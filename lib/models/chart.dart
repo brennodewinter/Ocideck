@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math' as math;
 
 import '../utils/log.dart';
 
@@ -90,6 +91,88 @@ String chartRowColor(ChartSpec spec, int index) => index < spec.rowColors.length
     ? normalizeChartColor(spec.rowColors[index]) ??
           chartColorPalette[index % chartColorPalette.length]
     : chartColorPalette[index % chartColorPalette.length];
+
+// ── Heatmap colour scale ─────────────────────────────────────────────────────
+// A [ChartType.heatmap] encodes MAGNITUDE, so — unlike the other charts — its
+// cells are not tinted with the deck's series/accent colours (which made every
+// heatmap read as "the theme" rather than as a heatmap). Instead it uses a
+// fixed, theme-independent sequential "heat" ramp: a single perceptual
+// direction, pale/cool = low → intense/hot = high, so a heatmap always looks
+// like one. There are two ramps so magnitude maps to intensity on either
+// surface: on a light slide the low end stays pale and the high end deepens to
+// red (ColorBrewer YlOrRd, a colourblind-safe sequential scheme); on a dark
+// slide the low end recedes into the dark and the high end brightens (a
+// black-body warm ramp). Low cells intentionally have little contrast with the
+// surface ("near zero recedes"); the numeric value printed in every cell keeps
+// them readable.
+
+const List<String> _heatRampLight = <String>[
+  '#FFFFB2',
+  '#FECC5C',
+  '#FD8D3C',
+  '#F03B20',
+  '#BD0026',
+];
+
+const List<String> _heatRampDark = <String>[
+  '#4B1D06',
+  '#8C2D04',
+  '#D7301F',
+  '#FC8D3C',
+  '#FEE08B',
+];
+
+/// The heat ramp for a slide whose background reads as [darkBackground].
+List<String> heatmapRamp({required bool darkBackground}) =>
+    darkBackground ? _heatRampDark : _heatRampLight;
+
+/// The `#RRGGBB` colour at position [t] (0..1) along [ramp], linearly
+/// interpolated between its stops.
+String heatmapColorAt(List<String> ramp, double t) {
+  final clamped = t.isNaN ? 0.0 : t.clamp(0.0, 1.0);
+  final scaled = clamped * (ramp.length - 1);
+  final i = scaled.floor().clamp(0, ramp.length - 2);
+  final f = scaled - i;
+  final a = _rgbOf(ramp[i]);
+  final b = _rgbOf(ramp[i + 1]);
+  int mix(int x, int y) => (x + (y - x) * f).round();
+  return '#${_hex2(mix(a[0], b[0]))}${_hex2(mix(a[1], b[1]))}${_hex2(mix(a[2], b[2]))}';
+}
+
+/// Whether a `#RRGGBB` reads as dark — used to pick the ramp from the slide
+/// background and to choose readable (white vs dark) in-cell text.
+bool isDarkHex(String hex) => _relativeLuminance(hex) < 0.4;
+
+/// The readable label colour (`#RRGGBB`) for a value printed on a heat cell of
+/// [cellHex]: white on the hot/dark cells, a fixed dark ink on the pale ones.
+/// Fixed (not the deck/app theme) because the cell colour is fixed too.
+String heatmapInk(String cellHex) => isDarkHex(cellHex) ? '#FFFFFF' : '#334155';
+
+/// Parse `#RRGGBB` (or `#RGB`) into `[r, g, b]` (0..255); tolerant of a missing
+/// `#` and bad input (falls back to black).
+List<int> _rgbOf(String hex) {
+  var h = hex.replaceFirst('#', '');
+  if (h.length == 3) h = h.split('').map((c) => '$c$c').join();
+  if (h.length < 6) h = h.padRight(6, '0');
+  int channel(int i) => int.tryParse(h.substring(i, i + 2), radix: 16) ?? 0;
+  return [channel(0), channel(2), channel(4)];
+}
+
+String _hex2(int v) =>
+    v.clamp(0, 255).toRadixString(16).padLeft(2, '0').toUpperCase();
+
+/// WCAG relative luminance of a `#RRGGBB` colour (0 = black, 1 = white).
+double _relativeLuminance(String hex) {
+  final c = _rgbOf(hex);
+  double lin(int v) {
+    final s = v / 255.0;
+    return s <= 0.03928
+        ? s / 12.92
+        : math.pow((s + 0.055) / 1.055, 2.4).toDouble();
+  }
+
+  return 0.2126 * lin(c[0]) + 0.7152 * lin(c[1]) + 0.0722 * lin(c[2]);
+}
 
 /// The full chart specification, stored as JSON inside a ```chart fenced block.
 ///

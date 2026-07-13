@@ -84,6 +84,11 @@ const _stringsEn = {
 };
 
 const _dutchSourceEn = {
+  'Handtekening tekenen': 'Draw signature',
+  'Teken je handtekening in het vak hieronder.':
+      'Draw your signature in the box below.',
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'A data pack is a .zip with the reference data for this module. It is first checked against the fingerprint built into the app; only a pack that matches this app version is accepted.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Area',
   'Horizontale staaf': 'Horizontal bar',
@@ -288,14 +293,21 @@ const _dutchSourceEn = {
   'Uitbreidingen': 'Extensions',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Optional modules. Off by default; they add nothing to the base app until you enable them.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Pentest reporting per MIAUW. Enabling fetches the reference data once; the module then works offline.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Reporting slides and reference data for information security: findings, checklists, scope matrices and sign-off. Structured per MIAUW and broadly usable for pentests, audits and security research. Enabling fetches the reference data once; the module then works offline.',
   'Gegevens opschonen': 'Clean up data',
   'Gegevens lokaal beschikbaar': 'Data available locally',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'First grant consent for outbound traffic under Licence and Privacy.',
   'Op het web nog niet beschikbaar': 'Not yet available on the web',
-  'Ophalen mislukt': 'Fetch failed',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'No source reachable — the reference data could not be fetched anywhere. Try again or import the pack manually.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'The fetched data did not match the expected fingerprint and was refused as a precaution.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'The data pack was damaged or invalid and was therefore refused.',
+  'Gegevenspakket kiezen': 'Choose data pack',
+  'Kon het gekozen bestand niet lezen.': 'Could not read the chosen file.',
   'Nog niet opgehaald': 'Not fetched yet',
   'AI-assistentie': 'AI assistance',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

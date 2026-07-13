@@ -565,18 +565,6 @@ void _radarSvg(
 String _shortChartLabel(String value) =>
     value.length > 13 ? '${value.substring(0, 12)}…' : value;
 
-/// Linear blend of two `#RRGGBB` hex colours, used by the heatmap scale.
-String _lerpHex(String a, String b, double t) {
-  int ch(String s, int i) => int.parse(s.substring(i, i + 2), radix: 16);
-  final aa = a.replaceAll('#', '').padRight(6, '0');
-  final bb = b.replaceAll('#', '').padRight(6, '0');
-  String h(int v) => v.clamp(0, 255).toRadixString(16).padLeft(2, '0');
-  final r = (ch(aa, 0) + (ch(bb, 0) - ch(aa, 0)) * t).round();
-  final g = (ch(aa, 2) + (ch(bb, 2) - ch(aa, 2)) * t).round();
-  final bl = (ch(aa, 4) + (ch(bb, 4) - ch(aa, 4)) * t).round();
-  return '#${h(r)}${h(g)}${h(bl)}';
-}
-
 double _maxHorizontalSvg(ChartSpec spec) {
   var m = 0.0;
   for (final s in spec.series) {
@@ -837,9 +825,11 @@ void _heatmapSvg(
   final low = lo ?? 0;
   var high = hi ?? 1;
   if (high <= low) high = low + 1;
-  final accent = theme?.accentColor ?? '#2563EB';
+  // Magnitude → a fixed heat ramp (see chart.dart), not the deck theme, matching
+  // the live preview. The ramp follows the slide background so low always
+  // recedes and high always intensifies.
   final bg = theme?.slideBackgroundColor ?? '#FFFFFF';
-  final lowColor = _lerpHex(bg, accent, 0.12);
+  final ramp = heatmapRamp(darkBackground: isDarkHex(bg));
   final cellW = (right - gridLeft) / cols.length;
   final cellH = (bottom - top) / rows.length;
   for (var r = 0; r < rows.length; r++) {
@@ -854,14 +844,14 @@ void _heatmapSvg(
       final present = c < rows[r].data.length;
       final v = present ? rows[r].data[c] : 0.0;
       final norm = ((v - low) / (high - low)).clamp(0.0, 1.0);
-      final fill = present ? _lerpHex(lowColor, accent, norm) : '#f1f5f9';
+      final fill = present ? heatmapColorAt(ramp, norm) : '#f1f5f9';
       final x = gridLeft + cellW * c;
       b.write(
         '<rect x="${x + 2}" y="${rowY + 2}" width="${cellW - 4}" '
         'height="${cellH - 4}" rx="4" fill="$fill"/>',
       );
       if (present) {
-        final on = norm > 0.55 ? '#FFFFFF' : '#334155';
+        final on = heatmapInk(fill);
         b.write(
           '<text x="${x + cellW / 2}" y="${rowY + cellH / 2 + 5}" '
           'text-anchor="middle" font-size="14" font-weight="700" fill="$on">'
@@ -889,7 +879,7 @@ void _heatmapSvg(
     'font-size="12" fill="#64748b">${_num(low)}</text>',
   );
   for (var i = 0; i < segments; i++) {
-    final fill = _lerpHex(lowColor, accent, i / (segments - 1));
+    final fill = heatmapColorAt(ramp, i / (segments - 1));
     final x = scaleLeft + scaleW * i / segments;
     b.write(
       '<rect x="$x" y="$scaleY" width="${scaleW / segments + 0.5}" '

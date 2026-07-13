@@ -84,6 +84,11 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Handtekening tekenen': 'Zīmēt parakstu',
+  'Teken je handtekening in het vak hieronder.':
+      'Uzzīmējiet savu parakstu lodziņā zemāk.',
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'Datu pakotne ir .zip ar šī moduļa atsauces datiem. Vispirms to pārbauda pret lietotnē iebūvēto nospiedumu; tiek pieņemta tikai pakotne, kas atbilst šai lietotnes versijai.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Laukuma',
   'Horizontale staaf': 'Horizontāls stabiņu',
@@ -289,14 +294,21 @@ const _dutchSourceLv = {
   'Uitbreidingen': 'Paplašinājumi',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Neobligāti moduļi. Pēc noklusējuma izslēgti; tie neko nepievieno pamata lietotnei, kamēr tos neieslēdzat.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Pentestu ziņošana pēc MIAUW. Ieslēgšana vienreiz lejupielādē atsauces datus; pēc tam modulis darbojas bezsaistē.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Ziņošanas slaidi un atsauces dati informācijas drošībai: atklājumi, kontrolsaraksti, tvēruma matricas un apstiprināšana. Strukturēts pēc MIAUW un plaši izmantojams pentestiem, auditiem un drošības pētījumiem. Ieslēgšana vienreiz lejupielādē atsauces datus; pēc tam modulis darbojas bezsaistē.',
   'Gegevens opschonen': 'Notīrīt datus',
   'Gegevens lokaal beschikbaar': 'Dati pieejami lokāli',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Vispirms sniedziet piekrišanu izejošajam trafikam sadaļā Licence un privātums.',
   'Op het web nog niet beschikbaar': 'Tīmeklī vēl nav pieejams',
-  'Ophalen mislukt': 'Lejupielāde neizdevās',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Neviens avots nav sasniedzams — atsauces datus nekur neizdevās lejupielādēt. Mēģiniet vēlreiz vai importējiet pakotni manuāli.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'Lejupielādētie dati neatbilda gaidītajam ciparnospiedumam un piesardzības nolūkā tika atteikti.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'Datu pakotne bija bojāta vai nederīga, tāpēc tā tika atteikta.',
+  'Gegevenspakket kiezen': 'Izvēlēties datu pakotni',
+  'Kon het gekozen bestand niet lezen.': 'Neizdevās nolasīt izvēlēto failu.',
   'Nog niet opgehaald': 'Vēl nav lejupielādēts',
   'AI-assistentie': 'MI palīdzība',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

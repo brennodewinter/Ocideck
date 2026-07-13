@@ -84,6 +84,11 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Handtekening tekenen': 'Hantekening tekenje',
+  'Teken je handtekening in het vak hieronder.':
+      'Tekenje dyn hantekening yn it fak hjirûnder.',
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'In gegevenspakket is in .zip mei de referinsjegegevens foar dizze module. It wurdt earst tsjin de yn de app ynboude fingerôfdruk kontrolearre; allinnich in pakket dat by dizze app-ferzje heart, wurdt akseptearre.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Flak',
   'Horizontale staaf': 'Horizontale steaf',
@@ -289,14 +294,21 @@ const _dutchSourceFy = {
   'Uitbreidingen': 'Utwreidingen',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Opsjonele modules. Standert út; se foegje neat ta oan de basis-app oant jo se ynskeakelje.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Pentestrapportaazje neffens MIAUW. By it ynskeakeljen wurde de referinsjegegevens ien kear ophelle; dêrnei wurket de module offline.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Rapportaazjeslides en referinsjedata foar ynformaasjebefeiliging: befinings, checklists, scope-matriuzen en ûndertekening. Struktureare neffens MIAUW en breed ynsetber foar pentests, audits en befeiligingsûndersyk. By it ynskeakeljen wurde de referinsjegegevens ien kear ophelle; dêrnei wurket de module offline.',
   'Gegevens opschonen': 'Gegevens opromje',
   'Gegevens lokaal beschikbaar': 'Gegevens lokaal beskikber',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Jou earst tastimming foar útgeand ferkear by Lisinsje en Privacy.',
   'Op het web nog niet beschikbaar': 'Op it web noch net beskikber',
-  'Ophalen mislukt': 'Ophaljen mislearre',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Gjin boarne berikber — de referinsjegegevens koenen nearne ophelle wurde. Besykje it opnij of ymportearje it pakket mei de hân.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'De ophelle gegevens kamen net oerien mei de ferwachte fingerôfdruk en binne út foarsoarch wegere.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'It gegevenspakket wie skansearre of ûnjildich en is dêrom wegere.',
+  'Gegevenspakket kiezen': 'Gegevenspakket kieze',
+  'Kon het gekozen bestand niet lezen.': 'Koe it keazen bestân net lêze.',
   'Nog niet opgehaald': 'Noch net ophelle',
   'AI-assistentie': 'AI-stipe',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

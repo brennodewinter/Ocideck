@@ -86,6 +86,11 @@ const _stringsLa = {
 };
 
 const _dutchSourceLa = {
+  'Handtekening tekenen': 'Subscriptionem designare',
+  'Teken je handtekening in het vak hieronder.':
+      'Subscriptionem tuam in area infra designa.',
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'Fasciculus datorum est .zip cum datis referentiae huius moduli. Primum cum nota digiti in applicatione insita comparatur; solum fasciculus qui huic applicationis versioni convenit accipitur.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Area',
   'Horizontale staaf': 'Columnae horizontales',
@@ -291,14 +296,21 @@ const _dutchSourceLa = {
   'Uitbreidingen': 'Extensiones',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Moduli optionales. Praedefinite exstincti; nihil applicationi basi addunt donec eos actives.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Relationes pentest secundum MIAUW. Activatio data referentiae semel accersit; deinde modulus sine rete operatur.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Tabellae relationis et data referentiae ad securitatem informationis: inventa, indices agendorum, matrices ambitus et subscriptio. Secundum MIAUW ordinata et late adhibenda ad pentest, recognitiones et investigationem securitatis. Activatio data referentiae semel accersit; deinde modulus sine rete operatur.',
   'Gegevens opschonen': 'Data purgare',
   'Gegevens lokaal beschikbaar': 'Data localiter praesto',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Primum consensum ad commercium exiens sub Licentia et Secreto concede.',
   'Op het web nog niet beschikbaar': 'In rete nondum praesto',
-  'Ophalen mislukt': 'Accersitio defecit',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Nullus fons attingi potest — data referentiae nusquam accersi potuerunt. Iterum conare vel fasciculum manu importa.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'Data accersita cum vestigio digitali exspectato non convenerunt et ex cautione recusata sunt.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'Fasciculus datorum corruptus aut invalidus erat ideoque recusatus est.',
+  'Gegevenspakket kiezen': 'Fasciculum datorum eligere',
+  'Kon het gekozen bestand niet lezen.': 'Plica electa legi non potuit.',
   'Nog niet opgehaald': 'Nondum accersitum',
   'AI-assistentie': 'Auxilium IA',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

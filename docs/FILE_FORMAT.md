@@ -116,7 +116,7 @@ ocideck_style_profile: <base64url(JSON)>
 | `ocideck_seal_tsr` | base64url | RFC 3161 trusted-timestamp token (`.tsr`) over `ocideck_seal_hash` (PENTEST_MIAUW §8-A2). Written only when present; excluded from the sealed content hash. Verified in-app on open. |
 | `ocideck_finalized` | `true`/absent | Document integrity (§8 A1): the deck is finalised and read-only. Written only when `true`. |
 | `ocideck_seal_hash` · `ocideck_seal_algo` · `ocideck_seal_at` | string | The content seal: a SHA-512 hash over the canonical content (styling and the seal fields themselves excluded), the algorithm (`sha-512`), and the ISO-8601 UTC timestamp. Recomputed on open → *intact* / *changed after finalising*. |
-| `ocideck_sig_name` · `ocideck_sig_role` · `ocideck_sig_cert` · `ocideck_sig_date` · `ocideck_sig_statement` · `ocideck_sig_typed` · `ocideck_sig_image` | string | The deck-level **visual signature** rendered by the `signOff` slide (§5): signer name, role, certification, date, attested statement, typed signature, and an optional embedded (`data:`) signature image. Written before the seal fields, so the signature is covered by the hash. Each key is written only when non-empty. |
+| `ocideck_sig_name` · `ocideck_sig_role` · `ocideck_sig_cert` · `ocideck_sig_date` · `ocideck_sig_statement` · `ocideck_sig_typed` · `ocideck_sig_image` | string | The deck-level **visual signature** rendered by the `signOff` slide (§5): signer name, role, certification, date, attested statement, typed signature, and an optional embedded (`data:`) signature image — a **hand-drawn signature** (drawn on the pad in the sign-off editor / seal dialog) is stored here as a self-contained base64 PNG. Written before the seal fields, so the signature is covered by the hash. Each key is written only when non-empty. |
 
 Metadata fields are written only when they are not empty. Text is written as a
 YAML scalar and quoted only when needed (empty value, leading/trailing
@@ -241,6 +241,19 @@ The first class determines (together with the content) the **slide type**:
 > `code`, `chart`, `cockpit`, and `question` slides contain fenced code blocks
 > that would confuse the generic line parser, so they are recognized separately
 > through their `_class`.
+
+> **Information-security classes and the module.** `finding`, `findings-summary`,
+> `checklist`, `scope-matrix` and `sign-off` are the slide types of the optional
+> **Informatieveiligheid** module (§ "Information security module" in the User
+> Guide). Their handling in the file format is **unconditional and does not
+> depend on the module**: OciDeck always parses these classes, and always renders
+> them, whether or not the module is enabled — the file is the source of truth, so
+> a report authored elsewhere opens and presents fully on any install. The module
+> toggle governs **authoring only**: these types are offered in the add-slide and
+> change-type pickers, and the MIAUW template appears in the new-presentation
+> dialog, only while the module is enabled. A slide that is already one of these
+> types can still be re-typed among them with the module off, so an imported
+> report is never a dead-end.
 
 Additional behavior classes:
 

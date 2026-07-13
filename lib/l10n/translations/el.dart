@@ -84,6 +84,11 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Handtekening tekenen': 'Σχεδίαση υπογραφής',
+  'Teken je handtekening in het vak hieronder.':
+      'Σχεδιάστε την υπογραφή σας στο πλαίσιο παρακάτω.',
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'Ένα πακέτο δεδομένων είναι ένα .zip με τα δεδομένα αναφοράς αυτής της ενότητας. Ελέγχεται πρώτα ως προς το αποτύπωμα που είναι ενσωματωμένο στην εφαρμογή· γίνεται δεκτό μόνο πακέτο που ταιριάζει με αυτή την έκδοση της εφαρμογής.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Περιοχή',
   'Horizontale staaf': 'Οριζόντιες ράβδοι',
@@ -292,14 +297,22 @@ const _dutchSourceEl = {
   'Uitbreidingen': 'Επεκτάσεις',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Προαιρετικές μονάδες. Απενεργοποιημένες από προεπιλογή· δεν προσθέτουν τίποτα στη βασική εφαρμογή μέχρι να τις ενεργοποιήσετε.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Αναφορές pentest κατά MIAUW. Η ενεργοποίηση κατεβάζει μία φορά τα δεδομένα αναφοράς· έπειτα η μονάδα λειτουργεί εκτός σύνδεσης.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Διαφάνειες αναφοράς και δεδομένα αναφοράς για την ασφάλεια πληροφοριών: ευρήματα, λίστες ελέγχου, μήτρες εμβέλειας και υπογραφή. Δομημένο κατά MIAUW και ευρέως αξιοποιήσιμο για pentests, ελέγχους και έρευνα ασφάλειας. Η ενεργοποίηση κατεβάζει μία φορά τα δεδομένα αναφοράς· έπειτα η μονάδα λειτουργεί εκτός σύνδεσης.',
   'Gegevens opschonen': 'Εκκαθάριση δεδομένων',
   'Gegevens lokaal beschikbaar': 'Δεδομένα διαθέσιμα τοπικά',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Δώστε πρώτα συγκατάθεση για εξερχόμενη κίνηση στην ενότητα Άδεια και Απόρρητο.',
   'Op het web nog niet beschikbaar': 'Δεν είναι ακόμη διαθέσιμο στον ιστό',
-  'Ophalen mislukt': 'Η λήψη απέτυχε',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Καμία πηγή δεν είναι προσβάσιμη — τα δεδομένα αναφοράς δεν ήταν δυνατό να ληφθούν από πουθενά. Δοκιμάστε ξανά ή εισαγάγετε το πακέτο χειροκίνητα.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'Τα δεδομένα που λήφθηκαν δεν ταίριαζαν με το αναμενόμενο αποτύπωμα και απορρίφθηκαν προληπτικά.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'Το πακέτο δεδομένων ήταν κατεστραμμένο ή μη έγκυρο και επομένως απορρίφθηκε.',
+  'Gegevenspakket kiezen': 'Επιλογή πακέτου δεδομένων',
+  'Kon het gekozen bestand niet lezen.':
+      'Δεν ήταν δυνατή η ανάγνωση του επιλεγμένου αρχείου.',
   'Nog niet opgehaald': 'Δεν έχει ληφθεί ακόμη',
   'AI-assistentie': 'Υποστήριξη AI',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

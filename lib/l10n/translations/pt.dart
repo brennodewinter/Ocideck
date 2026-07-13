@@ -85,6 +85,11 @@ const _stringsPt = {
 };
 
 const _dutchSourcePt = {
+  'Handtekening tekenen': 'Desenhar assinatura',
+  'Teken je handtekening in het vak hieronder.':
+      'Desenhe a sua assinatura na caixa abaixo.',
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'Um pacote de dados é um .zip com os dados de referência deste módulo. É primeiro verificado em relação à impressão digital incorporada na aplicação; só é aceite um pacote que corresponda a esta versão da aplicação.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Área',
   'Horizontale staaf': 'Barras horizontais',
@@ -292,14 +297,22 @@ const _dutchSourcePt = {
   'Uitbreidingen': 'Extensões',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Módulos opcionais. Desativados por predefinição; não acrescentam nada à aplicação base até os ativar.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Relatórios de pentest segundo o MIAUW. Ao ativar, os dados de referência são obtidos uma vez; depois o módulo funciona offline.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Diapositivos de relatório e dados de referência para a segurança da informação: constatações, listas de tarefas, matrizes de escopo e assinatura. Estruturado segundo o MIAUW e amplamente utilizável para pentests, auditorias e investigação de segurança. Ao ativar, os dados de referência são obtidos uma vez; depois o módulo funciona offline.',
   'Gegevens opschonen': 'Limpar dados',
   'Gegevens lokaal beschikbaar': 'Dados disponíveis localmente',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Conceda primeiro o consentimento para o tráfego de saída em Licença e privacidade.',
   'Op het web nog niet beschikbaar': 'Ainda não disponível na web',
-  'Ophalen mislukt': 'Falha ao obter',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Nenhuma fonte acessível — não foi possível obter os dados de referência em lado nenhum. Tente novamente ou importe o pacote manualmente.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'Os dados obtidos não correspondiam à impressão digital esperada e foram recusados por precaução.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'O pacote de dados estava danificado ou inválido e foi, por isso, recusado.',
+  'Gegevenspakket kiezen': 'Escolher pacote de dados',
+  'Kon het gekozen bestand niet lezen.':
+      'Não foi possível ler o ficheiro escolhido.',
   'Nog niet opgehaald': 'Ainda não obtido',
   'AI-assistentie': 'Assistência de IA',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

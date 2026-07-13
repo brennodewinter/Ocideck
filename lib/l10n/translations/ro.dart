@@ -85,6 +85,11 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'Handtekening tekenen': 'Desenează semnătura',
+  'Teken je handtekening in het vak hieronder.':
+      'Desenează-ți semnătura în caseta de mai jos.',
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'Un pachet de date este un .zip cu datele de referință pentru acest modul. Este mai întâi verificat față de amprenta încorporată în aplicație; se acceptă doar un pachet care corespunde acestei versiuni a aplicației.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Suprafață',
   'Horizontale staaf': 'Bare orizontale',
@@ -291,14 +296,21 @@ const _dutchSourceRo = {
   'Uitbreidingen': 'Extensii',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Module opționale. Dezactivate implicit; nu adaugă nimic aplicației de bază până nu le activați.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Raportare pentest conform MIAUW. Activarea descarcă o dată datele de referință; apoi modulul funcționează offline.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Slide-uri de raportare și date de referință pentru securitatea informațiilor: constatări, liste de verificare, matrice de domeniu și semnare. Structurat conform MIAUW și utilizabil pe scară largă pentru pentesturi, audituri și cercetare de securitate. Activarea descarcă o dată datele de referință; apoi modulul funcționează offline.',
   'Gegevens opschonen': 'Curăță datele',
   'Gegevens lokaal beschikbaar': 'Date disponibile local',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Acordați mai întâi consimțământul pentru traficul de ieșire la Licență și confidențialitate.',
   'Op het web nog niet beschikbaar': 'Încă indisponibil pe web',
-  'Ophalen mislukt': 'Descărcarea a eșuat',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Nicio sursă accesibilă — datele de referință nu au putut fi descărcate de nicăieri. Încearcă din nou sau importă pachetul manual.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'Datele descărcate nu au corespuns amprentei așteptate și au fost refuzate ca măsură de precauție.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'Pachetul de date era deteriorat sau nevalid și, prin urmare, a fost refuzat.',
+  'Gegevenspakket kiezen': 'Alege pachetul de date',
+  'Kon het gekozen bestand niet lezen.': 'Fișierul ales nu a putut fi citit.',
   'Nog niet opgehaald': 'Încă nedescărcat',
   'AI-assistentie': 'Asistență IA',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

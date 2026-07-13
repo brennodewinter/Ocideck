@@ -694,6 +694,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       projectPath: deck.projectPath,
       exportService: widget.exportService,
       tlp: deck.tlp,
+      signature: deck.signature,
+      sealedAt: deck.sealAt,
       enforcementPolicy: ClassificationEnforcementPolicy.fromAppSettings(
         ref.read(settingsProvider),
       ),
@@ -855,13 +857,11 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         .read(tabsProvider.notifier)
         .importPackageFile(path, homeDir: settings.homeDirectory);
     if (failure != null && mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            '${l10n.d('Kon dit pakket niet importeren.')} '
-            '${importFailureMessage(l10n, failure)}',
-          ),
-        ),
+      showErrorSnackBar(
+        ScaffoldMessenger.of(context),
+        l10n,
+        '${l10n.d('Kon dit pakket niet importeren.')} '
+        '${importFailureMessage(l10n, failure)}',
       );
     }
   }

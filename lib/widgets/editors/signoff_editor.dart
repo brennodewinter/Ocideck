@@ -7,6 +7,8 @@ import '../../models/slide.dart';
 import '../../state/deck_provider.dart';
 import '../../theme/app_theme.dart';
 import '../dialogs/finalize_seal_dialog.dart';
+import '../document_signature_view.dart';
+import '../signature_draw_dialog.dart';
 import '_editor_field.dart';
 
 /// Editor for a `signOff` slide (PENTEST_MIAUW 1.6 / §8 A1): the report's
@@ -46,12 +48,17 @@ class _SignOffEditorState extends ConsumerState<SignOffEditor>
   /// keeps it.
   String _date = '';
 
+  /// The drawn signature as an embedded `data:` image URI, preserved across
+  /// edits (the text fields don't carry it).
+  String _imagePath = '';
+
   @override
   void initState() {
     super.initState();
     final sig =
         ref.read(deckProvider).deck?.signature ?? const DocumentSignature();
     _date = sig.date;
+    _imagePath = sig.imagePath;
     _title = newController(widget.slide.title, _emitTitle);
     _statement = newController(sig.statement, _emitSignature);
     _name = newController(sig.name, _emitSignature);
@@ -74,9 +81,72 @@ class _SignOffEditorState extends ConsumerState<SignOffEditor>
             certification: _certification.text.trim(),
             statement: _statement.text.trim(),
             typedSignature: _typed.text.trim(),
+            imagePath: _imagePath,
             date: _date,
           ),
         );
+  }
+
+  Future<void> _drawSignature() async {
+    final uri = await SignatureDrawDialog.show(context);
+    if (uri == null || !mounted) return;
+    setState(() => _imagePath = uri);
+    _emitSignature();
+  }
+
+  void _clearDrawnSignature() {
+    setState(() => _imagePath = '');
+    _emitSignature();
+  }
+
+  /// The freehand-signature control: a "draw" button, and — once something is
+  /// drawn — a preview of it plus a redraw/clear row. The drawn image takes
+  /// precedence over the typed signature wherever the sign-off is rendered.
+  Widget _drawnSignatureField(AppLocalizations l10n) {
+    final bytes = decodeEmbeddedSignatureImage(_imagePath);
+    if (bytes == null) {
+      return Align(
+        alignment: Alignment.centerLeft,
+        child: OutlinedButton.icon(
+          onPressed: _drawSignature,
+          icon: const Icon(Icons.gesture, size: 16),
+          label: Text(l10n.d('Handtekening tekenen')),
+        ),
+      );
+    }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: double.infinity,
+          height: 72,
+          padding: const EdgeInsets.all(6),
+          alignment: Alignment.centerLeft,
+          decoration: BoxDecoration(
+            color: AppTheme.slate50,
+            border: Border.all(color: AppTheme.slate300),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Image.memory(bytes, fit: BoxFit.contain),
+        ),
+        const SizedBox(height: 8),
+        Row(
+          children: [
+            OutlinedButton.icon(
+              onPressed: _drawSignature,
+              icon: const Icon(Icons.gesture, size: 16),
+              label: Text(l10n.d('Handtekening tekenen')),
+            ),
+            const SizedBox(width: 8),
+            TextButton.icon(
+              onPressed: _clearDrawnSignature,
+              icon: const Icon(Icons.delete_outline, size: 16),
+              label: Text(l10n.d('Wissen')),
+            ),
+          ],
+        ),
+      ],
+    );
   }
 
   Future<void> _finalizeAndSeal() async {
@@ -142,6 +212,8 @@ class _SignOffEditorState extends ConsumerState<SignOffEditor>
         EditorField(label: 'Certificering', controller: _certification),
         const SizedBox(height: 12),
         EditorField(label: 'Getypte handtekening', controller: _typed),
+        const SizedBox(height: 12),
+        _drawnSignatureField(l10n),
         const SizedBox(height: 20),
         Align(
           alignment: Alignment.centerLeft,

@@ -97,7 +97,22 @@ class _SignOffPreview extends StatelessWidget {
       if (sig.name.isNotEmpty) sig.name,
       if (sig.role.isNotEmpty) sig.role,
     ];
+    final image = decodeEmbeddedSignatureImage(sig.imagePath);
     final mark = sig.typedSignature.isNotEmpty ? sig.typedSignature : sig.name;
+    final markText = mark.isEmpty
+        ? null
+        : Text(
+            mark,
+            style: _applyFont(
+              font,
+              TextStyle(
+                fontSize: w * 0.05,
+                fontStyle: FontStyle.italic,
+                fontWeight: FontWeight.w500,
+                color: AppTheme.navy,
+              ),
+            ),
+          );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -115,19 +130,17 @@ class _SignOffPreview extends StatelessWidget {
             ),
           ),
         SizedBox(height: w * 0.03),
-        if (mark.isNotEmpty)
-          Text(
-            mark,
-            style: _applyFont(
-              font,
-              TextStyle(
-                fontSize: w * 0.05,
-                fontStyle: FontStyle.italic,
-                fontWeight: FontWeight.w500,
-                color: AppTheme.navy,
-              ),
-            ),
-          ),
+        // A drawn signature takes precedence over the typed name/mark.
+        if (image != null)
+          Image.memory(
+            image,
+            height: w * 0.09,
+            fit: BoxFit.contain,
+            alignment: Alignment.centerLeft,
+            errorBuilder: (_, _, _) => markText ?? const SizedBox.shrink(),
+          )
+        else
+          ?markText,
         SizedBox(height: w * 0.008),
         Container(width: w * 0.34, height: 1, color: AppTheme.slate300),
         SizedBox(height: w * 0.008),

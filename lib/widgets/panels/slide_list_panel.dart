@@ -246,6 +246,8 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
         themeProfile: deck.themeProfile,
         cockpitColorScheme: ref.read(settingsProvider).cockpitColorScheme,
         projectPath: deck.projectPath,
+        signature: deck.signature,
+        sealedAt: deck.sealAt,
         tlp: deck.tlp,
         organization: deck.organization,
         showClassificationWatermark: ref

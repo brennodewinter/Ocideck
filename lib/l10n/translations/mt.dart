@@ -85,6 +85,11 @@ const _stringsMt = {
 };
 
 const _dutchSourceMt = {
+  'Handtekening tekenen': 'Iddisinja l-firma',
+  'Teken je handtekening in het vak hieronder.':
+      'Iddisinja l-firma tiegħek fil-kaxxa hawn taħt.',
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'Pakkett tad-data huwa .zip bid-dejta ta\' referenza għal dan il-modulu. L-ewwel jiġi vverifikat mal-marka tas-swaba\' mibnija fl-app; jiġi aċċettat biss pakkett li jaqbel ma\' din il-verżjoni tal-app.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Erja',
   'Horizontale staaf': 'Bar orizzontali',
@@ -291,14 +296,21 @@ const _dutchSourceMt = {
   'Uitbreidingen': 'Estensjonijiet',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Moduli fakultattivi. Mitfija b\'mod awtomatiku; ma jżidu xejn mal-app bażika sakemm ma tattivahomx.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Rappurtar tal-pentest skont MIAUW. L-attivazzjoni tniżżel id-dejta ta\' referenza darba; imbagħad il-modulu jaħdem offline.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Slajds ta\' rappurtar u dejta ta\' referenza għas-sigurtà tal-informazzjoni: sejbiet, listi ta\' verifika, matriċi tal-ambitu u firma. Strutturat skont MIAUW u użabbli fuq firxa wiesgħa għall-pentests, l-awditi u r-riċerka tas-sigurtà. L-attivazzjoni tniżżel id-dejta ta\' referenza darba; imbagħad il-modulu jaħdem offline.',
   'Gegevens opschonen': 'Naddaf id-dejta',
   'Gegevens lokaal beschikbaar': 'Dejta disponibbli lokalment',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'L-ewwel agħti kunsens għat-traffiku \'l barra taħt Liċenzja u Privatezza.',
   'Op het web nog niet beschikbaar': 'Għadha mhux disponibbli fuq il-web',
-  'Ophalen mislukt': 'It-tniżżil falla',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'L-ebda sors ma huwa aċċessibbli — id-dejta ta\' referenza ma setgħetx tinġieb minn imkien. Erġa\' pprova jew importa l-pakkett manwalment.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'Id-dejta miġjuba ma qablitx mal-marka tas-swaba\' mistennija u ġiet miċħuda bħala prekawzjoni.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'Il-pakkett tad-dejta kien bil-ħsara jew invalidu u għalhekk ġie miċħud.',
+  'Gegevenspakket kiezen': 'Agħżel il-pakkett tad-dejta',
+  'Kon het gekozen bestand niet lezen.': 'Ma setax jinqara l-fajl magħżul.',
   'Nog niet opgehaald': 'Għadha ma tniżżlitx',
   'AI-assistentie': 'Assistenza AI',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

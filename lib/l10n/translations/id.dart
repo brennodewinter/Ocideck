@@ -84,6 +84,11 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Handtekening tekenen': 'Gambar tanda tangan',
+  'Teken je handtekening in het vak hieronder.':
+      'Gambar tanda tangan Anda di kotak di bawah.',
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'Paket data adalah .zip berisi data referensi untuk modul ini. Paket diperiksa dulu terhadap sidik jari yang tertanam di aplikasi; hanya paket yang cocok dengan versi aplikasi ini yang diterima.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Area',
   'Horizontale staaf': 'Batang horizontal',
@@ -288,14 +293,22 @@ const _dutchSourceId = {
   'Uitbreidingen': 'Ekstensi',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Modul opsional. Mati secara bawaan; tidak menambahkan apa pun ke aplikasi dasar sampai Anda mengaktifkannya.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Pelaporan pentest menurut MIAUW. Mengaktifkan akan mengambil data referensi sekali; setelah itu modul bekerja offline.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Slide pelaporan dan data referensi untuk keamanan informasi: temuan, daftar periksa, matriks ruang lingkup, dan penandatanganan. Terstruktur menurut MIAUW dan dapat digunakan secara luas untuk pentest, audit, dan riset keamanan. Mengaktifkan akan mengambil data referensi sekali; setelah itu modul bekerja offline.',
   'Gegevens opschonen': 'Bersihkan data',
   'Gegevens lokaal beschikbaar': 'Data tersedia secara lokal',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Berikan dulu persetujuan untuk lalu lintas keluar di Lisensi dan Privasi.',
   'Op het web nog niet beschikbaar': 'Belum tersedia di web',
-  'Ophalen mislukt': 'Pengambilan gagal',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Tidak ada sumber yang dapat dijangkau — data referensi tidak dapat diambil dari mana pun. Coba lagi atau impor paket secara manual.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'Data yang diambil tidak cocok dengan sidik jari yang diharapkan dan ditolak sebagai tindakan pencegahan.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'Paket data rusak atau tidak valid sehingga ditolak.',
+  'Gegevenspakket kiezen': 'Pilih paket data',
+  'Kon het gekozen bestand niet lezen.':
+      'Tidak dapat membaca berkas yang dipilih.',
   'Nog niet opgehaald': 'Belum diambil',
   'AI-assistentie': 'Bantuan AI',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

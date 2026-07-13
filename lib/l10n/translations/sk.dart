@@ -85,6 +85,11 @@ const _stringsSk = {
 };
 
 const _dutchSourceSk = {
+  'Handtekening tekenen': 'Nakresliť podpis',
+  'Teken je handtekening in het vak hieronder.':
+      'Nakreslite svoj podpis do poľa nižšie.',
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'Dátový balík je .zip s referenčnými údajmi pre tento modul. Najprv sa overí voči odtlačku zabudovanému v aplikácii; prijme sa iba balík, ktorý zodpovedá tejto verzii aplikácie.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Plošný',
   'Horizontale staaf': 'Vodorovný stĺpcový',
@@ -290,14 +295,22 @@ const _dutchSourceSk = {
   'Uitbreidingen': 'Rozšírenia',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Voliteľné moduly. Predvolene vypnuté; do základnej aplikácie nič nepridávajú, kým ich nezapnete.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Vykazovanie pentestov podľa MIAUW. Zapnutie raz stiahne referenčné údaje; potom modul funguje offline.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Reportové snímky a referenčné údaje pre informačnú bezpečnosť: zistenia, kontrolné zoznamy, matice rozsahu a podpis. Štruktúrované podľa MIAUW a široko použiteľné pre pentesty, audity a bezpečnostný výskum. Zapnutie raz stiahne referenčné údaje; potom modul funguje offline.',
   'Gegevens opschonen': 'Vyčistiť údaje',
   'Gegevens lokaal beschikbaar': 'Údaje dostupné lokálne',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Najprv udeľte súhlas s odchádzajúcou prevádzkou v časti Licencia a súkromie.',
   'Op het web nog niet beschikbaar': 'Na webe zatiaľ nedostupné',
-  'Ophalen mislukt': 'Sťahovanie zlyhalo',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Žiadny zdroj nie je dostupný — referenčné údaje sa nepodarilo nikde stiahnuť. Skúste to znova alebo balík importujte ručne.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'Stiahnuté údaje sa nezhodovali s očakávaným odtlačkom a z opatrnosti boli odmietnuté.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'Dátový balík bol poškodený alebo neplatný, a preto bol odmietnutý.',
+  'Gegevenspakket kiezen': 'Vybrať dátový balík',
+  'Kon het gekozen bestand niet lezen.':
+      'Vybraný súbor sa nepodarilo prečítať.',
   'Nog niet opgehaald': 'Zatiaľ nestiahnuté',
   'AI-assistentie': 'Asistencia AI',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

@@ -7,10 +7,14 @@
 // (sec_pack_codec.dart), and caches it locally keyed by pack version — so the
 // module is offline-after-first-fetch.
 //
-// Fallback chain (all behind the outbound-privacy consent + the module toggle):
-//   1. verified local cache  → offline, NO fetch;
-//   2. baseline pack across mirrors by hash;
-//   3. manual local-file import ([provisionFromBytes]).
+// Fallback chain:
+//   1. verified local cache        → offline, NO fetch;
+//   2. app-bundled baseline pack    → offline, NO consent (bytes ship with the
+//                                     app); the default source that makes the
+//                                     module work out of the box;
+//   3. baseline pack across mirrors → consent-gated; only when there is no
+//                                     bundled pack for this version;
+//   4. manual local-file import ([provisionFromBytes]).
 // (An opt-in upstream refresh is out of scope for the skeleton.)
 //
 // Both the network layer ([SecPackTransport]) and the on-disk cache
@@ -79,6 +83,10 @@ enum SecProvisionStatus {
   /// Already present in the verified local cache — no fetch happened.
   alreadyCached,
 
+  /// Verified + cached from the baseline pack bundled with the app (offline, no
+  /// outbound traffic). The default source, tried before any mirror.
+  bundled,
+
   /// Fetched from a mirror, verified and cached.
   fetched,
 
@@ -118,6 +126,7 @@ class SecProvisionResult {
   /// Whether the module is usable after this run (cache present + verified).
   bool get isProvisioned =>
       status == SecProvisionStatus.alreadyCached ||
+      status == SecProvisionStatus.bundled ||
       status == SecProvisionStatus.fetched ||
       status == SecProvisionStatus.imported;
 }
@@ -127,6 +136,11 @@ class SecProvisionResult {
 class SecModuleProvisioner {
   final SecPackTransport transport;
   final SecPackStore store;
+
+  /// Loads the baseline pack bundled with the app (an app asset), or null when
+  /// none is available / it cannot be read. Injected so the pure core stays
+  /// free of Flutter's `rootBundle`; tests pass a fake or leave it null.
+  final Future<Uint8List?> Function()? bundledPackLoader;
 
   /// The pack version this build expects; cache is keyed by it.
   final String version;
@@ -142,6 +156,7 @@ class SecModuleProvisioner {
   SecModuleProvisioner({
     required this.transport,
     required this.store,
+    this.bundledPackLoader,
     this.version = secPackVersion,
     this.expectedHash = secPackSha256,
     this.mirrors = secPackMirrors,
@@ -157,8 +172,11 @@ class SecModuleProvisioner {
     return cached == version;
   }
 
-  /// Run the fallback chain. [hasConsent] gates every outbound fetch: without
-  /// it, only the local cache is consulted.
+  /// Run the fallback chain. The bundled baseline pack is tried first — it is an
+  /// app asset, so provisioning from it is offline and needs no consent, which
+  /// is why the module works out of the box. [hasConsent] gates only the
+  /// network step: a mirror is consulted only when there is no bundled pack for
+  /// this version (e.g. a future build ships a newer pinned pack).
   Future<SecProvisionResult> provision({required bool hasConsent}) async {
     if (await isProvisioned()) {
       return SecProvisionResult(
@@ -166,10 +184,39 @@ class SecModuleProvisioner {
         version: version,
       );
     }
+    final bundled = await _provisionFromBundled();
+    if (bundled != null) return bundled;
     if (!hasConsent) {
       return const SecProvisionResult(SecProvisionStatus.noConsent);
     }
     return _fetchAcrossMirrors();
+  }
+
+  /// Verify + cache the app-bundled baseline pack, or null when there is none /
+  /// it does not match this build's pin (then the caller falls through to the
+  /// network). Not gated by consent: the bytes are already on the device.
+  Future<SecProvisionResult?> _provisionFromBundled() async {
+    final loader = bundledPackLoader;
+    if (loader == null) return null;
+    final Uint8List? bytes;
+    try {
+      bytes = await loader();
+    } catch (e) {
+      logWarning('SecModuleProvisioner: meegeleverd pakket niet leesbaar', e);
+      return null;
+    }
+    if (bytes == null) return null;
+    // A stale bundle (a version bump re-pinned the hash) fails this check and
+    // falls through to the mirror rather than being trusted.
+    if (secPackSha256Hex(bytes) != expectedHash) return null;
+    final contents = _openVerified(bytes);
+    if (contents == null) return null;
+    await store.save(
+      version: version,
+      outerHash: expectedHash,
+      contents: contents,
+    );
+    return SecProvisionResult(SecProvisionStatus.bundled, version: version);
   }
 
   /// Verify + cache a pack the user supplied as a local file (fallback #3, and

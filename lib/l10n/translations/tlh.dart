@@ -82,6 +82,10 @@ const _stringsTlh = {
 };
 
 const _dutchSourceTlh = {
+  'Handtekening tekenen': 'qItlh yIqon',
+  'Teken je handtekening in het vak hieronder.': 'box bIngDaq qItlh yIqon.',
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'De\' ngaSwI\' ghaH .zip, pa\' De\' Qan module vam. wa\'DIch app qelDI\' nItlh \'oH nuDlu\'; app version vam rurbogh ngaSwI\' neH laj.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Sep',
   'Horizontale staaf': 'SIrgh SaS',
@@ -283,14 +287,21 @@ const _dutchSourceTlh = {
   'Uitbreidingen': 'chelwI\'mey',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'ngoQmey DIch Hutlh. motlh chImmoH; DamaghmoHpa\' app basis vaS chelbe\'.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'MIAUW pentest ja\'ghach. DamaghmoHchugh De\' Qan wa\'logh Suq; ngoQ offline vumtaH.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'ja\'ghach nav De\' Qan je Hub De\' vaD: Sampu\'bogh, tetlh, ghantoH Degh, ghItlh je. MIAUW tlha\' \'ej pentest, nojwI\', Hub QeD lo\'laH. DamaghmoHchugh De\' Qan wa\'logh Suq; ngoQ offline vumtaH.',
   'Gegevens opschonen': 'De\' Say\'moH',
   'Gegevens lokaal beschikbaar': 'De\' pa\' naDev',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'wa\'DIch Data lel Doch \'e\' chaw\'chugh neH nga\'chuqlaH.',
   'Op het web nog niet beschikbaar': 'web-Daq DungluqlaHbe\'taH',
-  'Ophalen mislukt': 'Suq luj',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Suplu\'laHbe\' Hal — pa\' De\' Qan Suqlu\'laHbe\'. cha\'logh yInID pagh ngaSHa\' yIkII\'.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'De\' Suqta\' pIHbogh nItlh Degh rurbe\'; Qan meqmo\' lajlu\'be\'.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'De\' ngIq QIHlu\'pu\' pagh lI\'be\'; vaj lajlu\'be\'.',
+  'Gegevenspakket kiezen': 'De\' ngIq wIv',
+  'Kon het gekozen bestand niet lezen.': 'teywI\' wIvta\' laDlu\'laHbe\'.',
   'Nog niet opgehaald': 'SuqluHbe\'taH',
   'AI-assistentie': 'AI QaH',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

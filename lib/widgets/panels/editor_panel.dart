@@ -10,9 +10,11 @@ import '../../services/image_service.dart';
 import '../../services/slide_layout_metrics.dart';
 import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
+import '../../state/sec_module_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
+import '../dialogs/add_slide_dialog.dart';
 import '../editors/audio_attachment_editor.dart';
 import '../editors/slide_editor_registry.dart';
 import '../editors/slide_type_help.dart';
@@ -50,6 +52,9 @@ class EditorPanel extends ConsumerWidget {
     void update(Slide updated) => deckNotifier.updateSlide(idx, updated);
 
     final settings = ref.watch(settingsProvider);
+    // Gate de informatieveiligheid-slidetypes in de TYPE-kiezer net als in
+    // 'Slide toevoegen', zodat beide plekken exact dezelfde types aanbieden.
+    final secReveal = ref.watch(secModuleRevealProvider);
 
     // Zoekpaden voor de afbeeldingencarousel: projectmap eerst, dan alle
     // bibliotheken als (recursief gescande) zoekwortels.
@@ -77,6 +82,7 @@ class EditorPanel extends ConsumerWidget {
             profiles: settings.themeProfiles,
             activeProfile: deck.themeProfile,
             defaultProfile: settings.themeProfile,
+            revealSecurityModule: secReveal,
             onTypeChanged: (newType) {
               if (newType == slide.type) return;
               update(_convertSlideType(slide, newType));

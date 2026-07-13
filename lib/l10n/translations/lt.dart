@@ -84,6 +84,11 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Handtekening tekenen': 'Piešti parašą',
+  'Teken je handtekening in het vak hieronder.':
+      'Nupieškite savo parašą laukelyje žemiau.',
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'Duomenų paketas – tai .zip su šio modulio nuorodų duomenimis. Pirmiausia jis patikrinamas pagal į programą įtaisytą atspaudą; priimamas tik su šia programos versija suderinamas paketas.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Ploto',
   'Horizontale staaf': 'Horizontali stulpelinė',
@@ -288,14 +293,22 @@ const _dutchSourceLt = {
   'Uitbreidingen': 'Plėtiniai',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Neprivalomi moduliai. Numatytai išjungti; jie nieko neprideda prie pagrindinės programos, kol jų neįjungiate.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Pentestų ataskaitos pagal MIAUW. Įjungus vieną kartą atsisiunčiami nuorodų duomenys; vėliau modulis veikia neprisijungus.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Ataskaitų skaidrės ir nuorodų duomenys informacijos saugumui: išvados, kontroliniai sąrašai, aprėpties matricos ir patvirtinimas. Struktūruota pagal MIAUW ir plačiai pritaikoma pentestams, auditams ir saugumo tyrimams. Įjungus vieną kartą atsisiunčiami nuorodų duomenys; vėliau modulis veikia neprisijungus.',
   'Gegevens opschonen': 'Išvalyti duomenis',
   'Gegevens lokaal beschikbaar': 'Duomenys pasiekiami vietoje',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Pirmiausia suteikite sutikimą išeinančiam srautui skiltyje Licencija ir privatumas.',
   'Op het web nog niet beschikbaar': 'Žiniatinklyje dar nepasiekiama',
-  'Ophalen mislukt': 'Nepavyko atsisiųsti',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Nepavyko pasiekti jokio šaltinio — nuorodų duomenų niekur nepavyko atsisiųsti. Bandykite dar kartą arba importuokite paketą rankiniu būdu.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'Atsisiųsti duomenys neatitiko laukiamo skaitmeninio atspaudo ir dėl atsargumo buvo atmesti.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'Duomenų paketas buvo sugadintas arba netinkamas, todėl buvo atmestas.',
+  'Gegevenspakket kiezen': 'Pasirinkti duomenų paketą',
+  'Kon het gekozen bestand niet lezen.':
+      'Nepavyko nuskaityti pasirinkto failo.',
   'Nog niet opgehaald': 'Dar neatsisiųsta',
   'AI-assistentie': 'DI pagalba',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

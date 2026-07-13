@@ -75,7 +75,10 @@ dated events), and
 **free Markdown**. Each card in the chooser shows a miniature
 wireframe of the layout, and the dialog works entirely with the keyboard
 (`Tab`/`Enter` to choose, `Esc` to cancel). Each type has a dedicated editor on
-the left and a live preview on the right.
+the left and a live preview on the right. You can change an existing slide's type
+at any time from the **TYPE** control in the editor header: it opens the same
+chooser, so adding and re-typing a slide always offer exactly the same set of
+types.
 
 Not sure what a slide type is for? Click the small **"What can I do here?"**
 button at the top of the editor for a one-line hint about the selected type (for
@@ -637,13 +640,29 @@ same optional, off-by-default backend used elsewhere.
 
 Turn it on under **Settings → Uitbreidingen (Extensions)**. Once enabled, the
 security slide types appear in a dedicated *Informatieveiligheid* tab of the
-add-slide picker, and the module's command-palette actions become available.
+add-slide and **change-type** pickers, the MIAUW template appears in the
+new-presentation dialog, and the module's command-palette actions become
+available. While the module is off, none of those security types are offered
+anywhere, so the picker stays short for everyone who does not need them — but a
+report that already uses them always opens and renders correctly regardless (the
+file is the source of truth; the toggle only governs *authoring*).
 
-Enabling fetches the module's reference data once and then works offline. If
-that fetch cannot complete, the card explains **which** step failed — no source
-reachable, a fingerprint that did not match, or a damaged/invalid pack — instead
-of a bare "failed", and offers **Pakket importeren (Import pack)** to load the
-data pack from a local file instead (the air-gapped fallback).
+The module's reference data is **bundled with the app**, so enabling it works
+**offline and out of the box** — no download, no server, and no outbound traffic
+(nothing leaves your device; you do not even need to grant the outbound-traffic
+consent for this). The bundled pack is verified against a fingerprint compiled
+into the app before it is used, so a tampered or mismatched pack is refused.
+
+You will normally never see a failure. In the rare case the bundled pack cannot
+be read and no mirror is reachable, the card explains **which** step failed — no
+source reachable, a fingerprint that did not match, or a damaged/invalid pack —
+instead of a bare "failed", and offers two recourses: **Opnieuw proberen (Try
+again)** to re-run provisioning, and **Pakket importeren (Import pack)** to load
+a data pack from a local file. A data pack is a `.zip` holding this module's
+reference data; on import it is checked against the same built-in fingerprint, so
+**only a pack that matches your app version is accepted** — this is the
+air-gapped / update path, not something you need for normal use. Retry is hidden
+on the web build; import still works there.
 
 ### Starting from the MIAUW report template
 
@@ -677,6 +696,11 @@ else.
   recomputes the counts from the deck's findings.
 - **Sign-off** — the truthful-reporting page (MIAUW 1.6) with the deck-wide visual
   signature and certification, and **Afronden & verzegelen** to seal the report.
+  The signature can be **typed** or **drawn**: click **Handtekening tekenen (Draw
+  signature)** — in the sign-off editor or the seal dialog — to sign on a pad with
+  the mouse, trackpad, touch or stylus. A drawn signature is stored as an embedded
+  image inside the report (so it travels with the `.md` and is covered by the
+  seal) and takes precedence over the typed name wherever the sign-off is shown.
 
 ### The finding wizard
 

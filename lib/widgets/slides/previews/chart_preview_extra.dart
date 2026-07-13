@@ -535,9 +535,11 @@ extension _ChartPreviewExtra on _ChartPreviewState {
     final low = lo ?? 0;
     var high = hi ?? 1;
     if (high <= low) high = low + 1;
-    final accent = _hexColor(profile.accentColor);
-    final bg = _hexColor(profile.slideBackgroundColor);
-    final lowColor = Color.lerp(bg, accent, 0.12)!;
+    // Magnitude → a fixed heat ramp, not the deck theme (see chart.dart), picked
+    // for the slide background so low always recedes and high always intensifies.
+    final ramp = heatmapRamp(
+      darkBackground: isDarkHex(profile.slideBackgroundColor),
+    );
     final labelStyle = _applyFont(
       font,
       TextStyle(
@@ -599,8 +601,7 @@ extension _ChartPreviewExtra on _ChartPreviewState {
                                         cc < rows[r].data.length,
                                         low,
                                         high,
-                                        lowColor,
-                                        accent,
+                                        ramp,
                                         t,
                                         textColor,
                                       ),
@@ -644,7 +645,7 @@ extension _ChartPreviewExtra on _ChartPreviewState {
                 ),
               ),
               SizedBox(height: w * 0.008),
-              _heatScale(lowColor, accent, low, high, textColor, labelW),
+              _heatScale(ramp, low, high, textColor, labelW),
             ],
           );
         },
@@ -657,18 +658,20 @@ extension _ChartPreviewExtra on _ChartPreviewState {
     bool present,
     double low,
     double high,
-    Color lowColor,
-    Color accent,
+    List<String> ramp,
     double t,
     Color textColor,
   ) {
     final norm = (high - low) <= 0
         ? 0.0
         : ((v - low) / (high - low)).clamp(0.0, 1.0);
+    final fillHex = heatmapColorAt(ramp, norm);
     final color = present
-        ? Color.lerp(lowColor, accent, norm)!
+        ? _hexColor(fillHex)
         : textColor.withValues(alpha: 0.04);
-    final onColor = norm > 0.55 ? Colors.white : textColor;
+    // The cell colour is fixed (not the theme), so the label colour is too:
+    // white on the hot/dark cells, dark ink on the pale ones.
+    final onColor = _hexColor(heatmapInk(fillHex));
     return Padding(
       padding: EdgeInsets.all(w * 0.0025),
       child: Opacity(
@@ -699,8 +702,7 @@ extension _ChartPreviewExtra on _ChartPreviewState {
   }
 
   Widget _heatScale(
-    Color low,
-    Color high,
+    List<String> ramp,
     double lo,
     double hi,
     Color textColor,
@@ -728,7 +730,9 @@ extension _ChartPreviewExtra on _ChartPreviewState {
                   child: Container(
                     height: w * 0.012,
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(colors: [low, high]),
+                      gradient: LinearGradient(
+                        colors: [for (final s in ramp) _hexColor(s)],
+                      ),
                       borderRadius: BorderRadius.circular(w * 0.008),
                     ),
                   ),

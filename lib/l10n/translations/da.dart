@@ -84,6 +84,11 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  'Handtekening tekenen': 'Tegn underskrift',
+  'Teken je handtekening in het vak hieronder.':
+      'Tegn din underskrift i feltet nedenfor.',
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'En datapakke er en .zip med referencedataene til dette modul. Den kontrolleres først mod det fingeraftryk, der er indbygget i appen; kun en pakke, der passer til denne appversion, accepteres.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Areal',
   'Horizontale staaf': 'Vandret søjle',
@@ -289,14 +294,21 @@ const _dutchSourceDa = {
   'Uitbreidingen': 'Udvidelser',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Valgfrie moduler. Slået fra som standard; de tilføjer intet til basisappen, før du aktiverer dem.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Pentest-rapportering efter MIAUW. Aktivering henter referencedataene én gang; derefter arbejder modulet offline.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Rapporteringsslides og referencedata til informationssikkerhed: fund, tjeklister, scope-matricer og godkendelse. Struktureret efter MIAUW og bredt anvendelig til pentests, audits og sikkerhedsundersøgelser. Aktivering henter referencedataene én gang; derefter arbejder modulet offline.',
   'Gegevens opschonen': 'Ryd data',
   'Gegevens lokaal beschikbaar': 'Data tilgængelige lokalt',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Giv først samtykke til udgående trafik under Licens og privatliv.',
   'Op het web nog niet beschikbaar': 'Endnu ikke tilgængelig på nettet',
-  'Ophalen mislukt': 'Hentning mislykkedes',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Ingen kilde tilgængelig — referencedataene kunne ikke hentes nogen steder. Prøv igen, eller importer pakken manuelt.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'De hentede data stemte ikke overens med det forventede fingeraftryk og blev afvist for en sikkerheds skyld.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'Datapakken var beskadiget eller ugyldig og blev derfor afvist.',
+  'Gegevenspakket kiezen': 'Vælg datapakke',
+  'Kon het gekozen bestand niet lezen.': 'Kunne ikke læse den valgte fil.',
   'Nog niet opgehaald': 'Endnu ikke hentet',
   'AI-assistentie': 'AI-assistance',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

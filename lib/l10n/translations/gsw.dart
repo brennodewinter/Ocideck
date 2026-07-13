@@ -84,6 +84,11 @@ const _stringsGsw = {
 };
 
 const _dutchSourceGsw = {
+  'Handtekening tekenen': 'Ünnerschrift zeichne',
+  'Teken je handtekening in het vak hieronder.':
+      'Zeichne dini Ünnerschrift is Fäld hie unde.',
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'Es Datepaket isch es .zip mit de Referänzdate für die Modul. Es wird zerscht gäge de i de App iiboute Fingerabdruck prüeft; nume es Paket, wo zu där App-Version passt, wird akzeptiert.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Flächä',
   'Horizontale staaf': 'Horizontali Balke',
@@ -289,14 +294,22 @@ const _dutchSourceGsw = {
   'Uitbreidingen': 'Erwyterige',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Optionali Modul. Standardmässig us; si tüend zur Basis-App nüt derzue, bis du si iischaltisch.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Pentest-Bricht nach MIAUW. Bim Iischalte werde d\'Referänzdate eimol glade; dernah lauft s Modul offline.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Bricht-Slides und Referänzdate für d\'Informationssicherheit: Befund, Checkliste, Scope-Matrize und Underzeichnig. Nach MIAUW strukturiert und breit iisetzbar für Pentest, Audits und Sicherheitsforschig. Bim Iischalte werde d\'Referänzdate eimol glade; dernah lauft s Modul offline.',
   'Gegevens opschonen': 'Date ufruume',
   'Gegevens lokaal beschikbaar': 'Date lokal verfüegbar',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Gib zerscht d\'Zuestimmig für usgehende Verkehr under Lizänz und Dateschutz.',
   'Op het web nog niet beschikbaar': 'Im Web no nöd verfüegbar',
-  'Ophalen mislukt': 'Abruef fehlgschlage',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Kei Quelle erreichbar — d\'Referänzdate händ nienersch chöne glade werde. Probier\'s nomol oder importier s Paket vo Hand.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'D\'gladene Date händ nöd mit em erwartete Fingerabdruck übereigstimmt und sind us Vorsicht abglehnt worde.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'S Datepäckli isch beschädigt oder ungültig gsi und isch drum abglehnt worde.',
+  'Gegevenspakket kiezen': 'Datepäckli uswähle',
+  'Kon het gekozen bestand niet lezen.':
+      'S usgwählte File het nöd chöne gläse werde.',
   'Nog niet opgehaald': 'No nöd glade',
   'AI-assistentie': 'KI-Unterstützig',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

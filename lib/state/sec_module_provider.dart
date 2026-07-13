@@ -11,6 +11,7 @@
 // This is deliberately reusable: a future domain extension can reuse the same
 // enable → provision → reveal pattern.
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -23,12 +24,25 @@ import 'consent_provider.dart';
 const _enabledKey = 'secModuleEnabled';
 const _versionKey = 'secModulePackVersion';
 
+/// Loads the app-bundled baseline pack (a pubspec asset) as bytes, or null when
+/// it is missing/unreadable — the provisioner then falls through to a mirror.
+Future<Uint8List?> _loadBundledSecPack() async {
+  try {
+    final data = await rootBundle.load(secPackAssetKey);
+    return data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+  } catch (e) {
+    logWarning('secModule: kon meegeleverd pakket niet laden', e);
+    return null;
+  }
+}
+
 /// The provisioner used by the notifier. Overridden in tests with a fake
 /// transport + in-memory store so nothing hits the network or disk.
 final secModuleProvisionerProvider = Provider<SecModuleProvisioner>((ref) {
   return SecModuleProvisioner(
     transport: createSecPackTransport(),
     store: createSecPackStore(),
+    bundledPackLoader: _loadBundledSecPack,
   );
 });
 
@@ -130,7 +144,21 @@ class SecModuleNotifier extends Notifier<SecModuleState> {
   Future<SecProvisionStatus> enable() async {
     state = state.copyWith(enabled: true, busy: true);
     await _persistBool(_enabledKey, true);
+    return _provision();
+  }
 
+  /// Re-run provisioning for an already-enabled module — the "try again" action
+  /// after a fetch failed (no mirror reachable) or after the user has just
+  /// granted the outbound consent. Same pipeline as [enable] minus flipping the
+  /// toggle, so it is a no-op safe to call whenever the module is on.
+  Future<SecProvisionStatus> retry() async {
+    if (!state.enabled) return SecProvisionStatus.noConsent;
+    state = state.copyWith(busy: true);
+    return _provision();
+  }
+
+  /// The shared fetch → verify → cache run behind [enable] and [retry].
+  Future<SecProvisionStatus> _provision() async {
     final hasConsent = ref.read(consentProvider).hasAccepted;
     final provisioner = ref.read(secModuleProvisionerProvider);
     final result = await provisioner.provision(hasConsent: hasConsent);

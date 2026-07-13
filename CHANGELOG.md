@@ -8,6 +8,49 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Draw a signature on the sign-off page.** Next to the typed signature, the
+  sign-off editor and the **Afronden & verzegelen** dialog now offer
+  **Handtekening tekenen (Draw signature)** — a pad you sign with the mouse,
+  trackpad, touch or stylus. The drawing is stored as a self-contained embedded
+  PNG in the deck's visual signature (the existing `ocideck_sig_image` field), so
+  it round-trips in the `.md` and is covered by the document seal like the rest
+  of the attestation. Wherever the sign-off is shown — the editor preview, the
+  presenter, and the **PDF/PPTX export** — a drawn signature takes precedence
+  over the typed name. Localised in all interface languages.
+- **The sign-off signature now appears in the PDF/PPTX export.** The rasterised
+  export previously dropped the deck's visual signature (both the typed name and
+  a drawn one), so a sealed report exported without its attestation signature.
+  The signature and seal date now travel into the export rasteriser, and the
+  drawn image is precached so it paints on the captured frame.
+- **Error messages are copyable.** Failure notifications (export, import,
+  Nextcloud download/save, and the module card) now carry a **Kopiëren (Copy)**
+  action that puts the exact message on the clipboard, and stay on screen a
+  little longer so there is time to read and copy them — so a failure can be
+  reported or looked up without retyping it. The Informatieveiligheid module's
+  status line is also selectable for the same reason. Reuses the existing copy
+  strings, so it is localised in all interface languages.
+- **The Informatieveiligheid module now works offline, out of the box.** Its
+  baseline reference data is **bundled with the app** (as a signed-by-hash asset)
+  and provisioned from there on enable — no mirror, no download, no outbound
+  traffic, and no consent needed (nothing leaves the device). The bundled pack is
+  verified against the fingerprint compiled into the app before use, exactly like
+  an import. This replaces the skeleton behaviour where enabling always failed
+  with "no source reachable" because no mirror served the pack yet. The manual
+  **Pakket importeren (Import pack)** path remains for an air-gapped/updated pack
+  and now explains, on the card, what an importable pack is (a `.zip` verified
+  against the built-in fingerprint; only a pack matching your app version is
+  accepted). Localised in all interface languages (PENTEST_MIAUW §6).
+- **Retry a failed module fetch, and a clearer reason when it fails** — the
+  *Informatieveiligheid* extension card now offers **Opnieuw proberen (Try
+  again)** whenever the module is on but its reference data is not yet present,
+  so a fetch that failed because the network was briefly down — or because the
+  outbound-traffic consent had not been granted yet — can be re-run in place
+  without toggling the module off and on. It sits next to the existing **Pakket
+  importeren (Import pack)** recourse and is hidden on the web build, which
+  cannot reach a mirror. The "no source reachable" message was also reworded: it
+  now states plainly that the data could not be retrieved from any source and
+  points to the two recourses, instead of implying the user's own internet
+  connection is at fault. Localised in all interface languages (PENTEST_MIAUW §6).
 - **Low-contrast warning in the style-profile editor** — *Settings → Colours* now
   shows a live warning beneath any colour whose contrast the deck-level quality
   panel would flag, so you catch the problem while designing the style instead of
@@ -25,7 +68,11 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   last series as a line on a second axis, e.g. revenue + growth %), **donut** (a
   pie with the total in the centre), **waterfall** (the first series as up/down
   steps building on a running total) and **heatmap** (a value-coloured grid that
-  doubles as a likelihood × impact **risk matrix**). Each renders natively
+  doubles as a likelihood × impact **risk matrix**). The heatmap is coloured by a
+  dedicated, theme-independent sequential **heat** scale — pale→deep-red on light
+  slides, dark→bright on dark ones — so it reads as a heatmap rather than taking
+  the deck's accent colour; the numeric value is printed in every cell. Each
+  renders natively
   (preview, presenter, PDF, PPTX) and as self-contained SVG in the HTML export,
   round-trips through the same `chart` JSON block, animates on enter, and carries
   a screen-reader text alternative. Type names are localised in all interface
@@ -642,6 +689,15 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   the EUPL-1.2 licence text.
 
 ### Changed
+- **The editor's slide-type selector now opens the same visual picker as "Slide
+  toevoegen".** The **TYPE** control in the editor header used to be a plain
+  pulldown that listed every slide type in one long, flat list — and, unlike the
+  add-slide dialog, it always showed the Informatieveiligheid types even with the
+  module off, so the two places disagreed about which types exist. It now opens
+  the shared picker (category tabs, search and wireframe previews) and gates the
+  security types exactly like the add dialog, so both surfaces offer an identical
+  set. A slide that is already a security type can still be re-typed among the
+  security types with the module off, so imported reports are never a dead-end.
 - **The markdown checker is more critical and less noisy.** It now warns about
   **unknown front-matter keys** (a typo like `pagenate:`, or a Marp option
   OciDeck does not implement such as `header`/`footer`/`size`/`style`) and about

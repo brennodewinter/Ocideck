@@ -84,6 +84,11 @@ const _stringsHr = {
 };
 
 const _dutchSourceHr = {
+  'Handtekening tekenen': 'Nacrtaj potpis',
+  'Teken je handtekening in het vak hieronder.':
+      'Nacrtajte svoj potpis u okviru ispod.',
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'Podatkovni paket je .zip s referentnim podacima za ovaj modul. Najprije se provjerava u odnosu na otisak ugrađen u aplikaciju; prihvaća se samo paket koji odgovara ovoj verziji aplikacije.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Površinski',
   'Horizontale staaf': 'Vodoravni stupčasti',
@@ -290,14 +295,22 @@ const _dutchSourceHr = {
   'Uitbreidingen': 'Proširenja',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Neobavezni moduli. Prema zadanim postavkama isključeni; ne dodaju ništa osnovnoj aplikaciji dok ih ne omogućite.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Izvještavanje o pentestu prema MIAUW-u. Omogućavanje jednom preuzima referentne podatke; nakon toga modul radi izvan mreže.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Slajdovi izvješća i referentni podaci za informacijsku sigurnost: nalazi, kontrolni popisi, matrice opsega i potpisivanje. Strukturirano prema MIAUW-u i široko primjenjivo za pentestove, revizije i sigurnosna istraživanja. Omogućavanje jednom preuzima referentne podatke; nakon toga modul radi izvan mreže.',
   'Gegevens opschonen': 'Očisti podatke',
   'Gegevens lokaal beschikbaar': 'Podaci dostupni lokalno',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Najprije dajte privolu za izlazni promet u odjeljku Licenca i privatnost.',
   'Op het web nog niet beschikbaar': 'Još nije dostupno na webu',
-  'Ophalen mislukt': 'Preuzimanje nije uspjelo',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Nijedan izvor nije dostupan — referentne podatke nije bilo moguće nigdje preuzeti. Pokušajte ponovno ili ručno uvezite paket.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'Preuzeti podaci nisu odgovarali očekivanom otisku i odbijeni su iz opreza.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'Podatkovni paket bio je oštećen ili nevažeći pa je stoga odbijen.',
+  'Gegevenspakket kiezen': 'Odaberi podatkovni paket',
+  'Kon het gekozen bestand niet lezen.':
+      'Odabranu datoteku nije bilo moguće pročitati.',
   'Nog niet opgehaald': 'Još nije preuzeto',
   'AI-assistentie': 'AI pomoć',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':

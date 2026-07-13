@@ -84,6 +84,11 @@ const _stringsIt = {
 };
 
 const _dutchSourceIt = {
+  'Handtekening tekenen': 'Disegna firma',
+  'Teken je handtekening in het vak hieronder.':
+      'Disegna la tua firma nel riquadro qui sotto.',
+  'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
+      'Un pacchetto di dati è un .zip con i dati di riferimento di questo modulo. Viene prima verificato rispetto all\'impronta incorporata nell\'app; è accettato solo un pacchetto compatibile con questa versione dell\'app.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Area',
   'Horizontale staaf': 'Barre orizzontali',
@@ -291,14 +296,21 @@ const _dutchSourceIt = {
   'Uitbreidingen': 'Estensioni',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Moduli opzionali. Disattivati per impostazione predefinita; non aggiungono nulla all\'app di base finché non li attivi.',
-  'Pentestrapportage volgens MIAUW. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Rendicontazione dei pentest secondo MIAUW. L\'attivazione scarica una volta i dati di riferimento; poi il modulo funziona offline.',
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
+      'Slide di rendicontazione e dati di riferimento per la sicurezza delle informazioni: rilievi, liste di controllo, matrici dell\'ambito e firma. Strutturato secondo MIAUW e ampiamente utilizzabile per pentest, audit e ricerca sulla sicurezza. L\'attivazione scarica una volta i dati di riferimento; poi il modulo funziona offline.',
   'Gegevens opschonen': 'Pulisci dati',
   'Gegevens lokaal beschikbaar': 'Dati disponibili localmente',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
       'Concedi prima il consenso al traffico in uscita in Licenza e privacy.',
   'Op het web nog niet beschikbaar': 'Non ancora disponibile sul web',
-  'Ophalen mislukt': 'Download non riuscito',
+  'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.':
+      'Nessuna fonte raggiungibile — non è stato possibile scaricare i dati di riferimento da nessuna parte. Riprova o importa il pacchetto manualmente.',
+  'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.':
+      'I dati scaricati non corrispondevano all\'impronta digitale prevista e sono stati rifiutati per precauzione.',
+  'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.':
+      'Il pacchetto di dati era danneggiato o non valido ed è stato quindi rifiutato.',
+  'Gegevenspakket kiezen': 'Scegli pacchetto di dati',
+  'Kon het gekozen bestand niet lezen.': 'Impossibile leggere il file scelto.',
   'Nog niet opgehaald': 'Non ancora scaricato',
   'AI-assistentie': 'Assistenza IA',
   'AI-assistentie is alleen beschikbaar in de desktopversie.':
