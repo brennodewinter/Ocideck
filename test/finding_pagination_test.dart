@@ -5,6 +5,9 @@ import 'package:ocideck/services/finding_pagination.dart';
 
 String _lorem(int n) => List.filled(n, 'lorem ipsum dolor sit amet').join(' ');
 
+// A section long enough to force a page split under the tuned heuristic.
+String _bigSection() => _lorem(24);
+
 void main() {
   const heading = 'F-03 · SQL-injectie in het loginformulier';
   const vector =
@@ -15,10 +18,10 @@ void main() {
     scopeObject: 'https://app.voorbeeld/login',
     cvssVector: vector,
     cweId: 89,
-    description: _lorem(6),
-    confirmation: _lorem(6),
-    impact: _lorem(6),
-    recommendation: _lorem(6),
+    description: _bigSection(),
+    confirmation: _bigSection(),
+    impact: _bigSection(),
+    recommendation: _bigSection(),
   );
 
   group('paginateFinding', () {

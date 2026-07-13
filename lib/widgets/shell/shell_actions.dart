@@ -795,13 +795,21 @@ void presentDeck(
     if (initial < 0) initial = 0;
   }
   final settings = ref.read(settingsProvider);
+  // Render-time pagination: a long finding presents as several full-size slides
+  // (matching the export). Remap the start index into the expanded list. A
+  // finding never fires onSlideChanged (only checklist/table live-edits do), so
+  // the callback below still resolves page-slides to their deck slide by id.
+  final renderSlides = expandFindingsForRender(slides);
+  final renderInitial = expandFindingsForRender(
+    slides.sublist(0, initial),
+  ).length.clamp(0, renderSlides.length - 1);
   FullscreenPresenter.present(
     context,
-    slides: slides,
+    slides: renderSlides,
     projectPath: deck.projectPath,
     themeProfile: deck.themeProfile,
     cockpitColorScheme: settings.cockpitColorScheme,
-    initialIndex: initial,
+    initialIndex: renderInitial,
     tlp: deck.tlp,
     organization: deck.organization,
     showClassificationWatermark: settings.classificationWatermarkEnabled,

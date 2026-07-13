@@ -18,13 +18,14 @@ import '../models/slide.dart';
 enum _Section { description, confirmation, impact, recommendation }
 
 /// Estimated full-size body lines that fit on one 16:9 slide, and the cost (in
-/// those line-units) of the header card and a section heading. Deliberately
-/// conservative so a page never overflows back into the shrinking regime; tuned
-/// against the live finding preview.
-const double _linesPerSlide = 11.0;
-const double _headerCardCost = 4.5;
-const double _sectionHeadingCost = 1.6;
-const double _charsPerLine = 62.0;
+/// those line-units) of the header card and a section heading. Tuned against the
+/// live finding preview/presenter (a 16:9 finding fits roughly 22 body lines at
+/// ~88 characters per line) so only a genuinely overflowing finding splits —
+/// a borderline one stays a single slide rather than being over-split.
+const double _linesPerSlide = 22.0;
+const double _headerCardCost = 4.0;
+const double _sectionHeadingCost = 1.4;
+const double _charsPerLine = 88.0;
 
 /// Estimated line-cost of a section's body text, honouring hard line breaks.
 double _bodyCost(String text) {

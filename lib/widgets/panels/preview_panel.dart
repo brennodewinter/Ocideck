@@ -8,6 +8,7 @@ import '../../models/slide.dart';
 import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../state/settings_provider.dart';
+import '../../services/finding_pagination.dart';
 import '../../services/rich_text_layout.dart';
 import '../../services/slide_layout_metrics.dart';
 import '../../theme/app_theme.dart';
@@ -53,24 +54,24 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
     final current = ref.read(editorProvider).selectedIndex;
     final slide = deck.slides[current.clamp(0, deck.slides.length - 1)];
 
-    if (slideUsesRichText(slide)) {
-      final pages = richTextPageCountForSlide(
-        slide: slide,
-        profile: deck.themeProfile,
-        splitWithImage: slide.type.splitWithImage,
-      );
-      final richTextPage = ref.read(richTextPreviewPageProvider);
-      if (pages > 1) {
-        if (delta > 0 && richTextPage < pages - 1) {
-          ref.read(richTextPreviewPageProvider.notifier).state =
-              richTextPage + 1;
-          return;
-        }
-        if (delta < 0 && richTextPage > 0) {
-          ref.read(richTextPreviewPageProvider.notifier).state =
-              richTextPage - 1;
-          return;
-        }
+    // A rich-text slide and an overflowing finding both preview as multiple
+    // pages; arrow keys step through the pages before moving to the next slide.
+    final pages = slideUsesRichText(slide)
+        ? richTextPageCountForSlide(
+            slide: slide,
+            profile: deck.themeProfile,
+            splitWithImage: slide.type.splitWithImage,
+          )
+        : expandFindingsForRender([slide]).length;
+    if (pages > 1) {
+      final page = ref.read(richTextPreviewPageProvider);
+      if (delta > 0 && page < pages - 1) {
+        ref.read(richTextPreviewPageProvider.notifier).state = page + 1;
+        return;
+      }
+      if (delta < 0 && page > 0) {
+        ref.read(richTextPreviewPageProvider.notifier).state = page - 1;
+        return;
       }
     }
 
@@ -146,7 +147,15 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
             splitWithImage: slide.type.splitWithImage,
           )
         : 1;
-    final hasRichTextPages = richTextPages > 1;
+    // A long finding previews across multiple full-size pages (render-time
+    // pagination, mirroring the export); the preview shows the current page and
+    // arrow keys / the page indicator step through them.
+    final findingPageSlides = expandFindingsForRender([slide]);
+    final isPagedFinding = findingPageSlides.length > 1;
+    final pageCount = isPagedFinding ? findingPageSlides.length : richTextPages;
+    final hasRichTextPages = pageCount > 1;
+    final previewPage = richTextPage.clamp(0, pageCount - 1);
+    final canvasSlide = isPagedFinding ? findingPageSlides[previewPage] : slide;
 
     return Focus(
       focusNode: _focusNode,
@@ -163,8 +172,8 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                 l10n,
                 deck,
                 idx,
-                richTextPage,
-                richTextPages,
+                previewPage,
+                pageCount,
                 hasRichTextPages,
               ),
               const Divider(height: 1),
@@ -173,9 +182,9 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
               _slideCanvas(
                 deck,
                 settings,
-                slide,
+                canvasSlide,
                 idx,
-                richTextPage,
+                previewPage,
                 hasRichTextPages,
               ),
 
@@ -185,8 +194,8 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                 deck,
                 slide,
                 idx,
-                richTextPage,
-                richTextPages,
+                previewPage,
+                pageCount,
                 hasRichTextPages,
               ),
 
