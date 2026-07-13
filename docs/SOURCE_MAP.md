@@ -56,7 +56,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `classification_policy.dart` — Thin backward-compatible wrapper around the TLP export ceiling only.
 - `cvss/cvss4.dart` — Native-Dart port of the FIRST CVSS v4.0 calculator (metrics, parse, score, severity); `cvss4_lookup.dart` + `cvss4_scoring.dart` are its lookup-table/scoring parts.
 - `cwe_catalog.dart` — The offline CWE catalog (`CweCatalog`): a curated floor merged with the full MITRE list from `assets/cwe/cwe_full.json` (via `ensureLoaded`); search/byId.
-- `cve_search_service.dart` — `CveSearchService` + `CveSource` cascade (primary `LibrekatCveSource`) that searches CVEs by id pattern; `CveHit` in `models/cve_hit.dart`.
+- `cve_search_service.dart` — `CveSearchService` + `CveSource` cascade (`LibrekatCveSource` mirror → `EnisaCveSource` EUVD keyword search → `MitreCveSource` exact-id lookup); `CveHit` in `models/cve_hit.dart`.
 - `cve_transport.dart` / `cve_transport_io.dart` / `cve_transport_web.dart` / `cve_transport_factory.dart` — injectable, SSRF-pinned HTTP transport for the CVE search (io) with a web stub, selected by conditional export.
 - `wstg_catalog.dart` — The bundled offline OWASP WSTG v4.2 test catalog (`WstgCatalog`, 97 tests + pinned version) used to one-click-fill a `checklist` slide.
 - `description_service.dart` — Stores searchable image descriptions as JSON sidecars.

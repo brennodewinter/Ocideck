@@ -15,9 +15,11 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   or number, with no network. The curated floor keeps its richer
   description/remediation snippets.
 - **Look up CVEs online (opt-in).** The finding editor and wizard gain a **Zoek
-  CVE…** action that searches a CVE by id pattern (e.g. `2021-44228`) against an
-  NVD mirror and shows each match's description + CVSS score; picking one appends
-  its id to the CVE field (the finding's CVSS 4.0 vector is never overwritten).
+  CVE…** action that searches a CVE against a source cascade — the configured NVD
+  mirror first (by id pattern), then **ENISA EUVD** (which also does keyword
+  search) and **MITRE** (exact-id lookup) as fallbacks — and shows each match's
+  description + CVSS score; picking one appends its id to the CVE field (the
+  finding's CVSS 4.0 vector is never overwritten).
   It is **off by default** and fail-closed: enable **CVE opzoeken (online)** under
   Settings → Security (which also requires your consent), where the mirror base
   URL is configurable (default `https://cveapi.librekat.nl`). The fetch is
