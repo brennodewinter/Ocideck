@@ -1786,6 +1786,16 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Bewijs': 'Důkazy',
+  'Screenshot toevoegen': 'Přidat snímek obrazovky',
+  'Video toevoegen': 'Přidat video',
+  'Bewerk deze slide': 'Upravit tento snímek',
+  'Bewijs verwijderen': 'Odebrat důkaz',
+  '(nog leeg)': '(zatím prázdné)',
+  'Geef eerst een bevinding-id op om bewijs te koppelen.':
+      'Nejprve zadejte ID zjištění, abyste mohli připojit důkazy.',
+  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Přidejte snímky obrazovky nebo videa jako důkaz. Každý důkaz se stane vlastním snímkem hned za zjištěním a je součástí exportu.',
   'Uitvoering testen conform standaard': 'Testování podle standardu',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Příliš malý kontrast s pozadím — může být nečitelné.',

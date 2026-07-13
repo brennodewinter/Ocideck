@@ -740,6 +740,16 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Bewijs': 'Nachweise',
+  'Screenshot toevoegen': 'Screenshot hinzufügen',
+  'Video toevoegen': 'Video hinzufügen',
+  'Bewerk deze slide': 'Diese Folie bearbeiten',
+  'Bewijs verwijderen': 'Nachweis entfernen',
+  '(nog leeg)': '(noch leer)',
+  'Geef eerst een bevinding-id op om bewijs te koppelen.':
+      'Gib zuerst eine Befund-ID an, um Nachweise anzuhängen.',
+  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Füge Screenshots oder Videos als Nachweis hinzu. Jeder Nachweis wird zu einer eigenen Folie direkt nach dem Befund und ist im Export enthalten.',
   'Uitvoering testen conform standaard': 'Tests gemäß Standard',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Zu wenig Kontrast zum Hintergrund — möglicherweise unlesbar.',

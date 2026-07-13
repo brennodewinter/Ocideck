@@ -922,6 +922,16 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Bewijs': 'Evidence',
+  'Screenshot toevoegen': 'Add screenshot',
+  'Video toevoegen': 'Add video',
+  'Bewerk deze slide': 'Edit this slide',
+  'Bewijs verwijderen': 'Remove evidence',
+  '(nog leeg)': '(still empty)',
+  'Geef eerst een bevinding-id op om bewijs te koppelen.':
+      'Enter a finding id first to attach evidence.',
+  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Add screenshots or videos as evidence. Each piece of evidence becomes its own slide right after the finding and is included in the export.',
   'Uitvoering testen conform standaard': 'Testing per standard',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Too little contrast with the background — may be unreadable.',

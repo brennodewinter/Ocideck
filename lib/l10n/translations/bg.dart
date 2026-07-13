@@ -1806,6 +1806,16 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Bewijs': 'Доказателства',
+  'Screenshot toevoegen': 'Добави екранна снимка',
+  'Video toevoegen': 'Добави видео',
+  'Bewerk deze slide': 'Редактирай този слайд',
+  'Bewijs verwijderen': 'Премахни доказателство',
+  '(nog leeg)': '(все още празно)',
+  'Geef eerst een bevinding-id op om bewijs te koppelen.':
+      'Първо въведете ID на констатацията, за да прикачите доказателства.',
+  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Добавете екранни снимки или видеа като доказателство. Всяко доказателство става отделен слайд веднага след констатацията и се включва в експорта.',
   'Uitvoering testen conform standaard': 'Тестване съгласно стандарта',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Твърде малък контраст с фона — може да е нечетливо.',

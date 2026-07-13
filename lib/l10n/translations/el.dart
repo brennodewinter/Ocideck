@@ -1811,6 +1811,16 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Bewijs': 'Αποδείξεις',
+  'Screenshot toevoegen': 'Προσθήκη στιγμιότυπου',
+  'Video toevoegen': 'Προσθήκη βίντεο',
+  'Bewerk deze slide': 'Επεξεργασία διαφάνειας',
+  'Bewijs verwijderen': 'Αφαίρεση απόδειξης',
+  '(nog leeg)': '(ακόμα κενό)',
+  'Geef eerst een bevinding-id op om bewijs te koppelen.':
+      'Δώσε πρώτα ένα αναγνωριστικό ευρήματος για να επισυνάψεις αποδείξεις.',
+  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Πρόσθεσε στιγμιότυπα ή βίντεο ως αποδείξεις. Κάθε απόδειξη γίνεται δική της διαφάνεια αμέσως μετά το εύρημα και περιλαμβάνεται στην εξαγωγή.',
   'Uitvoering testen conform standaard': 'Δοκιμές σύμφωνα με το πρότυπο',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Πολύ μικρή αντίθεση με το φόντο — ίσως δυσανάγνωστο.',

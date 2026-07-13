@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/finding_spec.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/widgets/editors/finding_editor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,7 +16,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 Widget _host(Slide slide, void Function(Slide) onUpdate) => ProviderScope(
   child: MaterialApp(
     home: Scaffold(
-      body: FindingEditor(slide: slide, onUpdate: onUpdate),
+      body: FindingEditor(
+        slide: slide,
+        onUpdate: onUpdate,
+        imageService: ImageService(),
+      ),
     ),
   ),
 );

@@ -684,7 +684,13 @@ else.
   whole finding moves and round-trips as a unit. The header carries the scope
   object, the CVSS 4.0 vector (with a live, derived score and severity band), CWE
   and CVE references, and the description / reproduction / impact / recommendation
-  sections. Severity is always **derived** from the vector, never typed.
+  sections. Severity is always **derived** from the vector, never typed. The
+  finding editor also has an **Bewijs (Evidence)** section: **Screenshot
+  toevoegen** and **Video toevoegen** attach a screenshot or a video as evidence.
+  Each piece of evidence becomes its own slide right after the finding (part of
+  the same finding group, so it moves and exports with the finding); the section
+  lists them with a thumbnail and lets you jump to or remove each one. Give the
+  finding an id first — evidence links to the finding by that id.
 - **Uitvoering testen conform standaard** (the checklist slide type; the file
   format keeps the `checklist` class) — a standard-driven test list with a MIAUW
   tri-state per item

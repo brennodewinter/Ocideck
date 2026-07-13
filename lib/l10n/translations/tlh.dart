@@ -1758,6 +1758,16 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Bewijs': '\'ol',
+  'Screenshot toevoegen': 'HaSta nabmey chel',
+  'Video toevoegen': 'video chel',
+  'Bewerk deze slide': 'vam slide choH',
+  'Bewijs verwijderen': '\'ol teq',
+  '(nog leeg)': '(chIm)',
+  'Geef eerst een bevinding-id op om bewijs te koppelen.':
+      '\'ol DaghajmeH wa\'DIch finding-id yInob.',
+  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      '\'ol \'e\' DachelmeH HaSta nabmey pagh videos yIchel. finding tlha\' \'ol Hoch slide mojpu\' \'ej export-Daq chel.',
   'Uitvoering testen conform standaard': 'test poQlu\'bogh',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'rItlh puS — laDlaHbe\'lu\'.',

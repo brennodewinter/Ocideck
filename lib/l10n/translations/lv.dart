@@ -1782,6 +1782,16 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Bewijs': 'Pierādījumi',
+  'Screenshot toevoegen': 'Pievienot ekrānuzņēmumu',
+  'Video toevoegen': 'Pievienot video',
+  'Bewerk deze slide': 'Rediģēt šo slaidu',
+  'Bewijs verwijderen': 'Noņemt pierādījumu',
+  '(nog leeg)': '(vēl tukšs)',
+  'Geef eerst een bevinding-id op om bewijs te koppelen.':
+      'Vispirms norādiet konstatējuma ID, lai pievienotu pierādījumus.',
+  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Pievienojiet ekrānuzņēmumus vai videoklipus kā pierādījumus. Katrs pierādījums kļūst par atsevišķu slaidu tūlīt pēc konstatējuma un tiek iekļauts eksportā.',
   'Uitvoering testen conform standaard': 'Testēšana saskaņā ar standartu',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Pārāk mazs kontrasts ar fonu — var būt nesalasāms.',

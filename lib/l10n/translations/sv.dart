@@ -1782,6 +1782,16 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Bewijs': 'Bevis',
+  'Screenshot toevoegen': 'Lägg till skärmbild',
+  'Video toevoegen': 'Lägg till video',
+  'Bewerk deze slide': 'Redigera denna bild',
+  'Bewijs verwijderen': 'Ta bort bevis',
+  '(nog leeg)': '(fortfarande tom)',
+  'Geef eerst een bevinding-id op om bewijs te koppelen.':
+      'Ange först ett fynd-id för att bifoga bevis.',
+  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Lägg till skärmbilder eller videor som bevis. Varje bevis blir en egen bild direkt efter fyndet och kommer med i exporten.',
   'Uitvoering testen conform standaard': 'Tester enligt standard',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'För lite kontrast mot bakgrunden — kan bli oläsligt.',

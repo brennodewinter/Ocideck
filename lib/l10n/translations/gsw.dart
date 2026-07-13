@@ -1787,6 +1787,16 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Bewijs': 'Beweis',
+  'Screenshot toevoegen': 'Screenshot zuefüege',
+  'Video toevoegen': 'Video zuefüege',
+  'Bewerk deze slide': 'Die Folie bearbeite',
+  'Bewijs verwijderen': 'Beweis entferne',
+  '(nog leeg)': '(no läär)',
+  'Geef eerst een bevinding-id op om bewijs te koppelen.':
+      'Gib zerscht e Befund-ID a, zum Beweis aahänke.',
+  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Füeg Screenshots oder Videos as Beweis zue. Jede Beweis wird e eigeni Folie grad nach em Befund und chunt im Export mit.',
   'Uitvoering testen conform standaard': 'Tests gmäss Standard',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Z wenig Kontrast zum Hindergrund — villicht unläsbar.',

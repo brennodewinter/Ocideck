@@ -1783,6 +1783,16 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Bewijs': 'Bukti',
+  'Screenshot toevoegen': 'Tambah tangkapan layar',
+  'Video toevoegen': 'Tambah video',
+  'Bewerk deze slide': 'Edit slide ini',
+  'Bewijs verwijderen': 'Hapus bukti',
+  '(nog leeg)': '(masih kosong)',
+  'Geef eerst een bevinding-id op om bewijs te koppelen.':
+      'Masukkan dulu ID temuan untuk melampirkan bukti.',
+  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Tambahkan tangkapan layar atau video sebagai bukti. Setiap bukti menjadi slide tersendiri tepat setelah temuan dan disertakan dalam ekspor.',
   'Uitvoering testen conform standaard': 'Pengujian sesuai standar',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Kontras dengan latar terlalu rendah — mungkin tak terbaca.',

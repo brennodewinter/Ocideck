@@ -1802,6 +1802,16 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Bewijs': 'Dovezi',
+  'Screenshot toevoegen': 'Adaugă captură de ecran',
+  'Video toevoegen': 'Adaugă videoclip',
+  'Bewerk deze slide': 'Editează acest slide',
+  'Bewijs verwijderen': 'Elimină dovada',
+  '(nog leeg)': '(încă gol)',
+  'Geef eerst een bevinding-id op om bewijs te koppelen.':
+      'Introdu mai întâi un ID de constatare pentru a atașa dovezi.',
+  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Adaugă capturi de ecran sau videoclipuri ca dovezi. Fiecare dovadă devine un slide propriu imediat după constatare și este inclusă în export.',
   'Uitvoering testen conform standaard': 'Testare conform standardului',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Contrast prea mic cu fundalul — poate fi ilizibil.',

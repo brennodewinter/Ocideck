@@ -1806,6 +1806,16 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Bewijs': 'Evidenza',
+  'Screenshot toevoegen': 'Żid screenshot',
+  'Video toevoegen': 'Żid video',
+  'Bewerk deze slide': 'Editja din is-slide',
+  'Bewijs verwijderen': 'Neħħi l-evidenza',
+  '(nog leeg)': '(għadu vojt)',
+  'Geef eerst een bevinding-id op om bewijs te koppelen.':
+      'L-ewwel daħħal ID tas-sejba biex tehmeż evidenza.',
+  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Żid screenshots jew vidjows bħala evidenza. Kull biċċa evidenza ssir slide għaliha eżatt wara s-sejba u tiddaħħal fl-esportazzjoni.',
   'Uitvoering testen conform standaard': 'Ittestjar skont l-istandard',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Kuntrast baxx wisq mal-isfond — forsi illeġibbli.',

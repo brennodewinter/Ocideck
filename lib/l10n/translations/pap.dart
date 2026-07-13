@@ -740,6 +740,16 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Bewijs': 'Prueba',
+  'Screenshot toevoegen': 'Añadí screenshot',
+  'Video toevoegen': 'Añadí video',
+  'Bewerk deze slide': 'Editá e slide aki',
+  'Bewijs verwijderen': 'Kita prueba',
+  '(nog leeg)': '(ainda bashí)',
+  'Geef eerst een bevinding-id op om bewijs te koppelen.':
+      'Duna promé un id di finding pa pega prueba.',
+  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Añadí screenshot òf video komo prueba. Kada prueba ta bira un slide propio djis despues di e finding i ta bai den e eksportashon.',
   'Uitvoering testen conform standaard': 'Testnan konforme standard',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Muy poko kontraste ku e fondo — kisas ilegibel.',
