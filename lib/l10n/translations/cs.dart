@@ -1786,6 +1786,28 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Niet gedefinieerd': 'Nedefinováno',
+  'Netwerk': 'Síť',
+  'Aangrenzend': 'Sousední',
+  'Lokaal': 'Místní',
+  'Fysiek': 'Fyzický',
+  'Aanwezig': 'Přítomné',
+  'Passief': 'Pasivní',
+  'Actief': 'Aktivní',
+  'Aanvalsvector': 'Vektor útoku',
+  'Aanvalscomplexiteit': 'Složitost útoku',
+  'Aanvalsvereisten': 'Požadavky útoku',
+  'Vereiste rechten': 'Požadovaná oprávnění',
+  'Gebruikersinteractie': 'Interakce uživatele',
+  'Vertrouwelijkheid (kwetsbaar systeem)': 'Důvěrnost (zranitelný systém)',
+  'Integriteit (kwetsbaar systeem)': 'Integrita (zranitelný systém)',
+  'Beschikbaarheid (kwetsbaar systeem)': 'Dostupnost (zranitelný systém)',
+  'Vertrouwelijkheid (vervolgsysteem)': 'Důvěrnost (následný systém)',
+  'Integriteit (vervolgsysteem)': 'Integrita (následný systém)',
+  'Beschikbaarheid (vervolgsysteem)': 'Dostupnost (následný systém)',
+  'PTES-fasen laden': 'Načíst fáze PTES',
+  'Voegt de zeven PTES-fasen toe; bestaande gebeurtenissen blijven staan.':
+      'Přidá sedm fází PTES; stávající události zůstanou zachovány.',
   'Basis': 'Základní',
   'Context': 'Kontext',
   'CVSS-wizard': 'Průvodce CVSS',

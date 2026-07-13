@@ -1783,6 +1783,30 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Niet gedefinieerd': 'Ei määritelty',
+  'Netwerk': 'Verkko',
+  'Aangrenzend': 'Vierekkäinen',
+  'Lokaal': 'Paikallinen',
+  'Fysiek': 'Fyysinen',
+  'Aanwezig': 'Läsnä',
+  'Passief': 'Passiivinen',
+  'Actief': 'Aktiivinen',
+  'Aanvalsvector': 'Hyökkäysvektori',
+  'Aanvalscomplexiteit': 'Hyökkäyksen monimutkaisuus',
+  'Aanvalsvereisten': 'Hyökkäyksen vaatimukset',
+  'Vereiste rechten': 'Vaaditut oikeudet',
+  'Gebruikersinteractie': 'Käyttäjän vuorovaikutus',
+  'Vertrouwelijkheid (kwetsbaar systeem)':
+      'Luottamuksellisuus (haavoittuva järjestelmä)',
+  'Integriteit (kwetsbaar systeem)': 'Eheys (haavoittuva järjestelmä)',
+  'Beschikbaarheid (kwetsbaar systeem)': 'Saatavuus (haavoittuva järjestelmä)',
+  'Vertrouwelijkheid (vervolgsysteem)':
+      'Luottamuksellisuus (seuraava järjestelmä)',
+  'Integriteit (vervolgsysteem)': 'Eheys (seuraava järjestelmä)',
+  'Beschikbaarheid (vervolgsysteem)': 'Saatavuus (seuraava järjestelmä)',
+  'PTES-fasen laden': 'Lataa PTES-vaiheet',
+  'Voegt de zeven PTES-fasen toe; bestaande gebeurtenissen blijven staan.':
+      'Lisää seitsemän PTES-vaihetta; olemassa olevat tapahtumat säilyvät.',
   'Basis': 'Perus',
   'Context': 'Konteksti',
   'CVSS-wizard': 'CVSS-velho',

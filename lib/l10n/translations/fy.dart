@@ -741,6 +741,28 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Niet gedefinieerd': 'Net definiearre',
+  'Netwerk': 'Netwurk',
+  'Aangrenzend': 'Neistlizzend',
+  'Lokaal': 'Pleatslik',
+  'Fysiek': 'Fysyk',
+  'Aanwezig': 'Oanwêzich',
+  'Passief': 'Passyf',
+  'Actief': 'Aktyf',
+  'Aanvalsvector': 'Oanfalsfektor',
+  'Aanvalscomplexiteit': 'Oanfalskompleksiteit',
+  'Aanvalsvereisten': 'Oanfalsfereasken',
+  'Vereiste rechten': 'Fereaske rjochten',
+  'Gebruikersinteractie': 'Brûkersynteraksje',
+  'Vertrouwelijkheid (kwetsbaar systeem)': 'Fertroulikheid (kwetsber systeem)',
+  'Integriteit (kwetsbaar systeem)': 'Yntegriteit (kwetsber systeem)',
+  'Beschikbaarheid (kwetsbaar systeem)': 'Beskikberheid (kwetsber systeem)',
+  'Vertrouwelijkheid (vervolgsysteem)': 'Fertroulikheid (opfolgjend systeem)',
+  'Integriteit (vervolgsysteem)': 'Yntegriteit (opfolgjend systeem)',
+  'Beschikbaarheid (vervolgsysteem)': 'Beskikberheid (opfolgjend systeem)',
+  'PTES-fasen laden': 'PTES-fazen lade',
+  'Voegt de zeven PTES-fasen toe; bestaande gebeurtenissen blijven staan.':
+      'Foeget de sân PTES-fazen ta; besteande foarfallen bliuwe stean.',
   'Basis': 'Basis',
   'Context': 'Kontekst',
   'CVSS-wizard': 'CVSS-assistint',

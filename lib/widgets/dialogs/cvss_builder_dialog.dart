@@ -66,35 +66,41 @@ class _CvssBuilderState extends State<CvssBuilder> {
     );
   }
 
-  Widget _metricDropdown(Cvss4BaseMetric m) => Padding(
-    padding: const EdgeInsets.only(bottom: 4),
-    child: Row(
-      children: [
-        Expanded(
-          flex: 5,
-          child: Text(m.label, style: const TextStyle(fontSize: 12)),
-        ),
-        Expanded(
-          flex: 4,
-          child: DropdownButton<String>(
-            isExpanded: true,
-            value: _base[m.code],
-            style: TextStyle(fontSize: 12, color: AppTheme.ink),
-            items: [
-              for (final o in m.options)
-                DropdownMenuItem(
-                  value: o.token,
-                  child: Text('${o.token} · ${o.label}'),
-                ),
-            ],
-            onChanged: (v) {
-              if (v != null) _set(m.code, v);
-            },
+  Widget _metricDropdown(Cvss4BaseMetric m) {
+    final l10n = context.l10n;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 4),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 5,
+            child: Text(
+              l10n.d(m.dutchLabel),
+              style: const TextStyle(fontSize: 12),
+            ),
           ),
-        ),
-      ],
-    ),
-  );
+          Expanded(
+            flex: 4,
+            child: DropdownButton<String>(
+              isExpanded: true,
+              value: _base[m.code],
+              style: TextStyle(fontSize: 12, color: AppTheme.ink),
+              items: [
+                for (final o in m.options)
+                  DropdownMenuItem(
+                    value: o.token,
+                    child: Text('${o.token} · ${l10n.d(o.dutchLabel)}'),
+                  ),
+              ],
+              onChanged: (v) {
+                if (v != null) _set(m.code, v);
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   /// Live score chips: always the base score, plus a context score when the
   /// scope object carries a CIA rating (then the context score is what guides

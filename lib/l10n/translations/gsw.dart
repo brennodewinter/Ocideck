@@ -1787,6 +1787,30 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Niet gedefinieerd': 'Nöd definiert',
+  'Netwerk': 'Netzwärch',
+  'Aangrenzend': 'Aagränzend',
+  'Lokaal': 'Lokal',
+  'Fysiek': 'Physisch',
+  'Aanwezig': 'Vorhande',
+  'Passief': 'Passiv',
+  'Actief': 'Aktiv',
+  'Aanvalsvector': 'Aagriffsvektor',
+  'Aanvalscomplexiteit': 'Aagriffskomplexität',
+  'Aanvalsvereisten': 'Aagriffsaaforderige',
+  'Vereiste rechten': 'Erforderligi Rächt',
+  'Gebruikersinteractie': 'Benutzerinteraktion',
+  'Vertrouwelijkheid (kwetsbaar systeem)':
+      'Vertroulichkeit (aafälligs Systeem)',
+  'Integriteit (kwetsbaar systeem)': 'Integrität (aafälligs Systeem)',
+  'Beschikbaarheid (kwetsbaar systeem)': 'Verfüegbarkeit (aafälligs Systeem)',
+  'Vertrouwelijkheid (vervolgsysteem)':
+      'Vertroulichkeit (nachfolgends Systeem)',
+  'Integriteit (vervolgsysteem)': 'Integrität (nachfolgends Systeem)',
+  'Beschikbaarheid (vervolgsysteem)': 'Verfüegbarkeit (nachfolgends Systeem)',
+  'PTES-fasen laden': 'PTES-Phase lade',
+  'Voegt de zeven PTES-fasen toe; bestaande gebeurtenissen blijven staan.':
+      'Füegt di siebe PTES-Phase zue; bestehendi Eräignis blibed erhalte.',
   'Basis': 'Basis',
   'Context': 'Kontext',
   'CVSS-wizard': 'CVSS-Assistänt',

@@ -260,7 +260,9 @@ class _ScopeMatrixEditorState extends State<ScopeMatrixEditor> {
                 for (final level in CiaLevel.values)
                   DropdownMenuItem(
                     value: level,
-                    child: Text('${level.token} · ${level.label}'),
+                    child: Text(
+                      '${level.token} · ${context.l10n.d(level.dutchLabel)}',
+                    ),
                   ),
               ],
               onChanged: (v) {

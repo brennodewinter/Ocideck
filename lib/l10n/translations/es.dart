@@ -737,6 +737,29 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Niet gedefinieerd': 'No definido',
+  'Netwerk': 'Red',
+  'Aangrenzend': 'Adyacente',
+  'Lokaal': 'Local',
+  'Fysiek': 'Físico',
+  'Aanwezig': 'Presente',
+  'Passief': 'Pasivo',
+  'Actief': 'Activo',
+  'Aanvalsvector': 'Vector de ataque',
+  'Aanvalscomplexiteit': 'Complejidad del ataque',
+  'Aanvalsvereisten': 'Requisitos del ataque',
+  'Vereiste rechten': 'Privilegios requeridos',
+  'Gebruikersinteractie': 'Interacción del usuario',
+  'Vertrouwelijkheid (kwetsbaar systeem)':
+      'Confidencialidad (sistema vulnerable)',
+  'Integriteit (kwetsbaar systeem)': 'Integridad (sistema vulnerable)',
+  'Beschikbaarheid (kwetsbaar systeem)': 'Disponibilidad (sistema vulnerable)',
+  'Vertrouwelijkheid (vervolgsysteem)': 'Confidencialidad (sistema posterior)',
+  'Integriteit (vervolgsysteem)': 'Integridad (sistema posterior)',
+  'Beschikbaarheid (vervolgsysteem)': 'Disponibilidad (sistema posterior)',
+  'PTES-fasen laden': 'Cargar las fases PTES',
+  'Voegt de zeven PTES-fasen toe; bestaande gebeurtenissen blijven staan.':
+      'Añade las siete fases PTES; los eventos existentes se conservan.',
   'Basis': 'Base',
   'Context': 'Contexto',
   'CVSS-wizard': 'Asistente CVSS',

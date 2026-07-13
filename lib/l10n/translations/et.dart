@@ -1774,6 +1774,29 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Niet gedefinieerd': 'Määratlemata',
+  'Netwerk': 'Võrk',
+  'Aangrenzend': 'Külgnev',
+  'Lokaal': 'Kohalik',
+  'Fysiek': 'Füüsiline',
+  'Aanwezig': 'Olemas',
+  'Passief': 'Passiivne',
+  'Actief': 'Aktiivne',
+  'Aanvalsvector': 'Ründevektor',
+  'Aanvalscomplexiteit': 'Rünnaku keerukus',
+  'Aanvalsvereisten': 'Rünnaku nõuded',
+  'Vereiste rechten': 'Nõutavad õigused',
+  'Gebruikersinteractie': 'Kasutaja interaktsioon',
+  'Vertrouwelijkheid (kwetsbaar systeem)':
+      'Konfidentsiaalsus (haavatav süsteem)',
+  'Integriteit (kwetsbaar systeem)': 'Terviklikkus (haavatav süsteem)',
+  'Beschikbaarheid (kwetsbaar systeem)': 'Käideldavus (haavatav süsteem)',
+  'Vertrouwelijkheid (vervolgsysteem)': 'Konfidentsiaalsus (järgnev süsteem)',
+  'Integriteit (vervolgsysteem)': 'Terviklikkus (järgnev süsteem)',
+  'Beschikbaarheid (vervolgsysteem)': 'Käideldavus (järgnev süsteem)',
+  'PTES-fasen laden': 'Laadi PTES-faasid',
+  'Voegt de zeven PTES-fasen toe; bestaande gebeurtenissen blijven staan.':
+      'Lisab seitse PTES-faasi; olemasolevad sündmused säilivad.',
   'Basis': 'Baas',
   'Context': 'Kontekst',
   'CVSS-wizard': 'CVSS-viisard',

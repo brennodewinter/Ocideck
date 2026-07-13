@@ -1758,6 +1758,28 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Niet gedefinieerd': 'Sovbe\'lu\'',
+  'Netwerk': 'netwerq',
+  'Aangrenzend': 'retlh',
+  'Lokaal': 'naDev',
+  'Fysiek': 'porgh',
+  'Aanwezig': 'tu\'lu\'',
+  'Passief': 'vangHa\'',
+  'Actief': 'vang',
+  'Aanvalsvector': 'HIvmeH He',
+  'Aanvalscomplexiteit': 'HIv Qatlh',
+  'Aanvalsvereisten': 'HIv poQ',
+  'Vereiste rechten': 'chaw\' poQlu\'',
+  'Gebruikersinteractie': 'lo\'wI\' Suq',
+  'Vertrouwelijkheid (kwetsbaar systeem)': 'pegh (pat puj)',
+  'Integriteit (kwetsbaar systeem)': 'naQghach (pat puj)',
+  'Beschikbaarheid (kwetsbaar systeem)': 'Suqlu\'laHghach (pat puj)',
+  'Vertrouwelijkheid (vervolgsysteem)': 'pegh (pat veb)',
+  'Integriteit (vervolgsysteem)': 'naQghach (pat veb)',
+  'Beschikbaarheid (vervolgsysteem)': 'Suqlu\'laHghach (pat veb)',
+  'PTES-fasen laden': 'PTES \'ay\'mey yIlan',
+  'Voegt de zeven PTES-fasen toe; bestaande gebeurtenissen blijven staan.':
+      'PTES \'ay\'mey Soch chellu\'; wanI\'mey tu\'lu\'bogh pollu\'.',
   'Basis': 'mung',
   'Context': 'Do',
   'CVSS-wizard': 'CVSS pIn',

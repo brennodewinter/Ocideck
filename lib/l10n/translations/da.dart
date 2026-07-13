@@ -1782,6 +1782,28 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Niet gedefinieerd': 'Ikke defineret',
+  'Netwerk': 'Netværk',
+  'Aangrenzend': 'Tilstødende',
+  'Lokaal': 'Lokal',
+  'Fysiek': 'Fysisk',
+  'Aanwezig': 'Til stede',
+  'Passief': 'Passiv',
+  'Actief': 'Aktiv',
+  'Aanvalsvector': 'Angrebsvektor',
+  'Aanvalscomplexiteit': 'Angrebskompleksitet',
+  'Aanvalsvereisten': 'Angrebskrav',
+  'Vereiste rechten': 'Krævede rettigheder',
+  'Gebruikersinteractie': 'Brugerinteraktion',
+  'Vertrouwelijkheid (kwetsbaar systeem)': 'Fortrolighed (sårbart system)',
+  'Integriteit (kwetsbaar systeem)': 'Integritet (sårbart system)',
+  'Beschikbaarheid (kwetsbaar systeem)': 'Tilgængelighed (sårbart system)',
+  'Vertrouwelijkheid (vervolgsysteem)': 'Fortrolighed (efterfølgende system)',
+  'Integriteit (vervolgsysteem)': 'Integritet (efterfølgende system)',
+  'Beschikbaarheid (vervolgsysteem)': 'Tilgængelighed (efterfølgende system)',
+  'PTES-fasen laden': 'Indlæs PTES-faser',
+  'Voegt de zeven PTES-fasen toe; bestaande gebeurtenissen blijven staan.':
+      'Tilføjer de syv PTES-faser; eksisterende hændelser bevares.',
   'Basis': 'Basis',
   'Context': 'Kontekst',
   'CVSS-wizard': 'CVSS-guide',

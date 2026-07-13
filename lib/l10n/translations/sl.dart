@@ -1785,6 +1785,28 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Niet gedefinieerd': 'Ni določeno',
+  'Netwerk': 'Omrežje',
+  'Aangrenzend': 'Sosednje',
+  'Lokaal': 'Lokalno',
+  'Fysiek': 'Fizično',
+  'Aanwezig': 'Prisotno',
+  'Passief': 'Pasivno',
+  'Actief': 'Aktivno',
+  'Aanvalsvector': 'Vektor napada',
+  'Aanvalscomplexiteit': 'Zapletenost napada',
+  'Aanvalsvereisten': 'Zahteve napada',
+  'Vereiste rechten': 'Zahtevane pravice',
+  'Gebruikersinteractie': 'Interakcija uporabnika',
+  'Vertrouwelijkheid (kwetsbaar systeem)': 'Zaupnost (ranljiv sistem)',
+  'Integriteit (kwetsbaar systeem)': 'Celovitost (ranljiv sistem)',
+  'Beschikbaarheid (kwetsbaar systeem)': 'Razpoložljivost (ranljiv sistem)',
+  'Vertrouwelijkheid (vervolgsysteem)': 'Zaupnost (naknadni sistem)',
+  'Integriteit (vervolgsysteem)': 'Celovitost (naknadni sistem)',
+  'Beschikbaarheid (vervolgsysteem)': 'Razpoložljivost (naknadni sistem)',
+  'PTES-fasen laden': 'Naloži faze PTES',
+  'Voegt de zeven PTES-fasen toe; bestaande gebeurtenissen blijven staan.':
+      'Doda sedem faz PTES; obstoječi dogodki ostanejo.',
   'Basis': 'Osnova',
   'Context': 'Kontekst',
   'CVSS-wizard': 'Čarovnik CVSS',

@@ -1819,6 +1819,28 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Niet gedefinieerd': 'Gan sainiú',
+  'Netwerk': 'Líonra',
+  'Aangrenzend': 'Cóngarach',
+  'Lokaal': 'Áitiúil',
+  'Fysiek': 'Fisiciúil',
+  'Aanwezig': 'I láthair',
+  'Passief': 'Éighníomhach',
+  'Actief': 'Gníomhach',
+  'Aanvalsvector': 'Veicteoir ionsaithe',
+  'Aanvalscomplexiteit': 'Castacht an ionsaithe',
+  'Aanvalsvereisten': 'Riachtanais ionsaithe',
+  'Vereiste rechten': 'Pribhléidí riachtanacha',
+  'Gebruikersinteractie': 'Idirghníomhaíocht úsáideora',
+  'Vertrouwelijkheid (kwetsbaar systeem)': 'Rúndacht (córas leochaileach)',
+  'Integriteit (kwetsbaar systeem)': 'Sláine (córas leochaileach)',
+  'Beschikbaarheid (kwetsbaar systeem)': 'Infhaighteacht (córas leochaileach)',
+  'Vertrouwelijkheid (vervolgsysteem)': 'Rúndacht (córas iartheachtach)',
+  'Integriteit (vervolgsysteem)': 'Sláine (córas iartheachtach)',
+  'Beschikbaarheid (vervolgsysteem)': 'Infhaighteacht (córas iartheachtach)',
+  'PTES-fasen laden': 'Lódáil céimeanna PTES',
+  'Voegt de zeven PTES-fasen toe; bestaande gebeurtenissen blijven staan.':
+      'Cuireann sé na seacht gcéim PTES leis; coinnítear na himeachtaí atá ann.',
   'Basis': 'Bunúsach',
   'Context': 'Comhthéacs',
   'CVSS-wizard': 'Draoi CVSS',

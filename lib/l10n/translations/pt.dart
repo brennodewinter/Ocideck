@@ -1813,6 +1813,30 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Niet gedefinieerd': 'Não definido',
+  'Netwerk': 'Rede',
+  'Aangrenzend': 'Adjacente',
+  'Lokaal': 'Local',
+  'Fysiek': 'Físico',
+  'Aanwezig': 'Presente',
+  'Passief': 'Passivo',
+  'Actief': 'Ativo',
+  'Aanvalsvector': 'Vetor de ataque',
+  'Aanvalscomplexiteit': 'Complexidade do ataque',
+  'Aanvalsvereisten': 'Requisitos do ataque',
+  'Vereiste rechten': 'Privilégios necessários',
+  'Gebruikersinteractie': 'Interação do utilizador',
+  'Vertrouwelijkheid (kwetsbaar systeem)':
+      'Confidencialidade (sistema vulnerável)',
+  'Integriteit (kwetsbaar systeem)': 'Integridade (sistema vulnerável)',
+  'Beschikbaarheid (kwetsbaar systeem)': 'Disponibilidade (sistema vulnerável)',
+  'Vertrouwelijkheid (vervolgsysteem)':
+      'Confidencialidade (sistema subsequente)',
+  'Integriteit (vervolgsysteem)': 'Integridade (sistema subsequente)',
+  'Beschikbaarheid (vervolgsysteem)': 'Disponibilidade (sistema subsequente)',
+  'PTES-fasen laden': 'Carregar as fases PTES',
+  'Voegt de zeven PTES-fasen toe; bestaande gebeurtenissen blijven staan.':
+      'Adiciona as sete fases PTES; os eventos existentes são mantidos.',
   'Basis': 'Base',
   'Context': 'Contexto',
   'CVSS-wizard': 'Assistente CVSS',

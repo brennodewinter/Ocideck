@@ -165,10 +165,10 @@ void main() {
     final latest = await pump(tester, slideWithRows(1));
 
     // The three CIA dropdowns are confidentiality, integrity, availability; the
-    // first is confidentiality.
+    // first is confidentiality. Value labels render in the interface language.
     await tester.tap(find.byType(DropdownButton<CiaLevel>).first);
     await tester.pumpAndSettle();
-    await tester.tap(find.text('H · High').last);
+    await tester.tap(find.text('H · Hoog').last);
     await tester.pumpAndSettle();
 
     final spec = ScopeMatrixSpec.fromSlide(

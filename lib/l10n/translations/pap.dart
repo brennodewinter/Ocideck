@@ -740,6 +740,30 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Niet gedefinieerd': 'No definí',
+  'Netwerk': 'Reda',
+  'Aangrenzend': 'Adyasente',
+  'Lokaal': 'Lokal',
+  'Fysiek': 'Físiko',
+  'Aanwezig': 'Presente',
+  'Passief': 'Pasivo',
+  'Actief': 'Aktivo',
+  'Aanvalsvector': 'Vektor di atake',
+  'Aanvalscomplexiteit': 'Kompleksidat di atake',
+  'Aanvalsvereisten': 'Rekisitonan di atake',
+  'Vereiste rechten': 'Privilegionan rekerí',
+  'Gebruikersinteractie': 'Interakshon di usuario',
+  'Vertrouwelijkheid (kwetsbaar systeem)':
+      'Konfidensialidat (sistema vulnerabel)',
+  'Integriteit (kwetsbaar systeem)': 'Integridat (sistema vulnerabel)',
+  'Beschikbaarheid (kwetsbaar systeem)': 'Disponibilidat (sistema vulnerabel)',
+  'Vertrouwelijkheid (vervolgsysteem)':
+      'Konfidensialidat (sistema subsiguiente)',
+  'Integriteit (vervolgsysteem)': 'Integridat (sistema subsiguiente)',
+  'Beschikbaarheid (vervolgsysteem)': 'Disponibilidat (sistema subsiguiente)',
+  'PTES-fasen laden': 'Karga e fasenan PTES',
+  'Voegt de zeven PTES-fasen toe; bestaande gebeurtenissen blijven staan.':
+      'Ta agregá e shete fasenan PTES; e eventonan eksistente ta keda.',
   'Basis': 'Base',
   'Context': 'Konteksto',
   'CVSS-wizard': 'Asistente CVSS',

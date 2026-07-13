@@ -1801,6 +1801,29 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Niet gedefinieerd': 'Не визначено',
+  'Netwerk': 'Мережа',
+  'Aangrenzend': 'Суміжний',
+  'Lokaal': 'Локальний',
+  'Fysiek': 'Фізичний',
+  'Aanwezig': 'Присутній',
+  'Passief': 'Пасивний',
+  'Actief': 'Активний',
+  'Aanvalsvector': 'Вектор атаки',
+  'Aanvalscomplexiteit': 'Складність атаки',
+  'Aanvalsvereisten': 'Вимоги до атаки',
+  'Vereiste rechten': 'Необхідні привілеї',
+  'Gebruikersinteractie': 'Взаємодія користувача',
+  'Vertrouwelijkheid (kwetsbaar systeem)':
+      'Конфіденційність (вразлива система)',
+  'Integriteit (kwetsbaar systeem)': 'Цілісність (вразлива система)',
+  'Beschikbaarheid (kwetsbaar systeem)': 'Доступність (вразлива система)',
+  'Vertrouwelijkheid (vervolgsysteem)': 'Конфіденційність (наступна система)',
+  'Integriteit (vervolgsysteem)': 'Цілісність (наступна система)',
+  'Beschikbaarheid (vervolgsysteem)': 'Доступність (наступна система)',
+  'PTES-fasen laden': 'Завантажити фази PTES',
+  'Voegt de zeven PTES-fasen toe; bestaande gebeurtenissen blijven staan.':
+      'Додає сім фаз PTES; наявні події зберігаються.',
   'Basis': 'Базовий',
   'Context': 'Контекст',
   'CVSS-wizard': 'Майстер CVSS',
