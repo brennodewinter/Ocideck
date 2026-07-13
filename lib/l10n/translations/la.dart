@@ -1799,6 +1799,16 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Bewijs': 'Documenta',
+  'Screenshot toevoegen': 'Imaginem screen addere',
+  'Video toevoegen': 'Pelliculam addere',
+  'Bewerk deze slide': 'Hanc paginam recensere',
+  'Bewijs verwijderen': 'Documentum removere',
+  '(nog leeg)': '(adhuc vacuum)',
+  'Geef eerst een bevinding-id op om bewijs te koppelen.':
+      'Inde documenta annectere, prius indicem inventi da.',
+  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Imagines screen aut pelliculas ut documenta adde. Quodque documentum fit pagina propria statim post inventum et in exportatione includitur.',
   'Uitvoering testen conform standaard': 'Probationes secundum normam',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Discrimen colorum a fundo nimis exiguum — fortasse illegibile.',

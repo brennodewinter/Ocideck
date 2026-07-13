@@ -1774,6 +1774,16 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Bewijs': 'Tõendid',
+  'Screenshot toevoegen': 'Lisa ekraanipilt',
+  'Video toevoegen': 'Lisa video',
+  'Bewerk deze slide': 'Muuda seda slaidi',
+  'Bewijs verwijderen': 'Eemalda tõend',
+  '(nog leeg)': '(veel tühi)',
+  'Geef eerst een bevinding-id op om bewijs te koppelen.':
+      'Tõendite lisamiseks sisesta esmalt leiu ID.',
+  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Lisa tõendiks ekraanipilte või videoid. Iga tõend saab kohe leiu järel oma slaidi ja kaasatakse eksporti.',
   'Uitvoering testen conform standaard': 'Testimine vastavalt standardile',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Liiga väike kontrast taustaga — võib olla loetamatu.',

@@ -1791,6 +1791,16 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Bewijs': 'Įrodymai',
+  'Screenshot toevoegen': 'Pridėti ekrano nuotrauką',
+  'Video toevoegen': 'Pridėti vaizdo įrašą',
+  'Bewerk deze slide': 'Redaguoti šią skaidrę',
+  'Bewijs verwijderen': 'Pašalinti įrodymą',
+  '(nog leeg)': '(dar tuščia)',
+  'Geef eerst een bevinding-id op om bewijs te koppelen.':
+      'Pirma įveskite radinio ID, kad pridėtumėte įrodymus.',
+  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Pridėkite ekrano nuotraukų arba vaizdo įrašų kaip įrodymus. Kiekvienas įrodymas tampa atskira skaidre iškart po radinio ir įtraukiamas į eksportą.',
   'Uitvoering testen conform standaard': 'Testavimas pagal standartą',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Per mažas kontrastas su fonu — gali būti neįskaitoma.',

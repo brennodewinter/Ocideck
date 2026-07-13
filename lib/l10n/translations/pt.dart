@@ -1813,6 +1813,16 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Bewijs': 'Provas',
+  'Screenshot toevoegen': 'Adicionar captura de ecrã',
+  'Video toevoegen': 'Adicionar vídeo',
+  'Bewerk deze slide': 'Editar este diapositivo',
+  'Bewijs verwijderen': 'Remover prova',
+  '(nog leeg)': '(ainda vazio)',
+  'Geef eerst een bevinding-id op om bewijs te koppelen.':
+      'Introduza primeiro um ID de constatação para anexar provas.',
+  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Adicione capturas de ecrã ou vídeos como prova. Cada prova torna-se um diapositivo próprio logo após a constatação e é incluída na exportação.',
   'Uitvoering testen conform standaard': 'Testes conforme a norma',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Contraste insuficiente com o fundo — pode ficar ilegível.',

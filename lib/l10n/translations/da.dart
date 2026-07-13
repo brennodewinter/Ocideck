@@ -1782,6 +1782,16 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Bewijs': 'Bevis',
+  'Screenshot toevoegen': 'Tilføj skærmbillede',
+  'Video toevoegen': 'Tilføj video',
+  'Bewerk deze slide': 'Rediger dette dias',
+  'Bewijs verwijderen': 'Fjern bevis',
+  '(nog leeg)': '(stadig tom)',
+  'Geef eerst een bevinding-id op om bewijs te koppelen.':
+      'Angiv først et fund-id for at vedhæfte bevis.',
+  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Tilføj skærmbilleder eller videoer som bevis. Hvert bevis bliver sit eget dias lige efter fundet og kommer med i eksporten.',
   'Uitvoering testen conform standaard': 'Test i henhold til standard',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'For lidt kontrast til baggrunden — kan være ulæseligt.',

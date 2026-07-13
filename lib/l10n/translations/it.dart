@@ -736,6 +736,16 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Bewijs': 'Prove',
+  'Screenshot toevoegen': 'Aggiungi screenshot',
+  'Video toevoegen': 'Aggiungi video',
+  'Bewerk deze slide': 'Modifica questa slide',
+  'Bewijs verwijderen': 'Rimuovi prova',
+  '(nog leeg)': '(ancora vuoto)',
+  'Geef eerst een bevinding-id op om bewijs te koppelen.':
+      'Inserisci prima un ID del rilievo per allegare le prove.',
+  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Aggiungi screenshot o video come prova. Ogni prova diventa una slide subito dopo il rilievo ed è inclusa nell\'esportazione.',
   'Uitvoering testen conform standaard': 'Test secondo lo standard',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Contrasto insufficiente con lo sfondo — potrebbe essere illeggibile.',

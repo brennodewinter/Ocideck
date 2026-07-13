@@ -1790,6 +1790,16 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Bewijs': 'Dokazi',
+  'Screenshot toevoegen': 'Dodaj snimku zaslona',
+  'Video toevoegen': 'Dodaj videozapis',
+  'Bewerk deze slide': 'Uredi ovaj slajd',
+  'Bewijs verwijderen': 'Ukloni dokaz',
+  '(nog leeg)': '(još prazno)',
+  'Geef eerst een bevinding-id op om bewijs te koppelen.':
+      'Prvo unesite ID nalaza da biste priložili dokaze.',
+  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Dodajte snimke zaslona ili videozapise kao dokaz. Svaki dokaz postaje vlastiti slajd odmah nakon nalaza i uključen je u izvoz.',
   'Uitvoering testen conform standaard': 'Testiranje prema standardu',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Premali kontrast s pozadinom — možda nečitljivo.',

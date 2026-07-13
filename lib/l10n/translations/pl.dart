@@ -1796,6 +1796,16 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Bewijs': 'Dowody',
+  'Screenshot toevoegen': 'Dodaj zrzut ekranu',
+  'Video toevoegen': 'Dodaj wideo',
+  'Bewerk deze slide': 'Edytuj ten slajd',
+  'Bewijs verwijderen': 'Usuń dowód',
+  '(nog leeg)': '(nadal puste)',
+  'Geef eerst een bevinding-id op om bewijs te koppelen.':
+      'Najpierw podaj identyfikator ustalenia, aby dołączyć dowody.',
+  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Dodaj zrzuty ekranu lub filmy jako dowody. Każdy dowód staje się osobnym slajdem tuż po ustaleniu i jest uwzględniany w eksporcie.',
   'Uitvoering testen conform standaard': 'Testy zgodnie ze standardem',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Zbyt mały kontrast z tłem — może być nieczytelne.',

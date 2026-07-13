@@ -1787,6 +1787,16 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Bewijs': 'Bizonyítékok',
+  'Screenshot toevoegen': 'Képernyőkép hozzáadása',
+  'Video toevoegen': 'Videó hozzáadása',
+  'Bewerk deze slide': 'Dia szerkesztése',
+  'Bewijs verwijderen': 'Bizonyíték eltávolítása',
+  '(nog leeg)': '(még üres)',
+  'Geef eerst een bevinding-id op om bewijs te koppelen.':
+      'A bizonyíték csatolásához előbb adj meg egy megállapítás-azonosítót.',
+  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Adj hozzá képernyőképeket vagy videókat bizonyítékként. Minden bizonyíték külön diává válik közvetlenül a megállapítás után, és bekerül az exportba.',
   'Uitvoering testen conform standaard': 'Tesztelés a szabvány szerint',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Túl kicsi a kontraszt a háttérrel — olvashatatlan lehet.',

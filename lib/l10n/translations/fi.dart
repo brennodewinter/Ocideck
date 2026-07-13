@@ -1783,6 +1783,16 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Bewijs': 'Todisteet',
+  'Screenshot toevoegen': 'Lisää kuvakaappaus',
+  'Video toevoegen': 'Lisää video',
+  'Bewerk deze slide': 'Muokkaa tätä diaa',
+  'Bewijs verwijderen': 'Poista todiste',
+  '(nog leeg)': '(vielä tyhjä)',
+  'Geef eerst een bevinding-id op om bewijs te koppelen.':
+      'Anna ensin löydöksen tunnus, jotta voit liittää todisteita.',
+  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Lisää kuvakaappauksia tai videoita todisteeksi. Jokainen todiste tulee omaksi diakseen heti löydöksen jälkeen ja on mukana viennissä.',
   'Uitvoering testen conform standaard': 'Testaus standardin mukaan',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Liian vähän kontrastia taustaan — voi olla lukukelvoton.',

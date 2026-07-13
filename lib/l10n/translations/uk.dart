@@ -1801,6 +1801,16 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Bewijs': 'Докази',
+  'Screenshot toevoegen': 'Додати знімок екрана',
+  'Video toevoegen': 'Додати відео',
+  'Bewerk deze slide': 'Редагувати цей слайд',
+  'Bewijs verwijderen': 'Видалити доказ',
+  '(nog leeg)': '(ще порожньо)',
+  'Geef eerst een bevinding-id op om bewijs te koppelen.':
+      'Спершу вкажіть ідентифікатор виявлення, щоб долучити докази.',
+  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Додайте знімки екрана або відео як докази. Кожен доказ стає окремим слайдом одразу після виявлення й потрапляє в експорт.',
   'Uitvoering testen conform standaard': 'Тестування за стандартом',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Замалий контраст із тлом — можливо, нечитабельно.',

@@ -737,6 +737,16 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Bewijs': 'Evidencias',
+  'Screenshot toevoegen': 'Añadir captura de pantalla',
+  'Video toevoegen': 'Añadir vídeo',
+  'Bewerk deze slide': 'Editar esta diapositiva',
+  'Bewijs verwijderen': 'Eliminar evidencia',
+  '(nog leeg)': '(aún vacío)',
+  'Geef eerst een bevinding-id op om bewijs te koppelen.':
+      'Introduce primero un ID de hallazgo para adjuntar evidencias.',
+  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Añade capturas de pantalla o vídeos como evidencia. Cada evidencia se convierte en su propia diapositiva justo después del hallazgo y se incluye en la exportación.',
   'Uitvoering testen conform standaard': 'Pruebas según el estándar',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Contraste insuficiente con el fondo — puede ser ilegible.',

@@ -741,6 +741,16 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Bewijs': 'Bewiis',
+  'Screenshot toevoegen': 'Skermôfdruk tafoegje',
+  'Video toevoegen': 'Fideo tafoegje',
+  'Bewerk deze slide': 'Bewurkje dizze slide',
+  'Bewijs verwijderen': 'Bewiis fuortsmite',
+  '(nog leeg)': '(noch leech)',
+  'Geef eerst een bevinding-id op om bewijs te koppelen.':
+      'Jou earst in befiningskoade op om bewiis te keppeljen.',
+  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Foegje skermôfdrukken of fideo\'s ta as bewiis. Elk bewiis wurdt in eigen slide fuort nei de befining en giet mei yn de eksport.',
   'Uitvoering testen conform standaard': 'Testen neffens de standert',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Te min kontrast mei de eftergrûn — mooglik ûnlêsber.',

@@ -1819,6 +1819,16 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Bewijs': 'Fianaise',
+  'Screenshot toevoegen': 'Cuir gabháil scáileáin leis',
+  'Video toevoegen': 'Cuir físeán leis',
+  'Bewerk deze slide': 'Cuir an sleamhnán seo in eagar',
+  'Bewijs verwijderen': 'Bain an fhianaise',
+  '(nog leeg)': '(folamh fós)',
+  'Geef eerst een bevinding-id op om bewijs te koppelen.':
+      'Cuir aitheantas fionnachtana isteach ar dtús chun fianaise a cheangal.',
+  'Voeg screenshots of video\'s toe als bewijs. Elk stuk bewijs komt als eigen slide direct na de bevinding en telt mee in de export.':
+      'Cuir gabhálacha scáileáin nó físeáin leis mar fhianaise. Éiríonn gach píosa fianaise ina sleamhnán féin díreach i ndiaidh na fionnachtana agus cuirtear san easpórtáil é.',
   'Uitvoering testen conform standaard': 'Tástáil de réir an chaighdeáin',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Codarsnacht ró-íseal leis an gcúlra — seans nach féidir é a léamh.',
