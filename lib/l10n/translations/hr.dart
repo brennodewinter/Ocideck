@@ -1790,6 +1790,30 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Bez ID-a nalaza stvara se automatski pri prvom dokazu.',
+  'Niet gedefinieerd': 'Nije definirano',
+  'Netwerk': 'Mreža',
+  'Aangrenzend': 'Susjedno',
+  'Lokaal': 'Lokalno',
+  'Fysiek': 'Fizičko',
+  'Aanwezig': 'Prisutno',
+  'Passief': 'Pasivno',
+  'Actief': 'Aktivno',
+  'Aanvalsvector': 'Vektor napada',
+  'Aanvalscomplexiteit': 'Složenost napada',
+  'Aanvalsvereisten': 'Zahtjevi napada',
+  'Vereiste rechten': 'Potrebne ovlasti',
+  'Gebruikersinteractie': 'Interakcija korisnika',
+  'Vertrouwelijkheid (kwetsbaar systeem)': 'Povjerljivost (ranjiv sustav)',
+  'Integriteit (kwetsbaar systeem)': 'Integritet (ranjiv sustav)',
+  'Beschikbaarheid (kwetsbaar systeem)': 'Dostupnost (ranjiv sustav)',
+  'Vertrouwelijkheid (vervolgsysteem)': 'Povjerljivost (naknadni sustav)',
+  'Integriteit (vervolgsysteem)': 'Integritet (naknadni sustav)',
+  'Beschikbaarheid (vervolgsysteem)': 'Dostupnost (naknadni sustav)',
+  'PTES-fasen laden': 'Učitaj PTES faze',
+  'Voegt de zeven PTES-fasen toe; bestaande gebeurtenissen blijven staan.':
+      'Dodaje sedam PTES faza; postojeći događaji ostaju sačuvani.',
   'Basis': 'Osnovni',
   'Context': 'Kontekst',
   'CVSS-wizard': 'CVSS čarobnjak',

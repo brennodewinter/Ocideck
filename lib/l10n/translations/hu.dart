@@ -1787,6 +1787,32 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Megállapítás-azonosító nélkül az első bizonyítéknál automatikusan létrejön egy.',
+  'Niet gedefinieerd': 'Nincs meghatározva',
+  'Netwerk': 'Hálózat',
+  'Aangrenzend': 'Szomszédos',
+  'Lokaal': 'Helyi',
+  'Fysiek': 'Fizikai',
+  'Aanwezig': 'Jelen van',
+  'Passief': 'Passzív',
+  'Actief': 'Aktív',
+  'Aanvalsvector': 'Támadási vektor',
+  'Aanvalscomplexiteit': 'Támadás összetettsége',
+  'Aanvalsvereisten': 'Támadási követelmények',
+  'Vereiste rechten': 'Szükséges jogosultságok',
+  'Gebruikersinteractie': 'Felhasználói interakció',
+  'Vertrouwelijkheid (kwetsbaar systeem)': 'Bizalmasság (sérülékeny rendszer)',
+  'Integriteit (kwetsbaar systeem)': 'Integritás (sérülékeny rendszer)',
+  'Beschikbaarheid (kwetsbaar systeem)':
+      'Rendelkezésre állás (sérülékeny rendszer)',
+  'Vertrouwelijkheid (vervolgsysteem)': 'Bizalmasság (következő rendszer)',
+  'Integriteit (vervolgsysteem)': 'Integritás (következő rendszer)',
+  'Beschikbaarheid (vervolgsysteem)':
+      'Rendelkezésre állás (következő rendszer)',
+  'PTES-fasen laden': 'PTES-fázisok betöltése',
+  'Voegt de zeven PTES-fasen toe; bestaande gebeurtenissen blijven staan.':
+      'Hozzáadja a hét PTES-fázist; a meglévő események megmaradnak.',
   'Basis': 'Alap',
   'Context': 'Kontextus',
   'CVSS-wizard': 'CVSS varázsló',

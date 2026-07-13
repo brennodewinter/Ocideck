@@ -1811,6 +1811,30 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Χωρίς αναγνωριστικό ευρήματος, δημιουργείται αυτόματα ένα με το πρώτο τεκμήριο.',
+  'Niet gedefinieerd': 'Μη ορισμένο',
+  'Netwerk': 'Δίκτυο',
+  'Aangrenzend': 'Παρακείμενο',
+  'Lokaal': 'Τοπικό',
+  'Fysiek': 'Φυσικό',
+  'Aanwezig': 'Παρόν',
+  'Passief': 'Παθητικό',
+  'Actief': 'Ενεργό',
+  'Aanvalsvector': 'Φορέας επίθεσης',
+  'Aanvalscomplexiteit': 'Πολυπλοκότητα επίθεσης',
+  'Aanvalsvereisten': 'Απαιτήσεις επίθεσης',
+  'Vereiste rechten': 'Απαιτούμενα προνόμια',
+  'Gebruikersinteractie': 'Αλληλεπίδραση χρήστη',
+  'Vertrouwelijkheid (kwetsbaar systeem)': 'Εμπιστευτικότητα (ευάλωτο σύστημα)',
+  'Integriteit (kwetsbaar systeem)': 'Ακεραιότητα (ευάλωτο σύστημα)',
+  'Beschikbaarheid (kwetsbaar systeem)': 'Διαθεσιμότητα (ευάλωτο σύστημα)',
+  'Vertrouwelijkheid (vervolgsysteem)': 'Εμπιστευτικότητα (επόμενο σύστημα)',
+  'Integriteit (vervolgsysteem)': 'Ακεραιότητα (επόμενο σύστημα)',
+  'Beschikbaarheid (vervolgsysteem)': 'Διαθεσιμότητα (επόμενο σύστημα)',
+  'PTES-fasen laden': 'Φόρτωση φάσεων PTES',
+  'Voegt de zeven PTES-fasen toe; bestaande gebeurtenissen blijven staan.':
+      'Προσθέτει τις επτά φάσεις PTES· τα υπάρχοντα συμβάντα διατηρούνται.',
   'Basis': 'Βασικό',
   'Context': 'Πλαίσιο',
   'CVSS-wizard': 'Οδηγός CVSS',

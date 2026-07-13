@@ -1783,6 +1783,30 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Tanpa ID temuan, satu dibuat otomatis pada bukti pertama.',
+  'Niet gedefinieerd': 'Tidak ditentukan',
+  'Netwerk': 'Jaringan',
+  'Aangrenzend': 'Berdekatan',
+  'Lokaal': 'Lokal',
+  'Fysiek': 'Fisik',
+  'Aanwezig': 'Hadir',
+  'Passief': 'Pasif',
+  'Actief': 'Aktif',
+  'Aanvalsvector': 'Vektor serangan',
+  'Aanvalscomplexiteit': 'Kompleksitas serangan',
+  'Aanvalsvereisten': 'Persyaratan serangan',
+  'Vereiste rechten': 'Hak akses yang diperlukan',
+  'Gebruikersinteractie': 'Interaksi pengguna',
+  'Vertrouwelijkheid (kwetsbaar systeem)': 'Kerahasiaan (sistem rentan)',
+  'Integriteit (kwetsbaar systeem)': 'Integritas (sistem rentan)',
+  'Beschikbaarheid (kwetsbaar systeem)': 'Ketersediaan (sistem rentan)',
+  'Vertrouwelijkheid (vervolgsysteem)': 'Kerahasiaan (sistem berikutnya)',
+  'Integriteit (vervolgsysteem)': 'Integritas (sistem berikutnya)',
+  'Beschikbaarheid (vervolgsysteem)': 'Ketersediaan (sistem berikutnya)',
+  'PTES-fasen laden': 'Muat fase PTES',
+  'Voegt de zeven PTES-fasen toe; bestaande gebeurtenissen blijven staan.':
+      'Menambahkan tujuh fase PTES; peristiwa yang ada tetap dipertahankan.',
   'Basis': 'Dasar',
   'Context': 'Konteks',
   'CVSS-wizard': 'Wizard CVSS',

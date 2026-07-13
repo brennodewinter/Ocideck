@@ -1802,6 +1802,31 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Fără un ID de constatare, unul este creat automat la prima dovadă.',
+  'Niet gedefinieerd': 'Nedefinit',
+  'Netwerk': 'Rețea',
+  'Aangrenzend': 'Adiacent',
+  'Lokaal': 'Local',
+  'Fysiek': 'Fizic',
+  'Aanwezig': 'Prezent',
+  'Passief': 'Pasiv',
+  'Actief': 'Activ',
+  'Aanvalsvector': 'Vector de atac',
+  'Aanvalscomplexiteit': 'Complexitatea atacului',
+  'Aanvalsvereisten': 'Cerințe de atac',
+  'Vereiste rechten': 'Privilegii necesare',
+  'Gebruikersinteractie': 'Interacțiunea utilizatorului',
+  'Vertrouwelijkheid (kwetsbaar systeem)':
+      'Confidențialitate (sistem vulnerabil)',
+  'Integriteit (kwetsbaar systeem)': 'Integritate (sistem vulnerabil)',
+  'Beschikbaarheid (kwetsbaar systeem)': 'Disponibilitate (sistem vulnerabil)',
+  'Vertrouwelijkheid (vervolgsysteem)': 'Confidențialitate (sistem ulterior)',
+  'Integriteit (vervolgsysteem)': 'Integritate (sistem ulterior)',
+  'Beschikbaarheid (vervolgsysteem)': 'Disponibilitate (sistem ulterior)',
+  'PTES-fasen laden': 'Încarcă fazele PTES',
+  'Voegt de zeven PTES-fasen toe; bestaande gebeurtenissen blijven staan.':
+      'Adaugă cele șapte faze PTES; evenimentele existente sunt păstrate.',
   'Basis': 'Bază',
   'Context': 'Context',
   'CVSS-wizard': 'Asistent CVSS',

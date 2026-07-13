@@ -1806,6 +1806,30 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Без идентификатор на констатацията се създава автоматично при първото доказателство.',
+  'Niet gedefinieerd': 'Не е дефинирано',
+  'Netwerk': 'Мрежа',
+  'Aangrenzend': 'Съседен',
+  'Lokaal': 'Локален',
+  'Fysiek': 'Физически',
+  'Aanwezig': 'Присъства',
+  'Passief': 'Пасивен',
+  'Actief': 'Активен',
+  'Aanvalsvector': 'Вектор на атака',
+  'Aanvalscomplexiteit': 'Сложност на атаката',
+  'Aanvalsvereisten': 'Изисквания за атака',
+  'Vereiste rechten': 'Необходими права',
+  'Gebruikersinteractie': 'Взаимодействие с потребителя',
+  'Vertrouwelijkheid (kwetsbaar systeem)': 'Поверителност (уязвима система)',
+  'Integriteit (kwetsbaar systeem)': 'Цялост (уязвима система)',
+  'Beschikbaarheid (kwetsbaar systeem)': 'Достъпност (уязвима система)',
+  'Vertrouwelijkheid (vervolgsysteem)': 'Поверителност (следваща система)',
+  'Integriteit (vervolgsysteem)': 'Цялост (следваща система)',
+  'Beschikbaarheid (vervolgsysteem)': 'Достъпност (следваща система)',
+  'PTES-fasen laden': 'Зареждане на PTES фазите',
+  'Voegt de zeven PTES-fasen toe; bestaande gebeurtenissen blijven staan.':
+      'Добавя седемте PTES фази; съществуващите събития се запазват.',
   'Basis': 'Базов',
   'Context': 'Контекст',
   'CVSS-wizard': 'Помощник CVSS',

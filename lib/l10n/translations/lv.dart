@@ -1782,6 +1782,31 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Bez atraduma ID tas tiek izveidots automātiski pie pirmā pierādījuma.',
+  'Niet gedefinieerd': 'Nav definēts',
+  'Netwerk': 'Tīkls',
+  'Aangrenzend': 'Blakusesošs',
+  'Lokaal': 'Lokāls',
+  'Fysiek': 'Fizisks',
+  'Aanwezig': 'Klātesošs',
+  'Passief': 'Pasīvs',
+  'Actief': 'Aktīvs',
+  'Aanvalsvector': 'Uzbrukuma vektors',
+  'Aanvalscomplexiteit': 'Uzbrukuma sarežģītība',
+  'Aanvalsvereisten': 'Uzbrukuma prasības',
+  'Vereiste rechten': 'Nepieciešamās tiesības',
+  'Gebruikersinteractie': 'Lietotāja mijiedarbība',
+  'Vertrouwelijkheid (kwetsbaar systeem)':
+      'Konfidencialitāte (ievainojama sistēma)',
+  'Integriteit (kwetsbaar systeem)': 'Integritāte (ievainojama sistēma)',
+  'Beschikbaarheid (kwetsbaar systeem)': 'Pieejamība (ievainojama sistēma)',
+  'Vertrouwelijkheid (vervolgsysteem)': 'Konfidencialitāte (turpmākā sistēma)',
+  'Integriteit (vervolgsysteem)': 'Integritāte (turpmākā sistēma)',
+  'Beschikbaarheid (vervolgsysteem)': 'Pieejamība (turpmākā sistēma)',
+  'PTES-fasen laden': 'Ielādēt PTES fāzes',
+  'Voegt de zeven PTES-fasen toe; bestaande gebeurtenissen blijven staan.':
+      'Pievieno septiņas PTES fāzes; esošie notikumi tiek saglabāti.',
   'Basis': 'Bāze',
   'Context': 'Konteksts',
   'CVSS-wizard': 'CVSS vednis',

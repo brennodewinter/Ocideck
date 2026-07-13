@@ -1806,6 +1806,31 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Mingħajr ID tas-sejba, jinħoloq wieħed awtomatikament mal-ewwel prova.',
+  'Niet gedefinieerd': 'Mhux definit',
+  'Netwerk': 'Xibka',
+  'Aangrenzend': 'Maġenb',
+  'Lokaal': 'Lokali',
+  'Fysiek': 'Fiżiku',
+  'Aanwezig': 'Preżenti',
+  'Passief': 'Passiv',
+  'Actief': 'Attiv',
+  'Aanvalsvector': 'Vettur tal-attakk',
+  'Aanvalscomplexiteit': 'Kumplessità tal-attakk',
+  'Aanvalsvereisten': 'Rekwiżiti tal-attakk',
+  'Vereiste rechten': 'Privileġġi meħtieġa',
+  'Gebruikersinteractie': 'Interazzjoni tal-utent',
+  'Vertrouwelijkheid (kwetsbaar systeem)':
+      'Kunfidenzjalità (sistema vulnerabbli)',
+  'Integriteit (kwetsbaar systeem)': 'Integrità (sistema vulnerabbli)',
+  'Beschikbaarheid (kwetsbaar systeem)': 'Disponibbiltà (sistema vulnerabbli)',
+  'Vertrouwelijkheid (vervolgsysteem)': 'Kunfidenzjalità (sistema sussegwenti)',
+  'Integriteit (vervolgsysteem)': 'Integrità (sistema sussegwenti)',
+  'Beschikbaarheid (vervolgsysteem)': 'Disponibbiltà (sistema sussegwenti)',
+  'PTES-fasen laden': 'Illowdja l-fażijiet PTES',
+  'Voegt de zeven PTES-fasen toe; bestaande gebeurtenissen blijven staan.':
+      'Iżid is-seba\' fażijiet PTES; l-avvenimenti eżistenti jinżammu.',
   'Basis': 'Bażi',
   'Context': 'Kuntest',
   'CVSS-wizard': 'Wizard CVSS',

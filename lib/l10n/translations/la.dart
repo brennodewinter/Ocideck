@@ -1799,6 +1799,31 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Sine indicio inventi, unum automatice creatur cum primo argumento.',
+  'Niet gedefinieerd': 'Non definitum',
+  'Netwerk': 'Rete',
+  'Aangrenzend': 'Adiacens',
+  'Lokaal': 'Localis',
+  'Fysiek': 'Physicus',
+  'Aanwezig': 'Praesens',
+  'Passief': 'Passivus',
+  'Actief': 'Activus',
+  'Aanvalsvector': 'Vector impetus',
+  'Aanvalscomplexiteit': 'Complexitas impetus',
+  'Aanvalsvereisten': 'Requisita impetus',
+  'Vereiste rechten': 'Iura requisita',
+  'Gebruikersinteractie': 'Interactio usoris',
+  'Vertrouwelijkheid (kwetsbaar systeem)':
+      'Confidentialitas (systema vulnerabile)',
+  'Integriteit (kwetsbaar systeem)': 'Integritas (systema vulnerabile)',
+  'Beschikbaarheid (kwetsbaar systeem)': 'Disponibilitas (systema vulnerabile)',
+  'Vertrouwelijkheid (vervolgsysteem)': 'Confidentialitas (systema subsequens)',
+  'Integriteit (vervolgsysteem)': 'Integritas (systema subsequens)',
+  'Beschikbaarheid (vervolgsysteem)': 'Disponibilitas (systema subsequens)',
+  'PTES-fasen laden': 'Onera phases PTES',
+  'Voegt de zeven PTES-fasen toe; bestaande gebeurtenissen blijven staan.':
+      'Addit septem phases PTES; eventus exsistentes manent.',
   'Basis': 'Basis',
   'Context': 'Contextus',
   'CVSS-wizard': 'Auxilium CVSS',

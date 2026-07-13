@@ -1791,6 +1791,31 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Be radinio ID jis sukuriamas automatiškai su pirmuoju įrodymu.',
+  'Niet gedefinieerd': 'Neapibrėžta',
+  'Netwerk': 'Tinklas',
+  'Aangrenzend': 'Gretimas',
+  'Lokaal': 'Vietinis',
+  'Fysiek': 'Fizinis',
+  'Aanwezig': 'Esamas',
+  'Passief': 'Pasyvus',
+  'Actief': 'Aktyvus',
+  'Aanvalsvector': 'Atakos vektorius',
+  'Aanvalscomplexiteit': 'Atakos sudėtingumas',
+  'Aanvalsvereisten': 'Atakos reikalavimai',
+  'Vereiste rechten': 'Reikalingos teisės',
+  'Gebruikersinteractie': 'Naudotojo sąveika',
+  'Vertrouwelijkheid (kwetsbaar systeem)':
+      'Konfidencialumas (pažeidžiama sistema)',
+  'Integriteit (kwetsbaar systeem)': 'Vientisumas (pažeidžiama sistema)',
+  'Beschikbaarheid (kwetsbaar systeem)': 'Prieinamumas (pažeidžiama sistema)',
+  'Vertrouwelijkheid (vervolgsysteem)': 'Konfidencialumas (paskesnė sistema)',
+  'Integriteit (vervolgsysteem)': 'Vientisumas (paskesnė sistema)',
+  'Beschikbaarheid (vervolgsysteem)': 'Prieinamumas (paskesnė sistema)',
+  'PTES-fasen laden': 'Įkelti PTES fazes',
+  'Voegt de zeven PTES-fasen toe; bestaande gebeurtenissen blijven staan.':
+      'Prideda septynias PTES fazes; esami įvykiai išsaugomi.',
   'Basis': 'Bazinis',
   'Context': 'Kontekstas',
   'CVSS-wizard': 'CVSS vediklys',

@@ -740,6 +740,32 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Ohne Feststellungs-ID wird beim ersten Nachweis automatisch eine erzeugt.',
+  'Niet gedefinieerd': 'Nicht definiert',
+  'Netwerk': 'Netzwerk',
+  'Aangrenzend': 'Benachbart',
+  'Lokaal': 'Lokal',
+  'Fysiek': 'Physisch',
+  'Aanwezig': 'Vorhanden',
+  'Passief': 'Passiv',
+  'Actief': 'Aktiv',
+  'Aanvalsvector': 'Angriffsvektor',
+  'Aanvalscomplexiteit': 'Angriffskomplexität',
+  'Aanvalsvereisten': 'Angriffsanforderungen',
+  'Vereiste rechten': 'Erforderliche Rechte',
+  'Gebruikersinteractie': 'Benutzerinteraktion',
+  'Vertrouwelijkheid (kwetsbaar systeem)':
+      'Vertraulichkeit (anfälliges System)',
+  'Integriteit (kwetsbaar systeem)': 'Integrität (anfälliges System)',
+  'Beschikbaarheid (kwetsbaar systeem)': 'Verfügbarkeit (anfälliges System)',
+  'Vertrouwelijkheid (vervolgsysteem)':
+      'Vertraulichkeit (nachfolgendes System)',
+  'Integriteit (vervolgsysteem)': 'Integrität (nachfolgendes System)',
+  'Beschikbaarheid (vervolgsysteem)': 'Verfügbarkeit (nachfolgendes System)',
+  'PTES-fasen laden': 'PTES-Phasen laden',
+  'Voegt de zeven PTES-fasen toe; bestaande gebeurtenissen blijven staan.':
+      'Fügt die sieben PTES-Phasen hinzu; vorhandene Ereignisse bleiben erhalten.',
   'Basis': 'Basis',
   'Context': 'Kontext',
   'CVSS-wizard': 'CVSS-Assistent',

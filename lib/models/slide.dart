@@ -422,8 +422,9 @@ class Slide {
               rows: [ChecklistRow(), ChecklistRow()],
             ).toTableRows()
           : type == SlideType.scopeMatrix
-          // Start met de vaste kop + twee lege scope-regels.
-          ? const ScopeMatrixSpec(rows: [ScopeRow(), ScopeRow()]).toTableRows()
+          // Start met de vaste kop + één lege scope-regel; objecten voeg je toe
+          // of verwijder je zelf.
+          ? const ScopeMatrixSpec(rows: [ScopeRow()]).toTableRows()
           : type == SlideType.findingsSummary
           // Start met de vaste kop + één nulrij per ernstband; de editor vult ze
           // (of vernieuwt ze uit het deck).

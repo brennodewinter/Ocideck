@@ -1796,6 +1796,30 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
+      'Bez identyfikatora ustalenia zostanie on utworzony automatycznie przy pierwszym dowodzie.',
+  'Niet gedefinieerd': 'Niezdefiniowane',
+  'Netwerk': 'Sieć',
+  'Aangrenzend': 'Sąsiadujący',
+  'Lokaal': 'Lokalny',
+  'Fysiek': 'Fizyczny',
+  'Aanwezig': 'Obecny',
+  'Passief': 'Pasywny',
+  'Actief': 'Aktywny',
+  'Aanvalsvector': 'Wektor ataku',
+  'Aanvalscomplexiteit': 'Złożoność ataku',
+  'Aanvalsvereisten': 'Wymagania ataku',
+  'Vereiste rechten': 'Wymagane uprawnienia',
+  'Gebruikersinteractie': 'Interakcja użytkownika',
+  'Vertrouwelijkheid (kwetsbaar systeem)': 'Poufność (system podatny)',
+  'Integriteit (kwetsbaar systeem)': 'Integralność (system podatny)',
+  'Beschikbaarheid (kwetsbaar systeem)': 'Dostępność (system podatny)',
+  'Vertrouwelijkheid (vervolgsysteem)': 'Poufność (system następczy)',
+  'Integriteit (vervolgsysteem)': 'Integralność (system następczy)',
+  'Beschikbaarheid (vervolgsysteem)': 'Dostępność (system następczy)',
+  'PTES-fasen laden': 'Wczytaj fazy PTES',
+  'Voegt de zeven PTES-fasen toe; bestaande gebeurtenissen blijven staan.':
+      'Dodaje siedem faz PTES; istniejące zdarzenia zostają zachowane.',
   'Basis': 'Podstawowy',
   'Context': 'Kontekst',
   'CVSS-wizard': 'Kreator CVSS',
