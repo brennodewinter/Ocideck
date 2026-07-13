@@ -100,6 +100,12 @@ class _ScopeMatrixEditorState extends State<ScopeMatrixEditor> {
     _emit();
   }
 
+  void _moveRow(int from, int to) {
+    if (to < 0 || to >= _rows.length) return;
+    setState(() => _rows.insert(to, _rows.removeAt(from)));
+    _emit();
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
@@ -147,10 +153,27 @@ class _ScopeMatrixEditorState extends State<ScopeMatrixEditor> {
                 ),
               ),
               IconButton(
+                tooltip: l10n.d('Omhoog'),
+                onPressed: index > 0 ? () => _moveRow(index, index - 1) : null,
+                icon: const Icon(Icons.arrow_upward, size: 18),
+                color: AppTheme.slate500,
+                visualDensity: VisualDensity.compact,
+              ),
+              IconButton(
+                tooltip: l10n.d('Omlaag'),
+                onPressed: index < _rows.length - 1
+                    ? () => _moveRow(index, index + 1)
+                    : null,
+                icon: const Icon(Icons.arrow_downward, size: 18),
+                color: AppTheme.slate500,
+                visualDensity: VisualDensity.compact,
+              ),
+              IconButton(
                 tooltip: l10n.d('Object verwijderen'),
                 onPressed: _rows.length > 1 ? () => _removeRow(index) : null,
                 icon: const Icon(Icons.delete_outline, size: 18),
                 color: AppTheme.slate500,
+                visualDensity: VisualDensity.compact,
               ),
             ],
           ),

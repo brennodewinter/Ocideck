@@ -20,7 +20,7 @@ void main() {
   );
 
   // A scope-matrix slide with an explicit row count, so each test controls how
-  // many rows the editor starts with (the default `Slide.create` seeds two).
+  // many rows the editor starts with (the default `Slide.create` seeds one).
   Slide slideWithRows(int n, {String title = ''}) =>
       Slide.create(SlideType.scopeMatrix).copyWith(
         title: title,
@@ -135,6 +135,28 @@ void main() {
     );
     expect(spec.rows.single.status, ScopeStatus.deviation);
     expect(latest()!.tableRows[1][3], 'Deviation');
+  });
+
+  testWidgets('move-down reorders the objects', (tester) async {
+    final slide = Slide.create(SlideType.scopeMatrix).copyWith(
+      tableRows: ScopeMatrixSpec(
+        rows: const [
+          ScopeRow(object: 'A'),
+          ScopeRow(object: 'B'),
+        ],
+      ).toTableRows(),
+    );
+    final latest = await pump(tester, slide);
+
+    // Row 0's "down" button moves A below B.
+    await tester.tap(find.byIcon(Icons.arrow_downward).first);
+    await tester.pumpAndSettle();
+
+    final spec = ScopeMatrixSpec.fromSlide(
+      latest()!.title,
+      latest()!.tableRows,
+    );
+    expect(spec.rows.map((r) => r.object), ['B', 'A']);
   });
 
   testWidgets('setting the confidentiality rating writes its token', (
