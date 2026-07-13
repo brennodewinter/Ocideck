@@ -1791,6 +1791,18 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Bewerken': 'Redaguoti',
+  'Checklist-sjabloon': 'Kontrolinio sąrašo šablonas',
+  'Eigen checklists': 'Savi kontroliniai sąrašai',
+  'Laad een eigen checklist-sjabloon': 'Įkelti savą kontrolinio sąrašo šabloną',
+  'Leeg laten': 'Palikti tuščią',
+  'Maak herbruikbare testlijsten die je per scope-object in een checklist kunt laden, naast de gebundelde WSTG-lijst.':
+      'Kurkite pakartotinai naudojamus testų sąrašus, kuriuos galite įkelti į kontrolinį sąrašą kiekvienam apimties objektui, greta integruoto WSTG sąrašo.',
+  'Nieuw sjabloon': 'Naujas šablonas',
+  'Nog geen eigen checklists.': 'Kol kas nėra savų kontrolinių sąrašų.',
+  'Sjabloon laden…': 'Įkelti šabloną…',
+  'Sjabloon voor overige objecten': 'Šablonas kitiems objektams',
+  'Testen': 'Testai',
   'Genereer checklists voor scope-objecten':
       'Generuoti kontrolinius sąrašus apimties objektams',
   'checklists toegevoegd': 'pridėta kontrolinių sąrašų',

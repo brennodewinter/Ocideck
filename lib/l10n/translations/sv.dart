@@ -1782,6 +1782,18 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Bewerken': 'Redigera',
+  'Checklist-sjabloon': 'Checklistmall',
+  'Eigen checklists': 'Egna checklistor',
+  'Laad een eigen checklist-sjabloon': 'Läs in en egen checklistmall',
+  'Leeg laten': 'Lämna tom',
+  'Maak herbruikbare testlijsten die je per scope-object in een checklist kunt laden, naast de gebundelde WSTG-lijst.':
+      'Skapa återanvändbara testlistor som du kan läsa in i en checklista per scope-objekt, vid sidan av den inbyggda WSTG-listan.',
+  'Nieuw sjabloon': 'Ny mall',
+  'Nog geen eigen checklists.': 'Inga egna checklistor ännu.',
+  'Sjabloon laden…': 'Läs in mall…',
+  'Sjabloon voor overige objecten': 'Mall för övriga objekt',
+  'Testen': 'Tester',
   'Genereer checklists voor scope-objecten':
       'Generera checklistor för scope-objekt',
   'checklists toegevoegd': 'checklistor tillagda',

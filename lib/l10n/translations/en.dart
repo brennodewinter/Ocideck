@@ -922,6 +922,18 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Bewerken': 'Edit',
+  'Checklist-sjabloon': 'Checklist template',
+  'Eigen checklists': 'Custom checklists',
+  'Laad een eigen checklist-sjabloon': 'Load a custom checklist template',
+  'Leeg laten': 'Leave empty',
+  'Maak herbruikbare testlijsten die je per scope-object in een checklist kunt laden, naast de gebundelde WSTG-lijst.':
+      'Create reusable test lists you can load into a checklist per scope object, alongside the bundled WSTG list.',
+  'Nieuw sjabloon': 'New template',
+  'Nog geen eigen checklists.': 'No custom checklists yet.',
+  'Sjabloon laden…': 'Load template…',
+  'Sjabloon voor overige objecten': 'Template for other objects',
+  'Testen': 'Tests',
   'Genereer checklists voor scope-objecten':
       'Generate checklists for scope objects',
   'checklists toegevoegd': 'checklists added',

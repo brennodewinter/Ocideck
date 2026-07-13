@@ -1813,6 +1813,19 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Bewerken': 'Editar',
+  'Checklist-sjabloon': 'Modelo de lista de verificação',
+  'Eigen checklists': 'Listas de verificação próprias',
+  'Laad een eigen checklist-sjabloon':
+      'Carregar um modelo de lista de verificação próprio',
+  'Leeg laten': 'Deixar vazio',
+  'Maak herbruikbare testlijsten die je per scope-object in een checklist kunt laden, naast de gebundelde WSTG-lijst.':
+      'Crie listas de testes reutilizáveis que você pode carregar em uma lista de verificação por objeto do escopo, além da lista WSTG incluída.',
+  'Nieuw sjabloon': 'Novo modelo',
+  'Nog geen eigen checklists.': 'Ainda não há listas de verificação próprias.',
+  'Sjabloon laden…': 'Carregar modelo…',
+  'Sjabloon voor overige objecten': 'Modelo para os outros objetos',
+  'Testen': 'Testes',
   'Genereer checklists voor scope-objecten':
       'Gerar listas de verificação para objetos do escopo',
   'checklists toegevoegd': 'listas de verificação adicionadas',

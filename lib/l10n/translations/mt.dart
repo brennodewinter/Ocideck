@@ -1806,6 +1806,20 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Bewerken': 'Editja',
+  'Checklist-sjabloon': 'Mudell ta\' lista ta\' kontroll',
+  'Eigen checklists': 'Listi ta\' kontroll tiegħek',
+  'Laad een eigen checklist-sjabloon':
+      'Għabbi mudell ta\' lista ta\' kontroll tiegħek',
+  'Leeg laten': 'Ħalli vojt',
+  'Maak herbruikbare testlijsten die je per scope-object in een checklist kunt laden, naast de gebundelde WSTG-lijst.':
+      'Oħloq listi ta\' testijiet li jistgħu jerġgħu jintużaw li tista\' tgħabbi f\'lista ta\' kontroll għal kull oġġett tal-kamp, ħdejn il-lista WSTG inkluża.',
+  'Nieuw sjabloon': 'Mudell ġdid',
+  'Nog geen eigen checklists.':
+      'Għad m\'hemm l-ebda lista ta\' kontroll tiegħek.',
+  'Sjabloon laden…': 'Għabbi mudell…',
+  'Sjabloon voor overige objecten': 'Mudell għall-oġġetti l-oħra',
+  'Testen': 'Testijiet',
   'Genereer checklists voor scope-objecten':
       'Iġġenera listi ta\' kontroll għall-oġġetti tal-kamp',
   'checklists toegevoegd': 'listi ta\' kontroll miżjuda',

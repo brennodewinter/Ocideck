@@ -959,6 +959,37 @@ void main() {
       expect(n.generateScopeChecklists(), 0);
     });
 
+    test('a template pre-fills non-WSTG objects (feedback #9)', () {
+      final n = _notifier()
+        ..loadDeck(
+          deckWithScope(const [
+            ScopeRow(object: '10.0.0.1', type: ScopeObjectType.infra),
+          ]),
+        );
+      expect(
+        n.generateScopeChecklists(
+          templateForOthers: const ChecklistTemplate(
+            name: 'Intern',
+            standardLabel: 'PTES intern',
+            items: [
+              ChecklistTemplateItem(id: 'NET-01', title: 'Poortscan'),
+              ChecklistTemplateItem(id: 'NET-02', title: 'Wachtwoorden'),
+            ],
+          ),
+        ),
+        1,
+      );
+      final checklist = n.state.deck!.slides.firstWhere(
+        (s) => s.type == SlideType.checklist,
+      );
+      expect(checklist.title, 'PTES intern');
+      final spec = ChecklistSpec.fromSlide(
+        checklist.title,
+        checklist.tableRows,
+      );
+      expect(spec.rows.map((r) => r.id), ['NET-01', 'NET-02']);
+    });
+
     test('skips blank objects and de-duplicates by normalized object', () {
       final n = _notifier()
         ..loadDeck(

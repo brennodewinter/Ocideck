@@ -8,6 +8,14 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Your own checklist templates.** A new **Checklists** tab under Settings lets
+  you create, edit and delete reusable checklist templates (a name, a standard
+  label and its test items). Any template can be loaded into a checklist slide
+  via a new **Sjabloon laden…** menu in the checklist editor (next to the WSTG
+  button), and the per-scope-object generator can pre-fill non-WSTG objects
+  (Infra/IoT/…) from a template you pick. Templates are stored in the app
+  settings (`customChecklists`), so they persist across decks. Localised in all
+  interface languages.
 - **Checklists per scope-object.** A `checklist` slide can now be linked to a
   scope-matrix object (a **Scope-object** field in the checklist editor, shown in
   the preview), so each scope element carries its own test list. The scope-matrix

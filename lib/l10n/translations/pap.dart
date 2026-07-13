@@ -740,6 +740,19 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Bewerken': 'Editá',
+  'Checklist-sjabloon': 'Plantia di lista di kontrol',
+  'Eigen checklists': 'Lista di kontrol propio',
+  'Laad een eigen checklist-sjabloon':
+      'Karga un plantia di lista di kontrol propio',
+  'Leeg laten': 'Laga bashí',
+  'Maak herbruikbare testlijsten die je per scope-object in een checklist kunt laden, naast de gebundelde WSTG-lijst.':
+      'Krea lista di test reutilisabel ku bo por karga den un lista di kontrol pa kada objeto di scope, banda di e lista WSTG inkluí.',
+  'Nieuw sjabloon': 'Plantia nobo',
+  'Nog geen eigen checklists.': 'Ainda no tin lista di kontrol propio.',
+  'Sjabloon laden…': 'Karga plantia…',
+  'Sjabloon voor overige objecten': 'Plantia pa e otro objetonan',
+  'Testen': 'Tesnan',
   'Genereer checklists voor scope-objecten':
       'Generá lista di kontrol pa objeto di scope',
   'checklists toegevoegd': 'lista di kontrol añadí',

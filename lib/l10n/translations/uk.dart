@@ -1801,6 +1801,19 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Bewerken': 'Редагувати',
+  'Checklist-sjabloon': 'Шаблон контрольного списку',
+  'Eigen checklists': 'Власні контрольні списки',
+  'Laad een eigen checklist-sjabloon':
+      'Завантажити власний шаблон контрольного списку',
+  'Leeg laten': 'Залишити порожнім',
+  'Maak herbruikbare testlijsten die je per scope-object in een checklist kunt laden, naast de gebundelde WSTG-lijst.':
+      'Створюйте багаторазові списки тестів, які можна завантажити в контрольний список для кожного об\'єкта обсягу, поряд із вбудованим списком WSTG.',
+  'Nieuw sjabloon': 'Новий шаблон',
+  'Nog geen eigen checklists.': 'Ще немає власних контрольних списків.',
+  'Sjabloon laden…': 'Завантажити шаблон…',
+  'Sjabloon voor overige objecten': 'Шаблон для інших об\'єктів',
+  'Testen': 'Тести',
   'Genereer checklists voor scope-objecten':
       'Створити контрольні списки для об\'єктів обсягу',
   'checklists toegevoegd': 'контрольних списків додано',

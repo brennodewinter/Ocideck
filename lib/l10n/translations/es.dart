@@ -737,6 +737,19 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Bewerken': 'Editar',
+  'Checklist-sjabloon': 'Plantilla de lista de verificación',
+  'Eigen checklists': 'Listas de verificación propias',
+  'Laad een eigen checklist-sjabloon':
+      'Cargar una plantilla de lista de verificación propia',
+  'Leeg laten': 'Dejar vacío',
+  'Maak herbruikbare testlijsten die je per scope-object in een checklist kunt laden, naast de gebundelde WSTG-lijst.':
+      'Crea listas de pruebas reutilizables que puedes cargar en una lista de verificación por objeto del alcance, junto a la lista WSTG incluida.',
+  'Nieuw sjabloon': 'Nueva plantilla',
+  'Nog geen eigen checklists.': 'Aún no hay listas de verificación propias.',
+  'Sjabloon laden…': 'Cargar plantilla…',
+  'Sjabloon voor overige objecten': 'Plantilla para los demás objetos',
+  'Testen': 'Pruebas',
   'Genereer checklists voor scope-objecten':
       'Generar listas de verificación para los objetos del alcance',
   'checklists toegevoegd': 'listas de verificación añadidas',

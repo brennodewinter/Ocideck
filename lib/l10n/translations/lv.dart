@@ -1782,6 +1782,18 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Bewerken': 'Rediģēt',
+  'Checklist-sjabloon': 'Kontrolsaraksta veidne',
+  'Eigen checklists': 'Pašu kontrolsaraksti',
+  'Laad een eigen checklist-sjabloon': 'Ielādēt savu kontrolsaraksta veidni',
+  'Leeg laten': 'Atstāt tukšu',
+  'Maak herbruikbare testlijsten die je per scope-object in een checklist kunt laden, naast de gebundelde WSTG-lijst.':
+      'Izveido atkārtoti izmantojamus testu sarakstus, ko vari ielādēt kontrolsarakstā katram tvēruma objektam, līdzās iebūvētajam WSTG sarakstam.',
+  'Nieuw sjabloon': 'Jauna veidne',
+  'Nog geen eigen checklists.': 'Vēl nav savu kontrolsarakstu.',
+  'Sjabloon laden…': 'Ielādēt veidni…',
+  'Sjabloon voor overige objecten': 'Veidne pārējiem objektiem',
+  'Testen': 'Testi',
   'Genereer checklists voor scope-objecten':
       'Ģenerēt kontrolsarakstus tvēruma objektiem',
   'checklists toegevoegd': 'kontrolsaraksti pievienoti',

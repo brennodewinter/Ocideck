@@ -1782,6 +1782,18 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Bewerken': 'Rediger',
+  'Checklist-sjabloon': 'Tjeklisteskabelon',
+  'Eigen checklists': 'Egne tjeklister',
+  'Laad een eigen checklist-sjabloon': 'Indlæs en egen tjeklisteskabelon',
+  'Leeg laten': 'Lad stå tom',
+  'Maak herbruikbare testlijsten die je per scope-object in een checklist kunt laden, naast de gebundelde WSTG-lijst.':
+      'Opret genanvendelige testlister, du kan indlæse i en tjekliste pr. scope-objekt, ved siden af den medfølgende WSTG-liste.',
+  'Nieuw sjabloon': 'Ny skabelon',
+  'Nog geen eigen checklists.': 'Ingen egne tjeklister endnu.',
+  'Sjabloon laden…': 'Indlæs skabelon…',
+  'Sjabloon voor overige objecten': 'Skabelon til øvrige objekter',
+  'Testen': 'Test',
   'Genereer checklists voor scope-objecten':
       'Generér tjeklister for scope-objekter',
   'checklists toegevoegd': 'tjeklister tilføjet',

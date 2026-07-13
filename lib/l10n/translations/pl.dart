@@ -1796,6 +1796,19 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Bewerken': 'Edytuj',
+  'Checklist-sjabloon': 'Szablon listy kontrolnej',
+  'Eigen checklists': 'Własne listy kontrolne',
+  'Laad een eigen checklist-sjabloon':
+      'Wczytaj własny szablon listy kontrolnej',
+  'Leeg laten': 'Pozostaw puste',
+  'Maak herbruikbare testlijsten die je per scope-object in een checklist kunt laden, naast de gebundelde WSTG-lijst.':
+      'Twórz wielokrotnego użytku listy testów, które możesz wczytać do listy kontrolnej dla każdego obiektu zakresu, obok dołączonej listy WSTG.',
+  'Nieuw sjabloon': 'Nowy szablon',
+  'Nog geen eigen checklists.': 'Brak własnych list kontrolnych.',
+  'Sjabloon laden…': 'Wczytaj szablon…',
+  'Sjabloon voor overige objecten': 'Szablon dla pozostałych obiektów',
+  'Testen': 'Testy',
   'Genereer checklists voor scope-objecten':
       'Generuj listy kontrolne dla obiektów zakresu',
   'checklists toegevoegd': 'dodano listy kontrolne',

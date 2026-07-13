@@ -3,10 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/checklist_spec.dart';
+import '../../models/checklist_template.dart';
 import '../../models/slide.dart';
+import '../../services/checklist_templates.dart';
 import '../../services/finding_context_score.dart';
 import '../../services/wstg_catalog.dart';
 import '../../state/deck_provider.dart';
+import '../../state/settings_provider.dart';
 import '../../theme/app_theme.dart';
 import '_editor_field.dart';
 
@@ -120,10 +123,11 @@ class _ChecklistEditorState extends ConsumerState<ChecklistEditor> {
     _emit();
   }
 
-  /// Append every WSTG test not already present (matched by id), preserving the
-  /// current rows and their statuses. Replaces a lone blank starter row, and
-  /// sets the standard label to the versioned WSTG label when it is still empty.
-  void _loadWstg() {
+  /// Append every test from [source] not already present (matched by id),
+  /// preserving the current rows and their statuses. Replaces a lone blank
+  /// starter row, and sets the standard label from the source when it is still
+  /// empty. Used by both the WSTG button and the custom-template picker (#9).
+  void _loadSource(ChecklistSource source) {
     final blankStarter =
         _rows.length == 1 &&
         _rows.first.id.text.trim().isEmpty &&
@@ -133,16 +137,16 @@ class _ChecklistEditorState extends ConsumerState<ChecklistEditor> {
     final present = {for (final r in _rows) r.id.text.trim().toUpperCase()}
       ..remove('');
     final additions = [
-      for (final t in WstgCatalog.instance.tests)
-        if (!present.contains(t.id.toUpperCase()))
-          _RowControllers(ChecklistRow(id: t.id, test: t.title), _emit),
+      for (final row in source.rows)
+        if (row.id.isEmpty || !present.contains(row.id.toUpperCase()))
+          _RowControllers(row, _emit),
     ];
     if (additions.isEmpty) return;
     setState(() {
       if (blankStarter) _rows.removeAt(0).dispose();
       _rows.addAll(additions);
-      if (_standard.text.trim().isEmpty) {
-        _standard.text = WstgCatalog.instance.standardLabel;
+      if (_standard.text.trim().isEmpty && source.standardLabel.isNotEmpty) {
+        _standard.text = source.standardLabel;
       }
     });
     _emit();
@@ -157,6 +161,9 @@ class _ChecklistEditorState extends ConsumerState<ChecklistEditor> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final deck = ref.watch(deckProvider.select((s) => s.deck));
+    final templates = ref.watch(
+      settingsProvider.select((s) => s.customChecklists),
+    );
     final scopeObjects = <String>{
       for (final r in deckScopeRows(deck?.slides ?? const []))
         if (r.object.trim().isNotEmpty) r.object.trim(),
@@ -172,7 +179,7 @@ class _ChecklistEditorState extends ConsumerState<ChecklistEditor> {
           hint: WstgCatalog.instance.standardLabel,
         ),
         const SizedBox(height: 12),
-        _wstgLoadRow(context),
+        _loadRow(context, templates),
         const SizedBox(height: 16),
         for (var i = 0; i < _rows.length; i++) ...[
           _rowCard(context, i),
@@ -239,30 +246,69 @@ class _ChecklistEditorState extends ConsumerState<ChecklistEditor> {
     );
   }
 
-  /// The "load the standard's tests" affordance: a button plus a caption naming
-  /// the bundled standard version, so the version is visible before any load.
-  Widget _wstgLoadRow(BuildContext context) {
+  /// The "load tests" affordances: a one-click WSTG button, plus a
+  /// **Sjabloon laden…** menu of the user's own checklist templates (feedback
+  /// #9) when there are any, and a caption naming the bundled WSTG version.
+  Widget _loadRow(BuildContext context, List<ChecklistTemplate> templates) {
     final l10n = context.l10n;
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Tooltip(
-          message: l10n.d(
-            'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.',
-          ),
-          child: OutlinedButton.icon(
-            onPressed: _loadWstg,
-            icon: const Icon(Icons.playlist_add_check, size: 16),
-            label: Text(l10n.d('WSTG-testen laden')),
-          ),
+        Wrap(
+          spacing: 10,
+          runSpacing: 8,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            Tooltip(
+              message: l10n.d(
+                'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.',
+              ),
+              child: OutlinedButton.icon(
+                onPressed: () => _loadSource(wstgChecklistSource()),
+                icon: const Icon(Icons.playlist_add_check, size: 16),
+                label: Text(l10n.d('WSTG-testen laden')),
+              ),
+            ),
+            if (templates.isNotEmpty)
+              PopupMenuButton<ChecklistTemplate>(
+                tooltip: l10n.d('Laad een eigen checklist-sjabloon'),
+                onSelected: (t) => _loadSource(templateChecklistSource(t)),
+                itemBuilder: (_) => [
+                  for (final t in templates)
+                    PopupMenuItem(
+                      value: t,
+                      child: Text(
+                        '${t.name} · ${t.items.length} ${l10n.d('testen')}',
+                      ),
+                    ),
+                ],
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 8,
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: AppTheme.slate300),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.playlist_add, size: 16),
+                      const SizedBox(width: 6),
+                      Text(l10n.d('Sjabloon laden…')),
+                    ],
+                  ),
+                ),
+              ),
+          ],
         ),
-        const SizedBox(width: 10),
-        Expanded(
-          child: Text(
-            '${WstgCatalog.instance.standardLabel} · '
-            '${WstgCatalog.instance.tests.length} '
-            '${l10n.d('testen')}',
-            style: TextStyle(fontSize: 12, color: AppTheme.slate500),
-          ),
+        const SizedBox(height: 6),
+        Text(
+          '${WstgCatalog.instance.standardLabel} · '
+          '${WstgCatalog.instance.tests.length} '
+          '${l10n.d('testen')}',
+          style: TextStyle(fontSize: 12, color: AppTheme.slate500),
         ),
       ],
     );

@@ -1774,6 +1774,18 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Bewerken': 'Muuda',
+  'Checklist-sjabloon': 'Kontrollnimekirja mall',
+  'Eigen checklists': 'Oma kontrollnimekirjad',
+  'Laad een eigen checklist-sjabloon': 'Laadi oma kontrollnimekirja mall',
+  'Leeg laten': 'Jäta tühjaks',
+  'Maak herbruikbare testlijsten die je per scope-object in een checklist kunt laden, naast de gebundelde WSTG-lijst.':
+      'Loo korduvkasutatavaid testinimekirju, mille saad laadida kontrollnimekirja iga ulatuse objekti kohta, lisaks kaasasolevale WSTG nimekirjale.',
+  'Nieuw sjabloon': 'Uus mall',
+  'Nog geen eigen checklists.': 'Oma kontrollnimekirju veel pole.',
+  'Sjabloon laden…': 'Laadi mall…',
+  'Sjabloon voor overige objecten': 'Mall teiste objektide jaoks',
+  'Testen': 'Testid',
   'Genereer checklists voor scope-objecten':
       'Loo kontrollnimekirjad ulatuse objektidele',
   'checklists toegevoegd': 'kontrollnimekirja lisatud',

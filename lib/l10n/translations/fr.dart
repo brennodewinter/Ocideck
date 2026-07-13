@@ -740,6 +740,20 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Bewerken': 'Modifier',
+  'Checklist-sjabloon': 'Modèle de checklist',
+  'Eigen checklists': 'Checklists personnalisées',
+  'Laad een eigen checklist-sjabloon':
+      'Charger un modèle de checklist personnalisé',
+  'Leeg laten': 'Laisser vide',
+  'Maak herbruikbare testlijsten die je per scope-object in een checklist kunt laden, naast de gebundelde WSTG-lijst.':
+      'Créez des listes de tests réutilisables que vous pouvez charger dans une checklist par objet de la portée, en plus de la liste WSTG intégrée.',
+  'Nieuw sjabloon': 'Nouveau modèle',
+  'Nog geen eigen checklists.':
+      'Aucune checklist personnalisée pour l\'instant.',
+  'Sjabloon laden…': 'Charger un modèle…',
+  'Sjabloon voor overige objecten': 'Modèle pour les autres objets',
+  'Testen': 'Tests',
   'Genereer checklists voor scope-objecten':
       'Générer des checklists pour les objets de la portée',
   'checklists toegevoegd': 'checklists ajoutées',

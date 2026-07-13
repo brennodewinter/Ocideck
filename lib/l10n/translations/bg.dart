@@ -1806,6 +1806,19 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Bewerken': 'Редактиране',
+  'Checklist-sjabloon': 'Шаблон на контролен списък',
+  'Eigen checklists': 'Собствени контролни списъци',
+  'Laad een eigen checklist-sjabloon':
+      'Зареждане на собствен шаблон на контролен списък',
+  'Leeg laten': 'Оставяне празно',
+  'Maak herbruikbare testlijsten die je per scope-object in een checklist kunt laden, naast de gebundelde WSTG-lijst.':
+      'Създавайте многократно използваеми списъци с тестове, които можете да заредите в контролен списък за всеки обект от обхвата, наред с вградения списък WSTG.',
+  'Nieuw sjabloon': 'Нов шаблон',
+  'Nog geen eigen checklists.': 'Все още няма собствени контролни списъци.',
+  'Sjabloon laden…': 'Зареждане на шаблон…',
+  'Sjabloon voor overige objecten': 'Шаблон за останалите обекти',
+  'Testen': 'Тестове',
   'Genereer checklists voor scope-objecten':
       'Генериране на контролни списъци за обекти от обхвата',
   'checklists toegevoegd': 'добавени контролни списъка',

@@ -1799,6 +1799,18 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Bewerken': 'Recognosce',
+  'Checklist-sjabloon': 'Formula indicis',
+  'Eigen checklists': 'Indices proprii',
+  'Laad een eigen checklist-sjabloon': 'Formulam indicis propriam onera',
+  'Leeg laten': 'Vacuum relinque',
+  'Maak herbruikbare testlijsten die je per scope-object in een checklist kunt laden, naast de gebundelde WSTG-lijst.':
+      'Indices probationum iterabiles crea quos in indicem pro obiecto ambitus onerare potes, praeter indicem WSTG inclusum.',
+  'Nieuw sjabloon': 'Nova formula',
+  'Nog geen eigen checklists.': 'Nondum indices proprii.',
+  'Sjabloon laden…': 'Formulam onera…',
+  'Sjabloon voor overige objecten': 'Formula pro ceteris obiectis',
+  'Testen': 'Probationes',
   'Genereer checklists voor scope-objecten':
       'Indices pro obiectis ambitus genera',
   'checklists toegevoegd': 'indices additi',

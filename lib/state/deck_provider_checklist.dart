@@ -8,11 +8,12 @@ extension DeckNotifierChecklist on DeckNotifier {
   /// Generate one checklist slide per scope-matrix object that does not yet have
   /// one (feedback #8, "per scope-object heb je een checklist"). A `Web`/`API`
   /// object (standard = WSTG) is pre-filled with the full bundled WSTG list; any
-  /// other type gets an empty checklist titled with its derived standard, ready
-  /// for a template (PR 2) or manual filling. Objects already linked to a
-  /// checklist (by [Slide.checklistScope]) are skipped, so it is safe to re-run.
-  /// Returns the number of checklists added. Appended after the existing slides.
-  int generateScopeChecklists() {
+  /// other type is pre-filled from [templateForOthers] when given (feedback #9),
+  /// otherwise an empty checklist titled with its derived standard. Objects
+  /// already linked to a checklist (by [Slide.checklistScope]) are skipped, so it
+  /// is safe to re-run. Returns the number of checklists added, appended after
+  /// the existing slides.
+  int generateScopeChecklists({ChecklistTemplate? templateForOthers}) {
     final deck = currentState.deck;
     if (deck == null) return 0;
     final covered = <String>{
@@ -27,7 +28,7 @@ extension DeckNotifierChecklist on DeckNotifier {
       if (object.isEmpty) continue;
       final key = normalizeScopeObject(object);
       if (covered.contains(key) || !seen.add(key)) continue;
-      additions.add(_checklistForScope(object, row.type));
+      additions.add(_checklistForScope(object, row.type, templateForOthers));
     }
     if (additions.isEmpty) return 0;
     final slides = List<Slide>.from(deck.slides)..addAll(additions);
@@ -36,23 +37,34 @@ extension DeckNotifierChecklist on DeckNotifier {
   }
 
   /// Build a checklist slide linked to [object]: WSTG rows for a WSTG-standard
-  /// type, otherwise an empty checklist titled with the derived standard.
-  Slide _checklistForScope(String object, ScopeObjectType type) {
-    final useWstg = type.standard == 'WSTG';
-    final spec = ChecklistSpec(
-      standardLabel: useWstg
-          ? WstgCatalog.instance.standardLabel
-          : type.standard,
-      rows: useWstg
-          ? [
-              for (final t in WstgCatalog.instance.tests)
-                ChecklistRow(id: t.id, test: t.title),
-            ]
-          : const [ChecklistRow()],
-    );
+  /// type, [template] rows when one is given for a non-WSTG type, otherwise an
+  /// empty checklist titled with the derived standard.
+  Slide _checklistForScope(
+    String object,
+    ScopeObjectType type,
+    ChecklistTemplate? template,
+  ) {
+    final ChecklistSource source;
+    if (type.standard == 'WSTG') {
+      source = wstgChecklistSource();
+    } else if (template != null) {
+      source = templateChecklistSource(template);
+    } else {
+      source = ChecklistSource(
+        label: type.standard,
+        standardLabel: type.standard,
+        rows: const [ChecklistRow()],
+      );
+    }
+    final label = source.standardLabel.isNotEmpty
+        ? source.standardLabel
+        : type.standard;
     return Slide.create(SlideType.checklist).copyWith(
-      title: spec.standardLabel,
-      tableRows: spec.toTableRows(),
+      title: label,
+      tableRows: ChecklistSpec(
+        standardLabel: label,
+        rows: source.rows,
+      ).toTableRows(),
       checklistScope: object,
     );
   }

@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../models/checklist_template.dart';
 import '../../models/cvss_builder.dart';
 import '../../models/scope_matrix_spec.dart';
 import '../../models/slide.dart';
 import '../../state/deck_provider.dart';
+import '../../state/settings_provider.dart';
 import '../../theme/app_theme.dart';
 import '_editor_field.dart';
 
@@ -151,10 +153,36 @@ class _ScopeMatrixEditorState extends ConsumerState<ScopeMatrixEditor> {
   }
 
   /// Create a checklist slide per scope object that lacks one, then report how
-  /// many were added via a SnackBar.
-  void _generateChecklists() {
+  /// many were added via a SnackBar. When the user has custom templates, first
+  /// ask which one to pre-fill non-WSTG objects with (or leave them empty).
+  Future<void> _generateChecklists() async {
     final l10n = context.l10n;
-    final added = ref.read(deckProvider.notifier).generateScopeChecklists();
+    final templates = ref.read(settingsProvider).customChecklists;
+    ChecklistTemplate? templateForOthers;
+    if (templates.isNotEmpty) {
+      final choice = await showDialog<({ChecklistTemplate? template})>(
+        context: context,
+        builder: (ctx) => SimpleDialog(
+          title: Text(l10n.d('Sjabloon voor overige objecten')),
+          children: [
+            SimpleDialogOption(
+              onPressed: () => Navigator.pop(ctx, (template: null)),
+              child: Text(l10n.d('Leeg laten')),
+            ),
+            for (final t in templates)
+              SimpleDialogOption(
+                onPressed: () => Navigator.pop(ctx, (template: t)),
+                child: Text(t.name),
+              ),
+          ],
+        ),
+      );
+      if (!mounted || choice == null) return; // dismissed
+      templateForOthers = choice.template;
+    }
+    final added = ref
+        .read(deckProvider.notifier)
+        .generateScopeChecklists(templateForOthers: templateForOthers);
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
