@@ -161,6 +161,19 @@ String assembleCvss4Vector(Map<String, String> base, {CiaRating? cia}) {
   return parts.join('/');
 }
 
+/// The canonical **Base-only** vector for [vector]: each of the eleven Base
+/// metrics taken from [vector] when present, else its builder default; any
+/// Threat/Environmental/Supplemental metrics are dropped. Seeds the per-metric
+/// builder and strips a legacy vector's baked-in `CR`/`IR`/`AR` back to its
+/// base — the CIA weighting now lives on the scope object, not the finding.
+String baseCvss4Vector(String vector) {
+  final parsed = Cvss4.tryParseVector(vector);
+  return assembleCvss4Vector({
+    for (final m in kCvss4BaseMetrics)
+      m.code: parsed?[m.code] ?? m.defaultToken,
+  });
+}
+
 /// The **context (environmental) score** for a finding whose base vector is
 /// [baseVector], weighted by a scope object's [cia] rating. Returns `null` when
 /// the rating adds nothing ([CiaRating.isDefined] is false) or [baseVector] does

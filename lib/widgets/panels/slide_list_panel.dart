@@ -13,6 +13,7 @@ import '../../state/sec_module_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';
 import '../../services/classification_enforcement_policy.dart';
+import '../../services/finding_context_score.dart';
 import '../../services/image_service.dart';
 import '../../services/slide_rasterizer.dart';
 import '../../state/slide_clipboard_provider.dart';

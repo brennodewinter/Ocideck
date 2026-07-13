@@ -11,25 +11,39 @@ import 'scope_coverage.dart';
 /// so the score is never baked into the finding — changing a scope object's
 /// rating re-scores every finding that points at it.
 
-/// The scope-object → CIA-rating index built from every `scopeMatrix` slide in
-/// [slides]. Only rows with a defined rating are included; the key is the
-/// normalised scope-object string (see [normalizeScopeObject]) so it matches a
-/// finding's own, independently free-typed, scope object. When two rows name the
-/// same object, the later one wins.
-Map<String, CiaRating> deckScopeCiaIndex(Iterable<Slide> slides) {
+/// The scope-object → CIA-rating index for [rows]. Only rows with a defined
+/// rating are included; the key is the normalised scope-object string (see
+/// [normalizeScopeObject]) so it matches a finding's own, independently
+/// free-typed, scope object. When two rows name the same object, the later wins.
+Map<String, CiaRating> scopeCiaIndexFromRows(Iterable<ScopeRow> rows) {
   final index = <String, CiaRating>{};
-  for (final slide in slides) {
-    if (slide.type != SlideType.scopeMatrix) continue;
-    final spec = ScopeMatrixSpec.fromSlide(slide.title, slide.tableRows);
-    for (final row in spec.rows) {
-      if (!row.cia.isDefined) continue;
-      final key = normalizeScopeObject(row.object);
-      if (key.isEmpty) continue;
-      index[key] = row.cia;
-    }
+  for (final row in rows) {
+    if (!row.cia.isDefined) continue;
+    final key = normalizeScopeObject(row.object);
+    if (key.isEmpty) continue;
+    index[key] = row.cia;
   }
   return index;
 }
+
+/// Every scope object across all `scopeMatrix` slides in [slides], in document
+/// order. Feeds both the CIA index and the finding-editor/wizard scope-object
+/// pickers.
+List<ScopeRow> deckScopeRows(Iterable<Slide> slides) => [
+  for (final slide in slides)
+    if (slide.type == SlideType.scopeMatrix)
+      ...ScopeMatrixSpec.fromSlide(slide.title, slide.tableRows).rows,
+];
+
+/// The scope-object → CIA-rating index built from every `scopeMatrix` slide in
+/// [slides]. See [scopeCiaIndexFromRows].
+Map<String, CiaRating> deckScopeCiaIndex(Iterable<Slide> slides) =>
+    scopeCiaIndexFromRows(deckScopeRows(slides));
+
+/// The CIA rating of the scope object named [object] in [index], or an empty
+/// rating when it is not rated. Matches on the normalised object string.
+CiaRating scopeObjectCia(String object, Map<String, CiaRating> index) =>
+    index[normalizeScopeObject(object)] ?? const CiaRating();
 
 /// The context (environmental) [Cvss4] for [spec], or `null` when its scope
 /// object has no CIA rating in [index] or its base vector does not parse — the

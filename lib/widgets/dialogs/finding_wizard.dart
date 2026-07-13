@@ -3,27 +3,36 @@ import 'package:flutter/material.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/cvss_builder.dart';
 import '../../models/finding_spec.dart';
+import '../../models/scope_matrix_spec.dart';
 import '../../models/slide.dart';
-import '../../services/cvss/cvss4.dart';
+import '../../services/finding_context_score.dart';
 import '../../services/finding_group_builder.dart';
 import '../../theme/app_theme.dart';
-import '../../theme/finding_severity_palette.dart';
+import 'cvss_builder_dialog.dart';
 import 'cwe_picker.dart';
 
 /// The guided **finding wizard** (PENTEST_MIAUW §4.1): step through title →
-/// scope object → a per-metric **CVSS 4.0 builder** (Environmental `CR/IR/AR`
-/// pre-filled from the scope object's CIA rating → a CIA-weighted score) → CWE →
-/// CVE → the four narrative sections, then **emit a finding slide group** (header
-/// + optional detail/evidence placeholders sharing one finding id). Returns the
-/// group (or null on cancel); the caller inserts it with `insertSlides`.
+/// scope object → a per-metric **CVSS 4.0 builder** (which stores a Base-only
+/// vector and shows the context score derived from the chosen scope object's CIA
+/// rating) → CWE → CVE → the four narrative sections, then **emit a finding slide
+/// group** (header + optional detail/evidence placeholders sharing one finding
+/// id). Returns the group (or null on cancel); the caller inserts it with
+/// `insertSlides`.
 class FindingWizard extends StatefulWidget {
-  const FindingWizard({super.key});
+  const FindingWizard({super.key, this.scopeRows = const []});
 
-  static Future<List<Slide>?> show(BuildContext context) =>
-      showDialog<List<Slide>>(
-        context: context,
-        builder: (_) => const FindingWizard(),
-      );
+  /// The deck's scope objects, so the CVSS step can pull the chosen scope
+  /// object's CIA rating and show a context (environmental) score alongside the
+  /// base score.
+  final List<ScopeRow> scopeRows;
+
+  static Future<List<Slide>?> show(
+    BuildContext context, {
+    List<ScopeRow> scopeRows = const [],
+  }) => showDialog<List<Slide>>(
+    context: context,
+    builder: (_) => FindingWizard(scopeRows: scopeRows),
+  );
 
   @override
   State<FindingWizard> createState() => _FindingWizardState();
@@ -49,16 +58,18 @@ class _FindingWizardState extends State<FindingWizard> {
   late final TextEditingController _impact;
   late final TextEditingController _recommendation;
 
-  final Map<String, String> _base = {
-    for (final m in kCvss4BaseMetrics) m.code: m.defaultToken,
-  };
-  CiaRating _cia = const CiaRating();
+  /// The finding's Base-only CVSS vector, seeded to the all-defaults vector and
+  /// updated by the builder. The CIA weighting is never baked in here — it lives
+  /// on the scope object and yields the context score at display time.
+  String _baseVector = baseCvss4Vector('');
+  late final Map<String, CiaRating> _scopeCiaIndex;
   bool _addDetail = false;
   bool _addEvidence = true;
 
   @override
   void initState() {
     super.initState();
+    _scopeCiaIndex = scopeCiaIndexFromRows(widget.scopeRows);
     _heading = TextEditingController();
     _findingId = TextEditingController();
     _scope = TextEditingController();
@@ -88,7 +99,10 @@ class _FindingWizardState extends State<FindingWizard> {
     super.dispose();
   }
 
-  String get _vector => assembleCvss4Vector(_base, cia: _cia);
+  /// The CIA rating of the currently entered scope object, or an empty rating
+  /// when it is not in the scope matrix — the CVSS step uses it for the context
+  /// read-out.
+  CiaRating get _scopeCia => scopeObjectCia(_scope.text.trim(), _scopeCiaIndex);
 
   void _finish() {
     final cweText = _cwe.text.trim();
@@ -107,7 +121,7 @@ class _FindingWizardState extends State<FindingWizard> {
     final spec = FindingSpec(
       heading: _heading.text.trim(),
       scopeObject: _scope.text.trim(),
-      cvssVector: _vector,
+      cvssVector: _baseVector,
       cweId: cweId,
       cweName: cweName,
       cveIds: cveIds,
@@ -193,35 +207,29 @@ class _FindingWizardState extends State<FindingWizard> {
     ],
   );
 
-  Widget _stepCvss(AppLocalizations l10n) => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      for (final m in kCvss4BaseMetrics) _metricDropdown(m),
-      const SizedBox(height: 12),
-      Text(
-        l10n.d('CIA-rating (scope-object)'),
-        style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
-      ),
-      const SizedBox(height: 4),
-      _ciaDropdown(
-        l10n.d('Vertrouwelijkheid'),
-        _cia.confidentiality,
-        (v) => setState(() => _cia = _cia.copyWith(confidentiality: v)),
-      ),
-      _ciaDropdown(
-        l10n.d('Integriteit'),
-        _cia.integrity,
-        (v) => setState(() => _cia = _cia.copyWith(integrity: v)),
-      ),
-      _ciaDropdown(
-        l10n.d('Beschikbaarheid'),
-        _cia.availability,
-        (v) => setState(() => _cia = _cia.copyWith(availability: v)),
-      ),
-      const SizedBox(height: 12),
-      _readout(l10n),
-    ],
-  );
+  Widget _stepCvss(AppLocalizations l10n) {
+    final cia = _scopeCia;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (cia.isDefined)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8),
+            child: Text(
+              l10n.d(
+                'De contextscore is gewogen met de CIA-rating van het gekozen scope-object.',
+              ),
+              style: TextStyle(fontSize: 11, color: AppTheme.slate500),
+            ),
+          ),
+        CvssBuilder(
+          initialVector: _baseVector,
+          cia: cia,
+          onVectorChanged: (v) => _baseVector = v,
+        ),
+      ],
+    );
+  }
 
   Widget _stepCweCve(AppLocalizations l10n) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -291,98 +299,4 @@ class _FindingWizardState extends State<FindingWizard> {
       ),
     ),
   );
-
-  Widget _metricDropdown(Cvss4BaseMetric m) => Padding(
-    padding: const EdgeInsets.only(bottom: 4),
-    child: Row(
-      children: [
-        Expanded(
-          flex: 5,
-          child: Text(m.label, style: const TextStyle(fontSize: 12)),
-        ),
-        Expanded(
-          flex: 4,
-          child: DropdownButton<String>(
-            isExpanded: true,
-            value: _base[m.code],
-            style: TextStyle(fontSize: 12, color: AppTheme.ink),
-            items: [
-              for (final o in m.options)
-                DropdownMenuItem(
-                  value: o.token,
-                  child: Text('${o.token} · ${o.label}'),
-                ),
-            ],
-            onChanged: (v) {
-              if (v != null) setState(() => _base[m.code] = v);
-            },
-          ),
-        ),
-      ],
-    ),
-  );
-
-  Widget _ciaDropdown(
-    String label,
-    CiaLevel value,
-    ValueChanged<CiaLevel> onChanged,
-  ) => Row(
-    children: [
-      Expanded(
-        flex: 5,
-        child: Text(label, style: const TextStyle(fontSize: 12)),
-      ),
-      Expanded(
-        flex: 4,
-        child: DropdownButton<CiaLevel>(
-          isExpanded: true,
-          value: value,
-          style: TextStyle(fontSize: 12, color: AppTheme.ink),
-          items: [
-            for (final l in CiaLevel.values)
-              DropdownMenuItem(
-                value: l,
-                child: Text('${l.token} · ${l.label}'),
-              ),
-          ],
-          onChanged: (v) {
-            if (v != null) onChanged(v);
-          },
-        ),
-      ),
-    ],
-  );
-
-  /// Live score + severity chip for the assembled vector (empty when it does not
-  /// parse, which shouldn't happen for a builder-produced vector).
-  Widget _readout(AppLocalizations l10n) {
-    final cvss = Cvss4.tryParseVector(_vector);
-    if (cvss == null) return const SizedBox.shrink();
-    final color = FindingSeverityPalette.of(cvss.severity);
-    return Row(
-      children: [
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(4),
-          ),
-          child: Text(
-            '${cvss.score.toStringAsFixed(1)} · ${cvss.severity.label}',
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 12,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-        ),
-        const SizedBox(width: 10),
-        if (_cia.isDefined)
-          Text(
-            l10n.d('CIA-gewogen'),
-            style: TextStyle(fontSize: 11, color: AppTheme.slate500),
-          ),
-      ],
-    );
-  }
 }
