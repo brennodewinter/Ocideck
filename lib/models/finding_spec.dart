@@ -1,5 +1,39 @@
 import '../services/cvss/cvss4.dart';
 
+/// Whether — and with what outcome — a finding was **retested** (hertest,
+/// PENTEST_MIAUW §4.13). The [token] is the stable English word written to the
+/// finding's Markdown (language-independent, like the section anchors);
+/// [dutchLabel] is the Dutch source shown in the UI (localise with `l10n.d(...)`).
+enum RetestStatus {
+  notRetested('', 'Niet hertest'),
+  resolved('Resolved', 'Opgelost'),
+  notResolved('NotResolved', 'Nog aanwezig'),
+  partiallyResolved('PartiallyResolved', 'Deels opgelost');
+
+  const RetestStatus(this.token, this.dutchLabel);
+
+  final String token;
+  final String dutchLabel;
+
+  /// Whether a retest outcome is recorded (so it shows a badge and counts as
+  /// retested); [notRetested] is the "not yet retested" default.
+  bool get isRetested => this != notRetested;
+
+  /// Whether the finding was confirmed resolved after retest.
+  bool get isResolved => this == resolved;
+
+  /// Parse the on-disk token; anything unrecognised (incl. empty) is
+  /// [notRetested].
+  static RetestStatus fromToken(String value) {
+    final v = value.trim().toLowerCase();
+    if (v.isEmpty) return notRetested;
+    for (final s in values) {
+      if (s != notRetested && s.token.toLowerCase() == v) return s;
+    }
+    return notRetested;
+  }
+}
+
 /// The structured content of a `finding` slide's **header card**
 /// (PENTEST_MIAUW §3.1), parsed from and rendered to plain, human-readable
 /// Markdown. Storage stays Markdown-close (the philosophy of the caption /
@@ -29,6 +63,8 @@ class FindingSpec {
     this.confirmation = '',
     this.impact = '',
     this.recommendation = '',
+    this.retest = RetestStatus.notRetested,
+    this.retestNote = '',
   });
 
   /// The `# ` heading text, e.g. `F-03 · SQL injection in the login form`. The
@@ -58,6 +94,12 @@ class FindingSpec {
   final String confirmation;
   final String impact;
   final String recommendation;
+
+  /// Whether the finding was retested and the outcome (hertest, §4.13).
+  final RetestStatus retest;
+
+  /// Optional free-text note on the retest (e.g. date, patch reference).
+  final String retestNote;
 
   /// The parsed CVSS vector, or null when [cvssVector] is empty/invalid.
   Cvss4? get cvss =>
@@ -103,6 +145,8 @@ class FindingSpec {
     int? cweId;
     var cweName = '';
     final cveIds = <String>[];
+    var retest = RetestStatus.notRetested;
+    var retestNote = '';
     final sections = <String, StringBuffer>{};
     String? current; // the section title currently being accumulated
 
@@ -146,6 +190,13 @@ class FindingSpec {
             final id = match.group(0)!;
             if (!cveIds.contains(id)) cveIds.add(id);
           }
+        case 'retest':
+          // `<Token>` or `<Token> — <note>`.
+          final dash = value.indexOf('—');
+          final statusText = (dash >= 0 ? value.substring(0, dash) : value)
+              .trim();
+          retest = RetestStatus.fromToken(statusText);
+          if (dash >= 0) retestNote = value.substring(dash + 1).trim();
       }
     }
 
@@ -157,6 +208,8 @@ class FindingSpec {
       cweId: cweId,
       cweName: cweName,
       cveIds: cveIds,
+      retest: retest,
+      retestNote: retestNote,
       description: body(sectionDescription),
       confirmation: body(sectionConfirmation),
       impact: body(sectionImpact),
@@ -183,6 +236,12 @@ class FindingSpec {
     if (cveIds.isNotEmpty) {
       final links = cveIds.map((c) => '[$c](${cveUrl(c)})').join(', ');
       metaLines.add('**CVE:** $links');
+    }
+    if (retest.isRetested) {
+      final note = retestNote.trim();
+      metaLines.add(
+        '**Retest:** ${retest.token}${note.isEmpty ? '' : ' — $note'}',
+      );
     }
     if (metaLines.isNotEmpty) {
       for (final line in metaLines) {
@@ -230,6 +289,8 @@ class FindingSpec {
     String? confirmation,
     String? impact,
     String? recommendation,
+    RetestStatus? retest,
+    String? retestNote,
   }) {
     return FindingSpec(
       heading: heading ?? this.heading,
@@ -242,6 +303,8 @@ class FindingSpec {
       confirmation: confirmation ?? this.confirmation,
       impact: impact ?? this.impact,
       recommendation: recommendation ?? this.recommendation,
+      retest: retest ?? this.retest,
+      retestNote: retestNote ?? this.retestNote,
     );
   }
 }

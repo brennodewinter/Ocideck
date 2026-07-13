@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/cvss_builder.dart';
+import 'package:ocideck/models/finding_spec.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
@@ -81,6 +82,20 @@ void main() {
     // Base score is still shown (labelled), plus a CIA-weighted context score.
     expect(find.textContaining('Basis 9.3'), findsOneWidget);
     expect(find.textContaining('Context'), findsOneWidget);
+  });
+
+  testWidgets('a resolved-after-retest finding shows a retest badge', (
+    tester,
+  ) async {
+    final md = const FindingSpec(
+      heading: 'F-1 · Fixed thing',
+      retest: RetestStatus.resolved,
+    ).toMarkdown();
+    await tester.pumpWidget(_host(_finding(md)));
+    await tester.pump();
+
+    expect(tester.takeException(), isNull);
+    expect(find.textContaining('Opgelost na hertest'), findsOneWidget);
   });
 
   testWidgets('a finding with no CVSS renders without a badge or a crash', (

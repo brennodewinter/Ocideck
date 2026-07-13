@@ -1813,6 +1813,14 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Hertest': 'Reteste',
+  'Niet hertest': 'Não retestado',
+  'Opgelost': 'Resolvido',
+  'Nog aanwezig': 'Ainda presente',
+  'Deels opgelost': 'Parcialmente resolvido',
+  'na hertest': 'após reteste',
+  'Opgelost na hertest': 'Resolvido após reteste',
+  'Hertest-notitie': 'Nota de reteste',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'Sem um ID de constatação, é criado um automaticamente na primeira evidência.',
   'Niet gedefinieerd': 'Não definido',

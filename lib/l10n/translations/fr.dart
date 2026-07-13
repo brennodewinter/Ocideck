@@ -740,6 +740,14 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Hertest': 'Nouveau test',
+  'Niet hertest': 'Non retesté',
+  'Opgelost': 'Résolu',
+  'Nog aanwezig': 'Toujours présent',
+  'Deels opgelost': 'Partiellement résolu',
+  'na hertest': 'après le nouveau test',
+  'Opgelost na hertest': 'Résolu après le nouveau test',
+  'Hertest-notitie': 'Note du nouveau test',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'Sans identifiant de constatation, un est créé automatiquement au premier élément de preuve.',
   'Niet gedefinieerd': 'Non défini',

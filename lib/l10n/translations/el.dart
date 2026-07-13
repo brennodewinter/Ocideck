@@ -1811,6 +1811,14 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Hertest': 'Επανέλεγχος',
+  'Niet hertest': 'Δεν επανελέγχθηκε',
+  'Opgelost': 'Επιλύθηκε',
+  'Nog aanwezig': 'Ακόμα παρόν',
+  'Deels opgelost': 'Εν μέρει επιλύθηκε',
+  'na hertest': 'μετά τον επανέλεγχο',
+  'Opgelost na hertest': 'Επιλύθηκε μετά τον επανέλεγχο',
+  'Hertest-notitie': 'Σημείωση επανελέγχου',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'Χωρίς αναγνωριστικό ευρήματος, δημιουργείται αυτόματα ένα με το πρώτο τεκμήριο.',
   'Niet gedefinieerd': 'Μη ορισμένο',

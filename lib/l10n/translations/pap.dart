@@ -740,6 +740,14 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Hertest': 'Test di nobo',
+  'Niet hertest': 'No testá di nobo',
+  'Opgelost': 'Resolvé',
+  'Nog aanwezig': 'Ainda presente',
+  'Deels opgelost': 'Parcialmente resolvé',
+  'na hertest': 'despues di test di nobo',
+  'Opgelost na hertest': 'Resolvé despues di test di nobo',
+  'Hertest-notitie': 'Nota di test di nobo',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'Sin un ID di finding, ta krea unu outomátikamente ku e promé prueba.',
   'Niet gedefinieerd': 'No definí',

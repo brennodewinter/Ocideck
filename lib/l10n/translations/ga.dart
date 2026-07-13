@@ -1819,6 +1819,14 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Hertest': 'Athtástáil',
+  'Niet hertest': 'Gan athtástáil',
+  'Opgelost': 'Réitithe',
+  'Nog aanwezig': 'Fós i láthair',
+  'Deels opgelost': 'Réitithe go páirteach',
+  'na hertest': 'tar éis athtástála',
+  'Opgelost na hertest': 'Réitithe tar éis athtástála',
+  'Hertest-notitie': 'Nóta athtástála',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'Gan aitheantas torthaí, cruthaítear ceann go huathoibríoch ag an gcéad fhianaise.',
   'Niet gedefinieerd': 'Gan sainiú',

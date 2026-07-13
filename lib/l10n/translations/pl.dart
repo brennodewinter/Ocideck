@@ -1796,6 +1796,14 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Hertest': 'Ponowny test',
+  'Niet hertest': 'Nie przetestowano ponownie',
+  'Opgelost': 'Rozwiązano',
+  'Nog aanwezig': 'Nadal obecny',
+  'Deels opgelost': 'Częściowo rozwiązane',
+  'na hertest': 'po ponownym teście',
+  'Opgelost na hertest': 'Rozwiązane po ponownym teście',
+  'Hertest-notitie': 'Notatka z ponownego testu',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'Bez identyfikatora ustalenia zostanie on utworzony automatycznie przy pierwszym dowodzie.',
   'Niet gedefinieerd': 'Niezdefiniowane',

@@ -1791,6 +1791,14 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Hertest': 'Pakartotinis testas',
+  'Niet hertest': 'Nepatikrinta pakartotinai',
+  'Opgelost': 'Išspręsta',
+  'Nog aanwezig': 'Vis dar yra',
+  'Deels opgelost': 'Iš dalies išspręsta',
+  'na hertest': 'po pakartotinio testo',
+  'Opgelost na hertest': 'Išspręsta po pakartotinio testo',
+  'Hertest-notitie': 'Pakartotinio testo pastaba',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'Be radinio ID jis sukuriamas automatiškai su pirmuoju įrodymu.',
   'Niet gedefinieerd': 'Neapibrėžta',

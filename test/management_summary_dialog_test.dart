@@ -17,6 +17,7 @@ void main() {
       standards: const ['WSTG', 'PTES'],
       scopeObjectCount: 3,
       scopeTestedCount: 2,
+      resolvedCount: 1,
     );
     await tester.pumpWidget(
       MaterialApp(
@@ -37,5 +38,9 @@ void main() {
     expect(find.textContaining('2'), findsWidgets); // total findings = 2
     expect(find.textContaining('2 / 3'), findsOneWidget); // scope coverage
     expect(find.textContaining('WSTG, PTES'), findsOneWidget); // standards
+    expect(
+      find.textContaining('Opgelost na hertest: 1'),
+      findsOneWidget,
+    ); // retest
   });
 }

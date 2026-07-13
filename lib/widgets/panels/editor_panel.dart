@@ -119,6 +119,9 @@ class EditorPanel extends ConsumerWidget {
                   deckFindingSeverities: slide.type == SlideType.findingsSummary
                       ? deckFindingSeverities(deck.slides)
                       : const <Cvss4Severity>[],
+                  deckResolvedCount: slide.type == SlideType.findingsSummary
+                      ? deckRetestResolvedCount(deck.slides)
+                      : 0,
                   nestedInScrollView: true,
                   onSplitVideo: (atMs) {
                     deckNotifier.splitVideoSlide(idx, atMs);
@@ -314,6 +317,7 @@ class EditorPanel extends ConsumerWidget {
     bool nestedInScrollView = false,
     void Function(int atMs)? onSplitVideo,
     List<Cvss4Severity> deckFindingSeverities = const [],
+    int deckResolvedCount = 0,
   }) {
     return slideEditorBuilders[slide.type]!(
       SlideEditorContext(
@@ -328,6 +332,7 @@ class EditorPanel extends ConsumerWidget {
         nestedInScrollView: nestedInScrollView,
         onSplitVideo: onSplitVideo,
         deckFindingSeverities: deckFindingSeverities,
+        deckResolvedCount: deckResolvedCount,
       ),
     );
   }

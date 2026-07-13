@@ -1802,6 +1802,14 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Hertest': 'Retestare',
+  'Niet hertest': 'Neretestat',
+  'Opgelost': 'Rezolvat',
+  'Nog aanwezig': 'Încă prezent',
+  'Deels opgelost': 'Parțial rezolvat',
+  'na hertest': 'după retestare',
+  'Opgelost na hertest': 'Rezolvat după retestare',
+  'Hertest-notitie': 'Notă de retestare',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'Fără un ID de constatare, unul este creat automat la prima dovadă.',
   'Niet gedefinieerd': 'Nedefinit',

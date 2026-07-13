@@ -1790,6 +1790,14 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Hertest': 'Ponovni test',
+  'Niet hertest': 'Nije ponovno testirano',
+  'Opgelost': 'Riješeno',
+  'Nog aanwezig': 'Još prisutno',
+  'Deels opgelost': 'Djelomično riješeno',
+  'na hertest': 'nakon ponovnog testa',
+  'Opgelost na hertest': 'Riješeno nakon ponovnog testa',
+  'Hertest-notitie': 'Bilješka o ponovnom testu',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'Bez ID-a nalaza stvara se automatski pri prvom dokazu.',
   'Niet gedefinieerd': 'Nije definirano',

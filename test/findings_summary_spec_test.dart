@@ -43,10 +43,11 @@ void main() {
       ]);
       final rows = spec.toTableRows();
       expect(rows.first, FindingsSummarySpec.header);
-      // Header + one row per band, worst first, with the stable English token.
-      expect(rows.length, 1 + FindingsSummarySpec.order.length);
+      // Header + one row per band + the retest-resolved row.
+      expect(rows.length, 2 + FindingsSummarySpec.order.length);
       expect(rows[1], ['Critical', '1']);
       expect(rows[3], ['Medium', '2']);
+      expect(rows.last, ['Resolved', '0']);
 
       final back = FindingsSummarySpec.fromSlide('Overzicht', rows);
       expect(back.title, 'Overzicht');
@@ -109,6 +110,37 @@ void main() {
       );
       // Base 9.3 (Critical) is weighted down to 8.9 (High) by the low CIA rating.
       expect(deckFindingSeverities([scope, finding]), [Cvss4Severity.high]);
+    });
+  });
+
+  group('retest resolved', () {
+    test('resolved round-trips through the snapshot table', () {
+      final spec = FindingsSummarySpec.fromSeverities('', const [
+        Cvss4Severity.critical,
+      ], resolved: 3);
+      final back = FindingsSummarySpec.fromSlide('', spec.toTableRows());
+      expect(back.resolved, 3);
+      expect(back.total, 1);
+    });
+
+    test('deckRetestResolvedCount counts only resolved finding headers', () {
+      Slide fnd(RetestStatus r, {FindingRole role = FindingRole.header}) =>
+          Slide.create(SlideType.finding).copyWith(
+            customMarkdown: FindingSpec(
+              cvssVector: _criticalVector,
+              retest: r,
+            ).toMarkdown(),
+            findingRole: role,
+          );
+      final slides = [
+        fnd(RetestStatus.resolved),
+        fnd(RetestStatus.resolved),
+        fnd(RetestStatus.notResolved),
+        fnd(RetestStatus.notRetested),
+        fnd(RetestStatus.resolved, role: FindingRole.detail), // skipped
+        Slide.create(SlideType.bullets),
+      ];
+      expect(deckRetestResolvedCount(slides), 2);
     });
   });
 

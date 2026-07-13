@@ -1806,6 +1806,14 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Hertest': 'Повторен тест',
+  'Niet hertest': 'Не е претестван',
+  'Opgelost': 'Отстранено',
+  'Nog aanwezig': 'Все още присъства',
+  'Deels opgelost': 'Частично отстранено',
+  'na hertest': 'след повторен тест',
+  'Opgelost na hertest': 'Отстранено след повторен тест',
+  'Hertest-notitie': 'Бележка за повторен тест',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'Без идентификатор на констатацията се създава автоматично при първото доказателство.',
   'Niet gedefinieerd': 'Не е дефинирано',

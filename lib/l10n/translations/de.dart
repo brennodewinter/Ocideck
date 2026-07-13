@@ -740,6 +740,14 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Hertest': 'Nachtest',
+  'Niet hertest': 'Nicht nachgetestet',
+  'Opgelost': 'Behoben',
+  'Nog aanwezig': 'Noch vorhanden',
+  'Deels opgelost': 'Teilweise behoben',
+  'na hertest': 'nach Nachtest',
+  'Opgelost na hertest': 'Nach Nachtest behoben',
+  'Hertest-notitie': 'Nachtest-Notiz',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'Ohne Feststellungs-ID wird beim ersten Nachweis automatisch eine erzeugt.',
   'Niet gedefinieerd': 'Nicht definiert',

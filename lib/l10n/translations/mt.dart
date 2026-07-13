@@ -1806,6 +1806,14 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Hertest': 'Test mill-ġdid',
+  'Niet hertest': 'Mhux ittestjat mill-ġdid',
+  'Opgelost': 'Solvut',
+  'Nog aanwezig': 'Għadu preżenti',
+  'Deels opgelost': 'Parzjalment solvut',
+  'na hertest': 'wara t-test mill-ġdid',
+  'Opgelost na hertest': 'Solvut wara t-test mill-ġdid',
+  'Hertest-notitie': 'Nota tat-test mill-ġdid',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'Mingħajr ID tas-sejba, jinħoloq wieħed awtomatikament mal-ewwel prova.',
   'Niet gedefinieerd': 'Mhux definit',

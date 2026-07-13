@@ -686,7 +686,10 @@ else.
   whole finding moves and round-trips as a unit. The header carries the scope
   object, the CVSS 4.0 vector (with a live, derived score and severity band), CWE
   and CVE references, and the description / reproduction / impact / recommendation
-  sections. Severity is always **derived** from the vector, never typed. The
+  sections. Severity is always **derived** from the vector, never typed. A
+  **Hertest (Retest)** dropdown records the retest outcome — *Opgelost* / *Nog
+  aanwezig* / *Deels opgelost* (with an optional note); a resolved finding shows a
+  green **Opgelost na hertest** badge on its card while keeping its severity. The
   finding editor also has an **Bewijs (Evidence)** section: **Screenshot
   toevoegen** and **Video toevoegen** attach a screenshot or a video as evidence.
   Each piece of evidence becomes its own slide right after the finding (part of
@@ -712,8 +715,9 @@ else.
   when the weighting is not known. A new matrix starts with one object; add,
   remove or reorder objects (move up/down) as you go.
 - **Findings summary** — a management overview: the number of findings per CVSS
-  severity band, rendered as a severity-coloured bar chart. **Vernieuw uit deck**
-  recomputes the counts from the deck's findings.
+  severity band, rendered as a severity-coloured bar chart, plus an always-shown
+  **Opgelost na hertest (Resolved after retest)** total. **Vernieuw uit deck**
+  recomputes both from the deck's findings.
 - **Sign-off** — the truthful-reporting page (MIAUW 1.6) with the deck-wide visual
   signature and certification, and **Afronden & verzegelen** to seal the report.
   The signature can be **typed** or **drawn**: click **Handtekening tekenen (Draw

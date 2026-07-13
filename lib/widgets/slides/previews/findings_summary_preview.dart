@@ -68,6 +68,18 @@ class _FindingsSummaryPreview extends StatelessWidget {
                       TextStyle(fontSize: w * 0.026, color: AppTheme.slate600),
                     ),
                   ),
+                  SizedBox(height: w * 0.008),
+                  // Retest is always named — also when nothing was resolved.
+                  Text(
+                    '${l10n.d('Opgelost na hertest')}: ${spec.resolved}',
+                    style: _applyFont(
+                      font,
+                      TextStyle(
+                        fontSize: w * 0.024,
+                        color: AppTheme.success700,
+                      ),
+                    ),
+                  ),
                   SizedBox(height: w * 0.03),
                   SizedBox(height: w * 0.42, child: _chart(spec)),
                   SizedBox(height: w * 0.03),

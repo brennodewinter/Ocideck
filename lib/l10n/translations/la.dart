@@ -1799,6 +1799,14 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Hertest': 'Retentatio',
+  'Niet hertest': 'Non retentatum',
+  'Opgelost': 'Solutum',
+  'Nog aanwezig': 'Adhuc praesens',
+  'Deels opgelost': 'Partim solutum',
+  'na hertest': 'post retentationem',
+  'Opgelost na hertest': 'Solutum post retentationem',
+  'Hertest-notitie': 'Nota retentationis',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'Sine indicio inventi, unum automatice creatur cum primo argumento.',
   'Niet gedefinieerd': 'Non definitum',

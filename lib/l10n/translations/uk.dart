@@ -1801,6 +1801,14 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Hertest': 'Повторний тест',
+  'Niet hertest': 'Не протестовано повторно',
+  'Opgelost': 'Вирішено',
+  'Nog aanwezig': 'Все ще присутня',
+  'Deels opgelost': 'Частково вирішено',
+  'na hertest': 'після повторного тесту',
+  'Opgelost na hertest': 'Вирішено після повторного тесту',
+  'Hertest-notitie': 'Нотатка повторного тесту',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'Без ідентифікатора виявлення його буде створено автоматично для першого доказу.',
   'Niet gedefinieerd': 'Не визначено',

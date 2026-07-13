@@ -1774,6 +1774,14 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Hertest': 'Kordustest',
+  'Niet hertest': 'Uuesti testimata',
+  'Opgelost': 'Lahendatud',
+  'Nog aanwezig': 'Endiselt olemas',
+  'Deels opgelost': 'Osaliselt lahendatud',
+  'na hertest': 'pärast kordustesti',
+  'Opgelost na hertest': 'Lahendatud pärast kordustesti',
+  'Hertest-notitie': 'Kordustesti märkus',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'Ilma leiu ID-ta luuakse see esimese tõendi juures automaatselt.',
   'Niet gedefinieerd': 'Määratlemata',

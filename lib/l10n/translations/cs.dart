@@ -1786,6 +1786,14 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Hertest': 'Opakovaný test',
+  'Niet hertest': 'Nepřetestováno',
+  'Opgelost': 'Vyřešeno',
+  'Nog aanwezig': 'Stále přítomné',
+  'Deels opgelost': 'Částečně vyřešeno',
+  'na hertest': 'po opakovaném testu',
+  'Opgelost na hertest': 'Vyřešeno po opakovaném testu',
+  'Hertest-notitie': 'Poznámka k opakovanému testu',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'Bez ID zjištění se při prvním důkazu vytvoří automaticky.',
   'Niet gedefinieerd': 'Nedefinováno',

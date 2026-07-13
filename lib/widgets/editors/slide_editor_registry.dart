@@ -51,6 +51,10 @@ class SlideEditorContext {
   /// empty for the other editors, which ignore it.
   final List<Cvss4Severity> deckFindingSeverities;
 
+  /// How many deck findings are resolved after retest, for the same
+  /// "refresh from deck" (see [deckRetestResolvedCount]); 0 for other editors.
+  final int deckResolvedCount;
+
   const SlideEditorContext({
     required this.slide,
     required this.onUpdate,
@@ -63,6 +67,7 @@ class SlideEditorContext {
     this.nestedInScrollView = false,
     this.onSplitVideo,
     this.deckFindingSeverities = const [],
+    this.deckResolvedCount = 0,
   });
 
   Key get _key => ValueKey(slide.id);
@@ -217,6 +222,7 @@ final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
         slide: c.slide,
         onUpdate: c.onUpdate,
         deckFindingSeverities: c.deckFindingSeverities,
+        deckResolvedCount: c.deckResolvedCount,
         nestedInScrollView: c.nestedInScrollView,
       ),
       SlideType.scopeMatrix: (c) => ScopeMatrixEditor(
