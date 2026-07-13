@@ -63,6 +63,10 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
   late final TextEditingController _confirmation;
   late final TextEditingController _impact;
   late final TextEditingController _recommendation;
+  late final TextEditingController _retestNote;
+
+  /// The finding's retest outcome (hertest); the dropdown drives it.
+  RetestStatus _retest = RetestStatus.notRetested;
 
   static final _reCweId = RegExp(r'\d+');
   static final _reCweStrip = RegExp(r'^\s*CWE[-\s]*\d+\s*');
@@ -89,6 +93,8 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
     _confirmation = newController(spec.confirmation, _onChanged);
     _impact = newController(spec.impact, _onChanged);
     _recommendation = newController(spec.recommendation, _onChanged);
+    _retest = spec.retest;
+    _retestNote = newController(spec.retestNote, _onChanged);
   }
 
   String _composeCwe(FindingSpec spec) {
@@ -128,6 +134,8 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
       confirmation: _confirmation.text,
       impact: _impact.text,
       recommendation: _recommendation.text,
+      retest: _retest,
+      retestNote: _retestNote.text.trim(),
     );
     widget.onUpdate(
       widget.slide.copyWith(
@@ -290,6 +298,13 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
           controller: _cve,
           hint: 'CVE-2024-1234, CVE-2024-5678',
         ),
+        _retestField(context),
+        if (_retest.isRetested)
+          EditorField(
+            label: 'Hertest-notitie',
+            controller: _retestNote,
+            hint: 'bijv. hertest 2026-07-20, patch toegepast',
+          ),
         EditorField(
           label: 'Beschrijving',
           controller: _description,
@@ -575,6 +590,39 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
       cia: scopeCia,
     );
     if (result != null && mounted) _cvss.text = result;
+  }
+
+  /// The retest (hertest) outcome dropdown: Niet hertest / Opgelost / Nog
+  /// aanwezig / Deels opgelost. A note field appears once an outcome is set.
+  Widget _retestField(BuildContext context) {
+    final l10n = context.l10n;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          l10n.d('Hertest'),
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+            color: AppTheme.slate500,
+          ),
+        ),
+        const SizedBox(height: 5),
+        DropdownButtonFormField<RetestStatus>(
+          initialValue: _retest,
+          isDense: true,
+          items: [
+            for (final s in RetestStatus.values)
+              DropdownMenuItem(value: s, child: Text(l10n.d(s.dutchLabel))),
+          ],
+          onChanged: (v) {
+            if (v == null) return;
+            setState(() => _retest = v);
+            _emit();
+          },
+        ),
+      ],
+    );
   }
 
   /// The derived score chips: nothing when the vector is empty; a muted hint
