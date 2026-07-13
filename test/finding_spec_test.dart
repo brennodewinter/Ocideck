@@ -144,6 +144,21 @@ void main() {
     });
   });
 
+  group('test link (feedback #8)', () {
+    test('round-trips the linked checklist test id', () {
+      const spec = FindingSpec(heading: 'F-1', testId: 'WSTG-ATHN-07');
+      final md = spec.toMarkdown();
+      expect(md, contains('**Test:** `WSTG-ATHN-07`'));
+      expect(FindingSpec.parse(md).testId, 'WSTG-ATHN-07');
+    });
+
+    test('an unlinked finding emits no Test line', () {
+      final md = const FindingSpec(heading: 'F-1').toMarkdown();
+      expect(md, isNot(contains('**Test:**')));
+      expect(FindingSpec.parse(md).testId, isEmpty);
+    });
+  });
+
   test('parse(toMarkdown(parse(x))) is a fixed point', () {
     final once = FindingSpec.parse(_example);
     final twice = FindingSpec.parse(once.toMarkdown());

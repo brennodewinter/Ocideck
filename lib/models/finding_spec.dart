@@ -65,6 +65,7 @@ class FindingSpec {
     this.recommendation = '',
     this.retest = RetestStatus.notRetested,
     this.retestNote = '',
+    this.testId = '',
   });
 
   /// The `# ` heading text, e.g. `F-03 · SQL injection in the login form`. The
@@ -100,6 +101,12 @@ class FindingSpec {
 
   /// Optional free-text note on the retest (e.g. date, patch reference).
   final String retestNote;
+
+  /// The checklist **test** this finding evidences (feedback #8), e.g.
+  /// `WSTG-ATHN-07`. Empty = not linked. Picked from the checklist(s) that cover
+  /// the finding's scope object; setting it marks the matching checklist row as
+  /// an anomaly linked to this finding. Rendered inside backticks; stored without.
+  final String testId;
 
   /// The parsed CVSS vector, or null when [cvssVector] is empty/invalid.
   Cvss4? get cvss =>
@@ -147,6 +154,7 @@ class FindingSpec {
     final cveIds = <String>[];
     var retest = RetestStatus.notRetested;
     var retestNote = '';
+    var testId = '';
     final sections = <String, StringBuffer>{};
     String? current; // the section title currently being accumulated
 
@@ -197,6 +205,8 @@ class FindingSpec {
               .trim();
           retest = RetestStatus.fromToken(statusText);
           if (dash >= 0) retestNote = value.substring(dash + 1).trim();
+        case 'test':
+          testId = _reBacktick.firstMatch(value)?.group(1) ?? value;
       }
     }
 
@@ -210,6 +220,7 @@ class FindingSpec {
       cveIds: cveIds,
       retest: retest,
       retestNote: retestNote,
+      testId: testId,
       description: body(sectionDescription),
       confirmation: body(sectionConfirmation),
       impact: body(sectionImpact),
@@ -237,6 +248,7 @@ class FindingSpec {
       final links = cveIds.map((c) => '[$c](${cveUrl(c)})').join(', ');
       metaLines.add('**CVE:** $links');
     }
+    if (testId.isNotEmpty) metaLines.add('**Test:** `$testId`');
     if (retest.isRetested) {
       final note = retestNote.trim();
       metaLines.add(
@@ -291,6 +303,7 @@ class FindingSpec {
     String? recommendation,
     RetestStatus? retest,
     String? retestNote,
+    String? testId,
   }) {
     return FindingSpec(
       heading: heading ?? this.heading,
@@ -305,6 +318,7 @@ class FindingSpec {
       recommendation: recommendation ?? this.recommendation,
       retest: retest ?? this.retest,
       retestNote: retestNote ?? this.retestNote,
+      testId: testId ?? this.testId,
     );
   }
 }
