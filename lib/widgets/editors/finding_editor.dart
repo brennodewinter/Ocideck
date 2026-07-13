@@ -4,16 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../models/cvss_builder.dart';
 import '../../models/finding_spec.dart';
 import '../../models/slide.dart';
 import '../../services/cvss/cvss4.dart';
 import '../../services/finding_ai_service.dart';
+import '../../services/finding_context_score.dart';
 import '../../services/image_service.dart';
 import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../theme/finding_severity_palette.dart';
 import '../../utils/project_path.dart';
+import '../dialogs/cvss_builder_dialog.dart';
 import '../dialogs/cwe_picker.dart';
 import '../dialogs/finding_template_picker.dart';
 import '_editor_field.dart';
@@ -216,6 +219,19 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
 
   @override
   Widget build(BuildContext context) {
+    // Scope objects (with their CIA ratings) come from the deck's scope matrix,
+    // so the scope-object field can pick from them and the CVSS read-out can show
+    // a context score for the linked object.
+    final deck = ref.watch(deckProvider.select((s) => s.deck));
+    final scopeRows = deckScopeRows(deck?.slides ?? const []);
+    final scopeObjects = {
+      for (final r in scopeRows)
+        if (r.object.trim().isNotEmpty) r.object,
+    }.toList();
+    final scopeCia = scopeObjectCia(
+      _scope.text.trim(),
+      scopeCiaIndexFromRows(scopeRows),
+    );
     return EditorFieldList(
       nestedInScrollView: widget.nestedInScrollView,
       children: [
@@ -248,18 +264,22 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
           controller: _findingId,
           hint: 'F-03',
         ),
-        EditorField(
-          label: 'Scope-object',
-          controller: _scope,
-          hint: 'https://app.voorbeeld/login',
-        ),
+        _scopeField(context, scopeObjects),
         EditorField(
           label: 'CVSS 4.0-vector',
           controller: _cvss,
           hint:
               'CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:L/SC:N/SI:N/SA:N',
         ),
-        _cvssReadout(context),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: OutlinedButton.icon(
+            onPressed: () => _openCvssWizard(scopeCia),
+            icon: const Icon(Icons.tune, size: 16),
+            label: Text(context.l10n.d('CVSS-wizard')),
+          ),
+        ),
+        _cvssReadout(context, scopeCia),
         EditorField(
           label: 'CWE',
           controller: _cwe,
@@ -478,10 +498,70 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
     );
   }
 
-  /// The derived score/severity chip. Nothing when the vector is empty; a muted
-  /// hint when it is present but unparseable; otherwise the score + FIRST band
-  /// in the band's colour.
-  Widget _cvssReadout(BuildContext context) {
+  /// A labelled scope-object field: a free-text input plus a dropdown that fills
+  /// it from the deck's scope-matrix objects, so the finding links to a scope
+  /// element (and inherits its CIA rating for the context score) without losing
+  /// the freedom to type an object that is not in the matrix.
+  Widget _scopeField(BuildContext context, List<String> scopeObjects) {
+    final l10n = context.l10n;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          l10n.d('Scope-object'),
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+            color: AppTheme.slate500,
+          ),
+        ),
+        const SizedBox(height: 5),
+        Row(
+          children: [
+            Expanded(
+              child: TextField(
+                controller: _scope,
+                minLines: 1,
+                maxLines: 1,
+                decoration: InputDecoration(
+                  hintText: l10n.d('https://app.voorbeeld/login'),
+                ),
+              ),
+            ),
+            if (scopeObjects.isNotEmpty)
+              PopupMenuButton<String>(
+                icon: Icon(Icons.arrow_drop_down, color: AppTheme.slate500),
+                tooltip: l10n.d('Kies uit de scope'),
+                onSelected: (v) => _scope.text = v,
+                itemBuilder: (_) => [
+                  for (final o in scopeObjects)
+                    PopupMenuItem(
+                      value: o,
+                      child: Text(o, style: const TextStyle(fontSize: 13)),
+                    ),
+                ],
+              ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  /// Open the guided CVSS builder seeded from the current vector and the linked
+  /// scope object's CIA rating; write the returned Base-only vector back.
+  Future<void> _openCvssWizard(CiaRating scopeCia) async {
+    final result = await CvssBuilderDialog.show(
+      context,
+      initialVector: _cvss.text.trim(),
+      cia: scopeCia,
+    );
+    if (result != null && mounted) _cvss.text = result;
+  }
+
+  /// The derived score chips: nothing when the vector is empty; a muted hint
+  /// when it is present but unparseable; otherwise the base score plus — when the
+  /// linked scope object carries a CIA rating — the CIA-weighted context score.
+  Widget _cvssReadout(BuildContext context, CiaRating scopeCia) {
     final l10n = context.l10n;
     final vector = _cvss.text.trim();
     if (vector.isEmpty) return const SizedBox.shrink();
@@ -498,25 +578,39 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
         ],
       );
     }
-    final color = FindingSeverityPalette.of(cvss.severity);
-    return Row(
+    final weighted = contextCvss(vector, scopeCia);
+    return Wrap(
+      spacing: 10,
+      runSpacing: 6,
+      crossAxisAlignment: WrapCrossAlignment.center,
       children: [
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(4),
+        _scoreBadge(l10n.d('Basis'), cvss),
+        if (weighted != null) _scoreBadge(l10n.d('Context'), weighted),
+        if (weighted != null)
+          Text(
+            l10n.d('CIA-gewogen'),
+            style: TextStyle(fontSize: 11, color: AppTheme.slate500),
           ),
-          child: Text(
-            '${cvss.score.toStringAsFixed(1)} · ${cvss.severity.label}',
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 12,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-        ),
       ],
+    );
+  }
+
+  Widget _scoreBadge(String label, Cvss4 cvss) {
+    final color = FindingSeverityPalette.of(cvss.severity);
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Text(
+        '$label ${cvss.score.toStringAsFixed(1)} · ${cvss.severity.label}',
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 12,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
     );
   }
 }
