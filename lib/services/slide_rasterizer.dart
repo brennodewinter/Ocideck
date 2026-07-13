@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import '../models/deck.dart';
+import '../models/document_signature.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
 import 'web_asset_store.dart';
@@ -14,6 +15,8 @@ import '../utils/bundled_asset.dart';
 import '../utils/image_limits.dart';
 import '../utils/project_path.dart';
 import 'slide_layout_metrics.dart';
+import '../widgets/document_signature_view.dart'
+    show decodeEmbeddedSignatureImage;
 import '../widgets/slides/slide_preview.dart';
 
 /// Renders the exact on-screen slide previews to PNG images so exports look
@@ -35,6 +38,8 @@ class SlideRasterizer {
     required ThemeProfile themeProfile,
     CockpitColorScheme cockpitColorScheme = CockpitColorScheme.standard,
     required String? projectPath,
+    DocumentSignature? signature,
+    String sealedAt = '',
     TlpLevel tlp = TlpLevel.none,
     bool showClassificationWatermark = false,
     String organization = '',
@@ -90,6 +95,8 @@ class SlideRasterizer {
           themeProfile: themeProfile,
           cockpitColorScheme: cockpitColorScheme,
           slideCount: slides.length,
+          signature: signature,
+          sealedAt: sealedAt,
           tlp: tlp,
           showClassificationWatermark: showClassificationWatermark,
           organization: organization,
@@ -110,6 +117,18 @@ class SlideRasterizer {
         onProgress: (done, total) => onStage?.call('precache', done, total),
       );
       if (!context.mounted) return results;
+
+      // The sign-off's drawn signature is a deck-level embedded image, not a
+      // slide path — precache it (as the same MemoryImage the preview uses, via
+      // the shared decoder's stable bytes) so it paints on the first captured
+      // frame instead of decoding a beat too late.
+      final sigBytes = signature == null
+          ? null
+          : decodeEmbeddedSignatureImage(signature.imagePath);
+      if (sigBytes != null) {
+        await precacheImage(MemoryImage(sigBytes), context, onError: (_, _) {});
+        if (!context.mounted) return results;
+      }
 
       for (var i = 0; i < slides.length; i++) {
         if (isCancelled?.call() ?? false) break;
@@ -231,6 +250,8 @@ class _RasterSlideHost extends StatefulWidget {
   final ThemeProfile themeProfile;
   final CockpitColorScheme cockpitColorScheme;
   final int slideCount;
+  final DocumentSignature? signature;
+  final String sealedAt;
   final TlpLevel tlp;
   final bool showClassificationWatermark;
   final String organization;
@@ -243,6 +264,8 @@ class _RasterSlideHost extends StatefulWidget {
     required this.themeProfile,
     required this.cockpitColorScheme,
     required this.slideCount,
+    required this.signature,
+    required this.sealedAt,
     required this.tlp,
     required this.showClassificationWatermark,
     required this.organization,
@@ -301,6 +324,8 @@ class _RasterSlideHostState extends State<_RasterSlideHost> {
           slideCount: widget.slideCount,
           numberStart: _numberStart,
           fitScaleOverride: _fitScaleOverride,
+          deckSignature: widget.signature,
+          sealedAt: widget.sealedAt,
           tlp: widget.tlp,
           showClassificationWatermark: widget.showClassificationWatermark,
           organization: widget.organization,

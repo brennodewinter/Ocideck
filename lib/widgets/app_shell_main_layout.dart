@@ -694,6 +694,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       projectPath: deck.projectPath,
       exportService: widget.exportService,
       tlp: deck.tlp,
+      signature: deck.signature,
+      sealedAt: deck.sealAt,
       enforcementPolicy: ClassificationEnforcementPolicy.fromAppSettings(
         ref.read(settingsProvider),
       ),

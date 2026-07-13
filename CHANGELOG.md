@@ -14,10 +14,14 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   trackpad, touch or stylus. The drawing is stored as a self-contained embedded
   PNG in the deck's visual signature (the existing `ocideck_sig_image` field), so
   it round-trips in the `.md` and is covered by the document seal like the rest
-  of the attestation. Wherever the sign-off is shown, a drawn signature takes
-  precedence over the typed name. Localised in all interface languages.
-  *(Note: the sign-off signature is not yet included in the PDF/PPTX export — a
-  pre-existing limitation that also affects the typed signature.)*
+  of the attestation. Wherever the sign-off is shown — the editor preview, the
+  presenter, and the **PDF/PPTX export** — a drawn signature takes precedence
+  over the typed name. Localised in all interface languages.
+- **The sign-off signature now appears in the PDF/PPTX export.** The rasterised
+  export previously dropped the deck's visual signature (both the typed name and
+  a drawn one), so a sealed report exported without its attestation signature.
+  The signature and seal date now travel into the export rasteriser, and the
+  drawn image is precached so it paints on the captured frame.
 - **Error messages are copyable.** Failure notifications (export, import,
   Nextcloud download/save, and the module card) now carry a **Kopiëren (Copy)**
   action that puts the exact message on the clipboard, and stay on screen a
