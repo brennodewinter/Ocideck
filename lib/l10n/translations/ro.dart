@@ -1802,6 +1802,14 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Basis': 'Bază',
+  'Context': 'Context',
+  'CVSS-wizard': 'Asistent CVSS',
+  'Kies uit de scope': 'Alege din domeniu',
+  'Bepaalt de contextscore van bevindingen op dit object; laat leeg als de weging niet bekend is.':
+      'Determină scorul de context al constatărilor pentru acest obiect; lăsați gol dacă ponderarea nu este cunoscută.',
+  'De contextscore is gewogen met de CIA-rating van het gekozen scope-object.':
+      'Scorul de context este ponderat cu evaluarea CIA a obiectului de domeniu ales.',
   'WSTG-testen laden': 'Încarcă testele WSTG',
   'testen': 'teste',
   'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':

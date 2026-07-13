@@ -1785,6 +1785,14 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Basis': 'Osnova',
+  'Context': 'Kontekst',
+  'CVSS-wizard': 'Čarovnik CVSS',
+  'Kies uit de scope': 'Izberi iz obsega',
+  'Bepaalt de contextscore van bevindingen op dit object; laat leeg als de weging niet bekend is.':
+      'Določa kontekstno oceno ugotovitev za ta predmet; pustite prazno, če utež ni znana.',
+  'De contextscore is gewogen met de CIA-rating van het gekozen scope-object.':
+      'Kontekstna ocena je utežena z oceno CIA izbranega predmeta obsega.',
   'WSTG-testen laden': 'Naloži teste WSTG',
   'testen': 'testov',
   'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':

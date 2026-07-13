@@ -1783,6 +1783,14 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Basis': 'Perus',
+  'Context': 'Konteksti',
+  'CVSS-wizard': 'CVSS-velho',
+  'Kies uit de scope': 'Valitse laajuudesta',
+  'Bepaalt de contextscore van bevindingen op dit object; laat leeg als de weging niet bekend is.':
+      'Määrittää tähän kohteeseen liittyvien löydösten kontekstipisteet; jätä tyhjäksi, jos painotusta ei tunneta.',
+  'De contextscore is gewogen met de CIA-rating van het gekozen scope-object.':
+      'Kontekstipisteet on painotettu valitun laajuuskohteen CIA-luokituksella.',
   'WSTG-testen laden': 'Lataa WSTG-testit',
   'testen': 'testiä',
   'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':

@@ -1786,6 +1786,14 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Basis': 'Základní',
+  'Context': 'Kontext',
+  'CVSS-wizard': 'Průvodce CVSS',
+  'Kies uit de scope': 'Vybrat z rozsahu',
+  'Bepaalt de contextscore van bevindingen op dit object; laat leeg als de weging niet bekend is.':
+      'Určuje kontextové skóre zjištění na tomto objektu; ponechte prázdné, pokud váha není známa.',
+  'De contextscore is gewogen met de CIA-rating van het gekozen scope-object.':
+      'Kontextové skóre je váženo hodnocením CIA vybraného objektu rozsahu.',
   'WSTG-testen laden': 'Načíst testy WSTG',
   'testen': 'testů',
   'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':

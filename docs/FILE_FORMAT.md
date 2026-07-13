@@ -611,17 +611,26 @@ The heading is the standard label; the table has a fixed five-column shape:
 | WSTG-SESS-01 | Testing for Session Management |  | — | |
 **Scope matrix** (`scope-matrix`) — the scope objects and the extent of testing,
 stored as a normal Markdown table (like `checklist`) so it round-trips
-losslessly. The heading is the title; the table has a fixed five-column shape:
+losslessly. The heading is the title; the table has a fixed eight-column shape:
 
 ```markdown
 <!-- _class: scope-matrix -->
 # Scope
-| Object | Type | Standard | Status | Note |
-| --- | --- | --- | --- | --- |
-| https://app.example | Web | WSTG | Tested | |
-| 10.0.0.0/24 | Infra | PTES | Anomaly | one host down |
-| firmware.bin | Firmware | FSTM |  | |
+| Object | Type | Standard | Status | Note | C | I | A |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| https://app.example | Web | WSTG | Tested | | H | M | L |
+| 10.0.0.0/24 | Infra | PTES | Anomaly | one host down | | | |
+| firmware.bin | Firmware | FSTM |  | | | | |
 ```
+
+The last three columns are the object's **CIA rating** — how important it is on
+Confidentiality (`C`), Integrity (`I`) and Availability (`A`) — each `H`/`M`/`L`
+or empty (not rated). They map to the CVSS 4.0 Environmental Security
+Requirements (`CR`/`IR`/`AR`) and give every finding on this object a **context
+(environmental) score** derived from its base vector — the weighting lives here,
+not in the finding. The `C`/`I`/`A` columns are **appended after `Note`**, so a
+matrix written by an older version (five columns, no rating) still parses: the
+missing cells simply read as "not rated".
 
 **Findings summary** (`findings-summary`) — a management overview of how many
 findings fall in each CVSS severity band, stored as a normal Markdown table (like

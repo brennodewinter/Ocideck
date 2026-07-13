@@ -1758,6 +1758,14 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Basis': 'mung',
+  'Context': 'Do',
+  'CVSS-wizard': 'CVSS pIn',
+  'Kies uit de scope': 'scope-vo\' wIv',
+  'Bepaalt de contextscore van bevindingen op dit object; laat leeg als de weging niet bekend is.':
+      'object-vam findings-Daq context-score wuqmoH; weight Sovbe\'chugh chImmoH.',
+  'De contextscore is gewogen met de CIA-rating van het gekozen scope-object.':
+      'wIvbogh scope-object CIA-rating-Daq context-score luqel.',
   'WSTG-testen laden': 'WSTG tests laD',
   'testen': 'tests',
   'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':

@@ -1796,6 +1796,14 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Basis': 'Podstawowy',
+  'Context': 'Kontekst',
+  'CVSS-wizard': 'Kreator CVSS',
+  'Kies uit de scope': 'Wybierz z zakresu',
+  'Bepaalt de contextscore van bevindingen op dit object; laat leeg als de weging niet bekend is.':
+      'Określa wynik kontekstowy ustaleń dla tego obiektu; pozostaw puste, jeśli waga jest nieznana.',
+  'De contextscore is gewogen met de CIA-rating van het gekozen scope-object.':
+      'Wynik kontekstowy jest ważony oceną CIA wybranego obiektu zakresu.',
   'WSTG-testen laden': 'Wczytaj testy WSTG',
   'testen': 'testów',
   'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':

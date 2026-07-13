@@ -1774,6 +1774,14 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Basis': 'Baas',
+  'Context': 'Kontekst',
+  'CVSS-wizard': 'CVSS-viisard',
+  'Kies uit de scope': 'Vali ulatusest',
+  'Bepaalt de contextscore van bevindingen op dit object; laat leeg als de weging niet bekend is.':
+      'Määrab selle objekti leidude kontekstiskoori; jäta tühjaks, kui kaal pole teada.',
+  'De contextscore is gewogen met de CIA-rating van het gekozen scope-object.':
+      'Kontekstiskoor on kaalutud valitud ulatusobjekti CIA hinnanguga.',
   'WSTG-testen laden': 'Laadi WSTG testid',
   'testen': 'testi',
   'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':

@@ -1813,6 +1813,14 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Basis': 'Base',
+  'Context': 'Contexto',
+  'CVSS-wizard': 'Assistente CVSS',
+  'Kies uit de scope': 'Escolher do âmbito',
+  'Bepaalt de contextscore van bevindingen op dit object; laat leeg als de weging niet bekend is.':
+      'Determina a pontuação de contexto das constatações neste objeto; deixe vazio se a ponderação for desconhecida.',
+  'De contextscore is gewogen met de CIA-rating van het gekozen scope-object.':
+      'A pontuação de contexto é ponderada com a classificação CIA do objeto de âmbito escolhido.',
   'WSTG-testen laden': 'Carregar testes WSTG',
   'testen': 'testes',
   'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':

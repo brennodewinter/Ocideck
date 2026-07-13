@@ -1806,6 +1806,14 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Basis': 'Bażi',
+  'Context': 'Kuntest',
+  'CVSS-wizard': 'Wizard CVSS',
+  'Kies uit de scope': 'Agħżel mill-ambitu',
+  'Bepaalt de contextscore van bevindingen op dit object; laat leeg als de weging niet bekend is.':
+      'Jiddetermina l-punteġġ tal-kuntest tas-sejbiet fuq dan l-oġġett; ħalli vojt jekk il-piż mhux magħruf.',
+  'De contextscore is gewogen met de CIA-rating van het gekozen scope-object.':
+      'Il-punteġġ tal-kuntest huwa peżat bil-klassifikazzjoni CIA tal-oġġett tal-ambitu magħżul.',
   'WSTG-testen laden': 'Għabbi t-testijiet WSTG',
   'testen': 'testijiet',
   'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':

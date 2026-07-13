@@ -737,6 +737,14 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Basis': 'Base',
+  'Context': 'Contexto',
+  'CVSS-wizard': 'Asistente CVSS',
+  'Kies uit de scope': 'Elegir del alcance',
+  'Bepaalt de contextscore van bevindingen op dit object; laat leeg als de weging niet bekend is.':
+      'Determina la puntuación de contexto de los hallazgos en este objeto; déjelo vacío si la ponderación no se conoce.',
+  'De contextscore is gewogen met de CIA-rating van het gekozen scope-object.':
+      'La puntuación de contexto se pondera con la clasificación CIA del objeto de alcance elegido.',
   'WSTG-testen laden': 'Cargar pruebas WSTG',
   'testen': 'pruebas',
   'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':

@@ -1791,6 +1791,14 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Basis': 'Bazinis',
+  'Context': 'Kontekstas',
+  'CVSS-wizard': 'CVSS vediklys',
+  'Kies uit de scope': 'Pasirinkti iš aprėpties',
+  'Bepaalt de contextscore van bevindingen op dit object; laat leeg als de weging niet bekend is.':
+      'Nustato šio objekto radinių konteksto įvertį; palikite tuščią, jei svoris nežinomas.',
+  'De contextscore is gewogen met de CIA-rating van het gekozen scope-object.':
+      'Konteksto įvertis pasvertas pagal pasirinkto aprėpties objekto CIA reitingą.',
   'WSTG-testen laden': 'Įkelti WSTG testus',
   'testen': 'testų',
   'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':

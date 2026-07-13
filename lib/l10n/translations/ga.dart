@@ -1819,6 +1819,14 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Basis': 'Bunúsach',
+  'Context': 'Comhthéacs',
+  'CVSS-wizard': 'Draoi CVSS',
+  'Kies uit de scope': 'Roghnaigh ón scóip',
+  'Bepaalt de contextscore van bevindingen op dit object; laat leeg als de weging niet bekend is.':
+      'Socraíonn sé scór comhthéacs na dtorthaí ar an oibiacht seo; fág folamh mura eol an t-ualú.',
+  'De contextscore is gewogen met de CIA-rating van het gekozen scope-object.':
+      'Tá scór an chomhthéacs ualaithe le rátáil CIA an oibiachta scóip roghnaithe.',
   'WSTG-testen laden': 'Luchtaigh tástálacha WSTG',
   'testen': 'tástáil',
   'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':

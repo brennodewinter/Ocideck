@@ -1787,6 +1787,14 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Basis': 'Basis',
+  'Context': 'Kontext',
+  'CVSS-wizard': 'CVSS-Assistänt',
+  'Kies uit de scope': 'Us em Scope uswähle',
+  'Bepaalt de contextscore van bevindingen op dit object; laat leeg als de weging niet bekend is.':
+      'Leit de Kontext-Score vo de Befind uf dem Objäkt ab; leer lah, wenn d Gwichtig unbekannt isch.',
+  'De contextscore is gewogen met de CIA-rating van het gekozen scope-object.':
+      'De Kontext-Score isch mit de CIA-Bewertig vom gwählte Scope-Objäkt gwichtet.',
   'WSTG-testen laden': 'WSTG-Teschts lade',
   'testen': 'Teschts',
   'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':

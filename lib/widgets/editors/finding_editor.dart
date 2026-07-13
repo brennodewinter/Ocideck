@@ -504,6 +504,9 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
   /// the freedom to type an object that is not in the matrix.
   Widget _scopeField(BuildContext context, List<String> scopeObjects) {
     final l10n = context.l10n;
+    // Via a variable (like EditorField) so the URL example is not scanned as a
+    // translatable literal — it stays identical across languages.
+    const hint = 'https://app.voorbeeld/login';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -523,9 +526,7 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
                 controller: _scope,
                 minLines: 1,
                 maxLines: 1,
-                decoration: InputDecoration(
-                  hintText: l10n.d('https://app.voorbeeld/login'),
-                ),
+                decoration: InputDecoration(hintText: l10n.d(hint)),
               ),
             ),
             if (scopeObjects.isNotEmpty)

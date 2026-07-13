@@ -1806,6 +1806,14 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Basis': 'Базов',
+  'Context': 'Контекст',
+  'CVSS-wizard': 'Помощник CVSS',
+  'Kies uit de scope': 'Изберете от обхвата',
+  'Bepaalt de contextscore van bevindingen op dit object; laat leeg als de weging niet bekend is.':
+      'Определя контекстния резултат на констатациите за този обект; оставете празно, ако тежестта не е известна.',
+  'De contextscore is gewogen met de CIA-rating van het gekozen scope-object.':
+      'Контекстният резултат е претеглен с CIA оценката на избрания обект от обхвата.',
   'WSTG-testen laden': 'Зареди WSTG тестове',
   'testen': 'теста',
   'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':

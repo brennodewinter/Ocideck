@@ -1790,6 +1790,14 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Basis': 'Základné',
+  'Context': 'Kontext',
+  'CVSS-wizard': 'Sprievodca CVSS',
+  'Kies uit de scope': 'Vybrať z rozsahu',
+  'Bepaalt de contextscore van bevindingen op dit object; laat leeg als de weging niet bekend is.':
+      'Určuje kontextové skóre zistení pre tento objekt; nechajte prázdne, ak váha nie je známa.',
+  'De contextscore is gewogen met de CIA-rating van het gekozen scope-object.':
+      'Kontextové skóre je vážené hodnotením CIA vybraného objektu rozsahu.',
   'WSTG-testen laden': 'Načítať testy WSTG',
   'testen': 'testov',
   'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':

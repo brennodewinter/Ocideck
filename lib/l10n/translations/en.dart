@@ -922,6 +922,14 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Basis': 'Base',
+  'Context': 'Context',
+  'CVSS-wizard': 'CVSS wizard',
+  'Kies uit de scope': 'Choose from the scope',
+  'Bepaalt de contextscore van bevindingen op dit object; laat leeg als de weging niet bekend is.':
+      'Sets the context score of findings on this object; leave empty if the weighting is unknown.',
+  'De contextscore is gewogen met de CIA-rating van het gekozen scope-object.':
+      'The context score is weighted with the CIA rating of the chosen scope object.',
   'WSTG-testen laden': 'Load WSTG tests',
   'testen': 'tests',
   'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':

@@ -40,6 +40,7 @@ void main() {
     AppLocalizations.setActiveLanguageCode('en');
 
     const unchangedInEnglish = {
+      'Context',
       'Accent / bullets',
       'Audio',
       'Bank',
@@ -103,6 +104,7 @@ void main() {
 
   test('all literal Dutch source strings are translated in every language', () {
     const unchangedInAllLanguages = {
+      'Context',
       'Accent / bullets',
       'Bullet',
       'Code',

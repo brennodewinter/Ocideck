@@ -736,6 +736,14 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Basis': 'Base',
+  'Context': 'Contesto',
+  'CVSS-wizard': 'Assistente CVSS',
+  'Kies uit de scope': 'Scegli dall\'ambito',
+  'Bepaalt de contextscore van bevindingen op dit object; laat leeg als de weging niet bekend is.':
+      'Determina il punteggio di contesto delle rilevazioni su questo oggetto; lascia vuoto se la ponderazione non è nota.',
+  'De contextscore is gewogen met de CIA-rating van het gekozen scope-object.':
+      'Il punteggio di contesto è ponderato con la valutazione CIA dell\'oggetto di ambito scelto.',
   'WSTG-testen laden': 'Carica i test WSTG',
   'testen': 'test',
   'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':

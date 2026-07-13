@@ -1783,6 +1783,14 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Basis': 'Dasar',
+  'Context': 'Konteks',
+  'CVSS-wizard': 'Wizard CVSS',
+  'Kies uit de scope': 'Pilih dari cakupan',
+  'Bepaalt de contextscore van bevindingen op dit object; laat leeg als de weging niet bekend is.':
+      'Menentukan skor konteks temuan pada objek ini; kosongkan jika pembobotan tidak diketahui.',
+  'De contextscore is gewogen met de CIA-rating van het gekozen scope-object.':
+      'Skor konteks ditimbang dengan peringkat CIA objek cakupan yang dipilih.',
   'WSTG-testen laden': 'Muat tes WSTG',
   'testen': 'tes',
   'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':

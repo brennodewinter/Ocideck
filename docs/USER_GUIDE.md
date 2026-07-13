@@ -703,7 +703,11 @@ else.
   you can re-load after editing without losing progress.
 - **Scope matrix** — the scope objects, each with a type (Web / Infra / IoT /
   Firmware / API / Mobile / Other) that automatically fixes its test standard
-  (Web→WSTG, Infra→PTES, …), a coverage status and a note.
+  (Web→WSTG, Infra→PTES, …), a coverage status, a note, and a **CIA rating**
+  (Confidentiality / Integrity / Availability, each `H`/`M`/`L` or left empty).
+  The rating captures how important the object is per dimension and drives the
+  **context score** of every finding on that object (see below); leave it empty
+  when the weighting is not known.
 - **Findings summary** — a management overview: the number of findings per CVSS
   severity band, rendered as a severity-coloured bar chart. **Vernieuw uit deck**
   recomputes the counts from the deck's findings.
@@ -720,11 +724,12 @@ else.
 Adding a **Bevinding** opens a step-by-step wizard instead of a blank slide:
 
 1. **Basis** — title, finding id, scope object.
-2. **CVSS 4.0** — a per-metric builder (a dropdown per metric) with a live score
-   and severity read-out, plus the scope object's **CIA rating** (Confidentiality
-   / Integrity / Availability). The CIA rating pre-fills the CVSS Environmental
-   requirements (`CR`/`IR`/`AR`), so the offered score is **CIA-weighted** by
-   default (you can still override any metric).
+2. **CVSS 4.0** — a per-metric builder (a dropdown per metric) with a live
+   **base** score and severity read-out. When the chosen scope object carries a
+   CIA rating in the scope matrix, a **context** (CIA-weighted) score is shown
+   next to the base score. Only the **base vector** is stored on the finding; the
+   context score is derived from the scope object's rating, so re-rating the
+   object re-scores every finding on it.
 3. **CWE & CVE** — a searchable **CWE picker** over a bundled offline catalog of
    the most pentest-relevant weaknesses. Picking one sets the CWE and, only when
    they are still empty, fills the description and recommendation with a short,
@@ -735,6 +740,15 @@ Adding a **Bevinding** opens a step-by-step wizard instead of a blank slide:
 
 On finish the wizard inserts the whole finding group in one step. The same CWE
 picker is also available from the finding editor's **Kies CWE…** button.
+
+The same guided builder is available when editing an existing finding: the
+finding editor's **CVSS-wizard** button opens the per-metric builder (seeded from
+the current vector and the linked scope object's CIA rating) and writes the base
+vector back. The **Scope-object** field there is a picker that lists the scope
+matrix's objects (free text still allowed), and the score read-out shows the base
+score plus the context score when the object is rated. The context score then
+flows everywhere — the finding card, the previews and the PDF/PPTX export, and the
+findings-summary and management-summary counts use the context severity band.
 
 ### AI drafting for finding text (optional)
 

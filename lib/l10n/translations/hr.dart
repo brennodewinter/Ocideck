@@ -1790,6 +1790,14 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Basis': 'Osnovni',
+  'Context': 'Kontekst',
+  'CVSS-wizard': 'CVSS čarobnjak',
+  'Kies uit de scope': 'Odaberi iz opsega',
+  'Bepaalt de contextscore van bevindingen op dit object; laat leeg als de weging niet bekend is.':
+      'Određuje kontekstni rezultat nalaza na ovom objektu; ostavite prazno ako ponder nije poznat.',
+  'De contextscore is gewogen met de CIA-rating van het gekozen scope-object.':
+      'Kontekstni rezultat ponderiran je CIA ocjenom odabranog objekta opsega.',
   'WSTG-testen laden': 'Učitaj WSTG testove',
   'testen': 'testova',
   'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':

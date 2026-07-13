@@ -741,6 +741,14 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Basis': 'Basis',
+  'Context': 'Kontekst',
+  'CVSS-wizard': 'CVSS-assistint',
+  'Kies uit de scope': 'Kies út de scope',
+  'Bepaalt de contextscore van bevindingen op dit object; laat leeg als de weging niet bekend is.':
+      'Bepaalt de kontekstskoare fan befinings op dit objekt; lit leech as de weging net bekend is.',
+  'De contextscore is gewogen met de CIA-rating van het gekozen scope-object.':
+      'De kontekstskoare is weage mei de CIA-wurdearring fan it keazen scope-objekt.',
   'WSTG-testen laden': 'WSTG-testen lade',
   'testen': 'testen',
   'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':
