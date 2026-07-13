@@ -1801,6 +1801,10 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'WSTG-testen laden': 'Завантажити тести WSTG',
+  'testen': 'тестів',
+  'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':
+      'Додає відсутні тести WSTG; наявні залишаються.',
   'Bewijs': 'Докази',
   'Screenshot toevoegen': 'Додати знімок екрана',
   'Video toevoegen': 'Додати відео',

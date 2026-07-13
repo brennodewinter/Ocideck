@@ -1785,6 +1785,10 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'WSTG-testen laden': 'Naloži teste WSTG',
+  'testen': 'testov',
+  'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':
+      'Doda manjkajoče teste WSTG; obstoječi ostanejo.',
   'Bewijs': 'Dokazi',
   'Screenshot toevoegen': 'Dodaj posnetek zaslona',
   'Video toevoegen': 'Dodaj videoposnetek',

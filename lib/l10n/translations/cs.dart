@@ -1786,6 +1786,10 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'WSTG-testen laden': 'Načíst testy WSTG',
+  'testen': 'testů',
+  'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':
+      'Přidá chybějící testy WSTG; stávající zůstanou.',
   'Bewijs': 'Důkazy',
   'Screenshot toevoegen': 'Přidat snímek obrazovky',
   'Video toevoegen': 'Přidat video',

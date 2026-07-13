@@ -1790,6 +1790,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'WSTG-testen laden': 'Učitaj WSTG testove',
+  'testen': 'testova',
+  'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':
+      'Dodaje nedostajuće WSTG testove; postojeći ostaju.',
   'Bewijs': 'Dokazi',
   'Screenshot toevoegen': 'Dodaj snimku zaslona',
   'Video toevoegen': 'Dodaj videozapis',

@@ -1783,6 +1783,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'WSTG-testen laden': 'Muat tes WSTG',
+  'testen': 'tes',
+  'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':
+      'Menambahkan tes WSTG yang belum ada; yang sudah ada tetap.',
   'Bewijs': 'Bukti',
   'Screenshot toevoegen': 'Tambah tangkapan layar',
   'Video toevoegen': 'Tambah video',

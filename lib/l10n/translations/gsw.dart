@@ -1787,6 +1787,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'WSTG-testen laden': 'WSTG-Teschts lade',
+  'testen': 'Teschts',
+  'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':
+      'Füegt di fählende WSTG-Teschts hinzue; vorhandeni bliibe.',
   'Bewijs': 'Beweis',
   'Screenshot toevoegen': 'Screenshot zuefüege',
   'Video toevoegen': 'Video zuefüege',

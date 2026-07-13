@@ -1806,6 +1806,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'WSTG-testen laden': 'Għabbi t-testijiet WSTG',
+  'testen': 'testijiet',
+  'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':
+      'Iżid it-testijiet WSTG nieqsa; dawk eżistenti jibqgħu.',
   'Bewijs': 'Evidenza',
   'Screenshot toevoegen': 'Żid screenshot',
   'Video toevoegen': 'Żid video',

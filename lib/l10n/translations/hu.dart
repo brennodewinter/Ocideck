@@ -1787,6 +1787,10 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'WSTG-testen laden': 'WSTG-tesztek betöltése',
+  'testen': 'teszt',
+  'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':
+      'Hozzáadja a hiányzó WSTG-teszteket; a meglévők megmaradnak.',
   'Bewijs': 'Bizonyítékok',
   'Screenshot toevoegen': 'Képernyőkép hozzáadása',
   'Video toevoegen': 'Videó hozzáadása',

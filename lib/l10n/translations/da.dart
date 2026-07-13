@@ -1782,6 +1782,10 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'WSTG-testen laden': 'Indlæs WSTG-tests',
+  'testen': 'tests',
+  'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':
+      'Tilføjer de manglende WSTG-tests; eksisterende bevares.',
   'Bewijs': 'Bevis',
   'Screenshot toevoegen': 'Tilføj skærmbillede',
   'Video toevoegen': 'Tilføj video',

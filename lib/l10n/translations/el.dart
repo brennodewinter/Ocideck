@@ -1811,6 +1811,10 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'WSTG-testen laden': 'Φόρτωση δοκιμών WSTG',
+  'testen': 'δοκιμές',
+  'Voegt ontbrekende WSTG-testen toe; bestaande blijven staan.':
+      'Προσθέτει τις δοκιμές WSTG που λείπουν· οι υπάρχουσες διατηρούνται.',
   'Bewijs': 'Αποδείξεις',
   'Screenshot toevoegen': 'Προσθήκη στιγμιότυπου',
   'Video toevoegen': 'Προσθήκη βίντεο',
