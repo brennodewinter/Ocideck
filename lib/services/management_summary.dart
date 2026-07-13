@@ -47,6 +47,7 @@ class ManagementSummary {
     required this.standards,
     required this.scopeObjectCount,
     required this.scopeTestedCount,
+    required this.resolvedCount,
   });
 
   /// Findings per CVSS severity band (with a derived total).
@@ -62,15 +63,20 @@ class ManagementSummary {
   /// "not tested".
   final int scopeTestedCount;
 
+  /// How many findings were resolved after retest (hertest).
+  final int resolvedCount;
+
   /// Total number of findings (derived from [severities]).
   int get findingCount => severities.total;
 }
 
 /// Derive the full management summary from [deck] (PENTEST_MIAUW §10.3).
 ManagementSummary deckManagementSummary(Deck deck) {
+  final resolved = deckRetestResolvedCount(deck.slides);
   final severities = FindingsSummarySpec.fromSeverities(
     '',
     deckFindingSeverities(deck.slides),
+    resolved: resolved,
   );
   var objects = 0;
   var tested = 0;
@@ -85,5 +91,6 @@ ManagementSummary deckManagementSummary(Deck deck) {
     standards: deckStandardsUsed(deck),
     scopeObjectCount: objects,
     scopeTestedCount: tested,
+    resolvedCount: resolved,
   );
 }

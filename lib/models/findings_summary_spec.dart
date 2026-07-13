@@ -18,13 +18,26 @@ import 'slide.dart';
 /// automated regeneration; the domain-consistency lint (§10.10) is what catches
 /// a snapshot that has drifted from the findings.
 class FindingsSummarySpec {
-  const FindingsSummarySpec({this.title = '', this.counts = const {}});
+  const FindingsSummarySpec({
+    this.title = '',
+    this.counts = const {},
+    this.resolved = 0,
+  });
 
   final String title;
 
   /// Findings per severity band. An absent band reads as zero; [order] fixes the
   /// worst-first display sequence.
   final Map<Cvss4Severity, int> counts;
+
+  /// How many findings were **resolved after retest** (hertest). A separate
+  /// figure from the bands: resolved findings still count as found, so this is
+  /// the "x opgelost na hertest" total shown next to the total.
+  final int resolved;
+
+  /// The on-disk row key for the retest-resolved total (a special row appended
+  /// after the severity bands; a table without it reads `resolved = 0`).
+  static const resolvedKey = 'Resolved';
 
   /// Fixed English column headers written as the table's first row.
   static const header = ['Severity', 'Count'];
@@ -47,13 +60,18 @@ class FindingsSummarySpec {
   /// Aggregate one [severities] entry per finding into per-band counts.
   factory FindingsSummarySpec.fromSeverities(
     String title,
-    Iterable<Cvss4Severity> severities,
-  ) {
+    Iterable<Cvss4Severity> severities, {
+    int resolved = 0,
+  }) {
     final counts = <Cvss4Severity, int>{};
     for (final band in severities) {
       counts[band] = (counts[band] ?? 0) + 1;
     }
-    return FindingsSummarySpec(title: title, counts: counts);
+    return FindingsSummarySpec(
+      title: title,
+      counts: counts,
+      resolved: resolved,
+    );
   }
 
   /// Parse the typed counts from [title] + [tableRows]. The first row is the
@@ -65,17 +83,26 @@ class FindingsSummarySpec {
     List<List<String>> tableRows,
   ) {
     final counts = <Cvss4Severity, int>{};
+    var resolved = 0;
     for (var i = 0; i < tableRows.length; i++) {
       final cells = tableRows[i];
       if (cells.isEmpty) continue;
       if (i == 0 && _looksLikeHeader(cells)) continue;
-      final band = _bandFromToken(cells.first);
-      if (band == null) continue;
       final n = int.tryParse((cells.length > 1 ? cells[1] : '').trim());
       if (n == null || n < 0) continue;
+      if (cells.first.trim().toLowerCase() == resolvedKey.toLowerCase()) {
+        resolved = n;
+        continue;
+      }
+      final band = _bandFromToken(cells.first);
+      if (band == null) continue;
       counts[band] = n;
     }
-    return FindingsSummarySpec(title: title, counts: counts);
+    return FindingsSummarySpec(
+      title: title,
+      counts: counts,
+      resolved: resolved,
+    );
   }
 
   static bool _looksLikeHeader(List<String> cells) =>
@@ -87,6 +114,7 @@ class FindingsSummarySpec {
   List<List<String>> toTableRows() => [
     header,
     for (final band in order) [band.label, '${countOf(band)}'],
+    [resolvedKey, '$resolved'],
   ];
 
   static Cvss4Severity? _bandFromToken(String token) {
@@ -104,9 +132,11 @@ class FindingsSummarySpec {
   FindingsSummarySpec copyWith({
     String? title,
     Map<Cvss4Severity, int>? counts,
+    int? resolved,
   }) => FindingsSummarySpec(
     title: title ?? this.title,
     counts: counts ?? this.counts,
+    resolved: resolved ?? this.resolved,
   );
 }
 
@@ -146,3 +176,13 @@ List<Cvss4Severity> deckFindingSeverities(Iterable<Slide> slides) {
             Cvss4Severity.none,
   ];
 }
+
+/// How many findings in [slides] were **resolved after retest** — each `finding`
+/// header whose retest outcome is [RetestStatus.resolved]. Feeds the "x opgelost
+/// na hertest" figure in the findings/management summary.
+int deckRetestResolvedCount(Iterable<Slide> slides) => [
+  for (final slide in slides)
+    if (slide.type == SlideType.finding &&
+        slide.findingRole == FindingRole.header)
+      FindingSpec.parse(slide.customMarkdown),
+].where((spec) => spec.retest.isResolved).length;

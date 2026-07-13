@@ -17,6 +17,7 @@ void main() {
       standards: const ['WSTG', 'PTES'],
       scopeObjectCount: 3,
       scopeTestedCount: 2,
+      resolvedCount: 0,
     );
     await tester.pumpWidget(
       MaterialApp(
