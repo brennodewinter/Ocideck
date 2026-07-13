@@ -109,6 +109,9 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     state = AppSettings(
       languageCode: prefs.getString('languageCode') ?? 'nl',
       libraries: _loadLibraries(prefs),
+      customChecklists: ChecklistTemplate.decodeList(
+        prefs.getString('customChecklists'),
+      ),
       exportDirectory: prefs.getString('exportDirectory'),
       themeProfiles: profiles.isEmpty ? ThemeProfile.builtIns : profiles,
       selectedThemeProfileName:
@@ -544,6 +547,43 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     await setLibraries([
       for (var i = 0; i < state.libraries.length; i++)
         if (i != index) state.libraries[i],
+    ]);
+  }
+
+  /// Schrijf de volledige lijst met eigen checklist-sjablonen weg (feedback #9),
+  /// als JSON onder één prefs-sleutel.
+  Future<void> setCustomChecklists(List<ChecklistTemplate> templates) async {
+    state = state.copyWith(customChecklists: templates);
+    await _persist('setCustomChecklists', (prefs) async {
+      await prefs.setString(
+        'customChecklists',
+        ChecklistTemplate.encodeList(templates),
+      );
+    });
+  }
+
+  /// Voeg een sjabloon toe (aan het einde).
+  Future<void> addCustomChecklist(ChecklistTemplate template) =>
+      setCustomChecklists([...state.customChecklists, template]);
+
+  /// Vervang het sjabloon op [index]. Buiten bereik: no-op.
+  Future<void> updateCustomChecklist(
+    int index,
+    ChecklistTemplate template,
+  ) async {
+    if (index < 0 || index >= state.customChecklists.length) return;
+    await setCustomChecklists([
+      for (var i = 0; i < state.customChecklists.length; i++)
+        if (i == index) template else state.customChecklists[i],
+    ]);
+  }
+
+  /// Verwijder het sjabloon op [index]. Buiten bereik: no-op.
+  Future<void> removeCustomChecklist(int index) async {
+    if (index < 0 || index >= state.customChecklists.length) return;
+    await setCustomChecklists([
+      for (var i = 0; i < state.customChecklists.length; i++)
+        if (i != index) state.customChecklists[i],
     ]);
   }
 

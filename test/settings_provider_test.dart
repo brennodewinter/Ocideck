@@ -564,4 +564,38 @@ void main() {
       expect(notifier.state.appAppearanceProfile.fontFamily, 'Lora');
     });
   });
+
+  group('customChecklists (feedback #9)', () {
+    test('starts empty and add/update/remove persist across a reload', () async {
+      SharedPreferences.setMockInitialValues({});
+      final notifier = SettingsNotifier();
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+      expect(notifier.state.customChecklists, isEmpty);
+
+      await notifier.addCustomChecklist(
+        const ChecklistTemplate(
+          name: 'Interne test',
+          standardLabel: 'PTES intern',
+          items: [ChecklistTemplateItem(id: 'NET-01', title: 'Poortscan')],
+        ),
+      );
+      expect(notifier.state.customChecklists, hasLength(1));
+
+      await notifier.updateCustomChecklist(
+        0,
+        notifier.state.customChecklists.first.copyWith(name: 'Hernoemd'),
+      );
+      expect(notifier.state.customChecklists.first.name, 'Hernoemd');
+
+      // A fresh notifier reads the persisted list back.
+      final reloaded = SettingsNotifier();
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+      expect(reloaded.state.customChecklists, hasLength(1));
+      expect(reloaded.state.customChecklists.first.name, 'Hernoemd');
+      expect(reloaded.state.customChecklists.first.items.single.id, 'NET-01');
+
+      await notifier.removeCustomChecklist(0);
+      expect(notifier.state.customChecklists, isEmpty);
+    });
+  });
 }

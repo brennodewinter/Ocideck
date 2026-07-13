@@ -1,10 +1,12 @@
 import 'ai_settings.dart';
 import 'chart.dart' show normalizeChartColor;
+import 'checklist_template.dart';
 import 'library_folder.dart';
 import 'recent_file.dart';
 import 'webdav_settings.dart';
 
 export 'ai_settings.dart';
+export 'checklist_template.dart';
 export 'library_folder.dart';
 export 'recent_file.dart';
 export 'webdav_settings.dart';
@@ -656,6 +658,12 @@ class AppSettings {
   /// afbeeldingenbibliotheek, brede scan).
   List<String> get libraryPaths => [for (final l in libraries) l.path];
 
+  /// De eigen checklist-sjablonen van de gebruiker (feedback #9): herbruikbare
+  /// testlijsten die per scope-object in een `checklist`-slide geladen kunnen
+  /// worden, naast de gebundelde WSTG-lijst. Opgeslagen als JSON onder één
+  /// prefs-sleutel (`customChecklists`).
+  final List<ChecklistTemplate> customChecklists;
+
   /// Folder where all exports (PDF/PPTX) are written. When null, exports land
   /// next to the source deck (legacy behaviour).
   final String? exportDirectory;
@@ -747,6 +755,7 @@ class AppSettings {
   const AppSettings({
     this.languageCode = 'nl',
     this.libraries = const [],
+    this.customChecklists = const [],
     this.exportDirectory,
     this.themeProfiles = ThemeProfile.builtIns,
     this.selectedThemeProfileName = 'LibreKAT',
@@ -822,6 +831,7 @@ class AppSettings {
   AppSettings copyWith({
     String? languageCode,
     List<LibraryFolder>? libraries,
+    List<ChecklistTemplate>? customChecklists,
     String? exportDirectory,
     ThemeProfile? themeProfile,
     List<ThemeProfile>? themeProfiles,
@@ -855,6 +865,7 @@ class AppSettings {
     return AppSettings(
       languageCode: languageCode ?? this.languageCode,
       libraries: libraries ?? this.libraries,
+      customChecklists: customChecklists ?? this.customChecklists,
       exportDirectory: clearExportDirectory
           ? null
           : (exportDirectory ?? this.exportDirectory),
