@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../models/checklist_spec.dart';
 import '../../models/cvss_builder.dart';
 import '../../models/finding_spec.dart';
 import '../../models/slide.dart';
@@ -11,6 +12,7 @@ import '../../services/cvss/cvss4.dart';
 import '../../services/finding_ai_service.dart';
 import '../../services/finding_context_score.dart';
 import '../../services/image_service.dart';
+import '../../services/scope_coverage.dart';
 import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../theme/app_theme.dart';
@@ -69,6 +71,10 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
   /// The finding's retest outcome (hertest); the dropdown drives it.
   RetestStatus _retest = RetestStatus.notRetested;
 
+  /// The checklist test id this finding evidences (feedback #8); the test picker
+  /// drives it and writes it back to the matching checklist row.
+  String _testId = '';
+
   static final _reCweId = RegExp(r'\d+');
   static final _reCweStrip = RegExp(r'^\s*CWE[-\s]*\d+\s*');
   static final _reCweSep = RegExp(r'^[—:·-]\s*');
@@ -96,6 +102,7 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
     _recommendation = newController(spec.recommendation, _onChanged);
     _retest = spec.retest;
     _retestNote = newController(spec.retestNote, _onChanged);
+    _testId = spec.testId;
   }
 
   String _composeCwe(FindingSpec spec) {
@@ -137,6 +144,7 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
       recommendation: _recommendation.text,
       retest: _retest,
       retestNote: _retestNote.text.trim(),
+      testId: _testId,
     );
     widget.onUpdate(
       widget.slide.copyWith(
@@ -254,6 +262,7 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
       _scope.text.trim(),
       scopeCiaIndexFromRows(scopeRows),
     );
+    final availableTests = _testsForScope(deck?.slides ?? const []);
     return EditorFieldList(
       nestedInScrollView: widget.nestedInScrollView,
       children: [
@@ -317,6 +326,7 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
           controller: _cve,
           hint: 'CVE-2024-1234, CVE-2024-5678',
         ),
+        _testField(context, availableTests),
         _retestField(context),
         if (_retest.isRetested)
           EditorField(
@@ -639,6 +649,101 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
             setState(() => _retest = v);
             _emit();
           },
+        ),
+      ],
+    );
+  }
+
+  /// The checklist tests that cover this finding's scope object, de-duplicated by
+  /// id — the options for the test picker and the write-back targets.
+  List<({String id, String test})> _testsForScope(Iterable<Slide> slides) {
+    final scopeKey = normalizeScopeObject(_scope.text.trim());
+    if (scopeKey.isEmpty) return const [];
+    final out = <({String id, String test})>[];
+    final seen = <String>{};
+    for (final s in slides) {
+      if (s.type != SlideType.checklist) continue;
+      if (normalizeScopeObject(s.checklistScope) != scopeKey) continue;
+      for (final r in ChecklistSpec.fromSlide(s.title, s.tableRows).rows) {
+        final id = r.id.trim();
+        if (id.isEmpty || !seen.add(id.toUpperCase())) continue;
+        out.add((id: id, test: r.test.trim()));
+      }
+    }
+    return out;
+  }
+
+  /// Set the linked test and actively write it back to the matching checklist
+  /// row (marking it an anomaly); an empty id unlinks.
+  void _pickTest(String testId) {
+    final fid = testId.isEmpty ? _findingId.text.trim() : _ensureFindingId();
+    setState(() => _testId = testId);
+    _emit();
+    if (fid.isNotEmpty) {
+      ref
+          .read(deckProvider.notifier)
+          .linkFindingToTest(
+            findingId: fid,
+            scopeObject: _scope.text.trim(),
+            testId: testId,
+          );
+    }
+  }
+
+  /// The test picker (feedback #8): choose which checklist test this finding
+  /// evidences. Options are the tests on the checklist(s) covering the scope
+  /// object; picking one marks that row as an anomaly linked to this finding.
+  Widget _testField(
+    BuildContext context,
+    List<({String id, String test})> tests,
+  ) {
+    final l10n = context.l10n;
+    final label = Text(
+      l10n.d('Gekoppelde test'),
+      style: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w600,
+        color: AppTheme.slate500,
+      ),
+    );
+    if (tests.isEmpty && _testId.isEmpty) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          label,
+          const SizedBox(height: 5),
+          Text(
+            l10n.d('Maak eerst een checklist voor dit scope-object.'),
+            style: TextStyle(fontSize: 12, color: AppTheme.slate400),
+          ),
+        ],
+      );
+    }
+    final currentOutsideList =
+        _testId.isNotEmpty &&
+        !tests.any((t) => t.id.toUpperCase() == _testId.toUpperCase());
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        label,
+        const SizedBox(height: 5),
+        DropdownButtonFormField<String>(
+          initialValue: _testId,
+          isDense: true,
+          items: [
+            DropdownMenuItem(value: '', child: Text(l10n.d('Geen'))),
+            for (final t in tests)
+              DropdownMenuItem(
+                value: t.id,
+                child: Text(
+                  t.test.isEmpty ? t.id : '${t.id} — ${t.test}',
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            if (currentOutsideList)
+              DropdownMenuItem(value: _testId, child: Text(_testId)),
+          ],
+          onChanged: (v) => _pickTest(v ?? ''),
         ),
       ],
     );
