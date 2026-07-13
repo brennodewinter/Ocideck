@@ -815,6 +815,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   behavioural change; see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ### Fixed
+- **A long finding no longer shrinks to unreadable text in the export.** A
+  `finding` slide with a lot of prose used to scale its whole card down to fit
+  one slide — the text got smaller *and* stopped using the full slide width. In
+  the **export** (PDF/PPTX and the self-contained HTML) an overflowing finding is
+  now **paginated**: it renders across several full-size slides (page 1 keeps the
+  severity/CWE header card and the sections that fit; each continuation page
+  repeats the heading with a small "(i/N)" marker and holds the next sections).
+  This is render-time only — the finding is still edited as one slide and the
+  `.md` on disk is unchanged. (The presenter and the in-editor preview follow in
+  a separate change.)
 - **Per-slide title colour lost in the self-contained HTML export.** A title slide
   whose title text colour was overridden (the "Titelkleur: Wit/Donker" choice, e.g.
   a dark title over a light background image) rendered with the theme's default

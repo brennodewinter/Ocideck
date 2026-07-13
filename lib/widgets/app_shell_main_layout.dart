@@ -683,12 +683,16 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       logWarning('export: async image-contrast pass failed', e);
     }
     if (!mounted) return;
+    // Render-time pagination: an overflowing finding is exported as several
+    // full-size slides instead of one shrunken one. The deck itself is
+    // unchanged — this only affects what the export enumerates.
+    final renderSlides = expandFindingsForRender(slides);
     await ExportDialog.show(
       context,
       // Op web heeft een deck geen bestandspad; de deck-titel bepaalt dan de
       // naam van het te downloaden bestand.
       deckPath: deckState.filePath ?? '${_safeRemoteName(deck.title)}.md',
-      slides: slides,
+      slides: renderSlides,
       themeProfile: deck.themeProfile,
       cockpitColorScheme: ref.read(settingsProvider).cockpitColorScheme,
       projectPath: deck.projectPath,
@@ -710,7 +714,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       markdown: ref
           .read(markdownServiceProvider)
           .generateDeck(
-            deck.copyWith(slides: slides),
+            deck.copyWith(slides: renderSlides),
             inlineChartData: true,
             forExport: true,
           ),
