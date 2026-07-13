@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:flutter/services.dart' show AssetBundle, rootBundle;
 
 import '../models/cwe_entry.dart';
+import '../utils/log.dart';
 
 /// The offline CWE catalog (PENTEST_MIAUW §6/§10.6). A **curated floor** of the
 /// most pentest-relevant MITRE CWE weaknesses (with richer description +
@@ -47,8 +48,9 @@ class CweCatalog {
         byId[floor.id] = floor; // the curated floor wins over the bulk asset
       }
       _merged = byId.values.toList()..sort((a, b) => a.id.compareTo(b.id));
-    } catch (_) {
+    } catch (e) {
       // Missing/corrupt asset: keep the always-on offline floor.
+      logError('CweCatalog.ensureLoaded', e);
     }
   }
 

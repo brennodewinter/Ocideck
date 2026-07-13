@@ -736,6 +736,23 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'CVE opzoeken': 'Cerca CVE',
+  'CVE opzoeken (online)': 'Cerca CVE (online)',
+  'CVE opzoeken is niet beschikbaar in de webversie.':
+      'La ricerca CVE non è disponibile nella versione web.',
+  'CVE-mirror (basis-URL)': 'Mirror CVE (URL di base)',
+  'Geen CVE gevonden.': 'Nessun CVE trovato.',
+  'Kon de CVE-bron niet bereiken.': 'Impossibile raggiungere la fonte CVE.',
+  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
+      'Consenti la ricerca online di CVE nell\'editor delle rilevazioni tramite un mirror NVD. Disattivato per impostazione predefinita; richiede anche il tuo consenso e funziona solo su desktop.',
+  'Typ een (deel van een) CVE-id en zoek.':
+      'Digita (una parte di) un id CVE e cerca.',
+  'Typ minstens 3 tekens.': 'Digita almeno 3 caratteri.',
+  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
+      'Attiva la ricerca CVE (online) in Impostazioni → Sicurezza per cercare CVE online.',
+  'Zoek CVE…': 'Cerca CVE…',
+  'Zoek op CVE-id, bijv. 2021-44228': 'Cerca per id CVE, ad es. 2021-44228',
+  'Zoeken': 'Cerca',
   'Hertest': 'Ritest',
   'Niet hertest': 'Non ritestato',
   'Opgelost': 'Risolto',

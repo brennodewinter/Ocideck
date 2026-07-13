@@ -1819,6 +1819,24 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'CVE opzoeken': 'Cuardaigh CVE',
+  'CVE opzoeken (online)': 'Cuardaigh CVE (ar líne)',
+  'CVE opzoeken is niet beschikbaar in de webversie.':
+      'Níl cuardach CVE ar fáil sa leagan gréasáin.',
+  'CVE-mirror (basis-URL)': 'Scáthán CVE (bun-URL)',
+  'Geen CVE gevonden.': 'Níor aimsíodh aon CVE.',
+  'Kon de CVE-bron niet bereiken.': 'Níorbh fhéidir teacht ar fhoinse CVE.',
+  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
+      'Ceadaigh cuardach CVE ar líne san eagarthóir torthaí trí scáthán NVD. Múchta de réir réamhshocraithe; teastaíonn do thoiliú freisin agus ní oibríonn sé ach ar an deasc.',
+  'Typ een (deel van een) CVE-id en zoek.':
+      'Clóscríobh (cuid de) aitheantas CVE agus cuardaigh.',
+  'Typ minstens 3 tekens.': 'Clóscríobh 3 charachtar ar a laghad.',
+  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
+      'Cuir cuardach CVE (ar líne) ar siúl i Socruithe → Slándáil chun CVEanna a chuardach ar líne.',
+  'Zoek CVE…': 'Cuardaigh CVE…',
+  'Zoek op CVE-id, bijv. 2021-44228':
+      'Cuardaigh de réir aitheantais CVE, m.sh. 2021-44228',
+  'Zoeken': 'Cuardaigh',
   'Hertest': 'Athtástáil',
   'Niet hertest': 'Gan athtástáil',
   'Opgelost': 'Réitithe',

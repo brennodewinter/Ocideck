@@ -1782,6 +1782,23 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'CVE opzoeken': 'Meklēt CVE',
+  'CVE opzoeken (online)': 'Meklēt CVE (tiešsaistē)',
+  'CVE opzoeken is niet beschikbaar in de webversie.':
+      'CVE meklēšana nav pieejama tīmekļa versijā.',
+  'CVE-mirror (basis-URL)': 'CVE spogulis (bāzes URL)',
+  'Geen CVE gevonden.': 'CVE nav atrasts.',
+  'Kon de CVE-bron niet bereiken.': 'Nevarēja sasniegt CVE avotu.',
+  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
+      'Atļaut meklēt CVE tiešsaistē atradumu redaktorā, izmantojot NVD spoguli. Pēc noklusējuma izslēgts; nepieciešama arī jūsu piekrišana un darbojas tikai datorā.',
+  'Typ een (deel van een) CVE-id en zoek.':
+      'Ievadiet (daļu no) CVE identifikatora un meklējiet.',
+  'Typ minstens 3 tekens.': 'Ievadiet vismaz 3 rakstzīmes.',
+  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
+      'Ieslēdziet CVE meklēšanu (tiešsaistē) sadaļā Iestatījumi → Drošība, lai meklētu CVE tiešsaistē.',
+  'Zoek CVE…': 'Meklēt CVE…',
+  'Zoek op CVE-id, bijv. 2021-44228': 'Meklēt pēc CVE id, piem. 2021-44228',
+  'Zoeken': 'Meklēt',
   'Hertest': 'Atkārtota pārbaude',
   'Niet hertest': 'Nav atkārtoti pārbaudīts',
   'Opgelost': 'Atrisināts',

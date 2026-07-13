@@ -262,6 +262,11 @@ off by default for your privacy — until you turn it on, an online slide shows 
 placeholder with the URL instead of loading anything, and on export an online
 source is written as a clickable link.
 
+The same Security tab has **CVE opzoeken (online)** for the finding editor's
+**Zoek CVE…** action — also off by default, and additionally gated on your
+consent. When on, you can set the **CVE mirror** base URL (default
+`https://cveapi.librekat.nl`). The lookup is SSRF-safe and desktop-only.
+
 **Watching a video in parts (cutting).** You can split a video so you watch it in
 pieces across slides. Play the video in the preview, then click **Knip hier**
 (Cut here): the part up to that point stays on this slide, and the remainder
@@ -737,11 +742,14 @@ Adding a **Bevinding** opens a step-by-step wizard instead of a blank slide:
    next to the base score. Only the **base vector** is stored on the finding; the
    context score is derived from the scope object's rating, so re-rating the
    object re-scores every finding on it.
-3. **CWE & CVE** — a searchable **CWE picker** over a bundled offline catalog of
-   the most pentest-relevant weaknesses. Picking one sets the CWE and, only when
-   they are still empty, fills the description and recommendation with a short,
-   neutral snippet — a good starting point written without an LLM. A CVE field
-   accepts one or more ids.
+3. **CWE & CVE** — a searchable **CWE picker** over the full, offline MITRE CWE
+   list (~940 weaknesses; the curated ones add a description/recommendation
+   snippet). Picking one sets the CWE and, only when they are still empty, fills
+   the description and recommendation — a good starting point written without an
+   LLM. The **Zoek CVE…** button looks a CVE up online by id pattern (e.g.
+   `2021-44228`) and appends the chosen id; it is off by default — enable **CVE
+   opzoeken (online)** under Settings → Security (see below). A CVE field also
+   accepts ids typed by hand.
 4. **Inhoud** — the four narrative sections, and a choice to add a detail and/or
    evidence placeholder.
 

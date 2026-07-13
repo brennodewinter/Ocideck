@@ -1783,6 +1783,24 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'CVE opzoeken': 'Cari CVE',
+  'CVE opzoeken (online)': 'Cari CVE (daring)',
+  'CVE opzoeken is niet beschikbaar in de webversie.':
+      'Pencarian CVE tidak tersedia di versi web.',
+  'CVE-mirror (basis-URL)': 'Cermin CVE (URL dasar)',
+  'Geen CVE gevonden.': 'Tidak ada CVE ditemukan.',
+  'Kon de CVE-bron niet bereiken.': 'Tidak dapat menjangkau sumber CVE.',
+  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
+      'Izinkan pencarian CVE secara daring di editor temuan melalui mirror NVD. Nonaktif secara bawaan; juga memerlukan persetujuan Anda dan hanya berfungsi di desktop.',
+  'Typ een (deel van een) CVE-id en zoek.':
+      'Ketik (sebagian) id CVE lalu cari.',
+  'Typ minstens 3 tekens.': 'Ketik minimal 3 karakter.',
+  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
+      'Aktifkan pencarian CVE (daring) di Pengaturan → Keamanan untuk mencari CVE secara daring.',
+  'Zoek CVE…': 'Cari CVE…',
+  'Zoek op CVE-id, bijv. 2021-44228':
+      'Cari berdasarkan id CVE, mis. 2021-44228',
+  'Zoeken': 'Cari',
   'Hertest': 'Uji ulang',
   'Niet hertest': 'Tidak diuji ulang',
   'Opgelost': 'Teratasi',

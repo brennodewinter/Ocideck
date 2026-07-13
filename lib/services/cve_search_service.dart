@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import '../models/cve_hit.dart';
+import '../utils/log.dart';
 import 'cve_transport.dart';
 import 'cve_transport_factory.dart';
 
@@ -81,8 +82,9 @@ class CveSearchService {
         final hits = await source.search(q);
         anySucceeded = true;
         if (hits.isNotEmpty) return CveSearchResult.ok(hits);
-      } catch (_) {
+      } catch (e) {
         // Try the next source in the cascade.
+        logError('CveSource.search', e);
       }
     }
     return anySucceeded

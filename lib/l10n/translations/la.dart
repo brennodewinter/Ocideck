@@ -1799,6 +1799,23 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'CVE opzoeken': 'CVE quaerere',
+  'CVE opzoeken (online)': 'CVE quaerere (interrete)',
+  'CVE opzoeken is niet beschikbaar in de webversie.':
+      'CVE quaerere in versione telae non praesto est.',
+  'CVE-mirror (basis-URL)': 'Speculum CVE (URL basis)',
+  'Geen CVE gevonden.': 'Nullum CVE inventum.',
+  'Kon de CVE-bron niet bereiken.': 'Fons CVE adiri non potuit.',
+  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
+      'Permitte CVE interrete quaerere in editore inventorum per speculum NVD. Praedefinite exstinctum; consensum tuum quoque requirit et solum in desktop operatur.',
+  'Typ een (deel van een) CVE-id en zoek.':
+      'Scribe (partem) identificationis CVE et quaere.',
+  'Typ minstens 3 tekens.': 'Scribe saltem 3 characteres.',
+  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
+      'Activa CVE quaerere (interrete) in Optionibus → Securitate ad CVE interrete quaerenda.',
+  'Zoek CVE…': 'CVE quaere…',
+  'Zoek op CVE-id, bijv. 2021-44228': 'Quaere per id CVE, e.g. 2021-44228',
+  'Zoeken': 'Quaerere',
   'Hertest': 'Retentatio',
   'Niet hertest': 'Non retentatum',
   'Opgelost': 'Solutum',

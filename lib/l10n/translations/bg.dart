@@ -1806,6 +1806,25 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'CVE opzoeken': 'Търсене на CVE',
+  'CVE opzoeken (online)': 'Търсене на CVE (онлайн)',
+  'CVE opzoeken is niet beschikbaar in de webversie.':
+      'Търсенето на CVE не е налично във уеб версията.',
+  'CVE-mirror (basis-URL)': 'CVE огледало (базов URL)',
+  'Geen CVE gevonden.': 'Не е намерен CVE.',
+  'Kon de CVE-bron niet bereiken.':
+      'Източникът на CVE не можа да бъде достигнат.',
+  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
+      'Разреши онлайн търсене на CVE в редактора на находки чрез огледало на NVD. Изключено по подразбиране; изисква също вашето съгласие и работи само на настолен компютър.',
+  'Typ een (deel van een) CVE-id en zoek.':
+      'Въведете (част от) CVE идентификатор и търсете.',
+  'Typ minstens 3 tekens.': 'Въведете поне 3 символа.',
+  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
+      'Включете търсенето на CVE (онлайн) в Настройки → Сигурност, за да търсите CVE онлайн.',
+  'Zoek CVE…': 'Търсене на CVE…',
+  'Zoek op CVE-id, bijv. 2021-44228':
+      'Търсене по CVE идентификатор, напр. 2021-44228',
+  'Zoeken': 'Търсене',
   'Hertest': 'Повторен тест',
   'Niet hertest': 'Не е претестван',
   'Opgelost': 'Отстранено',

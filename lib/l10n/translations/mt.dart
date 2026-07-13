@@ -1806,6 +1806,23 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'CVE opzoeken': 'Fittex CVE',
+  'CVE opzoeken (online)': 'Fittex CVE (onlajn)',
+  'CVE opzoeken is niet beschikbaar in de webversie.':
+      'It-tfittxija CVE mhix disponibbli fil-verżjoni tal-web.',
+  'CVE-mirror (basis-URL)': 'Mera CVE (URL bażi)',
+  'Geen CVE gevonden.': 'L-ebda CVE ma nstab.',
+  'Kon de CVE-bron niet bereiken.': 'Ma setax jintlaħaq is-sors CVE.',
+  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
+      'Ippermetti t-tfittxija ta\' CVE onlajn fl-editur tas-sejbiet permezz ta\' mera NVD. Mitfi b\'mod awtomatiku; jeħtieġ ukoll il-kunsens tiegħek u jaħdem biss fuq desktop.',
+  'Typ een (deel van een) CVE-id en zoek.':
+      'Ittajpja (parti minn) id CVE u fittex.',
+  'Typ minstens 3 tekens.': 'Ittajpja mill-inqas 3 karattri.',
+  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
+      'Ixgħel it-tfittxija CVE (onlajn) f\'Settings → Sigurtà biex tfittex CVE onlajn.',
+  'Zoek CVE…': 'Fittex CVE…',
+  'Zoek op CVE-id, bijv. 2021-44228': 'Fittex bl-id CVE, eż. 2021-44228',
+  'Zoeken': 'Fittex',
   'Hertest': 'Test mill-ġdid',
   'Niet hertest': 'Mhux ittestjat mill-ġdid',
   'Opgelost': 'Solvut',

@@ -1802,6 +1802,23 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'CVE opzoeken': 'Caută CVE',
+  'CVE opzoeken (online)': 'Caută CVE (online)',
+  'CVE opzoeken is niet beschikbaar in de webversie.':
+      'Căutarea CVE nu este disponibilă în versiunea web.',
+  'CVE-mirror (basis-URL)': 'Oglindă CVE (URL de bază)',
+  'Geen CVE gevonden.': 'Niciun CVE găsit.',
+  'Kon de CVE-bron niet bereiken.': 'Nu s-a putut accesa sursa CVE.',
+  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
+      'Permite căutarea CVE online în editorul de constatări printr-o oglindă NVD. Dezactivat implicit; necesită de asemenea consimțământul tău și funcționează doar pe desktop.',
+  'Typ een (deel van een) CVE-id en zoek.':
+      'Tastează (o parte dintr-)un id CVE și caută.',
+  'Typ minstens 3 tekens.': 'Tastează cel puțin 3 caractere.',
+  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
+      'Activează căutarea CVE (online) în Setări → Securitate pentru a căuta CVE online.',
+  'Zoek CVE…': 'Caută CVE…',
+  'Zoek op CVE-id, bijv. 2021-44228': 'Caută după id CVE, de ex. 2021-44228',
+  'Zoeken': 'Caută',
   'Hertest': 'Retestare',
   'Niet hertest': 'Neretestat',
   'Opgelost': 'Rezolvat',

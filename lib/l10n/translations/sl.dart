@@ -1785,6 +1785,23 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'CVE opzoeken': 'Poišči CVE',
+  'CVE opzoeken (online)': 'Poišči CVE (na spletu)',
+  'CVE opzoeken is niet beschikbaar in de webversie.':
+      'Iskanje CVE ni na voljo v spletni različici.',
+  'CVE-mirror (basis-URL)': 'Zrcalo CVE (osnovni URL)',
+  'Geen CVE gevonden.': 'Noben CVE ni bil najden.',
+  'Kon de CVE-bron niet bereiken.': 'Vira CVE ni bilo mogoče doseči.',
+  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
+      'Dovoli spletno iskanje CVE-jev v urejevalniku ugotovitev prek zrcala NVD. Privzeto izklopljeno; zahteva tudi vaše soglasje in deluje samo na namizju.',
+  'Typ een (deel van een) CVE-id en zoek.':
+      'Vnesite (del) CVE ID-ja in poiščite.',
+  'Typ minstens 3 tekens.': 'Vnesite vsaj 3 znake.',
+  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
+      'Vklopite iskanje CVE (na spletu) v Nastavitve → Varnost za spletno iskanje CVE-jev.',
+  'Zoek CVE…': 'Išči CVE…',
+  'Zoek op CVE-id, bijv. 2021-44228': 'Išči po CVE ID-ju, npr. 2021-44228',
+  'Zoeken': 'Išči',
   'Hertest': 'Ponovni test',
   'Niet hertest': 'Ni ponovno testirano',
   'Opgelost': 'Rešeno',

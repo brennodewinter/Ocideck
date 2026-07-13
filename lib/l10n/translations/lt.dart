@@ -1791,6 +1791,23 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'CVE opzoeken': 'Ieškoti CVE',
+  'CVE opzoeken (online)': 'Ieškoti CVE (internete)',
+  'CVE opzoeken is niet beschikbaar in de webversie.':
+      'CVE paieška negalima žiniatinklio versijoje.',
+  'CVE-mirror (basis-URL)': 'CVE veidrodis (bazinis URL)',
+  'Geen CVE gevonden.': 'CVE nerasta.',
+  'Kon de CVE-bron niet bereiken.': 'Nepavyko pasiekti CVE šaltinio.',
+  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
+      'Leisti ieškoti CVE internete radinių redaktoriuje per NVD veidrodį. Pagal numatytuosius nustatymus išjungta; taip pat reikalingas jūsų sutikimas ir veikia tik kompiuteryje.',
+  'Typ een (deel van een) CVE-id en zoek.':
+      'Įveskite (dalį) CVE identifikatoriaus ir ieškokite.',
+  'Typ minstens 3 tekens.': 'Įveskite bent 3 simbolius.',
+  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
+      'Įjunkite CVE paiešką (internete) skiltyje Nustatymai → Sauga, kad ieškotumėte CVE internete.',
+  'Zoek CVE…': 'Ieškoti CVE…',
+  'Zoek op CVE-id, bijv. 2021-44228': 'Ieškoti pagal CVE id, pvz. 2021-44228',
+  'Zoeken': 'Ieškoti',
   'Hertest': 'Pakartotinis testas',
   'Niet hertest': 'Nepatikrinta pakartotinai',
   'Opgelost': 'Išspręsta',

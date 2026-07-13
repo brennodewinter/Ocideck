@@ -1801,6 +1801,24 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'CVE opzoeken': 'Знайти CVE',
+  'CVE opzoeken (online)': 'Знайти CVE (онлайн)',
+  'CVE opzoeken is niet beschikbaar in de webversie.':
+      'Пошук CVE недоступний у веб-версії.',
+  'CVE-mirror (basis-URL)': 'Дзеркало CVE (базова URL-адреса)',
+  'Geen CVE gevonden.': 'CVE не знайдено.',
+  'Kon de CVE-bron niet bereiken.': 'Не вдалося зв\'язатися з джерелом CVE.',
+  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
+      'Дозволити онлайн-пошук CVE у редакторі знахідок через дзеркало NVD. За замовчуванням вимкнено; також потребує вашої згоди та працює лише на комп\'ютері.',
+  'Typ een (deel van een) CVE-id en zoek.':
+      'Введіть (частину) ідентифікатора CVE та шукайте.',
+  'Typ minstens 3 tekens.': 'Введіть щонайменше 3 символи.',
+  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
+      'Увімкніть пошук CVE (онлайн) у Налаштування → Безпека, щоб шукати CVE онлайн.',
+  'Zoek CVE…': 'Пошук CVE…',
+  'Zoek op CVE-id, bijv. 2021-44228':
+      'Шукати за ідентифікатором CVE, напр. 2021-44228',
+  'Zoeken': 'Пошук',
   'Hertest': 'Повторний тест',
   'Niet hertest': 'Не протестовано повторно',
   'Opgelost': 'Вирішено',

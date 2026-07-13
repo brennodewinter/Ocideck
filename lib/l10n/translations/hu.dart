@@ -1787,6 +1787,24 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'CVE opzoeken': 'CVE keresése',
+  'CVE opzoeken (online)': 'CVE keresése (online)',
+  'CVE opzoeken is niet beschikbaar in de webversie.':
+      'A CVE-keresés nem érhető el a webes verzióban.',
+  'CVE-mirror (basis-URL)': 'CVE-tükör (alap-URL)',
+  'Geen CVE gevonden.': 'Nem található CVE.',
+  'Kon de CVE-bron niet bereiken.': 'A CVE-forrás nem érhető el.',
+  'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.':
+      'Engedélyezd a CVE-k online keresését a megállapítás-szerkesztőben egy NVD-tükrön keresztül. Alapértelmezetten kikapcsolva; a hozzájárulásodat is igényli, és csak asztali gépen működik.',
+  'Typ een (deel van een) CVE-id en zoek.':
+      'Írj be egy CVE-azonosítót (vagy annak egy részét), és keress.',
+  'Typ minstens 3 tekens.': 'Írj be legalább 3 karaktert.',
+  'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
+      'Kapcsold be a CVE-keresést (online) a Beállítások → Biztonság menüben a CVE-k online kereséséhez.',
+  'Zoek CVE…': 'CVE keresése…',
+  'Zoek op CVE-id, bijv. 2021-44228':
+      'Keresés CVE-azonosító alapján, pl. 2021-44228',
+  'Zoeken': 'Keresés',
   'Hertest': 'Újratesztelés',
   'Niet hertest': 'Nincs újratesztelve',
   'Opgelost': 'Megoldva',
