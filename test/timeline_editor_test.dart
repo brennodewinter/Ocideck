@@ -67,6 +67,25 @@ void main() {
     expect(find.byIcon(Icons.place_outlined), findsNWidgets(4));
   });
 
+  testWidgets('"PTES-fasen laden" seeds the seven PTES phases', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(900, 2200));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    Slide? out;
+    // An empty timeline shows a lone blank starter row, which the loader replaces.
+    final empty = Slide.create(SlideType.timeline).copyWith(bullets: const []);
+    await tester.pumpWidget(_host(empty, (s) => out = s));
+    await tester.pump();
+
+    await tester.tap(find.text('PTES-fasen laden'));
+    await tester.pumpAndSettle();
+
+    final events = parseTimelineEvents(out!.bullets);
+    expect(events, hasLength(7));
+    expect(events.first.title, 'Voorafgaande afspraken');
+    expect(events.last.title, 'Rapportage');
+  });
+
   testWidgets('dragging the speed slider changes the draw-in duration', (
     tester,
   ) async {

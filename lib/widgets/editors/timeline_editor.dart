@@ -177,6 +177,26 @@ class _TimelineEditorState extends State<TimelineEditor> {
     _emit();
   }
 
+  /// Append the seven PTES project phases (matched by title, so re-loading is
+  /// safe), replacing a lone blank starter row and respecting the event cap.
+  void _loadPtes() {
+    final blankStarter = _rows.length == 1 && _rows.first.toEvent().isEmpty;
+    final present = {for (final r in _rows) r.title.text.trim().toLowerCase()}
+      ..remove('');
+    final base = blankStarter ? 0 : _rows.length;
+    final slots = timelineMaxEvents - base;
+    final additions = [
+      for (final e in ptesTimelinePhases)
+        if (!present.contains(e.title.toLowerCase())) e,
+    ].take(slots < 0 ? 0 : slots).toList();
+    if (additions.isEmpty) return;
+    setState(() {
+      if (blankStarter) _rows.removeAt(0).dispose();
+      _rows.addAll(additions.map(_makeRow));
+    });
+    _emit();
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
@@ -215,6 +235,20 @@ class _TimelineEditorState extends State<TimelineEditor> {
         if (_reveal == TimelineReveal.onEnter) _buildSpeedSlider(),
         const SizedBox(height: 16),
         SectionLabel(l10n.d('Gebeurtenissen')),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Tooltip(
+            message: l10n.d(
+              'Voegt de zeven PTES-fasen toe; bestaande gebeurtenissen blijven staan.',
+            ),
+            child: OutlinedButton.icon(
+              onPressed: _loadPtes,
+              icon: const Icon(Icons.playlist_add_check, size: 16),
+              label: Text(l10n.d('PTES-fasen laden')),
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
         ReorderableListView(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),

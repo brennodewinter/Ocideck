@@ -151,6 +151,48 @@ List<TimelineEvent> defaultTimelineEvents() => const [
   ),
 ];
 
+/// The seven project phases of the Penetration Testing Execution Standard
+/// (PTES), as ready-to-load timeline events. Markers are the phase numbers and
+/// the titles/descriptions are Dutch source text (freely editable after
+/// loading); they are content, not localised UI, like other seeded slide text.
+const List<TimelineEvent> ptesTimelinePhases = [
+  TimelineEvent(
+    marker: 'Fase 1',
+    title: 'Voorafgaande afspraken',
+    description: 'Scope, doelen, planning en spelregels vastleggen.',
+  ),
+  TimelineEvent(
+    marker: 'Fase 2',
+    title: 'Informatie verzamelen',
+    description: 'Open bronnen en verkenning van de doelomgeving.',
+  ),
+  TimelineEvent(
+    marker: 'Fase 3',
+    title: 'Dreigingsmodellering',
+    description: 'Relevante dreigingen en aanvalspaden in kaart brengen.',
+  ),
+  TimelineEvent(
+    marker: 'Fase 4',
+    title: 'Kwetsbaarheidsanalyse',
+    description: 'Kwetsbaarheden identificeren en valideren.',
+  ),
+  TimelineEvent(
+    marker: 'Fase 5',
+    title: 'Exploitatie',
+    description: 'Kwetsbaarheden actief benutten om toegang te verkrijgen.',
+  ),
+  TimelineEvent(
+    marker: 'Fase 6',
+    title: 'Post-exploitatie',
+    description: 'Impact, reikwijdte en persistentie bepalen.',
+  ),
+  TimelineEvent(
+    marker: 'Fase 7',
+    title: 'Rapportage',
+    description: 'Bevindingen, risico en aanbevelingen vastleggen.',
+  ),
+];
+
 /// The `_class` tokens that encode the layout/animation options (the base
 /// `timeline` token is emitted separately via the slide's marpClass).
 List<String> timelineClassTokens(
