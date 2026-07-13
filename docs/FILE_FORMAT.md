@@ -595,8 +595,10 @@ block. All structured fields are inline and re-parsed on load:
 …
 ## Recommendation
 …
-**Checklist** (`checklist`) — a standard-driven test list, stored as a normal
-Markdown table so it aligns with the `table` slide and round-trips losslessly.
+**Uitvoering testen conform standaard** (`checklist` — the UI label was renamed
+from "Checklist"; the class token is unchanged) — a standard-driven test list,
+stored as a normal Markdown table so it aligns with the `table` slide and
+round-trips losslessly.
 The heading is the standard label; the table has a fixed five-column shape:
 
 ```markdown

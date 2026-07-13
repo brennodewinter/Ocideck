@@ -1799,6 +1799,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Uitvoering testen conform standaard': 'Probationes secundum normam',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Discrimen colorum a fundo nimis exiguum — fortasse illegibile.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).

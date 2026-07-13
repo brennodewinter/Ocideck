@@ -162,7 +162,7 @@ const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
     category: SlideCategory.informatieveiligheid,
   ),
   SlideType.checklist: SlideTypeMeta(
-    label: 'Checklist',
+    label: 'Uitvoering testen conform standaard',
     marpClass: 'checklist',
     category: SlideCategory.informatieveiligheid,
   ),

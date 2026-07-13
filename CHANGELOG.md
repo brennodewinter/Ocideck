@@ -689,6 +689,11 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   the EUPL-1.2 licence text.
 
 ### Changed
+- **The "Checklist" security slide type is renamed to "Uitvoering testen conform
+  standaard".** The old name clashed with the bullets *Checklist* list style;
+  the new name says what the slide is (a per-standard test run, e.g. OWASP WSTG).
+  Only the UI label changed — the `checklist` file-format class is unchanged, so
+  existing reports round-trip untouched. Localised in all interface languages.
 - **The editor's slide-type selector now opens the same visual picker as "Slide
   toevoegen".** The **TYPE** control in the editor header used to be a plain
   pulldown that listed every slide type in one long, flat list — and, unlike the

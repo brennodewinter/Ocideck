@@ -740,6 +740,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Uitvoering testen conform standaard': 'Testnan konforme standard',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Muy poko kontraste ku e fondo — kisas ilegibel.',
   // Consent / license screen (redesign).

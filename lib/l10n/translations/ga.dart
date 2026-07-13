@@ -1819,6 +1819,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Uitvoering testen conform standaard': 'Tástáil de réir an chaighdeáin',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Codarsnacht ró-íseal leis an gcúlra — seans nach féidir é a léamh.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).

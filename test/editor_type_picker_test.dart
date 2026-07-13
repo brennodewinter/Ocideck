@@ -113,7 +113,7 @@ void main() {
       expect(find.byType(ChoiceChip), findsWidgets);
       await tester.tap(find.text('Informatieveiligheid'));
       await tester.pumpAndSettle();
-      expect(find.text('Checklist'), findsOneWidget);
+      expect(find.text('Uitvoering testen conform standaard'), findsOneWidget);
     },
   );
 }

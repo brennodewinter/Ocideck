@@ -1806,6 +1806,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Uitvoering testen conform standaard': 'Тестване съгласно стандарта',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Твърде малък контраст с фона — може да е нечетливо.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).

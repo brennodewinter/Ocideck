@@ -1813,6 +1813,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Uitvoering testen conform standaard': 'Testes conforme a norma',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Contraste insuficiente com o fundo — pode ficar ilegível.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).

@@ -1787,6 +1787,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Uitvoering testen conform standaard': 'Tesztelés a szabvány szerint',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
       'Túl kicsi a kontraszt a háttérrel — olvashatatlan lehet.',
   // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
