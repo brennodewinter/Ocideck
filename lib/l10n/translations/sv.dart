@@ -84,6 +84,9 @@ const _stringsSv = {
 };
 
 const _dutchSourceSv = {
+  'Handtekening tekenen': 'Rita signatur',
+  'Teken je handtekening in het vak hieronder.':
+      'Rita din signatur i rutan nedan.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Ett datapaket är en .zip med referensdata för den här modulen. Det kontrolleras först mot fingeravtrycket som är inbyggt i appen; endast ett paket som matchar den här appversionen godtas.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':

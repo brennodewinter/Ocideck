@@ -6,6 +6,28 @@ import 'package:flutter/material.dart';
 import '../models/document_signature.dart';
 import '../utils/log.dart' show logError;
 
+/// Decode an embedded `data:...;base64,...` signature image to raw bytes, or
+/// null when [imagePath] is empty, not a base64 data URI, or malformed. Shared
+/// by [DocumentSignatureView], the sign-off slide preview and the editor's
+/// drawn-signature preview so they all read a drawn signature the same way.
+Uint8List? decodeEmbeddedSignatureImage(String imagePath) {
+  if (!imagePath.startsWith('data:')) return null;
+  final comma = imagePath.indexOf(',');
+  if (comma == -1 || !imagePath.substring(0, comma).contains('base64')) {
+    return null;
+  }
+  try {
+    return base64Decode(imagePath.substring(comma + 1));
+  } catch (e, s) {
+    logError(
+      'decodeEmbeddedSignatureImage: bad data-URI signature image',
+      e,
+      s,
+    );
+    return null;
+  }
+}
+
 /// A small, reusable render of a [DocumentSignature]: the attested statement,
 /// the signature itself (an optional image and/or a typed name), and the
 /// signer's name, role and date. Deliberately simple — NO freehand drawing — so
@@ -87,12 +109,13 @@ class DocumentSignatureView extends StatelessWidget {
   /// The signature "mark": the embedded image when present and renderable,
   /// otherwise the typed name in a handwriting-like italic.
   Widget _signatureMark(ThemeData theme, double scale) {
-    final image = _embeddedImage();
+    final image = decodeEmbeddedSignatureImage(signature.imagePath);
     if (image != null) {
       return Image.memory(
         image,
         height: 44 * scale,
         fit: BoxFit.contain,
+        alignment: Alignment.centerLeft,
         errorBuilder: (_, _, _) => _typedMark(theme, scale),
       );
     }
@@ -113,22 +136,5 @@ class DocumentSignatureView extends StatelessWidget {
         color: theme.colorScheme.onSurface,
       ),
     );
-  }
-
-  /// Decode an embedded `data:...;base64,...` image path, or null when the path
-  /// is empty, not a data URI, or malformed.
-  Uint8List? _embeddedImage() {
-    final path = signature.imagePath;
-    if (!path.startsWith('data:')) return null;
-    final comma = path.indexOf(',');
-    if (comma == -1 || !path.substring(0, comma).contains('base64')) {
-      return null;
-    }
-    try {
-      return base64Decode(path.substring(comma + 1));
-    } catch (e, s) {
-      logError('DocumentSignatureView: decode data-URI signature image', e, s);
-      return null;
-    }
   }
 }

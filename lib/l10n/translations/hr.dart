@@ -84,6 +84,9 @@ const _stringsHr = {
 };
 
 const _dutchSourceHr = {
+  'Handtekening tekenen': 'Nacrtaj potpis',
+  'Teken je handtekening in het vak hieronder.':
+      'Nacrtajte svoj potpis u okviru ispod.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Podatkovni paket je .zip s referentnim podacima za ovaj modul. Najprije se provjerava u odnosu na otisak ugrađen u aplikaciju; prihvaća se samo paket koji odgovara ovoj verziji aplikacije.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':

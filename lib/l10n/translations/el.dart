@@ -84,6 +84,9 @@ const _stringsEl = {
 };
 
 const _dutchSourceEl = {
+  'Handtekening tekenen': 'Σχεδίαση υπογραφής',
+  'Teken je handtekening in het vak hieronder.':
+      'Σχεδιάστε την υπογραφή σας στο πλαίσιο παρακάτω.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Ένα πακέτο δεδομένων είναι ένα .zip με τα δεδομένα αναφοράς αυτής της ενότητας. Ελέγχεται πρώτα ως προς το αποτύπωμα που είναι ενσωματωμένο στην εφαρμογή· γίνεται δεκτό μόνο πακέτο που ταιριάζει με αυτή την έκδοση της εφαρμογής.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':

@@ -84,6 +84,9 @@ const _stringsEn = {
 };
 
 const _dutchSourceEn = {
+  'Handtekening tekenen': 'Draw signature',
+  'Teken je handtekening in het vak hieronder.':
+      'Draw your signature in the box below.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'A data pack is a .zip with the reference data for this module. It is first checked against the fingerprint built into the app; only a pack that matches this app version is accepted.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':

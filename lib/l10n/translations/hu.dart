@@ -84,6 +84,9 @@ const _stringsHu = {
 };
 
 const _dutchSourceHu = {
+  'Handtekening tekenen': 'Aláírás rajzolása',
+  'Teken je handtekening in het vak hieronder.':
+      'Rajzold az aláírásodat az alábbi mezőbe.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Az adatcsomag egy .zip a modul referenciaadataival. Először az alkalmazásba épített ujjlenyomathoz ellenőrzi; csak az ehhez az alkalmazásverzióhoz illő csomag fogadható el.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':

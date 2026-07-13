@@ -84,6 +84,9 @@ const _stringsFy = {
 };
 
 const _dutchSourceFy = {
+  'Handtekening tekenen': 'Hantekening tekenje',
+  'Teken je handtekening in het vak hieronder.':
+      'Tekenje dyn hantekening yn it fak hjirûnder.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'In gegevenspakket is in .zip mei de referinsjegegevens foar dizze module. It wurdt earst tsjin de yn de app ynboude fingerôfdruk kontrolearre; allinnich in pakket dat by dizze app-ferzje heart, wurdt akseptearre.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':

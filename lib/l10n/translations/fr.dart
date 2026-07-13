@@ -85,6 +85,9 @@ const _stringsFr = {
 };
 
 const _dutchSourceFr = {
+  'Handtekening tekenen': 'Dessiner la signature',
+  'Teken je handtekening in het vak hieronder.':
+      'Dessinez votre signature dans le cadre ci-dessous.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Un paquet de données est un .zip contenant les données de référence de ce module. Il est d\'abord vérifié par rapport à l\'empreinte intégrée à l\'application ; seul un paquet correspondant à cette version de l\'application est accepté.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':

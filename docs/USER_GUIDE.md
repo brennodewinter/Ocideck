@@ -696,6 +696,11 @@ else.
   recomputes the counts from the deck's findings.
 - **Sign-off** — the truthful-reporting page (MIAUW 1.6) with the deck-wide visual
   signature and certification, and **Afronden & verzegelen** to seal the report.
+  The signature can be **typed** or **drawn**: click **Handtekening tekenen (Draw
+  signature)** — in the sign-off editor or the seal dialog — to sign on a pad with
+  the mouse, trackpad, touch or stylus. A drawn signature is stored as an embedded
+  image inside the report (so it travels with the `.md` and is covered by the
+  seal) and takes precedence over the typed name wherever the sign-off is shown.
 
 ### The finding wizard
 

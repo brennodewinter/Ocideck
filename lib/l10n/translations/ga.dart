@@ -86,6 +86,9 @@ const _stringsGa = {
 };
 
 const _dutchSourceGa = {
+  'Handtekening tekenen': 'Tarraing síniú',
+  'Teken je handtekening in het vak hieronder.':
+      'Tarraing do shíniú sa bhosca thíos.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Is éard is pacáiste sonraí ann ná .zip leis na sonraí tagartha don mhodúl seo. Seiceáiltear ar dtús é in aghaidh an mhéarloirg atá tógtha isteach san aip; ní ghlactar ach le pacáiste a fhreagraíonn don leagan aipe seo.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':

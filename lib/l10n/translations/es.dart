@@ -85,6 +85,9 @@ const _stringsEs = {
 };
 
 const _dutchSourceEs = {
+  'Handtekening tekenen': 'Dibujar firma',
+  'Teken je handtekening in het vak hieronder.':
+      'Dibuja tu firma en el recuadro de abajo.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Un paquete de datos es un .zip con los datos de referencia de este módulo. Primero se verifica con la huella integrada en la aplicación; solo se acepta un paquete que coincida con esta versión de la aplicación.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':

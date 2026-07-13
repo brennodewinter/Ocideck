@@ -84,6 +84,9 @@ const _stringsLv = {
 };
 
 const _dutchSourceLv = {
+  'Handtekening tekenen': 'Zīmēt parakstu',
+  'Teken je handtekening in het vak hieronder.':
+      'Uzzīmējiet savu parakstu lodziņā zemāk.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Datu pakotne ir .zip ar šī moduļa atsauces datiem. Vispirms to pārbauda pret lietotnē iebūvēto nospiedumu; tiek pieņemta tikai pakotne, kas atbilst šai lietotnes versijai.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':

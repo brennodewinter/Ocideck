@@ -85,6 +85,9 @@ const _stringsBg = {
 };
 
 const _dutchSourceBg = {
+  'Handtekening tekenen': 'Начертай подпис',
+  'Teken je handtekening in het vak hieronder.':
+      'Начертайте подписа си в полето по-долу.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Пакетът с данни е .zip с референтните данни за този модул. Първо се проверява спрямо отпечатъка, вграден в приложението; приема се само пакет, който съответства на тази версия на приложението.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':

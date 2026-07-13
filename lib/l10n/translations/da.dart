@@ -84,6 +84,9 @@ const _stringsDa = {
 };
 
 const _dutchSourceDa = {
+  'Handtekening tekenen': 'Tegn underskrift',
+  'Teken je handtekening in het vak hieronder.':
+      'Tegn din underskrift i feltet nedenfor.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'En datapakke er en .zip med referencedataene til dette modul. Den kontrolleres først mod det fingeraftryk, der er indbygget i appen; kun en pakke, der passer til denne appversion, accepteres.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':

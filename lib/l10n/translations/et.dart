@@ -83,6 +83,9 @@ const _stringsEt = {
 };
 
 const _dutchSourceEt = {
+  'Handtekening tekenen': 'Joonista allkiri',
+  'Teken je handtekening in het vak hieronder.':
+      'Joonista oma allkiri allolevasse kasti.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Andmepakett on .zip selle mooduli võrdlusandmetega. Kõigepealt kontrollitakse seda rakendusse sisseehitatud sõrmejälje suhtes; vastu võetakse ainult sellele rakenduse versioonile vastav pakett.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
