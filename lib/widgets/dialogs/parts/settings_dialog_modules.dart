@@ -95,7 +95,9 @@ extension _SettingsModules on _SettingsDialogState {
             ),
             const SizedBox(width: 6),
             Expanded(
-              child: Text(
+              // Selectable so the message can be copied (e.g. to report it)
+              // rather than retyped.
+              child: SelectableText(
                 _secModuleStatusText(l10n, module),
                 style: TextStyle(fontSize: 12, color: AppTheme.slate600),
               ),
@@ -168,8 +170,10 @@ extension _SettingsModules on _SettingsDialogState {
     if (!mounted || picked == null) return;
     final bytes = picked.files.single.bytes;
     if (bytes == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.d('Kon het gekozen bestand niet lezen.'))),
+      showErrorSnackBar(
+        ScaffoldMessenger.of(context),
+        l10n,
+        l10n.d('Kon het gekozen bestand niet lezen.'),
       );
       return;
     }

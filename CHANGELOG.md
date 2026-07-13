@@ -8,6 +8,13 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Error messages are copyable.** Failure notifications (export, import,
+  Nextcloud download/save, and the module card) now carry a **Kopiëren (Copy)**
+  action that puts the exact message on the clipboard, and stay on screen a
+  little longer so there is time to read and copy them — so a failure can be
+  reported or looked up without retyping it. The Informatieveiligheid module's
+  status line is also selectable for the same reason. Reuses the existing copy
+  strings, so it is localised in all interface languages.
 - **The Informatieveiligheid module now works offline, out of the box.** Its
   baseline reference data is **bundled with the app** (as a signed-by-hash asset)
   and provisioned from there on enable — no mirror, no download, no outbound

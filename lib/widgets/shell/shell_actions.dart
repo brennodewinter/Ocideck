@@ -51,12 +51,10 @@ Future<void> _exportPackage(BuildContext context, WidgetRef ref) async {
   } catch (e) {
     logError('AppShell: pakketexport mislukt', e);
     if (!context.mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          '${l10n.d('Export mislukt:')} ${userFacingError(l10n, e)}',
-        ),
-      ),
+    showErrorSnackBar(
+      ScaffoldMessenger.of(context),
+      l10n,
+      '${l10n.d('Export mislukt:')} ${userFacingError(l10n, e)}',
     );
   }
 }
@@ -123,12 +121,10 @@ Future<void> _exportAuditDossier(BuildContext context, WidgetRef ref) async {
   } catch (e) {
     logError('AppShell: auditdossier-export mislukt', e);
     if (!context.mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          '${l10n.d('Export mislukt:')} ${userFacingError(l10n, e)}',
-        ),
-      ),
+    showErrorSnackBar(
+      ScaffoldMessenger.of(context),
+      l10n,
+      '${l10n.d('Export mislukt:')} ${userFacingError(l10n, e)}',
     );
   }
 }
@@ -217,9 +213,7 @@ Future<void> _importFromUrl(BuildContext context, WidgetRef ref) async {
     failure = ImportFailure.network;
   }
   if (failure != null && context.mounted) {
-    messenger.showSnackBar(
-      SnackBar(content: Text(importFailureMessage(l10n, failure))),
-    );
+    showErrorSnackBar(messenger, l10n, importFailureMessage(l10n, failure));
   }
 }
 
@@ -287,12 +281,10 @@ Future<void> _openFromNextcloud(BuildContext context, WidgetRef ref) async {
     // OpenResult.blocked toont al het veiligheidsalarm via de shell.
   } on WebdavException catch (e) {
     logWarning('shell: WebDAV-download mislukt', e);
-    messenger.showSnackBar(
-      SnackBar(
-        content: Text(
-          '${l10n.d('Downloaden mislukt:')} ${webdavErrorMessage(l10n, e)}',
-        ),
-      ),
+    showErrorSnackBar(
+      messenger,
+      l10n,
+      '${l10n.d('Downloaden mislukt:')} ${webdavErrorMessage(l10n, e)}',
     );
   }
 }
@@ -340,12 +332,10 @@ Future<void> _saveToNextcloud(BuildContext context, WidgetRef ref) async {
     );
   } on WebdavException catch (e) {
     logWarning('shell: WebDAV-opslaan mislukt', e);
-    messenger.showSnackBar(
-      SnackBar(
-        content: Text(
-          '${l10n.d('Opslaan mislukt:')} ${webdavErrorMessage(l10n, e)}',
-        ),
-      ),
+    showErrorSnackBar(
+      messenger,
+      l10n,
+      '${l10n.d('Opslaan mislukt:')} ${webdavErrorMessage(l10n, e)}',
     );
   }
 }
