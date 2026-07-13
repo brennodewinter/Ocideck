@@ -46,6 +46,7 @@ import '../state/settings_provider.dart';
 import '../state/tabs_provider.dart';
 import '../state/webdav_provider.dart';
 import '../utils/project_path.dart';
+import '../utils/error_snackbar.dart';
 import '../utils/user_facing_error.dart';
 import '../theme/app_theme.dart';
 import '../l10n/app_localizations.dart';
@@ -353,10 +354,10 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
       } else if (ext == '.ocideck' || ext == '.zip') {
         final failure = await tabs.importPackageFile(path, homeDir: homeDir);
         if (failure != null && mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(importFailureMessage(context.l10n, failure)),
-            ),
+          showErrorSnackBar(
+            ScaffoldMessenger.of(context),
+            context.l10n,
+            importFailureMessage(context.l10n, failure),
           );
         }
       } else if (_imageExtensions.contains(ext)) {
