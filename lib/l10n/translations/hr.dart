@@ -89,8 +89,6 @@ const _dutchSourceHr = {
       'Nacrtajte svoj potpis u okviru ispod.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Podatkovni paket je .zip s referentnim podacima za ovaj modul. Najprije se provjerava u odnosu na otisak ugrađen u aplikaciju; prihvaća se samo paket koji odgovara ovoj verziji aplikacije.',
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'Premali kontrast s pozadinom — možda nečitljivo.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Površinski',
   'Horizontale staaf': 'Vodoravni stupčasti',
@@ -1789,4 +1787,10 @@ const _dutchSourceHr = {
   'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
       'Sadržaj se razlikuje od pečata — datoteka je promijenjena nakon dovršetka.',
   'Presentatie afgerond en verzegeld.': 'Prezentacija dovršena i zapečaćena.',
+};
+
+const _dutchSourceAddHr = <String, String>{
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Premali kontrast s pozadinom — možda nečitljivo.',
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
 };

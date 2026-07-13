@@ -89,8 +89,6 @@ const _dutchSourceLv = {
       'Uzzīmējiet savu parakstu lodziņā zemāk.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Datu pakotne ir .zip ar šī moduļa atsauces datiem. Vispirms to pārbauda pret lietotnē iebūvēto nospiedumu; tiek pieņemta tikai pakotne, kas atbilst šai lietotnes versijai.',
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'Pārāk mazs kontrasts ar fonu — var būt nesalasāms.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Laukuma',
   'Horizontale staaf': 'Horizontāls stabiņu',
@@ -1781,4 +1779,10 @@ const _dutchSourceLv = {
   'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
       'Saturs atšķiras no zīmoga — fails pēc pabeigšanas ir mainīts.',
   'Presentatie afgerond en verzegeld.': 'Prezentācija pabeigta un aizzīmogota.',
+};
+
+const _dutchSourceAddLv = <String, String>{
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Pārāk mazs kontrasts ar fonu — var būt nesalasāms.',
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
 };

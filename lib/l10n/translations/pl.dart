@@ -91,8 +91,6 @@ const _dutchSourcePl = {
       'Narysuj swój podpis w polu poniżej.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Pakiet danych to plik .zip z danymi referencyjnymi tego modułu. Najpierw jest sprawdzany względem odcisku wbudowanego w aplikację; akceptowany jest tylko pakiet zgodny z tą wersją aplikacji.',
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'Zbyt mały kontrast z tłem — może być nieczytelne.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Warstwowy',
   'Horizontale staaf': 'Słupkowy poziomy',
@@ -1795,4 +1793,10 @@ const _dutchSourcePl = {
       'Zawartość różni się od pieczęci — plik został zmieniony po sfinalizowaniu.',
   'Presentatie afgerond en verzegeld.':
       'Prezentacja sfinalizowana i zapieczętowana.',
+};
+
+const _dutchSourceAddPl = <String, String>{
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Zbyt mały kontrast z tłem — może być nieczytelne.',
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
 };

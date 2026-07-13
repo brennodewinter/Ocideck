@@ -90,8 +90,6 @@ const _dutchSourceSk = {
       'Nakreslite svoj podpis do poľa nižšie.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Dátový balík je .zip s referenčnými údajmi pre tento modul. Najprv sa overí voči odtlačku zabudovanému v aplikácii; prijme sa iba balík, ktorý zodpovedá tejto verzii aplikácie.',
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'Príliš malý kontrast s pozadím — môže byť nečitateľné.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Plošný',
   'Horizontale staaf': 'Vodorovný stĺpcový',
@@ -1789,4 +1787,10 @@ const _dutchSourceSk = {
   'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
       'Obsah sa líši od pečate — súbor bol po dokončení zmenený.',
   'Presentatie afgerond en verzegeld.': 'Prezentácia dokončená a zapečatená.',
+};
+
+const _dutchSourceAddSk = <String, String>{
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Príliš malý kontrast s pozadím — môže byť nečitateľné.',
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
 };

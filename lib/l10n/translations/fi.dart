@@ -89,8 +89,6 @@ const _dutchSourceFi = {
       'Piirrä allekirjoituksesi alla olevaan ruutuun.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Datapaketti on .zip, joka sisältää tämän moduulin viitetiedot. Se tarkistetaan ensin sovellukseen sisäänrakennettua sormenjälkeä vasten; vain tähän sovellusversioon sopiva paketti hyväksytään.',
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'Liian vähän kontrastia taustaan — voi olla lukukelvoton.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Alue',
   'Horizontale staaf': 'Vaakapylväs',
@@ -1782,4 +1780,10 @@ const _dutchSourceFi = {
   'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
       'Sisältö poikkeaa sinetistä — tiedostoa on muutettu viimeistelyn jälkeen.',
   'Presentatie afgerond en verzegeld.': 'Esitys viimeistelty ja sinetöity.',
+};
+
+const _dutchSourceAddFi = <String, String>{
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Liian vähän kontrastia taustaan — voi olla lukukelvoton.',
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
 };

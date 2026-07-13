@@ -86,8 +86,6 @@ const _dutchSourceTlh = {
   'Teken je handtekening in het vak hieronder.': 'box bIngDaq qItlh yIqon.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'De\' ngaSwI\' ghaH .zip, pa\' De\' Qan module vam. wa\'DIch app qelDI\' nItlh \'oH nuDlu\'; app version vam rurbogh ngaSwI\' neH laj.',
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'rItlh puS — laDlaHbe\'lu\'.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Sep',
   'Horizontale staaf': 'SIrgh SaS',
@@ -1757,4 +1755,10 @@ const _dutchSourceTlh = {
   'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
       'HablI\' rap be\' De\' — rInmoH tlhab teywI\' choHpu\'.',
   'Presentatie afgerond en verzegeld.': 'cha\'nob rInpu\' \'ej SoQpu\'.',
+};
+
+const _dutchSourceAddTlh = <String, String>{
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'rItlh puS — laDlaHbe\'lu\'.',
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
 };

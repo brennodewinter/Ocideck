@@ -89,8 +89,6 @@ const _dutchSourceEl = {
       'Σχεδιάστε την υπογραφή σας στο πλαίσιο παρακάτω.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Ένα πακέτο δεδομένων είναι ένα .zip με τα δεδομένα αναφοράς αυτής της ενότητας. Ελέγχεται πρώτα ως προς το αποτύπωμα που είναι ενσωματωμένο στην εφαρμογή· γίνεται δεκτό μόνο πακέτο που ταιριάζει με αυτή την έκδοση της εφαρμογής.',
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'Πολύ μικρή αντίθεση με το φόντο — ίσως δυσανάγνωστο.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Περιοχή',
   'Horizontale staaf': 'Οριζόντιες ράβδοι',
@@ -1810,4 +1808,10 @@ const _dutchSourceEl = {
       'Το περιεχόμενο διαφέρει από τη σφραγίδα — το αρχείο άλλαξε μετά την οριστικοποίηση.',
   'Presentatie afgerond en verzegeld.':
       'Η παρουσίαση οριστικοποιήθηκε και σφραγίστηκε.',
+};
+
+const _dutchSourceAddEl = <String, String>{
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Πολύ μικρή αντίθεση με το φόντο — ίσως δυσανάγνωστο.',
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
 };

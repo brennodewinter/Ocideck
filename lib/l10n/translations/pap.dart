@@ -89,8 +89,6 @@ const _dutchSourcePap = {
       'Dibuhá bo firma den e kuadro aki bou.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Un pakete di dato ta un .zip ku e datonan di referensia pa e módulo aki. Promé e ta wòrdu kontrolá kontra e fingerprint inkorporá den e app; solamente un pakete ku ta kuadra ku e vershon di app aki ta wòrdu aseptá.',
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'Muy poko kontraste ku e fondo — kisas ilegibel.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Área',
   'Horizontale staaf': 'Bara horizontal',
@@ -742,6 +740,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Muy poko kontraste ku e fondo — kisas ilegibel.',
   // Consent / license screen (redesign).
   'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
       'Mi ta aseptá e lisensia EUPL 1.2 i mi a lesa ki datos OciDeck ta warda.',

@@ -89,8 +89,6 @@ const _dutchSourceEn = {
       'Draw your signature in the box below.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'A data pack is a .zip with the reference data for this module. It is first checked against the fingerprint built into the app; only a pack that matches this app version is accepted.',
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'Too little contrast with the background — may be unreadable.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Area',
   'Horizontale staaf': 'Horizontal bar',
@@ -924,6 +922,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Too little contrast with the background — may be unreadable.',
   // Consent / license screen (redesign).
   'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
       'I accept the EUPL 1.2 licence and have read what data OciDeck stores.',

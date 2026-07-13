@@ -89,8 +89,6 @@ const _dutchSourceGsw = {
       'Zeichne dini Ünnerschrift is Fäld hie unde.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Es Datepaket isch es .zip mit de Referänzdate für die Modul. Es wird zerscht gäge de i de App iiboute Fingerabdruck prüeft; nume es Paket, wo zu där App-Version passt, wird akzeptiert.',
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'Z wenig Kontrast zum Hindergrund — villicht unläsbar.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Flächä',
   'Horizontale staaf': 'Horizontali Balke',
@@ -1786,4 +1784,10 @@ const _dutchSourceGsw = {
       'De Inhalt wiicht vom Sigel ab — d Datei isch nach em Abschliesse gänderet worde.',
   'Presentatie afgerond en verzegeld.':
       'Präsentation abgschlosse und versieglet.',
+};
+
+const _dutchSourceAddGsw = <String, String>{
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Z wenig Kontrast zum Hindergrund — villicht unläsbar.',
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
 };

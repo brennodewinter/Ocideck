@@ -91,8 +91,6 @@ const _dutchSourceGa = {
       'Tarraing do shíniú sa bhosca thíos.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Is éard is pacáiste sonraí ann ná .zip leis na sonraí tagartha don mhodúl seo. Seiceáiltear ar dtús é in aghaidh an mhéarloirg atá tógtha isteach san aip; ní ghlactar ach le pacáiste a fhreagraíonn don leagan aipe seo.',
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'Codarsnacht ró-íseal leis an gcúlra — seans nach féidir é a léamh.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Achar',
   'Horizontale staaf': 'Barra chothrománach',
@@ -1818,4 +1816,10 @@ const _dutchSourceGa = {
       'Tá an t-ábhar difriúil ón séala — athraíodh an comhad tar éis é a chur i gcrích.',
   'Presentatie afgerond en verzegeld.':
       'Cur i láthair curtha i gcrích agus séalaithe.',
+};
+
+const _dutchSourceAddGa = <String, String>{
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Codarsnacht ró-íseal leis an gcúlra — seans nach féidir é a léamh.',
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
 };

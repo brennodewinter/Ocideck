@@ -89,8 +89,6 @@ const _dutchSourceDe = {
       'Zeichne deine Unterschrift in das Feld unten.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Ein Datenpaket ist eine .zip mit den Referenzdaten für dieses Modul. Es wird zuerst gegen den in der App eingebauten Fingerabdruck geprüft; nur ein Paket, das zu dieser App-Version passt, wird akzeptiert.',
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'Zu wenig Kontrast zum Hintergrund — möglicherweise unlesbar.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Fläche',
   'Horizontale staaf': 'Horizontale Balken',
@@ -742,6 +740,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Zu wenig Kontrast zum Hintergrund — möglicherweise unlesbar.',
   // Consent / license screen (redesign).
   'Ik ga akkoord met de EUPL 1.2-licentie en heb gelezen welke gegevens OciDeck bewaart.':
       'Ich akzeptiere die EUPL-1.2-Lizenz und habe gelesen, welche Daten OciDeck speichert.',

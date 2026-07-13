@@ -89,8 +89,6 @@ const _dutchSourceHu = {
       'Rajzold az aláírásodat az alábbi mezőbe.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Az adatcsomag egy .zip a modul referenciaadataival. Először az alkalmazásba épített ujjlenyomathoz ellenőrzi; csak az ehhez az alkalmazásverzióhoz illő csomag fogadható el.',
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'Túl kicsi a kontraszt a háttérrel — olvashatatlan lehet.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Terület',
   'Horizontale staaf': 'Vízszintes oszlop',
@@ -1786,4 +1784,10 @@ const _dutchSourceHu = {
   'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
       'A tartalom eltér a pecséttől — a fájlt a véglegesítés után módosították.',
   'Presentatie afgerond en verzegeld.': 'A bemutató véglegesítve és lezárva.',
+};
+
+const _dutchSourceAddHu = <String, String>{
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Túl kicsi a kontraszt a háttérrel — olvashatatlan lehet.',
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
 };

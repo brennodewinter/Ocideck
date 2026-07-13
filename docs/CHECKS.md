@@ -18,6 +18,23 @@ local sweep that also covers licences and dependency health:
 make check-full   # check + licenses + sbom-verify + deps-check + deps-outdated
 ```
 
+## Localisation helpers
+
+Every translatable string must exist in all 31 languages, so adding one used to
+mean editing 30 files by hand. Two helpers remove that toil:
+
+```sh
+make add-l10n SPEC=strings.json  # insert d('…') strings into every language
+make l10n-check                  # fast l10n gate: dup keys + coverage + format
+```
+
+`make add-l10n` reads a JSON spec (Dutch source → per-language translations; the
+format is documented in `tool/add_l10n.dart`), inserts each string into that
+language's additions overlay, `dart format`s the result, skips anything already
+present, and whitelists any `unchanged` loanwords. `make l10n-check` runs just
+the l10n parts of `make check` (the duplicate-key and per-language coverage
+guards plus formatting), handy while iterating on translations.
+
 ## How intensively is it tested?
 
 To give a sense of scale (point-in-time figures — they only grow):

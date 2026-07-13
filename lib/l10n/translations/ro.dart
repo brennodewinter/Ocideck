@@ -90,8 +90,6 @@ const _dutchSourceRo = {
       'Desenează-ți semnătura în caseta de mai jos.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Un pachet de date este un .zip cu datele de referință pentru acest modul. Este mai întâi verificat față de amprenta încorporată în aplicație; se acceptă doar un pachet care corespunde acestei versiuni a aplicației.',
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'Contrast prea mic cu fundalul — poate fi ilizibil.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Suprafață',
   'Horizontale staaf': 'Bare orizontale',
@@ -1801,4 +1799,10 @@ const _dutchSourceRo = {
   'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
       'Conținutul diferă de sigiliu — fișierul a fost modificat după finalizare.',
   'Presentatie afgerond en verzegeld.': 'Prezentare finalizată și sigilată.',
+};
+
+const _dutchSourceAddRo = <String, String>{
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Contrast prea mic cu fundalul — poate fi ilizibil.',
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
 };

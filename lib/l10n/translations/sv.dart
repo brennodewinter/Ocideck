@@ -89,8 +89,6 @@ const _dutchSourceSv = {
       'Rita din signatur i rutan nedan.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Ett datapaket är en .zip med referensdata för den här modulen. Det kontrolleras först mot fingeravtrycket som är inbyggt i appen; endast ett paket som matchar den här appversionen godtas.',
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'För lite kontrast mot bakgrunden — kan bli oläsligt.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Yta',
   'Horizontale staaf': 'Liggande stapel',
@@ -1781,4 +1779,10 @@ const _dutchSourceSv = {
       'Innehållet avviker från sigillet — filen ändrades efter slutförandet.',
   'Presentatie afgerond en verzegeld.':
       'Presentationen är slutförd och förseglad.',
+};
+
+const _dutchSourceAddSv = <String, String>{
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'För lite kontrast mot bakgrunden — kan bli oläsligt.',
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
 };

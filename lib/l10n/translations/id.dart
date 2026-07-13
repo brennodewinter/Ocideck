@@ -89,8 +89,6 @@ const _dutchSourceId = {
       'Gambar tanda tangan Anda di kotak di bawah.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Paket data adalah .zip berisi data referensi untuk modul ini. Paket diperiksa dulu terhadap sidik jari yang tertanam di aplikasi; hanya paket yang cocok dengan versi aplikasi ini yang diterima.',
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'Kontras dengan latar terlalu rendah — mungkin tak terbaca.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Area',
   'Horizontale staaf': 'Batang horizontal',
@@ -1782,4 +1780,10 @@ const _dutchSourceId = {
   'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
       'Konten berbeda dari segel — berkas diubah setelah finalisasi.',
   'Presentatie afgerond en verzegeld.': 'Presentasi difinalisasi dan disegel.',
+};
+
+const _dutchSourceAddId = <String, String>{
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Kontras dengan latar terlalu rendah — mungkin tak terbaca.',
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
 };

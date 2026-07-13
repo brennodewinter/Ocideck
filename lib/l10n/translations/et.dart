@@ -88,8 +88,6 @@ const _dutchSourceEt = {
       'Joonista oma allkiri allolevasse kasti.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Andmepakett on .zip selle mooduli võrdlusandmetega. Kõigepealt kontrollitakse seda rakendusse sisseehitatud sõrmejälje suhtes; vastu võetakse ainult sellele rakenduse versioonile vastav pakett.',
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'Liiga väike kontrast taustaga — võib olla loetamatu.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Pindala',
   'Horizontale staaf': 'Horisontaalne tulp',
@@ -1773,4 +1771,10 @@ const _dutchSourceEt = {
   'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
       'Sisu erineb pitserist — faili on pärast vormistamist muudetud.',
   'Presentatie afgerond en verzegeld.': 'Esitlus vormistatud ja pitseeritud.',
+};
+
+const _dutchSourceAddEt = <String, String>{
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Liiga väike kontrast taustaga — võib olla loetamatu.',
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
 };

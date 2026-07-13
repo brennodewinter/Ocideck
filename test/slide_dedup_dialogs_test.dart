@@ -42,6 +42,25 @@ Widget _host(void Function(BuildContext context) onPressed) {
   );
 }
 
+/// Pumps a handful of bounded real-time frames so any pending async `setState`
+/// rebuild reaches the widget tree.
+///
+/// The dialog's scan result and its per-keystroke re-dedup both land via
+/// `setState` on the real event loop (we are inside [WidgetTester.runAsync]). A
+/// single zero-duration `pump()` races those async rebuilds: under a loaded
+/// suite the rebuild can be applied a frame late, leaving the results grid empty
+/// exactly when the count assertions run — the order-dependent flakiness this
+/// test used to show. `pumpAndSettle` is no help either: the blinking autofocus
+/// cursor and the scan-progress spinner keep the frame queue from ever draining,
+/// so it would time out. Pumping a few bounded frames flushes every pending
+/// rebuild deterministically (the open/scan dialog smoke test settles the same
+/// way).
+Future<void> _flushFrames(WidgetTester tester) async {
+  for (int i = 0; i < 5; i++) {
+    await tester.pump(const Duration(milliseconds: 100));
+  }
+}
+
 /// Opens [dialog], lets its on-disk scan complete, and types [query] into the
 /// search box. The whole flow runs inside [WidgetTester.runAsync] so the
 /// dialog's real file-I/O scan actually resolves (a fake-async pump never lets
@@ -57,12 +76,12 @@ Future<void> _openAndSearch(
   await tester.runAsync(() async {
     await tester.pumpWidget(_host(show));
     await tester.tap(find.text('open'));
-    await tester.pump();
-    await Future<void>.delayed(const Duration(milliseconds: 400)); // scan
-    await tester.pump();
+    await tester.pump(); // dialog appears (loading)
+    await Future<void>.delayed(const Duration(milliseconds: 400)); // disk scan
+    await _flushFrames(tester); // flush the scan results into the tree
     await tester.enterText(find.byType(TextField).first, query);
     await Future<void>.delayed(const Duration(milliseconds: 250));
-    await tester.pump();
+    await _flushFrames(tester); // flush the re-dedup into the tree
     if (then != null) await then();
   });
   await tester.pump();
@@ -131,7 +150,7 @@ void main() {
       then: () async {
         await tester.tap(find.text('Verschillen').first);
         await Future<void>.delayed(const Duration(milliseconds: 200));
-        await tester.pump();
+        await _flushFrames(tester); // let the comparison dialog build
       },
     );
 

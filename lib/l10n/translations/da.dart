@@ -89,8 +89,6 @@ const _dutchSourceDa = {
       'Tegn din underskrift i feltet nedenfor.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'En datapakke er en .zip med referencedataene til dette modul. Den kontrolleres først mod det fingeraftryk, der er indbygget i appen; kun en pakke, der passer til denne appversion, accepteres.',
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'For lidt kontrast til baggrunden — kan være ulæseligt.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Areal',
   'Horizontale staaf': 'Vandret søjle',
@@ -1781,4 +1779,10 @@ const _dutchSourceDa = {
       'Indholdet afviger fra seglet — filen blev ændret efter færdiggørelsen.',
   'Presentatie afgerond en verzegeld.':
       'Præsentationen er færdiggjort og forseglet.',
+};
+
+const _dutchSourceAddDa = <String, String>{
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'For lidt kontrast til baggrunden — kan være ulæseligt.',
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
 };

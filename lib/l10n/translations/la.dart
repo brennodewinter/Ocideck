@@ -91,8 +91,6 @@ const _dutchSourceLa = {
       'Subscriptionem tuam in area infra designa.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Fasciculus datorum est .zip cum datis referentiae huius moduli. Primum cum nota digiti in applicatione insita comparatur; solum fasciculus qui huic applicationis versioni convenit accipitur.',
-  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
-      'Discrimen colorum a fundo nimis exiguum — fortasse illegibile.',
   // Extra grafiektypen (vlak / horizontale staaf / waterval) en hun hints.
   'Vlak': 'Area',
   'Horizontale staaf': 'Columnae horizontales',
@@ -1798,4 +1796,10 @@ const _dutchSourceLa = {
   'De inhoud wijkt af van het zegel — het bestand is na het afronden gewijzigd.':
       'Contentum a sigillo differt — tabella post perfectionem mutata est.',
   'Presentatie afgerond en verzegeld.': 'Praesentatio perfecta et obsignata.',
+};
+
+const _dutchSourceAddLa = <String, String>{
+  'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':
+      'Discrimen colorum a fundo nimis exiguum — fortasse illegibile.',
+  // Nieuwe strings hier toevoegen via `make add-l10n` (tool/add_l10n.dart).
 };
