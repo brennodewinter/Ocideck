@@ -1003,4 +1003,97 @@ void main() {
       expect(n.generateScopeChecklists(), 1);
     });
   });
+
+  group('linkFindingToTest (feedback #8)', () {
+    Deck deckWithChecklist(String scope, List<ChecklistRow> rows) {
+      final checklist = Slide.create(SlideType.checklist).copyWith(
+        title: 'OWASP WSTG v4.2',
+        tableRows: ChecklistSpec(
+          standardLabel: 'OWASP WSTG v4.2',
+          rows: rows,
+        ).toTableRows(),
+        checklistScope: scope,
+      );
+      return Deck(
+        title: 'D',
+        slides: [Slide.create(SlideType.title), checklist],
+      );
+    }
+
+    ChecklistSpec onlyChecklist(DeckNotifier n) {
+      final s = n.state.deck!.slides.firstWhere(
+        (s) => s.type == SlideType.checklist,
+      );
+      return ChecklistSpec.fromSlide(s.title, s.tableRows);
+    }
+
+    test('marks the matching row an anomaly and links the finding', () {
+      final n = _notifier()
+        ..loadDeck(
+          deckWithChecklist('https://app.example', const [
+            ChecklistRow(id: 'WSTG-ATHN-07', test: 'Weak password policy'),
+            ChecklistRow(id: 'WSTG-SESS-01', test: 'Session management'),
+          ]),
+        );
+
+      expect(
+        n.linkFindingToTest(
+          findingId: 'F-03',
+          scopeObject: 'https://APP.example/',
+          testId: 'wstg-athn-07', // case/scope-normalized match
+        ),
+        isTrue,
+      );
+      final rows = onlyChecklist(n).rows;
+      expect(rows[0].findingId, 'F-03');
+      expect(rows[0].status, ChecklistStatus.anomaly);
+      expect(rows[1].findingId, isEmpty); // untouched
+    });
+
+    test('re-linking to another test moves the link (no duplicate)', () {
+      final n = _notifier()
+        ..loadDeck(
+          deckWithChecklist('https://app.example', const [
+            ChecklistRow(id: 'WSTG-ATHN-07', test: 'A'),
+            ChecklistRow(id: 'WSTG-SESS-01', test: 'B'),
+          ]),
+        );
+      n.linkFindingToTest(
+        findingId: 'F-03',
+        scopeObject: 'https://app.example',
+        testId: 'WSTG-ATHN-07',
+      );
+      n.linkFindingToTest(
+        findingId: 'F-03',
+        scopeObject: 'https://app.example',
+        testId: 'WSTG-SESS-01',
+      );
+      final rows = onlyChecklist(n).rows;
+      expect(rows[0].findingId, isEmpty); // old link cleared
+      expect(rows[1].findingId, 'F-03'); // new link set
+    });
+
+    test('an empty testId unlinks the finding everywhere', () {
+      final n = _notifier()
+        ..loadDeck(
+          deckWithChecklist('https://app.example', const [
+            ChecklistRow(
+              id: 'WSTG-ATHN-07',
+              test: 'A',
+              status: ChecklistStatus.anomaly,
+              findingId: 'F-03',
+            ),
+          ]),
+        );
+      expect(
+        n.linkFindingToTest(
+          findingId: 'F-03',
+          scopeObject: 'https://app.example',
+          testId: '',
+        ),
+        isFalse, // no target row
+      );
+      expect(onlyChecklist(n).rows.single.findingId, isEmpty);
+    });
+  });
 }
