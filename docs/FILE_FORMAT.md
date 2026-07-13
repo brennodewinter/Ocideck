@@ -683,9 +683,11 @@ Rules:
   are a parsed *view* used by the editor and the severity-card preview.
 
 A finding is authored as a **group**: a header card plus its detail slides
-(description, reproduction, impact, recommendation) and evidence image slides.
-Every slide in the group carries the same id and its role — a `finding`-typed
-header, plus ordinary `bullets`/`image` detail and evidence slides:
+(description, reproduction, impact, recommendation) and evidence slides — a
+screenshot (`image`) or a video (`video`), added from the finding editor's
+evidence section. Every slide in the group carries the same id and its role — a
+`finding`-typed header, plus ordinary `bullets`/`image`/`video` detail and
+evidence slides:
 
 ```markdown
 <!-- ocideck_finding_id: F-03 -->

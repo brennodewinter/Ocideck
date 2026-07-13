@@ -8,6 +8,14 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Attach evidence to a finding.** The finding editor now has a **Bewijs
+  (Evidence)** section: **Screenshot toevoegen** and **Video toevoegen** attach a
+  screenshot or a video as evidence. Each piece of evidence becomes its own slide
+  right after the finding and joins the same finding group (shares the finding id,
+  role `evidence`), so it moves, round-trips in the `.md`, and exports with the
+  finding. The section lists the group's evidence with a thumbnail and lets you
+  jump to or remove each item; adding evidence requires a finding id, since that
+  is what links it to the finding. Localised in all interface languages.
 - **Draw a signature on the sign-off page.** Next to the typed signature, the
   sign-off editor and the **Afronden & verzegelen** dialog now offer
   **Handtekening tekenen (Draw signature)** — a pad you sign with the mouse,
