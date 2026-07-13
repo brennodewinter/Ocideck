@@ -112,6 +112,38 @@ void main() {
     );
   });
 
+  group('retest', () {
+    test('round-trips the status and note', () {
+      const spec = FindingSpec(
+        heading: 'F-1',
+        retest: RetestStatus.resolved,
+        retestNote: 'hertest 2026-07-20',
+      );
+      final md = spec.toMarkdown();
+      expect(md, contains('**Retest:** Resolved — hertest 2026-07-20'));
+      final back = FindingSpec.parse(md);
+      expect(back.retest, RetestStatus.resolved);
+      expect(back.retestNote, 'hertest 2026-07-20');
+    });
+
+    test('a not-retested finding emits no Retest line', () {
+      final md = const FindingSpec(heading: 'F-1').toMarkdown();
+      expect(md, isNot(contains('**Retest:**')));
+      expect(FindingSpec.parse(md).retest, RetestStatus.notRetested);
+    });
+
+    test('fromToken maps the tokens; unknown/empty -> notRetested', () {
+      expect(RetestStatus.fromToken('Resolved'), RetestStatus.resolved);
+      expect(RetestStatus.fromToken('notresolved'), RetestStatus.notResolved);
+      expect(
+        RetestStatus.fromToken('PartiallyResolved'),
+        RetestStatus.partiallyResolved,
+      );
+      expect(RetestStatus.fromToken(''), RetestStatus.notRetested);
+      expect(RetestStatus.fromToken('bogus'), RetestStatus.notRetested);
+    });
+  });
+
   test('parse(toMarkdown(parse(x))) is a fixed point', () {
     final once = FindingSpec.parse(_example);
     final twice = FindingSpec.parse(once.toMarkdown());
