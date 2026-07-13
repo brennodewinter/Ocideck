@@ -215,4 +215,37 @@ void main() {
       expect(pie.supportsBounds, isFalse);
     });
   });
+
+  group('heatmap colour ramp', () {
+    test('is theme-independent and picks a ramp by background lightness', () {
+      final light = heatmapRamp(darkBackground: false);
+      final dark = heatmapRamp(darkBackground: true);
+      expect(light, isNot(equals(dark)));
+      // On a light slide the low end is pale (near-white) and the high end is a
+      // deep red; on a dark slide it inverts so low recedes into the dark.
+      expect(isDarkHex(light.first), isFalse);
+      expect(isDarkHex(light.last), isTrue);
+      expect(isDarkHex(dark.first), isTrue);
+      expect(isDarkHex(dark.last), isFalse);
+    });
+
+    test('interpolates between stops and pins the endpoints', () {
+      final ramp = heatmapRamp(darkBackground: false);
+      expect(heatmapColorAt(ramp, 0), ramp.first);
+      expect(heatmapColorAt(ramp, 1), ramp.last);
+      // A value between stops is a blend, so it matches no exact stop.
+      final between = heatmapColorAt(ramp, 0.6);
+      expect(ramp.contains(between), isFalse);
+      // Out-of-range and NaN clamp to the ends rather than throwing.
+      expect(heatmapColorAt(ramp, -1), ramp.first);
+      expect(heatmapColorAt(ramp, 2), ramp.last);
+      expect(heatmapColorAt(ramp, double.nan), ramp.first);
+    });
+
+    test('isDarkHex reads plain colours, tolerant of format', () {
+      expect(isDarkHex('#FFFFFF'), isFalse);
+      expect(isDarkHex('#000000'), isTrue);
+      expect(isDarkHex('fff'), isFalse); // no '#', shorthand
+    });
+  });
 }

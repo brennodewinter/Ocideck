@@ -36,7 +36,11 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   last series as a line on a second axis, e.g. revenue + growth %), **donut** (a
   pie with the total in the centre), **waterfall** (the first series as up/down
   steps building on a running total) and **heatmap** (a value-coloured grid that
-  doubles as a likelihood × impact **risk matrix**). Each renders natively
+  doubles as a likelihood × impact **risk matrix**). The heatmap is coloured by a
+  dedicated, theme-independent sequential **heat** scale — pale→deep-red on light
+  slides, dark→bright on dark ones — so it reads as a heatmap rather than taking
+  the deck's accent colour; the numeric value is printed in every cell. Each
+  renders natively
   (preview, presenter, PDF, PPTX) and as self-contained SVG in the HTML export,
   round-trips through the same `chart` JSON block, animates on enter, and carries
   a screen-reader text alternative. Type names are localised in all interface
