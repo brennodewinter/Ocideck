@@ -695,7 +695,12 @@ else.
   format keeps the `checklist` class) — a standard-driven test list with a MIAUW
   tri-state per item
   (*Getoetst* / *Afwijking* / *Niet toetsbaar* / *Niet getoetst*) and an optional
-  link to a finding id.
+  link to a finding id. **WSTG-testen laden (Load WSTG tests)** fills the list in
+  one click with the complete **OWASP WSTG v4.2** checklist (97 tests across 12
+  categories); the version is shown next to the button and lands in the standard
+  label so it appears on the slide. Loading is non-destructive — it only adds the
+  tests you don't have yet, keeping any rows and statuses already filled in — so
+  you can re-load after editing without losing progress.
 - **Scope matrix** — the scope objects, each with a type (Web / Infra / IoT /
   Firmware / API / Mobile / Other) that automatically fixes its test standard
   (Web→WSTG, Infra→PTES, …), a coverage status and a note.
