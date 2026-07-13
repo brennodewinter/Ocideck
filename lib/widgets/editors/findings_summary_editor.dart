@@ -24,11 +24,16 @@ class FindingsSummaryEditor extends StatefulWidget {
   /// [deckFindingSeverities]); the source for "refresh from deck".
   final List<Cvss4Severity> deckFindingSeverities;
 
+  /// How many deck findings are resolved after retest (see
+  /// [deckRetestResolvedCount]); refreshed alongside the band counts.
+  final int deckResolvedCount;
+
   const FindingsSummaryEditor({
     super.key,
     required this.slide,
     required this.onUpdate,
     this.deckFindingSeverities = const [],
+    this.deckResolvedCount = 0,
     this.nestedInScrollView = false,
   });
 
@@ -40,6 +45,7 @@ class _FindingsSummaryEditorState extends State<FindingsSummaryEditor>
     with EditorTextControllers {
   late final TextEditingController _title;
   late final Map<Cvss4Severity, TextEditingController> _counts;
+  late final TextEditingController _resolved;
 
   @override
   void initState() {
@@ -53,6 +59,7 @@ class _FindingsSummaryEditorState extends State<FindingsSummaryEditor>
       for (final band in FindingsSummarySpec.order)
         band: newController('${spec.countOf(band)}', _emit),
     };
+    _resolved = newController('${spec.resolved}', _emit);
   }
 
   void _emit() {
@@ -62,6 +69,7 @@ class _FindingsSummaryEditorState extends State<FindingsSummaryEditor>
         for (final entry in _counts.entries)
           entry.key: int.tryParse(entry.value.text.trim()) ?? 0,
       },
+      resolved: int.tryParse(_resolved.text.trim()) ?? 0,
     );
     widget.onUpdate(
       widget.slide.copyWith(title: spec.title, tableRows: spec.toTableRows()),
@@ -78,6 +86,7 @@ class _FindingsSummaryEditorState extends State<FindingsSummaryEditor>
       // _emit() covers the no-change case (all counts already equal).
       _counts[band]!.text = '${derived.countOf(band)}';
     }
+    _resolved.text = '${widget.deckResolvedCount}';
     _emit();
   }
 
@@ -98,6 +107,9 @@ class _FindingsSummaryEditorState extends State<FindingsSummaryEditor>
           _bandField(context, band),
           const SizedBox(height: 8),
         ],
+        const SizedBox(height: 12),
+        const SectionLabel('Hertest'),
+        _resolvedField(context),
         const SizedBox(height: 8),
         Align(
           alignment: Alignment.centerLeft,
@@ -134,6 +146,41 @@ class _FindingsSummaryEditorState extends State<FindingsSummaryEditor>
           width: 76,
           child: TextField(
             controller: _counts[band],
+            keyboardType: TextInputType.number,
+            textAlign: TextAlign.right,
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            decoration: const InputDecoration(isDense: true),
+          ),
+        ),
+      ],
+    );
+  }
+
+  /// The "opgelost na hertest" total: derived from the deck's resolved findings
+  /// on refresh, editable by hand afterwards (like the band counts).
+  Widget _resolvedField(BuildContext context) {
+    final l10n = context.l10n;
+    return Row(
+      children: [
+        Container(
+          width: 12,
+          height: 12,
+          decoration: const BoxDecoration(
+            color: AppTheme.success700,
+            shape: BoxShape.circle,
+          ),
+        ),
+        const SizedBox(width: 10),
+        Expanded(
+          child: Text(
+            l10n.d('Opgelost na hertest'),
+            style: TextStyle(fontSize: 13, color: AppTheme.slate700),
+          ),
+        ),
+        SizedBox(
+          width: 76,
+          child: TextField(
+            controller: _resolved,
             keyboardType: TextInputType.number,
             textAlign: TextAlign.right,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],

@@ -52,6 +52,20 @@ void main() {
     expect(find.textContaining('6'), findsWidgets);
   });
 
+  testWidgets('always names the retest-resolved total', (tester) async {
+    final spec = FindingsSummarySpec.fromSeverities('Bevindingen', const [
+      Cvss4Severity.high,
+    ], resolved: 2);
+    final slide = Slide.create(
+      SlideType.findingsSummary,
+    ).copyWith(title: spec.title, tableRows: spec.toTableRows());
+    await tester.pumpWidget(_host(slide));
+    await tester.pump();
+
+    expect(tester.takeException(), isNull);
+    expect(find.textContaining('Opgelost na hertest: 2'), findsOneWidget);
+  });
+
   testWidgets('findingsSummary with no findings still renders', (tester) async {
     final empty = Slide.create(SlideType.findingsSummary);
     await tester.pumpWidget(_host(empty));

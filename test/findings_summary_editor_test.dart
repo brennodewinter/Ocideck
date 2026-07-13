@@ -10,6 +10,7 @@ Widget _host({
   required Slide slide,
   required List<Cvss4Severity> deckFindingSeverities,
   required ValueChanged<Slide> onUpdate,
+  int deckResolvedCount = 0,
 }) {
   return ProviderScope(
     child: MaterialApp(
@@ -18,6 +19,7 @@ Widget _host({
           slide: slide,
           onUpdate: onUpdate,
           deckFindingSeverities: deckFindingSeverities,
+          deckResolvedCount: deckResolvedCount,
         ),
       ),
     ),
@@ -39,6 +41,7 @@ void main() {
           Cvss4Severity.high,
           Cvss4Severity.none,
         ],
+        deckResolvedCount: 3,
         onUpdate: (s) => emitted = s,
       ),
     );
@@ -58,5 +61,6 @@ void main() {
     expect(spec.countOf(Cvss4Severity.medium), 0);
     expect(spec.countOf(Cvss4Severity.none), 1);
     expect(spec.total, 4);
+    expect(spec.resolved, 3);
   });
 }

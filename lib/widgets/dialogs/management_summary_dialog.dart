@@ -61,6 +61,14 @@ class ManagementSummaryDialog extends StatelessWidget {
                   ],
                 ),
               ),
+            const SizedBox(height: 8),
+            Text(
+              '${l10n.d('Opgelost na hertest')}: ${summary.resolvedCount}',
+              style: TextStyle(
+                color: AppTheme.success700,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
             const Divider(height: 20),
             Text(
               '${summary.scopeTestedCount} / ${summary.scopeObjectCount} '
