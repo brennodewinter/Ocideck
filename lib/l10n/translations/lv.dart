@@ -1782,6 +1782,14 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Hertest': 'Atkārtota pārbaude',
+  'Niet hertest': 'Nav atkārtoti pārbaudīts',
+  'Opgelost': 'Atrisināts',
+  'Nog aanwezig': 'Joprojām pastāv',
+  'Deels opgelost': 'Daļēji atrisināts',
+  'na hertest': 'pēc atkārtotas pārbaudes',
+  'Opgelost na hertest': 'Atrisināts pēc atkārtotas pārbaudes',
+  'Hertest-notitie': 'Atkārtotas pārbaudes piezīme',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'Bez atraduma ID tas tiek izveidots automātiski pie pirmā pierādījuma.',
   'Niet gedefinieerd': 'Nav definēts',

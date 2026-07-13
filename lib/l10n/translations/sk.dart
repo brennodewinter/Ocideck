@@ -1790,6 +1790,14 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Hertest': 'Opakovaný test',
+  'Niet hertest': 'Nepretestované',
+  'Opgelost': 'Vyriešené',
+  'Nog aanwezig': 'Stále prítomné',
+  'Deels opgelost': 'Čiastočne vyriešené',
+  'na hertest': 'po opakovanom teste',
+  'Opgelost na hertest': 'Vyriešené po opakovanom teste',
+  'Hertest-notitie': 'Poznámka k opakovanému testu',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'Bez ID zistenia sa pri prvom dôkaze vytvorí automaticky.',
   'Niet gedefinieerd': 'Nedefinované',

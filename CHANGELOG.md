@@ -8,6 +8,17 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Record retest (hertest) outcomes on findings.** A finding now carries a
+  **Hertest** status — *Niet hertest* (default) / *Opgelost* / *Nog aanwezig* /
+  *Deels opgelost* — set from a dropdown in the finding editor, with an optional
+  retest note. A finding that was resolved after retest shows a green **Opgelost
+  na hertest** badge on its card (amber for still-present/partially resolved),
+  while its CVSS severity stays visible. The findings summary and the management
+  summary always name the retest — **Opgelost na hertest: x** (also 0 when
+  nothing was retested) — so "x found, x resolved after retest" is reported; the
+  findingsSummary editor refreshes the figure from the deck. Round-trips via a
+  `**Retest:**` meta line (language-independent English token). Localised in all
+  interface languages.
 - **Load the seven PTES phases into a timeline.** The timeline editor gains a
   **PTES-fasen laden (Load PTES phases)** button that seeds the seven
   Penetration Testing Execution Standard phases (Voorafgaande afspraken →

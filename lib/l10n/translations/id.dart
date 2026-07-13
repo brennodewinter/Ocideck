@@ -1783,6 +1783,14 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Hertest': 'Uji ulang',
+  'Niet hertest': 'Tidak diuji ulang',
+  'Opgelost': 'Teratasi',
+  'Nog aanwezig': 'Masih ada',
+  'Deels opgelost': 'Sebagian teratasi',
+  'na hertest': 'setelah uji ulang',
+  'Opgelost na hertest': 'Teratasi setelah uji ulang',
+  'Hertest-notitie': 'Catatan uji ulang',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'Tanpa ID temuan, satu dibuat otomatis pada bukti pertama.',
   'Niet gedefinieerd': 'Tidak ditentukan',

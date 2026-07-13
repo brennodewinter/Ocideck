@@ -1782,6 +1782,14 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Hertest': 'Gentest',
+  'Niet hertest': 'Ikke gentestet',
+  'Opgelost': 'Løst',
+  'Nog aanwezig': 'Stadig til stede',
+  'Deels opgelost': 'Delvist løst',
+  'na hertest': 'efter gentest',
+  'Opgelost na hertest': 'Løst efter gentest',
+  'Hertest-notitie': 'Gentestnote',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'Uden et fund-id oprettes et automatisk ved det første bevis.',
   'Niet gedefinieerd': 'Ikke defineret',

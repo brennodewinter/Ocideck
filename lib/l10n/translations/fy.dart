@@ -741,6 +741,14 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Hertest': 'Werhelle test',
+  'Niet hertest': 'Net op \'e nij test',
+  'Opgelost': 'Oplost',
+  'Nog aanwezig': 'Noch oanwêzich',
+  'Deels opgelost': 'Foar in part oplost',
+  'na hertest': 'nei werhelle test',
+  'Opgelost na hertest': 'Oplost nei werhelle test',
+  'Hertest-notitie': 'Notysje werhelle test',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'Sûnder befinings-id meitsje we by it earste bewiis automatysk ien oan.',
   'Niet gedefinieerd': 'Net definiearre',

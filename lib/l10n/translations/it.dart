@@ -736,6 +736,14 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Hertest': 'Ritest',
+  'Niet hertest': 'Non ritestato',
+  'Opgelost': 'Risolto',
+  'Nog aanwezig': 'Ancora presente',
+  'Deels opgelost': 'Parzialmente risolto',
+  'na hertest': 'dopo il ritest',
+  'Opgelost na hertest': 'Risolto dopo il ritest',
+  'Hertest-notitie': 'Nota del ritest',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'Senza un ID rilevazione, ne viene creato uno automaticamente al primo elemento di prova.',
   'Niet gedefinieerd': 'Non definito',

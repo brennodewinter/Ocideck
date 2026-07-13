@@ -1787,6 +1787,14 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Hertest': 'Nochtescht',
+  'Niet hertest': 'Nöd nochtescht',
+  'Opgelost': 'Glöst',
+  'Nog aanwezig': 'No vorhande',
+  'Deels opgelost': 'Teilwiis glöst',
+  'na hertest': 'nach em Nochtescht',
+  'Opgelost na hertest': 'Nach em Nochtescht glöst',
+  'Hertest-notitie': 'Nochtescht-Notiz',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'Ohni Befind-ID wird bim erschte Bewiis automatisch eini erstellt.',
   'Niet gedefinieerd': 'Nöd definiert',

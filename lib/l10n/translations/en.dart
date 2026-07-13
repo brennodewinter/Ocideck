@@ -922,6 +922,14 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Hertest': 'Retest',
+  'Niet hertest': 'Not retested',
+  'Opgelost': 'Resolved',
+  'Nog aanwezig': 'Still present',
+  'Deels opgelost': 'Partially resolved',
+  'na hertest': 'after retest',
+  'Opgelost na hertest': 'Resolved after retest',
+  'Hertest-notitie': 'Retest note',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'Without a finding id, one is created automatically on the first evidence.',
   'Niet gedefinieerd': 'Not defined',

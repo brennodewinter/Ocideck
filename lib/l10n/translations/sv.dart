@@ -1782,6 +1782,14 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Hertest': 'Omtest',
+  'Niet hertest': 'Inte omtestad',
+  'Opgelost': 'Löst',
+  'Nog aanwezig': 'Kvarstår',
+  'Deels opgelost': 'Delvis löst',
+  'na hertest': 'efter omtest',
+  'Opgelost na hertest': 'Löst efter omtest',
+  'Hertest-notitie': 'Omtestanteckning',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'Utan ett fynd-id skapas ett automatiskt vid det första beviset.',
   'Niet gedefinieerd': 'Ej definierad',

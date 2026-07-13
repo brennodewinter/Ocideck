@@ -737,6 +737,14 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Hertest': 'Nueva prueba',
+  'Niet hertest': 'No reprobado',
+  'Opgelost': 'Resuelto',
+  'Nog aanwezig': 'Aún presente',
+  'Deels opgelost': 'Parcialmente resuelto',
+  'na hertest': 'tras la nueva prueba',
+  'Opgelost na hertest': 'Resuelto tras la nueva prueba',
+  'Hertest-notitie': 'Nota de nueva prueba',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'Sin un ID de hallazgo, se crea uno automáticamente con la primera evidencia.',
   'Niet gedefinieerd': 'No definido',

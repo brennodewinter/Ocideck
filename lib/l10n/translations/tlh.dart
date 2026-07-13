@@ -1758,6 +1758,14 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Hertest': 'nIDqa\'',
+  'Niet hertest': 'nIDqa\'be\'',
+  'Opgelost': 'rInpu\'',
+  'Nog aanwezig': 'ratlh',
+  'Deels opgelost': '\'op rInpu\'',
+  'na hertest': 'nIDqa\' ghIq',
+  'Opgelost na hertest': 'nIDqa\' ghIq rInpu\'',
+  'Hertest-notitie': 'nIDqa\' ghItlh',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'finding-ID Sovbe\'chugh, wa\'DIch evidence-Daq automatically chenmoH.',
   'Niet gedefinieerd': 'Sovbe\'lu\'',

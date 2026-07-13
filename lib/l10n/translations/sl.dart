@@ -1785,6 +1785,14 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Hertest': 'Ponovni test',
+  'Niet hertest': 'Ni ponovno testirano',
+  'Opgelost': 'Rešeno',
+  'Nog aanwezig': 'Še vedno prisotno',
+  'Deels opgelost': 'Delno rešeno',
+  'na hertest': 'po ponovnem testu',
+  'Opgelost na hertest': 'Rešeno po ponovnem testu',
+  'Hertest-notitie': 'Opomba ponovnega testa',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'Brez ID-ja ugotovitve se ta samodejno ustvari ob prvem dokazu.',
   'Niet gedefinieerd': 'Ni določeno',

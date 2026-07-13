@@ -1783,6 +1783,14 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Hertest': 'Uusintatesti',
+  'Niet hertest': 'Ei testattu uudelleen',
+  'Opgelost': 'Ratkaistu',
+  'Nog aanwezig': 'Yhä olemassa',
+  'Deels opgelost': 'Osittain ratkaistu',
+  'na hertest': 'uusintatestin jälkeen',
+  'Opgelost na hertest': 'Ratkaistu uusintatestin jälkeen',
+  'Hertest-notitie': 'Uusintatestin muistiinpano',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'Ilman löydöstunnusta se luodaan automaattisesti ensimmäisen todisteen yhteydessä.',
   'Niet gedefinieerd': 'Ei määritelty',

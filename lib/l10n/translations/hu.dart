@@ -1787,6 +1787,14 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Hertest': 'Újratesztelés',
+  'Niet hertest': 'Nincs újratesztelve',
+  'Opgelost': 'Megoldva',
+  'Nog aanwezig': 'Még mindig fennáll',
+  'Deels opgelost': 'Részben megoldva',
+  'na hertest': 'újratesztelés után',
+  'Opgelost na hertest': 'Megoldva újratesztelés után',
+  'Hertest-notitie': 'Újratesztelési megjegyzés',
   'Zonder bevinding-id maken we er automatisch een aan bij het eerste bewijs.':
       'Megállapítás-azonosító nélkül az első bizonyítéknál automatikusan létrejön egy.',
   'Niet gedefinieerd': 'Nincs meghatározva',
