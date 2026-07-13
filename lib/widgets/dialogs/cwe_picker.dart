@@ -27,6 +27,11 @@ class _CwePickerState extends State<CwePicker> {
   void initState() {
     super.initState();
     _search.addListener(() => setState(() {}));
+    // Serve the curated floor immediately; grow to the full offline list once
+    // the bundled asset is parsed (a one-off, a few ms).
+    _catalog.ensureLoaded().then((_) {
+      if (mounted) setState(() {});
+    });
   }
 
   @override
