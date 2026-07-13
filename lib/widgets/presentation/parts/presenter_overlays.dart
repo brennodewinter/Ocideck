@@ -524,6 +524,7 @@ extension _PresenterOverlays on _FullscreenPresenterState {
                       organization: widget.organization,
                       showClassificationWatermark:
                           widget.showClassificationWatermark,
+                      scopeCia: deckScopeCiaIndex(widget.slides),
                       fitScaleOverride: sharedSplitFitScale(
                         widget.slides,
                         i,

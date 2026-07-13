@@ -6,6 +6,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import '../models/cvss_builder.dart';
 import '../models/deck.dart';
 import '../models/document_signature.dart';
 import '../models/settings.dart';
@@ -14,6 +15,7 @@ import 'web_asset_store.dart';
 import '../utils/bundled_asset.dart';
 import '../utils/image_limits.dart';
 import '../utils/project_path.dart';
+import 'finding_context_score.dart';
 import 'slide_layout_metrics.dart';
 import '../widgets/document_signature_view.dart'
     show decodeEmbeddedSignatureImage;
@@ -100,6 +102,7 @@ class SlideRasterizer {
           tlp: tlp,
           showClassificationWatermark: showClassificationWatermark,
           organization: organization,
+          scopeCia: deckScopeCiaIndex(slides),
         ),
       ),
     );
@@ -255,6 +258,7 @@ class _RasterSlideHost extends StatefulWidget {
   final TlpLevel tlp;
   final bool showClassificationWatermark;
   final String organization;
+  final Map<String, CiaRating> scopeCia;
 
   const _RasterSlideHost({
     super.key,
@@ -269,6 +273,7 @@ class _RasterSlideHost extends StatefulWidget {
     required this.tlp,
     required this.showClassificationWatermark,
     required this.organization,
+    required this.scopeCia,
   });
 
   @override
@@ -329,6 +334,7 @@ class _RasterSlideHostState extends State<_RasterSlideHost> {
           tlp: widget.tlp,
           showClassificationWatermark: widget.showClassificationWatermark,
           organization: widget.organization,
+          scopeCia: widget.scopeCia,
         ),
       ),
     );

@@ -14,12 +14,14 @@ class _FindingPreview extends StatelessWidget {
   final double w;
   final String font;
   final ThemeProfile profile;
+  final Map<String, CiaRating> scopeCia;
 
   const _FindingPreview({
     required this.slide,
     required this.w,
     required this.font,
     required this.profile,
+    this.scopeCia = const {},
   });
 
   @override
@@ -27,8 +29,11 @@ class _FindingPreview extends StatelessWidget {
     final pad = w * 0.07;
     final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
     final spec = FindingSpec.parse(slide.customMarkdown);
+    // The context (environmental) score when the scope object is rated; the
+    // header card and its primary badge then track the CIA-weighted severity.
+    final ctxCvss = findingContextCvss(spec, scopeCia);
     final severityColor = FindingSeverityPalette.of(
-      spec.severity,
+      (ctxCvss ?? spec.cvss)?.severity,
       profile: profile,
     );
 
@@ -51,7 +56,7 @@ class _FindingPreview extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  _headerCard(context, spec, severityColor),
+                  _headerCard(context, spec, severityColor, ctxCvss),
                   SizedBox(height: w * 0.03),
                   ..._sectionBlocks(context, spec),
                 ],
@@ -63,7 +68,12 @@ class _FindingPreview extends StatelessWidget {
     );
   }
 
-  Widget _headerCard(BuildContext context, FindingSpec spec, Color severity) {
+  Widget _headerCard(
+    BuildContext context,
+    FindingSpec spec,
+    Color severity,
+    Cvss4? ctxCvss,
+  ) {
     return Container(
       width: w,
       padding: EdgeInsets.all(w * 0.03),
@@ -79,7 +89,7 @@ class _FindingPreview extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (_hasBadges(spec)) ...[
-            _badges(spec, severity),
+            _badges(context, spec, ctxCvss),
             SizedBox(height: w * 0.02),
           ],
           if (spec.heading.isNotEmpty)
@@ -125,17 +135,27 @@ class _FindingPreview extends StatelessWidget {
   bool _hasBadges(FindingSpec spec) =>
       spec.cvss != null || spec.cweId != null || spec.cveIds.isNotEmpty;
 
-  Widget _badges(FindingSpec spec, Color severity) {
-    final cvss = spec.cvss;
+  Widget _badges(BuildContext context, FindingSpec spec, Cvss4? ctxCvss) {
+    final base = spec.cvss;
+    final l10n = context.l10n;
+    String badge(String label, Cvss4 cvss) =>
+        '$label ${cvss.score.toStringAsFixed(1)} · ${cvss.severity.label}';
+    Color band(Cvss4 cvss) =>
+        FindingSeverityPalette.of(cvss.severity, profile: profile);
     return Wrap(
       spacing: w * 0.015,
       runSpacing: w * 0.012,
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
-        if (cvss != null)
+        if (base != null && ctxCvss != null) ...[
+          // The CIA-weighted context score leads (it is the "correct" score),
+          // with the base score alongside for transparency.
+          _filledBadge(badge(l10n.d('Context'), ctxCvss), band(ctxCvss)),
+          _filledBadge(badge(l10n.d('Basis'), base), band(base)),
+        ] else if (base != null)
           _filledBadge(
-            '${cvss.score.toStringAsFixed(1)} · ${cvss.severity.label}',
-            severity,
+            '${base.score.toStringAsFixed(1)} · ${base.severity.label}',
+            band(base),
           ),
         if (spec.cweId != null) _outlinedChip('CWE-${spec.cweId}'),
         for (final cve in spec.cveIds) _outlinedChip(cve),

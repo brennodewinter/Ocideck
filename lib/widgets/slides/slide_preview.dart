@@ -18,6 +18,7 @@ import '../../l10n/app_localizations.dart';
 import '../../models/chart.dart';
 import '../../models/checklist_spec.dart';
 import '../../models/cockpit.dart';
+import '../../models/cvss_builder.dart';
 import '../../models/deck.dart';
 import '../../models/document_signature.dart';
 import '../../models/finding_spec.dart';
@@ -30,6 +31,8 @@ import '../../models/timeline.dart';
 import '../../models/video_source.dart';
 import '../../theme/app_theme.dart';
 import '../../theme/finding_severity_palette.dart';
+import '../../services/cvss/cvss4.dart';
+import '../../services/finding_context_score.dart';
 import '../../services/slide_layout_metrics.dart';
 import '../../services/rich_text_layout.dart';
 import '../../services/web_asset_store.dart';
@@ -408,6 +411,12 @@ class SlidePreviewWidget extends StatelessWidget {
   /// with the full deck compute it via [sharedSplitFitScale].
   final double? fitScaleOverride;
 
+  /// The deck's scope-object → CIA-rating index (see [deckScopeCiaIndex]). A
+  /// `finding` header whose scope object is rated shows a context (environmental)
+  /// score derived from it. Callers with the full deck build it once and pass it
+  /// to every slide; standalone previews leave it empty (base score only).
+  final Map<String, CiaRating> scopeCia;
+
   const SlidePreviewWidget({
     super.key,
     required this.slide,
@@ -443,6 +452,7 @@ class SlidePreviewWidget extends StatelessWidget {
     this.timelineRevealedCount,
     this.numberStart = 1,
     this.fitScaleOverride,
+    this.scopeCia = const {},
   });
 
   @override
@@ -751,6 +761,7 @@ class SlidePreviewWidget extends StatelessWidget {
         w: w,
         font: fontFamily,
         profile: themeProfile,
+        scopeCia: scopeCia,
       );
     }
     if (slide.type == SlideType.checklist) {

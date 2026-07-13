@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../models/cvss_builder.dart';
 import '../../models/markdown_validation.dart';
 import '../../models/deck.dart';
 import '../../models/settings.dart';
@@ -38,6 +39,10 @@ class SlideThumbnail extends ConsumerWidget {
   /// main preview and the presentation (see [SlidePreviewWidget.numberStart]).
   final int numberStart;
 
+  /// Deck scope-object → CIA-rating index, so a finding thumbnail's severity
+  /// colour matches the main preview (see [SlidePreviewWidget.scopeCia]).
+  final Map<String, CiaRating> scopeCia;
+
   const SlideThumbnail({
     super.key,
     required this.slide,
@@ -56,6 +61,7 @@ class SlideThumbnail extends ConsumerWidget {
     this.organization = '',
     this.fitScaleOverride,
     this.numberStart = 1,
+    this.scopeCia = const {},
   });
 
   @override
@@ -192,6 +198,7 @@ class SlideThumbnail extends ConsumerWidget {
                     slideNumber: index + 1,
                     slideCount: slideCount,
                     numberStart: numberStart,
+                    scopeCia: scopeCia,
                     fitScaleOverride: fitScaleOverride,
                     tlp: tlp,
                     organization: organization,

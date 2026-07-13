@@ -8,6 +8,7 @@ import '../../models/slide.dart';
 import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../state/settings_provider.dart';
+import '../../services/finding_context_score.dart';
 import '../../services/finding_pagination.dart';
 import '../../services/rich_text_layout.dart';
 import '../../services/slide_layout_metrics.dart';
@@ -345,6 +346,7 @@ class _PreviewPanelState extends ConsumerState<PreviewPanel> {
                   slideNumber: idx + 1,
                   slideCount: deck.slides.length,
                   numberStart: numberedListStartFor(deck.slides, idx),
+                  scopeCia: deckScopeCiaIndex(deck.slides),
                   fitScaleOverride: sharedSplitFitScale(
                     deck.slides,
                     idx,
@@ -528,6 +530,7 @@ class FullDeckPreview extends ConsumerWidget {
                     onLinkTap: openExternalUrl,
                     slideNumber: i + 1,
                     slideCount: deck.slides.length,
+                    scopeCia: deckScopeCiaIndex(deck.slides),
                     tlp: deck.tlp,
                     organization: deck.organization,
                     deckSignature: deck.signature,
