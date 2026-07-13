@@ -35,6 +35,38 @@ extension _SettingsSecurity on _SettingsDialogState {
               ref.read(settingsProvider.notifier).setAllowRemoteMedia(value),
         ),
         const SizedBox(height: 20),
+        _sectionTitle(l10n.d('CVE opzoeken')),
+        SwitchListTile(
+          contentPadding: EdgeInsets.zero,
+          title: Text(
+            l10n.d('CVE opzoeken (online)'),
+            style: const TextStyle(fontSize: 13),
+          ),
+          subtitle: Text(
+            l10n.d(
+              'Sta toe om in de bevinding-editor online in CVE\'s te zoeken via een NVD-mirror. Standaard uit; vereist ook je toestemming en werkt alleen op desktop.',
+            ),
+            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+          ),
+          value: ref.watch(settingsProvider.select((s) => s.allowCveLookup)),
+          onChanged: (value) =>
+              ref.read(settingsProvider.notifier).setAllowCveLookup(value),
+        ),
+        if (ref.watch(settingsProvider.select((s) => s.allowCveLookup)))
+          Padding(
+            padding: const EdgeInsets.only(top: 4),
+            child: TextFormField(
+              initialValue: ref.read(settingsProvider).cveApiBaseUrl,
+              decoration: InputDecoration(
+                labelText: l10n.d('CVE-mirror (basis-URL)'),
+                hintText: AppSettings.defaultCveApiBaseUrl,
+                isDense: true,
+              ),
+              onFieldSubmitted: (value) =>
+                  ref.read(settingsProvider.notifier).setCveApiBaseUrl(value),
+            ),
+          ),
+        const SizedBox(height: 20),
         _sectionTitle(l10n.d('Herstelbestanden')),
         Padding(
           padding: const EdgeInsets.only(bottom: 8),

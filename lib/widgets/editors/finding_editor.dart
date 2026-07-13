@@ -16,6 +16,7 @@ import '../../state/editor_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../theme/finding_severity_palette.dart';
 import '../../utils/project_path.dart';
+import '../dialogs/cve_picker.dart';
 import '../dialogs/cvss_builder_dialog.dart';
 import '../dialogs/cwe_picker.dart';
 import '../dialogs/finding_template_picker.dart';
@@ -225,6 +226,19 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
     }
   }
 
+  /// Look up a CVE online (gated) and append its id to the CVE field, without
+  /// duplicating an id already present. The finding's CVSS is left untouched.
+  Future<void> _pickCve() async {
+    final id = await CvePicker.show(context);
+    if (id == null || !mounted) return;
+    final existing = _cve.text.trim();
+    final present = _reCve
+        .allMatches(existing)
+        .map((m) => m.group(0)!.toUpperCase());
+    if (present.contains(id.toUpperCase())) return;
+    _cve.text = existing.isEmpty ? id : '$existing, $id';
+  }
+
   @override
   Widget build(BuildContext context) {
     // Scope objects (with their CIA ratings) come from the deck's scope matrix,
@@ -258,6 +272,11 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
                 onPressed: _pickCwe,
                 icon: const Icon(Icons.shield_outlined, size: 16),
                 label: Text(context.l10n.d('Kies CWE…')),
+              ),
+              OutlinedButton.icon(
+                onPressed: _pickCve,
+                icon: const Icon(Icons.travel_explore, size: 16),
+                label: Text(context.l10n.d('Zoek CVE…')),
               ),
             ],
           ),
