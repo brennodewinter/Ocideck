@@ -66,6 +66,21 @@ class _ChecklistPreview extends StatelessWidget {
                         ),
                       ),
                     ),
+                  // The scope object this checklist covers (feedback #8).
+                  if (slide.checklistScope.isNotEmpty) ...[
+                    SizedBox(height: w * 0.008),
+                    Text(
+                      '${context.l10n.d('Scope-object')}: '
+                      '${slide.checklistScope}',
+                      style: _applyFont(
+                        font,
+                        TextStyle(
+                          fontSize: w * 0.024,
+                          color: AppTheme.slate600,
+                        ),
+                      ),
+                    ),
+                  ],
                   SizedBox(height: w * 0.02),
                   _progress(context, spec, accent),
                   SizedBox(height: w * 0.03),

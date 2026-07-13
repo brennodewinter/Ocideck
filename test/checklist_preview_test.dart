@@ -54,4 +54,29 @@ void main() {
     // The progress bar is present (derived tested/total).
     expect(find.byType(LinearProgressIndicator), findsOneWidget);
   });
+
+  testWidgets('checklist shows its linked scope object (feedback #8)', (
+    tester,
+  ) async {
+    final slide = _checklist().copyWith(
+      checklistScope: 'https://app.example/login',
+    );
+    await tester.pumpWidget(_host(slide));
+    await tester.pump();
+
+    expect(tester.takeException(), isNull);
+    expect(
+      find.textContaining('https://app.example/login'),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('checklist without a scope object shows no scope line', (
+    tester,
+  ) async {
+    await tester.pumpWidget(_host(_checklist()));
+    await tester.pump();
+
+    expect(find.textContaining('Scope-object:'), findsNothing);
+  });
 }
