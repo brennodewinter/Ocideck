@@ -5,6 +5,7 @@ import '../../l10n/app_localizations.dart';
 import '../../models/document_signature.dart';
 import '../../theme/app_theme.dart';
 import '../document_signature_view.dart';
+import '../signature_draw_dialog.dart';
 
 /// Outcome of [FinalizeSealDialog]: confirming returns this (with an optional
 /// [signature]); cancelling returns null.
@@ -52,6 +53,10 @@ class _FinalizeSealDialogState extends State<FinalizeSealDialog> {
     text: widget.initial?.typedSignature ?? '',
   );
 
+  /// The drawn signature as an embedded `data:` image URI, preserved so sealing
+  /// keeps a signature drawn on the sign-off slide.
+  late String _imagePath = widget.initial?.imagePath ?? '';
+
   @override
   void dispose() {
     _name.dispose();
@@ -74,7 +79,14 @@ class _FinalizeSealDialogState extends State<FinalizeSealDialog> {
     certification: _certification.text.trim(),
     statement: _statement.text.trim(),
     typedSignature: _typed.text.trim(),
+    imagePath: _imagePath,
   );
+
+  Future<void> _drawSignature() async {
+    final uri = await SignatureDrawDialog.show(context);
+    if (uri == null || !mounted) return;
+    setState(() => _imagePath = uri);
+  }
 
   void _seal() {
     final base = _currentSignature();
@@ -147,6 +159,24 @@ class _FinalizeSealDialogState extends State<FinalizeSealDialog> {
           _field(l10n, _statement, 'Verklaring', maxLines: 2),
           const SizedBox(height: 10),
           _field(l10n, _typed, 'Getypte handtekening'),
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              OutlinedButton.icon(
+                onPressed: _drawSignature,
+                icon: const Icon(Icons.gesture, size: 16),
+                label: Text(l10n.d('Handtekening tekenen')),
+              ),
+              if (_imagePath.startsWith('data:')) ...[
+                const SizedBox(width: 8),
+                TextButton.icon(
+                  onPressed: () => setState(() => _imagePath = ''),
+                  icon: const Icon(Icons.delete_outline, size: 16),
+                  label: Text(l10n.d('Wissen')),
+                ),
+              ],
+            ],
+          ),
           const SizedBox(height: 16),
           _preview(l10n),
         ],

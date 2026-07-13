@@ -84,6 +84,9 @@ const _stringsFi = {
 };
 
 const _dutchSourceFi = {
+  'Handtekening tekenen': 'Piirrä allekirjoitus',
+  'Teken je handtekening in het vak hieronder.':
+      'Piirrä allekirjoituksesi alla olevaan ruutuun.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Datapaketti on .zip, joka sisältää tämän moduulin viitetiedot. Se tarkistetaan ensin sovellukseen sisäänrakennettua sormenjälkeä vasten; vain tähän sovellusversioon sopiva paketti hyväksytään.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':

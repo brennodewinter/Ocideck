@@ -84,6 +84,9 @@ const _stringsId = {
 };
 
 const _dutchSourceId = {
+  'Handtekening tekenen': 'Gambar tanda tangan',
+  'Teken je handtekening in het vak hieronder.':
+      'Gambar tanda tangan Anda di kotak di bawah.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Paket data adalah .zip berisi data referensi untuk modul ini. Paket diperiksa dulu terhadap sidik jari yang tertanam di aplikasi; hanya paket yang cocok dengan versi aplikasi ini yang diterima.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':

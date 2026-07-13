@@ -84,6 +84,9 @@ const _stringsLt = {
 };
 
 const _dutchSourceLt = {
+  'Handtekening tekenen': 'Piešti parašą',
+  'Teken je handtekening in het vak hieronder.':
+      'Nupieškite savo parašą laukelyje žemiau.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Duomenų paketas – tai .zip su šio modulio nuorodų duomenimis. Pirmiausia jis patikrinamas pagal į programą įtaisytą atspaudą; priimamas tik su šia programos versija suderinamas paketas.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':

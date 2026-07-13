@@ -86,6 +86,9 @@ const _stringsPl = {
 };
 
 const _dutchSourcePl = {
+  'Handtekening tekenen': 'Narysuj podpis',
+  'Teken je handtekening in het vak hieronder.':
+      'Narysuj swój podpis w polu poniżej.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Pakiet danych to plik .zip z danymi referencyjnymi tego modułu. Najpierw jest sprawdzany względem odcisku wbudowanego w aplikację; akceptowany jest tylko pakiet zgodny z tą wersją aplikacji.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':

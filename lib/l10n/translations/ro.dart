@@ -85,6 +85,9 @@ const _stringsRo = {
 };
 
 const _dutchSourceRo = {
+  'Handtekening tekenen': 'Desenează semnătura',
+  'Teken je handtekening in het vak hieronder.':
+      'Desenează-ți semnătura în caseta de mai jos.',
   'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.':
       'Un pachet de date este un .zip cu datele de referință pentru acest modul. Este mai întâi verificat față de amprenta încorporată în aplicație; se acceptă doar un pachet care corespunde acestei versiuni a aplicației.',
   'Te weinig contrast met de achtergrond — mogelijk onleesbaar.':

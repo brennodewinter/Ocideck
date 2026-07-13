@@ -41,6 +41,7 @@ import '../../utils/lru_cache.dart';
 import '../../utils/net_guard.dart';
 import '../../utils/markdown_paste_cleanup.dart';
 import '../../utils/project_path.dart';
+import '../document_signature_view.dart' show decodeEmbeddedSignatureImage;
 import 'inline_markdown.dart';
 import 'image_zoom_dialog.dart';
 

@@ -8,6 +8,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Draw a signature on the sign-off page.** Next to the typed signature, the
+  sign-off editor and the **Afronden & verzegelen** dialog now offer
+  **Handtekening tekenen (Draw signature)** — a pad you sign with the mouse,
+  trackpad, touch or stylus. The drawing is stored as a self-contained embedded
+  PNG in the deck's visual signature (the existing `ocideck_sig_image` field), so
+  it round-trips in the `.md` and is covered by the document seal like the rest
+  of the attestation. Wherever the sign-off is shown, a drawn signature takes
+  precedence over the typed name. Localised in all interface languages.
+  *(Note: the sign-off signature is not yet included in the PDF/PPTX export — a
+  pre-existing limitation that also affects the typed signature.)*
 - **Error messages are copyable.** Failure notifications (export, import,
   Nextcloud download/save, and the module card) now carry a **Kopiëren (Copy)**
   action that puts the exact message on the clipboard, and stay on screen a
