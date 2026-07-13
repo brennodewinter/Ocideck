@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/checklist_spec.dart';
 import '../../models/slide.dart';
+import '../../services/finding_context_score.dart';
 import '../../services/wstg_catalog.dart';
+import '../../state/deck_provider.dart';
 import '../../theme/app_theme.dart';
 import '_editor_field.dart';
 
@@ -16,7 +19,11 @@ import '_editor_field.dart';
 /// [WstgCatalog] (the full OWASP WSTG v4.2 checklist), non-destructively: it
 /// only appends the tests whose id is not already present, so existing rows and
 /// their statuses are preserved. The standard label then carries the version.
-class ChecklistEditor extends StatefulWidget {
+///
+/// A **scope-object** field links the checklist to a scope-matrix object
+/// (feedback #8, "per scope-object heb je een checklist"): free text plus a
+/// dropdown filled from the deck's scope matrix. It stores [Slide.checklistScope].
+class ChecklistEditor extends ConsumerStatefulWidget {
   final Slide slide;
   final ValueChanged<Slide> onUpdate;
   final bool nestedInScrollView;
@@ -29,7 +36,7 @@ class ChecklistEditor extends StatefulWidget {
   });
 
   @override
-  State<ChecklistEditor> createState() => _ChecklistEditorState();
+  ConsumerState<ChecklistEditor> createState() => _ChecklistEditorState();
 }
 
 /// The controllers + status for one editable checklist row.
@@ -64,8 +71,9 @@ class _RowControllers {
   }
 }
 
-class _ChecklistEditorState extends State<ChecklistEditor> {
+class _ChecklistEditorState extends ConsumerState<ChecklistEditor> {
   late final TextEditingController _standard;
+  late final TextEditingController _scope;
   late List<_RowControllers> _rows;
 
   @override
@@ -77,6 +85,8 @@ class _ChecklistEditorState extends State<ChecklistEditor> {
     );
     _standard = TextEditingController(text: spec.standardLabel)
       ..addListener(_emit);
+    _scope = TextEditingController(text: widget.slide.checklistScope)
+      ..addListener(_emit);
     _rows = spec.rows.map((r) => _RowControllers(r, _emit)).toList();
     if (_rows.isEmpty) _rows = [_RowControllers(const ChecklistRow(), _emit)];
   }
@@ -84,6 +94,7 @@ class _ChecklistEditorState extends State<ChecklistEditor> {
   @override
   void dispose() {
     _standard.dispose();
+    _scope.dispose();
     for (final row in _rows) {
       row.dispose();
     }
@@ -99,6 +110,7 @@ class _ChecklistEditorState extends State<ChecklistEditor> {
       widget.slide.copyWith(
         title: spec.standardLabel,
         tableRows: spec.toTableRows(),
+        checklistScope: _scope.text.trim(),
       ),
     );
   }
@@ -144,9 +156,17 @@ class _ChecklistEditorState extends State<ChecklistEditor> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final deck = ref.watch(deckProvider.select((s) => s.deck));
+    final scopeObjects =
+        <String>{
+          for (final r in deckScopeRows(deck?.slides ?? const []))
+            if (r.object.trim().isNotEmpty) r.object.trim(),
+        }.toList();
     return editorScrollList(
       nestedInScrollView: widget.nestedInScrollView,
       children: [
+        _scopeField(context, scopeObjects),
+        const SizedBox(height: 12),
         EditorField(
           label: 'Standaard',
           controller: _standard,
@@ -166,6 +186,55 @@ class _ChecklistEditorState extends State<ChecklistEditor> {
             icon: const Icon(Icons.add, size: 16),
             label: Text(l10n.d('Test toevoegen')),
           ),
+        ),
+      ],
+    );
+  }
+
+  /// The scope-object this checklist covers: a free-text field plus a dropdown
+  /// filled from the deck's scope matrix, mirroring the finding editor's scope
+  /// picker. Stored on [Slide.checklistScope]; typing an object not (yet) in the
+  /// matrix stays allowed.
+  Widget _scopeField(BuildContext context, List<String> scopeObjects) {
+    final l10n = context.l10n;
+    // Via a variable so the URL example is not scanned as a translatable literal.
+    const hint = 'https://app.voorbeeld/login';
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          l10n.d('Scope-object'),
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+            color: AppTheme.slate500,
+          ),
+        ),
+        const SizedBox(height: 5),
+        Row(
+          children: [
+            Expanded(
+              child: TextField(
+                controller: _scope,
+                minLines: 1,
+                maxLines: 1,
+                decoration: InputDecoration(hintText: l10n.d(hint)),
+              ),
+            ),
+            if (scopeObjects.isNotEmpty)
+              PopupMenuButton<String>(
+                icon: Icon(Icons.arrow_drop_down, color: AppTheme.slate500),
+                tooltip: l10n.d('Kies uit de scope'),
+                onSelected: (v) => _scope.text = v,
+                itemBuilder: (_) => [
+                  for (final o in scopeObjects)
+                    PopupMenuItem(
+                      value: o,
+                      child: Text(o, style: const TextStyle(fontSize: 13)),
+                    ),
+                ],
+              ),
+          ],
         ),
       ],
     );
