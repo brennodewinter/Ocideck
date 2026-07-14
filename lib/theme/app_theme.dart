@@ -144,7 +144,6 @@ class AppTheme {
   static const danger600 = Color(0xFFDC2626);
   static const danger700 = Color(0xFFB91C1C);
   static const danger800 = Color(0xFFC62828);
-  static const dangerPlain = Color(0xFFCC0000);
 
   // ── Bevinding-ernst (FIRST CVSS-banden) ───────────────────────────────────
   // Deterministische const-tokens zodat een `finding` identiek rendert in de

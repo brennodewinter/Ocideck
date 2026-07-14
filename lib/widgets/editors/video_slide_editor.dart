@@ -285,8 +285,12 @@ class _SourceKindChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    // De chip zegt wélke soort bron dit is, niet dat er iets mis is. YouTube
+    // kreeg eerder het rode danger-token: een geldige YouTube-link zag er dan
+    // uit als een fout, náást een kwaliteitspaneel waar rood écht "fout"
+    // betekent. Een online bron is een online bron — teal, net als de andere.
     final (label, color) = switch (source.kind) {
-      VideoSourceKind.youtube => ('YouTube', AppTheme.dangerPlain),
+      VideoSourceKind.youtube => ('YouTube', AppTheme.teal),
       VideoSourceKind.vimeo => ('Vimeo', AppTheme.cyan),
       VideoSourceKind.remoteFile => (l10n.d('Online'), AppTheme.teal),
       VideoSourceKind.localFile => (
