@@ -118,7 +118,49 @@ class PrivacyStatementContent extends StatelessWidget {
         ),
         const SizedBox(height: 16),
 
-        // ── 4. Redaction ─────────────────────────────────────────────────────
+        // ── 4. The privacy check ─────────────────────────────────────────────
+        //
+        // De belofte moet hier kleiner zijn dan de feature aanvoelt. Wie denkt
+        // dat de controle álles vindt, deelt op grond van die aanname — en dan
+        // heeft een gemiste bevinding meer schade aangericht dan geen controle.
+        // Vandaar dat de grens er in de verklaring net zo hard in staat als de
+        // belofte.
+        _heading(
+          theme,
+          Icons.privacy_tip_outlined,
+          l10n.d('De privacycontrole'),
+        ),
+        _card(
+          theme,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                l10n.d(
+                  'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.',
+                ),
+                style: _bodyStyle,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                l10n.d(
+                  'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.',
+                ),
+                style: _bodyStyle,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                l10n.d(
+                  'Tekst in afbeeldingen blijft buiten beeld, gelinkte bestanden worden niet geopend, en gegevens zonder herkenbaar patroon herkent geen enkele scanner. Een dia zonder meldingen is een dia waarin wíj niets hebben gevonden, niet een dia waarvan vaststaat dat er niets in staat. Wat je deelt, blijft jouw beslissing en jouw verantwoordelijkheid.',
+                ),
+                style: _bodyStyle,
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 16),
+
+        // ── 5. Redaction ─────────────────────────────────────────────────────
         _heading(
           theme,
           Icons.visibility_off_outlined,

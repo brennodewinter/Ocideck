@@ -1802,6 +1802,13 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'De privacycontrole': 'Verificarea confidențialității',
+  'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
+      'OciDeck îți parcurge diapozitivele în căutarea datelor care ar putea fi sensibile: numere de identificare, date de contact, numere de telefon, conturi bancare, chei și parole, precum și categorii speciale de date personale. Totul se întâmplă pe acest dispozitiv: nu se trimite nimic, iar valoarea găsită nu apare în niciun mesaj.',
+  'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.':
+      'Verificarea nu garantează că se găsește totul; reduce riscul ca date personale să se scurgă neintenționat.',
+  'Tekst in afbeeldingen blijft buiten beeld, gelinkte bestanden worden niet geopend, en gegevens zonder herkenbaar patroon herkent geen enkele scanner. Een dia zonder meldingen is een dia waarin wíj niets hebben gevonden, niet een dia waarvan vaststaat dat er niets in staat. Wat je deelt, blijft jouw beslissing en jouw verantwoordelijkheid.':
+      'Textul din imagini rămâne în afara razei, fișierele legate nu sunt deschise, iar datele fără un tipar recognoscibil nu sunt recunoscute de niciun scaner. Un diapozitiv fără constatări este un diapozitiv în care *noi* nu am găsit nimic — nu un diapozitiv despre care s-a dovedit că nu conține nimic. Ce partajezi rămâne decizia ta și responsabilitatea ta.',
   'telefoonnummer': 'număr de telefon',
   'Voor wie is deze export?': 'Pentru cine este acest export?',
   'Volledig': 'Complet',

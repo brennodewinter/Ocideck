@@ -7,6 +7,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+- **The promise is now written down where it matters.** *The check does not
+  guarantee that everything is found; it reduces the chance that personal data
+  leaks out unintentionally.* That sentence now appears in the privacy statement
+  (which is also the consent gate), under the setting itself, and — most
+  importantly — in the **export dialog, always, including when nothing was
+  found**. That quiet case is the dangerous one: a deck with findings warns you
+  by itself, but a deck without findings shows a green *Ready to export*, and
+  that reads as "clean". It says no more than: we found nothing.
+
 ### Fixed
 - **A special-category datum is a statement, not a word.** Redaction blanked only
   the keyword that fired, which left this on screen:

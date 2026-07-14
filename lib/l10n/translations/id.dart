@@ -1783,6 +1783,13 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'De privacycontrole': 'Pemeriksaan privasi',
+  'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
+      'OciDeck memeriksa slide Anda untuk data yang mungkin sensitif bagi privasi: nomor identifikasi, data kontak, nomor telepon, rekening bank, kunci dan kata sandi, serta kategori khusus data pribadi. Semuanya terjadi di perangkat ini: tidak ada yang dikirim, dan nilai yang ditemukan tidak pernah muncul dalam pemberitahuan apa pun.',
+  'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.':
+      'Pemeriksaan ini tidak menjamin bahwa semuanya ditemukan; ia mengurangi peluang data pribadi bocor tanpa disengaja.',
+  'Tekst in afbeeldingen blijft buiten beeld, gelinkte bestanden worden niet geopend, en gegevens zonder herkenbaar patroon herkent geen enkele scanner. Een dia zonder meldingen is een dia waarin wíj niets hebben gevonden, niet een dia waarvan vaststaat dat er niets in staat. Wat je deelt, blijft jouw beslissing en jouw verantwoordelijkheid.':
+      'Teks di dalam gambar tetap tak terbaca, berkas tertaut tidak dibuka, dan tidak ada pemindai yang mengenali data tanpa pola yang jelas. Slide tanpa temuan adalah slide di mana *kami* tidak menemukan apa pun — bukan slide yang terbukti tidak memuat apa pun. Apa yang Anda bagikan tetap keputusan dan tanggung jawab Anda.',
   'telefoonnummer': 'nomor telepon',
   'Voor wie is deze export?': 'Ekspor ini untuk siapa?',
   'Volledig': 'Lengkap',

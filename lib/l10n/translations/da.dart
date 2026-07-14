@@ -1782,6 +1782,13 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'De privacycontrole': 'Privatlivskontrollen',
+  'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
+      'OciDeck læser dine slides igennem for data, der kan være følsomme: identifikationsnumre, kontaktoplysninger, telefonnumre, bankkonti, nøgler og adgangskoder samt særlige kategorier af personoplysninger. Det sker udelukkende på denne enhed: intet sendes nogen steder hen, og den fundne værdi optræder ikke i nogen meddelelse.',
+  'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.':
+      'Kontrollen garanterer ikke, at alt bliver fundet; den mindsker risikoen for, at personoplysninger utilsigtet slipper ud.',
+  'Tekst in afbeeldingen blijft buiten beeld, gelinkte bestanden worden niet geopend, en gegevens zonder herkenbaar patroon herkent geen enkele scanner. Een dia zonder meldingen is een dia waarin wíj niets hebben gevonden, niet een dia waarvan vaststaat dat er niets in staat. Wat je deelt, blijft jouw beslissing en jouw verantwoordelijkheid.':
+      'Tekst i billeder forbliver uden for rækkevidde, linkede filer åbnes ikke, og data uden et genkendeligt mønster genkender ingen scanner. Et slide uden fund er et slide, hvor *vi* ikke fandt noget — ikke et slide, hvor det er bevist, at der intet står. Hvad du deler, forbliver din beslutning og dit ansvar.',
   'telefoonnummer': 'telefonnummer',
   'Voor wie is deze export?': 'Hvem er denne eksport til?',
   'Volledig': 'Fuldstændig',

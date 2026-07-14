@@ -445,10 +445,19 @@ word was covered. So the whole statement goes.
 
 ### It is an aid, not a guarantee
 
+**The check does not guarantee that everything is found; it reduces the chance
+that personal data leaks out unintentionally.** That sentence is the whole promise,
+and it is deliberately the smaller of the two you might have expected.
+
 The check does not read text inside **images**, does not open **linked files**,
 and cannot see sensitive information without a recognisable pattern. A slide with
 no findings is a slide in which *we* found nothing — not a slide that is proven
-clean. What you share remains your call.
+clean. The green *Ready to export* means the checks we run found nothing to say;
+it does not mean the deck is safe to send.
+
+So the decision about what you share, and the responsibility for it, stay with
+you. A tool that let you outsource that judgement would be more dangerous than no
+tool at all — you would stop looking.
 
 Found something you want gone? Wrap it in double square brackets — see below.
 

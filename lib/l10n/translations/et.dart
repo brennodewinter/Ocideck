@@ -1774,6 +1774,13 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'De privacycontrole': 'Privaatsuskontroll',
+  'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
+      'OciDeck loeb su slaidid läbi andmete suhtes, mis võivad olla privaatsustundlikud: isikukoodid, kontaktandmed, telefoninumbrid, pangakontod, võtmed ja paroolid ning isikuandmete eriliigid. Kõik toimub selles seadmes: midagi ei saadeta välja ja leitud väärtus ei ilmu üheski teates.',
+  'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.':
+      'Kontroll ei taga, et kõik leitakse; see vähendab ohtu, et isikuandmed tahtmatult lekivad.',
+  'Tekst in afbeeldingen blijft buiten beeld, gelinkte bestanden worden niet geopend, en gegevens zonder herkenbaar patroon herkent geen enkele scanner. Een dia zonder meldingen is een dia waarin wíj niets hebben gevonden, niet een dia waarvan vaststaat dat er niets in staat. Wat je deelt, blijft jouw beslissing en jouw verantwoordelijkheid.':
+      'Piltidel olev tekst jääb nähtamatuks, lingitud faile ei avata ja äratuntava mustrita andmeid ei tunne ükski skanner ära. Leiuta slaid on slaid, millelt *meie* midagi ei leidnud — mitte slaid, mille kohta on tõestatud, et seal midagi pole. See, mida jagad, jääb sinu otsuseks ja sinu vastutuseks.',
   'telefoonnummer': 'telefoninumber',
   'Voor wie is deze export?': 'Kellele see eksport on?',
   'Volledig': 'Täielik',

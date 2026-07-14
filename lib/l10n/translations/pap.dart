@@ -740,6 +740,13 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'De privacycontrole': 'E kontrol di privacidat',
+  'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
+      'OciDeck ta lesa bo slides pa datos ku por ta sensitivo pa privacidat: number di identifikashon, datos di kontakto, number di telefon, kuenta di banko, yabi i kontraseña, i datos personal spesial. Tur esaki ta pasa kompletamente riba e aparato aki: nada no ta wòrdu mandá, i e balor hañá no ta aparesé den ningun mensahe.',
+  'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.':
+      'E kontrol no ta garantisá ku tur kos ta wòrdu hañá; e ta redusí e chèns ku datos personal ta lek afó sin ku bo ke.',
+  'Tekst in afbeeldingen blijft buiten beeld, gelinkte bestanden worden niet geopend, en gegevens zonder herkenbaar patroon herkent geen enkele scanner. Een dia zonder meldingen is een dia waarin wíj niets hebben gevonden, niet een dia waarvan vaststaat dat er niets in staat. Wat je deelt, blijft jouw beslissing en jouw verantwoordelijkheid.':
+      'Teksto den imágen ta keda pafó di bista, archivo lombrá no ta wòrdu habri, i ningun scanner no ta rekonosé datos sin un patronchi rekonosibel. Un slide sin mensahe ta un slide kaminda *nos* no a haña nada, no un slide di kua ta konstá ku no tin nada aden. Loke bo ta kompartí ta keda bo desishon i bo responsabilidat.',
   'telefoonnummer': 'number di telefon',
   'Voor wie is deze export?': 'Pa ken e eksportashon aki ta?',
   'Volledig': 'Kompleto',

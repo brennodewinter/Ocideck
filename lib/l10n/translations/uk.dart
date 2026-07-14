@@ -1801,6 +1801,13 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'De privacycontrole': 'Перевірка приватності',
+  'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
+      'OciDeck переглядає ваші слайди на предмет даних, які можуть бути чутливими: ідентифікаційні номери, контактні дані, номери телефонів, банківські рахунки, ключі та паролі, а також особливі категорії персональних даних. Усе відбувається на цьому пристрої: нічого не надсилається, і знайдене значення не з\'являється в жодному повідомленні.',
+  'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.':
+      'Перевірка не гарантує, що буде знайдено все; вона зменшує ймовірність ненавмисного витоку персональних даних.',
+  'Tekst in afbeeldingen blijft buiten beeld, gelinkte bestanden worden niet geopend, en gegevens zonder herkenbaar patroon herkent geen enkele scanner. Een dia zonder meldingen is een dia waarin wíj niets hebben gevonden, niet een dia waarvan vaststaat dat er niets in staat. Wat je deelt, blijft jouw beslissing en jouw verantwoordelijkheid.':
+      'Текст на зображеннях залишається поза увагою, пов\'язані файли не відкриваються, а дані без розпізнаваного шаблону не розпізнає жоден сканер. Слайд без повідомлень — це слайд, на якому *ми* нічого не знайшли, а не слайд, про який доведено, що на ньому нічого немає. Те, чим ви ділитеся, залишається вашим рішенням і вашою відповідальністю.',
   'telefoonnummer': 'номер телефону',
   'Voor wie is deze export?': 'Для кого цей експорт?',
   'Volledig': 'Повний',

@@ -1785,6 +1785,13 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'De privacycontrole': 'Preverjanje zasebnosti',
+  'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
+      'OciDeck prebere tvoje prosojnice in išče podatke, ki bi lahko bili občutljivi: identifikacijske številke, kontaktne podatke, telefonske številke, bančne račune, ključe in gesla ter posebne vrste osebnih podatkov. Vse poteka na tej napravi: nič se ne pošilja, najdena vrednost pa se ne pojavi v nobenem obvestilu.',
+  'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.':
+      'Preverjanje ne jamči, da bo najdeno vse; zmanjša možnost, da osebni podatki nenamerno uidejo v javnost.',
+  'Tekst in afbeeldingen blijft buiten beeld, gelinkte bestanden worden niet geopend, en gegevens zonder herkenbaar patroon herkent geen enkele scanner. Een dia zonder meldingen is een dia waarin wíj niets hebben gevonden, niet een dia waarvan vaststaat dat er niets in staat. Wat je deelt, blijft jouw beslissing en jouw verantwoordelijkheid.':
+      'Besedilo v slikah ostane skrito, povezane datoteke se ne odprejo, podatkov brez prepoznavnega vzorca pa ne prepozna noben pregledovalnik. Prosojnica brez najdb je prosojnica, na kateri *mi* nismo našli ničesar — ne prosojnica, za katero je dokazano, da na njej ni ničesar. Kar deliš, ostaja tvoja odločitev in tvoja odgovornost.',
   'telefoonnummer': 'telefonska številka',
   'Voor wie is deze export?': 'Za koga je ta izvoz?',
   'Volledig': 'Popolno',

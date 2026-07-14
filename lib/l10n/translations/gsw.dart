@@ -1787,6 +1787,13 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'De privacycontrole': 'D Dateschutzprüefig',
+  'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
+      'OciDeck lisst dini Folie na uf Date, wo dateschutzrelevant chönnted si: Identifikationsnummere, Kontaktdate, Telifonnummere, Bankkonte, Schlüssel und Passwörter, und bsunderi Kategorie vo persönliche Date. Das passiert ganz uf dem Grät: es wird nüt verschickt, und de gfundeni Wärt chunnt i kei Mäldig vor.',
+  'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.':
+      'D Prüefig garantiert nöd, dass alles gfunde wird; si verchlinert d Gfahr, dass persönlichi Date ungwollt uselaufed.',
+  'Tekst in afbeeldingen blijft buiten beeld, gelinkte bestanden worden niet geopend, en gegevens zonder herkenbaar patroon herkent geen enkele scanner. Een dia zonder meldingen is een dia waarin wíj niets hebben gevonden, niet een dia waarvan vaststaat dat er niets in staat. Wat je deelt, blijft jouw beslissing en jouw verantwoordelijkheid.':
+      'Text i Bilder blibt usserhalb, verlinkti Datei wärded nöd ufgmacht, und Date ohni erkennbars Muschter erkennt kei Scanner. E Folie ohni Mäldige isch e Folie, wo *mir* nüt gfunde händ — nöd e Folie, wo bewise isch, dass nüt drin isch. Was du teilsch, blibt dini Entscheidig und dini Verantwortig.',
   'telefoonnummer': 'Telifonnummere',
   'Voor wie is deze export?': 'Für wän isch dä Export?',
   'Volledig': 'Vollständig',

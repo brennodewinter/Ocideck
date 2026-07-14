@@ -68,7 +68,14 @@ void main() {
     expect(find.text('Afbeeldingskwaliteit (PDF)'), findsOneWidget);
     // De kwaliteitskeuze zit achter de inklapbare kop (progressive
     // disclosure); openklappen toont de segmentknop.
-    await tester.tap(find.text('Afbeeldingskwaliteit (PDF)'));
+    //
+    // Eerst in beeld scrollen: het dialoog is `scrollable`, en op het 800×600-
+    // testoppervlak valt de kop onder de vouw. Zonder dit mist de tik het doel —
+    // een artefact van de testmaat, niet van de layout.
+    final imageQuality = find.text('Afbeeldingskwaliteit (PDF)');
+    await tester.ensureVisible(imageQuality);
+    await tester.pumpAndSettle();
+    await tester.tap(imageQuality);
     await tester.pumpAndSettle();
     expect(
       find.widgetWithText(SegmentedButton<bool>, 'Normaal'),

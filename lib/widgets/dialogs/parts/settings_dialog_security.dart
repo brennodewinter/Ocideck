@@ -24,11 +24,23 @@ extension _SettingsSecurity on _SettingsDialogState {
             l10n.d('Waarschuw bij mogelijke persoonsgegevens'),
             style: const TextStyle(fontSize: 13),
           ),
-          subtitle: Text(
-            l10n.d(
-              'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.',
-            ),
-            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                l10n.d(
+                  'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.',
+                ),
+                style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                l10n.d(
+                  'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.',
+                ),
+                style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+              ),
+            ],
           ),
           value: ref.watch(
             settingsProvider.select((s) => s.privacyChecksEnabled),

@@ -1806,6 +1806,13 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'De privacycontrole': 'Il-kontroll tal-privatezza',
+  'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
+      'OciDeck jaqra s-slides tiegħek għal data li tista\' tkun sensittiva għall-privatezza: numri ta\' identifikazzjoni, dettalji ta\' kuntatt, numri tat-telefon, kontijiet bankarji, ċwievet u passwords, u kategoriji speċjali ta\' data personali. Dan kollu jseħħ fuq dan l-apparat: xejn ma jintbagħat, u l-valur misjub ma jidher f\'ebda avviż.',
+  'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.':
+      'Il-kontroll ma jiggarantixxix li kollox jinstab; inaqqas iċ-ċans li data personali tinxtered mingħajr ma trid.',
+  'Tekst in afbeeldingen blijft buiten beeld, gelinkte bestanden worden niet geopend, en gegevens zonder herkenbaar patroon herkent geen enkele scanner. Een dia zonder meldingen is een dia waarin wíj niets hebben gevonden, niet een dia waarvan vaststaat dat er niets in staat. Wat je deelt, blijft jouw beslissing en jouw verantwoordelijkheid.':
+      'It-test fl-istampi jibqa\' barra mill-vista, il-fajls marbuta ma jinfetħux, u l-ebda skener ma jagħraf data mingħajr mudell rikonoxxibbli. Slide mingħajr sejbiet hija slide li fiha *aħna* ma sibna xejn — mhux slide li ġie ppruvat li ma fiha xejn. Dak li taqsam jibqa\' d-deċiżjoni tiegħek u r-responsabbiltà tiegħek.',
   'telefoonnummer': 'numru tat-telefon',
   'Voor wie is deze export?': 'Għal min hi din l-esportazzjoni?',
   'Volledig': 'Sħiħ',

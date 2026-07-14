@@ -922,6 +922,13 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'De privacycontrole': 'The privacy check',
+  'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
+      'OciDeck reads your slides for data that may be privacy-sensitive: identification numbers, contact details, phone numbers, bank accounts, keys and passwords, and special categories of personal data. This happens entirely on this device: nothing is sent anywhere, and the value that was found never appears in any notice.',
+  'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.':
+      'The check does not guarantee that everything is found; it reduces the chance that personal data leaks out unintentionally.',
+  'Tekst in afbeeldingen blijft buiten beeld, gelinkte bestanden worden niet geopend, en gegevens zonder herkenbaar patroon herkent geen enkele scanner. Een dia zonder meldingen is een dia waarin wíj niets hebben gevonden, niet een dia waarvan vaststaat dat er niets in staat. Wat je deelt, blijft jouw beslissing en jouw verantwoordelijkheid.':
+      'Text inside images stays out of view, linked files are not opened, and no scanner recognises data without a recognisable pattern. A slide with no findings is a slide in which *we* found nothing — not a slide proven to hold nothing. What you share remains your decision and your responsibility.',
   'telefoonnummer': 'phone number',
   'Voor wie is deze export?': 'Who is this export for?',
   'Volledig': 'Full',

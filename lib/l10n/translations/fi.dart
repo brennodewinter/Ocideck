@@ -1783,6 +1783,13 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'De privacycontrole': 'Yksityisyystarkistus',
+  'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
+      'OciDeck lukee diasi läpi tietojen varalta, jotka voivat olla yksityisyyden kannalta arkaluonteisia: tunnistenumerot, yhteystiedot, puhelinnumerot, pankkitilit, avaimet ja salasanat sekä erityiset henkilötietoryhmät. Kaikki tapahtuu tällä laitteella: mitään ei lähetetä, eikä löytynyt arvo näy missään ilmoituksessa.',
+  'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.':
+      'Tarkistus ei takaa, että kaikki löytyy; se pienentää riskiä, että henkilötietoja vuotaa vahingossa ulos.',
+  'Tekst in afbeeldingen blijft buiten beeld, gelinkte bestanden worden niet geopend, en gegevens zonder herkenbaar patroon herkent geen enkele scanner. Een dia zonder meldingen is een dia waarin wíj niets hebben gevonden, niet een dia waarvan vaststaat dat er niets in staat. Wat je deelt, blijft jouw beslissing en jouw verantwoordelijkheid.':
+      'Kuvien sisällä oleva teksti jää näkymättömiin, linkitettyjä tiedostoja ei avata, eikä mikään skanneri tunnista tietoja ilman tunnistettavaa kaavaa. Dia ilman havaintoja on dia, josta *me* emme löytäneet mitään — ei dia, jonka on todistettu olevan tyhjä. Se, mitä jaat, on edelleen sinun päätöksesi ja sinun vastuullasi.',
   'telefoonnummer': 'puhelinnumero',
   'Voor wie is deze export?': 'Kenelle tämä vienti on?',
   'Volledig': 'Täysi',
