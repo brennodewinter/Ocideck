@@ -1790,6 +1790,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Privacy Shield (ontwerp)': 'Privacy Shield (návrh)',
   'Mogelijk geheim': 'Možné tajomstvo',
   'sleutel of token': 'kľúč alebo token',
   'private sleutel': 'súkromný kľúč',

@@ -1806,6 +1806,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Privacy Shield (ontwerp)': 'Privacy Shield (disinn)',
   'Mogelijk geheim': 'Sigriet possibbli',
   'sleutel of token': 'ċavetta jew token',
   'private sleutel': 'ċavetta privata',

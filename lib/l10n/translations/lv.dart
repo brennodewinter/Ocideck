@@ -1782,6 +1782,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Privacy Shield (ontwerp)': 'Privacy Shield (dizains)',
   'Mogelijk geheim': 'Iespējams noslēpums',
   'sleutel of token': 'atslēga vai marķieris',
   'private sleutel': 'privātā atslēga',

@@ -1813,6 +1813,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Privacy Shield (ontwerp)': 'Privacy Shield (design)',
   'Mogelijk geheim': 'Possível segredo',
   'sleutel of token': 'chave ou token',
   'private sleutel': 'chave privada',

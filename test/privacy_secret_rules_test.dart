@@ -114,6 +114,16 @@ void main() {
       expect(rulesIn('https://ocideck.example.com/docs'), isEmpty);
       expect(rulesIn('postgres://db.intern:5432/prod'), isEmpty);
     });
+
+    test('vuurt niet op de illustratie in een handleiding', () {
+      // Documentatie legt dit patroon nu eenmaal uit met `user:pass@`. Zou dat
+      // afgaan, dan kleurt elke uitleg-slide rood — en onze eigen
+      // ontwerpdocumenten ook. Dat is geen theoretisch risico: de corpustest
+      // betrapte ons er letterlijk op.
+      expect(rulesIn('bijvoorbeeld postgres://user:pass@host/db'), isEmpty);
+      expect(rulesIn('mysql://user:password@localhost:3306/db'), isEmpty);
+      expect(rulesIn('mongodb://<user>:<password>@cluster'), isEmpty);
+    });
   });
 
   group('secret.password_plain — de placeholder-poort', () {

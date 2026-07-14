@@ -922,6 +922,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Privacy Shield (ontwerp)': 'Privacy Shield (design)',
   'Mogelijk geheim': 'Possible secret',
   'sleutel of token': 'key or token',
   'private sleutel': 'private key',

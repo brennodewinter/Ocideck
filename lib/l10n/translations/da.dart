@@ -1782,6 +1782,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Privacy Shield (ontwerp)': 'Privacy Shield (design)',
   'Mogelijk geheim': 'Mulig hemmelighed',
   'sleutel of token': 'nøgle eller token',
   'private sleutel': 'privat nøgle',

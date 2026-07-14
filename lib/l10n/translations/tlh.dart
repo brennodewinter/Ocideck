@@ -1758,6 +1758,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Privacy Shield (ontwerp)': 'Privacy Shield (qech)',
   'Mogelijk geheim': 'chaq pegh',
   'sleutel of token': 'ngaQHa\'moHwI\' pagh token',
   'private sleutel': 'pegh ngaQHa\'moHwI\'',

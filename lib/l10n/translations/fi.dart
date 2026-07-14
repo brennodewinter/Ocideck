@@ -1783,6 +1783,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Privacy Shield (ontwerp)': 'Privacy Shield (suunnitelma)',
   'Mogelijk geheim': 'Mahdollinen salaisuus',
   'sleutel of token': 'avain tai poletti',
   'private sleutel': 'yksityinen avain',
