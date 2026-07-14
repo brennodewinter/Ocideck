@@ -132,9 +132,15 @@ class _SealTimestampDialogState extends State<SealTimestampDialog> {
         ],
       );
     }
+    // The token's message imprint matches this seal, but its CMS signature and
+    // TSA certificate chain are deliberately NOT verified in-app (see
+    // rfc3161_timestamp.dart, §8-A3). So genTime is the token's *claim*, not a
+    // checked fact — whoever holds the deck can mint a token with an arbitrary
+    // time and a matching imprint. Present it as neutral information, never a
+    // green "verified" trust badge that would overstate what was checked.
     return Row(
       children: [
-        Icon(Icons.verified_outlined, size: 16, color: AppTheme.severityLow),
+        Icon(Icons.schedule, size: 16, color: AppTheme.slate600),
         const SizedBox(width: 8),
         Expanded(
           child: Text(

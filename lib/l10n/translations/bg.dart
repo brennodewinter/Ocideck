@@ -1806,6 +1806,9 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Extern': 'Външен',
+  'Van een externe URL opgehaald; het openen heeft die server benaderd.':
+      'Изтеглено от външен URL адрес; отварянето се свърза с този сървър.',
   'map/presentatie': 'папка/презентация',
   'Gekoppelde test': 'Свързан тест',
   'Maak eerst een checklist voor dit scope-object.':

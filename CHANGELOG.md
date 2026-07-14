@@ -8,6 +8,59 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **A privacy badge marks decks that came from a URL.** When a deck is fetched
+  from a web address (the URL import, or a `?deck=…` share link on the web
+  build), the status bar shows an **“Extern”** badge — a “PrivacyKat” mark in the
+  EU blue/yellow palette. Opening such a link makes your device contact that
+  server; the badge makes that provenance visible (hover for the source host)
+  without blocking the open. Decks opened from your own disk carry no badge.
+  Translated into every interface language.
+
+### Security
+- **The RFC 3161 timestamp panel no longer shows a "verified" badge for a
+  token it hasn't verified.** The panel displayed a green check and
+  "Getijdstempeld op &lt;time&gt;" whenever the token's message imprint matched
+  the seal — but the TSA's CMS signature and certificate chain are deliberately
+  not checked in-app, so that time is the token's *claim*, not a verified fact
+  (anyone holding the deck can mint a token with an arbitrary time and a
+  matching imprint). The green trust badge is replaced with a neutral clock
+  icon so the UI stops overstating what was checked. (A follow-up will add an
+  explicit "signature not verified" caption — deferred here because it needs the
+  string translated into all interface languages.)
+- **The HTML export's CSP now pins every network-capable resource, not just
+  scripts and fetches.** The export already blocked remote scripts (nonce) and
+  `connect-src`/remote `img-src`, but with no `default-src` the `media-src`,
+  `font-src` and `form-action` directives were unset and therefore unrestricted
+  — so a `<video src="https://…">`, a hostile `@font-face { url() }` or a
+  planted `<form action="https://…">` that survived DOMPurify could still call
+  home when the exported file was opened. All three are now pinned to local
+  sources (`'self' data: blob: file:` / `'none'`). MathJax is tex-svg (no web
+  fonts) and the bundled CSS carries no `url()`, so this never bites a real
+  export.
+- **The web fetch-proxy fails closed by default.** `server/fetch-proxy`
+  served *any* requester when `OCIDECK_PROXY_ALLOWED_ORIGINS` was unset, so an
+  operator who deployed it without that variable ran an (SSRF-guarded, but
+  otherwise open) fetch relay for arbitrary public URLs. With no allowlist it
+  now serves only the app's own same-origin fetch (proven by `Sec-Fetch-Site`,
+  which a cross-site page cannot forge); the previous open behaviour is still
+  available but must be chosen deliberately with `OCIDECK_PROXY_ALLOW_ANY=1`,
+  which also logs a startup warning.
+- **The Mermaid SVG sanitiser can no longer be split apart by a control
+  character.** `sanitizeMermaidSvg` refused `javascript:`/`data:` URLs with a
+  plain `startsWith`, but a URL parser ignores ASCII whitespace and control
+  bytes while reading a scheme — so `java<tab>script:`, a newline (which XML
+  normalisation or a `&#10;` reference can plant) or a leading NUL all slipped
+  through, and `vbscript:` was not checked at all. The scheme test now strips
+  every C0 control and space before matching and also rejects `vbscript:`. This
+  is a defence-in-depth layer (the in-app renderer runs no script and the HTML
+  export re-sanitises with DOMPurify under a nonce CSP), but the layer now
+  actually holds its stated contract.
+- **CI runs with a least-privilege token and no lingering credentials.** Both
+  workflows now declare `permissions: contents: read` (they only read the repo
+  and upload artifacts, which use the separate Actions runtime token), so a
+  compromised dependency or action can't push, open PRs or edit issues with the
+  job token. Every `actions/checkout` also sets `persist-credentials: false`, so
+  the auth token is not written into `.git/config` for a later step to reuse.
 - **The coverage gate now actually runs — and can finally see an untested file.**
   `make coverage` was in no aggregate target, and the CI workflow that ran it
   cannot fire on the Forgejo remote, so the coverage floor was enforced by

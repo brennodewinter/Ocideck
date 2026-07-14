@@ -1783,6 +1783,9 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Extern': 'Ulkoinen',
+  'Van een externe URL opgehaald; het openen heeft die server benaderd.':
+      'Haettu ulkoisesta URL-osoitteesta; avaaminen otti yhteyden kyseiseen palvelimeen.',
   'map/presentatie': 'kansio/esitys',
   'Gekoppelde test': 'Linkitetty testi',
   'Maak eerst een checklist voor dit scope-object.':

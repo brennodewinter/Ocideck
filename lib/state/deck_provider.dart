@@ -71,6 +71,12 @@ class DeckState {
   /// opgeslagen". Op desktop blijft dit null en telt [filePath].
   final String? downloadName;
 
+  /// Gezet wanneer dit deck via de web-URL-import/`?deck=`-deeplink van een
+  /// externe URL is opgehaald (niet van schijf gekozen). De statusbalk toont
+  /// dan een privacy-badge: het openen van zo'n link heeft die externe server
+  /// benaderd. Null voor lokaal geopende/nieuwe decks.
+  final String? remoteOrigin;
+
   /// Of er een ongedaan-maken- resp. opnieuw-uitvoeren-stap beschikbaar is.
   /// Onderdeel van de state zodat de toolbarknoppen vanzelf mee-enabelen.
   final bool canUndo;
@@ -87,6 +93,7 @@ class DeckState {
     this.filePath,
     this.error,
     this.downloadName,
+    this.remoteOrigin,
     this.canUndo = false,
     this.canRedo = false,
     this.revision = 0,
@@ -101,6 +108,7 @@ class DeckState {
     String? filePath,
     String? error,
     String? downloadName,
+    String? remoteOrigin,
     bool? canUndo,
     bool? canRedo,
     int? revision,
@@ -113,6 +121,7 @@ class DeckState {
       filePath: clearFilePath ? null : (filePath ?? this.filePath),
       error: clearError ? null : (error ?? this.error),
       downloadName: downloadName ?? this.downloadName,
+      remoteOrigin: remoteOrigin ?? this.remoteOrigin,
       canUndo: canUndo ?? this.canUndo,
       canRedo: canRedo ?? this.canRedo,
       revision: revision ?? this.revision,
@@ -195,12 +204,17 @@ class DeckNotifier extends StateNotifier<DeckState> {
   /// Load a deck that was already parsed (used by the tab manager). Styling is
   /// not taken from the deck/markdown but from the active style profile, so an
   /// opened or recovered deck always picks up the current look.
-  void loadDeck(Deck deck, {String? filePath}) {
+  void loadDeck(Deck deck, {String? filePath, String? remoteOrigin}) {
     final resolvedDeck = deck.copyWith(
       themeProfile: _file.activeProfileFor(projectPath: deck.projectPath),
     );
     _clearHistory();
-    state = DeckState(deck: resolvedDeck, filePath: filePath, isDirty: false);
+    state = DeckState(
+      deck: resolvedDeck,
+      filePath: filePath,
+      remoteOrigin: remoteOrigin,
+      isDirty: false,
+    );
   }
 
   Future<void> openDeck({String? initialDirectory}) async {

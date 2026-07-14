@@ -736,6 +736,9 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Extern': 'Esterno',
+  'Van een externe URL opgehaald; het openen heeft die server benaderd.':
+      'Recuperato da un URL esterno; l\'apertura ha contattato quel server.',
   'map/presentatie': 'cartella/presentazione',
   'Gekoppelde test': 'Test collegato',
   'Maak eerst een checklist voor dit scope-object.':

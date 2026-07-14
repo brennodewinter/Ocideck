@@ -8,6 +8,12 @@ on:
     tags: ["v*"]
   workflow_dispatch:
 
+# Least privilege: these jobs only read the repo and upload build artifacts
+# (via the separate Actions runtime token, not GITHUB_TOKEN), so read-only is
+# enough. Grant no more than that to the token a tag build runs with.
+permissions:
+  contents: read
+
 jobs:
   # Software Bill of Materials (CycloneDX 1.6 + SPDX 2.3). Uploaded as its own
   # release artefact so the CRA (Reg. (EU) 2024/2847, Annex I Part II §1)
@@ -19,6 +25,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
@@ -51,6 +59,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
@@ -86,6 +96,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
@@ -115,6 +127,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
@@ -146,6 +160,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       # Linux desktop build toolchain (GTK, clang, ninja) — not present on the
       # runner by default.

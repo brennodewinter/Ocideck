@@ -1799,6 +1799,9 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Extern': 'Externum',
+  'Van een externe URL opgehaald; het openen heeft die server benaderd.':
+      'Ex URL externa haustum; in aperiendo servitium illud contactum est.',
   'map/presentatie': 'scrinium/expositio',
   'Gekoppelde test': 'Probatio nexa',
   'Maak eerst een checklist voor dit scope-object.':

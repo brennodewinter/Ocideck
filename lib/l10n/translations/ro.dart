@@ -1802,6 +1802,9 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Extern': 'Extern',
+  'Van een externe URL opgehaald; het openen heeft die server benaderd.':
+      'Preluat de la un URL extern; deschiderea a contactat acel server.',
   'map/presentatie': 'folder/prezentare',
   'Gekoppelde test': 'Test asociat',
   'Maak eerst een checklist voor dit scope-object.':

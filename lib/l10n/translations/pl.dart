@@ -1796,6 +1796,9 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Extern': 'Zewnętrzny',
+  'Van een externe URL opgehaald; het openen heeft die server benaderd.':
+      'Pobrano z zewnętrznego adresu URL; otwarcie połączyło się z tym serwerem.',
   'map/presentatie': 'folder/prezentacja',
   'Gekoppelde test': 'Powiązany test',
   'Maak eerst een checklist voor dit scope-object.':

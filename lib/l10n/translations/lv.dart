@@ -1782,6 +1782,9 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Extern': 'Ārējs',
+  'Van een externe URL opgehaald; het openen heeft die server benaderd.':
+      'Iegūts no ārēja URL; atverot tika izveidots savienojums ar šo serveri.',
   'map/presentatie': 'mape/prezentācija',
   'Gekoppelde test': 'Saistīts tests',
   'Maak eerst een checklist voor dit scope-object.':

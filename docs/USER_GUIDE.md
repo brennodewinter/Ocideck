@@ -23,6 +23,11 @@ Marp tools.
   high-stakes, emotional ones weave in the *Crucial Conversations* method; each
   comes with fill-in preparation tables and a progress checklist. Everything is
   placeholder text you overwrite with your own content.
+- **Opened from a URL**: a deck fetched from a web address (the URL import, or a
+  `?deck=…` share link on the web build) shows an **“Extern”** privacy badge in
+  the status bar. Opening such a link made your device contact that server;
+  hover the badge to see the source host. Decks you open from your own disk carry
+  no badge.
 - **Save**: `Ctrl/Cmd + S`. Saving lays out a tidy project folder next to your
   `.md` (`images/`, `data/`, `logos/`, `themes/`) and copies assets in. See
   [`FILE_FORMAT.md`](FILE_FORMAT.md).

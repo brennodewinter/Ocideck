@@ -1813,6 +1813,9 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Extern': 'Externo',
+  'Van een externe URL opgehaald; het openen heeft die server benaderd.':
+      'Obtido de um URL externo; a abertura contactou esse servidor.',
   'map/presentatie': 'pasta/apresentação',
   'Gekoppelde test': 'Teste vinculado',
   'Maak eerst een checklist voor dit scope-object.':

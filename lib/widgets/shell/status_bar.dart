@@ -40,6 +40,11 @@ class _DeckStatusBar extends StatelessWidget {
   final ExportReadiness readiness;
   final SlideQualityResult quality;
 
+  /// De externe URL waar dit deck vandaan is opgehaald (web-URL-import /
+  /// `?deck=`-deeplink), of null bij een lokaal/nieuw deck. Bepaalt of de
+  /// privacy-badge verschijnt.
+  final String? remoteOrigin;
+
   const _DeckStatusBar({
     required this.deck,
     required this.deckState,
@@ -49,6 +54,7 @@ class _DeckStatusBar extends StatelessWidget {
     required this.exportTooltip,
     required this.readiness,
     required this.quality,
+    this.remoteOrigin,
   });
 
   @override
@@ -101,6 +107,10 @@ class _DeckStatusBar extends StatelessWidget {
                       tooltip: fileStatus.tooltip,
                     ),
                   ),
+                  if (remoteOrigin != null) ...[
+                    const _StatusDivider(),
+                    _RemoteOriginBadge(url: remoteOrigin!),
+                  ],
                   const _StatusDivider(),
                   _StatusItem(
                     icon: Icons.slideshow_outlined,
@@ -328,6 +338,65 @@ class _StatusItem extends StatelessWidget {
                       : FontWeight.w600,
                 ),
               ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// The "PrivacyKat" mark: an EU-blue (#003399) shield with cat ears and an
+/// EU-yellow (#FFCC00) keyhole. Flags a deck that was fetched from an external
+/// URL. The yellow rim keeps the dark-blue body legible on a dark status bar.
+/// Kept as an inline string (rendered via `SvgPicture.string`, like the mermaid
+/// diagrams) so it needs no bundled asset.
+const String privacyKatSvg =
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">'
+    '<path d="M4.6 6.2 L7 3.2 L9.1 6.2 L12 5.4 L14.9 6.2 L17 3.2 L19.4 6.2 '
+    'V11.3 C19.4 16.1 16.2 19.5 12 21.4 C7.8 19.5 4.6 16.1 4.6 11.3 Z" '
+    'fill="#003399" stroke="#FFCC00" stroke-width="1.4" stroke-linejoin="round"/>'
+    '<circle cx="12" cy="11" r="1.85" fill="#FFCC00"/>'
+    '<path d="M11.15 12.3 L10.75 15.4 H13.25 L12.85 12.3 Z" fill="#FFCC00"/>'
+    '</svg>';
+
+/// Tooltip for the remote-origin badge: the fixed privacy explanation, followed
+/// by the source host (data, not translated) when it can be parsed. Pure so the
+/// host-extraction + composition is unit-testable without a widget.
+String remoteOriginTooltip(String url, AppLocalizations l10n) {
+  final base = l10n.d(
+    'Van een externe URL opgehaald; het openen heeft die server benaderd.',
+  );
+  final host = Uri.tryParse(url)?.host;
+  return (host == null || host.isEmpty) ? base : '$base ($host)';
+}
+
+/// Non-blocking privacy badge shown when the open deck came from an external
+/// URL (web URL-import / `?deck=` deeplink). Opening such a link caused the
+/// device to contact that server; the badge makes that provenance visible
+/// without getting in the way. Hover reveals the full explanation and host.
+class _RemoteOriginBadge extends StatelessWidget {
+  final String url;
+
+  const _RemoteOriginBadge({required this.url});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final fg = Theme.of(context).colorScheme.onSurfaceVariant;
+    return Tooltip(
+      message: remoteOriginTooltip(url, l10n),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SvgPicture.string(privacyKatSvg, width: 14, height: 14),
+          const SizedBox(width: 4),
+          Text(
+            l10n.d('Extern'),
+            style: TextStyle(
+              fontSize: 11,
+              color: fg,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ],

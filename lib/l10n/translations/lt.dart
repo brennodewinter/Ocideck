@@ -1791,6 +1791,9 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Extern': 'Išorinis',
+  'Van een externe URL opgehaald; het openen heeft die server benaderd.':
+      'Gauta iš išorinio URL; atidarant buvo susisiekta su tuo serveriu.',
   'map/presentatie': 'aplankas/pristatymas',
   'Gekoppelde test': 'Susietas testas',
   'Maak eerst een checklist voor dit scope-object.':

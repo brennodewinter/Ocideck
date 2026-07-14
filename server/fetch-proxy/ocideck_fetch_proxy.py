@@ -27,6 +27,11 @@ Draait als eigen gebruiker achter de webserver, bv. Apache:
 Omgevingsvariabelen: OCIDECK_PROXY_BIND (127.0.0.1), OCIDECK_PROXY_PORT
 (8123), OCIDECK_PROXY_MAX_BYTES (536870912), OCIDECK_PROXY_ALLOWED_ORIGINS
 (komma-lijst; indien gezet moet Origin of Referer ermee beginnen).
+
+Standaard faalt de proxy gesloten: zonder allowlist bedient hij alleen de
+same-origin fetch van de app (Sec-Fetch-Site), zodat een niet-geconfigureerde
+deployment géén open fetch-relay is. Zet OCIDECK_PROXY_ALLOW_ANY=1 om de proxy
+bewust als open (SSRF-begrensde, alleen publieke hosts) fetcher te draaien.
 """
 
 import http.client
@@ -46,6 +51,11 @@ ALLOWED_ORIGINS = [
     for o in os.environ.get("OCIDECK_PROXY_ALLOWED_ORIGINS", "").split(",")
     if o.strip()
 ]
+# Fail closed by default: zonder allowlist bedient de proxy alleen de
+# same-origin fetch van de app zelf (Sec-Fetch-Site), niet elke willekeurige
+# aanvrager. Zet OCIDECK_PROXY_ALLOW_ANY=1 om dat bewust los te laten en de
+# proxy als open (public-only) fetcher te draaien.
+ALLOW_ANY = os.environ.get("OCIDECK_PROXY_ALLOW_ANY", "").strip() in ("1", "true", "yes")
 CONNECT_TIMEOUT = 15
 READ_TIMEOUT = 60
 CHUNK = 64 * 1024
@@ -139,15 +149,23 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
     def _origin_allowed(self) -> bool:
-        if not ALLOWED_ORIGINS:
-            return True
+        if ALLOW_ANY:
+            return True  # operator heeft de open (public-only) modus gekozen
         # `Sec-Fetch-Site: same-origin` sturen browsers bij elk verzoek
         # automatisch mee en is niet door (cross-site) pagina's te zetten:
         # het bewijst dat het verzoek van de app-pagina zelf komt — óók
         # wanneer een privacy-instelling of extensie de Referer stript.
         # Een direct ingetikt adres heeft Sec-Fetch-Site "none" en een
         # andere site "cross-site"; beide blijven geweigerd.
-        if (self.headers.get("Sec-Fetch-Site") or "").lower() == "same-origin":
+        same_origin = (
+            self.headers.get("Sec-Fetch-Site") or ""
+        ).lower() == "same-origin"
+        if not ALLOWED_ORIGINS:
+            # Fail closed: zonder expliciete allowlist alleen de same-origin
+            # fetch van de app zelf — geen open fetch-relay voor willekeurige
+            # publieke URL's.
+            return same_origin
+        if same_origin:
             return True
         for header in ("Origin", "Referer"):
             value = (self.headers.get(header) or "").rstrip("/")
@@ -252,10 +270,21 @@ class Handler(BaseHTTPRequestHandler):
 
 def main():
     server = ThreadingHTTPServer((BIND, PORT), Handler)
+    if ALLOW_ANY:
+        origins = "OPEN — elke aanvrager (OCIDECK_PROXY_ALLOW_ANY gezet)"
+    elif ALLOWED_ORIGINS:
+        origins = ", ".join(ALLOWED_ORIGINS)
+    else:
+        origins = "alleen same-origin (fail-closed standaard)"
     sys.stderr.write(
         "fetch-proxy: luistert op %s:%d (cap %d bytes, origins: %s)\n"
-        % (BIND, PORT, MAX_BYTES, ", ".join(ALLOWED_ORIGINS) or "alle")
+        % (BIND, PORT, MAX_BYTES, origins)
     )
+    if ALLOW_ANY:
+        sys.stderr.write(
+            "fetch-proxy: WAARSCHUWING — open modus: dit is een SSRF-begrensde "
+            "(alleen publieke hosts) maar verder onbeperkte fetch-relay.\n"
+        )
     server.serve_forever()
 
 

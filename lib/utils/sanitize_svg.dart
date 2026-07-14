@@ -60,6 +60,14 @@ void _stripUnsafeAttributes(XmlElement element) {
 }
 
 bool _isUnsafeUrl(String value) {
-  final lower = value.toLowerCase();
-  return lower.startsWith('javascript:') || lower.startsWith('data:');
+  // A URL parser ignores ASCII whitespace and control characters while reading
+  // the scheme, so `java\tscript:`, `java\nscript:` and a leading NUL all still
+  // resolve to `javascript:`. XML normalisation and numeric character
+  // references (`java&#10;script:`) let an attacker plant exactly those bytes.
+  // Strip every C0 control and space before matching so the scheme can't be
+  // split apart — this only ever makes the check stricter.
+  final lower = value.replaceAll(RegExp(r'[\x00-\x20]'), '').toLowerCase();
+  return lower.startsWith('javascript:') ||
+      lower.startsWith('vbscript:') ||
+      lower.startsWith('data:');
 }

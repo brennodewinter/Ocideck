@@ -1783,6 +1783,9 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Extern': 'Eksternal',
+  'Van een externe URL opgehaald; het openen heeft die server benaderd.':
+      'Diambil dari URL eksternal; membukanya menghubungi server itu.',
   'map/presentatie': 'folder/presentasi',
   'Gekoppelde test': 'Uji tertaut',
   'Maak eerst een checklist voor dit scope-object.':

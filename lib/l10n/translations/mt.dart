@@ -1806,6 +1806,9 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Extern': 'Estern',
+  'Van een externe URL opgehaald; het openen heeft die server benaderd.':
+      'Miksub minn URL estern; il-ftuħ ikkuntattja dak is-server.',
   'map/presentatie': 'folder/preżentazzjoni',
   'Gekoppelde test': 'Test marbut',
   'Maak eerst een checklist voor dit scope-object.':

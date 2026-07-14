@@ -6,6 +6,14 @@ on:
     tags: ["v*"]
   pull_request:
 
+# Least privilege: the default GITHUB_TOKEN grants far more than these jobs
+# need. They only read the repo and upload build artifacts (which use the
+# separate Actions runtime token, not GITHUB_TOKEN), so read-only is enough.
+# A compromised dependency or action therefore can't push, open PRs, or edit
+# issues with this token.
+permissions:
+  contents: read
+
 jobs:
   # Canonical gate on Linux: formatting, analysis, the full suite with coverage,
   # licence compliance and the bundled-JS security check.
@@ -15,6 +23,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # Don't leave the auth token in .git/config after checkout, where a
+          # later step (or a compromised action) could reuse it.
+          persist-credentials: false
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
@@ -89,6 +101,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
@@ -112,6 +126,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
@@ -134,6 +150,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Check Markdown links
         uses: lycheeverse/lychee-action@v2
@@ -151,6 +169,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Trivy filesystem scan (advisory)
         uses: aquasecurity/trivy-action@v0.36.0

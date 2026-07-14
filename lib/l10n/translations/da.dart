@@ -1782,6 +1782,9 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Extern': 'Ekstern',
+  'Van een externe URL opgehaald; het openen heeft die server benaderd.':
+      'Hentet fra en ekstern URL; åbningen kontaktede den server.',
   'map/presentatie': 'mappe/præsentation',
   'Gekoppelde test': 'Tilknyttet test',
   'Maak eerst een checklist voor dit scope-object.':
