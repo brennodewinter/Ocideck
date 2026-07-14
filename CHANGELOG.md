@@ -8,6 +8,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Security
+- **The RFC 3161 timestamp panel no longer shows a "verified" badge for a
+  token it hasn't verified.** The panel displayed a green check and
+  "Getijdstempeld op &lt;time&gt;" whenever the token's message imprint matched
+  the seal — but the TSA's CMS signature and certificate chain are deliberately
+  not checked in-app, so that time is the token's *claim*, not a verified fact
+  (anyone holding the deck can mint a token with an arbitrary time and a
+  matching imprint). The green trust badge is replaced with a neutral clock
+  icon so the UI stops overstating what was checked. (A follow-up will add an
+  explicit "signature not verified" caption — deferred here because it needs the
+  string translated into all interface languages.)
 - **The HTML export's CSP now pins every network-capable resource, not just
   scripts and fetches.** The export already blocked remote scripts (nonce) and
   `connect-src`/remote `img-src`, but with no `default-src` the `media-src`,
