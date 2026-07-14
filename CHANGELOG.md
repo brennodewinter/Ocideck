@@ -40,6 +40,22 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   that reads as "clean". It says no more than: we found nothing.
 
 ### Fixed
+- **A YouTube video never played on macOS — and the app blamed your settings.**
+  The embed host built its `WebViewController` in one cascade, and
+  `setBackgroundColor` sits in the middle of it. On macOS that call is not
+  implemented (`opaque is not implemented on macOS`), so it threw, the cascade
+  died, and the controller was never assigned. What you saw was a dead grey
+  panel with the word *Video* — indistinguishable from a blocked source. So the
+  conclusion was reasonable and wrong: *online media must be off*. It was on;
+  the player had simply never been built. The background colour was cosmetic
+  (the embed HTML already paints itself black), so it is now a best-effort call
+  outside the cascade. YouTube and Vimeo embeds play on macOS.
+- **A YouTube link is not an error, so it is no longer red.** The source chip in
+  the video editor labelled a YouTube URL with the *danger* colour — the red this
+  product uses, elsewhere, to mean "something is wrong here". A perfectly valid
+  link therefore looked broken, right next to a quality panel where red really
+  does mean broken. The chip only says which *kind* of source this is; an online
+  source is an online source, and it now shares the same teal as the others.
 - **A special-category datum is a statement, not a word.** Redaction blanked only
   the keyword that fired, which left this on screen:
 
