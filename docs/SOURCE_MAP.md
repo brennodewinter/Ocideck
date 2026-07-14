@@ -37,9 +37,10 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `question.dart` — `QuestionSpec`/`QuestionView` for interactive quiz slides (multiple-choice/true-false/multiple-correct/ordering).
 - `rehearsal.dart` — `RehearsalRun`/`SlideTiming` for tracking presentation-practice durations per slide.
 - `scope_matrix_spec.dart` — `ScopeMatrixSpec`/`ScopeRow`/`ScopeObjectType`/`ScopeStatus` for the scope-matrix slide; each row carries a `CiaRating` (serialised as the `C`/`I`/`A` columns).
+- `privacy_finding.dart` — `PrivacyFinding`/`PrivacyScanResult`: what the privacy scanner found. Never stores the raw value — only a masked sample.
 - `settings.dart` — `AppSettings`, `ThemeProfile` (incl. severity tokens + built-in Security profile), `AppAppearanceProfile`, `CockpitColorScheme` config.
 - `slide.dart` — `Slide` model with typed fields; `SlideType` enum for the slide layout variants.
-- `slide_quality.dart` — `SlideQualityResult`/`SlideQualityIssue` for accessibility/contrast/density audits.
+- `slide_quality.dart` — `SlideQualityResult`/`SlideQualityIssue` for accessibility/contrast/density/privacy audits.
 - `timeline.dart` — `TimelineEvent` and `TimelineLayout`/`TimelineReveal` enums for animated timeline slides.
 - `video_source.dart` — `VideoSource` parser for local files, YouTube, Vimeo, and remote video URLs.
 - `webdav_settings.dart` — `WebdavServer`/`WebdavOrigin` for Nextcloud/WebDAV integration configuration.
@@ -87,6 +88,10 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `miauw_compliance_analyzer.dart` — Scores each MIAUW EIS (Voldaan/Openstaand/Uitgesloten) from deck content + waivers.
 - `miauw_eis_catalog.dart` — The bundled offline MIAUW EIS catalog (`MiauwEisCatalog`, curated subset).
 - `open_file_channel.dart` — Receives file-open paths from macOS for `.md` files.
+- `privacy/privacy_checksums.dart` — Eleven-proof (BSN), Luhn and IBAN mod-97 with the country-length table.
+- `privacy/privacy_allowlist.dart` — Known non-personal values: reserved domains, example IBANs, test cards, the official test-BSN range.
+- `privacy/privacy_scanner.dart` — `PrivacyScanner`: reads a deck for privacy-sensitive data (email, IBAN, BSN), with context gates where the checksum is too weak.
+- `privacy/privacy_quality_bridge.dart` — Maps `PrivacyFinding` onto `SlideQualityIssue` so findings surface in the quality panel.
 - `privacy/privacy_projection.dart` — `AudienceDeck` + `PrivacyProjection`: the single boundary a source deck crosses to reach any receiving surface. Redacts `[[…]]` markers before rendering or export; the private constructor means no export path can hold the unredacted source.
 - `quality_export_policy.dart` — Gates export by slide-quality issues with warnings.
 - `recovery_service.dart` — Auto-saves deck snapshots for crash/unsaved recovery.
@@ -117,6 +122,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `editor_provider.dart` — `EditorState`/`EditorNotifier`: selected slide, editor mode, markdown buffer.
 - `image_contrast_provider.dart` — Computes title-slide image-contrast issues asynchronously per deck.
 - `sec_module_provider.dart` — The security-module enable/reveal state that gates the pentest features.
+- `privacy_provider.dart` — Runs the privacy scan for the active deck (per-tab scoped) and bridges it into the quality panel.
 - `settings_provider.dart` — `SettingsNotifier`: app settings, theme/appearance profiles, cockpit schemes.
 - `slide_clipboard_provider.dart` — Global slide clipboard for copy/paste across tabs.
 - `tabs_provider.dart` — `TabInfo` and the tabs notifier: open editor tabs, recovery, WebDAV origin.

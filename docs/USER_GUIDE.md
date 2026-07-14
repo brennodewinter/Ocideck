@@ -384,6 +384,51 @@ Slides with no classification show none of the above. Per-slide TLP that is
 stricter than the deck still contributes to the effective marking on slides that
 are shown.
 
+## Privacy check
+
+OciDeck reads your slides for data that may be privacy-sensitive — identification
+numbers, contact details, bank accounts — and reports what it finds in the
+**quality panel**, alongside the contrast and readability checks. It is on by
+default and can be switched off under *Settings → Security → Privacy check*.
+
+It runs **entirely on this device**. Slide content is not sent anywhere, no
+findings are kept outside the session, and no statistics leave your machine.
+
+### It never shows you the value it found
+
+A finding says *what kind* of data it saw and where, with a masked fragment
+(`j…l`) — never the value itself. A privacy check that lists the citizen service
+numbers it found has moved the problem, not solved it.
+
+### Why some findings are only a hint
+
+The BSN check is the clearest example of the design. A citizen service number is
+validated by the *elevenproof*, but roughly **one in eleven random nine-digit
+numbers passes that test** — order numbers, invoice numbers, customer numbers.
+A scanner that warned on all of those would be switched off within a week, and
+then it detects nothing at all.
+
+So the check needs both the checksum **and** a context word nearby ("BSN",
+"burgerservicenummer"):
+
+- checksum **and** context → a real warning;
+- checksum but no context → an informational hint, which interrupts nobody.
+
+The same reasoning runs through everything: known example values are ignored on
+purpose. The example IBAN from every Dutch banking manual, the official test-BSN
+range, the card schemes' test numbers, `example.com` addresses — none of them
+belong to anyone, and a deck that lights up red on its own demo content destroys
+your trust in every other finding.
+
+### It is an aid, not a guarantee
+
+The check does not read text inside **images**, does not open **linked files**,
+and cannot see sensitive information without a recognisable pattern. A slide with
+no findings is a slide in which *we* found nothing — not a slide that is proven
+clean. What you share remains your call.
+
+Found something you want gone? Wrap it in double square brackets — see below.
+
 ## Redaction — leaving data out
 
 Some decks carry things the room should not see: a citizen service number in a

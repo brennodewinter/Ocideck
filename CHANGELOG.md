@@ -8,6 +8,34 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **A privacy check that reads your slides for personal data — on this device.**
+  Identification numbers, contact details, bank accounts. Findings appear in the
+  quality panel next to the contrast and readability checks; on by default,
+  switchable under *Settings → Security*. Nothing is sent anywhere, and a finding
+  never shows you the value it found — only a masked fragment (`j…l`). A privacy
+  check that lists the citizen service numbers it found has moved the problem,
+  not solved it.
+
+  The interesting part is what it *doesn't* warn about. A BSN is validated by the
+  elevenproof, but roughly **one in eleven random nine-digit numbers passes that
+  test** — order numbers, invoice numbers, customer numbers. Warn on all of those
+  and the check gets switched off within a week, after which it detects nothing at
+  all. So a BSN needs the checksum **and** a context word nearby to become a
+  warning; without context it stays an informational hint that interrupts nobody.
+  A corpus test throws a thousand random numbers at it and asserts zero warnings —
+  while confirming the findings *are* there, as hints. The context gate suppresses
+  the interruption, not the detection.
+
+  Same reasoning for the known-fake registry: the example IBAN from every banking
+  manual, the official test-BSN range (`999999xxx`), `123456782` (which passes the
+  elevenproof — it was chosen to), the card schemes' test numbers, `example.com`
+  addresses. A deck that lights up red on its own demo content destroys trust in
+  every other finding. The false-positive corpus test also scans OciDeck's own
+  documentation, for exactly that reason.
+
+  It is an aid, not a guarantee: no OCR on images, no linked files, nothing
+  without a recognisable pattern. A slide with no findings is a slide in which
+  *we* found nothing.
 - **Redaction — and it actually leaves the data out.** Wrap text in double square
   brackets (`[[Jan de Vries]]`) and OciDeck removes it from everything it shows
   and exports, while your Markdown keeps the original. The point is what it is
