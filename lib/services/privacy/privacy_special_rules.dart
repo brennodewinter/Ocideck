@@ -227,6 +227,45 @@ final List<({String id, RegExp pattern})> geneticPatterns = [
 /// patroon is distinctief genoeg om zonder contextwoord te vuren.
 final RegExp parketnummerPattern = RegExp(r'\b\d{2}/\d{6}-\d{2}\b');
 
+/// De mededeling waarin een treffer staat: van regelbegin tot regeleinde.
+///
+/// Dit is de reikwijdte waarmee een bijzonder persoonsgegeven wordt weggehaald,
+/// en de reden is dat een bijzonder gegeven geen wóórd is maar een uitspraak.
+/// Lak je alleen het trefwoord weg, dan blijft er dit staan:
+///
+///     Marieke de Vries meldde zich ziek met een ████████
+///
+/// De naam staat er nog, de ziekmelding staat er nog, en `diabetes-` staat er
+/// zelfs letterlijk nog. Er is niets weggehaald — er is een woord bedekt. Dat is
+/// precies de fout die dit hele ontwerp wil voorkomen: niet beschikbaar is niet
+/// beschikbaar.
+///
+/// Waarom de regel en niet de zin? Omdat zinsgrenzen niet te vertrouwen zijn.
+/// "Zie dhr. Jansen. De diagnose is diabetes." splitst een puntdetector op de
+/// afkorting, en dan valt de naam búíten de redactie — en dat is de gevaarlijke
+/// kant om ernaast te zitten. Een regel is wat de auteur als één mededeling heeft
+/// opgeschreven: één bullet, één tabelcel, één alinea. Te ruim redigeren is
+/// hinderlijk; te krap redigeren is een lek.
+({int start, int end}) statementSpan(String text, int start, int end) {
+  var from = text.lastIndexOf('\n', start > 0 ? start - 1 : 0);
+  from = from < 0 ? 0 : from + 1;
+
+  var to = text.indexOf('\n', end);
+  if (to < 0) to = text.length;
+
+  // Omliggende witruimte hoort niet bij de mededeling: die meenemen zou het blok
+  // laten kleven aan het woord ervoor.
+  while (from < start && _isSpace(text.codeUnitAt(from))) {
+    from++;
+  }
+  while (to > end && _isSpace(text.codeUnitAt(to - 1))) {
+    to--;
+  }
+  return (start: from, end: to);
+}
+
+bool _isSpace(int unit) => unit == 0x20 || unit == 0x09;
+
 /// Welke bevindingen tellen als "direct identificerend" voor de escalator.
 ///
 /// Een BSN, een nationaal nummer, een e-mailadres: gegevens die één persoon

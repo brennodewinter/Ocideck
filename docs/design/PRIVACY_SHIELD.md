@@ -560,6 +560,27 @@ IBAN ∧ naam                      →  warning
 Een slide *over* privacywetgeving noemt "gezondheidsgegevens" zonder één identificator — die
 blijft dus stil. Een slide met "Jan de Vries, BSN 123456782, diagnose F32.1" schreeuwt.
 
+**De escalatie verbreedt ook het bereik.** Dit is niet cosmetisch, en de eerste versie had het
+mís. Een bijzonder persoonsgegeven is geen wóórd maar een **mededeling**: lak je alleen het
+trefwoord weg, dan houd je dit over —
+
+```
+Marieke de Vries meldde zich ziek met een ████████
+```
+
+— en dan staat de naam er nog, staat de ziekmelding er nog, en staat `diabetes-` er zelfs
+letterlijk nog. Er is niets weggehaald; er is een woord bedekt. Zodra het gegeven herleidbaar
+is tot een persoon beslaat de redactie daarom de hele **regel** waarin de treffer staat: één
+bullet, één tabelcel, één alinea — de eenheid waarin de auteur de mededeling heeft
+opgeschreven. Bewust de regel en niet de zin: zinsgrenzen zijn niet te vertrouwen ("Zie dhr.
+Jansen. De diagnose is diabetes." splitst op de afkorting en laat de naam búíten de redactie),
+en dat is de gevaarlijke kant om ernaast te zitten. Te ruim redigeren is hinderlijk; te krap
+redigeren is een lek.
+
+Hetzelfde geldt voor de patroonregels in deze familie. "Zaak 01/234567-19 tegen M. de Vries"
+met alleen het parketnummer weg laat nog steeds zien dát zij verdachte is — en dát is het
+art. 10-gegeven; het nummer is er hooguit het bewijs van.
+
 ### 5.7 Regiopakketten
 Standaard draaien alleen de universele regels plus het landpakket van de app-taal (en het
 door de gebruiker gekozen thuisland). Alle 40 landen tegelijk aanzetten is mogelijk, maar
