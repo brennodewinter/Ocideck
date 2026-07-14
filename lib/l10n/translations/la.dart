@@ -1799,6 +1799,25 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Bij onafgehandelde persoonsgegevens': 'Cum datis personalibus non tractatis',
+  'Export afgebroken vanwege privacybevindingen.':
+      'Exportatio ob inventa privata abrupta.',
+  'Export blokkeren': 'Exportationem impedire',
+  'Export geblokkeerd': 'Exportatio impedita',
+  'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.':
+      'Exportatio impedita: in hac praesentatione sunt data personalia de quibus nondum decretum est.',
+  'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.':
+      'Elige per paginam quid fiat, vel scienter ita exporta.',
+  'Maak per slide een keuze (accepteren, waarschuwen of weglaten) voordat je exporteert. Dit is zo ingesteld bij Beveiliging.':
+      'Elige per paginam (accipere, monere vel omittere) priusquam exportas. Ita in Securitate constitutum est.',
+  'Niets doen': 'Nihil facere',
+  'Persoonsgegevens in dit deck': 'Data personalia in hac praesentatione',
+  'Verder in dit deck:': 'Alibi in hac praesentatione:',
+  'Waarschuwen vóór export': 'Ante exportationem monere',
+  'bevinding(en) zonder keuze.': 'inventum/a sine electione.',
+  'geaccepteerd': 'accepta',
+  'geredigeerd': 'obliterata',
+  'met waarschuwing': 'cum monito',
   'Deze regel nooit meer melden': 'Hanc regulam numquam iterum nuntiare',
   'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
       'Regulae exstinctae. Neque nuntiantur neque obliterantur. Tange ut rursus accendas.',

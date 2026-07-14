@@ -95,6 +95,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `privacy/privacy_checksums_eu.dart` — The European checksums: BE mod-97, DE ISO 7064 + digit-repetition, FR NIR, ES DNI/NIE, PT NIF, PL PESEL, IT codice fiscale, HR OIB, BG EGN, RO CNP, SE Luhn, FI mod-31, EE/LT mod-11, UK NHS/NINO — with embedded-birthdate validation where the checksum alone is too weak.
 - `privacy/privacy_eu_rules.dart` — The European country packs as a data table: pattern, checksum, context words, confidence.
 - `privacy/privacy_special_rules.dart` — GDPR art. 9/10: multilingual keyword families, genetic notation (dbSNP/HGVS), the Dutch parketnummer, and the co-occurrence escalator's definition of "identifies a person".
+- `privacy/privacy_export_policy.dart` — The export gate: counts findings by disposition and decides whether to warn, block, or stay quiet.
 - `privacy/privacy_scanner.dart` — `PrivacyScanner`: reads a deck for privacy-sensitive data (email, IBAN, BSN), with context gates where the checksum is too weak.
 - `privacy/privacy_quality_bridge.dart` — Maps `PrivacyFinding` onto `SlideQualityIssue` so findings surface in the quality panel.
 - `privacy/privacy_projection.dart` — `AudienceDeck` + `PrivacyProjection`: the single boundary a source deck crosses to reach any receiving surface. Redacts `[[…]]` markers before rendering or export; the private constructor means no export path can hold the unredacted source.

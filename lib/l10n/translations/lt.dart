@@ -1791,6 +1791,26 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Bij onafgehandelde persoonsgegevens':
+      'Esant neišspręstiems asmens duomenims',
+  'Export afgebroken vanwege privacybevindingen.':
+      'Eksportas nutrauktas dėl privatumo radinių.',
+  'Export blokkeren': 'Blokuoti eksportą',
+  'Export geblokkeerd': 'Eksportas užblokuotas',
+  'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.':
+      'Eksportas užblokuotas: šiame pristatyme yra asmens duomenų, dėl kurių dar nenuspręsta.',
+  'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.':
+      'Pasirink kiekvienai skaidrei, ką daryti, arba sąmoningai eksportuok kaip yra.',
+  'Maak per slide een keuze (accepteren, waarschuwen of weglaten) voordat je exporteert. Dit is zo ingesteld bij Beveiliging.':
+      'Prieš eksportuodamas pasirink kiekvienai skaidrei (priimti, įspėti ar praleisti). Tai nustatoma skiltyje Sauga.',
+  'Niets doen': 'Nieko nedaryti',
+  'Persoonsgegevens in dit deck': 'Asmens duomenys šiame pristatyme',
+  'Verder in dit deck:': 'Kitur šiame pristatyme:',
+  'Waarschuwen vóór export': 'Įspėti prieš eksportuojant',
+  'bevinding(en) zonder keuze.': 'radinys (-iai) be sprendimo.',
+  'geaccepteerd': 'priimta',
+  'geredigeerd': 'paslėpta',
+  'met waarschuwing': 'su įspėjimu',
   'Deze regel nooit meer melden': 'Daugiau nepranešti apie šią taisyklę',
   'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
       'Išjungtos taisyklės. Apie jas nepranešama ir jos neredaguojamos. Bakstelėk, kad vėl įjungtum.',

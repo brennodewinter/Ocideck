@@ -28,6 +28,7 @@ import '../../utils/log.dart';
 import '../../utils/url_launcher_util.dart';
 import '../../l10n/app_localizations.dart';
 import '../../l10n/slide_quality_localization.dart';
+import '../../models/privacy_disposition.dart';
 import '../editors/advanced_section.dart';
 import '../language_flag.dart';
 import '../privacy_statement_content.dart';

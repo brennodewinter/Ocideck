@@ -1786,6 +1786,25 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Bij onafgehandelde persoonsgegevens': 'Při nevyřešených osobních údajích',
+  'Export afgebroken vanwege privacybevindingen.':
+      'Export přerušen kvůli nálezům soukromí.',
+  'Export blokkeren': 'Zablokovat export',
+  'Export geblokkeerd': 'Export zablokován',
+  'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.':
+      'Export zablokován: tato prezentace obsahuje osobní údaje, o kterých jsi ještě nerozhodl.',
+  'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.':
+      'Zvol u každého snímku, co se má stát, nebo vědomě exportuj tak, jak to je.',
+  'Maak per slide een keuze (accepteren, waarschuwen of weglaten) voordat je exporteert. Dit is zo ingesteld bij Beveiliging.':
+      'Rozhodni u každého snímku (přijmout, upozornit nebo vynechat) před exportem. Nastaveno v Zabezpečení.',
+  'Niets doen': 'Nedělat nic',
+  'Persoonsgegevens in dit deck': 'Osobní údaje v této prezentaci',
+  'Verder in dit deck:': 'Dále v této prezentaci:',
+  'Waarschuwen vóór export': 'Upozornit před exportem',
+  'bevinding(en) zonder keuze.': 'nález(y) bez rozhodnutí.',
+  'geaccepteerd': 'přijato',
+  'geredigeerd': 'začerněno',
+  'met waarschuwing': 's upozorněním',
   'Deze regel nooit meer melden': 'Toto pravidlo už nikdy nehlásit',
   'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
       'Vypnutá pravidla. Nehlásí se a nezačerňují se. Klepnutím je znovu zapneš.',

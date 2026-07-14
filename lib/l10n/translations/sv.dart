@@ -1782,6 +1782,25 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Bij onafgehandelde persoonsgegevens': 'Vid ohanterade personuppgifter',
+  'Export afgebroken vanwege privacybevindingen.':
+      'Exporten avbröts på grund av integritetsfynd.',
+  'Export blokkeren': 'Blockera export',
+  'Export geblokkeerd': 'Exporten blockerad',
+  'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.':
+      'Exporten blockerad: den här presentationen innehåller personuppgifter du ännu inte tagit ställning till.',
+  'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.':
+      'Välj per bild vad som ska hända, eller exportera medvetet som det är.',
+  'Maak per slide een keuze (accepteren, waarschuwen of weglaten) voordat je exporteert. Dit is zo ingesteld bij Beveiliging.':
+      'Gör ett val per bild (acceptera, varna eller utelämna) innan du exporterar. Det ställs in under Säkerhet.',
+  'Niets doen': 'Gör ingenting',
+  'Persoonsgegevens in dit deck': 'Personuppgifter i den här presentationen',
+  'Verder in dit deck:': 'I övrigt i den här presentationen:',
+  'Waarschuwen vóór export': 'Varna före export',
+  'bevinding(en) zonder keuze.': 'fynd utan gjort val.',
+  'geaccepteerd': 'accepterade',
+  'geredigeerd': 'maskade',
+  'met waarschuwing': 'med varning',
   'Deze regel nooit meer melden': 'Rapportera aldrig den här regeln igen',
   'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
       'Avstängda regler. De rapporteras inte och maskas inte. Tryck för att slå på igen.',

@@ -1787,6 +1787,25 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Bij onafgehandelde persoonsgegevens': 'Bi unbehandlete Persoonedate',
+  'Export afgebroken vanwege privacybevindingen.':
+      'Export wäge Dateschutzbefund abbroche.',
+  'Export blokkeren': 'Export blockiere',
+  'Export geblokkeerd': 'Export blockiert',
+  'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.':
+      'Export blockiert: i dere Präsentation sind Persoonedate, wo no kei Entscheidig druuf gfallt isch.',
+  'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.':
+      'Entscheid pro Folie, was passiere söll — oder exportier bewusst so, wie\'s isch.',
+  'Maak per slide een keuze (accepteren, waarschuwen of weglaten) voordat je exporteert. Dit is zo ingesteld bij Beveiliging.':
+      'Triff pro Folie e Entscheidig (akzeptiere, warne oder wegglah), bevor du exportiersch. So iigstellt under Sicherheit.',
+  'Niets doen': 'Nüt mache',
+  'Persoonsgegevens in dit deck': 'Persoonedate i dere Präsentation',
+  'Verder in dit deck:': 'Susch i dere Präsentation:',
+  'Waarschuwen vóór export': 'Vor em Export warne',
+  'bevinding(en) zonder keuze.': 'Befund(e) ohni Entscheidig.',
+  'geaccepteerd': 'akzeptiert',
+  'geredigeerd': 'gschwärzt',
+  'met waarschuwing': 'mit Warnig',
   'Deze regel nooit meer melden': 'Die Regle nie meh mälde',
   'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
       'Deaktivierti Regle. Die wärded weder gmäldet no gschwärzt. Tipp zum wieder ischalte.',

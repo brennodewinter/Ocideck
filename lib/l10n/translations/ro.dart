@@ -1802,6 +1802,25 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Bij onafgehandelde persoonsgegevens': 'La date personale nerezolvate',
+  'Export afgebroken vanwege privacybevindingen.':
+      'Export anulat din cauza constatărilor de confidențialitate.',
+  'Export blokkeren': 'Blochează exportul',
+  'Export geblokkeerd': 'Export blocat',
+  'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.':
+      'Export blocat: această prezentare conține date personale asupra cărora nu ai decis încă.',
+  'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.':
+      'Alege pentru fiecare diapozitiv ce trebuie făcut sau exportă deliberat așa cum este.',
+  'Maak per slide een keuze (accepteren, waarschuwen of weglaten) voordat je exporteert. Dit is zo ingesteld bij Beveiliging.':
+      'Fă o alegere pentru fiecare diapozitiv (acceptă, avertizează sau omite) înainte de export. Se configurează la Securitate.',
+  'Niets doen': 'Nu face nimic',
+  'Persoonsgegevens in dit deck': 'Date personale în această prezentare',
+  'Verder in dit deck:': 'În rest, în această prezentare:',
+  'Waarschuwen vóór export': 'Avertizează înainte de export',
+  'bevinding(en) zonder keuze.': 'constatare/constatări fără decizie.',
+  'geaccepteerd': 'acceptate',
+  'geredigeerd': 'redactate',
+  'met waarschuwing': 'cu avertisment',
   'Deze regel nooit meer melden': 'Nu mai raporta niciodată această regulă',
   'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
       'Reguli dezactivate. Nu sunt raportate și nici redactate. Atinge pentru a le reactiva.',

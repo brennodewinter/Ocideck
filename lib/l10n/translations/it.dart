@@ -736,6 +736,25 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Bij onafgehandelde persoonsgegevens': 'Con dati personali non gestiti',
+  'Export afgebroken vanwege privacybevindingen.':
+      'Esportazione annullata a causa di rilevazioni di privacy.',
+  'Export blokkeren': 'Blocca l\'esportazione',
+  'Export geblokkeerd': 'Esportazione bloccata',
+  'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.':
+      'Esportazione bloccata: questa presentazione contiene dati personali su cui non hai ancora deciso.',
+  'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.':
+      'Scegli per ogni diapositiva cosa fare, oppure esporta consapevolmente così com\'è.',
+  'Maak per slide een keuze (accepteren, waarschuwen of weglaten) voordat je exporteert. Dit is zo ingesteld bij Beveiliging.':
+      'Fai una scelta per diapositiva (accetta, avvisa od ometti) prima di esportare. È configurato in Sicurezza.',
+  'Niets doen': 'Non fare nulla',
+  'Persoonsgegevens in dit deck': 'Dati personali in questa presentazione',
+  'Verder in dit deck:': 'Altrove in questa presentazione:',
+  'Waarschuwen vóór export': 'Avvisa prima di esportare',
+  'bevinding(en) zonder keuze.': 'rilevazione/i senza scelta.',
+  'geaccepteerd': 'accettati',
+  'geredigeerd': 'oscurati',
+  'met waarschuwing': 'con avviso',
   'Deze regel nooit meer melden': 'Non segnalare più questa regola',
   'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
       'Regole disattivate. Non vengono segnalate né oscurate. Tocca per riattivarle.',

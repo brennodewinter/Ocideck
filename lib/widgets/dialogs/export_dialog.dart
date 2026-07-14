@@ -7,6 +7,7 @@ import '../../services/classification_enforcement_policy.dart';
 import '../../services/export_metadata.dart';
 import '../../services/export_service.dart';
 import '../../models/redaction_manifest.dart';
+import '../../services/privacy/privacy_export_policy.dart';
 import '../../services/privacy/privacy_projection.dart';
 import '../../services/quality_export_policy.dart';
 import '../../services/slide_rasterizer.dart';
@@ -52,6 +53,12 @@ class ExportDialog extends StatefulWidget {
 
   final bool showClassificationWatermark;
 
+  /// Wat er in dit deck zit, geteld naar wat de auteur ermee heeft gedaan.
+  final PrivacyExportSummary privacySummary;
+
+  /// Waarschuwen of blokkeren bij onafgehandelde bevindingen.
+  final PrivacyExportPolicy privacyPolicy;
+
   /// Het redactiemanifest, wanneer dit deck redacties bevat. Wordt naast de
   /// export weggeschreven zodat een ontvanger kan zien wát er is weggehaald en
   /// een derde partij het kan verifiëren. Gebouwd uit de BRON — de AudienceDeck
@@ -75,6 +82,8 @@ class ExportDialog extends StatefulWidget {
     this.markdown = '',
     this.showClassificationWatermark = false,
     this.redactionManifest = RedactionManifest.empty,
+    this.privacySummary = PrivacyExportSummary.empty,
+    this.privacyPolicy = const PrivacyExportPolicy(),
     this.onExported,
   });
 
@@ -92,6 +101,8 @@ class ExportDialog extends StatefulWidget {
     String markdown = '',
     bool showClassificationWatermark = false,
     RedactionManifest redactionManifest = RedactionManifest.empty,
+    PrivacyExportSummary privacySummary = PrivacyExportSummary.empty,
+    PrivacyExportPolicy privacyPolicy = const PrivacyExportPolicy(),
     void Function(String formatLabel)? onExported,
   }) {
     return showDialog(
@@ -109,6 +120,8 @@ class ExportDialog extends StatefulWidget {
         markdown: markdown,
         showClassificationWatermark: showClassificationWatermark,
         redactionManifest: redactionManifest,
+        privacySummary: privacySummary,
+        privacyPolicy: privacyPolicy,
         onExported: onExported,
       ),
     );
@@ -133,6 +146,77 @@ class _ExportDialogState extends State<ExportDialog> {
   /// Image quality for PDF export: false = full-resolution PNG, true = a smaller
   /// downscaled JPEG handout.
   bool _compress = false;
+
+  /// De privacy-gate in beeld.
+  ///
+  /// Toont wát er in het deck zit én wat de auteur ermee heeft gedaan. Dat laatste
+  /// is de kern: de gate straft geen persoonsgegevens af, hij straft *onopgemerkte*
+  /// persoonsgegevens af. Een briefing waarin alles bewust geaccepteerd is, gaat er
+  /// zonder onderbreking doorheen.
+  Future<bool> _confirmPrivacyExport() async {
+    final decision = widget.privacyPolicy.evaluate(widget.privacySummary);
+    if (decision.allowed) return true;
+
+    final l10n = context.l10n;
+    final s = decision.summary;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(
+          decision.hardBlocked
+              ? l10n.d('Export geblokkeerd')
+              : l10n.d('Persoonsgegevens in dit deck'),
+        ),
+        content: SizedBox(
+          width: 480,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${s.unresolved} ${l10n.d('bevinding(en) zonder keuze.')}',
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                '${l10n.d('Verder in dit deck:')} '
+                '${s.accepted} ${l10n.d('geaccepteerd')}, '
+                '${s.shielded} ${l10n.d('met waarschuwing')}, '
+                '${s.redacted} ${l10n.d('geredigeerd')}.',
+                style: TextStyle(fontSize: 12, color: AppTheme.slate600),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                decision.hardBlocked
+                    ? l10n.d(
+                        'Maak per slide een keuze (accepteren, waarschuwen of weglaten) voordat je exporteert. Dit is zo ingesteld bij Beveiliging.',
+                      )
+                    : l10n.d(
+                        'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.',
+                      ),
+                style: const TextStyle(fontSize: 12),
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: Text(l10n.t('cancel')),
+          ),
+          if (!decision.hardBlocked)
+            ElevatedButton(
+              onPressed: () => Navigator.pop(ctx, true),
+              child: Text(l10n.d('Toch exporteren')),
+            ),
+        ],
+      ),
+    );
+    return confirmed == true;
+  }
 
   Future<bool> _confirmQualityExport() async {
     final decision = widget.qualityPolicy.evaluate(widget.qualityResult);
@@ -199,6 +283,12 @@ class _ExportDialogState extends State<ExportDialog> {
     });
     await WidgetsBinding.instance.endOfFrame;
     await Future<void>.delayed(Duration.zero);
+    if (!mounted) return;
+
+    if (!await _confirmPrivacyExport()) {
+      if (mounted) setState(() => _loading = false);
+      return;
+    }
     if (!mounted) return;
 
     if (!await _confirmQualityExport()) {
@@ -273,6 +363,9 @@ class _ExportDialogState extends State<ExportDialog> {
       qualityAcknowledged: true,
       metadata: ExportDocumentMetadata.fromDeck(widget.audience.deck),
       redactionManifest: widget.redactionManifest,
+      privacySummary: widget.privacySummary,
+      privacyPolicy: widget.privacyPolicy,
+      privacyAcknowledged: true,
     );
 
     if (!mounted) return;

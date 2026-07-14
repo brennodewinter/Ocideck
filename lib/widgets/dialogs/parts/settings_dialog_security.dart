@@ -38,6 +38,8 @@ extension _SettingsSecurity on _SettingsDialogState {
               .setPrivacyChecksEnabled(value),
         ),
         _disabledPrivacyRules(l10n),
+        const SizedBox(height: 10),
+        _privacyExportGate(l10n),
         const SizedBox(height: 20),
         _sectionTitle(l10n.d('Online media')),
         SwitchListTile(
@@ -175,6 +177,49 @@ extension _SettingsSecurity on _SettingsDialogState {
           ),
         ],
       ),
+    );
+  }
+
+  /// Wat er bij exporteren gebeurt met bevindingen waarvoor nog geen keuze is
+  /// gemaakt.
+  ///
+  /// Waarschuwen is de standaard, want een gate die *altijd* blokkeert is een
+  /// gate die wordt weggeklikt. De harde blokkade is er voor omgevingen waar het
+  /// een procedure-eis is — en die keuze hoort bij de organisatie, niet bij ons.
+  Widget _privacyExportGate(AppLocalizations l10n) {
+    final gate = ref.watch(settingsProvider.select((s) => s.privacyExportGate));
+    String label(PrivacyExportGate g) => switch (g) {
+      PrivacyExportGate.off => l10n.d('Niets doen'),
+      PrivacyExportGate.warn => l10n.d('Waarschuwen vóór export'),
+      PrivacyExportGate.block => l10n.d('Export blokkeren'),
+    };
+
+    return Row(
+      children: [
+        Expanded(
+          child: Text(
+            l10n.d('Bij onafgehandelde persoonsgegevens'),
+            style: const TextStyle(fontSize: 13),
+          ),
+        ),
+        DropdownButtonHideUnderline(
+          child: DropdownButton<PrivacyExportGate>(
+            value: gate,
+            isDense: true,
+            borderRadius: BorderRadius.circular(6),
+            style: TextStyle(fontSize: 12, color: AppTheme.ink),
+            items: [
+              for (final g in PrivacyExportGate.values)
+                DropdownMenuItem(value: g, child: Text(label(g))),
+            ],
+            onChanged: (v) {
+              if (v != null) {
+                ref.read(settingsProvider.notifier).setPrivacyExportGate(v);
+              }
+            },
+          ),
+        ),
+      ],
     );
   }
 }

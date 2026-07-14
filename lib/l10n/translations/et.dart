@@ -1774,6 +1774,25 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Bij onafgehandelde persoonsgegevens': 'Lahendamata isikuandmete korral',
+  'Export afgebroken vanwege privacybevindingen.':
+      'Eksport katkestati privaatsusleidude tõttu.',
+  'Export blokkeren': 'Blokeeri eksport',
+  'Export geblokkeerd': 'Eksport blokeeritud',
+  'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.':
+      'Eksport blokeeritud: selles esitluses on isikuandmeid, mille kohta pole veel otsustatud.',
+  'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.':
+      'Vali iga slaidi kohta, mis peaks juhtuma, või ekspordi teadlikult nii, nagu on.',
+  'Maak per slide een keuze (accepteren, waarschuwen of weglaten) voordat je exporteert. Dit is zo ingesteld bij Beveiliging.':
+      'Tee iga slaidi kohta valik (nõustu, hoiata või jäta välja) enne eksporti. See on seatud jaotises Turvalisus.',
+  'Niets doen': 'Ära tee midagi',
+  'Persoonsgegevens in dit deck': 'Isikuandmed selles esitluses',
+  'Verder in dit deck:': 'Mujal selles esitluses:',
+  'Waarschuwen vóór export': 'Hoiata enne eksporti',
+  'bevinding(en) zonder keuze.': 'leidu ilma valikuta.',
+  'geaccepteerd': 'nõustutud',
+  'geredigeerd': 'redigeeritud',
+  'met waarschuwing': 'hoiatusega',
   'Deze regel nooit meer melden': 'Ära enam sellest reeglist teata',
   'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
       'Väljalülitatud reeglid. Neist ei teatata ega redigeerita. Puuduta uuesti sisselülitamiseks.',

@@ -1819,6 +1819,25 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Bij onafgehandelde persoonsgegevens': 'Le sonraí pearsanta gan réiteach',
+  'Export afgebroken vanwege privacybevindingen.':
+      'Cuireadh an t-easpórtáil ar ceal mar gheall ar thorthaí príobháideachais.',
+  'Export blokkeren': 'Cuir bac ar easpórtáil',
+  'Export geblokkeerd': 'Easpórtáil bactha',
+  'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.':
+      'Easpórtáil bactha: tá sonraí pearsanta sa láithreoireacht seo nár shocraigh tú fúthu fós.',
+  'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.':
+      'Roghnaigh in aghaidh an tsleamhnáin cad ba cheart tarlú, nó easpórtáil d\'aon ghnó mar atá.',
+  'Maak per slide een keuze (accepteren, waarschuwen of weglaten) voordat je exporteert. Dit is zo ingesteld bij Beveiliging.':
+      'Déan rogha in aghaidh an tsleamhnáin (glac leis, tabhair rabhadh nó fág ar lár) sula n-easpórtálann tú. Socraítear é seo faoi Slándáil.',
+  'Niets doen': 'Ná déan faic',
+  'Persoonsgegevens in dit deck': 'Sonraí pearsanta sa láithreoireacht seo',
+  'Verder in dit deck:': 'In áiteanna eile sa láithreoireacht seo:',
+  'Waarschuwen vóór export': 'Tabhair rabhadh roimh easpórtáil',
+  'bevinding(en) zonder keuze.': 'toradh/torthaí gan rogha.',
+  'geaccepteerd': 'glactha',
+  'geredigeerd': 'folaithe',
+  'met waarschuwing': 'le rabhadh',
   'Deze regel nooit meer melden': 'Ná tuairiscigh an riail seo arís',
   'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
       'Rialacha díchumasaithe. Ní thuairiscítear iad agus ní fholaítear iad. Tapáil chun iad a chur ar siúl arís.',

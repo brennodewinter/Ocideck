@@ -1782,6 +1782,25 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Bij onafgehandelde persoonsgegevens': 'Ved ubehandlede personoplysninger',
+  'Export afgebroken vanwege privacybevindingen.':
+      'Eksport afbrudt på grund af privatlivsfund.',
+  'Export blokkeren': 'Blokér eksport',
+  'Export geblokkeerd': 'Eksport blokeret',
+  'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.':
+      'Eksport blokeret: denne præsentation indeholder personoplysninger, du endnu ikke har taget stilling til.',
+  'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.':
+      'Vælg pr. slide, hvad der skal ske, eller eksportér bevidst som det er.',
+  'Maak per slide een keuze (accepteren, waarschuwen of weglaten) voordat je exporteert. Dit is zo ingesteld bij Beveiliging.':
+      'Træf et valg pr. slide (acceptér, advar eller udelad), før du eksporterer. Det er indstillet under Sikkerhed.',
+  'Niets doen': 'Gør ingenting',
+  'Persoonsgegevens in dit deck': 'Personoplysninger i denne præsentation',
+  'Verder in dit deck:': 'Ellers i denne præsentation:',
+  'Waarschuwen vóór export': 'Advar før eksport',
+  'bevinding(en) zonder keuze.': 'fund uden truffet valg.',
+  'geaccepteerd': 'accepteret',
+  'geredigeerd': 'redigeret bort',
+  'met waarschuwing': 'med advarsel',
   'Deze regel nooit meer melden': 'Rapportér aldrig denne regel igen',
   'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
       'Deaktiverede regler. De rapporteres ikke og redigeres ikke bort. Tryk for at slå til igen.',

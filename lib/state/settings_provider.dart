@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/deck.dart' show TlpLevel;
+import '../models/privacy_disposition.dart';
 import '../models/privacy_finding.dart';
 import '../models/settings.dart';
 import '../services/secret_store.dart';
@@ -145,6 +146,9 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       privacyDisabledRules:
           prefs.getStringList('privacyDisabledRules')?.toSet() ??
           defaultDisabledPrivacyRules,
+      privacyExportGate: PrivacyExportGateX.fromKey(
+        prefs.getString('privacyExportGate'),
+      ),
       uiTextScale: (prefs.getDouble('uiTextScale') ?? 1.0).clamp(1.0, 2.0),
       docReaderTextScale: (prefs.getDouble('docReaderTextScale') ?? 1.0).clamp(
         0.8,
@@ -321,6 +325,14 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
   /// Chirurgisch ingrijpen op één regel is oneindig veel beter dan de hele
   /// controle uitzetten, want dat laatste is onomkeerbaar in de praktijk: wie hem
   /// eenmaal uit heeft, zet hem niet meer aan.
+  Future<void> setPrivacyExportGate(PrivacyExportGate gate) async {
+    state = state.copyWith(privacyExportGate: gate);
+    await _persist(
+      'setPrivacyExportGate',
+      (prefs) => prefs.setString('privacyExportGate', gate.key),
+    );
+  }
+
   Future<void> setPrivacyRuleEnabled(String ruleId, bool enabled) async {
     final next = {...state.privacyDisabledRules};
     if (enabled) {
