@@ -1804,6 +1804,15 @@ const _dutchSourceAddUk = <String, String>{
   'Extern': 'Зовнішній',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Отримано із зовнішньої URL-адреси; відкриття звернулося до того сервера.',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Wat je hebt geredigeerd, gaat er eerst uit. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'AI-помічник (типово вимкнено): якщо ви оберете власний або хмарний бекенд, тексти чи зображення, які ви надаєте на обробку, надсилаються на цю адресу. Те, що ви відредагували, спершу вилучається. Локальна AI-модель на цьому пристрої нічого не надсилає.',
+  'Gegevens weglaten (redactie)': 'Вилучення даних (редагування)',
+  'Zet je tekst tussen dubbele blokhaken, zoals [[het adres]], dan laat OciDeck die weg uit alles wat je toont en exporteert. Op de dia, in de presentatie, in de PDF, de PowerPoint en de HTML verschijnen alleen blokken.':
+      'Візьміть текст у подвійні квадратні дужки, як-от [[адреса]], і OciDeck вилучить його з усього, що ви показуєте та експортуєте. На слайді, у презентації, у PDF, PowerPoint та HTML з\'являться лише блоки.',
+  'Weggelaten is écht weggelaten, niet afgedekt. De tekst zit niet als onzichtbare laag onder een zwart balkje in de PDF, niet in de sprekersnotities van de PowerPoint, en niet in de broncode van de HTML. Wie het bestand openmaakt, kan er niets uit terughalen.':
+      'Вилучене означає справді вилучене, а не прикрите. Текст не лежить невидимим шаром під чорною смугою в PDF, його немає ні в нотатках доповідача PowerPoint, ні у вихідному коді HTML. Хто відкриє файл, нічого звідти не дістане.',
+  'Je eigen bestand verandert niet. De oorspronkelijke tekst blijft in je markdown staan; redactie geldt alleen voor wat je deelt. Zo houd je je eigen gegevens.':
+      'Ваш власний файл не змінюється. Початковий текст лишається у вашому markdown; редагування стосується лише того, чим ви ділитеся. Так ви зберігаєте власні дані.',
   'map/presentatie': 'тека/презентація',
   'Gekoppelde test': 'Пов\'язаний тест',
   'Maak eerst een checklist voor dit scope-object.':

@@ -743,6 +743,15 @@ const _dutchSourceAddFr = {
   'Extern': 'Externe',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Récupéré depuis une URL externe ; l\'ouverture a contacté ce serveur.',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Wat je hebt geredigeerd, gaat er eerst uit. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'Assistance IA (désactivée par défaut) : si tu choisis un backend auto-hébergé ou cloud, les textes ou images que tu fais traiter sont envoyés à cette adresse. Ce que tu as caviardé en est d\'abord retiré. Un modèle IA local sur cet appareil n\'envoie rien.',
+  'Gegevens weglaten (redactie)': 'Omettre des données (caviardage)',
+  'Zet je tekst tussen dubbele blokhaken, zoals [[het adres]], dan laat OciDeck die weg uit alles wat je toont en exporteert. Op de dia, in de presentatie, in de PDF, de PowerPoint en de HTML verschijnen alleen blokken.':
+      'Place du texte entre doubles crochets, comme [[l\'adresse]], et OciDeck l\'omet de tout ce que tu montres et exportes. Sur la diapositive, dans la présentation, dans le PDF, le PowerPoint et le HTML, seuls des blocs apparaissent.',
+  'Weggelaten is écht weggelaten, niet afgedekt. De tekst zit niet als onzichtbare laag onder een zwart balkje in de PDF, niet in de sprekersnotities van de PowerPoint, en niet in de broncode van de HTML. Wie het bestand openmaakt, kan er niets uit terughalen.':
+      'Omis veut dire vraiment omis, pas masqué. Le texte ne se trouve pas en couche invisible sous une barre noire dans le PDF, ni dans les notes de l\'orateur du PowerPoint, ni dans le code source du HTML. Qui ouvre le fichier n\'en récupère rien.',
+  'Je eigen bestand verandert niet. De oorspronkelijke tekst blijft in je markdown staan; redactie geldt alleen voor wat je deelt. Zo houd je je eigen gegevens.':
+      'Ton propre fichier ne change pas. Le texte d\'origine reste dans ton markdown ; le caviardage ne vaut que pour ce que tu partages. Ainsi tu gardes tes propres données.',
   'map/presentatie': 'dossier/présentation',
   'Gekoppelde test': 'Test lié',
   'Maak eerst een checklist voor dit scope-object.':

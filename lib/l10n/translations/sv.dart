@@ -1785,6 +1785,15 @@ const _dutchSourceAddSv = <String, String>{
   'Extern': 'Extern',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Hämtad från en extern URL; öppningen kontaktade den servern.',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Wat je hebt geredigeerd, gaat er eerst uit. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'AI-assistans (av som standard): väljer du en självhostad backend eller molnbackend skickas texterna eller bilderna du låter bearbeta till den adressen. Det du har maskat tas bort först. En lokal AI-modell på den här enheten skickar ingenting.',
+  'Gegevens weglaten (redactie)': 'Utelämna uppgifter (maskning)',
+  'Zet je tekst tussen dubbele blokhaken, zoals [[het adres]], dan laat OciDeck die weg uit alles wat je toont en exporteert. Op de dia, in de presentatie, in de PDF, de PowerPoint en de HTML verschijnen alleen blokken.':
+      'Sätt text inom dubbla hakparenteser, som [[adressen]], så utelämnar OciDeck den från allt du visar och exporterar. På bilden, i presentationen, i PDF:en, PowerPointen och HTML:en syns bara block.',
+  'Weggelaten is écht weggelaten, niet afgedekt. De tekst zit niet als onzichtbare laag onder een zwart balkje in de PDF, niet in de sprekersnotities van de PowerPoint, en niet in de broncode van de HTML. Wie het bestand openmaakt, kan er niets uit terughalen.':
+      'Utelämnat betyder verkligen utelämnat, inte övertäckt. Texten ligger inte som ett osynligt lager under ett svart streck i PDF:en, inte i PowerPointens anteckningar och inte i HTML:ens källkod. Den som öppnar filen kan inte få fram något.',
+  'Je eigen bestand verandert niet. De oorspronkelijke tekst blijft in je markdown staan; redactie geldt alleen voor wat je deelt. Zo houd je je eigen gegevens.':
+      'Din egen fil ändras inte. Originaltexten blir kvar i din markdown; maskningen gäller bara det du delar. Så behåller du dina egna uppgifter.',
   'map/presentatie': 'mapp/presentation',
   'Gekoppelde test': 'Länkad test',
   'Maak eerst een checklist voor dit scope-object.':

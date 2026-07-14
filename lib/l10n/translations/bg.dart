@@ -1809,6 +1809,15 @@ const _dutchSourceAddBg = <String, String>{
   'Extern': 'Външен',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Изтеглено от външен URL адрес; отварянето се свърза с този сървър.',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Wat je hebt geredigeerd, gaat er eerst uit. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'AI помощ (изключена по подразбиране): изберете ли самостоятелно хостван или облачен бекенд, текстовете или изображенията, които давате за обработка, се изпращат на този адрес. Това, което сте заличили, се премахва предварително. Локален AI модел на това устройство не изпраща нищо.',
+  'Gegevens weglaten (redactie)': 'Заличаване на данни (редакция)',
+  'Zet je tekst tussen dubbele blokhaken, zoals [[het adres]], dan laat OciDeck die weg uit alles wat je toont en exporteert. Op de dia, in de presentatie, in de PDF, de PowerPoint en de HTML verschijnen alleen blokken.':
+      'Поставете текст в двойни квадратни скоби, например [[адресът]], и OciDeck го пропуска от всичко, което показвате и изнасяте. На слайда, в презентацията, в PDF, PowerPoint и HTML се появяват само блокчета.',
+  'Weggelaten is écht weggelaten, niet afgedekt. De tekst zit niet als onzichtbare laag onder een zwart balkje in de PDF, niet in de sprekersnotities van de PowerPoint, en niet in de broncode van de HTML. Wie het bestand openmaakt, kan er niets uit terughalen.':
+      'Заличеното е наистина заличено, не просто закрито. Текстът не стои като невидим слой под черна лента в PDF, нито в бележките на говорителя в PowerPoint, нито в изходния код на HTML. Който отвори файла, не може да извади нищо от него.',
+  'Je eigen bestand verandert niet. De oorspronkelijke tekst blijft in je markdown staan; redactie geldt alleen voor wat je deelt. Zo houd je je eigen gegevens.':
+      'Собственият ви файл не се променя. Оригиналният текст остава в markdown-а ви; заличаването важи само за това, което споделяте. Така запазвате собствените си данни.',
   'map/presentatie': 'папка/презентация',
   'Gekoppelde test': 'Свързан тест',
   'Maak eerst een checklist voor dit scope-object.':

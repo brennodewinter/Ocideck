@@ -1790,6 +1790,15 @@ const _dutchSourceAddHu = <String, String>{
   'Extern': 'Külső',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Külső URL-ről letöltve; a megnyitás kapcsolatba lépett azzal a kiszolgálóval.',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Wat je hebt geredigeerd, gaat er eerst uit. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'MI-segítség (alapértelmezetten kikapcsolva): ha saját üzemeltetésű vagy felhőalapú backendet választasz, a feldolgozásra átadott szövegek vagy képek arra a címre kerülnek. Amit kitakartál, előbb kikerül belőle. A helyi MI-modell ezen az eszközön semmit sem küld.',
+  'Gegevens weglaten (redactie)': 'Adatok kihagyása (kitakarás)',
+  'Zet je tekst tussen dubbele blokhaken, zoals [[het adres]], dan laat OciDeck die weg uit alles wat je toont en exporteert. Op de dia, in de presentatie, in de PDF, de PowerPoint en de HTML verschijnen alleen blokken.':
+      'Tedd a szöveget dupla szögletes zárójelbe, például [[a cím]], és az OciDeck kihagyja mindenből, amit megmutatsz és exportálsz. A dián, az előadásban, a PDF-ben, a PowerPointban és a HTML-ben csak blokkok jelennek meg.',
+  'Weggelaten is écht weggelaten, niet afgedekt. De tekst zit niet als onzichtbare laag onder een zwart balkje in de PDF, niet in de sprekersnotities van de PowerPoint, en niet in de broncode van de HTML. Wie het bestand openmaakt, kan er niets uit terughalen.':
+      'A kihagyott tényleg kihagyott, nem letakart. A szöveg nem lapul láthatatlan rétegként egy fekete csík alatt a PDF-ben, sem a PowerPoint előadói jegyzeteiben, sem a HTML forráskódjában. Aki megnyitja a fájlt, semmit sem tud belőle előhalászni.',
+  'Je eigen bestand verandert niet. De oorspronkelijke tekst blijft in je markdown staan; redactie geldt alleen voor wat je deelt. Zo houd je je eigen gegevens.':
+      'A saját fájlod nem változik. Az eredeti szöveg a markdownodban marad; a kitakarás csak arra vonatkozik, amit megosztasz. Így a saját adataid nálad maradnak.',
   'map/presentatie': 'mappa/prezentáció',
   'Gekoppelde test': 'Kapcsolt teszt',
   'Maak eerst een checklist voor dit scope-object.':

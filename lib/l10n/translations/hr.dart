@@ -1793,6 +1793,15 @@ const _dutchSourceAddHr = <String, String>{
   'Extern': 'Vanjski',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Dohvaćeno s vanjskog URL-a; otvaranje je kontaktiralo taj poslužitelj.',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Wat je hebt geredigeerd, gaat er eerst uit. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'AI pomoć (prema zadanome isključena): odabereš li vlastiti ili oblak backend, tekstovi ili slike koje daješ na obradu šalju se na tu adresu. Ono što si redigirao prethodno se uklanja. Lokalni AI model na ovom uređaju ne šalje ništa.',
+  'Gegevens weglaten (redactie)': 'Izostavljanje podataka (redakcija)',
+  'Zet je tekst tussen dubbele blokhaken, zoals [[het adres]], dan laat OciDeck die weg uit alles wat je toont en exporteert. Op de dia, in de presentatie, in de PDF, de PowerPoint en de HTML verschijnen alleen blokken.':
+      'Stavi tekst u dvostruke uglate zagrade, primjerice [[adresa]], i OciDeck ga izostavlja iz svega što prikazuješ i izvoziš. Na slajdu, u prezentaciji, u PDF-u, PowerPointu i HTML-u pojavljuju se samo blokovi.',
+  'Weggelaten is écht weggelaten, niet afgedekt. De tekst zit niet als onzichtbare laag onder een zwart balkje in de PDF, niet in de sprekersnotities van de PowerPoint, en niet in de broncode van de HTML. Wie het bestand openmaakt, kan er niets uit terughalen.':
+      'Izostavljeno znači doista izostavljeno, a ne prekriveno. Tekst ne leži kao nevidljiv sloj ispod crne trake u PDF-u, ni u bilješkama govornika PowerPointa, ni u izvornom kodu HTML-a. Tko otvori datoteku, ne može iz nje ništa izvući.',
+  'Je eigen bestand verandert niet. De oorspronkelijke tekst blijft in je markdown staan; redactie geldt alleen voor wat je deelt. Zo houd je je eigen gegevens.':
+      'Tvoja datoteka se ne mijenja. Izvorni tekst ostaje u tvom markdownu; redakcija vrijedi samo za ono što dijeliš. Tako zadržavaš svoje podatke.',
   'map/presentatie': 'mapa/prezentacija',
   'Gekoppelde test': 'Povezani test',
   'Maak eerst een checklist voor dit scope-object.':

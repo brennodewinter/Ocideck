@@ -1809,6 +1809,15 @@ const _dutchSourceAddMt = <String, String>{
   'Extern': 'Estern',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Miksub minn URL estern; il-ftuħ ikkuntattja dak is-server.',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Wat je hebt geredigeerd, gaat er eerst uit. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'Assistenza AI (mitfija awtomatikament): jekk tagħżel backend self-hosted jew fis-sħaba, it-testi jew l-immaġni li tipproċessa jintbagħtu f\'dak l-indirizz. Dak li rrediġejt jitneħħa l-ewwel. Mudell AI lokali fuq dan l-apparat ma jibgħat xejn.',
+  'Gegevens weglaten (redactie)': 'Tħalli barra data (redazzjoni)',
+  'Zet je tekst tussen dubbele blokhaken, zoals [[het adres]], dan laat OciDeck die weg uit alles wat je toont en exporteert. Op de dia, in de presentatie, in de PDF, de PowerPoint en de HTML verschijnen alleen blokken.':
+      'Poġġi t-test bejn parentesi kwadri doppji, bħal [[l-indirizz]], u OciDeck iħallih barra minn dak kollu li turi u tesporta. Fuq is-slide, fil-preżentazzjoni, fil-PDF, fil-PowerPoint u fl-HTML jidhru blokki biss.',
+  'Weggelaten is écht weggelaten, niet afgedekt. De tekst zit niet als onzichtbare laag onder een zwart balkje in de PDF, niet in de sprekersnotities van de PowerPoint, en niet in de broncode van de HTML. Wie het bestand openmaakt, kan er niets uit terughalen.':
+      'Imħolli barra jfisser tassew imħolli barra, mhux mgħotti. It-test ma jinsabx bħala saff inviżibbli taħt strixxa sewda fil-PDF, lanqas fin-noti tal-kelliem tal-PowerPoint, u lanqas fil-kodiċi sors tal-HTML. Min jiftaħ il-fajl ma jista\' jirkupra xejn minnu.',
+  'Je eigen bestand verandert niet. De oorspronkelijke tekst blijft in je markdown staan; redactie geldt alleen voor wat je deelt. Zo houd je je eigen gegevens.':
+      'Il-fajl tiegħek ma jinbidilx. It-test oriġinali jibqa\' fil-markdown tiegħek; ir-redazzjoni tapplika biss għal dak li taqsam. Hekk iżżomm id-data tiegħek.',
   'map/presentatie': 'folder/preżentazzjoni',
   'Gekoppelde test': 'Test marbut',
   'Maak eerst een checklist voor dit scope-object.':

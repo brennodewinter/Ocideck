@@ -15,6 +15,7 @@ import '../../state/tabs_provider.dart';
 import '../../services/classification_enforcement_policy.dart';
 import '../../services/finding_context_score.dart';
 import '../../services/image_service.dart';
+import '../../services/privacy/privacy_projection.dart';
 import '../../services/slide_rasterizer.dart';
 import '../../state/slide_clipboard_provider.dart';
 import '../../theme/app_theme.dart';
@@ -241,16 +242,12 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     );
     Uint8List? bytes;
     try {
+      // Rasteren-naar-klembord is een ontvangend oppervlak: de projectie hoort
+      // er dus net zo goed voor te staan als bij een echte export.
       final images = await SlideRasterizer.rasterize(
         context: context,
-        slides: [slide],
-        themeProfile: deck.themeProfile,
+        audience: PrivacyProjection.forAudience(deck.copyWith(slides: [slide])),
         cockpitColorScheme: ref.read(settingsProvider).cockpitColorScheme,
-        projectPath: deck.projectPath,
-        signature: deck.signature,
-        sealedAt: deck.sealAt,
-        tlp: deck.tlp,
-        organization: deck.organization,
         showClassificationWatermark: ref
             .read(settingsProvider)
             .classificationWatermarkEnabled,

@@ -1816,6 +1816,15 @@ const _dutchSourceAddPt = <String, String>{
   'Extern': 'Externo',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Obtido de um URL externo; a abertura contactou esse servidor.',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Wat je hebt geredigeerd, gaat er eerst uit. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'Assistência de IA (desativada por predefinição): se escolheres um backend auto-hospedado ou na nuvem, os textos ou imagens que mandas processar são enviados para esse endereço. O que ocultaste é removido primeiro. Um modelo de IA local neste dispositivo não envia nada.',
+  'Gegevens weglaten (redactie)': 'Omitir dados (ocultação)',
+  'Zet je tekst tussen dubbele blokhaken, zoals [[het adres]], dan laat OciDeck die weg uit alles wat je toont en exporteert. Op de dia, in de presentatie, in de PDF, de PowerPoint en de HTML verschijnen alleen blokken.':
+      'Coloca texto entre parênteses retos duplos, como [[a morada]], e o OciDeck omite-o de tudo o que mostras e exportas. No diapositivo, na apresentação, no PDF, no PowerPoint e no HTML aparecem apenas blocos.',
+  'Weggelaten is écht weggelaten, niet afgedekt. De tekst zit niet als onzichtbare laag onder een zwart balkje in de PDF, niet in de sprekersnotities van de PowerPoint, en niet in de broncode van de HTML. Wie het bestand openmaakt, kan er niets uit terughalen.':
+      'Omitido significa mesmo omitido, não tapado. O texto não fica como camada invisível por baixo de uma barra preta no PDF, nem nas notas do orador do PowerPoint, nem no código-fonte do HTML. Quem abrir o ficheiro não consegue recuperar nada.',
+  'Je eigen bestand verandert niet. De oorspronkelijke tekst blijft in je markdown staan; redactie geldt alleen voor wat je deelt. Zo houd je je eigen gegevens.':
+      'O teu ficheiro não muda. O texto original permanece no teu markdown; a ocultação aplica-se apenas ao que partilhas. Assim ficas com os teus dados.',
   'map/presentatie': 'pasta/apresentação',
   'Gekoppelde test': 'Teste vinculado',
   'Maak eerst een checklist voor dit scope-object.':

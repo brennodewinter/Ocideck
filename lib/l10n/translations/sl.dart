@@ -1788,6 +1788,15 @@ const _dutchSourceAddSl = <String, String>{
   'Extern': 'Zunanji',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Pridobljeno z zunanjega URL-ja; odpiranje je vzpostavilo stik s tem strežnikom.',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Wat je hebt geredigeerd, gaat er eerst uit. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'Pomoč UI (privzeto izklopljena): če izbereš lastno gostovano ali oblačno zaledje, se besedila ali slike, ki jih daš v obdelavo, pošljejo na ta naslov. Kar si prekril, se prej odstrani. Lokalni model UI na tej napravi ne pošlje ničesar.',
+  'Gegevens weglaten (redactie)': 'Izpuščanje podatkov (prekrivanje)',
+  'Zet je tekst tussen dubbele blokhaken, zoals [[het adres]], dan laat OciDeck die weg uit alles wat je toont en exporteert. Op de dia, in de presentatie, in de PDF, de PowerPoint en de HTML verschijnen alleen blokken.':
+      'Besedilo daj med dvojne oglate oklepaje, na primer [[naslov]], in OciDeck ga izpusti iz vsega, kar pokažeš in izvoziš. Na prosojnici, v predstavitvi, v PDF-ju, PowerPointu in HTML-ju se prikažejo le bloki.',
+  'Weggelaten is écht weggelaten, niet afgedekt. De tekst zit niet als onzichtbare laag onder een zwart balkje in de PDF, niet in de sprekersnotities van de PowerPoint, en niet in de broncode van de HTML. Wie het bestand openmaakt, kan er niets uit terughalen.':
+      'Izpuščeno pomeni res izpuščeno, ne prekrito. Besedilo ne leži kot neviden sloj pod črno črto v PDF-ju, ne v govornikovih zapiskih PowerPointa in ne v izvorni kodi HTML-ja. Kdor odpre datoteko, iz nje ne more ničesar potegniti.',
+  'Je eigen bestand verandert niet. De oorspronkelijke tekst blijft in je markdown staan; redactie geldt alleen voor wat je deelt. Zo houd je je eigen gegevens.':
+      'Tvoja datoteka se ne spremeni. Izvirno besedilo ostane v tvojem markdownu; prekrivanje velja le za to, kar deliš. Tako obdržiš svoje podatke.',
   'map/presentatie': 'mapa/predstavitev',
   'Gekoppelde test': 'Povezani test',
   'Maak eerst een checklist voor dit scope-object.':

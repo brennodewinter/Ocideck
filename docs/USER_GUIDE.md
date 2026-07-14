@@ -384,6 +384,60 @@ Slides with no classification show none of the above. Per-slide TLP that is
 stricter than the deck still contributes to the effective marking on slides that
 are shown.
 
+## Redaction — leaving data out
+
+Some decks carry things the room should not see: a citizen service number in a
+police briefing, a captured credential in a pentest report, a customer's address
+in a training deck. Wrap that text in **double square brackets** and OciDeck
+leaves it out of everything it shows and exports.
+
+```markdown
+The suspect, [[Jan de Vries]], was arrested at [[Kalverstraat 12]].
+```
+
+On the slide, in the presentation, in the audience window, in the PDF, the PPTX
+and the HTML you get `████████`. Anywhere.
+
+### It is left out, not covered up
+
+This is the part that matters, and it is where most redaction goes wrong. A black
+rectangle drawn over text is not redaction — the text is still in the file, one
+copy-paste away. OciDeck removes the characters *before* anything is rendered or
+written, so:
+
+- the PDF has **no text layer** under the blocks — they are pixels;
+- the PPTX **speaker notes** (`ppt/notesSlides/…`) do not contain the value,
+  even though they are plain text in the file and invisible on the slide;
+- the HTML **source** does not contain it — not in the embedded Markdown, not in
+  a `<meta>` tag, not behind a CSS rule;
+- the **document metadata** (title, author, keywords in the PDF/PPTX properties)
+  does not contain it either;
+- a **screen reader** cannot read it, because it never reaches the widget tree.
+
+A test in the suite exports a deck with a known value and searches for it in
+every one of those places. If it ever shows up, the build fails.
+
+### Your file keeps the original
+
+Redaction applies to what you *share*, never to what you *store*. The Markdown on
+disk keeps `[[Jan de Vries]]` exactly as you typed it, so you can lift the
+brackets later, or produce a full version for the client and a redacted one for
+wider distribution from the same source. Saving a deck after redacting changes
+nothing about its contents.
+
+### Live table editing is off on a redacted slide
+
+A slide with a redaction cannot be table-edited during a presentation. The
+presenter writes a live edit back to the deck as a whole slide, and it only ever
+saw the blocks — writing that back would overwrite your own data. A surface that
+cannot see the data may not write it back either.
+
+### What it does not do
+
+Redaction only removes what you mark. It does not read your images: a screenshot
+with a name in it stays a screenshot with a name in it. And a `~~strikethrough~~`
+is not a redaction — it is styling, and the text travels with the file.
+
 ## Presenting
 
 Start the fullscreen presenter from the toolbar. See

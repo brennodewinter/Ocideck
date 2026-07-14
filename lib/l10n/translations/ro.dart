@@ -1805,6 +1805,15 @@ const _dutchSourceAddRo = <String, String>{
   'Extern': 'Extern',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Preluat de la un URL extern; deschiderea a contactat acel server.',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Wat je hebt geredigeerd, gaat er eerst uit. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'Asistență IA (dezactivată implicit): dacă alegi un backend găzduit de tine sau în cloud, textele ori imaginile pe care le dai spre procesare sunt trimise la acea adresă. Ce ai redactat este eliminat mai întâi. Un model IA local pe acest dispozitiv nu trimite nimic.',
+  'Gegevens weglaten (redactie)': 'Omiterea datelor (redactare)',
+  'Zet je tekst tussen dubbele blokhaken, zoals [[het adres]], dan laat OciDeck die weg uit alles wat je toont en exporteert. Op de dia, in de presentatie, in de PDF, de PowerPoint en de HTML verschijnen alleen blokken.':
+      'Pune textul între paranteze drepte duble, precum [[adresa]], iar OciDeck îl omite din tot ce arăți și exporți. Pe diapozitiv, în prezentare, în PDF, PowerPoint și HTML apar doar blocuri.',
+  'Weggelaten is écht weggelaten, niet afgedekt. De tekst zit niet als onzichtbare laag onder een zwart balkje in de PDF, niet in de sprekersnotities van de PowerPoint, en niet in de broncode van de HTML. Wie het bestand openmaakt, kan er niets uit terughalen.':
+      'Omis înseamnă cu adevărat omis, nu acoperit. Textul nu stă ca strat invizibil sub o bară neagră în PDF, nici în notele vorbitorului din PowerPoint, nici în codul sursă al HTML. Cine deschide fișierul nu poate scoate nimic din el.',
+  'Je eigen bestand verandert niet. De oorspronkelijke tekst blijft in je markdown staan; redactie geldt alleen voor wat je deelt. Zo houd je je eigen gegevens.':
+      'Fișierul tău nu se schimbă. Textul original rămâne în markdownul tău; redactarea se aplică doar la ce partajezi. Astfel îți păstrezi propriile date.',
   'map/presentatie': 'folder/prezentare',
   'Gekoppelde test': 'Test asociat',
   'Maak eerst een checklist voor dit scope-object.':

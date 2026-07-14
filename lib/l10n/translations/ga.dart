@@ -1822,6 +1822,15 @@ const _dutchSourceAddGa = <String, String>{
   'Extern': 'Seachtrach',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Aisghabhadh ó URL seachtrach; rinne an oscailt teagmháil leis an bhfreastalaí sin.',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Wat je hebt geredigeerd, gaat er eerst uit. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'Cúnamh IS (múchta de réir réamhshocraithe): má roghnaíonn tú inneall féin-óstáilte nó néalbhunaithe, seoltar na téacsanna nó na híomhánna a phróiseálann tú chuig an seoladh sin. Baintear an rud a rinne tú a fholú ar dtús. Ní sheolann samhail IS áitiúil ar an ngléas seo faic.',
+  'Gegevens weglaten (redactie)': 'Sonraí a fhágáil ar lár (folú)',
+  'Zet je tekst tussen dubbele blokhaken, zoals [[het adres]], dan laat OciDeck die weg uit alles wat je toont en exporteert. Op de dia, in de presentatie, in de PDF, de PowerPoint en de HTML verschijnen alleen blokken.':
+      'Cuir téacs idir lúibíní cearnacha dúbailte, mar [[an seoladh]], agus fágfaidh OciDeck ar lár é as gach a dtaispeánann tú agus a easpórtálann tú. Ar an sleamhnán, sa láithreoireacht, sa PDF, sa PowerPoint agus san HTML, ní fheicfear ach bloic.',
+  'Weggelaten is écht weggelaten, niet afgedekt. De tekst zit niet als onzichtbare laag onder een zwart balkje in de PDF, niet in de sprekersnotities van de PowerPoint, en niet in de broncode van de HTML. Wie het bestand openmaakt, kan er niets uit terughalen.':
+      'Ciallaíonn fágtha ar lár go bhfuil sé fágtha ar lár i ndáiríre, ní hé go bhfuil sé clúdaithe. Níl an téacs ina shraith dhofheicthe faoi bharra dubh sa PDF, ná i nótaí cainteora an PowerPoint, ná i gcód foinseach an HTML. An té a osclaíonn an comhad, ní féidir leis aon rud a bhaint as.',
+  'Je eigen bestand verandert niet. De oorspronkelijke tekst blijft in je markdown staan; redactie geldt alleen voor wat je deelt. Zo houd je je eigen gegevens.':
+      'Ní athraíonn do chomhad féin. Fanann an téacs bunaidh i do mharcdown; ní bhaineann an folú ach leis an méid a roinneann tú. Mar sin coinníonn tú do shonraí féin.',
   'map/presentatie': 'fillteán/cur-i-láthair',
   'Gekoppelde test': 'Tástáil nasctha',
   'Maak eerst een checklist voor dit scope-object.':

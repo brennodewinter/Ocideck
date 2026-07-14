@@ -8,6 +8,32 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Redaction — and it actually leaves the data out.** Wrap text in double square
+  brackets (`[[Jan de Vries]]`) and OciDeck removes it from everything it shows
+  and exports, while your Markdown keeps the original. The point is what it is
+  *not*: it is not a black rectangle drawn over text that is still in the file.
+  The characters are replaced at a single boundary — `PrivacyProjection` — before
+  anything is rendered or written, so the PDF has no text layer under the blocks,
+  the PPTX speaker notes (plain text in the file, invisible on the slide) do not
+  carry the value, the HTML source does not contain it in the embedded Markdown
+  or behind a CSS rule, the document metadata does not either, and a screen
+  reader cannot read it because it never reaches the widget tree. A test exports
+  a deck with a known value and hunts for it in every one of those places,
+  unzipping the PPTX rather than scanning raw bytes — deflated XML would hide the
+  string even if it were there. The replacement has a fixed width: mirroring the
+  original length would tell the reader what kind of value was removed.
+
+  The boundary is a *type*, not an agreement. Receiving surfaces take an
+  `AudienceDeck`, which only the projection can mint, and `check-conventions`
+  fails if one of them ever accepts a raw `Deck` again. The real risk here is
+  human — someone adds a fourth export format next year and hands it the source —
+  and a convention in a design document does not stop data; a compile error does.
+
+  One consequence worth naming: a slide with a redaction can no longer be
+  table-edited *during a presentation*. The presenter writes a live edit back as
+  a whole slide, and it only ever saw the blocks. A surface that cannot see the
+  data may not write it back either.
+
 - **A privacy badge marks decks that came from a URL.** When a deck is fetched
   from a web address (the URL import, or a `?deck=…` share link on the web
   build), the status bar shows an **“Extern”** badge — a “PrivacyKat” mark in the

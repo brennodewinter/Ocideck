@@ -87,6 +87,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `miauw_compliance_analyzer.dart` — Scores each MIAUW EIS (Voldaan/Openstaand/Uitgesloten) from deck content + waivers.
 - `miauw_eis_catalog.dart` — The bundled offline MIAUW EIS catalog (`MiauwEisCatalog`, curated subset).
 - `open_file_channel.dart` — Receives file-open paths from macOS for `.md` files.
+- `privacy/privacy_projection.dart` — `AudienceDeck` + `PrivacyProjection`: the single boundary a source deck crosses to reach any receiving surface. Redacts `[[…]]` markers before rendering or export; the private constructor means no export path can hold the unredacted source.
 - `quality_export_policy.dart` — Gates export by slide-quality issues with warnings.
 - `recovery_service.dart` — Auto-saves deck snapshots for crash/unsaved recovery.
 - `rehearsal_controller.dart` — Unit-testable controller tracking elapsed/remaining/per-slide rehearsal timing.

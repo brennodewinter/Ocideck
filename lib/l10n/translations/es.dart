@@ -740,6 +740,15 @@ const _dutchSourceAddEs = {
   'Extern': 'Externo',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Obtenido de una URL externa; al abrirla se contactó ese servidor.',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Wat je hebt geredigeerd, gaat er eerst uit. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'Asistencia de IA (desactivada por defecto): si eliges un backend autoalojado o en la nube, los textos o imágenes que procesas se envían a esa dirección. Lo que hayas redactado se elimina antes. Un modelo de IA local en este dispositivo no envía nada.',
+  'Gegevens weglaten (redactie)': 'Omitir datos (redacción)',
+  'Zet je tekst tussen dubbele blokhaken, zoals [[het adres]], dan laat OciDeck die weg uit alles wat je toont en exporteert. Op de dia, in de presentatie, in de PDF, de PowerPoint en de HTML verschijnen alleen blokken.':
+      'Pon texto entre corchetes dobles, como [[la dirección]], y OciDeck lo omite de todo lo que muestras y exportas. En la diapositiva, en la presentación, en el PDF, el PowerPoint y el HTML solo aparecen bloques.',
+  'Weggelaten is écht weggelaten, niet afgedekt. De tekst zit niet als onzichtbare laag onder een zwart balkje in de PDF, niet in de sprekersnotities van de PowerPoint, en niet in de broncode van de HTML. Wie het bestand openmaakt, kan er niets uit terughalen.':
+      'Omitido significa realmente omitido, no tapado. El texto no queda como capa invisible bajo una barra negra en el PDF, ni en las notas del orador del PowerPoint, ni en el código fuente del HTML. Quien abra el archivo no puede recuperar nada.',
+  'Je eigen bestand verandert niet. De oorspronkelijke tekst blijft in je markdown staan; redactie geldt alleen voor wat je deelt. Zo houd je je eigen gegevens.':
+      'Tu propio archivo no cambia. El texto original permanece en tu markdown; la redacción solo se aplica a lo que compartes. Así conservas tus propios datos.',
   'map/presentatie': 'carpeta/presentación',
   'Gekoppelde test': 'Prueba vinculada',
   'Maak eerst een checklist voor dit scope-object.':
