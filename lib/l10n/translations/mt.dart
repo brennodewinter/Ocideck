@@ -1806,6 +1806,9 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Je eigen gegevens': 'Id-dettalji tiegħek stess',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
+      'Wieħed f\'kull linja: ismek, l-indirizz email, in-numru tat-telefon jew id-dominju tal-organizzazzjoni tiegħek. Dak li hemm hawn ma jiġix irrapportat u lanqas irrediġut — huwa min jibgħat, mhux sejba. Dominju (politie.nl) ikopri kull indirizz taħtu.',
   'Bij onafgehandelde persoonsgegevens': 'B\'data personali mhux solvuta',
   'Export afgebroken vanwege privacybevindingen.':
       'L-esportazzjoni ġiet ikkanċellata minħabba sejbiet ta\' privatezza.',

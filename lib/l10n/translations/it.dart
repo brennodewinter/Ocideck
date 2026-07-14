@@ -736,6 +736,9 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Je eigen gegevens': 'I tuoi dati',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
+      'Uno per riga: il tuo nome, indirizzo e-mail, numero di telefono o il dominio della tua organizzazione. Ciò che indichi qui non viene segnalato né oscurato: è il mittente, non una rilevazione. Un dominio (politie.nl) copre ogni indirizzo sottostante.',
   'Bij onafgehandelde persoonsgegevens': 'Con dati personali non gestiti',
   'Export afgebroken vanwege privacybevindingen.':
       'Esportazione annullata a causa di rilevazioni di privacy.',

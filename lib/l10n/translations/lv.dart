@@ -1782,6 +1782,9 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Je eigen gegevens': 'Tavi paša dati',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
+      'Viens rindā: tavs vārds, e-pasta adrese, tālruņa numurs vai tavas organizācijas domēns. Tas, kas šeit ir, netiek ziņots un netiek aizklāts — tas ir sūtītājs, nevis atradums. Domēns (politie.nl) sedz katru adresi zem tā.',
   'Bij onafgehandelde persoonsgegevens': 'Ar neatrisinātiem personas datiem',
   'Export afgebroken vanwege privacybevindingen.':
       'Eksports pārtraukts privātuma atradumu dēļ.',

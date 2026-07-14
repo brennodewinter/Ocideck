@@ -741,6 +741,9 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Je eigen gegevens': 'Dyn eigen gegevens',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
+      'Ien de regel: dyn namme, e-mailadres, telefoannûmer of it domein fan dyn organisaasje. Wat hjir stiet wurdt net meld en net redigearre — it is de ôfstjoerder, gjin befining. In domein (politie.nl) dekt elk adres derûnder.',
   'Bij onafgehandelde persoonsgegevens': 'By ûnôfhannele persoansgegevens',
   'Export afgebroken vanwege privacybevindingen.':
       'Eksport ôfbrutsen fanwegen privacybefinings.',

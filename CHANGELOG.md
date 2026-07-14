@@ -8,6 +8,24 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Your own details are the sender, not a finding.** Put your name, email
+  address, phone number or your organisation's domain under *Settings → Security*
+  and they stop being reported — and stop being redacted.
+
+  This was the single most predictable false positive left. Your address in the
+  footer, your name on the title slide, your number on the contact slide: without
+  this list, nearly *every* deck fires, and it fires on the one slide that is
+  always there.
+
+  It is deliberately a list rather than a heuristic. Guessing who the author is —
+  from the front matter, from the OS account — is sometimes wrong, and when it is
+  wrong it suppresses a *real* finding. A list is never wrong: it contains exactly
+  what you put in it.
+
+  The matching is exact or by domain, and nothing in between. `politie.nl` covers
+  `j.jansen@politie.nl`, but not `j.jansen@nietpolitie.nl` — a loose substring
+  match would have covered that too, which is a whole different organisation
+  quietly silenced. That trap was caught while writing the tests, not after.
 - **An export gate that does not punish personal data — only *unnoticed* personal
   data.** Before writing a file, OciDeck tells you how many findings you have not
   decided about, and how many you did handle (accepted, warned, redacted). You can

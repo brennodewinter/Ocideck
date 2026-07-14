@@ -35,6 +35,7 @@ import '../services/export_service.dart';
 import '../services/file_service.dart';
 import '../services/image_service.dart';
 import '../services/privacy/privacy_export_policy.dart';
+import '../services/privacy/privacy_own_identity.dart';
 import '../services/privacy/privacy_projection.dart';
 import '../services/privacy/privacy_scanner.dart';
 import '../services/privacy/redaction_manifest_service.dart';

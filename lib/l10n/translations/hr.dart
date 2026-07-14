@@ -1790,6 +1790,9 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Je eigen gegevens': 'Tvoji vlastiti podaci',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
+      'Jedan po retku: tvoje ime, e-adresa, broj telefona ili domena tvoje organizacije. Ono što je ovdje nije prijavljeno ni redigirano — to je pošiljatelj, ne nalaz. Domena (politie.nl) pokriva svaku adresu ispod nje.',
   'Bij onafgehandelde persoonsgegevens': 'Kod neriješenih osobnih podataka',
   'Export afgebroken vanwege privacybevindingen.':
       'Izvoz prekinut zbog nalaza o privatnosti.',

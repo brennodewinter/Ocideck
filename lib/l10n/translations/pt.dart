@@ -1813,6 +1813,9 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Je eigen gegevens': 'Os teus próprios dados',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
+      'Um por linha: o teu nome, endereço de e-mail, telefone ou o domínio da tua organização. O que estiver aqui não é comunicado nem ocultado — é o remetente, não uma deteção. Um domínio (politie.nl) cobre todos os endereços sob ele.',
   'Bij onafgehandelde persoonsgegevens': 'Com dados pessoais por resolver',
   'Export afgebroken vanwege privacybevindingen.':
       'Exportação cancelada devido a deteções de privacidade.',

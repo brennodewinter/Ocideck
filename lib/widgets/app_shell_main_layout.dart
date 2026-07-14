@@ -693,10 +693,15 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     // de rasterizer, de markdown voor de HTML-export, de PPTX-notities en de
     // documentmetadata worden allemaal uit dit ene object afgeleid.
     final source = deck.copyWith(slides: renderSlides);
-    final disabledRules = ref.read(settingsProvider).privacyDisabledRules;
+    final privacySettings = ref.read(settingsProvider);
+    final disabledRules = privacySettings.privacyDisabledRules;
+    final ownIdentity = OwnIdentity.fromLines(
+      privacySettings.privacyOwnIdentity,
+    );
     final audience = PrivacyProjection.forAudience(
       source,
       disabledRules: disabledRules,
+      ownIdentity: ownIdentity,
     );
 
     // Het manifest wordt uit de BRON gebouwd — de AudienceDeck bevat de
@@ -706,6 +711,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     // laten herbouwen.
     final manifest = RedactionManifestService(
       disabledRules: disabledRules,
+      ownIdentity: ownIdentity,
     ).build(source);
 
     // De gate telt op de ONGEFILTERDE scan. De provider onderdrukt bevindingen
@@ -714,7 +720,10 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     // juist zichtbaar zijn hoevéél er bewust geaccepteerd of geredigeerd is.
     final privacySummary = summarisePrivacyForExport(
       source,
-      PrivacyScanner(disabledRules: disabledRules).scan(source),
+      PrivacyScanner(
+        disabledRules: disabledRules,
+        ownIdentity: ownIdentity,
+      ).scan(source),
     );
 
     await ExportDialog.show(

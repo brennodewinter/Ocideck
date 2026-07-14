@@ -922,6 +922,9 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Je eigen gegevens': 'Your own details',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
+      'One per line: your name, email address, phone number, or your organisation\'s domain. What you list here is not reported and not redacted — it is the sender, not a finding. A domain (politie.nl) covers every address under it.',
   'Bij onafgehandelde persoonsgegevens': 'With unresolved personal data',
   'Export afgebroken vanwege privacybevindingen.':
       'Export cancelled because of privacy findings.',

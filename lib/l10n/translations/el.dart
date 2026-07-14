@@ -1811,6 +1811,9 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Je eigen gegevens': 'Τα δικά σου στοιχεία',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
+      'Ένα ανά γραμμή: το όνομά σου, η διεύθυνση email, το τηλέφωνο ή ο τομέας του οργανισμού σου. Ό,τι γράφεις εδώ δεν αναφέρεται και δεν αποκρύπτεται — είναι ο αποστολέας, όχι εύρημα. Ένας τομέας (politie.nl) καλύπτει κάθε διεύθυνση κάτω από αυτόν.',
   'Bij onafgehandelde persoonsgegevens': 'Με ανεπίλυτα προσωπικά δεδομένα',
   'Export afgebroken vanwege privacybevindingen.':
       'Η εξαγωγή ακυρώθηκε λόγω ευρημάτων απορρήτου.',

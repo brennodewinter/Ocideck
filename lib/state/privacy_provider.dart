@@ -5,6 +5,7 @@ import '../models/privacy_disposition.dart';
 import '../models/privacy_finding.dart';
 import '../models/slide_quality.dart';
 import '../services/privacy/privacy_quality_bridge.dart';
+import '../services/privacy/privacy_own_identity.dart';
 import '../services/privacy/privacy_scanner.dart';
 import 'deck_provider.dart';
 import 'settings_provider.dart';
@@ -14,6 +15,9 @@ final privacyScannerProvider = Provider<PrivacyScanner>(
   (ref) => PrivacyScanner(
     disabledRules: ref.watch(
       settingsProvider.select((s) => s.privacyDisabledRules),
+    ),
+    ownIdentity: OwnIdentity.fromLines(
+      ref.watch(settingsProvider.select((s) => s.privacyOwnIdentity)),
     ),
   ),
 );

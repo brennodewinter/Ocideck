@@ -1791,6 +1791,9 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Je eigen gegevens': 'Tavo paties duomenys',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
+      'Po vieną eilutėje: tavo vardas, el. pašto adresas, telefono numeris ar organizacijos domenas. Tai, kas čia įrašyta, nepranešama ir neredaguojama — tai siuntėjas, o ne radinys. Domenas (politie.nl) apima visus po juo esančius adresus.',
   'Bij onafgehandelde persoonsgegevens':
       'Esant neišspręstiems asmens duomenims',
   'Export afgebroken vanwege privacybevindingen.':

@@ -22,6 +22,7 @@ import '../../models/deck.dart';
 import '../../models/privacy_disposition.dart';
 import '../../models/privacy_finding.dart';
 import '../../models/slide.dart';
+import 'privacy_own_identity.dart';
 import 'privacy_scanner.dart';
 
 /// Het teken waarmee geredigeerde tekst wordt vervangen (U+2588 FULL BLOCK).
@@ -89,7 +90,13 @@ class PrivacyProjection {
   static AudienceDeck forAudience(
     Deck deck, {
     Set<String> disabledRules = const {},
-  }) => _project(deck, external: false, disabledRules: disabledRules);
+    OwnIdentity ownIdentity = OwnIdentity.empty,
+  }) => _project(
+    deck,
+    external: false,
+    disabledRules: disabledRules,
+    ownIdentity: ownIdentity,
+  );
 
   /// De projectie voor verwerking buiten dit apparaat (AI-backends).
   ///
@@ -100,7 +107,13 @@ class PrivacyProjection {
   static AudienceDeck forExternalProcessing(
     Deck deck, {
     Set<String> disabledRules = const {},
-  }) => _project(deck, external: true, disabledRules: disabledRules);
+    OwnIdentity ownIdentity = OwnIdentity.empty,
+  }) => _project(
+    deck,
+    external: true,
+    disabledRules: disabledRules,
+    ownIdentity: ownIdentity,
+  );
 
   /// De projectie scant **zelf**, en doet dat altijd.
   ///
@@ -119,11 +132,18 @@ class PrivacyProjection {
     Deck deck, {
     required bool external,
     Set<String> disabledRules = const {},
+    OwnIdentity ownIdentity = OwnIdentity.empty,
   }) {
     // De uitgezette regels tellen hier wél mee (anders dan de hoofdschakelaar):
     // wie een regel uitzet omdat die het mis heeft over zijn inhoud, wil die
     // inhoud niet zwart in zijn export terugzien. Zie PrivacyScanner.
-    final scan = PrivacyScanner(disabledRules: disabledRules).scan(deck);
+    // De eigen gegevens van de gebruiker tellen hier ook mee: zijn adres in de
+    // footer is geen bevinding maar de afzender, en zwart in de export zetten zou
+    // de contactslide onbruikbaar maken.
+    final scan = PrivacyScanner(
+      disabledRules: disabledRules,
+      ownIdentity: ownIdentity,
+    ).scan(deck);
 
     var count = 0;
     final shielded = <int>{};

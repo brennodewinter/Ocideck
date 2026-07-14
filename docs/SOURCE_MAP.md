@@ -96,6 +96,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `privacy/privacy_eu_rules.dart` — The European country packs as a data table: pattern, checksum, context words, confidence.
 - `privacy/privacy_special_rules.dart` — GDPR art. 9/10: multilingual keyword families, genetic notation (dbSNP/HGVS), the Dutch parketnummer, and the co-occurrence escalator's definition of "identifies a person".
 - `privacy/privacy_export_policy.dart` — The export gate: counts findings by disposition and decides whether to warn, block, or stay quiet.
+- `privacy/privacy_own_identity.dart` — `OwnIdentity`: the author's own name/email/domain, which is the sender rather than a finding. Exact and domain matching only — no fuzzy match, which would silently suppress a real finding.
 - `privacy/privacy_scanner.dart` — `PrivacyScanner`: reads a deck for privacy-sensitive data (email, IBAN, BSN), with context gates where the checksum is too weak.
 - `privacy/privacy_quality_bridge.dart` — Maps `PrivacyFinding` onto `SlideQualityIssue` so findings surface in the quality panel.
 - `privacy/privacy_projection.dart` — `AudienceDeck` + `PrivacyProjection`: the single boundary a source deck crosses to reach any receiving surface. Redacts `[[…]]` markers before rendering or export; the private constructor means no export path can hold the unredacted source.
@@ -129,6 +130,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `image_contrast_provider.dart` — Computes title-slide image-contrast issues asynchronously per deck.
 - `sec_module_provider.dart` — The security-module enable/reveal state that gates the pentest features.
 - `privacy_provider.dart` — Runs the privacy scan for the active deck (per-tab scoped) and bridges it into the quality panel.
+- `parts/settings_provider_privacy.dart` — The privacy switches (master, per-rule, own identity, export gate).
 - `settings_provider.dart` — `SettingsNotifier`: app settings, theme/appearance profiles, cockpit schemes.
 - `slide_clipboard_provider.dart` — Global slide clipboard for copy/paste across tabs.
 - `tabs_provider.dart` — `TabInfo` and the tabs notifier: open editor tabs, recovery, WebDAV origin.
@@ -214,6 +216,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 
 - `editor_panel.dart` — Routes slide edits to type-specific editors with toolbar/notes/timing controls.
 - `preview_panel.dart` — Zoomable slide preview with rich-text page navigation.
+- `slide_list_panel_clipboard.dart` — Copy-slide-as-image: an egress path, so it runs the same classification gate and privacy projection as a real export.
 - `slide_list_panel.dart` — Searchable, reorderable thumbnail list with import/paste/add controls.
 - `slide_quality_panel.dart` — Slide accessibility/quality checks with issue filtering.
 

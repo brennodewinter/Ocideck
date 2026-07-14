@@ -17,6 +17,7 @@ import '../../models/privacy_disposition.dart';
 import '../../models/privacy_finding.dart';
 import '../../models/redaction_manifest.dart';
 import '../../models/slide.dart';
+import 'privacy_own_identity.dart';
 import 'privacy_scanner.dart';
 
 /// Bouwt en verifieert redactiemanifesten.
@@ -25,6 +26,9 @@ class RedactionManifestService {
   /// ook niet in het manifest.
   final Set<String> disabledRules;
 
+  /// Idem voor de eigen gegevens van de gebruiker.
+  final OwnIdentity ownIdentity;
+
   /// Injecteerbaar voor de test; standaard een cryptografisch veilige bron.
   ///
   /// De salt is geen decoratie: zonder salt is een SHA-256 van een geredigeerd
@@ -32,8 +36,11 @@ class RedactionManifestService {
   /// precies wat je zojuist hebt weggelakt.
   final Random _random;
 
-  RedactionManifestService({Random? random, this.disabledRules = const {}})
-    : _random = random ?? Random.secure();
+  RedactionManifestService({
+    Random? random,
+    this.disabledRules = const {},
+    this.ownIdentity = OwnIdentity.empty,
+  }) : _random = random ?? Random.secure();
 
   /// Bouwt het manifest voor [deck]: één entry per redactie die de projectie op
   /// dit deck zou toepassen.
@@ -65,7 +72,10 @@ class RedactionManifestService {
   /// volgorde (slide, dan bevinding). Eén bron van waarheid voor zowel het
   /// bouwen als het verifiëren van een manifest — anders lopen die twee uiteen.
   List<({PrivacyFinding finding, String value})> redactedValues(Deck deck) {
-    final scan = PrivacyScanner(disabledRules: disabledRules).scan(deck);
+    final scan = PrivacyScanner(
+      disabledRules: disabledRules,
+      ownIdentity: ownIdentity,
+    ).scan(deck);
     final out = <({PrivacyFinding finding, String value})>[];
 
     for (var i = 0; i < deck.slides.length; i++) {

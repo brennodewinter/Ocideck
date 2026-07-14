@@ -733,6 +733,14 @@ class AppSettings {
   /// die wordt weggeklikt.
   final PrivacyExportGate privacyExportGate;
 
+  /// Je eigen gegevens: naam, e-mailadres, telefoonnummer, organisatiedomein.
+  /// Eén per regel.
+  ///
+  /// Wat hierin staat, wordt niet als bevinding gemeld. De grootste praktische
+  /// vals-positieven-bron is namelijk de auteur zelf — zijn adres in de footer,
+  /// zijn naam op de titelslide. Dat is geen bevinding maar de afzender.
+  final String privacyOwnIdentity;
+
   /// Scale factor for all interface text (1.0–2.0), on top of the system
   /// text scaling. The slide canvas itself is never scaled: slides are a
   /// fixed 16:9 design surface. WCAG 1.4.4 asks for text resizing up to 200%.
@@ -801,6 +809,7 @@ class AppSettings {
     this.privacyChecksEnabled = true,
     this.privacyDisabledRules = defaultDisabledPrivacyRules,
     this.privacyExportGate = PrivacyExportGate.warn,
+    this.privacyOwnIdentity = '',
     this.uiTextScale = 1.0,
     this.docReaderTextScale = 1.0,
     this.qualityWarningsOnExport = true,
@@ -881,6 +890,7 @@ class AppSettings {
     bool? privacyChecksEnabled,
     Set<String>? privacyDisabledRules,
     PrivacyExportGate? privacyExportGate,
+    String? privacyOwnIdentity,
     double? uiTextScale,
     double? docReaderTextScale,
     bool? qualityWarningsOnExport,
@@ -942,6 +952,7 @@ class AppSettings {
       privacyChecksEnabled: privacyChecksEnabled ?? this.privacyChecksEnabled,
       privacyDisabledRules: privacyDisabledRules ?? this.privacyDisabledRules,
       privacyExportGate: privacyExportGate ?? this.privacyExportGate,
+      privacyOwnIdentity: privacyOwnIdentity ?? this.privacyOwnIdentity,
       uiTextScale: uiTextScale ?? this.uiTextScale,
       docReaderTextScale: docReaderTextScale ?? this.docReaderTextScale,
       qualityWarningsOnExport:

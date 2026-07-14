@@ -1799,6 +1799,9 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Je eigen gegevens': 'Data tua propria',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
+      'Unum in versu: nomen tuum, inscriptio electronica, numerus telephonicus vel dominium consociationis tuae. Quae hic stant nec nuntiantur nec obliterantur — mittens est, non inventum. Dominium (politie.nl) omnem inscriptionem sub eo tegit.',
   'Bij onafgehandelde persoonsgegevens': 'Cum datis personalibus non tractatis',
   'Export afgebroken vanwege privacybevindingen.':
       'Exportatio ob inventa privata abrupta.',

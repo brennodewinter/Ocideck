@@ -1785,6 +1785,9 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Je eigen gegevens': 'Tvoji lastni podatki',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
+      'Eno na vrstico: tvoje ime, e-poštni naslov, telefonska številka ali domena tvoje organizacije. Kar je tu, se ne javi in ne prekrije — to je pošiljatelj, ne ugotovitev. Domena (politie.nl) pokriva vsak naslov pod njo.',
   'Bij onafgehandelde persoonsgegevens': 'Pri nerešenih osebnih podatkih',
   'Export afgebroken vanwege privacybevindingen.':
       'Izvoz preklican zaradi ugotovitev o zasebnosti.',
