@@ -1787,6 +1787,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'map/presentatie': 'mappa/prezentáció',
   'Gekoppelde test': 'Kapcsolt teszt',
   'Maak eerst een checklist voor dit scope-object.':
       'Először hozz létre egy ellenőrzőlistát ehhez a hatókör-objektumhoz.',

@@ -1785,6 +1785,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'map/presentatie': 'mapa/predstavitev',
   'Gekoppelde test': 'Povezani test',
   'Maak eerst een checklist voor dit scope-object.':
       'Najprej ustvari kontrolni seznam za ta predmet obsega.',

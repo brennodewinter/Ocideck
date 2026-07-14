@@ -25,6 +25,12 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   tables to the full width and trims the slide padding — fewer pages for the same
   content.
 
+### Fixed
+- **A few remaining interface labels are now localised.** The checklist preview's
+  `ID`/`Test` column headers, the audio-play tooltip and the export target-path
+  hint now go through the translation layer, so they follow the interface
+  language like the rest of the app.
+
 ### Added
 - **Link a finding to a checklist test.** The finding editor gains a **Gekoppelde
   test (Linked test)** picker listing the tests on the checklist(s) that cover the

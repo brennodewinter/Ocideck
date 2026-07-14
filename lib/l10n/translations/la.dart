@@ -1799,6 +1799,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'map/presentatie': 'scrinium/expositio',
   'Gekoppelde test': 'Probatio nexa',
   'Maak eerst een checklist voor dit scope-object.':
       'Primum indicem pro hoc obiecto ambitus crea.',

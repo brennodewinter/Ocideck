@@ -1819,6 +1819,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'map/presentatie': 'fillteán/cur-i-láthair',
   'Gekoppelde test': 'Tástáil nasctha',
   'Maak eerst een checklist voor dit scope-object.':
       'Cruthaigh seicliosta don réad scóipe seo ar dtús.',

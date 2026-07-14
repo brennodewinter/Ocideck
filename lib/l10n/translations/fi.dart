@@ -1783,6 +1783,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'map/presentatie': 'kansio/esitys',
   'Gekoppelde test': 'Linkitetty testi',
   'Maak eerst een checklist voor dit scope-object.':
       'Luo ensin tarkistuslista tälle laajuuden kohteelle.',

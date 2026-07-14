@@ -741,6 +741,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'map/presentatie': 'map/presintaasje',
   'Gekoppelde test': 'Keppele test',
   'Maak eerst een checklist voor dit scope-object.':
       'Meitsje earst in checklist foar dit scope-objekt.',

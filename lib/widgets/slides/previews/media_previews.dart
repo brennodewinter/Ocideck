@@ -234,7 +234,7 @@ class _AudioPlaybackState extends State<_AudioPlayback>
       right: widget.w * 0.035,
       bottom: widget.w * 0.035,
       child: IconButton(
-        tooltip: 'Audio',
+        tooltip: context.l10n.d('Audio'),
         onPressed: controller == null || !controller.value.isInitialized
             ? null
             : () {

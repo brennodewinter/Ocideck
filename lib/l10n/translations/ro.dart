@@ -1802,6 +1802,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'map/presentatie': 'folder/prezentare',
   'Gekoppelde test': 'Test asociat',
   'Maak eerst een checklist voor dit scope-object.':
       'Creează mai întâi o listă de verificare pentru acest obiect din domeniu.',

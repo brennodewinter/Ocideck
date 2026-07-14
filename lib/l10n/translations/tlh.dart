@@ -1758,6 +1758,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'map/presentatie': 'yav/\'angnIS',
   'Gekoppelde test': 'test rar',
   'Maak eerst een checklist voor dit scope-object.':
       'wa\'DIch scope-Doch checklist yIchenmoH.',

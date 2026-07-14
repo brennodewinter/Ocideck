@@ -740,6 +740,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'map/presentatie': 'karpeta/presentashon',
   'Gekoppelde test': 'Test konektá',
   'Maak eerst een checklist voor dit scope-object.':
       'Krea promé un lista di kontrol pa e objeto di scope aki.',

@@ -1782,6 +1782,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'map/presentatie': 'mape/prezentācija',
   'Gekoppelde test': 'Saistīts tests',
   'Maak eerst een checklist voor dit scope-object.':
       'Vispirms izveido kontrolsarakstu šim tvēruma objektam.',

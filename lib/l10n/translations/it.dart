@@ -736,6 +736,7 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'map/presentatie': 'cartella/presentazione',
   'Gekoppelde test': 'Test collegato',
   'Maak eerst een checklist voor dit scope-object.':
       'Crea prima una checklist per questo oggetto dell\'ambito.',

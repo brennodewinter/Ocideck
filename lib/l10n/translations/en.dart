@@ -922,6 +922,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'map/presentatie': 'folder/presentation',
   'Gekoppelde test': 'Linked test',
   'Maak eerst een checklist voor dit scope-object.':
       'First create a checklist for this scope object.',

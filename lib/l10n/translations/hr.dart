@@ -1790,6 +1790,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'map/presentatie': 'mapa/prezentacija',
   'Gekoppelde test': 'Povezani test',
   'Maak eerst een checklist voor dit scope-object.':
       'Prvo izradi kontrolni popis za ovaj objekt opsega.',

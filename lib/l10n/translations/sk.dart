@@ -1790,6 +1790,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'map/presentatie': 'priečinok/prezentácia',
   'Gekoppelde test': 'Prepojený test',
   'Maak eerst een checklist voor dit scope-object.':
       'Najprv vytvorte kontrolný zoznam pre tento objekt rozsahu.',

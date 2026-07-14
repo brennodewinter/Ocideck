@@ -1806,6 +1806,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'map/presentatie': 'папка/презентация',
   'Gekoppelde test': 'Свързан тест',
   'Maak eerst een checklist voor dit scope-object.':
       'Първо създайте контролен списък за този обект от обхвата.',

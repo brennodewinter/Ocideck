@@ -1782,6 +1782,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'map/presentatie': 'mappe/præsentation',
   'Gekoppelde test': 'Tilknyttet test',
   'Maak eerst een checklist voor dit scope-object.':
       'Opret først en tjekliste for dette scope-objekt.',

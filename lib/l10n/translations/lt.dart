@@ -1791,6 +1791,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'map/presentatie': 'aplankas/pristatymas',
   'Gekoppelde test': 'Susietas testas',
   'Maak eerst een checklist voor dit scope-object.':
       'Pirmiausia sukurkite kontrolinį sąrašą šiam apimties objektui.',
