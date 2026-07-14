@@ -1806,6 +1806,9 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'tabel met persoonsgegevens (rijen×kolommen)':
+      'таблица с лични данни (редове×колони)',
+  'massa-persoonsgegevens op één slide': 'масови лични данни на един слайд',
   'gebruikerspad met een naam erin': 'потребителски път с име в него',
   'toegangstoken in een link': 'токен за достъп в връзка',
   'persoonsgegeven in een link': 'лични данни във връзка',

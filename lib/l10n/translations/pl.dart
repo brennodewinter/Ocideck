@@ -1796,6 +1796,10 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'tabel met persoonsgegevens (rijen×kolommen)':
+      'tabela danych osobowych (wiersze×kolumny)',
+  'massa-persoonsgegevens op één slide':
+      'masowe dane osobowe na jednym slajdzie',
   'gebruikerspad met een naam erin': 'ścieżka użytkownika zawierająca imię',
   'toegangstoken in een link': 'token dostępu w linku',
   'persoonsgegeven in een link': 'dana osobowa w linku',

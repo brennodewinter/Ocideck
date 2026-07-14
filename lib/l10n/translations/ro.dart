@@ -1802,6 +1802,10 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'tabel met persoonsgegevens (rijen×kolommen)':
+      'tabel cu date personale (rânduri×coloane)',
+  'massa-persoonsgegevens op één slide':
+      'date personale în masă pe un diapozitiv',
   'gebruikerspad met een naam erin': 'cale de utilizator care conține un nume',
   'toegangstoken in een link': 'token de acces într-un link',
   'persoonsgegeven in een link': 'dată personală într-un link',

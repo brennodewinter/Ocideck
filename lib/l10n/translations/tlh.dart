@@ -1758,6 +1758,9 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'tabel met persoonsgegevens (rijen×kolommen)':
+      'nuv De\' HIvje\' (tlhoy\'×Der)',
+  'massa-persoonsgegevens op één slide': 'wa\' nagh beQDaq nuv De\' law\'',
   'gebruikerspad met een naam erin': 'lo\'wI\' He pong ngaSbogh',
   'toegangstoken in een link': 'rar token',
   'persoonsgegeven in een link': 'rar nuv De\'',

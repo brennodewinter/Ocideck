@@ -1782,6 +1782,10 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'tabel met persoonsgegevens (rijen×kolommen)':
+      'tabell med personuppgifter (rader×kolumner)',
+  'massa-persoonsgegevens op één slide':
+      'massvis av personuppgifter på en bild',
   'gebruikerspad met een naam erin': 'användarsökväg med ett namn i',
   'toegangstoken in een link': 'åtkomsttoken i en länk',
   'persoonsgegeven in een link': 'personuppgift i en länk',

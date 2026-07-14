@@ -1806,6 +1806,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'tabel met persoonsgegevens (rijen×kolommen)':
+      'tabella ta\' data personali (ringieli×kolonni)',
+  'massa-persoonsgegevens op één slide':
+      'data personali bl-ingrossa fuq slide waħda',
   'gebruikerspad met een naam erin': 'path tal-utent b\'isem fih',
   'toegangstoken in een link': 'token ta\' aċċess f\'link',
   'persoonsgegeven in een link': 'data personali f\'link',

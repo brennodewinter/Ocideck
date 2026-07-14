@@ -1790,6 +1790,10 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'tabel met persoonsgegevens (rijen×kolommen)':
+      'tabuľka osobných údajov (riadky×stĺpce)',
+  'massa-persoonsgegevens op één slide':
+      'hromadné osobné údaje na jednej snímke',
   'gebruikerspad met een naam erin': 'cesta používateľa obsahujúca meno',
   'toegangstoken in een link': 'prístupový token v odkaze',
   'persoonsgegeven in een link': 'osobný údaj v odkaze',

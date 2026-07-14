@@ -1787,6 +1787,9 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'tabel met persoonsgegevens (rijen×kolommen)':
+      'Tabälle mit Persoonedate (Ziile×Spalte)',
+  'massa-persoonsgegevens op één slide': 'Masse-Persoonedate uf eire Folie',
   'gebruikerspad met een naam erin': 'Benutzerpfad mit eme Name drin',
   'toegangstoken in een link': 'Zuegangstoken imene Link',
   'persoonsgegeven in een link': 'Persoonedatum imene Link',

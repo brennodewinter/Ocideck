@@ -922,6 +922,9 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'tabel met persoonsgegevens (rijen×kolommen)':
+      'table of personal data (rows×columns)',
+  'massa-persoonsgegevens op één slide': 'bulk personal data on one slide',
   'gebruikerspad met een naam erin': 'user path containing a name',
   'toegangstoken in een link': 'access token in a link',
   'persoonsgegeven in een link': 'personal data in a link',

@@ -1791,6 +1791,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'tabel met persoonsgegevens (rijen×kolommen)':
+      'asmens duomenų lentelė (eilutės×stulpeliai)',
+  'massa-persoonsgegevens op één slide':
+      'masiniai asmens duomenys vienoje skaidrėje',
   'gebruikerspad met een naam erin': 'naudotojo kelias su vardu',
   'toegangstoken in een link': 'prieigos raktas nuorodoje',
   'persoonsgegeven in een link': 'asmens duomenys nuorodoje',

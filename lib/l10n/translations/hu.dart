@@ -1787,6 +1787,9 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'tabel met persoonsgegevens (rijen×kolommen)':
+      'személyes adatok táblázata (sorok×oszlopok)',
+  'massa-persoonsgegevens op één slide': 'tömeges személyes adat egy dián',
   'gebruikerspad met een naam erin': 'felhasználói útvonal névvel',
   'toegangstoken in een link': 'hozzáférési token egy hivatkozásban',
   'persoonsgegeven in een link': 'személyes adat egy hivatkozásban',

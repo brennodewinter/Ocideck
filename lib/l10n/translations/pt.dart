@@ -1813,6 +1813,10 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'tabel met persoonsgegevens (rijen×kolommen)':
+      'tabela de dados pessoais (linhas×colunas)',
+  'massa-persoonsgegevens op één slide':
+      'dados pessoais em massa num diapositivo',
   'gebruikerspad met een naam erin': 'caminho de utilizador com um nome',
   'toegangstoken in een link': 'token de acesso numa ligação',
   'persoonsgegeven in een link': 'dado pessoal numa ligação',

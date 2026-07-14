@@ -1790,6 +1790,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'tabel met persoonsgegevens (rijen×kolommen)':
+      'tablica osobnih podataka (retci×stupci)',
+  'massa-persoonsgegevens op één slide':
+      'masovni osobni podaci na jednom slajdu',
   'gebruikerspad met een naam erin': 'korisnička staza s imenom',
   'toegangstoken in een link': 'pristupni token u poveznici',
   'persoonsgegeven in een link': 'osobni podatak u poveznici',

@@ -1774,6 +1774,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'tabel met persoonsgegevens (rijen×kolommen)':
+      'isikuandmete tabel (read×veerud)',
+  'massa-persoonsgegevens op één slide':
+      'hulgaliselt isikuandmeid ühel slaidil',
   'gebruikerspad met een naam erin': 'kasutajatee, mis sisaldab nime',
   'toegangstoken in een link': 'juurdepääsuluba lingis',
   'persoonsgegeven in een link': 'isikuandmed lingis',

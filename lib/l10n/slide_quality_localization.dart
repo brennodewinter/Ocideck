@@ -334,6 +334,10 @@ String privacyRuleLabel(AppLocalizations l10n, String ruleId) {
     'special.sexlife' => l10n.d('seksuele geaardheid'),
     'special.genetic' => l10n.d('genetisch gegeven'),
     'nl.parketnummer' => l10n.d('parketnummer'),
+    'bulk.table_column' => l10n.d(
+      'tabel met persoonsgegevens (rijen×kolommen)',
+    ),
+    'bulk.repeat' => l10n.d('massa-persoonsgegevens op één slide'),
     'struct.user_path' => l10n.d('gebruikerspad met een naam erin'),
     'struct.url_token' => l10n.d('toegangstoken in een link'),
     'struct.url_pii' => l10n.d('persoonsgegeven in een link'),
