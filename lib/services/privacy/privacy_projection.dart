@@ -91,9 +91,12 @@ class PrivacyProjection {
     Deck deck, {
     Set<String> disabledRules = const {},
     OwnIdentity ownIdentity = OwnIdentity.empty,
+    PrivacyExportProfile profile = PrivacyExportProfile.full,
   }) => _project(
     deck,
-    external: false,
+    // In het geredigeerde profiel telt de dispositie niet: "deze zaal mag het
+    // zien" is niet hetzelfde als "iedereen mag het zien".
+    external: profile == PrivacyExportProfile.redacted,
     disabledRules: disabledRules,
     ownIdentity: ownIdentity,
   );

@@ -1787,6 +1787,13 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Voor wie is deze export?': 'Für wän isch dä Export?',
+  'Volledig': 'Vollständig',
+  'Geredigeerd': 'Gschwärzt',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.':
+      'Für de Uftraggäber oder Auditor: nur was du uf "weglah" gsetzt häsch, wird entfernt. De Rest bliibt läsbar, damit e Dritte d Befund prüefe cha.',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Für de breiteri Chreis: alles, was d Prüefig findet, wird entfernt — au uf Folie, wo du akzeptiert häsch. D Datei überchunnt "-geredigeerd" im Name.',
   'tabel met persoonsgegevens (rijen×kolommen)':
       'Tabälle mit Persoonedate (Ziile×Spalte)',
   'massa-persoonsgegevens op één slide': 'Masse-Persoonedate uf eire Folie',

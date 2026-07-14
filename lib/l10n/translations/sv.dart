@@ -1782,6 +1782,13 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Voor wie is deze export?': 'Vem är den här exporten till?',
+  'Volledig': 'Fullständig',
+  'Geredigeerd': 'Maskad',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.':
+      'För uppdragsgivaren eller revisorn: bara det du satt till "utelämna" tas bort. Resten förblir läsbart, så att en tredje part kan kontrollera fynden.',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.':
+      'För en bredare krets: allt kontrollen hittar tas bort, även på bilder du accepterat. Filen får "-geredigeerd" i namnet.',
   'tabel met persoonsgegevens (rijen×kolommen)':
       'tabell med personuppgifter (rader×kolumner)',
   'massa-persoonsgegevens op één slide':

@@ -1758,6 +1758,13 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Voor wie is deze export?': '\'Iv ngeHmeH?',
+  'Volledig': 'naQ',
+  'Geredigeerd': 'So\'lu\'bogh',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.':
+      'vum ra\'wI\' pagh ninSarwI\'vaD: "yIteq" DawIvbogh neH teqlu\'. latlh laDlaHlu\'taH, vaj wej ghot tu\'lu\'bogh \'ol.',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.':
+      'ghot law\'vaD: ninSar tu\'bogh Hoch teqlu\', nagh beQ Dalajbogh je. teywI\' pongDaq "-geredigeerd" chelu\'.',
   'tabel met persoonsgegevens (rijen×kolommen)':
       'nuv De\' HIvje\' (tlhoy\'×Der)',
   'massa-persoonsgegevens op één slide': 'wa\' nagh beQDaq nuv De\' law\'',

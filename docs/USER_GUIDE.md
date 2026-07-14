@@ -512,6 +512,27 @@ If you use the optional AI assistance, everything the scanner finds is stripped
 before the text leaves your device — **even on a slide you marked as accepted**.
 Deciding that a room may see a name is not deciding that a language model may.
 
+## Two versions from one source
+
+When a deck holds findings, the export dialog asks **who this export is for**:
+
+| Profile | What comes out |
+| --- | --- |
+| **Full** | Only what you set to *leave out* is removed. Everything else stays readable — so the client or auditor can actually verify the findings. |
+| **Redacted** | Everything the check finds is removed, including on slides you accepted. "This room may see it" is not the same as "everyone may see it". |
+
+This is the heart of the pentest-report case, and without it you would have to
+choose *between* those two — at which point the full version always wins, because
+that is the one that has to go out the door.
+
+The profile lands in the **filename** (`report-geredigeerd.pdf`). That is not
+cosmetic: the most expensive mistake you can make with this feature is sending the
+full copy to the wider circle. A mix-up should be something you can *see*, not
+something you have to remember.
+
+The redaction manifest follows the profile too, so a redacted report stays
+verifiable against the source — see below.
+
 ## Redaction — leaving data out
 
 Some decks carry things the room should not see: a citizen service number in a

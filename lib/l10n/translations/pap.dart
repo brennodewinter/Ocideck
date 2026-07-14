@@ -740,6 +740,13 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Voor wie is deze export?': 'Pa ken e eksportashon aki ta?',
+  'Volledig': 'Kompleto',
+  'Geredigeerd': 'Redaktá',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.':
+      'Pa e kliente òf ouditor: solamente loke bo a pone riba "laga afó" ta wòrdu kitá. E resto ta keda legibel, pa un tersero por verifiká e hayasgonan.',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Pa e sírkulo mas hancho: tur loke e kontròl ta haña ta wòrdu kitá, tambe riba slidenan ku bo a aseptá. E file ta haña "-geredigeerd" den su nòmber.',
   'tabel met persoonsgegevens (rijen×kolommen)':
       'tabel ku datos personal (fila×kolom)',
   'massa-persoonsgegevens op één slide': 'datos personal na masa riba un slide',

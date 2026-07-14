@@ -1790,6 +1790,13 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Voor wie is deze export?': 'Za koga je ovaj izvoz?',
+  'Volledig': 'Potpuno',
+  'Geredigeerd': 'Redigirano',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.':
+      'Za naručitelja ili revizora: uklanja se samo ono što si označio kao "izostavi". Ostalo ostaje čitljivo, kako bi treća strana mogla provjeriti nalaze.',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Za širi krug: uklanja se sve što provjera pronađe, i na slajdovima koje si prihvatio. Datoteka dobiva "-geredigeerd" u nazivu.',
   'tabel met persoonsgegevens (rijen×kolommen)':
       'tablica osobnih podataka (retci×stupci)',
   'massa-persoonsgegevens op één slide':

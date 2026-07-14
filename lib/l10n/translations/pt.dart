@@ -1813,6 +1813,13 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Voor wie is deze export?': 'Para quem é esta exportação?',
+  'Volledig': 'Completo',
+  'Geredigeerd': 'Ocultado',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.':
+      'Para o cliente ou auditor: só é removido o que marcaste como "omitir". O resto fica legível, para que um terceiro possa verificar as deteções.',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Para um círculo mais alargado: é removido tudo o que a verificação encontra, mesmo em diapositivos que aceitaste. O ficheiro fica com "-geredigeerd" no nome.',
   'tabel met persoonsgegevens (rijen×kolommen)':
       'tabela de dados pessoais (linhas×colunas)',
   'massa-persoonsgegevens op één slide':

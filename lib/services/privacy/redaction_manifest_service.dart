@@ -47,9 +47,12 @@ class RedactionManifestService {
   ///
   /// Het resultaat draagt de salts. Gebruik [RedactionManifest.withoutSalts]
   /// voor het exemplaar dat bij de geredigeerde versie hoort.
-  RedactionManifest build(Deck deck) {
+  RedactionManifest build(
+    Deck deck, {
+    PrivacyExportProfile profile = PrivacyExportProfile.full,
+  }) {
     final entries = <RedactionEntry>[];
-    for (final r in redactedValues(deck)) {
+    for (final r in redactedValues(deck, profile: profile)) {
       final salt = _newSalt();
       final commitment = commitmentFor(salt: salt, value: r.value);
       entries.add(
@@ -71,7 +74,10 @@ class RedactionManifestService {
   /// Elke waarde die de projectie op dit deck zou wegredigeren, in vaste
   /// volgorde (slide, dan bevinding). Eén bron van waarheid voor zowel het
   /// bouwen als het verifiëren van een manifest — anders lopen die twee uiteen.
-  List<({PrivacyFinding finding, String value})> redactedValues(Deck deck) {
+  List<({PrivacyFinding finding, String value})> redactedValues(
+    Deck deck, {
+    PrivacyExportProfile profile = PrivacyExportProfile.full,
+  }) {
     final scan = PrivacyScanner(
       disabledRules: disabledRules,
       ownIdentity: ownIdentity,
@@ -84,7 +90,10 @@ class RedactionManifestService {
         deck: deck.privacy,
         slide: slide.privacy,
       );
-      if (disposition != PrivacyDisposition.redact) continue;
+      // In het geredigeerde profiel gaat alles eruit, ongeacht wat de auteur voor
+      // de zaal heeft besloten.
+      final redactAll = profile == PrivacyExportProfile.redacted;
+      if (!redactAll && disposition != PrivacyDisposition.redact) continue;
 
       for (final finding in scan.forSlide(i)) {
         final value = _valueOf(slide, finding);
@@ -168,13 +177,22 @@ class RedactionManifestService {
   /// Voor wie beide versies heeft: elke entry moet terug te rekenen zijn uit de
   /// bron, en er mogen er niet meer of minder zijn dan de bron oplevert. Zo valt
   /// zowel een toegevoegde als een weggelaten redactie op.
-  bool verifyAgainstSource(RedactionManifest manifest, Deck source) {
+  ///
+  /// [profile] moet hetzelfde zijn als waarmee het manifest gebouwd is. Een
+  /// geredigeerd exemplaar bevat immers méér redacties dan een volledig, en
+  /// tegen de verkeerde lat leggen zou een eerlijk manifest ten onrechte
+  /// verdacht maken.
+  bool verifyAgainstSource(
+    RedactionManifest manifest,
+    Deck source, {
+    PrivacyExportProfile profile = PrivacyExportProfile.full,
+  }) {
     // Zonder salts valt er niets na te rekenen. Dat is precies de bedoeling van
     // het exemplaar dat bij de geredigeerde versie hoort — dus dit is geen fout,
     // maar wel een "nee".
     if (!manifest.carriesSalts) return false;
 
-    final actual = redactedValues(source);
+    final actual = redactedValues(source, profile: profile);
     // Een toegevoegde óf weggelaten redactie valt hiermee allebei op.
     if (actual.length != manifest.entries.length) return false;
 

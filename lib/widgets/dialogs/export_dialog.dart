@@ -6,9 +6,9 @@ import '../../models/slide_quality.dart';
 import '../../services/classification_enforcement_policy.dart';
 import '../../services/export_metadata.dart';
 import '../../services/export_service.dart';
-import '../../models/redaction_manifest.dart';
+import '../../models/privacy_disposition.dart';
+import '../../services/export_bundle.dart';
 import '../../services/privacy/privacy_export_policy.dart';
-import '../../services/privacy/privacy_projection.dart';
 import '../../services/quality_export_policy.dart';
 import '../../services/slide_rasterizer.dart';
 import '../../l10n/app_localizations.dart';
@@ -22,13 +22,17 @@ import '../../theme/app_theme.dart';
 class ExportDialog extends StatefulWidget {
   final String deckPath;
 
-  /// Het te exporteren deck, ná de privacyprojectie.
+  /// Levert per doelgroepprofiel alles wat de export nodig heeft.
   ///
-  /// Bewust één [AudienceDeck] in plaats van losse slides, thema, TLP, auteur
-  /// en metadata: export is een ontvangend oppervlak, en het typesysteem moet
-  /// verhinderen dat de ongeredigeerde bron hier ooit binnenkomt. Alles wat de
-  /// export nodig heeft, wordt uit dit ene object afgeleid.
-  final AudienceDeck audience;
+  /// Een fabriek en geen kant-en-klaar deck, omdat de gebruiker het profiel hier
+  /// kiest — en het dialoog de bron níét mag hebben (dat is de projectiegrens).
+  /// De functie sluit in de shell om de bron heen; het dialoog kan er alleen
+  /// `AudienceDeck`s uit halen.
+  final ExportBundle Function(PrivacyExportProfile) bundleFor;
+
+  /// Of dit deck überhaupt privacybevindingen heeft. Zo niet, dan heeft de keuze
+  /// tussen "volledig" en "geredigeerd" geen betekenis en tonen we hem niet.
+  final bool hasPrivacyFindings;
 
   final CockpitColorScheme cockpitColorScheme;
   final ExportService exportService;
@@ -45,25 +49,10 @@ class ExportDialog extends StatefulWidget {
   /// Folder all exports are written to. Null = next to the source deck.
   final String? exportDirectory;
 
-  /// The deck's Marp Markdown, used for the self-contained HTML export.
-  ///
-  /// Wordt uit [audience] gegenereerd, niet uit de bron — de HTML-export zet de
-  /// markdown letterlijk in het bestand, dus dit is een tekstpad en geen raster.
-  final String markdown;
-
   final bool showClassificationWatermark;
-
-  /// Wat er in dit deck zit, geteld naar wat de auteur ermee heeft gedaan.
-  final PrivacyExportSummary privacySummary;
 
   /// Waarschuwen of blokkeren bij onafgehandelde bevindingen.
   final PrivacyExportPolicy privacyPolicy;
-
-  /// Het redactiemanifest, wanneer dit deck redacties bevat. Wordt naast de
-  /// export weggeschreven zodat een ontvanger kan zien wát er is weggehaald en
-  /// een derde partij het kan verifiëren. Gebouwd uit de BRON — de AudienceDeck
-  /// bevat de oorspronkelijke waarden immers niet meer.
-  final RedactionManifest redactionManifest;
 
   /// Na een geslaagde export aangeroepen met het formaat-label ("PDF",
   /// "PPTX", "HTML") — bijv. om het bij de recente bestanden te noteren.
@@ -72,17 +61,15 @@ class ExportDialog extends StatefulWidget {
   const ExportDialog({
     super.key,
     required this.deckPath,
-    required this.audience,
+    required this.bundleFor,
+    this.hasPrivacyFindings = false,
     this.cockpitColorScheme = CockpitColorScheme.standard,
     required this.exportService,
     this.enforcementPolicy = const ClassificationEnforcementPolicy(),
     this.qualityResult = const SlideQualityResult([]),
     this.qualityPolicy = const QualityExportPolicy(),
     this.exportDirectory,
-    this.markdown = '',
     this.showClassificationWatermark = false,
-    this.redactionManifest = RedactionManifest.empty,
-    this.privacySummary = PrivacyExportSummary.empty,
     this.privacyPolicy = const PrivacyExportPolicy(),
     this.onExported,
   });
@@ -90,7 +77,8 @@ class ExportDialog extends StatefulWidget {
   static Future<void> show(
     BuildContext context, {
     required String deckPath,
-    required AudienceDeck audience,
+    required ExportBundle Function(PrivacyExportProfile) bundleFor,
+    bool hasPrivacyFindings = false,
     CockpitColorScheme cockpitColorScheme = CockpitColorScheme.standard,
     required ExportService exportService,
     ClassificationEnforcementPolicy enforcementPolicy =
@@ -98,10 +86,7 @@ class ExportDialog extends StatefulWidget {
     SlideQualityResult qualityResult = const SlideQualityResult([]),
     QualityExportPolicy qualityPolicy = const QualityExportPolicy(),
     String? exportDirectory,
-    String markdown = '',
     bool showClassificationWatermark = false,
-    RedactionManifest redactionManifest = RedactionManifest.empty,
-    PrivacyExportSummary privacySummary = PrivacyExportSummary.empty,
     PrivacyExportPolicy privacyPolicy = const PrivacyExportPolicy(),
     void Function(String formatLabel)? onExported,
   }) {
@@ -110,17 +95,15 @@ class ExportDialog extends StatefulWidget {
       barrierDismissible: false,
       builder: (_) => ExportDialog(
         deckPath: deckPath,
-        audience: audience,
+        bundleFor: bundleFor,
+        hasPrivacyFindings: hasPrivacyFindings,
         cockpitColorScheme: cockpitColorScheme,
         exportService: exportService,
         enforcementPolicy: enforcementPolicy,
         qualityResult: qualityResult,
         qualityPolicy: qualityPolicy,
         exportDirectory: exportDirectory,
-        markdown: markdown,
         showClassificationWatermark: showClassificationWatermark,
-        redactionManifest: redactionManifest,
-        privacySummary: privacySummary,
         privacyPolicy: privacyPolicy,
         onExported: onExported,
       ),
@@ -147,6 +130,23 @@ class _ExportDialogState extends State<ExportDialog> {
   /// downscaled JPEG handout.
   bool _compress = false;
 
+  /// Voor wie deze export bedoeld is. Volledig is de standaard: dat is het
+  /// exemplaar waarmee een derde partij de bevindingen kan natrekken.
+  PrivacyExportProfile _profile = PrivacyExportProfile.full;
+
+  /// De bundel van het gekozen profiel. Eén keer per keuze gebouwd — het manifest
+  /// bevat willekeurige salts, dus hem elke build opnieuw maken zou andere
+  /// commitments opleveren dan er straks worden weggeschreven.
+  late ExportBundle _bundle = widget.bundleFor(_profile);
+
+  void _selectProfile(PrivacyExportProfile profile) {
+    if (profile == _profile) return;
+    setState(() {
+      _profile = profile;
+      _bundle = widget.bundleFor(profile);
+    });
+  }
+
   /// De privacy-gate in beeld.
   ///
   /// Toont wát er in het deck zit én wat de auteur ermee heeft gedaan. Dat laatste
@@ -154,7 +154,7 @@ class _ExportDialogState extends State<ExportDialog> {
   /// persoonsgegevens af. Een briefing waarin alles bewust geaccepteerd is, gaat er
   /// zonder onderbreking doorheen.
   Future<bool> _confirmPrivacyExport() async {
-    final decision = widget.privacyPolicy.evaluate(widget.privacySummary);
+    final decision = widget.privacyPolicy.evaluate(_bundle.privacySummary);
     if (decision.allowed) return true;
 
     final l10n = context.l10n;
@@ -279,7 +279,7 @@ class _ExportDialogState extends State<ExportDialog> {
       _result = null;
       _phase = l10n.d('Export wordt voorbereid…');
       _done = 0;
-      _total = needsRaster ? widget.audience.slides.length : 0;
+      _total = needsRaster ? _bundle.audience.slides.length : 0;
     });
     await WidgetsBinding.instance.endOfFrame;
     await Future<void>.delayed(Duration.zero);
@@ -300,7 +300,7 @@ class _ExportDialogState extends State<ExportDialog> {
     setState(() {
       _phase = needsRaster ? l10n.t('renderingSlides') : l10n.t('buildingHtml');
       _done = 0;
-      _total = needsRaster ? widget.audience.slides.length : 0;
+      _total = needsRaster ? _bundle.audience.slides.length : 0;
     });
     await WidgetsBinding.instance.endOfFrame;
     await Future<void>.delayed(Duration.zero);
@@ -309,7 +309,7 @@ class _ExportDialogState extends State<ExportDialog> {
     final images = needsRaster
         ? await SlideRasterizer.rasterize(
             context: context,
-            audience: widget.audience,
+            audience: _bundle.audience,
             cockpitColorScheme: widget.cockpitColorScheme,
             showClassificationWatermark: widget.showClassificationWatermark,
             targetWidth: compress ? 1280 : 1920,
@@ -340,7 +340,7 @@ class _ExportDialogState extends State<ExportDialog> {
     }
     setState(() {
       _phase = '${format.label} ${l10n.t('buildingExport')}';
-      _done = needsRaster ? widget.audience.slides.length : 0;
+      _done = needsRaster ? _bundle.audience.slides.length : 0;
     });
     await WidgetsBinding.instance.endOfFrame;
     if (!mounted) return;
@@ -352,18 +352,19 @@ class _ExportDialogState extends State<ExportDialog> {
       compress: compress,
       outputDirectory: widget.exportDirectory,
       // Speaker notes travel 1:1 with the rendered slides (PPTX notes pane).
-      notes: [for (final s in widget.audience.slides) s.notes],
-      markdown: widget.markdown,
-      themeProfile: widget.audience.deck.themeProfile,
+      notes: [for (final s in _bundle.audience.slides) s.notes],
+      markdown: _bundle.markdown,
+      themeProfile: _bundle.audience.deck.themeProfile,
       cockpitColorScheme: widget.cockpitColorScheme,
-      tlp: widget.audience.deck.tlp,
+      tlp: _bundle.audience.deck.tlp,
       enforcementPolicy: widget.enforcementPolicy,
       qualityResult: widget.qualityResult,
       qualityPolicy: widget.qualityPolicy,
       qualityAcknowledged: true,
-      metadata: ExportDocumentMetadata.fromDeck(widget.audience.deck),
-      redactionManifest: widget.redactionManifest,
-      privacySummary: widget.privacySummary,
+      metadata: ExportDocumentMetadata.fromDeck(_bundle.audience.deck),
+      redactionManifest: _bundle.manifest,
+      privacyProfile: _profile,
+      privacySummary: _bundle.privacySummary,
       privacyPolicy: widget.privacyPolicy,
       privacyAcknowledged: true,
     );
@@ -398,6 +399,61 @@ class _ExportDialogState extends State<ExportDialog> {
       default:
         return l10n.t('renderingSlides');
     }
+  }
+
+  /// Voor wie is deze export?
+  ///
+  /// Eén bron, twee versies. Dat is de kern van het pentestrapport-scenario: de
+  /// opdrachtgever moet de bevinding kúnnen natrekken, dus die krijgt alles; de
+  /// bredere kring krijgt hetzelfde rapport met de persoonsgegevens eruit.
+  ///
+  /// Het profiel staat in de bestandsnaam (`…-geredigeerd.pdf`). Dat is niet
+  /// cosmetisch: de duurste fout die je met deze feature kunt maken, is het
+  /// volledige exemplaar naar de brede kring sturen. Een verwisseling moet je
+  /// kunnen *zien*, niet hoeven onthouden.
+  Widget _profileSelector(AppLocalizations l10n) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.d('Voor wie is deze export?'),
+            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+          ),
+          const SizedBox(height: 6),
+          SegmentedButton<PrivacyExportProfile>(
+            segments: [
+              ButtonSegment(
+                value: PrivacyExportProfile.full,
+                label: Text(l10n.d('Volledig')),
+                icon: const Icon(Icons.lock_open_outlined, size: 15),
+              ),
+              ButtonSegment(
+                value: PrivacyExportProfile.redacted,
+                label: Text(l10n.d('Geredigeerd')),
+                icon: const Icon(Icons.visibility_off_outlined, size: 15),
+              ),
+            ],
+            selected: {_profile},
+            showSelectedIcon: false,
+            style: const ButtonStyle(visualDensity: VisualDensity.compact),
+            onSelectionChanged: (s) => _selectProfile(s.first),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            _profile == PrivacyExportProfile.full
+                ? l10n.d(
+                    'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.',
+                  )
+                : l10n.d(
+                    'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.',
+                  ),
+            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -491,7 +547,7 @@ class _ExportDialogState extends State<ExportDialog> {
     // zodat de gebruiker meteen de reden ziet. De service handhaaft dezelfde
     // regel nog eens als backstop, dus dit is puur UX — niet de beveiliging.
     final decision = widget.enforcementPolicy.evaluate(
-      widget.audience.deck.tlp,
+      _bundle.audience.deck.tlp,
     );
     if (!decision.allowed) {
       return Column(
@@ -597,6 +653,7 @@ class _ExportDialogState extends State<ExportDialog> {
           ),
         ),
         const SizedBox(height: 8),
+        if (widget.hasPrivacyFindings) _profileSelector(l10n),
         // De formaatknoppen zijn de hoofdactie; de beeldkwaliteit is een
         // verfijning en staat daarom achter een inklapbare kop (open zodra
         // er gecomprimeerd wordt, zodat de keuze zichtbaar blijft).

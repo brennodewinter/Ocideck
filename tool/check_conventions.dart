@@ -113,6 +113,9 @@ bool _isPaletteHome(String path) {
 /// een compileerfout wel. Vandaar deze check.
 ///
 /// Sleutel = bestand, waarde = de instappunten daarin die de grens bewaken.
+///
+/// Toegestane types: `AudienceDeck`, of `ExportBundle` (die er een bevat en niet
+/// zonder te maken is).
 const Map<String, List<String>> audienceBoundary = {
   'lib/services/slide_rasterizer.dart': ['rasterize'],
   'lib/widgets/presentation/fullscreen_presenter.dart': ['present'],
@@ -156,8 +159,13 @@ List<String> _audienceBoundaryViolations() {
         hits.add('$path: instappunt `$entry(` niet gevonden');
         continue;
       }
-      if (!params.contains('AudienceDeck')) {
-        hits.add('$path: `$entry(` eist geen AudienceDeck');
+      // `ExportBundle` telt ook: die is niet te maken zonder een AudienceDeck
+      // (zie zijn constructor), dus de grens houdt transitief stand. Het
+      // exportdialoog krijgt een fabriek die per doelgroepprofiel een bundel
+      // oplevert — de bron komt er nog steeds niet in.
+      if (!params.contains('AudienceDeck') &&
+          !params.contains('ExportBundle')) {
+        hits.add('$path: `$entry(` eist geen AudienceDeck of ExportBundle');
       }
       final raw = _rawDeckParam.firstMatch(params);
       if (raw != null) {

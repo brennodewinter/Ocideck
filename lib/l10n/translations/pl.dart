@@ -1796,6 +1796,13 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Voor wie is deze export?': 'Dla kogo jest ten eksport?',
+  'Volledig': 'Pełny',
+  'Geredigeerd': 'Zredagowany',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.':
+      'Dla zleceniodawcy lub audytora: usuwane jest tylko to, co oznaczyłeś jako "pomiń". Reszta pozostaje czytelna, aby strona trzecia mogła zweryfikować ustalenia.',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Dla szerszego grona: usuwane jest wszystko, co znajdzie kontrola, także na zaakceptowanych slajdach. Plik dostaje "-geredigeerd" w nazwie.',
   'tabel met persoonsgegevens (rijen×kolommen)':
       'tabela danych osobowych (wiersze×kolumny)',
   'massa-persoonsgegevens op één slide':

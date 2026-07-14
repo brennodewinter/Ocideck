@@ -1806,6 +1806,13 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Voor wie is deze export?': 'За кого е този експорт?',
+  'Volledig': 'Пълен',
+  'Geredigeerd': 'Заличен',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.':
+      'За възложителя или одитора: премахва се само това, което сте задали като „заличаване“. Останалото остава четимо, за да може трета страна да провери констатациите.',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.':
+      'За по-широк кръг: премахва се всичко, което проверката намери, включително на приети слайдове. Файлът получава „-geredigeerd“ в името.',
   'tabel met persoonsgegevens (rijen×kolommen)':
       'таблица с лични данни (редове×колони)',
   'massa-persoonsgegevens op één slide': 'масови лични данни на един слайд',

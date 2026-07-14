@@ -698,40 +698,57 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     final ownIdentity = OwnIdentity.fromLines(
       privacySettings.privacyOwnIdentity,
     );
-    final audience = PrivacyProjection.forAudience(
-      source,
-      disabledRules: disabledRules,
-      ownIdentity: ownIdentity,
-    );
+    final markdownService = ref.read(markdownServiceProvider);
 
-    // Het manifest wordt uit de BRON gebouwd — de AudienceDeck bevat de
-    // oorspronkelijke waarden immers niet meer, en dat is precies de bedoeling.
-    // Het gebeurt hier en niet in de projectie, omdat de salts willekeurig zijn:
-    // een projectie die bij elke frame een ander resultaat gaf, zou de preview
-    // laten herbouwen.
-    final manifest = RedactionManifestService(
-      disabledRules: disabledRules,
-      ownIdentity: ownIdentity,
-    ).build(source);
-
-    // De gate telt op de ONGEFILTERDE scan. De provider onderdrukt bevindingen
-    // op slides die de auteur al heeft afgehandeld — precies wat je in het
-    // paneel wilt, en precies wat je in deze samenvatting niet wilt: hier moet
-    // juist zichtbaar zijn hoevéél er bewust geaccepteerd of geredigeerd is.
-    final privacySummary = summarisePrivacyForExport(
-      source,
-      PrivacyScanner(
+    // De fabriek. Het exportdialoog kiest het doelgroepprofiel, maar mág de bron
+    // niet hebben — dat is de projectiegrens. Deze closure sluit hier om de bron
+    // heen en levert per profiel alleen AudienceDecks op.
+    ExportBundle bundleFor(PrivacyExportProfile profile) {
+      final audience = PrivacyProjection.forAudience(
+        source,
         disabledRules: disabledRules,
         ownIdentity: ownIdentity,
-      ).scan(source),
-    );
+        profile: profile,
+      );
+      return ExportBundle(
+        audience: audience,
+        // Inline chart data so the HTML export can render charts standalone,
+        // even when a chart links an external CSV. Gegenereerd uit het
+        // geprojecteerde deck: de HTML-export zet deze markdown letterlijk in het
+        // bestand.
+        markdown: markdownService.generateDeck(
+          audience.deck,
+          inlineChartData: true,
+          forExport: true,
+        ),
+        manifest: RedactionManifestService(
+          disabledRules: disabledRules,
+          ownIdentity: ownIdentity,
+        ).build(source, profile: profile),
+        // De gate telt op de ONGEFILTERDE scan: de provider onderdrukt bevindingen
+        // op slides die de auteur al heeft afgehandeld — precies wat je in het
+        // paneel wilt, en precies wat je in deze samenvatting niet wilt.
+        privacySummary: summarisePrivacyForExport(
+          source,
+          PrivacyScanner(
+            disabledRules: disabledRules,
+            ownIdentity: ownIdentity,
+          ).scan(source),
+        ),
+      );
+    }
+
+    final hasPrivacyFindings = !bundleFor(
+      PrivacyExportProfile.full,
+    ).privacySummary.isEmpty;
 
     await ExportDialog.show(
       context,
       // Op web heeft een deck geen bestandspad; de deck-titel bepaalt dan de
       // naam van het te downloaden bestand.
       deckPath: deckState.filePath ?? '${_safeRemoteName(deck.title)}.md',
-      audience: audience,
+      bundleFor: bundleFor,
+      hasPrivacyFindings: hasPrivacyFindings,
       cockpitColorScheme: ref.read(settingsProvider).cockpitColorScheme,
       exportService: widget.exportService,
       enforcementPolicy: ClassificationEnforcementPolicy.fromAppSettings(
@@ -748,14 +765,9 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       // geprojecteerde deck: de HTML-export zet deze markdown letterlijk in het
       // bestand, dus wat hier niet geredigeerd is, staat straks één Ctrl+U
       // verderop leesbaar in de broncode.
-      markdown: ref
-          .read(markdownServiceProvider)
-          .generateDeck(audience.deck, inlineChartData: true, forExport: true),
       showClassificationWatermark: ref
           .read(settingsProvider)
           .classificationWatermarkEnabled,
-      redactionManifest: manifest,
-      privacySummary: privacySummary,
       privacyPolicy: PrivacyExportPolicy(
         gate: ref.read(settingsProvider).privacyExportGate,
       ),

@@ -1802,6 +1802,13 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Voor wie is deze export?': 'Pentru cine este acest export?',
+  'Volledig': 'Complet',
+  'Geredigeerd': 'Redactat',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.':
+      'Pentru client sau auditor: se elimină doar ce ai marcat ca "omite". Restul rămâne lizibil, ca un terț să poată verifica constatările.',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Pentru un cerc mai larg: se elimină tot ce găsește verificarea, inclusiv pe diapozitivele acceptate. Fișierul primește "-geredigeerd" în nume.',
   'tabel met persoonsgegevens (rijen×kolommen)':
       'tabel cu date personale (rânduri×coloane)',
   'massa-persoonsgegevens op één slide':

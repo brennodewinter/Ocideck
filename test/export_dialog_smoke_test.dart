@@ -4,14 +4,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/services/export_service.dart';
+import 'package:ocideck/models/privacy_disposition.dart';
+import 'package:ocideck/models/redaction_manifest.dart';
+import 'package:ocideck/services/export_bundle.dart';
+import 'package:ocideck/services/privacy/privacy_export_policy.dart';
 import 'package:ocideck/services/privacy/privacy_projection.dart';
 import 'package:ocideck/widgets/dialogs/export_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Zelfs een test komt alleen via de projectiegrens aan een AudienceDeck —
-/// de constructor is private. Dat is precies de bedoeling.
-AudienceDeck _emptyAudience() =>
-    PrivacyProjection.forAudience(const Deck(title: 'Test'));
+/// Zelfs een test komt alleen via de projectiegrens aan een AudienceDeck — de
+/// constructor is private. Dat is precies de bedoeling.
+ExportBundle _emptyBundle(PrivacyExportProfile profile) => ExportBundle(
+  audience: PrivacyProjection.forAudience(
+    const Deck(title: 'Test'),
+    profile: profile,
+  ),
+  markdown: '',
+  manifest: RedactionManifest.empty,
+  privacySummary: PrivacyExportSummary.empty,
+);
 
 void main() {
   late Directory tempDir;
@@ -41,7 +52,7 @@ void main() {
               onPressed: () => ExportDialog.show(
                 context,
                 deckPath: deckPath,
-                audience: _emptyAudience(),
+                bundleFor: _emptyBundle,
                 exportService: ExportService(),
               ),
               child: const Text('open'),

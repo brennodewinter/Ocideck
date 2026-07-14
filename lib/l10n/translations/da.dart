@@ -1782,6 +1782,13 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Voor wie is deze export?': 'Hvem er denne eksport til?',
+  'Volledig': 'Fuldstændig',
+  'Geredigeerd': 'Redigeret',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.':
+      'Til kunden eller revisoren: kun det, du har sat til "udelad", fjernes. Resten forbliver læsbart, så en tredjepart kan efterprøve fundene.',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Til en bredere kreds: alt, hvad tjekket finder, fjernes — også på slides, du har accepteret. Filen får "-geredigeerd" i navnet.',
   'tabel met persoonsgegevens (rijen×kolommen)':
       'tabel med personoplysninger (rækker×kolonner)',
   'massa-persoonsgegevens op één slide': 'masse-personoplysninger på én slide',

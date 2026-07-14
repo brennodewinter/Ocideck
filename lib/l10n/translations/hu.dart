@@ -1787,6 +1787,13 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Voor wie is deze export?': 'Kinek szól ez az export?',
+  'Volledig': 'Teljes',
+  'Geredigeerd': 'Kitakarva',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.':
+      'A megbízónak vagy auditornak: csak az kerül ki, amit "kihagyás"-ra állítottál. A többi olvasható marad, hogy egy harmadik fél ellenőrizhesse a megállapításokat.',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Szélesebb körnek: minden kikerül, amit az ellenőrzés talál — az általad elfogadott diákon is. A fájl neve "-geredigeerd" toldalékot kap.',
   'tabel met persoonsgegevens (rijen×kolommen)':
       'személyes adatok táblázata (sorok×oszlopok)',
   'massa-persoonsgegevens op één slide': 'tömeges személyes adat egy dián',
