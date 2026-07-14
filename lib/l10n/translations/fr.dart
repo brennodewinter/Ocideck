@@ -740,6 +740,19 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
+      ' Envisage de le caviarder avec [[doubles crochets]].',
+  ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
+      ' Sans contexte dans le texte, ce n\'est peut-être pas une donnée personnelle.',
+  'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
+      'Examine tes diapositives à la recherche de numéros d\'identification, de coordonnées et d\'autres données sensibles, et les signale dans le contrôle qualité. Tout se passe sur cet appareil ; rien n\'est envoyé. C\'est une aide, pas une garantie : le texte dans les images et les données sans motif reconnaissable restent invisibles.',
+  'Mogelijk persoonsgegeven': 'Donnée personnelle possible',
+  'Privacycontrole': 'Contrôle de confidentialité',
+  'Waarschuw bij mogelijke persoonsgegevens':
+      'Avertir en cas de données personnelles possibles',
+  'burgerservicenummer (BSN)': 'numéro de service au citoyen (BSN)',
+  'bankrekeningnummer (IBAN)': 'numéro de compte bancaire (IBAN)',
+  'e-mailadres': 'adresse e-mail',
   'Extern': 'Externe',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Récupéré depuis une URL externe ; l\'ouverture a contacté ce serveur.',

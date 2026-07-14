@@ -31,6 +31,8 @@ void main() {
       const allowlist = <String>{
         // Stateless analyzer service; the deck is passed in at call sites.
         'slideQualityAnalyzerProvider',
+        // Idem: a stateless scanner; the deck is passed in at call sites.
+        'privacyScannerProvider',
       };
 
       final appShell = File('lib/widgets/app_shell.dart').readAsStringSync();

@@ -1819,6 +1819,19 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
+      ' Smaoinigh ar é a fholú le [[lúibíní cearnacha dúbailte]].',
+  ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
+      ' Gan comhthéacs sa téacs, seans nach sonraí pearsanta é seo ar chor ar bith.',
+  'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
+      'Scrúdaíonn sé do shleamhnáin le haghaidh uimhreacha aitheantais, sonraí teagmhála agus sonraí íogaire príobháideachais eile, agus tuairiscíonn sé iad sa seiceáil cáilíochta. Tarlaíonn sé seo go hiomlán ar an ngléas seo; ní sheoltar aon rud. Is áis é, ní ráthaíocht: fanann téacs laistigh d\'íomhánna agus sonraí gan patrún inaitheanta as radharc.',
+  'Mogelijk persoonsgegeven': 'Sonraí pearsanta féideartha',
+  'Privacycontrole': 'Seiceáil príobháideachais',
+  'Waarschuw bij mogelijke persoonsgegevens':
+      'Tabhair rabhadh faoi shonraí pearsanta féideartha',
+  'burgerservicenummer (BSN)': 'uimhir sheirbhíse saoránach (BSN)',
+  'bankrekeningnummer (IBAN)': 'uimhir chuntais bhainc (IBAN)',
+  'e-mailadres': 'seoladh ríomhphoist',
   'Extern': 'Seachtrach',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Aisghabhadh ó URL seachtrach; rinne an oscailt teagmháil leis an bhfreastalaí sin.',

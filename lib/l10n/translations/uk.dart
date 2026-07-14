@@ -1801,6 +1801,19 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
+      ' Розгляньте можливість приховати це за [[подвійними квадратними дужками]].',
+  ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
+      ' Без контексту в тексті це може взагалі не бути персональними даними.',
+  'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
+      'Перевіряє ваші слайди на ідентифікаційні номери, контактні дані та інші чутливі дані й повідомляє про них у перевірці якості. Усе відбувається на цьому пристрої; нічого не надсилається. Це допоміжний засіб, а не гарантія: текст на зображеннях і дані без розпізнаваного шаблону лишаються поза увагою.',
+  'Mogelijk persoonsgegeven': 'Можливі персональні дані',
+  'Privacycontrole': 'Перевірка приватності',
+  'Waarschuw bij mogelijke persoonsgegevens':
+      'Попереджати про можливі персональні дані',
+  'burgerservicenummer (BSN)': 'номер громадянина (BSN)',
+  'bankrekeningnummer (IBAN)': 'номер банківського рахунку (IBAN)',
+  'e-mailadres': 'адреса електронної пошти',
   'Extern': 'Зовнішній',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Отримано із зовнішньої URL-адреси; відкриття звернулося до того сервера.',

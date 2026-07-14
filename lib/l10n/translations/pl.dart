@@ -1796,6 +1796,19 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
+      ' Rozważ zredagowanie tego przez [[podwójne nawiasy kwadratowe]].',
+  ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
+      ' Bez kontekstu w tekście to może wcale nie być dana osobowa.',
+  'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
+      'Sprawdza slajdy pod kątem numerów identyfikacyjnych, danych kontaktowych i innych danych wrażliwych, i zgłasza je w kontroli jakości. Dzieje się to w całości na tym urządzeniu; nic nie jest wysyłane. To pomoc, nie gwarancja: tekst na obrazach i dane bez rozpoznawalnego wzorca pozostają niewidoczne.',
+  'Mogelijk persoonsgegeven': 'Możliwa dana osobowa',
+  'Privacycontrole': 'Kontrola prywatności',
+  'Waarschuw bij mogelijke persoonsgegevens':
+      'Ostrzegaj przy możliwych danych osobowych',
+  'burgerservicenummer (BSN)': 'numer obywatelski (BSN)',
+  'bankrekeningnummer (IBAN)': 'numer rachunku bankowego (IBAN)',
+  'e-mailadres': 'adres e-mail',
   'Extern': 'Zewnętrzny',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Pobrano z zewnętrznego adresu URL; otwarcie połączyło się z tym serwerem.',

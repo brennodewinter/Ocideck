@@ -1782,6 +1782,19 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
+      ' Overvej at redigere det bort med [[dobbelte kantede parenteser]].',
+  ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
+      ' Uden kontekst i teksten er dette måske slet ikke en personoplysning.',
+  'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
+      'Gennemgår dine slides for identifikationsnumre, kontaktoplysninger og andre privatlivsfølsomme data og melder dem i kvalitetstjekket. Det sker helt på denne enhed; intet sendes. Det er en hjælp, ikke en garanti: tekst i billeder og data uden et genkendeligt mønster forbliver usynlige.',
+  'Mogelijk persoonsgegeven': 'Mulig personoplysning',
+  'Privacycontrole': 'Privatlivstjek',
+  'Waarschuw bij mogelijke persoonsgegevens':
+      'Advar om mulige personoplysninger',
+  'burgerservicenummer (BSN)': 'personnummer (BSN)',
+  'bankrekeningnummer (IBAN)': 'bankkontonummer (IBAN)',
+  'e-mailadres': 'e-mailadresse',
   'Extern': 'Ekstern',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Hentet fra en ekstern URL; åbningen kontaktede den server.',

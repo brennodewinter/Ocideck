@@ -43,6 +43,7 @@ import '../services/webdav_service.dart';
 import '../state/deck_provider.dart';
 import '../state/deck_quality_provider.dart';
 import '../state/image_contrast_provider.dart';
+import '../state/privacy_provider.dart';
 import '../state/sec_module_provider.dart';
 import '../state/editor_provider.dart';
 import '../state/settings_provider.dart';
@@ -521,6 +522,16 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
                                 }),
                                 imageContrastIssuesProvider.overrideWith(
                                   computeImageContrastIssues,
+                                ),
+                                // De privacyscan leest het deck, dus hij moet
+                                // per tab gescoped worden — anders lost hij op
+                                // in de root-container en scant hij een leeg
+                                // deck, stilletjes.
+                                privacyScanProvider.overrideWith(
+                                  computePrivacyScan,
+                                ),
+                                privacyQualityIssuesProvider.overrideWith(
+                                  computePrivacyQualityIssues,
                                 ),
                               ],
                               child: const _TabContent(),

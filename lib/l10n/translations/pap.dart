@@ -740,6 +740,19 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
+      ' Konsiderá redaktá esaki ku [[dòbel blokhaki]].',
+  ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
+      ' Sin konteksto den e teksto, kisas esaki no ta un dato personal.',
+  'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
+      'Ta revisá bo slidenan pa number di identifikashon, datos di kontakto i otro datos sensitivo pa privasidat, i ta reportá nan den e kontròl di kalidat. Esaki ta pasa kompletamente riba e aparato aki; no ta wòrdu mandá nada. Ta un yudansa, no un garantia: teksto den imágennan i datos sin un patronchi rekonosibel ta keda for di bista.',
+  'Mogelijk persoonsgegeven': 'Posibel dato personal',
+  'Privacycontrole': 'Kontròl di privasidat',
+  'Waarschuw bij mogelijke persoonsgegevens':
+      'Advertí ora tin posibel datos personal',
+  'burgerservicenummer (BSN)': 'number di servisio na siudadano (BSN)',
+  'bankrekeningnummer (IBAN)': 'number di kuenta bankario (IBAN)',
+  'e-mailadres': 'adres di e-mail',
   'Extern': 'Èksterno',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Buscá for di un URL èksterno; ora di habri el a kontaktá e server ei.',

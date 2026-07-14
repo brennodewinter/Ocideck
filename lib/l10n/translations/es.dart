@@ -737,6 +737,19 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
+      ' Considera redactarlo con [[corchetes dobles]].',
+  ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
+      ' Sin contexto en el texto, puede que no sea un dato personal.',
+  'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
+      'Revisa tus diapositivas en busca de números de identificación, datos de contacto y otros datos sensibles, y los notifica en el control de calidad. Ocurre por completo en este dispositivo; no se envía nada. Es una ayuda, no una garantía: el texto dentro de imágenes y los datos sin un patrón reconocible quedan fuera de vista.',
+  'Mogelijk persoonsgegeven': 'Posible dato personal',
+  'Privacycontrole': 'Comprobación de privacidad',
+  'Waarschuw bij mogelijke persoonsgegevens':
+      'Avisar sobre posibles datos personales',
+  'burgerservicenummer (BSN)': 'número de servicio al ciudadano (BSN)',
+  'bankrekeningnummer (IBAN)': 'número de cuenta bancaria (IBAN)',
+  'e-mailadres': 'dirección de correo electrónico',
   'Extern': 'Externo',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Obtenido de una URL externa; al abrirla se contactó ese servidor.',

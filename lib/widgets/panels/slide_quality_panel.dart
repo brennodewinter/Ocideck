@@ -8,6 +8,7 @@ import '../../models/markdown_validation.dart';
 import '../../models/slide_quality.dart';
 import '../../state/deck_quality_provider.dart';
 import '../../state/image_contrast_provider.dart';
+import '../../state/privacy_provider.dart';
 import '../dialogs/slide_quality_details_dialog.dart';
 import 'slide_quality_actions.dart';
 import '../../theme/app_theme.dart';
@@ -17,12 +18,19 @@ import '../../theme/app_theme.dart';
 /// compacte samenvattingschip zodat beide dezelfde tellingen tonen. Gebruik
 /// `.value` (niet `.asData?.value`) zodat de vorige uitslag blijft staan
 /// terwijl de FutureProvider herlaadt — anders knippert de melding weg.
+/// Privacybevindingen worden er als eigen categorie in gemengd (PRIVACY_SHIELD
+/// §2.1): een eigen paneel zou een tweede plek zijn om te kijken, en de
+/// gebruiker kijkt hier al.
 SlideQualityResult combinedSlideQualityResult(WidgetRef ref) {
   final syncResult = ref.watch(deckQualityProvider);
   final imageIssues = ref.watch(imageContrastIssuesProvider).value ?? const [];
-  return imageIssues.isEmpty
-      ? syncResult
-      : SlideQualityResult([...syncResult.issues, ...imageIssues]);
+  final privacyIssues = ref.watch(privacyQualityIssuesProvider);
+  if (imageIssues.isEmpty && privacyIssues.isEmpty) return syncResult;
+  return SlideQualityResult([
+    ...syncResult.issues,
+    ...imageIssues,
+    ...privacyIssues,
+  ]);
 }
 
 /// De achtergrond- en voorgrondkleur horend bij de ernst van [result].

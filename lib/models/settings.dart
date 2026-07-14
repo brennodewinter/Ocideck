@@ -704,6 +704,14 @@ class AppSettings {
   /// Diagonaal classificatie-watermerk op slides (fase 2). Standaard uit.
   final bool classificationWatermarkEnabled;
 
+  /// Of de privacycontrole draait: leest OciDeck de slides na op gegevens die
+  /// privacygevoelig kunnen zijn (identificatienummers, contactgegevens)?
+  ///
+  /// Staat standaard **aan**. De controle draait volledig op dit apparaat en
+  /// stuurt niets naar buiten. Uitzetten laat de scan echt niet draaien — het
+  /// verbergt de meldingen niet alleen.
+  final bool privacyChecksEnabled;
+
   /// Scale factor for all interface text (1.0–2.0), on top of the system
   /// text scaling. The slide canvas itself is never scaled: slides are a
   /// fixed 16:9 design surface. WCAG 1.4.4 asks for text resizing up to 200%.
@@ -769,6 +777,7 @@ class AppSettings {
     this.minRequiredExportTlpKey,
     this.requireClassificationOnExport = false,
     this.classificationWatermarkEnabled = false,
+    this.privacyChecksEnabled = true,
     this.uiTextScale = 1.0,
     this.docReaderTextScale = 1.0,
     this.qualityWarningsOnExport = true,
@@ -846,6 +855,7 @@ class AppSettings {
     String? minRequiredExportTlpKey,
     bool? requireClassificationOnExport,
     bool? classificationWatermarkEnabled,
+    bool? privacyChecksEnabled,
     double? uiTextScale,
     double? docReaderTextScale,
     bool? qualityWarningsOnExport,
@@ -904,6 +914,7 @@ class AppSettings {
           requireClassificationOnExport ?? this.requireClassificationOnExport,
       classificationWatermarkEnabled:
           classificationWatermarkEnabled ?? this.classificationWatermarkEnabled,
+      privacyChecksEnabled: privacyChecksEnabled ?? this.privacyChecksEnabled,
       uiTextScale: uiTextScale ?? this.uiTextScale,
       docReaderTextScale: docReaderTextScale ?? this.docReaderTextScale,
       qualityWarningsOnExport:

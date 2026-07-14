@@ -1787,6 +1787,19 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
+      ' Fontold meg a kitakarását [[dupla szögletes zárójellel]].',
+  ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
+      ' A szövegben lévő kontextus nélkül lehet, hogy ez nem is személyes adat.',
+  'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
+      'Átnézi a diáidat azonosító számok, elérhetőségek és más adatvédelmi szempontból érzékeny adatok után, és jelzi őket a minőségellenőrzésben. Ez teljes egészében ezen az eszközön történik; semmi nem kerül elküldésre. Segédeszköz, nem garancia: a képeken lévő szöveg és a felismerhető minta nélküli adatok rejtve maradnak.',
+  'Mogelijk persoonsgegeven': 'Lehetséges személyes adat',
+  'Privacycontrole': 'Adatvédelmi ellenőrzés',
+  'Waarschuw bij mogelijke persoonsgegevens':
+      'Figyelmeztetés lehetséges személyes adatokra',
+  'burgerservicenummer (BSN)': 'állampolgári azonosító szám (BSN)',
+  'bankrekeningnummer (IBAN)': 'bankszámlaszám (IBAN)',
+  'e-mailadres': 'e-mail-cím',
   'Extern': 'Külső',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Külső URL-ről letöltve; a megnyitás kapcsolatba lépett azzal a kiszolgálóval.',

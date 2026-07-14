@@ -1811,6 +1811,19 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
+      ' Σκέψου να το αποκρύψεις με [[διπλές αγκύλες]].',
+  ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
+      ' Χωρίς συμφραζόμενα στο κείμενο, ίσως να μην είναι καν προσωπικό δεδομένο.',
+  'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
+      'Ελέγχει τις διαφάνειές σου για αριθμούς ταυτοποίησης, στοιχεία επικοινωνίας και άλλα ευαίσθητα δεδομένα, και τα αναφέρει στον έλεγχο ποιότητας. Γίνεται εξ ολοκλήρου σε αυτή τη συσκευή· δεν στέλνεται τίποτα. Είναι βοήθημα, όχι εγγύηση: κείμενο μέσα σε εικόνες και δεδομένα χωρίς αναγνωρίσιμο μοτίβο μένουν αόρατα.',
+  'Mogelijk persoonsgegeven': 'Πιθανό προσωπικό δεδομένο',
+  'Privacycontrole': 'Έλεγχος απορρήτου',
+  'Waarschuw bij mogelijke persoonsgegevens':
+      'Προειδοποίηση για πιθανά προσωπικά δεδομένα',
+  'burgerservicenummer (BSN)': 'αριθμός μητρώου πολίτη (BSN)',
+  'bankrekeningnummer (IBAN)': 'αριθμός τραπεζικού λογαριασμού (IBAN)',
+  'e-mailadres': 'διεύθυνση email',
   'Extern': 'Εξωτερικό',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Λήφθηκε από εξωτερική διεύθυνση URL· το άνοιγμα επικοινώνησε με αυτόν τον διακομιστή.',

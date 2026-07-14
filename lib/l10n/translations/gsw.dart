@@ -1787,6 +1787,18 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
+      ' Überleg der, öb du s mit [[doppleti eckigi Chlammere]] schwärze wotsch.',
+  ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
+      ' Ohni Kontext im Täxt isch das villicht gar kes Persoonedatum.',
+  'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
+      'Prüeft dini Folie uf Identifikationsnummere, Kontaktdate und anderi dateschutzheikli Agabe und mäldet sie bi de Qualitätsprüefig. Das passiert komplett uf dem Grät; es wird nüt gschickt. Es isch e Hilf, kei Garantie: Täxt i Bilder und Date ohni erkennbars Muschter bliibed unsichtbar.',
+  'Mogelijk persoonsgegeven': 'Möglichs Persoonedatum',
+  'Privacycontrole': 'Dateschutzprüefig',
+  'Waarschuw bij mogelijke persoonsgegevens': 'Bi möglichne Persoonedate warne',
+  'burgerservicenummer (BSN)': 'Bürgerservicenummere (BSN)',
+  'bankrekeningnummer (IBAN)': 'Bankkontonummere (IBAN)',
+  'e-mailadres': 'E-Mail-Adrässe',
   'Extern': 'Extern',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Vo ere externe URL glade; bim Öffne isch dä Server kontaktiert worde.',

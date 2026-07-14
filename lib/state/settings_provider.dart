@@ -136,6 +136,9 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
           prefs.getBool('requireClassificationOnExport') ?? false,
       classificationWatermarkEnabled:
           prefs.getBool('classificationWatermarkEnabled') ?? false,
+      // Standaard AAN: een privacycontrole die je eerst moet aanzetten, helpt
+      // precies de mensen niet die niet weten dat ze hem nodig hebben.
+      privacyChecksEnabled: prefs.getBool('privacyChecksEnabled') ?? true,
       uiTextScale: (prefs.getDouble('uiTextScale') ?? 1.0).clamp(1.0, 2.0),
       docReaderTextScale: (prefs.getDouble('docReaderTextScale') ?? 1.0).clamp(
         0.8,
@@ -295,6 +298,14 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     await _persist(
       'setClassificationWatermarkEnabled',
       (prefs) => prefs.setBool('classificationWatermarkEnabled', enabled),
+    );
+  }
+
+  Future<void> setPrivacyChecksEnabled(bool enabled) async {
+    state = state.copyWith(privacyChecksEnabled: enabled);
+    await _persist(
+      'setPrivacyChecksEnabled',
+      (prefs) => prefs.setBool('privacyChecksEnabled', enabled),
     );
   }
 

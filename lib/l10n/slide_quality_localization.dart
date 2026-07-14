@@ -178,6 +178,7 @@ String slideQualityCategoryLabel(
     SlideQualityCategory.contrast => l10n.d('Contrast'),
     SlideQualityCategory.textDensity => l10n.d('Tekstdichtheid'),
     SlideQualityCategory.content => l10n.d('Inhoud'),
+    SlideQualityCategory.privacy => l10n.d('Privacy'),
   };
 }
 
@@ -258,6 +259,43 @@ String formatSlideQualityIssue(AppLocalizations l10n, SlideQualityIssue issue) {
     SlideQualityIssueKind.questionNotAnswerable => l10n.d(
       'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.',
     ),
+    SlideQualityIssueKind.privacyIdentifier ||
+    SlideQualityIssueKind.privacyFinancial ||
+    SlideQualityIssueKind.privacyContact ||
+    SlideQualityIssueKind.privacyDigital ||
+    SlideQualityIssueKind.privacySecret ||
+    SlideQualityIssueKind.privacySpecialCategory ||
+    SlideQualityIssueKind.privacyBulk ||
+    SlideQualityIssueKind.privacyStructural => _formatPrivacy(l10n, issue),
+  };
+}
+
+/// De tekst van een privacybevinding.
+///
+/// `args['sample']` is een gemaskeerd fragment (`j…l`), nooit de volledige
+/// waarde: deze melding belandt in een paneel en een tooltip, en een
+/// privacycontrole die de gevonden BSN's in haar eigen meldingen zet, heeft het
+/// probleem verplaatst in plaats van opgelost.
+String _formatPrivacy(AppLocalizations l10n, SlideQualityIssue issue) {
+  final rule = privacyRuleLabel(l10n, issue.args['rule'] ?? '');
+  final sample = issue.args['sample'] ?? '';
+  final suffix = issue.severity == MarkdownValidationSeverity.informational
+      ? l10n.d(
+          ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.',
+        )
+      : l10n.d(' Overweeg dit te redigeren met [[dubbele blokhaken]].');
+  return '${l10n.d('Mogelijk persoonsgegeven')} — $rule ($sample).$suffix';
+}
+
+/// Het leesbare label van een detectieregel.
+///
+/// Acroniemen blijven onvertaald; die zijn in elke taal hetzelfde.
+String privacyRuleLabel(AppLocalizations l10n, String ruleId) {
+  return switch (ruleId) {
+    'nl.bsn' => l10n.d('burgerservicenummer (BSN)'),
+    'fin.iban' => l10n.d('bankrekeningnummer (IBAN)'),
+    'contact.email' => l10n.d('e-mailadres'),
+    _ => ruleId,
   };
 }
 

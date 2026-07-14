@@ -1774,6 +1774,19 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
+      ' Kaalu selle peitmist [[topeltnurksulgudega]].',
+  ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
+      ' Ilma kontekstita tekstis ei pruugi see üldse olla isikuandmed.',
+  'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
+      'Kontrollib su slaide isikukoodide, kontaktandmete ja muude privaatsustundlike andmete suhtes ning teatab neist kvaliteedikontrollis. See toimub täielikult selles seadmes; midagi ei saadeta. See on abivahend, mitte tagatis: piltidel olev tekst ja äratuntava mustrita andmed jäävad märkamata.',
+  'Mogelijk persoonsgegeven': 'Võimalikud isikuandmed',
+  'Privacycontrole': 'Privaatsuse kontroll',
+  'Waarschuw bij mogelijke persoonsgegevens':
+      'Hoiata võimalike isikuandmete eest',
+  'burgerservicenummer (BSN)': 'kodaniku isikukood (BSN)',
+  'bankrekeningnummer (IBAN)': 'pangakonto number (IBAN)',
+  'e-mailadres': 'e-posti aadress',
   'Extern': 'Väline',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Toodud välisest URL-ist; avamine võttis ühendust selle serveriga.',

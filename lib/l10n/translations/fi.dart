@@ -1783,6 +1783,19 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
+      ' Harkitse sen peittämistä [[kaksoishakasulkeilla]].',
+  ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
+      ' Ilman asiayhteyttä tekstissä tämä ei ehkä ole henkilötieto lainkaan.',
+  'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
+      'Käy diasi läpi tunnistenumeroiden, yhteystietojen ja muiden yksityisyyden kannalta arkojen tietojen varalta ja ilmoittaa niistä laatutarkistuksessa. Tämä tapahtuu kokonaan tällä laitteella; mitään ei lähetetä. Se on apuväline, ei takuu: kuvien sisällä oleva teksti ja tiedot ilman tunnistettavaa kaavaa jäävät näkymättä.',
+  'Mogelijk persoonsgegeven': 'Mahdollinen henkilötieto',
+  'Privacycontrole': 'Yksityisyystarkistus',
+  'Waarschuw bij mogelijke persoonsgegevens':
+      'Varoita mahdollisista henkilötiedoista',
+  'burgerservicenummer (BSN)': 'kansalaisen tunnusnumero (BSN)',
+  'bankrekeningnummer (IBAN)': 'pankkitilinumero (IBAN)',
+  'e-mailadres': 'sähköpostiosoite',
   'Extern': 'Ulkoinen',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Haettu ulkoisesta URL-osoitteesta; avaaminen otti yhteyden kyseiseen palvelimeen.',

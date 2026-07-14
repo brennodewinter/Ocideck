@@ -1802,6 +1802,19 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
+      ' Ia în calcul redactarea cu [[paranteze drepte duble]].',
+  ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
+      ' Fără context în text, este posibil să nu fie deloc o dată cu caracter personal.',
+  'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
+      'Îți verifică diapozitivele pentru numere de identificare, date de contact și alte date sensibile, și le raportează la controlul calității. Totul se întâmplă pe acest dispozitiv; nu se trimite nimic. Este un ajutor, nu o garanție: textul din imagini și datele fără un tipar recognoscibil rămân nedetectate.',
+  'Mogelijk persoonsgegeven': 'Posibilă dată cu caracter personal',
+  'Privacycontrole': 'Verificare de confidențialitate',
+  'Waarschuw bij mogelijke persoonsgegevens':
+      'Avertizează la posibile date cu caracter personal',
+  'burgerservicenummer (BSN)': 'număr de identificare a cetățeanului (BSN)',
+  'bankrekeningnummer (IBAN)': 'număr de cont bancar (IBAN)',
+  'e-mailadres': 'adresă de e-mail',
   'Extern': 'Extern',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Preluat de la un URL extern; deschiderea a contactat acel server.',
