@@ -739,6 +739,15 @@ const _dutchSourceAddIt = {
   'Extern': 'Esterno',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Recuperato da un URL esterno; l\'apertura ha contattato quel server.',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Wat je hebt geredigeerd, gaat er eerst uit. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'Assistenza IA (disattivata per impostazione predefinita): se scegli un backend self-hosted o cloud, i testi o le immagini che fai elaborare vengono inviati a quell\'indirizzo. Ciò che hai oscurato viene prima rimosso. Un modello IA locale su questo dispositivo non invia nulla.',
+  'Gegevens weglaten (redactie)': 'Omettere dati (oscuramento)',
+  'Zet je tekst tussen dubbele blokhaken, zoals [[het adres]], dan laat OciDeck die weg uit alles wat je toont en exporteert. Op de dia, in de presentatie, in de PDF, de PowerPoint en de HTML verschijnen alleen blokken.':
+      'Metti il testo tra doppie parentesi quadre, come [[l\'indirizzo]], e OciDeck lo omette da tutto ciò che mostri ed esporti. Sulla diapositiva, nella presentazione, nel PDF, nel PowerPoint e nell\'HTML compaiono solo blocchi.',
+  'Weggelaten is écht weggelaten, niet afgedekt. De tekst zit niet als onzichtbare laag onder een zwart balkje in de PDF, niet in de sprekersnotities van de PowerPoint, en niet in de broncode van de HTML. Wie het bestand openmaakt, kan er niets uit terughalen.':
+      'Omesso significa davvero omesso, non coperto. Il testo non resta come strato invisibile sotto una barra nera nel PDF, né nelle note del relatore del PowerPoint, né nel codice sorgente dell\'HTML. Chi apre il file non può recuperarne nulla.',
+  'Je eigen bestand verandert niet. De oorspronkelijke tekst blijft in je markdown staan; redactie geldt alleen voor wat je deelt. Zo houd je je eigen gegevens.':
+      'Il tuo file non cambia. Il testo originale resta nel tuo markdown; l\'oscuramento vale solo per ciò che condividi. Così i tuoi dati restano tuoi.',
   'map/presentatie': 'cartella/presentazione',
   'Gekoppelde test': 'Test collegato',
   'Maak eerst een checklist voor dit scope-object.':

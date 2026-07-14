@@ -744,6 +744,15 @@ const _dutchSourceAddFy = {
   'Extern': 'Ekstern',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Fan in eksterne URL ophelle; it iepenjen hat dy server benadere.',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Wat je hebt geredigeerd, gaat er eerst uit. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'AI-assistinsje (stiet standert út): kiest do in sels-hoste of cloud-backend, dan wurde de teksten of ôfbyldings dy\'tst ferwurkje litst nei dat adres stjoerd. Wat\'t do redigearre hast, giet der earst út. In lokaal AI-model op dit apparaat stjoert neat.',
+  'Gegevens weglaten (redactie)': 'Gegevens weilitte (redaksje)',
+  'Zet je tekst tussen dubbele blokhaken, zoals [[het adres]], dan laat OciDeck die weg uit alles wat je toont en exporteert. Op de dia, in de presentatie, in de PDF, de PowerPoint en de HTML verschijnen alleen blokken.':
+      'Setst do tekst tusken dûbele blokhaken, lykas [[it adres]], dan lit OciDeck dy wei út alles watst toanst en eksportearrest. Op de dia, yn de presintaasje, yn de PDF, de PowerPoint en de HTML ferskine allinnich blokken.',
+  'Weggelaten is écht weggelaten, niet afgedekt. De tekst zit niet als onzichtbare laag onder een zwart balkje in de PDF, niet in de sprekersnotities van de PowerPoint, en niet in de broncode van de HTML. Wie het bestand openmaakt, kan er niets uit terughalen.':
+      'Weilitten is écht weilitten, net ôfdutsen. De tekst sit net as ûnsichtbere laach ûnder in swart balkje yn de PDF, net yn de sprekkersnotysjes fan de PowerPoint, en net yn de boarnekoade fan de HTML. Wa\'t it bestân iepenet, kin der neat út weromhelje.',
+  'Je eigen bestand verandert niet. De oorspronkelijke tekst blijft in je markdown staan; redactie geldt alleen voor wat je deelt. Zo houd je je eigen gegevens.':
+      'Dyn eigen bestân feroaret net. De oarspronklike tekst bliuwt yn dyn markdown stean; redaksje jildt allinnich foar watst dielst. Sa hâldst do dyn eigen gegevens.',
   'map/presentatie': 'map/presintaasje',
   'Gekoppelde test': 'Keppele test',
   'Maak eerst een checklist voor dit scope-object.':

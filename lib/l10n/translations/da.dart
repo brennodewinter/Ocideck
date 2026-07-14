@@ -1785,6 +1785,15 @@ const _dutchSourceAddDa = <String, String>{
   'Extern': 'Ekstern',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Hentet fra en ekstern URL; åbningen kontaktede den server.',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Wat je hebt geredigeerd, gaat er eerst uit. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'AI-assistance (slået fra som standard): vælger du en selvhostet eller cloud-backend, sendes de tekster eller billeder, du lader behandle, til den adresse. Det, du har redigeret bort, fjernes først. En lokal AI-model på denne enhed sender ingenting.',
+  'Gegevens weglaten (redactie)': 'Udelade data (redigering)',
+  'Zet je tekst tussen dubbele blokhaken, zoals [[het adres]], dan laat OciDeck die weg uit alles wat je toont en exporteert. Op de dia, in de presentatie, in de PDF, de PowerPoint en de HTML verschijnen alleen blokken.':
+      'Sæt tekst mellem dobbelte kantede parenteser, som [[adressen]], så udelader OciDeck den fra alt, du viser og eksporterer. På sliden, i præsentationen, i PDF\'en, PowerPointen og HTML\'en ses kun blokke.',
+  'Weggelaten is écht weggelaten, niet afgedekt. De tekst zit niet als onzichtbare laag onder een zwart balkje in de PDF, niet in de sprekersnotities van de PowerPoint, en niet in de broncode van de HTML. Wie het bestand openmaakt, kan er niets uit terughalen.':
+      'Udeladt betyder virkelig udeladt, ikke tildækket. Teksten ligger ikke som et usynligt lag under en sort bjælke i PDF\'en, ikke i PowerPointens talernoter og ikke i HTML\'ens kildekode. Den, der åbner filen, kan ikke hente noget frem.',
+  'Je eigen bestand verandert niet. De oorspronkelijke tekst blijft in je markdown staan; redactie geldt alleen voor wat je deelt. Zo houd je je eigen gegevens.':
+      'Din egen fil ændres ikke. Den oprindelige tekst bliver stående i din markdown; redigering gælder kun det, du deler. Sådan beholder du dine egne data.',
   'map/presentatie': 'mappe/præsentation',
   'Gekoppelde test': 'Tilknyttet test',
   'Maak eerst een checklist voor dit scope-object.':

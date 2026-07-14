@@ -157,6 +157,45 @@ back during presenting/exporting (`slideVisibleAtTlp`). The **export enforcement
 (ceiling, minimum, mandatory classification) only looks at the deck-wide `tlp`
 field in front matter, not at per-slide levels.
 
+### 3.1a Redaction markers — `[[…]]`
+
+Text between double square brackets is **redacted**: replaced by a fixed run of
+`█` in everything the deck renders or exports.
+
+```markdown
+The suspect, [[Jan de Vries]], was arrested at [[Kalverstraat 12]].
+```
+
+It is inline body text, not a directive, so it needs no escaping rule and
+round-trips through parse/generate untouched. The regex is
+`\[\[([^\[\]]*)\]\]` — no nested brackets, so an ordinary Markdown link
+(`[text](url)`) never matches.
+
+**The marker stays in the file.** Redaction is applied by `PrivacyProjection`
+(`lib/services/privacy/privacy_projection.dart`) at the boundary between the
+source deck and every receiving surface — preview, presenter, audience window,
+rasteriser (PDF/PPTX), HTML, speaker notes, and document metadata. The Markdown
+on disk is never rewritten, so the same source can produce a full version and a
+redacted one.
+
+**The replacement has a fixed width** (8 blocks) regardless of the original
+length. Mirroring the length would tell the reader what kind of value was
+removed and how long it was, which for short structured values (a BSN, a phone
+number) comes uncomfortably close to reconstructable.
+
+Two consequences worth knowing about:
+
+- A slide containing a redaction has `tableEditable` forced off in the
+  projection. The presenter writes a live table edit back as a whole slide, and
+  it only ever saw the blocks.
+- Redaction covers slide fields (title, subtitle, bullets, column titles,
+  captions, alt text, quotes, free Markdown, table cells, **speaker notes**) and
+  the deck fields that feed document metadata (title, author, organisation,
+  description, keywords). It deliberately does **not** cover `userNotes` — those
+  are the recipient's own sidecar notes, they reach no export artefact, and
+  projecting them would let the presenter write blocks over someone's own
+  annotations.
+
 ### 3.2 `ocideck_style_profile` (Style Profile)
 
 The complete visual profile is serialized as JSON, UTF-8 encoded, and

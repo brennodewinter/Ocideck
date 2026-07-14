@@ -1786,6 +1786,15 @@ const _dutchSourceAddId = <String, String>{
   'Extern': 'Eksternal',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Diambil dari URL eksternal; membukanya menghubungi server itu.',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Wat je hebt geredigeerd, gaat er eerst uit. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'Bantuan AI (mati secara bawaan): jika Anda memilih backend swakelola atau awan, teks atau gambar yang Anda proses dikirim ke alamat tersebut. Apa pun yang Anda redaksi dihapus lebih dulu. Model AI lokal di perangkat ini tidak mengirim apa pun.',
+  'Gegevens weglaten (redactie)': 'Menghilangkan data (redaksi)',
+  'Zet je tekst tussen dubbele blokhaken, zoals [[het adres]], dan laat OciDeck die weg uit alles wat je toont en exporteert. Op de dia, in de presentatie, in de PDF, de PowerPoint en de HTML verschijnen alleen blokken.':
+      'Letakkan teks di antara kurung siku ganda, seperti [[alamatnya]], maka OciDeck menghilangkannya dari semua yang Anda tampilkan dan ekspor. Pada slide, dalam presentasi, di PDF, PowerPoint, dan HTML hanya muncul blok.',
+  'Weggelaten is écht weggelaten, niet afgedekt. De tekst zit niet als onzichtbare laag onder een zwart balkje in de PDF, niet in de sprekersnotities van de PowerPoint, en niet in de broncode van de HTML. Wie het bestand openmaakt, kan er niets uit terughalen.':
+      'Dihilangkan berarti benar-benar dihilangkan, bukan ditutupi. Teksnya tidak tersimpan sebagai lapisan tak terlihat di bawah bilah hitam dalam PDF, tidak di catatan pembicara PowerPoint, dan tidak di kode sumber HTML. Siapa pun yang membuka berkasnya tidak bisa mengambil apa pun.',
+  'Je eigen bestand verandert niet. De oorspronkelijke tekst blijft in je markdown staan; redactie geldt alleen voor wat je deelt. Zo houd je je eigen gegevens.':
+      'Berkas Anda sendiri tidak berubah. Teks aslinya tetap ada di markdown Anda; redaksi hanya berlaku untuk yang Anda bagikan. Dengan begitu data Anda tetap milik Anda.',
   'map/presentatie': 'folder/presentasi',
   'Gekoppelde test': 'Uji tertaut',
   'Maak eerst een checklist voor dit scope-object.':

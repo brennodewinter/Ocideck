@@ -743,6 +743,15 @@ const _dutchSourceAddPap = {
   'Extern': 'Èksterno',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Buscá for di un URL èksterno; ora di habri el a kontaktá e server ei.',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Wat je hebt geredigeerd, gaat er eerst uit. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'Asistensia AI (ta apagá pa defekto): si bo skohe un backend self-hosted of di nubia, e tekstonan òf imágennan ku bo ta laga prosesá ta wòrdu mandá na e adres ei. Loke bo a redaktá ta wòrdu kitá promé. Un modelo AI lokal riba e aparato aki no ta manda nada.',
+  'Gegevens weglaten (redactie)': 'Laga datos afó (redakshon)',
+  'Zet je tekst tussen dubbele blokhaken, zoals [[het adres]], dan laat OciDeck die weg uit alles wat je toont en exporteert. Op de dia, in de presentatie, in de PDF, de PowerPoint en de HTML verschijnen alleen blokken.':
+      'Pone teksto entre dòbel blokhaki, manera [[e adres]], anto OciDeck ta lag\'é afó di tur loke bo ta mustra i eksportá. Riba e slide, den e presentashon, den e PDF, e PowerPoint i e HTML solamente blòkinan ta aparesé.',
+  'Weggelaten is écht weggelaten, niet afgedekt. De tekst zit niet als onzichtbare laag onder een zwart balkje in de PDF, niet in de sprekersnotities van de PowerPoint, en niet in de broncode van de HTML. Wie het bestand openmaakt, kan er niets uit terughalen.':
+      'Kitá ta di bèrdat kitá, no tapá. E teksto no ta keda komo un kapa invisibel bou di un bara pretu den e PDF, ni den e notanan di orador di PowerPoint, ni den e kódigo fuente di e HTML. Ken ku habri e file no por saka nada for di dje.',
+  'Je eigen bestand verandert niet. De oorspronkelijke tekst blijft in je markdown staan; redactie geldt alleen voor wat je deelt. Zo houd je je eigen gegevens.':
+      'Bo mes file no ta kambia. E teksto original ta keda den bo markdown; redakshon ta konta solamente pa loke bo ta kompartí. Asina bo ta warda bo mes datos.',
   'map/presentatie': 'karpeta/presentashon',
   'Gekoppelde test': 'Test konektá',
   'Maak eerst een checklist voor dit scope-object.':

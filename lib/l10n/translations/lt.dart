@@ -1794,6 +1794,15 @@ const _dutchSourceAddLt = <String, String>{
   'Extern': 'Išorinis',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Gauta iš išorinio URL; atidarant buvo susisiekta su tuo serveriu.',
+  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Wat je hebt geredigeerd, gaat er eerst uit. Een lokaal AI-model op dit apparaat verstuurt niets.':
+      'DI pagalba (pagal numatytuosius nustatymus išjungta): pasirinkus savo ar debesijos vidinę sistemą, tekstai ar vaizdai, kuriuos duodi apdoroti, siunčiami tuo adresu. Tai, ką paslėpei, pirmiausia pašalinama. Vietinis DI modelis šiame įrenginyje nieko nesiunčia.',
+  'Gegevens weglaten (redactie)': 'Duomenų praleidimas (redagavimas)',
+  'Zet je tekst tussen dubbele blokhaken, zoals [[het adres]], dan laat OciDeck die weg uit alles wat je toont en exporteert. Op de dia, in de presentatie, in de PDF, de PowerPoint en de HTML verschijnen alleen blokken.':
+      'Įrašyk tekstą tarp dvigubų laužtinių skliaustų, pavyzdžiui [[adresas]], ir OciDeck jį praleis visur, ką rodai ir eksportuoji. Skaidrėje, pristatyme, PDF, PowerPoint ir HTML matomi tik blokai.',
+  'Weggelaten is écht weggelaten, niet afgedekt. De tekst zit niet als onzichtbare laag onder een zwart balkje in de PDF, niet in de sprekersnotities van de PowerPoint, en niet in de broncode van de HTML. Wie het bestand openmaakt, kan er niets uit terughalen.':
+      'Praleista reiškia tikrai praleista, o ne uždengta. Tekstas neguli kaip nematomas sluoksnis po juoda juosta PDF faile, jo nėra nei PowerPoint pranešėjo pastabose, nei HTML pirminiame kode. Kas atvers failą, iš jo nieko neištrauks.',
+  'Je eigen bestand verandert niet. De oorspronkelijke tekst blijft in je markdown staan; redactie geldt alleen voor wat je deelt. Zo houd je je eigen gegevens.':
+      'Tavo paties failas nesikeičia. Originalus tekstas lieka tavo markdown faile; redagavimas galioja tik tam, ką dalijiesi. Taip išsaugai savo duomenis.',
   'map/presentatie': 'aplankas/pristatymas',
   'Gekoppelde test': 'Susietas testas',
   'Maak eerst een checklist voor dit scope-object.':

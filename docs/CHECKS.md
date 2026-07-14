@@ -147,6 +147,16 @@ These three run on every push and pull request (and as `make check`).
     time. A ceiling may shrink (split the file) but never grow, so large files
     trend smaller instead of creeping bigger. `lib/l10n/translations/*` is
     exempt (those grow with every UI string).
+  - **privacy projection boundary** — every surface that hands slide content to
+    a recipient (`SlideRasterizer.rasterize`, `FullscreenPresenter.present`,
+    `ExportDialog.show`) must take an `AudienceDeck` and must not accept a raw
+    `Deck` or `List<Slide>`. That type can only be minted by `PrivacyProjection`,
+    so as long as the entry points hold the line, no unredacted text can escape —
+    the compiler refuses it. The risk here is not technical but human: someone
+    adds a fourth export format in six months, hands it a `Deck`, and the
+    guarantee is quietly gone without a single test going red. A convention in a
+    design document does not stop data; a compile error does. See
+    `audienceBoundary` in the tool and `docs/design/PRIVACY_SHIELD.md` §6;
 - **Failure means:** route the diagnostic through `logError`; **or** replace the
   literal colour with an `AppTheme` token (then lower `rawColorBaseline`); **or**
   split the oversized file (then lower its `fileSizeBaseline` entry — the run
