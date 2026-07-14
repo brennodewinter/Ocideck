@@ -99,9 +99,12 @@ class PrivacyProjection {
       return result.text;
     }
 
-    final slides = [
-      for (final slide in deck.slides) _projectSlide(slide, take),
-    ];
+    final slides = <Slide>[];
+    for (final slide in deck.slides) {
+      final projected = _projectSlide(slide);
+      count += projected.count;
+      slides.add(projected.slide);
+    }
 
     // De deckvelden die de documentmetadata voeden (titel, auteur, organisatie,
     // trefwoorden) reizen mee in PDF-properties en PPTX-docProps — leesbaar,
@@ -126,8 +129,23 @@ class PrivacyProjection {
   ///
   /// Sprekersnotities staan er nadrukkelijk bij: die zijn onzichtbaar in de
   /// preview, maar gaan als platte tekst mee in de PPTX-notitiepagina's.
-  static Slide _projectSlide(Slide slide, String Function(String) take) {
-    return slide.copyWith(
+  ///
+  /// Een slide waarin iets is geredigeerd, verliest [Slide.tableEditable]. Dat
+  /// is geen bijkomstigheid maar de kern van de grens: de presenter schrijft een
+  /// live tabelbewerking als *hele slide* terug naar het deck
+  /// (`presenter_table.dart`). Zou de presenter een geprojecteerde slide mogen
+  /// terugschrijven, dan overschreef één bewerking de bron met blokken. Een
+  /// oppervlak dat de gegevens niet kán zien, mag ze ook niet terugschrijven.
+  static ({Slide slide, int count}) _projectSlide(Slide slide) {
+    var count = 0;
+
+    String take(String source) {
+      final result = redactText(source);
+      count += result.count;
+      return result.text;
+    }
+
+    final projected = slide.copyWith(
       title: take(slide.title),
       subtitle: take(slide.subtitle),
       bullets: [for (final b in slide.bullets) take(b)],
@@ -145,6 +163,11 @@ class PrivacyProjection {
       tableRows: [
         for (final row in slide.tableRows) [for (final cell in row) take(cell)],
       ],
+    );
+
+    return (
+      slide: count > 0 ? projected.copyWith(tableEditable: false) : projected,
+      count: count,
     );
   }
 

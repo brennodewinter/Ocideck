@@ -159,6 +159,39 @@ void main() {
       expect(deck.title, 'Briefing [[Acme]]');
     });
 
+    test('een geredigeerde slide verliest live tabelbewerking', () {
+      // De presenter schrijft een live tabelbewerking als HELE slide terug naar
+      // het deck. Zou dat mogen op een geprojecteerde slide, dan overschreef
+      // één bewerking tijdens het presenteren de bron met blokken.
+      final slide = Slide.create(SlideType.table).copyWith(
+        tableEditable: true,
+        tableRows: [
+          ['Naam'],
+          ['[[Jan]]'],
+        ],
+      );
+      final deck = Deck(title: 'D', slides: [slide]);
+
+      final out = PrivacyProjection.forAudience(deck).slides.single;
+
+      expect(out.tableEditable, isFalse);
+    });
+
+    test('een slide zonder redacties houdt live tabelbewerking', () {
+      final slide = Slide.create(SlideType.table).copyWith(
+        tableEditable: true,
+        tableRows: [
+          ['Kolom'],
+          ['waarde'],
+        ],
+      );
+      final deck = Deck(title: 'D', slides: [slide]);
+
+      final out = PrivacyProjection.forAudience(deck).slides.single;
+
+      expect(out.tableEditable, isTrue);
+    });
+
     test('een deck zonder markeringen telt nul redacties', () {
       final deck = Deck(
         title: 'Gewoon',
