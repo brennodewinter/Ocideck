@@ -22,7 +22,10 @@ Widget _host(Slide slide) {
 
 Color? _chipColor(WidgetTester tester, String label) {
   final text = tester.widget<Text>(
-    find.descendant(of: find.byType(VideoSlideEditor), matching: find.text(label)),
+    find.descendant(
+      of: find.byType(VideoSlideEditor),
+      matching: find.text(label),
+    ),
   );
   return text.style?.color;
 }
@@ -36,9 +39,9 @@ void main() {
   ) async {
     await tester.pumpWidget(
       _host(
-        Slide.create(SlideType.video).copyWith(
-          videoPath: 'https://www.youtube.com/watch?v=fZ5u46AjFCU',
-        ),
+        Slide.create(
+          SlideType.video,
+        ).copyWith(videoPath: 'https://www.youtube.com/watch?v=fZ5u46AjFCU'),
       ),
     );
 

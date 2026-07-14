@@ -278,7 +278,6 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
         : 'vimeo';
     final controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(Colors.black)
       ..addJavaScriptChannel('OciDeck', onMessageReceived: _onJsMessage)
       ..setNavigationDelegate(
         NavigationDelegate(
@@ -305,9 +304,32 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
           },
         ),
       );
+    _setEmbedBackground(controller);
     _controller = controller;
     _loadEmbed();
     if (mounted) setState(() {});
+  }
+
+  /// Een zwarte achtergrond onder de speler — puur cosmetisch, en niet overal
+  /// geïmplementeerd: op macOS gooit `setBackgroundColor` een
+  /// `UnimplementedError` ("opaque is not implemented on macOS"). Zolang die
+  /// aanroep in de cascade van [_initWebView] stond, sneuvelde daarmee de héle
+  /// controller-opbouw: `_controller` bleef null, en de embed kwam nooit verder
+  /// dan de "Video"-placeholder. Een YouTube- of Vimeo-video speelde op macOS
+  /// dus simpelweg nooit af.
+  ///
+  /// De kleur mag falen: de embed-HTML zet zelf al `background:#000`, en de
+  /// speler vult het vlak. Alleen de video mag niet aan de kleur onderdoorgaan.
+  void _setEmbedBackground(WebViewController controller) {
+    try {
+      controller.setBackgroundColor(Colors.black);
+    } on UnimplementedError catch (e) {
+      logWarning(
+        '_VideoEmbedPreviewState._initWebView: '
+        'setBackgroundColor unsupported on this platform',
+        e,
+      );
+    }
   }
 
   void _loadEmbed() {
