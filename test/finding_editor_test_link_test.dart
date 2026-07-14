@@ -93,9 +93,11 @@ void main() {
     expect(updated!.customMarkdown, contains('**Test:** `WSTG-ATHN-07`'));
 
     // …and the checklist row is now an anomaly linked to F-1.
-    final checklistOut = container.read(deckProvider).deck!.slides.firstWhere(
-      (s) => s.type == SlideType.checklist,
-    );
+    final checklistOut = container
+        .read(deckProvider)
+        .deck!
+        .slides
+        .firstWhere((s) => s.type == SlideType.checklist);
     final row = ChecklistSpec.fromSlide(
       checklistOut.title,
       checklistOut.tableRows,

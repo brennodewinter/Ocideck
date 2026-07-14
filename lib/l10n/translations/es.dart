@@ -737,6 +737,9 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Gekoppelde test': 'Prueba vinculada',
+  'Maak eerst een checklist voor dit scope-object.':
+      'Primero crea una lista de verificación para este objeto del alcance.',
   'Bewerken': 'Editar',
   'Checklist-sjabloon': 'Plantilla de lista de verificación',
   'Eigen checklists': 'Listas de verificación propias',

@@ -1782,6 +1782,9 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Gekoppelde test': 'Länkad test',
+  'Maak eerst een checklist voor dit scope-object.':
+      'Skapa först en checklista för det här scope-objektet.',
   'Bewerken': 'Redigera',
   'Checklist-sjabloon': 'Checklistmall',
   'Eigen checklists': 'Egna checklistor',

@@ -1791,6 +1791,9 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Gekoppelde test': 'Susietas testas',
+  'Maak eerst een checklist voor dit scope-object.':
+      'Pirmiausia sukurkite kontrolinį sąrašą šiam apimties objektui.',
   'Bewerken': 'Redaguoti',
   'Checklist-sjabloon': 'Kontrolinio sąrašo šablonas',
   'Eigen checklists': 'Savi kontroliniai sąrašai',

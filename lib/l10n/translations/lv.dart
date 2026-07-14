@@ -1782,6 +1782,9 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Gekoppelde test': 'Saistīts tests',
+  'Maak eerst een checklist voor dit scope-object.':
+      'Vispirms izveido kontrolsarakstu šim tvēruma objektam.',
   'Bewerken': 'Rediģēt',
   'Checklist-sjabloon': 'Kontrolsaraksta veidne',
   'Eigen checklists': 'Pašu kontrolsaraksti',

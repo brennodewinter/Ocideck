@@ -1790,6 +1790,9 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Gekoppelde test': 'Povezani test',
+  'Maak eerst een checklist voor dit scope-object.':
+      'Prvo izradi kontrolni popis za ovaj objekt opsega.',
   'Bewerken': 'Uredi',
   'Checklist-sjabloon': 'Predložak kontrolnog popisa',
   'Eigen checklists': 'Vlastiti kontrolni popisi',

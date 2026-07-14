@@ -1801,6 +1801,9 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Gekoppelde test': 'Пов\'язаний тест',
+  'Maak eerst een checklist voor dit scope-object.':
+      'Спершу створіть контрольний список для цього об\'єкта обсягу.',
   'Bewerken': 'Редагувати',
   'Checklist-sjabloon': 'Шаблон контрольного списку',
   'Eigen checklists': 'Власні контрольні списки',

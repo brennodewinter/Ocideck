@@ -1787,6 +1787,9 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Gekoppelde test': 'Kapcsolt teszt',
+  'Maak eerst een checklist voor dit scope-object.':
+      'Először hozz létre egy ellenőrzőlistát ehhez a hatókör-objektumhoz.',
   'Bewerken': 'Szerkesztés',
   'Checklist-sjabloon': 'Ellenőrzőlista-sablon',
   'Eigen checklists': 'Saját ellenőrzőlisták',

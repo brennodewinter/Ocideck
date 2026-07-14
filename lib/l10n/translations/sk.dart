@@ -1790,6 +1790,9 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Gekoppelde test': 'Prepojený test',
+  'Maak eerst een checklist voor dit scope-object.':
+      'Najprv vytvorte kontrolný zoznam pre tento objekt rozsahu.',
   'Bewerken': 'Upraviť',
   'Checklist-sjabloon': 'Šablóna kontrolného zoznamu',
   'Eigen checklists': 'Vlastné kontrolné zoznamy',

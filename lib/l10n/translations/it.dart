@@ -736,6 +736,9 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Gekoppelde test': 'Test collegato',
+  'Maak eerst een checklist voor dit scope-object.':
+      'Crea prima una checklist per questo oggetto dell\'ambito.',
   'Bewerken': 'Modifica',
   'Checklist-sjabloon': 'Modello di checklist',
   'Eigen checklists': 'Checklist personalizzate',

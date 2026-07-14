@@ -1796,6 +1796,9 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Gekoppelde test': 'Powiązany test',
+  'Maak eerst een checklist voor dit scope-object.':
+      'Najpierw utwórz listę kontrolną dla tego obiektu zakresu.',
   'Bewerken': 'Edytuj',
   'Checklist-sjabloon': 'Szablon listy kontrolnej',
   'Eigen checklists': 'Własne listy kontrolne',

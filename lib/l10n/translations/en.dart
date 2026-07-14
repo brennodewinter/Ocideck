@@ -922,6 +922,9 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Gekoppelde test': 'Linked test',
+  'Maak eerst een checklist voor dit scope-object.':
+      'First create a checklist for this scope object.',
   'Bewerken': 'Edit',
   'Checklist-sjabloon': 'Checklist template',
   'Eigen checklists': 'Custom checklists',

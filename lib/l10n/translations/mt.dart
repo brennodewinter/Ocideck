@@ -1806,6 +1806,9 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Gekoppelde test': 'Test marbut',
+  'Maak eerst een checklist voor dit scope-object.':
+      'L-ewwel oħloq lista ta\' kontroll għal dan l-oġġett tal-kamp.',
   'Bewerken': 'Editja',
   'Checklist-sjabloon': 'Mudell ta\' lista ta\' kontroll',
   'Eigen checklists': 'Listi ta\' kontroll tiegħek',

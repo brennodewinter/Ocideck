@@ -586,6 +586,7 @@ block. All structured fields are inline and re-parsed on load:
 **CVSS 4.0:** 9.3 (Critical) · `CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:L/SC:N/SI:N/SA:N`
 **CWE:** [CWE-89 — Improper Neutralization of SQL](https://cwe.mitre.org/data/definitions/89.html)
 **CVE:** [CVE-2024-1234](https://nvd.nist.gov/vuln/detail/CVE-2024-1234)
+**Test:** `WSTG-ATHN-07`
 **Retest:** Resolved — hertest 2026-07-20, patch toegepast
 
 ## Description
@@ -664,7 +665,9 @@ hertest") — a separate figure from the bands (resolved findings still count as
 found). It is appended after the five bands; a table without it reads `0`. Each
 finding's own retest outcome lives on its header via a `**Retest:**` meta line
 (`Resolved` / `NotResolved` / `PartiallyResolved`, optionally `— <note>`; absent
-when not retested).
+when not retested). A finding may also carry a `**Test:**` meta line with the
+checklist test id it evidences (e.g. `` `WSTG-ATHN-07` ``, backtick-wrapped); it
+mirrors the `Finding` column of that test's row in the scope object's checklist.
 
 - The first column holds the **stable English FIRST band names** (`Critical`,
   `High`, `Medium`, `Low`, `None`) so the table round-trips regardless of

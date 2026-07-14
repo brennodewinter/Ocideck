@@ -1783,6 +1783,9 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Gekoppelde test': 'Linkitetty testi',
+  'Maak eerst een checklist voor dit scope-object.':
+      'Luo ensin tarkistuslista tälle laajuuden kohteelle.',
   'Bewerken': 'Muokkaa',
   'Checklist-sjabloon': 'Tarkistuslistan malli',
   'Eigen checklists': 'Omat tarkistuslistat',

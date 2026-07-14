@@ -1783,6 +1783,9 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Gekoppelde test': 'Uji tertaut',
+  'Maak eerst een checklist voor dit scope-object.':
+      'Buat dulu daftar periksa untuk objek cakupan ini.',
   'Bewerken': 'Ubah',
   'Checklist-sjabloon': 'Templat daftar periksa',
   'Eigen checklists': 'Daftar periksa khusus',

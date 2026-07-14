@@ -741,6 +741,9 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Gekoppelde test': 'Keppele test',
+  'Maak eerst een checklist voor dit scope-object.':
+      'Meitsje earst in checklist foar dit scope-objekt.',
   'Bewerken': 'Bewurkje',
   'Checklist-sjabloon': 'Checklist-sjabloan',
   'Eigen checklists': 'Eigen checklists',

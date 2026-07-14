@@ -694,7 +694,11 @@ else.
   sections. Severity is always **derived** from the vector, never typed. A
   **Hertest (Retest)** dropdown records the retest outcome — *Opgelost* / *Nog
   aanwezig* / *Deels opgelost* (with an optional note); a resolved finding shows a
-  green **Opgelost na hertest** badge on its card while keeping its severity. The
+  green **Opgelost na hertest** badge on its card while keeping its severity. A
+  **Gekoppelde test (Linked test)** picker links the finding to a test from the
+  checklist(s) covering its scope object; picking one shows the test id as a chip
+  on the finding card and marks that checklist row as an anomaly linked to the
+  finding (changing or clearing the choice moves or removes the link). The
   finding editor also has an **Bewijs (Evidence)** section: **Screenshot
   toevoegen** and **Video toevoegen** attach a screenshot or a video as evidence.
   Each piece of evidence becomes its own slide right after the finding (part of
