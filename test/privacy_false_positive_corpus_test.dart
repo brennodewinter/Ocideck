@@ -75,6 +75,9 @@ void main() {
       'Documentatie: https://ocideck.nl/docs?page=2&sort=date',
       'Bekijk https://drive.google.com voor cloudopslag',
       'Campagne via https://example.com/?utm_source=nieuwsbrief',
+      // Massa-aas: drie van hetzelfde, maar niets persoonlijks.
+      'Ordernummer 100000001, 100000002 en 100000003 verwerkt',
+      'Versies 1.2.3, 1.2.4 en 1.2.5 zijn uitgerold',
     ];
 
     final result = scanLines(corpus);

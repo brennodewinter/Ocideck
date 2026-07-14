@@ -1786,6 +1786,10 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'tabel met persoonsgegevens (rijen×kolommen)':
+      'tabulka osobních údajů (řádky×sloupce)',
+  'massa-persoonsgegevens op één slide':
+      'hromadné osobní údaje na jednom snímku',
   'gebruikerspad met een naam erin': 'cesta uživatele obsahující jméno',
   'toegangstoken in een link': 'přístupový token v odkazu',
   'persoonsgegeven in een link': 'osobní údaj v odkazu',

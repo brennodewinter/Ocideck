@@ -740,6 +740,10 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'tabel met persoonsgegevens (rijen×kolommen)':
+      'tableau de données personnelles (lignes×colonnes)',
+  'massa-persoonsgegevens op één slide':
+      'données personnelles en masse sur une diapositive',
   'gebruikerspad met een naam erin': 'chemin utilisateur contenant un nom',
   'toegangstoken in een link': 'jeton d\'accès dans un lien',
   'persoonsgegeven in een link': 'donnée personnelle dans un lien',

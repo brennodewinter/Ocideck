@@ -740,6 +740,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'tabel met persoonsgegevens (rijen×kolommen)':
+      'tabel ku datos personal (fila×kolom)',
+  'massa-persoonsgegevens op één slide': 'datos personal na masa riba un slide',
   'gebruikerspad met een naam erin': 'kaminda di usuario ku un nòmber aden',
   'toegangstoken in een link': 'token di akseso den un link',
   'persoonsgegeven in een link': 'dato personal den un link',

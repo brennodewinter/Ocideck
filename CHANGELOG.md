@@ -8,6 +8,26 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Forty email addresses in a table is not forty findings — it is a membership
+  list.** One email address on a slide is a contact detail. Forty in a table is an
+  exported list, and that is a different conversation entirely: with the GDPR, with
+  your data protection officer, and with the people on that list.
+
+  The scanner already saw those forty, forty times over. But forty separate notices
+  are exactly what a user learns to click away — the panel overflows and the message
+  drowns in the noise. What was missing was the insight sitting on top.
+
+  Two signals, and the first is by far the stronger: a **table header** that names
+  the column ("Naam", "E-mail", "BSN", "Date of birth"). That is a pasted CSV, and
+  the header says in so many words that the cells below are personal data. Nobody
+  labels a column "BSN" when it holds no BSNs, which makes it close to
+  false-positive-free. The second is cruder: the same rule firing three or more
+  times on one slide, which catches the pasted list that is not a table.
+
+  The bulk notice sits **on top of** the individual findings, not instead of them,
+  and it reports the *count* rather than the values — that is what you need to know.
+  One example row under a header is not a list, and a plain contact slide (name,
+  email, phone of one person) is left alone.
 - **Structural leaks — the hiding places a generic PII scanner misses.** A user
   path (`/Users/jan.jansen/…`) simply gives away a name, and it is most often in
   the path of an image you dragged in, travelling along into the Markdown and the

@@ -1783,6 +1783,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'tabel met persoonsgegevens (rijen×kolommen)':
+      'taulukko henkilötietoja (rivit×sarakkeet)',
+  'massa-persoonsgegevens op één slide':
+      'runsaasti henkilötietoja yhdessä diassa',
   'gebruikerspad met een naam erin': 'käyttäjäpolku, jossa on nimi',
   'toegangstoken in een link': 'käyttöoikeuspoletti linkissä',
   'persoonsgegeven in een link': 'henkilötieto linkissä',

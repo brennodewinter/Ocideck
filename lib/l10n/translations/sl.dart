@@ -1785,6 +1785,10 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'tabel met persoonsgegevens (rijen×kolommen)':
+      'tabela osebnih podatkov (vrstice×stolpci)',
+  'massa-persoonsgegevens op één slide':
+      'množični osebni podatki na eni prosojnici',
   'gebruikerspad met een naam erin': 'uporabniška pot z imenom',
   'toegangstoken in een link': 'žeton za dostop v povezavi',
   'persoonsgegeven in een link': 'osebni podatek v povezavi',

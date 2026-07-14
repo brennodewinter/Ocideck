@@ -19,6 +19,7 @@ import '../../models/deck.dart';
 import '../../models/privacy_finding.dart';
 import '../../models/slide.dart';
 import 'privacy_allowlist.dart';
+import 'privacy_bulk_rules.dart';
 import 'privacy_checksums.dart';
 import 'privacy_eu_rules.dart';
 import 'privacy_own_identity.dart';
@@ -99,7 +100,14 @@ class PrivacyScanner {
       for (final fragment in _slideFragments(deck.slides[i])) {
         _scanFragment(fragment, i, slideFindings);
       }
-      findings.addAll(_escalateSpecialCategories(_enabled(slideFindings)));
+      final enabled = _escalateSpecialCategories(_enabled(slideFindings));
+      findings.addAll(enabled);
+      // De massa-bevinding komt bovenóp de losse: veertig e-mailadressen zijn
+      // veertig bevindingen én één ledenlijst, en die tweede is de melding waar
+      // het om gaat.
+      findings.addAll(
+        _enabled(bulkFindingsFor(deck.slides[i], i, enabled).toList()),
+      );
     }
     return PrivacyScanResult(findings);
   }
@@ -110,7 +118,11 @@ class PrivacyScanner {
     for (final fragment in _slideFragments(slide)) {
       _scanFragment(fragment, index, findings);
     }
-    return PrivacyScanResult(_escalateSpecialCategories(_enabled(findings)));
+    final enabled = _escalateSpecialCategories(_enabled(findings));
+    return PrivacyScanResult([
+      ...enabled,
+      ..._enabled(bulkFindingsFor(slide, index, enabled).toList()),
+    ]);
   }
 
   /// Uitgezette regels eruit — vóór de escalatie, zodat een uitgezette

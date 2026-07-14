@@ -1819,6 +1819,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'tabel met persoonsgegevens (rijen×kolommen)':
+      'tábla sonraí pearsanta (sraitheanna×colúin)',
+  'massa-persoonsgegevens op één slide':
+      'sonraí pearsanta ollmhóra ar shleamhnán amháin',
   'gebruikerspad met een naam erin': 'conair úsáideora ina bhfuil ainm',
   'toegangstoken in een link': 'comharthán rochtana i nasc',
   'persoonsgegeven in een link': 'sonraí pearsanta i nasc',

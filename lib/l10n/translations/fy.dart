@@ -741,6 +741,9 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'tabel met persoonsgegevens (rijen×kolommen)':
+      'tabel mei persoansgegevens (rigen×kolommen)',
+  'massa-persoonsgegevens op één slide': 'massa-persoansgegevens op ien dia',
   'gebruikerspad met een naam erin': 'brûkerspaad mei in namme deryn',
   'toegangstoken in een link': 'tagongstoken yn in keppeling',
   'persoonsgegeven in een link': 'persoansgegeven yn in keppeling',

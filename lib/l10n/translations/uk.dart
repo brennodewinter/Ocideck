@@ -1801,6 +1801,10 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'tabel met persoonsgegevens (rijen×kolommen)':
+      'таблиця персональних даних (рядки×стовпці)',
+  'massa-persoonsgegevens op één slide':
+      'масив персональних даних на одному слайді',
   'gebruikerspad met een naam erin': 'шлях користувача з іменем',
   'toegangstoken in een link': 'токен доступу в посиланні',
   'persoonsgegeven in een link': 'персональні дані в посиланні',

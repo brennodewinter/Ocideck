@@ -1782,6 +1782,9 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'tabel met persoonsgegevens (rijen×kolommen)':
+      'personas datu tabula (rindas×kolonnas)',
+  'massa-persoonsgegevens op één slide': 'masveida personas dati vienā slaidā',
   'gebruikerspad met een naam erin': 'lietotāja ceļš ar vārdu',
   'toegangstoken in een link': 'piekļuves marķieris saitē',
   'persoonsgegeven in een link': 'personas dati saitē',

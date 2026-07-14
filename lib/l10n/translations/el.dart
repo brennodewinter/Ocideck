@@ -1811,6 +1811,10 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'tabel met persoonsgegevens (rijen×kolommen)':
+      'πίνακας προσωπικών δεδομένων (γραμμές×στήλες)',
+  'massa-persoonsgegevens op één slide':
+      'μαζικά προσωπικά δεδομένα σε μία διαφάνεια',
   'gebruikerspad met een naam erin': 'διαδρομή χρήστη που περιέχει όνομα',
   'toegangstoken in een link': 'διακριτικό πρόσβασης σε σύνδεσμο',
   'persoonsgegeven in een link': 'προσωπικό δεδομένο σε σύνδεσμο',

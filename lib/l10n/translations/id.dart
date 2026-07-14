@@ -1783,6 +1783,9 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'tabel met persoonsgegevens (rijen×kolommen)':
+      'tabel data pribadi (baris×kolom)',
+  'massa-persoonsgegevens op één slide': 'data pribadi massal pada satu slide',
   'gebruikerspad met een naam erin': 'jalur pengguna yang memuat nama',
   'toegangstoken in een link': 'token akses dalam tautan',
   'persoonsgegeven in een link': 'data pribadi dalam tautan',

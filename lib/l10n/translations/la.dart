@@ -1799,6 +1799,9 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'tabel met persoonsgegevens (rijen×kolommen)':
+      'tabula datorum personalium (versus×columnae)',
+  'massa-persoonsgegevens op één slide': 'data personalia multa in una pagina',
   'gebruikerspad met een naam erin': 'semita usoris nomen continens',
   'toegangstoken in een link': 'signum accessus in nexu',
   'persoonsgegeven in een link': 'datum personale in nexu',

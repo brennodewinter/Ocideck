@@ -1782,6 +1782,9 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'tabel met persoonsgegevens (rijen×kolommen)':
+      'tabel med personoplysninger (rækker×kolonner)',
+  'massa-persoonsgegevens op één slide': 'masse-personoplysninger på én slide',
   'gebruikerspad met een naam erin': 'brugersti med et navn i',
   'toegangstoken in een link': 'adgangstoken i et link',
   'persoonsgegeven in een link': 'personoplysning i et link',
