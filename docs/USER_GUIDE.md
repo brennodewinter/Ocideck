@@ -414,11 +414,34 @@ So the check needs both the checksum **and** a context word nearby ("BSN",
 - checksum **and** context → a real warning;
 - checksum but no context → an informational hint, which interrupts nobody.
 
+Phone numbers follow the same three-step logic. In international form (`+CC`
+followed by the national number) the calling code is checked against the list of
+*assigned* ITU country codes together with a valid E.164 length — that is a real
+validation, so it becomes a proper warning. A national number needs a separator
+(`06-24681357`); a bare run of digits needs a context word ("tel", "mobiel",
+"phone"), because `0417164300` on its own is just as likely to be an old bank
+account number.
+
+(You will notice this manual never prints a real-looking international number.
+That is deliberate — and the check would flag it if it did.)
+
 The same reasoning runs through everything: known example values are ignored on
 purpose. The example IBAN from every Dutch banking manual, the official test-BSN
-range, the card schemes' test numbers, `example.com` addresses — none of them
-belong to anyone, and a deck that lights up red on its own demo content destroys
-your trust in every other finding.
+range, the card schemes' test numbers, `example.com` addresses, the reserved
+"drama" phone ranges that films and manuals use (`555-01xx`, `+49 30 23125 xx`) —
+none of them belong to anyone, and a deck that lights up red on its own demo
+content destroys your trust in every other finding.
+
+### A special-category datum is a statement, not a word
+
+When health, criminal, religious or union data is traceable to a person on the
+same slide, redaction takes the **whole line**, not just the keyword that fired.
+Blanking only the word would leave you with
+
+> Marieke de Vries reported sick with a ████████
+
+— the name is still there, the sick note is still there. Nothing was removed; a
+word was covered. So the whole statement goes.
 
 ### It is an aid, not a guarantee
 

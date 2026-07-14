@@ -1802,6 +1802,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'telefoonnummer': 'număr de telefon',
   'Voor wie is deze export?': 'Pentru cine este acest export?',
   'Volledig': 'Complet',
   'Geredigeerd': 'Redactat',

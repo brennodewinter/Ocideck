@@ -1811,6 +1811,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'telefoonnummer': 'αριθμός τηλεφώνου',
   'Voor wie is deze export?': 'Για ποιον είναι αυτή η εξαγωγή;',
   'Volledig': 'Πλήρες',
   'Geredigeerd': 'Αποκρυμμένο',

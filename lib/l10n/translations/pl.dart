@@ -1796,6 +1796,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'telefoonnummer': 'numer telefonu',
   'Voor wie is deze export?': 'Dla kogo jest ten eksport?',
   'Volledig': 'Pełny',
   'Geredigeerd': 'Zredagowany',

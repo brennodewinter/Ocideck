@@ -1774,6 +1774,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'telefoonnummer': 'telefoninumber',
   'Voor wie is deze export?': 'Kellele see eksport on?',
   'Volledig': 'Täielik',
   'Geredigeerd': 'Redigeeritud',

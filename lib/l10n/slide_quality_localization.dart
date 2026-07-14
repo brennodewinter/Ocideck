@@ -324,6 +324,7 @@ String privacyRuleLabel(AppLocalizations l10n, String ruleId) {
     'nl.bsn' => l10n.d('burgerservicenummer (BSN)'),
     'fin.iban' => l10n.d('bankrekeningnummer (IBAN)'),
     'contact.email' => l10n.d('e-mailadres'),
+    'contact.phone' => l10n.d('telefoonnummer'),
     'special.health' => l10n.d('gezondheidsgegeven'),
     'special.criminal' => l10n.d('strafrechtelijk gegeven'),
     'special.religion' => l10n.d('religie of levensovertuiging'),

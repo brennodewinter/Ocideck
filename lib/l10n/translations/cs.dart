@@ -1786,6 +1786,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'telefoonnummer': 'telefonní číslo',
   'Voor wie is deze export?': 'Pro koho je tento export?',
   'Volledig': 'Úplný',
   'Geredigeerd': 'Začerněný',

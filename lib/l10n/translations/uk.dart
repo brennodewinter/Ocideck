@@ -1801,6 +1801,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'telefoonnummer': 'номер телефону',
   'Voor wie is deze export?': 'Для кого цей експорт?',
   'Volledig': 'Повний',
   'Geredigeerd': 'Відредаговано',

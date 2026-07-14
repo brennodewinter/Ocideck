@@ -1791,6 +1791,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'telefoonnummer': 'telefono numeris',
   'Voor wie is deze export?': 'Kam skirtas šis eksportas?',
   'Volledig': 'Pilnas',
   'Geredigeerd': 'Paslėptas',
