@@ -1782,6 +1782,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'nationaal identificatienummer': 'nationellt identifikationsnummer',
   'Privacy Shield (ontwerp)': 'Privacy Shield (design)',
   'Mogelijk geheim': 'Möjlig hemlighet',
   'sleutel of token': 'nyckel eller token',

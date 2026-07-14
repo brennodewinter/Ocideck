@@ -1783,6 +1783,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'nationaal identificatienummer': 'kansallinen henkilötunnus',
   'Privacy Shield (ontwerp)': 'Privacy Shield (suunnitelma)',
   'Mogelijk geheim': 'Mahdollinen salaisuus',
   'sleutel of token': 'avain tai poletti',

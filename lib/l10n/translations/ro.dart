@@ -1802,6 +1802,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'nationaal identificatienummer': 'număr național de identificare',
   'Privacy Shield (ontwerp)': 'Privacy Shield (proiect)',
   'Mogelijk geheim': 'Posibil secret',
   'sleutel of token': 'cheie sau token',

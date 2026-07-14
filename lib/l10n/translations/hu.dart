@@ -1787,6 +1787,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'nationaal identificatienummer': 'nemzeti azonosító szám',
   'Privacy Shield (ontwerp)': 'Privacy Shield (terv)',
   'Mogelijk geheim': 'Lehetséges titok',
   'sleutel of token': 'kulcs vagy token',

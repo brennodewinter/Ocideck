@@ -8,6 +8,25 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **European identification numbers — fifteen countries, and the scanner got no
+  louder.** Belgian rijksregisternummer, German Steuer-ID, French NIR, Spanish
+  DNI/NIE, Portuguese NIF, Polish PESEL, Italian codice fiscale, Croatian OIB,
+  Bulgarian EGN, Romanian CNP, Swedish personnummer, Finnish henkilötunnus,
+  Estonian isikukood, UK NHS number and NINO.
+
+  Turning on twenty checksums at once is defensible precisely *because* they are
+  checksums: a checksum does not cost precision, it buys precision. Enabling the
+  Croatian OIB does not make the scanner shout, it makes it wider. The noise never
+  lived in the self-validating numbers — it lives in the handful without one, and
+  those (UK NINO, Swedish personnummer, NHS number) carry a mandatory context word,
+  exactly like the BSN.
+
+  The interesting part is what a checksum *doesn't* do. The Bulgarian EGN uses a
+  mod-11, which lets roughly one in ten random ten-digit numbers through — the same
+  trap as the elevenproof. It fired on a 32-bit ARGB colour value in a JSON example
+  in OciDeck's own documentation. These numbers embed a **birth date**, so that is
+  validated too: month 94 does not exist. Caught by the false-positive corpus test,
+  which scans our own docs for exactly this reason.
 - **Secret scanning: API keys, tokens, private keys, passwords.** Vendor tokens
   carry a fixed prefix — `AKIA`, `ghp_`, `xoxb-`, `sk_live_` — and that prefix is
   the proof, so this family is close to false-positive-free without needing a

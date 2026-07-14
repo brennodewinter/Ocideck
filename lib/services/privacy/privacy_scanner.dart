@@ -20,6 +20,7 @@ import '../../models/privacy_finding.dart';
 import '../../models/slide.dart';
 import 'privacy_allowlist.dart';
 import 'privacy_checksums.dart';
+import 'privacy_eu_rules.dart';
 import 'privacy_secret_rules.dart';
 
 /// Eén tekstfragment van een slide, met de veldnaam waar het uit komt.
@@ -91,6 +92,48 @@ class PrivacyScanner {
     _scanIban(fragment, slideIndex, out);
     _scanBsn(fragment, slideIndex, out);
     _scanSecrets(fragment, slideIndex, out);
+    _scanEuIdentifiers(fragment, slideIndex, out);
+  }
+
+  // ── Europese identificatienummers ─────────────────────────────────────────
+
+  /// De landpakketten (`privacy_eu_rules.dart`).
+  ///
+  /// Ruim twintig van de dertig Europese nummers zijn zelfvalidereend, en een
+  /// checksum kóst geen precisie — hij wínt precisie. Daarom mogen ze allemaal
+  /// aan staan. De handvol zonder bruikbare checksum draagt een contextwoordeis,
+  /// precies zoals het BSN, en komt nooit hoger dan `likely`.
+  void _scanEuIdentifiers(
+    _Fragment fragment,
+    int slideIndex,
+    List<PrivacyFinding> out,
+  ) {
+    for (final rule in euIdentifierRules) {
+      for (final match in rule.pattern.allMatches(fragment.text)) {
+        final value = match.group(0)!;
+        if (rule.validate != null && !rule.validate!(value)) continue;
+
+        // Vraagt de regel om context, dan is die verplicht. Dat geldt voor de
+        // nummers zonder bruikbare checksum (Brits NINO) en voor de nummers
+        // waarvan de checksum te zwak is om alleen op af te gaan — tien cijfers
+        // met een Luhn is óók een klantnummer.
+        if (rule.contextWords.isNotEmpty &&
+            !_hasContextWord(fragment.text, match.start, rule.contextWords)) {
+          continue;
+        }
+
+        out.add(
+          _finding(
+            fragment,
+            slideIndex,
+            match,
+            ruleId: rule.id,
+            family: PrivacyFamily.identifier,
+            confidence: rule.confidence,
+          ),
+        );
+      }
+    }
   }
 
   // ── secret.* ──────────────────────────────────────────────────────────────

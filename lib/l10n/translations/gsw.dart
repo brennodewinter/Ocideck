@@ -1787,6 +1787,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'nationaal identificatienummer': 'nationali Identifikationsnummere',
   'Privacy Shield (ontwerp)': 'Privacy Shield (Entwurf)',
   'Mogelijk geheim': 'Möglichs Gheimnis',
   'sleutel of token': 'Schlüssel oder Token',
