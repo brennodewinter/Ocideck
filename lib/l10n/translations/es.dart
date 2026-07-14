@@ -737,6 +737,14 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
+      'Datos personales, categorías especiales y secretos en el texto',
+  'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':
+      'Las diapositivas, notas, tablas, código, rutas de archivo y URL se examinan en este dispositivo en busca de números identificativos, datos financieros, datos de contacto, identificadores digitales, secretos, categorías especiales de datos personales (RGPD art. 9/10), datos en masa y fugas de metadatos.',
+  'Alleen een zekere treffer waarschuwt; waarschijnlijk en mogelijk blijven informatief. Een uitgezette regel vuurt nergens.':
+      'Solo una coincidencia segura avisa; probable y posible siguen siendo informativas. Una regla desactivada no salta en ninguna parte.',
+  'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.':
+      'Sin comprobar: datos personales, categorías especiales y secretos. La comprobación de privacidad está desactivada en Seguridad.',
   'Op deze slide': 'En esta diapositiva',
   'Tijdens presenteren': 'Durante la presentación',
   'Classificatie en privacy': 'Clasificación y privacidad',

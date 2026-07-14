@@ -1806,6 +1806,14 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
+      'Data personali, data speċjali u sigrieti fit-test',
+  'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':
+      'Is-slides, in-noti, it-tabelli, il-kodiċi, il-paths tal-fajls u l-URLs jiġu mfittxija fuq dan l-apparat għal numri ta\' identifikazzjoni, data finanzjarja, dettalji ta\' kuntatt, identifikaturi diġitali, sigrieti, kategoriji speċjali ta\' data personali (GDPR art. 9/10), data bl-ingrossa u tnixxijiet ta\' metadata.',
+  'Alleen een zekere treffer waarschuwt; waarschijnlijk en mogelijk blijven informatief. Een uitgezette regel vuurt nergens.':
+      'Iwissi biss riżultat ċert; probabbli u possibbli jibqgħu informattivi. Regola mitfija ma tiskatta mkien.',
+  'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.':
+      'Mhux iċċekkjat: data personali, data speċjali u sigrieti. Il-kontroll tal-privatezza huwa mitfi taħt Sigurtà.',
   'Op deze slide': 'F\'din is-slide',
   'Tijdens presenteren': 'Waqt il-preżentazzjoni',
   'Classificatie en privacy': 'Klassifikazzjoni u privatezza',

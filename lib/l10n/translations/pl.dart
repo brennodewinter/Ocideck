@@ -1796,6 +1796,14 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
+      'Dane osobowe, dane szczególne i sekrety w tekście',
+  'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':
+      'Slajdy, notatki, tabele, kod, ścieżki plików i adresy URL są przeszukiwane na tym urządzeniu pod kątem numerów identyfikacyjnych, danych finansowych, danych kontaktowych, identyfikatorów cyfrowych, sekretów, szczególnych kategorii danych osobowych (RODO art. 9/10), danych masowych i wycieków metadanych.',
+  'Alleen een zekere treffer waarschuwt; waarschijnlijk en mogelijk blijven informatief. Een uitgezette regel vuurt nergens.':
+      'Ostrzega tylko trafienie pewne; prawdopodobne i możliwe pozostają informacyjne. Wyłączona reguła nigdzie nie zadziała.',
+  'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.':
+      'Niesprawdzone: dane osobowe, dane szczególne i sekrety. Kontrola prywatności jest wyłączona w Bezpieczeństwie.',
   'Op deze slide': 'Na tym slajdzie',
   'Tijdens presenteren': 'Podczas prezentacji',
   'Classificatie en privacy': 'Klasyfikacja i prywatność',

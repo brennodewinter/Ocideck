@@ -1787,6 +1787,14 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
+      'Persoonedate, bsunderi Date und Gheimnis im Täxt',
+  'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':
+      'Folie, Notize, Tabälle, Code, Dateipfäd und URLs wärded uf dem Grät durchsuecht nach Identifikationsnummere, Finanzdate, Kontaktdate, digitale Kennige, Gheimnis, bsunderi Kategorie vo Persoonedate (DSGVO Art. 9/10), Massedate und Metadate-Läck.',
+  'Alleen een zekere treffer waarschuwt; waarschijnlijk en mogelijk blijven informatief. Een uitgezette regel vuurt nergens.':
+      'Nur en sichere Träffer warnt; wahrschiinlich und möglich bliibed informativ. E deaktivierti Regle löst niene us.',
+  'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.':
+      'Nöd prüeft: Persoonedate, bsunderi Date und Gheimnis. D Dateschutzprüefig isch bi Sicherheit usgschalte.',
   'Op deze slide': 'Uf däre Folie',
   'Tijdens presenteren': 'Während em Präsentiere',
   'Classificatie en privacy': 'Iistuefig und Dateschutz',

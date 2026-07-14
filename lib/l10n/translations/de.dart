@@ -740,6 +740,14 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
+      'Personenbezogene Daten, besondere Kategorien und Geheimnisse im Text',
+  'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':
+      'Folien, Notizen, Tabellen, Code, Dateipfade und URLs werden auf diesem Gerät nach Identifikationsnummern, Finanzdaten, Kontaktdaten, digitalen Kennungen, Geheimnissen, besonderen Kategorien personenbezogener Daten (DSGVO Art. 9/10), Massendaten und Metadatenlecks durchsucht.',
+  'Alleen een zekere treffer waarschuwt; waarschijnlijk en mogelijk blijven informatief. Een uitgezette regel vuurt nergens.':
+      'Nur ein sicherer Treffer warnt; wahrscheinlich und möglich bleiben informativ. Eine deaktivierte Regel greift nirgends.',
+  'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.':
+      'Nicht geprüft: personenbezogene Daten, besondere Kategorien und Geheimnisse. Die Datenschutzprüfung ist unter Sicherheit ausgeschaltet.',
   'Op deze slide': 'Auf dieser Folie',
   'Tijdens presenteren': 'Während der Präsentation',
   'Classificatie en privacy': 'Einstufung und Datenschutz',

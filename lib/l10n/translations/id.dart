@@ -1783,6 +1783,14 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
+      'Data pribadi, data khusus, dan rahasia dalam teks',
+  'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':
+      'Slide, catatan, tabel, kode, jalur berkas, dan URL ditelusuri di perangkat ini untuk mencari nomor pengenal, data keuangan, data kontak, pengenal digital, rahasia, kategori khusus data pribadi (GDPR pasal 9/10), data massal, dan kebocoran metadata.',
+  'Alleen een zekere treffer waarschuwt; waarschijnlijk en mogelijk blijven informatief. Een uitgezette regel vuurt nergens.':
+      'Hanya kecocokan yang pasti yang memberi peringatan; kemungkinan besar dan mungkin tetap bersifat informatif. Aturan yang dimatikan tidak berlaku di mana pun.',
+  'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.':
+      'Tidak diperiksa: data pribadi, data khusus, dan rahasia. Pemeriksaan privasi dimatikan di Keamanan.',
   'Op deze slide': 'Pada slide ini',
   'Tijdens presenteren': 'Saat presentasi',
   'Classificatie en privacy': 'Klasifikasi dan privasi',

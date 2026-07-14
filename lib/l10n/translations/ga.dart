@@ -1819,6 +1819,14 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
+      'Sonraí pearsanta, sonraí speisialta agus rúin sa téacs',
+  'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':
+      'Cuardaítear sleamhnáin, nótaí, táblaí, cód, conairí comhad agus URLanna ar an ngléas seo le haghaidh uimhreacha aitheantais, sonraí airgeadais, sonraí teagmhála, aitheantóirí digiteacha, rún, catagóirí speisialta sonraí pearsanta (RGCS airt. 9/10), sonraí ollmhóra agus sceitheadh meiteashonraí.',
+  'Alleen een zekere treffer waarschuwt; waarschijnlijk en mogelijk blijven informatief. Een uitgezette regel vuurt nergens.':
+      'Ní thugann ach toradh cinnte rabhadh; fanann dóchúil agus féideartha faisnéiseach. Ní lasann riail dhíchumasaithe áit ar bith.',
+  'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.':
+      'Gan seiceáil: sonraí pearsanta, sonraí speisialta agus rúin. Tá an tseiceáil príobháideachais múchta faoi Slándáil.',
   'Op deze slide': 'Ar an sleamhnán seo',
   'Tijdens presenteren': 'Le linn cur i láthair',
   'Classificatie en privacy': 'Aicmiú agus príobháideachas',

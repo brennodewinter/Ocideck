@@ -66,13 +66,23 @@ String _fillParams(String template, Map<String, Object> values) {
   return out;
 }
 
-/// De controles die de slidekwaliteit-analyse altijd uitvoert, met per controle
-/// een korte verantwoording ([detail]) en de geldende parameters ([params],
+/// De controles die de slidekwaliteit-analyse uitvoert, met per controle een
+/// korte verantwoording ([detail]) en de geldende parameters ([params],
 /// opgebouwd uit de echte drempelconstanten). Getoond bij een groene balk zodat
 /// duidelijk is wat er is gecontroleerd, hoe en met welke grenzen. Houd in lijn
 /// met de checks in [SlideQualityAnalyzer.analyzeSlides].
+///
+/// De privacycontrole staat er alleen in als hij ook echt heeft gedraaid
+/// ([privacyEnabled]). De kop boven deze lijst zegt "uitgevoerde controles", en
+/// een controle die uitstaat opvoeren onder die kop is precies de leugen die een
+/// groene balk gevaarlijk maakt: dan leest "niets gevonden" als "er zit niets
+/// in". Staat hij uit, dan zegt het paneel dát in plaats hiervan — zie
+/// [SlideQualityPanel].
 List<({String title, String detail, String params})>
-slideQualityPerformedChecks(AppLocalizations l10n) {
+slideQualityPerformedChecks(
+  AppLocalizations l10n, {
+  required bool privacyEnabled,
+}) {
   // De tekstkrimp-grenzen worden als percentage getoond.
   final warnPct = (kTextDensityWarningScale * 100).round();
   final critPct = (kTextDensityCriticalScale * 100).round();
@@ -139,6 +149,18 @@ slideQualityPerformedChecks(AppLocalizations l10n) {
         },
       ),
     ),
+    if (privacyEnabled)
+      (
+        title: l10n.d(
+          'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst',
+        ),
+        detail: l10n.d(
+          'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.',
+        ),
+        params:
+            '${l10n.d('Alleen een zekere treffer waarschuwt; waarschijnlijk en mogelijk blijven informatief. Een uitgezette regel vuurt nergens.')} '
+            '${l10n.d('De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.')}',
+      ),
   ];
 }
 

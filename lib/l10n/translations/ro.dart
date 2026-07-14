@@ -1802,6 +1802,14 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
+      'Date personale, date speciale și secrete în text',
+  'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':
+      'Diapozitivele, notițele, tabelele, codul, căile de fișiere și URL-urile sunt căutate pe acest dispozitiv pentru numere de identificare, date financiare, date de contact, identificatori digitali, secrete, categorii speciale de date cu caracter personal (GDPR art. 9/10), date în masă și scurgeri de metadate.',
+  'Alleen een zekere treffer waarschuwt; waarschijnlijk en mogelijk blijven informatief. Een uitgezette regel vuurt nergens.':
+      'Doar o potrivire certă avertizează; probabilă și posibilă rămân informative. O regulă dezactivată nu se declanșează nicăieri.',
+  'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.':
+      'Neverificat: date personale, date speciale și secrete. Verificarea de confidențialitate este dezactivată la Securitate.',
   'Op deze slide': 'Pe acest diapozitiv',
   'Tijdens presenteren': 'În timpul prezentării',
   'Classificatie en privacy': 'Clasificare și confidențialitate',

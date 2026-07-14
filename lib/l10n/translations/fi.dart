@@ -1783,6 +1783,14 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
+      'Henkilötiedot, erityiset tiedot ja salaisuudet tekstissä',
+  'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':
+      'Diat, muistiinpanot, taulukot, koodi, tiedostopolut ja URL-osoitteet käydään läpi tällä laitteella tunnistenumeroiden, taloudellisten tietojen, yhteystietojen, digitaalisten tunnisteiden, salaisuuksien, erityisten henkilötietoryhmien (GDPR art. 9/10), massatietojen ja metatietovuotojen varalta.',
+  'Alleen een zekere treffer waarschuwt; waarschijnlijk en mogelijk blijven informatief. Een uitgezette regel vuurt nergens.':
+      'Vain varma osuma varoittaa; todennäköinen ja mahdollinen jäävät tiedoksi. Poistettu sääntö ei laukea missään.',
+  'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.':
+      'Ei tarkistettu: henkilötiedot, erityiset tiedot ja salaisuudet. Yksityisyystarkistus on kytketty pois kohdassa Turvallisuus.',
   'Op deze slide': 'Tässä diassa',
   'Tijdens presenteren': 'Esityksen aikana',
   'Classificatie en privacy': 'Luokittelu ja yksityisyys',

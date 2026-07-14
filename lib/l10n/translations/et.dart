@@ -1774,6 +1774,14 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
+      'Isikuandmed, eriliiki andmed ja saladused tekstis',
+  'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':
+      'Slaide, märkmeid, tabeleid, koodi, failiteid ja URL-e otsitakse selles seadmes läbi identifitseerivate numbrite, finantsandmete, kontaktandmete, digitaalsete identifikaatorite, saladuste, isikuandmete eriliikide (GDPR art 9/10), masseandmete ja metaandmete lekete suhtes.',
+  'Alleen een zekere treffer waarschuwt; waarschijnlijk en mogelijk blijven informatief. Een uitgezette regel vuurt nergens.':
+      'Hoiatab ainult kindel vaste; tõenäoline ja võimalik jäävad teavituslikuks. Väljalülitatud reegel ei rakendu kusagil.',
+  'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.':
+      'Kontrollimata: isikuandmed, eriliiki andmed ja saladused. Privaatsuse kontroll on Turvalisuse all välja lülitatud.',
   'Op deze slide': 'Sellel slaidil',
   'Tijdens presenteren': 'Esitluse ajal',
   'Classificatie en privacy': 'Klassifikatsioon ja privaatsus',

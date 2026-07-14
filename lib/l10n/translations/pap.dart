@@ -740,6 +740,14 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
+      'Datos personal, datos spesial i sekreto den e teksto',
+  'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':
+      'Slides, notanan, tabelnan, kódigo, kaminda di archivo i URL ta wòrdu buská riba e aparato aki pa number identifikadó, datos finansiero, datos di kontakto, identifikadó digital, sekreto, datos personal spesial (GDPR art. 9/10), datos na masa i lek di metadata.',
+  'Alleen een zekere treffer waarschuwt; waarschijnlijk en mogelijk blijven informatief. Een uitgezette regel vuurt nergens.':
+      'Solamente un resultado sigur ta advertí; probabel i posibel ta keda informativo. Un regla apagá no ta dispará niun kaminda.',
+  'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.':
+      'No chequeá: datos personal, datos spesial i sekreto. E kontròl di privasidat ta apagá na Seguridat.',
   'Op deze slide': 'Riba e slide aki',
   'Tijdens presenteren': 'Durante presentashon',
   'Classificatie en privacy': 'Klasifikashon i privacidat',
