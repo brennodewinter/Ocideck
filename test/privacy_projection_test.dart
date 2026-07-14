@@ -138,15 +138,19 @@ void main() {
       expect(out.keywords, '$kRedactionToken, fraude');
     });
 
-    test('redigeert de gebruikersnotities-sidecar', () {
+    test('laat de gebruikersnotities met rust — die zijn van de ontvanger', () {
+      // Gebruikersnotities gaan naar een sidecar en bereiken geen exportartefact.
+      // Ze projecteren zou schaden in plaats van voorkomen: de presenter schrijft
+      // de hele notitiemap terug, dus we zouden blokken over iemands eigen
+      // aantekeningen zetten.
       final slide = bulletSlide();
       final deck = Deck(
         title: 'D',
         slides: [slide],
-        userNotes: {slide.id: 'cursist: [[naam]]'},
+        userNotes: {slide.id: 'mijn eigen aantekening'},
       );
       final out = PrivacyProjection.forAudience(deck).deck;
-      expect(out.userNotes[slide.id]!.contains('naam'), isFalse);
+      expect(out.userNotes[slide.id], 'mijn eigen aantekening');
     });
 
     test('laat de bron ongemoeid — het deck is niet gemuteerd', () {

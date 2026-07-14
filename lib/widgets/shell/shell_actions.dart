@@ -805,13 +805,13 @@ void presentDeck(
   ).length.clamp(0, renderSlides.length - 1);
   FullscreenPresenter.present(
     context,
-    slides: renderSlides,
-    projectPath: deck.projectPath,
-    themeProfile: deck.themeProfile,
+    // De projectiegrens. Presenteren is het ontvangende oppervlak bij uitstek:
+    // wat hier op het scherm komt, ziet de zaal.
+    audienceDeck: PrivacyProjection.forAudience(
+      deck.copyWith(slides: renderSlides),
+    ),
     cockpitColorScheme: settings.cockpitColorScheme,
     initialIndex: renderInitial,
-    tlp: deck.tlp,
-    organization: deck.organization,
     showClassificationWatermark: settings.classificationWatermarkEnabled,
     allowRemoteMedia: settings.allowRemoteMedia,
     showRehearsalSummary: deck.showRehearsalSummary,

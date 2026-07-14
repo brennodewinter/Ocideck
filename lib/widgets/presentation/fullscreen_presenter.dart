@@ -21,6 +21,7 @@ import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../models/timeline.dart';
 import '../../services/markdown_service.dart';
+import '../../services/privacy/privacy_projection.dart';
 import '../../services/mermaid_render_service.dart';
 import '../../services/rehearsal_controller.dart';
 import '../../services/rich_text_layout.dart';
@@ -176,15 +177,15 @@ class FullscreenPresenter extends StatefulWidget {
   /// Entry point used by the app: pick dual-screen mode when a second display is
   /// available on desktop, otherwise the single-window presenter. Any failure
   /// to open the second window falls back to single-window mode.
+  /// Het instappunt dat de app gebruikt. Neemt bewust een [AudienceDeck]:
+  /// presenteren is het ontvangende oppervlak bij uitstek — wat hier op het
+  /// scherm komt, ziet de zaal. De projectiegrens hoort dus in het typesysteem
+  /// te staan en niet in een afspraak. Zie `PrivacyProjection`.
   static Future<void> present(
     BuildContext context, {
-    required List<Slide> slides,
-    required String? projectPath,
-    required ThemeProfile themeProfile,
+    required AudienceDeck audienceDeck,
     CockpitColorScheme cockpitColorScheme = CockpitColorScheme.standard,
     required int initialIndex,
-    TlpLevel tlp = TlpLevel.none,
-    String organization = '',
     bool showClassificationWatermark = false,
     bool allowRemoteMedia = false,
     Duration? targetDuration,
@@ -195,6 +196,14 @@ class FullscreenPresenter extends StatefulWidget {
     Map<String, String> initialUserNotes = const {},
     void Function(Map<String, String>)? onUserNotesChanged,
   }) async {
+    // Alles wat de render nodig heeft, komt uit het geprojecteerde deck.
+    final slides = audienceDeck.slides;
+    final deck = audienceDeck.deck;
+    final projectPath = deck.projectPath;
+    final themeProfile = deck.themeProfile;
+    final tlp = deck.tlp;
+    final organization = deck.organization;
+
     var displayCount = 0;
     if (supportsDualScreenPresenter) {
       try {

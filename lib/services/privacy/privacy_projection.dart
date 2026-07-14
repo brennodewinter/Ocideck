@@ -109,6 +109,13 @@ class PrivacyProjection {
     // De deckvelden die de documentmetadata voeden (titel, auteur, organisatie,
     // trefwoorden) reizen mee in PDF-properties en PPTX-docProps — leesbaar,
     // ook al staat er op de slide zelf niets van te zien.
+    //
+    // Deck.userNotes staat er bewust NIET bij. Dat zijn de notities die de
+    // ontvanger zélf typt; ze gaan naar een sidecar naast het bestand
+    // (`user_notes_codec.dart`) en bereiken geen enkel exportartefact. Ze wél
+    // projecteren zou schade doen in plaats van voorkomen: de presenter schrijft
+    // de notitiemap in haar geheel terug, dus één bewerking tijdens het
+    // presenteren zou blokken over iemands eigen aantekeningen zetten.
     final projected = deck.copyWith(
       slides: slides,
       title: take(deck.title),
@@ -116,10 +123,6 @@ class PrivacyProjection {
       organization: take(deck.organization),
       description: take(deck.description),
       keywords: take(deck.keywords),
-      userNotes: {
-        for (final entry in deck.userNotes.entries)
-          entry.key: take(entry.value),
-      },
     );
 
     return AudienceDeck._(projected, count);
