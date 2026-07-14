@@ -98,6 +98,20 @@ void main() {
     expect(find.textContaining('Opgelost na hertest'), findsOneWidget);
   });
 
+  testWidgets('a finding linked to a test shows the test id chip (#8)', (
+    tester,
+  ) async {
+    final md = const FindingSpec(
+      heading: 'F-1 · Linked thing',
+      testId: 'WSTG-ATHN-07',
+    ).toMarkdown();
+    await tester.pumpWidget(_host(_finding(md)));
+    await tester.pump();
+
+    expect(tester.takeException(), isNull);
+    expect(find.text('WSTG-ATHN-07'), findsOneWidget);
+  });
+
   testWidgets('a finding with no CVSS renders without a badge or a crash', (
     tester,
   ) async {
