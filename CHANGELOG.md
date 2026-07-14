@@ -8,6 +8,14 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Changed
+- **Notes blocks now open only when there is something in them.** *Speaker notes*
+  and *User notes* both started expanded, always — two tall empty editors under
+  every slide, on the majority of slides that have no notes at all. They now start
+  collapsed when the field is empty and expanded when it is not, so the block is
+  open exactly when it has something to say. Opening or closing one by hand sticks
+  while you stay on that slide; stepping to the next slide asks the question again
+  for that slide, which is the only way the default can stay true as you move
+  through a deck.
 - **Slide settings, redesigned.** The block had grown one feature at a time, and it
   showed: seven settings in one flat list with three different row shapes mixed
   together — a full-width audio card, checkboxes with the control on the *left*,
