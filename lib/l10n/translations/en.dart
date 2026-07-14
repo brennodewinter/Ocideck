@@ -922,6 +922,17 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
+      ' This slide also carries an identifying detail, so this is traceable to a person.',
+  'Bijzonder persoonsgegeven (AVG art. 9/10)':
+      'Special category of personal data (GDPR art. 9/10)',
+  'gezondheidsgegeven': 'health data',
+  'strafrechtelijk gegeven': 'criminal-law data',
+  'religie of levensovertuiging': 'religion or belief',
+  'vakbondslidmaatschap': 'trade-union membership',
+  'biometrisch gegeven': 'biometric data',
+  'genetisch gegeven': 'genetic data',
+  'parketnummer': 'prosecution case number',
   'nationaal identificatienummer': 'national identification number',
   'Privacy Shield (ontwerp)': 'Privacy Shield (design)',
   'Mogelijk geheim': 'Possible secret',

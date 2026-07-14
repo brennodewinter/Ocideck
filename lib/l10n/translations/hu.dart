@@ -1787,6 +1787,17 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
+      ' Ezen a dián azonosító adat is szerepel, tehát ez visszavezethető egy személyre.',
+  'Bijzonder persoonsgegeven (AVG art. 9/10)':
+      'Személyes adatok különleges kategóriája (GDPR 9/10. cikk)',
+  'gezondheidsgegeven': 'egészségügyi adat',
+  'strafrechtelijk gegeven': 'büntetőjogi adat',
+  'religie of levensovertuiging': 'vallás vagy meggyőződés',
+  'vakbondslidmaatschap': 'szakszervezeti tagság',
+  'biometrisch gegeven': 'biometrikus adat',
+  'genetisch gegeven': 'genetikai adat',
+  'parketnummer': 'ügyészségi ügyszám',
   'nationaal identificatienummer': 'nemzeti azonosító szám',
   'Privacy Shield (ontwerp)': 'Privacy Shield (terv)',
   'Mogelijk geheim': 'Lehetséges titok',

@@ -1813,6 +1813,17 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
+      ' Este diapositivo contém também um dado identificativo, pelo que isto é atribuível a uma pessoa.',
+  'Bijzonder persoonsgegeven (AVG art. 9/10)':
+      'Categoria especial de dados pessoais (RGPD art. 9.º/10.º)',
+  'gezondheidsgegeven': 'dado de saúde',
+  'strafrechtelijk gegeven': 'dado penal',
+  'religie of levensovertuiging': 'religião ou convicção',
+  'vakbondslidmaatschap': 'filiação sindical',
+  'biometrisch gegeven': 'dado biométrico',
+  'genetisch gegeven': 'dado genético',
+  'parketnummer': 'número de processo do Ministério Público',
   'nationaal identificatienummer': 'número de identificação nacional',
   'Privacy Shield (ontwerp)': 'Privacy Shield (design)',
   'Mogelijk geheim': 'Possível segredo',

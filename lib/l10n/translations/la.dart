@@ -1799,6 +1799,17 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
+      ' In hac pagina etiam datum identificans est, itaque hoc ad personam referri potest.',
+  'Bijzonder persoonsgegeven (AVG art. 9/10)':
+      'Genus speciale datorum personalium (GDPR art. 9/10)',
+  'gezondheidsgegeven': 'datum valetudinis',
+  'strafrechtelijk gegeven': 'datum criminale',
+  'religie of levensovertuiging': 'religio vel persuasio',
+  'vakbondslidmaatschap': 'sodalitas collegii opificum',
+  'biometrisch gegeven': 'datum biometricum',
+  'genetisch gegeven': 'datum geneticum',
+  'parketnummer': 'numerus causae criminalis',
   'nationaal identificatienummer': 'numerus identitatis nationalis',
   'Privacy Shield (ontwerp)': 'Privacy Shield (consilium)',
   'Mogelijk geheim': 'Arcanum possibile',

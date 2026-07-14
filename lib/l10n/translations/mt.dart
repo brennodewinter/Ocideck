@@ -1806,6 +1806,17 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
+      ' F\'din is-slide hemm ukoll dettall li jidentifika, allura dan jista\' jintrabat ma\' persuna.',
+  'Bijzonder persoonsgegeven (AVG art. 9/10)':
+      'Kategorija speċjali ta\' data personali (GDPR art. 9/10)',
+  'gezondheidsgegeven': 'data dwar is-saħħa',
+  'strafrechtelijk gegeven': 'data kriminali',
+  'religie of levensovertuiging': 'reliġjon jew twemmin',
+  'vakbondslidmaatschap': 'sħubija f\'unjin',
+  'biometrisch gegeven': 'data bijometrika',
+  'genetisch gegeven': 'data ġenetika',
+  'parketnummer': 'numru tal-kawża tal-prosekuzzjoni',
   'nationaal identificatienummer': 'numru ta\' identifikazzjoni nazzjonali',
   'Privacy Shield (ontwerp)': 'Privacy Shield (disinn)',
   'Mogelijk geheim': 'Sigriet possibbli',

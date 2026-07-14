@@ -1819,6 +1819,17 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
+      ' Tá sonra aitheantais ar an sleamhnán seo freisin, mar sin tá sé inrianaithe chuig duine.',
+  'Bijzonder persoonsgegeven (AVG art. 9/10)':
+      'Catagóir speisialta sonraí pearsanta (RGCS airt. 9/10)',
+  'gezondheidsgegeven': 'sonraí sláinte',
+  'strafrechtelijk gegeven': 'sonraí coiriúla',
+  'religie of levensovertuiging': 'reiligiún nó creideamh',
+  'vakbondslidmaatschap': 'ballraíocht cheardchumainn',
+  'biometrisch gegeven': 'sonraí bithmhéadracha',
+  'genetisch gegeven': 'sonraí géiniteacha',
+  'parketnummer': 'uimhir cháis ionchúisimh',
   'nationaal identificatienummer': 'uimhir aitheantais náisiúnta',
   'Privacy Shield (ontwerp)': 'Privacy Shield (dearadh)',
   'Mogelijk geheim': 'Rún féideartha',

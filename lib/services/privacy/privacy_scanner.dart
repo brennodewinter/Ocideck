@@ -21,6 +21,7 @@ import '../../models/slide.dart';
 import 'privacy_allowlist.dart';
 import 'privacy_checksums.dart';
 import 'privacy_eu_rules.dart';
+import 'privacy_special_rules.dart';
 import 'privacy_secret_rules.dart';
 
 /// Eén tekstfragment van een slide, met de veldnaam waar het uit komt.
@@ -66,9 +67,11 @@ class PrivacyScanner {
       _scanFragment(fragment, kDeckWidePrivacyIndex, findings);
     }
     for (var i = 0; i < deck.slides.length; i++) {
+      final slideFindings = <PrivacyFinding>[];
       for (final fragment in _slideFragments(deck.slides[i])) {
-        _scanFragment(fragment, i, findings);
+        _scanFragment(fragment, i, slideFindings);
       }
+      findings.addAll(_escalateSpecialCategories(slideFindings));
     }
     return PrivacyScanResult(findings);
   }
@@ -79,7 +82,31 @@ class PrivacyScanner {
     for (final fragment in _slideFragments(slide)) {
       _scanFragment(fragment, index, findings);
     }
-    return PrivacyScanResult(findings);
+    return PrivacyScanResult(_escalateSpecialCategories(findings));
+  }
+
+  /// De co-occurrence-escalator (PRIVACY_SHIELD §5.6).
+  ///
+  /// Een trefwoord als "diagnose" of "verdachte" meldt op zichzelf niets dat de
+  /// gebruiker onderbreekt — een slide *óver* de AVG noemt die woorden nu eenmaal,
+  /// en een privacyles die alarm slaat is binnen een dag uitgezet.
+  ///
+  /// Staat er op dezelfde slide óók een gegeven dat één persoon aanwijst (BSN,
+  /// nationaal nummer, e-mailadres), dan is het bijzondere gegeven herleidbaar tot
+  /// een persoon — en dát is precies wat artikel 9 beschermt. Dán pas gaat de
+  /// melding omhoog.
+  List<PrivacyFinding> _escalateSpecialCategories(
+    List<PrivacyFinding> findings,
+  ) {
+    if (!findings.any(identifiesAPerson)) return findings;
+    return [
+      for (final f in findings)
+        if (f.family == PrivacyFamily.specialCategory &&
+            f.confidence == PrivacyConfidence.possible)
+          f.withConfidence(PrivacyConfidence.certain)
+        else
+          f,
+    ];
   }
 
   void _scanFragment(
@@ -93,7 +120,83 @@ class PrivacyScanner {
     _scanBsn(fragment, slideIndex, out);
     _scanSecrets(fragment, slideIndex, out);
     _scanEuIdentifiers(fragment, slideIndex, out);
+    _scanSpecialCategories(fragment, slideIndex, out);
   }
+
+  // ── Bijzondere persoonsgegevens (AVG art. 9/10) ───────────────────────────
+
+  /// Trefwoorden, genetische notatie, en het parketnummer.
+  ///
+  /// De trefwoorden leveren bewust niet meer dan `possible` op. Ze worden pas een
+  /// echte melding via de escalator, wanneer er op dezelfde slide iemand staat om
+  /// ze aan te koppelen.
+  void _scanSpecialCategories(
+    _Fragment fragment,
+    int slideIndex,
+    List<PrivacyFinding> out,
+  ) {
+    final lower = fragment.text.toLowerCase();
+
+    for (final rule in specialCategoryRules) {
+      for (final word in rule.keywords) {
+        final at = lower.indexOf(word);
+        if (at < 0) continue;
+        out.add(
+          _keywordFinding(fragment, slideIndex, rule.id, at, word.length),
+        );
+        // Eén melding per familie per fragment: tien synoniemen in één zin
+        // leveren geen tien meldingen op.
+        break;
+      }
+    }
+
+    for (final genetic in geneticPatterns) {
+      for (final match in genetic.pattern.allMatches(fragment.text)) {
+        out.add(
+          _finding(
+            fragment,
+            slideIndex,
+            match,
+            ruleId: genetic.id,
+            family: PrivacyFamily.specialCategory,
+            confidence: PrivacyConfidence.possible,
+          ),
+        );
+      }
+    }
+
+    for (final match in parketnummerPattern.allMatches(fragment.text)) {
+      out.add(
+        _finding(
+          fragment,
+          slideIndex,
+          match,
+          ruleId: 'nl.parketnummer',
+          family: PrivacyFamily.specialCategory,
+          // Geen checksum, maar een formaat dat in gewone tekst niet voorkomt.
+          confidence: PrivacyConfidence.likely,
+        ),
+      );
+    }
+  }
+
+  PrivacyFinding _keywordFinding(
+    _Fragment fragment,
+    int slideIndex,
+    String ruleId,
+    int start,
+    int length,
+  ) => PrivacyFinding(
+    ruleId: ruleId,
+    family: PrivacyFamily.specialCategory,
+    confidence: PrivacyConfidence.possible,
+    slideIndex: slideIndex,
+    field: fragment.field,
+    fragmentIndex: fragment.index,
+    start: start,
+    end: start + length,
+    maskedSample: maskValue(fragment.text.substring(start, start + length)),
+  );
 
   // ── Europese identificatienummers ─────────────────────────────────────────
 

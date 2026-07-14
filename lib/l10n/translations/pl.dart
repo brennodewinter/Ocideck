@@ -1796,6 +1796,17 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
+      ' Na tym slajdzie jest też dana identyfikująca, więc można to powiązać z osobą.',
+  'Bijzonder persoonsgegeven (AVG art. 9/10)':
+      'Szczególna kategoria danych osobowych (RODO art. 9/10)',
+  'gezondheidsgegeven': 'dane o zdrowiu',
+  'strafrechtelijk gegeven': 'dane karne',
+  'religie of levensovertuiging': 'religia lub światopogląd',
+  'vakbondslidmaatschap': 'przynależność do związku zawodowego',
+  'biometrisch gegeven': 'dane biometryczne',
+  'genetisch gegeven': 'dane genetyczne',
+  'parketnummer': 'sygnatura sprawy karnej',
   'nationaal identificatienummer': 'krajowy numer identyfikacyjny',
   'Privacy Shield (ontwerp)': 'Privacy Shield (projekt)',
   'Mogelijk geheim': 'Możliwy sekret',

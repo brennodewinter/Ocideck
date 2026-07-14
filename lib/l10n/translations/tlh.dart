@@ -1758,6 +1758,16 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
+      ' nagh beQvamDaq nuv ngu\'meH De\' je tu\'lu\', vaj nuv Daq DevlaH.',
+  'Bijzonder persoonsgegeven (AVG art. 9/10)': 'nuv De\' pIn (GDPR art. 9/10)',
+  'gezondheidsgegeven': 'pIvghor De\'',
+  'strafrechtelijk gegeven': 'ghom qIch De\'',
+  'religie of levensovertuiging': 'lalDan pagh Har',
+  'vakbondslidmaatschap': 'vum ghom tlhej',
+  'biometrisch gegeven': 'porgh De\'',
+  'genetisch gegeven': 'tIq De\'',
+  'parketnummer': 'qIch mI\'',
   'nationaal identificatienummer': 'wo\' nuv mI\'',
   'Privacy Shield (ontwerp)': 'Privacy Shield (qech)',
   'Mogelijk geheim': 'chaq pegh',

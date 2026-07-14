@@ -94,6 +94,21 @@ class PrivacyFinding {
   });
 
   bool get isDeckWide => slideIndex == kDeckWidePrivacyIndex;
+
+  /// Dezelfde bevinding, met een andere zekerheid. Voor de co-occurrence-
+  /// escalator: een bijzonder gegeven wordt pas een echte melding zodra er op
+  /// dezelfde slide iemand staat om het aan te koppelen.
+  PrivacyFinding withConfidence(PrivacyConfidence value) => PrivacyFinding(
+    ruleId: ruleId,
+    family: family,
+    confidence: value,
+    slideIndex: slideIndex,
+    field: field,
+    fragmentIndex: fragmentIndex,
+    start: start,
+    end: end,
+    maskedSample: maskedSample,
+  );
 }
 
 /// Sentinel voor een bevinding die niet bij één slide hoort (frontmatter,

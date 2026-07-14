@@ -284,12 +284,36 @@ String _formatPrivacy(AppLocalizations l10n, SlideQualityIssue issue) {
           ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.',
         )
       : l10n.d(' Overweeg dit te redigeren met [[dubbele blokhaken]].');
-  // Een API-sleutel is geen persoonsgegeven maar een geheim; hem zo noemen zou
-  // de melding onbegrijpelijk maken voor precies wie hem moet lezen.
-  final prefix = issue.kind == SlideQualityIssueKind.privacySecret
-      ? l10n.d('Mogelijk geheim')
-      : l10n.d('Mogelijk persoonsgegeven');
-  return '$prefix — $rule ($sample).$suffix';
+  // Een API-sleutel is geen persoonsgegeven maar een geheim, en een diagnose is
+  // geen gewoon persoonsgegeven maar een bijzonder. Ze allemaal hetzelfde noemen
+  // maakt de melding onbegrijpelijk voor precies wie hem moet lezen.
+  final prefix = switch (issue.kind) {
+    SlideQualityIssueKind.privacySecret => l10n.d('Mogelijk geheim'),
+    SlideQualityIssueKind.privacySpecialCategory => l10n.d(
+      'Bijzonder persoonsgegeven (AVG art. 9/10)',
+    ),
+    _ => l10n.d('Mogelijk persoonsgegeven'),
+  };
+  return '$prefix — $rule ($sample).${_privacySuffix(l10n, issue, suffix)}';
+}
+
+/// De staart van de melding.
+///
+/// Bij een geëscaleerd bijzonder gegeven zegt hij *waarom* de melding zwaarder
+/// is: er staat iemand op de slide om het aan te koppelen. Zonder die uitleg
+/// leest de gebruiker een willekeurige verzwaring in plaats van een reden.
+String _privacySuffix(
+  AppLocalizations l10n,
+  SlideQualityIssue issue,
+  String fallback,
+) {
+  if (issue.kind == SlideQualityIssueKind.privacySpecialCategory &&
+      issue.severity != MarkdownValidationSeverity.informational) {
+    return l10n.d(
+      ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.',
+    );
+  }
+  return fallback;
 }
 
 /// Het leesbare label van een detectieregel.
@@ -300,6 +324,13 @@ String privacyRuleLabel(AppLocalizations l10n, String ruleId) {
     'nl.bsn' => l10n.d('burgerservicenummer (BSN)'),
     'fin.iban' => l10n.d('bankrekeningnummer (IBAN)'),
     'contact.email' => l10n.d('e-mailadres'),
+    'special.health' => l10n.d('gezondheidsgegeven'),
+    'special.criminal' => l10n.d('strafrechtelijk gegeven'),
+    'special.religion' => l10n.d('religie of levensovertuiging'),
+    'special.union' => l10n.d('vakbondslidmaatschap'),
+    'special.biometric' => l10n.d('biometrisch gegeven'),
+    'special.genetic' => l10n.d('genetisch gegeven'),
+    'nl.parketnummer' => l10n.d('parketnummer'),
     _ when _euNumberNames.containsKey(ruleId) =>
       '${l10n.d('nationaal identificatienummer')} (${_euNumberNames[ruleId]})',
     'secret.private_key' => l10n.d('private sleutel'),

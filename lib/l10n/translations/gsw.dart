@@ -1787,6 +1787,17 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
+      ' Uf dere Folie staht au es identifizierends Datum, drum isch das ere Person zuezordne.',
+  'Bijzonder persoonsgegeven (AVG art. 9/10)':
+      'Bsunderi Kategorie vo Persoonedate (DSGVO Art. 9/10)',
+  'gezondheidsgegeven': 'Gsundheitsdate',
+  'strafrechtelijk gegeven': 'strafrächtlichs Datum',
+  'religie of levensovertuiging': 'Religion oder Wältaschauig',
+  'vakbondslidmaatschap': 'Gwerkschaftszuegehörigkeit',
+  'biometrisch gegeven': 'biometrischs Datum',
+  'genetisch gegeven': 'genetischs Datum',
+  'parketnummer': 'Aktezeiche vo de Staatsawaltschaft',
   'nationaal identificatienummer': 'nationali Identifikationsnummere',
   'Privacy Shield (ontwerp)': 'Privacy Shield (Entwurf)',
   'Mogelijk geheim': 'Möglichs Gheimnis',

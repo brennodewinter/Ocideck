@@ -1785,6 +1785,17 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
+      ' Na tej prosojnici je tudi identifikacijski podatek, zato je to mogoče povezati z osebo.',
+  'Bijzonder persoonsgegeven (AVG art. 9/10)':
+      'Posebna vrsta osebnih podatkov (GDPR čl. 9/10)',
+  'gezondheidsgegeven': 'zdravstveni podatek',
+  'strafrechtelijk gegeven': 'kazenskopravni podatek',
+  'religie of levensovertuiging': 'vera ali prepričanje',
+  'vakbondslidmaatschap': 'članstvo v sindikatu',
+  'biometrisch gegeven': 'biometrični podatek',
+  'genetisch gegeven': 'genetski podatek',
+  'parketnummer': 'opravilna številka kazenske zadeve',
   'nationaal identificatienummer': 'nacionalna identifikacijska številka',
   'Privacy Shield (ontwerp)': 'Privacy Shield (zasnova)',
   'Mogelijk geheim': 'Možna skrivnost',

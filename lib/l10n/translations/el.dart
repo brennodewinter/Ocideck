@@ -1811,6 +1811,17 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
+      ' Σε αυτή τη διαφάνεια υπάρχει και ένα στοιχείο ταυτοποίησης, άρα αυτό ανάγεται σε πρόσωπο.',
+  'Bijzonder persoonsgegeven (AVG art. 9/10)':
+      'Ειδική κατηγορία προσωπικών δεδομένων (GDPR άρθρο 9/10)',
+  'gezondheidsgegeven': 'δεδομένο υγείας',
+  'strafrechtelijk gegeven': 'ποινικό δεδομένο',
+  'religie of levensovertuiging': 'θρησκεία ή πεποιθήσεις',
+  'vakbondslidmaatschap': 'συνδικαλιστική ιδιότητα',
+  'biometrisch gegeven': 'βιομετρικό δεδομένο',
+  'genetisch gegeven': 'γενετικό δεδομένο',
+  'parketnummer': 'αριθμός δικογραφίας',
   'nationaal identificatienummer': 'εθνικός αριθμός ταυτοποίησης',
   'Privacy Shield (ontwerp)': 'Privacy Shield (σχεδιασμός)',
   'Mogelijk geheim': 'Πιθανό μυστικό',
