@@ -302,6 +302,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   Translated into every interface language.
 
 ### Security
+- **The online CVE switch now says what it costs you.** Turning on *CVE opzoeken
+  (online)* sends your search term to the configured mirror — and, because the
+  lookup falls through on a miss, the same term then goes to **ENISA and MITRE**
+  as well. For a pentester, *which* vulnerability you are looking up is often the
+  most sensitive thing they know: it discloses what is being investigated, and by
+  implication where the weakness is. That was already true, and was explained
+  nowhere near the switch. A PrivacyKat badge now sits next to it, and hovering
+  it spells out exactly that. It blocks nothing — it makes the trade visible
+  while the choice is still yours.
+
 - **The RFC 3161 timestamp panel no longer shows a "verified" badge for a
   token it hasn't verified.** The panel displayed a green check and
   "Getijdstempeld op &lt;time&gt;" whenever the token's message imprint matched
@@ -373,7 +383,44 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   when the scope object is rated, otherwise the base score) and renders the same
   in the app and in exports.
 
+### Added
+- **The security module now says what it actually has.** *Settings →
+  Uitbreidingen → Informatieveiligheid* used to report exactly one thing —
+  "Gegevens lokaal beschikbaar" — which left open whether that meant a full CWE
+  list or an empty shell. It now lists **what is available, in counts**: CWE
+  weaknesses, WSTG test cases, MIAUW requirements, CVSS score-table rows and
+  finding templates, each with the upstream standard it follows, plus the version
+  of the data pack in use.
+
+  The counts come from the catalogues the app *actually queries*, not from what a
+  pack claims to contain. That distinction is the point: a reassuring tick over an
+  empty list is worse than no tick at all.
+
+  **Nu bijwerken** re-fetches the reference data even when a verified pack is
+  already cached — which is exactly when you want to know whether something newer
+  exists. Previously that path short-circuited on the cache, so a refresh could
+  only ever have been a button that did nothing. The fingerprint check still runs:
+  forcing an update means fetching again, not verifying less.
+
+- **You can search the settings.** There are around eighty of them now, spread
+  over twelve tabs, and finding one meant knowing which tab a developer had
+  filed it under. A search box sits in the settings header: type and you get the
+  matching settings with the tab and section they live in; click one and it jumps
+  there, scrolls the section into view and flashes it.
+
+  It searches synonyms too, not just what is printed on screen — type `youtube`,
+  `vimeo` or `mp4` and you land on **Online media**, which is the setting you
+  actually wanted and is not called any of those things. That matters most for
+  exactly the people who don't know the app's vocabulary yet.
+
 ### Changed
+- **A video slide no longer nags for a title or speaker notes.** The
+  accessibility nudge that asked every video for a description was excessive: a
+  clip that speaks for itself needs no title, and the video editor has no caption
+  or alt-text field to silence the tip with — only a title. So it fired on
+  essentially every video and could not be answered on its own terms. Images and
+  charts keep their description nudge, where there *is* a field to fill in.
+
 - **MIAUW slides use the width better.** The finding, checklist, scope-matrix and
   findings-summary slides had a wide side margin (14% of the slide) that pushed
   content into extra pages. The side margin is narrowed (content grows from
@@ -384,6 +431,23 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   content.
 
 ### Fixed
+- **Online video did not work, in two different ways at once.** A YouTube, Vimeo
+  or `.mp4` link on a video slide was reported as *"Video: bestand niet gevonden"*.
+  The missing-media check ran `File(...).existsSync()` over *any* video or image
+  path, and the path resolver knows only local paths — so it glued the URL onto
+  the project folder (`<project>/https:/youtu.be/…`), found nothing there, and
+  called an online source a missing file. The URL gate now sits in front of the
+  disk check, so an online source is never reported as missing.
+
+  Separately, and confusingly at the same time, those slides showed *"Online media
+  staat uit"* even with the setting **on**. The `allowRemoteMedia` flag is handed
+  to each preview by hand and defaults to `false` (fail-closed, deliberately), but
+  four surfaces never passed it — including the thumbnail rail, which is the only
+  slide preview you actually see while editing. So online media was hard-off in
+  the editor no matter what the settings said. The flag now reaches the rail, the
+  full-deck preview, play-only mode and the presenter. Export stays fail-closed on
+  purpose: an online source is exported as a clickable link, not baked in.
+
 - **Three source files were invisible to `grep` and unreviewable in `git diff`.**
   `tabs_provider.dart`, `slide_dedup_service.dart` and `annotation_codec.dart`
   each held a control character as a raw *byte* inside a string literal (a NUL

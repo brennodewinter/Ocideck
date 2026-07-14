@@ -527,6 +527,9 @@ class FullDeckPreview extends ConsumerWidget {
                     cockpitColorScheme: ref
                         .watch(settingsProvider)
                         .cockpitColorScheme,
+                    allowRemoteMedia: ref
+                        .watch(settingsProvider)
+                        .allowRemoteMedia,
                     onLinkTap: openExternalUrl,
                     slideNumber: i + 1,
                     slideCount: deck.slides.length,

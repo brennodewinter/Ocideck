@@ -47,6 +47,10 @@ const Set<String> uncoveredBaseline = {
   'lib/services/cvss/cvss4_lookup.dart',
   // NO EXECUTABLE LINES: const configuration only.
   'lib/services/secmodule/sec_pack_config.dart',
+  // NO EXECUTABLE LINES: const data table — the settings search index. The
+  // entries themselves are asserted in test/settings_search_test.dart, which
+  // also guards that every section title in here is still rendered.
+  'lib/widgets/dialogs/parts/settings_dialog_search_index.dart',
   // NO EXECUTABLE LINES: a single `export`.
   'lib/widgets/markdown_notes_editor.dart',
   // NO EXECUTABLE LINES: a single enum declaration.

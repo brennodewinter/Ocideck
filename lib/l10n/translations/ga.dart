@@ -1909,6 +1909,20 @@ const _dutchSourceAddGa = <String, String>{
   'toegangstoken (JWT)': 'comharthán rochtana (JWT)',
   'databaseverbinding met wachtwoord': 'nasc bunachair sonraí le pasfhocal',
   'wachtwoord in klare tekst': 'pasfhocal i ngnáth-théacs',
+  'Wat er lokaal beschikbaar is': 'A bhfuil ar fáil go háitiúil',
+  'Gegevenspakket': 'Pacáiste sonraí',
+  'Nu bijwerken': 'Nuashonraigh anois',
+  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
+      'Sonraí ar fáil go háitiúil — déantar cuardaigh ar an ngléas seo; ní fhágann aon rud é.',
+  'Zwakheden (CWE)': 'Laigí (CWE)',
+  'Testgevallen (WSTG)': 'Cásanna tástála (WSTG)',
+  'MIAUW-eisen': 'Riachtanais MIAUW',
+  'CVSS-scoretabel': 'Tábla scór CVSS',
+  'Bevindingsjablonen': 'Teimpléid aimsithe',
+  'Zoek een instelling': 'Cuardaigh socrú',
+  'Geen instelling gevonden': 'Níor aimsíodh aon socrú',
+  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
+      'Téann do théarma cuardaigh chuig an scáthán CVE atá cumraithe, agus mura bhfaigheann sé sin aon rud, chuig ENISA agus MITRE freisin. Is féidir leo siúd a riarann na freastalaithe sin a thuiscint cén leochaileacht ar leith atá á lorg agat — agus mar sin cén leochaileacht atá á scrúdú agat.',
   'Accepteren': 'Glac leis',
   'Accepteren + waarschuwen': 'Glac leis + tabhair rabhadh',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

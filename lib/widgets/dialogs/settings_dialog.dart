@@ -17,6 +17,7 @@ import '../../services/recovery_service.dart';
 import '../../services/classification_enforcement_policy.dart';
 import '../../services/webdav_service.dart';
 import '../../services/secmodule/sec_module_provisioner.dart';
+import '../../services/secmodule/sec_reference_inventory.dart';
 import '../../services/slide_quality_analyzer.dart';
 import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';
@@ -31,6 +32,7 @@ import '../../l10n/slide_quality_localization.dart';
 import '../../models/privacy_disposition.dart';
 import '../editors/advanced_section.dart';
 import '../language_flag.dart';
+import '../privacy_badge.dart';
 import '../privacy_statement_content.dart';
 import '../reader/documentation_search_tab.dart';
 
@@ -47,6 +49,8 @@ part 'parts/settings_dialog_modules.dart';
 part 'parts/settings_dialog_checklists.dart';
 part 'parts/settings_dialog_about.dart';
 part 'parts/settings_dialog_hex_color.dart';
+part 'parts/settings_dialog_search.dart';
+part 'parts/settings_dialog_search_index.dart';
 
 TextStyle _fontStyle(String font, TextStyle base) {
   return base.copyWith(fontFamily: font);
@@ -166,6 +170,20 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   String? _highlightedThemeField;
   final _themeFieldKeys = <String, GlobalKey>{};
 
+  /// Anchors for the settings search: every `_sectionTitle` registers a key
+  /// under its own (translated) text, so a search hit can scroll its section
+  /// into view and flash it. See parts/settings_dialog_search.dart.
+  final _sectionKeys = <String, GlobalKey>{};
+  String? _highlightedSection;
+  final _searchController = TextEditingController();
+  String _searchQuery = '';
+
+  /// De telling van de referentiecatalogi (Uitbreidingen). Eén keer starten en
+  /// vasthouden: de volledige CWE-lijst komt uit een asset, en een FutureBuilder
+  /// die elke build opnieuw begint zou hem elke build opnieuw willen laden.
+  late final Future<List<ReferenceCatalog>> _referenceInventory =
+      SecReferenceInventory.load();
+
   /// Index of the section shown in the sidebar navigation (0..4).
   late int _selectedTab;
 
@@ -267,6 +285,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
 
   @override
   void dispose() {
+    _searchController.dispose();
     _profileName.dispose();
     _logoSize.dispose();
     _footerText.dispose();
@@ -456,20 +475,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         .min(760.0, screen.height * 0.86)
         .clamp(560.0, 760.0);
 
-    final labels = <String>[
-      l10n.t('settingsGeneral'),
-      l10n.d('App-thema'),
-      l10n.d('Presentatiestijl'),
-      l10n.d('Cockpit'),
-      l10n.d('Licentie en Privacy'),
-      l10n.d('Beveiliging'),
-      l10n.d('AI-assistentie'),
-      l10n.d('Nextcloud'),
-      l10n.d('Documentatie'),
-      l10n.d('Uitbreidingen'),
-      l10n.d('Checklists'),
-      l10n.d('Over OciDeck'),
-    ];
+    final labels = _tabLabels(l10n);
 
     final bodies = <Widget>[
       _tabBody(_generalTab()),
@@ -508,10 +514,22 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                   children: [
                     _contentHeader(labels[_selectedTab]),
                     Expanded(
-                      child: IndexedStack(
-                        index: _selectedTab,
-                        sizing: StackFit.expand,
-                        children: bodies,
+                      // De zoekresultaten leggen zich óver de actieve tab; de
+                      // IndexedStack blijft eronder staan zodat zijn GlobalKeys
+                      // (de sectie-ankers) in de boom blijven en een treffer er
+                      // meteen naartoe kan scrollen.
+                      child: Stack(
+                        children: [
+                          IndexedStack(
+                            index: _selectedTab,
+                            sizing: StackFit.expand,
+                            children: bodies,
+                          ),
+                          if (_searchQuery.isNotEmpty)
+                            Positioned.fill(
+                              child: _settingsSearchResults(l10n),
+                            ),
+                        ],
                       ),
                     ),
                     _footerBar(l10n),
@@ -751,6 +769,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
               ),
             ),
           ),
+          _settingsSearchField(),
           IconButton(
             tooltip: context.l10n.t('cancel'),
             onPressed: () => Navigator.pop(context),
@@ -943,21 +962,6 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
               )
             : null,
         child: child,
-      ),
-    );
-  }
-
-  Widget _sectionTitle(String text) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: Text(
-        text.toUpperCase(),
-        style: TextStyle(
-          fontSize: 10,
-          fontWeight: FontWeight.w700,
-          color: AppTheme.slate500,
-          letterSpacing: 1.2,
-        ),
       ),
     );
   }

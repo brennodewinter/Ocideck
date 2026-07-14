@@ -829,6 +829,20 @@ const _dutchSourceAddEs = {
   'databaseverbinding met wachtwoord':
       'conexión a base de datos con contraseña',
   'wachtwoord in klare tekst': 'contraseña en texto claro',
+  'Wat er lokaal beschikbaar is': 'Lo que está disponible localmente',
+  'Gegevenspakket': 'Paquete de datos',
+  'Nu bijwerken': 'Actualizar ahora',
+  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
+      'Datos disponibles localmente: las búsquedas se hacen en este dispositivo; nada sale de él.',
+  'Zwakheden (CWE)': 'Debilidades (CWE)',
+  'Testgevallen (WSTG)': 'Casos de prueba (WSTG)',
+  'MIAUW-eisen': 'Requisitos MIAUW',
+  'CVSS-scoretabel': 'Tabla de puntuación CVSS',
+  'Bevindingsjablonen': 'Plantillas de hallazgo',
+  'Zoek een instelling': 'Buscar un ajuste',
+  'Geen instelling gevonden': 'No se encontró ningún ajuste',
+  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
+      'Tu término de búsqueda se envía al mirror de CVE configurado y, si no encuentra nada, también a ENISA y MITRE. Quien gestione esos servidores puede deducir qué vulnerabilidad concreta buscas — y por tanto cuál estás investigando.',
   'Accepteren': 'Aceptar',
   'Accepteren + waarschuwen': 'Aceptar + avisar',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

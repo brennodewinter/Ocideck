@@ -520,6 +520,7 @@ extension _PresenterOverlays on _FullscreenPresenterState {
                       projectPath: widget.projectPath,
                       themeProfile: widget.themeProfile,
                       cockpitColorScheme: widget.cockpitColorScheme,
+                      allowRemoteMedia: widget.allowRemoteMedia,
                       tlp: widget.tlp,
                       organization: widget.organization,
                       showClassificationWatermark:

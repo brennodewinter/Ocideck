@@ -1877,6 +1877,20 @@ const _dutchSourceAddHu = <String, String>{
   'toegangstoken (JWT)': 'hozzáférési token (JWT)',
   'databaseverbinding met wachtwoord': 'adatbázis-kapcsolat jelszóval',
   'wachtwoord in klare tekst': 'jelszó nyílt szövegben',
+  'Wat er lokaal beschikbaar is': 'Ami helyben elérhető',
+  'Gegevenspakket': 'Adatcsomag',
+  'Nu bijwerken': 'Frissítés most',
+  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
+      'Az adatok helyben elérhetők — a keresés ezen az eszközön történik; semmi sem hagyja el.',
+  'Zwakheden (CWE)': 'Gyengeségek (CWE)',
+  'Testgevallen (WSTG)': 'Tesztesetek (WSTG)',
+  'MIAUW-eisen': 'MIAUW követelmények',
+  'CVSS-scoretabel': 'CVSS pontszámtábla',
+  'Bevindingsjablonen': 'Megállapítás-sablonok',
+  'Zoek een instelling': 'Beállítás keresése',
+  'Geen instelling gevonden': 'Nincs találat a beállításokban',
+  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
+      'A keresőkifejezésed a beállított CVE-tükörre kerül, és ha az nem talál semmit, az ENISA-hoz és a MITRE-hez is. Aki ezeket a kiszolgálókat üzemelteti, kikövetkeztetheti, melyik konkrét sérülékenységet keresed — és így melyiket vizsgálod.',
   'Accepteren': 'Elfogadás',
   'Accepteren + waarschuwen': 'Elfogadás + figyelmeztetés',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

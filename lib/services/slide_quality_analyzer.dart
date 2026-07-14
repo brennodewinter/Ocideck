@@ -10,6 +10,7 @@ import '../models/question.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
 import '../models/slide_quality.dart';
+import '../models/video_source.dart';
 import '../utils/color_contrast.dart';
 import '../utils/project_path.dart';
 import '../widgets/slides/inline_markdown.dart';
@@ -388,14 +389,6 @@ class SlideQualityAnalyzer {
     switch (slide.type) {
       case SlideType.chart:
         _checkChartAltText(slide, index, issues);
-      case SlideType.video:
-        _checkMediaAltText(
-          slide: slide,
-          index: index,
-          issues: issues,
-          hasMedia: slide.videoPath.trim().isNotEmpty,
-          label: 'Video',
-        );
       case SlideType.image:
       case SlideType.twoImages:
       case SlideType.bulletsImage:
@@ -408,6 +401,11 @@ class SlideQualityAnalyzer {
               slide.imagePath2.trim().isNotEmpty,
           label: 'Afbeelding',
         );
+      // Video is bewust géén alt-tekst-nudge: een videoslide zonder titel is
+      // een legitieme keuze (de clip spreekt voor zich), en de tip dook op bij
+      // élke video omdat de video-editor alleen een titelveld heeft — er is
+      // geen bijschrift- of alt-tekstveld om hem mee te stillen.
+      case SlideType.video:
       case SlideType.title:
       case SlideType.quote:
       case SlideType.bullets:
@@ -499,6 +497,11 @@ class SlideQualityAnalyzer {
       required String label,
     }) {
       if (path.trim().isEmpty) return;
+      // Een online bron heeft geen bestand op schijf dat kán ontbreken. Zonder
+      // deze poort plakt resolveSlideAssetPath de URL als relatief pad achter de
+      // projectmap ("<project>/https:/youtu.be/…"), vindt daar niets, en meldt
+      // een YouTube/Vimeo/mp4-link als "bestand niet gevonden".
+      if (VideoSource.looksLikeUrl(path)) return;
       final resolved = _resolveAssetPath(path, projectPath);
       if (resolved == null || File(resolved).existsSync()) return;
 

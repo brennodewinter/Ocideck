@@ -1876,6 +1876,20 @@ const _dutchSourceAddCs = <String, String>{
   'toegangstoken (JWT)': 'přístupový token (JWT)',
   'databaseverbinding met wachtwoord': 'připojení k databázi s heslem',
   'wachtwoord in klare tekst': 'heslo v otevřeném textu',
+  'Wat er lokaal beschikbaar is': 'Co je k dispozici lokálně',
+  'Gegevenspakket': 'Datový balíček',
+  'Nu bijwerken': 'Aktualizovat nyní',
+  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
+      'Data k dispozici lokálně — vyhledávání probíhá na tomto zařízení; nic je neopouští.',
+  'Zwakheden (CWE)': 'Slabiny (CWE)',
+  'Testgevallen (WSTG)': 'Testovací případy (WSTG)',
+  'MIAUW-eisen': 'Požadavky MIAUW',
+  'CVSS-scoretabel': 'Tabulka skóre CVSS',
+  'Bevindingsjablonen': 'Šablony zjištění',
+  'Zoek een instelling': 'Hledat nastavení',
+  'Geen instelling gevonden': 'Nenalezeno žádné nastavení',
+  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
+      'Váš vyhledávaný výraz jde na nastavené zrcadlo CVE, a pokud nic nenajde, také do ENISA a MITRE. Kdo tyto servery provozuje, může odvodit, jakou konkrétní zranitelnost hledáte — a tedy jakou zranitelnost zkoumáte.',
   'Accepteren': 'Přijmout',
   'Accepteren + waarschuwen': 'Přijmout + upozornit',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

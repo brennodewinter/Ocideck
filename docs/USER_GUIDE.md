@@ -272,6 +272,13 @@ The same Security tab has **CVE opzoeken (online)** for the finding editor's
 consent. When on, you can set the **CVE mirror** base URL (default
 `https://cveapi.librekat.nl`). The lookup is SSRF-safe and desktop-only.
 
+A **privacy badge** (the PrivacyKat shield) sits next to that switch, and hovering
+it says what turning it on costs you: your search term goes to the configured
+mirror, and *if that mirror finds nothing, the same term is then sent to ENISA and
+MITRE as well*. Whoever runs those servers can infer which specific vulnerability
+you are looking for — which, for a pentester, is often the most sensitive thing
+they know. The badge blocks nothing; it makes the trade visible before you take it.
+
 **Watching a video in parts (cutting).** You can split a video so you watch it in
 pieces across slides. Play the video in the preview, then click **Knip hier**
 (Cut here): the part up to that point stays on this slide, and the remainder
@@ -849,7 +856,7 @@ for (`lib/services/slide_quality_analyzer.dart`).
 | Category | Severity | What is checked |
 | --- | --- | --- |
 | **Contrast** | error / warning | Style profile: body text, title, table text, table header, code colours, and accent colour against their backgrounds (WCAG 2.1 AA). Footer text at 70% opacity against the slide background when a footer is configured. Checklist marker colours against the slide background when the deck contains checklist slides. Section slides: title colour against the section background. |
-| **Alt text** | tip / warning | Charts: no title, series names, or linked data description. Video slides: no title, subtitle, or speaker notes describing the content. Missing image captions are not reported as quality issues. Missing image or video **files on disk** when the deck is saved in a project folder (path in the slide points to a file that is not there). |
+| **Alt text** | tip / warning | Charts: no title, series names, or linked data description. Images: no alt text, caption, title, or speaker notes describing the content. Video slides are **not** nudged for a description — a clip that speaks for itself needs no title. Missing image captions are not reported as quality issues. Missing image or video **files on disk** when the deck is saved in a project folder (path in the slide points to a file that is not there). An **online** source (`http(s)` URL, including YouTube/Vimeo) is never reported as a missing file. |
 | **Text density** | error / warning | Bullet slides (one column, two columns, bullets + image): auto-fit shrinks text below 70% of design size (warning) or 20% (error), or the slide has too many bullets/words, long prose-like bullets, multiple sentences in a bullet, deep nesting, or strongly imbalanced two-column content. Rich-text and free-Markdown list items use the same bullet readability checks. Tables: cell text at the minimum readable size. Source-code and free-Markdown slides: very long content. Title slides: long title + subtitle combined. Quote slides: long quote + author combined. |
 
 Theme-wide contrast issues are listed once for the whole deck; slide-specific
@@ -899,6 +906,19 @@ The module's reference data is **bundled with the app**, so enabling it works
 (nothing leaves your device; you do not even need to grant the outbound-traffic
 consent for this). The bundled pack is verified against a fingerprint compiled
 into the app before it is used, so a tampered or mismatched pack is refused.
+
+**What you actually have.** Once the module is on, the card lists **what is
+available locally, in counts** — how many CWE weaknesses, WSTG test cases, MIAUW
+requirements, CVSS score-table rows and finding templates the app can serve you,
+with the upstream standard each one follows. The counts are taken from the
+catalogues the app *actually* queries, not from what a pack claims to contain, so
+an empty list shows up as empty rather than hiding behind a reassuring tick. Below
+them sits the version of the data pack in use.
+
+**Nu bijwerken (Update now)** re-runs the fetch even when a verified pack is
+already cached — that is precisely when you want to know whether something newer
+exists. It re-verifies the fingerprint; forcing an update means fetching again,
+not checking less strictly. **Gegevens opschonen** removes the cached data again.
 
 You will normally never see a failure. In the rare case the bundled pack cannot
 be read and no mirror is reachable, the card explains **which** step failed — no
@@ -1215,6 +1235,15 @@ Implementation: `lib/services/markdown_validator.dart` (unit tests in
 `test/markdown_validator_test.dart`).
 
 ## Theming and language
+
+**Finding a setting.** There are around eighty settings across twelve tabs, so the
+settings window has a **search box** in its header. Type a word and you get the
+matching settings, each with the tab and section it lives in; click one and the
+window jumps to that tab, scrolls the section into view and briefly highlights it.
+Search also matches **synonyms that aren't printed on screen** — `youtube`,
+`vimeo` or `mp4` all lead you to **Online media**, and `lettergrootte` to the
+interface text size. You don't need to know what the app calls a thing in order to
+find it.
 
 - **Style profiles** control deck colours (including the source-code background,
   text, font and an optional syntax-colouring toggle), fonts, logo, and footer.

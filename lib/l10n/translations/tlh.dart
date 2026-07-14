@@ -1846,6 +1846,20 @@ const _dutchSourceAddTlh = <String, String>{
   'toegangstoken (JWT)': 'nuqDaq token (JWT)',
   'databaseverbinding met wachtwoord': 'De\' pat rar \'ej pegh mu\'',
   'wachtwoord in klare tekst': 'ghItlh SaH pegh mu\'',
+  'Wat er lokaal beschikbaar is': 'naDev tu\'lu\'bogh De\'',
+  'Gegevenspakket': 'De\' ngeD',
+  'Nu bijwerken': 'DaH yIchoH',
+  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
+      'naDev De\' tu\'lu\' — naDev nej; pagh mej.',
+  'Zwakheden (CWE)': '\'oy\'meH (CWE)',
+  'Testgevallen (WSTG)': 'waw\'mey (WSTG)',
+  'MIAUW-eisen': 'MIAUW poQbogh',
+  'CVSS-scoretabel': 'CVSS mI\' nav',
+  'Bevindingsjablonen': 'SammeH chovnatlh',
+  'Zoek een instelling': '\'oH DawIv\'a\'? SeHlaw yInej',
+  'Geen instelling gevonden': 'SeHlaw tu\'be\'lu\'',
+  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
+      'SoQwIj DamevmeH mu\' Data\'bogh CVE mirror vIlo\'; pagh Sam \'e\' chugh, ENISA MITRE je lulo\'lu\'. bIH lurarbogh nuvpu\' \'e\' luSov: nuq \'oH Qagh Danejbogh\'e\' — vaj nuq \'oH Qagh Daqelbogh\'e\'.',
   'Accepteren': 'yIlaj',
   'Accepteren + waarschuwen': 'yIlaj \'ej yIghuHmoH',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

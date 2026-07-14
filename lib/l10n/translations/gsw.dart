@@ -1876,6 +1876,20 @@ const _dutchSourceAddGsw = <String, String>{
   'toegangstoken (JWT)': 'Zuegangstoken (JWT)',
   'databaseverbinding met wachtwoord': 'Datebankverbindig mit Passwort',
   'wachtwoord in klare tekst': 'Passwort im Klartäxt',
+  'Wat er lokaal beschikbaar is': 'Was lokal verfüegbar isch',
+  'Gegevenspakket': 'Datepäckli',
+  'Nu bijwerken': 'Jetz aktualisiere',
+  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
+      'Date lokal verfüegbar — s Nachschlage passiert uf däm Grät; es gaht nüt use.',
+  'Zwakheden (CWE)': 'Schwachstelle (CWE)',
+  'Testgevallen (WSTG)': 'Testfäll (WSTG)',
+  'MIAUW-eisen': 'MIAUW-Aaforderige',
+  'CVSS-scoretabel': 'CVSS-Bewärtigstabälle',
+  'Bevindingsjablonen': 'Befundvorlage',
+  'Zoek een instelling': 'Yystellig sueche',
+  'Geen instelling gevonden': 'Kei Yystellig gfunde',
+  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
+      'Dyn Suechbegriff gaht a de yygstellti CVE-Mirror, und wenn dä nüt findt, au a ENISA und MITRE. Wer die Server betriibt, cha drus abläse, nach welerer konkrete Schwachstell du suechsch — und somit, weli Schwachstell du undersuechsch.',
   'Accepteren': 'Akzeptiere',
   'Accepteren + waarschuwen': 'Akzeptiere + warne',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

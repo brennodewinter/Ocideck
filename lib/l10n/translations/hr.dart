@@ -1881,6 +1881,20 @@ const _dutchSourceAddHr = <String, String>{
   'toegangstoken (JWT)': 'pristupni token (JWT)',
   'databaseverbinding met wachtwoord': 'veza s bazom podataka s lozinkom',
   'wachtwoord in klare tekst': 'lozinka u čistom tekstu',
+  'Wat er lokaal beschikbaar is': 'Što je dostupno lokalno',
+  'Gegevenspakket': 'Paket podataka',
+  'Nu bijwerken': 'Ažuriraj sada',
+  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
+      'Podaci dostupni lokalno — pretraživanje se odvija na ovom uređaju; ništa ne odlazi van.',
+  'Zwakheden (CWE)': 'Slabosti (CWE)',
+  'Testgevallen (WSTG)': 'Testni slučajevi (WSTG)',
+  'MIAUW-eisen': 'MIAUW zahtjevi',
+  'CVSS-scoretabel': 'CVSS tablica bodovanja',
+  'Bevindingsjablonen': 'Predlošci nalaza',
+  'Zoek een instelling': 'Pretraži postavku',
+  'Geen instelling gevonden': 'Nije pronađena nijedna postavka',
+  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
+      'Vaš pojam za pretraživanje šalje se konfiguriranom CVE zrcalu, a ako ono ništa ne pronađe, i ENISA-i i MITRE-u. Tko upravlja tim poslužiteljima može zaključiti koju konkretnu ranjivost tražite — a time i koju ranjivost istražujete.',
   'Accepteren': 'Prihvati',
   'Accepteren + waarschuwen': 'Prihvati + upozori',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

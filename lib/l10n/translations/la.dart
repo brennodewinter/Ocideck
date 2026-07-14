@@ -1888,6 +1888,20 @@ const _dutchSourceAddLa = <String, String>{
   'toegangstoken (JWT)': 'signum accessus (JWT)',
   'databaseverbinding met wachtwoord': 'conexio datorum cum tessera',
   'wachtwoord in klare tekst': 'tessera in textu aperto',
+  'Wat er lokaal beschikbaar is': 'Quae localiter praesto sunt',
+  'Gegevenspakket': 'Fasciculus datorum',
+  'Nu bijwerken': 'Nunc renovare',
+  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
+      'Data localiter praesto — inquisitio in hoc instrumento fit; nihil egreditur.',
+  'Zwakheden (CWE)': 'Infirmitates (CWE)',
+  'Testgevallen (WSTG)': 'Casus probationis (WSTG)',
+  'MIAUW-eisen': 'Postulata MIAUW',
+  'CVSS-scoretabel': 'Tabula aestimationis CVSS',
+  'Bevindingsjablonen': 'Exemplaria inventorum',
+  'Zoek een instelling': 'Optionem quaerere',
+  'Geen instelling gevonden': 'Nulla optio inventa',
+  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
+      'Vocabulum quaesitum ad speculum CVE constitutum mittitur et, si nihil invenit, etiam ad ENISA et MITRE. Qui ea moderantur, colligere possunt quod certum vitium quaeras — ideoque quod vitium investiges.',
   'Accepteren': 'Accipere',
   'Accepteren + waarschuwen': 'Accipere + monere',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

@@ -138,19 +138,124 @@ extension _SettingsModules on _SettingsDialogState {
             style: TextStyle(fontSize: 11, color: AppTheme.slate500),
           ),
         ],
-        if (module.provisionedVersion != null) ...[
+        // Wát er lokaal ligt, in aantallen. "Gegevens lokaal beschikbaar" zei
+        // niets: het liet in het midden of daar een volledige CWE-lijst achter
+        // zat of een lege huls.
+        if (module.revealed) ...[
+          const SizedBox(height: 16),
+          _secModuleInventory(l10n, module),
+        ],
+        if (module.enabled) ...[
           const SizedBox(height: 8),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: TextButton.icon(
-              onPressed: () =>
-                  ref.read(secModuleProvider.notifier).cleanUpCache(),
-              icon: const Icon(Icons.delete_sweep_outlined, size: 16),
-              label: Text(l10n.d('Gegevens opschonen')),
-            ),
+          Wrap(
+            spacing: 4,
+            runSpacing: 4,
+            children: [
+              // Bijwerken mag ook als alles al klopt — dat is juist wanneer je
+              // wilt weten of er iets nieuwers is. Niet op het web: daar is geen
+              // spiegel te bereiken.
+              if (module.lastStatus != SecProvisionStatus.unsupportedPlatform)
+                TextButton.icon(
+                  onPressed: () =>
+                      ref.read(secModuleProvider.notifier).refresh(),
+                  icon: const Icon(Icons.refresh, size: 16),
+                  label: Text(l10n.d('Nu bijwerken')),
+                ),
+              if (module.provisionedVersion != null)
+                TextButton.icon(
+                  onPressed: () =>
+                      ref.read(secModuleProvider.notifier).cleanUpCache(),
+                  icon: const Icon(Icons.delete_sweep_outlined, size: 16),
+                  label: Text(l10n.d('Gegevens opschonen')),
+                ),
+            ],
           ),
         ],
       ],
+    );
+  }
+
+  /// De inhoudsopgave van de referentiegegevens: hoeveel records er per
+  /// catalogus daadwerkelijk bediend worden, met versie en herkomst.
+  Widget _secModuleInventory(AppLocalizations l10n, SecModuleState module) {
+    return FutureBuilder<List<ReferenceCatalog>>(
+      future: _referenceInventory,
+      builder: (context, snap) => _secModuleInventoryCard(
+        l10n,
+        module,
+        // Tot de volledige CWE-lijst geladen is telt de snapshot de curated
+        // bodem. Dat is een eerlijk tussengetal, geen leugen — en het staat er
+        // maar een oogwenk.
+        snap.data ?? SecReferenceInventory.snapshot(),
+      ),
+    );
+  }
+
+  Widget _secModuleInventoryCard(
+    AppLocalizations l10n,
+    SecModuleState module,
+    List<ReferenceCatalog> catalogs,
+  ) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: AppTheme.slate50,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: AppTheme.iceBlue),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.d('Wat er lokaal beschikbaar is'),
+            style: TextStyle(
+              fontSize: 11,
+              fontWeight: FontWeight.w700,
+              color: AppTheme.slate600,
+              letterSpacing: 0.6,
+            ),
+          ),
+          const SizedBox(height: 8),
+          for (final c in catalogs)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 4),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 52,
+                    child: Text(
+                      '${c.count}',
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w700,
+                        color: AppTheme.slate800,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      l10n.d(c.name),
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      c.standard.isEmpty ? c.source : c.standard,
+                      style: TextStyle(fontSize: 11, color: AppTheme.slate500),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          const Divider(height: 16),
+          Text(
+            '${l10n.d('Gegevenspakket')}: ${module.provisionedVersion ?? '—'}',
+            style: TextStyle(fontSize: 11, color: AppTheme.slate500),
+          ),
+        ],
+      ),
     );
   }
 
@@ -202,7 +307,14 @@ extension _SettingsModules on _SettingsDialogState {
   }
 
   String _secModuleStatusText(AppLocalizations l10n, SecModuleState module) {
-    if (module.revealed) return l10n.d('Gegevens lokaal beschikbaar');
+    // Zeg érbij dat het lokaal blijft: dat is de vraag die de gebruiker heeft
+    // ("wat is er opgehaald, en gaat er iets naar buiten?"). De aantallen staan
+    // eronder.
+    if (module.revealed) {
+      return l10n.d(
+        'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.',
+      );
+    }
     switch (module.lastStatus) {
       case SecProvisionStatus.noConsent:
         return l10n.d(

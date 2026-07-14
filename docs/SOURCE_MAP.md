@@ -62,6 +62,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `cve_search_service.dart` — `CveSearchService` + `CveSource` cascade (`LibrekatCveSource` mirror → `EnisaCveSource` EUVD keyword search → `MitreCveSource` exact-id lookup); `CveHit` in `models/cve_hit.dart`.
 - `cve_transport.dart` / `cve_transport_io.dart` / `cve_transport_web.dart` / `cve_transport_factory.dart` — injectable, SSRF-pinned HTTP transport for the CVE search (io) with a web stub, selected by conditional export.
 - `wstg_catalog.dart` — The bundled offline OWASP WSTG v4.2 test catalog (`WstgCatalog`, 97 tests + pinned version) used to one-click-fill a `checklist` slide.
+- `secmodule/sec_reference_inventory.dart` — `SecReferenceInventory` + `ReferenceCatalog`: counts what reference data is *actually* available locally (CWE, WSTG, MIAUW, the CVSS table, finding templates) for the Uitbreidingen tab, so "data available locally" is a number rather than a claim.
 - `checklist_templates.dart` — `ChecklistSource` + helpers that present WSTG and each user `ChecklistTemplate` uniformly to the checklist editor and the per-scope generator (feedback #9).
 - `description_service.dart` — Stores searchable image descriptions as JSON sidecars.
 - `document_integrity.dart` — Computes/verifies the SHA-512 deck seal and seals a finalised deck.
@@ -203,6 +204,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 
 - `app_shell.dart` — Main application shell: layout, file IO, and dialog coordination.
 - `markdown_notes_editor.dart` — Barrel re-export of the markdown notes editor.
+- `privacy_badge.dart` — `PrivacyBadge` + the `privacyKatSvg` mark: the non-blocking marker (with an explanation on hover) for a spot where something leaves the device. Used by the status bar's remote-origin badge and the Security tab's online-CVE switch.
 - `privacy_statement_content.dart` — Privacy/license content shared by the consent and settings dialogs.
 
 ### `lib/widgets/shell/` (each `part of app_shell.dart`)
@@ -211,7 +213,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `command_palette_actions.dart` — `_MainLayoutCommandPalette`: builds and shows the Ctrl/Cmd+K command list (incl. the security-module actions).
 - `shell_actions.dart` — File-IO helpers for deck import/export and Nextcloud integration, plus shared `presentDeck`/`requestCloseTab` helpers.
 - `shell_overlays.dart` — `_DropOverlay` and `_ResizableDivider` chrome.
-- `status_bar.dart` — `_DeckStatusBar`: save state, file info, TLP classification, and the remote-origin privacy badge (`_RemoteOriginBadge` + `remoteOriginTooltip`) shown when a deck was fetched from a URL.
+- `status_bar.dart` — `_DeckStatusBar`: save state, file info, TLP classification, and the remote-origin privacy badge (`_RemoteOriginBadge` + `remoteOriginTooltip`, rendered with the shared `PrivacyBadge`) shown when a deck was fetched from a URL.
 - `tab_bar.dart` — `_AppTabBar`/`_TabChip` multi-deck tab management; `_TabContent` picks welcome / play-only / editor per deck.
 - `welcome_screen.dart` — `_WelcomeScreen`: recent files and new/open/import actions.
 - `play_only_screen.dart` — `_PlayOnlyScreen`: locked view for `Deck.playOnly` decks (first slide + Play + Close).
@@ -254,6 +256,12 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
   Licentie en Privacy, Beveiliging, Nextcloud, Checklists, and an "Over OciDeck"
   screen); tab bodies live in `parts/settings_dialog_*.dart` (the Checklists tab
   managing user checklist templates is `parts/settings_dialog_checklists.dart`).
+  Search over the settings lives in `parts/settings_dialog_search.dart`
+  (`SettingsSearchEntry`, the search field, and the jump-and-flash), with the
+  index of what is searchable in `parts/settings_dialog_search_index.dart`.
+  Anchors are free: every section heading goes through `_sectionTitle`, which
+  registers a `GlobalKey` under its own text, so a hit can scroll its section
+  into view without any of the tab bodies knowing about search.
 - `slide_finder_dialog.dart` — Stay-open searcher for gathering slides from many presentations.
 - `slide_quality_details_dialog.dart` — Issues grouped by severity with counts and navigation.
 - `webdav_browser_dialog.dart` — Browses WebDAV/Nextcloud folders to pick a deck or images.

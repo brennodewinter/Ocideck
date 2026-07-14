@@ -159,6 +159,7 @@ class _PlayOnlyScreen extends ConsumerWidget {
           projectPath: deck.projectPath,
           themeProfile: deck.themeProfile,
           cockpitColorScheme: settings.cockpitColorScheme,
+          allowRemoteMedia: settings.allowRemoteMedia,
           slideNumber: 1,
           slideCount: slideCount,
           scopeCia: deckScopeCiaIndex(deck.slides),

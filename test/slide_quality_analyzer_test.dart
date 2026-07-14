@@ -569,11 +569,31 @@ void main() {
       );
     });
 
-    test('detects video without descriptive text', () {
+    // Een videoslide zonder titel is een legitieme keuze, en de video-editor
+    // heeft geen bijschrift-/alt-tekstveld om de tip mee te stillen. Alleen
+    // afbeeldingen en charts krijgen de beschrijvingsnudge nog.
+    test('does not nudge a video without descriptive text', () {
       final deck = Deck(
         title: 'Demo',
         slides: [
           Slide.create(SlideType.video).copyWith(videoPath: 'media/demo.mp4'),
+        ],
+      );
+
+      final result = analyzer.analyze(deck);
+      expect(
+        result.issues.any(
+          (i) => i.kind == SlideQualityIssueKind.mediaMissingDescription,
+        ),
+        isFalse,
+      );
+    });
+
+    test('still nudges a bare image without description', () {
+      final deck = Deck(
+        title: 'Demo',
+        slides: [
+          Slide.create(SlideType.image).copyWith(imagePath: 'media/foto.jpg'),
         ],
       );
 
@@ -626,7 +646,7 @@ void main() {
         title: 'Demo',
         slides: [
           Slide.create(SlideType.bullets),
-          Slide.create(SlideType.video).copyWith(videoPath: 'video/demo.mp4'),
+          Slide.create(SlideType.image).copyWith(imagePath: 'media/foto.jpg'),
         ],
       );
 
@@ -714,6 +734,62 @@ void main() {
           (i) => i.kind == SlideQualityIssueKind.missingMediaFile,
         ),
         isTrue,
+      );
+    });
+
+    // Een online bron is geen ontbrekend bestand: zonder URL-poort plakt de
+    // resolver de URL achter de projectmap en meldt hem als "niet gevonden".
+    test('does not report an online media URL as a missing file', () async {
+      final dir = await Directory.systemTemp.createTemp('ocideck-quality-');
+      addTearDown(() => dir.delete(recursive: true));
+
+      for (final url in const [
+        'https://www.youtube.com/watch?v=fZ5u46AjFCU',
+        'https://vimeo.com/181000543',
+        'https://dewinter.com/img/video/ik-zal-je-leren-toxisch.mp4',
+      ]) {
+        final deck = Deck(
+          title: 'Demo',
+          projectPath: dir.path,
+          slides: [
+            Slide.create(
+              SlideType.video,
+            ).copyWith(videoPath: url, title: 'Met titel'),
+          ],
+        );
+
+        expect(
+          analyzer
+              .analyze(deck)
+              .issues
+              .any((i) => i.kind == SlideQualityIssueKind.missingMediaFile),
+          isFalse,
+          reason: '$url is een online bron, geen ontbrekend bestand',
+        );
+      }
+    });
+
+    test('does not report an online image URL as a missing file', () async {
+      final dir = await Directory.systemTemp.createTemp('ocideck-quality-');
+      addTearDown(() => dir.delete(recursive: true));
+
+      final deck = Deck(
+        title: 'Demo',
+        projectPath: dir.path,
+        slides: [
+          Slide.create(SlideType.image).copyWith(
+            imagePath: 'https://dewinter.com/img/foto.jpg',
+            imageAltText: 'Een foto',
+          ),
+        ],
+      );
+
+      expect(
+        analyzer
+            .analyze(deck)
+            .issues
+            .any((i) => i.kind == SlideQualityIssueKind.missingMediaFile),
+        isFalse,
       );
     });
 

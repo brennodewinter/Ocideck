@@ -1875,6 +1875,20 @@ const _dutchSourceAddFi = <String, String>{
   'toegangstoken (JWT)': 'käyttöoikeuspoletti (JWT)',
   'databaseverbinding met wachtwoord': 'tietokantayhteys salasanalla',
   'wachtwoord in klare tekst': 'salasana selkokielisenä',
+  'Wat er lokaal beschikbaar is': 'Mitä on saatavilla paikallisesti',
+  'Gegevenspakket': 'Datapaketti',
+  'Nu bijwerken': 'Päivitä nyt',
+  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
+      'Tiedot saatavilla paikallisesti — haut tehdään tällä laitteella; mitään ei lähde ulos.',
+  'Zwakheden (CWE)': 'Heikkoudet (CWE)',
+  'Testgevallen (WSTG)': 'Testitapaukset (WSTG)',
+  'MIAUW-eisen': 'MIAUW-vaatimukset',
+  'CVSS-scoretabel': 'CVSS-pisteytystaulukko',
+  'Bevindingsjablonen': 'Havaintomallit',
+  'Zoek een instelling': 'Hae asetusta',
+  'Geen instelling gevonden': 'Asetusta ei löytynyt',
+  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
+      'Hakusanasi lähetetään määritettyyn CVE-peilipalvelimeen, ja jos se ei löydä mitään, myös ENISAlle ja MITRElle. Näiden palvelimien ylläpitäjät voivat päätellä, mitä tiettyä haavoittuvuutta etsit — ja siten mitä haavoittuvuutta tutkit.',
   'Accepteren': 'Hyväksy',
   'Accepteren + waarschuwen': 'Hyväksy + varoita',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

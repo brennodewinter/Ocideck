@@ -827,6 +827,20 @@ const _dutchSourceAddIt = {
   'toegangstoken (JWT)': 'token di accesso (JWT)',
   'databaseverbinding met wachtwoord': 'connessione al database con password',
   'wachtwoord in klare tekst': 'password in chiaro',
+  'Wat er lokaal beschikbaar is': 'Cosa è disponibile localmente',
+  'Gegevenspakket': 'Pacchetto dati',
+  'Nu bijwerken': 'Aggiorna ora',
+  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
+      'Dati disponibili localmente — le ricerche avvengono su questo dispositivo; nulla esce.',
+  'Zwakheden (CWE)': 'Debolezze (CWE)',
+  'Testgevallen (WSTG)': 'Casi di test (WSTG)',
+  'MIAUW-eisen': 'Requisiti MIAUW',
+  'CVSS-scoretabel': 'Tabella dei punteggi CVSS',
+  'Bevindingsjablonen': 'Modelli di rilievo',
+  'Zoek een instelling': 'Cerca un\'impostazione',
+  'Geen instelling gevonden': 'Nessuna impostazione trovata',
+  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
+      'Il termine di ricerca viene inviato al mirror CVE configurato e, se non trova nulla, anche a ENISA e MITRE. Chi gestisce quei server può dedurre quale vulnerabilità specifica stai cercando — e quindi quale vulnerabilità stai analizzando.',
   'Accepteren': 'Accetta',
   'Accepteren + waarschuwen': 'Accetta + avvisa',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

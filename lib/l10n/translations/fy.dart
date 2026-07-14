@@ -830,6 +830,20 @@ const _dutchSourceAddFy = {
   'toegangstoken (JWT)': 'tagongstoken (JWT)',
   'databaseverbinding met wachtwoord': 'databaseferbining mei wachtwurd',
   'wachtwoord in klare tekst': 'wachtwurd yn platte tekst',
+  'Wat er lokaal beschikbaar is': 'Wat der lokaal beskikber is',
+  'Gegevenspakket': 'Gegevenspakket',
+  'Nu bijwerken': 'No bywurkje',
+  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
+      'Gegevens lokaal beskikber — it opsykjen bart op dit apparaat, der giet neat nei bûten.',
+  'Zwakheden (CWE)': 'Swakheden (CWE)',
+  'Testgevallen (WSTG)': 'Testgefallen (WSTG)',
+  'MIAUW-eisen': 'MIAUW-easken',
+  'CVSS-scoretabel': 'CVSS-skoretabel',
+  'Bevindingsjablonen': 'Befiningssjabloanen',
+  'Zoek een instelling': 'Sykje in ynstelling',
+  'Geen instelling gevonden': 'Gjin ynstelling fûn',
+  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
+      'Dyn sykterm giet nei de ynstelde CVE-mirror, en as dy neat fynt ek nei ENISA en MITRE. Wa\'t dy servers beheart, kin dêrút ôfliede nei hokker spesifyk lek ast sikest — en dus hokker lek ast ûndersikest.',
   'Accepteren': 'Akseptearje',
   'Accepteren + waarschuwen': 'Akseptearje + warskôgje',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
