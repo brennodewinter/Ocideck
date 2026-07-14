@@ -19,6 +19,7 @@ import '../utils/log.dart';
 import '../utils/user_facing_error.dart';
 import '../utils/atomic_file.dart';
 import '../models/deck.dart';
+import '../models/redaction_manifest.dart';
 import '../models/settings.dart';
 import 'classification_enforcement_policy.dart';
 import '../models/slide_quality.dart';
@@ -126,6 +127,7 @@ class ExportService {
     QualityExportPolicy qualityPolicy = const QualityExportPolicy(),
     bool qualityAcknowledged = false,
     ExportDocumentMetadata? metadata,
+    RedactionManifest redactionManifest = RedactionManifest.empty,
   }) async {
     // Classificatie-gate. Dit is het enige chokepoint waar elk formaat
     // (PDF/PPTX/HTML) doorheen moet, dus de handhaving zit hier en niet in de
@@ -206,6 +208,7 @@ class ExportService {
       // Atomair: exporteren over een bestaand bestand mag dat bij een crash
       // niet half-geschreven achterlaten.
       await writeBytesAtomic(File(outputPath), bytes);
+      await _writeRedactionManifest(outputPath, redactionManifest);
       return ExportResult.ok(outputPath);
     } catch (e) {
       // Technische details naar het log; de gebruiker krijgt een korte,
@@ -228,6 +231,41 @@ class ExportService {
 
   // JPEG-hercompressie en PDF-assemblage zijn CPU-zwaar (honderden ms per
   // slide); in een eigen isolate blijft de UI responsief tijdens export.
+  /// Schrijft het redactiemanifest naast een geredigeerde export.
+  ///
+  /// TWEE bestanden, met opzet, en met namen die het verschil onmiskenbaar maken:
+  ///
+  ///   * `<naam>-redacties.json` — commitments zonder salts. Dit reist mee met
+  ///     het geredigeerde rapport. Een ontvanger ziet hoeveel er is weggehaald,
+  ///     welke regel het vond en op welke slide, en kan een specifieke redactie
+  ///     bij naam betwisten ("ik betwist a3f1"). Terugrekenen kan hij niet.
+  ///
+  ///   * `<naam>-redacties-verificatiesleutels.json` — mét salts. Dit levert je
+  ///     NIET mee. Hiermee kan de houder van de bron elke redactie natrekken, of
+  ///     er één selectief openen zonder de rest prijs te geven.
+  ///
+  /// Zonder salt is een SHA-256 van een geredigeerd BSN in seconden terug te
+  /// rekenen — 10⁹ kandidaten. De scheiding tussen deze twee bestanden ís de
+  /// beveiliging; daarom staat het verschil in de bestandsnaam en niet in een
+  /// veldje binnenin.
+  static Future<void> _writeRedactionManifest(
+    String outputPath,
+    RedactionManifest manifest,
+  ) async {
+    if (manifest.isEmpty) return;
+    final base = p.withoutExtension(outputPath);
+    await writeStringAtomic(
+      File('$base-redacties.json'),
+      manifest.withoutSalts.toPrettyJson(),
+    );
+    if (manifest.carriesSalts) {
+      await writeStringAtomic(
+        File('$base-redacties-verificatiesleutels.json'),
+        manifest.toPrettyJson(),
+      );
+    }
+  }
+
   static Future<Uint8List> _buildPdf(
     List<Uint8List> images, {
     required ExportDocumentMetadata metadata,
