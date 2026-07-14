@@ -1,5 +1,13 @@
 .PHONY: setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions licenses sbom sbom-verify check-conventions check-method-length check-dead-code add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
 
+# macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
+# full test suite exhausts it and fails with "Too many open files" — worst under
+# --coverage, which holds a VM-Service connection open per test until the run
+# ends. Raise the soft limit for the whole-suite recipes below. The hard limit is
+# normally unlimited; the `|| true` keeps the build working if a machine caps it
+# lower than 8192 (there the limit simply stays where it was).
+RAISE_FDS := ulimit -n 8192 2>/dev/null || true;
+
 help:
 	@echo "OciDeck quality targets:"
 	@echo "  make check           Format check + static analysis + full Flutter test suite + coverage floor."
@@ -81,7 +89,7 @@ test:
 	@echo "Command: flutter test --test-randomize-ordering-seed random"
 	@echo "Covers: all unit/widget tests under test/, including markdown round-trip, preview, export, provider, footer, and presenter tests."
 	@echo "Failure means: inspect the named failing test file and test case in the Flutter output."
-	flutter test --test-randomize-ordering-seed random --exclude-tags golden
+	$(RAISE_FDS) flutter test --test-randomize-ordering-seed random --exclude-tags golden
 
 # Run the full test suite with coverage and summarise line coverage. The floor
 # guards against large regressions; raise it as coverage improves.
@@ -95,7 +103,7 @@ coverage:
 	@echo "Command: flutter test --coverage && dart run tool/coverage_summary.dart --min=73 --require-instrumented"
 	@echo "Covers: line coverage over lib/, plus: every lib/ file is in at least one test."
 	@echo "Failure means: coverage fell below the floor, or a lib/ file is in no test at all."
-	flutter test --coverage --test-randomize-ordering-seed random --exclude-tags golden
+	$(RAISE_FDS) flutter test --coverage --test-randomize-ordering-seed random --exclude-tags golden
 	dart run tool/coverage_summary.dart --min=73 --require-instrumented
 
 # Slide-renderer visual-regression goldens (test/golden/). Pixel- and
@@ -110,7 +118,7 @@ test-golden:
 	@echo "Covers: SlidePreviewWidget layout/structure/colour per slide type."
 	@echo "Failure means: a slide renders differently — inspect the *_testImage diff,"
 	@echo "        then re-run with UPDATE=1 if the change is intentional."
-	flutter test --tags golden $(if $(UPDATE),--update-goldens,)
+	$(RAISE_FDS) flutter test --tags golden $(if $(UPDATE),--update-goldens,)
 
 # Mutation check for the "dead/untested boolean-operand" bug class that line
 # coverage and `dart analyze` both miss: an `||`/`&&` operand that can never be
