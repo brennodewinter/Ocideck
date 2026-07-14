@@ -28,6 +28,19 @@
 //     "weglaten" bepáált wat de ontvanger krijgt, en die kon je niet zien zonder
 //     open te klappen. Nu staat elke afwijking van de standaard als badge in de
 //     kop.
+//
+//  4. **Nabijheid gaat vóór volle breedte.** Een regel die de hele editorkolom
+//     beslaat, zet het label op x=290 en de schakelaar op x=1330: duizend pixels
+//     leegte tussen twee dingen die bij elkaar horen. Je oog moet heen en weer, en
+//     bij zes regels onder elkaar raak je kwijt welke schakelaar bij welk label
+//     hoort. Rechts uitlijnen is goed; het over de volle breedte doen is het niet.
+//
+//     De groepen zijn daarom kaarten met een eigen kolombreedte, die náást elkaar
+//     staan zodra de kolom er ruimte voor heeft. Binnen zo'n kaart is de afstand
+//     label→bediening een paar honderd pixels in plaats van duizend, blijft de
+//     rechteruitlijning staan, en is de horizontale ruimte eindelijk ergens vóór
+//     gebruikt in plaats van weggegeven. Wordt het paneel smal, dan stapelen ze
+//     vanzelf terug.
 part of 'editor_panel.dart';
 
 /// De hoogte van één instellingenregel. Eén constante, zodat de regels van
@@ -36,7 +49,12 @@ const double _kSettingRowHeight = 34;
 
 // ── Bouwstenen ────────────────────────────────────────────────────────────────
 
-/// Een groep instellingen onder een rustige kop.
+/// Een groep instellingen als kaart.
+///
+/// De kaart doet twee dingen tegelijk. Ze is de *gemeenschappelijke omheining*
+/// (Gestalt) die zegt dat deze regels bij elkaar horen — en ze begrenst de
+/// regelbreedte, zodat het label en zijn bediening binnen één oogopslag liggen in
+/// plaats van aan weerszijden van de editorkolom.
 class _SettingsGroup extends StatelessWidget {
   final String label;
   final List<Widget> children;
@@ -46,23 +64,33 @@ class _SettingsGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (children.isEmpty) return const SizedBox.shrink();
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(12, 12, 12, 2),
-          child: Text(
-            label.toUpperCase(),
-            style: TextStyle(
-              fontSize: 10,
-              fontWeight: FontWeight.w700,
-              letterSpacing: 0.6,
-              color: AppTheme.slate400,
+    return Container(
+      decoration: BoxDecoration(
+        color: AppTheme.paper,
+        border: Border.all(color: AppTheme.slate200),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(10, 8, 10, 6),
+            child: Text(
+              label.toUpperCase(),
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 0.6,
+                color: AppTheme.slate400,
+              ),
             ),
           ),
-        ),
-        ...children,
-      ],
+          Divider(height: 1, color: AppTheme.slate200),
+          const SizedBox(height: 2),
+          ...children,
+          const SizedBox(height: 6),
+        ],
+      ),
     );
   }
 }
@@ -103,7 +131,7 @@ class _SettingRow extends StatelessWidget {
         ConstrainedBox(
           constraints: const BoxConstraints(minHeight: _kSettingRowHeight),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Row(
               children: [
                 Icon(icon, size: 14, color: AppTheme.slate500),
@@ -148,7 +176,7 @@ class _SettingRow extends StatelessWidget {
         ),
         if (detail != null)
           Padding(
-            padding: const EdgeInsets.fromLTRB(36, 0, 12, 6),
+            padding: const EdgeInsets.fromLTRB(34, 0, 10, 6),
             child: detail,
           ),
       ],
@@ -193,10 +221,15 @@ class _SettingDropdown<T> extends StatelessWidget {
   final List<DropdownMenuItem<T>> items;
   final ValueChanged<T?> onChanged;
 
+  /// Wat de knop dicht toont, als dat korter mag zijn dan wat de lijst open
+  /// toont. Zie de privacydispositie.
+  final List<Widget> Function(BuildContext)? selectedItemBuilder;
+
   const _SettingDropdown({
     required this.value,
     required this.items,
     required this.onChanged,
+    this.selectedItemBuilder,
   });
 
   @override
@@ -207,6 +240,7 @@ class _SettingDropdown<T> extends StatelessWidget {
       borderRadius: BorderRadius.circular(6),
       style: TextStyle(fontSize: 12, color: AppTheme.ink),
       items: items,
+      selectedItemBuilder: selectedItemBuilder,
       onChanged: onChanged,
     ),
   );
@@ -428,131 +462,196 @@ class _SlideSettingsBody extends StatelessWidget {
     required this.deck,
   });
 
+  /// De kolombreedte waaronder een kaart niet meer fatsoenlijk uitlijnt: het
+  /// langste label plus zijn bediening.
+  static const double _minColumn = 330;
+
   @override
   Widget build(BuildContext context) {
+    final groups = _groups(context);
+
+    // Zoveel kolommen als er passen, hoogstens één per groep. Boven de ~1050px
+    // (een normaal breed editorpaneel) staan de drie kaarten naast elkaar; wordt
+    // het paneel smaller, dan stapelen ze vanzelf terug naar twee en naar één.
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        const gap = 10.0;
+        final available = constraints.maxWidth - 24;
+        final fit = ((available + gap) / (_minColumn + gap)).floor();
+        final columns = fit.clamp(1, groups.length);
+
+        return Padding(
+          // Onder maar 2: elke rij zet er zelf al een tussenruimte achter.
+          padding: const EdgeInsets.fromLTRB(12, 10, 12, 2),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              for (final row in _rows(groups, columns)) ...[
+                // `IntrinsicHeight` maakt de kaarten van één rij even hoog. Geen
+                // franje: kaarten met een rafelige onderrand lezen als een fout,
+                // en de blik blijft aan de langste hangen in plaats van aan de
+                // inhoud.
+                IntrinsicHeight(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      for (var i = 0; i < columns; i++) ...[
+                        if (i > 0) const SizedBox(width: gap),
+                        // Ontbrekende kaarten in de laatste rij houden hun plek
+                        // leeg, zodat de kolommen boven elkaar blijven staan.
+                        Expanded(
+                          child: i < row.length
+                              ? row[i]
+                              : const SizedBox.shrink(),
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+                const SizedBox(height: gap),
+              ],
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  /// De groepen, in rijen van [columns].
+  static List<List<Widget>> _rows(List<Widget> groups, int columns) => [
+    for (var i = 0; i < groups.length; i += columns)
+      groups.sublist(i, (i + columns).clamp(0, groups.length)),
+  ];
+
+  List<Widget> _groups(BuildContext context) {
     final l10n = context.l10n;
     final profile = deck.themeProfile;
     final hasLogo = profile.logoPath?.isNotEmpty == true;
     final hasFooter =
         profile.footerText.trim().isNotEmpty || profile.footerShowPageNumbers;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        // ── Op deze slide ───────────────────────────────────────────────────
-        //
-        // Alleen tonen wat er te kiezen valt: zonder logo in het stijlprofiel is
-        // "logo tonen" een dode schakelaar, en een dode schakelaar is erger dan
-        // een ontbrekende.
-        if (hasLogo || hasFooter)
-          _SettingsGroup(
-            label: l10n.d('Op deze slide'),
-            children: [
-              if (hasLogo)
-                _SettingRow(
-                  icon: Icons.branding_watermark_outlined,
-                  label: l10n.d('Logo tonen'),
-                  control: _SettingSwitch(
-                    value: slide.showLogo,
-                    semanticLabel: l10n.d('Logo tonen'),
-                    onChanged: (v) => onUpdate(slide.copyWith(showLogo: v)),
-                  ),
-                ),
-              if (hasFooter)
-                _SettingRow(
-                  icon: Icons.short_text_outlined,
-                  label: l10n.d('Footer tonen'),
-                  control: _SettingSwitch(
-                    value: slide.showFooter,
-                    semanticLabel: l10n.d('Footer tonen'),
-                    onChanged: (v) => onUpdate(slide.copyWith(showFooter: v)),
-                  ),
-                ),
-            ],
-          ),
-
-        // ── Tijdens presenteren ─────────────────────────────────────────────
+    return [
+      // ── Op deze slide ─────────────────────────────────────────────────────
+      //
+      // Alleen tonen wat er te kiezen valt: zonder logo in het stijlprofiel is
+      // "logo tonen" een dode schakelaar, en een dode schakelaar is erger dan
+      // een ontbrekende. Valt de hele groep weg, dan valt ook de kaart weg —
+      // een lege kaart zou een gat in de rij slaan.
+      if (hasLogo || hasFooter)
         _SettingsGroup(
-          label: l10n.d('Tijdens presenteren'),
+          label: l10n.d('Op deze slide'),
           children: [
-            _TimingSetting(slide: slide, onUpdate: onUpdate),
-            if (slide.type == SlideType.table)
+            if (hasLogo)
               _SettingRow(
-                icon: Icons.edit_outlined,
-                label: l10n.d('Tabel bewerkbaar'),
-                help: l10n.d(
-                  'Laat je de tabel tijdens het presenteren voor de zaal aanpassen. Staat standaard uit.',
-                ),
+                icon: Icons.branding_watermark_outlined,
+                label: l10n.d('Logo tonen'),
                 control: _SettingSwitch(
-                  value: slide.tableEditable,
-                  semanticLabel: l10n.d('Tabel bewerkbaar'),
-                  onChanged: (v) => onUpdate(slide.copyWith(tableEditable: v)),
+                  value: slide.showLogo,
+                  semanticLabel: l10n.d('Logo tonen'),
+                  onChanged: (v) => onUpdate(slide.copyWith(showLogo: v)),
                 ),
               ),
-            if (slide.type != SlideType.video)
-              _AudioSetting(
-                slide: slide,
-                onUpdate: onUpdate,
-                imageService: imageService,
-                projectPath: deck.projectPath,
+            if (hasFooter)
+              _SettingRow(
+                icon: Icons.short_text_outlined,
+                label: l10n.d('Footer tonen'),
+                control: _SettingSwitch(
+                  value: slide.showFooter,
+                  semanticLabel: l10n.d('Footer tonen'),
+                  onChanged: (v) => onUpdate(slide.copyWith(showFooter: v)),
+                ),
               ),
           ],
         ),
 
-        // ── Wat de ontvanger ermee mag ──────────────────────────────────────
-        _SettingsGroup(
-          label: l10n.d('Classificatie en privacy'),
-          children: [
+      // ── Tijdens presenteren ─────────────────────────────────────────────
+      _SettingsGroup(
+        label: l10n.d('Tijdens presenteren'),
+        children: [
+          _TimingSetting(slide: slide, onUpdate: onUpdate),
+          if (slide.type == SlideType.table)
             _SettingRow(
-              icon: Icons.shield_outlined,
-              label: l10n.d('TLP van deze slide'),
-              help: slideTlpHelpText(l10n),
-              control: _SettingDropdown<TlpLevel>(
-                value: slide.tlp,
-                items: [
-                  for (final level in TlpLevel.values)
-                    DropdownMenuItem(
-                      value: level,
-                      child: Text(
-                        level == TlpLevel.none
-                            ? l10n.d('Geen')
-                            : level.menuLabel,
-                      ),
-                    ),
-                ],
-                onChanged: (v) {
-                  if (v != null) onUpdate(slide.copyWith(tlp: v));
-                },
-              ),
-            ),
-            _SettingRow(
-              icon: Icons.privacy_tip_outlined,
-              label: l10n.d('Persoonsgegevens'),
+              icon: Icons.edit_outlined,
+              label: l10n.d('Tabel bewerkbaar'),
               help: l10n.d(
-                'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.',
+                'Laat je de tabel tijdens het presenteren voor de zaal aanpassen. Staat standaard uit.',
               ),
-              control: _SettingDropdown<PrivacyDisposition?>(
-                value: slide.privacy,
-                items: [
-                  DropdownMenuItem(
-                    value: null,
-                    child: Text(privacyDispositionLabel(l10n, null)),
-                  ),
-                  for (final d in PrivacyDisposition.values)
-                    DropdownMenuItem(
-                      value: d,
-                      child: Text(privacyDispositionLabel(l10n, d)),
-                    ),
-                ],
-                onChanged: (v) => onUpdate(
-                  slide.copyWith(privacy: v, clearPrivacy: v == null),
-                ),
+              control: _SettingSwitch(
+                value: slide.tableEditable,
+                semanticLabel: l10n.d('Tabel bewerkbaar'),
+                onChanged: (v) => onUpdate(slide.copyWith(tableEditable: v)),
               ),
             ),
-          ],
-        ),
-      ],
-    );
+          if (slide.type != SlideType.video)
+            _AudioSetting(
+              slide: slide,
+              onUpdate: onUpdate,
+              imageService: imageService,
+              projectPath: deck.projectPath,
+            ),
+        ],
+      ),
+
+      // ── Wat de ontvanger ermee mag ──────────────────────────────────────
+      _SettingsGroup(
+        label: l10n.d('Classificatie en privacy'),
+        children: [
+          _SettingRow(
+            icon: Icons.shield_outlined,
+            label: l10n.d('TLP van deze slide'),
+            help: slideTlpHelpText(l10n),
+            control: _SettingDropdown<TlpLevel>(
+              value: slide.tlp,
+              items: [
+                for (final level in TlpLevel.values)
+                  DropdownMenuItem(
+                    value: level,
+                    child: Text(
+                      level == TlpLevel.none ? l10n.d('Geen') : level.menuLabel,
+                    ),
+                  ),
+              ],
+              onChanged: (v) {
+                if (v != null) onUpdate(slide.copyWith(tlp: v));
+              },
+            ),
+          ),
+          _SettingRow(
+            icon: Icons.privacy_tip_outlined,
+            label: l10n.d('Persoonsgegevens'),
+            help: l10n.d(
+              'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.',
+            ),
+            control: _SettingDropdown<PrivacyDisposition?>(
+              value: slide.privacy,
+              items: [
+                DropdownMenuItem(
+                  value: null,
+                  child: Text(privacyDispositionLabel(l10n, null)),
+                ),
+                for (final d in PrivacyDisposition.values)
+                  DropdownMenuItem(
+                    value: d,
+                    child: Text(privacyDispositionLabel(l10n, d)),
+                  ),
+              ],
+              // Open toont de lijst de volle zin ("Weglaten uit tonen en
+              // exporteren"), want daar kies je op. Dicht toont ze het korte
+              // woord, want daar lees je alleen de stand af — en die volle zin
+              // zou een kaartbreedte opeisen die de rest van de kolom niet
+              // heeft.
+              selectedItemBuilder: (context) => [
+                Text(privacyDispositionLabel(l10n, null)),
+                for (final d in PrivacyDisposition.values)
+                  Text(privacyDispositionShortLabel(l10n, d)),
+              ],
+              onChanged: (v) =>
+                  onUpdate(slide.copyWith(privacy: v, clearPrivacy: v == null)),
+            ),
+          ),
+        ],
+      ),
+    ];
   }
 }
 

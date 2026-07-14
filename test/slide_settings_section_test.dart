@@ -33,6 +33,7 @@ void main() {
     WidgetTester tester, {
     Slide Function(Slide)? slide,
     ThemeProfile Function(ThemeProfile)? profile,
+    Size surface = const Size(900, 2400),
   }) async {
     final container = ProviderContainer();
     addTearDown(container.dispose);
@@ -47,7 +48,7 @@ void main() {
       notifier.updateSlide(0, slide(deck.slides.single));
     }
 
-    await tester.binding.setSurfaceSize(const Size(900, 2400));
+    await tester.binding.setSurfaceSize(surface);
     addTearDown(() => tester.binding.setSurfaceSize(null));
 
     await tester.pumpWidget(
@@ -127,6 +128,75 @@ void main() {
       expect(find.text(_l10n.d('Logo tonen')), findsOneWidget);
     });
   });
+
+  group(
+    'nabijheid: de groepen zijn kaarten, geen regels over de volle breedte',
+    () {
+      // De aanleiding: bij een breed paneel stond het label op x≈290 en de
+      // schakelaar op x≈1330. Duizend pixels tussen twee dingen die bij elkaar
+      // horen — je oog moet heen en weer, en bij zes regels raak je kwijt welke
+      // schakelaar bij welk label hoort.
+      Offset labelAt(WidgetTester tester, String group) =>
+          tester.getTopLeft(find.text(_l10n.d(group).toUpperCase()));
+
+      testWidgets('breed: de drie kaarten staan náást elkaar', (tester) async {
+        await pump(
+          tester,
+          profile: (p) => p.copyWith(logoPath: 'logo.png'),
+          surface: const Size(1600, 1600),
+        );
+        await expand(tester);
+
+        final a = labelAt(tester, 'Op deze slide');
+        final b = labelAt(tester, 'Tijdens presenteren');
+        final c = labelAt(tester, 'Classificatie en privacy');
+
+        expect(a.dy, b.dy, reason: 'zelfde rij');
+        expect(b.dy, c.dy, reason: 'zelfde rij');
+        expect(a.dx, lessThan(b.dx));
+        expect(b.dx, lessThan(c.dx));
+      });
+
+      testWidgets('smal: ze stapelen terug', (tester) async {
+        // Kolommen die niet passen, zijn erger dan geen kolommen: dan wordt het
+        // label afgekapt en de bediening geplet. Onder de ~360px per kaart valt
+        // de indeling terug op één kolom.
+        await pump(
+          tester,
+          profile: (p) => p.copyWith(logoPath: 'logo.png'),
+          surface: const Size(680, 2400),
+        );
+        await expand(tester);
+
+        final a = labelAt(tester, 'Op deze slide');
+        final b = labelAt(tester, 'Tijdens presenteren');
+        final c = labelAt(tester, 'Classificatie en privacy');
+
+        expect(a.dx, b.dx, reason: 'zelfde kolom');
+        expect(a.dy, lessThan(b.dy));
+        expect(b.dy, lessThan(c.dy));
+      });
+
+      testWidgets('en de bediening blijft dicht bij haar label', (
+        tester,
+      ) async {
+        // De harde eis achter dit hele herontwerp. Binnen een kaart mag de afstand
+        // van label naar schakelaar niet weer richting de volle paneelbreedte
+        // groeien — dan is er niets opgelost.
+        await pump(
+          tester,
+          profile: (p) => p.copyWith(logoPath: 'logo.png'),
+          surface: const Size(1600, 1600),
+        );
+        await expand(tester);
+
+        final label = tester.getTopRight(find.text(_l10n.d('Logo tonen')));
+        final control = tester.getTopLeft(find.byType(Switch).first);
+
+        expect(control.dx - label.dx, lessThan(340));
+      });
+    },
+  );
 
   group('de duur verschijnt pas als de timing aan staat', () {
     testWidgets('uit: geen stepper', (tester) async {

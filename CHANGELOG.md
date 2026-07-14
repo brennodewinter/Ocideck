@@ -18,6 +18,14 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   on, and a setting you cannot use (a logo toggle with no logo in the style profile)
   is not shown at all rather than shown greyed out.
 
+  The groups are **cards that sit side by side** when the editor column is wide
+  enough, and stack back when it is not. A settings row spanning the full width put
+  the label at x≈290 and its switch at x≈1330 — a thousand pixels of nothing between
+  two things that belong together. Right-aligning the control is right; doing it
+  across the full width is not. Inside a card the eye travels a couple of hundred
+  pixels instead of a thousand, the alignment survives, and the horizontal space is
+  finally used *for* something instead of given away.
+
   Collapsed, the header now badges **everything that deviates from the default** —
   not just TLP. That was not only ugly but a gap: *leave out of display and export*
   decides what the recipient gets, and you could not see it without expanding the
