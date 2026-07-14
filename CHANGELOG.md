@@ -7,7 +7,23 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
-### Added
+### Security
+- **The Mermaid SVG sanitiser can no longer be split apart by a control
+  character.** `sanitizeMermaidSvg` refused `javascript:`/`data:` URLs with a
+  plain `startsWith`, but a URL parser ignores ASCII whitespace and control
+  bytes while reading a scheme — so `java<tab>script:`, a newline (which XML
+  normalisation or a `&#10;` reference can plant) or a leading NUL all slipped
+  through, and `vbscript:` was not checked at all. The scheme test now strips
+  every C0 control and space before matching and also rejects `vbscript:`. This
+  is a defence-in-depth layer (the in-app renderer runs no script and the HTML
+  export re-sanitises with DOMPurify under a nonce CSP), but the layer now
+  actually holds its stated contract.
+- **CI runs with a least-privilege token and no lingering credentials.** Both
+  workflows now declare `permissions: contents: read` (they only read the repo
+  and upload artifacts, which use the separate Actions runtime token), so a
+  compromised dependency or action can't push, open PRs or edit issues with the
+  job token. Every `actions/checkout` also sets `persist-credentials: false`, so
+  the auth token is not written into `.git/config` for a later step to reuse.
 - **The coverage gate now actually runs — and can finally see an untested file.**
   `make coverage` was in no aggregate target, and the CI workflow that ran it
   cannot fire on the Forgejo remote, so the coverage floor was enforced by
