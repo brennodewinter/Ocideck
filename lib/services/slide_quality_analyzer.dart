@@ -10,6 +10,7 @@ import '../models/question.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
 import '../models/slide_quality.dart';
+import '../models/video_source.dart';
 import '../utils/color_contrast.dart';
 import '../utils/project_path.dart';
 import '../widgets/slides/inline_markdown.dart';
@@ -499,6 +500,11 @@ class SlideQualityAnalyzer {
       required String label,
     }) {
       if (path.trim().isEmpty) return;
+      // Een online bron heeft geen bestand op schijf dat kán ontbreken. Zonder
+      // deze poort plakt resolveSlideAssetPath de URL als relatief pad achter de
+      // projectmap ("<project>/https:/youtu.be/…"), vindt daar niets, en meldt
+      // een YouTube/Vimeo/mp4-link als "bestand niet gevonden".
+      if (VideoSource.looksLikeUrl(path)) return;
       final resolved = _resolveAssetPath(path, projectPath);
       if (resolved == null || File(resolved).existsSync()) return;
 
