@@ -741,6 +741,23 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Op deze slide': 'Op dizze dia',
+  'Tijdens presenteren': 'Under it presintearjen',
+  'Classificatie en privacy': 'Klassifikaasje en privacy',
+  'Logo tonen': 'Logo toane',
+  'Footer tonen': 'Foettekst toane',
+  'Tabel bewerkbaar': 'Tabel te bewurkjen',
+  'Laat je de tabel tijdens het presenteren voor de zaal aanpassen. Staat standaard uit.':
+      'Lit dy de tabel ûnder it presintearjen foar de seal oanpasse. Stiet standert út.',
+  'Automatisch doorgaan': 'Automatysk trochgean',
+  'Persoonsgegevens': 'Persoansgegevens',
+  'Wijzigen': 'Feroarje',
+  'Automatisch afspelen': 'Automatysk ôfspylje',
+  'Melden': 'Melde',
+  'Geaccepteerd': 'Akseptearre',
+  'Gewaarschuwd': 'Warskôge',
+  'Weggelaten': 'Weilitten',
+  'Bewerkbaar': 'Te bewurkjen',
   'De privacycontrole': 'De privacykontrôle',
   'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
       'OciDeck lêst dyn dia\'s nei op gegevens dy\'t privacygefoelich wêze kinne: identifikaasjenûmers, kontaktgegevens, telefoannûmers, bankrekkens, kaaien en wachtwurden, en bysûndere persoansgegevens. Dat bart folslein op dit apparaat: der wurdt neat ferstjoerd, en de fûne wearde komt yn gjin inkelde melding te stean.',

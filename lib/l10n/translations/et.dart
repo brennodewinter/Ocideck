@@ -1774,6 +1774,23 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Op deze slide': 'Sellel slaidil',
+  'Tijdens presenteren': 'Esitluse ajal',
+  'Classificatie en privacy': 'Klassifikatsioon ja privaatsus',
+  'Logo tonen': 'Näita logo',
+  'Footer tonen': 'Näita jalust',
+  'Tabel bewerkbaar': 'Tabel muudetav',
+  'Laat je de tabel tijdens het presenteren voor de zaal aanpassen. Staat standaard uit.':
+      'Võimaldab sul esitluse ajal publiku ees tabelit muuta. Vaikimisi väljas.',
+  'Automatisch doorgaan': 'Liigu automaatselt edasi',
+  'Persoonsgegevens': 'Isikuandmed',
+  'Wijzigen': 'Muuda',
+  'Automatisch afspelen': 'Esita automaatselt',
+  'Melden': 'Teata',
+  'Geaccepteerd': 'Aktsepteeritud',
+  'Gewaarschuwd': 'Hoiatatud',
+  'Weggelaten': 'Välja jäetud',
+  'Bewerkbaar': 'Muudetav',
   'De privacycontrole': 'Privaatsuskontroll',
   'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
       'OciDeck loeb su slaidid läbi andmete suhtes, mis võivad olla privaatsustundlikud: isikukoodid, kontaktandmed, telefoninumbrid, pangakontod, võtmed ja paroolid ning isikuandmete eriliigid. Kõik toimub selles seadmes: midagi ei saadeta välja ja leitud väärtus ei ilmu üheski teates.',

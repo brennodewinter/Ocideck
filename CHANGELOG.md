@@ -8,6 +8,20 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Changed
+- **Slide settings, redesigned.** The block had grown one feature at a time, and it
+  showed: seven settings in one flat list with three different row shapes mixed
+  together — a full-width audio card, checkboxes with the control on the *left*,
+  dropdowns with the control on the *right*. Nothing lined up. Now the settings are
+  grouped by the question you are actually asking (*on this slide*, *while
+  presenting*, *classification and privacy*), every row has the same shape with the
+  control on the right, the auto-advance duration only appears once you switch it
+  on, and a setting you cannot use (a logo toggle with no logo in the style profile)
+  is not shown at all rather than shown greyed out.
+
+  Collapsed, the header now badges **everything that deviates from the default** —
+  not just TLP. That was not only ugly but a gap: *leave out of display and export*
+  decides what the recipient gets, and you could not see it without expanding the
+  block. So you did not expand, and so you did not see it.
 - **The promise is now written down where it matters.** *The check does not
   guarantee that everything is found; it reduces the chance that personal data
   leaks out unintentionally.* That sentence now appears in the privacy statement

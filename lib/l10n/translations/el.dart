@@ -1811,6 +1811,23 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Op deze slide': 'Σε αυτή τη διαφάνεια',
+  'Tijdens presenteren': 'Κατά την παρουσίαση',
+  'Classificatie en privacy': 'Διαβάθμιση και απόρρητο',
+  'Logo tonen': 'Εμφάνιση λογοτύπου',
+  'Footer tonen': 'Εμφάνιση υποσέλιδου',
+  'Tabel bewerkbaar': 'Επεξεργάσιμος πίνακας',
+  'Laat je de tabel tijdens het presenteren voor de zaal aanpassen. Staat standaard uit.':
+      'Σου επιτρέπει να αλλάζεις τον πίνακα μπροστά στο κοινό κατά την παρουσίαση. Απενεργοποιημένο εξ ορισμού.',
+  'Automatisch doorgaan': 'Αυτόματη μετάβαση',
+  'Persoonsgegevens': 'Προσωπικά δεδομένα',
+  'Wijzigen': 'Αλλαγή',
+  'Automatisch afspelen': 'Αυτόματη αναπαραγωγή',
+  'Melden': 'Αναφορά',
+  'Geaccepteerd': 'Αποδεκτό',
+  'Gewaarschuwd': 'Με προειδοποίηση',
+  'Weggelaten': 'Παραλείπεται',
+  'Bewerkbaar': 'Επεξεργάσιμο',
   'De privacycontrole': 'Ο έλεγχος απορρήτου',
   'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
       'Το OciDeck διαβάζει τις διαφάνειές σου για δεδομένα που μπορεί να είναι ευαίσθητα: αριθμούς ταυτοποίησης, στοιχεία επικοινωνίας, αριθμούς τηλεφώνου, τραπεζικούς λογαριασμούς, κλειδιά και κωδικούς, και ειδικές κατηγορίες προσωπικών δεδομένων. Όλα γίνονται σε αυτή τη συσκευή: τίποτα δεν αποστέλλεται και η τιμή που βρέθηκε δεν εμφανίζεται σε καμία ειδοποίηση.',

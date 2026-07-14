@@ -1782,6 +1782,23 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Op deze slide': 'På den här bilden',
+  'Tijdens presenteren': 'Under presentationen',
+  'Classificatie en privacy': 'Klassificering och integritet',
+  'Logo tonen': 'Visa logotyp',
+  'Footer tonen': 'Visa sidfot',
+  'Tabel bewerkbaar': 'Tabell redigerbar',
+  'Laat je de tabel tijdens het presenteren voor de zaal aanpassen. Staat standaard uit.':
+      'Låter dig ändra tabellen inför publiken under presentationen. Av som standard.',
+  'Automatisch doorgaan': 'Gå vidare automatiskt',
+  'Persoonsgegevens': 'Personuppgifter',
+  'Wijzigen': 'Ändra',
+  'Automatisch afspelen': 'Spela upp automatiskt',
+  'Melden': 'Rapportera',
+  'Geaccepteerd': 'Accepterad',
+  'Gewaarschuwd': 'Varnad',
+  'Weggelaten': 'Utelämnad',
+  'Bewerkbaar': 'Redigerbar',
   'De privacycontrole': 'Integritetskontrollen',
   'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
       'OciDeck läser igenom dina bilder efter uppgifter som kan vara integritetskänsliga: identifikationsnummer, kontaktuppgifter, telefonnummer, bankkonton, nycklar och lösenord samt särskilda kategorier av personuppgifter. Allt sker på den här enheten: ingenting skickas iväg, och det funna värdet syns inte i något meddelande.',

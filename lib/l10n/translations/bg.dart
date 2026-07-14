@@ -1806,6 +1806,23 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Op deze slide': 'На този слайд',
+  'Tijdens presenteren': 'По време на презентация',
+  'Classificatie en privacy': 'Класификация и поверителност',
+  'Logo tonen': 'Показване на лого',
+  'Footer tonen': 'Показване на долен колонтитул',
+  'Tabel bewerkbaar': 'Таблицата е редактируема',
+  'Laat je de tabel tijdens het presenteren voor de zaal aanpassen. Staat standaard uit.':
+      'Позволява ти да променяш таблицата пред публиката по време на презентация. По подразбиране е изключено.',
+  'Automatisch doorgaan': 'Автоматично напред',
+  'Persoonsgegevens': 'Лични данни',
+  'Wijzigen': 'Промяна',
+  'Automatisch afspelen': 'Автоматично възпроизвеждане',
+  'Melden': 'Съобщаване',
+  'Geaccepteerd': 'Прието',
+  'Gewaarschuwd': 'С предупреждение',
+  'Weggelaten': 'Пропуснато',
+  'Bewerkbaar': 'Редактируемо',
   'De privacycontrole': 'Проверката за поверителност',
   'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
       'OciDeck преглежда слайдовете ти за данни, които може да са чувствителни: идентификационни номера, данни за контакт, телефонни номера, банкови сметки, ключове и пароли, както и специални категории лични данни. Всичко се случва на това устройство: нищо не се изпраща и намерената стойност не се появява в нито едно съобщение.',

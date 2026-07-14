@@ -922,6 +922,23 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Op deze slide': 'On this slide',
+  'Tijdens presenteren': 'While presenting',
+  'Classificatie en privacy': 'Classification and privacy',
+  'Logo tonen': 'Show logo',
+  'Footer tonen': 'Show footer',
+  'Tabel bewerkbaar': 'Table editable',
+  'Laat je de tabel tijdens het presenteren voor de zaal aanpassen. Staat standaard uit.':
+      'Lets you change the table in front of the audience while presenting. Off by default.',
+  'Automatisch doorgaan': 'Advance automatically',
+  'Persoonsgegevens': 'Personal data',
+  'Wijzigen': 'Change',
+  'Automatisch afspelen': 'Play automatically',
+  'Melden': 'Report',
+  'Geaccepteerd': 'Accepted',
+  'Gewaarschuwd': 'Warned',
+  'Weggelaten': 'Left out',
+  'Bewerkbaar': 'Editable',
   'De privacycontrole': 'The privacy check',
   'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
       'OciDeck reads your slides for data that may be privacy-sensitive: identification numbers, contact details, phone numbers, bank accounts, keys and passwords, and special categories of personal data. This happens entirely on this device: nothing is sent anywhere, and the value that was found never appears in any notice.',

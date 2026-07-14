@@ -1791,6 +1791,23 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Op deze slide': 'Šioje skaidrėje',
+  'Tijdens presenteren': 'Pristatymo metu',
+  'Classificatie en privacy': 'Klasifikacija ir privatumas',
+  'Logo tonen': 'Rodyti logotipą',
+  'Footer tonen': 'Rodyti poraštę',
+  'Tabel bewerkbaar': 'Lentelė redaguojama',
+  'Laat je de tabel tijdens het presenteren voor de zaal aanpassen. Staat standaard uit.':
+      'Leidžia keisti lentelę auditorijos akivaizdoje pristatymo metu. Pagal numatytuosius nustatymus išjungta.',
+  'Automatisch doorgaan': 'Tęsti automatiškai',
+  'Persoonsgegevens': 'Asmens duomenys',
+  'Wijzigen': 'Keisti',
+  'Automatisch afspelen': 'Groti automatiškai',
+  'Melden': 'Pranešti',
+  'Geaccepteerd': 'Priimta',
+  'Gewaarschuwd': 'Su įspėjimu',
+  'Weggelaten': 'Praleista',
+  'Bewerkbaar': 'Redaguojama',
   'De privacycontrole': 'Privatumo patikra',
   'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
       'OciDeck peržiūri tavo skaidres ieškodama duomenų, kurie gali būti jautrūs privatumui: identifikavimo numerių, kontaktinių duomenų, telefono numerių, banko sąskaitų, raktų ir slaptažodžių bei specialių kategorijų asmens duomenų. Visa tai vyksta šiame įrenginyje: niekas nesiunčiama, o rasta reikšmė nepasirodo jokiame pranešime.',

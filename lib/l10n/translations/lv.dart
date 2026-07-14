@@ -1782,6 +1782,23 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Op deze slide': 'Šajā slaidā',
+  'Tijdens presenteren': 'Prezentācijas laikā',
+  'Classificatie en privacy': 'Klasifikācija un privātums',
+  'Logo tonen': 'Rādīt logotipu',
+  'Footer tonen': 'Rādīt kājeni',
+  'Tabel bewerkbaar': 'Tabula rediģējama',
+  'Laat je de tabel tijdens het presenteren voor de zaal aanpassen. Staat standaard uit.':
+      'Ļauj tev mainīt tabulu publikas priekšā prezentācijas laikā. Pēc noklusējuma izslēgts.',
+  'Automatisch doorgaan': 'Automātiski turpināt',
+  'Persoonsgegevens': 'Personas dati',
+  'Wijzigen': 'Mainīt',
+  'Automatisch afspelen': 'Atskaņot automātiski',
+  'Melden': 'Ziņot',
+  'Geaccepteerd': 'Pieņemts',
+  'Gewaarschuwd': 'Ar brīdinājumu',
+  'Weggelaten': 'Izlaists',
+  'Bewerkbaar': 'Rediģējams',
   'De privacycontrole': 'Privātuma pārbaude',
   'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
       'OciDeck pārlasa tavus slaidus, meklējot datus, kas varētu būt privātumam jutīgi: identifikācijas numurus, kontaktinformāciju, tālruņa numurus, bankas kontus, atslēgas un paroles, kā arī īpašas personas datu kategorijas. Tas viss notiek šajā ierīcē: nekas netiek nosūtīts, un atrastā vērtība neparādās nevienā paziņojumā.',
