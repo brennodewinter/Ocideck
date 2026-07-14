@@ -8,6 +8,14 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Security
+- **The web fetch-proxy fails closed by default.** `server/fetch-proxy`
+  served *any* requester when `OCIDECK_PROXY_ALLOWED_ORIGINS` was unset, so an
+  operator who deployed it without that variable ran an (SSRF-guarded, but
+  otherwise open) fetch relay for arbitrary public URLs. With no allowlist it
+  now serves only the app's own same-origin fetch (proven by `Sec-Fetch-Site`,
+  which a cross-site page cannot forge); the previous open behaviour is still
+  available but must be chosen deliberately with `OCIDECK_PROXY_ALLOW_ANY=1`,
+  which also logs a startup warning.
 - **The Mermaid SVG sanitiser can no longer be split apart by a control
   character.** `sanitizeMermaidSvg` refused `javascript:`/`data:` URLs with a
   plain `startsWith`, but a URL parser ignores ASCII whitespace and control
