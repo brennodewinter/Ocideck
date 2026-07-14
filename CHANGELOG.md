@@ -8,6 +8,28 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Structural leaks — the hiding places a generic PII scanner misses.** A user
+  path (`/Users/jan.jansen/…`) simply gives away a name, and it is most often in
+  the path of an image you dragged in, travelling along into the Markdown and the
+  HTML export. Plus tokens in URL queries (a presigned S3 link, an Azure SAS
+  token), personal data in query strings, share links with built-in access
+  (SharePoint, Drive, Dropbox — whoever has the link has the file), and `mailto:`
+  addresses.
+
+  These are not personal data *in* the text, but they leak all the same.
+
+  Reporting and redacting are deliberately different here: **a path is reported but
+  never redacted**, because a redacted path is a broken image. Rename the file or
+  move it — that is a decision only you can make.
+
+  And an embedded data-URI is reported as an honest admission rather than an alarm:
+  we cannot look inside it, and it could just as well be a screenshot of a CRM
+  screen full of names. Saying nothing would leave you believing we had seen
+  everything.
+
+  What keeps the family usable is the generic-account exclusion: `/home/runner`,
+  `/Users/admin`, `C:\Users\Public`. Without it every CI log and every Docker
+  example fires, and the rule is switched off within a day.
 - **Your own details are the sender, not a finding.** Put your name, email
   address, phone number or your organisation's domain under *Settings → Security*
   and they stop being reported — and stop being redacted.

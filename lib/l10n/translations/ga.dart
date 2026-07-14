@@ -1819,6 +1819,13 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'gebruikerspad met een naam erin': 'conair úsáideora ina bhfuil ainm',
+  'toegangstoken in een link': 'comharthán rochtana i nasc',
+  'persoonsgegeven in een link': 'sonraí pearsanta i nasc',
+  'deellink met ingebakken toegang': 'nasc comhroinnte le rochtain ionsuite',
+  'e-mailadres in een link': 'seoladh ríomhphoist i nasc',
+  'ingesloten afbeelding — wij kunnen er niet in kijken':
+      'íomhá leabaithe — ní féidir linn breathnú isteach inti',
   'Je eigen gegevens': 'Do shonraí féin',
   'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
       'Ceann sa líne: d\'ainm, do sheoladh ríomhphoist, d\'uimhir ghutháin nó fearann d\'eagraíochta. Ní thuairiscítear ná ní fholaítear a bhfuil anseo — is é an seoltóir é, ní toradh. Clúdaíonn fearann (politie.nl) gach seoladh faoi.',

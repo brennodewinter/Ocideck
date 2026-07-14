@@ -1811,6 +1811,14 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'gebruikerspad met een naam erin': 'διαδρομή χρήστη που περιέχει όνομα',
+  'toegangstoken in een link': 'διακριτικό πρόσβασης σε σύνδεσμο',
+  'persoonsgegeven in een link': 'προσωπικό δεδομένο σε σύνδεσμο',
+  'deellink met ingebakken toegang':
+      'σύνδεσμος κοινής χρήσης με ενσωματωμένη πρόσβαση',
+  'e-mailadres in een link': 'διεύθυνση email σε σύνδεσμο',
+  'ingesloten afbeelding — wij kunnen er niet in kijken':
+      'ενσωματωμένη εικόνα — δεν μπορούμε να δούμε μέσα',
   'Je eigen gegevens': 'Τα δικά σου στοιχεία',
   'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
       'Ένα ανά γραμμή: το όνομά σου, η διεύθυνση email, το τηλέφωνο ή ο τομέας του οργανισμού σου. Ό,τι γράφεις εδώ δεν αναφέρεται και δεν αποκρύπτεται — είναι ο αποστολέας, όχι εύρημα. Ένας τομέας (politie.nl) καλύπτει κάθε διεύθυνση κάτω από αυτόν.',

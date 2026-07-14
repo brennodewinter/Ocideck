@@ -922,6 +922,13 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'gebruikerspad met een naam erin': 'user path containing a name',
+  'toegangstoken in een link': 'access token in a link',
+  'persoonsgegeven in een link': 'personal data in a link',
+  'deellink met ingebakken toegang': 'share link with built-in access',
+  'e-mailadres in een link': 'email address in a link',
+  'ingesloten afbeelding — wij kunnen er niet in kijken':
+      'embedded image — we cannot look inside it',
   'Je eigen gegevens': 'Your own details',
   'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
       'One per line: your name, email address, phone number, or your organisation\'s domain. What you list here is not reported and not redacted — it is the sender, not a finding. A domain (politie.nl) covers every address under it.',

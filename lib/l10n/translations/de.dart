@@ -740,6 +740,13 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'gebruikerspad met een naam erin': 'Benutzerpfad mit einem Namen darin',
+  'toegangstoken in een link': 'Zugangstoken in einem Link',
+  'persoonsgegeven in een link': 'personenbezogenes Datum in einem Link',
+  'deellink met ingebakken toegang': 'Freigabelink mit eingebautem Zugriff',
+  'e-mailadres in een link': 'E-Mail-Adresse in einem Link',
+  'ingesloten afbeelding — wij kunnen er niet in kijken':
+      'eingebettetes Bild — wir können nicht hineinsehen',
   'Je eigen gegevens': 'Deine eigenen Daten',
   'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
       'Eines pro Zeile: dein Name, deine E-Mail-Adresse, deine Telefonnummer oder die Domain deiner Organisation. Was hier steht, wird weder gemeldet noch geschwärzt — es ist der Absender, kein Befund. Eine Domain (politie.nl) deckt jede Adresse darunter ab.',

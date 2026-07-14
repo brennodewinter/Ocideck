@@ -1787,6 +1787,14 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'gebruikerspad met een naam erin': 'felhasználói útvonal névvel',
+  'toegangstoken in een link': 'hozzáférési token egy hivatkozásban',
+  'persoonsgegeven in een link': 'személyes adat egy hivatkozásban',
+  'deellink met ingebakken toegang':
+      'megosztási hivatkozás beépített hozzáféréssel',
+  'e-mailadres in een link': 'e-mail-cím egy hivatkozásban',
+  'ingesloten afbeelding — wij kunnen er niet in kijken':
+      'beágyazott kép — nem tudunk belenézni',
   'Je eigen gegevens': 'A saját adataid',
   'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
       'Soronként egy: a neved, e-mail-címed, telefonszámod vagy a szervezeted domainje. Ami itt szerepel, azt nem jelzi és nem takarja ki — az a feladó, nem megállapítás. Egy domain (politie.nl) minden alatta lévő címet lefed.',

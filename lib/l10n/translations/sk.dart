@@ -1790,6 +1790,13 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'gebruikerspad met een naam erin': 'cesta používateľa obsahujúca meno',
+  'toegangstoken in een link': 'prístupový token v odkaze',
+  'persoonsgegeven in een link': 'osobný údaj v odkaze',
+  'deellink met ingebakken toegang': 'odkaz na zdieľanie s vstavaným prístupom',
+  'e-mailadres in een link': 'e-mailová adresa v odkaze',
+  'ingesloten afbeelding — wij kunnen er niet in kijken':
+      'vložený obrázok — nevidíme dovnútra',
   'Je eigen gegevens': 'Tvoje vlastné údaje',
   'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
       'Jeden na riadok: tvoje meno, e-mailová adresa, telefón alebo doména tvojej organizácie. To, čo je tu, sa nehlási ani nezačierňuje — je to odosielateľ, nie nález. Doména (politie.nl) pokrýva každú adresu pod ňou.',

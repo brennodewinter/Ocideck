@@ -1802,6 +1802,13 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'gebruikerspad met een naam erin': 'cale de utilizator care conține un nume',
+  'toegangstoken in een link': 'token de acces într-un link',
+  'persoonsgegeven in een link': 'dată personală într-un link',
+  'deellink met ingebakken toegang': 'link de partajare cu acces încorporat',
+  'e-mailadres in een link': 'adresă de e-mail într-un link',
+  'ingesloten afbeelding — wij kunnen er niet in kijken':
+      'imagine încorporată — nu putem privi în interior',
   'Je eigen gegevens': 'Propriile tale date',
   'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
       'Câte unul pe rând: numele tău, adresa de e-mail, telefonul sau domeniul organizației tale. Ce este aici nu se raportează și nu se redactează — este expeditorul, nu o constatare. Un domeniu (politie.nl) acoperă orice adresă de sub el.',

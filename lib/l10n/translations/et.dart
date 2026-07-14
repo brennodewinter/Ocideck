@@ -1774,6 +1774,13 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'gebruikerspad met een naam erin': 'kasutajatee, mis sisaldab nime',
+  'toegangstoken in een link': 'juurdepääsuluba lingis',
+  'persoonsgegeven in een link': 'isikuandmed lingis',
+  'deellink met ingebakken toegang': 'jagamislink sisseehitatud juurdepääsuga',
+  'e-mailadres in een link': 'e-posti aadress lingis',
+  'ingesloten afbeelding — wij kunnen er niet in kijken':
+      'manustatud pilt — me ei näe selle sisse',
   'Je eigen gegevens': 'Sinu enda andmed',
   'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
       'Üks rea kohta: sinu nimi, e-posti aadress, telefoninumber või organisatsiooni domeen. Siin olevat ei teatata ega redigeerita — see on saatja, mitte leid. Domeen (politie.nl) katab kõik selle all olevad aadressid.',
