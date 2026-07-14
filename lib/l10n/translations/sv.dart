@@ -1872,6 +1872,31 @@ const _dutchSourceAddSv = <String, String>{
   'toegangstoken (JWT)': 'åtkomsttoken (JWT)',
   'databaseverbinding met wachtwoord': 'databasanslutning med lösenord',
   'wachtwoord in klare tekst': 'lösenord i klartext',
+  'Afbreken': 'Avbryt',
+  'Afgebroken. Er is niets half achtergebleven.':
+      'Avbrutet. Ingenting blev halvfärdigt kvar.',
+  'Bijwerken': 'Uppdatera',
+  'Binnenhalen…': 'Hämtar…',
+  'CVE\'s': 'CVE:er',
+  'Database ophalen': 'Hämta databas',
+  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
+      'CVE-listan kunde inte hämtas. Kontrollera din anslutning och försök igen; en halvhämtad lista har kastats.',
+  'De nieuwste uitgave opzoeken…': 'Söker efter den senaste utgåvan…',
+  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
+      'Det här är en stor nedladdning: över 500 MB att hämta, tillfälligt runt 1,5 GB diskutrymme och, beroende på din anslutning och enhet, lätt tio till trettio minuters arbete. Sedan blir ett index på några hundra megabyte kvar. På en anslutning som betalas per megabyte gör du helst inte det här.',
+  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
+      'Det fanns för lite diskutrymme. Uppbyggnaden kräver tillfälligt över 1,5 GB.',
+  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
+      'Det hämtade arkivet var inte det vi förväntade oss och avvisades. Ingenting har installerats.',
+  'Indexeren…': 'Indexerar…',
+  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
+      'Tillgänglig lokalt — uppslag sker offline, ingen sökterm lämnar enheten.',
+  'Lokale CVE-database': 'Lokal CVE-databas',
+  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
+      'Med CVE-listan på din egen enhet stannar uppslagen här: ingen sökterm går längre till en server, och ingen kan se vilken sårbarhet du undersöker.',
+  'Uitpakken…': 'Packar upp…',
+  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
+      'Lägg hela CVE-listan på den här enheten, så att uppslag sker offline och din sökterm inte går någonstans. Databasen kommer från CVE List V5 (det officiella CVE-programmet, via GitHub).',
   'Wat er lokaal beschikbaar is': 'Vad som finns tillgängligt lokalt',
   'Gegevenspakket': 'Datapaket',
   'Nu bijwerken': 'Uppdatera nu',

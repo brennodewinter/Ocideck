@@ -1896,6 +1896,31 @@ const _dutchSourceAddMt = <String, String>{
   'toegangstoken (JWT)': 'token ta\' aċċess (JWT)',
   'databaseverbinding met wachtwoord': 'konnessjoni tad-database bil-password',
   'wachtwoord in klare tekst': 'password f\'test ċar',
+  'Afbreken': 'Ikkanċella',
+  'Afgebroken. Er is niets half achtergebleven.':
+      'Ikkanċellat. Ma baqa\' xejn nofsu lest.',
+  'Bijwerken': 'Aġġorna',
+  'Binnenhalen…': 'Qed jitniżżel…',
+  'CVE\'s': 'CVE',
+  'Database ophalen': 'Niżżel id-database',
+  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
+      'Il-lista tas-CVE ma setgħetx tinġieb. Iċċekkja l-konnessjoni tiegħek u erġa\' pprova; lista mniżżla nofsha ntremiet.',
+  'De nieuwste uitgave opzoeken…': 'Qed tinstab l-aħħar verżjoni…',
+  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
+      'Dan huwa download kbir: aktar minn 500 MB x\'tniżżel, temporanjament madwar 1,5 GB spazju fuq id-diska, u skont il-konnessjoni u l-apparat tiegħek faċilment għaxar sa tletin minuta xogħol. Wara jibqa\' indiċi ta\' xi mitt megabajt jew tnejn. Fuq konnessjoni li titħallas bil-megabajt, aħjar ma tagħmilx dan.',
+  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
+      'Ma kienx hemm biżżejjed spazju fuq id-diska. Il-bini jitlob temporanjament aktar minn 1,5 GB.',
+  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
+      'L-arkivju mniżżel ma kienx dak li stennejna u ġie miċħud. Ma ġie installat xejn.',
+  'Indexeren…': 'Qed jiġi indiċjat…',
+  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
+      'Disponibbli lokalment — it-tfittxija ssir offline, l-ebda terminu ta\' tfittxija ma joħroġ barra.',
+  'Lokale CVE-database': 'Database CVE lokali',
+  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
+      'Bil-lista tas-CVE fuq l-apparat tiegħek stess, it-tfittxija tibqa\' hawn: l-ebda terminu ta\' tfittxija ma jmur aktar għand server, u ħadd ma jista\' jara liema vulnerabbiltà qed tinvestiga.',
+  'Uitpakken…': 'Qed jinħareġ…',
+  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
+      'Poġġi l-lista sħiħa tas-CVE fuq dan l-apparat, biex it-tfittxija ssir offline u t-terminu ta\' tfittxija tiegħek ma jmur imkien. Id-database tiġi minn CVE List V5 (il-programm uffiċjali tas-CVE, permezz ta\' GitHub).',
   'Wat er lokaal beschikbaar is': 'X\'inhu disponibbli lokalment',
   'Gegevenspakket': 'Pakkett tad-data',
   'Nu bijwerken': 'Aġġorna issa',

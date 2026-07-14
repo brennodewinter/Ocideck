@@ -1880,6 +1880,31 @@ const _dutchSourceAddSk = <String, String>{
   'toegangstoken (JWT)': 'prístupový token (JWT)',
   'databaseverbinding met wachtwoord': 'pripojenie k databáze s heslom',
   'wachtwoord in klare tekst': 'heslo v otvorenom texte',
+  'Afbreken': 'Prerušiť',
+  'Afgebroken. Er is niets half achtergebleven.':
+      'Prerušené. Nič nezostalo rozrobené.',
+  'Bijwerken': 'Aktualizovať',
+  'Binnenhalen…': 'Sťahovanie…',
+  'CVE\'s': 'CVE',
+  'Database ophalen': 'Stiahnuť databázu',
+  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
+      'Zoznam CVE sa nepodarilo stiahnuť. Skontroluj pripojenie a skús to znova; napoly stiahnutý zoznam bol zahodený.',
+  'De nieuwste uitgave opzoeken…': 'Hľadanie najnovšieho vydania…',
+  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
+      'Toto je veľké sťahovanie: vyše 500 MB na stiahnutie, dočasne asi 1,5 GB miesta na disku a podľa pripojenia a zariadenia pokojne desať až tridsať minút práce. Potom zostane index s veľkosťou niekoľkých stoviek megabajtov. Na pripojení platenom za megabajt to radšej nerob.',
+  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
+      'Na disku nebolo dosť miesta. Zostavenie dočasne vyžaduje vyše 1,5 GB.',
+  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
+      'Stiahnutý archív nebol taký, aký sme čakali, a bol odmietnutý. Nič sa nenainštalovalo.',
+  'Indexeren…': 'Indexovanie…',
+  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
+      'Dostupné lokálne — vyhľadávanie prebieha offline, žiadny hľadaný výraz neopustí zariadenie.',
+  'Lokale CVE-database': 'Lokálna databáza CVE',
+  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
+      'So zoznamom CVE na vlastnom zariadení zostáva vyhľadávanie tu: žiadny hľadaný výraz už nejde na server a nikto nevidí, ktorú zraniteľnosť skúmaš.',
+  'Uitpakken…': 'Rozbaľovanie…',
+  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
+      'Ulož celý zoznam CVE do tohto zariadenia, aby vyhľadávanie prebiehalo offline a tvoj hľadaný výraz nikam neputoval. Databáza pochádza z CVE List V5 (oficiálneho programu CVE, cez GitHub).',
   'Wat er lokaal beschikbaar is': 'Čo je dostupné lokálne',
   'Gegevenspakket': 'Dátový balík',
   'Nu bijwerken': 'Aktualizovať teraz',

@@ -1902,6 +1902,31 @@ const _dutchSourceAddEl = <String, String>{
   'toegangstoken (JWT)': 'διακριτικό πρόσβασης (JWT)',
   'databaseverbinding met wachtwoord': 'σύνδεση βάσης δεδομένων με κωδικό',
   'wachtwoord in klare tekst': 'κωδικός σε απλό κείμενο',
+  'Afbreken': 'Ακύρωση',
+  'Afgebroken. Er is niets half achtergebleven.':
+      'Ακυρώθηκε. Δεν έμεινε τίποτα μισοτελειωμένο.',
+  'Bijwerken': 'Ενημέρωση',
+  'Binnenhalen…': 'Γίνεται λήψη…',
+  'CVE\'s': 'CVE',
+  'Database ophalen': 'Λήψη βάσης δεδομένων',
+  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
+      'Δεν ήταν δυνατή η λήψη της λίστας CVE. Έλεγξε τη σύνδεσή σου και δοκίμασε ξανά· μια μισοκατεβασμένη λίστα απορρίφθηκε.',
+  'De nieuwste uitgave opzoeken…': 'Αναζήτηση της πιο πρόσφατης έκδοσης…',
+  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
+      'Πρόκειται για μεγάλη λήψη: πάνω από 500 MB, προσωρινά περίπου 1,5 GB χώρου στον δίσκο και, ανάλογα με τη σύνδεση και τη συσκευή σου, εύκολα δέκα έως τριάντα λεπτά δουλειάς. Μετά παραμένει ένα ευρετήριο μερικών εκατοντάδων megabyte. Σε σύνδεση που χρεώνεται ανά megabyte, καλύτερα να μην το κάνεις.',
+  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
+      'Δεν υπήρχε αρκετός χώρος στον δίσκο. Η δημιουργία χρειάζεται προσωρινά πάνω από 1,5 GB.',
+  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
+      'Το αρχείο που κατέβηκε δεν ήταν αυτό που περιμέναμε και απορρίφθηκε. Δεν εγκαταστάθηκε τίποτα.',
+  'Indexeren…': 'Ευρετηρίαση…',
+  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
+      'Διαθέσιμο τοπικά — οι αναζητήσεις γίνονται εκτός σύνδεσης, κανένας όρος αναζήτησης δεν φεύγει.',
+  'Lokale CVE-database': 'Τοπική βάση δεδομένων CVE',
+  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
+      'Με τη λίστα CVE στη δική σου συσκευή, οι αναζητήσεις μένουν εδώ: κανένας όρος αναζήτησης δεν πηγαίνει πια σε διακομιστή και κανείς δεν βλέπει ποια ευπάθεια ερευνάς.',
+  'Uitpakken…': 'Γίνεται εξαγωγή…',
+  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
+      'Βάλε την πλήρη λίστα CVE σε αυτή τη συσκευή, ώστε οι αναζητήσεις να γίνονται εκτός σύνδεσης και ο όρος αναζήτησής σου να μην πηγαίνει πουθενά. Η βάση δεδομένων προέρχεται από το CVE List V5 (το επίσημο πρόγραμμα CVE, μέσω GitHub).',
   'Wat er lokaal beschikbaar is': 'Τι είναι διαθέσιμο τοπικά',
   'Gegevenspakket': 'Πακέτο δεδομένων',
   'Nu bijwerken': 'Ενημέρωση τώρα',

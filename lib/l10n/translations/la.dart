@@ -1888,6 +1888,31 @@ const _dutchSourceAddLa = <String, String>{
   'toegangstoken (JWT)': 'signum accessus (JWT)',
   'databaseverbinding met wachtwoord': 'conexio datorum cum tessera',
   'wachtwoord in klare tekst': 'tessera in textu aperto',
+  'Afbreken': 'Abrumpere',
+  'Afgebroken. Er is niets half achtergebleven.':
+      'Abruptum est. Nihil semiperfectum remansit.',
+  'Bijwerken': 'Renovare',
+  'Binnenhalen…': 'Deponitur…',
+  'CVE\'s': 'CVE',
+  'Database ophalen': 'Datorum copiam accersere',
+  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
+      'Index CVE accersi non potuit. Nexum tuum inspice et iterum conare; index ex parte deportatus abiectus est.',
+  'De nieuwste uitgave opzoeken…': 'Editio novissima quaeritur…',
+  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
+      'Magna haec est deportatio: plus quam 500 MB accersenda, ad tempus circiter 1,5 GB spatii in disco, et pro nexu tuo et machina facile decem ad triginta minuta operis. Postea index aliquot centenorum megabytorum remanet. In nexu qui pro singulis megabytis pretium exigit, hoc facere malis.',
+  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
+      'Spatium in disco nimis exiguum erat. Constructio ad tempus plus quam 1,5 GB poscit.',
+  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
+      'Tabularium deportatum non erat quod exspectabamus et recusatum est. Nihil installatum est.',
+  'Indexeren…': 'Index conficitur…',
+  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
+      'Localiter praesto est — quaestiones sine nexu fiunt, nullum verbum quaesitum foras exit.',
+  'Lokale CVE-database': 'Copia datorum CVE localis',
+  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
+      'Cum index CVE in machina tua propria est, quaestiones hic manent: nullum verbum quaesitum amplius ad servitorem it, nec quisquam videre potest quod vitium securitatis investiges.',
+  'Uitpakken…': 'Expromitur…',
+  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
+      'Indicem CVE plenum in hac machina pone, ut quaestiones sine nexu fiant et verbum quaesitum tuum nusquam eat. Copia datorum ex CVE List V5 venit (programma CVE publicum, per GitHub).',
   'Wat er lokaal beschikbaar is': 'Quae localiter praesto sunt',
   'Gegevenspakket': 'Fasciculus datorum',
   'Nu bijwerken': 'Nunc renovare',

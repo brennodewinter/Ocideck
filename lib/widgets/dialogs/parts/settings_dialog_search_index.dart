@@ -228,6 +228,21 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
   ),
   SettingsSearchEntry(
     tab: 5,
+    label: 'Database ophalen',
+    section: 'Lokale CVE-database',
+    keywords: [
+      'cve',
+      'offline',
+      'lokaal',
+      'database',
+      'kwetsbaarheid',
+      'lek',
+      'nvd',
+      'downloaden',
+    ],
+  ),
+  SettingsSearchEntry(
+    tab: 5,
     label: 'Herstelbestanden nu wissen',
     section: 'Herstelbestanden',
     keywords: ['herstel', 'recovery', 'wissen', 'autosave', 'sporen'],

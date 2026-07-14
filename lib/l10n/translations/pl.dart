@@ -1887,6 +1887,31 @@ const _dutchSourceAddPl = <String, String>{
   'toegangstoken (JWT)': 'token dostępu (JWT)',
   'databaseverbinding met wachtwoord': 'połączenie z bazą danych z hasłem',
   'wachtwoord in klare tekst': 'hasło jawnym tekstem',
+  'Afbreken': 'Przerwij',
+  'Afgebroken. Er is niets half achtergebleven.':
+      'Przerwano. Nic nie zostało w połowie.',
+  'Bijwerken': 'Zaktualizuj',
+  'Binnenhalen…': 'Pobieranie…',
+  'CVE\'s': 'CVE',
+  'Database ophalen': 'Pobierz bazę danych',
+  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
+      'Nie udało się pobrać listy CVE. Sprawdź połączenie i spróbuj ponownie; częściowo pobrana lista została usunięta.',
+  'De nieuwste uitgave opzoeken…': 'Wyszukiwanie najnowszego wydania…',
+  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
+      'To duże pobieranie: ponad 500 MB do ściągnięcia, tymczasowo około 1,5 GB miejsca na dysku i — zależnie od łącza i urządzenia — łatwo dziesięć do trzydziestu minut pracy. Potem zostaje indeks o wielkości kilkuset megabajtów. Na łączu płatnym za megabajt lepiej tego nie robić.',
+  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
+      'Zabrakło miejsca na dysku. Budowanie wymaga tymczasowo ponad 1,5 GB.',
+  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
+      'Pobrane archiwum nie było tym, czego oczekiwaliśmy, i zostało odrzucone. Nic nie zainstalowano.',
+  'Indexeren…': 'Indeksowanie…',
+  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
+      'Dostępne lokalnie — wyszukiwanie odbywa się offline, żadna fraza nie opuszcza urządzenia.',
+  'Lokale CVE-database': 'Lokalna baza danych CVE',
+  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
+      'Z listą CVE na własnym urządzeniu wyszukiwanie zostaje tutaj: żadna fraza nie trafia już na serwer i nikt nie widzi, którą podatność badasz.',
+  'Uitpakken…': 'Rozpakowywanie…',
+  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
+      'Umieść pełną listę CVE na tym urządzeniu, żeby wyszukiwanie odbywało się offline, a twoja fraza nigdzie nie trafiała. Baza pochodzi z CVE List V5 (oficjalnego programu CVE, przez GitHub).',
   'Wat er lokaal beschikbaar is': 'Co jest dostępne lokalnie',
   'Gegevenspakket': 'Pakiet danych',
   'Nu bijwerken': 'Zaktualizuj teraz',

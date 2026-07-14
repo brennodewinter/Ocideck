@@ -830,6 +830,31 @@ const _dutchSourceAddFy = {
   'toegangstoken (JWT)': 'tagongstoken (JWT)',
   'databaseverbinding met wachtwoord': 'databaseferbining mei wachtwurd',
   'wachtwoord in klare tekst': 'wachtwurd yn platte tekst',
+  'Afbreken': 'Ofbrekke',
+  'Afgebroken. Er is niets half achtergebleven.':
+      'Ofbrutsen. Der is neat healwei achterbleaun.',
+  'Bijwerken': 'Bywurkje',
+  'Binnenhalen…': 'Ophelje…',
+  'CVE\'s': 'CVE\'s',
+  'Database ophalen': 'Databank ophelje',
+  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
+      'De CVE-list koe net ophelle wurde. Kontrolearje dyn ferbining en besykje it nochris; in healwei ophelle list is fuortsmiten.',
+  'De nieuwste uitgave opzoeken…': 'De nijste útjefte opsykje…',
+  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
+      'Dit is in grutte download: rom 500 MB ophelje, tydlik sa\'n 1,5 GB skiifromte, en ôfhinklik fan dyn ferbining en apparaat al gau tsien oant tritich minuten wurk. Dêrnei bliuwt der in yndeks fan inkele hûnderten megabytes stean. Op in ferbining dy\'t per megabyte betellet, dochst dit leaver net.',
+  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
+      'Der wie te min skiifromte. De opbou freget tydlik rom 1,5 GB.',
+  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
+      'It ophelle argyf wie net wat wy ferwachten en is wegere. Der is neat ynstallearre.',
+  'Indexeren…': 'Yndeksearje…',
+  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
+      'Lokaal beskikber — opsykjen bart offline, der giet gjin sykterm nei bûten.',
+  'Lokale CVE-database': 'Lokale CVE-databank',
+  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
+      'Mei de CVE-list op dyn eigen apparaat bliuwt it opsykjen hjir: der giet gjin sykterm mear nei in server, en nimmen kin sjen hokker lek do ûndersikest.',
+  'Uitpakken…': 'Útpakke…',
+  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
+      'Set de folsleine CVE-list op dit apparaat, sadat opsykjen offline bart en dyn sykterm nearne hinne giet. De databank komt fan CVE List V5 (it offisjele CVE-programma, fia GitHub).',
   'Wat er lokaal beschikbaar is': 'Wat der lokaal beskikber is',
   'Gegevenspakket': 'Gegevenspakket',
   'Nu bijwerken': 'No bywurkje',

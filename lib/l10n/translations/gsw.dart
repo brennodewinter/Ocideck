@@ -1876,6 +1876,31 @@ const _dutchSourceAddGsw = <String, String>{
   'toegangstoken (JWT)': 'Zuegangstoken (JWT)',
   'databaseverbinding met wachtwoord': 'Datebankverbindig mit Passwort',
   'wachtwoord in klare tekst': 'Passwort im Klartäxt',
+  'Afbreken': 'Abbräche',
+  'Afgebroken. Er is niets half achtergebleven.':
+      'Abbroche. Es isch nüt halbfertigs zrugg bliebe.',
+  'Bijwerken': 'Aktualisiere',
+  'Binnenhalen…': 'Am abelade…',
+  'CVE\'s': 'CVEs',
+  'Database ophalen': 'Datebank hole',
+  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
+      'D CVE-Lischte het nöd chönne gholt werde. Prüef dini Verbindig und probier\'s nomal; e halb abeglade Lischte isch weggschmisse worde.',
+  'De nieuwste uitgave opzoeken…': 'Di nöischti Usgab wird gsuecht…',
+  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
+      'Das isch en grosse Download: über 500 MB abelade, zitwiis öppe 1,5 GB Spycherplatz und, je nach Verbindig und Grät, schnäll zäh bis drissg Minute Arbet. Nachher bliibt en Index vo es paar hundert Megabyte. Uf ere Verbindig wo pro Megabyte zahlt, machsch das lieber nöd.',
+  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
+      'Es het z\'wenig Spycherplatz gha. De Ufbau bruucht zitwiis über 1,5 GB.',
+  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
+      'S gholte Archiv isch nöd das gsi, wo mer erwartet hend, und isch abglehnt worde. Es isch nüt installiert worde.',
+  'Indexeren…': 'Am indexiere…',
+  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
+      'Lokal verfüegbar – s Nachschlage passiert offline, kein Suechbegriff gaht use.',
+  'Lokale CVE-database': 'Lokali CVE-Datebank',
+  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
+      'Mit de CVE-Lischte uf dim eigene Grät bliibt s Nachschlage da: es gaht kein Suechbegriff meh zum e Server, und niemert cha gseh, weli Sicherheitslücke du undersuechsch.',
+  'Uitpakken…': 'Am uspacke…',
+  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
+      'Leg di ganzi CVE-Lischte uf das Grät, damit s Nachschlage offline passiert und din Suechbegriff niene ane gaht. D Datebank chunnt vo CVE List V5 (em offizielle CVE-Programm, über GitHub).',
   'Wat er lokaal beschikbaar is': 'Was lokal verfüegbar isch',
   'Gegevenspakket': 'Datepäckli',
   'Nu bijwerken': 'Jetz aktualisiere',

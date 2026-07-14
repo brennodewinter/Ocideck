@@ -1893,6 +1893,31 @@ const _dutchSourceAddUk = <String, String>{
   'toegangstoken (JWT)': 'токен доступу (JWT)',
   'databaseverbinding met wachtwoord': 'підключення до бази даних з паролем',
   'wachtwoord in klare tekst': 'пароль у відкритому вигляді',
+  'Afbreken': 'Перервати',
+  'Afgebroken. Er is niets half achtergebleven.':
+      'Перервано. Нічого недоробленого не залишилося.',
+  'Bijwerken': 'Оновити',
+  'Binnenhalen…': 'Завантаження…',
+  'CVE\'s': 'CVE',
+  'Database ophalen': 'Отримати базу даних',
+  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
+      'Не вдалося отримати список CVE. Перевір з\'єднання та спробуй ще раз; частково завантажений список видалено.',
+  'De nieuwste uitgave opzoeken…': 'Пошук найновішого випуску…',
+  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
+      'Це велике завантаження: понад 500 MB, тимчасово близько 1,5 GB місця на диску і, залежно від з\'єднання та пристрою, легко від десяти до тридцяти хвилин роботи. Після цього залишається індекс на кілька сотень мегабайтів. На з\'єднанні з оплатою за мегабайт краще цього не робити.',
+  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
+      'Бракувало місця на диску. Побудова тимчасово потребує понад 1,5 GB.',
+  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
+      'Отриманий архів виявився не тим, на що ми очікували, і був відхилений. Нічого не встановлено.',
+  'Indexeren…': 'Індексування…',
+  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
+      'Доступно локально — пошук відбувається офлайн, жоден запит не залишає пристрій.',
+  'Lokale CVE-database': 'Локальна база даних CVE',
+  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
+      'Зі списком CVE на власному пристрої пошук залишається тут: жоден запит більше не йде на сервер, і ніхто не бачить, яку вразливість ти досліджуєш.',
+  'Uitpakken…': 'Розпакування…',
+  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
+      'Розмісти повний список CVE на цьому пристрої, щоб пошук відбувався офлайн і твій запит нікуди не йшов. База даних походить із CVE List V5 (офіційної програми CVE, через GitHub).',
   'Wat er lokaal beschikbaar is': 'Що доступно локально',
   'Gegevenspakket': 'Пакет даних',
   'Nu bijwerken': 'Оновити зараз',

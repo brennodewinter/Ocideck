@@ -1877,6 +1877,31 @@ const _dutchSourceAddHu = <String, String>{
   'toegangstoken (JWT)': 'hozzáférési token (JWT)',
   'databaseverbinding met wachtwoord': 'adatbázis-kapcsolat jelszóval',
   'wachtwoord in klare tekst': 'jelszó nyílt szövegben',
+  'Afbreken': 'Megszakítás',
+  'Afgebroken. Er is niets half achtergebleven.':
+      'Megszakítva. Semmi nem maradt félkészen.',
+  'Bijwerken': 'Frissítés',
+  'Binnenhalen…': 'Letöltés…',
+  'CVE\'s': 'CVE',
+  'Database ophalen': 'Adatbázis letöltése',
+  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
+      'A CVE-listát nem sikerült letölteni. Ellenőrizd a kapcsolatot, és próbáld újra; a félig letöltött listát eldobtuk.',
+  'De nieuwste uitgave opzoeken…': 'A legújabb kiadás keresése…',
+  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
+      'Ez nagy letöltés: több mint 500 MB behúzása, átmenetileg nagyjából 1,5 GB lemezterület, és a kapcsolatodtól meg az eszközödtől függően könnyen tíz-harminc perc munka. Utána néhány száz megabájtos index marad. Megabájt alapon fizetett kapcsolaton ezt inkább ne tedd.',
+  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
+      'Nem volt elég lemezterület. A felépítés átmenetileg több mint 1,5 GB-ot igényel.',
+  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
+      'A letöltött archívum nem az volt, amire számítottunk, ezért elutasítottuk. Semmi sem került telepítésre.',
+  'Indexeren…': 'Indexelés…',
+  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
+      'Helyben elérhető — a keresés offline történik, egyetlen keresőkifejezés sem hagyja el az eszközt.',
+  'Lokale CVE-database': 'Helyi CVE-adatbázis',
+  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
+      'Ha a CVE-lista a saját eszközödön van, a keresés itt marad: egyetlen keresőkifejezés sem megy többé szerverre, és senki nem látja, melyik sebezhetőséget vizsgálod.',
+  'Uitpakken…': 'Kicsomagolás…',
+  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
+      'Tedd a teljes CVE-listát erre az eszközre, hogy a keresés offline történjen, és a keresőkifejezésed sehová se menjen. Az adatbázis a CVE List V5-ből származik (a hivatalos CVE-program, GitHubon keresztül).',
   'Wat er lokaal beschikbaar is': 'Ami helyben elérhető',
   'Gegevenspakket': 'Adatcsomag',
   'Nu bijwerken': 'Frissítés most',

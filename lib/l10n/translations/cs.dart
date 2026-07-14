@@ -1876,6 +1876,31 @@ const _dutchSourceAddCs = <String, String>{
   'toegangstoken (JWT)': 'přístupový token (JWT)',
   'databaseverbinding met wachtwoord': 'připojení k databázi s heslem',
   'wachtwoord in klare tekst': 'heslo v otevřeném textu',
+  'Afbreken': 'Přerušit',
+  'Afgebroken. Er is niets half achtergebleven.':
+      'Přerušeno. Nic nezůstalo rozdělané.',
+  'Bijwerken': 'Aktualizovat',
+  'Binnenhalen…': 'Stahování…',
+  'CVE\'s': 'CVE',
+  'Database ophalen': 'Stáhnout databázi',
+  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
+      'Seznam CVE se nepodařilo stáhnout. Zkontroluj připojení a zkus to znovu; napůl stažený seznam byl zahozen.',
+  'De nieuwste uitgave opzoeken…': 'Hledání nejnovějšího vydání…',
+  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
+      'Tohle je velké stahování: přes 500 MB ke stažení, dočasně asi 1,5 GB místa na disku a podle připojení a zařízení klidně deset až třicet minut práce. Poté zůstane index o velikosti několika set megabajtů. Na připojení placeném po megabajtech to raději nedělej.',
+  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
+      'Na disku nebylo dost místa. Sestavení dočasně vyžaduje přes 1,5 GB.',
+  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
+      'Stažený archiv nebyl tím, co jsme čekali, a byl odmítnut. Nic se nenainstalovalo.',
+  'Indexeren…': 'Indexování…',
+  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
+      'Dostupné lokálně — vyhledávání probíhá offline, žádný hledaný výraz neopustí zařízení.',
+  'Lokale CVE-database': 'Místní databáze CVE',
+  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
+      'Se seznamem CVE na vlastním zařízení zůstává vyhledávání tady: žádný hledaný výraz už nejde na server a nikdo nevidí, kterou zranitelnost zkoumáš.',
+  'Uitpakken…': 'Rozbalování…',
+  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
+      'Ulož celý seznam CVE do tohoto zařízení, aby vyhledávání probíhalo offline a tvůj hledaný výraz nikam neputoval. Databáze pochází z CVE List V5 (oficiálního programu CVE, přes GitHub).',
   'Wat er lokaal beschikbaar is': 'Co je k dispozici lokálně',
   'Gegevenspakket': 'Datový balíček',
   'Nu bijwerken': 'Aktualizovat nyní',

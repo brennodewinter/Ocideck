@@ -61,6 +61,10 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `cwe_catalog.dart` — The offline CWE catalog (`CweCatalog`): a curated floor merged with the full MITRE list from `assets/cwe/cwe_full.json` (via `ensureLoaded`); search/byId.
 - `cve_search_service.dart` — `CveSearchService` + `CveSource` cascade (`LibrekatCveSource` mirror → `EnisaCveSource` EUVD keyword search → `MitreCveSource` exact-id lookup); `CveHit` in `models/cve_hit.dart`.
 - `cve_transport.dart` / `cve_transport_io.dart` / `cve_transport_web.dart` / `cve_transport_factory.dart` — injectable, SSRF-pinned HTTP transport for the CVE search (io) with a web stub, selected by conditional export.
+- `cve/cve_record_parser.dart` — `CveRecordParser`: one CVE List V5 record → the handful of fields the picker shows. Reads CVSS from **both** `containers.cna.metrics` and `containers.adp[].metrics` (for much of the corpus the score was added later by an ADP, not the CNA).
+- `cve/local_cve_index.dart` — `LocalCveIndex`: the on-disk JSONL index + meta. Search is a raw-line substring scan that only JSON-decodes the lines that hit, so a 300k-record query neither loads the corpus into memory nor needs a database engine.
+- `cve/cve_bulk_ingest.dart` — `CveBulkIngest` + `CveBulkTransport`: discover the latest CVE List V5 release (the asset is named after the day, so there is no fixed URL), stream it to disk, unpack the **zip inside the zip**, and index record by record. Injectable transport so the whole chain is testable with a few-KB archive.
+- `cve/local_cve_database.dart` (+ `_api` / `_io` / `_web`) — the desktop-only facade: real index + `GithubBulkTransport` on io, an unsupported stub on web.
 - `wstg_catalog.dart` — The bundled offline OWASP WSTG v4.2 test catalog (`WstgCatalog`, 97 tests + pinned version) used to one-click-fill a `checklist` slide.
 - `secmodule/sec_reference_inventory.dart` — `SecReferenceInventory` + `ReferenceCatalog`: counts what reference data is *actually* available locally (CWE, WSTG, MIAUW, the CVSS table, finding templates) for the Uitbreidingen tab, so "data available locally" is a number rather than a claim.
 - `checklist_templates.dart` — `ChecklistSource` + helpers that present WSTG and each user `ChecklistTemplate` uniformly to the checklist editor and the per-scope generator (feedback #9).
@@ -134,6 +138,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `editor_provider.dart` — `EditorState`/`EditorNotifier`: selected slide, editor mode, markdown buffer.
 - `image_contrast_provider.dart` — Computes title-slide image-contrast issues asynchronously per deck.
 - `sec_module_provider.dart` — The security-module enable/reveal state that gates the pentest features.
+- `local_cve_provider.dart` — `LocalCveNotifier`/`LocalCveState`: the local CVE database's status, build progress and cancellation, plus `localCveAvailableProvider` — which the CVE picker uses to search offline (and then deliberately *not* fall back online).
 - `privacy_provider.dart` — Runs the privacy scan for the active deck (per-tab scoped) and bridges it into the quality panel.
 - `parts/settings_provider_privacy.dart` — The privacy switches (master, per-rule, own identity, export gate).
 - `settings_provider.dart` — `SettingsNotifier`: app settings, theme/appearance profiles, cockpit schemes.

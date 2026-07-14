@@ -116,6 +116,14 @@ extension _SettingsSecurity on _SettingsDialogState {
                   ref.read(settingsProvider.notifier).setCveApiBaseUrl(value),
             ),
           ),
+        // Alleen op desktop: op het web is er geen bestandssysteem voor een
+        // index van honderden megabytes, en een download van 550 MB hoort niet
+        // in een browsertab. Dan tonen we de sectie niet, in plaats van een
+        // knop die niets kan.
+        if (localCveSupported) ...[
+          const SizedBox(height: 20),
+          _localCveSection(l10n),
+        ],
         const SizedBox(height: 20),
         _sectionTitle(l10n.d('Herstelbestanden')),
         Padding(

@@ -1011,6 +1011,31 @@ const _dutchSourceAddEn = {
   'toegangstoken (JWT)': 'access token (JWT)',
   'databaseverbinding met wachtwoord': 'database connection with password',
   'wachtwoord in klare tekst': 'password in plain text',
+  'Afbreken': 'Cancel',
+  'Afgebroken. Er is niets half achtergebleven.':
+      'Cancelled. Nothing was left half-finished.',
+  'Bijwerken': 'Update',
+  'Binnenhalen…': 'Downloading…',
+  'CVE\'s': 'CVEs',
+  'Database ophalen': 'Fetch database',
+  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
+      'The CVE list could not be fetched. Check your connection and try again; a partially downloaded list has been discarded.',
+  'De nieuwste uitgave opzoeken…': 'Looking up the latest release…',
+  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
+      'This is a large download: over 500 MB to fetch, about 1.5 GB of disk space temporarily, and, depending on your connection and device, easily ten to thirty minutes of work. Afterwards an index of a few hundred megabytes stays behind. On a connection that charges per megabyte, you would rather not do this.',
+  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
+      'There was not enough disk space. Building the index temporarily needs over 1.5 GB.',
+  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
+      'The fetched archive was not what we expected and was rejected. Nothing has been installed.',
+  'Indexeren…': 'Indexing…',
+  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
+      'Available locally — lookups happen offline, no search term leaves the device.',
+  'Lokale CVE-database': 'Local CVE database',
+  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
+      'With the CVE list on your own device, lookups stay here: no search term goes to a server any more, and nobody can see which vulnerability you are investigating.',
+  'Uitpakken…': 'Extracting…',
+  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
+      'Put the full CVE list on this device, so lookups happen offline and your search term goes nowhere. The database comes from CVE List V5 (the official CVE programme, via GitHub).',
   'Wat er lokaal beschikbaar is': 'What is available locally',
   'Gegevenspakket': 'Data pack',
   'Nu bijwerken': 'Update now',

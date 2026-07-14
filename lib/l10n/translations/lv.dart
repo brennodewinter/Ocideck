@@ -1871,6 +1871,31 @@ const _dutchSourceAddLv = <String, String>{
   'toegangstoken (JWT)': 'piekļuves marķieris (JWT)',
   'databaseverbinding met wachtwoord': 'datubāzes savienojums ar paroli',
   'wachtwoord in klare tekst': 'parole atklātā tekstā',
+  'Afbreken': 'Pārtraukt',
+  'Afgebroken. Er is niets half achtergebleven.':
+      'Pārtraukts. Nekas nav palicis pusceļā.',
+  'Bijwerken': 'Atjaunināt',
+  'Binnenhalen…': 'Lejupielādē…',
+  'CVE\'s': 'CVE',
+  'Database ophalen': 'Ielādēt datubāzi',
+  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
+      'CVE sarakstu neizdevās ielādēt. Pārbaudi savienojumu un mēģini vēlreiz; daļēji lejupielādētais saraksts ir izmests.',
+  'De nieuwste uitgave opzoeken…': 'Meklē jaunāko laidienu…',
+  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
+      'Šī ir liela lejupielāde: vairāk nekā 500 MB, uz laiku aptuveni 1,5 GB diska vietas un — atkarībā no savienojuma un ierīces — viegli desmit līdz trīsdesmit minūtes darba. Pēc tam paliek indekss dažu simtu megabaitu apmērā. Savienojumā, par kuru maksā par katru megabaitu, to labāk nedarīt.',
+  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
+      'Diska vietas bija par maz. Veidošanai uz laiku vajag vairāk nekā 1,5 GB.',
+  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
+      'Ielādētais arhīvs nebija tāds, kādu gaidījām, un tika noraidīts. Nekas netika instalēts.',
+  'Indexeren…': 'Indeksē…',
+  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
+      'Pieejams lokāli — meklēšana notiek bezsaistē, neviens meklējamais vārds neaiziet ārā.',
+  'Lokale CVE-database': 'Lokāla CVE datubāze',
+  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
+      'Ar CVE sarakstu savā ierīcē meklēšana paliek šeit: neviens meklējamais vārds vairs neaiziet uz serveri, un neviens neredz, kuru ievainojamību tu pēti.',
+  'Uitpakken…': 'Izpako…',
+  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
+      'Ievieto pilnu CVE sarakstu šajā ierīcē, lai meklēšana notiktu bezsaistē un tavs meklējamais vārds nekur neaizietu. Datubāze nāk no CVE List V5 (oficiālās CVE programmas, caur GitHub).',
   'Wat er lokaal beschikbaar is': 'Kas ir pieejams lokāli',
   'Gegevenspakket': 'Datu pakotne',
   'Nu bijwerken': 'Atjaunināt tagad',

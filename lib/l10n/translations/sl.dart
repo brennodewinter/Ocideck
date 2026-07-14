@@ -1876,6 +1876,31 @@ const _dutchSourceAddSl = <String, String>{
   'toegangstoken (JWT)': 'žeton za dostop (JWT)',
   'databaseverbinding met wachtwoord': 'povezava z zbirko podatkov z geslom',
   'wachtwoord in klare tekst': 'geslo v čistem besedilu',
+  'Afbreken': 'Prekini',
+  'Afgebroken. Er is niets half achtergebleven.':
+      'Prekinjeno. Nič ni ostalo na pol.',
+  'Bijwerken': 'Posodobi',
+  'Binnenhalen…': 'Prenašanje…',
+  'CVE\'s': 'CVE',
+  'Database ophalen': 'Prenesi zbirko podatkov',
+  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
+      'Seznama CVE ni bilo mogoče prenesti. Preveri povezavo in poskusi znova; napol prenesen seznam je bil zavržen.',
+  'De nieuwste uitgave opzoeken…': 'Iskanje najnovejše izdaje…',
+  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
+      'To je velik prenos: več kot 500 MB za prenesti, začasno okoli 1,5 GB prostora na disku in – odvisno od povezave in naprave – zlahka deset do trideset minut dela. Zatem ostane kazalo velikosti nekaj sto megabajtov. Na povezavi, ki se plačuje po megabajtu, tega raje ne počni.',
+  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
+      'Na disku ni bilo dovolj prostora. Izgradnja začasno zahteva več kot 1,5 GB.',
+  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
+      'Prenesen arhiv ni bil takšen, kot smo pričakovali, in je bil zavrnjen. Nič ni bilo nameščeno.',
+  'Indexeren…': 'Indeksiranje…',
+  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
+      'Na voljo lokalno — iskanje poteka brez povezave, noben iskalni izraz ne zapusti naprave.',
+  'Lokale CVE-database': 'Lokalna zbirka podatkov CVE',
+  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
+      'S seznamom CVE na lastni napravi iskanje ostane tu: noben iskalni izraz ne gre več na strežnik in nihče ne vidi, katero ranljivost preiskuješ.',
+  'Uitpakken…': 'Razpakiranje…',
+  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
+      'Postavi celoten seznam CVE na to napravo, da iskanje poteka brez povezave in tvoj iskalni izraz ne gre nikamor. Zbirka podatkov prihaja iz CVE List V5 (uradni program CVE, prek GitHuba).',
   'Wat er lokaal beschikbaar is': 'Kaj je na voljo lokalno',
   'Gegevenspakket': 'Paket podatkov',
   'Nu bijwerken': 'Posodobi zdaj',
