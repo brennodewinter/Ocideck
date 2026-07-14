@@ -1786,6 +1786,12 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Mogelijk geheim': 'Možné tajemství',
+  'sleutel of token': 'klíč nebo token',
+  'private sleutel': 'soukromý klíč',
+  'toegangstoken (JWT)': 'přístupový token (JWT)',
+  'databaseverbinding met wachtwoord': 'připojení k databázi s heslem',
+  'wachtwoord in klare tekst': 'heslo v otevřeném textu',
   'Accepteren': 'Přijmout',
   'Accepteren + waarschuwen': 'Přijmout + upozornit',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

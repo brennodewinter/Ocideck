@@ -1758,6 +1758,12 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Mogelijk geheim': 'chaq pegh',
+  'sleutel of token': 'ngaQHa\'moHwI\' pagh token',
+  'private sleutel': 'pegh ngaQHa\'moHwI\'',
+  'toegangstoken (JWT)': 'nuqDaq token (JWT)',
+  'databaseverbinding met wachtwoord': 'De\' pat rar \'ej pegh mu\'',
+  'wachtwoord in klare tekst': 'ghItlh SaH pegh mu\'',
   'Accepteren': 'yIlaj',
   'Accepteren + waarschuwen': 'yIlaj \'ej yIghuHmoH',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

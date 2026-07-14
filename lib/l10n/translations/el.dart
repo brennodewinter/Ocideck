@@ -1811,6 +1811,12 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Mogelijk geheim': 'Πιθανό μυστικό',
+  'sleutel of token': 'κλειδί ή διακριτικό',
+  'private sleutel': 'ιδιωτικό κλειδί',
+  'toegangstoken (JWT)': 'διακριτικό πρόσβασης (JWT)',
+  'databaseverbinding met wachtwoord': 'σύνδεση βάσης δεδομένων με κωδικό',
+  'wachtwoord in klare tekst': 'κωδικός σε απλό κείμενο',
   'Accepteren': 'Αποδοχή',
   'Accepteren + waarschuwen': 'Αποδοχή + προειδοποίηση',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

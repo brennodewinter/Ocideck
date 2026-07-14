@@ -740,6 +740,13 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Mogelijk geheim': 'Posibel sekreto',
+  'sleutel of token': 'yabi òf token',
+  'private sleutel': 'yabi privá',
+  'toegangstoken (JWT)': 'token di akseso (JWT)',
+  'databaseverbinding met wachtwoord':
+      'konekshon di base di datos ku kontraseña',
+  'wachtwoord in klare tekst': 'kontraseña den teksto kla',
   'Accepteren': 'Aseptá',
   'Accepteren + waarschuwen': 'Aseptá + advertí',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

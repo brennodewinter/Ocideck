@@ -1799,6 +1799,12 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Mogelijk geheim': 'Arcanum possibile',
+  'sleutel of token': 'clavis vel signum',
+  'private sleutel': 'clavis privata',
+  'toegangstoken (JWT)': 'signum accessus (JWT)',
+  'databaseverbinding met wachtwoord': 'conexio datorum cum tessera',
+  'wachtwoord in klare tekst': 'tessera in textu aperto',
   'Accepteren': 'Accipere',
   'Accepteren + waarschuwen': 'Accipere + monere',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

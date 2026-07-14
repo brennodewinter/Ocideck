@@ -737,6 +737,13 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Mogelijk geheim': 'Posible secreto',
+  'sleutel of token': 'clave o token',
+  'private sleutel': 'clave privada',
+  'toegangstoken (JWT)': 'token de acceso (JWT)',
+  'databaseverbinding met wachtwoord':
+      'conexión a base de datos con contraseña',
+  'wachtwoord in klare tekst': 'contraseña en texto claro',
   'Accepteren': 'Aceptar',
   'Accepteren + waarschuwen': 'Aceptar + avisar',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

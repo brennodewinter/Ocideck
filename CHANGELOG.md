@@ -8,6 +8,23 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Secret scanning: API keys, tokens, private keys, passwords.** Vendor tokens
+  carry a fixed prefix — `AKIA`, `ghp_`, `xoxb-`, `sk_live_` — and that prefix is
+  the proof, so this family is close to false-positive-free without needing a
+  checksum. Plus PEM private keys, database URLs with an inline password, and
+  plain-text passwords in fifteen languages.
+
+  A JWT is not recognised by its shape but by **decoding its header** and checking
+  for an `alg` field. `eyJ` is just base64 for `{"`, so shape alone would fire on
+  any embedded JSON; decoding takes the false-positive rate to near zero — worth
+  it, because a JWT is itself a container full of personal data.
+
+  What keeps it usable is the placeholder gate. A slide that explains *how* to
+  configure a key must stay quiet: `api_key: <your-key>`, `password: changeme`,
+  `sk_test_…`, and AWS's own documented `AKIAIOSFODNN7EXAMPLE` all pass without a
+  peep. So does `const token = null;` — a code slide full of null assignments
+  would otherwise discredit the scanner in one go. That last one was caught by a
+  test, not by foresight.
 - **A privacy check that reads your slides for personal data — on this device.**
   Identification numbers, contact details, bank accounts. Findings appear in the
   quality panel next to the contrast and readability checks; on by default,

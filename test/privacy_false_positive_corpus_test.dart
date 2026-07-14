@@ -50,6 +50,15 @@ void main() {
       'Contact: noreply@example.com voor testberichten',
       'Documentatie op https://example.com/handleiding',
       'Serienummer SN-2024-889231-XT van het apparaat',
+      // Secrets-aas: uitleg over sleutels, zonder een sleutel.
+      'Zet je API-sleutel in api_key: <your-key>',
+      'export AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE',
+      'Gebruik sk_test_A1b2C3d4E5f6G7h8I9j0K1l2 in de sandbox',
+      'const token = null; // nog niet ingevuld',
+      'password: changeme',
+      'Verbind met postgres://db.intern:5432/prod',
+      'Het certificaat begint met -----BEGIN CERTIFICATE-----',
+      'De publieke sleutel staat in -----BEGIN PUBLIC KEY-----',
     ];
 
     final result = scanLines(corpus);

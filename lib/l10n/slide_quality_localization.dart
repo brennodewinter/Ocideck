@@ -284,7 +284,12 @@ String _formatPrivacy(AppLocalizations l10n, SlideQualityIssue issue) {
           ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.',
         )
       : l10n.d(' Overweeg dit te redigeren met [[dubbele blokhaken]].');
-  return '${l10n.d('Mogelijk persoonsgegeven')} — $rule ($sample).$suffix';
+  // Een API-sleutel is geen persoonsgegeven maar een geheim; hem zo noemen zou
+  // de melding onbegrijpelijk maken voor precies wie hem moet lezen.
+  final prefix = issue.kind == SlideQualityIssueKind.privacySecret
+      ? l10n.d('Mogelijk geheim')
+      : l10n.d('Mogelijk persoonsgegeven');
+  return '$prefix — $rule ($sample).$suffix';
 }
 
 /// Het leesbare label van een detectieregel.
@@ -295,9 +300,29 @@ String privacyRuleLabel(AppLocalizations l10n, String ruleId) {
     'nl.bsn' => l10n.d('burgerservicenummer (BSN)'),
     'fin.iban' => l10n.d('bankrekeningnummer (IBAN)'),
     'contact.email' => l10n.d('e-mailadres'),
+    'secret.private_key' => l10n.d('private sleutel'),
+    'secret.jwt' => l10n.d('toegangstoken (JWT)'),
+    'secret.connection_string' => l10n.d('databaseverbinding met wachtwoord'),
+    'secret.password_plain' => l10n.d('wachtwoord in klare tekst'),
+    _ when ruleId.startsWith('secret.') =>
+      '${l10n.d('sleutel of token')} (${_secretVendors[ruleId] ?? ruleId})',
     _ => ruleId,
   };
 }
+
+/// De leveranciersnaam bij een sleutelregel. Eigennamen — die vertalen we niet.
+const Map<String, String> _secretVendors = {
+  'secret.aws': 'AWS',
+  'secret.gcp': 'Google',
+  'secret.github': 'GitHub',
+  'secret.gitlab': 'GitLab',
+  'secret.slack': 'Slack',
+  'secret.stripe': 'Stripe',
+  'secret.llm': 'OpenAI / Anthropic',
+  'secret.huggingface': 'Hugging Face',
+  'secret.sendgrid': 'SendGrid',
+  'secret.npm': 'npm',
+};
 
 String _formatThemeContrast(AppLocalizations l10n, SlideQualityIssue issue) {
   final large = issue.args['largeText'] == 'true';

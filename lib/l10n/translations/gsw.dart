@@ -1787,6 +1787,12 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Mogelijk geheim': 'Möglichs Gheimnis',
+  'sleutel of token': 'Schlüssel oder Token',
+  'private sleutel': 'private Schlüssel',
+  'toegangstoken (JWT)': 'Zuegangstoken (JWT)',
+  'databaseverbinding met wachtwoord': 'Datebankverbindig mit Passwort',
+  'wachtwoord in klare tekst': 'Passwort im Klartäxt',
   'Accepteren': 'Akzeptiere',
   'Accepteren + waarschuwen': 'Akzeptiere + warne',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

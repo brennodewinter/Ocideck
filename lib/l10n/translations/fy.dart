@@ -741,6 +741,12 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Mogelijk geheim': 'Mooglik geheim',
+  'sleutel of token': 'kaai of token',
+  'private sleutel': 'privee kaai',
+  'toegangstoken (JWT)': 'tagongstoken (JWT)',
+  'databaseverbinding met wachtwoord': 'databaseferbining mei wachtwurd',
+  'wachtwoord in klare tekst': 'wachtwurd yn platte tekst',
   'Accepteren': 'Akseptearje',
   'Accepteren + waarschuwen': 'Akseptearje + warskôgje',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

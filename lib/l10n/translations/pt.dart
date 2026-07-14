@@ -1813,6 +1813,13 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Mogelijk geheim': 'Possível segredo',
+  'sleutel of token': 'chave ou token',
+  'private sleutel': 'chave privada',
+  'toegangstoken (JWT)': 'token de acesso (JWT)',
+  'databaseverbinding met wachtwoord':
+      'ligação à base de dados com palavra-passe',
+  'wachtwoord in klare tekst': 'palavra-passe em texto simples',
   'Accepteren': 'Aceitar',
   'Accepteren + waarschuwen': 'Aceitar + avisar',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

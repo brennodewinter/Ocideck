@@ -1806,6 +1806,12 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Mogelijk geheim': 'Sigriet possibbli',
+  'sleutel of token': 'ċavetta jew token',
+  'private sleutel': 'ċavetta privata',
+  'toegangstoken (JWT)': 'token ta\' aċċess (JWT)',
+  'databaseverbinding met wachtwoord': 'konnessjoni tad-database bil-password',
+  'wachtwoord in klare tekst': 'password f\'test ċar',
   'Accepteren': 'Aċċetta',
   'Accepteren + waarschuwen': 'Aċċetta + wissi',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

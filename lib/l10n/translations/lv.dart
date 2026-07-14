@@ -1782,6 +1782,12 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Mogelijk geheim': 'Iespējams noslēpums',
+  'sleutel of token': 'atslēga vai marķieris',
+  'private sleutel': 'privātā atslēga',
+  'toegangstoken (JWT)': 'piekļuves marķieris (JWT)',
+  'databaseverbinding met wachtwoord': 'datubāzes savienojums ar paroli',
+  'wachtwoord in klare tekst': 'parole atklātā tekstā',
   'Accepteren': 'Pieņemt',
   'Accepteren + waarschuwen': 'Pieņemt + brīdināt',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
