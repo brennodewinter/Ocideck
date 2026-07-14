@@ -21,7 +21,6 @@ class _NotesField extends StatefulWidget {
 
 class _NotesFieldState extends State<_NotesField> {
   late final TextEditingController _ctrl;
-  bool _expanded = true;
 
   @override
   void initState() {
@@ -96,8 +95,17 @@ class _NotesFieldState extends State<_NotesField> {
       child: Theme(
         data: Theme.of(context).copyWith(dividerColor: AppTheme.notesBorder),
         child: ExpansionTile(
-          initiallyExpanded: _expanded,
-          onExpansionChanged: (open) => setState(() => _expanded = open),
+          // Leeg begint ingeklapt, gevuld begint open: het paneel toont wat er
+          // ís, en kost geen schermruimte aan wat er niet is. De sleutel hoort
+          // erbij — `initiallyExpanded` wordt door ExpansionTile alleen in zijn
+          // eigen initState gelezen, dus zonder een sleutel die per slide en
+          // per pagina verandert, blijft de stand van de vorige slide hangen.
+          // Binnen dezelfde slide verandert de sleutel niet, zodat handmatig
+          // open- of dichtklappen blijft staan terwijl je typt.
+          key: ValueKey(
+            'speaker-notes-tile-${widget.slide.id}-p${widget.richTextPage}',
+          ),
+          initiallyExpanded: _noteText().trim().isNotEmpty,
           tilePadding: const EdgeInsets.symmetric(horizontal: 12),
           childrenPadding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
           leading: const Icon(Icons.notes, size: 18, color: AppTheme.amber700),
@@ -203,7 +211,6 @@ class _UserNotesField extends StatefulWidget {
 
 class _UserNotesFieldState extends State<_UserNotesField> {
   late final TextEditingController _ctrl;
-  bool _expanded = true;
 
   @override
   void initState() {
@@ -250,8 +257,12 @@ class _UserNotesFieldState extends State<_UserNotesField> {
           context,
         ).copyWith(dividerColor: AppTheme.userNotesBorder),
         child: ExpansionTile(
-          initiallyExpanded: _expanded,
-          onExpansionChanged: (open) => setState(() => _expanded = open),
+          // Zie _NotesField: leeg dicht, gevuld open, en de sleutel zorgt dat
+          // die afweging per slide en per pagina opnieuw wordt gemaakt.
+          key: ValueKey(
+            'user-notes-tile-${widget.slide.id}-p${widget.richTextPage}',
+          ),
+          initiallyExpanded: widget.note.trim().isNotEmpty,
           tilePadding: const EdgeInsets.symmetric(horizontal: 12),
           childrenPadding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
           leading: const Icon(

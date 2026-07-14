@@ -393,6 +393,12 @@ Below each editor you can set:
   sidecar, not in the Markdown). Use the discard button in the header to remove
   them for that slide. Slides with user notes show a blue badge on the thumbnail
   in the slide list.
+
+Both notes blocks **start collapsed on a slide that has none, and start expanded
+on a slide that has them** — so the block is open exactly when there is something
+to read. Expanding or collapsing by hand sticks while you stay on that slide (and
+on that page of a multi-page rich-text slide); moving to another slide asks the
+question again for that slide.
 - An optional **audio** attachment.
 
 ## Traffic Light Protocol (TLP)
