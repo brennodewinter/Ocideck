@@ -740,6 +740,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Gekoppelde test': 'Test konektá',
+  'Maak eerst een checklist voor dit scope-object.':
+      'Krea promé un lista di kontrol pa e objeto di scope aki.',
   'Bewerken': 'Editá',
   'Checklist-sjabloon': 'Plantia di lista di kontrol',
   'Eigen checklists': 'Lista di kontrol propio',

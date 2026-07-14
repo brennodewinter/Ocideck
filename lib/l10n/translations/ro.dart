@@ -1802,6 +1802,9 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Gekoppelde test': 'Test asociat',
+  'Maak eerst een checklist voor dit scope-object.':
+      'Creează mai întâi o listă de verificare pentru acest obiect din domeniu.',
   'Bewerken': 'Editează',
   'Checklist-sjabloon': 'Șablon de listă de verificare',
   'Eigen checklists': 'Liste de verificare proprii',

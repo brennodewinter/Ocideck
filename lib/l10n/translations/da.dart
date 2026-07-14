@@ -1782,6 +1782,9 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Gekoppelde test': 'Tilknyttet test',
+  'Maak eerst een checklist voor dit scope-object.':
+      'Opret først en tjekliste for dette scope-objekt.',
   'Bewerken': 'Rediger',
   'Checklist-sjabloon': 'Tjeklisteskabelon',
   'Eigen checklists': 'Egne tjeklister',

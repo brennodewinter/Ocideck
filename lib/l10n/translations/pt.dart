@@ -1813,6 +1813,9 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Gekoppelde test': 'Teste vinculado',
+  'Maak eerst een checklist voor dit scope-object.':
+      'Primeiro crie uma lista de verificação para este objeto do escopo.',
   'Bewerken': 'Editar',
   'Checklist-sjabloon': 'Modelo de lista de verificação',
   'Eigen checklists': 'Listas de verificação próprias',

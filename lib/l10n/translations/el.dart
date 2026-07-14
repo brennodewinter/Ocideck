@@ -1811,6 +1811,9 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Gekoppelde test': 'Συνδεδεμένος έλεγχος',
+  'Maak eerst een checklist voor dit scope-object.':
+      'Δημιούργησε πρώτα μια λίστα ελέγχου για αυτό το αντικείμενο εμβέλειας.',
   'Bewerken': 'Επεξεργασία',
   'Checklist-sjabloon': 'Πρότυπο λίστας ελέγχου',
   'Eigen checklists': 'Προσαρμοσμένες λίστες ελέγχου',

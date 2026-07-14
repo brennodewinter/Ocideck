@@ -136,6 +136,7 @@ class _FindingPreview extends StatelessWidget {
       spec.cvss != null ||
       spec.cweId != null ||
       spec.cveIds.isNotEmpty ||
+      spec.testId.isNotEmpty ||
       spec.retest.isRetested;
 
   Widget _badges(BuildContext context, FindingSpec spec, Cvss4? ctxCvss) {
@@ -162,6 +163,7 @@ class _FindingPreview extends StatelessWidget {
           ),
         if (spec.cweId != null) _outlinedChip('CWE-${spec.cweId}'),
         for (final cve in spec.cveIds) _outlinedChip(cve),
+        if (spec.testId.isNotEmpty) _outlinedChip(spec.testId),
         if (spec.retest.isRetested)
           _filledBadge(
             '${l10n.d(spec.retest.dutchLabel)} ${l10n.d('na hertest')}',

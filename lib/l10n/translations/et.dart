@@ -1774,6 +1774,9 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Gekoppelde test': 'Seotud test',
+  'Maak eerst een checklist voor dit scope-object.':
+      'Loo esmalt sellele ulatuse objektile kontrollnimekiri.',
   'Bewerken': 'Muuda',
   'Checklist-sjabloon': 'Kontrollnimekirja mall',
   'Eigen checklists': 'Oma kontrollnimekirjad',

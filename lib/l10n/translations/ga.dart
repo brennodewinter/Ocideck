@@ -1819,6 +1819,9 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Gekoppelde test': 'Tástáil nasctha',
+  'Maak eerst een checklist voor dit scope-object.':
+      'Cruthaigh seicliosta don réad scóipe seo ar dtús.',
   'Bewerken': 'Cuir in eagar',
   'Checklist-sjabloon': 'Teimpléad seicliosta',
   'Eigen checklists': 'Seicliostaí saincheaptha',

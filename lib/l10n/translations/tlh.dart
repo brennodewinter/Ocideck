@@ -1758,6 +1758,9 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Gekoppelde test': 'test rar',
+  'Maak eerst een checklist voor dit scope-object.':
+      'wa\'DIch scope-Doch checklist yIchenmoH.',
   'Bewerken': 'choH',
   'Checklist-sjabloon': 'checklist HewmeH',
   'Eigen checklists': 'checklist ghaj',

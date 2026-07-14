@@ -105,4 +105,67 @@ extension DeckNotifierChecklist on DeckNotifier {
       _mutate(deck.copyWith(slides: slides), bumpRevision: true);
     }
   }
+
+  /// Actively write a finding↔test link into the checklists (feedback #8):
+  /// clears [findingId] from every checklist row that currently carries it, then
+  /// — when [testId] is non-empty — sets it on the row with that id in the
+  /// checklist that covers [scopeObject], marking that row an anomaly. Passing an
+  /// empty [testId] therefore just unlinks. Status is only *raised* to anomaly on
+  /// a match; unlinking leaves the row's status untouched (a tester may have set
+  /// it deliberately). Returns whether a target row was found. One undo step.
+  bool linkFindingToTest({
+    required String findingId,
+    required String scopeObject,
+    required String testId,
+  }) {
+    final deck = currentState.deck;
+    if (deck == null || findingId.isEmpty) return false;
+    final scopeKey = normalizeScopeObject(scopeObject);
+    final target = testId.trim().toUpperCase();
+    var found = false;
+    var changed = false;
+    final slides = <Slide>[];
+    for (final s in deck.slides) {
+      if (s.type != SlideType.checklist) {
+        slides.add(s);
+        continue;
+      }
+      final spec = ChecklistSpec.fromSlide(s.title, s.tableRows);
+      final inScope = normalizeScopeObject(s.checklistScope) == scopeKey;
+      var rowsChanged = false;
+      final rows = <ChecklistRow>[];
+      for (final r in spec.rows) {
+        if (inScope &&
+            target.isNotEmpty &&
+            r.id.trim().toUpperCase() == target) {
+          found = true;
+          rowsChanged = true;
+          rows.add(
+            r.copyWith(findingId: findingId, status: ChecklistStatus.anomaly),
+          );
+        } else if (r.findingId == findingId) {
+          // Stale link on another row (or an unlink): clear it, keep the status.
+          rowsChanged = true;
+          rows.add(r.copyWith(findingId: ''));
+        } else {
+          rows.add(r);
+        }
+      }
+      if (rowsChanged) {
+        changed = true;
+        slides.add(
+          s.copyWith(
+            tableRows: ChecklistSpec(
+              standardLabel: spec.standardLabel,
+              rows: rows,
+            ).toTableRows(),
+          ),
+        );
+      } else {
+        slides.add(s);
+      }
+    }
+    if (changed) _mutate(deck.copyWith(slides: slides), bumpRevision: true);
+    return found;
+  }
 }

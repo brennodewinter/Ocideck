@@ -1787,6 +1787,9 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Gekoppelde test': 'Verchnüpfte Test',
+  'Maak eerst een checklist voor dit scope-object.':
+      'Erstell zerscht e Checkliste für das Scope-Objäkt.',
   'Bewerken': 'Bearbeite',
   'Checklist-sjabloon': 'Checkliste-Vorlag',
   'Eigen checklists': 'Eigeni Checkliste',

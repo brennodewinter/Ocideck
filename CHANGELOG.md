@@ -8,6 +8,14 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Link a finding to a checklist test.** The finding editor gains a **Gekoppelde
+  test (Linked test)** picker listing the tests on the checklist(s) that cover the
+  finding's scope object. Picking one records it on the finding (a `**Test:**`
+  line, shown as a chip on the finding card) and **writes back** to the checklist:
+  the matching row is marked an anomaly and linked to the finding. Changing or
+  clearing the choice moves or removes that link. This closes the loop between a
+  finding and the test that revealed it (feedback #8). Localised in all interface
+  languages.
 - **Your own checklist templates.** A new **Checklists** tab under Settings lets
   you create, edit and delete reusable checklist templates (a name, a standard
   label and its test items). Any template can be loaded into a checklist slide

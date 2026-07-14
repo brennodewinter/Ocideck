@@ -1786,6 +1786,9 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Gekoppelde test': 'Propojený test',
+  'Maak eerst een checklist voor dit scope-object.':
+      'Nejprve vytvořte kontrolní seznam pro tento objekt rozsahu.',
   'Bewerken': 'Upravit',
   'Checklist-sjabloon': 'Šablona kontrolního seznamu',
   'Eigen checklists': 'Vlastní kontrolní seznamy',
