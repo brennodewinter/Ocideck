@@ -1801,6 +1801,9 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Je eigen gegevens': 'Ваші власні дані',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
+      'По одному в рядку: ваше ім\'я, адреса електронної пошти, телефон або домен вашої організації. Те, що тут вказано, не повідомляється і не редагується — це відправник, а не виявлення. Домен (politie.nl) охоплює всі адреси під ним.',
   'Bij onafgehandelde persoonsgegevens':
       'За наявності неопрацьованих персональних даних',
   'Export afgebroken vanwege privacybevindingen.':

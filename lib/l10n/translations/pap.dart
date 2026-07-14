@@ -740,6 +740,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Je eigen gegevens': 'Bo mes datos',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
+      'Un pa liña: bo nòmber, adres di e-mail, number di telefòn òf e dominio di bo organisashon. Loke ta pará aki no ta wòrdu reportá ni redaktá — ta e remitente, no un hayasgo. Un dominio (politie.nl) ta kubri tur adres bou di dje.',
   'Bij onafgehandelde persoonsgegevens': 'Ku datos personal no resolví',
   'Export afgebroken vanwege privacybevindingen.':
       'Eksportashon kanselá pa motibu di hayasgo di privasidat.',

@@ -810,6 +810,7 @@ void presentDeck(
     audienceDeck: PrivacyProjection.forAudience(
       deck.copyWith(slides: renderSlides),
       disabledRules: settings.privacyDisabledRules,
+      ownIdentity: OwnIdentity.fromLines(settings.privacyOwnIdentity),
     ),
     cockpitColorScheme: settings.cockpitColorScheme,
     initialIndex: renderInitial,

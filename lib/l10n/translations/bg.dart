@@ -1806,6 +1806,9 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Je eigen gegevens': 'Вашите собствени данни',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
+      'По едно на ред: вашето име, имейл, телефон или домейнът на организацията ви. Каквото е тук, не се съобщава и не се заличава — това е подателят, а не констатация. Домейн (politie.nl) покрива всеки адрес под него.',
   'Bij onafgehandelde persoonsgegevens': 'При необработени лични данни',
   'Export afgebroken vanwege privacybevindingen.':
       'Експортът е прекратен заради констатации за поверителност.',

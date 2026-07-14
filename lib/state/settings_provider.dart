@@ -10,7 +10,16 @@ import '../models/settings.dart';
 import '../services/secret_store.dart';
 import '../utils/log.dart';
 
+part 'parts/settings_provider_privacy.dart';
+
 class SettingsNotifier extends StateNotifier<AppSettings> {
+  /// De huidige instellingen, leesbaar en schrijfbaar vanuit een `part`.
+  ///
+  /// `state` is protected en dus onbereikbaar voor een extension in een
+  /// part-bestand — precies het patroon dat `DeckNotifier` al gebruikt.
+  AppSettings get currentState => state;
+  set currentState(AppSettings value) => state = value;
+
   SettingsNotifier({SecretStore? secretStore})
     : _secrets = secretStore ?? SecretStore(),
       super(const AppSettings()) {
@@ -149,6 +158,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       privacyExportGate: PrivacyExportGateX.fromKey(
         prefs.getString('privacyExportGate'),
       ),
+      privacyOwnIdentity: prefs.getString('privacyOwnIdentity') ?? '',
       uiTextScale: (prefs.getDouble('uiTextScale') ?? 1.0).clamp(1.0, 2.0),
       docReaderTextScale: (prefs.getDouble('docReaderTextScale') ?? 1.0).clamp(
         0.8,
@@ -308,42 +318,6 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     await _persist(
       'setClassificationWatermarkEnabled',
       (prefs) => prefs.setBool('classificationWatermarkEnabled', enabled),
-    );
-  }
-
-  Future<void> setPrivacyChecksEnabled(bool enabled) async {
-    state = state.copyWith(privacyChecksEnabled: enabled);
-    await _persist(
-      'setPrivacyChecksEnabled',
-      (prefs) => prefs.setBool('privacyChecksEnabled', enabled),
-    );
-  }
-
-  /// Zet één detectieregel aan of uit.
-  ///
-  /// De ontsnappingsklep uit de melding zelf ("deze regel nooit meer melden").
-  /// Chirurgisch ingrijpen op één regel is oneindig veel beter dan de hele
-  /// controle uitzetten, want dat laatste is onomkeerbaar in de praktijk: wie hem
-  /// eenmaal uit heeft, zet hem niet meer aan.
-  Future<void> setPrivacyExportGate(PrivacyExportGate gate) async {
-    state = state.copyWith(privacyExportGate: gate);
-    await _persist(
-      'setPrivacyExportGate',
-      (prefs) => prefs.setString('privacyExportGate', gate.key),
-    );
-  }
-
-  Future<void> setPrivacyRuleEnabled(String ruleId, bool enabled) async {
-    final next = {...state.privacyDisabledRules};
-    if (enabled) {
-      next.remove(ruleId);
-    } else {
-      next.add(ruleId);
-    }
-    state = state.copyWith(privacyDisabledRules: next);
-    await _persist(
-      'setPrivacyRuleEnabled',
-      (prefs) => prefs.setStringList('privacyDisabledRules', next.toList()),
     );
   }
 

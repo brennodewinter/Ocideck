@@ -1787,6 +1787,9 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Je eigen gegevens': 'A saját adataid',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
+      'Soronként egy: a neved, e-mail-címed, telefonszámod vagy a szervezeted domainje. Ami itt szerepel, azt nem jelzi és nem takarja ki — az a feladó, nem megállapítás. Egy domain (politie.nl) minden alatta lévő címet lefed.',
   'Bij onafgehandelde persoonsgegevens': 'Kezeletlen személyes adatok esetén',
   'Export afgebroken vanwege privacybevindingen.':
       'Az exportálás adatvédelmi megállapítások miatt megszakadt.',

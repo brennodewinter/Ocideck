@@ -1802,6 +1802,9 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Je eigen gegevens': 'Propriile tale date',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
+      'Câte unul pe rând: numele tău, adresa de e-mail, telefonul sau domeniul organizației tale. Ce este aici nu se raportează și nu se redactează — este expeditorul, nu o constatare. Un domeniu (politie.nl) acoperă orice adresă de sub el.',
   'Bij onafgehandelde persoonsgegevens': 'La date personale nerezolvate',
   'Export afgebroken vanwege privacybevindingen.':
       'Export anulat din cauza constatărilor de confidențialitate.',

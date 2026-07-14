@@ -1819,6 +1819,9 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Je eigen gegevens': 'Do shonraí féin',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
+      'Ceann sa líne: d\'ainm, do sheoladh ríomhphoist, d\'uimhir ghutháin nó fearann d\'eagraíochta. Ní thuairiscítear ná ní fholaítear a bhfuil anseo — is é an seoltóir é, ní toradh. Clúdaíonn fearann (politie.nl) gach seoladh faoi.',
   'Bij onafgehandelde persoonsgegevens': 'Le sonraí pearsanta gan réiteach',
   'Export afgebroken vanwege privacybevindingen.':
       'Cuireadh an t-easpórtáil ar ceal mar gheall ar thorthaí príobháideachais.',

@@ -40,6 +40,8 @@ extension _SettingsSecurity on _SettingsDialogState {
         _disabledPrivacyRules(l10n),
         const SizedBox(height: 10),
         _privacyExportGate(l10n),
+        const SizedBox(height: 10),
+        _privacyOwnIdentity(l10n),
         const SizedBox(height: 20),
         _sectionTitle(l10n.d('Online media')),
         SwitchListTile(
@@ -218,6 +220,47 @@ extension _SettingsSecurity on _SettingsDialogState {
               }
             },
           ),
+        ),
+      ],
+    );
+  }
+
+  /// Je eigen gegevens — die zijn geen bevinding maar de afzender.
+  ///
+  /// Dit is in de praktijk de grootste vals-positieven-bron van de hele scanner:
+  /// je naam op de titelslide, je adres in de footer, je nummer op de
+  /// contactslide. Zonder deze lijst vuurt vrijwel élk deck onterecht, en wel op
+  /// de ene slide die er altijd in zit.
+  ///
+  /// Bewust een lijst en geen slimmigheid: een heuristiek die probeert te raden
+  /// wie de auteur is, zit er soms naast — en dan onderdrukt hij juist wél een
+  /// echte bevinding.
+  Widget _privacyOwnIdentity(AppLocalizations l10n) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(l10n.d('Je eigen gegevens'), style: const TextStyle(fontSize: 13)),
+        const SizedBox(height: 2),
+        Text(
+          l10n.d(
+            'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.',
+          ),
+          style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+        ),
+        const SizedBox(height: 6),
+        TextFormField(
+          initialValue: ref.read(settingsProvider).privacyOwnIdentity,
+          minLines: 2,
+          maxLines: 4,
+          style: const TextStyle(fontSize: 12),
+          decoration: InputDecoration(
+            isDense: true,
+            border: const OutlineInputBorder(),
+            hintText: 'brenno@dewinter.com\ndewinter.com',
+            hintStyle: TextStyle(fontSize: 11, color: AppTheme.slate400),
+          ),
+          onChanged: (value) =>
+              ref.read(settingsProvider.notifier).setPrivacyOwnIdentity(value),
         ),
       ],
     );

@@ -21,6 +21,7 @@ import '../../models/slide.dart';
 import 'privacy_allowlist.dart';
 import 'privacy_checksums.dart';
 import 'privacy_eu_rules.dart';
+import 'privacy_own_identity.dart';
 import 'privacy_special_rules.dart';
 import 'privacy_secret_rules.dart';
 
@@ -69,7 +70,18 @@ class PrivacyScanner {
   ///     ordernummers erop afgaan, wil die ordernummers niet zwart in zijn export.
   final Set<String> disabledRules;
 
-  const PrivacyScanner({this.disabledRules = const {}});
+  /// De eigen gegevens van de gebruiker: naam, e-mailadres, telefoonnummer,
+  /// organisatiedomein.
+  ///
+  /// De grootste praktische vals-positieven-bron is de auteur zelf — zijn adres
+  /// in de footer, zijn naam op de titelslide. Dat is geen bevinding maar de
+  /// afzender.
+  final OwnIdentity ownIdentity;
+
+  const PrivacyScanner({
+    this.disabledRules = const {},
+    this.ownIdentity = OwnIdentity.empty,
+  });
 
   /// Scant het hele deck. Deckbrede velden (titel, auteur, trefwoorden) krijgen
   /// [kDeckWidePrivacyIndex].
@@ -166,7 +178,8 @@ class PrivacyScanner {
       for (final word in rule.keywords) {
         final at = lower.indexOf(word);
         if (at < 0) continue;
-        out.add(
+        _emit(
+          out,
           _keywordFinding(fragment, slideIndex, rule.id, at, word.length),
         );
         // Eén melding per familie per fragment: tien synoniemen in één zin
@@ -177,7 +190,8 @@ class PrivacyScanner {
 
     for (final genetic in geneticPatterns) {
       for (final match in genetic.pattern.allMatches(fragment.text)) {
-        out.add(
+        _emit(
+          out,
           _finding(
             fragment,
             slideIndex,
@@ -191,7 +205,8 @@ class PrivacyScanner {
     }
 
     for (final match in parketnummerPattern.allMatches(fragment.text)) {
-      out.add(
+      _emit(
+        out,
         _finding(
           fragment,
           slideIndex,
@@ -250,7 +265,8 @@ class PrivacyScanner {
           continue;
         }
 
-        out.add(
+        _emit(
+          out,
           _finding(
             fragment,
             slideIndex,
@@ -281,7 +297,8 @@ class PrivacyScanner {
         final value = match.group(0)!;
         if (isPlaceholderSecret(value)) continue;
         if (rule.validate != null && !rule.validate!(value)) continue;
-        out.add(
+        _emit(
+          out,
           _finding(
             fragment,
             slideIndex,
@@ -310,7 +327,8 @@ class PrivacyScanner {
       )) {
         continue;
       }
-      out.add(
+      _emit(
+        out,
         _finding(
           fragment,
           slideIndex,
@@ -334,7 +352,8 @@ class PrivacyScanner {
     for (final match in _reEmail.allMatches(fragment.text)) {
       final address = match.group(0)!;
       if (isPlaceholderEmail(address)) continue;
-      out.add(
+      _emit(
+        out,
         _finding(
           fragment,
           slideIndex,
@@ -354,7 +373,8 @@ class PrivacyScanner {
       final candidate = match.group(0)!;
       if (!isValidIban(candidate)) continue;
       if (isExampleIban(candidate)) continue;
-      out.add(
+      _emit(
+        out,
         _finding(
           fragment,
           slideIndex,
@@ -391,7 +411,8 @@ class PrivacyScanner {
         match.start,
         bsnContextWords,
       );
-      out.add(
+      _emit(
+        out,
         _finding(
           fragment,
           slideIndex,
@@ -413,7 +434,18 @@ class PrivacyScanner {
     return words.any(window.contains);
   }
 
-  PrivacyFinding _finding(
+  /// Voegt een bevinding toe, tenzij hij is onderdrukt (`null`).
+  void _emit(List<PrivacyFinding> out, PrivacyFinding? finding) {
+    if (finding != null) out.add(finding);
+  }
+
+  /// Bouwt een bevinding, of `null` wanneer de waarde bij de gebruiker zelf
+  /// hoort.
+  ///
+  /// De controle zit hier, op één plek, en niet in elke regel apart: elke regel
+  /// die een waarde uit de tekst haalt, loopt hierdoorheen, dus een nieuwe regel
+  /// erft de onderdrukking gratis.
+  PrivacyFinding? _finding(
     _Fragment fragment,
     int slideIndex,
     Match match, {
@@ -421,6 +453,7 @@ class PrivacyScanner {
     required PrivacyFamily family,
     required PrivacyConfidence confidence,
   }) {
+    if (ownIdentity.covers(match.group(0)!)) return null;
     return PrivacyFinding(
       ruleId: ruleId,
       family: family,

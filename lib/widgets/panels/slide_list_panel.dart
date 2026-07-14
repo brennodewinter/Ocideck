@@ -15,6 +15,7 @@ import '../../state/tabs_provider.dart';
 import '../../services/classification_enforcement_policy.dart';
 import '../../services/finding_context_score.dart';
 import '../../services/image_service.dart';
+import '../../services/privacy/privacy_own_identity.dart';
 import '../../services/privacy/privacy_projection.dart';
 import '../../services/slide_rasterizer.dart';
 import '../../state/slide_clipboard_provider.dart';
@@ -32,6 +33,7 @@ import '../slides/slide_thumbnail.dart';
 
 part 'slide_list_panel_bars.dart';
 part 'slide_list_panel_add.dart';
+part 'slide_list_panel_clipboard.dart';
 
 class SlideListPanel extends ConsumerStatefulWidget {
   /// Current width of the slide rail. When it changes (dragging the divider),
@@ -205,71 +207,6 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     } else {
       _selectSlide(index);
     }
-  }
-
-  /// Render de hele slide naar een afbeelding en kopieer 'm naar het klembord,
-  /// zodat je 'm elders kunt plakken.
-  /// Fail-closed classificatie-gate voor egress-paden buiten [ExportService].
-  /// Rasteren-naar-klembord is functioneel een export: het levert een volledige
-  /// render van (mogelijk geclassificeerde) slide-inhoud af op het systeem-
-  /// klembord. Zonder deze check zou het vrijgaveplafond omzeild kunnen worden.
-  /// Retourneert true als de actie door mag; toont anders de weigerreden.
-  bool _classificationAllowsEgress(
-    Deck deck,
-    ScaffoldMessengerState messenger,
-  ) {
-    final policy = ClassificationEnforcementPolicy.fromAppSettings(
-      ref.read(settingsProvider),
-    );
-    final decision = policy.evaluate(deck.tlp);
-    if (!decision.allowed) {
-      messenger.showSnackBar(SnackBar(content: Text(decision.reason!)));
-      return false;
-    }
-    return true;
-  }
-
-  Future<void> _copySlideAsImage(Slide slide) async {
-    final deck = ref.read(deckProvider).deck;
-    if (deck == null) return;
-    final messenger = ScaffoldMessenger.of(context);
-    if (!_classificationAllowsEgress(deck, messenger)) return;
-    messenger.showSnackBar(
-      SnackBar(
-        content: Text(context.l10n.d('Slide renderen…')),
-        duration: const Duration(milliseconds: 700),
-      ),
-    );
-    Uint8List? bytes;
-    try {
-      // Rasteren-naar-klembord is een ontvangend oppervlak: de projectie hoort
-      // er dus net zo goed voor te staan als bij een echte export.
-      final images = await SlideRasterizer.rasterize(
-        context: context,
-        audience: PrivacyProjection.forAudience(deck.copyWith(slides: [slide])),
-        cockpitColorScheme: ref.read(settingsProvider).cockpitColorScheme,
-        showClassificationWatermark: ref
-            .read(settingsProvider)
-            .classificationWatermarkEnabled,
-      );
-      if (images.isNotEmpty) bytes = images.first;
-    } catch (e) {
-      logWarning('_SlideListPanelState._copySlideAsImage: rasterize slide', e);
-    }
-    if (!mounted) return;
-    final ok =
-        bytes != null && await ImageService().copyImageBytesToClipboard(bytes);
-    if (!mounted) return;
-    messenger.hideCurrentSnackBar();
-    messenger.showSnackBar(
-      SnackBar(
-        content: Text(
-          ok
-              ? context.l10n.d('Slide gekopieerd naar klembord.')
-              : context.l10n.d('Kopiëren mislukt.'),
-        ),
-      ),
-    );
   }
 
   /// De geselecteerde slides, op volgorde van positie in het deck.

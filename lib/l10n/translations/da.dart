@@ -1782,6 +1782,9 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Je eigen gegevens': 'Dine egne oplysninger',
+  'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
+      'Ét pr. linje: dit navn, din e-mailadresse, dit telefonnummer eller din organisations domæne. Det, der står her, rapporteres ikke og redigeres ikke bort — det er afsenderen, ikke et fund. Et domæne (politie.nl) dækker enhver adresse under det.',
   'Bij onafgehandelde persoonsgegevens': 'Ved ubehandlede personoplysninger',
   'Export afgebroken vanwege privacybevindingen.':
       'Eksport afbrudt på grund af privatlivsfund.',
