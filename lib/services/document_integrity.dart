@@ -4,6 +4,7 @@ import 'package:crypto/crypto.dart';
 
 import '../models/deck.dart';
 import '../models/document_signature.dart';
+import '../models/redaction_manifest.dart';
 import 'markdown_service.dart';
 
 /// Result of verifying a deck's document seal (§8 A1).
@@ -17,6 +18,20 @@ enum IntegrityStatus {
   /// The recomputed content hash differs from the stored seal: the content was
   /// changed after finalising (tamper-evidence).
   changed,
+
+  /// Een geredigeerde afleiding van een verzegeld deck.
+  ///
+  /// Dit bestaat om een vals alarm te voorkomen, en dat is geen bijzaak. Een
+  /// geredigeerd artefact heeft per definitie andere inhoud dan de bron, dus de
+  /// hertelde hash wijkt af — en zonder deze status zou een auditor die het
+  /// pakket natrekt tot "GEMANIPULEERD" concluderen. Een vals tamper-alarm op een
+  /// echt rapport is erger dan geen integriteitscontrole hebben: het maakt het
+  /// mechanisme onbetrouwbaar precies wanneer het ertoe doet.
+  ///
+  /// De controle loopt hier niet tegen de inhoudshash maar tegen het
+  /// redactiemanifest (`redaction_manifest.dart`): elke redactie moet uit de
+  /// bron terug te rekenen zijn, en er mogen er niet meer of minder zijn.
+  redactedDerivative,
 }
 
 /// The general "Document integrity" capability (§8 A1): compute and verify a
@@ -52,6 +67,31 @@ class DocumentIntegrity {
     }
     return computeHash(deck) == deck.sealHash
         ? IntegrityStatus.intact
+        : IntegrityStatus.changed;
+  }
+
+  /// Verifieer een **geredigeerde afleiding** tegen de bron waaruit hij komt.
+  ///
+  /// Dit is het pad voor een auditor die twee dingen heeft: het geredigeerde
+  /// rapport (met zijn manifest) en de gezegelde bron. De inhoudshash klópt hier
+  /// per definitie niet — dat is geen manipulatie maar redactie — dus de controle
+  /// loopt tegen het manifest.
+  ///
+  /// [IntegrityStatus.changed] betekent hier: het manifest hoort niet bij deze
+  /// bron. Er is een redactie toegevoegd, weggelaten, of hij verbergt iets anders
+  /// dan hij beweert.
+  IntegrityStatus verifyRedactedDerivative(
+    RedactionManifest manifest,
+    Deck source, {
+    required bool Function(RedactionManifest, Deck) verifier,
+  }) {
+    if (!source.finalized || source.sealHash.isEmpty) {
+      return IntegrityStatus.notSealed;
+    }
+    if (manifest.derivedFrom != source.sealHash) return IntegrityStatus.changed;
+    if (computeHash(source) != source.sealHash) return IntegrityStatus.changed;
+    return verifier(manifest, source)
+        ? IntegrityStatus.redactedDerivative
         : IntegrityStatus.changed;
   }
 

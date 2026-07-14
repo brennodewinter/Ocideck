@@ -6,6 +6,7 @@ import '../../models/slide_quality.dart';
 import '../../services/classification_enforcement_policy.dart';
 import '../../services/export_metadata.dart';
 import '../../services/export_service.dart';
+import '../../models/redaction_manifest.dart';
 import '../../services/privacy/privacy_projection.dart';
 import '../../services/quality_export_policy.dart';
 import '../../services/slide_rasterizer.dart';
@@ -51,6 +52,12 @@ class ExportDialog extends StatefulWidget {
 
   final bool showClassificationWatermark;
 
+  /// Het redactiemanifest, wanneer dit deck redacties bevat. Wordt naast de
+  /// export weggeschreven zodat een ontvanger kan zien wát er is weggehaald en
+  /// een derde partij het kan verifiëren. Gebouwd uit de BRON — de AudienceDeck
+  /// bevat de oorspronkelijke waarden immers niet meer.
+  final RedactionManifest redactionManifest;
+
   /// Na een geslaagde export aangeroepen met het formaat-label ("PDF",
   /// "PPTX", "HTML") — bijv. om het bij de recente bestanden te noteren.
   final void Function(String formatLabel)? onExported;
@@ -67,6 +74,7 @@ class ExportDialog extends StatefulWidget {
     this.exportDirectory,
     this.markdown = '',
     this.showClassificationWatermark = false,
+    this.redactionManifest = RedactionManifest.empty,
     this.onExported,
   });
 
@@ -83,6 +91,7 @@ class ExportDialog extends StatefulWidget {
     String? exportDirectory,
     String markdown = '',
     bool showClassificationWatermark = false,
+    RedactionManifest redactionManifest = RedactionManifest.empty,
     void Function(String formatLabel)? onExported,
   }) {
     return showDialog(
@@ -99,6 +108,7 @@ class ExportDialog extends StatefulWidget {
         exportDirectory: exportDirectory,
         markdown: markdown,
         showClassificationWatermark: showClassificationWatermark,
+        redactionManifest: redactionManifest,
         onExported: onExported,
       ),
     );
@@ -262,6 +272,7 @@ class _ExportDialogState extends State<ExportDialog> {
       qualityPolicy: widget.qualityPolicy,
       qualityAcknowledged: true,
       metadata: ExportDocumentMetadata.fromDeck(widget.audience.deck),
+      redactionManifest: widget.redactionManifest,
     );
 
     if (!mounted) return;
