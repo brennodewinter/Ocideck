@@ -98,6 +98,26 @@ void main() {
     expect(find.textContaining('Opgelost na hertest'), findsOneWidget);
   });
 
+  testWidgets('a finding with a CVSS shows the severity speedometer (#3)', (
+    tester,
+  ) async {
+    await tester.pumpWidget(_host(_finding(_headerBody)));
+    await tester.pump();
+
+    expect(tester.takeException(), isNull);
+    // The cockpit speedometer beside the header carries a 'CVSS' label.
+    expect(find.text('CVSS'), findsOneWidget);
+  });
+
+  testWidgets('a finding without a CVSS shows no speedometer', (tester) async {
+    final md = const FindingSpec(heading: 'F-1 · Geen score').toMarkdown();
+    await tester.pumpWidget(_host(_finding(md)));
+    await tester.pump();
+
+    expect(tester.takeException(), isNull);
+    expect(find.text('CVSS'), findsNothing);
+  });
+
   testWidgets('a finding linked to a test shows the test id chip (#8)', (
     tester,
   ) async {

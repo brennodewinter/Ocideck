@@ -691,7 +691,11 @@ else.
   whole finding moves and round-trips as a unit. The header carries the scope
   object, the CVSS 4.0 vector (with a live, derived score and severity band), CWE
   and CVE references, and the description / reproduction / impact / recommendation
-  sections. Severity is always **derived** from the vector, never typed. A
+  sections. Severity is always **derived** from the vector, never typed. On the
+  rendered slide a **cockpit speedometer** sits next to the finding header — a
+  green→amber→red gauge with the needle at the effective score (the CIA-weighted
+  context score when the scope object is rated, else the base score) — so the
+  reader sees the severity at a glance. A
   **Hertest (Retest)** dropdown records the retest outcome — *Opgelost* / *Nog
   aanwezig* / *Deels opgelost* (with an optional note); a resolved finding shows a
   green **Opgelost na hertest** badge on its card while keeping its severity. A
