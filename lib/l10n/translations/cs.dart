@@ -1786,6 +1786,18 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'De eigenaar staat insluiten niet toe': 'Vlastník nepovoluje vkládání',
+  'Deze video is alleen op de bron zelf te bekijken.':
+      'Toto video lze zhlédnout jen na samotném zdroji.',
+  'Video niet gevonden': 'Video nebylo nalezeno',
+  'De video is verwijderd, privé of de link klopt niet.':
+      'Video bylo odstraněno, je soukromé nebo je odkaz chybný.',
+  'Ongeldige video-link': 'Neplatný odkaz na video',
+  'Controleer de URL van de video op deze slide.':
+      'Zkontrolujte URL videa na tomto snímku.',
+  'Geen verbinding met de videobron': 'Žádné připojení ke zdroji videa',
+  'Controleer de internetverbinding en probeer opnieuw.':
+      'Zkontrolujte připojení k internetu a zkuste to znovu.',
   'Privacy blokkeert export': 'Soukromí blokuje export',
   'privacybevinding(en) zonder keuze': 'nález(y) soukromí bez rozhodnutí',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':

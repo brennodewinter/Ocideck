@@ -1782,6 +1782,18 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'De eigenaar staat insluiten niet toe': 'Ägaren tillåter inte inbäddning',
+  'Deze video is alleen op de bron zelf te bekijken.':
+      'Den här videon kan bara ses på själva källan.',
+  'Video niet gevonden': 'Videon hittades inte',
+  'De video is verwijderd, privé of de link klopt niet.':
+      'Videon har tagits bort, är privat eller så är länken fel.',
+  'Ongeldige video-link': 'Ogiltig videolänk',
+  'Controleer de URL van de video op deze slide.':
+      'Kontrollera videons URL på den här bilden.',
+  'Geen verbinding met de videobron': 'Ingen anslutning till videokällan',
+  'Controleer de internetverbinding en probeer opnieuw.':
+      'Kontrollera internetanslutningen och försök igen.',
   'Privacy blokkeert export': 'Integriteten blockerar exporten',
   'privacybevinding(en) zonder keuze': 'integritetsfynd utan gjort val',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':

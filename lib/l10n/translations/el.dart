@@ -1811,6 +1811,19 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'De eigenaar staat insluiten niet toe':
+      'Ο κάτοχος δεν επιτρέπει την ενσωμάτωση',
+  'Deze video is alleen op de bron zelf te bekijken.':
+      'Αυτό το βίντεο μπορεί να προβληθεί μόνο στην ίδια την πηγή.',
+  'Video niet gevonden': 'Το βίντεο δεν βρέθηκε',
+  'De video is verwijderd, privé of de link klopt niet.':
+      'Το βίντεο αφαιρέθηκε, είναι ιδιωτικό ή ο σύνδεσμος είναι λανθασμένος.',
+  'Ongeldige video-link': 'Μη έγκυρος σύνδεσμος βίντεο',
+  'Controleer de URL van de video op deze slide.':
+      'Ελέγξτε το URL του βίντεο σε αυτή τη διαφάνεια.',
+  'Geen verbinding met de videobron': 'Καμία σύνδεση με την πηγή του βίντεο',
+  'Controleer de internetverbinding en probeer opnieuw.':
+      'Ελέγξτε τη σύνδεση στο διαδίκτυο και δοκιμάστε ξανά.',
   'Privacy blokkeert export': 'Το απόρρητο μπλοκάρει την εξαγωγή',
   'privacybevinding(en) zonder keuze': 'εύρημα/-τα απορρήτου χωρίς επιλογή',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':

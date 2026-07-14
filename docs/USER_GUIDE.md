@@ -267,6 +267,13 @@ off by default for your privacy — until you turn it on, an online slide shows 
 placeholder with the URL instead of loading anything, and on export an online
 source is written as a clickable link.
 
+When an embedded video does not play, the slide now **says why** instead of
+showing a blank rectangle: the owner disabled embedding (by far the most common —
+the clip can only be watched on YouTube/Vimeo itself), the video was removed or is
+private, the link is invalid, or there is no connection to the source. While a
+valid embed is still loading you see a small spinner, so a slow load is no longer
+mistaken for a broken one.
+
 The same Security tab has **CVE opzoeken (online)** for the finding editor's
 **Zoek CVE…** action — also off by default, and additionally gated on your
 consent. When on, you can set the **CVE mirror** base URL (default

@@ -1790,6 +1790,18 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'De eigenaar staat insluiten niet toe': 'Vlasnik ne dopušta ugrađivanje',
+  'Deze video is alleen op de bron zelf te bekijken.':
+      'Ovaj se videozapis može gledati samo na samom izvoru.',
+  'Video niet gevonden': 'Videozapis nije pronađen',
+  'De video is verwijderd, privé of de link klopt niet.':
+      'Videozapis je uklonjen, privatan je ili poveznica nije ispravna.',
+  'Ongeldige video-link': 'Neispravna poveznica na videozapis',
+  'Controleer de URL van de video op deze slide.':
+      'Provjerite URL videozapisa na ovom slajdu.',
+  'Geen verbinding met de videobron': 'Nema veze s izvorom videozapisa',
+  'Controleer de internetverbinding en probeer opnieuw.':
+      'Provjerite internetsku vezu i pokušajte ponovno.',
   'Privacy blokkeert export': 'Privatnost blokira izvoz',
   'privacybevinding(en) zonder keuze': 'nalaz(a) o privatnosti bez odluke',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':

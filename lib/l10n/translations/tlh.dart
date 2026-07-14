@@ -1758,6 +1758,18 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'De eigenaar staat insluiten niet toe': 'ghajwI\' chaw\'be\'',
+  'Deze video is alleen op de bron zelf te bekijken.':
+      'mungDajDaq neH HaStavam bejlaHlu\'.',
+  'Video niet gevonden': 'HaSta tu\'be\'lu\'',
+  'De video is verwijderd, privé of de link klopt niet.':
+      'HaSta teqlu\'pu\', pegh, ghap rar lI\'be\'.',
+  'Ongeldige video-link': 'HaSta rar lI\'be\'',
+  'Controleer de URL van de video op deze slide.':
+      'cha\'nobvamDaq HaSta URL yI\'ol.',
+  'Geen verbinding met de videobron': 'HaSta mung SIchlaHbe\'lu\'',
+  'Controleer de internetverbinding en probeer opnieuw.':
+      'internet rarwI\' yI\'ol \'ej yInIDqa\'.',
   'Privacy blokkeert export': 'ngeH bot pegh',
   'privacybevinding(en) zonder keuze': 'wIv Hutlhbogh pegh tu\'lu\'bogh',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':

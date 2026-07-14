@@ -736,6 +736,20 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'De eigenaar staat insluiten niet toe':
+      'Il proprietario non consente l\'incorporamento',
+  'Deze video is alleen op de bron zelf te bekijken.':
+      'Questo video può essere guardato solo sull\'origine stessa.',
+  'Video niet gevonden': 'Video non trovato',
+  'De video is verwijderd, privé of de link klopt niet.':
+      'Il video è stato rimosso, è privato o il link è errato.',
+  'Ongeldige video-link': 'Link video non valido',
+  'Controleer de URL van de video op deze slide.':
+      'Controlla l\'URL del video su questa diapositiva.',
+  'Geen verbinding met de videobron':
+      'Nessuna connessione all\'origine del video',
+  'Controleer de internetverbinding en probeer opnieuw.':
+      'Controlla la connessione internet e riprova.',
   'Privacy blokkeert export': 'La privacy blocca l\'esportazione',
   'privacybevinding(en) zonder keuze': 'rilevazione/i di privacy senza scelta',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':

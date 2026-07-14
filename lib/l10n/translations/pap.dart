@@ -740,6 +740,18 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'De eigenaar staat insluiten niet toe': 'E doño no ta permití inkrustashon',
+  'Deze video is alleen op de bron zelf te bekijken.':
+      'E video aki por wòrdu mirá solamente riba e fuente mes.',
+  'Video niet gevonden': 'Video no hañá',
+  'De video is verwijderd, privé of de link klopt niet.':
+      'E video a wòrdu kitá, ta privá òf e link no ta bon.',
+  'Ongeldige video-link': 'Link di video inválido',
+  'Controleer de URL van de video op deze slide.':
+      'Kontrolá e URL di e video riba e lámina aki.',
+  'Geen verbinding met de videobron': 'Sin konekshon ku e fuente di video',
+  'Controleer de internetverbinding en probeer opnieuw.':
+      'Kontrolá e konekshon di internet i purba atrobe.',
   'Privacy blokkeert export': 'Privasidat ta blokia eksportashon',
   'privacybevinding(en) zonder keuze': 'hayasgo(nan) di privasidat sin skoho',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':

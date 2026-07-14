@@ -1819,6 +1819,18 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'De eigenaar staat insluiten niet toe': 'Ní cheadaíonn an t-úinéir leabú',
+  'Deze video is alleen op de bron zelf te bekijken.':
+      'Ní féidir an físeán seo a fheiceáil ach ar an bhfoinse féin.',
+  'Video niet gevonden': 'Físeán gan aimsiú',
+  'De video is verwijderd, privé of de link klopt niet.':
+      'Baineadh an físeán, tá sé príobháideach nó tá an nasc mícheart.',
+  'Ongeldige video-link': 'Nasc físeáin neamhbhailí',
+  'Controleer de URL van de video op deze slide.':
+      'Seiceáil URL an fhíseáin ar an sleamhnán seo.',
+  'Geen verbinding met de videobron': 'Gan nasc le foinse an fhíseáin',
+  'Controleer de internetverbinding en probeer opnieuw.':
+      'Seiceáil an nasc idirlín agus bain triail eile as.',
   'Privacy blokkeert export':
       'Cuireann an phríobháideacht bac ar an easpórtáil',
   'privacybevinding(en) zonder keuze':

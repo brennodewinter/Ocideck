@@ -1785,6 +1785,18 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'De eigenaar staat insluiten niet toe': 'Lastnik ne dovoljuje vdelave',
+  'Deze video is alleen op de bron zelf te bekijken.':
+      'Ta video si je mogoče ogledati le v samem viru.',
+  'Video niet gevonden': 'Video ni najden',
+  'De video is verwijderd, privé of de link klopt niet.':
+      'Video je odstranjen, je zaseben ali pa je povezava napačna.',
+  'Ongeldige video-link': 'Neveljavna povezava do videa',
+  'Controleer de URL van de video op deze slide.':
+      'Preverite URL videa na tem diapozitivu.',
+  'Geen verbinding met de videobron': 'Ni povezave z virom videa',
+  'Controleer de internetverbinding en probeer opnieuw.':
+      'Preverite internetno povezavo in poskusite znova.',
   'Privacy blokkeert export': 'Zasebnost blokira izvoz',
   'privacybevinding(en) zonder keuze': 'ugotovitev o zasebnosti brez odločitve',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':

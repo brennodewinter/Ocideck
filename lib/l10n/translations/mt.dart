@@ -1806,6 +1806,19 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'De eigenaar staat insluiten niet toe':
+      'Is-sid ma jippermettix l-inkorporazzjoni',
+  'Deze video is alleen op de bron zelf te bekijken.':
+      'Dan il-vidjo jista\' jitwera biss fuq is-sors innifsu.',
+  'Video niet gevonden': 'Il-vidjo ma nstabx',
+  'De video is verwijderd, privé of de link klopt niet.':
+      'Il-vidjo tneħħa, huwa privat jew il-link mhux tajjeb.',
+  'Ongeldige video-link': 'Link tal-vidjo invalidu',
+  'Controleer de URL van de video op deze slide.':
+      'Iċċekkja l-URL tal-vidjo fuq din is-slide.',
+  'Geen verbinding met de videobron': 'L-ebda konnessjoni mas-sors tal-vidjo',
+  'Controleer de internetverbinding en probeer opnieuw.':
+      'Iċċekkja l-konnessjoni tal-internet u erġa\' pprova.',
   'Privacy blokkeert export': 'Il-privatezza timblokka l-esportazzjoni',
   'privacybevinding(en) zonder keuze':
       'sejba/sejbiet ta\' privatezza mingħajr għażla',

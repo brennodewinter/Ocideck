@@ -1799,6 +1799,18 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'De eigenaar staat insluiten niet toe': 'Dominus insertionem non permittit',
+  'Deze video is alleen op de bron zelf te bekijken.':
+      'Haec pellicula tantum in ipso fonte spectari potest.',
+  'Video niet gevonden': 'Pellicula non inventa',
+  'De video is verwijderd, privé of de link klopt niet.':
+      'Pellicula remota est, privata est aut nexus mendosus est.',
+  'Ongeldige video-link': 'Nexus pelliculae invalidus',
+  'Controleer de URL van de video op deze slide.':
+      'URL pelliculae in hac lamina proba.',
+  'Geen verbinding met de videobron': 'Nullus nexus ad fontem pelliculae',
+  'Controleer de internetverbinding en probeer opnieuw.':
+      'Nexum interretis proba et iterum conare.',
   'Privacy blokkeert export': 'Privatio exportationem impedit',
   'privacybevinding(en) zonder keuze': 'inventum/a privationis sine electione',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':

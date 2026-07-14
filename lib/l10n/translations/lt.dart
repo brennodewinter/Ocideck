@@ -1791,6 +1791,18 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'De eigenaar staat insluiten niet toe': 'Savininkas neleidžia įterpti',
+  'Deze video is alleen op de bron zelf te bekijken.':
+      'Šį vaizdo įrašą galima žiūrėti tik pačiame šaltinyje.',
+  'Video niet gevonden': 'Vaizdo įrašas nerastas',
+  'De video is verwijderd, privé of de link klopt niet.':
+      'Vaizdo įrašas pašalintas, yra privatus arba nuoroda neteisinga.',
+  'Ongeldige video-link': 'Neteisinga vaizdo įrašo nuoroda',
+  'Controleer de URL van de video op deze slide.':
+      'Patikrinkite vaizdo įrašo URL šioje skaidrėje.',
+  'Geen verbinding met de videobron': 'Nėra ryšio su vaizdo įrašo šaltiniu',
+  'Controleer de internetverbinding en probeer opnieuw.':
+      'Patikrinkite interneto ryšį ir bandykite dar kartą.',
   'Privacy blokkeert export': 'Privatumas blokuoja eksportą',
   'privacybevinding(en) zonder keuze': 'privatumo radinys (-iai) be sprendimo',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':

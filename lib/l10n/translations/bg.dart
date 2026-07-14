@@ -1806,6 +1806,18 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'De eigenaar staat insluiten niet toe': 'Собственикът не разрешава вграждане',
+  'Deze video is alleen op de bron zelf te bekijken.':
+      'Това видео може да се гледа само в самия източник.',
+  'Video niet gevonden': 'Видеото не е намерено',
+  'De video is verwijderd, privé of de link klopt niet.':
+      'Видеото е премахнато, частно е или връзката е грешна.',
+  'Ongeldige video-link': 'Невалидна връзка към видео',
+  'Controleer de URL van de video op deze slide.':
+      'Проверете URL адреса на видеото на този слайд.',
+  'Geen verbinding met de videobron': 'Няма връзка с източника на видеото',
+  'Controleer de internetverbinding en probeer opnieuw.':
+      'Проверете връзката с интернет и опитайте отново.',
   'Privacy blokkeert export': 'Поверителността блокира експорта',
   'privacybevinding(en) zonder keuze':
       'констатация(и) за поверителност без избор',

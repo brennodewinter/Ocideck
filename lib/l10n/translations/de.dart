@@ -740,6 +740,19 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'De eigenaar staat insluiten niet toe':
+      'Der Eigentümer erlaubt kein Einbetten',
+  'Deze video is alleen op de bron zelf te bekijken.':
+      'Dieses Video kann nur auf der Quelle selbst angesehen werden.',
+  'Video niet gevonden': 'Video nicht gefunden',
+  'De video is verwijderd, privé of de link klopt niet.':
+      'Das Video wurde entfernt, ist privat oder der Link ist falsch.',
+  'Ongeldige video-link': 'Ungültiger Video-Link',
+  'Controleer de URL van de video op deze slide.':
+      'Prüfe die URL des Videos auf dieser Folie.',
+  'Geen verbinding met de videobron': 'Keine Verbindung zur Videoquelle',
+  'Controleer de internetverbinding en probeer opnieuw.':
+      'Prüfe die Internetverbindung und versuche es erneut.',
   'Privacy blokkeert export': 'Datenschutz blockiert den Export',
   'privacybevinding(en) zonder keuze': 'Datenschutzbefund(e) ohne Entscheidung',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
