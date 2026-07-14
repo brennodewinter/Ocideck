@@ -7,6 +7,14 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+- **Severity speedometer on findings.** A finding with a CVSS score now shows a
+  compact cockpit speedometer next to its header — a green→amber→red gauge with
+  the needle at the score — so the reader sees the severity at a glance alongside
+  the score badge. It uses the effective score (the CIA-weighted context score
+  when the scope object is rated, otherwise the base score) and renders the same
+  in the app and in exports.
+
 ### Changed
 - **MIAUW slides use the width better.** The finding, checklist, scope-matrix and
   findings-summary slides had a wide side margin (14% of the slide) that pushed

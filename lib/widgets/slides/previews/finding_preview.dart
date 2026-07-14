@@ -88,50 +88,105 @@ class _FindingPreview extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(w * 0.012),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          if (_hasBadges(spec)) ...[
-            _badges(context, spec, ctxCvss),
-            SizedBox(height: w * 0.02),
-          ],
-          if (spec.heading.isNotEmpty)
-            Text(
-              spec.heading,
-              style: _applyFont(
-                font,
-                TextStyle(
-                  fontSize: w * 0.038,
-                  fontWeight: FontWeight.w700,
-                  color: AppTheme.navy,
-                ),
-              ),
-            ),
-          if (spec.scopeObject.isNotEmpty) ...[
-            SizedBox(height: w * 0.015),
-            Row(
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(
-                  Icons.my_location,
-                  size: w * 0.024,
-                  color: AppTheme.slate500,
-                ),
-                SizedBox(width: w * 0.01),
-                Flexible(
-                  child: Text(
-                    spec.scopeObject,
+                if (_hasBadges(spec)) ...[
+                  _badges(context, spec, ctxCvss),
+                  SizedBox(height: w * 0.02),
+                ],
+                if (spec.heading.isNotEmpty)
+                  Text(
+                    spec.heading,
                     style: _applyFont(
                       font,
-                      TextStyle(fontSize: w * 0.024, color: AppTheme.slate700),
+                      TextStyle(
+                        fontSize: w * 0.038,
+                        fontWeight: FontWeight.w700,
+                        color: AppTheme.navy,
+                      ),
                     ),
                   ),
-                ),
+                if (spec.scopeObject.isNotEmpty) ...[
+                  SizedBox(height: w * 0.015),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.my_location,
+                        size: w * 0.024,
+                        color: AppTheme.slate500,
+                      ),
+                      SizedBox(width: w * 0.01),
+                      Flexible(
+                        child: Text(
+                          spec.scopeObject,
+                          style: _applyFont(
+                            font,
+                            TextStyle(
+                              fontSize: w * 0.024,
+                              color: AppTheme.slate700,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ],
             ),
-          ],
+          ),
+          _severityGauge(spec, ctxCvss),
         ],
+      ),
+    );
+  }
+
+  /// A compact cockpit speedometer for the finding's effective CVSS score
+  /// (feedback #3): the context score when the scope object is rated, else the
+  /// base score. Empty when there is no valid vector. Colours are deterministic
+  /// (profile + fixed AppTheme severity colours) so it renders identically in an
+  /// export isolate, like the badges.
+  Widget _severityGauge(FindingSpec spec, Cvss4? ctxCvss) {
+    final cvss = ctxCvss ?? spec.cvss;
+    if (cvss == null) return const SizedBox.shrink();
+    final meter = CockpitMeterSpec(
+      type: CockpitMeterType.speedometer,
+      label: 'CVSS',
+      unit: '',
+      min: 0,
+      max: 10,
+      greenFrom: 0,
+      greenTo: 4,
+      redFrom: 7,
+      value: cvss.score,
+    );
+    final textColor = _hexColor(profile.textColor);
+    return Padding(
+      padding: EdgeInsets.only(left: w * 0.02),
+      child: SizedBox(
+        width: w * 0.16,
+        height: w * 0.16,
+        child: _CockpitInstrument(
+          meter: meter,
+          progress: 1,
+          accent: _hexColor(profile.accentColor),
+          surface: _hexColor(profile.slideBackgroundColor),
+          textColor: textColor,
+          mutedColor: textColor.withValues(alpha: 0.62),
+          good: AppTheme.success700,
+          warning: AppTheme.amber500,
+          critical: AppTheme.danger600,
+          cold: AppTheme.success700,
+          sky: AppTheme.slate300,
+          ground: AppTheme.slate500,
+          font: font,
+        ),
       ),
     );
   }
