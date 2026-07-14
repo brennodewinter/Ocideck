@@ -41,10 +41,15 @@ To give a sense of scale (point-in-time figures — they only grow):
 
 | Metric | Approx. |
 | --- | ---: |
-| Automated tests in the suite | **~900** |
-| Test files under `test/` | **~105** |
-| Source files under `lib/` | ~178 (indexed in [`SOURCE_MAP.md`](SOURCE_MAP.md)) |
-| Line coverage (enforced floor: 65%) | **~66%** |
+| Automated tests in the suite | **~1920** |
+| Test files under `test/` | **~225** |
+| Source files under `lib/` | ~352 excl. translations (indexed in [`SOURCE_MAP.md`](SOURCE_MAP.md)) |
+| Line coverage (enforced floor: 73%) | **~74%** |
+
+Coverage is a floor **and** a census: `make coverage` also fails when a `lib/`
+file appears in no test at all. Such a file is not 0% — lcov never records it,
+so it sits outside the fraction entirely and the percentage alone can never see
+it (see [`make coverage`](#make-coverage)).
 
 Every push runs the **entire** suite — there is no "smoke subset". The tests
 span unit (model/parsing/state), widget (every slide editor, the dialogs, the
@@ -61,11 +66,11 @@ run locally and in CI, the number you see locally is the number CI gates on.
 | --- | --- | :---: | :---: | :---: |
 | [`make format-check`](#make-format-check) | Code is `dart format`-clean | ✅ | ✅ | ✅ |
 | [`make analyze`](#make-analyze) | No analyzer/lint/type issues (`--fatal-infos`) | ✅ | ✅ | ✅ |
-| [`make check-conventions`](#make-check-conventions) | No `print()`; bare `catch (_)`, raw-colour & file-size ratchets | ✅ | ✅ | ✅ |
+| [`make check-conventions`](#make-check-conventions) | No `print()`; no raw control bytes; bare `catch (_)`, raw-colour, layering & file-size ratchets | ✅ | ✅ | ✅ |
 | [`make check-method-length`](#make-check-method-length) | Per-method length ratchet (AST, max 150) | ✅ | ✅ | ✅ |
 | [`make check-dead-code`](#make-check-dead-code) | No orphaned `lib/` files (unreachable from any entrypoint) | ✅ | ✅ | ✅ |
-| [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ | ✅ | ✅ |
-| [`make coverage`](#make-coverage) | Line coverage ≥ 65% floor | — | — | ✅ (gate) |
+| [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ (via `coverage`) | ✅ | ✅ |
+| [`make coverage`](#make-coverage) | Line coverage ≥ 73% floor **and** every `lib/` file is in some test | ✅ | ✅ | ✅ (gate) |
 | [`make licenses`](#make-licenses) | Every dependency is open-source | — | ✅ | ✅ |
 | [`make sbom-verify`](#make-sbom--make-sbom-verify) | Committed SBOM matches the dependency set | — | ✅ | ✅ |
 | [`make deps-check`](#make-deps-check) | Vendored export JS: integrity + CVEs | — | ✅ | ✅ |
@@ -121,7 +126,20 @@ These three run on every push and pull request (and as `make check`).
     baseline count that may shrink but never grow, currently **0**, so every
     swallow routes a named error through `logError`/`logWarning`;
   - **raw-colour ratchet** — literal `Color(0x…)` outside
-    `lib/theme/app_theme.dart` may shrink but never grow (`rawColorBaseline`).
+    `lib/theme/app_theme.dart` may shrink but never grow (`rawColorBaseline`);
+  - **no raw control bytes** in any `lib/`, `test/` or `tool/` source. A
+    control character written as the *byte* rather than as an escape
+    (`\u0000`) makes the whole file read as **binary**: `grep` silently skips
+    it — no output at all, not "no matches" — and `git diff` shows
+    `Bin … bytes` instead of a reviewable diff. A source file invisible to a
+    grep audit and unreadable in review is a real hazard in a security tool,
+    and the escape costs nothing: the resulting string is byte-identical;
+  - **layering ratchet** — `lib/models/` may not import Flutter's UI layer or
+    `lib/widgets/` at all (hard **0**), and the count in `lib/services/` may
+    shrink but never grow (`serviceUiImportBaseline`, currently **8**). A
+    service is the headless core: usable without a widget tree, testable
+    without pumping one. `foundation.dart`/`services.dart` are exempt — they
+    carry no widget tree.
     Prefer a semantic `AppTheme` token so a palette change — and a future dark
     mode — touches one place instead of dozens;
   - **file-size ratchet** — no file may exceed **1000** lines, except the
@@ -182,11 +200,25 @@ These three run on every push and pull request (and as `make check`).
   printed at the top of the run so you can reproduce it.
 
 ### `make coverage`
-- **Runs:** `flutter test --coverage` then `dart run tool/coverage_summary.dart --min=65`.
-- **Covers:** line coverage across every `lib/` file a test imports.
-- **Failure means:** overall line coverage dropped below the floor (currently
-  **65%**, with actual coverage ~66.5%). The floor guards against large regressions; raise it as coverage
-  improves. This is the coverage form of the gate used in CI.
+- **Runs:** `flutter test --coverage` then
+  `dart run tool/coverage_summary.dart --min=73 --require-instrumented`.
+- **Covers:** two things. (1) Line coverage across every `lib/` file a test
+  imports. (2) That there **is** such a test for every `lib/` file.
+- **Failure means:** coverage dropped below the floor (currently **73%**, actual
+  ~74.2%), **or** a `lib/` file is in no test at all.
+- **Why (2) exists:** lcov only records files a test imported, so a file no test
+  touches is not 0% — it is absent from the denominator altogether. Add a
+  brand-new, wholly untested file and the percentage does not move a hair: the
+  one case a coverage floor exists to catch is the one case it structurally
+  cannot see. `--require-instrumented` enumerates `lib/` from disk instead and
+  fails on any file missing from the report. The 16 files legitimately absent
+  today are baselined in `uncoveredBaseline` with a reason each — 12 platform
+  halves / conditional-import facades (the VM test runner cannot load
+  `dart:js_interop` code at all) and 4 with no executable lines (an `export`
+  barrel, an enum, a const data table). It is a **ratchet**: it may shrink, and
+  the run prints a tip when a baselined file becomes covered.
+- Since this supersedes `make test` (same suite, one run, plus the floor),
+  `make check` depends on **`coverage`** rather than `test`.
 
 ---
 
@@ -285,9 +317,15 @@ These three run on every push and pull request (and as `make check`).
   `object-src 'none'`) and any `</script>` an untrusted deck injects is escaped
   so it can't break out of the inert markdown data holder.
 - **Class-level guards** catch whole bug *families*, not just known cases:
-  - `test/network_sink_guard_test.dart` — a source scan that fails if
-    `NetworkImage` / `VideoPlayerController.networkUrl` / `HttpClient` appears
-    outside the files that apply `NetGuard` (a new sink can't reintroduce SSRF).
+  - `test/network_sink_guard_test.dart` — a source scan that fails if any
+    egress primitive appears outside the files that apply `NetGuard`, so a new
+    sink cannot reintroduce SSRF. It covers `NetworkImage` /
+    `VideoPlayerController.networkUrl`, raw `HttpClient`, **and** the other ways
+    to open a socket: `package:http`, `package:dio`, `Socket`, `SecureSocket`,
+    `WebSocket`, `RawDatagramSocket`. That last group was added after the guard
+    was found to scan for `HttpClient(` alone — which made its own promise
+    ("a new raw client fails this test") untrue for every other primitive: an
+    `http.get(deckSuppliedUrl)` anywhere in `lib/` passed every gate untouched.
   - `test/markdown_roundtrip_fuzz_test.dart` — an adversarial corpus (pipe,
     `-->`, `<br>`, backslash, HTML metachars, newlines) through every lossless
     field, so a new escaping bug fails instead of silently losing author text.

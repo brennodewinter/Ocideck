@@ -2,9 +2,9 @@
 
 help:
 	@echo "OciDeck quality targets:"
-	@echo "  make check           Format check + static analysis + full Flutter test suite."
+	@echo "  make check           Format check + static analysis + full Flutter test suite + coverage floor."
 	@echo "  make check-full      make check + dependency outdated report."
-	@echo "  make coverage        Run the test suite with coverage and print a line-coverage summary."
+	@echo "  make coverage        Test suite with coverage: enforce the floor AND that every lib/ file is in some test."
 	@echo "  make mutate          Mutation check for dead/untested branch operands (manual; FILE/TESTS overridable)."
 	@echo "  make mutate-parsers  Mutation sweep over all markdown parsers/serializers (manual, slow)."
 	@echo "  make test-golden     Slide-renderer visual-regression goldens (single platform; UPDATE=1 to accept)."
@@ -85,13 +85,18 @@ test:
 
 # Run the full test suite with coverage and summarise line coverage. The floor
 # guards against large regressions; raise it as coverage improves.
+#
+# --require-instrumented is what makes the floor mean something: lcov omits a
+# file no test imports, so such a file is not 0% — it is outside the fraction
+# altogether, and a percentage alone can never catch it. This also enumerates
+# lib/ from disk and fails on any non-baselined file that is in no test.
 coverage:
 	@echo "== OciDeck check: coverage =="
-	@echo "Command: flutter test --coverage && dart run tool/coverage_summary.dart --min=65"
-	@echo "Covers: line coverage across every lib/ file a test imports."
-	@echo "Failure means: overall line coverage dropped below the required floor."
+	@echo "Command: flutter test --coverage && dart run tool/coverage_summary.dart --min=73 --require-instrumented"
+	@echo "Covers: line coverage over lib/, plus: every lib/ file is in at least one test."
+	@echo "Failure means: coverage fell below the floor, or a lib/ file is in no test at all."
 	flutter test --coverage --test-randomize-ordering-seed random --exclude-tags golden
-	dart run tool/coverage_summary.dart --min=65
+	dart run tool/coverage_summary.dart --min=73 --require-instrumented
 
 # Slide-renderer visual-regression goldens (test/golden/). Pixel- and
 # platform-specific (default flutter-test font, so they catch layout/structure/
@@ -416,9 +421,15 @@ build-release:
 	scripts/build_release.sh
 
 # Full local quality gate. Intended for humans, CI logs, and LLM-assisted debugging.
-check: format-check analyze check-conventions check-method-length check-dead-code test
+# `coverage` rather than `test`: it runs the same suite (one run, instrumented)
+# and additionally enforces the floor and the every-file-is-in-a-test rule.
+# Those two gates existed but no aggregate target invoked them, so in practice
+# nothing ran them — and the GitHub workflow that did cannot fire on a Forgejo
+# remote without a runner. `make check` is the real gate; it should contain the
+# gates.
+check: format-check analyze check-conventions check-method-length check-dead-code coverage
 	@echo "== OciDeck check complete =="
-	@echo "Validated: formatting, static analysis, conventions, method length, dead-code, and the full Flutter test suite."
+	@echo "Validated: formatting, static analysis, conventions, method length, dead-code, the full Flutter test suite, and the coverage floor."
 
 # Extended local check: the gate plus licence/compliance, bundled-JS CVEs, the
 # web-hardening assertion (rebuilds the web bundle), and a freshness report.

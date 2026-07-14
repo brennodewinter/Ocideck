@@ -18,18 +18,20 @@ class AnnotationCodec {
   static String fingerprint(Slide s) {
     final buf = StringBuffer()
       ..write(s.type.index)
-      ..write('${s.title}')
-      ..write('${s.subtitle}')
-      ..write('${s.bullets.join('')}')
-      ..write('${s.bullets2.join('')}')
-      ..write('${s.imagePath}')
-      ..write('${s.imagePath2}')
-      ..write('${s.quote}')
-      ..write('${s.quoteAuthor}')
-      ..write('${s.customMarkdown}')
-      ..write('${s.codeLanguage}')
-      ..write('${s.videoPath}')
-      ..write('${s.tableRows.map((r) => r.join('')).join('')}');
+      ..write('\u0001${s.title}')
+      ..write('\u0001${s.subtitle}')
+      ..write('\u0001${s.bullets.join('\u0002')}')
+      ..write('\u0001${s.bullets2.join('\u0002')}')
+      ..write('\u0001${s.imagePath}')
+      ..write('\u0001${s.imagePath2}')
+      ..write('\u0001${s.quote}')
+      ..write('\u0001${s.quoteAuthor}')
+      ..write('\u0001${s.customMarkdown}')
+      ..write('\u0001${s.codeLanguage}')
+      ..write('\u0001${s.videoPath}')
+      ..write(
+        '\u0001${s.tableRows.map((r) => r.join('\u0002')).join('\u0003')}',
+      );
     return _fnv1a(buf.toString());
   }
 

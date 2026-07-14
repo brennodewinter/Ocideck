@@ -8,7 +8,17 @@ import 'package:flutter_test/flutter_test.dart';
 /// through `NetGuard`. New sinks must apply the guard:
 ///   * a deck-supplied media URL → `NetGuard.isAllowedMediaUrlResolved` before
 ///     `NetworkImage` / `VideoPlayerController.networkUrl`;
-///   * a raw `HttpClient` → `NetGuard.safeResolve(Trusted)` + socket pinning.
+///   * a raw `HttpClient` → `NetGuard.safeResolve(Trusted)` + socket pinning;
+///   * any OTHER egress primitive — `package:http`, `package:dio`, `Socket`,
+///     `SecureSocket`, `WebSocket`, `RawDatagramSocket` — likewise.
+///
+/// That last group is why this file was widened. The guard used to scan for
+/// `HttpClient(` alone, so its own promise ("a new raw client fails this test")
+/// was false for every other way to open a socket: a `http.get(deckSuppliedUrl)`
+/// added anywhere in lib/ passed every gate in the Makefile untouched. The
+/// current code is sound — the desktop URL-import goes through the pinned
+/// `importFromUrl`, and the one `package:http` caller is web-only — but nothing
+/// *kept* it that way. Now it does.
 ///
 /// The allowlist is by FILE (stable across line edits): these files already
 /// apply the guard. A sink appearing in any *other* file fails this test —
@@ -79,6 +89,36 @@ void main() {
           'New raw HttpClient. Resolve the host through NetGuard.safeResolve '
           '(or safeResolveTrusted) and pin the socket to the returned address, '
           'then add the file to the allowlist:',
+    );
+  });
+
+  test('every other egress primitive stays behind the same gate', () {
+    scan(
+      sink: RegExp(
+        // Package-level HTTP clients — the gap this test was widened to close.
+        r'package:http/http\.dart'
+        r'|package:dio/'
+        r'|\bhttp\.(Client|get|post|put|patch|delete|head|read|readBytes)\('
+        // Raw sockets: an SSRF path that never touches an HTTP client at all.
+        r'|\b(Socket|SecureSocket|WebSocket|RawDatagramSocket)\.(connect|bind)\(',
+      ),
+      allowedFiles: {
+        // Houdt de `package:http`-import voor de part-bibliotheek eronder.
+        'lib/services/file_service.dart',
+        // fetchUrlBytes: de WEB-tak van de URL-import, en alleen bereikbaar via
+        // `if (isWebPlatform)` in widgets/shell/shell_actions.dart. Op web
+        // bestaat de dart:io-pinning van importFromUrl niet en kan ze ook niet
+        // draaien: daar zijn de browser (CORS, mixed content) en de pagina-CSP
+        // (`connect-src`) de gate. Lokaal begrenst dit bestand schema (http/s)
+        // en omvang (harde bytecap). Op desktop loopt de import via het gepinde
+        // importFromUrl, niet hierlangs.
+        'lib/services/parts/file_service_net.dart',
+      },
+      guidance:
+          'New network egress primitive (package:http, dio, or a raw socket). '
+          'Route the URL through NetGuard — safeResolve(Trusted) + socket '
+          'pinning for dart:io, or document why the platform itself is the gate '
+          '— then add the file to the allowlist:',
     );
   });
 }

@@ -406,7 +406,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
       ];
       final copy = await _duplicates.findIdenticalCopy(openedPath, recents);
       if (copy == null || !mounted) return;
-      final pair = ([openedPath, copy]..sort()).join(' ');
+      final pair = ([openedPath, copy]..sort()).join('\u0000');
       if (!_noticedDuplicatePairs.add(pair)) return;
       _ref.read(duplicateCopyNoticeProvider.notifier).state =
           DuplicateCopyNotice(openedPath: openedPath, copyPath: copy);
