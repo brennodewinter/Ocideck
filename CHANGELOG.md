@@ -8,6 +8,27 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Two versions from one source.** When a deck holds findings, the export dialog
+  asks who the export is for. **Full** removes only what you marked *leave out* —
+  the client or auditor gets a report they can actually verify against. **Redacted**
+  removes everything the check finds, including on slides you accepted, because
+  "this room may see it" is not the same as "everyone may see it".
+
+  This is the heart of the pentest-report case. Without the choice you would have to
+  pick *between* those two, and in practice the full version always wins — because
+  that is the one that has to go out the door.
+
+  The profile lands in the filename (`report-geredigeerd.pdf`). Not cosmetic: the
+  most expensive mistake here is sending the full copy to the wider circle, and a
+  mix-up should be something you can *see* rather than something you have to
+  remember. The redaction manifest follows the profile too, and verification now
+  takes the profile as an argument — measuring a redacted manifest against the full
+  yardstick would flag an honest report as suspect, which is exactly the false alarm
+  we removed from the seal.
+
+  The export dialog picks the profile without ever touching the source deck: it holds
+  a *factory* that hands out one `ExportBundle` per profile, and that closure lives in
+  the shell where the source legitimately is. The projection boundary holds.
 - **Forty email addresses in a table is not forty findings — it is a membership
   list.** One email address on a slide is a contact detail. Forty in a table is an
   exported list, and that is a different conversation entirely: with the GDPR, with
