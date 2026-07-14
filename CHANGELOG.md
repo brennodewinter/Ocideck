@@ -8,6 +8,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Security
+- **The HTML export's CSP now pins every network-capable resource, not just
+  scripts and fetches.** The export already blocked remote scripts (nonce) and
+  `connect-src`/remote `img-src`, but with no `default-src` the `media-src`,
+  `font-src` and `form-action` directives were unset and therefore unrestricted
+  — so a `<video src="https://…">`, a hostile `@font-face { url() }` or a
+  planted `<form action="https://…">` that survived DOMPurify could still call
+  home when the exported file was opened. All three are now pinned to local
+  sources (`'self' data: blob: file:` / `'none'`). MathJax is tex-svg (no web
+  fonts) and the bundled CSS carries no `url()`, so this never bites a real
+  export.
 - **The web fetch-proxy fails closed by default.** `server/fetch-proxy`
   served *any* requester when `OCIDECK_PROXY_ALLOWED_ORIGINS` was unset, so an
   operator who deployed it without that variable ran an (SSRF-guarded, but

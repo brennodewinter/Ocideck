@@ -41,6 +41,14 @@ Normal text.
     expect(csp, contains("connect-src 'none'"));
     expect(csp, contains('img-src'));
     expect(csp, isNot(contains("img-src 'self' data: blob: file: https:")));
+    // Every other network-capable resource type is pinned to local sources too,
+    // so remote media, a hostile @font-face, or a planted form can't beacon out
+    // when the exported file is opened.
+    expect(csp, contains("media-src 'self' data: blob: file:"));
+    expect(csp, contains("font-src 'self' data:"));
+    expect(csp, contains("form-action 'none'"));
+    // None of these may quietly widen to a remote origin.
+    expect(csp, isNot(contains('https:')));
     expect(csp, isNot(contains("'unsafe-inline'")));
     expect(csp, isNot(contains("'unsafe-eval'")));
     expect(csp, isNot(contains("script-src 'self'")));

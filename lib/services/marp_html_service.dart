@@ -128,15 +128,23 @@ class MarpHtmlService {
         '<html lang="nl"><head><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width, initial-scale=1">'
         // Neutralise injected inline scripts (defence-in-depth behind DOMPurify)
-        // without over-restricting style/font, which would break locally opened
-        // exports. img-src still permits self/data/blob/file so relative and
-        // inlined images render; connect-src 'none' stops a surviving
-        // <img src="https://…"> (or CSS url()) from beaconing home on open.
-        // No default-src: the inline <style> block must keep working.
+        // without over-restricting style, which would break locally opened
+        // exports. No default-src: the inline <style> block must keep working
+        // (adding one would force 'unsafe-inline' for style). Instead every
+        // network-capable resource type is pinned to local sources so nothing a
+        // crafted deck smuggles past DOMPurify can beacon home when the file is
+        // opened: connect-src 'none' (fetch/XHR/beacon), img-src/media-src
+        // self/data/blob/file (a surviving <img>/<video src="https://…">),
+        // font-src self/data (a hostile @font-face url()), and form-action
+        // 'none' (a planted <form action="https://…"> on submit). MathJax is
+        // tex-svg (no web fonts) and the bundled theme/highlight CSS carry no
+        // url()/@font-face, so these limits never bite a legitimate export.
         '<meta http-equiv="Content-Security-Policy" '
         'content="script-src \'nonce-$nonce\'; object-src \'none\'; '
-        'base-uri \'none\'; frame-src \'none\'; '
-        'img-src \'self\' data: blob: file:; connect-src \'none\'">'
+        'base-uri \'none\'; frame-src \'none\'; form-action \'none\'; '
+        'img-src \'self\' data: blob: file:; '
+        'media-src \'self\' data: blob: file:; font-src \'self\' data:; '
+        'connect-src \'none\'">'
         '<title>$title</title>'
         '$headMeta'
         '<style>$css\n$hljsCss</style>'
