@@ -29,7 +29,9 @@ class AnnotationCodec {
       ..write('\u0001${s.customMarkdown}')
       ..write('\u0001${s.codeLanguage}')
       ..write('\u0001${s.videoPath}')
-      ..write('\u0001${s.tableRows.map((r) => r.join('\u0002')).join('\u0003')}');
+      ..write(
+        '\u0001${s.tableRows.map((r) => r.join('\u0002')).join('\u0003')}',
+      );
     return _fnv1a(buf.toString());
   }
 
