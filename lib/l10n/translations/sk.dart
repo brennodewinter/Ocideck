@@ -1790,6 +1790,16 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Privacy blokkeert export': 'Súkromie blokuje export',
+  'privacybevinding(en) zonder keuze': 'nález(y) súkromia bez rozhodnutia',
+  'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
+      'Osobné údaje, osobitné údaje a tajomstvá v texte',
+  'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':
+      'Snímky, poznámky, tabuľky, kód, cesty k súborom a adresy URL sa na tomto zariadení prehľadávajú na identifikačné čísla, finančné údaje, kontaktné údaje, digitálne identifikátory, tajomstvá, osobitné kategórie osobných údajov (GDPR čl. 9/10), hromadné údaje a úniky metaúdajov.',
+  'Alleen een zekere treffer waarschuwt; waarschijnlijk en mogelijk blijven informatief. Een uitgezette regel vuurt nergens.':
+      'Varuje len istá zhoda; pravdepodobná a možná zostávajú informatívne. Vypnuté pravidlo nikde nezareaguje.',
+  'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.':
+      'Neskontrolované: osobné údaje, osobitné údaje a tajomstvá. Kontrola súkromia je vypnutá v Zabezpečení.',
   'Op deze slide': 'Na tejto snímke',
   'Tijdens presenteren': 'Počas prezentácie',
   'Classificatie en privacy': 'Klasifikácia a súkromie',

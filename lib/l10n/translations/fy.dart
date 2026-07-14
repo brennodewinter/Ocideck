@@ -741,6 +741,16 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Privacy blokkeert export': 'Privacy blokkearret eksport',
+  'privacybevinding(en) zonder keuze': 'privacybefining(en) sûnder kar',
+  'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
+      'Persoansgegevens, bysûndere gegevens en geheimen yn de tekst',
+  'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':
+      'Slides, notysjes, tabellen, koade, bestânspaden en URL\'s wurde op dit apparaat trochsocht op identifisearjende nûmers, finansjele gegevens, kontaktgegevens, digitale identifikatoaren, geheimen, bysûndere persoansgegevens (AVG art. 9/10), massagegevens en metadatalekken.',
+  'Alleen een zekere treffer waarschuwt; waarschijnlijk en mogelijk blijven informatief. Een uitgezette regel vuurt nergens.':
+      'Allinne in wisse treffer warskôget; wierskynlik en mooglik bliuwe ynformatyf. In útsette regel fjurret nearne.',
+  'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.':
+      'Net kontrolearre: persoansgegevens, bysûndere gegevens en geheimen. De privacykontrôle stiet út by Befeiliging.',
   'Op deze slide': 'Op dizze dia',
   'Tijdens presenteren': 'Under it presintearjen',
   'Classificatie en privacy': 'Klassifikaasje en privacy',

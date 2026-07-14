@@ -1791,6 +1791,16 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Privacy blokkeert export': 'Privatumas blokuoja eksportą',
+  'privacybevinding(en) zonder keuze': 'privatumo radinys (-iai) be sprendimo',
+  'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
+      'Asmens duomenys, ypatingi duomenys ir paslaptys tekste',
+  'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':
+      'Skaidrės, pastabos, lentelės, kodas, failų keliai ir URL šiame įrenginyje peržiūrimi ieškant identifikavimo numerių, finansinių duomenų, kontaktinių duomenų, skaitmeninių identifikatorių, paslapčių, ypatingų kategorijų asmens duomenų (BDAR 9/10 str.), masinių duomenų ir metaduomenų nutekėjimų.',
+  'Alleen een zekere treffer waarschuwt; waarschijnlijk en mogelijk blijven informatief. Een uitgezette regel vuurt nergens.':
+      'Įspėja tik tikras atitikmuo; tikėtinas ir galimas lieka informaciniai. Išjungta taisyklė niekur nesuveikia.',
+  'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.':
+      'Nepatikrinta: asmens duomenys, ypatingi duomenys ir paslaptys. Privatumo patikra išjungta skiltyje Saugumas.',
   'Op deze slide': 'Šioje skaidrėje',
   'Tijdens presenteren': 'Pristatymo metu',
   'Classificatie en privacy': 'Klasifikacija ir privatumas',

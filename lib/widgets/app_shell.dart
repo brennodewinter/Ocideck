@@ -407,6 +407,33 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     editorN.select(idx);
   }
 
+  /// Eén tab-paneel, met alle providers die het deck lezen per tab opnieuw
+  /// gescoped.
+  ///
+  /// Alles wat het deck leest hoort in deze `overrides` te staan. Een afgeleide
+  /// provider die ontbreekt, lost op in de root-container, ziet een leeg deck en
+  /// doet stilletjes niets — geen fout, geen melding, gewoon niets. Zo ging
+  /// `imageContrastIssuesProvider` ooit stuk. `provider_scope_test.dart` scant
+  /// `lib/state` en faalt als er hier een mist.
+  Widget _tabScope(TabInfo tab) => ProviderScope(
+    key: ValueKey(tab.id),
+    overrides: [
+      deckProvider.overrideWith((ref) => tab.deckNotifier),
+      editorProvider.overrideWith((ref) => tab.editorNotifier),
+      deckQualityProvider.overrideWith((ref) {
+        final deck = ref.watch(deckProvider.select((state) => state.deck));
+        if (deck == null) return const SlideQualityResult([]);
+        return ref.watch(slideQualityAnalyzerProvider).analyze(deck);
+      }),
+      imageContrastIssuesProvider.overrideWith(computeImageContrastIssues),
+      privacyRawScanProvider.overrideWith(computePrivacyRawScan),
+      privacyScanProvider.overrideWith(computePrivacyScan),
+      privacyQualityIssuesProvider.overrideWith(computePrivacyQualityIssues),
+      privacyExportSummaryProvider.overrideWith(computePrivacyExportSummary),
+    ],
+    child: const _TabContent(),
+  );
+
   @override
   Widget build(BuildContext context) {
     final tabsState = ref.watch(tabsProvider);
@@ -505,43 +532,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
                       child: IndexedStack(
                         index: tabsState.clampedIndex,
                         children: [
-                          for (final tab in tabsState.tabs)
-                            ProviderScope(
-                              key: ValueKey(tab.id),
-                              overrides: [
-                                deckProvider.overrideWith(
-                                  (ref) => tab.deckNotifier,
-                                ),
-                                editorProvider.overrideWith(
-                                  (ref) => tab.editorNotifier,
-                                ),
-                                deckQualityProvider.overrideWith((ref) {
-                                  final deck = ref.watch(
-                                    deckProvider.select((state) => state.deck),
-                                  );
-                                  if (deck == null) {
-                                    return const SlideQualityResult([]);
-                                  }
-                                  return ref
-                                      .watch(slideQualityAnalyzerProvider)
-                                      .analyze(deck);
-                                }),
-                                imageContrastIssuesProvider.overrideWith(
-                                  computeImageContrastIssues,
-                                ),
-                                // De privacyscan leest het deck, dus hij moet
-                                // per tab gescoped worden — anders lost hij op
-                                // in de root-container en scant hij een leeg
-                                // deck, stilletjes.
-                                privacyScanProvider.overrideWith(
-                                  computePrivacyScan,
-                                ),
-                                privacyQualityIssuesProvider.overrideWith(
-                                  computePrivacyQualityIssues,
-                                ),
-                              ],
-                              child: const _TabContent(),
-                            ),
+                          for (final tab in tabsState.tabs) _tabScope(tab),
                         ],
                       ),
                     ),

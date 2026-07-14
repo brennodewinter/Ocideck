@@ -740,6 +740,17 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Privacy blokkeert export': 'La confidentialité bloque l\'export',
+  'privacybevinding(en) zonder keuze':
+      'constat(s) de confidentialité sans décision',
+  'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
+      'Données personnelles, catégories particulières et secrets dans le texte',
+  'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':
+      'Les diapositives, notes, tableaux, code, chemins de fichiers et URL sont examinés sur cet appareil à la recherche de numéros identifiants, de données financières, de coordonnées, d\'identifiants numériques, de secrets, de catégories particulières de données personnelles (RGPD art. 9/10), de données en masse et de fuites de métadonnées.',
+  'Alleen een zekere treffer waarschuwt; waarschijnlijk en mogelijk blijven informatief. Een uitgezette regel vuurt nergens.':
+      'Seul un résultat certain avertit ; probable et possible restent informatifs. Une règle désactivée ne se déclenche nulle part.',
+  'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.':
+      'Non contrôlé : données personnelles, catégories particulières et secrets. Le contrôle de confidentialité est désactivé dans Sécurité.',
   'Op deze slide': 'Sur cette diapositive',
   'Tijdens presenteren': 'Pendant la présentation',
   'Classificatie en privacy': 'Classification et confidentialité',

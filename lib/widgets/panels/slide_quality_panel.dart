@@ -9,6 +9,7 @@ import '../../models/slide_quality.dart';
 import '../../state/deck_quality_provider.dart';
 import '../../state/image_contrast_provider.dart';
 import '../../state/privacy_provider.dart';
+import '../../state/settings_provider.dart';
 import '../dialogs/slide_quality_details_dialog.dart';
 import 'slide_quality_actions.dart';
 import '../../theme/app_theme.dart';
@@ -286,6 +287,9 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
   }
 
   List<Widget> _performedChecksList(AppLocalizations l10n, Color iconColor) {
+    final privacyEnabled = ref.watch(
+      settingsProvider.select((s) => s.privacyChecksEnabled),
+    );
     return [
       Padding(
         padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
@@ -300,7 +304,10 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
                 color: iconColor,
               ),
             ),
-            for (final check in slideQualityPerformedChecks(l10n))
+            for (final check in slideQualityPerformedChecks(
+              l10n,
+              privacyEnabled: privacyEnabled,
+            ))
               Padding(
                 padding: const EdgeInsets.only(top: 4),
                 child: Row(
@@ -336,6 +343,37 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
                             ),
                           ),
                         ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            // Staat de privacycontrole uit, dan zwijgen is het gevaarlijkste wat
+            // dit paneel kan doen: de balk is groen, de lijst erboven ziet er
+            // compleet uit, en "niets gevonden" leest als "er zit niets in".
+            // Terwijl er niet eens gekeken is.
+            if (!privacyEnabled)
+              Padding(
+                padding: const EdgeInsets.only(top: 6),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(
+                      Icons.remove_circle_outline,
+                      size: 12,
+                      color: AppTheme.warningFg,
+                    ),
+                    const SizedBox(width: 6),
+                    Expanded(
+                      child: Text(
+                        l10n.d(
+                          'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.',
+                        ),
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w600,
+                          color: AppTheme.warningFg,
+                        ),
                       ),
                     ),
                   ],

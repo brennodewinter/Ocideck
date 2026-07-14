@@ -1758,6 +1758,16 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Privacy blokkeert export': 'ngeH bot pegh',
+  'privacybevinding(en) zonder keuze': 'wIv Hutlhbogh pegh tu\'lu\'bogh',
+  'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
+      'ghItlhDaq nuv De\', nuv De\' pIn, pegh je',
+  'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':
+      'jan vamDaq nejlu\' \'anghommey, ghItlhmey, romuSmey, ngoq, De\' Daqmey, URLmey je: nuv mI\'mey, Huch De\', rIchmey, De\' Deghmey, peghmey, nuv De\' pIn (GDPR art. 9/10), nuv De\' law\', \'ej De\'-De\' Hejmey.',
+  'Alleen een zekere treffer waarschuwt; waarschijnlijk en mogelijk blijven informatief. Een uitgezette regel vuurt nergens.':
+      'SamwI\' teHqu\' neH ghuHmoH; chaqqu\' chaq je ja\' neH. chut chu\'Ha\'lu\'bogh not vang.',
+  'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.':
+      'nuDlu\'be\': nuv De\', nuv De\' pIn, pegh je. Hubqu\'Daq chu\'Ha\'lu\' pegh ninSar.',
   'Op deze slide': 'nav vam',
   'Tijdens presenteren': '\'ang\'eghmeH poH',
   'Classificatie en privacy': 'Sup je peghmey',

@@ -1782,6 +1782,16 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Privacy blokkeert export': 'Integriteten blockerar exporten',
+  'privacybevinding(en) zonder keuze': 'integritetsfynd utan gjort val',
+  'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
+      'Personuppgifter, särskilda uppgifter och hemligheter i texten',
+  'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':
+      'Bilder, anteckningar, tabeller, kod, filsökvägar och URL:er genomsöks på den här enheten efter identifierande nummer, finansiella uppgifter, kontaktuppgifter, digitala identifierare, hemligheter, särskilda kategorier av personuppgifter (GDPR art. 9/10), massuppgifter och metadataläckor.',
+  'Alleen een zekere treffer waarschuwt; waarschijnlijk en mogelijk blijven informatief. Een uitgezette regel vuurt nergens.':
+      'Bara en säker träff varnar; sannolik och möjlig förblir informativa. En avstängd regel slår inte till någonstans.',
+  'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.':
+      'Inte kontrollerat: personuppgifter, särskilda uppgifter och hemligheter. Integritetskontrollen är avstängd under Säkerhet.',
   'Op deze slide': 'På den här bilden',
   'Tijdens presenteren': 'Under presentationen',
   'Classificatie en privacy': 'Klassificering och integritet',

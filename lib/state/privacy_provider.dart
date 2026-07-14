@@ -4,6 +4,7 @@ import '../models/deck.dart';
 import '../models/privacy_disposition.dart';
 import '../models/privacy_finding.dart';
 import '../models/slide_quality.dart';
+import '../services/privacy/privacy_export_policy.dart';
 import '../services/privacy/privacy_quality_bridge.dart';
 import '../services/privacy/privacy_own_identity.dart';
 import '../services/privacy/privacy_scanner.dart';
@@ -39,13 +40,32 @@ final privacyQualityIssuesProvider = Provider<List<SlideQualityIssue>>(
   computePrivacyQualityIssues,
 );
 
+/// De ruwe scan: álle bevindingen, óók die op een al afgehandelde slide.
+///
+/// [privacyScanProvider] filtert die laatste eruit — precies goed voor het
+/// paneel, precies fout voor een gate. Een gate moet weten hoevéél er is
+/// afgehandeld om te kunnen zeggen dat er niets meer openstaat; een scan waaruit
+/// het afgehandelde al verdwenen is, kan dat verschil niet meer maken.
+///
+/// Beide leiden hieruit af, zodat de scanner één keer per deckwijziging draait
+/// in plaats van twee keer.
+final privacyRawScanProvider = Provider<PrivacyScanResult>(
+  computePrivacyRawScan,
+);
+
+/// De export-samenvatting voor de statusbalk: hoeveel bevindingen staan er nog
+/// open, en hoeveel zijn er geaccepteerd, geshield of geredigeerd.
+final privacyExportSummaryProvider = Provider<PrivacyExportSummary>(
+  computePrivacyExportSummary,
+);
+
 /// Top-level, zodat `AppShell` dezelfde berekening per tab kan overriden.
 ///
 /// Beide providers lezen het gescopede deck. Zonder die override lossen ze op in
 /// de root-container, zien ze een leeg deck en doen ze stilletjes niets — precies
 /// hoe `imageContrastIssuesProvider` ooit stukging. `provider_scope_test.dart`
 /// bewaakt dat.
-PrivacyScanResult computePrivacyScan(Ref ref) {
+PrivacyScanResult computePrivacyRawScan(Ref ref) {
   final enabled = ref.watch(
     settingsProvider.select((s) => s.privacyChecksEnabled),
   );
@@ -54,7 +74,14 @@ PrivacyScanResult computePrivacyScan(Ref ref) {
   final deck = ref.watch(deckProvider.select((state) => state.deck));
   if (deck == null) return PrivacyScanResult.empty;
 
-  final scan = ref.watch(privacyScannerProvider).scan(deck);
+  return ref.watch(privacyScannerProvider).scan(deck);
+}
+
+PrivacyScanResult computePrivacyScan(Ref ref) {
+  final deck = ref.watch(deckProvider.select((state) => state.deck));
+  if (deck == null) return PrivacyScanResult.empty;
+
+  final scan = ref.watch(privacyRawScanProvider);
 
   // Bevindingen op een slide die de auteur al heeft afgehandeld (accept, shield
   // of redact) verdwijnen uit het paneel. Blijven melden over een beslissing die
@@ -67,6 +94,12 @@ PrivacyScanResult computePrivacyScan(Ref ref) {
     for (final finding in scan.findings)
       if (!_isResolved(deck, finding)) finding,
   ]);
+}
+
+PrivacyExportSummary computePrivacyExportSummary(Ref ref) {
+  final deck = ref.watch(deckProvider.select((state) => state.deck));
+  if (deck == null) return PrivacyExportSummary.empty;
+  return summarisePrivacyForExport(deck, ref.watch(privacyRawScanProvider));
 }
 
 bool _isResolved(Deck deck, PrivacyFinding finding) {

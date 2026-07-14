@@ -234,6 +234,15 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
   /// Dezelfde samenvoeging als het kwaliteitspaneel: sync-analyse plus de
   /// asynchrone titel-afbeeldingcontrastcheck, zodat statusbalk en paneel
   /// dezelfde tellingen tonen.
+  ///
+  /// De privacy-gate telt mee in de *status*, niet in het kwaliteitsresultaat.
+  /// Dat onderscheid is opzet. De statusbalk hoort elke gate te kennen die de
+  /// export tegenhoudt — hij zei "Klaar voor export" terwijl de privacy-gate op
+  /// blokkeren stond, en dat is de gevaarlijkste vorm van stilte die dit product
+  /// kent. Maar de privacybevindingen bij `quality` optellen zou ze langs de
+  /// kwaliteits-gate sturen, en dan krijgt de gebruiker bij het exporteren twéé
+  /// dialogen over dezelfde bevindingen: die van de privacy-gate en die van de
+  /// kwaliteits-gate. Eén gate, één dialoog, één status.
   ({ExportReadiness readiness, SlideQualityResult quality}) _exportReadiness(
     DeckState deckState,
     AppSettings settings,
@@ -254,6 +263,9 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         warningsEnabled: settings.qualityWarningsOnExport,
         blockOnErrors: settings.qualityBlockExportOnErrors,
       ).evaluate(quality),
+      privacyDecision: PrivacyExportPolicy(
+        gate: settings.privacyExportGate,
+      ).evaluate(ref.watch(privacyExportSummaryProvider)),
     );
     return (readiness: readiness, quality: quality);
   }
@@ -279,6 +291,12 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       ExportReadinessStatus.qualityWarnings => formatQualityExportReason(
         l10n,
         quality,
+      ),
+      ExportReadinessStatus.blockedByPrivacy => l10n.d(
+        'Maak per slide een keuze (accepteren, waarschuwen of weglaten) voordat je exporteert. Dit is zo ingesteld bij Beveiliging.',
+      ),
+      ExportReadinessStatus.privacyWarnings => l10n.d(
+        'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.',
       ),
       ExportReadinessStatus.ready => l10n.t('exportReady'),
     };

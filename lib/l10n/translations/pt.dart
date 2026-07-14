@@ -1813,6 +1813,17 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Privacy blokkeert export': 'A privacidade bloqueia a exportação',
+  'privacybevinding(en) zonder keuze':
+      'deteção(ões) de privacidade sem escolha feita',
+  'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
+      'Dados pessoais, dados especiais e segredos no texto',
+  'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':
+      'Os diapositivos, as notas, as tabelas, o código, os caminhos de ficheiros e os URL são pesquisados neste dispositivo à procura de números identificadores, dados financeiros, contactos, identificadores digitais, segredos, categorias especiais de dados pessoais (RGPD art. 9.º/10.º), dados em massa e fugas de metadados.',
+  'Alleen een zekere treffer waarschuwt; waarschijnlijk en mogelijk blijven informatief. Een uitgezette regel vuurt nergens.':
+      'Só um resultado certo avisa; provável e possível continuam informativos. Uma regra desativada não dispara em lado nenhum.',
+  'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.':
+      'Não verificado: dados pessoais, dados especiais e segredos. A verificação de privacidade está desativada em Segurança.',
   'Op deze slide': 'Neste diapositivo',
   'Tijdens presenteren': 'Durante a apresentação',
   'Classificatie en privacy': 'Classificação e privacidade',

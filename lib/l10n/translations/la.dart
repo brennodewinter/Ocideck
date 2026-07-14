@@ -1799,6 +1799,16 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Privacy blokkeert export': 'Privatio exportationem impedit',
+  'privacybevinding(en) zonder keuze': 'inventum/a privationis sine electione',
+  'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
+      'Data personalia, genera specialia et arcana in textu',
+  'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':
+      'Diapositivae, notae, tabulae, codex, semitae fasciculorum et URL in hoc instrumento perscrutantur ad numeros identitatis, data nummaria, notitias contactus, identificatores digitales, arcana, genera specialia datorum personalium (GDPR art. 9/10), data multa et effluvia metadatorum.',
+  'Alleen een zekere treffer waarschuwt; waarschijnlijk en mogelijk blijven informatief. Een uitgezette regel vuurt nergens.':
+      'Sola congruentia certa monet; probabilis et possibilis notitiam tantum praebent. Regula exstincta nusquam agit.',
+  'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.':
+      'Non examinatum: data personalia, genera specialia et arcana. Examen privati apud Securitatem exstinctum est.',
   'Op deze slide': 'In hac pagina',
   'Tijdens presenteren': 'Dum ostenditur',
   'Classificatie en privacy': 'Classificatio et vita privata',

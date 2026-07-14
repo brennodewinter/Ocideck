@@ -1806,6 +1806,17 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Privacy blokkeert export': 'Поверителността блокира експорта',
+  'privacybevinding(en) zonder keuze':
+      'констатация(и) за поверителност без избор',
+  'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
+      'Лични данни, специални данни и тайни в текста',
+  'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':
+      'Слайдовете, бележките, таблиците, кодът, пътищата до файлове и URL адресите се претърсват на това устройство за идентификационни номера, финансови данни, данни за контакт, цифрови идентификатори, тайни, специални категории лични данни (GDPR чл. 9/10), масови данни и изтичане на метаданни.',
+  'Alleen een zekere treffer waarschuwt; waarschijnlijk en mogelijk blijven informatief. Een uitgezette regel vuurt nergens.':
+      'Предупреждава само сигурно съвпадение; вероятното и възможното остават информативни. Изключено правило не се задейства никъде.',
+  'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.':
+      'Не е проверено: лични данни, специални данни и тайни. Проверката на поверителността е изключена в Сигурност.',
   'Op deze slide': 'На този слайд',
   'Tijdens presenteren': 'По време на презентация',
   'Classificatie en privacy': 'Класификация и поверителност',

@@ -1787,6 +1787,16 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Privacy blokkeert export': 'Az adatvédelem blokkolja az exportot',
+  'privacybevinding(en) zonder keuze': 'adatvédelmi megállapítás döntés nélkül',
+  'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
+      'Személyes adatok, különleges adatok és titkok a szövegben',
+  'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':
+      'A diákat, jegyzeteket, táblázatokat, kódot, fájlútvonalakat és URL-eket ezen az eszközön átvizsgáljuk azonosító számok, pénzügyi adatok, elérhetőségek, digitális azonosítók, titkok, különleges személyes adatok (GDPR 9/10. cikk), tömeges adatok és metaadat-szivárgások után.',
+  'Alleen een zekere treffer waarschuwt; waarschijnlijk en mogelijk blijven informatief. Een uitgezette regel vuurt nergens.':
+      'Csak a biztos találat figyelmeztet; a valószínű és a lehetséges tájékoztató marad. A kikapcsolt szabály sehol sem lép működésbe.',
+  'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.':
+      'Nincs ellenőrizve: személyes adatok, különleges adatok és titkok. Az adatvédelmi ellenőrzés ki van kapcsolva a Biztonság alatt.',
   'Op deze slide': 'Ezen a dián',
   'Tijdens presenteren': 'Bemutatás közben',
   'Classificatie en privacy': 'Besorolás és adatvédelem',

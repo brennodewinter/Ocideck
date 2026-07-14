@@ -1785,6 +1785,16 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Privacy blokkeert export': 'Zasebnost blokira izvoz',
+  'privacybevinding(en) zonder keuze': 'ugotovitev o zasebnosti brez odločitve',
+  'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
+      'Osebni podatki, posebni podatki in skrivnosti v besedilu',
+  'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':
+      'Prosojnice, opombe, tabele, koda, poti datotek in naslovi URL se na tej napravi pregledajo za identifikacijskimi številkami, finančnimi podatki, kontaktnimi podatki, digitalnimi identifikatorji, skrivnostmi, posebnimi vrstami osebnih podatkov (GDPR čl. 9/10), množičnimi podatki in razkritji metapodatkov.',
+  'Alleen een zekere treffer waarschuwt; waarschijnlijk en mogelijk blijven informatief. Een uitgezette regel vuurt nergens.':
+      'Opozori le zanesljiv zadetek; verjeten in možen ostaneta informativna. Izklopljeno pravilo se nikjer ne sproži.',
+  'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.':
+      'Ni preverjeno: osebni podatki, posebni podatki in skrivnosti. Preverjanje zasebnosti je izklopljeno v razdelku Varnost.',
   'Op deze slide': 'Na tej prosojnici',
   'Tijdens presenteren': 'Med predstavitvijo',
   'Classificatie en privacy': 'Klasifikacija in zasebnost',

@@ -7,6 +7,36 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Fixed
+- **The privacy check is now visible everywhere the quality of the deck is
+  shown.** The scanner was running, and its findings did land in the quality
+  panel — but three places that rebuild the "quality" view by hand quietly left
+  privacy out, so the same deck disagreed with itself depending on where you
+  looked. Now aligned:
+  - The list of **performed checks** on a green quality bar named contrast, alt
+    text, media files and text density — four checks — and silently omitted the
+    privacy check, ninety-plus rules on personal data, special categories and
+    secrets. Open a pentest report, read no word about privacy in the quality
+    list, and the honest conclusion is that it was not checked. It was. And the
+    mirror case: when the privacy check is switched **off**, it is no longer
+    listed under "performed checks" (that would be a lie under that heading) —
+    the panel says instead that it is off. A green bar with a complete-looking
+    list, while nothing was actually looked at, is the most dangerous state this
+    panel can show.
+  - **Thumbnail badges** watched only the four original checks, so a slide whose
+    only problem was an IBAN in the text looked perfectly clean in the rail. It
+    now carries a badge like any other issue. (Same edit fixed a pre-existing
+    bug: the badge keyed on *warnings*, so a slide with only an **error** — a
+    contrast error with no accompanying warning — showed no badge at all. The
+    worst slide in the deck was the only one unmarked.)
+  - The **status bar** export-readiness chip knew about the save, classification
+    and quality gates but not the privacy gate. A deck full of undecided personal
+    data, with the privacy gate set to *block*, showed a green *Ready to export* —
+    the status bar promising the opposite of what the export would do. It now
+    counts the undecided findings and turns red when the gate blocks, in the same
+    order as the other gates (privacy before quality). The gate itself was already
+    enforced in the export dialog; only the at-a-glance status was blind to it.
+
 ### Changed
 - **Notes blocks now open only when there is something in them.** *Speaker notes*
   and *User notes* both started expanded, always — two tall empty editors under

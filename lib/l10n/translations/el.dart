@@ -1811,6 +1811,16 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Privacy blokkeert export': 'Το απόρρητο μπλοκάρει την εξαγωγή',
+  'privacybevinding(en) zonder keuze': 'εύρημα/-τα απορρήτου χωρίς επιλογή',
+  'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
+      'Προσωπικά δεδομένα, ειδικές κατηγορίες και μυστικά στο κείμενο',
+  'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':
+      'Οι διαφάνειες, οι σημειώσεις, οι πίνακες, ο κώδικας, οι διαδρομές αρχείων και τα URL σαρώνονται σε αυτή τη συσκευή για αριθμούς ταυτοποίησης, οικονομικά δεδομένα, στοιχεία επικοινωνίας, ψηφιακά αναγνωριστικά, μυστικά, ειδικές κατηγορίες προσωπικών δεδομένων (GDPR άρθρο 9/10), μαζικά δεδομένα και διαρροές μεταδεδομένων.',
+  'Alleen een zekere treffer waarschuwt; waarschijnlijk en mogelijk blijven informatief. Een uitgezette regel vuurt nergens.':
+      'Μόνο ένα βέβαιο αποτέλεσμα προειδοποιεί· το πιθανότατο και το πιθανό παραμένουν ενημερωτικά. Ένας απενεργοποιημένος κανόνας δεν ενεργοποιείται πουθενά.',
+  'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.':
+      'Δεν ελέγχθηκαν: προσωπικά δεδομένα, ειδικές κατηγορίες και μυστικά. Ο έλεγχος απορρήτου είναι απενεργοποιημένος στην Ασφάλεια.',
   'Op deze slide': 'Σε αυτή τη διαφάνεια',
   'Tijdens presenteren': 'Κατά την παρουσίαση',
   'Classificatie en privacy': 'Διαβάθμιση και απόρρητο',

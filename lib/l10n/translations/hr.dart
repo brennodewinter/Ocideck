@@ -1790,6 +1790,16 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Privacy blokkeert export': 'Privatnost blokira izvoz',
+  'privacybevinding(en) zonder keuze': 'nalaz(a) o privatnosti bez odluke',
+  'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
+      'Osobni podaci, posebni podaci i tajne u tekstu',
+  'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':
+      'Slajdovi, bilješke, tablice, kôd, putanje datoteka i URL-ovi pretražuju se na ovom uređaju radi identifikacijskih brojeva, financijskih podataka, kontaktnih podataka, digitalnih identifikatora, tajni, posebnih kategorija osobnih podataka (GDPR čl. 9/10), masovnih podataka i curenja metapodataka.',
+  'Alleen een zekere treffer waarschuwt; waarschijnlijk en mogelijk blijven informatief. Een uitgezette regel vuurt nergens.':
+      'Upozorava samo sigurno podudaranje; vjerojatno i moguće ostaju informativni. Isključeno pravilo nigdje se ne okida.',
+  'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.':
+      'Nije provjereno: osobni podaci, posebni podaci i tajne. Provjera privatnosti isključena je u odjeljku Sigurnost.',
   'Op deze slide': 'Na ovom slajdu',
   'Tijdens presenteren': 'Tijekom izlaganja',
   'Classificatie en privacy': 'Klasifikacija i privatnost',

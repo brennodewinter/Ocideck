@@ -1801,6 +1801,17 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Privacy blokkeert export': 'Приватність блокує експорт',
+  'privacybevinding(en) zonder keuze':
+      'виявлення персональних даних без ухваленого рішення',
+  'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
+      'Персональні дані, особливі дані та секрети в тексті',
+  'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':
+      'Слайди, нотатки, таблиці, код, шляхи до файлів і URL перевіряються на цьому пристрої на ідентифікаційні номери, фінансові дані, контактні дані, цифрові ідентифікатори, секрети, особливі категорії персональних даних (GDPR ст. 9/10), масиви даних і витоки метаданих.',
+  'Alleen een zekere treffer waarschuwt; waarschijnlijk en mogelijk blijven informatief. Een uitgezette regel vuurt nergens.':
+      'Попереджає лише певний збіг; імовірний і можливий залишаються інформативними. Вимкнене правило ніде не спрацьовує.',
+  'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.':
+      'Не перевірено: персональні дані, особливі дані та секрети. Перевірку приватності вимкнено в розділі «Безпека».',
   'Op deze slide': 'На цьому слайді',
   'Tijdens presenteren': 'Під час презентації',
   'Classificatie en privacy': 'Класифікація та приватність',

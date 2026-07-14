@@ -922,6 +922,16 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Privacy blokkeert export': 'Privacy blocks export',
+  'privacybevinding(en) zonder keuze': 'privacy finding(s) with no choice made',
+  'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
+      'Personal data, special categories and secrets in the text',
+  'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':
+      'Slides, notes, tables, code, file paths and URLs are searched on this device for identifying numbers, financial data, contact details, digital identifiers, secrets, special categories of personal data (GDPR art. 9/10), bulk data and metadata leaks.',
+  'Alleen een zekere treffer waarschuwt; waarschijnlijk en mogelijk blijven informatief. Een uitgezette regel vuurt nergens.':
+      'Only a certain match warns; likely and possible stay informational. A disabled rule fires nowhere.',
+  'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.':
+      'Not checked: personal data, special categories and secrets. The privacy check is turned off under Security.',
   'Op deze slide': 'On this slide',
   'Tijdens presenteren': 'While presenting',
   'Classificatie en privacy': 'Classification and privacy',

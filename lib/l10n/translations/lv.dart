@@ -1782,6 +1782,16 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Privacy blokkeert export': 'Privātums bloķē eksportu',
+  'privacybevinding(en) zonder keuze': 'privātuma atradum(i) bez izvēles',
+  'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
+      'Personas dati, īpaši dati un noslēpumi tekstā',
+  'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':
+      'Slaidi, piezīmes, tabulas, kods, failu ceļi un URL šajā ierīcē tiek pārmeklēti, meklējot identifikācijas numurus, finanšu datus, kontaktinformāciju, digitālus identifikatorus, noslēpumus, īpašas personas datu kategorijas (VDAR 9./10. pants), masveida datus un metadatu noplūdes.',
+  'Alleen een zekere treffer waarschuwt; waarschijnlijk en mogelijk blijven informatief. Een uitgezette regel vuurt nergens.':
+      'Brīdina tikai droša atbilstība; varbūtējā un iespējamā paliek informatīvas. Izslēgts noteikums nekur nenostrādā.',
+  'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.':
+      'Nav pārbaudīts: personas dati, īpaši dati un noslēpumi. Privātuma pārbaude ir izslēgta sadaļā Drošība.',
   'Op deze slide': 'Šajā slaidā',
   'Tijdens presenteren': 'Prezentācijas laikā',
   'Classificatie en privacy': 'Klasifikācija un privātums',

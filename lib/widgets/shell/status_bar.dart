@@ -240,6 +240,22 @@ class _ExportReadinessChip extends StatelessWidget {
         amber,
         formatQualityExportReason(l10n, quality),
       ),
+      ExportReadinessStatus.privacyWarnings => (
+        '${readiness.privacyUnresolved} ${l10n.d('privacybevinding(en) zonder keuze')}',
+        Icons.privacy_tip_outlined,
+        amber,
+        l10n.d(
+          'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.',
+        ),
+      ),
+      ExportReadinessStatus.blockedByPrivacy => (
+        l10n.d('Privacy blokkeert export'),
+        Icons.privacy_tip_outlined,
+        red,
+        l10n.d(
+          'Maak per slide een keuze (accepteren, waarschuwen of weglaten) voordat je exporteert. Dit is zo ingesteld bij Beveiliging.',
+        ),
+      ),
       ExportReadinessStatus.needsSave => (
         l10n.d('Nog opslaan nodig'),
         Icons.save_outlined,
