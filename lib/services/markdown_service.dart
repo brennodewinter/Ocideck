@@ -18,6 +18,7 @@ import '../utils/markdown_paste_cleanup.dart';
 
 part 'markdown_service_helpers.dart';
 part 'markdown_service_parse.dart';
+part 'parts/markdown_service_parse_directives.dart';
 part 'markdown_service_finding.dart';
 part 'markdown_service_fenced.dart';
 part 'markdown_service_serialize.dart';
@@ -302,6 +303,25 @@ class MarkdownService {
     return out.toString();
   }
 
+  /// De per-slide classificaties: TLP (welke slides achtergehouden worden bij
+  /// een lager deelniveau) en de privacydispositie. Beide reizen mee in de
+  /// markdown, zodat de keuze het bestand niet verlaat.
+  ///
+  /// De dispositie wordt alleen geschreven als de slide er een heeft; `null`
+  /// betekent "erf de stand van het deck", en dat schrijven zou elke bestaande
+  /// .md bij het eerste opslaan dikker maken zonder dat er iets veranderd is.
+  void _writeSlideClassification(StringBuffer buf, Slide slide) {
+    if (slide.tlp != TlpLevel.none) {
+      buf.writeln();
+      buf.writeln('<!-- tlp: ${slide.tlp.key} -->');
+    }
+    final privacy = slide.privacy;
+    if (privacy != null) {
+      buf.writeln();
+      buf.writeln('<!-- ocideck_privacy: ${privacy.key} -->');
+    }
+  }
+
   String generateSlide(
     Slide slide, {
     ThemeProfile? themeProfile,
@@ -434,20 +454,7 @@ class MarkdownService {
       buf.writeln('<!-- skip -->');
     }
 
-    // Per-slide TLP classification (used to withhold the slide when sharing at
-    // a lower level). Persisted so it survives save/load round-trips.
-    if (slide.tlp != TlpLevel.none) {
-      buf.writeln();
-      buf.writeln('<!-- tlp: ${slide.tlp.key} -->');
-    }
-
-    // Per-slide privacy disposition. Alleen wegschrijven als de slide er een
-    // heeft; `null` betekent "erf de stand van het deck".
-    final privacy = slide.privacy;
-    if (privacy != null) {
-      buf.writeln();
-      buf.writeln('<!-- ocideck_privacy: ${privacy.key} -->');
-    }
+    _writeSlideClassification(buf, slide);
 
     if (slide.notes.isNotEmpty) {
       buf.writeln();

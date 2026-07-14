@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../models/deck.dart';
+import '../models/privacy_disposition.dart';
 import '../models/privacy_finding.dart';
 import '../models/slide_quality.dart';
 import '../services/privacy/privacy_quality_bridge.dart';
@@ -44,7 +46,29 @@ PrivacyScanResult computePrivacyScan(Ref ref) {
   final deck = ref.watch(deckProvider.select((state) => state.deck));
   if (deck == null) return PrivacyScanResult.empty;
 
-  return ref.watch(privacyScannerProvider).scan(deck);
+  final scan = ref.watch(privacyScannerProvider).scan(deck);
+
+  // Bevindingen op een slide die de auteur al heeft afgehandeld (accept, shield
+  // of redact) verdwijnen uit het paneel. Blijven melden over een beslissing die
+  // al genomen is, leert de gebruiker precies één ding: dat hij deze meldingen
+  // kan negeren.
+  //
+  // Let op: dit onderdrukt de MELDING, niet de redactie. Die zit in
+  // PrivacyProjection, die zijn eigen scan draait en deze instelling negeert.
+  return PrivacyScanResult([
+    for (final finding in scan.findings)
+      if (!_isResolved(deck, finding)) finding,
+  ]);
+}
+
+bool _isResolved(Deck deck, PrivacyFinding finding) {
+  final slide = finding.isDeckWide || finding.slideIndex >= deck.slides.length
+      ? null
+      : deck.slides[finding.slideIndex];
+  return effectivePrivacyDisposition(
+    deck: deck.privacy,
+    slide: slide?.privacy,
+  ).isResolved;
 }
 
 List<SlideQualityIssue> computePrivacyQualityIssues(Ref ref) {

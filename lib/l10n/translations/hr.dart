@@ -1790,6 +1790,15 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Accepteren': 'Prihvati',
+  'Accepteren + waarschuwen': 'Prihvati + upozori',
+  'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Prihvati: podaci ovdje pripadaju i obavijest nestaje. Prihvati + upozori: primatelj vidi oznaku da slajd sadrži osobne podatke. Izostavi: pronađeni podaci postaju nečitljivi na zaslonu i u izvozu — tvoja Markdown datoteka zadržava izvorni tekst.',
+  'Alleen melden': 'Samo prijavi',
+  'PERSOONSGEGEVENS': 'OSOBNI PODACI',
+  'Persoonsgegevens op deze slide': 'Osobni podaci na ovom slajdu',
+  'Volg de presentatie': 'Prati prezentaciju',
+  'Weglaten uit tonen en exporteren': 'Izostavi iz prikaza i izvoza',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
       ' Razmisli o redigiranju pomoću [[dvostrukih uglatih zagrada]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':

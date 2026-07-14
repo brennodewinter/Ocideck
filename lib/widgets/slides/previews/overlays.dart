@@ -151,6 +151,60 @@ class _TlpOverlay extends StatelessWidget {
   }
 }
 
+/// De privacy-badge: waarschuwt de ontvanger dát er persoonsgegevens op deze
+/// slide staan, zonder ze weg te halen. De tegenhanger van `redact`, voor wie de
+/// gegevens wél moet tonen — een politiebriefing, een dossier — maar wil dat de
+/// zaal weet wat ze voor zich hebben.
+///
+/// Staat linksonder, tegenover de TLP-badge, en wijkt naar rechts wanneer die
+/// hoek al bezet is. De twee kunnen samen op één slide staan.
+class _PrivacyShieldOverlay extends StatelessWidget {
+  final double w;
+  final bool tlpTakesLeft;
+
+  const _PrivacyShieldOverlay({required this.w, required this.tlpTakesLeft});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return Positioned(
+      bottom: _tlpBottomInset(w),
+      left: tlpTakesLeft ? null : w * _kTlpEdge,
+      right: tlpTakesLeft ? w * _kTlpEdge : null,
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: w * _kTlpHPad,
+          vertical: w * _kTlpVPad,
+        ),
+        decoration: BoxDecoration(
+          color: Colors.black,
+          borderRadius: BorderRadius.circular(w * 0.005),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              Icons.privacy_tip_outlined,
+              size: w * 0.016,
+              color: AppTheme.warningFg,
+            ),
+            SizedBox(width: w * 0.006),
+            Text(
+              l10n.d('PERSOONSGEGEVENS'),
+              style: TextStyle(
+                color: AppTheme.warningFg,
+                fontSize: w * 0.013,
+                fontWeight: FontWeight.w700,
+                letterSpacing: w * 0.0008,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class _FooterOverlay extends StatelessWidget {
   final Slide slide;
   final double w;

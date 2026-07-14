@@ -1799,6 +1799,15 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Accepteren': 'Accipere',
+  'Accepteren + waarschuwen': 'Accipere + monere',
+  'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Accipere: data hic pertinent et monitum evanescit. Accipere + monere: accipiens insigne videt data personalia in pagina esse. Omittere: data reperta in schermate et in exportatione illegibilia fiunt — plica Markdown tua textum originalem servat.',
+  'Alleen melden': 'Tantum nuntiare',
+  'PERSOONSGEGEVENS': 'DATA PERSONALIA',
+  'Persoonsgegevens op deze slide': 'Data personalia in hac pagina',
+  'Volg de presentatie': 'Praesentationem sequi',
+  'Weglaten uit tonen en exporteren': 'Ex ostensione et exportatione omittere',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
       ' Considera id obliterare per [[duplices uncos quadratos]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':

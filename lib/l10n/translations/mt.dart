@@ -1806,6 +1806,15 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Accepteren': 'Aċċetta',
+  'Accepteren + waarschuwen': 'Aċċetta + wissi',
+  'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Aċċetta: id-data tappartjeni hawn u l-avviż jisparixxi. Aċċetta + wissi: min jirċievi jara badge li s-slide fiha data personali. Ħalli barra: id-data misjuba ssir illeġġibbli fuq l-iskrin u fl-esportazzjoni — il-fajl Markdown tiegħek iżomm it-test oriġinali.',
+  'Alleen melden': 'Irrapporta biss',
+  'PERSOONSGEGEVENS': 'DATA PERSONALI',
+  'Persoonsgegevens op deze slide': 'Data personali f\'din is-slide',
+  'Volg de presentatie': 'Segwi l-preżentazzjoni',
+  'Weglaten uit tonen en exporteren': 'Ħalli barra mill-wiri u l-esportazzjoni',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
       ' Ikkunsidra li tirrediġih b\'[[parentesi kwadri doppji]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':

@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/privacy/privacy_projection.dart';
 
@@ -210,6 +211,81 @@ void main() {
     });
   });
 
+  group('dispositie', () {
+    Deck deckMet(
+      PrivacyDisposition? slideStand, {
+      PrivacyDisposition? deckStand,
+    }) => Deck(
+      title: 'D',
+      privacy: deckStand ?? PrivacyDisposition.warn,
+      slides: [
+        bulletSlide().copyWith(
+          bullets: ['mail j.jansen@politie.nl en BSN 728398242'],
+          privacy: slideStand,
+          clearPrivacy: slideStand == null,
+        ),
+      ],
+    );
+
+    test('warn laat de gegevens staan — melden is niet weghalen', () {
+      final out = PrivacyProjection.forAudience(deckMet(null)).slides.single;
+      expect(out.bullets.single, contains('j.jansen@politie.nl'));
+    });
+
+    test('accept laat de gegevens staan — de briefing hoort ze te tonen', () {
+      final out = PrivacyProjection.forAudience(
+        deckMet(PrivacyDisposition.accept),
+      ).slides.single;
+      expect(out.bullets.single, contains('j.jansen@politie.nl'));
+    });
+
+    test('redact haalt de gedetecteerde gegevens weg', () {
+      final audience = PrivacyProjection.forAudience(
+        deckMet(PrivacyDisposition.redact),
+      );
+      final bullet = audience.slides.single.bullets.single;
+
+      expect(bullet.contains('j.jansen@politie.nl'), isFalse);
+      expect(bullet.contains('728398242'), isFalse);
+      expect(bullet, contains(kRedactionToken));
+      expect(audience.redactionCount, 2);
+    });
+
+    test('shield laat de gegevens staan maar markeert de slide', () {
+      final audience = PrivacyProjection.forAudience(
+        deckMet(PrivacyDisposition.shield),
+      );
+      expect(
+        audience.slides.single.bullets.single,
+        contains('j.jansen@politie.nl'),
+      );
+      expect(audience.shieldedSlides, contains(0));
+    });
+
+    test('de slidestand overschrijft de deckstand', () {
+      final audience = PrivacyProjection.forAudience(
+        deckMet(
+          PrivacyDisposition.accept,
+          deckStand: PrivacyDisposition.redact,
+        ),
+      );
+      expect(
+        audience.slides.single.bullets.single,
+        contains('j.jansen@politie.nl'),
+      );
+    });
+
+    test('de deckstand geldt als de slide er geen heeft', () {
+      final audience = PrivacyProjection.forAudience(
+        deckMet(null, deckStand: PrivacyDisposition.redact),
+      );
+      expect(
+        audience.slides.single.bullets.single.contains('j.jansen'),
+        isFalse,
+      );
+    });
+  });
+
   group('forExternalProcessing', () {
     test('redigeert minstens alles wat forAudience ook redigeert', () {
       final deck = Deck(
@@ -218,6 +294,31 @@ void main() {
       );
       final extern = PrivacyProjection.forExternalProcessing(deck);
       expect(extern.slides.single.title.contains('geheim'), isFalse);
+    });
+
+    test('negeert accept — een zaal is geen extern model', () {
+      // Dat de auteur besluit dat het publiek de namen mag zien, is geen
+      // toestemming om ze naar een taalmodel te sturen.
+      final deck = Deck(
+        title: 'D',
+        slides: [
+          bulletSlide().copyWith(
+            bullets: ['mail j.jansen@politie.nl'],
+            privacy: PrivacyDisposition.accept,
+          ),
+        ],
+      );
+
+      expect(
+        PrivacyProjection.forAudience(deck).slides.single.bullets.single,
+        contains('j.jansen@politie.nl'),
+      );
+      expect(
+        PrivacyProjection.forExternalProcessing(
+          deck,
+        ).slides.single.bullets.single.contains('j.jansen@politie.nl'),
+        isFalse,
+      );
     });
   });
 }

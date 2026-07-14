@@ -741,6 +741,15 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Accepteren': 'Akseptearje',
+  'Accepteren + waarschuwen': 'Akseptearje + warskôgje',
+  'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Akseptearje: de gegevens hearre hjir en de melding ferdwynt. Akseptearje + warskôgje: de ûntfanger sjocht in badge dat der persoansgegevens op de dia steane. Weilitte: de fûne gegevens wurde ûnlêsber makke op it skerm en yn de eksport — dyn markdown-bestân hâldt de oarspronklike tekst.',
+  'Alleen melden': 'Allinnich melde',
+  'PERSOONSGEGEVENS': 'PERSOANSGEGEVENS',
+  'Persoonsgegevens op deze slide': 'Persoansgegevens op dizze dia',
+  'Volg de presentatie': 'Folgje de presintaasje',
+  'Weglaten uit tonen en exporteren': 'Weilitte út toanen en eksportearjen',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
       ' Oerweagje it te redigearjen mei [[dûbele blokhaken]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':

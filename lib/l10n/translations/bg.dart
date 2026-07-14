@@ -1806,6 +1806,15 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Accepteren': 'Приемане',
+  'Accepteren + waarschuwen': 'Приемане + предупреждение',
+  'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Приемане: данните са на място и известието изчезва. Приемане + предупреждение: получателят вижда значка, че слайдът съдържа лични данни. Заличаване: намерените данни стават нечетливи на екрана и в експорта — вашият Markdown файл запазва оригиналния текст.',
+  'Alleen melden': 'Само съобщаване',
+  'PERSOONSGEGEVENS': 'ЛИЧНИ ДАННИ',
+  'Persoonsgegevens op deze slide': 'Лични данни на този слайд',
+  'Volg de presentatie': 'Като презентацията',
+  'Weglaten uit tonen en exporteren': 'Заличаване при показване и експорт',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
       ' Обмислете да го заличите с [[двойни квадратни скоби]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':

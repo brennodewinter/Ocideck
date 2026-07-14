@@ -1802,6 +1802,15 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Accepteren': 'Acceptă',
+  'Accepteren + waarschuwen': 'Acceptă + avertizează',
+  'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Acceptă: datele își au locul aici și notificarea dispare. Acceptă + avertizează: destinatarul vede o insignă că diapozitivul conține date personale. Omite: datele găsite devin ilizibile pe ecran și în export — fișierul tău Markdown păstrează textul original.',
+  'Alleen melden': 'Doar raportează',
+  'PERSOONSGEGEVENS': 'DATE PERSONALE',
+  'Persoonsgegevens op deze slide': 'Date personale pe acest diapozitiv',
+  'Volg de presentatie': 'Urmează prezentarea',
+  'Weglaten uit tonen en exporteren': 'Omite din afișare și export',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
       ' Ia în calcul redactarea cu [[paranteze drepte duble]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':

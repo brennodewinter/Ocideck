@@ -1796,6 +1796,15 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Accepteren': 'Akceptuj',
+  'Accepteren + waarschuwen': 'Akceptuj + ostrzegaj',
+  'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Akceptuj: dane należą tutaj i powiadomienie znika. Akceptuj + ostrzegaj: odbiorca widzi plakietkę, że na slajdzie są dane osobowe. Pomiń: znalezione dane stają się nieczytelne na ekranie i w eksporcie — twój plik Markdown zachowuje oryginalny tekst.',
+  'Alleen melden': 'Tylko zgłaszaj',
+  'PERSOONSGEGEVENS': 'DANE OSOBOWE',
+  'Persoonsgegevens op deze slide': 'Dane osobowe na tym slajdzie',
+  'Volg de presentatie': 'Jak w prezentacji',
+  'Weglaten uit tonen en exporteren': 'Pomiń przy wyświetlaniu i eksporcie',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
       ' Rozważ zredagowanie tego przez [[podwójne nawiasy kwadratowe]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':

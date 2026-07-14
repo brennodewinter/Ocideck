@@ -1787,6 +1787,15 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Accepteren': 'Elfogadás',
+  'Accepteren + waarschuwen': 'Elfogadás + figyelmeztetés',
+  'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Elfogadás: az adatok ide tartoznak, és az értesítés eltűnik. Elfogadás + figyelmeztetés: a címzett jelzést lát arról, hogy a dián személyes adatok vannak. Kihagyás: a megtalált adatok olvashatatlanná válnak a képernyőn és az exportban — a Markdown-fájlod megőrzi az eredeti szöveget.',
+  'Alleen melden': 'Csak jelzés',
+  'PERSOONSGEGEVENS': 'SZEMÉLYES ADATOK',
+  'Persoonsgegevens op deze slide': 'Személyes adatok ezen a dián',
+  'Volg de presentatie': 'Az előadás szerint',
+  'Weglaten uit tonen en exporteren': 'Kihagyás a megjelenítésből és exportból',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
       ' Fontold meg a kitakarását [[dupla szögletes zárójellel]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':

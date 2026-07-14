@@ -1811,6 +1811,15 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Accepteren': 'Αποδοχή',
+  'Accepteren + waarschuwen': 'Αποδοχή + προειδοποίηση',
+  'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Αποδοχή: τα δεδομένα ανήκουν εδώ και η ειδοποίηση εξαφανίζεται. Αποδοχή + προειδοποίηση: ο παραλήπτης βλέπει σήμα ότι η διαφάνεια περιέχει προσωπικά δεδομένα. Παράλειψη: τα δεδομένα που βρέθηκαν γίνονται δυσανάγνωστα στην οθόνη και στην εξαγωγή — το αρχείο Markdown σου κρατά το αρχικό κείμενο.',
+  'Alleen melden': 'Μόνο αναφορά',
+  'PERSOONSGEGEVENS': 'ΠΡΟΣΩΠΙΚΑ ΔΕΔΟΜΕΝΑ',
+  'Persoonsgegevens op deze slide': 'Προσωπικά δεδομένα σε αυτή τη διαφάνεια',
+  'Volg de presentatie': 'Ακολούθησε την παρουσίαση',
+  'Weglaten uit tonen en exporteren': 'Παράλειψη από προβολή και εξαγωγή',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
       ' Σκέψου να το αποκρύψεις με [[διπλές αγκύλες]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':

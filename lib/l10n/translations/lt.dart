@@ -1791,6 +1791,15 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Accepteren': 'Priimti',
+  'Accepteren + waarschuwen': 'Priimti + įspėti',
+  'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Priimti: duomenys čia priklauso ir pranešimas dingsta. Priimti + įspėti: gavėjas mato ženklelį, kad skaidrėje yra asmens duomenų. Praleisti: rasti duomenys ekrane ir eksporte tampa neįskaitomi — tavo Markdown failas išsaugo originalų tekstą.',
+  'Alleen melden': 'Tik pranešti',
+  'PERSOONSGEGEVENS': 'ASMENS DUOMENYS',
+  'Persoonsgegevens op deze slide': 'Asmens duomenys šioje skaidrėje',
+  'Volg de presentatie': 'Kaip pristatyme',
+  'Weglaten uit tonen en exporteren': 'Praleisti rodant ir eksportuojant',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
       ' Apsvarstyk galimybę tai paslėpti [[dvigubais laužtiniais skliaustais]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':

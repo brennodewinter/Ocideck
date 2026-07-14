@@ -1785,6 +1785,15 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Accepteren': 'Sprejmi',
+  'Accepteren + waarschuwen': 'Sprejmi + opozori',
+  'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Sprejmi: podatki sodijo sem in obvestilo izgine. Sprejmi + opozori: prejemnik vidi značko, da so na prosojnici osebni podatki. Izpusti: najdeni podatki postanejo nečitljivi na zaslonu in v izvozu — tvoja datoteka Markdown obdrži izvirno besedilo.',
+  'Alleen melden': 'Samo javi',
+  'PERSOONSGEGEVENS': 'OSEBNI PODATKI',
+  'Persoonsgegevens op deze slide': 'Osebni podatki na tej prosojnici',
+  'Volg de presentatie': 'Sledi predstavitvi',
+  'Weglaten uit tonen en exporteren': 'Izpusti iz prikaza in izvoza',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
       ' Razmisli o prekritju z [[dvojnimi oglatimi oklepaji]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
