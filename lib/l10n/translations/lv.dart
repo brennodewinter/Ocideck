@@ -1871,6 +1871,16 @@ const _dutchSourceAddLv = <String, String>{
   'toegangstoken (JWT)': 'piekļuves marķieris (JWT)',
   'databaseverbinding met wachtwoord': 'datubāzes savienojums ar paroli',
   'wachtwoord in klare tekst': 'parole atklātā tekstā',
+  'Wat er lokaal beschikbaar is': 'Kas ir pieejams lokāli',
+  'Gegevenspakket': 'Datu pakotne',
+  'Nu bijwerken': 'Atjaunināt tagad',
+  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
+      'Dati pieejami lokāli — meklēšana notiek šajā ierīcē; nekas to nepamet.',
+  'Zwakheden (CWE)': 'Vājības (CWE)',
+  'Testgevallen (WSTG)': 'Testa gadījumi (WSTG)',
+  'MIAUW-eisen': 'MIAUW prasības',
+  'CVSS-scoretabel': 'CVSS vērtējuma tabula',
+  'Bevindingsjablonen': 'Atradumu veidnes',
   'Zoek een instelling': 'Meklēt iestatījumu',
   'Geen instelling gevonden': 'Iestatījums nav atrasts',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':

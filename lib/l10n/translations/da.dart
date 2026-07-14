@@ -1871,6 +1871,16 @@ const _dutchSourceAddDa = <String, String>{
   'toegangstoken (JWT)': 'adgangstoken (JWT)',
   'databaseverbinding met wachtwoord': 'databaseforbindelse med adgangskode',
   'wachtwoord in klare tekst': 'adgangskode i klartekst',
+  'Wat er lokaal beschikbaar is': 'Hvad der er tilgængeligt lokalt',
+  'Gegevenspakket': 'Datapakke',
+  'Nu bijwerken': 'Opdater nu',
+  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
+      'Data tilgængelige lokalt — opslag sker på denne enhed; intet forlader den.',
+  'Zwakheden (CWE)': 'Svagheder (CWE)',
+  'Testgevallen (WSTG)': 'Testtilfælde (WSTG)',
+  'MIAUW-eisen': 'MIAUW-krav',
+  'CVSS-scoretabel': 'CVSS-scoretabel',
+  'Bevindingsjablonen': 'Fundskabeloner',
   'Zoek een instelling': 'Søg en indstilling',
   'Geen instelling gevonden': 'Ingen indstilling fundet',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':

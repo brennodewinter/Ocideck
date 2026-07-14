@@ -1905,6 +1905,16 @@ const _dutchSourceAddPt = <String, String>{
   'databaseverbinding met wachtwoord':
       'ligação à base de dados com palavra-passe',
   'wachtwoord in klare tekst': 'palavra-passe em texto simples',
+  'Wat er lokaal beschikbaar is': 'O que está disponível localmente',
+  'Gegevenspakket': 'Pacote de dados',
+  'Nu bijwerken': 'Atualizar agora',
+  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
+      'Dados disponíveis localmente — as pesquisas acontecem neste dispositivo; nada sai dele.',
+  'Zwakheden (CWE)': 'Fraquezas (CWE)',
+  'Testgevallen (WSTG)': 'Casos de teste (WSTG)',
+  'MIAUW-eisen': 'Requisitos MIAUW',
+  'CVSS-scoretabel': 'Tabela de pontuação CVSS',
+  'Bevindingsjablonen': 'Modelos de achado',
   'Zoek een instelling': 'Procurar uma definição',
   'Geen instelling gevonden': 'Nenhuma definição encontrada',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':

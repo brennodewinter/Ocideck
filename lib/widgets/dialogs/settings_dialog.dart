@@ -17,6 +17,7 @@ import '../../services/recovery_service.dart';
 import '../../services/classification_enforcement_policy.dart';
 import '../../services/webdav_service.dart';
 import '../../services/secmodule/sec_module_provisioner.dart';
+import '../../services/secmodule/sec_reference_inventory.dart';
 import '../../services/slide_quality_analyzer.dart';
 import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';
@@ -176,6 +177,12 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   String? _highlightedSection;
   final _searchController = TextEditingController();
   String _searchQuery = '';
+
+  /// De telling van de referentiecatalogi (Uitbreidingen). Eén keer starten en
+  /// vasthouden: de volledige CWE-lijst komt uit een asset, en een FutureBuilder
+  /// die elke build opnieuw begint zou hem elke build opnieuw willen laden.
+  late final Future<List<ReferenceCatalog>> _referenceInventory =
+      SecReferenceInventory.load();
 
   /// Index of the section shown in the sidebar navigation (0..4).
   late int _selectedTab;

@@ -1011,6 +1011,16 @@ const _dutchSourceAddEn = {
   'toegangstoken (JWT)': 'access token (JWT)',
   'databaseverbinding met wachtwoord': 'database connection with password',
   'wachtwoord in klare tekst': 'password in plain text',
+  'Wat er lokaal beschikbaar is': 'What is available locally',
+  'Gegevenspakket': 'Data pack',
+  'Nu bijwerken': 'Update now',
+  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
+      'Data available locally — lookups happen on this device; nothing leaves it.',
+  'Zwakheden (CWE)': 'Weaknesses (CWE)',
+  'Testgevallen (WSTG)': 'Test cases (WSTG)',
+  'MIAUW-eisen': 'MIAUW requirements',
+  'CVSS-scoretabel': 'CVSS score table',
+  'Bevindingsjablonen': 'Finding templates',
   'Zoek een instelling': 'Search a setting',
   'Geen instelling gevonden': 'No setting found',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':

@@ -1902,6 +1902,16 @@ const _dutchSourceAddEl = <String, String>{
   'toegangstoken (JWT)': 'διακριτικό πρόσβασης (JWT)',
   'databaseverbinding met wachtwoord': 'σύνδεση βάσης δεδομένων με κωδικό',
   'wachtwoord in klare tekst': 'κωδικός σε απλό κείμενο',
+  'Wat er lokaal beschikbaar is': 'Τι είναι διαθέσιμο τοπικά',
+  'Gegevenspakket': 'Πακέτο δεδομένων',
+  'Nu bijwerken': 'Ενημέρωση τώρα',
+  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
+      'Τα δεδομένα είναι διαθέσιμα τοπικά — οι αναζητήσεις γίνονται σε αυτή τη συσκευή· τίποτα δεν φεύγει.',
+  'Zwakheden (CWE)': 'Αδυναμίες (CWE)',
+  'Testgevallen (WSTG)': 'Περιπτώσεις δοκιμών (WSTG)',
+  'MIAUW-eisen': 'Απαιτήσεις MIAUW',
+  'CVSS-scoretabel': 'Πίνακας βαθμολογίας CVSS',
+  'Bevindingsjablonen': 'Πρότυπα ευρημάτων',
   'Zoek een instelling': 'Αναζήτηση ρύθμισης',
   'Geen instelling gevonden': 'Δεν βρέθηκε ρύθμιση',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':

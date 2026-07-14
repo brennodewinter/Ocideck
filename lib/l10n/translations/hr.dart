@@ -1881,6 +1881,16 @@ const _dutchSourceAddHr = <String, String>{
   'toegangstoken (JWT)': 'pristupni token (JWT)',
   'databaseverbinding met wachtwoord': 'veza s bazom podataka s lozinkom',
   'wachtwoord in klare tekst': 'lozinka u čistom tekstu',
+  'Wat er lokaal beschikbaar is': 'Što je dostupno lokalno',
+  'Gegevenspakket': 'Paket podataka',
+  'Nu bijwerken': 'Ažuriraj sada',
+  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
+      'Podaci dostupni lokalno — pretraživanje se odvija na ovom uređaju; ništa ne odlazi van.',
+  'Zwakheden (CWE)': 'Slabosti (CWE)',
+  'Testgevallen (WSTG)': 'Testni slučajevi (WSTG)',
+  'MIAUW-eisen': 'MIAUW zahtjevi',
+  'CVSS-scoretabel': 'CVSS tablica bodovanja',
+  'Bevindingsjablonen': 'Predlošci nalaza',
   'Zoek een instelling': 'Pretraži postavku',
   'Geen instelling gevonden': 'Nije pronađena nijedna postavka',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':

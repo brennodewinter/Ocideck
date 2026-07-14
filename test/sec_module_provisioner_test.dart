@@ -104,6 +104,30 @@ void main() {
     expect(result.status, SecProvisionStatus.allMirrorsFailed);
   });
 
+  // Zonder de force-vlag stuit "Nu bijwerken" meteen op de cache en doet niets:
+  // een knop die doet alsof hij ververst.
+  test('a second provision short-circuits on the cache', () async {
+    final p = make(bundled: () async => packBytes);
+    expect(
+      (await p.provision(hasConsent: false)).status,
+      SecProvisionStatus.bundled,
+    );
+    expect(
+      (await p.provision(hasConsent: false)).status,
+      SecProvisionStatus.alreadyCached,
+    );
+  });
+
+  test('force re-runs the chain instead of returning alreadyCached', () async {
+    final p = make(bundled: () async => packBytes);
+    await p.provision(hasConsent: false);
+
+    final refreshed = await p.provision(hasConsent: false, force: true);
+    expect(refreshed.status, SecProvisionStatus.bundled);
+    expect(refreshed.status, isNot(SecProvisionStatus.alreadyCached));
+    expect(await p.isProvisioned(), isTrue);
+  });
+
   test('a stale bundle (hash mismatch) is ignored and falls through', () async {
     // expectedHash differs from the bundle's real hash → bundle rejected.
     final p = make(

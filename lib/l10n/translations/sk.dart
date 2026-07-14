@@ -1880,6 +1880,16 @@ const _dutchSourceAddSk = <String, String>{
   'toegangstoken (JWT)': 'prístupový token (JWT)',
   'databaseverbinding met wachtwoord': 'pripojenie k databáze s heslom',
   'wachtwoord in klare tekst': 'heslo v otvorenom texte',
+  'Wat er lokaal beschikbaar is': 'Čo je dostupné lokálne',
+  'Gegevenspakket': 'Dátový balík',
+  'Nu bijwerken': 'Aktualizovať teraz',
+  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
+      'Údaje dostupné lokálne — vyhľadávanie prebieha na tomto zariadení; nič ho neopúšťa.',
+  'Zwakheden (CWE)': 'Slabiny (CWE)',
+  'Testgevallen (WSTG)': 'Testovacie prípady (WSTG)',
+  'MIAUW-eisen': 'Požiadavky MIAUW',
+  'CVSS-scoretabel': 'Tabuľka skóre CVSS',
+  'Bevindingsjablonen': 'Šablóny zistení',
   'Zoek een instelling': 'Hľadať nastavenie',
   'Geen instelling gevonden': 'Nenašlo sa žiadne nastavenie',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':

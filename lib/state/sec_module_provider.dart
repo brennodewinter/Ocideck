@@ -157,11 +157,23 @@ class SecModuleNotifier extends Notifier<SecModuleState> {
     return _provision();
   }
 
+  /// Bijwerken: haal de referentiegegevens opnieuw op, óók als er al een
+  /// geverifieerd pakket ligt. Zonder de force-vlag zou dit meteen op
+  /// `alreadyCached` stuiten en dus niets doen — een knop die doet alsof.
+  Future<SecProvisionStatus> refresh() async {
+    if (!state.enabled) return SecProvisionStatus.noConsent;
+    state = state.copyWith(busy: true);
+    return _provision(force: true);
+  }
+
   /// The shared fetch → verify → cache run behind [enable] and [retry].
-  Future<SecProvisionStatus> _provision() async {
+  Future<SecProvisionStatus> _provision({bool force = false}) async {
     final hasConsent = ref.read(consentProvider).hasAccepted;
     final provisioner = ref.read(secModuleProvisionerProvider);
-    final result = await provisioner.provision(hasConsent: hasConsent);
+    final result = await provisioner.provision(
+      hasConsent: hasConsent,
+      force: force,
+    );
     await _applyResult(result);
     return result.status;
   }

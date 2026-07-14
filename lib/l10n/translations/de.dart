@@ -831,6 +831,16 @@ const _dutchSourceAddDe = {
   'toegangstoken (JWT)': 'Zugangstoken (JWT)',
   'databaseverbinding met wachtwoord': 'Datenbankverbindung mit Passwort',
   'wachtwoord in klare tekst': 'Passwort im Klartext',
+  'Wat er lokaal beschikbaar is': 'Was lokal verfügbar ist',
+  'Gegevenspakket': 'Datenpaket',
+  'Nu bijwerken': 'Jetzt aktualisieren',
+  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
+      'Daten lokal verfügbar — das Nachschlagen geschieht auf diesem Gerät; nichts verlässt es.',
+  'Zwakheden (CWE)': 'Schwachstellen (CWE)',
+  'Testgevallen (WSTG)': 'Testfälle (WSTG)',
+  'MIAUW-eisen': 'MIAUW-Anforderungen',
+  'CVSS-scoretabel': 'CVSS-Bewertungstabelle',
+  'Bevindingsjablonen': 'Befundvorlagen',
   'Zoek een instelling': 'Einstellung suchen',
   'Geen instelling gevonden': 'Keine Einstellung gefunden',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':

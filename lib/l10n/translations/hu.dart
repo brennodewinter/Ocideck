@@ -1877,6 +1877,16 @@ const _dutchSourceAddHu = <String, String>{
   'toegangstoken (JWT)': 'hozzáférési token (JWT)',
   'databaseverbinding met wachtwoord': 'adatbázis-kapcsolat jelszóval',
   'wachtwoord in klare tekst': 'jelszó nyílt szövegben',
+  'Wat er lokaal beschikbaar is': 'Ami helyben elérhető',
+  'Gegevenspakket': 'Adatcsomag',
+  'Nu bijwerken': 'Frissítés most',
+  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
+      'Az adatok helyben elérhetők — a keresés ezen az eszközön történik; semmi sem hagyja el.',
+  'Zwakheden (CWE)': 'Gyengeségek (CWE)',
+  'Testgevallen (WSTG)': 'Tesztesetek (WSTG)',
+  'MIAUW-eisen': 'MIAUW követelmények',
+  'CVSS-scoretabel': 'CVSS pontszámtábla',
+  'Bevindingsjablonen': 'Megállapítás-sablonok',
   'Zoek een instelling': 'Beállítás keresése',
   'Geen instelling gevonden': 'Nincs találat a beállításokban',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':

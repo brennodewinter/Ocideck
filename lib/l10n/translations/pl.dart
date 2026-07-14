@@ -1887,6 +1887,16 @@ const _dutchSourceAddPl = <String, String>{
   'toegangstoken (JWT)': 'token dostępu (JWT)',
   'databaseverbinding met wachtwoord': 'połączenie z bazą danych z hasłem',
   'wachtwoord in klare tekst': 'hasło jawnym tekstem',
+  'Wat er lokaal beschikbaar is': 'Co jest dostępne lokalnie',
+  'Gegevenspakket': 'Pakiet danych',
+  'Nu bijwerken': 'Zaktualizuj teraz',
+  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
+      'Dane dostępne lokalnie — wyszukiwanie odbywa się na tym urządzeniu; nic go nie opuszcza.',
+  'Zwakheden (CWE)': 'Słabości (CWE)',
+  'Testgevallen (WSTG)': 'Przypadki testowe (WSTG)',
+  'MIAUW-eisen': 'Wymagania MIAUW',
+  'CVSS-scoretabel': 'Tabela punktacji CVSS',
+  'Bevindingsjablonen': 'Szablony ustaleń',
   'Zoek een instelling': 'Szukaj ustawienia',
   'Geen instelling gevonden': 'Nie znaleziono ustawienia',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':

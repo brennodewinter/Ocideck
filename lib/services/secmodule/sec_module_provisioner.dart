@@ -177,8 +177,16 @@ class SecModuleProvisioner {
   /// is why the module works out of the box. [hasConsent] gates only the
   /// network step: a mirror is consulted only when there is no bundled pack for
   /// this version (e.g. a future build ships a newer pinned pack).
-  Future<SecProvisionResult> provision({required bool hasConsent}) async {
-    if (await isProvisioned()) {
+  ///
+  /// [force] slaat de cachecontrole over. Zonder die vlag valt "Bijwerken" altijd
+  /// meteen terug op `alreadyCached` — een verversknop die per definitie niets
+  /// doet. De hashcontrole blijft ook dan staan: forceren betekent opnieuw
+  /// óphalen, niet minder streng verifiëren.
+  Future<SecProvisionResult> provision({
+    required bool hasConsent,
+    bool force = false,
+  }) async {
+    if (!force && await isProvisioned()) {
       return SecProvisionResult(
         SecProvisionStatus.alreadyCached,
         version: version,

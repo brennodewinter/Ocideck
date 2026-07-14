@@ -907,6 +907,19 @@ The module's reference data is **bundled with the app**, so enabling it works
 consent for this). The bundled pack is verified against a fingerprint compiled
 into the app before it is used, so a tampered or mismatched pack is refused.
 
+**What you actually have.** Once the module is on, the card lists **what is
+available locally, in counts** — how many CWE weaknesses, WSTG test cases, MIAUW
+requirements, CVSS score-table rows and finding templates the app can serve you,
+with the upstream standard each one follows. The counts are taken from the
+catalogues the app *actually* queries, not from what a pack claims to contain, so
+an empty list shows up as empty rather than hiding behind a reassuring tick. Below
+them sits the version of the data pack in use.
+
+**Nu bijwerken (Update now)** re-runs the fetch even when a verified pack is
+already cached — that is precisely when you want to know whether something newer
+exists. It re-verifies the fingerprint; forcing an update means fetching again,
+not checking less strictly. **Gegevens opschonen** removes the cached data again.
+
 You will normally never see a failure. In the rare case the bundled pack cannot
 be read and no mirror is reachable, the card explains **which** step failed — no
 source reachable, a fingerprint that did not match, or a damaged/invalid pack —

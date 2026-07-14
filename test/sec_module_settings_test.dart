@@ -47,8 +47,10 @@ class _FixedProvisioner extends SecModuleProvisioner {
   @override
   Future<bool> isProvisioned() async => false;
   @override
-  Future<SecProvisionResult> provision({required bool hasConsent}) async =>
-      SecProvisionResult(status);
+  Future<SecProvisionResult> provision({
+    required bool hasConsent,
+    bool force = false,
+  }) async => SecProvisionResult(status);
 }
 
 /// Open the settings dialog, then turn the module on (which runs provisioning —

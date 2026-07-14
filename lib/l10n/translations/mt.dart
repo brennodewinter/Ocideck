@@ -1896,6 +1896,16 @@ const _dutchSourceAddMt = <String, String>{
   'toegangstoken (JWT)': 'token ta\' aċċess (JWT)',
   'databaseverbinding met wachtwoord': 'konnessjoni tad-database bil-password',
   'wachtwoord in klare tekst': 'password f\'test ċar',
+  'Wat er lokaal beschikbaar is': 'X\'inhu disponibbli lokalment',
+  'Gegevenspakket': 'Pakkett tad-data',
+  'Nu bijwerken': 'Aġġorna issa',
+  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
+      'Data disponibbli lokalment — it-tfittxija ssir fuq dan l-apparat; xejn ma joħroġ.',
+  'Zwakheden (CWE)': 'Dgħufijiet (CWE)',
+  'Testgevallen (WSTG)': 'Każijiet ta\' test (WSTG)',
+  'MIAUW-eisen': 'Rekwiżiti MIAUW',
+  'CVSS-scoretabel': 'Tabella tal-punteġġ CVSS',
+  'Bevindingsjablonen': 'Mudelli tas-sejbiet',
   'Zoek een instelling': 'Fittex issettjar',
   'Geen instelling gevonden': 'Ma nstab l-ebda issettjar',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':

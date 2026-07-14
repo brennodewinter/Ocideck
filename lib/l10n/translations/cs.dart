@@ -1876,6 +1876,16 @@ const _dutchSourceAddCs = <String, String>{
   'toegangstoken (JWT)': 'přístupový token (JWT)',
   'databaseverbinding met wachtwoord': 'připojení k databázi s heslem',
   'wachtwoord in klare tekst': 'heslo v otevřeném textu',
+  'Wat er lokaal beschikbaar is': 'Co je k dispozici lokálně',
+  'Gegevenspakket': 'Datový balíček',
+  'Nu bijwerken': 'Aktualizovat nyní',
+  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
+      'Data k dispozici lokálně — vyhledávání probíhá na tomto zařízení; nic je neopouští.',
+  'Zwakheden (CWE)': 'Slabiny (CWE)',
+  'Testgevallen (WSTG)': 'Testovací případy (WSTG)',
+  'MIAUW-eisen': 'Požadavky MIAUW',
+  'CVSS-scoretabel': 'Tabulka skóre CVSS',
+  'Bevindingsjablonen': 'Šablony zjištění',
   'Zoek een instelling': 'Hledat nastavení',
   'Geen instelling gevonden': 'Nenalezeno žádné nastavení',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':

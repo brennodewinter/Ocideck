@@ -1895,6 +1895,16 @@ const _dutchSourceAddBg = <String, String>{
   'toegangstoken (JWT)': 'токен за достъп (JWT)',
   'databaseverbinding met wachtwoord': 'връзка към база данни с парола',
   'wachtwoord in klare tekst': 'парола в чист текст',
+  'Wat er lokaal beschikbaar is': 'Какво е налично локално',
+  'Gegevenspakket': 'Пакет с данни',
+  'Nu bijwerken': 'Актуализирай сега',
+  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
+      'Данните са налични локално — търсенето се извършва на това устройство; нищо не излиза навън.',
+  'Zwakheden (CWE)': 'Слабости (CWE)',
+  'Testgevallen (WSTG)': 'Тестови случаи (WSTG)',
+  'MIAUW-eisen': 'Изисквания MIAUW',
+  'CVSS-scoretabel': 'Таблица с оценки CVSS',
+  'Bevindingsjablonen': 'Шаблони за находки',
   'Zoek een instelling': 'Търсене на настройка',
   'Geen instelling gevonden': 'Не е намерена настройка',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':

@@ -1893,6 +1893,16 @@ const _dutchSourceAddUk = <String, String>{
   'toegangstoken (JWT)': 'токен доступу (JWT)',
   'databaseverbinding met wachtwoord': 'підключення до бази даних з паролем',
   'wachtwoord in klare tekst': 'пароль у відкритому вигляді',
+  'Wat er lokaal beschikbaar is': 'Що доступно локально',
+  'Gegevenspakket': 'Пакет даних',
+  'Nu bijwerken': 'Оновити зараз',
+  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
+      'Дані доступні локально — пошук відбувається на цьому пристрої; нічого не надсилається назовні.',
+  'Zwakheden (CWE)': 'Слабкості (CWE)',
+  'Testgevallen (WSTG)': 'Тестові випадки (WSTG)',
+  'MIAUW-eisen': 'Вимоги MIAUW',
+  'CVSS-scoretabel': 'Таблиця оцінок CVSS',
+  'Bevindingsjablonen': 'Шаблони знахідок',
   'Zoek een instelling': 'Пошук налаштування',
   'Geen instelling gevonden': 'Налаштування не знайдено',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':

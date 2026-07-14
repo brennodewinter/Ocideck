@@ -1876,6 +1876,16 @@ const _dutchSourceAddGsw = <String, String>{
   'toegangstoken (JWT)': 'Zuegangstoken (JWT)',
   'databaseverbinding met wachtwoord': 'Datebankverbindig mit Passwort',
   'wachtwoord in klare tekst': 'Passwort im Klartäxt',
+  'Wat er lokaal beschikbaar is': 'Was lokal verfüegbar isch',
+  'Gegevenspakket': 'Datepäckli',
+  'Nu bijwerken': 'Jetz aktualisiere',
+  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
+      'Date lokal verfüegbar — s Nachschlage passiert uf däm Grät; es gaht nüt use.',
+  'Zwakheden (CWE)': 'Schwachstelle (CWE)',
+  'Testgevallen (WSTG)': 'Testfäll (WSTG)',
+  'MIAUW-eisen': 'MIAUW-Aaforderige',
+  'CVSS-scoretabel': 'CVSS-Bewärtigstabälle',
+  'Bevindingsjablonen': 'Befundvorlage',
   'Zoek een instelling': 'Yystellig sueche',
   'Geen instelling gevonden': 'Kei Yystellig gfunde',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':

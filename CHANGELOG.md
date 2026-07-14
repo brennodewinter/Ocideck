@@ -384,6 +384,24 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   in the app and in exports.
 
 ### Added
+- **The security module now says what it actually has.** *Settings →
+  Uitbreidingen → Informatieveiligheid* used to report exactly one thing —
+  "Gegevens lokaal beschikbaar" — which left open whether that meant a full CWE
+  list or an empty shell. It now lists **what is available, in counts**: CWE
+  weaknesses, WSTG test cases, MIAUW requirements, CVSS score-table rows and
+  finding templates, each with the upstream standard it follows, plus the version
+  of the data pack in use.
+
+  The counts come from the catalogues the app *actually queries*, not from what a
+  pack claims to contain. That distinction is the point: a reassuring tick over an
+  empty list is worse than no tick at all.
+
+  **Nu bijwerken** re-fetches the reference data even when a verified pack is
+  already cached — which is exactly when you want to know whether something newer
+  exists. Previously that path short-circuited on the cache, so a refresh could
+  only ever have been a button that did nothing. The fingerprint check still runs:
+  forcing an update means fetching again, not verifying less.
+
 - **You can search the settings.** There are around eighty of them now, spread
   over twelve tabs, and finding one meant knowing which tab a developer had
   filed it under. A search box sits in the settings header: type and you get the

@@ -1873,6 +1873,16 @@ const _dutchSourceAddId = <String, String>{
   'toegangstoken (JWT)': 'token akses (JWT)',
   'databaseverbinding met wachtwoord': 'koneksi basis data dengan kata sandi',
   'wachtwoord in klare tekst': 'kata sandi dalam teks biasa',
+  'Wat er lokaal beschikbaar is': 'Yang tersedia secara lokal',
+  'Gegevenspakket': 'Paket data',
+  'Nu bijwerken': 'Perbarui sekarang',
+  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
+      'Data tersedia secara lokal — pencarian dilakukan di perangkat ini; tidak ada yang keluar.',
+  'Zwakheden (CWE)': 'Kelemahan (CWE)',
+  'Testgevallen (WSTG)': 'Kasus uji (WSTG)',
+  'MIAUW-eisen': 'Persyaratan MIAUW',
+  'CVSS-scoretabel': 'Tabel skor CVSS',
+  'Bevindingsjablonen': 'Templat temuan',
   'Zoek een instelling': 'Cari pengaturan',
   'Geen instelling gevonden': 'Pengaturan tidak ditemukan',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':

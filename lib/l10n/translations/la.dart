@@ -1888,6 +1888,16 @@ const _dutchSourceAddLa = <String, String>{
   'toegangstoken (JWT)': 'signum accessus (JWT)',
   'databaseverbinding met wachtwoord': 'conexio datorum cum tessera',
   'wachtwoord in klare tekst': 'tessera in textu aperto',
+  'Wat er lokaal beschikbaar is': 'Quae localiter praesto sunt',
+  'Gegevenspakket': 'Fasciculus datorum',
+  'Nu bijwerken': 'Nunc renovare',
+  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.':
+      'Data localiter praesto — inquisitio in hoc instrumento fit; nihil egreditur.',
+  'Zwakheden (CWE)': 'Infirmitates (CWE)',
+  'Testgevallen (WSTG)': 'Casus probationis (WSTG)',
+  'MIAUW-eisen': 'Postulata MIAUW',
+  'CVSS-scoretabel': 'Tabula aestimationis CVSS',
+  'Bevindingsjablonen': 'Exemplaria inventorum',
   'Zoek een instelling': 'Optionem quaerere',
   'Geen instelling gevonden': 'Nulla optio inventa',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
