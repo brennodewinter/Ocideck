@@ -1893,6 +1893,8 @@ const _dutchSourceAddDa = <String, String>{
   'burgerservicenummer (BSN)': 'personnummer (BSN)',
   'bankrekeningnummer (IBAN)': 'bankkontonummer (IBAN)',
   'e-mailadres': 'e-mailadresse',
+  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
+      'TSA-signaturen verificeres ikke i appen; kun hashen stemmer.',
   'Extern': 'Ekstern',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Hentet fra en ekstern URL; åbningen kontaktede den server.',

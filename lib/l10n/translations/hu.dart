@@ -1899,6 +1899,8 @@ const _dutchSourceAddHu = <String, String>{
   'burgerservicenummer (BSN)': 'állampolgári azonosító szám (BSN)',
   'bankrekeningnummer (IBAN)': 'bankszámlaszám (IBAN)',
   'e-mailadres': 'e-mail-cím',
+  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
+      'A TSA-aláírást az alkalmazás nem ellenőrzi; csak a hash egyezik.',
   'Extern': 'Külső',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Külső URL-ről letöltve; a megnyitás kapcsolatba lépett azzal a kiszolgálóval.',

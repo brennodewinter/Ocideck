@@ -1895,6 +1895,8 @@ const _dutchSourceAddId = <String, String>{
   'burgerservicenummer (BSN)': 'nomor layanan warga (BSN)',
   'bankrekeningnummer (IBAN)': 'nomor rekening bank (IBAN)',
   'e-mailadres': 'alamat email',
+  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
+      'Tanda tangan TSA tidak diverifikasi di dalam aplikasi; hanya hash yang cocok.',
   'Extern': 'Eksternal',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Diambil dari URL eksternal; membukanya menghubungi server itu.',

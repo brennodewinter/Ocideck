@@ -853,6 +853,8 @@ const _dutchSourceAddPap = {
   'burgerservicenummer (BSN)': 'number di servisio na siudadano (BSN)',
   'bankrekeningnummer (IBAN)': 'number di kuenta bankario (IBAN)',
   'e-mailadres': 'adres di e-mail',
+  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
+      'E firma di TSA no ta verifiká den e app; solamente e hash ta korespondé.',
   'Extern': 'Èksterno',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Buscá for di un URL èksterno; ora di habri el a kontaktá e server ei.',

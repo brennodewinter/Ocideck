@@ -1924,6 +1924,8 @@ const _dutchSourceAddEl = <String, String>{
   'burgerservicenummer (BSN)': 'αριθμός μητρώου πολίτη (BSN)',
   'bankrekeningnummer (IBAN)': 'αριθμός τραπεζικού λογαριασμού (IBAN)',
   'e-mailadres': 'διεύθυνση email',
+  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
+      'Η υπογραφή της TSA δεν επαληθεύεται στην εφαρμογή· ταιριάζει μόνο το hash.',
   'Extern': 'Εξωτερικό',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Λήφθηκε από εξωτερική διεύθυνση URL· το άνοιγμα επικοινώνησε με αυτόν τον διακομιστή.',

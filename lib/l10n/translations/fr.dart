@@ -856,6 +856,8 @@ const _dutchSourceAddFr = {
   'burgerservicenummer (BSN)': 'numéro de service au citoyen (BSN)',
   'bankrekeningnummer (IBAN)': 'numéro de compte bancaire (IBAN)',
   'e-mailadres': 'adresse e-mail',
+  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
+      'La signature de la TSA n\'est pas vérifiée dans l\'application ; seul le hachage correspond.',
   'Extern': 'Externe',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Récupéré depuis une URL externe ; l\'ouverture a contacté ce serveur.',

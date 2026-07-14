@@ -1886,6 +1886,8 @@ const _dutchSourceAddEt = <String, String>{
   'burgerservicenummer (BSN)': 'kodaniku isikukood (BSN)',
   'bankrekeningnummer (IBAN)': 'pangakonto number (IBAN)',
   'e-mailadres': 'e-posti aadress',
+  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
+      'TSA allkirja rakenduses ei kontrollita; kattub ainult räsi (hash).',
   'Extern': 'Väline',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Toodud välisest URL-ist; avamine võttis ühendust selle serveriga.',

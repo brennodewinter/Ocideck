@@ -309,9 +309,9 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   not checked in-app, so that time is the token's *claim*, not a verified fact
   (anyone holding the deck can mint a token with an arbitrary time and a
   matching imprint). The green trust badge is replaced with a neutral clock
-  icon so the UI stops overstating what was checked. (A follow-up will add an
-  explicit "signature not verified" caption — deferred here because it needs the
-  string translated into all interface languages.)
+  icon, and an explicit caption now spells it out — "The TSA signature is not
+  verified in-app; only the hash matches." — so the panel no longer overstates
+  what was checked. Translated into every interface language.
 - **The HTML export's CSP now pins every network-capable resource, not just
   scripts and fetches.** The export already blocked remote scripts (nonce) and
   `connect-src`/remote `img-src`, but with no `default-src` the `media-src`,

@@ -1918,6 +1918,8 @@ const _dutchSourceAddMt = <String, String>{
   'burgerservicenummer (BSN)': 'numru taċ-ċittadin (BSN)',
   'bankrekeningnummer (IBAN)': 'numru tal-kont bankarju (IBAN)',
   'e-mailadres': 'indirizz tal-email',
+  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
+      'Il-firma tat-TSA mhijiex verifikata fl-app; jaqbel biss il-hash.',
   'Extern': 'Estern',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Miksub minn URL estern; il-ftuħ ikkuntattja dak is-server.',

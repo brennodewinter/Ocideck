@@ -1927,6 +1927,8 @@ const _dutchSourceAddPt = <String, String>{
   'burgerservicenummer (BSN)': 'número de identificação de cidadão (BSN)',
   'bankrekeningnummer (IBAN)': 'número de conta bancária (IBAN)',
   'e-mailadres': 'endereço de e-mail',
+  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
+      'A assinatura da TSA não é verificada na aplicação; apenas o hash corresponde.',
   'Extern': 'Externo',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Obtido de um URL externo; a abertura contactou esse servidor.',

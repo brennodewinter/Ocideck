@@ -1932,6 +1932,8 @@ const _dutchSourceAddGa = <String, String>{
   'burgerservicenummer (BSN)': 'uimhir sheirbhíse saoránach (BSN)',
   'bankrekeningnummer (IBAN)': 'uimhir chuntais bhainc (IBAN)',
   'e-mailadres': 'seoladh ríomhphoist',
+  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
+      'Ní fhíoraítear síniú an TSA san aip; ní mheaitseálann ach an hais.',
   'Extern': 'Seachtrach',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Aisghabhadh ó URL seachtrach; rinne an oscailt teagmháil leis an bhfreastalaí sin.',
