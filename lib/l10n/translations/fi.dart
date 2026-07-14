@@ -1783,6 +1783,23 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Op deze slide': 'Tässä diassa',
+  'Tijdens presenteren': 'Esityksen aikana',
+  'Classificatie en privacy': 'Luokittelu ja yksityisyys',
+  'Logo tonen': 'Näytä logo',
+  'Footer tonen': 'Näytä alatunniste',
+  'Tabel bewerkbaar': 'Taulukko muokattava',
+  'Laat je de tabel tijdens het presenteren voor de zaal aanpassen. Staat standaard uit.':
+      'Antaa sinun muuttaa taulukkoa yleisön edessä esityksen aikana. Oletuksena pois päältä.',
+  'Automatisch doorgaan': 'Siirry automaattisesti',
+  'Persoonsgegevens': 'Henkilötiedot',
+  'Wijzigen': 'Vaihda',
+  'Automatisch afspelen': 'Toista automaattisesti',
+  'Melden': 'Ilmoita',
+  'Geaccepteerd': 'Hyväksytty',
+  'Gewaarschuwd': 'Varoitettu',
+  'Weggelaten': 'Jätetty pois',
+  'Bewerkbaar': 'Muokattava',
   'De privacycontrole': 'Yksityisyystarkistus',
   'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
       'OciDeck lukee diasi läpi tietojen varalta, jotka voivat olla yksityisyyden kannalta arkaluonteisia: tunnistenumerot, yhteystiedot, puhelinnumerot, pankkitilit, avaimet ja salasanat sekä erityiset henkilötietoryhmät. Kaikki tapahtuu tällä laitteella: mitään ei lähetetä, eikä löytynyt arvo näy missään ilmoituksessa.',

@@ -1786,6 +1786,23 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Op deze slide': 'Na tomto snímku',
+  'Tijdens presenteren': 'Během prezentace',
+  'Classificatie en privacy': 'Klasifikace a soukromí',
+  'Logo tonen': 'Zobrazit logo',
+  'Footer tonen': 'Zobrazit zápatí',
+  'Tabel bewerkbaar': 'Tabulka upravitelná',
+  'Laat je de tabel tijdens het presenteren voor de zaal aanpassen. Staat standaard uit.':
+      'Umožní ti měnit tabulku před publikem během prezentace. Ve výchozím nastavení vypnuto.',
+  'Automatisch doorgaan': 'Pokračovat automaticky',
+  'Persoonsgegevens': 'Osobní údaje',
+  'Wijzigen': 'Změnit',
+  'Automatisch afspelen': 'Přehrát automaticky',
+  'Melden': 'Hlásit',
+  'Geaccepteerd': 'Přijato',
+  'Gewaarschuwd': 'S varováním',
+  'Weggelaten': 'Vynecháno',
+  'Bewerkbaar': 'Upravitelné',
   'De privacycontrole': 'Kontrola soukromí',
   'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
       'OciDeck prochází tvé snímky a hledá údaje, které mohou být citlivé: identifikační čísla, kontaktní údaje, telefonní čísla, bankovní účty, klíče a hesla a zvláštní kategorie osobních údajů. Vše probíhá na tomto zařízení: nic se nikam neodesílá a nalezená hodnota se v žádném hlášení neobjeví.',

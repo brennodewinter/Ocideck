@@ -1782,6 +1782,23 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Op deze slide': 'På dette slide',
+  'Tijdens presenteren': 'Under præsentationen',
+  'Classificatie en privacy': 'Klassifikation og privatliv',
+  'Logo tonen': 'Vis logo',
+  'Footer tonen': 'Vis sidefod',
+  'Tabel bewerkbaar': 'Tabel kan redigeres',
+  'Laat je de tabel tijdens het presenteren voor de zaal aanpassen. Staat standaard uit.':
+      'Lader dig ændre tabellen foran publikum under præsentationen. Slået fra som standard.',
+  'Automatisch doorgaan': 'Gå videre automatisk',
+  'Persoonsgegevens': 'Personoplysninger',
+  'Wijzigen': 'Skift',
+  'Automatisch afspelen': 'Afspil automatisk',
+  'Melden': 'Rapportér',
+  'Geaccepteerd': 'Accepteret',
+  'Gewaarschuwd': 'Advaret',
+  'Weggelaten': 'Udeladt',
+  'Bewerkbaar': 'Redigerbar',
   'De privacycontrole': 'Privatlivskontrollen',
   'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
       'OciDeck læser dine slides igennem for data, der kan være følsomme: identifikationsnumre, kontaktoplysninger, telefonnumre, bankkonti, nøgler og adgangskoder samt særlige kategorier af personoplysninger. Det sker udelukkende på denne enhed: intet sendes nogen steder hen, og den fundne værdi optræder ikke i nogen meddelelse.',

@@ -1806,6 +1806,23 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Op deze slide': 'F\'din is-slide',
+  'Tijdens presenteren': 'Waqt il-preżentazzjoni',
+  'Classificatie en privacy': 'Klassifikazzjoni u privatezza',
+  'Logo tonen': 'Uri l-logo',
+  'Footer tonen': 'Uri l-footer',
+  'Tabel bewerkbaar': 'Tabella editabbli',
+  'Laat je de tabel tijdens het presenteren voor de zaal aanpassen. Staat standaard uit.':
+      'Iħallik tbiddel it-tabella quddiem l-udjenza waqt il-preżentazzjoni. Mitfi awtomatikament.',
+  'Automatisch doorgaan': 'Kompli awtomatikament',
+  'Persoonsgegevens': 'Data personali',
+  'Wijzigen': 'Ibdel',
+  'Automatisch afspelen': 'Daqq awtomatikament',
+  'Melden': 'Irrapporta',
+  'Geaccepteerd': 'Aċċettat',
+  'Gewaarschuwd': 'Imwissi',
+  'Weggelaten': 'Imħolli barra',
+  'Bewerkbaar': 'Editabbli',
   'De privacycontrole': 'Il-kontroll tal-privatezza',
   'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
       'OciDeck jaqra s-slides tiegħek għal data li tista\' tkun sensittiva għall-privatezza: numri ta\' identifikazzjoni, dettalji ta\' kuntatt, numri tat-telefon, kontijiet bankarji, ċwievet u passwords, u kategoriji speċjali ta\' data personali. Dan kollu jseħħ fuq dan l-apparat: xejn ma jintbagħat, u l-valur misjub ma jidher f\'ebda avviż.',

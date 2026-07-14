@@ -1790,6 +1790,23 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Op deze slide': 'Na ovom slajdu',
+  'Tijdens presenteren': 'Tijekom izlaganja',
+  'Classificatie en privacy': 'Klasifikacija i privatnost',
+  'Logo tonen': 'Prikaži logotip',
+  'Footer tonen': 'Prikaži podnožje',
+  'Tabel bewerkbaar': 'Tablica uredljiva',
+  'Laat je de tabel tijdens het presenteren voor de zaal aanpassen. Staat standaard uit.':
+      'Omogućuje ti mijenjanje tablice pred publikom tijekom izlaganja. Prema zadanom isključeno.',
+  'Automatisch doorgaan': 'Automatski nastavi',
+  'Persoonsgegevens': 'Osobni podaci',
+  'Wijzigen': 'Promijeni',
+  'Automatisch afspelen': 'Automatski reproduciraj',
+  'Melden': 'Prijavi',
+  'Geaccepteerd': 'Prihvaćeno',
+  'Gewaarschuwd': 'S upozorenjem',
+  'Weggelaten': 'Izostavljeno',
+  'Bewerkbaar': 'Uredljivo',
   'De privacycontrole': 'Provjera privatnosti',
   'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
       'OciDeck pregledava tvoje slajdove tražeći podatke koji bi mogli biti osjetljivi: identifikacijske brojeve, kontaktne podatke, telefonske brojeve, bankovne račune, ključeve i lozinke te posebne kategorije osobnih podataka. Sve se odvija na ovom uređaju: ništa se ne šalje i pronađena vrijednost ne pojavljuje se ni u jednoj obavijesti.',

@@ -1799,6 +1799,23 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Op deze slide': 'In hac pagina',
+  'Tijdens presenteren': 'Dum ostenditur',
+  'Classificatie en privacy': 'Classificatio et vita privata',
+  'Logo tonen': 'Insigne monstrare',
+  'Footer tonen': 'Imum paginae monstrare',
+  'Tabel bewerkbaar': 'Tabula mutabilis',
+  'Laat je de tabel tijdens het presenteren voor de zaal aanpassen. Staat standaard uit.':
+      'Sinit te tabulam coram spectatoribus mutare dum ostenditur. Ex more exstinctum.',
+  'Automatisch doorgaan': 'Sponte procedere',
+  'Persoonsgegevens': 'Data personalia',
+  'Wijzigen': 'Mutare',
+  'Automatisch afspelen': 'Sponte canere',
+  'Melden': 'Nuntiare',
+  'Geaccepteerd': 'Acceptum',
+  'Gewaarschuwd': 'Monitum',
+  'Weggelaten': 'Omissum',
+  'Bewerkbaar': 'Mutabile',
   'De privacycontrole': 'Examinatio privatae vitae',
   'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
       'OciDeck paginas tuas perlegit ad data quae vitam privatam tangere possunt: numeros identitatis, notitias contactus, numeros telephonicos, rationes argentarias, claves et tesseras, et data personalia specialia. Id totum in hoc instrumento fit: nihil mittitur, et valor inventus in nullo nuntio apparet.',

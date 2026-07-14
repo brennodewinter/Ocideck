@@ -1783,6 +1783,23 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Op deze slide': 'Pada slide ini',
+  'Tijdens presenteren': 'Saat presentasi',
+  'Classificatie en privacy': 'Klasifikasi dan privasi',
+  'Logo tonen': 'Tampilkan logo',
+  'Footer tonen': 'Tampilkan footer',
+  'Tabel bewerkbaar': 'Tabel dapat diedit',
+  'Laat je de tabel tijdens het presenteren voor de zaal aanpassen. Staat standaard uit.':
+      'Memungkinkan Anda mengubah tabel di depan audiens saat presentasi. Nonaktif secara bawaan.',
+  'Automatisch doorgaan': 'Lanjut otomatis',
+  'Persoonsgegevens': 'Data pribadi',
+  'Wijzigen': 'Ubah',
+  'Automatisch afspelen': 'Putar otomatis',
+  'Melden': 'Laporkan',
+  'Geaccepteerd': 'Diterima',
+  'Gewaarschuwd': 'Diperingatkan',
+  'Weggelaten': 'Dihilangkan',
+  'Bewerkbaar': 'Dapat diedit',
   'De privacycontrole': 'Pemeriksaan privasi',
   'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
       'OciDeck memeriksa slide Anda untuk data yang mungkin sensitif bagi privasi: nomor identifikasi, data kontak, nomor telepon, rekening bank, kunci dan kata sandi, serta kategori khusus data pribadi. Semuanya terjadi di perangkat ini: tidak ada yang dikirim, dan nilai yang ditemukan tidak pernah muncul dalam pemberitahuan apa pun.',

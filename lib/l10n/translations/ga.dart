@@ -1819,6 +1819,23 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Op deze slide': 'Ar an sleamhnán seo',
+  'Tijdens presenteren': 'Le linn cur i láthair',
+  'Classificatie en privacy': 'Aicmiú agus príobháideachas',
+  'Logo tonen': 'Taispeáin lógó',
+  'Footer tonen': 'Taispeáin buntásc',
+  'Tabel bewerkbaar': 'Tábla ineagarthóireachta',
+  'Laat je de tabel tijdens het presenteren voor de zaal aanpassen. Staat standaard uit.':
+      'Ligeann duit an tábla a athrú os comhair an lucht féachana le linn cur i láthair. As de réir réamhshocraithe.',
+  'Automatisch doorgaan': 'Téigh ar aghaidh go huathoibríoch',
+  'Persoonsgegevens': 'Sonraí pearsanta',
+  'Wijzigen': 'Athraigh',
+  'Automatisch afspelen': 'Seinn go huathoibríoch',
+  'Melden': 'Tuairiscigh',
+  'Geaccepteerd': 'Glactha',
+  'Gewaarschuwd': 'Rabhadh tugtha',
+  'Weggelaten': 'Fágtha ar lár',
+  'Bewerkbaar': 'Ineagarthóireachta',
   'De privacycontrole': 'An tseiceáil príobháideachais',
   'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
       'Léann OciDeck do shleamhnáin le haghaidh sonraí a d\'fhéadfadh a bheith íogair ó thaobh príobháideachais de: uimhreacha aitheantais, sonraí teagmhála, uimhreacha gutháin, cuntais bhainc, eochracha agus pasfhocail, agus catagóirí speisialta sonraí pearsanta. Tarlaíonn sé seo go hiomlán ar an ngléas seo: ní sheoltar aon rud, agus ní thaispeántar an luach a aimsíodh in aon fhógra.',

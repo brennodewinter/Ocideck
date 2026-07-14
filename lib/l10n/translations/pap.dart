@@ -740,6 +740,23 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Op deze slide': 'Riba e slide aki',
+  'Tijdens presenteren': 'Durante presentashon',
+  'Classificatie en privacy': 'Klasifikashon i privacidat',
+  'Logo tonen': 'Mustra logo',
+  'Footer tonen': 'Mustra pia di página',
+  'Tabel bewerkbaar': 'Tabel editabel',
+  'Laat je de tabel tijdens het presenteren voor de zaal aanpassen. Staat standaard uit.':
+      'Ta laga bo kambia e tabel dilanti di e públiko durante presentashon. Ta pagá pa default.',
+  'Automatisch doorgaan': 'Sigui outomátikamente',
+  'Persoonsgegevens': 'Datos personal',
+  'Wijzigen': 'Kambia',
+  'Automatisch afspelen': 'Toka outomátikamente',
+  'Melden': 'Reportá',
+  'Geaccepteerd': 'Aseptá',
+  'Gewaarschuwd': 'Advertí',
+  'Weggelaten': 'Kitá',
+  'Bewerkbaar': 'Editabel',
   'De privacycontrole': 'E kontrol di privacidat',
   'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
       'OciDeck ta lesa bo slides pa datos ku por ta sensitivo pa privacidat: number di identifikashon, datos di kontakto, number di telefon, kuenta di banko, yabi i kontraseña, i datos personal spesial. Tur esaki ta pasa kompletamente riba e aparato aki: nada no ta wòrdu mandá, i e balor hañá no ta aparesé den ningun mensahe.',

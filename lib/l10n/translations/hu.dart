@@ -1787,6 +1787,23 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Op deze slide': 'Ezen a dián',
+  'Tijdens presenteren': 'Bemutatás közben',
+  'Classificatie en privacy': 'Besorolás és adatvédelem',
+  'Logo tonen': 'Logó megjelenítése',
+  'Footer tonen': 'Élőláb megjelenítése',
+  'Tabel bewerkbaar': 'Táblázat szerkeszthető',
+  'Laat je de tabel tijdens het presenteren voor de zaal aanpassen. Staat standaard uit.':
+      'Lehetővé teszi, hogy bemutatás közben a közönség előtt módosítsd a táblázatot. Alapértelmezetten kikapcsolva.',
+  'Automatisch doorgaan': 'Automatikus továbblépés',
+  'Persoonsgegevens': 'Személyes adatok',
+  'Wijzigen': 'Módosítás',
+  'Automatisch afspelen': 'Automatikus lejátszás',
+  'Melden': 'Jelentés',
+  'Geaccepteerd': 'Elfogadva',
+  'Gewaarschuwd': 'Figyelmeztetve',
+  'Weggelaten': 'Kihagyva',
+  'Bewerkbaar': 'Szerkeszthető',
   'De privacycontrole': 'Az adatvédelmi ellenőrzés',
   'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
       'Az OciDeck átnézi a diáidat olyan adatok után, amelyek adatvédelmi szempontból érzékenyek lehetnek: azonosító számok, elérhetőségek, telefonszámok, bankszámlák, kulcsok és jelszavak, valamint különleges személyes adatok. Mindez teljes egészében ezen az eszközön történik: semmi nem kerül elküldésre, és a megtalált érték egyetlen üzenetben sem jelenik meg.',

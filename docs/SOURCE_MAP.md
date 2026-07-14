@@ -219,6 +219,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 ### `lib/widgets/panels/`
 
 - `editor_panel.dart` — Routes slide edits to type-specific editors with toolbar/notes/timing controls.
+- `editor_panel_slide_settings.dart` — The per-slide settings block (logo, footer, timing, table editing, audio, TLP, privacy disposition), grouped by the question you are actually asking and with one row shape throughout. Collapsed, the header badges what deviates from the default — including the redaction disposition, which decides what the recipient gets.
 - `preview_panel.dart` — Zoomable slide preview with rich-text page navigation.
 - `slide_list_panel_clipboard.dart` — Copy-slide-as-image: an egress path, so it runs the same classification gate and privacy projection as a real export.
 - `slide_list_panel.dart` — Searchable, reorderable thumbnail list with import/paste/add controls.

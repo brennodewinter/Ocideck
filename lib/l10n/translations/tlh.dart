@@ -1758,6 +1758,23 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Op deze slide': 'nav vam',
+  'Tijdens presenteren': '\'ang\'eghmeH poH',
+  'Classificatie en privacy': 'Sup je peghmey',
+  'Logo tonen': 'Degh \'ang',
+  'Footer tonen': 'bIng QIn \'ang',
+  'Tabel bewerkbaar': 'raS choH laH',
+  'Laat je de tabel tijdens het presenteren voor de zaal aanpassen. Staat standaard uit.':
+      '\'ang\'eghmeH poH raS choH laH. motlh chu\'Ha\'lu\'.',
+  'Automatisch doorgaan': 'DaH ghoS',
+  'Persoonsgegevens': 'nuv De\'',
+  'Wijzigen': 'choH',
+  'Automatisch afspelen': 'DaH chu\'',
+  'Melden': 'ja\'',
+  'Geaccepteerd': 'lulaj',
+  'Gewaarschuwd': 'ghuHmoHta\'',
+  'Weggelaten': 'teqta\'',
+  'Bewerkbaar': 'choH laH',
   'De privacycontrole': 'peghmey nuDwI\'',
   'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
       'OciDeck De\' Sovbe\'lu\'bogh nej: nuv mI\'mey, rIchmey, ghogh QIn mI\'mey, Huch qach mI\'mey, ngaQHa\'moHwI\'mey je pIn\'a\' mu\'mey, \'ej De\' pIm\'a\'. jan vaD neH qaS. pagh ngeHlu\'. De\' tu\'lu\'bogh \'oH ta\'be\' Doch.',

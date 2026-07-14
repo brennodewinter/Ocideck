@@ -1802,6 +1802,23 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Op deze slide': 'Pe acest diapozitiv',
+  'Tijdens presenteren': 'În timpul prezentării',
+  'Classificatie en privacy': 'Clasificare și confidențialitate',
+  'Logo tonen': 'Afișează sigla',
+  'Footer tonen': 'Afișează subsolul',
+  'Tabel bewerkbaar': 'Tabel editabil',
+  'Laat je de tabel tijdens het presenteren voor de zaal aanpassen. Staat standaard uit.':
+      'Îți permite să modifici tabelul în fața publicului în timpul prezentării. Dezactivat implicit.',
+  'Automatisch doorgaan': 'Avansează automat',
+  'Persoonsgegevens': 'Date personale',
+  'Wijzigen': 'Modifică',
+  'Automatisch afspelen': 'Redă automat',
+  'Melden': 'Raportează',
+  'Geaccepteerd': 'Acceptat',
+  'Gewaarschuwd': 'Avertizat',
+  'Weggelaten': 'Omis',
+  'Bewerkbaar': 'Editabil',
   'De privacycontrole': 'Verificarea confidențialității',
   'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
       'OciDeck îți parcurge diapozitivele în căutarea datelor care ar putea fi sensibile: numere de identificare, date de contact, numere de telefon, conturi bancare, chei și parole, precum și categorii speciale de date personale. Totul se întâmplă pe acest dispozitiv: nu se trimite nimic, iar valoarea găsită nu apare în niciun mesaj.',

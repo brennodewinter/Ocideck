@@ -1787,6 +1787,23 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Op deze slide': 'Uf däre Folie',
+  'Tijdens presenteren': 'Während em Präsentiere',
+  'Classificatie en privacy': 'Iistuefig und Dateschutz',
+  'Logo tonen': 'Logo azeige',
+  'Footer tonen': 'Fuesszile azeige',
+  'Tabel bewerkbaar': 'Tabäle bearbeitbar',
+  'Laat je de tabel tijdens het presenteren voor de zaal aanpassen. Staat standaard uit.':
+      'Lat di d Tabäle während em Präsentiere vor em Publikum ändere. Standardmässig us.',
+  'Automatisch doorgaan': 'Automatisch wiiter',
+  'Persoonsgegevens': 'Persönlichi Date',
+  'Wijzigen': 'Ändere',
+  'Automatisch afspelen': 'Automatisch abspiele',
+  'Melden': 'Mälde',
+  'Geaccepteerd': 'Akzeptiert',
+  'Gewaarschuwd': 'Gwarnt',
+  'Weggelaten': 'Wegglah',
+  'Bewerkbaar': 'Bearbeitbar',
   'De privacycontrole': 'D Dateschutzprüefig',
   'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
       'OciDeck lisst dini Folie na uf Date, wo dateschutzrelevant chönnted si: Identifikationsnummere, Kontaktdate, Telifonnummere, Bankkonte, Schlüssel und Passwörter, und bsunderi Kategorie vo persönliche Date. Das passiert ganz uf dem Grät: es wird nüt verschickt, und de gfundeni Wärt chunnt i kei Mäldig vor.',

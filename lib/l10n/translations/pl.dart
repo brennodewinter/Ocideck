@@ -1796,6 +1796,23 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Op deze slide': 'Na tym slajdzie',
+  'Tijdens presenteren': 'Podczas prezentacji',
+  'Classificatie en privacy': 'Klasyfikacja i prywatność',
+  'Logo tonen': 'Pokaż logo',
+  'Footer tonen': 'Pokaż stopkę',
+  'Tabel bewerkbaar': 'Tabela edytowalna',
+  'Laat je de tabel tijdens het presenteren voor de zaal aanpassen. Staat standaard uit.':
+      'Pozwala zmieniać tabelę na oczach publiczności podczas prezentacji. Domyślnie wyłączone.',
+  'Automatisch doorgaan': 'Przechodź automatycznie',
+  'Persoonsgegevens': 'Dane osobowe',
+  'Wijzigen': 'Zmień',
+  'Automatisch afspelen': 'Odtwarzaj automatycznie',
+  'Melden': 'Zgłoś',
+  'Geaccepteerd': 'Zaakceptowane',
+  'Gewaarschuwd': 'Z ostrzeżeniem',
+  'Weggelaten': 'Pominięte',
+  'Bewerkbaar': 'Edytowalne',
   'De privacycontrole': 'Kontrola prywatności',
   'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
       'OciDeck przegląda Twoje slajdy pod kątem danych, które mogą być wrażliwe: numery identyfikacyjne, dane kontaktowe, numery telefonów, rachunki bankowe, klucze i hasła oraz szczególne kategorie danych osobowych. Wszystko dzieje się na tym urządzeniu: nic nie jest wysyłane, a znaleziona wartość nie pojawia się w żadnym komunikacie.',

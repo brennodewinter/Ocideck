@@ -16,7 +16,6 @@ import '../../state/settings_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 import '../dialogs/add_slide_dialog.dart';
-import '../editors/audio_attachment_editor.dart';
 import '../editors/slide_editor_registry.dart';
 import '../editors/slide_type_help.dart';
 import '../panels/slide_quality_panel.dart';
@@ -26,6 +25,7 @@ import '../panels/preview_panel.dart';
 import '../markdown_notes_editor.dart';
 
 part 'editor_panel_controls.dart';
+part 'editor_panel_slide_settings.dart';
 part 'editor_panel_notes.dart';
 
 class EditorPanel extends ConsumerWidget {
