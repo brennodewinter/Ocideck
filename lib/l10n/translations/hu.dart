@@ -1787,6 +1787,12 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Mogelijk geheim': 'Lehetséges titok',
+  'sleutel of token': 'kulcs vagy token',
+  'private sleutel': 'privát kulcs',
+  'toegangstoken (JWT)': 'hozzáférési token (JWT)',
+  'databaseverbinding met wachtwoord': 'adatbázis-kapcsolat jelszóval',
+  'wachtwoord in klare tekst': 'jelszó nyílt szövegben',
   'Accepteren': 'Elfogadás',
   'Accepteren + waarschuwen': 'Elfogadás + figyelmeztetés',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

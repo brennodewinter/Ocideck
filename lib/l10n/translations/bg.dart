@@ -1806,6 +1806,12 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Mogelijk geheim': 'Възможна тайна',
+  'sleutel of token': 'ключ или токен',
+  'private sleutel': 'частен ключ',
+  'toegangstoken (JWT)': 'токен за достъп (JWT)',
+  'databaseverbinding met wachtwoord': 'връзка към база данни с парола',
+  'wachtwoord in klare tekst': 'парола в чист текст',
   'Accepteren': 'Приемане',
   'Accepteren + waarschuwen': 'Приемане + предупреждение',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

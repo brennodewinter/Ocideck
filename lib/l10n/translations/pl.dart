@@ -1796,6 +1796,12 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Mogelijk geheim': 'Możliwy sekret',
+  'sleutel of token': 'klucz lub token',
+  'private sleutel': 'klucz prywatny',
+  'toegangstoken (JWT)': 'token dostępu (JWT)',
+  'databaseverbinding met wachtwoord': 'połączenie z bazą danych z hasłem',
+  'wachtwoord in klare tekst': 'hasło jawnym tekstem',
   'Accepteren': 'Akceptuj',
   'Accepteren + waarschuwen': 'Akceptuj + ostrzegaj',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

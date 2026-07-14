@@ -1791,6 +1791,12 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Mogelijk geheim': 'Galima paslaptis',
+  'sleutel of token': 'raktas arba prieigos raktas',
+  'private sleutel': 'privatusis raktas',
+  'toegangstoken (JWT)': 'prieigos raktas (JWT)',
+  'databaseverbinding met wachtwoord': 'duomenų bazės ryšys su slaptažodžiu',
+  'wachtwoord in klare tekst': 'slaptažodis atviru tekstu',
   'Accepteren': 'Priimti',
   'Accepteren + waarschuwen': 'Priimti + įspėti',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

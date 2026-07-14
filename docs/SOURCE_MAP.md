@@ -91,6 +91,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `open_file_channel.dart` — Receives file-open paths from macOS for `.md` files.
 - `privacy/privacy_checksums.dart` — Eleven-proof (BSN), Luhn and IBAN mod-97 with the country-length table.
 - `privacy/privacy_allowlist.dart` — Known non-personal values: reserved domains, example IBANs, test cards, the official test-BSN range.
+- `privacy/privacy_secret_rules.dart` — The secrets rule table: vendor tokens (AWS/GitHub/Slack/Stripe/…), PEM private keys, decodable JWTs, connection strings, plain-text passwords — plus the placeholder gate that keeps a how-to slide quiet.
 - `privacy/privacy_scanner.dart` — `PrivacyScanner`: reads a deck for privacy-sensitive data (email, IBAN, BSN), with context gates where the checksum is too weak.
 - `privacy/privacy_quality_bridge.dart` — Maps `PrivacyFinding` onto `SlideQualityIssue` so findings surface in the quality panel.
 - `privacy/privacy_projection.dart` — `AudienceDeck` + `PrivacyProjection`: the single boundary a source deck crosses to reach any receiving surface. Redacts `[[…]]` markers before rendering or export; the private constructor means no export path can hold the unredacted source.

@@ -1774,6 +1774,12 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Mogelijk geheim': 'Võimalik saladus',
+  'sleutel of token': 'võti või luba',
+  'private sleutel': 'privaatvõti',
+  'toegangstoken (JWT)': 'juurdepääsuluba (JWT)',
+  'databaseverbinding met wachtwoord': 'andmebaasiühendus parooliga',
+  'wachtwoord in klare tekst': 'parool avatekstina',
   'Accepteren': 'Nõustu',
   'Accepteren + waarschuwen': 'Nõustu + hoiata',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

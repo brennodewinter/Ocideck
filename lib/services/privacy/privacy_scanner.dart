@@ -20,6 +20,7 @@ import '../../models/privacy_finding.dart';
 import '../../models/slide.dart';
 import 'privacy_allowlist.dart';
 import 'privacy_checksums.dart';
+import 'privacy_secret_rules.dart';
 
 /// Eén tekstfragment van een slide, met de veldnaam waar het uit komt.
 typedef _Fragment = ({String field, int index, String text});
@@ -89,6 +90,66 @@ class PrivacyScanner {
     _scanEmail(fragment, slideIndex, out);
     _scanIban(fragment, slideIndex, out);
     _scanBsn(fragment, slideIndex, out);
+    _scanSecrets(fragment, slideIndex, out);
+  }
+
+  // ── secret.* ──────────────────────────────────────────────────────────────
+
+  /// Leverancierstokens (prefix = bewijs), private keys, JWT's, connection
+  /// strings, en wachtwoorden in klare taal.
+  ///
+  /// Data-gedreven: de regels staan in `privacy_secret_rules.dart`, zodat een
+  /// nieuwe leverancier één regel in een tabel is en niet een tak in deze functie.
+  void _scanSecrets(
+    _Fragment fragment,
+    int slideIndex,
+    List<PrivacyFinding> out,
+  ) {
+    for (final rule in secretRules) {
+      for (final match in rule.pattern.allMatches(fragment.text)) {
+        final value = match.group(0)!;
+        if (isPlaceholderSecret(value)) continue;
+        if (rule.validate != null && !rule.validate!(value)) continue;
+        out.add(
+          _finding(
+            fragment,
+            slideIndex,
+            match,
+            ruleId: rule.id,
+            family: PrivacyFamily.secret,
+            confidence: PrivacyConfidence.certain,
+          ),
+        );
+      }
+    }
+
+    // Een wachtwoord in klare taal. De waarde erachter beslist: een slide die
+    // uitlegt hóé je een sleutel invult (`api_key: <your-key>`) mag niet afgaan.
+    for (final match in secretAssignment.allMatches(fragment.text)) {
+      final value = match.group(1)!;
+      if (isPlaceholderSecret(value)) continue;
+      // Een al gevonden leverancierstoken niet dubbel melden.
+      if (out.any(
+        (f) =>
+            f.family == PrivacyFamily.secret &&
+            f.field == fragment.field &&
+            f.fragmentIndex == fragment.index &&
+            f.start >= match.start &&
+            f.end <= match.end,
+      )) {
+        continue;
+      }
+      out.add(
+        _finding(
+          fragment,
+          slideIndex,
+          match,
+          ruleId: 'secret.password_plain',
+          family: PrivacyFamily.secret,
+          confidence: PrivacyConfidence.likely,
+        ),
+      );
+    }
   }
 
   // ── contact.email ─────────────────────────────────────────────────────────

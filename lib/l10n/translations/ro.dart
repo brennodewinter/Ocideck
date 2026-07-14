@@ -1802,6 +1802,12 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Mogelijk geheim': 'Posibil secret',
+  'sleutel of token': 'cheie sau token',
+  'private sleutel': 'cheie privată',
+  'toegangstoken (JWT)': 'token de acces (JWT)',
+  'databaseverbinding met wachtwoord': 'conexiune la baza de date cu parolă',
+  'wachtwoord in klare tekst': 'parolă în text clar',
   'Accepteren': 'Acceptă',
   'Accepteren + waarschuwen': 'Acceptă + avertizează',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

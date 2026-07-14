@@ -1783,6 +1783,12 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Mogelijk geheim': 'Kemungkinan rahasia',
+  'sleutel of token': 'kunci atau token',
+  'private sleutel': 'kunci privat',
+  'toegangstoken (JWT)': 'token akses (JWT)',
+  'databaseverbinding met wachtwoord': 'koneksi basis data dengan kata sandi',
+  'wachtwoord in klare tekst': 'kata sandi dalam teks biasa',
   'Accepteren': 'Terima',
   'Accepteren + waarschuwen': 'Terima + peringatkan',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

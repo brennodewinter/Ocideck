@@ -1790,6 +1790,12 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Mogelijk geheim': 'Moguća tajna',
+  'sleutel of token': 'ključ ili token',
+  'private sleutel': 'privatni ključ',
+  'toegangstoken (JWT)': 'pristupni token (JWT)',
+  'databaseverbinding met wachtwoord': 'veza s bazom podataka s lozinkom',
+  'wachtwoord in klare tekst': 'lozinka u čistom tekstu',
   'Accepteren': 'Prihvati',
   'Accepteren + waarschuwen': 'Prihvati + upozori',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

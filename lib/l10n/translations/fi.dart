@@ -1783,6 +1783,12 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Mogelijk geheim': 'Mahdollinen salaisuus',
+  'sleutel of token': 'avain tai poletti',
+  'private sleutel': 'yksityinen avain',
+  'toegangstoken (JWT)': 'käyttöoikeuspoletti (JWT)',
+  'databaseverbinding met wachtwoord': 'tietokantayhteys salasanalla',
+  'wachtwoord in klare tekst': 'salasana selkokielisenä',
   'Accepteren': 'Hyväksy',
   'Accepteren + waarschuwen': 'Hyväksy + varoita',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
