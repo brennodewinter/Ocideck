@@ -2,6 +2,7 @@ import 'package:uuid/uuid.dart';
 import 'checklist_spec.dart';
 import 'cockpit.dart';
 import 'deck.dart';
+import 'privacy_disposition.dart';
 import 'finding_spec.dart';
 import 'findings_summary_spec.dart';
 import 'question.dart';
@@ -295,6 +296,10 @@ class Slide {
   /// when the presentation is shared at a lower (less restrictive) level than
   /// this. [TlpLevel.none] = no per-slide restriction (always shown).
   final TlpLevel tlp;
+
+  /// Wat er met privacybevindingen op déze slide gebeurt. `null` = erf de stand
+  /// van het deck. Round-trips als `<!-- ocideck_privacy: … -->`.
+  final PrivacyDisposition? privacy;
   final List<List<String>> tableRows; // first row is the header
 
   /// Table slides only: whether the table may be edited live during a
@@ -392,6 +397,7 @@ class Slide {
     this.showFooter = true,
     this.skipped = false,
     this.tlp = TlpLevel.none,
+    this.privacy,
     this.tableRows = const [],
     this.tableEditable = false,
     this.timelineLayout = TimelineLayout.auto,
@@ -493,6 +499,7 @@ class Slide {
       showFooter: src.showFooter,
       skipped: src.skipped,
       tlp: src.tlp,
+      privacy: src.privacy,
       tableRows: src.tableRows.map((r) => List<String>.from(r)).toList(),
       tableEditable: src.tableEditable,
       timelineLayout: src.timelineLayout,
@@ -550,6 +557,8 @@ class Slide {
     bool? showFooter,
     bool? skipped,
     TlpLevel? tlp,
+    PrivacyDisposition? privacy,
+    bool clearPrivacy = false,
     List<List<String>>? tableRows,
     bool? tableEditable,
     TimelineLayout? timelineLayout,
@@ -611,6 +620,7 @@ class Slide {
       showFooter: showFooter ?? this.showFooter,
       skipped: skipped ?? this.skipped,
       tlp: tlp ?? this.tlp,
+      privacy: clearPrivacy ? null : (privacy ?? this.privacy),
       tableRows: tableRows ?? this.tableRows,
       tableEditable: tableEditable ?? this.tableEditable,
       timelineLayout: timelineLayout ?? this.timelineLayout,

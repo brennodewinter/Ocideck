@@ -4,6 +4,7 @@ import 'package:uuid/uuid.dart';
 import '../models/chart.dart';
 import '../models/cockpit.dart';
 import '../models/deck.dart';
+import '../models/privacy_disposition.dart';
 import '../models/document_signature.dart';
 import '../models/finding_spec.dart';
 import '../models/question.dart';
@@ -75,6 +76,9 @@ class MarkdownService {
     }
     if (deck.tlp != TlpLevel.none) {
       buf.writeln('tlp: ${deck.tlp.key}');
+    }
+    if (deck.privacy != PrivacyDisposition.warn) {
+      buf.writeln('privacy: ${deck.privacy.key}');
     }
     if (deck.presentationTargetSeconds > 0) {
       buf.writeln('ocideck_target_seconds: ${deck.presentationTargetSeconds}');
@@ -435,6 +439,14 @@ class MarkdownService {
     if (slide.tlp != TlpLevel.none) {
       buf.writeln();
       buf.writeln('<!-- tlp: ${slide.tlp.key} -->');
+    }
+
+    // Per-slide privacy disposition. Alleen wegschrijven als de slide er een
+    // heeft; `null` betekent "erf de stand van het deck".
+    final privacy = slide.privacy;
+    if (privacy != null) {
+      buf.writeln();
+      buf.writeln('<!-- ocideck_privacy: ${privacy.key} -->');
     }
 
     if (slide.notes.isNotEmpty) {

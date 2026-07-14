@@ -84,6 +84,7 @@ extension _MarkdownParse on MarkdownService {
     String description = '';
     String keywords = '';
     TlpLevel tlp = TlpLevel.none;
+    PrivacyDisposition privacy = PrivacyDisposition.warn;
     int presentationTargetSeconds = 0;
     bool showRehearsalSummary = true;
     bool playOnly = false;
@@ -140,6 +141,8 @@ extension _MarkdownParse on MarkdownService {
               keywords = _parseScalar(value);
             case 'tlp':
               tlp = TlpLevelX.fromKey(value);
+            case 'privacy':
+              privacy = PrivacyDispositionX.fromKey(value);
             case 'ocideck_target_seconds':
               presentationTargetSeconds = int.tryParse(value) ?? 0;
             case 'ocideck_show_rehearsal_summary':
@@ -208,6 +211,7 @@ extension _MarkdownParse on MarkdownService {
       description: description,
       keywords: keywords,
       tlp: tlp,
+      privacy: privacy,
       presentationTargetSeconds: presentationTargetSeconds.clamp(0, 86400),
       showRehearsalSummary: showRehearsalSummary,
       playOnly: playOnly,
@@ -373,7 +377,12 @@ extension _MarkdownParse on MarkdownService {
       findingRole: link.findingRole,
     );
     if (structured != null) {
-      return structured.copyWith(aiAssistedFields: link.aiAssistedFields);
+      // De dispositie hangt aan de slide, niet aan het slidetype. Hier zetten
+      // in plaats van door elke fenced-parser rijgen: één plek, geen gaten.
+      return structured.copyWith(
+        aiAssistedFields: link.aiAssistedFields,
+        privacy: d.privacy,
+      );
     }
 
     // bullets may already hold the decoded two-column data; the line parser
@@ -469,6 +478,7 @@ extension _MarkdownParse on MarkdownService {
       showFooter: showFooter,
       skipped: d.skipped,
       tlp: d.tlp,
+      privacy: d.privacy,
       tableRows: _tableBackedTypes.contains(type) ? tableRows : const [],
       tableEditable:
           type == SlideType.table && classTokens.contains('table-editable'),
@@ -499,6 +509,7 @@ extension _MarkdownParse on MarkdownService {
     double advanceDuration,
     bool skipped,
     TlpLevel tlp,
+    PrivacyDisposition? privacy,
     List<String> bullets,
     List<String> bullets2,
     ListStyle listStyle,
@@ -529,6 +540,7 @@ extension _MarkdownParse on MarkdownService {
     double advanceDuration = 0;
     bool skipped = false;
     TlpLevel slideTlp = TlpLevel.none;
+    PrivacyDisposition? slidePrivacy;
     final bullets = <String>[];
     var bullets2 = <String>[];
     var listStyle = ListStyle.bullets;
@@ -557,6 +569,8 @@ extension _MarkdownParse on MarkdownService {
         skipped = true;
       } else if (content.startsWith('tlp:')) {
         slideTlp = TlpLevelX.fromKey(content.substring(4));
+      } else if (content.startsWith('ocideck_privacy:')) {
+        slidePrivacy = PrivacyDispositionX.fromKey(content.substring(16));
       } else if (content.startsWith('_style:')) {
         final w = _reImageWidthStyle.firstMatch(content);
         if (w != null) styleImageWidth = int.tryParse(w.group(1)!) ?? 0;
@@ -626,6 +640,7 @@ extension _MarkdownParse on MarkdownService {
       advanceDuration: advanceDuration,
       skipped: skipped,
       tlp: slideTlp,
+      privacy: slidePrivacy,
       bullets: bullets,
       bullets2: bullets2,
       listStyle: listStyle,
