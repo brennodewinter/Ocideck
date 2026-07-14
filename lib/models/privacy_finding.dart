@@ -95,20 +95,32 @@ class PrivacyFinding {
 
   bool get isDeckWide => slideIndex == kDeckWidePrivacyIndex;
 
-  /// Dezelfde bevinding, met een andere zekerheid. Voor de co-occurrence-
-  /// escalator: een bijzonder gegeven wordt pas een echte melding zodra er op
-  /// dezelfde slide iemand staat om het aan te koppelen.
-  PrivacyFinding withConfidence(PrivacyConfidence value) => PrivacyFinding(
-    ruleId: ruleId,
-    family: family,
-    confidence: value,
-    slideIndex: slideIndex,
-    field: field,
-    fragmentIndex: fragmentIndex,
-    start: start,
-    end: end,
-    maskedSample: maskedSample,
-  );
+  /// Dezelfde bevinding, geëscaleerd door de co-occurrence-escalator.
+  ///
+  /// Twee dingen veranderen tegelijk, en dat is geen toeval — het is dezelfde
+  /// vaststelling, twee keer uitgedrukt:
+  ///
+  ///   * de zekerheid gaat omhoog: er staat iemand op de slide om het bijzondere
+  ///     gegeven aan te koppelen, dus het is herleidbaar tot een persoon;
+  ///   * het bereik gaat omhoog: bij een bijzonder gegeven is niet het wóórd het
+  ///     gegeven maar de mededeling. "Marieke de Vries meldde zich ziek met een
+  ///     diabetes-diagnose" met alleen `diagnose` weggelakt is nog steeds
+  ///     leesbaar — en dat is precies wat er niét mocht.
+  ///
+  /// [maskedSample] blijft staan: dat is het trefwoord dat vuurde, en dát is wat
+  /// de auteur wil zien om te begrijpen wáárom er iets weggaat.
+  PrivacyFinding escalated({required int start, required int end}) =>
+      PrivacyFinding(
+        ruleId: ruleId,
+        family: family,
+        confidence: PrivacyConfidence.certain,
+        slideIndex: slideIndex,
+        field: field,
+        fragmentIndex: fragmentIndex,
+        start: start,
+        end: end,
+        maskedSample: maskedSample,
+      );
 }
 
 /// Sentinel voor een bevinding die niet bij één slide hoort (frontmatter,

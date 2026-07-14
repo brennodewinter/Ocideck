@@ -97,10 +97,14 @@ class PrivacyScanner {
     findings.addAll(_enabled(deckFindings));
     for (var i = 0; i < deck.slides.length; i++) {
       final slideFindings = <PrivacyFinding>[];
-      for (final fragment in _slideFragments(deck.slides[i])) {
+      final fragments = _slideFragments(deck.slides[i]).toList();
+      for (final fragment in fragments) {
         _scanFragment(fragment, i, slideFindings);
       }
-      final enabled = _escalateSpecialCategories(_enabled(slideFindings));
+      final enabled = _escalateSpecialCategories(
+        _enabled(slideFindings),
+        _textsOf(fragments),
+      );
       findings.addAll(enabled);
       // De massa-bevinding komt bovenóp de losse: veertig e-mailadressen zijn
       // veertig bevindingen én één ledenlijst, en die tweede is de melding waar
@@ -115,10 +119,14 @@ class PrivacyScanner {
   /// Scant één slide los — voor de per-slide memoisatie in de provider.
   PrivacyScanResult scanSlide(Slide slide, int index) {
     final findings = <PrivacyFinding>[];
-    for (final fragment in _slideFragments(slide)) {
+    final fragments = _slideFragments(slide).toList();
+    for (final fragment in fragments) {
       _scanFragment(fragment, index, findings);
     }
-    final enabled = _escalateSpecialCategories(_enabled(findings));
+    final enabled = _escalateSpecialCategories(
+      _enabled(findings),
+      _textsOf(fragments),
+    );
     return PrivacyScanResult([
       ...enabled,
       ..._enabled(bulkFindingsFor(slide, index, enabled).toList()),
@@ -145,19 +153,36 @@ class PrivacyScanner {
   /// nationaal nummer, e-mailadres), dan is het bijzondere gegeven herleidbaar tot
   /// een persoon — en dát is precies wat artikel 9 beschermt. Dán pas gaat de
   /// melding omhoog.
+  /// De escalatie verbreedt ook het **bereik**, niet alleen de zekerheid.
+  ///
+  /// Zodra het bijzondere gegeven herleidbaar is tot een persoon, is het gegeven
+  /// de hele mededeling — zie [statementSpan]. Daarom heeft deze functie de
+  /// fragmenttekst nodig: zonder die tekst weet ze niet waar de mededeling begint
+  /// en eindigt.
   List<PrivacyFinding> _escalateSpecialCategories(
     List<PrivacyFinding> findings,
+    Map<String, String> fragmentTexts,
   ) {
     if (!findings.any(identifiesAPerson)) return findings;
     return [
       for (final f in findings)
-        if (f.family == PrivacyFamily.specialCategory &&
-            f.confidence == PrivacyConfidence.possible)
-          f.withConfidence(PrivacyConfidence.certain)
+        if (f.family == PrivacyFamily.specialCategory)
+          _escalate(f, fragmentTexts['${f.field}:${f.fragmentIndex}'] ?? '')
         else
           f,
     ];
   }
+
+  PrivacyFinding _escalate(PrivacyFinding finding, String text) {
+    if (text.isEmpty) return finding;
+    final span = statementSpan(text, finding.start, finding.end);
+    return finding.escalated(start: span.start, end: span.end);
+  }
+
+  /// De tekst van elk fragment, opzoekbaar met dezelfde sleutel als de bevinding.
+  Map<String, String> _textsOf(Iterable<_Fragment> fragments) => {
+    for (final f in fragments) '${f.field}:${f.index}': f.text,
+  };
 
   void _scanFragment(
     _Fragment fragment,
