@@ -1782,6 +1782,13 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Voor wie is deze export?': 'Kam paredzēts šis eksports?',
+  'Volledig': 'Pilns',
+  'Geredigeerd': 'Aizklāts',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.':
+      'Pasūtītājam vai revidentam: tiek noņemts tikai tas, ko esi iestatījis kā "izlaist". Pārējais paliek lasāms, lai trešā puse varētu pārbaudīt atradumus.',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Plašākam lokam: tiek noņemts viss, ko pārbaude atrod, arī tavos pieņemtajos slaidos. Failam nosaukumā parādās "-geredigeerd".',
   'tabel met persoonsgegevens (rijen×kolommen)':
       'personas datu tabula (rindas×kolonnas)',
   'massa-persoonsgegevens op één slide': 'masveida personas dati vienā slaidā',

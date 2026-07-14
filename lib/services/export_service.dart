@@ -19,6 +19,7 @@ import '../utils/log.dart';
 import '../utils/user_facing_error.dart';
 import '../utils/atomic_file.dart';
 import '../models/deck.dart';
+import '../models/privacy_disposition.dart';
 import '../models/redaction_manifest.dart';
 import 'privacy/privacy_export_policy.dart';
 import '../models/settings.dart';
@@ -132,6 +133,7 @@ class ExportService {
     PrivacyExportSummary privacySummary = PrivacyExportSummary.empty,
     PrivacyExportPolicy privacyPolicy = const PrivacyExportPolicy(),
     bool privacyAcknowledged = false,
+    PrivacyExportProfile privacyProfile = PrivacyExportProfile.full,
   }) async {
     // Classificatie-gate. Dit is het enige chokepoint waar elk formaat
     // (PDF/PPTX/HTML) doorheen moet, dus de handhaving zit hier en niet in de
@@ -184,7 +186,8 @@ class ExportService {
         : p.dirname(deckPath);
     final prefix = '${natoDtg(DateTime.now())} ';
     final fileName =
-        '$prefix${p.basenameWithoutExtension(deckPath)}$compactSuffix${format.extension}';
+        '$prefix${p.basenameWithoutExtension(deckPath)}'
+        '${privacyProfile.fileSuffix}$compactSuffix${format.extension}';
     final outputPath = p.join(dir, fileName);
     try {
       final Uint8List bytes;

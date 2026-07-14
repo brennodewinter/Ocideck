@@ -1774,6 +1774,13 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Voor wie is deze export?': 'Kellele see eksport on?',
+  'Volledig': 'Täielik',
+  'Geredigeerd': 'Redigeeritud',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.':
+      'Tellijale või audiitorile: eemaldatakse ainult see, mille märkisid "jäta välja". Ülejäänu jääb loetavaks, et kolmas osapool saaks leide kontrollida.',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Laiemale ringile: eemaldatakse kõik, mida kontroll leiab, ka slaididel, millega nõustusid. Fail saab nimesse "-geredigeerd".',
   'tabel met persoonsgegevens (rijen×kolommen)':
       'isikuandmete tabel (read×veerud)',
   'massa-persoonsgegevens op één slide':

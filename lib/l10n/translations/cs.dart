@@ -1786,6 +1786,13 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Voor wie is deze export?': 'Pro koho je tento export?',
+  'Volledig': 'Úplný',
+  'Geredigeerd': 'Začerněný',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.':
+      'Pro zadavatele nebo auditora: odstraní se jen to, co jsi označil jako "vynechat". Zbytek zůstane čitelný, aby třetí strana mohla nálezy ověřit.',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Pro širší okruh: odstraní se vše, co kontrola najde, i na snímcích, které jsi přijal. Soubor dostane v názvu "-geredigeerd".',
   'tabel met persoonsgegevens (rijen×kolommen)':
       'tabulka osobních údajů (řádky×sloupce)',
   'massa-persoonsgegevens op één slide':

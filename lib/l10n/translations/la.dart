@@ -1799,6 +1799,13 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Voor wie is deze export?': 'Cui haec exportatio destinatur?',
+  'Volledig': 'Plenum',
+  'Geredigeerd': 'Obliteratum',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.':
+      'Pro conductore vel auditore: tantum ea removentur quae ipse "omittere" designasti. Cetera legibilia manent, ut tertius inventa probare possit.',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Pro circulo latiore: omnia quae examen invenit removentur, etiam in paginis acceptis. Plicae nomen "-geredigeerd" accipit.',
   'tabel met persoonsgegevens (rijen×kolommen)':
       'tabula datorum personalium (versus×columnae)',
   'massa-persoonsgegevens op één slide': 'data personalia multa in una pagina',

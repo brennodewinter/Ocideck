@@ -1783,6 +1783,13 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Voor wie is deze export?': 'Kenelle tämä vienti on?',
+  'Volledig': 'Täysi',
+  'Geredigeerd': 'Peitetty',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.':
+      'Toimeksiantajalle tai tarkastajalle: vain se, minkä merkitsit "jätä pois", poistetaan. Muu jää luettavaksi, jotta kolmas osapuoli voi tarkistaa havainnot.',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Laajemmalle piirille: kaikki, mitä tarkistus löytää, poistetaan — myös hyväksymiltäsi dioilta. Tiedoston nimeen tulee "-geredigeerd".',
   'tabel met persoonsgegevens (rijen×kolommen)':
       'taulukko henkilötietoja (rivit×sarakkeet)',
   'massa-persoonsgegevens op één slide':

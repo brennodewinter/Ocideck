@@ -922,6 +922,13 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Voor wie is deze export?': 'Who is this export for?',
+  'Volledig': 'Full',
+  'Geredigeerd': 'Redacted',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.':
+      'For the client or auditor: only what you set to "leave out" is removed. The rest stays readable, so a third party can verify the findings.',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.':
+      'For a wider audience: everything the check finds is removed, including on slides you accepted. The file gets "-geredigeerd" in its name.',
   'tabel met persoonsgegevens (rijen×kolommen)':
       'table of personal data (rows×columns)',
   'massa-persoonsgegevens op één slide': 'bulk personal data on one slide',

@@ -741,6 +741,13 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Voor wie is deze export?': 'Foar wa is dizze eksport?',
+  'Volledig': 'Folslein',
+  'Geredigeerd': 'Redigearre',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.':
+      'Foar de opdrachtjouwer of auditor: allinnich watst sels op "weilitte" set hast, giet derút. De rest bliuwt lêsber, sadat in tredde partij de befinings kontrolearje kin.',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Foar de bredere rûnte: alles wat de kontrôle fynt giet derút, ek op dia\'s dy\'tst aksepteare hast. It bestân krijt "-geredigeerd" yn de namme.',
   'tabel met persoonsgegevens (rijen×kolommen)':
       'tabel mei persoansgegevens (rigen×kolommen)',
   'massa-persoonsgegevens op één slide': 'massa-persoansgegevens op ien dia',

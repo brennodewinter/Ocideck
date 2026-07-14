@@ -1791,6 +1791,13 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Voor wie is deze export?': 'Kam skirtas šis eksportas?',
+  'Volledig': 'Pilnas',
+  'Geredigeerd': 'Paslėptas',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.':
+      'Užsakovui ar auditoriui: pašalinama tik tai, ką pažymėjai kaip „praleisti“. Likusi dalis lieka įskaitoma, kad trečioji šalis galėtų patikrinti radinius.',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Platesniam ratui: pašalinama viskas, ką randa patikra, taip pat ir tavo priimtose skaidrėse. Failo pavadinime atsiranda „-geredigeerd“.',
   'tabel met persoonsgegevens (rijen×kolommen)':
       'asmens duomenų lentelė (eilutės×stulpeliai)',
   'massa-persoonsgegevens op één slide':

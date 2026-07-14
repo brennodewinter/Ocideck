@@ -20,7 +20,7 @@ accepteren, waarschuwen met een shield-badge, of redigeren op scherm en in expor
 | §7 Per-regel uitschakelen (met de drie art. 9-categorieën standaard uit) | **geleverd** |
 | §3-I Structurele regels (gebruikerspaden, URL-tokens, share-links, data-URI's) | **geleverd** |
 | §5.4 De eigen-identiteitslijst | **geleverd** |
-| §4.0 Exportprofielen (`full` / `restricted` / `public`) als TLP-plafond | open |
+| §4.0 Exportprofielen (volledig / geredigeerd) | **geleverd** |
 | §3-H Massa-persoonsgegevens (tabelkolommen, herhaalde treffers) | **geleverd** |
 
 De genomen beslissingen staan in §11; die zijn niet meer open.

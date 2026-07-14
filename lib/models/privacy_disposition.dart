@@ -86,3 +86,40 @@ extension PrivacyExportGateX on PrivacyExportGate {
     _ => PrivacyExportGate.warn,
   };
 }
+
+/// Voor wélke ontvanger deze export bedoeld is.
+///
+/// Eén bron, meerdere versies. Dat is geen luxe maar de kern van het
+/// pentestrapport-scenario: de opdrachtgever moet de bevinding kúnnen natrekken,
+/// dus die krijgt alles. De bredere kring krijgt hetzelfde rapport met de
+/// persoonsgegevens eruit.
+///
+/// Zonder deze keuze zou je moeten kiezen tússen die twee — en dan wint in de
+/// praktijk altijd de volledige versie, want die moet nu eenmaal de deur uit.
+enum PrivacyExportProfile {
+  /// Voor de opdrachtgever of de auditor. Alleen wat de auteur expliciet op
+  /// `redact` heeft gezet, gaat eruit; de rest blijft leesbaar, zodat een derde
+  /// partij de bevindingen kan controleren.
+  full,
+
+  /// Voor de bredere kring. Álles wat de scanner vindt gaat eruit, ook op slides
+  /// die de auteur bewust heeft geaccepteerd — want "deze zaal mag het zien" is
+  /// niet hetzelfde als "iedereen mag het zien".
+  redacted,
+}
+
+extension PrivacyExportProfileX on PrivacyExportProfile {
+  String get key => name;
+
+  /// Het achtervoegsel in de bestandsnaam.
+  ///
+  /// Niet cosmetisch: de duurste fout die je met deze feature kunt maken, is het
+  /// volledige exemplaar naar de brede kring sturen. Een verwisseling moet je
+  /// kunnen *zien*, niet hoeven onthouden.
+  String get fileSuffix =>
+      this == PrivacyExportProfile.redacted ? '-geredigeerd' : '';
+
+  static PrivacyExportProfile fromKey(String? raw) => raw == 'redacted'
+      ? PrivacyExportProfile.redacted
+      : PrivacyExportProfile.full;
+}

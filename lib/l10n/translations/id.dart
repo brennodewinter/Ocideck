@@ -1783,6 +1783,13 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Voor wie is deze export?': 'Ekspor ini untuk siapa?',
+  'Volledig': 'Lengkap',
+  'Geredigeerd': 'Diredaksi',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.':
+      'Untuk klien atau auditor: hanya yang Anda tandai "hilangkan" yang dibuang. Sisanya tetap terbaca, agar pihak ketiga bisa memverifikasi temuan.',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Untuk khalayak lebih luas: semua yang ditemukan pemeriksaan dibuang, termasuk pada slide yang Anda terima. Berkas mendapat "-geredigeerd" pada namanya.',
   'tabel met persoonsgegevens (rijen×kolommen)':
       'tabel data pribadi (baris×kolom)',
   'massa-persoonsgegevens op één slide': 'data pribadi massal pada satu slide',

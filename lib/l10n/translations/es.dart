@@ -737,6 +737,13 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Voor wie is deze export?': '¿Para quién es esta exportación?',
+  'Volledig': 'Completo',
+  'Geredigeerd': 'Redactado',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.':
+      'Para el cliente o auditor: solo se elimina lo que marcaste como "omitir". El resto queda legible, para que un tercero pueda verificar los hallazgos.',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Para un público más amplio: se elimina todo lo que encuentra la comprobación, también en diapositivas aceptadas. El archivo lleva "-geredigeerd" en el nombre.',
   'tabel met persoonsgegevens (rijen×kolommen)':
       'tabla de datos personales (filas×columnas)',
   'massa-persoonsgegevens op één slide':

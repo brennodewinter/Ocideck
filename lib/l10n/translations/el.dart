@@ -1811,6 +1811,13 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Voor wie is deze export?': 'Για ποιον είναι αυτή η εξαγωγή;',
+  'Volledig': 'Πλήρες',
+  'Geredigeerd': 'Αποκρυμμένο',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.':
+      'Για τον πελάτη ή τον ελεγκτή: αφαιρείται μόνο ό,τι όρισες ως «παράλειψη». Τα υπόλοιπα μένουν αναγνώσιμα, ώστε ένας τρίτος να μπορεί να ελέγξει τα ευρήματα.',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Για ευρύτερο κοινό: αφαιρείται ό,τι βρίσκει ο έλεγχος, ακόμη και σε διαφάνειες που αποδέχτηκες. Το αρχείο παίρνει «-geredigeerd» στο όνομα.',
   'tabel met persoonsgegevens (rijen×kolommen)':
       'πίνακας προσωπικών δεδομένων (γραμμές×στήλες)',
   'massa-persoonsgegevens op één slide':

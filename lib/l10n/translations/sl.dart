@@ -1785,6 +1785,13 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Voor wie is deze export?': 'Za koga je ta izvoz?',
+  'Volledig': 'Popolno',
+  'Geredigeerd': 'Prekrito',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.':
+      'Za naročnika ali revizorja: odstrani se le tisto, kar si označil kot "izpusti". Ostalo ostane berljivo, da lahko tretja stran preveri ugotovitve.',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Za širši krog: odstrani se vse, kar preverjanje najde, tudi na prosojnicah, ki si jih sprejel. Datoteka dobi "-geredigeerd" v imenu.',
   'tabel met persoonsgegevens (rijen×kolommen)':
       'tabela osebnih podatkov (vrstice×stolpci)',
   'massa-persoonsgegevens op één slide':

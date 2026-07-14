@@ -1801,6 +1801,13 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Voor wie is deze export?': 'Для кого цей експорт?',
+  'Volledig': 'Повний',
+  'Geredigeerd': 'Відредаговано',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.':
+      'Для замовника або аудитора: вилучається лише те, що ви позначили як «вилучити». Решта лишається читабельною, щоб третя сторона могла перевірити висновки.',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Для ширшого кола: вилучається все, що знаходить перевірка, зокрема на прийнятих слайдах. Файл отримує «-geredigeerd» у назві.',
   'tabel met persoonsgegevens (rijen×kolommen)':
       'таблиця персональних даних (рядки×стовпці)',
   'massa-persoonsgegevens op één slide':

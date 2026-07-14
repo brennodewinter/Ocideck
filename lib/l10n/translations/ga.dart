@@ -1819,6 +1819,13 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Voor wie is deze export?': 'Cé dó an t-easpórtáil seo?',
+  'Volledig': 'Iomlán',
+  'Geredigeerd': 'Folaithe',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.':
+      'Don chliant nó don iniúchóir: ní bhaintear ach an rud a shocraigh tú mar "fág ar lár". Fanann an chuid eile inléite, ionas gur féidir le tríú páirtí na torthaí a fhíorú.',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Do lucht féachana níos leithne: baintear gach a n-aimsíonn an tseiceáil, fiú ar shleamhnáin ar ghlac tú leo. Faigheann an comhad "-geredigeerd" ina ainm.',
   'tabel met persoonsgegevens (rijen×kolommen)':
       'tábla sonraí pearsanta (sraitheanna×colúin)',
   'massa-persoonsgegevens op één slide':

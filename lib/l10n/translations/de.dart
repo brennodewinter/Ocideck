@@ -740,6 +740,13 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Voor wie is deze export?': 'Für wen ist dieser Export?',
+  'Volledig': 'Vollständig',
+  'Geredigeerd': 'Geschwärzt',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.':
+      'Für den Auftraggeber oder Auditor: Nur was du auf "weglassen" gesetzt hast, wird entfernt. Der Rest bleibt lesbar, damit ein Dritter die Befunde prüfen kann.',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Für den weiteren Kreis: Alles, was die Prüfung findet, wird entfernt — auch auf Folien, die du akzeptiert hast. Die Datei bekommt "-geredigeerd" im Namen.',
   'tabel met persoonsgegevens (rijen×kolommen)':
       'Tabelle mit personenbezogenen Daten (Zeilen×Spalten)',
   'massa-persoonsgegevens op één slide': 'Massen-Personendaten auf einer Folie',

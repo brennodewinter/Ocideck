@@ -740,6 +740,13 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Voor wie is deze export?': 'Pour qui est cet export ?',
+  'Volledig': 'Complet',
+  'Geredigeerd': 'Caviardé',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.':
+      'Pour le client ou l\'auditeur : seul ce que tu as marqué "omettre" est retiré. Le reste reste lisible, afin qu\'un tiers puisse vérifier les constats.',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Pour un public plus large : tout ce que le contrôle trouve est retiré, y compris sur les diapositives acceptées. Le fichier reçoit "-geredigeerd" dans son nom.',
   'tabel met persoonsgegevens (rijen×kolommen)':
       'tableau de données personnelles (lignes×colonnes)',
   'massa-persoonsgegevens op één slide':

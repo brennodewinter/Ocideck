@@ -1806,6 +1806,13 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Voor wie is deze export?': 'Għal min hi din l-esportazzjoni?',
+  'Volledig': 'Sħiħ',
+  'Geredigeerd': 'Irrediġut',
+  'Voor de opdrachtgever of auditor: alleen wat je zelf op "weglaten" hebt gezet, gaat eruit. De rest blijft leesbaar, zodat een derde partij de bevindingen kan controleren.':
+      'Għall-klijent jew l-awditur: jitneħħa biss dak li ssettjajt bħala "ħalli barra". Il-bqija jibqa\' jinqara, biex parti terza tkun tista\' tivverifika s-sejbiet.',
+  'Voor de bredere kring: alles wat de controle vindt gaat eruit, ook op slides die je hebt geaccepteerd. Het bestand krijgt "-geredigeerd" in de naam.':
+      'Għal ċirku usa\': jitneħħa kollox li ssib il-kontroll, anke fuq slides li aċċettajt. Il-fajl jieħu "-geredigeerd" f\'ismu.',
   'tabel met persoonsgegevens (rijen×kolommen)':
       'tabella ta\' data personali (ringieli×kolonni)',
   'massa-persoonsgegevens op één slide':

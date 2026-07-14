@@ -66,6 +66,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `description_service.dart` — Stores searchable image descriptions as JSON sidecars.
 - `document_integrity.dart` — Computes/verifies the SHA-512 deck seal and seals a finalised deck.
 - `evidence_hash_service.dart` — Computes the MIAUW SHA1 + SHA-256 of evidence bytes and builds the appendix hash table.
+- `export_bundle.dart` — `ExportBundle`: everything an export needs for one audience profile. A factory the export dialog holds, so it can pick the profile without ever touching the source deck.
 - `export_metadata.dart` — `ExportDocumentMetadata` stamped into PDF/PPTX/HTML (title, author, org, keywords, TLP).
 - `export_service.dart` — The single chokepoint that renders decks to PDF, PPTX, and HTML.
 - `file_service.dart` — Scans presentation files, opens decks (with the safety gate), and import/URL/package IO. Part `parts/file_service_dossier.dart` builds the one-click audit dossier (package + `AUDIT_DOSSIER.md` + optional `report.pdf`, AES-256).
