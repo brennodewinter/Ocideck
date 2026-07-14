@@ -1787,6 +1787,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Privacy blokkeert export': 'Dr Dateschutz blockiert dr Export',
+  'privacybevinding(en) zonder keuze': 'Dateschutzbefund(e) ohni Entscheidig',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
       'Persoonedate, bsunderi Date und Gheimnis im Täxt',
   'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':

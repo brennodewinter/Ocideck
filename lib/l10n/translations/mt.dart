@@ -1806,6 +1806,9 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Privacy blokkeert export': 'Il-privatezza timblokka l-esportazzjoni',
+  'privacybevinding(en) zonder keuze':
+      'sejba/sejbiet ta\' privatezza mingħajr għażla',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
       'Data personali, data speċjali u sigrieti fit-test',
   'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':

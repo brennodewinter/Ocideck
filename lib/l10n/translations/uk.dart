@@ -1801,6 +1801,9 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Privacy blokkeert export': 'Приватність блокує експорт',
+  'privacybevinding(en) zonder keuze':
+      'виявлення персональних даних без ухваленого рішення',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
       'Персональні дані, особливі дані та секрети в тексті',
   'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':

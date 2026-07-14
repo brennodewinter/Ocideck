@@ -139,7 +139,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `image_contrast_provider.dart` — Computes title-slide image-contrast issues asynchronously per deck.
 - `sec_module_provider.dart` — The security-module enable/reveal state that gates the pentest features.
 - `local_cve_provider.dart` — `LocalCveNotifier`/`LocalCveState`: the local CVE database's status, build progress and cancellation, plus `localCveAvailableProvider` — which the CVE picker uses to search offline (and then deliberately *not* fall back online).
-- `privacy_provider.dart` — Runs the privacy scan for the active deck (per-tab scoped) and bridges it into the quality panel.
+- `privacy_provider.dart` — Runs the privacy scan for the active deck (per-tab scoped) and surfaces it everywhere the deck's quality is shown. The raw scan (`privacyRawScanProvider`) feeds two views: the panel/thumbnail issues (`privacyScanProvider` → `privacyQualityIssuesProvider`, which suppress already-handled slides) and the export gate's count (`privacyExportSummaryProvider`, which must *not* suppress them — a gate has to know how much was handled).
 - `parts/settings_provider_privacy.dart` — The privacy switches (master, per-rule, own identity, export gate).
 - `settings_provider.dart` — `SettingsNotifier`: app settings, theme/appearance profiles, cockpit schemes.
 - `slide_clipboard_provider.dart` — Global slide clipboard for copy/paste across tabs.

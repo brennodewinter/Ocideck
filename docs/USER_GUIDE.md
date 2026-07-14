@@ -546,6 +546,12 @@ the export** until every certain finding has a choice. Blocking is enforced at t
 export chokepoint itself, not only in the dialog: a gate that lives only in a
 dialog is not a gate.
 
+The **status bar** carries this gate too, next to the classification and quality
+gates: it counts the findings still without a choice, and turns red when the gate
+is set to block. Before, that corner could read a green *Ready to export* while a
+blocking privacy gate was waiting one click away — the status bar promised the
+opposite of what the export would do. It no longer can.
+
 The point of the gate is narrow, and worth stating: **it does not punish personal
 data, it punishes *unnoticed* personal data.** A police briefing where everything
 is deliberately accepted goes through without a peep — otherwise you would learn
@@ -879,8 +885,15 @@ issue to jump to that slide and focus the relevant editor field; click a **theme
 colour field scrolled into view and highlighted.
 
 Issues also appear as badges on slide thumbnails (amber for warnings, red when
-errors are included), as a blue badge when a slide has **user notes**, and as
-inline hints on relevant editor fields (for example image captions).
+errors are included, including a slide whose only issue is a **privacy finding**),
+as a blue badge when a slide has **user notes**, and as inline hints on relevant
+editor fields (for example image captions).
+
+When the green bar shows no issues, expand it to see **which checks ran** —
+contrast, alt text, media files, text density, and (when it is switched on) the
+privacy check. If the privacy check is **off**, the panel says so there rather
+than silently leaving it out: a green "nothing found" must never be mistaken for
+"nothing was looked for".
 
 Skipped slides are not checked. Export and presentation use the same analyser on
 the slides that will actually be shown.

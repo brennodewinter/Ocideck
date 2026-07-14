@@ -1783,6 +1783,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Privacy blokkeert export': 'Yksityisyys estää viennin',
+  'privacybevinding(en) zonder keuze': 'yksityisyyshavainto(a) ilman valintaa',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
       'Henkilötiedot, erityiset tiedot ja salaisuudet tekstissä',
   'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':

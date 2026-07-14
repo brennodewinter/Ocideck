@@ -1790,6 +1790,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Privacy blokkeert export': 'Privatnost blokira izvoz',
+  'privacybevinding(en) zonder keuze': 'nalaz(a) o privatnosti bez odluke',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
       'Osobni podaci, posebni podaci i tajne u tekstu',
   'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':

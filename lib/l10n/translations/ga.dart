@@ -1819,6 +1819,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Privacy blokkeert export':
+      'Cuireann an phríobháideacht bac ar an easpórtáil',
+  'privacybevinding(en) zonder keuze':
+      'toradh/torthaí príobháideachais gan rogha',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
       'Sonraí pearsanta, sonraí speisialta agus rúin sa téacs',
   'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':

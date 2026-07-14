@@ -740,6 +740,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Privacy blokkeert export': 'Privasidat ta blokia eksportashon',
+  'privacybevinding(en) zonder keuze': 'hayasgo(nan) di privasidat sin skoho',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
       'Datos personal, datos spesial i sekreto den e teksto',
   'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':

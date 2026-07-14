@@ -1799,6 +1799,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Privacy blokkeert export': 'Privatio exportationem impedit',
+  'privacybevinding(en) zonder keuze': 'inventum/a privationis sine electione',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
       'Data personalia, genera specialia et arcana in textu',
   'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':

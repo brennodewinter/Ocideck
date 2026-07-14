@@ -1791,6 +1791,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Privacy blokkeert export': 'Privatumas blokuoja eksportą',
+  'privacybevinding(en) zonder keuze': 'privatumo radinys (-iai) be sprendimo',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
       'Asmens duomenys, ypatingi duomenys ir paslaptys tekste',
   'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':

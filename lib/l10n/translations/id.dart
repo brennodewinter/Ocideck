@@ -1783,6 +1783,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Privacy blokkeert export': 'Privasi memblokir ekspor',
+  'privacybevinding(en) zonder keuze': 'temuan privasi tanpa pilihan',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
       'Data pribadi, data khusus, dan rahasia dalam teks',
   'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':

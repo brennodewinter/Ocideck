@@ -1787,6 +1787,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Privacy blokkeert export': 'Az adatvédelem blokkolja az exportot',
+  'privacybevinding(en) zonder keuze': 'adatvédelmi megállapítás döntés nélkül',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
       'Személyes adatok, különleges adatok és titkok a szövegben',
   'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':

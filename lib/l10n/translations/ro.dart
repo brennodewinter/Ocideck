@@ -1802,6 +1802,9 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Privacy blokkeert export': 'Confidențialitatea blochează exportul',
+  'privacybevinding(en) zonder keuze':
+      'constatare/constatări de confidențialitate fără decizie',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
       'Date personale, date speciale și secrete în text',
   'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':

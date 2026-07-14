@@ -1782,6 +1782,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Privacy blokkeert export': 'Integriteten blockerar exporten',
+  'privacybevinding(en) zonder keuze': 'integritetsfynd utan gjort val',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
       'Personuppgifter, särskilda uppgifter och hemligheter i texten',
   'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':

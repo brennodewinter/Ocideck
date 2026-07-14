@@ -1811,6 +1811,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Privacy blokkeert export': 'Το απόρρητο μπλοκάρει την εξαγωγή',
+  'privacybevinding(en) zonder keuze': 'εύρημα/-τα απορρήτου χωρίς επιλογή',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
       'Προσωπικά δεδομένα, ειδικές κατηγορίες και μυστικά στο κείμενο',
   'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':

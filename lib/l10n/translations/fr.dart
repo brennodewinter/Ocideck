@@ -740,6 +740,9 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Privacy blokkeert export': 'La confidentialité bloque l\'export',
+  'privacybevinding(en) zonder keuze':
+      'constat(s) de confidentialité sans décision',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
       'Données personnelles, catégories particulières et secrets dans le texte',
   'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':

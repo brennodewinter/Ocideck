@@ -922,6 +922,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Privacy blokkeert export': 'Privacy blocks export',
+  'privacybevinding(en) zonder keuze': 'privacy finding(s) with no choice made',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
       'Personal data, special categories and secrets in the text',
   'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':

@@ -1774,6 +1774,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Privacy blokkeert export': 'Privaatsus blokeerib ekspordi',
+  'privacybevinding(en) zonder keuze': 'privaatsusleidu ilma valikuta',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
       'Isikuandmed, eriliiki andmed ja saladused tekstis',
   'Slides, notities, tabellen, code, bestandspaden en URL\'s worden op dit apparaat doorzocht op identificerende nummers, financiële gegevens, contactgegevens, digitale identificatoren, geheimen, bijzondere persoonsgegevens (AVG art. 9/10), massagegevens en metadatalekken.':
