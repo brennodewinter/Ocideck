@@ -1787,6 +1787,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'map/presentatie': 'Ordner/Präsentation',
   'Gekoppelde test': 'Verchnüpfte Test',
   'Maak eerst een checklist voor dit scope-object.':
       'Erstell zerscht e Checkliste für das Scope-Objäkt.',

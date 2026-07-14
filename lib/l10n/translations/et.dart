@@ -1774,6 +1774,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'map/presentatie': 'kaust/esitlus',
   'Gekoppelde test': 'Seotud test',
   'Maak eerst een checklist voor dit scope-object.':
       'Loo esmalt sellele ulatuse objektile kontrollnimekiri.',

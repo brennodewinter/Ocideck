@@ -150,8 +150,8 @@ class _ChecklistPreview extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: w * 0.008),
       child: Row(
         children: [
-          Expanded(flex: 3, child: Text('ID', style: style())),
-          Expanded(flex: 5, child: Text('Test', style: style())),
+          Expanded(flex: 3, child: Text(l10n.d('ID'), style: style())),
+          Expanded(flex: 5, child: Text(l10n.d('Test'), style: style())),
           Expanded(flex: 3, child: Text(l10n.d('Status'), style: style())),
           Expanded(flex: 2, child: Text(l10n.d('Bevinding'), style: style())),
         ],

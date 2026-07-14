@@ -1796,6 +1796,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'map/presentatie': 'folder/prezentacja',
   'Gekoppelde test': 'Powiązany test',
   'Maak eerst een checklist voor dit scope-object.':
       'Najpierw utwórz listę kontrolną dla tego obiektu zakresu.',

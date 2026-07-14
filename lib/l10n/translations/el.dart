@@ -1811,6 +1811,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'map/presentatie': 'φάκελος/παρουσίαση',
   'Gekoppelde test': 'Συνδεδεμένος έλεγχος',
   'Maak eerst een checklist voor dit scope-object.':
       'Δημιούργησε πρώτα μια λίστα ελέγχου για αυτό το αντικείμενο εμβέλειας.',

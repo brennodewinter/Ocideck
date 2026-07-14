@@ -1813,6 +1813,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'map/presentatie': 'pasta/apresentação',
   'Gekoppelde test': 'Teste vinculado',
   'Maak eerst een checklist voor dit scope-object.':
       'Primeiro crie uma lista de verificação para este objeto do escopo.',

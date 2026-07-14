@@ -1801,6 +1801,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'map/presentatie': 'тека/презентація',
   'Gekoppelde test': 'Пов\'язаний тест',
   'Maak eerst een checklist voor dit scope-object.':
       'Спершу створіть контрольний список для цього об\'єкта обсягу.',

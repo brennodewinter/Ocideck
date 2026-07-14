@@ -1806,6 +1806,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'map/presentatie': 'folder/preżentazzjoni',
   'Gekoppelde test': 'Test marbut',
   'Maak eerst een checklist voor dit scope-object.':
       'L-ewwel oħloq lista ta\' kontroll għal dan l-oġġett tal-kamp.',

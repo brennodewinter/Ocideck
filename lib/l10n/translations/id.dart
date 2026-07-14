@@ -1783,6 +1783,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'map/presentatie': 'folder/presentasi',
   'Gekoppelde test': 'Uji tertaut',
   'Maak eerst een checklist voor dit scope-object.':
       'Buat dulu daftar periksa untuk objek cakupan ini.',

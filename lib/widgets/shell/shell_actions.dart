@@ -410,7 +410,7 @@ class _WebdavSaveDialogState extends State<_WebdavSaveDialog> {
               controller: _path,
               decoration: InputDecoration(
                 labelText: l10n.d('Doelpad (zonder extensie)'),
-                hintText: 'map/presentatie',
+                hintText: l10n.d('map/presentatie'),
                 isDense: true,
                 border: const OutlineInputBorder(),
               ),
