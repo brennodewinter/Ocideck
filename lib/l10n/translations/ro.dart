@@ -1802,6 +1802,19 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'De eigenaar staat insluiten niet toe':
+      'Proprietarul nu permite încorporarea',
+  'Deze video is alleen op de bron zelf te bekijken.':
+      'Acest videoclip poate fi vizionat doar pe sursa însăși.',
+  'Video niet gevonden': 'Videoclip negăsit',
+  'De video is verwijderd, privé of de link klopt niet.':
+      'Videoclipul a fost eliminat, este privat sau linkul este greșit.',
+  'Ongeldige video-link': 'Link video nevalid',
+  'Controleer de URL van de video op deze slide.':
+      'Verificați URL-ul videoclipului pe acest slide.',
+  'Geen verbinding met de videobron': 'Nicio conexiune la sursa video',
+  'Controleer de internetverbinding en probeer opnieuw.':
+      'Verificați conexiunea la internet și încercați din nou.',
   'Privacy blokkeert export': 'Confidențialitatea blochează exportul',
   'privacybevinding(en) zonder keuze':
       'constatare/constatări de confidențialitate fără decizie',

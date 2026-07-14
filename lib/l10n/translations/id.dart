@@ -1783,6 +1783,19 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'De eigenaar staat insluiten niet toe':
+      'Pemilik tidak mengizinkan penyematan',
+  'Deze video is alleen op de bron zelf te bekijken.':
+      'Video ini hanya dapat ditonton di sumbernya sendiri.',
+  'Video niet gevonden': 'Video tidak ditemukan',
+  'De video is verwijderd, privé of de link klopt niet.':
+      'Video telah dihapus, bersifat pribadi, atau tautannya salah.',
+  'Ongeldige video-link': 'Tautan video tidak valid',
+  'Controleer de URL van de video op deze slide.':
+      'Periksa URL video pada slide ini.',
+  'Geen verbinding met de videobron': 'Tidak ada koneksi ke sumber video',
+  'Controleer de internetverbinding en probeer opnieuw.':
+      'Periksa koneksi internet dan coba lagi.',
   'Privacy blokkeert export': 'Privasi memblokir ekspor',
   'privacybevinding(en) zonder keuze': 'temuan privasi tanpa pilihan',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':

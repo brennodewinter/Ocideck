@@ -1801,6 +1801,18 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'De eigenaar staat insluiten niet toe': 'Власник не дозволяє вбудовування',
+  'Deze video is alleen op de bron zelf te bekijken.':
+      'Це відео можна переглянути лише в самому джерелі.',
+  'Video niet gevonden': 'Відео не знайдено',
+  'De video is verwijderd, privé of de link klopt niet.':
+      'Відео видалено, воно приватне або посилання неправильне.',
+  'Ongeldige video-link': 'Недійсне посилання на відео',
+  'Controleer de URL van de video op deze slide.':
+      'Перевірте URL відео на цьому слайді.',
+  'Geen verbinding met de videobron': 'Немає з\'єднання з джерелом відео',
+  'Controleer de internetverbinding en probeer opnieuw.':
+      'Перевірте інтернет-з\'єднання та спробуйте ще раз.',
   'Privacy blokkeert export': 'Приватність блокує експорт',
   'privacybevinding(en) zonder keuze':
       'виявлення персональних даних без ухваленого рішення',

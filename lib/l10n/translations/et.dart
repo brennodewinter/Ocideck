@@ -1774,6 +1774,18 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'De eigenaar staat insluiten niet toe': 'Omanik ei luba manustamist',
+  'Deze video is alleen op de bron zelf te bekijken.':
+      'Seda videot saab vaadata ainult allikas endas.',
+  'Video niet gevonden': 'Videot ei leitud',
+  'De video is verwijderd, privé of de link klopt niet.':
+      'Video on eemaldatud, on privaatne või link on vale.',
+  'Ongeldige video-link': 'Vigane videolink',
+  'Controleer de URL van de video op deze slide.':
+      'Kontrolli video URL-i sellel slaidil.',
+  'Geen verbinding met de videobron': 'Ühendus video allikaga puudub',
+  'Controleer de internetverbinding en probeer opnieuw.':
+      'Kontrolli internetiühendust ja proovi uuesti.',
   'Privacy blokkeert export': 'Privaatsus blokeerib ekspordi',
   'privacybevinding(en) zonder keuze': 'privaatsusleidu ilma valikuta',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':

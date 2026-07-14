@@ -1783,6 +1783,18 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'De eigenaar staat insluiten niet toe': 'Omistaja ei salli upottamista',
+  'Deze video is alleen op de bron zelf te bekijken.':
+      'Tätä videota voi katsoa vain itse lähteessä.',
+  'Video niet gevonden': 'Videota ei löydy',
+  'De video is verwijderd, privé of de link klopt niet.':
+      'Video on poistettu, se on yksityinen tai linkki on väärä.',
+  'Ongeldige video-link': 'Virheellinen videolinkki',
+  'Controleer de URL van de video op deze slide.':
+      'Tarkista videon URL tällä dialla.',
+  'Geen verbinding met de videobron': 'Ei yhteyttä videon lähteeseen',
+  'Controleer de internetverbinding en probeer opnieuw.':
+      'Tarkista internetyhteys ja yritä uudelleen.',
   'Privacy blokkeert export': 'Yksityisyys estää viennin',
   'privacybevinding(en) zonder keuze': 'yksityisyyshavainto(a) ilman valintaa',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':

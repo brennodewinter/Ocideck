@@ -240,6 +240,16 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
   bool _completed = false;
   bool _initialLoadDone = false;
 
+  /// De reden waarom deze embed niet speelt, of null zolang alles goed gaat.
+  /// Zolang dit null is en de speler nog niet "ok" meldde, tonen we de
+  /// laad-placeholder; is het gezet, dan de foutmelding met die reden.
+  VideoEmbedError? _error;
+
+  /// De speler meldde dat hij klaarstaat. Vóór dat moment is een leeg vlak
+  /// "nog aan het laden", niet "stuk" — en dat onderscheid was precies wat de
+  /// gebruiker miste.
+  bool _playerReady = false;
+
   @override
   void initState() {
     super.initState();
@@ -302,6 +312,17 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
           onHttpAuthRequest: (request) async {
             // Weiger auth-prompts vanuit de embed.
           },
+          // Alleen een fout op de hóófdlading telt hier als netwerkfout. Een
+          // embed laadt tientallen subresources (het IFrame-script, thumbnails,
+          // tracking) die los mogen mislukken zonder dat de video stuk is; die
+          // hebben `isForMainFrame == false` en negeren we. Bij twijfel (null)
+          // zwijgen we ook — de JS-timeout in de embed-HTML is het echte vangnet
+          // voor "de speler kwam nooit klaar", en die maakt geen vals alarm.
+          onWebResourceError: (error) {
+            if (error.isForMainFrame ?? false) {
+              _reportError(VideoEmbedError.network);
+            }
+          },
         ),
       );
     _setEmbedBackground(controller);
@@ -336,6 +357,14 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
     final controller = _controller;
     if (controller == null) return;
     _completed = false;
+    // Een nieuwe lading is een schone lei: de vorige fout en klaar-status horen
+    // niet mee te reizen naar een andere video op dezelfde slide.
+    if (_error != null || _playerReady) {
+      setState(() {
+        _error = null;
+        _playerReady = false;
+      });
+    }
     final html = _buildEmbedHtml();
     if (html == null) return;
     final baseUrl = widget.source.kind == VideoSourceKind.youtube
@@ -349,6 +378,7 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
     if (m.startsWith('pos:')) {
       final ms = int.tryParse(m.substring(4));
       if (ms != null) {
+        if (!_playerReady) setState(() => _playerReady = true);
         VideoPlayheadBus.publish(
           VideoPlayhead(
             slideId: widget.slide.id,
@@ -357,6 +387,15 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
           ),
         );
       }
+    } else if (m == 'ok') {
+      if (!_playerReady || _error != null) {
+        setState(() {
+          _playerReady = true;
+          _error = null;
+        });
+      }
+    } else if (m.startsWith('err:')) {
+      _reportError(videoEmbedErrorFromCode(m.substring(4)));
     } else if (m == 'ended') {
       if (_completed) return;
       _completed = true;
@@ -364,6 +403,15 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
       // ongevraagd doorbladeren).
       if (widget.autoplay) widget.onComplete?.call();
     }
+  }
+
+  /// Een speler die eerst "ok" meldde en daarna een fout, is meestal een clip
+  /// die middenin stokt; de gebruiker heeft dan al beeld gehad. De reden die de
+  /// gebruiker mist is de fout die vóór het spelen komt (insluiten uit, video
+  /// weg, geen verbinding), dus die laten we winnen.
+  void _reportError(VideoEmbedError error) {
+    if (!mounted || _playerReady || _error != null) return;
+    setState(() => _error = error);
   }
 
   String? _buildEmbedHtml() {
@@ -402,9 +450,19 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
         children: [
           if (!widget.allowRemoteMedia)
             _remoteBlockedPlaceholder(context, widget.slide.videoPath)
-          else if (controller != null)
-            WebViewWidget(controller: controller)
-          else
+          else if (_error != null)
+            _videoEmbedErrorPlaceholder(
+              context,
+              _error!,
+              widget.slide.videoPath,
+            )
+          else if (controller != null) ...[
+            WebViewWidget(controller: controller),
+            // De speler zit al in beeld, maar meldde nog geen positie of "ok".
+            // Toon zolang een subtiele laadhint zodat een trage lading niet met
+            // een dood vlak wordt verward.
+            if (!_playerReady) const IgnorePointer(child: _VideoEmbedLoading()),
+          ] else
             _mediaPlaceholder(Icons.movie_outlined, 'Video'),
           if (widget.slide.title.isNotEmpty)
             Positioned(
@@ -435,20 +493,31 @@ class _VideoEmbedPreviewState extends State<_VideoEmbedPreview> {
 
 /// HTML voor een YouTube-embed via de IFrame Player API. Bewaakt het knip-einde
 /// ([endMs] > 0) en meldt positie/einde via de `OciDeck`-channel.
+///
+/// `onError` meldt de fout terug (`err:<code>`), plus een tijdslot: laadt het
+/// IFrame-script niet of komt de speler nooit klaar, dan hoort de gebruiker een
+/// reden te zien in plaats van een zwart vlak (`err:noapi`). Dit is precies de
+/// stille faalmodus waar "de video laadt niet en ik zie niet waarom" vandaan
+/// kwam — de meest voorkomende oorzaak is dat de eigenaar insluiten heeft
+/// uitgezet, en dat wist de gebruiker niet.
 String _youTubeHtml(String id, int startSec, int endMs, int autoplay) {
   return '''<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1">
 <style>html,body{margin:0;background:#000;height:100%}#p{width:100%;height:100%}</style></head>
 <body><div id="p"></div>
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
-var player, endMs=$endMs;
+var player, endMs=$endMs, ready=false;
 function post(m){try{OciDeck.postMessage(m)}catch(e){}}
 function onYouTubeIframeAPIReady(){
-  player=new YT.Player('p',{videoId:'$id',playerVars:{autoplay:$autoplay,controls:1,rel:0,modestbranding:1,playsinline:1,start:$startSec},events:{onReady:onReady,onStateChange:onState}});
+  player=new YT.Player('p',{videoId:'$id',playerVars:{autoplay:$autoplay,controls:1,rel:0,modestbranding:1,playsinline:1,start:$startSec},events:{onReady:onReady,onStateChange:onState,onError:onErr}});
 }
-function onReady(e){tick()}
+function onReady(e){ready=true;post('ok');tick()}
+function onErr(e){post('err:'+e.data)}
 function onState(e){if(e.data===YT.PlayerState.ENDED){post('ended')}}
 function tick(){try{if(player&&player.getCurrentTime){var ms=Math.round(player.getCurrentTime()*1000);post('pos:'+ms);if(endMs>0&&ms>=endMs){player.pauseVideo();post('ended')}}}catch(e){}setTimeout(tick,250)}
+// Laadt het IFrame-script niet (offline, geblokkeerd), dan komt de speler nooit
+// klaar. Meld dat na een royale marge in plaats van zwart te blijven.
+setTimeout(function(){if(!ready){post('err:noapi')}},8000);
 </script></body></html>''';
 }
 
@@ -460,10 +529,156 @@ String _vimeoHtml(String embedUrl, int endMs) {
 <body><iframe id="f" src="$embedUrl" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
 <script src="https://player.vimeo.com/api/player.js"></script>
 <script>
-var endMs=$endMs;
+var endMs=$endMs, ready=false;
 function post(m){try{OciDeck.postMessage(m)}catch(e){}}
-var player=new Vimeo.Player(document.getElementById('f'));
-player.on('timeupdate',function(d){var ms=Math.round(d.seconds*1000);post('pos:'+ms);if(endMs>0&&ms>=endMs){player.pause();post('ended')}});
-player.on('ended',function(){post('ended')});
+if(window.Vimeo){
+  var player=new Vimeo.Player(document.getElementById('f'));
+  player.on('timeupdate',function(d){ready=true;var ms=Math.round(d.seconds*1000);post('pos:'+ms);if(endMs>0&&ms>=endMs){player.pause();post('ended')}});
+  player.on('loaded',function(){ready=true;post('ok')});
+  player.on('ended',function(){post('ended')});
+  player.on('error',function(e){post('err:'+((e&&e.name)||'vimeo'))});
+} else { post('err:noapi'); }
+setTimeout(function(){if(!ready){post('err:noapi')}},8000);
 </script></body></html>''';
+}
+
+/// Waaróm een online video niet speelt. Elke waarde krijgt een eigen icoon en
+/// tekst, zodat de gebruiker niet naar een zwart vlak hoeft te raden.
+enum VideoEmbedError {
+  /// De eigenaar staat insluiten van deze video niet toe (YouTube 101/150).
+  /// Verreweg de meest voorkomende oorzaak van "hij laadt niet".
+  embeddingDisabled,
+
+  /// De video bestaat niet meer, is privé of op deze URL niet te vinden
+  /// (YouTube 100, Vimeo not found).
+  unavailable,
+
+  /// De video-URL zelf deugt niet (YouTube 2/5).
+  invalid,
+
+  /// Geen verbinding met de videobron: netwerkfout, DNS, of de speler-API die
+  /// niet laadt.
+  network,
+}
+
+/// Vertaalt een `err:<code>` uit de embed-HTML naar een [VideoEmbedError].
+///
+/// De YouTube IFrame-API-codes: 2 = ongeldige parameter, 5 = HTML5-fout,
+/// 100 = niet gevonden/privé, 101 & 150 = insluiten door de eigenaar uitgezet.
+/// Vimeo meldt een foutnaam; `noapi` is onze eigen code voor "speler-API laadde
+/// niet". Onbekende codes vallen naar [VideoEmbedError.network], de meest
+/// neutrale reden ("er ging iets mis met de bron").
+VideoEmbedError videoEmbedErrorFromCode(String code) {
+  switch (code) {
+    case '101':
+    case '150':
+      return VideoEmbedError.embeddingDisabled;
+    case '100':
+    case 'PrivacyError':
+    case 'PasswordError':
+    case 'NotFoundError':
+      return VideoEmbedError.unavailable;
+    case '2':
+    case '5':
+      return VideoEmbedError.invalid;
+    case 'noapi':
+    default:
+      return VideoEmbedError.network;
+  }
+}
+
+/// Icoon, titel en detailregel per foutsoort. Publiek zodat een test kan
+/// bewaken dat elke oorzaak een eigen, herkenbare reden krijgt.
+({IconData icon, String title, String detail}) videoEmbedErrorContent(
+  AppLocalizations l10n,
+  VideoEmbedError error,
+) {
+  return switch (error) {
+    VideoEmbedError.embeddingDisabled => (
+      icon: Icons.lock_outline,
+      title: l10n.d('De eigenaar staat insluiten niet toe'),
+      detail: l10n.d('Deze video is alleen op de bron zelf te bekijken.'),
+    ),
+    VideoEmbedError.unavailable => (
+      icon: Icons.videocam_off_outlined,
+      title: l10n.d('Video niet gevonden'),
+      detail: l10n.d('De video is verwijderd, privé of de link klopt niet.'),
+    ),
+    VideoEmbedError.invalid => (
+      icon: Icons.link_off_outlined,
+      title: l10n.d('Ongeldige video-link'),
+      detail: l10n.d('Controleer de URL van de video op deze slide.'),
+    ),
+    VideoEmbedError.network => (
+      icon: Icons.wifi_off_outlined,
+      title: l10n.d('Geen verbinding met de videobron'),
+      detail: l10n.d('Controleer de internetverbinding en probeer opnieuw.'),
+    ),
+  };
+}
+
+/// Het zichtbare "waarom speelt dit niet"-vlak. Vervangt het dode zwart-of-grijs
+/// dat elke faalmodus vroeger op één hoop gooide.
+Widget _videoEmbedErrorPlaceholder(
+  BuildContext context,
+  VideoEmbedError error,
+  String url,
+) {
+  final content = videoEmbedErrorContent(context.l10n, error);
+  return Container(
+    color: AppTheme.slate200,
+    padding: const EdgeInsets.all(16),
+    child: Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(content.icon, color: AppTheme.slate400, size: 32),
+          const SizedBox(height: 8),
+          Text(
+            content.title,
+            style: TextStyle(
+              color: AppTheme.slate600,
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 4),
+          Text(
+            content.detail,
+            style: TextStyle(color: AppTheme.slate500, fontSize: 11),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 4),
+          Text(
+            url,
+            style: TextStyle(color: AppTheme.slate400, fontSize: 10),
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+/// Een discrete laadhint over de nog-lege speler: een online video kost even,
+/// en zonder deze hint is die tussentijd niet te onderscheiden van "stuk".
+class _VideoEmbedLoading extends StatelessWidget {
+  const _VideoEmbedLoading();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: SizedBox(
+        width: 22,
+        height: 22,
+        child: CircularProgressIndicator(
+          strokeWidth: 2,
+          valueColor: AlwaysStoppedAnimation(Colors.white70),
+        ),
+      ),
+    );
+  }
 }

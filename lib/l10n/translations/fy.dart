@@ -741,6 +741,18 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'De eigenaar staat insluiten niet toe': 'De eigner stiet ynsluten net ta',
+  'Deze video is alleen op de bron zelf te bekijken.':
+      'Dizze fideo is allinnich op de boarne sels te besjen.',
+  'Video niet gevonden': 'Fideo net fûn',
+  'De video is verwijderd, privé of de link klopt niet.':
+      'De fideo is fuortsmiten, is privee of de link kloppet net.',
+  'Ongeldige video-link': 'Unjildige fideolink',
+  'Controleer de URL van de video op deze slide.':
+      'Kontrolearje de URL fan de fideo op dizze dia.',
+  'Geen verbinding met de videobron': 'Gjin ferbining mei de fideoboarne',
+  'Controleer de internetverbinding en probeer opnieuw.':
+      'Kontrolearje de ynternetferbining en besykje it nochris.',
   'Privacy blokkeert export': 'Privacy blokkearret eksport',
   'privacybevinding(en) zonder keuze': 'privacybefining(en) sûnder kar',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':

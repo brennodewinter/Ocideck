@@ -1787,6 +1787,18 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'De eigenaar staat insluiten niet toe': 'De Bsitzer erlaubt s Iibette nöd',
+  'Deze video is alleen op de bron zelf te bekijken.':
+      'Das Video cha me nume uf de Quelle sälber aaluege.',
+  'Video niet gevonden': 'Video nöd gfunde',
+  'De video is verwijderd, privé of de link klopt niet.':
+      'S Video isch entfernt, isch privat oder de Link stimmt nöd.',
+  'Ongeldige video-link': 'Ungültige Video-Link',
+  'Controleer de URL van de video op deze slide.':
+      'Lueg d URL vom Video uf dere Slide aa.',
+  'Geen verbinding met de videobron': 'Kei Verbindig zur Videoquelle',
+  'Controleer de internetverbinding en probeer opnieuw.':
+      'Lueg d Internetverbindig aa und probier\'s nomol.',
   'Privacy blokkeert export': 'Dr Dateschutz blockiert dr Export',
   'privacybevinding(en) zonder keuze': 'Dateschutzbefund(e) ohni Entscheidig',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':

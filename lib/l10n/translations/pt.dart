@@ -1813,6 +1813,19 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'De eigenaar staat insluiten niet toe':
+      'O proprietário não permite a incorporação',
+  'Deze video is alleen op de bron zelf te bekijken.':
+      'Este vídeo só pode ser visto na própria fonte.',
+  'Video niet gevonden': 'Vídeo não encontrado',
+  'De video is verwijderd, privé of de link klopt niet.':
+      'O vídeo foi removido, é privado ou o link está errado.',
+  'Ongeldige video-link': 'Link de vídeo inválido',
+  'Controleer de URL van de video op deze slide.':
+      'Verifique o URL do vídeo neste slide.',
+  'Geen verbinding met de videobron': 'Sem ligação à fonte do vídeo',
+  'Controleer de internetverbinding en probeer opnieuw.':
+      'Verifique a ligação à internet e tente novamente.',
   'Privacy blokkeert export': 'A privacidade bloqueia a exportação',
   'privacybevinding(en) zonder keuze':
       'deteção(ões) de privacidade sem escolha feita',

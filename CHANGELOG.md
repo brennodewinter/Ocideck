@@ -8,6 +8,19 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Fixed
+- **An embedded video that will not play now says why.** Every failure mode of a
+  YouTube/Vimeo embed used to collapse into the same dead rectangle — a blank
+  grey box indistinguishable from "still loading", and from "online media is
+  off". There was no error handling at all: no `onWebResourceError`, no
+  `onHttpError`, no reaction to the player's own error events. So "the video does
+  not load and I cannot see why" was exactly right — there was nothing to see.
+  Now the slide shows the reason: **the owner disabled embedding** (by far the
+  most common; the clip can only be watched on the platform itself), the video is
+  **gone or private**, the **link is invalid**, or there is **no connection to
+  the source** — each with its own icon and text. A valid embed that is merely
+  slow shows a spinner, so loading no longer looks like failure. (The separate
+  macOS bug where embeds never started at all was fixed in #251; this is the
+  feedback that was missing on top of it.)
 - **The privacy check is now visible everywhere the quality of the deck is
   shown.** The scanner was running, and its findings did land in the quality
   panel — but three places that rebuild the "quality" view by hand quietly left

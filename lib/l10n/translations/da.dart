@@ -1782,6 +1782,18 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'De eigenaar staat insluiten niet toe': 'Ejeren tillader ikke indlejring',
+  'Deze video is alleen op de bron zelf te bekijken.':
+      'Denne video kan kun ses på selve kilden.',
+  'Video niet gevonden': 'Video ikke fundet',
+  'De video is verwijderd, privé of de link klopt niet.':
+      'Videoen er fjernet, er privat, eller linket er forkert.',
+  'Ongeldige video-link': 'Ugyldigt videolink',
+  'Controleer de URL van de video op deze slide.':
+      'Tjek videoens URL på denne slide.',
+  'Geen verbinding met de videobron': 'Ingen forbindelse til videokilden',
+  'Controleer de internetverbinding en probeer opnieuw.':
+      'Tjek internetforbindelsen og prøv igen.',
   'Privacy blokkeert export': 'Privatlivet blokerer eksporten',
   'privacybevinding(en) zonder keuze': 'privatlivsfund uden truffet valg',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':

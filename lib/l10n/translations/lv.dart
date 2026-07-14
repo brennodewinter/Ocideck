@@ -1782,6 +1782,18 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'De eigenaar staat insluiten niet toe': 'Īpašnieks neatļauj iegulšanu',
+  'Deze video is alleen op de bron zelf te bekijken.':
+      'Šo video var skatīties tikai pašā avotā.',
+  'Video niet gevonden': 'Video nav atrasts',
+  'De video is verwijderd, privé of de link klopt niet.':
+      'Video ir noņemts, ir privāts vai saite ir nepareiza.',
+  'Ongeldige video-link': 'Nederīga video saite',
+  'Controleer de URL van de video op deze slide.':
+      'Pārbaudiet video URL šajā slaidā.',
+  'Geen verbinding met de videobron': 'Nav savienojuma ar video avotu',
+  'Controleer de internetverbinding en probeer opnieuw.':
+      'Pārbaudiet interneta savienojumu un mēģiniet vēlreiz.',
   'Privacy blokkeert export': 'Privātums bloķē eksportu',
   'privacybevinding(en) zonder keuze': 'privātuma atradum(i) bez izvēles',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':

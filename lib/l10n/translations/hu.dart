@@ -1787,6 +1787,19 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'De eigenaar staat insluiten niet toe':
+      'A tulajdonos nem engedélyezi a beágyazást',
+  'Deze video is alleen op de bron zelf te bekijken.':
+      'Ez a videó csak magán a forráson tekinthető meg.',
+  'Video niet gevonden': 'A videó nem található',
+  'De video is verwijderd, privé of de link klopt niet.':
+      'A videót eltávolították, privát, vagy a hivatkozás hibás.',
+  'Ongeldige video-link': 'Érvénytelen videó-hivatkozás',
+  'Controleer de URL van de video op deze slide.':
+      'Ellenőrizd a videó URL-jét ezen a dián.',
+  'Geen verbinding met de videobron': 'Nincs kapcsolat a videó forrásával',
+  'Controleer de internetverbinding en probeer opnieuw.':
+      'Ellenőrizd az internetkapcsolatot, és próbáld újra.',
   'Privacy blokkeert export': 'Az adatvédelem blokkolja az exportot',
   'privacybevinding(en) zonder keuze': 'adatvédelmi megállapítás döntés nélkül',
   'Persoonsgegevens, bijzondere gegevens en geheimen in de tekst':
