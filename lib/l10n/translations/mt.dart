@@ -1806,6 +1806,12 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Deze regel nooit meer melden': 'Qatt aktar tirrapporta din ir-regola',
+  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
+      'Regoli mitfija. Dawn ma jiġux irrapportati u lanqas irrediġuti. Mess biex terġa\' tixgħelhom.',
+  'politieke opvatting': 'opinjoni politika',
+  'etnische afkomst': 'oriġini etnika',
+  'seksuele geaardheid': 'orjentazzjoni sesswali',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' F\'din is-slide hemm ukoll dettall li jidentifika, allura dan jista\' jintrabat ma\' persuna.',
   'Bijzonder persoonsgegeven (AVG art. 9/10)':

@@ -1819,6 +1819,12 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Deze regel nooit meer melden': 'Ná tuairiscigh an riail seo arís',
+  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
+      'Rialacha díchumasaithe. Ní thuairiscítear iad agus ní fholaítear iad. Tapáil chun iad a chur ar siúl arís.',
+  'politieke opvatting': 'tuairim pholaitiúil',
+  'etnische afkomst': 'bunús eitneach',
+  'seksuele geaardheid': 'claonadh gnéasach',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Tá sonra aitheantais ar an sleamhnán seo freisin, mar sin tá sé inrianaithe chuig duine.',
   'Bijzonder persoonsgegeven (AVG art. 9/10)':

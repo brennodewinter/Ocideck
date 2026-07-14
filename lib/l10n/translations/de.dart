@@ -740,6 +740,12 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Deze regel nooit meer melden': 'Diese Regel nie mehr melden',
+  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
+      'Deaktivierte Regeln. Sie werden weder gemeldet noch geschwärzt. Zum Wiedereinschalten antippen.',
+  'politieke opvatting': 'politische Meinung',
+  'etnische afkomst': 'ethnische Herkunft',
+  'seksuele geaardheid': 'sexuelle Orientierung',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Auf dieser Folie steht auch ein identifizierendes Datum, dies ist also einer Person zuzuordnen.',
   'Bijzonder persoonsgegeven (AVG art. 9/10)':

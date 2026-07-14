@@ -1799,6 +1799,12 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Deze regel nooit meer melden': 'Hanc regulam numquam iterum nuntiare',
+  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
+      'Regulae exstinctae. Neque nuntiantur neque obliterantur. Tange ut rursus accendas.',
+  'politieke opvatting': 'opinio politica',
+  'etnische afkomst': 'origo ethnica',
+  'seksuele geaardheid': 'propensio sexualis',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' In hac pagina etiam datum identificans est, itaque hoc ad personam referri potest.',
   'Bijzonder persoonsgegeven (AVG art. 9/10)':

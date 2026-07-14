@@ -1758,6 +1758,12 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Deze regel nooit meer melden': 'chutvam yIja\'Qo\' not',
+  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
+      'chutmey chu\'Ha\'lu\'bogh. luja\'lu\'be\' \'ej So\'lu\'be\'. chu\'qa\'meH yIuS.',
+  'politieke opvatting': 'wo\' qech',
+  'etnische afkomst': 'tuq',
+  'seksuele geaardheid': 'ngagh mIw',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' nagh beQvamDaq nuv ngu\'meH De\' je tu\'lu\', vaj nuv Daq DevlaH.',
   'Bijzonder persoonsgegeven (AVG art. 9/10)': 'nuv De\' pIn (GDPR art. 9/10)',

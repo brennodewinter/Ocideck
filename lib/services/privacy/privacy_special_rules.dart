@@ -143,6 +143,40 @@ const List<SpecialCategoryRule> specialCategoryRules = [
     'lid van de fnv',
     'lid van het cnv',
   ]),
+  // ── Standaard uit (zie defaultDisabledPrivacyRules) ───────────────────────
+  //
+  // Deze drie zijn niet minder belangrijk — het zijn juist de zwaarste
+  // categorieën — maar hun trefwoorden komen in gewone zakelijke taal veel te
+  // vaak voor. Ze staan er wél, en zijn met één vinkje aan te zetten.
+  SpecialCategoryRule('special.politics', [
+    'politieke voorkeur',
+    'politieke overtuiging',
+    'stemde op',
+    'lid van de partij',
+    'political opinion',
+    'politische meinung',
+    'opinion politique',
+    'opinión política',
+  ]),
+  SpecialCategoryRule('special.ethnicity', [
+    'etnische afkomst',
+    'etnische achtergrond',
+    'raciale afkomst',
+    'ethnic origin',
+    'racial origin',
+    'ethnische herkunft',
+    'origine ethnique',
+    'origen étnico',
+  ]),
+  SpecialCategoryRule('special.sexlife', [
+    'seksuele geaardheid',
+    'seksuele voorkeur',
+    'sexual orientation',
+    'sexuelle orientierung',
+    'orientation sexuelle',
+    'orientación sexual',
+  ]),
+
   SpecialCategoryRule('special.biometric', [
     'vingerafdruk',
     'fingerprint',

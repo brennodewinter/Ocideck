@@ -1791,6 +1791,12 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Deze regel nooit meer melden': 'Daugiau nepranešti apie šią taisyklę',
+  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
+      'Išjungtos taisyklės. Apie jas nepranešama ir jos neredaguojamos. Bakstelėk, kad vėl įjungtum.',
+  'politieke opvatting': 'politinės pažiūros',
+  'etnische afkomst': 'etninė kilmė',
+  'seksuele geaardheid': 'seksualinė orientacija',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Šioje skaidrėje yra ir identifikuojantis duomuo, todėl tai galima susieti su asmeniu.',
   'Bijzonder persoonsgegeven (AVG art. 9/10)':

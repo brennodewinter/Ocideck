@@ -86,7 +86,10 @@ class PrivacyProjection {
   ///
   /// Redigeert wat de auteur met `[[…]]` heeft gemarkeerd, plus de gedetecteerde
   /// gegevens op elke slide waarvan de effectieve stand `redact` is.
-  static AudienceDeck forAudience(Deck deck) => _project(deck, external: false);
+  static AudienceDeck forAudience(
+    Deck deck, {
+    Set<String> disabledRules = const {},
+  }) => _project(deck, external: false, disabledRules: disabledRules);
 
   /// De projectie voor verwerking buiten dit apparaat (AI-backends).
   ///
@@ -94,8 +97,10 @@ class PrivacyProjection {
   /// een zaal de namen mag zien, is geen toestemming om ze naar een extern model
   /// te sturen. Alles wat de scanner vindt gaat eruit, ook op een slide die op
   /// `accept` staat.
-  static AudienceDeck forExternalProcessing(Deck deck) =>
-      _project(deck, external: true);
+  static AudienceDeck forExternalProcessing(
+    Deck deck, {
+    Set<String> disabledRules = const {},
+  }) => _project(deck, external: true, disabledRules: disabledRules);
 
   /// De projectie scant **zelf**, en doet dat altijd.
   ///
@@ -110,8 +115,15 @@ class PrivacyProjection {
   ///    `privacy: redact` moet blijven redigeren, ook bij een gebruiker die de
   ///    meldingen niet wil zien — anders zet iemand de meldingen uit en lekt zijn
   ///    briefing stilletjes.
-  static AudienceDeck _project(Deck deck, {required bool external}) {
-    final scan = const PrivacyScanner().scan(deck);
+  static AudienceDeck _project(
+    Deck deck, {
+    required bool external,
+    Set<String> disabledRules = const {},
+  }) {
+    // De uitgezette regels tellen hier wél mee (anders dan de hoofdschakelaar):
+    // wie een regel uitzet omdat die het mis heeft over zijn inhoud, wil die
+    // inhoud niet zwart in zijn export terugzien. Zie PrivacyScanner.
+    final scan = PrivacyScanner(disabledRules: disabledRules).scan(deck);
 
     var count = 0;
     final shielded = <int>{};

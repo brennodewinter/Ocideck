@@ -1,3 +1,4 @@
+import 'privacy_finding.dart';
 import 'ai_settings.dart';
 import 'chart.dart' show normalizeChartColor;
 import 'checklist_template.dart';
@@ -712,6 +713,18 @@ class AppSettings {
   /// verbergt de meldingen niet alleen.
   final bool privacyChecksEnabled;
 
+  /// Detectieregels die de gebruiker heeft uitgezet.
+  ///
+  /// De ontsnappingsklep: wie één regel te luid vindt, kan chirurgisch ingrijpen
+  /// in plaats van de hele controle uit te zetten. Zonder die klep is "alles uit"
+  /// de enige uitweg, en dan detecteert er niets meer.
+  ///
+  /// Standaard staan hier de drie zwaarste art. 9-categorieën in
+  /// ([defaultDisabledPrivacyRules]) — niet omdat ze onbelangrijk zijn, maar omdat
+  /// hun trefwoorden op gewone zakelijke slides te vaak voorkomen. Wie in die hoek
+  /// werkt, zet ze met één vinkje aan.
+  final Set<String> privacyDisabledRules;
+
   /// Scale factor for all interface text (1.0–2.0), on top of the system
   /// text scaling. The slide canvas itself is never scaled: slides are a
   /// fixed 16:9 design surface. WCAG 1.4.4 asks for text resizing up to 200%.
@@ -778,6 +791,7 @@ class AppSettings {
     this.requireClassificationOnExport = false,
     this.classificationWatermarkEnabled = false,
     this.privacyChecksEnabled = true,
+    this.privacyDisabledRules = defaultDisabledPrivacyRules,
     this.uiTextScale = 1.0,
     this.docReaderTextScale = 1.0,
     this.qualityWarningsOnExport = true,
@@ -856,6 +870,7 @@ class AppSettings {
     bool? requireClassificationOnExport,
     bool? classificationWatermarkEnabled,
     bool? privacyChecksEnabled,
+    Set<String>? privacyDisabledRules,
     double? uiTextScale,
     double? docReaderTextScale,
     bool? qualityWarningsOnExport,
@@ -915,6 +930,7 @@ class AppSettings {
       classificationWatermarkEnabled:
           classificationWatermarkEnabled ?? this.classificationWatermarkEnabled,
       privacyChecksEnabled: privacyChecksEnabled ?? this.privacyChecksEnabled,
+      privacyDisabledRules: privacyDisabledRules ?? this.privacyDisabledRules,
       uiTextScale: uiTextScale ?? this.uiTextScale,
       docReaderTextScale: docReaderTextScale ?? this.docReaderTextScale,
       qualityWarningsOnExport:

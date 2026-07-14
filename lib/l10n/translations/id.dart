@@ -1783,6 +1783,12 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Deze regel nooit meer melden': 'Jangan laporkan aturan ini lagi',
+  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
+      'Aturan yang dimatikan. Ini tidak dilaporkan dan tidak diredaksi. Ketuk untuk mengaktifkan lagi.',
+  'politieke opvatting': 'pandangan politik',
+  'etnische afkomst': 'asal etnis',
+  'seksuele geaardheid': 'orientasi seksual',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Slide ini juga memuat data pengenal, jadi hal ini dapat ditelusuri ke seseorang.',
   'Bijzonder persoonsgegeven (AVG art. 9/10)':

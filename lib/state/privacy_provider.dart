@@ -9,9 +9,13 @@ import '../services/privacy/privacy_scanner.dart';
 import 'deck_provider.dart';
 import 'settings_provider.dart';
 
-/// De scanner zelf: stateloos, het deck komt bij de aanroep binnen.
+/// De scanner, geconfigureerd met de regels die de gebruiker heeft uitgezet.
 final privacyScannerProvider = Provider<PrivacyScanner>(
-  (_) => const PrivacyScanner(),
+  (ref) => PrivacyScanner(
+    disabledRules: ref.watch(
+      settingsProvider.select((s) => s.privacyDisabledRules),
+    ),
+  ),
 );
 
 /// De privacyscan van het huidige deck.

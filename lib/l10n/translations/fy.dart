@@ -741,6 +741,12 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Deze regel nooit meer melden': 'Dizze regel noait mear melde',
+  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
+      'Utsette regels. Dizze wurde net meld en net redigearre. Tik om wer oan te setten.',
+  'politieke opvatting': 'politike opfetting',
+  'etnische afkomst': 'etnyske komôf',
+  'seksuele geaardheid': 'seksuele oanstriid',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Op dizze dia stiet ek in identifisearjend gegeven, dus dit is werom te lieden ta in persoan.',
   'Bijzonder persoonsgegeven (AVG art. 9/10)':

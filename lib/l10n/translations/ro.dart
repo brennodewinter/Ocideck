@@ -1802,6 +1802,12 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Deze regel nooit meer melden': 'Nu mai raporta niciodată această regulă',
+  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
+      'Reguli dezactivate. Nu sunt raportate și nici redactate. Atinge pentru a le reactiva.',
+  'politieke opvatting': 'opinie politică',
+  'etnische afkomst': 'origine etnică',
+  'seksuele geaardheid': 'orientare sexuală',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Pe acest diapozitiv există și o dată identificatoare, deci aceasta este atribuibilă unei persoane.',
   'Bijzonder persoonsgegeven (AVG art. 9/10)':

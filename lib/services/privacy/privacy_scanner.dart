@@ -56,22 +56,37 @@ final _reNineDigits = RegExp(r'(?<!\d)\d{9}(?!\d)');
 
 /// Leest een deck na op privacygevoelige gegevens.
 class PrivacyScanner {
-  const PrivacyScanner();
+  /// Regels die de gebruiker heeft uitgezet.
+  ///
+  /// Een uitgezette regel vuurt niet, nergens — óók niet bij redactie. Dat is een
+  /// ander soort keuze dan de hoofdschakelaar, en het onderscheid is belangrijk:
+  ///
+  ///   * de hoofdschakelaar zegt "val me niet lastig". Dat is geen oordeel over de
+  ///     inhoud, dus een deck met `privacy: redact` blijft gewoon redigeren;
+  ///   * een uitgezette regel zegt "deze regel heeft het mís over mijn inhoud".
+  ///     Dat ís een oordeel over de inhoud, en het honoreren ervan betekent dat we
+  ///     hem ook niet mogen wegredigeren. Iemand die `nl.bsn` uitzet omdat zijn
+  ///     ordernummers erop afgaan, wil die ordernummers niet zwart in zijn export.
+  final Set<String> disabledRules;
+
+  const PrivacyScanner({this.disabledRules = const {}});
 
   /// Scant het hele deck. Deckbrede velden (titel, auteur, trefwoorden) krijgen
   /// [kDeckWidePrivacyIndex].
   PrivacyScanResult scan(Deck deck) {
     final findings = <PrivacyFinding>[];
 
+    final deckFindings = <PrivacyFinding>[];
     for (final fragment in _deckFragments(deck)) {
-      _scanFragment(fragment, kDeckWidePrivacyIndex, findings);
+      _scanFragment(fragment, kDeckWidePrivacyIndex, deckFindings);
     }
+    findings.addAll(_enabled(deckFindings));
     for (var i = 0; i < deck.slides.length; i++) {
       final slideFindings = <PrivacyFinding>[];
       for (final fragment in _slideFragments(deck.slides[i])) {
         _scanFragment(fragment, i, slideFindings);
       }
-      findings.addAll(_escalateSpecialCategories(slideFindings));
+      findings.addAll(_escalateSpecialCategories(_enabled(slideFindings)));
     }
     return PrivacyScanResult(findings);
   }
@@ -82,7 +97,17 @@ class PrivacyScanner {
     for (final fragment in _slideFragments(slide)) {
       _scanFragment(fragment, index, findings);
     }
-    return PrivacyScanResult(_escalateSpecialCategories(findings));
+    return PrivacyScanResult(_escalateSpecialCategories(_enabled(findings)));
+  }
+
+  /// Uitgezette regels eruit — vóór de escalatie, zodat een uitgezette
+  /// identificator ook geen bijzonder gegeven meer omhoog trekt.
+  List<PrivacyFinding> _enabled(List<PrivacyFinding> findings) {
+    if (disabledRules.isEmpty) return findings;
+    return [
+      for (final f in findings)
+        if (!disabledRules.contains(f.ruleId)) f,
+    ];
   }
 
   /// De co-occurrence-escalator (PRIVACY_SHIELD §5.6).

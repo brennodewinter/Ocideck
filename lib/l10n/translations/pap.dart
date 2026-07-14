@@ -740,6 +740,12 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Deze regel nooit meer melden': 'No reportá e regla aki nunka mas',
+  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
+      'Reglanan apagá. Nan no ta wòrdu reportá ni redaktá. Toka pa prendé nan atrobe.',
+  'politieke opvatting': 'opinion polítiko',
+  'etnische afkomst': 'orígen étniko',
+  'seksuele geaardheid': 'orientashon seksual',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Riba e slide aki tin tambe un dato identifikatorio, pues esaki ta trasabel na un persona.',
   'Bijzonder persoonsgegeven (AVG art. 9/10)':

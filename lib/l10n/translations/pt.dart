@@ -1813,6 +1813,12 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Deze regel nooit meer melden': 'Nunca mais comunicar esta regra',
+  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
+      'Regras desativadas. Não são comunicadas nem ocultadas. Toca para voltar a ativar.',
+  'politieke opvatting': 'opinião política',
+  'etnische afkomst': 'origem étnica',
+  'seksuele geaardheid': 'orientação sexual',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Este diapositivo contém também um dado identificativo, pelo que isto é atribuível a uma pessoa.',
   'Bijzonder persoonsgegeven (AVG art. 9/10)':

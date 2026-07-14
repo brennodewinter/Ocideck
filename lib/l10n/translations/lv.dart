@@ -1782,6 +1782,12 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Deze regel nooit meer melden': 'Vairs neziņot par šo noteikumu',
+  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
+      'Izslēgtie noteikumi. Par tiem neziņo un tos neaizklāj. Pieskaries, lai atkal ieslēgtu.',
+  'politieke opvatting': 'politiskie uzskati',
+  'etnische afkomst': 'etniskā izcelsme',
+  'seksuele geaardheid': 'seksuālā orientācija',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Šajā slaidā ir arī identificējošs dats, tāpēc to var attiecināt uz personu.',
   'Bijzonder persoonsgegeven (AVG art. 9/10)':

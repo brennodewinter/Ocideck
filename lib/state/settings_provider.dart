@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/deck.dart' show TlpLevel;
+import '../models/privacy_finding.dart';
 import '../models/settings.dart';
 import '../services/secret_store.dart';
 import '../utils/log.dart';
@@ -139,6 +140,11 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       // Standaard AAN: een privacycontrole die je eerst moet aanzetten, helpt
       // precies de mensen niet die niet weten dat ze hem nodig hebben.
       privacyChecksEnabled: prefs.getBool('privacyChecksEnabled') ?? true,
+      // Nooit eerder opgeslagen → de standaard-uitgezette regels. Een lege lijst
+      // die de gebruiker zelf heeft gemaakt, blijft leeg: dat is een keuze.
+      privacyDisabledRules:
+          prefs.getStringList('privacyDisabledRules')?.toSet() ??
+          defaultDisabledPrivacyRules,
       uiTextScale: (prefs.getDouble('uiTextScale') ?? 1.0).clamp(1.0, 2.0),
       docReaderTextScale: (prefs.getDouble('docReaderTextScale') ?? 1.0).clamp(
         0.8,
@@ -306,6 +312,26 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     await _persist(
       'setPrivacyChecksEnabled',
       (prefs) => prefs.setBool('privacyChecksEnabled', enabled),
+    );
+  }
+
+  /// Zet één detectieregel aan of uit.
+  ///
+  /// De ontsnappingsklep uit de melding zelf ("deze regel nooit meer melden").
+  /// Chirurgisch ingrijpen op één regel is oneindig veel beter dan de hele
+  /// controle uitzetten, want dat laatste is onomkeerbaar in de praktijk: wie hem
+  /// eenmaal uit heeft, zet hem niet meer aan.
+  Future<void> setPrivacyRuleEnabled(String ruleId, bool enabled) async {
+    final next = {...state.privacyDisabledRules};
+    if (enabled) {
+      next.remove(ruleId);
+    } else {
+      next.add(ruleId);
+    }
+    state = state.copyWith(privacyDisabledRules: next);
+    await _persist(
+      'setPrivacyRuleEnabled',
+      (prefs) => prefs.setStringList('privacyDisabledRules', next.toList()),
     );
   }
 

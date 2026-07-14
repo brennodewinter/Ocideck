@@ -1774,6 +1774,12 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Deze regel nooit meer melden': 'Ära enam sellest reeglist teata',
+  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
+      'Väljalülitatud reeglid. Neist ei teatata ega redigeerita. Puuduta uuesti sisselülitamiseks.',
+  'politieke opvatting': 'poliitiline veendumus',
+  'etnische afkomst': 'etniline päritolu',
+  'seksuele geaardheid': 'seksuaalne sättumus',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Sellel slaidil on ka tuvastav andmeühik, seega on see seostatav isikuga.',
   'Bijzonder persoonsgegeven (AVG art. 9/10)':

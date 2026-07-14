@@ -1811,6 +1811,12 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Deze regel nooit meer melden': 'Να μην αναφέρεται ξανά αυτός ο κανόνας',
+  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
+      'Απενεργοποιημένοι κανόνες. Δεν αναφέρονται ούτε αποκρύπτονται. Πάτησε για επανενεργοποίηση.',
+  'politieke opvatting': 'πολιτική άποψη',
+  'etnische afkomst': 'εθνοτική καταγωγή',
+  'seksuele geaardheid': 'σεξουαλικός προσανατολισμός',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Σε αυτή τη διαφάνεια υπάρχει και ένα στοιχείο ταυτοποίησης, άρα αυτό ανάγεται σε πρόσωπο.',
   'Bijzonder persoonsgegeven (AVG art. 9/10)':

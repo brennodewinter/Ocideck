@@ -1782,6 +1782,12 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Deze regel nooit meer melden': 'Rapportera aldrig den här regeln igen',
+  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
+      'Avstängda regler. De rapporteras inte och maskas inte. Tryck för att slå på igen.',
+  'politieke opvatting': 'politisk åsikt',
+  'etnische afkomst': 'etniskt ursprung',
+  'seksuele geaardheid': 'sexuell läggning',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' På den här bilden finns även en identifierande uppgift, så detta kan kopplas till en person.',
   'Bijzonder persoonsgegeven (AVG art. 9/10)':

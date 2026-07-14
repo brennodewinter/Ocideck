@@ -1786,6 +1786,12 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Deze regel nooit meer melden': 'Toto pravidlo už nikdy nehlásit',
+  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
+      'Vypnutá pravidla. Nehlásí se a nezačerňují se. Klepnutím je znovu zapneš.',
+  'politieke opvatting': 'politický názor',
+  'etnische afkomst': 'etnický původ',
+  'seksuele geaardheid': 'sexuální orientace',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Na tomto snímku je i identifikační údaj, takže to lze přiřadit ke konkrétní osobě.',
   'Bijzonder persoonsgegeven (AVG art. 9/10)':
