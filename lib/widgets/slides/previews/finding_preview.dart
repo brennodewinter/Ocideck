@@ -26,7 +26,11 @@ class _FindingPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pad = w * 0.07;
+    final pad = w * 0.07; // vertical margin
+    // Narrower side margin so MIAUW slides use the width better (feedback):
+    // content becomes ~0.91·w instead of 0.86·w, fewer findings spill to a
+    // second page.
+    final hPad = w * 0.045;
     final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
     final spec = FindingSpec.parse(slide.customMarkdown);
     // The context (environmental) score when the scope object is rated; the
@@ -47,9 +51,9 @@ class _FindingPreview extends StatelessWidget {
             width: w,
             child: Padding(
               padding: EdgeInsets.fromLTRB(
-                pad,
+                hPad,
                 pad + safe.top,
-                pad,
+                hPad,
                 _logoAwareBottomPadding(pad, safe.bottom),
               ),
               child: Column(
