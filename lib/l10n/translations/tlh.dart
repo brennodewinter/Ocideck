@@ -1758,6 +1758,13 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'gebruikerspad met een naam erin': 'lo\'wI\' He pong ngaSbogh',
+  'toegangstoken in een link': 'rar token',
+  'persoonsgegeven in een link': 'rar nuv De\'',
+  'deellink met ingebakken toegang': 'boSwI\' rar \'ej nuqDaq',
+  'e-mailadres in een link': 'rar jabbI\'ID Daq',
+  'ingesloten afbeelding — wij kunnen er niet in kijken':
+      'nagh mIllogh — qoDDaq wIleghlaHbe\'',
   'Je eigen gegevens': 'De\'lIj\'e\'',
   'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
       'wa\' Hoch tlhoy\'Daq: ponglIj, jabbI\'ID DaqlIj, jIH mI\'lIj, pagh ghom DaqlIj. naDev tu\'lu\'bogh luja\'lu\'be\' \'ej So\'lu\'be\' — ngeHwI\' \'oH, tu\'lu\'bogh \'oHbe\'. wa\' Daq (politie.nl) bIng Hoch Daq DevlaH.',

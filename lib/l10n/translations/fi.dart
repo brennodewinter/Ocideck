@@ -1783,6 +1783,14 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'gebruikerspad met een naam erin': 'käyttäjäpolku, jossa on nimi',
+  'toegangstoken in een link': 'käyttöoikeuspoletti linkissä',
+  'persoonsgegeven in een link': 'henkilötieto linkissä',
+  'deellink met ingebakken toegang':
+      'jakolinkki, jossa on sisäänrakennettu käyttöoikeus',
+  'e-mailadres in een link': 'sähköpostiosoite linkissä',
+  'ingesloten afbeelding — wij kunnen er niet in kijken':
+      'upotettu kuva — emme näe sen sisään',
   'Je eigen gegevens': 'Omat tietosi',
   'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
       'Yksi riviä kohti: nimesi, sähköpostiosoitteesi, puhelinnumerosi tai organisaatiosi verkkotunnus. Tässä olevaa ei ilmoiteta eikä peitetä — se on lähettäjä, ei havainto. Verkkotunnus (politie.nl) kattaa kaikki sen alla olevat osoitteet.',

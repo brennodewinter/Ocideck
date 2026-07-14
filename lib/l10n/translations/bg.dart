@@ -1806,6 +1806,13 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'gebruikerspad met een naam erin': 'потребителски път с име в него',
+  'toegangstoken in een link': 'токен за достъп в връзка',
+  'persoonsgegeven in een link': 'лични данни във връзка',
+  'deellink met ingebakken toegang': 'връзка за споделяне с вграден достъп',
+  'e-mailadres in een link': 'имейл адрес във връзка',
+  'ingesloten afbeelding — wij kunnen er niet in kijken':
+      'вградено изображение — не можем да погледнем вътре',
   'Je eigen gegevens': 'Вашите собствени данни',
   'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
       'По едно на ред: вашето име, имейл, телефон или домейнът на организацията ви. Каквото е тук, не се съобщава и не се заличава — това е подателят, а не констатация. Домейн (politie.nl) покрива всеки адрес под него.',

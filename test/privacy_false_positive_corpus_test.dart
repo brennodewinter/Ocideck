@@ -69,6 +69,12 @@ void main() {
       'Denk aan een diagnose, een strafblad of vakbondslidmaatschap',
       'Biometrische gegevens vragen een DPIA',
       'Een veroordeling valt onder artikel 10',
+      // Structureel aas: paden en links die niemand aanwijzen.
+      'De build draait in /home/runner/work/repo',
+      'Zie C:\\Users\\Public\\Documents voor het sjabloon',
+      'Documentatie: https://ocideck.nl/docs?page=2&sort=date',
+      'Bekijk https://drive.google.com voor cloudopslag',
+      'Campagne via https://example.com/?utm_source=nieuwsbrief',
     ];
 
     final result = scanLines(corpus);

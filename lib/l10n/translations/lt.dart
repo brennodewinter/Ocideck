@@ -1791,6 +1791,13 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'gebruikerspad met een naam erin': 'naudotojo kelias su vardu',
+  'toegangstoken in een link': 'prieigos raktas nuorodoje',
+  'persoonsgegeven in een link': 'asmens duomenys nuorodoje',
+  'deellink met ingebakken toegang': 'bendrinimo nuoroda su integruota prieiga',
+  'e-mailadres in een link': 'el. pašto adresas nuorodoje',
+  'ingesloten afbeelding — wij kunnen er niet in kijken':
+      'įterptas vaizdas — negalime į jį pažvelgti',
   'Je eigen gegevens': 'Tavo paties duomenys',
   'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
       'Po vieną eilutėje: tavo vardas, el. pašto adresas, telefono numeris ar organizacijos domenas. Tai, kas čia įrašyta, nepranešama ir neredaguojama — tai siuntėjas, o ne radinys. Domenas (politie.nl) apima visus po juo esančius adresus.',

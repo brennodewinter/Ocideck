@@ -1787,6 +1787,13 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'gebruikerspad met een naam erin': 'Benutzerpfad mit eme Name drin',
+  'toegangstoken in een link': 'Zuegangstoken imene Link',
+  'persoonsgegeven in een link': 'Persoonedatum imene Link',
+  'deellink met ingebakken toegang': 'Freigabelink mit iibautem Zuegriff',
+  'e-mailadres in een link': 'E-Mail-Adrässe imene Link',
+  'ingesloten afbeelding — wij kunnen er niet in kijken':
+      'iibettets Bild — mir chönd nöd inegluege',
   'Je eigen gegevens': 'Dini eigene Date',
   'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
       'Eis pro Ziile: din Name, dini E-Mail-Adrässe, dini Telefonnummere oder d Domain vo dinere Organisation. Was da staht, wird weder gmäldet no gschwärzt — es isch de Absänder, kei Befund. E Domain (politie.nl) deckt jedi Adrässe drunder ab.',

@@ -736,6 +736,14 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'gebruikerspad met een naam erin': 'percorso utente con un nome',
+  'toegangstoken in een link': 'token di accesso in un link',
+  'persoonsgegeven in een link': 'dato personale in un link',
+  'deellink met ingebakken toegang':
+      'link di condivisione con accesso incorporato',
+  'e-mailadres in een link': 'indirizzo e-mail in un link',
+  'ingesloten afbeelding — wij kunnen er niet in kijken':
+      'immagine incorporata — non possiamo guardarci dentro',
   'Je eigen gegevens': 'I tuoi dati',
   'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
       'Uno per riga: il tuo nome, indirizzo e-mail, numero di telefono o il dominio della tua organizzazione. Ciò che indichi qui non viene segnalato né oscurato: è il mittente, non una rilevazione. Un dominio (politie.nl) copre ogni indirizzo sottostante.',

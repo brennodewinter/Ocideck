@@ -1782,6 +1782,13 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'gebruikerspad met een naam erin': 'lietotāja ceļš ar vārdu',
+  'toegangstoken in een link': 'piekļuves marķieris saitē',
+  'persoonsgegeven in een link': 'personas dati saitē',
+  'deellink met ingebakken toegang': 'koplietošanas saite ar iebūvētu piekļuvi',
+  'e-mailadres in een link': 'e-pasta adrese saitē',
+  'ingesloten afbeelding — wij kunnen er niet in kijken':
+      'iegults attēls — mēs nevaram tajā ieskatīties',
   'Je eigen gegevens': 'Tavi paša dati',
   'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
       'Viens rindā: tavs vārds, e-pasta adrese, tālruņa numurs vai tavas organizācijas domēns. Tas, kas šeit ir, netiek ziņots un netiek aizklāts — tas ir sūtītājs, nevis atradums. Domēns (politie.nl) sedz katru adresi zem tā.',

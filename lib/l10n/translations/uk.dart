@@ -1801,6 +1801,14 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'gebruikerspad met een naam erin': 'шлях користувача з іменем',
+  'toegangstoken in een link': 'токен доступу в посиланні',
+  'persoonsgegeven in een link': 'персональні дані в посиланні',
+  'deellink met ingebakken toegang':
+      'посилання для спільного доступу з вбудованим доступом',
+  'e-mailadres in een link': 'адреса електронної пошти в посиланні',
+  'ingesloten afbeelding — wij kunnen er niet in kijken':
+      'вбудоване зображення — ми не можемо зазирнути всередину',
   'Je eigen gegevens': 'Ваші власні дані',
   'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
       'По одному в рядку: ваше ім\'я, адреса електронної пошти, телефон або домен вашої організації. Те, що тут вказано, не повідомляється і не редагується — це відправник, а не виявлення. Домен (politie.nl) охоплює всі адреси під ним.',

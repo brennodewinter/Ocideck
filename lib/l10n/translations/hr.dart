@@ -1790,6 +1790,14 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'gebruikerspad met een naam erin': 'korisnička staza s imenom',
+  'toegangstoken in een link': 'pristupni token u poveznici',
+  'persoonsgegeven in een link': 'osobni podatak u poveznici',
+  'deellink met ingebakken toegang':
+      'poveznica za dijeljenje s ugrađenim pristupom',
+  'e-mailadres in een link': 'adresa e-pošte u poveznici',
+  'ingesloten afbeelding — wij kunnen er niet in kijken':
+      'ugrađena slika — ne možemo pogledati u nju',
   'Je eigen gegevens': 'Tvoji vlastiti podaci',
   'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
       'Jedan po retku: tvoje ime, e-adresa, broj telefona ili domena tvoje organizacije. Ono što je ovdje nije prijavljeno ni redigirano — to je pošiljatelj, ne nalaz. Domena (politie.nl) pokriva svaku adresu ispod nje.',

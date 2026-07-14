@@ -740,6 +740,14 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'gebruikerspad met een naam erin': 'kaminda di usuario ku un nòmber aden',
+  'toegangstoken in een link': 'token di akseso den un link',
+  'persoonsgegeven in een link': 'dato personal den un link',
+  'deellink met ingebakken toegang':
+      'link di kompartimentu ku akseso inkorporá',
+  'e-mailadres in een link': 'adres di e-mail den un link',
+  'ingesloten afbeelding — wij kunnen er niet in kijken':
+      'imagen inkorporá — nos no por wak paden',
   'Je eigen gegevens': 'Bo mes datos',
   'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
       'Un pa liña: bo nòmber, adres di e-mail, number di telefòn òf e dominio di bo organisashon. Loke ta pará aki no ta wòrdu reportá ni redaktá — ta e remitente, no un hayasgo. Un dominio (politie.nl) ta kubri tur adres bou di dje.',

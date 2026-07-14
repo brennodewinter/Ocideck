@@ -1806,6 +1806,13 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'gebruikerspad met een naam erin': 'path tal-utent b\'isem fih',
+  'toegangstoken in een link': 'token ta\' aċċess f\'link',
+  'persoonsgegeven in een link': 'data personali f\'link',
+  'deellink met ingebakken toegang': 'link ta\' qsim b\'aċċess inkorporat',
+  'e-mailadres in een link': 'indirizz tal-email f\'link',
+  'ingesloten afbeelding — wij kunnen er niet in kijken':
+      'immaġni inkorporata — ma nistgħux inħarsu ġewwa',
   'Je eigen gegevens': 'Id-dettalji tiegħek stess',
   'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
       'Wieħed f\'kull linja: ismek, l-indirizz email, in-numru tat-telefon jew id-dominju tal-organizzazzjoni tiegħek. Dak li hemm hawn ma jiġix irrapportat u lanqas irrediġut — huwa min jibgħat, mhux sejba. Dominju (politie.nl) ikopri kull indirizz taħtu.',

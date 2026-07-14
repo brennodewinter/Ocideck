@@ -1785,6 +1785,14 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'gebruikerspad met een naam erin': 'uporabniška pot z imenom',
+  'toegangstoken in een link': 'žeton za dostop v povezavi',
+  'persoonsgegeven in een link': 'osebni podatek v povezavi',
+  'deellink met ingebakken toegang':
+      'povezava za deljenje z vgrajenim dostopom',
+  'e-mailadres in een link': 'e-poštni naslov v povezavi',
+  'ingesloten afbeelding — wij kunnen er niet in kijken':
+      'vdelana slika — vanjo ne moremo pogledati',
   'Je eigen gegevens': 'Tvoji lastni podatki',
   'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
       'Eno na vrstico: tvoje ime, e-poštni naslov, telefonska številka ali domena tvoje organizacije. Kar je tu, se ne javi in ne prekrije — to je pošiljatelj, ne ugotovitev. Domena (politie.nl) pokriva vsak naslov pod njo.',

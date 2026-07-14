@@ -1782,6 +1782,13 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'gebruikerspad met een naam erin': 'brugersti med et navn i',
+  'toegangstoken in een link': 'adgangstoken i et link',
+  'persoonsgegeven in een link': 'personoplysning i et link',
+  'deellink met ingebakken toegang': 'delingslink med indbygget adgang',
+  'e-mailadres in een link': 'e-mailadresse i et link',
+  'ingesloten afbeelding — wij kunnen er niet in kijken':
+      'indlejret billede — vi kan ikke se ind i det',
   'Je eigen gegevens': 'Dine egne oplysninger',
   'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
       'Ét pr. linje: dit navn, din e-mailadresse, dit telefonnummer eller din organisations domæne. Det, der står her, rapporteres ikke og redigeres ikke bort — det er afsenderen, ikke et fund. Et domæne (politie.nl) dækker enhver adresse under det.',

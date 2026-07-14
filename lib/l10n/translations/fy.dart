@@ -741,6 +741,13 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'gebruikerspad met een naam erin': 'brûkerspaad mei in namme deryn',
+  'toegangstoken in een link': 'tagongstoken yn in keppeling',
+  'persoonsgegeven in een link': 'persoansgegeven yn in keppeling',
+  'deellink met ingebakken toegang': 'dielkeppeling mei ynboude tagong',
+  'e-mailadres in een link': 'e-mailadres yn in keppeling',
+  'ingesloten afbeelding — wij kunnen er niet in kijken':
+      'ynsletten ôfbylding — wy kinne der net yn sjen',
   'Je eigen gegevens': 'Dyn eigen gegevens',
   'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
       'Ien de regel: dyn namme, e-mailadres, telefoannûmer of it domein fan dyn organisaasje. Wat hjir stiet wurdt net meld en net redigearre — it is de ôfstjoerder, gjin befining. In domein (politie.nl) dekt elk adres derûnder.',

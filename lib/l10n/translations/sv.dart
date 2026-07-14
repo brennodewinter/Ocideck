@@ -1782,6 +1782,13 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'gebruikerspad met een naam erin': 'användarsökväg med ett namn i',
+  'toegangstoken in een link': 'åtkomsttoken i en länk',
+  'persoonsgegeven in een link': 'personuppgift i en länk',
+  'deellink met ingebakken toegang': 'delningslänk med inbyggd åtkomst',
+  'e-mailadres in een link': 'e-postadress i en länk',
+  'ingesloten afbeelding — wij kunnen er niet in kijken':
+      'inbäddad bild — vi kan inte titta in i den',
   'Je eigen gegevens': 'Dina egna uppgifter',
   'Eén per regel: je naam, e-mailadres, telefoonnummer of het domein van je organisatie. Wat hier staat wordt niet gemeld en niet geredigeerd — het is de afzender, geen bevinding. Een domein (politie.nl) dekt elk adres eronder.':
       'Ett per rad: ditt namn, din e-postadress, ditt telefonnummer eller din organisations domän. Det som står här rapporteras inte och maskas inte — det är avsändaren, inte ett fynd. En domän (politie.nl) täcker varje adress under den.',

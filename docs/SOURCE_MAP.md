@@ -97,6 +97,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `privacy/privacy_special_rules.dart` — GDPR art. 9/10: multilingual keyword families, genetic notation (dbSNP/HGVS), the Dutch parketnummer, and the co-occurrence escalator's definition of "identifies a person".
 - `privacy/privacy_export_policy.dart` — The export gate: counts findings by disposition and decides whether to warn, block, or stay quiet.
 - `privacy/privacy_own_identity.dart` — `OwnIdentity`: the author's own name/email/domain, which is the sender rather than a finding. Exact and domain matching only — no fuzzy match, which would silently suppress a real finding.
+- `privacy/privacy_structural_rules.dart` — Structural leaks: user paths that reveal a name, tokens and personal data in URL queries, share links with built-in access, mailto links, unscannable data-URIs.
 - `privacy/privacy_scanner.dart` — `PrivacyScanner`: reads a deck for privacy-sensitive data (email, IBAN, BSN), with context gates where the checksum is too weak.
 - `privacy/privacy_quality_bridge.dart` — Maps `PrivacyFinding` onto `SlideQualityIssue` so findings surface in the quality panel.
 - `privacy/privacy_projection.dart` — `AudienceDeck` + `PrivacyProjection`: the single boundary a source deck crosses to reach any receiving surface. Redacts `[[…]]` markers before rendering or export; the private constructor means no export path can hold the unredacted source.

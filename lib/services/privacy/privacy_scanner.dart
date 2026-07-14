@@ -23,6 +23,7 @@ import 'privacy_checksums.dart';
 import 'privacy_eu_rules.dart';
 import 'privacy_own_identity.dart';
 import 'privacy_special_rules.dart';
+import 'privacy_structural_rules.dart';
 import 'privacy_secret_rules.dart';
 
 /// Eén tekstfragment van een slide, met de veldnaam waar het uit komt.
@@ -158,6 +159,56 @@ class PrivacyScanner {
     _scanSecrets(fragment, slideIndex, out);
     _scanEuIdentifiers(fragment, slideIndex, out);
     _scanSpecialCategories(fragment, slideIndex, out);
+    _scanStructural(fragment, slideIndex, out);
+  }
+
+  // ── Structurele lekken ────────────────────────────────────────────────────
+
+  /// Gebruikerspaden, tokens in URL's, deellinks, mailto's, data-URI's.
+  ///
+  /// De familie die generieke PII-scanners missen: dit zijn geen persoonsgegevens
+  /// in de tekst, maar ze lekken er wel. Een gebruikerspad in een
+  /// afbeeldingsverwijzing verraadt gewoon een naam.
+  void _scanStructural(
+    _Fragment fragment,
+    int slideIndex,
+    List<PrivacyFinding> out,
+  ) {
+    for (final rule in structuralRules) {
+      for (final match in rule.pattern.allMatches(fragment.text)) {
+        if (rule.validate != null && !rule.validate!(match)) {
+          continue;
+        }
+        _emit(
+          out,
+          _finding(
+            fragment,
+            slideIndex,
+            match,
+            ruleId: rule.id,
+            family: PrivacyFamily.structural,
+            confidence: rule.confidence,
+          ),
+        );
+      }
+    }
+
+    // Een data-URI kunnen we niet inkijken. Dat is geen bevinding maar een
+    // eerlijke mededeling: dit stuk deck is voor ons onzichtbaar, en de gebruiker
+    // mag niet in de waan blijven dat we alles hebben gezien.
+    for (final match in dataUriPattern.allMatches(fragment.text)) {
+      _emit(
+        out,
+        _finding(
+          fragment,
+          slideIndex,
+          match,
+          ruleId: 'struct.data_uri',
+          family: PrivacyFamily.structural,
+          confidence: PrivacyConfidence.possible,
+        ),
+      );
+    }
   }
 
   // ── Bijzondere persoonsgegevens (AVG art. 9/10) ───────────────────────────
@@ -500,6 +551,18 @@ class PrivacyScanner {
     yield (field: 'quoteAuthor', index: 0, text: slide.quoteAuthor);
     yield (field: 'customMarkdown', index: 0, text: slide.customMarkdown);
     yield (field: 'notes', index: 0, text: slide.notes);
+
+    // De mediapaden. Een `/Users/jan.jansen/…` in een afbeeldingsverwijzing
+    // verraadt gewoon een naam, en dat pad reist mee in de markdown en dus in de
+    // HTML-export.
+    //
+    // Let op: `_projectSlide` in de projectie kent deze velden NIET, en dat is
+    // met opzet. Een geredigeerd pad is een kapotte afbeelding. We melden het,
+    // we redigeren het niet — de auteur hernoemt het bestand of verplaatst het.
+    yield (field: 'imagePath', index: 0, text: slide.imagePath);
+    yield (field: 'imagePath2', index: 0, text: slide.imagePath2);
+    yield (field: 'videoPath', index: 0, text: slide.videoPath);
+    yield (field: 'audioPath', index: 0, text: slide.audioPath);
 
     for (var i = 0; i < slide.bullets.length; i++) {
       yield (field: 'bullets', index: i, text: slide.bullets[i]);
