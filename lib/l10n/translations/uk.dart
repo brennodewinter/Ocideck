@@ -1801,6 +1801,15 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Accepteren': 'Прийняти',
+  'Accepteren + waarschuwen': 'Прийняти + попередити',
+  'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Прийняти: дані тут доречні й повідомлення зникає. Прийняти + попередити: одержувач бачить позначку, що на слайді є персональні дані. Вилучити: знайдені дані стають нечитабельними на екрані та в експорті — ваш Markdown-файл зберігає початковий текст.',
+  'Alleen melden': 'Лише повідомляти',
+  'PERSOONSGEGEVENS': 'ПЕРСОНАЛЬНІ ДАНІ',
+  'Persoonsgegevens op deze slide': 'Персональні дані на цьому слайді',
+  'Volg de presentatie': 'Як у презентації',
+  'Weglaten uit tonen en exporteren': 'Вилучити з показу та експорту',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
       ' Розгляньте можливість приховати це за [[подвійними квадратними дужками]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':

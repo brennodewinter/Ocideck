@@ -1783,6 +1783,15 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Accepteren': 'Hyväksy',
+  'Accepteren + waarschuwen': 'Hyväksy + varoita',
+  'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Hyväksy: tiedot kuuluvat tänne ja ilmoitus katoaa. Hyväksy + varoita: vastaanottaja näkee merkin, että diassa on henkilötietoja. Jätä pois: löydetyt tiedot tehdään lukukelvottomiksi näytöllä ja viennissä — Markdown-tiedostosi säilyttää alkuperäisen tekstin.',
+  'Alleen melden': 'Vain ilmoita',
+  'PERSOONSGEGEVENS': 'HENKILÖTIETOJA',
+  'Persoonsgegevens op deze slide': 'Henkilötietoja tässä diassa',
+  'Volg de presentatie': 'Seuraa esitystä',
+  'Weglaten uit tonen en exporteren': 'Jätä pois näytöstä ja viennistä',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
       ' Harkitse sen peittämistä [[kaksoishakasulkeilla]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':

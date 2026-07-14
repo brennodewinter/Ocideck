@@ -1758,6 +1758,15 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Accepteren': 'yIlaj',
+  'Accepteren + waarschuwen': 'yIlaj \'ej yIghuHmoH',
+  'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'yIlaj: naDev De\' lunge\' \'ej QIn chIl. yIlaj \'ej yIghuHmoH: nagh beQDaq nuv De\' tu\'lu\' \'e\' \'ang degh. yIteq: De\' tu\'lu\'bogh laDlaHbe\'lu\' HaSta\'Daq je ngeHmeHDaq — Markdown teywI\'lIj ghItlh wa\'DIch polt.',
+  'Alleen melden': 'yIja\' neH',
+  'PERSOONSGEGEVENS': 'NUV DE\'',
+  'Persoonsgegevens op deze slide': 'nagh beQvamDaq nuv De\'',
+  'Volg de presentatie': 'cha\'nav yItlha\'',
+  'Weglaten uit tonen en exporteren': 'cha\'meH ngeHmeH je yIteq',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
       ' [[cha\' vaghDIch Doch chorgh]] lo\'taHvIS So\'meH yIqel.',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':

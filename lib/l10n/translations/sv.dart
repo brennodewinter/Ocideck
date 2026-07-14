@@ -1782,6 +1782,15 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Accepteren': 'Acceptera',
+  'Accepteren + waarschuwen': 'Acceptera + varna',
+  'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Acceptera: uppgifterna hör hemma här och meddelandet försvinner. Acceptera + varna: mottagaren ser en märkning om att bilden innehåller personuppgifter. Utelämna: de funna uppgifterna görs oläsliga på skärmen och i exporten — din Markdown-fil behåller originaltexten.',
+  'Alleen melden': 'Rapportera bara',
+  'PERSOONSGEGEVENS': 'PERSONUPPGIFTER',
+  'Persoonsgegevens op deze slide': 'Personuppgifter på den här bilden',
+  'Volg de presentatie': 'Följ presentationen',
+  'Weglaten uit tonen en exporteren': 'Utelämna från visning och export',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
       ' Överväg att maska det med [[dubbla hakparenteser]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':

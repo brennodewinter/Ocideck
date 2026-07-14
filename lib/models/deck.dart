@@ -1,3 +1,4 @@
+import 'privacy_disposition.dart';
 import 'annotation.dart';
 import 'document_signature.dart';
 import 'slide.dart';
@@ -117,6 +118,10 @@ class Deck {
   /// Traffic Light Protocol-classificatie van deze presentatie.
   final TlpLevel tlp;
 
+  /// Wat er met privacybevindingen gebeurt in dit deck. Slides kunnen dit per
+  /// stuk overschrijven. Round-trips als `privacy:` in de front matter.
+  final PrivacyDisposition privacy;
+
   /// Doeltijd (in seconden) voor de aftelling in de presenter. 0 = geen
   /// aftelling. Live aanpasbaar tijdens presenteren (toets K).
   final int presentationTargetSeconds;
@@ -194,6 +199,7 @@ class Deck {
     this.description = '',
     this.keywords = '',
     this.tlp = TlpLevel.none,
+    this.privacy = PrivacyDisposition.warn,
     this.presentationTargetSeconds = 0,
     this.showRehearsalSummary = true,
     this.playOnly = false,
@@ -223,6 +229,7 @@ class Deck {
     String? description,
     String? keywords,
     TlpLevel? tlp,
+    PrivacyDisposition? privacy,
     int? presentationTargetSeconds,
     bool? showRehearsalSummary,
     bool? playOnly,
@@ -251,6 +258,7 @@ class Deck {
       description: description ?? this.description,
       keywords: keywords ?? this.keywords,
       tlp: tlp ?? this.tlp,
+      privacy: privacy ?? this.privacy,
       presentationTargetSeconds:
           presentationTargetSeconds ?? this.presentationTargetSeconds,
       showRehearsalSummary: showRehearsalSummary ?? this.showRehearsalSummary,

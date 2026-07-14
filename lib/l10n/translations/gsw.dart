@@ -1787,6 +1787,15 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Accepteren': 'Akzeptiere',
+  'Accepteren + waarschuwen': 'Akzeptiere + warne',
+  'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Akzeptiere: d Date ghöred da häre und de Hiiwiis verschwindet. Akzeptiere + warne: de Empfänger gseht es Abzeiche, dass uf de Folie Persoonedate sind. Weglah: die gfundene Date wärded uf em Bildschirm und im Export unläsbar gmacht — dini Markdown-Datei bhaltet de Originaltäxt.',
+  'Alleen melden': 'Nur mälde',
+  'PERSOONSGEGEVENS': 'PERSOONEDATE',
+  'Persoonsgegevens op deze slide': 'Persoonedate uf dere Folie',
+  'Volg de presentatie': 'De Präsentation folge',
+  'Weglaten uit tonen en exporteren': 'Us Azeig und Export wegglah',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
       ' Überleg der, öb du s mit [[doppleti eckigi Chlammere]] schwärze wotsch.',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':

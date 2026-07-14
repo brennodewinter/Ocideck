@@ -740,6 +740,15 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Accepteren': 'Aseptá',
+  'Accepteren + waarschuwen': 'Aseptá + advertí',
+  'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Aseptá: e datos ta pertenesé aki i e mensahe ta disparsé. Aseptá + advertí: e risibidó ta mira un badge ku tin datos personal riba e slide. Laga afó: e datos hañá ta wòrdu hasí ilegibel riba pantaya i den eksportashon — bo file Markdown ta warda e teksto original.',
+  'Alleen melden': 'Solamente reportá',
+  'PERSOONSGEGEVENS': 'DATOS PERSONAL',
+  'Persoonsgegevens op deze slide': 'Datos personal riba e slide aki',
+  'Volg de presentatie': 'Sigui e presentashon',
+  'Weglaten uit tonen en exporteren': 'Laga afó di mustra i eksportá',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
       ' Konsiderá redaktá esaki ku [[dòbel blokhaki]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':

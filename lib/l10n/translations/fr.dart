@@ -740,6 +740,16 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Accepteren': 'Accepter',
+  'Accepteren + waarschuwen': 'Accepter + avertir',
+  'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Accepter : les données sont à leur place et l\'avis disparaît. Accepter + avertir : le destinataire voit un badge indiquant des données personnelles sur la diapositive. Omettre : les données trouvées deviennent illisibles à l\'écran et à l\'export — ton fichier Markdown conserve le texte d\'origine.',
+  'Alleen melden': 'Signaler seulement',
+  'PERSOONSGEGEVENS': 'DONNÉES PERSONNELLES',
+  'Persoonsgegevens op deze slide':
+      'Données personnelles sur cette diapositive',
+  'Volg de presentatie': 'Suivre la présentation',
+  'Weglaten uit tonen en exporteren': 'Omettre de l\'affichage et de l\'export',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
       ' Envisage de le caviarder avec [[doubles crochets]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':

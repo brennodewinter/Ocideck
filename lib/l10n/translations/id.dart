@@ -1783,6 +1783,15 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Accepteren': 'Terima',
+  'Accepteren + waarschuwen': 'Terima + peringatkan',
+  'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Terima: datanya memang milik sini dan pemberitahuan hilang. Terima + peringatkan: penerima melihat lencana bahwa slide memuat data pribadi. Hilangkan: data yang ditemukan dibuat tak terbaca di layar dan di ekspor — berkas Markdown Anda tetap menyimpan teks aslinya.',
+  'Alleen melden': 'Hanya laporkan',
+  'PERSOONSGEGEVENS': 'DATA PRIBADI',
+  'Persoonsgegevens op deze slide': 'Data pribadi pada slide ini',
+  'Volg de presentatie': 'Ikuti presentasi',
+  'Weglaten uit tonen en exporteren': 'Hilangkan dari tampilan dan ekspor',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
       ' Pertimbangkan untuk meredaksinya dengan [[kurung siku ganda]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':

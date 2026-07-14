@@ -19,7 +19,10 @@
 // oorspronkelijke markdown. Redactie geldt voor wat je *toont en exporteert*.
 
 import '../../models/deck.dart';
+import '../../models/privacy_disposition.dart';
+import '../../models/privacy_finding.dart';
 import '../../models/slide.dart';
+import 'privacy_scanner.dart';
 
 /// Het teken waarmee geredigeerde tekst wordt vervangen (U+2588 FULL BLOCK).
 const String kRedactionBlock = '█';
@@ -55,11 +58,14 @@ class AudienceDeck {
   /// niet de bron.
   final Deck deck;
 
-  /// Hoeveel redacties de projectie heeft toegepast. Voert de exportbanner en
-  /// straks het redactiemanifest.
+  /// Hoeveel redacties de projectie heeft toegepast.
   final int redactionCount;
 
-  const AudienceDeck._(this.deck, this.redactionCount);
+  /// De slides waarop een privacy-shield getoond moet worden: de ontvanger wordt
+  /// gewaarschuwd dát er persoonsgegevens op staan, zonder ze weg te halen.
+  final Set<int> shieldedSlides;
+
+  const AudienceDeck._(this.deck, this.redactionCount, this.shieldedSlides);
 
   bool get hasRedactions => redactionCount > 0;
 
@@ -69,63 +75,118 @@ class AudienceDeck {
 /// Tekst plus het aantal redacties dat erin is toegepast.
 typedef RedactedText = ({String text, int count});
 
+/// Een half-open bereik in een tekst.
+typedef _Range = ({int start, int end});
+
 /// Bouwt een [AudienceDeck] uit een bron-[Deck].
 class PrivacyProjection {
   const PrivacyProjection._();
 
   /// De projectie voor een menselijke ontvanger: publiek, lezer van de export.
   ///
-  /// Redigeert wat de auteur met `[[…]]` heeft gemarkeerd. Zodra de scanner er
-  /// is, respecteert deze projectie de per-slide dispositie: `accept` en
-  /// `shield` laten gedetecteerde gegevens staan, `redact` haalt ze weg.
-  static AudienceDeck forAudience(Deck deck) => _project(deck);
+  /// Redigeert wat de auteur met `[[…]]` heeft gemarkeerd, plus de gedetecteerde
+  /// gegevens op elke slide waarvan de effectieve stand `redact` is.
+  static AudienceDeck forAudience(Deck deck) => _project(deck, external: false);
 
   /// De projectie voor verwerking buiten dit apparaat (AI-backends).
   ///
-  /// Bewust **strenger** dan [forAudience], en straks ook feitelijk: dat de
-  /// auteur besluit dat een zaal de namen mag zien, is geen toestemming om ze
-  /// naar een extern model te sturen. Zodra de scanner er is, negeert deze
-  /// projectie de dispositie en verwijdert álles wat gedetecteerd is. Nu doen
-  /// beide projecties hetzelfde, omdat er nog alleen handmatige markeringen
-  /// zijn — die gelden voor iedere ontvanger.
-  static AudienceDeck forExternalProcessing(Deck deck) => _project(deck);
+  /// Bewust **strenger**: hier telt de dispositie níét. Dat de auteur besluit dat
+  /// een zaal de namen mag zien, is geen toestemming om ze naar een extern model
+  /// te sturen. Alles wat de scanner vindt gaat eruit, ook op een slide die op
+  /// `accept` staat.
+  static AudienceDeck forExternalProcessing(Deck deck) =>
+      _project(deck, external: true);
 
-  static AudienceDeck _project(Deck deck) {
+  /// De projectie scant **zelf**, en doet dat altijd.
+  ///
+  /// Twee redenen, en ze zijn allebei fail-closed:
+  ///
+  /// 1. Zou de aanroeper het scanresultaat moeten meegeven, dan is "vergeten mee
+  ///    te geven" een stille lek: er wordt dan niets geredigeerd en niemand merkt
+  ///    het. Een grens die je kunt vergeten, is geen grens.
+  ///
+  /// 2. De instelling "waarschuw bij mogelijke persoonsgegevens" wordt hier
+  ///    genegeerd. Die schakelt *waarschuwingen* uit, niet redactie. Een deck met
+  ///    `privacy: redact` moet blijven redigeren, ook bij een gebruiker die de
+  ///    meldingen niet wil zien — anders zet iemand de meldingen uit en lekt zijn
+  ///    briefing stilletjes.
+  static AudienceDeck _project(Deck deck, {required bool external}) {
+    final scan = const PrivacyScanner().scan(deck);
+
     var count = 0;
+    final shielded = <int>{};
 
-    String take(String source) {
-      final result = redactText(source);
+    // Deckvelden voeden de documentmetadata (PDF-properties, PPTX-docProps):
+    // leesbaar, ook al staat er op geen enkele slide iets van te zien.
+    final deckRedact = external || deck.privacy == PrivacyDisposition.redact;
+    final deckFindings = _byFragment(
+      scan.findings.where((f) => f.isDeckWide),
+      active: deckRedact,
+    );
+
+    String deckField(String field, String text) {
+      final result = _redact(text, deckFindings['$field:0'] ?? const []);
       count += result.count;
       return result.text;
     }
 
     final slides = <Slide>[];
-    for (final slide in deck.slides) {
-      final projected = _projectSlide(slide);
+    for (var i = 0; i < deck.slides.length; i++) {
+      final slide = deck.slides[i];
+      final disposition = effectivePrivacyDisposition(
+        deck: deck.privacy,
+        slide: slide.privacy,
+      );
+      if (disposition == PrivacyDisposition.shield) shielded.add(i);
+
+      final active = external || disposition == PrivacyDisposition.redact;
+      final byFragment = _byFragment(scan.forSlide(i), active: active);
+
+      final projected = _projectSlide(slide, byFragment);
       count += projected.count;
-      slides.add(projected.slide);
+      // De effectieve stand wordt op de geprojecteerde slide gezet. Zo reist het
+      // shield mee mét de slide en kan geen renderoppervlak hem vergeten — een
+      // extra parameter door elf aanroepplaatsen heen zou wél te vergeten zijn,
+      // en dan verdwijnt de waarschuwing voor de ontvanger stilletjes.
+      slides.add(projected.slide.copyWith(privacy: disposition));
     }
 
-    // De deckvelden die de documentmetadata voeden (titel, auteur, organisatie,
-    // trefwoorden) reizen mee in PDF-properties en PPTX-docProps — leesbaar,
-    // ook al staat er op de slide zelf niets van te zien.
-    //
     // Deck.userNotes staat er bewust NIET bij. Dat zijn de notities die de
-    // ontvanger zélf typt; ze gaan naar een sidecar naast het bestand
-    // (`user_notes_codec.dart`) en bereiken geen enkel exportartefact. Ze wél
-    // projecteren zou schade doen in plaats van voorkomen: de presenter schrijft
-    // de notitiemap in haar geheel terug, dus één bewerking tijdens het
-    // presenteren zou blokken over iemands eigen aantekeningen zetten.
+    // ontvanger zélf typt; ze gaan naar een sidecar naast het bestand en
+    // bereiken geen enkel exportartefact. Ze wél projecteren zou schade doen in
+    // plaats van voorkomen: de presenter schrijft de notitiemap in haar geheel
+    // terug, dus één bewerking tijdens het presenteren zou blokken over iemands
+    // eigen aantekeningen zetten.
     final projected = deck.copyWith(
       slides: slides,
-      title: take(deck.title),
-      author: take(deck.author),
-      organization: take(deck.organization),
-      description: take(deck.description),
-      keywords: take(deck.keywords),
+      title: deckField('deckTitle', deck.title),
+      author: deckField('author', deck.author),
+      organization: deckField('organization', deck.organization),
+      description: deckField('description', deck.description),
+      keywords: deckField('keywords', deck.keywords),
     );
 
-    return AudienceDeck._(projected, count);
+    return AudienceDeck._(projected, count, shielded);
+  }
+
+  /// Groepeert de te redigeren bevindingen per tekstfragment.
+  ///
+  /// Staat de slide niet op `redact`, dan is de map leeg: de gegevens blijven
+  /// staan. De handmatige `[[…]]`-markering werkt hoe dan ook — die is een
+  /// instructie van de auteur, geen bevinding van de scanner.
+  static Map<String, List<_Range>> _byFragment(
+    Iterable<PrivacyFinding> findings, {
+    required bool active,
+  }) {
+    if (!active) return const {};
+    final map = <String, List<_Range>>{};
+    for (final f in findings) {
+      map.putIfAbsent('${f.field}:${f.fragmentIndex}', () => []).add((
+        start: f.start,
+        end: f.end,
+      ));
+    }
+    return map;
   }
 
   /// Projecteert elk tekstdragend veld van een slide.
@@ -139,32 +200,49 @@ class PrivacyProjection {
   /// (`presenter_table.dart`). Zou de presenter een geprojecteerde slide mogen
   /// terugschrijven, dan overschreef één bewerking de bron met blokken. Een
   /// oppervlak dat de gegevens niet kán zien, mag ze ook niet terugschrijven.
-  static ({Slide slide, int count}) _projectSlide(Slide slide) {
+  static ({Slide slide, int count}) _projectSlide(
+    Slide slide,
+    Map<String, List<_Range>> byFragment,
+  ) {
     var count = 0;
 
-    String take(String source) {
-      final result = redactText(source);
+    String field(String name, String text, [int index = 0]) {
+      final result = _redact(text, byFragment['$name:$index'] ?? const []);
       count += result.count;
       return result.text;
     }
 
     final projected = slide.copyWith(
-      title: take(slide.title),
-      subtitle: take(slide.subtitle),
-      bullets: [for (final b in slide.bullets) take(b)],
-      bullets2: [for (final b in slide.bullets2) take(b)],
-      columnTitle1: take(slide.columnTitle1),
-      columnTitle2: take(slide.columnTitle2),
-      imageCaption: take(slide.imageCaption),
-      imageCaption2: take(slide.imageCaption2),
-      imageAltText: take(slide.imageAltText),
-      imageAltText2: take(slide.imageAltText2),
-      quote: take(slide.quote),
-      quoteAuthor: take(slide.quoteAuthor),
-      customMarkdown: take(slide.customMarkdown),
-      notes: take(slide.notes),
+      title: field('title', slide.title),
+      subtitle: field('subtitle', slide.subtitle),
+      columnTitle1: field('columnTitle1', slide.columnTitle1),
+      columnTitle2: field('columnTitle2', slide.columnTitle2),
+      imageCaption: field('imageCaption', slide.imageCaption),
+      imageCaption2: field('imageCaption2', slide.imageCaption2),
+      imageAltText: field('imageAltText', slide.imageAltText),
+      imageAltText2: field('imageAltText2', slide.imageAltText2),
+      quote: field('quote', slide.quote),
+      quoteAuthor: field('quoteAuthor', slide.quoteAuthor),
+      customMarkdown: field('customMarkdown', slide.customMarkdown),
+      notes: field('notes', slide.notes),
+      bullets: [
+        for (var i = 0; i < slide.bullets.length; i++)
+          field('bullets', slide.bullets[i], i),
+      ],
+      bullets2: [
+        for (var i = 0; i < slide.bullets2.length; i++)
+          field('bullets2', slide.bullets2[i], i),
+      ],
       tableRows: [
-        for (final row in slide.tableRows) [for (final cell in row) take(cell)],
+        for (var r = 0; r < slide.tableRows.length; r++)
+          [
+            for (var c = 0; c < slide.tableRows[r].length; c++)
+              field(
+                'tableRows',
+                slide.tableRows[r][c],
+                r * slide.tableRows[r].length + c,
+              ),
+          ],
       ],
     );
 
@@ -174,15 +252,49 @@ class PrivacyProjection {
     );
   }
 
-  /// Vervangt elke `[[…]]`-markering door de blokken en telt hoeveel het er
-  /// waren. Puur: dezelfde invoer geeft altijd dezelfde uitvoer.
-  static RedactedText redactText(String source) {
-    if (!source.contains('[[')) return (text: source, count: 0);
-    var count = 0;
-    final text = source.replaceAllMapped(_manualRedaction, (_) {
-      count++;
-      return kRedactionToken;
-    });
-    return (text: text, count: count);
+  /// Vervangt de handmatige markeringen én de meegegeven bereiken door blokken.
+  ///
+  /// Beide bronnen worden samengevoegd en van achteren naar voren vervangen. Dat
+  /// is niet cosmetisch: zou je van voren af aan werken, dan verschuiven alle
+  /// volgende posities zodra de eerste vervanging een andere lengte heeft, en
+  /// redigeer je de verkeerde tekens — of, erger, laat je er een paar staan.
+  static RedactedText _redact(String source, List<_Range> ranges) {
+    final all = <_Range>[
+      ...ranges,
+      for (final m in _manualRedaction.allMatches(source))
+        (start: m.start, end: m.end),
+    ];
+    if (all.isEmpty) return (text: source, count: 0);
+
+    all.sort((a, b) => a.start.compareTo(b.start));
+
+    // Overlappende bereiken samenvoegen: een treffer die binnen een handmatige
+    // markering valt, mag geen tweede blok opleveren.
+    final merged = <_Range>[];
+    for (final r in all) {
+      if (merged.isNotEmpty && r.start <= merged.last.end) {
+        final last = merged.removeLast();
+        merged.add((
+          start: last.start,
+          end: r.end > last.end ? r.end : last.end,
+        ));
+      } else {
+        merged.add(r);
+      }
+    }
+
+    final buf = StringBuffer();
+    var cursor = 0;
+    for (final r in merged) {
+      buf.write(source.substring(cursor, r.start));
+      buf.write(kRedactionToken);
+      cursor = r.end;
+    }
+    buf.write(source.substring(cursor));
+    return (text: buf.toString(), count: merged.length);
   }
+
+  /// Vervangt elke `[[…]]`-markering door de blokken. Puur en zelfstandig
+  /// testbaar.
+  static RedactedText redactText(String source) => _redact(source, const []);
 }

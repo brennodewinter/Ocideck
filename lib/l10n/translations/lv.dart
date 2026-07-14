@@ -1782,6 +1782,15 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Accepteren': 'Pieņemt',
+  'Accepteren + waarschuwen': 'Pieņemt + brīdināt',
+  'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Pieņemt: dati šeit pieder un paziņojums pazūd. Pieņemt + brīdināt: saņēmējs redz nozīmīti, ka slaidā ir personas dati. Izlaist: atrastie dati tiek padarīti nesalasāmi ekrānā un eksportā — tavs Markdown fails saglabā sākotnējo tekstu.',
+  'Alleen melden': 'Tikai ziņot',
+  'PERSOONSGEGEVENS': 'PERSONAS DATI',
+  'Persoonsgegevens op deze slide': 'Personas dati šajā slaidā',
+  'Volg de presentatie': 'Sekot prezentācijai',
+  'Weglaten uit tonen en exporteren': 'Izlaist no rādīšanas un eksporta',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
       ' Apsver to aizklāt ar [[dubultajām kvadrātiekavām]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':

@@ -502,6 +502,68 @@ class _SlideTableEditControl extends StatelessWidget {
 
 // ── Per-slide TLP-classificatie ───────────────────────────────────────────────
 
+/// Wat er met privacybevindingen op deze slide gebeurt.
+///
+/// De scanner meldt; de auteur beslist. Een briefing van de recherche bevat per
+/// definitie persoonsgegevens — daar hoort de tool niet tegen te vechten, maar
+/// hij moet wél kunnen laten zien dát het erin zit.
+class _SlidePrivacyControl extends StatelessWidget {
+  final Slide slide;
+  final ValueChanged<Slide> onUpdate;
+  const _SlidePrivacyControl({required this.slide, required this.onUpdate});
+
+  String _label(AppLocalizations l10n, PrivacyDisposition? d) => switch (d) {
+    null => l10n.d('Volg de presentatie'),
+    PrivacyDisposition.warn => l10n.d('Alleen melden'),
+    PrivacyDisposition.accept => l10n.d('Accepteren'),
+    PrivacyDisposition.shield => l10n.d('Accepteren + waarschuwen'),
+    PrivacyDisposition.redact => l10n.d('Weglaten uit tonen en exporteren'),
+  };
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return Container(
+      color: AppTheme.slate50,
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+      child: Row(
+        children: [
+          Icon(Icons.privacy_tip_outlined, size: 14, color: AppTheme.slate500),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              l10n.d('Persoonsgegevens op deze slide'),
+              style: TextStyle(fontSize: 12, color: AppTheme.slate600),
+            ),
+          ),
+          Tooltip(
+            message: l10n.d(
+              'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.',
+            ),
+            child: Icon(Icons.info_outline, size: 14, color: AppTheme.slate400),
+          ),
+          const SizedBox(width: 8),
+          DropdownButtonHideUnderline(
+            child: DropdownButton<PrivacyDisposition?>(
+              value: slide.privacy,
+              isDense: true,
+              borderRadius: BorderRadius.circular(6),
+              style: TextStyle(fontSize: 12, color: AppTheme.ink),
+              items: [
+                DropdownMenuItem(value: null, child: Text(_label(l10n, null))),
+                for (final d in PrivacyDisposition.values)
+                  DropdownMenuItem(value: d, child: Text(_label(l10n, d))),
+              ],
+              onChanged: (v) =>
+                  onUpdate(slide.copyWith(privacy: v, clearPrivacy: v == null)),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _SlideTlpControl extends StatelessWidget {
   final Slide slide;
   final ValueChanged<Slide> onUpdate;
@@ -693,6 +755,7 @@ class _SlideSettingsBody extends StatelessWidget {
         _SlideTimingControl(slide: slide, onUpdate: onUpdate),
         const Divider(height: 1),
         _SlideTlpControl(slide: slide, onUpdate: onUpdate),
+        _SlidePrivacyControl(slide: slide, onUpdate: onUpdate),
       ],
     );
   }

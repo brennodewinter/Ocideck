@@ -922,6 +922,15 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Accepteren': 'Accept',
+  'Accepteren + waarschuwen': 'Accept + warn',
+  'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Accept: the data belongs here and the notice disappears. Accept + warn: the recipient sees a badge saying the slide holds personal data. Leave out: the data found is made unreadable on screen and in the export — your Markdown file keeps the original text.',
+  'Alleen melden': 'Only report',
+  'PERSOONSGEGEVENS': 'PERSONAL DATA',
+  'Persoonsgegevens op deze slide': 'Personal data on this slide',
+  'Volg de presentatie': 'Follow the presentation',
+  'Weglaten uit tonen en exporteren': 'Leave out of display and export',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
       ' Consider redacting it with [[double square brackets]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':

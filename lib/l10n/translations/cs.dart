@@ -1786,6 +1786,15 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Accepteren': 'Přijmout',
+  'Accepteren + waarschuwen': 'Přijmout + upozornit',
+  'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Přijmout: údaje sem patří a upozornění zmizí. Přijmout + upozornit: příjemce uvidí odznak, že snímek obsahuje osobní údaje. Vynechat: nalezené údaje se na obrazovce i v exportu znečitelní — tvůj soubor Markdown si ponechá původní text.',
+  'Alleen melden': 'Jen hlásit',
+  'PERSOONSGEGEVENS': 'OSOBNÍ ÚDAJE',
+  'Persoonsgegevens op deze slide': 'Osobní údaje na tomto snímku',
+  'Volg de presentatie': 'Podle prezentace',
+  'Weglaten uit tonen en exporteren': 'Vynechat ze zobrazení i exportu',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
       ' Zvaž začernění pomocí [[dvojitých hranatých závorek]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':

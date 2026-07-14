@@ -1819,6 +1819,16 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Accepteren': 'Glac leis',
+  'Accepteren + waarschuwen': 'Glac leis + tabhair rabhadh',
+  'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Glac leis: baineann na sonraí leis an áit seo agus imíonn an fógra. Glac leis + tabhair rabhadh: feiceann an faighteoir suaitheantas go bhfuil sonraí pearsanta ar an sleamhnán. Fág ar lár: déantar na sonraí a aimsíodh doléite ar an scáileán agus san easpórtáil — coinníonn do chomhad Markdown an téacs bunaidh.',
+  'Alleen melden': 'Tuairiscigh amháin',
+  'PERSOONSGEGEVENS': 'SONRAÍ PEARSANTA',
+  'Persoonsgegevens op deze slide': 'Sonraí pearsanta ar an sleamhnán seo',
+  'Volg de presentatie': 'Lean an láithreoireacht',
+  'Weglaten uit tonen en exporteren':
+      'Fág ar lár ón taispeáint agus ón easpórtáil',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
       ' Smaoinigh ar é a fholú le [[lúibíní cearnacha dúbailte]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':

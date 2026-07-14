@@ -1774,6 +1774,15 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Accepteren': 'Nõustu',
+  'Accepteren + waarschuwen': 'Nõustu + hoiata',
+  'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Nõustu: andmed kuuluvad siia ja teade kaob. Nõustu + hoiata: saaja näeb märki, et slaidil on isikuandmed. Jäta välja: leitud andmed muudetakse ekraanil ja ekspordis loetamatuks — su Markdown-fail säilitab algse teksti.',
+  'Alleen melden': 'Ainult teavita',
+  'PERSOONSGEGEVENS': 'ISIKUANDMED',
+  'Persoonsgegevens op deze slide': 'Isikuandmed sellel slaidil',
+  'Volg de presentatie': 'Järgi esitlust',
+  'Weglaten uit tonen en exporteren': 'Jäta kuvamisest ja ekspordist välja',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
       ' Kaalu selle peitmist [[topeltnurksulgudega]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':

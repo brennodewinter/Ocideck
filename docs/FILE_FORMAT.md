@@ -157,6 +157,37 @@ back during presenting/exporting (`slideVisibleAtTlp`). The **export enforcement
 (ceiling, minimum, mandatory classification) only looks at the deck-wide `tlp`
 field in front matter, not at per-slide levels.
 
+### 3.1b Privacy disposition — `privacy:` / `<!-- ocideck_privacy: … -->`
+
+What happens to privacy findings. Four stable values: `warn` (the default, never
+written), `accept`, `shield`, `redact`.
+
+```markdown
+---
+marp: true
+theme: ocideck
+privacy: accept
+---
+
+# Suspect
+
+<!-- ocideck_privacy: redact -->
+```
+
+**A slide overrides the deck** — deliberately unlike `tlp`, where the stricter
+level wins. A deck on `accept` (the whole briefing is known) with one slide on
+`redact` (this one detail is for nobody) must work; the author of that slide knows
+best. `effectivePrivacyDisposition` in `lib/models/privacy_disposition.dart`.
+
+`shield` shows a **PERSONAL DATA** badge on the slide, next to the TLP marking,
+and it rasterises into PDF/PPTX like any other overlay. `redact` replaces every
+detected value with blocks in everything rendered or exported — see §3.1a; the
+Markdown on disk is untouched either way.
+
+Note that `redact` is honoured **regardless of the "warn about possible personal
+data" setting**. That setting governs warnings, not redaction: otherwise silencing
+the messages would silently stop the redaction too.
+
 ### 3.1a Redaction markers — `[[…]]`
 
 Text between double square brackets is **redacted**: replaced by a fixed run of

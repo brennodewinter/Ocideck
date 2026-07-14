@@ -1782,6 +1782,15 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Accepteren': 'Acceptér',
+  'Accepteren + waarschuwen': 'Acceptér + advar',
+  'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':
+      'Acceptér: dataene hører til her, og meddelelsen forsvinder. Acceptér + advar: modtageren ser et mærke om, at sliden indeholder personoplysninger. Udelad: de fundne data gøres ulæselige på skærmen og i eksporten — din Markdown-fil beholder den oprindelige tekst.',
+  'Alleen melden': 'Kun rapportér',
+  'PERSOONSGEGEVENS': 'PERSONOPLYSNINGER',
+  'Persoonsgegevens op deze slide': 'Personoplysninger på denne slide',
+  'Volg de presentatie': 'Følg præsentationen',
+  'Weglaten uit tonen en exporteren': 'Udelad fra visning og eksport',
   ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
       ' Overvej at redigere det bort med [[dobbelte kantede parenteser]].',
   ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':

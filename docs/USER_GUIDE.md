@@ -429,6 +429,41 @@ clean. What you share remains your call.
 
 Found something you want gone? Wrap it in double square brackets — see below.
 
+## What to do with a finding
+
+A finding is not a verdict. A police briefing contains personal data by
+definition; a pentest report contains captured credentials by definition. The
+tool should not fight you about that — but it should let you say what you decided,
+and it should let the *recipient* know what they are holding.
+
+Under **Slide settings** (the gear in the editor header), each slide offers:
+
+| Setting | What happens |
+| --- | --- |
+| **Follow the presentation** | Inherit the deck-wide setting (the default). |
+| **Only report** | Findings stay in the quality panel; nothing shows on the slide. |
+| **Accept** | The data belongs here. The notice disappears. Nothing changes on the slide. |
+| **Accept + warn** | The data stays, and the slide gets a **PERSONAL DATA** badge — next to the TLP marking, and travelling into the PDF, the PPTX and the HTML. Whoever receives the deck knows what they have. |
+| **Leave out of display and export** | The data found is redacted everywhere: screen, presentation, audience window, PDF, PPTX, HTML, speaker notes, document metadata. Your Markdown keeps the original text. |
+
+The same four values exist deck-wide (`privacy:` in the front matter). A slide
+**overrides** the deck — unlike TLP, where the stricter level wins. A deck set to
+*accept* (the whole briefing is known) with one slide set to *leave out* (this one
+detail is for nobody) has to just work, and the author of that slide knows best.
+
+### Turning the warnings off does not turn redaction off
+
+The privacy check can be switched off under *Settings → Security*. That switches
+off **warnings** — it does not switch off redaction. A deck that says *leave out*
+keeps leaving data out, even for someone who never wants to see a notice.
+Otherwise you could silence the messages and leak your briefing without noticing.
+
+### Accepting is not consent for an AI backend
+
+If you use the optional AI assistance, everything the scanner finds is stripped
+before the text leaves your device — **even on a slide you marked as accepted**.
+Deciding that a room may see a name is not deciding that a language model may.
+
 ## Redaction — leaving data out
 
 Some decks carry things the room should not see: a citizen service number in a

@@ -20,6 +20,7 @@ import '../../models/checklist_spec.dart';
 import '../../models/cockpit.dart';
 import '../../models/cvss_builder.dart';
 import '../../models/deck.dart';
+import '../../models/privacy_disposition.dart';
 import '../../models/document_signature.dart';
 import '../../models/finding_spec.dart';
 import '../../models/findings_summary_spec.dart';
@@ -562,6 +563,19 @@ class SlidePreviewWidget extends StatelessWidget {
                           hasLogo:
                               themeProfile.logoPath?.isNotEmpty == true &&
                               slide.showLogo,
+                        ),
+                      // Het privacy-shield. De effectieve stand is door de
+                      // projectie op de slide gezet, dus elk renderoppervlak
+                      // krijgt de badge automatisch — er is geen parameter om te
+                      // vergeten.
+                      if (slide.privacy == PrivacyDisposition.shield)
+                        _PrivacyShieldOverlay(
+                          w: w,
+                          tlpTakesLeft:
+                              markingTlp != TlpLevel.none &&
+                              themeProfile.logoPath?.isNotEmpty == true &&
+                              slide.showLogo &&
+                              themeProfile.logoPosition == 'bottom-right',
                         ),
                       if (themeProfile.logoPath?.isNotEmpty == true &&
                           slide.showLogo)
