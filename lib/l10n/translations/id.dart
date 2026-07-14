@@ -1873,6 +1873,31 @@ const _dutchSourceAddId = <String, String>{
   'toegangstoken (JWT)': 'token akses (JWT)',
   'databaseverbinding met wachtwoord': 'koneksi basis data dengan kata sandi',
   'wachtwoord in klare tekst': 'kata sandi dalam teks biasa',
+  'Afbreken': 'Batalkan',
+  'Afgebroken. Er is niets half achtergebleven.':
+      'Dibatalkan. Tidak ada yang tertinggal setengah jadi.',
+  'Bijwerken': 'Perbarui',
+  'Binnenhalen…': 'Mengunduh…',
+  'CVE\'s': 'CVE',
+  'Database ophalen': 'Ambil basis data',
+  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
+      'Daftar CVE tidak dapat diambil. Periksa koneksimu dan coba lagi; daftar yang terunduh sebagian telah dibuang.',
+  'De nieuwste uitgave opzoeken…': 'Mencari rilis terbaru…',
+  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
+      'Ini unduhan besar: lebih dari 500 MB yang harus diambil, sekitar 1,5 GB ruang disk untuk sementara, dan tergantung koneksi serta perangkatmu, mudah memakan sepuluh sampai tiga puluh menit. Setelah itu tersisa indeks sebesar beberapa ratus megabyte. Pada koneksi yang dibayar per megabyte, sebaiknya jangan lakukan ini.',
+  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
+      'Ruang disk tidak mencukupi. Pembangunan indeks sementara membutuhkan lebih dari 1,5 GB.',
+  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
+      'Arsip yang diunduh bukan yang kami harapkan dan ditolak. Tidak ada yang dipasang.',
+  'Indexeren…': 'Mengindeks…',
+  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
+      'Tersedia secara lokal — pencarian berlangsung offline, tidak ada kata kunci yang keluar.',
+  'Lokale CVE-database': 'Basis data CVE lokal',
+  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
+      'Dengan daftar CVE di perangkatmu sendiri, pencarian tetap di sini: tidak ada lagi kata kunci yang dikirim ke server, dan tidak ada yang bisa melihat celah keamanan mana yang kamu teliti.',
+  'Uitpakken…': 'Mengekstrak…',
+  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
+      'Tempatkan daftar CVE lengkap di perangkat ini, agar pencarian berlangsung offline dan kata kuncimu tidak pergi ke mana-mana. Basis data ini berasal dari CVE List V5 (program CVE resmi, melalui GitHub).',
   'Wat er lokaal beschikbaar is': 'Yang tersedia secara lokal',
   'Gegevenspakket': 'Paket data',
   'Nu bijwerken': 'Perbarui sekarang',

@@ -1909,6 +1909,31 @@ const _dutchSourceAddGa = <String, String>{
   'toegangstoken (JWT)': 'comharthán rochtana (JWT)',
   'databaseverbinding met wachtwoord': 'nasc bunachair sonraí le pasfhocal',
   'wachtwoord in klare tekst': 'pasfhocal i ngnáth-théacs',
+  'Afbreken': 'Cealaigh',
+  'Afgebroken. Er is niets half achtergebleven.':
+      'Cealaithe. Níor fágadh aon rud leathdhéanta.',
+  'Bijwerken': 'Nuashonraigh',
+  'Binnenhalen…': 'Á íoslódáil…',
+  'CVE\'s': 'CVE',
+  'Database ophalen': 'Faigh an bunachar sonraí',
+  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
+      'Níorbh fhéidir an liosta CVE a fháil. Seiceáil do cheangal agus bain triail eile as; caitheadh liosta leathíoslódáilte i leataobh.',
+  'De nieuwste uitgave opzoeken…': 'Ag cuardach an eisiúint is déanaí…',
+  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
+      'Íoslódáil mhór atá anseo: breis is 500 MB le tarraingt anuas, timpeall 1,5 GB spás diosca go sealadach, agus ag brath ar do cheangal is ar do ghléas, deich go tríocha nóiméad oibre go héasca. Ina dhiaidh sin fanann innéacs cúpla céad megabyte. Ar cheangal a ghearrann táille de réir an mhegabyte, b\'fhearr gan é seo a dhéanamh.',
+  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
+      'Ní raibh go leor spáis dhiosca ann. Teastaíonn breis is 1,5 GB go sealadach chun é a thógáil.',
+  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
+      'Níorbh é an chartlann a fuarthas an ceann a rabhthas ag súil leis agus diúltaíodh di. Níor suiteáladh aon rud.',
+  'Indexeren…': 'Á innéacsú…',
+  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
+      'Ar fáil go háitiúil — déantar cuardaigh as líne, ní fhágann téarma cuardaigh ar bith an gléas.',
+  'Lokale CVE-database': 'Bunachar sonraí CVE áitiúil',
+  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
+      'Leis an liosta CVE ar do ghléas féin, fanann na cuardaigh anseo: ní théann téarma cuardaigh ar bith chuig freastalaí a thuilleadh, agus ní féidir le duine ar bith a fheiceáil cén leochaileacht atá á scrúdú agat.',
+  'Uitpakken…': 'Á bhaint amach…',
+  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
+      'Cuir an liosta CVE iomlán ar an ngléas seo, ionas go ndéanfar cuardaigh as líne agus nach dtéann do théarma cuardaigh áit ar bith. Tagann an bunachar sonraí ó CVE List V5 (an clár oifigiúil CVE, trí GitHub).',
   'Wat er lokaal beschikbaar is': 'A bhfuil ar fáil go háitiúil',
   'Gegevenspakket': 'Pacáiste sonraí',
   'Nu bijwerken': 'Nuashonraigh anois',

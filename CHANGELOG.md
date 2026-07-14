@@ -302,6 +302,30 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   Translated into every interface language.
 
 ### Security
+- **The CVE list can now live on your own machine, so looking one up tells nobody
+  anything.** *Settings → Beveiliging → Lokale CVE-database* downloads the whole
+  CVE List V5 corpus (the official CVE Program list, via GitHub) and indexes it
+  locally. After that, **Zoek CVE…** searches on your device and **no search term
+  leaves it** — which is the entire point: for a pentester, *which* vulnerability
+  you are looking up is often the most sensitive thing they know.
+
+  It does not need the online-lookup switch — offline search needs no permission,
+  because it sends nothing. And it deliberately does **not** fall back to the
+  internet when a local search comes up empty. That fallback would be the obvious
+  convenience, and it would leak exactly the term you kept local, at exactly the
+  moment you were searching for something unusual. A test pins that: a local miss
+  must not reach the network.
+
+  The price is real and is stated **before** the button, not after: ~550 MB to
+  download, ~1.5 GB of disk while it builds (the release is a zip inside a zip),
+  a few hundred MB left behind, and ten to thirty minutes. You confirm those
+  numbers, watch a progress bar that names the phase it is in, and can cancel.
+  Cancelling or failing leaves nothing half-installed — a partial index is thrown
+  away and any working one is left alone.
+
+  Desktop only. On the web the section is not shown at all, rather than offering a
+  button that could not work.
+
 - **The online CVE switch now says what it costs you.** Turning on *CVE opzoeken
   (online)* sends your search term to the configured mirror — and, because the
   lookup falls through on a miss, the same term then goes to **ENISA and MITRE**

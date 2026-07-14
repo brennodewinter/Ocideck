@@ -7,6 +7,7 @@ import '../../models/cve_hit.dart';
 import '../../models/settings.dart';
 import '../../services/cve_search_service.dart';
 import '../../state/consent_provider.dart';
+import '../../state/local_cve_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../theme/app_theme.dart';
 
@@ -46,15 +47,33 @@ class _CvePickerState extends ConsumerState<CvePicker> {
   }
 
   Future<void> _run() async {
+    setState(() {
+      _loading = true;
+      _result = null;
+    });
+
+    // Ligt de database lokaal, dan zoeken we dáárin — en gaat er niets naar
+    // buiten. Niet als optimalisatie maar als het hele punt: wélk lek je
+    // opzoekt is het gevoeligste dat je prijsgeeft. Er wordt dan ook níét
+    // teruggevallen op de online keten als het lokaal niets oplevert; dat zou
+    // precies de zoekterm lekken die je lokaal wilde houden.
+    if (ref.read(localCveAvailableProvider)) {
+      final hits = await ref
+          .read(localCveProvider.notifier)
+          .search(_query.text);
+      if (!mounted) return;
+      setState(() {
+        _loading = false;
+        _result = CveSearchResult.ok(hits);
+      });
+      return;
+    }
+
     final settings = ref.read(settingsProvider);
     final base = settings.cveApiBaseUrl.trim().isEmpty
         ? AppSettings.defaultCveApiBaseUrl
         : settings.cveApiBaseUrl.trim();
     final service = widget.service ?? defaultCveSearchService(base);
-    setState(() {
-      _loading = true;
-      _result = null;
-    });
     final res = await service.search(_query.text);
     if (!mounted) return;
     setState(() {
@@ -66,10 +85,14 @@ class _CvePickerState extends ConsumerState<CvePicker> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    // Een lokale database opent de picker op eigen kracht: offline zoeken heeft
+    // geen online-toestemming nodig, want er wordt niets verstuurd.
+    final local = ref.watch(localCveAvailableProvider);
     final enabled =
-        !kIsWeb &&
-        ref.watch(settingsProvider).allowCveLookup &&
-        ref.watch(consentProvider).hasAccepted;
+        local ||
+        (!kIsWeb &&
+            ref.watch(settingsProvider).allowCveLookup &&
+            ref.watch(consentProvider).hasAccepted);
     return AlertDialog(
       title: Text(l10n.d('CVE opzoeken')),
       content: SizedBox(

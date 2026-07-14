@@ -84,6 +84,11 @@ void main() {
         'lib/services/ai_client_service.dart',
         // CVE lookup: NetGuard.safeResolve + socket pin + no-redirect + cap.
         'lib/services/cve_transport_io.dart',
+        // CVE-bulkdownload: NetGuard.safeResolve + socket pin per hop. Deze moet
+        // redirects volgen (github.com → objects.githubusercontent.com), maar
+        // doet dat zélf: elke sprong gaat opnieuw door de poort, zodat een 3xx
+        // naar een intern adres niet alsnog opgehaald wordt.
+        'lib/services/cve/local_cve_database_io.dart',
       },
       guidance:
           'New raw HttpClient. Resolve the host through NetGuard.safeResolve '

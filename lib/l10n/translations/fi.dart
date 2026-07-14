@@ -1875,6 +1875,31 @@ const _dutchSourceAddFi = <String, String>{
   'toegangstoken (JWT)': 'käyttöoikeuspoletti (JWT)',
   'databaseverbinding met wachtwoord': 'tietokantayhteys salasanalla',
   'wachtwoord in klare tekst': 'salasana selkokielisenä',
+  'Afbreken': 'Keskeytä',
+  'Afgebroken. Er is niets half achtergebleven.':
+      'Keskeytetty. Mitään ei jäänyt puolitiehen.',
+  'Bijwerken': 'Päivitä',
+  'Binnenhalen…': 'Ladataan…',
+  'CVE\'s': 'CVE:tä',
+  'Database ophalen': 'Nouda tietokanta',
+  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
+      'CVE-luetteloa ei voitu noutaa. Tarkista yhteys ja yritä uudelleen; puoliksi ladattu luettelo on hylätty.',
+  'De nieuwste uitgave opzoeken…': 'Etsitään uusinta julkaisua…',
+  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
+      'Tämä on iso lataus: yli 500 MB noudettavaa, tilapäisesti noin 1,5 GB levytilaa ja yhteydestä ja laitteesta riippuen helposti kymmenestä kolmeenkymmeneen minuuttiin työtä. Jälkeenpäin jää muutaman sadan megatavun hakemisto. Yhteydellä, josta maksetaan megatavuittain, tätä on parempi olla tekemättä.',
+  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
+      'Levytilaa oli liian vähän. Rakentaminen vaatii tilapäisesti yli 1,5 GB.',
+  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
+      'Noudettu arkisto ei ollut se, mitä odotimme, ja se hylättiin. Mitään ei asennettu.',
+  'Indexeren…': 'Indeksoidaan…',
+  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
+      'Saatavilla paikallisesti — haut tehdään offline-tilassa, yksikään hakusana ei lähde ulos.',
+  'Lokale CVE-database': 'Paikallinen CVE-tietokanta',
+  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
+      'Kun CVE-luettelo on omalla laitteellasi, haut pysyvät täällä: yksikään hakusana ei enää mene palvelimelle, eikä kukaan näe, mitä haavoittuvuutta tutkit.',
+  'Uitpakken…': 'Puretaan…',
+  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
+      'Vie koko CVE-luettelo tälle laitteelle, jotta haut tehdään offline-tilassa eikä hakusanasi mene minnekään. Tietokanta tulee CVE List V5 -lähteestä (virallinen CVE-ohjelma, GitHubin kautta).',
   'Wat er lokaal beschikbaar is': 'Mitä on saatavilla paikallisesti',
   'Gegevenspakket': 'Datapaketti',
   'Nu bijwerken': 'Päivitä nyt',

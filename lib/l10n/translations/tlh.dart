@@ -1846,6 +1846,31 @@ const _dutchSourceAddTlh = <String, String>{
   'toegangstoken (JWT)': 'nuqDaq token (JWT)',
   'databaseverbinding met wachtwoord': 'De\' pat rar \'ej pegh mu\'',
   'wachtwoord in klare tekst': 'ghItlh SaH pegh mu\'',
+  'Afbreken': 'qIl',
+  'Afgebroken. Er is niets half achtergebleven.':
+      'qIlta\'. pagh rInbe\'bogh ratlhpu\'.',
+  'Bijwerken': 'chu\'moH',
+  'Binnenhalen…': 'luDaqmeH…',
+  'CVE\'s': 'CVE',
+  'Database ophalen': 'De\'wI\' qawHaq yISuq',
+  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
+      'CVE tetlh luSuqlaHbe\'. rar yInuD \'ej yInIDqa\'; tetlh rInbe\'bogh luwoDta\'.',
+  'De nieuwste uitgave opzoeken…': 'chu\'bogh mIw luSam…',
+  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
+      'wa\'DIch tIn qem\'a\': 500 MB law\' law\' Suq, ram 1,5 GB Daq, \'ej rar lI\'wI\' je Dupmey vaD wa\'maH vagh wejmaH tup Qu\'. ghIq vatlh megabyte tetlh ratlh. megabyte DIch DIl rar, ghal net tuch.',
+  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
+      'Daq puS. cher \'e\' poQ 1,5 GB law\'.',
+  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
+      'qelI\'qam Suqta\'bogh pIchbe\'; lulajbe\'. pagh lanta\'.',
+  'Indexeren…': 'tetlh chenmoHtaH…',
+  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
+      'naDev ngaq — Do\'Ha\'be\' nejmeH mIw; nejwI\' mu\' pagh mej.',
+  'Lokale CVE-database': 'naDev CVE qawHaq',
+  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
+      'Duplu\'DI\' CVE tetlh, naDev ratlh nejmeH Qu\': pagh nejwI\' mu\' Sep\'a\'Daq ghoS \'ej wa\' vay\' leghlaHbe\' \'Iv Qagh Danej.',
+  'Uitpakken…': 'poSmoHtaH…',
+  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
+      'naDev CVE tetlh naQ yIlan, vaj Do\'Ha\'be\' nejmeH Qu\' \'ej pagh Daq ghoS nejwI\' mu\'lIj. CVE List V5 vo\' qawHaq Hegh (CVE nab motlh, GitHub Dung).',
   'Wat er lokaal beschikbaar is': 'naDev tu\'lu\'bogh De\'',
   'Gegevenspakket': 'De\' ngeD',
   'Nu bijwerken': 'DaH yIchoH',

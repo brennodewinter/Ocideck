@@ -279,6 +279,45 @@ MITRE as well*. Whoever runs those servers can infer which specific vulnerabilit
 you are looking for — which, for a pentester, is often the most sensitive thing
 they know. The badge blocks nothing; it makes the trade visible before you take it.
 
+### The local CVE database (offline lookup)
+
+The way to not disclose which vulnerability you are researching is to stop asking
+anyone. Under *Settings → Beveiliging → **Lokale CVE-database*** you can put the
+**whole CVE list on your own device**. Once it is there, **Zoek CVE…** searches
+locally and **nothing leaves your machine** — no search term, to nobody. It does
+not even need the online-lookup switch: offline search needs no permission,
+because it sends nothing.
+
+It also does **not** quietly fall back to the internet when a local search finds
+nothing. That would leak the very term you kept local, at exactly the moment you
+were looking for something unusual.
+
+**What it costs you — read this before you press the button.** The source is
+**CVE List V5**, the official CVE Program list, published on GitHub:
+
+| | |
+| --- | --- |
+| **Download** | ~550 MB (the full daily archive) |
+| **Disk, during the build** | ~1.5 GB temporarily (it is a zip inside a zip) |
+| **Disk, afterwards** | a few hundred MB (the index; the archives are deleted) |
+| **Time** | ten to thirty minutes, depending on your connection and machine |
+| **Records** | 300,000+ CVEs |
+
+On a metered connection, don't. The app asks you to confirm, with those numbers,
+before it starts — and shows a progress bar with the phase it is in (finding the
+latest release, downloading, unpacking, indexing) and a **Afbreken** (Cancel)
+button. Cancelling or failing part-way leaves **nothing** half-installed: a
+partial index is thrown away and an existing working one is left untouched.
+
+Once built, the card shows how many CVEs you have, how big the index is, which
+release it came from and when it was built. **Bijwerken** rebuilds it from the
+latest release; **Verwijderen** removes it.
+
+**Desktop only.** The feature does not appear on the web build at all — there is
+no filesystem there for an index of this size, and a 550 MB download has no
+business in a browser tab. Rather than show a button that cannot work, the web
+build hides the section.
+
 **Watching a video in parts (cutting).** You can split a video so you watch it in
 pieces across slides. Play the video in the preview, then click **Knip hier**
 (Cut here): the part up to that point stays on this slide, and the remainder

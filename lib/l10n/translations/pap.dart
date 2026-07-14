@@ -831,6 +831,31 @@ const _dutchSourceAddPap = {
   'databaseverbinding met wachtwoord':
       'konekshon di base di datos ku kontraseña',
   'wachtwoord in klare tekst': 'kontraseña den teksto kla',
+  'Afbreken': 'Kanselá',
+  'Afgebroken. Er is niets half achtergebleven.':
+      'Kanselá. No a keda nada mitar kaba.',
+  'Bijwerken': 'Aktualisá',
+  'Binnenhalen…': 'Ta baha…',
+  'CVE\'s': 'CVE',
+  'Database ophalen': 'Baha database',
+  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
+      'No por a baha e lista di CVE. Chek bo konekshon i purba atrobe; un lista mitar bahá a ser tirá afó.',
+  'De nieuwste uitgave opzoeken…': 'Ta buska e edishon di mas resien…',
+  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
+      'Esaki ta un download grandi: mas ku 500 MB pa baha, temporalmente mas o ménos 1,5 GB di espasio riba disko, i dependiendo di bo konekshon i aparato lihé dies te trinta minüt di trabou. Despues ta keda un index di algun shen megabyte. Riba un konekshon ku ta paga pa megabyte, mihó bo no hasi esaki.',
+  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
+      'Tabata tin muy poko espasio riba disko. E konstrukshon ta pidi temporalmente mas ku 1,5 GB.',
+  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
+      'E archivo bahá no tabata loke nos a spera i a ser rechasá. No a instalá nada.',
+  'Indexeren…': 'Ta indeksá…',
+  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
+      'Disponibel lokalmente — buskeda ta sosodé offline, ningun término di buskeda no ta bai pafó.',
+  'Lokale CVE-database': 'Database CVE lokal',
+  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
+      'Ku e lista di CVE riba bo mes aparato, buskeda ta keda akinan: ningun término di buskeda no ta bai mas serka un server, i ningun hende no por mira ki vulnerabilidat bo ta investigá.',
+  'Uitpakken…': 'Ta saka afó…',
+  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
+      'Pone e lista kompletu di CVE riba e aparato aki, pa buskeda sosodé offline i bo término di buskeda no bai ningun kaminda. E database ta bin di CVE List V5 (e programa CVE ofisial, via GitHub).',
   'Wat er lokaal beschikbaar is': 'Kiko ta disponibel lokalmente',
   'Gegevenspakket': 'Pakete di dato',
   'Nu bijwerken': 'Aktualisá awor',

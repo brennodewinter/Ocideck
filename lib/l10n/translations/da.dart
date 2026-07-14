@@ -1871,6 +1871,31 @@ const _dutchSourceAddDa = <String, String>{
   'toegangstoken (JWT)': 'adgangstoken (JWT)',
   'databaseverbinding met wachtwoord': 'databaseforbindelse med adgangskode',
   'wachtwoord in klare tekst': 'adgangskode i klartekst',
+  'Afbreken': 'Afbryd',
+  'Afgebroken. Er is niets half achtergebleven.':
+      'Afbrudt. Der er ikke efterladt noget halvfærdigt.',
+  'Bijwerken': 'Opdater',
+  'Binnenhalen…': 'Henter…',
+  'CVE\'s': 'CVE\'er',
+  'Database ophalen': 'Hent database',
+  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
+      'CVE-listen kunne ikke hentes. Tjek din forbindelse, og prøv igen; en halvt hentet liste er kasseret.',
+  'De nieuwste uitgave opzoeken…': 'Søger efter den nyeste udgivelse…',
+  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
+      'Det er en stor download: over 500 MB, der skal hentes, midlertidigt omkring 1,5 GB diskplads, og afhængigt af din forbindelse og enhed nemt ti til tredive minutters arbejde. Bagefter bliver et indeks på et par hundrede megabyte liggende. På en forbindelse, der betales pr. megabyte, gør du helst ikke det her.',
+  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
+      'Der var for lidt diskplads. Opbygningen kræver midlertidigt over 1,5 GB.',
+  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
+      'Det hentede arkiv var ikke det, vi forventede, og blev afvist. Der er ikke installeret noget.',
+  'Indexeren…': 'Indekserer…',
+  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
+      'Tilgængelig lokalt — opslag sker offline, og ingen søgeterm forlader enheden.',
+  'Lokale CVE-database': 'Lokal CVE-database',
+  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
+      'Med CVE-listen på din egen enhed bliver opslagene her: ingen søgeterm går længere til en server, og ingen kan se, hvilken sårbarhed du undersøger.',
+  'Uitpakken…': 'Pakker ud…',
+  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
+      'Læg hele CVE-listen på denne enhed, så opslag sker offline, og din søgeterm ikke går nogen steder hen. Databasen kommer fra CVE List V5 (det officielle CVE-program, via GitHub).',
   'Wat er lokaal beschikbaar is': 'Hvad der er tilgængeligt lokalt',
   'Gegevenspakket': 'Datapakke',
   'Nu bijwerken': 'Opdater nu',

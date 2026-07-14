@@ -1864,6 +1864,31 @@ const _dutchSourceAddEt = <String, String>{
   'toegangstoken (JWT)': 'juurdepääsuluba (JWT)',
   'databaseverbinding met wachtwoord': 'andmebaasiühendus parooliga',
   'wachtwoord in klare tekst': 'parool avatekstina',
+  'Afbreken': 'Katkesta',
+  'Afgebroken. Er is niets half achtergebleven.':
+      'Katkestatud. Midagi poolikut ei jäänud järele.',
+  'Bijwerken': 'Uuenda',
+  'Binnenhalen…': 'Allalaadimine…',
+  'CVE\'s': 'CVE-d',
+  'Database ophalen': 'Laadi andmebaas',
+  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
+      'CVE-loendit ei õnnestunud alla laadida. Kontrolli ühendust ja proovi uuesti; poolik loend visati ära.',
+  'De nieuwste uitgave opzoeken…': 'Otsitakse uusimat väljalaset…',
+  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
+      'See on suur allalaadimine: üle 500 MB tõmmata, ajutiselt umbes 1,5 GB kettaruumi ning olenevalt ühendusest ja seadmest hõlpsasti kümme kuni kolmkümmend minutit tööd. Pärast jääb alles paarisaja megabaidi suurune indeks. Ühenduses, mille eest makstakse megabaidi kaupa, on parem seda mitte teha.',
+  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
+      'Kettaruumi oli liiga vähe. Ülesehitus vajab ajutiselt üle 1,5 GB.',
+  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
+      'Allalaaditud arhiiv ei olnud see, mida ootasime, ja lükati tagasi. Midagi ei paigaldatud.',
+  'Indexeren…': 'Indekseerimine…',
+  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
+      'Saadaval kohapeal — otsingud toimuvad võrguühenduseta, ükski otsingusõna ei lahku seadmest.',
+  'Lokale CVE-database': 'Kohalik CVE-andmebaas',
+  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
+      'Kui CVE-loend on sinu enda seadmes, jäävad otsingud siia: ükski otsingusõna ei lähe enam serverisse ja keegi ei näe, millist turvaauku sa uurid.',
+  'Uitpakken…': 'Lahtipakkimine…',
+  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
+      'Pane täielik CVE-loend sellesse seadmesse, et otsingud toimuksid võrguühenduseta ja su otsingusõna ei läheks kuhugi. Andmebaas pärineb allikast CVE List V5 (ametlik CVE-programm, GitHubi kaudu).',
   'Wat er lokaal beschikbaar is': 'Mis on kohapeal saadaval',
   'Gegevenspakket': 'Andmepakett',
   'Nu bijwerken': 'Uuenda kohe',

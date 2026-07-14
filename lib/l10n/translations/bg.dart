@@ -1895,6 +1895,31 @@ const _dutchSourceAddBg = <String, String>{
   'toegangstoken (JWT)': 'токен за достъп (JWT)',
   'databaseverbinding met wachtwoord': 'връзка към база данни с парола',
   'wachtwoord in klare tekst': 'парола в чист текст',
+  'Afbreken': 'Прекъсване',
+  'Afgebroken. Er is niets half achtergebleven.':
+      'Прекъснато. Нищо не остана наполовина.',
+  'Bijwerken': 'Актуализиране',
+  'Binnenhalen…': 'Изтегляне…',
+  'CVE\'s': 'CVE',
+  'Database ophalen': 'Изтегляне на базата данни',
+  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
+      'Списъкът с CVE не можа да бъде изтеглен. Провери връзката си и опитай отново; наполовина изтегленият списък е изхвърлен.',
+  'De nieuwste uitgave opzoeken…': 'Търсене на най-новото издание…',
+  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
+      'Това е голямо изтегляне: над 500 MB, временно около 1,5 GB дисково пространство и, в зависимост от връзката и устройството ти, лесно от десет до тридесет минути работа. След това остава индекс от няколкостотин мегабайта. При връзка, която се плаща на мегабайт, по-добре не го прави.',
+  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
+      'Дисковото пространство беше недостатъчно. Изграждането временно изисква над 1,5 GB.',
+  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
+      'Изтегленият архив не беше това, което очаквахме, и беше отхвърлен. Нищо не е инсталирано.',
+  'Indexeren…': 'Индексиране…',
+  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
+      'Налично локално — търсенето става офлайн, никой термин не напуска устройството.',
+  'Lokale CVE-database': 'Локална CVE база данни',
+  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
+      'Със списъка на CVE на собственото ти устройство търсенето остава тук: никой термин вече не отива до сървър и никой не вижда коя уязвимост проучваш.',
+  'Uitpakken…': 'Разопаковане…',
+  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
+      'Сложи пълния списък с CVE на това устройство, така че търсенето да става офлайн и терминът ти да не отива никъде. Базата данни идва от CVE List V5 (официалната CVE програма, през GitHub).',
   'Wat er lokaal beschikbaar is': 'Какво е налично локално',
   'Gegevenspakket': 'Пакет с данни',
   'Nu bijwerken': 'Актуализирай сега',

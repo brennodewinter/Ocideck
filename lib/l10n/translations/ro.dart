@@ -1892,6 +1892,31 @@ const _dutchSourceAddRo = <String, String>{
   'toegangstoken (JWT)': 'token de acces (JWT)',
   'databaseverbinding met wachtwoord': 'conexiune la baza de date cu parolă',
   'wachtwoord in klare tekst': 'parolă în text clar',
+  'Afbreken': 'Anulează',
+  'Afgebroken. Er is niets half achtergebleven.':
+      'Anulat. Nu a rămas nimic pe jumătate.',
+  'Bijwerken': 'Actualizează',
+  'Binnenhalen…': 'Se descarcă…',
+  'CVE\'s': 'CVE',
+  'Database ophalen': 'Descarcă baza de date',
+  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
+      'Lista CVE nu a putut fi descărcată. Verifică-ți conexiunea și încearcă din nou; o listă descărcată pe jumătate a fost aruncată.',
+  'De nieuwste uitgave opzoeken…': 'Se caută cea mai recentă versiune…',
+  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
+      'Aceasta este o descărcare mare: peste 500 MB de adus, temporar cam 1,5 GB spațiu pe disc și, în funcție de conexiune și dispozitiv, ușor zece până la treizeci de minute de lucru. După aceea rămâne un index de câteva sute de megabiți. Pe o conexiune plătită la megabit, mai bine nu faci asta.',
+  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
+      'Nu era destul spațiu pe disc. Construirea cere temporar peste 1,5 GB.',
+  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
+      'Arhiva descărcată nu era cea așteptată și a fost respinsă. Nu s-a instalat nimic.',
+  'Indexeren…': 'Se indexează…',
+  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
+      'Disponibil local — căutările se fac offline, niciun termen de căutare nu iese afară.',
+  'Lokale CVE-database': 'Bază de date CVE locală',
+  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
+      'Cu lista CVE pe propriul dispozitiv, căutările rămân aici: niciun termen de căutare nu mai ajunge la un server și nimeni nu poate vedea ce vulnerabilitate cercetezi.',
+  'Uitpakken…': 'Se dezarhivează…',
+  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
+      'Pune lista CVE completă pe acest dispozitiv, astfel încât căutările să se facă offline, iar termenul tău de căutare să nu ajungă nicăieri. Baza de date provine din CVE List V5 (programul CVE oficial, prin GitHub).',
   'Wat er lokaal beschikbaar is': 'Ce este disponibil local',
   'Gegevenspakket': 'Pachet de date',
   'Nu bijwerken': 'Actualizează acum',

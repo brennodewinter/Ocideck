@@ -1882,6 +1882,31 @@ const _dutchSourceAddLt = <String, String>{
   'toegangstoken (JWT)': 'prieigos raktas (JWT)',
   'databaseverbinding met wachtwoord': 'duomenų bazės ryšys su slaptažodžiu',
   'wachtwoord in klare tekst': 'slaptažodis atviru tekstu',
+  'Afbreken': 'Nutraukti',
+  'Afgebroken. Er is niets half achtergebleven.':
+      'Nutraukta. Nieko nebaigto neliko.',
+  'Bijwerken': 'Atnaujinti',
+  'Binnenhalen…': 'Atsiunčiama…',
+  'CVE\'s': 'CVE',
+  'Database ophalen': 'Atsisiųsti duomenų bazę',
+  'De CVE-lijst kon niet worden opgehaald. Controleer je verbinding en probeer het opnieuw; een half binnengehaalde lijst is weggegooid.':
+      'Nepavyko atsisiųsti CVE sąrašo. Patikrink ryšį ir bandyk dar kartą; iš dalies atsiųstas sąrašas išmestas.',
+  'De nieuwste uitgave opzoeken…': 'Ieškoma naujausios laidos…',
+  'Dit is een grote download: ruim 500 MB binnenhalen, tijdelijk zo\'n 1,5 GB schijfruimte, en afhankelijk van je verbinding en apparaat al gauw tien tot dertig minuten werk. Daarna blijft er een index van enkele honderden megabytes staan. Op een verbinding die per megabyte betaalt, doe je dit liever niet.':
+      'Tai didelis atsisiuntimas: daugiau nei 500 MB, laikinai apie 1,5 GB disko vietos ir, priklausomai nuo ryšio bei įrenginio, lengvai nuo dešimties iki trisdešimties minučių darbo. Po to lieka kelių šimtų megabaitų rodyklė. Naudojant ryšį, už kurį mokama pagal megabaitus, geriau to nedaryti.',
+  'Er was te weinig schijfruimte. De opbouw vraagt tijdelijk ruim 1,5 GB.':
+      'Trūko vietos diske. Kūrimui laikinai reikia daugiau nei 1,5 GB.',
+  'Het opgehaalde archief was niet wat we verwachtten en is geweigerd. Er is niets geïnstalleerd.':
+      'Atsiųstas archyvas buvo ne toks, kokio tikėjomės, ir buvo atmestas. Nieko neįdiegta.',
+  'Indexeren…': 'Indeksuojama…',
+  'Lokaal beschikbaar — opzoeken gebeurt offline, er gaat geen zoekterm naar buiten.':
+      'Pasiekiama vietoje — paieška vyksta neprisijungus, joks paieškos žodis neišeina į išorę.',
+  'Lokale CVE-database': 'Vietinė CVE duomenų bazė',
+  'Met de CVE-lijst op je eigen apparaat blijft het opzoeken hier: er gaat geen zoekterm meer naar een server, en niemand kan zien welk lek je onderzoekt.':
+      'Turint CVE sąrašą savo įrenginyje, paieška lieka čia: joks paieškos žodis nebekeliauja į serverį ir niekas nemato, kokį pažeidžiamumą tiri.',
+  'Uitpakken…': 'Išpakuojama…',
+  'Zet de volledige CVE-lijst op dit apparaat, zodat opzoeken offline gebeurt en je zoekterm nergens heen gaat. De database komt van CVE List V5 (het officiële CVE-programma, via GitHub).':
+      'Įkelk visą CVE sąrašą į šį įrenginį, kad paieška vyktų neprisijungus ir tavo paieškos žodis niekur nekeliautų. Duomenų bazė gaunama iš CVE List V5 (oficialios CVE programos, per GitHub).',
   'Wat er lokaal beschikbaar is': 'Kas prieinama vietoje',
   'Gegevenspakket': 'Duomenų paketas',
   'Nu bijwerken': 'Atnaujinti dabar',

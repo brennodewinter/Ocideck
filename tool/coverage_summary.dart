@@ -39,6 +39,10 @@ const Set<String> uncoveredBaseline = {
   'lib/platform/presenter_fullscreen_web.dart',
   'lib/services/cve_transport_factory.dart',
   'lib/services/cve_transport_web.dart',
+  // PLATFORM: the local CVE database's conditional-export facade + its web half
+  // (the feature is desktop-only; the io half is exercised by the ingest tests).
+  'lib/services/cve/local_cve_database.dart',
+  'lib/services/cve/local_cve_database_web.dart',
   'lib/services/secmodule/sec_pack_platform.dart',
   'lib/services/secmodule/sec_pack_platform_web.dart',
   'lib/utils/file_download.dart',
@@ -53,6 +57,9 @@ const Set<String> uncoveredBaseline = {
   'lib/widgets/dialogs/parts/settings_dialog_search_index.dart',
   // NO EXECUTABLE LINES: a single `export`.
   'lib/widgets/markdown_notes_editor.dart',
+  // NO EXECUTABLE LINES: an abstract interface (the local CVE database as the
+  // UI sees it). Its two implementations are covered separately.
+  'lib/services/cve/local_cve_database_api.dart',
   // NO EXECUTABLE LINES: a single enum declaration.
   'lib/widgets/markdown_editor/notes_editor_mode.dart',
 };
