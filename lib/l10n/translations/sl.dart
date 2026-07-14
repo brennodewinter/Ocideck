@@ -1785,6 +1785,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'telefoonnummer': 'telefonska številka',
   'Voor wie is deze export?': 'Za koga je ta izvoz?',
   'Volledig': 'Popolno',
   'Geredigeerd': 'Prekrito',

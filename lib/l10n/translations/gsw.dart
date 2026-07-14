@@ -1787,6 +1787,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'telefoonnummer': 'Telifonnummere',
   'Voor wie is deze export?': 'Für wän isch dä Export?',
   'Volledig': 'Vollständig',
   'Geredigeerd': 'Gschwärzt',

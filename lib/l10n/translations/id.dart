@@ -1783,6 +1783,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'telefoonnummer': 'nomor telepon',
   'Voor wie is deze export?': 'Ekspor ini untuk siapa?',
   'Volledig': 'Lengkap',
   'Geredigeerd': 'Diredaksi',

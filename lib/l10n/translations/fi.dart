@@ -1783,6 +1783,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'telefoonnummer': 'puhelinnumero',
   'Voor wie is deze export?': 'Kenelle tämä vienti on?',
   'Volledig': 'Täysi',
   'Geredigeerd': 'Peitetty',

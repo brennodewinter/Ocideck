@@ -1799,6 +1799,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'telefoonnummer': 'numerus telephonicus',
   'Voor wie is deze export?': 'Cui haec exportatio destinatur?',
   'Volledig': 'Plenum',
   'Geredigeerd': 'Obliteratum',

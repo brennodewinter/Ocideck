@@ -1782,6 +1782,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'telefoonnummer': 'tālruņa numurs',
   'Voor wie is deze export?': 'Kam paredzēts šis eksports?',
   'Volledig': 'Pilns',
   'Geredigeerd': 'Aizklāts',

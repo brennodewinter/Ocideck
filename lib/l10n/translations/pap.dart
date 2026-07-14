@@ -740,6 +740,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'telefoonnummer': 'number di telefon',
   'Voor wie is deze export?': 'Pa ken e eksportashon aki ta?',
   'Volledig': 'Kompleto',
   'Geredigeerd': 'Redaktá',

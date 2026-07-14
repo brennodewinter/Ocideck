@@ -1787,6 +1787,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'telefoonnummer': 'telefonszám',
   'Voor wie is deze export?': 'Kinek szól ez az export?',
   'Volledig': 'Teljes',
   'Geredigeerd': 'Kitakarva',

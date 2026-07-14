@@ -1790,6 +1790,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'telefoonnummer': 'telefonski broj',
   'Voor wie is deze export?': 'Za koga je ovaj izvoz?',
   'Volledig': 'Potpuno',
   'Geredigeerd': 'Redigirano',

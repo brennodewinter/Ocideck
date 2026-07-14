@@ -741,6 +741,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'telefoonnummer': 'telefoannûmer',
   'Voor wie is deze export?': 'Foar wa is dizze eksport?',
   'Volledig': 'Folslein',
   'Geredigeerd': 'Redigearre',

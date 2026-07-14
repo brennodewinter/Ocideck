@@ -1806,6 +1806,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'telefoonnummer': 'numru tat-telefon',
   'Voor wie is deze export?': 'Għal min hi din l-esportazzjoni?',
   'Volledig': 'Sħiħ',
   'Geredigeerd': 'Irrediġut',

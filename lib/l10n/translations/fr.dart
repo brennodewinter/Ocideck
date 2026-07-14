@@ -740,6 +740,7 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'telefoonnummer': 'numéro de téléphone',
   'Voor wie is deze export?': 'Pour qui est cet export ?',
   'Volledig': 'Complet',
   'Geredigeerd': 'Caviardé',

@@ -7,7 +7,28 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Fixed
+- **A special-category datum is a statement, not a word.** Redaction blanked only
+  the keyword that fired, which left this on screen:
+
+  > Marieke de Vries reported sick with a ████████
+
+  The name is still there, the sick note is still there, and `diabetes-` is still
+  there literally. Nothing had been removed — a word had been covered, which is
+  exactly the mistake this whole design exists to prevent. Now, once a health,
+  criminal, religious or union datum is traceable to a person on the same slide,
+  the redaction takes the whole line. The same goes for a case number: "Case
+  ████ against M. de Vries" still tells you she is a suspect.
+
 ### Added
+- **Phone numbers (`contact.phone`).** In international form (`+CC` followed by
+  the national number) they are validated against the list of assigned ITU country
+  calling codes and a valid E.164 length — a real check, so it becomes a proper
+  warning. A national
+  number needs a separator (`06-24681357`); a bare run of digits needs a context
+  word, because `0417164300` on its own is just as likely to be an old bank
+  account number. Dates, ISBNs, amounts and the reserved "drama" ranges that films
+  and manuals use are excluded by design.
 - **Two versions from one source.** When a deck holds findings, the export dialog
   asks who the export is for. **Full** removes only what you marked *leave out* —
   the client or auditor gets a report they can actually verify against. **Redacted**

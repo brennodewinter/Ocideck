@@ -736,6 +736,7 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'telefoonnummer': 'numero di telefono',
   'Voor wie is deze export?': 'Per chi è questa esportazione?',
   'Volledig': 'Completo',
   'Geredigeerd': 'Oscurato',

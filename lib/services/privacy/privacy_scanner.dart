@@ -23,6 +23,7 @@ import 'privacy_bulk_rules.dart';
 import 'privacy_checksums.dart';
 import 'privacy_eu_rules.dart';
 import 'privacy_own_identity.dart';
+import 'privacy_phone_rules.dart';
 import 'privacy_special_rules.dart';
 import 'privacy_structural_rules.dart';
 import 'privacy_secret_rules.dart';
@@ -153,7 +154,8 @@ class PrivacyScanner {
   /// nationaal nummer, e-mailadres), dan is het bijzondere gegeven herleidbaar tot
   /// een persoon — en dát is precies wat artikel 9 beschermt. Dán pas gaat de
   /// melding omhoog.
-  /// De escalatie verbreedt ook het **bereik**, niet alleen de zekerheid.
+  ///
+  /// En dan verbreedt ze ook het **bereik**, niet alleen de zekerheid.
   ///
   /// Zodra het bijzondere gegeven herleidbaar is tot een persoon, is het gegeven
   /// de hele mededeling — zie [statementSpan]. Daarom heeft deze functie de
@@ -191,6 +193,7 @@ class PrivacyScanner {
   ) {
     if (fragment.text.isEmpty) return;
     _scanEmail(fragment, slideIndex, out);
+    _scanPhone(fragment, slideIndex, out);
     _scanIban(fragment, slideIndex, out);
     _scanBsn(fragment, slideIndex, out);
     _scanSecrets(fragment, slideIndex, out);
@@ -449,6 +452,62 @@ class PrivacyScanner {
           ruleId: 'contact.email',
           family: PrivacyFamily.contact,
           confidence: PrivacyConfidence.certain,
+        ),
+      );
+    }
+  }
+
+  // ── contact.phone ─────────────────────────────────────────────────────────
+
+  /// Drie poorten, van streng naar soepel — zie `privacy_phone_rules.dart`.
+  ///
+  /// Alleen de internationale vorm wordt `certain`: een tóégekend landnummer plus
+  /// een geldige E.164-lengte is een structurele validatie, niet een gok. De
+  /// nationale vorm mist dat bewijs en blijft `likely`; een kale cijferreeks
+  /// vuurt zonder contextwoord helemaal niet, want dan is ze niet te
+  /// onderscheiden van een oud bankrekeningnummer.
+  ///
+  /// `contact.phone` telt bewust **niet** mee voor [identifiesAPerson]. Een
+  /// telefoonnummer identificeert een persoon net zo goed als een e-mailadres,
+  /// maar het staat vaker op een slide als *organisatienummer* — en dan zou een
+  /// HR-slide met het centrale nummer en het woord "ziekteverzuim" onterecht
+  /// escaleren tot een bijzonder persoonsgegeven.
+  void _scanPhone(
+    _Fragment fragment,
+    int slideIndex,
+    List<PrivacyFinding> out,
+  ) {
+    for (final match in e164Pattern.allMatches(fragment.text)) {
+      if (!isValidE164(match.group(0)!)) continue;
+      _emit(
+        out,
+        _finding(
+          fragment,
+          slideIndex,
+          match,
+          ruleId: 'contact.phone',
+          family: PrivacyFamily.contact,
+          confidence: PrivacyConfidence.certain,
+        ),
+      );
+    }
+
+    for (final match in nationalPhonePattern.allMatches(fragment.text)) {
+      final raw = match.group(0)!;
+      if (!isPlausibleNationalPhone(raw)) continue;
+      if (!hasPhoneSeparator(raw) &&
+          !_hasContextWord(fragment.text, match.start, phoneContextWords)) {
+        continue;
+      }
+      _emit(
+        out,
+        _finding(
+          fragment,
+          slideIndex,
+          match,
+          ruleId: 'contact.phone',
+          family: PrivacyFamily.contact,
+          confidence: PrivacyConfidence.likely,
         ),
       );
     }

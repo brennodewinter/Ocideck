@@ -1790,6 +1790,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'telefoonnummer': 'telefónne číslo',
   'Voor wie is deze export?': 'Pre koho je tento export?',
   'Volledig': 'Úplný',
   'Geredigeerd': 'Začiernený',

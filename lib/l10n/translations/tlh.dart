@@ -1758,6 +1758,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'telefoonnummer': 'ghogh QIn mI\'',
   'Voor wie is deze export?': '\'Iv ngeHmeH?',
   'Volledig': 'naQ',
   'Geredigeerd': 'So\'lu\'bogh',

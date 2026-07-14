@@ -1819,6 +1819,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'telefoonnummer': 'uimhir ghutháin',
   'Voor wie is deze export?': 'Cé dó an t-easpórtáil seo?',
   'Volledig': 'Iomlán',
   'Geredigeerd': 'Folaithe',

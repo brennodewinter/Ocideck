@@ -1813,6 +1813,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'telefoonnummer': 'número de telefone',
   'Voor wie is deze export?': 'Para quem é esta exportação?',
   'Volledig': 'Completo',
   'Geredigeerd': 'Ocultado',

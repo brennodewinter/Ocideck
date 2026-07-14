@@ -1782,6 +1782,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'telefoonnummer': 'telefonnummer',
   'Voor wie is deze export?': 'Vem är den här exporten till?',
   'Volledig': 'Fullständig',
   'Geredigeerd': 'Maskad',

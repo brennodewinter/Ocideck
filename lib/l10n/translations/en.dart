@@ -922,6 +922,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'telefoonnummer': 'phone number',
   'Voor wie is deze export?': 'Who is this export for?',
   'Volledig': 'Full',
   'Geredigeerd': 'Redacted',

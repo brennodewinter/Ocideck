@@ -1782,6 +1782,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'telefoonnummer': 'telefonnummer',
   'Voor wie is deze export?': 'Hvem er denne eksport til?',
   'Volledig': 'Fuldstændig',
   'Geredigeerd': 'Redigeret',

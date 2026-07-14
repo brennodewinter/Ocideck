@@ -1806,6 +1806,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'telefoonnummer': 'телефонен номер',
   'Voor wie is deze export?': 'За кого е този експорт?',
   'Volledig': 'Пълен',
   'Geredigeerd': 'Заличен',
