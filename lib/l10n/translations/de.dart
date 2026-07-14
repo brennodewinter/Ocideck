@@ -740,6 +740,13 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'De privacycontrole': 'Die Datenschutzprüfung',
+  'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
+      'OciDeck liest deine Folien auf möglicherweise datenschutzrelevante Angaben durch: Identifikationsnummern, Kontaktdaten, Telefonnummern, Bankkonten, Schlüssel und Passwörter sowie besondere Kategorien personenbezogener Daten. Das geschieht vollständig auf diesem Gerät: Es wird nichts verschickt, und der gefundene Wert erscheint in keiner Meldung.',
+  'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.':
+      'Die Prüfung garantiert nicht, dass alles gefunden wird; sie verringert die Gefahr, dass personenbezogene Daten unbeabsichtigt nach außen gelangen.',
+  'Tekst in afbeeldingen blijft buiten beeld, gelinkte bestanden worden niet geopend, en gegevens zonder herkenbaar patroon herkent geen enkele scanner. Een dia zonder meldingen is een dia waarin wíj niets hebben gevonden, niet een dia waarvan vaststaat dat er niets in staat. Wat je deelt, blijft jouw beslissing en jouw verantwoordelijkheid.':
+      'Text in Bildern bleibt unsichtbar, verlinkte Dateien werden nicht geöffnet, und Daten ohne erkennbares Muster erkennt kein Scanner. Eine Folie ohne Meldungen ist eine Folie, auf der *wir* nichts gefunden haben — nicht eine Folie, von der erwiesen ist, dass nichts darin steht. Was du teilst, bleibt deine Entscheidung und deine Verantwortung.',
   'telefoonnummer': 'Telefonnummer',
   'Voor wie is deze export?': 'Für wen ist dieser Export?',
   'Volledig': 'Vollständig',

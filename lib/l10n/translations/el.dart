@@ -1811,6 +1811,13 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'De privacycontrole': 'Ο έλεγχος απορρήτου',
+  'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
+      'Το OciDeck διαβάζει τις διαφάνειές σου για δεδομένα που μπορεί να είναι ευαίσθητα: αριθμούς ταυτοποίησης, στοιχεία επικοινωνίας, αριθμούς τηλεφώνου, τραπεζικούς λογαριασμούς, κλειδιά και κωδικούς, και ειδικές κατηγορίες προσωπικών δεδομένων. Όλα γίνονται σε αυτή τη συσκευή: τίποτα δεν αποστέλλεται και η τιμή που βρέθηκε δεν εμφανίζεται σε καμία ειδοποίηση.',
+  'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.':
+      'Ο έλεγχος δεν εγγυάται ότι θα βρεθούν τα πάντα· μειώνει την πιθανότητα να διαρρεύσουν προσωπικά δεδομένα κατά λάθος.',
+  'Tekst in afbeeldingen blijft buiten beeld, gelinkte bestanden worden niet geopend, en gegevens zonder herkenbaar patroon herkent geen enkele scanner. Een dia zonder meldingen is een dia waarin wíj niets hebben gevonden, niet een dia waarvan vaststaat dat er niets in staat. Wat je deelt, blijft jouw beslissing en jouw verantwoordelijkheid.':
+      'Το κείμενο μέσα σε εικόνες μένει εκτός εμβέλειας, τα συνδεδεμένα αρχεία δεν ανοίγονται και κανένας σαρωτής δεν αναγνωρίζει δεδομένα χωρίς αναγνωρίσιμο μοτίβο. Μια διαφάνεια χωρίς ευρήματα είναι μια διαφάνεια στην οποία *εμείς* δεν βρήκαμε τίποτα — όχι μια διαφάνεια για την οποία αποδεικνύεται ότι δεν περιέχει τίποτα. Ό,τι μοιράζεσαι παραμένει δική σου απόφαση και δική σου ευθύνη.',
   'telefoonnummer': 'αριθμός τηλεφώνου',
   'Voor wie is deze export?': 'Για ποιον είναι αυτή η εξαγωγή;',
   'Volledig': 'Πλήρες',

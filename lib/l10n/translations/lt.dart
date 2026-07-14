@@ -1791,6 +1791,13 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'De privacycontrole': 'Privatumo patikra',
+  'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
+      'OciDeck peržiūri tavo skaidres ieškodama duomenų, kurie gali būti jautrūs privatumui: identifikavimo numerių, kontaktinių duomenų, telefono numerių, banko sąskaitų, raktų ir slaptažodžių bei specialių kategorijų asmens duomenų. Visa tai vyksta šiame įrenginyje: niekas nesiunčiama, o rasta reikšmė nepasirodo jokiame pranešime.',
+  'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.':
+      'Patikra negarantuoja, kad bus rasta viskas; ji sumažina riziką, kad asmens duomenys netyčia nutekės.',
+  'Tekst in afbeeldingen blijft buiten beeld, gelinkte bestanden worden niet geopend, en gegevens zonder herkenbaar patroon herkent geen enkele scanner. Een dia zonder meldingen is een dia waarin wíj niets hebben gevonden, niet een dia waarvan vaststaat dat er niets in staat. Wat je deelt, blijft jouw beslissing en jouw verantwoordelijkheid.':
+      'Tekstas paveikslėliuose lieka nematomas, susieti failai neatveriami, o duomenų be atpažįstamo šablono neatpažįsta joks skaitytuvas. Skaidrė be radinių yra skaidrė, kurioje *mes* nieko neradome — ne skaidrė, apie kurią įrodyta, kad joje nieko nėra. Tai, kuo dalijiesi, lieka tavo sprendimas ir tavo atsakomybė.',
   'telefoonnummer': 'telefono numeris',
   'Voor wie is deze export?': 'Kam skirtas šis eksportas?',
   'Volledig': 'Pilnas',

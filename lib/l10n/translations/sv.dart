@@ -1782,6 +1782,13 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'De privacycontrole': 'Integritetskontrollen',
+  'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
+      'OciDeck läser igenom dina bilder efter uppgifter som kan vara integritetskänsliga: identifikationsnummer, kontaktuppgifter, telefonnummer, bankkonton, nycklar och lösenord samt särskilda kategorier av personuppgifter. Allt sker på den här enheten: ingenting skickas iväg, och det funna värdet syns inte i något meddelande.',
+  'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.':
+      'Kontrollen garanterar inte att allt hittas; den minskar risken för att personuppgifter oavsiktligt läcker ut.',
+  'Tekst in afbeeldingen blijft buiten beeld, gelinkte bestanden worden niet geopend, en gegevens zonder herkenbaar patroon herkent geen enkele scanner. Een dia zonder meldingen is een dia waarin wíj niets hebben gevonden, niet een dia waarvan vaststaat dat er niets in staat. Wat je deelt, blijft jouw beslissing en jouw verantwoordelijkheid.':
+      'Text i bilder förblir osynlig, länkade filer öppnas inte, och uppgifter utan igenkännbart mönster känner ingen skanner igen. En bild utan anmärkningar är en bild där *vi* inte hittade något — inte en bild där det är bevisat att inget finns. Vad du delar förblir ditt beslut och ditt ansvar.',
   'telefoonnummer': 'telefonnummer',
   'Voor wie is deze export?': 'Vem är den här exporten till?',
   'Volledig': 'Fullständig',

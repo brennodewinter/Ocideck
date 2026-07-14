@@ -1758,6 +1758,13 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'De privacycontrole': 'peghmey nuDwI\'',
+  'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
+      'OciDeck De\' Sovbe\'lu\'bogh nej: nuv mI\'mey, rIchmey, ghogh QIn mI\'mey, Huch qach mI\'mey, ngaQHa\'moHwI\'mey je pIn\'a\' mu\'mey, \'ej De\' pIm\'a\'. jan vaD neH qaS. pagh ngeHlu\'. De\' tu\'lu\'bogh \'oH ta\'be\' Doch.',
+  'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.':
+      'Hoch tu\'lu\' \'e\' lulaHbe\'. \'ach nuv De\' Hejbe\'meH QaH.',
+  'Tekst in afbeeldingen blijft buiten beeld, gelinkte bestanden worden niet geopend, en gegevens zonder herkenbaar patroon herkent geen enkele scanner. Een dia zonder meldingen is een dia waarin wíj niets hebben gevonden, niet een dia waarvan vaststaat dat er niets in staat. Wat je deelt, blijft jouw beslissing en jouw verantwoordelijkheid.':
+      'mIllogh QIn wIlaDbe\'. De\' HIvje\' wIpoSmoHbe\'. De\' Sovbe\'lu\'bogh, pat vItu\'laHbe\'. QIn Hutlhbogh nav \'oH nav pagh wItu\'pu\'bogh — nav pagh tu\'lu\' \'e\' toblu\'pu\'bogh \'oHbe\'. bochelbogh Doch: SoH wIv, SoH ngoQ.',
   'telefoonnummer': 'ghogh QIn mI\'',
   'Voor wie is deze export?': '\'Iv ngeHmeH?',
   'Volledig': 'naQ',

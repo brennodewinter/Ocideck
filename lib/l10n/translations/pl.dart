@@ -1796,6 +1796,13 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'De privacycontrole': 'Kontrola prywatności',
+  'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
+      'OciDeck przegląda Twoje slajdy pod kątem danych, które mogą być wrażliwe: numery identyfikacyjne, dane kontaktowe, numery telefonów, rachunki bankowe, klucze i hasła oraz szczególne kategorie danych osobowych. Wszystko dzieje się na tym urządzeniu: nic nie jest wysyłane, a znaleziona wartość nie pojawia się w żadnym komunikacie.',
+  'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.':
+      'Kontrola nie gwarantuje, że wszystko zostanie znalezione; zmniejsza ryzyko niezamierzonego wycieku danych osobowych.',
+  'Tekst in afbeeldingen blijft buiten beeld, gelinkte bestanden worden niet geopend, en gegevens zonder herkenbaar patroon herkent geen enkele scanner. Een dia zonder meldingen is een dia waarin wíj niets hebben gevonden, niet een dia waarvan vaststaat dat er niets in staat. Wat je deelt, blijft jouw beslissing en jouw verantwoordelijkheid.':
+      'Tekst na obrazach pozostaje niewidoczny, pliki z odnośników nie są otwierane, a danych bez rozpoznawalnego wzorca nie rozpozna żaden skaner. Slajd bez ostrzeżeń to slajd, na którym *my* niczego nie znaleźliśmy — a nie slajd, o którym wiadomo, że nic na nim nie ma. To, co udostępniasz, pozostaje Twoją decyzją i Twoją odpowiedzialnością.',
   'telefoonnummer': 'numer telefonu',
   'Voor wie is deze export?': 'Dla kogo jest ten eksport?',
   'Volledig': 'Pełny',

@@ -741,6 +741,13 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'De privacycontrole': 'De privacykontrôle',
+  'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
+      'OciDeck lêst dyn dia\'s nei op gegevens dy\'t privacygefoelich wêze kinne: identifikaasjenûmers, kontaktgegevens, telefoannûmers, bankrekkens, kaaien en wachtwurden, en bysûndere persoansgegevens. Dat bart folslein op dit apparaat: der wurdt neat ferstjoerd, en de fûne wearde komt yn gjin inkelde melding te stean.',
+  'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.':
+      'De kontrôle garandearret net dat alles fûn wurdt; se ferlytset de kâns dat persoansgegevens ûnbedoeld útlekke.',
+  'Tekst in afbeeldingen blijft buiten beeld, gelinkte bestanden worden niet geopend, en gegevens zonder herkenbaar patroon herkent geen enkele scanner. Een dia zonder meldingen is een dia waarin wíj niets hebben gevonden, niet een dia waarvan vaststaat dat er niets in staat. Wat je deelt, blijft jouw beslissing en jouw verantwoordelijkheid.':
+      'Tekst yn ôfbyldings bliuwt bûten byld, keppele bestannen wurde net iepene, en gegevens sûnder werkenber patroan werkent gjin inkelde scanner. In dia sûnder meldingen is in dia dêr\'t *wy* neat yn fûn hawwe, net in dia dêr\'t fêststiet dat der neat yn stiet. Wat do dielst, bliuwt dyn beslissing en dyn ferantwurdlikheid.',
   'telefoonnummer': 'telefoannûmer',
   'Voor wie is deze export?': 'Foar wa is dizze eksport?',
   'Volledig': 'Folslein',

@@ -1813,6 +1813,13 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'De privacycontrole': 'A verificação de privacidade',
+  'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
+      'O OciDeck lê os teus diapositivos à procura de dados que possam ser sensíveis: números de identificação, dados de contacto, números de telefone, contas bancárias, chaves e palavras-passe, e categorias especiais de dados pessoais. Tudo acontece neste dispositivo: nada é enviado e o valor encontrado não aparece em nenhum aviso.',
+  'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.':
+      'A verificação não garante que tudo seja encontrado; reduz a probabilidade de dados pessoais escaparem sem intenção.',
+  'Tekst in afbeeldingen blijft buiten beeld, gelinkte bestanden worden niet geopend, en gegevens zonder herkenbaar patroon herkent geen enkele scanner. Een dia zonder meldingen is een dia waarin wíj niets hebben gevonden, niet een dia waarvan vaststaat dat er niets in staat. Wat je deelt, blijft jouw beslissing en jouw verantwoordelijkheid.':
+      'O texto dentro de imagens fica fora de alcance, os ficheiros ligados não são abertos, e nenhum scanner reconhece dados sem um padrão identificável. Um diapositivo sem ocorrências é um diapositivo em que *nós* não encontrámos nada — não um diapositivo do qual se prove que nada contém. O que partilhas continua a ser a tua decisão e a tua responsabilidade.',
   'telefoonnummer': 'número de telefone',
   'Voor wie is deze export?': 'Para quem é esta exportação?',
   'Volledig': 'Completo',

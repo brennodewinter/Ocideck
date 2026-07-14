@@ -456,6 +456,28 @@ class _ExportDialogState extends State<ExportDialog> {
     );
   }
 
+  /// De grens, op het moment van delen.
+  ///
+  /// Deze regel staat er **altijd**, en juist het stille geval is de reden. Een
+  /// deck met bevindingen waarschuwt zichzelf al; een deck zonder bevindingen
+  /// toont een groen "Klaar voor export — geen kwaliteitsproblemen gevonden", en
+  /// dát leest als "schoon". Terwijl het niet meer zegt dan: wij hebben niets
+  /// gevonden. Wie op die aanname deelt, is slechter af dan wie helemaal geen
+  /// controle had — dan had hij tenminste zelf gekeken.
+  Widget _privacyCaveat(AppLocalizations l10n) => Padding(
+    padding: const EdgeInsets.only(bottom: 8),
+    child: Text(
+      l10n.d(
+        'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.',
+      ),
+      style: TextStyle(
+        fontSize: 11,
+        color: AppTheme.slate500,
+        fontStyle: FontStyle.italic,
+      ),
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
@@ -619,6 +641,7 @@ class _ExportDialogState extends State<ExportDialog> {
           _qualityBanner(l10n)
         else
           _readyBanner(l10n),
+        _privacyCaveat(l10n),
         Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: Text(

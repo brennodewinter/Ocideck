@@ -1782,6 +1782,13 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'De privacycontrole': 'Privātuma pārbaude',
+  'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
+      'OciDeck pārlasa tavus slaidus, meklējot datus, kas varētu būt privātumam jutīgi: identifikācijas numurus, kontaktinformāciju, tālruņa numurus, bankas kontus, atslēgas un paroles, kā arī īpašas personas datu kategorijas. Tas viss notiek šajā ierīcē: nekas netiek nosūtīts, un atrastā vērtība neparādās nevienā paziņojumā.',
+  'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.':
+      'Pārbaude negarantē, ka tiks atrasts viss; tā samazina risku, ka personas dati nejauši noplūst.',
+  'Tekst in afbeeldingen blijft buiten beeld, gelinkte bestanden worden niet geopend, en gegevens zonder herkenbaar patroon herkent geen enkele scanner. Een dia zonder meldingen is een dia waarin wíj niets hebben gevonden, niet een dia waarvan vaststaat dat er niets in staat. Wat je deelt, blijft jouw beslissing en jouw verantwoordelijkheid.':
+      'Teksts attēlos paliek ārpus redzesloka, saistītie faili netiek atvērti, un datus bez atpazīstama raksta neatpazīst neviens skeneris. Slaids bez atradumiem ir slaids, kurā *mēs* neko neatradām — nevis slaids, par kuru ir pierādīts, ka tajā nekā nav. Tas, ko tu dalies, paliek tavs lēmums un tava atbildība.',
   'telefoonnummer': 'tālruņa numurs',
   'Voor wie is deze export?': 'Kam paredzēts šis eksports?',
   'Volledig': 'Pilns',

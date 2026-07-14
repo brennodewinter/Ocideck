@@ -1036,14 +1036,22 @@ Met een eigen kop, in de stijl van de bestaande drie:
 > (gepseudonimiseerd, niet geanonimiseerd) — behandel een geredigeerde export dus met dezelfde
 > zorg als het origineel.
 >
-> **De controle is een hulpmiddel, geen garantie.** OciDeck vindt niet alles: tekst in
-> afbeeldingen, gegevens in gelinkte bestanden en gevoelige informatie zonder herkenbaar patroon
-> blijven buiten beeld. Een dia zonder meldingen is een dia waarin *wij* niets hebben gevonden —
-> niet een dia waarvan vaststaat dat er niets in zit. De eindverantwoordelijkheid voor wat je
-> deelt, blijft bij jou.
+> **De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er
+> persoonsgegevens onbedoeld uitlekken.** Tekst in afbeeldingen, gegevens in gelinkte bestanden en
+> gevoelige informatie zonder herkenbaar patroon blijven buiten beeld. Een dia zonder meldingen is
+> een dia waarin *wij* niets hebben gevonden — niet een dia waarvan vaststaat dat er niets in zit.
+> De eindverantwoordelijkheid voor wat je deelt, blijft bij jou.
 
 Die laatste alinea is niet optioneel. Zonder dat voorbehoud gaat iemand de groene balk lezen als
 een vrijwaring, en dan hebben we een privacyfeature gebouwd die het probleem verergert.
+
+Die ene zin is daarom de **hele belofte**, en hij staat op drie plaatsen waar hij ertoe doet: in de
+privacyverklaring (`privacy_statement_content.dart`, óók in de toestemmingspoort), onder de
+instelling zelf, en — het belangrijkst — in het **exportdialoog**, altijd, ook wanneer er niets is
+gevonden. Juist dát is het gevaarlijke geval: een deck mét bevindingen waarschuwt zichzelf al,
+maar een deck zónder bevindingen toont een groen "Klaar voor export" en dat leest als "schoon".
+`privacy_promise_test.dart` houdt dat vast: het is een belofte die je niet stilletjes mag
+oprekken.
 
 ### 12.3 Consequenties voor de toestemmingspoort
 

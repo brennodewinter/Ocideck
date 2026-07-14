@@ -1786,6 +1786,13 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'De privacycontrole': 'Kontrola soukromí',
+  'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
+      'OciDeck prochází tvé snímky a hledá údaje, které mohou být citlivé: identifikační čísla, kontaktní údaje, telefonní čísla, bankovní účty, klíče a hesla a zvláštní kategorie osobních údajů. Vše probíhá na tomto zařízení: nic se nikam neodesílá a nalezená hodnota se v žádném hlášení neobjeví.',
+  'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.':
+      'Kontrola nezaručuje, že se najde všechno; snižuje riziko, že osobní údaje neúmyslně uniknou.',
+  'Tekst in afbeeldingen blijft buiten beeld, gelinkte bestanden worden niet geopend, en gegevens zonder herkenbaar patroon herkent geen enkele scanner. Een dia zonder meldingen is een dia waarin wíj niets hebben gevonden, niet een dia waarvan vaststaat dat er niets in staat. Wat je deelt, blijft jouw beslissing en jouw verantwoordelijkheid.':
+      'Text v obrázcích zůstává mimo dosah, odkazované soubory se neotevírají a údaje bez rozpoznatelného vzoru nerozpozná žádný skener. Snímek bez hlášení je snímek, na kterém *my* nic nenašli — nikoli snímek, o němž je prokázáno, že nic neobsahuje. Co sdílíš, zůstává tvým rozhodnutím a tvou odpovědností.',
   'telefoonnummer': 'telefonní číslo',
   'Voor wie is deze export?': 'Pro koho je tento export?',
   'Volledig': 'Úplný',

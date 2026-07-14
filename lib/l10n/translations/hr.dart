@@ -1790,6 +1790,13 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'De privacycontrole': 'Provjera privatnosti',
+  'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
+      'OciDeck pregledava tvoje slajdove tražeći podatke koji bi mogli biti osjetljivi: identifikacijske brojeve, kontaktne podatke, telefonske brojeve, bankovne račune, ključeve i lozinke te posebne kategorije osobnih podataka. Sve se odvija na ovom uređaju: ništa se ne šalje i pronađena vrijednost ne pojavljuje se ni u jednoj obavijesti.',
+  'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.':
+      'Provjera ne jamči da će sve biti pronađeno; smanjuje vjerojatnost da osobni podaci nenamjerno procure.',
+  'Tekst in afbeeldingen blijft buiten beeld, gelinkte bestanden worden niet geopend, en gegevens zonder herkenbaar patroon herkent geen enkele scanner. Een dia zonder meldingen is een dia waarin wíj niets hebben gevonden, niet een dia waarvan vaststaat dat er niets in staat. Wat je deelt, blijft jouw beslissing en jouw verantwoordelijkheid.':
+      'Tekst na slikama ostaje izvan dosega, povezane se datoteke ne otvaraju, a podatke bez prepoznatljivog uzorka ne prepoznaje nijedan skener. Slajd bez nalaza slajd je na kojem *mi* nismo ništa pronašli — ne slajd za koji je dokazano da ništa ne sadrži. Ono što dijeliš ostaje tvoja odluka i tvoja odgovornost.',
   'telefoonnummer': 'telefonski broj',
   'Voor wie is deze export?': 'Za koga je ovaj izvoz?',
   'Volledig': 'Potpuno',

@@ -740,6 +740,13 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'De privacycontrole': 'Le contrôle de confidentialité',
+  'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
+      'OciDeck parcourt tes diapositives à la recherche de données potentiellement sensibles : numéros d\'identification, coordonnées, numéros de téléphone, comptes bancaires, clés et mots de passe, et catégories particulières de données personnelles. Tout se passe sur cet appareil : rien n\'est envoyé, et la valeur trouvée n\'apparaît dans aucun message.',
+  'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.':
+      'Le contrôle ne garantit pas que tout soit trouvé ; il réduit le risque que des données personnelles fuitent involontairement.',
+  'Tekst in afbeeldingen blijft buiten beeld, gelinkte bestanden worden niet geopend, en gegevens zonder herkenbaar patroon herkent geen enkele scanner. Een dia zonder meldingen is een dia waarin wíj niets hebben gevonden, niet een dia waarvan vaststaat dat er niets in staat. Wat je deelt, blijft jouw beslissing en jouw verantwoordelijkheid.':
+      'Le texte dans les images reste hors de portée, les fichiers liés ne sont pas ouverts, et aucun scanner ne reconnaît des données sans motif identifiable. Une diapositive sans signalement est une diapositive où *nous* n\'avons rien trouvé, pas une diapositive dont il est prouvé qu\'elle ne contient rien. Ce que tu partages reste ta décision et ta responsabilité.',
   'telefoonnummer': 'numéro de téléphone',
   'Voor wie is deze export?': 'Pour qui est cet export ?',
   'Volledig': 'Complet',

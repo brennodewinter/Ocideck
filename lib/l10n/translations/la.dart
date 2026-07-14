@@ -1799,6 +1799,13 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'De privacycontrole': 'Examinatio privatae vitae',
+  'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
+      'OciDeck paginas tuas perlegit ad data quae vitam privatam tangere possunt: numeros identitatis, notitias contactus, numeros telephonicos, rationes argentarias, claves et tesseras, et data personalia specialia. Id totum in hoc instrumento fit: nihil mittitur, et valor inventus in nullo nuntio apparet.',
+  'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.':
+      'Examinatio non spondet omnia inveniri; minuit periculum ne data personalia imprudenter effluant.',
+  'Tekst in afbeeldingen blijft buiten beeld, gelinkte bestanden worden niet geopend, en gegevens zonder herkenbaar patroon herkent geen enkele scanner. Een dia zonder meldingen is een dia waarin wíj niets hebben gevonden, niet een dia waarvan vaststaat dat er niets in staat. Wat je deelt, blijft jouw beslissing en jouw verantwoordelijkheid.':
+      'Textus in imaginibus latet, tabellae adnexae non aperiuntur, et data sine forma agnoscibili nullus scrutator agnoscit. Pagina sine nuntiis est pagina in qua *nos* nihil invenimus, non pagina de qua constat nihil inesse. Quod communicas, tuum consilium et tua cura manet.',
   'telefoonnummer': 'numerus telephonicus',
   'Voor wie is deze export?': 'Cui haec exportatio destinatur?',
   'Volledig': 'Plenum',

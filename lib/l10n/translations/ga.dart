@@ -1819,6 +1819,13 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'De privacycontrole': 'An tseiceáil príobháideachais',
+  'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
+      'Léann OciDeck do shleamhnáin le haghaidh sonraí a d\'fhéadfadh a bheith íogair ó thaobh príobháideachais de: uimhreacha aitheantais, sonraí teagmhála, uimhreacha gutháin, cuntais bhainc, eochracha agus pasfhocail, agus catagóirí speisialta sonraí pearsanta. Tarlaíonn sé seo go hiomlán ar an ngléas seo: ní sheoltar aon rud, agus ní thaispeántar an luach a aimsíodh in aon fhógra.',
+  'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.':
+      'Ní ráthaíonn an tseiceáil go bhfaightear gach rud; laghdaíonn sí an seans go sceithfí sonraí pearsanta gan chuimhneamh.',
+  'Tekst in afbeeldingen blijft buiten beeld, gelinkte bestanden worden niet geopend, en gegevens zonder herkenbaar patroon herkent geen enkele scanner. Een dia zonder meldingen is een dia waarin wíj niets hebben gevonden, niet een dia waarvan vaststaat dat er niets in staat. Wat je deelt, blijft jouw beslissing en jouw verantwoordelijkheid.':
+      'Fanann téacs laistigh d\'íomhánna as radharc, ní osclaítear comhaid nasctha, agus ní aithníonn scanóir ar bith sonraí gan phatrún inaitheanta. Is sleamhnán é sleamhnán gan torthaí nach bhfuair *muidne* aon rud air — ní sleamhnán é a cruthaíodh nach bhfuil aon rud air. Is leatsa an cinneadh agus an fhreagracht faoina roinneann tú.',
   'telefoonnummer': 'uimhir ghutháin',
   'Voor wie is deze export?': 'Cé dó an t-easpórtáil seo?',
   'Volledig': 'Iomlán',

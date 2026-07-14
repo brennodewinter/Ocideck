@@ -1787,6 +1787,13 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'De privacycontrole': 'Az adatvédelmi ellenőrzés',
+  'OciDeck leest je dia\'s na op gegevens die privacygevoelig kunnen zijn: identificatienummers, contactgegevens, telefoonnummers, bankrekeningen, sleutels en wachtwoorden, en bijzondere persoonsgegevens. Dat gebeurt volledig op dit apparaat: er wordt niets verstuurd, en de gevonden waarde zelf komt in geen enkele melding te staan.':
+      'Az OciDeck átnézi a diáidat olyan adatok után, amelyek adatvédelmi szempontból érzékenyek lehetnek: azonosító számok, elérhetőségek, telefonszámok, bankszámlák, kulcsok és jelszavak, valamint különleges személyes adatok. Mindez teljes egészében ezen az eszközön történik: semmi nem kerül elküldésre, és a megtalált érték egyetlen üzenetben sem jelenik meg.',
+  'De controle garandeert niet dat alles wordt gevonden; ze verkleint de kans dat er persoonsgegevens onbedoeld uitlekken.':
+      'Az ellenőrzés nem garantálja, hogy mindent megtalál; csökkenti annak esélyét, hogy személyes adatok véletlenül kiszivárogjanak.',
+  'Tekst in afbeeldingen blijft buiten beeld, gelinkte bestanden worden niet geopend, en gegevens zonder herkenbaar patroon herkent geen enkele scanner. Een dia zonder meldingen is een dia waarin wíj niets hebben gevonden, niet een dia waarvan vaststaat dat er niets in staat. Wat je deelt, blijft jouw beslissing en jouw verantwoordelijkheid.':
+      'A képeken belüli szöveg rejtve marad, a hivatkozott fájlokat nem nyitjuk meg, és felismerhető minta nélküli adatokat egyetlen szkenner sem ismer fel. A találat nélküli dia olyan dia, amelyen *mi* nem találtunk semmit — nem olyan dia, amelyről bizonyított, hogy nincs rajta semmi. Amit megosztasz, továbbra is a te döntésed és a te felelősséged.',
   'telefoonnummer': 'telefonszám',
   'Voor wie is deze export?': 'Kinek szól ez az export?',
   'Volledig': 'Teljes',
