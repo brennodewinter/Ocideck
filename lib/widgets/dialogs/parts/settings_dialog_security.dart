@@ -17,6 +17,27 @@ extension _SettingsSecurity on _SettingsDialogState {
           style: const TextStyle(fontSize: 12, height: 1.4),
         ),
         const SizedBox(height: 20),
+        _sectionTitle(l10n.d('Privacycontrole')),
+        SwitchListTile(
+          contentPadding: EdgeInsets.zero,
+          title: Text(
+            l10n.d('Waarschuw bij mogelijke persoonsgegevens'),
+            style: const TextStyle(fontSize: 13),
+          ),
+          subtitle: Text(
+            l10n.d(
+              'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.',
+            ),
+            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+          ),
+          value: ref.watch(
+            settingsProvider.select((s) => s.privacyChecksEnabled),
+          ),
+          onChanged: (value) => ref
+              .read(settingsProvider.notifier)
+              .setPrivacyChecksEnabled(value),
+        ),
+        const SizedBox(height: 20),
         _sectionTitle(l10n.d('Online media')),
         SwitchListTile(
           contentPadding: EdgeInsets.zero,

@@ -740,6 +740,19 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
+      ' Erwäge, es mit [[doppelten eckigen Klammern]] zu schwärzen.',
+  ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
+      ' Ohne Kontext im Text ist dies möglicherweise gar kein personenbezogenes Datum.',
+  'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
+      'Prüft deine Folien auf Identifikationsnummern, Kontaktdaten und andere datenschutzsensible Angaben und meldet sie in der Qualitätsprüfung. Das geschieht vollständig auf diesem Gerät; nichts wird gesendet. Es ist eine Hilfe, keine Garantie: Text in Bildern und Daten ohne erkennbares Muster bleiben unsichtbar.',
+  'Mogelijk persoonsgegeven': 'Mögliches personenbezogenes Datum',
+  'Privacycontrole': 'Datenschutzprüfung',
+  'Waarschuw bij mogelijke persoonsgegevens':
+      'Bei möglichen personenbezogenen Daten warnen',
+  'burgerservicenummer (BSN)': 'Bürgerservicenummer (BSN)',
+  'bankrekeningnummer (IBAN)': 'Bankkontonummer (IBAN)',
+  'e-mailadres': 'E-Mail-Adresse',
   'Extern': 'Extern',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Von einer externen URL geladen; beim Öffnen wurde dieser Server kontaktiert.',

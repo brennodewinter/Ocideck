@@ -1799,6 +1799,19 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
+      ' Considera id obliterare per [[duplices uncos quadratos]].',
+  ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
+      ' Sine contextu in textu, hoc fortasse datum personale non est.',
+  'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
+      'Paginas tuas inquirit numeros identitatis, notitias contactus aliaque data privata, et in examine qualitatis nuntiat. Hoc totum in hoc instrumento fit; nihil mittitur. Auxilium est, non sponsio: textus in imaginibus et data sine forma cognoscibili latent.',
+  'Mogelijk persoonsgegeven': 'Datum personale possibile',
+  'Privacycontrole': 'Examen privati',
+  'Waarschuw bij mogelijke persoonsgegevens':
+      'Mone de datis personalibus possibilibus',
+  'burgerservicenummer (BSN)': 'numerus civilis (BSN)',
+  'bankrekeningnummer (IBAN)': 'numerus rationis argentariae (IBAN)',
+  'e-mailadres': 'inscriptio electronica',
   'Extern': 'Externum',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Ex URL externa haustum; in aperiendo servitium illud contactum est.',

@@ -922,6 +922,19 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
+      ' Consider redacting it with [[double square brackets]].',
+  ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
+      ' Without context in the text, this may not be personal data at all.',
+  'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
+      'Checks your slides for identification numbers, contact details and other privacy-sensitive data, and reports them under the quality check. This happens entirely on this device; nothing is sent anywhere. It is an aid, not a guarantee: text inside images and data without a recognisable pattern stay out of sight.',
+  'Mogelijk persoonsgegeven': 'Possible personal data',
+  'Privacycontrole': 'Privacy check',
+  'Waarschuw bij mogelijke persoonsgegevens':
+      'Warn about possible personal data',
+  'burgerservicenummer (BSN)': 'citizen service number (BSN)',
+  'bankrekeningnummer (IBAN)': 'bank account number (IBAN)',
+  'e-mailadres': 'email address',
   'Extern': 'External',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Fetched from an external URL; opening it contacted that server.',

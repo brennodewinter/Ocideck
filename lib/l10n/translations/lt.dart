@@ -1791,6 +1791,19 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
+      ' Apsvarstyk galimybę tai paslėpti [[dvigubais laužtiniais skliaustais]].',
+  ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
+      ' Be konteksto tekste tai gali visai nebūti asmens duomenys.',
+  'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
+      'Peržiūri tavo skaidres ieškodama identifikavimo numerių, kontaktinių duomenų ir kitų privatumui jautrių duomenų, ir praneša apie juos kokybės patikroje. Visa tai vyksta šiame įrenginyje; niekas nesiunčiama. Tai pagalbinė priemonė, o ne garantija: tekstas paveikslėliuose ir duomenys be atpažįstamo šablono lieka nepastebėti.',
+  'Mogelijk persoonsgegeven': 'Galimi asmens duomenys',
+  'Privacycontrole': 'Privatumo patikra',
+  'Waarschuw bij mogelijke persoonsgegevens':
+      'Įspėti apie galimus asmens duomenis',
+  'burgerservicenummer (BSN)': 'piliečio identifikacinis numeris (BSN)',
+  'bankrekeningnummer (IBAN)': 'banko sąskaitos numeris (IBAN)',
+  'e-mailadres': 'el. pašto adresas',
   'Extern': 'Išorinis',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Gauta iš išorinio URL; atidarant buvo susisiekta su tuo serveriu.',

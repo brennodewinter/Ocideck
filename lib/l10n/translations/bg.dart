@@ -1806,6 +1806,19 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
+      ' Обмислете да го заличите с [[двойни квадратни скоби]].',
+  ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
+      ' Без контекст в текста това може изобщо да не е лични данни.',
+  'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
+      'Преглежда слайдовете ви за идентификационни номера, данни за контакт и други чувствителни данни и ги съобщава при проверката на качеството. Това се случва изцяло на това устройство; нищо не се изпраща. Това е помощно средство, не гаранция: текст в изображения и данни без разпознаваем модел остават извън обхват.',
+  'Mogelijk persoonsgegeven': 'Възможни лични данни',
+  'Privacycontrole': 'Проверка на поверителността',
+  'Waarschuw bij mogelijke persoonsgegevens':
+      'Предупреждавай при възможни лични данни',
+  'burgerservicenummer (BSN)': 'граждански сервизен номер (BSN)',
+  'bankrekeningnummer (IBAN)': 'номер на банкова сметка (IBAN)',
+  'e-mailadres': 'имейл адрес',
   'Extern': 'Външен',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Изтеглено от външен URL адрес; отварянето се свърза с този сървър.',

@@ -1782,6 +1782,19 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
+      ' Apsver to aizklāt ar [[dubultajām kvadrātiekavām]].',
+  ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
+      ' Bez konteksta tekstā tie, iespējams, nemaz nav personas dati.',
+  'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
+      'Pārbauda tavus slaidus, meklējot identifikācijas numurus, kontaktinformāciju un citus privātumam jutīgus datus, un ziņo par tiem kvalitātes pārbaudē. Tas notiek pilnībā šajā ierīcē; nekas netiek nosūtīts. Tas ir palīglīdzeklis, nevis garantija: teksts attēlos un dati bez atpazīstama parauga paliek nepamanīti.',
+  'Mogelijk persoonsgegeven': 'Iespējami personas dati',
+  'Privacycontrole': 'Privātuma pārbaude',
+  'Waarschuw bij mogelijke persoonsgegevens':
+      'Brīdināt par iespējamiem personas datiem',
+  'burgerservicenummer (BSN)': 'iedzīvotāja identifikācijas numurs (BSN)',
+  'bankrekeningnummer (IBAN)': 'bankas konta numurs (IBAN)',
+  'e-mailadres': 'e-pasta adrese',
   'Extern': 'Ārējs',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Iegūts no ārēja URL; atverot tika izveidots savienojums ar šo serveri.',

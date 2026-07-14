@@ -1806,6 +1806,19 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
+      ' Ikkunsidra li tirrediġih b\'[[parentesi kwadri doppji]].',
+  ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
+      ' Mingħajr kuntest fit-test, dan forsi lanqas huwa data personali.',
+  'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
+      'Jiċċekkja s-slides tiegħek għal numri ta\' identifikazzjoni, dettalji ta\' kuntatt u data oħra sensittiva għall-privatezza, u jirrappurtahom fil-kontroll tal-kwalità. Dan iseħħ kollu fuq dan l-apparat; xejn ma jintbagħat. Hija għajnuna, mhux garanzija: test fl-immaġni u data mingħajr xejra rikonoxxibbli jibqgħu moħbija.',
+  'Mogelijk persoonsgegeven': 'Data personali possibbli',
+  'Privacycontrole': 'Kontroll tal-privatezza',
+  'Waarschuw bij mogelijke persoonsgegevens':
+      'Wissi dwar data personali possibbli',
+  'burgerservicenummer (BSN)': 'numru taċ-ċittadin (BSN)',
+  'bankrekeningnummer (IBAN)': 'numru tal-kont bankarju (IBAN)',
+  'e-mailadres': 'indirizz tal-email',
   'Extern': 'Estern',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Miksub minn URL estern; il-ftuħ ikkuntattja dak is-server.',

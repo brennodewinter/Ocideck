@@ -741,6 +741,19 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
+      ' Oerweagje it te redigearjen mei [[dûbele blokhaken]].',
+  ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
+      ' Sûnder kontekst yn \'e tekst is dit mooglik gjin persoansgegeven.',
+  'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
+      'Lêst dyn dia\'s nei op identifikaasjenûmers, kontaktgegevens en oare privacygefoelige gegevens, en meldt se by de kwaliteitskontrôle. Dit bart folslein op dit apparaat; der wurdt neat ferstjoerd. It is in helpmiddel, gjin garânsje: tekst yn ôfbyldings en gegevens sûnder werkenber patroan bliuwe bûten byld.',
+  'Mogelijk persoonsgegeven': 'Mooglik persoansgegeven',
+  'Privacycontrole': 'Privacykontrôle',
+  'Waarschuw bij mogelijke persoonsgegevens':
+      'Warskôgje by mooglike persoansgegevens',
+  'burgerservicenummer (BSN)': 'boargerservicenûmer (BSN)',
+  'bankrekeningnummer (IBAN)': 'bankrekkennûmer (IBAN)',
+  'e-mailadres': 'e-mailadres',
   'Extern': 'Ekstern',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Fan in eksterne URL ophelle; it iepenjen hat dy server benadere.',

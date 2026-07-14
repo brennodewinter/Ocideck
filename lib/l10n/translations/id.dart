@@ -1783,6 +1783,19 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
+      ' Pertimbangkan untuk meredaksinya dengan [[kurung siku ganda]].',
+  ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
+      ' Tanpa konteks dalam teks, ini mungkin bukan data pribadi.',
+  'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
+      'Memeriksa slide Anda untuk nomor identifikasi, data kontak, dan data sensitif privasi lainnya, lalu melaporkannya di pemeriksaan kualitas. Ini terjadi sepenuhnya di perangkat ini; tidak ada yang dikirim. Ini alat bantu, bukan jaminan: teks di dalam gambar dan data tanpa pola yang dikenali tetap tidak terlihat.',
+  'Mogelijk persoonsgegeven': 'Kemungkinan data pribadi',
+  'Privacycontrole': 'Pemeriksaan privasi',
+  'Waarschuw bij mogelijke persoonsgegevens':
+      'Peringatkan tentang kemungkinan data pribadi',
+  'burgerservicenummer (BSN)': 'nomor layanan warga (BSN)',
+  'bankrekeningnummer (IBAN)': 'nomor rekening bank (IBAN)',
+  'e-mailadres': 'alamat email',
   'Extern': 'Eksternal',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Diambil dari URL eksternal; membukanya menghubungi server itu.',

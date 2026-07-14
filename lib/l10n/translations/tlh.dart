@@ -1758,6 +1758,19 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
+      ' [[cha\' vaghDIch Doch chorgh]] lo\'taHvIS So\'meH yIqel.',
+  ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
+      ' ghItlhDaq De\' latlh tu\'lu\'be\'chugh, nuv De\' \'oHbe\' \'e\' chaq.',
+  'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
+      'nuv De\' mI\'mey, rIchmey, latlh nuv De\' je nagh beQmeylIjDaq nej \'ej QaQ ninSar Daq ja\'. naDev neH qaS; pagh ngeHlu\'. QaHwI\' \'oH; \'ol \'oHbe\'. nagh beQ ghItlh mIllogh je patlh Sovbe\'lu\'bogh De\' je legh \'e\' laHbe\'.',
+  'Mogelijk persoonsgegeven': 'chaq nuv De\'',
+  'Privacycontrole': 'pegh ninSar',
+  'Waarschuw bij mogelijke persoonsgegevens':
+      'chaq nuv De\' tu\'lu\'chugh, yIghuHmoH',
+  'burgerservicenummer (BSN)': 'nuv mI\' (BSN)',
+  'bankrekeningnummer (IBAN)': 'HuchQeD mI\' (IBAN)',
+  'e-mailadres': 'jabbI\'ID Daq',
   'Extern': 'Hur',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Hur URL-vo\' Suqlu\'; poSlu\'DI\' vetlh server qIHlu\'.',

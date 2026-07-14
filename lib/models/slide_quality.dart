@@ -3,7 +3,7 @@ import 'markdown_validation.dart';
 /// Sentinel index for deck-wide issues (theme contrast, etc.).
 const int kDeckWideSlideIndex = -1;
 
-enum SlideQualityCategory { altText, contrast, textDensity, content }
+enum SlideQualityCategory { altText, contrast, textDensity, content, privacy }
 
 enum SlideQualityIssueKind {
   missingAltCaption,
@@ -32,6 +32,19 @@ enum SlideQualityIssueKind {
   bulletNestingDeep,
   bulletColumnImbalance,
   questionNotAnswerable,
+
+  // ── Privacy (PRIVACY_SHIELD §2.1) ─────────────────────────────────────────
+  // Eén kind per familie, niet één per regel: de regelverzameling groeit naar
+  // tientallen en `formatSlideQualityIssue` is een exhaustieve switch. De
+  // concrete regel zit in `args['rule']` en wordt los gelokaliseerd.
+  privacyIdentifier,
+  privacyFinancial,
+  privacyContact,
+  privacyDigital,
+  privacySecret,
+  privacySpecialCategory,
+  privacyBulk,
+  privacyStructural,
 }
 
 class SlideQualityIssue {

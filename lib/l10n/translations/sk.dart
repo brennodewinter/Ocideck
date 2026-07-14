@@ -1790,6 +1790,19 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
+      ' Zváž začiernenie pomocou [[dvojitých hranatých zátvoriek]].',
+  ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
+      ' Bez kontextu v texte to nemusí byť osobný údaj vôbec.',
+  'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
+      'Prezerá tvoje snímky a hľadá identifikačné čísla, kontaktné údaje a ďalšie citlivé osobné údaje, a hlási ich v kontrole kvality. Deje sa to výhradne na tomto zariadení; nič sa neodosiela. Je to pomôcka, nie záruka: text v obrázkoch a údaje bez rozpoznateľného vzoru zostávajú mimo dohľadu.',
+  'Mogelijk persoonsgegeven': 'Možný osobný údaj',
+  'Privacycontrole': 'Kontrola súkromia',
+  'Waarschuw bij mogelijke persoonsgegevens':
+      'Upozorňovať na možné osobné údaje',
+  'burgerservicenummer (BSN)': 'občianske identifikačné číslo (BSN)',
+  'bankrekeningnummer (IBAN)': 'číslo bankového účtu (IBAN)',
+  'e-mailadres': 'e-mailová adresa',
   'Extern': 'Externý',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Načítané z externej URL; otvorenie kontaktovalo tento server.',

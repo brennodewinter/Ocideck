@@ -1786,6 +1786,19 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
+      ' Zvaž začernění pomocí [[dvojitých hranatých závorek]].',
+  ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
+      ' Bez kontextu v textu to nemusí být osobní údaj vůbec.',
+  'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
+      'Prochází tvé snímky a hledá identifikační čísla, kontaktní údaje a další citlivé osobní údaje, a hlásí je v kontrole kvality. Děje se to zcela na tomto zařízení; nic se neodesílá. Je to pomůcka, ne záruka: text v obrázcích a údaje bez rozpoznatelného vzorce zůstávají mimo dohled.',
+  'Mogelijk persoonsgegeven': 'Možný osobní údaj',
+  'Privacycontrole': 'Kontrola soukromí',
+  'Waarschuw bij mogelijke persoonsgegevens':
+      'Upozorňovat na možné osobní údaje',
+  'burgerservicenummer (BSN)': 'občanské identifikační číslo (BSN)',
+  'bankrekeningnummer (IBAN)': 'číslo bankovního účtu (IBAN)',
+  'e-mailadres': 'e-mailová adresa',
   'Extern': 'Externí',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Načteno z externí adresy URL; otevření kontaktovalo tento server.',

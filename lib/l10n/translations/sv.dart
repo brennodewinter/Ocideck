@@ -1782,6 +1782,19 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
+      ' Överväg att maska det med [[dubbla hakparenteser]].',
+  ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
+      ' Utan sammanhang i texten är detta kanske inte en personuppgift alls.',
+  'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
+      'Granskar dina bilder efter identifikationsnummer, kontaktuppgifter och andra integritetskänsliga uppgifter och rapporterar dem i kvalitetskontrollen. Det sker helt på den här enheten; ingenting skickas. Det är ett hjälpmedel, inte en garanti: text i bilder och uppgifter utan igenkännbart mönster förblir osynliga.',
+  'Mogelijk persoonsgegeven': 'Möjlig personuppgift',
+  'Privacycontrole': 'Integritetskontroll',
+  'Waarschuw bij mogelijke persoonsgegevens':
+      'Varna för möjliga personuppgifter',
+  'burgerservicenummer (BSN)': 'medborgarnummer (BSN)',
+  'bankrekeningnummer (IBAN)': 'bankkontonummer (IBAN)',
+  'e-mailadres': 'e-postadress',
   'Extern': 'Extern',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Hämtad från en extern URL; öppningen kontaktade den servern.',

@@ -1790,6 +1790,19 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  ' Overweeg dit te redigeren met [[dubbele blokhaken]].':
+      ' Razmisli o redigiranju pomoću [[dvostrukih uglatih zagrada]].',
+  ' Zonder context in de tekst is dit mogelijk geen persoonsgegeven.':
+      ' Bez konteksta u tekstu ovo možda uopće nije osobni podatak.',
+  'Leest je dia\'s na op identificatienummers, contactgegevens en andere privacygevoelige gegevens, en meldt ze bij de kwaliteitscontrole. Dit gebeurt volledig op dit apparaat; er wordt niets verstuurd. Het is een hulpmiddel, geen garantie: tekst in afbeeldingen en gegevens zonder herkenbaar patroon blijven buiten beeld.':
+      'Pregledava tvoje slajdove tražeći identifikacijske brojeve, kontaktne podatke i druge osjetljive podatke te ih prijavljuje u provjeri kvalitete. To se u cijelosti događa na ovom uređaju; ništa se ne šalje. To je pomagalo, a ne jamstvo: tekst u slikama i podaci bez prepoznatljivog obrasca ostaju izvan vidokruga.',
+  'Mogelijk persoonsgegeven': 'Mogući osobni podatak',
+  'Privacycontrole': 'Provjera privatnosti',
+  'Waarschuw bij mogelijke persoonsgegevens':
+      'Upozori na moguće osobne podatke',
+  'burgerservicenummer (BSN)': 'matični broj građanina (BSN)',
+  'bankrekeningnummer (IBAN)': 'broj bankovnog računa (IBAN)',
+  'e-mailadres': 'adresa e-pošte',
   'Extern': 'Vanjski',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Dohvaćeno s vanjskog URL-a; otvaranje je kontaktiralo taj poslužitelj.',
