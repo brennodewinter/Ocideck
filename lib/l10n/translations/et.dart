@@ -1774,6 +1774,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Privacy Shield (ontwerp)': 'Privacy Shield (kavand)',
   'Mogelijk geheim': 'Võimalik saladus',
   'sleutel of token': 'võti või luba',
   'private sleutel': 'privaatvõti',

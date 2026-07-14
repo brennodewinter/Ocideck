@@ -91,6 +91,11 @@ extension _SettingsDocs on _SettingsDialogState {
           label: l10n.d('Ontwerp'),
           entries: [
             DocEntry(
+              icon: Icons.privacy_tip_outlined,
+              title: l10n.d('Privacy Shield (ontwerp)'),
+              assetBase: 'docs/design/PRIVACY_SHIELD.md',
+            ),
+            DocEntry(
               icon: Icons.groups_outlined,
               title: l10n.d('Samenwerking (ontwerp)'),
               assetBase: 'docs/design/COLLABORATION.md',

@@ -1801,6 +1801,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Privacy Shield (ontwerp)': 'Privacy Shield (проєкт)',
   'Mogelijk geheim': 'Можливий секрет',
   'sleutel of token': 'ключ або токен',
   'private sleutel': 'приватний ключ',

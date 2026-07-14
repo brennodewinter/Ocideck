@@ -1790,6 +1790,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Privacy Shield (ontwerp)': 'Privacy Shield (nacrt)',
   'Mogelijk geheim': 'Moguća tajna',
   'sleutel of token': 'ključ ili token',
   'private sleutel': 'privatni ključ',

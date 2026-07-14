@@ -1791,6 +1791,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Privacy Shield (ontwerp)': 'Privacy Shield (projektas)',
   'Mogelijk geheim': 'Galima paslaptis',
   'sleutel of token': 'raktas arba prieigos raktas',
   'private sleutel': 'privatusis raktas',

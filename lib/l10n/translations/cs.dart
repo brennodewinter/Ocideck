@@ -1786,6 +1786,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Privacy Shield (ontwerp)': 'Privacy Shield (návrh)',
   'Mogelijk geheim': 'Možné tajemství',
   'sleutel of token': 'klíč nebo token',
   'private sleutel': 'soukromý klíč',

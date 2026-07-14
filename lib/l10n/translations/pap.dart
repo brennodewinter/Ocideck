@@ -740,6 +740,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Privacy Shield (ontwerp)': 'Privacy Shield (diseño)',
   'Mogelijk geheim': 'Posibel sekreto',
   'sleutel of token': 'yabi òf token',
   'private sleutel': 'yabi privá',

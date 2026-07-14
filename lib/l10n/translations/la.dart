@@ -1799,6 +1799,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Privacy Shield (ontwerp)': 'Privacy Shield (consilium)',
   'Mogelijk geheim': 'Arcanum possibile',
   'sleutel of token': 'clavis vel signum',
   'private sleutel': 'clavis privata',

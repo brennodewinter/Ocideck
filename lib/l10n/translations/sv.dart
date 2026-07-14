@@ -1782,6 +1782,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Privacy Shield (ontwerp)': 'Privacy Shield (design)',
   'Mogelijk geheim': 'Möjlig hemlighet',
   'sleutel of token': 'nyckel eller token',
   'private sleutel': 'privat nyckel',

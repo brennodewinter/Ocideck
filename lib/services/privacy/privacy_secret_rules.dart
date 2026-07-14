@@ -152,8 +152,22 @@ final List<SecretRule> secretRules = [
       r'\b(?:postgres(?:ql)?|mysql|mongodb(?:\+srv)?|redis|amqp|ftp|https?)'
       r'://[^\s:/@]+:[^\s@/]+@[^\s/]+',
     ),
+    validate: connectionStringHasRealPassword,
   ),
 ];
+
+/// Het wachtwoorddeel van een connection string, niet de hele URL, door de
+/// placeholder-poort halen.
+///
+/// Documentatie illustreert dit patroon nu eenmaal met `postgres://user:pass@…`.
+/// Zou de hele match tellen, dan gaat elke handleiding af die uitlegt hóé een
+/// connection string eruitziet — inclusief onze eigen ontwerpdocumenten. Dat is
+/// geen theoretisch risico: dit is precies waar de corpustest ons op betrapte.
+bool connectionStringHasRealPassword(String match) {
+  final m = RegExp(r'://[^\s:/@]+:([^\s@/]+)@').firstMatch(match);
+  if (m == null) return false;
+  return !isPlaceholderSecret(m.group(1)!);
+}
 
 /// Een wachtwoord in klare taal: `wachtwoord: hunter2`.
 ///

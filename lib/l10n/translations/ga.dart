@@ -1819,6 +1819,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Privacy Shield (ontwerp)': 'Privacy Shield (dearadh)',
   'Mogelijk geheim': 'Rún féideartha',
   'sleutel of token': 'eochair nó comharthán',
   'private sleutel': 'eochair phríobháideach',

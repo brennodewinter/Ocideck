@@ -1787,6 +1787,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Privacy Shield (ontwerp)': 'Privacy Shield (terv)',
   'Mogelijk geheim': 'Lehetséges titok',
   'sleutel of token': 'kulcs vagy token',
   'private sleutel': 'privát kulcs',
