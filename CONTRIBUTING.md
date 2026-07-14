@@ -28,7 +28,7 @@ flutter run -d macos  # or -d windows / -d linux
 Run this before every push — it is exactly what CI runs:
 
 ```sh
-make check            # format-check + analyze + full test suite
+make check            # format-check + analyze + conventions + full test suite + coverage floor
 ```
 
 Individual steps:
@@ -38,8 +38,9 @@ Individual steps:
 | `make format` | Rewrites Dart files with `dart format`. |
 | `make format-check` | Fails if any file needs formatting. |
 | `make analyze` | `flutter analyze --fatal-infos` (analyzer + lints + strict type checks). |
-| `make check-conventions` | No `print()`; the bare `catch (_)` count may not grow. |
+| `make check-conventions` | No `print()`; no raw control bytes; the bare `catch (_)`, raw-colour, layering and file-size ratchets may not grow. |
 | `make test` | The full test suite (randomised order). |
+| `make coverage` | The suite with coverage: enforces the 73% floor **and** that every `lib/` file is in some test. Part of `make check`. |
 | `make licenses` | Verify every dependency uses an open-source licence. |
 | `make deps-check` | Verify the vendored export JS bundles (integrity + known CVEs via OSV). |
 | `make check-web` | Build the web bundle and assert its hardening (CSP, self-hosted, fonts). |

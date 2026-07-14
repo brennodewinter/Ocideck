@@ -8,6 +8,26 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **The coverage gate now actually runs — and can finally see an untested file.**
+  `make coverage` was in no aggregate target, and the CI workflow that ran it
+  cannot fire on the Forgejo remote, so the coverage floor was enforced by
+  nobody. `make check` now depends on it. The floor also had a hole: lcov only
+  records files a test imported, so a file no test touches is not 0% — it is
+  outside the fraction entirely, and adding a wholly untested file moved the
+  percentage not one hair. `--require-instrumented` enumerates `lib/` from disk
+  and fails on any non-baselined file that is in no test. Floor raised 65% → 73%
+  (actual: 74.2%).
+- **The network guard now sees every way to open a socket.** It scanned for
+  `HttpClient(` alone, so its own promise — "a new raw client fails this test" —
+  was untrue for `package:http`, `dio`, `Socket`, `SecureSocket`, `WebSocket`
+  and `RawDatagramSocket`: an `http.get(deckSuppliedUrl)` added anywhere in
+  `lib/` passed every gate untouched. The current code is sound (the desktop
+  URL-import is pinned; the one `package:http` caller is web-only), but nothing
+  kept it that way. Now it does.
+- **Layering is enforced.** `lib/models/` may not import Flutter's UI layer or
+  `lib/widgets/` (hard 0); the count in `lib/services/` is ratcheted at today's
+  8 and may only shrink. A service should run headless — no widget tree, and
+  testable without pumping one.
 - **Severity speedometer on findings.** A finding with a CVSS score now shows a
   compact cockpit speedometer next to its header — a green→amber→red gauge with
   the needle at the score — so the reader sees the severity at a glance alongside
@@ -26,6 +46,18 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   content.
 
 ### Fixed
+- **Three source files were invisible to `grep` and unreviewable in `git diff`.**
+  `tabs_provider.dart`, `slide_dedup_service.dart` and `annotation_codec.dart`
+  each held a control character as a raw *byte* inside a string literal (a NUL
+  join-separator; SOH/STX/ETX field separators in the annotation fingerprint).
+  Dart compiles that fine, but every byte-oriented tool then reads the file as
+  binary: `grep` silently skipped all 890 lines of `tabs_provider.dart` — no
+  output at all, not "no matches" — and `git diff` rendered changes to
+  `slide_dedup_service.dart` as `Bin … bytes` rather than a readable diff. In a
+  tool built for security review, a source file that no grep audit can see and
+  no reviewer can read is a real hazard. Replaced with the equivalent escapes
+  (byte-identical strings, so fingerprints and the file format are unchanged)
+  and guarded by `make check-conventions` so it cannot come back.
 - **A few remaining interface labels are now localised.** The checklist preview's
   `ID`/`Test` column headers, the audio-play tooltip and the export target-path
   hint now go through the translation layer, so they follow the interface
