@@ -7,6 +7,7 @@ import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../state/deck_quality_provider.dart';
 import '../../state/editor_provider.dart';
+import '../../state/privacy_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../state/slide_clipboard_provider.dart';
 import '../../theme/app_theme.dart';
@@ -78,11 +79,25 @@ class SlideThumbnail extends ConsumerWidget {
     );
     // Selects op booleans i.p.v. het hele kwaliteitsresultaat: anders rebuildt
     // élke thumbnail bij elke wijziging waar dan ook in het deck.
+    //
+    // Privacybevindingen tellen mee. Ze zijn kwaliteitsmeldingen als alle andere
+    // (zie privacy_quality_bridge.dart), en een slide waarvan het énige probleem
+    // een BSN in de tekst is, hoort niet ongemerkt langs te kunnen glippen omdat
+    // de badge alleen naar contrast en alt-teksten keek.
     final hasQualityErrors = ref.watch(
       deckQualityProvider.select(
         (r) => r
             .forSlide(index)
             .any((i) => i.severity == MarkdownValidationSeverity.error),
+      ),
+    );
+    final hasPrivacyWarnings = ref.watch(
+      privacyQualityIssuesProvider.select(
+        (issues) => issues.any(
+          (i) =>
+              i.slideIndex == index &&
+              i.severity == MarkdownValidationSeverity.warning,
+        ),
       ),
     );
     final showWatermark = ref.watch(
@@ -99,13 +114,15 @@ class SlideThumbnail extends ConsumerWidget {
         slide.bullets.length >= 2 || slide.bullets2.length >= 2,
       _ => false,
     };
-    final hasQualityWarnings = ref.watch(
-      deckQualityProvider.select(
-        (r) => r
-            .forSlide(index)
-            .any((i) => i.severity == MarkdownValidationSeverity.warning),
-      ),
-    );
+    final hasQualityWarnings =
+        ref.watch(
+          deckQualityProvider.select(
+            (r) => r
+                .forSlide(index)
+                .any((i) => i.severity == MarkdownValidationSeverity.warning),
+          ),
+        ) ||
+        hasPrivacyWarnings;
     final hasActionableQualityIssues = hasQualityErrors || hasQualityWarnings;
     final borderColor = isSelected
         ? AppTheme.accent
@@ -148,7 +165,7 @@ class SlideThumbnail extends ConsumerWidget {
                 l10n,
                 skipped: skipped,
                 showWatermark: showWatermark,
-                hasQualityWarnings: hasQualityWarnings,
+                hasActionableQualityIssues: hasActionableQualityIssues,
                 hasQualityErrors: hasQualityErrors,
               ),
               // Footer: slide number, type label, action buttons
@@ -171,7 +188,7 @@ class SlideThumbnail extends ConsumerWidget {
     AppLocalizations l10n, {
     required bool skipped,
     required bool showWatermark,
-    required bool hasQualityWarnings,
+    required bool hasActionableQualityIssues,
     required bool hasQualityErrors,
   }) {
     return ExcludeSemantics(
@@ -263,7 +280,11 @@ class SlideThumbnail extends ConsumerWidget {
                     ),
                   ),
                 ),
-              if (hasQualityWarnings)
+              // Waarschuwingen én fouten. Dit stond op `hasQualityWarnings`, en
+              // een slide met alléén een fout (een contrastfout zonder verdere
+              // waarschuwing) kreeg dus juist géén badge — de ernstigste slide
+              // van het deck was de enige zonder markering.
+              if (hasActionableQualityIssues)
                 Positioned(
                   top: 4,
                   right: 4,
