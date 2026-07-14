@@ -25,7 +25,8 @@ class _FindingsSummaryPreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final pad = w * 0.07;
+    final pad = w * 0.07; // vertical margin
+    final hPad = w * 0.045; // narrower side margin — use the width (feedback)
     final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
     final spec = FindingsSummarySpec.fromSlide(slide.title, slide.tableRows);
 
@@ -39,9 +40,9 @@ class _FindingsSummaryPreview extends StatelessWidget {
             width: w,
             child: Padding(
               padding: EdgeInsets.fromLTRB(
-                pad,
+                hPad,
                 pad + safe.top,
-                pad,
+                hPad,
                 _logoAwareBottomPadding(pad, safe.bottom),
               ),
               child: Column(

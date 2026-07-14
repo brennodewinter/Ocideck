@@ -19,13 +19,15 @@ enum _Section { description, confirmation, impact, recommendation }
 
 /// Estimated full-size body lines that fit on one 16:9 slide, and the cost (in
 /// those line-units) of the header card and a section heading. Tuned against the
-/// live finding preview/presenter (a 16:9 finding fits roughly 22 body lines at
-/// ~88 characters per line) so only a genuinely overflowing finding splits —
-/// a borderline one stays a single slide rather than being over-split.
+/// live finding preview/presenter (a 16:9 finding fits roughly 22 body lines) so
+/// only a genuinely overflowing finding splits — a borderline one stays a single
+/// slide rather than being over-split. [_charsPerLine] tracks the finding
+/// preview's content width: the side margin was narrowed (0.07·w → 0.045·w →
+/// content 0.86·w → 0.91·w), so a line now holds ~94 chars — fewer pages.
 const double _linesPerSlide = 22.0;
 const double _headerCardCost = 4.0;
 const double _sectionHeadingCost = 1.4;
-const double _charsPerLine = 88.0;
+const double _charsPerLine = 94.0;
 
 /// Estimated line-cost of a section's body text, honouring hard line breaks.
 double _bodyCost(String text) {

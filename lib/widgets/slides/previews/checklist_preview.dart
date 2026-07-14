@@ -30,7 +30,8 @@ class _ChecklistPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pad = w * 0.07;
+    final pad = w * 0.07; // vertical margin
+    final hPad = w * 0.045; // narrower side margin — use the width (feedback)
     final safe = slide.showLogo ? _logoSafeInsets(w, profile) : EdgeInsets.zero;
     final spec = ChecklistSpec.fromSlide(slide.title, slide.tableRows);
     final accent = _hexColor(profile.accentColor);
@@ -45,9 +46,9 @@ class _ChecklistPreview extends StatelessWidget {
             width: w,
             child: Padding(
               padding: EdgeInsets.fromLTRB(
-                pad,
+                hPad,
                 pad + safe.top,
-                pad,
+                hPad,
                 _logoAwareBottomPadding(pad, safe.bottom),
               ),
               child: Column(
@@ -99,7 +100,7 @@ class _ChecklistPreview extends StatelessWidget {
     return Row(
       children: [
         SizedBox(
-          width: w * 0.5,
+          width: w * 0.62,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(w * 0.006),
             child: LinearProgressIndicator(

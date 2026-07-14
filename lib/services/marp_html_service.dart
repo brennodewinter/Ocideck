@@ -301,7 +301,7 @@ class MarpHtmlService {
         'html,body{margin:0;padding:0}'
         'body{background:#1e1e1e;font-family:$family;color:${t.textColor}}'
         '.slide{position:relative;width:1280px;min-height:720px;margin:24px auto;'
-        'background:${t.slideBackgroundColor};color:${t.textColor};padding:60px;'
+        'background:${t.slideBackgroundColor};color:${t.textColor};padding:48px;'
         'overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.4);border-radius:4px;'
         'font-family:$family}'
         '.slide h1{font-size:48px;margin:.15em 0;'
@@ -326,7 +326,7 @@ class MarpHtmlService {
         '.slide img{max-width:100%}'
         '.slide blockquote{border-left:4px solid ${t.accentColor};margin:.5em 0;'
         'padding-left:16px;opacity:.85}'
-        '.slide table{border-collapse:collapse}'
+        '.slide table{border-collapse:collapse;width:100%}'
         '.slide th{background:${t.tableHeaderBackgroundColor};color:${t.tableHeaderTextColor};'
         'border:1px solid #ccc;padding:6px 12px;font-size:20px}'
         '.slide td{color:${t.tableTextColor};border:1px solid #ccc;padding:6px 12px;font-size:20px}'
@@ -374,7 +374,7 @@ class MarpHtmlService {
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
 body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#1a1a1a}
-.slide{position:relative;width:1280px;min-height:720px;margin:24px auto;background:#fff;padding:60px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.4);border-radius:4px}
+.slide{position:relative;width:1280px;min-height:720px;margin:24px auto;background:#fff;padding:48px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.4);border-radius:4px}
 .slide h1{font-size:48px;margin:.15em 0;color:var(--ocideck-title-color,inherit)}
 .slide h2{font-size:34px;margin:.15em 0}
 .slide p,.slide li{font-size:24px;line-height:1.45}
@@ -383,7 +383,7 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
 .slide pre.mermaid{background:transparent;border:0;text-align:center}
 .slide img{max-width:100%}
 .slide blockquote{border-left:4px solid #ccc;margin:.5em 0;padding-left:16px;color:#555}
-.slide table{border-collapse:collapse}.slide th,.slide td{border:1px solid #ccc;padding:6px 12px;font-size:20px}
+.slide table{border-collapse:collapse;width:100%}.slide th,.slide td{border:1px solid #ccc;padding:6px 12px;font-size:20px}
 .tlp-export-banner{position:fixed;top:0;left:0;right:0;background:#000;color:#ffc000;text-align:center;font:700 14px/2.4 monospace;z-index:9999;letter-spacing:.06em}
 @media print{body{background:#fff}.slide{margin:0;box-shadow:none;border-radius:0;page-break-after:always;width:100%;min-height:100vh}}
 ''';

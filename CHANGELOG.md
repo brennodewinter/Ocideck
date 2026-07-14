@@ -7,6 +7,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+- **MIAUW slides use the width better.** The finding, checklist, scope-matrix and
+  findings-summary slides had a wide side margin (14% of the slide) that pushed
+  content into extra pages. The side margin is narrowed (content grows from
+  ~0.86× to ~0.91× of the slide width), the finding paginator is retuned to the
+  wider line so a borderline finding stays on one page instead of splitting, the
+  checklist/scope coverage bars are widened, and the HTML export now stretches
+  tables to the full width and trims the slide padding — fewer pages for the same
+  content.
+
 ### Added
 - **Link a finding to a checklist test.** The finding editor gains a **Gekoppelde
   test (Linked test)** picker listing the tests on the checklist(s) that cover the

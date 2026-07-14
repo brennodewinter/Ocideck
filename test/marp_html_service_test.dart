@@ -62,6 +62,9 @@ void main() {}
     final html = await service.build(md);
 
     expect(html, startsWith('<!doctype html>'));
+    // MIAUW tables fill the slide width in the export (feedback #2), matching
+    // the project export path.
+    expect(html, contains('.slide table{border-collapse:collapse;width:100%}'));
     // Slide payload is embedded for the in-browser renderer.
     expect(html, contains('# Titel'));
     expect(html, contains(r'E=mc^2'));

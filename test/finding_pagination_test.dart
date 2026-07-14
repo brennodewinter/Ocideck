@@ -37,6 +37,14 @@ void main() {
       expect(pages.length, greaterThan(1));
     });
 
+    test('the widened content budget keeps a borderline finding on one page', () {
+      // ~1450 chars fits one page at the narrowed side margin (content 0.91·w →
+      // ~94 chars/line); it would have split into two at the old 0.86·w
+      // (88 chars/line). Guards the width→pages retune (feedback #2).
+      final spec = FindingSpec(heading: heading, description: _lorem(54));
+      expect(paginateFinding(spec), hasLength(1));
+    });
+
     test('page 1 keeps the header card; continuations drop it and mark the '
         'heading', () {
       final pages = paginateFinding(bigFinding());
