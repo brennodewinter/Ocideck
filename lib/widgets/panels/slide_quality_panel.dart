@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../l10n/slide_quality_localization.dart';
@@ -10,6 +11,7 @@ import '../../state/deck_quality_provider.dart';
 import '../../state/image_contrast_provider.dart';
 import '../../state/privacy_provider.dart';
 import '../../state/settings_provider.dart';
+import '../privacy_badge.dart' show privacyKatSvg;
 import '../dialogs/slide_quality_details_dialog.dart';
 import 'slide_quality_actions.dart';
 import '../../theme/app_theme.dart';
@@ -418,11 +420,21 @@ class _QualityIssueTile extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(
-              slideQualitySeverityIcon(issue.severity),
-              size: 13,
-              color: color,
-            ),
+            // Een privacybevinding krijgt het eigen merkteken in plaats van het
+            // generieke waarschuwingsicoon: zo is in één oogopslag te zien dat
+            // een melding over persoonsgegevens gaat en niet over contrast of
+            // tekstdichtheid. De ernst blijft in de kleur van de tekst zitten.
+            if (issue.category == SlideQualityCategory.privacy)
+              Padding(
+                padding: const EdgeInsets.only(top: 1),
+                child: SvgPicture.string(privacyKatSvg, width: 13, height: 13),
+              )
+            else
+              Icon(
+                slideQualitySeverityIcon(issue.severity),
+                size: 13,
+                color: color,
+              ),
             const SizedBox(width: 6),
             Expanded(
               child: Column(

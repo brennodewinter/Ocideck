@@ -447,8 +447,11 @@ are shown.
 
 OciDeck reads your slides for data that may be privacy-sensitive — identification
 numbers, contact details, bank accounts — and reports what it finds in the
-**quality panel**, alongside the contrast and readability checks. It is on by
-default and can be switched off under *Settings → Security → Privacy check*.
+**quality panel**, alongside the contrast and readability checks. Each privacy
+row carries the **PrivacyKat shield** mark instead of the generic warning icon,
+so at a glance you can tell a personal-data finding from a contrast or density
+one. It is on by default and can be switched off under *Settings → Security →
+Privacy check*.
 
 It runs **entirely on this device**. Slide content is not sent anywhere, no
 findings are kept outside the session, and no statistics leave your machine.
@@ -534,7 +537,7 @@ Under **Slide settings** (the gear in the editor header), each slide offers:
 | **Follow the presentation** | Inherit the deck-wide setting (the default). |
 | **Only report** | Findings stay in the quality panel; nothing shows on the slide. |
 | **Accept** | The data belongs here. The notice disappears. Nothing changes on the slide. |
-| **Accept + warn** | The data stays, and the slide gets a **PERSONAL DATA** badge — next to the TLP marking, and travelling into the PDF, the PPTX and the HTML. Whoever receives the deck knows what they have. |
+| **Accept + warn** | The data stays, and the slide gets a **PERSONAL DATA** badge — the PrivacyKat shield mark next to the TLP marking, travelling into the PDF, the PPTX and the HTML. Whoever receives the deck knows what they have. |
 | **Leave out of display and export** | The data found is redacted everywhere: screen, presentation, audience window, PDF, PPTX, HTML, speaker notes, document metadata. Your Markdown keeps the original text. |
 
 The same four values exist deck-wide (`privacy:` in the front matter). A slide

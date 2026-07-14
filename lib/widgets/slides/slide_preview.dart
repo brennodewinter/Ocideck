@@ -4,6 +4,7 @@ import 'dart:math' as math;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_highlight/themes/github.dart';
 import 'package:flutter_highlight/themes/atom-one-dark.dart';
@@ -46,6 +47,7 @@ import '../../utils/net_guard.dart';
 import '../../utils/markdown_paste_cleanup.dart';
 import '../../utils/project_path.dart';
 import '../document_signature_view.dart' show decodeEmbeddedSignatureImage;
+import '../privacy_badge.dart' show privacyKatSvg;
 import 'inline_markdown.dart';
 import 'image_zoom_dialog.dart';
 
