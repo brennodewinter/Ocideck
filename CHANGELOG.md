@@ -7,6 +7,17 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+- **The PrivacyKat mark now appears where privacy-sensitive risks are pointed
+  out, not only as an egress marker.** The shield was designed as the product's
+  mark for personal data, but it only ever showed up next to "this deck came from
+  a URL" and a couple of settings switches — never on an actual privacy risk. Now
+  it does: the recipient-facing **PERSONAL DATA** badge on a slide (the *accept +
+  warn* disposition) is the PrivacyKat shield rather than a generic tip icon, and
+  every **privacy row in the quality panel** carries the shield instead of the
+  plain warning triangle — so a personal-data finding is distinguishable at a
+  glance from a contrast or text-density one.
+
 ### Fixed
 - **An embedded video that will not play now says why.** Every failure mode of a
   YouTube/Vimeo embed used to collapse into the same dead rectangle — a blank

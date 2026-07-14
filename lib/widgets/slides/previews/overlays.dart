@@ -183,11 +183,11 @@ class _PrivacyShieldOverlay extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              Icons.privacy_tip_outlined,
-              size: w * 0.016,
-              color: AppTheme.warningFg,
-            ),
+            // De PrivacyKat: het eigen merkteken voor persoonsgegevens, precies
+            // waar het thuishoort — de badge die de ontvanger op de slide ziet.
+            // De gele rand is gemaakt om leesbaar te blijven op een donkere
+            // achtergrond, dus hij staat hier goed op het zwarte overlay.
+            SvgPicture.string(privacyKatSvg, width: w * 0.02, height: w * 0.02),
             SizedBox(width: w * 0.006),
             Text(
               l10n.d('PERSOONSGEGEVENS'),

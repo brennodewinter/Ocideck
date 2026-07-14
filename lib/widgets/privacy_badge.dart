@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 /// The "PrivacyKat" mark: an EU-blue (#003399) shield with cat ears and an
-/// EU-yellow (#FFCC00) keyhole. Marks a spot where something leaves the device
-/// — a deck fetched from an external URL, a lookup that talks to a third party.
-/// The yellow rim keeps the dark-blue body legible on a dark status bar.
-/// Kept as an inline string (rendered via `SvgPicture.string`, like the mermaid
-/// diagrams) so it needs no bundled asset.
+/// EU-yellow (#FFCC00) keyhole. The product's own mark for personal data — used
+/// wherever a privacy-sensitive risk is pointed out: the "personal data" shield
+/// the recipient sees on a slide, the privacy rows in the quality panel, and (as
+/// an egress marker) a deck fetched from an external URL or a lookup that talks
+/// to a third party. The yellow rim keeps the dark-blue body legible on a dark
+/// background. Kept as an inline string (rendered via `SvgPicture.string`, like
+/// the mermaid diagrams) so it needs no bundled asset.
 const String privacyKatSvg =
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">'
     '<path d="M4.6 6.2 L7 3.2 L9.1 6.2 L12 5.4 L14.9 6.2 L17 3.2 L19.4 6.2 '
