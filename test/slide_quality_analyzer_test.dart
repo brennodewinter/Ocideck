@@ -569,11 +569,31 @@ void main() {
       );
     });
 
-    test('detects video without descriptive text', () {
+    // Een videoslide zonder titel is een legitieme keuze, en de video-editor
+    // heeft geen bijschrift-/alt-tekstveld om de tip mee te stillen. Alleen
+    // afbeeldingen en charts krijgen de beschrijvingsnudge nog.
+    test('does not nudge a video without descriptive text', () {
       final deck = Deck(
         title: 'Demo',
         slides: [
           Slide.create(SlideType.video).copyWith(videoPath: 'media/demo.mp4'),
+        ],
+      );
+
+      final result = analyzer.analyze(deck);
+      expect(
+        result.issues.any(
+          (i) => i.kind == SlideQualityIssueKind.mediaMissingDescription,
+        ),
+        isFalse,
+      );
+    });
+
+    test('still nudges a bare image without description', () {
+      final deck = Deck(
+        title: 'Demo',
+        slides: [
+          Slide.create(SlideType.image).copyWith(imagePath: 'media/foto.jpg'),
         ],
       );
 
@@ -626,7 +646,7 @@ void main() {
         title: 'Demo',
         slides: [
           Slide.create(SlideType.bullets),
-          Slide.create(SlideType.video).copyWith(videoPath: 'video/demo.mp4'),
+          Slide.create(SlideType.image).copyWith(imagePath: 'media/foto.jpg'),
         ],
       );
 

@@ -374,6 +374,13 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   in the app and in exports.
 
 ### Changed
+- **A video slide no longer nags for a title or speaker notes.** The
+  accessibility nudge that asked every video for a description was excessive: a
+  clip that speaks for itself needs no title, and the video editor has no caption
+  or alt-text field to silence the tip with — only a title. So it fired on
+  essentially every video and could not be answered on its own terms. Images and
+  charts keep their description nudge, where there *is* a field to fill in.
+
 - **MIAUW slides use the width better.** The finding, checklist, scope-matrix and
   findings-summary slides had a wide side margin (14% of the slide) that pushed
   content into extra pages. The side margin is narrowed (content grows from
@@ -384,6 +391,23 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   content.
 
 ### Fixed
+- **Online video did not work, in two different ways at once.** A YouTube, Vimeo
+  or `.mp4` link on a video slide was reported as *"Video: bestand niet gevonden"*.
+  The missing-media check ran `File(...).existsSync()` over *any* video or image
+  path, and the path resolver knows only local paths — so it glued the URL onto
+  the project folder (`<project>/https:/youtu.be/…`), found nothing there, and
+  called an online source a missing file. The URL gate now sits in front of the
+  disk check, so an online source is never reported as missing.
+
+  Separately, and confusingly at the same time, those slides showed *"Online media
+  staat uit"* even with the setting **on**. The `allowRemoteMedia` flag is handed
+  to each preview by hand and defaults to `false` (fail-closed, deliberately), but
+  four surfaces never passed it — including the thumbnail rail, which is the only
+  slide preview you actually see while editing. So online media was hard-off in
+  the editor no matter what the settings said. The flag now reaches the rail, the
+  full-deck preview, play-only mode and the presenter. Export stays fail-closed on
+  purpose: an online source is exported as a clickable link, not baked in.
+
 - **Three source files were invisible to `grep` and unreviewable in `git diff`.**
   `tabs_provider.dart`, `slide_dedup_service.dart` and `annotation_codec.dart`
   each held a control character as a raw *byte* inside a string literal (a NUL
