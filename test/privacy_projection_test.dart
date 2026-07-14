@@ -1,0 +1,186 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/privacy/privacy_projection.dart';
+
+/// De projectiegrens (PRIVACY_SHIELD §6). De kern van elke test hier is
+/// dezelfde vraag: bevat het geprojecteerde deck de oorspronkelijke tekens nog?
+/// "Niet beschikbaar is niet beschikbaar" — een zwarte balk over leesbare tekst
+/// is geen redactie.
+void main() {
+  Slide bulletSlide() =>
+      Slide.create(SlideType.bullets).copyWith(title: 'Kop', bullets: const []);
+
+  group('redactText', () {
+    test('vervangt een markering door blokken', () {
+      final r = PrivacyProjection.redactText('Bel [[06-12345678]] vandaag');
+      expect(r.text, 'Bel $kRedactionToken vandaag');
+      expect(r.count, 1);
+    });
+
+    test('telt meerdere markeringen op één regel', () {
+      final r = PrivacyProjection.redactText('[[a]] en [[b]]');
+      expect(r.count, 2);
+      expect(r.text, '$kRedactionToken en $kRedactionToken');
+    });
+
+    test('laat tekst zonder markering ongemoeid', () {
+      final r = PrivacyProjection.redactText('Gewone tekst [met] haken');
+      expect(r.text, 'Gewone tekst [met] haken');
+      expect(r.count, 0);
+    });
+
+    test('raakt een gewone markdown-link niet aan', () {
+      final r = PrivacyProjection.redactText('Zie [de site](https://a.nl)');
+      expect(r.count, 0);
+    });
+
+    test('verraadt de lengte van het origineel niet', () {
+      final kort = PrivacyProjection.redactText('[[Jan]]');
+      final lang = PrivacyProjection.redactText(
+        '[[Jan Pieter Balkenende jr.]]',
+      );
+      expect(kort.text, lang.text);
+    });
+  });
+
+  group('forAudience', () {
+    test('redigeert elk tekstdragend veld van een slide', () {
+      final slide = bulletSlide().copyWith(
+        title: 'Verdachte [[Jan de Vries]]',
+        subtitle: 'BSN [[123456782]]',
+        bullets: ['woont op [[Kalverstraat 12]]'],
+        bullets2: ['tel [[06-1234]]'],
+        columnTitle1: 'kol [[x]]',
+        columnTitle2: 'kol [[y]]',
+        imageCaption: 'foto van [[Jan]]',
+        imageCaption2: 'foto van [[Piet]]',
+        imageAltText: 'alt [[Jan]]',
+        imageAltText2: 'alt [[Piet]]',
+        quote: 'citaat [[Jan]]',
+        quoteAuthor: '[[Jan]]',
+        customMarkdown: 'code [[secret]]',
+        notes: 'niet voorlezen: [[het adres]]',
+        tableRows: [
+          ['Naam', 'BSN'],
+          ['[[Jan]]', '[[123456782]]'],
+        ],
+      );
+      final deck = Deck(title: 'Briefing', slides: [slide]);
+
+      final audience = PrivacyProjection.forAudience(deck);
+      final out = audience.slides.single;
+
+      // Geen enkel veld bevat de oorspronkelijke tekens nog.
+      final alleTekst = [
+        out.title,
+        out.subtitle,
+        ...out.bullets,
+        ...out.bullets2,
+        out.columnTitle1,
+        out.columnTitle2,
+        out.imageCaption,
+        out.imageCaption2,
+        out.imageAltText,
+        out.imageAltText2,
+        out.quote,
+        out.quoteAuthor,
+        out.customMarkdown,
+        out.notes,
+        ...out.tableRows.expand((r) => r),
+      ].join('\n');
+
+      for (final geheim in [
+        'Jan de Vries',
+        '123456782',
+        'Kalverstraat 12',
+        '06-1234',
+        'Piet',
+        'secret',
+        'het adres',
+      ]) {
+        expect(
+          alleTekst.contains(geheim),
+          isFalse,
+          reason: '"$geheim" staat nog in het geprojecteerde deck',
+        );
+      }
+      expect(alleTekst.contains('[['), isFalse);
+      expect(audience.redactionCount, 16);
+      expect(audience.hasRedactions, isTrue);
+    });
+
+    test('redigeert de sprekersnotities — die gaan mee in PPTX', () {
+      final deck = Deck(
+        title: 'D',
+        slides: [bulletSlide().copyWith(notes: 'intern: [[het BSN]]')],
+      );
+      final out = PrivacyProjection.forAudience(deck).slides.single;
+      expect(out.notes.contains('het BSN'), isFalse);
+      expect(out.notes, 'intern: $kRedactionToken');
+    });
+
+    test('redigeert de deckvelden die de documentmetadata voeden', () {
+      final deck = Deck(
+        title: 'Dossier [[Jansen]]',
+        slides: [bulletSlide()],
+        author: '[[Piet Peters]]',
+        organization: 'Politie [[Eenheid Noord]]',
+        description: 'over [[Jansen]]',
+        keywords: '[[Jansen]], fraude',
+      );
+      final out = PrivacyProjection.forAudience(deck).deck;
+      expect(out.title.contains('Jansen'), isFalse);
+      expect(out.author.contains('Piet Peters'), isFalse);
+      expect(out.organization.contains('Eenheid Noord'), isFalse);
+      expect(out.description.contains('Jansen'), isFalse);
+      expect(out.keywords.contains('Jansen'), isFalse);
+      expect(out.keywords, '$kRedactionToken, fraude');
+    });
+
+    test('redigeert de gebruikersnotities-sidecar', () {
+      final slide = bulletSlide();
+      final deck = Deck(
+        title: 'D',
+        slides: [slide],
+        userNotes: {slide.id: 'cursist: [[naam]]'},
+      );
+      final out = PrivacyProjection.forAudience(deck).deck;
+      expect(out.userNotes[slide.id]!.contains('naam'), isFalse);
+    });
+
+    test('laat de bron ongemoeid — het deck is niet gemuteerd', () {
+      final slide = bulletSlide().copyWith(title: 'Verdachte [[Jan]]');
+      final deck = Deck(title: 'Briefing [[Acme]]', slides: [slide]);
+
+      PrivacyProjection.forAudience(deck);
+
+      expect(deck.slides.single.title, 'Verdachte [[Jan]]');
+      expect(deck.title, 'Briefing [[Acme]]');
+    });
+
+    test('een deck zonder markeringen telt nul redacties', () {
+      final deck = Deck(
+        title: 'Gewoon',
+        slides: [
+          bulletSlide().copyWith(title: 'Kop', bullets: ['punt']),
+        ],
+      );
+      final audience = PrivacyProjection.forAudience(deck);
+      expect(audience.redactionCount, 0);
+      expect(audience.hasRedactions, isFalse);
+      expect(audience.slides.single.title, 'Kop');
+    });
+  });
+
+  group('forExternalProcessing', () {
+    test('redigeert minstens alles wat forAudience ook redigeert', () {
+      final deck = Deck(
+        title: 'D',
+        slides: [bulletSlide().copyWith(title: 'x [[geheim]]')],
+      );
+      final extern = PrivacyProjection.forExternalProcessing(deck);
+      expect(extern.slides.single.title.contains('geheim'), isFalse);
+    });
+  });
+}
