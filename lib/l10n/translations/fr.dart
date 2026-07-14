@@ -833,6 +833,8 @@ const _dutchSourceAddFr = {
   'databaseverbinding met wachtwoord':
       'connexion à la base de données avec mot de passe',
   'wachtwoord in klare tekst': 'mot de passe en clair',
+  'Zoek een instelling': 'Rechercher un réglage',
+  'Geen instelling gevonden': 'Aucun réglage trouvé',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
       'Votre terme de recherche est envoyé au miroir CVE configuré et, s\'il ne trouve rien, également à l\'ENISA et au MITRE. Ceux qui gèrent ces serveurs peuvent en déduire quelle faille précise vous recherchez — et donc quelle faille vous examinez.',
   'Accepteren': 'Accepter',

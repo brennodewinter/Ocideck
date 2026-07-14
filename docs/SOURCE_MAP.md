@@ -255,6 +255,12 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
   Licentie en Privacy, Beveiliging, Nextcloud, Checklists, and an "Over OciDeck"
   screen); tab bodies live in `parts/settings_dialog_*.dart` (the Checklists tab
   managing user checklist templates is `parts/settings_dialog_checklists.dart`).
+  Search over the settings lives in `parts/settings_dialog_search.dart`
+  (`SettingsSearchEntry`, the search field, and the jump-and-flash), with the
+  index of what is searchable in `parts/settings_dialog_search_index.dart`.
+  Anchors are free: every section heading goes through `_sectionTitle`, which
+  registers a `GlobalKey` under its own text, so a hit can scroll its section
+  into view without any of the tab bodies knowing about search.
 - `slide_finder_dialog.dart` — Stay-open searcher for gathering slides from many presentations.
 - `slide_quality_details_dialog.dart` — Issues grouped by severity with counts and navigation.
 - `webdav_browser_dialog.dart` — Browses WebDAV/Nextcloud folders to pick a deck or images.

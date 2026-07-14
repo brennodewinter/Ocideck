@@ -1871,6 +1871,8 @@ const _dutchSourceAddDa = <String, String>{
   'toegangstoken (JWT)': 'adgangstoken (JWT)',
   'databaseverbinding met wachtwoord': 'databaseforbindelse med adgangskode',
   'wachtwoord in klare tekst': 'adgangskode i klartekst',
+  'Zoek een instelling': 'Søg en indstilling',
+  'Geen instelling gevonden': 'Ingen indstilling fundet',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
       'Dit søgeord sendes til det konfigurerede CVE-mirror, og hvis det ikke finder noget, også til ENISA og MITRE. De, der driver disse servere, kan udlede hvilken specifik sårbarhed du leder efter — og dermed hvilken sårbarhed du undersøger.',
   'Accepteren': 'Acceptér',

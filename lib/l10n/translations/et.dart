@@ -1864,6 +1864,8 @@ const _dutchSourceAddEt = <String, String>{
   'toegangstoken (JWT)': 'juurdepääsuluba (JWT)',
   'databaseverbinding met wachtwoord': 'andmebaasiühendus parooliga',
   'wachtwoord in klare tekst': 'parool avatekstina',
+  'Zoek een instelling': 'Otsi seadet',
+  'Geen instelling gevonden': 'Seadet ei leitud',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
       'Teie otsingusõna saadetakse seadistatud CVE peegelserverisse ja, kui see midagi ei leia, ka ENISA-le ja MITRE-le. Nende serverite haldajad saavad järeldada, millist konkreetset haavatavust te otsite — ja seega millist haavatavust te uurite.',
   'Accepteren': 'Nõustu',

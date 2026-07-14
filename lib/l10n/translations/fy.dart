@@ -830,6 +830,8 @@ const _dutchSourceAddFy = {
   'toegangstoken (JWT)': 'tagongstoken (JWT)',
   'databaseverbinding met wachtwoord': 'databaseferbining mei wachtwurd',
   'wachtwoord in klare tekst': 'wachtwurd yn platte tekst',
+  'Zoek een instelling': 'Sykje in ynstelling',
+  'Geen instelling gevonden': 'Gjin ynstelling fûn',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
       'Dyn sykterm giet nei de ynstelde CVE-mirror, en as dy neat fynt ek nei ENISA en MITRE. Wa\'t dy servers beheart, kin dêrút ôfliede nei hokker spesifyk lek ast sikest — en dus hokker lek ast ûndersikest.',
   'Accepteren': 'Akseptearje',

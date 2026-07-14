@@ -1881,6 +1881,8 @@ const _dutchSourceAddHr = <String, String>{
   'toegangstoken (JWT)': 'pristupni token (JWT)',
   'databaseverbinding met wachtwoord': 'veza s bazom podataka s lozinkom',
   'wachtwoord in klare tekst': 'lozinka u čistom tekstu',
+  'Zoek een instelling': 'Pretraži postavku',
+  'Geen instelling gevonden': 'Nije pronađena nijedna postavka',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
       'Vaš pojam za pretraživanje šalje se konfiguriranom CVE zrcalu, a ako ono ništa ne pronađe, i ENISA-i i MITRE-u. Tko upravlja tim poslužiteljima može zaključiti koju konkretnu ranjivost tražite — a time i koju ranjivost istražujete.',
   'Accepteren': 'Prihvati',

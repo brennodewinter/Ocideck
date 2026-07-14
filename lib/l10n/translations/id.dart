@@ -1873,6 +1873,8 @@ const _dutchSourceAddId = <String, String>{
   'toegangstoken (JWT)': 'token akses (JWT)',
   'databaseverbinding met wachtwoord': 'koneksi basis data dengan kata sandi',
   'wachtwoord in klare tekst': 'kata sandi dalam teks biasa',
+  'Zoek een instelling': 'Cari pengaturan',
+  'Geen instelling gevonden': 'Pengaturan tidak ditemukan',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
       'Kata pencarian Anda dikirim ke mirror CVE yang dikonfigurasi, dan jika tidak menemukan apa pun, juga ke ENISA dan MITRE. Pengelola server tersebut dapat menyimpulkan kerentanan spesifik mana yang Anda cari — dan dengan demikian kerentanan mana yang sedang Anda selidiki.',
   'Accepteren': 'Terima',

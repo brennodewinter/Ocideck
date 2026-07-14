@@ -1882,6 +1882,8 @@ const _dutchSourceAddLt = <String, String>{
   'toegangstoken (JWT)': 'prieigos raktas (JWT)',
   'databaseverbinding met wachtwoord': 'duomenų bazės ryšys su slaptažodžiu',
   'wachtwoord in klare tekst': 'slaptažodis atviru tekstu',
+  'Zoek een instelling': 'Ieškoti nustatymo',
+  'Geen instelling gevonden': 'Nustatymų nerasta',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
       'Jūsų paieškos žodis siunčiamas į sukonfigūruotą CVE veidrodį, o jei jis nieko neranda — taip pat į ENISA ir MITRE. Tie, kas valdo šiuos serverius, gali nustatyti, kurio konkretaus pažeidžiamumo ieškote — taigi ir kurį pažeidžiamumą tiriate.',
   'Accepteren': 'Priimti',

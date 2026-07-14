@@ -1876,6 +1876,8 @@ const _dutchSourceAddCs = <String, String>{
   'toegangstoken (JWT)': 'přístupový token (JWT)',
   'databaseverbinding met wachtwoord': 'připojení k databázi s heslem',
   'wachtwoord in klare tekst': 'heslo v otevřeném textu',
+  'Zoek een instelling': 'Hledat nastavení',
+  'Geen instelling gevonden': 'Nenalezeno žádné nastavení',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
       'Váš vyhledávaný výraz jde na nastavené zrcadlo CVE, a pokud nic nenajde, také do ENISA a MITRE. Kdo tyto servery provozuje, může odvodit, jakou konkrétní zranitelnost hledáte — a tedy jakou zranitelnost zkoumáte.',
   'Accepteren': 'Přijmout',

@@ -831,6 +831,8 @@ const _dutchSourceAddDe = {
   'toegangstoken (JWT)': 'Zugangstoken (JWT)',
   'databaseverbinding met wachtwoord': 'Datenbankverbindung mit Passwort',
   'wachtwoord in klare tekst': 'Passwort im Klartext',
+  'Zoek een instelling': 'Einstellung suchen',
+  'Geen instelling gevonden': 'Keine Einstellung gefunden',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
       'Dein Suchbegriff geht an den eingestellten CVE-Mirror und, wenn dieser nichts findet, auch an ENISA und MITRE. Wer diese Server betreibt, kann daraus ableiten, nach welcher konkreten Schwachstelle du suchst — und damit, welche Schwachstelle du untersuchst.',
   'Accepteren': 'Akzeptieren',

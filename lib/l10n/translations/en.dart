@@ -1011,6 +1011,8 @@ const _dutchSourceAddEn = {
   'toegangstoken (JWT)': 'access token (JWT)',
   'databaseverbinding met wachtwoord': 'database connection with password',
   'wachtwoord in klare tekst': 'password in plain text',
+  'Zoek een instelling': 'Search a setting',
+  'Geen instelling gevonden': 'No setting found',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
       'Your search term goes to the configured CVE mirror, and if that finds nothing, to ENISA and MITRE as well. Whoever runs those servers can infer which specific vulnerability you are looking for — and therefore which vulnerability you are investigating.',
   'Accepteren': 'Accept',

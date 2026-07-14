@@ -1876,6 +1876,8 @@ const _dutchSourceAddSl = <String, String>{
   'toegangstoken (JWT)': 'žeton za dostop (JWT)',
   'databaseverbinding met wachtwoord': 'povezava z zbirko podatkov z geslom',
   'wachtwoord in klare tekst': 'geslo v čistem besedilu',
+  'Zoek een instelling': 'Iskanje nastavitve',
+  'Geen instelling gevonden': 'Nastavitve ni mogoče najti',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
       'Vaš iskalni izraz gre na nastavljeno zrcalo CVE, in če to ničesar ne najde, tudi na ENISA in MITRE. Tisti, ki upravljajo te strežnike, lahko sklepajo, katero konkretno ranljivost iščete — in s tem, katero ranljivost preiskujete.',
   'Accepteren': 'Sprejmi',

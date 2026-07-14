@@ -1892,6 +1892,8 @@ const _dutchSourceAddRo = <String, String>{
   'toegangstoken (JWT)': 'token de acces (JWT)',
   'databaseverbinding met wachtwoord': 'conexiune la baza de date cu parolă',
   'wachtwoord in klare tekst': 'parolă în text clar',
+  'Zoek een instelling': 'Caută o setare',
+  'Geen instelling gevonden': 'Nicio setare găsită',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
       'Termenul tău de căutare ajunge la oglinda CVE configurată și, dacă aceasta nu găsește nimic, și la ENISA și MITRE. Cei care administrează acele servere pot deduce ce vulnerabilitate anume cauți — și deci ce vulnerabilitate investighezi.',
   'Accepteren': 'Acceptă',

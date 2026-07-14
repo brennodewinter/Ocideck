@@ -1872,6 +1872,8 @@ const _dutchSourceAddSv = <String, String>{
   'toegangstoken (JWT)': 'åtkomsttoken (JWT)',
   'databaseverbinding met wachtwoord': 'databasanslutning med lösenord',
   'wachtwoord in klare tekst': 'lösenord i klartext',
+  'Zoek een instelling': 'Sök en inställning',
+  'Geen instelling gevonden': 'Ingen inställning hittades',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
       'Din sökterm skickas till den konfigurerade CVE-spegeln och, om den inte hittar något, även till ENISA och MITRE. De som driver dessa servrar kan sluta sig till vilken specifik sårbarhet du söker — och därmed vilken sårbarhet du undersöker.',
   'Accepteren': 'Acceptera',

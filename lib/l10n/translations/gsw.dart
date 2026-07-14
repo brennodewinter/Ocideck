@@ -1876,6 +1876,8 @@ const _dutchSourceAddGsw = <String, String>{
   'toegangstoken (JWT)': 'Zuegangstoken (JWT)',
   'databaseverbinding met wachtwoord': 'Datebankverbindig mit Passwort',
   'wachtwoord in klare tekst': 'Passwort im Klartäxt',
+  'Zoek een instelling': 'Yystellig sueche',
+  'Geen instelling gevonden': 'Kei Yystellig gfunde',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
       'Dyn Suechbegriff gaht a de yygstellti CVE-Mirror, und wenn dä nüt findt, au a ENISA und MITRE. Wer die Server betriibt, cha drus abläse, nach welerer konkrete Schwachstell du suechsch — und somit, weli Schwachstell du undersuechsch.',
   'Accepteren': 'Akzeptiere',

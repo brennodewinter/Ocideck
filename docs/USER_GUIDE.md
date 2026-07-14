@@ -1223,6 +1223,15 @@ Implementation: `lib/services/markdown_validator.dart` (unit tests in
 
 ## Theming and language
 
+**Finding a setting.** There are around eighty settings across twelve tabs, so the
+settings window has a **search box** in its header. Type a word and you get the
+matching settings, each with the tab and section it lives in; click one and the
+window jumps to that tab, scrolls the section into view and briefly highlights it.
+Search also matches **synonyms that aren't printed on screen** — `youtube`,
+`vimeo` or `mp4` all lead you to **Online media**, and `lettergrootte` to the
+interface text size. You don't need to know what the app calls a thing in order to
+find it.
+
 - **Style profiles** control deck colours (including the source-code background,
   text, font and an optional syntax-colouring toggle), fonts, logo, and footer.
   Every colour can be picked from the presets or entered as a custom hex value. The

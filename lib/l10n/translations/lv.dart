@@ -1871,6 +1871,8 @@ const _dutchSourceAddLv = <String, String>{
   'toegangstoken (JWT)': 'piekļuves marķieris (JWT)',
   'databaseverbinding met wachtwoord': 'datubāzes savienojums ar paroli',
   'wachtwoord in klare tekst': 'parole atklātā tekstā',
+  'Zoek een instelling': 'Meklēt iestatījumu',
+  'Geen instelling gevonden': 'Iestatījums nav atrasts',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
       'Jūsu meklēšanas vārds tiek nosūtīts uz konfigurēto CVE spoguli, un, ja tas neko neatrod, arī uz ENISA un MITRE. Tie, kas pārvalda šos serverus, var secināt, kuru konkrēto ievainojamību meklējat — un tātad kuru ievainojamību pētāt.',
   'Accepteren': 'Pieņemt',

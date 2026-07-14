@@ -383,6 +383,18 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   when the scope object is rated, otherwise the base score) and renders the same
   in the app and in exports.
 
+### Added
+- **You can search the settings.** There are around eighty of them now, spread
+  over twelve tabs, and finding one meant knowing which tab a developer had
+  filed it under. A search box sits in the settings header: type and you get the
+  matching settings with the tab and section they live in; click one and it jumps
+  there, scrolls the section into view and flashes it.
+
+  It searches synonyms too, not just what is printed on screen — type `youtube`,
+  `vimeo` or `mp4` and you land on **Online media**, which is the setting you
+  actually wanted and is not called any of those things. That matters most for
+  exactly the people who don't know the app's vocabulary yet.
+
 ### Changed
 - **A video slide no longer nags for a title or speaker notes.** The
   accessibility nudge that asked every video for a description was excessive: a

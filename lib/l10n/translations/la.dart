@@ -1888,6 +1888,8 @@ const _dutchSourceAddLa = <String, String>{
   'toegangstoken (JWT)': 'signum accessus (JWT)',
   'databaseverbinding met wachtwoord': 'conexio datorum cum tessera',
   'wachtwoord in klare tekst': 'tessera in textu aperto',
+  'Zoek een instelling': 'Optionem quaerere',
+  'Geen instelling gevonden': 'Nulla optio inventa',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
       'Vocabulum quaesitum ad speculum CVE constitutum mittitur et, si nihil invenit, etiam ad ENISA et MITRE. Qui ea moderantur, colligere possunt quod certum vitium quaeras — ideoque quod vitium investiges.',
   'Accepteren': 'Accipere',

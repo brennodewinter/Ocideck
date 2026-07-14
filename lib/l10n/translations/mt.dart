@@ -1896,6 +1896,8 @@ const _dutchSourceAddMt = <String, String>{
   'toegangstoken (JWT)': 'token ta\' aċċess (JWT)',
   'databaseverbinding met wachtwoord': 'konnessjoni tad-database bil-password',
   'wachtwoord in klare tekst': 'password f\'test ċar',
+  'Zoek een instelling': 'Fittex issettjar',
+  'Geen instelling gevonden': 'Ma nstab l-ebda issettjar',
   'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
       'It-terminu tat-tfittxija tiegħek jintbagħat lill-mirror CVE konfigurat, u jekk dak ma jsib xejn, anke lil ENISA u MITRE. Min imexxi dawk is-servers jista\' jiddeduċi liema vulnerabbiltà speċifika qed tfittex — u għalhekk liema vulnerabbiltà qed tinvestiga.',
   'Accepteren': 'Aċċetta',
