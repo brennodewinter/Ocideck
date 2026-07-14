@@ -1902,6 +1902,8 @@ const _dutchSourceAddEl = <String, String>{
   'toegangstoken (JWT)': 'διακριτικό πρόσβασης (JWT)',
   'databaseverbinding met wachtwoord': 'σύνδεση βάσης δεδομένων με κωδικό',
   'wachtwoord in klare tekst': 'κωδικός σε απλό κείμενο',
+  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
+      'Ο όρος αναζήτησής σας πηγαίνει στο ρυθμισμένο κάτοπτρο CVE και, αν αυτό δεν βρει τίποτα, και στον ENISA και στη MITRE. Όποιος διαχειρίζεται αυτούς τους διακομιστές μπορεί να συμπεράνει ποια συγκεκριμένη ευπάθεια αναζητάτε — και άρα ποια ευπάθεια ερευνάτε.',
   'Accepteren': 'Αποδοχή',
   'Accepteren + waarschuwen': 'Αποδοχή + προειδοποίηση',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

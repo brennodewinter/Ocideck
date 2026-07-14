@@ -31,6 +31,7 @@ import '../../l10n/slide_quality_localization.dart';
 import '../../models/privacy_disposition.dart';
 import '../editors/advanced_section.dart';
 import '../language_flag.dart';
+import '../privacy_badge.dart';
 import '../privacy_statement_content.dart';
 import '../reader/documentation_search_tab.dart';
 

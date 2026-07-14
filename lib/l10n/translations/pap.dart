@@ -831,6 +831,8 @@ const _dutchSourceAddPap = {
   'databaseverbinding met wachtwoord':
       'konekshon di base di datos ku kontraseña',
   'wachtwoord in klare tekst': 'kontraseña den teksto kla',
+  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
+      'Bo término di buskeda ta bai na e mirror di CVE konfigurá, i si esei no haña nada, tambe na ENISA i MITRE. Ken ta maneha e servidornan ei por dedusí kua vulnerabilidat spesífiko bo ta buska — i pues kua lek bo ta investigá.',
   'Accepteren': 'Aseptá',
   'Accepteren + waarschuwen': 'Aseptá + advertí',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

@@ -272,6 +272,13 @@ The same Security tab has **CVE opzoeken (online)** for the finding editor's
 consent. When on, you can set the **CVE mirror** base URL (default
 `https://cveapi.librekat.nl`). The lookup is SSRF-safe and desktop-only.
 
+A **privacy badge** (the PrivacyKat shield) sits next to that switch, and hovering
+it says what turning it on costs you: your search term goes to the configured
+mirror, and *if that mirror finds nothing, the same term is then sent to ENISA and
+MITRE as well*. Whoever runs those servers can infer which specific vulnerability
+you are looking for — which, for a pentester, is often the most sensitive thing
+they know. The badge blocks nothing; it makes the trade visible before you take it.
+
 **Watching a video in parts (cutting).** You can split a video so you watch it in
 pieces across slides. Play the video in the preview, then click **Knip hier**
 (Cut here): the part up to that point stays on this slide, and the remainder

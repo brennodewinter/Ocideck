@@ -1893,6 +1893,8 @@ const _dutchSourceAddUk = <String, String>{
   'toegangstoken (JWT)': 'токен доступу (JWT)',
   'databaseverbinding met wachtwoord': 'підключення до бази даних з паролем',
   'wachtwoord in klare tekst': 'пароль у відкритому вигляді',
+  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
+      'Ваш пошуковий запит надходить до налаштованого дзеркала CVE, а якщо воно нічого не знайде — також до ENISA та MITRE. Ті, хто керує цими серверами, можуть визначити, яку саме вразливість ви шукаєте — а отже, яку вразливість ви досліджуєте.',
   'Accepteren': 'Прийняти',
   'Accepteren + waarschuwen': 'Прийняти + попередити',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

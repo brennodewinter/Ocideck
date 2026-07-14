@@ -73,7 +73,19 @@ extension _SettingsSecurity on _SettingsDialogState {
               ref.read(settingsProvider.notifier).setAllowRemoteMedia(value),
         ),
         const SizedBox(height: 20),
-        _sectionTitle(l10n.d('CVE opzoeken')),
+        Row(
+          children: [
+            _sectionTitle(l10n.d('CVE opzoeken')),
+            const SizedBox(width: 8),
+            // De badge blokkeert niets — hij maakt zichtbaar wát er weglekt als
+            // je dit aanzet: niet dát je zoekt, maar wáárnaar.
+            PrivacyBadge(
+              tooltip: l10n.d(
+                'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.',
+              ),
+            ),
+          ],
+        ),
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
           title: Text(

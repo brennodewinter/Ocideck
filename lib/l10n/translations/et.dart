@@ -1864,6 +1864,8 @@ const _dutchSourceAddEt = <String, String>{
   'toegangstoken (JWT)': 'juurdepääsuluba (JWT)',
   'databaseverbinding met wachtwoord': 'andmebaasiühendus parooliga',
   'wachtwoord in klare tekst': 'parool avatekstina',
+  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
+      'Teie otsingusõna saadetakse seadistatud CVE peegelserverisse ja, kui see midagi ei leia, ka ENISA-le ja MITRE-le. Nende serverite haldajad saavad järeldada, millist konkreetset haavatavust te otsite — ja seega millist haavatavust te uurite.',
   'Accepteren': 'Nõustu',
   'Accepteren + waarschuwen': 'Nõustu + hoiata',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

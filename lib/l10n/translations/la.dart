@@ -1888,6 +1888,8 @@ const _dutchSourceAddLa = <String, String>{
   'toegangstoken (JWT)': 'signum accessus (JWT)',
   'databaseverbinding met wachtwoord': 'conexio datorum cum tessera',
   'wachtwoord in klare tekst': 'tessera in textu aperto',
+  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
+      'Vocabulum quaesitum ad speculum CVE constitutum mittitur et, si nihil invenit, etiam ad ENISA et MITRE. Qui ea moderantur, colligere possunt quod certum vitium quaeras — ideoque quod vitium investiges.',
   'Accepteren': 'Accipere',
   'Accepteren + waarschuwen': 'Accipere + monere',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

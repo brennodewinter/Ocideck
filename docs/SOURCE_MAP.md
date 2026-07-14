@@ -203,6 +203,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 
 - `app_shell.dart` — Main application shell: layout, file IO, and dialog coordination.
 - `markdown_notes_editor.dart` — Barrel re-export of the markdown notes editor.
+- `privacy_badge.dart` — `PrivacyBadge` + the `privacyKatSvg` mark: the non-blocking marker (with an explanation on hover) for a spot where something leaves the device. Used by the status bar's remote-origin badge and the Security tab's online-CVE switch.
 - `privacy_statement_content.dart` — Privacy/license content shared by the consent and settings dialogs.
 
 ### `lib/widgets/shell/` (each `part of app_shell.dart`)
@@ -211,7 +212,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `command_palette_actions.dart` — `_MainLayoutCommandPalette`: builds and shows the Ctrl/Cmd+K command list (incl. the security-module actions).
 - `shell_actions.dart` — File-IO helpers for deck import/export and Nextcloud integration, plus shared `presentDeck`/`requestCloseTab` helpers.
 - `shell_overlays.dart` — `_DropOverlay` and `_ResizableDivider` chrome.
-- `status_bar.dart` — `_DeckStatusBar`: save state, file info, TLP classification, and the remote-origin privacy badge (`_RemoteOriginBadge` + `remoteOriginTooltip`) shown when a deck was fetched from a URL.
+- `status_bar.dart` — `_DeckStatusBar`: save state, file info, TLP classification, and the remote-origin privacy badge (`_RemoteOriginBadge` + `remoteOriginTooltip`, rendered with the shared `PrivacyBadge`) shown when a deck was fetched from a URL.
 - `tab_bar.dart` — `_AppTabBar`/`_TabChip` multi-deck tab management; `_TabContent` picks welcome / play-only / editor per deck.
 - `welcome_screen.dart` — `_WelcomeScreen`: recent files and new/open/import actions.
 - `play_only_screen.dart` — `_PlayOnlyScreen`: locked view for `Deck.playOnly` decks (first slide + Play + Close).

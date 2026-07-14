@@ -1905,6 +1905,8 @@ const _dutchSourceAddPt = <String, String>{
   'databaseverbinding met wachtwoord':
       'ligação à base de dados com palavra-passe',
   'wachtwoord in klare tekst': 'palavra-passe em texto simples',
+  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
+      'O seu termo de pesquisa vai para o espelho CVE configurado e, se este não encontrar nada, também para a ENISA e a MITRE. Quem gere esses servidores pode deduzir qual a vulnerabilidade específica que procura — e, portanto, qual a vulnerabilidade que está a investigar.',
   'Accepteren': 'Aceitar',
   'Accepteren + waarschuwen': 'Aceitar + avisar',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

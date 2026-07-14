@@ -1011,6 +1011,8 @@ const _dutchSourceAddEn = {
   'toegangstoken (JWT)': 'access token (JWT)',
   'databaseverbinding met wachtwoord': 'database connection with password',
   'wachtwoord in klare tekst': 'password in plain text',
+  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
+      'Your search term goes to the configured CVE mirror, and if that finds nothing, to ENISA and MITRE as well. Whoever runs those servers can infer which specific vulnerability you are looking for — and therefore which vulnerability you are investigating.',
   'Accepteren': 'Accept',
   'Accepteren + waarschuwen': 'Accept + warn',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

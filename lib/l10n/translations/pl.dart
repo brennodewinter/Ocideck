@@ -1887,6 +1887,8 @@ const _dutchSourceAddPl = <String, String>{
   'toegangstoken (JWT)': 'token dostępu (JWT)',
   'databaseverbinding met wachtwoord': 'połączenie z bazą danych z hasłem',
   'wachtwoord in klare tekst': 'hasło jawnym tekstem',
+  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
+      'Twoje zapytanie trafia do skonfigurowanego serwera lustrzanego CVE, a jeśli ten nic nie znajdzie, także do ENISA i MITRE. Osoby zarządzające tymi serwerami mogą wywnioskować, jakiej konkretnej podatności szukasz — a więc którą podatność badasz.',
   'Accepteren': 'Akceptuj',
   'Accepteren + waarschuwen': 'Akceptuj + ostrzegaj',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

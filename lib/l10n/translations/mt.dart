@@ -1896,6 +1896,8 @@ const _dutchSourceAddMt = <String, String>{
   'toegangstoken (JWT)': 'token ta\' aċċess (JWT)',
   'databaseverbinding met wachtwoord': 'konnessjoni tad-database bil-password',
   'wachtwoord in klare tekst': 'password f\'test ċar',
+  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
+      'It-terminu tat-tfittxija tiegħek jintbagħat lill-mirror CVE konfigurat, u jekk dak ma jsib xejn, anke lil ENISA u MITRE. Min imexxi dawk is-servers jista\' jiddeduċi liema vulnerabbiltà speċifika qed tfittex — u għalhekk liema vulnerabbiltà qed tinvestiga.',
   'Accepteren': 'Aċċetta',
   'Accepteren + waarschuwen': 'Aċċetta + wissi',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

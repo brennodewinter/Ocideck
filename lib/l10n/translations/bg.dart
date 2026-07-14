@@ -1895,6 +1895,8 @@ const _dutchSourceAddBg = <String, String>{
   'toegangstoken (JWT)': 'токен за достъп (JWT)',
   'databaseverbinding met wachtwoord': 'връзка към база данни с парола',
   'wachtwoord in klare tekst': 'парола в чист текст',
+  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
+      'Вашата заявка за търсене отива към настроеното CVE огледало, а ако то не намери нищо — и към ENISA и MITRE. Тези, които управляват тези сървъри, могат да заключат коя конкретна уязвимост търсите — и следователно коя уязвимост проучвате.',
   'Accepteren': 'Приемане',
   'Accepteren + waarschuwen': 'Приемане + предупреждение',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

@@ -1872,6 +1872,8 @@ const _dutchSourceAddSv = <String, String>{
   'toegangstoken (JWT)': 'åtkomsttoken (JWT)',
   'databaseverbinding met wachtwoord': 'databasanslutning med lösenord',
   'wachtwoord in klare tekst': 'lösenord i klartext',
+  'Je zoekterm gaat naar de ingestelde CVE-mirror, en als die niets vindt ook naar ENISA en MITRE. Wie die servers beheert, kan daaruit afleiden naar welk specifiek lek je zoekt — en dus welk lek je onderzoekt.':
+      'Din sökterm skickas till den konfigurerade CVE-spegeln och, om den inte hittar något, även till ENISA och MITRE. De som driver dessa servrar kan sluta sig till vilken specifik sårbarhet du söker — och därmed vilken sårbarhet du undersöker.',
   'Accepteren': 'Acceptera',
   'Accepteren + waarschuwen': 'Acceptera + varna',
   'Accepteren: de gegevens horen hier en de melding verdwijnt. Accepteren + waarschuwen: de ontvanger ziet een badge dat er persoonsgegevens op de slide staan. Weglaten: de gevonden gegevens worden onleesbaar gemaakt op het scherm en in de export — je markdown-bestand houdt de oorspronkelijke tekst.':

@@ -302,6 +302,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   Translated into every interface language.
 
 ### Security
+- **The online CVE switch now says what it costs you.** Turning on *CVE opzoeken
+  (online)* sends your search term to the configured mirror — and, because the
+  lookup falls through on a miss, the same term then goes to **ENISA and MITRE**
+  as well. For a pentester, *which* vulnerability you are looking up is often the
+  most sensitive thing they know: it discloses what is being investigated, and by
+  implication where the weakness is. That was already true, and was explained
+  nowhere near the switch. A PrivacyKat badge now sits next to it, and hovering
+  it spells out exactly that. It blocks nothing — it makes the trade visible
+  while the choice is still yours.
+
 - **The RFC 3161 timestamp panel no longer shows a "verified" badge for a
   token it hasn't verified.** The panel displayed a green check and
   "Getijdstempeld op &lt;time&gt;" whenever the token's message imprint matched
