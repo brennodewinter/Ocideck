@@ -1,14 +1,12 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import '../../models/deck.dart';
-import '../../models/document_signature.dart';
 import '../../models/settings.dart';
-import '../../models/slide.dart';
 import '../../models/slide_quality.dart';
 import '../../services/classification_enforcement_policy.dart';
 import '../../services/export_metadata.dart';
 import '../../services/export_service.dart';
+import '../../services/privacy/privacy_projection.dart';
 import '../../services/quality_export_policy.dart';
 import '../../services/slide_rasterizer.dart';
 import '../../l10n/app_localizations.dart';
@@ -21,12 +19,17 @@ import '../../theme/app_theme.dart';
 /// packing them into a PDF or PPTX (WYSIWYG — the export matches the preview).
 class ExportDialog extends StatefulWidget {
   final String deckPath;
-  final List<Slide> slides;
-  final ThemeProfile themeProfile;
+
+  /// Het te exporteren deck, ná de privacyprojectie.
+  ///
+  /// Bewust één [AudienceDeck] in plaats van losse slides, thema, TLP, auteur
+  /// en metadata: export is een ontvangend oppervlak, en het typesysteem moet
+  /// verhinderen dat de ongeredigeerde bron hier ooit binnenkomt. Alles wat de
+  /// export nodig heeft, wordt uit dit ene object afgeleid.
+  final AudienceDeck audience;
+
   final CockpitColorScheme cockpitColorScheme;
-  final String? projectPath;
   final ExportService exportService;
-  final TlpLevel tlp;
 
   /// Classificatie-handhaving (plafond, minimum, verplicht classificeren).
   final ClassificationEnforcementPolicy enforcementPolicy;
@@ -41,16 +44,12 @@ class ExportDialog extends StatefulWidget {
   final String? exportDirectory;
 
   /// The deck's Marp Markdown, used for the self-contained HTML export.
+  ///
+  /// Wordt uit [audience] gegenereerd, niet uit de bron — de HTML-export zet de
+  /// markdown letterlijk in het bestand, dus dit is een tekstpad en geen raster.
   final String markdown;
 
-  final String organization;
   final bool showClassificationWatermark;
-  final ExportDocumentMetadata documentMetadata;
-
-  /// The deck-level visual signature and seal timestamp, so a `signOff` slide
-  /// renders its (typed or drawn) signature in the rasterised export.
-  final DocumentSignature? signature;
-  final String sealedAt;
 
   /// Na een geslaagde export aangeroepen met het formaat-label ("PDF",
   /// "PPTX", "HTML") — bijv. om het bij de recente bestanden te noteren.
@@ -59,45 +58,31 @@ class ExportDialog extends StatefulWidget {
   const ExportDialog({
     super.key,
     required this.deckPath,
-    required this.slides,
-    required this.themeProfile,
+    required this.audience,
     this.cockpitColorScheme = CockpitColorScheme.standard,
-    required this.projectPath,
     required this.exportService,
-    this.tlp = TlpLevel.none,
     this.enforcementPolicy = const ClassificationEnforcementPolicy(),
     this.qualityResult = const SlideQualityResult([]),
     this.qualityPolicy = const QualityExportPolicy(),
     this.exportDirectory,
     this.markdown = '',
-    this.organization = '',
     this.showClassificationWatermark = false,
-    this.documentMetadata = const ExportDocumentMetadata(),
-    this.signature,
-    this.sealedAt = '',
     this.onExported,
   });
 
   static Future<void> show(
     BuildContext context, {
     required String deckPath,
-    required List<Slide> slides,
-    required ThemeProfile themeProfile,
+    required AudienceDeck audience,
     CockpitColorScheme cockpitColorScheme = CockpitColorScheme.standard,
-    required String? projectPath,
     required ExportService exportService,
-    TlpLevel tlp = TlpLevel.none,
     ClassificationEnforcementPolicy enforcementPolicy =
         const ClassificationEnforcementPolicy(),
     SlideQualityResult qualityResult = const SlideQualityResult([]),
     QualityExportPolicy qualityPolicy = const QualityExportPolicy(),
     String? exportDirectory,
     String markdown = '',
-    String organization = '',
     bool showClassificationWatermark = false,
-    ExportDocumentMetadata documentMetadata = const ExportDocumentMetadata(),
-    DocumentSignature? signature,
-    String sealedAt = '',
     void Function(String formatLabel)? onExported,
   }) {
     return showDialog(
@@ -105,22 +90,15 @@ class ExportDialog extends StatefulWidget {
       barrierDismissible: false,
       builder: (_) => ExportDialog(
         deckPath: deckPath,
-        slides: slides,
-        themeProfile: themeProfile,
+        audience: audience,
         cockpitColorScheme: cockpitColorScheme,
-        projectPath: projectPath,
         exportService: exportService,
-        tlp: tlp,
         enforcementPolicy: enforcementPolicy,
         qualityResult: qualityResult,
         qualityPolicy: qualityPolicy,
         exportDirectory: exportDirectory,
         markdown: markdown,
-        organization: organization,
         showClassificationWatermark: showClassificationWatermark,
-        documentMetadata: documentMetadata,
-        signature: signature,
-        sealedAt: sealedAt,
         onExported: onExported,
       ),
     );
@@ -207,7 +185,7 @@ class _ExportDialogState extends State<ExportDialog> {
       _result = null;
       _phase = l10n.d('Export wordt voorbereid…');
       _done = 0;
-      _total = needsRaster ? widget.slides.length : 0;
+      _total = needsRaster ? widget.audience.slides.length : 0;
     });
     await WidgetsBinding.instance.endOfFrame;
     await Future<void>.delayed(Duration.zero);
@@ -222,7 +200,7 @@ class _ExportDialogState extends State<ExportDialog> {
     setState(() {
       _phase = needsRaster ? l10n.t('renderingSlides') : l10n.t('buildingHtml');
       _done = 0;
-      _total = needsRaster ? widget.slides.length : 0;
+      _total = needsRaster ? widget.audience.slides.length : 0;
     });
     await WidgetsBinding.instance.endOfFrame;
     await Future<void>.delayed(Duration.zero);
@@ -231,15 +209,9 @@ class _ExportDialogState extends State<ExportDialog> {
     final images = needsRaster
         ? await SlideRasterizer.rasterize(
             context: context,
-            slides: widget.slides,
-            themeProfile: widget.themeProfile,
+            audience: widget.audience,
             cockpitColorScheme: widget.cockpitColorScheme,
-            projectPath: widget.projectPath,
-            signature: widget.signature,
-            sealedAt: widget.sealedAt,
-            tlp: widget.tlp,
             showClassificationWatermark: widget.showClassificationWatermark,
-            organization: widget.organization,
             targetWidth: compress ? 1280 : 1920,
             onProgress: (done, total) {
               if (mounted) setState(() => _done = done);
@@ -268,7 +240,7 @@ class _ExportDialogState extends State<ExportDialog> {
     }
     setState(() {
       _phase = '${format.label} ${l10n.t('buildingExport')}';
-      _done = needsRaster ? widget.slides.length : 0;
+      _done = needsRaster ? widget.audience.slides.length : 0;
     });
     await WidgetsBinding.instance.endOfFrame;
     if (!mounted) return;
@@ -280,16 +252,16 @@ class _ExportDialogState extends State<ExportDialog> {
       compress: compress,
       outputDirectory: widget.exportDirectory,
       // Speaker notes travel 1:1 with the rendered slides (PPTX notes pane).
-      notes: [for (final s in widget.slides) s.notes],
+      notes: [for (final s in widget.audience.slides) s.notes],
       markdown: widget.markdown,
-      themeProfile: widget.themeProfile,
+      themeProfile: widget.audience.deck.themeProfile,
       cockpitColorScheme: widget.cockpitColorScheme,
-      tlp: widget.tlp,
+      tlp: widget.audience.deck.tlp,
       enforcementPolicy: widget.enforcementPolicy,
       qualityResult: widget.qualityResult,
       qualityPolicy: widget.qualityPolicy,
       qualityAcknowledged: true,
-      metadata: widget.documentMetadata,
+      metadata: ExportDocumentMetadata.fromDeck(widget.audience.deck),
     );
 
     if (!mounted) return;
@@ -414,7 +386,9 @@ class _ExportDialogState extends State<ExportDialog> {
     // Pre-flight classificatie-gate: blokkeert de export al vóór een poging,
     // zodat de gebruiker meteen de reden ziet. De service handhaaft dezelfde
     // regel nog eens als backstop, dus dit is puur UX — niet de beveiliging.
-    final decision = widget.enforcementPolicy.evaluate(widget.tlp);
+    final decision = widget.enforcementPolicy.evaluate(
+      widget.audience.deck.tlp,
+    );
     if (!decision.allowed) {
       return Column(
         mainAxisSize: MainAxisSize.min,

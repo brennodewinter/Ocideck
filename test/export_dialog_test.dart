@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/markdown_validation.dart';
-import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide_quality.dart';
+import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/services/export_service.dart';
+import 'package:ocideck/services/privacy/privacy_projection.dart';
 import 'package:ocideck/services/quality_export_policy.dart';
 import 'package:ocideck/widgets/dialogs/export_dialog.dart';
 
@@ -25,6 +26,11 @@ const _qualityError = SlideQualityResult([
   ),
 ]);
 
+/// Zelfs een test komt alleen via de projectiegrens aan een AudienceDeck —
+/// de constructor is private. Dat is precies de bedoeling.
+AudienceDeck _emptyAudience() =>
+    PrivacyProjection.forAudience(const Deck(title: 'Test'));
+
 void main() {
   test('quality warnings require acknowledgement before export proceeds', () {
     final decision = const QualityExportPolicy().evaluate(_qualityWarning);
@@ -41,9 +47,7 @@ void main() {
         home: Scaffold(
           body: ExportDialog(
             deckPath: '/tmp/deck.md',
-            slides: const [],
-            themeProfile: const ThemeProfile(),
-            projectPath: null,
+            audience: _emptyAudience(),
             exportService: ExportService(),
           ),
         ),
@@ -72,9 +76,7 @@ void main() {
         home: Scaffold(
           body: ExportDialog(
             deckPath: '/tmp/deck.md',
-            slides: const [],
-            themeProfile: const ThemeProfile(),
-            projectPath: null,
+            audience: _emptyAudience(),
             exportService: ExportService(),
             qualityResult: _qualityWarning,
           ),
@@ -94,9 +96,7 @@ void main() {
         home: Scaffold(
           body: ExportDialog(
             deckPath: '/tmp/deck.md',
-            slides: const [],
-            themeProfile: const ThemeProfile(),
-            projectPath: null,
+            audience: _emptyAudience(),
             exportService: ExportService(),
             qualityResult: _qualityError,
             qualityPolicy: const QualityExportPolicy(blockOnErrors: true),

@@ -11,6 +11,7 @@ import '../models/deck.dart';
 import '../models/document_signature.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
+import 'privacy/privacy_projection.dart';
 import 'web_asset_store.dart';
 import '../utils/bundled_asset.dart';
 import '../utils/image_limits.dart';
@@ -33,18 +34,17 @@ class SlideRasterizer {
   /// the logical size only affects sampling quality.
   static const Size logicalSize = Size(1280, 720);
 
-  /// Render [slides] to PNG bytes at [targetWidth] x (targetWidth * 9/16).
+  /// Render [audience] to PNG bytes at [targetWidth] x (targetWidth * 9/16).
+  ///
+  /// Neemt bewust een [AudienceDeck] en geen rauwe slides: rasteren is een
+  /// ontvangend oppervlak (de pixels worden een PDF, een PPTX, of het
+  /// klembord), en de projectiegrens hoort dus in het typesysteem te staan en
+  /// niet in een afspraak. Zie `PrivacyProjection`.
   static Future<List<Uint8List>> rasterize({
     required BuildContext context,
-    required List<Slide> slides,
-    required ThemeProfile themeProfile,
+    required AudienceDeck audience,
     CockpitColorScheme cockpitColorScheme = CockpitColorScheme.standard,
-    required String? projectPath,
-    DocumentSignature? signature,
-    String sealedAt = '',
-    TlpLevel tlp = TlpLevel.none,
     bool showClassificationWatermark = false,
-    String organization = '',
     int targetWidth = 1920,
     void Function(int done, int total)? onProgress,
     void Function(String phase, int done, int total)? onStage,
@@ -52,7 +52,18 @@ class SlideRasterizer {
     // onvolledige lijst terug en hoort die weg te gooien.
     bool Function()? isCancelled,
   }) async {
+    final slides = audience.slides;
     if (slides.isEmpty) return const [];
+
+    // Alles wat de render nodig heeft, komt uit het geprojecteerde deck — niet
+    // uit los meegegeven velden die per ongeluk van de bron konden komen.
+    final deck = audience.deck;
+    final themeProfile = deck.themeProfile;
+    final projectPath = deck.projectPath;
+    final signature = deck.signature;
+    final sealedAt = deck.sealAt;
+    final tlp = deck.tlp;
+    final organization = deck.organization;
 
     final overlay = Overlay.of(context, rootOverlay: true);
     final pixelRatio = targetWidth / logicalSize.width;

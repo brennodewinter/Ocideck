@@ -688,19 +688,22 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     // full-size slides instead of one shrunken one. The deck itself is
     // unchanged — this only affects what the export enumerates.
     final renderSlides = expandFindingsForRender(slides);
+
+    // De projectiegrens. Vanaf hier raakt geen enkel exportpad de bron nog aan:
+    // de rasterizer, de markdown voor de HTML-export, de PPTX-notities en de
+    // documentmetadata worden allemaal uit dit ene object afgeleid.
+    final audience = PrivacyProjection.forAudience(
+      deck.copyWith(slides: renderSlides),
+    );
+
     await ExportDialog.show(
       context,
       // Op web heeft een deck geen bestandspad; de deck-titel bepaalt dan de
       // naam van het te downloaden bestand.
       deckPath: deckState.filePath ?? '${_safeRemoteName(deck.title)}.md',
-      slides: renderSlides,
-      themeProfile: deck.themeProfile,
+      audience: audience,
       cockpitColorScheme: ref.read(settingsProvider).cockpitColorScheme,
-      projectPath: deck.projectPath,
       exportService: widget.exportService,
-      tlp: deck.tlp,
-      signature: deck.signature,
-      sealedAt: deck.sealAt,
       enforcementPolicy: ClassificationEnforcementPolicy.fromAppSettings(
         ref.read(settingsProvider),
       ),
@@ -711,26 +714,16 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       ),
       exportDirectory: ref.read(settingsProvider).exportDirectory,
       // Inline chart data so the HTML export can render charts standalone,
-      // even when a chart links an external CSV.
+      // even when a chart links an external CSV. Gegenereerd uit het
+      // geprojecteerde deck: de HTML-export zet deze markdown letterlijk in het
+      // bestand, dus wat hier niet geredigeerd is, staat straks één Ctrl+U
+      // verderop leesbaar in de broncode.
       markdown: ref
           .read(markdownServiceProvider)
-          .generateDeck(
-            deck.copyWith(slides: renderSlides),
-            inlineChartData: true,
-            forExport: true,
-          ),
-      organization: deck.organization,
+          .generateDeck(audience.deck, inlineChartData: true, forExport: true),
       showClassificationWatermark: ref
           .read(settingsProvider)
           .classificationWatermarkEnabled,
-      documentMetadata: ExportDocumentMetadata(
-        title: deck.title,
-        author: deck.author,
-        organization: deck.organization,
-        description: deck.description,
-        keywords: deck.keywords,
-        tlp: deck.tlp,
-      ),
       // Noteer een geslaagde export bij het recente bestand, zodat de
       // welkomstlijst "laatst geëxporteerd als …" kan tonen. Alleen zinvol
       // met een echt bestandspad (op web is een deck een download).
