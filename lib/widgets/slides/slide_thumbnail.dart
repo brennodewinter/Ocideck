@@ -195,6 +195,9 @@ class SlideThumbnail extends ConsumerWidget {
                     cockpitColorScheme: ref.watch(
                       settingsProvider.select((s) => s.cockpitColorScheme),
                     ),
+                    allowRemoteMedia: ref.watch(
+                      settingsProvider.select((s) => s.allowRemoteMedia),
+                    ),
                     slideNumber: index + 1,
                     slideCount: slideCount,
                     numberStart: numberStart,

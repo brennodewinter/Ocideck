@@ -739,9 +739,10 @@ void main() {
         );
 
         expect(
-          analyzer.analyze(deck).issues.any(
-            (i) => i.kind == SlideQualityIssueKind.missingMediaFile,
-          ),
+          analyzer
+              .analyze(deck)
+              .issues
+              .any((i) => i.kind == SlideQualityIssueKind.missingMediaFile),
           isFalse,
           reason: '$url is een online bron, geen ontbrekend bestand',
         );
@@ -764,9 +765,10 @@ void main() {
       );
 
       expect(
-        analyzer.analyze(deck).issues.any(
-          (i) => i.kind == SlideQualityIssueKind.missingMediaFile,
-        ),
+        analyzer
+            .analyze(deck)
+            .issues
+            .any((i) => i.kind == SlideQualityIssueKind.missingMediaFile),
         isFalse,
       );
     });
