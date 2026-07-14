@@ -1786,6 +1786,9 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Extern': 'Externí',
+  'Van een externe URL opgehaald; het openen heeft die server benaderd.':
+      'Načteno z externí adresy URL; otevření kontaktovalo tento server.',
   'map/presentatie': 'složka/prezentace',
   'Gekoppelde test': 'Propojený test',
   'Maak eerst een checklist voor dit scope-object.':

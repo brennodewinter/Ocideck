@@ -228,6 +228,38 @@ void main() {
       },
     );
 
+    test('records the remote origin for the privacy badge', () async {
+      final container = _container();
+      final tabs = container.read(tabsProvider.notifier);
+      const url = 'https://example.org/deck.md';
+      final result = await tabs.openDeckFromBytes(
+        utf8.encode(_goodDeck),
+        url,
+        remoteOrigin: url,
+      );
+      expect(result, OpenResult.opened);
+      final deckState = container
+          .read(tabsProvider)
+          .current!
+          .deckNotifier
+          .currentState;
+      expect(deckState.remoteOrigin, url);
+    });
+
+    test('a locally opened deck carries no remote origin', () async {
+      final container = _container();
+      final tabs = container.read(tabsProvider.notifier);
+      // No remoteOrigin argument: mirrors the web file-picker / drag-drop,
+      // where the bytes came from the user's own disk, not a URL.
+      await tabs.openDeckFromBytes(utf8.encode(_goodDeck), 'deck.md');
+      final deckState = container
+          .read(tabsProvider)
+          .current!
+          .deckNotifier
+          .currentState;
+      expect(deckState.remoteOrigin, isNull);
+    });
+
     test('a corrupt zip package is refused, nothing opens', () async {
       final container = _container();
       final tabs = container.read(tabsProvider.notifier);

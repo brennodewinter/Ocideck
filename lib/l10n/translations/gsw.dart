@@ -1787,6 +1787,9 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Extern': 'Extern',
+  'Van een externe URL opgehaald; het openen heeft die server benaderd.':
+      'Vo ere externe URL glade; bim Öffne isch dä Server kontaktiert worde.',
   'map/presentatie': 'Ordner/Präsentation',
   'Gekoppelde test': 'Verchnüpfte Test',
   'Maak eerst een checklist voor dit scope-object.':

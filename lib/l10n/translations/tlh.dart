@@ -1758,6 +1758,9 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Extern': 'Hur',
+  'Van een externe URL opgehaald; het openen heeft die server benaderd.':
+      'Hur URL-vo\' Suqlu\'; poSlu\'DI\' vetlh server qIHlu\'.',
   'map/presentatie': 'yav/\'angnIS',
   'Gekoppelde test': 'test rar',
   'Maak eerst een checklist voor dit scope-object.':

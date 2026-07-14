@@ -1785,6 +1785,9 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Extern': 'Zunanji',
+  'Van een externe URL opgehaald; het openen heeft die server benaderd.':
+      'Pridobljeno z zunanjega URL-ja; odpiranje je vzpostavilo stik s tem strežnikom.',
   'map/presentatie': 'mapa/predstavitev',
   'Gekoppelde test': 'Povezani test',
   'Maak eerst een checklist voor dit scope-object.':

@@ -1819,6 +1819,9 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Extern': 'Seachtrach',
+  'Van een externe URL opgehaald; het openen heeft die server benaderd.':
+      'Aisghabhadh ó URL seachtrach; rinne an oscailt teagmháil leis an bhfreastalaí sin.',
   'map/presentatie': 'fillteán/cur-i-láthair',
   'Gekoppelde test': 'Tástáil nasctha',
   'Maak eerst een checklist voor dit scope-object.':

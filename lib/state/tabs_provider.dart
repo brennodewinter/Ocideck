@@ -434,15 +434,28 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// Zet een zojuist geopend deck in een tabblad: een leeg huidig tabblad
   /// wordt hergebruikt, anders komt er een nieuw tabblad naast. Gedeelde
   /// staart van pad-, bytes- en URL-opens.
-  void _placeDeckInTab(Deck deck, {String? filePath, int index = 0}) {
+  void _placeDeckInTab(
+    Deck deck, {
+    String? filePath,
+    int index = 0,
+    String? remoteOrigin,
+  }) {
     final current = state.current;
     if (current != null && !current.isOpen) {
-      current.deckNotifier.loadDeck(deck, filePath: filePath);
+      current.deckNotifier.loadDeck(
+        deck,
+        filePath: filePath,
+        remoteOrigin: remoteOrigin,
+      );
       current.editorNotifier.select(index);
       state = state.copyWith(tabs: List.from(state.tabs));
     } else {
       final tab = _createTab();
-      tab.deckNotifier.loadDeck(deck, filePath: filePath);
+      tab.deckNotifier.loadDeck(
+        deck,
+        filePath: filePath,
+        remoteOrigin: remoteOrigin,
+      );
       tab.editorNotifier.select(index);
       final newTabs = [...state.tabs, tab];
       state = state.copyWith(tabs: newTabs, selectedIndex: newTabs.length - 1);
@@ -458,9 +471,13 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// tabblad krijgt geen [DeckState.filePath], dus opslaan wordt een
   /// download. [name] labelt het importalarm en de logregels (bestandsnaam
   /// of URL).
-  Future<OpenResult> openDeckFromBytes(Uint8List bytes, String name) async {
+  Future<OpenResult> openDeckFromBytes(
+    Uint8List bytes,
+    String name, {
+    String? remoteOrigin,
+  }) async {
     if (FileService.looksLikeZipBytes(bytes)) {
-      return _openPackageFromBytes(bytes, name);
+      return _openPackageFromBytes(bytes, name, remoteOrigin: remoteOrigin);
     }
     if (bytes.length > FileService.maxDeckMarkdownBytes) {
       return OpenResult.unreadable;
@@ -476,7 +493,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     final deck = gated.deck;
     if (deck == null) return gated.failure;
     if (!mounted) return OpenResult.unreadable;
-    _placeDeckInTab(deck);
+    _placeDeckInTab(deck, remoteOrigin: remoteOrigin);
     return OpenResult.opened;
   }
 
@@ -486,7 +503,11 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// en de slidepaden worden naar hun mem:-pad herschreven, en de sidecars
   /// (annotaties, sprekersnotities) reizen mee. Er raakt geen bestandssysteem
   /// aan te pas, dus dit werkt ook in de webversie.
-  Future<OpenResult> _openPackageFromBytes(Uint8List bytes, String name) async {
+  Future<OpenResult> _openPackageFromBytes(
+    Uint8List bytes,
+    String name, {
+    String? remoteOrigin,
+  }) async {
     // Versleuteld pakket: vraag (met retry) het wachtwoord vóór het decoderen.
     String? password;
     if (FileService.isEncryptedPackage(bytes)) {
@@ -524,7 +545,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     deck = _attachPackageAssets(deck, entries, mdEntry.name);
     deck = _attachPackageSidecars(deck, entries, mdEntry.name);
     if (!mounted) return OpenResult.unreadable;
-    _placeDeckInTab(deck);
+    _placeDeckInTab(deck, remoteOrigin: remoteOrigin);
     return OpenResult.opened;
   }
 
@@ -726,8 +747,10 @@ class TabsNotifier extends StateNotifier<TabsState> {
       maxBytes: FileService.maxPackageBytes,
     );
     if (bytes == null || !mounted) return OpenResult.unreadable;
-    // Zelfde kern als de web-picker en drag-drop: [openDeckFromBytes].
-    return openDeckFromBytes(bytes, url);
+    // Zelfde kern als de web-picker en drag-drop: [openDeckFromBytes]. De URL
+    // reist mee als [remoteOrigin] zodat de statusbalk de privacy-badge toont:
+    // deze presentatie is van buiten het apparaat opgehaald.
+    return openDeckFromBytes(bytes, url, remoteOrigin: url);
   }
 
   /// Gedeelde staart van elke import-flow (pakket/URL/WebDAV): open het

@@ -1787,6 +1787,9 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Extern': 'Külső',
+  'Van een externe URL opgehaald; het openen heeft die server benaderd.':
+      'Külső URL-ről letöltve; a megnyitás kapcsolatba lépett azzal a kiszolgálóval.',
   'map/presentatie': 'mappa/prezentáció',
   'Gekoppelde test': 'Kapcsolt teszt',
   'Maak eerst een checklist voor dit scope-object.':

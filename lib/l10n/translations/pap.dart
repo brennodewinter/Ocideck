@@ -740,6 +740,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Extern': 'Èksterno',
+  'Van een externe URL opgehaald; het openen heeft die server benaderd.':
+      'Buscá for di un URL èksterno; ora di habri el a kontaktá e server ei.',
   'map/presentatie': 'karpeta/presentashon',
   'Gekoppelde test': 'Test konektá',
   'Maak eerst een checklist voor dit scope-object.':

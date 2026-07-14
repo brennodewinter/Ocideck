@@ -1790,6 +1790,9 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Extern': 'Vanjski',
+  'Van een externe URL opgehaald; het openen heeft die server benaderd.':
+      'Dohvaćeno s vanjskog URL-a; otvaranje je kontaktiralo taj poslužitelj.',
   'map/presentatie': 'mapa/prezentacija',
   'Gekoppelde test': 'Povezani test',
   'Maak eerst een checklist voor dit scope-object.':

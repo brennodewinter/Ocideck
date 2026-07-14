@@ -1774,6 +1774,9 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Extern': 'Väline',
+  'Van een externe URL opgehaald; het openen heeft die server benaderd.':
+      'Toodud välisest URL-ist; avamine võttis ühendust selle serveriga.',
   'map/presentatie': 'kaust/esitlus',
   'Gekoppelde test': 'Seotud test',
   'Maak eerst een checklist voor dit scope-object.':

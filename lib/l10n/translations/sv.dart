@@ -1782,6 +1782,9 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Extern': 'Extern',
+  'Van een externe URL opgehaald; het openen heeft die server benaderd.':
+      'Hämtad från en extern URL; öppningen kontaktade den servern.',
   'map/presentatie': 'mapp/presentation',
   'Gekoppelde test': 'Länkad test',
   'Maak eerst een checklist voor dit scope-object.':

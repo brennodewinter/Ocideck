@@ -1801,6 +1801,9 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Extern': 'Зовнішній',
+  'Van een externe URL opgehaald; het openen heeft die server benaderd.':
+      'Отримано із зовнішньої URL-адреси; відкриття звернулося до того сервера.',
   'map/presentatie': 'тека/презентація',
   'Gekoppelde test': 'Пов\'язаний тест',
   'Maak eerst een checklist voor dit scope-object.':

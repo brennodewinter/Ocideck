@@ -7,6 +7,15 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+- **A privacy badge marks decks that came from a URL.** When a deck is fetched
+  from a web address (the URL import, or a `?deck=…` share link on the web
+  build), the status bar shows an **“Extern”** badge — a “PrivacyKat” mark in the
+  EU blue/yellow palette. Opening such a link makes your device contact that
+  server; the badge makes that provenance visible (hover for the source host)
+  without blocking the open. Decks opened from your own disk carry no badge.
+  Translated into every interface language.
+
 ### Security
 - **The RFC 3161 timestamp panel no longer shows a "verified" badge for a
   token it hasn't verified.** The panel displayed a green check and

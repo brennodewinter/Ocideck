@@ -1811,6 +1811,9 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Extern': 'Εξωτερικό',
+  'Van een externe URL opgehaald; het openen heeft die server benaderd.':
+      'Λήφθηκε από εξωτερική διεύθυνση URL· το άνοιγμα επικοινώνησε με αυτόν τον διακομιστή.',
   'map/presentatie': 'φάκελος/παρουσίαση',
   'Gekoppelde test': 'Συνδεδεμένος έλεγχος',
   'Maak eerst een checklist voor dit scope-object.':

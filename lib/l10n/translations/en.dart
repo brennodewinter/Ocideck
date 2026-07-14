@@ -922,6 +922,9 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Extern': 'External',
+  'Van een externe URL opgehaald; het openen heeft die server benaderd.':
+      'Fetched from an external URL; opening it contacted that server.',
   'map/presentatie': 'folder/presentation',
   'Gekoppelde test': 'Linked test',
   'Maak eerst een checklist voor dit scope-object.':

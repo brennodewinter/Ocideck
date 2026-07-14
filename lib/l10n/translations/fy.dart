@@ -741,6 +741,9 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Extern': 'Ekstern',
+  'Van een externe URL opgehaald; het openen heeft die server benaderd.':
+      'Fan in eksterne URL ophelle; it iepenjen hat dy server benadere.',
   'map/presentatie': 'map/presintaasje',
   'Gekoppelde test': 'Keppele test',
   'Maak eerst een checklist voor dit scope-object.':

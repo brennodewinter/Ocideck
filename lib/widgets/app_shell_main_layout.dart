@@ -85,6 +85,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
             exportTooltip: exportTooltip,
             readiness: readiness,
             quality: quality,
+            remoteOrigin: deckState.remoteOrigin,
           ),
           body: Builder(
             builder: (ctx) {

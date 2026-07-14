@@ -1790,6 +1790,9 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Extern': 'Externý',
+  'Van een externe URL opgehaald; het openen heeft die server benaderd.':
+      'Načítané z externej URL; otvorenie kontaktovalo tento server.',
   'map/presentatie': 'priečinok/prezentácia',
   'Gekoppelde test': 'Prepojený test',
   'Maak eerst een checklist voor dit scope-object.':
