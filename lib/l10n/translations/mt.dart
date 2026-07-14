@@ -1806,6 +1806,25 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Bij onafgehandelde persoonsgegevens': 'B\'data personali mhux solvuta',
+  'Export afgebroken vanwege privacybevindingen.':
+      'L-esportazzjoni ġiet ikkanċellata minħabba sejbiet ta\' privatezza.',
+  'Export blokkeren': 'Imblokka l-esportazzjoni',
+  'Export geblokkeerd': 'L-esportazzjoni mblukkata',
+  'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.':
+      'L-esportazzjoni mblukkata: din il-preżentazzjoni fiha data personali li għadek ma ddeċidejtx dwarha.',
+  'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.':
+      'Agħżel għal kull slide x\'għandu jsir, jew esporta b\'mod konxju kif inhu.',
+  'Maak per slide een keuze (accepteren, waarschuwen of weglaten) voordat je exporteert. Dit is zo ingesteld bij Beveiliging.':
+      'Agħmel għażla għal kull slide (aċċetta, wissi jew ħalli barra) qabel tesporta. Dan huwa ssettjat taħt Sigurtà.',
+  'Niets doen': 'Tagħmel xejn',
+  'Persoonsgegevens in dit deck': 'Data personali f\'din il-preżentazzjoni',
+  'Verder in dit deck:': 'Band\'oħra f\'din il-preżentazzjoni:',
+  'Waarschuwen vóór export': 'Wissi qabel l-esportazzjoni',
+  'bevinding(en) zonder keuze.': 'sejba/sejbiet mingħajr għażla.',
+  'geaccepteerd': 'aċċettati',
+  'geredigeerd': 'irrediġuti',
+  'met waarschuwing': 'b\'twissija',
   'Deze regel nooit meer melden': 'Qatt aktar tirrapporta din ir-regola',
   'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
       'Regoli mitfija. Dawn ma jiġux irrapportati u lanqas irrediġuti. Mess biex terġa\' tixgħelhom.',

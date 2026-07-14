@@ -20,6 +20,7 @@ import '../utils/user_facing_error.dart';
 import '../utils/atomic_file.dart';
 import '../models/deck.dart';
 import '../models/redaction_manifest.dart';
+import 'privacy/privacy_export_policy.dart';
 import '../models/settings.dart';
 import 'classification_enforcement_policy.dart';
 import '../models/slide_quality.dart';
@@ -128,6 +129,9 @@ class ExportService {
     bool qualityAcknowledged = false,
     ExportDocumentMetadata? metadata,
     RedactionManifest redactionManifest = RedactionManifest.empty,
+    PrivacyExportSummary privacySummary = PrivacyExportSummary.empty,
+    PrivacyExportPolicy privacyPolicy = const PrivacyExportPolicy(),
+    bool privacyAcknowledged = false,
   }) async {
     // Classificatie-gate. Dit is het enige chokepoint waar elk formaat
     // (PDF/PPTX/HTML) doorheen moet, dus de handhaving zit hier en niet in de
@@ -137,6 +141,22 @@ class ExportService {
     if (!decision.allowed) {
       return ExportResult.fail(decision.reason!);
     }
+    // Privacy-gate. Op hetzelfde chokepoint als de classificatie-gate, en om
+    // dezelfde reden: geen exportpad mag eromheen. De harde blokkade telt hier
+    // ook zonder de UI — een gate die alleen in een dialoog leeft, is er geen.
+    final privacyDecision = privacyPolicy.evaluate(privacySummary);
+    if (!privacyDecision.allowed &&
+        (privacyDecision.hardBlocked || !privacyAcknowledged)) {
+      const l10n = AppLocalizations(Locale('nl'));
+      return ExportResult.fail(
+        privacyDecision.hardBlocked
+            ? l10n.d(
+                'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.',
+              )
+            : l10n.d('Export afgebroken vanwege privacybevindingen.'),
+      );
+    }
+
     final quality = qualityResult ?? const SlideQualityResult([]);
     final qualityDecision = qualityPolicy.evaluate(
       quality,

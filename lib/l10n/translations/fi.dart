@@ -1783,6 +1783,26 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Bij onafgehandelde persoonsgegevens':
+      'Käsittelemättömien henkilötietojen kohdalla',
+  'Export afgebroken vanwege privacybevindingen.':
+      'Vienti keskeytettiin yksityisyyshavaintojen vuoksi.',
+  'Export blokkeren': 'Estä vienti',
+  'Export geblokkeerd': 'Vienti estetty',
+  'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.':
+      'Vienti estetty: tässä esityksessä on henkilötietoja, joista et ole vielä päättänyt.',
+  'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.':
+      'Valitse diakohtaisesti, mitä tehdään, tai vie tietoisesti sellaisenaan.',
+  'Maak per slide een keuze (accepteren, waarschuwen of weglaten) voordat je exporteert. Dit is zo ingesteld bij Beveiliging.':
+      'Tee valinta diakohtaisesti (hyväksy, varoita tai jätä pois) ennen vientiä. Tämä asetetaan Turvallisuus-kohdassa.',
+  'Niets doen': 'Älä tee mitään',
+  'Persoonsgegevens in dit deck': 'Henkilötietoja tässä esityksessä',
+  'Verder in dit deck:': 'Muualla tässä esityksessä:',
+  'Waarschuwen vóór export': 'Varoita ennen vientiä',
+  'bevinding(en) zonder keuze.': 'havainto(a) ilman valintaa.',
+  'geaccepteerd': 'hyväksytty',
+  'geredigeerd': 'peitetty',
+  'met waarschuwing': 'varoituksen kanssa',
   'Deze regel nooit meer melden': 'Älä ilmoita tästä säännöstä enää',
   'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
       'Poistetut säännöt. Niistä ei ilmoiteta eikä niitä peitetä. Napauta ottaaksesi taas käyttöön.',

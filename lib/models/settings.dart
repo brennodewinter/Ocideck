@@ -1,3 +1,4 @@
+import 'privacy_disposition.dart';
 import 'privacy_finding.dart';
 import 'ai_settings.dart';
 import 'chart.dart' show normalizeChartColor;
@@ -725,6 +726,13 @@ class AppSettings {
   /// werkt, zet ze met één vinkje aan.
   final Set<String> privacyDisabledRules;
 
+  /// Hoe streng de export-gate is: niets zeggen, waarschuwen (standaard), of
+  /// weigeren zolang er onafgehandelde zekere bevindingen zijn.
+  ///
+  /// Waarschuwen is de standaard omdat een gate die altijd blokkeert, een gate is
+  /// die wordt weggeklikt.
+  final PrivacyExportGate privacyExportGate;
+
   /// Scale factor for all interface text (1.0–2.0), on top of the system
   /// text scaling. The slide canvas itself is never scaled: slides are a
   /// fixed 16:9 design surface. WCAG 1.4.4 asks for text resizing up to 200%.
@@ -792,6 +800,7 @@ class AppSettings {
     this.classificationWatermarkEnabled = false,
     this.privacyChecksEnabled = true,
     this.privacyDisabledRules = defaultDisabledPrivacyRules,
+    this.privacyExportGate = PrivacyExportGate.warn,
     this.uiTextScale = 1.0,
     this.docReaderTextScale = 1.0,
     this.qualityWarningsOnExport = true,
@@ -871,6 +880,7 @@ class AppSettings {
     bool? classificationWatermarkEnabled,
     bool? privacyChecksEnabled,
     Set<String>? privacyDisabledRules,
+    PrivacyExportGate? privacyExportGate,
     double? uiTextScale,
     double? docReaderTextScale,
     bool? qualityWarningsOnExport,
@@ -931,6 +941,7 @@ class AppSettings {
           classificationWatermarkEnabled ?? this.classificationWatermarkEnabled,
       privacyChecksEnabled: privacyChecksEnabled ?? this.privacyChecksEnabled,
       privacyDisabledRules: privacyDisabledRules ?? this.privacyDisabledRules,
+      privacyExportGate: privacyExportGate ?? this.privacyExportGate,
       uiTextScale: uiTextScale ?? this.uiTextScale,
       docReaderTextScale: docReaderTextScale ?? this.docReaderTextScale,
       qualityWarningsOnExport:

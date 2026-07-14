@@ -922,6 +922,25 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Bij onafgehandelde persoonsgegevens': 'With unresolved personal data',
+  'Export afgebroken vanwege privacybevindingen.':
+      'Export cancelled because of privacy findings.',
+  'Export blokkeren': 'Block export',
+  'Export geblokkeerd': 'Export blocked',
+  'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.':
+      'Export blocked: this deck holds personal data you have not yet decided about.',
+  'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.':
+      'Choose per slide what should happen, or export it deliberately as it is.',
+  'Maak per slide een keuze (accepteren, waarschuwen of weglaten) voordat je exporteert. Dit is zo ingesteld bij Beveiliging.':
+      'Make a choice per slide (accept, warn or leave out) before exporting. This is configured under Security.',
+  'Niets doen': 'Do nothing',
+  'Persoonsgegevens in dit deck': 'Personal data in this deck',
+  'Verder in dit deck:': 'Elsewhere in this deck:',
+  'Waarschuwen vóór export': 'Warn before exporting',
+  'bevinding(en) zonder keuze.': 'finding(s) with no choice made.',
+  'geaccepteerd': 'accepted',
+  'geredigeerd': 'redacted',
+  'met waarschuwing': 'with a warning',
   'Deze regel nooit meer melden': 'Never report this rule again',
   'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
       'Disabled rules. These are not reported and not redacted. Tap to turn back on.',

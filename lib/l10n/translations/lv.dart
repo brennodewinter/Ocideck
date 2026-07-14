@@ -1782,6 +1782,25 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Bij onafgehandelde persoonsgegevens': 'Ar neatrisinātiem personas datiem',
+  'Export afgebroken vanwege privacybevindingen.':
+      'Eksports pārtraukts privātuma atradumu dēļ.',
+  'Export blokkeren': 'Bloķēt eksportu',
+  'Export geblokkeerd': 'Eksports bloķēts',
+  'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.':
+      'Eksports bloķēts: šajā prezentācijā ir personas dati, par kuriem vēl nav lemts.',
+  'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.':
+      'Izvēlies katram slaidam, kas jādara, vai apzināti eksportē, kā ir.',
+  'Maak per slide een keuze (accepteren, waarschuwen of weglaten) voordat je exporteert. Dit is zo ingesteld bij Beveiliging.':
+      'Izdari izvēli katram slaidam (pieņemt, brīdināt vai izlaist) pirms eksporta. Tas ir iestatīts sadaļā Drošība.',
+  'Niets doen': 'Nedarīt neko',
+  'Persoonsgegevens in dit deck': 'Personas dati šajā prezentācijā',
+  'Verder in dit deck:': 'Citviet šajā prezentācijā:',
+  'Waarschuwen vóór export': 'Brīdināt pirms eksporta',
+  'bevinding(en) zonder keuze.': 'atradum(i) bez izvēles.',
+  'geaccepteerd': 'pieņemti',
+  'geredigeerd': 'aizklāti',
+  'met waarschuwing': 'ar brīdinājumu',
   'Deze regel nooit meer melden': 'Vairs neziņot par šo noteikumu',
   'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
       'Izslēgtie noteikumi. Par tiem neziņo un tos neaizklāj. Pieskaries, lai atkal ieslēgtu.',

@@ -1787,6 +1787,25 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Bij onafgehandelde persoonsgegevens': 'Kezeletlen személyes adatok esetén',
+  'Export afgebroken vanwege privacybevindingen.':
+      'Az exportálás adatvédelmi megállapítások miatt megszakadt.',
+  'Export blokkeren': 'Exportálás blokkolása',
+  'Export geblokkeerd': 'Exportálás blokkolva',
+  'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.':
+      'Exportálás blokkolva: ez az előadás olyan személyes adatokat tartalmaz, amelyekről még nem döntöttél.',
+  'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.':
+      'Válaszd meg diánként, mi történjen, vagy tudatosan exportáld így.',
+  'Maak per slide een keuze (accepteren, waarschuwen of weglaten) voordat je exporteert. Dit is zo ingesteld bij Beveiliging.':
+      'Diánként dönts (elfogadás, figyelmeztetés vagy kihagyás) az exportálás előtt. Ez a Biztonságnál állítható.',
+  'Niets doen': 'Ne tegyen semmit',
+  'Persoonsgegevens in dit deck': 'Személyes adatok ebben az előadásban',
+  'Verder in dit deck:': 'Máshol ebben az előadásban:',
+  'Waarschuwen vóór export': 'Figyelmeztetés exportálás előtt',
+  'bevinding(en) zonder keuze.': 'megállapítás döntés nélkül.',
+  'geaccepteerd': 'elfogadva',
+  'geredigeerd': 'kitakarva',
+  'met waarschuwing': 'figyelmeztetéssel',
   'Deze regel nooit meer melden': 'Ne jelezze többé ezt a szabályt',
   'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
       'Kikapcsolt szabályok. Ezeket nem jelzi és nem takarja ki. Koppints a visszakapcsoláshoz.',

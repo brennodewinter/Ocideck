@@ -1758,6 +1758,25 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Bij onafgehandelde persoonsgegevens': 'nuv De\' Sovbe\'lu\'bogh',
+  'Export afgebroken vanwege privacybevindingen.':
+      'pegh tu\'lu\'mo\' ngeH mev.',
+  'Export blokkeren': 'ngeH yIbot',
+  'Export geblokkeerd': 'ngeH botlu\'',
+  'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.':
+      'ngeH botlu\': cha\'navvamDaq nuv De\' tu\'lu\' \'ej wIv Sovbe\'lu\'.',
+  'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.':
+      'nagh beQ Hoch qaSbogh yIwIv, pagh SovtaHvIS DangeH.',
+  'Maak per slide een keuze (accepteren, waarschuwen of weglaten) voordat je exporteert. Dit is zo ingesteld bij Beveiliging.':
+      'DangeHpa\' nagh beQ Hoch yIwIv (yIlaj, yIghuHmoH, pagh yIteq). Hub Daq Set.',
+  'Niets doen': 'pagh yIta\'',
+  'Persoonsgegevens in dit deck': 'cha\'navvamDaq nuv De\'',
+  'Verder in dit deck:': 'cha\'navvamDaq latlh:',
+  'Waarschuwen vóór export': 'ngeHpa\' yIghuHmoH',
+  'bevinding(en) zonder keuze.': 'wIv Hutlhbogh tu\'lu\'bogh.',
+  'geaccepteerd': 'lajlu\'',
+  'geredigeerd': 'So\'lu\'',
+  'met waarschuwing': 'ghuHmoHwI\' tlhej',
   'Deze regel nooit meer melden': 'chutvam yIja\'Qo\' not',
   'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
       'chutmey chu\'Ha\'lu\'bogh. luja\'lu\'be\' \'ej So\'lu\'be\'. chu\'qa\'meH yIuS.',

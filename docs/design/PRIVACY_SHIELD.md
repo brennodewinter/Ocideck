@@ -9,15 +9,19 @@ accepteren, waarschuwen met een shield-badge, of redigeren op scherm en in expor
 | --- | --- |
 | §6 De projectiegrens (`AudienceDeck`, afgedwongen door de conventiecheck) | **geleverd** |
 | §6.4 Handmatige redactie `[[…]]` | **geleverd** |
-| §3 Scanner: `contact.email`, `fin.iban`, `nl.bsn` + checksums + nepwaardelijst | **geleverd** |
+| §3 Scanner: checksums, nepwaardelijst, contextpoorten | **geleverd** |
+| §3-A NL + vijftien Europese landpakketten (BE/DE/FR/ES/PT/PL/IT/HR/BG/RO/SE/FI/EE/GB) | **geleverd** |
+| §3-C/D Financieel en contact (IBAN, e-mail) | **geleverd** |
 | §3-F Secrets-familie (leverancierstokens, PEM, JWT, connection strings, wachtwoorden) | **geleverd** |
+| §3-G Bijzondere categorieën + co-occurrence-escalator | **geleverd** |
 | §4 Standen: accept / shield / redact, per slide en per deck | **geleverd** |
+| §4.5 Export-gate: uit / waarschuwen / blokkeren | **geleverd** |
 | §6.6 Redactiemanifest met gesalte commitments + `IntegrityStatus.redactedDerivative` | **geleverd** |
-| §3-A EU-landpakketten | open |
-| §3-G Bijzondere categorieën + co-occurrence-escalator | open |
-| §3-I Structurele regels (gebruikerspaden, URL-tokens, share-links) | open |
-| §7 Regiopakketten en de export-gate in de instellingen | open |
+| §7 Per-regel uitschakelen (met de drie art. 9-categorieën standaard uit) | **geleverd** |
+| §3-I Structurele regels (gebruikerspaden, URL-tokens, share-links, data-URI's) | open |
+| §5.4 De eigen-identiteitslijst | open |
 | §4.0 Exportprofielen (`full` / `restricted` / `public`) als TLP-plafond | open |
+| §3-H Massa-persoonsgegevens (tabelkolommen, k-anonimiteit) | open |
 
 De genomen beslissingen staan in §11; die zijn niet meer open.
 

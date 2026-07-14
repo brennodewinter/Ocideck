@@ -1783,6 +1783,26 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Bij onafgehandelde persoonsgegevens':
+      'Dengan data pribadi yang belum ditangani',
+  'Export afgebroken vanwege privacybevindingen.':
+      'Ekspor dibatalkan karena temuan privasi.',
+  'Export blokkeren': 'Blokir ekspor',
+  'Export geblokkeerd': 'Ekspor diblokir',
+  'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.':
+      'Ekspor diblokir: slide ini memuat data pribadi yang belum Anda putuskan.',
+  'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.':
+      'Pilih per slide apa yang harus terjadi, atau ekspor secara sadar apa adanya.',
+  'Maak per slide een keuze (accepteren, waarschuwen of weglaten) voordat je exporteert. Dit is zo ingesteld bij Beveiliging.':
+      'Buat pilihan per slide (terima, peringatkan, atau hilangkan) sebelum mengekspor. Ini diatur di Keamanan.',
+  'Niets doen': 'Tidak melakukan apa-apa',
+  'Persoonsgegevens in dit deck': 'Data pribadi dalam presentasi ini',
+  'Verder in dit deck:': 'Selebihnya dalam presentasi ini:',
+  'Waarschuwen vóór export': 'Peringatkan sebelum mengekspor',
+  'bevinding(en) zonder keuze.': 'temuan tanpa pilihan.',
+  'geaccepteerd': 'diterima',
+  'geredigeerd': 'diredaksi',
+  'met waarschuwing': 'dengan peringatan',
   'Deze regel nooit meer melden': 'Jangan laporkan aturan ini lagi',
   'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
       'Aturan yang dimatikan. Ini tidak dilaporkan dan tidak diredaksi. Ketuk untuk mengaktifkan lagi.',

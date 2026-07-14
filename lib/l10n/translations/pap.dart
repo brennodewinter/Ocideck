@@ -740,6 +740,25 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Bij onafgehandelde persoonsgegevens': 'Ku datos personal no resolví',
+  'Export afgebroken vanwege privacybevindingen.':
+      'Eksportashon kanselá pa motibu di hayasgo di privasidat.',
+  'Export blokkeren': 'Blokeá eksportashon',
+  'Export geblokkeerd': 'Eksportashon blokeá',
+  'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.':
+      'Eksportashon blokeá: e presentashon aki tin datos personal ku ainda no a tuma un desishon riba dje.',
+  'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.':
+      'Skohe pa kada slide kiko mester pasa, òf eksportá konsientemente manera e ta.',
+  'Maak per slide een keuze (accepteren, waarschuwen of weglaten) voordat je exporteert. Dit is zo ingesteld bij Beveiliging.':
+      'Hasi un skoho pa kada slide (aseptá, advertí òf laga afó) promé ku bo eksportá. Ta konfigurá na Siguridat.',
+  'Niets doen': 'No hasi nada',
+  'Persoonsgegevens in dit deck': 'Datos personal den e presentashon aki',
+  'Verder in dit deck:': 'Mas aleu den e presentashon aki:',
+  'Waarschuwen vóór export': 'Advertí promé ku eksportá',
+  'bevinding(en) zonder keuze.': 'hayasgo(nan) sin skoho.',
+  'geaccepteerd': 'aseptá',
+  'geredigeerd': 'redaktá',
+  'met waarschuwing': 'ku advertensia',
   'Deze regel nooit meer melden': 'No reportá e regla aki nunka mas',
   'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
       'Reglanan apagá. Nan no ta wòrdu reportá ni redaktá. Toka pa prendé nan atrobe.',

@@ -1796,6 +1796,26 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Bij onafgehandelde persoonsgegevens':
+      'Przy nierozstrzygniętych danych osobowych',
+  'Export afgebroken vanwege privacybevindingen.':
+      'Eksport przerwany z powodu ustaleń dotyczących prywatności.',
+  'Export blokkeren': 'Zablokuj eksport',
+  'Export geblokkeerd': 'Eksport zablokowany',
+  'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.':
+      'Eksport zablokowany: w tej prezentacji są dane osobowe, o których jeszcze nie zdecydowano.',
+  'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.':
+      'Wybierz dla każdego slajdu, co ma się stać, albo świadomie wyeksportuj tak, jak jest.',
+  'Maak per slide een keuze (accepteren, waarschuwen of weglaten) voordat je exporteert. Dit is zo ingesteld bij Beveiliging.':
+      'Wybierz dla każdego slajdu (akceptuj, ostrzegaj lub pomiń) przed eksportem. Tak ustawiono w Bezpieczeństwie.',
+  'Niets doen': 'Nic nie rób',
+  'Persoonsgegevens in dit deck': 'Dane osobowe w tej prezentacji',
+  'Verder in dit deck:': 'Poza tym w tej prezentacji:',
+  'Waarschuwen vóór export': 'Ostrzeż przed eksportem',
+  'bevinding(en) zonder keuze.': 'ustalenie(-a) bez decyzji.',
+  'geaccepteerd': 'zaakceptowane',
+  'geredigeerd': 'zredagowane',
+  'met waarschuwing': 'z ostrzeżeniem',
   'Deze regel nooit meer melden': 'Nigdy więcej nie zgłaszaj tej reguły',
   'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
       'Wyłączone reguły. Nie są zgłaszane ani redagowane. Dotknij, aby włączyć ponownie.',

@@ -8,6 +8,21 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **An export gate that does not punish personal data — only *unnoticed* personal
+  data.** Before writing a file, OciDeck tells you how many findings you have not
+  decided about, and how many you did handle (accepted, warned, redacted). You can
+  go past it deliberately; under *Settings → Security* you can also silence it, or
+  block the export until every certain finding has a choice.
+
+  The distinction is the whole design. A police briefing where everything is
+  deliberately accepted goes through without a peep. Warn on that and the user
+  learns exactly one thing: that this dialog can be clicked away. Informational
+  hints never hold up an export either — we said ourselves we are not sure about
+  those, and blocking on them would discredit the gate immediately.
+
+  The hard block is enforced at the export chokepoint, not just in the dialog: a
+  gate that lives only in a dialog is not a gate. There is a test that calls
+  `ExportService` directly, with acknowledgement set, and still gets refused.
 - **Switch off a single rule instead of the whole check.** Click *Never report this
   rule again* on a finding and it stops firing; the disabled rules appear as chips
   under *Settings → Security*, one tap from coming back.

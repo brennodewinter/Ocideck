@@ -741,6 +741,25 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Bij onafgehandelde persoonsgegevens': 'By ûnôfhannele persoansgegevens',
+  'Export afgebroken vanwege privacybevindingen.':
+      'Eksport ôfbrutsen fanwegen privacybefinings.',
+  'Export blokkeren': 'Eksport blokkearje',
+  'Export geblokkeerd': 'Eksport blokkearre',
+  'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.':
+      'Eksport blokkearre: yn dizze presintaasje steane persoansgegevens dêr\'t noch gjin kar oer makke is.',
+  'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.':
+      'Kies per dia wat der barre moat, of eksportearje bewust sa\'t it is.',
+  'Maak per slide een keuze (accepteren, waarschuwen of weglaten) voordat je exporteert. Dit is zo ingesteld bij Beveiliging.':
+      'Meitsje per dia in kar (akseptearje, warskôgje of weilitte) foardatst eksportearrest. Sa ynsteld by Feilichheid.',
+  'Niets doen': 'Neat dwaan',
+  'Persoonsgegevens in dit deck': 'Persoansgegevens yn dizze presintaasje',
+  'Verder in dit deck:': 'Fierder yn dizze presintaasje:',
+  'Waarschuwen vóór export': 'Warskôgje foar it eksportearjen',
+  'bevinding(en) zonder keuze.': 'befining(en) sûnder kar.',
+  'geaccepteerd': 'aksepteare',
+  'geredigeerd': 'redigearre',
+  'met waarschuwing': 'mei warskôging',
   'Deze regel nooit meer melden': 'Dizze regel noait mear melde',
   'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
       'Utsette regels. Dizze wurde net meld en net redigearre. Tik om wer oan te setten.',

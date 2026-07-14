@@ -708,6 +708,15 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       disabledRules: disabledRules,
     ).build(source);
 
+    // De gate telt op de ONGEFILTERDE scan. De provider onderdrukt bevindingen
+    // op slides die de auteur al heeft afgehandeld — precies wat je in het
+    // paneel wilt, en precies wat je in deze samenvatting niet wilt: hier moet
+    // juist zichtbaar zijn hoevéél er bewust geaccepteerd of geredigeerd is.
+    final privacySummary = summarisePrivacyForExport(
+      source,
+      PrivacyScanner(disabledRules: disabledRules).scan(source),
+    );
+
     await ExportDialog.show(
       context,
       // Op web heeft een deck geen bestandspad; de deck-titel bepaalt dan de
@@ -737,6 +746,10 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
           .read(settingsProvider)
           .classificationWatermarkEnabled,
       redactionManifest: manifest,
+      privacySummary: privacySummary,
+      privacyPolicy: PrivacyExportPolicy(
+        gate: ref.read(settingsProvider).privacyExportGate,
+      ),
       // Noteer een geslaagde export bij het recente bestand, zodat de
       // welkomstlijst "laatst geëxporteerd als …" kan tonen. Alleen zinvol
       // met een echt bestandspad (op web is een deck een download).

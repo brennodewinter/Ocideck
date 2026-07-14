@@ -1806,6 +1806,25 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Bij onafgehandelde persoonsgegevens': 'При необработени лични данни',
+  'Export afgebroken vanwege privacybevindingen.':
+      'Експортът е прекратен заради констатации за поверителност.',
+  'Export blokkeren': 'Блокиране на експорта',
+  'Export geblokkeerd': 'Експортът е блокиран',
+  'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.':
+      'Експортът е блокиран: тази презентация съдържа лични данни, за които още не сте решили.',
+  'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.':
+      'Изберете за всеки слайд какво да стане или съзнателно експортирайте както е.',
+  'Maak per slide een keuze (accepteren, waarschuwen of weglaten) voordat je exporteert. Dit is zo ingesteld bij Beveiliging.':
+      'Направете избор за всеки слайд (приемане, предупреждение или заличаване) преди експорт. Настроено е в Сигурност.',
+  'Niets doen': 'Не прави нищо',
+  'Persoonsgegevens in dit deck': 'Лични данни в тази презентация',
+  'Verder in dit deck:': 'Другаде в тази презентация:',
+  'Waarschuwen vóór export': 'Предупреждавай преди експорт',
+  'bevinding(en) zonder keuze.': 'констатация(и) без избор.',
+  'geaccepteerd': 'приети',
+  'geredigeerd': 'заличени',
+  'met waarschuwing': 'с предупреждение',
   'Deze regel nooit meer melden': 'Повече да не се съобщава за това правило',
   'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
       'Изключени правила. Те не се съобщават и не се заличават. Докоснете, за да ги включите отново.',

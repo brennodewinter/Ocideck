@@ -1811,6 +1811,25 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Bij onafgehandelde persoonsgegevens': 'Με ανεπίλυτα προσωπικά δεδομένα',
+  'Export afgebroken vanwege privacybevindingen.':
+      'Η εξαγωγή ακυρώθηκε λόγω ευρημάτων απορρήτου.',
+  'Export blokkeren': 'Αποκλεισμός εξαγωγής',
+  'Export geblokkeerd': 'Η εξαγωγή αποκλείστηκε',
+  'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.':
+      'Η εξαγωγή αποκλείστηκε: αυτή η παρουσίαση περιέχει προσωπικά δεδομένα για τα οποία δεν έχεις αποφασίσει ακόμη.',
+  'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.':
+      'Επίλεξε ανά διαφάνεια τι θα γίνει, ή εξήγαγε συνειδητά ως έχει.',
+  'Maak per slide een keuze (accepteren, waarschuwen of weglaten) voordat je exporteert. Dit is zo ingesteld bij Beveiliging.':
+      'Κάνε επιλογή ανά διαφάνεια (αποδοχή, προειδοποίηση ή παράλειψη) πριν την εξαγωγή. Ρυθμίζεται στην Ασφάλεια.',
+  'Niets doen': 'Να μη γίνει τίποτα',
+  'Persoonsgegevens in dit deck': 'Προσωπικά δεδομένα σε αυτή την παρουσίαση',
+  'Verder in dit deck:': 'Αλλού σε αυτή την παρουσίαση:',
+  'Waarschuwen vóór export': 'Προειδοποίηση πριν την εξαγωγή',
+  'bevinding(en) zonder keuze.': 'εύρημα/-τα χωρίς επιλογή.',
+  'geaccepteerd': 'αποδεκτά',
+  'geredigeerd': 'αποκρυμμένα',
+  'met waarschuwing': 'με προειδοποίηση',
   'Deze regel nooit meer melden': 'Να μην αναφέρεται ξανά αυτός ο κανόνας',
   'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
       'Απενεργοποιημένοι κανόνες. Δεν αναφέρονται ούτε αποκρύπτονται. Πάτησε για επανενεργοποίηση.',

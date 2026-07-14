@@ -1801,6 +1801,26 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Bij onafgehandelde persoonsgegevens':
+      'За наявності неопрацьованих персональних даних',
+  'Export afgebroken vanwege privacybevindingen.':
+      'Експорт скасовано через виявлення персональних даних.',
+  'Export blokkeren': 'Блокувати експорт',
+  'Export geblokkeerd': 'Експорт заблоковано',
+  'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.':
+      'Експорт заблоковано: у цій презентації є персональні дані, щодо яких ще не ухвалено рішення.',
+  'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.':
+      'Оберіть для кожного слайда, що робити, або свідомо експортуйте як є.',
+  'Maak per slide een keuze (accepteren, waarschuwen of weglaten) voordat je exporteert. Dit is zo ingesteld bij Beveiliging.':
+      'Зробіть вибір для кожного слайда (прийняти, попередити або вилучити) перед експортом. Це налаштовано в розділі Безпека.',
+  'Niets doen': 'Нічого не робити',
+  'Persoonsgegevens in dit deck': 'Персональні дані в цій презентації',
+  'Verder in dit deck:': 'Далі в цій презентації:',
+  'Waarschuwen vóór export': 'Попереджати перед експортом',
+  'bevinding(en) zonder keuze.': 'виявлення без ухваленого рішення.',
+  'geaccepteerd': 'прийнято',
+  'geredigeerd': 'відредаговано',
+  'met waarschuwing': 'з попередженням',
   'Deze regel nooit meer melden': 'Більше не повідомляти про це правило',
   'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
       'Вимкнені правила. Вони не повідомляються і не редагуються. Торкніться, щоб увімкнути знову.',

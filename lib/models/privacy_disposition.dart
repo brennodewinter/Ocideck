@@ -60,3 +60,29 @@ PrivacyDisposition effectivePrivacyDisposition({
   required PrivacyDisposition deck,
   required PrivacyDisposition? slide,
 }) => slide ?? deck;
+
+/// Hoe streng de export-gate is.
+///
+/// Waarschuwen is de standaard, want een gate die *altijd* blokkeert is een gate
+/// die wordt weggeklikt. De harde blokkade is er voor omgevingen waar het een
+/// procedure-eis is.
+enum PrivacyExportGate {
+  /// Niets zeggen bij export.
+  off,
+
+  /// Een samenvatting tonen; de gebruiker mag er bewust langs.
+  warn,
+
+  /// Weigeren zolang er onafgehandelde zekere bevindingen zijn.
+  block,
+}
+
+extension PrivacyExportGateX on PrivacyExportGate {
+  String get key => name;
+
+  static PrivacyExportGate fromKey(String? raw) => switch (raw) {
+    'off' => PrivacyExportGate.off,
+    'block' => PrivacyExportGate.block,
+    _ => PrivacyExportGate.warn,
+  };
+}

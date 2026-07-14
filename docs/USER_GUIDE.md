@@ -451,6 +451,24 @@ The same four values exist deck-wide (`privacy:` in the front matter). A slide
 *accept* (the whole briefing is known) with one slide set to *leave out* (this one
 detail is for nobody) has to just work, and the author of that slide knows best.
 
+### Before you export
+
+If the deck still holds findings you have not decided about, OciDeck says so
+before writing the file: how many are unresolved, and — just as important — how
+many you *did* handle (accepted, warned, redacted). You can go past it deliberately.
+
+Under *Settings → Security* you can also set this to **do nothing**, or to **block
+the export** until every certain finding has a choice. Blocking is enforced at the
+export chokepoint itself, not only in the dialog: a gate that lives only in a
+dialog is not a gate.
+
+The point of the gate is narrow, and worth stating: **it does not punish personal
+data, it punishes *unnoticed* personal data.** A police briefing where everything
+is deliberately accepted goes through without a peep — otherwise you would learn
+exactly one thing, which is that this dialog can be clicked away. Informational
+hints never hold up an export either: we said ourselves that we are not sure about
+those.
+
 ### Switching off a single rule
 
 If one rule keeps misfiring on your content — an order-number format that trips the

@@ -1785,6 +1785,25 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Bij onafgehandelde persoonsgegevens': 'Pri nerešenih osebnih podatkih',
+  'Export afgebroken vanwege privacybevindingen.':
+      'Izvoz preklican zaradi ugotovitev o zasebnosti.',
+  'Export blokkeren': 'Blokiraj izvoz',
+  'Export geblokkeerd': 'Izvoz blokiran',
+  'Export geblokkeerd: er staan persoonsgegevens in dit deck waarvoor nog geen keuze is gemaakt.':
+      'Izvoz blokiran: ta predstavitev vsebuje osebne podatke, o katerih se še nisi odločil.',
+  'Kies per slide wat er moet gebeuren, of exporteer bewust zoals het is.':
+      'Za vsako prosojnico izberi, kaj naj se zgodi, ali zavestno izvozi tako, kot je.',
+  'Maak per slide een keuze (accepteren, waarschuwen of weglaten) voordat je exporteert. Dit is zo ingesteld bij Beveiliging.':
+      'Pred izvozom za vsako prosojnico izberi (sprejmi, opozori ali izpusti). To je nastavljeno pri Varnosti.',
+  'Niets doen': 'Ne stori ničesar',
+  'Persoonsgegevens in dit deck': 'Osebni podatki v tej predstavitvi',
+  'Verder in dit deck:': 'Drugje v tej predstavitvi:',
+  'Waarschuwen vóór export': 'Opozori pred izvozom',
+  'bevinding(en) zonder keuze.': 'ugotovitev brez odločitve.',
+  'geaccepteerd': 'sprejeto',
+  'geredigeerd': 'prekrito',
+  'met waarschuwing': 'z opozorilom',
   'Deze regel nooit meer melden': 'Tega pravila ne javljaj več',
   'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
       'Izklopljena pravila. Ne javljajo se in se ne prekrivajo. Tapni za ponovni vklop.',
