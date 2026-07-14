@@ -740,6 +740,17 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
+      ' Auf dieser Folie steht auch ein identifizierendes Datum, dies ist also einer Person zuzuordnen.',
+  'Bijzonder persoonsgegeven (AVG art. 9/10)':
+      'Besondere Kategorie personenbezogener Daten (DSGVO Art. 9/10)',
+  'gezondheidsgegeven': 'Gesundheitsdatum',
+  'strafrechtelijk gegeven': 'strafrechtliches Datum',
+  'religie of levensovertuiging': 'Religion oder Weltanschauung',
+  'vakbondslidmaatschap': 'Gewerkschaftszugehörigkeit',
+  'biometrisch gegeven': 'biometrisches Datum',
+  'genetisch gegeven': 'genetisches Datum',
+  'parketnummer': 'Aktenzeichen der Staatsanwaltschaft',
   'nationaal identificatienummer': 'nationale Identifikationsnummer',
   'Privacy Shield (ontwerp)': 'Privacy Shield (Entwurf)',
   'Mogelijk geheim': 'Mögliches Geheimnis',

@@ -1806,6 +1806,17 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
+      ' На този слайд има и идентифициращо данно, така че това е проследимо до лице.',
+  'Bijzonder persoonsgegeven (AVG art. 9/10)':
+      'Специална категория лични данни (GDPR чл. 9/10)',
+  'gezondheidsgegeven': 'данни за здравето',
+  'strafrechtelijk gegeven': 'данни за съдимост',
+  'religie of levensovertuiging': 'религия или убеждения',
+  'vakbondslidmaatschap': 'членство в синдикат',
+  'biometrisch gegeven': 'биометрични данни',
+  'genetisch gegeven': 'генетични данни',
+  'parketnummer': 'номер на прокурорска преписка',
   'nationaal identificatienummer': 'национален идентификационен номер',
   'Privacy Shield (ontwerp)': 'Privacy Shield (проект)',
   'Mogelijk geheim': 'Възможна тайна',

@@ -1783,6 +1783,17 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
+      ' Tässä diassa on myös yksilöivä tieto, joten tämä on yhdistettävissä henkilöön.',
+  'Bijzonder persoonsgegeven (AVG art. 9/10)':
+      'Erityinen henkilötietoryhmä (GDPR art. 9/10)',
+  'gezondheidsgegeven': 'terveystieto',
+  'strafrechtelijk gegeven': 'rikostieto',
+  'religie of levensovertuiging': 'uskonto tai vakaumus',
+  'vakbondslidmaatschap': 'ammattiliiton jäsenyys',
+  'biometrisch gegeven': 'biometrinen tieto',
+  'genetisch gegeven': 'geneettinen tieto',
+  'parketnummer': 'syyttäjän asianumero',
   'nationaal identificatienummer': 'kansallinen henkilötunnus',
   'Privacy Shield (ontwerp)': 'Privacy Shield (suunnitelma)',
   'Mogelijk geheim': 'Mahdollinen salaisuus',

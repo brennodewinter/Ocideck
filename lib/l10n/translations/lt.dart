@@ -1791,6 +1791,17 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
+      ' Šioje skaidrėje yra ir identifikuojantis duomuo, todėl tai galima susieti su asmeniu.',
+  'Bijzonder persoonsgegeven (AVG art. 9/10)':
+      'Ypatinga asmens duomenų kategorija (BDAR 9/10 str.)',
+  'gezondheidsgegeven': 'sveikatos duomenys',
+  'strafrechtelijk gegeven': 'baudžiamosios teisės duomenys',
+  'religie of levensovertuiging': 'religija ar įsitikinimai',
+  'vakbondslidmaatschap': 'narystė profesinėje sąjungoje',
+  'biometrisch gegeven': 'biometriniai duomenys',
+  'genetisch gegeven': 'genetiniai duomenys',
+  'parketnummer': 'baudžiamosios bylos numeris',
   'nationaal identificatienummer': 'nacionalinis identifikavimo numeris',
   'Privacy Shield (ontwerp)': 'Privacy Shield (projektas)',
   'Mogelijk geheim': 'Galima paslaptis',

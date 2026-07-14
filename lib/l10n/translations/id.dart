@@ -1783,6 +1783,17 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
+      ' Slide ini juga memuat data pengenal, jadi hal ini dapat ditelusuri ke seseorang.',
+  'Bijzonder persoonsgegeven (AVG art. 9/10)':
+      'Kategori khusus data pribadi (GDPR pasal 9/10)',
+  'gezondheidsgegeven': 'data kesehatan',
+  'strafrechtelijk gegeven': 'data pidana',
+  'religie of levensovertuiging': 'agama atau keyakinan',
+  'vakbondslidmaatschap': 'keanggotaan serikat pekerja',
+  'biometrisch gegeven': 'data biometrik',
+  'genetisch gegeven': 'data genetik',
+  'parketnummer': 'nomor perkara kejaksaan',
   'nationaal identificatienummer': 'nomor identifikasi nasional',
   'Privacy Shield (ontwerp)': 'Privacy Shield (desain)',
   'Mogelijk geheim': 'Kemungkinan rahasia',

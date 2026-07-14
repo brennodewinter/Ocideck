@@ -1790,6 +1790,17 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
+      ' Na tejto snímke je aj identifikačný údaj, takže to možno priradiť konkrétnej osobe.',
+  'Bijzonder persoonsgegeven (AVG art. 9/10)':
+      'Osobitná kategória osobných údajov (GDPR čl. 9/10)',
+  'gezondheidsgegeven': 'údaj o zdraví',
+  'strafrechtelijk gegeven': 'údaj trestnej povahy',
+  'religie of levensovertuiging': 'náboženstvo alebo presvedčenie',
+  'vakbondslidmaatschap': 'členstvo v odboroch',
+  'biometrisch gegeven': 'biometrický údaj',
+  'genetisch gegeven': 'genetický údaj',
+  'parketnummer': 'spisová značka trestnej veci',
   'nationaal identificatienummer': 'národné identifikačné číslo',
   'Privacy Shield (ontwerp)': 'Privacy Shield (návrh)',
   'Mogelijk geheim': 'Možné tajomstvo',

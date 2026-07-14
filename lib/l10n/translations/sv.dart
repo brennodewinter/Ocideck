@@ -1782,6 +1782,17 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
+      ' På den här bilden finns även en identifierande uppgift, så detta kan kopplas till en person.',
+  'Bijzonder persoonsgegeven (AVG art. 9/10)':
+      'Särskild kategori av personuppgifter (GDPR art. 9/10)',
+  'gezondheidsgegeven': 'hälsouppgift',
+  'strafrechtelijk gegeven': 'straffrättslig uppgift',
+  'religie of levensovertuiging': 'religion eller övertygelse',
+  'vakbondslidmaatschap': 'fackligt medlemskap',
+  'biometrisch gegeven': 'biometrisk uppgift',
+  'genetisch gegeven': 'genetisk uppgift',
+  'parketnummer': 'åklagarens ärendenummer',
   'nationaal identificatienummer': 'nationellt identifikationsnummer',
   'Privacy Shield (ontwerp)': 'Privacy Shield (design)',
   'Mogelijk geheim': 'Möjlig hemlighet',

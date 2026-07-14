@@ -1782,6 +1782,17 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
+      ' På denne slide står også en identificerende oplysning, så dette kan føres tilbage til en person.',
+  'Bijzonder persoonsgegeven (AVG art. 9/10)':
+      'Særlig kategori af personoplysninger (GDPR art. 9/10)',
+  'gezondheidsgegeven': 'helbredsoplysning',
+  'strafrechtelijk gegeven': 'strafferetlig oplysning',
+  'religie of levensovertuiging': 'religion eller overbevisning',
+  'vakbondslidmaatschap': 'fagforeningsmedlemskab',
+  'biometrisch gegeven': 'biometrisk oplysning',
+  'genetisch gegeven': 'genetisk oplysning',
+  'parketnummer': 'sagsnummer hos anklagemyndigheden',
   'nationaal identificatienummer': 'nationalt identifikationsnummer',
   'Privacy Shield (ontwerp)': 'Privacy Shield (design)',
   'Mogelijk geheim': 'Mulig hemmelighed',

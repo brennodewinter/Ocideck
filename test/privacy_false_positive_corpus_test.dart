@@ -64,6 +64,11 @@ void main() {
       'Transactie 44051401358 verwerkt',
       'Meldnummer 1800510123457 in het systeem',
       'Bereikbaar op 811218 9875 tijdens kantooruren',
+      // Art.9-aas: een slide OVER privacy noemt precies onze trefwoorden.
+      'Onder de AVG zijn gezondheidsgegevens bijzondere persoonsgegevens',
+      'Denk aan een diagnose, een strafblad of vakbondslidmaatschap',
+      'Biometrische gegevens vragen een DPIA',
+      'Een veroordeling valt onder artikel 10',
     ];
 
     final result = scanLines(corpus);

@@ -1802,6 +1802,17 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
+      ' Pe acest diapozitiv există și o dată identificatoare, deci aceasta este atribuibilă unei persoane.',
+  'Bijzonder persoonsgegeven (AVG art. 9/10)':
+      'Categorie specială de date cu caracter personal (GDPR art. 9/10)',
+  'gezondheidsgegeven': 'dată privind sănătatea',
+  'strafrechtelijk gegeven': 'dată penală',
+  'religie of levensovertuiging': 'religie sau convingere',
+  'vakbondslidmaatschap': 'apartenență sindicală',
+  'biometrisch gegeven': 'dată biometrică',
+  'genetisch gegeven': 'dată genetică',
+  'parketnummer': 'număr de dosar penal',
   'nationaal identificatienummer': 'număr național de identificare',
   'Privacy Shield (ontwerp)': 'Privacy Shield (proiect)',
   'Mogelijk geheim': 'Posibil secret',

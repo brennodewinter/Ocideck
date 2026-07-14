@@ -8,6 +8,33 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Special categories of personal data (GDPR art. 9/10) — and the trick that
+  makes them usable.** Health, criminal-law, religion, trade-union membership,
+  biometrics, genetic notation (dbSNP `rs334`, HGVS `p.Val600Glu`), and the Dutch
+  prosecution case number.
+
+  Keyword detection for these categories is normally worthless, and not subtly so:
+  a slide *about* the GDPR says "health data" without containing any. A privacy
+  lesson, a DPIA deck, a processing register — all full of exactly the words we are
+  looking for. Warn on those and the check is switched off within a day.
+
+  So a keyword on its own reports nothing that interrupts you. It becomes a real
+  warning only when the **same slide** also carries something that identifies a
+  person — a BSN, a national number, an email address. Then the special-category
+  detail is traceable to a person, which is precisely what article 9 protects.
+
+      slide about privacy law:   "health data"                     → silent
+      case slide:  "BSN 728398242 — diagnosis established in March" → warning
+
+  An API key does not count as a person, and neither does an IBAN: they say nothing
+  about *who*. And the escalation is per slide, not per deck — a BSN on slide 1 must
+  not pull the word "diagnosis" on slide 12 upwards, because those two never sit
+  side by side for the recipient.
+
+  Politics, ethnicity and sexual orientation are deliberately **not** shipped yet:
+  a diversity-policy slide is *about* ethnicity without containing ethnic data, and
+  without a per-rule off switch that false-positive rate is indefensible. Better no
+  rule than a rule that discredits the whole check.
 - **European identification numbers — fifteen countries, and the scanner got no
   louder.** Belgian rijksregisternummer, German Steuer-ID, French NIR, Spanish
   DNI/NIE, Portuguese NIF, Polish PESEL, Italian codice fiscale, Croatian OIB,

@@ -741,6 +741,17 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
+      ' Op dizze dia stiet ek in identifisearjend gegeven, dus dit is werom te lieden ta in persoan.',
+  'Bijzonder persoonsgegeven (AVG art. 9/10)':
+      'Bysûnder persoansgegeven (AVG art. 9/10)',
+  'gezondheidsgegeven': 'sûnensgegeven',
+  'strafrechtelijk gegeven': 'strafrjochtlik gegeven',
+  'religie of levensovertuiging': 'religy of libbensoertsjûging',
+  'vakbondslidmaatschap': 'fakbûnslidmaatskip',
+  'biometrisch gegeven': 'biometrysk gegeven',
+  'genetisch gegeven': 'genetysk gegeven',
+  'parketnummer': 'parketnûmer',
   'nationaal identificatienummer': 'nasjonaal identifikaasjenûmer',
   'Privacy Shield (ontwerp)': 'Privacy Shield (ûntwerp)',
   'Mogelijk geheim': 'Mooglik geheim',

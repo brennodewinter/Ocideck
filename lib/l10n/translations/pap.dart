@@ -740,6 +740,17 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
+      ' Riba e slide aki tin tambe un dato identifikatorio, pues esaki ta trasabel na un persona.',
+  'Bijzonder persoonsgegeven (AVG art. 9/10)':
+      'Kategoria spesial di dato personal (GDPR art. 9/10)',
+  'gezondheidsgegeven': 'dato di salú',
+  'strafrechtelijk gegeven': 'dato penal',
+  'religie of levensovertuiging': 'religion òf konvikshon',
+  'vakbondslidmaatschap': 'afiliashon sindikal',
+  'biometrisch gegeven': 'dato biométriko',
+  'genetisch gegeven': 'dato genétiko',
+  'parketnummer': 'number di kaso di fiskalia',
   'nationaal identificatienummer': 'number di identifikashon nashonal',
   'Privacy Shield (ontwerp)': 'Privacy Shield (diseño)',
   'Mogelijk geheim': 'Posibel sekreto',

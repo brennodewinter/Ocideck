@@ -736,6 +736,17 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
+      ' Questa diapositiva contiene anche un dato identificativo, quindi è riconducibile a una persona.',
+  'Bijzonder persoonsgegeven (AVG art. 9/10)':
+      'Categoria particolare di dati personali (GDPR art. 9/10)',
+  'gezondheidsgegeven': 'dato sanitario',
+  'strafrechtelijk gegeven': 'dato giudiziario',
+  'religie of levensovertuiging': 'religione o convinzioni',
+  'vakbondslidmaatschap': 'appartenenza sindacale',
+  'biometrisch gegeven': 'dato biometrico',
+  'genetisch gegeven': 'dato genetico',
+  'parketnummer': 'numero di procedimento penale',
   'nationaal identificatienummer': 'numero di identificazione nazionale',
   'Privacy Shield (ontwerp)': 'Privacy Shield (progetto)',
   'Mogelijk geheim': 'Possibile segreto',

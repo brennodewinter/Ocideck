@@ -1774,6 +1774,17 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
+      ' Sellel slaidil on ka tuvastav andmeühik, seega on see seostatav isikuga.',
+  'Bijzonder persoonsgegeven (AVG art. 9/10)':
+      'Isikuandmete eriliik (GDPR art 9/10)',
+  'gezondheidsgegeven': 'terviseandmed',
+  'strafrechtelijk gegeven': 'karistusandmed',
+  'religie of levensovertuiging': 'usk või veendumus',
+  'vakbondslidmaatschap': 'ametiühingusse kuulumine',
+  'biometrisch gegeven': 'biomeetrilised andmed',
+  'genetisch gegeven': 'geneetilised andmed',
+  'parketnummer': 'kriminaalasja number',
   'nationaal identificatienummer': 'riiklik isikukood',
   'Privacy Shield (ontwerp)': 'Privacy Shield (kavand)',
   'Mogelijk geheim': 'Võimalik saladus',
