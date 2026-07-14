@@ -1787,6 +1787,12 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Deze regel nooit meer melden': 'Die Regle nie meh mälde',
+  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
+      'Deaktivierti Regle. Die wärded weder gmäldet no gschwärzt. Tipp zum wieder ischalte.',
+  'politieke opvatting': 'politischi Meinig',
+  'etnische afkomst': 'ethnischi Herkunft',
+  'seksuele geaardheid': 'sexuelli Orientierig',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Uf dere Folie staht au es identifizierends Datum, drum isch das ere Person zuezordne.',
   'Bijzonder persoonsgegeven (AVG art. 9/10)':

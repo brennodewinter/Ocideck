@@ -329,6 +329,9 @@ String privacyRuleLabel(AppLocalizations l10n, String ruleId) {
     'special.religion' => l10n.d('religie of levensovertuiging'),
     'special.union' => l10n.d('vakbondslidmaatschap'),
     'special.biometric' => l10n.d('biometrisch gegeven'),
+    'special.politics' => l10n.d('politieke opvatting'),
+    'special.ethnicity' => l10n.d('etnische afkomst'),
+    'special.sexlife' => l10n.d('seksuele geaardheid'),
     'special.genetic' => l10n.d('genetisch gegeven'),
     'nl.parketnummer' => l10n.d('parketnummer'),
     _ when _euNumberNames.containsKey(ruleId) =>

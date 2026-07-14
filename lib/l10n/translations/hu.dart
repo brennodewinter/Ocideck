@@ -1787,6 +1787,12 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Deze regel nooit meer melden': 'Ne jelezze többé ezt a szabályt',
+  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
+      'Kikapcsolt szabályok. Ezeket nem jelzi és nem takarja ki. Koppints a visszakapcsoláshoz.',
+  'politieke opvatting': 'politikai vélemény',
+  'etnische afkomst': 'etnikai származás',
+  'seksuele geaardheid': 'szexuális irányultság',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Ezen a dián azonosító adat is szerepel, tehát ez visszavezethető egy személyre.',
   'Bijzonder persoonsgegeven (AVG art. 9/10)':

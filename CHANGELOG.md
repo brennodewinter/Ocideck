@@ -8,6 +8,25 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Switch off a single rule instead of the whole check.** Click *Never report this
+  rule again* on a finding and it stops firing; the disabled rules appear as chips
+  under *Settings → Security*, one tap from coming back.
+
+  This escape hatch matters more than it looks. Without it, the only way out of a
+  rule that misfires on your content is switching off the whole check — and that is
+  a one-way door in practice: once it is off, nobody turns it back on.
+
+  A disabled rule is **not redacted either**, which is the exact opposite of the
+  master switch, and deliberately so. The master switch says *don't bother me* — not
+  a judgement about your content, so a deck set to redact keeps redacting. Switching
+  off a rule says *this rule is wrong about my content*, and honouring that means we
+  must not black it out. Someone who disables the BSN check because their order
+  numbers trip it does not want those order numbers blacked out in the export.
+
+  It also unlocks the three heaviest article-9 categories — political opinion, ethnic
+  origin, sexual orientation — which now ship but start out **off**. Their keywords
+  appear far too often in ordinary business language for anything else, but the choice
+  belongs to the user, not to us.
 - **Special categories of personal data (GDPR art. 9/10) — and the trick that
   makes them usable.** Health, criminal-law, religion, trade-union membership,
   biometrics, genetic notation (dbSNP `rs334`, HGVS `p.Val600Glu`), and the Dutch

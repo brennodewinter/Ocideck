@@ -809,6 +809,7 @@ void presentDeck(
     // wat hier op het scherm komt, ziet de zaal.
     audienceDeck: PrivacyProjection.forAudience(
       deck.copyWith(slides: renderSlides),
+      disabledRules: settings.privacyDisabledRules,
     ),
     cockpitColorScheme: settings.cockpitColorScheme,
     initialIndex: renderInitial,

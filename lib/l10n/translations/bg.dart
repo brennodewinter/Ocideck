@@ -1806,6 +1806,12 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Deze regel nooit meer melden': 'Повече да не се съобщава за това правило',
+  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
+      'Изключени правила. Те не се съобщават и не се заличават. Докоснете, за да ги включите отново.',
+  'politieke opvatting': 'политическо мнение',
+  'etnische afkomst': 'етнически произход',
+  'seksuele geaardheid': 'сексуална ориентация',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' На този слайд има и идентифициращо данно, така че това е проследимо до лице.',
   'Bijzonder persoonsgegeven (AVG art. 9/10)':

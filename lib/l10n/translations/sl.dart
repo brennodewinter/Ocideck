@@ -1785,6 +1785,12 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Deze regel nooit meer melden': 'Tega pravila ne javljaj več',
+  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
+      'Izklopljena pravila. Ne javljajo se in se ne prekrivajo. Tapni za ponovni vklop.',
+  'politieke opvatting': 'politično prepričanje',
+  'etnische afkomst': 'etnično poreklo',
+  'seksuele geaardheid': 'spolna usmerjenost',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Na tej prosojnici je tudi identifikacijski podatek, zato je to mogoče povezati z osebo.',
   'Bijzonder persoonsgegeven (AVG art. 9/10)':

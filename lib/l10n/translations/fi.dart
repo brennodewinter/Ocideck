@@ -1783,6 +1783,12 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Deze regel nooit meer melden': 'Älä ilmoita tästä säännöstä enää',
+  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
+      'Poistetut säännöt. Niistä ei ilmoiteta eikä niitä peitetä. Napauta ottaaksesi taas käyttöön.',
+  'politieke opvatting': 'poliittinen mielipide',
+  'etnische afkomst': 'etninen alkuperä',
+  'seksuele geaardheid': 'seksuaalinen suuntautuminen',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' Tässä diassa on myös yksilöivä tieto, joten tämä on yhdistettävissä henkilöön.',
   'Bijzonder persoonsgegeven (AVG art. 9/10)':

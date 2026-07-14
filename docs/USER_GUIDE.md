@@ -451,6 +451,36 @@ The same four values exist deck-wide (`privacy:` in the front matter). A slide
 *accept* (the whole briefing is known) with one slide set to *leave out* (this one
 detail is for nobody) has to just work, and the author of that slide knows best.
 
+### Switching off a single rule
+
+If one rule keeps misfiring on your content — an order-number format that trips the
+BSN check, say — click **Never report this rule again** on the finding itself. The
+rule is switched off and stays off, and you can turn it back on under
+*Settings → Security*, where the disabled rules appear as chips.
+
+This escape hatch matters more than it looks. Without it, the only way out of a
+noisy rule is switching off the whole check — and in practice that is a one-way
+door: once it is off, nobody turns it back on. A surgical switch keeps everything
+else working.
+
+**A disabled rule is not redacted either.** That is deliberate, and it is the
+opposite of the master switch below. The master switch says *don't bother me*,
+which is not a judgement about your content, so a deck set to *leave out* keeps
+redacting. Switching off a rule says *this rule is wrong about my content* — and
+honouring that means we must not black it out either. Someone who disables the BSN
+check because their order numbers trip it does not want those order numbers blacked
+out in the export.
+
+### Rules that start out off
+
+Three of the heaviest article-9 categories — political opinion, ethnic origin and
+sexual orientation — are **off by default**. Not because they matter less; because
+their keywords appear far too often in ordinary business language. A slide about
+diversity policy is *about* ethnicity without containing any ethnic data.
+
+They are there, and one tap under *Settings → Security* turns them on. That choice
+belongs to you, not to us.
+
 ### Turning the warnings off does not turn redaction off
 
 The privacy check can be switched off under *Settings → Security*. That switches

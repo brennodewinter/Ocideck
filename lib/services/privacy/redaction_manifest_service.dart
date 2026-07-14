@@ -21,6 +21,10 @@ import 'privacy_scanner.dart';
 
 /// Bouwt en verifieert redactiemanifesten.
 class RedactionManifestService {
+  /// Regels die de gebruiker heeft uitgezet — die redigeren we niet, dus staan ze
+  /// ook niet in het manifest.
+  final Set<String> disabledRules;
+
   /// Injecteerbaar voor de test; standaard een cryptografisch veilige bron.
   ///
   /// De salt is geen decoratie: zonder salt is een SHA-256 van een geredigeerd
@@ -28,7 +32,7 @@ class RedactionManifestService {
   /// precies wat je zojuist hebt weggelakt.
   final Random _random;
 
-  RedactionManifestService({Random? random})
+  RedactionManifestService({Random? random, this.disabledRules = const {}})
     : _random = random ?? Random.secure();
 
   /// Bouwt het manifest voor [deck]: één entry per redactie die de projectie op
@@ -61,7 +65,7 @@ class RedactionManifestService {
   /// volgorde (slide, dan bevinding). Eén bron van waarheid voor zowel het
   /// bouwen als het verifiëren van een manifest — anders lopen die twee uiteen.
   List<({PrivacyFinding finding, String value})> redactedValues(Deck deck) {
-    final scan = const PrivacyScanner().scan(deck);
+    final scan = PrivacyScanner(disabledRules: disabledRules).scan(deck);
     final out = <({PrivacyFinding finding, String value})>[];
 
     for (var i = 0; i < deck.slides.length; i++) {

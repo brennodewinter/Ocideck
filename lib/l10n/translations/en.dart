@@ -922,6 +922,12 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Deze regel nooit meer melden': 'Never report this rule again',
+  'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.':
+      'Disabled rules. These are not reported and not redacted. Tap to turn back on.',
+  'politieke opvatting': 'political opinion',
+  'etnische afkomst': 'ethnic origin',
+  'seksuele geaardheid': 'sexual orientation',
   ' Op deze slide staat ook een identificerend gegeven, dus dit is herleidbaar tot een persoon.':
       ' This slide also carries an identifying detail, so this is traceable to a person.',
   'Bijzonder persoonsgegeven (AVG art. 9/10)':

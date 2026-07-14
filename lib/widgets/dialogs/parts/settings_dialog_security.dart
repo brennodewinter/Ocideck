@@ -37,6 +37,7 @@ extension _SettingsSecurity on _SettingsDialogState {
               .read(settingsProvider.notifier)
               .setPrivacyChecksEnabled(value),
         ),
+        _disabledPrivacyRules(l10n),
         const SizedBox(height: 20),
         _sectionTitle(l10n.d('Online media')),
         SwitchListTile(
@@ -121,6 +122,58 @@ extension _SettingsSecurity on _SettingsDialogState {
               ? l10n.d('Er waren geen herstelbestanden.')
               : '$removed ${l10n.d('herstelbestand(en) gewist.')}',
         ),
+      ),
+    );
+  }
+
+  /// De uitgezette detectieregels, als chips die je weer aanzet.
+  ///
+  /// Dit is de tegenkant van de "nooit meer melden"-knop in het kwaliteitspaneel:
+  /// wat je daar wegklikt, kun je hier terugzetten. Zonder die tegenkant is
+  /// uitzetten een eenrichtingsstraat, en dan durft niemand het te doen.
+  ///
+  /// Standaard staan hier de drie zwaarste art. 9-categorieën in — politiek,
+  /// etniciteit en seksuele geaardheid. Niet omdat ze onbelangrijk zijn, maar
+  /// omdat hun trefwoorden op gewone zakelijke slides te vaak voorkomen. Wie in
+  /// die hoek werkt, zet ze hier met één tik aan.
+  Widget _disabledPrivacyRules(AppLocalizations l10n) {
+    final disabled = ref.watch(
+      settingsProvider.select((s) => s.privacyDisabledRules),
+    );
+    if (disabled.isEmpty) return const SizedBox.shrink();
+
+    final sorted = disabled.toList()..sort();
+    return Padding(
+      padding: const EdgeInsets.only(top: 4, left: 2),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.d(
+              'Uitgezette regels. Deze worden niet gemeld en niet geredigeerd. Tik om weer aan te zetten.',
+            ),
+            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+          ),
+          const SizedBox(height: 6),
+          Wrap(
+            spacing: 6,
+            runSpacing: 4,
+            children: [
+              for (final rule in sorted)
+                InputChip(
+                  label: Text(
+                    privacyRuleLabel(l10n, rule),
+                    style: const TextStyle(fontSize: 11),
+                  ),
+                  visualDensity: VisualDensity.compact,
+                  avatar: const Icon(Icons.add, size: 14),
+                  onPressed: () => ref
+                      .read(settingsProvider.notifier)
+                      .setPrivacyRuleEnabled(rule, true),
+                ),
+            ],
+          ),
+        ],
       ),
     );
   }

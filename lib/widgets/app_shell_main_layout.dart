@@ -693,14 +693,20 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     // de rasterizer, de markdown voor de HTML-export, de PPTX-notities en de
     // documentmetadata worden allemaal uit dit ene object afgeleid.
     final source = deck.copyWith(slides: renderSlides);
-    final audience = PrivacyProjection.forAudience(source);
+    final disabledRules = ref.read(settingsProvider).privacyDisabledRules;
+    final audience = PrivacyProjection.forAudience(
+      source,
+      disabledRules: disabledRules,
+    );
 
     // Het manifest wordt uit de BRON gebouwd — de AudienceDeck bevat de
     // oorspronkelijke waarden immers niet meer, en dat is precies de bedoeling.
     // Het gebeurt hier en niet in de projectie, omdat de salts willekeurig zijn:
     // een projectie die bij elke frame een ander resultaat gaf, zou de preview
     // laten herbouwen.
-    final manifest = RedactionManifestService().build(source);
+    final manifest = RedactionManifestService(
+      disabledRules: disabledRules,
+    ).build(source);
 
     await ExportDialog.show(
       context,

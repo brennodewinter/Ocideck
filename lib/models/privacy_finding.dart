@@ -115,6 +115,23 @@ class PrivacyFinding {
 /// bestandsnaam).
 const int kDeckWidePrivacyIndex = -1;
 
+/// Regels die standaard uit staan.
+///
+/// Niet omdat ze onbelangrijk zijn — dit zijn juist de zwaarste categorieën uit
+/// artikel 9 — maar omdat hun vals-positieven-ratio op gewone zakelijke slides
+/// onhoudbaar is. Een slide over diversiteitsbeleid gaat *over* etniciteit zonder
+/// etnische gegevens te bevatten; een verkiezingsanalyse noemt partijnamen zonder
+/// iemands politieke voorkeur vast te leggen.
+///
+/// Ze staan er wél, en zijn met één vinkje aan te zetten voor wie in die hoek
+/// werkt. Dat is beter dan ze weglaten: de keuze hoort bij de gebruiker, niet bij
+/// ons.
+const Set<String> defaultDisabledPrivacyRules = {
+  'special.politics',
+  'special.ethnicity',
+  'special.sexlife',
+};
+
 /// Maskeert een gevonden waarde voor weergave.
 ///
 /// Toont hooguit het eerste en laatste teken. Een BSN wordt `1…2`, een

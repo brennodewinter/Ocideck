@@ -5,6 +5,7 @@ import '../../l10n/app_localizations.dart';
 import '../../l10n/slide_quality_navigation.dart';
 import '../../models/slide_quality.dart';
 import '../../state/deck_provider.dart';
+import '../../state/settings_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../utils/bullet_fixes.dart';
 import '../../utils/title_contrast.dart';
@@ -46,6 +47,23 @@ List<SlideQualityAction> buildSlideQualityActions({
 
   void navigate() =>
       navigateToSlideQualityIssue(context: context, ref: ref, issue: issue);
+
+  // Privacy: de ontsnappingsklep. Wie één regel te luid vindt, moet chirurgisch
+  // kunnen ingrijpen — anders is "de hele controle uitzetten" de enige uitweg, en
+  // dat is in de praktijk onomkeerbaar: wie hem eenmaal uit heeft, zet hem niet
+  // meer aan.
+  final rule = issue.args['rule'];
+  if (issue.category == SlideQualityCategory.privacy && rule != null) {
+    actions.add(
+      SlideQualityAction(
+        label: l10n.d('Deze regel nooit meer melden'),
+        icon: Icons.notifications_off_outlined,
+        run: () => ref
+            .read(settingsProvider.notifier)
+            .setPrivacyRuleEnabled(rule, false),
+      ),
+    );
+  }
 
   // Deck-wijd = thema: de oplossing zit in de kleurinstellingen.
   if (issue.isDeckWide) {
