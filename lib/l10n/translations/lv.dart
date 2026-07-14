@@ -1893,6 +1893,8 @@ const _dutchSourceAddLv = <String, String>{
   'burgerservicenummer (BSN)': 'iedzīvotāja identifikācijas numurs (BSN)',
   'bankrekeningnummer (IBAN)': 'bankas konta numurs (IBAN)',
   'e-mailadres': 'e-pasta adrese',
+  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
+      'TSA paraksts lietotnē netiek pārbaudīts; sakrīt tikai jaucējkods (hash).',
   'Extern': 'Ārējs',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Iegūts no ārēja URL; atverot tika izveidots savienojums ar šo serveri.',

@@ -1897,6 +1897,8 @@ const _dutchSourceAddSl = <String, String>{
   'burgerservicenummer (BSN)': 'matična številka občana (BSN)',
   'bankrekeningnummer (IBAN)': 'številka bančnega računa (IBAN)',
   'e-mailadres': 'e-poštni naslov',
+  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
+      'Podpis TSA v aplikaciji ni preverjen; ujema se samo zgostitev (hash).',
   'Extern': 'Zunanji',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Pridobljeno z zunanjega URL-ja; odpiranje je vzpostavilo stik s tem strežnikom.',

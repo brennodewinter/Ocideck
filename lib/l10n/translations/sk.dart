@@ -1902,6 +1902,8 @@ const _dutchSourceAddSk = <String, String>{
   'burgerservicenummer (BSN)': 'občianske identifikačné číslo (BSN)',
   'bankrekeningnummer (IBAN)': 'číslo bankového účtu (IBAN)',
   'e-mailadres': 'e-mailová adresa',
+  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
+      'Podpis TSA sa v aplikácii neoveruje; zhoduje sa iba hash.',
   'Extern': 'Externý',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Načítané z externej URL; otvorenie kontaktovalo tento server.',

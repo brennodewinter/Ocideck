@@ -138,15 +138,32 @@ class _SealTimestampDialogState extends State<SealTimestampDialog> {
     // checked fact — whoever holds the deck can mint a token with an arbitrary
     // time and a matching imprint. Present it as neutral information, never a
     // green "verified" trust badge that would overstate what was checked.
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(Icons.schedule, size: 16, color: AppTheme.slate600),
-        const SizedBox(width: 8),
-        Expanded(
+        Row(
+          children: [
+            Icon(Icons.schedule, size: 16, color: AppTheme.slate600),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Text(
+                '${l10n.d('Getijdstempeld op')} '
+                '${parsed.genTime.toIso8601String()}',
+                style: const TextStyle(fontSize: 12),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 6),
+        Padding(
+          // Uitgelijnd onder de tekst (icoon 16 + 8 tussenruimte), zodat de
+          // kanttekening bij het tijdstip hoort.
+          padding: const EdgeInsets.only(left: 24),
           child: Text(
-            '${l10n.d('Getijdstempeld op')} '
-            '${parsed.genTime.toIso8601String()}',
-            style: const TextStyle(fontSize: 12),
+            l10n.d(
+              'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.',
+            ),
+            style: TextStyle(fontSize: 11, color: AppTheme.slate500),
           ),
         ),
       ],

@@ -1917,6 +1917,8 @@ const _dutchSourceAddBg = <String, String>{
   'burgerservicenummer (BSN)': 'граждански сервизен номер (BSN)',
   'bankrekeningnummer (IBAN)': 'номер на банкова сметка (IBAN)',
   'e-mailadres': 'имейл адрес',
+  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
+      'Подписът на TSA не се проверява в приложението; съвпада само хешът.',
   'Extern': 'Външен',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Изтеглено от външен URL адрес; отварянето се свърза с този сървър.',

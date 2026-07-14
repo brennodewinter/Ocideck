@@ -1897,6 +1897,8 @@ const _dutchSourceAddGsw = <String, String>{
   'burgerservicenummer (BSN)': 'Bürgerservicenummere (BSN)',
   'bankrekeningnummer (IBAN)': 'Bankkontonummere (IBAN)',
   'e-mailadres': 'E-Mail-Adrässe',
+  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
+      'D TSA-Signatur wird i de App nöd prüeft; nume de Hash stimmt überii.',
   'Extern': 'Extern',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Vo ere externe URL glade; bim Öffne isch dä Server kontaktiert worde.',

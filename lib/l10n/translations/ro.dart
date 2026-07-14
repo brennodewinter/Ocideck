@@ -1914,6 +1914,8 @@ const _dutchSourceAddRo = <String, String>{
   'burgerservicenummer (BSN)': 'număr de identificare a cetățeanului (BSN)',
   'bankrekeningnummer (IBAN)': 'număr de cont bancar (IBAN)',
   'e-mailadres': 'adresă de e-mail',
+  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
+      'Semnătura TSA nu este verificată în aplicație; doar hash-ul corespunde.',
   'Extern': 'Extern',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Preluat de la un URL extern; deschiderea a contactat acel server.',

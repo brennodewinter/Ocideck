@@ -1903,6 +1903,8 @@ const _dutchSourceAddHr = <String, String>{
   'burgerservicenummer (BSN)': 'matični broj građanina (BSN)',
   'bankrekeningnummer (IBAN)': 'broj bankovnog računa (IBAN)',
   'e-mailadres': 'adresa e-pošte',
+  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
+      'TSA potpis nije provjeren u aplikaciji; podudara se samo hash.',
   'Extern': 'Vanjski',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Dohvaćeno s vanjskog URL-a; otvaranje je kontaktiralo taj poslužitelj.',

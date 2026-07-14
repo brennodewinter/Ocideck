@@ -1897,6 +1897,8 @@ const _dutchSourceAddFi = <String, String>{
   'burgerservicenummer (BSN)': 'kansalaisen tunnusnumero (BSN)',
   'bankrekeningnummer (IBAN)': 'pankkitilinumero (IBAN)',
   'e-mailadres': 'sähköpostiosoite',
+  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
+      'TSA:n allekirjoitusta ei varmenneta sovelluksessa; vain tiiviste (hash) täsmää.',
   'Extern': 'Ulkoinen',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Haettu ulkoisesta URL-osoitteesta; avaaminen otti yhteyden kyseiseen palvelimeen.',

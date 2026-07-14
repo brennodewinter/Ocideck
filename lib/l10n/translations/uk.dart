@@ -1915,6 +1915,8 @@ const _dutchSourceAddUk = <String, String>{
   'burgerservicenummer (BSN)': 'номер громадянина (BSN)',
   'bankrekeningnummer (IBAN)': 'номер банківського рахунку (IBAN)',
   'e-mailadres': 'адреса електронної пошти',
+  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
+      'Підпис TSA не перевіряється в застосунку; збігається лише хеш.',
   'Extern': 'Зовнішній',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Отримано із зовнішньої URL-адреси; відкриття звернулося до того сервера.',

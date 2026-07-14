@@ -1910,6 +1910,8 @@ const _dutchSourceAddLa = <String, String>{
   'burgerservicenummer (BSN)': 'numerus civilis (BSN)',
   'bankrekeningnummer (IBAN)': 'numerus rationis argentariae (IBAN)',
   'e-mailadres': 'inscriptio electronica',
+  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
+      'Subscriptio TSA in programmate non verificatur; sola summa (hash) congruit.',
   'Extern': 'Externum',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Ex URL externa haustum; in aperiendo servitium illud contactum est.',

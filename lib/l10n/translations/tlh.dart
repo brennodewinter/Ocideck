@@ -1868,6 +1868,8 @@ const _dutchSourceAddTlh = <String, String>{
   'burgerservicenummer (BSN)': 'nuv mI\' (BSN)',
   'bankrekeningnummer (IBAN)': 'HuchQeD mI\' (IBAN)',
   'e-mailadres': 'jabbI\'ID Daq',
+  'De TSA-handtekening is niet in-app geverifieerd; alleen de hash komt overeen.':
+      'TSA QIn Sujbe\'lu\' De\'wI\'Daq; hash neH rap.',
   'Extern': 'Hur',
   'Van een externe URL opgehaald; het openen heeft die server benaderd.':
       'Hur URL-vo\' Suqlu\'; poSlu\'DI\' vetlh server qIHlu\'.',
