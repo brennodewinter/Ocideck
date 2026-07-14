@@ -1791,6 +1791,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'nationaal identificatienummer': 'nacionalinis identifikavimo numeris',
   'Privacy Shield (ontwerp)': 'Privacy Shield (projektas)',
   'Mogelijk geheim': 'Galima paslaptis',
   'sleutel of token': 'raktas arba prieigos raktas',

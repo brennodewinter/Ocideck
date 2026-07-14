@@ -741,6 +741,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'nationaal identificatienummer': 'nasjonaal identifikaasjenûmer',
   'Privacy Shield (ontwerp)': 'Privacy Shield (ûntwerp)',
   'Mogelijk geheim': 'Mooglik geheim',
   'sleutel of token': 'kaai of token',

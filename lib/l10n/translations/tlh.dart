@@ -1758,6 +1758,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'nationaal identificatienummer': 'wo\' nuv mI\'',
   'Privacy Shield (ontwerp)': 'Privacy Shield (qech)',
   'Mogelijk geheim': 'chaq pegh',
   'sleutel of token': 'ngaQHa\'moHwI\' pagh token',

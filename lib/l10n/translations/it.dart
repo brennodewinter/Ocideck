@@ -736,6 +736,7 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'nationaal identificatienummer': 'numero di identificazione nazionale',
   'Privacy Shield (ontwerp)': 'Privacy Shield (progetto)',
   'Mogelijk geheim': 'Possibile segreto',
   'sleutel of token': 'chiave o token',

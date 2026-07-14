@@ -737,6 +737,7 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'nationaal identificatienummer': 'número de identificación nacional',
   'Privacy Shield (ontwerp)': 'Privacy Shield (diseño)',
   'Mogelijk geheim': 'Posible secreto',
   'sleutel of token': 'clave o token',

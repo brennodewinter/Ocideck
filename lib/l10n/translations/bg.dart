@@ -1806,6 +1806,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'nationaal identificatienummer': 'национален идентификационен номер',
   'Privacy Shield (ontwerp)': 'Privacy Shield (проект)',
   'Mogelijk geheim': 'Възможна тайна',
   'sleutel of token': 'ключ или токен',

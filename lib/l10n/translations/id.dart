@@ -1783,6 +1783,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'nationaal identificatienummer': 'nomor identifikasi nasional',
   'Privacy Shield (ontwerp)': 'Privacy Shield (desain)',
   'Mogelijk geheim': 'Kemungkinan rahasia',
   'sleutel of token': 'kunci atau token',

@@ -1811,6 +1811,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'nationaal identificatienummer': 'εθνικός αριθμός ταυτοποίησης',
   'Privacy Shield (ontwerp)': 'Privacy Shield (σχεδιασμός)',
   'Mogelijk geheim': 'Πιθανό μυστικό',
   'sleutel of token': 'κλειδί ή διακριτικό',

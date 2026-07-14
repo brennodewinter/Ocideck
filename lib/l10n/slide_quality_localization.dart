@@ -300,6 +300,8 @@ String privacyRuleLabel(AppLocalizations l10n, String ruleId) {
     'nl.bsn' => l10n.d('burgerservicenummer (BSN)'),
     'fin.iban' => l10n.d('bankrekeningnummer (IBAN)'),
     'contact.email' => l10n.d('e-mailadres'),
+    _ when _euNumberNames.containsKey(ruleId) =>
+      '${l10n.d('nationaal identificatienummer')} (${_euNumberNames[ruleId]})',
     'secret.private_key' => l10n.d('private sleutel'),
     'secret.jwt' => l10n.d('toegangstoken (JWT)'),
     'secret.connection_string' => l10n.d('databaseverbinding met wachtwoord'),
@@ -309,6 +311,26 @@ String privacyRuleLabel(AppLocalizations l10n, String ruleId) {
     _ => ruleId,
   };
 }
+
+/// De naam van een nationaal nummer. Eigennamen — die vertalen we niet: een
+/// PESEL heet in elke taal een PESEL.
+const Map<String, String> _euNumberNames = {
+  'be.rijksregister': 'rijksregisternummer',
+  'de.steuer_id': 'Steuer-ID',
+  'fr.nir': 'NIR',
+  'es.dni': 'DNI/NIE',
+  'pt.nif': 'NIF',
+  'pl.pesel': 'PESEL',
+  'it.codice_fiscale': 'codice fiscale',
+  'hr.oib': 'OIB',
+  'bg.egn': 'ЕГН',
+  'ro.cnp': 'CNP',
+  'se.personnummer': 'personnummer',
+  'fi.hetu': 'henkilötunnus',
+  'ee.isikukood': 'isikukood',
+  'uk.nhs': 'NHS',
+  'uk.nino': 'NINO',
+};
 
 /// De leveranciersnaam bij een sleutelregel. Eigennamen — die vertalen we niet.
 const Map<String, String> _secretVendors = {

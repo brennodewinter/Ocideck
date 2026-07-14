@@ -1796,6 +1796,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'nationaal identificatienummer': 'krajowy numer identyfikacyjny',
   'Privacy Shield (ontwerp)': 'Privacy Shield (projekt)',
   'Mogelijk geheim': 'Możliwy sekret',
   'sleutel of token': 'klucz lub token',

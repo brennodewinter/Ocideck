@@ -59,6 +59,11 @@ void main() {
       'Verbind met postgres://db.intern:5432/prod',
       'Het certificaat begint met -----BEGIN CERTIFICATE-----',
       'De publieke sleutel staat in -----BEGIN PUBLIC KEY-----',
+      // EU-aas: getallen in de lengtes van de landnummers, zonder context.
+      'Batchnummer 85073003032 uit de productie',
+      'Transactie 44051401358 verwerkt',
+      'Meldnummer 1800510123457 in het systeem',
+      'Bereikbaar op 811218 9875 tijdens kantooruren',
     ];
 
     final result = scanLines(corpus);
