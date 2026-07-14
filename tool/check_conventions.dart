@@ -12,6 +12,9 @@
 //     baselined files below whose ceiling is their size at ratchet time. A
 //     ceiling may shrink (split the file) but never grow, so big files trend
 //     smaller instead of creeping bigger. Translation data is exempt.
+//   * No raw control bytes — write the escape (\u0000), never the
+//     byte itself. See [controlByteBaseline]: this is a review hazard, not a
+//     nitpick.
 //
 // Exits non-zero (with the offending locations) when a rule is violated.
 
@@ -28,6 +31,22 @@ const int catchUnderscoreBaseline = 0;
 /// deliberately-dark component) may move into its own file that [_isPaletteHome]
 /// exempts.
 const int rawColorBaseline = 0;
+
+/// Raw control bytes (NUL, SOH, …) allowed in `lib/` sources. Keep at 0.
+///
+/// A control character written as the BYTE ITSELF inside a string literal — a
+/// separator like `'\u0000'` typed raw — makes the whole file look BINARY to
+/// every byte-oriented tool, even though Dart compiles it fine:
+///
+///   * `grep` silently skips the file. Not "no matches": *no output at all*.
+///     A 900-line source file becomes invisible to any grep-based audit — a
+///     file-sized blind spot in a tool whose job is security review.
+///   * `git diff` renders it as `Bin 11326 -> 11331 bytes`, so a change to it
+///     can never be read as a diff in review.
+///
+/// The fix is free: write the escape (`\u0000`), which produces a byte-identical
+/// string. Only tab, LF and CR may appear raw.
+const int controlByteBaseline = 0;
 
 /// A non-baselined `lib/` file may not exceed this many lines — split it first.
 const int maxFileLines = 1000;
@@ -62,6 +81,26 @@ bool _isAtomicFileLib(String path) =>
 bool _isTranslationData(String path) =>
     path.replaceAll(r'\', '/').contains('lib/l10n/translations/');
 
+/// Tab, LF and CR are the only control bytes a source file may contain raw.
+bool _isAllowedControlByte(int b) => b == 0x09 || b == 0x0a || b == 0x0d;
+
+/// Every raw control byte in [file], as `path:line (0xNN)`. Scans BYTES, not
+/// decoded lines: the point is exactly what the byte-oriented tools choke on.
+Iterable<String> _controlBytesIn(File file) sync* {
+  final bytes = file.readAsBytesSync();
+  var line = 1;
+  for (final b in bytes) {
+    if (b == 0x0a) {
+      line++;
+      continue;
+    }
+    if ((b < 0x20 && !_isAllowedControlByte(b)) || b == 0x7f) {
+      final hex = b.toRadixString(16).padLeft(2, '0');
+      yield '${file.path}:$line (0x$hex)';
+    }
+  }
+}
+
 void main() {
   final printHits = <String>[];
   final plainWriteHits = <String>[];
@@ -69,8 +108,10 @@ void main() {
   var rawColorCount = 0;
   final oversize = <String>[];
   final shrunk = <String>[];
+  final controlByteHits = <String>[];
 
   for (final file in _dartFiles(Directory('lib'))) {
+    controlByteHits.addAll(_controlBytesIn(file));
     final lines = file.readAsLinesSync();
     final countColors =
         !_isPaletteHome(file.path) && !_isTranslationData(file.path);
@@ -100,6 +141,14 @@ void main() {
       } else if (count > maxFileLines) {
         oversize.add('$path: $count lines (max $maxFileLines)');
       }
+    }
+  }
+
+  // A control byte hides a file from grep wherever it lives, so this one rule
+  // reaches beyond lib/ — the size and colour ratchets deliberately do not.
+  for (final dir in ['test', 'tool']) {
+    for (final file in _dartFiles(Directory(dir))) {
+      controlByteHits.addAll(_controlBytesIn(file));
     }
   }
 
@@ -145,11 +194,23 @@ void main() {
     );
   }
 
+  if (controlByteHits.length > controlByteBaseline) {
+    failures.add(
+      'Found ${controlByteHits.length} raw control byte(s) — the file now reads '
+      'as BINARY to grep and git diff, so it is invisible to a grep audit and '
+      'unreviewable in a PR. Write the escape instead (e.g. the six characters '
+      r'\u0000'
+      ') — the resulting string is byte-identical:\n'
+      '    ${controlByteHits.join('\n    ')}',
+    );
+  }
+
   if (failures.isEmpty) {
     stdout.writeln(
-      'Conventions OK: no print(); no plain writeAs*; bare catch (_) at '
-      '$catchCount (baseline $catchUnderscoreBaseline); raw Color(0x…) at '
-      '$rawColorCount (baseline $rawColorBaseline); file sizes within ceilings.',
+      'Conventions OK: no print(); no plain writeAs*; no raw control bytes; '
+      'bare catch (_) at $catchCount (baseline $catchUnderscoreBaseline); raw '
+      'Color(0x…) at $rawColorCount (baseline $rawColorBaseline); file sizes '
+      'within ceilings.',
     );
     if (rawColorCount < rawColorBaseline) {
       stdout.writeln(
