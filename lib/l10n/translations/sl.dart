@@ -1785,6 +1785,9 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Ta predstavitev vsebuje dele modula Informacijska varnost. Vklopite modul, da jih uredite.',
+  'Inschakelen': 'Vklopi',
   'Bevestigen': 'Potrdi',
   'Onderbouwing van de bevestiging': 'Utemeljitev potrditve',
   'De eigenaar staat insluiten niet toe': 'Lastnik ne dovoljuje vdelave',

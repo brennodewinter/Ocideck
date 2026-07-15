@@ -740,6 +740,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'E presentashon aki ta kontené elementonan di e módulo di Seguridat di informashon. Aktivá e módulo pa editá nan.',
+  'Inschakelen': 'Aktivá',
   'Bevestigen': 'Konfirmá',
   'Onderbouwing van de bevestiging': 'Hustifikashon di e konfirmashon',
   'De eigenaar staat insluiten niet toe': 'E doño no ta permití inkrustashon',

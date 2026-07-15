@@ -1786,6 +1786,9 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Tato prezentace obsahuje části modulu Informační bezpečnost. Zapněte modul, abyste je mohli upravovat.',
+  'Inschakelen': 'Zapnout',
   'Bevestigen': 'Potvrdit',
   'Onderbouwing van de bevestiging': 'Odůvodnění potvrzení',
   'De eigenaar staat insluiten niet toe': 'Vlastník nepovoluje vkládání',

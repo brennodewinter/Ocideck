@@ -1819,6 +1819,9 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Tá codanna den mhodúl Slándáil Faisnéise sa láithreoireacht seo. Cuir an modúl ar siúl chun iad a chur in eagar.',
+  'Inschakelen': 'Cuir ar siúl',
   'Bevestigen': 'Deimhnigh',
   'Onderbouwing van de bevestiging': 'Bunús an dearbhaithe',
   'De eigenaar staat insluiten niet toe': 'Ní cheadaíonn an t-úinéir leabú',

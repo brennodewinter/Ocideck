@@ -740,6 +740,9 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Diese Präsentation enthält Bestandteile des Moduls Informationssicherheit. Aktiviere das Modul, um sie zu bearbeiten.',
+  'Inschakelen': 'Aktivieren',
   'Bevestigen': 'Bestätigen',
   'Onderbouwing van de bevestiging': 'Begründung der Bestätigung',
   'De eigenaar staat insluiten niet toe':

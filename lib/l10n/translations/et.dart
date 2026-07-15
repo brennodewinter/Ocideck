@@ -1774,6 +1774,9 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'See esitlus sisaldab infoturbe mooduli osi. Lülita moodul sisse, et neid muuta.',
+  'Inschakelen': 'Lülita sisse',
   'Bevestigen': 'Kinnita',
   'Onderbouwing van de bevestiging': 'Kinnituse põhjendus',
   'De eigenaar staat insluiten niet toe': 'Omanik ei luba manustamist',

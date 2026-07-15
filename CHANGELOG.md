@@ -7,6 +7,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+- **Opening a security report while the Informatieveiligheid module is off now
+  offers to turn it on.** When you open a presentation that contains security
+  slide types (a finding, findings overview, checklist, scope matrix or
+  sign-off) while the module is disabled, a one-time snackbar with an **Enable**
+  action appears — so the module is discoverable from the deck that needs it,
+  not just buried in settings. The prompt shows once per open (never while you
+  edit) and only when the module is off; the slides render either way, so this
+  is purely a discovery aid.
+
 ### Changed
 - **The privacy feature is now called OciWacht.** "Privacy Shield" was a
   confusing name — it collides with the (invalidated) EU–US Privacy Shield

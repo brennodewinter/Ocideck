@@ -741,6 +741,9 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Dizze presintaasje befettet ûnderdielen fan de Ynformaasjefeiligensmodule. Set de module oan om se te bewurkjen.',
+  'Inschakelen': 'Ynskeakelje',
   'Bevestigen': 'Befêstigje',
   'Onderbouwing van de bevestiging': 'Underbouwing fan de befêstiging',
   'De eigenaar staat insluiten niet toe': 'De eigner stiet ynsluten net ta',

@@ -1783,6 +1783,9 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Presentasi ini berisi bagian dari modul Keamanan Informasi. Aktifkan modul untuk mengeditnya.',
+  'Inschakelen': 'Aktifkan',
   'Bevestigen': 'Konfirmasi',
   'Onderbouwing van de bevestiging': 'Dasar konfirmasi',
   'De eigenaar staat insluiten niet toe':

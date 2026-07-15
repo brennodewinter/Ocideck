@@ -1782,6 +1782,9 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Den här presentationen innehåller delar av modulen Informationssäkerhet. Aktivera modulen för att redigera dem.',
+  'Inschakelen': 'Aktivera',
   'Bevestigen': 'Bekräfta',
   'Onderbouwing van de bevestiging': 'Motivering för bekräftelsen',
   'De eigenaar staat insluiten niet toe': 'Ägaren tillåter inte inbäddning',

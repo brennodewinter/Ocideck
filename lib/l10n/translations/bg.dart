@@ -1806,6 +1806,9 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Тази презентация съдържа елементи от модула Информационна сигурност. Включете модула, за да ги редактирате.',
+  'Inschakelen': 'Включване',
   'Bevestigen': 'Потвърди',
   'Onderbouwing van de bevestiging': 'Обосновка на потвърждението',
   'De eigenaar staat insluiten niet toe': 'Собственикът не разрешава вграждане',

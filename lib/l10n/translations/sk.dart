@@ -1790,6 +1790,9 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Táto prezentácia obsahuje časti modulu Informačná bezpečnosť. Zapnite modul, aby ste ich mohli upravovať.',
+  'Inschakelen': 'Zapnúť',
   'Bevestigen': 'Potvrdiť',
   'Onderbouwing van de bevestiging': 'Odôvodnenie potvrdenia',
   'De eigenaar staat insluiten niet toe': 'Vlastník nepovoľuje vkladanie',
