@@ -148,6 +148,12 @@ String buildAuditDossier(
     b.writeln();
   }
   b.writeln('- **Voldaan:** ${compliance.metCount}');
+  if (compliance.confirmedCount > 0) {
+    b.writeln(
+      '  - waarvan handmatig bevestigd (niet uit inhoud afgeleid): '
+      '${compliance.confirmedCount}',
+    );
+  }
   b.writeln('- **Openstaand:** ${compliance.openCount}');
   b.writeln('- **Uitgesloten:** ${compliance.waivedCount}');
   b.writeln();

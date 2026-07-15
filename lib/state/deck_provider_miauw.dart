@@ -22,4 +22,24 @@ extension DeckNotifierMiauw on DeckNotifier {
     final waivers = Map<String, String>.from(deck.miauwWaivers)..remove(eisId);
     _mutate(deck.copyWith(miauwWaivers: waivers));
   }
+
+  /// Manually confirm EIS [eisId] with a mandatory [note] (the human
+  /// attestation). An empty note is ignored — a confirmation must be justified,
+  /// just like a waiver. The requirement then reads as voldaan (handmatig).
+  void setMiauwConfirmation(String eisId, String note) {
+    final deck = currentState.deck;
+    if (deck == null || note.trim().isEmpty) return;
+    final confirmations = Map<String, String>.from(deck.miauwConfirmations)
+      ..[eisId] = note.trim();
+    _mutate(deck.copyWith(miauwConfirmations: confirmations));
+  }
+
+  /// Withdraw the manual confirmation on EIS [eisId], returning it to open.
+  void removeMiauwConfirmation(String eisId) {
+    final deck = currentState.deck;
+    if (deck == null || !deck.miauwConfirmations.containsKey(eisId)) return;
+    final confirmations = Map<String, String>.from(deck.miauwConfirmations)
+      ..remove(eisId);
+    _mutate(deck.copyWith(miauwConfirmations: confirmations));
+  }
 }

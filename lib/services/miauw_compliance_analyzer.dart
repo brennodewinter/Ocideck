@@ -13,7 +13,8 @@ import 'miauw_eis_catalog.dart';
 /// - an **automatic** requirement is **voldaan** when its content check passes,
 ///   else **open**;
 /// - a **manual** requirement can't be proven from content, so it stays **open**
-///   until the client waives it (a manual-confirmation state is later work).
+///   until the client confirms it (a human attestation in `miauwConfirmations`,
+///   which reads as **voldaan** while carrying its note) or waives it.
 ///
 /// Modelled on `SlideQualityAnalyzer`: a `const` service with a single pure
 /// [analyze] entry point, so the provider recomputes cheaply on every deck edit.
@@ -39,7 +40,16 @@ class MiauwComplianceAnalyzer {
       );
     }
     if (eis.derivation == EisDerivation.manual) {
-      return EisResult(entry: eis, status: EisStatus.open);
+      // A manual (organisational) EIS can't be proven from content; it stays
+      // open until the client either confirms it (a human attestation) or
+      // waives it. Confirmation counts as voldaan but carries its note so the
+      // panel/dossier show it was human-attested, not content-verified.
+      final note = deck.miauwConfirmations[eis.id];
+      return EisResult(
+        entry: eis,
+        status: note != null ? EisStatus.voldaan : EisStatus.open,
+        confirmationNote: note,
+      );
     }
     final met = _check(eis.check!, deck, findings);
     return EisResult(

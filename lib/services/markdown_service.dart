@@ -118,6 +118,11 @@ class MarkdownService {
         'ocideck_miauw_waivers: ${base64Url.encode(utf8.encode(jsonEncode(deck.miauwWaivers)))}',
       );
     }
+    if (deck.miauwConfirmations.isNotEmpty) {
+      buf.writeln(
+        'ocideck_miauw_confirmations: ${base64Url.encode(utf8.encode(jsonEncode(deck.miauwConfirmations)))}',
+      );
+    }
     buf.writeln('---');
     buf.writeln();
 

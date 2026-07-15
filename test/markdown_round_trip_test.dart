@@ -394,6 +394,30 @@ void main() {
       expect(markdown, isNot(contains('ocideck_miauw_waivers')));
     });
 
+    test('MIAUW confirmations round-trip through the front matter', () {
+      final service = MarkdownService();
+      const confirmations = {
+        '1.2': 'Rapporteur OSCP-gecertificeerd, bewijs bijgevoegd',
+        '2.1': 'Intake gehouden op 2026-07-01',
+      };
+      final markdown = service.generateDeck(
+        Deck(
+          title: 'Pentest',
+          miauwConfirmations: confirmations,
+          slides: [Slide.create(SlideType.title)],
+        ),
+      );
+      expect(markdown, contains('ocideck_miauw_confirmations:'));
+      expect(service.parseDeck(markdown)!.miauwConfirmations, confirmations);
+    });
+
+    test('a deck without confirmations writes no confirmation key', () {
+      final markdown = MarkdownService().generateDeck(
+        Deck(title: 'X', slides: [Slide.create(SlideType.title)]),
+      );
+      expect(markdown, isNot(contains('ocideck_miauw_confirmations')));
+    });
+
     test(
       'the RFC3161 timestamp token round-trips through the front matter',
       () {

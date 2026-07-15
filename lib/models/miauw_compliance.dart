@@ -18,6 +18,7 @@ class EisResult {
     required this.entry,
     required this.status,
     this.waiverReason,
+    this.confirmationNote,
   });
 
   final EisEntry entry;
@@ -26,6 +27,11 @@ class EisResult {
   /// The client's exclusion reason, set only when [status] is
   /// [EisStatus.uitgesloten].
   final String? waiverReason;
+
+  /// The human attestation for a manually confirmed EIS, set only when a manual
+  /// requirement was confirmed (its [status] is then [EisStatus.voldaan]). Its
+  /// presence is what distinguishes a human-attested pass from a content check.
+  final String? confirmationNote;
 }
 
 /// The full MIAUW compliance overview: one [EisResult] per requirement in the
@@ -42,6 +48,11 @@ class MiauwComplianceResult {
   int get openCount => _count(EisStatus.open);
   int get waivedCount => _count(EisStatus.uitgesloten);
   int get total => results.length;
+
+  /// How many of the [metCount] are human attestations of a manual EIS rather
+  /// than content-derived passes — surfaced so an auditor can tell them apart.
+  int get confirmedCount =>
+      results.where((r) => r.confirmationNote != null).length;
 
   bool get hasOpen => openCount > 0;
 
