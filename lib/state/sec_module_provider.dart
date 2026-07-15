@@ -218,15 +218,6 @@ class SecModuleNotifier extends Notifier<SecModuleState> {
     await _removeKey(_versionKey);
   }
 
-  /// TODO(pentest-module): auto-activation hook. Opening a `.md` that carries a
-  /// pentest slide class while the module is off should prompt the user to
-  /// enable it (PENTEST_MIAUW.md §6). No pentest slide types exist yet, so this
-  /// is a stub; wire it into the deck-open path once the `finding`/`checklist`/…
-  /// classes land. Returns whether a prompt would be warranted.
-  bool shouldPromptAutoActivate({required bool deckHasPentestSlides}) {
-    return deckHasPentestSlides && !state.enabled;
-  }
-
   Future<void> _persistBool(String key, bool value) =>
       _persist((prefs) => prefs.setBool(key, value));
 

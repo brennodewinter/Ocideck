@@ -112,6 +112,23 @@ void main() {
     expect(find.byType(CommandPalette), findsOneWidget);
   });
 
+  testWidgets('security commands are hidden from the palette when the module '
+      'is off', (tester) async {
+    await pumpShell(tester);
+
+    await tester.tap(appBarIcon(Icons.more_vert));
+    await tester.pumpAndSettle();
+    await tester.tap(menuItemIcon(Icons.keyboard_command_key));
+    await tester.pumpAndSettle();
+
+    // The Informatieveiligheid module is off by default, so its commands are
+    // omitted entirely — not shown as dead greyed-out entries. Filtering for
+    // one therefore yields nothing.
+    await tester.enterText(find.byType(TextField).first, 'MIAUW');
+    await tester.pumpAndSettle();
+    expect(find.text('MIAUW-compliance'), findsNothing);
+  });
+
   testWidgets('running "Nieuwe grafiek" from the palette adds a chart slide', (
     tester,
   ) async {
