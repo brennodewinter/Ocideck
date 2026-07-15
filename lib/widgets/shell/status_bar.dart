@@ -195,6 +195,13 @@ class _DeckStatusBar extends StatelessWidget {
   }
 }
 
+/// Of de exportstatus een privacygegeven aanwijst — en dus het PrivacyKat-merk
+/// hoort te dragen in plaats van het generieke waarschuwingsicoon. Publiek en
+/// puur, zodat de keuze los van de widget te testen is.
+bool statusShowsPrivacyMark(ExportReadinessStatus status) =>
+    status == ExportReadinessStatus.privacyWarnings ||
+    status == ExportReadinessStatus.blockedByPrivacy;
+
 /// De exportstatus in één oogopslag: "Klaar voor export", "Nog opslaan
 /// nodig", "N kwaliteitswaarschuwing(en)" of "TLP/kwaliteit blokkeert
 /// export". Klikken doet het meest logische vervolg: opslaan wanneer dat de
@@ -297,7 +304,9 @@ class _ExportReadinessChip extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(icon, size: 12, color: color),
+              statusShowsPrivacyMark(readiness.status)
+                  ? const PrivacyKatMark(size: 12)
+                  : Icon(icon, size: 12, color: color),
               const SizedBox(width: 4),
               Text(
                 label,

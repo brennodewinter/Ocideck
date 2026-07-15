@@ -210,7 +210,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 
 - `app_shell.dart` — Main application shell: layout, file IO, and dialog coordination.
 - `markdown_notes_editor.dart` — Barrel re-export of the markdown notes editor.
-- `privacy_badge.dart` — `PrivacyBadge` + the `privacyKatSvg` mark: the non-blocking marker (with an explanation on hover) for a spot where something leaves the device. Used by the status bar's remote-origin badge and the Security tab's online-CVE switch.
+- `privacy_badge.dart` — `PrivacyBadge`, the bare `PrivacyKatMark`, and the `privacyKatSvg` mark: the non-blocking marker (with an explanation on hover) for a spot where personal data is pointed at or something leaves the device. Used by the status bar's remote-origin badge, the export-readiness chip's privacy warnings, and the Security tab's online-CVE switch.
 - `privacy_statement_content.dart` — Privacy/license content shared by the consent and settings dialogs.
 
 ### `lib/widgets/shell/` (each `part of app_shell.dart`)

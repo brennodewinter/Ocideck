@@ -18,6 +18,23 @@ const String privacyKatSvg =
     '<path d="M11.15 12.3 L10.75 15.4 H13.25 L12.85 12.3 Z" fill="#FFCC00"/>'
     '</svg>';
 
+/// Just the PrivacyKat mark, without a tooltip or label. For callers that
+/// already carry their own text and framing — the export-readiness chip in the
+/// status bar reuses it so its "personal data" warning shows the same mark as
+/// the slide badge and the quality panel, instead of a generic warning icon.
+///
+/// The mark keeps its own EU-blue/yellow colours on purpose: it is a brand,
+/// not a status glyph, so it is not tinted to the chip's amber/red.
+class PrivacyKatMark extends StatelessWidget {
+  final double size;
+
+  const PrivacyKatMark({super.key, this.size = 14});
+
+  @override
+  Widget build(BuildContext context) =>
+      SvgPicture.string(privacyKatSvg, width: size, height: size);
+}
+
 /// A non-blocking privacy marker: the PrivacyKat shield with an explanation on
 /// hover. It never blocks the action it sits next to — it makes visible that
 /// the action reaches outside this device, and says what that discloses.
