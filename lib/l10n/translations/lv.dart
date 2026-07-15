@@ -1888,7 +1888,7 @@ const _dutchSourceAddLv = <String, String>{
   'genetisch gegeven': 'ģenētiskie dati',
   'parketnummer': 'krimināllietas numurs',
   'nationaal identificatienummer': 'valsts identifikācijas numurs',
-  'Privacy Shield (ontwerp)': 'Privacy Shield (dizains)',
+  'OciWacht (ontwerp)': 'OciWacht (dizains)',
   'Mogelijk geheim': 'Iespējams noslēpums',
   'sleutel of token': 'atslēga vai marķieris',
   'private sleutel': 'privātā atslēga',

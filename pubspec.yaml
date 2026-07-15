@@ -122,7 +122,7 @@ flutter:
     - docs/design/PENTEST_MIAUW.md
     - docs/design/AI_ASSIST.md
     - docs/design/AGENTIC_BUILD_PLAN.md
-    - docs/design/PRIVACY_SHIELD.md
+    - docs/design/OCIWACHT.md
   fonts:
     - family: EB Garamond
       fonts:

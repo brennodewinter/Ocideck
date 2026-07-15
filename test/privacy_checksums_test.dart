@@ -37,7 +37,7 @@ void main() {
     test('ongeveer één op de elf willekeurige getallen slaagt', () {
       // Dit is GEEN eigenschap die we willen, maar een die we moeten kennen: ze
       // is de hele reden dat een BSN-treffer zonder contextwoord niet meer dan
-      // informatief mag zijn. Zie PRIVACY_SHIELD §5.2. Zakt dit getal ooit
+      // informatief mag zijn. Zie OCIWACHT §5.2. Zakt dit getal ooit
       // drastisch, dan is de proef stuk; stijgt het, dan is de aanname in de
       // scanner niet meer waar.
       var geslaagd = 0;

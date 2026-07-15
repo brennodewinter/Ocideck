@@ -1899,7 +1899,7 @@ const _dutchSourceAddLt = <String, String>{
   'genetisch gegeven': 'genetiniai duomenys',
   'parketnummer': 'baudžiamosios bylos numeris',
   'nationaal identificatienummer': 'nacionalinis identifikavimo numeris',
-  'Privacy Shield (ontwerp)': 'Privacy Shield (projektas)',
+  'OciWacht (ontwerp)': 'OciWacht (projektas)',
   'Mogelijk geheim': 'Galima paslaptis',
   'sleutel of token': 'raktas arba prieigos raktas',
   'private sleutel': 'privatusis raktas',

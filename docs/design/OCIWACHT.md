@@ -1,4 +1,4 @@
-# OciDeck — Privacy Shield (ontwerp)
+# OciDeck — OciWacht (ontwerp)
 
 Detectie van privacygevoelige informatie in slides, met per-slide afhandeling:
 accepteren, waarschuwen met een shield-badge, of redigeren op scherm en in export.
@@ -458,7 +458,7 @@ validator, en ze moeten door de round-trip-test (`make test-contracts`) heen.
 
 ### 4.3 Het shield op de slide
 
-Een `_PrivacyShieldOverlay` naast de bestaande `_TlpOverlay` in
+Een `_OciWachtOverlay` naast de bestaande `_TlpOverlay` in
 `lib/widgets/slides/previews/overlays.dart:119-152`. De overlays wijken al voor elkaar (de
 TLP-badge voor het logo, de footer voor de badge); het shield krijgt een eigen plek in die dans,
 standaard linksonder.
@@ -837,7 +837,7 @@ Nieuwe sectie in het tabblad "Veiligheid" (`settings_dialog_security.dart`), wan
 | `privacyExportGate` | uit / waarschuwen / blokkeren | waarschuwen |
 | `privacyRedactionStyle` | blokken (`████`) / label (`[BSN]`) | blokken |
 | `privacyOwnIdentity` | vrije lijst: naam, e-mail, telefoon, domein | leeg |
-| `privacyShieldWatermark` | bool | uit |
+| `ociWachtWatermark` | bool | uit |
 | `privacyPreviewProfile` | welk doelgroepprofiel de preview toont | het profiel waarmee je zou exporteren |
 | `privacyCustomRules` | pad naar een eigen regelbestand (fase 7) | leeg |
 
@@ -980,7 +980,7 @@ Vastgesteld, niet meer open:
 | `docs/FILE_FORMAT.md` | De frontmatter-sleutels `privacy:`, `privacy_disclosure:`, `privacy_ignore:`, de `<!-- ocideck_privacy* -->`-directives, de `[[…]]`-markering, en het redactiemanifest |
 | `docs/CHECKS.md` | Rij in de "at a glance"-tabel + een `###`-sectie in de vorm Runs / Covers / Failure means |
 | `docs/SOURCE_MAP.md` | Eén regel per nieuw `lib/`-bestand |
-| `docs/design/PRIVACY_SHIELD.md` | Dit document. Design-docs vormen een eigen klasse in `docs_registration_test.dart`, maar worden nog steeds gecontroleerd: het bestand moet als asset in `pubspec.yaml` staan **en** een `_docTile` krijgen in `settings_dialog_docs.dart`, met een titel die in alle 31 talen vertaald is |
+| `docs/design/OCIWACHT.md` | Dit document. Design-docs vormen een eigen klasse in `docs_registration_test.dart`, maar worden nog steeds gecontroleerd: het bestand moet als asset in `pubspec.yaml` staan **en** een `_docTile` krijgen in `settings_dialog_docs.dart`, met een titel die in alle 31 talen vertaald is |
 | `CHANGELOG.md` | Per fase |
 
 ### 12.2 De privacyverklaring

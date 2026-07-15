@@ -17,7 +17,7 @@
 /// bewijs dat je naar een BSN kijkt — het is alleen bewijs dat het er een kán
 /// zijn. Zonder een contextwoord of een veldpositie ("BSN: …", een tabelkolom
 /// met die kop) hoort een treffer daarom hooguit informatief te zijn, nooit een
-/// waarschuwing. Zie `docs/design/PRIVACY_SHIELD.md` §5.2.
+/// waarschuwing. Zie `docs/design/OCIWACHT.md` §5.2.
 bool passesElevenProof(String digits) {
   if (digits.length != 9) return false;
   var sum = 0;

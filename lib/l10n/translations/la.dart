@@ -1905,7 +1905,7 @@ const _dutchSourceAddLa = <String, String>{
   'genetisch gegeven': 'datum geneticum',
   'parketnummer': 'numerus causae criminalis',
   'nationaal identificatienummer': 'numerus identitatis nationalis',
-  'Privacy Shield (ontwerp)': 'Privacy Shield (consilium)',
+  'OciWacht (ontwerp)': 'OciWacht (consilium)',
   'Mogelijk geheim': 'Arcanum possibile',
   'sleutel of token': 'clavis vel signum',
   'private sleutel': 'clavis privata',

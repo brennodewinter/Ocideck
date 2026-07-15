@@ -1911,7 +1911,7 @@ const _dutchSourceAddRo = <String, String>{
   'genetisch gegeven': 'dată genetică',
   'parketnummer': 'număr de dosar penal',
   'nationaal identificatienummer': 'număr național de identificare',
-  'Privacy Shield (ontwerp)': 'Privacy Shield (proiect)',
+  'OciWacht (ontwerp)': 'OciWacht (proiect)',
   'Mogelijk geheim': 'Posibil secret',
   'sleutel of token': 'cheie sau token',
   'private sleutel': 'cheie privată',

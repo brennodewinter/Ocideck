@@ -1892,7 +1892,7 @@ const _dutchSourceAddFi = <String, String>{
   'genetisch gegeven': 'geneettinen tieto',
   'parketnummer': 'syyttäjän asianumero',
   'nationaal identificatienummer': 'kansallinen henkilötunnus',
-  'Privacy Shield (ontwerp)': 'Privacy Shield (suunnitelma)',
+  'OciWacht (ontwerp)': 'OciWacht (suunnitelma)',
   'Mogelijk geheim': 'Mahdollinen salaisuus',
   'sleutel of token': 'avain tai poletti',
   'private sleutel': 'yksityinen avain',

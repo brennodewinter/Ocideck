@@ -1893,7 +1893,7 @@ const _dutchSourceAddGsw = <String, String>{
   'genetisch gegeven': 'genetischs Datum',
   'parketnummer': 'Aktezeiche vo de Staatsawaltschaft',
   'nationaal identificatienummer': 'nationali Identifikationsnummere',
-  'Privacy Shield (ontwerp)': 'Privacy Shield (Entwurf)',
+  'OciWacht (ontwerp)': 'OciWacht (Entwurf)',
   'Mogelijk geheim': 'Möglichs Gheimnis',
   'sleutel of token': 'Schlüssel oder Token',
   'private sleutel': 'private Schlüssel',

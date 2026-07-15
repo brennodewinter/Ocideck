@@ -4,7 +4,7 @@ import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/privacy/privacy_projection.dart';
 
-/// De projectiegrens (PRIVACY_SHIELD §6). De kern van elke test hier is
+/// De projectiegrens (OCIWACHT §6). De kern van elke test hier is
 /// dezelfde vraag: bevat het geprojecteerde deck de oorspronkelijke tekens nog?
 /// "Niet beschikbaar is niet beschikbaar" — een zwarte balk over leesbare tekst
 /// is geen redactie.

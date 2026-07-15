@@ -1863,7 +1863,7 @@ const _dutchSourceAddTlh = <String, String>{
   'genetisch gegeven': 'tIq De\'',
   'parketnummer': 'qIch mI\'',
   'nationaal identificatienummer': 'wo\' nuv mI\'',
-  'Privacy Shield (ontwerp)': 'Privacy Shield (qech)',
+  'OciWacht (ontwerp)': 'OciWacht (qech)',
   'Mogelijk geheim': 'chaq pegh',
   'sleutel of token': 'ngaQHa\'moHwI\' pagh token',
   'private sleutel': 'pegh ngaQHa\'moHwI\'',

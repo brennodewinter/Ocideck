@@ -1911,7 +1911,7 @@ const _dutchSourceAddUk = <String, String>{
   'genetisch gegeven': 'генетичні дані',
   'parketnummer': 'номер кримінального провадження',
   'nationaal identificatienummer': 'національний ідентифікаційний номер',
-  'Privacy Shield (ontwerp)': 'Privacy Shield (проєкт)',
+  'OciWacht (ontwerp)': 'OciWacht (проєкт)',
   'Mogelijk geheim': 'Можливий секрет',
   'sleutel of token': 'ключ або токен',
   'private sleutel': 'приватний ключ',

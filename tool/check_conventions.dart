@@ -99,7 +99,7 @@ bool _isPaletteHome(String path) {
 
 /// The atomic-write helpers themselves are the only place a plain write may
 /// live: everything else goes through them.
-/// De privacy-projectiegrens (docs/design/PRIVACY_SHIELD.md §6).
+/// De privacy-projectiegrens (docs/design/OCIWACHT.md §6).
 ///
 /// Elk oppervlak dat slide-inhoud aan een ontvanger levert — een export, een
 /// raster, de presentatie — hoort een `AudienceDeck` te eisen en geen rauwe
@@ -267,7 +267,7 @@ void main() {
     failures.add(
       'Privacy-projectiegrens doorbroken — een ontvangend oppervlak mag geen '
       'rauw Deck/List<Slide> accepteren, alleen een AudienceDeck (die alleen '
-      'PrivacyProjection kan maken). Zie docs/design/PRIVACY_SHIELD.md §6:\n'
+      'PrivacyProjection kan maken). Zie docs/design/OCIWACHT.md §6:\n'
       '    ${boundaryHits.join('\n    ')}',
     );
   }

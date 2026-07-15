@@ -158,11 +158,11 @@ class _TlpOverlay extends StatelessWidget {
 ///
 /// Staat linksonder, tegenover de TLP-badge, en wijkt naar rechts wanneer die
 /// hoek al bezet is. De twee kunnen samen op één slide staan.
-class _PrivacyShieldOverlay extends StatelessWidget {
+class _OciWachtOverlay extends StatelessWidget {
   final double w;
   final bool tlpTakesLeft;
 
-  const _PrivacyShieldOverlay({required this.w, required this.tlpTakesLeft});
+  const _OciWachtOverlay({required this.w, required this.tlpTakesLeft});
 
   @override
   Widget build(BuildContext context) {

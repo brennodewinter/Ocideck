@@ -1893,7 +1893,7 @@ const _dutchSourceAddSl = <String, String>{
   'genetisch gegeven': 'genetski podatek',
   'parketnummer': 'opravilna številka kazenske zadeve',
   'nationaal identificatienummer': 'nacionalna identifikacijska številka',
-  'Privacy Shield (ontwerp)': 'Privacy Shield (zasnova)',
+  'OciWacht (ontwerp)': 'OciWacht (zasnova)',
   'Mogelijk geheim': 'Možna skrivnost',
   'sleutel of token': 'ključ ali žeton',
   'private sleutel': 'zasebni ključ',

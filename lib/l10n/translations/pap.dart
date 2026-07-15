@@ -847,7 +847,7 @@ const _dutchSourceAddPap = {
   'genetisch gegeven': 'dato genétiko',
   'parketnummer': 'number di kaso di fiskalia',
   'nationaal identificatienummer': 'number di identifikashon nashonal',
-  'Privacy Shield (ontwerp)': 'Privacy Shield (diseño)',
+  'OciWacht (ontwerp)': 'OciWacht (diseño)',
   'Mogelijk geheim': 'Posibel sekreto',
   'sleutel of token': 'yabi òf token',
   'private sleutel': 'yabi privá',

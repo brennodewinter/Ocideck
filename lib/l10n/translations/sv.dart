@@ -1889,7 +1889,7 @@ const _dutchSourceAddSv = <String, String>{
   'genetisch gegeven': 'genetisk uppgift',
   'parketnummer': 'åklagarens ärendenummer',
   'nationaal identificatienummer': 'nationellt identifikationsnummer',
-  'Privacy Shield (ontwerp)': 'Privacy Shield (design)',
+  'OciWacht (ontwerp)': 'OciWacht (design)',
   'Mogelijk geheim': 'Möjlig hemlighet',
   'sleutel of token': 'nyckel eller token',
   'private sleutel': 'privat nyckel',

@@ -1891,7 +1891,7 @@ const _dutchSourceAddId = <String, String>{
   'genetisch gegeven': 'data genetik',
   'parketnummer': 'nomor perkara kejaksaan',
   'nationaal identificatienummer': 'nomor identifikasi nasional',
-  'Privacy Shield (ontwerp)': 'Privacy Shield (desain)',
+  'OciWacht (ontwerp)': 'OciWacht (desain)',
   'Mogelijk geheim': 'Kemungkinan rahasia',
   'sleutel of token': 'kunci atau token',
   'private sleutel': 'kunci privat',

@@ -1928,7 +1928,7 @@ const _dutchSourceAddGa = <String, String>{
   'genetisch gegeven': 'sonraí géiniteacha',
   'parketnummer': 'uimhir cháis ionchúisimh',
   'nationaal identificatienummer': 'uimhir aitheantais náisiúnta',
-  'Privacy Shield (ontwerp)': 'Privacy Shield (dearadh)',
+  'OciWacht (ontwerp)': 'OciWacht (dearadh)',
   'Mogelijk geheim': 'Rún féideartha',
   'sleutel of token': 'eochair nó comharthán',
   'private sleutel': 'eochair phríobháideach',

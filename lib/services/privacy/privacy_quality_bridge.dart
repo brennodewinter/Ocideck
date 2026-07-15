@@ -56,7 +56,7 @@ SlideQualityIssueKind _kindFor(PrivacyFamily family) {
 /// `qualityBlockExportOnErrors` bij bestaande gebruikers onbedoeld scherp zetten:
 /// wie die instelling ooit aanzette voor contrastfouten, zou ineens geen deck met
 /// een e-mailadres meer kunnen exporteren. De strengere variant komt als eigen
-/// instelling (PRIVACY_SHIELD §7), niet als bijwerking.
+/// instelling (OCIWACHT §7), niet als bijwerking.
 ///
 /// `possible` blijft informatief. Dat is waar de contextloze BSN-treffers landen,
 /// en die mogen niemand onderbreken — zie `privacy_scanner.dart`.

@@ -846,7 +846,7 @@ const _dutchSourceAddIt = {
   'genetisch gegeven': 'dato genetico',
   'parketnummer': 'numero di procedimento penale',
   'nationaal identificatienummer': 'numero di identificazione nazionale',
-  'Privacy Shield (ontwerp)': 'Privacy Shield (progetto)',
+  'OciWacht (ontwerp)': 'OciWacht (progetto)',
   'Mogelijk geheim': 'Possibile segreto',
   'sleutel of token': 'chiave o token',
   'private sleutel': 'chiave privata',
