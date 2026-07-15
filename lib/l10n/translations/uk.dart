@@ -1801,6 +1801,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Bevestigen': 'Підтвердити',
+  'Onderbouwing van de bevestiging': 'Обґрунтування підтвердження',
   'De eigenaar staat insluiten niet toe': 'Власник не дозволяє вбудовування',
   'Deze video is alleen op de bron zelf te bekijken.':
       'Це відео можна переглянути лише в самому джерелі.',

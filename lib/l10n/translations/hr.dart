@@ -1790,6 +1790,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Bevestigen': 'Potvrdi',
+  'Onderbouwing van de bevestiging': 'Obrazloženje potvrde',
   'De eigenaar staat insluiten niet toe': 'Vlasnik ne dopušta ugrađivanje',
   'Deze video is alleen op de bron zelf te bekijken.':
       'Ovaj se videozapis može gledati samo na samom izvoru.',

@@ -22,10 +22,14 @@ DeckNotifier _deckNotifier(Deck deck) {
   return notifier;
 }
 
-Deck _deck({Map<String, String> waivers = const {}}) => Deck(
+Deck _deck({
+  Map<String, String> waivers = const {},
+  Map<String, String> confirmations = const {},
+}) => Deck(
   title: 'Demo',
   slides: [Slide.create(SlideType.title).copyWith(title: 'Welkom')],
   miauwWaivers: waivers,
+  miauwConfirmations: confirmations,
 );
 
 const _localizations = [
@@ -153,5 +157,30 @@ void main() {
     expect(find.widgetWithText(TextButton, 'Opheffen'), findsNothing);
     expect(find.byIcon(Icons.warning_amber_outlined), findsNothing);
     expect(find.text('Geen digitale aanlevering'), findsNothing);
+  });
+
+  testWidgets('confirming a manual EIS reads as voldaan and can be withdrawn', (
+    tester,
+  ) async {
+    await _roomySurface(tester);
+    final notifier = _deckNotifier(
+      _deck(confirmations: const {'1.2': 'Rapporteur OSCP-gecertificeerd'}),
+    );
+    await tester.pumpWidget(_host(notifier));
+    await tester.tap(find.text('open'));
+    await tester.pumpAndSettle();
+
+    // A confirmed manual EIS carries its attestation note and offers to
+    // withdraw it (rather than the confirm/exclude actions of an open one).
+    expect(find.text('Rapporteur OSCP-gecertificeerd'), findsOneWidget);
+    expect(find.widgetWithText(TextButton, 'Intrekken'), findsOneWidget);
+
+    await tester.tap(find.widgetWithText(TextButton, 'Intrekken'));
+    await tester.pumpAndSettle();
+
+    // Withdrawing returns it to open: the note and the withdraw action are gone.
+    expect(notifier.currentState.deck!.miauwConfirmations, isEmpty);
+    expect(find.text('Rapporteur OSCP-gecertificeerd'), findsNothing);
+    expect(find.widgetWithText(TextButton, 'Intrekken'), findsNothing);
   });
 }

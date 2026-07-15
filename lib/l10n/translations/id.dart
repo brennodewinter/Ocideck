@@ -1783,6 +1783,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Bevestigen': 'Konfirmasi',
+  'Onderbouwing van de bevestiging': 'Dasar konfirmasi',
   'De eigenaar staat insluiten niet toe':
       'Pemilik tidak mengizinkan penyematan',
   'Deze video is alleen op de bron zelf te bekijken.':

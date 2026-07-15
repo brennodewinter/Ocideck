@@ -741,6 +741,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Bevestigen': 'Befêstigje',
+  'Onderbouwing van de bevestiging': 'Underbouwing fan de befêstiging',
   'De eigenaar staat insluiten niet toe': 'De eigner stiet ynsluten net ta',
   'Deze video is alleen op de bron zelf te bekijken.':
       'Dizze fideo is allinnich op de boarne sels te besjen.',

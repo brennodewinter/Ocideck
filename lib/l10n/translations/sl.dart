@@ -1785,6 +1785,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Bevestigen': 'Potrdi',
+  'Onderbouwing van de bevestiging': 'Utemeljitev potrditve',
   'De eigenaar staat insluiten niet toe': 'Lastnik ne dovoljuje vdelave',
   'Deze video is alleen op de bron zelf te bekijken.':
       'Ta video si je mogoče ogledati le v samem viru.',

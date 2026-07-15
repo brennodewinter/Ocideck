@@ -740,6 +740,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Bevestigen': 'Confirmer',
+  'Onderbouwing van de bevestiging': 'Justification de la confirmation',
   'De eigenaar staat insluiten niet toe':
       'Le propriétaire n\'autorise pas l\'intégration',
   'Deze video is alleen op de bron zelf te bekijken.':

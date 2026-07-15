@@ -922,6 +922,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Bevestigen': 'Confirm',
+  'Onderbouwing van de bevestiging': 'Basis for the confirmation',
   'De eigenaar staat insluiten niet toe': 'The owner doesn\'t allow embedding',
   'Deze video is alleen op de bron zelf te bekijken.':
       'This video can only be watched on the source itself.',

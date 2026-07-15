@@ -1796,6 +1796,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Bevestigen': 'Potwierdź',
+  'Onderbouwing van de bevestiging': 'Uzasadnienie potwierdzenia',
   'De eigenaar staat insluiten niet toe': 'Właściciel nie zezwala na osadzanie',
   'Deze video is alleen op de bron zelf te bekijken.':
       'To wideo można obejrzeć tylko w samym źródle.',

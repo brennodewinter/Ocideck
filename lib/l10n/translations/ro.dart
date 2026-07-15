@@ -1802,6 +1802,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Bevestigen': 'Confirmă',
+  'Onderbouwing van de bevestiging': 'Justificarea confirmării',
   'De eigenaar staat insluiten niet toe':
       'Proprietarul nu permite încorporarea',
   'Deze video is alleen op de bron zelf te bekijken.':

@@ -1774,6 +1774,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Bevestigen': 'Kinnita',
+  'Onderbouwing van de bevestiging': 'Kinnituse põhjendus',
   'De eigenaar staat insluiten niet toe': 'Omanik ei luba manustamist',
   'Deze video is alleen op de bron zelf te bekijken.':
       'Seda videot saab vaadata ainult allikas endas.',

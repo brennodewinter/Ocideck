@@ -1782,6 +1782,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Bevestigen': 'Bekräfta',
+  'Onderbouwing van de bevestiging': 'Motivering för bekräftelsen',
   'De eigenaar staat insluiten niet toe': 'Ägaren tillåter inte inbäddning',
   'Deze video is alleen op de bron zelf te bekijken.':
       'Den här videon kan bara ses på själva källan.',

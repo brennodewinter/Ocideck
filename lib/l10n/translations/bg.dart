@@ -1806,6 +1806,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Bevestigen': 'Потвърди',
+  'Onderbouwing van de bevestiging': 'Обосновка на потвърждението',
   'De eigenaar staat insluiten niet toe': 'Собственикът не разрешава вграждане',
   'Deze video is alleen op de bron zelf te bekijken.':
       'Това видео може да се гледа само в самия източник.',

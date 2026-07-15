@@ -1786,6 +1786,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Bevestigen': 'Potvrdit',
+  'Onderbouwing van de bevestiging': 'Odůvodnění potvrzení',
   'De eigenaar staat insluiten niet toe': 'Vlastník nepovoluje vkládání',
   'Deze video is alleen op de bron zelf te bekijken.':
       'Toto video lze zhlédnout jen na samotném zdroji.',

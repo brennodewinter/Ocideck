@@ -1791,6 +1791,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Bevestigen': 'Patvirtinti',
+  'Onderbouwing van de bevestiging': 'Patvirtinimo pagrindimas',
   'De eigenaar staat insluiten niet toe': 'Savininkas neleidžia įterpti',
   'Deze video is alleen op de bron zelf te bekijken.':
       'Šį vaizdo įrašą galima žiūrėti tik pačiame šaltinyje.',

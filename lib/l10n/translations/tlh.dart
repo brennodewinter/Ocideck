@@ -1758,6 +1758,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Bevestigen': 'wuq',
+  'Onderbouwing van de bevestiging': 'meq',
   'De eigenaar staat insluiten niet toe': 'ghajwI\' chaw\'be\'',
   'Deze video is alleen op de bron zelf te bekijken.':
       'mungDajDaq neH HaStavam bejlaHlu\'.',

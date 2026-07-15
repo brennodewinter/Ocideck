@@ -1806,6 +1806,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Bevestigen': 'Ikkonferma',
+  'Onderbouwing van de bevestiging': 'Ġustifikazzjoni tal-konferma',
   'De eigenaar staat insluiten niet toe':
       'Is-sid ma jippermettix l-inkorporazzjoni',
   'Deze video is alleen op de bron zelf te bekijken.':

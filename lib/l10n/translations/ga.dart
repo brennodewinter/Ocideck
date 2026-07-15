@@ -1819,6 +1819,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Bevestigen': 'Deimhnigh',
+  'Onderbouwing van de bevestiging': 'Bunús an dearbhaithe',
   'De eigenaar staat insluiten niet toe': 'Ní cheadaíonn an t-úinéir leabú',
   'Deze video is alleen op de bron zelf te bekijken.':
       'Ní féidir an físeán seo a fheiceáil ach ar an bhfoinse féin.',
