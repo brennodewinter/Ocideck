@@ -136,6 +136,48 @@ void main() {
     expect(second.continuesSplit, isTrue);
   });
 
+  test('splitSlide breaks between groups so a heading is never stranded', () {
+    // Layout-metingen gebruiken TextPainter; binding moet geïnitialiseerd zijn.
+    TestWidgetsFlutterBinding.ensureInitialized();
+    final n = _notifier()..newDeck('D');
+    final items = <String>[
+      groupHeadingBullet('Ochtend'),
+      for (var i = 1; i <= 4; i++) 'Bullet $i met wat tekst erbij',
+      groupHeadingBullet('Middag'),
+      for (var i = 5; i <= 8; i++) 'Bullet $i met wat tekst erbij',
+      groupHeadingBullet('Avond'),
+      for (var i = 9; i <= 12; i++) 'Bullet $i met wat tekst erbij',
+    ];
+    n.addSlide(SlideType.bullets, afterIndex: 0);
+    n.updateSlide(
+      1,
+      n.state.deck!.slides[1].copyWith(title: 'X', bullets: items),
+    );
+
+    n.splitSlide(1);
+
+    final slides = n.state.deck!.slides;
+    expect(slides, hasLength(3));
+    final first = slides[1];
+    final second = slides[2];
+    // Split falls on a group boundary: page 2 opens with a heading and page 1
+    // does not end on one (no heading stranded with a stray bullet).
+    expect(isGroupHeading(second.bullets.first), isTrue);
+    expect(isGroupHeading(first.bullets.last), isFalse);
+    // Every heading kept on page 1 still has at least one bullet under it there.
+    for (var i = 0; i < first.bullets.length; i++) {
+      if (isGroupHeading(first.bullets[i])) {
+        expect(
+          i + 1 < first.bullets.length && !isGroupHeading(first.bullets[i + 1]),
+          isTrue,
+          reason: 'heading at $i has no bullet under it on page 1',
+        );
+      }
+    }
+    // Nothing is lost or reordered.
+    expect([...first.bullets, ...second.bullets], items);
+  });
+
   test('splitSlide marks the second column-split half as a continuation', () {
     TestWidgetsFlutterBinding.ensureInitialized();
     final n = _notifier()..newDeck('D');
