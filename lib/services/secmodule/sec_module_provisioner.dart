@@ -66,6 +66,17 @@ abstract class SecPackStore {
     required String expectedHash,
   });
 
+  /// Load the cached pack for [version], or null when nothing valid is cached.
+  /// This is the read side of [save]: the module's reference-data consumers pull
+  /// their catalogs through it once the module is provisioned. The recorded
+  /// outer hash must still match [expectedHash] and every data file must still
+  /// match its manifest sha256 (so an on-disk-tampered cache is refused, not
+  /// served); otherwise null.
+  Future<SecPackContents?> read({
+    required String version,
+    required String expectedHash,
+  });
+
   /// Persist the verified [contents] of the pack that hashed to [outerHash]
   /// under [version]. Replaces any previous cache for that version.
   Future<void> save({

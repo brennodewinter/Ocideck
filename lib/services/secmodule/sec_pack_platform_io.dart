@@ -1,5 +1,6 @@
 // Desktop/mobile (dart:io) implementation of the module-pack platform layer:
 // the SSRF-hardened network transport and the app-support cache store.
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -74,14 +75,22 @@ class NetGuardSecPackTransport implements SecPackTransport {
 /// can confirm the cache without re-fetching. Writes go through the atomic-file
 /// helpers.
 class FileSecPackStore implements SecPackStore {
+  /// [baseDir] overrides the cache root (tests point it at a temp dir); it
+  /// defaults to `<app-support>/secmodule/`.
+  FileSecPackStore({Directory? baseDir}) : _baseOverride = baseDir;
+
+  final Directory? _baseOverride;
   Directory? _baseDir;
 
   static const _metaName = '_pack_meta.json';
+  static const _manifestName = '_manifest.json';
 
   Future<Directory> _base() async {
-    return _baseDir ??= Directory(
-      p.join((await getApplicationSupportDirectory()).path, 'secmodule'),
-    );
+    return _baseDir ??=
+        _baseOverride ??
+        Directory(
+          p.join((await getApplicationSupportDirectory()).path, 'secmodule'),
+        );
   }
 
   Future<Directory> _versionDir(String version) async {
@@ -127,8 +136,46 @@ class FileSecPackStore implements SecPackStore {
       await out.parent.create(recursive: true);
       await writeBytesAtomic(out, entry.value);
     }
+    // Persist the manifest so read() can reconstruct + re-verify the contents;
+    // the meta marker is still written LAST as the completion signal.
+    final manifest = File(p.join(dir.path, _manifestName));
+    await writeStringAtomic(manifest, jsonEncode(contents.manifest.toJson()));
     final meta = File(p.join(dir.path, _metaName));
     await writeStringAtomic(meta, '$version\n$outerHash');
+  }
+
+  @override
+  Future<SecPackContents?> read({
+    required String version,
+    required String expectedHash,
+  }) async {
+    try {
+      // Only trust a cache whose completion marker still matches version+hash.
+      final cached = await cachedVersion(
+        version: version,
+        expectedHash: expectedHash,
+      );
+      if (cached == null) return null;
+      final dir = await _versionDir(version);
+      final manifestFile = File(p.join(dir.path, _manifestName));
+      if (!await manifestFile.exists()) return null;
+      final manifest = SecPackManifest.fromJson(
+        jsonDecode(await manifestFile.readAsString()) as Map<String, Object?>,
+      );
+      final files = <String, Uint8List>{};
+      for (final entry in manifest.files) {
+        final f = _safeOutFile(dir, entry.name);
+        if (f == null || !await f.exists()) return null;
+        final bytes = await f.readAsBytes();
+        // Re-verify on read: a tampered cache file must not reach a consumer.
+        if (secPackSha256Hex(bytes) != entry.sha256) return null;
+        files[entry.name] = bytes;
+      }
+      return SecPackContents(manifest: manifest, files: files);
+    } catch (e) {
+      logWarning('FileSecPackStore: pack lezen mislukt', e);
+      return null;
+    }
   }
 
   @override

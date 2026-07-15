@@ -35,6 +35,12 @@ class _NullSecPackStore implements SecPackStore {
   }) async => null;
 
   @override
+  Future<SecPackContents?> read({
+    required String version,
+    required String expectedHash,
+  }) async => null;
+
+  @override
   Future<void> save({
     required String version,
     required String outerHash,
