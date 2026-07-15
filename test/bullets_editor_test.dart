@@ -512,6 +512,52 @@ Paragraaf met **vet** en wat extra tekst zodat de layout echt iets te doen heeft
     expect(isGroupHeading(updated.bullets.first), isFalse);
   });
 
+  testWidgets('removing a group-heading row drops it and keeps the bullets', (
+    tester,
+  ) async {
+    var updated = Slide.create(
+      SlideType.bullets,
+    ).copyWith(bullets: [groupHeadingBullet('Kop'), 'Een', 'Twee']);
+
+    await tester.pumpWidget(
+      _testApp(
+        BulletsEditor(slide: updated, onUpdate: (slide) => updated = slide),
+      ),
+    );
+    await tester.pump();
+
+    await tester.tap(find.byKey(const ValueKey('remove-bullet-0')));
+    await tester.pump();
+
+    expect(updated.bullets, ['Een', 'Twee']);
+    expect(updated.bullets.any(isGroupHeading), isFalse);
+  });
+
+  testWidgets('adding a bullet after a heading yields a level-0 bullet', (
+    tester,
+  ) async {
+    var updated = Slide.create(
+      SlideType.bullets,
+    ).copyWith(bullets: [groupHeadingBullet('Kop')]);
+
+    await tester.pumpWidget(
+      _testApp(
+        BulletsEditor(slide: updated, onUpdate: (slide) => updated = slide),
+      ),
+    );
+    await tester.pump();
+
+    // The bottom "Bullet toevoegen" adds after the last row (the heading); the
+    // new row is an ordinary, non-indented bullet, not another heading.
+    await tester.tap(find.text('Bullet toevoegen'));
+    await tester.pump();
+
+    expect(updated.bullets.length, 2);
+    expect(isGroupHeading(updated.bullets[0]), isTrue);
+    expect(isGroupHeading(updated.bullets[1]), isFalse);
+    expect(updated.bullets[1].startsWith('\t'), isFalse);
+  });
+
   testWidgets('a slide with a heading loads into the editor as a heading row', (
     tester,
   ) async {
