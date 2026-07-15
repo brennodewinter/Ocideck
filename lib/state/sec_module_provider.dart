@@ -127,8 +127,15 @@ class SecModuleNotifier extends Notifier<SecModuleState> {
         clearProvisionedVersion: !provisioned,
         loading: false,
       );
-      // Drop a stale prefs entry so state and prefs stay in step.
-      if (!provisioned && version != null) {
+      if (enabled && !provisioned) {
+        // The web cache store persists nothing, so a page reload drops the
+        // provisioned marker while the toggle stays on — the module would
+        // silently lose its slide types and commands. Re-provision from the
+        // bundled pack (offline, no consent) so it re-reveals. On desktop this
+        // only runs if the on-disk cache was lost.
+        await _provision();
+      } else if (!provisioned && version != null) {
+        // Drop a stale prefs entry so state and prefs stay in step.
         await prefs.remove(_versionKey);
       }
     } catch (e) {
