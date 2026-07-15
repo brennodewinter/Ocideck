@@ -1,9 +1,13 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import '../models/deck.dart';
 import '../models/findings_summary_spec.dart';
 import 'cvss/cvss4.dart';
 import 'evidence_hash_service.dart';
 import 'management_summary.dart';
 import 'miauw_compliance_analyzer.dart';
+import 'rfc3161_timestamp.dart';
 
 /// The audit-dossier index (PENTEST_MIAUW §10.11): a deterministic Markdown
 /// document that travels **inside** the one-click audit package next to the
@@ -67,16 +71,38 @@ String buildAuditDossier(
     meta('Zegel-algoritme', deck.sealAlgo);
     meta('Zegel-hash', deck.sealHash);
     meta('Verzegeld op', deck.sealAt);
-    b.writeln(
-      '- **RFC 3161-tijdstempel:** '
-      '${deck.sealTimestampToken.trim().isNotEmpty ? 'aanwezig' : 'afwezig'}',
-    );
+    // The imprint is checked against the seal hash, but the token's CMS
+    // signature and TSA certificate chain are deliberately NOT verified in-app
+    // (see rfc3161_timestamp.dart, §8-A3). So genTime is the token's *claim*,
+    // never assert external time-anchoring here — that would overstate what was
+    // checked, exactly the badge the seal dialog refuses to show.
+    final tsToken = _decodeTimestampToken(deck.sealTimestampToken);
+    final tsParsed = tsToken == null ? null : parseTimeStampToken(tsToken);
+    final tsMatches =
+        tsToken != null && timeStampMatchesHash(tsToken, deck.sealHash);
+    if (deck.sealTimestampToken.trim().isEmpty) {
+      b.writeln('- **RFC 3161-tijdstempel:** afwezig');
+    } else if (tsParsed == null || !tsMatches) {
+      b.writeln(
+        '- **RFC 3161-tijdstempel:** aanwezig, maar de imprint komt niet '
+        'overeen met de zegel-hash — niet bruikbaar als tijdsbewijs',
+      );
+    } else {
+      b.writeln(
+        '- **RFC 3161-tijdstempel:** aanwezig; imprint komt overeen '
+        '(TSA-handtekening niet in-app geverifieerd)',
+      );
+      meta('Getijdstempeld op (claim)', tsParsed.genTime.toIso8601String());
+    }
     b.writeln();
     b.writeln(
       'Controleer de integriteit door de ${deck.sealAlgo}-hash van de '
       'gekanoniseerde rapportinhoud te herberekenen en te vergelijken met de '
-      'zegel-hash hierboven; een aanwezig RFC 3161-token verankert die hash '
-      'extern in de tijd.',
+      'zegel-hash hierboven. Een RFC 3161-token bindt die hash aan een '
+      'tijdstip, maar OciDeck verifieert de TSA-handtekening en '
+      'certificaatketen niet in-app; het getoonde tijdstip is dus een claim '
+      'van het token, geen geverifieerd feit. Voor onweerlegbare '
+      'tijdsverankering moet het token tegen de TSA worden geverifieerd.',
     );
   } else {
     b.writeln();
@@ -118,4 +144,16 @@ String buildAuditDossier(
   b.writeln();
 
   return b.toString();
+}
+
+/// Decode the base64url-encoded RFC 3161 token as stored on the deck (see
+/// [Deck.sealTimestampToken]); null when empty or malformed.
+Uint8List? _decodeTimestampToken(String base64Token) {
+  final trimmed = base64Token.trim();
+  if (trimmed.isEmpty) return null;
+  try {
+    return base64Url.decode(trimmed);
+  } on FormatException {
+    return null;
+  }
 }

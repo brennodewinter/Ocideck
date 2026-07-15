@@ -1,8 +1,62 @@
+import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/services/audit_dossier.dart';
 import 'package:ocideck/services/evidence_hash_service.dart';
 import 'package:ocideck/services/miauw_compliance_analyzer.dart';
+import 'package:ocideck/utils/asn1_der.dart';
+
+const _sha512Oid = [0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x03];
+const _idSignedData = [0x2a, 0x86, 0x48, 0x86, 0xf7, 0x0d, 0x01, 0x07, 0x02];
+const _idCtTstInfo = [
+  0x2a, 0x86, 0x48, 0x86, 0xf7, 0x0d, 0x01, 0x09, 0x10, 0x01, 0x04, //
+];
+
+List<int> _bytesFromHex(String hex) => [
+  for (var i = 0; i < hex.length; i += 2)
+    int.parse(hex.substring(i, i + 2), radix: 16),
+];
+
+/// A structurally-faithful RFC 3161 token whose message imprint is [hash],
+/// base64url-encoded exactly as the deck stores it (see rfc3161_timestamp_test
+/// for the wire shape). The CMS signature is not present — matching how the app
+/// only checks the imprint, never the TSA signature.
+String _tsr(List<int> hash, {String genTime = '20260712120000Z'}) {
+  final tstInfo = derSequence([
+    derInteger(1),
+    derOid(const [0x2b, 0x06, 0x01]),
+    derSequence([
+      derSequence([derOid(_sha512Oid), derNull()]),
+      derOctetString(hash),
+    ]),
+    derInteger(42),
+    derTlv(0x18, genTime.codeUnits),
+  ]);
+  final token = derSequence([
+    derOid(_idSignedData),
+    derTlv(
+      0xa0,
+      derSequence([
+        derTlv(
+          0x31,
+          derSequence([
+            derSequence([derOid(_sha512Oid), derNull()]),
+          ]),
+        ),
+        derSequence([
+          derOid(_idCtTstInfo),
+          derTlv(0xa0, derOctetString(tstInfo)),
+        ]),
+      ]),
+    ),
+  ]);
+  return base64Url.encode(token);
+}
+
+/// The seal hash used by [sealedDeck], as raw bytes — a token built over these
+/// bytes has a message imprint that matches the deck's seal.
+final _sealHashBytes = _bytesFromHex('abc123def456');
 
 /// The audit-dossier index (PENTEST_MIAUW §10.11) is a deterministic Markdown
 /// restatement of the report identity, seal facts, summary, compliance overview
@@ -37,9 +91,36 @@ void main() {
       expect(md, contains('RFC 3161-tijdstempel:** afwezig'));
     });
 
-    test('an RFC 3161 token is reported as present', () {
-      final md = buildAuditDossier(sealedDeck(tsr: 'TOKENBASE64URL'));
-      expect(md, contains('RFC 3161-tijdstempel:** aanwezig'));
+    test('a matching token is reported present but not signature-verified', () {
+      final md = buildAuditDossier(sealedDeck(tsr: _tsr(_sealHashBytes)));
+      expect(
+        md,
+        contains('RFC 3161-tijdstempel:** aanwezig; imprint komt overeen'),
+      );
+      expect(md, contains('TSA-handtekening niet in-app geverifieerd'));
+      // The claimed genTime is surfaced as a claim, not a checked fact.
+      expect(md, contains('Getijdstempeld op (claim)'));
+    });
+
+    test('a token whose imprint does not match the seal is flagged', () {
+      // A structurally-valid token over different bytes than the seal hash.
+      final md = buildAuditDossier(
+        sealedDeck(tsr: _tsr(_bytesFromHex('0011223344'))),
+      );
+      expect(md, contains('imprint komt niet overeen met de zegel-hash'));
+    });
+
+    test('a malformed token string is flagged, not reported as anchored', () {
+      final md = buildAuditDossier(sealedDeck(tsr: 'not-a-valid-token'));
+      expect(md, contains('imprint komt niet overeen met de zegel-hash'));
+    });
+
+    test('never claims unverified external time-anchoring', () {
+      final md = buildAuditDossier(sealedDeck(tsr: _tsr(_sealHashBytes)));
+      // The old wording overstated what was checked.
+      expect(md, isNot(contains('verankert die hash extern in de tijd')));
+      // Instead it states the honest limitation.
+      expect(md, contains('geen geverifieerd feit'));
     });
 
     test('an unsealed deck warns instead of stating a seal', () {
