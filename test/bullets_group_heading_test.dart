@@ -99,6 +99,28 @@ void main() {
       expect(tester.takeException(), isNull);
     });
 
+    testWidgets('headings render in a bullets+image slide', (tester) async {
+      final slide = Slide.create(SlideType.bulletsImage).copyWith(
+        title: 'Programma',
+        bullets: [
+          groupHeadingBullet('Ochtend'),
+          'Inloop',
+          groupHeadingBullet('Middag'),
+          'Workshops',
+        ],
+      );
+
+      await tester.pumpWidget(_host(slide));
+      await tester.pump();
+
+      expect(find.text('Ochtend'), findsOneWidget);
+      expect(find.text('Middag'), findsOneWidget);
+      final middagTop = tester.getTopLeft(find.text('Middag')).dy;
+      final workshopsTop = tester.getTopLeft(find.text('Workshops')).dy;
+      expect(middagTop, lessThan(workshopsTop));
+      expect(tester.takeException(), isNull);
+    });
+
     testWidgets('a wordless divider renders without overflowing', (
       tester,
     ) async {
