@@ -8,6 +8,12 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Changed
+- **The privacy feature is now called OciWacht.** "Privacy Shield" was a
+  confusing name — it collides with the (invalidated) EU–US Privacy Shield
+  data-transfer framework, which this feature has nothing to do with. The
+  privacy scan, the per-slide dispositions and the enforced egress boundary are
+  now branded **OciWacht** throughout the app and the documentation (design spec
+  renamed `docs/design/OCIWACHT.md`). Behaviour is unchanged; this is a rename.
 - **The PrivacyKat mark now appears where privacy-sensitive risks are pointed
   out, not only as an egress marker.** The shield was designed as the product's
   mark for personal data, but it only ever showed up next to "this deck came from

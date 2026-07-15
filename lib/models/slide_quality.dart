@@ -33,7 +33,7 @@ enum SlideQualityIssueKind {
   bulletColumnImbalance,
   questionNotAnswerable,
 
-  // ── Privacy (PRIVACY_SHIELD §2.1) ─────────────────────────────────────────
+  // ── Privacy (OCIWACHT §2.1) ─────────────────────────────────────────
   // Eén kind per familie, niet één per regel: de regelverzameling groeit naar
   // tientallen en `formatSlideQualityIssue` is een exhaustieve switch. De
   // concrete regel zit in `args['rule']` en wordt los gelokaliseerd.

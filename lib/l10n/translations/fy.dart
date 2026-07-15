@@ -847,7 +847,7 @@ const _dutchSourceAddFy = {
   'genetisch gegeven': 'genetysk gegeven',
   'parketnummer': 'parketnûmer',
   'nationaal identificatienummer': 'nasjonaal identifikaasjenûmer',
-  'Privacy Shield (ontwerp)': 'Privacy Shield (ûntwerp)',
+  'OciWacht (ontwerp)': 'OciWacht (ûntwerp)',
   'Mogelijk geheim': 'Mooglik geheim',
   'sleutel of token': 'kaai of token',
   'private sleutel': 'privee kaai',

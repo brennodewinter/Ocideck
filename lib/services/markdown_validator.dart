@@ -139,7 +139,7 @@ class MarkdownValidator {
     'ocideck_image_focus2',
     'ocideck_image_alt',
     'ocideck_image_alt2',
-    // Per-slide privacy disposition (PRIVACY_SHIELD §4.2): accept / shield /
+    // Per-slide privacy disposition (OCIWACHT §4.2): accept / shield /
     // redact. Zonder deze regel meldt de checker een onbekende directive.
     'ocideck_privacy',
   };

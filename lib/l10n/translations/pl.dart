@@ -1905,7 +1905,7 @@ const _dutchSourceAddPl = <String, String>{
   'genetisch gegeven': 'dane genetyczne',
   'parketnummer': 'sygnatura sprawy karnej',
   'nationaal identificatienummer': 'krajowy numer identyfikacyjny',
-  'Privacy Shield (ontwerp)': 'Privacy Shield (projekt)',
+  'OciWacht (ontwerp)': 'OciWacht (projekt)',
   'Mogelijk geheim': 'Możliwy sekret',
   'sleutel of token': 'klucz lub token',
   'private sleutel': 'klucz prywatny',

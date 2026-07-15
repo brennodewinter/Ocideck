@@ -1888,7 +1888,7 @@ const _dutchSourceAddDa = <String, String>{
   'genetisch gegeven': 'genetisk oplysning',
   'parketnummer': 'sagsnummer hos anklagemyndigheden',
   'nationaal identificatienummer': 'nationalt identifikationsnummer',
-  'Privacy Shield (ontwerp)': 'Privacy Shield (design)',
+  'OciWacht (ontwerp)': 'OciWacht (design)',
   'Mogelijk geheim': 'Mulig hemmelighed',
   'sleutel of token': 'nøgle eller token',
   'private sleutel': 'privat nøgle',

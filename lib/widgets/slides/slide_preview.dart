@@ -571,7 +571,7 @@ class SlidePreviewWidget extends StatelessWidget {
                       // krijgt de badge automatisch — er is geen parameter om te
                       // vergeten.
                       if (slide.privacy == PrivacyDisposition.shield)
-                        _PrivacyShieldOverlay(
+                        _OciWachtOverlay(
                           w: w,
                           tlpTakesLeft:
                               markingTlp != TlpLevel.none &&

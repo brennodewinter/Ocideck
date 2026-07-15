@@ -168,7 +168,7 @@ also declares them, but see the [CI note](#continuous-integration).)
     adds a fourth export format in six months, hands it a `Deck`, and the
     guarantee is quietly gone without a single test going red. A convention in a
     design document does not stop data; a compile error does. See
-    `audienceBoundary` in the tool and `docs/design/PRIVACY_SHIELD.md` §6;
+    `audienceBoundary` in the tool and `docs/design/OCIWACHT.md` §6;
 - **Failure means:** route the diagnostic through `logError`; **or** replace the
   literal colour with an `AppTheme` token (then lower `rawColorBaseline`); **or**
   split the oversized file (then lower its `fileSizeBaseline` entry — the run

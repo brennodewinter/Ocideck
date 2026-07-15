@@ -1920,7 +1920,7 @@ const _dutchSourceAddEl = <String, String>{
   'genetisch gegeven': 'γενετικό δεδομένο',
   'parketnummer': 'αριθμός δικογραφίας',
   'nationaal identificatienummer': 'εθνικός αριθμός ταυτοποίησης',
-  'Privacy Shield (ontwerp)': 'Privacy Shield (σχεδιασμός)',
+  'OciWacht (ontwerp)': 'OciWacht (σχεδιασμός)',
   'Mogelijk geheim': 'Πιθανό μυστικό',
   'sleutel of token': 'κλειδί ή διακριτικό',
   'private sleutel': 'ιδιωτικό κλειδί',

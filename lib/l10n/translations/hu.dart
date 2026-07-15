@@ -1895,7 +1895,7 @@ const _dutchSourceAddHu = <String, String>{
   'genetisch gegeven': 'genetikai adat',
   'parketnummer': 'ügyészségi ügyszám',
   'nationaal identificatienummer': 'nemzeti azonosító szám',
-  'Privacy Shield (ontwerp)': 'Privacy Shield (terv)',
+  'OciWacht (ontwerp)': 'OciWacht (terv)',
   'Mogelijk geheim': 'Lehetséges titok',
   'sleutel of token': 'kulcs vagy token',
   'private sleutel': 'privát kulcs',

@@ -21,7 +21,7 @@ import '../../theme/app_theme.dart';
 /// compacte samenvattingschip zodat beide dezelfde tellingen tonen. Gebruik
 /// `.value` (niet `.asData?.value`) zodat de vorige uitslag blijft staan
 /// terwijl de FutureProvider herlaadt — anders knippert de melding weg.
-/// Privacybevindingen worden er als eigen categorie in gemengd (PRIVACY_SHIELD
+/// Privacybevindingen worden er als eigen categorie in gemengd (OCIWACHT
 /// §2.1): een eigen paneel zou een tweede plek zijn om te kijken, en de
 /// gebruiker kijkt hier al.
 SlideQualityResult combinedSlideQualityResult(WidgetRef ref) {

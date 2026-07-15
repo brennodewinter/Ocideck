@@ -1915,7 +1915,7 @@ const _dutchSourceAddMt = <String, String>{
   'genetisch gegeven': 'data ġenetika',
   'parketnummer': 'numru tal-kawża tal-prosekuzzjoni',
   'nationaal identificatienummer': 'numru ta\' identifikazzjoni nazzjonali',
-  'Privacy Shield (ontwerp)': 'Privacy Shield (disinn)',
+  'OciWacht (ontwerp)': 'OciWacht (disinn)',
   'Mogelijk geheim': 'Sigriet possibbli',
   'sleutel of token': 'ċavetta jew token',
   'private sleutel': 'ċavetta privata',

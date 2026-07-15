@@ -10,7 +10,7 @@ import 'package:ocideck/services/export_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/privacy/privacy_projection.dart';
 
-// De invariant van de hele feature (PRIVACY_SHIELD §6.5):
+// De invariant van de hele feature (OCIWACHT §6.5):
 //
 //   DE GEREDIGEERDE WAARDE KOMT IN GEEN ENKEL ONTVANGEND ARTEFACT VOOR.
 //

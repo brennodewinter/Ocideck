@@ -144,7 +144,7 @@ class PrivacyScanner {
     ];
   }
 
-  /// De co-occurrence-escalator (PRIVACY_SHIELD §5.6).
+  /// De co-occurrence-escalator (OCIWACHT §5.6).
   ///
   /// Een trefwoord als "diagnose" of "verdachte" meldt op zichzelf niets dat de
   /// gebruiker onderbreekt — een slide *óver* de AVG noemt die woorden nu eenmaal,

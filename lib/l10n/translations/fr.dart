@@ -851,7 +851,7 @@ const _dutchSourceAddFr = {
   'genetisch gegeven': 'donnée génétique',
   'parketnummer': 'numéro de dossier du parquet',
   'nationaal identificatienummer': 'numéro d\'identification national',
-  'Privacy Shield (ontwerp)': 'Privacy Shield (conception)',
+  'OciWacht (ontwerp)': 'OciWacht (conception)',
   'Mogelijk geheim': 'Secret possible',
   'sleutel of token': 'clé ou jeton',
   'private sleutel': 'clé privée',

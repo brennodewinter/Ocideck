@@ -1881,7 +1881,7 @@ const _dutchSourceAddEt = <String, String>{
   'genetisch gegeven': 'geneetilised andmed',
   'parketnummer': 'kriminaalasja number',
   'nationaal identificatienummer': 'riiklik isikukood',
-  'Privacy Shield (ontwerp)': 'Privacy Shield (kavand)',
+  'OciWacht (ontwerp)': 'OciWacht (kavand)',
   'Mogelijk geheim': 'Võimalik saladus',
   'sleutel of token': 'võti või luba',
   'private sleutel': 'privaatvõti',

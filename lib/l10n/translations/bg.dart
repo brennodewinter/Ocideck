@@ -1913,7 +1913,7 @@ const _dutchSourceAddBg = <String, String>{
   'genetisch gegeven': 'генетични данни',
   'parketnummer': 'номер на прокурорска преписка',
   'nationaal identificatienummer': 'национален идентификационен номер',
-  'Privacy Shield (ontwerp)': 'Privacy Shield (проект)',
+  'OciWacht (ontwerp)': 'OciWacht (проект)',
   'Mogelijk geheim': 'Възможна тайна',
   'sleutel of token': 'ключ или токен',
   'private sleutel': 'частен ключ',

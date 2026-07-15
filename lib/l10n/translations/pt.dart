@@ -1923,7 +1923,7 @@ const _dutchSourceAddPt = <String, String>{
   'genetisch gegeven': 'dado genético',
   'parketnummer': 'número de processo do Ministério Público',
   'nationaal identificatienummer': 'número de identificação nacional',
-  'Privacy Shield (ontwerp)': 'Privacy Shield (design)',
+  'OciWacht (ontwerp)': 'OciWacht (design)',
   'Mogelijk geheim': 'Possível segredo',
   'sleutel of token': 'chave ou token',
   'private sleutel': 'chave privada',

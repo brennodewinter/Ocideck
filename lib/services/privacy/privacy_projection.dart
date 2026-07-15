@@ -13,7 +13,7 @@
 // private constructor en is alleen in deze library te maken. Een ontvangend
 // oppervlak dat een AudienceDeck eist, kan de ongeredigeerde bron dus niet eens
 // ontvangen — ook niet als een toekomstig exportformaat het zou proberen. Zie
-// docs/design/PRIVACY_SHIELD.md §6.
+// docs/design/OCIWACHT.md §6.
 //
 // De bron blijft ongemoeid: wat de gebruiker opslaat is en blijft de
 // oorspronkelijke markdown. Redactie geldt voor wat je *toont en exporteert*.

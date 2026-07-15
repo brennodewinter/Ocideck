@@ -1898,7 +1898,7 @@ const _dutchSourceAddHr = <String, String>{
   'genetisch gegeven': 'genetski podatak',
   'parketnummer': 'broj kaznenog predmeta',
   'nationaal identificatienummer': 'nacionalni identifikacijski broj',
-  'Privacy Shield (ontwerp)': 'Privacy Shield (nacrt)',
+  'OciWacht (ontwerp)': 'OciWacht (nacrt)',
   'Mogelijk geheim': 'Moguća tajna',
   'sleutel of token': 'ključ ili token',
   'private sleutel': 'privatni ključ',

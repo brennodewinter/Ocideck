@@ -92,8 +92,8 @@ extension _SettingsDocs on _SettingsDialogState {
           entries: [
             DocEntry(
               icon: Icons.privacy_tip_outlined,
-              title: l10n.d('Privacy Shield (ontwerp)'),
-              assetBase: 'docs/design/PRIVACY_SHIELD.md',
+              title: l10n.d('OciWacht (ontwerp)'),
+              assetBase: 'docs/design/OCIWACHT.md',
             ),
             DocEntry(
               icon: Icons.groups_outlined,
