@@ -741,6 +741,11 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Maak een tussenkop': 'Meitsje in tuskenkop',
+  'Maak er weer een bullet van': 'Wer in bullet fan meitsje',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Tuskenkop (leech = allinnich in skiedingsstreek)',
+  'Tussenkop toevoegen': 'Tuskenkop tafoegje',
   'Bevestigen': 'Befêstigje',
   'Onderbouwing van de bevestiging': 'Underbouwing fan de befêstiging',
   'De eigenaar staat insluiten niet toe': 'De eigner stiet ynsluten net ta',

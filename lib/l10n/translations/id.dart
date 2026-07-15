@@ -1783,6 +1783,11 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Maak een tussenkop': 'Buat subjudul',
+  'Maak er weer een bullet van': 'Ubah kembali menjadi butir',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Subjudul (kosong = hanya garis pemisah)',
+  'Tussenkop toevoegen': 'Tambah subjudul',
   'Bevestigen': 'Konfirmasi',
   'Onderbouwing van de bevestiging': 'Dasar konfirmasi',
   'De eigenaar staat insluiten niet toe':

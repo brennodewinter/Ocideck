@@ -37,6 +37,7 @@ class _BulletsEditorState extends State<BulletsEditor> {
   late List<TextEditingController> _bullets;
   late List<int> _levels;
   late List<bool> _checked;
+  late List<bool> _isHeading;
   late List<FocusNode> _focusNodes;
   late ListStyle _listStyle;
   BulletMarker? _bulletMarkerOverride;
@@ -66,9 +67,18 @@ class _BulletsEditorState extends State<BulletsEditor> {
 
   void _initBullets(List<String> raw) {
     final list = raw.isEmpty ? [''] : raw;
-    _levels = list.map(_levelOf).toList();
-    _checked = list.map(checklistItemChecked).toList();
-    _bullets = list.map((b) => _makeCtrl(checklistItemText(b))).toList();
+    _isHeading = list.map(isGroupHeading).toList();
+    _levels = list.map((b) => isGroupHeading(b) ? 0 : _levelOf(b)).toList();
+    _checked = list
+        .map((b) => isGroupHeading(b) ? false : checklistItemChecked(b))
+        .toList();
+    _bullets = list
+        .map(
+          (b) => _makeCtrl(
+            isGroupHeading(b) ? groupHeadingText(b) : checklistItemText(b),
+          ),
+        )
+        .toList();
     _focusNodes = List.generate(_bullets.length, (_) => FocusNode());
   }
 
@@ -104,16 +114,16 @@ class _BulletsEditorState extends State<BulletsEditor> {
             : widget.slide.customMarkdown,
         bullets: _listStyle == ListStyle.richText
             ? widget.slide.bullets
-            : List.generate(
-                _bullets.length,
-                (i) => _listStyle == ListStyle.checklist
+            : List.generate(_bullets.length, (i) {
+                if (_isHeading[i]) return groupHeadingBullet(_bullets[i].text);
+                return _listStyle == ListStyle.checklist
                     ? checklistBullet(
                         level: _levels[i],
                         text: _bullets[i].text,
                         checked: _checked[i],
                       )
-                    : '\t' * _levels[i] + _bullets[i].text,
-              ),
+                    : '\t' * _levels[i] + _bullets[i].text;
+              }),
       ),
     );
   }
@@ -127,27 +137,53 @@ class _BulletsEditorState extends State<BulletsEditor> {
       final ctrl = _bullets.removeAt(oldIndex);
       final level = _levels.removeAt(oldIndex);
       final checked = _checked.removeAt(oldIndex);
+      final heading = _isHeading.removeAt(oldIndex);
       final focus = _focusNodes.removeAt(oldIndex);
       _bullets.insert(newIndex, ctrl);
       _levels.insert(newIndex, level);
       _checked.insert(newIndex, checked);
+      _isHeading.insert(newIndex, heading);
       _focusNodes.insert(newIndex, focus);
     });
     _emit();
   }
 
   void _addBulletAfter(int i) {
-    final newLevel = _levels[i]; // inherit current level
+    // A new item inherits the row's indent, but never its heading-ness — Enter
+    // after a heading starts an ordinary bullet in the group it introduces.
+    final newLevel = _isHeading[i] ? 0 : _levels[i];
+    _insertItemAfter(i, level: newLevel, heading: false);
+  }
+
+  /// Inserts a wordless group heading below row [i] and focuses it.
+  void _addHeadingAfter(int i) => _insertItemAfter(i, level: 0, heading: true);
+
+  void _insertItemAfter(int i, {required int level, required bool heading}) {
     setState(() {
       _bullets.insert(i + 1, _makeCtrl(''));
-      _levels.insert(i + 1, newLevel);
+      _levels.insert(i + 1, level);
       _checked.insert(i + 1, false);
+      _isHeading.insert(i + 1, heading);
       _focusNodes.insert(i + 1, FocusNode());
     });
     _emit();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (i + 1 < _focusNodes.length) _focusNodes[i + 1].requestFocus();
     });
+  }
+
+  /// Flips row [i] between an ordinary bullet and a group heading. A heading is
+  /// always level 0 and unchecked.
+  void _toggleHeading(int i) {
+    setState(() {
+      _isHeading[i] = !_isHeading[i];
+      if (_isHeading[i]) {
+        _levels[i] = 0;
+        _checked[i] = false;
+      }
+    });
+    _emit();
+    _focusNodes[i].requestFocus();
   }
 
   void _removeBulletAndFocus(int i) {
@@ -158,6 +194,7 @@ class _BulletsEditorState extends State<BulletsEditor> {
         _bullets[i].addListener(_emit);
         _levels[i] = 0;
         _checked[i] = false;
+        _isHeading[i] = false;
       });
       _emit();
       _focusNodes[i].requestFocus();
@@ -170,6 +207,7 @@ class _BulletsEditorState extends State<BulletsEditor> {
       _bullets.removeAt(i);
       _levels.removeAt(i);
       _checked.removeAt(i);
+      _isHeading.removeAt(i);
       _focusNodes[i].dispose();
       _focusNodes.removeAt(i);
     });
@@ -205,10 +243,12 @@ class _BulletsEditorState extends State<BulletsEditor> {
       _bullets[i].removeListener(_emit);
       _bullets[i].dispose();
       _bullets[i] = _makeCtrl(lines[0]);
+      _isHeading[i] = false;
       for (int j = 1; j < lines.length; j++) {
         _bullets.insert(i + j, _makeCtrl(lines[j]));
         _levels.insert(i + j, _levels[i]);
         _checked.insert(i + j, false);
+        _isHeading.insert(i + j, false);
         _focusNodes.insert(i + j, FocusNode());
       }
     });
@@ -321,10 +361,20 @@ class _BulletsEditorState extends State<BulletsEditor> {
           const SizedBox(height: 4),
           Align(
             alignment: Alignment.centerLeft,
-            child: TextButton.icon(
-              onPressed: () => _addBulletAfter(_bullets.length - 1),
-              icon: const Icon(Icons.add, size: 16),
-              label: Text(l10n.d('Bullet toevoegen')),
+            child: Wrap(
+              spacing: 4,
+              children: [
+                TextButton.icon(
+                  onPressed: () => _addBulletAfter(_bullets.length - 1),
+                  icon: const Icon(Icons.add, size: 16),
+                  label: Text(l10n.d('Bullet toevoegen')),
+                ),
+                TextButton.icon(
+                  onPressed: () => _addHeadingAfter(_bullets.length - 1),
+                  icon: const Icon(Icons.horizontal_split, size: 16),
+                  label: Text(l10n.d('Tussenkop toevoegen')),
+                ),
+              ],
             ),
           ),
         ],
@@ -334,7 +384,8 @@ class _BulletsEditorState extends State<BulletsEditor> {
 
   Widget _buildBulletRow(int i) {
     final l10n = context.l10n;
-    final level = _levels[i];
+    final heading = _isHeading[i];
+    final level = heading ? 0 : _levels[i];
     return Padding(
       key: ValueKey(_bullets[i]),
       padding: EdgeInsets.only(left: level * 20.0, top: 4, bottom: 4),
@@ -350,26 +401,45 @@ class _BulletsEditorState extends State<BulletsEditor> {
             ),
           ),
           const SizedBox(width: 4),
-          if (_listStyle == ListStyle.checklist)
-            SizedBox(
-              width: 24,
-              height: 24,
-              child: Checkbox(
-                key: ValueKey('checklist-item-$i'),
-                value: _checked[i],
-                onChanged: (value) {
-                  setState(() => _checked[i] = value ?? false);
-                  _emit();
-                },
-                visualDensity: VisualDensity.compact,
-              ),
-            )
-          else
-            Text(
-              _markerForItem(i),
-              style: TextStyle(fontSize: 16, color: AppTheme.slate500),
+          // Toggle a row between an ordinary bullet and a group heading.
+          IconButton(
+            key: ValueKey('toggle-heading-$i'),
+            icon: Icon(
+              Icons.horizontal_split,
+              size: 18,
+              color: heading ? AppTheme.accent : AppTheme.slate300,
             ),
-          const SizedBox(width: 8),
+            onPressed: () => _toggleHeading(i),
+            tooltip: heading
+                ? l10n.d('Maak er weer een bullet van')
+                : l10n.d('Maak een tussenkop'),
+            padding: const EdgeInsets.symmetric(horizontal: 4),
+            constraints: const BoxConstraints(minWidth: 28),
+            visualDensity: VisualDensity.compact,
+          ),
+          const SizedBox(width: 4),
+          if (!heading) ...[
+            if (_listStyle == ListStyle.checklist)
+              SizedBox(
+                width: 24,
+                height: 24,
+                child: Checkbox(
+                  key: ValueKey('checklist-item-$i'),
+                  value: _checked[i],
+                  onChanged: (value) {
+                    setState(() => _checked[i] = value ?? false);
+                    _emit();
+                  },
+                  visualDensity: VisualDensity.compact,
+                ),
+              )
+            else
+              Text(
+                _markerForItem(i),
+                style: TextStyle(fontSize: 16, color: AppTheme.slate500),
+              ),
+            const SizedBox(width: 8),
+          ],
           Expanded(
             child: Focus(
               onKeyEvent: (_, event) {
@@ -386,8 +456,9 @@ class _BulletsEditorState extends State<BulletsEditor> {
                   _removeBulletAndFocus(i);
                   return KeyEventResult.handled;
                 }
-                // Tab → inspringing
-                if (event.logicalKey == LogicalKeyboardKey.tab) {
+                // Tab → inspringing (niet op een tussenkop; die staat vast op
+                // niveau 0)
+                if (event.logicalKey == LogicalKeyboardKey.tab && !heading) {
                   if (HardwareKeyboard.instance.isShiftPressed) {
                     if (_levels[i] > 0) setState(() => _levels[i]--);
                   } else {
@@ -408,8 +479,13 @@ class _BulletsEditorState extends State<BulletsEditor> {
               child: TextField(
                 controller: _bullets[i],
                 focusNode: _focusNodes[i],
+                style: heading
+                    ? const TextStyle(fontWeight: FontWeight.bold)
+                    : null,
                 decoration: InputDecoration(
-                  hintText: '${l10n.d('Bullet')} ${i + 1}',
+                  hintText: heading
+                      ? l10n.d('Tussenkop (leeg = alleen een scheidingslijn)')
+                      : '${l10n.d('Bullet')} ${i + 1}',
                   isDense: true,
                 ),
               ),

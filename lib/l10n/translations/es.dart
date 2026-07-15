@@ -737,6 +737,11 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Maak een tussenkop': 'Crear un subencabezado',
+  'Maak er weer een bullet van': 'Convertir de nuevo en viñeta',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Subencabezado (vacío = solo una línea divisoria)',
+  'Tussenkop toevoegen': 'Añadir subencabezado',
   'Bevestigen': 'Confirmar',
   'Onderbouwing van de bevestiging': 'Justificación de la confirmación',
   'De eigenaar staat insluiten niet toe':

@@ -1787,6 +1787,11 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Maak een tussenkop': 'Közcím létrehozása',
+  'Maak er weer een bullet van': 'Visszaalakítás felsorolásjellé',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Közcím (üres = csak elválasztó vonal)',
+  'Tussenkop toevoegen': 'Közcím hozzáadása',
   'Bevestigen': 'Megerősítés',
   'Onderbouwing van de bevestiging': 'A megerősítés indoklása',
   'De eigenaar staat insluiten niet toe':

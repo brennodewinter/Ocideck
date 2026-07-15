@@ -1796,6 +1796,11 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Maak een tussenkop': 'Utwórz śródtytuł',
+  'Maak er weer een bullet van': 'Zmień z powrotem w punktor',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Śródtytuł (puste = tylko linia oddzielająca)',
+  'Tussenkop toevoegen': 'Dodaj śródtytuł',
   'Bevestigen': 'Potwierdź',
   'Onderbouwing van de bevestiging': 'Uzasadnienie potwierdzenia',
   'De eigenaar staat insluiten niet toe': 'Właściciel nie zezwala na osadzanie',

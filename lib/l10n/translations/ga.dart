@@ -1819,6 +1819,11 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Maak een tussenkop': 'Cruthaigh fo-cheannteideal',
+  'Maak er weer een bullet van': 'Athraigh ar ais go urchar',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Fo-cheannteideal (folamh = líne deighilte amháin)',
+  'Tussenkop toevoegen': 'Cuir fo-cheannteideal leis',
   'Bevestigen': 'Deimhnigh',
   'Onderbouwing van de bevestiging': 'Bunús an dearbhaithe',
   'De eigenaar staat insluiten niet toe': 'Ní cheadaíonn an t-úinéir leabú',

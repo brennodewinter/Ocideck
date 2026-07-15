@@ -1813,6 +1813,11 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Maak een tussenkop': 'Criar um intertítulo',
+  'Maak er weer een bullet van': 'Converter novamente em marcador',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Intertítulo (vazio = apenas uma linha divisória)',
+  'Tussenkop toevoegen': 'Adicionar intertítulo',
   'Bevestigen': 'Confirmar',
   'Onderbouwing van de bevestiging': 'Justificação da confirmação',
   'De eigenaar staat insluiten niet toe':

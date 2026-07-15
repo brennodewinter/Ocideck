@@ -1783,6 +1783,11 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Maak een tussenkop': 'Luo väliotsikko',
+  'Maak er weer een bullet van': 'Muuta takaisin luettelomerkiksi',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Väliotsikko (tyhjä = vain erotinviiva)',
+  'Tussenkop toevoegen': 'Lisää väliotsikko',
   'Bevestigen': 'Vahvista',
   'Onderbouwing van de bevestiging': 'Vahvistuksen perustelu',
   'De eigenaar staat insluiten niet toe': 'Omistaja ei salli upottamista',

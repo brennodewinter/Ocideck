@@ -1802,6 +1802,11 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Maak een tussenkop': 'Creează un subtitlu',
+  'Maak er weer een bullet van': 'Transformă înapoi în marcaj',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Subtitlu (gol = doar o linie de separare)',
+  'Tussenkop toevoegen': 'Adaugă subtitlu',
   'Bevestigen': 'Confirmă',
   'Onderbouwing van de bevestiging': 'Justificarea confirmării',
   'De eigenaar staat insluiten niet toe':

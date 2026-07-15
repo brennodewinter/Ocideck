@@ -922,6 +922,11 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Maak een tussenkop': 'Make a group heading',
+  'Maak er weer een bullet van': 'Turn it back into a bullet',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Group heading (empty = just a divider line)',
+  'Tussenkop toevoegen': 'Add group heading',
   'Bevestigen': 'Confirm',
   'Onderbouwing van de bevestiging': 'Basis for the confirmation',
   'De eigenaar staat insluiten niet toe': 'The owner doesn\'t allow embedding',

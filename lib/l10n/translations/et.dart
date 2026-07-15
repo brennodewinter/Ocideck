@@ -1774,6 +1774,11 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Maak een tussenkop': 'Loo vahepealkiri',
+  'Maak er weer een bullet van': 'Muuda tagasi täpiks',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Vahepealkiri (tühi = ainult eraldusjoon)',
+  'Tussenkop toevoegen': 'Lisa vahepealkiri',
   'Bevestigen': 'Kinnita',
   'Onderbouwing van de bevestiging': 'Kinnituse põhjendus',
   'De eigenaar staat insluiten niet toe': 'Omanik ei luba manustamist',

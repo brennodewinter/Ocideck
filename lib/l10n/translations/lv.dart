@@ -1782,6 +1782,11 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Maak een tussenkop': 'Izveidot starpvirsrakstu',
+  'Maak er weer een bullet van': 'Pārvērst atpakaļ par aizzīmi',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Starpvirsraksts (tukšs = tikai atdalītājlīnija)',
+  'Tussenkop toevoegen': 'Pievienot starpvirsrakstu',
   'Bevestigen': 'Apstiprināt',
   'Onderbouwing van de bevestiging': 'Apstiprinājuma pamatojums',
   'De eigenaar staat insluiten niet toe': 'Īpašnieks neatļauj iegulšanu',

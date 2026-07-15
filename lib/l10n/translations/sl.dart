@@ -1785,6 +1785,11 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Maak een tussenkop': 'Ustvari mednaslov',
+  'Maak er weer een bullet van': 'Pretvori nazaj v oznako',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Mednaslov (prazno = samo ločilna črta)',
+  'Tussenkop toevoegen': 'Dodaj mednaslov',
   'Bevestigen': 'Potrdi',
   'Onderbouwing van de bevestiging': 'Utemeljitev potrditve',
   'De eigenaar staat insluiten niet toe': 'Lastnik ne dovoljuje vdelave',

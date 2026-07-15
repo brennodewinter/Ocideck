@@ -740,6 +740,11 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Maak een tussenkop': 'Zwischenüberschrift einfügen',
+  'Maak er weer een bullet van': 'Wieder in einen Aufzählungspunkt umwandeln',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Zwischenüberschrift (leer = nur eine Trennlinie)',
+  'Tussenkop toevoegen': 'Zwischenüberschrift hinzufügen',
   'Bevestigen': 'Bestätigen',
   'Onderbouwing van de bevestiging': 'Begründung der Bestätigung',
   'De eigenaar staat insluiten niet toe':

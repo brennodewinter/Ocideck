@@ -736,6 +736,11 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Maak een tussenkop': 'Crea un intertitolo',
+  'Maak er weer een bullet van': 'Riconverti in punto elenco',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Intertitolo (vuoto = solo una linea di separazione)',
+  'Tussenkop toevoegen': 'Aggiungi intertitolo',
   'Bevestigen': 'Conferma',
   'Onderbouwing van de bevestiging': 'Motivazione della conferma',
   'De eigenaar staat insluiten niet toe':

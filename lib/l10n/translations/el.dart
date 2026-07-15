@@ -1811,6 +1811,11 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Maak een tussenkop': 'Δημιουργία ενδιάμεσου τίτλου',
+  'Maak er weer een bullet van': 'Μετατροπή ξανά σε κουκκίδα',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Ενδιάμεσος τίτλος (κενό = μόνο διαχωριστική γραμμή)',
+  'Tussenkop toevoegen': 'Προσθήκη ενδιάμεσου τίτλου',
   'Bevestigen': 'Επιβεβαίωση',
   'Onderbouwing van de bevestiging': 'Τεκμηρίωση της επιβεβαίωσης',
   'De eigenaar staat insluiten niet toe':

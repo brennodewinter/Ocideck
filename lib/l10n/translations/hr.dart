@@ -1790,6 +1790,11 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Maak een tussenkop': 'Stvori međunaslov',
+  'Maak er weer een bullet van': 'Ponovno pretvori u grafičku oznaku',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Međunaslov (prazno = samo crta razdvajanja)',
+  'Tussenkop toevoegen': 'Dodaj međunaslov',
   'Bevestigen': 'Potvrdi',
   'Onderbouwing van de bevestiging': 'Obrazloženje potvrde',
   'De eigenaar staat insluiten niet toe': 'Vlasnik ne dopušta ugrađivanje',
