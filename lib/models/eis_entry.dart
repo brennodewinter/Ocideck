@@ -1,3 +1,9 @@
+/// The size of the full MIAUW EIS schema (PENTEST_MIAUW §1). The bundled
+/// [MiauwEisCatalog] is a curated subset (its own, smaller length); this is the
+/// denominator the compliance overview reports its coverage against, so a reader
+/// can never mistake a subset tally for full MIAUW conformance.
+const int kMiauwFullSchemaSize = 92;
+
 /// One of the four parts of the MIAUW requirement schema (PENTEST_MIAUW §1).
 enum EisPart {
   algemeen('Algemeen'),

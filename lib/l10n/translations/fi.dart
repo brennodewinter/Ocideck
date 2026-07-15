@@ -1783,6 +1783,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Bevestigen': 'Vahvista',
+  'Onderbouwing van de bevestiging': 'Vahvistuksen perustelu',
   'De eigenaar staat insluiten niet toe': 'Omistaja ei salli upottamista',
   'Deze video is alleen op de bron zelf te bekijken.':
       'Tätä videota voi katsoa vain itse lähteessä.',

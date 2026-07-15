@@ -108,7 +108,12 @@ class _MiauwCompliancePanelState extends State<MiauwCompliancePanel> {
     );
   }
 
+  // Lead with the denominator: the catalog is a curated subset of the full
+  // 92-EIS schema, so a bare met·open·waived tally must never read as full
+  // MIAUW conformance. Counts stay compact (locale-invariant) so the dialog
+  // title never overflows; the labelled breakdown lives in the audit dossier.
   Widget _summary(AppLocalizations l10n, MiauwComplianceResult r) => Text(
+    '${r.total}/$kMiauwFullSchemaSize · '
     '${r.metCount} · ${r.openCount} · ${r.waivedCount}',
     style: TextStyle(fontSize: 13, color: AppTheme.slate500),
   );
@@ -179,20 +184,54 @@ class _MiauwCompliancePanelState extends State<MiauwCompliancePanel> {
                       fontStyle: FontStyle.italic,
                     ),
                   ),
+                if ((r.confirmationNote ?? '').isNotEmpty)
+                  Text(
+                    r.confirmationNote!,
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: AppTheme.slate500,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
               ],
             ),
           ),
-          TextButton(
-            onPressed: () => _toggleWaiver(l10n, r, waived),
-            child: Text(
-              waived ? l10n.d('Opheffen') : l10n.d('Uitsluiten'),
-              style: const TextStyle(fontSize: 12),
-            ),
-          ),
+          ..._rowActions(l10n, r),
         ],
       ),
     );
   }
+
+  /// The action button(s) for a row, per state: a waived EIS can be lifted; a
+  /// confirmed manual EIS can be withdrawn; an open manual EIS can be confirmed
+  /// (human attestation) or excluded; anything else can be excluded.
+  List<Widget> _rowActions(AppLocalizations l10n, EisResult r) {
+    if (r.status == EisStatus.uitgesloten) {
+      return [_action(l10n.d('Opheffen'), () => _toggleWaiver(l10n, r, true))];
+    }
+    if (r.confirmationNote != null) {
+      return [
+        _action(l10n.d('Intrekken'), () => _toggleConfirmation(l10n, r, true)),
+      ];
+    }
+    return [
+      if (r.entry.derivation == EisDerivation.manual)
+        _action(
+          l10n.d('Bevestigen'),
+          () => _toggleConfirmation(l10n, r, false),
+        ),
+      _action(l10n.d('Uitsluiten'), () => _toggleWaiver(l10n, r, false)),
+    ];
+  }
+
+  Widget _action(String label, VoidCallback onPressed) => TextButton(
+    onPressed: onPressed,
+    style: TextButton.styleFrom(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      minimumSize: const Size(0, 36),
+    ),
+    child: Text(label, style: const TextStyle(fontSize: 12)),
+  );
 
   Widget _statusChip(String label, Color color) => Container(
     padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
@@ -230,24 +269,58 @@ class _MiauwCompliancePanelState extends State<MiauwCompliancePanel> {
       notifier.removeMiauwWaiver(r.entry.id);
       return;
     }
-    final reason = await _promptReason(l10n, r);
+    final reason = await _promptText(
+      l10n,
+      r,
+      action: l10n.d('Uitsluiten'),
+      label: l10n.d('Reden voor uitsluiting'),
+    );
     if (reason == null || reason.trim().isEmpty) return;
     notifier.setMiauwWaiver(r.entry.id, reason);
   }
 
-  Future<String?> _promptReason(AppLocalizations l10n, EisResult r) {
+  /// Confirm ([confirmed] false) or withdraw ([confirmed] true) the manual
+  /// human attestation on EIS [r].
+  Future<void> _toggleConfirmation(
+    AppLocalizations l10n,
+    EisResult r,
+    bool confirmed,
+  ) async {
+    final notifier = widget.notifier;
+    if (confirmed) {
+      notifier.removeMiauwConfirmation(r.entry.id);
+      return;
+    }
+    final note = await _promptText(
+      l10n,
+      r,
+      action: l10n.d('Bevestigen'),
+      label: l10n.d('Onderbouwing van de bevestiging'),
+    );
+    if (note == null || note.trim().isEmpty) return;
+    notifier.setMiauwConfirmation(r.entry.id, note);
+  }
+
+  /// A shared reason/attestation prompt: a titled multiline text field whose
+  /// [action] labels both the dialog and its confirm button.
+  Future<String?> _promptText(
+    AppLocalizations l10n,
+    EisResult r, {
+    required String action,
+    required String label,
+  }) {
     final controller = TextEditingController();
     return showDialog<String>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: Text('${l10n.d('Uitsluiten')} · ${r.entry.id}'),
+        title: Text('$action · ${r.entry.id}'),
         content: TextField(
           controller: controller,
           autofocus: true,
           minLines: 2,
           maxLines: 4,
           decoration: InputDecoration(
-            labelText: l10n.d('Reden voor uitsluiting'),
+            labelText: label,
             border: const OutlineInputBorder(),
           ),
         ),
@@ -258,7 +331,7 @@ class _MiauwCompliancePanelState extends State<MiauwCompliancePanel> {
           ),
           FilledButton(
             onPressed: () => Navigator.of(ctx).pop(controller.text),
-            child: Text(l10n.d('Uitsluiten')),
+            child: Text(action),
           ),
         ],
       ),

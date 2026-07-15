@@ -110,5 +110,30 @@ void main() {
       );
       expect(r.foundationalWaived.map((e) => e.entry.id), contains('1.6'));
     });
+
+    test('confirming a manual EIS marks it voldaan and carries the note', () {
+      final r = _analyzer.analyze(
+        Deck(
+          title: 'X',
+          miauwConfirmations: const {'1.2': 'Intake gehouden op 2026-07-01'},
+        ),
+      );
+      final res = r.results.firstWhere((x) => x.entry.id == '1.2');
+      expect(res.status, EisStatus.voldaan);
+      expect(res.confirmationNote, 'Intake gehouden op 2026-07-01');
+      // Counted as a human attestation, distinct from content-derived passes.
+      expect(r.confirmedCount, 1);
+    });
+
+    test('a waiver takes precedence over a confirmation on the same EIS', () {
+      final r = _analyzer.analyze(
+        Deck(
+          title: 'X',
+          miauwConfirmations: const {'1.2': 'bevestigd'},
+          miauwWaivers: const {'1.2': 'toch uitgesloten'},
+        ),
+      );
+      expect(_status(r, '1.2'), EisStatus.uitgesloten);
+    });
   });
 }

@@ -1811,6 +1811,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Bevestigen': 'Επιβεβαίωση',
+  'Onderbouwing van de bevestiging': 'Τεκμηρίωση της επιβεβαίωσης',
   'De eigenaar staat insluiten niet toe':
       'Ο κάτοχος δεν επιτρέπει την ενσωμάτωση',
   'Deze video is alleen op de bron zelf te bekijken.':

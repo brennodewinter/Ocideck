@@ -1790,6 +1790,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Bevestigen': 'Potvrdiť',
+  'Onderbouwing van de bevestiging': 'Odôvodnenie potvrdenia',
   'De eigenaar staat insluiten niet toe': 'Vlastník nepovoľuje vkladanie',
   'Deze video is alleen op de bron zelf te bekijken.':
       'Toto video možno pozrieť len na samotnom zdroji.',

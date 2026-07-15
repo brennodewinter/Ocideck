@@ -1787,6 +1787,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Bevestigen': 'Megerősítés',
+  'Onderbouwing van de bevestiging': 'A megerősítés indoklása',
   'De eigenaar staat insluiten niet toe':
       'A tulajdonos nem engedélyezi a beágyazást',
   'Deze video is alleen op de bron zelf te bekijken.':

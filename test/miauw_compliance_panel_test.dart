@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/eis_entry.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/file_service.dart';
@@ -21,10 +22,14 @@ DeckNotifier _deckNotifier(Deck deck) {
   return notifier;
 }
 
-Deck _deck({Map<String, String> waivers = const {}}) => Deck(
+Deck _deck({
+  Map<String, String> waivers = const {},
+  Map<String, String> confirmations = const {},
+}) => Deck(
   title: 'Demo',
   slides: [Slide.create(SlideType.title).copyWith(title: 'Welkom')],
   miauwWaivers: waivers,
+  miauwConfirmations: confirmations,
 );
 
 const _localizations = [
@@ -74,6 +79,9 @@ void main() {
     // Rows come from the live deck via the analyzer, grouped by part.
     expect(find.textContaining('1.1 ·'), findsOneWidget);
     expect(find.textContaining('1.6 ·'), findsOneWidget);
+    // The header discloses the denominator: this is a subset of the full 92-EIS
+    // schema, so the tally can't be mistaken for full MIAUW conformance.
+    expect(find.textContaining('/$kMiauwFullSchemaSize ·'), findsOneWidget);
     // A waived foundational EIS (1.1) surfaces the warning + carries its reason.
     expect(find.byIcon(Icons.warning_amber_outlined), findsOneWidget);
     expect(find.text('Geen digitale aanlevering'), findsOneWidget);
@@ -149,5 +157,30 @@ void main() {
     expect(find.widgetWithText(TextButton, 'Opheffen'), findsNothing);
     expect(find.byIcon(Icons.warning_amber_outlined), findsNothing);
     expect(find.text('Geen digitale aanlevering'), findsNothing);
+  });
+
+  testWidgets('confirming a manual EIS reads as voldaan and can be withdrawn', (
+    tester,
+  ) async {
+    await _roomySurface(tester);
+    final notifier = _deckNotifier(
+      _deck(confirmations: const {'1.2': 'Rapporteur OSCP-gecertificeerd'}),
+    );
+    await tester.pumpWidget(_host(notifier));
+    await tester.tap(find.text('open'));
+    await tester.pumpAndSettle();
+
+    // A confirmed manual EIS carries its attestation note and offers to
+    // withdraw it (rather than the confirm/exclude actions of an open one).
+    expect(find.text('Rapporteur OSCP-gecertificeerd'), findsOneWidget);
+    expect(find.widgetWithText(TextButton, 'Intrekken'), findsOneWidget);
+
+    await tester.tap(find.widgetWithText(TextButton, 'Intrekken'));
+    await tester.pumpAndSettle();
+
+    // Withdrawing returns it to open: the note and the withdraw action are gone.
+    expect(notifier.currentState.deck!.miauwConfirmations, isEmpty);
+    expect(find.text('Rapporteur OSCP-gecertificeerd'), findsNothing);
+    expect(find.widgetWithText(TextButton, 'Intrekken'), findsNothing);
   });
 }

@@ -1787,6 +1787,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Bevestigen': 'Bestätige',
+  'Onderbouwing van de bevestiging': 'Begründig vo dr Bestätigung',
   'De eigenaar staat insluiten niet toe': 'De Bsitzer erlaubt s Iibette nöd',
   'Deze video is alleen op de bron zelf te bekijken.':
       'Das Video cha me nume uf de Quelle sälber aaluege.',

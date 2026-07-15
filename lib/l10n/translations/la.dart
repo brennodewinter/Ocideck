@@ -1799,6 +1799,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Bevestigen': 'Confirmare',
+  'Onderbouwing van de bevestiging': 'Ratio confirmationis',
   'De eigenaar staat insluiten niet toe': 'Dominus insertionem non permittit',
   'Deze video is alleen op de bron zelf te bekijken.':
       'Haec pellicula tantum in ipso fonte spectari potest.',

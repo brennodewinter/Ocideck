@@ -1782,6 +1782,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Bevestigen': 'Apstiprināt',
+  'Onderbouwing van de bevestiging': 'Apstiprinājuma pamatojums',
   'De eigenaar staat insluiten niet toe': 'Īpašnieks neatļauj iegulšanu',
   'Deze video is alleen op de bron zelf te bekijken.':
       'Šo video var skatīties tikai pašā avotā.',

@@ -76,6 +76,7 @@ extension _MarkdownParse on MarkdownService {
     bool paginate = true;
     ThemeProfile themeProfile = const ThemeProfile();
     Map<String, String> miauwWaivers = const {};
+    Map<String, String> miauwConfirmations = const {};
     String? presentationTitle;
     String author = '';
     String organization = '';
@@ -169,6 +170,13 @@ extension _MarkdownParse on MarkdownService {
               if (waiverJson != null) {
                 miauwWaivers = waiverJson.map((k, v) => MapEntry(k, '$v'));
               }
+            case 'ocideck_miauw_confirmations':
+              final confirmJson = _decodeBase64JsonMap(value, key);
+              if (confirmJson != null) {
+                miauwConfirmations = confirmJson.map(
+                  (k, v) => MapEntry(k, '$v'),
+                );
+              }
           }
         }
         content = content.substring(end + 5).trim();
@@ -215,6 +223,7 @@ extension _MarkdownParse on MarkdownService {
       sealTimestampToken: sealTsr,
       signature: signature.isEmpty ? null : signature,
       miauwWaivers: miauwWaivers,
+      miauwConfirmations: miauwConfirmations,
     );
   }
 

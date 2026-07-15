@@ -740,6 +740,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Bevestigen': 'Konfirmá',
+  'Onderbouwing van de bevestiging': 'Hustifikashon di e konfirmashon',
   'De eigenaar staat insluiten niet toe': 'E doño no ta permití inkrustashon',
   'Deze video is alleen op de bron zelf te bekijken.':
       'E video aki por wòrdu mirá solamente riba e fuente mes.',

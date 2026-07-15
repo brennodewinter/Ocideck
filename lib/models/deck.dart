@@ -185,6 +185,14 @@ class Deck {
   /// Reist mee in de front matter als `ocideck_miauw_waivers` (base64url-JSON).
   final Map<String, String> miauwWaivers;
 
+  /// MIAUW-compliance handmatige bevestigingen (PENTEST_MIAUW §9), gekeyd op
+  /// EIS-id met de attestatie/onderbouwing als waarde. Een organisatorische
+  /// (handmatige) EIS die niet uit de deckinhoud af te leiden is, telt hiermee
+  /// als "Voldaan" — met de tag "Handmatig" zodat zichtbaar blijft dat het een
+  /// menselijke bevestiging is, geen contentcontrole. Reist mee in de front
+  /// matter als `ocideck_miauw_confirmations` (base64url-JSON).
+  final Map<String, String> miauwConfirmations;
+
   const Deck({
     required this.title,
     this.theme = 'ocideck',
@@ -212,6 +220,7 @@ class Deck {
     this.annotations = const {},
     this.userNotes = const {},
     this.miauwWaivers = const {},
+    this.miauwConfirmations = const {},
   });
 
   Deck copyWith({
@@ -243,6 +252,7 @@ class Deck {
     Map<String, List<InkStroke>>? annotations,
     Map<String, String>? userNotes,
     Map<String, String>? miauwWaivers,
+    Map<String, String>? miauwConfirmations,
   }) {
     return Deck(
       title: title ?? this.title,
@@ -272,6 +282,7 @@ class Deck {
       annotations: annotations ?? this.annotations,
       userNotes: userNotes ?? this.userNotes,
       miauwWaivers: miauwWaivers ?? this.miauwWaivers,
+      miauwConfirmations: miauwConfirmations ?? this.miauwConfirmations,
     );
   }
 }

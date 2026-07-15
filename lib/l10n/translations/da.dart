@@ -1782,6 +1782,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Bevestigen': 'Bekræft',
+  'Onderbouwing van de bevestiging': 'Begrundelse for bekræftelsen',
   'De eigenaar staat insluiten niet toe': 'Ejeren tillader ikke indlejring',
   'Deze video is alleen op de bron zelf te bekijken.':
       'Denne video kan kun ses på selve kilden.',

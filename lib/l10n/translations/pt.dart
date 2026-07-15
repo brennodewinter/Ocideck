@@ -1813,6 +1813,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Bevestigen': 'Confirmar',
+  'Onderbouwing van de bevestiging': 'Justificação da confirmação',
   'De eigenaar staat insluiten niet toe':
       'O proprietário não permite a incorporação',
   'Deze video is alleen op de bron zelf te bekijken.':
