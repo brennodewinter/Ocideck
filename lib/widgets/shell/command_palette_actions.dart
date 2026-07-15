@@ -119,34 +119,34 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
     CommandPalette.show(context, commands);
   }
 
-  /// The security-module command-palette actions, gated on the reveal flag and
-  /// grouped here to keep [_openCommandPalette] under the method-length limit.
+  /// The security-module command-palette actions. Gated on the reveal flag:
+  /// when the module is off they are **omitted entirely** (not shown greyed-out),
+  /// matching how the security slide types are hidden from the add-slide picker
+  /// and editor — the palette never offers a command the user can't run.
+  /// Grouped here to keep [_openCommandPalette] under the method-length limit.
   List<PaletteCommand> _securityCommands(
     AppLocalizations l10n,
     Deck deck,
     DeckNotifier deckNotifier,
   ) {
-    final enabled = ref.read(secModuleRevealProvider);
+    if (!ref.read(secModuleRevealProvider)) return const [];
     return [
       PaletteCommand(
         label: l10n.d('MIAUW-compliance'),
         icon: Icons.fact_check_outlined,
         keywords: const ['eis', 'compliance', 'miauw', 'waiver', 'audit'],
-        enabled: enabled,
         onInvoke: () => MiauwCompliancePanel.show(context, deckNotifier),
       ),
       PaletteCommand(
         label: l10n.d('Bevindingen hernummeren'),
         icon: Icons.format_list_numbered,
         keywords: const ['finding', 'renumber', 'nummer', 'f-01'],
-        enabled: enabled,
         onInvoke: deckNotifier.autoRenumberFindings,
       ),
       PaletteCommand(
         label: l10n.d('Scope-dekking controleren'),
         icon: Icons.travel_explore_outlined,
         keywords: const ['scope', 'coverage', 'gap', 'dekking'],
-        enabled: enabled,
         onInvoke: () =>
             ScopeCoverageDialog.show(context, deckScopeCoverageGaps(deck)),
       ),
@@ -154,14 +154,12 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
         label: l10n.d('Bewijs-hashes kopiëren'),
         icon: Icons.tag_outlined,
         keywords: const ['sha1', 'sha256', 'hash', 'bewijs', 'evidence'],
-        enabled: enabled,
         onInvoke: _copyEvidenceHashes,
       ),
       PaletteCommand(
         label: l10n.d('Managementsamenvatting'),
         icon: Icons.summarize_outlined,
         keywords: const ['summary', 'management', 'samenvatting', 'overzicht'],
-        enabled: enabled,
         onInvoke: () =>
             ManagementSummaryDialog.show(context, deckManagementSummary(deck)),
       ),
@@ -169,7 +167,6 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
         label: l10n.d('RFC3161-tijdstempel'),
         icon: Icons.schedule_outlined,
         keywords: const ['rfc3161', 'timestamp', 'tijdstempel', 'tsa', 'seal'],
-        enabled: enabled,
         onInvoke: () => SealTimestampDialog.show(context, deckNotifier),
       ),
       PaletteCommand(
@@ -183,7 +180,6 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
           'bewijs',
           'verzegel',
         ],
-        enabled: enabled,
         onInvoke: () => _exportAuditDossier(context, ref),
       ),
     ];
