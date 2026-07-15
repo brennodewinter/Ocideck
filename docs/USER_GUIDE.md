@@ -969,6 +969,13 @@ anywhere, so the picker stays short for everyone who does not need them — but 
 report that already uses them always opens and renders correctly regardless (the
 file is the source of truth; the toggle only governs *authoring*).
 
+**Opening a security report while the module is off** surfaces a one-time
+prompt — a snackbar with an **Enable** action — so you can turn the module on
+right there instead of hunting through settings. It appears only when a deck you
+open actually contains security slide types and the module is off, once per open
+(never while you edit), and the slides render either way; it is purely a way to
+discover the module.
+
 The module's reference data is **bundled with the app**, so enabling it works
 **offline and out of the box** — no download, no server, and no outbound traffic
 (nothing leaves your device; you do not even need to grant the outbound-traffic
