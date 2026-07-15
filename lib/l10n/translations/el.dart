@@ -1811,6 +1811,9 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Αυτή η παρουσίαση περιέχει στοιχεία της ενότητας Ασφάλεια πληροφοριών. Ενεργοποιήστε την ενότητα για να τα επεξεργαστείτε.',
+  'Inschakelen': 'Ενεργοποίηση',
   'Bevestigen': 'Επιβεβαίωση',
   'Onderbouwing van de bevestiging': 'Τεκμηρίωση της επιβεβαίωσης',
   'De eigenaar staat insluiten niet toe':

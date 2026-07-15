@@ -460,6 +460,21 @@ class TabsNotifier extends StateNotifier<TabsState> {
       final newTabs = [...state.tabs, tab];
       state = state.copyWith(tabs: newTabs, selectedIndex: newTabs.length - 1);
     }
+    _maybePromptSecurityModule(deck);
+  }
+
+  /// A just-opened deck carrying Informatieveiligheid slide types is worth a
+  /// one-time "enable the module" nudge. Signalled here — the single chokepoint
+  /// every real open funnels through — so it fires exactly once per open; an
+  /// edit builds a new [Deck] via copyWith but never touches this path, so it
+  /// never re-fires. Whether to actually prompt (module off, not still loading)
+  /// is decided by the shell's listener, which reads the freshest module state;
+  /// this layer stays decoupled from the module and just reports the fact. Same
+  /// one-shot listen pattern as [importSecurityAlarmProvider].
+  void _maybePromptSecurityModule(Deck deck) {
+    if (!deck.hasSecuritySlides) return;
+    _ref.read(securityModulePromptProvider.notifier).state =
+        SecurityModulePrompt();
   }
 
   /// Open een deck uit in-memory bytes — het open-pad voor web, waar de
@@ -909,5 +924,22 @@ class DuplicateCopyNotice {
 }
 
 final duplicateCopyNoticeProvider = StateProvider<DuplicateCopyNotice?>(
+  (ref) => null,
+);
+
+/// One-shot signal that a deck carrying Informatieveiligheid slide types was
+/// just opened (see [Deck.hasSecuritySlides]). The shell listens on this and —
+/// only when the module is off — offers a one-time "enable the module" snackbar
+/// (pure discovery; the slides render regardless). Set once per open by
+/// [TabsNotifier._maybePromptSecurityModule], then reset to null once handled,
+/// mirroring [importSecurityAlarmProvider].
+class SecurityModulePrompt {
+  /// A non-const constructor on purpose: each open must produce a *distinct*
+  /// instance so a back-to-back second open still notifies listeners (two const
+  /// instances would be identical and be swallowed as "no change").
+  SecurityModulePrompt();
+}
+
+final securityModulePromptProvider = StateProvider<SecurityModulePrompt?>(
   (ref) => null,
 );

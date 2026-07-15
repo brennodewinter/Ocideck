@@ -1806,6 +1806,9 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Din il-preżentazzjoni fiha partijiet mill-modulu tas-Sigurtà tal-Informazzjoni. Ixgħel il-modulu biex teditjahom.',
+  'Inschakelen': 'Ixgħel',
   'Bevestigen': 'Ikkonferma',
   'Onderbouwing van de bevestiging': 'Ġustifikazzjoni tal-konferma',
   'De eigenaar staat insluiten niet toe':

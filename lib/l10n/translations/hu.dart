@@ -1787,6 +1787,9 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Ez a bemutató az Információbiztonsági modul elemeit tartalmazza. Kapcsold be a modult a szerkesztésükhöz.',
+  'Inschakelen': 'Bekapcsolás',
   'Bevestigen': 'Megerősítés',
   'Onderbouwing van de bevestiging': 'A megerősítés indoklása',
   'De eigenaar staat insluiten niet toe':

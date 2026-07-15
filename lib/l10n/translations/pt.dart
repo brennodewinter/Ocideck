@@ -1813,6 +1813,9 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Esta apresentação contém elementos do módulo de Segurança da informação. Ative o módulo para os editar.',
+  'Inschakelen': 'Ativar',
   'Bevestigen': 'Confirmar',
   'Onderbouwing van de bevestiging': 'Justificação da confirmação',
   'De eigenaar staat insluiten niet toe':

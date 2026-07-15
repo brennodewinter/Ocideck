@@ -1787,6 +1787,9 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Die Präsentation enthaltet Teil vom Modul Informationssicherheit. Aktivier s Modul, zum si bearbeite.',
+  'Inschakelen': 'Aktiviere',
   'Bevestigen': 'Bestätige',
   'Onderbouwing van de bevestiging': 'Begründig vo dr Bestätigung',
   'De eigenaar staat insluiten niet toe': 'De Bsitzer erlaubt s Iibette nöd',

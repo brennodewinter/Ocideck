@@ -1783,6 +1783,9 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Tämä esitys sisältää Tietoturva-moduulin osia. Ota moduuli käyttöön muokataksesi niitä.',
+  'Inschakelen': 'Ota käyttöön',
   'Bevestigen': 'Vahvista',
   'Onderbouwing van de bevestiging': 'Vahvistuksen perustelu',
   'De eigenaar staat insluiten niet toe': 'Omistaja ei salli upottamista',

@@ -1802,6 +1802,9 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Această prezentare conține elemente ale modulului Securitatea informațiilor. Activează modulul pentru a le edita.',
+  'Inschakelen': 'Activează',
   'Bevestigen': 'Confirmă',
   'Onderbouwing van de bevestiging': 'Justificarea confirmării',
   'De eigenaar staat insluiten niet toe':

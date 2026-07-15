@@ -1799,6 +1799,9 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Haec demonstratio partes moduli Securitatis Informationum continet. Modulum activa ut eas recenseas.',
+  'Inschakelen': 'Activare',
   'Bevestigen': 'Confirmare',
   'Onderbouwing van de bevestiging': 'Ratio confirmationis',
   'De eigenaar staat insluiten niet toe': 'Dominus insertionem non permittit',
