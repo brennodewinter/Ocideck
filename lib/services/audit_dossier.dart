@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import '../models/deck.dart';
+import '../models/eis_entry.dart';
 import '../models/findings_summary_spec.dart';
 import 'cvss/cvss4.dart';
 import 'evidence_hash_service.dart';
@@ -130,8 +131,22 @@ String buildAuditDossier(
   }
   b.writeln();
 
-  b.writeln('## MIAUW-naleving (${compliance.total} EIS)');
+  b.writeln(
+    '## MIAUW-naleving (${compliance.total} van $kMiauwFullSchemaSize EIS '
+    'beoordeeld)',
+  );
   b.writeln();
+  if (compliance.total < kMiauwFullSchemaSize) {
+    b.writeln(
+      '> Let op: dit overzicht toetst een gecureerd deel '
+      '(${compliance.total}) van het volledige MIAUW-schema van '
+      '$kMiauwFullSchemaSize EIS. De overige '
+      '${kMiauwFullSchemaSize - compliance.total} eisen zijn in deze versie '
+      'niet beoordeeld — een all-green telling hieronder betekent dus niet '
+      'dat het rapport volledig MIAUW-conform is.',
+    );
+    b.writeln();
+  }
   b.writeln('- **Voldaan:** ${compliance.metCount}');
   b.writeln('- **Openstaand:** ${compliance.openCount}');
   b.writeln('- **Uitgesloten:** ${compliance.waivedCount}');

@@ -108,7 +108,12 @@ class _MiauwCompliancePanelState extends State<MiauwCompliancePanel> {
     );
   }
 
+  // Lead with the denominator: the catalog is a curated subset of the full
+  // 92-EIS schema, so a bare met·open·waived tally must never read as full
+  // MIAUW conformance. Counts stay compact (locale-invariant) so the dialog
+  // title never overflows; the labelled breakdown lives in the audit dossier.
   Widget _summary(AppLocalizations l10n, MiauwComplianceResult r) => Text(
+    '${r.total}/$kMiauwFullSchemaSize · '
     '${r.metCount} · ${r.openCount} · ${r.waivedCount}',
     style: TextStyle(fontSize: 13, color: AppTheme.slate500),
   );
