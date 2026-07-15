@@ -1783,6 +1783,9 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'adres': 'osoite',
+  'postcode': 'postinumero',
+  'persoonsnaam': 'henkilön nimi',
   'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
       'Tämä esitys sisältää Tietoturva-moduulin osia. Ota moduuli käyttöön muokataksesi niitä.',
   'Inschakelen': 'Ota käyttöön',

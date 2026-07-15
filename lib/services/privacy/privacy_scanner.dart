@@ -21,6 +21,7 @@ import '../../models/slide.dart';
 import 'privacy_allowlist.dart';
 import 'privacy_bulk_rules.dart';
 import 'privacy_checksums.dart';
+import 'privacy_contact_rules.dart';
 import 'privacy_eu_rules.dart';
 import 'privacy_own_identity.dart';
 import 'privacy_phone_rules.dart';
@@ -199,7 +200,112 @@ class PrivacyScanner {
     _scanSecrets(fragment, slideIndex, out);
     _scanEuIdentifiers(fragment, slideIndex, out);
     _scanSpecialCategories(fragment, slideIndex, out);
+    _scanAddress(fragment, slideIndex, out);
+    _scanName(fragment, slideIndex, out);
     _scanStructural(fragment, slideIndex, out);
+  }
+
+  // ── contact.address / contact.postcode_nl ─────────────────────────────────
+
+  /// Straat-met-huisnummer en Nederlandse postcode.
+  ///
+  /// Elk voor zich blijft `possible`: een postcode is vaak een kantooradres, een
+  /// straat-met-nummer kan een verwijzing zijn. Staan ze binnen
+  /// [kAddressLocationWindow] tekens van elkaar, dan wijzen ze samen één woonadres
+  /// aan — postcode plus huisnummer is in Nederland vrijwel uniek identificerend —
+  /// en gaan beide naar `certain`. Zie `privacy_contact_rules.dart`.
+  void _scanAddress(
+    _Fragment fragment,
+    int slideIndex,
+    List<PrivacyFinding> out,
+  ) {
+    final text = fragment.text;
+    final addresses = streetAddressPattern.allMatches(text).toList();
+    final postcodes = [
+      for (final m in dutchPostcodePattern.allMatches(text))
+        if (postcodeBoundaryOk(text, m.start) &&
+            isPlausibleDutchPostcode(m.group(0)!))
+          m,
+    ];
+    if (addresses.isEmpty && postcodes.isEmpty) return;
+
+    for (final address in addresses) {
+      final confirmed = postcodes.any((p) => _within(address, p));
+      _emit(
+        out,
+        _finding(
+          fragment,
+          slideIndex,
+          address,
+          ruleId: 'contact.address',
+          family: PrivacyFamily.contact,
+          confidence: confirmed
+              ? PrivacyConfidence.certain
+              : PrivacyConfidence.possible,
+        ),
+      );
+    }
+    for (final postcode in postcodes) {
+      final confirmed = addresses.any((a) => _within(a, postcode));
+      _emit(
+        out,
+        _finding(
+          fragment,
+          slideIndex,
+          postcode,
+          ruleId: 'contact.postcode_nl',
+          family: PrivacyFamily.contact,
+          confidence: confirmed
+              ? PrivacyConfidence.certain
+              : PrivacyConfidence.possible,
+        ),
+      );
+    }
+  }
+
+  /// Staan twee treffers binnen [kAddressLocationWindow] tekens van elkaar?
+  bool _within(Match a, Match b) {
+    final gap = a.start >= b.end
+        ? a.start - b.end
+        : (b.start >= a.end ? b.start - a.end : 0);
+    return gap <= kAddressLocationWindow;
+  }
+
+  // ── contact.name ──────────────────────────────────────────────────────────
+
+  /// Een persoonsnaam achter een aanhef of een label — nooit via NER.
+  ///
+  /// Blijft bewust `possible`: een naam heeft geen checksum, en een woord met een
+  /// hoofdletter is ook het begin van een zin. De melding informeert dus, en
+  /// onderbreekt niet. Bij redactie gaat de naam er wél uit, net als elke andere
+  /// bevinding. De kale naam zonder label (een titel die enkel een naam is) valt
+  /// hier buiten — daarvoor is de handmatige `[[…]]`-markering.
+  void _scanName(_Fragment fragment, int slideIndex, List<PrivacyFinding> out) {
+    final text = fragment.text;
+    for (final pattern in [nameLabelPattern, nameSalutationPattern]) {
+      for (final match in pattern.allMatches(text)) {
+        final name = match.group(1);
+        if (name == null || name.isEmpty) continue;
+        if (isPlaceholderPerson(name)) continue;
+        if (ownIdentity.covers(name)) continue;
+        // De naam staat aan het eind van de match; daaruit volgt zijn positie
+        // zonder dat we een groepsoffset nodig hebben (die Dart niet los geeft).
+        final start = match.end - name.length;
+        out.add(
+          PrivacyFinding(
+            ruleId: 'contact.name',
+            family: PrivacyFamily.contact,
+            confidence: PrivacyConfidence.possible,
+            slideIndex: slideIndex,
+            field: fragment.field,
+            fragmentIndex: fragment.index,
+            start: start,
+            end: match.end,
+            maskedSample: maskValue(name),
+          ),
+        );
+      }
+    }
   }
 
   // ── Structurele lekken ────────────────────────────────────────────────────

@@ -1782,6 +1782,9 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'adres': 'adrese',
+  'postcode': 'pasta indekss',
+  'persoonsnaam': 'personas vārds',
   'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
       'Šī prezentācija satur Informācijas drošības moduļa daļas. Ieslēdziet moduli, lai tās rediģētu.',
   'Inschakelen': 'Ieslēgt',

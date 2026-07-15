@@ -1787,6 +1787,9 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'adres': 'Adrässe',
+  'postcode': 'Poschtleitzahl',
+  'persoonsnaam': 'Persoonename',
   'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
       'Die Präsentation enthaltet Teil vom Modul Informationssicherheit. Aktivier s Modul, zum si bearbeite.',
   'Inschakelen': 'Aktiviere',

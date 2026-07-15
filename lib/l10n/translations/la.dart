@@ -1799,6 +1799,9 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'adres': 'inscriptio',
+  'postcode': 'numerus postalis',
+  'persoonsnaam': 'nomen personae',
   'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
       'Haec demonstratio partes moduli Securitatis Informationum continet. Modulum activa ut eas recenseas.',
   'Inschakelen': 'Activare',

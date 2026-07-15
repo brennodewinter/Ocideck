@@ -1811,6 +1811,9 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'adres': 'διεύθυνση',
+  'postcode': 'ταχυδρομικός κώδικας',
+  'persoonsnaam': 'όνομα προσώπου',
   'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
       'Αυτή η παρουσίαση περιέχει στοιχεία της ενότητας Ασφάλεια πληροφοριών. Ενεργοποιήστε την ενότητα για να τα επεξεργαστείτε.',
   'Inschakelen': 'Ενεργοποίηση',

@@ -1785,6 +1785,9 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'adres': 'naslov',
+  'postcode': 'poštna številka',
+  'persoonsnaam': 'ime osebe',
   'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
       'Ta predstavitev vsebuje dele modula Informacijska varnost. Vklopite modul, da jih uredite.',
   'Inschakelen': 'Vklopi',

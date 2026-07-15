@@ -1758,6 +1758,9 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'adres': 'Daq',
+  'postcode': 'Daq mI\'',
+  'persoonsnaam': 'nuv pong',
   'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
       'nav vam De\' Qan module Dochmey ngaS. Dochmeyvam yIchoHmeH module yIchu\'.',
   'Inschakelen': 'yIchu\'',

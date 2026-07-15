@@ -1796,6 +1796,9 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'adres': 'adres',
+  'postcode': 'kod pocztowy',
+  'persoonsnaam': 'imię i nazwisko',
   'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
       'Ta prezentacja zawiera elementy modułu Bezpieczeństwo informacji. Włącz moduł, aby je edytować.',
   'Inschakelen': 'Włącz',

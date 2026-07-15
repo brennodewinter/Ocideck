@@ -1783,6 +1783,9 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'adres': 'alamat',
+  'postcode': 'kode pos',
+  'persoonsnaam': 'nama orang',
   'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
       'Presentasi ini berisi bagian dari modul Keamanan Informasi. Aktifkan modul untuk mengeditnya.',
   'Inschakelen': 'Aktifkan',

@@ -741,6 +741,9 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'adres': 'adres',
+  'postcode': 'postkoade',
+  'persoonsnaam': 'persoansnamme',
   'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
       'Dizze presintaasje befettet ûnderdielen fan de Ynformaasjefeiligensmodule. Set de module oan om se te bewurkjen.',
   'Inschakelen': 'Ynskeakelje',
