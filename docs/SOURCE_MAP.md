@@ -102,11 +102,12 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `privacy/privacy_eu_rules.dart` — The European country packs as a data table: pattern, checksum, context words, confidence.
 - `privacy/privacy_special_rules.dart` — GDPR art. 9/10: multilingual keyword families, genetic notation (dbSNP/HGVS), the Dutch parketnummer, the co-occurrence escalator's definition of "identifies a person", and `statementSpan` — because a special-category datum is a statement, not a word, so redacting it takes the whole line.
 - `privacy/privacy_phone_rules.dart` — Phone numbers: E.164 validated against the ITU calling-code list (the only form that earns `certain`), national trunk forms, the context-word gate for bare digit runs, and the reserved "drama" ranges that are the `example.com` of telephony.
+- `privacy/privacy_contact_rules.dart` — Address, Dutch postcode and labelled person-name: a street-suffix word with a house number, the `1234 AB` pattern (hex colours excluded), and names only behind a salutation (`dhr.`) or a label (`naam:`) — no NER. Address and postcode are each `possible`; a street and a postcode within ~40 characters escalate both to `certain`, because postcode + house number pins one home address.
 - `privacy/privacy_export_policy.dart` — The export gate: counts findings by disposition and decides whether to warn, block, or stay quiet.
 - `privacy/privacy_own_identity.dart` — `OwnIdentity`: the author's own name/email/domain, which is the sender rather than a finding. Exact and domain matching only — no fuzzy match, which would silently suppress a real finding.
 - `privacy/privacy_structural_rules.dart` — Structural leaks: user paths that reveal a name, tokens and personal data in URL queries, share links with built-in access, mailto links, unscannable data-URIs.
 - `privacy/privacy_bulk_rules.dart` — Bulk personal data: a table header that names the column ("Naam", "BSN"), or one rule firing too often on a slide. One finding on top of the individual ones, not instead of them.
-- `privacy/privacy_scanner.dart` — `PrivacyScanner`: reads a deck for privacy-sensitive data (email, IBAN, BSN), with context gates where the checksum is too weak.
+- `privacy/privacy_scanner.dart` — `PrivacyScanner`: reads a deck for privacy-sensitive data (email, phone, IBAN, BSN, EU numbers, address, postcode, name), with context gates where the checksum is too weak and proximity escalation where a postcode meets a house number.
 - `privacy/privacy_quality_bridge.dart` — Maps `PrivacyFinding` onto `SlideQualityIssue` so findings surface in the quality panel.
 - `privacy/privacy_projection.dart` — `AudienceDeck` + `PrivacyProjection`: the single boundary a source deck crosses to reach any receiving surface. Redacts `[[…]]` markers before rendering or export; the private constructor means no export path can hold the unredacted source.
 - `quality_export_policy.dart` — Gates export by slide-quality issues with warnings.
@@ -143,7 +144,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `parts/settings_provider_privacy.dart` — The privacy switches (master, per-rule, own identity, export gate).
 - `settings_provider.dart` — `SettingsNotifier`: app settings, theme/appearance profiles, cockpit schemes.
 - `slide_clipboard_provider.dart` — Global slide clipboard for copy/paste across tabs.
-- `tabs_provider.dart` — `TabInfo` and the tabs notifier: open editor tabs, recovery, WebDAV origin.
+- `tabs_provider.dart` — `TabInfo` and the tabs notifier: open editor tabs, recovery, WebDAV origin. Also hosts the one-shot open-time signals the shell listens on, including `securityModulePromptProvider` — set once per open when a deck carries Informatieveiligheid slide types, driving the "enable the module" discovery snackbar.
 - `webdav_provider.dart` — Providers for `WebdavService`, server config, and directory listings.
 
 ## `lib/utils/` — small shared helpers
@@ -209,7 +210,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 
 - `app_shell.dart` — Main application shell: layout, file IO, and dialog coordination.
 - `markdown_notes_editor.dart` — Barrel re-export of the markdown notes editor.
-- `privacy_badge.dart` — `PrivacyBadge` + the `privacyKatSvg` mark: the non-blocking marker (with an explanation on hover) for a spot where something leaves the device. Used by the status bar's remote-origin badge and the Security tab's online-CVE switch.
+- `privacy_badge.dart` — `PrivacyBadge`, the bare `PrivacyKatMark`, and the `privacyKatSvg` mark: the non-blocking marker (with an explanation on hover) for a spot where personal data is pointed at or something leaves the device. Used by the status bar's remote-origin badge, the export-readiness chip's privacy warnings, and the Security tab's online-CVE switch.
 - `privacy_statement_content.dart` — Privacy/license content shared by the consent and settings dialogs.
 
 ### `lib/widgets/shell/` (each `part of app_shell.dart`)

@@ -465,7 +465,7 @@ are shown.
 ## Privacy check
 
 OciDeck reads your slides for data that may be privacy-sensitive — identification
-numbers, contact details, bank accounts — and reports what it finds in the
+numbers, contact details, addresses and names, bank accounts — and reports what it finds in the
 **quality panel**, alongside the contrast and readability checks. Each privacy
 row carries the **PrivacyKat shield** mark instead of the generic warning icon,
 so at a glance you can tell a personal-data finding from a contrast or density
@@ -957,6 +957,15 @@ the readable optimum and leaves the rest, which you can split again. Splitting a
 pages match and share one font size — swap the follow-up to a plain bullets page
 via the slide **type** picker if you prefer.
 
+A bullet slide with multi-sentence or overly long bullets offers two more
+one-click fixes in the quality panel. **Split sentences into bullets** turns each
+multi-sentence bullet into one bullet per sentence — every word stays on the
+slide. **Explanation to notes** does the opposite: for a bullet shaped like
+*label : explanation* (split on a colon, a spaced hyphen, or the first full stop,
+when the explanation is at least a few words) it keeps just the label on the slide
+and moves the full original line to the speaker notes — the point survives where
+you can still say it, and one undo brings it back.
+
 #### Settings
 
 Under *Settings → General → Accessibility*:
@@ -987,6 +996,13 @@ available. While the module is off, none of those security types are offered
 anywhere, so the picker stays short for everyone who does not need them — but a
 report that already uses them always opens and renders correctly regardless (the
 file is the source of truth; the toggle only governs *authoring*).
+
+**Opening a security report while the module is off** surfaces a one-time
+prompt — a snackbar with an **Enable** action — so you can turn the module on
+right there instead of hunting through settings. It appears only when a deck you
+open actually contains security slide types and the module is off, once per open
+(never while you edit), and the slides render either way; it is purely a way to
+discover the module.
 
 The module's reference data is **bundled with the app**, so enabling it works
 **offline and out of the box** — no download, no server, and no outbound traffic

@@ -1762,6 +1762,13 @@ const _dutchSourceAddTlh = <String, String>{
   'Maak er weer een bullet van': 'ghItlh yIchenmoHqa\'',
   'Tussenkop (leeg = alleen een scheidingslijn)': 'nach bIng (chIm = HeH neH)',
   'Tussenkop toevoegen': 'nach bIng yIchel',
+  'Uitleg naar notities': 'ghItlhDaq QIj',
+  'adres': 'Daq',
+  'postcode': 'Daq mI\'',
+  'persoonsnaam': 'nuv pong',
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'nav vam De\' Qan module Dochmey ngaS. Dochmeyvam yIchoHmeH module yIchu\'.',
+  'Inschakelen': 'yIchu\'',
   'Bevestigen': 'wuq',
   'Onderbouwing van de bevestiging': 'meq',
   'De eigenaar staat insluiten niet toe': 'ghajwI\' chaw\'be\'',

@@ -1807,6 +1807,13 @@ const _dutchSourceAddRo = <String, String>{
   'Tussenkop (leeg = alleen een scheidingslijn)':
       'Subtitlu (gol = doar o linie de separare)',
   'Tussenkop toevoegen': 'Adaugă subtitlu',
+  'Uitleg naar notities': 'Explicația în note',
+  'adres': 'adresă',
+  'postcode': 'cod poștal',
+  'persoonsnaam': 'nume de persoană',
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Această prezentare conține elemente ale modulului Securitatea informațiilor. Activează modulul pentru a le edita.',
+  'Inschakelen': 'Activează',
   'Bevestigen': 'Confirmă',
   'Onderbouwing van de bevestiging': 'Justificarea confirmării',
   'De eigenaar staat insluiten niet toe':

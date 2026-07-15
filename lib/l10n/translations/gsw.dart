@@ -1792,6 +1792,13 @@ const _dutchSourceAddGsw = <String, String>{
   'Tussenkop (leeg = alleen een scheidingslijn)':
       'Zwüschetitel (leer = nur e Trennlinie)',
   'Tussenkop toevoegen': 'Zwüschetitel zuefüege',
+  'Uitleg naar notities': 'Erchlärig i d Notize',
+  'adres': 'Adrässe',
+  'postcode': 'Poschtleitzahl',
+  'persoonsnaam': 'Persoonename',
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Die Präsentation enthaltet Teil vom Modul Informationssicherheit. Aktivier s Modul, zum si bearbeite.',
+  'Inschakelen': 'Aktiviere',
   'Bevestigen': 'Bestätige',
   'Onderbouwing van de bevestiging': 'Begründig vo dr Bestätigung',
   'De eigenaar staat insluiten niet toe': 'De Bsitzer erlaubt s Iibette nöd',

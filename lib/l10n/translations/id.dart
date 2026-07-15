@@ -1788,6 +1788,13 @@ const _dutchSourceAddId = <String, String>{
   'Tussenkop (leeg = alleen een scheidingslijn)':
       'Subjudul (kosong = hanya garis pemisah)',
   'Tussenkop toevoegen': 'Tambah subjudul',
+  'Uitleg naar notities': 'Penjelasan ke catatan',
+  'adres': 'alamat',
+  'postcode': 'kode pos',
+  'persoonsnaam': 'nama orang',
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Presentasi ini berisi bagian dari modul Keamanan Informasi. Aktifkan modul untuk mengeditnya.',
+  'Inschakelen': 'Aktifkan',
   'Bevestigen': 'Konfirmasi',
   'Onderbouwing van de bevestiging': 'Dasar konfirmasi',
   'De eigenaar staat insluiten niet toe':

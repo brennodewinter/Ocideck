@@ -742,6 +742,13 @@ const _dutchSourceAddEs = {
   'Tussenkop (leeg = alleen een scheidingslijn)':
       'Subencabezado (vacío = solo una línea divisoria)',
   'Tussenkop toevoegen': 'Añadir subencabezado',
+  'Uitleg naar notities': 'Explicación a las notas',
+  'adres': 'dirección',
+  'postcode': 'código postal',
+  'persoonsnaam': 'nombre de persona',
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Esta presentación contiene elementos del módulo de Seguridad de la información. Activa el módulo para editarlos.',
+  'Inschakelen': 'Activar',
   'Bevestigen': 'Confirmar',
   'Onderbouwing van de bevestiging': 'Justificación de la confirmación',
   'De eigenaar staat insluiten niet toe':

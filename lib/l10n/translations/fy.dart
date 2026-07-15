@@ -746,6 +746,13 @@ const _dutchSourceAddFy = {
   'Tussenkop (leeg = alleen een scheidingslijn)':
       'Tuskenkop (leech = allinnich in skiedingsstreek)',
   'Tussenkop toevoegen': 'Tuskenkop tafoegje',
+  'Uitleg naar notities': 'Taljochting nei notysjes',
+  'adres': 'adres',
+  'postcode': 'postkoade',
+  'persoonsnaam': 'persoansnamme',
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Dizze presintaasje befettet ûnderdielen fan de Ynformaasjefeiligensmodule. Set de module oan om se te bewurkjen.',
+  'Inschakelen': 'Ynskeakelje',
   'Bevestigen': 'Befêstigje',
   'Onderbouwing van de bevestiging': 'Underbouwing fan de befêstiging',
   'De eigenaar staat insluiten niet toe': 'De eigner stiet ynsluten net ta',

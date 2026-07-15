@@ -1787,6 +1787,13 @@ const _dutchSourceAddLv = <String, String>{
   'Tussenkop (leeg = alleen een scheidingslijn)':
       'Starpvirsraksts (tukšs = tikai atdalītājlīnija)',
   'Tussenkop toevoegen': 'Pievienot starpvirsrakstu',
+  'Uitleg naar notities': 'Skaidrojumu uz piezīmēm',
+  'adres': 'adrese',
+  'postcode': 'pasta indekss',
+  'persoonsnaam': 'personas vārds',
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Šī prezentācija satur Informācijas drošības moduļa daļas. Ieslēdziet moduli, lai tās rediģētu.',
+  'Inschakelen': 'Ieslēgt',
   'Bevestigen': 'Apstiprināt',
   'Onderbouwing van de bevestiging': 'Apstiprinājuma pamatojums',
   'De eigenaar staat insluiten niet toe': 'Īpašnieks neatļauj iegulšanu',

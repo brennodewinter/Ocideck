@@ -1792,6 +1792,13 @@ const _dutchSourceAddHu = <String, String>{
   'Tussenkop (leeg = alleen een scheidingslijn)':
       'Közcím (üres = csak elválasztó vonal)',
   'Tussenkop toevoegen': 'Közcím hozzáadása',
+  'Uitleg naar notities': 'Magyarázat a jegyzetekbe',
+  'adres': 'cím',
+  'postcode': 'irányítószám',
+  'persoonsnaam': 'személynév',
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Ez a bemutató az Információbiztonsági modul elemeit tartalmazza. Kapcsold be a modult a szerkesztésükhöz.',
+  'Inschakelen': 'Bekapcsolás',
   'Bevestigen': 'Megerősítés',
   'Onderbouwing van de bevestiging': 'A megerősítés indoklása',
   'De eigenaar staat insluiten niet toe':

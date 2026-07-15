@@ -1818,6 +1818,13 @@ const _dutchSourceAddPt = <String, String>{
   'Tussenkop (leeg = alleen een scheidingslijn)':
       'Intertítulo (vazio = apenas uma linha divisória)',
   'Tussenkop toevoegen': 'Adicionar intertítulo',
+  'Uitleg naar notities': 'Explicação para as notas',
+  'adres': 'endereço',
+  'postcode': 'código postal',
+  'persoonsnaam': 'nome de pessoa',
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Esta apresentação contém elementos do módulo de Segurança da informação. Ative o módulo para os editar.',
+  'Inschakelen': 'Ativar',
   'Bevestigen': 'Confirmar',
   'Onderbouwing van de bevestiging': 'Justificação da confirmação',
   'De eigenaar staat insluiten niet toe':

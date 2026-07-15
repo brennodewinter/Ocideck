@@ -1804,6 +1804,13 @@ const _dutchSourceAddLa = <String, String>{
   'Tussenkop (leeg = alleen een scheidingslijn)':
       'Titulus interpositus (vacuus = tantum linea divisoria)',
   'Tussenkop toevoegen': 'Titulum interpositum addere',
+  'Uitleg naar notities': 'Explicatio in notas',
+  'adres': 'inscriptio',
+  'postcode': 'numerus postalis',
+  'persoonsnaam': 'nomen personae',
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Haec demonstratio partes moduli Securitatis Informationum continet. Modulum activa ut eas recenseas.',
+  'Inschakelen': 'Activare',
   'Bevestigen': 'Confirmare',
   'Onderbouwing van de bevestiging': 'Ratio confirmationis',
   'De eigenaar staat insluiten niet toe': 'Dominus insertionem non permittit',

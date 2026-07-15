@@ -927,6 +927,13 @@ const _dutchSourceAddEn = {
   'Tussenkop (leeg = alleen een scheidingslijn)':
       'Group heading (empty = just a divider line)',
   'Tussenkop toevoegen': 'Add group heading',
+  'Uitleg naar notities': 'Explanation to notes',
+  'adres': 'address',
+  'postcode': 'postal code',
+  'persoonsnaam': 'person\'s name',
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'This presentation contains parts of the Information security module. Turn the module on to edit them.',
+  'Inschakelen': 'Enable',
   'Bevestigen': 'Confirm',
   'Onderbouwing van de bevestiging': 'Basis for the confirmation',
   'De eigenaar staat insluiten niet toe': 'The owner doesn\'t allow embedding',

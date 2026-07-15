@@ -120,6 +120,12 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
   void initState() {
     super.initState();
     windowManager.addListener(this);
+    // Warm up the Informatieveiligheid-module state at shell startup so that by
+    // the time a deck is opened its `loading` flag has cleared. Without this the
+    // very first security-deck open would read the still-loading module and skip
+    // the discovery prompt (which only ever appears when the module is known
+    // off). See the [securityModulePromptProvider] listener in [build].
+    ref.read(secModuleProvider);
     _openFileChannel = OpenFileChannel(_onFilesDropped);
     // De TabsNotifier kent geen BuildContext; de shell levert de dialoog die
     // om het wachtwoord van een versleuteld pakket vraagt (met retry-melding).
@@ -455,6 +461,37 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(context.l10n.d('Instelling opslaan is mislukt.')),
+        ),
+      );
+    });
+
+    // Een zojuist geopende presentatie bevat Informatieveiligheid-slidetypes
+    // terwijl de module uit staat: bied eenmalig aan de module aan te zetten
+    // (puur discovery — de slides renderen sowieso gewoon, MODUS-REGEL). De
+    // state-laag seint dit alleen bij het OPENEN; edits raken dit pad nooit,
+    // dus de prompt komt precies één keer per open. De module-stand toetsen we
+    // hier, op het verse moment: nog aan het laden of al aan → niets tonen.
+    ref.listen<SecurityModulePrompt?>(securityModulePromptProvider, (
+      _,
+      prompt,
+    ) {
+      if (prompt == null) return;
+      ref.read(securityModulePromptProvider.notifier).state = null;
+      final sec = ref.read(secModuleProvider);
+      if (sec.loading || sec.enabled) return;
+      final l10n = context.l10n;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          duration: const Duration(seconds: 8),
+          content: Text(
+            l10n.d(
+              'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.',
+            ),
+          ),
+          action: SnackBarAction(
+            label: l10n.d('Inschakelen'),
+            onPressed: () => ref.read(secModuleProvider.notifier).enable(),
+          ),
         ),
       );
     });

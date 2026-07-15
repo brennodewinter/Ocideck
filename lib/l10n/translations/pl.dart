@@ -1801,6 +1801,13 @@ const _dutchSourceAddPl = <String, String>{
   'Tussenkop (leeg = alleen een scheidingslijn)':
       'Śródtytuł (puste = tylko linia oddzielająca)',
   'Tussenkop toevoegen': 'Dodaj śródtytuł',
+  'Uitleg naar notities': 'Wyjaśnienie do notatek',
+  'adres': 'adres',
+  'postcode': 'kod pocztowy',
+  'persoonsnaam': 'imię i nazwisko',
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Ta prezentacja zawiera elementy modułu Bezpieczeństwo informacji. Włącz moduł, aby je edytować.',
+  'Inschakelen': 'Włącz',
   'Bevestigen': 'Potwierdź',
   'Onderbouwing van de bevestiging': 'Uzasadnienie potwierdzenia',
   'De eigenaar staat insluiten niet toe': 'Właściciel nie zezwala na osadzanie',

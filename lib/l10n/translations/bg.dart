@@ -1811,6 +1811,13 @@ const _dutchSourceAddBg = <String, String>{
   'Tussenkop (leeg = alleen een scheidingslijn)':
       'Междинно заглавие (празно = само разделителна линия)',
   'Tussenkop toevoegen': 'Добавяне на междинно заглавие',
+  'Uitleg naar notities': 'Обяснение в бележките',
+  'adres': 'адрес',
+  'postcode': 'пощенски код',
+  'persoonsnaam': 'име на лице',
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Тази презентация съдържа елементи от модула Информационна сигурност. Включете модула, за да ги редактирате.',
+  'Inschakelen': 'Включване',
   'Bevestigen': 'Потвърди',
   'Onderbouwing van de bevestiging': 'Обосновка на потвърждението',
   'De eigenaar staat insluiten niet toe': 'Собственикът не разрешава вграждане',

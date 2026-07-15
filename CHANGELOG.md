@@ -18,6 +18,28 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   lists as well as the two-column and bullets-with-image layouts. They travel with
   the deck in the `.md` (an inline `U+E010` marker on the list item, so the file
   stays valid Marp) and round-trip losslessly.
+- **Opening a security report while the Informatieveiligheid module is off now
+  offers to turn it on.** When you open a presentation that contains security
+  slide types (a finding, findings overview, checklist, scope matrix or
+  sign-off) while the module is disabled, a one-time snackbar with an **Enable**
+  action appears — so the module is discoverable from the deck that needs it,
+  not just buried in settings. The prompt shows once per open (never while you
+  edit) and only when the module is off; the slides render either way, so this
+  is purely a discovery aid.
+- **The privacy check now detects addresses, Dutch postcodes and labelled
+  names.** A street with a house number (`Kalverstraat 12`) and a Dutch postcode
+  (`1234 AB`) each surface as a hint; when they sit close together on a slide
+  they escalate to a warning, because a postcode plus a house number pins one
+  home address. Person names are detected only behind a salutation (`dhr.`) or a
+  label (`naam:`) — never by guessing — and stay a hint. All three are redacted
+  on slides set to *redact*, in every field including the title. A bare name in a
+  title (with no label) still needs the manual `[[…]]` marking.
+- **New quality fix "Explanation to notes" for overcrowded bullet slides.**
+  Splitting bullets keeps all the text on the slide; this fix removes it. For a
+  bullet shaped like *label : explanation* — split on a colon, a spaced hyphen or
+  the first full stop, when the explanation is substantial — it keeps just the
+  label on the slide and moves the full original line to the speaker notes. The
+  content is not lost, only relocated, and one undo brings it back.
 
 ### Changed
 - **The privacy feature is now called OciWacht.** "Privacy Shield" was a
@@ -37,6 +59,12 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   glance from a contrast or text-density one.
 
 ### Fixed
+- **The export-readiness status now shows the PrivacyKat mark for privacy
+  warnings.** The "N privacy findings without a choice" chip (and "Privacy
+  blocks export") in the status bar carried a generic warning icon instead of
+  the PrivacyKat shield used on the slide badge and in the quality panel. It now
+  shows the same mark, so the personal-data warning reads as one brand
+  everywhere.
 - **An embedded video that will not play now says why.** Every failure mode of a
   YouTube/Vimeo embed used to collapse into the same dead rectangle — a blank
   grey box indistinguishable from "still loading", and from "online media is

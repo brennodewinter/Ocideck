@@ -1787,6 +1787,13 @@ const _dutchSourceAddDa = <String, String>{
   'Tussenkop (leeg = alleen een scheidingslijn)':
       'Mellemoverskrift (tom = kun en skillelinje)',
   'Tussenkop toevoegen': 'Tilføj mellemoverskrift',
+  'Uitleg naar notities': 'Forklaring til noter',
+  'adres': 'adresse',
+  'postcode': 'postnummer',
+  'persoonsnaam': 'personnavn',
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Denne præsentation indeholder dele af modulet Informationssikkerhed. Slå modulet til for at redigere dem.',
+  'Inschakelen': 'Slå til',
   'Bevestigen': 'Bekræft',
   'Onderbouwing van de bevestiging': 'Begrundelse for bekræftelsen',
   'De eigenaar staat insluiten niet toe': 'Ejeren tillader ikke indlejring',

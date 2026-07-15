@@ -745,6 +745,13 @@ const _dutchSourceAddFr = {
   'Tussenkop (leeg = alleen een scheidingslijn)':
       'Intertitre (vide = seulement une ligne de séparation)',
   'Tussenkop toevoegen': 'Ajouter un intertitre',
+  'Uitleg naar notities': 'Explication dans les notes',
+  'adres': 'adresse',
+  'postcode': 'code postal',
+  'persoonsnaam': 'nom de personne',
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Cette présentation contient des éléments du module Sécurité de l\'information. Activez le module pour les modifier.',
+  'Inschakelen': 'Activer',
   'Bevestigen': 'Confirmer',
   'Onderbouwing van de bevestiging': 'Justification de la confirmation',
   'De eigenaar staat insluiten niet toe':

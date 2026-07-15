@@ -1779,6 +1779,13 @@ const _dutchSourceAddEt = <String, String>{
   'Tussenkop (leeg = alleen een scheidingslijn)':
       'Vahepealkiri (tühi = ainult eraldusjoon)',
   'Tussenkop toevoegen': 'Lisa vahepealkiri',
+  'Uitleg naar notities': 'Selgitus märkmetesse',
+  'adres': 'aadress',
+  'postcode': 'postiindeks',
+  'persoonsnaam': 'isiku nimi',
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'See esitlus sisaldab infoturbe mooduli osi. Lülita moodul sisse, et neid muuta.',
+  'Inschakelen': 'Lülita sisse',
   'Bevestigen': 'Kinnita',
   'Onderbouwing van de bevestiging': 'Kinnituse põhjendus',
   'De eigenaar staat insluiten niet toe': 'Omanik ei luba manustamist',

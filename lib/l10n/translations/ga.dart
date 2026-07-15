@@ -1824,6 +1824,13 @@ const _dutchSourceAddGa = <String, String>{
   'Tussenkop (leeg = alleen een scheidingslijn)':
       'Fo-cheannteideal (folamh = líne deighilte amháin)',
   'Tussenkop toevoegen': 'Cuir fo-cheannteideal leis',
+  'Uitleg naar notities': 'Míniú chuig na nótaí',
+  'adres': 'seoladh',
+  'postcode': 'cód poist',
+  'persoonsnaam': 'ainm duine',
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Tá codanna den mhodúl Slándáil Faisnéise sa láithreoireacht seo. Cuir an modúl ar siúl chun iad a chur in eagar.',
+  'Inschakelen': 'Cuir ar siúl',
   'Bevestigen': 'Deimhnigh',
   'Onderbouwing van de bevestiging': 'Bunús an dearbhaithe',
   'De eigenaar staat insluiten niet toe': 'Ní cheadaíonn an t-úinéir leabú',

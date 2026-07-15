@@ -1795,6 +1795,13 @@ const _dutchSourceAddHr = <String, String>{
   'Tussenkop (leeg = alleen een scheidingslijn)':
       'Međunaslov (prazno = samo crta razdvajanja)',
   'Tussenkop toevoegen': 'Dodaj međunaslov',
+  'Uitleg naar notities': 'Objašnjenje u bilješke',
+  'adres': 'adresa',
+  'postcode': 'poštanski broj',
+  'persoonsnaam': 'ime osobe',
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Ova prezentacija sadrži dijelove modula Informacijska sigurnost. Uključite modul da biste ih uređivali.',
+  'Inschakelen': 'Uključi',
   'Bevestigen': 'Potvrdi',
   'Onderbouwing van de bevestiging': 'Obrazloženje potvrde',
   'De eigenaar staat insluiten niet toe': 'Vlasnik ne dopušta ugrađivanje',

@@ -1806,6 +1806,13 @@ const _dutchSourceAddUk = <String, String>{
   'Tussenkop (leeg = alleen een scheidingslijn)':
       'Підзаголовок (порожньо = лише розділювальна лінія)',
   'Tussenkop toevoegen': 'Додати підзаголовок',
+  'Uitleg naar notities': 'Пояснення до нотаток',
+  'adres': 'адреса',
+  'postcode': 'поштовий індекс',
+  'persoonsnaam': 'ім\'я особи',
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Ця презентація містить елементи модуля «Інформаційна безпека». Увімкніть модуль, щоб редагувати їх.',
+  'Inschakelen': 'Увімкнути',
   'Bevestigen': 'Підтвердити',
   'Onderbouwing van de bevestiging': 'Обґрунтування підтвердження',
   'De eigenaar staat insluiten niet toe': 'Власник не дозволяє вбудовування',

@@ -1788,6 +1788,13 @@ const _dutchSourceAddFi = <String, String>{
   'Tussenkop (leeg = alleen een scheidingslijn)':
       'Väliotsikko (tyhjä = vain erotinviiva)',
   'Tussenkop toevoegen': 'Lisää väliotsikko',
+  'Uitleg naar notities': 'Selitys muistiinpanoihin',
+  'adres': 'osoite',
+  'postcode': 'postinumero',
+  'persoonsnaam': 'henkilön nimi',
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Tämä esitys sisältää Tietoturva-moduulin osia. Ota moduuli käyttöön muokataksesi niitä.',
+  'Inschakelen': 'Ota käyttöön',
   'Bevestigen': 'Vahvista',
   'Onderbouwing van de bevestiging': 'Vahvistuksen perustelu',
   'De eigenaar staat insluiten niet toe': 'Omistaja ei salli upottamista',

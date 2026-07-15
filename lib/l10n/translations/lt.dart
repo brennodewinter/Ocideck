@@ -1796,6 +1796,13 @@ const _dutchSourceAddLt = <String, String>{
   'Tussenkop (leeg = alleen een scheidingslijn)':
       'Tarpinė antraštė (tuščia = tik skiriamoji linija)',
   'Tussenkop toevoegen': 'Pridėti tarpinę antraštę',
+  'Uitleg naar notities': 'Paaiškinimą į pastabas',
+  'adres': 'adresas',
+  'postcode': 'pašto kodas',
+  'persoonsnaam': 'asmens vardas',
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Šioje pateiktyje yra Informacijos saugumo modulio dalių. Įjunkite modulį, kad galėtumėte jas redaguoti.',
+  'Inschakelen': 'Įjungti',
   'Bevestigen': 'Patvirtinti',
   'Onderbouwing van de bevestiging': 'Patvirtinimo pagrindimas',
   'De eigenaar staat insluiten niet toe': 'Savininkas neleidžia įterpti',

@@ -1790,6 +1790,13 @@ const _dutchSourceAddSl = <String, String>{
   'Tussenkop (leeg = alleen een scheidingslijn)':
       'Mednaslov (prazno = samo ločilna črta)',
   'Tussenkop toevoegen': 'Dodaj mednaslov',
+  'Uitleg naar notities': 'Pojasnilo v opombe',
+  'adres': 'naslov',
+  'postcode': 'poštna številka',
+  'persoonsnaam': 'ime osebe',
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Ta predstavitev vsebuje dele modula Informacijska varnost. Vklopite modul, da jih uredite.',
+  'Inschakelen': 'Vklopi',
   'Bevestigen': 'Potrdi',
   'Onderbouwing van de bevestiging': 'Utemeljitev potrditve',
   'De eigenaar staat insluiten niet toe': 'Lastnik ne dovoljuje vdelave',

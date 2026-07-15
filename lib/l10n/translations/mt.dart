@@ -1811,6 +1811,13 @@ const _dutchSourceAddMt = <String, String>{
   'Tussenkop (leeg = alleen een scheidingslijn)':
       'Intestatura tal-grupp (vojta = biss linja separatriċi)',
   'Tussenkop toevoegen': 'Żid intestatura tal-grupp',
+  'Uitleg naar notities': 'Spjegazzjoni fin-noti',
+  'adres': 'indirizz',
+  'postcode': 'kodiċi postali',
+  'persoonsnaam': 'isem ta\' persuna',
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Din il-preżentazzjoni fiha partijiet mill-modulu tas-Sigurtà tal-Informazzjoni. Ixgħel il-modulu biex teditjahom.',
+  'Inschakelen': 'Ixgħel',
   'Bevestigen': 'Ikkonferma',
   'Onderbouwing van de bevestiging': 'Ġustifikazzjoni tal-konferma',
   'De eigenaar staat insluiten niet toe':

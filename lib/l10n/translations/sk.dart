@@ -1795,6 +1795,13 @@ const _dutchSourceAddSk = <String, String>{
   'Tussenkop (leeg = alleen een scheidingslijn)':
       'Medzititulok (prázdne = iba oddeľovacia čiara)',
   'Tussenkop toevoegen': 'Pridať medzititulok',
+  'Uitleg naar notities': 'Vysvetlenie do poznámok',
+  'adres': 'adresa',
+  'postcode': 'PSČ',
+  'persoonsnaam': 'meno osoby',
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Táto prezentácia obsahuje časti modulu Informačná bezpečnosť. Zapnite modul, aby ste ich mohli upravovať.',
+  'Inschakelen': 'Zapnúť',
   'Bevestigen': 'Potvrdiť',
   'Onderbouwing van de bevestiging': 'Odôvodnenie potvrdenia',
   'De eigenaar staat insluiten niet toe': 'Vlastník nepovoľuje vkladanie',

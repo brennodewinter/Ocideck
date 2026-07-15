@@ -1787,6 +1787,13 @@ const _dutchSourceAddSv = <String, String>{
   'Tussenkop (leeg = alleen een scheidingslijn)':
       'Mellanrubrik (tom = endast en avgränsningslinje)',
   'Tussenkop toevoegen': 'Lägg till mellanrubrik',
+  'Uitleg naar notities': 'Förklaring till anteckningar',
+  'adres': 'adress',
+  'postcode': 'postnummer',
+  'persoonsnaam': 'personnamn',
+  'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
+      'Den här presentationen innehåller delar av modulen Informationssäkerhet. Aktivera modulen för att redigera dem.',
+  'Inschakelen': 'Aktivera',
   'Bevestigen': 'Bekräfta',
   'Onderbouwing van de bevestiging': 'Motivering för bekräftelsen',
   'De eigenaar staat insluiten niet toe': 'Ägaren tillåter inte inbäddning',
