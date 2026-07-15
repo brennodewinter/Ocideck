@@ -19,8 +19,15 @@ part 'cvss4_scoring.dart';
 
 /// Aantal MacroVector-rijen in de FIRST-scoretabel. Alleen om de gebruiker te
 /// laten zien hóéveel referentiegegevens er lokaal zijn (Instellingen →
-/// Uitbreidingen); de tabel zelf blijft privé.
+/// Uitbreidingen). Het scoren leest altijd de privé-tabel; die wordt alleen als
+/// geheel, read-only blootgesteld via [cvss4LookupTable] voor de pack-bouwer.
 int get cvss4LookupSize => _cvssLookup.length;
+
+/// The full MacroVector→score lookup table, exposed read-only so the module
+/// pack builder (tool/build_secmodule_pack.dart) can serialise it into the
+/// reference-data pack. It is an immutable `const` map; the scoring path keeps
+/// reading the private original.
+Map<String, double> get cvss4LookupTable => _cvssLookup;
 
 /// Qualitative severity band for a CVSS v4.0 score, per the FIRST rating scale:
 /// None 0.0 / Low 0.1–3.9 / Medium 4.0–6.9 / High 7.0–8.9 / Critical 9.0–10.0.

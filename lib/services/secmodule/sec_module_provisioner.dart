@@ -15,7 +15,7 @@
 //   3. baseline pack across mirrors → consent-gated; only when there is no
 //                                     bundled pack for this version;
 //   4. manual local-file import ([provisionFromBytes]).
-// (An opt-in upstream refresh is out of scope for the skeleton.)
+// (An opt-in upstream refresh is out of scope for now.)
 //
 // Both the network layer ([SecPackTransport]) and the on-disk cache
 // ([SecPackStore]) are INJECTED, so tests exercise fetch/verify/cache with a

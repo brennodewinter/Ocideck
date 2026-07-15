@@ -9,23 +9,24 @@
 // the pack, and PRINTS the outer sha256 to pin into the app
 // (lib/services/secmodule/sec_pack_config.dart → `secPackSha256`).
 //
-// SKELETON STATUS: this packages a MINIMAL PLACEHOLDER dataset so the mechanism
-// is verifiable end-to-end. The real CWE 4.20 / WSTG / CVSS 4.0 lookup / MIAUW
-// 92-EIS content is wired in by later steps — swap [_datasets] for the real
-// normalisers then, rebuild, and re-pin the printed hash + committed fixture in
-// the same commit.
+// STATUS: this packages the REAL CWE 4.20, OWASP WSTG v4.2 and FIRST CVSS 4.0
+// MacroVector datasets from their in-repo sources of truth. MIAUW is still a
+// placeholder — the full 92-EIS schema (derived from docs/design/PENTEST_MIAUW
+// .md) is wired in by a later step. Rebuild + re-pin the printed hash + the
+// committed fixture in the same commit whenever the datasets change.
 //
 // The pack is BUNDLED with the app (declared under `assets/secmodule/` in
 // pubspec.yaml) so the Informatieveiligheid module provisions from it offline,
 // with no mirror and no outbound traffic — the provisioner verifies the bundled
-// bytes against the pinned hash exactly like a manual import. Rebuild + re-pin
-// the printed hash here in the same commit whenever the datasets change.
+// bytes against the pinned hash exactly like a manual import.
 
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:ocideck/services/cvss/cvss4.dart';
 import 'package:ocideck/services/secmodule/sec_pack_codec.dart';
 import 'package:ocideck/services/secmodule/sec_pack_config.dart';
+import 'package:ocideck/services/wstg_catalog.dart';
 
 /// Where the built pack is written — the bundled app asset (see pubspec.yaml).
 const _outDir = 'assets/secmodule';
@@ -61,9 +62,10 @@ void main(List<String> args) {
   }
 }
 
-/// Minimal placeholder datasets, each carrying its upstream version + licence
+/// The bundled reference datasets, each carrying its upstream version + licence
 /// (PENTEST_MIAUW.md §15) so the compliance appendix stays accurate. Content is
-/// fixed so the pack bytes — and therefore the outer sha256 — are reproducible.
+/// derived deterministically from the in-repo sources of truth so the pack bytes
+/// — and therefore the outer sha256 — are reproducible.
 List<SecPackDataFile> _datasets(String version) {
   SecPackDataFile file(
     String name,
@@ -85,56 +87,31 @@ List<SecPackDataFile> _datasets(String version) {
   return [
     file(
       'cwe/cwe.json',
-      {
-        '_note': 'PLACEHOLDER — real MITRE CWE 4.20 list wired in later (P3).',
-        'weaknesses': [
-          {
-            'id': 'CWE-89',
-            'name': 'Improper Neutralization of SQL',
-            'url': 'https://cwe.mitre.org/data/definitions/89.html',
-          },
-        ],
-      },
-      upstreamVersion: 'CWE 4.20 (placeholder)',
+      _cweDataset(),
+      upstreamVersion: 'CWE 4.20',
       licence: 'MITRE Terms of Use',
       source: 'https://cwe.mitre.org/',
     ),
     file(
       'wstg/wstg.json',
-      {
-        '_note':
-            'PLACEHOLDER — real OWASP WSTG stable checklist wired in later.',
-        'categories': [
-          {
-            'id': 'WSTG-ATHN',
-            'tests': [
-              {
-                'id': 'WSTG-ATHN-07',
-                'title': 'Testing for Weak Password Policy',
-              },
-            ],
-          },
-        ],
-      },
-      upstreamVersion: 'WSTG stable (placeholder)',
+      _wstgDataset(),
+      upstreamVersion: 'WSTG $wstgVersion',
       licence: 'CC-BY-SA-4.0',
       source: 'https://owasp.org/www-project-web-security-testing-guide/',
     ),
     file(
       'cvss/cvss_lookup.json',
-      {
-        '_note':
-            'PLACEHOLDER — real CVSS 4.0 MacroVector lookup wired in later.',
-        'lookup': {'000000000000': 10.0},
-      },
-      upstreamVersion: 'CVSS 4.0 (placeholder)',
-      licence: 'FIRST.Org attribution',
+      _cvssDataset(),
+      upstreamVersion: 'CVSS 4.0',
+      licence: 'BSD-2-Clause',
       source: 'https://www.first.org/cvss/',
     ),
     file(
       'miauw/schema.json',
       {
-        '_note': 'PLACEHOLDER — real MIAUW 92-EIS schema wired in later.',
+        '_note':
+            'PLACEHOLDER — the full MIAUW 92-EIS schema (derived from '
+            'docs/design/PENTEST_MIAUW.md) is wired in by a later step.',
         'requirements': [
           {'id': '1.1', 'title': 'Digitale aanlevering + hash'},
         ],
@@ -146,3 +123,30 @@ List<SecPackDataFile> _datasets(String version) {
     ),
   ];
 }
+
+/// The full MITRE CWE list, read from the bundled asset (the same source
+/// [CweCatalog] loads at runtime), normalised to `{id, name, description}`.
+Object _cweDataset() {
+  final raw = File('assets/cwe/cwe_full.json').readAsStringSync();
+  final list = (jsonDecode(raw) as List).cast<Map<String, dynamic>>();
+  return [
+    for (final m in list)
+      {
+        'id': (m['id'] as num).toInt(),
+        'name': (m['name'] as String?) ?? '',
+        'description': (m['description'] as String?) ?? '',
+      },
+  ];
+}
+
+/// The OWASP WSTG v4.2 checklist, serialised from the in-repo [WstgCatalog].
+Object _wstgDataset() => {
+  'version': wstgVersion,
+  'tests': [
+    for (final t in WstgCatalog.instance.tests)
+      {'id': t.id, 'title': t.title, 'category': t.category},
+  ],
+};
+
+/// The FIRST CVSS 4.0 MacroVector→score lookup, from the in-repo [cvss4LookupTable].
+Object _cvssDataset() => {'lookup': cvss4LookupTable};
