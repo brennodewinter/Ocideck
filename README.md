@@ -37,7 +37,10 @@ Built with Flutter for macOS, Windows, Linux, and **web**.
 
 ## Requirements
 
-- Flutter SDK `^3.12.0` (Dart 3.12+)
+- Flutter **3.44.6** (stable) — the pinned toolchain (see `.tool-versions`),
+  bundling Dart 3.12.2. The `pubspec.yaml` Dart SDK constraint is `^3.12.0`;
+  building tolerates Flutter 3.44+, but `make format-check` is version-sensitive
+  (see [BUILD.md](docs/BUILD.md)).
 - A desktop target enabled: macOS, Windows, or Linux — or run in a browser via Flutter web
 
 ## Getting started
@@ -74,7 +77,7 @@ Run `make check` before pushing — it is the same quality gate (format check,
 static analysis, full test suite) you would wire into CI. `make check-full` adds
 licence compliance (`make licenses`), the vendored-JS security check
 (`make deps-check`), and the SBOM freshness gate (`make sbom-verify`). For the
-full reference — every check, what it covers, and how CI runs it — see
+full reference — every check, what it covers, and how it is enforced — see
 [`docs/CHECKS.md`](docs/CHECKS.md).
 
 OciDeck ships a machine-readable **Software Bill of Materials** (CycloneDX 1.6 +
@@ -113,7 +116,7 @@ style profile, sidecars, and the package format — is documented in
 | [Architecture](docs/ARCHITECTURE.md) | How the code fits together (for contributors) |
 | [Build & release](docs/BUILD.md) | Building from source and producing distributables |
 | [Changelog](CHANGELOG.md) | Notable changes per version |
-| [Checks & CI](docs/CHECKS.md) | Every automated check, what it covers, and how CI runs it |
+| [Checks & CI](docs/CHECKS.md) | Every automated check, what it covers, and how each is enforced |
 | [Contributing](CONTRIBUTING.md) | Setup, the quality gate, and how to propose changes |
 | [File format](docs/FILE_FORMAT.md) | The Marp Markdown, front matter, sidecars, and `.ocideck` package |
 | [Keyboard shortcuts](docs/SHORTCUTS.md) | Editor and presenter shortcuts |
