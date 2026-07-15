@@ -15,7 +15,7 @@
 //   3. baseline pack across mirrors → consent-gated; only when there is no
 //                                     bundled pack for this version;
 //   4. manual local-file import ([provisionFromBytes]).
-// (An opt-in upstream refresh is out of scope for the skeleton.)
+// (An opt-in upstream refresh is out of scope for now.)
 //
 // Both the network layer ([SecPackTransport]) and the on-disk cache
 // ([SecPackStore]) are INJECTED, so tests exercise fetch/verify/cache with a
@@ -62,6 +62,17 @@ abstract class SecPackStore {
   /// cached. A stored version is only reported when its recorded outer hash
   /// still matches [expectedHash].
   Future<String?> cachedVersion({
+    required String version,
+    required String expectedHash,
+  });
+
+  /// Load the cached pack for [version], or null when nothing valid is cached.
+  /// This is the read side of [save]: the module's reference-data consumers pull
+  /// their catalogs through it once the module is provisioned. The recorded
+  /// outer hash must still match [expectedHash] and every data file must still
+  /// match its manifest sha256 (so an on-disk-tampered cache is refused, not
+  /// served); otherwise null.
+  Future<SecPackContents?> read({
     required String version,
     required String expectedHash,
   });

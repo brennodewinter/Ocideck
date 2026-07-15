@@ -19,12 +19,19 @@ class _FailTransport implements SecPackTransport {
 class _MemStore implements SecPackStore {
   String? _version;
   String? _hash;
+  SecPackContents? _contents;
 
   @override
   Future<String?> cachedVersion({
     required String version,
     required String expectedHash,
   }) async => (_version == version && _hash == expectedHash) ? version : null;
+
+  @override
+  Future<SecPackContents?> read({
+    required String version,
+    required String expectedHash,
+  }) async => (_version == version && _hash == expectedHash) ? _contents : null;
 
   @override
   Future<void> save({
@@ -34,12 +41,14 @@ class _MemStore implements SecPackStore {
   }) async {
     _version = version;
     _hash = outerHash;
+    _contents = contents;
   }
 
   @override
   Future<void> clear() async {
     _version = null;
     _hash = null;
+    _contents = null;
   }
 }
 
