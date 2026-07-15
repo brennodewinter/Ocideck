@@ -1790,6 +1790,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Uitleg naar notities': 'Objašnjenje u bilješke',
   'adres': 'adresa',
   'postcode': 'poštanski broj',
   'persoonsnaam': 'ime osobe',

@@ -1799,6 +1799,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Uitleg naar notities': 'Explicatio in notas',
   'adres': 'inscriptio',
   'postcode': 'numerus postalis',
   'persoonsnaam': 'nomen personae',

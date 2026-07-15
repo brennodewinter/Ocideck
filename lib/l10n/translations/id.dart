@@ -1783,6 +1783,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Uitleg naar notities': 'Penjelasan ke catatan',
   'adres': 'alamat',
   'postcode': 'kode pos',
   'persoonsnaam': 'nama orang',

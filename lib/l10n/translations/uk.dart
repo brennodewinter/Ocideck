@@ -1801,6 +1801,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Uitleg naar notities': 'Пояснення до нотаток',
   'adres': 'адреса',
   'postcode': 'поштовий індекс',
   'persoonsnaam': 'ім\'я особи',

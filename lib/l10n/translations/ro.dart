@@ -1802,6 +1802,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Uitleg naar notities': 'Explicația în note',
   'adres': 'adresă',
   'postcode': 'cod poștal',
   'persoonsnaam': 'nume de persoană',

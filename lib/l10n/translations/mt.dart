@@ -1806,6 +1806,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Uitleg naar notities': 'Spjegazzjoni fin-noti',
   'adres': 'indirizz',
   'postcode': 'kodiċi postali',
   'persoonsnaam': 'isem ta\' persuna',

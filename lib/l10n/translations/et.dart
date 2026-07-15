@@ -1774,6 +1774,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Uitleg naar notities': 'Selgitus märkmetesse',
   'adres': 'aadress',
   'postcode': 'postiindeks',
   'persoonsnaam': 'isiku nimi',

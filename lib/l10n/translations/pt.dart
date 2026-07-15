@@ -1813,6 +1813,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Uitleg naar notities': 'Explicação para as notas',
   'adres': 'endereço',
   'postcode': 'código postal',
   'persoonsnaam': 'nome de pessoa',

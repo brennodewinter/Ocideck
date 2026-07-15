@@ -1785,6 +1785,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Uitleg naar notities': 'Pojasnilo v opombe',
   'adres': 'naslov',
   'postcode': 'poštna številka',
   'persoonsnaam': 'ime osebe',

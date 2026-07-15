@@ -24,6 +24,12 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   label (`naam:`) — never by guessing — and stay a hint. All three are redacted
   on slides set to *redact*, in every field including the title. A bare name in a
   title (with no label) still needs the manual `[[…]]` marking.
+- **New quality fix "Explanation to notes" for overcrowded bullet slides.**
+  Splitting bullets keeps all the text on the slide; this fix removes it. For a
+  bullet shaped like *label : explanation* — split on a colon, a spaced hyphen or
+  the first full stop, when the explanation is substantial — it keeps just the
+  label on the slide and moves the full original line to the speaker notes. The
+  content is not lost, only relocated, and one undo brings it back.
 
 ### Changed
 - **The privacy feature is now called OciWacht.** "Privacy Shield" was a

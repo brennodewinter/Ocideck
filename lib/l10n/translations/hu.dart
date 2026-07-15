@@ -1787,6 +1787,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Uitleg naar notities': 'Magyarázat a jegyzetekbe',
   'adres': 'cím',
   'postcode': 'irányítószám',
   'persoonsnaam': 'személynév',

@@ -938,6 +938,15 @@ the readable optimum and leaves the rest, which you can split again. Splitting a
 pages match and share one font size — swap the follow-up to a plain bullets page
 via the slide **type** picker if you prefer.
 
+A bullet slide with multi-sentence or overly long bullets offers two more
+one-click fixes in the quality panel. **Split sentences into bullets** turns each
+multi-sentence bullet into one bullet per sentence — every word stays on the
+slide. **Explanation to notes** does the opposite: for a bullet shaped like
+*label : explanation* (split on a colon, a spaced hyphen, or the first full stop,
+when the explanation is at least a few words) it keeps just the label on the slide
+and moves the full original line to the speaker notes — the point survives where
+you can still say it, and one undo brings it back.
+
 #### Settings
 
 Under *Settings → General → Accessibility*:

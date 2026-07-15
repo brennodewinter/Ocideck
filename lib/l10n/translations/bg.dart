@@ -1806,6 +1806,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Uitleg naar notities': 'Обяснение в бележките',
   'adres': 'адрес',
   'postcode': 'пощенски код',
   'persoonsnaam': 'име на лице',
