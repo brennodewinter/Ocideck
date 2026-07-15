@@ -446,7 +446,7 @@ are shown.
 ## Privacy check
 
 OciDeck reads your slides for data that may be privacy-sensitive — identification
-numbers, contact details, bank accounts — and reports what it finds in the
+numbers, contact details, addresses and names, bank accounts — and reports what it finds in the
 **quality panel**, alongside the contrast and readability checks. Each privacy
 row carries the **PrivacyKat shield** mark instead of the generic warning icon,
 so at a glance you can tell a personal-data finding from a contrast or density

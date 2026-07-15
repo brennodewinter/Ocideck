@@ -22,6 +22,7 @@ accepteren, waarschuwen met een shield-badge, of redigeren op scherm en in expor
 | §5.4 De eigen-identiteitslijst | **geleverd** |
 | §4.0 Exportprofielen (volledig / geredigeerd) | **geleverd** |
 | §3-H Massa-persoonsgegevens (tabelkolommen, herhaalde treffers) | **geleverd** |
+| §3-D Adres, NL-postcode en gelabelde persoonsnaam (postcode + huisnummer escaleert via nabijheid) | **geleverd** |
 
 De genomen beslissingen staan in §11; die zijn niet meer open.
 
@@ -97,30 +98,35 @@ groeit de regelset zonder de compile te breken.
 
 ### 2.2 Bestanden
 
+> **Implementatienoot (2026-07-15).** De indeling hieronder week bij de bouw af van
+> dit ontwerp: er is géén data-driven `PrivacyRule`-descriptor en géén
+> `privacy_lexicon.dart` gekomen. De detectors zijn methodes in de scanner, met de
+> data (patronen, contextwoorden) in een bestand per familie. Dit zijn de
+> feitelijke bestanden. De regelcatalogus in §3 beschrijft de vólledig ontworpen
+> dekking; wat daarvan gebouwd is, staat in de Status-tabel bovenaan en in de code.
+
 | Pad | Rol |
 | --- | --- |
-| `lib/models/privacy_finding.dart` | `PrivacyFinding`, `PrivacyFamily`, `PrivacyConfidence`, `PrivacyDisposition`, `PrivacyScanResult` |
-| `lib/services/privacy/privacy_scanner.dart` | Orkestratie: velden verzamelen, prefilter, regels draaien, allowlist toepassen, co-occurrence-escalatie |
-| `lib/services/privacy/privacy_rule.dart` | `PrivacyRule`-descriptor (data-driven: id, familie, regex, validator, confidence, contextwoorden, regio) |
-| `lib/services/privacy/rules_identifiers_nl.dart` | BSN, V-nummer, A-nummer, BIG, AGB, KvK, btw-id, parketnummer, kenteken, postcode |
-| `lib/services/privacy/rules_identifiers_eu.dart` | BE/DE/FR/ES/PT/IT/PL/SE/NO/DK/FI/GR/IE/HR/CZ/SK/HU/BG/RO/SI/EE/LV/LT/AT/CH/MT/CY/LU |
-| `lib/services/privacy/rules_identifiers_world.dart` | US/UK/CA/AU/IN/BR/ZA/CW/AW |
-| `lib/services/privacy/rules_financial.dart` | IBAN, PAN, BIC, SEPA-mandaat, crypto |
-| `lib/services/privacy/rules_contact.dart` | E-mail, telefoon, adres, postcode, geboortedatum, coördinaten |
-| `lib/services/privacy/rules_digital.dart` | IP, MAC, IMEI, ICCID, UUID, handles, device-ID |
-| `lib/services/privacy/rules_secrets.dart` | API-keys, tokens, PEM, connection strings, wachtwoorden, entropie |
-| `lib/services/privacy/rules_special.dart` | Gezondheid, strafrecht, religie, politiek, vakbond, etniciteit, biometrie, genetica |
-| `lib/services/privacy/rules_structural.dart` | Gebruikerspaden, URL-tokens, share-links, mailto, data-URI, remote media, doorhaling-als-redactie |
-| `lib/services/privacy/privacy_checksums.dart` | 11-proef, mod-97, Luhn, Verhoeff, ISO 7064, MRZ, base58check, bech32, EIP-55 |
-| `lib/services/privacy/privacy_allowlist.dart` | Testwaarden, gereserveerde reeksen, placeholder-personen, eigen identiteit |
-| `lib/services/privacy/privacy_lexicon.dart` | Meertalige contextwoorden (laadt `assets/privacy/lexicon_<lang>.json`) |
-| `lib/models/audience_deck.dart` | `AudienceDeck` — deck ná de privacyprojectie, met een private constructor. Het enige type dat de ontvangende oppervlakken accepteren (§6.0) |
-| `lib/services/privacy/privacy_projection.dart` | **De grens.** `forAudience()` en `forExternalProcessing()`: bron-`Deck` → `AudienceDeck` met de gevoelige substrings al vervangen |
+| `lib/models/privacy_finding.dart` | `PrivacyFinding`, `PrivacyFamily`, `PrivacyConfidence`, `PrivacyScanResult`, `maskValue`, `defaultDisabledPrivacyRules` |
+| `lib/models/privacy_disposition.dart` | `PrivacyDisposition` + `effectivePrivacyDisposition` (deck- en slide-stand samen) |
+| `lib/services/privacy/privacy_scanner.dart` | Orkestratie én de inline-detectors: e-mail, telefoon, IBAN, BSN, EU-nummers, secrets, bijzondere categorieën, adres/postcode, naam, structureel — plus allowlist en co-occurrence-escalatie |
+| `lib/services/privacy/privacy_contact_rules.dart` | Adres (straat + huisnummer), NL-postcode, gelabelde persoonsnaam: patronen, straatachtervoegsels, placeholder-personen |
+| `lib/services/privacy/privacy_phone_rules.dart` | Telefoon: E.164, nationale vorm, contextwoorden, toegekende landnummers, gereserveerde reeksen |
+| `lib/services/privacy/privacy_eu_rules.dart` | Europese landpakketten: BE/BG/DE/EE/ES/FI/FR/HR/IT/PL/PT/RO/SE + UK (NHS/NINO) |
+| `lib/services/privacy/privacy_checksums.dart`, `privacy_checksums_eu.dart` | 11-proef, mod-97, Luhn, ISO 7064, geboortedatum-validatie, enz. |
+| `lib/services/privacy/privacy_secret_rules.dart` | Leverancierstokens, PEM, JWT, connection strings, wachtwoorden |
+| `lib/services/privacy/privacy_special_rules.dart` | Art. 9/10-trefwoorden, genetische notatie, parketnummer, `statementSpan`, `identifiesAPerson` |
+| `lib/services/privacy/privacy_structural_rules.dart` | Gebruikerspaden, URL-tokens, share-links, mailto, data-URI |
+| `lib/services/privacy/privacy_bulk_rules.dart` | Massa-persoonsgegevens: tabelkolommen uit het lexicon, herhaalde treffers |
+| `lib/services/privacy/privacy_allowlist.dart` | Testwaarden, gereserveerde reeksen, placeholder-e-mails/IBANs/kaarten |
+| `lib/services/privacy/privacy_own_identity.dart` | De eigen-identiteitslijst (naam, e-mail, telefoon, domein) |
+| `lib/services/privacy/privacy_projection.dart` | **De grens.** `AudienceDeck` (private constructor) + `forAudience()` / `forExternalProcessing()` |
 | `lib/services/privacy/privacy_export_policy.dart` | Export-gate, spiegelt `ClassificationEnforcementPolicy` |
+| `lib/services/privacy/privacy_quality_bridge.dart` | `PrivacyFinding` → `SlideQualityIssue` voor het kwaliteitspaneel |
+| `lib/services/privacy/redaction_manifest_service.dart` | Redactiemanifest met gesalte commitments |
 | `lib/state/privacy_provider.dart` | Riverpod: scanner-config uit settings, gememoiseerde deck-scan |
-| `lib/l10n/privacy_localization.dart` | Regel-labels, familie-labels, meldingteksten, uitleg |
-| `lib/widgets/panels/privacy_disposition_control.dart` | Per-slide dropdown (accepteren / shield / redigeren), naast `_SlideTlpControl` |
-| `assets/privacy/lexicon_*.json` | Contextwoordenlijsten per taal (géén l10n-strings: dit is data, geen UI) |
+| `lib/l10n/slide_quality_localization.dart` | `privacyRuleLabel` (regel-labels) en de meldingteksten |
+| `lib/widgets/panels/editor_panel_slide_settings.dart`, `lib/widgets/slides/slide_preview.dart` | Per-slide dispositie (accepteren / shield / redigeren) en de shield-badge in de preview |
 
 Uitbreidingen aan bestaande bestanden: `slide_quality.dart` (categorie + 6 kinds),
 `slide.dart` (veld `privacy`), `deck.dart` (veld `privacy` + `privacyIgnore`),
@@ -245,6 +251,16 @@ nul. Waar géén checksum bestaat (US SSN, V-nummer), is een contextwoord verpli
 | `contact.name` | Persoonsnaam | Zie §5.5 — bewust géén NER. Alleen: aanhef (`dhr.`, `mevr.`, `Herr`, `Sra.`, `Dr.`), naamlabel (`naam:`, `contactpersoon:`, `auteur:`), of een tabelkolom met een naamkop. Placeholder-personen uitgesloten (`Jan Jansen`, `John Doe`, `Max Mustermann`, `Mario Rossi`, `Jean Dupont`, …) | mogelijk | ✓ |
 | `contact.geo` | Coördinaten | lat/lon-paar in plausibel bereik, `geo:`-URI, plus-code, what3words. Uitgesloten wanneer het een grafiek-as of een chart-dataset is | waarschijnlijk | ✓ |
 | `contact.plate` | Kenteken | NL-sidecodes met de juiste letteruitsluitingen; overige landen binnen het regiopakket. Contextwoord aanbevolen (`kenteken`, `nummerbord`) omdat `XX-99-99` ook een artikelcode kan zijn | mogelijk | ◐ |
+
+> **Gebouwd (2026-07-15):** `contact.email`, `contact.phone`, `contact.address`,
+> `contact.postcode_nl` en de gelabelde `contact.name`. Adres en NL-postcode zijn
+> elk `possible`; staan een straat-met-huisnummer en een postcode binnen ±40 tekens
+> van elkaar, dan escaleren beide naar `certain` — postcode plus huisnummer wijst
+> in Nederland één woonadres aan. `contact.name` blijft `possible` en werkt alleen
+> met een aanhef of label — géén NER, dus een kále naam (bijvoorbeeld enkel een naam
+> als slidetitel) valt erbuiten; daarvoor is de handmatige `[[…]]`-markering. Nog
+> niet gebouwd: `contact.postcode_intl`, `contact.birthdate`, `contact.geo`,
+> `contact.plate`.
 
 ### E. Digitale identificatoren
 
