@@ -736,6 +736,11 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Maak een tussenkop': 'Crea un intertitolo',
+  'Maak er weer een bullet van': 'Riconverti in punto elenco',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Intertitolo (vuoto = solo una linea di separazione)',
+  'Tussenkop toevoegen': 'Aggiungi intertitolo',
   'Uitleg naar notities': 'Spiegazione nelle note',
   'adres': 'indirizzo',
   'postcode': 'codice postale',

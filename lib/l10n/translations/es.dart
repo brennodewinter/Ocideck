@@ -737,6 +737,11 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Maak een tussenkop': 'Crear un subencabezado',
+  'Maak er weer een bullet van': 'Convertir de nuevo en viñeta',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Subencabezado (vacío = solo una línea divisoria)',
+  'Tussenkop toevoegen': 'Añadir subencabezado',
   'Uitleg naar notities': 'Explicación a las notas',
   'adres': 'dirección',
   'postcode': 'código postal',

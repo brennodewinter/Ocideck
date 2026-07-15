@@ -1799,6 +1799,11 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Maak een tussenkop': 'Titulum interpositum facere',
+  'Maak er weer een bullet van': 'Rursus in punctum vertere',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Titulus interpositus (vacuus = tantum linea divisoria)',
+  'Tussenkop toevoegen': 'Titulum interpositum addere',
   'Uitleg naar notities': 'Explicatio in notas',
   'adres': 'inscriptio',
   'postcode': 'numerus postalis',

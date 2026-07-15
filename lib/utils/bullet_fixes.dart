@@ -35,7 +35,9 @@ Slide splitSentenceBullets(Slide slide) {
 List<String> splitSentencesInBullets(List<String> bullets) {
   final result = <String>[];
   for (final bullet in bullets) {
-    if (!_isMultiSentence(bullet)) {
+    // A group heading is a section label, never a multi-sentence bullet to
+    // split — keep it verbatim.
+    if (isGroupHeading(bullet) || !_isMultiSentence(bullet)) {
       result.add(bullet);
       continue;
     }
@@ -101,6 +103,7 @@ bool canTrimBulletExplanations(Slide slide) =>
     slide.bullets2.any(_hasTrimmableExplanation);
 
 bool _hasTrimmableExplanation(String bullet) =>
+    !isGroupHeading(bullet) &&
     _splitLabelExplanation(_plainText(bullet)) != null;
 
 /// Nieuwe slide waarin de uitleg achter elk "label : uitleg"-bullet naar de
@@ -122,7 +125,7 @@ List<String> _trimColumn(List<String> bullets, List<String> moved) {
   final result = <String>[];
   for (final bullet in bullets) {
     final plain = _plainText(bullet);
-    final split = _splitLabelExplanation(plain);
+    final split = isGroupHeading(bullet) ? null : _splitLabelExplanation(plain);
     if (split == null) {
       result.add(bullet);
       continue;

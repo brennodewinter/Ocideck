@@ -1782,6 +1782,11 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Maak een tussenkop': 'Skapa en mellanrubrik',
+  'Maak er weer een bullet van': 'Gör om till en punkt igen',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Mellanrubrik (tom = endast en avgränsningslinje)',
+  'Tussenkop toevoegen': 'Lägg till mellanrubrik',
   'Uitleg naar notities': 'Förklaring till anteckningar',
   'adres': 'adress',
   'postcode': 'postnummer',

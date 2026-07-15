@@ -461,4 +461,74 @@ Paragraaf met **vet** en wat extra tekst zodat de layout echt iets te doen heeft
       isNot(Colors.transparent),
     );
   });
+
+  testWidgets('"Tussenkop toevoegen" appends a group-heading item', (
+    tester,
+  ) async {
+    var updated = Slide.create(
+      SlideType.bullets,
+    ).copyWith(bullets: ['Eerste punt']);
+
+    await tester.pumpWidget(
+      _testApp(
+        BulletsEditor(slide: updated, onUpdate: (slide) => updated = slide),
+      ),
+    );
+
+    await tester.tap(find.text('Tussenkop toevoegen'));
+    await tester.pumpAndSettle();
+
+    expect(updated.bullets.length, 2);
+    expect(isGroupHeading(updated.bullets.last), isTrue);
+    // Typing into the new (focused) heading row fills its label.
+    await tester.enterText(find.byType(TextField).last, 'Middag');
+    await tester.pump();
+    expect(updated.bullets.last, groupHeadingBullet('Middag'));
+  });
+
+  testWidgets('the divider button toggles a bullet to a heading and back', (
+    tester,
+  ) async {
+    var updated = Slide.create(
+      SlideType.bullets,
+    ).copyWith(bullets: ['Blok A', 'Punt']);
+
+    await tester.pumpWidget(
+      _testApp(
+        BulletsEditor(slide: updated, onUpdate: (slide) => updated = slide),
+      ),
+    );
+
+    // Toggle the first row into a heading.
+    await tester.tap(find.byKey(const ValueKey('toggle-heading-0')));
+    await tester.pumpAndSettle();
+    expect(updated.bullets.first, groupHeadingBullet('Blok A'));
+    expect(updated.bullets[1], 'Punt');
+
+    // Toggle it back to an ordinary bullet — the label is preserved.
+    await tester.tap(find.byKey(const ValueKey('toggle-heading-0')));
+    await tester.pumpAndSettle();
+    expect(updated.bullets.first, 'Blok A');
+    expect(isGroupHeading(updated.bullets.first), isFalse);
+  });
+
+  testWidgets('a slide with a heading loads into the editor as a heading row', (
+    tester,
+  ) async {
+    var updated = Slide.create(
+      SlideType.bullets,
+    ).copyWith(bullets: [groupHeadingBullet('Ochtend'), 'Inloop']);
+
+    await tester.pumpWidget(
+      _testApp(
+        BulletsEditor(slide: updated, onUpdate: (slide) => updated = slide),
+      ),
+    );
+    await tester.pump();
+
+    // The heading's label shows in its field, not the raw marker.
+    expect(find.widgetWithText(TextField, 'Ochtend'), findsOneWidget);
+    // An unchanged round-trip through the editor keeps the heading intact.
+    expect(updated.bullets.first, groupHeadingBullet('Ochtend'));
+  });
 }

@@ -741,6 +741,11 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Maak een tussenkop': 'Meitsje in tuskenkop',
+  'Maak er weer een bullet van': 'Wer in bullet fan meitsje',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Tuskenkop (leech = allinnich in skiedingsstreek)',
+  'Tussenkop toevoegen': 'Tuskenkop tafoegje',
   'Uitleg naar notities': 'Taljochting nei notysjes',
   'adres': 'adres',
   'postcode': 'postkoade',

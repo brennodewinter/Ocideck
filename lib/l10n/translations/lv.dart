@@ -1782,6 +1782,11 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Maak een tussenkop': 'Izveidot starpvirsrakstu',
+  'Maak er weer een bullet van': 'Pārvērst atpakaļ par aizzīmi',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Starpvirsraksts (tukšs = tikai atdalītājlīnija)',
+  'Tussenkop toevoegen': 'Pievienot starpvirsrakstu',
   'Uitleg naar notities': 'Skaidrojumu uz piezīmēm',
   'adres': 'adrese',
   'postcode': 'pasta indekss',

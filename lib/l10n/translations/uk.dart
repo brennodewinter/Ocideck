@@ -1801,6 +1801,11 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Maak een tussenkop': 'Створити підзаголовок',
+  'Maak er weer een bullet van': 'Перетворити назад на пункт',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Підзаголовок (порожньо = лише розділювальна лінія)',
+  'Tussenkop toevoegen': 'Додати підзаголовок',
   'Uitleg naar notities': 'Пояснення до нотаток',
   'adres': 'адреса',
   'postcode': 'поштовий індекс',

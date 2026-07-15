@@ -1811,6 +1811,11 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Maak een tussenkop': 'Δημιουργία ενδιάμεσου τίτλου',
+  'Maak er weer een bullet van': 'Μετατροπή ξανά σε κουκκίδα',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Ενδιάμεσος τίτλος (κενό = μόνο διαχωριστική γραμμή)',
+  'Tussenkop toevoegen': 'Προσθήκη ενδιάμεσου τίτλου',
   'Uitleg naar notities': 'Επεξήγηση στις σημειώσεις',
   'adres': 'διεύθυνση',
   'postcode': 'ταχυδρομικός κώδικας',

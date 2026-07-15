@@ -740,6 +740,11 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Maak een tussenkop': 'Traha un subtítulo',
+  'Maak er weer een bullet van': 'Kombertí bèk na un bullet',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Subtítulo (bashí = solamente un liña di separashon)',
+  'Tussenkop toevoegen': 'Agregá subtítulo',
   'Uitleg naar notities': 'Splikashon pa nota',
   'adres': 'adres',
   'postcode': 'kódigo postal',

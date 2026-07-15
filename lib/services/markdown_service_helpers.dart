@@ -14,6 +14,15 @@ final _attrRegexes = <String, RegExp>{};
 void _writeList(StringBuffer buf, List<String> items, ListStyle style) {
   final counters = <int>[];
   for (final item in items) {
+    // A group heading rides through the ordinary bullet path: written verbatim
+    // as `- <marker><label>` (never a checkbox or a number, and it does not
+    // advance the list counters) and read back by the plain `- body` parser, so
+    // the marker survives round-trips with no parser change. See
+    // [kGroupHeadingMarker].
+    if (isGroupHeading(item)) {
+      buf.writeln('- $item');
+      continue;
+    }
     int level = 0;
     while (level < item.length && item[level] == '\t') {
       level++;
@@ -164,6 +173,20 @@ void _writeHtmlBulletItems(
 ) {
   final counters = <int>[];
   for (final b in bullets) {
+    // A group heading is a markerless section label (empty = a divider rule),
+    // not a list entry, so it renders as an <li> with no bullet and never
+    // advances the counters. See [kGroupHeadingMarker].
+    if (isGroupHeading(b)) {
+      final label = groupHeadingText(b).trim();
+      buf.writeln(
+        label.isEmpty
+            ? '<li style="list-style:none; border-top:1px solid currentColor; '
+                  'opacity:.4; margin:.5em 0; height:0;"></li>'
+            : '<li style="list-style:none; font-weight:bold; margin:.6em 0 .2em;">'
+                  '${_escapeHtml(label)}</li>',
+      );
+      continue;
+    }
     int level = 0;
     while (level < b.length && b[level] == '\t') {
       level++;

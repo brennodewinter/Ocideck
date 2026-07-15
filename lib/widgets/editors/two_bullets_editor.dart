@@ -167,26 +167,37 @@ class _BulletSet {
   late List<TextEditingController> controllers;
   late List<int> levels;
   late List<bool> checked;
+  late List<bool> headings;
   late List<FocusNode> focusNodes;
 
   _BulletSet(List<String> raw, this.emit) {
     final list = raw.isEmpty ? [''] : raw;
-    levels = list.map(_levelOf).toList();
-    checked = list.map(checklistItemChecked).toList();
-    controllers = list.map((b) => _makeCtrl(checklistItemText(b))).toList();
+    headings = list.map(isGroupHeading).toList();
+    levels = list.map((b) => isGroupHeading(b) ? 0 : _levelOf(b)).toList();
+    checked = list
+        .map((b) => isGroupHeading(b) ? false : checklistItemChecked(b))
+        .toList();
+    controllers = list
+        .map(
+          (b) => _makeCtrl(
+            isGroupHeading(b) ? groupHeadingText(b) : checklistItemText(b),
+          ),
+        )
+        .toList();
     focusNodes = List.generate(controllers.length, (_) => FocusNode());
   }
 
-  List<String> values(ListStyle listStyle) => List.generate(
-    controllers.length,
-    (i) => listStyle == ListStyle.checklist
-        ? checklistBullet(
-            level: levels[i],
-            text: controllers[i].text,
-            checked: checked[i],
-          )
-        : '\t' * levels[i] + controllers[i].text,
-  );
+  List<String> values(ListStyle listStyle) =>
+      List.generate(controllers.length, (i) {
+        if (headings[i]) return groupHeadingBullet(controllers[i].text);
+        return listStyle == ListStyle.checklist
+            ? checklistBullet(
+                level: levels[i],
+                text: controllers[i].text,
+                checked: checked[i],
+              )
+            : '\t' * levels[i] + controllers[i].text;
+      });
 
   static int _levelOf(String b) {
     int l = 0;
@@ -202,17 +213,31 @@ class _BulletSet {
     return c;
   }
 
-  void addAfter(_Mutate mutate, int i) {
+  void addAfter(_Mutate mutate, int i, {bool heading = false}) {
     mutate(() {
       controllers.insert(i + 1, _makeCtrl(''));
-      levels.insert(i + 1, levels[i]);
+      levels.insert(i + 1, heading ? 0 : levels[i]);
       checked.insert(i + 1, false);
+      headings.insert(i + 1, heading);
       focusNodes.insert(i + 1, FocusNode());
     });
     emit();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (i + 1 < focusNodes.length) focusNodes[i + 1].requestFocus();
     });
+  }
+
+  /// Flips row [i] between an ordinary bullet and a group heading.
+  void toggleHeading(_Mutate mutate, int i) {
+    mutate(() {
+      headings[i] = !headings[i];
+      if (headings[i]) {
+        levels[i] = 0;
+        checked[i] = false;
+      }
+    });
+    emit();
+    focusNodes[i].requestFocus();
   }
 
   void removeAndFocus(_Mutate mutate, int i) {
@@ -223,6 +248,7 @@ class _BulletSet {
         controllers[i].addListener(emit);
         levels[i] = 0;
         checked[i] = false;
+        headings[i] = false;
       });
       emit();
       focusNodes[i].requestFocus();
@@ -235,6 +261,7 @@ class _BulletSet {
       controllers.removeAt(i);
       levels.removeAt(i);
       checked.removeAt(i);
+      headings.removeAt(i);
       focusNodes[i].dispose();
       focusNodes.removeAt(i);
     });
@@ -270,10 +297,12 @@ class _BulletSet {
       controllers[i].removeListener(emit);
       controllers[i].dispose();
       controllers[i] = _makeCtrl(lines[0]);
+      headings[i] = false;
       for (int j = 1; j < lines.length; j++) {
         controllers.insert(i + j, _makeCtrl(lines[j]));
         levels.insert(i + j, levels[i]);
         checked.insert(i + j, false);
+        headings.insert(i + j, false);
         focusNodes.insert(i + j, FocusNode());
       }
     });
@@ -334,11 +363,27 @@ class _BulletColumnState extends State<_BulletColumn> {
         const SizedBox(height: 6),
         for (int i = 0; i < set.controllers.length; i++) _buildRow(i),
         const SizedBox(height: 4),
-        TextButton.icon(
-          onPressed: () =>
-              set.addAfter((fn) => setState(fn), set.controllers.length - 1),
-          icon: const Icon(Icons.add, size: 16),
-          label: Text(l10n.d('Bullet toevoegen')),
+        Wrap(
+          spacing: 4,
+          children: [
+            TextButton.icon(
+              onPressed: () => set.addAfter(
+                (fn) => setState(fn),
+                set.controllers.length - 1,
+              ),
+              icon: const Icon(Icons.add, size: 16),
+              label: Text(l10n.d('Bullet toevoegen')),
+            ),
+            TextButton.icon(
+              onPressed: () => set.addAfter(
+                (fn) => setState(fn),
+                set.controllers.length - 1,
+                heading: true,
+              ),
+              icon: const Icon(Icons.horizontal_split, size: 16),
+              label: Text(l10n.d('Tussenkop toevoegen')),
+            ),
+          ],
         ),
       ],
     );
@@ -346,33 +391,52 @@ class _BulletColumnState extends State<_BulletColumn> {
 
   Widget _buildRow(int i) {
     final l10n = context.l10n;
-    final level = set.levels[i];
+    final heading = set.headings[i];
+    final level = heading ? 0 : set.levels[i];
     return Padding(
       key: ValueKey(set.controllers[i]),
       padding: EdgeInsets.only(left: level * 20.0, top: 4, bottom: 4),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          if (widget.listStyle == ListStyle.checklist)
-            SizedBox(
-              width: 24,
-              height: 24,
-              child: Checkbox(
-                key: ValueKey('checklist-item-${widget.label}-$i'),
-                value: set.checked[i],
-                onChanged: (value) {
-                  setState(() => set.checked[i] = value ?? false);
-                  widget.emit();
-                },
-                visualDensity: VisualDensity.compact,
-              ),
-            )
-          else
-            Text(
-              _markerForItem(i),
-              style: TextStyle(fontSize: 16, color: AppTheme.slate500),
+          IconButton(
+            key: ValueKey('toggle-heading-${widget.label}-$i'),
+            icon: Icon(
+              Icons.horizontal_split,
+              size: 18,
+              color: heading ? AppTheme.accent : AppTheme.slate300,
             ),
-          const SizedBox(width: 8),
+            onPressed: () => set.toggleHeading((fn) => setState(fn), i),
+            tooltip: heading
+                ? l10n.d('Maak er weer een bullet van')
+                : l10n.d('Maak een tussenkop'),
+            padding: const EdgeInsets.symmetric(horizontal: 4),
+            constraints: const BoxConstraints(minWidth: 28),
+            visualDensity: VisualDensity.compact,
+          ),
+          const SizedBox(width: 4),
+          if (!heading) ...[
+            if (widget.listStyle == ListStyle.checklist)
+              SizedBox(
+                width: 24,
+                height: 24,
+                child: Checkbox(
+                  key: ValueKey('checklist-item-${widget.label}-$i'),
+                  value: set.checked[i],
+                  onChanged: (value) {
+                    setState(() => set.checked[i] = value ?? false);
+                    widget.emit();
+                  },
+                  visualDensity: VisualDensity.compact,
+                ),
+              )
+            else
+              Text(
+                _markerForItem(i),
+                style: TextStyle(fontSize: 16, color: AppTheme.slate500),
+              ),
+            const SizedBox(width: 8),
+          ],
           Expanded(
             child: Focus(
               onKeyEvent: (_, event) {
@@ -387,7 +451,7 @@ class _BulletColumnState extends State<_BulletColumn> {
                   set.removeAndFocus((fn) => setState(fn), i);
                   return KeyEventResult.handled;
                 }
-                if (event.logicalKey == LogicalKeyboardKey.tab) {
+                if (event.logicalKey == LogicalKeyboardKey.tab && !heading) {
                   if (HardwareKeyboard.instance.isShiftPressed) {
                     if (set.levels[i] > 0) setState(() => set.levels[i]--);
                   } else {
@@ -409,8 +473,13 @@ class _BulletColumnState extends State<_BulletColumn> {
               child: TextField(
                 controller: set.controllers[i],
                 focusNode: set.focusNodes[i],
+                style: heading
+                    ? const TextStyle(fontWeight: FontWeight.bold)
+                    : null,
                 decoration: InputDecoration(
-                  hintText: '${l10n.d('Bullet')} ${i + 1}',
+                  hintText: heading
+                      ? l10n.d('Tussenkop (leeg = alleen een scheidingslijn)')
+                      : '${l10n.d('Bullet')} ${i + 1}',
                   isDense: true,
                 ),
               ),

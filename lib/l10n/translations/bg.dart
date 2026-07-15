@@ -1806,6 +1806,11 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Maak een tussenkop': 'Създаване на междинно заглавие',
+  'Maak er weer een bullet van': 'Връщане обратно към водещ символ',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Междинно заглавие (празно = само разделителна линия)',
+  'Tussenkop toevoegen': 'Добавяне на междинно заглавие',
   'Uitleg naar notities': 'Обяснение в бележките',
   'adres': 'адрес',
   'postcode': 'пощенски код',

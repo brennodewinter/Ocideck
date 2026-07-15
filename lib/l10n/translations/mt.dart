@@ -1806,6 +1806,11 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Maak een tussenkop': 'Oħloq intestatura tal-grupp',
+  'Maak er weer een bullet van': 'Ibdel lura f\'bużżieqa',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Intestatura tal-grupp (vojta = biss linja separatriċi)',
+  'Tussenkop toevoegen': 'Żid intestatura tal-grupp',
   'Uitleg naar notities': 'Spjegazzjoni fin-noti',
   'adres': 'indirizz',
   'postcode': 'kodiċi postali',

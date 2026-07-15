@@ -1790,6 +1790,11 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Maak een tussenkop': 'Stvori međunaslov',
+  'Maak er weer een bullet van': 'Ponovno pretvori u grafičku oznaku',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Međunaslov (prazno = samo crta razdvajanja)',
+  'Tussenkop toevoegen': 'Dodaj međunaslov',
   'Uitleg naar notities': 'Objašnjenje u bilješke',
   'adres': 'adresa',
   'postcode': 'poštanski broj',

@@ -1790,6 +1790,11 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Maak een tussenkop': 'Vytvoriť medzititulok',
+  'Maak er weer een bullet van': 'Zmeniť späť na odrážku',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Medzititulok (prázdne = iba oddeľovacia čiara)',
+  'Tussenkop toevoegen': 'Pridať medzititulok',
   'Uitleg naar notities': 'Vysvetlenie do poznámok',
   'adres': 'adresa',
   'postcode': 'PSČ',

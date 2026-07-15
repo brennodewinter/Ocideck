@@ -1785,6 +1785,11 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Maak een tussenkop': 'Ustvari mednaslov',
+  'Maak er weer een bullet van': 'Pretvori nazaj v oznako',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Mednaslov (prazno = samo ločilna črta)',
+  'Tussenkop toevoegen': 'Dodaj mednaslov',
   'Uitleg naar notities': 'Pojasnilo v opombe',
   'adres': 'naslov',
   'postcode': 'poštna številka',

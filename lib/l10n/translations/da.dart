@@ -1782,6 +1782,11 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Maak een tussenkop': 'Opret en mellemoverskrift',
+  'Maak er weer een bullet van': 'Lav det om til et punkt igen',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Mellemoverskrift (tom = kun en skillelinje)',
+  'Tussenkop toevoegen': 'Tilføj mellemoverskrift',
   'Uitleg naar notities': 'Forklaring til noter',
   'adres': 'adresse',
   'postcode': 'postnummer',

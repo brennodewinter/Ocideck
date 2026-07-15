@@ -18,7 +18,11 @@ class _ChecklistProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = bullets
-        .where((bullet) => checklistItemText(bullet).trim().isNotEmpty)
+        .where(
+          (bullet) =>
+              !isGroupHeading(bullet) &&
+              checklistItemText(bullet).trim().isNotEmpty,
+        )
         .toList();
     final checked = items.where(checklistItemChecked).length;
     final total = items.length;
@@ -289,6 +293,74 @@ class _ChecklistBulletRow extends StatelessWidget {
   }
 
   double wScale(double value) => value * scale;
+}
+
+/// A group heading ("tussenkop") inside a bullet list: a labelled break that
+/// visually separates groups of bullets on one slide. Rendered as a bold accent
+/// label above a thin rule; a wordless heading is just the rule (a divider). Its
+/// geometry mirrors [groupHeadingHeight] exactly so the measured block height
+/// matches what is drawn (see the constants in slide_layout_metrics.dart).
+class _GroupHeadingRow extends StatelessWidget {
+  final String label;
+  final double fontSize;
+  final double bulletSize;
+  final double bulletGap;
+  final double scale;
+  final bool isFirst;
+  final String font;
+  final ThemeProfile profile;
+
+  const _GroupHeadingRow({
+    required this.label,
+    required this.fontSize,
+    required this.bulletSize,
+    required this.bulletGap,
+    required this.scale,
+    required this.isFirst,
+    required this.font,
+    required this.profile,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final accent = _hexColor(profile.accentColor);
+    final hasLabel = label.trim().isNotEmpty;
+    final topGap = isFirst
+        ? 0.0
+        : bulletSize * kGroupHeadingTopGapFactor * scale;
+    return Padding(
+      padding: EdgeInsets.only(
+        top: bulletGap * scale + topGap,
+        bottom: bulletGap * scale,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (hasLabel) ...[
+            _md(
+              context,
+              label,
+              _applyFont(
+                font,
+                TextStyle(
+                  fontSize: fontSize,
+                  fontWeight: FontWeight.bold,
+                  color: accent,
+                ),
+              ),
+              linkColor: accent,
+            ),
+            SizedBox(height: bulletSize * kGroupHeadingLabelGapFactor * scale),
+          ],
+          Container(
+            height: kGroupHeadingRuleThickness * scale,
+            color: accent.withValues(alpha: hasLabel ? 0.45 : 0.35),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class _ChecklistInteractionHost extends StatefulWidget {

@@ -102,6 +102,25 @@ Text fields support inline Markdown (`**bold**`, `*italic*`, `` `code` ``,
 highlighting, `$…$` / `$$…$$` LaTeX math, and ` ```mermaid ` diagrams (rendered
 in preview, presenter, PDF/PPTX, and HTML export).
 
+### Bullets and lists
+
+A bullets slide has an optional title and subheading and a list you edit row by
+row: **Enter** adds a bullet, **Tab** / **Shift+Tab** indents, drag the handle to
+reorder. The list style picker switches the whole list between plain **bullets**,
+**numbered**, a **checklist** (tick-boxes with an optional progress bar), and
+**rich text** (a free-Markdown body). Plain bullets can use a dot or a cat-paw
+marker.
+
+**Group headings ("tussenkoppen").** To split one slide's bullets into visually
+separated groups — an agenda's *morning* and *afternoon*, pros versus cons —
+click **Tussenkop toevoegen** (Add group heading), or turn any row into one with
+the divider button on its left. A group heading renders as a bold accent label
+above a thin rule; leave its text empty for a **wordless divider** — just the
+rule, a plain break between two groups. Headings carry no bullet, checkbox or
+number, and don't count toward the list. They work the same on plain, numbered
+and checklist lists and in two-column and bullets-with-image layouts, and they
+travel with the deck in the `.md` (see FILE_FORMAT § Bullets).
+
 ### Large image
 
 A single image fills the slide as a background. Tick **Afbeelding slidevullend**

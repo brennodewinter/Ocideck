@@ -1758,6 +1758,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Maak een tussenkop': 'nach bIng yIchenmoH',
+  'Maak er weer een bullet van': 'ghItlh yIchenmoHqa\'',
+  'Tussenkop (leeg = alleen een scheidingslijn)': 'nach bIng (chIm = HeH neH)',
+  'Tussenkop toevoegen': 'nach bIng yIchel',
   'Uitleg naar notities': 'ghItlhDaq QIj',
   'adres': 'Daq',
   'postcode': 'Daq mI\'',

@@ -1813,6 +1813,11 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Maak een tussenkop': 'Criar um intertítulo',
+  'Maak er weer een bullet van': 'Converter novamente em marcador',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Intertítulo (vazio = apenas uma linha divisória)',
+  'Tussenkop toevoegen': 'Adicionar intertítulo',
   'Uitleg naar notities': 'Explicação para as notas',
   'adres': 'endereço',
   'postcode': 'código postal',

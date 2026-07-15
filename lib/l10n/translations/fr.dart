@@ -740,6 +740,11 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Maak een tussenkop': 'Créer un intertitre',
+  'Maak er weer een bullet van': 'Reconvertir en puce',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Intertitre (vide = seulement une ligne de séparation)',
+  'Tussenkop toevoegen': 'Ajouter un intertitre',
   'Uitleg naar notities': 'Explication dans les notes',
   'adres': 'adresse',
   'postcode': 'code postal',

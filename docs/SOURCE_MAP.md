@@ -40,7 +40,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `privacy_disposition.dart` — `PrivacyDisposition` (warn/accept/shield/redact) and the slide-overrides-deck resolution.
 - `privacy_finding.dart` — `PrivacyFinding`/`PrivacyScanResult`: what the privacy scanner found. Never stores the raw value — only a masked sample.
 - `settings.dart` — `AppSettings`, `ThemeProfile` (incl. severity tokens + built-in Security profile), `AppAppearanceProfile`, `CockpitColorScheme` config.
-- `slide.dart` — `Slide` model with typed fields; `SlideType` enum for the slide layout variants.
+- `slide.dart` — `Slide` model with typed fields; `SlideType` enum for the slide layout variants. Inline bullet-item helpers: checklist (`checklistBullet`/`checklistItemChecked`/`checklistItemText`) and group headings (`kGroupHeadingMarker`/`isGroupHeading`/`groupHeadingBullet`/`groupHeadingText`).
 - `slide_quality.dart` — `SlideQualityResult`/`SlideQualityIssue` for accessibility/contrast/density/privacy audits.
 - `timeline.dart` — `TimelineEvent` and `TimelineLayout`/`TimelineReveal` enums for animated timeline slides.
 - `video_source.dart` — `VideoSource` parser for local files, YouTube, Vimeo, and remote video URLs.
@@ -279,7 +279,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `alt_text_field.dart` — Per-image alt-text field with the optional "suggest alt-text (AI)" button and AI-draft badge.
 - `audio_attachment_editor.dart` — Edits a slide's audio file attachment.
 - `bullet_marker_selector.dart` — Per-slide bullet-marker override (dot or paw).
-- `bullets_editor.dart` — Edits a bullet-list slide (title, subtitle, nested levels, markers).
+- `bullets_editor.dart` — Edits a bullet-list slide (title, subtitle, nested levels, markers, group headings/"tussenkoppen").
 - `bullets_image_editor.dart` — Edits a bullets-with-image slide.
 - `chart_editor.dart` — Edits a chart slide (type, data grid, CSV import/linking).
 - `checklist_editor.dart` — Edits a checklist slide (standard label, tri-state test rows, finding links).
@@ -331,7 +331,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `bullets_previews.dart` — Bullet-point slide layout.
 - `chart_preview.dart` — Chart slide rendering + dispatch, legend, hover, and screen-reader text for every chart type.
 - `chart_preview_extra.dart` — Hand-drawn builders for the horizontal-bar, combo, waterfall, and heatmap chart types.
-- `checklist_previews.dart` — Checklist slides with a progress bar.
+- `checklist_previews.dart` — Checklist slides with a progress bar; `_ChecklistBulletRow` and the `_GroupHeadingRow` (group-heading/divider) row widget shared by the bullet previews.
 - `cockpit_preview.dart` — Animated cockpit/gauge dashboard slides.
 - `code_preview.dart` — Syntax-highlighted code slides with fit.
 - `media_previews.dart` — Shared audio/video playback lifecycle (`_MediaPlaybackHost`) + remote-media SSRF gate.

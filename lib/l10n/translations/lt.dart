@@ -1791,6 +1791,11 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Maak een tussenkop': 'Sukurti tarpinę antraštę',
+  'Maak er weer een bullet van': 'Vėl paversti ženkleliu',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Tarpinė antraštė (tuščia = tik skiriamoji linija)',
+  'Tussenkop toevoegen': 'Pridėti tarpinę antraštę',
   'Uitleg naar notities': 'Paaiškinimą į pastabas',
   'adres': 'adresas',
   'postcode': 'pašto kodas',

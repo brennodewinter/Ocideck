@@ -1787,6 +1787,11 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Maak een tussenkop': 'E Zwüschetitel mache',
+  'Maak er weer een bullet van': 'Wieder zu emene Punkt mache',
+  'Tussenkop (leeg = alleen een scheidingslijn)':
+      'Zwüschetitel (leer = nur e Trennlinie)',
+  'Tussenkop toevoegen': 'Zwüschetitel zuefüege',
   'Uitleg naar notities': 'Erchlärig i d Notize',
   'adres': 'Adrässe',
   'postcode': 'Poschtleitzahl',
