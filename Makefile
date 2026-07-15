@@ -100,11 +100,11 @@ test:
 # lib/ from disk and fails on any non-baselined file that is in no test.
 coverage:
 	@echo "== OciDeck check: coverage =="
-	@echo "Command: flutter test --coverage && dart run tool/coverage_summary.dart --min=73 --require-instrumented"
+	@echo "Command: flutter test --coverage && dart run tool/coverage_summary.dart --min=78 --require-instrumented"
 	@echo "Covers: line coverage over lib/, plus: every lib/ file is in at least one test."
 	@echo "Failure means: coverage fell below the floor, or a lib/ file is in no test at all."
 	$(RAISE_FDS) flutter test --coverage --test-randomize-ordering-seed random --exclude-tags golden
-	dart run tool/coverage_summary.dart --min=73 --require-instrumented
+	dart run tool/coverage_summary.dart --min=78 --require-instrumented
 
 # Slide-renderer visual-regression goldens (test/golden/). Pixel- and
 # platform-specific (default flutter-test font, so they catch layout/structure/
