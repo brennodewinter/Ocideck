@@ -1802,6 +1802,9 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'adres': 'adresă',
+  'postcode': 'cod poștal',
+  'persoonsnaam': 'nume de persoană',
   'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
       'Această prezentare conține elemente ale modulului Securitatea informațiilor. Activează modulul pentru a le edita.',
   'Inschakelen': 'Activează',

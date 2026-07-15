@@ -1806,6 +1806,9 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'adres': 'адрес',
+  'postcode': 'пощенски код',
+  'persoonsnaam': 'име на лице',
   'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
       'Тази презентация съдържа елементи от модула Информационна сигурност. Включете модула, за да ги редактирате.',
   'Inschakelen': 'Включване',

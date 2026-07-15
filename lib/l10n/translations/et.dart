@@ -1774,6 +1774,9 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'adres': 'aadress',
+  'postcode': 'postiindeks',
+  'persoonsnaam': 'isiku nimi',
   'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
       'See esitlus sisaldab infoturbe mooduli osi. Lülita moodul sisse, et neid muuta.',
   'Inschakelen': 'Lülita sisse',

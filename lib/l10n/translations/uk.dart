@@ -1801,6 +1801,9 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'adres': 'адреса',
+  'postcode': 'поштовий індекс',
+  'persoonsnaam': 'ім\'я особи',
   'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
       'Ця презентація містить елементи модуля «Інформаційна безпека». Увімкніть модуль, щоб редагувати їх.',
   'Inschakelen': 'Увімкнути',

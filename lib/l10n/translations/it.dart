@@ -736,6 +736,9 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'adres': 'indirizzo',
+  'postcode': 'codice postale',
+  'persoonsnaam': 'nome di persona',
   'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
       'Questa presentazione contiene elementi del modulo Sicurezza delle informazioni. Attiva il modulo per modificarli.',
   'Inschakelen': 'Attiva',

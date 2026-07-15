@@ -1782,6 +1782,9 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'adres': 'adresse',
+  'postcode': 'postnummer',
+  'persoonsnaam': 'personnavn',
   'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
       'Denne præsentation indeholder dele af modulet Informationssikkerhed. Slå modulet til for at redigere dem.',
   'Inschakelen': 'Slå til',

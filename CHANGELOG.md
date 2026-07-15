@@ -16,6 +16,14 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   not just buried in settings. The prompt shows once per open (never while you
   edit) and only when the module is off; the slides render either way, so this
   is purely a discovery aid.
+- **The privacy check now detects addresses, Dutch postcodes and labelled
+  names.** A street with a house number (`Kalverstraat 12`) and a Dutch postcode
+  (`1234 AB`) each surface as a hint; when they sit close together on a slide
+  they escalate to a warning, because a postcode plus a house number pins one
+  home address. Person names are detected only behind a salutation (`dhr.`) or a
+  label (`naam:`) — never by guessing — and stay a hint. All three are redacted
+  on slides set to *redact*, in every field including the title. A bare name in a
+  title (with no label) still needs the manual `[[…]]` marking.
 
 ### Changed
 - **The privacy feature is now called OciWacht.** "Privacy Shield" was a

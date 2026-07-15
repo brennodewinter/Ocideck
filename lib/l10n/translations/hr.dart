@@ -1790,6 +1790,9 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'adres': 'adresa',
+  'postcode': 'poštanski broj',
+  'persoonsnaam': 'ime osobe',
   'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
       'Ova prezentacija sadrži dijelove modula Informacijska sigurnost. Uključite modul da biste ih uređivali.',
   'Inschakelen': 'Uključi',

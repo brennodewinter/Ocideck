@@ -1791,6 +1791,9 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'adres': 'adresas',
+  'postcode': 'pašto kodas',
+  'persoonsnaam': 'asmens vardas',
   'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
       'Šioje pateiktyje yra Informacijos saugumo modulio dalių. Įjunkite modulį, kad galėtumėte jas redaguoti.',
   'Inschakelen': 'Įjungti',

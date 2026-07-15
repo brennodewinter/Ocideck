@@ -740,6 +740,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'adres': 'adres',
+  'postcode': 'kódigo postal',
+  'persoonsnaam': 'nòmber di persona',
   'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
       'E presentashon aki ta kontené elementonan di e módulo di Seguridat di informashon. Aktivá e módulo pa editá nan.',
   'Inschakelen': 'Aktivá',

@@ -1819,6 +1819,9 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'adres': 'seoladh',
+  'postcode': 'cód poist',
+  'persoonsnaam': 'ainm duine',
   'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
       'Tá codanna den mhodúl Slándáil Faisnéise sa láithreoireacht seo. Cuir an modúl ar siúl chun iad a chur in eagar.',
   'Inschakelen': 'Cuir ar siúl',
