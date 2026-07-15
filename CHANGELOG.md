@@ -49,6 +49,12 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   glance from a contrast or text-density one.
 
 ### Fixed
+- **The export-readiness status now shows the PrivacyKat mark for privacy
+  warnings.** The "N privacy findings without a choice" chip (and "Privacy
+  blocks export") in the status bar carried a generic warning icon instead of
+  the PrivacyKat shield used on the slide badge and in the quality panel. It now
+  shows the same mark, so the personal-data warning reads as one brand
+  everywhere.
 - **An embedded video that will not play now says why.** Every failure mode of a
   YouTube/Vimeo embed used to collapse into the same dead rectangle — a blank
   grey box indistinguishable from "still loading", and from "online media is
