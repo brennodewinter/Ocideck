@@ -143,7 +143,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `parts/settings_provider_privacy.dart` — The privacy switches (master, per-rule, own identity, export gate).
 - `settings_provider.dart` — `SettingsNotifier`: app settings, theme/appearance profiles, cockpit schemes.
 - `slide_clipboard_provider.dart` — Global slide clipboard for copy/paste across tabs.
-- `tabs_provider.dart` — `TabInfo` and the tabs notifier: open editor tabs, recovery, WebDAV origin.
+- `tabs_provider.dart` — `TabInfo` and the tabs notifier: open editor tabs, recovery, WebDAV origin. Also hosts the one-shot open-time signals the shell listens on, including `securityModulePromptProvider` — set once per open when a deck carries Informatieveiligheid slide types, driving the "enable the module" discovery snackbar.
 - `webdav_provider.dart` — Providers for `WebdavService`, server config, and directory listings.
 
 ## `lib/utils/` — small shared helpers
