@@ -1787,6 +1787,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Uitleg naar notities': 'Erchlärig i d Notize',
   'adres': 'Adrässe',
   'postcode': 'Poschtleitzahl',
   'persoonsnaam': 'Persoonename',

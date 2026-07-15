@@ -1758,6 +1758,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Uitleg naar notities': 'ghItlhDaq QIj',
   'adres': 'Daq',
   'postcode': 'Daq mI\'',
   'persoonsnaam': 'nuv pong',

@@ -1782,6 +1782,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Uitleg naar notities': 'Förklaring till anteckningar',
   'adres': 'adress',
   'postcode': 'postnummer',
   'persoonsnaam': 'personnamn',

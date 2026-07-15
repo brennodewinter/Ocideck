@@ -1786,6 +1786,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Uitleg naar notities': 'Vysvětlení do poznámek',
   'adres': 'adresa',
   'postcode': 'PSČ',
   'persoonsnaam': 'jméno osoby',

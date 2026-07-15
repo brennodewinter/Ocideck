@@ -1790,6 +1790,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Uitleg naar notities': 'Vysvetlenie do poznámok',
   'adres': 'adresa',
   'postcode': 'PSČ',
   'persoonsnaam': 'meno osoby',

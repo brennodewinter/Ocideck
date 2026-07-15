@@ -1819,6 +1819,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Uitleg naar notities': 'Míniú chuig na nótaí',
   'adres': 'seoladh',
   'postcode': 'cód poist',
   'persoonsnaam': 'ainm duine',

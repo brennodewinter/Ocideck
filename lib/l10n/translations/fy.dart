@@ -741,6 +741,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Uitleg naar notities': 'Taljochting nei notysjes',
   'adres': 'adres',
   'postcode': 'postkoade',
   'persoonsnaam': 'persoansnamme',

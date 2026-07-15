@@ -737,6 +737,7 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Uitleg naar notities': 'Explicación a las notas',
   'adres': 'dirección',
   'postcode': 'código postal',
   'persoonsnaam': 'nombre de persona',

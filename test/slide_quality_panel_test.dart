@@ -100,6 +100,35 @@ void main() {
     expect(container.read(deckProvider).deck!.slides.length, 2);
   });
 
+  testWidgets(
+    'offers an Uitleg naar notities action that trims dense bullets',
+    (tester) async {
+      await tester.pumpWidget(_host(overfullDeck()));
+      await tester.pump();
+      await tester.tap(find.textContaining('Slidekwaliteit'));
+      await tester.pump();
+
+      final trimButton = find.widgetWithText(
+        TextButton,
+        'Uitleg naar notities',
+      );
+      expect(trimButton, findsWidgets);
+
+      final container = ProviderScope.containerOf(
+        tester.element(find.byType(SlideQualityPanel)),
+      );
+
+      await tester.ensureVisible(trimButton.first);
+      await tester.tap(trimButton.first);
+      await tester.pump();
+
+      // The label stays on the slide; the explanation moves to the notes.
+      final slide = container.read(deckProvider).deck!.slides.first;
+      expect(slide.bullets.first, 'Controleer op een SPECI');
+      expect(slide.notes.contains('Kijk of er tussentijds'), isTrue);
+    },
+  );
+
   testWidgets('green bar lists the checks that were performed', (tester) async {
     final cleanDeck = Deck(
       title: 'Schoon',

@@ -740,6 +740,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Uitleg naar notities': 'Splikashon pa nota',
   'adres': 'adres',
   'postcode': 'kódigo postal',
   'persoonsnaam': 'nòmber di persona',

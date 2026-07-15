@@ -1791,6 +1791,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Uitleg naar notities': 'Paaiškinimą į pastabas',
   'adres': 'adresas',
   'postcode': 'pašto kodas',
   'persoonsnaam': 'asmens vardas',

@@ -1811,6 +1811,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Uitleg naar notities': 'Επεξήγηση στις σημειώσεις',
   'adres': 'διεύθυνση',
   'postcode': 'ταχυδρομικός κώδικας',
   'persoonsnaam': 'όνομα προσώπου',

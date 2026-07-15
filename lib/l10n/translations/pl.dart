@@ -1796,6 +1796,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Uitleg naar notities': 'Wyjaśnienie do notatek',
   'adres': 'adres',
   'postcode': 'kod pocztowy',
   'persoonsnaam': 'imię i nazwisko',

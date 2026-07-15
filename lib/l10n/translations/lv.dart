@@ -1782,6 +1782,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Uitleg naar notities': 'Skaidrojumu uz piezīmēm',
   'adres': 'adrese',
   'postcode': 'pasta indekss',
   'persoonsnaam': 'personas vārds',

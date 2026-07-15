@@ -1783,6 +1783,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Uitleg naar notities': 'Selitys muistiinpanoihin',
   'adres': 'osoite',
   'postcode': 'postinumero',
   'persoonsnaam': 'henkilön nimi',

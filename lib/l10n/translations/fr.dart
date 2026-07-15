@@ -740,6 +740,7 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Uitleg naar notities': 'Explication dans les notes',
   'adres': 'adresse',
   'postcode': 'code postal',
   'persoonsnaam': 'nom de personne',
