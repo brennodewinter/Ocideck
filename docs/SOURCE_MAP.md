@@ -93,7 +93,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `marp_html_service.dart` — Builds the self-contained, sanitised HTML export with embedded assets.
 - `mermaid_render_service.dart` — Renders Mermaid diagrams to cached inline SVG via a shared WebView.
 - `miauw_compliance_analyzer.dart` — Scores each MIAUW EIS (Voldaan/Openstaand/Uitgesloten) from deck content + waivers.
-- `miauw_eis_catalog.dart` — The bundled offline MIAUW EIS catalog (`MiauwEisCatalog`, curated subset).
+- `miauw_eis_catalog.dart` — The bundled offline MIAUW EIS catalog (`MiauwEisCatalog`): all 88 testable EIS, parsed from the authoritative MIAUW workbook.
 - `open_file_channel.dart` — Receives file-open paths from macOS for `.md` files.
 - `privacy/privacy_checksums.dart` — Eleven-proof (BSN), Luhn and IBAN mod-97 with the country-length table.
 - `privacy/privacy_allowlist.dart` — Known non-personal values: reserved domains, example IBANs, test cards, the official test-BSN range.

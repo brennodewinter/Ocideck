@@ -63,13 +63,13 @@ font (SIL OFL-1.1, see `assets/fonts/OFL.txt`). The OciDeck-owned brand images i
 
 ## Bundled reference data (information-security module)
 
-The optional *Informatieveiligheid* module (off by default) bundles a small
-amount of curated reference data. Each dataset is a hand-curated subset stored as
-plain Dart data in the repo, not a verbatim upstream dump:
+The optional *Informatieveiligheid* module (off by default) bundles reference
+data stored as plain Dart data in the repo (a curated floor for CWE; the full
+schema for MIAUW/WSTG/CVSS), not a verbatim upstream dump:
 
 | Dataset | Where | Upstream | Licence / terms |
 |---|---|---|---|
-| MIAUW EIS catalog (curated subset) | `lib/services/miauw_eis_catalog.dart` | MIAUW schema / methodology | EUPL-1.2 (same as OciDeck) — clean to bundle |
+| MIAUW EIS catalog (full 88-EIS schema) | `lib/services/miauw_eis_catalog.dart` | MIAUW workbook (github.com/brennodewinter/Informatiebeveiligingsonderzoek) | EUPL-1.2 (same as OciDeck) — clean to bundle |
 | CWE catalog (curated subset) | `lib/services/cwe_catalog.dart` | MITRE CWE | MITRE Terms of Use — attribution to MITRE |
 | CVSS v4.0 calculator | `lib/services/cvss/cvss4.dart` | FIRST.Org CVSS v4.0 specification | Native-Dart reimplementation of the public spec; attribution to FIRST.Org |
 

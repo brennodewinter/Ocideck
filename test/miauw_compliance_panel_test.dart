@@ -78,13 +78,23 @@ void main() {
 
     // Rows come from the live deck via the analyzer, grouped by part.
     expect(find.textContaining('1.1 ·'), findsOneWidget);
-    expect(find.textContaining('1.6 ·'), findsOneWidget);
-    // The header discloses the denominator: this is a subset of the full 92-EIS
-    // schema, so the tally can't be mistaken for full MIAUW conformance.
+    // The header discloses the denominator (count / full schema) so the tally
+    // can't be mistaken for full MIAUW conformance.
     expect(find.textContaining('/$kMiauwFullSchemaSize ·'), findsOneWidget);
     // A waived foundational EIS (1.1) surfaces the warning + carries its reason.
     expect(find.byIcon(Icons.warning_amber_outlined), findsOneWidget);
     expect(find.text('Geen digitale aanlevering'), findsOneWidget);
+    // The other foundational EIS (1.6) is further down the full 88-EIS list;
+    // scroll it into view by its unique title (avoids the 4.1.6 id substring).
+    await tester.scrollUntilVisible(
+      find.textContaining('Handtekening voor waarheidsgetrouwe'),
+      80,
+      scrollable: find.byType(Scrollable).last,
+    );
+    expect(
+      find.textContaining('Handtekening voor waarheidsgetrouwe'),
+      findsOneWidget,
+    );
   });
 
   testWidgets(

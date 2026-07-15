@@ -9,11 +9,11 @@
 // the pack, and PRINTS the outer sha256 to pin into the app
 // (lib/services/secmodule/sec_pack_config.dart → `secPackSha256`).
 //
-// STATUS: this packages the REAL CWE 4.20, OWASP WSTG v4.2 and FIRST CVSS 4.0
-// MacroVector datasets from their in-repo sources of truth. MIAUW is still a
-// placeholder — the full 92-EIS schema (derived from docs/design/PENTEST_MIAUW
-// .md) is wired in by a later step. Rebuild + re-pin the printed hash + the
-// committed fixture in the same commit whenever the datasets change.
+// STATUS: this packages the REAL datasets from their in-repo sources of truth —
+// CWE 4.20, OWASP WSTG v4.2, FIRST CVSS 4.0 MacroVector, and the full MIAUW
+// 88-EIS schema (parsed from the authoritative workbook). Rebuild + re-pin the
+// printed hash + the committed fixture in the same commit whenever the datasets
+// change.
 //
 // The pack is BUNDLED with the app (declared under `assets/secmodule/` in
 // pubspec.yaml) so the Informatieveiligheid module provisions from it offline,
@@ -23,7 +23,9 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:ocideck/models/eis_entry.dart';
 import 'package:ocideck/services/cvss/cvss4.dart';
+import 'package:ocideck/services/miauw_eis_catalog.dart';
 import 'package:ocideck/services/secmodule/sec_pack_codec.dart';
 import 'package:ocideck/services/secmodule/sec_pack_config.dart';
 import 'package:ocideck/services/wstg_catalog.dart';
@@ -108,21 +110,30 @@ List<SecPackDataFile> _datasets(String version) {
     ),
     file(
       'miauw/schema.json',
-      {
-        '_note':
-            'PLACEHOLDER — the full MIAUW 92-EIS schema (derived from '
-            'docs/design/PENTEST_MIAUW.md) is wired in by a later step.',
-        'requirements': [
-          {'id': '1.1', 'title': 'Digitale aanlevering + hash'},
-        ],
-      },
-      upstreamVersion: 'MIAUW 1.00 (placeholder)',
+      _miauwDataset(),
+      upstreamVersion: 'MIAUW 1.00',
       licence: 'EUPL-1.2',
       source:
           'https://github.com/brennodewinter/Informatiebeveiligingsonderzoek',
     ),
   ];
 }
+
+/// The MIAUW compliance schema, serialised from the in-repo [MiauwEisCatalog]
+/// (parsed from the authoritative workbook).
+Object _miauwDataset() => {
+  'schemaSize': kMiauwFullSchemaSize,
+  'eis': [
+    for (final e in MiauwEisCatalog.instance.entries)
+      {
+        'id': e.id,
+        'part': e.part.name,
+        'title': e.title,
+        'derivation': e.derivation.name,
+        if (e.check != null) 'check': e.check!.name,
+      },
+  ],
+};
 
 /// The full MITRE CWE list, read from the bundled asset (the same source
 /// [CweCatalog] loads at runtime), normalised to `{id, name, description}`.

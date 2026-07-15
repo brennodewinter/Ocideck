@@ -136,10 +136,10 @@ void main() {
       expect(md, contains('## Managementsamenvatting'));
       expect(md, contains('Bevindingen totaal:** 0'));
       final total = const MiauwComplianceAnalyzer().analyze(deck).total;
-      expect(md, contains('## MIAUW-naleving ($total van 92 EIS beoordeeld)'));
-      // The curated subset must disclose that it is not full MIAUW coverage.
-      expect(md, contains('gecureerd deel'));
-      expect(md, contains('volledig MIAUW-conform'));
+      expect(md, contains('## MIAUW-naleving ($total van 88 EIS beoordeeld)'));
+      // The catalog now carries every testable EIS, so no subset caveat.
+      expect(total, 88);
+      expect(md, isNot(contains('gecureerd deel')));
       expect(md, contains('Voldaan:'));
       expect(md, contains('Openstaand:'));
       expect(md, contains('Uitgesloten:'));
