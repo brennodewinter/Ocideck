@@ -238,6 +238,85 @@ void main() {
       expect(markdown, contains('ocideck_checklist_progress: true'));
     });
 
+    test('group headings round-trip inside a bullets list, in order', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.bullets).copyWith(
+          title: 'Agenda',
+          bullets: [
+            groupHeadingBullet('Ochtend'),
+            'Inloop',
+            'Keynote',
+            groupHeadingBullet('Middag'),
+            'Workshops',
+            groupHeadingBullet(''), // wordless divider
+            'Borrel',
+          ],
+        ),
+      );
+      expect(out.type, SlideType.bullets);
+      expect(out.bullets, [
+        groupHeadingBullet('Ochtend'),
+        'Inloop',
+        'Keynote',
+        groupHeadingBullet('Middag'),
+        'Workshops',
+        groupHeadingBullet(''),
+        'Borrel',
+      ]);
+      expect(out.bullets.where(isGroupHeading).length, 3);
+    });
+
+    test('a group heading in a checklist never gains a checkbox', () {
+      final service = MarkdownService();
+      final markdown = service.generateDeck(
+        Deck(
+          title: 'Demo',
+          slides: [
+            Slide.create(SlideType.bullets).copyWith(
+              title: 'Taken',
+              bullets: [
+                groupHeadingBullet('Blok A'),
+                '[x] Gedaan',
+                '[ ] Nog doen',
+              ],
+              listStyle: ListStyle.checklist,
+            ),
+          ],
+        ),
+      );
+      // The heading is written as a plain markerless item, not `- [ ] …`, so it
+      // reads back as a heading (not a stray unchecked task).
+      expect(
+        markdown,
+        contains(
+          '- $kGroupHeadingMarker'
+          'Blok A',
+        ),
+      );
+      expect(markdown, isNot(contains('[ ] ${kGroupHeadingMarker}Blok A')));
+      final out = service.parseDeck(markdown)!.slides.single;
+      expect(out.listStyle, ListStyle.checklist);
+      expect(out.bullets.first, groupHeadingBullet('Blok A'));
+      expect(isGroupHeading(out.bullets.first), isTrue);
+    });
+
+    test('group headings round-trip in two-column bullets', () {
+      final out = _roundTrip(
+        Slide.create(SlideType.twoBullets).copyWith(
+          title: 'Vergelijk',
+          bullets: [groupHeadingBullet('Voordelen'), 'Snel', 'Goedkoop'],
+          bullets2: [groupHeadingBullet('Nadelen'), 'Risico'],
+        ),
+      );
+      expect(out.type, SlideType.twoBullets);
+      expect(out.bullets, [
+        groupHeadingBullet('Voordelen'),
+        'Snel',
+        'Goedkoop',
+      ]);
+      expect(out.bullets2, [groupHeadingBullet('Nadelen'), 'Risico']);
+    });
+
     test('richText bullets slide round-trips with custom markdown', () {
       final service = MarkdownService();
       const body = 'Paragraaf één\n\n**Vet** tekst';

@@ -403,7 +403,9 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
 
   List<_BulletText> _visibleBulletTexts(List<String> bullets, ListStyle style) {
     return bullets
-        .where((b) => b.trimLeft().isNotEmpty)
+        // A group heading is a section label, not a content bullet, so it must
+        // not count toward "too many bullets" or the reading-density metrics.
+        .where((b) => b.trimLeft().isNotEmpty && !isGroupHeading(b))
         .map((b) {
           final level = bulletLevel(b);
           final text = style == ListStyle.checklist

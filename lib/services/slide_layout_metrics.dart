@@ -56,6 +56,44 @@ const double kBulletMaxFontFraction = 0.0335;
 
 const double kBulletLineHeight = 1.16;
 
+/// Group-heading ("tussenkop") geometry — shared by the height measurement here
+/// and the `_GroupHeadingRow` preview so the two can never drift (a mismatch
+/// clips or overflows the slide). The factors multiply the base bullet size (or
+/// the fit scale) exactly as the widget does. A labelled heading is a bold
+/// accent label above a thin rule; a wordless heading is just the rule.
+const double kGroupHeadingTopGapFactor = 1.0; // × bulletSize × scale, above it
+const double kGroupHeadingLabelGapFactor =
+    0.22; // × bulletSize × scale, label→rule
+const double kGroupHeadingRuleThickness = 1.5; // × scale, the divider rule
+
+/// Height a group-heading item adds to a bullet block, mirroring the
+/// `_GroupHeadingRow` layout. [isFirst] drops the top gap for the leading item.
+double groupHeadingHeight({
+  required String label,
+  required double availW,
+  required double bulletSize,
+  required double bulletGap,
+  required double scale,
+  required String font,
+  required bool isFirst,
+}) {
+  final topGap = isFirst ? 0.0 : bulletSize * kGroupHeadingTopGapFactor * scale;
+  final rule = kGroupHeadingRuleThickness * scale;
+  var inner = rule;
+  if (label.trim().isNotEmpty) {
+    inner +=
+        measureTextHeight(
+          label,
+          bulletSize * scale,
+          availW,
+          bold: true,
+          fontFamily: font,
+        ) +
+        bulletSize * kGroupHeadingLabelGapFactor * scale;
+  }
+  return bulletGap * scale * 2 + topGap + inner;
+}
+
 /// Stop de fit-schaal-bisectie zodra het interval hieronder zakt. Elke iteratie
 /// kost een volledige blok-meting (een TextPainter-layout per bullet/regel), en
 /// een schaalverschil van 0,004 is zelfs op de referentiebreedte (960pt) maar
@@ -95,6 +133,8 @@ String bulletListMarker(
     return level;
   }
 
+  // A group heading has no marker and never consumes a list number.
+  if (isGroupHeading(items[index])) return '';
   final level = levelOf(items[index]);
   if (style == ListStyle.bullets) return _bulletMarkerForLevel(level);
   if (style == ListStyle.checklist) {
@@ -103,6 +143,7 @@ String bulletListMarker(
   if (style == ListStyle.richText) return '•';
   var number = 0;
   for (var i = 0; i <= index; i++) {
+    if (isGroupHeading(items[i])) continue;
     final itemLevel = levelOf(items[i]);
     if (itemLevel == level) number++;
     if (itemLevel < level) number = 0;
@@ -121,7 +162,10 @@ bool isNumberedListSlide(Slide slide) =>
 /// Number of top-level (non-indented, non-empty) items in [slide]'s list —
 /// the count that a following slide continues past.
 int _topLevelNumberedCount(Slide slide) => slide.bullets
-    .where((b) => b.trimLeft().isNotEmpty && !b.startsWith('\t'))
+    .where(
+      (b) =>
+          b.trimLeft().isNotEmpty && !b.startsWith('\t') && !isGroupHeading(b),
+    )
     .length;
 
 /// The first number a numbered list should show on slide [index]. Returns 1
@@ -247,6 +291,18 @@ double bulletsBlockHeight({
   }
   for (var i = 0; i < bullets.length; i++) {
     final b = bullets[i];
+    if (isGroupHeading(b)) {
+      height += groupHeadingHeight(
+        label: groupHeadingText(b),
+        availW: availW,
+        bulletSize: bulletSize,
+        bulletGap: bulletGap,
+        scale: scale,
+        font: font,
+        isFirst: i == 0,
+      );
+      continue;
+    }
     final level = bulletLevel(b);
     final text = listStyle == ListStyle.checklist
         ? checklistItemText(b)

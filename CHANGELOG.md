@@ -7,6 +7,18 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+- **Group headings ("tussenkoppen") inside a bullet list.** A single bullets
+  slide can now be split into visually separated groups without splitting the
+  slide: add a heading with **Tussenkop toevoegen**, or turn any row into one
+  with the divider button beside it. A group heading renders as a bold accent
+  label above a thin rule; leaving its text empty makes a **wordless divider** —
+  just the rule between two groups. Headings carry no bullet, checkbox or number
+  and don't count toward the list, and they work on plain, numbered and checklist
+  lists as well as the two-column and bullets-with-image layouts. They travel with
+  the deck in the `.md` (an inline `U+E010` marker on the list item, so the file
+  stays valid Marp) and round-trip losslessly.
+
 ### Changed
 - **The privacy feature is now called OciWacht.** "Privacy Shield" was a
   confusing name — it collides with the (invalidated) EU–US Privacy Shield

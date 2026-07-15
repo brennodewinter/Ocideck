@@ -35,7 +35,9 @@ Slide splitSentenceBullets(Slide slide) {
 List<String> splitSentencesInBullets(List<String> bullets) {
   final result = <String>[];
   for (final bullet in bullets) {
-    if (!_isMultiSentence(bullet)) {
+    // A group heading is a section label, never a multi-sentence bullet to
+    // split — keep it verbatim.
+    if (isGroupHeading(bullet) || !_isMultiSentence(bullet)) {
       result.add(bullet);
       continue;
     }

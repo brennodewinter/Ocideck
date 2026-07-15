@@ -362,6 +362,18 @@ class _BulletsImagePreview extends StatelessWidget {
           ],
           ...bullets.asMap().entries.map((entry) {
             final b = entry.value;
+            if (isGroupHeading(b)) {
+              return _GroupHeadingRow(
+                label: groupHeadingText(b),
+                fontSize: bulletSize * scale,
+                bulletSize: bulletSize,
+                bulletGap: bulletGap,
+                scale: scale,
+                isFirst: entry.key == 0,
+                font: font,
+                profile: profile,
+              );
+            }
             int level = 0;
             while (level < b.length && b[level] == '\t') {
               level++;
@@ -432,6 +444,18 @@ class _BulletListColumn extends StatelessWidget {
       children: [
         ...bullets.asMap().entries.map((entry) {
           final b = entry.value;
+          if (isGroupHeading(b)) {
+            return _GroupHeadingRow(
+              label: groupHeadingText(b),
+              fontSize: bulletSize * scale,
+              bulletSize: bulletSize,
+              bulletGap: bulletGap,
+              scale: scale,
+              isFirst: entry.key == 0,
+              font: font,
+              profile: profile,
+            );
+          }
           int level = 0;
           while (level < b.length && b[level] == '\t') {
             level++;

@@ -82,6 +82,38 @@ String checklistBullet({
   required bool checked,
 }) => '${'\t' * level}[${checked ? 'x' : ' '}] $text';
 
+/// Sentinel that marks a bullet-list item as a **group heading** ("tussenkop"):
+/// a labelled break that visually separates groups of bullets on one slide, so a
+/// single bullets slide can be split into sections without splitting the slide.
+///
+/// It is a private-use codepoint stored inline at the start of the item's text
+/// — mirroring the checklist `[x]` convention — so a heading is just another
+/// entry in [Slide.bullets]. Ordering, drag-reorder, delete and the file
+/// round-trip therefore all ride the existing list machinery: no parallel list
+/// of positions to keep in sync. An empty label renders as a plain divider rule
+/// (a break with no words). Group headings are always at level 0.
+///
+/// The codepoint is deliberately in the Unicode Private Use Area so it can never
+/// collide with text a user actually types (the same reasoning as the caption
+/// pipe sentinels in `markdown_service_helpers.dart`).
+const String kGroupHeadingMarker = '\u{E010}';
+
+/// Whether [value] is a group-heading item (see [kGroupHeadingMarker]).
+bool isGroupHeading(String value) =>
+    bulletText(value).startsWith(kGroupHeadingMarker);
+
+/// The label of a group-heading item, or the plain bullet text when [value] is
+/// an ordinary bullet. Empty for a wordless divider.
+String groupHeadingText(String value) {
+  final body = bulletText(value);
+  return body.startsWith(kGroupHeadingMarker)
+      ? body.substring(kGroupHeadingMarker.length)
+      : body;
+}
+
+/// Builds a group-heading item carrying [text] (empty = a wordless divider).
+String groupHeadingBullet(String text) => '$kGroupHeadingMarker$text';
+
 /// Pure-data metadata for a [SlideType], co-located with the enum so adding a
 /// type is one map entry instead of edits to several scattered switches. UI
 /// behaviour (editor, preview, picker icon) lives in the widget layer's

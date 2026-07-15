@@ -372,6 +372,26 @@ Markdown:
   - Subpoint
 ```
 
+A bullet list can be broken into visually separated groups with **group
+headings** ("tussenkoppen"): a labelled break, or an empty one that renders as
+just a divider rule. Like the redaction marker (§3.1a), it is an inline sentinel,
+not a comment: a heading is an ordinary `bullets` entry whose text starts with
+the private-use marker `U+E010`, so it rides the normal list
+read/write path and keeps its position in the list; it never carries a checkbox
+or a number and never consumes a list number. It is written as a plain list item
+(`- ␀Ochtend`, where `␀` is the marker) — valid Marp, and in OciDeck's own
+rendering/exports it draws as an accent-coloured label above a thin rule:
+
+```markdown
+- ␀Ochtend
+- Inloop
+- Keynote
+- ␀Middag        (a second group)
+- Workshops
+- ␀             (an empty heading = a wordless divider)
+- Borrel
+```
+
 **Two bullet columns** (`two-bullets`) — besides the visible HTML grid, the two
 columns are also stored **canonically** in comments (base64url of a JSON array),
 so they can be read back losslessly. Each column can optionally have a
