@@ -9,7 +9,8 @@ How to build OciDeck from source and produce distributable apps.
   3.44+, but **`make format-check` is version-sensitive**: a different
   `dart format` reflows whitespace and fails the gate. Use the Flutter-bundled
   `dart` (not a separately installed standalone Dart, which can drift) so
-  "green locally" equals "green in CI". Check with `flutter --version`.
+  `make format-check` stays reproducible across machines. Check with
+  `flutter --version`.
 - A desktop toolchain for your target:
   - **macOS**: Xcode + CocoaPods.
   - **Windows**: Visual Studio with the "Desktop development with C++" workload.
@@ -128,9 +129,11 @@ Use `make build-release` for the normal manual release path on macOS. It runs
 self-hosted CanvasKit, and bundled UI font before the macOS app is built.
 
 `make build-all` builds the web bundle plus whichever desktop target matches the
-host OS (web + macOS on a Mac, web + Linux on Linux). Windows and Linux bundles
-for the *other* OSes come from the release CI workflow, not from a single
-machine. Artifacts land under `build/<platform>/`.
+host OS (web + macOS on a Mac, web + Linux on Linux). A desktop bundle cannot be
+cross-compiled, so a bundle for another OS must be built on that OS (the release
+workflow in `.github/workflows/release.yml` would do this across runners, but it
+does not currently run — see the [CI](#ci) note). Artifacts land under
+`build/<platform>/`.
 
 ### macOS notes
 
@@ -171,14 +174,20 @@ machine. Artifacts land under `build/<platform>/`.
 
 ## CI
 
-`.github/workflows/ci.yml` runs the quality gate on Ubuntu for every push and
-pull request (plus `flutter test` on macOS and Windows). It does not build native
-binaries; it validates formatting, static analysis, and the test suite (which are
-platform-independent).
+> **The CI workflows are defined but do not currently run.** The remote is a
+> Forgejo instance with no runner configured, so nothing fires on push or tag.
+> `make check` (and `make check-full`), run by the committer, is the enforced
+> gate; release bundles must be built manually on each target OS. See
+> [CHECKS.md](CHECKS.md#continuous-integration).
 
-`.github/workflows/release.yml` builds the distributable artifacts. On a version
-tag (`v*`) — or a manual run — it builds **web, macOS, Windows and Linux** on
-their matching runners and uploads each as an artifact, so one tag produces all
-four. Both workflows pin **Flutter 3.44.6** (stable).
+`.github/workflows/ci.yml` *declares* the quality gate on Ubuntu for every push
+and pull request (plus `flutter test` on macOS and Windows). It does not build
+native binaries; it validates formatting, static analysis, and the test suite
+(which are platform-independent).
+
+`.github/workflows/release.yml` *declares* the distributable-artifact build. On a
+version tag (`v*`) — or a manual run — it would build **web, macOS, Windows and
+Linux** on their matching runners and upload each as an artifact, so one tag
+produces all four. Both workflows pin **Flutter 3.44.6** (stable).
 
 For the full check reference, see [`CHECKS.md`](CHECKS.md).
