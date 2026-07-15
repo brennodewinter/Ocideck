@@ -444,7 +444,10 @@ class DeckNotifier extends StateNotifier<DeckState> {
         final limit = slide.listStyle == ListStyle.checklist
             ? kChecklistBulletWarningCount
             : kSingleColumnBulletWarningCount;
-        final at = keepFor(counts.left, bullets.length, limit);
+        final at = snapSplitToGroupBoundary(
+          bullets,
+          keepFor(counts.left, bullets.length, limit),
+        );
         // De vervolgpagina erft standaard hetzelfde type en dezelfde afbeelding
         // (Slide.duplicate kopieert imagePath/-caption/-size). Zo houden beide
         // helften van een bulletsImage-slide gelijke tekstbreedte — nodig voor de
@@ -464,8 +467,14 @@ class DeckNotifier extends StateNotifier<DeckState> {
         if (left.length < 2 && right.length < 2) return null;
         final counts = bulletFitCounts(slide: slide, font: font);
         const perColumn = kTwoColumnBulletWarningCount ~/ 2;
-        final leftAt = keepFor(counts.left, left.length, perColumn);
-        final rightAt = keepFor(counts.right, right.length, perColumn);
+        final leftAt = snapSplitToGroupBoundary(
+          left,
+          keepFor(counts.left, left.length, perColumn),
+        );
+        final rightAt = snapSplitToGroupBoundary(
+          right,
+          keepFor(counts.right, right.length, perColumn),
+        );
         return (
           first: slide.copyWith(
             bullets: left.sublist(0, leftAt),

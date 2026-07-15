@@ -17,7 +17,9 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   and don't count toward the list, and they work on plain, numbered and checklist
   lists as well as the two-column and bullets-with-image layouts. They travel with
   the deck in the `.md` (an inline `U+E010` marker on the list item, so the file
-  stays valid Marp) and round-trip losslessly.
+  stays valid Marp) and round-trip losslessly. Splitting an over-full slide (the
+  **Split slide** density fix) now breaks between groups, so a heading is never
+  stranded with a stray bullet at the foot of a page.
 - **Opening a security report while the Informatieveiligheid module is off now
   offers to turn it on.** When you open a presentation that contains security
   slide types (a finding, findings overview, checklist, scope matrix or
