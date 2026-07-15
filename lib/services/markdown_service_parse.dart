@@ -69,34 +69,95 @@ class _BodyParse {
   bool isSplit = false;
 }
 
+/// Mutable accumulator for the deck-level front-matter fields, filled by
+/// [_MarkdownParse._parseFrontMatter]. Held as a struct — the same idiom as
+/// [_BodyParse] — so [_MarkdownParse._doParse] stays short and the per-key
+/// switch reads top-to-bottom.
+class _FrontMatter {
+  String theme = 'ocideck';
+  bool paginate = true;
+  ThemeProfile themeProfile = const ThemeProfile();
+  Map<String, String> miauwWaivers = const {};
+  Map<String, String> miauwConfirmations = const {};
+  String? presentationTitle;
+  String author = '';
+  String organization = '';
+  String version = '';
+  String date = '';
+  String description = '';
+  String keywords = '';
+  TlpLevel tlp = TlpLevel.none;
+  PrivacyDisposition privacy = PrivacyDisposition.warn;
+  int presentationTargetSeconds = 0;
+  bool showRehearsalSummary = true;
+  bool playOnly = false;
+  bool finalized = false;
+  String sealHash = '';
+  String sealAlgo = '';
+  String sealAt = '';
+  String sealTsr = '';
+  DocumentSignature signature = const DocumentSignature();
+
+  /// The markdown body with the front-matter block stripped off.
+  String body = '';
+}
+
 extension _MarkdownParse on MarkdownService {
   Deck _doParse(String markdown, {String? filePath}) {
-    String content = markdown;
-    String theme = 'ocideck';
-    bool paginate = true;
-    ThemeProfile themeProfile = const ThemeProfile();
-    Map<String, String> miauwWaivers = const {};
-    Map<String, String> miauwConfirmations = const {};
-    String? presentationTitle;
-    String author = '';
-    String organization = '';
-    String version = '';
-    String date = '';
-    String description = '';
-    String keywords = '';
-    TlpLevel tlp = TlpLevel.none;
-    PrivacyDisposition privacy = PrivacyDisposition.warn;
-    int presentationTargetSeconds = 0;
-    bool showRehearsalSummary = true;
-    bool playOnly = false;
-    bool finalized = false;
-    String sealHash = '';
-    String sealAlgo = '';
-    String sealAt = '';
-    String sealTsr = '';
-    DocumentSignature signature = const DocumentSignature();
+    final fm = _parseFrontMatter(markdown);
 
-    // Strip front matter
+    final blocks = MarkdownService.splitSlideBlocks(fm.body);
+    final slides = <Slide>[];
+    for (final block in blocks) {
+      final slide = _parseBlock(block.trim());
+      if (slide != null) slides.add(slide);
+    }
+
+    final title =
+        fm.presentationTitle ??
+        (slides.isNotEmpty && slides.first.title.isNotEmpty
+            ? slides.first.title
+            : 'Presentatie');
+
+    final projectPath = _projectPathFor(filePath);
+
+    return Deck(
+      title: title,
+      theme: fm.theme,
+      paginate: fm.paginate,
+      slides: slides.isEmpty ? [Slide.create(SlideType.title)] : slides,
+      projectPath: projectPath,
+      themeProfile: fm.themeProfile,
+      author: fm.author,
+      organization: fm.organization,
+      version: fm.version,
+      date: fm.date,
+      description: fm.description,
+      keywords: fm.keywords,
+      tlp: fm.tlp,
+      privacy: fm.privacy,
+      presentationTargetSeconds: fm.presentationTargetSeconds.clamp(0, 86400),
+      showRehearsalSummary: fm.showRehearsalSummary,
+      playOnly: fm.playOnly,
+      finalized: fm.finalized,
+      sealHash: fm.sealHash,
+      sealAlgo: fm.sealAlgo,
+      sealAt: fm.sealAt,
+      sealTimestampToken: fm.sealTsr,
+      signature: fm.signature.isEmpty ? null : fm.signature,
+      miauwWaivers: fm.miauwWaivers,
+      miauwConfirmations: fm.miauwConfirmations,
+    );
+  }
+
+  /// Parses and strips the optional `---`-delimited front matter, returning the
+  /// deck-level fields plus the remaining markdown ([_FrontMatter.body]).
+  /// Extracted from [_doParse] to keep that method under the length limit;
+  /// behaviour is identical to the previous inline block.
+  _FrontMatter _parseFrontMatter(String markdown) {
+    final fm = _FrontMatter();
+    String content = markdown;
+
     if (content.startsWith('---\n')) {
       final end = content.indexOf('\n---\n', 4);
       if (end != -1) {
@@ -112,10 +173,10 @@ extension _MarkdownParse on MarkdownService {
           final key = line.substring(0, colon).trim();
           final value = line.substring(colon + 1).trim();
           // Visual-signature fields share a prefix; fold them into the
-          // accumulator here so the switch below (and _doParse) stay short.
+          // accumulator here so the switch below stays short.
           if (key.startsWith('ocideck_sig_')) {
-            signature = _applySignatureField(
-              signature,
+            fm.signature = _applySignatureField(
+              fm.signature,
               key,
               _parseScalar(value),
             );
@@ -123,57 +184,57 @@ extension _MarkdownParse on MarkdownService {
           }
           switch (key) {
             case 'theme':
-              theme = value;
+              fm.theme = value;
             case 'paginate':
-              paginate = value == 'true';
+              fm.paginate = value == 'true';
             case 'title':
-              presentationTitle = _parseScalar(value);
+              fm.presentationTitle = _parseScalar(value);
             case 'author':
-              author = _parseScalar(value);
+              fm.author = _parseScalar(value);
             case 'organization':
-              organization = _parseScalar(value);
+              fm.organization = _parseScalar(value);
             case 'version':
-              version = _parseScalar(value);
+              fm.version = _parseScalar(value);
             case 'date':
-              date = _parseScalar(value);
+              fm.date = _parseScalar(value);
             case 'description':
-              description = _parseScalar(value);
+              fm.description = _parseScalar(value);
             case 'keywords':
-              keywords = _parseScalar(value);
+              fm.keywords = _parseScalar(value);
             case 'tlp':
-              tlp = TlpLevelX.fromKey(value);
+              fm.tlp = TlpLevelX.fromKey(value);
             case 'privacy':
-              privacy = PrivacyDispositionX.fromKey(value);
+              fm.privacy = PrivacyDispositionX.fromKey(value);
             case 'ocideck_target_seconds':
-              presentationTargetSeconds = int.tryParse(value) ?? 0;
+              fm.presentationTargetSeconds = int.tryParse(value) ?? 0;
             case 'ocideck_show_rehearsal_summary':
-              showRehearsalSummary = value != 'false';
+              fm.showRehearsalSummary = value != 'false';
             case 'ocideck_play_only':
-              playOnly = value == 'true';
+              fm.playOnly = value == 'true';
             case 'ocideck_finalized':
-              finalized = value == 'true';
+              fm.finalized = value == 'true';
             case 'ocideck_seal_hash':
-              sealHash = _parseScalar(value);
+              fm.sealHash = _parseScalar(value);
             case 'ocideck_seal_algo':
-              sealAlgo = _parseScalar(value);
+              fm.sealAlgo = _parseScalar(value);
             case 'ocideck_seal_at':
-              sealAt = _parseScalar(value);
+              fm.sealAt = _parseScalar(value);
             case 'ocideck_seal_tsr':
-              sealTsr = value;
+              fm.sealTsr = value;
             case 'ocideck_style_profile':
               final styleJson = _decodeBase64JsonMap(value, key);
               if (styleJson != null) {
-                themeProfile = ThemeProfile.fromJson(styleJson);
+                fm.themeProfile = ThemeProfile.fromJson(styleJson);
               }
             case 'ocideck_miauw_waivers':
               final waiverJson = _decodeBase64JsonMap(value, key);
               if (waiverJson != null) {
-                miauwWaivers = waiverJson.map((k, v) => MapEntry(k, '$v'));
+                fm.miauwWaivers = waiverJson.map((k, v) => MapEntry(k, '$v'));
               }
             case 'ocideck_miauw_confirmations':
               final confirmJson = _decodeBase64JsonMap(value, key);
               if (confirmJson != null) {
-                miauwConfirmations = confirmJson.map(
+                fm.miauwConfirmations = confirmJson.map(
                   (k, v) => MapEntry(k, '$v'),
                 );
               }
@@ -183,48 +244,8 @@ extension _MarkdownParse on MarkdownService {
       }
     }
 
-    final blocks = MarkdownService.splitSlideBlocks(content);
-    final slides = <Slide>[];
-    for (final block in blocks) {
-      final slide = _parseBlock(block.trim());
-      if (slide != null) slides.add(slide);
-    }
-
-    final title =
-        presentationTitle ??
-        (slides.isNotEmpty && slides.first.title.isNotEmpty
-            ? slides.first.title
-            : 'Presentatie');
-
-    final projectPath = _projectPathFor(filePath);
-
-    return Deck(
-      title: title,
-      theme: theme,
-      paginate: paginate,
-      slides: slides.isEmpty ? [Slide.create(SlideType.title)] : slides,
-      projectPath: projectPath,
-      themeProfile: themeProfile,
-      author: author,
-      organization: organization,
-      version: version,
-      date: date,
-      description: description,
-      keywords: keywords,
-      tlp: tlp,
-      privacy: privacy,
-      presentationTargetSeconds: presentationTargetSeconds.clamp(0, 86400),
-      showRehearsalSummary: showRehearsalSummary,
-      playOnly: playOnly,
-      finalized: finalized,
-      sealHash: sealHash,
-      sealAlgo: sealAlgo,
-      sealAt: sealAt,
-      sealTimestampToken: sealTsr,
-      signature: signature.isEmpty ? null : signature,
-      miauwWaivers: miauwWaivers,
-      miauwConfirmations: miauwConfirmations,
-    );
+    fm.body = content;
+    return fm;
   }
 
   /// Folds one `ocideck_sig_*` front-matter field into the running visual
