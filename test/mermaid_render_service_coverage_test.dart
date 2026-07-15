@@ -1,0 +1,47 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/services/mermaid_render_service.dart';
+
+/// Covers the parts of MermaidRenderService that DON'T need a live WebView / JS
+/// engine: the test-mode guards, the host-request notifier, the empty-source
+/// fast path, and the offstage host layer's test-mode short-circuit.
+///
+/// The bootstrap → runJavaScript → sanitize pipeline (the bulk of the file) is
+/// intentionally not covered here: it strictly requires a WebViewController and
+/// a JavaScript runtime, which a plain unit test cannot provide. Driving a
+/// non-empty render() without a controller would enqueue a job that never
+/// completes, so those paths are left to widget/integration harnesses.
+void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
+  test('isFlutterTest reports true under the flutter test runner', () {
+    expect(isFlutterTest, isTrue);
+  });
+
+  test('render() of blank source resolves to null without a WebView', () async {
+    final service = MermaidRenderService.instance;
+    // Empty and whitespace-only sources short-circuit before any host/JS use.
+    expect(await service.render(''), isNull);
+    expect(await service.render('   \n\t'), isNull);
+  });
+
+  test('requestHost flips the hostNeeded notifier and is idempotent', () {
+    final service = MermaidRenderService.instance;
+    service.requestHost();
+    expect(service.hostNeeded.value, isTrue);
+    // Calling again keeps it set (the guard avoids a redundant notification).
+    service.requestHost();
+    expect(service.hostNeeded.value, isTrue);
+  });
+
+  testWidgets('MermaidRenderHostLayer collapses to nothing in test mode', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      const MaterialApp(home: Scaffold(body: MermaidRenderHostLayer())),
+    );
+    // isFlutterTest is true, so the layer never mounts the offstage host.
+    expect(find.byType(MermaidRenderHost), findsNothing);
+    expect(find.byType(MermaidRenderHostLayer), findsOneWidget);
+  });
+}
