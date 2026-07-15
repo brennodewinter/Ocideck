@@ -8,16 +8,15 @@
 // matching bytes is equivalent.
 //
 // The values below pin the baseline pack produced by
-// `dart run tool/build_secmodule_pack.dart`. It carries the real CWE/WSTG/CVSS
-// datasets; the MIAUW schema is still a placeholder pending its own step.
-// Regenerate the pack and re-pin [secPackSha256] here in the same commit when
-// the datasets change, exactly like assets/web_export/MANIFEST.json is re-pinned
-// when a bundle is upgraded.
+// `dart run tool/build_secmodule_pack.dart`. It carries the real
+// CWE/WSTG/CVSS/MIAUW datasets. Regenerate the pack and re-pin [secPackSha256]
+// here in the same commit when the datasets change, exactly like
+// assets/web_export/MANIFEST.json is re-pinned when a bundle is upgraded.
 library;
 
 /// The baseline pack version this app build expects. Cache is keyed by this, so
 /// bumping it re-provisions.
-const secPackVersion = '2026.07.0';
+const secPackVersion = '2026.07.1';
 
 /// The bundled baseline pack, shipped as an app asset (pubspec.yaml → assets/
 /// secmodule/) so the module provisions offline with no mirror and no outbound
@@ -30,7 +29,7 @@ const secPackAssetKey = 'assets/secmodule/secmodule_pack_$secPackVersion.zip';
 /// Integrity is hash-only for now; a detached signature is a later phase (see
 /// PENTEST_MIAUW.md §14 open question 2).
 const secPackSha256 =
-    '3098c00a16640d4dec5caf8fce5ec9c7626e838151dae6ad04476b257bf2197e';
+    'f34e44f874c7874ea4394176d4232c5c8139396425857c377ae7145512d76717';
 
 /// Generous upper bound on the fetched/imported pack size, refused before any
 /// unpack (mirrors the import byte-caps elsewhere).

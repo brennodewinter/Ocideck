@@ -1,8 +1,10 @@
-/// The size of the full MIAUW EIS schema (PENTEST_MIAUW §1). The bundled
-/// [MiauwEisCatalog] is a curated subset (its own, smaller length); this is the
-/// denominator the compliance overview reports its coverage against, so a reader
-/// can never mistake a subset tally for full MIAUW conformance.
-const int kMiauwFullSchemaSize = 92;
+/// The number of testable EIS in the full MIAUW schema (PENTEST_MIAUW §1),
+/// parsed from the authoritative workbook. The workbook numbers 92 rows, of
+/// which four are part-section headers (modelled by [EisPart]) and one (`4.6`)
+/// is an empty number; the remaining 88 are the requirements the overview
+/// assesses. It is the denominator the compliance overview reports coverage
+/// against, so a reader can never mistake a partial tally for full conformance.
+const int kMiauwFullSchemaSize = 88;
 
 /// One of the four parts of the MIAUW requirement schema (PENTEST_MIAUW §1).
 enum EisPart {
@@ -73,11 +75,11 @@ enum EisCheck {
 
 /// One MIAUW requirement (EIS) from the bundled schema (PENTEST_MIAUW §1/§9).
 ///
-/// This is a **curated in-repo subset** of the 92-EIS schema — the always-on
-/// offline floor, mirroring the CWE catalog; the full schema arrives later as a
-/// provisioned data pack (§6). [title] is bundled normative content (data, not
-/// localised UI text, §12). [check] is set only for [EisDerivation.automatic]
-/// requirements.
+/// The catalog holds the **full** set of testable EIS parsed from the
+/// authoritative MIAUW workbook — the always-on offline floor, mirroring the CWE
+/// catalog; the provisioned data pack (§6) can carry the same schema. [title] is
+/// bundled normative content (data, not localised UI text, §12). [check] is set
+/// only for [EisDerivation.automatic] requirements.
 class EisEntry {
   const EisEntry({
     required this.id,

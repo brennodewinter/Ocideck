@@ -1,14 +1,20 @@
 import '../models/eis_entry.dart';
 
-/// The MIAUW compliance schema (PENTEST_MIAUW §1/§9). This first increment ships
-/// a **curated, bundled subset** of the 92 EIS across the four parts (Algemeen /
-/// Interacties / Executie / Rapportage) as in-repo `const` data — no asset
-/// wiring, no network — exactly as the CWE catalog does. Content-derivable EIS
-/// carry a [EisCheck]; organisational EIS are manual confirmations.
+/// The full MIAUW compliance schema (PENTEST_MIAUW §1/§9): all 88 testable EIS
+/// across the four parts (Algemeen / Interacties / Executie / Rapportage; the
+/// four part-section rows are modelled by [EisPart], not listed here), parsed
+/// from the authoritative MIAUW workbook
+/// (github.com/brennodewinter/Informatiebeveiligingsonderzoek, EUPL-1.2) and
+/// bundled as in-repo `const` data — no asset wiring, no network — exactly as
+/// the CWE catalog does. Content-derivable EIS carry a [EisCheck] and score
+/// automatically; the organisational EIS are manual confirmations (a human
+/// attestation via `deck.miauwConfirmations`, or a client waiver).
 ///
-/// The **full** 92-EIS schema (parsed from the MIAUW workbook) is a later,
-/// provisioned data pack (§6); this stays the always-on offline floor that
-/// drives the compliance overview.
+/// This is the always-on offline floor that drives the compliance overview; the
+/// provisioned data pack (§6) can carry the same schema for out-of-band updates.
+/// Titles are bundled normative content (Dutch, data — not localised UI, §12);
+/// `4.6` is an empty number in the source workbook, and the two `2.2.9` rows in
+/// the workbook are disambiguated as `2.2.9` / `2.2.9b`.
 class MiauwEisCatalog {
   MiauwEisCatalog._();
 
@@ -33,235 +39,556 @@ class MiauwEisCatalog {
 }
 
 const List<EisEntry> _entries = [
-  // ── 1 · Algemeen ──────────────────────────────────────────────────────────
   EisEntry(
     id: '1.1',
     part: EisPart.algemeen,
-    title: 'Digitale aanlevering met integriteitshash',
+    title: 'De onderzoeksrapportage wordt digitaal verstrekt.',
     derivation: EisDerivation.automatic,
     check: EisCheck.sealed,
   ),
   EisEntry(
     id: '1.2',
     part: EisPart.algemeen,
-    title: 'Rapporteur benoemd',
+    title:
+        'Aanwijzing en beschrijving rapporteur, opsteller of hoofdonderzoeker',
     derivation: EisDerivation.manual,
   ),
   EisEntry(
     id: '1.3',
     part: EisPart.algemeen,
-    title: 'Verplichte certificering (OSCP/OSEP/OSCE/OSWE/eWPTX)',
+    title:
+        'Beschrijving van de verplichte certificering, waarover de rapporteur beschikt',
     derivation: EisDerivation.manual,
   ),
   EisEntry(
     id: '1.4',
     part: EisPart.algemeen,
-    title: 'Bewijs van certificering',
+    title: 'Bewijs certificering',
     derivation: EisDerivation.manual,
   ),
   EisEntry(
     id: '1.5',
     part: EisPart.algemeen,
-    title: 'Rapportversie vastgelegd',
+    title: 'Benoemen van de versie van de rapportage',
     derivation: EisDerivation.automatic,
     check: EisCheck.reportVersion,
   ),
   EisEntry(
     id: '1.6',
     part: EisPart.algemeen,
-    title: 'Ondertekening voor waarheidsgetrouwe rapportage',
+    title: 'Handtekening voor waarheidsgetrouwe rapportage',
     derivation: EisDerivation.automatic,
     check: EisCheck.signOff,
   ),
   EisEntry(
     id: '1.7',
     part: EisPart.algemeen,
-    title: 'Zeven PTES-fasen doorlopen',
+    title: 'Proces van de Pentest Execution Standard volgen',
     derivation: EisDerivation.manual,
   ),
   EisEntry(
     id: '1.8',
     part: EisPart.algemeen,
-    title: 'Vertrouwelijkheid afgesproken',
+    title: 'Vertrouwelijkheid',
     derivation: EisDerivation.manual,
   ),
   EisEntry(
     id: '1.9',
     part: EisPart.algemeen,
-    title: 'Distributie vastgelegd',
+    title: 'Verspreiding',
     derivation: EisDerivation.manual,
   ),
-  // ── 2 · Interacties / Plan van aanpak ─────────────────────────────────────
   EisEntry(
     id: '2.1',
     part: EisPart.interacties,
-    title: 'Intakegesprek gehouden',
+    title: 'Beschrijving intakegesprek',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '2.1.1',
+    part: EisPart.interacties,
+    title: 'Er wordt benoemd wanneer het gesprek heeft plaats gevonden.',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '2.1.2',
+    part: EisPart.interacties,
+    title: 'Deelnemers',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '2.1.3',
+    part: EisPart.interacties,
+    title: 'Informatieverstrekking',
     derivation: EisDerivation.manual,
   ),
   EisEntry(
     id: '2.2',
     part: EisPart.interacties,
-    title: 'Scope met standaard per objecttype',
+    title:
+        'Er is een beschrijving van de scope van het onderzoek. Deze bevat de relevante selectie van onderdelen en objecten volgens sub 2.2.1 t/m 2.2.8. De scope komt overeen met de behoeftes uit het intakegesprek en past binnen de afgesproken tijdspanne.',
     derivation: EisDerivation.automatic,
     check: EisCheck.scopeMatrix,
   ),
   EisEntry(
+    id: '2.2.1',
+    part: EisPart.interacties,
+    title: 'Scope - Aanvalsperspectieven',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '2.2.2',
+    part: EisPart.interacties,
+    title: 'Scope - Objecten',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '2.2.3',
+    part: EisPart.interacties,
+    title: 'Scopeonderdeel - Infrastructuur',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '2.2.4',
+    part: EisPart.interacties,
+    title: 'Scopeonderdeel - Webapplicatie',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '2.2.5',
+    part: EisPart.interacties,
+    title: 'Scopeonderdeel - IoT',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '2.2.6',
+    part: EisPart.interacties,
+    title: 'Scopeonderdeel - Firmware',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '2.2.7',
+    part: EisPart.interacties,
+    title: 'Scopeonderdeel - API',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '2.2.8',
+    part: EisPart.interacties,
+    title: 'Scopeonderdeel - Mobiele Applicatie',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '2.2.9',
+    part: EisPart.interacties,
+    title: 'Scopeonderdeel – CIS Controls',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '2.2.9b',
+    part: EisPart.interacties,
+    title: 'Vaststelling scope en objecten',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '2.2.10',
+    part: EisPart.interacties,
+    title: 'Eigenaarschap scope',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '2.2.11',
+    part: EisPart.interacties,
+    title: 'Jurisdictie scope-objecten',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '2.2.12',
+    part: EisPart.interacties,
+    title: 'Accordering scope',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
     id: '2.3',
     part: EisPart.interacties,
-    title: 'Eigendom, jurisdictie en akkoord',
+    title:
+        'Voorafgaand aan de pentest is afgesproken en vastgelegd in welke taal de rapportage dient te worden geschreven.',
     derivation: EisDerivation.manual,
   ),
   EisEntry(
     id: '2.4',
     part: EisPart.interacties,
-    title: 'Taal en doelstelling vastgelegd',
+    title:
+        'Een plan van aanpak bevat het doel van de penetratietest en eventuele secundaire doelstelling(en) indien deze naar voren zijn gekomen in het intakegesprek.',
     derivation: EisDerivation.manual,
   ),
   EisEntry(
     id: '2.5',
     part: EisPart.interacties,
-    title: 'Vrijwaring getekend',
+    title:
+        'Er dient een vrijwaringsverklaring te worden getekend tussen opdrachtgever en opdrachtnemer voor het uitvoeren van de penetratietest, in deze vrijwaringsverklaring is specifiek verwezen naar de scope',
     derivation: EisDerivation.manual,
   ),
-  // ── 3 · Executie ──────────────────────────────────────────────────────────
   EisEntry(
     id: '3.1',
     part: EisPart.executie,
-    title: 'Assume breach als uitgangspunt',
+    title:
+        'Er wordt getest ervan uitgaande dat een aanvaller op reeds toegang tot een netwerkomgeving heeft (assume breach)',
     derivation: EisDerivation.manual,
   ),
   EisEntry(
     id: '3.2',
     part: EisPart.executie,
-    title: 'CVSS 4.0-scores toegekend aan bevindingen',
+    title: 'Gebruik CVSS-scores',
     derivation: EisDerivation.automatic,
     check: EisCheck.everyFindingHasCvss,
   ),
   EisEntry(
+    id: '3.2.1',
+    part: EisPart.executie,
+    title: 'Berekening CVSS-score',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
     id: '3.3',
     part: EisPart.executie,
-    title: 'Bewijslast met hashes',
+    title: 'Bewijslast',
     derivation: EisDerivation.manual,
   ),
   EisEntry(
     id: '3.4',
     part: EisPart.executie,
-    title: 'Scanresultaten gevalideerd',
+    title: 'Validatie scanresultaten',
     derivation: EisDerivation.manual,
   ),
   EisEntry(
     id: '3.5',
     part: EisPart.executie,
-    title: 'Toegangspaden gedocumenteerd',
+    title: 'Documenteren toegangswegen',
     derivation: EisDerivation.manual,
   ),
-  // ── 4 · Rapportage ────────────────────────────────────────────────────────
   EisEntry(
     id: '4.1',
     part: EisPart.rapportage,
-    title: 'Hoofdstukindeling volgens MIAUW',
+    title: 'Hoofdstukindeling',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.1.1',
+    part: EisPart.rapportage,
+    title: 'Hoofdstukindeling - Inhoudsopgave',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.1.2',
+    part: EisPart.rapportage,
+    title: 'Hoofdstukindeling - Methodologie',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.1.2.1',
+    part: EisPart.rapportage,
+    title: 'Hoofdstukindeling - Methodologie - CVSS',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.1.3',
+    part: EisPart.rapportage,
+    title: 'Hoofstukdindeling - Documentbeheer',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.1.4',
+    part: EisPart.rapportage,
+    title: 'Hoofstukdindeling - Versiebeheer',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.1.5',
+    part: EisPart.rapportage,
+    title: 'Hoofdstukindeling - Distributielijst',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.1.6',
+    part: EisPart.rapportage,
+    title: 'Hoofdstukindeling - Aanleiding',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.1.7',
+    part: EisPart.rapportage,
+    title: 'Doelstelling',
     derivation: EisDerivation.manual,
   ),
   EisEntry(
     id: '4.2',
     part: EisPart.rapportage,
-    title: 'Bevindingenlijst aanwezig',
+    title: 'Bevindingenlijst',
     derivation: EisDerivation.automatic,
     check: EisCheck.findingsPresent,
   ),
   EisEntry(
     id: '4.3',
     part: EisPart.rapportage,
-    title: 'Managementsamenvatting aanwezig',
+    title: 'Managementsamenvatting',
     derivation: EisDerivation.automatic,
     check: EisCheck.managementSummary,
   ),
   EisEntry(
+    id: '4.3.1',
+    part: EisPart.rapportage,
+    title: 'Managementsamenvatting - Start/einddatum',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.3.2',
+    part: EisPart.rapportage,
+    title: 'Managementsamenvatting - Overzicht gebruikte standaarden',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.3.3',
+    part: EisPart.rapportage,
+    title: 'Managementsamenvatting - CIA-scores',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.3.4',
+    part: EisPart.rapportage,
+    title: 'Managementsamenvatting - Root-cause analyse',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.3.5',
+    part: EisPart.rapportage,
+    title: 'Managementsamenvatting - Overzicht bevindingen',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
     id: '4.4',
     part: EisPart.rapportage,
-    title: 'Scope-hoofdstuk aanwezig',
+    title: 'Scope',
     derivation: EisDerivation.automatic,
     check: EisCheck.scopeMatrix,
   ),
   EisEntry(
+    id: '4.4.1',
+    part: EisPart.rapportage,
+    title: 'Scope - overeenkomst met Plan van Aanpak',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.4.2',
+    part: EisPart.rapportage,
+    title: 'Scope - Assume Breach principe',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
     id: '4.5',
     part: EisPart.rapportage,
-    title: 'Tijdlijn opgenomen',
+    title: 'Tijdslijn (verloop van penetratietest) - reproduceerbaarheid',
     derivation: EisDerivation.automatic,
     check: EisCheck.timeline,
   ),
   EisEntry(
+    id: '4.6',
+    part: EisPart.rapportage,
+    title: 'Gereserveerd (leeg nummer in het MIAUW-schema)',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.7',
+    part: EisPart.rapportage,
+    title: 'Hoofdstuk - Bevindingen',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
     id: '4.7.1',
     part: EisPart.rapportage,
-    title: 'Elke bevinding benoemt het scope-object',
+    title: 'Hoofdstuk - Bevindingen - Scope-object',
     derivation: EisDerivation.automatic,
     check: EisCheck.everyFindingHasScope,
   ),
   EisEntry(
     id: '4.7.2',
     part: EisPart.rapportage,
-    title: 'Elke bevinding heeft een CVSS-score en vectorstring',
+    title: 'Hoofdstuk - Bevindingen - CVSS-score',
     derivation: EisDerivation.automatic,
     check: EisCheck.everyFindingHasCvss,
   ),
   EisEntry(
     id: '4.7.3',
     part: EisPart.rapportage,
-    title: 'Elke bevinding heeft een beschrijving',
+    title: 'Hoofdstuk - Bevindingen - CVSS Vector string',
     derivation: EisDerivation.automatic,
-    check: EisCheck.everyFindingHasDescription,
+    check: EisCheck.everyFindingHasCvss,
   ),
   EisEntry(
     id: '4.7.4',
     part: EisPart.rapportage,
-    title: 'Elke bevinding heeft bevestiging / reproductie',
+    title: 'Hoofdstuk - Bevindingen - Beschrijving kwetsbaarheid',
     derivation: EisDerivation.automatic,
-    check: EisCheck.everyFindingHasConfirmation,
+    check: EisCheck.everyFindingHasDescription,
   ),
   EisEntry(
     id: '4.7.5',
     part: EisPart.rapportage,
-    title: 'Elke bevinding beschrijft de mogelijke impact',
+    title: 'Hoofdstuk - Bevindingen - Bevestiging kwetsbaarheid',
     derivation: EisDerivation.automatic,
-    check: EisCheck.everyFindingHasImpact,
+    check: EisCheck.everyFindingHasConfirmation,
   ),
   EisEntry(
     id: '4.7.6',
     part: EisPart.rapportage,
-    title: 'Elke bevinding heeft een aanbeveling',
+    title: 'Hoofdstuk - Bevindingen - Mogelijke impact',
     derivation: EisDerivation.automatic,
-    check: EisCheck.everyFindingHasRecommendation,
+    check: EisCheck.everyFindingHasImpact,
   ),
   EisEntry(
     id: '4.7.7',
     part: EisPart.rapportage,
-    title: 'Elke bevinding legt een CWE-koppeling',
+    title: 'Hoofdstuk - Bevindingen - Aanbeveling',
     derivation: EisDerivation.automatic,
-    check: EisCheck.everyFindingHasCwe,
+    check: EisCheck.everyFindingHasRecommendation,
+  ),
+  EisEntry(
+    id: '4.8',
+    part: EisPart.rapportage,
+    title: 'Bijlages',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.8.1',
+    part: EisPart.rapportage,
+    title: 'Bijlages - Verklarende woordenlijst',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.8.2',
+    part: EisPart.rapportage,
+    title: 'Bijlages - Hulpmiddelen',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.8.2.1',
+    part: EisPart.rapportage,
+    title: 'Bijlages - Hulpmiddelen - Beschrijving',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.8.2.2',
+    part: EisPart.rapportage,
+    title: 'Bijlages - Hulpmiddelen - Versie-nummer',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.8.2.3',
+    part: EisPart.rapportage,
+    title: 'Bijlages - Hulpmiddelen - Publieke referentie (URL)',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.8.3',
+    part: EisPart.rapportage,
+    title: 'Bijlages - Ontvangen documenten',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.8.3.1',
+    part: EisPart.rapportage,
+    title: 'Bijlages - Ontvangen documenten - Beschrijving',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.8.3.2',
+    part: EisPart.rapportage,
+    title: 'Bijlages - Ontvangen documenten - SHA1-hashes',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.8.4',
+    part: EisPart.rapportage,
+    title: 'Bijlages - Ontvangen bestanden',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.8.4.1',
+    part: EisPart.rapportage,
+    title: 'Bijlages - Ontvangen bestanden - Beschrijving',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.8.4.2',
+    part: EisPart.rapportage,
+    title: 'Bijlages - Ontvangen bestanden - SHA1-hashes',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.9',
+    part: EisPart.rapportage,
+    title: 'Bijlages - Gebruikte accounts',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.9.1',
+    part: EisPart.rapportage,
+    title: 'Bijlages - Gebruikte accounts - Scope-object',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.9.2',
+    part: EisPart.rapportage,
+    title: 'Bijlages - Gebruikte accounts - Beschrijving',
+    derivation: EisDerivation.manual,
   ),
   EisEntry(
     id: '4.10',
     part: EisPart.rapportage,
-    title: 'Ontvangen documenten met SHA1',
+    title: 'Bijlages - Uitgevoerde scans',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.10.1',
+    part: EisPart.rapportage,
+    title: 'Bijlages - Uitgevoerde scans - Scan-resultaat - Scope-object',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.10.2',
+    part: EisPart.rapportage,
+    title: 'Bijlages - Uitgevoerde scans - Scan-resultaat - Output',
     derivation: EisDerivation.manual,
   ),
   EisEntry(
     id: '4.11',
     part: EisPart.rapportage,
-    title: 'Accounts gedocumenteerd',
+    title: 'Bijlages - Bewijsmateriaal',
+    derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.11.1',
+    part: EisPart.rapportage,
+    title: 'Bijlages - Bewijsmateriaal - SHA1-hashes',
     derivation: EisDerivation.manual,
   ),
   EisEntry(
     id: '4.12',
     part: EisPart.rapportage,
-    title: 'Scans gedocumenteerd',
+    title: 'Bijlages - Checklists',
     derivation: EisDerivation.manual,
+  ),
+  EisEntry(
+    id: '4.12.1',
+    part: EisPart.rapportage,
+    title: 'Bijlages - Checklists - Per standaard',
+    derivation: EisDerivation.automatic,
+    check: EisCheck.checklistPresent,
   ),
   EisEntry(
     id: '4.13',
     part: EisPart.rapportage,
-    title: 'Checklists per standaard aanwezig',
-    derivation: EisDerivation.automatic,
-    check: EisCheck.checklistPresent,
+    title: 'Bijlages - Lijst van onbenaderbare/onbereikbare scope-objecten',
+    derivation: EisDerivation.manual,
   ),
 ];

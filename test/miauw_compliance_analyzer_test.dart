@@ -47,7 +47,7 @@ void main() {
       expect(_status(r, '4.2'), EisStatus.voldaan); // findings present
       expect(_status(r, '4.7.1'), EisStatus.voldaan); // scope object
       expect(_status(r, '4.7.2'), EisStatus.voldaan); // cvss
-      expect(_status(r, '4.7.7'), EisStatus.voldaan); // cwe
+      expect(_status(r, '4.7.7'), EisStatus.voldaan); // recommendation
       expect(_status(r, '3.2'), EisStatus.voldaan); // cvss (shared check)
     });
 
@@ -77,7 +77,7 @@ void main() {
       );
       expect(_status(r, '4.3'), EisStatus.voldaan); // management summary
       expect(_status(r, '4.4'), EisStatus.voldaan); // scope
-      expect(_status(r, '4.13'), EisStatus.voldaan); // checklist
+      expect(_status(r, '4.12.1'), EisStatus.voldaan); // checklist
       expect(_status(r, '4.5'), EisStatus.voldaan); // timeline
       expect(_status(r, '1.6'), EisStatus.voldaan); // sign-off
       expect(_status(r, '1.5'), EisStatus.voldaan); // report version
