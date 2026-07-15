@@ -3,10 +3,10 @@
 // A lightweight module framework: a single toggle, OFF by default, whose
 // enabled flag + provisioned pack version live in the one shared_preferences
 // domain (like every other setting). Enabling runs provisioning
-// (SecModuleProvisioner) and, on success, flips a REVEAL flag that later
-// features (the Informatieveiligheid picker tab, MIAUW templates + slide types —
-// none of which exist yet) read via [secModuleRevealProvider]. Disabling clears
-// the reveal but KEEPS the cached pack.
+// (SecModuleProvisioner) and, on success, flips a REVEAL flag that the module's
+// features (the Informatieveiligheid picker tab, MIAUW templates and the
+// finding/checklist/scope-matrix slide types) read via [secModuleRevealProvider].
+// Disabling clears the reveal but KEEPS the cached pack.
 //
 // This is deliberately reusable: a future domain extension can reuse the same
 // enable → provision → reveal pattern.

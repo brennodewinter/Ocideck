@@ -25,7 +25,8 @@ flutter run -d macos  # or -d windows / -d linux
 
 ## The quality gate
 
-Run this before every push — it is exactly what CI runs:
+Run this before every push — it is the enforced quality gate (the remote is
+Forgejo with no CI runner, so nothing runs it for you):
 
 ```sh
 make check            # format-check + analyze + conventions + full test suite + coverage floor
@@ -47,7 +48,8 @@ Individual steps:
 | `make check-full` | `check` plus licences, bundled-JS, web hardening, and a freshness report. |
 
 See [`docs/CHECKS.md`](docs/CHECKS.md) for the full reference — what each check
-covers, what a failure means, and how CI runs them.
+covers, what a failure means, and how the CI workflows (defined but not currently
+running) declare them.
 
 Targeted test groups for focused work:
 

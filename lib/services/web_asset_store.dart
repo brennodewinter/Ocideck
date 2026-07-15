@@ -10,9 +10,10 @@ const _uuid = Uuid();
 /// leeft als bytes in het geheugen en krijgt een pad met het schema
 /// `mem:<uuid>`. De renderlaag (media_previews_image) herkent dat schema en
 /// tekent rechtstreeks uit deze store; de gewone pad-resolvers zien `mem:`
-/// nooit. De store leeft zolang de pagina leeft — een opgeslagen `.md` met
-/// `mem:`-verwijzingen verliest zijn afbeeldingen dus bij herladen. Assets
-/// meenemen in een pakket (.ocideck) is de vervolgstap.
+/// nooit. De store leeft zolang de pagina leeft — een los opgeslagen `.md` met
+/// `mem:`-verwijzingen verliest zijn afbeeldingen dus bij herladen. Exporteren
+/// als `.ocideck`-pakket neemt de `mem:`-assets wél mee (zie
+/// file_service_package.dart).
 class WebAssetStore {
   WebAssetStore._();
 

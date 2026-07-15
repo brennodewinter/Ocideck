@@ -1679,5 +1679,5 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   assets. Localized in Dutch, English, Italian, German, French, Spanish, Frisian,
   and Papiamento.
 
-[Unreleased]: https://example.com/ocideck/compare/v1.0.0...HEAD
-[1.0.0]: https://example.com/ocideck/releases/tag/v1.0.0
+[Unreleased]: https://pawprint.vigilis.online/LibreKAT/Ocideck/compare/v1.0.0...HEAD
+[1.0.0]: https://pawprint.vigilis.online/LibreKAT/Ocideck/releases/tag/v1.0.0

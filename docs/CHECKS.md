@@ -1,9 +1,12 @@
 # OciDeck — Checks & CI
 
 Every automated check OciDeck runs, what it covers, what a failure means, and how
-to fix it. The **`Makefile` is the single entry point**: the same targets run
-locally and in CI, so "green locally" means "green in CI". Run `make help` for a
-one-line summary of every target.
+to fix it. The **`Makefile` is the single entry point** and the **real gate**:
+`make check`, run by the committer before pushing, is what actually enforces
+these checks. GitHub Actions workflows are defined under `.github/workflows/`,
+but the project's remote is a Forgejo instance with **no CI runner configured**,
+so they do not execute — see [Continuous integration](#continuous-integration).
+Run `make help` for a one-line summary of every target.
 
 ## The one command
 
@@ -11,7 +14,7 @@ one-line summary of every target.
 make check        # format-check + analyze + full test suite — the quality gate
 ```
 
-Run this before every push; it is exactly what the CI gate runs. For the extended
+Run this before every push — it is the enforced gate. For the extended
 local sweep that also covers licences and dependency health:
 
 ```sh
@@ -51,18 +54,18 @@ file appears in no test at all. Such a file is not 0% — lcov never records it,
 so it sits outside the fraction entirely and the percentage alone can never see
 it (see [`make coverage`](#make-coverage)).
 
-Every push runs the **entire** suite — there is no "smoke subset". The tests
+`make check` runs the **entire** suite — there is no "smoke subset". The tests
 span unit (model/parsing/state), widget (every slide editor, the dialogs, the
 panels, the live preview and the fullscreen presenter's keyboard handling) and
 service-level (export, file IO, sanitisation) layers, plus the enforced
-localization and security guards listed below. Because the same `make` targets
-run locally and in CI, the number you see locally is the number CI gates on.
+localization and security guards listed below. With no CI runner on the Forgejo
+remote, the number you see locally is the number that gates the push.
 
 ---
 
 ## All checks at a glance
 
-| Check | Verifies | In `make check` | In `check-full` | In CI |
+| Check | Verifies | In `make check` | In `check-full` | In CI workflow † |
 | --- | --- | :---: | :---: | :---: |
 | [`make format-check`](#make-format-check) | Code is `dart format`-clean | ✅ | ✅ | ✅ |
 | [`make analyze`](#make-analyze) | No analyzer/lint/type issues (`--fatal-infos`) | ✅ | ✅ | ✅ |
@@ -79,8 +82,16 @@ run locally and in CI, the number you see locally is the number CI gates on.
 | [`make trivy`](#make-trivy-advisory) | Dart-dep CVEs + committed secrets (advisory) | — | — | ✅ (advisory) |
 | [`make check-actions`](#make-check-actions-advisory) | Pinned CI Actions vs their latest release (advisory) | — | — | — |
 
-CI additionally runs `flutter pub get --enforce-lockfile` (reproducible
-dependencies) and a **Markdown link check** (`lychee --offline`).
+† The **In CI workflow** column is what `.github/workflows/ci.yml` *declares* —
+not what runs. That workflow does not currently execute: the remote is Forgejo
+with no runner (see [Continuous integration](#continuous-integration)). Until a
+runner exists, only what the committer runs locally gates a push, and `make
+check` alone does **not** include `licenses`, `sbom-verify`, `deps-check` or
+`check-web` — those live in `check-full`. Run `make check-full` before a
+dependency or web-facing change.
+
+The workflow additionally declares `flutter pub get --enforce-lockfile`
+(reproducible dependencies) and a **Markdown link check** (`lychee --offline`).
 
 Enforced inside `make test`: **localization in all 31 languages**, the
 **path/SSRF guards**, the **HTML-export sanitisation** invariants (strict
@@ -97,7 +108,8 @@ are subsets of `make test` for focused work — not separate gates.
 
 ## Quality gate
 
-These three run on every push and pull request (and as `make check`).
+These three are the core of `make check` — the enforced gate. (The CI workflow
+also declares them, but see the [CI note](#continuous-integration).)
 
 ### `make format-check`
 - **Runs:** `dart format --output=none --set-exit-if-changed .`
@@ -372,16 +384,23 @@ For focused work, run only the relevant slice instead of the whole suite:
   structure / colour regressions (elements moving, resizing, disappearing, wrong
   theme colours) without depending on glyph rendering. The PNGs are pixel- and
   **platform-specific**, so they are tagged `golden` and **excluded from the
-  default suite** (CI runs it on Linux/macOS/Windows) — run them on **one**
-  platform. `make test-golden` compares; `make test-golden UPDATE=1` accepts an
-  intentional visual change. (To gate them in CI, add a single-platform job that
-  runs `make test-golden` and regenerate the PNGs on that platform.)
+  default suite** — run them on **one** platform. `make test-golden` compares;
+  `make test-golden UPDATE=1` accepts an intentional visual change. (To gate them
+  once a CI runner exists, add a single-platform job that runs `make test-golden`
+  and regenerate the PNGs on that platform.)
 
 ---
 
 ## Continuous integration
 
-### `.github/workflows/ci.yml` — every push and pull request
+> **These workflows are defined but do not currently run.** OciDeck's remote is a
+> Forgejo instance with no CI runner configured, so GitHub Actions never fires on
+> push or tag. The files are kept ready for a GitHub mirror or a future Forgejo
+> runner; until then, **`make check` (plus `make check-full` for the
+> dependency/web checks), run by the committer before pushing, is the only
+> enforcement.** The sections below describe what the workflow files *declare*.
+
+### `.github/workflows/ci.yml` — declared for every push and pull request
 - **Gate (Linux)** — `runs-on: ubuntu-latest`: `flutter pub get
   --enforce-lockfile`, then `make format-check`, `make analyze`,
   `make check-conventions`, `make check-method-length`, `make check-dead-code`,

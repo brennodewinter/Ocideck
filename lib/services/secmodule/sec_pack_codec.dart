@@ -1,9 +1,12 @@
 // Content-addressed "module data pack" codec (PENTEST_MIAUW.md §6).
 //
-// The Informatieveiligheid module ships NO reference data in the base app
-// payload. Enabling it fetches a single versioned pack — a zip of pre-normalised
-// JSON plus an inner MANIFEST.json — verifies it, and caches it locally so the
-// module then runs offline. This file is the pure-Dart codec for that pack:
+// The module's reference data is *designed* to travel in a single versioned
+// pack — a zip of pre-normalised JSON plus an inner MANIFEST.json — fetched,
+// verified against a compiled-in fingerprint, and cached locally so the module
+// runs offline. CURRENT STATE: the shipped pack is still a placeholder skeleton,
+// the module's live data (CWE/WSTG/CVSS/MIAUW) is compiled into the base app,
+// and nothing reads the pack's contents back yet (see PENTEST_MIAUW.md §6 and
+// the secmodule remediation). This file is the pure-Dart codec for that pack:
 //
 //   * [buildSecPack]  — deterministically assembles data files + an inner
 //     MANIFEST.json (per-file sha256 + upstream version + licence + source),

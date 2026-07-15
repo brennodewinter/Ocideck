@@ -133,8 +133,9 @@ IntegrityStatus deckIntegrityStatus(Deck deck) =>
 /// (AI_ASSIST §16.3, [Slide.aiAssistedFields]). While this is non-empty the deck
 /// must **not** be sealed: the EIS 1.6 attestation has to cover human-verified
 /// text, so every AI-drafted field must be reviewed and cleared first. AI
-/// drafting (P3-AIA) sets the markers and clears them on review; nothing writes
-/// them yet, so today this is empty for every hand-authored deck.
+/// drafting (P3-AIA) sets the markers and clears them on review; the finding and
+/// image editors set them when a field is AI-drafted, so a deck can carry
+/// unreviewed markers until each is cleared.
 List<int> slidesWithUnreviewedAiMarkers(Deck deck) => [
   for (var i = 0; i < deck.slides.length; i++)
     if (deck.slides[i].aiAssistedFields.isNotEmpty) i + 1,
