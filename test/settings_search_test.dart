@@ -58,6 +58,19 @@ void main() {
     expect(find.textContaining('› Toegankelijkheid'), findsOneWidget);
   });
 
+  testWidgets('een stijlprofiel delen is vindbaar zonder de term te kennen', (
+    tester,
+  ) async {
+    await openSettings(tester);
+    // "downloaden" staat nergens op het scherm; de knop heet "exporteren".
+    await search(tester, 'downloaden');
+    expect(find.text('Profiel exporteren'), findsOneWidget);
+    expect(find.text('Geen instelling gevonden'), findsNothing);
+
+    await search(tester, 'inladen');
+    expect(find.text('Profiel importeren'), findsOneWidget);
+  });
+
   testWidgets('a query that matches nothing says so', (tester) async {
     await openSettings(tester);
     await search(tester, 'zoiets bestaat niet');

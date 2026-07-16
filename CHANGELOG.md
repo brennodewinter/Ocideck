@@ -8,6 +8,24 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Style profiles can be exported and imported as a file.** A profile could
+  only travel inside a deck (in the front matter); there was no way to download
+  one or load one in. Two buttons next to the profile name (Settings →
+  Presentation style) now write the profile you are editing to a
+  `.ocideckstyle` file — on the web build it downloads — and read such a file
+  back. So a house style can be handed to a colleague or kept in a repository
+  without a deck around it. An import is added as a *new* profile and selected;
+  an existing name is never overwritten, the import gets a unique name instead.
+  A **custom logo travels inside the file** (embedded as base64), so the profile
+  arrives complete, while the local path to your logo is deliberately left out —
+  it means nothing to the receiver and would leak your user name. Built-in logos
+  stay a reference. The file is JSON in a small envelope with a format marker and
+  version, so an arbitrary `.json` is refused rather than half-read
+  (FILE_FORMAT §3.3). An imported profile is treated as untrusted input and goes
+  through the same hardened gate as a profile from a deck: colours are validated
+  to strict `#RRGGBB` and fonts are whitelisted. On the web build a restored
+  custom logo lives only until the page reloads (the browser has no persistent
+  file storage) — everything else in the profile keeps working.
 - **Group headings ("tussenkoppen") inside a bullet list.** A single bullets
   slide can now be split into visually separated groups without splitting the
   slide: add a heading with **Tussenkop toevoegen**, or turn any row into one

@@ -354,6 +354,13 @@ also declares them, but see the [CI note](#continuous-integration).)
   - the `ThemeProfile.fromJson` fuzz in `test/settings_provider_test.dart` —
     every style colour must read back as `#RRGGBB` and every font as a
     whitelisted family, blocking CSS/HTML injection via an imported theme.
+  - `test/style_profile_export_test.dart` — the standalone `.ocideckstyle`
+    carrier of that same profile: a file without the format marker, with an
+    unsupported version, or over the size cap is refused rather than half-read;
+    an embedded logo is accepted only on its magic bytes (a declared MIME type
+    is ignored); a bare `logoPath` from someone else's disk is dropped; and a
+    crafted colour in a file still comes back neutralised — so the hardened gate
+    is proven on the carrier that actually crosses machines.
 
 ### Targeted test groups
 

@@ -114,6 +114,16 @@ lib/
   `themeProfile`; the cockpit painter and the export SVG read the four colours
   from it instead of hardcoded constants. For the beamer window it travels in the
   transient audience payload, like the inlined style profile.
+- **`ThemeProfile` travels three ways**, all through the same `toJson` /
+  `fromJson` pair: in `AppSettings` as the managed list of profiles (persisted to
+  preferences), inlined in a deck's front matter (base64url), and — since it must
+  also be shareable on its own — as a standalone `.ocideckstyle` file
+  (`parts/file_service_style_profile.dart`, FILE_FORMAT §3.3). `fromJson` is
+  deliberately the single hardened gate for all three: two of them are untrusted
+  input, so validating at the model rather than per call site means a new carrier
+  cannot forget to. The standalone file is the only carrier that embeds the logo
+  bytes, because it is the only one that travels without a project folder to
+  resolve a path against.
 
 ## Markdown round-trip
 
