@@ -1787,6 +1787,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Procesverbetering (ontwerp)': 'Folyamatfejlesztés (terv)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Ez a projekt a Pilot Informatieautonomie mellékterméke.',
   'Stijlprofiel exporteren': 'Stílusprofil exportálása',

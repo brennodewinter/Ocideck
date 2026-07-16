@@ -1801,6 +1801,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Procesverbetering (ontwerp)': 'Удосконалення процесів (проєкт)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Цей проєкт є побічним продуктом Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Експортувати профіль стилю',

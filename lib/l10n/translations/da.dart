@@ -1782,6 +1782,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Procesverbetering (ontwerp)': 'Procesforbedring (design)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Dette projekt er et biprodukt af Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Eksportér stilprofil',

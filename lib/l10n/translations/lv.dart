@@ -1782,6 +1782,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Procesverbetering (ontwerp)': 'Procesu uzlabošana (dizains)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Šis projekts ir Pilot Informatieautonomie blakusprodukts.',
   'Stijlprofiel exporteren': 'Eksportēt stila profilu',

@@ -1811,6 +1811,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Procesverbetering (ontwerp)': 'Βελτίωση διεργασιών (σχεδίαση)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Αυτό το έργο είναι παραπροϊόν του Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Εξαγωγή προφίλ στυλ',

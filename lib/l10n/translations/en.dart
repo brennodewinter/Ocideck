@@ -922,6 +922,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Procesverbetering (ontwerp)': 'Process improvement (design)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'This project is a by-product of the Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Export style profile',

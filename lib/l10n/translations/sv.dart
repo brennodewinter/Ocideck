@@ -1782,6 +1782,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Procesverbetering (ontwerp)': 'Processförbättring (design)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Det här projektet är en biprodukt av Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Exportera stilprofil',

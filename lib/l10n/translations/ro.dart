@@ -1802,6 +1802,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Procesverbetering (ontwerp)': 'Îmbunătățirea proceselor (proiectare)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Acest proiect este un produs secundar al Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Exportă profilul de stil',

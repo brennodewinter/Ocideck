@@ -1806,6 +1806,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Procesverbetering (ontwerp)': 'Titjib tal-proċessi (disinn)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Dan il-proġett huwa prodott sekondarju tal-Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Esporta l-profil tal-istil',

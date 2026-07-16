@@ -1790,6 +1790,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Procesverbetering (ontwerp)': 'Poboljšanje procesa (dizajn)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Ovaj projekt nusproizvod je projekta Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Izvezi profil stila',

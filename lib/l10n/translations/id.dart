@@ -1783,6 +1783,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Procesverbetering (ontwerp)': 'Peningkatan proses (desain)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Proyek ini merupakan produk sampingan dari Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Ekspor profil gaya',

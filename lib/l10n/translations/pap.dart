@@ -740,6 +740,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Procesverbetering (ontwerp)': 'Mehoramentu di proseso (diseño)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'E proyekto aki ta un subprodukto di e Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Eksportá perfil di estilo',
