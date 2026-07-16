@@ -44,6 +44,32 @@ don't matter), use `↑`/`↓` to move, `Enter` to run, and `Esc` to close. Acti
 that aren't available yet (for example export before you've saved) stay visible
 but greyed out. The palette is also in the `⋮` menu.
 
+## Git repository
+
+You can open decks from a git repository — your own Forgejo, for now. Every
+saved version stays retrievable, which a plain folder cannot give you.
+
+- **Set it up** in *Settings → Git repository*: the server URL
+  (`https://git.example.org`), the owner (user or organisation), the repository
+  name, and a **personal access token**. Scope the token to just that repository
+  where your forge supports it. It is stored encrypted in your operating
+  system's keychain, not in the plain settings file. A public repository needs
+  no token at all.
+- **Self-hosted on a private address**: tick **Trusted internal server**, the
+  same safeguard as for Nextcloud.
+- **Open** via the `…` menu (*Open from git…*): pick a deck and it is fetched,
+  checked by the same safety scan as any other deck, and opened. A repository is
+  untrusted input — coming from your own forge does not make it trusted.
+- **Layout**: a repository holds many decks under `decks/<name>/deck.md`, with
+  images shared in one `assets/` pool so the same picture is stored once.
+- **Read-only for now**: saving back, versions and releases are still being
+  built. See [`design/GIT_STORAGE.md`](design/GIT_STORAGE.md).
+- **A repository is a trust boundary.** Everyone who can read it reads *every*
+  deck in it, so use one repository per client, engagement or classification
+  level — the forge's permissions are what separate them, not OciDeck.
+
+Unlike Nextcloud, this also works in the browser version.
+
 ## Nextcloud (WebDAV)
 
 You can use a folder on your Nextcloud as a source for decks and assets.

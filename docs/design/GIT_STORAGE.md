@@ -1,6 +1,13 @@
 # OciDeck — Git-Repository Storage (Design)
 
-> **Status: design proposal — not yet implemented.**
+> **Status: Phase 0 landed; the rest is still a design proposal.**
+> Read-only opening from a Forgejo/Gitea repository works today — see
+> [`../SOURCE_MAP.md`](../SOURCE_MAP.md) for what exists (`lib/services/git/`,
+> `lib/state/git_provider.dart`, `lib/state/tabs_provider_git.dart`) and the
+> [`../USER_GUIDE.md`](../USER_GUIDE.md) for how to use it. Everything from
+> Phase 1 on — the asset pool, writing, native git, releases — is still design.
+> Each phase folds its part into the current-state docs as it lands.
+>
 > This document describes a *future* storage backend and the architecture chosen
 > for it. It is deliberately kept separate from the current-state contributor
 > docs ([`ARCHITECTURE.md`](../ARCHITECTURE.md), [`SOURCE_MAP.md`](../SOURCE_MAP.md),
@@ -785,6 +792,15 @@ git_cli.dart`, and nothing else in the tree may spawn a process.
   `/fetch-proxy` (`lib/services/parts/file_service_net.dart`) for those origins,
   or document the required CORS configuration. (URL-import failures on web are
   usually CORS.)
+- **The proxy is for public repositories only — a request carrying a token never
+  goes through it.** The fetch-proxy fetches server-side, so it would receive the
+  PAT and forward it on the user's behalf. That directly contradicts §10.1 ("the
+  token lives in the keychain, nowhere else"): it would put the secret in a
+  second place, on a host the user did not authenticate to. So the fallback
+  applies only when the request carries no credential; with a token, the honest
+  answer is to tell the user CORS must be configured on the forge. This is a
+  Phase 0 finding, not part of the original design — the transport enforces it
+  (`git_transport_web.dart`) and a test pins it.
 - **No SSRF pinning on web** — the browser sandbox handles it; `NetGuard`'s
   network checks are a no-op there, as they already are for media URLs.
 - Offline degrades to the §8.3 draft model.
