@@ -96,6 +96,24 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   content is not lost, only relocated, and one undo brings it back.
 
 ### Changed
+- **The licence documentation now says what is actually bundled.**
+  `LICENSE_COMPLIANCE.md` stated that no OWASP WSTG checklist content shipped, so
+  CC-BY-SA-4.0 share-alike was not triggered — while the module had bundled the
+  97 verbatim WSTG test titles from the day it landed. It even named the
+  condition for its own undoing ("should verbatim checklist content be bundled
+  later, it must ship with attribution + share-alike"); nobody came back to it.
+  The same lapse left the full 969-entry MITRE CWE asset out of the table
+  entirely, while listing only the 41-entry curated floor.
+  OWASP WSTG is now recorded with **attribution to the OWASP Foundation, a link
+  to the licence and to the guide, and share-alike** — as are the full CWE asset,
+  the CVSS band labels reproduced from FIRST's rating scale, and the finding
+  templates. What is bundled is stated plainly: the WSTG **checklist index** (id,
+  title, category), not the guide's substance. Share-alike travels with that
+  dataset; the app bundles it as a collection, so the EUPL-1.2 code around it is
+  unaffected.
+  A test now derives the table from the app's own catalogue registry, so a sixth
+  dataset cannot reach a user without its terms being written down first.
+
 - **The Informatieveiligheid module is simply on or off now — no provisioning.**
   Enabling it used to run a fetch-verify-cache pipeline: an ordered mirror list,
   a pinned hash, a local cache, a manual pack import for air-gapped machines, and
