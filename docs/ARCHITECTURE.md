@@ -11,6 +11,53 @@ description of **every** file under `lib/`, see [`SOURCE_MAP.md`](SOURCE_MAP.md)
 - **Storage**: standard Marp Markdown (`.md`) as the single source of truth, with
   sidecars for anything that isn't plain Marp.
 
+## Runtime & network model
+
+OciDeck is a **client-side app with no application backend**. On every platform —
+desktop and web alike — the editor, live preview, the on-device privacy scan
+(OciWacht), export to PDF/PPTX/HTML, and the CVSS/MIAUW engines run **in the
+process the user is looking at**: the native app on desktop, and on web the
+browser tab, into which the whole Dart-compiled bundle is downloaded and then
+run. Deck content is never shipped to a server to be processed.
+
+There is **no telemetry, analytics, or tracking** of any kind. The only network
+dependency is `http` (see `pubspec.yaml`) — no Firebase/Sentry/GA/PostHog — and
+`web/index.html` ships a strict CSP (`default-src 'self'`; `connect-src 'self'
+https:`) with no third-party scripts. The app never phones home. (The only
+`tracking` strings in `lib/` belong to the *privacy detector*, which flags
+trackers found in the user's own slides — not tracking of the user.)
+
+**What a web host can and cannot see.** A server that *serves* the web bundle sees
+only what any static host sees — ordinary HTTP access logs (IP, timestamp, which
+assets were fetched, user-agent). It has **no application-level insight**: not the
+deck, its content, the edits, or what the user does inside the tab. Everything
+above the transport stays in the browser.
+
+**Outbound calls are user-initiated and go where the user points them**, never to
+the hosting origin as telemetry:
+
+- **fetch-proxy** (`server/fetch-proxy/`) — the *one* optional server-side
+  component. When the web app opens a deck from a URL whose host sends no CORS
+  headers, it falls back to the same-origin `/fetch-proxy?url=…` and the proxy
+  fetches those bytes server-side, relaying **raw bytes only** (no content
+  inspection). So in that one case the host does see the fetched URL. It is
+  SSRF-guarded, mirroring `utils/net_guard.dart` (public-routable targets only,
+  socket pinned to the validated address against DNS rebind, no redirects, hard
+  byte cap). Without it deployed the web app still works for same-origin and
+  CORS-friendly sources.
+- **Optional AI assistance** (`services/ai_*`, off by default) — a local model or
+  a *consented* outbound endpoint the user configures.
+- **Nextcloud/WebDAV** (`services/webdav_service.dart`) — the user's own server.
+- **CVE database / secmodule provisioning** — opt-in downloads.
+- **URL import / remote media** — a link the user pastes.
+
+Every outbound request from the app funnels through `utils/net_guard.dart`, which
+rejects internal targets (loopback, RFC1918, link-local incl. cloud metadata,
+CGNAT, ULA, IPv4-in-IPv6) and pins the socket to the validated address. The one
+opt-in exception is a WebDAV host the user has ticked as a *trusted internal
+server* (`NetGuard.safeResolveTrusted`, `WebdavServer.trustedInternal`), which
+allows a private/LAN address over plain `http`.
+
 ## Module layout
 
 ```
