@@ -123,6 +123,7 @@ flutter:
     - docs/design/AI_ASSIST.md
     - docs/design/AGENTIC_BUILD_PLAN.md
     - docs/design/OCIWACHT.md
+    - docs/design/PROCESS_IMPROVEMENT.md
   fonts:
     - family: EB Garamond
       fonts:

@@ -741,6 +741,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Procesverbetering (ontwerp)': 'Prosesferbettering (ûntwerp)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Dit projekt is byfangst fan de Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Styleprofyl eksportearje',

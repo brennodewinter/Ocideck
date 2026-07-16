@@ -737,6 +737,7 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Procesverbetering (ontwerp)': 'Mejora de procesos (diseño)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Este proyecto es un subproducto del Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Exportar perfil de estilo',

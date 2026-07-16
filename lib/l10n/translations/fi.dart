@@ -1783,6 +1783,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Procesverbetering (ontwerp)': 'Prosessien parantaminen (suunnitelma)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Tämä projekti on Pilot Informatieautonomie -hankkeen sivutuote.',
   'Stijlprofiel exporteren': 'Vie tyyliprofiili',

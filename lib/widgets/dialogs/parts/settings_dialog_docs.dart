@@ -120,6 +120,11 @@ extension _SettingsDocs on _SettingsDialogState {
               title: l10n.d('Agentisch bouwplan (ontwerp)'),
               assetBase: 'docs/design/AGENTIC_BUILD_PLAN.md',
             ),
+            DocEntry(
+              icon: Icons.trending_up_outlined,
+              title: l10n.d('Procesverbetering (ontwerp)'),
+              assetBase: 'docs/design/PROCESS_IMPROVEMENT.md',
+            ),
           ],
         ),
       ],

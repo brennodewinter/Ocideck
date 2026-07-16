@@ -1819,6 +1819,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Procesverbetering (ontwerp)': 'Feabhsú próiseas (dearadh)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Is seachtháirge de chuid an Pilot Informatieautonomie é an tionscadal seo.',
   'Stijlprofiel exporteren': 'Easpórtáil próifíl stíle',

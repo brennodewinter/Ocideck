@@ -1785,6 +1785,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Procesverbetering (ontwerp)': 'Izboljševanje procesov (zasnova)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Ta projekt je stranski produkt projekta Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Izvozi profil sloga',

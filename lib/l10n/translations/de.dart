@@ -740,6 +740,7 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Procesverbetering (ontwerp)': 'Prozessverbesserung (Design)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Dieses Projekt ist ein Nebenprodukt des Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Stilprofil exportieren',

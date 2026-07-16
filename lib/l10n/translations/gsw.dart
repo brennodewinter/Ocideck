@@ -1787,6 +1787,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Procesverbetering (ontwerp)': 'Prozessverbesserig (Design)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Das Projäkt isch es Näbeprodukt vom Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Stilprofil exportiere',

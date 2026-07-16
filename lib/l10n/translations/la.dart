@@ -1799,6 +1799,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Procesverbetering (ontwerp)': 'Emendatio processuum (designatio)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Hoc opus fructus secundarius Pilot Informatieautonomie est.',
   'Stijlprofiel exporteren': 'Prosopographiam stili exportare',

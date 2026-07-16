@@ -1774,6 +1774,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Procesverbetering (ontwerp)': 'Protsesside parendamine (kavand)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'See projekt on Pilot Informatieautonomie kõrvalsaadus.',
   'Stijlprofiel exporteren': 'Ekspordi stiiliprofiil',
