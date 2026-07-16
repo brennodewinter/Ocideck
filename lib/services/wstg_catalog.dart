@@ -10,8 +10,15 @@ import '../models/wstg_test.dart';
 /// The pinned [version] is the **stable released** WSTG version (v4.2, 2020),
 /// so a report cites a fixed, citeable standard rather than a moving branch.
 /// The ids and titles are the canonical WSTG identifiers; every entry maps back
-/// to owasp.org's guide. WSTG is licensed CC-BY-SA-4.0 (see
-/// PENTEST_MIAUW §15 for attribution).
+/// to owasp.org's guide.
+///
+/// **Third-party content under CC-BY-SA-4.0.** The ids, titles and categories are
+/// the OWASP Web Security Testing Guide v4.2 checklist index, © the OWASP
+/// Foundation and its contributors, reproduced here with attribution and
+/// share-alike; the guide's substance (how to test) is deliberately not bundled.
+/// The terms travel with this dataset — `docs/LICENSE_COMPLIANCE.md` is the
+/// authority (PENTEST_MIAUW §15 is a design-time note). Bundling another
+/// standard's content means adding it to that table in the same commit.
 class WstgCatalog {
   WstgCatalog._();
 
