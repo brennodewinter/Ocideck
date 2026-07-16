@@ -154,6 +154,44 @@ class GitRepoLayout {
   /// Gedeelde, content-geadresseerde asset-pool.
   static const String assetsRoot = 'assets';
 
+  /// Verwijzingsschema naar de pool, naast de bestaande `mem:` en `asset:`
+  /// (§6.1). Vorm: `repo:assets/<sha256>.<ext>`.
+  ///
+  /// Het bestaat omdat het pad tegen de **repo-wortel** oplost, niet tegen de
+  /// deckmap. Een relatieve `../../assets/…` zou door `resolveProjectRelative`
+  /// geweigerd worden — en terecht, want die fail-closet op traversal. Een deck
+  /// drie mappen diep moet tóch bij de gedeelde pool kunnen, dus krijgt de
+  /// verwijzing een eigen schema in plaats van een uitzondering op de guard.
+  static const String assetScheme = 'repo:';
+
+  static bool isRepoAsset(String path) => path.startsWith(assetScheme);
+
+  /// De verwijzing voor een blob met [sha256] en extensie [ext] (zonder punt).
+  /// Null bij een sha of extensie die geen pad-segment mag worden.
+  static String? assetRef(String sha256, String ext) {
+    final h = sha256.trim().toLowerCase();
+    final e = ext.trim().toLowerCase().replaceFirst(RegExp(r'^\.'), '');
+    if (!RegExp(r'^[0-9a-f]{64}$').hasMatch(h)) return null;
+    if (!RegExp(r'^[a-z0-9]{1,10}$').hasMatch(e)) return null;
+    return '$assetScheme$assetsRoot/$h.$e';
+  }
+
+  /// Het repo-pad achter een `repo:`-verwijzing, of null wanneer het er geen is
+  /// of wanneer hij niet onder [assetsRoot] blijft.
+  ///
+  /// Dit is de eigen guard die §6.1 eist: een `repo:`-doel komt uit deck-inhoud
+  /// die we niet vertrouwen, dus het moet normaliseren naar een pad ónder
+  /// `assets/` en mag daar niet uit traverseren. `repo:assets/../decks/x` is
+  /// geen asset.
+  static String? assetPathOf(String reference) {
+    if (!isRepoAsset(reference)) return null;
+    final raw = reference.substring(assetScheme.length).trim();
+    if (!isSafeRepoPath(raw)) return null;
+    final normalized = p.posix.normalize(raw);
+    if (!p.posix.isWithin(assetsRoot, normalized)) return null;
+    return normalized;
+  }
+
   /// Naamregels voor een deckmap. Bewust streng: de naam wordt een pad-segment
   /// én een deel van een git-refnaam (`decks/<naam>/v1.0`), dus alles wat in
   /// één van beide een bijzondere betekenis heeft, weigeren we hier al.
