@@ -61,6 +61,17 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   glance from a contrast or text-density one.
 
 ### Fixed
+- **"Split slide" now divides an over-full slide into balanced pages instead of
+  peeling off a lopsided tail.** On a slide whose bullets do not all fit, the fix
+  used to fill the first page to the readability cap and dump the whole remainder
+  on the next page — so a slide with longer bullets (only a couple fit at full
+  size) split into a near-empty first page and a second page that was still
+  overfull. It now spreads the bullets over as many evenly-sized pages as needed
+  so **no resulting page stays full**: ten bullets become 5/5, thirty become
+  8/8/7/7, and a list where only two bullets fit becomes pages of two. Page
+  breaks still land on group headings, so whole "tussenkoppen" groups stay
+  together — three groups of five split cleanly into 5/5/5. Two-column slides
+  spread both columns over the same number of pages.
 - **The export-readiness status now shows the PrivacyKat mark for privacy
   warnings.** The "N privacy findings without a choice" chip (and "Privacy
   blocks export") in the status bar carried a generic warning icon instead of

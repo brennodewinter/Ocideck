@@ -950,12 +950,15 @@ Theme-wide contrast issues are listed once for the whole deck; slide-specific
 issues name the slide number.
 
 A too-dense bullet slide offers a one-click **Split slide** fix (also available
-from the slide thumbnail's menu). It divides the bullets evenly between the two
-pages when both halves fit; a slide too full for two pages fills the first page to
-the readable optimum and leaves the rest, which you can split again. Splitting a
-**bullets + image** slide keeps the image on the continuation page too, so both
-pages match and share one font size — swap the follow-up to a plain bullets page
-via the slide **type** picker if you prefer.
+from the slide thumbnail's menu). It spreads the bullets over as many evenly-sized
+pages as needed so no page is left over-full: a list twice the readable optimum
+splits in two, a longer one into three or more, and a list whose bullets barely
+fit (only a couple at full size) into pages of just those few. Page breaks land on
+group headings, so whole **tussenkoppen** groups stay together on a page rather
+than being cut in half. Splitting a **bullets + image** slide keeps the image on
+every continuation page too, so all pages match and share one font size — swap a
+follow-up to a plain bullets page via the slide **type** picker if you prefer.
+Two-column slides spread both columns across the same set of pages.
 
 A bullet slide with multi-sentence or overly long bullets offers two more
 one-click fixes in the quality panel. **Split sentences into bullets** turns each
