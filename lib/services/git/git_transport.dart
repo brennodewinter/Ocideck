@@ -30,5 +30,16 @@ abstract class GitTransport {
     required int maxBytes,
   });
 
+  /// Als [get], maar met een body. Zelfde afspraak over fouten: een
+  /// HTTP-foutstatus komt terug in [GitResponse.status] en is aan de adapter om
+  /// te duiden — een 409 betekent bij een commit iets heel anders dan bij een
+  /// leesactie.
+  Future<GitResponse> post(
+    Uri uri, {
+    required Map<String, String> headers,
+    required List<int> body,
+    required int maxBytes,
+  });
+
   void close();
 }

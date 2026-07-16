@@ -20,6 +20,7 @@ class _FakeTransport implements GitTransport {
   final GitResponse Function(Uri uri) respond;
   final List<Uri> uris = <Uri>[];
   final List<Map<String, String>> headers = <Map<String, String>>[];
+  final List<List<int>> bodies = <List<int>>[];
   bool closed = false;
 
   @override
@@ -30,6 +31,19 @@ class _FakeTransport implements GitTransport {
   }) async {
     uris.add(uri);
     this.headers.add(headers);
+    return respond(uri);
+  }
+
+  @override
+  Future<GitResponse> post(
+    Uri uri, {
+    required Map<String, String> headers,
+    required List<int> body,
+    required int maxBytes,
+  }) async {
+    uris.add(uri);
+    this.headers.add(headers);
+    bodies.add(body);
     return respond(uri);
   }
 

@@ -18,6 +18,9 @@ class FakeRepo {
   /// Repo-relative path to blob bytes.
   final Map<String, Uint8List> files;
 
+  /// Bumped per commit, so every commit gets its own sha.
+  int commitCounter = 1;
+
   factory FakeRepo.sample() => FakeRepo(
     branches: {
       'main': 'commit-main',
@@ -120,6 +123,49 @@ class FakeForge implements GitForge {
   }
 
   @override
+  Future<CommitResult> commitFiles({
+    required String branch,
+    required String message,
+    required Map<String, Uint8List> upserts,
+    required List<String> deletes,
+    required String baseSha,
+  }) async {
+    _requireRef(branch);
+    if (upserts.isEmpty && deletes.isEmpty) {
+      throw const GitForgeException(
+        GitForgeError.malformed,
+        'Niets te committen',
+      );
+    }
+    for (final path in [...upserts.keys, ...deletes]) {
+      if (!GitRepoLayout.isSafeRepoPath(path)) {
+        throw GitForgeException(
+          GitForgeError.malformed,
+          'Onveilig pad in commit: $path',
+        );
+      }
+    }
+    final head = repo.branches[branch.trim()];
+    if (head == null) {
+      throw const GitForgeException(GitForgeError.notFound, 'Branch onbekend');
+    }
+    // De hele reden dat baseSha bestaat: iemand anders is je voor geweest.
+    if (head != baseSha) {
+      throw GitConflictException(
+        baseSha: baseSha,
+        message: 'Branch staat op $head, niet op $baseSha',
+      );
+    }
+    repo.files.addAll(upserts);
+    for (final path in deletes) {
+      repo.files.remove(path);
+    }
+    final sha = 'commit-${repo.commitCounter++}';
+    repo.branches[branch.trim()] = sha;
+    return CommitResult(sha);
+  }
+
+  @override
   Future<Uint8List> readBlob(String ref, String path) async {
     _requireRef(ref);
     if (!GitRepoLayout.isSafeRepoPath(path)) {
@@ -205,6 +251,47 @@ class FakeGiteaTransport implements GitTransport {
     }
 
     return _notFound();
+  }
+
+  @override
+  Future<GitResponse> post(
+    Uri uri, {
+    required Map<String, String> headers,
+    required List<int> body,
+    required int maxBytes,
+  }) async {
+    final segments = uri.pathSegments.skip(5).toList();
+    if (segments.length != 1 || segments.first != 'contents') {
+      return _notFound();
+    }
+    final payload = jsonDecode(utf8.decode(body)) as Map<String, Object?>;
+    final branch = payload['branch'] as String;
+    final head = repo.branches[branch];
+    if (head == null) return _notFound();
+    // Gitea's eigen concurrency-guard: de branch moet nog op last_commit_id
+    // staan. 409 is wat hij dan geeft.
+    if (payload['last_commit_id'] != head) {
+      return _json({'message': 'not a fast forward'}, 409);
+    }
+
+    for (final raw in payload['files'] as List) {
+      final file = raw as Map<String, Object?>;
+      final path = file['path'] as String;
+      switch (file['operation']) {
+        case 'create':
+        case 'update':
+          repo.files[path] = Uint8List.fromList(
+            base64Decode(file['content'] as String),
+          );
+        case 'delete':
+          repo.files.remove(path);
+      }
+    }
+    final sha = 'commit-${repo.commitCounter++}';
+    repo.branches[branch] = sha;
+    return _json({
+      'commit': {'sha': sha},
+    });
   }
 
   GitResponse _json(Object? body, [int status = 200]) =>

@@ -75,14 +75,38 @@ class GitForgeException implements Exception {
   String toString() => 'GitForgeException($kind): $message';
 }
 
+/// Wat er van een geslaagde commit terugkomt.
+class CommitResult {
+  /// De sha van de nieuwe commit — de nieuwe [GitOrigin.baseSha] van de tab.
+  final String sha;
+
+  const CommitResult(this.sha);
+}
+
+/// Iemand anders heeft de branch verzet sinds [baseSha]. Bewust een eigen type
+/// en geen [GitForgeException]-soort: dit is geen fout maar een uitkomst waar de
+/// aanroeper iets mee moet — herladen, of (vanaf Fase 3) mergen. Het verschil
+/// tussen "er ging iets mis" en "je bent ingehaald" mag niet vervagen.
+class GitConflictException implements Exception {
+  /// De commit waarop het werk was gebaseerd.
+  final String baseSha;
+
+  final String message;
+
+  const GitConflictException({required this.baseSha, required this.message});
+
+  @override
+  String toString() => 'GitConflictException(base=$baseSha): $message';
+}
+
 /// Het forge-plane: alles wat git zélf niet kent. Provider-agnostisch (P6), met
 /// `GiteaForge`/`GitHubForge`/`GitLabForge` erachter; geen provider-specifieke
 /// code mag naar de editor of de state-laag lekken.
 ///
-/// Dit is bewust alléén het read-only oppervlak van Fase 0. Schrijven
-/// (`commitFiles`), branches, tags en pull requests komen in Fase 2 en 4 —
-/// een interfacemethode die `UnimplementedError` gooit is erger dan een
-/// interface die eerlijk zegt wat hij nu kan.
+/// Het oppervlak groeit per fase mee. Lezen en schrijven staan er nu; branches,
+/// tags en pull requests komen in Fase 4 — een interfacemethode die
+/// `UnimplementedError` gooit is erger dan een interface die eerlijk zegt wat
+/// hij nu kan.
 ///
 /// Implementaties moeten:
 /// - elk pad uit een tree door `GitRepoLayout.isSafeRepoPath` halen voordat het
@@ -106,6 +130,26 @@ abstract class GitForge {
   /// bewaart, zodat een latere commit een non-fast-forward kan detecteren in
   /// plaats van stil werk te overschrijven.
   Future<String> headSha(String branch);
+
+  /// Eén save = één atomaire commit van de gewijzigde set (§7.2).
+  ///
+  /// [upserts] is pad → bytes, [deletes] zijn paden die verdwijnen. [baseSha] is
+  /// de commit waarop het werk is geschreven: staat de branch daar niet meer op,
+  /// dan is er iemand vóór je geweest en volgt een [GitConflictException] in
+  /// plaats van een overschrijving. Dat is het git-equivalent van de
+  /// atomic-write-guard van WebDAV.
+  ///
+  /// Atomair is geen detail: een half doorgekomen deck — markdown nieuw, asset
+  /// nog niet — zou een commit opleveren die naar een blob wijst die er niet is.
+  /// Elke provider kan dit in één server-side operatie; alleen de vorm verschilt
+  /// (§7.2), en dat verschil hoort in de adapter.
+  Future<CommitResult> commitFiles({
+    required String branch,
+    required String message,
+    required Map<String, Uint8List> upserts,
+    required List<String> deletes,
+    required String baseSha,
+  });
 }
 
 extension GitForgeDecks on GitForge {
