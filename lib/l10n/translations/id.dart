@@ -1783,6 +1783,25 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Stijlprofiel exporteren': 'Ekspor profil gaya',
+  'Stijlprofiel importeren': 'Impor profil gaya',
+  'Profiel exporteren': 'Ekspor profil',
+  'Profiel importeren': 'Impor profil',
+  'Stijlprofiel geëxporteerd': 'Profil gaya diekspor',
+  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
+      'Profil gaya diekspor — logo khusus tidak dapat disertakan',
+  'Stijlprofiel exporteren mislukt': 'Gagal mengekspor profil gaya',
+  'Stijlprofiel importeren mislukt': 'Gagal mengimpor profil gaya',
+  'Stijlprofiel geïmporteerd': 'Profil gaya diimpor',
+  'Dit is geen geldig stijlprofiel-bestand':
+      'Ini bukan berkas profil gaya yang sah',
+  'Dit bestand is te groot voor een stijlprofiel':
+      'Berkas ini terlalu besar untuk profil gaya',
+  'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
+      'Profil gaya ini berasal dari versi OciDeck yang lebih baru',
+  'die naam bestond al, bewaard als': 'nama itu sudah ada, disimpan sebagai',
+  'het ingesloten logo kon niet worden teruggezet':
+      'logo yang disertakan tidak dapat dipulihkan',
   'Maak een tussenkop': 'Buat subjudul',
   'Maak er weer een bullet van': 'Ubah kembali menjadi butir',
   'Tussenkop (leeg = alleen een scheidingslijn)':

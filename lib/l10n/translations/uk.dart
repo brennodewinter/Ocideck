@@ -1801,6 +1801,24 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Stijlprofiel exporteren': 'Експортувати профіль стилю',
+  'Stijlprofiel importeren': 'Імпортувати профіль стилю',
+  'Profiel exporteren': 'Експортувати профіль',
+  'Profiel importeren': 'Імпортувати профіль',
+  'Stijlprofiel geëxporteerd': 'Профіль стилю експортовано',
+  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
+      'Профіль стилю експортовано — власний логотип не вдалося долучити',
+  'Stijlprofiel exporteren mislukt': 'Не вдалося експортувати профіль стилю',
+  'Stijlprofiel importeren mislukt': 'Не вдалося імпортувати профіль стилю',
+  'Stijlprofiel geïmporteerd': 'Профіль стилю імпортовано',
+  'Dit is geen geldig stijlprofiel-bestand': 'Це не дійсний файл профілю стилю',
+  'Dit bestand is te groot voor een stijlprofiel':
+      'Цей файл завеликий для профілю стилю',
+  'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
+      'Цей профіль стилю створено новішою версією OciDeck',
+  'die naam bestond al, bewaard als': 'така назва вже існувала, збережено як',
+  'het ingesloten logo kon niet worden teruggezet':
+      'вбудований логотип не вдалося відновити',
   'Maak een tussenkop': 'Створити підзаголовок',
   'Maak er weer een bullet van': 'Перетворити назад на пункт',
   'Tussenkop (leeg = alleen een scheidingslijn)':

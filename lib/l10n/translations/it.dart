@@ -736,6 +736,27 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Stijlprofiel exporteren': 'Esporta profilo di stile',
+  'Stijlprofiel importeren': 'Importa profilo di stile',
+  'Profiel exporteren': 'Esporta profilo',
+  'Profiel importeren': 'Importa profilo',
+  'Stijlprofiel geëxporteerd': 'Profilo di stile esportato',
+  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
+      'Profilo di stile esportato — il logo personalizzato non è stato incluso',
+  'Stijlprofiel exporteren mislukt':
+      'Esportazione del profilo di stile non riuscita',
+  'Stijlprofiel importeren mislukt':
+      'Importazione del profilo di stile non riuscita',
+  'Stijlprofiel geïmporteerd': 'Profilo di stile importato',
+  'Dit is geen geldig stijlprofiel-bestand':
+      'Questo non è un file di profilo di stile valido',
+  'Dit bestand is te groot voor een stijlprofiel':
+      'Questo file è troppo grande per un profilo di stile',
+  'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
+      'Questo profilo di stile proviene da una versione più recente di OciDeck',
+  'die naam bestond al, bewaard als': 'quel nome esisteva già, salvato come',
+  'het ingesloten logo kon niet worden teruggezet':
+      'il logo incorporato non è stato ripristinato',
   'Maak een tussenkop': 'Crea un intertitolo',
   'Maak er weer een bullet van': 'Riconverti in punto elenco',
   'Tussenkop (leeg = alleen een scheidingslijn)':

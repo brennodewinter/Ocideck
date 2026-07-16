@@ -1783,6 +1783,26 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Stijlprofiel exporteren': 'Vie tyyliprofiili',
+  'Stijlprofiel importeren': 'Tuo tyyliprofiili',
+  'Profiel exporteren': 'Vie profiili',
+  'Profiel importeren': 'Tuo profiili',
+  'Stijlprofiel geëxporteerd': 'Tyyliprofiili viety',
+  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
+      'Tyyliprofiili viety — omaa logoa ei voitu sisällyttää',
+  'Stijlprofiel exporteren mislukt': 'Tyyliprofiilin vienti epäonnistui',
+  'Stijlprofiel importeren mislukt': 'Tyyliprofiilin tuonti epäonnistui',
+  'Stijlprofiel geïmporteerd': 'Tyyliprofiili tuotu',
+  'Dit is geen geldig stijlprofiel-bestand':
+      'Tämä ei ole kelvollinen tyyliprofiilitiedosto',
+  'Dit bestand is te groot voor een stijlprofiel':
+      'Tämä tiedosto on liian suuri tyyliprofiiliksi',
+  'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
+      'Tämä tyyliprofiili on peräisin uudemmasta OciDeck-versiosta',
+  'die naam bestond al, bewaard als':
+      'nimi oli jo käytössä, tallennettu nimellä',
+  'het ingesloten logo kon niet worden teruggezet':
+      'upotettua logoa ei voitu palauttaa',
   'Maak een tussenkop': 'Luo väliotsikko',
   'Maak er weer een bullet van': 'Muuta takaisin luettelomerkiksi',
   'Tussenkop (leeg = alleen een scheidingslijn)':

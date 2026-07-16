@@ -1819,6 +1819,26 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Stijlprofiel exporteren': 'Easpórtáil próifíl stíle',
+  'Stijlprofiel importeren': 'Iompórtáil próifíl stíle',
+  'Profiel exporteren': 'Easpórtáil próifíl',
+  'Profiel importeren': 'Iompórtáil próifíl',
+  'Stijlprofiel geëxporteerd': 'Próifíl stíle easpórtáilte',
+  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
+      'Próifíl stíle easpórtáilte — níorbh fhéidir an lógó saincheaptha a chur san áireamh',
+  'Stijlprofiel exporteren mislukt': 'Theip ar easpórtáil na próifíle stíle',
+  'Stijlprofiel importeren mislukt': 'Theip ar iompórtáil na próifíle stíle',
+  'Stijlprofiel geïmporteerd': 'Próifíl stíle iompórtáilte',
+  'Dit is geen geldig stijlprofiel-bestand':
+      'Ní comhad próifíle stíle bailí é seo',
+  'Dit bestand is te groot voor een stijlprofiel':
+      'Tá an comhad seo rómhór do phróifíl stíle',
+  'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
+      'Tagann an phróifíl stíle seo ó leagan níos nuaí de OciDeck',
+  'die naam bestond al, bewaard als':
+      'bhí an t-ainm sin ann cheana, sábháilte mar',
+  'het ingesloten logo kon niet worden teruggezet':
+      'níorbh fhéidir an lógó leabaithe a athchóiriú',
   'Maak een tussenkop': 'Cruthaigh fo-cheannteideal',
   'Maak er weer een bullet van': 'Athraigh ar ais go urchar',
   'Tussenkop (leeg = alleen een scheidingslijn)':

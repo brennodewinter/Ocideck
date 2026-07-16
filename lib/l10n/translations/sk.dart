@@ -1790,6 +1790,25 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Stijlprofiel exporteren': 'Exportovať profil štýlu',
+  'Stijlprofiel importeren': 'Importovať profil štýlu',
+  'Profiel exporteren': 'Exportovať profil',
+  'Profiel importeren': 'Importovať profil',
+  'Stijlprofiel geëxporteerd': 'Profil štýlu bol exportovaný',
+  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
+      'Profil štýlu bol exportovaný — vlastné logo sa nepodarilo zahrnúť',
+  'Stijlprofiel exporteren mislukt': 'Export profilu štýlu zlyhal',
+  'Stijlprofiel importeren mislukt': 'Import profilu štýlu zlyhal',
+  'Stijlprofiel geïmporteerd': 'Profil štýlu bol importovaný',
+  'Dit is geen geldig stijlprofiel-bestand':
+      'Toto nie je platný súbor profilu štýlu',
+  'Dit bestand is te groot voor een stijlprofiel':
+      'Tento súbor je na profil štýlu príliš veľký',
+  'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
+      'Tento profil štýlu pochádza z novšej verzie OciDeck',
+  'die naam bestond al, bewaard als': 'tento názov už existoval, uložené ako',
+  'het ingesloten logo kon niet worden teruggezet':
+      'vložené logo sa nepodarilo obnoviť',
   'Maak een tussenkop': 'Vytvoriť medzititulok',
   'Maak er weer een bullet van': 'Zmeniť späť na odrážku',
   'Tussenkop (leeg = alleen een scheidingslijn)':

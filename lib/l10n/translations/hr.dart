@@ -1790,6 +1790,26 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Stijlprofiel exporteren': 'Izvezi profil stila',
+  'Stijlprofiel importeren': 'Uvezi profil stila',
+  'Profiel exporteren': 'Izvezi profil',
+  'Profiel importeren': 'Uvezi profil',
+  'Stijlprofiel geëxporteerd': 'Profil stila izvezen',
+  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
+      'Profil stila izvezen — vlastiti logotip nije se mogao uključiti',
+  'Stijlprofiel exporteren mislukt': 'Izvoz profila stila nije uspio',
+  'Stijlprofiel importeren mislukt': 'Uvoz profila stila nije uspio',
+  'Stijlprofiel geïmporteerd': 'Profil stila uvezen',
+  'Dit is geen geldig stijlprofiel-bestand':
+      'Ovo nije valjana datoteka profila stila',
+  'Dit bestand is te groot voor een stijlprofiel':
+      'Ova datoteka prevelika je za profil stila',
+  'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
+      'Ovaj profil stila potječe iz novije verzije OciDecka',
+  'die naam bestond al, bewaard als':
+      'taj naziv već je postojao, spremljeno kao',
+  'het ingesloten logo kon niet worden teruggezet':
+      'ugrađeni logotip nije se mogao vratiti',
   'Maak een tussenkop': 'Stvori međunaslov',
   'Maak er weer een bullet van': 'Ponovno pretvori u grafičku oznaku',
   'Tussenkop (leeg = alleen een scheidingslijn)':

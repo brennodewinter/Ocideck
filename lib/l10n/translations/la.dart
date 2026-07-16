@@ -1799,6 +1799,27 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Stijlprofiel exporteren': 'Prosopographiam stili exportare',
+  'Stijlprofiel importeren': 'Prosopographiam stili importare',
+  'Profiel exporteren': 'Prosopographiam exportare',
+  'Profiel importeren': 'Prosopographiam importare',
+  'Stijlprofiel geëxporteerd': 'Prosopographia stili exportata',
+  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
+      'Prosopographia stili exportata — insigne proprium includi non potuit',
+  'Stijlprofiel exporteren mislukt':
+      'Prosopographia stili exportari non potuit',
+  'Stijlprofiel importeren mislukt':
+      'Prosopographia stili importari non potuit',
+  'Stijlprofiel geïmporteerd': 'Prosopographia stili importata',
+  'Dit is geen geldig stijlprofiel-bestand':
+      'Hic fasciculus prosopographiae stili validus non est',
+  'Dit bestand is te groot voor een stijlprofiel':
+      'Hic fasciculus prosopographiae stili nimis magnus est',
+  'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
+      'Haec prosopographia stili ex recentiore OciDeck editione venit',
+  'die naam bestond al, bewaard als': 'id nomen iam erat, servatum ut',
+  'het ingesloten logo kon niet worden teruggezet':
+      'insigne inclusum restitui non potuit',
   'Maak een tussenkop': 'Titulum interpositum facere',
   'Maak er weer een bullet van': 'Rursus in punctum vertere',
   'Tussenkop (leeg = alleen een scheidingslijn)':

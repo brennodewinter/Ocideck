@@ -1787,6 +1787,25 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Stijlprofiel exporteren': 'Stílusprofil exportálása',
+  'Stijlprofiel importeren': 'Stílusprofil importálása',
+  'Profiel exporteren': 'Profil exportálása',
+  'Profiel importeren': 'Profil importálása',
+  'Stijlprofiel geëxporteerd': 'A stílusprofil exportálva',
+  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
+      'A stílusprofil exportálva — a saját logót nem sikerült belefoglalni',
+  'Stijlprofiel exporteren mislukt': 'A stílusprofil exportálása nem sikerült',
+  'Stijlprofiel importeren mislukt': 'A stílusprofil importálása nem sikerült',
+  'Stijlprofiel geïmporteerd': 'A stílusprofil importálva',
+  'Dit is geen geldig stijlprofiel-bestand':
+      'Ez nem érvényes stílusprofil-fájl',
+  'Dit bestand is te groot voor een stijlprofiel':
+      'Ez a fájl túl nagy egy stílusprofilhoz',
+  'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
+      'Ez a stílusprofil az OciDeck újabb verziójából származik',
+  'die naam bestond al, bewaard als': 'ez a név már létezett, mentve így',
+  'het ingesloten logo kon niet worden teruggezet':
+      'a beágyazott logót nem sikerült visszaállítani',
   'Maak een tussenkop': 'Közcím létrehozása',
   'Maak er weer een bullet van': 'Visszaalakítás felsorolásjellé',
   'Tussenkop (leeg = alleen een scheidingslijn)':

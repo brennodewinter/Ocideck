@@ -740,6 +740,27 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Stijlprofiel exporteren': 'Eksportá perfil di estilo',
+  'Stijlprofiel importeren': 'Importá perfil di estilo',
+  'Profiel exporteren': 'Eksportá perfil',
+  'Profiel importeren': 'Importá perfil',
+  'Stijlprofiel geëxporteerd': 'Perfil di estilo eksportá',
+  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
+      'Perfil di estilo eksportá — no por a inkluí e logo propio',
+  'Stijlprofiel exporteren mislukt':
+      'Eksportashon di e perfil di estilo a faya',
+  'Stijlprofiel importeren mislukt': 'Importashon di e perfil di estilo a faya',
+  'Stijlprofiel geïmporteerd': 'Perfil di estilo importá',
+  'Dit is geen geldig stijlprofiel-bestand':
+      'Esaki no ta un archivo di perfil di estilo válido',
+  'Dit bestand is te groot voor een stijlprofiel':
+      'E archivo aki ta muchu grandi pa un perfil di estilo',
+  'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
+      'E perfil di estilo aki ta bini for di un vershon mas nobo di OciDeck',
+  'die naam bestond al, bewaard als':
+      'e nòmber ei tabata eksistí kaba, warda komo',
+  'het ingesloten logo kon niet worden teruggezet':
+      'no por a restourá e logo inkluí',
   'Maak een tussenkop': 'Traha un subtítulo',
   'Maak er weer een bullet van': 'Kombertí bèk na un bullet',
   'Tussenkop (leeg = alleen een scheidingslijn)':

@@ -741,6 +741,27 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Stijlprofiel exporteren': 'Styleprofyl eksportearje',
+  'Stijlprofiel importeren': 'Styleprofyl ymportearje',
+  'Profiel exporteren': 'Profyl eksportearje',
+  'Profiel importeren': 'Profyl ymportearje',
+  'Stijlprofiel geëxporteerd': 'Styleprofyl eksportearre',
+  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
+      'Styleprofyl eksportearre — it eigen logo koe net meinommen wurde',
+  'Stijlprofiel exporteren mislukt':
+      'Eksportearjen fan it styleprofyl mislearre',
+  'Stijlprofiel importeren mislukt':
+      'Ymportearjen fan it styleprofyl mislearre',
+  'Stijlprofiel geïmporteerd': 'Styleprofyl ymportearre',
+  'Dit is geen geldig stijlprofiel-bestand':
+      'Dit is gjin jildich styleprofyl-bestân',
+  'Dit bestand is te groot voor een stijlprofiel':
+      'Dit bestân is te grut foar in styleprofyl',
+  'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
+      'Dit styleprofyl komt út in nijere ferzje fan OciDeck',
+  'die naam bestond al, bewaard als': 'dy namme bestie al, bewarre as',
+  'het ingesloten logo kon niet worden teruggezet':
+      'it ynsletten logo koe net weromset wurde',
   'Maak een tussenkop': 'Meitsje in tuskenkop',
   'Maak er weer een bullet van': 'Wer in bullet fan meitsje',
   'Tussenkop (leeg = alleen een scheidingslijn)':

@@ -1774,6 +1774,26 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Stijlprofiel exporteren': 'Ekspordi stiiliprofiil',
+  'Stijlprofiel importeren': 'Impordi stiiliprofiil',
+  'Profiel exporteren': 'Ekspordi profiil',
+  'Profiel importeren': 'Impordi profiil',
+  'Stijlprofiel geëxporteerd': 'Stiiliprofiil eksporditud',
+  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
+      'Stiiliprofiil eksporditud — oma logo ei saanud kaasa võtta',
+  'Stijlprofiel exporteren mislukt': 'Stiiliprofiili eksportimine ebaõnnestus',
+  'Stijlprofiel importeren mislukt': 'Stiiliprofiili importimine ebaõnnestus',
+  'Stijlprofiel geïmporteerd': 'Stiiliprofiil imporditud',
+  'Dit is geen geldig stijlprofiel-bestand':
+      'See ei ole kehtiv stiiliprofiili fail',
+  'Dit bestand is te groot voor een stijlprofiel':
+      'See fail on stiiliprofiili jaoks liiga suur',
+  'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
+      'See stiiliprofiil pärineb OciDecki uuemast versioonist',
+  'die naam bestond al, bewaard als':
+      'see nimi oli juba olemas, salvestatud nimega',
+  'het ingesloten logo kon niet worden teruggezet':
+      'manustatud logo ei õnnestunud taastada',
   'Maak een tussenkop': 'Loo vahepealkiri',
   'Maak er weer een bullet van': 'Muuda tagasi täpiks',
   'Tussenkop (leeg = alleen een scheidingslijn)':

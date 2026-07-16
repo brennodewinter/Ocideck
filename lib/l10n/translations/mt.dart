@@ -1806,6 +1806,28 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Stijlprofiel exporteren': 'Esporta l-profil tal-istil',
+  'Stijlprofiel importeren': 'Importa l-profil tal-istil',
+  'Profiel exporteren': 'Esporta l-profil',
+  'Profiel importeren': 'Importa l-profil',
+  'Stijlprofiel geëxporteerd': 'Il-profil tal-istil ġie esportat',
+  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
+      'Il-profil tal-istil ġie esportat — il-logo personalizzat ma setax jiġi inkluż',
+  'Stijlprofiel exporteren mislukt':
+      'L-esportazzjoni tal-profil tal-istil falliet',
+  'Stijlprofiel importeren mislukt':
+      'L-importazzjoni tal-profil tal-istil falliet',
+  'Stijlprofiel geïmporteerd': 'Il-profil tal-istil ġie importat',
+  'Dit is geen geldig stijlprofiel-bestand':
+      'Dan mhuwiex fajl validu ta\' profil tal-istil',
+  'Dit bestand is te groot voor een stijlprofiel':
+      'Dan il-fajl huwa kbir wisq għal profil tal-istil',
+  'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
+      'Dan il-profil tal-istil ġej minn verżjoni aktar ġdida ta\' OciDeck',
+  'die naam bestond al, bewaard als':
+      'dak l-isem kien diġà jeżisti, issejvjat bħala',
+  'het ingesloten logo kon niet worden teruggezet':
+      'il-logo inkorporat ma setax jiġi rrestawrat',
   'Maak een tussenkop': 'Oħloq intestatura tal-grupp',
   'Maak er weer een bullet van': 'Ibdel lura f\'bużżieqa',
   'Tussenkop (leeg = alleen een scheidingslijn)':

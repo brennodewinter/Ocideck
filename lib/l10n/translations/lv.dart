@@ -1782,6 +1782,26 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Stijlprofiel exporteren': 'Eksportēt stila profilu',
+  'Stijlprofiel importeren': 'Importēt stila profilu',
+  'Profiel exporteren': 'Eksportēt profilu',
+  'Profiel importeren': 'Importēt profilu',
+  'Stijlprofiel geëxporteerd': 'Stila profils eksportēts',
+  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
+      'Stila profils eksportēts — savu logotipu neizdevās iekļaut',
+  'Stijlprofiel exporteren mislukt': 'Neizdevās eksportēt stila profilu',
+  'Stijlprofiel importeren mislukt': 'Neizdevās importēt stila profilu',
+  'Stijlprofiel geïmporteerd': 'Stila profils importēts',
+  'Dit is geen geldig stijlprofiel-bestand':
+      'Šis nav derīgs stila profila fails',
+  'Dit bestand is te groot voor een stijlprofiel':
+      'Šis fails ir pārāk liels stila profilam',
+  'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
+      'Šis stila profils ir no jaunākas OciDeck versijas',
+  'die naam bestond al, bewaard als':
+      'šāds nosaukums jau pastāvēja, saglabāts kā',
+  'het ingesloten logo kon niet worden teruggezet':
+      'iegulto logotipu neizdevās atjaunot',
   'Maak een tussenkop': 'Izveidot starpvirsrakstu',
   'Maak er weer een bullet van': 'Pārvērst atpakaļ par aizzīmi',
   'Tussenkop (leeg = alleen een scheidingslijn)':

@@ -737,6 +737,25 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Stijlprofiel exporteren': 'Exportar perfil de estilo',
+  'Stijlprofiel importeren': 'Importar perfil de estilo',
+  'Profiel exporteren': 'Exportar perfil',
+  'Profiel importeren': 'Importar perfil',
+  'Stijlprofiel geëxporteerd': 'Perfil de estilo exportado',
+  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
+      'Perfil de estilo exportado — no se pudo incluir el logotipo propio',
+  'Stijlprofiel exporteren mislukt': 'Error al exportar el perfil de estilo',
+  'Stijlprofiel importeren mislukt': 'Error al importar el perfil de estilo',
+  'Stijlprofiel geïmporteerd': 'Perfil de estilo importado',
+  'Dit is geen geldig stijlprofiel-bestand':
+      'Este no es un archivo de perfil de estilo válido',
+  'Dit bestand is te groot voor een stijlprofiel':
+      'Este archivo es demasiado grande para un perfil de estilo',
+  'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
+      'Este perfil de estilo procede de una versión más reciente de OciDeck',
+  'die naam bestond al, bewaard als': 'ese nombre ya existía, guardado como',
+  'het ingesloten logo kon niet worden teruggezet':
+      'no se pudo restaurar el logotipo incrustado',
   'Maak een tussenkop': 'Crear un subencabezado',
   'Maak er weer een bullet van': 'Convertir de nuevo en viñeta',
   'Tussenkop (leeg = alleen een scheidingslijn)':
