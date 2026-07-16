@@ -1791,6 +1791,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Rapportagetaal': 'Ataskaitos kalba',
+  'Niet vastgelegd': 'Neužfiksuota',
   'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Ataskaitų skaidrės ir nuorodų duomenys informacijos saugumui: išvados, kontroliniai sąrašai, aprėpties matricos ir patvirtinimas. Struktūruota pagal MIAUW ir plačiai pritaikoma pentestams, auditams ir saugumo tyrimams. Nuorodų duomenys yra pačioje programoje, todėl modulis veikia iš karto ir visiškai neprisijungus.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':

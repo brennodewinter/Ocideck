@@ -107,6 +107,7 @@ ocideck_style_profile: <base64url(JSON)>
 | `date` | string | Date (free text). |
 | `description` | string | Description. |
 | `keywords` | string | Keywords. |
+| `language` | string | The language the report is written in, as a language code (`nl`, `en`, …). This is the **report's** language, not the interface language: a Dutch tester writing for an international client produces an English report from a Dutch UI. Written only when recorded. Findings render their section headings in it while the Markdown keeps its stable English anchors (§4.x / PENTEST_MIAUW §12.3), and recording it satisfies MIAUW EIS 2.3. |
 | `tlp` | enum | Traffic Light Protocol level (§3.1). Written only when not `none`. |
 | `ocideck_target_seconds` | int | Target duration for the presenter countdown, in seconds. Written only when `> 0`. |
 | `ocideck_show_rehearsal_summary` | `false`/absent | Opt-out of the post-presentation timing summary. Default (shown) stays out of the file; only `false` is written. |

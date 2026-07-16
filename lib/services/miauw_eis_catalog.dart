@@ -216,7 +216,11 @@ const List<EisEntry> _entries = [
     part: EisPart.interacties,
     title:
         'Voorafgaand aan de pentest is afgesproken en vastgelegd in welke taal de rapportage dient te worden geschreven.',
-    derivation: EisDerivation.manual,
+    // Was manual — filed as unprovable while it was merely unrecordable: the
+    // deck had nowhere to put the language. It does now (front matter
+    // `language`), so the record itself is the proof.
+    derivation: EisDerivation.automatic,
+    check: EisCheck.reportLanguage,
   ),
   EisEntry(
     id: '2.4',

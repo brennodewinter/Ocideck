@@ -140,6 +140,24 @@ class FindingSpec {
   static const sectionImpact = 'Possible impact';
   static const sectionRecommendation = 'Recommendation';
 
+  /// Anchor → its Dutch source string, so a rendering surface can show the
+  /// heading in the **report's** language (`Deck.language`, MIAUW EIS 2.3) while
+  /// the anchor written to disk stays English and the round-trip stays
+  /// language-independent (PENTEST_MIAUW §12.3).
+  ///
+  /// Resolve with `AppLocalizations.sourceFor(deck.language, …)`, never
+  /// `l10n.d(…)`: `d()` follows the *interface* language, and a Dutch tester
+  /// writing for an international client produces an English report from a Dutch
+  /// UI. An unrecorded language resolves through the `en` fallback back to the
+  /// anchor itself — which is why every English translation here must stay
+  /// identical to its anchor (guarded by `test/finding_section_language_test.dart`).
+  static const sectionSources = {
+    sectionDescription: 'Beschrijving',
+    sectionConfirmation: 'Bevestiging (reproductie)',
+    sectionImpact: 'Mogelijke impact',
+    sectionRecommendation: 'Aanbeveling',
+  };
+
   /// Parse a finding header body (the Markdown after the `_class` sidecar). The
   /// parse is deliberately lenient: hand-written findings that stray from the
   /// canonical layout still yield whatever fields are recognisable, and the

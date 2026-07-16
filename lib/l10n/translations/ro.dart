@@ -1802,6 +1802,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Rapportagetaal': 'Limba raportului',
+  'Niet vastgelegd': 'Neînregistrat',
   'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Slide-uri de raportare și date de referință pentru securitatea informațiilor: constatări, liste de verificare, matrice de domeniu și semnare. Structurat conform MIAUW și utilizabil pe scară largă pentru pentesturi, audituri și cercetare de securitate. Datele de referință se află în aplicația însăși, așa că modulul funcționează imediat și complet offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':

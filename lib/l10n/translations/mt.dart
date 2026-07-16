@@ -1806,6 +1806,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Rapportagetaal': 'Lingwa tar-rapport',
+  'Niet vastgelegd': 'Mhux irreġistrat',
   'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Slajds ta\' rappurtar u dejta ta\' referenza għas-sigurtà tal-informazzjoni: sejbiet, listi ta\' verifika, matriċi tal-ambitu u firma. Strutturat skont MIAUW u użabbli fuq firxa wiesgħa għall-pentests, l-awditi u r-riċerka tas-sigurtà. Id-dejta ta\' referenza tinsab fl-app innifisha, għalhekk il-modulu jaħdem mill-ewwel u kompletament offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':

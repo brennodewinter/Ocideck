@@ -47,6 +47,7 @@ class AudienceWindowApp extends StatefulWidget {
 
 class _AudienceWindowAppState extends State<AudienceWindowApp> {
   List<Slide> _slides = const [];
+  String _reportLanguage = '';
   ThemeProfile _theme = const ThemeProfile();
   CockpitColorScheme _scheme = CockpitColorScheme.standard;
   TlpLevel _tlp = TlpLevel.none;
@@ -83,6 +84,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
     _index = (widget.args['index'] as num?)?.toInt() ?? 0;
     final deck = MarkdownService().parseDeck(markdown);
     _slides = deck?.slides ?? const [];
+    _reportLanguage = deck?.language ?? '';
     _theme = deck?.themeProfile ?? const ThemeProfile();
     final schemeJson = widget.args['cockpitColorScheme'];
     if (schemeJson is Map) {
@@ -296,6 +298,7 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
                   slideCount: _slides.length,
                   numberStart: numberedListStartFor(_slides, _index),
                   scopeCia: deckScopeCiaIndex(_slides),
+                  reportLanguage: _reportLanguage,
                   fitScaleOverride: sharedSplitFitScale(
                     _slides,
                     _index,

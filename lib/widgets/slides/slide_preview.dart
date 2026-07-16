@@ -420,6 +420,16 @@ class SlidePreviewWidget extends StatelessWidget {
   /// to every slide; standalone previews leave it empty (base score only).
   final Map<String, CiaRating> scopeCia;
 
+  /// The language the report is written in ([Deck.language], MIAUW EIS 2.3), or
+  /// empty when it is not recorded. A `finding` renders its section headings in
+  /// this language while the Markdown keeps its stable English anchors
+  /// (PENTEST_MIAUW §12.3). Empty resolves through the `en` fallback back to the
+  /// anchors, so an unrecorded language renders exactly what the file says.
+  ///
+  /// NOT the interface language: a Dutch tester writing for an international
+  /// client produces an English report from a Dutch UI.
+  final String reportLanguage;
+
   const SlidePreviewWidget({
     super.key,
     required this.slide,
@@ -456,6 +466,7 @@ class SlidePreviewWidget extends StatelessWidget {
     this.numberStart = 1,
     this.fitScaleOverride,
     this.scopeCia = const {},
+    this.reportLanguage = '',
   });
 
   @override
@@ -778,6 +789,7 @@ class SlidePreviewWidget extends StatelessWidget {
         font: fontFamily,
         profile: themeProfile,
         scopeCia: scopeCia,
+        reportLanguage: reportLanguage,
       );
     }
     if (slide.type == SlideType.checklist) {

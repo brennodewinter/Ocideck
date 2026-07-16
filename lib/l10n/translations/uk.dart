@@ -1801,6 +1801,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Rapportagetaal': 'Мова звіту',
+  'Niet vastgelegd': 'Не зафіксовано',
   'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Слайди звітів і довідкові дані для інформаційної безпеки: висновки, контрольні списки, матриці обсягу та підписання. Структуровано за MIAUW і широко застосовно для пентестів, аудитів і досліджень безпеки. Довідкові дані містяться в самому застосунку, тож модуль працює одразу й повністю офлайн.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':

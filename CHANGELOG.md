@@ -8,6 +8,23 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **A report can record the language it is written in, and findings now read in
+  that language.** MIAUW requires the report language to be agreed and recorded
+  before a pentest starts (EIS 2.3), but a deck had nowhere to put it — so the
+  requirement sat in the compliance overview as a permanently open item you could
+  only ever tick by hand. It is now a field under Presentation properties, stored
+  in the front matter as `language`, and EIS 2.3 is derived from it like any other
+  content-based requirement (18 of the 88 are now automatic, up from 17).
+  It also fixes something that reached the client. Every finding rendered its
+  section headings — *Description*, *Confirmation (reproduction)*, *Possible
+  impact*, *Recommendation* — in English no matter what language the report was
+  written in, and because PDF/PPTX export rasterises the same previews, a Dutch
+  MIAUW report went out with English headings. The heading now follows the
+  **report's** language, not the interface language: a Dutch tester writing for an
+  international client still gets an English report from a Dutch UI. The Markdown
+  keeps its stable English anchors, so the file round-trips exactly as before and
+  a deck that records no language renders precisely what it always did.
+
 - **The About screen names where the project comes from.** Right above "Waar
   komt de naam vandaan?" it now says that OciDeck is a by-product of the Pilot
   Informatieautonomie, with a link to www.pilotinformatieautonomie.nl.

@@ -881,6 +881,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       date: info.date,
       description: info.description,
       keywords: info.keywords,
+      language: info.language,
       presentationTargetSeconds: info.presentationTargetSeconds,
       showRehearsalSummary: info.showRehearsalSummary,
       playOnly: info.playOnly,

@@ -114,6 +114,7 @@ class SlideRasterizer {
           showClassificationWatermark: showClassificationWatermark,
           organization: organization,
           scopeCia: deckScopeCiaIndex(slides),
+          reportLanguage: audience.deck.language,
         ),
       ),
     );
@@ -269,6 +270,7 @@ class _RasterSlideHost extends StatefulWidget {
   final TlpLevel tlp;
   final bool showClassificationWatermark;
   final String organization;
+  final String reportLanguage;
   final Map<String, CiaRating> scopeCia;
 
   const _RasterSlideHost({
@@ -284,6 +286,7 @@ class _RasterSlideHost extends StatefulWidget {
     required this.tlp,
     required this.showClassificationWatermark,
     required this.organization,
+    required this.reportLanguage,
     required this.scopeCia,
   });
 
@@ -346,6 +349,7 @@ class _RasterSlideHostState extends State<_RasterSlideHost> {
           showClassificationWatermark: widget.showClassificationWatermark,
           organization: widget.organization,
           scopeCia: widget.scopeCia,
+          reportLanguage: widget.reportLanguage,
         ),
       ),
     );

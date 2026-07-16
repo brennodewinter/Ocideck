@@ -17,6 +17,10 @@ class PresentationInfo {
   final String date;
   final String description;
   final String keywords;
+
+  /// De taal waarin het rapport geschreven wordt (MIAUW EIS 2.3), als taalcode;
+  /// leeg = niet vastgelegd.
+  final String language;
   final int presentationTargetSeconds;
   final bool showRehearsalSummary;
 
@@ -34,6 +38,7 @@ class PresentationInfo {
     required this.date,
     required this.description,
     required this.keywords,
+    required this.language,
     this.presentationTargetSeconds = 0,
     this.showRehearsalSummary = true,
     this.playOnly = false,
@@ -88,6 +93,7 @@ class _PresentationInfoDialogState
   late final TextEditingController _date;
   late final TextEditingController _description;
   late final TextEditingController _keywords;
+  String _language = '';
   late int _presentationTargetSeconds;
   late bool _useCustomTarget;
   late final TextEditingController _customMinutes;
@@ -105,6 +111,7 @@ class _PresentationInfoDialogState
     _date = TextEditingController(text: widget.deck.date);
     _description = TextEditingController(text: widget.deck.description);
     _keywords = TextEditingController(text: widget.deck.keywords);
+    _language = widget.deck.language;
     _presentationTargetSeconds = widget.deck.presentationTargetSeconds;
     _useCustomTarget =
         _presentationTargetSeconds > 0 &&
@@ -141,6 +148,7 @@ class _PresentationInfoDialogState
         date: _date.text.trim(),
         description: _description.text.trim(),
         keywords: _keywords.text.trim(),
+        language: _language,
         presentationTargetSeconds: _presentationTargetSeconds,
         showRehearsalSummary: _showRehearsalSummary,
         playOnly: _playOnly,
@@ -282,6 +290,8 @@ class _PresentationInfoDialogState
             ),
           ],
         ),
+        const SizedBox(height: 12),
+        _languageField(),
         const SizedBox(height: 12),
         _field(
           _description,
@@ -458,6 +468,33 @@ class _PresentationInfoDialogState
           ),
         ),
       ],
+    );
+  }
+
+  /// De taal waarin het rapport geschreven wordt. Een keuzelijst en geen
+  /// tekstveld: de waarde is een taalcode die de bevindingskoppen resolvet
+  /// (PENTEST_MIAUW §12.3), dus "Nederlands" ingetypt zou niets doen.
+  ///
+  /// Dit is de taal van het *rapport*, niet van de interface — een Nederlandse
+  /// tester schrijft soms een Engels rapport. Vastleggen voldoet MIAUW EIS 2.3.
+  /// De taalnamen zijn endoniemen (Nederlands, Deutsch, …) en gaan dus bewust
+  /// niet door `d(...)`: zo herkent een lezer zijn eigen taal altijd.
+  Widget _languageField() {
+    final l10n = context.l10n;
+    return DropdownButtonFormField<String>(
+      initialValue: _language.isEmpty ? '' : _language,
+      isDense: true,
+      decoration: InputDecoration(
+        labelText: l10n.d('Rapportagetaal'),
+        border: const OutlineInputBorder(),
+        isDense: true,
+      ),
+      items: [
+        DropdownMenuItem(value: '', child: Text(l10n.d('Niet vastgelegd'))),
+        for (final e in AppLocalizations.languageNames.entries)
+          DropdownMenuItem(value: e.key, child: Text(e.value)),
+      ],
+      onChanged: (v) => setState(() => _language = v ?? ''),
     );
   }
 

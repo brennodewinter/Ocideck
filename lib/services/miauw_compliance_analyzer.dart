@@ -81,6 +81,7 @@ class MiauwComplianceAnalyzer {
     return switch (check) {
       EisCheck.sealed => deck.finalized && deck.sealHash.trim().isNotEmpty,
       EisCheck.reportVersion => deck.version.trim().isNotEmpty,
+      EisCheck.reportLanguage => deck.language.trim().isNotEmpty,
       EisCheck.signOff =>
         _hasSlide(deck, SlideType.signOff) || deck.signature != null,
       EisCheck.scopeMatrix => _hasSlide(deck, SlideType.scopeMatrix),

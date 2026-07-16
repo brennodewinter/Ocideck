@@ -1811,6 +1811,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Rapportagetaal': 'Γλώσσα αναφοράς',
+  'Niet vastgelegd': 'Δεν έχει καταγραφεί',
   'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Διαφάνειες αναφοράς και δεδομένα αναφοράς για την ασφάλεια πληροφοριών: ευρήματα, λίστες ελέγχου, μήτρες εμβέλειας και υπογραφή. Δομημένο κατά MIAUW και ευρέως αξιοποιήσιμο για pentests, ελέγχους και έρευνα ασφάλειας. Τα δεδομένα αναφοράς βρίσκονται μέσα στην ίδια την εφαρμογή, οπότε η μονάδα λειτουργεί αμέσως και πλήρως εκτός σύνδεσης.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
