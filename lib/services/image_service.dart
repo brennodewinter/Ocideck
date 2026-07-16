@@ -64,15 +64,22 @@ class ImageService {
   /// signature. Public for the import validation and its tests.
   static bool looksLikeImage(List<int> b) => _looksLikeImage(b);
 
-  static bool _looksLikeImage(List<int> b) {
-    if (b.length < 4) return false;
+  static bool _looksLikeImage(List<int> b) => imageMimeFromBytes(b) != null;
+
+  /// The MIME type behind [b]'s raster image signature, or null when the bytes
+  /// match none of them. The signature set is the single source of truth for
+  /// [looksLikeImage]; callers that must *name* the type (the style-profile
+  /// export embeds a logo as `data:<mime>;base64,…`) sniff it here rather than
+  /// trusting a file extension or a declared type from an outside file.
+  static String? imageMimeFromBytes(List<int> b) {
+    if (b.length < 4) return null;
     // PNG
     if (b[0] == 0x89 && b[1] == 0x50 && b[2] == 0x4E && b[3] == 0x47) {
-      return true;
+      return 'image/png';
     }
-    if (b[0] == 0xFF && b[1] == 0xD8 && b[2] == 0xFF) return true; // JPEG
-    if (b[0] == 0x47 && b[1] == 0x49 && b[2] == 0x46) return true; // GIF
-    if (b[0] == 0x42 && b[1] == 0x4D) return true; // BMP
+    if (b[0] == 0xFF && b[1] == 0xD8 && b[2] == 0xFF) return 'image/jpeg';
+    if (b[0] == 0x47 && b[1] == 0x49 && b[2] == 0x46) return 'image/gif';
+    if (b[0] == 0x42 && b[1] == 0x4D) return 'image/bmp';
     // WebP: "RIFF"...."WEBP"
     if (b.length >= 12 &&
         b[0] == 0x52 &&
@@ -83,10 +90,20 @@ class ImageService {
         b[9] == 0x45 &&
         b[10] == 0x42 &&
         b[11] == 0x50) {
-      return true;
+      return 'image/webp';
     }
-    return false;
+    return null;
   }
+
+  /// The file extension for a MIME type from [imageMimeFromBytes]. Falls back
+  /// to `png` so a materialized file always carries a usable extension.
+  static String extensionForImageMime(String mime) => switch (mime) {
+    'image/jpeg' => 'jpg',
+    'image/gif' => 'gif',
+    'image/bmp' => 'bmp',
+    'image/webp' => 'webp',
+    _ => 'png',
+  };
 
   Future<bool> _isWithinMediaCap(String path) async {
     try {

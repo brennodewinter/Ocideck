@@ -7,6 +7,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
+import 'package:uuid/uuid.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart' show rootBundle;
 import '../models/deck.dart';
@@ -35,6 +37,7 @@ part 'parts/file_service_package.dart';
 part 'parts/file_service_dossier.dart';
 part 'parts/file_service_project.dart';
 part 'parts/file_service_import.dart';
+part 'parts/file_service_style_profile.dart';
 
 /// A presentation found on disk while scanning a directory.
 class ScannedPresentation {
@@ -729,6 +732,15 @@ class FileService {
   static const maxPackageBytes = 512 * 1024 * 1024; // 512 MiB
   static const maxPackageEntries = 10000;
   static const maxZipEntryPathLength = 512;
+
+  // ── Zelfstandig stijlprofiel ── zie parts/file_service_style_profile.dart.
+
+  static const styleProfileExtension = 'ocideckstyle';
+
+  /// Een stijlprofiel is een handvol kleuren plus hooguit één ingesloten logo;
+  /// beide caps zijn ruim voor echt gebruik en begrenzen een gemaakt bestand.
+  static const maxStyleProfileBytes = 16 * 1024 * 1024; // 16 MiB
+  static const maxStyleProfileLogoBytes = 8 * 1024 * 1024; // 8 MiB
 
   // Import (URL/pakket/markdown) leeft in parts/file_service_import.dart;
   // hieronder staat alleen de gedeelde decode-/hergebruik-infrastructuur.
