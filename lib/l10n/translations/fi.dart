@@ -1783,6 +1783,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+      'Raportointidiat ja viitetiedot tietoturvaa varten: havainnot, tarkistuslistat, scope-matriisit ja hyväksyntä. Jäsennelty MIAUW:n mukaisesti ja laajasti käytettävissä pentesteihin, auditointeihin ja tietoturvatutkimukseen. Viitetiedot ovat itse sovelluksessa, joten moduuli toimii heti ja täysin offline-tilassa.',
+  'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
+      'Valinnaiset moduulit. Oletuksena pois; ne pysyvät piilossa, kunnes otat ne käyttöön.',
   'Procesverbetering (ontwerp)': 'Prosessien parantaminen (suunnitelma)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Tämä projekti on Pilot Informatieautonomie -hankkeen sivutuote.',

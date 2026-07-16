@@ -1787,6 +1787,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+      'Bricht-Slides und Referänzdate für d\'Informationssicherheit: Befund, Checkliste, Scope-Matrize und Underzeichnig. Nach MIAUW strukturiert und breit iisetzbar für Pentest, Audits und Sicherheitsforschig. D\'Referänzdate stecke i de App sälber, drum lauft s Modul grad und ganz offline.',
+  'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
+      'Optionali Modul. Standardmässig us; si bliibe verborge, bis du si iischaltisch.',
   'Procesverbetering (ontwerp)': 'Prozessverbesserig (Design)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Das Projäkt isch es Näbeprodukt vom Pilot Informatieautonomie.',

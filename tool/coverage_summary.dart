@@ -43,14 +43,10 @@ const Set<String> uncoveredBaseline = {
   // (the feature is desktop-only; the io half is exercised by the ingest tests).
   'lib/services/cve/local_cve_database.dart',
   'lib/services/cve/local_cve_database_web.dart',
-  'lib/services/secmodule/sec_pack_platform.dart',
-  'lib/services/secmodule/sec_pack_platform_web.dart',
   'lib/utils/file_download.dart',
   'lib/utils/file_download_web.dart',
   // NO EXECUTABLE LINES: const data table (345 lines, zero statements).
   'lib/services/cvss/cvss4_lookup.dart',
-  // NO EXECUTABLE LINES: const configuration only.
-  'lib/services/secmodule/sec_pack_config.dart',
   // NO EXECUTABLE LINES: const data table — the settings search index. The
   // entries themselves are asserted in test/settings_search_test.dart, which
   // also guards that every section title in here is still rendered.

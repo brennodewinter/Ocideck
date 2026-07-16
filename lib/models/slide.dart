@@ -29,11 +29,10 @@ enum SlideType {
   cockpit,
   question,
   timeline,
-  // Informatieveiligheid-module (pentestrapportage, PENTEST_MIAUW §4). Toegevoegd
-  // als scaffold (P1-S): enum + meta + registries staan; de gestructureerde
-  // editors/previews/serialisers volgen per type in P1-FIND/CHK/SCOPE/SUM/SIGN.
-  // Voorlopig gedragen ze zich als een vrije-Markdown-body onder hun eigen
-  // `_class`-token, zodat inhoud én type verliesvrij round-trippen.
+  // Informatieveiligheid-module (pentestrapportage, PENTEST_MIAUW §4). Elk type
+  // heeft een eigen gestructureerde editor, preview en serialiser; inhoud én
+  // type round-trippen verliesvrij onder hun eigen `_class`-token. `signOff`
+  // draagt per ontwerp geen eigen dia-inhoud (§1.6/§8).
   finding,
   findingsSummary,
   checklist,
@@ -42,10 +41,10 @@ enum SlideType {
 }
 
 /// Broad grouping a [SlideType] belongs to, used by the add-slide picker to
-/// offer category tabs. Everything is [SlideCategory.algemeen] today; a later
-/// package tags the pentest-reporting layouts as
-/// [SlideCategory.informatieveiligheid], at which point the picker's tab bar
-/// appears automatically.
+/// offer category tabs. The pentest-reporting layouts carry
+/// [SlideCategory.informatieveiligheid]; the picker derives its tab bar from the
+/// categories actually present, so a tab appears only once the module reveals
+/// its types.
 enum SlideCategory { algemeen, informatieveiligheid }
 
 /// The part a slide plays inside a finding *group* (PENTEST_MIAUW §3.1). A real

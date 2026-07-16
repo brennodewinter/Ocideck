@@ -65,6 +65,23 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   content is not lost, only relocated, and one undo brings it back.
 
 ### Changed
+- **The Informatieveiligheid module is simply on or off now — no provisioning.**
+  Enabling it used to run a fetch-verify-cache pipeline: an ordered mirror list,
+  a pinned hash, a local cache, a manual pack import for air-gapped machines, and
+  a card explaining which step had failed. None of it did anything. No mirror was
+  ever live, so every run fell back to a pack bundled with the app; the pack held
+  a second copy of the CWE list nobody read back (the module's data has always
+  been compiled in); and the whole run existed to flip one boolean. The pipeline,
+  the pack (**288 KB off every download, for everyone**) and its buttons — *Nu
+  bijwerken*, *Opnieuw proberen*, *Pakket importeren*, *Gegevens opschonen* — are
+  gone. The switch reveals the module at once, offline, and no longer needs the
+  outbound-traffic consent. The reference data travels with the app version, so
+  upgrading OciDeck is the only update path — which is what actually happened
+  before, minus the ceremony. The card still lists what is available locally, in
+  counts, from the catalogues the app really queries. **The module now reaches
+  the network nowhere**: its entry in the outbound-sink allowlist is dropped, not
+  relaxed.
+
 - **Checklists no longer sit under Extensions in the settings sidebar.** The
   pane had ended up between Uitbreidingen and Over OciDeck, which read as if
   checklists were part of the extensions. The sidebar order is now Checklists,

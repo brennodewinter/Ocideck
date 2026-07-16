@@ -1,8 +1,9 @@
 // Part of the settings_dialog library — see ../settings_dialog.dart.
 // Split out for navigability (the "Uitbreidingen" / modules tab). Instance
 // methods live in an extension on _SettingsDialogState — same library, same
-// members. See PENTEST_MIAUW.md §6: a lightweight module framework whose
-// enable → provision → reveal pattern future domain extensions reuse.
+// members. See PENTEST_MIAUW.md §6, but read it against the code: the module's
+// reference data ships with the app, so this card is a toggle plus an inventory
+// of what is already there — there is nothing to fetch, retry or clean up.
 part of '../settings_dialog.dart';
 
 extension _SettingsModules on _SettingsDialogState {
@@ -15,7 +16,7 @@ extension _SettingsModules on _SettingsDialogState {
         _sectionTitle(l10n.d('Uitbreidingen')),
         Text(
           l10n.d(
-            'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.',
+            'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.',
           ),
           style: TextStyle(fontSize: 12, color: AppTheme.slate600),
         ),
@@ -41,148 +42,68 @@ extension _SettingsModules on _SettingsDialogState {
         children: [
           SwitchListTile(
             value: module.enabled,
-            onChanged: module.busy ? null : (v) => _toggleSecModule(v),
+            onChanged: (v) => _toggleSecModule(v),
             title: Text(
               l10n.d('Informatieveiligheid'),
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
             ),
             subtitle: Text(
               l10n.d(
-                'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.',
+                'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.',
               ),
               style: TextStyle(fontSize: 12, color: AppTheme.slate600),
             ),
             secondary: const Icon(Icons.shield_moon_outlined),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 14),
-            child: _secModuleStatus(l10n, module),
-          ),
+          if (module.enabled)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 14),
+              child: _secModuleStatus(l10n),
+            ),
         ],
       ),
     );
   }
 
-  Widget _secModuleStatus(AppLocalizations l10n, SecModuleState module) {
-    if (module.busy) {
-      return const Align(
-        alignment: Alignment.centerLeft,
-        child: SizedBox(
-          width: 18,
-          height: 18,
-          child: CircularProgressIndicator(strokeWidth: 2),
-        ),
-      );
-    }
-    final failed = _secModuleFailed(module);
+  Widget _secModuleStatus(AppLocalizations l10n) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
-            Icon(
-              module.revealed
-                  ? Icons.check_circle_outline
-                  : failed
-                  ? Icons.error_outline
-                  : Icons.info_outline,
-              size: 15,
-              color: module.revealed
-                  ? AppTheme.accent
-                  : failed
-                  ? AppTheme.amber700
-                  : AppTheme.slate400,
-            ),
+            Icon(Icons.check_circle_outline, size: 15, color: AppTheme.accent),
             const SizedBox(width: 6),
             Expanded(
               // Selectable so the message can be copied (e.g. to report it)
               // rather than retyped.
               child: SelectableText(
-                _secModuleStatusText(l10n, module),
+                // Zeg érbij dat het lokaal blijft: dat is de vraag die de
+                // gebruiker heeft ("wat is er opgehaald, en gaat er iets naar
+                // buiten?"). De aantallen staan eronder.
+                l10n.d(
+                  'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.',
+                ),
                 style: TextStyle(fontSize: 12, color: AppTheme.slate600),
               ),
             ),
           ],
         ),
-        // The module normally provisions from the pack bundled with the app, so
-        // this branch is only reached in the rare case that bundle is missing
-        // and no mirror is reachable. Offer the two recourses side by side —
-        // retry the fetch and the manual local-file import — plus a line saying
-        // what an importable pack actually is.
-        if (module.enabled && !module.revealed) ...[
-          const SizedBox(height: 8),
-          Wrap(
-            spacing: 4,
-            runSpacing: 4,
-            children: [
-              // Retry only makes sense where a fetch could succeed: skip it on
-              // the web, which cannot reach a mirror at all.
-              if (module.lastStatus != SecProvisionStatus.unsupportedPlatform)
-                TextButton.icon(
-                  onPressed: () => ref.read(secModuleProvider.notifier).retry(),
-                  icon: const Icon(Icons.refresh, size: 16),
-                  label: Text(l10n.d('Opnieuw proberen')),
-                ),
-              TextButton.icon(
-                onPressed: () => _importSecModulePack(),
-                icon: const Icon(Icons.file_open_outlined, size: 16),
-                label: Text(l10n.d('Pakket importeren')),
-              ),
-            ],
-          ),
-          const SizedBox(height: 4),
-          Text(
-            l10n.d(
-              'Een gegevenspakket is een .zip met de referentiedata voor deze module. Het wordt eerst tegen de in de app ingebouwde vingerafdruk gecontroleerd; alleen een pakket dat bij deze app-versie hoort, wordt geaccepteerd.',
-            ),
-            style: TextStyle(fontSize: 11, color: AppTheme.slate500),
-          ),
-        ],
         // Wát er lokaal ligt, in aantallen. "Gegevens lokaal beschikbaar" zei
         // niets: het liet in het midden of daar een volledige CWE-lijst achter
         // zat of een lege huls.
-        if (module.revealed) ...[
-          const SizedBox(height: 16),
-          _secModuleInventory(l10n, module),
-        ],
-        if (module.enabled) ...[
-          const SizedBox(height: 8),
-          Wrap(
-            spacing: 4,
-            runSpacing: 4,
-            children: [
-              // Bijwerken mag ook als alles al klopt — dat is juist wanneer je
-              // wilt weten of er iets nieuwers is. Niet op het web: daar is geen
-              // spiegel te bereiken.
-              if (module.lastStatus != SecProvisionStatus.unsupportedPlatform)
-                TextButton.icon(
-                  onPressed: () =>
-                      ref.read(secModuleProvider.notifier).refresh(),
-                  icon: const Icon(Icons.refresh, size: 16),
-                  label: Text(l10n.d('Nu bijwerken')),
-                ),
-              if (module.provisionedVersion != null)
-                TextButton.icon(
-                  onPressed: () =>
-                      ref.read(secModuleProvider.notifier).cleanUpCache(),
-                  icon: const Icon(Icons.delete_sweep_outlined, size: 16),
-                  label: Text(l10n.d('Gegevens opschonen')),
-                ),
-            ],
-          ),
-        ],
+        const SizedBox(height: 16),
+        _secModuleInventory(l10n),
       ],
     );
   }
 
   /// De inhoudsopgave van de referentiegegevens: hoeveel records er per
   /// catalogus daadwerkelijk bediend worden, met versie en herkomst.
-  Widget _secModuleInventory(AppLocalizations l10n, SecModuleState module) {
+  Widget _secModuleInventory(AppLocalizations l10n) {
     return FutureBuilder<List<ReferenceCatalog>>(
       future: _referenceInventory,
       builder: (context, snap) => _secModuleInventoryCard(
         l10n,
-        module,
         // Tot de volledige CWE-lijst geladen is telt de snapshot de curated
         // bodem. Dat is een eerlijk tussengetal, geen leugen — en het staat er
         // maar een oogwenk.
@@ -193,7 +114,6 @@ extension _SettingsModules on _SettingsDialogState {
 
   Widget _secModuleInventoryCard(
     AppLocalizations l10n,
-    SecModuleState module,
     List<ReferenceCatalog> catalogs,
   ) {
     return Container(
@@ -249,100 +169,9 @@ extension _SettingsModules on _SettingsDialogState {
                 ],
               ),
             ),
-          const Divider(height: 16),
-          Text(
-            '${l10n.d('Gegevenspakket')}: ${module.provisionedVersion ?? '—'}',
-            style: TextStyle(fontSize: 11, color: AppTheme.slate500),
-          ),
         ],
       ),
     );
-  }
-
-  /// Manual local-file import (PENTEST_MIAUW §6 fallback #3, the air-gapped
-  /// path): pick a pack file and hand its bytes to the notifier, which verifies
-  /// them against the pinned hash + inner manifest before caching. No consent is
-  /// needed — nothing leaves the device. The status row reflects the outcome
-  /// (revealed on success, a distinct failure message otherwise).
-  Future<void> _importSecModulePack() async {
-    final l10n = context.l10n;
-    final picked = await FilePicker.pickFiles(
-      dialogTitle: l10n.d('Gegevenspakket kiezen'),
-      type: FileType.custom,
-      allowedExtensions: const ['zip'],
-      withData: true,
-    );
-    if (!mounted || picked == null) return;
-    final bytes = picked.files.single.bytes;
-    if (bytes == null) {
-      showErrorSnackBar(
-        ScaffoldMessenger.of(context),
-        l10n,
-        l10n.d('Kon het gekozen bestand niet lezen.'),
-      );
-      return;
-    }
-    await ref.read(secModuleProvider.notifier).provisionFromBytes(bytes);
-  }
-
-  /// Whether the last provisioning attempt ended in a genuine failure (as
-  /// opposed to a not-yet-tried / needs-consent / unsupported state), so the
-  /// status row can flag it with a warning icon.
-  bool _secModuleFailed(SecModuleState module) {
-    if (module.revealed) return false;
-    switch (module.lastStatus) {
-      case SecProvisionStatus.allMirrorsFailed:
-      case SecProvisionStatus.hashMismatch:
-      case SecProvisionStatus.invalidPack:
-        return true;
-      case SecProvisionStatus.noConsent:
-      case SecProvisionStatus.unsupportedPlatform:
-      case SecProvisionStatus.alreadyCached:
-      case SecProvisionStatus.bundled:
-      case SecProvisionStatus.fetched:
-      case SecProvisionStatus.imported:
-      case null:
-        return false;
-    }
-  }
-
-  String _secModuleStatusText(AppLocalizations l10n, SecModuleState module) {
-    // Zeg érbij dat het lokaal blijft: dat is de vraag die de gebruiker heeft
-    // ("wat is er opgehaald, en gaat er iets naar buiten?"). De aantallen staan
-    // eronder.
-    if (module.revealed) {
-      return l10n.d(
-        'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, er gaat niets naar buiten.',
-      );
-    }
-    switch (module.lastStatus) {
-      case SecProvisionStatus.noConsent:
-        return l10n.d(
-          'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.',
-        );
-      case SecProvisionStatus.unsupportedPlatform:
-        return l10n.d('Op het web nog niet beschikbaar');
-      // Distinct failure reasons so the user sees what went wrong, not a bare
-      // "Ophalen mislukt" (PENTEST_MIAUW §6 fallback chain).
-      case SecProvisionStatus.allMirrorsFailed:
-        return l10n.d(
-          'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele bron worden opgehaald. Probeer het opnieuw of importeer het pakket handmatig.',
-        );
-      case SecProvisionStatus.hashMismatch:
-        return l10n.d(
-          'De opgehaalde gegevens kwamen niet overeen met de verwachte vingerafdruk en zijn uit voorzorg geweigerd.',
-        );
-      case SecProvisionStatus.invalidPack:
-        return l10n.d(
-          'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.',
-        );
-      case SecProvisionStatus.alreadyCached:
-      case SecProvisionStatus.bundled:
-      case SecProvisionStatus.fetched:
-      case SecProvisionStatus.imported:
-      case null:
-        return l10n.d('Nog niet opgehaald');
-    }
   }
 
   Future<void> _toggleSecModule(bool enabled) async {

@@ -1,80 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ocideck/services/secmodule/sec_module_provisioner.dart';
-import 'package:ocideck/services/secmodule/sec_pack_codec.dart';
+import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/state/sec_module_provider.dart';
 import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// The "Informatieveiligheid" module card must explain *why* provisioning
-/// failed rather than collapse every failure into one bare "Ophalen mislukt".
-/// These tests drive the card through each failure status and assert the
-/// distinct, human-readable message plus the manual-import recourse.
+/// The "Informatieveiligheid" card in Settings → Uitbreidingen.
 ///
-/// The card lives in the settings dialog's modules tab, which is an offstage
-/// child of an IndexedStack until selected — so we render the dialog, drive the
-/// failure through the notifier, and match with `skipOffstage: false` rather
-/// than fighting the tab-navigation / overlay hit-testing.
-class _NoTransport implements SecPackTransport {
-  @override
-  Future<SecPackFetchResult> fetch(Uri url, {required int maxBytes}) async =>
-      const SecPackFetchResult.failed();
-}
-
-class _NoStore implements SecPackStore {
-  @override
-  Future<String?> cachedVersion({
-    required String version,
-    required String expectedHash,
-  }) async => null;
-  @override
-  Future<SecPackContents?> read({
-    required String version,
-    required String expectedHash,
-  }) async => null;
-  @override
-  Future<void> save({
-    required String version,
-    required String outerHash,
-    required SecPackContents contents,
-  }) async {}
-  @override
-  Future<void> clear() async {}
-}
-
-/// A provisioner whose every run yields a fixed [status], so the settings card
-/// can be exercised without any network or disk.
-class _FixedProvisioner extends SecModuleProvisioner {
-  final SecProvisionStatus status;
-  _FixedProvisioner(this.status)
-    : super(transport: _NoTransport(), store: _NoStore());
-  @override
-  Future<bool> isProvisioned() async => false;
-  @override
-  Future<SecProvisionResult> provision({
-    required bool hasConsent,
-    bool force = false,
-  }) async => SecProvisionResult(status);
-}
-
-/// Open the settings dialog, then turn the module on (which runs provisioning —
-/// our fake fails with [status]). The dialog reads `tabsProvider`, whose
-/// notifier starts a 25 s autosave timer; the caller must unmount the tree (see
-/// [_teardownTree]) so that timer is cancelled before the test ends.
-Future<void> _showDialogAndEnable(
-  WidgetTester tester,
-  SecProvisionStatus status,
-) async {
+/// This file used to drive the card through provisioning failures (no mirror
+/// reachable, hash mismatch, invalid pack) and assert each recourse. None of
+/// that exists any more: the reference data ships inside the app, so switching
+/// the module on reveals it — there is nothing to fetch, retry, import or clean
+/// up, and therefore no failure to explain.
+///
+/// What is worth pinning is the claim the card now makes to the user: the data
+/// is here, it stays here, and *this much* of it is here. The counts come from
+/// the real catalogs (SecReferenceInventory), so a card that renders them is a
+/// card telling the truth.
+///
+/// The card lives in the settings dialog's modules tab, an offstage child of an
+/// IndexedStack until selected — so we render the dialog and match with
+/// `skipOffstage: false` rather than fighting the tab navigation.
+Future<void> _showDialog(WidgetTester tester, {required bool enabled}) async {
   await tester.binding.setSurfaceSize(const Size(1500, 1100));
   addTearDown(() => tester.binding.setSurfaceSize(null));
   await tester.pumpWidget(
     ProviderScope(
-      overrides: [
-        secModuleProvisionerProvider.overrideWithValue(
-          _FixedProvisioner(status),
-        ),
-      ],
       child: MaterialApp(
         home: Scaffold(
           body: Builder(
@@ -89,63 +41,96 @@ Future<void> _showDialogAndEnable(
   );
   await tester.tap(find.text('open'));
   await tester.pumpAndSettle();
-  final container = ProviderScope.containerOf(
-    tester.element(find.text('open')),
-    listen: false,
-  );
-  await container.read(secModuleProvider.notifier).enable();
-  await tester.pumpAndSettle();
+  if (enabled) {
+    final container = ProviderScope.containerOf(
+      tester.element(find.text('open')),
+      listen: false,
+    );
+    await container.read(secModuleProvider.notifier).enable();
+    await tester.pumpAndSettle();
+  }
 }
 
-/// Unmount the widget tree so the ProviderScope disposes its container — which
-/// cancels the tabs autosave timer, satisfying the pending-timer invariant.
+/// Unmount the tree so the ProviderScope disposes its container — which cancels
+/// the tabs autosave timer, satisfying the pending-timer invariant.
 Future<void> _teardownTree(WidgetTester tester) async {
   await tester.pumpWidget(const SizedBox());
   await tester.pumpAndSettle();
 }
 
 void main() {
-  setUp(() => SharedPreferences.setMockInitialValues({}));
-
-  const cases = {
-    SecProvisionStatus.allMirrorsFailed:
-        'Geen bron bereikbaar — de referentiegegevens konden bij geen enkele '
-        'bron worden opgehaald. Probeer het opnieuw of importeer het pakket '
-        'handmatig.',
-    SecProvisionStatus.hashMismatch:
-        'De opgehaalde gegevens kwamen niet overeen met de verwachte '
-        'vingerafdruk en zijn uit voorzorg geweigerd.',
-    SecProvisionStatus.invalidPack:
-        'Het gegevenspakket was beschadigd of ongeldig en is daarom geweigerd.',
-  };
-
-  cases.forEach((status, message) {
-    testWidgets('$status shows its own message and the import recourse', (
-      tester,
-    ) async {
-      await _showDialogAndEnable(tester, status);
-
-      // The card renders in the (offstage) modules tab of the IndexedStack.
-      expect(find.text(message, skipOffstage: false), findsOneWidget);
-      // The old catch-all is gone.
-      expect(find.text('Ophalen mislukt', skipOffstage: false), findsNothing);
-      // Both recourses are offered while nothing is revealed yet: retry the
-      // fetch (none of these failures is the web's unsupportedPlatform) and the
-      // manual local-file import.
-      expect(
-        find.text('Opnieuw proberen', skipOffstage: false),
-        findsOneWidget,
-      );
-      expect(
-        find.text('Pakket importeren', skipOffstage: false),
-        findsOneWidget,
-      );
-
-      await _teardownTree(tester);
-    });
+  setUp(() {
+    AppLocalizations.setActiveLanguageCode('nl');
+    SharedPreferences.setMockInitialValues({});
   });
 
-  testWidgets('the three failure messages are distinct', (tester) async {
-    expect(cases.values.toSet().length, cases.length);
+  testWidgets('enabling the module shows what is locally available', (
+    tester,
+  ) async {
+    await _showDialog(tester, enabled: true);
+
+    expect(
+      find.text(
+        'Gegevens lokaal beschikbaar — het opzoeken gebeurt op dit apparaat, '
+        'er gaat niets naar buiten.',
+        skipOffstage: false,
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.text('Wat er lokaal beschikbaar is', skipOffstage: false),
+      findsOneWidget,
+    );
+
+    await _teardownTree(tester);
+  });
+
+  testWidgets('the card offers no fetch, retry, import or cleanup', (
+    tester,
+  ) async {
+    await _showDialog(tester, enabled: true);
+
+    // Anchor on something that must be there, so the absences below mean "not
+    // on a rendered card" rather than "no card rendered at all".
+    expect(
+      find.text('Wat er lokaal beschikbaar is', skipOffstage: false),
+      findsOneWidget,
+    );
+
+    // Every one of these was an affordance over a pipeline that fetched
+    // nothing, cached bytes nobody read, and could not fail. A button that
+    // works harder at pretending is still pretending.
+    for (final gone in const [
+      'Opnieuw proberen',
+      'Nu bijwerken',
+      'Pakket importeren',
+      'Gegevens opschonen',
+      'Nog niet opgehaald',
+    ]) {
+      expect(
+        find.text(gone, skipOffstage: false),
+        findsNothing,
+        reason: '"$gone" belongs to the removed provisioning pipeline.',
+      );
+    }
+
+    await _teardownTree(tester);
+  });
+
+  testWidgets('while the module is off the card stays a bare toggle', (
+    tester,
+  ) async {
+    await _showDialog(tester, enabled: false);
+
+    expect(
+      find.text('Informatieveiligheid', skipOffstage: false),
+      findsWidgets,
+    );
+    expect(
+      find.text('Wat er lokaal beschikbaar is', skipOffstage: false),
+      findsNothing,
+    );
+
+    await _teardownTree(tester);
   });
 }
