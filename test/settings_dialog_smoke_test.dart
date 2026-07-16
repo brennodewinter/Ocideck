@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/l10n/app_localizations.dart';
+import 'package:ocideck/state/settings_provider.dart';
 import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
 import 'package:ocideck/widgets/privacy_badge.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -54,6 +56,75 @@ void main() {
     }
 
     expect(find.byType(SettingsDialog), findsOneWidget);
+  });
+
+  // De taalkeuze wisselt de interface meteen en schrijft dus buiten Opslaan om
+  // in de instellingen. Annuleren moet dat terugdraaien, anders verwerpt het je
+  // andere wijzigingen wél en blijft de taal staan.
+  group('de taal volgt Opslaan en Annuleren', () {
+    /// Opent het venster en wisselt de taal zoals de dropdown dat doet: meteen,
+    /// via de provider. Geeft de container terug om de taal uit te lezen. De
+    /// container hangt bewust ónder de widgetboom (niet ernaast): de tabs­provider
+    /// draait een periodieke timer, en alleen zo ruimt het afbreken van de boom
+    /// die op tijd op.
+    Future<ProviderContainer> openAndSwitchLanguage(WidgetTester tester) async {
+      await tester.pumpWidget(
+        ProviderScope(
+          child: MaterialApp(
+            home: Scaffold(
+              body: Builder(
+                builder: (context) => ElevatedButton(
+                  onPressed: () => SettingsDialog.show(context),
+                  child: const Text('open'),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      final container = ProviderScope.containerOf(
+        tester.element(find.byType(MaterialApp)),
+      );
+
+      await tester.tap(find.text('open'));
+      await tester.pumpAndSettle();
+      expect(container.read(settingsProvider).languageCode, 'nl');
+
+      await container.read(settingsProvider.notifier).setLanguageCode('de');
+      await tester.pumpAndSettle();
+      expect(container.read(settingsProvider).languageCode, 'de');
+
+      return container;
+    }
+
+    // De knoppen staan ná de wissel in het Duits; hun labels komen daarom uit
+    // de vertaling en niet uit een hardgecodeerd 'Annuleren'/'Opslaan'.
+    const german = AppLocalizations(Locale('de'));
+
+    testWidgets('Annuleren zet de taal terug zoals ze was', (tester) async {
+      await tester.binding.setSurfaceSize(const Size(1500, 1100));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+
+      final container = await openAndSwitchLanguage(tester);
+
+      await tester.tap(find.text(german.t('cancel')));
+      await tester.pumpAndSettle();
+
+      expect(container.read(settingsProvider).languageCode, 'nl');
+    });
+
+    testWidgets('Opslaan houdt de nieuwe taal vast', (tester) async {
+      await tester.binding.setSurfaceSize(const Size(1500, 1100));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+
+      final container = await openAndSwitchLanguage(tester);
+
+      await tester.tap(find.text(german.t('saveSettings')));
+      await tester.pumpAndSettle();
+
+      expect(container.read(settingsProvider).languageCode, 'de');
+    });
   });
 
   // De CVE-schakelaar zet je bloot: de zoekterm gaat naar de mirror en bij een
