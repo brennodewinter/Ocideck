@@ -740,6 +740,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+      'Slide di raportahe i datonan di referensia pa seguridat di informashon: hallazgonan, lista di kontrol, matris di scope i firma. Strukturá segun MIAUW i ampliamente uzabel pa pentest, audit i investigashon di seguridat. E datonan di referensia ta den e app mes, p\'esei e módulo ta funshoná mesora i kompletamente offline.',
+  'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
+      'Módulonan opcional. Pa defekto apagá; nan ta keda skondí te ora bo aktivá nan.',
   'Procesverbetering (ontwerp)': 'Mehoramentu di proseso (diseño)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'E proyekto aki ta un subprodukto di e Pilot Informatieautonomie.',

@@ -1787,6 +1787,10 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+      'Jelentésdiák és referenciaadatok az információbiztonsághoz: megállapítások, ellenőrzőlisták, hatókörmátrixok és aláírás. MIAUW szerint strukturálva és széles körben használható pentesztekhez, auditokhoz és biztonsági kutatáshoz. A referenciaadatok magában az alkalmazásban vannak, így a modul azonnal és teljesen offline működik.',
+  'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
+      'Választható modulok. Alapértelmezetten kikapcsolva; rejtve maradnak, amíg be nem kapcsolja őket.',
   'Procesverbetering (ontwerp)': 'Folyamatfejlesztés (terv)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Ez a projekt a Pilot Informatieautonomie mellékterméke.',

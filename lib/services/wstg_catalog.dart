@@ -11,7 +11,7 @@ import '../models/wstg_test.dart';
 /// so a report cites a fixed, citeable standard rather than a moving branch.
 /// The ids and titles are the canonical WSTG identifiers; every entry maps back
 /// to owasp.org's guide. WSTG is licensed CC-BY-SA-4.0 (see
-/// tool/build_secmodule_pack.dart / PENTEST_MIAUW §15 for attribution).
+/// PENTEST_MIAUW §15 for attribution).
 class WstgCatalog {
   WstgCatalog._();
 

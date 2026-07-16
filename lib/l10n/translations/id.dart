@@ -1783,6 +1783,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+      'Slide pelaporan dan data referensi untuk keamanan informasi: temuan, daftar periksa, matriks ruang lingkup, dan penandatanganan. Terstruktur menurut MIAUW dan dapat digunakan secara luas untuk pentest, audit, dan riset keamanan. Data referensi ada di dalam aplikasi itu sendiri, jadi modul langsung bekerja dan sepenuhnya offline.',
+  'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
+      'Modul opsional. Mati secara bawaan; tetap tersembunyi sampai Anda mengaktifkannya.',
   'Procesverbetering (ontwerp)': 'Peningkatan proses (desain)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Proyek ini merupakan produk sampingan dari Pilot Informatieautonomie.',

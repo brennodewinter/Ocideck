@@ -1785,6 +1785,10 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+      'Poročilne prosojnice in referenčni podatki za informacijsko varnost: ugotovitve, kontrolni seznami, matrike obsega in podpis. Strukturirano po MIAUW in široko uporabno za penteste, revizije in varnostne raziskave. Referenčni podatki so v sami aplikaciji, zato modul deluje takoj in povsem brez povezave.',
+  'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
+      'Izbirni moduli. Privzeto izklopljeni; ostanejo skriti, dokler jih ne omogočite.',
   'Procesverbetering (ontwerp)': 'Izboljševanje procesov (zasnova)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Ta projekt je stranski produkt projekta Pilot Informatieautonomie.',

@@ -1007,35 +1007,23 @@ open actually contains security slide types and the module is off, once per open
 (never while you edit), and the slides render either way; it is purely a way to
 discover the module.
 
-The module's reference data is **bundled with the app**, so enabling it works
-**offline and out of the box** — no download, no server, and no outbound traffic
-(nothing leaves your device; you do not even need to grant the outbound-traffic
-consent for this). The bundled pack is verified against a fingerprint compiled
-into the app before it is used, so a tampered or mismatched pack is refused.
+The module's reference data is **part of the app itself**, so enabling it works
+**offline and out of the box** — nothing is downloaded, there is no server, and
+no outbound traffic is involved. You do not need to grant the outbound-traffic
+consent for it, and turning the module on cannot fail: the data is already there,
+so the switch is the whole story.
 
 **What you actually have.** Once the module is on, the card lists **what is
 available locally, in counts** — how many CWE weaknesses, WSTG test cases, MIAUW
 requirements, CVSS score-table rows and finding templates the app can serve you,
 with the upstream standard each one follows. The counts are taken from the
-catalogues the app *actually* queries, not from what a pack claims to contain, so
-an empty list shows up as empty rather than hiding behind a reassuring tick. Below
-them sits the version of the data pack in use.
+catalogues the app *actually* queries, so an empty list would show up as empty
+rather than hiding behind a reassuring tick.
 
-**Nu bijwerken (Update now)** re-runs the fetch even when a verified pack is
-already cached — that is precisely when you want to know whether something newer
-exists. It re-verifies the fingerprint; forcing an update means fetching again,
-not checking less strictly. **Gegevens opschonen** removes the cached data again.
-
-You will normally never see a failure. In the rare case the bundled pack cannot
-be read and no mirror is reachable, the card explains **which** step failed — no
-source reachable, a fingerprint that did not match, or a damaged/invalid pack —
-instead of a bare "failed", and offers two recourses: **Opnieuw proberen (Try
-again)** to re-run provisioning, and **Pakket importeren (Import pack)** to load
-a data pack from a local file. A data pack is a `.zip` holding this module's
-reference data; on import it is checked against the same built-in fingerprint, so
-**only a pack that matches your app version is accepted** — this is the
-air-gapped / update path, not something you need for normal use. Retry is hidden
-on the web build; import still works there.
+The data travels with the app version, which means it also updates with it:
+there is no separate update, no cache to clean up and no pack to import. Upgrade
+OciDeck and you have the newer reference data; that is the only path, and the
+card no longer offers buttons suggesting otherwise.
 
 ### Starting from the MIAUW report template
 

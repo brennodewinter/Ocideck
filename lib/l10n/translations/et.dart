@@ -1774,6 +1774,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+      'Aruandlusslaidid ja võrdlusandmed infoturbe jaoks: leiud, kontroll-loendid, skoobimaatriksid ja allkirjastamine. Struktureeritud MIAUW järgi ja laialt kasutatav pentestideks, audititeks ja turvauuringuteks. Võrdlusandmed on rakenduses endas, seega töötab moodul kohe ja täielikult võrguühenduseta.',
+  'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
+      'Valikulised moodulid. Vaikimisi väljas; need jäävad peidetuks, kuni te need sisse lülitate.',
   'Procesverbetering (ontwerp)': 'Protsesside parendamine (kavand)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'See projekt on Pilot Informatieautonomie kõrvalsaadus.',

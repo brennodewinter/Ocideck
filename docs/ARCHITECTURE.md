@@ -48,7 +48,7 @@ the hosting origin as telemetry:
 - **Optional AI assistance** (`services/ai_*`, off by default) — a local model or
   a *consented* outbound endpoint the user configures.
 - **Nextcloud/WebDAV** (`services/webdav_service.dart`) — the user's own server.
-- **CVE database / secmodule provisioning** — opt-in downloads.
+- **CVE database** — an opt-in download.
 - **URL import / remote media** — a link the user pastes.
 
 Every outbound request from the app funnels through `utils/net_guard.dart`, which

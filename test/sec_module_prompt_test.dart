@@ -9,8 +9,6 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/markdown_service.dart';
-import 'package:ocideck/services/secmodule/sec_module_provisioner.dart';
-import 'package:ocideck/services/secmodule/sec_pack_codec.dart';
 import 'package:ocideck/state/sec_module_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/app_shell.dart';
@@ -22,47 +20,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// is pure discovery (MODUS-REGEL). It fires exactly once, at the OPEN, and
 /// never again on an edit (which builds a fresh Deck via copyWith but never
 /// touches the open path).
-class _NoTransport implements SecPackTransport {
-  @override
-  Future<SecPackFetchResult> fetch(Uri url, {required int maxBytes}) async =>
-      const SecPackFetchResult.failed();
-}
-
-class _NoStore implements SecPackStore {
-  @override
-  Future<String?> cachedVersion({
-    required String version,
-    required String expectedHash,
-  }) async => null;
-  @override
-  Future<SecPackContents?> read({
-    required String version,
-    required String expectedHash,
-  }) async => null;
-  @override
-  Future<void> save({
-    required String version,
-    required String outerHash,
-    required SecPackContents contents,
-  }) async {}
-  @override
-  Future<void> clear() async {}
-}
-
-/// A provisioner that touches no network or disk: nothing is provisioned, and
-/// every run fails cleanly. Enough to drive the module's on/off state without
-/// side effects.
-class _OfflineProvisioner extends SecModuleProvisioner {
-  _OfflineProvisioner() : super(transport: _NoTransport(), store: _NoStore());
-  @override
-  Future<bool> isProvisioned() async => false;
-  @override
-  Future<SecProvisionResult> provision({
-    required bool hasConsent,
-    bool force = false,
-  }) async => const SecProvisionResult(SecProvisionStatus.allMirrorsFailed);
-}
-
 void main() {
   const promptText =
       'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. '
@@ -105,8 +62,8 @@ void main() {
     );
   }
 
-  // Pumps the whole app (module off by default, provisioner stubbed offline)
-  // and returns its ProviderContainer + tabs notifier. The module state is
+  // Pumps the whole app (module off by default) and returns its
+  // ProviderContainer + tabs notifier. The module state is
   // warmed up during pumpAndSettle (AppShell.initState reads it), so by the
   // time a deck opens its `loading` flag has cleared.
   Future<(ProviderContainer, TabsNotifier)> pumpShell(
@@ -114,14 +71,7 @@ void main() {
   ) async {
     await tester.binding.setSurfaceSize(const Size(1600, 1000));
     addTearDown(() => tester.binding.setSurfaceSize(null));
-    await tester.pumpWidget(
-      ProviderScope(
-        overrides: [
-          secModuleProvisionerProvider.overrideWithValue(_OfflineProvisioner()),
-        ],
-        child: const OciDeckApp(),
-      ),
-    );
+    await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
     await tester.pumpAndSettle();
     final container = ProviderScope.containerOf(
       tester.element(find.byType(AppShell)),

@@ -25,13 +25,18 @@ void main() {
   /// Every reference-data asset the base build currently declares. Deliberately
   /// exact: an unlisted entry here means someone grew the payload for all users
   /// without saying so.
-  const expectedDataAssets = {'assets/cwe/cwe_full.json', 'assets/secmodule/'};
+  ///
+  /// `assets/secmodule/` (the provisioned module pack) used to sit here too. It
+  /// held a second copy of this very CWE dataset and nothing ever read it back,
+  /// so it was 288 KB bought for one boolean — see the CHANGELOG entry for
+  /// 2026-07-16.
+  const expectedDataAssets = {'assets/cwe/cwe_full.json'};
 
   /// Ceiling for the unpacked bytes those assets add to every build. Headroom is
   /// for regenerating the datasets from upstream (CWE grows), not for adding new
   /// ones — a new dataset belongs in [expectedDataAssets], with this raised
   /// deliberately. Ratchet it **down** when the payload shrinks.
-  const dataPayloadCeilingBytes = 560 * 1024;
+  const dataPayloadCeilingBytes = 260 * 1024;
 
   final pubspec = File('pubspec.yaml').readAsStringSync();
 

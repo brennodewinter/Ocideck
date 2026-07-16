@@ -1782,6 +1782,10 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+      'Ziņošanas slaidi un atsauces dati informācijas drošībai: atklājumi, kontrolsaraksti, tvēruma matricas un apstiprināšana. Strukturēts pēc MIAUW un plaši izmantojams pentestiem, auditiem un drošības pētījumiem. Atsauces dati atrodas pašā lietotnē, tāpēc modulis darbojas uzreiz un pilnībā bezsaistē.',
+  'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
+      'Neobligāti moduļi. Pēc noklusējuma izslēgti; tie paliek paslēpti, līdz tos ieslēdzat.',
   'Procesverbetering (ontwerp)': 'Procesu uzlabošana (dizains)',
   'Dit project is bijvangst van de Pilot Informatieautonomie.':
       'Šis projekts ir Pilot Informatieautonomie blakusprodukts.',

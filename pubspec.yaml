@@ -98,10 +98,6 @@ flutter:
     # lib/services/cwe_catalog.dart. Regenerate with tool/build_cwe_catalog.dart.
     - assets/cwe/cwe_full.json
     - assets/web_export/
-    # Baseline Informatieveiligheid module data pack, bundled so the module
-    # provisions offline (verified against the pinned hash in
-    # sec_pack_config.dart). Rebuild with tool/build_secmodule_pack.dart.
-    - assets/secmodule/
     # Full EUPL 1.2 licence text, shown verbatim in the consent screen.
     - LICENSE.md
     # User-facing documentation, shown in the in-app reader (Settings →
