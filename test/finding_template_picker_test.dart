@@ -14,7 +14,10 @@ void main() {
           body: Builder(
             builder: (context) => ElevatedButton(
               onPressed: () async {
-                picked = await FindingTemplatePicker.show(context);
+                picked = await FindingTemplatePicker.show(
+                  context,
+                  languageCode: 'en',
+                );
               },
               child: const Text('open'),
             ),

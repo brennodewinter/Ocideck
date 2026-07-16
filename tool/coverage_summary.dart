@@ -47,6 +47,43 @@ const Set<String> uncoveredBaseline = {
   'lib/utils/file_download_web.dart',
   // NO EXECUTABLE LINES: const data table (345 lines, zero statements).
   'lib/services/cvss/cvss4_lookup.dart',
+  // NO EXECUTABLE LINES: const data tables — the finding templates, one file
+  // per language, plus the map that gathers them. Their *content* is asserted
+  // hard in test/finding_template_languages_test.dart, which parses every
+  // template in every language and checks the fixed parts field by field;
+  // there is simply no statement here for a line counter to reach.
+  'lib/services/finding_templates/all.dart',
+  'lib/services/finding_templates/bg.dart',
+  'lib/services/finding_templates/cs.dart',
+  'lib/services/finding_templates/da.dart',
+  'lib/services/finding_templates/de.dart',
+  'lib/services/finding_templates/el.dart',
+  'lib/services/finding_templates/en.dart',
+  'lib/services/finding_templates/es.dart',
+  'lib/services/finding_templates/et.dart',
+  'lib/services/finding_templates/fi.dart',
+  'lib/services/finding_templates/fr.dart',
+  'lib/services/finding_templates/fy.dart',
+  'lib/services/finding_templates/ga.dart',
+  'lib/services/finding_templates/gsw.dart',
+  'lib/services/finding_templates/hr.dart',
+  'lib/services/finding_templates/hu.dart',
+  'lib/services/finding_templates/id.dart',
+  'lib/services/finding_templates/it.dart',
+  'lib/services/finding_templates/la.dart',
+  'lib/services/finding_templates/lt.dart',
+  'lib/services/finding_templates/lv.dart',
+  'lib/services/finding_templates/mt.dart',
+  'lib/services/finding_templates/nl.dart',
+  'lib/services/finding_templates/pap.dart',
+  'lib/services/finding_templates/pl.dart',
+  'lib/services/finding_templates/pt.dart',
+  'lib/services/finding_templates/ro.dart',
+  'lib/services/finding_templates/sk.dart',
+  'lib/services/finding_templates/sl.dart',
+  'lib/services/finding_templates/sv.dart',
+  'lib/services/finding_templates/tlh.dart',
+  'lib/services/finding_templates/uk.dart',
   // NO EXECUTABLE LINES: const data table — the settings search index. The
   // entries themselves are asserted in test/settings_search_test.dart, which
   // also guards that every section title in here is still rendered.

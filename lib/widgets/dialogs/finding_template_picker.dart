@@ -8,14 +8,23 @@ import '../../theme/app_theme.dart';
 /// A searchable picker over the reusable finding-template library
 /// (PENTEST_MIAUW §17). Returns the chosen [FindingTemplate] (or null on
 /// cancel); the caller pulls it into the current finding and specialises it.
+///
+/// The templates offered are in the **report's** language ([Deck.language]), not
+/// the interface's — a tester writing an English report from a Dutch UI needs an
+/// English skeleton (§12.3). An unrecorded language yields English.
 class FindingTemplatePicker extends StatefulWidget {
-  const FindingTemplatePicker({super.key});
+  const FindingTemplatePicker({super.key, required this.languageCode});
 
-  static Future<FindingTemplate?> show(BuildContext context) =>
-      showDialog<FindingTemplate>(
-        context: context,
-        builder: (_) => const FindingTemplatePicker(),
-      );
+  /// The report's language; empty or unknown falls back to English.
+  final String languageCode;
+
+  static Future<FindingTemplate?> show(
+    BuildContext context, {
+    required String languageCode,
+  }) => showDialog<FindingTemplate>(
+    context: context,
+    builder: (_) => FindingTemplatePicker(languageCode: languageCode),
+  );
 
   @override
   State<FindingTemplatePicker> createState() => _FindingTemplatePickerState();
@@ -40,7 +49,10 @@ class _FindingTemplatePickerState extends State<FindingTemplatePicker> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final matches = _library.search(_search.text);
+    final matches = _library.search(
+      _search.text,
+      languageCode: widget.languageCode,
+    );
     return AlertDialog(
       title: Text(l10n.d('Sjabloon kiezen')),
       content: SizedBox(
