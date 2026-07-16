@@ -134,6 +134,9 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
 
   void _scrollSlideToTop(int index, {int attempts = 2}) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      // The panel can be disposed before the frame lands (slide restructure,
+      // tab close). Reading `ref` after unmount throws, so bail out first.
+      if (!mounted) return;
       final deck = ref.read(deckProvider).deck;
       if (deck == null ||
           index < 0 ||
