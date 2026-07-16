@@ -140,6 +140,7 @@ follow in later phases.
 - `git_transport_factory.dart` — Conditional export: pinned `dart:io` on desktop, browser fetch on web.
 - `git_transport_io.dart` — Desktop: `NetGuard.safeResolveTrusted` + socket pin + no redirects + byte cap.
 - `git_transport_web.dart` — Web: browser fetch with the same-origin fetch-proxy as fallback, but never for a request carrying a token.
+- `asset_pool.dart` — The shared content-addressed pool (`repo:assets/<sha256>.<ext>`): SHA-256 naming, fetch-once cache, and re-hashing of every fetched blob — a hash-named path from an untrusted forge proves nothing until checked.
 
 ## `lib/state/` — Riverpod providers
 

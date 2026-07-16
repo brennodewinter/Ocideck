@@ -1,12 +1,13 @@
 # OciDeck — Git-Repository Storage (Design)
 
-> **Status: Phase 0 landed; the rest is still a design proposal.**
-> Read-only opening from a Forgejo/Gitea repository works today — see
-> [`../SOURCE_MAP.md`](../SOURCE_MAP.md) for what exists (`lib/services/git/`,
-> `lib/state/git_provider.dart`, `lib/state/tabs_provider_git.dart`) and the
-> [`../USER_GUIDE.md`](../USER_GUIDE.md) for how to use it. Everything from
-> Phase 1 on — the asset pool, writing, native git, releases — is still design.
-> Each phase folds its part into the current-state docs as it lands.
+> **Status: Phases 0 and 1 landed; the rest is still a design proposal.**
+> Opening a deck read-only from a Forgejo/Gitea repository works today, pooled
+> images and all — see [`../SOURCE_MAP.md`](../SOURCE_MAP.md) for what exists
+> (`lib/services/git/`, `lib/state/git_provider.dart`,
+> `lib/state/tabs_provider_git.dart`) and [`../USER_GUIDE.md`](../USER_GUIDE.md)
+> for how to use it. Everything from Phase 2 on — writing, native git, releases —
+> is still design. Each phase folds its part into the current-state docs as it
+> lands.
 >
 > This document describes a *future* storage backend and the architecture chosen
 > for it. It is deliberately kept separate from the current-state contributor
@@ -343,6 +344,14 @@ Why this satisfies the goal:
 - **Filename = content hash.** Two decks using the same image both reference
   `assets/<hash>.png`. Physically it exists once. This *enforces* de-duplication
   rather than hoping for it.
+- **…and the hash is verified on read, not assumed.** A hash-named path proves
+  nothing on its own: a forge is untrusted (P5) and can serve whatever it likes
+  under `assets/<hash>.png`. Because pooled blobs are cached — and a
+  content-addressed cache is naturally shared *across* repos, since the key is
+  the content — an unverified read would let one hostile repository poison the
+  bytes an honest one later gets. So `AssetPool` re-hashes every fetched blob
+  and fails closed on a mismatch. Content-addressed storage that never checks
+  the address is just a filename.
 - **The hashing machinery exists.** `image_dedup_service.dart` already hashes
   images in an isolate (md5). Reuse it, but standardise the pool on **SHA-256**
   for collision resistance (md5 stays fine for the existing in-session dedup UI).
@@ -815,6 +824,17 @@ git_cli.dart`, and nothing else in the tree may spawn a process.
 
 Each phase is shippable and preserves the invariants.
 
+> **A phase must land with its caller, not before it.** The original roadmap was
+> written machinery-first — Phase 1 builds the mirror, Phase 2 uses it; Phase 1
+> builds the reverse index, Phase 6 uses it. That cannot land here:
+> `make check-dead-code` refuses any `lib/` file unreachable from an entrypoint,
+> and it is right to. Discovered twice, in Phase 0 and Phase 1, so the phases
+> below have been re-cut around it: each one now carries the wiring that makes
+> its own machinery reachable. Where that forced a move, the entry says so.
+> Do not answer this by allowlisting — the allowlist is for deliberate dynamic
+> entrypoints, and code with no caller is a different thing wearing the same
+> clothes.
+
 ### Phase 0 — Foundation (provider-agnostic, read-only, REST)
 - `GitForge` interface, `GitRepoConfig`/`GitOrigin` models, PAT storage in
   `secret_store`, HTTP client reusing `NetGuard` + HTTPS/caps.
@@ -824,17 +844,34 @@ Each phase is shippable and preserves the invariants.
 - Deliberately REST-first: it is the path both platforms share, so it de-risks
   the interface before a second implementation exists.
 
-### Phase 1 — Asset pool + mirror
-- `AssetPool` (SHA-256, `repo:` scheme, resolve on desktop + web), `repo:`
-  round-trip in `markdown_service`, reverse-index for image search.
-- `DeckMirror` interface + `DraftMirror` (on-disk desktop / IndexedDB web) as the
-  editing target.
+### Phase 1 — The asset pool, wired into opening
+- The `repo:` scheme + its guard (`GitRepoLayout.assetRef` / `assetPathOf`).
+  `markdown_service` needs **no** change: a path is opaque to it, so `repo:`
+  already round-trips — pinned by a regression test rather than defended by code.
+- `AssetPool`: SHA-256 naming, fetch-once cache, `existing()` for Phase 2's
+  commit. **Every fetched blob is re-hashed** — see §6.
+- Its caller, which is what makes the phase land: `openDeckFromGit` resolves a
+  deck's pooled images and rewrites the slide paths (§9.2). Before this, a deck
+  from a repo opened with every picture broken.
+- *Moved out:* the reverse index went to Phase 6 and `DeckMirror` to Phase 2 —
+  each now sits with the caller that gives it a reason to exist.
 
 ### Phase 2 — Writing (commit + push, offline)
+- `DeckMirror` interface + `DraftMirror` as the editing target (§8.1, §8.3) —
+  moved here from Phase 1, because *this* is where it acquires a caller.
 - `commitFiles` in `GiteaForge` (multi-file), the `SyncEngine` + durable outbox,
   `baseSha` conflict detection.
 - "Save to git" beside "Save to Nextcloud"; offline queue + flush-on-reconnect.
-- At this point the feature is complete on every platform, on the REST plane.
+- **Open question — the web working copy.** §8.3 wants an IndexedDB draft. This
+  repository runs every test on the Dart VM and has no browser test target at
+  all, so that interop would be the one piece of the git backend shipping
+  untested; `recovery_service.dart` is already desktop-only for a comparable
+  reason. Until that is resolved the web draft store is an explicit stub that
+  refuses rather than an in-memory one that quietly is not durable — a working
+  copy that looks like storage and is not would break P2 in the worst way.
+  Decide before Phase 2 ships: add a browser test target, or say plainly that
+  writing to git is desktop-only.
+- At this point the feature is complete on desktop, on the REST plane.
 
 ### Phase 3 — Native git on desktop
 - `GitCli` with the §10.2 hardening; `gitCapabilityProvider` with the lazy probe
@@ -864,7 +901,12 @@ Each phase is shippable and preserves the invariants.
 
 ### Phase 6 — Cross-deck search & polish
 - Server-side code/image search per provider, native `git grep` on a clone, local
-  index fallback; manual asset GC; token-scope guidance UI.
+  index fallback; token-scope guidance UI.
+- `AssetIndex` — the reverse index over the pool (moved here from Phase 1: this
+  is where "which decks use this image" and the manual asset GC of §6.2 finally
+  have a caller). Note the split it must keep: image search may answer from an
+  incomplete index, but "nothing uses this" may not — an unreadable deck could be
+  the one user of an asset, and deleting is irreversible (P2).
 
 ### Coverage against the requirements
 | Requirement | Delivered by |
