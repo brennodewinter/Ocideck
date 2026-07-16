@@ -1819,6 +1819,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Dit project is bijvangst van de Pilot Informatieautonomie.':
+      'Is seachtháirge de chuid an Pilot Informatieautonomie é an tionscadal seo.',
   'Stijlprofiel exporteren': 'Easpórtáil próifíl stíle',
   'Stijlprofiel importeren': 'Iompórtáil próifíl stíle',
   'Profiel exporteren': 'Easpórtáil próifíl',

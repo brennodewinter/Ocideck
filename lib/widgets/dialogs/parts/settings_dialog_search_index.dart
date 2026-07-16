@@ -304,6 +304,14 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
     keywords: ['nextcloud', 'webdav', 'test', 'verbinding'],
   ),
 
+  // ── Tab 8 — Checklists ────────────────────────────────────────────────────
+  SettingsSearchEntry(
+    tab: 8,
+    label: 'Nieuw sjabloon',
+    section: 'Eigen checklists',
+    keywords: ['checklist', 'sjabloon', 'template'],
+  ),
+
   // ── Tab 9 — Uitbreidingen ─────────────────────────────────────────────────
   SettingsSearchEntry(
     tab: 9,
@@ -325,13 +333,5 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
     label: 'Pakket importeren',
     section: 'Uitbreidingen',
     keywords: ['import', 'pakket', 'offline', 'gegevens'],
-  ),
-
-  // ── Tab 10 — Checklists ───────────────────────────────────────────────────
-  SettingsSearchEntry(
-    tab: 10,
-    label: 'Nieuw sjabloon',
-    section: 'Eigen checklists',
-    keywords: ['checklist', 'sjabloon', 'template'],
   ),
 ];

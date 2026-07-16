@@ -25,6 +25,10 @@ extension _SettingsAbout on _SettingsDialogState {
         _aboutBanner(l10n),
         const SizedBox(height: 22),
 
+        // ── Origin: the Pilot Informatieautonomie ────────────────────────────
+        _aboutOrigin(l10n),
+        const SizedBox(height: 18),
+
         // ── Where the name comes from ────────────────────────────────────────
         _aboutHeading(
           Icons.badge_outlined,
@@ -249,6 +253,24 @@ extension _SettingsAbout on _SettingsDialogState {
       ),
     );
   }
+
+  /// Where the project came from. The pilot is a proper noun and its domain a
+  /// bare URL, so both stay out of the translated line.
+  Widget _aboutOrigin(AppLocalizations l10n) => _aboutCard(
+    Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          l10n.d('Dit project is bijvangst van de Pilot Informatieautonomie.'),
+          style: _aboutBodyStyle,
+        ),
+        _aboutLink(
+          'www.pilotinformatieautonomie.nl',
+          'https://www.pilotinformatieautonomie.nl',
+        ),
+      ],
+    ),
+  );
 
   Widget _aboutHeading(IconData icon, String text) => Padding(
     padding: const EdgeInsets.only(bottom: 8),

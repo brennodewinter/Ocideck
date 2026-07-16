@@ -1783,6 +1783,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Dit project is bijvangst van de Pilot Informatieautonomie.':
+      'Proyek ini merupakan produk sampingan dari Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Ekspor profil gaya',
   'Stijlprofiel importeren': 'Impor profil gaya',
   'Profiel exporteren': 'Ekspor profil',

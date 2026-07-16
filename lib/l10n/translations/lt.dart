@@ -1791,6 +1791,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Dit project is bijvangst van de Pilot Informatieautonomie.':
+      'Šis projektas yra šalutinis Pilot Informatieautonomie produktas.',
   'Stijlprofiel exporteren': 'Eksportuoti stiliaus profilį',
   'Stijlprofiel importeren': 'Importuoti stiliaus profilį',
   'Profiel exporteren': 'Eksportuoti profilį',

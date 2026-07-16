@@ -8,6 +8,9 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **The About screen names where the project comes from.** Right above "Waar
+  komt de naam vandaan?" it now says that OciDeck is a by-product of the Pilot
+  Informatieautonomie, with a link to www.pilotinformatieautonomie.nl.
 - **Style profiles can be exported and imported as a file.** A profile could
   only travel inside a deck (in the front matter); there was no way to download
   one or load one in. Two buttons next to the profile name (Settings →
@@ -62,6 +65,11 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   content is not lost, only relocated, and one undo brings it back.
 
 ### Changed
+- **Checklists no longer sit under Extensions in the settings sidebar.** The
+  pane had ended up between Uitbreidingen and Over OciDeck, which read as if
+  checklists were part of the extensions. The sidebar order is now Checklists,
+  Uitbreidingen, Documentatie — the extensions last, with their documentation
+  right after them.
 - **The privacy feature is now called OciWacht.** "Privacy Shield" was a
   confusing name — it collides with the (invalidated) EU–US Privacy Shield
   data-transfer framework, which this feature has nothing to do with. The

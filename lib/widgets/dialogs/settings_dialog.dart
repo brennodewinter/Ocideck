@@ -194,6 +194,14 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   /// Index of the section shown in the sidebar navigation (0..4).
   late int _selectedTab;
 
+  /// De taal zoals die bij het openen actief was, plus of er is opgeslagen. De
+  /// taalkeuze wisselt de interface meteen (dat is de bedoeling: je wilt zien
+  /// wat je kiest), maar schrijft daarmee buiten Opslaan om in de instellingen.
+  /// Zonder deze twee zou Annuleren de taal laten staan terwijl het de rest van
+  /// je wijzigingen verwerpt.
+  late final String _initialLanguageCode;
+  bool _saved = false;
+
   static const _navIcons = [
     Icons.tune,
     Icons.format_paint_outlined,
@@ -203,9 +211,9 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     Icons.shield_outlined,
     Icons.smart_toy_outlined,
     Icons.cloud_outlined,
-    Icons.menu_book_outlined,
-    Icons.extension_outlined,
     Icons.checklist_outlined,
+    Icons.extension_outlined,
+    Icons.menu_book_outlined,
     Icons.info_outline,
   ];
 
@@ -232,6 +240,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   void initState() {
     super.initState();
     final settings = ref.read(settingsProvider);
+    _initialLanguageCode = settings.languageCode;
     _libraries = List.of(settings.libraries);
     _exportDirectory = settings.exportDirectory;
     // Reflect the profile the open presentation actually uses, falling back to
@@ -422,6 +431,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   }
 
   void _save() {
+    _saved = true;
     final notifier = ref.read(settingsProvider.notifier);
     final profile = _editedProfile();
     notifier.setLibraries(_normalizedLibraries());
@@ -507,61 +517,77 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       _tabBody(_securityTab()),
       _tabBody(_aiTab()),
       _tabBody(_webdavTab()),
-      _tabBody(_documentationTab()),
-      _tabBody(_modulesTab()),
       _tabBody(_checklistsTab()),
+      _tabBody(_modulesTab()),
+      _tabBody(_documentationTab()),
       _tabBody(_aboutTab()),
     ];
 
-    return Dialog(
-      clipBehavior: Clip.antiAlias,
-      backgroundColor: Colors.white,
-      insetPadding: const EdgeInsets.symmetric(horizontal: 40, vertical: 28),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-      child: SizedBox(
-        width: dialogWidth,
-        height: dialogHeight,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _sidebar(l10n, labels),
-            Expanded(
-              // Material (not ColoredBox) so ListTiles inside the tab bodies
-              // paint their ink/selected state onto this surface instead of a
-              // hidden ancestor behind an opaque box.
-              child: Material(
-                color: AppTheme.slate50,
-                child: Column(
-                  children: [
-                    _contentHeader(labels[_selectedTab]),
-                    Expanded(
-                      // De zoekresultaten leggen zich óver de actieve tab; de
-                      // IndexedStack blijft eronder staan zodat zijn GlobalKeys
-                      // (de sectie-ankers) in de boom blijven en een treffer er
-                      // meteen naartoe kan scrollen.
-                      child: Stack(
-                        children: [
-                          IndexedStack(
-                            index: _selectedTab,
-                            sizing: StackFit.expand,
-                            children: bodies,
-                          ),
-                          if (_searchQuery.isNotEmpty)
-                            Positioned.fill(
-                              child: _settingsSearchResults(l10n),
+    return PopScope(
+      // Vangt élke manier van sluiten zonder opslaan: de knop, het kruisje,
+      // Escape en een klik naast het venster.
+      onPopInvokedWithResult: (didPop, _) {
+        if (didPop) _restoreLanguageIfDiscarded();
+      },
+      child: Dialog(
+        clipBehavior: Clip.antiAlias,
+        backgroundColor: Colors.white,
+        insetPadding: const EdgeInsets.symmetric(horizontal: 40, vertical: 28),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+        child: SizedBox(
+          width: dialogWidth,
+          height: dialogHeight,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _sidebar(l10n, labels),
+              Expanded(
+                // Material (not ColoredBox) so ListTiles inside the tab bodies
+                // paint their ink/selected state onto this surface instead of a
+                // hidden ancestor behind an opaque box.
+                child: Material(
+                  color: AppTheme.slate50,
+                  child: Column(
+                    children: [
+                      _contentHeader(labels[_selectedTab]),
+                      Expanded(
+                        // De zoekresultaten leggen zich óver de actieve tab; de
+                        // IndexedStack blijft eronder staan zodat zijn GlobalKeys
+                        // (de sectie-ankers) in de boom blijven en een treffer er
+                        // meteen naartoe kan scrollen.
+                        child: Stack(
+                          children: [
+                            IndexedStack(
+                              index: _selectedTab,
+                              sizing: StackFit.expand,
+                              children: bodies,
                             ),
-                        ],
+                            if (_searchQuery.isNotEmpty)
+                              Positioned.fill(
+                                child: _settingsSearchResults(l10n),
+                              ),
+                          ],
+                        ),
                       ),
-                    ),
-                    _footerBar(l10n),
-                  ],
+                      _footerBar(l10n),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  /// Zet de taal terug zoals ze bij het openen was wanneer het venster zonder
+  /// opslaan sluit. Alleen schrijven als er écht iets veranderde, zodat een
+  /// gewone Annuleren geen instellingen aanraakt.
+  void _restoreLanguageIfDiscarded() {
+    if (_saved) return;
+    if (ref.read(settingsProvider).languageCode == _initialLanguageCode) return;
+    ref.read(settingsProvider.notifier).setLanguageCode(_initialLanguageCode);
   }
 
   Widget _sidebar(AppLocalizations l10n, List<String> labels) {

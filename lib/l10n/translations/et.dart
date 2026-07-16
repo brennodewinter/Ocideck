@@ -1774,6 +1774,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Dit project is bijvangst van de Pilot Informatieautonomie.':
+      'See projekt on Pilot Informatieautonomie kõrvalsaadus.',
   'Stijlprofiel exporteren': 'Ekspordi stiiliprofiil',
   'Stijlprofiel importeren': 'Impordi stiiliprofiil',
   'Profiel exporteren': 'Ekspordi profiil',
