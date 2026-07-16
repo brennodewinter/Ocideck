@@ -1,15 +1,19 @@
 // State for the "Informatieveiligheid" module (PENTEST_MIAUW.md §6).
 //
-// A lightweight module framework: a single toggle, OFF by default, whose
-// enabled flag + provisioned pack version live in the one shared_preferences
-// domain (like every other setting). Enabling runs provisioning
-// (SecModuleProvisioner) and, on success, flips a REVEAL flag that the module's
-// features (the Informatieveiligheid picker tab, MIAUW templates and the
-// finding/checklist/scope-matrix slide types) read via [secModuleRevealProvider].
-// Disabling clears the reveal but KEEPS the cached pack.
+// A single toggle, OFF by default, whose enabled flag + provisioned pack version
+// live in the one shared_preferences domain (like every other setting). Enabling
+// runs provisioning (SecModuleProvisioner) and, on success, flips a REVEAL flag
+// that the module's features (the Informatieveiligheid picker tab, MIAUW
+// templates and the finding/checklist/scope-matrix slide types) read via
+// [secModuleRevealProvider]. Disabling clears the reveal but KEEPS the cached
+// pack.
 //
-// This is deliberately reusable: a future domain extension can reuse the same
-// enable → provision → reveal pattern.
+// This is NOT a reusable module framework, despite the enable → provision →
+// reveal shape: the preference keys, the bundled-pack loader and the reveal
+// check are all hardcoded to this one module, and [secModuleRevealProvider] is a
+// single global that its consumers name directly. A second module needs a real
+// registry (module id, parameterised keys, per-module reveal) — build that when
+// one actually arrives, rather than budgeting to "reuse" this.
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_riverpod/flutter_riverpod.dart';

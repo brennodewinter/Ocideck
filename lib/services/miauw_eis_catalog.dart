@@ -12,7 +12,10 @@ import '../models/eis_entry.dart';
 ///
 /// This is the always-on offline floor that drives the compliance overview; the
 /// provisioned data pack (§6) can carry the same schema for out-of-band updates.
-/// Titles are bundled normative content (Dutch, data — not localised UI, §12);
+/// Titles are bundled normative content: data, not localised UI. They are Dutch
+/// only — no bundled catalog or pack manifest carries a language dimension
+/// today. (§12 describes NL+EN provisioning; that does not exist, so do not read
+/// this as §12 sanctioning Dutch-only.)
 /// `4.6` is an empty number in the source workbook, and the two `2.2.9` rows in
 /// the workbook are disambiguated as `2.2.9` / `2.2.9b`.
 class MiauwEisCatalog {
