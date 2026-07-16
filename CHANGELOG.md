@@ -8,6 +8,11 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Images in a deck opened from git now load, and are stored once per
+  repository.** A picture used by five presentations is one file in the
+  repository, named after a hash of its own bytes — so adding it again cannot
+  duplicate it. The bytes are re-hashed on the way in: a repository claiming a
+  file is a given image has to prove it.
 - **Decks can be opened from a git repository (Forgejo/Gitea).** A folder gives
   you the latest version of a presentation; a repository keeps every version
   you ever saved. This is the first slice: read-only opening, configured under
