@@ -343,6 +343,14 @@ Why this satisfies the goal:
 - **Filename = content hash.** Two decks using the same image both reference
   `assets/<hash>.png`. Physically it exists once. This *enforces* de-duplication
   rather than hoping for it.
+- **…and the hash is verified on read, not assumed.** A hash-named path proves
+  nothing on its own: a forge is untrusted (P5) and can serve whatever it likes
+  under `assets/<hash>.png`. Because pooled blobs are cached — and a
+  content-addressed cache is naturally shared *across* repos, since the key is
+  the content — an unverified read would let one hostile repository poison the
+  bytes an honest one later gets. So `AssetPool` re-hashes every fetched blob
+  and fails closed on a mismatch. Content-addressed storage that never checks
+  the address is just a filename.
 - **The hashing machinery exists.** `image_dedup_service.dart` already hashes
   images in an isolate (md5). Reuse it, but standardise the pool on **SHA-256**
   for collision resistance (md5 stays fine for the existing in-session dedup UI).
