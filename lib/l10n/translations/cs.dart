@@ -1786,6 +1786,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Dit project is bijvangst van de Pilot Informatieautonomie.':
+      'Tento projekt je vedlejším produktem Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Exportovat profil stylu',
   'Stijlprofiel importeren': 'Importovat profil stylu',
   'Profiel exporteren': 'Exportovat profil',

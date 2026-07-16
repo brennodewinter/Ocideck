@@ -1806,6 +1806,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Dit project is bijvangst van de Pilot Informatieautonomie.':
+      'Този проект е страничен продукт на Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Експортиране на стилов профил',
   'Stijlprofiel importeren': 'Импортиране на стилов профил',
   'Profiel exporteren': 'Експортиране на профил',

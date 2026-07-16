@@ -741,6 +741,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Dit project is bijvangst van de Pilot Informatieautonomie.':
+      'Dit projekt is byfangst fan de Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Styleprofyl eksportearje',
   'Stijlprofiel importeren': 'Styleprofyl ymportearje',
   'Profiel exporteren': 'Profyl eksportearje',

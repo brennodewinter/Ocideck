@@ -1799,6 +1799,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Dit project is bijvangst van de Pilot Informatieautonomie.':
+      'Hoc opus fructus secundarius Pilot Informatieautonomie est.',
   'Stijlprofiel exporteren': 'Prosopographiam stili exportare',
   'Stijlprofiel importeren': 'Prosopographiam stili importare',
   'Profiel exporteren': 'Prosopographiam exportare',

@@ -1790,6 +1790,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Dit project is bijvangst van de Pilot Informatieautonomie.':
+      'Ovaj projekt nusproizvod je projekta Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Izvezi profil stila',
   'Stijlprofiel importeren': 'Uvezi profil stila',
   'Profiel exporteren': 'Izvezi profil',

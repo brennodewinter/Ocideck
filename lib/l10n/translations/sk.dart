@@ -1790,6 +1790,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Dit project is bijvangst van de Pilot Informatieautonomie.':
+      'Tento projekt je vedľajším produktom Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Exportovať profil štýlu',
   'Stijlprofiel importeren': 'Importovať profil štýlu',
   'Profiel exporteren': 'Exportovať profil',

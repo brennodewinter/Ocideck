@@ -1801,6 +1801,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Dit project is bijvangst van de Pilot Informatieautonomie.':
+      'Цей проєкт є побічним продуктом Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Експортувати профіль стилю',
   'Stijlprofiel importeren': 'Імпортувати профіль стилю',
   'Profiel exporteren': 'Експортувати профіль',

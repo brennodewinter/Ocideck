@@ -1802,6 +1802,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Dit project is bijvangst van de Pilot Informatieautonomie.':
+      'Acest proiect este un produs secundar al Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Exportă profilul de stil',
   'Stijlprofiel importeren': 'Importă profilul de stil',
   'Profiel exporteren': 'Exportă profilul',

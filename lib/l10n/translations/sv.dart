@@ -1782,6 +1782,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Dit project is bijvangst van de Pilot Informatieautonomie.':
+      'Det här projektet är en biprodukt av Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Exportera stilprofil',
   'Stijlprofiel importeren': 'Importera stilprofil',
   'Profiel exporteren': 'Exportera profil',

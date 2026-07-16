@@ -1758,6 +1758,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Dit project is bijvangst van de Pilot Informatieautonomie.':
+      'Pilot Informatieautonomie vumtaHvIS chenpu\' Dochvam.',
   'Stijlprofiel exporteren': 'Segh nab DoQmeH yIngeH',
   'Stijlprofiel importeren': 'Segh nab yIkII\'',
   'Profiel exporteren': 'nab DoQmeH yIngeH',

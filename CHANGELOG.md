@@ -8,6 +8,9 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **The About screen names where the project comes from.** Right above "Waar
+  komt de naam vandaan?" it now says that OciDeck is a by-product of the Pilot
+  Informatieautonomie, with a link to www.pilotinformatieautonomie.nl.
 - **Style profiles can be exported and imported as a file.** A profile could
   only travel inside a deck (in the front matter); there was no way to download
   one or load one in. Two buttons next to the profile name (Settings →

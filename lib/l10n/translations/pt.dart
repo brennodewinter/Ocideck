@@ -1813,6 +1813,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Dit project is bijvangst van de Pilot Informatieautonomie.':
+      'Este projeto é um subproduto do Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Exportar perfil de estilo',
   'Stijlprofiel importeren': 'Importar perfil de estilo',
   'Profiel exporteren': 'Exportar perfil',

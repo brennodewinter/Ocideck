@@ -740,6 +740,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Dit project is bijvangst van de Pilot Informatieautonomie.':
+      'Dieses Projekt ist ein Nebenprodukt des Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Stilprofil exportieren',
   'Stijlprofiel importeren': 'Stilprofil importieren',
   'Profiel exporteren': 'Profil exportieren',

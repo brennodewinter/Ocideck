@@ -740,6 +740,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Dit project is bijvangst van de Pilot Informatieautonomie.':
+      'E proyekto aki ta un subprodukto di e Pilot Informatieautonomie.',
   'Stijlprofiel exporteren': 'Eksportá perfil di estilo',
   'Stijlprofiel importeren': 'Importá perfil di estilo',
   'Profiel exporteren': 'Eksportá perfil',
