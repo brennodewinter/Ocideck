@@ -105,7 +105,7 @@ void main() {
     expect(slides[1].id, isNot(originalId));
   });
 
-  test('splitSlide moves overflow bullets onto a fresh second slide', () {
+  test('splitSlide spreads a full slide over enough pages that none stays full', () {
     // Layout-metingen gebruiken TextPainter; binding moet geïnitialiseerd zijn.
     TestWidgetsFlutterBinding.ensureInitialized();
     final n = _notifier()..newDeck('D');
@@ -115,25 +115,24 @@ void main() {
 
     n.splitSlide(1);
 
-    final slides = n.state.deck!.slides;
-    expect(slides, hasLength(3));
-    final first = slides[1];
-    final second = slides[2];
-    expect(first.type, SlideType.bullets);
-    expect(second.type, SlideType.bullets);
-    expect(second.id, isNot(first.id));
-    // Beide helften houden minstens één bullet en samen zijn ze het origineel.
-    expect(first.bullets, isNotEmpty);
-    expect(second.bullets, isNotEmpty);
-    expect([...first.bullets, ...second.bullets], bullets);
-    // Slide 1 houdt het optimum: de leesbaarheidsdrempel (8 bullets), niet het
-    // fysieke maximum dat nog zou passen.
-    expect(first.bullets.length, kSingleColumnBulletWarningCount);
-    expect(second.bullets.length, 30 - kSingleColumnBulletWarningCount);
-    // Alleen de tweede helft is een vervolgpagina: die deelt straks de
-    // fontgrootte met de eerste; de eerste blijft een gewone (start)slide.
-    expect(first.continuesSplit, isFalse);
-    expect(second.continuesSplit, isTrue);
+    final pages = n.state.deck!.slides.skip(1).toList();
+    // Meerdere pagina's, elk binnen de leesbaarheidsdrempel: geen enkele blijft
+    // overvol (de gemelde klacht was juist een nog volle slide na het splitsen).
+    expect(pages.length, greaterThan(2));
+    for (final p in pages) {
+      expect(p.type, SlideType.bullets);
+      expect(p.bullets, isNotEmpty);
+      expect(
+        p.bullets.length,
+        lessThanOrEqualTo(kSingleColumnBulletWarningCount),
+      );
+    }
+    // Niets verdwijnt of wordt herordend; ids van vervolgpagina's zijn vers.
+    expect(pages.expand((p) => p.bullets).toList(), bullets);
+    expect(pages.map((p) => p.id).toSet(), hasLength(pages.length));
+    // Alleen de eerste is een startslide; de rest deelt de fontgrootte.
+    expect(pages.first.continuesSplit, isFalse);
+    expect(pages.skip(1).every((p) => p.continuesSplit), isTrue);
   });
 
   test('splitSlide breaks between groups so a heading is never stranded', () {
@@ -156,26 +155,35 @@ void main() {
 
     n.splitSlide(1);
 
-    final slides = n.state.deck!.slides;
-    expect(slides, hasLength(3));
-    final first = slides[1];
-    final second = slides[2];
-    // Split falls on a group boundary: page 2 opens with a heading and page 1
-    // does not end on one (no heading stranded with a stray bullet).
-    expect(isGroupHeading(second.bullets.first), isTrue);
-    expect(isGroupHeading(first.bullets.last), isFalse);
-    // Every heading kept on page 1 still has at least one bullet under it there.
-    for (var i = 0; i < first.bullets.length; i++) {
-      if (isGroupHeading(first.bullets[i])) {
-        expect(
-          i + 1 < first.bullets.length && !isGroupHeading(first.bullets[i + 1]),
-          isTrue,
-          reason: 'heading at $i has no bullet under it on page 1',
-        );
+    final pages = n.state.deck!.slides.skip(1).toList();
+    // Three equal groups fall onto three pages, each led by its heading — no
+    // group is cut across pages and no heading is stranded at a page foot.
+    expect(pages, hasLength(3));
+    for (final page in pages) {
+      final bullets = page.bullets;
+      expect(
+        isGroupHeading(bullets.first),
+        isTrue,
+        reason: 'page leads with a heading',
+      );
+      expect(
+        isGroupHeading(bullets.last),
+        isFalse,
+        reason: 'no heading stranded at the foot',
+      );
+      // Every heading on the page still has at least one bullet under it there.
+      for (var i = 0; i < bullets.length; i++) {
+        if (isGroupHeading(bullets[i])) {
+          expect(
+            i + 1 < bullets.length && !isGroupHeading(bullets[i + 1]),
+            isTrue,
+            reason: 'heading at $i has no bullet under it',
+          );
+        }
       }
     }
     // Nothing is lost or reordered.
-    expect([...first.bullets, ...second.bullets], items);
+    expect(pages.expand((p) => p.bullets).toList(), items);
   });
 
   test('splitSlide marks the second column-split half as a continuation', () {

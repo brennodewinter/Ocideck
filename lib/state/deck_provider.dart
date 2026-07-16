@@ -10,6 +10,7 @@ import '../models/settings.dart';
 import '../models/slide.dart';
 import '../services/ai_alt_text_cleanup.dart';
 import '../services/annotation_codec.dart';
+import '../services/bullet_pagination.dart';
 import '../services/checklist_templates.dart';
 import '../services/document_integrity.dart';
 import '../services/finding_context_score.dart';
@@ -400,90 +401,64 @@ class DeckNotifier extends StateNotifier<DeckState> {
     _mutate(deck.copyWith(slides: slides));
   }
 
-  /// Splitst de bulletslide op [index] in tweeën: het maximale aantal bullets
-  /// dat op natuurlijke grootte op één slide past blijft staan, de rest verhuist
-  /// naar een nieuwe slide erna. Doet niets als de slide geen (genoeg) bullets
-  /// heeft om te splitsen.
+  /// Splitst de bulletslide op [index] in zoveel gelijkmatige pagina's als nodig
+  /// zodat geen enkele nog overvol is; de vervolgpagina's komen er direct achter.
+  /// Doet niets als de slide geen (genoeg) bullets heeft om te splitsen.
   void splitSlide(int index) {
     final deck = state.deck;
     if (deck == null || index < 0 || index >= deck.slides.length) return;
-    final split = _splitSlide(deck.slides[index], deck.themeProfile.fontFamily);
-    if (split == null) return;
-    final slides = List<Slide>.from(deck.slides);
-    slides[index] = split.first;
-    slides.insert(index + 1, split.second);
+    final pages = _splitSlide(deck.slides[index], deck.themeProfile.fontFamily);
+    if (pages == null) return;
+    final slides = List<Slide>.from(deck.slides)
+      ..removeAt(index)
+      ..insertAll(index, pages);
     // De huidige slide krijgt nieuwe inhoud, dus forceer een editor-refresh.
     _mutate(deck.copyWith(slides: slides), bumpRevision: true);
   }
 
-  /// Bepaalt hoe de bulletslide [slide] in tweeën valt, of `null` als dat niet
-  /// kan (geen bullettype, of te weinig bullets om te splitsen).
-  ({Slide first, Slide second})? _splitSlide(Slide slide, String font) {
-    // Het optimum per pagina is het kleinste van wat op natuurlijke grootte past
-    // en de leesbaarheidsdrempel. Passen beide helften binnen dat optimum
-    // (len ≤ 2·cap), dan verdelen we netjes doormidden — zo voorkom je een scheve
-    // 8/2-splitsing. Zo niet, dan vullen we pagina 1 tot het optimum en laten de
-    // rest over; die kan de gebruiker desgewenst opnieuw splitsen tot de staart
-    // klein genoeg is. Resultaat ligt altijd in [1, len-1] zodat beide helften
-    // minstens één bullet houden.
-    int keepFor(int fit, int len, int limit) {
-      if (len < 2) return len; // niets te verplaatsen in deze kolom
-      final cap = fit < limit ? fit : limit;
-      final keep = len <= 2 * cap ? len ~/ 2 : cap;
-      return keep < 1 ? 1 : (keep > len - 1 ? len - 1 : keep);
-    }
-
+  /// Verdeelt de bulletslide [slide] over gelijkmatige pagina's die elk binnen
+  /// het optimum blijven (het kleinste van wat op ware grootte past en de
+  /// leesbaarheidsdrempel), of `null` als splitsen niet kan. Splitpunten vallen
+  /// op groepsgrenzen zodat geen tussenkop losraakt van zijn bullets. De eerste
+  /// pagina erft type/afbeelding en de continuesSplit-vlag van [slide] (want
+  /// [Slide.duplicate] kopieert imagePath/-caption/-size); elke vervolgpagina is
+  /// een continuation die de fontgrootte deelt.
+  List<Slide>? _splitSlide(Slide slide, String font) {
+    List<Slide> build(List<(List<String>, List<String>)> pages) => [
+      for (var i = 0; i < pages.length; i++)
+        (i == 0 ? slide : Slide.duplicate(slide)).copyWith(
+          bullets: pages[i].$1,
+          bullets2: pages[i].$2,
+          continuesSplit: i == 0 ? slide.continuesSplit : true,
+        ),
+    ];
     switch (slide.type) {
       case SlideType.bullets:
       case SlideType.bulletsImage:
-        final bullets = slide.bullets;
-        if (bullets.length < 2) return null;
-        final counts = bulletFitCounts(slide: slide, font: font);
+        if (slide.bullets.length < 2) return null;
         // Checklists houden hun ruimere optimum aan (consistent met de
         // waarschuwingsdrempel), zodat een lijst van 12 niet onnodig krimpt.
         final limit = slide.listStyle == ListStyle.checklist
             ? kChecklistBulletWarningCount
             : kSingleColumnBulletWarningCount;
-        final at = snapSplitToGroupBoundary(
-          bullets,
-          keepFor(counts.left, bullets.length, limit),
-        );
-        // De vervolgpagina erft standaard hetzelfde type en dezelfde afbeelding
-        // (Slide.duplicate kopieert imagePath/-caption/-size). Zo houden beide
-        // helften van een bulletsImage-slide gelijke tekstbreedte — nodig voor de
-        // gelijkmatige verdeling én de gedeelde fontgrootte. Wie de vervolgpagina
-        // liever zonder (of met een andere) afbeelding wil, wisselt dat per pagina
-        // via de TYPE-keuze in de editor.
-        final second = Slide.duplicate(
-          slide,
-        ).copyWith(bullets: bullets.sublist(at), continuesSplit: true);
-        return (
-          first: slide.copyWith(bullets: bullets.sublist(0, at)),
-          second: second,
-        );
+        final fit = bulletFitCounts(slide: slide, font: font).left;
+        return build([
+          for (final p in paginateBulletsToFit(
+            slide.bullets,
+            bulletPageCap(fit, limit),
+          ))
+            (p, const <String>[]),
+        ]);
       case SlideType.twoBullets:
-        final left = slide.bullets;
-        final right = slide.bullets2;
-        if (left.length < 2 && right.length < 2) return null;
-        final counts = bulletFitCounts(slide: slide, font: font);
+        if (slide.bullets.length < 2 && slide.bullets2.length < 2) return null;
         const perColumn = kTwoColumnBulletWarningCount ~/ 2;
-        final leftAt = snapSplitToGroupBoundary(
-          left,
-          keepFor(counts.left, left.length, perColumn),
-        );
-        final rightAt = snapSplitToGroupBoundary(
-          right,
-          keepFor(counts.right, right.length, perColumn),
-        );
-        return (
-          first: slide.copyWith(
-            bullets: left.sublist(0, leftAt),
-            bullets2: right.sublist(0, rightAt),
-          ),
-          second: Slide.duplicate(slide).copyWith(
-            bullets: left.sublist(leftAt),
-            bullets2: right.sublist(rightAt),
-            continuesSplit: true,
+        final counts = bulletFitCounts(slide: slide, font: font);
+        return build(
+          paginateTwoColumnsToFit(
+            slide.bullets,
+            bulletPageCap(counts.left, perColumn),
+            slide.bullets2,
+            bulletPageCap(counts.right, perColumn),
           ),
         );
       default:

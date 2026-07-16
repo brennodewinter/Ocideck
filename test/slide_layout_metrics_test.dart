@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/bullet_pagination.dart';
 import 'package:ocideck/services/slide_layout_metrics.dart';
 
 void main() {
@@ -294,6 +295,112 @@ void main() {
       run(availW: 81); // 5: different available width
       run(availH: 61); // 6: different available height
       expect(calls, 6, reason: 'every distinct key must miss and recompute');
+    });
+  });
+
+  group('bulletPageCap', () {
+    test('is the smaller of fit and limit, never below one', () {
+      expect(bulletPageCap(3, 8), 3);
+      expect(bulletPageCap(20, 8), 8);
+      expect(bulletPageCap(0, 8), 1);
+      expect(bulletPageCap(5, 0), 1);
+    });
+  });
+
+  group('pageCountToFit', () {
+    test('is ceil(len/cap) without headings, minimum two', () {
+      expect(pageCountToFit(List.filled(10, 'x'), 8), 2); // 5/5
+      expect(pageCountToFit(List.filled(16, 'x'), 8), 2);
+      expect(pageCountToFit(List.filled(17, 'x'), 8), 3);
+      expect(pageCountToFit(List.filled(30, 'x'), 8), 4);
+      expect(pageCountToFit(List.filled(6, 'x'), 8), 2); // fits, still splits
+      expect(pageCountToFit(List.filled(10, 'x'), 2), 5); // long bullets
+    });
+
+    test('keeps whole groups together, one page per group that fits', () {
+      final items = <String>[
+        for (final g in ['A', 'B', 'C']) ...[
+          groupHeadingBullet(g),
+          for (var i = 0; i < 4; i++) 'bullet',
+        ],
+      ]; // three groups of five, 15 items
+      expect(pageCountToFit(items, 8), 3); // 5/5/5, not 8/7 across a group
+    });
+
+    test('cuts a single group larger than a page across pages', () {
+      final items = <String>[
+        groupHeadingBullet('Big'),
+        for (var i = 0; i < 20; i++) 'b',
+      ];
+      expect(
+        pageCountToFit(items, 8),
+        3,
+      ); // 21 items in one group -> ceil(21/8)
+    });
+  });
+
+  group('paginateBulletsToFit', () {
+    List<String> gen(int n) => [for (var i = 0; i < n; i++) 'bullet $i'];
+
+    test('splits a full list into balanced pages that each fit', () {
+      final pages = paginateBulletsToFit(gen(30), 8);
+      expect(pages.map((p) => p.length).toList(), [8, 8, 7, 7]);
+      expect(
+        pages.expand((p) => p).toList(),
+        gen(30),
+      ); // nothing lost/reordered
+      expect(pages.every((p) => p.length <= 8 && p.isNotEmpty), isTrue);
+    });
+
+    test('never peels off a lopsided tail when few bullets fit', () {
+      // The reported bug: cap 2 used to give 2/8; now every page holds two.
+      expect(paginateBulletsToFit(gen(10), 2).map((p) => p.length).toList(), [
+        2,
+        2,
+        2,
+        2,
+        2,
+      ]);
+    });
+
+    test('divides a fitting list evenly in two on request', () {
+      expect(paginateBulletsToFit(gen(6), 8).map((p) => p.length).toList(), [
+        3,
+        3,
+      ]);
+    });
+
+    test('breaks on group boundaries so a heading leads every page', () {
+      final items = <String>[
+        for (final g in ['Ochtend', 'Middag', 'Avond']) ...[
+          groupHeadingBullet(g),
+          for (var i = 0; i < 4; i++) 'bullet',
+        ],
+      ];
+      final pages = paginateBulletsToFit(items, 8);
+      expect(pages, hasLength(3));
+      for (final page in pages) {
+        expect(
+          isGroupHeading(page.first),
+          isTrue,
+          reason: 'page leads with a heading',
+        );
+        expect(
+          isGroupHeading(page.last),
+          isFalse,
+          reason: 'no heading stranded at the foot',
+        );
+      }
+      expect(pages.expand((p) => p).toList(), items);
+    });
+  });
+
+  group('spreadBulletsOverPages', () {
+    test('pads with empty trailing pages when items run short', () {
+      final pages = spreadBulletsOverPages(['a', 'b', 'c'], 5, 7);
+      expect(pages, hasLength(5));
+      expect(pages.expand((p) => p).toList(), ['a', 'b', 'c']);
+      expect(pages.where((p) => p.isEmpty), hasLength(2));
     });
   });
 }

@@ -118,7 +118,8 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `scope_coverage.dart` — `deckScopeCoverageGaps`: flags in-scope objects with no test and no finding.
 - `finding_context_score.dart` — builds the deck's scope-object→CIA index and derives each finding's context (environmental) score / effective severity from it.
 - `secret_store.dart` — Manages secrets (WebDAV credentials, AI API key) in the OS keychain.
-- `slide_layout_metrics.dart` — Layout constants/helpers for text sizing, fonts, and fit scaling.
+- `slide_layout_metrics.dart` — Layout constants/helpers for text sizing, fonts, and fit scaling; `bulletFitCounts` measures how many bullets fit at natural size (the input to the "Split slide" page capacity).
+- `bullet_pagination.dart` — Pure "Split slide" pagination (`bulletPageCap`, `pageCountToFit`, `paginateBulletsToFit`/`paginateTwoColumnsToFit`, `spreadBulletsOverPages`) that spreads an over-full bullet list into balanced, group-aware pages so none stays full.
 - `slide_quality_analyzer.dart` — Checks deck slides for accessibility and readability issues.
 - `slide_rasterizer.dart` — Renders on-screen slide previews to PNG for WYSIWYG PDF/PPTX export.
 - `text_measurement.dart` — `measureTextHeight`/`measureTextWidth` for rendered text dimensions.

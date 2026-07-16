@@ -850,24 +850,6 @@ double richTextFitScale({
   }
 }
 
-/// Shift a split point down to a group-heading boundary so a group heading
-/// ("tussenkop") is never stranded with a stray bullet at the foot of a page.
-///
-/// Given the natural split index [at] (from [bulletFitCounts] + the caller's
-/// readability cap), this returns the largest index `i` in `[ceil(at/2), at]`
-/// where `bullets[i]` starts a group heading — so page 1 keeps whole groups and
-/// stays at least half as full as the natural fit. With no suitable boundary the
-/// index is unchanged, and a group larger than one page is cut as before.
-int snapSplitToGroupBoundary(List<String> bullets, int at) {
-  if (at < 1 || at >= bullets.length) return at;
-  final minKeep = (at / 2).ceil();
-  var best = at;
-  for (var i = minKeep; i <= at; i++) {
-    if (isGroupHeading(bullets[i])) best = i;
-  }
-  return best;
-}
-
 /// Layout metrics for a bullets + image slide. [extraVReserve] reserves extra
 /// vertical space (bijv. de logostrook) zodat de gedeelde split-schaal die net zo
 /// vrijhoudt als de live layout.
