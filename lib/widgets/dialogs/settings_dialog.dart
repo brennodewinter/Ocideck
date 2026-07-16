@@ -203,9 +203,9 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     Icons.shield_outlined,
     Icons.smart_toy_outlined,
     Icons.cloud_outlined,
-    Icons.menu_book_outlined,
-    Icons.extension_outlined,
     Icons.checklist_outlined,
+    Icons.extension_outlined,
+    Icons.menu_book_outlined,
     Icons.info_outline,
   ];
 
@@ -507,9 +507,9 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       _tabBody(_securityTab()),
       _tabBody(_aiTab()),
       _tabBody(_webdavTab()),
-      _tabBody(_documentationTab()),
-      _tabBody(_modulesTab()),
       _tabBody(_checklistsTab()),
+      _tabBody(_modulesTab()),
+      _tabBody(_documentationTab()),
       _tabBody(_aboutTab()),
     ];
 

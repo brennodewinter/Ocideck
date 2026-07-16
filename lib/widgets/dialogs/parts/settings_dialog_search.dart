@@ -75,9 +75,9 @@ extension _SettingsSearch on _SettingsDialogState {
     l10n.d('Beveiliging'),
     l10n.d('AI-assistentie'),
     l10n.d('Nextcloud'),
-    l10n.d('Documentatie'),
-    l10n.d('Uitbreidingen'),
     l10n.d('Checklists'),
+    l10n.d('Uitbreidingen'),
+    l10n.d('Documentatie'),
     l10n.d('Over OciDeck'),
   ];
 
