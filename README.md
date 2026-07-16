@@ -34,7 +34,7 @@ Built with Flutter for macOS, Windows, Linux, and **web**.
 - **Productivity** — find & replace, slide finder, undo/redo, skip-slide state, multi-select with bulk copy-to-another-deck / delete / skip, and tabbed multi-deck editing. Paste a spreadsheet selection (or CSV / a markdown table) into a table cell to fill the whole grid. **Markdown mode** edits the whole deck as raw Marp text, with an in-editor find bar (`Ctrl/Cmd+F`, replace via `Ctrl/Cmd+H`) over the live buffer, plus a structural syntax check (line highlights, optional **Apply anyway**) before switching back. `Ctrl/Cmd+O` opens, `Ctrl/Cmd+S` saves.
 - **Accessibility** — WCAG 2.1-oriented: interface text scaling up to 200%, keyboard-operable panel divider and dialogs, screen-reader labels for slides and charts (charts read out their data), and slide-change announcements while presenting.
 - **Crash recovery** — automatic snapshots so work survives an unexpected exit.
-- **Theming** — customizable deck style profiles (deck and source-code colours via presets or custom hex, fonts, logo, footer) and app appearance (including a dark interface), a bundled Marp CSS theme (`assets/themes/ocideck.css`), and a bundled EB Garamond font (no network fetch).
+- **Theming** — customizable deck style profiles (deck and source-code colours via presets or custom hex, fonts, logo, footer) and app appearance (including a dark interface), a bundled Marp CSS theme (`assets/themes/ocideck.css`), and a bundled EB Garamond font (no network fetch). A style profile can be exported to and imported from a standalone `.ocideckstyle` file — logo included — so a house style travels between installs without a deck around it.
 - **Localized** — a fully translated interface in **31 languages**: Dutch, English, German, French, Italian, Spanish, Portuguese, Polish, Czech, Slovak, Slovenian, Croatian, Bulgarian, Romanian, Hungarian, Greek, Danish, Swedish, Finnish, Estonian, Latvian, Lithuanian, Maltese, Irish, Ukrainian, Indonesian, Frisian, Swiss German, Latin, Papiamento, and Klingon. Every interface string is translated in all of them, enforced by tests.
 
 ## Requirements
@@ -107,8 +107,10 @@ Presentations are saved as standard, Marp-compatible Markdown (`.md`) with a
 defined project folder layout and an optional portable `.ocideck` package.
 Anything that isn't plain Marp is kept in side files so the `.md` stays pure and
 portable: image captions, the annotation layer (`.ink.json`), and linked chart
-data (`data/*.csv`). The full specification — front matter, per-slide markup,
-style profile, sidecars, and the package format — is documented in
+data (`data/*.csv`). A style profile also travels on its own as a
+`.ocideckstyle` file (JSON, with any custom logo embedded). The full
+specification — front matter, per-slide markup, style profile, sidecars, and the
+package format — is documented in
 [`docs/FILE_FORMAT.md`](docs/FILE_FORMAT.md).
 
 ## Documentation
@@ -120,7 +122,7 @@ style profile, sidecars, and the package format — is documented in
 | [Changelog](CHANGELOG.md) | Notable changes per version |
 | [Checks & CI](docs/CHECKS.md) | Every automated check, what it covers, and how each is enforced |
 | [Contributing](CONTRIBUTING.md) | Setup, the quality gate, and how to propose changes |
-| [File format](docs/FILE_FORMAT.md) | The Marp Markdown, front matter, sidecars, and `.ocideck` package |
+| [File format](docs/FILE_FORMAT.md) | The Marp Markdown, front matter, sidecars, the `.ocideck` package, and the `.ocideckstyle` style profile |
 | [Keyboard shortcuts](docs/SHORTCUTS.md) | Editor and presenter shortcuts |
 | [Licence compliance](docs/LICENSE_COMPLIANCE.md) | Open-source policy and the `make licenses` check |
 | [SBOM](docs/SBOM.md) | The machine-readable Software Bill of Materials and its CRA mapping |

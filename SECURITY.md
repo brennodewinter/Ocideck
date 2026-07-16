@@ -39,8 +39,8 @@ service disruption while researching.
 
 OciDeck is an offline desktop application. Areas of particular interest:
 
-- Parsing of untrusted decks (`.md`), packages (`.ocideck`), sidecars
-  (`.ink.json`, captions), and linked CSV data.
+- Parsing of untrusted decks (`.md`), packages (`.ocideck`), style profiles
+  (`.ocideckstyle`), sidecars (`.ink.json`, captions), and linked CSV data.
 - Importing presentations from a URL.
 - The **Nextcloud (WebDAV) source** — a user-configured server the app
   authenticates to (basic auth) and reads/writes files on, including how its
@@ -105,8 +105,21 @@ OciDeck constrains what an opened deck can do:
   sink for clipboard or export.
 - **Size limits.** A deck `.md` is capped at 32 MiB on open; `.ocideck`
   packages at 512 MiB / 10 000 entries with zip-slip and decompression-bomb
-  guards; URL imports use an `http`/`https` allowlist with an SSRF host
+  guards; a `.ocideckstyle` style profile at 16 MiB with its embedded logo at
+  8 MiB; URL imports use an `http`/`https` allowlist with an SSRF host
   blocklist and no redirect following.
+- **Style profiles are validated, not trusted.** A profile carries colours and
+  font names that are interpolated into a `<style>` block on export, so an
+  unvalidated value like `red}</style>…<style>` would be a CSS/HTML injection.
+  Every profile — whether it arrives inlined in a deck's front matter or as a
+  standalone `.ocideckstyle` — passes through the single hardened gate
+  `ThemeProfile.fromJson`, which validates each colour to a strict `#RRGGBB`
+  literal and whitelists font families against the offered set, falling back to
+  the default for anything else. This matters because the import-safety scanner
+  never sees the base64 front-matter payload. An embedded logo is accepted only
+  after a magic-byte check (its declared MIME type is ignored and re-derived
+  from the bytes), and a profile that carries a bare `logoPath` without an
+  embedded image has that path dropped rather than resolved.
 - **Render/export sanitization.** Deck content rendered to HTML is sanitized
   with the bundled DOMPurify before insertion into the DOM, and the export
   carries a **nonce-based Content-Security-Policy** (`script-src 'nonce-…';

@@ -104,6 +104,18 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
   ),
   SettingsSearchEntry(
     tab: 2,
+    label: 'Profiel exporteren',
+    sectionKey: 'styleProfile',
+    keywords: ['exporteren', 'downloaden', 'opslaan', 'delen', 'huisstijl'],
+  ),
+  SettingsSearchEntry(
+    tab: 2,
+    label: 'Profiel importeren',
+    sectionKey: 'styleProfile',
+    keywords: ['importeren', 'inladen', 'openen', 'huisstijl'],
+  ),
+  SettingsSearchEntry(
+    tab: 2,
     label: 'Achtergrond slides',
     sectionKey: 'settingsColors',
     keywords: ['kleur', 'achtergrond', 'slide'],
