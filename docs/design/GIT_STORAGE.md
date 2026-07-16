@@ -62,7 +62,7 @@ Three hosting providers are in scope, in this order of priority:
   exactly as the WebDAV source lets them point at *their* storage.
 - OciDeck **bundles no git binary and links no git library** — see the decision
   in §4.3. Native git is used *if present*, never shipped.
-- No Git-LFS in v1 (§14, OQ-5).
+- No Git-LFS in v1 (§14, D5).
 
 ---
 
@@ -321,6 +321,16 @@ repo/
     librekat.css
 ```
 
+**A repo is a trust boundary, and that is what decides its granularity.** Forge
+access control is all-or-nothing: everyone who can read the repo reads *every*
+deck in it. So a repo holds many decks — the asset pool needs that (P4) — but it
+holds decks that **share an audience**: one repo per client, per engagement, or
+per classification level. Do not put a TLP:RED pentest report and a public deck
+in one repo and expect the forge to keep them apart. It cannot, and the shared
+pool would straddle the boundary as well: an asset is reachable by anyone who can
+read the repo, whatever the classification of the deck that introduced it.
+OciDeck does not enforce this — the forge's permissions do (§14, D6).
+
 Why this satisfies the goal:
 
 - **Filename = content hash.** Two decks using the same image both reference
@@ -497,6 +507,13 @@ from "save" is only shown when it is true; otherwise the user sees a single
 
 - The mirror is a **real clone** under the app-support path. The working tree is
   exactly the repo layout of §6, because it *is* the repo.
+- Cloned with `--filter=blob:none` — a **partial clone**, so blobs are fetched
+  only when a deck actually needs them. This matters because a full clone would
+  otherwise pull every video in the repo's entire history to open one deck: 4 GB
+  of media would cost 4 GB to open a text file. With the filter, opening costs
+  megabytes and blobs arrive on demand, which is the same lazy-fetch shape the
+  REST plane already has. Requires git ≥2.19 and forge support — Forgejo, GitHub
+  and GitLab all have it (§14, D5).
 - Saving writes files locally and immediately (as desktop already works — a real
   `filePath`), then `git add` + `git commit`. Offline, this is a complete,
   durable, real commit. Ten commits on a plane stay ten commits.
@@ -529,8 +546,11 @@ from "save" is only shown when it is true; otherwise the user sees a single
 not the build. It is a **runtime probe**, cached for the process lifetime, and
 therefore belongs in a provider (`gitCapabilityProvider`) rather than a getter:
 
-- probe `git --version` with `Process.run`, require a **minimum version** so that
-  plumbing behaviour cannot drift under us (§14, OQ-8),
+- probe `git --version` with `Process.run` and require a **minimum version**, so
+  that plumbing behaviour cannot drift under us and so that `--filter=blob:none`
+  (§8.2) is actually available. Below that version the native plane is refused
+  **wholesale** and the repo falls back to REST — never feature-by-feature, which
+  would multiply into a test matrix nobody can hold (§14, D8),
 - `kIsWeb` short-circuits to `false` before any `dart:io` access — the ordering
   gotcha already documented at `lib/services/open_file_channel.dart:22`
   (`Platform.isMacOS` is a throwing stub on web).
@@ -608,9 +628,22 @@ enforcement), evaluated *before* the PR is opened and *before* the tag is
 created. A tag is a durable, advertised pointer — it must not be able to publish
 a deck past its classification ceiling any more than an export can.
 
-**Tag naming must be deck-scoped.** A repo holds many decks (§6), so a flat
-`v1.0` is ambiguous. Tags are namespaced per deck — `decks/kwartaalcijfers/v1.0`
-(git permits `/` in tag names) or `kwartaalcijfers-v1.0`; see §14, OQ-9.
+**The branch is generated, not authored** (§14, D3). Each editing round starts a
+fresh branch off current `main`, named
+`decks/<naam>/<datum>` — so every release PR is a clean diff against an
+up-to-date base, and there is no long-lived branch drifting away from `main` that
+someone must remember to back-merge. The user never types a branch name and, in
+the normal flow, never sees one: the UI speaks of a **concept** (the open branch)
+and an **uitgebrachte versie** (the tag). Stale merged branches are the forge's
+to prune, and the UI offers it after a merge.
+
+**Tag names are deck-scoped** (§14, D9). A repo holds many decks (§6), so a flat
+`v1.0` would be ambiguous; tags are `decks/<naam>/v1.0`. Git permits `/` in tag
+names, the form groups readably in forge UIs, and tag-protection patterns like
+`decks/*/v*` fall out naturally — which matters, because a release tag is gated
+under P8 and therefore deserves protecting. Git's D/F conflict (a ref `a/b`
+cannot coexist with a ref `a`) does not bite here: `decks/<naam>` is itself never
+a tag.
 
 The UI surfaces tags as a **version picker**: open `v1.0` of a deck read-only,
 diff it against `v2.0`, or branch a new revision from it.
@@ -630,16 +663,56 @@ requests. What OciDeck must add is small but real:
 - **Attribution** — commits carry an author identity. OciDeck needs a name/email
   setting per repo (it must not silently reuse a global `user.name` it did not
   set, nor invent one).
+- **Signing** — **SSH commit signing, optional, native plane only** (§14, D11).
+  SSH is chosen over GPG deliberately: a key plus an `allowed_signers` file, no
+  keyring to manage. It is *optional* because of an asymmetry that cannot be
+  engineered away: on the REST plane the forge builds the commit server-side, so
+  there is nothing client-side to sign with. Presenting signing as a property of
+  "a deck in git" would therefore be a lie on web. It is a property of a commit
+  made on a machine that has your key, and the UI must say exactly that — a
+  signed-commit badge on the history entry, never a claim about the deck.
 - **Awareness** — show that `main` has moved, and whose branch is open, from
   `listBranches`/`fetch`. Not presence, just freshness.
-- **Sidecar conflicts** — `.annotations`/`.notes` do not merge textually (§14,
-  OQ-7). This is the one place async collaboration needs a real answer.
+- **Sidecar conflicts** — `.notes` merges as text; `.annotations` unions (§14,
+  D7). See §9.7.
 
 The boundary with [`COLLABORATION.md`](COLLABORATION.md) is deliberate and should
 stay crisp: **git is for authors who are not in the room at the same time**;
 Matrix is for those who are. Git has no opinion on live cursors; the Matrix room
 has no opinion on last year's version. A future session may combine them (a room
 whose participants share a repo), but neither doc depends on the other landing.
+
+### 9.7 Sidecar merge semantics
+
+"Sidecars merge poorly" flattened a distinction worth keeping: the two sidecars
+are not the same kind of file, and each has its own right answer (§14, D7).
+
+- **`.notes` — speaker notes are text.** Git's ordinary text merge applies. No
+  special case, no custom driver. Two authors editing different slides' notes
+  merge cleanly, and a genuine same-line collision produces a conflict a human
+  can actually read and resolve.
+- **`.annotations` — ink strokes are additive.** Two people who drew on the same
+  slide did not disagree; they both drew. The merge is a **union of the stroke
+  sets**, keyed per slide and deduplicated by stroke identity. That is
+  semantically right rather than merely convenient: no ink is lost and there is
+  nothing for the user to arbitrate. It requires the annotation format to carry a
+  stable per-stroke identity — check this when wiring it up, and add one if it is
+  missing (`FILE_FORMAT.md`).
+
+On the native plane this is a **git merge driver** (`merge=ocideck-ink` in
+`.gitattributes`, registered in the clone's own config — never the user's global
+config, per §10.2), so `git merge` resolves it without OciDeck mediating. Two
+consequences must be respected rather than discovered later:
+
+- **A clone made by another tool has no driver.** The union must therefore also
+  be reproducible in-app, for when git hands back a file it could not merge.
+- **Union has one real failure mode: erasure.** If one side deletes a stroke and
+  the other keeps it, the union resolves to "kept" — the erase silently loses.
+  For ink that is usually the safe direction (P2: never lose content without
+  intent), but it *is* a semantic loss and it must be a conscious one. If erasure
+  needs to survive a merge, model it as a tombstone rather than an absence. Decide
+  this when the annotation format is pinned down; the choice belongs to that
+  format, not to this document.
 
 ---
 
@@ -650,7 +723,7 @@ whose participants share a repo), but neither doc depends on the other landing.
 - **Auth**: a **Personal Access Token** per repo, stored in `secret_store`
   (`flutter_secure_storage` / OS keychain), keyed by `baseUrl`+`owner` — the same
   pattern as WebDAV passwords. Never in settings/prefs. (OAuth device-flow is a
-  later nicety — OQ-2.)
+  later nicety — D2.)
 - **SSRF / self-hosted Forgejo**: on the REST plane, reuse
   `NetGuard.safeResolveTrusted` with the `trustedInternal` opt-in and socket
   pinning against DNS-rebind, exactly as `webdav_service.dart` does. HTTPS
@@ -750,8 +823,11 @@ Each phase is shippable and preserves the invariants.
 ### Phase 3 — Native git on desktop
 - `GitCli` with the §10.2 hardening; `gitCapabilityProvider` with the lazy probe
   and the macOS `xcode-select` guard (§8.4).
-- `NativeGitMirror implements DeckMirror` — clone, commit, fetch, push, merge,
-  log, tag. Real offline history; real merges.
+- `NativeGitMirror implements DeckMirror` — partial clone (D5), commit, fetch,
+  push, merge, log, tag. Real offline history; real merges.
+- The `.annotations` union merge driver + `.gitattributes` in the clone (§9.7).
+- **Prove OQ-10** (token delivery) on macOS, Windows and Linux before this phase
+  is called done; §10.2 is provisional until then.
 - Verify: same `DeckMirror` contract tests pass against both implementations.
   That equivalence is the phase's actual deliverable.
 
@@ -759,8 +835,10 @@ Each phase is shippable and preserves the invariants.
 - `createBranch`, `history`, `openPullRequest`, `mergePullRequest`, `createTag`,
   `listTags`.
 - Wire both PR-open and tag-create to the classification/TLP gate (fail-closed).
+- Generated per-round branches (D3); tag names per D9.
 - Branch picker, commit timeline, and the tag-based version picker.
-- Per-repo author identity for attribution (§9.6).
+- Per-repo author identity for attribution, and optional SSH commit signing on
+  the native plane (D11).
 
 ### Phase 5 — GitHub & GitLab adapters
 - Implement `GitHubForge` (Git Data API multi-file) and `GitLabForge`
@@ -830,41 +908,63 @@ is a deliberate consequence of §4.3, and worth checking still holds at merge ti
 
 ---
 
-## 14. Open questions (decide before/while implementing)
+## 14. Decisions
 
-- **OQ-1 — Hash algorithm & pool naming.** SHA-256 recommended for pool
-  filenames; keep the existing md5 for the in-session dedup UI, or migrate that
-  too? (Leaning: SHA-256 for the pool, md5 stays for the ephemeral UI.)
-- **OQ-2 — Auth.** PAT for v1 (decided). Add OAuth device-flow later per provider?
-- **OQ-3 — Branch strategy.** One long-lived work branch per deck, or a fresh
-  branch per editing session/release? Affects how "release" picks `head`.
-- **OQ-4 — Native git on desktop.** *Resolved (§4.3):* the user's `git` CLI as a
-  runtime-detected capability, with the REST plane as the fallback; nothing
-  bundled. libgit2 (`git2dart`) stays documented as the escape hatch behind
-  `DeckMirror` if git-absent proves common.
-- **OQ-5 — Large media / LFS.** Videos can be large, and a clone pulls *all* of
-  them — worse on the native plane than on the lazy REST one. Cap asset size,
-  warn, use partial clone (`--filter=blob:none`), or integrate Git-LFS later?
-- **OQ-6 — Multiple decks per repo vs one repo per deck.** The §6 layout assumes a
-  repo holds many decks (best for asset sharing). Do we also support pointing at a
-  repo whose root *is* a single deck? (Interacts with OQ-9.)
-- **OQ-7 — Sidecar conflicts.** `.annotations`/`.notes` merge poorly. On a
-  conflict, do we prefer local, prefer remote, or force a manual resolve for
-  sidecars specifically? Now sharper than before: the native plane can actually
-  reach a conflicted merge state, where the REST plane could only reload.
-- **OQ-8 — Minimum git version.** Which version do we require, and what do we do
-  on an older one — refuse the native plane and fall back to REST (safe,
-  consistent), or degrade feature by feature (fiddly)? Leaning: fall back wholesale.
-- **OQ-9 — Tag namespacing.** `decks/<naam>/v1.0` (slashes, groups nicely in
-  forge UIs) or `<naam>-v1.0` (flat, no ref-hierarchy edge cases: git refuses a
-  tag `a/b` if a tag `a` exists)? Leaning: the slash form, decided with OQ-6.
-- **OQ-10 — Token delivery to the `git` subprocess.** §10.2 proposes
-  `GIT_CONFIG_*` env vars with `http.extraHeader`, avoiding argv, the URL and
-  `.git/config`. Validate this against each forge, and confirm the token cannot
-  leak into a reflog, a trace (`GIT_TRACE`) or a crash report.
-- **OQ-11 — Which identity signs a commit?** §9.6 needs an author name/email per
-  repo. Do we offer commit **signing** (SSH/GPG) at all? For a project with this
-  security posture the question will be asked; the answer may still be "not v1".
+These were open questions; all but one are now decided. **The numbering is
+deliberately unchanged** (OQ-*n* → D-*n*), so references from the review
+discussion still resolve.
+
+- **D1 — Hash algorithm & pool naming.** **SHA-256** for pool filenames. The
+  existing **md5 stays** in the in-session dedup UI: that comparison is ephemeral
+  and never written to a durable name, so collision resistance is not what it is
+  for. No migration.
+- **D2 — Auth.** **PAT** for v1, in `secret_store` (§10.1). OAuth device-flow is a
+  later per-provider nicety, not a v1 blocker.
+- **D3 — Branch strategy.** A **fresh, generated branch per editing round**, cut
+  from current `main` and named `decks/<naam>/<datum>`. No long-lived per-deck
+  branch, so nothing drifts from `main` and nobody has to remember a back-merge.
+  The user never types or sees a branch name in the normal flow (§9.4).
+- **D4 — Native git on desktop.** The user's **`git` CLI as a runtime-detected
+  capability**, REST as the fallback; **nothing bundled**. libgit2 (`git2dart`)
+  stays documented as the escape hatch behind `DeckMirror` if git-absent proves
+  common (§4.3).
+- **D5 — Large media.** **Partial clone** (`--filter=blob:none`) plus a size
+  warning. No hard cap — telling a presentation author their video is too large
+  is a bad answer from a tool that supports video — and **no Git-LFS in v1**
+  (§8.2).
+- **D6 — Repo granularity.** **Many decks per repo**; the shared asset pool
+  requires it. A repo whose root is a single deck is **not** supported — one
+  layout, no detection. The governing rule is that **a repo is a trust boundary**:
+  one per client, engagement or classification level, because forge access is
+  all-or-nothing and the pool cannot straddle a boundary the forge does not
+  enforce (§6).
+- **D7 — Sidecar conflicts.** **Per type**: `.notes` is text and takes git's
+  ordinary text merge; `.annotations` is ink and **unions** the stroke sets via a
+  merge driver, because two people drawing on one slide did not disagree. Manual
+  resolution only where both fail (§9.7). Erasure-vs-union and per-stroke identity
+  are consequences that belong to the annotation file format, not to this document.
+- **D8 — Minimum git version.** Required, and enforced by the probe. Below it the
+  native plane is refused **wholesale** and the repo falls back to REST — never
+  feature-by-feature. `--filter=blob:none` (D5) puts the floor at **≥2.19**; pin
+  the exact number when Phase 3 starts (§8.4).
+- **D9 — Tag namespacing.** **`decks/<naam>/v1.0`**. Groups readably in forge UIs,
+  makes tag-protection patterns (`decks/*/v*`) natural for a ref that is gated
+  under P8, and avoids git's D/F conflict because `decks/<naam>` is never itself a
+  tag (§9.4).
+- **D11 — Identity & signing.** **Name/email per repo**, never a silently
+  inherited global `user.name`. **SSH commit signing, optional, native plane
+  only** — SSH over GPG for the lighter key story, and optional because the REST
+  plane builds commits server-side and has nothing to sign with. The UI presents
+  signing as a property of a *commit*, never of a deck (§9.6).
+
+### The one still open
+
+- **OQ-10 — Token delivery to the `git` subprocess.** Not a design choice but a
+  **verification task for Phase 3**. §10.2 proposes `GIT_CONFIG_*` env vars with
+  `http.extraHeader`, avoiding argv, the remote URL and `.git/config`. Validate it
+  against each forge, and confirm the token cannot leak into a reflog, a trace
+  (`GIT_TRACE`), a credential cache or a crash report. Do not consider §10.2 final
+  until this is proven on all three desktop platforms.
 
 ---
 
