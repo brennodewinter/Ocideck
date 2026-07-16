@@ -14,9 +14,11 @@
 > implementation session has everything it needs without re-deriving context.
 >
 > Sibling design doc: [`COLLABORATION.md`](COLLABORATION.md) (real-time
-> co-authoring). Git storage and collaboration are complementary — a room is a
-> disposable sync channel, a git repo is durable versioned storage — and share
-> the principle *file = truth*.
+> co-authoring). The two are complementary and split along a clean seam:
+> **git is asynchronous collaboration** (clone, branch, review, merge, release),
+> **Matrix is synchronous collaboration** (live co-editing and presenting in one
+> session). A room is a disposable sync channel; a git repo is durable versioned
+> storage. Both share the principle *file = truth*.
 
 ---
 
@@ -25,18 +27,26 @@
 OciDeck should be able to store decks in a **`.git` repository** in addition to
 the existing backends (local files, `.ocideck` packages, WebDAV/Nextcloud). This
 turns storage into **versioned storage**: every save is a commit, history and
-branches become first-class, and *releasing* a presentation becomes a pull
-request that is reviewed and merged.
+branches become first-class, *releasing* a presentation is a reviewed pull
+request plus a tag, and multiple authors can work on the same deck
+asynchronously.
 
 The full existing feature set must keep working against this backend:
 
-- **saving** a deck (→ commit + push),
+- **saving** a deck (→ commit, pushed when there is connectivity),
 - **opening / loading** a deck,
 - **searching** decks (text) and **searching images**,
 - **assets** (images, video) — with *deduplication* as an explicit goal, see §6,
-- **exporting / releasing** — release becomes **branch → pull request → merge**,
 - **offline authoring** — you must be able to write a presentation on a plane
-  with no network and sync later (see §8).
+  with no network and sync later (see §8),
+
+and the backend adds three genuinely new capabilities:
+
+- **versions of the same presentation** — `v1.0` and `v2.0` of one deck coexist
+  and are both retrievable, as annotated **tags** (§9.4),
+- **release as review** — a pull request against the default branch, gated by the
+  existing classification/TLP policy (§9.4),
+- **asynchronous collaboration** — clone, branch, review, merge (§9.6).
 
 Three hosting providers are in scope, in this order of priority:
 
@@ -46,12 +56,13 @@ Three hosting providers are in scope, in this order of priority:
 
 ### Non-goals (v1)
 
-- Not a general-purpose git client (no arbitrary rebase/cherry-pick UI, no
-  submodules, no LFS in v1 — see §12).
+- Not a general-purpose git client. OciDeck exposes the operations a deck author
+  needs (commit, branch, merge, tag, PR); it is not a rebase/cherry-pick UI.
 - OciDeck operates **no** server of its own. The user points at *their* forge,
   exactly as the WebDAV source lets them point at *their* storage.
-- Not re-implementing the git smart-HTTP wire protocol in the online path — see
-  the decision in §4.
+- OciDeck **bundles no git binary and links no git library** — see the decision
+  in §4.3. Native git is used *if present*, never shipped.
+- No Git-LFS in v1 (§14, OQ-5).
 
 ---
 
@@ -75,7 +86,8 @@ These are non-negotiable. Every phase must preserve them.
 - **P5 — Every inbound `.md` passes the import gate.** Content pulled from a forge
   is untrusted exactly like a URL/package import: it goes through
   `MarkdownSafetyScanner.scan` (`lib/services/markdown_safety.dart`) fail-closed,
-  and byte/entry caps apply. A forge is not more trusted than WebDAV.
+  and byte/entry caps apply. A forge is not more trusted than WebDAV. **Native
+  git does not change this** — a clone is an import, not a blessing.
 - **P6 — Provider-agnostic core.** All save/open/search/release logic is written
   against a thin `GitForge` interface. Forgejo/Gitea, GitHub and GitLab are
   implementations behind it. No provider-specific code leaks into the editor or
@@ -83,12 +95,17 @@ These are non-negotiable. Every phase must preserve them.
 - **P7 — Reuse, don't re-derive.** The deck→`{path: bytes}` mapping
   (`buildPackageMembers`), image hashing (`image_dedup_service`), SSRF hardening
   (`net_guard`), secret storage (`secret_store`), per-tab origin tracking
-  (`WebdavOrigin` → `GitOrigin`) and per-tab provider scope already exist. The git
-  backend is assembled from them, not built beside them.
-- **P8 — Release is gated.** Opening a release PR is subject to the existing
-  classification/TLP enforcement (`ExportService.export()` policy), fail-closed.
-  You cannot push a deck past its allowed classification ceiling by routing it
-  through git.
+  (`WebdavOrigin` → `GitOrigin`), per-tab provider scope and the capability
+  pattern in `lib/platform/` already exist. The git backend is assembled from
+  them, not built beside them.
+- **P8 — Release is gated.** Opening a release PR **and creating a release tag**
+  are subject to the existing classification/TLP enforcement
+  (`ExportService.export()` policy), fail-closed. You cannot push a deck past its
+  allowed classification ceiling by routing it through git.
+- **P9 — Native git is an enhancement, never a requirement.** Every feature has a
+  defined behaviour when `git` is absent (§4.2). The app must never dead-end
+  because a user has no git installed, and must never bundle one to avoid the
+  question (§4.3).
 
 ---
 
@@ -110,76 +127,176 @@ every building block exists:
 | Per-tab provider overrides | `ProviderScope` overrides per tab | `lib/widgets/app_shell.dart` |
 | Same-origin fetch-proxy (web CORS) | `/fetch-proxy?url=` | `lib/services/parts/file_service_net.dart` |
 | Classification/quality gate | policy evaluate, fail-closed | `lib/services/export_service.dart` |
+| **Platform capability with real stubs** | conditional import + `impl.*` getters | `lib/platform/platform_features.dart` |
+| **A network deck source that web deliberately does not get** | `supportsNetworkDeckSources == false` on web | `lib/platform/platform_features_web.dart` |
 
-The one genuinely new thing is a **`GitForge` REST client** per provider and a
-**`SyncEngine`**. Everything else is wiring.
+The last two rows matter for §4. The codebase already models "this platform can
+do less, and that is a designed answer, not a bug" — and it already has one
+network deck source (WebDAV) that is switched **off** on web, for SSRF and CORS
+reasons spelled out in `platform_features.dart:23-31`. Git storage takes a
+different route (it *is* offered on web, §11), and the doc owes an explicit
+reason why; see §4.4.
+
+The genuinely new things are a **`GitForge` REST client** per provider, a
+**`DeckMirror`** with two implementations, and a **`SyncEngine`**. Everything
+else is wiring.
 
 ---
 
-## 4. Key decision: forge REST APIs, not the git wire protocol
+## 4. Key decision: two data planes, one forge plane
 
-There are three ways to talk to a git host. The constraint that decides it is
-**web is a first-class target** and there are six platforms total.
+### 4.1 The split
 
-| Approach | Works on web? | Effort | PR/merge |
-|---|---|---|---|
-| A. Native git (`libgit2` / `git` CLI) | ❌ no | high (two code paths) | still needs per-forge REST |
-| B. Git smart-HTTP protocol in pure Dart (packfiles, ref negotiation) | ⚠️ CORS + huge | very high | still needs per-forge REST |
-| C. **Forge REST APIs** (Gitea/Forgejo, GitHub, GitLab) | ✅ yes | moderate, uniform | ✅ native in the API |
+Talking to a git host is two unrelated problems, and conflating them is what
+makes this design look harder than it is.
 
-**Decision: C for the online path.** The forge *is* the git server; history and
-branches already live there. Committing, branching, and opening a PR are all
-plain authenticated REST calls. This is uniform across providers, works on web,
-and is the direct generalisation of the WebDAV client already in the tree. A pull
-request is inherently a server-side, forge-specific concept anyway — the wire
-protocol has no notion of it — so B/A would not save that work.
+- **The data plane** moves commits, trees and blobs: `clone`, `fetch`, `push`,
+  `commit`, `merge`, `tag`, `log`. This is git proper.
+- **The forge plane** is everything git has no concept of: pull requests,
+  reviews, merge buttons, repo discovery, server-side code search. This is
+  **always provider-specific REST**, on every platform, no matter how the data
+  plane works. A pull request cannot be expressed in the wire protocol.
 
-**Offline is handled by a local mirror + sync, not by the wire protocol** (§8).
-On desktop that mirror *may* later be a real local git repo for true offline
-history; that is an optional enhancement behind the same interface, never a
-divergent second behaviour (§12, OQ-4).
+So the forge plane is settled: `GitForge` over hardened HTTP with a PAT (§7).
+The only real question is the data plane.
 
-The multi-file commit primitive is the only part where providers differ
-materially (§7.2); the adapter hides it.
+### 4.2 The data plane: native where possible, REST otherwise
+
+| | `git` present (desktop) | no `git`, or web |
+|---|---|---|
+| Save | real local commit, offline | draft + outbox, commit synthesised via REST |
+| Offline history | **many real commits** | one pending draft |
+| Merge | real `git merge`, conflict resolution | non-fast-forward → reload |
+| Tag | real annotated tag, offline | tag via REST |
+| Cross-deck search | local, cheap, over a full clone | REST search + lazy index |
+| Pull request | REST | REST |
+
+**Both columns ship.** The REST data plane is not a consolation prize — web needs
+it regardless, so it gets built either way. That is the decisive point: because
+the REST path exists anyway, **native git costs nothing to make optional**.
+"No git installed" is not a dead end, it is a degradation to the path the web
+build uses full-time (P9).
+
+What native git buys, and why it is worth having as the preferred path:
+
+- **True offline history.** The REST plane can only ever flush *one* commit's
+  worth of work per reconnect, because it has nowhere to record intermediate
+  states. Native git gives the airplane scenario what it actually wants: a dozen
+  real commits, pushed as a dozen commits.
+- **Real merges.** The REST plane's answer to a concurrent edit is "someone else
+  moved the ref, reload". Native git can actually merge, and can present a
+  conflict for resolution.
+- **Cheap local reads.** Cross-deck and image search over a clone is a filesystem
+  walk, not N REST round-trips.
+- **Interoperability.** The repo is a plain git repo. Any other tool — a CI job
+  rendering decks, `git blame`, a reviewer's own client — reads it without
+  OciDeck. That is the whole point of choosing git over a bespoke store.
+
+### 4.3 How native git is obtained: the `git` CLI, not a bundled library
+
+**Decision: invoke the user's `git` binary as a subprocess. Bundle nothing.**
+
+The obvious alternative — bundle libgit2 and bind it via `dart:ffi` — was
+investigated and rejected. The reasons are ordered by how decisive they are.
+
+1. **It collides head-on with this project's licence policy.**
+   [`LICENSE_COMPLIANCE.md`](../LICENSE_COMPLIANCE.md) states that accepted
+   licence families are MIT, BSD, Apache-2.0, MPL-2.0, ISC, Zlib, BSL-1.0,
+   Unlicense, OFL-1.1 and CC0, and that *"anything else — in particular
+   GPL/AGPL/LGPL — is flagged for review before it can be added"*. libgit2 is
+   GPLv2-with-linking-exception. The exception genuinely permits linking from
+   EUPL-1.2 code without copyleft reaching OciDeck, and EUPL-1.2 is
+   GPLv2-compatible besides — so this is **not a legal problem**. It is a policy
+   and tooling problem: `tool/license_detect.dart` classifies any text containing
+   "gnu general public" as `GPL`, with no notion of an exception, so `make
+   licenses` — and therefore `make check-full` and CI — would fail. Adopting
+   libgit2 means consciously amending the policy *and* teaching the classifier
+   about linking exceptions. That is a real decision with a real cost, taken for
+   a dependency we do not need.
+2. **It would be the first native binary in the tree.** There is today no
+   `dart:ffi`, no `Process.run`, and no bundled native library anywhere in
+   `lib/`. Bundling libgit2 adds ~37 MB of prebuilt binaries, an SBOM entry per
+   platform, and a build story per platform — permanently.
+3. **The available binding is not solid enough to bet on.** `libgit2dart` is
+   discontinued and its repository was archived in February 2023. Its de-facto
+   successor `git2dart` is actively maintained but has a bus factor of 1, ships a
+   macOS dylib that is **arm64-only** (no Intel), ships a Linux `.so` whose
+   `libssl.so.3`/`libssh2.so.1` dependencies are *not* bundled with it, and only
+   stabilised its network transport in mid-2026. Certificate trust on desktop is
+   the sharpest edge: OpenSSL is statically linked without SecureTransport, so
+   verification falls back to a CA path baked in on the build machine.
+
+The CLI's own cost is honest and bounded: `git` must be installed, and a
+subprocess is a security surface. §10.2 hardens the subprocess. P9 and §4.2
+handle the absence. Both are cheaper than the three problems above.
+
+**libgit2 remains the documented escape hatch.** If telemetry-free reality shows
+that too many users lack git, it can be adopted later *behind the same
+`DeckMirror` interface* (§8.1) — a dependency swap, not a redesign. That is
+precisely why the interface exists.
+
+### 4.4 Why not the wire protocol in Dart, and why web still gets git
+
+Re-implementing git's smart-HTTP protocol (packfile negotiation, ref discovery)
+in pure Dart would give a uniform data plane on all six platforms. It is
+rejected: it is by far the most work, it hits CORS against self-hosted Forgejo
+anyway, and the surveyed pure-Dart implementations (`dart_git` and relatives)
+implement packfile *parsing* only — none does network git at all.
+
+That leaves the question §3 raises: WebDAV is switched **off** on web, so why is
+git switched **on**? Because the two obstacles that stop WebDAV do not apply the
+same way. WebDAV's client is `dart:io`-based with its own SSRF pinning that has
+no browser equivalent, and WebDAV needs server-side CORS configuration that an
+administrator must consciously make. The git forge plane is plain HTTPS+JSON that
+the browser sandbox already contains, GitHub and GitLab send CORS headers for
+token auth, and the self-hosted-Forgejo gap has an existing answer in the
+same-origin `/fetch-proxy` (§11). Web git is therefore offered, with the honest
+limitation that it is the REST data plane only (§8.3).
 
 ---
 
 ## 5. Architecture overview
 
-Four layers. The editor and state layer never see anything below `LocalMirror`.
+Five layers. The editor and state layer never see anything below `DeckMirror`.
 
 ```
-   ┌───────────────────────────────────────────────────────────┐
-   │ Editor / state (deck_provider, tabs_provider)              │
-   │   save() / open() / search — unchanged surface             │
-   └───────────────┬───────────────────────────────────────────┘
+   ┌────────────────────────────────────────────────────────────┐
+   │ Editor / state (deck_provider, tabs_provider)               │
+   │   save() / open() / search — unchanged surface              │
+   └───────────────┬────────────────────────────────────────────┘
                    │ writes/reads a deck as files
                    ▼
-   ┌───────────────────────────────────────────────────────────┐
-   │ LocalMirror        — the working copy (always available)   │
-   │   desktop/mobile: on-disk working tree under app support   │
-   │   web:            IndexedDB draft + in-memory WebAssetStore │
-   └───────────────┬───────────────────────────────────────────┘
-                   │ reconcile (commit/push/pull), queue when offline
+   ┌────────────────────────────────────────────────────────────┐
+   │ DeckMirror (interface)  — the working copy, always available │
+   │   NativeGitMirror   desktop + `git` on PATH → a real clone   │
+   │   DraftMirror       web, or desktop without git → outbox     │
+   └───────────────┬────────────────────────────────────────────┘
+                   │ reconcile: push/pull, or drain the outbox
                    ▼
-   ┌───────────────────────────────────────────────────────────┐
-   │ SyncEngine         — reconciles mirror ↔ forge             │
-   │   pending-commit outbox, baseSha conflict detection        │
-   └───────────────┬───────────────────────────────────────────┘
-                   │ REST
-                   ▼
-   ┌───────────────────────────────────────────────────────────┐
-   │ GitForge (interface)   — commitFiles, tree, branch, PR      │
-   │   GiteaForge · GitHubForge · GitLabForge                    │
-   └───────────────┬───────────────────────────────────────────┘
-                   │ hardened HTTP (NetGuard, HTTPS, caps, PAT)
-                   ▼
-             Forgejo / GitHub / GitLab
+   ┌────────────────────────────────────────────────────────────┐
+   │ SyncEngine         — reconciles mirror ↔ forge              │
+   │   native: git push/fetch      REST: outbox, baseSha guard   │
+   └───────┬─────────────────────────────────┬──────────────────┘
+           │ data plane (native only)        │ forge plane (always)
+           ▼                                 ▼
+   ┌──────────────────────┐   ┌─────────────────────────────────┐
+   │ GitCli               │   │ GitForge (interface)            │
+   │  hardened Process.run │   │  tree · commit · branch · tag   │
+   │  argv, clean env      │   │  pull request · search          │
+   └───────┬──────────────┘   │  GiteaForge·GitHubForge·GitLab… │
+           │                  └───────────────┬─────────────────┘
+           │ https (git's own)                │ hardened HTTP (NetGuard, PAT)
+           ▼                                  ▼
+                     Forgejo / GitHub / GitLab
 ```
 
-Cross-cutting: `AssetPool` (content-addressed dedup, §6) sits beside `LocalMirror`
-and feeds both reads (resolve `repo:` references) and commits (add only new
+Cross-cutting: `AssetPool` (content-addressed dedup, §6) sits beside the mirror
+and feeds both reads (resolve `repo:` references) and writes (add only new
 blobs).
+
+Note that `GitForge` is *not* bypassed on the native path. Native git replaces
+the **data** plane only; pull requests, review and code search still go over
+REST. A desktop user with git installed uses both planes at once.
 
 ---
 
@@ -216,6 +333,8 @@ Why this satisfies the goal:
   so a repeated asset does not grow the pack/history either.
 - **Commit only what is new.** Before committing, check the HEAD tree for
   `assets/<hash>`; if present, commit only the changed `deck.md`, not the asset.
+  On the native path this is what git does anyway; on the REST path it is an
+  explicit tree check that saves an upload.
 
 ### 6.1 The `repo:` reference scheme
 
@@ -235,7 +354,8 @@ repo:assets/<sha256>.<ext>
   Respect the existing escaping edge cases (caption-pipe sentinel, decimal video
   seconds, note `--\>`, cell `\<br>`) documented for that file.
 - On **web** a `repo:` asset resolves to the in-memory `WebAssetStore` after the
-  blob is fetched once; on desktop it resolves to the on-disk pool file.
+  blob is fetched once; on a native clone it resolves to the on-disk pool file
+  directly — no fetch at all.
 
 ### 6.2 Garbage collection (deliberately manual)
 
@@ -243,8 +363,8 @@ When no deck references an asset any more, its blob becomes an orphan in the
 working tree. A **manual** "clean unused assets" sweep (scan every `deck.md`
 across the repo, delete unreferenced `assets/*`) reclaims it. It is *not*
 automatic: in a versioned store an asset unreferenced on `main` may still be used
-by another branch or an older commit, and silent deletion would be wrong (P2 —
-never lose durable content without intent).
+by another branch, an older commit, **or a release tag** (§9.4), and silent
+deletion would be wrong (P2 — never lose durable content without intent).
 
 ---
 
@@ -259,7 +379,7 @@ abstract class GitForge {
   Future<Uint8List>       readBlob(String ref, String path);
   Future<String>          headSha(String branch);
 
-  // write (save = commit + push in one server-side operation)
+  // write (REST data plane: save = commit + push in one server-side operation)
   Future<CommitResult> commitFiles({
     required String branch,
     required String message,
@@ -273,7 +393,11 @@ abstract class GitForge {
   Future<List<BranchRef>> listBranches();
   Future<List<CommitInfo>> history(String ref, String path); // deck timeline
 
-  // release
+  // releases
+  Future<void>          createTag(String name, String ref, String message);
+  Future<List<TagRef>>  listTags();
+
+  // review
   Future<PullRequest> openPullRequest({
     required String head, required String base,
     required String title, String? body,
@@ -306,12 +430,13 @@ class GitOrigin {               // per-tab, sits next to TabInfo.webdavOrigin
 ```
 
 The PAT is **never** in `GitRepoConfig`; it lives in `secret_store` keyed by
-`baseUrl` + `owner` (§10).
+`baseUrl` + `owner` (§10.1).
 
 ### 7.2 The multi-file commit primitive (where providers differ)
 
-One save = one atomic commit of the changed file set. This is the only place the
-providers diverge materially; each adapter hides it behind `commitFiles`:
+On the REST data plane, one save = one atomic commit of the changed file set.
+This is the only place providers diverge materially; each adapter hides it behind
+`commitFiles`:
 
 - **GitLab** — `POST /projects/:id/repository/commits` with an `actions[]` array
   (`create`/`update`/`delete`). One call, atomic.
@@ -327,47 +452,104 @@ providers diverge materially; each adapter hides it behind `commitFiles`:
 
 Concurrency: `commitFiles` sends `baseSha`; if the server ref has moved (someone
 else committed), it returns a **non-fast-forward conflict**, surfaced to the user
-as reload/rebase — the git equivalent of the WebDAV atomic-write guard.
+as reload — the git equivalent of the WebDAV atomic-write guard. On the native
+data plane this whole primitive is unused: `git push` performs the same check
+server-side, and a rejection can be *merged* rather than reloaded (§8.2).
 
 ---
 
-## 8. Local-first & the SyncEngine (offline authoring)
+## 8. The mirror and the SyncEngine (offline authoring)
 
 Requirement: author on a plane, sync later. The forge is therefore **never the
-direct editing target**; a `LocalMirror` is, and the `SyncEngine` reconciles.
+direct editing target**; a `DeckMirror` is, and the `SyncEngine` reconciles.
 
 ```
-Editor ──writes──▶ LocalMirror ──SyncEngine──▶ GitForge (commit/push/PR)
-                   (offline-capable)            (when connectivity returns)
+Editor ──writes──▶ DeckMirror ──SyncEngine──▶ forge (when connectivity returns)
+                   (offline-capable)
 ```
 
-### 8.1 Desktop / mobile
+### 8.1 `DeckMirror` — one interface, two implementations
 
-- The mirror is an on-disk working directory under the app-support path:
-  `decks/…` + `assets/…`, i.e. exactly the repo layout of §6.
-- Saving writes files **locally and immediately** (this is how desktop already
-  works — a real `filePath`), then enqueues a **pending commit** in an outbox.
-- The `SyncEngine` drains the outbox when a connectivity/`NetGuard` check passes:
-  each pending commit becomes a `commitFiles` call (or, if the desktop native-git
-  option of OQ-4 is enabled, a local `git commit` now + `git push` later, giving
-  true offline history).
-- Conflict on push → `baseSha` mismatch → present reload/merge.
+```dart
+abstract class DeckMirror {
+  /// Write the deck's file set into the working copy. Always succeeds offline.
+  Future<void> writeDeck(String deckDir, Map<String, List<int>> files);
 
-### 8.2 Web
+  /// Record a durable local checkpoint. Real commit natively; queued otherwise.
+  Future<void> checkpoint(String deckDir, String message);
 
-- No persistent filesystem. The mirror is an **IndexedDB draft** plus the existing
-  in-memory `WebAssetStore` for asset bytes.
+  /// Reconcile with the forge. Push/pull natively; drain the outbox otherwise.
+  Future<SyncResult> sync();
+
+  Future<List<CommitInfo>> history(String deckDir);
+  Future<void> tagRelease(String name, String message);
+
+  /// False for DraftMirror: callers must not promise multi-commit offline history.
+  bool get hasRealHistory;
+}
+```
+
+`hasRealHistory` is the honest seam. UI that offers "commit" as a distinct act
+from "save" is only shown when it is true; otherwise the user sees a single
+"save, syncs when online". Never present a queued draft as if it were history.
+
+### 8.2 `NativeGitMirror` — desktop with `git` on PATH
+
+- The mirror is a **real clone** under the app-support path. The working tree is
+  exactly the repo layout of §6, because it *is* the repo.
+- Saving writes files locally and immediately (as desktop already works — a real
+  `filePath`), then `git add` + `git commit`. Offline, this is a complete,
+  durable, real commit. Ten commits on a plane stay ten commits.
+- `sync()` is `git fetch` then `git push`. A rejected push means the branch moved;
+  the user is offered a **real merge**, with conflicts surfaced per file.
+- `tagRelease()` is `git tag -a`, offline-capable, pushed on the next sync.
+- `history()` is `git log -- <deckDir>` — local, instant, no REST.
+
+### 8.3 `DraftMirror` — web, or desktop without git
+
+- No local git. On web there is no persistent filesystem either: the mirror is an
+  **IndexedDB draft** plus the existing in-memory `WebAssetStore` for asset bytes.
+  On desktop without git it is a plain directory plus an on-disk outbox.
+- Saving updates the draft and enqueues a **pending commit** carrying the
+  `baseSha` it was authored against.
+- `sync()` drains the outbox via `GitForge.commitFiles` once a
+  connectivity/`NetGuard` check passes.
 - Offline you keep editing a single **draft version**; on reconnect it is flushed
-  as one real commit via REST.
-- Honest limitation: full multi-commit offline *history* is not realistic on web
-  — it is "one pending draft, synced on return", not an offline commit log. This
-  is acceptable because the airplane scenario is a desktop/mobile install; web is
-  the online-first surface.
+  as one real commit. Honest limitation: this is "one pending draft, synced on
+  return", **not** an offline commit log — hence `hasRealHistory == false`. This
+  is acceptable because the airplane scenario is a desktop install, which is
+  exactly where native git is available.
+- Conflict on flush → `baseSha` mismatch → present reload. No merge is possible
+  here; that asymmetry is the main functional reason to prefer §8.2.
 
-### 8.3 What the SyncEngine guarantees
+### 8.4 Capability detection (and the macOS trap)
 
-- **Never lose local work** (P2): the outbox is durable (on disk / IndexedDB) and
-  survives restart.
+`supportsNativeGit` cannot be a compile-time constant like its neighbours in
+`lib/platform/platform_features.dart`, because it depends on the user's machine,
+not the build. It is a **runtime probe**, cached for the process lifetime, and
+therefore belongs in a provider (`gitCapabilityProvider`) rather than a getter:
+
+- probe `git --version` with `Process.run`, require a **minimum version** so that
+  plumbing behaviour cannot drift under us (§14, OQ-8),
+- `kIsWeb` short-circuits to `false` before any `dart:io` access — the ordering
+  gotcha already documented at `lib/services/open_file_channel.dart:22`
+  (`Platform.isMacOS` is a throwing stub on web).
+
+**The macOS trap, which must not be got wrong:** on a Mac without Xcode Command
+Line Tools, `/usr/bin/git` is a *shim*. Running it does not fail — it **pops a
+system GUI dialog** offering to install the tools. A naive probe at startup would
+therefore ambush a user who has never touched git with an OS install prompt they
+did not ask for. Mitigations, both required:
+
+1. Never probe eagerly at startup. Probe **lazily**, the first time the user
+   actually configures or opens a git repo.
+2. On macOS, check `xcode-select -p` (exit code 0 = tools present) *before*
+   invoking `git`, so the shim is never triggered by us.
+
+### 8.5 What the SyncEngine guarantees
+
+- **Never lose local work** (P2): a native commit is durable by construction; the
+  outbox is durable (on disk / IndexedDB) and survives restart.
 - **At-most-one authority per deck tab** for pushes; a queued commit references
   the `baseSha` it was authored against.
 - **Idempotent flush**: a commit that already landed (same tree, advanced ref) is
@@ -377,81 +559,166 @@ Editor ──writes──▶ LocalMirror ──SyncEngine──▶ GitForge (com
 
 ## 9. Mapping the existing features onto git
 
-### 9.1 Saving → commit + push
+### 9.1 Saving → commit (+ push)
 
 `DeckNotifier.save()` writes the deck's `{path: bytes}` set (from
 `buildPackageMembers`, re-pathed into the §6 layout, assets replaced by `repo:`
-pointers) to the `LocalMirror`, then enqueues a commit. Message defaults to a
-concise auto-message (`Update <deck title>`), editable. Push is the SyncEngine
-draining the outbox — from the user's point of view, **save = commit + push**.
+pointers) to the `DeckMirror`, then checkpoints it. Message defaults to a concise
+auto-message (`Update <deck title>`), editable. Push is the SyncEngine — from the
+user's point of view, **save = commit, and it reaches the forge when the network
+does**.
 
 ### 9.2 Opening / loading
 
-`listTree` the deck dir → `readBlob` `deck.md` and sidecars → resolve `repo:`
-assets from the pool (fetch blobs lazily, cache in `AssetPool`/`WebAssetStore`) →
-**run the import gate** (`MarkdownSafetyScanner`) on the `.md` bytes → parse via
-`markdown_service.parseDeck` → `openDeckFromBytes`-style placement into a tab with
-a `GitOrigin` attached.
+Native: clone or fetch, then read from the working tree. REST: `listTree` the
+deck dir → `readBlob` `deck.md` and sidecars → resolve `repo:` assets from the
+pool (fetch blobs lazily, cache in `AssetPool`/`WebAssetStore`). Both paths then
+converge: **run the import gate** (`MarkdownSafetyScanner`) on the `.md` bytes
+(P5) → parse via `markdown_service.parseDeck` → `openDeckFromBytes`-style
+placement into a tab with a `GitOrigin` attached.
 
 ### 9.3 Searching (text) and searching images
 
 - **Within the current deck**: unchanged (`DeckNotifier.countMatches`).
 - **Cross-deck / image search over the repo**:
-  - prefer **server-side search** where the provider offers it (Gitea, GitHub and
-    GitLab all expose code/repository search endpoints) — cheap, no bulk download;
+  - with a native clone, search the working tree directly — a filesystem walk,
+    no network, and `git grep` is available for text;
+  - otherwise prefer **server-side search** where the provider offers it (Gitea,
+    GitHub and GitLab all expose code/repository search endpoints);
   - fall back to a **local index** built from `listTree` + lazily fetched blobs,
-    cached, refreshed on branch change. Image search enumerates `assets/*` and the
-    `repo:` references that point at them (so "which decks use this image" is a
-    reverse-index over the pool — a natural by-product of §6).
+    cached, refreshed on branch change.
+  - Image search enumerates `assets/*` and the `repo:` references that point at
+    them (so "which decks use this image" is a reverse-index over the pool — a
+    natural by-product of §6).
 
-### 9.4 Releasing → branch → pull request → merge
+### 9.4 Releasing → PR to merge, tag to release
 
-- Author on a working branch (per deck or per session — OQ-3).
-- **Release** = `openPullRequest(head: workBranch, base: defaultBranch, …)`,
-  **gated by the classification/TLP policy** (`ExportService` enforcement) —
-  fail-closed *before* the PR is created (P8).
-- Optional `mergePullRequest` with the chosen merge method once approved. Branch
-  protection / required reviews are the forge's job, not OciDeck's.
+Release is **two acts, both gated** (P8), and the distinction is the point:
+
+1. **Review** — author on a working branch, then
+   `openPullRequest(head: workBranch, base: defaultBranch, …)`. Reviewers comment
+   on a real diff of `deck.md`. Merge with `mergePullRequest` once approved.
+   Branch protection and required reviews are the forge's job, not OciDeck's.
+2. **Release** — an **annotated tag** on the merge commit marks the version that
+   was actually presented. `v1.0` and `v2.0` of the same deck coexist and are
+   both retrievable, which is what "releases van dezelfde presentatie" asks for.
+
+Both are fail-closed against the classification/TLP policy (`ExportService`
+enforcement), evaluated *before* the PR is opened and *before* the tag is
+created. A tag is a durable, advertised pointer — it must not be able to publish
+a deck past its classification ceiling any more than an export can.
+
+**Tag naming must be deck-scoped.** A repo holds many decks (§6), so a flat
+`v1.0` is ambiguous. Tags are namespaced per deck — `decks/kwartaalcijfers/v1.0`
+(git permits `/` in tag names) or `kwartaalcijfers-v1.0`; see §14, OQ-9.
+
+The UI surfaces tags as a **version picker**: open `v1.0` of a deck read-only,
+diff it against `v2.0`, or branch a new revision from it.
 
 ### 9.5 Versions & branches
 
-History and branch lists come from `history()` / `listBranches()`. The UI gets a
-branch picker and a per-deck commit timeline (reusing the `history(ref, deckDir)`
-call). No local plumbing required for the online path.
+History and branch lists come from `DeckMirror.history()` / `listBranches()` —
+`git log` on a clone, REST otherwise. The UI gets a branch picker, a per-deck
+commit timeline, and the tag-based version picker of §9.4.
+
+### 9.6 Asynchronous collaboration
+
+This falls out of the design rather than being built: a repo is shared, so two
+authors clone it, work on branches, and review each other's decks as pull
+requests. What OciDeck must add is small but real:
+
+- **Attribution** — commits carry an author identity. OciDeck needs a name/email
+  setting per repo (it must not silently reuse a global `user.name` it did not
+  set, nor invent one).
+- **Awareness** — show that `main` has moved, and whose branch is open, from
+  `listBranches`/`fetch`. Not presence, just freshness.
+- **Sidecar conflicts** — `.annotations`/`.notes` do not merge textually (§14,
+  OQ-7). This is the one place async collaboration needs a real answer.
+
+The boundary with [`COLLABORATION.md`](COLLABORATION.md) is deliberate and should
+stay crisp: **git is for authors who are not in the room at the same time**;
+Matrix is for those who are. Git has no opinion on live cursors; the Matrix room
+has no opinion on last year's version. A future session may combine them (a room
+whose participants share a repo), but neither doc depends on the other landing.
 
 ---
 
 ## 10. Security
 
+### 10.1 Network, auth and untrusted content
+
 - **Auth**: a **Personal Access Token** per repo, stored in `secret_store`
   (`flutter_secure_storage` / OS keychain), keyed by `baseUrl`+`owner` — the same
-  pattern as WebDAV passwords and the project's own Forgejo admin token. Never in
-  settings/prefs. (OAuth device-flow is a later nicety — OQ-2.)
-- **SSRF / self-hosted Forgejo**: reuse `NetGuard.safeResolveTrusted` with the
-  `trustedInternal` opt-in and socket pinning against DNS-rebind, exactly as
-  `webdav_service.dart` does. HTTPS enforced unless the user has explicitly marked
-  the server trusted-internal.
-- **Import gate on every inbound `.md`** (P5), fail-closed. A repo is untrusted
-  input.
+  pattern as WebDAV passwords. Never in settings/prefs. (OAuth device-flow is a
+  later nicety — OQ-2.)
+- **SSRF / self-hosted Forgejo**: on the REST plane, reuse
+  `NetGuard.safeResolveTrusted` with the `trustedInternal` opt-in and socket
+  pinning against DNS-rebind, exactly as `webdav_service.dart` does. HTTPS
+  enforced unless the user has explicitly marked the server trusted-internal.
+  **Note the honest gap:** the native plane's HTTPS is git's own, so `NetGuard`
+  cannot pin it. The trusted-internal opt-in therefore governs *whether the
+  origin may be used at all*, and the origin is validated before it is ever
+  handed to `git`.
+- **Import gate on every inbound `.md`** (P5), fail-closed, on both planes. A repo
+  is untrusted input; cloning it does not make it trusted.
 - **Path-traversal guards** on tree entries and on `repo:` resolution — reject any
   entry that escapes the repo root / the `assets/` pool (zip-slip-equivalent for
   trees).
 - **Caps**: reuse the package limits (max bytes per blob, max entries per tree
-  listing) against oversize/zip-bomb-equivalent responses.
+  listing) against oversize/zip-bomb-equivalent responses. On a clone, cap by
+  repo size before fetching.
 - **Token scope guidance** in the UI: recommend a least-privilege PAT scoped to
   the single repo where the provider supports it (GitHub fine-grained tokens,
   GitLab project access tokens, Gitea scoped tokens).
 
+### 10.2 Subprocess hardening (the native plane)
+
+This is new surface for this codebase — `lib/` contains no `Process.` call today
+— so the rules are explicit. All of it lives in one place, `lib/services/git/
+git_cli.dart`, and nothing else in the tree may spawn a process.
+
+- **argv array, never a shell.** `Process.run('git', [...], runInShell: false)`.
+  No string interpolation into a command line, ever.
+- **User data is an operand, never an option.** Branch names, tags, messages and
+  paths are attacker-influencable (they can come from a repo). Pass them after
+  `--end-of-options` where git supports it, reject any value starting with `-`,
+  and validate refs against `git check-ref-format` rules before use.
+- **Never put the PAT in the remote URL.** It would land in `.git/config` in
+  plaintext and in the reflog. **Never pass it in argv either** — process
+  arguments are world-readable via `ps` on Linux and macOS. Supply it through the
+  child's environment (`GIT_CONFIG_COUNT`/`GIT_CONFIG_KEY_n`/`GIT_CONFIG_VALUE_n`
+  with `http.extraHeader`), which is not exposed in `ps` to other users, and
+  never persist it to disk. See §14, OQ-10 — this deserves a second look during
+  implementation.
+- **A clean, closed environment.** `GIT_TERMINAL_PROMPT=0` so git can never block
+  forever waiting for a credential prompt that has no terminal to appear on.
+  `GIT_CONFIG_NOSYSTEM=1` and a controlled `HOME` so the user's global gitconfig
+  cannot change our behaviour — aliases, `core.fsmonitor` and `core.pager` are all
+  code-execution or hang vectors we do not want inherited.
+- **No hooks.** Point `core.hooksPath` at an empty directory for every invocation.
+  Hooks are not cloned, but this closes the door rather than trusting that.
+- **Timeouts and bounded output.** Every invocation has a deadline and a cap on
+  captured stdout/stderr; a wedged `git` must not wedge the app.
+- **Never construct a repo path from untrusted input.** The clone location is
+  derived from the config, under app-support, and is validated to stay there.
+
+---
+
 ## 11. Web specifics
 
+- Web is the **REST data plane only** (§8.3). `supportsNativeGit` is `false`.
 - **CORS**: GitHub and GitLab APIs send CORS headers for token auth; a
   self-hosted Forgejo may not. Reuse/extend the existing same-origin
   `/fetch-proxy` (`lib/services/parts/file_service_net.dart`) for those origins,
-  or document the required CORS configuration. (Memory: URL-import failures on web
-  are usually CORS.)
+  or document the required CORS configuration. (URL-import failures on web are
+  usually CORS.)
 - **No SSRF pinning on web** — the browser sandbox handles it; `NetGuard`'s
   network checks are a no-op there, as they already are for media URLs.
-- Offline degrades to the §8.2 draft model.
+- Offline degrades to the §8.3 draft model.
+- The **CSP is a hard constraint**, not an afterthought: `web/index.html` ships a
+  strict policy and CI enforces it (`make check-web`). Any forge origin the app
+  must reach has to fit `connect-src`, or go through the proxy. This is a design
+  input for Phase 0, not a Phase 5 surprise.
 
 ---
 
@@ -459,47 +726,66 @@ call). No local plumbing required for the online path.
 
 Each phase is shippable and preserves the invariants.
 
-### Phase 0 — Foundation (provider-agnostic, read-only)
+### Phase 0 — Foundation (provider-agnostic, read-only, REST)
 - `GitForge` interface, `GitRepoConfig`/`GitOrigin` models, PAT storage in
   `secret_store`, HTTP client reusing `NetGuard` + HTTPS/caps.
 - `GiteaForge` first (targets the project's own Forgejo).
 - **Open a deck read-only** from a repo through the import gate. No writing yet.
 - Tests: interface contract tests + a fake in-memory forge.
+- Deliberately REST-first: it is the path both platforms share, so it de-risks
+  the interface before a second implementation exists.
 
-### Phase 1 — Asset pool + local mirror
+### Phase 1 — Asset pool + mirror
 - `AssetPool` (SHA-256, `repo:` scheme, resolve on desktop + web), `repo:`
   round-trip in `markdown_service`, reverse-index for image search.
-- `LocalMirror` (on-disk desktop / IndexedDB web) as the editing target.
+- `DeckMirror` interface + `DraftMirror` (on-disk desktop / IndexedDB web) as the
+  editing target.
 
 ### Phase 2 — Writing (commit + push, offline)
 - `commitFiles` in `GiteaForge` (multi-file), the `SyncEngine` + durable outbox,
   `baseSha` conflict detection.
 - "Save to git" beside "Save to Nextcloud"; offline queue + flush-on-reconnect.
+- At this point the feature is complete on every platform, on the REST plane.
 
-### Phase 3 — Branches, PR & merge (release), gated
-- `createBranch`, `history`, `openPullRequest`, `mergePullRequest`.
-- Wire release to the classification/TLP gate (fail-closed). Branch picker +
-  commit timeline UI.
+### Phase 3 — Native git on desktop
+- `GitCli` with the §10.2 hardening; `gitCapabilityProvider` with the lazy probe
+  and the macOS `xcode-select` guard (§8.4).
+- `NativeGitMirror implements DeckMirror` — clone, commit, fetch, push, merge,
+  log, tag. Real offline history; real merges.
+- Verify: same `DeckMirror` contract tests pass against both implementations.
+  That equivalence is the phase's actual deliverable.
 
-### Phase 4 — GitHub & GitLab adapters
+### Phase 4 — Releases: branches, PR, merge & tags (gated)
+- `createBranch`, `history`, `openPullRequest`, `mergePullRequest`, `createTag`,
+  `listTags`.
+- Wire both PR-open and tag-create to the classification/TLP gate (fail-closed).
+- Branch picker, commit timeline, and the tag-based version picker.
+- Per-repo author identity for attribution (§9.6).
+
+### Phase 5 — GitHub & GitLab adapters
 - Implement `GitHubForge` (Git Data API multi-file) and `GitLabForge`
   (`actions[]`). The interface and everything above are already exercised by
-  `GiteaForge`, so this is adapter work only.
+  `GiteaForge`, so this is adapter work only. The native plane is unaffected —
+  it does not know which forge it is talking to.
 
-### Phase 5 — Cross-deck search & polish
-- Server-side code/image search per provider with the local-index fallback;
-  manual asset GC; token-scope guidance UI.
+### Phase 6 — Cross-deck search & polish
+- Server-side code/image search per provider, native `git grep` on a clone, local
+  index fallback; manual asset GC; token-scope guidance UI.
 
 ### Coverage against the requirements
 | Requirement | Delivered by |
 |---|---|
-| Saving = commit + push | Phase 2 |
 | Opening / loading | Phase 0 |
-| Text search | Phase 5 (within-deck already works) |
-| Image search + dedup | Phase 1 (pool) + Phase 5 (search) |
-| Release = PR + merge | Phase 3 |
-| Offline (airplane) | Phase 2 (mirror + outbox) |
-| Forgejo / GitHub / GitLab | Phase 0/2/3 (Forgejo) → Phase 4 (the others) |
+| Image dedup (shared pool) | Phase 1 |
+| Saving = commit (+ push) | Phase 2 |
+| Offline (one draft, any platform) | Phase 2 |
+| Offline (real history, airplane) | Phase 3 |
+| Real merges | Phase 3 |
+| Release = reviewed PR | Phase 4 |
+| Versions of one deck = tags | Phase 4 |
+| Async collaboration | Phase 4 (falls out of PR + attribution) |
+| Forgejo / GitHub / GitLab | Phase 0–4 (Forgejo) → Phase 5 (the others) |
+| Text + image search | Phase 6 (within-deck already works) |
 
 ---
 
@@ -508,11 +794,18 @@ Each phase is shippable and preserves the invariants.
 New:
 - `lib/services/git/git_forge.dart` — interface + shared value types.
 - `lib/services/git/gitea_forge.dart`, `github_forge.dart`, `gitlab_forge.dart`.
-- `lib/services/git/sync_engine.dart`, `lib/services/git/local_mirror.dart`.
-- `lib/services/git/asset_pool.dart` (or fold into an existing asset service).
+- `lib/services/git/deck_mirror.dart` — the `DeckMirror` interface.
+- `lib/services/git/native_git_mirror.dart` — desktop clone (Phase 3).
+- `lib/services/git/draft_mirror.dart` — outbox/IndexedDB (Phase 1).
+- `lib/services/git/git_cli.dart` — **the only** `Process.run` site; §10.2 lives
+  here.
+- `lib/services/git/git_cli_stub.dart` — web stub, wired by conditional import
+  exactly as `lib/platform/native_window.dart` does it.
+- `lib/services/git/sync_engine.dart`, `lib/services/git/asset_pool.dart`.
 - `lib/models/git_settings.dart` — `GitRepoConfig`, `GitOrigin`, `GitProvider`.
-- `lib/state/git_provider.dart` — `gitForgeProvider`, family providers for
-  tree/history (mirrors `lib/state/webdav_provider.dart`).
+- `lib/state/git_provider.dart` — `gitForgeProvider`, `deckMirrorProvider`,
+  `gitCapabilityProvider` (the lazy probe of §8.4), family providers for
+  tree/history/tags (mirrors `lib/state/webdav_provider.dart`).
 
 Touch points (integrate, don't fork):
 - `lib/services/parts/file_service_package.dart` — reuse `buildPackageMembers`;
@@ -520,16 +813,20 @@ Touch points (integrate, don't fork):
 - `lib/services/markdown_service.dart` — `repo:` scheme round-trip.
 - `lib/utils/project_path.dart` — repo-root resolution for `repo:` (with guard).
 - `lib/services/image_dedup_service.dart` — SHA-256 hashing for pool names.
-- `lib/state/deck_provider.dart` — `save()`/open routed via `LocalMirror`.
+- `lib/state/deck_provider.dart` — `save()`/open routed via `DeckMirror`.
 - `lib/state/tabs_provider.dart` — `GitOrigin` on `TabInfo`; open-from-git path.
 - `lib/models/webdav_settings.dart` — `GitOrigin` mirrors `WebdavOrigin`.
 - `lib/widgets/app_shell.dart` — per-tab provider overrides already support this.
-- `lib/services/export_service.dart` — reuse the classification gate for PR open.
+- `lib/services/export_service.dart` — reuse the classification gate for PR open
+  **and tag create**.
 - `lib/utils/net_guard.dart`, `lib/services/secret_store.dart` — reused as-is.
+- `lib/platform/platform_features.dart` — note in the doc comment that native git
+  is a *runtime* capability and therefore deliberately not a getter here (§8.4).
 
 Docs to update when it lands: `ARCHITECTURE.md`, `SOURCE_MAP.md`,
 `FILE_FORMAT.md` (the repo layout + `repo:` scheme), `USER_GUIDE.md`,
-`CHANGELOG.md`.
+`CHANGELOG.md`. `LICENSE_COMPLIANCE.md` and the SBOM need **no** change — which
+is a deliberate consequence of §4.3, and worth checking still holds at merge time.
 
 ---
 
@@ -541,31 +838,60 @@ Docs to update when it lands: `ARCHITECTURE.md`, `SOURCE_MAP.md`,
 - **OQ-2 — Auth.** PAT for v1 (decided). Add OAuth device-flow later per provider?
 - **OQ-3 — Branch strategy.** One long-lived work branch per deck, or a fresh
   branch per editing session/release? Affects how "release" picks `head`.
-- **OQ-4 — Native git on desktop.** Add a real-git `LocalMirror` (via `git` CLI
-  where present, or a Dart git lib) for genuine offline commit history, behind the
-  same interface — or keep the REST-outbox model everywhere for uniformity?
-- **OQ-5 — Large media / LFS.** Videos can be large. Do we cap asset size, warn,
-  or integrate Git-LFS (provider-dependent) in a later phase?
+- **OQ-4 — Native git on desktop.** *Resolved (§4.3):* the user's `git` CLI as a
+  runtime-detected capability, with the REST plane as the fallback; nothing
+  bundled. libgit2 (`git2dart`) stays documented as the escape hatch behind
+  `DeckMirror` if git-absent proves common.
+- **OQ-5 — Large media / LFS.** Videos can be large, and a clone pulls *all* of
+  them — worse on the native plane than on the lazy REST one. Cap asset size,
+  warn, use partial clone (`--filter=blob:none`), or integrate Git-LFS later?
 - **OQ-6 — Multiple decks per repo vs one repo per deck.** The §6 layout assumes a
   repo holds many decks (best for asset sharing). Do we also support pointing at a
-  repo whose root *is* a single deck?
+  repo whose root *is* a single deck? (Interacts with OQ-9.)
 - **OQ-7 — Sidecar conflicts.** `.annotations`/`.notes` merge poorly. On a
-  non-fast-forward, do we prefer local, prefer remote, or force a manual resolve
-  for sidecars specifically?
+  conflict, do we prefer local, prefer remote, or force a manual resolve for
+  sidecars specifically? Now sharper than before: the native plane can actually
+  reach a conflicted merge state, where the REST plane could only reload.
+- **OQ-8 — Minimum git version.** Which version do we require, and what do we do
+  on an older one — refuse the native plane and fall back to REST (safe,
+  consistent), or degrade feature by feature (fiddly)? Leaning: fall back wholesale.
+- **OQ-9 — Tag namespacing.** `decks/<naam>/v1.0` (slashes, groups nicely in
+  forge UIs) or `<naam>-v1.0` (flat, no ref-hierarchy edge cases: git refuses a
+  tag `a/b` if a tag `a` exists)? Leaning: the slash form, decided with OQ-6.
+- **OQ-10 — Token delivery to the `git` subprocess.** §10.2 proposes
+  `GIT_CONFIG_*` env vars with `http.extraHeader`, avoiding argv, the URL and
+  `.git/config`. Validate this against each forge, and confirm the token cannot
+  leak into a reflog, a trace (`GIT_TRACE`) or a crash report.
+- **OQ-11 — Which identity signs a commit?** §9.6 needs an author name/email per
+  repo. Do we offer commit **signing** (SSH/GPG) at all? For a project with this
+  security posture the question will be asked; the answer may still be "not v1".
 
 ---
 
 ## 15. Summary
 
 Store decks in a git repo by treating the **forge as a versioned network deck
-source** — the WebDAV pattern plus commit/branch/PR semantics — reached through a
-provider-agnostic `GitForge` interface (Forgejo/Gitea first, then GitHub and
-GitLab) over hardened HTTP. A deck is a **folder of real files** so history and
-diffs mean something; assets live once in a **content-addressed shared pool**
-(`repo:assets/<hash>`) so nothing is duplicated. Editing always targets a
-**local mirror** and a **SyncEngine** reconciles it with the forge, so authoring
-works offline and syncs later. Saving is a commit+push; releasing is a
-classification-gated pull request and merge. Almost every dependency —
-`buildPackageMembers`, `image_dedup_service`, `net_guard`, `secret_store`,
-per-tab origins and provider scope — already exists; the new code is the forge
-clients and the sync engine.
+source** — the WebDAV pattern plus commit/branch/PR/tag semantics. The design
+splits along one seam: the **forge plane** (pull requests, review, search) is
+always provider REST behind a `GitForge` interface, because git has no notion of
+a PR; the **data plane** is native `git` on desktop when the user has it, and the
+same REST calls otherwise. Because web needs the REST plane regardless, native
+git costs nothing to make optional — so OciDeck detects the user's `git`, uses it
+for real offline history and real merges, and **bundles nothing**, keeping the
+tree free of FFI, native binaries and the GPL-classified dependency its own
+licence policy would flag.
+
+A deck is a **folder of real files** so history and diffs mean something; assets
+live once in a **content-addressed shared pool** (`repo:assets/<hash>`) so nothing
+is duplicated. Editing always targets a **`DeckMirror`** and a **`SyncEngine`**
+reconciles it with the forge, so authoring works offline and syncs later. Saving
+is a commit; **releasing is a classification-gated pull request to merge and an
+annotated tag to mark the version**, so `v1.0` and `v2.0` of the same presentation
+both remain retrievable. Asynchronous collaboration then falls out of the model:
+clone, branch, review, merge — with live co-editing left to
+[`COLLABORATION.md`](COLLABORATION.md), on the other side of a deliberate seam.
+
+Almost every dependency — `buildPackageMembers`, `image_dedup_service`,
+`net_guard`, `secret_store`, per-tab origins, provider scope and the
+`lib/platform/` capability pattern — already exists; the new code is the forge
+clients, the two mirrors and the sync engine.
