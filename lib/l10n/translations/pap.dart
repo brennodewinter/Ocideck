@@ -740,6 +740,18 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
+      'Konfigurá promé un repositorio Git na Konfigurashon → Repositorio Git.',
+  'Git-repository': 'Repositorio Git',
+  'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Habri presentashonnan for di un repositorio Git. Tur vershon warda ta keda warda. E token ta wòrdu wardá enkriptá den e yabero, no huntu ku e otro konfigurashonnan.',
+  'Eigenaar': 'Doño',
+  'Repository': 'Repositorio',
+  'Personal access token': 'Token di akseso personal',
+  'Openen uit git…': 'Habri for di Git…',
+  'Presentatie openen uit git': 'Habri un presentashon for di Git',
+  'Geen presentaties in deze repository.':
+      'No tin presentashon den e repositorio aki.',
   'Rapportagetaal': 'Idioma di e raport',
   'Niet vastgelegd': 'No registrá',
   'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':

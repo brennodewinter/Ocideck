@@ -1787,6 +1787,18 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
+      'Richt zerscht es Git-Repository i under Iistellige → Git-Repository.',
+  'Git-repository': 'Git-Repository',
+  'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Presentatione us eme Git-Repository ufmache. Jedi gspeicherti Version bliibt erhalte. S Token wird verschlüsslet im Schlüsselbund abgleit, nöd bi de andere Iistellige.',
+  'Eigenaar': 'Bsitzer',
+  'Repository': 'Repository',
+  'Personal access token': 'Persönlichs Zuegriffstoken',
+  'Openen uit git…': 'Us Git ufmache…',
+  'Presentatie openen uit git': 'Presentation us Git ufmache',
+  'Geen presentaties in deze repository.':
+      'Kei Presentatione i dem Repository.',
   'Rapportagetaal': 'Brichtsprach',
   'Niet vastgelegd': 'Nid festghalte',
   'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':

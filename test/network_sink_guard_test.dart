@@ -87,6 +87,11 @@ void main() {
         // doet dat zélf: elke sprong gaat opnieuw door de poort, zodat een 3xx
         // naar een intern adres niet alsnog opgehaald wordt.
         'lib/services/cve/local_cve_database_io.dart',
+        // Git-forge (desktop): safeResolveTrusted met de trustedInternal-opt-in
+        // van de repo + socket-pin + geen redirects + cap. De pin wordt één keer
+        // gelegd en hergebruikt; een URI buiten de geconfigureerde origin wordt
+        // geweigerd, zodat de gepinde client nooit op een andere host uitkomt.
+        'lib/services/git/git_transport_io.dart',
       },
       guidance:
           'New raw HttpClient. Resolve the host through NetGuard.safeResolve '
@@ -116,6 +121,15 @@ void main() {
         // en omvang (harde bytecap). Op desktop loopt de import via het gepinde
         // importFromUrl, niet hierlangs.
         'lib/services/parts/file_service_net.dart',
+        // Git-forge (WEB-tak). Zelfde redenering als file_service_net.dart
+        // hierboven: op web bestaat de dart:io-pinning van git_transport_io.dart
+        // niet en kan ze er ook niet draaien — daar zijn de browser-sandbox en
+        // de pagina-CSP (`connect-src`) de gate. Lokaal begrenst dit bestand
+        // schema (https, of http alleen bij een bewust vertrouwde interne
+        // server) en omvang (harde bytecap). Bovendien: een verzoek mét token
+        // gaat nooit door het same-origin fetch-hulppunt, zodat dat punt het
+        // PAT nooit in handen krijgt.
+        'lib/services/git/git_transport_web.dart',
       },
       guidance:
           'New network egress primitive (package:http, dio, or a raw socket). '

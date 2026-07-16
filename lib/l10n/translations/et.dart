@@ -1774,6 +1774,17 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
+      'Seadistage kõigepealt Giti hoidla jaotises Seaded → Giti hoidla.',
+  'Git-repository': 'Giti hoidla',
+  'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Avage esitlusi Giti hoidlast. Iga salvestatud versioon säilib. Luba hoitakse krüpteerituna võtmehoidjas, mitte koos muude seadetega.',
+  'Eigenaar': 'Omanik',
+  'Repository': 'Hoidla',
+  'Personal access token': 'Isiklik juurdepääsuluba',
+  'Openen uit git…': 'Ava Gitist…',
+  'Presentatie openen uit git': 'Ava esitlus Gitist',
+  'Geen presentaties in deze repository.': 'Selles hoidlas pole esitlusi.',
   'Rapportagetaal': 'Aruande keel',
   'Niet vastgelegd': 'Pole märgitud',
   'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':

@@ -1,5 +1,7 @@
 import 'dart:typed_data';
 
+import '../../models/git_settings.dart';
+
 /// Soort van een entry in een git-tree.
 enum RepoEntryType {
   file,
@@ -104,4 +106,22 @@ abstract class GitForge {
   /// bewaart, zodat een latere commit een non-fast-forward kan detecteren in
   /// plaats van stil werk te overschrijven.
   Future<String> headSha(String branch);
+}
+
+extension GitForgeDecks on GitForge {
+  /// De deckmappen op [branch], als deknaam → pad.
+  ///
+  /// Alleen mappen direct onder `decks/` tellen: de layout kent geen genest
+  /// deck (D6), en een map die niet als deknaam door de beugel kan laten we uit
+  /// de lijst in plaats van hem half te tonen.
+  Future<Map<String, String>> listDecks(String branch) async {
+    final entries = await listTree(branch, GitRepoLayout.decksRoot);
+    final decks = <String, String>{};
+    for (final entry in entries) {
+      if (entry.type != RepoEntryType.dir) continue;
+      final name = GitRepoLayout.deckNameOf(entry.path);
+      if (name != null) decks[name] = entry.path;
+    }
+    return decks;
+  }
 }

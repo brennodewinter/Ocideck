@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:http/http.dart' as http;
 
 import '../../models/git_settings.dart';
+import '../../utils/log.dart';
 import 'git_forge.dart';
 import 'git_transport.dart';
 
@@ -111,9 +112,10 @@ class BrowserGitTransport implements GitTransport {
       return GitResponse(response.statusCode, bytes);
     } on GitForgeException {
       rethrow;
-    } catch (_) {
-      // Bewust geen logError met de URL erin: die draagt owner/repo en soms een
-      // deknaam. De aanroeper maakt er een nette melding van.
+    } catch (e) {
+      // Null, niet gooien: de aanroeper beslist of de proxy-terugval nog mag en
+      // maakt er anders een nette melding van.
+      logError('BrowserGitTransport: request failed', e);
       return null;
     }
   }

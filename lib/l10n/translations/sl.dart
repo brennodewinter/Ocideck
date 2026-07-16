@@ -1785,6 +1785,18 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
+      'Najprej nastavite repozitorij Git v Nastavitve → Repozitorij Git.',
+  'Git-repository': 'Repozitorij Git',
+  'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Odprite predstavitve iz repozitorija Git. Vsaka shranjena različica se ohrani. Žeton je shranjen šifrirano v zbirki ključev, ne poleg drugih nastavitev.',
+  'Eigenaar': 'Lastnik',
+  'Repository': 'Repozitorij',
+  'Personal access token': 'Osebni dostopni žeton',
+  'Openen uit git…': 'Odpri iz Gita…',
+  'Presentatie openen uit git': 'Odpri predstavitev iz Gita',
+  'Geen presentaties in deze repository.':
+      'V tem repozitoriju ni predstavitev.',
   'Rapportagetaal': 'Jezik poročila',
   'Niet vastgelegd': 'Ni zabeleženo',
   'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':

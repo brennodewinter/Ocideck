@@ -1802,6 +1802,17 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
+      'Configurați mai întâi un depozit Git în Setări → Depozit Git.',
+  'Git-repository': 'Depozit Git',
+  'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Deschideți prezentări dintr-un depozit Git. Fiecare versiune salvată este păstrată. Jetonul este stocat criptat în inelul de chei, nu alături de celelalte setări.',
+  'Eigenaar': 'Proprietar',
+  'Repository': 'Depozit',
+  'Personal access token': 'Jeton de acces personal',
+  'Openen uit git…': 'Deschide din Git…',
+  'Presentatie openen uit git': 'Deschide o prezentare din Git',
+  'Geen presentaties in deze repository.': 'Nicio prezentare în acest depozit.',
   'Rapportagetaal': 'Limba raportului',
   'Niet vastgelegd': 'Neînregistrat',
   'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':

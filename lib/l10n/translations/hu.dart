@@ -1787,6 +1787,18 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
+      'Először állítson be egy Git-tárolót a Beállítások → Git-tároló alatt.',
+  'Git-repository': 'Git-tároló',
+  'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Nyisson meg bemutatókat egy Git-tárolóból. Minden mentett verzió megmarad. A tokent titkosítva a kulcstartó őrzi, nem a többi beállítás mellett.',
+  'Eigenaar': 'Tulajdonos',
+  'Repository': 'Tároló',
+  'Personal access token': 'Személyes hozzáférési token',
+  'Openen uit git…': 'Megnyitás Gitből…',
+  'Presentatie openen uit git': 'Bemutató megnyitása Gitből',
+  'Geen presentaties in deze repository.':
+      'Nincsenek bemutatók ebben a tárolóban.',
   'Rapportagetaal': 'A jelentés nyelve',
   'Niet vastgelegd': 'Nincs rögzítve',
   'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':

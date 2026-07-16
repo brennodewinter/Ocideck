@@ -1782,6 +1782,18 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
+      'Vispirms iestatiet Git repozitoriju sadaļā Iestatījumi → Git repozitorijs.',
+  'Git-repository': 'Git repozitorijs',
+  'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Atveriet prezentācijas no Git repozitorija. Katra saglabātā versija tiek paturēta. Pilnvara tiek glabāta šifrēta atslēgu saišķī, nevis kopā ar pārējiem iestatījumiem.',
+  'Eigenaar': 'Īpašnieks',
+  'Repository': 'Repozitorijs',
+  'Personal access token': 'Personīgā piekļuves pilnvara',
+  'Openen uit git…': 'Atvērt no Git…',
+  'Presentatie openen uit git': 'Atvērt prezentāciju no Git',
+  'Geen presentaties in deze repository.':
+      'Šajā repozitorijā nav prezentāciju.',
   'Rapportagetaal': 'Ziņojuma valoda',
   'Niet vastgelegd': 'Nav reģistrēts',
   'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':

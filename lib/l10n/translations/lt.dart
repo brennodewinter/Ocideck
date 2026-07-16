@@ -1791,6 +1791,17 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
+      'Pirmiausia nustatykite Git saugyklą skiltyje Nustatymai → Git saugykla.',
+  'Git-repository': 'Git saugykla',
+  'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Atverkite pristatymus iš Git saugyklos. Kiekviena įrašyta versija išsaugoma. Prieigos raktas laikomas užšifruotas raktinėje, o ne kartu su kitais nustatymais.',
+  'Eigenaar': 'Savininkas',
+  'Repository': 'Saugykla',
+  'Personal access token': 'Asmeninis prieigos raktas',
+  'Openen uit git…': 'Atverti iš Git…',
+  'Presentatie openen uit git': 'Atverti pristatymą iš Git',
+  'Geen presentaties in deze repository.': 'Šioje saugykloje pristatymų nėra.',
   'Rapportagetaal': 'Ataskaitos kalba',
   'Niet vastgelegd': 'Neužfiksuota',
   'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':

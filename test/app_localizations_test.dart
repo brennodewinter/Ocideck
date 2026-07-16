@@ -40,6 +40,8 @@ void main() {
     AppLocalizations.setActiveLanguageCode('en');
 
     const unchangedInEnglish = {
+      'Repository',
+      'Personal access token',
       'ID',
       'Test',
       'Checklists',
@@ -107,6 +109,8 @@ void main() {
 
   test('all literal Dutch source strings are translated in every language', () {
     const unchangedInAllLanguages = {
+      'Repository',
+      'Personal access token',
       'ID',
       'Test',
       'Checklists',
