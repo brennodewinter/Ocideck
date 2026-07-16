@@ -46,6 +46,7 @@ part 'parts/settings_dialog_appearance.dart';
 part 'parts/settings_dialog_colors.dart';
 part 'parts/settings_dialog_profile.dart';
 part 'parts/settings_dialog_webdav.dart';
+part 'parts/settings_dialog_git.dart';
 part 'parts/settings_dialog_privacy.dart';
 part 'parts/settings_dialog_security.dart';
 part 'parts/settings_dialog_ai.dart';
@@ -128,6 +129,15 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   late TextEditingController _closingSlideMarkdown;
 
   // WebDAV/Nextcloud-bron.
+  // Git-repository als deck-bron.
+  late TextEditingController _gitUrl;
+  late TextEditingController _gitOwner;
+  late TextEditingController _gitRepo;
+  late TextEditingController _gitToken;
+  bool _gitTrusted = false;
+  String _initialGitIdentity = '';
+  String? _loadedGitToken;
+
   late TextEditingController _webdavUrl;
   late TextEditingController _webdavUser;
   late TextEditingController _webdavRoot;
@@ -210,6 +220,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     Icons.shield_outlined,
     Icons.smart_toy_outlined,
     Icons.cloud_outlined,
+    Icons.account_tree_outlined,
     Icons.checklist_outlined,
     Icons.extension_outlined,
     Icons.menu_book_outlined,
@@ -219,7 +230,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   /// Index of the "Over OciDeck" pane. It is the last entry in the tab lists
   /// but is opened from the branded footer at the bottom of the sidebar rather
   /// than from a regular nav item, so the nav list stops one short of it.
-  static const _aboutTabIndex = 11;
+  static const _aboutTabIndex = 12;
 
   static const _colorPresets = [
     '#FFFFFF',
@@ -265,6 +276,27 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     _closingSlideMarkdown = TextEditingController(
       text: _themeProfile.closingSlideMarkdown,
     );
+    final git = settings.gitRepo;
+    _gitUrl = TextEditingController(text: git?.baseUrl ?? '');
+    _gitOwner = TextEditingController(text: git?.owner ?? '');
+    _gitRepo = TextEditingController(text: git?.repo ?? '');
+    _gitToken = TextEditingController();
+    _gitTrusted = git?.trustedInternal ?? false;
+    _initialGitIdentity = '${git?.baseUrl ?? ''}|${git?.owner ?? ''}';
+    if (git != null && git.isConfigured) {
+      // Zelfde reden als bij het WebDAV-wachtwoord: het token staat in de
+      // keychain, laad het in zodat de gebruiker ziet dát het er is.
+      ref
+          .read(settingsProvider.notifier)
+          .readGitToken(git.baseUrl, git.owner)
+          .then((token) {
+            if (!mounted || token == null) return;
+            setState(() {
+              _loadedGitToken = token;
+              _gitToken.text = token;
+            });
+          });
+    }
     final webdav = settings.webdavServer;
     _webdavUrl = TextEditingController(text: webdav?.baseUrl ?? '');
     _webdavUser = TextEditingController(text: webdav?.username ?? '');
@@ -307,6 +339,10 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     _closingSlideMarkdown.dispose();
     _appearanceName.dispose();
     _cockpitName.dispose();
+    _gitUrl.dispose();
+    _gitOwner.dispose();
+    _gitRepo.dispose();
+    _gitToken.dispose();
     _webdavUrl.dispose();
     _webdavUser.dispose();
     _webdavRoot.dispose();
@@ -467,6 +503,20 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       ref.read(tabsProvider).current?.deckNotifier.updateThemeProfile(profile);
     }
 
+    // Git-repository: config in prefs, token in de keychain. Zelfde scheiding
+    // als bij WebDAV hieronder, en om dezelfde reden (D2, §10.1).
+    final gitRepo = _gitRepoFromFields();
+    if (gitRepo.isConfigured) {
+      notifier.setGitRepo(gitRepo);
+      final gitIdentityChanged =
+          '${gitRepo.baseUrl}|${gitRepo.owner}' != _initialGitIdentity;
+      if (_gitToken.text != _loadedGitToken || gitIdentityChanged) {
+        notifier.writeGitToken(gitRepo.baseUrl, gitRepo.owner, _gitToken.text);
+      }
+    } else {
+      notifier.setGitRepo(null);
+    }
+
     // WebDAV/Nextcloud-bron: serverconfig in prefs, wachtwoord in de keychain.
     final server = _webdavServerFromFields();
     if (server.isConfigured) {
@@ -516,6 +566,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       _tabBody(_securityTab()),
       _tabBody(_aiTab()),
       _tabBody(_webdavTab()),
+      _tabBody(_gitTab()),
       _tabBody(_checklistsTab()),
       _tabBody(_modulesTab()),
       _tabBody(_documentationTab()),

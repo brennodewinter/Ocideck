@@ -1806,6 +1806,18 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
+      'L-ewwel issettja repożitorju Git taħt Issettjar → Repożitorju Git.',
+  'Git-repository': 'Repożitorju Git',
+  'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Iftaħ preżentazzjonijiet minn repożitorju Git. Kull verżjoni salvata tinżamm. It-token jinħażen ikkriptat fiċ-ċavetta, mhux mal-issettjar l-ieħor.',
+  'Eigenaar': 'Sid',
+  'Repository': 'Repożitorju',
+  'Personal access token': 'Token ta\' aċċess personali',
+  'Openen uit git…': 'Iftaħ minn Git…',
+  'Presentatie openen uit git': 'Iftaħ preżentazzjoni minn Git',
+  'Geen presentaties in deze repository.':
+      'L-ebda preżentazzjoni f\'dan ir-repożitorju.',
   'Rapportagetaal': 'Lingwa tar-rapport',
   'Niet vastgelegd': 'Mhux irreġistrat',
   'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':

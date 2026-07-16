@@ -8,6 +8,15 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Decks can be opened from a git repository (Forgejo/Gitea).** A folder gives
+  you the latest version of a presentation; a repository keeps every version
+  you ever saved. This is the first slice: read-only opening, configured under
+  *Settings → Git repository*, with the token in the OS keychain rather than the
+  settings file. A repository is untrusted input like any other source, so the
+  markdown passes the same safety scan as a URL import — coming from your own
+  forge does not make it trusted. Unlike Nextcloud this also works on the web
+  build. Saving, versions and releases follow; see
+  [`docs/design/GIT_STORAGE.md`](docs/design/GIT_STORAGE.md).
 - **The bundled finding templates now exist in all 30 languages.** A tester
   writing a Dutch report pulled in an English skeleton and rewrote it by hand;
   the templates are OciDeck's own starter content, so they follow the reader.

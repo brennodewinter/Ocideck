@@ -10,6 +10,7 @@ import '../models/settings.dart';
 import '../services/secret_store.dart';
 import '../utils/log.dart';
 
+part 'parts/settings_provider_git.dart';
 part 'parts/settings_provider_privacy.dart';
 
 class SettingsNotifier extends StateNotifier<AppSettings> {
@@ -106,6 +107,17 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
         logWarning('SettingsNotifier: ongeldige webdavServer-prefs', e);
       }
     }
+    final gitJson = prefs.getString('gitRepo');
+    GitRepoConfig? gitRepo;
+    if (gitJson != null) {
+      try {
+        gitRepo = GitRepoConfig.fromJson(
+          Map<String, Object?>.from(jsonDecode(gitJson) as Map),
+        );
+      } catch (e) {
+        logWarning('SettingsNotifier: ongeldige gitRepo-prefs', e);
+      }
+    }
     final aiJson = prefs.getString('aiSettings');
     var ai = const AiSettings();
     if (aiJson != null) {
@@ -176,6 +188,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       cveApiBaseUrl:
           prefs.getString('cveApiBaseUrl') ?? AppSettings.defaultCveApiBaseUrl,
       webdavServer: webdav,
+      gitRepo: gitRepo,
       aiSettings: ai,
     );
   }

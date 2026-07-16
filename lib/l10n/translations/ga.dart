@@ -1819,6 +1819,18 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
+      'Socraigh stór Git ar dtús faoi Socruithe → Stór Git.',
+  'Git-repository': 'Stór Git',
+  'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Oscail láithreoireachtaí ó stór Git. Coinnítear gach leagan sábháilte. Stóráiltear an ceadchomhartha criptithe san eochairslabhra, ní in aice leis na socruithe eile.',
+  'Eigenaar': 'Úinéir',
+  'Repository': 'Stór',
+  'Personal access token': 'Ceadchomhartha rochtana pearsanta',
+  'Openen uit git…': 'Oscail ó Git…',
+  'Presentatie openen uit git': 'Oscail láithreoireacht ó Git',
+  'Geen presentaties in deze repository.':
+      'Níl aon láithreoireacht sa stór seo.',
   'Rapportagetaal': 'Teanga na tuairisce',
   'Niet vastgelegd': 'Gan taifeadadh',
   'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':

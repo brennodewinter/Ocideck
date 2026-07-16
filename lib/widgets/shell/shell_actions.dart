@@ -256,6 +256,49 @@ Future<void> _importUrlWeb(
   );
 }
 
+/// Kies een deck uit de git-repository, haal het op, door de security-gate en
+/// open het in een tab. Anders dan Nextcloud werkt dit óók op web: het
+/// forge-plane is gewoon https+JSON dat de browser-sandbox al inperkt, terwijl
+/// de WebDAV-client op dart:io-pinning leunt die daar niet bestaat (§4.4).
+Future<void> _openFromGit(BuildContext context, WidgetRef ref) async {
+  final forge = await ref.read(gitForgeProvider.future);
+  if (!context.mounted) return;
+  if (forge == null) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          context.l10n.d(
+            'Stel eerst een git-repository in bij Instellingen → Git-repository.',
+          ),
+        ),
+      ),
+    );
+    return;
+  }
+  final deckDir = await GitBrowserDialog.show(context);
+  if (deckDir == null || !context.mounted) return;
+
+  final config = ref.read(settingsProvider).gitRepo;
+  if (config == null) return;
+  final messenger = ScaffoldMessenger.of(context);
+  final l10n = context.l10n;
+  try {
+    final result = await ref
+        .read(tabsProvider.notifier)
+        .openDeckFromGit(
+          forge,
+          config: config,
+          deckDir: deckDir,
+          branch: config.defaultBranch,
+        );
+    _reportOpenFailure(messenger, l10n, result);
+  } on GitForgeException catch (e) {
+    // De uitzondering draagt al een uitlegbare tekst; die is voor de gebruiker
+    // bedoeld, dus toon hem in plaats van een eigen samenvatting.
+    messenger.showSnackBar(SnackBar(content: Text(e.message)));
+  }
+}
+
 /// Blader door de Nextcloud/WebDAV-bron, download het gekozen deck, haal het
 /// door de security-gate en open het in een tab. Toont waar nodig een melding.
 Future<void> _openFromNextcloud(BuildContext context, WidgetRef ref) async {

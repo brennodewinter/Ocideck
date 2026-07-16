@@ -1811,6 +1811,18 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
+      'Ρυθμίστε πρώτα ένα αποθετήριο Git στις Ρυθμίσεις → Αποθετήριο Git.',
+  'Git-repository': 'Αποθετήριο Git',
+  'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Ανοίξτε παρουσιάσεις από ένα αποθετήριο Git. Κάθε αποθηκευμένη έκδοση διατηρείται. Το διακριτικό αποθηκεύεται κρυπτογραφημένο στην κλειδοθήκη, όχι μαζί με τις υπόλοιπες ρυθμίσεις.',
+  'Eigenaar': 'Κάτοχος',
+  'Repository': 'Αποθετήριο',
+  'Personal access token': 'Προσωπικό διακριτικό πρόσβασης',
+  'Openen uit git…': 'Άνοιγμα από Git…',
+  'Presentatie openen uit git': 'Άνοιγμα παρουσίασης από Git',
+  'Geen presentaties in deze repository.':
+      'Δεν υπάρχουν παρουσιάσεις σε αυτό το αποθετήριο.',
   'Rapportagetaal': 'Γλώσσα αναφοράς',
   'Niet vastgelegd': 'Δεν έχει καταγραφεί',
   'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':

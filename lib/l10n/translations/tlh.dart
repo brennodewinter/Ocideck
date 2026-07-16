@@ -1758,6 +1758,18 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
+      'wa\'DIch Git qawHaq yIcher: chuqmey → Git qawHaq.',
+  'Git-repository': 'Git qawHaq',
+  'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Git qawHaqvo\' HaSta\' poQwI\' poSmoH. Hoch Qawlu\'pu\'bogh De\' polluvtaH. QulHom So\'lu\'pu\'bogh \'oH nuHmey qawHaqDaq polluvtaH, latlh chuqmey tlhejbe\'.',
+  'Eigenaar': 'ghaj wI\'',
+  'Repository': 'qawHaq',
+  'Personal access token': 'pagh QulHom',
+  'Openen uit git…': 'Gitvo\' poSmoH…',
+  'Presentatie openen uit git': 'Gitvo\' HaSta\' poQwI\' poSmoH',
+  'Geen presentaties in deze repository.':
+      'qawHaqvamDaq HaSta\' poQwI\' tu\'lu\'be\'.',
   'Rapportagetaal': 'ja\'ghach Hol',
   'Niet vastgelegd': 'qonlu\'be\'',
   'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':

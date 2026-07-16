@@ -9,10 +9,12 @@ import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 import '../models/deck.dart';
 import '../models/deck_template.dart';
+import '../models/git_settings.dart';
 import '../models/webdav_settings.dart';
 import '../services/annotation_codec.dart';
 import '../services/duplicate_service.dart';
 import '../services/file_service.dart';
+import '../services/git/git_forge.dart';
 import '../services/image_service.dart';
 import '../services/markdown_safety.dart';
 import '../services/markdown_service.dart';
@@ -25,6 +27,8 @@ import '../utils/log.dart';
 import 'deck_provider.dart';
 import 'editor_provider.dart';
 import 'settings_provider.dart';
+
+part 'tabs_provider_git.dart';
 
 const _uuid = Uuid();
 
@@ -43,12 +47,19 @@ class TabInfo {
   /// openen ingevuld en bij elke `state`-kopie hergebruikt.
   WebdavOrigin? webdavOrigin;
 
+  /// Gezet wanneer dit tabblad uit een git-repository is geopend. Draagt naast
+  /// de repo ook de `baseSha` waartegen dit werk is geschreven — dát is wat
+  /// versiebeheer toevoegt boven [webdavOrigin]. In Fase 0 wordt hij alleen
+  /// gevuld en gelezen; schrijven komt in Fase 2.
+  GitOrigin? gitOrigin;
+
   TabInfo({
     required this.id,
     required this.recoveryId,
     required this.deckNotifier,
     required this.editorNotifier,
     this.webdavOrigin,
+    this.gitOrigin,
   });
 
   String get label {
@@ -150,6 +161,18 @@ class TabsNotifier extends StateNotifier<TabsState> {
   final DuplicateService _duplicates = DuplicateService();
   Timer? _autosaveTimer;
   int _nextId = 0;
+
+  /// Leesbare state voor de part-extensies van deze library (zie
+  /// `tabs_provider_git.dart`): `state` zelf is protected en mag alleen binnen
+  /// de klasse. Zelfde truc als [DeckNotifier.currentState].
+  TabsState get currentState => state;
+
+  /// Herbouw de tabbladlijst zodat luisteraars een mutatie ín een [TabInfo] —
+  /// zoals een net ingevulde origin — daadwerkelijk zien. [TabInfo] is
+  /// muteerbaar, dus zonder nieuwe lijst verandert er niets voor Riverpod.
+  void refreshTabs() {
+    if (mounted) state = state.copyWith(tabs: List.from(state.tabs));
+  }
 
   /// UI-callback die het wachtwoord van een versleuteld pakket ophaalt.
   /// Geregistreerd door de shell (die een [BuildContext] heeft); zonder

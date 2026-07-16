@@ -129,6 +129,18 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `web_asset_store.dart` — In-memory afbeeldingsopslag (`mem:`-paden) voor de webversie; per-pagina levensduur.
 - `webdav_service.dart` — Talks WebDAV (Nextcloud) over a pinned, redirect-free `HttpClient`.
 
+### `lib/services/git/` — Git-repository storage (design: `docs/design/GIT_STORAGE.md`)
+
+Phase 0 only: read-only, over the forge REST plane. Writing, branches and tags
+follow in later phases.
+
+- `git_forge.dart` — The provider-agnostic `GitForge` interface (`listTree`, `readBlob`, `headSha`) plus its value types, `GitForgeException` and the `listDecks` extension. Everything git itself has no notion of lives behind this.
+- `gitea_forge.dart` — Forgejo/Gitea adapter (one adapter: same REST surface). The only place provider-specific knowledge may live.
+- `git_transport.dart` — The HTTP layer under the forge; carries no provider knowledge, not even the auth header (that differs per forge).
+- `git_transport_factory.dart` — Conditional export: pinned `dart:io` on desktop, browser fetch on web.
+- `git_transport_io.dart` — Desktop: `NetGuard.safeResolveTrusted` + socket pin + no redirects + byte cap.
+- `git_transport_web.dart` — Web: browser fetch with the same-origin fetch-proxy as fallback, but never for a request carrying a token.
+
 ## `lib/state/` — Riverpod providers
 
 - `consent_provider.dart` — `ConsentNotifier` managing consent acceptance/revocation with persistent storage.
@@ -139,7 +151,9 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `deck_provider_markdown.dart` — `DeckNotifierMarkdown` extension: generate/apply markdown for the whole deck or a single slide (per-slide markdown view).
 - `deck_provider_miauw.dart` — `DeckNotifierMiauw` extension: set/remove MIAUW compliance waivers.
 - `deck_quality_provider.dart` — Computes accessibility/quality analysis for the loaded deck.
+- `git_provider.dart` — `gitForgeProvider` (builds the adapter from the configured repo plus the token from the keychain) and `gitDeckListProvider` (the decks on a branch).
 - `editor_provider.dart` — `EditorState`/`EditorNotifier`: selected slide, editor mode, markdown buffer.
+- `tabs_provider_git.dart` — `TabsNotifierGit` extension: `openDeckFromGit` — fetch a deck from a repo, through the shared import gate, into a tab carrying a `GitOrigin`.
 - `image_contrast_provider.dart` — Computes title-slide image-contrast issues asynchronously per deck.
 - `sec_module_provider.dart` — The security-module enable/reveal state that gates the pentest features.
 - `local_cve_provider.dart` — `LocalCveNotifier`/`LocalCveState`: the local CVE database's status, build progress and cancellation, plus `localCveAvailableProvider` — which the CVE picker uses to search offline (and then deliberately *not* fall back online).

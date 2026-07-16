@@ -5,12 +5,14 @@ import 'chart.dart' show normalizeChartColor;
 import 'checklist_template.dart';
 import 'library_folder.dart';
 import 'recent_file.dart';
+import 'git_settings.dart';
 import 'webdav_settings.dart';
 
 export 'ai_settings.dart';
 export 'checklist_template.dart';
 export 'library_folder.dart';
 export 'recent_file.dart';
+export 'git_settings.dart';
 export 'webdav_settings.dart';
 
 /// Glyph used for unordered (bullet) list markers. [dot] is the classic
@@ -785,6 +787,10 @@ class AppSettings {
   /// ingesteld. Bevat nooit het wachtwoord (dat staat in de keychain).
   final WebdavServer? webdavServer;
 
+  /// Geconfigureerde git-repository als deck-bron, of `null` wanneer er geen is
+  /// ingesteld. Bevat nooit het token (dat staat in de keychain).
+  final GitRepoConfig? gitRepo;
+
   /// Instellingen voor de optionele AI-assistentie. Standaard uit; bevat nooit
   /// een API-sleutel (die staat in de keychain).
   final AiSettings aiSettings;
@@ -819,6 +825,7 @@ class AppSettings {
     this.allowCveLookup = false,
     this.cveApiBaseUrl = defaultCveApiBaseUrl,
     this.webdavServer,
+    this.gitRepo,
     this.aiSettings = const AiSettings(),
   });
 
@@ -900,11 +907,13 @@ class AppSettings {
     bool? allowCveLookup,
     String? cveApiBaseUrl,
     WebdavServer? webdavServer,
+    GitRepoConfig? gitRepo,
     AiSettings? aiSettings,
     bool clearExportDirectory = false,
     bool clearMaxReleaseExportTlp = false,
     bool clearMinRequiredExportTlp = false,
     bool clearWebdavServer = false,
+    bool clearGitRepo = false,
   }) {
     final nextProfiles = themeProfiles ?? this.themeProfiles;
     return AppSettings(
@@ -966,6 +975,7 @@ class AppSettings {
       webdavServer: clearWebdavServer
           ? null
           : (webdavServer ?? this.webdavServer),
+      gitRepo: clearGitRepo ? null : (gitRepo ?? this.gitRepo),
       aiSettings: aiSettings ?? this.aiSettings,
     );
   }

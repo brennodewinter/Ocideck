@@ -7,9 +7,11 @@ import '../utils/log.dart';
 /// app hoeft zo niets van de keychain te weten en er belandt nooit een geheim
 /// in het onversleutelde prefs-domein.
 ///
-/// Voorlopig wordt dit alleen gebruikt voor het WebDAV/Nextcloud-app-wachtwoord;
-/// de sleutel is afgeleid van server-URL + gebruikersnaam zodat meerdere
-/// accounts naast elkaar kunnen bestaan.
+/// Bewaart het WebDAV/Nextcloud-app-wachtwoord, de optionele API-sleutel van een
+/// AI-backend, en het personal access token van een git-forge. Elke sleutel is
+/// afgeleid van de genormaliseerde server-URL plus de identiteit erbinnen
+/// (gebruiker, respectievelijk repo-eigenaar), zodat meerdere accounts en
+/// servers naast elkaar kunnen bestaan zonder elkaar te overschrijven.
 class SecretStore {
   SecretStore({FlutterSecureStorage? storage})
     : _storage = storage ?? const FlutterSecureStorage();
@@ -86,6 +88,42 @@ class SecretStore {
       await _storage.delete(key: aiApiKeyKey(baseUrl));
     } catch (e) {
       logWarning('SecretStore.deleteAiApiKey: keychain delete failed', e);
+    }
+  }
+
+  /// Keychain-sleutel voor het personal access token van een git-forge, gekeyd
+  /// op genormaliseerde basis-URL + eigenaar. Eén token per repo-eigenaar, zodat
+  /// een account op twee forges — of twee organisaties op één forge — naast
+  /// elkaar kunnen bestaan.
+  static String gitTokenKey(String baseUrl, String owner) {
+    final normalized = baseUrl.trim().replaceAll(RegExp(r'/+$'), '');
+    return 'git_pat::$normalized::${owner.trim()}';
+  }
+
+  Future<void> writeGitToken(String baseUrl, String owner, String token) async {
+    try {
+      await _storage.write(key: gitTokenKey(baseUrl, owner), value: token);
+    } catch (e) {
+      logError('SecretStore.writeGitToken: keychain write failed', e);
+      rethrow;
+    }
+  }
+
+  Future<String?> readGitToken(String baseUrl, String owner) async {
+    try {
+      return await _storage.read(key: gitTokenKey(baseUrl, owner));
+    } catch (e) {
+      logError('SecretStore.readGitToken: keychain read failed', e);
+      return null;
+    }
+  }
+
+  Future<void> deleteGitToken(String baseUrl, String owner) async {
+    try {
+      await _storage.delete(key: gitTokenKey(baseUrl, owner));
+    } catch (e) {
+      // Wissen mag nooit fataal zijn: log en ga door.
+      logWarning('SecretStore.deleteGitToken: keychain delete failed', e);
     }
   }
 }

@@ -1783,6 +1783,18 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Stel eerst een git-repository in bij Instellingen → Git-repository.':
+      'Määritä ensin Git-tietovarasto kohdassa Asetukset → Git-tietovarasto.',
+  'Git-repository': 'Git-tietovarasto',
+  'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Avaa esityksiä Git-tietovarastosta. Jokainen tallennettu versio säilyy. Tunnus tallennetaan salattuna avainnippuun, ei muiden asetusten joukkoon.',
+  'Eigenaar': 'Omistaja',
+  'Repository': 'Tietovarasto',
+  'Personal access token': 'Henkilökohtainen käyttöoikeustunnus',
+  'Openen uit git…': 'Avaa Gitistä…',
+  'Presentatie openen uit git': 'Avaa esitys Gitistä',
+  'Geen presentaties in deze repository.':
+      'Tässä tietovarastossa ei ole esityksiä.',
   'Rapportagetaal': 'Raportin kieli',
   'Niet vastgelegd': 'Ei kirjattu',
   'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
