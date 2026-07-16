@@ -1361,6 +1361,18 @@ find it.
   analyser and contrast threshold), amber for a warning and red for a hard error,
   with the exact contrast ratio shown inline and the full details on hover. The
   bundled Marp theme is `assets/themes/ocideck.css`.
+- **Sharing a style profile.** Next to the profile name sit an **export** and an
+  **import** button. Export writes the profile you are editing to a
+  `.ocideckstyle` file (on the web build it downloads) — so a house style can be
+  passed to a colleague or kept in a repository without a deck around it. Import
+  reads such a file back, adds it as a new profile and selects it; an existing
+  name is never overwritten, the import gets a unique name instead. A **custom
+  logo travels inside the file**, so the profile arrives complete; the local path
+  to your logo is deliberately left out. Built-in logos stay a reference. On the
+  web build a restored custom logo lives only until you reload the page (there is
+  no persistent file storage in the browser) — everything else in the profile
+  keeps working. Anything that isn't a valid profile file is refused with an
+  explanation.
 - **App appearance** (a dark interface, the accent and panel colours, and the
   **interface font** — Roboto, Inter, Lora or EB Garamond, all bundled so the
   choice also holds on the web build) is configurable in settings. Create a
