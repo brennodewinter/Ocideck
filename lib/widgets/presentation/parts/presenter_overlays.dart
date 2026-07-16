@@ -526,6 +526,7 @@ extension _PresenterOverlays on _FullscreenPresenterState {
                       showClassificationWatermark:
                           widget.showClassificationWatermark,
                       scopeCia: deckScopeCiaIndex(widget.slides),
+                      reportLanguage: widget.reportLanguage,
                       fitScaleOverride: sharedSplitFitScale(
                         widget.slides,
                         i,

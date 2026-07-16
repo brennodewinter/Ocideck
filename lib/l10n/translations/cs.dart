@@ -1786,6 +1786,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Rapportagetaal': 'Jazyk zprávy',
+  'Niet vastgelegd': 'Nezaznamenáno',
   'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Reportové snímky a referenční data pro informační bezpečnost: zjištění, kontrolní seznamy, matice rozsahu a podpis. Strukturováno podle MIAUW a široce použitelné pro pentesty, audity a bezpečnostní výzkum. Referenční data jsou přímo v aplikaci, takže modul funguje ihned a zcela offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':

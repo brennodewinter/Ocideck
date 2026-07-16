@@ -16,12 +16,16 @@ class _FindingPreview extends StatelessWidget {
   final ThemeProfile profile;
   final Map<String, CiaRating> scopeCia;
 
+  /// The report's language (see [SlidePreviewWidget.reportLanguage]).
+  final String reportLanguage;
+
   const _FindingPreview({
     required this.slide,
     required this.w,
     required this.font,
     required this.profile,
     this.scopeCia = const {},
+    this.reportLanguage = '',
   });
 
   @override
@@ -275,13 +279,22 @@ class _FindingPreview extends StatelessWidget {
   }
 
   /// The finding's prose sections, in §3.1 order. Only sections with content are
-  /// shown, so a half-filled finding stays clean; the section headings are the
-  /// same stable English anchors the Markdown carries.
+  /// shown, so a half-filled finding stays clean.
+  ///
+  /// The heading shown is resolved into the **report's** language while the
+  /// Markdown keeps its stable English anchor (§12.3) — so a Dutch report reads
+  /// "Beschrijving" while the file still says `## Description` and round-trips.
+  /// This renders the deliverable: the rasterizer drives PDF/PPTX from these
+  /// previews, so an unlocalised heading here reaches the client.
   List<Widget> _sectionBlocks(BuildContext context, FindingSpec spec) {
     final buf = StringBuffer();
-    void add(String title, String body) {
+    void add(String anchor, String body) {
       if (body.trim().isEmpty) return;
-      buf.writeln('## $title');
+      final heading = AppLocalizations.sourceFor(
+        reportLanguage,
+        FindingSpec.sectionSources[anchor] ?? anchor,
+      );
+      buf.writeln('## $heading');
       buf.writeln();
       buf.writeln(body.trim());
       buf.writeln();

@@ -1819,6 +1819,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Rapportagetaal': 'Teanga na tuairisce',
+  'Niet vastgelegd': 'Gan taifeadadh',
   'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Sleamhnáin tuairiscithe agus sonraí tagartha don slándáil faisnéise: fionnachtana, seicliostaí, maitrísí raon feidhme agus síniú. Struchtúrtha de réir MIAUW agus inúsáidte go forleathan le haghaidh pentestanna, iniúchtaí agus taighde slándála. Tá na sonraí tagartha san aip féin, mar sin oibríonn an modúl láithreach agus go hiomlán as líne.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':

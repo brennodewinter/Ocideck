@@ -741,6 +741,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Rapportagetaal': 'Rapportaazjetaal',
+  'Niet vastgelegd': 'Net fêstlein',
   'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Rapportaazjeslides en referinsjedata foar ynformaasjebefeiliging: befinings, checklists, scope-matriuzen en ûndertekening. Struktureare neffens MIAUW en breed ynsetber foar pentests, audits en befeiligingsûndersyk. De referinsjegegevens sitte yn de app sels, dus de module wurket fuortendaliks en folslein offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':

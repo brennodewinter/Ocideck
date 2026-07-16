@@ -115,6 +115,14 @@ class Deck {
   final String description;
   final String keywords;
 
+  /// The language the report is written in, as a language code (e.g. `nl`,
+  /// `en`), or empty when not recorded. This is the **report's** language, not
+  /// the interface language: a Dutch tester writing for an international client
+  /// produces an English report from a Dutch UI. MIAUW EIS 2.3 requires it to be
+  /// agreed and recorded up front, and it drives the localisation of rendered
+  /// finding sections (PENTEST_MIAUW §12.3).
+  final String language;
+
   /// Traffic Light Protocol-classificatie van deze presentatie.
   final TlpLevel tlp;
 
@@ -206,6 +214,7 @@ class Deck {
     this.date = '',
     this.description = '',
     this.keywords = '',
+    this.language = '',
     this.tlp = TlpLevel.none,
     this.privacy = PrivacyDisposition.warn,
     this.presentationTargetSeconds = 0,
@@ -237,6 +246,7 @@ class Deck {
     String? date,
     String? description,
     String? keywords,
+    String? language,
     TlpLevel? tlp,
     PrivacyDisposition? privacy,
     int? presentationTargetSeconds,
@@ -267,6 +277,7 @@ class Deck {
       date: date ?? this.date,
       description: description ?? this.description,
       keywords: keywords ?? this.keywords,
+      language: language ?? this.language,
       tlp: tlp ?? this.tlp,
       privacy: privacy ?? this.privacy,
       presentationTargetSeconds:

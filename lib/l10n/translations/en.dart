@@ -922,6 +922,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Rapportagetaal': 'Report language',
+  'Niet vastgelegd': 'Not recorded',
   'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Reporting slides and reference data for information security: findings, checklists, scope matrices and sign-off. Structured per MIAUW and broadly usable for pentests, audits and security research. The reference data sits inside the app itself, so the module works right away and fully offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':

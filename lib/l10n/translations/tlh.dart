@@ -1758,6 +1758,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Rapportagetaal': 'ja\'ghach Hol',
+  'Niet vastgelegd': 'qonlu\'be\'',
   'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'ja\'ghach nav De\' Qan je Hub De\' vaD: Sampu\'bogh, tetlh, ghantoH Degh, ghItlh je. MIAUW tlha\' \'ej pentest, nojwI\', Hub QeD lo\'laH. app qojDaq De\' Qan tu\'lu\', vaj SIbI\' \'ej offline vumtaH ngoQ.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':

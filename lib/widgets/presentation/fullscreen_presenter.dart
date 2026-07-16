@@ -121,6 +121,10 @@ class FullscreenPresenter extends StatefulWidget {
   final int initialIndex;
   final TlpLevel tlp;
   final String organization;
+
+  /// De taal van het rapport ([Deck.language]); een bevinding toont haar
+  /// sectiekoppen daarin (PENTEST_MIAUW §12.3). Leeg = niet vastgelegd.
+  final String reportLanguage;
   final bool showClassificationWatermark;
 
   /// Of online media (URL-video's/-afbeeldingen en YouTube/Vimeo-embeds) live
@@ -162,6 +166,7 @@ class FullscreenPresenter extends StatefulWidget {
     required this.initialIndex,
     this.tlp = TlpLevel.none,
     this.organization = '',
+    this.reportLanguage = '',
     this.showClassificationWatermark = false,
     this.allowRemoteMedia = false,
     this.targetDuration,
@@ -203,6 +208,7 @@ class FullscreenPresenter extends StatefulWidget {
     final themeProfile = deck.themeProfile;
     final tlp = deck.tlp;
     final organization = deck.organization;
+    final reportLanguage = deck.language;
 
     var displayCount = 0;
     if (supportsDualScreenPresenter) {
@@ -229,6 +235,7 @@ class FullscreenPresenter extends StatefulWidget {
         initialIndex: initialIndex,
         tlp: tlp,
         organization: organization,
+        reportLanguage: reportLanguage,
         showClassificationWatermark: showClassificationWatermark,
         allowRemoteMedia: allowRemoteMedia,
         targetDuration: targetDuration,
@@ -249,6 +256,7 @@ class FullscreenPresenter extends StatefulWidget {
         initialIndex: initialIndex,
         tlp: tlp,
         organization: organization,
+        reportLanguage: reportLanguage,
         showClassificationWatermark: showClassificationWatermark,
         allowRemoteMedia: allowRemoteMedia,
         targetDuration: targetDuration,
@@ -271,6 +279,7 @@ class FullscreenPresenter extends StatefulWidget {
     required int initialIndex,
     TlpLevel tlp = TlpLevel.none,
     String organization = '',
+    String reportLanguage = '',
     bool showClassificationWatermark = false,
     bool allowRemoteMedia = false,
     Duration? targetDuration,
@@ -301,6 +310,7 @@ class FullscreenPresenter extends StatefulWidget {
               initialIndex: initialIndex,
               tlp: tlp,
               organization: organization,
+              reportLanguage: reportLanguage,
               showClassificationWatermark: showClassificationWatermark,
               allowRemoteMedia: allowRemoteMedia,
               targetDuration: targetDuration,
@@ -335,6 +345,7 @@ class FullscreenPresenter extends StatefulWidget {
     required int initialIndex,
     TlpLevel tlp = TlpLevel.none,
     String organization = '',
+    String reportLanguage = '',
     bool showClassificationWatermark = false,
     bool allowRemoteMedia = false,
     Duration? targetDuration,
@@ -357,6 +368,7 @@ class FullscreenPresenter extends StatefulWidget {
         themeProfile: themeProfile,
         tlp: tlp,
         organization: organization,
+        language: reportLanguage,
       ),
       inlineStyleProfile: true,
     );
@@ -413,6 +425,7 @@ class FullscreenPresenter extends StatefulWidget {
           initialIndex: initialIndex,
           tlp: tlp,
           organization: organization,
+          reportLanguage: reportLanguage,
           showClassificationWatermark: showClassificationWatermark,
           allowRemoteMedia: allowRemoteMedia,
           showRehearsalSummary: showRehearsalSummary,
@@ -442,6 +455,7 @@ class FullscreenPresenter extends StatefulWidget {
               initialIndex: initialIndex,
               tlp: tlp,
               organization: organization,
+              reportLanguage: reportLanguage,
               showClassificationWatermark: showClassificationWatermark,
               allowRemoteMedia: allowRemoteMedia,
               showRehearsalSummary: showRehearsalSummary,

@@ -208,7 +208,12 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
   /// from the template; the scope object, CVE ids and finding id stay as the
   /// tester set them for this engagement.
   Future<void> _pickTemplate() async {
-    final template = await FindingTemplatePicker.show(context);
+    // De sjabloontaal volgt het rapport, niet de interface (§12.3).
+    final language = ref.read(deckProvider).deck?.language ?? '';
+    final template = await FindingTemplatePicker.show(
+      context,
+      languageCode: language,
+    );
     if (template == null) return;
     final spec = template.toFindingSpec();
     _heading.text = spec.heading;

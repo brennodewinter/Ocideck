@@ -81,6 +81,7 @@ class _FrontMatter {
   Map<String, String> miauwConfirmations = const {};
   String? presentationTitle;
   String author = '';
+  String language = '';
   String organization = '';
   String version = '';
   String date = '';
@@ -134,6 +135,7 @@ extension _MarkdownParse on MarkdownService {
       date: fm.date,
       description: fm.description,
       keywords: fm.keywords,
+      language: fm.language,
       tlp: fm.tlp,
       privacy: fm.privacy,
       presentationTargetSeconds: fm.presentationTargetSeconds.clamp(0, 86400),
@@ -201,6 +203,8 @@ extension _MarkdownParse on MarkdownService {
               fm.description = _parseScalar(value);
             case 'keywords':
               fm.keywords = _parseScalar(value);
+            case 'language':
+              fm.language = _parseScalar(value);
             case 'tlp':
               fm.tlp = TlpLevelX.fromKey(value);
             case 'privacy':

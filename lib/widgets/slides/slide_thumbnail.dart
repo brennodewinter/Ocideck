@@ -44,6 +44,10 @@ class SlideThumbnail extends ConsumerWidget {
   /// colour matches the main preview (see [SlidePreviewWidget.scopeCia]).
   final Map<String, CiaRating> scopeCia;
 
+  /// The report's language (see [SlidePreviewWidget.reportLanguage]), so a
+  /// thumbnail reads the same as the slide it stands for.
+  final String reportLanguage;
+
   const SlideThumbnail({
     super.key,
     required this.slide,
@@ -63,6 +67,7 @@ class SlideThumbnail extends ConsumerWidget {
     this.fitScaleOverride,
     this.numberStart = 1,
     this.scopeCia = const {},
+    this.reportLanguage = '',
   });
 
   @override
@@ -219,6 +224,7 @@ class SlideThumbnail extends ConsumerWidget {
                     slideCount: slideCount,
                     numberStart: numberStart,
                     scopeCia: scopeCia,
+                    reportLanguage: reportLanguage,
                     fitScaleOverride: fitScaleOverride,
                     tlp: tlp,
                     organization: organization,

@@ -8,6 +8,37 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **The bundled finding templates now exist in all 30 languages.** A tester
+  writing a Dutch report pulled in an English skeleton and rewrote it by hand;
+  the templates are OciDeck's own starter content, so they follow the reader.
+  They follow the **report's** language (Settings → Presentation properties), not
+  the interface's — writing an English report from a Dutch UI still gives you an
+  English skeleton, and a report with no recorded language gets English.
+  Only the prose is translated. A template's section headings stay English
+  because they are what the parser matches on, its CWE line is a MITRE citation,
+  and its severity is FIRST's published band label — the same label the finding
+  itself stores, so a translated one would contradict the finding rendered right
+  beside it. A "Dutch template" is Dutch prose in a fixed skeleton, and a test
+  now proves that: it parses every template in every language and fails if any
+  section comes back empty.
+
+- **A report can record the language it is written in, and findings now read in
+  that language.** MIAUW requires the report language to be agreed and recorded
+  before a pentest starts (EIS 2.3), but a deck had nowhere to put it — so the
+  requirement sat in the compliance overview as a permanently open item you could
+  only ever tick by hand. It is now a field under Presentation properties, stored
+  in the front matter as `language`, and EIS 2.3 is derived from it like any other
+  content-based requirement (18 of the 88 are now automatic, up from 17).
+  It also fixes something that reached the client. Every finding rendered its
+  section headings — *Description*, *Confirmation (reproduction)*, *Possible
+  impact*, *Recommendation* — in English no matter what language the report was
+  written in, and because PDF/PPTX export rasterises the same previews, a Dutch
+  MIAUW report went out with English headings. The heading now follows the
+  **report's** language, not the interface language: a Dutch tester writing for an
+  international client still gets an English report from a Dutch UI. The Markdown
+  keeps its stable English anchors, so the file round-trips exactly as before and
+  a deck that records no language renders precisely what it always did.
+
 - **The About screen names where the project comes from.** Right above "Waar
   komt de naam vandaan?" it now says that OciDeck is a by-product of the Pilot
   Informatieautonomie, with a link to www.pilotinformatieautonomie.nl.

@@ -737,6 +737,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Rapportagetaal': 'Idioma del informe',
+  'Niet vastgelegd': 'No registrado',
   'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Diapositivas de informe y datos de referencia para la seguridad de la información: hallazgos, listas de verificación, matrices de alcance y firma. Estructurado según MIAUW y ampliamente utilizable para pentests, auditorías e investigación de seguridad. Los datos de referencia están en la propia aplicación, por lo que el módulo funciona de inmediato y totalmente sin conexión.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':

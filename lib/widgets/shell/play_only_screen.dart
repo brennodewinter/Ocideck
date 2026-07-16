@@ -163,6 +163,7 @@ class _PlayOnlyScreen extends ConsumerWidget {
           slideNumber: 1,
           slideCount: slideCount,
           scopeCia: deckScopeCiaIndex(deck.slides),
+          reportLanguage: deck.language,
           tlp: deck.tlp,
           organization: deck.organization,
           showClassificationWatermark: settings.classificationWatermarkEnabled,

@@ -74,20 +74,45 @@ void main() {
 
   group('FindingTemplateLibrary', () {
     final lib = FindingTemplateLibrary.instance;
+    // Templates are picked by the language of the report, not the interface
+    // (PENTEST_MIAUW §12.3); these cases are language-agnostic, so they use the
+    // English fallback. Per-language coverage lives in
+    // test/finding_template_languages_test.dart.
+    const lang = FindingTemplateLibrary.fallbackLanguage;
 
     test('parses every bundled template with a title and CWE', () {
-      expect(lib.bundled, isNotEmpty);
-      for (final t in lib.bundled) {
+      expect(lib.bundledFor(lang), isNotEmpty);
+      for (final t in lib.bundledFor(lang)) {
         expect(t.title, isNotEmpty, reason: 'template ${t.id} has no title');
         expect(t.cweId, isNotNull, reason: 'template ${t.id} has no CWE');
       }
     });
 
     test('search matches by title and by CWE id', () {
-      expect(lib.search('sql').map((t) => t.id), contains('sql-injection'));
-      expect(lib.search('CWE-79').map((t) => t.id), contains('reflected-xss'));
-      expect(lib.search(''), hasLength(lib.bundled.length));
-      expect(lib.search('nonexistentxyz'), isEmpty);
+      expect(
+        lib.search('sql', languageCode: lang).map((t) => t.id),
+        contains('sql-injection'),
+      );
+      expect(
+        lib.search('CWE-79', languageCode: lang).map((t) => t.id),
+        contains('reflected-xss'),
+      );
+      expect(
+        lib.search('', languageCode: lang),
+        hasLength(lib.bundledFor(lang).length),
+      );
+      expect(lib.search('nonexistentxyz', languageCode: lang), isEmpty);
+    });
+
+    test('search follows the report language', () {
+      // The Dutch title is "SQL-injectie": a Dutch search term finds it, and the
+      // same term finds nothing in the English set — proof the picker really is
+      // searching the report's language rather than one fixed set.
+      expect(
+        lib.search('injectie', languageCode: 'nl').map((t) => t.id),
+        contains('sql-injection'),
+      );
+      expect(lib.search('injectie', languageCode: 'en'), isEmpty);
     });
   });
 }

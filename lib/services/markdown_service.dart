@@ -75,6 +75,9 @@ class MarkdownService {
     if (deck.keywords.isNotEmpty) {
       buf.writeln('keywords: ${_yamlScalar(deck.keywords)}');
     }
+    if (deck.language.isNotEmpty) {
+      buf.writeln('language: ${_yamlScalar(deck.language)}');
+    }
     if (deck.tlp != TlpLevel.none) {
       buf.writeln('tlp: ${deck.tlp.key}');
     }

@@ -1813,6 +1813,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Rapportagetaal': 'Idioma do relatório',
+  'Niet vastgelegd': 'Não registado',
   'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Diapositivos de relatório e dados de referência para a segurança da informação: constatações, listas de tarefas, matrizes de escopo e assinatura. Estruturado segundo o MIAUW e amplamente utilizável para pentests, auditorias e investigação de segurança. Os dados de referência estão na própria aplicação, pelo que o módulo funciona de imediato e totalmente offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':

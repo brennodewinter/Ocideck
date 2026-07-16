@@ -33,6 +33,11 @@ enum EisCheck {
   /// The deck carries a report version (1.5).
   reportVersion,
 
+  /// The deck records the language the report is written in (2.3). MIAUW wants
+  /// it agreed and recorded *before* the pentest; the deck's front-matter
+  /// `language` is that record.
+  reportLanguage,
+
   /// A sign-off / truthful-reporting attestation is present (1.6).
   signOff,
 

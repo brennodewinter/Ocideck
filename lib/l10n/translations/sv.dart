@@ -1782,6 +1782,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Rapportagetaal': 'Rapportspråk',
+  'Niet vastgelegd': 'Inte angivet',
   'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Rapporteringsslides och referensdata för informationssäkerhet: fynd, checklistor, scope-matriser och godkännande. Strukturerad enligt MIAUW och brett användbar för pentester, revisioner och säkerhetsundersökningar. Referensdata finns i själva appen, så modulen fungerar direkt och helt offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':

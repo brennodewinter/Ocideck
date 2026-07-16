@@ -1790,6 +1790,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Rapportagetaal': 'Jazyk správy',
+  'Niet vastgelegd': 'Nezaznamenané',
   'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Reportové snímky a referenčné údaje pre informačnú bezpečnosť: zistenia, kontrolné zoznamy, matice rozsahu a podpis. Štruktúrované podľa MIAUW a široko použiteľné pre pentesty, audity a bezpečnostný výskum. Referenčné údaje sú priamo v aplikácii, takže modul funguje ihneď a úplne offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':

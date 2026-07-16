@@ -74,7 +74,7 @@ class SecReferenceInventory {
     ),
     ReferenceCatalog(
       name: 'Bevindingsjablonen',
-      count: FindingTemplateLibrary.instance.bundled.length,
+      count: FindingTemplateLibrary.instance.count,
       standard: '',
       source: 'OciDeck',
     ),
