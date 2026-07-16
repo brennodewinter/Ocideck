@@ -12,6 +12,14 @@
 > It is written to be **picked up cold**: exact file paths, integration points,
 > data shapes, invariants and open questions are spelled out so a later
 > implementation session has everything it needs without re-deriving context.
+>
+> Sibling design doc: [`GIT_STORAGE.md`](GIT_STORAGE.md) (versioned storage in a
+> git repository). The two are complementary and split along a clean seam:
+> **this document is synchronous collaboration** — authors in the room at the same
+> time, live co-editing and presenting in one session; **git is asynchronous
+> collaboration** — clone, branch, review, merge, release. A room is a disposable
+> sync channel; a git repo is durable versioned storage. Both share the principle
+> *file = truth*, and neither depends on the other landing.
 
 ---
 

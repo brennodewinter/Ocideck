@@ -145,7 +145,7 @@ Features list); Collaboration and Git storage remain forward-looking proposals.
 | [AI assistance](docs/design/AI_ASSIST.md) | **Implemented** | Optional, privacy-first AI assistance (finding text drafting and image tagging) |
 | [Agentic build plan](docs/design/AGENTIC_BUILD_PLAN.md) | Executed | How the pentest and AI feature set was built with autonomous agents |
 | [Collaboration](docs/design/COLLABORATION.md) | Proposal | Real-time co-authoring, presenting, and calls |
-| [Git storage](docs/design/GIT_STORAGE.md) | Proposal | Storing decks in a git repository as versioned storage |
+| [Git storage](docs/design/GIT_STORAGE.md) | Proposal | Decks in a git repository: history, releases as tags, review as pull requests |
 
 ## Contributing
 
