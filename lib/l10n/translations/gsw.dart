@@ -1787,6 +1787,25 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Stijlprofiel exporteren': 'Stilprofil exportiere',
+  'Stijlprofiel importeren': 'Stilprofil importiere',
+  'Profiel exporteren': 'Profil exportiere',
+  'Profiel importeren': 'Profil importiere',
+  'Stijlprofiel geëxporteerd': 'Stilprofil exportiert',
+  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
+      'Stilprofil exportiert — s eigene Logo het nöd chönne mitgnoh werde',
+  'Stijlprofiel exporteren mislukt': 'Export vom Stilprofil isch fehlgschlage',
+  'Stijlprofiel importeren mislukt': 'Import vom Stilprofil isch fehlgschlage',
+  'Stijlprofiel geïmporteerd': 'Stilprofil importiert',
+  'Dit is geen geldig stijlprofiel-bestand':
+      'Das isch kei gültigi Stilprofil-Datei',
+  'Dit bestand is te groot voor een stijlprofiel':
+      'Die Datei isch z gross für es Stilprofil',
+  'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
+      'Das Stilprofil chunnt vo ere neuere Version vo OciDeck',
+  'die naam bestond al, bewaard als': 'de Name hets scho gee, gspeicheret als',
+  'het ingesloten logo kon niet worden teruggezet':
+      's iibettete Logo het me nöd chönne zrugghole',
   'Maak een tussenkop': 'E Zwüschetitel mache',
   'Maak er weer een bullet van': 'Wieder zu emene Punkt mache',
   'Tussenkop (leeg = alleen een scheidingslijn)':

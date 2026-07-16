@@ -1806,6 +1806,28 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Stijlprofiel exporteren': 'Експортиране на стилов профил',
+  'Stijlprofiel importeren': 'Импортиране на стилов профил',
+  'Profiel exporteren': 'Експортиране на профил',
+  'Profiel importeren': 'Импортиране на профил',
+  'Stijlprofiel geëxporteerd': 'Стиловият профил е експортиран',
+  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
+      'Стиловият профил е експортиран — собственото лого не можа да бъде включено',
+  'Stijlprofiel exporteren mislukt':
+      'Експортирането на стиловия профил е неуспешно',
+  'Stijlprofiel importeren mislukt':
+      'Импортирането на стиловия профил е неуспешно',
+  'Stijlprofiel geïmporteerd': 'Стиловият профил е импортиран',
+  'Dit is geen geldig stijlprofiel-bestand':
+      'Това не е валиден файл със стилов профил',
+  'Dit bestand is te groot voor een stijlprofiel':
+      'Този файл е твърде голям за стилов профил',
+  'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
+      'Този стилов профил е от по-нова версия на OciDeck',
+  'die naam bestond al, bewaard als':
+      'това име вече съществуваше, запазено като',
+  'het ingesloten logo kon niet worden teruggezet':
+      'вграденото лого не можа да бъде възстановено',
   'Maak een tussenkop': 'Създаване на междинно заглавие',
   'Maak er weer een bullet van': 'Връщане обратно към водещ символ',
   'Tussenkop (leeg = alleen een scheidingslijn)':

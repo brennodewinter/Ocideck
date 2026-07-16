@@ -1802,6 +1802,25 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Stijlprofiel exporteren': 'Exportă profilul de stil',
+  'Stijlprofiel importeren': 'Importă profilul de stil',
+  'Profiel exporteren': 'Exportă profilul',
+  'Profiel importeren': 'Importă profilul',
+  'Stijlprofiel geëxporteerd': 'Profilul de stil a fost exportat',
+  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
+      'Profilul de stil a fost exportat — logoul propriu nu a putut fi inclus',
+  'Stijlprofiel exporteren mislukt': 'Exportul profilului de stil a eșuat',
+  'Stijlprofiel importeren mislukt': 'Importul profilului de stil a eșuat',
+  'Stijlprofiel geïmporteerd': 'Profilul de stil a fost importat',
+  'Dit is geen geldig stijlprofiel-bestand':
+      'Acesta nu este un fișier de profil de stil valid',
+  'Dit bestand is te groot voor een stijlprofiel':
+      'Acest fișier este prea mare pentru un profil de stil',
+  'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
+      'Acest profil de stil provine dintr-o versiune mai nouă a OciDeck',
+  'die naam bestond al, bewaard als': 'acel nume exista deja, salvat ca',
+  'het ingesloten logo kon niet worden teruggezet':
+      'logoul încorporat nu a putut fi restaurat',
   'Maak een tussenkop': 'Creează un subtitlu',
   'Maak er weer een bullet van': 'Transformă înapoi în marcaj',
   'Tussenkop (leeg = alleen een scheidingslijn)':

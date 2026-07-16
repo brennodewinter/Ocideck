@@ -1785,6 +1785,25 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Stijlprofiel exporteren': 'Izvozi profil sloga',
+  'Stijlprofiel importeren': 'Uvozi profil sloga',
+  'Profiel exporteren': 'Izvozi profil',
+  'Profiel importeren': 'Uvozi profil',
+  'Stijlprofiel geëxporteerd': 'Profil sloga je izvožen',
+  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
+      'Profil sloga je izvožen — lastnega logotipa ni bilo mogoče vključiti',
+  'Stijlprofiel exporteren mislukt': 'Izvoz profila sloga ni uspel',
+  'Stijlprofiel importeren mislukt': 'Uvoz profila sloga ni uspel',
+  'Stijlprofiel geïmporteerd': 'Profil sloga je uvožen',
+  'Dit is geen geldig stijlprofiel-bestand':
+      'To ni veljavna datoteka profila sloga',
+  'Dit bestand is te groot voor een stijlprofiel':
+      'Ta datoteka je prevelika za profil sloga',
+  'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
+      'Ta profil sloga izvira iz novejše različice OciDecka',
+  'die naam bestond al, bewaard als': 'to ime je že obstajalo, shranjeno kot',
+  'het ingesloten logo kon niet worden teruggezet':
+      'vdelanega logotipa ni bilo mogoče obnoviti',
   'Maak een tussenkop': 'Ustvari mednaslov',
   'Maak er weer een bullet van': 'Pretvori nazaj v oznako',
   'Tussenkop (leeg = alleen een scheidingslijn)':

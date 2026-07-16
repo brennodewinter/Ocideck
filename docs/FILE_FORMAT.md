@@ -272,6 +272,61 @@ Unknown or missing fields fall back to defaults, so older files migrate cleanly.
 > render time. It is intentionally kept out of the deck `.md` so the file stays
 > pure content.
 
+### 3.3 Standalone Style Profile (`.ocideckstyle`)
+
+A style profile also travels on its own, so a profile can be shared without a
+deck around it. The settings dialog exports the profile currently in the editor
+and imports one back (the buttons next to the profile name).
+
+The file is plain UTF-8 JSON — an envelope around the same profile JSON as
+§3.2:
+
+```json
+{
+  "ocideck": "style-profile",
+  "version": 1,
+  "profile": { "name": "…", "accentColor": "#2E7D64", "…": "…" },
+  "logo": { "mime": "image/png", "data": "<base64>" }
+}
+```
+
+| Key | Meaning |
+| --- | --- |
+| `ocideck` | Format marker; must be `style-profile`. Import refuses anything else, so an arbitrary `.json` cannot be mistaken for a profile. |
+| `version` | Envelope version (currently `1`). A higher number is refused rather than half-read. |
+| `profile` | The profile, exactly the §3.2 field set. Unknown/missing fields fall back to defaults. |
+| `logo` | **Optional.** An embedded custom logo. `mime` is informational — the importer re-derives the type from the bytes themselves. |
+
+Import accepts the `.ocideckstyle` and `.json` extensions. Caps: 16 MiB per
+file, 8 MiB per embedded logo.
+
+**How the logo travels.** `logoPath` is a local path and means nothing to the
+receiver, so it is handled by kind:
+
+- **No logo** (`null`) — nothing to do.
+- **Built-in logo** (`asset:…`) — stays a reference; every install carries the
+  same bundle.
+- **Custom logo** — the image bytes are embedded as base64 in `logo` and
+  `profile.logoPath` is written as `null`. This keeps the file portable and
+  avoids leaking the sender's local path (which contains their user name).
+
+On import the embedded bytes are written back to a real file and `logoPath`
+points at it: a `data:` URI is never left in `logoPath`, because none of the
+consumers (slide preview, rasterizer, presenter) resolve one.
+
+> **Web caveat.** On desktop the restored logo lands in a `style_logos/` folder
+> under the app-support directory and survives a restart. On web there is no
+> persistent byte store, so the logo goes into the in-memory store and is gone
+> after a reload — the profile itself (all colours, fonts, footer, …) stays
+> intact and only the logo falls back to a placeholder.
+
+**Security.** An imported profile is untrusted input and goes through the same
+hardened `ThemeProfile.fromJson` gate as a profile from a deck: colours are
+validated to strict `#RRGGBB` and font families are whitelisted, because these
+values are interpolated into a `<style>` block on export. A profile without an
+embedded image but *with* a bare `logoPath` has that path dropped — it points at
+the sender's disk and would not resolve anyway.
+
 ---
 
 ## 4. Slide Classes and Behavior

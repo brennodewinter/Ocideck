@@ -74,7 +74,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `export_bundle.dart` — `ExportBundle`: everything an export needs for one audience profile. A factory the export dialog holds, so it can pick the profile without ever touching the source deck.
 - `export_metadata.dart` — `ExportDocumentMetadata` stamped into PDF/PPTX/HTML (title, author, org, keywords, TLP).
 - `export_service.dart` — The single chokepoint that renders decks to PDF, PPTX, and HTML.
-- `file_service.dart` — Scans presentation files, opens decks (with the safety gate), and import/URL/package IO. Part `parts/file_service_dossier.dart` builds the one-click audit dossier (package + `AUDIT_DOSSIER.md` + optional `report.pdf`, AES-256).
+- `file_service.dart` — Scans presentation files, opens decks (with the safety gate), and import/URL/package IO. Part `parts/file_service_dossier.dart` builds the one-click audit dossier (package + `AUDIT_DOSSIER.md` + optional `report.pdf`, AES-256). Part `parts/file_service_style_profile.dart` reads/writes a standalone `.ocideckstyle` style profile (FILE_FORMAT §3.3), embedding a custom logo as base64 and materializing it back on import.
 - `finding_ai_service.dart` — Drafts a free-text finding field via the AI backend, grounded on the tester's facts; strips fabricated CWE/CVE/CVSS ids.
 - `finding_group_builder.dart` — `buildFindingGroup`: assembles a finding header + optional detail/evidence slides sharing one id.
 - `finding_numbering.dart` — `renumberFindings` (F-01… from deck order) + `deckFindingList` derivation.
@@ -266,6 +266,10 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
   Search over the settings lives in `parts/settings_dialog_search.dart`
   (`SettingsSearchEntry`, the search field, and the jump-and-flash), with the
   index of what is searchable in `parts/settings_dialog_search_index.dart`.
+  Picking/creating/deleting a style profile plus exporting and importing one as
+  a `.ocideckstyle` file is `parts/settings_dialog_profile.dart`; it mutates via
+  `_adoptProfile` on the state class, since `setState` is protected and out of
+  reach from an extension.
   Anchors are free: every section heading goes through `_sectionTitle`, which
   registers a `GlobalKey` under its own text, so a hit can scroll its section
   into view without any of the tab bodies knowing about search.

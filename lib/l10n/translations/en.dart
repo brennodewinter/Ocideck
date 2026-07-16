@@ -922,6 +922,25 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Stijlprofiel exporteren': 'Export style profile',
+  'Stijlprofiel importeren': 'Import style profile',
+  'Profiel exporteren': 'Export profile',
+  'Profiel importeren': 'Import profile',
+  'Stijlprofiel geëxporteerd': 'Style profile exported',
+  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
+      'Style profile exported — the custom logo could not be included',
+  'Stijlprofiel exporteren mislukt': 'Exporting the style profile failed',
+  'Stijlprofiel importeren mislukt': 'Importing the style profile failed',
+  'Stijlprofiel geïmporteerd': 'Style profile imported',
+  'Dit is geen geldig stijlprofiel-bestand':
+      'This is not a valid style profile file',
+  'Dit bestand is te groot voor een stijlprofiel':
+      'This file is too large for a style profile',
+  'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
+      'This style profile comes from a newer version of OciDeck',
+  'die naam bestond al, bewaard als': 'that name already existed, saved as',
+  'het ingesloten logo kon niet worden teruggezet':
+      'the embedded logo could not be restored',
   'Maak een tussenkop': 'Make a group heading',
   'Maak er weer een bullet van': 'Turn it back into a bullet',
   'Tussenkop (leeg = alleen een scheidingslijn)':

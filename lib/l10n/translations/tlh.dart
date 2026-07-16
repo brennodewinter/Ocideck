@@ -1758,6 +1758,24 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Stijlprofiel exporteren': 'Segh nab DoQmeH yIngeH',
+  'Stijlprofiel importeren': 'Segh nab yIkII\'',
+  'Profiel exporteren': 'nab DoQmeH yIngeH',
+  'Profiel importeren': 'nab yIkII\'',
+  'Stijlprofiel geëxporteerd': 'Segh nab ngeHlu\'pu\'',
+  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
+      'Segh nab ngeHlu\'pu\' — Degh tlhoS chellaHbe\'',
+  'Stijlprofiel exporteren mislukt': 'Segh nab ngeHlu\'laHbe\'',
+  'Stijlprofiel importeren mislukt': 'Segh nab kII\'laHbe\'',
+  'Stijlprofiel geïmporteerd': 'Segh nab kII\'lu\'pu\'',
+  'Dit is geen geldig stijlprofiel-bestand': 'Segh nab De\'wI\' nav ghaHbe\'',
+  'Dit bestand is te groot voor een stijlprofiel':
+      'Segh nab De\'wI\' nav tIn qu\'',
+  'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
+      'OciDeck chu\' law\' vo\' Segh nab ghaH',
+  'die naam bestond al, bewaard als': 'pong tu\'lu\'pu\', polDI\'',
+  'het ingesloten logo kon niet worden teruggezet':
+      'Degh chellu\'bogh choqlu\'laHbe\'',
   'Maak een tussenkop': 'nach bIng yIchenmoH',
   'Maak er weer een bullet van': 'ghItlh yIchenmoHqa\'',
   'Tussenkop (leeg = alleen een scheidingslijn)': 'nach bIng (chIm = HeH neH)',

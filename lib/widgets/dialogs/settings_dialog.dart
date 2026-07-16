@@ -13,6 +13,7 @@ import '../../models/slide_quality.dart';
 import '../../platform/platform_features.dart';
 import '../../services/ai_client_service.dart';
 import '../../services/ai_security_gate.dart';
+import '../../services/file_service.dart';
 import '../../services/recovery_service.dart';
 import '../../services/classification_enforcement_policy.dart';
 import '../../services/webdav_service.dart';
@@ -22,6 +23,7 @@ import '../../services/secmodule/sec_module_provisioner.dart';
 import '../../services/secmodule/sec_reference_inventory.dart';
 import '../../state/local_cve_provider.dart';
 import '../../services/slide_quality_analyzer.dart';
+import '../../state/deck_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';
 import '../../state/consent_provider.dart';
@@ -43,6 +45,7 @@ part 'parts/settings_dialog_general.dart';
 part 'parts/settings_dialog_presentation.dart';
 part 'parts/settings_dialog_appearance.dart';
 part 'parts/settings_dialog_colors.dart';
+part 'parts/settings_dialog_profile.dart';
 part 'parts/settings_dialog_webdav.dart';
 part 'parts/settings_dialog_privacy.dart';
 part 'parts/settings_dialog_security.dart';
@@ -385,7 +388,14 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   }
 
   void _selectProfile(String name) {
-    final profile = _profiles.firstWhere((p) => p.name == name);
+    _adoptProfile(_profiles.firstWhere((p) => p.name == name));
+  }
+
+  /// Neem [profile] over als het profiel in bewerking. Eén plek voor de
+  /// veldsynchronisatie die kiezen, aanmaken, importeren en verwijderen delen,
+  /// en het setState-aanspreekpunt voor de profiel-extensie (zie
+  /// parts/settings_dialog_profile.dart).
+  void _adoptProfile(ThemeProfile profile) {
     setState(() {
       _themeProfile = profile;
       _originalName = profile.name;
@@ -397,16 +407,23 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     });
   }
 
-  void _save() {
-    final notifier = ref.read(settingsProvider.notifier);
+  /// Het profiel zoals het nú in de editor staat: [_themeProfile] plus de
+  /// velden die nog in hun controller leven. Opslaan én exporteren gaan hier
+  /// doorheen, zodat je exporteert wat je ziet.
+  ThemeProfile _editedProfile() {
     final name = _profileName.text.trim();
     final size = int.tryParse(_logoSize.text)?.clamp(32, 240);
-    final profile = _themeProfile.copyWith(
+    return _themeProfile.copyWith(
       name: name.isEmpty ? 'Stijlprofiel' : name,
       logoSize: size,
       footerText: _footerText.text,
       closingSlideMarkdown: _closingSlideMarkdown.text,
     );
+  }
+
+  void _save() {
+    final notifier = ref.read(settingsProvider.notifier);
+    final profile = _editedProfile();
     notifier.setLibraries(_normalizedLibraries());
     notifier.setExportDirectory(_exportDirectory);
     notifier.saveThemeProfile(profile, previousName: _originalName);
@@ -809,116 +826,6 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         ],
       ),
     );
-  }
-
-  Widget _profileSelector(List<ThemeProfile> profiles) {
-    final l10n = context.l10n;
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          child: TextField(
-            controller: _profileName,
-            textInputAction: TextInputAction.done,
-            decoration: InputDecoration(
-              labelText: l10n.d('Stijlprofiel'),
-              hintText: l10n.d('Naam van het stijlprofiel'),
-              isDense: true,
-              prefixIcon: const Icon(Icons.style_outlined, size: 18),
-              suffixIcon: PopupMenuButton<String>(
-                tooltip: l10n.d('Ander profiel kiezen'),
-                icon: const Icon(Icons.arrow_drop_down),
-                onSelected: _selectProfile,
-                itemBuilder: (context) => [
-                  for (final profile in profiles)
-                    PopupMenuItem(
-                      value: profile.name,
-                      child: Row(
-                        children: [
-                          if (profile.name == _originalName)
-                            const Padding(
-                              padding: EdgeInsets.only(right: 8),
-                              child: Icon(Icons.check, size: 16),
-                            ),
-                          Expanded(child: Text(profile.name)),
-                        ],
-                      ),
-                    ),
-                ],
-              ),
-            ),
-            onChanged: (value) {
-              final name = value.trim();
-              _themeProfile = _themeProfile.copyWith(
-                name: name.isEmpty ? _themeProfile.name : name,
-              );
-              _profileTouched = true;
-            },
-          ),
-        ),
-        const SizedBox(width: 8),
-        IconButton(
-          tooltip: l10n.d('Nieuw profiel'),
-          onPressed: _createProfile,
-          icon: const Icon(Icons.add, size: 18),
-        ),
-        IconButton(
-          tooltip: l10n.d('Standaardprofiel laden'),
-          onPressed: _loadDefaultProfile,
-          icon: const Icon(Icons.restart_alt, size: 18),
-        ),
-        IconButton(
-          tooltip: l10n.d('Profiel verwijderen'),
-          onPressed: profiles.length <= 1
-              ? null
-              : () {
-                  ref
-                      .read(settingsProvider.notifier)
-                      .deleteThemeProfile(_themeProfile.name);
-                  final profile = ref.read(settingsProvider).themeProfile;
-                  setState(() {
-                    _themeProfile = profile;
-                    _originalName = profile.name;
-                    _profileName.text = profile.name;
-                    _logoSize.text = profile.logoSize.toString();
-                    _footerText.text = profile.footerText;
-                    _closingSlideMarkdown.text = profile.closingSlideMarkdown;
-                    _profileTouched = true;
-                  });
-                },
-          icon: const Icon(Icons.delete_outline, size: 18),
-        ),
-      ],
-    );
-  }
-
-  void _loadDefaultProfile() {
-    final profile = ref.read(settingsProvider).themeProfile;
-    setState(() {
-      _themeProfile = profile;
-      _originalName = profile.name;
-      _profileName.text = profile.name;
-      _logoSize.text = profile.logoSize.toString();
-      _footerText.text = profile.footerText;
-      _closingSlideMarkdown.text = profile.closingSlideMarkdown;
-      _profileTouched = true;
-    });
-  }
-
-  Future<void> _createProfile() async {
-    final created = await ref
-        .read(settingsProvider.notifier)
-        .createThemeProfile(base: _themeProfile);
-    if (!mounted) return;
-    setState(() {
-      _themeProfile = created;
-      _originalName = created.name;
-      _profileName.text = created.name;
-      _logoSize.text = created.logoSize.toString();
-      _footerText.text = created.footerText;
-      _closingSlideMarkdown.text = created.closingSlideMarkdown;
-      _profileTouched = true;
-    });
   }
 
   Widget _tabBody(Widget child) {

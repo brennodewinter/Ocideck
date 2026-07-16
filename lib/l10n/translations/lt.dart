@@ -1791,6 +1791,25 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Stijlprofiel exporteren': 'Eksportuoti stiliaus profilį',
+  'Stijlprofiel importeren': 'Importuoti stiliaus profilį',
+  'Profiel exporteren': 'Eksportuoti profilį',
+  'Profiel importeren': 'Importuoti profilį',
+  'Stijlprofiel geëxporteerd': 'Stiliaus profilis eksportuotas',
+  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
+      'Stiliaus profilis eksportuotas — nepavyko įtraukti savo logotipo',
+  'Stijlprofiel exporteren mislukt': 'Nepavyko eksportuoti stiliaus profilio',
+  'Stijlprofiel importeren mislukt': 'Nepavyko importuoti stiliaus profilio',
+  'Stijlprofiel geïmporteerd': 'Stiliaus profilis importuotas',
+  'Dit is geen geldig stijlprofiel-bestand':
+      'Tai nėra tinkamas stiliaus profilio failas',
+  'Dit bestand is te groot voor een stijlprofiel':
+      'Šis failas per didelis stiliaus profiliui',
+  'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
+      'Šis stiliaus profilis sukurtas naujesne OciDeck versija',
+  'die naam bestond al, bewaard als': 'toks pavadinimas jau buvo, įrašyta kaip',
+  'het ingesloten logo kon niet worden teruggezet':
+      'nepavyko atkurti įterpto logotipo',
   'Maak een tussenkop': 'Sukurti tarpinę antraštę',
   'Maak er weer een bullet van': 'Vėl paversti ženkleliu',
   'Tussenkop (leeg = alleen een scheidingslijn)':

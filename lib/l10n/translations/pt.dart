@@ -1813,6 +1813,25 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Stijlprofiel exporteren': 'Exportar perfil de estilo',
+  'Stijlprofiel importeren': 'Importar perfil de estilo',
+  'Profiel exporteren': 'Exportar perfil',
+  'Profiel importeren': 'Importar perfil',
+  'Stijlprofiel geëxporteerd': 'Perfil de estilo exportado',
+  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
+      'Perfil de estilo exportado — não foi possível incluir o logótipo próprio',
+  'Stijlprofiel exporteren mislukt': 'Falha ao exportar o perfil de estilo',
+  'Stijlprofiel importeren mislukt': 'Falha ao importar o perfil de estilo',
+  'Stijlprofiel geïmporteerd': 'Perfil de estilo importado',
+  'Dit is geen geldig stijlprofiel-bestand':
+      'Este não é um ficheiro de perfil de estilo válido',
+  'Dit bestand is te groot voor een stijlprofiel':
+      'Este ficheiro é demasiado grande para um perfil de estilo',
+  'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
+      'Este perfil de estilo provém de uma versão mais recente do OciDeck',
+  'die naam bestond al, bewaard als': 'esse nome já existia, guardado como',
+  'het ingesloten logo kon niet worden teruggezet':
+      'não foi possível restaurar o logótipo incorporado',
   'Maak een tussenkop': 'Criar um intertítulo',
   'Maak er weer een bullet van': 'Converter novamente em marcador',
   'Tussenkop (leeg = alleen een scheidingslijn)':

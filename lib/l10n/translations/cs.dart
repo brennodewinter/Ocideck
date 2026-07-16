@@ -1786,6 +1786,25 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Stijlprofiel exporteren': 'Exportovat profil stylu',
+  'Stijlprofiel importeren': 'Importovat profil stylu',
+  'Profiel exporteren': 'Exportovat profil',
+  'Profiel importeren': 'Importovat profil',
+  'Stijlprofiel geëxporteerd': 'Profil stylu byl exportován',
+  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
+      'Profil stylu byl exportován — vlastní logo nebylo možné zahrnout',
+  'Stijlprofiel exporteren mislukt': 'Export profilu stylu se nezdařil',
+  'Stijlprofiel importeren mislukt': 'Import profilu stylu se nezdařil',
+  'Stijlprofiel geïmporteerd': 'Profil stylu byl importován',
+  'Dit is geen geldig stijlprofiel-bestand':
+      'Toto není platný soubor profilu stylu',
+  'Dit bestand is te groot voor een stijlprofiel':
+      'Tento soubor je pro profil stylu příliš velký',
+  'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
+      'Tento profil stylu pochází z novější verze OciDeck',
+  'die naam bestond al, bewaard als': 'tento název už existoval, uloženo jako',
+  'het ingesloten logo kon niet worden teruggezet':
+      'vložené logo nebylo možné obnovit',
   'Maak een tussenkop': 'Vytvořit mezititulek',
   'Maak er weer een bullet van': 'Změnit zpět na odrážku',
   'Tussenkop (leeg = alleen een scheidingslijn)':

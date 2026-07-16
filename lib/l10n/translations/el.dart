@@ -1811,6 +1811,26 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Stijlprofiel exporteren': 'Εξαγωγή προφίλ στυλ',
+  'Stijlprofiel importeren': 'Εισαγωγή προφίλ στυλ',
+  'Profiel exporteren': 'Εξαγωγή προφίλ',
+  'Profiel importeren': 'Εισαγωγή προφίλ',
+  'Stijlprofiel geëxporteerd': 'Το προφίλ στυλ εξήχθη',
+  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
+      'Το προφίλ στυλ εξήχθη — το προσαρμοσμένο λογότυπο δεν συμπεριλήφθηκε',
+  'Stijlprofiel exporteren mislukt': 'Η εξαγωγή του προφίλ στυλ απέτυχε',
+  'Stijlprofiel importeren mislukt': 'Η εισαγωγή του προφίλ στυλ απέτυχε',
+  'Stijlprofiel geïmporteerd': 'Το προφίλ στυλ εισήχθη',
+  'Dit is geen geldig stijlprofiel-bestand':
+      'Αυτό δεν είναι έγκυρο αρχείο προφίλ στυλ',
+  'Dit bestand is te groot voor een stijlprofiel':
+      'Αυτό το αρχείο είναι πολύ μεγάλο για προφίλ στυλ',
+  'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
+      'Αυτό το προφίλ στυλ προέρχεται από νεότερη έκδοση του OciDeck',
+  'die naam bestond al, bewaard als':
+      'αυτό το όνομα υπήρχε ήδη, αποθηκεύτηκε ως',
+  'het ingesloten logo kon niet worden teruggezet':
+      'το ενσωματωμένο λογότυπο δεν αποκαταστάθηκε',
   'Maak een tussenkop': 'Δημιουργία ενδιάμεσου τίτλου',
   'Maak er weer een bullet van': 'Μετατροπή ξανά σε κουκκίδα',
   'Tussenkop (leeg = alleen een scheidingslijn)':

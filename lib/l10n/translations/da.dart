@@ -1782,6 +1782,25 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Stijlprofiel exporteren': 'Eksportér stilprofil',
+  'Stijlprofiel importeren': 'Importér stilprofil',
+  'Profiel exporteren': 'Eksportér profil',
+  'Profiel importeren': 'Importér profil',
+  'Stijlprofiel geëxporteerd': 'Stilprofil eksporteret',
+  'Stijlprofiel geëxporteerd — het eigen logo kon niet worden meegenomen':
+      'Stilprofil eksporteret — det egne logo kunne ikke tages med',
+  'Stijlprofiel exporteren mislukt': 'Eksport af stilprofilen mislykkedes',
+  'Stijlprofiel importeren mislukt': 'Import af stilprofilen mislykkedes',
+  'Stijlprofiel geïmporteerd': 'Stilprofil importeret',
+  'Dit is geen geldig stijlprofiel-bestand':
+      'Dette er ikke en gyldig stilprofil-fil',
+  'Dit bestand is te groot voor een stijlprofiel':
+      'Denne fil er for stor til en stilprofil',
+  'Dit stijlprofiel komt uit een nieuwere versie van OciDeck':
+      'Denne stilprofil kommer fra en nyere version af OciDeck',
+  'die naam bestond al, bewaard als': 'det navn fandtes allerede, gemt som',
+  'het ingesloten logo kon niet worden teruggezet':
+      'det indlejrede logo kunne ikke gendannes',
   'Maak een tussenkop': 'Opret en mellemoverskrift',
   'Maak er weer een bullet van': 'Lav det om til et punkt igen',
   'Tussenkop (leeg = alleen een scheidingslijn)':
