@@ -240,6 +240,219 @@ extension _ChartPreviewExtra on _ChartPreviewState {
     );
   }
 
+  // ── Horizontal stacked bar ───────────────────────────────────────────────
+
+  /// The largest per-label *total*: unlike a plain horizontal bar (which scales
+  /// to the biggest single value), a stacked bar's value axis must fit the sum
+  /// of its segments, so the widest whole bar just reaches the axis end.
+  double _maxHorizontalStacked(ChartSpec spec) {
+    var m = 0.0;
+    for (var xi = 0; xi < spec.x.length; xi++) {
+      var sum = 0.0;
+      for (final s in spec.series) {
+        if (xi < s.data.length) sum += s.data[xi];
+      }
+      if (sum > m) m = sum;
+    }
+    return m <= 0 ? 1 : m * 1.15;
+  }
+
+  /// A [_stackedBarChart] laid on its side: one bar per label with the series
+  /// stacked left-to-right. Reuses the horizontal-bar scaffolding (right-aligned
+  /// label column, vertical gridlines, a value axis) but each band is a single
+  /// segmented bar instead of one thin bar per series. Static (no tooltip); a
+  /// segment prints its value when it is wide enough to fit.
+  Widget _horizontalStackedBarChart(ChartSpec spec, Color textColor) {
+    final n = spec.x.length;
+    if (n == 0 || spec.series.isEmpty) {
+      return _placeholderText(context.l10n.d('Geen grafiekgegevens'));
+    }
+    final maxX = _maxHorizontalStacked(spec);
+    final labelStyle = _applyFont(
+      font,
+      TextStyle(
+        fontSize: w * 0.0115 * _labelScale,
+        color: textColor.withValues(alpha: 0.88),
+        fontWeight: presentationMode ? FontWeight.w600 : FontWeight.normal,
+      ),
+    );
+    final axisStyle = labelStyle.copyWith(fontSize: w * 0.0105 * _labelScale);
+    return _customGrow((t) {
+      return LayoutBuilder(
+        builder: (context, c) {
+          final labelW = math.max(w * 0.12, c.maxWidth * 0.24);
+          final axisH = w * 0.03 * _labelScale;
+          final plotW = math.max(0.0, c.maxWidth - labelW);
+          return Column(
+            children: [
+              Expanded(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    SizedBox(
+                      width: labelW,
+                      child: Column(
+                        children: [
+                          for (var i = 0; i < n; i++)
+                            Expanded(
+                              child: Padding(
+                                padding: EdgeInsets.only(right: w * 0.008),
+                                child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    spec.x[i],
+                                    textAlign: TextAlign.right,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: labelStyle,
+                                  ),
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Stack(
+                        children: [
+                          for (var g = 0; g <= 4; g++)
+                            Positioned(
+                              left: plotW * g / 4,
+                              top: 0,
+                              bottom: 0,
+                              child: Container(
+                                width: 1,
+                                color: textColor.withValues(alpha: 0.12),
+                              ),
+                            ),
+                          Column(
+                            children: [
+                              for (var i = 0; i < n; i++)
+                                Expanded(
+                                  child: _hStackBand(
+                                    spec,
+                                    i,
+                                    maxX,
+                                    plotW,
+                                    t,
+                                    textColor,
+                                  ),
+                                ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: axisH,
+                child: Row(
+                  children: [
+                    SizedBox(width: labelW),
+                    Expanded(
+                      child: Stack(
+                        clipBehavior: Clip.none,
+                        children: [
+                          for (var g = 0; g <= 4; g++)
+                            Positioned(
+                              left: (plotW * g / 4 - w * 0.03).clamp(
+                                0.0,
+                                math.max(0.0, plotW - w * 0.02),
+                              ),
+                              top: 0,
+                              width: w * 0.06,
+                              child: Text(
+                                _fmtNum(maxX * g / 4),
+                                textAlign: TextAlign.center,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: axisStyle,
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
+        },
+      );
+    });
+  }
+
+  /// One stacked bar (a whole category), its series abutting left-to-right. The
+  /// outer-right end is rounded (the growing tip); segments print their value
+  /// when wide enough. White hairline separators keep touching segments legible.
+  Widget _hStackBand(
+    ChartSpec spec,
+    int cat,
+    double maxX,
+    double plotW,
+    double t,
+    Color textColor,
+  ) {
+    final s = spec.series;
+    final segs = <({double len, Color color, double value})>[];
+    for (var si = 0; si < s.length; si++) {
+      if (cat >= s[si].data.length) continue;
+      final value = s[si].data[cat];
+      final frac = maxX <= 0 ? 0.0 : (value / maxX).clamp(0.0, 1.0);
+      final len = math.max(0.0, plotW * frac * t);
+      if (len <= 0) continue;
+      segs.add((len: len, color: _seriesDisplayColor(s[si], si), value: value));
+    }
+    final labelStyle = _applyFont(
+      font,
+      TextStyle(
+        fontSize: w * 0.011 * _labelScale,
+        color: Colors.white,
+        fontWeight: FontWeight.w700,
+      ),
+    );
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: w * 0.006),
+      child: ClipRRect(
+        borderRadius: BorderRadius.horizontal(right: Radius.circular(w * 0.004)),
+        child: Row(
+          children: [
+            for (var i = 0; i < segs.length; i++)
+              SizedBox(
+                width: segs[i].len,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: segs[i].color,
+                    border: i == 0
+                        ? null
+                        : Border(
+                            left: BorderSide(
+                              color: Colors.white.withValues(alpha: 0.9),
+                              width: w * 0.001,
+                            ),
+                          ),
+                  ),
+                  child: segs[i].len > w * 0.045 && segs[i].value != 0
+                      ? Center(
+                          child: Text(
+                            _fmtNum(segs[i].value),
+                            maxLines: 1,
+                            overflow: TextOverflow.clip,
+                            softWrap: false,
+                            style: labelStyle,
+                          ),
+                        )
+                      : const SizedBox.expand(),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
   // ── Combo (bars + line on a second axis) ─────────────────────────────────
 
   double _comboBarMaxY(List<ChartSeries> barSeries, ChartSpec spec) {

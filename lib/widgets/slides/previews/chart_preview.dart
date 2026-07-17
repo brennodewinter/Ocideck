@@ -195,6 +195,7 @@ class _ChartPreviewState extends State<_ChartPreview>
       ChartType.combo => l10n.d('Combo'),
       ChartType.waterfall => l10n.d('Waterval'),
       ChartType.heatmap => l10n.d('Heatmap'),
+      ChartType.horizontalStackedBar => l10n.d('Horizontale gestapelde staaf'),
     };
     final buffer = StringBuffer('${l10n.d('Grafiek')} ($typeName)');
     if (spec.title.isNotEmpty) {
@@ -511,6 +512,8 @@ class _ChartPreviewState extends State<_ChartPreview>
         return _waterfallChart(spec, textColor);
       case ChartType.heatmap:
         return _heatmapChart(spec, textColor);
+      case ChartType.horizontalStackedBar:
+        return _horizontalStackedBarChart(spec, textColor);
     }
   }
 
