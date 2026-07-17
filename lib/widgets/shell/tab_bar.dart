@@ -196,6 +196,10 @@ class _TabContent extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Zolang dit tabblad leeft blijft zijn afgeleide keten aangesloten, zodat
+    // een deckwijziging vóór het frame wordt verwerkt en niet pas in de build
+    // van de eerste widget die hem toevallig leest. Zie warmTabDerivedProviders.
+    warmTabDerivedProviders(ref);
     final isOpen = ref.watch(deckProvider.select((s) => s.isOpen));
     if (!isOpen) return const _WelcomeScreen();
     // 'Alleen afspelen'-vergrendeling: het volledige bewerk-scherm (toolbar,

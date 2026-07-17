@@ -19,7 +19,6 @@ import '../services/scope_coverage.dart';
 import '../services/file_service.dart';
 import '../services/image_service.dart';
 import '../services/markdown_service.dart';
-import '../services/slide_layout_metrics.dart';
 import '../services/slide_quality_analyzer.dart'
     show
         kChecklistBulletWarningCount,
@@ -401,13 +400,14 @@ class DeckNotifier extends StateNotifier<DeckState> {
     _mutate(deck.copyWith(slides: slides));
   }
 
-  /// Splitst de bulletslide op [index] in zoveel gelijkmatige pagina's als nodig
-  /// zodat geen enkele nog overvol is; de vervolgpagina's komen er direct achter.
-  /// Doet niets als de slide geen (genoeg) bullets heeft om te splitsen.
+  /// Splitst de bulletslide op [index] in pagina's van hooguit de leesbaarheids-
+  /// drempel, met de overgebleven bullets op een laatste, kortere pagina; de
+  /// vervolgpagina's komen er direct achter. Doet niets als de slide geen
+  /// (genoeg) bullets heeft om te splitsen.
   void splitSlide(int index) {
     final deck = state.deck;
     if (deck == null || index < 0 || index >= deck.slides.length) return;
-    final pages = _splitSlide(deck.slides[index], deck.themeProfile.fontFamily);
+    final pages = _splitSlide(deck.slides[index]);
     if (pages == null) return;
     final slides = List<Slide>.from(deck.slides)
       ..removeAt(index)
@@ -416,14 +416,13 @@ class DeckNotifier extends StateNotifier<DeckState> {
     _mutate(deck.copyWith(slides: slides), bumpRevision: true);
   }
 
-  /// Verdeelt de bulletslide [slide] over gelijkmatige pagina's die elk binnen
-  /// het optimum blijven (het kleinste van wat op ware grootte past en de
-  /// leesbaarheidsdrempel), of `null` als splitsen niet kan. Splitpunten vallen
-  /// op groepsgrenzen zodat geen tussenkop losraakt van zijn bullets. De eerste
+  /// Verdeelt de bulletslide [slide] over pagina's van hooguit de leesbaarheids-
+  /// drempel — acht bullets, twaalf voor een checklist, zeven per kolom — met de
+  /// rest op een laatste, kortere pagina. `null` als splitsen niet kan. De eerste
   /// pagina erft type/afbeelding en de continuesSplit-vlag van [slide] (want
   /// [Slide.duplicate] kopieert imagePath/-caption/-size); elke vervolgpagina is
   /// een continuation die de fontgrootte deelt.
-  List<Slide>? _splitSlide(Slide slide, String font) {
+  List<Slide>? _splitSlide(Slide slide) {
     List<Slide> build(List<(List<String>, List<String>)> pages) => [
       for (var i = 0; i < pages.length; i++)
         (i == 0 ? slide : Slide.duplicate(slide)).copyWith(
@@ -438,28 +437,18 @@ class DeckNotifier extends StateNotifier<DeckState> {
         if (slide.bullets.length < 2) return null;
         // Checklists houden hun ruimere optimum aan (consistent met de
         // waarschuwingsdrempel), zodat een lijst van 12 niet onnodig krimpt.
-        final limit = slide.listStyle == ListStyle.checklist
+        final size = slide.listStyle == ListStyle.checklist
             ? kChecklistBulletWarningCount
             : kSingleColumnBulletWarningCount;
-        final fit = bulletFitCounts(slide: slide, font: font).left;
         return build([
-          for (final p in paginateBulletsToFit(
-            slide.bullets,
-            bulletPageCap(fit, limit),
-          ))
+          for (final p in splitBulletsIntoPages(slide.bullets, size))
             (p, const <String>[]),
         ]);
       case SlideType.twoBullets:
         if (slide.bullets.length < 2 && slide.bullets2.length < 2) return null;
         const perColumn = kTwoColumnBulletWarningCount ~/ 2;
-        final counts = bulletFitCounts(slide: slide, font: font);
         return build(
-          paginateTwoColumnsToFit(
-            slide.bullets,
-            bulletPageCap(counts.left, perColumn),
-            slide.bullets2,
-            bulletPageCap(counts.right, perColumn),
-          ),
+          splitTwoColumnsIntoPages(slide.bullets, slide.bullets2, perColumn),
         );
       default:
         return null;

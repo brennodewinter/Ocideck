@@ -298,109 +298,115 @@ void main() {
     });
   });
 
-  group('bulletPageCap', () {
-    test('is the smaller of fit and limit, never below one', () {
-      expect(bulletPageCap(3, 8), 3);
-      expect(bulletPageCap(20, 8), 8);
-      expect(bulletPageCap(0, 8), 1);
-      expect(bulletPageCap(5, 0), 1);
-    });
-  });
-
-  group('pageCountToFit', () {
-    test('is ceil(len/cap) without headings, minimum two', () {
-      expect(pageCountToFit(List.filled(10, 'x'), 8), 2); // 5/5
-      expect(pageCountToFit(List.filled(16, 'x'), 8), 2);
-      expect(pageCountToFit(List.filled(17, 'x'), 8), 3);
-      expect(pageCountToFit(List.filled(30, 'x'), 8), 4);
-      expect(pageCountToFit(List.filled(6, 'x'), 8), 2); // fits, still splits
-      expect(pageCountToFit(List.filled(10, 'x'), 2), 5); // long bullets
-    });
-
-    test('keeps whole groups together, one page per group that fits', () {
-      final items = <String>[
-        for (final g in ['A', 'B', 'C']) ...[
-          groupHeadingBullet(g),
-          for (var i = 0; i < 4; i++) 'bullet',
-        ],
-      ]; // three groups of five, 15 items
-      expect(pageCountToFit(items, 8), 3); // 5/5/5, not 8/7 across a group
-    });
-
-    test('cuts a single group larger than a page across pages', () {
-      final items = <String>[
-        groupHeadingBullet('Big'),
-        for (var i = 0; i < 20; i++) 'b',
-      ];
-      expect(
-        pageCountToFit(items, 8),
-        3,
-      ); // 21 items in one group -> ceil(21/8)
-    });
-  });
-
-  group('paginateBulletsToFit', () {
+  group('splitBulletsIntoPages', () {
     List<String> gen(int n) => [for (var i = 0; i < n; i++) 'bullet $i'];
 
-    test('splits a full list into balanced pages that each fit', () {
-      final pages = paginateBulletsToFit(gen(30), 8);
-      expect(pages.map((p) => p.length).toList(), [8, 8, 7, 7]);
-      expect(
-        pages.expand((p) => p).toList(),
-        gen(30),
-      ); // nothing lost/reordered
-      expect(pages.every((p) => p.length <= 8 && p.isNotEmpty), isTrue);
-    });
-
-    test('never peels off a lopsided tail when few bullets fit', () {
-      // The reported bug: cap 2 used to give 2/8; now every page holds two.
-      expect(paginateBulletsToFit(gen(10), 2).map((p) => p.length).toList(), [
-        2,
-        2,
-        2,
-        2,
-        2,
+    test("vult pagina's van size en zet de rest achteraan", () {
+      expect(splitBulletsIntoPages(gen(11), 8).map((p) => p.length).toList(), [
+        8,
+        3,
+      ]);
+      expect(splitBulletsIntoPages(gen(20), 8).map((p) => p.length).toList(), [
+        8,
+        8,
+        4,
+      ]);
+      expect(splitBulletsIntoPages(gen(16), 8).map((p) => p.length).toList(), [
+        8,
+        8,
       ]);
     });
 
-    test('divides a fitting list evenly in two on request', () {
-      expect(paginateBulletsToFit(gen(6), 8).map((p) => p.length).toList(), [
-        3,
+    test('een rest van één of twee bullets wordt niet gemaakt', () {
+      // Zo'n pagina is geen slide. Dan valt de lijst gelijkmatig uiteen.
+      expect(splitBulletsIntoPages(gen(9), 8).map((p) => p.length).toList(), [
+        5,
+        4,
+      ]);
+      expect(splitBulletsIntoPages(gen(10), 8).map((p) => p.length).toList(), [
+        5,
+        5,
+      ]);
+      expect(splitBulletsIntoPages(gen(17), 8).map((p) => p.length).toList(), [
+        6,
+        6,
+        5,
+      ]);
+      expect(splitBulletsIntoPages(gen(18), 8).map((p) => p.length).toList(), [
+        6,
+        6,
+        6,
+      ]);
+    });
+
+    test('een rest die wél een pagina waard is blijft gewoon vullen', () {
+      // Alleen de runt wordt afgekocht; drie is genoeg voor een eigen slide.
+      expect(splitBulletsIntoPages(gen(19), 8).map((p) => p.length).toList(), [
+        8,
+        8,
         3,
       ]);
     });
 
-    test('breaks on group boundaries so a heading leads every page', () {
-      final items = <String>[
-        for (final g in ['Ochtend', 'Middag', 'Avond']) ...[
-          groupHeadingBullet(g),
-          for (var i = 0; i < 4; i++) 'bullet',
-        ],
-      ];
-      final pages = paginateBulletsToFit(items, 8);
-      expect(pages, hasLength(3));
-      for (final page in pages) {
+    test('geen enkele pagina onder de drie bullets, van negen tot dertig', () {
+      for (var n = 9; n <= 30; n++) {
+        final pages = splitBulletsIntoPages(gen(n), 8);
         expect(
-          isGroupHeading(page.first),
+          pages.every((p) => p.length >= kMinPageBullets),
           isTrue,
-          reason: 'page leads with a heading',
+          reason: 'n=$n gaf ${pages.map((p) => p.length).toList()}',
         );
-        expect(
-          isGroupHeading(page.last),
-          isFalse,
-          reason: 'no heading stranded at the foot',
-        );
+        expect(pages.expand((p) => p).toList(), gen(n), reason: 'n=$n');
       }
-      expect(pages.expand((p) => p).toList(), items);
+    });
+
+    test('een lijst die al past valt in twee helften', () {
+      // De menu-actie heet "In tweeën splitsen" en moet ook op een slide die
+      // niet overvol is iets doen.
+      expect(splitBulletsIntoPages(gen(6), 8).map((p) => p.length).toList(), [
+        3,
+        3,
+      ]);
+      expect(splitBulletsIntoPages(gen(2), 8).map((p) => p.length).toList(), [
+        1,
+        1,
+      ]);
+      expect(splitBulletsIntoPages(gen(5), 8).map((p) => p.length).toList(), [
+        3,
+        2,
+      ]);
+    });
+
+    test('raakt geen bullet kwijt en houdt de volgorde', () {
+      final pages = splitBulletsIntoPages(gen(23), 8);
+      expect(pages.expand((p) => p).toList(), gen(23));
+      expect(pages.every((p) => p.isNotEmpty && p.length <= 8), isTrue);
+    });
+
+    test("een lege lijst levert geen pagina's", () {
+      expect(splitBulletsIntoPages([], 8), isEmpty);
     });
   });
 
-  group('spreadBulletsOverPages', () {
-    test('pads with empty trailing pages when items run short', () {
-      final pages = spreadBulletsOverPages(['a', 'b', 'c'], 5, 7);
-      expect(pages, hasLength(5));
-      expect(pages.expand((p) => p).toList(), ['a', 'b', 'c']);
-      expect(pages.where((p) => p.isEmpty), hasLength(2));
+  group('chunkBullets', () {
+    test('knipt strikt op size, zonder helften-uitzondering', () {
+      final pages = chunkBullets([for (var i = 0; i < 5; i++) 'b'], 8);
+      expect(pages.map((p) => p.length).toList(), [5]);
+      expect(chunkBullets([for (var i = 0; i < 5; i++) 'b'], 0), hasLength(5));
+    });
+  });
+
+  group('splitTwoColumnsIntoPages', () {
+    test("beide kolommen over evenveel pagina's, de kortste raakt op", () {
+      final pages = splitTwoColumnsIntoPages(
+        [for (var i = 0; i < 10; i++) 'l'],
+        [for (var i = 0; i < 3; i++) 'r'],
+        7,
+      );
+      expect(pages.map((p) => (p.$1.length, p.$2.length)).toList(), [
+        (7, 2),
+        (3, 1),
+      ]);
     });
   });
 }

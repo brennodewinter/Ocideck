@@ -121,7 +121,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `finding_context_score.dart` — builds the deck's scope-object→CIA index and derives each finding's context (environmental) score / effective severity from it.
 - `secret_store.dart` — Manages secrets (WebDAV credentials, AI API key) in the OS keychain.
 - `slide_layout_metrics.dart` — Layout constants/helpers for text sizing, fonts, and fit scaling; `bulletFitCounts` measures how many bullets fit at natural size (the input to the "Split slide" page capacity).
-- `bullet_pagination.dart` — Pure "Split slide" pagination (`bulletPageCap`, `pageCountToFit`, `paginateBulletsToFit`/`paginateTwoColumnsToFit`, `spreadBulletsOverPages`) that spreads an over-full bullet list into balanced, group-aware pages so none stays full.
+- `bullet_pagination.dart` — Pure "Split slide" pagination (`chunkBullets`, `splitBulletsIntoPages`/`splitTwoColumnsIntoPages`): fills pages of a fixed size with the remainder last, never leaving a page under `kMinPageBullets`, and halves a list that already fits. Counts bullets and nothing else — measuring what physically fits used to collapse the page size and turn one slide into a stack.
 - `slide_quality_analyzer.dart` — Checks deck slides for accessibility and readability issues.
 - `slide_rasterizer.dart` — Renders on-screen slide previews to PNG for WYSIWYG PDF/PPTX export.
 - `text_measurement.dart` — `measureTextHeight`/`measureTextWidth` for rendered text dimensions.
@@ -158,6 +158,7 @@ follow in later phases.
 - `image_contrast_provider.dart` — Computes title-slide image-contrast issues asynchronously per deck.
 - `sec_module_provider.dart` — The security-module enable/reveal state that gates the pentest features.
 - `local_cve_provider.dart` — `LocalCveNotifier`/`LocalCveState`: the local CVE database's status, build progress and cancellation, plus `localCveAvailableProvider` — which the CVE picker uses to search offline (and then deliberately *not* fall back online).
+- `provider_warmup.dart` — `warmTabDerivedProviders`: keeps the tab's derived chain subscribed for as long as the tab lives, so a deck change schedules its refresh *before* the frame. Without it an unread chain goes dirty unnoticed and the first widget to read it flushes mid-build, which Flutter answers with "setState() called during build". Guarded by `provider_warmup_test.dart`.
 - `privacy_provider.dart` — Runs the privacy scan for the active deck (per-tab scoped) and surfaces it everywhere the deck's quality is shown. The raw scan (`privacyRawScanProvider`) feeds two views: the panel/thumbnail issues (`privacyScanProvider` → `privacyQualityIssuesProvider`, which suppress already-handled slides) and the export gate's count (`privacyExportSummaryProvider`, which must *not* suppress them — a gate has to know how much was handled).
 - `parts/settings_provider_privacy.dart` — The privacy switches (master, per-rule, own identity, export gate).
 - `settings_provider.dart` — `SettingsNotifier`: app settings, theme/appearance profiles, cockpit schemes.

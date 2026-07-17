@@ -167,17 +167,42 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   glance from a contrast or text-density one.
 
 ### Fixed
-- **"Split slide" now divides an over-full slide into balanced pages instead of
-  peeling off a lopsided tail.** On a slide whose bullets do not all fit, the fix
-  used to fill the first page to the readability cap and dump the whole remainder
-  on the next page — so a slide with longer bullets (only a couple fit at full
-  size) split into a near-empty first page and a second page that was still
-  overfull. It now spreads the bullets over as many evenly-sized pages as needed
-  so **no resulting page stays full**: ten bullets become 5/5, thirty become
-  8/8/7/7, and a list where only two bullets fit becomes pages of two. Page
-  breaks still land on group headings, so whole "tussenkoppen" groups stay
-  together — three groups of five split cleanly into 5/5/5. Two-column slides
-  spread both columns over the same number of pages.
+- **A bullet that is simply a long sentence can now be moved to the speaker
+  notes too.** *"Uitleg naar notities"* only appeared on a bullet shaped like
+  *label: explanation* — so the very line that most needed to leave the slide, a
+  full sentence with no colon anywhere in it, was the one line the fix would not
+  touch. Such a bullet now keeps its first five words on the slide and sends the
+  whole line down to the notes. The label reads like a clipped sentence
+  sometimes; nothing is lost, so it can be tidied by hand.
+- **The slide rail no longer throws "setState() called during build" after the
+  deck changes.** Riverpod computes a derived value only when something reads
+  it. With nothing reading the privacy chain, a deck change left it stale
+  without scheduling a refresh — and the next widget to read it was a thumbnail
+  being built, so the refresh landed in the middle of a build and Flutter
+  refused it. The tab now keeps its own chain subscribed for as long as it
+  lives, so a deck change is worked through before the frame instead of inside
+  it.
+- **Moving a bullet's explanation to the speaker notes now takes its context
+  along.** *"Uitleg naar notities"* left the label on the slide and moved the
+  full line down, but wrote the lines as a flat list: the "tussenkoppen" they
+  sat under were dropped and nested bullets lost their indent. A speaker reading
+  back "geregeld via de centrale IAM-oplossing" had no way to tell which part of
+  the slide it belonged to. Each heading now comes along once, above the first
+  line that falls under it, and every line keeps its indent level.
+- **"Split slide" now simply fills pages of eight bullets and leaves the rest on
+  a last page.** It used to balance the pages and weigh how many bullets
+  physically fit at natural size — and that measurement was the problem: with
+  long bullets only two or three fit, so the page size collapsed and one slide
+  fell apart into a stack of five. The split now counts bullets and nothing
+  else: twenty become 8/8/4, eleven become 8/3. The one concession to taste is
+  that it never leaves a runt behind — one or two bullets is not a slide, so a
+  list that would end that way falls apart evenly instead: nine become 5/4, not
+  8/1. A checklist keeps its roomier twelve, a two-column slide
+  seven per column, and a slide that is not over-full at all still halves on
+  request — that is what *"In tweeën splitsen"* in the slide menu asks for.
+  Page breaks no longer step aside for a group heading, so a "tussenkop" can now
+  land at the foot of a page: the price of a split you can predict before you
+  press it.
 - **The export-readiness status now shows the PrivacyKat mark for privacy
   warnings.** The "N privacy findings without a choice" chip (and "Privacy
   blocks export") in the status bar carried a generic warning icon instead of
