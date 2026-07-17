@@ -1790,6 +1790,11 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Native git gevonden:': 'Pronađen izvorni git:',
+  'Native git: bezig met detecteren…': 'Izvorni git: otkrivanje…',
+  'Native git: niet gevonden — het REST-pad wordt gebruikt':
+      'Izvorni git: nije pronađen — koristi se REST put',
+  'echte offline-historie mogelijk': 'moguća prava izvanmrežna povijest',
   'Nu synchroniseren': 'Sinkroniziraj sada',
   'Gesynchroniseerd:': 'Sinkronizirano:',
   'nog in de wachtrij:': 'još u redu:',

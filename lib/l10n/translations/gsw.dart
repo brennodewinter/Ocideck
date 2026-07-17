@@ -1787,6 +1787,11 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Native git gevonden:': 'Nativs git gfunde:',
+  'Native git: bezig met detecteren…': 'Nativs git: am erkenne…',
+  'Native git: niet gevonden — het REST-pad wordt gebruikt':
+      'Nativs git: nöd gfunde — de REST-Wäg wird bruucht',
+  'echte offline-historie mogelijk': 'echti Offline-Gschicht möglich',
   'Nu synchroniseren': 'Jetz synchronisiere',
   'Gesynchroniseerd:': 'Synchronisiert:',
   'nog in de wachtrij:': 'no i de Warteschlange:',

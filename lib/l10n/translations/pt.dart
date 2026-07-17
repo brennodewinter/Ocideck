@@ -1813,6 +1813,11 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Native git gevonden:': 'git nativo encontrado:',
+  'Native git: bezig met detecteren…': 'git nativo: a detetar…',
+  'Native git: niet gevonden — het REST-pad wordt gebruikt':
+      'git nativo: não encontrado — usa-se o caminho REST',
+  'echte offline-historie mogelijk': 'histórico offline real possível',
   'Nu synchroniseren': 'Sincronizar agora',
   'Gesynchroniseerd:': 'Sincronizados:',
   'nog in de wachtrij:': 'ainda na fila:',

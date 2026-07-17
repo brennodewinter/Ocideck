@@ -5,6 +5,8 @@ import 'package:flutter/foundation.dart';
 bool get isDesktopNative =>
     !kIsWeb && (Platform.isMacOS || Platform.isWindows || Platform.isLinux);
 
+bool get supportsNativeGit => isDesktopNative;
+
 bool get supportsDualScreenPresenter => isDesktopNative;
 
 bool get supportsLocalProjectFolders => !kIsWeb;

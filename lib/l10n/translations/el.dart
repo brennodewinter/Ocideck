@@ -1811,6 +1811,12 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Native git gevonden:': 'Βρέθηκε εγγενές git:',
+  'Native git: bezig met detecteren…': 'Εγγενές git: ανίχνευση…',
+  'Native git: niet gevonden — het REST-pad wordt gebruikt':
+      'Εγγενές git: δεν βρέθηκε — χρησιμοποιείται η διαδρομή REST',
+  'echte offline-historie mogelijk':
+      'δυνατό πραγματικό ιστορικό εκτός σύνδεσης',
   'Nu synchroniseren': 'Συγχρονισμός τώρα',
   'Gesynchroniseerd:': 'Συγχρονίστηκαν:',
   'nog in de wachtrij:': 'ακόμη σε αναμονή:',

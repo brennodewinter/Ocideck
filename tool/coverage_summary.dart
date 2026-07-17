@@ -43,6 +43,11 @@ const Set<String> uncoveredBaseline = {
   // exercised via the forge contract). A one-line `export … if …` barrel with
   // no statement to reach — the same seam as cve_transport_factory above.
   'lib/services/git/git_transport_factory.dart',
+  // PLATFORM: the native-git CLI's conditional-export facade + its web stub. The
+  // io half (NativeGitCli) is exercised directly by git_cli_test.dart; the web
+  // stub and the one-line barrel are the platform seam the VM runner can't load.
+  'lib/services/git/git_cli_factory.dart',
+  'lib/services/git/git_cli_web.dart',
   // PLATFORM: the git draft store's conditional-export facade. Both halves
   // (FileDraftStore, PrefsDraftStore) are exercised by the DeckMirror contract
   // in test/git_deck_mirror_contract_test.dart; only this one-line barrel has no

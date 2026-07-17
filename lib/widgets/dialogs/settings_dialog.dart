@@ -23,6 +23,7 @@ import '../../services/secmodule/sec_reference_inventory.dart';
 import '../../state/local_cve_provider.dart';
 import '../../services/slide_quality_analyzer.dart';
 import '../../state/deck_provider.dart';
+import '../../state/git_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';
 import '../../state/consent_provider.dart';

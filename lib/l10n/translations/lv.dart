@@ -1782,6 +1782,11 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Native git gevonden:': 'Atrasts vietējais git:',
+  'Native git: bezig met detecteren…': 'Vietējais git: nosaka…',
+  'Native git: niet gevonden — het REST-pad wordt gebruikt':
+      'Vietējais git: nav atrasts — tiek izmantots REST ceļš',
+  'echte offline-historie mogelijk': 'iespējama īsta bezsaistes vēsture',
   'Nu synchroniseren': 'Sinhronizēt tagad',
   'Gesynchroniseerd:': 'Sinhronizēti:',
   'nog in de wachtrij:': 'vēl rindā:',

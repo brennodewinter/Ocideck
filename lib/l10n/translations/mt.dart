@@ -1806,6 +1806,11 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Native git gevonden:': 'Instab git nattiv:',
+  'Native git: bezig met detecteren…': 'git nattiv: qed jinstab…',
+  'Native git: niet gevonden — het REST-pad wordt gebruikt':
+      'git nattiv: ma nstabx — jintuża l-mogħdija REST',
+  'echte offline-historie mogelijk': 'storja offline vera possibbli',
   'Nu synchroniseren': 'Issinkronizza issa',
   'Gesynchroniseerd:': 'Sinkronizzati:',
   'nog in de wachtrij:': 'għadhom fil-kju:',

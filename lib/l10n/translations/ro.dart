@@ -1802,6 +1802,11 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Native git gevonden:': 'git nativ găsit:',
+  'Native git: bezig met detecteren…': 'git nativ: se detectează…',
+  'Native git: niet gevonden — het REST-pad wordt gebruikt':
+      'git nativ: negăsit — se folosește calea REST',
+  'echte offline-historie mogelijk': 'istoric offline real posibil',
   'Nu synchroniseren': 'Sincronizează acum',
   'Gesynchroniseerd:': 'Sincronizate:',
   'nog in de wachtrij:': 'încă în coadă:',

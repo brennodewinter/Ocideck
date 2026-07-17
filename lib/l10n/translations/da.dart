@@ -1782,6 +1782,11 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Native git gevonden:': 'Native git fundet:',
+  'Native git: bezig met detecteren…': 'Native git: registrerer…',
+  'Native git: niet gevonden — het REST-pad wordt gebruikt':
+      'Native git: ikke fundet — REST-stien bruges',
+  'echte offline-historie mogelijk': 'ægte offline-historik mulig',
   'Nu synchroniseren': 'Synkroniser nu',
   'Gesynchroniseerd:': 'Synkroniseret:',
   'nog in de wachtrij:': 'stadig i kø:',
