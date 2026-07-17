@@ -175,6 +175,50 @@ void main() {
       );
     });
 
+    test(
+      'een volzin zonder scheidingsteken houdt zijn eerste vijf woorden',
+      () {
+        // Juist de regel die van de slide af moet — een volzin als bullet — had
+        // geen dubbele punt om op te knippen, dus bleef de fix weg waar hij het
+        // hardst nodig was.
+        final out = trimBulletExplanations(
+          bulletsWith([
+            'Wij hebben besloten de infrastructuur te migreren omdat dat '
+                'goedkoper uitpakt',
+          ]),
+        );
+        expect(out.bullets, ['Wij hebben besloten de infrastructuur']);
+        expect(
+          out.notes,
+          'Wij hebben besloten de infrastructuur te migreren omdat dat '
+          'goedkoper uitpakt',
+        );
+      },
+    );
+
+    test('een korte regel zonder scheidingsteken blijft ongemoeid', () {
+      // Negen woorden is de ondergrens: vijf label plus vier uitleg.
+      final kort = bulletsWith(['Een bullet van maar acht woorden in totaal']);
+      expect(canTrimBulletExplanations(kort), isFalse);
+      expect(trimBulletExplanations(kort).bullets, kort.bullets);
+
+      final net = bulletsWith([
+        'Een bullet van precies negen woorden in totaal hier',
+      ]);
+      expect(canTrimBulletExplanations(net), isTrue);
+      expect(trimBulletExplanations(net).bullets, [
+        'Een bullet van precies negen',
+      ]);
+    });
+
+    test('een scheidingsteken wint van de woordentelling', () {
+      // Met een dubbele punt blijft het label het label, niet de eerste vijf.
+      final out = trimBulletExplanations(
+        bulletsWith(['Autorisatie: geregeld via de centrale IAM-oplossing']),
+      );
+      expect(out.bullets, ['Autorisatie']);
+    });
+
     test('werkt over beide kolommen', () {
       final slide = Slide.create(SlideType.twoBullets).copyWith(
         bullets: ['Links: de eerste uitgebreide toelichting hier'],

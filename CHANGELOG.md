@@ -167,6 +167,21 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   glance from a contrast or text-density one.
 
 ### Fixed
+- **A bullet that is simply a long sentence can now be moved to the speaker
+  notes too.** *"Uitleg naar notities"* only appeared on a bullet shaped like
+  *label: explanation* — so the very line that most needed to leave the slide, a
+  full sentence with no colon anywhere in it, was the one line the fix would not
+  touch. Such a bullet now keeps its first five words on the slide and sends the
+  whole line down to the notes. The label reads like a clipped sentence
+  sometimes; nothing is lost, so it can be tidied by hand.
+- **The slide rail no longer throws "setState() called during build" after the
+  deck changes.** Riverpod computes a derived value only when something reads
+  it. With nothing reading the privacy chain, a deck change left it stale
+  without scheduling a refresh — and the next widget to read it was a thumbnail
+  being built, so the refresh landed in the middle of a build and Flutter
+  refused it. The tab now keeps its own chain subscribed for as long as it
+  lives, so a deck change is worked through before the frame instead of inside
+  it.
 - **Moving a bullet's explanation to the speaker notes now takes its context
   along.** *"Uitleg naar notities"* left the label on the slide and moved the
   full line down, but wrote the lines as a flat list: the "tussenkoppen" they

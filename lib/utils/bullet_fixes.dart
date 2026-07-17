@@ -96,6 +96,16 @@ final _labelPeriod = RegExp(r'\.(?:\s+|$)');
 /// te maken. Anders zou "Q3: klaar" tot "Q3" verschrompelen — dat lost niets op.
 const int _minExplanationWords = 4;
 
+/// Het label voor een bullet die géén scheidingsteken heeft: gewoon de eerste
+/// zoveel woorden. Een volzin als bullet ("Wij hebben besloten de infrastructuur
+/// te migreren omdat dat goedkoper is") is precies de regel die van de slide af
+/// moet, en juist die had geen dubbele punt om op te knippen — dan bleef de fix
+/// weg waar hij het hardst nodig was. Vijf woorden is genoeg voor een kop die te
+/// herkennen is en kort genoeg om een slide mee op te schonen; dat het soms als
+/// een afgekapte zin leest, is de prijs. De hele regel gaat naar de notities,
+/// dus er raakt niets zoek en de auteur kan het label bijschaven.
+const int _proseLabelWords = 5;
+
 /// Of [slide] bullets heeft waarvan [trimBulletExplanations] de uitleg zou
 /// verplaatsen — zodat de UI de actie alleen aanbiedt als die iets doet.
 bool canTrimBulletExplanations(Slide slide) =>
@@ -164,7 +174,8 @@ List<String> _trimColumn(List<String> bullets, List<String> moved) {
 
 /// Splitst een bullet in een label en een substantiële uitleg, of `null` als
 /// dat niet zinvol kan. Kiest het vroegste scheidingsteken en eist dat de
-/// uitleg minstens [_minExplanationWords] woorden telt.
+/// uitleg minstens [_minExplanationWords] woorden telt. Zonder scheidingsteken
+/// valt hij terug op de eerste woorden als label, zie [_splitProse].
 ({String label, String explanation})? _splitLabelExplanation(String text) {
   var at = -1;
   var length = 0;
@@ -176,7 +187,7 @@ List<String> _trimColumn(List<String> bullets, List<String> moved) {
       length = match.end - match.start;
     }
   }
-  if (at < 0) return null;
+  if (at < 0) return _splitProse(text);
 
   final label = text.substring(0, at).trim();
   final explanation = text.substring(at + length).trim();
@@ -185,5 +196,19 @@ List<String> _trimColumn(List<String> bullets, List<String> moved) {
   return (label: label, explanation: explanation);
 }
 
-int _wordCount(String text) =>
-    text.split(RegExp(r'\s+')).where((word) => word.isNotEmpty).length;
+/// Een bullet zonder scheidingsteken: de eerste [_proseLabelWords] woorden zijn
+/// het label, de rest is de uitleg. Alleen als er ná het label nog een
+/// substantiële uitleg overblijft — een bullet van zes woorden is al kort.
+({String label, String explanation})? _splitProse(String text) {
+  final words = _words(text);
+  if (words.length < _proseLabelWords + _minExplanationWords) return null;
+  return (
+    label: words.take(_proseLabelWords).join(' '),
+    explanation: words.skip(_proseLabelWords).join(' '),
+  );
+}
+
+List<String> _words(String text) =>
+    text.split(RegExp(r'\s+')).where((word) => word.isNotEmpty).toList();
+
+int _wordCount(String text) => _words(text).length;
