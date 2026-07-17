@@ -24,7 +24,11 @@ Uint8List _b(String s) => Uint8List.fromList(utf8.encode(s));
 /// `DraftMirror` as the editing target. Whatever is asserted here is what the
 /// editor may rely on regardless of which mirror is underneath — so
 /// implementation specifics (where bytes land, what a checkpoint costs) stay out.
-void runDeckMirrorContract(String name, DeckMirror Function() build) {
+void runDeckMirrorContract(
+  String name,
+  DeckMirror Function() build, {
+  bool expectRealHistory = false,
+}) {
   group('$name honours the DeckMirror contract', () {
     late DeckMirror mirror;
 
@@ -173,11 +177,11 @@ void runDeckMirrorContract(String name, DeckMirror Function() build) {
     });
 
     group('honesty about what it is', () {
-      test('a draft mirror does not claim to hold history', () {
+      test('reports its history capability honestly', () {
         // The seam of §8.1: UI that offers "commit" as its own act may only do
         // so when this is true. A queued draft must never be presented as a
-        // commit log.
-        expect(mirror.hasRealHistory, isFalse);
+        // commit log; a real clone may. Each implementation states which it is.
+        expect(mirror.hasRealHistory, expectRealHistory);
       });
     });
   });
