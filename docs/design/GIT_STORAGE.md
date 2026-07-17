@@ -1041,6 +1041,13 @@ discussion still resolve.
   against each forge, and confirm the token cannot leak into a reflog, a trace
   (`GIT_TRACE`), a credential cache or a crash report. Do not consider §10.2 final
   until this is proven on all three desktop platforms.
+  - **Status (Phase 3, native plane landed):** the `GIT_CONFIG_*`/`http.extraHeader`
+    delivery is implemented in `native_git_mirror_io.dart` and the token is never
+    placed in argv (unit-tested in `git_cli_test.dart`) nor written to `.git/config`
+    (end-to-end test against real git in `native_git_mirror_test.dart`). Verified on
+    **macOS**. Still to confirm: a live Basic-auth handshake against Forgejo/GitHub/
+    GitLab, and `ps`-exposure + `GIT_TRACE` on **Windows and Linux**. §10.2 stays
+    provisional until those are done.
 
 ---
 
