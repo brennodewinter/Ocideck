@@ -5,7 +5,7 @@
   "serialNumber": "urn:uuid:ffab1d8e-0c22-5719-8763-1376ea0c1316",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-07-12T16:09:27.410355Z",
+    "timestamp": "2026-07-17T23:39:39.626732Z",
     "tools": {
       "components": [
         {
@@ -17,11 +17,11 @@
       ]
     },
     "component": {
-      "bom-ref": "ocideck@1.0.0+1",
+      "bom-ref": "ocideck@0.2.0+1",
       "type": "application",
       "name": "ocideck",
-      "version": "1.0.0+1",
-      "purl": "pkg:generic/ocideck@1.0.0+1",
+      "version": "0.2.0+1",
+      "purl": "pkg:generic/ocideck@0.2.0+1",
       "licenses": [
         {
           "license": {
@@ -7056,7 +7056,7 @@
   ],
   "dependencies": [
     {
-      "ref": "ocideck@1.0.0+1",
+      "ref": "ocideck@0.2.0+1",
       "dependsOn": [
         "pkg:pub/analyzer@12.1.0",
         "pkg:pub/archive@4.0.9",

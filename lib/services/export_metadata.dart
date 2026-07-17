@@ -4,7 +4,7 @@ import '../models/deck.dart';
 const kOciDeckCreator = 'OciDeck';
 
 /// Producer string embedded in PDF/PPTX metadata.
-const kOciDeckProducer = 'OciDeck 1.0.0';
+const kOciDeckProducer = 'OciDeck 0.2.0';
 
 /// Document metadata stamped into PDF, PPTX and HTML exports.
 class ExportDocumentMetadata {
