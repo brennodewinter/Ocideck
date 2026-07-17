@@ -33,6 +33,7 @@ class _ChartVariantsDialogState extends State<_ChartVariantsDialog> {
       ChartType.combo => l10n.d('Combo'),
       ChartType.waterfall => l10n.d('Waterval'),
       ChartType.heatmap => l10n.d('Heatmap'),
+      ChartType.horizontalStackedBar => l10n.d('Horizontale gestapelde staaf'),
     };
   }
 
@@ -75,21 +76,32 @@ class _ChartVariantsDialogState extends State<_ChartVariantsDialog> {
                         key: ValueKey('chart-variant-${_types[i].name}'),
                         dense: true,
                         contentPadding: EdgeInsets.zero,
-                        leading: Icon(switch (_types[i]) {
-                          ChartType.bar => Icons.bar_chart,
-                          ChartType.stackedBar => Icons.stacked_bar_chart,
-                          ChartType.line => Icons.show_chart,
-                          ChartType.area => Icons.area_chart,
-                          ChartType.pie => Icons.pie_chart_outline,
-                          ChartType.donut => Icons.donut_large,
-                          ChartType.radar => Icons.radar,
-                          ChartType.scatter => Icons.scatter_plot,
-                          ChartType.horizontalBar =>
-                            Icons.align_horizontal_left,
-                          ChartType.combo => Icons.insights,
-                          ChartType.waterfall => Icons.waterfall_chart,
-                          ChartType.heatmap => Icons.grid_on,
-                        }),
+                        // A horizontal stacked bar IS a stacked bar turned a
+                        // quarter turn, so its icon is the stacked-bar glyph
+                        // rotated to match.
+                        leading: RotatedBox(
+                          quarterTurns:
+                              _types[i] == ChartType.horizontalStackedBar
+                              ? 1
+                              : 0,
+                          child: Icon(switch (_types[i]) {
+                            ChartType.bar => Icons.bar_chart,
+                            ChartType.stackedBar => Icons.stacked_bar_chart,
+                            ChartType.line => Icons.show_chart,
+                            ChartType.area => Icons.area_chart,
+                            ChartType.pie => Icons.pie_chart_outline,
+                            ChartType.donut => Icons.donut_large,
+                            ChartType.radar => Icons.radar,
+                            ChartType.scatter => Icons.scatter_plot,
+                            ChartType.horizontalBar =>
+                              Icons.align_horizontal_left,
+                            ChartType.combo => Icons.insights,
+                            ChartType.waterfall => Icons.waterfall_chart,
+                            ChartType.heatmap => Icons.grid_on,
+                            ChartType.horizontalStackedBar =>
+                              Icons.stacked_bar_chart,
+                          }),
+                        ),
                         title: Text(_label(context, _types[i])),
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,

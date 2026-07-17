@@ -96,6 +96,7 @@ class _ChartEditorState extends State<ChartEditor> {
       _type != ChartType.pie &&
       _type != ChartType.donut &&
       _type != ChartType.horizontalBar &&
+      _type != ChartType.horizontalStackedBar &&
       _type != ChartType.heatmap;
 
   static String _fmtBound(double? v) => v == null ? '' : _fmt(v);
@@ -636,6 +637,10 @@ class _ChartEditorState extends State<ChartEditor> {
             DropdownMenuItem(
               value: ChartType.stackedBar,
               child: Text(l10n.d('Gestapelde staaf')),
+            ),
+            DropdownMenuItem(
+              value: ChartType.horizontalStackedBar,
+              child: Text(l10n.d('Horizontale gestapelde staaf')),
             ),
             DropdownMenuItem(
               value: ChartType.combo,
