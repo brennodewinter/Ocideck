@@ -8,6 +8,15 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Open an earlier released version of a deck — "Versies…".** For a deck opened
+  from git, the `…` menu now lists the versions that were released of it (the
+  `decks/<naam>/vX` tags), newest first. Pick one and it opens **read-only** — a
+  snapshot to look at, not a target to save over, so reviewing last quarter's
+  deck can never overwrite this quarter's work. Like every other open from a
+  forge, the version passes the same import gate before it is shown. Works on the
+  web too, since versions are a forge listing rather than something native `git`
+  has to resolve. (Releasing, merging and tagging themselves land in the next
+  steps of this phase.)
 - **New chart type: horizontal stacked bar.** The stacked bar chart can now be
   laid on its side — one bar per label with the series stacked left-to-right.
   Like the horizontal bar it suits long category names, and it keeps the
