@@ -1806,6 +1806,12 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Nu synchroniseren': 'Issinkronizza issa',
+  'Gesynchroniseerd:': 'Sinkronizzati:',
+  'nog in de wachtrij:': 'għadhom fil-kju:',
+  'Niets in de wachtrij.': 'Xejn fil-kju.',
+  'Opgeslagen — gaat mee zodra er weer verbinding is.':
+      'Maħżun — jissinkronizza malli terġa\' tkun online.',
   'Deknaam': 'Isem tad-deck',
   'Wordt de map decks/<naam> in de repository':
       'Isir il-folder decks/<isem> fir-repożitorju',

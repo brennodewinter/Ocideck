@@ -1774,6 +1774,12 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Nu synchroniseren': 'Sünkrooni kohe',
+  'Gesynchroniseerd:': 'Sünkroonitud:',
+  'nog in de wachtrij:': 'veel järjekorras:',
+  'Niets in de wachtrij.': 'Järjekorras pole midagi.',
+  'Opgeslagen — gaat mee zodra er weer verbinding is.':
+      'Salvestatud — sünkroonitakse kohe, kui ühendus taastub.',
   'Deknaam': 'Deki nimi',
   'Wordt de map decks/<naam> in de repository':
       'Saab kaustaks decks/<nimi> hoidlas',

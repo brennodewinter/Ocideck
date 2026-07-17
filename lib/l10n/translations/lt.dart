@@ -1791,6 +1791,12 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Nu synchroniseren': 'Sinchronizuoti dabar',
+  'Gesynchroniseerd:': 'Sinchronizuota:',
+  'nog in de wachtrij:': 'vis dar eilėje:',
+  'Niets in de wachtrij.': 'Eilėje nieko.',
+  'Opgeslagen — gaat mee zodra er weer verbinding is.':
+      'Įrašyta — bus sinchronizuota, kai tik grįš ryšys.',
   'Deknaam': 'Rinkinio pavadinimas',
   'Wordt de map decks/<naam> in de repository':
       'Tampa aplanku decks/<pavadinimas> saugykloje',

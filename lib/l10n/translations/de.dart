@@ -740,6 +740,12 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Nu synchroniseren': 'Jetzt synchronisieren',
+  'Gesynchroniseerd:': 'Synchronisiert:',
+  'nog in de wachtrij:': 'noch in der Warteschlange:',
+  'Niets in de wachtrij.': 'Nichts in der Warteschlange.',
+  'Opgeslagen — gaat mee zodra er weer verbinding is.':
+      'Gespeichert — wird synchronisiert, sobald wieder Verbindung besteht.',
   'Deknaam': 'Deckname',
   'Wordt de map decks/<naam> in de repository':
       'Wird der Ordner decks/<Name> im Repository',

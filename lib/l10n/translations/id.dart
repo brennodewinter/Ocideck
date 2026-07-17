@@ -1783,6 +1783,12 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Nu synchroniseren': 'Sinkronkan sekarang',
+  'Gesynchroniseerd:': 'Tersinkron:',
+  'nog in de wachtrij:': 'masih dalam antrean:',
+  'Niets in de wachtrij.': 'Tidak ada dalam antrean.',
+  'Opgeslagen — gaat mee zodra er weer verbinding is.':
+      'Disimpan — akan disinkronkan begitu kembali daring.',
   'Deknaam': 'Nama dek',
   'Wordt de map decks/<naam> in de repository':
       'Menjadi folder decks/<nama> di repositori',

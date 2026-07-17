@@ -1811,6 +1811,12 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Nu synchroniseren': 'Συγχρονισμός τώρα',
+  'Gesynchroniseerd:': 'Συγχρονίστηκαν:',
+  'nog in de wachtrij:': 'ακόμη σε αναμονή:',
+  'Niets in de wachtrij.': 'Τίποτα σε αναμονή.',
+  'Opgeslagen — gaat mee zodra er weer verbinding is.':
+      'Αποθηκεύτηκε — θα συγχρονιστεί μόλις επανέλθει η σύνδεση.',
   'Deknaam': 'Όνομα ντεκ',
   'Wordt de map decks/<naam> in de repository':
       'Γίνεται ο φάκελος decks/<όνομα> στο αποθετήριο',

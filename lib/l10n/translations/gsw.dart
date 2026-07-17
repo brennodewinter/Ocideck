@@ -1787,6 +1787,12 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Nu synchroniseren': 'Jetz synchronisiere',
+  'Gesynchroniseerd:': 'Synchronisiert:',
+  'nog in de wachtrij:': 'no i de Warteschlange:',
+  'Niets in de wachtrij.': 'Nüt i de Warteschlange.',
+  'Opgeslagen — gaat mee zodra er weer verbinding is.':
+      'Gspicheret — wird synchronisiert, sobald wieder e Verbindig da isch.',
   'Deknaam': 'Deckname',
   'Wordt de map decks/<naam> in de repository':
       'Wird de Ordner decks/<Name> im Repository',

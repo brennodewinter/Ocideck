@@ -47,6 +47,8 @@ Future<void> _saveToGit(BuildContext context, WidgetRef ref) async {
           deckDir: deckDir,
           branch: config.defaultBranch,
           message: choice.message,
+          mirror: ref.read(draftMirrorProvider),
+          outbox: ref.read(outboxProvider),
         );
     if (!context.mounted) return;
     switch (result.status) {
@@ -58,6 +60,14 @@ Future<void> _saveToGit(BuildContext context, WidgetRef ref) async {
               result.warnings.isEmpty
                   ? base
                   : '$base — ${l10n.d('video en audio gaan (nog) niet mee naar git')}',
+            ),
+          ),
+        );
+      case GitSaveStatus.queued:
+        messenger.showSnackBar(
+          SnackBar(
+            content: Text(
+              l10n.d('Opgeslagen — gaat mee zodra er weer verbinding is.'),
             ),
           ),
         );
@@ -78,10 +88,72 @@ Future<void> _saveToGit(BuildContext context, WidgetRef ref) async {
           '${l10n.d('Opslaan mislukt:')} ${result.message ?? ''}',
         );
     }
+    // Een geslaagde opslag is een goed moment om te kijken of er nog iets in de
+    // wachtrij stond van een eerdere offline-sessie: leeg die op de koop toe.
+    if (result.status == GitSaveStatus.committed && context.mounted) {
+      await _flushGitQueue(context, ref, config, silent: true);
+    }
   } on GitForgeException catch (e) {
     // De uitzondering draagt al een uitlegbare tekst voor de gebruiker.
     messenger.showSnackBar(SnackBar(content: Text(e.message)));
   }
+}
+
+/// Loop de wachtrij van nog niet gepushte decks leeg (§8.5). Handmatig via het
+/// menu, of stilletjes ([silent]) na een geslaagde opslag. Meldt de uitkomst
+/// alleen als er iets te melden was, of wanneer de gebruiker er zelf om vroeg.
+Future<void> _syncGit(BuildContext context, WidgetRef ref) async {
+  final forge = await ref.read(gitForgeProvider.future);
+  if (!context.mounted) return;
+  if (forge == null) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          context.l10n.d(
+            'Stel eerst een git-repository in bij Instellingen → Git-repository.',
+          ),
+        ),
+      ),
+    );
+    return;
+  }
+  final config = ref.read(settingsProvider).gitRepo;
+  if (config == null) return;
+  await _flushGitQueue(context, ref, config, silent: false);
+}
+
+Future<void> _flushGitQueue(
+  BuildContext context,
+  WidgetRef ref,
+  GitRepoConfig config, {
+  required bool silent,
+}) async {
+  final l10n = context.l10n;
+  final messenger = ScaffoldMessenger.of(context);
+  final engine = await ref.read(syncEngineProvider.future);
+  if (engine == null) return;
+  if (silent && await ref.read(outboxProvider).isEmpty) return;
+
+  final outcomes = await ref
+      .read(tabsProvider.notifier)
+      .flushGit(engine, config);
+  if (!context.mounted) return;
+
+  final settled = outcomes.where((o) => o.isSettled).length;
+  final stuck = outcomes.length - settled;
+  if (silent && settled == 0 && stuck == 0) return;
+
+  final String text;
+  if (outcomes.isEmpty) {
+    text = l10n.d('Niets in de wachtrij.');
+  } else if (stuck == 0) {
+    text = '${l10n.d('Gesynchroniseerd:')} $settled';
+  } else {
+    text =
+        '${l10n.d('Gesynchroniseerd:')} $settled — '
+        '${l10n.d('nog in de wachtrij:')} $stuck';
+  }
+  messenger.showSnackBar(SnackBar(content: Text(text)));
 }
 
 /// Maak een geldige deknaam (§6) uit een deck-titel, of een nette terugval.

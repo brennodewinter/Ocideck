@@ -1801,6 +1801,12 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Nu synchroniseren': 'Синхронізувати зараз',
+  'Gesynchroniseerd:': 'Синхронізовано:',
+  'nog in de wachtrij:': 'ще в черзі:',
+  'Niets in de wachtrij.': 'У черзі порожньо.',
+  'Opgeslagen — gaat mee zodra er weer verbinding is.':
+      'Збережено — синхронізується, щойно з\'явиться зв\'язок.',
   'Deknaam': 'Назва колоди',
   'Wordt de map decks/<naam> in de repository':
       'Стане текою decks/<назва> у репозиторії',

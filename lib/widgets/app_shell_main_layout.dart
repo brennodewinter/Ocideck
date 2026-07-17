@@ -423,6 +423,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
               _openFromGit(context, ref);
             case 'save_git':
               _saveToGit(context, ref);
+            case 'sync_git':
+              _syncGit(context, ref);
             case 'open_nextcloud':
               _openFromNextcloud(context, ref);
             case 'save_nextcloud':
@@ -495,6 +497,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         Icons.cloud_upload_outlined,
         l10n.d('Opslaan naar git…'),
       ),
+      _menuItem('sync_git', Icons.sync, l10n.d('Nu synchroniseren')),
       if (supportsNetworkDeckSources) ...[
         _menuItem(
           'open_nextcloud',

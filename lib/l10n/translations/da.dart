@@ -1782,6 +1782,12 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Nu synchroniseren': 'Synkroniser nu',
+  'Gesynchroniseerd:': 'Synkroniseret:',
+  'nog in de wachtrij:': 'stadig i kø:',
+  'Niets in de wachtrij.': 'Intet i køen.',
+  'Opgeslagen — gaat mee zodra er weer verbinding is.':
+      'Gemt — synkroniseres, så snart der er forbindelse igen.',
   'Deknaam': 'Decknavn',
   'Wordt de map decks/<naam> in de repository':
       'Bliver mappen decks/<navn> i repositoryet',

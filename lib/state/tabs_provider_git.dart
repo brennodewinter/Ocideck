@@ -4,10 +4,9 @@ part of 'tabs_provider.dart';
 /// `tabs_provider` tegen de regelratchet aan zit; de extensie zit in dezelfde
 /// library, dus de gedeelde security-poort blijft bereikbaar.
 ///
-/// Opslaan schrijft nu rechtstreeks naar de forge (online). De offline-wachtrij
-/// (DeckMirror + Outbox + SyncEngine) komt in een volgende stap; daarom valt een
-/// netwerkfout hier nog gewoon als [GitSaveStatus.failed] terug, in plaats van
-/// stil in een wachtrij te belanden.
+/// Opslaan schrijft rechtstreeks naar de forge; is er geen verbinding, dan gaat
+/// de tekst naar de werkkopie ([DeckMirror]) en het deck in de wachtrij
+/// ([Outbox]), die [flushGit] via de [SyncEngine] leegloopt zodra het kan (§8.5).
 extension TabsNotifierGit on TabsNotifier {
   /// Standaardnaam van het markdown-bestand binnen een deckmap (§6).
   static const String deckFileName = 'deck.md';
@@ -151,12 +150,19 @@ extension TabsNotifierGit on TabsNotifier {
   /// Gooit [GitForgeException] bij een onbruikbare [deckDir] (programmeerfout van
   /// de aanroeper). Netwerk-, auth- en conflict-uitkomsten komen als
   /// [GitSaveResult] terug — die hoort de UI te vertalen naar een melding.
+  ///
+  /// Krijgt het een [mirror] én een [outbox] mee, dan is verbinding kwijt geen
+  /// verloren werk: bij een netwerkfout gaat de tekst naar de werkkopie en komt
+  /// het deck in de wachtrij, die bij de volgende synchronisatie leegloopt (P2,
+  /// §8.5). Zonder die twee is het pad online-only.
   Future<GitSaveResult> saveToGit(
     GitForge forge, {
     required GitRepoConfig config,
     required String deckDir,
     required String branch,
     required String message,
+    DeckMirror? mirror,
+    Outbox? outbox,
   }) async {
     if (GitRepoLayout.deckNameOf(deckDir) == null) {
       throw const GitForgeException(
@@ -225,6 +231,21 @@ extension TabsNotifierGit on TabsNotifier {
         warnings: files.warnings,
       );
     } on GitForgeException catch (e) {
+      // Verbinding kwijt is uitstel, geen mislukking: parkeer het werk als er
+      // een wachtrij is (§8.5). Auth- of vormfouten zijn dat niet — die blijven
+      // een echte mislukking, want opnieuw proberen lost ze niet op.
+      if (e.kind == GitForgeError.network && mirror != null && outbox != null) {
+        return _queueGitSave(
+          mirror,
+          outbox,
+          config: config,
+          deckDir: deckDir,
+          branch: branch,
+          message: message,
+          baseSha: baseSha,
+          files: files,
+        );
+      }
       logWarning('saveToGit: $deckDir niet opgeslagen', e);
       return GitSaveResult(
         status: GitSaveStatus.failed,
@@ -233,6 +254,66 @@ extension TabsNotifierGit on TabsNotifier {
       );
     }
   }
+
+  /// Parkeer een opslag in de wachtrij: de tekst gaat naar de werkkopie, de
+  /// intentie in de outbox. Alleen het tekstlid onder de deckmap gaat mee —
+  /// pool-blobs kunnen offline toch niet omhoog (§8.3) en horen niet in de
+  /// deckmap-werkkopie. De tab houdt zijn herkomst zoals hij was: er is niets
+  /// nieuws geland om de basis op te verzetten.
+  Future<GitSaveResult> _queueGitSave(
+    DeckMirror mirror,
+    Outbox outbox, {
+    required GitRepoConfig config,
+    required String deckDir,
+    required String branch,
+    required String message,
+    required String baseSha,
+    required RepoDeckFiles files,
+  }) async {
+    final deckFiles = <String, Uint8List>{
+      for (final entry in files.upserts.entries)
+        if (p.posix.isWithin(deckDir, p.posix.normalize(entry.key)))
+          entry.key: entry.value,
+    };
+    await mirror.writeDeck(deckDir, deckFiles);
+    await outbox.enqueue(
+      PendingCommit(
+        deckDir: deckDir,
+        branch: branch,
+        message: message,
+        baseSha: baseSha,
+      ),
+    );
+    return GitSaveResult(
+      status: GitSaveStatus.queued,
+      warnings: files.warnings,
+    );
+  }
+
+  /// Loop de wachtrij leeg tegen de forge (§8.5) en werk de basis bij van elk
+  /// open tabblad waarvan het deck landde, zodat een volgende opslag daar niet
+  /// meteen op een conflict loopt. Geeft per deck terug hoe het afliep.
+  Future<List<SyncOutcome>> flushGit(
+    SyncEngine engine,
+    GitRepoConfig config,
+  ) async {
+    final outcomes = await engine.flush();
+    var changed = false;
+    for (final outcome in outcomes) {
+      if (outcome.sha == null) continue;
+      for (final tab in currentState.tabs) {
+        final origin = tab.gitOrigin;
+        if (origin != null &&
+            origin.matchesRepo(config) &&
+            origin.deckDir == outcome.deckDir) {
+          tab.gitOrigin = origin.copyWith(baseSha: outcome.sha);
+          changed = true;
+        }
+      }
+    }
+    if (changed) refreshTabs();
+    return outcomes;
+  }
 }
 
 /// Hoe een [TabsNotifierGit.saveToGit] afliep.
@@ -240,11 +321,15 @@ enum GitSaveStatus {
   /// Gecommit; [GitSaveResult.sha] is de nieuwe basis.
   committed,
 
+  /// Geen verbinding: de tekst staat in de werkkopie en het deck in de
+  /// wachtrij, en gaat mee bij de volgende synchronisatie (§8.5).
+  queued,
+
   /// Iemand anders heeft de branch verzet sinds de basis. Herladen (of, later,
   /// mergen).
   conflict,
 
-  /// Netwerk, auth of forge deed het niet — of er was geen deck om op te slaan.
+  /// Auth of forge deed het niet — of er was geen deck om op te slaan.
   failed,
 }
 

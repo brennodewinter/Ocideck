@@ -1783,6 +1783,12 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Nu synchroniseren': 'Synkronoi nyt',
+  'Gesynchroniseerd:': 'Synkronoitu:',
+  'nog in de wachtrij:': 'yhä jonossa:',
+  'Niets in de wachtrij.': 'Jono on tyhjä.',
+  'Opgeslagen — gaat mee zodra er weer verbinding is.':
+      'Tallennettu — synkronoituu heti kun yhteys palaa.',
   'Deknaam': 'Setin nimi',
   'Wordt de map decks/<naam> in de repository':
       'Tulee kansioksi decks/<nimi> repositoriossa',

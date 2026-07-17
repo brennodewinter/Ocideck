@@ -66,8 +66,13 @@ saved version stays retrievable, which a plain folder cannot give you.
   in place; a new deck is published by choosing a name (it becomes
   `decks/<name>`). If someone moved the branch since you opened it, the save is
   refused so you do not overwrite their work — reload and save again. Video and
-  audio are not written yet; you are told when a deck has them. Saving needs a
-  connection for now; an offline queue that syncs on reconnect is next.
+  audio are not written yet; you are told when a deck has them.
+- **Lose your connection while saving** and the deck's text is kept locally and
+  queued instead of failing — you see "saved, syncs when you're back online".
+  The queue survives closing the app; it empties on your next successful save
+  and via *Sync now* in the `…` menu. New images added while offline are held in
+  memory until you next save online (the same limit a plain saved deck already
+  has for in-memory images); your text is always safe.
 - **Layout**: a repository holds many decks under `decks/<name>/deck.md`, with
   images shared in one `assets/` pool so the same picture is stored once.
 - **Versions and releases** are still being built. See

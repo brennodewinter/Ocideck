@@ -1758,6 +1758,12 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Nu synchroniseren': 'DaH yInI\'chuq',
+  'Gesynchroniseerd:': 'nI\'chuqta\':',
+  'nog in de wachtrij:': 'loS taH:',
+  'Niets in de wachtrij.': 'pagh taH.',
+  'Opgeslagen — gaat mee zodra er weer verbinding is.':
+      'Qaw\'ta\' — rIntaHvIS rggh, nI\'chuqqu\'.',
   'Deknaam': 'nav pong',
   'Wordt de map decks/<naam> in de repository':
       'repository-Daq decks/<pong> ngaQHa\' moj',

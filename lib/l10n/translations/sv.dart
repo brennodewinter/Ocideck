@@ -1782,6 +1782,12 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Nu synchroniseren': 'Synkronisera nu',
+  'Gesynchroniseerd:': 'Synkroniserade:',
+  'nog in de wachtrij:': 'fortfarande i kö:',
+  'Niets in de wachtrij.': 'Inget i kön.',
+  'Opgeslagen — gaat mee zodra er weer verbinding is.':
+      'Sparat — synkroniseras så snart du är online igen.',
   'Deknaam': 'Decknamn',
   'Wordt de map decks/<naam> in de repository':
       'Blir mappen decks/<namn> i repot',

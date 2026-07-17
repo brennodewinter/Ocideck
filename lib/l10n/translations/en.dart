@@ -922,6 +922,12 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Nu synchroniseren': 'Sync now',
+  'Gesynchroniseerd:': 'Synchronised:',
+  'nog in de wachtrij:': 'still queued:',
+  'Niets in de wachtrij.': 'Nothing in the queue.',
+  'Opgeslagen — gaat mee zodra er weer verbinding is.':
+      'Saved — it will sync as soon as you\'re back online.',
   'Deknaam': 'Deck name',
   'Wordt de map decks/<naam> in de repository':
       'Becomes the folder decks/<name> in the repository',

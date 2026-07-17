@@ -1819,6 +1819,12 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Nu synchroniseren': 'Sioncronaigh anois',
+  'Gesynchroniseerd:': 'Sioncronaithe:',
+  'nog in de wachtrij:': 'fós sa scuaine:',
+  'Niets in de wachtrij.': 'Faic sa scuaine.',
+  'Opgeslagen — gaat mee zodra er weer verbinding is.':
+      'Sábháilte — sioncronófar é chomh luath is a bheidh tú ar líne arís.',
   'Deknaam': 'Ainm an deic',
   'Wordt de map decks/<naam> in de repository':
       'Déantar an fillteán decks/<ainm> sa stór',
