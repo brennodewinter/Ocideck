@@ -1,228 +1,241 @@
 # OciDeck — API Documentation
 
-This document provides comprehensive documentation of the key APIs and interfaces used in the OciDeck codebase.
+This document describes the key internal APIs and interfaces in the OciDeck
+codebase. OciDeck is not a library with a published public API; the surfaces
+below are the seams a contributor works with when extending the app. Signatures
+are kept in sync with the source under `lib/` — if one drifts, the source is the
+source of truth.
 
 ## Overview
 
-OciDeck follows a modular architecture with well-defined APIs between components. This documentation covers the primary service interfaces, data models, and extension points that are available for developers who want to extend or integrate with OciDeck.
+OciDeck follows a modular architecture: immutable models, a service layer for
+serialization/export/privacy/git, and Riverpod `StateNotifier`s for app state.
+The sections below cover the primary models, service interfaces, and state
+providers.
 
-## Core Data Models API
+## Core Data Models
 
 ### Deck Model
-The `Deck` class represents a complete presentation:
-- Metadata (title, author, organization, description)
-- Slide list (`List<Slide>`)  
-- Theme profile information
-- TLP classification level
-- User notes and annotations
-- Presentation timing targets
+`lib/models/deck.dart` — `Deck` is an immutable presentation:
+- Metadata: `title`, `author`, `organization`, `description`
+- `List<Slide> slides`
+- `ThemeProfile themeProfile`
+- `TlpLevel tlp` (classification level)
+- `Map<String, String> userNotes` and per-slide ink `annotations`
+- `int presentationTargetSeconds` (presentation timing target)
 
 ### Slide Model
-Slides are immutable value objects with typed fields:
+`lib/models/slide.dart` — `Slide` is an immutable value object (all fields
+`final`, `const` constructor). It is **not** a generic property bag: besides
+`id` and `SlideType type`, it carries ~50 strongly-typed, type-specific fields
+(`title`, `subtitle`, `bullets`, `tableRows`, `imagePath`, `quote`, `findingId`,
+`tlp`, per-slide style overrides such as `titleTextColorOverride`, …). A field is
+only meaningful for the slide types that use it.
 
-```dart
-class Slide {
-  final String id;
-  final SlideType type;
-  final Map<String, dynamic> fields; // Type-specific fields based on slide type
-}
-```
+`SlideType` (21 values): `title, section, bullets, twoBullets, bulletsImage,
+twoImages, image, video, quote, table, freeMarkdown, code, chart, cockpit,
+question, timeline, finding, findingsSummary, checklist, scopeMatrix, signOff`.
+The last five are the informatieveiligheid (pentest-reporting) layouts. Note the
+Marp `_class` token stored in Markdown can differ from the enum name (e.g. the
+`split` class maps to `SlideType.bulletsImage`).
 
-Slide types include: title, section, bullets, two-bullets, split, quote, video, table, code, chart, cockpit, question, timeline, finding, findings-summary, checklist, scope-matrix, sign-off.
-
-### ThemeProfile Model  
-Manages visual styling:
-- Colors (background, text, accent, etc.)
-- Fonts and font families
-- Logo configuration
-- Footer settings
-- Slide-specific overrides
+### ThemeProfile Model
+`lib/models/settings.dart` — visual styling: colors, fonts (`fontFamily`,
+`codeFontFamily`), logo (`logoPath`, `logoPosition`, `logoSize`) and footer
+(`footerText`, `footerShowPageNumbers`, `footerPosition`). Per-slide visual
+overrides live on `Slide`, not here.
 
 ## Key Service Interfaces
 
 ### MarkdownService
-Handles serialization and parsing of Marp Markdown with OciDeck extensions:
+`lib/services/markdown_service.dart` — serialization of Marp Markdown with
+OciDeck extensions:
 
 ```dart
-class MarkdownService {
-  // Generate Marp Markdown from Deck model
-  String generateDeck(Deck deck);
-  
-  // Parse Marp Markdown back into Deck model  
-  Deck parseDeck(String markdown);
-  
-  // Validate Markdown structure before editing
-  MarkdownValidationResult validateMarkdown(String markdown);
-}
+// Generate Marp Markdown from a Deck.
+String generateDeck(Deck deck, {
+  bool inlineChartData = false,
+  bool inlineStyleProfile = false,
+  bool forExport = false,
+});
+
+// Parse Markdown back into a Deck. Returns null on unparseable input.
+Deck? parseDeck(String markdown, {String? filePath});
 ```
+
+Structural pre-flight validation is a separate class,
+`MarkdownValidator.validate(String markdown)` in
+`lib/services/markdown_validator.dart`, which returns a `MarkdownValidationResult`
+(`lib/models/markdown_validation.dart`).
 
 ### ExportService
-Main export functionality for PDF, PPTX, and HTML:
+`lib/services/export_service.dart` — export to PDF, PPTX, and HTML:
 
 ```dart
-class ExportService {
-  // Generate export in requested format
-  Future<Uint8List> export(ExportBundle bundle, ExportFormat format);
-  
-  // Build metadata for exports
-  ExportDocumentMetadata buildExportMetadata(Deck deck);
-}
+// ExportFormat is { pdf, pptx, html }. Images are pre-rendered by the caller.
+Future<ExportResult> export(
+  String deckPath,
+  ExportFormat format,
+  List<Uint8List> images, { /* … */ });
 ```
 
-### PrivacyProjection API
-Enforces privacy restrictions across all rendering/export operations:
+Export metadata is built from the deck via the factory
+`ExportDocumentMetadata.fromDeck(Deck deck)` (`lib/services/export_metadata.dart`).
+
+### Privacy Projection API
+`lib/services/privacy/privacy_projection.dart` — applies redaction and audience
+scoping. The entry points are **static**:
 
 ```dart
-class PrivacyProjection {
-  // Apply redaction and classification to content
-  AudienceDeck projectForAudience(Deck sourceDeck, PrivacyDisposition disposition);
-  
-  // Validate export against privacy rules
-  bool canExportWithPrivacy(AudienceDeck deck, ExportPolicy policy);
-}
+// Project a deck for a given audience (own-identity aware).
+static AudienceDeck PrivacyProjection.forAudience(Deck deck, {
+  Set<String> disabledRules,
+  OwnIdentity ownIdentity,
+  PrivacyExportProfile profile,
+});
+
+// Stricter projection for hand-off to external processing (e.g. AI).
+static AudienceDeck PrivacyProjection.forExternalProcessing(/* … */);
 ```
+
+Export-time gating (does this audience deck satisfy the export policy?) lives in
+`PrivacyExportGate` (`lib/services/privacy/privacy_export_policy.dart`).
+`PrivacyDisposition` (`{ warn, accept, shield, redact }`) is defined in
+`lib/models/privacy_disposition.dart`.
 
 ### Git Integration API
+`lib/services/git/git_forge.dart` — `GitForge` is the abstract forge adapter
+(REST implementation `GiteaForge`, covering Gitea/Forgejo and GitLab):
 
 ```dart
-class GitForge {
-  Future<List<GitFile>> listTree(String repositoryPath, String path);
-  Future<String> readBlob(String repositoryPath, String filePath);  
-  Future<String> headSha(String repositoryPath, String branch);
-}
+Future<List<RepoEntry>> listTree(String ref, String path, {bool recursive});
+Future<Uint8List> readBlob(String ref, String path);
+Future<String> headSha(String branch);
 ```
 
-## Riverpod State Management APIs
+Alongside the REST path, a native-git path (`NativeGitMirror`,
+`lib/services/git/native_git_mirror_api.dart`) makes real local commits and
+carries version history; see [`docs/design/GIT_STORAGE.md`](design/GIT_STORAGE.md).
+
+## Riverpod State Management
 
 ### DeckProvider
-Manages deck state and history:
+`lib/state/deck_provider.dart` — `DeckNotifier extends StateNotifier<DeckState>`
+manages the open deck and its undo/redo history:
 
 ```dart
-class DeckNotifier extends Notifier<DeckState> {
-  // Load a deck from file 
-  void loadFromFile(String path);
-  
-  // Save current deck
-  Future<void> save();
-  
-  // Undo/redo operations
-  void undo(); 
-  void redo();
-}
+void loadDeck(Deck deck, {String? filePath, String? remoteOrigin});
+Future<void> openDeck({String? initialDirectory});
+void newDeck(/* … */);
+Future<bool> save({String? initialDirectory}); // false if the user cancels
+void undo();
+void redo();
 ```
 
-### SettingsProvider  
-Handles application configuration:
+### SettingsProvider
+`lib/state/settings_provider.dart` — `SettingsNotifier extends
+StateNotifier<AppSettings>` handles application configuration:
 
 ```dart
-class SettingsNotifier extends Notifier<SettingsState> {
-  // Update theme profile
-  void updateThemeProfile(ThemeProfile profile);
-  
-  // Set TLP levels and classification policies
-  void setClassificationPolicy(ClassificationEnforcementPolicy policy);
-}
+Future<void> saveThemeProfile(ThemeProfile profile, { /* … */ });
+
+// Classification is set through granular setters, not one policy object:
+void setRequireClassificationOnExport(bool value);
+void setClassificationWatermarkEnabled(bool value);
 ```
 
-## Extension Points
+The `ClassificationEnforcementPolicy` used at export time is **built** from the
+current settings via `ClassificationEnforcementPolicy.fromAppSettings(...)`; it is
+not stored wholesale on the settings state.
 
-### Slide Type Extensions
-New slide types can be implemented by:
-1. Adding to `SlideType` enum 
-2. Implementing a corresponding editor widget
-3. Adding preview rendering logic
-4. Defining serialization format in MarkdownService
-
-### Service Layer Extensibility  
-Services follow dependency injection patterns for easy replacement:
-
-```dart
-// Example of service interface
-abstract class ImageService {
-  Future<String> validateAndStoreImage(File file);
-  Future<ImageMetadata> getMetadata(String imagePath); 
-}
-```
-
-## Utility APIs
+## Security & Utility APIs
 
 ### NetGuard
-Network security enforcement:
-- SSRF protection for all outbound requests  
-- Address pinning and validation
-- Redirect prevention
-- Byte caps on transfers
+`lib/utils/net_guard.dart` — SSRF protection for outbound requests:
+`isBlockedHost`, `isBlockedAddress`, and `safeResolve` reject loopback, RFC1918,
+link-local, cloud-metadata, CGNAT, ULA and IPv4-in-IPv6 targets, and return the
+resolved address so the caller can pin the socket against DNS rebinding.
+Redirect prevention and byte caps are enforced at the transport layer that calls
+NetGuard (`file_service_net.dart`, `git_transport_web.dart`), not inside NetGuard
+itself.
 
-### Asset Path Security
-Path validation against project containment rules:
-
-```dart
-class ProjectPathValidator {
-  bool isWithinProject(String filePath, String projectRoot);
-  String sanitizeAssetPath(String path, String projectDir);
-}
-```
-
-## Authentication and Security APIs
+### Asset Path Containment
+`lib/utils/project_path.dart` — a set of top-level functions (not a class) keep
+asset references inside the project folder: `resolveSlideAssetPath`,
+`resolveContainedRealPath`, `isRenderPathContained`, `resolveProjectRelative` /
+`resolveProjectAbsolute`, `resolveTrustedAssetPath`, `resolveEditorAssetPath`.
+Containment is checked with `p.isWithin` from the `path` package; absolute paths
+and `../` escapes are refused on the render/present/export paths.
 
 ### SecretStore
-Secure credential management:
-- OS keychain integration (macOS Keychain, Windows Credential Manager)
-- Encrypted storage for sensitive information
-- API for credential retrieval and storage
+`lib/services/secret_store.dart` — OS keychain integration via
+`flutter_secure_storage` (macOS Keychain, Windows Credential Manager, and the
+platform-appropriate backend elsewhere). Typed accessors:
+`write/read/deleteWebdavPassword`, `write/read/deleteAiApiKey`,
+`write/read/deleteGitToken`. Only secrets go here; server URLs and usernames stay
+in the prefs domain.
 
 ### ClassificationEnforcementPolicy
-Export security gates:
+`lib/services/classification_enforcement_policy.dart` — export classification gate:
 
 ```dart
-class ClassificationEnforcementPolicy {
-  bool canExport(Deck deck, ExportSettings settings);
-  List<String> getViolations(Deck deck, ExportSettings settings);
-}
+// Returns an allow / block-with-reason decision for a deck's TLP level.
+ExportDecision evaluate(TlpLevel deckLevel);
+bool get hasGate;
 ```
 
-## Web-Specific APIs
+Construct it with `ClassificationEnforcementPolicy.fromAppSettings(...)` or
+`.fromMaxReleaseKey(...)`. `ExportDecision` is in
+`lib/services/classification_policy.dart`.
+
+## Media & Web APIs
+
+### ImageService
+`lib/services/image_service.dart` — a concrete service (not an injectable
+interface) for importing and resolving images. Images are validated by magic
+bytes, not extension (`imageMimeFromBytes` accepts PNG, JPEG, GIF, BMP, WebP).
+Key methods: `pickImage` / `pickImageDetailed` (→ `ImageImportOutcome`),
+`pasteImage` / `pasteImageDetailed`, `readSlideImageBytes`, `copyImagesToProject`,
+`copyMediaToProject`.
 
 ### WebAssetStore
-In-memory asset storage for web builds:
-- Temporary file handling
-- Browser-compatible cache management  
-- Memory-limited caching strategy
+`lib/services/web_asset_store.dart` — in-memory image store for the web build,
+keyed under a `mem:` path scheme. Static `put(bytes, {name})`, `bytesFor`,
+`nameFor`, `clear`, `isMemPath`.
 
-### FetchProxy API (Web Only)
-Server-side proxy for CORS issues:
+### Fetch proxy (web only)
+There is no `FetchProxyService` class. On the web, URL fetches that CORS would
+block are routed through a **server-side** `fetch-proxy?url=…` endpoint (see
+[`server/fetch-proxy/README.md`](../server/fetch-proxy/README.md)). Clients call
+it via `FileService.fetchUrlBytes(String url, {int maxBytes, …})`
+(`lib/services/parts/file_service_net.dart`), which falls back to the proxy on
+web; the git web transport uses the same endpoint.
 
-```dart
-class FetchProxyService {
-  Future<Uint8List> fetchFromUrl(String url);
-}
-```
+## Extending OciDeck
+
+### Adding a slide type
+1. Add a value to the `SlideType` enum in `lib/models/slide.dart` (append, so the
+   stored token stays stable) and any type-specific fields on `Slide`.
+2. Add its editor widget and its preview rendering in `lib/widgets/slides/`.
+3. Add serialization/parsing in the markdown services
+   (`markdown_service_serialize.dart` / `markdown_service_parse.dart`).
+4. Cover the round-trip in `test/markdown_round_trip_test.dart`.
 
 ## Testing APIs
 
-### Golden Test Framework 
-Visual regression testing:
-- Slide preview rendering validation  
-- Consistent PNG output generation
-- Automated visual comparison tools
+### Golden tests
+`test/golden/` — slide-renderer visual-regression goldens over
+`SlidePreviewWidget`. They are excluded from the default suite (pixel- and
+platform-specific); run with `make test-golden`, accept intended changes with
+`make test-golden UPDATE=1`.
 
-### Mock Service Interface
-For test isolation:
-```dart
-// Example mock interface for services in tests
-class MockMarkdownService implements MarkdownService {
-  // Implementation that provides controlled test data
-}
-```
+### Fakes for tests
+The suite drives platform seams with fakes (a fake `VideoPlayerPlatform` for the
+media lifecycle, a fake `UrlLauncherPlatform` for external-link tests) rather
+than a formal mock framework — see the `dev_dependencies` in `pubspec.yaml`.
 
-## Version Compatibility Notes
+## Compatibility
 
-The API is designed to maintain backward compatibility where possible. Major version changes will be clearly documented with migration paths.
-
-## Future Extension Points
-
-The architecture supports additional extension points including:
-- Custom slide types via plugin system  
-- Alternative export formats
-- Additional authentication methods
-- Cloud synchronization services
+OciDeck is at version 1.0.0. These interfaces are internal and may change between
+releases; the `.md`/Marp on-disk format is the stable contract and is documented
+in [`docs/FILE_FORMAT.md`](FILE_FORMAT.md).
