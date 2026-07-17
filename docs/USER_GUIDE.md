@@ -70,9 +70,11 @@ saved version stays retrievable, which a plain folder cannot give you.
 - **Lose your connection while saving** and the deck's text is kept locally and
   queued instead of failing — you see "saved, syncs when you're back online".
   The queue survives closing the app; it empties on your next successful save
-  and via *Sync now* in the `…` menu. New images added while offline are held in
-  memory until you next save online (the same limit a plain saved deck already
-  has for in-memory images); your text is always safe.
+  and via *Sync now* in the `…` menu. An image you add while offline is pooled
+  and committed when the queue syncs, so a reconnect gets the whole deck —
+  unless you close the app first (an unsaved in-memory image does not survive a
+  restart, the same limit a plain saved deck already has). Your text is always
+  safe.
 - **Layout**: a repository holds many decks under `decks/<name>/deck.md`, with
   images shared in one `assets/` pool so the same picture is stored once.
 - **Versions and releases** are still being built. See
