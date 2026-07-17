@@ -10,6 +10,12 @@ bool get isWebPlatform => kIsWeb;
 /// Desktop OS with native windowing (macOS, Windows, Linux).
 bool get isDesktopNative => impl.isDesktopNative;
 
+/// Whether this platform *could* run a native `git` subprocess at all — the
+/// cheap, synchronous pre-check before the real runtime probe
+/// (`nativeGitVersionProvider`, which actually invokes `git`). False on web and
+/// mobile; true on desktop. It says nothing about whether `git` is installed.
+bool get supportsNativeGit => impl.supportsNativeGit;
+
 /// Dual-screen presenter (separate audience window).
 bool get supportsDualScreenPresenter => impl.supportsDualScreenPresenter;
 

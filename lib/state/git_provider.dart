@@ -1,7 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/git_settings.dart';
+import '../platform/platform_features.dart';
 import '../services/git/deck_mirror.dart';
+import '../services/git/git_cli.dart';
+import '../services/git/git_cli_factory.dart';
 import '../services/git/git_forge.dart';
 import '../services/git/gitea_forge.dart';
 import '../services/git/outbox.dart';
@@ -34,6 +37,25 @@ final gitForgeProvider = FutureProvider<GitForge?>((ref) async {
       // aanroep omvalt; de UI biedt ze niet aan.
       return null;
   }
+});
+
+/// De gehardde git-uitvoerder (§10.2). Eén per proces; op web een stub die
+/// [GitCli.isSupported] `false` meldt.
+final gitCliProvider = Provider<GitCli>((ref) => createGitCli());
+
+/// De versie van bruikbaar native `git`, of null wanneer het er niet is (web,
+/// mobiel, git ontbreekt, te oud, of — op macOS — de Xcode-tools ontbreken,
+/// §8.4). Draait de probe één keer en onthoudt het uitkomst voor de rest van het
+/// proces.
+///
+/// **Lui**: een `FutureProvider` rekent pas wanneer iets hem leest, en dat mag
+/// hier alléén gebeuren als de gebruiker een git-repo aanraakt — nooit bij het
+/// opstarten (§8.4: de macOS-shim zou anders een installatiedialoog kunnen
+/// openen). De goedkope [supportsNativeGit]-poort kort dat bovendien af vóór er
+/// ook maar een proces start.
+final nativeGitVersionProvider = FutureProvider<GitVersion?>((ref) async {
+  if (!supportsNativeGit) return null;
+  return ref.watch(gitCliProvider).probe();
 });
 
 /// De werkkopie waar een offline opslag naartoe schrijft (§8.1). Op web en op
