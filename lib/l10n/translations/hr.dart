@@ -1790,6 +1790,12 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Nu synchroniseren': 'Sinkroniziraj sada',
+  'Gesynchroniseerd:': 'Sinkronizirano:',
+  'nog in de wachtrij:': 'još u redu:',
+  'Niets in de wachtrij.': 'Ništa u redu.',
+  'Opgeslagen — gaat mee zodra er weer verbinding is.':
+      'Spremljeno — sinkronizirat će se čim se vratite na mrežu.',
   'Deknaam': 'Naziv kompleta',
   'Wordt de map decks/<naam> in de repository':
       'Postaje mapa decks/<naziv> u repozitoriju',

@@ -740,6 +740,12 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Nu synchroniseren': 'Sinkronisá awor',
+  'Gesynchroniseerd:': 'Sinkronisá:',
+  'nog in de wachtrij:': 'ainda den e kola:',
+  'Niets in de wachtrij.': 'Nada den e kola.',
+  'Opgeslagen — gaat mee zodra er weer verbinding is.':
+      'Wardá — lo sinkronisá asina tin koneksion atrobe.',
   'Deknaam': 'Nòmber di deck',
   'Wordt de map decks/<naam> in de repository':
       'Ta bira e karpeta decks/<nòmber> den e repository',

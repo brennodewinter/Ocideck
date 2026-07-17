@@ -1787,6 +1787,12 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Nu synchroniseren': 'Szinkronizálás most',
+  'Gesynchroniseerd:': 'Szinkronizálva:',
+  'nog in de wachtrij:': 'még sorban:',
+  'Niets in de wachtrij.': 'Semmi a sorban.',
+  'Opgeslagen — gaat mee zodra er weer verbinding is.':
+      'Mentve — szinkronizálódik, amint újra van kapcsolat.',
   'Deknaam': 'Csomag neve',
   'Wordt de map decks/<naam> in de repository':
       'A decks/<név> mappa lesz a tárolóban',

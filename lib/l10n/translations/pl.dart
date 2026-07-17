@@ -1796,6 +1796,12 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Nu synchroniseren': 'Synchronizuj teraz',
+  'Gesynchroniseerd:': 'Zsynchronizowano:',
+  'nog in de wachtrij:': 'nadal w kolejce:',
+  'Niets in de wachtrij.': 'Nic w kolejce.',
+  'Opgeslagen — gaat mee zodra er weer verbinding is.':
+      'Zapisano — zsynchronizuje się, gdy wróci połączenie.',
   'Deknaam': 'Nazwa zestawu',
   'Wordt de map decks/<naam> in de repository':
       'Stanie się folderem decks/<nazwa> w repozytorium',

@@ -1813,6 +1813,12 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Nu synchroniseren': 'Sincronizar agora',
+  'Gesynchroniseerd:': 'Sincronizados:',
+  'nog in de wachtrij:': 'ainda na fila:',
+  'Niets in de wachtrij.': 'Nada na fila.',
+  'Opgeslagen — gaat mee zodra er weer verbinding is.':
+      'Guardado — sincroniza assim que voltar a ligação.',
   'Deknaam': 'Nome do deck',
   'Wordt de map decks/<naam> in de repository':
       'Torna-se a pasta decks/<nome> no repositório',

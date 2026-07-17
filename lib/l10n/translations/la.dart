@@ -1799,6 +1799,12 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Nu synchroniseren': 'Nunc synchronizare',
+  'Gesynchroniseerd:': 'Synchronizata:',
+  'nog in de wachtrij:': 'adhuc in serie:',
+  'Niets in de wachtrij.': 'Nihil in serie.',
+  'Opgeslagen — gaat mee zodra er weer verbinding is.':
+      'Servatum — synchronizabitur simulac rursus coniunctio erit.',
   'Deknaam': 'Nomen fasciculi',
   'Wordt de map decks/<naam> in de repository':
       'Fit plica decks/<nomen> in repositorio',

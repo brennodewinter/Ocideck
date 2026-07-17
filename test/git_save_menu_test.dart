@@ -50,6 +50,7 @@ void main() {
     );
     await tester.pumpAndSettle();
     expect(find.text('Opslaan naar git…'), findsOneWidget);
+    expect(find.text('Nu synchroniseren'), findsOneWidget);
   });
 
   testWidgets(

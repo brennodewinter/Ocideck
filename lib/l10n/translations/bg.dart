@@ -1806,6 +1806,12 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Nu synchroniseren': 'Синхронизирай сега',
+  'Gesynchroniseerd:': 'Синхронизирани:',
+  'nog in de wachtrij:': 'още в опашката:',
+  'Niets in de wachtrij.': 'Нищо в опашката.',
+  'Opgeslagen — gaat mee zodra er weer verbinding is.':
+      'Запазено — ще се синхронизира, щом има връзка.',
   'Deknaam': 'Име на тестето',
   'Wordt de map decks/<naam> in de repository':
       'Става папката decks/<име> в хранилището',

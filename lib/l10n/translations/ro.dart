@@ -1802,6 +1802,12 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Nu synchroniseren': 'Sincronizează acum',
+  'Gesynchroniseerd:': 'Sincronizate:',
+  'nog in de wachtrij:': 'încă în coadă:',
+  'Niets in de wachtrij.': 'Nimic în coadă.',
+  'Opgeslagen — gaat mee zodra er weer verbinding is.':
+      'Salvat — se va sincroniza de îndată ce revii online.',
   'Deknaam': 'Nume deck',
   'Wordt de map decks/<naam> in de repository':
       'Devine folderul decks/<nume> în depozit',

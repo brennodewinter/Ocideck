@@ -1785,6 +1785,12 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Nu synchroniseren': 'Sinhroniziraj zdaj',
+  'Gesynchroniseerd:': 'Sinhronizirano:',
+  'nog in de wachtrij:': 'še v čakalni vrsti:',
+  'Niets in de wachtrij.': 'Nič v čakalni vrsti.',
+  'Opgeslagen — gaat mee zodra er weer verbinding is.':
+      'Shranjeno — sinhroniziralo se bo, ko bo spet povezava.',
   'Deknaam': 'Ime kompleta',
   'Wordt de map decks/<naam> in de repository':
       'Postane mapa decks/<ime> v repozitoriju',

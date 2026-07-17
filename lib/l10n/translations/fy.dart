@@ -741,6 +741,12 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Nu synchroniseren': 'No syngronisearje',
+  'Gesynchroniseerd:': 'Syngronisearre:',
+  'nog in de wachtrij:': 'noch yn \'e wachtrige:',
+  'Niets in de wachtrij.': 'Neat yn \'e wachtrige.',
+  'Opgeslagen — gaat mee zodra er weer verbinding is.':
+      'Bewarre — giet mei sagau\'t der wer ferbining is.',
   'Deknaam': 'Deknamme',
   'Wordt de map decks/<naam> in de repository':
       'Wurdt de map decks/<namme> yn it repository',
