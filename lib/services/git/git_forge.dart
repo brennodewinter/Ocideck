@@ -83,6 +83,42 @@ class CommitResult {
   const CommitResult(this.sha);
 }
 
+/// Een branch: de naam plus de commit waar hij op staat (§9.5).
+class BranchRef {
+  final String name;
+  final String sha;
+
+  const BranchRef({required this.name, required this.sha});
+}
+
+/// Een tag: de naam plus de commit die hij aanwijst (§9.4 — release-tags
+/// `decks/<naam>/vX`).
+class TagRef {
+  final String name;
+  final String sha;
+
+  const TagRef({required this.name, required this.sha});
+}
+
+/// Hoe een pull request gemerged wordt.
+enum PullRequestMergeMethod { merge, squash, rebase }
+
+/// Een pull request (§9.4): het nummer, de web-URL om op te reviewen, en of hij
+/// nog open is of al gemerged.
+class PullRequestRef {
+  final int number;
+  final String url;
+  final String state;
+  final bool merged;
+
+  const PullRequestRef({
+    required this.number,
+    required this.url,
+    required this.state,
+    this.merged = false,
+  });
+}
+
 /// Iemand anders heeft de branch verzet sinds [baseSha]. Bewust een eigen type
 /// en geen [GitForgeException]-soort: dit is geen fout maar een uitkomst waar de
 /// aanroeper iets mee moet — herladen, of (vanaf Fase 3) mergen. Het verschil
@@ -103,8 +139,8 @@ class GitConflictException implements Exception {
 /// `GiteaForge`/`GitHubForge`/`GitLabForge` erachter; geen provider-specifieke
 /// code mag naar de editor of de state-laag lekken.
 ///
-/// Het oppervlak groeit per fase mee. Lezen en schrijven staan er nu; branches,
-/// tags en pull requests komen in Fase 4 — een interfacemethode die
+/// Het oppervlak groeit per fase mee. Lezen, schrijven, en — sinds Fase 4 —
+/// branches, tags en pull requests staan er; een interfacemethode die
 /// `UnimplementedError` gooit is erger dan een interface die eerlijk zegt wat
 /// hij nu kan.
 ///
@@ -149,6 +185,44 @@ abstract class GitForge {
     required Map<String, Uint8List> upserts,
     required List<String> deletes,
     required String baseSha,
+  });
+
+  // ── Releases (Fase 4, §9.4/§9.5) ────────────────────────────────────────────
+
+  /// Alle branches in de repo.
+  Future<List<BranchRef>> listBranches();
+
+  /// Maak [name] aan, aftakkend van [fromRef] (een branch, tag of sha). Voor de
+  /// gegenereerde werkbranch per bewerkronde (§9.4/D3).
+  Future<BranchRef> createBranch(String name, {required String fromRef});
+
+  /// Alle tags in de repo (de release-versies, §9.4).
+  Future<List<TagRef>> listTags();
+
+  /// Maak een geannoteerde tag [name] op [target] (een branch, tag of sha) met
+  /// [message]. Een release-tag is een blijvende, geadverteerde verwijzing en
+  /// staat daarom onder de classificatie-poort (P8) — die evalueert de aanroeper
+  /// vóór dit punt.
+  Future<TagRef> createTag(
+    String name, {
+    required String target,
+    required String message,
+  });
+
+  /// Open een pull request van [head] naar [base]. Ook dit staat onder de
+  /// classificatie-poort (P8), vóór het openen geëvalueerd.
+  Future<PullRequestRef> openPullRequest({
+    required String head,
+    required String base,
+    required String title,
+    String body = '',
+  });
+
+  /// Merge pull request [number]. Branch-bescherming en verplichte reviews zijn
+  /// de zaak van de forge, niet van OciDeck (§9.4).
+  Future<PullRequestRef> mergePullRequest(
+    int number, {
+    PullRequestMergeMethod method = PullRequestMergeMethod.merge,
   });
 }
 

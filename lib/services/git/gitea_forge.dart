@@ -403,6 +403,189 @@ class GiteaForge implements GitForge {
     _checkStatus(status);
   }
 
+  // ── Releases (Fase 4) ───────────────────────────────────────────────────────
+
+  @override
+  Future<List<BranchRef>> listBranches() async {
+    final response = await _transport.get(
+      _apiUri(['branches'], query: {'limit': '50'}),
+      headers: _headers,
+      maxBytes: maxListingBytes,
+    );
+    _checkStatus(response.status);
+    final json = _decodeJson(response.bytes);
+    if (json is! List) {
+      throw const GitForgeException(
+        GitForgeError.malformed,
+        'Onverwacht antwoord op een branch-listing',
+      );
+    }
+    _requireEntryCount(json.length);
+    return [for (final raw in json) ?_branchRef(raw)];
+  }
+
+  @override
+  Future<BranchRef> createBranch(String name, {required String fromRef}) async {
+    _requireRef(name);
+    _requireRef(fromRef);
+    final response = await _transport.post(
+      _apiUri(['branches']),
+      headers: {..._headers, 'Content-Type': 'application/json'},
+      body: utf8.encode(
+        jsonEncode({'new_branch_name': name, 'old_ref_name': fromRef}),
+      ),
+      maxBytes: maxListingBytes,
+    );
+    _checkStatus(response.status);
+    final branch = _branchRef(_decodeJson(response.bytes));
+    if (branch == null) {
+      throw const GitForgeException(
+        GitForgeError.malformed,
+        'Branch gemaakt maar zonder bruikbaar antwoord',
+      );
+    }
+    return branch;
+  }
+
+  @override
+  Future<List<TagRef>> listTags() async {
+    final response = await _transport.get(
+      _apiUri(['tags'], query: {'limit': '50'}),
+      headers: _headers,
+      maxBytes: maxListingBytes,
+    );
+    _checkStatus(response.status);
+    final json = _decodeJson(response.bytes);
+    if (json is! List) {
+      throw const GitForgeException(
+        GitForgeError.malformed,
+        'Onverwacht antwoord op een tag-listing',
+      );
+    }
+    _requireEntryCount(json.length);
+    return [for (final raw in json) ?_tagRef(raw)];
+  }
+
+  @override
+  Future<TagRef> createTag(
+    String name, {
+    required String target,
+    required String message,
+  }) async {
+    _requireRef(name);
+    _requireRef(target);
+    final response = await _transport.post(
+      _apiUri(['tags']),
+      headers: {..._headers, 'Content-Type': 'application/json'},
+      body: utf8.encode(
+        jsonEncode({'tag_name': name, 'target': target, 'message': message}),
+      ),
+      maxBytes: maxListingBytes,
+    );
+    _checkStatus(response.status);
+    final tag = _tagRef(_decodeJson(response.bytes));
+    if (tag == null) {
+      throw const GitForgeException(
+        GitForgeError.malformed,
+        'Tag gemaakt maar zonder bruikbaar antwoord',
+      );
+    }
+    return tag;
+  }
+
+  @override
+  Future<PullRequestRef> openPullRequest({
+    required String head,
+    required String base,
+    required String title,
+    String body = '',
+  }) async {
+    _requireRef(head);
+    _requireRef(base);
+    final response = await _transport.post(
+      _apiUri(['pulls']),
+      headers: {..._headers, 'Content-Type': 'application/json'},
+      body: utf8.encode(
+        jsonEncode({'head': head, 'base': base, 'title': title, 'body': body}),
+      ),
+      maxBytes: maxListingBytes,
+    );
+    _checkStatus(response.status);
+    final pr = _pullRef(_decodeJson(response.bytes));
+    if (pr == null) {
+      throw const GitForgeException(
+        GitForgeError.malformed,
+        'Pull request geopend maar zonder bruikbaar antwoord',
+      );
+    }
+    return pr;
+  }
+
+  @override
+  Future<PullRequestRef> mergePullRequest(
+    int number, {
+    PullRequestMergeMethod method = PullRequestMergeMethod.merge,
+  }) async {
+    if (number <= 0) {
+      throw const GitForgeException(
+        GitForgeError.malformed,
+        'Ongeldig pull-request-nummer',
+      );
+    }
+    final response = await _transport.post(
+      _apiUri(['pulls', '$number', 'merge']),
+      headers: {..._headers, 'Content-Type': 'application/json'},
+      body: utf8.encode(jsonEncode({'Do': method.name})),
+      maxBytes: maxListingBytes,
+    );
+    // Gitea meldt "kan nog niet mergen" (open reviews, conflicten) als 405.
+    if (response.status == 405) {
+      throw const GitForgeException(
+        GitForgeError.server,
+        'De pull request kan nog niet gemerged worden — controleer reviews en '
+        'conflicten op de forge.',
+      );
+    }
+    _checkStatus(response.status);
+    // Een geslaagde merge geeft een lege body; het nummer kennen we al.
+    return PullRequestRef(
+      number: number,
+      url: '',
+      state: 'merged',
+      merged: true,
+    );
+  }
+
+  BranchRef? _branchRef(Object? raw) {
+    if (raw is! Map) return null;
+    final name = raw['name'];
+    final commit = raw['commit'];
+    final sha = commit is Map ? (commit['id'] ?? commit['sha']) : null;
+    if (name is! String || sha is! String) return null;
+    return BranchRef(name: name, sha: sha);
+  }
+
+  TagRef? _tagRef(Object? raw) {
+    if (raw is! Map) return null;
+    final name = raw['name'];
+    final commit = raw['commit'];
+    final sha = commit is Map ? (commit['sha'] ?? commit['id']) : raw['id'];
+    if (name is! String || sha is! String) return null;
+    return TagRef(name: name, sha: sha);
+  }
+
+  PullRequestRef? _pullRef(Object? raw) {
+    if (raw is! Map) return null;
+    final number = raw['number'];
+    if (number is! int) return null;
+    return PullRequestRef(
+      number: number,
+      url: raw['html_url'] is String ? raw['html_url'] as String : '',
+      state: raw['state'] is String ? raw['state'] as String : 'open',
+      merged: raw['merged'] == true,
+    );
+  }
+
   /// Een ref komt soms uit door de gebruiker of de forge geleverde data. Hij
   /// belandt in een URL-pad, dus weigeren we alles wat daar een betekenis heeft
   /// of wat git zelf niet als refnaam accepteert.

@@ -397,6 +397,76 @@ void runGitForgeContract(String name, GitForge Function(FakeRepo) build) {
         );
       });
     });
+
+    group('releases (Fase 4)', () {
+      const work = 'decks/kwartaalcijfers/2026-07-18';
+
+      test('lists the branches', () async {
+        final names = (await forge.listBranches()).map((b) => b.name).toSet();
+        expect(names, contains('main'));
+      });
+
+      test('creates a branch off a base ref', () async {
+        final base = await forge.headSha('main');
+        final branch = await forge.createBranch(work, fromRef: 'main');
+        expect(branch.sha, base);
+        expect(await forge.headSha(work), base);
+      });
+
+      test('creates and lists a tag', () async {
+        expect(await forge.listTags(), isEmpty);
+        final tag = await forge.createTag(
+          'decks/kwartaalcijfers/v1.0',
+          target: 'main',
+          message: 'eerste versie',
+        );
+        expect(tag.name, 'decks/kwartaalcijfers/v1.0');
+        expect(tag.sha, await forge.headSha('main'));
+        final names = (await forge.listTags()).map((t) => t.name).toSet();
+        expect(names, contains('decks/kwartaalcijfers/v1.0'));
+      });
+
+      test('opens a pull request', () async {
+        await forge.createBranch(work, fromRef: 'main');
+        final pr = await forge.openPullRequest(
+          head: work,
+          base: 'main',
+          title: 'Review',
+        );
+        expect(pr.number, greaterThan(0));
+        expect(pr.state, 'open');
+      });
+
+      test('merges a pull request onto its base', () async {
+        await forge.createBranch(work, fromRef: 'main');
+        final committed = await forge.commitFiles(
+          branch: work,
+          message: 'bewerkt',
+          upserts: {'decks/kwartaalcijfers/deck.md': _b('# Nieuw')},
+          deletes: const [],
+          baseSha: await forge.headSha(work),
+        );
+        final pr = await forge.openPullRequest(
+          head: work,
+          base: 'main',
+          title: 'Review',
+        );
+        final merged = await forge.mergePullRequest(pr.number);
+        expect(merged.merged, isTrue);
+        expect(await forge.headSha('main'), committed.sha);
+      });
+
+      test('refuses an unsafe branch or tag name', () async {
+        await expectLater(
+          forge.createBranch('-evil', fromRef: 'main'),
+          throwsA(isA<GitForgeException>()),
+        );
+        await expectLater(
+          forge.createTag('bad..name', target: 'main', message: 'x'),
+          throwsA(isA<GitForgeException>()),
+        );
+      });
+    });
   });
 }
 

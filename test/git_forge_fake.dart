@@ -10,16 +10,32 @@ import 'package:ocideck/services/git/git_transport.dart';
 /// source of data is the point — it is what lets the contract suite assert that
 /// the real adapter and the reference agree.
 class FakeRepo {
-  FakeRepo({required this.branches, required this.files});
+  FakeRepo({
+    required this.branches,
+    required this.files,
+    Map<String, String>? tags,
+  }) : tags = tags ?? {};
 
-  /// Branch or tag name to commit sha.
+  /// Branch name to commit sha.
   final Map<String, String> branches;
+
+  /// Tag name to commit sha (Fase 4 — release-versies).
+  final Map<String, String> tags;
 
   /// Repo-relative path to blob bytes.
   final Map<String, Uint8List> files;
 
+  /// Open/merged pull requests (Fase 4).
+  final List<FakePull> pulls = [];
+  int pullCounter = 1;
+
   /// Bumped per commit, so every commit gets its own sha.
   int commitCounter = 1;
+
+  /// Resolve a branch/tag name to its sha; an unknown ref is assumed to be a
+  /// literal sha.
+  String resolveSha(String ref) =>
+      branches[ref.trim()] ?? tags[ref.trim()] ?? ref.trim();
 
   factory FakeRepo.sample() => FakeRepo(
     branches: {
@@ -69,6 +85,15 @@ class FakeRepo {
       ..sort((a, b) => a.$1.compareTo(b.$1));
     return out;
   }
+}
+
+/// An in-memory pull request.
+class FakePull {
+  FakePull({required this.number, required this.head, required this.base});
+  final int number;
+  final String head;
+  final String base;
+  bool merged = false;
 }
 
 /// The reference [GitForge]: no transport, no JSON, just the repo. What the
@@ -180,6 +205,83 @@ class FakeForge implements GitForge {
     }
     return bytes;
   }
+
+  // ── Releases (Fase 4) ───────────────────────────────────────────────────────
+
+  @override
+  Future<List<BranchRef>> listBranches() async => [
+    for (final entry in repo.branches.entries)
+      BranchRef(name: entry.key, sha: entry.value),
+  ];
+
+  @override
+  Future<BranchRef> createBranch(String name, {required String fromRef}) async {
+    _requireRef(name);
+    _requireRef(fromRef);
+    final sha = repo.resolveSha(fromRef);
+    repo.branches[name.trim()] = sha;
+    return BranchRef(name: name.trim(), sha: sha);
+  }
+
+  @override
+  Future<List<TagRef>> listTags() async => [
+    for (final entry in repo.tags.entries)
+      TagRef(name: entry.key, sha: entry.value),
+  ];
+
+  @override
+  Future<TagRef> createTag(
+    String name, {
+    required String target,
+    required String message,
+  }) async {
+    _requireRef(name);
+    _requireRef(target);
+    final sha = repo.resolveSha(target);
+    repo.tags[name.trim()] = sha;
+    return TagRef(name: name.trim(), sha: sha);
+  }
+
+  @override
+  Future<PullRequestRef> openPullRequest({
+    required String head,
+    required String base,
+    required String title,
+    String body = '',
+  }) async {
+    _requireRef(head);
+    _requireRef(base);
+    final pull = FakePull(number: repo.pullCounter++, head: head, base: base);
+    repo.pulls.add(pull);
+    return PullRequestRef(
+      number: pull.number,
+      url: 'fake://pull/${pull.number}',
+      state: 'open',
+    );
+  }
+
+  @override
+  Future<PullRequestRef> mergePullRequest(
+    int number, {
+    PullRequestMergeMethod method = PullRequestMergeMethod.merge,
+  }) async {
+    final pull = repo.pulls.firstWhere(
+      (p) => p.number == number,
+      orElse: () => throw const GitForgeException(
+        GitForgeError.notFound,
+        'Pull request niet gevonden',
+      ),
+    );
+    // Merge = de base-branch schuift naar de head-commit.
+    pull.merged = true;
+    repo.branches[pull.base.trim()] = repo.resolveSha(pull.head);
+    return PullRequestRef(
+      number: number,
+      url: 'fake://pull/$number',
+      state: 'merged',
+      merged: true,
+    );
+  }
 }
 
 /// A transport that answers in Gitea's JSON shapes, backed by [FakeRepo]. Lets
@@ -202,6 +304,15 @@ class FakeGiteaTransport implements GitTransport {
     if (segments.isEmpty) return _notFound();
 
     if (segments.first == 'branches') {
+      if (segments.length == 1) {
+        return _json([
+          for (final e in repo.branches.entries)
+            {
+              'name': e.key,
+              'commit': {'id': e.value},
+            },
+        ]);
+      }
       final branch = segments.skip(1).join('/');
       final sha = repo.branches[branch];
       if (sha == null) return _notFound();
@@ -209,6 +320,16 @@ class FakeGiteaTransport implements GitTransport {
         'name': branch,
         'commit': {'id': sha},
       });
+    }
+
+    if (segments.first == 'tags' && segments.length == 1) {
+      return _json([
+        for (final e in repo.tags.entries)
+          {
+            'name': e.key,
+            'commit': {'sha': e.value},
+          },
+      ]);
     }
 
     if (segments.first == 'raw') {
@@ -261,6 +382,59 @@ class FakeGiteaTransport implements GitTransport {
     required int maxBytes,
   }) async {
     final segments = uri.pathSegments.skip(5).toList();
+
+    if (segments.length == 1 && segments.first == 'branches') {
+      final p = jsonDecode(utf8.decode(body)) as Map<String, Object?>;
+      final name = p['new_branch_name'] as String;
+      final sha = repo.resolveSha(p['old_ref_name'] as String);
+      repo.branches[name] = sha;
+      return _json({
+        'name': name,
+        'commit': {'id': sha},
+      });
+    }
+
+    if (segments.length == 1 && segments.first == 'tags') {
+      final p = jsonDecode(utf8.decode(body)) as Map<String, Object?>;
+      final name = p['tag_name'] as String;
+      final sha = repo.resolveSha(p['target'] as String);
+      repo.tags[name] = sha;
+      return _json({
+        'name': name,
+        'commit': {'sha': sha},
+      });
+    }
+
+    if (segments.length == 1 && segments.first == 'pulls') {
+      final p = jsonDecode(utf8.decode(body)) as Map<String, Object?>;
+      final pull = FakePull(
+        number: repo.pullCounter++,
+        head: p['head'] as String,
+        base: p['base'] as String,
+      );
+      repo.pulls.add(pull);
+      return _json({
+        'number': pull.number,
+        'html_url': 'https://forge.example/pulls/${pull.number}',
+        'state': 'open',
+        'merged': false,
+      });
+    }
+
+    if (segments.length == 3 &&
+        segments[0] == 'pulls' &&
+        segments[2] == 'merge') {
+      final number = int.tryParse(segments[1]);
+      final pull = repo.pulls
+          .where((p) => p.number == number)
+          .cast<FakePull?>()
+          .firstWhere((p) => true, orElse: () => null);
+      if (pull == null) return _notFound();
+      pull.merged = true;
+      repo.branches[pull.base] = repo.resolveSha(pull.head);
+      return GitResponse(200, Uint8List(0)); // Gitea: lege body bij succes
+    }
+
     if (segments.length != 1 || segments.first != 'contents') {
       return _notFound();
     }
