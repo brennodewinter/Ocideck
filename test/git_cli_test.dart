@@ -1,0 +1,232 @@
+@TestOn('vm')
+library;
+
+import 'dart:io';
+
+import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/services/git/git_cli.dart';
+import 'package:ocideck/services/git/git_cli_io.dart';
+
+// De gehardde git-uitvoerder (§10.2). Het gevaarlijke zit in de opbouw van argv
+// en omgeving; die wordt hier gecontroleerd zonder echt een proces te starten,
+// via een opnemende runner. Een paar echte git-aanroepen bewaken dat het geheel
+// ook werkt (deze machine heeft git).
+
+class _Call {
+  _Call(this.exe, this.args, this.env, this.workingDirectory, this.timeout);
+  final String exe;
+  final List<String> args;
+  final Map<String, String>? env;
+  final String? workingDirectory;
+  final Duration timeout;
+}
+
+class _Recorder {
+  final List<_Call> calls = [];
+  GitResult Function(String exe, List<String> args) respond = (_, _) =>
+      const GitResult(exitCode: 0, stdout: '', stderr: '');
+
+  Future<GitResult> run(
+    String exe,
+    List<String> args, {
+    String? workingDirectory,
+    Map<String, String>? environment,
+    required Duration timeout,
+  }) async {
+    calls.add(_Call(exe, args, environment, workingDirectory, timeout));
+    return respond(exe, args);
+  }
+}
+
+void main() {
+  group('GitVersion.parse', () {
+    test('leest gangbare vormen', () {
+      expect(GitVersion.parse('git version 2.54.0')!.display, '2.54.0');
+      expect(GitVersion.parse('2.39.3 (Apple Git-146)')!.display, '2.39.3');
+      expect(GitVersion.parse('git version 2.19')!.display, '2.19.0');
+      expect(GitVersion.parse('geen versie hier'), isNull);
+    });
+
+    test('vergelijkt op major/minor/patch', () {
+      expect(GitVersion(2, 54, 0) >= kMinGitVersion, isTrue);
+      expect(GitVersion(2, 19, 0) >= kMinGitVersion, isTrue);
+      expect(GitVersion(2, 18, 9) >= kMinGitVersion, isFalse);
+      expect(GitVersion(1, 99, 0) >= kMinGitVersion, isFalse);
+    });
+  });
+
+  group('run() hardening', () {
+    late Directory sandbox;
+    late _Recorder rec;
+    late NativeGitCli git;
+
+    setUp(() {
+      sandbox = Directory.systemTemp.createTempSync('gitcli_sandbox');
+      rec = _Recorder();
+      git = NativeGitCli(runner: rec.run, sandboxDir: sandbox);
+    });
+    tearDown(() => sandbox.deleteSync(recursive: true));
+
+    test('zet hooksPath vooraan, operands achter --end-of-options', () async {
+      await git.run(
+        ['clone', '--filter=blob:none'],
+        operands: ['https://git.example.org/x.git', '/tmp/doel'],
+        workingDirectory: sandbox.path,
+      );
+      final argv = rec.calls.single.args;
+      expect(argv.first, '-c');
+      expect(argv[1], 'core.hooksPath=${sandbox.path}');
+      expect(argv.sublist(2, 4), ['clone', '--filter=blob:none']);
+      final eoo = argv.indexOf('--end-of-options');
+      expect(eoo, greaterThan(0));
+      expect(argv.sublist(eoo + 1), [
+        'https://git.example.org/x.git',
+        '/tmp/doel',
+      ]);
+    });
+
+    test('geen --end-of-options als er geen operands zijn', () async {
+      await git.run(['status'], workingDirectory: sandbox.path);
+      expect(rec.calls.single.args, isNot(contains('--end-of-options')));
+    });
+
+    test('weigert een operand die met een streepje begint', () async {
+      await expectLater(
+        git.run(
+          ['log'],
+          operands: ['--upload-pack=/evil'],
+          workingDirectory: sandbox.path,
+        ),
+        throwsA(isA<GitCliException>()),
+      );
+      expect(rec.calls, isEmpty); // niet gestart
+    });
+
+    test('weigert een operand met een control-teken, spatie mag', () async {
+      await expectLater(
+        git.run(['log'], operands: ['a\nb'], workingDirectory: sandbox.path),
+        throwsA(isA<GitCliException>()),
+      );
+      // Een spatie is geen bezwaar — paden hebben ze, en de argv-array splitst niet.
+      await git.run(
+        ['add'],
+        operands: ['decks/mijn deck/deck.md'],
+        workingDirectory: sandbox.path,
+      );
+      expect(rec.calls.single.args, contains('decks/mijn deck/deck.md'));
+    });
+
+    test('de omgeving is dicht (§10.2)', () async {
+      await git.run(['status'], workingDirectory: sandbox.path);
+      final env = rec.calls.single.env!;
+      expect(env['GIT_TERMINAL_PROMPT'], '0');
+      expect(env['GIT_CONFIG_NOSYSTEM'], '1');
+      expect(env['HOME'], sandbox.path);
+      expect(env['GIT_CONFIG_GLOBAL'], anyOf('/dev/null', 'NUL'));
+    });
+
+    test('het token gaat via de omgeving, nooit in argv', () async {
+      const secret = 'Authorization: Basic aBcDeF123';
+      await git.run(
+        ['fetch'],
+        workingDirectory: sandbox.path,
+        config: const [
+          GitConfigOverride('http.extraHeader', secret, secret: true),
+        ],
+      );
+      final call = rec.calls.single;
+      // In de omgeving als GIT_CONFIG_*, niet in de argv.
+      expect(call.env!['GIT_CONFIG_COUNT'], '1');
+      expect(call.env!['GIT_CONFIG_KEY_0'], 'http.extraHeader');
+      expect(call.env!['GIT_CONFIG_VALUE_0'], secret);
+      expect(call.args.any((a) => a.contains(secret)), isFalse);
+      expect(call.args.any((a) => a.contains('aBcDeF123')), isFalse);
+    });
+
+    test('een niet-nul exit wordt een GitCliException met exitcode', () async {
+      rec.respond = (_, _) =>
+          const GitResult(exitCode: 128, stdout: '', stderr: 'fataal: nee');
+      await expectLater(
+        git.run(['push'], workingDirectory: sandbox.path),
+        throwsA(
+          isA<GitCliException>()
+              .having((e) => e.exitCode, 'exitCode', 128)
+              .having((e) => e.stderr, 'stderr', contains('fataal')),
+        ),
+      );
+    });
+  });
+
+  group('probe() via runner', () {
+    late Directory sandbox;
+    setUp(() => sandbox = Directory.systemTemp.createTempSync('gitcli_probe'));
+    tearDown(() => sandbox.deleteSync(recursive: true));
+
+    test('geeft de versie bij een recente git', () async {
+      final rec = _Recorder()
+        ..respond = (exe, args) => GitResult(
+          exitCode: 0,
+          stdout: exe == 'git' ? 'git version 2.54.0' : '/x',
+          stderr: '',
+        );
+      final version = await NativeGitCli(
+        runner: rec.run,
+        sandboxDir: sandbox,
+      ).probe();
+      expect(version?.display, '2.54.0');
+      // Op macOS gaat xcode-select vóór git (de shim-val).
+      if (Platform.isMacOS) {
+        expect(rec.calls.first.exe, 'xcode-select');
+        expect(rec.calls.any((c) => c.exe == 'git'), isTrue);
+      }
+    });
+
+    test('geeft null bij een te oude git', () async {
+      final rec = _Recorder()
+        ..respond = (exe, _) => GitResult(
+          exitCode: 0,
+          stdout: exe == 'git' ? 'git version 2.10.0' : '/x',
+          stderr: '',
+        );
+      expect(
+        await NativeGitCli(runner: rec.run, sandboxDir: sandbox).probe(),
+        isNull,
+      );
+    });
+
+    test('geeft null als git ontbreekt (nonzero exit)', () async {
+      final rec = _Recorder()
+        ..respond = (exe, _) => exe == 'git'
+            ? const GitResult(exitCode: 127, stdout: '', stderr: 'not found')
+            : const GitResult(exitCode: 0, stdout: '/x', stderr: '');
+      expect(
+        await NativeGitCli(runner: rec.run, sandboxDir: sandbox).probe(),
+        isNull,
+      );
+    });
+  });
+
+  group('echte git op deze machine', () {
+    test('git --version draait en meldt zijn versie', () async {
+      final res = await debugSpawn('git', const ['--version']);
+      expect(res.ok, isTrue);
+      expect(res.stdout, contains('git version'));
+    });
+
+    test('probe() vindt echt git (≥ 2.19)', () async {
+      final version = await NativeGitCli().probe();
+      expect(version, isNotNull);
+      expect(version! >= kMinGitVersion, isTrue);
+    });
+
+    test('een tijdslimiet schiet een vastgelopen proces af', () async {
+      if (Platform.isWindows) return; // 'sleep' is hier het gemak, niet de kern
+      await expectLater(
+        debugSpawn('sleep', const [
+          '5',
+        ], timeout: const Duration(milliseconds: 200)),
+        throwsA(isA<GitCliException>()),
+      );
+    });
+  });
+}
