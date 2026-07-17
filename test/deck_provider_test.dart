@@ -220,12 +220,12 @@ void main() {
   });
 
   test('splitSlide vult tot acht en laat de rest over', () {
-    // Tien bullets worden 8 + 2. Een eerdere versie verdeelde gelijkmatig (5/5)
-    // en woog mee hoeveel bullets er fysiek pasten — bij lange bullets zakte dat
-    // naar twee per pagina en viel één slide uiteen in vijf.
+    // Elf bullets worden 8 + 3. Een eerdere versie verdeelde gelijkmatig en woog
+    // mee hoeveel bullets er fysiek pasten — bij lange bullets zakte dat naar
+    // twee per pagina en viel één slide uiteen in vijf.
     TestWidgetsFlutterBinding.ensureInitialized();
     final n = _notifier()..newDeck('D');
-    final bullets = List.generate(10, (i) => 'Bullet met wat tekst nummer $i');
+    final bullets = List.generate(11, (i) => 'Bullet met wat tekst nummer $i');
     n.addSlide(SlideType.bullets, afterIndex: 0);
     n.updateSlide(1, n.state.deck!.slides[1].copyWith(bullets: bullets));
 
@@ -234,9 +234,25 @@ void main() {
     final slides = n.state.deck!.slides;
     expect(slides, hasLength(3));
     expect(slides[1].bullets.length, 8);
-    expect(slides[2].bullets.length, 2);
+    expect(slides[2].bullets.length, 3);
     expect([...slides[1].bullets, ...slides[2].bullets], bullets);
     expect(slides[2].continuesSplit, isTrue);
+  });
+
+  test('splitSlide laat geen slide met één of twee bullets achter', () {
+    // Negen bullets zouden 8 + 1 worden; die ene bullet is geen slide, dus de
+    // lijst valt gelijkmatig uiteen.
+    TestWidgetsFlutterBinding.ensureInitialized();
+    final n = _notifier()..newDeck('D');
+    final bullets = List.generate(9, (i) => 'Bullet met wat tekst nummer $i');
+    n.addSlide(SlideType.bullets, afterIndex: 0);
+    n.updateSlide(1, n.state.deck!.slides[1].copyWith(bullets: bullets));
+
+    n.splitSlide(1);
+
+    final slides = n.state.deck!.slides;
+    expect(slides.skip(1).map((p) => p.bullets.length), [5, 4]);
+    expect(slides.skip(1).expand((p) => p.bullets).toList(), bullets);
   });
 
   test('splitSlide laat een heel lange lijst niet in minipaginas vallen', () {
@@ -255,7 +271,7 @@ void main() {
 
     n.splitSlide(1);
 
-    expect(n.state.deck!.slides.skip(1).map((p) => p.bullets.length), [8, 2]);
+    expect(n.state.deck!.slides.skip(1).map((p) => p.bullets.length), [5, 5]);
   });
 
   test('insertSlides duplicates with fresh ids and returns insert index', () {

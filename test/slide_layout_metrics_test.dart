@@ -302,9 +302,9 @@ void main() {
     List<String> gen(int n) => [for (var i = 0; i < n; i++) 'bullet $i'];
 
     test("vult pagina's van size en zet de rest achteraan", () {
-      expect(splitBulletsIntoPages(gen(10), 8).map((p) => p.length).toList(), [
+      expect(splitBulletsIntoPages(gen(11), 8).map((p) => p.length).toList(), [
         8,
-        2,
+        3,
       ]);
       expect(splitBulletsIntoPages(gen(20), 8).map((p) => p.length).toList(), [
         8,
@@ -317,19 +317,47 @@ void main() {
       ]);
     });
 
-    test('een rest van een enkele bullet mag', () {
-      // Wat overblijft, blijft over — voorspelbaar boven mooi verdeeld.
+    test('een rest van één of twee bullets wordt niet gemaakt', () {
+      // Zo'n pagina is geen slide. Dan valt de lijst gelijkmatig uiteen.
       expect(splitBulletsIntoPages(gen(9), 8).map((p) => p.length).toList(), [
-        8,
-        1,
+        5,
+        4,
+      ]);
+      expect(splitBulletsIntoPages(gen(10), 8).map((p) => p.length).toList(), [
+        5,
+        5,
+      ]);
+      expect(splitBulletsIntoPages(gen(17), 8).map((p) => p.length).toList(), [
+        6,
+        6,
+        5,
+      ]);
+      expect(splitBulletsIntoPages(gen(18), 8).map((p) => p.length).toList(), [
+        6,
+        6,
+        6,
       ]);
     });
 
-    test("lange bullets leveren geen stapel minipagina's meer op", () {
-      // De melding: de paginagrootte volgde wat er fysiek paste, dus tien lange
-      // bullets werden vijf slides van twee. De grootte is nu vast.
-      final pages = splitBulletsIntoPages(gen(10), 8);
-      expect(pages, hasLength(2));
+    test('een rest die wél een pagina waard is blijft gewoon vullen', () {
+      // Alleen de runt wordt afgekocht; drie is genoeg voor een eigen slide.
+      expect(splitBulletsIntoPages(gen(19), 8).map((p) => p.length).toList(), [
+        8,
+        8,
+        3,
+      ]);
+    });
+
+    test('geen enkele pagina onder de drie bullets, van negen tot dertig', () {
+      for (var n = 9; n <= 30; n++) {
+        final pages = splitBulletsIntoPages(gen(n), 8);
+        expect(
+          pages.every((p) => p.length >= kMinPageBullets),
+          isTrue,
+          reason: 'n=$n gaf ${pages.map((p) => p.length).toList()}',
+        );
+        expect(pages.expand((p) => p).toList(), gen(n), reason: 'n=$n');
+      }
     });
 
     test('een lijst die al past valt in twee helften', () {

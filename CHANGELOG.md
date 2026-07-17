@@ -179,8 +179,10 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   physically fit at natural size — and that measurement was the problem: with
   long bullets only two or three fit, so the page size collapsed and one slide
   fell apart into a stack of five. The split now counts bullets and nothing
-  else. Ten become 8/2, twenty become 8/8/4, and a leftover of one bullet is
-  simply a page of one. A checklist keeps its roomier twelve, a two-column slide
+  else: twenty become 8/8/4, eleven become 8/3. The one concession to taste is
+  that it never leaves a runt behind — one or two bullets is not a slide, so a
+  list that would end that way falls apart evenly instead: nine become 5/4, not
+  8/1. A checklist keeps its roomier twelve, a two-column slide
   seven per column, and a slide that is not over-full at all still halves on
   request — that is what *"In tweeën splitsen"* in the slide menu asks for.
   Page breaks no longer step aside for a group heading, so a "tussenkop" can now
