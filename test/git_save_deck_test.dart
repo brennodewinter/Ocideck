@@ -379,6 +379,61 @@ theme: ocideck
       expect(repo.branches['main'], outcomes.single.sha); // commit geland
     });
 
+    test('een offline toegevoegde afbeelding wordt bij het synchroniseren '
+        'alsnog gepoold', () async {
+      final (container, tabs) = build();
+      final repo = FakeRepo(branches: {'main': 'commit-main'}, files: {});
+      final forge = _FlakyForge(repo);
+      final mirror = DraftMirror(store: PrefsDraftStore());
+      final outbox = Outbox();
+
+      final png = Uint8List.fromList([0x89, 0x50, 0x4e, 0x47, 3, 1, 4, 1, 5]);
+      final memPath = WebAssetStore.put(png, name: 'nieuw.png');
+      final ref = GitRepoLayout.assetRef(
+        sha256.convert(png).toString(),
+        'png',
+      )!;
+      final poolPath = GitRepoLayout.assetPathOf(ref)!;
+
+      seedDeck(
+        container,
+        deckWith([
+          Slide.create(SlideType.bulletsImage).copyWith(
+            title: 'Offline beeld',
+            bullets: const ['x'],
+            imagePath: memPath,
+          ),
+        ]),
+      );
+
+      // Offline opgeslagen: de blob kan nu niet omhoog.
+      forge.online = false;
+      final queued = await tabs.saveToGit(
+        forge,
+        config: config,
+        deckDir: 'decks/nieuwplan',
+        branch: 'main',
+        message: 'met offline beeld',
+        mirror: mirror,
+        outbox: outbox,
+      );
+      expect(queued.status, GitSaveStatus.queued);
+      expect(repo.files[poolPath], isNull); // nog niets gepoold
+
+      // Verbinding terug: de flush poolt de afbeelding alsnog en commit compleet.
+      forge.online = true;
+      final engine = SyncEngine(forge: forge, mirror: mirror, outbox: outbox);
+      final outcomes = await tabs.flushGit(engine, config);
+
+      expect(outcomes.single.status, SyncStatus.committed);
+      // De blob staat nu in de pool en deck.md verwijst er met repo: naar.
+      expect(repo.files[poolPath], png);
+      expect(
+        utf8.decode(repo.files['decks/nieuwplan/deck.md']!),
+        contains(ref),
+      );
+    });
+
     test('een pad dat geen deckmap is wordt geweigerd', () async {
       final (container, tabs) = build();
       final forge = FakeForge(repoWith('# x'));
