@@ -1,9 +1,27 @@
 import 'dart:typed_data';
 
+import 'package:path/path.dart' as p;
+
 import '../../utils/log.dart';
 import 'deck_mirror.dart';
 import 'git_forge.dart';
 import 'outbox.dart';
+
+/// Bewerkt de opgeslagen deckbestanden vlak vóór de commit, en geeft de
+/// volledige upsert-set terug: het (herschreven) `deck.md` plus de nog
+/// ontbrekende pool-blobs.
+///
+/// Dít is waar afbeeldingen alsnog gepoold worden bij het synchroniseren. De
+/// werkkopie bewaart offline een `deck.md` met `mem:`-verwijzingen — de bytes
+/// stonden op dat moment in het geheugen, niet in de repo. Bij verbinding zet
+/// deze hook die om naar `repo:`-verwijzingen en levert de bijbehorende blobs,
+/// zodat de commit compleet is. Gooit [GitForgeException] als het poolen de
+/// forge nodig heeft en die er niet is — dan blijft het deck in de wachtrij.
+typedef DeckFilePreparer =
+    Future<Map<String, Uint8List>> Function(
+      PendingCommit commit,
+      Map<String, Uint8List> stored,
+    );
 
 /// Hoe één deck uit de wachtrij afliep.
 enum SyncStatus {
@@ -65,27 +83,37 @@ class SyncEngine {
   /// Werk alles af wat wacht. Een deck dat faalt houdt de rest niet tegen: ze
   /// zijn onafhankelijk, en één onbereikbare branch mag niet betekenen dat het
   /// andere deck ook blijft hangen.
-  Future<List<SyncOutcome>> flush() async {
+  ///
+  /// [prepare] krijgt elk deck vlak vóór de commit; zo worden offline
+  /// toegevoegde afbeeldingen alsnog gepoold. Zonder [prepare] gaat de werkkopie
+  /// ongewijzigd omhoog.
+  Future<List<SyncOutcome>> flush({DeckFilePreparer? prepare}) async {
     final out = <SyncOutcome>[];
     for (final commit in await outbox.pending()) {
-      out.add(await _flush(commit));
+      out.add(await _flush(commit, prepare));
     }
     return out;
   }
 
   /// Werk één deck af. Geeft [SyncStatus.nothingToCommit] wanneer er niets
   /// wacht.
-  Future<SyncOutcome> flushDeck(String deckDir) async {
+  Future<SyncOutcome> flushDeck(
+    String deckDir, {
+    DeckFilePreparer? prepare,
+  }) async {
     final commit = await outbox.forDeck(deckDir);
     if (commit == null) {
       return SyncOutcome(deckDir: deckDir, status: SyncStatus.nothingToCommit);
     }
-    return _flush(commit);
+    return _flush(commit, prepare);
   }
 
-  Future<SyncOutcome> _flush(PendingCommit commit) async {
-    final local = await mirror.readDeck(commit.deckDir);
-    if (local.isEmpty) {
+  Future<SyncOutcome> _flush(
+    PendingCommit commit,
+    DeckFilePreparer? prepare,
+  ) async {
+    final stored = await mirror.readDeck(commit.deckDir);
+    if (stored.isEmpty) {
       // Geen werkkopie meer (deck verworpen): de intentie is zinloos geworden.
       await outbox.remove(commit.deckDir);
       return SyncOutcome(
@@ -95,6 +123,18 @@ class SyncEngine {
     }
 
     try {
+      // Poolen kan de forge nodig hebben (de bestaande blobs opsommen); een
+      // netwerkfout hier is dus gewoon "nog offline" en valt in de catch.
+      final upserts = prepare == null ? stored : await prepare(commit, stored);
+
+      // Idempotentie en verwijderingen kijken alléén naar de deckmap, niet naar
+      // de pool-blobs die buiten de map liggen: een blob is content-geadresseerd
+      // en onveranderlijk, dus die telt niet mee in "staat het er al precies zo".
+      final deckLocal = <String, Uint8List>{
+        for (final entry in upserts.entries)
+          if (p.posix.isWithin(commit.deckDir, p.posix.normalize(entry.key)))
+            entry.key: entry.value,
+      };
       final remote = await _remoteDeck(commit.branch, commit.deckDir);
 
       // De idempotentie-garantie van §8.5, en ze is eenvoudiger dan ze klinkt:
@@ -103,7 +143,7 @@ class SyncEngine {
       // — bij een herstart zou een blinde retry op de oude baseSha anders een
       // conflict opleveren met onze éigen commit. Vergelijken op inhoud in
       // plaats van op sha lost dat op zonder ergens een vlag te hoeven bewaren.
-      if (_sameTree(local, remote)) {
+      if (_sameTree(deckLocal, remote)) {
         await outbox.remove(commit.deckDir);
         return SyncOutcome(
           deckDir: commit.deckDir,
@@ -114,12 +154,12 @@ class SyncEngine {
 
       final deletes = [
         for (final path in remote.keys)
-          if (!local.containsKey(path)) path,
+          if (!deckLocal.containsKey(path)) path,
       ];
       final result = await forge.commitFiles(
         branch: commit.branch,
         message: commit.message,
-        upserts: local,
+        upserts: upserts,
         deletes: deletes,
         baseSha: commit.baseSha,
       );

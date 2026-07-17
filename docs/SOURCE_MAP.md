@@ -145,7 +145,7 @@ follow in later phases.
 - `deck_mirror.dart` — `DeckMirror` interface + `DraftMirror`: the durable offline working copy a save falls back to. Text only, one draft per deck (`hasRealHistory == false`); native git history comes later.
 - `draft_store.dart` / `draft_store_factory.dart` / `draft_store_io.dart` / `draft_store_web.dart` — the mirror's storage: files on desktop (`FileDraftStore`), the browser key/value store on web (`PrefsDraftStore`), picked by conditional import.
 - `outbox.dart` — `Outbox`/`PendingCommit`: the per-deck queue of not-yet-pushed saves, in `shared_preferences` so it survives restart. Carries the intent (deckDir, branch, message, `baseSha`), never the bytes — the mirror holds those.
-- `sync_engine.dart` — `SyncEngine`: drains the outbox against the forge (`flush`/`flushDeck`), with `baseSha` conflict detection and content-based idempotency (a commit that already landed is skipped, not duplicated).
+- `sync_engine.dart` — `SyncEngine`: drains the outbox against the forge (`flush`/`flushDeck`), with `baseSha` conflict detection and content-based idempotency (a commit that already landed is skipped, not duplicated). A `DeckFilePreparer` hook runs just before each commit — how `flushGit` pools an offline-added image into the reconnect commit; idempotency and deletes compare the deck-dir files only, not the pool blobs.
 
 ## `lib/state/` — Riverpod providers
 

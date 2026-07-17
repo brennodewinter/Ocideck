@@ -39,6 +39,10 @@ const Set<String> uncoveredBaseline = {
   'lib/platform/presenter_fullscreen_web.dart',
   'lib/services/cve_transport_factory.dart',
   'lib/services/cve_transport_web.dart',
+  // PLATFORM: the git transport's conditional-export facade (its two halves are
+  // exercised via the forge contract). A one-line `export … if …` barrel with
+  // no statement to reach — the same seam as cve_transport_factory above.
+  'lib/services/git/git_transport_factory.dart',
   // PLATFORM: the git draft store's conditional-export facade. Both halves
   // (FileDraftStore, PrefsDraftStore) are exercised by the DeckMirror contract
   // in test/git_deck_mirror_contract_test.dart; only this one-line barrel has no

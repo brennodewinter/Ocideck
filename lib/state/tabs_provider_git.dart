@@ -238,12 +238,12 @@ extension TabsNotifierGit on TabsNotifier {
         return _queueGitSave(
           mirror,
           outbox,
-          config: config,
+          deck: deck,
           deckDir: deckDir,
           branch: branch,
           message: message,
           baseSha: baseSha,
-          files: files,
+          warnings: files.warnings,
         );
       }
       logWarning('saveToGit: $deckDir niet opgeslagen', e);
@@ -256,24 +256,28 @@ extension TabsNotifierGit on TabsNotifier {
   }
 
   /// Parkeer een opslag in de wachtrij: de tekst gaat naar de werkkopie, de
-  /// intentie in de outbox. Alleen het tekstlid onder de deckmap gaat mee —
-  /// pool-blobs kunnen offline toch niet omhoog (§8.3) en horen niet in de
-  /// deckmap-werkkopie. De tab houdt zijn herkomst zoals hij was: er is niets
-  /// nieuws geland om de basis op te verzetten.
+  /// intentie in de outbox.
+  ///
+  /// De werkkopie bewaart `deck.md` ongepoold — met `mem:`-verwijzingen, zoals
+  /// het deck nu in de editor staat. De afbeeldingen worden nog niet omgezet:
+  /// offline kunnen de blobs toch niet omhoog, en hun bytes staan nu nog in het
+  /// geheugen. Bij het synchroniseren pakt [flushGit] die op en poolt ze alsnog,
+  /// zodat de commit compleet landt (§8.3). De tab houdt zijn herkomst zoals hij
+  /// was: er is niets nieuws geland om de basis op te verzetten.
   Future<GitSaveResult> _queueGitSave(
     DeckMirror mirror,
     Outbox outbox, {
-    required GitRepoConfig config,
+    required Deck deck,
     required String deckDir,
     required String branch,
     required String message,
     required String baseSha,
-    required RepoDeckFiles files,
+    required List<String> warnings,
   }) async {
     final deckFiles = <String, Uint8List>{
-      for (final entry in files.upserts.entries)
-        if (p.posix.isWithin(deckDir, p.posix.normalize(entry.key)))
-          entry.key: entry.value,
+      p.posix.join(deckDir, deckRepoFileName): Uint8List.fromList(
+        utf8.encode(_md.generateDeck(deck)),
+      ),
     };
     await mirror.writeDeck(deckDir, deckFiles);
     await outbox.enqueue(
@@ -284,20 +288,49 @@ extension TabsNotifierGit on TabsNotifier {
         baseSha: baseSha,
       ),
     );
-    return GitSaveResult(
-      status: GitSaveStatus.queued,
-      warnings: files.warnings,
+    return GitSaveResult(status: GitSaveStatus.queued, warnings: warnings);
+  }
+
+  /// Pool de afbeeldingen van een wachtend deck vlak vóór de commit: lees de
+  /// bewaarde `deck.md`, en zet zijn `mem:`-afbeeldingen om naar `repo:` met de
+  /// bijbehorende blobs (§8.3). Zo landt een offline gemaakte afbeelding alsnog,
+  /// zolang de bytes nog in het geheugen staan; een afbeelding die na een
+  /// herstart weg is houdt zijn verwijzing en toont een placeholder.
+  Future<Map<String, Uint8List>> _poolPendingDeck(
+    GitForge forge,
+    PendingCommit commit,
+    Map<String, Uint8List> stored,
+  ) async {
+    final raw = stored[p.posix.join(commit.deckDir, deckRepoFileName)];
+    if (raw == null) return stored;
+    final deck = _md.parseDeck(utf8.decode(raw));
+    if (deck == null) return stored;
+
+    final image = ImageService();
+    final files = await buildDeckRepoFiles(
+      deck,
+      md: _md,
+      pool: AssetPool(forge: forge, branch: commit.branch),
+      deckDir: commit.deckDir,
+      resolveBytes: (path) async => WebAssetStore.isMemPath(path)
+          ? WebAssetStore.bytesFor(path)
+          : image.readSlideImageBytes(path, projectPath: deck.projectPath),
     );
+    return files.upserts;
   }
 
   /// Loop de wachtrij leeg tegen de forge (§8.5) en werk de basis bij van elk
   /// open tabblad waarvan het deck landde, zodat een volgende opslag daar niet
-  /// meteen op een conflict loopt. Geeft per deck terug hoe het afliep.
+  /// meteen op een conflict loopt. Poolt onderweg de offline toegevoegde
+  /// afbeeldingen. Geeft per deck terug hoe het afliep.
   Future<List<SyncOutcome>> flushGit(
     SyncEngine engine,
     GitRepoConfig config,
   ) async {
-    final outcomes = await engine.flush();
+    final outcomes = await engine.flush(
+      prepare: (commit, stored) =>
+          _poolPendingDeck(engine.forge, commit, stored),
+    );
     var changed = false;
     for (final outcome in outcomes) {
       if (outcome.sha == null) continue;

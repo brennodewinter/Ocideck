@@ -14,9 +14,10 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   rather than shown an error. The queue survives closing the app. It empties on
   the next successful save and via *"Nu synchroniseren"* in the `…` menu; a deck
   that lands updates its tab so the next save does not trip over a stale base.
-  New images added while offline stay in memory until you save online again
-  (the same limit a saved `.md` with in-memory images already has); your text is
-  always safe.
+  An image you add while offline is pooled and committed when the queue syncs, so
+  a reconnect gets the whole deck — as long as you have not closed the app in
+  between (an unsaved in-memory image does not survive a restart, the same limit
+  a saved `.md` with in-memory images already has). Your text is always safe.
 - **A deck can now be saved back to a git repository — "Opslaan naar git…",
   beside "Opslaan naar Nextcloud".** Saving writes the deck as one commit: the
   markdown plus its images, and the images go to the shared pool exactly as
