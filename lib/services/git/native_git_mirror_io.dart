@@ -267,6 +267,58 @@ class _NativeGitMirror implements NativeGitMirror {
     }
   }
 
+  @override
+  Future<List<GitLogEntry>> history(String deckDir, {int limit = 50}) async {
+    if (!_cloned) return const [];
+    // deckDir is al gevalideerd (deckNameOf); na `--` is het ondubbelzinnig een
+    // pad, dus het mag hier als vertrouwd pathspec in de args.
+    if (GitRepoLayout.deckNameOf(deckDir) == null) return const [];
+    final unpushed = await _unpushedShas();
+    final GitResult res;
+    try {
+      // Velden gescheiden door unit-separator (0x1f), zodat een boodschap met
+      // spaties of tabs niet in de war raakt.
+      res = await _run([
+        'log',
+        '--max-count=$limit',
+        '--format=%H%x1f%s%x1f%an%x1f%aI',
+        '--',
+        deckDir,
+      ]);
+    } on GitCliException {
+      return const [];
+    }
+    final out = <GitLogEntry>[];
+    for (final line in const LineSplitter().convert(res.stdout)) {
+      if (line.trim().isEmpty) continue;
+      final parts = line.split('\x1f');
+      if (parts.length < 4) continue;
+      out.add(
+        GitLogEntry(
+          sha: parts[0],
+          subject: parts[1],
+          author: parts[2],
+          date: DateTime.tryParse(parts[3]),
+          pushed: !unpushed.contains(parts[0]),
+        ),
+      );
+    }
+    return out;
+  }
+
+  Future<Set<String>> _unpushedShas() async {
+    try {
+      final res = await _run(['rev-list', 'origin/$_branch..HEAD']);
+      return const LineSplitter()
+          .convert(res.stdout)
+          .map((s) => s.trim())
+          .where((s) => s.isNotEmpty)
+          .toSet();
+    } on GitCliException {
+      return const {};
+    }
+  }
+
   Future<int> _unpushedCount() async {
     try {
       final res = await _run(['rev-list', '--count', 'origin/$_branch..HEAD']);

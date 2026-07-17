@@ -192,6 +192,89 @@ Future<void> _flushGitQueue(
   messenger.showSnackBar(SnackBar(content: Text(text)));
 }
 
+/// Toon de commit-historie van het huidige, uit-git-geopende deck (§9.5). Alleen
+/// bereikbaar op het native plane, waar er echte historie ís.
+Future<void> _showGitHistory(BuildContext context, WidgetRef ref) async {
+  final origin = ref.read(tabsProvider).current?.gitOrigin;
+  if (origin == null) return;
+  final native = await ref.read(nativeGitMirrorProvider.future);
+  if (!context.mounted || native == null) return;
+  final entries = await native.history(origin.deckDir);
+  if (!context.mounted) return;
+  await showDialog<void>(
+    context: context,
+    builder: (_) => _GitHistoryDialog(
+      deckName: origin.deckName ?? origin.deckDir,
+      entries: entries,
+    ),
+  );
+}
+
+class _GitHistoryDialog extends StatelessWidget {
+  final String deckName;
+  final List<GitLogEntry> entries;
+  const _GitHistoryDialog({required this.deckName, required this.entries});
+
+  String _when(DateTime? date) {
+    if (date == null) return '';
+    final d = date.toLocal();
+    String two(int n) => n.toString().padLeft(2, '0');
+    return '${d.year}-${two(d.month)}-${two(d.day)} ${two(d.hour)}:${two(d.minute)}';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return AlertDialog(
+      title: Text('${l10n.d('Git-geschiedenis:')} $deckName'),
+      content: SizedBox(
+        width: 520,
+        child: entries.isEmpty
+            ? Text(l10n.d('Nog geen commits voor dit deck.'))
+            : ListView.builder(
+                shrinkWrap: true,
+                itemCount: entries.length,
+                itemBuilder: (context, i) {
+                  final e = entries[i];
+                  return ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    dense: true,
+                    leading: Tooltip(
+                      message: e.pushed
+                          ? l10n.d('Gepusht')
+                          : l10n.d('Nog niet gepusht'),
+                      child: Icon(
+                        e.pushed
+                            ? Icons.cloud_done_outlined
+                            : Icons.cloud_upload_outlined,
+                        size: 18,
+                        color: e.pushed ? AppTheme.slate400 : AppTheme.accent,
+                      ),
+                    ),
+                    title: Text(
+                      e.subject,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontSize: 13),
+                    ),
+                    subtitle: Text(
+                      '${e.shortSha} · ${e.author} · ${_when(e.date)}',
+                      style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+                    ),
+                  );
+                },
+              ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text(l10n.d('Sluiten')),
+        ),
+      ],
+    );
+  }
+}
+
 /// Maak een geldige deknaam (§6) uit een deck-titel, of een nette terugval.
 String _safeDeckName(String title) {
   final cleaned = title

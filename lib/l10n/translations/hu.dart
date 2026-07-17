@@ -1787,6 +1787,11 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Git-geschiedenis…': 'Git-előzmények…',
+  'Git-geschiedenis:': 'Git-előzmények:',
+  'Nog geen commits voor dit deck.': 'Ehhez a csomaghoz még nincs commit.',
+  'Gepusht': 'Elküldve',
+  'Nog niet gepusht': 'Még nincs elküldve',
   'Gesynchroniseerd met git.': 'Szinkronizálva a gittel.',
   'Nog geen verbinding — het gaat later mee.':
       'Még nincs kapcsolat — később megy el.',

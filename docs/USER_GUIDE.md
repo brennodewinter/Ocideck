@@ -86,7 +86,9 @@ saved version stays retrievable, which a plain folder cannot give you.
   on your machine and the sync is held rather than overwriting their work. On the
   web, or a desktop without `git`, the REST path above is used and nothing
   changes. On macOS the check looks for the Xcode command-line tools first, so it
-  never prompts you to install anything.
+  never prompts you to install anything. Once a deck is open from git this way,
+  *Git history…* in the `…` menu shows its commit timeline, with a badge on each
+  commit for whether it is on the forge yet or still waiting to push.
 - **Versions and releases** are still being built. See
   [`design/GIT_STORAGE.md`](design/GIT_STORAGE.md).
 - **A repository is a trust boundary.** Everyone who can read it reads *every*

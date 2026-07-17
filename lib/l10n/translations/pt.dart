@@ -1813,6 +1813,11 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Git-geschiedenis…': 'Histórico do git…',
+  'Git-geschiedenis:': 'Histórico do git:',
+  'Nog geen commits voor dit deck.': 'Ainda não há commits para este deck.',
+  'Gepusht': 'Enviado',
+  'Nog niet gepusht': 'Ainda não enviado',
   'Gesynchroniseerd met git.': 'Sincronizado com o git.',
   'Nog geen verbinding — het gaat later mee.':
       'Ainda sem ligação — segue mais tarde.',

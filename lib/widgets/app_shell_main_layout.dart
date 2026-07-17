@@ -425,6 +425,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
               _saveToGit(context, ref);
             case 'sync_git':
               _syncGit(context, ref);
+            case 'history_git':
+              _showGitHistory(context, ref);
             case 'open_nextcloud':
               _openFromNextcloud(context, ref);
             case 'save_nextcloud':
@@ -498,6 +500,11 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         l10n.d('Opslaan naar git…'),
       ),
       _menuItem('sync_git', Icons.sync, l10n.d('Nu synchroniseren')),
+      // Echte historie bestaat alleen op het native plane (§8.1): het item
+      // verschijnt zodra dit deck uit git is geopend én er een lokale clone is.
+      if (ref.read(tabsProvider).current?.gitOrigin != null &&
+          ref.read(nativeGitMirrorProvider).asData?.value != null)
+        _menuItem('history_git', Icons.history, l10n.d('Git-geschiedenis…')),
       if (supportsNetworkDeckSources) ...[
         _menuItem(
           'open_nextcloud',

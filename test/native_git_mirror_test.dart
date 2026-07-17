@@ -179,6 +179,33 @@ void main() {
       );
     });
 
+    test('history geeft de commits van het deck, nieuwste eerst', () async {
+      await mirror.prepareForOpen();
+      await mirror.commitDeck(deckDir, {
+        '$deckDir/deck.md': _b('# Tweede versie\n'),
+      }, 'tweede');
+      final log = await mirror.history(deckDir);
+      expect(log.length, greaterThanOrEqualTo(2));
+      expect(log.first.subject, 'tweede'); // nieuwste eerst
+      expect(log.first.pushed, isTrue); // gepusht
+      expect(log.first.sha, isNotEmpty);
+      expect(log.first.shortSha.length, 7);
+      // De init-commit staat er ook nog.
+      expect(log.any((e) => e.subject == 'init'), isTrue);
+    });
+
+    test('een niet-gepushte commit is als zodanig gemarkeerd', () async {
+      await mirror.prepareForOpen();
+      Directory(bare).renameSync('$bare.weg'); // origin onbereikbaar
+      await mirror.commitDeck(deckDir, {
+        '$deckDir/deck.md': _b('# Lokaal\n'),
+      }, 'alleen lokaal');
+      Directory('$bare.weg').renameSync(bare);
+      final log = await mirror.history(deckDir);
+      expect(log.first.subject, 'alleen lokaal');
+      expect(log.first.pushed, isFalse); // wacht nog om gepusht te worden
+    });
+
     test('het token belandt nooit in .git/config (OQ-10)', () async {
       const secret = 'geheim-pat-abc123';
       final tokenMirror = (await createNativeGitMirror(

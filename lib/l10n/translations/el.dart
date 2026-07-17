@@ -1811,6 +1811,12 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Git-geschiedenis…': 'Ιστορικό git…',
+  'Git-geschiedenis:': 'Ιστορικό git:',
+  'Nog geen commits voor dit deck.':
+      'Δεν υπάρχουν ακόμη commit για αυτό το deck.',
+  'Gepusht': 'Απεστάλη',
+  'Nog niet gepusht': 'Δεν έχει σταλεί ακόμη',
   'Gesynchroniseerd met git.': 'Συγχρονίστηκε με το git.',
   'Nog geen verbinding — het gaat later mee.':
       'Καμία σύνδεση ακόμη — θα σταλεί αργότερα.',

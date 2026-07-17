@@ -736,6 +736,11 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Git-geschiedenis…': 'Cronologia git…',
+  'Git-geschiedenis:': 'Cronologia git:',
+  'Nog geen commits voor dit deck.': 'Ancora nessun commit per questo deck.',
+  'Gepusht': 'Inviato',
+  'Nog niet gepusht': 'Non ancora inviato',
   'Gesynchroniseerd met git.': 'Sincronizzato con git.',
   'Nog geen verbinding — het gaat later mee.':
       'Ancora nessuna connessione — verrà inviato più tardi.',

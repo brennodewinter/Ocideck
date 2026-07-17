@@ -1758,6 +1758,11 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Git-geschiedenis…': 'git qonwI\'…',
+  'Git-geschiedenis:': 'git qonwI\':',
+  'Nog geen commits voor dit deck.': 'deck vamvaD commit tu\'be\'lu\' DaH.',
+  'Gepusht': 'ngeHta\'',
+  'Nog niet gepusht': 'ngeHbe\'taH',
   'Gesynchroniseerd met git.': 'git nI\'chuqta\'.',
   'Nog geen verbinding — het gaat later mee.': 'rggh Suqbe\'lu\' — tugh jaH.',
   'De branch is verzet; je commits staan lokaal klaar.':

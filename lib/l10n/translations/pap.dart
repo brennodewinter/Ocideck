@@ -740,6 +740,11 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Git-geschiedenis…': 'Historia di git…',
+  'Git-geschiedenis:': 'Historia di git:',
+  'Nog geen commits voor dit deck.': 'Ainda no tin commit pa e deck aki.',
+  'Gepusht': 'Pushí',
+  'Nog niet gepusht': 'Ainda no pushí',
   'Gesynchroniseerd met git.': 'Sinkronisá ku git.',
   'Nog geen verbinding — het gaat later mee.':
       'Ainda sin koneksion — lo bai despues.',

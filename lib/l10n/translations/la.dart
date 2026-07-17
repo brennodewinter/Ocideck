@@ -1799,6 +1799,11 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Git-geschiedenis…': 'Historia git…',
+  'Git-geschiedenis:': 'Historia git:',
+  'Nog geen commits voor dit deck.': 'Nulla adhuc commissa huic fasciculo.',
+  'Gepusht': 'Impulsum',
+  'Nog niet gepusht': 'Nondum impulsum',
   'Gesynchroniseerd met git.': 'Cum git synchronizatum.',
   'Nog geen verbinding — het gaat later mee.':
       'Nulla adhuc coniunctio — postea mittetur.',

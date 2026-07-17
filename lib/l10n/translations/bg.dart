@@ -1806,6 +1806,11 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Git-geschiedenis…': 'История на git…',
+  'Git-geschiedenis:': 'История на git:',
+  'Nog geen commits voor dit deck.': 'Все още няма commit-и за това тесте.',
+  'Gepusht': 'Изпратено',
+  'Nog niet gepusht': 'Още не е изпратено',
   'Gesynchroniseerd met git.': 'Синхронизирано с git.',
   'Nog geen verbinding — het gaat later mee.':
       'Все още няма връзка — ще се изпрати по-късно.',

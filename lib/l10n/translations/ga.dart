@@ -1819,6 +1819,11 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Git-geschiedenis…': 'Stair git…',
+  'Git-geschiedenis:': 'Stair git:',
+  'Nog geen commits voor dit deck.': 'Níl aon commit don deic seo fós.',
+  'Gepusht': 'Brúite',
+  'Nog niet gepusht': 'Gan brú fós',
   'Gesynchroniseerd met git.': 'Sioncronaithe le git.',
   'Nog geen verbinding — het gaat later mee.':
       'Gan nasc fós — rachaidh sé leis níos déanaí.',

@@ -1782,6 +1782,11 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Git-geschiedenis…': 'Git-historik…',
+  'Git-geschiedenis:': 'Git-historik:',
+  'Nog geen commits voor dit deck.': 'Inga commits för detta deck än.',
+  'Gepusht': 'Pushad',
+  'Nog niet gepusht': 'Inte pushad än',
   'Gesynchroniseerd met git.': 'Synkroniserat med git.',
   'Nog geen verbinding — het gaat later mee.':
       'Ingen anslutning än — det skickas senare.',

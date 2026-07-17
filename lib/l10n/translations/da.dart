@@ -1782,6 +1782,11 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Git-geschiedenis…': 'Git-historik…',
+  'Git-geschiedenis:': 'Git-historik:',
+  'Nog geen commits voor dit deck.': 'Ingen commits for dette deck endnu.',
+  'Gepusht': 'Pushet',
+  'Nog niet gepusht': 'Ikke pushet endnu',
   'Gesynchroniseerd met git.': 'Synkroniseret med git.',
   'Nog geen verbinding — het gaat later mee.':
       'Ingen forbindelse endnu — det sendes senere.',

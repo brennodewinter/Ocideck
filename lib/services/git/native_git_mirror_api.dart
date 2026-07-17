@@ -20,6 +20,30 @@ enum GitCommitOutcome {
   unchanged,
 }
 
+/// Eén regel uit de historie van een deck (§9.5): een commit die de deckmap
+/// raakte.
+class GitLogEntry {
+  final String sha;
+  final String subject;
+  final String author;
+  final DateTime? date;
+
+  /// Of deze commit al op de forge staat, of nog lokaal wacht om gepusht te
+  /// worden — de UI toont dat verschil (§9.6: een badge op de historie-regel,
+  /// nooit een claim over "het deck").
+  final bool pushed;
+
+  const GitLogEntry({
+    required this.sha,
+    required this.subject,
+    required this.author,
+    required this.date,
+    required this.pushed,
+  });
+
+  String get shortSha => sha.length >= 7 ? sha.substring(0, 7) : sha;
+}
+
 /// De uitkomst van een native opslag: de afloop plus de nieuwe HEAD-sha.
 class GitCommitResult {
   final GitCommitOutcome outcome;
@@ -57,4 +81,8 @@ abstract class NativeGitMirror implements DeckMirror {
 
   /// Push wat nog niet gepusht is (drain de lokale historie naar de forge).
   Future<GitCommitResult> sync();
+
+  /// De commits die de deckmap raakten, nieuwste eerst (§9.5). Leeg wanneer er
+  /// nog geen clone/historie is.
+  Future<List<GitLogEntry>> history(String deckDir, {int limit = 50});
 }

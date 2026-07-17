@@ -1782,6 +1782,11 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Git-geschiedenis…': 'Git vēsture…',
+  'Git-geschiedenis:': 'Git vēsture:',
+  'Nog geen commits voor dit deck.': 'Šim klājam vēl nav commit.',
+  'Gepusht': 'Nosūtīts',
+  'Nog niet gepusht': 'Vēl nav nosūtīts',
   'Gesynchroniseerd met git.': 'Sinhronizēts ar git.',
   'Nog geen verbinding — het gaat later mee.':
       'Vēl nav savienojuma — tiks nosūtīts vēlāk.',
