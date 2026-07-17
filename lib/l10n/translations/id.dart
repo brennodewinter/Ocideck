@@ -1783,6 +1783,11 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Native git gevonden:': 'git native ditemukan:',
+  'Native git: bezig met detecteren…': 'git native: mendeteksi…',
+  'Native git: niet gevonden — het REST-pad wordt gebruikt':
+      'git native: tidak ditemukan — jalur REST digunakan',
+  'echte offline-historie mogelijk': 'riwayat offline nyata dimungkinkan',
   'Nu synchroniseren': 'Sinkronkan sekarang',
   'Gesynchroniseerd:': 'Tersinkron:',
   'nog in de wachtrij:': 'masih dalam antrean:',

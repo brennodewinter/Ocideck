@@ -740,6 +740,11 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Native git gevonden:': 'git nativo hañá:',
+  'Native git: bezig met detecteren…': 'git nativo: ta deteklá…',
+  'Native git: niet gevonden — het REST-pad wordt gebruikt':
+      'git nativo: no hañá — e kaminda REST ta wòrdu usá',
+  'echte offline-historie mogelijk': 'historia offline real posibel',
   'Nu synchroniseren': 'Sinkronisá awor',
   'Gesynchroniseerd:': 'Sinkronisá:',
   'nog in de wachtrij:': 'ainda den e kola:',

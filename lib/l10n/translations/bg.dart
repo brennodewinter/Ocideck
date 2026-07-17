@@ -1806,6 +1806,11 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Native git gevonden:': 'Намерен е нативен git:',
+  'Native git: bezig met detecteren…': 'Нативен git: откриване…',
+  'Native git: niet gevonden — het REST-pad wordt gebruikt':
+      'Нативен git: не е намерен — използва се REST пътят',
+  'echte offline-historie mogelijk': 'възможна е истинска офлайн история',
   'Nu synchroniseren': 'Синхронизирай сега',
   'Gesynchroniseerd:': 'Синхронизирани:',
   'nog in de wachtrij:': 'още в опашката:',

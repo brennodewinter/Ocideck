@@ -1787,6 +1787,11 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Native git gevonden:': 'Natív git megtalálva:',
+  'Native git: bezig met detecteren…': 'Natív git: észlelés…',
+  'Native git: niet gevonden — het REST-pad wordt gebruikt':
+      'Natív git: nem található — a REST útvonal használatos',
+  'echte offline-historie mogelijk': 'valódi offline előzmény lehetséges',
   'Nu synchroniseren': 'Szinkronizálás most',
   'Gesynchroniseerd:': 'Szinkronizálva:',
   'nog in de wachtrij:': 'még sorban:',

@@ -1774,6 +1774,12 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Native git gevonden:': 'Leiti natiivne git:',
+  'Native git: bezig met detecteren…': 'Natiivne git: tuvastamine…',
+  'Native git: niet gevonden — het REST-pad wordt gebruikt':
+      'Natiivne git: ei leitud — kasutatakse REST-teed',
+  'echte offline-historie mogelijk':
+      'võimalik on tõeline võrguühenduseta ajalugu',
   'Nu synchroniseren': 'Sünkrooni kohe',
   'Gesynchroniseerd:': 'Sünkroonitud:',
   'nog in de wachtrij:': 'veel järjekorras:',

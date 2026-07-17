@@ -1799,6 +1799,11 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Native git gevonden:': 'git nativum inventum:',
+  'Native git: bezig met detecteren…': 'git nativum: deprehenditur…',
+  'Native git: niet gevonden — het REST-pad wordt gebruikt':
+      'git nativum: non inventum — via REST adhibetur',
+  'echte offline-historie mogelijk': 'vera historia interclusa possibilis',
   'Nu synchroniseren': 'Nunc synchronizare',
   'Gesynchroniseerd:': 'Synchronizata:',
   'nog in de wachtrij:': 'adhuc in serie:',

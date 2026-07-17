@@ -1801,6 +1801,11 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Native git gevonden:': 'Знайдено рідний git:',
+  'Native git: bezig met detecteren…': 'Рідний git: виявлення…',
+  'Native git: niet gevonden — het REST-pad wordt gebruikt':
+      'Рідний git: не знайдено — використовується шлях REST',
+  'echte offline-historie mogelijk': 'можлива справжня офлайн-історія',
   'Nu synchroniseren': 'Синхронізувати зараз',
   'Gesynchroniseerd:': 'Синхронізовано:',
   'nog in de wachtrij:': 'ще в черзі:',

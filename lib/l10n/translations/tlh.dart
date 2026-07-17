@@ -1758,6 +1758,11 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Native git gevonden:': 'git tu\'lu\':',
+  'Native git: bezig met detecteren…': 'git: wIvlI\'…',
+  'Native git: niet gevonden — het REST-pad wordt gebruikt':
+      'git: tu\'be\'lu\' — REST He lo\'lu\'',
+  'echte offline-historie mogelijk': 'reH offline qonwI\' DuH',
   'Nu synchroniseren': 'DaH yInI\'chuq',
   'Gesynchroniseerd:': 'nI\'chuqta\':',
   'nog in de wachtrij:': 'loS taH:',

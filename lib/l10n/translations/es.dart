@@ -737,6 +737,11 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Native git gevonden:': 'git nativo encontrado:',
+  'Native git: bezig met detecteren…': 'git nativo: detectando…',
+  'Native git: niet gevonden — het REST-pad wordt gebruikt':
+      'git nativo: no encontrado — se usa la ruta REST',
+  'echte offline-historie mogelijk': 'historial offline real posible',
   'Nu synchroniseren': 'Sincronizar ahora',
   'Gesynchroniseerd:': 'Sincronizados:',
   'nog in de wachtrij:': 'aún en cola:',

@@ -69,7 +69,54 @@ extension _SettingsGit on _SettingsDialogState {
             style: const TextStyle(fontSize: 13),
           ),
         ),
+        _nativeGitStatus(l10n),
       ],
+    );
+  }
+
+  /// Meldt of er bruikbaar native `git` op deze machine staat. Het lezen van de
+  /// provider is meteen de aanleiding om te detecteren (§8.4: nooit bij het
+  /// opstarten, wél zodra de gebruiker de git-instellingen opent). Met native
+  /// git wordt opslaan een echte lokale commit met historie; zonder valt alles
+  /// terug op het REST-pad, dat op elk platform werkt.
+  Widget _nativeGitStatus(AppLocalizations l10n) {
+    final probe = ref.watch(nativeGitVersionProvider);
+    final (IconData icon, Color color, String text) = probe.when(
+      loading: () => (
+        Icons.hourglass_empty,
+        AppTheme.slate400,
+        l10n.d('Native git: bezig met detecteren…'),
+      ),
+      error: (_, _) => (
+        Icons.info_outline,
+        AppTheme.slate400,
+        l10n.d('Native git: niet gevonden — het REST-pad wordt gebruikt'),
+      ),
+      data: (version) => version == null
+          ? (
+              Icons.info_outline,
+              AppTheme.slate400,
+              l10n.d('Native git: niet gevonden — het REST-pad wordt gebruikt'),
+            )
+          : (
+              Icons.check_circle_outline,
+              AppTheme.accent,
+              '${l10n.d('Native git gevonden:')} ${version.display} — '
+                  '${l10n.d('echte offline-historie mogelijk')}',
+            ),
+    );
+    return Padding(
+      padding: const EdgeInsets.only(top: 10),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(icon, size: 15, color: color),
+          const SizedBox(width: 6),
+          Expanded(
+            child: Text(text, style: TextStyle(fontSize: 11, color: color)),
+          ),
+        ],
+      ),
     );
   }
 }
