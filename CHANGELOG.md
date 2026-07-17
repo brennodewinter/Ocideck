@@ -8,6 +8,13 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **New chart type: horizontal stacked bar.** The stacked bar chart can now be
+  laid on its side — one bar per label with the series stacked left-to-right.
+  Like the horizontal bar it suits long category names, and it keeps the
+  part-to-whole reading of a stacked bar; a wide enough segment prints its value.
+  Available in the chart type picker, the variants dialog, the preview, the
+  presenter, PDF, PPTX, and the HTML export's inline SVG, with a screen-reader
+  text alternative like every other chart.
 - **See a deck's commit history — "Git history…".** For a deck opened from git on
   a machine with native `git`, the `…` menu now shows its timeline: every commit
   that touched the deck, newest first, each with its author, date, and a badge
