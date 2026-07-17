@@ -9,13 +9,47 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/git_settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/git/asset_pool.dart';
+import 'package:ocideck/services/git/deck_mirror.dart';
+import 'package:ocideck/services/git/draft_store_web.dart';
 import 'package:ocideck/services/git/git_forge.dart';
+import 'package:ocideck/services/git/outbox.dart';
+import 'package:ocideck/services/git/sync_engine.dart';
 import 'package:ocideck/services/recovery_service.dart';
 import 'package:ocideck/services/web_asset_store.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'git_forge_fake.dart';
+
+/// Een forge die je op scherp kunt zetten: online tot [online] op false gaat,
+/// waarna een commit een netwerkfout gooit — het vliegtuig, tijdens het opslaan.
+class _FlakyForge extends FakeForge {
+  _FlakyForge(super.repo);
+  bool online = true;
+
+  @override
+  Future<CommitResult> commitFiles({
+    required String branch,
+    required String message,
+    required Map<String, Uint8List> upserts,
+    required List<String> deletes,
+    required String baseSha,
+  }) {
+    if (!online) {
+      throw const GitForgeException(
+        GitForgeError.network,
+        'Netwerkfout: geen verbinding',
+      );
+    }
+    return super.commitFiles(
+      branch: branch,
+      message: message,
+      upserts: upserts,
+      deletes: deletes,
+      baseSha: baseSha,
+    );
+  }
+}
 
 // Het git-opslaanpad (§9.1): het deck van het tabblad wordt één commit. Deze
 // suite legt vast dat het commit landt, dat het tabblad daarna de nieuwe commit
@@ -265,6 +299,85 @@ theme: ocideck
         expect(WebAssetStore.bytesFor(reopened.imagePath), png);
       },
     );
+
+    test('offline belandt het werk in de wachtrij, niet in een fout', () async {
+      final (container, tabs) = build();
+      final repo = FakeRepo(
+        branches: {'main': 'commit-main'},
+        files: {'$deckDir/deck.md': bytes('# start')},
+      );
+      final forge = _FlakyForge(repo);
+      final mirror = DraftMirror(store: PrefsDraftStore());
+      final outbox = Outbox();
+
+      seedDeck(
+        container,
+        deckWith([
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(title: 'Werk', bullets: const ['offline gemaakt']),
+        ]),
+      );
+
+      forge.online = false;
+      final result = await tabs.saveToGit(
+        forge,
+        config: config,
+        deckDir: deckDir,
+        branch: 'main',
+        message: 'offline',
+        mirror: mirror,
+        outbox: outbox,
+      );
+
+      expect(result.status, GitSaveStatus.queued);
+      // De tekst staat duurzaam in de werkkopie en het deck in de wachtrij.
+      expect(await mirror.hasDeck(deckDir), isTrue);
+      expect(await outbox.forDeck(deckDir), isNotNull);
+      // De forge is niet aangeraakt: de branchkop staat er nog zoals hij stond.
+      expect(repo.branches['main'], 'commit-main');
+    });
+
+    test('bij verbinding loopt de wachtrij leeg en landt het werk', () async {
+      final (container, tabs) = build();
+      final repo = FakeRepo(
+        branches: {'main': 'commit-main'},
+        files: {'$deckDir/deck.md': bytes('# start')},
+      );
+      final forge = _FlakyForge(repo);
+      final mirror = DraftMirror(store: PrefsDraftStore());
+      final outbox = Outbox();
+
+      seedDeck(
+        container,
+        deckWith([
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(title: 'Werk', bullets: const ['offline gemaakt']),
+        ]),
+      );
+
+      forge.online = false;
+      await tabs.saveToGit(
+        forge,
+        config: config,
+        deckDir: deckDir,
+        branch: 'main',
+        message: 'offline',
+        mirror: mirror,
+        outbox: outbox,
+      );
+
+      // Verbinding terug: de wachtrij loopt leeg.
+      forge.online = true;
+      final engine = SyncEngine(forge: forge, mirror: mirror, outbox: outbox);
+      final outcomes = await tabs.flushGit(engine, config);
+
+      expect(outcomes, hasLength(1));
+      expect(outcomes.single.status, SyncStatus.committed);
+      expect(await outbox.isEmpty, isTrue); // wachtrij leeg
+      expect(repo.branches['main'], outcomes.single.sha); // commit geland
+    });
 
     test('een pad dat geen deckmap is wordt geweigerd', () async {
       final (container, tabs) = build();
