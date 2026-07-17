@@ -1,150 +1,274 @@
 # OciDeck — Security Design
 
-This document outlines the security design principles and mechanisms that protect OciDeck's architecture, data handling, and user privacy.
+This document describes the security design principles and the concrete
+mechanisms that enforce them. Where a mechanism is implemented, the source is
+cited so the claim can be checked against the code — the code is the source of
+truth. OciDeck is pre-release (currently 0.2.0); details may change, but the
+invariants below are enforced by tests and CI gates, not just documented.
 
 ## Overview
 
-OciDeck follows a strong client-side security model with no application backend. The entire app runs locally on the user's machine (desktop) or browser tab (web), ensuring that presentation content never leaves the device during editing, previewing, presenting, or exporting activities.
+OciDeck has a strong client-side security model with **no application backend**.
+The app runs locally on the user's machine (desktop) or in a browser tab (web);
+presentation content never leaves the device during editing, previewing,
+presenting, or exporting. The only network traffic is explicit and
+user-initiated (URL import, WebDAV/Nextcloud, git storage, optional AI), and each
+path is individually gated.
 
-## Core Security Principles
+## Core principles
 
-### 1. Zero Trust Architecture
-- Every component assumes untrusted inputs
-- All external data is validated and sanitized before use
-- No implicit trust in any network requests or file imports
-- External dependencies are carefully vetted for security compliance
+1. **File = truth.** Storage stays as close to plain Markdown as possible; there
+   is no opaque database and no server that could retain user data.
+2. **Zero implicit trust in inputs.** Every deck, asset, and network response is
+   treated as untrusted and validated before use.
+3. **No egress without consent.** Nothing leaves the machine unless the user
+   initiates it; outbound AI in particular is fail-closed (see §7).
+4. **Enforced, not just documented.** Security invariants are backed by CI gates
+   (§10), a compile-time privacy boundary (§8), and tests.
 
-### 2. Data Protection at Rest and in Transit
-- All user data (presentations, assets, settings) remains local unless explicitly shared
-- Sensitive information like credentials is stored securely using OS keychain services
-- No telemetry, analytics, or tracking of any kind
-- No network communication except for explicit user-initiated actions
+## 1. Web build hardening
 
-### 3. Secure Data Flow
-All data flows through clearly defined security gates:
-- Asset paths are confined to project folders
-- Network requests must pass through `NetGuard` 
-- External content is reviewed and sanitized before processing
-- Export operations enforce classification policies
+The web build is designed to pull **zero third-party origins** at runtime.
 
-## Security Mechanisms
+- **Strict CSP.** `web/index.html` ships a `Content-Security-Policy` meta tag:
+  `default-src 'self'`; `script-src 'self' 'wasm-unsafe-eval'` (no `unsafe-eval`
+  / `unsafe-inline`; the wasm token is only for CanvasKit); `style-src 'self'
+  'unsafe-inline'` (the Flutter engine injects styles); `img-src`/`media-src`/
+  `font-src` first-party plus `data:`/`blob:` only; `connect-src 'self' https:`;
+  `object-src 'none'`; `base-uri 'self'`; `frame-ancestors 'none'`
+  (`web/index.html:51`). Note a meta-delivered CSP cannot enforce
+  `frame-ancestors` — serve it as a real HTTP header to control embedding (see
+  [`HOSTING.md`](HOSTING.md)).
+- **Self-hosted engine.** `make build-web` builds with
+  `--no-web-resources-cdn --csp`, so CanvasKit is served from the same origin
+  (never the gstatic CDN) and the bootstrap needs no inline/eval scripts
+  (`Makefile:362-367`).
+- **Bundled fonts.** The UI font is bundled and registered as `Roboto`, so the
+  engine never fetches fonts from `fonts.gstatic.com`.
+- **Hardening verifier.** `tool/check_web_hardening.dart` parses the *built*
+  bundle and fails the build if any invariant regresses (CSP strictness,
+  self-hosted CanvasKit, bundled font). Wired via `make check-web` and CI.
 
-### Network Security (NetGuard)
-All outbound network connections funnel through `utils/net_guard.dart`. This system enforces:
+## 2. Supply-chain integrity
 
-1. **SSRF Protection**: Rejects internal targets (loopback, RFC1918, link-local, cloud metadata, CGNAT, ULA, IPv4-in-IPv6) 
-2. **Address Pinning**: Socket connections are pinned to validated addresses
-3. **Redirect Prevention**: No redirects allowed for security-critical requests
-4. **Byte Cap**: Hard limit on data transfer size
+- **Pinned, hashed JS bundles.** Every vendored JS/CSS file
+  (`marked`, `highlight.js`, `DOMPurify`, `mermaid`, MathJax/`tex-svg.js`) is
+  pinned in `assets/web_export/MANIFEST.json` by exact version, sha256, source
+  URL, and license. `tool/check_bundled_js.dart` re-hashes each file against the
+  manifest and queries the OSV vulnerability database for the pinned versions;
+  `make deps-check` fails on a hash mismatch or a known CVE. An offline variant
+  (`--offline`, `make deps-verify-offline`) verifies integrity without network
+  and runs as a `build-web` prerequisite.
+- **SBOM (EU CRA).** `tool/generate_sbom.dart` emits a Software Bill of Materials
+  in CycloneDX 1.6 and SPDX 2.3 (plus a human-readable Markdown view) covering
+  all direct/transitive Dart packages, the vendored JS/CSS, plugin forks,
+  bundled fonts, and pinned SDKs — the artefact required by the EU Cyber
+  Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1). `make sbom-verify`
+  is a staleness gate: it fails if dependencies changed without regenerating the
+  SBOM, so the CRA artefact can never silently drift.
+- **License compliance.** `tool/check_licenses.dart` (`make licenses`) fails if
+  any resolved package uses an unrecognised or non-open-source license.
+- **Pinned CI Actions.** Third-party CI Actions are pinned to exact versions
+  (`.github/pinned-actions.json`); `tool/check_pinned_actions.dart` reports when
+  a pin falls behind upstream. CI runs least-privilege
+  (`permissions: contents: read`, `persist-credentials: false`) and enforces a
+  reproducible dependency set (`flutter pub get --enforce-lockfile`).
 
-### Asset Path Security
-All asset references (images, videos, etc.) are resolved within the project folder structure only:
-- Absolute paths and `../` escapes are ignored during preview/present/export
-- Assets outside the project directory cannot be accessed by decks from untrusted sources
-- Project containment is enforced at multiple levels in the system
+## 3. Network security (NetGuard + pinned transports)
 
-### Privacy Protection (OciWacht)
-The privacy scanning functionality implements:
+All outbound connections funnel through `lib/utils/net_guard.dart` and a set of
+SSRF-pinned transports.
 
-1. **Data Discovery**: Scans for personal data patterns including:
-   - Email addresses
-   - Phone numbers  
-   - IBAN/Bank account numbers
-   - BSN/National ID numbers
-   - Address information and postcodes
-   - Personal names in various formats
+- **SSRF classification.** `isBlockedHost` / `isBlockedAddress` reject loopback,
+  link-local, multicast, `0/8`, `10/8`, `127/8`, `172.16/12`, `192.168/16`,
+  `169.254/16` (incl. cloud metadata `169.254.169.254`), CGNAT `100.64/10`, IPv6
+  `::`, and ULA `fc00::/7`.
+- **IPv4-in-IPv6 unwrapping.** `_embeddedIPv4` re-classifies IPv4-mapped,
+  IPv4-compatible, and NAT64 (`64:ff9b::/96`) addresses so tricks like
+  `[::ffff:169.254.169.254]` and numeric-encoded hosts (`http://2130706433/`)
+  can't slip past.
+- **DNS-rebind pinning (resolve-then-pin).** `safeResolve` rejects a host if any
+  resolved address is internal and returns the validated addresses; callers pin
+  the socket to that address (`connectionFactory = Socket.startConnect(pinned,
+  …)`), so a DNS rebind between the check and the connect cannot redirect the
+  socket to an internal IP. Redirects are blocked (`followRedirects = false`) at
+  each call site so a 3xx can't bypass the host check.
+- **Per-caller byte caps** (see the Performance guide) reject oversized responses
+  both by `Content-Length` pre-check and by streaming cap.
 
-2. **Redaction System**:
-   - Double square bracket markers `[[...]]` for manual redaction
-   - Automated detection with optional redaction based on rules
-   - WYSIWYG rendering that preserves privacy in all export formats
+## 4. Asset-path containment
 
-3. **Classification Enforcement**:
-   - TLP (Traffic Light Protocol) levels for content classification  
-   - Export gate enforcement at the policy level
-   - Session-only handling of interactive elements like question slides
+Asset references (images, video, CSS) are confined to the project folder by the
+functions in `lib/utils/project_path.dart`:
 
-### Data Handling and Storage
+- Absolute paths and `../` escapes are refused on the render/present/export
+  paths, so a deck from an untrusted source cannot read files outside its folder.
+- `resolveContainedRealPath` / `isRenderPathContained` resolve the **real**
+  (symlink-followed) path and refuse a project-internal symlink that points
+  outside — a check the lexical `p.isWithin` alone cannot make.
+- The distinction between trusted (app-config, e.g. the style-profile logo) and
+  editor-permissive resolvers is explicit in the API.
 
-#### Temporary Files and Recovery
-- Auto-save snapshots are written atomically to a per-user application-support
-  location (not a world-readable temp directory)
-- Recovery snapshots hold the working deck content and are **not** encrypted;
-  they inherit the OS user-account file protections of that directory
-- Snapshots are cleaned up on a clean exit and superseded on the next save
+## 5. HTML export sanitization
 
-#### Settings and Credentials
-- User settings are stored locally with encryption when required
-- WebDAV credentials, API keys, and other sensitive information are stored using OS keychain services (macOS Keychain, Windows Credential Manager)
-- Configuration files never contain raw passwords or tokens
+The HTML export is defence-in-depth against script injection in deck content:
 
-### Export Security
+- Every rendered Markdown block is passed through **DOMPurify** before it touches
+  the DOM (`lib/services/marp_html_service.dart`), falling back to text if
+  DOMPurify is unavailable.
+- The exported file carries its **own** CSP with a per-export random nonce
+  (`Random.secure`): `script-src 'nonce-…'`, `object-src 'none'`,
+  `base-uri 'none'`, `connect-src 'none'`, `form-action 'none'` — so any inline
+  script that survived sanitization still cannot execute, and a locally opened
+  export cannot beacon home.
+- A `</script>` breakout guard neutralises case-insensitive `</script` inside
+  inlined payloads, and Mermaid's injected SVG is re-sanitised with DOMPurify's
+  SVG profile (Mermaid runs at `securityLevel: strict`). An in-app SVG sanitizer
+  (`lib/utils/sanitize_svg.dart`) strips `script`/`foreignObject`/event handlers
+  and `javascript:`/`data:` URLs.
 
-All export operations follow strict security protocols:
+## 6. Input validation
 
-1. **Classification Gate**: Enforced before any export is generated
-2. **Content Sanitization**: Removes potentially unsafe HTML/JS content in exports
-3. **Document Metadata**: Export metadata (title, author, classification) is derived from the deck and embedded consistently across formats. Note: exported PDFs are not cryptographically signed.
-4. **Privacy Projection**: All sensitive data is properly redacted or removed from exports
+- **Structural Markdown pre-flight.** `lib/services/markdown_validator.dart`
+  validates front-matter keys against a whitelist, TLP values, comment
+  directives, HTML-comment and fence balance, unclosed images/`<video>`/`<audio>`,
+  table separators, and embedded chart/cockpit JSON — flagging content that the
+  parser would otherwise silently drop.
+- **Magic-byte image validation.** `ImageService.imageMimeFromBytes` sniffs
+  PNG/JPEG/GIF/BMP/WebP by signature bytes, not by file extension, and import is
+  size-capped (64 MiB image / 1 GiB media).
 
-## Attack Surface Mitigation
+## 7. AI egress control
 
-### Client-Side Only Approach
-- No web backend means no server-side attack surface
-- No persistent user tracking or telemetry
-- All processing happens in the isolated application environment
+The optional AI assistant is fail-closed and is the most security-sensitive
+subsystem, so it has a dedicated gate.
 
-### Input Validation and Sanitization
-- Markdown parsing with structural pre-flight validation 
-- Asset reference validation against project containment rules
-- Network request sanitization through NetGuard
-- HTML export sanitization to prevent XSS attacks
+- **Modes** (`lib/models/ai_settings.dart`): `none` (default — everything off),
+  `local` (loopback literal only, pinned directly), `selfHosted` (a user host
+  marked `trustedInternal`), and `cloud` (a public endpoint).
+- **Pure gate.** `AiSecurityGate.evaluate` (`lib/services/ai_security_gate.dart`)
+  is an I/O-free decision run before **every** request by `AiClientService`; a
+  denied request throws without touching the network. Cloud requires **both** the
+  general outbound-privacy consent **and** a per-destination confirmation, and is
+  **blocked entirely on the web build**. Self-hosted requires the explicit
+  `trustedInternal` opt-in; local is restricted to a verified loopback address.
+- **Key storage.** The optional AI API key is held in the OS keychain
+  (`SecretStore`), keyed on the normalised base URL — never in plain config.
+- **System guardrail.** Requests carry a system guardrail prompt and send only
+  the caller-supplied field/context (e.g. one image for alt-text, one finding for
+  a suggestion), not the whole deck.
+- A stricter privacy projection, `PrivacyProjection.forExternalProcessing`
+  (which ignores per-slide disposition and redacts everything the scanner finds),
+  exists in the privacy layer as a reusable primitive for external hand-off.
 
-### Memory Protection
-- Images are loaded with memory limits to prevent out-of-memory issues  
-- Assets are cached safely without exposing sensitive data
-- Temporary files are managed securely and cleared appropriately
+## 8. Privacy protection (OciWacht)
 
-## Third-Party Dependencies Security
+`lib/services/privacy/` implements the privacy scanner and the redaction/audience
+model.
 
-All dependencies undergo:
+- **Rule families.** Contact data (`email`, `phone`, `address`/`postcode`,
+  `name`), financial (`iban`, checksum-validated), Dutch `bsn` (11-proof +
+  context), secrets (vendor tokens, private keys, JWTs, plaintext passwords),
+  ~30 EU national identifiers, GDPR Art. 9 special-category keywords, and
+  structural leaks (user paths, tokens-in-URLs, `mailto:`/`data:` URIs).
+- **Deliberately non-NER names.** Name detection only fires behind a
+  salutation/label (`dhr.`/`mevr.`/`naam:`) and stays a *possible* finding — a
+  bare capitalised word is intentionally not flagged.
+- **False-positive engineering.** Checksums, placeholder/allowlist registries,
+  own-identity suppression, and masked samples in findings (never the raw value).
+- **Redaction as a value transform.** `PrivacyProjection` replaces sensitive
+  content with a **fixed-width** block token (not the original length, to prevent
+  reconstruction) *before* the deck reaches any surface; manual `[[…]]` markers
+  always redact.
+- **Type-enforced boundary.** Only `PrivacyProjection` can construct an
+  `AudienceDeck` (private constructor). A `check_conventions` gate
+  (`audienceBoundary`) fails the build if any receiving/export surface accepts a
+  raw `Deck`/`List<Slide>` instead of an `AudienceDeck` — the privacy boundary is
+  enforced at compile time, not by convention.
 
-1. **License Compliance**: All packages must use recognized open-source licenses (MIT, BSD, Apache2, etc.)
-2. **Vulnerability Scanning**: Regular checks for known vulnerabilities in dependencies 
-3. **Security Review**: Critical components are reviewed for security implications
-4. **Bundled Assets**: JavaScript and other bundled assets have integrity verification
+## 9. Classification, integrity & secure storage
 
-## Compliance and Standards
+- **TLP classification gate.** `ClassificationEnforcementPolicy.evaluate`
+  (`lib/services/classification_enforcement_policy.dart`) is a fail-closed export
+  gate with a release ceiling, a required floor, and an optional
+  "block unclassified" rule; it runs on `ExportService.export`.
+- **Classification watermark.** When enabled, the TLP level is stamped onto
+  rasterized PDF/PPTX output (`SlideRasterizer`) and rendered as a banner in HTML
+  export.
+- **Document integrity seal.** `lib/services/document_integrity.dart` computes a
+  **SHA-512** seal over a deck's canonical Markdown content; `verify()` reports
+  `intact` / `changed` (tamper-evidence, not tamper-proofing), and
+  `verifyRedactedDerivative()` reconciles a redacted export against its sealed
+  source via the redaction manifest so a legitimate redaction is not a false
+  alarm. An optional `DocumentSignature` is folded into the seal. Related
+  audit-value tooling exists for the pentest module: RFC 3161 trusted timestamps
+  (`rfc3161_timestamp.dart`), evidence hashing (`evidence_hash_service.dart`),
+  and an audit dossier (`audit_dossier.dart`).
+- **Encrypted packages.** `.ocideck` packages can be encrypted
+  (`lib/utils/zip_encryption.dart`, wired into `FileService`); an encrypted
+  package cannot be opened without its password.
+- **Atomic writes.** All persistence uses `writeStringAtomic`/`writeBytesAtomic`
+  (`lib/utils/atomic_file.dart`) — write-to-temp-then-rename — so a crash never
+  truncates a file. A `check_conventions` ratchet forbids raw
+  `writeAsString`/`writeAsBytes` anywhere else.
+- **Secret storage.** WebDAV/Nextcloud passwords, the AI API key, and the git
+  personal-access token live in the OS keychain via `flutter_secure_storage`
+  (`lib/services/secret_store.dart`), keyed per server/account; only the secret
+  goes there — URLs and usernames stay in the prefs domain.
+- **Recovery snapshots** are written atomically to a per-user app-support
+  directory, are **not** encrypted (they inherit OS user-account file
+  protections), and are pruned after 7 days.
 
-OciDeck aligns with the following security standards:
+## 10. Trusted-internal opt-in
 
-- **EU Cyber Resilience Act (CRA)**: Provides SBOM documentation in required formats 
-- **GDPR**: Data protection through minimal data collection and privacy controls
-- **ISO/IEC 27001**: Risk management principles in design
+WebDAV/Nextcloud, git, and self-hosted AI each expose an explicit
+`trustedInternal` flag. Only when the user sets it does
+`NetGuard.safeResolveTrusted(host, allowPrivate: true)` relax the private-range
+block (still resolving and pinning), and only then is plain `http` accepted for
+that user-configured host (so a token isn't sent in the clear on a TLS-less
+internal box). Deck-supplied URLs never reach this relaxed path.
 
-## Threat Model
+## 11. Offline reference data (MIAUW pentest module)
 
-### Assumptions
-- User's machine is not compromised by malware (assumes trusted environment)
-- Network connections are secure, but not inherently trusted
-- External files from untrusted sources are carefully reviewed before use
+The opt-in "Informatieveiligheid" (pentest reporting) module keeps all reference
+data local:
 
-### Potential Attack Vectors
-1. **Malicious File Import**: Files with embedded malicious code or data
-2. **Network-based Attacks**: Attempts to exploit network components  
-3. **Social Engineering**: Tricks targeting user behavior (e.g., phishing links)
-4. **Insider Threats**: Malicious actions by users with access to their own files
+- **Offline CWE catalog.** A curated in-repo floor plus the full MITRE CWE list
+  bundled as an asset (`assets/cwe/cwe_full.json`, generated offline by
+  `tool/build_cwe_catalog.dart`) — no runtime network; entries link back to
+  cwe.mitre.org.
+- **Local CVE database (desktop).** Built into the app-support directory from a
+  GitHub bulk-release archive via an SSRF-hardened transport that re-resolves and
+  re-pins the socket on every redirect hop (max 5, https-only). Live CVE lookups
+  use the 2 MiB-capped `PinnedCveTransport`.
 
-### Mitigations 
-- All file imports are scanned through security gates
-- Network requests are strictly controlled and validated
-- Input validation prevents injection attacks
-- Privacy scanning helps detect sensitive information exposure
+## Compliance & standards
 
-## Future Security Enhancements
+- **EU Cyber Resilience Act (CRA):** machine-readable SBOM in CycloneDX and SPDX,
+  with a staleness gate (§2).
+- **GDPR:** data minimisation (no telemetry), local-only processing, and the
+  OciWacht scanner/redaction model (§8).
+- **ISO/IEC 27001:** risk-management thinking in the design; defence-in-depth and
+  fail-closed defaults.
 
-Planned improvements include:
-1. Enhanced encryption for package exports (`.ocideck` files)
-2. More granular privacy controls in export settings  
-3. Advanced threat detection capabilities
-4. Additional security testing and verification procedures
+## Threat model
+
+**Assumptions.** The user's machine is trusted (not malware-compromised);
+networks are usable but not trusted; files from third parties are untrusted.
+
+**Primary vectors & mitigations.**
+- *Malicious deck / asset:* structural validation (§6), asset-path containment
+  (§4), HTML-export sanitization (§5), magic-byte image checks (§6).
+- *Network / SSRF:* NetGuard classification, resolve-then-pin, no-redirect,
+  byte caps (§3); trusted-internal is opt-in only (§10).
+- *Data exfiltration via AI:* fail-closed egress gate, dual cloud consent,
+  web block (§7).
+- *Tampering with a finalised report:* SHA-512 document seal (§9).
+- *Supply-chain drift:* hashed+CVE-checked bundles, SBOM staleness gate, license
+  and pinned-action gates (§2).
+
+## Roadmap
+
+Planned hardening includes more granular privacy controls in export settings and
+continued expansion of the offline reference data. (Encrypted package export,
+previously listed here as future work, has shipped — see §9.)

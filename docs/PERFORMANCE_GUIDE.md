@@ -1,192 +1,146 @@
 # OciDeck — Performance Guide
 
-This document outlines performance considerations, optimization strategies, and best practices for using and developing with OciDeck.
-
-## Overview
-
-OciDeck is designed to handle presentations efficiently while maintaining responsive user experience. Understanding the performance characteristics helps users optimize their workflows and developers create efficient extensions.
+This document describes OciDeck's performance characteristics using the **actual
+limits and sizes enforced in the codebase** (with `file:line` citations), plus a
+few measured figures. Where a number is a hard cap in code, it is authoritative;
+where it is a measured size or timing, it is labelled as such. OciDeck ships no
+formal timing/benchmark suite, so there are deliberately no invented latency
+budgets here.
 
 ## Memory Management
 
-### Image Handling
-- Images are decoded with memory limits to prevent out-of-memory errors
-- Large images are capped at a maximum resolution for preview purposes  
-- Animated GIF/WebP support with frame rate limiting
-- Capped memory usage for image processing operations
+### Image handling
+Images are the dominant memory cost, so decoding is bounded up front:
 
-### Asset Storage
-- Project assets are stored in dedicated folders with organized structure
-- Assets outside project directories cannot be referenced (security feature)
-- Memory-limited caching strategy for web builds
+| What | Limit | Source |
+|---|---|---|
+| Max image decode dimension (per axis) | **4096 px** | `lib/utils/image_limits.dart:16` (`kMaxImageDecodeDimension`) |
+| Max in-memory image bytes | **64 MiB** | `lib/services/image_service.dart:40` |
+| Max media (video/audio) bytes | **1 GiB** | `lib/services/image_service.dart:41` |
+| Luminance sampling decode | **48 × 48 px** | `lib/utils/image_luminance.dart:54` |
+| Carousel thumbnail / preview / full decode | `cacheWidth` **360 / 720 / 1000** | `image_carousel_picker_grid.dart`, `..._preview.dart` |
 
-## Rendering Performance
+A decode allocates roughly `width × height × 4` bytes, so the 4096 px cap and the
+64 MiB byte ceiling are two views of the same worst case (4096² × 4 ≈ 64 MiB).
+Keeping source images near their on-screen size is the single most effective
+optimisation.
 
-### Slide Preview and Presentation
-- Slides render as Flutter widgets for preview and presentation
-- Mermaid diagrams rendered to inline SVG via shared WebView
-- Charts use `fl_chart` library optimized for performance  
-- Video playback through shared `_MediaPlaybackHost`
+### Asset storage
+- Project assets live in dedicated subfolders (`images/`, `data/`, `logos/`,
+  `themes/`); assets outside the project directory are refused on the
+  render/present/export paths (containment, not just convention).
+- On the web build, images are held in an in-memory store (`mem:` scheme,
+  `lib/services/web_asset_store.dart`) — so large decks consume browser tab
+  memory rather than disk.
 
-### Export Performance
-- PDF/PPTX exports are rasterized to images (SlideRasterizer)
-- HTML export pre-renders charts to inline SVG in Dart
-- Export process is optimized for memory usage and speed
+## Rendering
 
-## Large Presentation Handling
+- Slides render as native Flutter widgets for preview and presentation.
+- Charts use the `fl_chart` library; the categorical palette is **10 colours**
+  and cycles (`index % 10`) beyond that (`lib/models/chart.dart:10`), and legend
+  tiles lay out in **≤ 6 columns × 1–3 rows** (`marp_html_service_charts.dart:121`).
+- Mermaid diagrams render to sanitised inline SVG via a shared WebView.
+- Video plays through a shared media host so only one heavy player is live.
 
-### Slide Limits
-- While OciDeck can technically handle large presentations, performance may degrade with:
-  - Over 100 slides
-  - Complex chart visualizations (10+ data series)
-  - High-resolution media assets
-  - Many interactive elements (questions, timelines)
+## Export
 
-### Optimization Recommendations
-- Break large presentations into smaller decks when possible
-- Use image compression for high-resolution photos  
-- Optimize chart complexity (fewer series, simpler visuals)
-- Reduce the number of video segments in timeline slides
+- PDF/PPTX exports rasterize each slide to a PNG at a default **1920 × 1080**
+  (16:9) target (`lib/services/slide_rasterizer.dart:37,48`); rasterization cost
+  scales with slide count and per-slide complexity.
+- HTML export pre-renders charts to inline SVG in Dart and inlines the vendored
+  JS/CSS, producing a self-contained file (see measured bundle sizes below).
 
-## Export Performance Considerations
+## Network limits
 
-### PDF/PPTX Exports
-- Rasterization process impacts export time for complex slides
-- Chart rendering affects performance due to SVG generation
-- Large presentations may take longer to process and render  
+OciDeck makes no network calls except explicit, user-initiated ones, and each is
+capped. `NetGuard` itself is SSRF/address classification only; the byte caps and
+timeouts live at the call sites:
 
-### HTML Exports  
-- Self-contained exports with embedded assets
-- JavaScript libraries are bundled but optimized (minified versions)
-- Performance impact from chart rendering in browser
+| Operation | Cap / timeout | Source |
+|---|---|---|
+| Deck markdown fetch/open | **32 MiB** | `lib/services/file_service.dart:731` |
+| Package (`.ocideck`/zip) | **512 MiB** | `lib/services/file_service.dart:732` |
+| Style profile / logo | **16 MiB / 8 MiB** | `lib/services/file_service.dart:742` |
+| CVE search fetch | **2 MiB** | `lib/services/cve_transport_io.dart:17` |
+| Default fetch timeout | **30 s** | `lib/services/parts/file_service_net.dart:63` |
+| Proxy/fallback timeout | **120 s** | `lib/services/parts/file_service_net.dart:49` |
 
-## System Resource Usage
+## Large presentations & directory scans
 
-### CPU Usage
-- Background processing for asset handling and privacy scanning
-- Real-time video playback during preview/presentation
-- Memory-intensive operations: image decoding, chart generation
+There is no hard slide-count limit, but responsiveness degrades with many
+high-resolution media assets or complex charts. Directory scanning (used by the
+deck browser and image-dedup tooling) is bounded so a pathological tree can't
+hang the app:
 
-### Memory Usage  
-- Preview and presentation consume more memory than editor mode
-- Large media files require substantial RAM allocation
-- Web builds have memory limitations due to browser constraints
+| Scan | Ceiling | Source |
+|---|---|---|
+| Image-reference scan | **20 000** files, depth **32** | `lib/services/image_reference_service.dart:24,28` |
+| Deck listing | **5 000** files, depth **32** | `lib/services/file_service.dart:271` |
+| Content search | **20 000** files, depth **8** | `lib/services/file_service.dart:376` |
 
-## Development Performance Guidelines
+**Optimisation tips:** compress high-resolution photos before import; keep chart
+series modest (the palette cycles after 10); split very large decks; and keep
+project folders reasonably shallow.
 
-### For Developers
-1. **Code Size Limits**: Methods should not exceed 150 lines (check_method_length)
-2. **Memory Efficiency**: Avoid unnecessary object creation during rendering loops  
-3. **Asynchronous Operations**: Long-running tasks use proper async patterns
-4. **Caching Strategies**: Use LRU cache for frequently accessed data
-5. **Layer Separation**: Services should not import UI layers directly
+## Autosave & recovery
 
-### Testing Performance
-- Widget and export tests cover the performance-critical rendering/export paths
-  for correctness
-- Image memory-cap behaviour is covered by dedicated tests
-- No dedicated timing/throughput benchmarks are run in CI — profile manually
-  (Flutter DevTools) when investigating a specific slowdown
+- Autosave ticks every **25 s** (`lib/state/tabs_provider.dart:192`), writing an
+  atomic snapshot so a crash never truncates the open file.
+- Recovery snapshots are retained for **7 days** by default
+  (`lib/services/recovery_service.dart:134`), then pruned.
 
-## Best Practices for Users
+## Development ratchets (keep the codebase fast to work in)
 
-### Creating Efficient Presentations
-1. **Image Optimization**:
-   - Use appropriate image resolutions (don't use 4K photos at 50% scale)
-   - Compress images before import when possible
-   - Consider using thumbnail versions for slides with multiple images
+| Ratchet | Value | Source |
+|---|---|---|
+| Max file length | **1000 lines** | `tool/check_conventions.dart:67` |
+| Max method/function length | **150 lines** | `tool/check_method_length.dart:26` |
+| Coverage floor | **78 %** line coverage | `Makefile:103,107` |
 
-2. **Chart Design**:
-   - Limit data series to 5-10 maximum for readability
-   - Use simpler chart types where complex ones aren't necessary  
-   - Minimize the number of charts on each slide
+## Measured figures
 
-3. **Media Management**:
-   - Use shorter video segments rather than long clips
-   - Consider using lower resolution videos when full quality isn't needed
-   - Implement proper trimming for video across slides
+These are measured on the current tree (not enforced limits), to set
+expectations for build size and test speed.
 
-4. **Slide Organization**:
-   - Group similar content in sections to improve navigation  
-   - Avoid excessive animations or complex transitions
-   - Keep slide text concise and focused
+### Bundled asset sizes
+| Asset group | Size |
+|---|---|
+| `assets/` total | **10 MB** |
+| Vendored web-export JS/CSS (`assets/web_export/`) | **5.4 MB** |
+| — `mermaid.min.js` | 3.2 MB |
+| — `tex-svg.js` (MathJax) | 2.0 MB |
+| — `highlight.min.js` / `marked.min.js` / `purify.min.js` | 127 KB / 43 KB / 28 KB |
+| Bundled fonts (`assets/fonts/`) | **3.1 MB** |
+| Offline CWE catalog (`assets/cwe/cwe_full.json`) | ~234 KB |
 
-### Performance Monitoring
-- Monitor memory usage through system tools during large operations
-- Consider upgrading hardware if consistently hitting resource limits
-- Use crash recovery features for long editing sessions
+Mermaid and MathJax dominate the web/HTML-export payload; they are only pulled in
+where a deck actually uses diagrams or math.
 
-## Benchmarking Information
+### Codebase & test suite
+| Item | Value |
+|---|---|
+| `lib/` Dart files / lines | ~484 files, ~177 000 lines |
+| Test files | ~316 |
+| `test(` / `testWidgets(` cases | ~2 140 / ~696 |
 
-### Typical Performance Metrics
+### Measured timing
+A single small test (`flutter test test/tlp_test.dart`, 15 cases) completes in
+**~4.7 s** wall-clock — dominated by the Flutter test harness warm-up, not the
+tests themselves. There are **no** automated wall-clock or throughput benchmarks
+in CI; profile a specific slowdown with Flutter DevTools rather than relying on
+fixed budgets.
 
-The figures below are **rough indicative ranges** to set expectations, not
-measured benchmarks — actual timings depend heavily on hardware, slide content,
-and platform (desktop vs web).
+## Best practices for users
 
-| Operation | Time Range | Notes |
-|-----------|------------|-------|
-| Slide Preview Load | < 100ms | For simple slides |
-| Complex Chart Render | 50-300ms | Varies by data complexity |
-| PDF Export | 2-30 seconds | Depends on slide count and complexity |
-| PPTX Export | 3-60 seconds | Similar to PDF but with different overhead |
-| HTML Export | 1-10 seconds | Usually faster than other formats |
+- **Images:** use appropriate resolutions (don't drop a 6000 px photo onto a
+  1920 px slide); the app will downscale to 4096 px max on decode regardless.
+- **Charts:** keep series counts modest — the palette repeats after 10.
+- **Media:** prefer shorter, lower-resolution clips; the 1 GiB media cap is a
+  ceiling, not a target.
+- **Structure:** group content into sections; split very large decks.
 
-### Performance Testing
-OciDeck does not ship a formal timing/benchmark suite. Performance is guarded
-indirectly: the widget/export tests exercise the rendering and export paths for
-correctness (so a regression that breaks them is caught), and behaviours such as
-the image memory caps have dedicated tests. There are no automated wall-clock or
-throughput benchmarks in CI, so the ranges above should be treated as guidance
-rather than enforced budgets.
+## Compatibility notes
 
-## Known Limitations and Workarounds
-
-### Browser Version Considerations
-- Web builds have memory constraints compared to desktop versions
-- Performance is limited by browser capabilities
-- Large presentations may cause browser instability or timeouts
-
-### Desktop Optimization
-- Desktop versions can utilize system resources more effectively  
-- Caching strategies are more robust on local filesystems
-- Better handling of large media assets
-
-## Future Improvements
-
-### Planned Optimizations
-1. **Lazy Loading**: Slides will be loaded only when needed during presentation
-2. **Advanced Caching**: More sophisticated memory management for asset caching
-3. **Parallel Processing**: Multi-threaded operations where possible  
-4. **Memory Profiling Tools**: Built-in tools to help identify performance bottlenecks
-
-## Troubleshooting Performance Issues
-
-### Common Symptoms and Solutions
-1. **Slow Preview/Rendering**:
-   - Check if slide has complex charts or animations
-   - Reduce image resolution for large slides  
-
-2. **High Memory Usage**:
-   - Close unnecessary tabs  
-   - Break large presentations into smaller decks
-   - Clear temporary files from system
-
-3. **Export Time Too Long**: 
-   - Simplify chart complexity in presentation
-   - Remove excessive media elements
-   - Export to PDF/PPTX individually if needed  
-
-### Diagnostic Tools
-- Built-in performance monitoring (coming soon)
-- Memory usage indicators during operations  
-- Speed profiling for rendering tasks
-
-## Compatibility Notes
-
-The performance characteristics may vary based on:
-- Hardware specifications (CPU, RAM, storage type)
-- Operating system optimizations 
-- Browser version and capabilities (web builds only) 
-- Network conditions (for remote content or services)
-
-This guide provides the baseline understanding of OciDeck's performance characteristics to help optimize both user experience and developer efficiency.
+Actual timings vary with hardware (CPU, RAM, storage), OS, and — on the web —
+browser and available tab memory. The web build is more memory-constrained than
+desktop and has no native filesystem access.

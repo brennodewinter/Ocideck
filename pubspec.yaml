@@ -1,7 +1,7 @@
 name: ocideck
 description: "Marp Presentation Builder for Desktop and Web"
 publish_to: 'none'
-version: 1.0.0+1
+version: 0.2.0+1
 
 environment:
   sdk: ^3.12.0

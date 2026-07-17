@@ -236,6 +236,7 @@ than a formal mock framework — see the `dev_dependencies` in `pubspec.yaml`.
 
 ## Compatibility
 
-OciDeck is at version 1.0.0. These interfaces are internal and may change between
-releases; the `.md`/Marp on-disk format is the stable contract and is documented
-in [`docs/FILE_FORMAT.md`](FILE_FORMAT.md).
+OciDeck is pre-release (currently 0.2.0) and has no formal versioning scheme yet.
+These interfaces are internal and change freely between builds; the `.md`/Marp
+on-disk format is the stable contract and is documented in
+[`docs/FILE_FORMAT.md`](FILE_FORMAT.md).
