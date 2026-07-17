@@ -1,11 +1,13 @@
 part of 'tabs_provider.dart';
 
-/// Het open-pad van de git-opslag (§9.2). Apart bestand omdat `tabs_provider`
-/// tegen de regelratchet aan zit; de extensie zit in dezelfde library, dus de
-/// gedeelde security-poort blijft bereikbaar.
+/// Het open- én opslaan-pad van de git-opslag (§9.1–9.2). Apart bestand omdat
+/// `tabs_provider` tegen de regelratchet aan zit; de extensie zit in dezelfde
+/// library, dus de gedeelde security-poort blijft bereikbaar.
 ///
-/// Read-only. Terugschrijven (commit + push) komt in Fase 2, samen met de
-/// DeckMirror en de SyncEngine.
+/// Opslaan schrijft nu rechtstreeks naar de forge (online). De offline-wachtrij
+/// (DeckMirror + Outbox + SyncEngine) komt in een volgende stap; daarom valt een
+/// netwerkfout hier nog gewoon als [GitSaveStatus.failed] terug, in plaats van
+/// stil in een wachtrij te belanden.
 extension TabsNotifierGit on TabsNotifier {
   /// Standaardnaam van het markdown-bestand binnen een deckmap (§6).
   static const String deckFileName = 'deck.md';
@@ -136,4 +138,133 @@ extension TabsNotifierGit on TabsNotifier {
     }
     return memFor.isEmpty ? deck : deck.copyWith(slides: slides);
   }
+
+  /// Schrijf het deck van het huidige tabblad terug naar [deckDir] op [branch]
+  /// als één commit (§9.1). Publiceert net zo goed een nieuw deck: dan is er nog
+  /// geen [GitOrigin] en wordt [GitForge.headSha] de basis.
+  ///
+  /// De afbeeldingen gaan naar de gedeelde pool en `deck.md` verwijst ernaar
+  /// (zie [buildDeckRepoFiles]) — de exacte omkering van [openDeckFromGit]. Bij
+  /// succes draagt het tabblad de nieuwe commit als [GitOrigin.baseSha], zodat de
+  /// volgende opslag een non-fast-forward kan detecteren.
+  ///
+  /// Gooit [GitForgeException] bij een onbruikbare [deckDir] (programmeerfout van
+  /// de aanroeper). Netwerk-, auth- en conflict-uitkomsten komen als
+  /// [GitSaveResult] terug — die hoort de UI te vertalen naar een melding.
+  Future<GitSaveResult> saveToGit(
+    GitForge forge, {
+    required GitRepoConfig config,
+    required String deckDir,
+    required String branch,
+    required String message,
+  }) async {
+    if (GitRepoLayout.deckNameOf(deckDir) == null) {
+      throw const GitForgeException(
+        GitForgeError.malformed,
+        'Pad is geen deckmap volgens de repo-layout',
+      );
+    }
+    final deck = currentState.current?.deckNotifier.currentState.deck;
+    if (deck == null) {
+      return const GitSaveResult(status: GitSaveStatus.failed);
+    }
+
+    // Terugschrijven naar de eigen herkomst gebruikt de basis waarop dit werk is
+    // gelezen; een nieuw of verplaatst deck valt terug op de huidige branchkop.
+    final origin = currentState.current?.gitOrigin;
+    final String baseSha;
+    if (origin != null &&
+        origin.matchesRepo(config) &&
+        origin.branch == branch &&
+        origin.deckDir == deckDir) {
+      baseSha = origin.baseSha;
+    } else {
+      baseSha = await forge.headSha(branch);
+    }
+
+    // Een uit-git-geopend deck houdt zijn afbeeldingen als mem: op élk platform
+    // (zie [_withRepoAssets]); [ImageService.readSlideImageBytes] leest mem:
+    // alleen op web. Dus mem: eerst zelf, en pas daarna het bestandspad-pad.
+    final image = ImageService();
+    final files = await buildDeckRepoFiles(
+      deck,
+      md: _md,
+      pool: AssetPool(forge: forge, branch: branch),
+      deckDir: deckDir,
+      resolveBytes: (path) async => WebAssetStore.isMemPath(path)
+          ? WebAssetStore.bytesFor(path)
+          : image.readSlideImageBytes(path, projectPath: deck.projectPath),
+    );
+
+    try {
+      final result = await forge.commitFiles(
+        branch: branch,
+        message: message,
+        upserts: files.upserts,
+        deletes: const [],
+        baseSha: baseSha,
+      );
+      currentState.current?.gitOrigin = GitOrigin(
+        config: config,
+        branch: branch,
+        deckDir: deckDir,
+        baseSha: result.sha,
+      );
+      refreshTabs();
+      return GitSaveResult(
+        status: GitSaveStatus.committed,
+        sha: result.sha,
+        warnings: files.warnings,
+      );
+    } on GitConflictException catch (e) {
+      // Geen fout maar een uitkomst: het werk is niet weg, het kan alleen niet
+      // zó landen. In Fase 2-vervolg wordt dit mergen; nu is het herladen.
+      return GitSaveResult(
+        status: GitSaveStatus.conflict,
+        message: e.message,
+        warnings: files.warnings,
+      );
+    } on GitForgeException catch (e) {
+      logWarning('saveToGit: $deckDir niet opgeslagen', e);
+      return GitSaveResult(
+        status: GitSaveStatus.failed,
+        message: e.message,
+        warnings: files.warnings,
+      );
+    }
+  }
+}
+
+/// Hoe een [TabsNotifierGit.saveToGit] afliep.
+enum GitSaveStatus {
+  /// Gecommit; [GitSaveResult.sha] is de nieuwe basis.
+  committed,
+
+  /// Iemand anders heeft de branch verzet sinds de basis. Herladen (of, later,
+  /// mergen).
+  conflict,
+
+  /// Netwerk, auth of forge deed het niet — of er was geen deck om op te slaan.
+  failed,
+}
+
+class GitSaveResult {
+  final GitSaveStatus status;
+
+  /// De nieuwe commit-sha bij [GitSaveStatus.committed].
+  final String? sha;
+
+  /// Uitlegbare tekst bij [GitSaveStatus.conflict] en [GitSaveStatus.failed].
+  final String? message;
+
+  /// Mediaverwijzingen die niet mee-gecommit zijn (video/audio, onleesbare
+  /// afbeeldingen). Het deck sloeg wel op; de UI meldt wat er niet meeging.
+  final List<String> warnings;
+
+  const GitSaveResult({
+    required this.status,
+    this.sha,
+    this.message,
+    this.warnings = const [],
+  });
 }
