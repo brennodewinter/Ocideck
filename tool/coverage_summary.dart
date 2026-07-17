@@ -39,6 +39,11 @@ const Set<String> uncoveredBaseline = {
   'lib/platform/presenter_fullscreen_web.dart',
   'lib/services/cve_transport_factory.dart',
   'lib/services/cve_transport_web.dart',
+  // PLATFORM: the git draft store's conditional-export facade. Both halves
+  // (FileDraftStore, PrefsDraftStore) are exercised by the DeckMirror contract
+  // in test/git_deck_mirror_contract_test.dart; only this one-line barrel has no
+  // statement for a line counter to reach.
+  'lib/services/git/draft_store_factory.dart',
   // PLATFORM: the local CVE database's conditional-export facade + its web half
   // (the feature is desktop-only; the io half is exercised by the ingest tests).
   'lib/services/cve/local_cve_database.dart',
