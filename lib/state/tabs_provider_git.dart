@@ -78,6 +78,55 @@ extension TabsNotifierGit on TabsNotifier {
     return OpenResult.opened;
   }
 
+  /// Open release-versie [tag] van het deck in [deckDir] **read-only** (§9.4).
+  /// Leest `deck.md` op de tag-ref, door dezelfde import-poort (P5) als elk
+  /// ander open, en zet géén [GitOrigin]: een uitgebrachte versie is een
+  /// momentopname om te bekijken, geen doel om overheen op te slaan. Wie hem wil
+  /// herzien takt er een nieuwe ronde vanaf (dat is de gewone save-flow).
+  Future<OpenResult> openVersionFromGit(
+    GitForge forge, {
+    required GitRepoConfig config,
+    required String deckDir,
+    required String tag,
+  }) async {
+    final deckName = GitRepoLayout.deckNameOf(deckDir);
+    if (deckName == null) {
+      throw const GitForgeException(
+        GitForgeError.malformed,
+        'Pad is geen deckmap volgens de repo-layout',
+      );
+    }
+    final bytes = await forge.readBlob(tag, '$deckDir/$deckFileName');
+    if (bytes.length > FileService.maxDeckMarkdownBytes) {
+      return OpenResult.unreadable;
+    }
+    final String raw;
+    try {
+      raw = utf8.decode(bytes);
+    } on FormatException catch (e) {
+      logWarning('openVersionFromGit: deck.md is geen geldige UTF-8', e);
+      return OpenResult.unreadable;
+    }
+
+    final version = GitRepoLayout.versionOfTag(tag, deckName) ?? tag;
+    final label = '${config.slug} · $deckName · $version';
+    final gated = _gateAndParseContent(raw, sourceName: label);
+    final parsed = gated.deck;
+    if (parsed == null) return gated.failure;
+    if (!mounted) return OpenResult.unreadable;
+
+    final deck = await _withRepoAssets(
+      parsed,
+      AssetPool(forge: forge, branch: tag),
+      sourceName: label,
+    );
+    if (!mounted) return OpenResult.unreadable;
+
+    _placeDeckInTab(deck, remoteOrigin: label);
+    refreshTabs();
+    return OpenResult.opened;
+  }
+
   /// Haal de `repo:`-afbeeldingen van [deck] uit de pool en geef het deck terug
   /// met de slidepaden herschreven naar hun `mem:`-pad (§9.2).
   ///

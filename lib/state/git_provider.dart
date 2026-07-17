@@ -117,3 +117,21 @@ final gitDeckListProvider = FutureProvider.autoDispose
       }
       return forge.listDecks(branch);
     });
+
+/// De release-tags van één deck (§9.4), nieuwste bovenaan. `autoDispose` zodat
+/// een gesloten versiekiezer de cache niet vasthoudt.
+final gitDeckTagsProvider = FutureProvider.autoDispose
+    .family<List<TagRef>, String>((ref, deckName) async {
+      final forge = await ref.watch(gitForgeProvider.future);
+      if (forge == null) {
+        throw const GitForgeException(
+          GitForgeError.config,
+          'Geen git-repository ingesteld',
+        );
+      }
+      final mine = [
+        for (final tag in await forge.listTags())
+          if (GitRepoLayout.isReleaseTagFor(tag.name, deckName)) tag,
+      ]..sort((a, b) => b.name.compareTo(a.name));
+      return mine;
+    });

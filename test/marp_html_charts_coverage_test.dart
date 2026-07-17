@@ -282,26 +282,29 @@ void main() {
       expect(html, contains('>8.5</text>'));
     });
 
-    test('horizontal stacked bar draws segments with category + value labels', () {
-      final html = _render(
-        const ChartSpec(
-          type: ChartType.horizontalStackedBar,
-          x: ['Alpha', 'Beta'],
-          series: [
-            ChartSeries(name: 'A', data: [6, 8]),
-            ChartSeries(name: 'B', data: [4, 3]),
-          ],
-        ),
-      );
-      expect(html, contains('<rect'));
-      // Category labels down the left, and a wide segment prints its value.
-      expect(html, contains('Alpha'));
-      expect(html, contains('Beta'));
-      expect(html, contains('>6</text>'));
-      // Both series appear in the legend.
-      expect(html, contains('>A</text>'));
-      expect(html, contains('>B</text>'));
-    });
+    test(
+      'horizontal stacked bar draws segments with category + value labels',
+      () {
+        final html = _render(
+          const ChartSpec(
+            type: ChartType.horizontalStackedBar,
+            x: ['Alpha', 'Beta'],
+            series: [
+              ChartSeries(name: 'A', data: [6, 8]),
+              ChartSeries(name: 'B', data: [4, 3]),
+            ],
+          ),
+        );
+        expect(html, contains('<rect'));
+        // Category labels down the left, and a wide segment prints its value.
+        expect(html, contains('Alpha'));
+        expect(html, contains('Beta'));
+        expect(html, contains('>6</text>'));
+        // Both series appear in the legend.
+        expect(html, contains('>A</text>'));
+        expect(html, contains('>B</text>'));
+      },
+    );
 
     test('horizontal stacked bar scales its axis to the widest total', () {
       // Beta's stacked total is 8 + 4 = 12, larger than any single value, so the

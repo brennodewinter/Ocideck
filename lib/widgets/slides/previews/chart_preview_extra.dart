@@ -416,7 +416,9 @@ extension _ChartPreviewExtra on _ChartPreviewState {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: w * 0.006),
       child: ClipRRect(
-        borderRadius: BorderRadius.horizontal(right: Radius.circular(w * 0.004)),
+        borderRadius: BorderRadius.horizontal(
+          right: Radius.circular(w * 0.004),
+        ),
         child: Row(
           children: [
             for (var i = 0; i < segs.length; i++)

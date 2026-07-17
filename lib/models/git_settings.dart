@@ -237,6 +237,23 @@ class GitRepoLayout {
     return '$dir/$v';
   }
 
+  /// De versie uit een release-tag `decks/<naam>/vX`, of null wanneer [tag] niet
+  /// die vorm heeft of niet bij [deckName] hoort. Het omgekeerde van
+  /// [releaseTag] — voor de versiekiezer die tags als `v1.0` toont.
+  static String? versionOfTag(String tag, String deckName) {
+    final dir = deckDir(deckName);
+    if (dir == null) return null;
+    final prefix = '$dir/';
+    if (!tag.startsWith(prefix)) return null;
+    final version = tag.substring(prefix.length);
+    // Alleen als het door releaseTag heen zou komen (geen submap onder de deck).
+    return releaseTag(deckName, version) == tag ? version : null;
+  }
+
+  /// Of [tag] een release-tag voor [deckName] is (`decks/<naam>/vX`).
+  static bool isReleaseTagFor(String tag, String deckName) =>
+      versionOfTag(tag, deckName) != null;
+
   /// Naam van een werkbranch voor één bewerkingsronde: `decks/<naam>/<datum>`
   /// (D3). De branch wordt gegenereerd, niet getypt — de auteur ziet "concept"
   /// en "uitgebrachte versie", nooit een branchnaam.

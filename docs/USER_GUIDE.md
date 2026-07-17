@@ -89,7 +89,12 @@ saved version stays retrievable, which a plain folder cannot give you.
   never prompts you to install anything. Once a deck is open from git this way,
   *Git history…* in the `…` menu shows its commit timeline, with a badge on each
   commit for whether it is on the forge yet or still waiting to push.
-- **Versions and releases** are still being built. See
+- **Open an earlier version — *Versies…*.** When a deck has been released as a
+  version, *Versies…* in the `…` menu lists those versions, newest first. Pick
+  one to open it **read-only**: a snapshot of how the deck was at that release,
+  to look at — not something you can save over, so reviewing an old version can
+  never overwrite your current work. This works in the browser too. *Releasing* a
+  version (review, merge, and tagging it) is still being built; see
   [`design/GIT_STORAGE.md`](design/GIT_STORAGE.md).
 - **A repository is a trust boundary.** Everyone who can read it reads *every*
   deck in it, so use one repository per client, engagement or classification

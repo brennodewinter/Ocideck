@@ -179,6 +179,47 @@ void main() {
     test('rejects a bad deck name before it can reach a ref', () {
       expect(GitRepoLayout.releaseTag('../evil', 'v1.0'), isNull);
     });
+
+    test('versionOfTag is the exact inverse of releaseTag', () {
+      for (final v in ['v1.0', 'v2', 'v10.3.1']) {
+        final tag = GitRepoLayout.releaseTag('kwartaalcijfers', v)!;
+        expect(GitRepoLayout.versionOfTag(tag, 'kwartaalcijfers'), v);
+      }
+    });
+
+    test(
+      'versionOfTag refuses a tag that is not this deck, or not a release',
+      () {
+        final tag = GitRepoLayout.releaseTag('kwartaalcijfers', 'v1.0')!;
+        // Right shape, wrong deck.
+        expect(GitRepoLayout.versionOfTag(tag, 'jaarplan'), isNull);
+        // A branch or a nested path is not a release tag, even under the deck.
+        expect(
+          GitRepoLayout.versionOfTag(
+            'decks/kwartaalcijfers/2026-07-16',
+            'kwartaalcijfers',
+          ),
+          isNull,
+        );
+        expect(
+          GitRepoLayout.versionOfTag(
+            'decks/kwartaalcijfers/v1.0/extra',
+            'kwartaalcijfers',
+          ),
+          isNull,
+        );
+        expect(
+          GitRepoLayout.versionOfTag('random-tag', 'kwartaalcijfers'),
+          isNull,
+        );
+      },
+    );
+
+    test('isReleaseTagFor agrees with versionOfTag', () {
+      final tag = GitRepoLayout.releaseTag('kwartaalcijfers', 'v1.0')!;
+      expect(GitRepoLayout.isReleaseTagFor(tag, 'kwartaalcijfers'), isTrue);
+      expect(GitRepoLayout.isReleaseTagFor(tag, 'jaarplan'), isFalse);
+    });
   });
 
   group('GitRepoLayout work branches (D3)', () {
