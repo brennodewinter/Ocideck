@@ -427,6 +427,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
               _syncGit(context, ref);
             case 'history_git':
               _showGitHistory(context, ref);
+            case 'versions_git':
+              _showGitVersions(context, ref);
             case 'open_nextcloud':
               _openFromNextcloud(context, ref);
             case 'save_nextcloud':
@@ -505,6 +507,10 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       if (ref.read(tabsProvider).current?.gitOrigin != null &&
           ref.read(nativeGitMirrorProvider).asData?.value != null)
         _menuItem('history_git', Icons.history, l10n.d('Git-geschiedenis…')),
+      // Versies (release-tags) werken op elk plane, ook op web: het is een
+      // forge-listing. Verschijnt zodra dit deck uit git is geopend.
+      if (ref.read(tabsProvider).current?.gitOrigin != null)
+        _menuItem('versions_git', Icons.label_outline, l10n.d('Versies…')),
       if (supportsNetworkDeckSources) ...[
         _menuItem(
           'open_nextcloud',

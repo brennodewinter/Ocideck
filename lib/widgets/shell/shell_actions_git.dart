@@ -275,6 +275,107 @@ class _GitHistoryDialog extends StatelessWidget {
   }
 }
 
+/// Toon de uitgebrachte versies (release-tags) van het huidige deck en open de
+/// gekozen versie read-only (§9.4). Werkt op elk plane — het is een
+/// forge-listing.
+Future<void> _showGitVersions(BuildContext context, WidgetRef ref) async {
+  final origin = ref.read(tabsProvider).current?.gitOrigin;
+  final deckName = origin?.deckName;
+  if (origin == null || deckName == null) return;
+  final forge = await ref.read(gitForgeProvider.future);
+  if (!context.mounted) return;
+  if (forge == null) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          context.l10n.d(
+            'Stel eerst een git-repository in bij Instellingen → Git-repository.',
+          ),
+        ),
+      ),
+    );
+    return;
+  }
+  final messenger = ScaffoldMessenger.of(context);
+  final l10n = context.l10n;
+  final List<TagRef> tags;
+  try {
+    tags = await ref.read(gitDeckTagsProvider(deckName).future);
+  } on GitForgeException catch (e) {
+    messenger.showSnackBar(SnackBar(content: Text(e.message)));
+    return;
+  }
+  if (!context.mounted) return;
+
+  final chosen = await showDialog<TagRef>(
+    context: context,
+    builder: (_) => _GitVersionsDialog(deckName: deckName, tags: tags),
+  );
+  if (chosen == null || !context.mounted) return;
+  try {
+    final result = await ref
+        .read(tabsProvider.notifier)
+        .openVersionFromGit(
+          forge,
+          config: origin.config,
+          deckDir: origin.deckDir,
+          tag: chosen.name,
+        );
+    _reportOpenFailure(messenger, l10n, result);
+  } on GitForgeException catch (e) {
+    messenger.showSnackBar(SnackBar(content: Text(e.message)));
+  }
+}
+
+class _GitVersionsDialog extends StatelessWidget {
+  final String deckName;
+  final List<TagRef> tags;
+  const _GitVersionsDialog({required this.deckName, required this.tags});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return AlertDialog(
+      title: Text('${l10n.d('Versies:')} $deckName'),
+      content: SizedBox(
+        width: 460,
+        child: tags.isEmpty
+            ? Text(l10n.d('Nog geen uitgebrachte versies van dit deck.'))
+            : ListView.builder(
+                shrinkWrap: true,
+                itemCount: tags.length,
+                itemBuilder: (context, i) {
+                  final tag = tags[i];
+                  final version =
+                      GitRepoLayout.versionOfTag(tag.name, deckName) ??
+                      tag.name;
+                  final shortSha = tag.sha.length >= 7
+                      ? tag.sha.substring(0, 7)
+                      : tag.sha;
+                  return ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    dense: true,
+                    leading: const Icon(Icons.label_outline, size: 18),
+                    title: Text(version, style: const TextStyle(fontSize: 13)),
+                    subtitle: Text(
+                      shortSha,
+                      style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+                    ),
+                    onTap: () => Navigator.pop(context, tag),
+                  );
+                },
+              ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text(l10n.d('Sluiten')),
+        ),
+      ],
+    );
+  }
+}
+
 /// Maak een geldige deknaam (§6) uit een deck-titel, of een nette terugval.
 String _safeDeckName(String title) {
   final cleaned = title
