@@ -1774,6 +1774,12 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Gesynchroniseerd met git.': 'Sünkroonitud gitiga.',
+  'Nog geen verbinding — het gaat later mee.':
+      'Ühendust veel pole — läheb hiljem kaasa.',
+  'De branch is verzet; je commits staan lokaal klaar.':
+      'Haru on liikunud; su commit\'id on kohalikult valmis.',
+  'Synchroniseren mislukt.': 'Sünkroonimine ebaõnnestus.',
   'Native git gevonden:': 'Leiti natiivne git:',
   'Native git: bezig met detecteren…': 'Natiivne git: tuvastamine…',
   'Native git: niet gevonden — het REST-pad wordt gebruikt':

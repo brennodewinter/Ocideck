@@ -1806,6 +1806,12 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Gesynchroniseerd met git.': 'Синхронизирано с git.',
+  'Nog geen verbinding — het gaat later mee.':
+      'Все още няма връзка — ще се изпрати по-късно.',
+  'De branch is verzet; je commits staan lokaal klaar.':
+      'Клонът е преместен; вашите commit-и са готови локално.',
+  'Synchroniseren mislukt.': 'Синхронизацията се провали.',
   'Native git gevonden:': 'Намерен е нативен git:',
   'Native git: bezig met detecteren…': 'Нативен git: откриване…',
   'Native git: niet gevonden — het REST-pad wordt gebruikt':

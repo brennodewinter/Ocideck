@@ -19,6 +19,7 @@ import '../services/git/asset_pool.dart';
 import '../services/git/deck_mirror.dart';
 import '../services/git/deck_repo_serializer.dart';
 import '../services/git/git_forge.dart';
+import '../services/git/native_git_mirror_api.dart';
 import '../services/git/outbox.dart';
 import '../services/git/sync_engine.dart';
 import '../services/image_service.dart';
@@ -35,6 +36,7 @@ import 'editor_provider.dart';
 import 'settings_provider.dart';
 
 part 'tabs_provider_git.dart';
+part 'tabs_provider_git_native.dart';
 
 const _uuid = Uuid();
 

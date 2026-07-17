@@ -737,6 +737,12 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Gesynchroniseerd met git.': 'Sincronizado con git.',
+  'Nog geen verbinding — het gaat later mee.':
+      'Aún sin conexión — se enviará más tarde.',
+  'De branch is verzet; je commits staan lokaal klaar.':
+      'La rama se ha movido; tus commits están listos en local.',
+  'Synchroniseren mislukt.': 'La sincronización falló.',
   'Native git gevonden:': 'git nativo encontrado:',
   'Native git: bezig met detecteren…': 'git nativo: detectando…',
   'Native git: niet gevonden — het REST-pad wordt gebruikt':

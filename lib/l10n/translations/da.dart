@@ -1782,6 +1782,12 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Gesynchroniseerd met git.': 'Synkroniseret med git.',
+  'Nog geen verbinding — het gaat later mee.':
+      'Ingen forbindelse endnu — det sendes senere.',
+  'De branch is verzet; je commits staan lokaal klaar.':
+      'Grenen er flyttet; dine commits er klar lokalt.',
+  'Synchroniseren mislukt.': 'Synkronisering mislykkedes.',
   'Native git gevonden:': 'Native git fundet:',
   'Native git: bezig met detecteren…': 'Native git: registrerer…',
   'Native git: niet gevonden — het REST-pad wordt gebruikt':

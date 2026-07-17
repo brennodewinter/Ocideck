@@ -1819,6 +1819,12 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Gesynchroniseerd met git.': 'Sioncronaithe le git.',
+  'Nog geen verbinding — het gaat later mee.':
+      'Gan nasc fós — rachaidh sé leis níos déanaí.',
+  'De branch is verzet; je commits staan lokaal klaar.':
+      'Bhog an bhrainse; tá do commits réidh go logánta.',
+  'Synchroniseren mislukt.': 'Theip ar an sioncronú.',
   'Native git gevonden:': 'Aimsíodh git dúchasach:',
   'Native git: bezig met detecteren…': 'git dúchasach: á bhrath…',
   'Native git: niet gevonden — het REST-pad wordt gebruikt':

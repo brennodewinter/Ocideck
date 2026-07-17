@@ -1799,6 +1799,12 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Gesynchroniseerd met git.': 'Cum git synchronizatum.',
+  'Nog geen verbinding — het gaat later mee.':
+      'Nulla adhuc coniunctio — postea mittetur.',
+  'De branch is verzet; je commits staan lokaal klaar.':
+      'Ramus motus est; commissa tua localiter parata sunt.',
+  'Synchroniseren mislukt.': 'Synchronizatio defecit.',
   'Native git gevonden:': 'git nativum inventum:',
   'Native git: bezig met detecteren…': 'git nativum: deprehenditur…',
   'Native git: niet gevonden — het REST-pad wordt gebruikt':

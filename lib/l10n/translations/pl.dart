@@ -1796,6 +1796,12 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Gesynchroniseerd met git.': 'Zsynchronizowano z git.',
+  'Nog geen verbinding — het gaat later mee.':
+      'Brak połączenia — zostanie wysłane później.',
+  'De branch is verzet; je commits staan lokaal klaar.':
+      'Gałąź się przesunęła; twoje commity są gotowe lokalnie.',
+  'Synchroniseren mislukt.': 'Synchronizacja nie powiodła się.',
   'Native git gevonden:': 'Znaleziono natywny git:',
   'Native git: bezig met detecteren…': 'Natywny git: wykrywanie…',
   'Native git: niet gevonden — het REST-pad wordt gebruikt':

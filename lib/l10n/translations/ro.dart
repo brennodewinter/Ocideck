@@ -1802,6 +1802,12 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Gesynchroniseerd met git.': 'Sincronizat cu git.',
+  'Nog geen verbinding — het gaat later mee.':
+      'Încă fără conexiune — se va trimite mai târziu.',
+  'De branch is verzet; je commits staan lokaal klaar.':
+      'Ramura s-a mutat; commit-urile tale sunt gata local.',
+  'Synchroniseren mislukt.': 'Sincronizarea a eșuat.',
   'Native git gevonden:': 'git nativ găsit:',
   'Native git: bezig met detecteren…': 'git nativ: se detectează…',
   'Native git: niet gevonden — het REST-pad wordt gebruikt':
