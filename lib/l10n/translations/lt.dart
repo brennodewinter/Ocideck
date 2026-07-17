@@ -1791,6 +1791,21 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Deknaam': 'Rinkinio pavadinimas',
+  'Wordt de map decks/<naam> in de repository':
+      'Tampa aplanku decks/<pavadinimas> saugykloje',
+  'Alleen letters, cijfers, punt, streep en liggend streepje':
+      'Tik raidės, skaitmenys, taškas, brūkšnys ir pabraukimas',
+  'Commitboodschap': 'Commit pranešimas',
+  'Wat is er veranderd?': 'Kas pasikeitė?',
+  'Opslaan naar git': 'Įrašyti į git',
+  'Opslaan naar git…': 'Įrašyti į git…',
+  'Opgeslagen in git:': 'Įrašyta į git:',
+  'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
+      'Šaka pasislinko; iš naujo įkelkite rinkinį ir įrašykite dar kartą.',
+  'video en audio gaan (nog) niet mee naar git':
+      'vaizdas ir garsas (kol kas) nepatenka į git',
+  'Bijgewerkt met OciDeck': 'Atnaujinta su OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Pirmiausia nustatykite Git saugyklą skiltyje Nustatymai → Git saugykla.',
   'Git-repository': 'Git saugykla',

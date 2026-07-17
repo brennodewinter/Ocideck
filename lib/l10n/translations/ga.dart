@@ -1819,6 +1819,21 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Deknaam': 'Ainm an deic',
+  'Wordt de map decks/<naam> in de repository':
+      'Déantar an fillteán decks/<ainm> sa stór',
+  'Alleen letters, cijfers, punt, streep en liggend streepje':
+      'Litreacha, digití, ponc, dais agus fostríoc amháin',
+  'Commitboodschap': 'Teachtaireacht commit',
+  'Wat is er veranderd?': 'Cad a athraíodh?',
+  'Opslaan naar git': 'Sábháil chuig git',
+  'Opslaan naar git…': 'Sábháil chuig git…',
+  'Opgeslagen in git:': 'Sábháilte chuig git:',
+  'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
+      'Bhog an bhrainse; athluchtaigh an deic agus sábháil arís.',
+  'video en audio gaan (nog) niet mee naar git':
+      'ní théann fís ná fuaim go git (go fóill)',
+  'Bijgewerkt met OciDeck': 'Nuashonraithe le OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Socraigh stór Git ar dtús faoi Socruithe → Stór Git.',
   'Git-repository': 'Stór Git',

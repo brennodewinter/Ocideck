@@ -740,6 +740,21 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Deknaam': 'Nòmber di deck',
+  'Wordt de map decks/<naam> in de repository':
+      'Ta bira e karpeta decks/<nòmber> den e repository',
+  'Alleen letters, cijfers, punt, streep en liggend streepje':
+      'Solamente letternan, sifranan, punto, streek i under-streek',
+  'Commitboodschap': 'Mensahe di commit',
+  'Wat is er veranderd?': 'Kiko a kambia?',
+  'Opslaan naar git': 'Warda na git',
+  'Opslaan naar git…': 'Warda na git…',
+  'Opgeslagen in git:': 'Wardá na git:',
+  'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
+      'E branch a move; recarga e deck i warda atrobe.',
+  'video en audio gaan (nog) niet mee naar git':
+      'video i audio no ta bai (ainda) na git',
+  'Bijgewerkt met OciDeck': 'Aktualisá ku OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Konfigurá promé un repositorio Git na Konfigurashon → Repositorio Git.',
   'Git-repository': 'Repositorio Git',

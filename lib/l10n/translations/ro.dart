@@ -1802,6 +1802,21 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Deknaam': 'Nume deck',
+  'Wordt de map decks/<naam> in de repository':
+      'Devine folderul decks/<nume> în depozit',
+  'Alleen letters, cijfers, punt, streep en liggend streepje':
+      'Doar litere, cifre, punct, cratimă și liniuță de subliniere',
+  'Commitboodschap': 'Mesaj de commit',
+  'Wat is er veranderd?': 'Ce s-a schimbat?',
+  'Opslaan naar git': 'Salvează în git',
+  'Opslaan naar git…': 'Salvează în git…',
+  'Opgeslagen in git:': 'Salvat în git:',
+  'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
+      'Ramura s-a mutat; reîncarcă deck-ul și salvează din nou.',
+  'video en audio gaan (nog) niet mee naar git':
+      'videoul și audioul (încă) nu ajung în git',
+  'Bijgewerkt met OciDeck': 'Actualizat cu OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Configurați mai întâi un depozit Git în Setări → Depozit Git.',
   'Git-repository': 'Depozit Git',

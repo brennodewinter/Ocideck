@@ -737,6 +737,21 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Deknaam': 'Nombre del deck',
+  'Wordt de map decks/<naam> in de repository':
+      'Será la carpeta decks/<nombre> en el repositorio',
+  'Alleen letters, cijfers, punt, streep en liggend streepje':
+      'Solo letras, dígitos, punto, guion y guion bajo',
+  'Commitboodschap': 'Mensaje de commit',
+  'Wat is er veranderd?': '¿Qué ha cambiado?',
+  'Opslaan naar git': 'Guardar en git',
+  'Opslaan naar git…': 'Guardar en git…',
+  'Opgeslagen in git:': 'Guardado en git:',
+  'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
+      'La rama se ha movido; recarga el deck y guarda de nuevo.',
+  'video en audio gaan (nog) niet mee naar git':
+      'el vídeo y el audio (todavía) no van a git',
+  'Bijgewerkt met OciDeck': 'Actualizado con OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Configura primero un repositorio Git en Ajustes → Repositorio Git.',
   'Git-repository': 'Repositorio Git',

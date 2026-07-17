@@ -1787,6 +1787,21 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Deknaam': 'Csomag neve',
+  'Wordt de map decks/<naam> in de repository':
+      'A decks/<név> mappa lesz a tárolóban',
+  'Alleen letters, cijfers, punt, streep en liggend streepje':
+      'Csak betűk, számok, pont, kötőjel és aláhúzás',
+  'Commitboodschap': 'Commit üzenet',
+  'Wat is er veranderd?': 'Mi változott?',
+  'Opslaan naar git': 'Mentés gitbe',
+  'Opslaan naar git…': 'Mentés gitbe…',
+  'Opgeslagen in git:': 'Mentve gitbe:',
+  'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
+      'Az ág elmozdult; töltsd újra a csomagot, és ments újra.',
+  'video en audio gaan (nog) niet mee naar git':
+      'a videó és a hang (még) nem kerül a gitbe',
+  'Bijgewerkt met OciDeck': 'Frissítve az OciDeckkel',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Először állítson be egy Git-tárolót a Beállítások → Git-tároló alatt.',
   'Git-repository': 'Git-tároló',

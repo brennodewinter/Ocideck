@@ -1806,6 +1806,21 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Deknaam': 'Isem tad-deck',
+  'Wordt de map decks/<naam> in de repository':
+      'Isir il-folder decks/<isem> fir-repożitorju',
+  'Alleen letters, cijfers, punt, streep en liggend streepje':
+      'Ittri, ċifri, punt, sing u underscore biss',
+  'Commitboodschap': 'Messaġġ ta\' commit',
+  'Wat is er veranderd?': 'X\'inbidel?',
+  'Opslaan naar git': 'Ħażen f\'git',
+  'Opslaan naar git…': 'Ħażen f\'git…',
+  'Opgeslagen in git:': 'Maħżun f\'git:',
+  'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
+      'Il-branch iċċaqlaq; erġa\' għabbi d-deck u ħażen mill-ġdid.',
+  'video en audio gaan (nog) niet mee naar git':
+      'il-vidjow u l-awdjo (għadhom) ma jmorrux f\'git',
+  'Bijgewerkt met OciDeck': 'Aġġornat b\'OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'L-ewwel issettja repożitorju Git taħt Issettjar → Repożitorju Git.',
   'Git-repository': 'Repożitorju Git',
