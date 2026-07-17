@@ -36,11 +36,13 @@ int pageCountToFit(List<String> bullets, int cap) {
     }
     final size = end - i;
     if (size > c) {
-      // Groep groter dan een pagina: sluit een gevulde pagina af en verdeel de
-      // groep over zoveel pagina's als nodig.
-      if (fill > 0) pages++;
-      pages += (size - 1) ~/ c;
-      fill = size - ((size - 1) ~/ c) * c;
+      // Groep groter dan een pagina: die wordt hoe dan ook geknipt, dus er valt
+      // geen grens te bewaren. Vul dan eerst de huidige pagina af — hem hier
+      // afsluiten kost een pagina én laat hem halfleeg achter, zonder dat de
+      // groep er heler van wordt.
+      final rest = size - (c - fill);
+      pages += (rest + c - 1) ~/ c;
+      fill = rest - ((rest - 1) ~/ c) * c;
     } else if (fill + size <= c) {
       fill += size; // past nog bij de vorige groep(en) op deze pagina
     } else {
@@ -117,7 +119,7 @@ List<List<String>> spreadBulletsOverPages(
       at = start + 1; // te weinig items voor de resterende pagina's: één hier
     } else {
       at = at.clamp(lo, hi);
-      at = _snapPageToGroupHeading(bullets, at, lo, hi);
+      at = _snapPageToGroupHeading(bullets, at, lo, hi, start);
     }
     pages.add(bullets.sublist(start, at));
     start = at;
@@ -128,10 +130,24 @@ List<List<String>> spreadBulletsOverPages(
 /// Nudge a page boundary [at] onto the nearest group heading within `[lo, hi]`
 /// so the heading leads the next page instead of ending the current one. Ties
 /// favour the earlier boundary; with no heading in range the boundary is kept.
-int _snapPageToGroupHeading(List<String> bullets, int at, int lo, int hi) {
+///
+/// Never at the price of a near-empty page, though: a heading close to [start]
+/// would pull the boundary so far back that the page keeps only the handful of
+/// bullets before it, and a slide with two bullets on it is a worse answer than
+/// a heading that opens mid-page. Snaps that leave this page under half the
+/// balanced size are therefore refused.
+int _snapPageToGroupHeading(
+  List<String> bullets,
+  int at,
+  int lo,
+  int hi,
+  int start,
+) {
+  final minSize = (at - start + 1) ~/ 2;
   var best = at;
   var bestDist = 1 << 30;
   for (var i = lo; i <= hi; i++) {
+    if (i - start < minSize) continue;
     if (i < bullets.length && isGroupHeading(bullets[i])) {
       final dist = (i - at).abs();
       if (dist < bestDist) {

@@ -337,6 +337,16 @@ void main() {
         3,
       ); // 21 items in one group -> ceil(21/8)
     });
+
+    test('an oversized group fills the open page instead of costing one', () {
+      final items = <String>[
+        'los',
+        'los',
+        groupHeadingBullet('Groot'),
+        for (var i = 0; i < 8; i++) 'b',
+      ]; // 11 items: a group of nine that no page can hold
+      expect(pageCountToFit(items, 8), 2); // was 3: the open page was abandoned
+    });
   });
 
   group('paginateBulletsToFit', () {
@@ -391,6 +401,33 @@ void main() {
           reason: 'no heading stranded at the foot',
         );
       }
+      expect(pages.expand((p) => p).toList(), items);
+    });
+
+    test('a heading near the top never orphans the bullets above it', () {
+      // The reported bug: a heading at index two snapped the break onto it and
+      // peeled the first two bullets off as a near-empty slide (2/5/4).
+      final items = <String>[
+        'bullet 1',
+        'bullet 2',
+        groupHeadingBullet('Kop B'),
+        for (var i = 3; i <= 10; i++) 'bullet $i',
+      ];
+      final pages = paginateBulletsToFit(items, 8);
+      expect(pages.map((p) => p.length).toList(), [6, 5]);
+      expect(pages.expand((p) => p).toList(), items);
+    });
+
+    test('refuses a snap that would leave a single bullet behind', () {
+      // A heading at index one is within snapping range of the balanced break,
+      // but honouring it would make a one-bullet page — the split stays even.
+      final items = <String>[
+        'bullet 0',
+        groupHeadingBullet('Kop'),
+        for (var i = 1; i <= 7; i++) 'bullet $i',
+      ];
+      final pages = paginateBulletsToFit(items, 8);
+      expect(pages.map((p) => p.length).toList(), [5, 4]);
       expect(pages.expand((p) => p).toList(), items);
     });
   });
