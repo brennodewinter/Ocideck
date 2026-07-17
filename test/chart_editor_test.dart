@@ -210,6 +210,7 @@ void main() {
       ChartType.combo,
       ChartType.waterfall,
       ChartType.heatmap,
+      ChartType.horizontalStackedBar,
     ]);
     expect(specs.first.x, ['A', 'B']);
     expect(specs.first.series.single.data, [10, 20]);
