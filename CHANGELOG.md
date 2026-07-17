@@ -8,6 +8,15 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Saving to git now survives losing your connection.** If the save cannot
+  reach the forge, the deck's text is kept in a durable local working copy and
+  the deck joins a queue — you are told "saved, syncs when you're back online"
+  rather than shown an error. The queue survives closing the app. It empties on
+  the next successful save and via *"Nu synchroniseren"* in the `…` menu; a deck
+  that lands updates its tab so the next save does not trip over a stale base.
+  New images added while offline stay in memory until you save online again
+  (the same limit a saved `.md` with in-memory images already has); your text is
+  always safe.
 - **A deck can now be saved back to a git repository — "Opslaan naar git…",
   beside "Opslaan naar Nextcloud".** Saving writes the deck as one commit: the
   markdown plus its images, and the images go to the shared pool exactly as

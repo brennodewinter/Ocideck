@@ -142,6 +142,10 @@ follow in later phases.
 - `git_transport_web.dart` — Web: browser fetch with the same-origin fetch-proxy as fallback, but never for a request carrying a token.
 - `asset_pool.dart` — The shared content-addressed pool (`repo:assets/<sha256>.<ext>`): SHA-256 naming, fetch-once cache, and re-hashing of every fetched blob — a hash-named path from an untrusted forge proves nothing until checked. `refFor`/`existing` are the save side: hash bytes to a ref, skip blobs already pooled.
 - `deck_repo_serializer.dart` — `buildDeckRepoFiles`: turns a deck into its repo file set — `deck.md` bytes plus the missing image blobs, images rewritten `mem:`→`repo:`. The exact inverse of the open path's `repo:`→`mem:`; video/audio are reported, not written as broken refs.
+- `deck_mirror.dart` — `DeckMirror` interface + `DraftMirror`: the durable offline working copy a save falls back to. Text only, one draft per deck (`hasRealHistory == false`); native git history comes later.
+- `draft_store.dart` / `draft_store_factory.dart` / `draft_store_io.dart` / `draft_store_web.dart` — the mirror's storage: files on desktop (`FileDraftStore`), the browser key/value store on web (`PrefsDraftStore`), picked by conditional import.
+- `outbox.dart` — `Outbox`/`PendingCommit`: the per-deck queue of not-yet-pushed saves, in `shared_preferences` so it survives restart. Carries the intent (deckDir, branch, message, `baseSha`), never the bytes — the mirror holds those.
+- `sync_engine.dart` — `SyncEngine`: drains the outbox against the forge (`flush`/`flushDeck`), with `baseSha` conflict detection and content-based idempotency (a commit that already landed is skipped, not duplicated).
 
 ## `lib/state/` — Riverpod providers
 
@@ -155,7 +159,8 @@ follow in later phases.
 - `deck_quality_provider.dart` — Computes accessibility/quality analysis for the loaded deck.
 - `git_provider.dart` — `gitForgeProvider` (builds the adapter from the configured repo plus the token from the keychain) and `gitDeckListProvider` (the decks on a branch).
 - `editor_provider.dart` — `EditorState`/`EditorNotifier`: selected slide, editor mode, markdown buffer.
-- `tabs_provider_git.dart` — `TabsNotifierGit` extension: `openDeckFromGit` — fetch a deck from a repo, through the shared import gate, into a tab carrying a `GitOrigin`; `saveToGit` — the inverse, committing the tab's deck (with pooled images) in one commit, advancing the tab's `baseSha` and returning a `GitSaveResult` (committed / conflict / failed).
+- `tabs_provider_git.dart` — `TabsNotifierGit` extension: `openDeckFromGit` — fetch a deck from a repo, through the shared import gate, into a tab carrying a `GitOrigin`; `saveToGit` — the inverse, committing the tab's deck (with pooled images) in one commit, advancing the tab's `baseSha` (`GitSaveResult`: committed / queued / conflict / failed). On a network error, with a mirror + outbox, the text is queued instead of lost. `flushGit` drains that queue and re-bases any open tab whose deck landed.
+- `git_provider.dart` — the forge-plane providers: `gitForgeProvider` (build the adapter from config + keychain token), `draftMirrorProvider` / `outboxProvider` / `syncEngineProvider` (the offline queue), and `gitDeckListProvider` (the browser's deck list).
 - `image_contrast_provider.dart` — Computes title-slide image-contrast issues asynchronously per deck.
 - `sec_module_provider.dart` — The security-module enable/reveal state that gates the pentest features.
 - `local_cve_provider.dart` — `LocalCveNotifier`/`LocalCveState`: the local CVE database's status, build progress and cancellation, plus `localCveAvailableProvider` — which the CVE picker uses to search offline (and then deliberately *not* fall back online).
