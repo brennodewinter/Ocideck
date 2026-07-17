@@ -1783,6 +1783,21 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Deknaam': 'Setin nimi',
+  'Wordt de map decks/<naam> in de repository':
+      'Tulee kansioksi decks/<nimi> repositoriossa',
+  'Alleen letters, cijfers, punt, streep en liggend streepje':
+      'Vain kirjaimet, numerot, piste, viiva ja alaviiva',
+  'Commitboodschap': 'Commit-viesti',
+  'Wat is er veranderd?': 'Mikä muuttui?',
+  'Opslaan naar git': 'Tallenna gitiin',
+  'Opslaan naar git…': 'Tallenna gitiin…',
+  'Opgeslagen in git:': 'Tallennettu gitiin:',
+  'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
+      'Haara siirtyi; lataa setti uudelleen ja tallenna uudestaan.',
+  'video en audio gaan (nog) niet mee naar git':
+      'video ja ääni eivät (vielä) mene gitiin',
+  'Bijgewerkt met OciDeck': 'Päivitetty OciDeckillä',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Määritä ensin Git-tietovarasto kohdassa Asetukset → Git-tietovarasto.',
   'Git-repository': 'Git-tietovarasto',

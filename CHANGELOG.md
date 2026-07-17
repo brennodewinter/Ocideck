@@ -8,6 +8,17 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **A deck can now be saved back to a git repository — "Opslaan naar git…",
+  beside "Opslaan naar Nextcloud".** Saving writes the deck as one commit: the
+  markdown plus its images, and the images go to the shared pool exactly as
+  opening reads them back, so the round-trip is lossless and a picture five
+  decks share is stored once. Saving a deck that came from git offers its own
+  name and updates in place; a new deck is published by choosing a deck name
+  (it becomes `decks/<name>`). If someone else moved the branch since you opened
+  it, the save is refused as a conflict rather than overwriting their work — you
+  reload and save again. Works on the web too (git is plain https+JSON). Video
+  and audio do not go along yet; you are told when a deck has them. The offline
+  queue (save now, sync on reconnect) follows next.
 - **Images in a deck opened from git now load, and are stored once per
   repository.** A picture used by five presentations is one file in the
   repository, named after a hash of its own bytes — so adding it again cannot

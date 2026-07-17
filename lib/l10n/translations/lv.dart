@@ -1782,6 +1782,21 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Deknaam': 'Klāja nosaukums',
+  'Wordt de map decks/<naam> in de repository':
+      'Kļūst par mapi decks/<nosaukums> repozitorijā',
+  'Alleen letters, cijfers, punt, streep en liggend streepje':
+      'Tikai burti, cipari, punkts, defise un pasvītrojums',
+  'Commitboodschap': 'Commit ziņojums',
+  'Wat is er veranderd?': 'Kas mainījās?',
+  'Opslaan naar git': 'Saglabāt git',
+  'Opslaan naar git…': 'Saglabāt git…',
+  'Opgeslagen in git:': 'Saglabāts git:',
+  'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
+      'Zars ir pārvietots; pārlādē klāju un saglabā vēlreiz.',
+  'video en audio gaan (nog) niet mee naar git':
+      'video un audio (vēl) neietilpst git',
+  'Bijgewerkt met OciDeck': 'Atjaunināts ar OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Vispirms iestatiet Git repozitoriju sadaļā Iestatījumi → Git repozitorijs.',
   'Git-repository': 'Git repozitorijs',

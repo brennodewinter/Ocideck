@@ -44,6 +44,7 @@ import '../services/web_asset_store.dart';
 import '../services/quality_export_policy.dart';
 import '../services/recovery_service.dart';
 import '../services/mermaid_render_service.dart';
+import '../models/git_settings.dart';
 import '../services/git/git_forge.dart';
 import '../services/webdav_service.dart';
 import '../state/deck_provider.dart';
@@ -99,6 +100,7 @@ part 'app_shell_main_layout.dart';
 // Shell sub-widgets and helpers, split into part files for navigability.
 // These parts share this library's imports and private scope.
 part 'shell/shell_actions.dart';
+part 'shell/shell_actions_git.dart';
 part 'shell/ai_actions.dart';
 part 'shell/command_palette_actions.dart';
 part 'shell/tab_bar.dart';

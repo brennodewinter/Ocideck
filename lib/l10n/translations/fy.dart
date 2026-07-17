@@ -741,6 +741,21 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Deknaam': 'Deknamme',
+  'Wordt de map decks/<naam> in de repository':
+      'Wurdt de map decks/<namme> yn it repository',
+  'Alleen letters, cijfers, punt, streep en liggend streepje':
+      'Allinnich letters, sifers, punt, streekje en ûnderstreekje',
+  'Commitboodschap': 'Commit-boadskip',
+  'Wat is er veranderd?': 'Wat is der feroare?',
+  'Opslaan naar git': 'Bewarje nei git',
+  'Opslaan naar git…': 'Bewarje nei git…',
+  'Opgeslagen in git:': 'Bewarre nei git:',
+  'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
+      'De branch is ferpleatst; laad it deck opnij en bewarje wer.',
+  'video en audio gaan (nog) niet mee naar git':
+      'fideo en audio geane (noch) net mei nei git',
+  'Bijgewerkt met OciDeck': 'Bywurke mei OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Stel earst in git-repository yn by Ynstellingen → Git-repository.',
   'Git-repository': 'Git-repository',

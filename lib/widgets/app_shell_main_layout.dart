@@ -421,6 +421,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
               _openWithSearch(context, ref);
             case 'open_git':
               _openFromGit(context, ref);
+            case 'save_git':
+              _saveToGit(context, ref);
             case 'open_nextcloud':
               _openFromNextcloud(context, ref);
             case 'save_nextcloud':
@@ -488,6 +490,11 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       // omdat de WebDAV-client dart:io-pinning nodig heeft. Git praat https+JSON
       // dat de browser-sandbox al inperkt, dus dit werkt daar wél (§4.4).
       _menuItem('open_git', Icons.hub_outlined, l10n.d('Openen uit git…')),
+      _menuItem(
+        'save_git',
+        Icons.cloud_upload_outlined,
+        l10n.d('Opslaan naar git…'),
+      ),
       if (supportsNetworkDeckSources) ...[
         _menuItem(
           'open_nextcloud',

@@ -1787,6 +1787,21 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Deknaam': 'Deckname',
+  'Wordt de map decks/<naam> in de repository':
+      'Wird de Ordner decks/<Name> im Repository',
+  'Alleen letters, cijfers, punt, streep en liggend streepje':
+      'Nur Buechstabe, Ziffere, Punkt, Bindestrich und Understrich',
+  'Commitboodschap': 'Commit-Nachricht',
+  'Wat is er veranderd?': 'Was het sich gänderet?',
+  'Opslaan naar git': 'In git spichere',
+  'Opslaan naar git…': 'In git spichere…',
+  'Opgeslagen in git:': 'In git gspicheret:',
+  'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
+      'De Branch isch verschobe; lad s Deck neu und spicher nomol.',
+  'video en audio gaan (nog) niet mee naar git':
+      'Video und Audio gönd (no) nöd mit i git',
+  'Bijgewerkt met OciDeck': 'Mit OciDeck aktualisiert',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Richt zerscht es Git-Repository i under Iistellige → Git-Repository.',
   'Git-repository': 'Git-Repository',

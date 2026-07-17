@@ -1785,6 +1785,21 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Deknaam': 'Ime kompleta',
+  'Wordt de map decks/<naam> in de repository':
+      'Postane mapa decks/<ime> v repozitoriju',
+  'Alleen letters, cijfers, punt, streep en liggend streepje':
+      'Samo črke, števke, pika, vezaj in podčrtaj',
+  'Commitboodschap': 'Sporočilo commita',
+  'Wat is er veranderd?': 'Kaj se je spremenilo?',
+  'Opslaan naar git': 'Shrani v git',
+  'Opslaan naar git…': 'Shrani v git…',
+  'Opgeslagen in git:': 'Shranjeno v git:',
+  'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
+      'Veja se je premaknila; znova naloži komplet in shrani znova.',
+  'video en audio gaan (nog) niet mee naar git':
+      'video in zvok (še) ne gresta v git',
+  'Bijgewerkt met OciDeck': 'Posodobljeno z OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Najprej nastavite repozitorij Git v Nastavitve → Repozitorij Git.',
   'Git-repository': 'Repozitorij Git',

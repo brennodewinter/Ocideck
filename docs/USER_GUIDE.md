@@ -60,10 +60,18 @@ saved version stays retrievable, which a plain folder cannot give you.
 - **Open** via the `…` menu (*Open from git…*): pick a deck and it is fetched,
   checked by the same safety scan as any other deck, and opened. A repository is
   untrusted input — coming from your own forge does not make it trusted.
+- **Save** via the `…` menu (*Save to git…*): the deck is written back as one
+  commit — the markdown and its images, which go into the shared pool exactly as
+  opening reads them. A deck you opened from git offers its own name and updates
+  in place; a new deck is published by choosing a name (it becomes
+  `decks/<name>`). If someone moved the branch since you opened it, the save is
+  refused so you do not overwrite their work — reload and save again. Video and
+  audio are not written yet; you are told when a deck has them. Saving needs a
+  connection for now; an offline queue that syncs on reconnect is next.
 - **Layout**: a repository holds many decks under `decks/<name>/deck.md`, with
   images shared in one `assets/` pool so the same picture is stored once.
-- **Read-only for now**: saving back, versions and releases are still being
-  built. See [`design/GIT_STORAGE.md`](design/GIT_STORAGE.md).
+- **Versions and releases** are still being built. See
+  [`design/GIT_STORAGE.md`](design/GIT_STORAGE.md).
 - **A repository is a trust boundary.** Everyone who can read it reads *every*
   deck in it, so use one repository per client, engagement or classification
   level — the forge's permissions are what separate them, not OciDeck.

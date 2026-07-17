@@ -1786,6 +1786,21 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Deknaam': 'Název sady',
+  'Wordt de map decks/<naam> in de repository':
+      'Stane se složkou decks/<název> v repozitáři',
+  'Alleen letters, cijfers, punt, streep en liggend streepje':
+      'Pouze písmena, číslice, tečka, pomlčka a podtržítko',
+  'Commitboodschap': 'Zpráva commitu',
+  'Wat is er veranderd?': 'Co se změnilo?',
+  'Opslaan naar git': 'Uložit do gitu',
+  'Opslaan naar git…': 'Uložit do gitu…',
+  'Opgeslagen in git:': 'Uloženo do gitu:',
+  'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
+      'Větev se posunula; načti sadu znovu a ulož znovu.',
+  'video en audio gaan (nog) niet mee naar git':
+      'video a audio (zatím) nejdou do gitu',
+  'Bijgewerkt met OciDeck': 'Aktualizováno pomocí OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Nejprve nastavte repozitář Git v Nastavení → Repozitář Git.',
   'Git-repository': 'Repozitář Git',

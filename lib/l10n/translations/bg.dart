@@ -1806,6 +1806,21 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Deknaam': 'Име на тестето',
+  'Wordt de map decks/<naam> in de repository':
+      'Става папката decks/<име> в хранилището',
+  'Alleen letters, cijfers, punt, streep en liggend streepje':
+      'Само букви, цифри, точка, тире и долна черта',
+  'Commitboodschap': 'Съобщение за commit',
+  'Wat is er veranderd?': 'Какво се промени?',
+  'Opslaan naar git': 'Запазване в git',
+  'Opslaan naar git…': 'Запазване в git…',
+  'Opgeslagen in git:': 'Запазено в git:',
+  'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
+      'Клонът е преместен; презаредете тестето и запазете отново.',
+  'video en audio gaan (nog) niet mee naar git':
+      'видеото и аудиото (все още) не отиват в git',
+  'Bijgewerkt met OciDeck': 'Обновено с OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Първо настройте Git хранилище в Настройки → Git хранилище.',
   'Git-repository': 'Git хранилище',

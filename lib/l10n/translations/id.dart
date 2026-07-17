@@ -1783,6 +1783,21 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Deknaam': 'Nama dek',
+  'Wordt de map decks/<naam> in de repository':
+      'Menjadi folder decks/<nama> di repositori',
+  'Alleen letters, cijfers, punt, streep en liggend streepje':
+      'Hanya huruf, angka, titik, tanda hubung, dan garis bawah',
+  'Commitboodschap': 'Pesan commit',
+  'Wat is er veranderd?': 'Apa yang berubah?',
+  'Opslaan naar git': 'Simpan ke git',
+  'Opslaan naar git…': 'Simpan ke git…',
+  'Opgeslagen in git:': 'Disimpan ke git:',
+  'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
+      'Branch telah berpindah; muat ulang dek dan simpan lagi.',
+  'video en audio gaan (nog) niet mee naar git':
+      'video dan audio (belum) ikut ke git',
+  'Bijgewerkt met OciDeck': 'Diperbarui dengan OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Siapkan repositori Git terlebih dahulu di Pengaturan → Repositori Git.',
   'Git-repository': 'Repositori Git',

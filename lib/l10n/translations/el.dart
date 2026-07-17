@@ -1811,6 +1811,21 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Deknaam': 'Όνομα ντεκ',
+  'Wordt de map decks/<naam> in de repository':
+      'Γίνεται ο φάκελος decks/<όνομα> στο αποθετήριο',
+  'Alleen letters, cijfers, punt, streep en liggend streepje':
+      'Μόνο γράμματα, ψηφία, τελεία, παύλα και κάτω παύλα',
+  'Commitboodschap': 'Μήνυμα commit',
+  'Wat is er veranderd?': 'Τι άλλαξε;',
+  'Opslaan naar git': 'Αποθήκευση σε git',
+  'Opslaan naar git…': 'Αποθήκευση σε git…',
+  'Opgeslagen in git:': 'Αποθηκεύτηκε σε git:',
+  'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
+      'Ο κλάδος μετακινήθηκε· φόρτωσε ξανά το deck και αποθήκευσε πάλι.',
+  'video en audio gaan (nog) niet mee naar git':
+      'το βίντεο και ο ήχος (ακόμη) δεν πηγαίνουν στο git',
+  'Bijgewerkt met OciDeck': 'Ενημερώθηκε με το OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Ρυθμίστε πρώτα ένα αποθετήριο Git στις Ρυθμίσεις → Αποθετήριο Git.',
   'Git-repository': 'Αποθετήριο Git',

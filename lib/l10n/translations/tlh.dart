@@ -1758,6 +1758,21 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Deknaam': 'nav pong',
+  'Wordt de map decks/<naam> in de repository':
+      'repository-Daq decks/<pong> ngaQHa\' moj',
+  'Alleen letters, cijfers, punt, streep en liggend streepje':
+      'ghItmey, mI\'mey, lurDech, ghItlh je bIngHom neH',
+  'Commitboodschap': 'commit QIn',
+  'Wat is er veranderd?': 'nuq choHlu\'pu\'?',
+  'Opslaan naar git': 'git-Daq Qaw\'',
+  'Opslaan naar git…': 'git-Daq Qaw\'…',
+  'Opgeslagen in git:': 'git-Daq Qaw\'ta\':',
+  'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
+      'branch vIHpu\'; deck yISamqa\' \'ej yIQaw\'qa\'.',
+  'video en audio gaan (nog) niet mee naar git':
+      'HaSta\' \'ej wab git-Daq jaHbe\' (DaH)',
+  'Bijgewerkt met OciDeck': 'OciDeck lo\'lu\'pu\'',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'wa\'DIch Git qawHaq yIcher: chuqmey → Git qawHaq.',
   'Git-repository': 'Git qawHaq',

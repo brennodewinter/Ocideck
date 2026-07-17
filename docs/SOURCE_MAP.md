@@ -140,7 +140,8 @@ follow in later phases.
 - `git_transport_factory.dart` — Conditional export: pinned `dart:io` on desktop, browser fetch on web.
 - `git_transport_io.dart` — Desktop: `NetGuard.safeResolveTrusted` + socket pin + no redirects + byte cap.
 - `git_transport_web.dart` — Web: browser fetch with the same-origin fetch-proxy as fallback, but never for a request carrying a token.
-- `asset_pool.dart` — The shared content-addressed pool (`repo:assets/<sha256>.<ext>`): SHA-256 naming, fetch-once cache, and re-hashing of every fetched blob — a hash-named path from an untrusted forge proves nothing until checked.
+- `asset_pool.dart` — The shared content-addressed pool (`repo:assets/<sha256>.<ext>`): SHA-256 naming, fetch-once cache, and re-hashing of every fetched blob — a hash-named path from an untrusted forge proves nothing until checked. `refFor`/`existing` are the save side: hash bytes to a ref, skip blobs already pooled.
+- `deck_repo_serializer.dart` — `buildDeckRepoFiles`: turns a deck into its repo file set — `deck.md` bytes plus the missing image blobs, images rewritten `mem:`→`repo:`. The exact inverse of the open path's `repo:`→`mem:`; video/audio are reported, not written as broken refs.
 
 ## `lib/state/` — Riverpod providers
 
@@ -154,7 +155,7 @@ follow in later phases.
 - `deck_quality_provider.dart` — Computes accessibility/quality analysis for the loaded deck.
 - `git_provider.dart` — `gitForgeProvider` (builds the adapter from the configured repo plus the token from the keychain) and `gitDeckListProvider` (the decks on a branch).
 - `editor_provider.dart` — `EditorState`/`EditorNotifier`: selected slide, editor mode, markdown buffer.
-- `tabs_provider_git.dart` — `TabsNotifierGit` extension: `openDeckFromGit` — fetch a deck from a repo, through the shared import gate, into a tab carrying a `GitOrigin`.
+- `tabs_provider_git.dart` — `TabsNotifierGit` extension: `openDeckFromGit` — fetch a deck from a repo, through the shared import gate, into a tab carrying a `GitOrigin`; `saveToGit` — the inverse, committing the tab's deck (with pooled images) in one commit, advancing the tab's `baseSha` and returning a `GitSaveResult` (committed / conflict / failed).
 - `image_contrast_provider.dart` — Computes title-slide image-contrast issues asynchronously per deck.
 - `sec_module_provider.dart` — The security-module enable/reveal state that gates the pentest features.
 - `local_cve_provider.dart` — `LocalCveNotifier`/`LocalCveState`: the local CVE database's status, build progress and cancellation, plus `localCveAvailableProvider` — which the CVE picker uses to search offline (and then deliberately *not* fall back online).

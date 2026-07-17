@@ -1782,6 +1782,21 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Deknaam': 'Decknavn',
+  'Wordt de map decks/<naam> in de repository':
+      'Bliver mappen decks/<navn> i repositoryet',
+  'Alleen letters, cijfers, punt, streep en liggend streepje':
+      'Kun bogstaver, tal, punktum, bindestreg og understregning',
+  'Commitboodschap': 'Commit-besked',
+  'Wat is er veranderd?': 'Hvad er ændret?',
+  'Opslaan naar git': 'Gem til git',
+  'Opslaan naar git…': 'Gem til git…',
+  'Opgeslagen in git:': 'Gemt til git:',
+  'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
+      'Grenen er flyttet; genindlæs decket og gem igen.',
+  'video en audio gaan (nog) niet mee naar git':
+      'video og lyd kommer (endnu) ikke med til git',
+  'Bijgewerkt met OciDeck': 'Opdateret med OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Opsæt først et Git-repository under Indstillinger → Git-repository.',
   'Git-repository': 'Git-repository',

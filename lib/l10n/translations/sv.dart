@@ -1782,6 +1782,21 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Deknaam': 'Decknamn',
+  'Wordt de map decks/<naam> in de repository':
+      'Blir mappen decks/<namn> i repot',
+  'Alleen letters, cijfers, punt, streep en liggend streepje':
+      'Endast bokstäver, siffror, punkt, bindestreck och understreck',
+  'Commitboodschap': 'Commit-meddelande',
+  'Wat is er veranderd?': 'Vad har ändrats?',
+  'Opslaan naar git': 'Spara till git',
+  'Opslaan naar git…': 'Spara till git…',
+  'Opgeslagen in git:': 'Sparat till git:',
+  'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
+      'Grenen har flyttats; ladda om decket och spara igen.',
+  'video en audio gaan (nog) niet mee naar git':
+      'video och ljud följer (ännu) inte med till git',
+  'Bijgewerkt met OciDeck': 'Uppdaterad med OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Ställ först in ett Git-repository under Inställningar → Git-repository.',
   'Git-repository': 'Git-repository',

@@ -1801,6 +1801,21 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Deknaam': 'Назва колоди',
+  'Wordt de map decks/<naam> in de repository':
+      'Стане текою decks/<назва> у репозиторії',
+  'Alleen letters, cijfers, punt, streep en liggend streepje':
+      'Лише літери, цифри, крапка, дефіс і підкреслення',
+  'Commitboodschap': 'Повідомлення коміту',
+  'Wat is er veranderd?': 'Що змінилося?',
+  'Opslaan naar git': 'Зберегти в git',
+  'Opslaan naar git…': 'Зберегти в git…',
+  'Opgeslagen in git:': 'Збережено в git:',
+  'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
+      'Гілку переміщено; перезавантажте колоду й збережіть знову.',
+  'video en audio gaan (nog) niet mee naar git':
+      'відео й аудіо (поки) не потрапляють у git',
+  'Bijgewerkt met OciDeck': 'Оновлено за допомогою OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Спершу налаштуйте репозиторій Git у Налаштування → Репозиторій Git.',
   'Git-repository': 'Репозиторій Git',

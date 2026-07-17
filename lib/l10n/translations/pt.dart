@@ -1813,6 +1813,21 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Deknaam': 'Nome do deck',
+  'Wordt de map decks/<naam> in de repository':
+      'Torna-se a pasta decks/<nome> no repositório',
+  'Alleen letters, cijfers, punt, streep en liggend streepje':
+      'Apenas letras, dígitos, ponto, hífen e sublinhado',
+  'Commitboodschap': 'Mensagem de commit',
+  'Wat is er veranderd?': 'O que mudou?',
+  'Opslaan naar git': 'Guardar no git',
+  'Opslaan naar git…': 'Guardar no git…',
+  'Opgeslagen in git:': 'Guardado no git:',
+  'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
+      'O branch mudou; recarrega o deck e guarda de novo.',
+  'video en audio gaan (nog) niet mee naar git':
+      'o vídeo e o áudio (ainda) não vão para o git',
+  'Bijgewerkt met OciDeck': 'Atualizado com OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Configure primeiro um repositório Git em Definições → Repositório Git.',
   'Git-repository': 'Repositório Git',

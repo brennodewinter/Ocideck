@@ -1799,6 +1799,21 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Deknaam': 'Nomen fasciculi',
+  'Wordt de map decks/<naam> in de repository':
+      'Fit plica decks/<nomen> in repositorio',
+  'Alleen letters, cijfers, punt, streep en liggend streepje':
+      'Solum litterae, numeri, punctum, lineola et lineola subscripta',
+  'Commitboodschap': 'Nuntius commissionis',
+  'Wat is er veranderd?': 'Quid mutatum est?',
+  'Opslaan naar git': 'In git servare',
+  'Opslaan naar git…': 'In git servare…',
+  'Opgeslagen in git:': 'In git servatum:',
+  'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
+      'Ramus motus est; fasciculum recarga et iterum serva.',
+  'video en audio gaan (nog) niet mee naar git':
+      'video et audio (nondum) in git non eunt',
+  'Bijgewerkt met OciDeck': 'Cum OciDeck renovatum',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Primum repositorium Git in Optiones → Repositorium Git constitue.',
   'Git-repository': 'Repositorium Git',

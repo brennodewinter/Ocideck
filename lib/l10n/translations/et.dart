@@ -1774,6 +1774,21 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Deknaam': 'Deki nimi',
+  'Wordt de map decks/<naam> in de repository':
+      'Saab kaustaks decks/<nimi> hoidlas',
+  'Alleen letters, cijfers, punt, streep en liggend streepje':
+      'Ainult tähed, numbrid, punkt, sidekriips ja alakriips',
+  'Commitboodschap': 'Commiti sõnum',
+  'Wat is er veranderd?': 'Mis muutus?',
+  'Opslaan naar git': 'Salvesta gitti',
+  'Opslaan naar git…': 'Salvesta gitti…',
+  'Opgeslagen in git:': 'Salvestatud gitti:',
+  'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
+      'Haru on liikunud; laadi deck uuesti ja salvesta uuesti.',
+  'video en audio gaan (nog) niet mee naar git':
+      'video ja heli (veel) gitti ei lähe',
+  'Bijgewerkt met OciDeck': 'Uuendatud OciDeckiga',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Seadistage kõigepealt Giti hoidla jaotises Seaded → Giti hoidla.',
   'Git-repository': 'Giti hoidla',

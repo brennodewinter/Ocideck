@@ -922,6 +922,21 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Deknaam': 'Deck name',
+  'Wordt de map decks/<naam> in de repository':
+      'Becomes the folder decks/<name> in the repository',
+  'Alleen letters, cijfers, punt, streep en liggend streepje':
+      'Only letters, digits, dot, dash and underscore',
+  'Commitboodschap': 'Commit message',
+  'Wat is er veranderd?': 'What changed?',
+  'Opslaan naar git': 'Save to git',
+  'Opslaan naar git…': 'Save to git…',
+  'Opgeslagen in git:': 'Saved to git:',
+  'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
+      'The branch has moved; reload the deck and save again.',
+  'video en audio gaan (nog) niet mee naar git':
+      'video and audio don\'t go to git yet',
+  'Bijgewerkt met OciDeck': 'Updated with OciDeck',
   'Stel eerst een git-repository in bij Instellingen → Git-repository.':
       'Set up a git repository first, under Settings → Git repository.',
   'Git-repository': 'Git repository',
