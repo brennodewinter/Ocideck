@@ -1801,6 +1801,11 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Versies…': 'Версії…',
+  'Versies:': 'Версії:',
+  'Nog geen uitgebrachte versies van dit deck.':
+      'Для цієї колоди ще немає випущених версій.',
+  'Horizontale gestapelde staaf': 'Горизонтальна стовпчикова з накопиченням',
   'Git-geschiedenis…': 'Історія git…',
   'Git-geschiedenis:': 'Історія git:',
   'Nog geen commits voor dit deck.': 'Для цієї колоди ще немає комітів.',

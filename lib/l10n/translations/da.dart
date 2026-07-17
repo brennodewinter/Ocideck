@@ -1782,6 +1782,11 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Versies…': 'Versioner…',
+  'Versies:': 'Versioner:',
+  'Nog geen uitgebrachte versies van dit deck.':
+      'Ingen udgivne versioner af dette deck endnu.',
+  'Horizontale gestapelde staaf': 'Vandret stablet søjle',
   'Git-geschiedenis…': 'Git-historik…',
   'Git-geschiedenis:': 'Git-historik:',
   'Nog geen commits voor dit deck.': 'Ingen commits for dette deck endnu.',

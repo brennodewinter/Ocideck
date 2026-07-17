@@ -1790,6 +1790,11 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Versies…': 'Verzije…',
+  'Versies:': 'Verzije:',
+  'Nog geen uitgebrachte versies van dit deck.':
+      'Još nema objavljenih verzija ovog kompleta.',
+  'Horizontale gestapelde staaf': 'Vodoravni složeni stupčasti',
   'Git-geschiedenis…': 'Povijest gita…',
   'Git-geschiedenis:': 'Povijest gita:',
   'Nog geen commits voor dit deck.': 'Još nema commitova za ovaj komplet.',

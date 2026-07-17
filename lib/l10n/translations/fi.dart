@@ -1783,6 +1783,11 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Versies…': 'Versiot…',
+  'Versies:': 'Versiot:',
+  'Nog geen uitgebrachte versies van dit deck.':
+      'Tälle setille ei vielä julkaistuja versioita.',
+  'Horizontale gestapelde staaf': 'Pinottu vaakapylväs',
   'Git-geschiedenis…': 'Git-historia…',
   'Git-geschiedenis:': 'Git-historia:',
   'Nog geen commits voor dit deck.': 'Tälle setille ei vielä committeja.',

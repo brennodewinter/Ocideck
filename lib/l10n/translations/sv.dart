@@ -1782,6 +1782,11 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Versies…': 'Versioner…',
+  'Versies:': 'Versioner:',
+  'Nog geen uitgebrachte versies van dit deck.':
+      'Inga utgivna versioner av detta deck än.',
+  'Horizontale gestapelde staaf': 'Liggande staplad stapel',
   'Git-geschiedenis…': 'Git-historik…',
   'Git-geschiedenis:': 'Git-historik:',
   'Nog geen commits voor dit deck.': 'Inga commits för detta deck än.',

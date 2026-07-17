@@ -741,6 +741,11 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Versies…': 'Ferzjes…',
+  'Versies:': 'Ferzjes:',
+  'Nog geen uitgebrachte versies van dit deck.':
+      'Noch gjin útbrochte ferzjes fan dit deck.',
+  'Horizontale gestapelde staaf': 'Horizontale stapele staven',
   'Git-geschiedenis…': 'Git-skiednis…',
   'Git-geschiedenis:': 'Git-skiednis:',
   'Nog geen commits voor dit deck.': 'Noch gjin commits foar dit deck.',

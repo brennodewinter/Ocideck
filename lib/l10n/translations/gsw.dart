@@ -1787,6 +1787,11 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Versies…': 'Versione…',
+  'Versies:': 'Versione:',
+  'Nog geen uitgebrachte versies van dit deck.':
+      'No kei veröffentlichti Versione für das Deck.',
+  'Horizontale gestapelde staaf': 'Horizontali gschtaplete Balke',
   'Git-geschiedenis…': 'Git-Verlauf…',
   'Git-geschiedenis:': 'Git-Verlauf:',
   'Nog geen commits voor dit deck.': 'No kei Commits für das Deck.',

@@ -1799,6 +1799,11 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Versies…': 'Versiones…',
+  'Versies:': 'Versiones:',
+  'Nog geen uitgebrachte versies van dit deck.':
+      'Nullae adhuc versiones huius fasciculi editae.',
+  'Horizontale gestapelde staaf': 'Columna cumulata horizontalis',
   'Git-geschiedenis…': 'Historia git…',
   'Git-geschiedenis:': 'Historia git:',
   'Nog geen commits voor dit deck.': 'Nulla adhuc commissa huic fasciculo.',

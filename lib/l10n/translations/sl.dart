@@ -1785,6 +1785,11 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Versies…': 'Različice…',
+  'Versies:': 'Različice:',
+  'Nog geen uitgebrachte versies van dit deck.':
+      'Za ta komplet še ni izdanih različic.',
+  'Horizontale gestapelde staaf': 'Vodoravni naloženi stolpci',
   'Git-geschiedenis…': 'Zgodovina gita…',
   'Git-geschiedenis:': 'Zgodovina gita:',
   'Nog geen commits voor dit deck.': 'Za ta komplet še ni commitov.',
