@@ -30,14 +30,31 @@ class PinnedGitTransport implements GitTransport {
     Uri uri, {
     required Map<String, String> headers,
     required int maxBytes,
+  }) => _send('GET', uri, headers: headers, maxBytes: maxBytes);
+
+  @override
+  Future<GitResponse> post(
+    Uri uri, {
+    required Map<String, String> headers,
+    required List<int> body,
+    required int maxBytes,
+  }) => _send('POST', uri, headers: headers, body: body, maxBytes: maxBytes);
+
+  Future<GitResponse> _send(
+    String method,
+    Uri uri, {
+    required Map<String, String> headers,
+    required int maxBytes,
+    List<int>? body,
   }) async {
     final client = await _ensureClient(uri);
     try {
-      final request = await client.getUrl(uri);
+      final request = await client.openUrl(method, uri);
       // Een 3xx mag de host-check niet omzeilen: de redirect-target is niet
       // gepind en zou naar een intern adres kunnen wijzen.
       request.followRedirects = false;
       headers.forEach(request.headers.set);
+      if (body != null) request.add(body);
       final response = await request.close().timeout(
         const Duration(seconds: 30),
       );

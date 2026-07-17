@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/git_settings.dart';
@@ -6,6 +7,8 @@ import 'package:ocideck/services/git/git_forge.dart';
 import 'package:ocideck/services/git/gitea_forge.dart';
 
 import 'git_forge_fake.dart';
+
+Uint8List _b(String s) => Uint8List.fromList(utf8.encode(s));
 
 /// The contract every [GitForge] must honour, stated once and run against every
 /// implementation. Per §12 this is Phase 0's actual deliverable: it de-risks the
@@ -158,6 +161,199 @@ void runGitForgeContract(String name, GitForge Function(FakeRepo) build) {
             reason: entry.path,
           );
         }
+      });
+    });
+
+    group('commitFiles', () {
+      Future<String> head() => forge.headSha('main');
+
+      test('writes a new file and advances the branch', () async {
+        final before = await head();
+        final result = await forge.commitFiles(
+          branch: 'main',
+          message: 'Nieuw deck',
+          upserts: {'decks/nieuw/deck.md': _b('# Nieuw')},
+          deletes: const [],
+          baseSha: before,
+        );
+
+        expect(result.sha, isNot(before));
+        expect(await head(), result.sha);
+        expect(
+          utf8.decode(await forge.readBlob('main', 'decks/nieuw/deck.md')),
+          '# Nieuw',
+        );
+      });
+
+      test('updates an existing file', () async {
+        await forge.commitFiles(
+          branch: 'main',
+          message: 'Wijzig',
+          upserts: {'decks/kwartaalcijfers/deck.md': _b('# Gewijzigd')},
+          deletes: const [],
+          baseSha: await head(),
+        );
+        expect(
+          utf8.decode(
+            await forge.readBlob('main', 'decks/kwartaalcijfers/deck.md'),
+          ),
+          '# Gewijzigd',
+        );
+      });
+
+      test('deletes a file', () async {
+        await forge.commitFiles(
+          branch: 'main',
+          message: 'Weg',
+          upserts: const {},
+          deletes: ['decks/kwartaalcijfers/deck.notes'],
+          baseSha: await head(),
+        );
+        await expectLater(
+          forge.readBlob('main', 'decks/kwartaalcijfers/deck.notes'),
+          throwsA(
+            isA<GitForgeException>().having(
+              (e) => e.kind,
+              'kind',
+              GitForgeError.notFound,
+            ),
+          ),
+        );
+      });
+
+      test('writes and deletes in one commit, atomically', () async {
+        // The point of atomicity: markdown that points at an asset must never
+        // land without it, and vice versa. One call, one commit, or nothing.
+        final before = await head();
+        final result = await forge.commitFiles(
+          branch: 'main',
+          message: 'Beide',
+          upserts: {'decks/jaarplan/deck.md': _b('# Nieuw jaarplan')},
+          deletes: ['decks/kwartaalcijfers/deck.notes'],
+          baseSha: before,
+        );
+
+        expect(await head(), result.sha, reason: 'één commit, niet twee');
+        expect(
+          utf8.decode(await forge.readBlob('main', 'decks/jaarplan/deck.md')),
+          '# Nieuw jaarplan',
+        );
+      });
+
+      test('refuses when someone else moved the branch', () async {
+        // The whole reason baseSha exists. Losing this means one author silently
+        // overwrites another.
+        final stale = await head();
+        await forge.commitFiles(
+          branch: 'main',
+          message: 'De ander',
+          upserts: {'decks/kwartaalcijfers/deck.md': _b('# Van iemand anders')},
+          deletes: const [],
+          baseSha: stale,
+        );
+
+        await expectLater(
+          forge.commitFiles(
+            branch: 'main',
+            message: 'Mijn werk',
+            upserts: {'decks/kwartaalcijfers/deck.md': _b('# Van mij')},
+            deletes: const [],
+            baseSha: stale,
+          ),
+          throwsA(
+            isA<GitConflictException>().having(
+              (e) => e.baseSha,
+              'baseSha',
+              stale,
+            ),
+          ),
+        );
+        // And the other author's work is still there, untouched.
+        expect(
+          utf8.decode(
+            await forge.readBlob('main', 'decks/kwartaalcijfers/deck.md'),
+          ),
+          '# Van iemand anders',
+        );
+      });
+
+      test('a conflict is not a GitForgeException', () async {
+        // "You were overtaken" is an outcome the caller acts on, not an error to
+        // report. Blurring the two would turn a reload prompt into a failure.
+        final stale = await head();
+        await forge.commitFiles(
+          branch: 'main',
+          message: 'De ander',
+          upserts: {'decks/a/deck.md': _b('# A')},
+          deletes: const [],
+          baseSha: stale,
+        );
+        await expectLater(
+          forge.commitFiles(
+            branch: 'main',
+            message: 'Ik',
+            upserts: {'decks/a/deck.md': _b('# B')},
+            deletes: const [],
+            baseSha: stale,
+          ),
+          throwsA(isNot(isA<GitForgeException>())),
+        );
+      });
+
+      test('refuses a path that escapes the repo', () async {
+        for (final path in ['../etc/passwd', '/absolute', 'decks/../../weg']) {
+          await expectLater(
+            forge.commitFiles(
+              branch: 'main',
+              message: 'Kwaad',
+              upserts: {path: _b('x')},
+              deletes: const [],
+              baseSha: await head(),
+            ),
+            throwsA(
+              isA<GitForgeException>().having(
+                (e) => e.kind,
+                'kind',
+                GitForgeError.malformed,
+              ),
+            ),
+            reason: path,
+          );
+        }
+      });
+
+      test('refuses an empty commit', () async {
+        await expectLater(
+          forge.commitFiles(
+            branch: 'main',
+            message: 'Niets',
+            upserts: const {},
+            deletes: const [],
+            baseSha: await head(),
+          ),
+          throwsA(
+            isA<GitForgeException>().having(
+              (e) => e.kind,
+              'kind',
+              GitForgeError.malformed,
+            ),
+          ),
+        );
+      });
+
+      test('round-trips utf-8 through the commit', () async {
+        const text = '# Kwartaal — cijfers\n\nÉén ≥ twee 🐾\n';
+        await forge.commitFiles(
+          branch: 'main',
+          message: 'Accenten',
+          upserts: {'decks/a/deck.md': _b(text)},
+          deletes: const [],
+          baseSha: await head(),
+        );
+        expect(
+          utf8.decode(await forge.readBlob('main', 'decks/a/deck.md')),
+          text,
+        );
       });
     });
 

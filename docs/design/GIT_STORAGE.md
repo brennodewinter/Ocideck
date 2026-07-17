@@ -540,9 +540,32 @@ from "save" is only shown when it is true; otherwise the user sees a single
 
 ### 8.3 `DraftMirror` — web, or desktop without git
 
-- No local git. On web there is no persistent filesystem either: the mirror is an
-  **IndexedDB draft** plus the existing in-memory `WebAssetStore` for asset bytes.
-  On desktop without git it is a plain directory plus an on-disk outbox.
+- No local git. On desktop without git the mirror is a plain directory plus an
+  on-disk outbox. On web there is no filesystem either — but note what actually
+  needs storing before reaching for a mechanism.
+- **A deck's working copy is text, all of it.** `deck.md` is markdown;
+  `AnnotationCodec.encode` and `UserNotesCodec.encode` both return a `String`
+  (JSON). There is no binary member. So the web draft is **a handful of strings
+  in the browser's key/value store** (`shared_preferences`, already a dependency,
+  already mocked in ~50 test files) — not IndexedDB.
+  An earlier version of this document specified an IndexedDB draft. That was
+  pattern-matching "durable storage on the web" onto the heaviest available
+  mechanism without asking what the payload is: a binary object database to hold
+  markdown. It also had a cost that only showed up when building — this repository
+  runs every test on the Dart VM and has no browser target, so the interop would
+  have been the one untested piece of the backend. A text store has no such
+  problem, because the repo already tests one.
+- **Asset bytes are not the draft's problem.** A pooled asset is content-addressed
+  and lives on the forge; a *new*, not-yet-pushed image lives in the existing
+  in-memory `WebAssetStore`, which is already explicitly ephemeral (its own doc:
+  a saved `.md` with `mem:` references loses its images on reload). The git draft
+  inherits that limitation rather than adding one — and still improves on today,
+  where nothing survives a reload at all.
+- **The one real constraint**: the browser store is roughly 5 MB per origin, while
+  `FileService.maxDeckMarkdownBytes` is 32 MiB. That ceiling is a hostile-input
+  guard, not a realistic deck size, so the answer is a cap with an honest message
+  when a deck genuinely will not fit — not an object database bought to cover a
+  case that does not occur.
 - Saving updates the draft and enqueues a **pending commit** carrying the
   `baseSha` it was authored against.
 - `sync()` drains the outbox via `GitForge.commitFiles` once a
@@ -585,7 +608,8 @@ did not ask for. Mitigations, both required:
 ### 8.5 What the SyncEngine guarantees
 
 - **Never lose local work** (P2): a native commit is durable by construction; the
-  outbox is durable (on disk / IndexedDB) and survives restart.
+  outbox is durable (on disk on desktop, the browser key/value store on web —
+  see §8.3 on why that suffices) and survives restart.
 - **At-most-one authority per deck tab** for pushes; a queued commit references
   the `baseSha` it was authored against.
 - **Idempotent flush**: a commit that already landed (same tree, advanced ref) is
@@ -862,16 +886,10 @@ Each phase is shippable and preserves the invariants.
 - `commitFiles` in `GiteaForge` (multi-file), the `SyncEngine` + durable outbox,
   `baseSha` conflict detection.
 - "Save to git" beside "Save to Nextcloud"; offline queue + flush-on-reconnect.
-- **Open question — the web working copy.** §8.3 wants an IndexedDB draft. This
-  repository runs every test on the Dart VM and has no browser test target at
-  all, so that interop would be the one piece of the git backend shipping
-  untested; `recovery_service.dart` is already desktop-only for a comparable
-  reason. Until that is resolved the web draft store is an explicit stub that
-  refuses rather than an in-memory one that quietly is not durable — a working
-  copy that looks like storage and is not would break P2 in the worst way.
-  Decide before Phase 2 ships: add a browser test target, or say plainly that
-  writing to git is desktop-only.
-- At this point the feature is complete on desktop, on the REST plane.
+- Web writes too: the draft is text, so it goes in the browser key/value store
+  (§8.3). No browser test target needed — that requirement was an artefact of the
+  IndexedDB choice, not of the web.
+- At this point the feature is complete on every platform, on the REST plane.
 
 ### Phase 3 — Native git on desktop
 - `GitCli` with the §10.2 hardening; `gitCapabilityProvider` with the lazy probe
@@ -932,7 +950,7 @@ New:
 - `lib/services/git/gitea_forge.dart`, `github_forge.dart`, `gitlab_forge.dart`.
 - `lib/services/git/deck_mirror.dart` — the `DeckMirror` interface.
 - `lib/services/git/native_git_mirror.dart` — desktop clone (Phase 3).
-- `lib/services/git/draft_mirror.dart` — outbox/IndexedDB (Phase 1).
+- `lib/services/git/draft_mirror.dart` — the text draft + outbox (Phase 2).
 - `lib/services/git/git_cli.dart` — **the only** `Process.run` site; §10.2 lives
   here.
 - `lib/services/git/git_cli_stub.dart` — web stub, wired by conditional import

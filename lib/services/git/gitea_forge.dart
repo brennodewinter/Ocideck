@@ -298,6 +298,111 @@ class GiteaForge implements GitForge {
     return response.bytes;
   }
 
+  @override
+  Future<CommitResult> commitFiles({
+    required String branch,
+    required String message,
+    required Map<String, Uint8List> upserts,
+    required List<String> deletes,
+    required String baseSha,
+  }) async {
+    _requireRef(branch);
+    _requireRef(baseSha);
+    if (upserts.isEmpty && deletes.isEmpty) {
+      throw const GitForgeException(
+        GitForgeError.malformed,
+        'Niets te committen',
+      );
+    }
+    for (final path in [...upserts.keys, ...deletes]) {
+      if (!GitRepoLayout.isSafeRepoPath(path)) {
+        throw GitForgeException(
+          GitForgeError.malformed,
+          'Onveilig pad in commit: $path',
+        );
+      }
+    }
+
+    // Gitea eist bij een `update`/`delete` de blob-sha van het bestand zoals het
+    // er nú staat, en bij een `create` juist géén. Eén tree-listing bepaalt dus
+    // per pad welke operatie het is — één call, niet één per bestand.
+    final existing = await _blobShas(branch);
+
+    final files = <Map<String, Object?>>[
+      for (final entry in upserts.entries)
+        {
+          'operation': existing.containsKey(entry.key) ? 'update' : 'create',
+          'path': entry.key,
+          'content': base64Encode(entry.value),
+          if (existing.containsKey(entry.key)) 'sha': existing[entry.key],
+        },
+      for (final path in deletes)
+        // Een delete van iets dat er niet is slaan we over: de uitkomst die de
+        // aanroeper wil (het staat er niet) is al bereikt, en Gitea zou erover
+        // vallen.
+        if (existing.containsKey(path))
+          {'operation': 'delete', 'path': path, 'sha': existing[path]},
+    ];
+    if (files.isEmpty) {
+      throw const GitForgeException(
+        GitForgeError.malformed,
+        'Niets te committen',
+      );
+    }
+
+    final response = await _transport.post(
+      _apiUri(['contents']),
+      headers: {..._headers, 'Content-Type': 'application/json'},
+      body: utf8.encode(
+        jsonEncode({
+          'branch': branch,
+          'message': message,
+          'files': files,
+          // Dít is de concurrency-guard: Gitea weigert wanneer de branch niet
+          // meer op deze commit staat, in plaats van er overheen te schrijven.
+          'last_commit_id': baseSha,
+        }),
+      ),
+      maxBytes: maxListingBytes,
+    );
+    _checkCommitStatus(response.status, baseSha);
+
+    final json = _decodeJson(response.bytes);
+    final commit = json is Map ? json['commit'] : null;
+    final sha = commit is Map ? commit['sha'] : null;
+    if (sha is! String || sha.trim().isEmpty) {
+      throw const GitForgeException(
+        GitForgeError.malformed,
+        'Commit gelukt maar zonder sha in het antwoord',
+      );
+    }
+    return CommitResult(sha);
+  }
+
+  /// Pad → blob-sha voor de hele boom op [ref].
+  Future<Map<String, String>> _blobShas(String ref) async {
+    final entries = await listTree(ref, '', recursive: true);
+    return {
+      for (final entry in entries)
+        if (entry.type == RepoEntryType.file) entry.path: entry.sha,
+    };
+  }
+
+  /// Als [_checkStatus], maar met het conflict eruit gelicht.
+  void _checkCommitStatus(int status, String baseSha) {
+    // Een verschoven branch is geen fout maar een uitkomst. Gitea meldt hem als
+    // 409; sommige versies gebruiken 422 voor dezelfde situatie.
+    if (status == 409 || status == 422) {
+      throw GitConflictException(
+        baseSha: baseSha,
+        message:
+            'Iemand anders heeft deze presentatie gewijzigd sinds jij hem '
+            'opende. Haal de nieuwste versie op voordat je opnieuw opslaat.',
+      );
+    }
+    _checkStatus(status);
+  }
+
   /// Een ref komt soms uit door de gebruiker of de forge geleverde data. Hij
   /// belandt in een URL-pad, dus weigeren we alles wat daar een betekenis heeft
   /// of wat git zelf niet als refnaam accepteert.

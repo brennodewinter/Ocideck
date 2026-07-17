@@ -36,6 +36,21 @@ class BrowserGitTransport implements GitTransport {
     Uri uri, {
     required Map<String, String> headers,
     required int maxBytes,
+  }) => _send(uri, headers: headers, maxBytes: maxBytes);
+
+  @override
+  Future<GitResponse> post(
+    Uri uri, {
+    required Map<String, String> headers,
+    required List<int> body,
+    required int maxBytes,
+  }) => _send(uri, headers: headers, body: body, maxBytes: maxBytes);
+
+  Future<GitResponse> _send(
+    Uri uri, {
+    required Map<String, String> headers,
+    required int maxBytes,
+    List<int>? body,
   }) async {
     if (!config.isConfigured) {
       throw const GitForgeException(
@@ -51,8 +66,20 @@ class BrowserGitTransport implements GitTransport {
       );
     }
 
-    final direct = await _fetchCapped(uri, headers, maxBytes);
+    final direct = await _fetchCapped(uri, headers, maxBytes, body: body);
     if (direct != null) return direct;
+
+    // Een schrijfactie gaat nooit door het fetch-hulppunt. Los van het token
+    // (dat er sowieso bij zit, zie _mayUseProxy): dat punt is een leesproxy, en
+    // een POST erdoorheen jassen zou van OciDeck's eigen server een schrijfpad
+    // naar andermans forge maken.
+    if (body != null) {
+      throw const GitForgeException(
+        GitForgeError.network,
+        'Server onbereikbaar vanuit de browser. Bij een eigen Forgejo is dit '
+        'meestal CORS: sta deze origin toe op de server.',
+      );
+    }
 
     // Een self-hosted Forgejo stuurt vaak geen CORS-headers, dus weigert de
     // browser de directe lezing. Het same-origin fetch-hulppunt kan dat
@@ -97,11 +124,15 @@ class BrowserGitTransport implements GitTransport {
     Map<String, String> headers,
     int maxBytes, {
     Duration timeout = const Duration(seconds: 30),
+    List<int>? body,
   }) async {
     try {
-      final response = await _client
-          .get(uri, headers: headers.isEmpty ? null : headers)
-          .timeout(timeout);
+      final h = headers.isEmpty ? null : headers;
+      final response =
+          await (body == null
+                  ? _client.get(uri, headers: h)
+                  : _client.post(uri, headers: h, body: body))
+              .timeout(timeout);
       final bytes = response.bodyBytes;
       if (bytes.length > maxBytes) {
         throw const GitForgeException(
