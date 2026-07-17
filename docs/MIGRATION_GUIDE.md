@@ -6,7 +6,14 @@ This document provides guidance for migrating between different versions of OciD
 
 OciDeck follows semantic versioning to help users understand the impact of updates. This guide outlines migration paths from previous versions to newer ones, helping maintain continuity in workflows while adopting new features.
 
-## Version 1.x to 2.x Migration
+> **Status:** OciDeck is currently at version **1.0.0** — no 2.x or 3.x release
+> exists yet. The version-specific sections below are **illustrative
+> placeholders** showing the shape of the migration notes a future major release
+> would carry (breaking-change summary, migration steps, rollback). They do not
+> describe migrations you can perform today; each real major release will replace
+> the relevant section with its actual breaking changes.
+
+## Version 1.x to 2.x Migration (illustrative — not yet released)
 
 ### Breaking Changes
 
@@ -29,7 +36,7 @@ OciDeck follows semantic versioning to help users understand the impact of updat
 4. **Review TLP Settings**: Re-examine deck classification levels as enforcement has been strengthened
 5. **Verify Privacy Settings**: Check that privacy disposition settings are properly applied
 
-## Version 2.x to 3.x Migration
+## Version 2.x to 3.x Migration (illustrative — not yet released)
 
 ### Breaking Changes
 
@@ -140,7 +147,7 @@ In case of critical issues:
 For migration assistance or specific issues:
 - Community forums and support channels
 - Official documentation updates 
-- GitHub issue tracker for bug reports
+- The project's issue tracker (Forgejo) for bug reports
 - Release notes detailing breaking changes
 
 ## Future Migration Considerations

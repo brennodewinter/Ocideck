@@ -67,9 +67,11 @@ The privacy scanning functionality implements:
 ### Data Handling and Storage
 
 #### Temporary Files and Recovery
-- Auto-save snapshots are stored in a secure temporary location
-- Crash recovery data is encrypted where possible 
-- All temporary files are automatically cleaned up on exit
+- Auto-save snapshots are written atomically to a per-user application-support
+  location (not a world-readable temp directory)
+- Recovery snapshots hold the working deck content and are **not** encrypted;
+  they inherit the OS user-account file protections of that directory
+- Snapshots are cleaned up on a clean exit and superseded on the next save
 
 #### Settings and Credentials
 - User settings are stored locally with encryption when required
@@ -82,7 +84,7 @@ All export operations follow strict security protocols:
 
 1. **Classification Gate**: Enforced before any export is generated
 2. **Content Sanitization**: Removes potentially unsafe HTML/JS content in exports
-3. **Document Integrity**: Ensures exported documents maintain their integrity (PDF signatures, metadata)
+3. **Document Metadata**: Export metadata (title, author, classification) is derived from the deck and embedded consistently across formats. Note: exported PDFs are not cryptographically signed.
 4. **Privacy Projection**: All sensitive data is properly redacted or removed from exports
 
 ## Attack Surface Mitigation

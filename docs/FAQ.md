@@ -77,7 +77,7 @@ OciDeck enforces strict export controls:
 - **Primary**: Markdown (.md) with Marp format compatibility
 - **Packages**: .ocideck (single-file packages)
 - **Style Profiles**: .ocideckstyle for theme sharing  
-- **Images**: PNG, JPEG, GIF, BMP, WebP (animated)
+- **Images**: PNG, JPEG, GIF, BMP, WebP (validated by content/magic bytes, not by file extension)
 - **Video/Audio**: Various formats supported through underlying libraries
 
 ### How are assets managed in OciDeck?
@@ -111,22 +111,24 @@ OciDeck supports "cutting" videos across slides:
 4. During presentation, segments stop at cut points and advance automatically
 
 ### What chart types are supported?
-OciDeck supports various chart types including:
-- Bar charts (normal, stacked)
+OciDeck supports the following chart types:
+- Bar charts (vertical, stacked, horizontal, horizontal stacked)
 - Line and area charts  
-- Pie/donut charts
+- Pie and donut charts
 - Radar/spider charts
 - Scatter plots
 - Waterfall charts
-- Heatmaps/risk matrices
-- Combo charts with mixed series types
+- Heatmaps (which double as risk matrices)
+- Combo charts (bars plus the last series drawn as a line on a second axis)
 
 ### How does the AI assistant work?
 The optional AI assistance requires explicit user consent:
-1. Enabled in Settings → Security
-2. Requires configuration of local model or outbound endpoint
+1. Enabled in its own **Settings → AI Assistant** tab (off by default)
+2. Requires configuration of a local model or an outbound endpoint; using a
+   cloud/outbound endpoint additionally requires the general outbound-privacy
+   consent under **Settings → License and Privacy**
 3. Used for generating text suggestions and alt-text for images  
-4. All data processing stays within user's control
+4. All data processing stays within the user's control
 
 ## Platform Support
 
@@ -238,7 +240,7 @@ While OciDeck is primarily designed as a desktop application, the team continues
 
 ### How can I contribute to OciDeck development?  
 Community contributions are welcome through:
-- Bug reports via GitHub issues
+- Bug reports via the project's issue tracker (Forgejo)
 - Feature requests in discussion forums  
 - Code contributions following project guidelines
 - Documentation improvements 

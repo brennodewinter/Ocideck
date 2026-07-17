@@ -135,10 +135,11 @@ flutter run -d linux
 
 #### Web Platform
 ```bash
-# Build and serve web version
-make build-web && make serve-web
+# Build the hardened web bundle, then serve build/web/ from any static host
+make build-web
+# e.g. (cd build/web && python3 -m http.server 8080)
 
-# Or manually:
+# Or, for a live-reload dev loop:
 flutter run -d chrome --web-hostname 127.0.0.1 --web-port 8080
 ```
 
@@ -186,8 +187,8 @@ make test-services     # Service layer tests
 make test-presenter    # Presenter functionality tests
 
 # Run quality gate checks
-make check             # format-check + analyze + full test suite
-make check-full        # Plus license, SBOM, and web checks
+make check             # format-check + analyze + conventions + method-length + dead-code + coverage
+make check-full        # Plus license, SBOM freshness, bundled-JS CVEs, web hardening, deps report
 ```
 
 ### Test Environment Requirements
@@ -239,7 +240,7 @@ The development workflow enforces:
 - `dart format` compliance (via make format-check)
 - Static analysis (`flutter analyze --fatal-infos`)
 - Unit and widget tests for all new features  
-- Coverage minimum of 73% line coverage
+- Coverage minimum of 78% line coverage (enforced by `make coverage`)
 - Convention enforcement through check_conventions
 
 ### Version Control Guidelines  
