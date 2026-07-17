@@ -8,6 +8,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **On desktop, OciDeck now detects a native `git` and shows it under *Settings →
+  Git*.** This is the groundwork for real offline history (a genuine local commit
+  per save, ten-commits-on-a-plane): the app finds your installed `git` (≥2.19),
+  reports the version, and falls back to the REST path when it is absent — so
+  nothing changes on web or on a machine without `git`. The detection is careful
+  on macOS: it checks for the Xcode command-line tools first, so it never trips
+  the `/usr/bin/git` shim into popping an install dialog, and it never probes at
+  startup — only when you open the git settings. Every `git` invocation is
+  hardened (no shell, the token supplied through the environment and never in the
+  command line or `.git/config`, no inherited config or hooks, a timeout).
 - **Saving to git now survives losing your connection.** If the save cannot
   reach the forge, the deck's text is kept in a durable local working copy and
   the deck joins a queue — you are told "saved, syncs when you're back online"
