@@ -740,6 +740,11 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Versies…': 'Vershonnan…',
+  'Versies:': 'Vershonnan:',
+  'Nog geen uitgebrachte versies van dit deck.':
+      'Ainda no tin vershon publiká di e deck aki.',
+  'Horizontale gestapelde staaf': 'Baranan apilá horizontal',
   'Git-geschiedenis…': 'Historia di git…',
   'Git-geschiedenis:': 'Historia di git:',
   'Nog geen commits voor dit deck.': 'Ainda no tin commit pa e deck aki.',

@@ -1802,6 +1802,11 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Versies…': 'Versiuni…',
+  'Versies:': 'Versiuni:',
+  'Nog geen uitgebrachte versies van dit deck.':
+      'Încă nicio versiune publicată pentru acest deck.',
+  'Horizontale gestapelde staaf': 'Bare orizontale stivuite',
   'Git-geschiedenis…': 'Istoric git…',
   'Git-geschiedenis:': 'Istoric git:',
   'Nog geen commits voor dit deck.': 'Încă niciun commit pentru acest deck.',

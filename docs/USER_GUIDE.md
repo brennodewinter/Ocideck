@@ -125,9 +125,9 @@ You can use a folder on your Nextcloud as a source for decks and assets.
 Add a slide and pick a type: **title**, **section** divider, **bullets**, **two
 bullet columns**, **bullets + image**, **two images**, **large image**, **video**,
 **audio**, **quote**, **table**, **source code**, **chart** (bar, horizontal
-bar, stacked bar, combo, line, area, pie, donut, spider/radar, scatter,
-waterfall, or heatmap/risk matrix), **cockpit** (a dashboard of aviation-style
-instrument gauges),
+bar, stacked bar, horizontal stacked bar, combo, line, area, pie, donut,
+spider/radar, scatter, waterfall, or heatmap/risk matrix), **cockpit** (a
+dashboard of aviation-style instrument gauges),
 **question** (an interactive quiz slide), **timeline** (an animated timeline of
 dated events), and
 **free Markdown**. Each card in the chooser shows a miniature
@@ -230,6 +230,9 @@ The available types:
   cartesian charts (labels on the x-axis, values on the y-axis).
 - **Horizontal bar** — bars laid left-to-right; best for rankings and long
   category names.
+- **Horizontal stacked bar** — a stacked bar turned a quarter turn: one bar per
+  label with the series stacked left-to-right. Best for part-to-whole
+  comparisons with long category names; a wide enough segment prints its value.
 - **Combo** — bars for every series **except the last**, which is drawn as a
   line on its own right-hand axis (e.g. revenue bars + a growth-% line). With a
   single series it falls back to a plain bar chart.
@@ -252,8 +255,8 @@ The available types:
 - **Min/max** (optional) — offered for the cartesian types (bar, line, area,
   scatter, combo, waterfall) and radar. On the cartesian charts they draw
   horizontal **reference lines**; on a spider/radar chart they fix the **scale**
-  (centre to outer ring). They are not shown for pie, donut, horizontal bar, or
-  heatmap. Leave them empty to scale automatically.
+  (centre to outer ring). They are not shown for pie, donut, horizontal bar,
+  horizontal stacked bar, or heatmap. Leave them empty to scale automatically.
 - **Reading values** — hovering a legend entry highlights its series (or pie
   slice). On a line chart the tooltip belongs to the dot under the cursor and
   shows every overlapping dot at once; on a spider/radar chart hovering a point

@@ -1787,6 +1787,11 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Versies…': 'Verziók…',
+  'Versies:': 'Verziók:',
+  'Nog geen uitgebrachte versies van dit deck.':
+      'Ehhez a csomaghoz még nincs kiadott verzió.',
+  'Horizontale gestapelde staaf': 'Vízszintes halmozott oszlop',
   'Git-geschiedenis…': 'Git-előzmények…',
   'Git-geschiedenis:': 'Git-előzmények:',
   'Nog geen commits voor dit deck.': 'Ehhez a csomaghoz még nincs commit.',

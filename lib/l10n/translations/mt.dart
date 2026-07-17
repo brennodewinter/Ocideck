@@ -1806,6 +1806,11 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Versies…': 'Verżjonijiet…',
+  'Versies:': 'Verżjonijiet:',
+  'Nog geen uitgebrachte versies van dit deck.':
+      'Għad m\'hemmx verżjonijiet maħruġa ta\' dan id-deck.',
+  'Horizontale gestapelde staaf': 'Bar stakkjat orizzontali',
   'Git-geschiedenis…': 'Storja ta\' git…',
   'Git-geschiedenis:': 'Storja ta\' git:',
   'Nog geen commits voor dit deck.': 'Għad m\'hemmx commits għal dan id-deck.',

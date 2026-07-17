@@ -824,6 +824,34 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  testWidgets('horizontal stacked bar renders category and segment labels', (
+    tester,
+  ) async {
+    const spec = ChartSpec(
+      type: ChartType.horizontalStackedBar,
+      title: 'Verdeling',
+      x: ['Alpha', 'Beta'],
+      series: [
+        ChartSeries(name: 'A', data: [6, 8]),
+        ChartSeries(name: 'B', data: [4, 3]),
+      ],
+    );
+
+    await tester.pumpWidget(_host(spec));
+    await tester.pump();
+    // The custom (hand-drawn) chart settles its entrance tween before the
+    // segment value labels appear.
+    await tester.pumpAndSettle();
+
+    expect(find.text('Alpha'), findsOneWidget);
+    expect(find.text('Beta'), findsOneWidget);
+    // Each series is one segment across both bars; a wide segment prints its
+    // value.
+    expect(find.text('6'), findsWidgets);
+    expect(find.text('8'), findsWidgets);
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets(
     'combo overlays a line over the bars, degrades below two series',
     (tester) async {
@@ -924,6 +952,7 @@ void main() {
       ChartType.combo,
       ChartType.waterfall,
       ChartType.heatmap,
+      ChartType.horizontalStackedBar,
     ]) {
       final spec = ChartSpec(
         type: type,

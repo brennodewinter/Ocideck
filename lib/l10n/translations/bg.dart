@@ -1806,6 +1806,11 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Versies…': 'Версии…',
+  'Versies:': 'Версии:',
+  'Nog geen uitgebrachte versies van dit deck.':
+      'Все още няма издадени версии на това тесте.',
+  'Horizontale gestapelde staaf': 'Хоризонтална наслоена стълбовидна',
   'Git-geschiedenis…': 'История на git…',
   'Git-geschiedenis:': 'История на git:',
   'Nog geen commits voor dit deck.': 'Все още няма commit-и за това тесте.',

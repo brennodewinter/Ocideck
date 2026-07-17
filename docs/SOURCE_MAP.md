@@ -18,7 +18,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 ## `lib/models/` — data model
 
 - `annotation.dart` — `InkStroke` and `InkTool` enum for freehand drawing annotations on presentation slides.
-- `chart.dart` — `ChartSpec`/`ChartSeries` and the `ChartType` enum (bar, stacked/horizontal bar, combo, line, area, pie, donut, radar, scatter, waterfall, heatmap) for chart slides with inline or CSV data.
+- `chart.dart` — `ChartSpec`/`ChartSeries` and the `ChartType` enum (bar, stacked/horizontal bar, horizontal stacked bar, combo, line, area, pie, donut, radar, scatter, waterfall, heatmap) for chart slides with inline or CSV data.
 - `checklist_spec.dart` — `ChecklistSpec` for the security checklist slide (MIAUW tri-state test list linked to findings).
 - `checklist_template.dart` — `ChecklistTemplate`/`ChecklistTemplateItem`: a user-created reusable checklist stored in the settings (feedback #9), with tolerant `encodeList`/`decodeList`.
 - `cockpit.dart` — `CockpitSpec`/`CockpitMeterSpec` for instrumentation gauges (speedometer, voltmeter, etc.).
@@ -362,7 +362,7 @@ follow in later phases.
 
 - `bullets_previews.dart` — Bullet-point slide layout.
 - `chart_preview.dart` — Chart slide rendering + dispatch, legend, hover, and screen-reader text for every chart type.
-- `chart_preview_extra.dart` — Hand-drawn builders for the horizontal-bar, combo, waterfall, and heatmap chart types.
+- `chart_preview_extra.dart` — Hand-drawn builders for the horizontal-bar, horizontal-stacked-bar, combo, waterfall, and heatmap chart types.
 - `checklist_previews.dart` — Checklist slides with a progress bar; `_ChecklistBulletRow` and the `_GroupHeadingRow` (group-heading/divider) row widget shared by the bullet previews.
 - `cockpit_preview.dart` — Animated cockpit/gauge dashboard slides.
 - `code_preview.dart` — Syntax-highlighted code slides with fit.

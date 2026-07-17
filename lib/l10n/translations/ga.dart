@@ -1819,6 +1819,11 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Versies…': 'Leaganacha…',
+  'Versies:': 'Leaganacha:',
+  'Nog geen uitgebrachte versies van dit deck.':
+      'Níl aon leagan eisithe don deic seo fós.',
+  'Horizontale gestapelde staaf': 'Barra cruachta cothrománach',
   'Git-geschiedenis…': 'Stair git…',
   'Git-geschiedenis:': 'Stair git:',
   'Nog geen commits voor dit deck.': 'Níl aon commit don deic seo fós.',

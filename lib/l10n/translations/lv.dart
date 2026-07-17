@@ -1782,6 +1782,11 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Versies…': 'Versijas…',
+  'Versies:': 'Versijas:',
+  'Nog geen uitgebrachte versies van dit deck.':
+      'Šim klājam vēl nav publicētu versiju.',
+  'Horizontale gestapelde staaf': 'Horizontāls sakrauts stabiņu',
   'Git-geschiedenis…': 'Git vēsture…',
   'Git-geschiedenis:': 'Git vēsture:',
   'Nog geen commits voor dit deck.': 'Šim klājam vēl nav commit.',

@@ -1758,6 +1758,11 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Versies…': 'mI\'mey…',
+  'Versies:': 'mI\'mey:',
+  'Nog geen uitgebrachte versies van dit deck.':
+      'deck vamvaD mI\' tu\'be\'lu\' DaH.',
+  'Horizontale gestapelde staaf': 'SIrgh SaS muvlu\'',
   'Git-geschiedenis…': 'git qonwI\'…',
   'Git-geschiedenis:': 'git qonwI\':',
   'Nog geen commits voor dit deck.': 'deck vamvaD commit tu\'be\'lu\' DaH.',

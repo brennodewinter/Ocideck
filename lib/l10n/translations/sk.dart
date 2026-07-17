@@ -1790,6 +1790,11 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Versies…': 'Verzie…',
+  'Versies:': 'Verzie:',
+  'Nog geen uitgebrachte versies van dit deck.':
+      'Pre túto sadu zatiaľ žiadne vydané verzie.',
+  'Horizontale gestapelde staaf': 'Vodorovný skladaný stĺpcový',
   'Git-geschiedenis…': 'História git…',
   'Git-geschiedenis:': 'História git:',
   'Nog geen commits voor dit deck.': 'Pre túto sadu zatiaľ žiadne commity.',

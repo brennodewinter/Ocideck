@@ -1774,6 +1774,11 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Versies…': 'Versioonid…',
+  'Versies:': 'Versioonid:',
+  'Nog geen uitgebrachte versies van dit deck.':
+      'Sellel dekil pole veel avaldatud versioone.',
+  'Horizontale gestapelde staaf': 'Horisontaalne virnastatud tulp',
   'Git-geschiedenis…': 'Giti ajalugu…',
   'Git-geschiedenis:': 'Giti ajalugu:',
   'Nog geen commits voor dit deck.': 'Sellel dekil pole veel commit\'e.',

@@ -1786,6 +1786,11 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Versies…': 'Verze…',
+  'Versies:': 'Verze:',
+  'Nog geen uitgebrachte versies van dit deck.':
+      'Zatím žádné vydané verze této sady.',
+  'Horizontale gestapelde staaf': 'Vodorovný skládaný sloupcový',
   'Git-geschiedenis…': 'Historie git…',
   'Git-geschiedenis:': 'Historie git:',
   'Nog geen commits voor dit deck.': 'Zatím žádné commity pro tuto sadu.',

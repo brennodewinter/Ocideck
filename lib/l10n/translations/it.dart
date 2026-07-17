@@ -736,6 +736,11 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Versies…': 'Versioni…',
+  'Versies:': 'Versioni:',
+  'Nog geen uitgebrachte versies van dit deck.':
+      'Ancora nessuna versione pubblicata di questo deck.',
+  'Horizontale gestapelde staaf': 'Barre orizzontali impilate',
   'Git-geschiedenis…': 'Cronologia git…',
   'Git-geschiedenis:': 'Cronologia git:',
   'Nog geen commits voor dit deck.': 'Ancora nessun commit per questo deck.',

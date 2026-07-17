@@ -30,6 +30,8 @@ const List<String> chartColorPalette = [
 /// - [combo] — bars plus the last series drawn as a line on a second axis.
 /// - [waterfall] — the first series as up/down steps building on a total.
 /// - [heatmap] — a grid coloured by value (doubles as a risk matrix).
+/// - [horizontalStackedBar] — a [stackedBar] laid on its side: one bar per
+///   label with the series stacked left-to-right (long labels / part-to-whole).
 enum ChartType {
   bar,
   stackedBar,
@@ -43,6 +45,7 @@ enum ChartType {
   combo,
   waterfall,
   heatmap,
+  horizontalStackedBar,
 }
 
 ChartType _chartTypeFromName(String? name) => ChartType.values.firstWhere(
@@ -225,6 +228,7 @@ class ChartSpec {
       type != ChartType.pie &&
       type != ChartType.donut &&
       type != ChartType.horizontalBar &&
+      type != ChartType.horizontalStackedBar &&
       type != ChartType.heatmap;
 
   /// Whether this is a pie-like proportional chart (one circle per series,

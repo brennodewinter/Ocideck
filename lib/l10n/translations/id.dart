@@ -1783,6 +1783,11 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Versies…': 'Versi…',
+  'Versies:': 'Versi:',
+  'Nog geen uitgebrachte versies van dit deck.':
+      'Belum ada versi rilis dari dek ini.',
+  'Horizontale gestapelde staaf': 'Batang bertumpuk horizontal',
   'Git-geschiedenis…': 'Riwayat git…',
   'Git-geschiedenis:': 'Riwayat git:',
   'Nog geen commits voor dit deck.': 'Belum ada commit untuk dek ini.',

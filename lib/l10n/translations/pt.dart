@@ -1813,6 +1813,11 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Versies…': 'Versões…',
+  'Versies:': 'Versões:',
+  'Nog geen uitgebrachte versies van dit deck.':
+      'Ainda não há versões publicadas deste deck.',
+  'Horizontale gestapelde staaf': 'Barras horizontais empilhadas',
   'Git-geschiedenis…': 'Histórico do git…',
   'Git-geschiedenis:': 'Histórico do git:',
   'Nog geen commits voor dit deck.': 'Ainda não há commits para este deck.',

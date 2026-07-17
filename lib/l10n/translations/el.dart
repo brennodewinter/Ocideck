@@ -1811,6 +1811,11 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Versies…': 'Εκδόσεις…',
+  'Versies:': 'Εκδόσεις:',
+  'Nog geen uitgebrachte versies van dit deck.':
+      'Δεν υπάρχουν ακόμη δημοσιευμένες εκδόσεις αυτού του deck.',
+  'Horizontale gestapelde staaf': 'Οριζόντιες στοιβαγμένες ράβδοι',
   'Git-geschiedenis…': 'Ιστορικό git…',
   'Git-geschiedenis:': 'Ιστορικό git:',
   'Nog geen commits voor dit deck.':

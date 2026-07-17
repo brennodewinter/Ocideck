@@ -1796,6 +1796,11 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Versies…': 'Wersje…',
+  'Versies:': 'Wersje:',
+  'Nog geen uitgebrachte versies van dit deck.':
+      'Brak wydanych wersji tego zestawu.',
+  'Horizontale gestapelde staaf': 'Słupkowy poziomy skumulowany',
   'Git-geschiedenis…': 'Historia git…',
   'Git-geschiedenis:': 'Historia git:',
   'Nog geen commits voor dit deck.': 'Brak commitów dla tego zestawu.',

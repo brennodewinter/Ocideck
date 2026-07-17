@@ -66,6 +66,8 @@ String _chartSvg(ChartSpec spec, ThemeProfile? theme) {
       _scatterSvg(b, spec, plotTop, theme);
     case ChartType.horizontalBar:
       _horizontalBarSvg(b, spec, plotTop, theme);
+    case ChartType.horizontalStackedBar:
+      _horizontalStackedBarSvg(b, spec, plotTop, theme);
     case ChartType.combo:
       _comboSvg(b, spec, plotTop, theme);
     case ChartType.waterfall:
@@ -626,6 +628,80 @@ void _horizontalBarSvg(
           'font-size="12" fill="#334155">${_num(v)}</text>',
         );
       }
+    }
+  }
+}
+
+/// The widest per-label total — the value axis of a horizontal stacked bar must
+/// fit the sum of a bar's segments, not just its biggest single value.
+double _maxHorizontalStackedSvg(ChartSpec spec) {
+  var m = 0.0;
+  for (var xi = 0; xi < spec.x.length; xi++) {
+    var sum = 0.0;
+    for (final s in spec.series) {
+      if (xi < s.data.length) sum += s.data[xi];
+    }
+    if (sum > m) m = sum;
+  }
+  return m <= 0 ? 1 : m * 1.15;
+}
+
+void _horizontalStackedBarSvg(
+  StringBuffer b,
+  ChartSpec spec,
+  double top,
+  ThemeProfile? theme,
+) {
+  const plotLeft = 170.0, right = 770.0, bottom = 382.0;
+  final n = spec.x.length;
+  if (n == 0 || spec.series.isEmpty) return;
+  final maxX = _maxHorizontalStackedSvg(spec);
+  final plotW = right - plotLeft;
+  // Vertical gridlines + value labels along the bottom.
+  for (var g = 0; g <= 4; g++) {
+    final x = plotLeft + plotW * g / 4;
+    b
+      ..write(
+        '<line x1="$x" y1="$top" x2="$x" y2="$bottom" stroke="#e2e8f0" '
+        'stroke-width="1"/>',
+      )
+      ..write(
+        '<text x="$x" y="${bottom + 18}" text-anchor="middle" font-size="13" '
+        'fill="#64748b">${_num(maxX * g / 4)}</text>',
+      );
+  }
+  final bandH = (bottom - top) / n;
+  final barH = bandH * 0.6;
+  for (var xi = 0; xi < n; xi++) {
+    final bandTop = top + bandH * xi;
+    final label = spec.x[xi].length > 16
+        ? '${spec.x[xi].substring(0, 15)}…'
+        : spec.x[xi];
+    b.write(
+      '<text x="${plotLeft - 12}" y="${bandTop + bandH / 2 + 5}" '
+      'text-anchor="end" font-size="13" fill="#334155">${_esc(label)}</text>',
+    );
+    final barTop = bandTop + (bandH - barH) / 2;
+    var segLeft = plotLeft;
+    for (var si = 0; si < spec.series.length; si++) {
+      if (xi >= spec.series[si].data.length) continue;
+      final v = spec.series[si].data[xi];
+      if (v <= 0) continue;
+      final len = plotW * (v / maxX);
+      // A thin white edge keeps abutting segments legible without the notches
+      // that per-segment rounding would leave.
+      b.write(
+        '<rect x="$segLeft" y="$barTop" width="$len" height="$barH" rx="3" '
+        'fill="${_color(spec, si, theme)}" stroke="white" stroke-width="1"/>',
+      );
+      if (len > 34) {
+        b.write(
+          '<text x="${segLeft + len / 2}" y="${barTop + barH / 2 + 5}" '
+          'text-anchor="middle" font-size="12" font-weight="700" fill="white">'
+          '${_num(v)}</text>',
+        );
+      }
+      segLeft += len;
     }
   }
 }
