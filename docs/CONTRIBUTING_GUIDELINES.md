@@ -42,7 +42,7 @@ Our codebase follows strict conventions:
 All code changes should include:
 - Unit tests for new functionality
 - Integration tests where appropriate  
-- Coverage maintained at or above current levels (73% floor)
+- Coverage maintained at or above the enforced floor (78% line coverage, checked by `make coverage`)
 - Test the specific behavior being changed
 
 ## Development Setup
@@ -72,8 +72,10 @@ make check
 # Run on desktop (macOS, Windows, Linux)
 flutter run -d macos  # or windows/linux
 
-# Run web version  
-make build-web && make serve-web
+# Build the hardened web bundle, then serve build/web/ from any static host
+make build-web
+# e.g. (cd build/web && python3 -m http.server 8080)
+# For a live-reload dev loop, use: flutter run -d chrome
 ```
 
 ## Code Review Process
@@ -102,8 +104,9 @@ Use descriptive branch names following this pattern:
 
 ## Issue Tracking
 
-We use GitHub issues to track bugs, enhancements, and feature requests. 
-Issues are categorized by:
+We use the project's issue tracker on the Forgejo instance that hosts the
+repository to track bugs, enhancements, and feature requests. Issues are
+categorized by:
 - **Bug**: Defects in functionality
 - **Enhancement**: Improvements to existing features  
 - **Feature**: New capabilities being added
@@ -128,7 +131,7 @@ All contributors are expected to follow our code of conduct:
 
 ## Contact
 
-For questions about contributing, contact the project maintainers through GitHub issues or the appropriate communication channels.
+For questions about contributing, contact the project maintainers through the repository's issue tracker or the appropriate communication channels.
 
 ## License
 

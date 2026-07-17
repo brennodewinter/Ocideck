@@ -81,10 +81,11 @@ OciDeck is designed to handle presentations efficiently while maintaining respon
 5. **Layer Separation**: Services should not import UI layers directly
 
 ### Testing Performance
-- Unit tests focused on performance-critical paths 
-- Memory usage validation in test suite
-- Benchmarking of rendering operations
-- Regression testing to prevent performance degradation
+- Widget and export tests cover the performance-critical rendering/export paths
+  for correctness
+- Image memory-cap behaviour is covered by dedicated tests
+- No dedicated timing/throughput benchmarks are run in CI — profile manually
+  (Flutter DevTools) when investigating a specific slowdown
 
 ## Best Practices for Users
 
@@ -117,6 +118,11 @@ OciDeck is designed to handle presentations efficiently while maintaining respon
 ## Benchmarking Information
 
 ### Typical Performance Metrics
+
+The figures below are **rough indicative ranges** to set expectations, not
+measured benchmarks — actual timings depend heavily on hardware, slide content,
+and platform (desktop vs web).
+
 | Operation | Time Range | Notes |
 |-----------|------------|-------|
 | Slide Preview Load | < 100ms | For simple slides |
@@ -126,10 +132,12 @@ OciDeck is designed to handle presentations efficiently while maintaining respon
 | HTML Export | 1-10 seconds | Usually faster than other formats |
 
 ### Performance Testing
-The test suite includes performance checks:
-- Rendering benchmarks for complex slides  
-- Memory usage validation during operations
-- Export time measurements for different presentation sizes
+OciDeck does not ship a formal timing/benchmark suite. Performance is guarded
+indirectly: the widget/export tests exercise the rendering and export paths for
+correctness (so a regression that breaks them is caught), and behaviours such as
+the image memory caps have dedicated tests. There are no automated wall-clock or
+throughput benchmarks in CI, so the ranges above should be treated as guidance
+rather than enforced budgets.
 
 ## Known Limitations and Workarounds
 
