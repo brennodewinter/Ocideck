@@ -1790,6 +1790,11 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Git-geschiedenis…': 'Povijest gita…',
+  'Git-geschiedenis:': 'Povijest gita:',
+  'Nog geen commits voor dit deck.': 'Još nema commitova za ovaj komplet.',
+  'Gepusht': 'Poslano',
+  'Nog niet gepusht': 'Još nije poslano',
   'Gesynchroniseerd met git.': 'Sinkronizirano s git.',
   'Nog geen verbinding — het gaat later mee.':
       'Još nema veze — poslat će se kasnije.',

@@ -1786,6 +1786,11 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Git-geschiedenis…': 'Historie git…',
+  'Git-geschiedenis:': 'Historie git:',
+  'Nog geen commits voor dit deck.': 'Zatím žádné commity pro tuto sadu.',
+  'Gepusht': 'Odesláno',
+  'Nog niet gepusht': 'Ještě neodesláno',
   'Gesynchroniseerd met git.': 'Synchronizováno s git.',
   'Nog geen verbinding — het gaat later mee.':
       'Zatím bez připojení — odešle se později.',

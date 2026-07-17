@@ -1806,6 +1806,11 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Git-geschiedenis…': 'Storja ta\' git…',
+  'Git-geschiedenis:': 'Storja ta\' git:',
+  'Nog geen commits voor dit deck.': 'Għad m\'hemmx commits għal dan id-deck.',
+  'Gepusht': 'Mibgħut',
+  'Nog niet gepusht': 'Għadu ma ntbagħatx',
   'Gesynchroniseerd met git.': 'Sinkronizzat ma\' git.',
   'Nog geen verbinding — het gaat later mee.':
       'Għad m\'hemmx konnessjoni — jintbagħat aktar tard.',

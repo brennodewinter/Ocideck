@@ -1802,6 +1802,11 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Git-geschiedenis…': 'Istoric git…',
+  'Git-geschiedenis:': 'Istoric git:',
+  'Nog geen commits voor dit deck.': 'Încă niciun commit pentru acest deck.',
+  'Gepusht': 'Trimis',
+  'Nog niet gepusht': 'Încă netrimis',
   'Gesynchroniseerd met git.': 'Sincronizat cu git.',
   'Nog geen verbinding — het gaat later mee.':
       'Încă fără conexiune — se va trimite mai târziu.',

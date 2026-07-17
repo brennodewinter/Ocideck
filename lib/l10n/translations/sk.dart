@@ -1790,6 +1790,11 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Git-geschiedenis…': 'História git…',
+  'Git-geschiedenis:': 'História git:',
+  'Nog geen commits voor dit deck.': 'Pre túto sadu zatiaľ žiadne commity.',
+  'Gepusht': 'Odoslané',
+  'Nog niet gepusht': 'Ešte neodoslané',
   'Gesynchroniseerd met git.': 'Synchronizované s git.',
   'Nog geen verbinding — het gaat later mee.':
       'Zatiaľ bez pripojenia — odošle sa neskôr.',

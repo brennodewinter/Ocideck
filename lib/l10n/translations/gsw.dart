@@ -1787,6 +1787,11 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Git-geschiedenis…': 'Git-Verlauf…',
+  'Git-geschiedenis:': 'Git-Verlauf:',
+  'Nog geen commits voor dit deck.': 'No kei Commits für das Deck.',
+  'Gepusht': 'Gepusht',
+  'Nog niet gepusht': 'No nöd gepusht',
   'Gesynchroniseerd met git.': 'Mit git synchronisiert.',
   'Nog geen verbinding — het gaat later mee.':
       'No kei Verbindig — es gaht spöter mit.',

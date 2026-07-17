@@ -1774,6 +1774,11 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Git-geschiedenis…': 'Giti ajalugu…',
+  'Git-geschiedenis:': 'Giti ajalugu:',
+  'Nog geen commits voor dit deck.': 'Sellel dekil pole veel commit\'e.',
+  'Gepusht': 'Saadetud',
+  'Nog niet gepusht': 'Veel saatmata',
   'Gesynchroniseerd met git.': 'Sünkroonitud gitiga.',
   'Nog geen verbinding — het gaat later mee.':
       'Ühendust veel pole — läheb hiljem kaasa.',

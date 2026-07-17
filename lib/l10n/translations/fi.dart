@@ -1783,6 +1783,11 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Git-geschiedenis…': 'Git-historia…',
+  'Git-geschiedenis:': 'Git-historia:',
+  'Nog geen commits voor dit deck.': 'Tälle setille ei vielä committeja.',
+  'Gepusht': 'Lähetetty',
+  'Nog niet gepusht': 'Ei vielä lähetetty',
   'Gesynchroniseerd met git.': 'Synkronoitu gitin kanssa.',
   'Nog geen verbinding — het gaat later mee.':
       'Ei yhteyttä vielä — lähtee myöhemmin.',

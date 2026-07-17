@@ -740,6 +740,12 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Git-geschiedenis…': 'Historique git…',
+  'Git-geschiedenis:': 'Historique git :',
+  'Nog geen commits voor dit deck.':
+      'Aucun commit pour ce deck pour l\'instant.',
+  'Gepusht': 'Poussé',
+  'Nog niet gepusht': 'Pas encore poussé',
   'Gesynchroniseerd met git.': 'Synchronisé avec git.',
   'Nog geen verbinding — het gaat later mee.':
       'Pas encore de connexion — ce sera envoyé plus tard.',

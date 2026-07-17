@@ -741,6 +741,11 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Git-geschiedenis…': 'Git-skiednis…',
+  'Git-geschiedenis:': 'Git-skiednis:',
+  'Nog geen commits voor dit deck.': 'Noch gjin commits foar dit deck.',
+  'Gepusht': 'Pusht',
+  'Nog niet gepusht': 'Noch net pusht',
   'Gesynchroniseerd met git.': 'Syngronisearre mei git.',
   'Nog geen verbinding — het gaat later mee.':
       'Noch gjin ferbining — it giet letter mei.',

@@ -46,6 +46,7 @@ import '../services/recovery_service.dart';
 import '../services/mermaid_render_service.dart';
 import '../models/git_settings.dart';
 import '../services/git/git_forge.dart';
+import '../services/git/native_git_mirror_api.dart';
 import '../services/webdav_service.dart';
 import '../state/deck_provider.dart';
 import '../state/deck_quality_provider.dart';

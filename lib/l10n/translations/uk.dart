@@ -1801,6 +1801,11 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Git-geschiedenis…': 'Історія git…',
+  'Git-geschiedenis:': 'Історія git:',
+  'Nog geen commits voor dit deck.': 'Для цієї колоди ще немає комітів.',
+  'Gepusht': 'Надіслано',
+  'Nog niet gepusht': 'Ще не надіслано',
   'Gesynchroniseerd met git.': 'Синхронізовано з git.',
   'Nog geen verbinding — het gaat later mee.':
       'Ще немає зв\'язку — надішлеться пізніше.',

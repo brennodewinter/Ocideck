@@ -1783,6 +1783,11 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Git-geschiedenis…': 'Riwayat git…',
+  'Git-geschiedenis:': 'Riwayat git:',
+  'Nog geen commits voor dit deck.': 'Belum ada commit untuk dek ini.',
+  'Gepusht': 'Terkirim',
+  'Nog niet gepusht': 'Belum terkirim',
   'Gesynchroniseerd met git.': 'Tersinkron dengan git.',
   'Nog geen verbinding — het gaat later mee.':
       'Belum ada koneksi — akan dikirim nanti.',
