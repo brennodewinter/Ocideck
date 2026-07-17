@@ -121,11 +121,25 @@ Slide trimBulletExplanations(Slide slide) {
 
 /// Verwerkt één kolom: een trimbare bullet wordt zijn label, en de volledige
 /// oorspronkelijke tekst gaat naar [moved], zodat er niets verloren gaat.
+///
+/// De notities krijgen de regel met zijn context mee: de tussenkop waaronder
+/// hij stond (eenmaal, boven de eerste regel die eronder valt) en zijn
+/// inspring-niveau. Zonder die twee leest de spreker een vlakke lijst zinnen
+/// zonder te weten bij welk deel van de slide ze horen — en dan is de uitleg
+/// wel bewaard maar niet meer te plaatsen.
 List<String> _trimColumn(List<String> bullets, List<String> moved) {
   final result = <String>[];
+  String? heading; // de tussenkop waaronder we nu lopen
+  var headingMoved = false;
   for (final bullet in bullets) {
+    if (isGroupHeading(bullet)) {
+      heading = groupHeadingText(bullet);
+      headingMoved = false;
+      result.add(bullet);
+      continue;
+    }
     final plain = _plainText(bullet);
-    final split = isGroupHeading(bullet) ? null : _splitLabelExplanation(plain);
+    final split = _splitLabelExplanation(plain);
     if (split == null) {
       result.add(bullet);
       continue;
@@ -138,7 +152,12 @@ List<String> _trimColumn(List<String> bullets, List<String> moved) {
           ? checklistBullet(level: level, text: split.label, checked: checked)
           : '${'\t' * level}${split.label}',
     );
-    moved.add(plain);
+    // Een naamloze kop is een scheidingsstreep, geen context om te melden.
+    if (heading != null && heading.isNotEmpty && !headingMoved) {
+      moved.add(heading);
+      headingMoved = true;
+    }
+    moved.add('${'\t' * level}$plain');
   }
   return result;
 }

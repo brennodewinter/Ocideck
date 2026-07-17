@@ -108,6 +108,73 @@ void main() {
       );
     });
 
+    test('de tussenkop gaat als context mee naar de notities', () {
+      // Zonder de kop leest de spreker een vlakke lijst zinnen en weet hij niet
+      // meer bij welk deel van de slide ze hoorden.
+      final out = trimBulletExplanations(
+        bulletsWith([
+          groupHeadingBullet('Techniek'),
+          'Autorisatie: geregeld via de centrale IAM-oplossing',
+          groupHeadingBullet('Beleid'),
+          'Naleving: jaarlijks getoetst door de interne auditdienst',
+        ]),
+      );
+      expect(
+        out.notes,
+        [
+          'Techniek',
+          'Autorisatie: geregeld via de centrale IAM-oplossing',
+          'Beleid',
+          'Naleving: jaarlijks getoetst door de interne auditdienst',
+        ].join('\n'),
+      );
+    });
+
+    test('de kop komt één keer mee, hoeveel bullets er ook onder vallen', () {
+      final out = trimBulletExplanations(
+        bulletsWith([
+          groupHeadingBullet('Techniek'),
+          'Autorisatie: geregeld via de centrale IAM-oplossing',
+          'Logging: bewaard gedurende twaalf volle maanden',
+        ]),
+      );
+      expect('Techniek\n'.allMatches(out.notes), hasLength(1));
+      expect(out.notes.startsWith('Techniek\n'), isTrue);
+    });
+
+    test('een kop zonder bullets eronder blijft uit de notities', () {
+      final out = trimBulletExplanations(
+        bulletsWith([
+          groupHeadingBullet('Leeg'),
+          'Gewone bullet zonder meer',
+          groupHeadingBullet('Techniek'),
+          'Autorisatie: geregeld via de centrale IAM-oplossing',
+        ]),
+      );
+      expect(out.notes.contains('Leeg'), isFalse);
+      expect(out.notes.startsWith('Techniek\n'), isTrue);
+    });
+
+    test('een naamloze scheidingsstreep levert geen lege regel op', () {
+      final out = trimBulletExplanations(
+        bulletsWith([
+          groupHeadingBullet(''),
+          'Autorisatie: geregeld via de centrale IAM-oplossing',
+        ]),
+      );
+      expect(out.notes, 'Autorisatie: geregeld via de centrale IAM-oplossing');
+    });
+
+    test('de notitieregel houdt het inspring-niveau van zijn bullet', () {
+      final out = trimBulletExplanations(
+        bulletsWith(['\tRisico: de sleutel staat in de repository geschreven']),
+      );
+      expect(
+        out.notes,
+        '\tRisico: de sleutel staat in de repository geschreven',
+      );
+    });
+
     test('werkt over beide kolommen', () {
       final slide = Slide.create(SlideType.twoBullets).copyWith(
         bullets: ['Links: de eerste uitgebreide toelichting hier'],

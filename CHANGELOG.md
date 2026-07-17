@@ -167,6 +167,22 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   glance from a contrast or text-density one.
 
 ### Fixed
+- **"Split slide" no longer peels two bullets off a slide that has a group
+  heading near the top.** Page breaks snap to a heading so it leads its page,
+  but the snap took the nearest heading at any price: a heading on the third
+  bullet pulled the break back onto it and left a slide with two bullets on it,
+  then spread the rest over two more pages (2/5/4 where 6/5 belonged). A snap
+  that would leave a page under half its balanced size is now refused — a
+  heading that opens mid-page beats a near-empty slide. A group too big for one
+  page also stopped costing an extra page: it gets cut across pages either way,
+  so it now fills the page already open instead of abandoning it half full.
+- **Moving a bullet's explanation to the speaker notes now takes its context
+  along.** *"Uitleg naar notities"* left the label on the slide and moved the
+  full line down, but wrote the lines as a flat list: the "tussenkoppen" they
+  sat under were dropped and nested bullets lost their indent. A speaker reading
+  back "geregeld via de centrale IAM-oplossing" had no way to tell which part of
+  the slide it belonged to. Each heading now comes along once, above the first
+  line that falls under it, and every line keeps its indent level.
 - **"Split slide" now divides an over-full slide into balanced pages instead of
   peeling off a lopsided tail.** On a slide whose bullets do not all fit, the fix
   used to fill the first page to the readability cap and dump the whole remainder
