@@ -50,13 +50,15 @@ class RepoDeckFiles {
 /// terugzet; video en audio round-trippen nog niet door git en worden gemeld in
 /// plaats van als kapotte verwijzing weggeschreven.
 ///
-/// Alleen blobs die nog niet in de repo staan komen in [RepoDeckFiles.upserts] —
-/// dát is waar de pool zijn geld verdient ([AssetPool.existing]): een afbeelding
-/// die vijf decks delen staat er één keer.
+/// Met een [pool] komen alleen blobs die nog niet in de repo staan in
+/// [RepoDeckFiles.upserts] — dát is waar de pool zijn geld verdient
+/// ([AssetPool.existing]): een afbeelding die vijf decks delen staat er één
+/// keer. Op het native plane is [pool] `null`: git ontdubbelt zelf op inhoud, dus
+/// dan gaan álle blobs mee en zijn de al aanwezige simpelweg geen wijziging.
 Future<RepoDeckFiles> buildDeckRepoFiles(
   Deck deck, {
   required MarkdownService md,
-  required AssetPool pool,
+  required AssetPool? pool,
   required String deckDir,
   required AssetByteResolver resolveBytes,
 }) async {
@@ -114,8 +116,10 @@ Future<RepoDeckFiles> buildDeckRepoFiles(
     ),
   };
 
-  // Alleen de nog niet aanwezige blobs uploaden.
-  final already = await pool.existing(bytesForRef.keys);
+  // Met een pool alleen de nog niet aanwezige blobs; zonder pool (native) alle.
+  final already = pool == null
+      ? const <String>{}
+      : await pool.existing(bytesForRef.keys);
   for (final entry in bytesForRef.entries) {
     if (already.contains(entry.key)) continue;
     final poolPath = GitRepoLayout.assetPathOf(entry.key);
