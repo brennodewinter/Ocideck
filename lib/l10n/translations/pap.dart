@@ -740,6 +740,12 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Gesynchroniseerd met git.': 'Sinkronisá ku git.',
+  'Nog geen verbinding — het gaat later mee.':
+      'Ainda sin koneksion — lo bai despues.',
+  'De branch is verzet; je commits staan lokaal klaar.':
+      'E branch a move; bo commit ta kla lokalmente.',
+  'Synchroniseren mislukt.': 'Sinkronisashon a faya.',
   'Native git gevonden:': 'git nativo hañá:',
   'Native git: bezig met detecteren…': 'git nativo: ta deteklá…',
   'Native git: niet gevonden — het REST-pad wordt gebruikt':

@@ -8,6 +8,18 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **On desktop with `git`, saving a deck is now a real local commit — genuine
+  offline history.** When native `git` is present, OciDeck keeps a real clone of
+  the repository: opening reads from it, and saving writes the deck as an actual
+  `git commit` and pushes it. That commit is durable and offline — edit on a
+  plane, make ten saves, and ten commits are waiting to push when you land,
+  nothing queued or approximate. On reconnect *Sync now* pushes them. If someone
+  moved the branch while you were away, your commit is kept locally and the push
+  is held rather than overwriting their work (a real merge comes in a later
+  phase). Images ride along in the shared pool exactly as before. On the web, or
+  a desktop without `git`, the REST path from the previous releases is used
+  unchanged. The `git` token is delivered to the subprocess through its
+  environment only — verified never to land in `.git/config` or the command line.
 - **On desktop, OciDeck now detects a native `git` and shows it under *Settings →
   Git*.** This is the groundwork for real offline history (a genuine local commit
   per save, ten-commits-on-a-plane): the app finds your installed `git` (≥2.19),

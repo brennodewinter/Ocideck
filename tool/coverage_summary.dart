@@ -48,6 +48,10 @@ const Set<String> uncoveredBaseline = {
   // stub and the one-line barrel are the platform seam the VM runner can't load.
   'lib/services/git/git_cli_factory.dart',
   'lib/services/git/git_cli_web.dart',
+  // PLATFORM: the native git mirror's conditional-export facade + its web stub.
+  // The io half is exercised by native_git_mirror_test.dart against a real repo.
+  'lib/services/git/native_git_mirror_factory.dart',
+  'lib/services/git/native_git_mirror_stub.dart',
   // PLATFORM: the git draft store's conditional-export facade. Both halves
   // (FileDraftStore, PrefsDraftStore) are exercised by the DeckMirror contract
   // in test/git_deck_mirror_contract_test.dart; only this one-line barrel has no

@@ -1787,6 +1787,12 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Gesynchroniseerd met git.': 'Mit git synchronisiert.',
+  'Nog geen verbinding — het gaat later mee.':
+      'No kei Verbindig — es gaht spöter mit.',
+  'De branch is verzet; je commits staan lokaal klaar.':
+      'De Branch isch verschobe; dini Commits sind lokal parat.',
+  'Synchroniseren mislukt.': 'Synchronisierig fählgschlage.',
   'Native git gevonden:': 'Nativs git gfunde:',
   'Native git: bezig met detecteren…': 'Nativs git: am erkenne…',
   'Native git: niet gevonden — het REST-pad wordt gebruikt':

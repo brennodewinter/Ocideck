@@ -1782,6 +1782,12 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Gesynchroniseerd met git.': 'Synkroniserat med git.',
+  'Nog geen verbinding — het gaat later mee.':
+      'Ingen anslutning än — det skickas senare.',
+  'De branch is verzet; je commits staan lokaal klaar.':
+      'Grenen har flyttats; dina commits är klara lokalt.',
+  'Synchroniseren mislukt.': 'Synkroniseringen misslyckades.',
   'Native git gevonden:': 'Native git hittat:',
   'Native git: bezig met detecteren…': 'Native git: identifierar…',
   'Native git: niet gevonden — het REST-pad wordt gebruikt':

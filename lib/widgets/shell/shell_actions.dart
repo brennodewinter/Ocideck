@@ -280,17 +280,28 @@ Future<void> _openFromGit(BuildContext context, WidgetRef ref) async {
 
   final config = ref.read(settingsProvider).gitRepo;
   if (config == null) return;
+  // Native git als het er is: openen uit de lokale clone, met de clone-HEAD als
+  // basis. Anders het REST-pad.
+  final native = await ref.read(nativeGitMirrorProvider.future);
+  if (!context.mounted) return;
   final messenger = ScaffoldMessenger.of(context);
   final l10n = context.l10n;
   try {
-    final result = await ref
-        .read(tabsProvider.notifier)
-        .openDeckFromGit(
-          forge,
-          config: config,
-          deckDir: deckDir,
-          branch: config.defaultBranch,
-        );
+    final notifier = ref.read(tabsProvider.notifier);
+    final result = native != null
+        ? await notifier.openDeckFromGitNative(
+            native,
+            forge,
+            config: config,
+            deckDir: deckDir,
+            branch: config.defaultBranch,
+          )
+        : await notifier.openDeckFromGit(
+            forge,
+            config: config,
+            deckDir: deckDir,
+            branch: config.defaultBranch,
+          );
     _reportOpenFailure(messenger, l10n, result);
   } on GitForgeException catch (e) {
     // De uitzondering draagt al een uitlegbare tekst; die is voor de gebruiker

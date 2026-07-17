@@ -77,11 +77,16 @@ saved version stays retrievable, which a plain folder cannot give you.
   safe.
 - **Layout**: a repository holds many decks under `decks/<name>/deck.md`, with
   images shared in one `assets/` pool so the same picture is stored once.
-- **Native git (desktop):** if you have `git` installed (version 2.19 or newer),
-  *Settings → Git* shows it — this is the start of real offline history, where
-  each save becomes a genuine local commit. Without `git`, or on the web, the
-  REST path above is used and nothing changes. On macOS the check looks for the
-  Xcode command-line tools first, so it never prompts you to install anything.
+- **Native git (desktop):** if you have `git` installed (2.19 or newer),
+  *Settings → Git* shows it, and OciDeck keeps a real clone of the repository.
+  Then **each save is a genuine local commit** — durable and offline: edit away
+  from a network, save as often as you like, and every commit is waiting to push
+  when you reconnect (*Sync now*, or automatically on your next successful save).
+  If someone moved the branch while you were offline, your commit is kept safely
+  on your machine and the sync is held rather than overwriting their work. On the
+  web, or a desktop without `git`, the REST path above is used and nothing
+  changes. On macOS the check looks for the Xcode command-line tools first, so it
+  never prompts you to install anything.
 - **Versions and releases** are still being built. See
   [`design/GIT_STORAGE.md`](design/GIT_STORAGE.md).
 - **A repository is a trust boundary.** Everyone who can read it reads *every*

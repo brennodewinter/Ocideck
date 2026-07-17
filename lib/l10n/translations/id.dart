@@ -1783,6 +1783,12 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Gesynchroniseerd met git.': 'Tersinkron dengan git.',
+  'Nog geen verbinding — het gaat later mee.':
+      'Belum ada koneksi — akan dikirim nanti.',
+  'De branch is verzet; je commits staan lokaal klaar.':
+      'Branch telah berpindah; commit-mu siap secara lokal.',
+  'Synchroniseren mislukt.': 'Sinkronisasi gagal.',
   'Native git gevonden:': 'git native ditemukan:',
   'Native git: bezig met detecteren…': 'git native: mendeteksi…',
   'Native git: niet gevonden — het REST-pad wordt gebruikt':

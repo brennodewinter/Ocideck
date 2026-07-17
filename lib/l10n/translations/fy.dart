@@ -741,6 +741,12 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Gesynchroniseerd met git.': 'Syngronisearre mei git.',
+  'Nog geen verbinding — het gaat later mee.':
+      'Noch gjin ferbining — it giet letter mei.',
+  'De branch is verzet; je commits staan lokaal klaar.':
+      'De branch is ferpleatst; dyn commits steane lokaal klear.',
+  'Synchroniseren mislukt.': 'Syngronisearjen mislearre.',
   'Native git gevonden:': 'Native git fûn:',
   'Native git: bezig met detecteren…': 'Native git: oan it opspoaren…',
   'Native git: niet gevonden — het REST-pad wordt gebruikt':

@@ -36,20 +36,31 @@ Future<void> _saveToGit(BuildContext context, WidgetRef ref) async {
   final deckDir = GitRepoLayout.deckDir(choice.name);
   if (deckDir == null) return;
 
+  // Native git als het er is: een echte lokale commit. Anders het REST-pad.
+  final native = await ref.read(nativeGitMirrorProvider.future);
+  if (!context.mounted) return;
+
   final messenger = ScaffoldMessenger.of(context);
   final l10n = context.l10n;
   try {
-    final result = await ref
-        .read(tabsProvider.notifier)
-        .saveToGit(
-          forge,
-          config: config,
-          deckDir: deckDir,
-          branch: config.defaultBranch,
-          message: choice.message,
-          mirror: ref.read(draftMirrorProvider),
-          outbox: ref.read(outboxProvider),
-        );
+    final notifier = ref.read(tabsProvider.notifier);
+    final result = native != null
+        ? await notifier.saveToGitNative(
+            native,
+            config: config,
+            deckDir: deckDir,
+            branch: config.defaultBranch,
+            message: choice.message,
+          )
+        : await notifier.saveToGit(
+            forge,
+            config: config,
+            deckDir: deckDir,
+            branch: config.defaultBranch,
+            message: choice.message,
+            mirror: ref.read(draftMirrorProvider),
+            outbox: ref.read(outboxProvider),
+          );
     if (!context.mounted) return;
     switch (result.status) {
       case GitSaveStatus.committed:
@@ -130,6 +141,31 @@ Future<void> _flushGitQueue(
 }) async {
   final l10n = context.l10n;
   final messenger = ScaffoldMessenger.of(context);
+
+  // Native: duw de lokale historie omhoog. Er is geen wachtrij — niet-gepushte
+  // commits zíjn de wachtrij.
+  final native = await ref.read(nativeGitMirrorProvider.future);
+  if (!context.mounted) return;
+  if (native != null) {
+    final result = await ref.read(tabsProvider.notifier).syncGitNative(native);
+    if (!context.mounted || silent) return; // een stille flush meldt niets
+    messenger.showSnackBar(
+      SnackBar(
+        content: Text(switch (result.status) {
+          GitSaveStatus.committed => l10n.d('Gesynchroniseerd met git.'),
+          GitSaveStatus.queued => l10n.d(
+            'Nog geen verbinding — het gaat later mee.',
+          ),
+          GitSaveStatus.conflict => l10n.d(
+            'De branch is verzet; je commits staan lokaal klaar.',
+          ),
+          GitSaveStatus.failed => l10n.d('Synchroniseren mislukt.'),
+        }),
+      ),
+    );
+    return;
+  }
+
   final engine = await ref.read(syncEngineProvider.future);
   if (engine == null) return;
   if (silent && await ref.read(outboxProvider).isEmpty) return;

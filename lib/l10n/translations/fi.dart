@@ -1783,6 +1783,12 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Gesynchroniseerd met git.': 'Synkronoitu gitin kanssa.',
+  'Nog geen verbinding — het gaat later mee.':
+      'Ei yhteyttä vielä — lähtee myöhemmin.',
+  'De branch is verzet; je commits staan lokaal klaar.':
+      'Haara siirtyi; commitisi ovat valmiina paikallisesti.',
+  'Synchroniseren mislukt.': 'Synkronointi epäonnistui.',
   'Native git gevonden:': 'Natiivi git löytyi:',
   'Native git: bezig met detecteren…': 'Natiivi git: tunnistetaan…',
   'Native git: niet gevonden — het REST-pad wordt gebruikt':

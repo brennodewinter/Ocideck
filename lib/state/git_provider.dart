@@ -7,6 +7,8 @@ import '../services/git/git_cli.dart';
 import '../services/git/git_cli_factory.dart';
 import '../services/git/git_forge.dart';
 import '../services/git/gitea_forge.dart';
+import '../services/git/native_git_mirror_api.dart';
+import '../services/git/native_git_mirror_factory.dart';
 import '../services/git/outbox.dart';
 import '../services/git/sync_engine.dart';
 import 'settings_provider.dart';
@@ -58,9 +60,31 @@ final nativeGitVersionProvider = FutureProvider<GitVersion?>((ref) async {
   return ref.watch(gitCliProvider).probe();
 });
 
-/// De werkkopie waar een offline opslag naartoe schrijft (§8.1). Op web en op
-/// desktop-zonder-git is dit een [DraftMirror]; de native clone (Fase 3) komt
-/// later. Levenslang, want hij houdt geen dure staat vast.
+/// De native werkkopie: een échte clone met echte historie (§8.2), of `null`
+/// wanneer die er niet kan zijn — geen bruikbaar git, geen ingestelde repo, of
+/// web. Dan valt de app terug op [draftMirrorProvider] + de REST-SyncEngine.
+///
+/// Wordt herbouwd zodra de git-config wijzigt; de probe erachter draait maar
+/// één keer (zie [nativeGitVersionProvider]).
+final nativeGitMirrorProvider = FutureProvider<NativeGitMirror?>((ref) async {
+  final version = await ref.watch(nativeGitVersionProvider.future);
+  if (version == null) return null;
+  final config = ref.watch(settingsProvider).gitRepo;
+  if (config == null || !config.isConfigured) return null;
+  final token =
+      await ref
+          .read(settingsProvider.notifier)
+          .readGitToken(config.baseUrl, config.owner) ??
+      '';
+  return createNativeGitMirror(
+    git: ref.watch(gitCliProvider),
+    config: config,
+    token: token,
+  );
+});
+
+/// De werkkopie waar een offline REST-opslag naartoe schrijft (§8.1) — op web en
+/// op desktop-zonder-git. Levenslang, want hij houdt geen dure staat vast.
 final draftMirrorProvider = Provider<DeckMirror>((ref) => DraftMirror());
 
 /// De duurzame wachtrij van nog niet gepushte decks (§8.5). Overleeft het

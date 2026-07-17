@@ -1758,6 +1758,11 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Gesynchroniseerd met git.': 'git nI\'chuqta\'.',
+  'Nog geen verbinding — het gaat later mee.': 'rggh Suqbe\'lu\' — tugh jaH.',
+  'De branch is verzet; je commits staan lokaal klaar.':
+      'branch vIHpu\'; commitmey Daj pa\' papDaq.',
+  'Synchroniseren mislukt.': 'nI\'chuq Qapbe\'.',
   'Native git gevonden:': 'git tu\'lu\':',
   'Native git: bezig met detecteren…': 'git: wIvlI\'…',
   'Native git: niet gevonden — het REST-pad wordt gebruikt':

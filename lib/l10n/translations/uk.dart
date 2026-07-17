@@ -1801,6 +1801,12 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Gesynchroniseerd met git.': 'Синхронізовано з git.',
+  'Nog geen verbinding — het gaat later mee.':
+      'Ще немає зв\'язку — надішлеться пізніше.',
+  'De branch is verzet; je commits staan lokaal klaar.':
+      'Гілку переміщено; ваші коміти готові локально.',
+  'Synchroniseren mislukt.': 'Синхронізація не вдалася.',
   'Native git gevonden:': 'Знайдено рідний git:',
   'Native git: bezig met detecteren…': 'Рідний git: виявлення…',
   'Native git: niet gevonden — het REST-pad wordt gebruikt':

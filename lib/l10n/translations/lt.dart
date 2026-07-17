@@ -1791,6 +1791,12 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Gesynchroniseerd met git.': 'Sinchronizuota su git.',
+  'Nog geen verbinding — het gaat later mee.':
+      'Ryšio dar nėra — bus išsiųsta vėliau.',
+  'De branch is verzet; je commits staan lokaal klaar.':
+      'Šaka pasislinko; tavo commit\'ai paruošti vietoje.',
+  'Synchroniseren mislukt.': 'Sinchronizuoti nepavyko.',
   'Native git gevonden:': 'Rastas savasis git:',
   'Native git: bezig met detecteren…': 'Savasis git: aptinkama…',
   'Native git: niet gevonden — het REST-pad wordt gebruikt':

@@ -1811,6 +1811,12 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Gesynchroniseerd met git.': 'Συγχρονίστηκε με το git.',
+  'Nog geen verbinding — het gaat later mee.':
+      'Καμία σύνδεση ακόμη — θα σταλεί αργότερα.',
+  'De branch is verzet; je commits staan lokaal klaar.':
+      'Ο κλάδος μετακινήθηκε· τα commit σου είναι έτοιμα τοπικά.',
+  'Synchroniseren mislukt.': 'Ο συγχρονισμός απέτυχε.',
   'Native git gevonden:': 'Βρέθηκε εγγενές git:',
   'Native git: bezig met detecteren…': 'Εγγενές git: ανίχνευση…',
   'Native git: niet gevonden — het REST-pad wordt gebruikt':
