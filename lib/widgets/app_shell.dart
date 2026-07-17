@@ -50,6 +50,7 @@ import '../state/deck_provider.dart';
 import '../state/deck_quality_provider.dart';
 import '../state/image_contrast_provider.dart';
 import '../state/privacy_provider.dart';
+import '../state/provider_warmup.dart';
 import '../state/sec_module_provider.dart';
 import '../state/editor_provider.dart';
 import '../state/settings_provider.dart';
