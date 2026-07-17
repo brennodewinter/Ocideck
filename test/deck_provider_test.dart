@@ -135,7 +135,7 @@ void main() {
     expect(pages.skip(1).every((p) => p.continuesSplit), isTrue);
   });
 
-  test('splitSlide breaks between groups so a heading is never stranded', () {
+  test('splitSlide knipt op acht bullets, dwars door een groep heen', () {
     // Layout-metingen gebruiken TextPainter; binding moet geïnitialiseerd zijn.
     TestWidgetsFlutterBinding.ensureInitialized();
     final n = _notifier()..newDeck('D');
@@ -156,33 +156,11 @@ void main() {
     n.splitSlide(1);
 
     final pages = n.state.deck!.slides.skip(1).toList();
-    // Three equal groups fall onto three pages, each led by its heading — no
-    // group is cut across pages and no heading is stranded at a page foot.
-    expect(pages, hasLength(3));
-    for (final page in pages) {
-      final bullets = page.bullets;
-      expect(
-        isGroupHeading(bullets.first),
-        isTrue,
-        reason: 'page leads with a heading',
-      );
-      expect(
-        isGroupHeading(bullets.last),
-        isFalse,
-        reason: 'no heading stranded at the foot',
-      );
-      // Every heading on the page still has at least one bullet under it there.
-      for (var i = 0; i < bullets.length; i++) {
-        if (isGroupHeading(bullets[i])) {
-          expect(
-            i + 1 < bullets.length && !isGroupHeading(bullets[i + 1]),
-            isTrue,
-            reason: 'heading at $i has no bullet under it',
-          );
-        }
-      }
-    }
-    // Nothing is lost or reordered.
+    // Vijftien items worden 8 + 7. De knip telt bullets en kijkt niet naar
+    // groepen: het oude groepsbewuste splitsen maakte drie pagina's van vijf en
+    // kon een pagina met twee bullets achterlaten.
+    expect(pages.map((p) => p.bullets.length).toList(), [8, 7]);
+    // Niets verdwijnt of wordt herordend.
     expect(pages.expand((p) => p.bullets).toList(), items);
   });
 
@@ -241,10 +219,10 @@ void main() {
     expect([...slides[1].bullets, ...slides[2].bullets], bullets);
   });
 
-  test('splitSlide verdeelt een niet-volle bulletslide gelijkmatig', () {
-    // 10 bullets die niet allemaal passen: pagina 1 werd vroeger volgepropt tot
-    // de leesbaarheidsdrempel (8) en liet 2 achter. Nu passen beide helften
-    // binnen het optimum, dus verdelen we netjes 5/5.
+  test('splitSlide vult tot acht en laat de rest over', () {
+    // Tien bullets worden 8 + 2. Een eerdere versie verdeelde gelijkmatig (5/5)
+    // en woog mee hoeveel bullets er fysiek pasten — bij lange bullets zakte dat
+    // naar twee per pagina en viel één slide uiteen in vijf.
     TestWidgetsFlutterBinding.ensureInitialized();
     final n = _notifier()..newDeck('D');
     final bullets = List.generate(10, (i) => 'Bullet met wat tekst nummer $i');
@@ -255,10 +233,29 @@ void main() {
 
     final slides = n.state.deck!.slides;
     expect(slides, hasLength(3));
-    expect(slides[1].bullets.length, 5);
-    expect(slides[2].bullets.length, 5);
+    expect(slides[1].bullets.length, 8);
+    expect(slides[2].bullets.length, 2);
     expect([...slides[1].bullets, ...slides[2].bullets], bullets);
     expect(slides[2].continuesSplit, isTrue);
+  });
+
+  test('splitSlide laat een heel lange lijst niet in minipaginas vallen', () {
+    // De melding: "ik zie nu heel veel slides ontstaan". Lange bullets mogen het
+    // aantal pagina's niet meer opdrijven.
+    TestWidgetsFlutterBinding.ensureInitialized();
+    final n = _notifier()..newDeck('D');
+    final long = List.generate(
+      10,
+      (i) =>
+          'Bullet nummer $i met een flink lange regel tekst die ver doorloopt '
+          'en op ware grootte bepaald niet met zijn tienen op een slide past',
+    );
+    n.addSlide(SlideType.bullets, afterIndex: 0);
+    n.updateSlide(1, n.state.deck!.slides[1].copyWith(bullets: long));
+
+    n.splitSlide(1);
+
+    expect(n.state.deck!.slides.skip(1).map((p) => p.bullets.length), [8, 2]);
   });
 
   test('insertSlides duplicates with fresh ids and returns insert index', () {

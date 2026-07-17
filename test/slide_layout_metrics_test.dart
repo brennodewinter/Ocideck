@@ -298,146 +298,87 @@ void main() {
     });
   });
 
-  group('bulletPageCap', () {
-    test('is the smaller of fit and limit, never below one', () {
-      expect(bulletPageCap(3, 8), 3);
-      expect(bulletPageCap(20, 8), 8);
-      expect(bulletPageCap(0, 8), 1);
-      expect(bulletPageCap(5, 0), 1);
-    });
-  });
-
-  group('pageCountToFit', () {
-    test('is ceil(len/cap) without headings, minimum two', () {
-      expect(pageCountToFit(List.filled(10, 'x'), 8), 2); // 5/5
-      expect(pageCountToFit(List.filled(16, 'x'), 8), 2);
-      expect(pageCountToFit(List.filled(17, 'x'), 8), 3);
-      expect(pageCountToFit(List.filled(30, 'x'), 8), 4);
-      expect(pageCountToFit(List.filled(6, 'x'), 8), 2); // fits, still splits
-      expect(pageCountToFit(List.filled(10, 'x'), 2), 5); // long bullets
-    });
-
-    test('keeps whole groups together, one page per group that fits', () {
-      final items = <String>[
-        for (final g in ['A', 'B', 'C']) ...[
-          groupHeadingBullet(g),
-          for (var i = 0; i < 4; i++) 'bullet',
-        ],
-      ]; // three groups of five, 15 items
-      expect(pageCountToFit(items, 8), 3); // 5/5/5, not 8/7 across a group
-    });
-
-    test('cuts a single group larger than a page across pages', () {
-      final items = <String>[
-        groupHeadingBullet('Big'),
-        for (var i = 0; i < 20; i++) 'b',
-      ];
-      expect(
-        pageCountToFit(items, 8),
-        3,
-      ); // 21 items in one group -> ceil(21/8)
-    });
-
-    test('an oversized group fills the open page instead of costing one', () {
-      final items = <String>[
-        'los',
-        'los',
-        groupHeadingBullet('Groot'),
-        for (var i = 0; i < 8; i++) 'b',
-      ]; // 11 items: a group of nine that no page can hold
-      expect(pageCountToFit(items, 8), 2); // was 3: the open page was abandoned
-    });
-  });
-
-  group('paginateBulletsToFit', () {
+  group('splitBulletsIntoPages', () {
     List<String> gen(int n) => [for (var i = 0; i < n; i++) 'bullet $i'];
 
-    test('splits a full list into balanced pages that each fit', () {
-      final pages = paginateBulletsToFit(gen(30), 8);
-      expect(pages.map((p) => p.length).toList(), [8, 8, 7, 7]);
-      expect(
-        pages.expand((p) => p).toList(),
-        gen(30),
-      ); // nothing lost/reordered
-      expect(pages.every((p) => p.length <= 8 && p.isNotEmpty), isTrue);
+    test("vult pagina's van size en zet de rest achteraan", () {
+      expect(splitBulletsIntoPages(gen(10), 8).map((p) => p.length).toList(), [
+        8,
+        2,
+      ]);
+      expect(splitBulletsIntoPages(gen(20), 8).map((p) => p.length).toList(), [
+        8,
+        8,
+        4,
+      ]);
+      expect(splitBulletsIntoPages(gen(16), 8).map((p) => p.length).toList(), [
+        8,
+        8,
+      ]);
     });
 
-    test('never peels off a lopsided tail when few bullets fit', () {
-      // The reported bug: cap 2 used to give 2/8; now every page holds two.
-      expect(paginateBulletsToFit(gen(10), 2).map((p) => p.length).toList(), [
-        2,
-        2,
-        2,
-        2,
+    test('een rest van een enkele bullet mag', () {
+      // Wat overblijft, blijft over — voorspelbaar boven mooi verdeeld.
+      expect(splitBulletsIntoPages(gen(9), 8).map((p) => p.length).toList(), [
+        8,
+        1,
+      ]);
+    });
+
+    test("lange bullets leveren geen stapel minipagina's meer op", () {
+      // De melding: de paginagrootte volgde wat er fysiek paste, dus tien lange
+      // bullets werden vijf slides van twee. De grootte is nu vast.
+      final pages = splitBulletsIntoPages(gen(10), 8);
+      expect(pages, hasLength(2));
+    });
+
+    test('een lijst die al past valt in twee helften', () {
+      // De menu-actie heet "In tweeën splitsen" en moet ook op een slide die
+      // niet overvol is iets doen.
+      expect(splitBulletsIntoPages(gen(6), 8).map((p) => p.length).toList(), [
+        3,
+        3,
+      ]);
+      expect(splitBulletsIntoPages(gen(2), 8).map((p) => p.length).toList(), [
+        1,
+        1,
+      ]);
+      expect(splitBulletsIntoPages(gen(5), 8).map((p) => p.length).toList(), [
+        3,
         2,
       ]);
     });
 
-    test('divides a fitting list evenly in two on request', () {
-      expect(paginateBulletsToFit(gen(6), 8).map((p) => p.length).toList(), [
-        3,
-        3,
-      ]);
+    test('raakt geen bullet kwijt en houdt de volgorde', () {
+      final pages = splitBulletsIntoPages(gen(23), 8);
+      expect(pages.expand((p) => p).toList(), gen(23));
+      expect(pages.every((p) => p.isNotEmpty && p.length <= 8), isTrue);
     });
 
-    test('breaks on group boundaries so a heading leads every page', () {
-      final items = <String>[
-        for (final g in ['Ochtend', 'Middag', 'Avond']) ...[
-          groupHeadingBullet(g),
-          for (var i = 0; i < 4; i++) 'bullet',
-        ],
-      ];
-      final pages = paginateBulletsToFit(items, 8);
-      expect(pages, hasLength(3));
-      for (final page in pages) {
-        expect(
-          isGroupHeading(page.first),
-          isTrue,
-          reason: 'page leads with a heading',
-        );
-        expect(
-          isGroupHeading(page.last),
-          isFalse,
-          reason: 'no heading stranded at the foot',
-        );
-      }
-      expect(pages.expand((p) => p).toList(), items);
-    });
-
-    test('a heading near the top never orphans the bullets above it', () {
-      // The reported bug: a heading at index two snapped the break onto it and
-      // peeled the first two bullets off as a near-empty slide (2/5/4).
-      final items = <String>[
-        'bullet 1',
-        'bullet 2',
-        groupHeadingBullet('Kop B'),
-        for (var i = 3; i <= 10; i++) 'bullet $i',
-      ];
-      final pages = paginateBulletsToFit(items, 8);
-      expect(pages.map((p) => p.length).toList(), [6, 5]);
-      expect(pages.expand((p) => p).toList(), items);
-    });
-
-    test('refuses a snap that would leave a single bullet behind', () {
-      // A heading at index one is within snapping range of the balanced break,
-      // but honouring it would make a one-bullet page — the split stays even.
-      final items = <String>[
-        'bullet 0',
-        groupHeadingBullet('Kop'),
-        for (var i = 1; i <= 7; i++) 'bullet $i',
-      ];
-      final pages = paginateBulletsToFit(items, 8);
-      expect(pages.map((p) => p.length).toList(), [5, 4]);
-      expect(pages.expand((p) => p).toList(), items);
+    test("een lege lijst levert geen pagina's", () {
+      expect(splitBulletsIntoPages([], 8), isEmpty);
     });
   });
 
-  group('spreadBulletsOverPages', () {
-    test('pads with empty trailing pages when items run short', () {
-      final pages = spreadBulletsOverPages(['a', 'b', 'c'], 5, 7);
-      expect(pages, hasLength(5));
-      expect(pages.expand((p) => p).toList(), ['a', 'b', 'c']);
-      expect(pages.where((p) => p.isEmpty), hasLength(2));
+  group('chunkBullets', () {
+    test('knipt strikt op size, zonder helften-uitzondering', () {
+      final pages = chunkBullets([for (var i = 0; i < 5; i++) 'b'], 8);
+      expect(pages.map((p) => p.length).toList(), [5]);
+      expect(chunkBullets([for (var i = 0; i < 5; i++) 'b'], 0), hasLength(5));
+    });
+  });
+
+  group('splitTwoColumnsIntoPages', () {
+    test("beide kolommen over evenveel pagina's, de kortste raakt op", () {
+      final pages = splitTwoColumnsIntoPages(
+        [for (var i = 0; i < 10; i++) 'l'],
+        [for (var i = 0; i < 3; i++) 'r'],
+        7,
+      );
+      expect(pages.map((p) => (p.$1.length, p.$2.length)).toList(), [
+        (7, 2),
+        (3, 1),
+      ]);
     });
   });
 }
