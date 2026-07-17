@@ -8,6 +8,10 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **See a deck's commit history — "Git history…".** For a deck opened from git on
+  a machine with native `git`, the `…` menu now shows its timeline: every commit
+  that touched the deck, newest first, each with its author, date, and a badge
+  marking whether it is already on the forge or still waiting locally to push.
 - **On desktop with `git`, saving a deck is now a real local commit — genuine
   offline history.** When native `git` is present, OciDeck keeps a real clone of
   the repository: opening reads from it, and saving writes the deck as an actual
