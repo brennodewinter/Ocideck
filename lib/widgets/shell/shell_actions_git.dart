@@ -376,6 +376,91 @@ class _GitVersionsDialog extends StatelessWidget {
   }
 }
 
+/// Breng het concept van het huidige tabblad uit ter review (§9.4): vraag een
+/// titel + toelichting en open een pull request van de werkbranch naar de
+/// standaardbranch. De classificatiepoort in [TabsNotifierGit.openForReview]
+/// weigert fail-closed vóór er iets naar de forge gaat.
+Future<void> _openForReview(BuildContext context, WidgetRef ref) async {
+  final tab = ref.read(tabsProvider).current;
+  final origin = tab?.gitOrigin;
+  final deck = tab?.deckNotifier.currentState.deck;
+  if (origin == null || deck == null) return;
+  final config = ref.read(settingsProvider).gitRepo;
+  if (config == null) return;
+  final forge = await ref.read(gitForgeProvider.future);
+  if (!context.mounted) return;
+  if (forge == null) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          context.l10n.d(
+            'Stel eerst een git-repository in bij Instellingen → Git-repository.',
+          ),
+        ),
+      ),
+    );
+    return;
+  }
+
+  final deckName = origin.deckName ?? _safeDeckName(deck.title);
+  final choice = await _showReviewDialog(context, deckName: deckName);
+  if (choice == null || !context.mounted) return;
+
+  final messenger = ScaffoldMessenger.of(context);
+  final l10n = context.l10n;
+  final result = await ref
+      .read(tabsProvider.notifier)
+      .openForReview(
+        forge,
+        config: config,
+        settings: ref.read(settingsProvider),
+        title: choice.title,
+        body: choice.message,
+      );
+  if (!context.mounted) return;
+  switch (result.status) {
+    case ReviewStatus.opened:
+      final url = result.pr?.url ?? '';
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text('${l10n.d('Uitgebracht ter review:')} $url'),
+          duration: const Duration(seconds: 8),
+          action: url.isEmpty
+              ? null
+              : SnackBarAction(
+                  label: l10n.d('Kopieer link'),
+                  onPressed: () =>
+                      Clipboard.setData(ClipboardData(text: url)),
+                ),
+        ),
+      );
+    case ReviewStatus.blocked:
+      showErrorSnackBar(
+        messenger,
+        l10n,
+        result.message ??
+            l10n.d('Uitbrengen geblokkeerd door het classificatiebeleid.'),
+      );
+    case ReviewStatus.notOnWorkBranch:
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(
+            l10n.d(
+              'Er is nog geen concept om uit te brengen — sla eerst een '
+              'wijziging op.',
+            ),
+          ),
+        ),
+      );
+    case ReviewStatus.failed:
+      showErrorSnackBar(
+        messenger,
+        l10n,
+        '${l10n.d('Uitbrengen mislukt:')} ${result.message ?? ''}',
+      );
+  }
+}
+
 /// Maak een geldige deknaam (§6) uit een deck-titel, of een nette terugval.
 String _safeDeckName(String title) {
   final cleaned = title
@@ -396,6 +481,103 @@ Future<_GitSaveChoice?> _showGitSaveDialog(
     context: context,
     builder: (_) => _GitSaveDialog(defaultName: defaultName),
   );
+}
+
+typedef _ReviewChoice = ({String title, String message});
+
+Future<_ReviewChoice?> _showReviewDialog(
+  BuildContext context, {
+  required String deckName,
+}) {
+  return showDialog<_ReviewChoice>(
+    context: context,
+    builder: (_) => _ReviewDialog(deckName: deckName),
+  );
+}
+
+class _ReviewDialog extends StatefulWidget {
+  final String deckName;
+  const _ReviewDialog({required this.deckName});
+
+  @override
+  State<_ReviewDialog> createState() => _ReviewDialogState();
+}
+
+class _ReviewDialogState extends State<_ReviewDialog> {
+  late final TextEditingController _title = TextEditingController(
+    text: 'Concept: ${widget.deckName}',
+  );
+  final TextEditingController _message = TextEditingController();
+
+  @override
+  void dispose() {
+    _title.dispose();
+    _message.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final title = _title.text.trim();
+    return AlertDialog(
+      title: Text(l10n.d('Uitbrengen ter review')),
+      content: SizedBox(
+        width: 460,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              l10n.d(
+                'Opent een pull request van je concept naar de hoofdbranch, '
+                'zodat het beoordeeld kan worden vóór het uitkomt.',
+              ),
+              style: TextStyle(fontSize: 12, color: AppTheme.slate400),
+            ),
+            const SizedBox(height: 14),
+            TextField(
+              controller: _title,
+              autofocus: true,
+              onChanged: (_) => setState(() {}),
+              decoration: InputDecoration(
+                labelText: l10n.d('Titel'),
+                isDense: true,
+                border: const OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 14),
+            TextField(
+              controller: _message,
+              maxLines: 3,
+              decoration: InputDecoration(
+                labelText: l10n.d('Toelichting'),
+                hintText: l10n.d('Wat is er veranderd en waarom?'),
+                isDense: true,
+                border: const OutlineInputBorder(),
+              ),
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text(l10n.t('cancel')),
+        ),
+        ElevatedButton.icon(
+          onPressed: title.isEmpty
+              ? null
+              : () => Navigator.pop(context, (
+                  title: title,
+                  message: _message.text.trim(),
+                )),
+          icon: const Icon(Icons.rate_review_outlined, size: 16),
+          label: Text(l10n.d('Uitbrengen')),
+        ),
+      ],
+    );
+  }
 }
 
 class _GitSaveDialog extends StatefulWidget {

@@ -434,6 +434,61 @@ extension TabsNotifierGit on TabsNotifier {
     if (changed) refreshTabs();
     return outcomes;
   }
+
+  /// Breng het concept van het huidige tabblad uit ter review (§9.4): open een
+  /// pull request van de werkbranch naar de standaardbranch.
+  ///
+  /// Eerst de classificatiepoort, fail-closed en vóór élke netwerk-bijwerking —
+  /// net als [ExportService.export] (export_service.dart:142), maar op de máx
+  /// effective TLP van het hele deck ([deckReleaseTlp]), want een release is
+  /// duurzaam en geadverteerd: één TLP:RED-slide in een TLP:none-deck hoort hem
+  /// tegen te houden. Pas als de poort groen geeft gaat er iets naar de forge.
+  ///
+  /// Vereist dat het tabblad op een werkbranch staat (een lopende ronde) en dat
+  /// die branch al op de forge staat — een gewone opslag pusht hem. Staat hij er
+  /// nog niet (offline gecommit), dan komt dat als [ReviewStatus.failed] terug;
+  /// synchroniseer dan eerst.
+  Future<ReviewResult> openForReview(
+    GitForge forge, {
+    required GitRepoConfig config,
+    required AppSettings settings,
+    required String title,
+    required String body,
+  }) async {
+    final tab = currentState.current;
+    final origin = tab?.gitOrigin;
+    final deck = tab?.deckNotifier.currentState.deck;
+    if (origin == null || deck == null || !origin.matchesRepo(config)) {
+      return const ReviewResult(status: ReviewStatus.notOnWorkBranch);
+    }
+    // Een review hoort bij een concept-ronde, niet bij de standaardbranch zelf.
+    if (origin.branch == config.defaultBranch) {
+      return const ReviewResult(status: ReviewStatus.notOnWorkBranch);
+    }
+
+    final decision = ClassificationEnforcementPolicy.fromAppSettings(
+      settings,
+    ).evaluate(deckReleaseTlp(deck));
+    if (!decision.allowed) {
+      return ReviewResult(
+        status: ReviewStatus.blocked,
+        message: decision.reason,
+      );
+    }
+
+    try {
+      final pr = await forge.openPullRequest(
+        head: origin.branch,
+        base: config.defaultBranch,
+        title: title,
+        body: body,
+      );
+      return ReviewResult(status: ReviewStatus.opened, pr: pr);
+    } on GitForgeException catch (e) {
+      logWarning('openForReview: PR openen mislukt', e);
+      return ReviewResult(status: ReviewStatus.failed, message: e.message);
+    }
+  }
 }
 
 /// Hoe een [TabsNotifierGit.saveToGit] afliep.
@@ -472,4 +527,33 @@ class GitSaveResult {
     this.message,
     this.warnings = const [],
   });
+}
+
+/// Hoe een [TabsNotifierGit.openForReview] afliep.
+enum ReviewStatus {
+  /// De pull request is geopend; [ReviewResult.pr] draagt het nummer + de link.
+  opened,
+
+  /// De classificatiepoort weigerde: het deck mag niet uitgebracht worden.
+  /// [ReviewResult.message] draagt de uitlegbare reden.
+  blocked,
+
+  /// Er was geen concept om uit te brengen (geen tabblad, of het staat niet op
+  /// een werkbranch).
+  notOnWorkBranch,
+
+  /// De forge deed het niet (netwerk, auth, of de branch staat er nog niet).
+  failed,
+}
+
+class ReviewResult {
+  final ReviewStatus status;
+
+  /// De geopende pull request bij [ReviewStatus.opened].
+  final PullRequestRef? pr;
+
+  /// Uitlegbare tekst bij [ReviewStatus.blocked] en [ReviewStatus.failed].
+  final String? message;
+
+  const ReviewResult({required this.status, this.pr, this.message});
 }
