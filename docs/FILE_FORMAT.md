@@ -1018,7 +1018,11 @@ from `images/`/`media/`. When opening, the file is read and attached to the
 chart in memory; the `.md` keeps only the `source` reference, so the markdown
 stays about the *shape* of the chart while the file holds the values.
 
-The file is copied along during save/`Save as...` and included in packages (§7).
+The file is copied along during save/`Save as...` and included in packages
+(§7). A package is written from the deck **in memory**, not by copying the file
+from disk, so an export made before saving carries the numbers you see on
+screen rather than the older ones still in the file. An HTML/PDF export has no
+folder to resolve a reference against, so it inlines the data instead.
 
 **Two forms.** New data files are written as **JSON**; **CSV** is still read,
 and a deck that already links a `.csv` keeps getting CSV on save — silently
@@ -1043,6 +1047,30 @@ and series colours, the title and the bounds stay in the `chart` block, because
 they are styling rather than data. That split is what lets the data file be
 regenerated wholesale — from a spreadsheet, a script, an export — without the
 chart losing its look.
+
+**In a git repository** the data file sits next to `deck.md` at the path the
+`source` names, deliberately *not* in the content-addressed asset pool that
+images use. A pool path is the hash of its contents, so every changed cell would
+produce a new file and orphan the old one — no diff to read. On a fixed path, a
+change reads as what it is.
+
+**Automatic.** A chart that still carries its data inline is moved to a data
+file **on save**, and the block is left with the reference. Decks written before
+data files existed therefore convert on their next save, with nothing for the
+user to do. The conversion runs on save and never on open — opening must not
+rewrite a deck that was only looked at.
+
+The file is named after the chart title (`data/Omzet_2025.json`, `grafiek.json`
+when untitled), with a numeric suffix when that name is taken. Once assigned, a
+`source` never changes again, even if the title does: renaming on every title
+edit would churn the file and its history for no gain. A chart with no data yet
+gets no file. Copying a chart slide copies its `source` too, so on the next save
+the copy is given a file of its own rather than overwriting its twin's.
+
+On save, data files this deck itself wrote that nothing references any more —
+from a deleted chart, say — are removed. Only files OciDeck read or wrote for
+this deck are eligible; anything else in `data/`, and every `.csv`, is left
+alone.
 
 **Editing.** Both directions work. The grid in the app edits a linked chart just
 like an inline one and writes the file back on save; the file can equally be

@@ -5,10 +5,8 @@ import 'dart:math' as math;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:path/path.dart' as p;
 import '../../l10n/app_localizations.dart';
 import '../../models/chart.dart';
-import '../../utils/atomic_file.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import 'advanced_section.dart';
@@ -265,47 +263,16 @@ class _ChartEditorState extends State<ChartEditor> {
     if (text == null) return;
     if (!mounted) return;
 
-    var asFile = false;
-    if (widget.projectPath != null && mounted) {
-      asFile =
-          await showDialog<bool>(
-            context: context,
-            builder: (ctx) => AlertDialog(
-              title: Text(ctx.l10n.d('CSV importeren')),
-              content: Text(
-                ctx.l10n.d(
-                  'Data in de slide opslaan, of als los CSV-bestand naast de presentatie bewaren?',
-                ),
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(ctx, false),
-                  child: Text(ctx.l10n.d('In de slide')),
-                ),
-                TextButton(
-                  onPressed: () => Navigator.pop(ctx, true),
-                  child: Text(ctx.l10n.d('Als CSV-bestand')),
-                ),
-              ],
-            ),
-          ) ??
-          false;
-    }
-
-    String? source;
-    if (asFile && widget.projectPath != null) {
-      final name = p.basename(file.name);
-      final dir = Directory(p.join(widget.projectPath!, chartDataDirName));
-      await dir.create(recursive: true);
-      // Atomair: kan een bestaand databestand met dezelfde naam overschrijven.
-      await writeStringAtomic(File(p.join(dir.path, name)), text);
-      source = '$chartDataDirName/$name';
-    }
-
-    if (!mounted) return;
+    // De import vult alleen het grid. Waar de data belandt is geen keuze meer
+    // die de gebruiker hier hoeft te maken: bij het opslaan verhuist ze sowieso
+    // naar een bestand naast de presentatie. Hier stond een dialoog "in de
+    // slide of als CSV-bestand?"; die vroeg om een beslissing waarvan het ene
+    // antwoord inmiddels niet meer waar te maken is.
     final parsed = parseCsv(text);
     setState(() {
-      _source = source;
+      // Een import vervangt de cijfers, niet de bestemming: een grafiek die al
+      // aan een bestand hangt blijft daaraan hangen en krijgt de nieuwe data
+      // daar geschreven.
       _xLabels = parsed.$1.isEmpty ? [''] : parsed.$1;
       _rowColors = [
         for (var i = 0; i < _xLabels.length; i++)

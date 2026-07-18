@@ -36,7 +36,12 @@ extension _FileServiceProject on FileService {
     // write back what the user changed in the grid. Order matters: the copy
     // seeds a fresh location, the write updates it.
     await _copyChartData(deck, dir);
+    // Charts that still carry their numbers inline move to a data file here,
+    // before the markdown is generated — so the .md that follows keeps only
+    // the reference. This is what makes the conversion invisible.
+    updatedDeck = await _externalizeCharts(updatedDeck, dir);
     final chartWarnings = await _writeChartData(updatedDeck, dir);
+    await _pruneChartData(updatedDeck, dir);
     // TODO(chart-data): via de meldkanaal van openDeckDetailed aan de gebruiker
     // tonen; tot dat kanaal bestaat is loggen beter dan weggooien.
     if (chartWarnings.isNotEmpty) {
