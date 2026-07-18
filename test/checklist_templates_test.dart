@@ -25,10 +25,15 @@ void main() {
     expect(s.rows.single.test, 'Test A');
   });
 
-  test('checklistSources lists WSTG first, then the custom templates', () {
+  test('checklistSources lists the bundled standards first, then customs', () {
+    // Volgorde is contract: de gebundelde standaarden staan bovenaan, eigen
+    // sjablonen eronder. Sinds MASTG erbij kwam zijn dat er drie — WSTG voor
+    // het web, MASTG per mobiel platform.
     final list = checklistSources(const [ChecklistTemplate(name: 'X')]);
-    expect(list, hasLength(2));
+    expect(list, hasLength(4));
     expect(list.first.label, WstgCatalog.instance.standardLabel);
-    expect(list[1].label, 'X');
+    expect(list[1].label, contains('MASTG'));
+    expect(list[2].label, contains('MASTG'));
+    expect(list.last.label, 'X', reason: 'eigen sjablonen sluiten de rij');
   });
 }

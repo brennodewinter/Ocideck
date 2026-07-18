@@ -150,10 +150,17 @@ List<_Standard> _parseStandards(String source) {
   return out;
 }
 
-/// `wstgVersion` woont in de catalogus zelf, niet in het register. Eén gerichte
-/// uitzondering, want de catalogus is daar de bron van waarheid.
+/// Sommige versies wonen in de catalogus zelf en niet in het register, omdat de
+/// catalogus daar de bron van waarheid is. Deze lijst maakt ze vindbaar.
+///
+/// Een naam die hier ontbreekt levert een lege versie op, en dan meldt de poort
+/// de standaard als verouderd. Dat is de goede kant om fout te gaan — bij het
+/// toevoegen van MASTG gebeurde het meteen, en het viel op.
 String _knownExternalConst(String name, String _) {
-  const files = {'wstgVersion': 'lib/services/wstg_catalog.dart'};
+  const files = {
+    'wstgVersion': 'lib/services/wstg_catalog.dart',
+    'mastgVersion': 'lib/services/mastg_catalog.dart',
+  };
   final path = files[name];
   if (path == null) return '';
   final f = File(path);

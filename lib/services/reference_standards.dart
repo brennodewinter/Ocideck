@@ -1,4 +1,5 @@
 import '../models/reference_standard.dart';
+import 'mastg_catalog.dart';
 import 'wstg_catalog.dart';
 
 /// Elke referentiestandaard die OciDeck meedraagt, als data.
@@ -25,6 +26,20 @@ const referenceStandards = <ReferenceStandard>[
     licence: 'CC-BY-SA-4.0',
     probe: UpstreamProbe.githubReleases,
     probeTarget: 'OWASP/wstg',
+  ),
+  ReferenceStandard(
+    id: 'mastg',
+    name: 'OWASP MASTG',
+    bundledVersion: mastgVersion,
+    url: 'https://mas.owasp.org/MASTG/',
+    bundled:
+        'De test-index van v2.0.0: per test het stabiele id, de canonieke '
+        'titel, de MASVS-categorie en de MASWE-zwakheid. De ingetrokken '
+        'v1-tests en de placeholders zitten er niet in; de inhoud van de gids '
+        'evenmin.',
+    licence: 'CC-BY-SA-4.0',
+    probe: UpstreamProbe.githubReleases,
+    probeTarget: 'OWASP/mastg',
   ),
   ReferenceStandard(
     id: 'cwe',

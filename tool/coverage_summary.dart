@@ -29,6 +29,13 @@ import 'dart:io';
 ///
 /// A file that is merely *untested* does not belong here: write the test.
 const Set<String> uncoveredBaseline = {
+  // NO EXECUTABLE LINES: the generated MASTG index — two `part` files holding
+  // nothing but a const list of 186 MastgTest literals. They are exercised
+  // (mastg_catalog_test.dart reads every entry) but lcov emits no record for a
+  // file with nothing to execute. Split in two only because 186 entries in one
+  // file crosses the 1000-line ratchet.
+  'lib/services/mastg_catalog_android.dart',
+  'lib/services/mastg_catalog_ios.dart',
   // PLATFORM: entrypoint — runApp() never executes under the test runner.
   'lib/main.dart',
   // PLATFORM: conditional-import facades + their io/web halves.
