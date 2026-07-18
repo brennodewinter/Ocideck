@@ -17,9 +17,15 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   er iets veranderd is: bij *Afronden & verzegelen* meldt OciDeck het als een
   standaard sinds het onderzoek is bijgewerkt — geen blokkade, want tegen een
   oudere versie toetsen is legitiem, maar het hoort geen verrassing achteraf te
-  zijn. Hiermee is MIAUW-eis 4.3.2 ("overzicht gebruikte standaarden") niet
-  langer iets dat je handmatig moet bevestigen: de compliance-controle leidt het
-  af uit het rapport zelf.
+  zijn.
+
+  MIAUW-eis 4.3.2 blijft wél iets dat je zelf bevestigt. Dat stond hier
+  aanvankelijk anders — de eis werd automatisch afgevinkt zodra je standaarden
+  had vastgelegd. Dat was onterecht: 4.3.2 vraagt om een overzicht *in de
+  managementsamenvatting*, en de vastlegging in het bestand komt niet in de
+  slides terecht die de klant krijgt. Een compliance-vinkje mag niet afgaan op
+  iets dat in de levering ontbreekt, dus de eis staat weer op handmatig
+  bevestigen. De vastlegging en de verouderingsmelding blijven gewoon werken.
 - **Zichtbaar welke versie van elke standaard erin zit — en een poort die merkt
   wanneer die achterloopt.** OciDeck draagt referentiedata mee (OWASP WSTG,
   MITRE CWE, het MIAUW-schema, de CVSS-specificatie). Welke versie dat was, stond

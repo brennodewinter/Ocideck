@@ -1,10 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/eis_entry.dart';
-import 'package:ocideck/models/miauw_compliance.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/markdown_service.dart';
-import 'package:ocideck/services/miauw_compliance_analyzer.dart';
 import 'package:ocideck/services/miauw_eis_catalog.dart';
 import 'package:ocideck/services/reference_standards.dart';
 
@@ -83,39 +81,37 @@ void main() {
     });
   });
 
-  group('MIAUW EIS 4.3.2', () {
-    EisResult resultFor(Deck deck) => MiauwComplianceAnalyzer()
-        .analyze(deck)
-        .results
-        .firstWhere((r) => r.entry.id == '4.3.2');
-
-    test('is nu inhoudelijk afleidbaar in plaats van handmatig', () {
-      final eis = MiauwEisCatalog.instance.byId('4.3.2')!;
-      expect(eis.derivation, EisDerivation.automatic);
-      expect(eis.check, EisCheck.standardsRecorded);
-    });
-
-    test('is voldaan zodra het deck standaarden vastlegt', () {
-      expect(resultFor(deckWith(['OWASP WSTG@4.2'])).status, EisStatus.voldaan);
-    });
-
-    test('is niet voldaan wanneer er niets is vastgelegd', () {
-      expect(resultFor(deckWith([])).status, isNot(EisStatus.voldaan));
-    });
-
-    test('4.8.2.x blijft handmatig — dat gaat over hulpmiddelen', () {
-      // Bewust vastgelegd: 4.8.2 vraagt naar de *tools* die de tester
-      // gebruikte (naam, versie, URL), niet naar de standaarden waartegen is
-      // getoetst. Die eis afleiden uit onze gebundelde catalogi zou compliance
-      // claimen voor iets dat nooit is vastgelegd.
-      for (final id in ['4.8.2', '4.8.2.1', '4.8.2.2', '4.8.2.3']) {
+  group('MIAUW EIS 4.3.2 en 4.8.2 blijven handmatig', () {
+    // Vastgelegd omdat het twee keer bijna misging. Beide eisen gaan over wat er
+    // ín het rapport staat, en dat kan OciDeck nu niet vaststellen:
+    //
+    // - 4.3.2 vraagt een overzicht van gebruikte standaarden in de
+    //   managementsamenvatting. Het deck kán ze vastleggen, maar die vastlegging
+    //   wordt nergens in de slides gerenderd — alleen in het auditdossier en een
+    //   dialoog. Vastleggen is dus niet hetzelfde als voldoen.
+    // - 4.8.2.x gaat over de *hulpmiddelen* die de tester gebruikte, niet over
+    //   de standaarden waartegen is getoetst. Dat is een andere lijst.
+    //
+    // Zodra de bijlage echt als rapportinhoud bestaat en herkenbaar is, mogen
+    // deze omgezet worden — niet eerder.
+    test('geen van beide claimt automatische afleiding', () {
+      for (final id in ['4.3.2', '4.8.2', '4.8.2.1', '4.8.2.2', '4.8.2.3']) {
         final eis = MiauwEisCatalog.instance.byId(id)!;
         expect(
           eis.derivation,
           EisDerivation.manual,
-          reason: '$id gaat over hulpmiddelen, niet over standaarden',
+          reason:
+              '$id gaat over rapportinhoud die nog niet aantoonbaar aanwezig is',
         );
+        expect(eis.check, isNull, reason: '$id heeft geen inhoudscontrole');
       }
+    });
+
+    test('vastleggen blijft wel gewoon werken', () {
+      // De vastlegging zelf is niet teruggedraaid: die draagt de bevroren
+      // versies en voedt de verouderingsmelding bij verzegelen.
+      final deck = deckWith(['OWASP WSTG@4.2']);
+      expect(deck.standardsUsed, ['OWASP WSTG@4.2']);
     });
   });
 }
