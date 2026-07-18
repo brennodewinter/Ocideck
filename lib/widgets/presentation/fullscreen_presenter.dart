@@ -5,8 +5,7 @@ import 'dart:math' as math;
 
 import '../../platform/platform_features.dart';
 import 'package:desktop_multi_window/desktop_multi_window.dart';
-import 'package:flutter/foundation.dart'
-    show kIsWeb, listEquals, visibleForTesting;
+import 'package:flutter/foundation.dart' show kIsWeb, listEquals;
 import 'package:flutter/material.dart';
 import '../../theme/presenter_palette.dart';
 import 'package:flutter/semantics.dart';
@@ -44,6 +43,7 @@ import 'audience_window.dart';
 import 'rehearsal_summary.dart';
 import '../../theme/app_theme.dart';
 
+part 'parts/presenter_beamer_payload.dart';
 part 'parts/presenter_questions.dart';
 part 'parts/presenter_table.dart';
 part 'parts/presenter_ink.dart';
@@ -332,37 +332,6 @@ class FullscreenPresenter extends StatefulWidget {
       await _restoreWakeLock(hadWakeLock);
     }
   }
-
-  /// The self-contained markdown payload for the audience window: the slides,
-  /// the style profile and the TLP level in one string.
-  ///
-  /// This payload never touches disk, so everything the beamer cannot look up
-  /// for itself has to travel inside it. That is why the style profile is
-  /// inlined — the audience window has no other way to learn the deck's
-  /// styling — and, for the same reason, why chart data is. A chart that links
-  /// its data through `source` would otherwise arrive as a bare relative
-  /// reference the beamer cannot resolve, and render as an empty plot.
-  @visibleForTesting
-  static String buildBeamerMarkdown({
-    required List<Slide> slides,
-    required String? projectPath,
-    required ThemeProfile themeProfile,
-    TlpLevel tlp = TlpLevel.none,
-    String organization = '',
-    String reportLanguage = '',
-  }) => MarkdownService().generateDeck(
-    Deck(
-      title: 'Presentatie',
-      slides: slides,
-      projectPath: projectPath,
-      themeProfile: themeProfile,
-      tlp: tlp,
-      organization: organization,
-      language: reportLanguage,
-    ),
-    inlineStyleProfile: true,
-    inlineChartData: true,
-  );
 
   /// Dual-screen mode: open a borderless audience window on the beamer showing
   /// the slide, and run the presenter view (current/next/notes/timer) in the

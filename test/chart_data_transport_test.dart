@@ -29,7 +29,7 @@ Slide _linkedChartSlide() => Slide.create(SlideType.chart).copyWith(
 void main() {
   group('beamer payload', () {
     test('inlines linked chart data so the audience window can draw it', () {
-      final markdown = FullscreenPresenter.buildBeamerMarkdown(
+      final markdown = buildBeamerMarkdown(
         slides: [_linkedChartSlide()],
         projectPath: '/decks/demo',
         themeProfile: const ThemeProfile(),
@@ -63,7 +63,7 @@ void main() {
     );
 
     test('still inlines the style profile', () {
-      final markdown = FullscreenPresenter.buildBeamerMarkdown(
+      final markdown = buildBeamerMarkdown(
         slides: [Slide.create(SlideType.bullets)],
         projectPath: null,
         themeProfile: const ThemeProfile(name: 'Vigilis'),
