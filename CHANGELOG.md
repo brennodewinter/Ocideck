@@ -309,6 +309,20 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   glance from a contrast or text-density one.
 
 ### Fixed
+- **A chart whose data lives in a separate file no longer loses that data when
+  saved to git, opened on the web, or shown on the beamer.** A chart slide can
+  keep its numbers in a file next to the deck (`data/…`) and leave only a
+  `source` reference in the markdown. That reference is a path relative to a
+  project folder on disk — and three places handed the deck to something that
+  has no such folder, while writing only the reference. Saving to git committed
+  the reference without the numbers, so after a push the data was gone for good,
+  with no warning. A package opened in the browser ignored its `data/` members,
+  and a deck downloaded as a single `.md` left with a path that pointed nowhere;
+  both opened with empty plots. The audience window on a second screen showed
+  the same empty plot. In all four cases the numbers now travel along with the
+  deck. Charts that keep their data inline — the default — were never affected.
+  Each case has a regression test, including one proving a `source` that points
+  outside the package with `../` is still refused.
 - **Screen readers now announce the image buttons by name.** The paste, copy and
   clear buttons in the image picker bar, and the reset button on the zoom
   slider, were wrapped *in* a tooltip rather than carrying one. Flutter attaches
