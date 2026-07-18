@@ -27,13 +27,15 @@ import 'ai_suggest_field.dart';
 
 /// Structured editor for a `finding` **header** slide (PENTEST_MIAUW §3.1). The
 /// fields map one-to-one onto [FindingSpec], which round-trips to plain,
-/// human-readable Markdown; the finding-group id is a slide-level field so a
-/// later wizard (P2-WIZ) can attach detail/evidence slides to the same group.
+/// human-readable Markdown; the finding-group id is a slide-level field so the
+/// finding wizard (`dialogs/finding_wizard.dart`) can attach detail/evidence
+/// slides to the same group.
 ///
 /// The CVSS score and severity band are **derived** from the vector by the
 /// [Cvss4] engine and shown live — never typed and never stored (§3.1). A full
-/// per-metric CVSS builder is the finding wizard's job (P2-WIZ); here the vector
-/// is entered as text with an immediate score/severity read-out.
+/// per-metric CVSS builder is the finding wizard's job — it has one
+/// (`dialogs/cvss_builder_dialog.dart`); here the vector is entered as text with
+/// an immediate score/severity read-out.
 class FindingEditor extends ConsumerStatefulWidget {
   final Slide slide;
   final ValueChanged<Slide> onUpdate;

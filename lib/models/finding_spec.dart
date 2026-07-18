@@ -69,8 +69,9 @@ class FindingSpec {
   });
 
   /// The `# ` heading text, e.g. `F-03 · SQL injection in the login form`. The
-  /// `F-03` prefix is authored/maintained by auto-numbering (§10.1, a later
-  /// package); this spec treats the whole line as opaque text.
+  /// `F-03` prefix is authored/maintained by auto-numbering (§10.1,
+  /// `DeckNotifierAuto.autoRenumberFindings`); this spec treats the whole line
+  /// as opaque text.
   final String heading;
 
   /// The scope object the finding concerns, e.g. `https://app.example/login`.
