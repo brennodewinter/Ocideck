@@ -1799,6 +1799,8 @@ const _dutchSourceAddEt = <String, String>{
   'Bron': 'Allikas',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
       'Selles eksemplaris olevad versioonid. Pentesti aruanne peab ütlema, mille vastu testiti — ja milline versioon see oli.',
+  'waarde(n) uit de CSV zijn niet als getal gelezen en staan nu op 0:':
+      'väärtust CSV-st ei loetud numbritena ja need on nüüd 0:',
   'Zoeken in alle decks…': 'Otsi kõigist pakkidest…',
   'Zoeken in alle decks': 'Otsi kõigist pakkidest',
   'Zoekterm': 'Otsingusõna',

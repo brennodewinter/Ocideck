@@ -1816,6 +1816,8 @@ const _dutchSourceAddLt = <String, String>{
   'Bron': 'Šaltinis',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
       'Šiame egzemplioriuje esančios versijos. Pentesto ataskaitoje turi būti nurodyta, su kuo lyginta — ir kuri tai buvo versija.',
+  'waarde(n) uit de CSV zijn niet als getal gelezen en staan nu op 0:':
+      'reikšmės iš CSV nebuvo perskaitytos kaip skaičiai ir dabar yra 0:',
   'Zoeken in alle decks…': 'Ieškoti visose kaladėse…',
   'Zoeken in alle decks': 'Ieškoti visose kaladėse',
   'Zoekterm': 'Paieškos žodis',

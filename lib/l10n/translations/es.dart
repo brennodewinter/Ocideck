@@ -762,6 +762,8 @@ const _dutchSourceAddEs = {
   'Bron': 'Fuente',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
       'Las versiones incluidas en esta copia. Un informe de pentest debe indicar contra qué se probó — y qué versión era.',
+  'waarde(n) uit de CSV zijn niet als getal gelezen en staan nu op 0:':
+      'valor(es) del CSV no se han leído como números y ahora son 0:',
   'Zoeken in alle decks…': 'Buscar en todas las presentaciones…',
   'Zoeken in alle decks': 'Buscar en todas las presentaciones',
   'Zoekterm': 'Término de búsqueda',

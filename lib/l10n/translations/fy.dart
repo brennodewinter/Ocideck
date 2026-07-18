@@ -766,6 +766,8 @@ const _dutchSourceAddFy = {
   'Bron': 'Boarne',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
       'De ferzjes yn dit eksimplaar. In pentestrapport heart te fermelden wêrtsjin toetst is — en hokker ferzje dat wie.',
+  'waarde(n) uit de CSV zijn niet als getal gelezen en staan nu op 0:':
+      'wearde(n) út de CSV binne net as getal lêzen en steane no op 0:',
   'Zoeken in alle decks…': 'Sykje yn alle decks…',
   'Zoeken in alle decks': 'Sykje yn alle decks',
   'Zoekterm': 'Sykterm',

@@ -1826,6 +1826,8 @@ const _dutchSourceAddUk = <String, String>{
   'Bron': 'Джерело',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
       'Версії в цьому примірнику. Звіт про пентест має вказувати, щодо чого проводилася перевірка — і яка це була версія.',
+  'waarde(n) uit de CSV zijn niet als getal gelezen en staan nu op 0:':
+      'значень із CSV не прочитано як числа, і зараз вони дорівнюють 0:',
   'Zoeken in alle decks…': 'Шукати в усіх колодах…',
   'Zoeken in alle decks': 'Шукати в усіх колодах',
   'Zoekterm': 'Пошуковий запит',

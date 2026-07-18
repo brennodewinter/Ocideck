@@ -1811,6 +1811,8 @@ const _dutchSourceAddCs = <String, String>{
   'Bron': 'Zdroj',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
       'Verze v tomto exempláři. Zpráva z pentestu má uvádět, vůči čemu se testovalo — a v jaké verzi.',
+  'waarde(n) uit de CSV zijn niet als getal gelezen en staan nu op 0:':
+      'hodnot z CSV nebylo přečteno jako čísla a nyní jsou 0:',
   'Zoeken in alle decks…': 'Hledat ve všech sadách…',
   'Zoeken in alle decks': 'Hledat ve všech sadách',
   'Zoekterm': 'Hledaný výraz',

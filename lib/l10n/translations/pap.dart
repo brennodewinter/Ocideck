@@ -765,6 +765,8 @@ const _dutchSourceAddPap = {
   'Bron': 'Fuente',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
       'E vershonnan den e kopia aki. Un rapòrt di pentest mester menshoná kontra kiko a wòrdu testá — i kua vershon esei tabata.',
+  'waarde(n) uit de CSV zijn niet als getal gelezen en staan nu op 0:':
+      'balor(nan) for di e CSV no a wòrdu lesá komo number i awor ta 0:',
   'Zoeken in alle decks…': 'Buska den tur e deknan…',
   'Zoeken in alle decks': 'Buska den tur e deknan',
   'Zoekterm': 'Palabra di buskeda',

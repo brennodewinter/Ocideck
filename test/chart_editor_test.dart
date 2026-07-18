@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
@@ -287,5 +288,36 @@ void main() {
     await tester.tap(find.text('Ontkoppelen').last);
     await tester.pumpAndSettle();
     expect(ChartSpec.parse(updated.customMarkdown).source, isNull);
+  });
+
+  group('csvUnreadableMessage', () {
+    const l10n = AppLocalizations(Locale('nl'));
+
+    test('names the count and quotes the value verbatim', () {
+      final message = csvUnreadableMessage(l10n, ['1,234']);
+      expect(message, startsWith('1 '));
+      // Verbatim, so the user can find it back in the source file.
+      expect(message, contains('1,234'));
+    });
+
+    test('lists at most five values and marks that there are more', () {
+      final message = csvUnreadableMessage(l10n, [
+        'aa',
+        'bb',
+        'cc',
+        'dd',
+        'ee',
+        'ff',
+        'gg',
+      ]);
+      expect(message, startsWith('7 '));
+      expect(message, contains('aa · bb · cc · dd · ee'));
+      expect(message, isNot(contains('ff')));
+      expect(message, endsWith('…'));
+    });
+
+    test('no ellipsis when everything fits', () {
+      expect(csvUnreadableMessage(l10n, ['aa', 'bb']), endsWith('aa · bb'));
+    });
   });
 }

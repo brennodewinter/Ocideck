@@ -1812,6 +1812,8 @@ const _dutchSourceAddGsw = <String, String>{
   'Bron': 'Quelle',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
       'D Versione i dem Exemplar. E Pentescht-Bricht muess säge, gäge was prüeft worde isch — und i welere Version.',
+  'waarde(n) uit de CSV zijn niet als getal gelezen en staan nu op 0:':
+      'Wärt(e) us em CSV sind nöd als Zahl gläse worde und stönd jetz uf 0:',
   'Zoeken in alle decks…': 'In allne Decks sueche…',
   'Zoeken in alle decks': 'In allne Decks sueche',
   'Zoekterm': 'Suechbegriff',

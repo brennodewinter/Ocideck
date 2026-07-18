@@ -1807,6 +1807,8 @@ const _dutchSourceAddDa = <String, String>{
   'Bron': 'Kilde',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
       'Versionerne i dette eksemplar. En pentestrapport bør angive, hvad der er testet mod — og hvilken version det var.',
+  'waarde(n) uit de CSV zijn niet als getal gelezen en staan nu op 0:':
+      'værdi(er) fra CSV-filen blev ikke læst som tal og er nu 0:',
   'Zoeken in alle decks…': 'Søg i alle decks…',
   'Zoeken in alle decks': 'Søg i alle decks',
   'Zoekterm': 'Søgeord',

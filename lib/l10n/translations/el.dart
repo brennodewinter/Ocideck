@@ -1836,6 +1836,8 @@ const _dutchSourceAddEl = <String, String>{
   'Bron': 'Πηγή',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
       'Οι εκδόσεις σε αυτό το αντίτυπο. Μια αναφορά pentest πρέπει να δηλώνει έναντι τίνος ελέγχθηκε — και σε ποια έκδοση.',
+  'waarde(n) uit de CSV zijn niet als getal gelezen en staan nu op 0:':
+      'τιμή/τιμές από το CSV δεν διαβάστηκαν ως αριθμοί και τώρα είναι 0:',
   'Zoeken in alle decks…': 'Αναζήτηση σε όλες τις παρουσιάσεις…',
   'Zoeken in alle decks': 'Αναζήτηση σε όλες τις παρουσιάσεις',
   'Zoekterm': 'Όρος αναζήτησης',

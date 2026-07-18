@@ -1808,6 +1808,8 @@ const _dutchSourceAddId = <String, String>{
   'Bron': 'Sumber',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
       'Versi yang ada dalam salinan ini. Laporan pentest harus menyebutkan terhadap apa pengujian dilakukan — dan versi mana itu.',
+  'waarde(n) uit de CSV zijn niet als getal gelezen en staan nu op 0:':
+      'nilai dari CSV tidak terbaca sebagai angka dan sekarang 0:',
   'Zoeken in alle decks…': 'Cari di semua dek…',
   'Zoeken in alle decks': 'Cari di semua dek',
   'Zoekterm': 'Kata pencarian',

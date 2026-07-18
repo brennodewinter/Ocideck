@@ -1810,6 +1810,8 @@ const _dutchSourceAddSl = <String, String>{
   'Bron': 'Vir',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
       'Različice v tem izvodu. Poročilo o pentestu mora navesti, proti čemu se je preverjalo — in katera različica je bila to.',
+  'waarde(n) uit de CSV zijn niet als getal gelezen en staan nu op 0:':
+      'vrednosti iz CSV niso bile prebrane kot številke in so zdaj 0:',
   'Zoeken in alle decks…': 'Iskanje po vseh kompletih…',
   'Zoeken in alle decks': 'Iskanje po vseh kompletih',
   'Zoekterm': 'Iskalni izraz',
