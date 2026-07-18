@@ -20,6 +20,62 @@ void main() {
       expect(x, ['Q1']);
       expect(series.single.data, [0]);
     });
+
+    test('a quoted field may contain a comma', () {
+      final (x, series) = parseCsv(',Omzet\n"Amsterdam, NL",10\n"Parijs, FR",12');
+      expect(x, ['Amsterdam, NL', 'Parijs, FR']);
+      expect(series.single.data, [10, 12]);
+    });
+
+    test('a quoted numeric field parses as one value', () {
+      // Excel exports decimals wrapped in quotes; before the quote-aware split
+      // this became two cells and shifted the whole row.
+      final (x, series) = parseCsv(',A,B\nQ1,"1.234",7');
+      expect(x, ['Q1']);
+      expect(series.map((s) => s.name), ['A', 'B']);
+      expect(series[0].data, [1.234]);
+      expect(series[1].data, [7]);
+    });
+
+    test('a doubled "" inside a quoted field is one literal quote', () {
+      final (x, series) = parseCsv(',A\n"say ""hi""",1\n"""quoted""",2');
+      expect(x, ['say "hi"', '"quoted"']);
+      expect(series.single.data, [1, 2]);
+    });
+
+    test('quoted fields work in the header row too', () {
+      final (x, series) = parseCsv(',"Omzet, netto"\nQ1,10');
+      expect(series.single.name, 'Omzet, netto');
+      expect(x, ['Q1']);
+    });
+
+    test('space before an opening quote still reads as one field', () {
+      final (x, _) = parseCsv(',A\n "Amsterdam, NL" ,10');
+      expect(x, ['Amsterdam, NL']);
+    });
+
+    test('a quoted field keeps its inner whitespace verbatim', () {
+      final (x, _) = parseCsv(',A\n" spatie ",1');
+      expect(x, [' spatie ']);
+    });
+
+    test('an unterminated quote runs to the end of the line', () {
+      final (x, series) = parseCsv(',A\n"Amsterdam, NL,10');
+      expect(x, ['Amsterdam, NL,10']);
+      expect(series.single.data, [0]);
+    });
+
+    test('regression: unquoted CSV parses exactly as before', () {
+      // Byte-for-byte the pre-fix behaviour: trimming, blank-line skipping,
+      // empty leading header cell, short rows padded with 0.
+      final (x, series) = parseCsv(
+        '\n, 2025, 2026\nQ1, 10, 12\n\nQ2, 14, 9\nQ3, 3\n',
+      );
+      expect(x, ['Q1', 'Q2', 'Q3']);
+      expect(series.map((s) => s.name), ['2025', '2026']);
+      expect(series[0].data, [10, 14, 3]);
+      expect(series[1].data, [12, 9, 0]);
+    });
   });
 
   group('ChartSpec', () {
