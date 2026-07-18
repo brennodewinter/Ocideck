@@ -5,7 +5,8 @@ import 'dart:math' as math;
 
 import '../../platform/platform_features.dart';
 import 'package:desktop_multi_window/desktop_multi_window.dart';
-import 'package:flutter/foundation.dart' show kIsWeb, listEquals;
+import 'package:flutter/foundation.dart'
+    show kIsWeb, listEquals, visibleForTesting;
 import 'package:flutter/material.dart';
 import '../../theme/presenter_palette.dart';
 import 'package:flutter/semantics.dart';
@@ -332,6 +333,37 @@ class FullscreenPresenter extends StatefulWidget {
     }
   }
 
+  /// The self-contained markdown payload for the audience window: the slides,
+  /// the style profile and the TLP level in one string.
+  ///
+  /// This payload never touches disk, so everything the beamer cannot look up
+  /// for itself has to travel inside it. That is why the style profile is
+  /// inlined — the audience window has no other way to learn the deck's
+  /// styling — and, for the same reason, why chart data is. A chart that links
+  /// its data through `source` would otherwise arrive as a bare relative
+  /// reference the beamer cannot resolve, and render as an empty plot.
+  @visibleForTesting
+  static String buildBeamerMarkdown({
+    required List<Slide> slides,
+    required String? projectPath,
+    required ThemeProfile themeProfile,
+    TlpLevel tlp = TlpLevel.none,
+    String organization = '',
+    String reportLanguage = '',
+  }) => MarkdownService().generateDeck(
+    Deck(
+      title: 'Presentatie',
+      slides: slides,
+      projectPath: projectPath,
+      themeProfile: themeProfile,
+      tlp: tlp,
+      organization: organization,
+      language: reportLanguage,
+    ),
+    inlineStyleProfile: true,
+    inlineChartData: true,
+  );
+
   /// Dual-screen mode: open a borderless audience window on the beamer showing
   /// the slide, and run the presenter view (current/next/notes/timer) in the
   /// main window on the laptop. The two windows stay in sync over method
@@ -356,21 +388,13 @@ class FullscreenPresenter extends StatefulWidget {
     Map<String, String> initialUserNotes = const {},
     void Function(Map<String, String>)? onUserNotesChanged,
   }) async {
-    // A self-contained markdown deck is the payload for the audience window; it
-    // carries the slides, the style profile and the TLP level in one string.
-    // This payload never touches disk, so it inlines the style profile — the
-    // beamer has no other way to learn the deck's styling.
-    final markdown = MarkdownService().generateDeck(
-      Deck(
-        title: 'Presentatie',
-        slides: slides,
-        projectPath: projectPath,
-        themeProfile: themeProfile,
-        tlp: tlp,
-        organization: organization,
-        language: reportLanguage,
-      ),
-      inlineStyleProfile: true,
+    final markdown = buildBeamerMarkdown(
+      slides: slides,
+      projectPath: projectPath,
+      themeProfile: themeProfile,
+      tlp: tlp,
+      organization: organization,
+      reportLanguage: reportLanguage,
     );
     // Pre-existing annotations re-keyed by index so the beamer shows them
     // immediately (the audience window has no stable slide ids of its own).
