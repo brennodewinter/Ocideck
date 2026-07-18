@@ -348,13 +348,21 @@ The available types:
   quote. A line break *inside* a quoted value is not supported. With a semicolon
   or tab separator a comma is read as a decimal mark, so `10,5` is ten and a
   half.
-- **Values that are not numbers** — a cell such as `12%`, `€ 1.000` or a bare
-  `1,234` in a comma-separated file cannot be read as a number: `1,234` is one
-  thousand two hundred thirty-four in one country and one-point-two-three-four
-  in another, and OciDeck will not guess which you meant. Such a cell is charted
-  as 0 **and named after the import**, so you can correct it at the source
-  rather than discovering a wrong chart on stage. An empty cell is left alone —
-  that is a missing value, not a mistake.
+- **Thousands and decimals** — `1,234` is one thousand two hundred thirty-four
+  in one country and one-point-two-three-four in another. OciDeck works it out
+  from the file as a whole rather than from the one cell: a `10,5` somewhere in
+  the same file proves the comma is a decimal mark, a `10.5` proves it groups
+  thousands, and `1.234,56` settles itself because the last mark is always the
+  decimal one. Nothing is assumed from your language or your region.
+
+  When the file genuinely does not say — every comma followed by exactly three
+  digits, so `1,234 · 2,500 · 12,000` reads equally well either way — the import
+  **asks**, showing what those very numbers become under each reading. Closing
+  that question cancels the import rather than picking one for you.
+- **Values that are not numbers** — a cell such as `12%` or `€ 1.000` cannot be
+  read as a number at all. It is charted as 0 **and named after the import**, so
+  you can correct it at the source rather than discovering a wrong chart on
+  stage. An empty cell is left alone — that is a missing value, not a mistake.
 - **Min/max** (optional) — offered for the cartesian types (bar, line, area,
   scatter, combo, waterfall) and radar. On the cartesian charts they draw
   horizontal **reference lines**; on a spider/radar chart they fix the **scale**
