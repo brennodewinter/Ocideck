@@ -1783,6 +1783,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Data bagan tidak dapat dibaca; bagan tersebut tetap kosong:',
   'Meegeleverde versies invullen': 'Isi versi bawaan',
   'vastgelegd': 'tercatat',
   'nu beschikbaar': 'kini tersedia',

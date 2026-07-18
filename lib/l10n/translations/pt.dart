@@ -1813,6 +1813,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Não foi possível ler os dados do gráfico; esses gráficos ficam vazios:',
   'Meegeleverde versies invullen': 'Preencher as versões incluídas',
   'vastgelegd': 'registada',
   'nu beschikbaar': 'agora disponível',

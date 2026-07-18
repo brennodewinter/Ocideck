@@ -1782,6 +1782,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Diagramdata kunne ikke læses; de diagrammer forbliver tomme:',
   'Meegeleverde versies invullen': 'Indsæt de medfølgende versioner',
   'vastgelegd': 'registreret',
   'nu beschikbaar': 'nu tilgængelig',

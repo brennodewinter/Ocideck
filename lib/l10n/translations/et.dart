@@ -1774,6 +1774,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Diagrammi andmeid ei õnnestunud lugeda; need diagrammid jäävad tühjaks:',
   'Meegeleverde versies invullen': 'Täida kaasasolevad versioonid',
   'vastgelegd': 'salvestatud',
   'nu beschikbaar': 'nüüd saadaval',

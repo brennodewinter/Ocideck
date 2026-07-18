@@ -1790,6 +1790,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Podaci grafikona nisu se mogli pročitati; ti grafikoni ostaju prazni:',
   'Meegeleverde versies invullen': 'Unesi uključene verzije',
   'vastgelegd': 'zabilježeno',
   'nu beschikbaar': 'sada dostupno',

@@ -1811,6 +1811,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Δεν ήταν δυνατή η ανάγνωση των δεδομένων του γραφήματος· αυτά τα γραφήματα παραμένουν κενά:',
   'Meegeleverde versies invullen': 'Συμπλήρωση ενσωματωμένων εκδόσεων',
   'vastgelegd': 'καταγράφηκε',
   'nu beschikbaar': 'τώρα διαθέσιμη',

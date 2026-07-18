@@ -1787,6 +1787,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'D Diagrammdate hend nöd chöne gläse werde; die Diagramm bliibed leer:',
   'Meegeleverde versies invullen': 'Mitglieferti Versione ysetze',
   'vastgelegd': 'festghalte',
   'nu beschikbaar': 'jetz verfüegbar',

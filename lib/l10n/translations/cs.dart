@@ -1786,6 +1786,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Data grafu se nepodařilo načíst; tyto grafy zůstanou prázdné:',
   'Meegeleverde versies invullen': 'Doplnit přibalené verze',
   'vastgelegd': 'zaznamenáno',
   'nu beschikbaar': 'nyní dostupné',

@@ -18,7 +18,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 ## `lib/models/` — data model
 
 - `annotation.dart` — `InkStroke` and `InkTool` enum for freehand drawing annotations on presentation slides.
-- `chart.dart` — `ChartSpec`/`ChartSeries` and the `ChartType` enum (bar, stacked/horizontal bar, horizontal stacked bar, combo, line, area, pie, donut, radar, scatter, waterfall, heatmap) for chart slides with inline or CSV data.
+- `chart.dart` — `ChartSpec`/`ChartSeries` and the `ChartType` enum (bar, stacked/horizontal bar, horizontal stacked bar, combo, line, area, pie, donut, radar, scatter, waterfall, heatmap) for chart slides with inline or linked data. Also the data-file codec: `dataToJson`/`withJson` for new files, `parseCsv`/`withCsv` for files written before the switch, and `withData` picking on the extension. The data file carries values only — colours stay in the chart block, which is what lets the save path compare two data files to decide whether the *numbers* changed. `parseChartDataJson` returns null rather than empty on a corrupt file, so a chart keeps what it has instead of quietly becoming an empty plot.
 - `checklist_spec.dart` — `ChecklistSpec` for the security checklist slide (MIAUW tri-state test list linked to findings).
 - `checklist_template.dart` — `ChecklistTemplate`/`ChecklistTemplateItem`: a user-created reusable checklist stored in the settings (feedback #9), with tolerant `encodeList`/`decodeList`.
 - `cockpit.dart` — `CockpitSpec`/`CockpitMeterSpec` for instrumentation gauges (speedometer, voltmeter, etc.).
@@ -78,7 +78,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `export_bundle.dart` — `ExportBundle`: everything an export needs for one audience profile. A factory the export dialog holds, so it can pick the profile without ever touching the source deck.
 - `export_metadata.dart` — `ExportDocumentMetadata` stamped into PDF/PPTX/HTML (title, author, org, keywords, TLP).
 - `export_service.dart` — The single chokepoint that renders decks to PDF, PPTX, and HTML.
-- `file_service.dart` — Scans presentation files, opens decks (with the safety gate), and import/URL/package IO. Part `parts/file_service_dossier.dart` builds the one-click audit dossier (package + `AUDIT_DOSSIER.md` + optional `report.pdf`, AES-256). Part `parts/file_service_style_profile.dart` reads/writes a standalone `.ocideckstyle` style profile (FILE_FORMAT §3.3), embedding a custom logo as base64 and materializing it back on import.
+- `file_service.dart` — Scans presentation files, opens decks (with the safety gate), and import/URL/package IO. `openDeckDetailed` returns `(deck, failure, warnings)`; the warnings carry chart data files that could not be read, because such a chart draws empty and an empty chart is indistinguishable from one that simply has no numbers yet. Part `parts/file_service_scan.dart` holds the private helpers of the disk scan, `parts/file_service_import_dirs.dart` those that pick where an import lands. Part `parts/file_service_dossier.dart` builds the one-click audit dossier (package + `AUDIT_DOSSIER.md` + optional `report.pdf`, AES-256). Part `parts/file_service_style_profile.dart` reads/writes a standalone `.ocideckstyle` style profile (FILE_FORMAT §3.3), embedding a custom logo as base64 and materializing it back on import.
 - `finding_ai_service.dart` — Drafts a free-text finding field via the AI backend, grounded on the tester's facts; strips fabricated CWE/CVE/CVSS ids.
 - `finding_group_builder.dart` — `buildFindingGroup`: assembles a finding header + optional detail/evidence slides sharing one id.
 - `finding_numbering.dart` — `renumberFindings` (F-01… from deck order) + `deckFindingList` derivation.
@@ -328,7 +328,7 @@ search (Phase 6) and asset deletion (§6.2, deliberately manual).
 - `bullet_marker_selector.dart` — Per-slide bullet-marker override (dot or paw).
 - `bullets_editor.dart` — Edits a bullet-list slide (title, subtitle, nested levels, markers, group headings/"tussenkoppen").
 - `bullets_image_editor.dart` — Edits a bullets-with-image slide.
-- `chart_editor.dart` — Edits a chart slide (type, data grid, CSV import/linking).
+- `chart_editor.dart` — Edits a chart slide (type, data grid, CSV import/linking). The grid is editable whether or not the data is linked to a file — a linked chart writes that file back on save. It was read-only while linked until that write-back existed.
 - `checklist_editor.dart` — Edits a checklist slide (standard label, tri-state test rows, finding links).
 - `cockpit_editor.dart` — Edits a cockpit slide (title + meter specs).
 - `code_editor.dart` — Edits a code slide (syntax-highlighted monospace field).

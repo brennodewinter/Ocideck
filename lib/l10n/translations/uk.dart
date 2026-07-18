@@ -1801,6 +1801,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Не вдалося прочитати дані діаграми; ці діаграми залишаться порожніми:',
   'Meegeleverde versies invullen': 'Підставити вбудовані версії',
   'vastgelegd': 'зафіксовано',
   'nu beschikbaar': 'тепер доступна',

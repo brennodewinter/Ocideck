@@ -1758,6 +1758,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'ta\'nom De\' laDlaHbe\'; ta\'nommey chIm rutlh:',
   'Meegeleverde versies invullen': 'mI\'mey chel',
   'vastgelegd': 'qonlu\'pu\'',
   'nu beschikbaar': 'DaH ngaq',

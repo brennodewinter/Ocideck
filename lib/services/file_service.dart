@@ -37,6 +37,8 @@ part 'parts/file_service_package.dart';
 part 'parts/file_service_dossier.dart';
 part 'parts/file_service_project.dart';
 part 'parts/file_service_import.dart';
+part 'parts/file_service_import_dirs.dart';
+part 'parts/file_service_scan.dart';
 part 'parts/file_service_style_profile.dart';
 
 /// A presentation found on disk while scanning a directory.
@@ -200,6 +202,15 @@ class FileService {
   final String? Function() _homeDirectory;
   final List<String> Function() _libraryPaths;
   final CaptionService _captions = CaptionService();
+
+  /// Absoluut pad van een grafiekdatabestand → de data zoals die erin stond
+  /// toen hij werd gelezen ([_hydrateCharts]), canoniek als [ChartSpec.dataToJson].
+  ///
+  /// De ijklijn waartegen [_writeChartData] bepaalt of de gebruiker de grafiek
+  /// heeft bewerkt. Zonder die ijklijn zou elk opslaan het bestand overschrijven
+  /// en dus elke bewerking van buiten de app — het spreadsheet-werkpad — stil
+  /// ongedaan maken.
+  final Map<String, String> _chartDataAtOpen = {};
 
   FileService(
     this._md,
@@ -441,80 +452,6 @@ class FileService {
     return hits;
   }
 
-  /// Frontmatter probe for one file: reads at most [_scanHeadBytes], and returns
-  /// a [ScanHit] only when the file declares `marp: true`. Oversized or
-  /// unreadable files are skipped (logged, never thrown).
-  Future<ScanHit?> _probeMarkdown(File file) async {
-    try {
-      final length = await file.length();
-      if (length > maxDeckMarkdownBytes) return null;
-      final cap = length < _scanHeadBytes ? length : _scanHeadBytes;
-      final bytes = <int>[];
-      await for (final chunk in file.openRead(0, cap)) {
-        bytes.addAll(chunk);
-      }
-      // Tolerate malformed bytes: the header is ASCII/UTF-8, and a bad tail
-      // byte from the cut-off point must not drop the whole probe.
-      final head = utf8.decode(bytes, allowMalformed: true);
-      final fm = _md.sniffFrontmatter(head);
-      if (!fm.marp) return null;
-      final theme = fm.theme?.trim();
-      final stat = await file.stat();
-      return ScanHit(
-        path: file.path,
-        fileName: p.basename(file.path),
-        title: fm.title,
-        theme: (theme == null || theme.isEmpty) ? null : theme,
-        isOcideckTheme: theme == 'ocideck',
-        size: length,
-        modified: stat.modified,
-      );
-    } catch (e) {
-      logWarning('FileService.scanKnownLocations: file probe failed', e);
-      return null;
-    }
-  }
-
-  /// The deduplicated set of root folders the broad scan walks. Parent folders
-  /// of recent files plus the standard user locations; a root nested inside
-  /// another is dropped so the tree isn't walked twice.
-  List<String> _knownScanRoots(List<String> recentFiles) {
-    final home = _homeDirectory() ?? Platform.environment['HOME'];
-    final candidates = <String>[];
-    if (home != null && home.trim().isNotEmpty) {
-      for (final sub in const [
-        'Documents',
-        'Desktop',
-        'Downloads',
-        'Library/Mobile Documents/com~apple~CloudDocs',
-      ]) {
-        candidates.add(p.join(home, sub));
-      }
-    }
-    // Geconfigureerde bibliotheken staan mogelijk buiten de standaardmappen;
-    // neem ze als eigen wortels mee zodat de brede scan ze ook dekt.
-    for (final path in _libraryPaths()) {
-      if (path.trim().isNotEmpty) candidates.add(path);
-    }
-    for (final f in recentFiles) {
-      if (f.trim().isEmpty) continue;
-      candidates.add(p.dirname(f));
-    }
-
-    // Normalise, dedupe, then drop any root that lives inside another root.
-    final normalized = <String>{
-      for (final c in candidates) p.normalize(c),
-    }.toList();
-    final roots = <String>[];
-    for (final c in normalized) {
-      final nested = normalized.any(
-        (other) => other != c && p.isWithin(other, c),
-      );
-      if (!nested) roots.add(c);
-    }
-    return roots;
-  }
-
   Future<String?> pickMarkdownFile({String? initialDirectory}) async {
     // FileType.any, not a custom-extension filter: on macOS an
     // `allowedExtensions: ['md']` filter greys out .md files in the native
@@ -597,17 +534,19 @@ class FileService {
   /// tell the user (e.g. "this isn't a presentation") instead of a generic
   /// failure. Returns `(deck: <deck>, failure: null)` on success, or
   /// `(deck: null, failure: <reason>)` on any refusal.
-  Future<({Deck? deck, OpenFailure? failure})> openDeckDetailed(
-    String filePath, {
-    String? content,
-  }) async {
+  Future<({Deck? deck, OpenFailure? failure, List<String> warnings})>
+  openDeckDetailed(String filePath, {String? content}) async {
     String raw;
     if (content != null) {
       raw = content;
     } else {
       final file = File(filePath);
       if (!await file.exists()) {
-        return (deck: null, failure: OpenFailure.notFound);
+        return (
+          deck: null,
+          failure: OpenFailure.notFound,
+          warnings: const <String>[],
+        );
       }
       // A deck is plain text (images/media are sidecar files), so a huge .md is
       // pathological. Cap it to avoid loading/parsing an attacker-sized file.
@@ -616,18 +555,30 @@ class FileService {
           logWarning(
             'FileService.openDeck: file exceeds ${maxDeckMarkdownBytes ~/ (1024 * 1024)} MiB cap',
           );
-          return (deck: null, failure: OpenFailure.tooLarge);
+          return (
+            deck: null,
+            failure: OpenFailure.tooLarge,
+            warnings: const <String>[],
+          );
         }
       } catch (e) {
         logWarning('FileService.openDeck: cannot stat file', e);
-        return (deck: null, failure: OpenFailure.unreadable);
+        return (
+          deck: null,
+          failure: OpenFailure.unreadable,
+          warnings: const <String>[],
+        );
       }
       try {
         raw = await file.readAsString();
       } catch (e) {
         // Non-UTF8 / unreadable bytes must not crash the open flow.
         logWarning('FileService.openDeck: file not readable as UTF-8', e);
-        return (deck: null, failure: OpenFailure.unreadable);
+        return (
+          deck: null,
+          failure: OpenFailure.unreadable,
+          warnings: const <String>[],
+        );
       }
     }
     // Fail-closed: never parse/open a deck that carries executable content.
@@ -641,7 +592,11 @@ class FileService {
         '(${findings.length} finding(s))',
         filePath,
       );
-      return (deck: null, failure: OpenFailure.unsafe);
+      return (
+        deck: null,
+        failure: OpenFailure.unsafe,
+        warnings: const <String>[],
+      );
     }
     // Only open Marp/OciDeck presentations. Every deck declares `marp: true` in
     // its front matter (the serializer always writes it), so this rejects an
@@ -654,10 +609,20 @@ class FileService {
         '(no `marp: true` front matter)',
         filePath,
       );
-      return (deck: null, failure: OpenFailure.notPresentation);
+      return (
+        deck: null,
+        failure: OpenFailure.notPresentation,
+        warnings: const <String>[],
+      );
     }
     final parsed = _md.parseDeck(raw, filePath: filePath);
-    if (parsed == null) return (deck: null, failure: OpenFailure.corrupt);
+    if (parsed == null) {
+      return (
+        deck: null,
+        failure: OpenFailure.corrupt,
+        warnings: const <String>[],
+      );
+    }
     // Guard against silently opening a truncated/corrupt file as a blank deck:
     // a valid save always emits at least one slide block after the frontmatter,
     // so a complete header with an empty body means the source was cut short.
@@ -666,13 +631,21 @@ class FileService {
         'FileService.openDeck: frontmatter present but no slide body',
         filePath,
       );
-      return (deck: null, failure: OpenFailure.corrupt);
+      return (
+        deck: null,
+        failure: OpenFailure.corrupt,
+        warnings: const <String>[],
+      );
     }
     // The file carries only content; apply the active style profile on open.
     final deck = parsed.copyWith(
       themeProfile: activeProfileFor(projectPath: parsed.projectPath),
     );
-    var hydrated = await _hydrateCharts(await _hydrateImageCaptions(deck));
+    final chartWarnings = <String>[];
+    var hydrated = await _hydrateCharts(
+      await _hydrateImageCaptions(deck),
+      chartWarnings,
+    );
     // Re-attach separate sidecar layers when reading from disk.
     if (content == null) {
       final sidecar = File(_sidecarPath(filePath));
@@ -701,7 +674,7 @@ class FileService {
         }
       }
     }
-    return (deck: hydrated, failure: null);
+    return (deck: hydrated, failure: null, warnings: chartWarnings);
   }
 
   Future<String?> saveDeckAs(Deck deck, {String? initialDirectory}) async {
@@ -865,61 +838,6 @@ class FileService {
     return mdEntry;
   }
 
-  Directory _uniqueDir(String parent, String name) {
-    var dir = Directory(p.join(parent, name));
-    var i = 2;
-    while (dir.existsSync()) {
-      dir = Directory(p.join(parent, '$name ($i)'));
-      i++;
-    }
-    return dir;
-  }
-
-  /// De bestaande importmappen zoals [_uniqueDir] ze aanmaakt: `naam`,
-  /// `naam (2)`, … — in aanmaakvolgorde, stoppend bij het eerste gat.
-  Iterable<Directory> _importDirCandidates(String parent, String name) sync* {
-    var dir = Directory(p.join(parent, name));
-    var i = 2;
-    while (dir.existsSync()) {
-      yield dir;
-      dir = Directory(p.join(parent, '$name ($i)'));
-      i++;
-    }
-  }
-
-  /// Of [dir] alle pakketleden [entries] byte-identiek bevat (traversal-leden
-  /// tellen niet mee, die worden ook nooit geschreven). Een gewijzigd of
-  /// ontbrekend lid — een lokaal bewerkte kopie — valt af. Extra lokale
-  /// bestanden zijn juist toegestaan: de app schrijft sidecars (annotaties,
-  /// notities) naast de markdown, en hergebruik schrijft zelf niets, dus die
-  /// kunnen nooit worden overschreven.
-  Future<bool> _dirMatchesEntries(
-    Directory dir,
-    List<PackageEntry> entries,
-  ) async {
-    final expected = <String, List<int>>{};
-    for (final entry in entries) {
-      final resolved = p.normalize(p.join(dir.path, entry.name));
-      if (resolved == dir.path || !p.isWithin(dir.path, resolved)) continue;
-      expected[resolved] = entry.bytes;
-    }
-    for (final e in expected.entries) {
-      final file = File(e.key);
-      if (!file.existsSync()) return false;
-      if (!await _fileHasBytes(file, e.value)) return false;
-    }
-    return true;
-  }
-
-  Future<bool> _fileHasBytes(File file, List<int> bytes) async {
-    if (await file.length() != bytes.length) return false;
-    final onDisk = await file.readAsBytes();
-    for (var i = 0; i < bytes.length; i++) {
-      if (onDisk[i] != bytes[i]) return false;
-    }
-    return true;
-  }
-
   /// Zip-magie 'PK\x03\x04' — herkent een .ocideck/zip-pakket aan zijn kop.
   static bool looksLikeZipBytes(List<int> bytes) =>
       bytes.length >= 4 &&
@@ -939,7 +857,7 @@ class FileService {
   /// als [openDeckDetailed] (veiligheidsscan → marp-sniff → parse → actief
   /// stijlprofiel), maar zonder enige bestandssysteemtoegang. Gebruikt door de
   /// web-URL-import: achter een URL zitten geen sidecars, projectmap of
-  /// chart-CSV's, dus die hydratatie wordt bewust overgeslagen. [sourceName]
+  /// chart-databestanden, dus die hydratatie wordt bewust overgeslagen. [sourceName]
   /// labelt alleen de logregels.
   ({Deck? deck, OpenFailure? failure}) openDeckFromContent(
     String raw, {

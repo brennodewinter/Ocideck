@@ -217,6 +217,46 @@ void main() {
     expect(specs.first.series.single.color, '#003399');
   });
 
+  // A linked chart used to be read-only: the grid was disabled and the
+  // Rij/Reeks buttons were hidden, because an edit had no way back to the file
+  // and would vanish at the next save. Now that saving writes the file back,
+  // linked and inline charts edit exactly alike.
+  testWidgets('a chart linked to a data file is still editable', (
+    tester,
+  ) async {
+    const spec = ChartSpec(
+      x: ['A', 'B'],
+      series: [
+        ChartSeries(name: 'Waarde', data: [10, 20]),
+      ],
+      source: 'data/cijfers.json',
+    );
+    var updated = Slide.create(
+      SlideType.chart,
+    ).copyWith(customMarkdown: spec.toBlock());
+
+    await tester.pumpWidget(_host(updated, (slide) => updated = slide));
+    await tester.pump();
+
+    // The grid takes input...
+    await tester.enterText(find.widgetWithText(TextField, '10'), '42');
+    await tester.pump();
+    expect(
+      ChartSpec.parse(updated.customMarkdown).series.single.data.first,
+      42,
+    );
+
+    // ...and the structural buttons are there, not hidden behind the link.
+    expect(find.text('Rij'), findsOneWidget);
+    expect(find.text('Reeks'), findsOneWidget);
+    await tester.tap(find.text('Rij'));
+    await tester.pump();
+    expect(ChartSpec.parse(updated.customMarkdown).x.length, 3);
+
+    // The link itself survives editing — the file stays the chart's home.
+    expect(ChartSpec.parse(updated.customMarkdown).source, 'data/cijfers.json');
+  });
+
   testWidgets('unlinking a CSV source asks for confirmation first', (
     tester,
   ) async {

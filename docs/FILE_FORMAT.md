@@ -30,8 +30,8 @@ my_presentation/
 ├── images/                         # copied images
 │   ├── photo.png
 │   └── .ocideck_captions.json      # caption sidecar (see §6.1)
-├── data/                           # linked chart CSV files (see §6.4)
-│   └── revenue.csv
+├── data/                           # linked chart data files (see §6.4)
+│   └── revenue.json
 ├── logos/                          # copied logo from the style profile
 │   └── logo.png
 ├── media/                          # video/audio (only in packages, see §7)
@@ -58,7 +58,7 @@ presentations.
 > part of the Marp Markdown (so the `.md` stays clean and exchangeable): the
 > annotation layer (`<name>.ink.json`, §6.2), user notes
 > (`<name>.user-notes.json`, §6.3), captions (`.ocideck_captions.json`, §6.1),
-> and linked chart data (`data/*.csv`, §6.4).
+> and linked chart data (`data/*.json`, `data/*.csv`, §6.4).
 
 ---
 
@@ -574,16 +574,16 @@ void main() => print('hi');
 ````
 
 **Chart** (`chart`) — a fenced ```chart``` block with the chart specification as
-**JSON**. Small charts store their data inline; data-driven charts point through
-`source` to a CSV in `data/` (see §6.4). When saving, inline data is omitted as
-soon as a `source` exists (the CSV is then the source of truth); when opening,
-that CSV is read back in.
+**JSON**. The data may sit inline, or in a data file in `data/` that `source`
+points at (see §6.4). When saving, inline data is omitted as soon as a `source`
+exists; when opening, that file is read back in. Styling — colours, title,
+bounds — always stays in the block, never in the data file.
 ````markdown
 ```chart
 {
   "type": "bar",            // see the type list below; defaults to bar
   "title": "Revenue",
-  "source": "data/revenue.csv",  // optional; otherwise inline x/series
+  "source": "data/revenue.json",  // optional; otherwise inline x/series
   "x": ["Q1", "Q2"],
   "rowColors": ["#003399", "#FFCC00"],  // optional; color per label (pie/donut/radar)
   "minBound": 0,            // optional; cartesian/radar only
@@ -600,6 +600,8 @@ Fields:
     x-axis, values on the y-axis). `area` is a filled line.
   - `horizontalBar` — bars laid out left-to-right; good for rankings and long
     labels.
+  - `horizontalStackedBar` — a `stackedBar` on its side: one bar per label with
+    the series stacked left-to-right; part-to-whole with long labels.
   - `combo` — bars for every series except the **last**, which is drawn as a
     line on its own right-hand axis (e.g. revenue bars + growth-% line).
     Falls back to a plain bar chart with a single series.
@@ -621,7 +623,9 @@ Fields:
   On `bar`/`stackedBar`/`line`/`area`/`scatter`/`combo`/`waterfall` they are
   horizontal **reference lines**; for `radar` they set the **scale**
   (inner/outer ring) with even spacing. Ignored for `pie`, `donut`,
-  `horizontalBar`, and `heatmap`.
+  `horizontalBar`, `horizontalStackedBar`, and `heatmap`.
+- `source` — optional path to a data file in `data/` holding `x` and `series`
+  (§6.4). When present, those two are omitted from the block on save.
 
 **Question** (`question`) — a fenced ```question``` block with the quiz
 specification as **JSON**, optionally preceded by a `# title`, an `![](image)`
@@ -1005,18 +1009,50 @@ not stored; when there are no notes, the sidecar file is deleted or not written.
 }
 ```
 
-### 6.4 Chart Data (`data/*.csv`)
+### 6.4 Chart Data (`data/*.json`, `data/*.csv`)
 
 A chart slide (§5) can keep its data inline in the `chart` block, or point via
-`"source": "data/<name>.csv"` to a CSV in a separate **`data/`** folder next to
-the deck. That folder keeps all linked data files together, separate from
-`images/`/`media/`. The CSV is then the source of truth: it is edited separately
-(for example in a spreadsheet), copied along during save/`Save as...`, and
-included in packages (§7). When opening, the CSV is read and attached to the
-chart in memory; the `.md` keeps only the `source` reference.
+`"source": "data/<name>.json"` to a data file in a separate **`data/`** folder
+next to the deck. That folder keeps all linked data files together, separate
+from `images/`/`media/`. When opening, the file is read and attached to the
+chart in memory; the `.md` keeps only the `source` reference, so the markdown
+stays about the *shape* of the chart while the file holds the values.
+
+The file is copied along during save/`Save as...` and included in packages (§7).
+
+**Two forms.** New data files are written as **JSON**; **CSV** is still read,
+and a deck that already links a `.csv` keeps getting CSV on save — silently
+rewriting it as JSON would break whatever points at it from outside. The reader
+is chosen on the extension.
+
+```json
+{
+  "x": ["Jan", "Feb", "Mrt"],
+  "series": [
+    { "name": "Omzet", "data": [120, 138, 95] }
+  ]
+}
+```
 
 CSV shape: first row = series names (first cell = label column), every next row
-is `label, value1, value2, ...`.
+is `label, value1, value2, ...`. The CSV reader does not support quoted fields,
+so a label containing a comma is mis-read — which is why new files are JSON.
+
+**Values only.** The data file carries `x` and `series` and nothing else. Row
+and series colours, the title and the bounds stay in the `chart` block, because
+they are styling rather than data. That split is what lets the data file be
+regenerated wholesale — from a spreadsheet, a script, an export — without the
+chart losing its look.
+
+**Editing.** Both directions work. The grid in the app edits a linked chart just
+like an inline one and writes the file back on save; the file can equally be
+edited outside the app. To keep those from fighting, a save only rewrites a data
+file whose values actually changed in the app: an untouched chart leaves its
+file completely alone, so an edit made elsewhere while the deck was open
+survives. If both changed, the app wins and the clash is reported.
+
+A missing or unparseable data file leaves the chart's data empty rather than
+failing the open, and never causes the reference to be dropped.
 
 ---
 
@@ -1033,7 +1069,7 @@ yet.
 ├── <title>.ink.json          # annotation layer (if present, §6.2)
 ├── <title>.user-notes.json   # user notes (if present, §6.3)
 ├── images/...                # all used images
-├── data/...                  # linked chart CSV files (§6.4)
+├── data/...                  # linked chart data files (§6.4)
 ├── media/...                 # used video/audio
 ├── logos/...                 # logo from the style profile
 └── themes/<theme>.css        # generated theme CSS (usable by Marp/CLI)
@@ -1110,6 +1146,10 @@ for presenter notes):
 - **Forward migration:** missing front-matter fields and style-profile fields
   fall back to defaults, and the absence of the `no-footer` token means (for
   older files) "footer visible".
+- **Chart data:** inline `x`/`series` in a `chart` block stays valid and is
+  read unchanged — it is still the only possible form where there is no project
+  folder (web). A `source` pointing at a `.csv` keeps being read *and written*
+  as CSV; only newly linked data files are JSON (§6.4).
 
 ---
 

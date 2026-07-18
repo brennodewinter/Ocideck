@@ -922,6 +922,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Chart data could not be read; those charts stay empty:',
   'Meegeleverde versies invullen': 'Fill in the bundled versions',
   'vastgelegd': 'recorded',
   'nu beschikbaar': 'now available',

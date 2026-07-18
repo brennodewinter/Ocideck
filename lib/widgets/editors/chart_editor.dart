@@ -20,8 +20,13 @@ part 'chart_editor_dialogs.dart';
 part 'chart_editor_grid.dart';
 
 /// Editor for a chart slide: type, title, and an editable data grid. Data can
-/// be entered directly in the interface, imported from a CSV (inline), or
-/// linked to a CSV file kept in the deck's data/ directory (the living source).
+/// be entered directly in the interface, imported from a CSV, or linked to a
+/// data file in the deck's data/ directory.
+///
+/// The grid stays editable in every one of those cases — a linked chart writes
+/// its file back on save. It used to be read-only while linked, because there
+/// was no way back to the file and an edit would quietly disappear at the next
+/// save; that is no longer true.
 class ChartEditor extends StatefulWidget {
   final Slide slide;
   final ValueChanged<Slide> onUpdate;
@@ -442,27 +447,25 @@ class _ChartEditorState extends State<ChartEditor> {
           ),
           const SizedBox(height: 12),
           if (widget.nestedInScrollView)
-            SizedBox(height: 280, child: _scrollableGrid(linked))
+            SizedBox(height: 280, child: _scrollableGrid())
           else
-            Expanded(child: _scrollableGrid(linked)),
-          if (!linked) ...[
-            const SizedBox(height: 8),
-            Row(
-              children: [
-                OutlinedButton.icon(
-                  onPressed: _addRow,
-                  icon: const Icon(Icons.add, size: 16),
-                  label: Text(l10n.d('Rij')),
-                ),
-                const SizedBox(width: 8),
-                OutlinedButton.icon(
-                  onPressed: _addColumn,
-                  icon: const Icon(Icons.add, size: 16),
-                  label: Text(l10n.d('Reeks')),
-                ),
-              ],
-            ),
-          ],
+            Expanded(child: _scrollableGrid()),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              OutlinedButton.icon(
+                onPressed: _addRow,
+                icon: const Icon(Icons.add, size: 16),
+                label: Text(l10n.d('Rij')),
+              ),
+              const SizedBox(width: 8),
+              OutlinedButton.icon(
+                onPressed: _addColumn,
+                icon: const Icon(Icons.add, size: 16),
+                label: Text(l10n.d('Reeks')),
+              ),
+            ],
+          ),
         ],
       ),
     );
@@ -565,16 +568,20 @@ class _ChartEditorState extends State<ChartEditor> {
     );
   }
 
-  /// Het datagrid in een tweerichtings-scroller; uitgeschakeld zolang de data
-  /// aan een CSV is gekoppeld.
-  Widget _scrollableGrid(bool linked) {
+  /// Het datagrid in een tweerichtings-scroller.
+  ///
+  /// Ook bewerkbaar wanneer de data aan een los bestand is gekoppeld: bij
+  /// opslaan wordt dat bestand bijgewerkt. Het grid stond hier vroeger uit,
+  /// omdat er toen geen weg terug naar het bestand was en een bewerking dus
+  /// stilzwijgend verloren ging.
+  Widget _scrollableGrid() {
     return LayoutBuilder(
       builder: (context, constraints) {
         final availableWidth = constraints.maxWidth;
         return SingleChildScrollView(
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            child: _grid(enabled: !linked, availableWidth: availableWidth),
+            child: _grid(enabled: true, availableWidth: availableWidth),
           ),
         );
       },

@@ -417,6 +417,11 @@ class TabsNotifier extends StateNotifier<TabsState> {
     }
     // notifier disposed during the await
     if (!mounted) return OpenResult.unreadable;
+    if (outcome.warnings.isNotEmpty) {
+      _ref.read(chartDataWarningProvider.notifier).state = ChartDataWarning(
+        outcome.warnings,
+      );
+    }
     final index = (selectIndex ?? 0).clamp(0, deck.slides.length - 1);
     _placeDeckInTab(deck, filePath: path, index: index);
     await _settings.addRecentFile(
@@ -883,5 +888,25 @@ class SecurityModulePrompt {
 }
 
 final securityModulePromptProvider = StateProvider<SecurityModulePrompt?>(
+  (ref) => null,
+);
+
+/// Grafieken waarvan het gekoppelde databestand niet gelezen kon worden bij het
+/// openen: ontbrekend, onleesbaar, of buiten de projectmap.
+///
+/// Zo'n grafiek tekent leeg, en dat ziet er precies uit als een grafiek zonder
+/// cijfers — het probleem is dus onzichtbaar tenzij we het zeggen. Zelfde
+/// eenmalige signaalvorm als [securityModulePromptProvider]: de state-laag zet
+/// hem bij het openen, de shell toont hem en wist hem.
+class ChartDataWarning {
+  /// De `source`-paden die niet gelezen konden worden.
+  final List<String> sources;
+
+  /// Niet-const, net als [SecurityModulePrompt]: twee identieke const-instanties
+  /// zouden bij een tweede open als "geen wijziging" worden weggeslikt.
+  ChartDataWarning(this.sources);
+}
+
+final chartDataWarningProvider = StateProvider<ChartDataWarning?>(
   (ref) => null,
 );

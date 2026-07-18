@@ -1791,6 +1791,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Nepavyko nuskaityti diagramos duomenų; šios diagramos liks tuščios:',
   'Meegeleverde versies invullen': 'Įrašyti pridėtas versijas',
   'vastgelegd': 'užfiksuota',
   'nu beschikbaar': 'dabar prieinama',

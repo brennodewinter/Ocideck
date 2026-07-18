@@ -1782,6 +1782,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Diagramdata kunde inte läsas; de diagrammen förblir tomma:',
   'Meegeleverde versies invullen': 'Fyll i medföljande versioner',
   'vastgelegd': 'registrerad',
   'nu beschikbaar': 'nu tillgänglig',

@@ -740,6 +740,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Les données du graphique n\'ont pas pu être lues ; ces graphiques restent vides :',
   'Meegeleverde versies invullen': 'Renseigner les versions intégrées',
   'vastgelegd': 'consignée',
   'nu beschikbaar': 'désormais disponible',

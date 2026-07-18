@@ -1783,6 +1783,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Kaavion tietoja ei voitu lukea; nämä kaaviot jäävät tyhjiksi:',
   'Meegeleverde versies invullen': 'Täytä mukana tulevat versiot',
   'vastgelegd': 'kirjattu',
   'nu beschikbaar': 'nyt saatavilla',

@@ -1796,6 +1796,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Nie można odczytać danych wykresu; te wykresy pozostaną puste:',
   'Meegeleverde versies invullen': 'Wstaw dołączone wersje',
   'vastgelegd': 'zapisano',
   'nu beschikbaar': 'obecnie dostępna',

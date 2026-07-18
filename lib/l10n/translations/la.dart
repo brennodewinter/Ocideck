@@ -1799,6 +1799,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Data diagrammatis legi non potuerunt; illa diagrammata vacua manent:',
   'Meegeleverde versies invullen': 'Versiones inclusas inserere',
   'vastgelegd': 'consignata',
   'nu beschikbaar': 'nunc praesto',

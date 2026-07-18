@@ -1785,6 +1785,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Podatkov grafikona ni bilo mogoče prebrati; ti grafikoni ostanejo prazni:',
   'Meegeleverde versies invullen': 'Vstavi priložene različice',
   'vastgelegd': 'zabeleženo',
   'nu beschikbaar': 'zdaj na voljo',

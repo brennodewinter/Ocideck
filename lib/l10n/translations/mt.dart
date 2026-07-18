@@ -1806,6 +1806,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Id-data tal-graff ma setgħetx tinqara; dawk il-graffs jibqgħu vojta:',
   'Meegeleverde versies invullen': 'Imla l-verżjonijiet inklużi',
   'vastgelegd': 'irreġistrata',
   'nu beschikbaar': 'issa disponibbli',

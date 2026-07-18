@@ -740,6 +740,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'No por a lesa e datos di grafiko; e grafikonan ei ta keda bashí:',
   'Meegeleverde versies invullen': 'Yena e vershonnan inkluí',
   'vastgelegd': 'registrá',
   'nu beschikbaar': 'awor disponibel',

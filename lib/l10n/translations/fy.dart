@@ -741,6 +741,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Grafykdata koe net lêzen wurde; dy grafiken bliuwe leech:',
   'Meegeleverde versies invullen': 'Meilevere ferzjes ynfolje',
   'vastgelegd': 'fêstlein',
   'nu beschikbaar': 'no beskikber',
