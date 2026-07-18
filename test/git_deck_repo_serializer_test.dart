@@ -180,41 +180,195 @@ void main() {
     expect(out.upserts.keys, ['$deckDir/deck.md']);
   });
 
-  // Regressie: gekoppelde grafiekdata ging bij het committen verloren. De
-  // markdown werd zonder inlineChartData geserialiseerd, dus bleef alleen de
-  // `source` staan — een pad in een projectmap die een repo niet heeft. Na een
-  // push waren de cijfers definitief weg.
-  test('gekoppelde grafiekdata gaat mee in deck.md', () async {
-    final repo = FakeRepo(branches: {'main': 'c0'}, files: {});
-    final chart = Slide.create(SlideType.chart).copyWith(
-      customMarkdown: const ChartSpec(
+  // Grafiekdata krijgt een eigen bestand op een stabiel pad naast deck.md.
+  // Regressie op twee dingen tegelijk: de cijfers mogen niet verdwijnen (dat
+  // deden ze, stil, tot de verwijzing zonder data werd gecommit), en ze mogen
+  // niet in de content-geadresseerde pool belanden — dan levert elke gewijzigde
+  // cel een nieuw bestand op en is er geen diff te lezen.
+  group('grafiekdata', () {
+    Slide chartSlide({
+      required String source,
+      List<double> data = const [10, 14],
+    }) => Slide.create(SlideType.chart).copyWith(
+      customMarkdown: ChartSpec(
         type: ChartType.line,
         title: 'Omzet',
-        source: 'data/omzet.csv',
-        x: ['Q1', 'Q2'],
-        series: [
-          ChartSeries(name: '2025', data: [10, 14]),
-        ],
+        source: source,
+        x: const ['Q1', 'Q2'],
+        series: [ChartSeries(name: '2025', data: data)],
       ).toBlock(),
     );
 
-    final out = await buildDeckRepoFiles(
-      deckWith([chart]),
+    Future<RepoDeckFiles> build(Deck deck) async => buildDeckRepoFiles(
+      deck,
       md: md,
-      pool: poolFor(repo),
+      pool: poolFor(FakeRepo(branches: {'main': 'c0'}, files: {})),
       deckDir: deckDir,
       resolveBytes: resolverFrom({}),
     );
 
-    final stored = md
-        .parseDeck(utf8.decode(out.upserts['$deckDir/deck.md']!))!
-        .slides
-        .single;
-    final spec = ChartSpec.parse(stored.customMarkdown);
-    expect(spec.hasInlineData, isTrue);
-    expect(spec.x, ['Q1', 'Q2']);
-    expect(spec.series.single.data, [10, 14]);
-    // De verwijzing blijft staan: op schijf is het databestand nog de bron.
-    expect(spec.source, 'data/omzet.csv');
+    test('krijgt een eigen bestand, deck.md houdt de verwijzing', () async {
+      final out = await build(
+        deckWith([chartSlide(source: 'data/omzet.json')]),
+      );
+
+      // Een stabiel pad onder de deckmap, niet assets/<hash>.
+      expect(out.upserts.containsKey('$deckDir/data/omzet.json'), isTrue);
+      expect(out.upserts.keys.where((k) => k.startsWith('assets/')), isEmpty);
+      expect(
+        utf8.decode(out.upserts['$deckDir/data/omzet.json']!),
+        contains('10'),
+      );
+
+      final spec = ChartSpec.parse(
+        md
+            .parseDeck(utf8.decode(out.upserts['$deckDir/deck.md']!))!
+            .slides
+            .single
+            .customMarkdown,
+      );
+      expect(spec.source, 'data/omzet.json');
+      expect(spec.hasInlineData, isFalse);
+    });
+
+    test('hetzelfde pad blijft hetzelfde pad bij een gewijzigde cel', () async {
+      final first = await build(
+        deckWith([
+          chartSlide(source: 'data/omzet.json', data: [10, 14]),
+        ]),
+      );
+      final second = await build(
+        deckWith([
+          chartSlide(source: 'data/omzet.json', data: [10, 99]),
+        ]),
+      );
+
+      // Zou de data via de pool lopen, dan stond de nieuwe inhoud onder een
+      // ander pad en was de wijziging geen diff maar een nieuw bestand.
+      const path = '$deckDir/data/omzet.json';
+      expect(first.upserts.containsKey(path), isTrue);
+      expect(second.upserts.containsKey(path), isTrue);
+      expect(utf8.decode(second.upserts[path]!), contains('99'));
+    });
+
+    test('een deck dat een .csv koppelt houdt .csv', () async {
+      final out = await build(deckWith([chartSlide(source: 'data/omzet.csv')]));
+      expect(
+        utf8.decode(out.upserts['$deckDir/data/omzet.csv']!),
+        contains('Q1,10'),
+      );
+    });
+
+    test(
+      'een source buiten de deckmap wordt gemeld, niet geschreven',
+      () async {
+        final out = await build(
+          deckWith([chartSlide(source: '../../geheim.json')]),
+        );
+        expect(out.upserts.keys, ['$deckDir/deck.md']);
+        expect(out.warnings, contains('../../geheim.json'));
+      },
+    );
+
+    test(
+      'zonder cijfers in het geheugen blijft het bestand ongemoeid',
+      () async {
+        // Het exemplaar in de repo is dan het enige dat er is; overschrijven met
+        // een leeg bestand zou het weggooien.
+        final out = await build(
+          deckWith([
+            Slide.create(SlideType.chart).copyWith(
+              customMarkdown: const ChartSpec(
+                source: 'data/omzet.json',
+              ).toBlock(),
+            ),
+          ]),
+        );
+        expect(out.upserts.keys, ['$deckDir/deck.md']);
+      },
+    );
+
+    test(
+      'round-trip: schrijven en terugleren geeft de cijfers terug',
+      () async {
+        final out = await build(
+          deckWith([chartSlide(source: 'data/omzet.json')]),
+        );
+        final parsed = md.parseDeck(
+          utf8.decode(out.upserts['$deckDir/deck.md']!),
+        )!;
+
+        final back = await withRepoChartData(
+          parsed,
+          deckDir: deckDir,
+          read: (path) async => out.upserts[path],
+        );
+        final spec = ChartSpec.parse(back.deck.slides.single.customMarkdown);
+        expect(spec.x, ['Q1', 'Q2']);
+        expect(spec.series.single.data, [10, 14]);
+        expect(back.missing, isEmpty);
+      },
+    );
+
+    test('een ontbrekend databestand wordt gemeld, niet verzwegen', () async {
+      final out = await build(
+        deckWith([chartSlide(source: 'data/omzet.json')]),
+      );
+      final parsed = md.parseDeck(
+        utf8.decode(out.upserts['$deckDir/deck.md']!),
+      )!;
+
+      // De blob is weg uit de repo: de grafiek tekent leeg, maar dat hoort
+      // gezegd te worden in plaats van als "geen cijfers" te passeren.
+      final back = await withRepoChartData(
+        parsed,
+        deckDir: deckDir,
+        read: (_) async => null,
+      );
+      expect(back.missing, ['data/omzet.json']);
+      expect(
+        ChartSpec.parse(back.deck.slides.single.customMarkdown).hasInlineData,
+        isFalse,
+      );
+    });
+
+    test('een leesfout laat het deck openen, niet mislukken', () async {
+      final out = await build(
+        deckWith([chartSlide(source: 'data/omzet.json')]),
+      );
+      final parsed = md.parseDeck(
+        utf8.decode(out.upserts['$deckDir/deck.md']!),
+      )!;
+      final back = await withRepoChartData(
+        parsed,
+        deckDir: deckDir,
+        read: (_) async => throw StateError('forge onbereikbaar'),
+      );
+      expect(back.missing, ['data/omzet.json']);
+      expect(back.deck.slides, hasLength(1));
+    });
+
+    test('een source met ../ wordt bij het lezen niet gevolgd', () async {
+      final deck = deckWith([chartSlide(source: '../../geheim.json')]);
+      var asked = false;
+      final back = await withRepoChartData(
+        deck.copyWith(
+          slides: [
+            Slide.create(SlideType.chart).copyWith(
+              customMarkdown: const ChartSpec(
+                source: '../../geheim.json',
+              ).toBlock(),
+            ),
+          ],
+        ),
+        deckDir: deckDir,
+        read: (path) async {
+          asked = true;
+          return null;
+        },
+      );
+      expect(asked, isFalse, reason: 'het pad mag niet eens opgevraagd worden');
+      expect(back.missing, ['../../geheim.json']);
+    });
   });
 }

@@ -416,6 +416,25 @@ class ChartSpec {
   }
 }
 
+/// [parseCsv] in reverse: a header row of series names, then one row per label.
+///
+/// Only used to keep a deck that already links a `.csv` on CSV. Values that
+/// would need quoting are not produced here — a label with a comma in it is
+/// exactly why new data files are written as JSON.
+String chartDataAsCsv(ChartSpec spec) {
+  final buf = StringBuffer()
+    ..writeln(',${spec.series.map((s) => s.name).join(',')}');
+  for (var r = 0; r < spec.x.length; r++) {
+    buf.writeln(
+      [
+        spec.x[r],
+        for (final s in spec.series) r < s.data.length ? s.data[r] : 0,
+      ].join(','),
+    );
+  }
+  return buf.toString();
+}
+
 /// Parse the contents of a `data/<naam>.json` into (x labels, series), or null
 /// when the file is not usable — bad JSON, or not an object with an `x` list.
 ///

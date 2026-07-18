@@ -60,12 +60,23 @@ extension TabsNotifierGit on TabsNotifier {
     if (parsed == null) return gated.failure;
     if (!mounted) return OpenResult.unreadable;
 
-    final deck = await _withRepoAssets(
+    final withAssets = await _withRepoAssets(
       parsed,
       AssetPool(forge: forge, branch: branch),
       sourceName: label,
     );
+    final charts = await withRepoChartData(
+      withAssets,
+      deckDir: deckDir,
+      read: (path) => forge.readBlob(branch, path),
+    );
+    final deck = charts.deck;
     if (!mounted) return OpenResult.unreadable;
+    if (charts.missing.isNotEmpty) {
+      _ref.read(chartDataWarningProvider.notifier).state = ChartDataWarning(
+        charts.missing,
+      );
+    }
 
     _placeDeckInTab(deck, remoteOrigin: label);
     currentState.current?.gitOrigin = GitOrigin(
@@ -148,12 +159,19 @@ extension TabsNotifierGit on TabsNotifier {
       return (deck: null, failure: OpenResult.unreadable, label: label);
     }
 
-    final deck = await _withRepoAssets(
+    final withAssets = await _withRepoAssets(
       parsed,
       AssetPool(forge: forge, branch: tag),
       sourceName: label,
     );
-    return (deck: deck, failure: OpenResult.opened, label: label);
+    // Ook een uitgebrachte versie moet zijn cijfers meekrijgen: zonder dit
+    // vergelijk je straks twee versies waarvan de grafieken allebei leeg zijn.
+    final charts = await withRepoChartData(
+      withAssets,
+      deckDir: deckDir,
+      read: (path) => forge.readBlob(tag, path),
+    );
+    return (deck: charts.deck, failure: OpenResult.opened, label: label);
   }
 
   /// Haal de `repo:`-afbeeldingen van [deck] uit de pool en geef het deck terug
@@ -536,10 +554,16 @@ extension TabsNotifierGit on TabsNotifier {
   }) async {
     final deckFiles = <String, Uint8List>{
       p.posix.join(deckDir, deckRepoFileName): Uint8List.fromList(
-        // Zie buildDeckRepoFiles: gekoppelde grafiekdata heeft in de repo geen
-        // projectmap om naar te wijzen, dus reist ze mee in deck.md.
-        utf8.encode(_md.generateDeck(deck, inlineChartData: true)),
+        utf8.encode(_md.generateDeck(deck)),
       ),
+      // De databestanden moeten mee de werkkopie in, niet alleen deck.md: de
+      // markdown draagt straks alleen nog de verwijzing, en bij het legen van
+      // de wachtrij wordt het deck hiervandaan opnieuw gelezen. Zonder deze
+      // bestanden zou daar een grafiek zonder cijfers uit komen.
+      for (final entry in chartDataFilesOf(deck).entries)
+        ?repoChartDataPath(deckDir, entry.key): Uint8List.fromList(
+          utf8.encode(entry.value),
+        ),
     };
     await mirror.writeDeck(deckDir, deckFiles);
     await outbox.enqueue(
@@ -569,9 +593,18 @@ extension TabsNotifierGit on TabsNotifier {
     final deck = _md.parseDeck(utf8.decode(raw));
     if (deck == null) return stored;
 
+    // deck.md draagt alleen de verwijzing naar de grafiekdata, dus die eerst
+    // terughalen uit de werkkopie. Zonder dit ziet buildDeckRepoFiles een deck
+    // zonder cijfers en laat het de databestanden uit de commit weg.
+    final charts = await withRepoChartData(
+      deck,
+      deckDir: commit.deckDir,
+      read: (path) async => stored[path],
+    );
+
     final image = ImageService();
     final files = await buildDeckRepoFiles(
-      deck,
+      charts.deck,
       md: _md,
       pool: AssetPool(forge: forge, branch: commit.branch),
       deckDir: commit.deckDir,

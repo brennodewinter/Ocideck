@@ -1047,6 +1047,12 @@ they are styling rather than data. That split is what lets the data file be
 regenerated wholesale — from a spreadsheet, a script, an export — without the
 chart losing its look.
 
+**In a git repository** the data file sits next to `deck.md` at the path the
+`source` names, deliberately *not* in the content-addressed asset pool that
+images use. A pool path is the hash of its contents, so every changed cell would
+produce a new file and orphan the old one — no diff to read. On a fixed path, a
+change reads as what it is.
+
 **Automatic.** A chart that still carries its data inline is moved to a data
 file **on save**, and the block is left with the reference. Decks written before
 data files existed therefore convert on their next save, with nothing for the

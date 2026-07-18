@@ -8,6 +8,15 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **In a git repository, a changed chart now reads as a changed number.** Chart
+  data is stored as its own file next to `deck.md`, on a fixed path, so editing
+  one cell shows up in the history as that one cell. It is deliberately kept out
+  of the shared image pool: paths there are content hashes, so every edit would
+  land as a brand-new file and orphan the previous one — no diff to read at all.
+  A version you released carries its data along too, so comparing two versions
+  compares their numbers instead of two empty charts. A data file that cannot be
+  fetched leaves the chart empty and says so, rather than passing for a chart
+  that never had numbers.
 - **Chart data moves out of the presentation file by itself.** A chart with
   forty rows used to bury hundreds of numbers in the `.md`. On save, a chart
   that still carries its data inline is now given a file of its own in `data/`

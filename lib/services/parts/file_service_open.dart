@@ -238,25 +238,8 @@ extension _FileServiceOpen on FileService {
   /// would break whatever they point at it from a spreadsheet.
   String _chartDataFor(ChartSpec spec, {required String path}) =>
       path.toLowerCase().endsWith('.csv')
-      ? _chartDataAsCsv(spec)
+      ? chartDataAsCsv(spec)
       : spec.dataToJson();
-
-  /// [parseCsv] in reverse: a header row of series names, then one row per
-  /// label. Values that would need quoting are not produced here — labels with
-  /// a comma in them are the reason new files are written as JSON.
-  String _chartDataAsCsv(ChartSpec spec) {
-    final buf = StringBuffer()
-      ..writeln(',${spec.series.map((s) => s.name).join(',')}');
-    for (var r = 0; r < spec.x.length; r++) {
-      buf.writeln(
-        [
-          spec.x[r],
-          for (final s in spec.series) r < s.data.length ? s.data[r] : 0,
-        ].join(','),
-      );
-    }
-    return buf.toString();
-  }
 
   /// For packaging: add a chart's linked CSV under data/ and rewrite its source
   /// path; if the CSV is missing, fall back to keeping the data inline.
