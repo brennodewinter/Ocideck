@@ -536,7 +536,9 @@ extension TabsNotifierGit on TabsNotifier {
   }) async {
     final deckFiles = <String, Uint8List>{
       p.posix.join(deckDir, deckRepoFileName): Uint8List.fromList(
-        utf8.encode(_md.generateDeck(deck)),
+        // Zie buildDeckRepoFiles: gekoppelde grafiekdata heeft in de repo geen
+        // projectmap om naar te wijzen, dus reist ze mee in deck.md.
+        utf8.encode(_md.generateDeck(deck, inlineChartData: true)),
       ),
     };
     await mirror.writeDeck(deckDir, deckFiles);

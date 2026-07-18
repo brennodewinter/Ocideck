@@ -50,6 +50,13 @@ class RepoDeckFiles {
 /// terugzet; video en audio round-trippen nog niet door git en worden gemeld in
 /// plaats van als kapotte verwijzing weggeschreven.
 ///
+/// Grafiekdata volgt geen van beide routes: die gaat inline mee in `deck.md`
+/// (zie de vlag hieronder). Een chart-`source` is een pad in een projectmap, en
+/// een repo heeft die niet — als verwijzing zou hij nergens heen wijzen. Zodra
+/// grafiekdata standaard naar een los bestand verhuist, krijgt ze hier een eigen
+/// `<deckDir>/data/…`-lid; tot die tijd is inline de enige vorm die de cijfers
+/// heelhoudt.
+///
 /// Met een [pool] komen alleen blobs die nog niet in de repo staan in
 /// [RepoDeckFiles.upserts] — dát is waar de pool zijn geld verdient
 /// ([AssetPool.existing]): een afbeelding die vijf decks delen staat er één
@@ -112,7 +119,12 @@ Future<RepoDeckFiles> buildDeckRepoFiles(
 
   final upserts = <String, Uint8List>{
     p.posix.join(deckDir, deckRepoFileName): Uint8List.fromList(
-      utf8.encode(md.generateDeck(rewritten)),
+      // Grafiekdata gaat mee ín deck.md. Een chart-slide kan zijn cijfers aan
+      // een los bestand koppelen en dan alleen een `source` in de markdown
+      // laten staan; dat pad is relatief aan een projectmap op schijf, en die
+      // heeft de repo niet. Zonder deze vlag committen we de verwijzing zonder
+      // de cijfers en zijn ze na een push definitief weg.
+      utf8.encode(md.generateDeck(rewritten, inlineChartData: true)),
     ),
   };
 
