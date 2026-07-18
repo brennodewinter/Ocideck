@@ -14,6 +14,9 @@ extension _FileServiceProject on FileService {
     await imagesDir.create(recursive: true);
     await logosDir.create(recursive: true);
     await themesDir.create(recursive: true);
+    // data/ hoort bij de vaste mapindeling; hij werd tot nu toe alleen
+    // toevallig aangemaakt door wie een CSV koppelde.
+    await Directory(p.join(dir, chartDataDirName)).create(recursive: true);
 
     final imageSlides = await _img.copyImagesToProject(deck.slides, dir);
     final mediaSlides = await _img.copyMediaToProject(imageSlides, dir);
@@ -29,8 +32,19 @@ extension _FileServiceProject on FileService {
       logoAsset.cssUrl,
     );
 
-    // Bring linked chart CSVs along when saving to a new location.
+    // Bring linked chart data files along when saving to a new location, then
+    // write back what the user changed in the grid. Order matters: the copy
+    // seeds a fresh location, the write updates it.
     await _copyChartData(deck, dir);
+    final chartWarnings = await _writeChartData(updatedDeck, dir);
+    // TODO(chart-data): via de meldkanaal van openDeckDetailed aan de gebruiker
+    // tonen; tot dat kanaal bestaat is loggen beter dan weggooien.
+    if (chartWarnings.isNotEmpty) {
+      logWarning(
+        'FileService._writeProject: chart data files not cleanly written',
+        chartWarnings.join(', '),
+      );
+    }
 
     final markdown = _md.generateDeck(updatedDeck);
     await writeStringAtomic(File(filePath), markdown);

@@ -155,10 +155,31 @@ void main() {
       );
       final json = spec.dataToJson();
       // Colours, title and bounds belong to the block; only x/series travel.
-      expect(json, isNot(contains('#003399')));
+      expect(json, isNot(contains('#003399')), reason: 'row colour');
+      expect(json, isNot(contains('#FFCC00')), reason: 'series colour');
+      expect(json, isNot(contains('color')));
       expect(json, isNot(contains('Titel')));
       expect(json, isNot(contains('minBound')));
       expect(json, contains('"x"'));
+      expect(json, contains('"name": "A"'));
+    });
+
+    test('recolouring does not change the data file', () {
+      const spec = ChartSpec(
+        x: ['Jan'],
+        series: [
+          ChartSeries(name: 'A', data: [1]),
+        ],
+      );
+      // The save path compares two of these to decide whether to rewrite the
+      // file; styling must not register as a data edit.
+      final recoloured = spec.copyWith(
+        rowColors: ['#003399'],
+        series: [
+          const ChartSeries(name: 'A', data: [1], color: '#FFCC00'),
+        ],
+      );
+      expect(recoloured.dataToJson(), spec.dataToJson());
     });
 
     test('withJson keeps the colours the block already had', () {

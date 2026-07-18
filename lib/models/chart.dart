@@ -375,9 +375,14 @@ class ChartSpec {
   /// because they are styling rather than data — that split is what lets the
   /// data file be regenerated from a spreadsheet without losing the deck's
   /// look. Mirrored by [parseChartDataJson].
+  /// Deliberately not [ChartSeries.toJson], which carries `color` along: this
+  /// file must hold values only, so that comparing two of them answers "did the
+  /// numbers change" without a recolour counting as a data edit.
   String dataToJson() => const JsonEncoder.withIndent('  ').convert({
     'x': x,
-    'series': [for (final s in series) s.toJson()],
+    'series': [
+      for (final s in series) {'name': s.name, 'data': s.data},
+    ],
   });
 
   /// Shared tail of [withCsv]/[withJson]: adopt fresh labels and values while

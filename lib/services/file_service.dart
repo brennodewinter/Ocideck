@@ -201,6 +201,15 @@ class FileService {
   final List<String> Function() _libraryPaths;
   final CaptionService _captions = CaptionService();
 
+  /// Absoluut pad van een grafiekdatabestand → de data zoals die erin stond
+  /// toen hij werd gelezen ([_hydrateCharts]), canoniek als [ChartSpec.dataToJson].
+  ///
+  /// De ijklijn waartegen [_writeChartData] bepaalt of de gebruiker de grafiek
+  /// heeft bewerkt. Zonder die ijklijn zou elk opslaan het bestand overschrijven
+  /// en dus elke bewerking van buiten de app — het spreadsheet-werkpad — stil
+  /// ongedaan maken.
+  final Map<String, String> _chartDataAtOpen = {};
+
   FileService(
     this._md,
     this._img,
