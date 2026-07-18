@@ -459,6 +459,139 @@ Future<void> _openForReview(BuildContext context, WidgetRef ref) async {
   }
 }
 
+/// Merge het concept van het huidige tabblad (§9.4): vraag bevestiging (met de
+/// keuze de concept-branch op te ruimen) en merge de review-PR naar de
+/// hoofdbranch. Daarna takt het tabblad terug op main.
+Future<void> _mergeConcept(BuildContext context, WidgetRef ref) async {
+  final origin = ref.read(tabsProvider).current?.gitOrigin;
+  if (origin == null) return;
+  final config = ref.read(settingsProvider).gitRepo;
+  if (config == null) return;
+  final forge = await ref.read(gitForgeProvider.future);
+  if (!context.mounted) return;
+  if (forge == null) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          context.l10n.d(
+            'Stel eerst een git-repository in bij Instellingen → Git-repository.',
+          ),
+        ),
+      ),
+    );
+    return;
+  }
+
+  final prune = await _showMergeDialog(context);
+  if (prune == null || !context.mounted) return;
+
+  final messenger = ScaffoldMessenger.of(context);
+  final l10n = context.l10n;
+  final result = await ref
+      .read(tabsProvider.notifier)
+      .mergeConcept(forge, config: config, prune: prune);
+  if (!context.mounted) return;
+  switch (result.status) {
+    case MergeStatus.merged:
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(l10n.d('Concept gemerged naar de hoofdbranch.')),
+        ),
+      );
+    case MergeStatus.noPullRequest:
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(
+            l10n.d('Nog geen review — breng het concept eerst uit ter review.'),
+          ),
+        ),
+      );
+    case MergeStatus.notOnWorkBranch:
+      messenger.showSnackBar(
+        SnackBar(content: Text(l10n.d('Er is geen concept om te mergen.'))),
+      );
+    case MergeStatus.failed:
+      showErrorSnackBar(
+        messenger,
+        l10n,
+        '${l10n.d('Mergen mislukt:')} ${result.message ?? ''}',
+      );
+  }
+}
+
+/// Leg de huidige versie van dit deck vast als release-tag (§9.4): vraag een
+/// versie (`vX`) + boodschap en zet de tag op de kop van de hoofdbranch. Achter
+/// de classificatiepoort, die in [TabsNotifierGit.tagRelease] fail-closed weigert.
+Future<void> _tagRelease(BuildContext context, WidgetRef ref) async {
+  final origin = ref.read(tabsProvider).current?.gitOrigin;
+  if (origin == null) return;
+  final config = ref.read(settingsProvider).gitRepo;
+  if (config == null) return;
+  final forge = await ref.read(gitForgeProvider.future);
+  if (!context.mounted) return;
+  if (forge == null) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          context.l10n.d(
+            'Stel eerst een git-repository in bij Instellingen → Git-repository.',
+          ),
+        ),
+      ),
+    );
+    return;
+  }
+
+  final choice = await _showTagDialog(context);
+  if (choice == null || !context.mounted) return;
+
+  final messenger = ScaffoldMessenger.of(context);
+  final l10n = context.l10n;
+  final result = await ref
+      .read(tabsProvider.notifier)
+      .tagRelease(
+        forge,
+        config: config,
+        settings: ref.read(settingsProvider),
+        version: choice.version,
+        message: choice.message,
+      );
+  if (!context.mounted) return;
+  switch (result.status) {
+    case ReleaseStatus.tagged:
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text('${l10n.d('Versie vastgelegd:')} ${result.tag?.name}'),
+        ),
+      );
+    case ReleaseStatus.blocked:
+      showErrorSnackBar(
+        messenger,
+        l10n,
+        result.message ??
+            l10n.d('Vastleggen geblokkeerd door het classificatiebeleid.'),
+      );
+    case ReleaseStatus.invalidVersion:
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text(
+            l10n.d('Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.'),
+          ),
+        ),
+      );
+    case ReleaseStatus.noDeck:
+      messenger.showSnackBar(
+        SnackBar(content: Text(l10n.d('Geen deck om vast te leggen.'))),
+      );
+    case ReleaseStatus.failed:
+      showErrorSnackBar(
+        messenger,
+        l10n,
+        '${l10n.d('Vastleggen mislukt:')} ${result.message ?? ''}',
+      );
+  }
+}
+
 /// Maak een geldige deknaam (§6) uit een deck-titel, of een nette terugval.
 String _safeDeckName(String title) {
   final cleaned = title
@@ -571,6 +704,165 @@ class _ReviewDialogState extends State<_ReviewDialog> {
                 )),
           icon: const Icon(Icons.rate_review_outlined, size: 16),
           label: Text(l10n.d('Uitbrengen')),
+        ),
+      ],
+    );
+  }
+}
+
+/// Bevestig het mergen van een concept; geeft `true`/`false` (concept-branch
+/// opruimen) terug, of `null` bij annuleren.
+Future<bool?> _showMergeDialog(BuildContext context) {
+  return showDialog<bool>(
+    context: context,
+    builder: (_) => const _MergeDialog(),
+  );
+}
+
+class _MergeDialog extends StatefulWidget {
+  const _MergeDialog();
+
+  @override
+  State<_MergeDialog> createState() => _MergeDialogState();
+}
+
+class _MergeDialogState extends State<_MergeDialog> {
+  bool _prune = true;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return AlertDialog(
+      title: Text(l10n.d('Concept mergen')),
+      content: SizedBox(
+        width: 460,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              l10n.d(
+                'Voegt de review-PR van dit concept samen met de hoofdbranch.',
+              ),
+              style: TextStyle(fontSize: 12, color: AppTheme.slate400),
+            ),
+            const SizedBox(height: 8),
+            CheckboxListTile(
+              value: _prune,
+              onChanged: (v) => setState(() => _prune = v ?? true),
+              contentPadding: EdgeInsets.zero,
+              controlAffinity: ListTileControlAffinity.leading,
+              dense: true,
+              title: Text(l10n.d('Concept-branch opruimen na het mergen')),
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text(l10n.t('cancel')),
+        ),
+        ElevatedButton.icon(
+          onPressed: () => Navigator.pop(context, _prune),
+          icon: const Icon(Icons.merge_outlined, size: 16),
+          label: Text(l10n.d('Mergen')),
+        ),
+      ],
+    );
+  }
+}
+
+typedef _TagChoice = ({String version, String message});
+
+Future<_TagChoice?> _showTagDialog(BuildContext context) {
+  return showDialog<_TagChoice>(
+    context: context,
+    builder: (_) => const _TagDialog(),
+  );
+}
+
+class _TagDialog extends StatefulWidget {
+  const _TagDialog();
+
+  @override
+  State<_TagDialog> createState() => _TagDialogState();
+}
+
+class _TagDialogState extends State<_TagDialog> {
+  final TextEditingController _version = TextEditingController(text: 'v1.0');
+  final TextEditingController _message = TextEditingController();
+
+  @override
+  void dispose() {
+    _version.dispose();
+    _message.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final version = _version.text.trim();
+    // Valideer de versie los van de deknaam: een geldige tag zou eruit komen.
+    final valid = GitRepoLayout.releaseTag('x', version) != null;
+    return AlertDialog(
+      title: Text(l10n.d('Versie vastleggen')),
+      content: SizedBox(
+        width: 460,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              l10n.d(
+                'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.',
+              ),
+              style: TextStyle(fontSize: 12, color: AppTheme.slate400),
+            ),
+            const SizedBox(height: 14),
+            TextField(
+              controller: _version,
+              autofocus: true,
+              onChanged: (_) => setState(() {}),
+              decoration: InputDecoration(
+                labelText: l10n.d('Versie'),
+                hintText: 'v1.0',
+                errorText: version.isEmpty || valid
+                    ? null
+                    : l10n.d('Gebruik vX, bijvoorbeeld v1.0.'),
+                isDense: true,
+                border: const OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 14),
+            TextField(
+              controller: _message,
+              decoration: InputDecoration(
+                labelText: l10n.d('Toelichting'),
+                isDense: true,
+                border: const OutlineInputBorder(),
+              ),
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text(l10n.t('cancel')),
+        ),
+        ElevatedButton.icon(
+          onPressed: valid
+              ? () => Navigator.pop(context, (
+                  version: version,
+                  message: _message.text.trim().isEmpty
+                      ? '$version — vastgelegd met OciDeck'
+                      : _message.text.trim(),
+                ))
+              : null,
+          icon: const Icon(Icons.bookmark_add_outlined, size: 16),
+          label: Text(l10n.d('Vastleggen')),
         ),
       ],
     );

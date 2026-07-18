@@ -431,6 +431,10 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
               _showGitVersions(context, ref);
             case 'review_git':
               _openForReview(context, ref);
+            case 'merge_git':
+              _mergeConcept(context, ref);
+            case 'tag_git':
+              _tagRelease(context, ref);
             case 'open_nextcloud':
               _openFromNextcloud(context, ref);
             case 'save_nextcloud':
@@ -513,15 +517,27 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       // forge-listing. Verschijnt zodra dit deck uit git is geopend.
       if (ref.read(tabsProvider).current?.gitOrigin != null)
         _menuItem('versions_git', Icons.label_outline, l10n.d('Versies…')),
-      // Uitbrengen ter review kan pas als er een concept-ronde loopt: het tabblad
-      // staat dan op een werkbranch, niet op de standaardbranch (D3).
+      // Uitbrengen ter review + concept mergen kunnen pas als er een
+      // concept-ronde loopt: het tabblad staat dan op een werkbranch, niet op de
+      // standaardbranch (D3).
       if (ref.read(tabsProvider).current?.gitOrigin != null &&
           ref.read(tabsProvider).current!.gitOrigin!.branch !=
-              (ref.read(settingsProvider).gitRepo?.defaultBranch ?? 'main'))
+              (ref.read(settingsProvider).gitRepo?.defaultBranch ??
+                  'main')) ...[
         _menuItem(
           'review_git',
           Icons.rate_review_outlined,
           l10n.d('Uitbrengen ter review…'),
+        ),
+        _menuItem('merge_git', Icons.merge_outlined, l10n.d('Concept mergen…')),
+      ],
+      // Een versie vastleggen (release-tag op main) kan voor elk uit-git-geopend
+      // deck; bedoeld ná het mergen.
+      if (ref.read(tabsProvider).current?.gitOrigin != null)
+        _menuItem(
+          'tag_git',
+          Icons.bookmark_add_outlined,
+          l10n.d('Versie vastleggen…'),
         ),
       if (supportsNetworkDeckSources) ...[
         _menuItem(
