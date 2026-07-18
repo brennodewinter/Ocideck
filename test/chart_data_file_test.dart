@@ -179,6 +179,41 @@ void main() {
     expect(File(p.join(temp.path, 'data', 'omzet.json')).existsSync(), isFalse);
   });
 
+  test('a label with a comma survives the CSV round trip', () async {
+    final service = serviceOf();
+    await Directory(p.join(temp.path, 'data')).create(recursive: true);
+    await File(
+      p.join(temp.path, 'data', 'omzet.csv'),
+    ).writeAsString(',Omzet\nJan,1\n');
+    await service.saveDeck(
+      deckWith(chartSlide('data/omzet.csv', [1])),
+      deckPath(),
+    );
+
+    final opened = await service.openDeck(deckPath());
+    final edited = specOf(opened!).copyWith(
+      x: const ['Amsterdam, NL'],
+      series: [
+        const ChartSeries(name: 'Omzet "netto"', data: [5]),
+      ],
+    );
+    await service.saveDeck(
+      opened.copyWith(
+        slides: [
+          opened.slides.single.copyWith(customMarkdown: edited.toBlock()),
+        ],
+      ),
+      deckPath(),
+    );
+
+    // Writing something the reader cannot read back would corrupt the deck by
+    // the mere act of saving it.
+    final spec = specOf((await serviceOf().openDeck(deckPath()))!);
+    expect(spec.x, ['Amsterdam, NL']);
+    expect(spec.series.single.name, 'Omzet "netto"');
+    expect(spec.series.single.data, [5]);
+  });
+
   test('a source pointing outside the project is never written', () async {
     final service = serviceOf();
     final outside = File(p.join(temp.path, 'geheim.json'));

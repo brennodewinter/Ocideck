@@ -149,21 +149,32 @@ extension _FileServiceOpen on FileService {
       : spec.dataToJson();
 
   /// [parseCsv] in reverse: a header row of series names, then one row per
-  /// label. Values that would need quoting are not produced here — labels with
-  /// a comma in them are the reason new files are written as JSON.
+  /// label.
+  ///
+  /// Quotes any value that would otherwise change meaning on the way back —
+  /// this is one half of a round trip we own (written on save, read on open),
+  /// so writing something [parseCsv] cannot read back would corrupt a deck by
+  /// saving it.
   String _chartDataAsCsv(ChartSpec spec) {
     final buf = StringBuffer()
-      ..writeln(',${spec.series.map((s) => s.name).join(',')}');
+      ..writeln(',${spec.series.map((s) => _csvValue(s.name)).join(',')}');
     for (var r = 0; r < spec.x.length; r++) {
       buf.writeln(
         [
-          spec.x[r],
+          _csvValue(spec.x[r]),
           for (final s in spec.series) r < s.data.length ? s.data[r] : 0,
         ].join(','),
       );
     }
     return buf.toString();
   }
+
+  /// A cell as CSV: quoted when it contains a comma, a quote or edge
+  /// whitespace, with `"` doubled — the form [parseCsv] reads back verbatim.
+  String _csvValue(String raw) =>
+      raw.contains(',') || raw.contains('"') || raw.trim() != raw
+      ? '"${raw.replaceAll('"', '""')}"'
+      : raw;
 
   /// For packaging: add a chart's linked CSV under data/ and rewrite its source
   /// path; if the CSV is missing, fall back to keeping the data inline.
