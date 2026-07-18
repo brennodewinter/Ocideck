@@ -182,6 +182,7 @@ search (Phase 6) and asset deletion (§6.2, deliberately manual).
 - `parts/settings_provider_privacy.dart` — The privacy switches (master, per-rule, own identity, export gate).
 - `settings_provider.dart` — `SettingsNotifier`: app settings, theme/appearance profiles, cockpit schemes.
 - `slide_clipboard_provider.dart` — Global slide clipboard for copy/paste across tabs.
+- `tabs_provider_package.dart` — `_TabsPackageAssets` extension: the unpack path of an `.ocideck` opened in memory (web, or an import without a project folder). Images go to the `WebAssetStore` and slide paths are rewritten to `mem:`; chart data is inlined into the spec (it is text belonging in the spec, and on web there is no project folder for a separate file to sit in); the sidecars are re-attached as layers. All three refuse a reference that points outside the package root with `../`.
 - `tabs_provider.dart` — `TabInfo` and the tabs notifier: open editor tabs, recovery, WebDAV origin. Also hosts the one-shot open-time signals the shell listens on, including `securityModulePromptProvider` — set once per open when a deck carries Informatieveiligheid slide types, driving the "enable the module" discovery snackbar.
 - `webdav_provider.dart` — Providers for `WebdavService`, server config, and directory listings.
 
@@ -394,8 +395,9 @@ search (Phase 6) and asset deletion (§6.2, deliberately manual).
 - `fullscreen_presenter.dart` — `FullscreenPresenter`: dual-screen presenter mode (notes/clock/grid).
 - `rehearsal_summary.dart` — Post-rehearsal timing summary dialog with per-slide breakdown.
 
-### `lib/widgets/presentation/parts/` (each `part of fullscreen_presenter.dart`, an `extension _PresenterX`)
+### `lib/widgets/presentation/parts/` (each `part of fullscreen_presenter.dart`, an `extension _PresenterX` unless noted)
 
+- `presenter_beamer_payload.dart` — `buildBeamerMarkdown`: the self-contained markdown handed to the audience window. A top-level function, not an extension. Everything the beamer cannot look up for itself travels inside this string — hence the inlined style profile *and* the inlined chart data (a chart's `source` is a projectmap-relative path the second screen cannot resolve).
 - `presenter_displays.dart` — Multi-monitor screen management.
 - `presenter_ink.dart` — Annotation layer stroking/erasing/laser.
 - `presenter_keys.dart` — Keyboard input during presentation.

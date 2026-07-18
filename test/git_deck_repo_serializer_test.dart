@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:crypto/crypto.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/git_settings.dart';
 import 'package:ocideck/models/slide.dart';
@@ -177,5 +178,43 @@ void main() {
     expect(utf8.decode(out.upserts['$deckDir/deck.md']!), contains(ref));
     expect(out.warnings, isEmpty);
     expect(out.upserts.keys, ['$deckDir/deck.md']);
+  });
+
+  // Regressie: gekoppelde grafiekdata ging bij het committen verloren. De
+  // markdown werd zonder inlineChartData geserialiseerd, dus bleef alleen de
+  // `source` staan — een pad in een projectmap die een repo niet heeft. Na een
+  // push waren de cijfers definitief weg.
+  test('gekoppelde grafiekdata gaat mee in deck.md', () async {
+    final repo = FakeRepo(branches: {'main': 'c0'}, files: {});
+    final chart = Slide.create(SlideType.chart).copyWith(
+      customMarkdown: const ChartSpec(
+        type: ChartType.line,
+        title: 'Omzet',
+        source: 'data/omzet.csv',
+        x: ['Q1', 'Q2'],
+        series: [
+          ChartSeries(name: '2025', data: [10, 14]),
+        ],
+      ).toBlock(),
+    );
+
+    final out = await buildDeckRepoFiles(
+      deckWith([chart]),
+      md: md,
+      pool: poolFor(repo),
+      deckDir: deckDir,
+      resolveBytes: resolverFrom({}),
+    );
+
+    final stored = md
+        .parseDeck(utf8.decode(out.upserts['$deckDir/deck.md']!))!
+        .slides
+        .single;
+    final spec = ChartSpec.parse(stored.customMarkdown);
+    expect(spec.hasInlineData, isTrue);
+    expect(spec.x, ['Q1', 'Q2']);
+    expect(spec.series.single.data, [10, 14]);
+    // De verwijzing blijft staan: op schijf is het databestand nog de bron.
+    expect(spec.source, 'data/omzet.csv');
   });
 }

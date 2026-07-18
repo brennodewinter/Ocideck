@@ -43,6 +43,7 @@ import 'audience_window.dart';
 import 'rehearsal_summary.dart';
 import '../../theme/app_theme.dart';
 
+part 'parts/presenter_beamer_payload.dart';
 part 'parts/presenter_questions.dart';
 part 'parts/presenter_table.dart';
 part 'parts/presenter_ink.dart';
@@ -356,21 +357,13 @@ class FullscreenPresenter extends StatefulWidget {
     Map<String, String> initialUserNotes = const {},
     void Function(Map<String, String>)? onUserNotesChanged,
   }) async {
-    // A self-contained markdown deck is the payload for the audience window; it
-    // carries the slides, the style profile and the TLP level in one string.
-    // This payload never touches disk, so it inlines the style profile — the
-    // beamer has no other way to learn the deck's styling.
-    final markdown = MarkdownService().generateDeck(
-      Deck(
-        title: 'Presentatie',
-        slides: slides,
-        projectPath: projectPath,
-        themeProfile: themeProfile,
-        tlp: tlp,
-        organization: organization,
-        language: reportLanguage,
-      ),
-      inlineStyleProfile: true,
+    final markdown = buildBeamerMarkdown(
+      slides: slides,
+      projectPath: projectPath,
+      themeProfile: themeProfile,
+      tlp: tlp,
+      organization: organization,
+      reportLanguage: reportLanguage,
     );
     // Pre-existing annotations re-keyed by index so the beamer shows them
     // immediately (the audience window has no stable slide ids of its own).

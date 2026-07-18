@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/legacy.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
+import '../models/chart.dart';
 import '../models/deck.dart';
 import '../models/deck_template.dart';
 import '../models/settings.dart';
@@ -36,6 +37,7 @@ import 'deck_provider.dart';
 import 'editor_provider.dart';
 import 'settings_provider.dart';
 
+part 'tabs_provider_package.dart';
 part 'tabs_provider_git.dart';
 part 'tabs_provider_git_native.dart';
 
@@ -590,103 +592,11 @@ class TabsNotifier extends StateNotifier<TabsState> {
     if (deck == null) return gated.failure;
 
     deck = _attachPackageAssets(deck, entries, mdEntry.name);
+    deck = _attachPackageChartData(deck, entries, mdEntry.name);
     deck = _attachPackageSidecars(deck, entries, mdEntry.name);
     if (!mounted) return OpenResult.unreadable;
     _placeDeckInTab(deck, remoteOrigin: remoteOrigin);
     return OpenResult.opened;
-  }
-
-  /// Zet de afbeeldings-leden van een pakket in de [WebAssetStore] en
-  /// herschrijf de slidepaden die ernaar verwijzen naar hun mem:-pad.
-  /// Verwijzingen zijn relatief aan de hoofd-markdown ([mdName]). Alleen
-  /// leden die de afbeeldingsvalidatie (magic bytes + cap) doorstaan doen mee.
-  Deck _attachPackageAssets(
-    Deck deck,
-    List<PackageEntry> entries,
-    String mdName,
-  ) {
-    final mdDir = p.posix.dirname(mdName);
-    final byName = {
-      for (final e in entries) p.posix.normalize(e.name): e.bytes,
-    };
-    final memFor = <String, String>{};
-    String? memPath(String ref) {
-      if (ref.trim().isEmpty || WebAssetStore.isMemPath(ref)) return null;
-      final resolved = p.posix.normalize(
-        mdDir == '.' ? ref : p.posix.join(mdDir, ref),
-      );
-      if (resolved.startsWith('..')) return null; // buiten het pakket
-      final cached = memFor[resolved];
-      if (cached != null) return cached;
-      final bytes = byName[resolved];
-      if (bytes == null ||
-          bytes.isEmpty ||
-          bytes.length > ImageService.maxImageBytes ||
-          !ImageService.looksLikeImage(bytes)) {
-        return null;
-      }
-      final mem = WebAssetStore.put(bytes, name: p.posix.basename(resolved));
-      memFor[resolved] = mem;
-      return mem;
-    }
-
-    final slides = [
-      for (final s in deck.slides)
-        s.copyWith(
-          imagePath: memPath(s.imagePath) ?? s.imagePath,
-          imagePath2: memPath(s.imagePath2) ?? s.imagePath2,
-        ),
-    ];
-    return deck.copyWith(slides: slides);
-  }
-
-  /// Herstel de sidecar-lagen (ink-annotaties en sprekersnotities) uit de
-  /// pakket-leden naast de hoofd-markdown — dezelfde bestandsnamen als de
-  /// schijfvariant in [FileService.openDeckDetailed].
-  Deck _attachPackageSidecars(
-    Deck deck,
-    List<PackageEntry> entries,
-    String mdName,
-  ) {
-    final base = mdName.replaceAll(RegExp(r'\.md$', caseSensitive: false), '');
-    String? textFor(String memberName) {
-      for (final e in entries) {
-        if (p.posix.normalize(e.name) == p.posix.normalize(memberName)) {
-          try {
-            return utf8.decode(e.bytes);
-          } on FormatException catch (err) {
-            logWarning(
-              'TabsNotifier._attachPackageSidecars: sidecar not UTF-8',
-              err,
-            );
-            return null;
-          }
-        }
-      }
-      return null;
-    }
-
-    var result = deck;
-    final ink = textFor('$base.ink.json');
-    if (ink != null) {
-      try {
-        final map = AnnotationCodec.decode(ink, result.slides);
-        if (map.isNotEmpty) result = result.copyWith(annotations: map);
-      } catch (e) {
-        // Een kapotte sidecar mag het openen nooit blokkeren.
-        logWarning('TabsNotifier._attachPackageSidecars: ink unreadable', e);
-      }
-    }
-    final notes = textFor('$base.user-notes.json');
-    if (notes != null) {
-      try {
-        final map = UserNotesCodec.decode(notes, result.slides);
-        if (map.isNotEmpty) result = result.copyWith(userNotes: map);
-      } catch (e) {
-        logWarning('TabsNotifier._attachPackageSidecars: notes unreadable', e);
-      }
-    }
-    return result;
   }
 
   /// Gedeelde poort van elk bytes-open: veiligheidsscan (met alarm bij

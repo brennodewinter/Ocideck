@@ -551,8 +551,12 @@ class FileService {
   /// een download niet mee. Geeft de gebruikte bestandsnaam terug als de
   /// download startte, of `null` als dat mislukte. De statusbalk toont die naam
   /// zodat het deck na een download niet als "nog niet opgeslagen" oogt.
+  ///
+  /// Juist omdat er één los bestand vertrekt, gaat grafiekdata wél mee: een
+  /// `source`-verwijzing naar `data/…` zou in de download een dood pad zijn en
+  /// de grafiek leeg achterlaten.
   String? downloadDeckAsFile(Deck deck) {
-    final markdown = _md.generateDeck(deck);
+    final markdown = _md.generateDeck(deck, inlineChartData: true);
     final name = '${_safeName(deck.title)}.md';
     return downloadTextFile(name, markdown) ? name : null;
   }

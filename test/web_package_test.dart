@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'package:archive/archive.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/recovery_service.dart';
@@ -173,6 +174,87 @@ void main() {
       final slide = opened.slides.firstWhere((s) => s.type == SlideType.image);
       expect(WebAssetStore.isMemPath(slide.imagePath), isFalse);
       expect(slide.imagePath, '../geheim.png');
+    });
+
+    test('gekoppelde grafiekdata reist mee uit data/', () async {
+      final container = _container();
+      final md = container.read(markdownServiceProvider);
+      final deck = Deck(
+        title: 'Cijferdeck',
+        slides: [
+          Slide.create(SlideType.chart).copyWith(
+            customMarkdown: const ChartSpec(
+              type: ChartType.line,
+              title: 'Omzet',
+              source: 'data/omzet.csv',
+              x: ['Q1', 'Q2'],
+              series: [
+                ChartSeries(name: '2025', data: [10, 14]),
+              ],
+            ).toBlock(),
+          ),
+        ],
+      );
+      // generateDeck laat alleen de verwijzing staan; de cijfers zitten in het
+      // data-lid. Zonder _attachPackageChartData opent dit als een lege plot.
+      final zip = _zipOf({
+        'Cijferdeck.md': utf8.encode(md.generateDeck(deck)),
+        'data/omzet.csv': utf8.encode(',2025\nQ1,10\nQ2,14\n'),
+      });
+      final tabs = container.read(tabsProvider.notifier);
+      final result = await tabs.openDeckFromBytes(zip, 'Cijferdeck.ocideck');
+      expect(result, OpenResult.opened);
+      final opened = container
+          .read(tabsProvider)
+          .current!
+          .deckNotifier
+          .currentState
+          .deck!;
+      final slide = opened.slides.firstWhere((s) => s.type == SlideType.chart);
+      final spec = ChartSpec.parse(slide.customMarkdown);
+      expect(spec.hasInlineData, isTrue);
+      expect(spec.x, ['Q1', 'Q2']);
+      expect(spec.series.single.data, [10, 14]);
+      // De verwijzing blijft staan, zodat de koppeling zichtbaar blijft.
+      expect(spec.source, 'data/omzet.csv');
+    });
+
+    test('grafiekdata buiten het pakket wordt niet gevolgd', () async {
+      final container = _container();
+      final md = container.read(markdownServiceProvider);
+      final deck = Deck(
+        title: 'Cijfertraversal',
+        slides: [
+          Slide.create(SlideType.chart).copyWith(
+            customMarkdown: const ChartSpec(
+              source: '../geheim.csv',
+              x: ['Q1'],
+              series: [
+                ChartSeries(name: '2025', data: [1]),
+              ],
+            ).toBlock(),
+          ),
+        ],
+      );
+      final zip = _zipOf({
+        'Cijfertraversal.md': utf8.encode(md.generateDeck(deck)),
+        'geheim.csv': utf8.encode(',geheim\nQ1,42\n'),
+      });
+      final tabs = container.read(tabsProvider.notifier);
+      final result = await tabs.openDeckFromBytes(zip, 'ct.ocideck');
+      expect(result, OpenResult.opened);
+      final opened = container
+          .read(tabsProvider)
+          .current!
+          .deckNotifier
+          .currentState
+          .deck!;
+      final spec = ChartSpec.parse(
+        opened.slides
+            .firstWhere((s) => s.type == SlideType.chart)
+            .customMarkdown,
+      );
+      expect(spec.hasInlineData, isFalse);
     });
   });
 }
