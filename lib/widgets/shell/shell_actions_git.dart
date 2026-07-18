@@ -705,3 +705,63 @@ String _safeDeckName(String title) {
       .replaceAll('..', '-');
   return GitRepoLayout.isValidDeckName(cleaned) ? cleaned : 'presentatie';
 }
+
+/// Voeg de bijlage met gebruikte hulpmiddelen in als tabel-slide (MIAUW 4.8.2).
+///
+/// Bewust een slide en geen afgeleide weergave: de eis vraagt een bijlage ín het
+/// rapport, en alleen wat als slide bestaat komt in de PDF en de PPTX terecht.
+/// De tester houdt de regie — hij voegt hem in, kan hem daarna bewerken, en
+/// bevestigt zelf dat 4.8.2 daarmee gedekt is. OciDeck vinkt die eis niet af,
+/// want na het invoegen kan de slide nog van alles worden.
+///
+/// De kopteksten staan in de taal van het **rapport**, niet van de interface:
+/// een Nederlandse tester die voor een internationale klant schrijft, levert
+/// anders een Engelse bijlage met Nederlandse kolomkoppen.
+Future<void> _insertToolsAppendix(BuildContext context, WidgetRef ref) async {
+  final deck = ref.read(deckProvider).deck;
+  if (deck == null) return;
+  final messenger = ScaffoldMessenger.of(context);
+  final l10n = context.l10n;
+
+  if (deck.toolsUsed.isEmpty) {
+    messenger.showSnackBar(
+      SnackBar(
+        content: Text(
+          l10n.d(
+            'Nog geen hulpmiddelen vastgelegd — vul ze in bij Presentatie-info.',
+          ),
+        ),
+      ),
+    );
+    return;
+  }
+
+  String reportText(String source) =>
+      AppLocalizations.sourceFor(deck.language, source);
+
+  ref.read(deckProvider.notifier).insertSlides([
+    Slide.create(SlideType.table).copyWith(
+      title: reportText('Gebruikte hulpmiddelen'),
+      tableRows: toolsAppendixRows(
+        deck.toolsUsed,
+        nameHeader: reportText('Hulpmiddel'),
+        descriptionHeader: reportText('Beschrijving'),
+        versionHeader: reportText('Versie'),
+        referenceHeader: reportText('Referentie'),
+      ),
+    ),
+  ]);
+
+  final incomplete = deck.toolsUsed.where((t) => t.isIncomplete).length;
+  messenger.showSnackBar(
+    SnackBar(
+      content: Text(
+        incomplete == 0
+            ? l10n.d('Bijlage met hulpmiddelen toegevoegd.')
+            // Niet blokkeren, wel melden: de eis vraagt beschrijving, versie én
+            // referentie, en een half ingevulde rij haalt dat niet.
+            : '${l10n.d('Bijlage toegevoegd, maar niet elk hulpmiddel heeft beschrijving, versie én referentie:')} $incomplete',
+      ),
+    ),
+  );
+}

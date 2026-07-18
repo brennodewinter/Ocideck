@@ -1776,6 +1776,17 @@ const _dutchSourceEt = {
 const _dutchSourceAddEt = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Diagrammi andmeid ei õnnestunud lugeda; need diagrammid jäävad tühjaks:',
+  'Bijlage hulpmiddelen invoegen…': 'Lisa tööriistade lisa…',
+  'Gebruikte hulpmiddelen': 'Kasutatud tööriistad',
+  'Hulpmiddel': 'Tööriist',
+  'Referentie': 'Viide',
+  'Eén per regel, bijv. Burp Suite@2026.4 | https://portswigger.net | Webproxy':
+      'Üks real, nt Burp Suite@2026.4 | https://portswigger.net | Veebipuhverserver',
+  'Nog geen hulpmiddelen vastgelegd — vul ze in bij Presentatie-info.':
+      'Tööriistu pole veel salvestatud — sisesta need esitluse teabes.',
+  'Bijlage met hulpmiddelen toegevoegd.': 'Tööriistade lisa lisatud.',
+  'Bijlage toegevoegd, maar niet elk hulpmiddel heeft beschrijving, versie én referentie:':
+      'Lisa lisatud, kuid mitte igal tööriistal pole kirjeldust, versiooni ja viidet:',
   'Meegeleverde versies invullen': 'Täida kaasasolevad versioonid',
   'vastgelegd': 'salvestatud',
   'nu beschikbaar': 'nüüd saadaval',

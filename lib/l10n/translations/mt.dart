@@ -1808,6 +1808,17 @@ const _dutchSourceMt = {
 const _dutchSourceAddMt = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Id-data tal-graff ma setgħetx tinqara; dawk il-graffs jibqgħu vojta:',
+  'Bijlage hulpmiddelen invoegen…': 'Daħħal l-anness tal-għodod…',
+  'Gebruikte hulpmiddelen': 'Għodod użati',
+  'Hulpmiddel': 'Għodda',
+  'Referentie': 'Referenza',
+  'Eén per regel, bijv. Burp Suite@2026.4 | https://portswigger.net | Webproxy':
+      'Wieħed f\'kull linja, eż. Burp Suite@2026.4 | https://portswigger.net | Proxy tal-web',
+  'Nog geen hulpmiddelen vastgelegd — vul ze in bij Presentatie-info.':
+      'Għadhom ma ġewx irreġistrati għodod — daħħalhom f\'Informazzjoni tal-preżentazzjoni.',
+  'Bijlage met hulpmiddelen toegevoegd.': 'Żdied l-anness tal-għodod.',
+  'Bijlage toegevoegd, maar niet elk hulpmiddel heeft beschrijving, versie én referentie:':
+      'L-anness żdied, iżda mhux kull għodda għandha deskrizzjoni, verżjoni u referenza:',
   'Meegeleverde versies invullen': 'Imla l-verżjonijiet inklużi',
   'vastgelegd': 'irreġistrata',
   'nu beschikbaar': 'issa disponibbli',

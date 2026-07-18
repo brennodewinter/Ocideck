@@ -1821,6 +1821,17 @@ const _dutchSourceGa = {
 const _dutchSourceAddGa = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Níorbh fhéidir sonraí an chairt a léamh; fanfaidh na cairteacha sin folamh:',
+  'Bijlage hulpmiddelen invoegen…': 'Ionsáigh aguisín na n-uirlisí…',
+  'Gebruikte hulpmiddelen': 'Uirlisí a úsáideadh',
+  'Hulpmiddel': 'Uirlis',
+  'Referentie': 'Tagairt',
+  'Eén per regel, bijv. Burp Suite@2026.4 | https://portswigger.net | Webproxy':
+      'Ceann sa líne, m.sh. Burp Suite@2026.4 | https://portswigger.net | Seachfhreastalaí gréasáin',
+  'Nog geen hulpmiddelen vastgelegd — vul ze in bij Presentatie-info.':
+      'Níl uirlisí taifeadta fós — cuir isteach iad in Eolas an chur i láthair.',
+  'Bijlage met hulpmiddelen toegevoegd.': 'Cuireadh aguisín na n-uirlisí leis.',
+  'Bijlage toegevoegd, maar niet elk hulpmiddel heeft beschrijving, versie én referentie:':
+      'Cuireadh an t-aguisín leis, ach níl cur síos, leagan agus tagairt ag gach uirlis:',
   'Meegeleverde versies invullen': 'Líon isteach na leaganacha cuimsithe',
   'vastgelegd': 'taifeadta',
   'nu beschikbaar': 'ar fáil anois',

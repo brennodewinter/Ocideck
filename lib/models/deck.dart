@@ -2,6 +2,7 @@ import 'privacy_disposition.dart';
 import 'annotation.dart';
 import 'document_signature.dart';
 import 'slide.dart';
+import 'used_tool.dart';
 import 'settings.dart';
 
 /// Traffic Light Protocol-classificatie (FIRST TLP 2.0) van een presentatie.
@@ -148,6 +149,18 @@ class Deck {
   /// noemt naast wat deze build bundelt, zie `outdatedStandards`.
   final List<String> standardsUsed;
 
+  /// De hulpmiddelen die bij het onderzoek zijn gebruikt (MIAUW EIS 4.8.2).
+  ///
+  /// Een andere lijst dan [standardsUsed]: dit zijn de *tools* van de tester —
+  /// naam, versie, publieke referentie, beschrijving — niet de standaarden
+  /// waartegen is getoetst. Die twee zijn eerder verward, en het verschil is
+  /// precies wat 4.8.2 van 4.3.2 scheidt.
+  ///
+  /// Vastleggen is niet hetzelfde als voldoen: de eis vraagt om een bijlage
+  /// ín het rapport. Deze lijst voedt die bijlage, maar de tester bevestigt
+  /// zelf dat hij er staat.
+  final List<UsedTool> toolsUsed;
+
   /// Traffic Light Protocol-classificatie van deze presentatie.
   final TlpLevel tlp;
 
@@ -241,6 +254,7 @@ class Deck {
     this.keywords = '',
     this.language = '',
     this.standardsUsed = const [],
+    this.toolsUsed = const [],
     this.tlp = TlpLevel.none,
     this.privacy = PrivacyDisposition.warn,
     this.presentationTargetSeconds = 0,
@@ -274,6 +288,7 @@ class Deck {
     String? keywords,
     String? language,
     List<String>? standardsUsed,
+    List<UsedTool>? toolsUsed,
     TlpLevel? tlp,
     PrivacyDisposition? privacy,
     int? presentationTargetSeconds,
@@ -306,6 +321,7 @@ class Deck {
       keywords: keywords ?? this.keywords,
       language: language ?? this.language,
       standardsUsed: standardsUsed ?? this.standardsUsed,
+      toolsUsed: toolsUsed ?? this.toolsUsed,
       tlp: tlp ?? this.tlp,
       privacy: privacy ?? this.privacy,
       presentationTargetSeconds:

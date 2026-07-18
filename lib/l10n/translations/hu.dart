@@ -1789,6 +1789,17 @@ const _dutchSourceHu = {
 const _dutchSourceAddHu = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'A diagram adatai nem olvashatók; ezek a diagramok üresen maradnak:',
+  'Bijlage hulpmiddelen invoegen…': 'Eszközök melléklet beszúrása…',
+  'Gebruikte hulpmiddelen': 'Használt eszközök',
+  'Hulpmiddel': 'Eszköz',
+  'Referentie': 'Hivatkozás',
+  'Eén per regel, bijv. Burp Suite@2026.4 | https://portswigger.net | Webproxy':
+      'Soronként egy, pl. Burp Suite@2026.4 | https://portswigger.net | Webproxy',
+  'Nog geen hulpmiddelen vastgelegd — vul ze in bij Presentatie-info.':
+      'Még nincsenek rögzített eszközök — adja meg őket a Prezentáció adatainál.',
+  'Bijlage met hulpmiddelen toegevoegd.': 'Eszközök melléklet hozzáadva.',
+  'Bijlage toegevoegd, maar niet elk hulpmiddel heeft beschrijving, versie én referentie:':
+      'A melléklet hozzáadva, de nem minden eszköznek van leírása, verziója és hivatkozása:',
   'Meegeleverde versies invullen': 'Mellékelt verziók kitöltése',
   'vastgelegd': 'rögzítve',
   'nu beschikbaar': 'most elérhető',

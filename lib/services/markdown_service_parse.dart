@@ -83,6 +83,7 @@ class _FrontMatter {
   String author = '';
   String language = '';
   List<String> standardsUsed = const [];
+  final List<UsedTool> toolsUsed = [];
   String organization = '';
   String version = '';
   String date = '';
@@ -138,6 +139,7 @@ extension _MarkdownParse on MarkdownService {
       keywords: fm.keywords,
       language: fm.language,
       standardsUsed: fm.standardsUsed,
+      toolsUsed: fm.toolsUsed,
       tlp: fm.tlp,
       privacy: fm.privacy,
       presentationTargetSeconds: fm.presentationTargetSeconds.clamp(0, 86400),
@@ -207,6 +209,11 @@ extension _MarkdownParse on MarkdownService {
               fm.keywords = _parseScalar(value);
             case 'language':
               fm.language = _parseScalar(value);
+            case 'tool':
+              // Meerdere `tool:`-regels stapelen in plaats van elkaar te
+              // overschrijven — anders houdt een deck maar één hulpmiddel over.
+              final tool = UsedTool.parse(_parseScalar(value));
+              if (tool != null) fm.toolsUsed.add(tool);
             case 'standards':
               fm.standardsUsed = _parseScalar(value)
                   .split(',')

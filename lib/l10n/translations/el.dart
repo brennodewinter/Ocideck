@@ -1813,6 +1813,17 @@ const _dutchSourceEl = {
 const _dutchSourceAddEl = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Δεν ήταν δυνατή η ανάγνωση των δεδομένων του γραφήματος· αυτά τα γραφήματα παραμένουν κενά:',
+  'Bijlage hulpmiddelen invoegen…': 'Εισαγωγή παραρτήματος εργαλείων…',
+  'Gebruikte hulpmiddelen': 'Εργαλεία που χρησιμοποιήθηκαν',
+  'Hulpmiddel': 'Εργαλείο',
+  'Referentie': 'Παραπομπή',
+  'Eén per regel, bijv. Burp Suite@2026.4 | https://portswigger.net | Webproxy':
+      'Ένα ανά γραμμή, π.χ. Burp Suite@2026.4 | https://portswigger.net | Διαμεσολαβητής ιστού',
+  'Nog geen hulpmiddelen vastgelegd — vul ze in bij Presentatie-info.':
+      'Δεν έχουν καταγραφεί εργαλεία — εισάγετέ τα στις Πληροφορίες παρουσίασης.',
+  'Bijlage met hulpmiddelen toegevoegd.': 'Προστέθηκε παράρτημα εργαλείων.',
+  'Bijlage toegevoegd, maar niet elk hulpmiddel heeft beschrijving, versie én referentie:':
+      'Προστέθηκε παράρτημα, αλλά δεν έχουν όλα τα εργαλεία περιγραφή, έκδοση και παραπομπή:',
   'Meegeleverde versies invullen': 'Συμπλήρωση ενσωματωμένων εκδόσεων',
   'vastgelegd': 'καταγράφηκε',
   'nu beschikbaar': 'τώρα διαθέσιμη',

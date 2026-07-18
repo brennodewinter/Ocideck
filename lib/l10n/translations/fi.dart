@@ -1785,6 +1785,17 @@ const _dutchSourceFi = {
 const _dutchSourceAddFi = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Kaavion tietoja ei voitu lukea; nämä kaaviot jäävät tyhjiksi:',
+  'Bijlage hulpmiddelen invoegen…': 'Lisää työkaluliite…',
+  'Gebruikte hulpmiddelen': 'Käytetyt työkalut',
+  'Hulpmiddel': 'Työkalu',
+  'Referentie': 'Viite',
+  'Eén per regel, bijv. Burp Suite@2026.4 | https://portswigger.net | Webproxy':
+      'Yksi riviä kohti, esim. Burp Suite@2026.4 | https://portswigger.net | Verkkovälityspalvelin',
+  'Nog geen hulpmiddelen vastgelegd — vul ze in bij Presentatie-info.':
+      'Työkaluja ei ole vielä kirjattu — syötä ne kohdassa Esityksen tiedot.',
+  'Bijlage met hulpmiddelen toegevoegd.': 'Työkaluliite lisätty.',
+  'Bijlage toegevoegd, maar niet elk hulpmiddel heeft beschrijving, versie én referentie:':
+      'Liite lisätty, mutta kaikilla työkaluilla ei ole kuvausta, versiota ja viitettä:',
   'Meegeleverde versies invullen': 'Täytä mukana tulevat versiot',
   'vastgelegd': 'kirjattu',
   'nu beschikbaar': 'nyt saatavilla',

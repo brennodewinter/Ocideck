@@ -1793,6 +1793,17 @@ const _dutchSourceLt = {
 const _dutchSourceAddLt = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Nepavyko nuskaityti diagramos duomenų; šios diagramos liks tuščios:',
+  'Bijlage hulpmiddelen invoegen…': 'Įterpti įrankių priedą…',
+  'Gebruikte hulpmiddelen': 'Naudoti įrankiai',
+  'Hulpmiddel': 'Įrankis',
+  'Referentie': 'Nuoroda',
+  'Eén per regel, bijv. Burp Suite@2026.4 | https://portswigger.net | Webproxy':
+      'Po vieną eilutėje, pvz. Burp Suite@2026.4 | https://portswigger.net | Žiniatinklio tarpinis serveris',
+  'Nog geen hulpmiddelen vastgelegd — vul ze in bij Presentatie-info.':
+      'Įrankių dar neužfiksuota — įveskite juos skiltyje Pristatymo informacija.',
+  'Bijlage met hulpmiddelen toegevoegd.': 'Įrankių priedas pridėtas.',
+  'Bijlage toegevoegd, maar niet elk hulpmiddel heeft beschrijving, versie én referentie:':
+      'Priedas pridėtas, bet ne kiekvienas įrankis turi aprašą, versiją ir nuorodą:',
   'Meegeleverde versies invullen': 'Įrašyti pridėtas versijas',
   'vastgelegd': 'užfiksuota',
   'nu beschikbaar': 'dabar prieinama',

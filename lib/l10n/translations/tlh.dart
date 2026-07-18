@@ -1760,6 +1760,17 @@ const _dutchSourceTlh = {
 const _dutchSourceAddTlh = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'ta\'nom De\' laDlaHbe\'; ta\'nommey chIm rutlh:',
+  'Bijlage hulpmiddelen invoegen…': 'jan tetlh chel…',
+  'Gebruikte hulpmiddelen': 'jan lo\'lu\'pu\'bogh',
+  'Hulpmiddel': 'jan',
+  'Referentie': '\'ang',
+  'Eén per regel, bijv. Burp Suite@2026.4 | https://portswigger.net | Webproxy':
+      'wa\' Doq, Dev: Burp Suite@2026.4 | https://portswigger.net | web proxy',
+  'Nog geen hulpmiddelen vastgelegd — vul ze in bij Presentatie-info.':
+      'jan qonlu\'be\' — Presentatie-info-Daq chel.',
+  'Bijlage met hulpmiddelen toegevoegd.': 'jan tetlh chellu\'.',
+  'Bijlage toegevoegd, maar niet elk hulpmiddel heeft beschrijving, versie én referentie:':
+      'tetlh chellu\', \'ach Hoch jan Del, mI\', \'ang je Hutlh:',
   'Meegeleverde versies invullen': 'mI\'mey chel',
   'vastgelegd': 'qonlu\'pu\'',
   'nu beschikbaar': 'DaH ngaq',

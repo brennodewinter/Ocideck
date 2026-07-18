@@ -8,6 +8,7 @@ import '../models/document_signature.dart';
 import '../models/scope_matrix_spec.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
+import '../models/used_tool.dart';
 import '../services/ai_alt_text_cleanup.dart';
 import '../services/annotation_codec.dart';
 import '../services/bullet_pagination.dart';
@@ -694,6 +695,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
     String? keywords,
     String? language,
     List<String>? standardsUsed,
+    List<UsedTool>? toolsUsed,
     TlpLevel? tlp,
     int? presentationTargetSeconds,
     bool? showRehearsalSummary,
@@ -712,6 +714,7 @@ class DeckNotifier extends StateNotifier<DeckState> {
         keywords: keywords,
         language: language,
         standardsUsed: standardsUsed,
+        toolsUsed: toolsUsed,
         tlp: tlp,
         presentationTargetSeconds: presentationTargetSeconds,
         showRehearsalSummary: showRehearsalSummary,

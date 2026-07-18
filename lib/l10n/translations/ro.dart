@@ -1804,6 +1804,18 @@ const _dutchSourceRo = {
 const _dutchSourceAddRo = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Datele graficului nu au putut fi citite; acele grafice rămân goale:',
+  'Bijlage hulpmiddelen invoegen…': 'Inserează anexa cu instrumente…',
+  'Gebruikte hulpmiddelen': 'Instrumente folosite',
+  'Hulpmiddel': 'Instrument',
+  'Referentie': 'Referință',
+  'Eén per regel, bijv. Burp Suite@2026.4 | https://portswigger.net | Webproxy':
+      'Unul pe linie, ex. Burp Suite@2026.4 | https://portswigger.net | Proxy web',
+  'Nog geen hulpmiddelen vastgelegd — vul ze in bij Presentatie-info.':
+      'Încă nu sunt înregistrate instrumente — introduceți-le în Informații prezentare.',
+  'Bijlage met hulpmiddelen toegevoegd.':
+      'Anexa cu instrumente a fost adăugată.',
+  'Bijlage toegevoegd, maar niet elk hulpmiddel heeft beschrijving, versie én referentie:':
+      'Anexă adăugată, dar nu fiecare instrument are descriere, versiune și referință:',
   'Meegeleverde versies invullen': 'Completează versiunile incluse',
   'vastgelegd': 'consemnată',
   'nu beschikbaar': 'acum disponibilă',

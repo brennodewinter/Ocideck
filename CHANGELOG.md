@@ -8,6 +8,20 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Vastleggen welke hulpmiddelen bij het onderzoek zijn gebruikt.** Bij
+  *Presentatie-info* noteer je per regel een tool met versie, publieke
+  referentie en een korte beschrijving — precies de drie dingen die MIAUW-eis
+  4.8.2 vraagt. Met *Bijlage hulpmiddelen invoegen…* in het `…`-menu maak je daar
+  in één klik een echte bijlagetabel van, in de taal van het **rapport** (niet
+  die van je interface, zodat een Nederlandse tester geen Nederlandse
+  kolomkoppen in een Engels rapport krijgt). Ontbreekt bij een tool de versie,
+  de referentie of de beschrijving, dan zegt OciDeck dat erbij — zonder je tegen
+  te houden.
+
+  De eis zelf blijft iets dat je zelf bevestigt. OciDeck maakt de bijlage
+  makkelijk, maar kan niet vaststellen dat hij daarna nog klopt: je kunt de
+  slide bewerken of verwijderen. Alleen de tester kan verklaren dat de bijlage
+  volledig is, en een vinkje dat dat automatisch zou beweren is er geen.
 - **Een rapport legt nu vast tegen welke standaarden is getoetst — met versie.**
   Bij *Presentatie-info* vul je de gebruikte standaarden in, met een knop die de
   versies invult die deze versie van OciDeck meedraagt. Die versies worden

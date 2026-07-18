@@ -61,6 +61,11 @@ void main() {
     await tester.pump(const Duration(milliseconds: 100));
     await tester.pumpAndSettle();
 
+    // De dialoog scrollt; de profielkiezer staat onder de vouw zodra er velden
+    // bijkomen. Eerst in beeld brengen, zoals een gebruiker ook zou doen —
+    // anders opent het dropdown-menu buiten het testvenster.
+    await tester.ensureVisible(find.byType(DropdownButton<String>).first);
+    await tester.pumpAndSettle();
     await tester.tap(find.byType(DropdownButton<String>).first);
     await tester.pumpAndSettle();
     await tester.tap(find.text('Standaard').last);

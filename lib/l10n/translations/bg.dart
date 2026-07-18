@@ -1808,6 +1808,18 @@ const _dutchSourceBg = {
 const _dutchSourceAddBg = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Данните на диаграмата не можаха да бъдат прочетени; тези диаграми остават празни:',
+  'Bijlage hulpmiddelen invoegen…': 'Вмъкване на приложение с инструменти…',
+  'Gebruikte hulpmiddelen': 'Използвани инструменти',
+  'Hulpmiddel': 'Инструмент',
+  'Referentie': 'Препратка',
+  'Eén per regel, bijv. Burp Suite@2026.4 | https://portswigger.net | Webproxy':
+      'По един на ред, напр. Burp Suite@2026.4 | https://portswigger.net | Уеб прокси',
+  'Nog geen hulpmiddelen vastgelegd — vul ze in bij Presentatie-info.':
+      'Все още няма записани инструменти — въведете ги в Информация за презентацията.',
+  'Bijlage met hulpmiddelen toegevoegd.':
+      'Приложението с инструменти е добавено.',
+  'Bijlage toegevoegd, maar niet elk hulpmiddel heeft beschrijving, versie én referentie:':
+      'Приложението е добавено, но не всеки инструмент има описание, версия и препратка:',
   'Meegeleverde versies invullen': 'Попълни вградените версии',
   'vastgelegd': 'записана',
   'nu beschikbaar': 'сега налична',

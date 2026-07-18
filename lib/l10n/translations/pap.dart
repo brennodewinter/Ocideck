@@ -742,6 +742,17 @@ const _dutchSourcePap = {
 const _dutchSourceAddPap = {
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'No por a lesa e datos di grafiko; e grafikonan ei ta keda bashí:',
+  'Bijlage hulpmiddelen invoegen…': 'Inserta anekso di hèrmèntnan…',
+  'Gebruikte hulpmiddelen': 'Hèrmèntnan usá',
+  'Hulpmiddel': 'Hèrmènt',
+  'Referentie': 'Referensia',
+  'Eén per regel, bijv. Burp Suite@2026.4 | https://portswigger.net | Webproxy':
+      'Un pa liña, p.e. Burp Suite@2026.4 | https://portswigger.net | Webproxy',
+  'Nog geen hulpmiddelen vastgelegd — vul ze in bij Presentatie-info.':
+      'Ainda no tin hèrmènt registrá — yena nan na Info di presentashon.',
+  'Bijlage met hulpmiddelen toegevoegd.': 'Anekso di hèrmèntnan agregá.',
+  'Bijlage toegevoegd, maar niet elk hulpmiddel heeft beschrijving, versie én referentie:':
+      'Anekso agregá, pero no tur hèrmènt tin deskripshon, vershon i referensia:',
   'Meegeleverde versies invullen': 'Yena e vershonnan inkluí',
   'vastgelegd': 'registrá',
   'nu beschikbaar': 'awor disponibel',

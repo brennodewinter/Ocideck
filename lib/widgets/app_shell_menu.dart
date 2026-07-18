@@ -47,6 +47,11 @@ extension _MainLayoutMenu on _MainLayoutState {
       ),
       _menuItem('sync_git', Icons.sync, l10n.d('Nu synchroniseren')),
       _menuItem(
+        'tools_appendix',
+        Icons.handyman_outlined,
+        l10n.d('Bijlage hulpmiddelen invoegen…'),
+      ),
+      _menuItem(
         'search_git',
         Icons.manage_search,
         l10n.d('Zoeken in alle decks…'),

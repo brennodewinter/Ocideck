@@ -1792,6 +1792,17 @@ const _dutchSourceSk = {
 const _dutchSourceAddSk = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Údaje grafu sa nepodarilo načítať; tieto grafy zostanú prázdne:',
+  'Bijlage hulpmiddelen invoegen…': 'Vložiť prílohu s nástrojmi…',
+  'Gebruikte hulpmiddelen': 'Použité nástroje',
+  'Hulpmiddel': 'Nástroj',
+  'Referentie': 'Odkaz',
+  'Eén per regel, bijv. Burp Suite@2026.4 | https://portswigger.net | Webproxy':
+      'Jeden na riadok, napr. Burp Suite@2026.4 | https://portswigger.net | Webová proxy',
+  'Nog geen hulpmiddelen vastgelegd — vul ze in bij Presentatie-info.':
+      'Zatiaľ nie sú zaznamenané nástroje — zadajte ich v Informáciách o prezentácii.',
+  'Bijlage met hulpmiddelen toegevoegd.': 'Príloha s nástrojmi pridaná.',
+  'Bijlage toegevoegd, maar niet elk hulpmiddel heeft beschrijving, versie én referentie:':
+      'Príloha pridaná, ale nie každý nástroj má popis, verziu a odkaz:',
   'Meegeleverde versies invullen': 'Doplniť pribalené verzie',
   'vastgelegd': 'zaznamenané',
   'nu beschikbaar': 'teraz dostupné',

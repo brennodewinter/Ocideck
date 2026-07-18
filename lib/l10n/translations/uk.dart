@@ -1803,6 +1803,17 @@ const _dutchSourceUk = {
 const _dutchSourceAddUk = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Не вдалося прочитати дані діаграми; ці діаграми залишаться порожніми:',
+  'Bijlage hulpmiddelen invoegen…': 'Вставити додаток з інструментами…',
+  'Gebruikte hulpmiddelen': 'Використані інструменти',
+  'Hulpmiddel': 'Інструмент',
+  'Referentie': 'Посилання',
+  'Eén per regel, bijv. Burp Suite@2026.4 | https://portswigger.net | Webproxy':
+      'По одному в рядку, напр. Burp Suite@2026.4 | https://portswigger.net | Вебпроксі',
+  'Nog geen hulpmiddelen vastgelegd — vul ze in bij Presentatie-info.':
+      'Інструменти ще не зафіксовані — введіть їх у відомостях про презентацію.',
+  'Bijlage met hulpmiddelen toegevoegd.': 'Додаток з інструментами додано.',
+  'Bijlage toegevoegd, maar niet elk hulpmiddel heeft beschrijving, versie én referentie:':
+      'Додаток додано, але не кожен інструмент має опис, версію та посилання:',
   'Meegeleverde versies invullen': 'Підставити вбудовані версії',
   'vastgelegd': 'зафіксовано',
   'nu beschikbaar': 'тепер доступна',

@@ -742,6 +742,17 @@ const _dutchSourceDe = {
 const _dutchSourceAddDe = {
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Diagrammdaten konnten nicht gelesen werden; diese Diagramme bleiben leer:',
+  'Bijlage hulpmiddelen invoegen…': 'Anhang Hilfsmittel einfügen…',
+  'Gebruikte hulpmiddelen': 'Verwendete Hilfsmittel',
+  'Hulpmiddel': 'Hilfsmittel',
+  'Referentie': 'Referenz',
+  'Eén per regel, bijv. Burp Suite@2026.4 | https://portswigger.net | Webproxy':
+      'Eines pro Zeile, z. B. Burp Suite@2026.4 | https://portswigger.net | Web-Proxy',
+  'Nog geen hulpmiddelen vastgelegd — vul ze in bij Presentatie-info.':
+      'Noch keine Hilfsmittel erfasst — tragen Sie sie unter Präsentationsinfo ein.',
+  'Bijlage met hulpmiddelen toegevoegd.': 'Anhang Hilfsmittel hinzugefügt.',
+  'Bijlage toegevoegd, maar niet elk hulpmiddel heeft beschrijving, versie én referentie:':
+      'Anhang hinzugefügt, aber nicht jedes Hilfsmittel hat Beschreibung, Version und Referenz:',
   'Meegeleverde versies invullen': 'Mitgelieferte Versionen einsetzen',
   'vastgelegd': 'festgehalten',
   'nu beschikbaar': 'jetzt verfügbar',
