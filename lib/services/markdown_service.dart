@@ -10,6 +10,7 @@ import '../models/finding_spec.dart';
 import '../models/question.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
+import '../models/used_tool.dart';
 import '../models/timeline.dart';
 import '../models/video_source.dart';
 import '../utils/deck_markdown_dashes.dart';
@@ -79,6 +80,11 @@ class MarkdownService {
       // Komma-gescheiden op één regel, net als keywords: de front matter blijft
       // met het blote oog leesbaar en diff't per regel.
       buf.writeln('standards: ${_yamlScalar(deck.standardsUsed.join(', '))}');
+    }
+    for (final tool in deck.toolsUsed) {
+      // Eén regel per hulpmiddel: de front matter blijft leesbaar en een
+      // toegevoegde tool is één regel diff.
+      buf.writeln('tool: ${_yamlScalar(tool.format())}');
     }
     if (deck.language.isNotEmpty) {
       buf.writeln('language: ${_yamlScalar(deck.language)}');

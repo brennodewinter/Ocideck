@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/deck.dart';
 import '../../l10n/app_localizations.dart';
 import '../../state/settings_provider.dart';
+import '../../models/used_tool.dart';
 import '../../services/reference_standards.dart';
 import '../../theme/app_theme.dart';
 import 'new_deck_dialog.dart' show ThemeProfileSwatch;
@@ -25,6 +26,9 @@ class PresentationInfo {
 
   /// De standaarden waartegen is getoetst, als `naam@versie` (MIAUW EIS 4.3.2).
   final List<String> standardsUsed;
+
+  /// De hulpmiddelen die bij het onderzoek zijn gebruikt (MIAUW EIS 4.8.2).
+  final List<UsedTool> toolsUsed;
   final int presentationTargetSeconds;
   final bool showRehearsalSummary;
 
@@ -44,6 +48,7 @@ class PresentationInfo {
     required this.keywords,
     required this.language,
     this.standardsUsed = const [],
+    this.toolsUsed = const [],
     this.presentationTargetSeconds = 0,
     this.showRehearsalSummary = true,
     this.playOnly = false,
@@ -99,6 +104,7 @@ class _PresentationInfoDialogState
   late final TextEditingController _description;
   late final TextEditingController _keywords;
   late final TextEditingController _standards;
+  late final TextEditingController _tools;
   String _language = '';
   late int _presentationTargetSeconds;
   late bool _useCustomTarget;
@@ -119,6 +125,9 @@ class _PresentationInfoDialogState
     _keywords = TextEditingController(text: widget.deck.keywords);
     _standards = TextEditingController(
       text: widget.deck.standardsUsed.join(', '),
+    );
+    _tools = TextEditingController(
+      text: widget.deck.toolsUsed.map((t) => t.format()).join('\n'),
     );
     _language = widget.deck.language;
     _presentationTargetSeconds = widget.deck.presentationTargetSeconds;
@@ -143,6 +152,7 @@ class _PresentationInfoDialogState
     _description.dispose();
     _keywords.dispose();
     _standards.dispose();
+    _tools.dispose();
     _customMinutes.dispose();
     super.dispose();
   }
@@ -164,6 +174,7 @@ class _PresentationInfoDialogState
             .map((e) => e.trim())
             .where((e) => e.isNotEmpty)
             .toList(),
+        toolsUsed: UsedTool.parseAll(_tools.text),
         presentationTargetSeconds: _presentationTargetSeconds,
         showRehearsalSummary: _showRehearsalSummary,
         playOnly: _playOnly,
@@ -322,6 +333,8 @@ class _PresentationInfoDialogState
         ),
         const SizedBox(height: 12),
         _standardsField(),
+        const SizedBox(height: 12),
+        _toolsField(),
       ],
     );
   }
@@ -344,6 +357,19 @@ class _PresentationInfoDialogState
       tooltip: context.l10n.d('Meegeleverde versies invullen'),
       onPressed: _fillCurrentStandards,
     ),
+  );
+
+  /// De gebruikte hulpmiddelen (MIAUW EIS 4.8.2), één per regel.
+  ///
+  /// Een tekstveld en geen rijtjes-editor: dit is een lijst die je één keer per
+  /// onderzoek overtikt uit je eigen aantekeningen, niet iets waar je in
+  /// rondklikt. De vorm spiegelt die van de standaarden, zodat er één conventie
+  /// te onthouden is.
+  Widget _toolsField() => _field(
+    _tools,
+    'Gebruikte hulpmiddelen',
+    'Eén per regel, bijv. Burp Suite@2026.4 | https://portswigger.net | Webproxy',
+    maxLines: 4,
   );
 
   void _fillCurrentStandards() {

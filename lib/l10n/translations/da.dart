@@ -1784,6 +1784,17 @@ const _dutchSourceDa = {
 const _dutchSourceAddDa = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Diagramdata kunne ikke læses; de diagrammer forbliver tomme:',
+  'Bijlage hulpmiddelen invoegen…': 'Indsæt bilag med værktøjer…',
+  'Gebruikte hulpmiddelen': 'Anvendte værktøjer',
+  'Hulpmiddel': 'Værktøj',
+  'Referentie': 'Reference',
+  'Eén per regel, bijv. Burp Suite@2026.4 | https://portswigger.net | Webproxy':
+      'Ét pr. linje, f.eks. Burp Suite@2026.4 | https://portswigger.net | Webproxy',
+  'Nog geen hulpmiddelen vastgelegd — vul ze in bij Presentatie-info.':
+      'Ingen værktøjer registreret endnu — angiv dem under Præsentationsinfo.',
+  'Bijlage met hulpmiddelen toegevoegd.': 'Bilag med værktøjer tilføjet.',
+  'Bijlage toegevoegd, maar niet elk hulpmiddel heeft beschrijving, versie én referentie:':
+      'Bilag tilføjet, men ikke alle værktøjer har beskrivelse, version og reference:',
   'Meegeleverde versies invullen': 'Indsæt de medfølgende versioner',
   'vastgelegd': 'registreret',
   'nu beschikbaar': 'nu tilgængelig',

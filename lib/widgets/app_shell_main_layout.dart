@@ -427,6 +427,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
               _syncGit(context, ref);
             case 'history_git':
               _showGitHistory(context, ref);
+            case 'tools_appendix':
+              _insertToolsAppendix(context, ref);
             case 'search_git':
               _searchDecks(context, ref);
             case 'assets_git':
@@ -836,6 +838,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       keywords: info.keywords,
       language: info.language,
       standardsUsed: info.standardsUsed,
+      toolsUsed: info.toolsUsed,
       presentationTargetSeconds: info.presentationTargetSeconds,
       showRehearsalSummary: info.showRehearsalSummary,
       playOnly: info.playOnly,

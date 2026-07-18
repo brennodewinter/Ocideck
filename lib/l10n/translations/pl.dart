@@ -1798,6 +1798,17 @@ const _dutchSourcePl = {
 const _dutchSourceAddPl = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Nie można odczytać danych wykresu; te wykresy pozostaną puste:',
+  'Bijlage hulpmiddelen invoegen…': 'Wstaw załącznik z narzędziami…',
+  'Gebruikte hulpmiddelen': 'Użyte narzędzia',
+  'Hulpmiddel': 'Narzędzie',
+  'Referentie': 'Odniesienie',
+  'Eén per regel, bijv. Burp Suite@2026.4 | https://portswigger.net | Webproxy':
+      'Jedno w wierszu, np. Burp Suite@2026.4 | https://portswigger.net | Proxy webowe',
+  'Nog geen hulpmiddelen vastgelegd — vul ze in bij Presentatie-info.':
+      'Nie zapisano jeszcze narzędzi — wpisz je w Informacjach o prezentacji.',
+  'Bijlage met hulpmiddelen toegevoegd.': 'Dodano załącznik z narzędziami.',
+  'Bijlage toegevoegd, maar niet elk hulpmiddel heeft beschrijving, versie én referentie:':
+      'Dodano załącznik, ale nie każde narzędzie ma opis, wersję i odniesienie:',
   'Meegeleverde versies invullen': 'Wstaw dołączone wersje',
   'vastgelegd': 'zapisano',
   'nu beschikbaar': 'obecnie dostępna',

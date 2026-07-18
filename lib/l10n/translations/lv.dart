@@ -1784,6 +1784,17 @@ const _dutchSourceLv = {
 const _dutchSourceAddLv = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Diagrammas datus nevarēja nolasīt; šīs diagrammas paliek tukšas:',
+  'Bijlage hulpmiddelen invoegen…': 'Ievietot rīku pielikumu…',
+  'Gebruikte hulpmiddelen': 'Izmantotie rīki',
+  'Hulpmiddel': 'Rīks',
+  'Referentie': 'Atsauce',
+  'Eén per regel, bijv. Burp Suite@2026.4 | https://portswigger.net | Webproxy':
+      'Viens rindā, piem. Burp Suite@2026.4 | https://portswigger.net | Tīmekļa starpniekserveris',
+  'Nog geen hulpmiddelen vastgelegd — vul ze in bij Presentatie-info.':
+      'Rīki vēl nav reģistrēti — ievadiet tos sadaļā Prezentācijas informācija.',
+  'Bijlage met hulpmiddelen toegevoegd.': 'Rīku pielikums pievienots.',
+  'Bijlage toegevoegd, maar niet elk hulpmiddel heeft beschrijving, versie én referentie:':
+      'Pielikums pievienots, taču ne katram rīkam ir apraksts, versija un atsauce:',
   'Meegeleverde versies invullen': 'Ievietot iekļautās versijas',
   'vastgelegd': 'reģistrēts',
   'nu beschikbaar': 'tagad pieejams',

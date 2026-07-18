@@ -1789,6 +1789,17 @@ const _dutchSourceGsw = {
 const _dutchSourceAddGsw = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'D Diagrammdate hend nöd chöne gläse werde; die Diagramm bliibed leer:',
+  'Bijlage hulpmiddelen invoegen…': 'Ahang Hilfsmittel yfüege…',
+  'Gebruikte hulpmiddelen': 'Bruchti Hilfsmittel',
+  'Hulpmiddel': 'Hilfsmittel',
+  'Referentie': 'Referänz',
+  'Eén per regel, bijv. Burp Suite@2026.4 | https://portswigger.net | Webproxy':
+      'Eis pro Zile, z. B. Burp Suite@2026.4 | https://portswigger.net | Web-Proxy',
+  'Nog geen hulpmiddelen vastgelegd — vul ze in bij Presentatie-info.':
+      'No kei Hilfsmittel erfasst — trag si under Präsentationsinfo y.',
+  'Bijlage met hulpmiddelen toegevoegd.': 'Ahang Hilfsmittel zuegfüegt.',
+  'Bijlage toegevoegd, maar niet elk hulpmiddel heeft beschrijving, versie én referentie:':
+      'Ahang zuegfüegt, aber nid jedes Hilfsmittel het Bschrybig, Version und Referänz:',
   'Meegeleverde versies invullen': 'Mitglieferti Versione ysetze',
   'vastgelegd': 'festghalte',
   'nu beschikbaar': 'jetz verfüegbar',

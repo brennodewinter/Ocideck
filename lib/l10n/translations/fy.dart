@@ -743,6 +743,17 @@ const _dutchSourceFy = {
 const _dutchSourceAddFy = {
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Grafykdata koe net lêzen wurde; dy grafiken bliuwe leech:',
+  'Bijlage hulpmiddelen invoegen…': 'Bylage helpmiddels ynfoegje…',
+  'Gebruikte hulpmiddelen': 'Brûkte helpmiddels',
+  'Hulpmiddel': 'Helpmiddel',
+  'Referentie': 'Referinsje',
+  'Eén per regel, bijv. Burp Suite@2026.4 | https://portswigger.net | Webproxy':
+      'Ien de rigel, bgl. Burp Suite@2026.4 | https://portswigger.net | Webproxy',
+  'Nog geen hulpmiddelen vastgelegd — vul ze in bij Presentatie-info.':
+      'Noch gjin helpmiddels fêstlein — folje se yn by Presintaasje-ynfo.',
+  'Bijlage met hulpmiddelen toegevoegd.': 'Bylage mei helpmiddels tafoege.',
+  'Bijlage toegevoegd, maar niet elk hulpmiddel heeft beschrijving, versie én referentie:':
+      'Bylage tafoege, mar net elk helpmiddel hat beskriuwing, ferzje én referinsje:',
   'Meegeleverde versies invullen': 'Meilevere ferzjes ynfolje',
   'vastgelegd': 'fêstlein',
   'nu beschikbaar': 'no beskikber',

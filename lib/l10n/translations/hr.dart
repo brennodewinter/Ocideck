@@ -1792,6 +1792,17 @@ const _dutchSourceHr = {
 const _dutchSourceAddHr = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Podaci grafikona nisu se mogli pročitati; ti grafikoni ostaju prazni:',
+  'Bijlage hulpmiddelen invoegen…': 'Umetni prilog s alatima…',
+  'Gebruikte hulpmiddelen': 'Korišteni alati',
+  'Hulpmiddel': 'Alat',
+  'Referentie': 'Referenca',
+  'Eén per regel, bijv. Burp Suite@2026.4 | https://portswigger.net | Webproxy':
+      'Jedan po retku, npr. Burp Suite@2026.4 | https://portswigger.net | Web proxy',
+  'Nog geen hulpmiddelen vastgelegd — vul ze in bij Presentatie-info.':
+      'Alati još nisu zabilježeni — unesite ih u Informacije o prezentaciji.',
+  'Bijlage met hulpmiddelen toegevoegd.': 'Prilog s alatima dodan.',
+  'Bijlage toegevoegd, maar niet elk hulpmiddel heeft beschrijving, versie én referentie:':
+      'Prilog dodan, ali nemaju svi alati opis, verziju i referencu:',
   'Meegeleverde versies invullen': 'Unesi uključene verzije',
   'vastgelegd': 'zabilježeno',
   'nu beschikbaar': 'sada dostupno',

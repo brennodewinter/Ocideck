@@ -1787,6 +1787,17 @@ const _dutchSourceSl = {
 const _dutchSourceAddSl = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Podatkov grafikona ni bilo mogoče prebrati; ti grafikoni ostanejo prazni:',
+  'Bijlage hulpmiddelen invoegen…': 'Vstavi prilogo z orodji…',
+  'Gebruikte hulpmiddelen': 'Uporabljena orodja',
+  'Hulpmiddel': 'Orodje',
+  'Referentie': 'Sklic',
+  'Eén per regel, bijv. Burp Suite@2026.4 | https://portswigger.net | Webproxy':
+      'Eno na vrstico, npr. Burp Suite@2026.4 | https://portswigger.net | Spletni posrednik',
+  'Nog geen hulpmiddelen vastgelegd — vul ze in bij Presentatie-info.':
+      'Orodja še niso zabeležena — vnesite jih v Informacije o predstavitvi.',
+  'Bijlage met hulpmiddelen toegevoegd.': 'Priloga z orodji dodana.',
+  'Bijlage toegevoegd, maar niet elk hulpmiddel heeft beschrijving, versie én referentie:':
+      'Priloga dodana, a nimajo vsa orodja opisa, različice in sklica:',
   'Meegeleverde versies invullen': 'Vstavi priložene različice',
   'vastgelegd': 'zabeleženo',
   'nu beschikbaar': 'zdaj na voljo',

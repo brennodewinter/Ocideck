@@ -1785,6 +1785,17 @@ const _dutchSourceId = {
 const _dutchSourceAddId = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Data bagan tidak dapat dibaca; bagan tersebut tetap kosong:',
+  'Bijlage hulpmiddelen invoegen…': 'Sisipkan lampiran perkakas…',
+  'Gebruikte hulpmiddelen': 'Perkakas yang digunakan',
+  'Hulpmiddel': 'Perkakas',
+  'Referentie': 'Referensi',
+  'Eén per regel, bijv. Burp Suite@2026.4 | https://portswigger.net | Webproxy':
+      'Satu per baris, mis. Burp Suite@2026.4 | https://portswigger.net | Proksi web',
+  'Nog geen hulpmiddelen vastgelegd — vul ze in bij Presentatie-info.':
+      'Belum ada perkakas tercatat — isi di Info presentasi.',
+  'Bijlage met hulpmiddelen toegevoegd.': 'Lampiran perkakas ditambahkan.',
+  'Bijlage toegevoegd, maar niet elk hulpmiddel heeft beschrijving, versie én referentie:':
+      'Lampiran ditambahkan, tetapi tidak semua perkakas punya deskripsi, versi, dan referensi:',
   'Meegeleverde versies invullen': 'Isi versi bawaan',
   'vastgelegd': 'tercatat',
   'nu beschikbaar': 'kini tersedia',

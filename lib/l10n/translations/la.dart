@@ -1801,6 +1801,17 @@ const _dutchSourceLa = {
 const _dutchSourceAddLa = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Data diagrammatis legi non potuerunt; illa diagrammata vacua manent:',
+  'Bijlage hulpmiddelen invoegen…': 'Appendicem instrumentorum inserere…',
+  'Gebruikte hulpmiddelen': 'Instrumenta adhibita',
+  'Hulpmiddel': 'Instrumentum',
+  'Referentie': 'Fons',
+  'Eén per regel, bijv. Burp Suite@2026.4 | https://portswigger.net | Webproxy':
+      'Unum per lineam, ex. gr. Burp Suite@2026.4 | https://portswigger.net | Proxy retis',
+  'Nog geen hulpmiddelen vastgelegd — vul ze in bij Presentatie-info.':
+      'Nulla adhuc instrumenta consignata — ea in Informatione praesentationis insere.',
+  'Bijlage met hulpmiddelen toegevoegd.': 'Appendix instrumentorum addita.',
+  'Bijlage toegevoegd, maar niet elk hulpmiddel heeft beschrijving, versie én referentie:':
+      'Appendix addita, sed non omnia instrumenta descriptionem, versionem fontemque habent:',
   'Meegeleverde versies invullen': 'Versiones inclusas inserere',
   'vastgelegd': 'consignata',
   'nu beschikbaar': 'nunc praesto',
