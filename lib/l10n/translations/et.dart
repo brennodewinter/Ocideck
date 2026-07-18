@@ -1774,6 +1774,15 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
+      'Keegi teine oli seda dekki samuti muutnud — ühendatud ja salvestatud.',
+  'Keuzes toegepast — sla op om ze vast te leggen.':
+      'Valikud rakendatud — salvesta need.',
+  'Allebei bewerkt — kies per slide': 'Mõlemad muutsid — vali slaidi kaupa',
+  'Iemand anders bewerkte dit deck tegelijk met jou. Alles wat vanzelf kon is al samengevoegd; deze slides niet.':
+      'Keegi teine muutis seda dekki sinuga samal ajal. Kõik, mida sai automaatselt ühendada, on juba ühendatud; neid slaide mitte.',
+  'Mijn versie': 'Minu versioon',
+  'Hun versie': 'Nende versioon',
   'Vergelijken…': 'Võrdle…',
   'Versies vergelijken': 'Võrdle versioone',
   'Kies twee versies; de oudste van de twee is het vertrekpunt.':

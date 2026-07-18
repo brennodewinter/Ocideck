@@ -8,6 +8,21 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Two people editing one deck no longer take turns — concurrent edits are
+  merged.** If someone else saved while you were working, saving used to bounce
+  you back with "reload and try again". Now the two edits are merged: everything
+  that can be resolved automatically is (they changed one slide, you changed
+  another; you both made the same change; one of you only reordered), and the
+  save goes through with a note that their work came along. Only slides you both
+  changed *differently* — or where one deleted what the other edited — come back
+  as a choice, one slide at a time, with your side kept until you decide.
+  Nothing is ever discarded on either side. The merge works per slide rather than
+  per line of text, because a text merge would leave conflict markers in
+  `deck.md` and an unparseable deck is exactly what you cannot be shown while
+  choosing. One safeguard worth naming: the deck's classification becomes the
+  stricter of the two, so a merge can never quietly drop someone's TLP
+  escalation. (On desktop with native `git` a rejected push still keeps your
+  commit local for now.)
 - **Editing a git deck now happens on a concept branch, and you release it for
   review.** Saving a deck opened from git no longer commits straight to the main
   branch: the first save of an editing round starts a dated *concept* branch

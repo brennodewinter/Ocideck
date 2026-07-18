@@ -741,6 +741,15 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
+      'Immen oars hie dit deck ek bewurke — gearfoege en bewarre.',
+  'Keuzes toegepast — sla op om ze vast te leggen.':
+      'Karren tapast — bewarje om se fêst te lizzen.',
+  'Allebei bewerkt — kies per slide': 'Beide bewurke — kies de slide',
+  'Iemand anders bewerkte dit deck tegelijk met jou. Alles wat vanzelf kon is al samengevoegd; deze slides niet.':
+      'Immen oars bewurke dit deck tagelyk mei dy. Alles wat fansels koe is al gearfoege; dizze slides net.',
+  'Mijn versie': 'Myn ferzje',
+  'Hun versie': 'Harren ferzje',
   'Vergelijken…': 'Ferlykje…',
   'Versies vergelijken': 'Ferzjes ferlykje',
   'Kies twee versies; de oudste van de twee is het vertrekpunt.':

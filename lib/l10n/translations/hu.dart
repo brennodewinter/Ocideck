@@ -1787,6 +1787,16 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
+      'Valaki más is szerkesztette ezt a csomagot — egyesítve és elmentve.',
+  'Keuzes toegepast — sla op om ze vast te leggen.':
+      'A választások alkalmazva — ments el a rögzítéshez.',
+  'Allebei bewerkt — kies per slide':
+      'Mindketten szerkesztették — válassz diánként',
+  'Iemand anders bewerkte dit deck tegelijk met jou. Alles wat vanzelf kon is al samengevoegd; deze slides niet.':
+      'Valaki más veled egy időben szerkesztette ezt a csomagot. Minden, ami automatikusan egyesíthető volt, már egyesült; ezek a diák nem.',
+  'Mijn versie': 'Az én verzióm',
+  'Hun versie': 'Az ő verziójuk',
   'Vergelijken…': 'Összehasonlítás…',
   'Versies vergelijken': 'Verziók összehasonlítása',
   'Kies twee versies; de oudste van de twee is het vertrekpunt.':

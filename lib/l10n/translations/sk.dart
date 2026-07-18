@@ -1790,6 +1790,16 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
+      'Túto sadu upravoval aj niekto iný — zlúčené a uložené.',
+  'Keuzes toegepast — sla op om ze vast te leggen.':
+      'Voľby použité — ulož ich na zaznamenanie.',
+  'Allebei bewerkt — kies per slide':
+      'Upravili obaja — vyber pri každej snímke',
+  'Iemand anders bewerkte dit deck tegelijk met jou. Alles wat vanzelf kon is al samengevoegd; deze slides niet.':
+      'Túto sadu upravoval niekto iný v rovnakom čase ako ty. Všetko, čo sa dalo zlúčiť automaticky, už zlúčené je; tieto snímky nie.',
+  'Mijn versie': 'Moja verzia',
+  'Hun versie': 'Ich verzia',
   'Vergelijken…': 'Porovnať…',
   'Versies vergelijken': 'Porovnať verzie',
   'Kies twee versies; de oudste van de twee is het vertrekpunt.':

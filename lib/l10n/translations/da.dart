@@ -1782,6 +1782,15 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
+      'En anden havde også redigeret dette deck — flettet og gemt.',
+  'Keuzes toegepast — sla op om ze vast te leggen.':
+      'Valg anvendt — gem for at registrere dem.',
+  'Allebei bewerkt — kies per slide': 'Begge har redigeret — vælg pr. slide',
+  'Iemand anders bewerkte dit deck tegelijk met jou. Alles wat vanzelf kon is al samengevoegd; deze slides niet.':
+      'En anden redigerede dette deck samtidig med dig. Alt, der kunne flettes automatisk, er allerede flettet; disse slides ikke.',
+  'Mijn versie': 'Min version',
+  'Hun versie': 'Deres version',
   'Vergelijken…': 'Sammenlign…',
   'Versies vergelijken': 'Sammenlign versioner',
   'Kies twee versies; de oudste van de twee is het vertrekpunt.':

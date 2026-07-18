@@ -1790,6 +1790,16 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
+      'Netko drugi također je uređivao ovaj komplet — spojeno i spremljeno.',
+  'Keuzes toegepast — sla op om ze vast te leggen.':
+      'Odabiri primijenjeni — spremi da ih zabilježiš.',
+  'Allebei bewerkt — kies per slide':
+      'Obje strane uređivale — odaberi po slajdu',
+  'Iemand anders bewerkte dit deck tegelijk met jou. Alles wat vanzelf kon is al samengevoegd; deze slides niet.':
+      'Netko drugi uređivao je ovaj komplet istovremeno s tobom. Sve što se moglo spojiti automatski već je spojeno; ovi slajdovi nisu.',
+  'Mijn versie': 'Moja verzija',
+  'Hun versie': 'Njihova verzija',
   'Vergelijken…': 'Usporedi…',
   'Versies vergelijken': 'Usporedi verzije',
   'Kies twee versies; de oudste van de twee is het vertrekpunt.':

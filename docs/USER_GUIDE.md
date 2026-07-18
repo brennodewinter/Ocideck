@@ -97,6 +97,14 @@ saved version stays retrievable, which a plain folder cannot give you.
   (`decks/<name>/vX`) on the main branch — the same versions *Versies…* lists and
   opens read-only. Recording a version passes the same classification check as
   releasing for review, so a version can never be tagged past its ceiling.
+- **If someone else edited at the same time, it merges.** Saving no longer sends
+  you back to reload. OciDeck compares what you started from, what you made of
+  it, and what they made of it, and merges the two. Edits to different slides,
+  identical edits, and reorderings resolve by themselves and your save simply
+  goes through. Only slides you both changed differently — or where one of you
+  deleted what the other edited — are put to you as a choice per slide, with your
+  own version kept until you pick. Neither side's work is thrown away. If the
+  deck's classification differs, the stricter of the two wins.
 - **Native git (desktop):** if you have `git` installed (2.19 or newer),
   *Settings → Git* shows it, and OciDeck keeps a real clone of the repository.
   Then **each save is a genuine local commit** — durable and offline: edit away

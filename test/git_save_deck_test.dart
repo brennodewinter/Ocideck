@@ -54,7 +54,9 @@ class _FlakyForge extends FakeForge {
 // Het git-opslaanpad (§9.1): het deck van het tabblad wordt één commit. Deze
 // suite legt vast dat het commit landt, dat het tabblad daarna de nieuwe commit
 // als baseSha draagt, dat een nieuw deck zonder herkomst ook publiceert, en dat
-// een verplaatste branch als conflict terugkomt in plaats van stil te falen.
+// een verplaatste branch wordt samengevoegd in plaats van stil te falen. Het
+// botsen zelf — als de deckinhoud wél uiteenloopt — staat in
+// git_merge_on_conflict_test.dart.
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -272,7 +274,7 @@ theme: ocideck
     );
 
     test(
-      'een verzette werkbranch komt terug als conflict, niet als fout',
+      'een verzette werkbranch wordt samengevoegd, niet teruggestuurd',
       () async {
         final (container, tabs) = build();
         final repo = repoWith('''
@@ -307,7 +309,7 @@ theme: ocideck
         );
 
         // Iemand anders verzet intussen de werkbranch (bv. een reviewer die
-        // erop doorwerkt). De volgende opslag zit midden in de ronde en botst.
+        // erop doorwerkt). De volgende opslag botst op de basis-sha.
         repo.branches[workBranch] = 'iemand-anders';
 
         final result = await tabs.saveToGit(
@@ -319,10 +321,15 @@ theme: ocideck
           now: DateTime(2026, 7, 18),
         );
 
-        expect(result.status, GitSaveStatus.conflict);
-        expect(result.message, isNotNull);
-        // De commit van de ander staat er nog; wij hebben niets overschreven.
-        expect(repo.branches[workBranch], 'iemand-anders');
+        // Sinds §8.6 is een verzette branch geen doodlopende weg meer: er wordt
+        // driewegs samengevoegd. Hier week de déckinhoud niet af (alleen de kop
+        // verschoof), dus dat gaat vanzelf en het werk landt alsnog.
+        expect(result.status, GitSaveStatus.merged);
+        expect(result.conflicts, isEmpty);
+        // En het landt óp hun commit, niet eroverheen: de branch is verzet naar
+        // onze nieuwe commit, met die van de ander als basis.
+        expect(repo.branches[workBranch], result.sha);
+        expect(repo.branches[workBranch], isNot('iemand-anders'));
       },
     );
 

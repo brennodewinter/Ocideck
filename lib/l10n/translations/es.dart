@@ -737,6 +737,16 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
+      'Otra persona también había editado este deck: combinado y guardado.',
+  'Keuzes toegepast — sla op om ze vast te leggen.':
+      'Opciones aplicadas: guarda para registrarlas.',
+  'Allebei bewerkt — kies per slide':
+      'Editado por ambos: elige por diapositiva',
+  'Iemand anders bewerkte dit deck tegelijk met jou. Alles wat vanzelf kon is al samengevoegd; deze slides niet.':
+      'Otra persona editó este deck al mismo tiempo que tú. Todo lo que podía combinarse automáticamente ya se combinó; estas diapositivas no.',
+  'Mijn versie': 'Mi versión',
+  'Hun versie': 'Su versión',
   'Vergelijken…': 'Comparar…',
   'Versies vergelijken': 'Comparar versiones',
   'Kies twee versies; de oudste van de twee is het vertrekpunt.':

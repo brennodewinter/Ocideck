@@ -1806,6 +1806,16 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
+      'Xi ħadd ieħor kien editja dan id-deck ukoll — ingħaqad u ġie ssejvjat.',
+  'Keuzes toegepast — sla op om ze vast te leggen.':
+      'L-għażliet ġew applikati — issejvja biex tirreġistrahom.',
+  'Allebei bewerkt — kies per slide':
+      'It-tnejn editjaw — agħżel għal kull slide',
+  'Iemand anders bewerkte dit deck tegelijk met jou. Alles wat vanzelf kon is al samengevoegd; deze slides niet.':
+      'Xi ħadd ieħor editja dan id-deck fl-istess ħin bħalek. Kollox li seta\' jingħaqad awtomatikament diġà ngħaqad; dawn is-slides le.',
+  'Mijn versie': 'Il-verżjoni tiegħi',
+  'Hun versie': 'Il-verżjoni tagħhom',
   'Vergelijken…': 'Qabbel…',
   'Versies vergelijken': 'Qabbel il-verżjonijiet',
   'Kies twee versies; de oudste van de twee is het vertrekpunt.':

@@ -1783,6 +1783,16 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
+      'Joku muukin oli muokannut tätä settiä — yhdistetty ja tallennettu.',
+  'Keuzes toegepast — sla op om ze vast te leggen.':
+      'Valinnat otettu käyttöön — tallenna ne.',
+  'Allebei bewerkt — kies per slide':
+      'Molemmat muokkasivat — valitse dioittain',
+  'Iemand anders bewerkte dit deck tegelijk met jou. Alles wat vanzelf kon is al samengevoegd; deze slides niet.':
+      'Joku muu muokkasi tätä settiä samaan aikaan kuin sinä. Kaikki automaattisesti yhdistettävissä ollut on jo yhdistetty; nämä diat eivät.',
+  'Mijn versie': 'Oma versioni',
+  'Hun versie': 'Heidän versionsa',
   'Vergelijken…': 'Vertaa…',
   'Versies vergelijken': 'Vertaa versioita',
   'Kies twee versies; de oudste van de twee is het vertrekpunt.':

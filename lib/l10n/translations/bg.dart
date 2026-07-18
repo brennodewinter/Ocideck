@@ -1806,6 +1806,16 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
+      'Някой друг също беше редактирал това тесте — обединено и запазено.',
+  'Keuzes toegepast — sla op om ze vast te leggen.':
+      'Изборите са приложени — запазете, за да ги запишете.',
+  'Allebei bewerkt — kies per slide':
+      'И двамата редактираха — изберете за всеки слайд',
+  'Iemand anders bewerkte dit deck tegelijk met jou. Alles wat vanzelf kon is al samengevoegd; deze slides niet.':
+      'Някой друг редактира това тесте едновременно с вас. Всичко, което можеше да се обедини автоматично, вече е обединено; тези слайдове не.',
+  'Mijn versie': 'Моята версия',
+  'Hun versie': 'Тяхната версия',
   'Vergelijken…': 'Сравняване…',
   'Versies vergelijken': 'Сравняване на версии',
   'Kies twee versies; de oudste van de twee is het vertrekpunt.':

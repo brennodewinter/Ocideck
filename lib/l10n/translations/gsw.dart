@@ -1787,6 +1787,15 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
+      'Öpper anders het das Deck au bearbeitet — zämmegfüehrt und gspeicheret.',
+  'Keuzes toegepast — sla op om ze vast te leggen.':
+      'Uuswahl übernoh — speichere zum festhalte.',
+  'Allebei bewerkt — kies per slide': 'Vo beide bearbeitet — pro Folie wähle',
+  'Iemand anders bewerkte dit deck tegelijk met jou. Alles wat vanzelf kon is al samengevoegd; deze slides niet.':
+      'Öpper anders het das Deck glychzytig mit dir bearbeitet. Alles wo automatisch gange isch, isch scho zämmegfüehrt; die Folie nid.',
+  'Mijn versie': 'Mini Version',
+  'Hun versie': 'Iri Version',
   'Vergelijken…': 'Verglyche…',
   'Versies vergelijken': 'Versione verglyche',
   'Kies twee versies; de oudste van de twee is het vertrekpunt.':

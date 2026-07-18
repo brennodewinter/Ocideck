@@ -1811,6 +1811,16 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
+      'Κάποιος άλλος είχε επεξεργαστεί κι αυτός το deck — συγχωνεύτηκε και αποθηκεύτηκε.',
+  'Keuzes toegepast — sla op om ze vast te leggen.':
+      'Οι επιλογές εφαρμόστηκαν — αποθηκεύστε για να καταγραφούν.',
+  'Allebei bewerkt — kies per slide':
+      'Επεξεργάστηκαν και οι δύο — επιλέξτε ανά διαφάνεια',
+  'Iemand anders bewerkte dit deck tegelijk met jou. Alles wat vanzelf kon is al samengevoegd; deze slides niet.':
+      'Κάποιος άλλος επεξεργάστηκε αυτό το deck ταυτόχρονα με εσάς. Ό,τι μπορούσε να συγχωνευτεί αυτόματα έχει ήδη συγχωνευτεί· αυτές οι διαφάνειες όχι.',
+  'Mijn versie': 'Η έκδοσή μου',
+  'Hun versie': 'Η δική τους έκδοση',
   'Vergelijken…': 'Σύγκριση…',
   'Versies vergelijken': 'Σύγκριση εκδόσεων',
   'Kies twee versies; de oudste van de twee is het vertrekpunt.':

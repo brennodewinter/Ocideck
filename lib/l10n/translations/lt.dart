@@ -1791,6 +1791,16 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
+      'Šį rinkinį redagavo ir kitas žmogus — sujungta ir išsaugota.',
+  'Keuzes toegepast — sla op om ze vast te leggen.':
+      'Pasirinkimai pritaikyti — išsaugokite, kad juos įrašytumėte.',
+  'Allebei bewerkt — kies per slide':
+      'Redagavo abu — pasirinkite kiekvienai skaidrei',
+  'Iemand anders bewerkte dit deck tegelijk met jou. Alles wat vanzelf kon is al samengevoegd; deze slides niet.':
+      'Kitas žmogus redagavo šį rinkinį tuo pačiu metu kaip ir jūs. Viskas, ką buvo galima sujungti automatiškai, jau sujungta; šios skaidrės — ne.',
+  'Mijn versie': 'Mano versija',
+  'Hun versie': 'Jų versija',
   'Vergelijken…': 'Palyginti…',
   'Versies vergelijken': 'Palyginti versijas',
   'Kies twee versies; de oudste van de twee is het vertrekpunt.':
