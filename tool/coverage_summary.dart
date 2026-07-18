@@ -41,6 +41,9 @@ const Set<String> uncoveredBaseline = {
   // zelf maakt.
   'lib/services/maswe_catalog_written.dart',
   'lib/services/maswe_catalog_draft.dart',
+  // NO EXECUTABLE LINES: idem voor de WSTG-index, sinds die uit
+  // tool/build_wstg_catalog.dart komt in plaats van met de hand overgetikt.
+  'lib/services/wstg_catalog_data.dart',
   // PLATFORM: entrypoint — runApp() never executes under the test runner.
   'lib/main.dart',
   // PLATFORM: conditional-import facades + their io/web halves.
