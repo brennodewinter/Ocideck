@@ -1,4 +1,4 @@
-.PHONY: setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions licenses sbom sbom-verify check-conventions check-method-length check-dead-code add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
+.PHONY: refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions licenses sbom sbom-verify check-conventions check-method-length check-dead-code add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -33,6 +33,7 @@ help:
 	@echo "  make check-method-length  Per-method length ratchet (AST-measured, max 150)."
 	@echo "  make check-dead-code Fail on orphaned lib/ files (unreachable from any entrypoint)."
 	@echo "  make add-l10n SPEC=… Add d('…') source strings to every language from a JSON spec."
+	@echo "  make refresh-catalogs Regenerate WSTG/MASTG/MASWE from upstream (not in check)."
 	@echo "  make l10n-check      Fast l10n gate: duplicate keys, per-language coverage, and formatting."
 	@echo "  make fix             Auto-apply 'dart fix' and reformat (local cleanup helper)."
 	@echo "  make build-web       Build the hardened web bundle (self-hosted CanvasKit + CSP-safe loader)."
@@ -263,6 +264,32 @@ deps-check:
 	@echo "        the version in lib/services/reference_standards.dart and"
 	@echo "        docs/LICENSE_COMPLIANCE.md, and re-check the source licence."
 	dart run tool/check_reference_data.dart
+
+
+# Regenerate the bundled reference catalogues from their upstream sources.
+# Downloads into a scratch dir, runs each generator, and leaves the diff for a
+# human to read — this is deliberately NOT part of `make check`: updating a
+# standard changes what a report cites, so it is a decision, not a build step.
+#
+# Afterwards: bump the version in lib/services/reference_standards.dart (and in
+# the catalogue's own const), update docs/LICENSE_COMPLIANCE.md, and re-run
+# `make deps-check` so the staleness gate agrees.
+refresh-catalogs:
+	@echo "== OciDeck: refresh bundled reference catalogues =="
+	@echo "Sources: OWASP WSTG + MASTG + MASWE, MITRE CWE."
+	@echo "This rewrites generated files under lib/services/ — read the diff."
+	@set -e; 	tmp=$$(mktemp -d); 	echo "-- WSTG"; 	curl -sfL "https://raw.githubusercontent.com/OWASP/wstg/v$(WSTG_VERSION)/checklist/checklist.json" -o $$tmp/wstg.json; 	dart run tool/build_wstg_catalog.dart $$tmp/wstg.json $(WSTG_VERSION); 	echo "-- MASTG"; 	curl -sfL "https://github.com/OWASP/mastg/archive/refs/tags/v$(MASTG_VERSION).tar.gz" | tar xz -C $$tmp; 	dart run tool/build_mastg_catalog.dart $$tmp/mastg-$(MASTG_VERSION) $(MASTG_VERSION); 	echo "-- MASWE"; 	curl -sfL "https://github.com/OWASP/maswe/archive/refs/heads/main.tar.gz" | tar xz -C $$tmp; 	dart run tool/build_maswe_catalog.dart $$tmp/maswe-main $(MASWE_DATE); 	rm -rf $$tmp
+	@echo ""
+	@echo "CWE is not refreshed here: its source is a ~30 MB zip behind a dated"
+	@echo "URL. Run tool/build_cwe_catalog.dart by hand (see its header)."
+	@dart format lib/ >/dev/null
+	@echo "Done. Read 'git diff', bump the versions, update LICENSE_COMPLIANCE.md."
+
+# The upstream versions the generators pull. Bump these, run refresh-catalogs,
+# then mirror them into lib/services/reference_standards.dart.
+WSTG_VERSION ?= 4.2
+MASTG_VERSION ?= 2.0.0
+MASWE_DATE ?= 2026-06-12
 
 # Open-source licence compliance check for all resolved dependencies.
 licenses:

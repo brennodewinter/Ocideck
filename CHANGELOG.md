@@ -369,6 +369,18 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   content is not lost, only relocated, and one undo brings it back.
 
 ### Changed
+- **De gebundelde standaarden zijn voortaan met één commando bij te werken.**
+  WSTG werd tot nu toe met de hand overgetikt; dat maakte een versiesprong duur
+  genoeg om uit te stellen — precies waardoor MASTG een half jaar bleef liggen.
+  `make refresh-catalogs` haalt WSTG, MASTG en MASWE bij de bron op en
+  genereert ze opnieuw. Bewust géén onderdeel van de gewone controle: een
+  standaard bijwerken verandert waar een rapport naar verwijst, en dat is een
+  beslissing, geen bouwstap.
+- Twee WSTG-categorieën heten nu zoals de gids ze zelf noemt — *Testing for
+  Error Handling* en *Testing for Weak Cryptography* — in plaats van de
+  ingekorte vormen die de handmatige lijst had. Het gaat om materiaal van
+  derden, dus dat wordt gereproduceerd en niet bijgeschaafd. De testlijst zelf
+  is ongewijzigd: dezelfde 97 tests met dezelfde titels.
 - **Evidence thumbnails no longer decode at full resolution.** A finding's
   evidence thumbnail is 44 pixels wide, but the screenshot behind it is usually
   a few thousand — and the whole bitmap went into memory. A report carrying
