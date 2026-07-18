@@ -34,6 +34,38 @@ void main() {
     });
   });
 
+  group('deckReleaseTlp', () {
+    Slide slideAt(TlpLevel level) =>
+        Slide.create(SlideType.bullets).copyWith(tlp: level);
+
+    test('is the deck level when no slide is stricter', () {
+      final deck = Deck(
+        title: 't',
+        slides: [slideAt(TlpLevel.none), slideAt(TlpLevel.clear)],
+        tlp: TlpLevel.green,
+      );
+      expect(deckReleaseTlp(deck), TlpLevel.green);
+    });
+
+    test('a single stricter slide raises the whole deck (the fail-safe case)',
+        () {
+      // The export gate looks at deck.tlp only; this must catch the RED slide.
+      final deck = Deck(
+        title: 't',
+        slides: [slideAt(TlpLevel.none), slideAt(TlpLevel.red)],
+        tlp: TlpLevel.none,
+      );
+      expect(deckReleaseTlp(deck), TlpLevel.red);
+    });
+
+    test('an empty deck is just its own level', () {
+      expect(
+        deckReleaseTlp(Deck(title: 't', slides: const [], tlp: TlpLevel.amber)),
+        TlpLevel.amber,
+      );
+    });
+  });
+
   group('slideVisibleAtTlp', () {
     Slide slideAt(TlpLevel level) =>
         Slide.create(SlideType.bullets).copyWith(tlp: level);
