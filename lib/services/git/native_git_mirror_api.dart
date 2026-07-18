@@ -89,6 +89,32 @@ abstract class NativeGitMirror implements DeckMirror {
   /// Push wat nog niet gepusht is (drain de lokale historie naar de forge).
   Future<GitCommitResult> sync();
 
+  /// Voeg `origin/[branch]` samen met de lokale historie na een geweigerde push
+  /// (§8.6).
+  ///
+  /// De git-kant zit hier — ophalen, de gemeenschappelijke voorouder bepalen, de
+  /// merge beginnen en er een echte merge-commit (twee ouders) van maken, zodat
+  /// de volgende push gewoon fast-forward is. De *deckmap* lost de aanroeper op:
+  /// [resolve] krijgt [deckFile] zoals hij in de voorouder, bij ons en bij hen
+  /// staat, en geeft terug wat de deckmap moet worden. Zo blijft het samenvoegen
+  /// van slides waar het thuishoort en weet dit bestand niets van decks.
+  ///
+  /// `clean: false` betekent dat de aanroeper er niet uitkwam: de merge-commit
+  /// wordt dan wél lokaal gemaakt — anders blijft de branch uiteenlopen en botst
+  /// de volgende poging opnieuw — maar niet gepusht.
+  Future<GitCommitResult> mergeRemote({
+    required String branch,
+    required String deckDir,
+    required String deckFile,
+    required String message,
+    required Future<({Map<String, Uint8List> files, bool clean})> Function(
+      Uint8List? base,
+      Uint8List? ours,
+      Uint8List? theirs,
+    )
+    resolve,
+  });
+
   /// De commits die de deckmap raakten, nieuwste eerst (§9.5). Leeg wanneer er
   /// nog geen clone/historie is.
   Future<List<GitLogEntry>> history(String deckDir, {int limit = 50});
