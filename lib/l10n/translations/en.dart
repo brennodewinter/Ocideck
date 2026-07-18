@@ -922,6 +922,13 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Meegeleverde versies invullen': 'Fill in the bundled versions',
+  'vastgelegd': 'recorded',
+  'nu beschikbaar': 'now available',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'A standard this report was tested against now has a newer version:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'That need not be wrong — the test was carried out while that version applied. The report records what was actually used.',
   'Gebundelde standaarden': 'Bundled standards',
   'geen versienummer': 'no version number',
   'Bron': 'Source',

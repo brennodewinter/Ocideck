@@ -1783,6 +1783,13 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Meegeleverde versies invullen': 'Isi versi bawaan',
+  'vastgelegd': 'tercatat',
+  'nu beschikbaar': 'kini tersedia',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Standar yang diuji kini punya versi lebih baru:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Itu belum tentu salah — pengujian dilakukan saat versi itu berlaku. Laporan mencatat apa yang benar-benar dipakai.',
   'Gebundelde standaarden': 'Standar bawaan',
   'geen versienummer': 'tanpa nomor versi',
   'Bron': 'Sumber',

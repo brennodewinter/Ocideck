@@ -1786,6 +1786,13 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Meegeleverde versies invullen': 'Doplnit přibalené verze',
+  'vastgelegd': 'zaznamenáno',
+  'nu beschikbaar': 'nyní dostupné',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Standard, vůči kterému se testovalo, má nyní novější verzi:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Nemusí to být chyba — test proběhl v době, kdy platila ta verze. Zpráva zaznamenává, co se skutečně použilo.',
   'Gebundelde standaarden': 'Přibalené standardy',
   'geen versienummer': 'bez čísla verze',
   'Bron': 'Zdroj',

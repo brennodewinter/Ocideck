@@ -1783,6 +1783,13 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Meegeleverde versies invullen': 'Täytä mukana tulevat versiot',
+  'vastgelegd': 'kirjattu',
+  'nu beschikbaar': 'nyt saatavilla',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Standardista, jota vasten testattiin, on nyt uudempi versio:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Se ei välttämättä ole virhe — testaus tehtiin, kun kyseinen versio oli voimassa. Raportti kirjaa, mitä todella käytettiin.',
   'Gebundelde standaarden': 'Mukana toimitetut standardit',
   'geen versienummer': 'ei versionumeroa',
   'Bron': 'Lähde',

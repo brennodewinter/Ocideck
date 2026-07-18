@@ -1785,6 +1785,13 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Meegeleverde versies invullen': 'Vstavi priložene različice',
+  'vastgelegd': 'zabeleženo',
+  'nu beschikbaar': 'zdaj na voljo',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Standard, proti kateremu se je preverjalo, ima zdaj novejšo različico:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'To ni nujno napaka — preverjanje je bilo opravljeno, ko je veljala ta različica. Poročilo beleži, kaj je bilo dejansko uporabljeno.',
   'Gebundelde standaarden': 'Priloženi standardi',
   'geen versienummer': 'brez številke različice',
   'Bron': 'Vir',

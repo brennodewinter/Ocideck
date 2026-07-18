@@ -1758,6 +1758,13 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Meegeleverde versies invullen': 'mI\'mey chel',
+  'vastgelegd': 'qonlu\'pu\'',
+  'nu beschikbaar': 'DaH ngaq',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'tetlh chu\' tu\'lu\':',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'qab \'oHbe\'; mI\' vIleghpu\'DI\' qaStaHvIS. lo\'lu\'pu\'bogh qon.',
   'Gebundelde standaarden': 'tetlh chuv',
   'geen versienummer': 'mI\' Hutlh',
   'Bron': 'Daq',

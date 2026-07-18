@@ -741,6 +741,13 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Meegeleverde versies invullen': 'Meilevere ferzjes ynfolje',
+  'vastgelegd': 'fêstlein',
+  'nu beschikbaar': 'no beskikber',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Fan in standert dêr\'t tsjin toetst is bestiet no in nijere ferzje:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Dat hoecht net ferkeard te wêzen — it ûndersyk is dien doe\'t dy ferzje jilde. It rapport leit fêst wat der echt brûkt is.',
   'Gebundelde standaarden': 'Bondele standerts',
   'geen versienummer': 'gjin ferzjenûmer',
   'Bron': 'Boarne',

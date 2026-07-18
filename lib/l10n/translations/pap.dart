@@ -740,6 +740,13 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Meegeleverde versies invullen': 'Yena e vershonnan inkluí',
+  'vastgelegd': 'registrá',
+  'nu beschikbaar': 'awor disponibel',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Un standar ku a wòrdu usá tin awor un vershon mas nobo:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Esei no tin ku ta robes — e investigashon a tuma lugá ora e vershon ei tabata bálido. E rapòrt ta registrá loke realmente a wòrdu usá.',
   'Gebundelde standaarden': 'Standarnan inkluí',
   'geen versienummer': 'sin number di vershon',
   'Bron': 'Fuente',

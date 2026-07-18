@@ -1791,6 +1791,13 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Meegeleverde versies invullen': 'Įrašyti pridėtas versijas',
+  'vastgelegd': 'užfiksuota',
+  'nu beschikbaar': 'dabar prieinama',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Standartas, su kuriuo lyginta, dabar turi naujesnę versiją:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Tai nebūtinai klaida — tyrimas atliktas galiojant tai versijai. Ataskaita fiksuoja, kas iš tikrųjų buvo naudota.',
   'Gebundelde standaarden': 'Pridėti standartai',
   'geen versienummer': 'be versijos numerio',
   'Bron': 'Šaltinis',

@@ -352,7 +352,8 @@ const List<EisEntry> _entries = [
     id: '4.3.2',
     part: EisPart.rapportage,
     title: 'Managementsamenvatting - Overzicht gebruikte standaarden',
-    derivation: EisDerivation.manual,
+    derivation: EisDerivation.automatic,
+    check: EisCheck.standardsRecorded,
   ),
   EisEntry(
     id: '4.3.3',

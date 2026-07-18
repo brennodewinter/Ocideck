@@ -1787,6 +1787,13 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Meegeleverde versies invullen': 'Mitglieferti Versione ysetze',
+  'vastgelegd': 'festghalte',
+  'nu beschikbaar': 'jetz verfüegbar',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Vome prüefte Standard git s jetz e nöieri Version:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Das mues nid falsch sy — d Prüefig isch gmacht worde, wo die Version golte het. De Bricht haltet fescht, was würkli bruucht worde isch.',
   'Gebundelde standaarden': 'Mitglieferti Standards',
   'geen versienummer': 'kei Versionsnummere',
   'Bron': 'Quelle',

@@ -1802,6 +1802,13 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Meegeleverde versies invullen': 'Completează versiunile incluse',
+  'vastgelegd': 'consemnată',
+  'nu beschikbaar': 'acum disponibilă',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Un standard față de care s-a testat are acum o versiune mai nouă:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Nu este neapărat o greșeală — testarea s-a făcut când acea versiune era în vigoare. Raportul consemnează ce s-a folosit efectiv.',
   'Gebundelde standaarden': 'Standarde incluse',
   'geen versienummer': 'fără număr de versiune',
   'Bron': 'Sursă',

@@ -84,3 +84,55 @@ ReferenceStandard? referenceStandardById(String id) {
   }
   return null;
 }
+
+/// De regel zoals hij in een deck wordt vastgelegd: `naam@versie`.
+String usedStandardEntry(ReferenceStandard s) =>
+    s.bundledVersion.isEmpty ? s.name : '${s.name}@${s.bundledVersion}';
+
+/// Alles wat deze build meedraagt, klaar om in een deck te zetten (EIS 4.3.2).
+List<String> currentStandardEntries() =>
+    referenceStandards.map(usedStandardEntry).toList();
+
+/// Splitst `naam@versie` terug. Een regel zonder `@` levert een lege versie —
+/// oude decks en met de hand getypte regels blijven zo gewoon leesbaar.
+({String name, String version}) parseUsedStandard(String entry) {
+  final at = entry.lastIndexOf('@');
+  if (at <= 0) return (name: entry.trim(), version: '');
+  return (
+    name: entry.substring(0, at).trim(),
+    version: entry.substring(at + 1).trim(),
+  );
+}
+
+/// De standaarden waarvan het deck een ándere versie noemt dan deze build
+/// bundelt — met per standaard de vastgelegde en de huidige versie.
+///
+/// Dit is de verouderingsmelding zonder netwerk. Het deck draagt de versie
+/// waartegen echt is getoetst; deze build draagt de nieuwste die wij kennen.
+/// Lopen die uiteen, dan is de standaard sinds dat onderzoek bijgewerkt, en dat
+/// hoort een lezer van het rapport te weten vóór het wordt verzegeld.
+///
+/// Standaarden die het deck noemt maar wij niet kennen blijven buiten beeld:
+/// daar valt niets over te zeggen, en een gok zou hier als feit gaan lezen.
+List<({String name, String recorded, String current})> outdatedStandards(
+  List<String> standardsUsed,
+) {
+  final out = <({String name, String recorded, String current})>[];
+  for (final entry in standardsUsed) {
+    final used = parseUsedStandard(entry);
+    if (used.version.isEmpty) continue;
+    for (final known in referenceStandards) {
+      if (known.name != used.name) continue;
+      if (known.bundledVersion.isNotEmpty &&
+          known.bundledVersion != used.version) {
+        out.add((
+          name: used.name,
+          recorded: used.version,
+          current: known.bundledVersion,
+        ));
+      }
+      break;
+    }
+  }
+  return out;
+}
