@@ -341,6 +341,20 @@ The available types:
   replace the file wholesale without the chart losing its look.
 
   **Ontkoppelen** (unlink) brings the numbers back into the slide.
+- **What the CSV may look like** — comma, semicolon and tab separated files are
+  all read; the separator is detected per file, so a Dutch Excel export (which
+  uses `;`) needs no conversion. A value may be wrapped in double quotes to hold
+  a comma, as in `"Amsterdam, NL"`, and `""` inside such a value is one literal
+  quote. A line break *inside* a quoted value is not supported. With a semicolon
+  or tab separator a comma is read as a decimal mark, so `10,5` is ten and a
+  half.
+- **Values that are not numbers** — a cell such as `12%`, `€ 1.000` or a bare
+  `1,234` in a comma-separated file cannot be read as a number: `1,234` is one
+  thousand two hundred thirty-four in one country and one-point-two-three-four
+  in another, and OciDeck will not guess which you meant. Such a cell is charted
+  as 0 **and named after the import**, so you can correct it at the source
+  rather than discovering a wrong chart on stage. An empty cell is left alone —
+  that is a missing value, not a mistake.
 - **Min/max** (optional) — offered for the cartesian types (bar, line, area,
   scatter, combo, waterfall) and radar. On the cartesian charts they draw
   horizontal **reference lines**; on a spider/radar chart they fix the **scale**

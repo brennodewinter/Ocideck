@@ -399,6 +399,21 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   glance from a contrast or text-density one.
 
 ### Fixed
+- **A Dutch Excel export finally charts as itself.** A spreadsheet whose decimal
+  mark is a comma writes CSV with **semicolons**, and OciDeck read the whole line
+  as one cell: labels like `Q1;10` and no series at all. The separator (comma,
+  semicolon or tab) is now detected per file. That also settles `10,5`: with a
+  semicolon between the fields a comma cannot be separating them, so it can only
+  be a decimal mark, and the value reads as ten and a half.
+- **A value that cannot be read is now said out loud instead of drawn as 0.**
+  `12%`, `€ 1.000`, or a bare `1,234` in a comma-separated file — that last one
+  is 1234 in one country and 1.234 in another, and guessing would mean inventing
+  a number. It still charts as 0, because a chart has to draw something, but the
+  import now names how many values were unreadable and shows the first few
+  verbatim so you can find them in the source file. A silent 0 is the more
+  damaging failure: it looks exactly like a real measurement of zero. An empty
+  cell stays unreported — a short row means "no value here", which is a
+  statement, not a mistake.
 - **Chart CSV from Excel no longer falls apart on quoted values.** A cell like
   `"Amsterdam, NL"` or `"1.234"` was split on the comma inside the quotes, so the
   row gained a cell, every value after it shifted one column, and the chart drew

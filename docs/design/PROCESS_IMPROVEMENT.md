@@ -331,10 +331,13 @@ the numbers.** No database — a folder of CSVs and a Markdown file.
 > Two existing guards apply and must not be lost: `resolveProjectRelative`
 > (`file_service_open.dart:70`, `:120`) rejects `../../../secret.csv` on Save As,
 > and `parseCsv` (`chart.dart`) reads quoted fields per RFC 4180 since the
-> pre-cursor fix (§18.8) — so a `"Amsterdam, NL"` from Excel survives. What it
-> still does *not* do is interpret a thousands separator: `"1,234"` now arrives
-> as one cell instead of two, but `double.tryParse` rejects it and the value
-> becomes 0. LSS will have to decide on number locales itself — see §17.
+> pre-cursor fix (§18.8) — so a `"Amsterdam, NL"` from Excel survives. It also
+> detects the separator per file, so a `;`-delimited Dutch export loads, and in
+> that case reads `10,5` as a decimal. What it still refuses is a genuinely
+> ambiguous number: a bare `1,234` in a comma-separated file is 1234 or 1.234
+> depending on origin. Those cells chart as 0 but are returned in `unreadable`
+> and surfaced, so LSS inherits a *visible* gap rather than a silent one. The
+> locale decision is still LSS's to make — see §17.
 
 ### 3.6 Deck-level metadata (front matter)
 
@@ -867,7 +870,7 @@ what §7's scene model is for.
 | **Scope creep** — the artefact list never closes | high | Engines × templates: a new artefact is data, not code (§2) |
 | **SVG/painter divergence** | high — precedent: `_maxY` duplicated verbatim | Shared scene model, injected measurer, scene-level goldens (§7) |
 | **File-size ratchet** | medium — biggest files at 97% of cap, baseline empty | `part`/`part of` split from day one; budget it (§14) |
-| ~~**`parseCsv` is naïve** — no quoted fields~~ | ~~medium~~ — **retired**, fixed ahead of this module as a standalone bugfix (§18.8): quoted fields are RFC 4180 now | Remaining, and now LSS's own call: a quoted `"1,234"` is one cell but still parses as 0, because `double.tryParse` does not do thousands separators or a comma decimal mark |
+| ~~**`parseCsv` is naïve** — no quoted fields~~ | ~~medium~~ — **retired** ahead of this module (§18.8): RFC 4180 quoting, per-file separator detection (`,` `;` tab), and a comma read as a decimal mark when the separator is not a comma | Remaining, and LSS's own call: a bare `1,234` in a comma-separated file stays ambiguous (1234 or 1.234). It charts as 0 — but `parseCsv` returns those cells in `unreadable` and the import names them, so the gap is visible rather than silent |
 | **Cpk on non-normal data** | medium — methodological malpractice | Normality verdict is mandatory alongside every capability figure (§4) |
 | **Standards/trademark** | medium | §19 — no bundled normative text, no conformance claims, naming reviewed |
 | **VSM painter complexity** | medium | Last of the engines (Phase 6), after the scene model has proven itself twice |
@@ -1075,10 +1078,12 @@ is warranted. Tracked as §20.2.
    pack write-only and revisit when a mirror host exists?
 8. ~~**`parseCsv` fix** — Phase 2 as proposed, or a separate pre-cursor PR since it
    is a pre-existing bug affecting charts today?~~ **Decided: a separate
-   pre-cursor PR**, done. It hit chart users today and nothing about the fix
-   needed this module, so it did not wait for a phase that is not built. Number
-   locales (`"1,234"`) were left out — that is a data question LSS should answer,
-   not a CSV-splitting one.
+   pre-cursor PR**, done, in two rounds. It hit chart users today and nothing
+   about the fix needed this module, so it did not wait for a phase that is not
+   built. The second round added separator detection and made unreadable cells
+   visible; what is left is only the genuinely ambiguous `1,234` in a
+   comma-separated file, which is a data question LSS should answer rather than
+   a CSV-splitting one.
 
 ---
 
