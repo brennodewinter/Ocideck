@@ -30,16 +30,27 @@ abstract class GitTransport {
     required int maxBytes,
   });
 
-  /// Als [get], maar met een body. Zelfde afspraak over fouten: een
-  /// HTTP-foutstatus komt terug in [GitResponse.status] en is aan de adapter om
-  /// te duiden — een 409 betekent bij een commit iets heel anders dan bij een
-  /// leesactie.
-  Future<GitResponse> post(
+  /// Als [get], maar schrijvend: één verzoek met [method] en een body. Zelfde
+  /// afspraak over fouten: een HTTP-foutstatus komt terug in
+  /// [GitResponse.status] en is aan de adapter om te duiden — een 409 betekent
+  /// bij een commit iets heel anders dan bij een leesactie.
+  ///
+  /// Bewust één methode in plaats van een `post` naast een `put` naast een
+  /// `patch`: de forges zijn het oneens over welk werkwoord waarbij hoort
+  /// (GitHub verzet een ref met PATCH en merget met PUT, GitLab merget met PUT,
+  /// Gitea doet vrijwel alles met POST), en elke keer een werkwoord bijbouwen
+  /// werd een terugkerende horde. [method] moet in [writeMethods] staan.
+  Future<GitResponse> send(
+    String method,
     Uri uri, {
     required Map<String, String> headers,
     required List<int> body,
     required int maxBytes,
   });
+
+  /// De schrijf-werkwoorden die een adapter mag gebruiken. Een vaste lijst, want
+  /// dit is een chokepoint: hier komt geen willekeurige string doorheen.
+  static const writeMethods = {'POST', 'PUT', 'PATCH', 'DELETE'};
 
   void close();
 }

@@ -411,7 +411,8 @@ class FakeGiteaTransport implements GitTransport {
   }
 
   @override
-  Future<GitResponse> post(
+  Future<GitResponse> send(
+    String method,
     Uri uri, {
     required Map<String, String> headers,
     required List<int> body,

@@ -350,7 +350,8 @@ class GiteaForge implements GitForge {
       );
     }
 
-    final response = await _transport.post(
+    final response = await _transport.send(
+      'POST',
       _apiUri(['contents']),
       headers: {..._headers, 'Content-Type': 'application/json'},
       body: utf8.encode(
@@ -428,7 +429,8 @@ class GiteaForge implements GitForge {
   Future<BranchRef> createBranch(String name, {required String fromRef}) async {
     _requireRef(name);
     _requireRef(fromRef);
-    final response = await _transport.post(
+    final response = await _transport.send(
+      'POST',
       _apiUri(['branches']),
       headers: {..._headers, 'Content-Type': 'application/json'},
       body: utf8.encode(
@@ -474,7 +476,8 @@ class GiteaForge implements GitForge {
   }) async {
     _requireRef(name);
     _requireRef(target);
-    final response = await _transport.post(
+    final response = await _transport.send(
+      'POST',
       _apiUri(['tags']),
       headers: {..._headers, 'Content-Type': 'application/json'},
       body: utf8.encode(
@@ -502,7 +505,8 @@ class GiteaForge implements GitForge {
   }) async {
     _requireRef(head);
     _requireRef(base);
-    final response = await _transport.post(
+    final response = await _transport.send(
+      'POST',
       _apiUri(['pulls']),
       headers: {..._headers, 'Content-Type': 'application/json'},
       body: utf8.encode(
@@ -533,7 +537,8 @@ class GiteaForge implements GitForge {
         'Ongeldig pull-request-nummer',
       );
     }
-    final response = await _transport.post(
+    final response = await _transport.send(
+      'POST',
       _apiUri(['pulls', '$number', 'merge']),
       headers: {..._headers, 'Content-Type': 'application/json'},
       body: utf8.encode(
