@@ -309,6 +309,15 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   glance from a contrast or text-density one.
 
 ### Fixed
+- **Chart CSV from Excel no longer falls apart on quoted values.** A cell like
+  `"Amsterdam, NL"` or `"1.234"` was split on the comma inside the quotes, so the
+  row gained a cell, every value after it shifted one column, and the chart drew
+  the wrong numbers — without a single warning. Quoted fields are now read per
+  RFC 4180: commas inside quotes belong to the field, and a doubled `""` is one
+  literal quote. CSV without quotes parses exactly as it did before, trimming
+  included. One limitation is deliberate and documented: a line break inside a
+  quoted field is still not supported, since a chart row is a label plus numbers
+  and has no use for one.
 - **Screen readers now announce the image buttons by name.** The paste, copy and
   clear buttons in the image picker bar, and the reset button on the zoom
   slider, were wrapped *in* a tooltip rather than carrying one. Flutter attaches

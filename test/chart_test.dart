@@ -22,7 +22,9 @@ void main() {
     });
 
     test('a quoted field may contain a comma', () {
-      final (x, series) = parseCsv(',Omzet\n"Amsterdam, NL",10\n"Parijs, FR",12');
+      final (x, series) = parseCsv(
+        ',Omzet\n"Amsterdam, NL",10\n"Parijs, FR",12',
+      );
       expect(x, ['Amsterdam, NL', 'Parijs, FR']);
       expect(series.single.data, [10, 12]);
     });
