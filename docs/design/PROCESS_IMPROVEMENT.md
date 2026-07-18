@@ -330,8 +330,11 @@ the numbers.** No database — a folder of CSVs and a Markdown file.
 
 > Two existing guards apply and must not be lost: `resolveProjectRelative`
 > (`file_service_open.dart:70`, `:120`) rejects `../../../secret.csv` on Save As,
-> and `parseCsv` (`chart.dart:371`) is naïve (no quoted fields). LSS data will hit
-> the latter — see §18.
+> and `parseCsv` (`chart.dart`) reads quoted fields per RFC 4180 since the
+> pre-cursor fix (§18.8) — so a `"Amsterdam, NL"` from Excel survives. What it
+> still does *not* do is interpret a thousands separator: `"1,234"` now arrives
+> as one cell instead of two, but `double.tryParse` rejects it and the value
+> becomes 0. LSS will have to decide on number locales itself — see §17.
 
 ### 3.6 Deck-level metadata (front matter)
 
@@ -864,7 +867,7 @@ what §7's scene model is for.
 | **Scope creep** — the artefact list never closes | high | Engines × templates: a new artefact is data, not code (§2) |
 | **SVG/painter divergence** | high — precedent: `_maxY` duplicated verbatim | Shared scene model, injected measurer, scene-level goldens (§7) |
 | **File-size ratchet** | medium — biggest files at 97% of cap, baseline empty | `part`/`part of` split from day one; budget it (§14) |
-| **`parseCsv` is naïve** (`chart.dart:371`) — no quoted fields | medium — LSS data comes from Excel and *will* contain `"1,234"` | Fix it in Phase 2 as a shared improvement; it is a pre-existing bug LSS will expose |
+| ~~**`parseCsv` is naïve** — no quoted fields~~ | ~~medium~~ — **retired**, fixed ahead of this module as a standalone bugfix (§18.8): quoted fields are RFC 4180 now | Remaining, and now LSS's own call: a quoted `"1,234"` is one cell but still parses as 0, because `double.tryParse` does not do thousands separators or a comma decimal mark |
 | **Cpk on non-normal data** | medium — methodological malpractice | Normality verdict is mandatory alongside every capability figure (§4) |
 | **Standards/trademark** | medium | §19 — no bundled normative text, no conformance claims, naming reviewed |
 | **VSM painter complexity** | medium | Last of the engines (Phase 6), after the scene model has proven itself twice |
@@ -1070,8 +1073,12 @@ is warranted. Tracked as §20.2.
    shape.
 7. **Does LSS become the sec pack's first real consumer** (§8), or do we leave the
    pack write-only and revisit when a mirror host exists?
-8. **`parseCsv` fix** — Phase 2 as proposed, or a separate pre-cursor PR since it
-   is a pre-existing bug affecting charts today?
+8. ~~**`parseCsv` fix** — Phase 2 as proposed, or a separate pre-cursor PR since it
+   is a pre-existing bug affecting charts today?~~ **Decided: a separate
+   pre-cursor PR**, done. It hit chart users today and nothing about the fix
+   needed this module, so it did not wait for a phase that is not built. Number
+   locales (`"1,234"`) were left out — that is a data question LSS should answer,
+   not a CSV-splitting one.
 
 ---
 
