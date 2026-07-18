@@ -1791,6 +1791,20 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Uitbrengen ter review…': 'Pateikti peržiūrai…',
+  'Uitbrengen ter review': 'Pateikti peržiūrai',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'Atidaro pull request iš jūsų juodraščio į pagrindinę šaką, kad ją būtų galima peržiūrėti prieš išleidžiant.',
+  'Toelichting': 'Išsami informacija',
+  'Wat is er veranderd en waarom?': 'Kas pasikeitė ir kodėl?',
+  'Uitbrengen': 'Pateikti',
+  'Uitgebracht ter review:': 'Pateikta peržiūrai:',
+  'Kopieer link': 'Kopijuoti nuorodą',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'Išleidimą užblokavo klasifikavimo politika.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'Dar nėra juodraščio pateikti — pirma išsaugokite pakeitimą.',
+  'Uitbrengen mislukt:': 'Nepavyko pateikti:',
   'Overzicht': 'Apžvalga',
   'Veelgestelde vragen': 'Dažni klausimai',
   'Probleemoplossing': 'Trikčių šalinimas',

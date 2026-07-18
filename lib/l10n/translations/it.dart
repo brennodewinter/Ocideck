@@ -736,6 +736,20 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Uitbrengen ter review…': 'Invia per revisione…',
+  'Uitbrengen ter review': 'Invia per revisione',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'Apre una pull request dalla tua bozza al ramo principale, così può essere revisionata prima di uscire.',
+  'Toelichting': 'Dettagli',
+  'Wat is er veranderd en waarom?': 'Cosa è cambiato e perché?',
+  'Uitbrengen': 'Invia',
+  'Uitgebracht ter review:': 'Inviato per revisione:',
+  'Kopieer link': 'Copia link',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'Rilascio bloccato dalla politica di classificazione.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'Non c\'è ancora una bozza da inviare — salva prima una modifica.',
+  'Uitbrengen mislukt:': 'Invio non riuscito:',
   'Overzicht': 'Panoramica',
   'Veelgestelde vragen': 'Domande frequenti',
   'Probleemoplossing': 'Risoluzione dei problemi',

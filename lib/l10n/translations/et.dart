@@ -1774,6 +1774,20 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Uitbrengen ter review…': 'Esita ülevaatuseks…',
+  'Uitbrengen ter review': 'Esita ülevaatuseks',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'Avab pull request\'i sinu mustandist peaharusse, et seda saaks enne avaldamist üle vaadata.',
+  'Toelichting': 'Üksikasjad',
+  'Wat is er veranderd en waarom?': 'Mis muutus ja miks?',
+  'Uitbrengen': 'Esita',
+  'Uitgebracht ter review:': 'Esitatud ülevaatuseks:',
+  'Kopieer link': 'Kopeeri link',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'Avaldamise blokeeris klassifitseerimispoliitika.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'Esitamiseks pole veel mustandit — salvesta esmalt muudatus.',
+  'Uitbrengen mislukt:': 'Esitamine ebaõnnestus:',
   'Overzicht': 'Ülevaade',
   'Veelgestelde vragen': 'Korduma kippuvad küsimused',
   'Probleemoplossing': 'Probleemide lahendamine',

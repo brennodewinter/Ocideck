@@ -1783,6 +1783,20 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Uitbrengen ter review…': 'Lähetä tarkistettavaksi…',
+  'Uitbrengen ter review': 'Lähetä tarkistettavaksi',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'Avaa pull requestin luonnoksestasi päähaaraan, jotta se voidaan tarkistaa ennen julkaisua.',
+  'Toelichting': 'Lisätiedot',
+  'Wat is er veranderd en waarom?': 'Mikä muuttui ja miksi?',
+  'Uitbrengen': 'Lähetä',
+  'Uitgebracht ter review:': 'Lähetetty tarkistettavaksi:',
+  'Kopieer link': 'Kopioi linkki',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'Julkaisu estetty luokittelukäytännön vuoksi.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'Lähetettävää luonnosta ei vielä ole — tallenna ensin muutos.',
+  'Uitbrengen mislukt:': 'Lähetys epäonnistui:',
   'Overzicht': 'Yleiskatsaus',
   'Veelgestelde vragen': 'Usein kysytyt kysymykset',
   'Probleemoplossing': 'Vianmääritys',

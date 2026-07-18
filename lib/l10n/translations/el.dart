@@ -1811,6 +1811,20 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Uitbrengen ter review…': 'Υποβολή για έλεγχο…',
+  'Uitbrengen ter review': 'Υποβολή για έλεγχο',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'Ανοίγει ένα pull request από το πρόχειρό σας προς τον κύριο κλάδο, ώστε να ελεγχθεί πριν δημοσιευτεί.',
+  'Toelichting': 'Λεπτομέρειες',
+  'Wat is er veranderd en waarom?': 'Τι άλλαξε και γιατί;',
+  'Uitbrengen': 'Υποβολή',
+  'Uitgebracht ter review:': 'Υποβλήθηκε για έλεγχο:',
+  'Kopieer link': 'Αντιγραφή συνδέσμου',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'Η δημοσίευση αποκλείστηκε από την πολιτική διαβάθμισης.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'Δεν υπάρχει ακόμη πρόχειρο για υποβολή — αποθηκεύστε πρώτα μια αλλαγή.',
+  'Uitbrengen mislukt:': 'Η υποβολή απέτυχε:',
   'Overzicht': 'Επισκόπηση',
   'Veelgestelde vragen': 'Συχνές ερωτήσεις',
   'Probleemoplossing': 'Αντιμετώπιση προβλημάτων',

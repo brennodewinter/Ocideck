@@ -1790,6 +1790,20 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Uitbrengen ter review…': 'Pošalji na pregled…',
+  'Uitbrengen ter review': 'Pošalji na pregled',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'Otvara pull request iz tvog koncepta prema glavnoj grani, kako bi se pregledao prije objave.',
+  'Toelichting': 'Pojedinosti',
+  'Wat is er veranderd en waarom?': 'Što se promijenilo i zašto?',
+  'Uitbrengen': 'Pošalji',
+  'Uitgebracht ter review:': 'Poslano na pregled:',
+  'Kopieer link': 'Kopiraj poveznicu',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'Objava blokirana pravilima klasifikacije.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'Još nema koncepta za slanje — najprije spremi promjenu.',
+  'Uitbrengen mislukt:': 'Slanje nije uspjelo:',
   'Overzicht': 'Pregled',
   'Veelgestelde vragen': 'Česta pitanja',
   'Probleemoplossing': 'Rješavanje problema',

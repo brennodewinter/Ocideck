@@ -1787,6 +1787,20 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Uitbrengen ter review…': 'Zur Prüefig ischicke…',
+  'Uitbrengen ter review': 'Zur Prüefig ischicke',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'Öffnet e Pull Request vo dim Entwurf zum Hauptzwyg, damit er vor de Veröffentlichig prüeft werde cha.',
+  'Toelichting': 'Erläuterig',
+  'Wat is er veranderd en waarom?': 'Was het sich gänderet und wurum?',
+  'Uitbrengen': 'Ischicke',
+  'Uitgebracht ter review:': 'Zur Prüefig ischickt:',
+  'Kopieer link': 'Link kopiere',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'Freigab dur d Klassifizierigsrichtlinie blockiert.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'S git no kei Entwurf zum ischicke — speicher zerscht e Änderig.',
+  'Uitbrengen mislukt:': 'Ischicke fehlgschlage:',
   'Overzicht': 'Übersicht',
   'Veelgestelde vragen': 'Hüüfigi Frooge',
   'Probleemoplossing': 'Fählersuechi',

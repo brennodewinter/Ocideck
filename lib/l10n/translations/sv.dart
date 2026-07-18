@@ -1782,6 +1782,20 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Uitbrengen ter review…': 'Skicka för granskning…',
+  'Uitbrengen ter review': 'Skicka för granskning',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'Öppnar en pull request från ditt utkast till huvudgrenen, så att den kan granskas innan den publiceras.',
+  'Toelichting': 'Detaljer',
+  'Wat is er veranderd en waarom?': 'Vad ändrades och varför?',
+  'Uitbrengen': 'Skicka',
+  'Uitgebracht ter review:': 'Skickad för granskning:',
+  'Kopieer link': 'Kopiera länk',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'Publicering blockerad av klassificeringspolicyn.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'Det finns inget utkast att skicka ännu — spara en ändring först.',
+  'Uitbrengen mislukt:': 'Inlämning misslyckades:',
   'Overzicht': 'Översikt',
   'Veelgestelde vragen': 'Vanliga frågor',
   'Probleemoplossing': 'Felsökning',

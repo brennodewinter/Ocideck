@@ -429,8 +429,7 @@ Future<void> _openForReview(BuildContext context, WidgetRef ref) async {
               ? null
               : SnackBarAction(
                   label: l10n.d('Kopieer link'),
-                  onPressed: () =>
-                      Clipboard.setData(ClipboardData(text: url)),
+                  onPressed: () => Clipboard.setData(ClipboardData(text: url)),
                 ),
         ),
       );
@@ -446,8 +445,7 @@ Future<void> _openForReview(BuildContext context, WidgetRef ref) async {
         SnackBar(
           content: Text(
             l10n.d(
-              'Er is nog geen concept om uit te brengen — sla eerst een '
-              'wijziging op.',
+              'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.',
             ),
           ),
         ),
@@ -530,8 +528,7 @@ class _ReviewDialogState extends State<_ReviewDialog> {
           children: [
             Text(
               l10n.d(
-                'Opent een pull request van je concept naar de hoofdbranch, '
-                'zodat het beoordeeld kan worden vóór het uitkomt.',
+                'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.',
               ),
               style: TextStyle(fontSize: 12, color: AppTheme.slate400),
             ),

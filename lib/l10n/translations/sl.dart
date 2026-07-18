@@ -1785,6 +1785,20 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Uitbrengen ter review…': 'Pošlji v pregled…',
+  'Uitbrengen ter review': 'Pošlji v pregled',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'Odpre pull request iz tvojega osnutka v glavno vejo, da ga je mogoče pregledati pred objavo.',
+  'Toelichting': 'Podrobnosti',
+  'Wat is er veranderd en waarom?': 'Kaj se je spremenilo in zakaj?',
+  'Uitbrengen': 'Pošlji',
+  'Uitgebracht ter review:': 'Poslano v pregled:',
+  'Kopieer link': 'Kopiraj povezavo',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'Objavo je blokiral pravilnik o klasifikaciji.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'Osnutka za pošiljanje še ni — najprej shrani spremembo.',
+  'Uitbrengen mislukt:': 'Pošiljanje ni uspelo:',
   'Overzicht': 'Pregled',
   'Veelgestelde vragen': 'Pogosta vprašanja',
   'Probleemoplossing': 'Odpravljanje težav',

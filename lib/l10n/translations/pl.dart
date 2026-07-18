@@ -1796,6 +1796,20 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Uitbrengen ter review…': 'Wyślij do recenzji…',
+  'Uitbrengen ter review': 'Wyślij do recenzji',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'Otwiera pull request z Twojej wersji roboczej do gałęzi głównej, aby można ją było sprawdzić przed publikacją.',
+  'Toelichting': 'Szczegóły',
+  'Wat is er veranderd en waarom?': 'Co się zmieniło i dlaczego?',
+  'Uitbrengen': 'Wyślij',
+  'Uitgebracht ter review:': 'Wysłano do recenzji:',
+  'Kopieer link': 'Kopiuj link',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'Publikacja zablokowana przez zasady klasyfikacji.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'Nie ma jeszcze wersji roboczej do wysłania — najpierw zapisz zmianę.',
+  'Uitbrengen mislukt:': 'Wysyłanie nie powiodło się:',
   'Overzicht': 'Przegląd',
   'Veelgestelde vragen': 'Częste pytania',
   'Probleemoplossing': 'Rozwiązywanie problemów',

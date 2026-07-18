@@ -1787,6 +1787,20 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Uitbrengen ter review…': 'Beküldés felülvizsgálatra…',
+  'Uitbrengen ter review': 'Beküldés felülvizsgálatra',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'Pull requestet nyit a piszkozatodból a fő ágba, hogy a kiadás előtt átnézhető legyen.',
+  'Toelichting': 'Részletek',
+  'Wat is er veranderd en waarom?': 'Mi változott és miért?',
+  'Uitbrengen': 'Beküldés',
+  'Uitgebracht ter review:': 'Beküldve felülvizsgálatra:',
+  'Kopieer link': 'Hivatkozás másolása',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'A kiadást a besorolási szabályzat letiltotta.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'Még nincs beküldhető piszkozat — előbb ments el egy módosítást.',
+  'Uitbrengen mislukt:': 'A beküldés sikertelen:',
   'Overzicht': 'Áttekintés',
   'Veelgestelde vragen': 'Gyakori kérdések',
   'Probleemoplossing': 'Hibaelhárítás',

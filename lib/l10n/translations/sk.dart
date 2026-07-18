@@ -1790,6 +1790,20 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Uitbrengen ter review…': 'Odoslať na kontrolu…',
+  'Uitbrengen ter review': 'Odoslať na kontrolu',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'Otvorí pull request z tvojho konceptu do hlavnej vetvy, aby sa dal skontrolovať pred vydaním.',
+  'Toelichting': 'Podrobnosti',
+  'Wat is er veranderd en waarom?': 'Čo sa zmenilo a prečo?',
+  'Uitbrengen': 'Odoslať',
+  'Uitgebracht ter review:': 'Odoslané na kontrolu:',
+  'Kopieer link': 'Kopírovať odkaz',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'Vydanie zablokovala klasifikačná politika.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'Zatiaľ nie je koncept na odoslanie — najprv ulož zmenu.',
+  'Uitbrengen mislukt:': 'Odoslanie zlyhalo:',
   'Overzicht': 'Prehľad',
   'Veelgestelde vragen': 'Časté otázky',
   'Probleemoplossing': 'Riešenie problémov',

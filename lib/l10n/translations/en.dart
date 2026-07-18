@@ -922,6 +922,20 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Uitbrengen ter review…': 'Submit for review…',
+  'Uitbrengen ter review': 'Submit for review',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'Opens a pull request from your draft to the main branch, so it can be reviewed before it goes out.',
+  'Toelichting': 'Details',
+  'Wat is er veranderd en waarom?': 'What changed and why?',
+  'Uitbrengen': 'Submit',
+  'Uitgebracht ter review:': 'Submitted for review:',
+  'Kopieer link': 'Copy link',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'Release blocked by the classification policy.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'There is no draft to release yet — save a change first.',
+  'Uitbrengen mislukt:': 'Submit failed:',
   'Overzicht': 'Overview',
   'Veelgestelde vragen': 'Frequently asked questions',
   'Probleemoplossing': 'Troubleshooting',
