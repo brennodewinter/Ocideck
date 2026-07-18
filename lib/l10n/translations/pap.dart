@@ -742,6 +742,18 @@ const _dutchSourcePap = {
 const _dutchSourceAddPap = {
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'No por a lesa e datos di grafiko; e grafikonan ei ta keda bashí:',
+  'Meegeleverde versies invullen': 'Yena e vershonnan inkluí',
+  'vastgelegd': 'registrá',
+  'nu beschikbaar': 'awor disponibel',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Un standar ku a wòrdu usá tin awor un vershon mas nobo:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Esei no tin ku ta robes — e investigashon a tuma lugá ora e vershon ei tabata bálido. E rapòrt ta registrá loke realmente a wòrdu usá.',
+  'Gebundelde standaarden': 'Standarnan inkluí',
+  'geen versienummer': 'sin number di vershon',
+  'Bron': 'Fuente',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'E vershonnan den e kopia aki. Un rapòrt di pentest mester menshoná kontra kiko a wòrdu testá — i kua vershon esei tabata.',
   'Zoeken in alle decks…': 'Buska den tur e deknan…',
   'Zoeken in alle decks': 'Buska den tur e deknan',
   'Zoekterm': 'Palabra di buskeda',

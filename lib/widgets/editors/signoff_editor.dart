@@ -165,7 +165,11 @@ class _SignOffEditorState extends ConsumerState<SignOffEditor>
     }
     final initial =
         ref.read(deckProvider).deck?.signature ?? const DocumentSignature();
-    final result = await FinalizeSealDialog.show(context, initial: initial);
+    final result = await FinalizeSealDialog.show(
+      context,
+      initial: initial,
+      standardsUsed: ref.read(deckProvider).deck?.standardsUsed ?? const [],
+    );
     if (result == null || !mounted) return;
     notifier.finalizeAndSeal(signature: result.signature);
     if (!mounted) return;

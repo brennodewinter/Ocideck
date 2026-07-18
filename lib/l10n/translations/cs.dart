@@ -1788,6 +1788,18 @@ const _dutchSourceCs = {
 const _dutchSourceAddCs = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Data grafu se nepodařilo načíst; tyto grafy zůstanou prázdné:',
+  'Meegeleverde versies invullen': 'Doplnit přibalené verze',
+  'vastgelegd': 'zaznamenáno',
+  'nu beschikbaar': 'nyní dostupné',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Standard, vůči kterému se testovalo, má nyní novější verzi:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Nemusí to být chyba — test proběhl v době, kdy platila ta verze. Zpráva zaznamenává, co se skutečně použilo.',
+  'Gebundelde standaarden': 'Přibalené standardy',
+  'geen versienummer': 'bez čísla verze',
+  'Bron': 'Zdroj',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Verze v tomto exempláři. Zpráva z pentestu má uvádět, vůči čemu se testovalo — a v jaké verzi.',
   'Zoeken in alle decks…': 'Hledat ve všech sadách…',
   'Zoeken in alle decks': 'Hledat ve všech sadách',
   'Zoekterm': 'Hledaný výraz',

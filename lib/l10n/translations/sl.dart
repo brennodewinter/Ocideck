@@ -1787,6 +1787,18 @@ const _dutchSourceSl = {
 const _dutchSourceAddSl = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Podatkov grafikona ni bilo mogoče prebrati; ti grafikoni ostanejo prazni:',
+  'Meegeleverde versies invullen': 'Vstavi priložene različice',
+  'vastgelegd': 'zabeleženo',
+  'nu beschikbaar': 'zdaj na voljo',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Standard, proti kateremu se je preverjalo, ima zdaj novejšo različico:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'To ni nujno napaka — preverjanje je bilo opravljeno, ko je veljala ta različica. Poročilo beleži, kaj je bilo dejansko uporabljeno.',
+  'Gebundelde standaarden': 'Priloženi standardi',
+  'geen versienummer': 'brez številke različice',
+  'Bron': 'Vir',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Različice v tem izvodu. Poročilo o pentestu mora navesti, proti čemu se je preverjalo — in katera različica je bila to.',
   'Zoeken in alle decks…': 'Iskanje po vseh kompletih…',
   'Zoeken in alle decks': 'Iskanje po vseh kompletih',
   'Zoekterm': 'Iskalni izraz',

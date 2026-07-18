@@ -743,6 +743,18 @@ const _dutchSourceFy = {
 const _dutchSourceAddFy = {
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Grafykdata koe net lêzen wurde; dy grafiken bliuwe leech:',
+  'Meegeleverde versies invullen': 'Meilevere ferzjes ynfolje',
+  'vastgelegd': 'fêstlein',
+  'nu beschikbaar': 'no beskikber',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Fan in standert dêr\'t tsjin toetst is bestiet no in nijere ferzje:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Dat hoecht net ferkeard te wêzen — it ûndersyk is dien doe\'t dy ferzje jilde. It rapport leit fêst wat der echt brûkt is.',
+  'Gebundelde standaarden': 'Bondele standerts',
+  'geen versienummer': 'gjin ferzjenûmer',
+  'Bron': 'Boarne',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'De ferzjes yn dit eksimplaar. In pentestrapport heart te fermelden wêrtsjin toetst is — en hokker ferzje dat wie.',
   'Zoeken in alle decks…': 'Sykje yn alle decks…',
   'Zoeken in alle decks': 'Sykje yn alle decks',
   'Zoekterm': 'Sykterm',

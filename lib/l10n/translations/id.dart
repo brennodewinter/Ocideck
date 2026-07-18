@@ -1785,6 +1785,18 @@ const _dutchSourceId = {
 const _dutchSourceAddId = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Data bagan tidak dapat dibaca; bagan tersebut tetap kosong:',
+  'Meegeleverde versies invullen': 'Isi versi bawaan',
+  'vastgelegd': 'tercatat',
+  'nu beschikbaar': 'kini tersedia',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Standar yang diuji kini punya versi lebih baru:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Itu belum tentu salah — pengujian dilakukan saat versi itu berlaku. Laporan mencatat apa yang benar-benar dipakai.',
+  'Gebundelde standaarden': 'Standar bawaan',
+  'geen versienummer': 'tanpa nomor versi',
+  'Bron': 'Sumber',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Versi yang ada dalam salinan ini. Laporan pentest harus menyebutkan terhadap apa pengujian dilakukan — dan versi mana itu.',
   'Zoeken in alle decks…': 'Cari di semua dek…',
   'Zoeken in alle decks': 'Cari di semua dek',
   'Zoekterm': 'Kata pencarian',

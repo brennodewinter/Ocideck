@@ -133,6 +133,21 @@ class Deck {
   /// finding sections (PENTEST_MIAUW §12.3).
   final String language;
 
+  /// De standaarden waartegen dit onderzoek is uitgevoerd, elk als
+  /// `naam@versie` — bijvoorbeeld `OWASP WSTG@4.2`. Leeg wanneer niet
+  /// vastgelegd. MIAUW EIS 4.3.2 vraagt om dit overzicht.
+  ///
+  /// **De versie staat hier bevroren, en dat is het hele punt.** Het zou
+  /// eenvoudiger zijn om alleen de naam op te slaan en de versie bij het
+  /// renderen uit het register van gebundelde standaarden te halen. Dan zou een
+  /// rapport uit 2026, geopend in een OciDeck die inmiddels WSTG 5.0 meedraagt,
+  /// beweren dat er tegen 5.0 is getoetst. Een rapport is een verantwoording
+  /// achteraf: wat er stond moet blijven staan, ook als de wereld doorloopt.
+  ///
+  /// Precies dat maakt veroudering zonder netwerk zichtbaar — wat het deck
+  /// noemt naast wat deze build bundelt, zie `outdatedStandards`.
+  final List<String> standardsUsed;
+
   /// Traffic Light Protocol-classificatie van deze presentatie.
   final TlpLevel tlp;
 
@@ -225,6 +240,7 @@ class Deck {
     this.description = '',
     this.keywords = '',
     this.language = '',
+    this.standardsUsed = const [],
     this.tlp = TlpLevel.none,
     this.privacy = PrivacyDisposition.warn,
     this.presentationTargetSeconds = 0,
@@ -257,6 +273,7 @@ class Deck {
     String? description,
     String? keywords,
     String? language,
+    List<String>? standardsUsed,
     TlpLevel? tlp,
     PrivacyDisposition? privacy,
     int? presentationTargetSeconds,
@@ -288,6 +305,7 @@ class Deck {
       description: description ?? this.description,
       keywords: keywords ?? this.keywords,
       language: language ?? this.language,
+      standardsUsed: standardsUsed ?? this.standardsUsed,
       tlp: tlp ?? this.tlp,
       privacy: privacy ?? this.privacy,
       presentationTargetSeconds:

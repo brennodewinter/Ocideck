@@ -738,6 +738,18 @@ const _dutchSourceIt = {
 const _dutchSourceAddIt = {
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Impossibile leggere i dati dei grafici; quei grafici restano vuoti:',
+  'Meegeleverde versies invullen': 'Inserisci le versioni incluse',
+  'vastgelegd': 'registrata',
+  'nu beschikbaar': 'ora disponibile',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Uno standard usato per questo test ha ora una versione più recente:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Non è necessariamente un errore: il test è stato svolto quando valeva quella versione. Il report registra ciò che è stato realmente usato.',
+  'Gebundelde standaarden': 'Standard inclusi',
+  'geen versienummer': 'nessun numero di versione',
+  'Bron': 'Fonte',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Le versioni presenti in questa copia. Un report di pentest deve indicare rispetto a cosa si è testato — e quale versione era.',
   'Zoeken in alle decks…': 'Cerca in tutte le presentazioni…',
   'Zoeken in alle decks': 'Cerca in tutte le presentazioni',
   'Zoekterm': 'Termine di ricerca',

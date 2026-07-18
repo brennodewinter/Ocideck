@@ -1815,6 +1815,18 @@ const _dutchSourcePt = {
 const _dutchSourceAddPt = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Não foi possível ler os dados do gráfico; esses gráficos ficam vazios:',
+  'Meegeleverde versies invullen': 'Preencher as versões incluídas',
+  'vastgelegd': 'registada',
+  'nu beschikbaar': 'agora disponível',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Uma norma contra a qual se testou tem agora uma versão mais recente:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Não tem de estar errado — o teste foi feito quando essa versão vigorava. O relatório regista o que foi realmente usado.',
+  'Gebundelde standaarden': 'Normas incluídas',
+  'geen versienummer': 'sem número de versão',
+  'Bron': 'Fonte',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'As versões presentes nesta cópia. Um relatório de pentest deve indicar contra o que foi testado — e qual a versão.',
   'Zoeken in alle decks…': 'Pesquisar em todos os decks…',
   'Zoeken in alle decks': 'Pesquisar em todos os decks',
   'Zoekterm': 'Termo de pesquisa',

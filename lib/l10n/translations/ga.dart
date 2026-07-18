@@ -1821,6 +1821,18 @@ const _dutchSourceGa = {
 const _dutchSourceAddGa = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Níorbh fhéidir sonraí an chairt a léamh; fanfaidh na cairteacha sin folamh:',
+  'Meegeleverde versies invullen': 'Líon isteach na leaganacha cuimsithe',
+  'vastgelegd': 'taifeadta',
+  'nu beschikbaar': 'ar fáil anois',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Tá leagan níos nuaí anois ag caighdeán a úsáideadh don tástáil:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Ní gá gur botún é sin — rinneadh an tástáil nuair a bhí an leagan sin i bhfeidhm. Taifeadann an tuairisc a úsáideadh i ndáiríre.',
+  'Gebundelde standaarden': 'Caighdeáin chuimsithe',
+  'geen versienummer': 'gan uimhir leagain',
+  'Bron': 'Foinse',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Na leaganacha sa chóip seo. Ba cheart do thuairisc pentest a rá cad ina choinne a rinneadh tástáil — agus cén leagan a bhí ann.',
   'Zoeken in alle decks…': 'Cuardaigh gach deic…',
   'Zoeken in alle decks': 'Cuardaigh gach deic',
   'Zoekterm': 'Téarma cuardaigh',

@@ -1,15 +1,33 @@
 # OciDeck — Agentic Build Plan for the Pentest / AI Feature Set (Design)
 
-> **Status: build plan — nothing implemented yet.**
+> **Status: HISTORICAL — this plan has been executed. Do not run it.**
+> It said "nothing implemented yet" long after the work it plans had shipped;
+> corrected 2026-07-18.
+>
+> The capabilities it decomposes are built: the MIAUW pentest module (see
+> [`PENTEST_MIAUW.md`](PENTEST_MIAUW.md)) and AI assist Phases 0–3 (see
+> [`AI_ASSIST.md`](AI_ASSIST.md), where Phase 4 / MCP is the only open item).
+> Running the work packages below would rebuild things that already exist.
+>
+> **One package is actively wrong to execute: P0-MOD**, which specifies the pack
+> fetch / mirror provisioning pipeline. That pipeline was built, tested, never
+> went live, and was **removed on 2026-07-16** — see `PENTEST_MIAUW.md` §6, "Why
+> the provisioning pipeline went". The module is now a plain on/off toggle over
+> built-in catalogues with no network egress. Do not reinstate it.
+>
+> Kept because the decomposition, the isolation rules and the §7 human decision
+> gates are a **reusable pattern** for the next agentic build, and because §7
+> records which calls were escalated to a human rather than guessed. Read it as a
+> worked example, not as a queue.
+>
+> Original framing follows.
+>
 > This document is the **execution plan** for building the capabilities specified
 > in [`PENTEST_MIAUW.md`](PENTEST_MIAUW.md) and [`AI_ASSIST.md`](AI_ASSIST.md)
 > using **autonomous AI agents** (Claude Code agents / the Workflow orchestrator).
 > It does not add new product design — it decomposes the already-validated design
 > into agent-executable work packages, orders their dependencies, and defines the
 > isolation and verification that make an agentic build safe in this repo.
->
-> Read the two design docs first; this plan assumes them. It is written to be
-> **picked up cold** by an orchestrator.
 
 ---
 

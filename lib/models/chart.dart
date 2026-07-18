@@ -438,9 +438,67 @@ class ChartSpec {
   }
 }
 
+/// Split one CSV line into cells, honouring RFC 4180 quoting: a field wrapped
+/// in double quotes may contain commas, and a doubled `""` inside it is one
+/// literal quote. Unquoted fields keep the historical behaviour and are
+/// trimmed; a quoted field's content is taken verbatim, so `" a "` keeps its
+/// inner spaces.
+///
+/// Deliberately lenient about malformed input, because the CSV comes from
+/// whatever a user exported: an unterminated quote runs to the end of the line,
+/// and characters between a closing quote and the next comma are discarded.
+List<String> _csvCells(String line) {
+  final cells = <String>[];
+  var i = 0;
+  while (true) {
+    final start = i;
+    // Tolerate space before an opening quote, so ` "Amsterdam, NL"` still
+    // reads as one quoted field.
+    while (i < line.length && (line[i] == ' ' || line[i] == '\t')) {
+      i++;
+    }
+
+    if (i < line.length && line[i] == '"') {
+      i++; // opening quote
+      final field = StringBuffer();
+      while (i < line.length) {
+        if (line[i] != '"') {
+          field.write(line[i]);
+          i++;
+        } else if (i + 1 < line.length && line[i + 1] == '"') {
+          field.write('"');
+          i += 2;
+        } else {
+          i++; // closing quote
+          break;
+        }
+      }
+      cells.add(field.toString());
+      while (i < line.length && line[i] != ',') {
+        i++;
+      }
+    } else {
+      final comma = line.indexOf(',', i);
+      final end = comma == -1 ? line.length : comma;
+      cells.add(line.substring(start, end).trim());
+      i = end;
+    }
+
+    if (i >= line.length) return cells;
+    i++; // the separating comma
+  }
+}
+
 /// Parse CSV text into (x labels, series). The first row is a header whose
 /// first cell is ignored (the label column) and whose remaining cells are the
 /// series names; each later row is `label, v1, v2, …`.
+///
+/// Quoted fields are understood per RFC 4180 (see [_csvCells]), with one
+/// documented exception: a newline inside a quoted field is **not** supported.
+/// Rows are split on line breaks before fields are parsed, so such a value is
+/// torn across two rows. Chart data is one label plus numbers per row, where an
+/// embedded newline has no legitimate use; supporting it would mean scanning
+/// the whole document instead of per line. Blank lines are skipped.
 (List<String>, List<ChartSeries>) parseCsv(String csv) {
   final lines = csv
       .replaceAll('\r\n', '\n')
@@ -449,16 +507,13 @@ class ChartSpec {
       .toList();
   if (lines.isEmpty) return (const [], const []);
 
-  List<String> cells(String line) =>
-      line.split(',').map((c) => c.trim()).toList();
-
-  final header = cells(lines.first);
+  final header = _csvCells(lines.first);
   final seriesNames = header.length > 1 ? header.sublist(1) : <String>[];
   final x = <String>[];
   final seriesData = [for (final _ in seriesNames) <double>[]];
 
   for (final line in lines.skip(1)) {
-    final row = cells(line);
+    final row = _csvCells(line);
     if (row.isEmpty) continue;
     x.add(row.first);
     for (var i = 0; i < seriesNames.length; i++) {

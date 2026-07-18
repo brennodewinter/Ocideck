@@ -1784,6 +1784,18 @@ const _dutchSourceLv = {
 const _dutchSourceAddLv = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Diagrammas datus nevarēja nolasīt; šīs diagrammas paliek tukšas:',
+  'Meegeleverde versies invullen': 'Ievietot iekļautās versijas',
+  'vastgelegd': 'reģistrēts',
+  'nu beschikbaar': 'tagad pieejams',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Standartam, pret kuru tika testēts, tagad ir jaunāka versija:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Tā nav obligāti kļūda — pārbaude notika, kad bija spēkā tā versija. Ziņojums fiksē, kas patiešām tika izmantots.',
+  'Gebundelde standaarden': 'Iekļautie standarti',
+  'geen versienummer': 'bez versijas numura',
+  'Bron': 'Avots',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Šajā eksemplārā iekļautās versijas. Pentesta ziņojumā jānorāda, pret ko tika testēts — un kura versija tā bija.',
   'Zoeken in alle decks…': 'Meklēt visās kavās…',
   'Zoeken in alle decks': 'Meklēt visās kavās',
   'Zoekterm': 'Meklējamais vārds',

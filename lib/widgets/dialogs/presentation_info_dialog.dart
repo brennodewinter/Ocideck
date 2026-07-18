@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/deck.dart';
 import '../../l10n/app_localizations.dart';
 import '../../state/settings_provider.dart';
+import '../../services/reference_standards.dart';
 import '../../theme/app_theme.dart';
 import 'new_deck_dialog.dart' show ThemeProfileSwatch;
 import 'settings_dialog.dart';
@@ -21,6 +22,9 @@ class PresentationInfo {
   /// De taal waarin het rapport geschreven wordt (MIAUW EIS 2.3), als taalcode;
   /// leeg = niet vastgelegd.
   final String language;
+
+  /// De standaarden waartegen is getoetst, als `naam@versie` (MIAUW EIS 4.3.2).
+  final List<String> standardsUsed;
   final int presentationTargetSeconds;
   final bool showRehearsalSummary;
 
@@ -39,6 +43,7 @@ class PresentationInfo {
     required this.description,
     required this.keywords,
     required this.language,
+    this.standardsUsed = const [],
     this.presentationTargetSeconds = 0,
     this.showRehearsalSummary = true,
     this.playOnly = false,
@@ -93,6 +98,7 @@ class _PresentationInfoDialogState
   late final TextEditingController _date;
   late final TextEditingController _description;
   late final TextEditingController _keywords;
+  late final TextEditingController _standards;
   String _language = '';
   late int _presentationTargetSeconds;
   late bool _useCustomTarget;
@@ -111,6 +117,9 @@ class _PresentationInfoDialogState
     _date = TextEditingController(text: widget.deck.date);
     _description = TextEditingController(text: widget.deck.description);
     _keywords = TextEditingController(text: widget.deck.keywords);
+    _standards = TextEditingController(
+      text: widget.deck.standardsUsed.join(', '),
+    );
     _language = widget.deck.language;
     _presentationTargetSeconds = widget.deck.presentationTargetSeconds;
     _useCustomTarget =
@@ -133,6 +142,7 @@ class _PresentationInfoDialogState
     _date.dispose();
     _description.dispose();
     _keywords.dispose();
+    _standards.dispose();
     _customMinutes.dispose();
     super.dispose();
   }
@@ -149,6 +159,11 @@ class _PresentationInfoDialogState
         description: _description.text.trim(),
         keywords: _keywords.text.trim(),
         language: _language,
+        standardsUsed: _standards.text
+            .split(',')
+            .map((e) => e.trim())
+            .where((e) => e.isNotEmpty)
+            .toList(),
         presentationTargetSeconds: _presentationTargetSeconds,
         showRehearsalSummary: _showRehearsalSummary,
         playOnly: _playOnly,
@@ -305,8 +320,34 @@ class _PresentationInfoDialogState
           'Trefwoorden',
           'Komma-gescheiden, bijv. kwartaal, cijfers, 2026',
         ),
+        const SizedBox(height: 12),
+        _standardsField(),
       ],
     );
+  }
+
+  /// De standaarden waartegen is getoetst (MIAUW EIS 4.3.2).
+  ///
+  /// Met een knop in het veld die de versies invult die deze build meedraagt.
+  /// Dat is een startpunt, geen waarheid: wie tegen een oudere versie heeft
+  /// getoetst, past de regel aan. Daarom een tekstveld en geen aanvinklijst —
+  /// de vastlegging moet ook standaarden kunnen noemen die OciDeck niet kent.
+  ///
+  /// De knop zit ín het veld en niet op een eigen regel: deze dialoog is al
+  /// dicht en groeide anders voorbij een 800×600-venster.
+  Widget _standardsField() => _field(
+    _standards,
+    'Gebruikte standaarden',
+    'Komma-gescheiden, bijv. OWASP WSTG@4.2',
+    suffix: IconButton(
+      icon: const Icon(Icons.playlist_add, size: 18),
+      tooltip: context.l10n.d('Meegeleverde versies invullen'),
+      onPressed: _fillCurrentStandards,
+    ),
+  );
+
+  void _fillCurrentStandards() {
+    setState(() => _standards.text = currentStandardEntries().join(', '));
   }
 
   /// Stijlprofielkeuze, hier zichtbaar naast de metadata: veel gebruikers
@@ -504,6 +545,7 @@ class _PresentationInfoDialogState
     String hint, {
     int maxLines = 1,
     VoidCallback? onDoubleTap,
+    Widget? suffix,
   }) {
     final l10n = context.l10n;
     final field = TextField(
@@ -514,6 +556,7 @@ class _PresentationInfoDialogState
         hintText: l10n.d(hint),
         isDense: true,
         border: const OutlineInputBorder(),
+        suffixIcon: suffix,
       ),
     );
     if (onDoubleTap == null) return field;

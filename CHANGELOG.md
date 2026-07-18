@@ -8,6 +8,38 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Een rapport legt nu vast tegen welke standaarden is getoetst — met versie.**
+  Bij *Presentatie-info* vul je de gebruikte standaarden in, met een knop die de
+  versies invult die deze versie van OciDeck meedraagt. Die versies worden
+  **bevroren** in het bestand: een rapport uit dit jaar dat je volgend jaar
+  opent, blijft zeggen waartegen er destijds echt is getoetst, ook als OciDeck
+  inmiddels een nieuwere standaard meelevert. Dat maakt meteen zichtbaar wanneer
+  er iets veranderd is: bij *Afronden & verzegelen* meldt OciDeck het als een
+  standaard sinds het onderzoek is bijgewerkt — geen blokkade, want tegen een
+  oudere versie toetsen is legitiem, maar het hoort geen verrassing achteraf te
+  zijn.
+
+  MIAUW-eis 4.3.2 blijft wél iets dat je zelf bevestigt. Dat stond hier
+  aanvankelijk anders — de eis werd automatisch afgevinkt zodra je standaarden
+  had vastgelegd. Dat was onterecht: 4.3.2 vraagt om een overzicht *in de
+  managementsamenvatting*, en de vastlegging in het bestand komt niet in de
+  slides terecht die de klant krijgt. Een compliance-vinkje mag niet afgaan op
+  iets dat in de levering ontbreekt, dus de eis staat weer op handmatig
+  bevestigen. De vastlegging en de verouderingsmelding blijven gewoon werken.
+- **Zichtbaar welke versie van elke standaard erin zit — en een poort die merkt
+  wanneer die achterloopt.** OciDeck draagt referentiedata mee (OWASP WSTG,
+  MITRE CWE, het MIAUW-schema, de CVSS-specificatie). Welke versie dat was, stond
+  tot nu toe alleen in proza verspreid over code en documentatie, en niets
+  controleerde het — zo kan een gebundelde standaard jarenlang verouderen zonder
+  dat iemand het merkt. *Instellingen → Over* toont nu per standaard de versie,
+  wat er precies van gebundeld is, de licentie en de bron. Daarnaast vergelijkt
+  `make deps-check` die versies met de bron en meldt wat achterloopt. **Elke**
+  gebundelde standaard wordt echt bevraagd — OWASP via zijn releases, MITRE via
+  de CWE-API, FIRST door te kijken of er al een nieuwere specificatie is
+  gepubliceerd — zodat een nieuwe versie niet in stilte voorbij kan gaan. Bij CWE
+  controleert de poort meteen of de gebundelde lijst even veel zwakheden bevat
+  als de bron zegt, want een half geregenereerde bundel is een stillere fout dan
+  een verouderde.
 - **A chart can keep its numbers in a separate file, without giving up the
   grid.** A chart with forty rows used to bury hundreds of numbers in the
   presentation file, which made the markdown hard to read and its version
@@ -329,6 +361,15 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   glance from a contrast or text-density one.
 
 ### Fixed
+- **Chart CSV from Excel no longer falls apart on quoted values.** A cell like
+  `"Amsterdam, NL"` or `"1.234"` was split on the comma inside the quotes, so the
+  row gained a cell, every value after it shifted one column, and the chart drew
+  the wrong numbers — without a single warning. Quoted fields are now read per
+  RFC 4180: commas inside quotes belong to the field, and a doubled `""` is one
+  literal quote. CSV without quotes parses exactly as it did before, trimming
+  included. One limitation is deliberate and documented: a line break inside a
+  quoted field is still not supported, since a chart row is a label plus numbers
+  and has no use for one.
 - **A chart whose data lives in a separate file no longer loses that data when
   saved to git, opened on the web, or shown on the beamer.** A chart slide can
   keep its numbers in a file next to the deck (`data/…`) and leave only a
