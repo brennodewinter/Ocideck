@@ -1,5 +1,6 @@
 import '../models/checklist_spec.dart';
 import '../models/checklist_template.dart';
+import 'mastg_catalog.dart';
 import 'wstg_catalog.dart';
 
 /// A loadable set of checklist rows presented uniformly in the "load tests"
@@ -33,6 +34,24 @@ ChecklistSource wstgChecklistSource() => ChecklistSource(
   ],
 );
 
+/// De ingebouwde OWASP MASTG-bronnen, één per platform.
+///
+/// Bewust gesplitst en niet één lijst van 186: een mobiele pentest raakt zelden
+/// beide platforms, en een checklist waarvan de helft niet van toepassing is
+/// wordt niet afgewerkt maar weggeklikt. Het etiket noemt het platform, zodat
+/// op de slide te zien blijft welke helft is gebruikt.
+ChecklistSource mastgChecklistSource(String platform) {
+  final label = platform == 'ios' ? 'iOS' : 'Android';
+  return ChecklistSource(
+    label: '${MastgCatalog.instance.standardLabel} — $label',
+    standardLabel: MastgCatalog.instance.standardLabel,
+    rows: [
+      for (final t in MastgCatalog.instance.forPlatform(platform))
+        ChecklistRow(id: t.id, test: t.title),
+    ],
+  );
+}
+
 /// A source built from a user-created [template].
 ChecklistSource templateChecklistSource(ChecklistTemplate template) =>
     ChecklistSource(
@@ -43,8 +62,11 @@ ChecklistSource templateChecklistSource(ChecklistTemplate template) =>
       ],
     );
 
-/// Every available source: WSTG first, then the user's [custom] templates.
+/// Every available source: the bundled standards first, then the user's
+/// [custom] templates.
 List<ChecklistSource> checklistSources(List<ChecklistTemplate> custom) => [
   wstgChecklistSource(),
+  mastgChecklistSource('android'),
+  mastgChecklistSource('ios'),
   for (final t in custom) templateChecklistSource(t),
 ];

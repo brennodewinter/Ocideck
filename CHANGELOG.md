@@ -8,6 +8,15 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Mobiele pentests krijgen hun checklist: OWASP MASTG zit erin.** Tot nu toe
+  kon je een scope-object wel als *mobiel* aanmerken — met MASTG als standaard —
+  maar viel die checklist niet te vullen; alleen de webkant (WSTG) was gebundeld.
+  Nu staan de 186 tests van **MASTG v2.0.0** erin, apart voor Android en iOS,
+  omdat een mobiele test zelden beide raakt en een lijst waarvan de helft niet
+  van toepassing is toch wordt weggeklikt. De testlijst komt uit de herbouwde
+  v2-uitgave van 30 juni 2026; de tests die OWASP daarbij heeft ingetrokken en
+  de nog ongeschreven plaatshouders zitten er bewust niet in — die zouden een
+  controle beloven die niemand kan uitvoeren.
 - **Vastleggen welke hulpmiddelen bij het onderzoek zijn gebruikt.** Bij
   *Presentatie-info* noteer je per regel een tool met versie, publieke
   referentie en een korte beschrijving — precies de drie dingen die MIAUW-eis
