@@ -23,13 +23,20 @@ void main() {
       expect(ids.toSet(), hasLength(ids.length));
     });
 
-    test('een bevraagbare standaard noemt zijn doelwit', () {
+    test('élke standaard is bij de bron te controleren', () {
+      // Dit is de regel, niet een eigenschap die toevallig geldt: een nieuwe
+      // versie mag niet in stilte voorbijgaan. CWE en CVSS stonden eerst als
+      // "niet te bevragen" in het register, tot bleek dat MITRE een REST-API
+      // heeft en FIRST per versie een schema op een vaste URL publiceert. Dat
+      // was luiheid, geen eigenschap van de bron. Voeg je een standaard toe,
+      // dan hoort daar een manier bij om hem te controleren.
       for (final s in referenceStandards) {
-        if (s.probe == UpstreamProbe.manual) continue;
         expect(
           s.probeTarget,
           isNotEmpty,
-          reason: '${s.id}: probe zonder doelwit is een stille no-op',
+          reason:
+              '${s.id}: een probe zonder doelwit is een stille no-op — zoek '
+              'uit hoe de bron zijn versie publiceert',
         );
       }
     });
@@ -47,6 +54,25 @@ void main() {
     // erger dan geen poort.
     test('de WSTG-versie is dezelfde als in de catalogus', () {
       expect(referenceStandardById('wstg')!.bundledVersion, wstgVersion);
+    });
+
+    test('de CVSS-versie past bij de opvolger-probe', () {
+      // successorDocument leidt kandidaten af uit `major.minor`; een andere
+      // vorm zou stil nul kandidaten opleveren en dus nooit iets vinden.
+      final cvss = referenceStandardById('cvss')!;
+      expect(cvss.probe, UpstreamProbe.successorDocument);
+      expect(cvss.bundledVersion, matches(r'^\d+\.\d+$'));
+      expect(
+        cvss.probeTarget,
+        contains('{version}'),
+        reason: 'zonder plaatshouder valt er niets in te vullen',
+      );
+    });
+
+    test('de CWE-probe wijst naar de API, niet naar de downloadpagina', () {
+      final cwe = referenceStandardById('cwe')!;
+      expect(cwe.probe, UpstreamProbe.cweApi);
+      expect(cwe.probeTarget, startsWith('https://cwe-api.mitre.org/'));
     });
 
     test('de MIAUW-versie is een datum, want de probe rekent ermee', () {

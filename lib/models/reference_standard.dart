@@ -1,9 +1,16 @@
 /// Hoe de actuele upstream-versie van een standaard te achterhalen is.
 ///
 /// Het onderscheid dat telt is niet "nieuw of oud" maar **"gecontroleerd of
-/// niet"**. Een standaard die we niet automatisch kunnen bevragen mag nooit
-/// voorbijkomen als "actueel" — dan zou stilte als goedkeuring lezen, en precies
-/// dat is hoe een gebundelde catalogus jarenlang onopgemerkt veroudert.
+/// niet"**: een bron die we niet bevragen mag nooit voorbijkomen als "actueel",
+/// want dan leest stilte als goedkeuring — precies hoe een gebundelde catalogus
+/// jarenlang onopgemerkt veroudert.
+///
+/// **Er is met opzet geen `manual`-waarde.** Die stond er eerst wel, voor CWE en
+/// CVSS, tot bleek dat beide gewoon te bevragen zijn: MITRE heeft een REST-API
+/// en FIRST publiceert per versie een schema op een voorspelbare URL. "Niet te
+/// controleren" was luiheid, geen eigenschap van de bron. Blijkt een toekomstige
+/// bron écht gesloten, voeg de waarde dan terug mét de reden — maar begin er
+/// niet mee.
 enum UpstreamProbe {
   /// De releases van een GitHub-repo (`owner/repo` in [ReferenceStandard.probeTarget]);
   /// vergelijkt de release-tag met [ReferenceStandard.bundledVersion].
@@ -19,9 +26,20 @@ enum UpstreamProbe {
   /// ordenbaar, dus hier kan "nieuwer dan wat wij hebben" echt worden vastgesteld.
   githubReleaseDate,
 
-  /// Niet automatisch te bevragen: de bron publiceert geen machineleesbare
-  /// release-aanduiding. De poort meldt dit als **onbekend**, niet als actueel.
-  manual,
+  /// MITRE's CWE REST API (`cwe-api.mitre.org`), die naast de versie ook de
+  /// inhoudsdatum en het **aantal** zwakheden geeft. Dat aantal is een
+  /// gratis integriteitscontrole: wijkt onze bundel ervan af, dan is hij
+  /// afgekapt of half geregenereerd, en dat is een ander soort fout dan
+  /// veroudering.
+  cweApi,
+
+  /// Bron die geen "laatste versie" publiceert, maar wél per versie een
+  /// document op een voorspelbare URL. We proberen de **opvolgers** van wat we
+  /// bundelen: bestaat `…v4.1…` of `…v5.0…` al, dan is er iets nieuwers.
+  ///
+  /// Levert geen versienummer op maar wel het antwoord dat telt — of we
+  /// achterlopen. FIRST publiceert de CVSS-specificatie zo.
+  successorDocument,
 }
 
 /// Eén gebundelde referentiestandaard: wat we ervan meedragen, welke versie dat
