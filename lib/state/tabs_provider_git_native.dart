@@ -103,7 +103,10 @@ extension TabsNotifierGitNative on TabsNotifier {
         origin.branch != branch) {
       workBranch = origin.branch;
     } else {
-      final generated = GitRepoLayout.workBranch(deckName, now ?? DateTime.now());
+      final generated = GitRepoLayout.workBranch(
+        deckName,
+        now ?? DateTime.now(),
+      );
       if (generated == null) {
         throw const GitForgeException(
           GitForgeError.malformed,

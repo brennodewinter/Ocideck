@@ -255,7 +255,9 @@ class _NativeGitMirror implements NativeGitMirror {
   Future<void> _ensureOnWorkBranch(String branch, String start) async {
     if (await _currentBranch() == branch) return;
     if (!await _refExists(branch)) {
-      final from = await _refExists('origin/$branch') ? 'origin/$branch' : start;
+      final from = await _refExists('origin/$branch')
+          ? 'origin/$branch'
+          : start;
       await _run(['branch'], operands: [branch, from]);
     }
     await _run(['checkout'], operands: [branch]);
@@ -274,7 +276,10 @@ class _NativeGitMirror implements NativeGitMirror {
   /// Of [ref] naar een commit verwijst (een branch bestaat, lokaal of remote).
   Future<bool> _refExists(String ref) async {
     try {
-      await _run(['rev-parse', '--verify', '--quiet'], operands: ['$ref^{commit}']);
+      await _run(
+        ['rev-parse', '--verify', '--quiet'],
+        operands: ['$ref^{commit}'],
+      );
       return true;
     } on GitCliException {
       return false;

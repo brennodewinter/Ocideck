@@ -47,16 +47,18 @@ void main() {
       expect(deckReleaseTlp(deck), TlpLevel.green);
     });
 
-    test('a single stricter slide raises the whole deck (the fail-safe case)',
-        () {
-      // The export gate looks at deck.tlp only; this must catch the RED slide.
-      final deck = Deck(
-        title: 't',
-        slides: [slideAt(TlpLevel.none), slideAt(TlpLevel.red)],
-        tlp: TlpLevel.none,
-      );
-      expect(deckReleaseTlp(deck), TlpLevel.red);
-    });
+    test(
+      'a single stricter slide raises the whole deck (the fail-safe case)',
+      () {
+        // The export gate looks at deck.tlp only; this must catch the RED slide.
+        final deck = Deck(
+          title: 't',
+          slides: [slideAt(TlpLevel.none), slideAt(TlpLevel.red)],
+          tlp: TlpLevel.none,
+        );
+        expect(deckReleaseTlp(deck), TlpLevel.red);
+      },
+    );
 
     test('an empty deck is just its own level', () {
       expect(

@@ -143,43 +143,46 @@ void main() {
       expect(File('$verify/assets/abc123.png').existsSync(), isTrue);
     });
 
-    test('commitDeck met een werkbranch pusht die branch, niet main (D3)', () async {
-      await mirror.prepareForOpen();
-      const work = 'decks/kwartaalcijfers/2026-07-18';
+    test(
+      'commitDeck met een werkbranch pusht die branch, niet main (D3)',
+      () async {
+        await mirror.prepareForOpen();
+        const work = 'decks/kwartaalcijfers/2026-07-18';
 
-      final first = await mirror.commitDeck(
-        deckDir,
-        {'$deckDir/deck.md': _b('# Concept-ronde\n')},
-        'concept 1',
-        workBranch: work,
-        forkFrom: 'main',
-      );
-      expect(first.outcome, GitCommitOutcome.pushed);
+        final first = await mirror.commitDeck(
+          deckDir,
+          {'$deckDir/deck.md': _b('# Concept-ronde\n')},
+          'concept 1',
+          workBranch: work,
+          forkFrom: 'main',
+        );
+        expect(first.outcome, GitCommitOutcome.pushed);
 
-      // Een tweede opslag blijft op dezelfde werkbranch voortbouwen.
-      final second = await mirror.commitDeck(
-        deckDir,
-        {'$deckDir/deck.md': _b('# Concept-ronde 2\n')},
-        'concept 2',
-        workBranch: work,
-        forkFrom: 'main',
-      );
-      expect(second.outcome, GitCommitOutcome.pushed);
+        // Een tweede opslag blijft op dezelfde werkbranch voortbouwen.
+        final second = await mirror.commitDeck(
+          deckDir,
+          {'$deckDir/deck.md': _b('# Concept-ronde 2\n')},
+          'concept 2',
+          workBranch: work,
+          forkFrom: 'main',
+        );
+        expect(second.outcome, GitCommitOutcome.pushed);
 
-      // Op de origin: main draagt de beginversie, de werkbranch onze ronde.
-      final verify = '${temp.path}/verifywb';
-      await _rawGit(['clone', bare, verify], temp.path);
-      expect(
-        File('$verify/$deckDir/deck.md').readAsStringSync(),
-        contains('# Kwartaalcijfers'),
-        reason: 'main ongemoeid',
-      );
-      await _rawGit(['checkout', work], verify);
-      expect(
-        File('$verify/$deckDir/deck.md').readAsStringSync(),
-        contains('Concept-ronde 2'),
-      );
-    });
+        // Op de origin: main draagt de beginversie, de werkbranch onze ronde.
+        final verify = '${temp.path}/verifywb';
+        await _rawGit(['clone', bare, verify], temp.path);
+        expect(
+          File('$verify/$deckDir/deck.md').readAsStringSync(),
+          contains('# Kwartaalcijfers'),
+          reason: 'main ongemoeid',
+        );
+        await _rawGit(['checkout', work], verify);
+        expect(
+          File('$verify/$deckDir/deck.md').readAsStringSync(),
+          contains('Concept-ronde 2'),
+        );
+      },
+    );
 
     test('niets veranderd → unchanged', () async {
       await mirror.prepareForOpen();

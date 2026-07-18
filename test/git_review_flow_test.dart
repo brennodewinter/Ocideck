@@ -5,7 +5,6 @@ import 'dart:typed_data';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
-import 'package:ocideck/models/git_settings.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/recovery_service.dart';
@@ -64,15 +63,17 @@ void main() {
     );
   }
 
-  Deck deckWith({required TlpLevel deckTlp, List<TlpLevel> slideTlps = const []}) =>
-      Deck(
-        title: 'Kwartaal',
-        tlp: deckTlp,
-        slides: [
-          for (final t in slideTlps)
-            Slide.create(SlideType.bullets).copyWith(tlp: t),
-        ],
-      );
+  Deck deckWith({
+    required TlpLevel deckTlp,
+    List<TlpLevel> slideTlps = const [],
+  }) => Deck(
+    title: 'Kwartaal',
+    tlp: deckTlp,
+    slides: [
+      for (final t in slideTlps)
+        Slide.create(SlideType.bullets).copyWith(tlp: t),
+    ],
+  );
 
   group('openForReview classification gate (fail-closed)', () {
     test('opens a PR from the work branch when the gate is green', () async {
@@ -114,31 +115,33 @@ void main() {
       expect(forge.repo.pulls, isEmpty); // fail-closed: niets naar de forge
     });
 
-    test('a single RED slide in a none-deck is caught (max effective TLP)',
-        () async {
-      // Dit is het venijn: de export-gate kijkt naar deck.tlp (none → altijd
-      // toegestaan). De release-gate moet de RED-slide vangen.
-      final (container, tabs) = build();
-      final forge = FakeForge(repo());
-      seedOnWorkBranch(
-        container,
-        deckWith(
-          deckTlp: TlpLevel.none,
-          slideTlps: const [TlpLevel.none, TlpLevel.red],
-        ),
-      );
+    test(
+      'a single RED slide in a none-deck is caught (max effective TLP)',
+      () async {
+        // Dit is het venijn: de export-gate kijkt naar deck.tlp (none → altijd
+        // toegestaan). De release-gate moet de RED-slide vangen.
+        final (container, tabs) = build();
+        final forge = FakeForge(repo());
+        seedOnWorkBranch(
+          container,
+          deckWith(
+            deckTlp: TlpLevel.none,
+            slideTlps: const [TlpLevel.none, TlpLevel.red],
+          ),
+        );
 
-      final result = await tabs.openForReview(
-        forge,
-        config: config,
-        settings: const AppSettings(maxReleaseExportTlpKey: 'amber'),
-        title: 't',
-        body: 'b',
-      );
+        final result = await tabs.openForReview(
+          forge,
+          config: config,
+          settings: const AppSettings(maxReleaseExportTlpKey: 'amber'),
+          title: 't',
+          body: 'b',
+        );
 
-      expect(result.status, ReviewStatus.blocked);
-      expect(forge.repo.pulls, isEmpty);
-    });
+        expect(result.status, ReviewStatus.blocked);
+        expect(forge.repo.pulls, isEmpty);
+      },
+    );
 
     test('no gate configured: any deck may be released', () async {
       final (container, tabs) = build();
@@ -158,28 +161,31 @@ void main() {
   });
 
   group('openForReview guards', () {
-    test('a tab still on the default branch has no concept to release', () async {
-      final (container, tabs) = build();
-      final forge = FakeForge(repo());
-      final tab = container.read(tabsProvider).current!;
-      tab.deckNotifier.loadDeck(deckWith(deckTlp: TlpLevel.green));
-      tab.gitOrigin = const GitOrigin(
-        config: config,
-        branch: 'main', // niet op een werkbranch
-        deckDir: deckDir,
-        baseSha: 'commit-main',
-      );
+    test(
+      'a tab still on the default branch has no concept to release',
+      () async {
+        final (container, tabs) = build();
+        final forge = FakeForge(repo());
+        final tab = container.read(tabsProvider).current!;
+        tab.deckNotifier.loadDeck(deckWith(deckTlp: TlpLevel.green));
+        tab.gitOrigin = const GitOrigin(
+          config: config,
+          branch: 'main', // niet op een werkbranch
+          deckDir: deckDir,
+          baseSha: 'commit-main',
+        );
 
-      final result = await tabs.openForReview(
-        forge,
-        config: config,
-        settings: const AppSettings(),
-        title: 't',
-        body: 'b',
-      );
+        final result = await tabs.openForReview(
+          forge,
+          config: config,
+          settings: const AppSettings(),
+          title: 't',
+          body: 'b',
+        );
 
-      expect(result.status, ReviewStatus.notOnWorkBranch);
-      expect(forge.repo.pulls, isEmpty);
-    });
+        expect(result.status, ReviewStatus.notOnWorkBranch);
+        expect(forge.repo.pulls, isEmpty);
+      },
+    );
   });
 }

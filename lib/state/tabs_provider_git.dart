@@ -243,7 +243,10 @@ extension TabsNotifierGit on TabsNotifier {
       workBranch = origin.branch;
       forkFrom = null;
     } else {
-      final generated = GitRepoLayout.workBranch(deckName, now ?? DateTime.now());
+      final generated = GitRepoLayout.workBranch(
+        deckName,
+        now ?? DateTime.now(),
+      );
       if (generated == null) {
         throw const GitForgeException(
           GitForgeError.malformed,

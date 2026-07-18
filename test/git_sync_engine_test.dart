@@ -444,35 +444,38 @@ void main() {
   group('work branch (D3)', () {
     const work = 'decks/kwartaalcijfers/2026-07-18';
 
-    test('a round that began offline: the flush creates the work branch', () async {
-      // The first save of a round happened on an aeroplane: the work branch
-      // never got created. forkFrom lets the flush make it on landing, so
-      // "verbinding kwijt is nooit werk kwijt" holds even for the first save.
-      await mirror.writeDeck('decks/kwartaalcijfers', {
-        'decks/kwartaalcijfers/deck.md': _b('# Concept'),
-      });
-      await outbox.enqueue(
-        const PendingCommit(
-          deckDir: 'decks/kwartaalcijfers',
-          branch: work, // a branch that does not exist yet
-          message: 'concept',
-          baseSha: '', // no base known offline; the flush fills it
-          forkFrom: 'main',
-        ),
-      );
-      expect(repo.branches.containsKey(work), isFalse);
+    test(
+      'a round that began offline: the flush creates the work branch',
+      () async {
+        // The first save of a round happened on an aeroplane: the work branch
+        // never got created. forkFrom lets the flush make it on landing, so
+        // "verbinding kwijt is nooit werk kwijt" holds even for the first save.
+        await mirror.writeDeck('decks/kwartaalcijfers', {
+          'decks/kwartaalcijfers/deck.md': _b('# Concept'),
+        });
+        await outbox.enqueue(
+          const PendingCommit(
+            deckDir: 'decks/kwartaalcijfers',
+            branch: work, // a branch that does not exist yet
+            message: 'concept',
+            baseSha: '', // no base known offline; the flush fills it
+            forkFrom: 'main',
+          ),
+        );
+        expect(repo.branches.containsKey(work), isFalse);
 
-      final outcome = await engineWith(
-        FakeForge(repo),
-      ).flushDeck('decks/kwartaalcijfers');
+        final outcome = await engineWith(
+          FakeForge(repo),
+        ).flushDeck('decks/kwartaalcijfers');
 
-      expect(outcome.status, SyncStatus.committed);
-      // The branch now exists, forked from main, carrying our commit; main is
-      // untouched — landing on it is a separate, gated act (the review PR).
-      expect(repo.branches[work], outcome.sha);
-      expect(repo.branches['main'], 'commit-main');
-      expect(await outbox.isEmpty, isTrue);
-    });
+        expect(outcome.status, SyncStatus.committed);
+        // The branch now exists, forked from main, carrying our commit; main is
+        // untouched — landing on it is a separate, gated act (the review PR).
+        expect(repo.branches[work], outcome.sha);
+        expect(repo.branches['main'], 'commit-main');
+        expect(await outbox.isEmpty, isTrue);
+      },
+    );
 
     test('an existing work branch is committed onto, not recreated', () async {
       repo.branches[work] = 'commit-main'; // created earlier in the round

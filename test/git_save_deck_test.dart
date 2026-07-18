@@ -185,11 +185,17 @@ theme: ocideck
       );
 
       expect(second.status, GitSaveStatus.committed);
-      expect(container.read(tabsProvider).current!.gitOrigin!.branch, workBranch);
+      expect(
+        container.read(tabsProvider).current!.gitOrigin!.branch,
+        workBranch,
+      );
       expect(repo.branches[workBranch], second.sha);
       expect(repo.branches[workBranch], isNot(first.sha));
       // Geen tweede werkbranch aangemaakt.
-      expect(repo.branches.containsKey('decks/kwartaalcijfers/2026-07-20'), isFalse);
+      expect(
+        repo.branches.containsKey('decks/kwartaalcijfers/2026-07-20'),
+        isFalse,
+      );
     });
 
     test('poolt een mem:-afbeelding en verwijst ernaar in deck.md', () async {
@@ -227,40 +233,43 @@ theme: ocideck
       expect(utf8.decode(repo.files['$deckDir/deck.md']!), contains(ref));
     });
 
-    test('een nieuw deck zonder herkomst start ook op een werkbranch', () async {
-      final (container, tabs) = build();
-      // Repo zonder dit deck; alleen een branch.
-      final repo = FakeRepo(branches: {'main': 'commit-main'}, files: {});
-      final forge = FakeForge(repo);
+    test(
+      'een nieuw deck zonder herkomst start ook op een werkbranch',
+      () async {
+        final (container, tabs) = build();
+        // Repo zonder dit deck; alleen een branch.
+        final repo = FakeRepo(branches: {'main': 'commit-main'}, files: {});
+        final forge = FakeForge(repo);
 
-      seedDeck(
-        container,
-        deckWith([
-          Slide.create(
-            SlideType.bullets,
-          ).copyWith(title: 'Nieuw', bullets: const ['punt']),
-        ]),
-      );
+        seedDeck(
+          container,
+          deckWith([
+            Slide.create(
+              SlideType.bullets,
+            ).copyWith(title: 'Nieuw', bullets: const ['punt']),
+          ]),
+        );
 
-      final result = await tabs.saveToGit(
-        forge,
-        config: config,
-        deckDir: 'decks/nieuwplan',
-        branch: 'main',
-        message: 'eerste versie',
-        now: DateTime(2026, 7, 18),
-      );
+        final result = await tabs.saveToGit(
+          forge,
+          config: config,
+          deckDir: 'decks/nieuwplan',
+          branch: 'main',
+          message: 'eerste versie',
+          now: DateTime(2026, 7, 18),
+        );
 
-      expect(result.status, GitSaveStatus.committed);
-      expect(repo.files['decks/nieuwplan/deck.md'], isNotNull);
-      // Ook een nieuw deck landt op een concept-branch, niet op main.
-      expect(repo.branches['decks/nieuwplan/2026-07-18'], result.sha);
-      expect(repo.branches['main'], 'commit-main');
-      final origin = container.read(tabsProvider).current!.gitOrigin!;
-      expect(origin.deckDir, 'decks/nieuwplan');
-      expect(origin.branch, 'decks/nieuwplan/2026-07-18');
-      expect(origin.baseSha, result.sha);
-    });
+        expect(result.status, GitSaveStatus.committed);
+        expect(repo.files['decks/nieuwplan/deck.md'], isNotNull);
+        // Ook een nieuw deck landt op een concept-branch, niet op main.
+        expect(repo.branches['decks/nieuwplan/2026-07-18'], result.sha);
+        expect(repo.branches['main'], 'commit-main');
+        final origin = container.read(tabsProvider).current!.gitOrigin!;
+        expect(origin.deckDir, 'decks/nieuwplan');
+        expect(origin.branch, 'decks/nieuwplan/2026-07-18');
+        expect(origin.baseSha, result.sha);
+      },
+    );
 
     test(
       'een verzette werkbranch komt terug als conflict, niet als fout',
