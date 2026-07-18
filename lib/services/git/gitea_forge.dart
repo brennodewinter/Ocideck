@@ -525,6 +525,7 @@ class GiteaForge implements GitForge {
   Future<PullRequestRef> mergePullRequest(
     int number, {
     PullRequestMergeMethod method = PullRequestMergeMethod.merge,
+    bool deleteBranch = false,
   }) async {
     if (number <= 0) {
       throw const GitForgeException(
@@ -535,7 +536,12 @@ class GiteaForge implements GitForge {
     final response = await _transport.post(
       _apiUri(['pulls', '$number', 'merge']),
       headers: {..._headers, 'Content-Type': 'application/json'},
-      body: utf8.encode(jsonEncode({'Do': method.name})),
+      body: utf8.encode(
+        jsonEncode({
+          'Do': method.name,
+          if (deleteBranch) 'delete_branch_after_merge': true,
+        }),
+      ),
       maxBytes: maxListingBytes,
     );
     // Gitea meldt "kan nog niet mergen" (open reviews, conflicten) als 405.
@@ -554,6 +560,30 @@ class GiteaForge implements GitForge {
       state: 'merged',
       merged: true,
     );
+  }
+
+  @override
+  Future<PullRequestRef?> pullRequestForBranch(String head) async {
+    _requireRef(head);
+    final response = await _transport.get(
+      _apiUri(['pulls'], query: {'state': 'open', 'limit': '50'}),
+      headers: _headers,
+      maxBytes: maxListingBytes,
+    );
+    _checkStatus(response.status);
+    final json = _decodeJson(response.bytes);
+    if (json is! List) {
+      throw const GitForgeException(
+        GitForgeError.malformed,
+        'Onverwacht antwoord op een pull-request-listing',
+      );
+    }
+    _requireEntryCount(json.length);
+    for (final raw in json) {
+      final pr = _pullRef(raw);
+      if (pr != null && pr.head == head.trim()) return pr;
+    }
+    return null;
   }
 
   BranchRef? _branchRef(Object? raw) {
@@ -578,11 +608,15 @@ class GiteaForge implements GitForge {
     if (raw is! Map) return null;
     final number = raw['number'];
     if (number is! int) return null;
+    final head = raw['head'];
+    final base = raw['base'];
     return PullRequestRef(
       number: number,
       url: raw['html_url'] is String ? raw['html_url'] as String : '',
       state: raw['state'] is String ? raw['state'] as String : 'open',
       merged: raw['merged'] == true,
+      head: head is Map && head['ref'] is String ? head['ref'] as String : '',
+      base: base is Map && base['ref'] is String ? base['ref'] as String : '',
     );
   }
 

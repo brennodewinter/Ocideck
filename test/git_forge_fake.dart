@@ -257,6 +257,8 @@ class FakeForge implements GitForge {
       number: pull.number,
       url: 'fake://pull/${pull.number}',
       state: 'open',
+      head: head.trim(),
+      base: base.trim(),
     );
   }
 
@@ -264,6 +266,7 @@ class FakeForge implements GitForge {
   Future<PullRequestRef> mergePullRequest(
     int number, {
     PullRequestMergeMethod method = PullRequestMergeMethod.merge,
+    bool deleteBranch = false,
   }) async {
     final pull = repo.pulls.firstWhere(
       (p) => p.number == number,
@@ -275,12 +278,30 @@ class FakeForge implements GitForge {
     // Merge = de base-branch schuift naar de head-commit.
     pull.merged = true;
     repo.branches[pull.base.trim()] = repo.resolveSha(pull.head);
+    if (deleteBranch) repo.branches.remove(pull.head.trim());
     return PullRequestRef(
       number: number,
       url: 'fake://pull/$number',
       state: 'merged',
       merged: true,
     );
+  }
+
+  @override
+  Future<PullRequestRef?> pullRequestForBranch(String head) async {
+    _requireRef(head);
+    for (final p in repo.pulls) {
+      if (!p.merged && p.head.trim() == head.trim()) {
+        return PullRequestRef(
+          number: p.number,
+          url: 'fake://pull/${p.number}',
+          state: 'open',
+          head: p.head.trim(),
+          base: p.base.trim(),
+        );
+      }
+    }
+    return null;
   }
 }
 
@@ -329,6 +350,21 @@ class FakeGiteaTransport implements GitTransport {
             'name': e.key,
             'commit': {'sha': e.value},
           },
+      ]);
+    }
+
+    if (segments.first == 'pulls' && segments.length == 1) {
+      return _json([
+        for (final p in repo.pulls)
+          if (!p.merged)
+            {
+              'number': p.number,
+              'html_url': 'https://forge.example/pulls/${p.number}',
+              'state': 'open',
+              'merged': false,
+              'head': {'ref': p.head},
+              'base': {'ref': p.base},
+            },
       ]);
     }
 
@@ -418,6 +454,8 @@ class FakeGiteaTransport implements GitTransport {
         'html_url': 'https://forge.example/pulls/${pull.number}',
         'state': 'open',
         'merged': false,
+        'head': {'ref': pull.head},
+        'base': {'ref': pull.base},
       });
     }
 
@@ -430,8 +468,12 @@ class FakeGiteaTransport implements GitTransport {
           .cast<FakePull?>()
           .firstWhere((p) => true, orElse: () => null);
       if (pull == null) return _notFound();
+      final p = jsonDecode(utf8.decode(body)) as Map<String, Object?>;
       pull.merged = true;
       repo.branches[pull.base] = repo.resolveSha(pull.head);
+      if (p['delete_branch_after_merge'] == true) {
+        repo.branches.remove(pull.head);
+      }
       return GitResponse(200, Uint8List(0)); // Gitea: lege body bij succes
     }
 

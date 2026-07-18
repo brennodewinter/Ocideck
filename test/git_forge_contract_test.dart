@@ -456,6 +456,44 @@ void runGitForgeContract(String name, GitForge Function(FakeRepo) build) {
         expect(await forge.headSha('main'), committed.sha);
       });
 
+      test('finds the open pull request for a branch, by head', () async {
+        await forge.createBranch(work, fromRef: 'main');
+        expect(await forge.pullRequestForBranch(work), isNull);
+        final opened = await forge.openPullRequest(
+          head: work,
+          base: 'main',
+          title: 'Review',
+        );
+        final found = await forge.pullRequestForBranch(work);
+        expect(found, isNotNull);
+        expect(found!.number, opened.number);
+        expect(found.head, work);
+        expect(found.base, 'main');
+        // A branch with no PR is null, not a stray match.
+        expect(await forge.pullRequestForBranch('main'), isNull);
+      });
+
+      test('a merged pull request is no longer found for its branch', () async {
+        await forge.createBranch(work, fromRef: 'main');
+        await forge.commitFiles(
+          branch: work,
+          message: 'x',
+          upserts: {'decks/kwartaalcijfers/deck.md': _b('# Nieuw')},
+          deletes: const [],
+          baseSha: await forge.headSha(work),
+        );
+        final pr = await forge.openPullRequest(
+          head: work,
+          base: 'main',
+          title: 'Review',
+        );
+        await forge.mergePullRequest(pr.number, deleteBranch: true);
+        expect(await forge.pullRequestForBranch(work), isNull);
+        // Pruned: the merged work branch is gone.
+        final names = (await forge.listBranches()).map((b) => b.name).toSet();
+        expect(names, isNot(contains(work)));
+      });
+
       test('refuses an unsafe branch or tag name', () async {
         await expectLater(
           forge.createBranch('-evil', fromRef: 'main'),
