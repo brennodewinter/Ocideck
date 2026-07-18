@@ -125,6 +125,67 @@ void main() {
       expect(env['GIT_CONFIG_GLOBAL'], anyOf('/dev/null', 'NUL'));
     });
 
+    test('geen enkele GIT_*/SSH_* uit de schil komt mee (OQ-10)', () async {
+      // Het venijn zit hier: het token gaat als `http.extraHeader` mee, en dat
+      // is een Authorization-header. Zou de omgeving van de gebruiker
+      // doorlekken, dan bepaalt zíjn schil of git die header wegschrijft —
+      // GIT_TRACE_CURL samen met GIT_TRACE_REDACT=0 doet dat onverkort. En
+      // GIT_ASKPASS/GIT_SSH_COMMAND/GIT_PROXY_COMMAND/GIT_EXTERNAL_DIFF wijzen
+      // een commando aan dat git uitvoert.
+      await git.run(['status'], workingDirectory: sandbox.path);
+      final env = rec.calls.single.env!;
+
+      const mustNotBeInherited = [
+        'GIT_TRACE',
+        'GIT_TRACE2',
+        'GIT_TRACE2_EVENT',
+        'GIT_TRACE2_PERF',
+        'GIT_TRACE_PACKET',
+        'GIT_TRACE_CURL',
+        'GIT_CURL_VERBOSE',
+        'GIT_CONFIG_PARAMETERS',
+        'GIT_ASKPASS',
+        'SSH_ASKPASS',
+        'GIT_SSH',
+        'GIT_SSH_COMMAND',
+        'GIT_PROXY_COMMAND',
+        'GIT_EXTERNAL_DIFF',
+        'GIT_PAGER',
+        'GIT_EDITOR',
+        'GIT_DIR',
+        'GIT_WORK_TREE',
+        'GIT_INDEX_FILE',
+        'GIT_OBJECT_DIRECTORY',
+        'GIT_ALTERNATE_OBJECT_DIRECTORIES',
+        'GIT_NAMESPACE',
+      ];
+      for (final key in mustNotBeInherited) {
+        expect(
+          env.containsKey(key),
+          isFalse,
+          reason: '$key hoort de app niet te kunnen overkomen',
+        );
+      }
+      // Redigeren staat vast aan, mocht een header ergens tóch langs een trace
+      // komen.
+      expect(env['GIT_TRACE_REDACT'], '1');
+    });
+
+    test('de omgeving is compleet genoeg om git te kúnnen starten', () async {
+      // De keerzijde van dichttimmeren: zonder PATH vindt het proces `git` niet
+      // meer, en op Windows zonder SystemRoot laden de socket-DLL's niet. Dit is
+      // wat de e2e-tests hieronder in de praktijk bewijzen; hier staat het als
+      // eis genoteerd, ook op de platforms waar die tests niet draaien.
+      await git.run(['status'], workingDirectory: sandbox.path);
+      final env = rec.calls.single.env!;
+      expect(env['PATH'], isNotNull, reason: 'anders is `git` onvindbaar');
+      expect(env['PATH'], isNotEmpty);
+      if (Platform.isWindows) {
+        expect(env['SystemRoot'] ?? env['SYSTEMROOT'], isNotNull);
+        expect(env['PATHEXT'], isNotNull);
+      }
+    });
+
     test('het token gaat via de omgeving, nooit in argv', () async {
       const secret = 'Authorization: Basic aBcDeF123';
       await git.run(
