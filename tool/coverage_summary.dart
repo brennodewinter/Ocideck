@@ -36,6 +36,11 @@ const Set<String> uncoveredBaseline = {
   // file crosses the 1000-line ratchet.
   'lib/services/mastg_catalog_android.dart',
   'lib/services/mastg_catalog_ios.dart',
+  // NO EXECUTABLE LINES: idem voor de gegenereerde MASWE-lijst, gesplitst op
+  // uitgeschreven versus concept omdat dat het onderscheid is dat de catalogus
+  // zelf maakt.
+  'lib/services/maswe_catalog_written.dart',
+  'lib/services/maswe_catalog_draft.dart',
   // PLATFORM: entrypoint — runApp() never executes under the test runner.
   'lib/main.dart',
   // PLATFORM: conditional-import facades + their io/web halves.

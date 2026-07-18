@@ -160,6 +160,7 @@ String _knownExternalConst(String name, String _) {
   const files = {
     'wstgVersion': 'lib/services/wstg_catalog.dart',
     'mastgVersion': 'lib/services/mastg_catalog.dart',
+    'masweSnapshotDate': 'lib/services/maswe_catalog.dart',
   };
   final path = files[name];
   if (path == null) return '';
@@ -198,6 +199,12 @@ Future<_Result> _probe(_Standard s) async {
       // Elke afwijking alarmeert: OWASP hernummerde MASTG van 1.x naar 2.0,
       // dus groter-is-nieuwer gaat hier niet op.
       return _Result(latest, stale: latest != null && latest != s.version);
+    case 'githubCommitDate':
+      final latest = await _latestCommitDate(s.target);
+      return _Result(
+        latest,
+        stale: latest != null && latest.compareTo(s.version) > 0,
+      );
     case 'githubReleaseDate':
       final latest = await _latestGithubRelease(s.target, byDate: true);
       return _Result(
@@ -210,6 +217,25 @@ Future<_Result> _probe(_Standard s) async {
       return _probeSuccessor(s);
     default:
       return _Result(null);
+  }
+}
+
+/// De datum van de laatste commit op de standaardbranch, als `JJJJ-MM-DD`.
+Future<String?> _latestCommitDate(String repo) async {
+  if (repo.isEmpty) return null;
+  final body = await _get(
+    Uri.parse('https://api.github.com/repos/$repo/commits?per_page=1'),
+  );
+  if (body == null) return null;
+  try {
+    final list = jsonDecode(body) as List;
+    if (list.isEmpty) return null;
+    final date = ((list.first as Map)['commit'] as Map)['committer'] as Map;
+    final at = date['date'];
+    if (at is! String || at.length < 10) return null;
+    return at.substring(0, 10);
+  } on Object {
+    return null;
   }
 }
 

@@ -26,6 +26,14 @@ enum UpstreamProbe {
   /// ordenbaar, dus hier kan "nieuwer dan wat wij hebben" echt worden vastgesteld.
   githubReleaseDate,
 
+  /// De datum van de laatste commit op de standaardbranch.
+  ///
+  /// Voor bronnen die géén releases en géén tags voeren — MASWE is er zo een.
+  /// Daar is "welke versie" geen zinnige vraag en is de dag van overname het
+  /// enige eerlijke antwoord. Een verzonnen versienummer zou hier een precisie
+  /// suggereren die de bron niet biedt.
+  githubCommitDate,
+
   /// MITRE's CWE REST API (`cwe-api.mitre.org`), die naast de versie ook de
   /// inhoudsdatum en het **aantal** zwakheden geeft. Dat aantal is een
   /// gratis integriteitscontrole: wijkt onze bundel ervan af, dan is hij
