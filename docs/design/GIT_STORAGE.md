@@ -1075,13 +1075,36 @@ discussion still resolve.
   against each forge, and confirm the token cannot leak into a reflog, a trace
   (`GIT_TRACE`), a credential cache or a crash report. Do not consider §10.2 final
   until this is proven on all three desktop platforms.
-  - **Status (Phase 3, native plane landed):** the `GIT_CONFIG_*`/`http.extraHeader`
-    delivery is implemented in `native_git_mirror_io.dart` and the token is never
-    placed in argv (unit-tested in `git_cli_test.dart`) nor written to `.git/config`
-    (end-to-end test against real git in `native_git_mirror_test.dart`). Verified on
-    **macOS**. Still to confirm: a live Basic-auth handshake against Forgejo/GitHub/
-    GitLab, and `ps`-exposure + `GIT_TRACE` on **Windows and Linux**. §10.2 stays
-    provisional until those are done.
+  - **Status.** The `GIT_CONFIG_*`/`http.extraHeader` delivery is implemented in
+    `native_git_mirror_io.dart`. The token is never in argv (unit-tested in
+    `git_cli_test.dart`), never written to `.git/config`, and — verified by a
+    byte-level scan of the whole clone after a token-carrying commit — appears
+    nowhere on disk in the working copy, so not in a reflog, credential cache or
+    stray trace file either (`native_git_mirror_test.dart`).
+  - **One gap this verification actually found and closed.** The subprocess was
+    started with Dart's default `includeParentEnvironment: true`, so the
+    environment was *not* closed despite the code and docs claiming it was: the
+    user's own shell came along. That matters here specifically, because the
+    token travels as an `Authorization:` header — a `GIT_TRACE_CURL=1` together
+    with `GIT_TRACE_REDACT=0` in the user's environment would have written it out
+    verbatim. The same inheritance also carried `GIT_ASKPASS`,
+    `GIT_SSH_COMMAND`, `GIT_PROXY_COMMAND`, `GIT_EXTERNAL_DIFF` (each names a
+    command git executes) and `GIT_CONFIG_PARAMETERS` (arbitrary config
+    injection). The environment is now built from an explicit **allowlist** —
+    deliberately an allowlist, since a denylist rots the moment git adds a new
+    `GIT_*` — carrying only what a process needs to start (`PATH`, plus the
+    Windows essentials, plus `SSL_CERT_*` so distributions that point at their CA
+    bundle that way keep working).
+  - **What is proven, and where.** The properties above are asserted by the test
+    suite itself rather than by a one-off manual check, so running
+    `flutter test test/git_cli_test.dart test/native_git_mirror_test.dart` on a
+    platform proves them *on that platform*. Done on **macOS**.
+  - **Still open.** (a) Running that suite on **Windows and Linux** — nobody has;
+    the allowlist's Windows entries are reasoned from what Git for Windows needs,
+    not observed. If it is wrong, `probe()` fails and the app falls back to the
+    REST plane, so the failure is graceful but quiet. (b) A **live Basic-auth
+    handshake** against a real Forgejo/GitHub/GitLab, which no offline test can
+    stand in for. §10.2 stays provisional until both are done.
 
 ---
 

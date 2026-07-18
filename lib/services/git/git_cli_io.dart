@@ -132,19 +132,84 @@ class NativeGitCli implements GitCli {
   /// Een dichte omgeving (§10.2): geen prompt die eeuwig kan blokkeren, geen
   /// systeem- of globale gitconfig die ons gedrag verandert, en het token via
   /// `GIT_CONFIG_*` in plaats van in argv of in `.git/config`.
+  /// De variabelen die we uit de omgeving van de gebruiker overnemen. Alles wat
+  /// hier niet in staat komt er niet in — zie [_hardenedEnv] voor waarom.
+  ///
+  /// Dit is bewust een toelatingslijst en geen verbodslijst: een verbodslijst
+  /// veroudert zodra git een nieuwe `GIT_*` introduceert, en dan lekt het stil.
+  ///
+  /// `SSL_CERT_FILE`/`SSL_CERT_DIR` staan er bewust bij: op distributies die hun
+  /// CA-bundel daarmee aanwijzen (NixOS, Alpine) breekt https zonder. Ze wijzen
+  /// een CA-bundel aan, dus wie ze kan zetten kan de app een eigen CA laten
+  /// vertrouwen — maar wie de omgeving van het proces kan zetten, kan sowieso
+  /// meer. De kans dat ze wegvallen bij een échte gebruiker weegt zwaarder.
+  static const _carriedPosix = {
+    'PATH',
+    'TMPDIR',
+    'LANG',
+    'LC_ALL',
+    'SSL_CERT_FILE',
+    'SSL_CERT_DIR',
+  };
+
+  /// Windows heeft er meer nodig om überhaupt een proces te kunnen starten:
+  /// zonder SystemRoot laden de socket-DLL's niet, en zonder PATHEXT vindt de
+  /// loader `git.exe` niet.
+  static const _carriedWindows = {
+    'PATH',
+    'PATHEXT',
+    'SystemRoot',
+    'SYSTEMROOT',
+    'SystemDrive',
+    'COMSPEC',
+    'windir',
+    'TEMP',
+    'TMP',
+    'USERPROFILE',
+    'LOCALAPPDATA',
+    'APPDATA',
+    'ProgramData',
+    'ProgramFiles',
+    'ProgramFiles(x86)',
+    'ProgramW6432',
+  };
+
+  /// De omgeving waarin `git` draait (§10.2) — volledig, want het proces start
+  /// met `includeParentEnvironment: false`.
+  ///
+  /// Waarom volledig en niet "de omgeving van de gebruiker plus wat overrides":
+  /// het token gaat als `http.extraHeader` mee, en dat is een
+  /// `Authorization:`-header. Zou de omgeving van de gebruiker doorlekken, dan
+  /// bepaalt zíjn omgeving of die header in een tracebestand belandt —
+  /// `GIT_TRACE_CURL=1` samen met `GIT_TRACE_REDACT=0` schrijft hem onverkort
+  /// weg. Datzelfde geldt voor de variabelen waarmee git een commando aanwijst
+  /// dat het uitvoert (`GIT_ASKPASS`, `GIT_SSH_COMMAND`, `GIT_PROXY_COMMAND`,
+  /// `GIT_EXTERNAL_DIFF`, …) en voor `GIT_CONFIG_PARAMETERS`, waarmee je
+  /// willekeurige config injecteert. Geen daarvan hoort de app te kunnen
+  /// overkomen doordat er iets in de schil stond.
   Future<Map<String, String>> _hardenedEnv({
     List<GitConfigOverride> config = const [],
   }) async {
     final sandbox = await _sandbox();
     final devNull = Platform.isWindows ? 'NUL' : '/dev/null';
+    final carried = Platform.isWindows ? _carriedWindows : _carriedPosix;
+
     final env = <String, String>{
+      // Alleen wat een proces nodig heeft om te kúnnen draaien.
+      for (final entry in Platform.environment.entries)
+        if (carried.contains(entry.key)) entry.key: entry.value,
       'GIT_TERMINAL_PROMPT': '0',
       'GIT_CONFIG_NOSYSTEM': '1',
       'GIT_CONFIG_GLOBAL': devNull,
       // Een gecontroleerde, lege HOME: geen `~/.gitconfig`, geen credential
       // cache, geen aliassen die code kunnen draaien.
       'HOME': sandbox.path,
+      // Windows kijkt hiernaar in plaats van naar HOME.
+      if (Platform.isWindows) 'USERPROFILE': sandbox.path,
       'GIT_ADVICE': '0',
+      // Vangnet, voor het geval een header tóch ergens langs een trace komt: laat
+      // git redigeren. Standaard doet hij dat al; dit zet het vast.
+      'GIT_TRACE_REDACT': '1',
     };
     if (config.isNotEmpty) {
       env['GIT_CONFIG_COUNT'] = '${config.length}';
@@ -185,6 +250,11 @@ class NativeGitCli implements GitCli {
       arguments,
       workingDirectory: workingDirectory,
       environment: environment,
+      // Dít maakt de omgeving pas echt dicht. Standaard vult Dart hem aan met
+      // die van het ouderproces, en dan bepaalt de schil van de gebruiker of een
+      // GIT_TRACE_* het Authorization-header van ons token wegschrijft (§10.2,
+      // OQ-10). [_hardenedEnv] levert alles wat git nodig heeft.
+      includeParentEnvironment: false,
       runInShell: false,
     );
     final out = _CappedCollector(_maxOutputBytes);

@@ -266,6 +266,32 @@ void main() {
       ).readAsStringSync();
       expect(gitConfig, isNot(contains(secret)));
       expect(gitConfig.toLowerCase(), isNot(contains('extraheader')));
+
+      // En breder dan alleen config: nergens in de clone — dus ook niet in een
+      // reflog, een credential-cache of een tracebestand dat git zelf had
+      // kunnen wegschrijven. Dit is de vorm die OQ-10 vraagt; op elk platform
+      // waar deze suite draait, bewijst hij het daar.
+      final leaked = <String>[];
+      for (final entity in Directory(
+        '${temp.path}/tokenclone',
+      ).listSync(recursive: true, followLinks: false)) {
+        if (entity is! File) continue;
+        final List<int> bytes;
+        try {
+          bytes = entity.readAsBytesSync();
+        } on FileSystemException {
+          continue; // niet leesbaar is ook niet lekbaar
+        }
+        // Ruwe bytes, want een pack of een index is geen tekst.
+        if (_containsBytes(bytes, utf8.encode(secret))) {
+          leaked.add(entity.path);
+        }
+      }
+      expect(
+        leaked,
+        isEmpty,
+        reason: 'het token staat op schijf in: ${leaked.join(', ')}',
+      );
     });
 
     test('geen verbinding → committedOffline, commit blijft lokaal', () async {
@@ -291,4 +317,21 @@ void main() {
       );
     });
   });
+}
+
+/// Zoekt [needle] in [haystack] op byte-niveau — een pack of een index is geen
+/// tekst, dus een string-zoektocht zou daar overheen kijken.
+bool _containsBytes(List<int> haystack, List<int> needle) {
+  if (needle.isEmpty || haystack.length < needle.length) return false;
+  for (var i = 0; i <= haystack.length - needle.length; i++) {
+    var match = true;
+    for (var j = 0; j < needle.length; j++) {
+      if (haystack[i + j] != needle[j]) {
+        match = false;
+        break;
+      }
+    }
+    if (match) return true;
+  }
+  return false;
 }
