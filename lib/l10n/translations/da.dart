@@ -1782,6 +1782,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Diagramdata kunne ikke læses; de diagrammer forbliver tomme:',
   'Zoeken in alle decks…': 'Søg i alle decks…',
   'Zoeken in alle decks': 'Søg i alle decks',
   'Zoekterm': 'Søgeord',

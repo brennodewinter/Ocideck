@@ -1796,6 +1796,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Nie można odczytać danych wykresu; te wykresy pozostaną puste:',
   'Zoeken in alle decks…': 'Szukaj we wszystkich taliach…',
   'Zoeken in alle decks': 'Szukaj we wszystkich taliach',
   'Zoekterm': 'Szukane hasło',

@@ -1790,6 +1790,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Údaje grafu sa nepodarilo načítať; tieto grafy zostanú prázdne:',
   'Zoeken in alle decks…': 'Hľadať vo všetkých sadách…',
   'Zoeken in alle decks': 'Hľadať vo všetkých sadách',
   'Zoekterm': 'Hľadaný výraz',

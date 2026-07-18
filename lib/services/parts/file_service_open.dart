@@ -53,7 +53,7 @@ extension _FileServiceOpen on FileService {
   /// Load the external CSV of any chart slide that links one, inlining the data
   /// into the in-memory spec so the renderer has it. The markdown on disk keeps
   /// only the `source` reference (data is stripped again on save).
-  Future<Deck> _hydrateCharts(Deck deck) async {
+  Future<Deck> _hydrateCharts(Deck deck, List<String> warnings) async {
     if (deck.projectPath == null) return deck;
     var changed = false;
     final slides = <Slide>[];
@@ -67,11 +67,14 @@ extension _FileServiceOpen on FileService {
         slides.add(s);
         continue;
       }
-      // A chart's CSV link must stay inside the project (no absolute paths or
+      // A chart's data link must stay inside the project (no absolute paths or
       // `../` escapes) — otherwise an untrusted deck could read arbitrary files.
       final abs = resolveProjectRelative(deck.projectPath, spec.source!);
       final file = abs == null ? null : File(abs);
       if (file == null || !await file.exists()) {
+        // The chart will draw empty. Say so: silence here reads as "this chart
+        // has no numbers" when the truth is "its file is missing or refused".
+        warnings.add(spec.source!);
         slides.add(s);
         continue;
       }
@@ -85,6 +88,7 @@ extension _FileServiceOpen on FileService {
         changed = true;
       } catch (e) {
         logWarning('FileService._hydrateCharts: chart data unreadable', e);
+        warnings.add(spec.source!);
         slides.add(s);
       }
     }

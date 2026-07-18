@@ -740,6 +740,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'No por a lesa e datos di grafiko; e grafikonan ei ta keda bashí:',
   'Zoeken in alle decks…': 'Buska den tur e deknan…',
   'Zoeken in alle decks': 'Buska den tur e deknan',
   'Zoekterm': 'Palabra di buskeda',

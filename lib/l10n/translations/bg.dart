@@ -1806,6 +1806,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Данните на диаграмата не можаха да бъдат прочетени; тези диаграми остават празни:',
   'Zoeken in alle decks…': 'Търсене във всички колоди…',
   'Zoeken in alle decks': 'Търсене във всички колоди',
   'Zoekterm': 'Търсен израз',

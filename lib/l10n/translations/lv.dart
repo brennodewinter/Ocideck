@@ -1782,6 +1782,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Diagrammas datus nevarēja nolasīt; šīs diagrammas paliek tukšas:',
   'Zoeken in alle decks…': 'Meklēt visās kavās…',
   'Zoeken in alle decks': 'Meklēt visās kavās',
   'Zoekterm': 'Meklējamais vārds',

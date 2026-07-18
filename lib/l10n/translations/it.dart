@@ -736,6 +736,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Impossibile leggere i dati dei grafici; quei grafici restano vuoti:',
   'Zoeken in alle decks…': 'Cerca in tutte le presentazioni…',
   'Zoeken in alle decks': 'Cerca in tutte le presentazioni',
   'Zoekterm': 'Termine di ricerca',

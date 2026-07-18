@@ -212,4 +212,28 @@ void main() {
       expect(spec.hasInlineData, isFalse);
     },
   );
+
+  test('a missing data file is reported, not swallowed', () async {
+    final service = serviceOf();
+    await service.saveDeck(
+      deckWith(chartSlide('data/omzet.json', [120, 138])),
+      deckPath(),
+    );
+    await File(p.join(temp.path, 'data', 'omzet.json')).delete();
+
+    // An empty chart looks exactly like a chart with no numbers yet, so the
+    // difference has to be said out loud.
+    final outcome = await serviceOf().openDeckDetailed(deckPath());
+    expect(outcome.deck, isNotNull);
+    expect(outcome.warnings, ['data/omzet.json']);
+  });
+
+  test('a healthy deck reports nothing', () async {
+    final service = serviceOf();
+    await service.saveDeck(
+      deckWith(chartSlide('data/omzet.json', [120, 138])),
+      deckPath(),
+    );
+    expect((await serviceOf().openDeckDetailed(deckPath())).warnings, isEmpty);
+  });
 }

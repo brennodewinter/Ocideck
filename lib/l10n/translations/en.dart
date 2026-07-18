@@ -922,6 +922,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Chart data could not be read; those charts stay empty:',
   'Zoeken in alle decks…': 'Search all decks…',
   'Zoeken in alle decks': 'Search all decks',
   'Zoekterm': 'Search term',

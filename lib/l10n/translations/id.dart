@@ -1783,6 +1783,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Data bagan tidak dapat dibaca; bagan tersebut tetap kosong:',
   'Zoeken in alle decks…': 'Cari di semua dek…',
   'Zoeken in alle decks': 'Cari di semua dek',
   'Zoekterm': 'Kata pencarian',

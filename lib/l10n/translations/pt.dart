@@ -1813,6 +1813,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Não foi possível ler os dados do gráfico; esses gráficos ficam vazios:',
   'Zoeken in alle decks…': 'Pesquisar em todos os decks…',
   'Zoeken in alle decks': 'Pesquisar em todos os decks',
   'Zoekterm': 'Termo de pesquisa',

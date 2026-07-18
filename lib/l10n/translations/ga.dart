@@ -1819,6 +1819,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Níorbh fhéidir sonraí an chairt a léamh; fanfaidh na cairteacha sin folamh:',
   'Zoeken in alle decks…': 'Cuardaigh gach deic…',
   'Zoeken in alle decks': 'Cuardaigh gach deic',
   'Zoekterm': 'Téarma cuardaigh',

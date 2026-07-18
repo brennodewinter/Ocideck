@@ -1802,6 +1802,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Datele graficului nu au putut fi citite; acele grafice rămân goale:',
   'Zoeken in alle decks…': 'Caută în toate pachetele…',
   'Zoeken in alle decks': 'Caută în toate pachetele',
   'Zoekterm': 'Termen de căutare',

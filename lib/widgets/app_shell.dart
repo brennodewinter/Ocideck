@@ -456,6 +456,28 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     child: const _TabContent(),
   );
 
+  /// Een grafiek verwijst naar een databestand dat niet gelezen kon worden:
+  /// ontbrekend, onleesbaar, of buiten de projectmap.
+  ///
+  /// Melden is hier het hele punt. Zo'n grafiek tekent leeg, en een lege
+  /// grafiek is niet te onderscheiden van een grafiek waar nog geen cijfers in
+  /// staan — zonder deze melding is het probleem dus onzichtbaar.
+  void _listenChartDataWarning(BuildContext context, WidgetRef ref) {
+    ref.listen<ChartDataWarning?>(chartDataWarningProvider, (_, warning) {
+      if (warning == null) return;
+      ref.read(chartDataWarningProvider.notifier).state = null;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          duration: const Duration(seconds: 8),
+          content: Text(
+            '${context.l10n.d('Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:')} '
+            '${warning.sources.join(', ')}',
+          ),
+        ),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final tabsState = ref.watch(tabsProvider);
@@ -511,6 +533,8 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
         ),
       );
     });
+
+    _listenChartDataWarning(context, ref);
 
     // Een zojuist geopend bestand heeft elders een byte-identieke kopie:
     // niet-blokkerend melden (de gebruiker wilde gewoon openen), met de

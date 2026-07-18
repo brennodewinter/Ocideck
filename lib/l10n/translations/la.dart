@@ -1799,6 +1799,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Data diagrammatis legi non potuerunt; illa diagrammata vacua manent:',
   'Zoeken in alle decks…': 'In omnibus fasciculis quaerere…',
   'Zoeken in alle decks': 'In omnibus fasciculis quaerere',
   'Zoekterm': 'Vocabulum quaesitum',

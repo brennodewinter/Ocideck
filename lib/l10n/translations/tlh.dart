@@ -1758,6 +1758,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'ta\'nom De\' laDlaHbe\'; ta\'nommey chIm rutlh:',
   'Zoeken in alle decks…': 'Hoch deck-Daq Sam…',
   'Zoeken in alle decks': 'Hoch deck-Daq Sam',
   'Zoekterm': 'nejwI\' mu\'',

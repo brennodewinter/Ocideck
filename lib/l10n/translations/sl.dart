@@ -1785,6 +1785,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Podatkov grafikona ni bilo mogoče prebrati; ti grafikoni ostanejo prazni:',
   'Zoeken in alle decks…': 'Iskanje po vseh kompletih…',
   'Zoeken in alle decks': 'Iskanje po vseh kompletih',
   'Zoekterm': 'Iskalni izraz',

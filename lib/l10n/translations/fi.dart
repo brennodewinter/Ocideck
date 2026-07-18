@@ -1783,6 +1783,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Kaavion tietoja ei voitu lukea; nämä kaaviot jäävät tyhjiksi:',
   'Zoeken in alle decks…': 'Hae kaikista pakoista…',
   'Zoeken in alle decks': 'Hae kaikista pakoista',
   'Zoekterm': 'Hakusana',

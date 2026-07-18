@@ -1801,6 +1801,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Не вдалося прочитати дані діаграми; ці діаграми залишаться порожніми:',
   'Zoeken in alle decks…': 'Шукати в усіх колодах…',
   'Zoeken in alle decks': 'Шукати в усіх колодах',
   'Zoekterm': 'Пошуковий запит',

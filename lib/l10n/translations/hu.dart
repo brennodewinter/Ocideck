@@ -1787,6 +1787,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'A diagram adatai nem olvashatók; ezek a diagramok üresen maradnak:',
   'Zoeken in alle decks…': 'Keresés minden pakliban…',
   'Zoeken in alle decks': 'Keresés minden pakliban',
   'Zoekterm': 'Keresőkifejezés',

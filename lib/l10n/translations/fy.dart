@@ -741,6 +741,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Grafykdata koe net lêzen wurde; dy grafiken bliuwe leech:',
   'Zoeken in alle decks…': 'Sykje yn alle decks…',
   'Zoeken in alle decks': 'Sykje yn alle decks',
   'Zoekterm': 'Sykterm',

@@ -740,6 +740,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
+      'Diagrammdaten konnten nicht gelesen werden; diese Diagramme bleiben leer:',
   'Zoeken in alle decks…': 'In allen Decks suchen…',
   'Zoeken in alle decks': 'In allen Decks suchen',
   'Zoekterm': 'Suchbegriff',
