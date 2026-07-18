@@ -1787,6 +1787,17 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Overzicht': 'Übersicht',
+  'Veelgestelde vragen': 'Hüüfigi Frooge',
+  'Probleemoplossing': 'Fählersuechi',
+  'Begrippenlijst': 'Glossar',
+  'API-documentatie': 'API-Dokumentation',
+  'Prestaties': 'Leischtig',
+  'Beveiligingsontwerp': 'Sicherheitskonzept',
+  'Hosting en uitrol': 'Hosting und Uusroll',
+  'Bijdragen': 'Mitmache',
+  'Ontwikkelomgeving': 'Entwicklungsumgäbig',
+  'Migratiegids': 'Migrationsaaleitig',
   'Versies…': 'Versione…',
   'Versies:': 'Versione:',
   'Nog geen uitgebrachte versies van dit deck.':

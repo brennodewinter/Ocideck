@@ -1806,6 +1806,17 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Overzicht': 'Ħarsa ġenerali',
+  'Veelgestelde vragen': 'Mistoqsijiet frekwenti',
+  'Probleemoplossing': 'Soluzzjoni tal-problemi',
+  'Begrippenlijst': 'Glossarju',
+  'API-documentatie': 'Dokumentazzjoni tal-API',
+  'Prestaties': 'Prestazzjoni',
+  'Beveiligingsontwerp': 'Disinn tas-sigurtà',
+  'Hosting en uitrol': 'Hosting u tqassim',
+  'Bijdragen': 'Kontribuzzjoni',
+  'Ontwikkelomgeving': 'Ambjent tal-iżvilupp',
+  'Migratiegids': 'Gwida għall-migrazzjoni',
   'Versies…': 'Verżjonijiet…',
   'Versies:': 'Verżjonijiet:',
   'Nog geen uitgebrachte versies van dit deck.':

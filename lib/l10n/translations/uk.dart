@@ -1801,6 +1801,17 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Overzicht': 'Огляд',
+  'Veelgestelde vragen': 'Поширені запитання',
+  'Probleemoplossing': 'Усунення несправностей',
+  'Begrippenlijst': 'Глосарій',
+  'API-documentatie': 'Документація API',
+  'Prestaties': 'Продуктивність',
+  'Beveiligingsontwerp': 'Проєктування безпеки',
+  'Hosting en uitrol': 'Хостинг і розгортання',
+  'Bijdragen': 'Внесок',
+  'Ontwikkelomgeving': 'Середовище розробки',
+  'Migratiegids': 'Посібник з міграції',
   'Versies…': 'Версії…',
   'Versies:': 'Версії:',
   'Nog geen uitgebrachte versies van dit deck.':

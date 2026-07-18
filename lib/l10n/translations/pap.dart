@@ -740,6 +740,17 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Overzicht': 'Resúmen',
+  'Veelgestelde vragen': 'Preguntanan frekuente',
+  'Probleemoplossing': 'Solushon di problema',
+  'Begrippenlijst': 'Glosario',
+  'API-documentatie': 'Dokumentashon di API',
+  'Prestaties': 'Rendimentu',
+  'Beveiligingsontwerp': 'Diseño di seguridat',
+  'Hosting en uitrol': 'Hosting i despliegue',
+  'Bijdragen': 'Kontribuí',
+  'Ontwikkelomgeving': 'Ambiente di desaroyo',
+  'Migratiegids': 'Guia di migrashon',
   'Versies…': 'Vershonnan…',
   'Versies:': 'Vershonnan:',
   'Nog geen uitgebrachte versies van dit deck.':

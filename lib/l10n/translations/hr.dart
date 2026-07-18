@@ -1790,6 +1790,17 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Overzicht': 'Pregled',
+  'Veelgestelde vragen': 'Česta pitanja',
+  'Probleemoplossing': 'Rješavanje problema',
+  'Begrippenlijst': 'Pojmovnik',
+  'API-documentatie': 'API dokumentacija',
+  'Prestaties': 'Performanse',
+  'Beveiligingsontwerp': 'Dizajn sigurnosti',
+  'Hosting en uitrol': 'Hosting i implementacija',
+  'Bijdragen': 'Doprinos',
+  'Ontwikkelomgeving': 'Razvojno okruženje',
+  'Migratiegids': 'Vodič za migraciju',
   'Versies…': 'Verzije…',
   'Versies:': 'Verzije:',
   'Nog geen uitgebrachte versies van dit deck.':

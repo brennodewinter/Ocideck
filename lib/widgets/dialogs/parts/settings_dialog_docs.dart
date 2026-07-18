@@ -36,6 +36,31 @@ extension _SettingsDocs on _SettingsDialogState {
               title: l10n.d('Bestandsformaat'),
               assetBase: 'docs/FILE_FORMAT.md',
             ),
+            DocEntry(
+              icon: Icons.list_alt_outlined,
+              title: l10n.d('Overzicht'),
+              assetBase: 'docs/README.md',
+            ),
+            DocEntry(
+              icon: Icons.help_outline,
+              title: l10n.d('Veelgestelde vragen'),
+              assetBase: 'docs/FAQ.md',
+            ),
+            DocEntry(
+              icon: Icons.build_circle_outlined,
+              title: l10n.d('Probleemoplossing'),
+              assetBase: 'docs/TROUBLESHOOTING_GUIDE.md',
+            ),
+            DocEntry(
+              icon: Icons.lock_outline,
+              title: l10n.d('Privacy'),
+              assetBase: 'docs/PRIVACY.md',
+            ),
+            DocEntry(
+              icon: Icons.menu_book_outlined,
+              title: l10n.d('Begrippenlijst'),
+              assetBase: 'docs/GLOSSARY.md',
+            ),
           ],
         ),
         DocSection(
@@ -60,6 +85,41 @@ extension _SettingsDocs on _SettingsDialogState {
               icon: Icons.map_outlined,
               title: l10n.d('Broncodekaart'),
               assetBase: 'docs/SOURCE_MAP.md',
+            ),
+            DocEntry(
+              icon: Icons.api_outlined,
+              title: l10n.d('API-documentatie'),
+              assetBase: 'docs/API_DOCUMENTATION.md',
+            ),
+            DocEntry(
+              icon: Icons.speed_outlined,
+              title: l10n.d('Prestaties'),
+              assetBase: 'docs/PERFORMANCE_GUIDE.md',
+            ),
+            DocEntry(
+              icon: Icons.security_outlined,
+              title: l10n.d('Beveiligingsontwerp'),
+              assetBase: 'docs/SECURITY_DESIGN.md',
+            ),
+            DocEntry(
+              icon: Icons.cloud_outlined,
+              title: l10n.d('Hosting en uitrol'),
+              assetBase: 'docs/HOSTING.md',
+            ),
+            DocEntry(
+              icon: Icons.volunteer_activism_outlined,
+              title: l10n.d('Bijdragen'),
+              assetBase: 'docs/CONTRIBUTING_GUIDELINES.md',
+            ),
+            DocEntry(
+              icon: Icons.terminal_outlined,
+              title: l10n.d('Ontwikkelomgeving'),
+              assetBase: 'docs/DEVELOPMENT_SETUP_GUIDE.md',
+            ),
+            DocEntry(
+              icon: Icons.swap_horiz_outlined,
+              title: l10n.d('Migratiegids'),
+              assetBase: 'docs/MIGRATION_GUIDE.md',
             ),
           ],
         ),

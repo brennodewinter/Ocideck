@@ -1774,6 +1774,17 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Overzicht': 'Ülevaade',
+  'Veelgestelde vragen': 'Korduma kippuvad küsimused',
+  'Probleemoplossing': 'Probleemide lahendamine',
+  'Begrippenlijst': 'Sõnastik',
+  'API-documentatie': 'API dokumentatsioon',
+  'Prestaties': 'Jõudlus',
+  'Beveiligingsontwerp': 'Turbe kavand',
+  'Hosting en uitrol': 'Majutus ja juurutamine',
+  'Bijdragen': 'Kaasautamine',
+  'Ontwikkelomgeving': 'Arenduskeskkond',
+  'Migratiegids': 'Migreerimisjuhend',
   'Versies…': 'Versioonid…',
   'Versies:': 'Versioonid:',
   'Nog geen uitgebrachte versies van dit deck.':

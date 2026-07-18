@@ -741,6 +741,17 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Overzicht': 'Oersjoch',
+  'Veelgestelde vragen': 'Faak stelde fragen',
+  'Probleemoplossing': 'Swierrichheden oplosse',
+  'Begrippenlijst': 'Wurdlist',
+  'API-documentatie': 'API-dokumintaasje',
+  'Prestaties': 'Prestaasjes',
+  'Beveiligingsontwerp': 'Feiligensûntwerp',
+  'Hosting en uitrol': 'Hosting en útrol',
+  'Bijdragen': 'Bydrage',
+  'Ontwikkelomgeving': 'Untwikkelomjouwing',
+  'Migratiegids': 'Migraasjegids',
   'Versies…': 'Ferzjes…',
   'Versies:': 'Ferzjes:',
   'Nog geen uitgebrachte versies van dit deck.':

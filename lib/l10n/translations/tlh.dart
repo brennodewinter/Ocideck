@@ -1758,6 +1758,17 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Overzicht': 'Hoch legh',
+  'Veelgestelde vragen': 'pIj yu\'lu\'bogh',
+  'Probleemoplossing': 'Qagh tI\'',
+  'Begrippenlijst': 'mu\' tetlh',
+  'API-documentatie': 'API ghItlh',
+  'Prestaties': 'laH',
+  'Beveiligingsontwerp': 'Hub nab',
+  'Hosting en uitrol': 'qengwI\' Qu\'',
+  'Bijdragen': 'boQ',
+  'Ontwikkelomgeving': 'chenmoHmeH Daq',
+  'Migratiegids': 'ghoS ghItlh',
   'Versies…': 'mI\'mey…',
   'Versies:': 'mI\'mey:',
   'Nog geen uitgebrachte versies van dit deck.':

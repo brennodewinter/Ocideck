@@ -1790,6 +1790,17 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Overzicht': 'Prehľad',
+  'Veelgestelde vragen': 'Časté otázky',
+  'Probleemoplossing': 'Riešenie problémov',
+  'Begrippenlijst': 'Slovník pojmov',
+  'API-documentatie': 'Dokumentácia API',
+  'Prestaties': 'Výkon',
+  'Beveiligingsontwerp': 'Návrh zabezpečenia',
+  'Hosting en uitrol': 'Hosting a nasadenie',
+  'Bijdragen': 'Prispievanie',
+  'Ontwikkelomgeving': 'Vývojové prostredie',
+  'Migratiegids': 'Sprievodca migráciou',
   'Versies…': 'Verzie…',
   'Versies:': 'Verzie:',
   'Nog geen uitgebrachte versies van dit deck.':

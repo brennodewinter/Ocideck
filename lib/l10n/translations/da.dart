@@ -1782,6 +1782,17 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Overzicht': 'Oversigt',
+  'Veelgestelde vragen': 'Ofte stillede spørgsmål',
+  'Probleemoplossing': 'Fejlfinding',
+  'Begrippenlijst': 'Ordliste',
+  'API-documentatie': 'API-dokumentation',
+  'Prestaties': 'Ydeevne',
+  'Beveiligingsontwerp': 'Sikkerhedsdesign',
+  'Hosting en uitrol': 'Hosting og udrulning',
+  'Bijdragen': 'Bidrag',
+  'Ontwikkelomgeving': 'Udviklingsmiljø',
+  'Migratiegids': 'Migrationsvejledning',
   'Versies…': 'Versioner…',
   'Versies:': 'Versioner:',
   'Nog geen uitgebrachte versies van dit deck.':

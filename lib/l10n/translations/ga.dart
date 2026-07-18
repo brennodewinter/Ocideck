@@ -1819,6 +1819,17 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Overzicht': 'Forbhreathnú',
+  'Veelgestelde vragen': 'Ceisteanna coitianta',
+  'Probleemoplossing': 'Fabhtcheartú',
+  'Begrippenlijst': 'Gluais',
+  'API-documentatie': 'Doiciméadú API',
+  'Prestaties': 'Feidhmíocht',
+  'Beveiligingsontwerp': 'Dearadh slándála',
+  'Hosting en uitrol': 'Óstáil agus imscaradh',
+  'Bijdragen': 'Rannchuidiú',
+  'Ontwikkelomgeving': 'Timpeallacht forbartha',
+  'Migratiegids': 'Treoir aistrithe',
   'Versies…': 'Leaganacha…',
   'Versies:': 'Leaganacha:',
   'Nog geen uitgebrachte versies van dit deck.':

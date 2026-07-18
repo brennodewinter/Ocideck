@@ -1787,6 +1787,17 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Overzicht': 'Áttekintés',
+  'Veelgestelde vragen': 'Gyakori kérdések',
+  'Probleemoplossing': 'Hibaelhárítás',
+  'Begrippenlijst': 'Fogalomtár',
+  'API-documentatie': 'API-dokumentáció',
+  'Prestaties': 'Teljesítmény',
+  'Beveiligingsontwerp': 'Biztonsági terv',
+  'Hosting en uitrol': 'Tárhely és üzembe helyezés',
+  'Bijdragen': 'Közreműködés',
+  'Ontwikkelomgeving': 'Fejlesztői környezet',
+  'Migratiegids': 'Migrációs útmutató',
   'Versies…': 'Verziók…',
   'Versies:': 'Verziók:',
   'Nog geen uitgebrachte versies van dit deck.':
