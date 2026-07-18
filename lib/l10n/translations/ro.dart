@@ -1802,6 +1802,17 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Vergelijken…': 'Compară…',
+  'Versies vergelijken': 'Compară versiunile',
+  'Kies twee versies; de oudste van de twee is het vertrekpunt.':
+      'Alege două versiuni; cea mai veche dintre ele este punctul de plecare.',
+  'Vergelijken': 'Compară',
+  'Deze twee versies zijn inhoudelijk gelijk.':
+      'Aceste două versiuni au același conținut.',
+  'verwijderd': 'eliminat',
+  'gewijzigd': 'modificat',
+  'verplaatst': 'mutat',
+  '(zonder titel)': '(fără titlu)',
   'Concept mergen…': 'Îmbină schița…',
   'Versie vastleggen…': 'Înregistrează versiunea…',
   'Concept gemerged naar de hoofdbranch.':

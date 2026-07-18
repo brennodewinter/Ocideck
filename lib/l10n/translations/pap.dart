@@ -740,6 +740,17 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Vergelijken…': 'Kompará…',
+  'Versies vergelijken': 'Kompará vershonnan',
+  'Kies twee versies; de oudste van de twee is het vertrekpunt.':
+      'Skohe dos vershon; e mas bieu di e dos ta e punto di salida.',
+  'Vergelijken': 'Kompará',
+  'Deze twee versies zijn inhoudelijk gelijk.':
+      'E dos vershonnan aki tin e mesun kontenido.',
+  'verwijderd': 'kitá',
+  'gewijzigd': 'kambiá',
+  'verplaatst': 'moví',
+  '(zonder titel)': '(sin título)',
   'Concept mergen…': 'Uni konsept…',
   'Versie vastleggen…': 'Registrá vershon…',
   'Concept gemerged naar de hoofdbranch.': 'Konsept uní ku e branch prinsipal.',

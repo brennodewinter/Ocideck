@@ -1787,6 +1787,17 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Vergelijken…': 'Összehasonlítás…',
+  'Versies vergelijken': 'Verziók összehasonlítása',
+  'Kies twee versies; de oudste van de twee is het vertrekpunt.':
+      'Válassz két verziót; a kettő közül a régebbi a kiindulópont.',
+  'Vergelijken': 'Összehasonlítás',
+  'Deze twee versies zijn inhoudelijk gelijk.':
+      'Ez a két verzió tartalmilag azonos.',
+  'verwijderd': 'eltávolítva',
+  'gewijzigd': 'módosítva',
+  'verplaatst': 'áthelyezve',
+  '(zonder titel)': '(cím nélkül)',
   'Concept mergen…': 'Piszkozat egyesítése…',
   'Versie vastleggen…': 'Verzió rögzítése…',
   'Concept gemerged naar de hoofdbranch.': 'A piszkozat egyesítve a fő ággal.',

@@ -1758,6 +1758,16 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Vergelijken…': 'rap\'a\'…',
+  'Versies vergelijken': 'mI\'mey rap\'a\'',
+  'Kies twee versies; de oudste van de twee is het vertrekpunt.':
+      'cha\' mI\' yIwIv; qan law\' \'oH mung\'e\'.',
+  'Vergelijken': 'rap\'a\'',
+  'Deze twee versies zijn inhoudelijk gelijk.': 'cha\' mI\'vam rap.',
+  'verwijderd': 'teqta\'',
+  'gewijzigd': 'choHta\'',
+  'verplaatst': 'vIHta\'',
+  '(zonder titel)': '(per Hutlh)',
   'Concept mergen…': 'concept DamuvmoH…',
   'Versie vastleggen…': 'mI\' DaqonmoH…',
   'Concept gemerged naar de hoofdbranch.':

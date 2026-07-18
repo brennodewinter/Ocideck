@@ -1783,6 +1783,16 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Vergelijken…': 'Bandingkan…',
+  'Versies vergelijken': 'Bandingkan versi',
+  'Kies twee versies; de oudste van de twee is het vertrekpunt.':
+      'Pilih dua versi; yang lebih lama menjadi titik awal.',
+  'Vergelijken': 'Bandingkan',
+  'Deze twee versies zijn inhoudelijk gelijk.': 'Kedua versi ini isinya sama.',
+  'verwijderd': 'dihapus',
+  'gewijzigd': 'diubah',
+  'verplaatst': 'dipindahkan',
+  '(zonder titel)': '(tanpa judul)',
   'Concept mergen…': 'Gabungkan draf…',
   'Versie vastleggen…': 'Catat versi…',
   'Concept gemerged naar de hoofdbranch.': 'Draf digabungkan ke branch utama.',

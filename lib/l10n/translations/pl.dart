@@ -1796,6 +1796,17 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Vergelijken…': 'Porównaj…',
+  'Versies vergelijken': 'Porównaj wersje',
+  'Kies twee versies; de oudste van de twee is het vertrekpunt.':
+      'Wybierz dwie wersje; starsza z nich jest punktem wyjścia.',
+  'Vergelijken': 'Porównaj',
+  'Deze twee versies zijn inhoudelijk gelijk.':
+      'Te dwie wersje mają identyczną treść.',
+  'verwijderd': 'usunięto',
+  'gewijzigd': 'zmieniono',
+  'verplaatst': 'przeniesiono',
+  '(zonder titel)': '(bez tytułu)',
   'Concept mergen…': 'Scal wersję roboczą…',
   'Versie vastleggen…': 'Zapisz wersję…',
   'Concept gemerged naar de hoofdbranch.':

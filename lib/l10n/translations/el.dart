@@ -1811,6 +1811,17 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Vergelijken…': 'Σύγκριση…',
+  'Versies vergelijken': 'Σύγκριση εκδόσεων',
+  'Kies twee versies; de oudste van de twee is het vertrekpunt.':
+      'Επιλέξτε δύο εκδόσεις· η παλαιότερη από τις δύο είναι η αφετηρία.',
+  'Vergelijken': 'Σύγκριση',
+  'Deze twee versies zijn inhoudelijk gelijk.':
+      'Αυτές οι δύο εκδόσεις έχουν πανομοιότυπο περιεχόμενο.',
+  'verwijderd': 'αφαιρέθηκε',
+  'gewijzigd': 'άλλαξε',
+  'verplaatst': 'μετακινήθηκε',
+  '(zonder titel)': '(χωρίς τίτλο)',
   'Concept mergen…': 'Συγχώνευση προχείρου…',
   'Versie vastleggen…': 'Καταγραφή έκδοσης…',
   'Concept gemerged naar de hoofdbranch.':

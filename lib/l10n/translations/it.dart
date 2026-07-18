@@ -736,6 +736,17 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Vergelijken…': 'Confronta…',
+  'Versies vergelijken': 'Confronta versioni',
+  'Kies twee versies; de oudste van de twee is het vertrekpunt.':
+      'Scegli due versioni; la più vecchia delle due è il punto di partenza.',
+  'Vergelijken': 'Confronta',
+  'Deze twee versies zijn inhoudelijk gelijk.':
+      'Queste due versioni hanno lo stesso contenuto.',
+  'verwijderd': 'rimosso',
+  'gewijzigd': 'modificato',
+  'verplaatst': 'spostato',
+  '(zonder titel)': '(senza titolo)',
   'Concept mergen…': 'Unisci bozza…',
   'Versie vastleggen…': 'Registra versione…',
   'Concept gemerged naar de hoofdbranch.': 'Bozza unita nel ramo principale.',

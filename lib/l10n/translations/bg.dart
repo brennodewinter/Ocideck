@@ -1806,6 +1806,17 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Vergelijken…': 'Сравняване…',
+  'Versies vergelijken': 'Сравняване на версии',
+  'Kies twee versies; de oudste van de twee is het vertrekpunt.':
+      'Изберете две версии; по-старата от двете е отправната точка.',
+  'Vergelijken': 'Сравняване',
+  'Deze twee versies zijn inhoudelijk gelijk.':
+      'Тези две версии са еднакви по съдържание.',
+  'verwijderd': 'премахнато',
+  'gewijzigd': 'променено',
+  'verplaatst': 'преместено',
+  '(zonder titel)': '(без заглавие)',
   'Concept mergen…': 'Обединяване на чернова…',
   'Versie vastleggen…': 'Записване на версия…',
   'Concept gemerged naar de hoofdbranch.':

@@ -1785,6 +1785,17 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Vergelijken…': 'Primerjaj…',
+  'Versies vergelijken': 'Primerjaj različice',
+  'Kies twee versies; de oudste van de twee is het vertrekpunt.':
+      'Izberi dve različici; starejša od obeh je izhodišče.',
+  'Vergelijken': 'Primerjaj',
+  'Deze twee versies zijn inhoudelijk gelijk.':
+      'Ti dve različici sta vsebinsko enaki.',
+  'verwijderd': 'odstranjeno',
+  'gewijzigd': 'spremenjeno',
+  'verplaatst': 'premaknjeno',
+  '(zonder titel)': '(brez naslova)',
   'Concept mergen…': 'Združi osnutek…',
   'Versie vastleggen…': 'Zabeleži različico…',
   'Concept gemerged naar de hoofdbranch.': 'Osnutek združen v glavno vejo.',

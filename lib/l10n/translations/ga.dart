@@ -1819,6 +1819,17 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Vergelijken…': 'Cuir i gcomparáid…',
+  'Versies vergelijken': 'Cuir leaganacha i gcomparáid',
+  'Kies twee versies; de oudste van de twee is het vertrekpunt.':
+      'Roghnaigh dhá leagan; is é an ceann is sine an pointe tosaigh.',
+  'Vergelijken': 'Cuir i gcomparáid',
+  'Deze twee versies zijn inhoudelijk gelijk.':
+      'Tá an t-ábhar céanna sa dá leagan seo.',
+  'verwijderd': 'bainte',
+  'gewijzigd': 'athraithe',
+  'verplaatst': 'bogtha',
+  '(zonder titel)': '(gan teideal)',
   'Concept mergen…': 'Cumaisc an dréacht…',
   'Versie vastleggen…': 'Taifead an leagan…',
   'Concept gemerged naar de hoofdbranch.':

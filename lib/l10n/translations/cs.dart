@@ -1786,6 +1786,17 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Vergelijken…': 'Porovnat…',
+  'Versies vergelijken': 'Porovnat verze',
+  'Kies twee versies; de oudste van de twee is het vertrekpunt.':
+      'Vyber dvě verze; starší z nich je výchozí bod.',
+  'Vergelijken': 'Porovnat',
+  'Deze twee versies zijn inhoudelijk gelijk.':
+      'Tyto dvě verze mají stejný obsah.',
+  'verwijderd': 'odebráno',
+  'gewijzigd': 'změněno',
+  'verplaatst': 'přesunuto',
+  '(zonder titel)': '(bez názvu)',
   'Concept mergen…': 'Sloučit koncept…',
   'Versie vastleggen…': 'Zaznamenat verzi…',
   'Concept gemerged naar de hoofdbranch.': 'Koncept sloučen do hlavní větve.',
