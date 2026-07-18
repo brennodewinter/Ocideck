@@ -1785,6 +1785,11 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Gebundelde standaarden': 'Priloženi standardi',
+  'geen versienummer': 'brez številke različice',
+  'Bron': 'Vir',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Različice v tem izvodu. Poročilo o pentestu mora navesti, proti čemu se je preverjalo — in katera različica je bila to.',
   'Zoeken in alle decks…': 'Iskanje po vseh kompletih…',
   'Zoeken in alle decks': 'Iskanje po vseh kompletih',
   'Zoekterm': 'Iskalni izraz',

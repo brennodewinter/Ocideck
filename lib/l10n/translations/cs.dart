@@ -1786,6 +1786,11 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Gebundelde standaarden': 'Přibalené standardy',
+  'geen versienummer': 'bez čísla verze',
+  'Bron': 'Zdroj',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Verze v tomto exempláři. Zpráva z pentestu má uvádět, vůči čemu se testovalo — a v jaké verzi.',
   'Zoeken in alle decks…': 'Hledat ve všech sadách…',
   'Zoeken in alle decks': 'Hledat ve všech sadách',
   'Zoekterm': 'Hledaný výraz',

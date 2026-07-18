@@ -1774,6 +1774,11 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Gebundelde standaarden': 'Kaasasolevad standardid',
+  'geen versienummer': 'versiooninumbrita',
+  'Bron': 'Allikas',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Selles eksemplaris olevad versioonid. Pentesti aruanne peab ütlema, mille vastu testiti — ja milline versioon see oli.',
   'Zoeken in alle decks…': 'Otsi kõigist pakkidest…',
   'Zoeken in alle decks': 'Otsi kõigist pakkidest',
   'Zoekterm': 'Otsingusõna',

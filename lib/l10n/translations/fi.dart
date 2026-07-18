@@ -1783,6 +1783,11 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Gebundelde standaarden': 'Mukana toimitetut standardit',
+  'geen versienummer': 'ei versionumeroa',
+  'Bron': 'Lähde',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Tässä kappaleessa olevat versiot. Pentest-raportin tulee kertoa, mitä vasten testattiin — ja mikä versio se oli.',
   'Zoeken in alle decks…': 'Hae kaikista pakoista…',
   'Zoeken in alle decks': 'Hae kaikista pakoista',
   'Zoekterm': 'Hakusana',

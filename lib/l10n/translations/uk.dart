@@ -1801,6 +1801,11 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Gebundelde standaarden': 'Вбудовані стандарти',
+  'geen versienummer': 'без номера версії',
+  'Bron': 'Джерело',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Версії в цьому примірнику. Звіт про пентест має вказувати, щодо чого проводилася перевірка — і яка це була версія.',
   'Zoeken in alle decks…': 'Шукати в усіх колодах…',
   'Zoeken in alle decks': 'Шукати в усіх колодах',
   'Zoekterm': 'Пошуковий запит',

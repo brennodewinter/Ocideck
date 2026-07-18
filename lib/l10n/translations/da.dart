@@ -1782,6 +1782,11 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Gebundelde standaarden': 'Medfølgende standarder',
+  'geen versienummer': 'intet versionsnummer',
+  'Bron': 'Kilde',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Versionerne i dette eksemplar. En pentestrapport bør angive, hvad der er testet mod — og hvilken version det var.',
   'Zoeken in alle decks…': 'Søg i alle decks…',
   'Zoeken in alle decks': 'Søg i alle decks',
   'Zoekterm': 'Søgeord',

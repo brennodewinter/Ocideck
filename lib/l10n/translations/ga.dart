@@ -1819,6 +1819,11 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Gebundelde standaarden': 'Caighdeáin chuimsithe',
+  'geen versienummer': 'gan uimhir leagain',
+  'Bron': 'Foinse',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Na leaganacha sa chóip seo. Ba cheart do thuairisc pentest a rá cad ina choinne a rinneadh tástáil — agus cén leagan a bhí ann.',
   'Zoeken in alle decks…': 'Cuardaigh gach deic…',
   'Zoeken in alle decks': 'Cuardaigh gach deic',
   'Zoekterm': 'Téarma cuardaigh',

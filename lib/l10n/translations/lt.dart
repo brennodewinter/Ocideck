@@ -1791,6 +1791,11 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Gebundelde standaarden': 'Pridėti standartai',
+  'geen versienummer': 'be versijos numerio',
+  'Bron': 'Šaltinis',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Šiame egzemplioriuje esančios versijos. Pentesto ataskaitoje turi būti nurodyta, su kuo lyginta — ir kuri tai buvo versija.',
   'Zoeken in alle decks…': 'Ieškoti visose kaladėse…',
   'Zoeken in alle decks': 'Ieškoti visose kaladėse',
   'Zoekterm': 'Paieškos žodis',

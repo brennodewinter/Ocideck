@@ -1782,6 +1782,11 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Gebundelde standaarden': 'Iekļautie standarti',
+  'geen versienummer': 'bez versijas numura',
+  'Bron': 'Avots',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Šajā eksemplārā iekļautās versijas. Pentesta ziņojumā jānorāda, pret ko tika testēts — un kura versija tā bija.',
   'Zoeken in alle decks…': 'Meklēt visās kavās…',
   'Zoeken in alle decks': 'Meklēt visās kavās',
   'Zoekterm': 'Meklējamais vārds',

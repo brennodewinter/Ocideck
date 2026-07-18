@@ -1758,6 +1758,11 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Gebundelde standaarden': 'tetlh chuv',
+  'geen versienummer': 'mI\' Hutlh',
+  'Bron': 'Daq',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'naDev mI\'mey. pentest ja\'chuq \'e\' Del net poQ — mI\' je.',
   'Zoeken in alle decks…': 'Hoch deck-Daq Sam…',
   'Zoeken in alle decks': 'Hoch deck-Daq Sam',
   'Zoekterm': 'nejwI\' mu\'',

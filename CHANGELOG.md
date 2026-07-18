@@ -8,6 +8,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Zichtbaar welke versie van elke standaard erin zit — en een poort die merkt
+  wanneer die achterloopt.** OciDeck draagt referentiedata mee (OWASP WSTG,
+  MITRE CWE, het MIAUW-schema, de CVSS-specificatie). Welke versie dat was, stond
+  tot nu toe alleen in proza verspreid over code en documentatie, en niets
+  controleerde het — zo kan een gebundelde standaard jarenlang verouderen zonder
+  dat iemand het merkt. *Instellingen → Over* toont nu per standaard de versie,
+  wat er precies van gebundeld is, de licentie en de bron. Daarnaast vergelijkt
+  `make deps-check` die versies met de bron en meldt wat achterloopt. De poort
+  onderscheidt "actueel", "verouderd" en "niet vast te stellen" — dat laatste
+  telt nooit als het eerste, want stilte mag geen goedkeuring worden.
 - **Search across every deck in the repository, not just the open one.**
   *Zoeken in alle decks…* in the `…` menu searches every deck in the git
   repository and tells you exactly where each hit sits: which deck, which slide,

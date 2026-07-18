@@ -740,6 +740,11 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Gebundelde standaarden': 'Normes intégrées',
+  'geen versienummer': 'pas de numéro de version',
+  'Bron': 'Source',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Les versions présentes dans cet exemplaire. Un rapport de pentest doit indiquer le référentiel utilisé — et sa version.',
   'Zoeken in alle decks…': 'Rechercher dans tous les decks…',
   'Zoeken in alle decks': 'Rechercher dans tous les decks',
   'Zoekterm': 'Terme recherché',

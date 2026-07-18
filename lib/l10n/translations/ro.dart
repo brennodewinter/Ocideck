@@ -1802,6 +1802,11 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Gebundelde standaarden': 'Standarde incluse',
+  'geen versienummer': 'fără număr de versiune',
+  'Bron': 'Sursă',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Versiunile din acest exemplar. Un raport de pentest trebuie să indice față de ce s-a testat — și ce versiune era.',
   'Zoeken in alle decks…': 'Caută în toate pachetele…',
   'Zoeken in alle decks': 'Caută în toate pachetele',
   'Zoekterm': 'Termen de căutare',

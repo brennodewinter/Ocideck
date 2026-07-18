@@ -1782,6 +1782,11 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Gebundelde standaarden': 'Medföljande standarder',
+  'geen versienummer': 'inget versionsnummer',
+  'Bron': 'Källa',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Versionerna i detta exemplar. En pentestrapport ska ange vad som testats mot — och vilken version det var.',
   'Zoeken in alle decks…': 'Sök i alla decks…',
   'Zoeken in alle decks': 'Sök i alla decks',
   'Zoekterm': 'Sökterm',

@@ -740,6 +740,11 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Gebundelde standaarden': 'Mitgelieferte Standards',
+  'geen versienummer': 'keine Versionsnummer',
+  'Bron': 'Quelle',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Die Versionen in diesem Exemplar. Ein Pentest-Bericht muss angeben, wogegen geprüft wurde — und in welcher Version.',
   'Zoeken in alle decks…': 'In allen Decks suchen…',
   'Zoeken in alle decks': 'In allen Decks suchen',
   'Zoekterm': 'Suchbegriff',

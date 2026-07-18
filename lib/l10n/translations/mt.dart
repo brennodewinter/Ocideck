@@ -1806,6 +1806,11 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Gebundelde standaarden': 'Standards inklużi',
+  'geen versienummer': 'l-ebda numru ta\' verżjoni',
+  'Bron': 'Sors',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Il-verżjonijiet f\'din il-kopja. Rapport ta\' pentest għandu jgħid kontra xiex sar it-test — u liema verżjoni kienet.',
   'Zoeken in alle decks…': 'Fittex fid-decks kollha…',
   'Zoeken in alle decks': 'Fittex fid-decks kollha',
   'Zoekterm': 'Terminu tat-tfittxija',

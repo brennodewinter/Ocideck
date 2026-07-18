@@ -1813,6 +1813,11 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Gebundelde standaarden': 'Normas incluídas',
+  'geen versienummer': 'sem número de versão',
+  'Bron': 'Fonte',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'As versões presentes nesta cópia. Um relatório de pentest deve indicar contra o que foi testado — e qual a versão.',
   'Zoeken in alle decks…': 'Pesquisar em todos os decks…',
   'Zoeken in alle decks': 'Pesquisar em todos os decks',
   'Zoekterm': 'Termo de pesquisa',
