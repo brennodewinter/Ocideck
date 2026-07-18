@@ -1821,6 +1821,8 @@ const _dutchSourceAddPl = <String, String>{
   'Bron': 'Źródło',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
       'Wersje zawarte w tej kopii. Raport z pentestu powinien podawać, względem czego testowano — i w jakiej wersji.',
+  'waarde(n) uit de CSV zijn niet als getal gelezen en staan nu op 0:':
+      'wartości z pliku CSV nie zostały odczytane jako liczby i wynoszą teraz 0:',
   'Zoeken in alle decks…': 'Szukaj we wszystkich taliach…',
   'Zoeken in alle decks': 'Szukaj we wszystkich taliach',
   'Zoekterm': 'Szukane hasło',

@@ -1808,6 +1808,8 @@ const _dutchSourceAddFi = <String, String>{
   'Bron': 'Lähde',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
       'Tässä kappaleessa olevat versiot. Pentest-raportin tulee kertoa, mitä vasten testattiin — ja mikä versio se oli.',
+  'waarde(n) uit de CSV zijn niet als getal gelezen en staan nu op 0:':
+      'arvoa CSV-tiedostosta ei luettu numeroina ja ne ovat nyt 0:',
   'Zoeken in alle decks…': 'Hae kaikista pakoista…',
   'Zoeken in alle decks': 'Hae kaikista pakoista',
   'Zoekterm': 'Hakusana',

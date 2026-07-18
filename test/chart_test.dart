@@ -8,21 +8,37 @@ void main() {
 
   group('parseCsv', () {
     test('reads header series names and labelled rows', () {
-      final (x, series) = parseCsv('\n, 2025, 2026\nQ1, 10, 12\nQ2, 14, 9\n');
+      final (x, series, unreadable: _) = parseCsv(
+        '\n, 2025, 2026\nQ1, 10, 12\nQ2, 14, 9\n',
+      );
       expect(x, ['Q1', 'Q2']);
       expect(series.map((s) => s.name), ['2025', '2026']);
       expect(series[0].data, [10, 14]);
       expect(series[1].data, [12, 9]);
     });
 
-    test('non-numeric cells become 0', () {
-      final (x, series) = parseCsv(',A\nQ1,oops');
-      expect(x, ['Q1']);
-      expect(series.single.data, [0]);
+    test('non-numeric cells become 0 and are reported', () {
+      final result = parseCsv(',A\nQ1,oops');
+      expect(result.$1, ['Q1']);
+      expect(result.$2.single.data, [0]);
+      expect(result.unreadable, ['oops']);
+    });
+
+    test('an empty cell is a statement, not a mistake: 0 and unreported', () {
+      // A short row means "no value here"; complaining about it would train
+      // the user to ignore the warning that does matter.
+      final result = parseCsv(',A,B\nQ1,10');
+      expect(result.$2[1].data, [0]);
+      expect(result.unreadable, isEmpty);
+    });
+
+    test('clean CSV reports nothing unreadable', () {
+      final result = parseCsv(',A\nQ1,10\nQ2,12');
+      expect(result.unreadable, isEmpty);
     });
 
     test('a quoted field may contain a comma', () {
-      final (x, series) = parseCsv(
+      final (x, series, unreadable: _) = parseCsv(
         ',Omzet\n"Amsterdam, NL",10\n"Parijs, FR",12',
       );
       expect(x, ['Amsterdam, NL', 'Parijs, FR']);
@@ -32,7 +48,7 @@ void main() {
     test('a quoted numeric field parses as one value', () {
       // Excel exports decimals wrapped in quotes; before the quote-aware split
       // this became two cells and shifted the whole row.
-      final (x, series) = parseCsv(',A,B\nQ1,"1.234",7');
+      final (x, series, unreadable: _) = parseCsv(',A,B\nQ1,"1.234",7');
       expect(x, ['Q1']);
       expect(series.map((s) => s.name), ['A', 'B']);
       expect(series[0].data, [1.234]);
@@ -40,29 +56,31 @@ void main() {
     });
 
     test('a doubled "" inside a quoted field is one literal quote', () {
-      final (x, series) = parseCsv(',A\n"say ""hi""",1\n"""quoted""",2');
+      final (x, series, unreadable: _) = parseCsv(
+        ',A\n"say ""hi""",1\n"""quoted""",2',
+      );
       expect(x, ['say "hi"', '"quoted"']);
       expect(series.single.data, [1, 2]);
     });
 
     test('quoted fields work in the header row too', () {
-      final (x, series) = parseCsv(',"Omzet, netto"\nQ1,10');
+      final (x, series, unreadable: _) = parseCsv(',"Omzet, netto"\nQ1,10');
       expect(series.single.name, 'Omzet, netto');
       expect(x, ['Q1']);
     });
 
     test('space before an opening quote still reads as one field', () {
-      final (x, _) = parseCsv(',A\n "Amsterdam, NL" ,10');
+      final (x, _, unreadable: _) = parseCsv(',A\n "Amsterdam, NL" ,10');
       expect(x, ['Amsterdam, NL']);
     });
 
     test('a quoted field keeps its inner whitespace verbatim', () {
-      final (x, _) = parseCsv(',A\n" spatie ",1');
+      final (x, _, unreadable: _) = parseCsv(',A\n" spatie ",1');
       expect(x, [' spatie ']);
     });
 
     test('an unterminated quote runs to the end of the line', () {
-      final (x, series) = parseCsv(',A\n"Amsterdam, NL,10');
+      final (x, series, unreadable: _) = parseCsv(',A\n"Amsterdam, NL,10');
       expect(x, ['Amsterdam, NL,10']);
       expect(series.single.data, [0]);
     });
@@ -70,13 +88,71 @@ void main() {
     test('regression: unquoted CSV parses exactly as before', () {
       // Byte-for-byte the pre-fix behaviour: trimming, blank-line skipping,
       // empty leading header cell, short rows padded with 0.
-      final (x, series) = parseCsv(
+      final (x, series, unreadable: _) = parseCsv(
         '\n, 2025, 2026\nQ1, 10, 12\n\nQ2, 14, 9\nQ3, 3\n',
       );
       expect(x, ['Q1', 'Q2', 'Q3']);
       expect(series.map((s) => s.name), ['2025', '2026']);
       expect(series[0].data, [10, 14, 3]);
       expect(series[1].data, [12, 9, 0]);
+    });
+  });
+
+  group('parseCsv delimiters', () {
+    test('a Dutch Excel export (semicolons) is read, not mangled', () {
+      // Was: labels ['Q1;10', 'Q2;14'] and no series at all.
+      final result = parseCsv('Label;Omzet\nQ1;10\nQ2;14');
+      expect(result.$1, ['Q1', 'Q2']);
+      expect(result.$2.single.name, 'Omzet');
+      expect(result.$2.single.data, [10, 14]);
+      expect(result.unreadable, isEmpty);
+    });
+
+    test('with a semicolon separator a comma is a decimal mark', () {
+      final result = parseCsv('Label;Omzet\nQ1;10,5\nQ2;14,25');
+      expect(result.$2.single.data, [10.5, 14.25]);
+      expect(result.unreadable, isEmpty);
+    });
+
+    test('tab-separated files are read too', () {
+      final result = parseCsv('Label\tOmzet\nQ1\t10\nQ2\t12');
+      expect(result.$1, ['Q1', 'Q2']);
+      expect(result.$2.single.data, [10, 12]);
+    });
+
+    test('a comma file keeps the comma separator even with quoted commas', () {
+      // The header has more commas inside quotes than out; detection must not
+      // be fooled into picking a separator that is not there.
+      final result = parseCsv(',"Omzet, netto"\nQ1,10');
+      expect(result.$2.single.name, 'Omzet, netto');
+      expect(result.$1, ['Q1']);
+      expect(result.$2.single.data, [10]);
+    });
+
+    test('quoting still works under a semicolon separator', () {
+      final result = parseCsv('Label;Omzet\n"Amsterdam; NL";10');
+      expect(result.$1, ['Amsterdam; NL']);
+      expect(result.$2.single.data, [10]);
+    });
+
+    test('an ambiguous 1,234 is refused and reported, never guessed', () {
+      // Could be 1234 or 1.234 depending on where the file was written. It
+      // draws as 0, but the user is told rather than shown a made-up number.
+      final result = parseCsv(',A\nQ1,"1,234"');
+      expect(result.$2.single.data, [0]);
+      expect(result.unreadable, ['1,234']);
+    });
+
+    test('a value carrying both marks is refused and reported', () {
+      final result = parseCsv('Label;Omzet\nQ1;"1.234,56"');
+      expect(result.$2.single.data, [0]);
+      expect(result.unreadable, ['1.234,56']);
+    });
+
+    test('currency and percent signs are refused and reported', () {
+      final result = parseCsv(',A\nQ1,"€ 1000"\nQ2,"12%"');
+      expect(result.$2.single.data, [0, 0]);
+      expect(result.unreadable, ['€ 1000', '12%']);
     });
   });
 

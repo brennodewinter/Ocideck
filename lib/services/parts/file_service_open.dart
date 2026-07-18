@@ -79,7 +79,25 @@ extension _FileServiceOpen on FileService {
         continue;
       }
       try {
-        final filled = spec.withData(await file.readAsString(), path: abs!);
+        final raw = await file.readAsString();
+        final filled = spec.withData(raw, path: abs!);
+        // Hydration happens on open, with no interface to interrupt, so an
+        // unreadable value can only leave a trace here. It still beats a chart
+        // that silently draws 0 with nothing anywhere recording why. Only the
+        // CSV form needs it — a JSON data file already carries real numbers.
+        // Parsing twice is deliberate and cheap: chart data is a handful of
+        // rows, and threading the diagnosis through withData would change its
+        // signature for every caller.
+        if (!abs.toLowerCase().endsWith('.json')) {
+          final unreadable = parseCsv(raw).unreadable;
+          if (unreadable.isNotEmpty) {
+            logWarning(
+              'FileService._hydrateCharts: ${unreadable.length} value(s) in '
+              '${spec.source} are not numbers and were charted as 0 '
+              '(${unreadable.take(5).join(' · ')})',
+            );
+          }
+        }
         // Remember what the file held, so the save path can tell "the user
         // edited this chart" apart from "nobody touched it" — see
         // [_writeChartData].

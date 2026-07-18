@@ -1828,6 +1828,8 @@ const _dutchSourceAddRo = <String, String>{
   'Bron': 'Sursă',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
       'Versiunile din acest exemplar. Un raport de pentest trebuie să indice față de ce s-a testat — și ce versiune era.',
+  'waarde(n) uit de CSV zijn niet als getal gelezen en staan nu op 0:':
+      'valori din CSV nu au fost citite ca numere și acum sunt 0:',
   'Zoeken in alle decks…': 'Caută în toate pachetele…',
   'Zoeken in alle decks': 'Caută în toate pachetele',
   'Zoekterm': 'Termen de căutare',

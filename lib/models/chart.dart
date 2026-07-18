@@ -352,7 +352,14 @@ class ChartSpec {
   }
 
   /// Return a copy with x/series taken from [csv]; keeps [source].
-  ChartSpec withCsv(String csv) => _withParsedData(parseCsv(csv));
+  ///
+  /// Drops [parseCsv]'s `unreadable` report: a spec has nowhere to put it. The
+  /// callers that can actually tell the user something — the import in the
+  /// chart editor, deck hydration — call [parseCsv] themselves for that.
+  ChartSpec withCsv(String csv) {
+    final parsed = parseCsv(csv);
+    return _withParsedData((parsed.$1, parsed.$2));
+  }
 
   /// Return a copy with x/series taken from [json] — the contents of a
   /// `data/<naam>.json`; keeps [source]. Tolerant like [ChartSpec.parse]: a
@@ -472,15 +479,18 @@ String _csvValue(String raw) =>
 ///
 /// Deliberately lenient about malformed input, because the CSV comes from
 /// whatever a user exported: an unterminated quote runs to the end of the line,
-/// and characters between a closing quote and the next comma are discarded.
-List<String> _csvCells(String line) {
+/// and characters between a closing quote and the next separator are discarded.
+List<String> _csvCells(String line, String delimiter) {
   final cells = <String>[];
   var i = 0;
   while (true) {
     final start = i;
-    // Tolerate space before an opening quote, so ` "Amsterdam, NL"` still
-    // reads as one quoted field.
-    while (i < line.length && (line[i] == ' ' || line[i] == '\t')) {
+    // Tolerate space before an opening quote, so ` "Amsterdam, NL"` still reads
+    // as one quoted field — but never eat the separator itself, or a
+    // tab-delimited line would collapse into a single cell.
+    while (i < line.length &&
+        line[i] != delimiter &&
+        (line[i] == ' ' || line[i] == '\t')) {
       i++;
     }
 
@@ -500,24 +510,65 @@ List<String> _csvCells(String line) {
         }
       }
       cells.add(field.toString());
-      while (i < line.length && line[i] != ',') {
+      while (i < line.length && line[i] != delimiter) {
         i++;
       }
     } else {
-      final comma = line.indexOf(',', i);
-      final end = comma == -1 ? line.length : comma;
+      final next = line.indexOf(delimiter, i);
+      final end = next == -1 ? line.length : next;
       cells.add(line.substring(start, end).trim());
       i = end;
     }
 
     if (i >= line.length) return cells;
-    i++; // the separating comma
+    i++; // the separator
   }
+}
+
+/// Pick the separator a file actually uses: whichever of `,` `;` or tab carves
+/// the header into the most cells. A Dutch Excel writes `;` whenever the system
+/// decimal mark is a comma, so assuming `,` silently produced a chart with no
+/// series at all. Ties fall back to `,`, which is what the format nominally is.
+String _detectDelimiter(String headerLine) {
+  var best = ',';
+  var bestCount = _csvCells(headerLine, ',').length;
+  for (final candidate in const [';', '\t']) {
+    final count = _csvCells(headerLine, candidate).length;
+    if (count > bestCount) {
+      best = candidate;
+      bestCount = count;
+    }
+  }
+  return best;
+}
+
+/// Read one cell as a number, or return null if it cannot be read.
+///
+/// When the separator is *not* a comma, a comma cannot be separating fields, so
+/// it can only be a decimal mark: `10,5` is 10.5. That inference is only sound
+/// because the delimiter is known, which is why it lives here and not in a
+/// general number parser.
+///
+/// Anything still ambiguous is deliberately refused rather than guessed. A bare
+/// `1,234` may be 1234 or 1.234 depending on where the file was written, and a
+/// value carrying both marks (`1.234,56`) needs a thousands-separator rule this
+/// does not have. Refusing puts them in front of the user instead of inventing
+/// a plausible number.
+double? _parseCsvNumber(String raw, String delimiter) {
+  final direct = double.tryParse(raw);
+  if (direct != null) return direct;
+  if (delimiter != ',' && raw.contains(',') && !raw.contains('.')) {
+    return double.tryParse(raw.replaceAll(',', '.'));
+  }
+  return null;
 }
 
 /// Parse CSV text into (x labels, series). The first row is a header whose
 /// first cell is ignored (the label column) and whose remaining cells are the
 /// series names; each later row is `label, v1, v2, …`.
+///
+/// The separator is detected per file (see [_detectDelimiter]), so a Dutch
+/// Excel export using `;` reads as well as a comma-separated one.
 ///
 /// Quoted fields are understood per RFC 4180 (see [_csvCells]), with one
 /// documented exception: a newline inside a quoted field is **not** supported.
@@ -525,26 +576,39 @@ List<String> _csvCells(String line) {
 /// torn across two rows. Chart data is one label plus numbers per row, where an
 /// embedded newline has no legitimate use; supporting it would mean scanning
 /// the whole document instead of per line. Blank lines are skipped.
-(List<String>, List<ChartSeries>) parseCsv(String csv) {
+///
+/// A cell that holds something other than a number still counts as 0 — a chart
+/// has to draw *something* — but every such cell is also returned in
+/// [unreadable], so a caller can say so out loud. A value silently rendered as
+/// 0 looks exactly like a real measurement of zero, which is the more damaging
+/// of the two failures. An empty cell is not reported: a short row means "no
+/// value here", which is a statement, not a mistake.
+(List<String>, List<ChartSeries>, {List<String> unreadable}) parseCsv(
+  String csv,
+) {
   final lines = csv
       .replaceAll('\r\n', '\n')
       .split('\n')
       .where((l) => l.trim().isNotEmpty)
       .toList();
-  if (lines.isEmpty) return (const [], const []);
+  if (lines.isEmpty) return (const [], const [], unreadable: const []);
 
-  final header = _csvCells(lines.first);
+  final delimiter = _detectDelimiter(lines.first);
+  final header = _csvCells(lines.first, delimiter);
   final seriesNames = header.length > 1 ? header.sublist(1) : <String>[];
   final x = <String>[];
   final seriesData = [for (final _ in seriesNames) <double>[]];
+  final unreadable = <String>[];
 
   for (final line in lines.skip(1)) {
-    final row = _csvCells(line);
+    final row = _csvCells(line, delimiter);
     if (row.isEmpty) continue;
     x.add(row.first);
     for (var i = 0; i < seriesNames.length; i++) {
       final raw = (i + 1) < row.length ? row[i + 1] : '';
-      seriesData[i].add(double.tryParse(raw) ?? 0);
+      final value = raw.isEmpty ? 0.0 : _parseCsvNumber(raw, delimiter);
+      if (value == null) unreadable.add(raw);
+      seriesData[i].add(value ?? 0);
     }
   }
 
@@ -554,5 +618,6 @@ List<String> _csvCells(String line) {
       for (var i = 0; i < seriesNames.length; i++)
         ChartSeries(name: seriesNames[i], data: seriesData[i]),
     ],
+    unreadable: unreadable,
   );
 }

@@ -1824,6 +1824,8 @@ const _dutchSourceAddLa = <String, String>{
   'Bron': 'Fons',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
       'Versiones in hoc exemplari. Relatio pentesti indicare debet quo contra probatum sit — et qua versione.',
+  'waarde(n) uit de CSV zijn niet als getal gelezen en staan nu op 0:':
+      'valores ex CSV ut numeri lecti non sunt et nunc 0 sunt:',
   'Zoeken in alle decks…': 'In omnibus fasciculis quaerere…',
   'Zoeken in alle decks': 'In omnibus fasciculis quaerere',
   'Zoekterm': 'Vocabulum quaesitum',

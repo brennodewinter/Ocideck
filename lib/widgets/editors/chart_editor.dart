@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/chart.dart';
+import '../../utils/error_snackbar.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import 'advanced_section.dart';
@@ -16,6 +17,24 @@ import '../../theme/app_theme.dart';
 
 part 'chart_editor_dialogs.dart';
 part 'chart_editor_grid.dart';
+
+/// The line shown after a CSV import that contained values which are not
+/// numbers: how many there were, and the first few verbatim so the user can
+/// recognise them in the source file. Only a handful are named — a snackbar
+/// listing forty values is a wall nobody reads, and the count already carries
+/// the scale.
+///
+/// Separate from the widget so the wording can be tested without driving a
+/// file picker, which no test here can do.
+@visibleForTesting
+String csvUnreadableMessage(AppLocalizations l10n, List<String> unreadable) {
+  const shown = 5;
+  final examples = unreadable.take(shown).join(' · ');
+  final ellipsis = unreadable.length > shown ? ' …' : '';
+  return '${unreadable.length} '
+      '${l10n.d('waarde(n) uit de CSV zijn niet als getal gelezen en staan nu op 0:')} '
+      '$examples$ellipsis';
+}
 
 /// Editor for a chart slide: type, title, and an editable data grid. Data can
 /// be entered directly in the interface, imported from a CSV, or linked to a
@@ -298,6 +317,17 @@ class _ChartEditorState extends State<ChartEditor> {
       _rev++;
     });
     _emit();
+
+    // Say what could not be read. Those cells are drawn as 0, and a 0 is
+    // indistinguishable from a real measurement of zero — so staying quiet
+    // would hand the user a chart that looks finished and is wrong.
+    if (parsed.unreadable.isNotEmpty) {
+      showErrorSnackBar(
+        ScaffoldMessenger.of(context),
+        context.l10n,
+        csvUnreadableMessage(context.l10n, parsed.unreadable),
+      );
+    }
   }
 
   void _moveRow(int from, int to) {

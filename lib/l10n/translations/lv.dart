@@ -1807,6 +1807,8 @@ const _dutchSourceAddLv = <String, String>{
   'Bron': 'Avots',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
       'Šajā eksemplārā iekļautās versijas. Pentesta ziņojumā jānorāda, pret ko tika testēts — un kura versija tā bija.',
+  'waarde(n) uit de CSV zijn niet als getal gelezen en staan nu op 0:':
+      'vērtības no CSV netika nolasītas kā skaitļi un tagad ir 0:',
   'Zoeken in alle decks…': 'Meklēt visās kavās…',
   'Zoeken in alle decks': 'Meklēt visās kavās',
   'Zoekterm': 'Meklējamais vārds',

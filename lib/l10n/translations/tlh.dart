@@ -1783,6 +1783,8 @@ const _dutchSourceAddTlh = <String, String>{
   'Bron': 'Daq',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
       'naDev mI\'mey. pentest ja\'chuq \'e\' Del net poQ — mI\' je.',
+  'waarde(n) uit de CSV zijn niet als getal gelezen en staan nu op 0:':
+      'CSV mI\'mey lulaDlu\'be\'; DaH pagh chaH:',
   'Zoeken in alle decks…': 'Hoch deck-Daq Sam…',
   'Zoeken in alle decks': 'Hoch deck-Daq Sam',
   'Zoekterm': 'nejwI\' mu\'',

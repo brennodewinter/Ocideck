@@ -1832,6 +1832,8 @@ const _dutchSourceAddBg = <String, String>{
   'Bron': 'Източник',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
       'Версиите в това копие. Докладът от пентест трябва да посочва спрямо какво е тествано — и коя версия.',
+  'waarde(n) uit de CSV zijn niet als getal gelezen en staan nu op 0:':
+      'стойности от CSV не са прочетени като числа и сега са 0:',
   'Zoeken in alle decks…': 'Търсене във всички колоди…',
   'Zoeken in alle decks': 'Търсене във всички колоди',
   'Zoekterm': 'Търсен израз',

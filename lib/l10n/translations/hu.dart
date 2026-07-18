@@ -1812,6 +1812,8 @@ const _dutchSourceAddHu = <String, String>{
   'Bron': 'Forrás',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
       'A példányban szereplő verziók. A pentestjelentésnek meg kell adnia, mihez képest történt a vizsgálat — és melyik verzióhoz.',
+  'waarde(n) uit de CSV zijn niet als getal gelezen en staan nu op 0:':
+      'érték a CSV-ből nem számként lett beolvasva, és most 0:',
   'Zoeken in alle decks…': 'Keresés minden pakliban…',
   'Zoeken in alle decks': 'Keresés minden pakliban',
   'Zoekterm': 'Keresőkifejezés',

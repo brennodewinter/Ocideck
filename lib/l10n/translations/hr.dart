@@ -1815,6 +1815,8 @@ const _dutchSourceAddHr = <String, String>{
   'Bron': 'Izvor',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
       'Verzije u ovom primjerku. Izvještaj o pentestu treba navesti prema čemu se testiralo — i koja je to verzija bila.',
+  'waarde(n) uit de CSV zijn niet als getal gelezen en staan nu op 0:':
+      'vrijednosti iz CSV-a nisu pročitane kao brojevi i sada su 0:',
   'Zoeken in alle decks…': 'Pretraži sve špilove…',
   'Zoeken in alle decks': 'Pretraži sve špilove',
   'Zoekterm': 'Pojam za pretragu',

@@ -1844,6 +1844,8 @@ const _dutchSourceAddGa = <String, String>{
   'Bron': 'Foinse',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
       'Na leaganacha sa chóip seo. Ba cheart do thuairisc pentest a rá cad ina choinne a rinneadh tástáil — agus cén leagan a bhí ann.',
+  'waarde(n) uit de CSV zijn niet als getal gelezen en staan nu op 0:':
+      'luach(anna) ón CSV nár léadh mar uimhreacha agus is 0 iad anois:',
   'Zoeken in alle decks…': 'Cuardaigh gach deic…',
   'Zoeken in alle decks': 'Cuardaigh gach deic',
   'Zoekterm': 'Téarma cuardaigh',

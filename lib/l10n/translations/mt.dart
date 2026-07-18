@@ -1831,6 +1831,8 @@ const _dutchSourceAddMt = <String, String>{
   'Bron': 'Sors',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
       'Il-verżjonijiet f\'din il-kopja. Rapport ta\' pentest għandu jgħid kontra xiex sar it-test — u liema verżjoni kienet.',
+  'waarde(n) uit de CSV zijn niet als getal gelezen en staan nu op 0:':
+      'valur(i) mis-CSV ma nqarawx bħala numri u issa huma 0:',
   'Zoeken in alle decks…': 'Fittex fid-decks kollha…',
   'Zoeken in alle decks': 'Fittex fid-decks kollha',
   'Zoekterm': 'Terminu tat-tfittxija',
