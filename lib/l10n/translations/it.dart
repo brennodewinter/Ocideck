@@ -736,6 +736,13 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Meegeleverde versies invullen': 'Inserisci le versioni incluse',
+  'vastgelegd': 'registrata',
+  'nu beschikbaar': 'ora disponibile',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Uno standard usato per questo test ha ora una versione più recente:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Non è necessariamente un errore: il test è stato svolto quando valeva quella versione. Il report registra ciò che è stato realmente usato.',
   'Gebundelde standaarden': 'Standard inclusi',
   'geen versienummer': 'nessun numero di versione',
   'Bron': 'Fonte',

@@ -1811,6 +1811,13 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Meegeleverde versies invullen': 'Συμπλήρωση ενσωματωμένων εκδόσεων',
+  'vastgelegd': 'καταγράφηκε',
+  'nu beschikbaar': 'τώρα διαθέσιμη',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Ένα πρότυπο βάσει του οποίου ελέγχθηκε έχει πλέον νεότερη έκδοση:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Δεν είναι κατ\' ανάγκη λάθος — ο έλεγχος έγινε όταν ίσχυε εκείνη η έκδοση. Η αναφορά καταγράφει τι χρησιμοποιήθηκε πράγματι.',
   'Gebundelde standaarden': 'Ενσωματωμένα πρότυπα',
   'geen versienummer': 'χωρίς αριθμό έκδοσης',
   'Bron': 'Πηγή',

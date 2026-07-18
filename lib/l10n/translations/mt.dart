@@ -1806,6 +1806,13 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Meegeleverde versies invullen': 'Imla l-verżjonijiet inklużi',
+  'vastgelegd': 'irreġistrata',
+  'nu beschikbaar': 'issa disponibbli',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Standard li kontrih sar it-test issa għandu verżjoni aktar ġdida:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Dan mhux bilfors żball — it-test sar meta kienet tapplika dik il-verżjoni. Ir-rapport jirreġistra dak li ntuża tabilħaqq.',
   'Gebundelde standaarden': 'Standards inklużi',
   'geen versienummer': 'l-ebda numru ta\' verżjoni',
   'Bron': 'Sors',

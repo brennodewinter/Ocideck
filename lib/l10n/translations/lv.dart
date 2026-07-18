@@ -1782,6 +1782,13 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Meegeleverde versies invullen': 'Ievietot iekļautās versijas',
+  'vastgelegd': 'reģistrēts',
+  'nu beschikbaar': 'tagad pieejams',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Standartam, pret kuru tika testēts, tagad ir jaunāka versija:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Tā nav obligāti kļūda — pārbaude notika, kad bija spēkā tā versija. Ziņojums fiksē, kas patiešām tika izmantots.',
   'Gebundelde standaarden': 'Iekļautie standarti',
   'geen versienummer': 'bez versijas numura',
   'Bron': 'Avots',

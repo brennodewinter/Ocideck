@@ -1801,6 +1801,13 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Meegeleverde versies invullen': 'Підставити вбудовані версії',
+  'vastgelegd': 'зафіксовано',
+  'nu beschikbaar': 'тепер доступна',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Стандарт, щодо якого проводилася перевірка, має новішу версію:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Це не обов\'язково помилка — перевірку проводили, коли діяла та версія. Звіт фіксує те, що справді використовувалося.',
   'Gebundelde standaarden': 'Вбудовані стандарти',
   'geen versienummer': 'без номера версії',
   'Bron': 'Джерело',

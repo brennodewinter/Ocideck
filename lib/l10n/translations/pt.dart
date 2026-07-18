@@ -1813,6 +1813,13 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Meegeleverde versies invullen': 'Preencher as versões incluídas',
+  'vastgelegd': 'registada',
+  'nu beschikbaar': 'agora disponível',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Uma norma contra a qual se testou tem agora uma versão mais recente:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Não tem de estar errado — o teste foi feito quando essa versão vigorava. O relatório regista o que foi realmente usado.',
   'Gebundelde standaarden': 'Normas incluídas',
   'geen versienummer': 'sem número de versão',
   'Bron': 'Fonte',

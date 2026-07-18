@@ -76,6 +76,14 @@ enum EisCheck {
 
   /// Every finding links a CWE weakness (4.7.6).
   everyFindingHasCwe,
+
+  /// The deck records which standards the test was carried out against (4.3.2).
+  ///
+  /// Deliberately *not* also used for 4.8.2.x: that requirement is about the
+  /// **tools** the tester used (name, version, public URL), which is a different
+  /// list entirely. Deriving it from the bundled reference standards would
+  /// assert compliance for something never recorded.
+  standardsRecorded,
 }
 
 /// One MIAUW requirement (EIS) from the bundled schema (PENTEST_MIAUW §1/§9).

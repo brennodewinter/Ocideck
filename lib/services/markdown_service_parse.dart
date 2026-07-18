@@ -82,6 +82,7 @@ class _FrontMatter {
   String? presentationTitle;
   String author = '';
   String language = '';
+  List<String> standardsUsed = const [];
   String organization = '';
   String version = '';
   String date = '';
@@ -136,6 +137,7 @@ extension _MarkdownParse on MarkdownService {
       description: fm.description,
       keywords: fm.keywords,
       language: fm.language,
+      standardsUsed: fm.standardsUsed,
       tlp: fm.tlp,
       privacy: fm.privacy,
       presentationTargetSeconds: fm.presentationTargetSeconds.clamp(0, 86400),
@@ -205,6 +207,12 @@ extension _MarkdownParse on MarkdownService {
               fm.keywords = _parseScalar(value);
             case 'language':
               fm.language = _parseScalar(value);
+            case 'standards':
+              fm.standardsUsed = _parseScalar(value)
+                  .split(',')
+                  .map((e) => e.trim())
+                  .where((e) => e.isNotEmpty)
+                  .toList();
             case 'tlp':
               fm.tlp = TlpLevelX.fromKey(value);
             case 'privacy':

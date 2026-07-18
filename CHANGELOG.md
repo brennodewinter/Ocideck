@@ -8,6 +8,18 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Een rapport legt nu vast tegen welke standaarden is getoetst — met versie.**
+  Bij *Presentatie-info* vul je de gebruikte standaarden in, met een knop die de
+  versies invult die deze versie van OciDeck meedraagt. Die versies worden
+  **bevroren** in het bestand: een rapport uit dit jaar dat je volgend jaar
+  opent, blijft zeggen waartegen er destijds echt is getoetst, ook als OciDeck
+  inmiddels een nieuwere standaard meelevert. Dat maakt meteen zichtbaar wanneer
+  er iets veranderd is: bij *Afronden & verzegelen* meldt OciDeck het als een
+  standaard sinds het onderzoek is bijgewerkt — geen blokkade, want tegen een
+  oudere versie toetsen is legitiem, maar het hoort geen verrassing achteraf te
+  zijn. Hiermee is MIAUW-eis 4.3.2 ("overzicht gebruikte standaarden") niet
+  langer iets dat je handmatig moet bevestigen: de compliance-controle leidt het
+  af uit het rapport zelf.
 - **Zichtbaar welke versie van elke standaard erin zit — en een poort die merkt
   wanneer die achterloopt.** OciDeck draagt referentiedata mee (OWASP WSTG,
   MITRE CWE, het MIAUW-schema, de CVSS-specificatie). Welke versie dat was, stond
