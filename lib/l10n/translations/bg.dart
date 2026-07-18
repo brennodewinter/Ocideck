@@ -1806,6 +1806,18 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Meegeleverde versies invullen': 'Попълни вградените версии',
+  'vastgelegd': 'записана',
+  'nu beschikbaar': 'сега налична',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Стандарт, спрямо който е тествано, вече има по-нова версия:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Това не е непременно грешка — проверката е извършена, когато е важала тази версия. Докладът записва какво наистина е използвано.',
+  'Gebundelde standaarden': 'Вградени стандарти',
+  'geen versienummer': 'без номер на версия',
+  'Bron': 'Източник',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Версиите в това копие. Докладът от пентест трябва да посочва спрямо какво е тествано — и коя версия.',
   'Zoeken in alle decks…': 'Търсене във всички колоди…',
   'Zoeken in alle decks': 'Търсене във всички колоди',
   'Zoekterm': 'Търсен израз',

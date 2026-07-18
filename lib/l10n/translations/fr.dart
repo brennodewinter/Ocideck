@@ -740,6 +740,18 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Meegeleverde versies invullen': 'Renseigner les versions intégrées',
+  'vastgelegd': 'consignée',
+  'nu beschikbaar': 'désormais disponible',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Une norme utilisée pour ce test a désormais une version plus récente :',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Ce n\'est pas nécessairement une erreur : le test a été mené quand cette version s\'appliquait. Le rapport consigne ce qui a réellement servi.',
+  'Gebundelde standaarden': 'Normes intégrées',
+  'geen versienummer': 'pas de numéro de version',
+  'Bron': 'Source',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Les versions présentes dans cet exemplaire. Un rapport de pentest doit indiquer le référentiel utilisé — et sa version.',
   'Zoeken in alle decks…': 'Rechercher dans tous les decks…',
   'Zoeken in alle decks': 'Rechercher dans tous les decks',
   'Zoekterm': 'Terme recherché',

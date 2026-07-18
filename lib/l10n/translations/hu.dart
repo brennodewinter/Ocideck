@@ -1787,6 +1787,18 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Meegeleverde versies invullen': 'Mellékelt verziók kitöltése',
+  'vastgelegd': 'rögzítve',
+  'nu beschikbaar': 'most elérhető',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Egy vizsgálati alapként használt szabványnak már újabb verziója van:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Ez nem feltétlenül hiba — a vizsgálat akkor készült, amikor az a verzió volt érvényben. A jelentés azt rögzíti, amit ténylegesen használtak.',
+  'Gebundelde standaarden': 'Mellékelt szabványok',
+  'geen versienummer': 'nincs verziószám',
+  'Bron': 'Forrás',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'A példányban szereplő verziók. A pentestjelentésnek meg kell adnia, mihez képest történt a vizsgálat — és melyik verzióhoz.',
   'Zoeken in alle decks…': 'Keresés minden pakliban…',
   'Zoeken in alle decks': 'Keresés minden pakliban',
   'Zoekterm': 'Keresőkifejezés',

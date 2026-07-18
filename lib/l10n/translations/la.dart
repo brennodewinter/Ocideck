@@ -1799,6 +1799,18 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Meegeleverde versies invullen': 'Versiones inclusas inserere',
+  'vastgelegd': 'consignata',
+  'nu beschikbaar': 'nunc praesto',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Normae qua probatum est nunc versio recentior exstat:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Id non necesse est erratum esse: probatio facta est cum ea versio valeret. Relatio consignat quid re vera adhibitum sit.',
+  'Gebundelde standaarden': 'Normae inclusae',
+  'geen versienummer': 'sine numero versionis',
+  'Bron': 'Fons',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Versiones in hoc exemplari. Relatio pentesti indicare debet quo contra probatum sit — et qua versione.',
   'Zoeken in alle decks…': 'In omnibus fasciculis quaerere…',
   'Zoeken in alle decks': 'In omnibus fasciculis quaerere',
   'Zoekterm': 'Vocabulum quaesitum',

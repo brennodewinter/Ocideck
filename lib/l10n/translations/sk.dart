@@ -1790,6 +1790,18 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Meegeleverde versies invullen': 'Doplniť pribalené verzie',
+  'vastgelegd': 'zaznamenané',
+  'nu beschikbaar': 'teraz dostupné',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Štandard, voči ktorému sa testovalo, má teraz novšiu verziu:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Nemusí to byť chyba — test prebehol v čase, keď platila tá verzia. Správa zaznamenáva, čo sa skutočne použilo.',
+  'Gebundelde standaarden': 'Pribalené štandardy',
+  'geen versienummer': 'bez čísla verzie',
+  'Bron': 'Zdroj',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Verzie v tomto exemplári. Správa z pentestu má uvádzať, voči čomu sa testovalo — a v akej verzii.',
   'Zoeken in alle decks…': 'Hľadať vo všetkých sadách…',
   'Zoeken in alle decks': 'Hľadať vo všetkých sadách',
   'Zoekterm': 'Hľadaný výraz',

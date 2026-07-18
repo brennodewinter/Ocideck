@@ -1796,6 +1796,18 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Meegeleverde versies invullen': 'Wstaw dołączone wersje',
+  'vastgelegd': 'zapisano',
+  'nu beschikbaar': 'obecnie dostępna',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Standard, względem którego testowano, ma już nowszą wersję:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'To nie musi być błąd — badanie przeprowadzono, gdy obowiązywała tamta wersja. Raport zapisuje to, czego faktycznie użyto.',
+  'Gebundelde standaarden': 'Dołączone standardy',
+  'geen versienummer': 'brak numeru wersji',
+  'Bron': 'Źródło',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Wersje zawarte w tej kopii. Raport z pentestu powinien podawać, względem czego testowano — i w jakiej wersji.',
   'Zoeken in alle decks…': 'Szukaj we wszystkich taliach…',
   'Zoeken in alle decks': 'Szukaj we wszystkich taliach',
   'Zoekterm': 'Szukane hasło',

@@ -1790,6 +1790,18 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Meegeleverde versies invullen': 'Unesi uključene verzije',
+  'vastgelegd': 'zabilježeno',
+  'nu beschikbaar': 'sada dostupno',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Standard prema kojem se testiralo sada ima noviju verziju:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'To ne mora biti pogrešno — ispitivanje je provedeno dok je vrijedila ta verzija. Izvještaj bilježi što je stvarno korišteno.',
+  'Gebundelde standaarden': 'Uključeni standardi',
+  'geen versienummer': 'bez broja verzije',
+  'Bron': 'Izvor',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Verzije u ovom primjerku. Izvještaj o pentestu treba navesti prema čemu se testiralo — i koja je to verzija bila.',
   'Zoeken in alle decks…': 'Pretraži sve špilove…',
   'Zoeken in alle decks': 'Pretraži sve špilove',
   'Zoekterm': 'Pojam za pretragu',

@@ -1782,6 +1782,18 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Meegeleverde versies invullen': 'Indsæt de medfølgende versioner',
+  'vastgelegd': 'registreret',
+  'nu beschikbaar': 'nu tilgængelig',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'En standard, der er testet mod, har nu en nyere version:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Det behøver ikke være forkert — testen blev udført, da den version gjaldt. Rapporten registrerer, hvad der faktisk blev brugt.',
+  'Gebundelde standaarden': 'Medfølgende standarder',
+  'geen versienummer': 'intet versionsnummer',
+  'Bron': 'Kilde',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Versionerne i dette eksemplar. En pentestrapport bør angive, hvad der er testet mod — og hvilken version det var.',
   'Zoeken in alle decks…': 'Søg i alle decks…',
   'Zoeken in alle decks': 'Søg i alle decks',
   'Zoekterm': 'Søgeord',
