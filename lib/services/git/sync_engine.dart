@@ -127,6 +127,24 @@ class SyncEngine {
       // netwerkfout hier is dus gewoon "nog offline" en valt in de catch.
       final upserts = prepare == null ? stored : await prepare(commit, stored);
 
+      // Een ronde kan offline op zijn werkbranch begonnen zijn: die branch
+      // bestaat dan nog niet op de forge (D3). De eerste commit van een ronde
+      // (forkFrom gezet) landt op de kop van de werkbranch — hij tákt net af, dus
+      // er is nog geen basis om tegen te botsen; bestaat de branch nog niet, maak
+      // hem dan af van waar de ronde vandaan kwam. Een netwerkfout hier valt net
+      // als de rest in de catch — het werk blijft gewoon in de wachtrij.
+      var baseSha = commit.baseSha;
+      if (commit.forkFrom != null) {
+        final branches = await forge.listBranches();
+        final match = branches.where((b) => b.name == commit.branch);
+        baseSha = match.isNotEmpty
+            ? match.first.sha
+            : (await forge.createBranch(
+                commit.branch,
+                fromRef: commit.forkFrom!,
+              )).sha;
+      }
+
       // Idempotentie en verwijderingen kijken alléén naar de deckmap, niet naar
       // de pool-blobs die buiten de map liggen: een blob is content-geadresseerd
       // en onveranderlijk, dus die telt niet mee in "staat het er al precies zo".
@@ -161,7 +179,7 @@ class SyncEngine {
         message: commit.message,
         upserts: upserts,
         deletes: deletes,
-        baseSha: commit.baseSha,
+        baseSha: baseSha,
       );
       await outbox.remove(commit.deckDir);
       return SyncOutcome(

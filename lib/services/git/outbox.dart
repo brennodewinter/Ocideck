@@ -25,11 +25,18 @@ class PendingCommit {
   /// een non-fast-forward detecteerbaar maakt.
   final String baseSha;
 
+  /// De branch waar [branch] van afgetakt moet worden als hij bij het flushen
+  /// nog niet bestaat (D3). Zo kan een bewerkingsronde óók offline op zijn
+  /// werkbranch beginnen: de branch wordt pas bij de eerste geslaagde push
+  /// aangemaakt. `null` voor een gewone opslag naar een bestaande branch.
+  final String? forkFrom;
+
   const PendingCommit({
     required this.deckDir,
     required this.branch,
     required this.message,
     required this.baseSha,
+    this.forkFrom,
   });
 
   Map<String, Object?> toJson() => {
@@ -37,6 +44,7 @@ class PendingCommit {
     'branch': branch,
     'message': message,
     'baseSha': baseSha,
+    if (forkFrom != null) 'forkFrom': forkFrom,
   };
 
   static PendingCommit? fromJson(Map<String, Object?> json) {
@@ -44,6 +52,7 @@ class PendingCommit {
     final branch = json['branch'];
     final message = json['message'];
     final baseSha = json['baseSha'];
+    final forkFrom = json['forkFrom'];
     if (deckDir is! String ||
         branch is! String ||
         message is! String ||
@@ -56,6 +65,7 @@ class PendingCommit {
       branch: branch,
       message: message,
       baseSha: baseSha,
+      forkFrom: forkFrom is String ? forkFrom : null,
     );
   }
 }
@@ -95,6 +105,10 @@ class Outbox {
             branch: commit.branch,
             message: commit.message,
             baseSha: existing.baseSha,
+            // Ronde-eigenschappen horen bij de oorspronkelijke baseSha: hield hij
+            // een nog-niet-bestaande werkbranch aan, dan blijft dat zo tot de
+            // eerste push hem aanmaakt.
+            forkFrom: existing.forkFrom,
           );
     await (await _prefs()).setString(
       _keyFor(commit.deckDir),

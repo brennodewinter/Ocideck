@@ -98,10 +98,12 @@ void main() {
       Deck(title: title, slides: slides);
 
   group('saveToGit', () {
-    test('schrijft het deck terug en landt als één commit', () async {
+    test('landt op een werkbranch, niet rechtstreeks op main (D3)', () async {
       final (container, tabs) = build();
       final repo = repoWith('# oud');
       final forge = FakeForge(repo);
+      final when = DateTime(2026, 7, 18);
+      const workBranch = 'decks/kwartaalcijfers/2026-07-18';
 
       // Open eerst, zodat het tabblad een herkomst + baseSha draagt.
       final validDeck = '''
@@ -119,11 +121,6 @@ theme: ocideck
         deckDir: deckDir,
         branch: 'main',
       );
-      final baseBefore = container
-          .read(tabsProvider)
-          .current!
-          .gitOrigin!
-          .baseSha;
 
       final result = await tabs.saveToGit(
         forge,
@@ -131,18 +128,68 @@ theme: ocideck
         deckDir: deckDir,
         branch: 'main',
         message: 'wijziging',
+        now: when,
       );
 
       expect(result.status, GitSaveStatus.committed);
       expect(result.warnings, isEmpty);
-      // De branchkop is verzet en het tabblad draagt de nieuwe basis.
+      // Het werk landt op de gegenereerde werkbranch; main is niet aangeraakt.
+      expect(repo.branches[workBranch], result.sha);
+      expect(repo.branches['main'], 'commit-main');
+      // Het tabblad volgt de werkbranch en draagt de nieuwe basis.
       final originAfter = container.read(tabsProvider).current!.gitOrigin!;
+      expect(originAfter.branch, workBranch);
       expect(originAfter.baseSha, result.sha);
-      expect(originAfter.baseSha, isNot(baseBefore));
-      expect(repo.branches['main'], result.sha);
       // deck.md staat op de forge en is geldige markdown.
       expect(repo.files['$deckDir/deck.md'], isNotNull);
       expect(utf8.decode(repo.files['$deckDir/deck.md']!), contains('#'));
+    });
+
+    test('een tweede opslag blijft op dezelfde werkbranch', () async {
+      final (container, tabs) = build();
+      final repo = repoWith('''
+---
+marp: true
+theme: ocideck
+---
+
+# Kwartaalcijfers
+''');
+      final forge = FakeForge(repo);
+      const workBranch = 'decks/kwartaalcijfers/2026-07-18';
+      await tabs.openDeckFromGit(
+        forge,
+        config: config,
+        deckDir: deckDir,
+        branch: 'main',
+      );
+
+      final first = await tabs.saveToGit(
+        forge,
+        config: config,
+        deckDir: deckDir,
+        branch: 'main',
+        message: 'ronde 1a',
+        now: DateTime(2026, 7, 18),
+      );
+      // Tweede opslag: het tabblad zit nu midden in de ronde. Ook al zeggen we
+      // opnieuw 'main' (de fork-bron), hij blijft op de werkbranch — een andere
+      // dag zou hem niet naar een nieuwe branch trekken.
+      final second = await tabs.saveToGit(
+        forge,
+        config: config,
+        deckDir: deckDir,
+        branch: 'main',
+        message: 'ronde 1b',
+        now: DateTime(2026, 7, 20),
+      );
+
+      expect(second.status, GitSaveStatus.committed);
+      expect(container.read(tabsProvider).current!.gitOrigin!.branch, workBranch);
+      expect(repo.branches[workBranch], second.sha);
+      expect(repo.branches[workBranch], isNot(first.sha));
+      // Geen tweede werkbranch aangemaakt.
+      expect(repo.branches.containsKey('decks/kwartaalcijfers/2026-07-20'), isFalse);
     });
 
     test('poolt een mem:-afbeelding en verwijst ernaar in deck.md', () async {
@@ -180,7 +227,7 @@ theme: ocideck
       expect(utf8.decode(repo.files['$deckDir/deck.md']!), contains(ref));
     });
 
-    test('publiceert een nieuw deck zonder herkomst op de branchkop', () async {
+    test('een nieuw deck zonder herkomst start ook op een werkbranch', () async {
       final (container, tabs) = build();
       // Repo zonder dit deck; alleen een branch.
       final repo = FakeRepo(branches: {'main': 'commit-main'}, files: {});
@@ -201,17 +248,22 @@ theme: ocideck
         deckDir: 'decks/nieuwplan',
         branch: 'main',
         message: 'eerste versie',
+        now: DateTime(2026, 7, 18),
       );
 
       expect(result.status, GitSaveStatus.committed);
       expect(repo.files['decks/nieuwplan/deck.md'], isNotNull);
+      // Ook een nieuw deck landt op een concept-branch, niet op main.
+      expect(repo.branches['decks/nieuwplan/2026-07-18'], result.sha);
+      expect(repo.branches['main'], 'commit-main');
       final origin = container.read(tabsProvider).current!.gitOrigin!;
       expect(origin.deckDir, 'decks/nieuwplan');
+      expect(origin.branch, 'decks/nieuwplan/2026-07-18');
       expect(origin.baseSha, result.sha);
     });
 
     test(
-      'een verzette branch komt terug als conflict, niet als fout',
+      'een verzette werkbranch komt terug als conflict, niet als fout',
       () async {
         final (container, tabs) = build();
         final repo = repoWith('''
@@ -223,6 +275,7 @@ theme: ocideck
 # Kwartaalcijfers
 ''');
         final forge = FakeForge(repo);
+        const workBranch = 'decks/kwartaalcijfers/2026-07-18';
         await tabs.openDeckFromGit(
           forge,
           config: config,
@@ -230,8 +283,23 @@ theme: ocideck
           branch: 'main',
         );
 
-        // Iemand anders committeert intussen: de branchkop verschuift.
-        repo.branches['main'] = 'iemand-anders';
+        // Eerste opslag opent de ronde op de werkbranch.
+        await tabs.saveToGit(
+          forge,
+          config: config,
+          deckDir: deckDir,
+          branch: 'main',
+          message: 'ronde 1',
+          now: DateTime(2026, 7, 18),
+        );
+        expect(
+          container.read(tabsProvider).current!.gitOrigin!.branch,
+          workBranch,
+        );
+
+        // Iemand anders verzet intussen de werkbranch (bv. een reviewer die
+        // erop doorwerkt). De volgende opslag zit midden in de ronde en botst.
+        repo.branches[workBranch] = 'iemand-anders';
 
         final result = await tabs.saveToGit(
           forge,
@@ -239,12 +307,13 @@ theme: ocideck
           deckDir: deckDir,
           branch: 'main',
           message: 'botsing',
+          now: DateTime(2026, 7, 18),
         );
 
         expect(result.status, GitSaveStatus.conflict);
         expect(result.message, isNotNull);
         // De commit van de ander staat er nog; wij hebben niets overschreven.
-        expect(repo.branches['main'], 'iemand-anders');
+        expect(repo.branches[workBranch], 'iemand-anders');
       },
     );
 
@@ -366,6 +435,7 @@ theme: ocideck
         message: 'offline',
         mirror: mirror,
         outbox: outbox,
+        now: DateTime(2026, 7, 18),
       );
 
       // Verbinding terug: de wachtrij loopt leeg.
@@ -376,7 +446,11 @@ theme: ocideck
       expect(outcomes, hasLength(1));
       expect(outcomes.single.status, SyncStatus.committed);
       expect(await outbox.isEmpty, isTrue); // wachtrij leeg
-      expect(repo.branches['main'], outcomes.single.sha); // commit geland
+      // Een ronde die offline begon: de flush maakt de werkbranch nu aan en de
+      // commit landt daar — niet op main.
+      const workBranch = 'decks/kwartaalcijfers/2026-07-18';
+      expect(repo.branches[workBranch], outcomes.single.sha);
+      expect(repo.branches['main'], 'commit-main');
     });
 
     test('een offline toegevoegde afbeelding wordt bij het synchroniseren '

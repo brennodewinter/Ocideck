@@ -118,6 +118,33 @@ void main() {
       expect(pending.message, 'Tweede', reason: 'de boodschap mag wél mee');
     });
 
+    test('forkFrom round-trips and is kept on re-enqueue', () async {
+      await outbox.enqueue(
+        const PendingCommit(
+          deckDir: 'decks/a',
+          branch: 'decks/a/2026-07-18',
+          message: 'concept',
+          baseSha: 'origineel',
+          forkFrom: 'main',
+        ),
+      );
+      expect((await Outbox(prefs: prefs).forDeck('decks/a'))!.forkFrom, 'main');
+
+      // Opnieuw opslaan houdt de ronde-eigenschappen vast, net als baseSha.
+      await outbox.enqueue(
+        const PendingCommit(
+          deckDir: 'decks/a',
+          branch: 'decks/a/2026-07-18',
+          message: 'tweede',
+          baseSha: 'nieuwer',
+          forkFrom: 'main',
+        ),
+      );
+      final again = (await outbox.forDeck('decks/a'))!;
+      expect(again.forkFrom, 'main');
+      expect(again.baseSha, 'origineel');
+    });
+
     test('one pending commit per deck, decks kept apart', () async {
       await outbox.enqueue(
         const PendingCommit(
@@ -411,6 +438,63 @@ void main() {
         utf8.decode(repo.files['decks/nieuw/deck.md']!),
         '# Splinternieuw',
       );
+    });
+  });
+
+  group('work branch (D3)', () {
+    const work = 'decks/kwartaalcijfers/2026-07-18';
+
+    test('a round that began offline: the flush creates the work branch', () async {
+      // The first save of a round happened on an aeroplane: the work branch
+      // never got created. forkFrom lets the flush make it on landing, so
+      // "verbinding kwijt is nooit werk kwijt" holds even for the first save.
+      await mirror.writeDeck('decks/kwartaalcijfers', {
+        'decks/kwartaalcijfers/deck.md': _b('# Concept'),
+      });
+      await outbox.enqueue(
+        const PendingCommit(
+          deckDir: 'decks/kwartaalcijfers',
+          branch: work, // a branch that does not exist yet
+          message: 'concept',
+          baseSha: '', // no base known offline; the flush fills it
+          forkFrom: 'main',
+        ),
+      );
+      expect(repo.branches.containsKey(work), isFalse);
+
+      final outcome = await engineWith(
+        FakeForge(repo),
+      ).flushDeck('decks/kwartaalcijfers');
+
+      expect(outcome.status, SyncStatus.committed);
+      // The branch now exists, forked from main, carrying our commit; main is
+      // untouched — landing on it is a separate, gated act (the review PR).
+      expect(repo.branches[work], outcome.sha);
+      expect(repo.branches['main'], 'commit-main');
+      expect(await outbox.isEmpty, isTrue);
+    });
+
+    test('an existing work branch is committed onto, not recreated', () async {
+      repo.branches[work] = 'commit-main'; // created earlier in the round
+      await mirror.writeDeck('decks/kwartaalcijfers', {
+        'decks/kwartaalcijfers/deck.md': _b('# Volgende'),
+      });
+      await outbox.enqueue(
+        const PendingCommit(
+          deckDir: 'decks/kwartaalcijfers',
+          branch: work,
+          message: 'volgende',
+          baseSha: '',
+          forkFrom: 'main',
+        ),
+      );
+
+      final outcome = await engineWith(
+        FakeForge(repo),
+      ).flushDeck('decks/kwartaalcijfers');
+      expect(outcome.status, SyncStatus.committed);
+      expect(repo.branches[work], outcome.sha);
+      expect(repo.branches[work], isNot('commit-main')); // advanced
     });
   });
 }
