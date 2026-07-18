@@ -194,6 +194,14 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   content is not lost, only relocated, and one undo brings it back.
 
 ### Changed
+- **Evidence thumbnails no longer decode at full resolution.** A finding's
+  evidence thumbnail is 44 pixels wide, but the screenshot behind it is usually
+  a few thousand — and the whole bitmap went into memory. A report carrying
+  dozens of evidence items paid for that many times over. The thumbnail now
+  decodes at four times its display width, which is well above any realistic
+  pixel ratio, so nothing looks different. Signatures are deliberately left
+  untouched: they are small drawn images that must stay sharp as proof of
+  signing.
 - **The licence documentation now says what is actually bundled.**
   `LICENSE_COMPLIANCE.md` stated that no OWASP WSTG checklist content shipped, so
   CC-BY-SA-4.0 share-alike was not triggered — while the module had bundled the
@@ -251,6 +259,14 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   glance from a contrast or text-density one.
 
 ### Fixed
+- **Screen readers now announce the image buttons by name.** The paste, copy and
+  clear buttons in the image picker bar, and the reset button on the zoom
+  slider, were wrapped *in* a tooltip rather than carrying one. Flutter attaches
+  that tooltip to a surrounding node, so the button itself arrived at the screen
+  reader unnamed — while the row beside it was announced as "Afbeelding plakken
+  uit klembord". Each button now carries its own name (WCAG 2.2 SC 4.1.2).
+  Nothing changes on screen. A new test walks the semantics tree and fails on
+  any button that offers no name, so this cannot quietly return.
 - **A bullet that is simply a long sentence can now be moved to the speaker
   notes too.** *"Uitleg naar notities"* only appeared on a bullet shaped like
   *label: explanation* — so the very line that most needed to leave the slide, a
