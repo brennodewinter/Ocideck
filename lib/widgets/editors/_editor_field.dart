@@ -303,15 +303,15 @@ class ImageZoomControl extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 4),
-            Tooltip(
-              message: l10n.d('Terugzetten (volledige afbeelding zichtbaar)'),
-              child: IconButton(
-                icon: const Icon(Icons.refresh, size: 16),
-                onPressed: zoomed ? () => onChanged(100) : null,
-                padding: EdgeInsets.zero,
-                constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
-                color: AppTheme.slate500,
-              ),
+            // Zie de toelichting bij de beeldkiezerknoppen: de tooltip hoort op
+            // de IconButton zelf, anders blijft de knop naamloos (WCAG 4.1.2).
+            IconButton(
+              tooltip: l10n.d('Terugzetten (volledige afbeelding zichtbaar)'),
+              icon: const Icon(Icons.refresh, size: 16),
+              onPressed: zoomed ? () => onChanged(100) : null,
+              padding: EdgeInsets.zero,
+              constraints: const BoxConstraints(minWidth: 28, minHeight: 28),
+              color: AppTheme.slate500,
             ),
           ],
         ),
@@ -529,47 +529,45 @@ class ImagePickerBar extends ConsumerWidget {
                 icon: const Icon(Icons.folder_open_outlined, size: 16),
                 label: Text(l10n.d('Van computer…')),
               ),
+            // `IconButton(tooltip:)` in plaats van een omhullende `Tooltip`:
+            // die laatste hangt zijn semantiek aan een omliggende knoop, zodat
+            // de knop zélf naamloos bij de schermlezer aankomt (WCAG 4.1.2).
+            // De tooltip blijft visueel identiek.
             if (onPaste != null)
-              Tooltip(
-                message: l10n.d('Afbeelding plakken uit klembord'),
-                child: IconButton(
-                  onPressed: onPaste,
-                  icon: const Icon(Icons.content_paste, size: 18),
-                  color: AppTheme.slate500,
-                ),
+              IconButton(
+                tooltip: l10n.d('Afbeelding plakken uit klembord'),
+                onPressed: onPaste,
+                icon: const Icon(Icons.content_paste, size: 18),
+                color: AppTheme.slate500,
               ),
             if (imagePath.isNotEmpty)
-              Tooltip(
-                message: l10n.d('Kopieer afbeelding naar klembord'),
-                child: IconButton(
-                  onPressed: () async {
-                    final ok = await ImageService().copyImageToClipboard(
-                      _resolveImagePathForClipboard(imagePath),
-                    );
-                    if (context.mounted) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            ok
-                                ? l10n.d('Afbeelding gekopieerd naar klembord.')
-                                : l10n.d('Kopiëren naar klembord mislukt.'),
-                          ),
+              IconButton(
+                tooltip: l10n.d('Kopieer afbeelding naar klembord'),
+                onPressed: () async {
+                  final ok = await ImageService().copyImageToClipboard(
+                    _resolveImagePathForClipboard(imagePath),
+                  );
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          ok
+                              ? l10n.d('Afbeelding gekopieerd naar klembord.')
+                              : l10n.d('Kopiëren naar klembord mislukt.'),
                         ),
-                      );
-                    }
-                  },
-                  icon: const Icon(Icons.content_copy_outlined, size: 18),
-                  color: AppTheme.slate500,
-                ),
+                      ),
+                    );
+                  }
+                },
+                icon: const Icon(Icons.content_copy_outlined, size: 18),
+                color: AppTheme.slate500,
               ),
             if (onClear != null && imagePath.isNotEmpty)
-              Tooltip(
-                message: l10n.d('Verwijder afbeelding'),
-                child: IconButton(
-                  onPressed: onClear,
-                  icon: const Icon(Icons.clear, size: 18),
-                  color: AppTheme.slate500,
-                ),
+              IconButton(
+                tooltip: l10n.d('Verwijder afbeelding'),
+                onPressed: onClear,
+                icon: const Icon(Icons.clear, size: 18),
+                color: AppTheme.slate500,
               ),
           ],
         ),
