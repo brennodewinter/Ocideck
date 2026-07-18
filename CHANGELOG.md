@@ -8,6 +8,26 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **A chart can keep its numbers in a separate file, without giving up the
+  grid.** A chart with forty rows used to bury hundreds of numbers in the
+  presentation file, which made the markdown hard to read and its version
+  history useless. Such a chart can now keep its data in `data/<name>.json`
+  next to the deck, leaving only a reference behind — and unlike before, it
+  stays fully editable. Type in the grid and the file is rewritten when you
+  save; edit the file in a spreadsheet instead and the app picks it up when the
+  deck next opens. Linking a chart used to make it read-only, because there was
+  no way back to the file and an edit would quietly disappear at the next save.
+
+  The two directions do not fight. Saving only rewrites a data file whose
+  numbers you actually changed in the app, so an edit made elsewhere while the
+  deck was open is still there afterwards. If both sides changed, the app wins —
+  it holds what you last saw — and the clash is reported rather than swallowed.
+
+  Colours, title and min/max stay with the slide, never in the data file, so the
+  file can be replaced wholesale without the chart losing its look. New files
+  are JSON; a deck that already links a `.csv` keeps getting CSV, since
+  something outside the app may point at it. A missing or corrupt data file
+  leaves the chart as it was instead of blanking it.
 - **Search across every deck in the repository, not just the open one.**
   *Zoeken in alle decks…* in the `…` menu searches every deck in the git
   repository and tells you exactly where each hit sits: which deck, which slide,

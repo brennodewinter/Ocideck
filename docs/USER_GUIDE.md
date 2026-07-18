@@ -316,10 +316,26 @@ The available types:
   cell colour follows the value. Label the axes *likelihood* and *impact* and it
   serves as a **risk matrix**.
 
-- **CSV import** — click **CSV importeren**. You can either keep the data **in the
-  slide** (inline) or store it **as a CSV file**. A linked CSV lives in the deck's
-  `data/` directory and stays the source of truth (edit it in a spreadsheet); the
-  grid then shows it read-only until you **Ontkoppelen** (unlink).
+- **CSV import** — click **CSV importeren**. You can either keep the data **in
+  the slide** (inline) or store it **as a separate file**.
+- **A separate data file** — a linked chart keeps its numbers in a file in the
+  deck's `data/` directory, and the presentation itself keeps only a reference
+  to it. That is what keeps a `.md` readable when a chart has forty rows, and
+  what makes its changes legible in version history.
+
+  You lose nothing by linking. The grid stays fully editable — edit it and the
+  file is rewritten when you save. You can just as well edit the file itself, in
+  a spreadsheet or by hand, and the app picks it up next time the deck opens.
+  The two do not fight: saving only rewrites a data file whose numbers you
+  actually changed in the app, so an edit you made elsewhere while the deck was
+  open is still there afterwards.
+
+  New data files are written as JSON. A deck that already uses a `.csv` keeps
+  using CSV, so anything else pointing at that file keeps working. Colours,
+  title and min/max stay with the slide, never in the data file — so you can
+  replace the file wholesale without the chart losing its look.
+
+  **Ontkoppelen** (unlink) brings the numbers back into the slide.
 - **Min/max** (optional) — offered for the cartesian types (bar, line, area,
   scatter, combo, waterfall) and radar. On the cartesian charts they draw
   horizontal **reference lines**; on a spider/radar chart they fix the **scale**

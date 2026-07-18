@@ -18,7 +18,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 ## `lib/models/` — data model
 
 - `annotation.dart` — `InkStroke` and `InkTool` enum for freehand drawing annotations on presentation slides.
-- `chart.dart` — `ChartSpec`/`ChartSeries` and the `ChartType` enum (bar, stacked/horizontal bar, horizontal stacked bar, combo, line, area, pie, donut, radar, scatter, waterfall, heatmap) for chart slides with inline or CSV data.
+- `chart.dart` — `ChartSpec`/`ChartSeries` and the `ChartType` enum (bar, stacked/horizontal bar, horizontal stacked bar, combo, line, area, pie, donut, radar, scatter, waterfall, heatmap) for chart slides with inline or linked data. Also the data-file codec: `dataToJson`/`withJson` for new files, `parseCsv`/`withCsv` for files written before the switch, and `withData` picking on the extension. The data file carries values only — colours stay in the chart block, which is what lets the save path compare two data files to decide whether the *numbers* changed. `parseChartDataJson` returns null rather than empty on a corrupt file, so a chart keeps what it has instead of quietly becoming an empty plot.
 - `checklist_spec.dart` — `ChecklistSpec` for the security checklist slide (MIAUW tri-state test list linked to findings).
 - `checklist_template.dart` — `ChecklistTemplate`/`ChecklistTemplateItem`: a user-created reusable checklist stored in the settings (feedback #9), with tolerant `encodeList`/`decodeList`.
 - `cockpit.dart` — `CockpitSpec`/`CockpitMeterSpec` for instrumentation gauges (speedometer, voltmeter, etc.).
@@ -326,7 +326,7 @@ search (Phase 6) and asset deletion (§6.2, deliberately manual).
 - `bullet_marker_selector.dart` — Per-slide bullet-marker override (dot or paw).
 - `bullets_editor.dart` — Edits a bullet-list slide (title, subtitle, nested levels, markers, group headings/"tussenkoppen").
 - `bullets_image_editor.dart` — Edits a bullets-with-image slide.
-- `chart_editor.dart` — Edits a chart slide (type, data grid, CSV import/linking).
+- `chart_editor.dart` — Edits a chart slide (type, data grid, CSV import/linking). The grid is editable whether or not the data is linked to a file — a linked chart writes that file back on save. It was read-only while linked until that write-back existed.
 - `checklist_editor.dart` — Edits a checklist slide (standard label, tri-state test rows, finding links).
 - `cockpit_editor.dart` — Edits a cockpit slide (title + meter specs).
 - `code_editor.dart` — Edits a code slide (syntax-highlighted monospace field).
