@@ -14,12 +14,14 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:ocideck/utils/csv.dart';
+
 void main(List<String> args) {
   if (args.isEmpty) {
     stderr.writeln('usage: dart run tool/build_cwe_catalog.dart <cwe.csv>');
     exit(2);
   }
-  final rows = _parseCsv(File(args.first).readAsStringSync());
+  final rows = parseCsvRows(File(args.first).readAsStringSync());
   if (rows.isEmpty) {
     stderr.writeln('empty CSV');
     exit(1);
@@ -58,49 +60,3 @@ void main(List<String> args) {
 
 /// Collapse runs of whitespace (the CSV has newlines inside quoted fields).
 String _clean(String s) => s.replaceAll(RegExp(r'\s+'), ' ').trim();
-
-/// Minimal RFC 4180 CSV parser: handles quoted fields with embedded commas,
-/// newlines and doubled `""` quotes. Avoids adding a package dependency.
-List<List<String>> _parseCsv(String text) {
-  final rows = <List<String>>[];
-  var row = <String>[];
-  final field = StringBuffer();
-  var inQuotes = false;
-  for (var i = 0; i < text.length; i++) {
-    final c = text[i];
-    if (inQuotes) {
-      if (c == '"') {
-        if (i + 1 < text.length && text[i + 1] == '"') {
-          field.write('"');
-          i++;
-        } else {
-          inQuotes = false;
-        }
-      } else {
-        field.write(c);
-      }
-    } else {
-      switch (c) {
-        case '"':
-          inQuotes = true;
-        case ',':
-          row.add(field.toString());
-          field.clear();
-        case '\n':
-          row.add(field.toString());
-          field.clear();
-          rows.add(row);
-          row = <String>[];
-        case '\r':
-          break; // ignore CR
-        default:
-          field.write(c);
-      }
-    }
-  }
-  if (field.isNotEmpty || row.isNotEmpty) {
-    row.add(field.toString());
-    rows.add(row);
-  }
-  return rows;
-}
