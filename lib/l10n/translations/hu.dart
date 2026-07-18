@@ -1787,6 +1787,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Soort forge': 'Forge típusa',
+  'Forgejo of Gitea': 'Forgejo vagy Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
       'Valaki más is szerkesztette ezt a csomagot — egyesítve és elmentve.',
   'Keuzes toegepast — sla op om ze vast te leggen.':

@@ -1787,6 +1787,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Soort forge': 'Forge-Typ',
+  'Forgejo of Gitea': 'Forgejo oder Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
       'Öpper anders het das Deck au bearbeitet — zämmegfüehrt und gspeicheret.',
   'Keuzes toegepast — sla op om ze vast te leggen.':

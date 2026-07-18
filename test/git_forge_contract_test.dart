@@ -6,9 +6,11 @@ import 'package:ocideck/models/git_settings.dart';
 import 'package:ocideck/services/git/git_forge.dart';
 import 'package:ocideck/services/git/gitea_forge.dart';
 import 'package:ocideck/services/git/github_forge.dart';
+import 'package:ocideck/services/git/gitlab_forge.dart';
 
 import 'git_forge_fake.dart';
 import 'git_forge_fake_github.dart';
+import 'git_forge_fake_gitlab.dart';
 
 Uint8List _b(String s) => Uint8List.fromList(utf8.encode(s));
 
@@ -21,7 +23,16 @@ Uint8List _b(String s) => Uint8List.fromList(utf8.encode(s));
 /// Anything asserted here is behaviour a *caller* may rely on regardless of
 /// which forge is behind it. Provider-specific details (URL shapes, auth header
 /// spelling, JSON quirks) belong in that adapter's own test, not here.
-void runGitForgeContract(String name, GitForge Function(FakeRepo) build) {
+/// [reportsBlobSize] vertelt of deze forge de bestandsgrootte in zijn
+/// boom-listing meegeeft. Gitea en GitHub doen dat; GitLab niet — die zou er een
+/// call per bestand voor nodig hebben. Dat is een echt verschil tussen de
+/// forges, geen tekortkoming van de adapter, dus het contract benoemt het in
+/// plaats van het te verdoezelen met een test die altijd slaagt.
+void runGitForgeContract(
+  String name,
+  GitForge Function(FakeRepo) build, {
+  bool reportsBlobSize = true,
+}) {
   group('$name honours the GitForge contract', () {
     late FakeRepo repo;
     late GitForge forge;
@@ -100,6 +111,12 @@ void runGitForgeContract(String name, GitForge Function(FakeRepo) build) {
       test('reports the size of a blob', () async {
         final entries = await forge.listTree('main', 'decks/jaarplan');
         final deck = entries.firstWhere((e) => e.name == 'deck.md');
+        if (!reportsBlobSize) {
+          // Niet stilzwijgend overslaan: leg vast dát hij hem niet weet, zodat
+          // een adapter die 'm later wél levert deze regel moet aanpassen.
+          expect(deck.size, 0);
+          return;
+        }
         expect(deck.size, repo.files['decks/jaarplan/deck.md']!.length);
       });
 
@@ -545,5 +562,23 @@ void main() {
       token: 'pat123',
       transport: FakeGitHubTransport(repo),
     ),
+  );
+
+  // En GitLab, met wéér een andere vorm: één commit-call met actions[], een
+  // project-id in plaats van owner/repo, en start_sha als concurrency-guard.
+  runGitForgeContract(
+    'GitLabForge',
+    (repo) => GitLabForge(
+      config: const GitRepoConfig(
+        baseUrl: 'https://gitlab.example.org',
+        owner: 'librekat',
+        repo: 'decks',
+        provider: GitProvider.gitlab,
+      ),
+      token: 'pat123',
+      transport: FakeGitLabTransport(repo),
+    ),
+    // GitLabs boom-listing draagt geen grootte; zie de vlag hierboven.
+    reportsBlobSize: false,
   );
 }

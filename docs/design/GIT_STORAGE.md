@@ -911,11 +911,39 @@ Each phase is shippable and preserves the invariants.
 - Per-repo author identity for attribution, and optional SSH commit signing on
   the native plane (D11).
 
-### Phase 5 — GitHub & GitLab adapters
-- Implement `GitHubForge` (Git Data API multi-file) and `GitLabForge`
-  (`actions[]`). The interface and everything above are already exercised by
-  `GiteaForge`, so this is adapter work only. The native plane is unaffected —
-  it does not know which forge it is talking to.
+### Phase 5 — GitHub & GitLab adapters — **done**
+- `GitHubForge` and `GitLabForge` alongside `GiteaForge`, all four implementations
+  (those three plus the reference `FakeForge`) driven through the *same* contract
+  suite. That shared suite is the deliverable: it is what turns "the interface is
+  provider-agnostic" from a claim into something that fails loudly when it stops
+  being true. It caught two real bugs on first run.
+- The roadmap called this "adapter work only". That undersold it, in one specific
+  way: **the three forges disagree about how a multi-file commit works, and that
+  is also where the concurrency guard lives.**
+  - *Gitea* — one `POST /contents`, guarded by `last_commit_id`.
+  - *GitHub* — no such endpoint. A commit is four round-trips through the Git
+    Data API (blob → tree → commit → move the ref), and the guard is that the
+    final ref update is non-forcing: it only succeeds as a fast-forward.
+  - *GitLab* — one call again, but an `actions[]` list that must name `create`
+    vs `update` vs `delete` per file, guarded by `start_sha`.
+  Three shapes, one meaning. Each fake transport models its own guard for real,
+  because a fake that always accepts a commit would let the conflict half of the
+  contract pass without ever being exercised.
+- Also unlike each other: auth headers (`token` / `Bearer` / `PRIVATE-TOKEN`),
+  the API host (GitHub's differs from the web host), project addressing (GitLab
+  uses one URL-encoded `owner/repo` segment), annotated tags (two calls on
+  GitHub), branch pruning on merge (a flag on Gitea and GitLab, a separate
+  `DELETE` on GitHub), and merge-request numbering (GitLab's per-project `iid`).
+- One genuine capability gap, recorded rather than hidden: **GitLab's tree
+  listing carries no file size.** Supplying it would cost a request per file, and
+  no caller reads the field — so the contract takes a `reportsBlobSize` flag and
+  asserts the absence explicitly, instead of a test that quietly passes either
+  way.
+- The native plane is untouched, as predicted: it never knew which forge it was
+  talking to.
+- **Not verified against a live github.com or gitlab.com.** Both adapters are
+  built from documentation; Forgejo had a real server to check against. That is
+  the largest remaining risk in this phase.
 
 ### Phase 6 — Cross-deck search & polish
 - Server-side code/image search per provider, native `git grep` on a clone, local
@@ -938,7 +966,7 @@ Each phase is shippable and preserves the invariants.
 | Release = reviewed PR | Phase 4 |
 | Versions of one deck = tags | Phase 4 |
 | Async collaboration | Phase 4 (falls out of PR + attribution) |
-| Forgejo / GitHub / GitLab | Phase 0–4 (Forgejo) → Phase 5 (the others) |
+| Forgejo / GitHub / GitLab | All three, behind one `GitForge` (Phase 5) |
 | Text + image search | Phase 6 (within-deck already works) |
 
 > **On "real merges".** This row said *Phase 3* until it was corrected: Phase 3

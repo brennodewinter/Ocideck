@@ -740,6 +740,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Soort forge': 'Tipo di forge',
+  'Forgejo of Gitea': 'Forgejo of Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
       'Un otro hende tabata editá e deck aki tambe — uní i wardá.',
   'Keuzes toegepast — sla op om ze vast te leggen.':

@@ -1796,6 +1796,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Soort forge': 'Rodzaj forge',
+  'Forgejo of Gitea': 'Forgejo lub Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
       'Ktoś inny też edytował ten zestaw — scalono i zapisano.',
   'Keuzes toegepast — sla op om ze vast te leggen.':

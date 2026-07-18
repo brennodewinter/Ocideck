@@ -1802,6 +1802,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Soort forge': 'Tip de forge',
+  'Forgejo of Gitea': 'Forgejo sau Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
       'Altcineva editase și el acest deck — îmbinat și salvat.',
   'Keuzes toegepast — sla op om ze vast te leggen.':

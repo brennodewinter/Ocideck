@@ -8,6 +8,7 @@ import '../services/git/git_cli_factory.dart';
 import '../services/git/git_forge.dart';
 import '../services/git/gitea_forge.dart';
 import '../services/git/github_forge.dart';
+import '../services/git/gitlab_forge.dart';
 import '../services/git/native_git_mirror_api.dart';
 import '../services/git/native_git_mirror_factory.dart';
 import '../services/git/outbox.dart';
@@ -39,9 +40,9 @@ final gitForgeProvider = FutureProvider<GitForge?>((ref) async {
       ref.onDispose(forge.close);
       return forge;
     case GitProvider.gitlab:
-      // Tweede helft van Fase 5. Tot dan is null eerlijker dan een adapter die
-      // bij de eerste aanroep omvalt; de UI biedt hem niet aan.
-      return null;
+      final forge = GitLabForge(config: config, token: token);
+      ref.onDispose(forge.close);
+      return forge;
   }
 });
 

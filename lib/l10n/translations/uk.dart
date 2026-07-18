@@ -1801,6 +1801,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Soort forge': 'Тип форджа',
+  'Forgejo of Gitea': 'Forgejo або Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
       'Хтось інший теж редагував цю колоду — об\'єднано та збережено.',
   'Keuzes toegepast — sla op om ze vast te leggen.':

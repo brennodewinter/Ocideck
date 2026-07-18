@@ -1786,6 +1786,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Soort forge': 'Typ forge',
+  'Forgejo of Gitea': 'Forgejo nebo Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
       'Tuto sadu upravoval i někdo jiný — sloučeno a uloženo.',
   'Keuzes toegepast — sla op om ze vast te leggen.':

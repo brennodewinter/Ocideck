@@ -1782,6 +1782,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Soort forge': 'Forge veids',
+  'Forgejo of Gitea': 'Forgejo vai Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
       'Arī kāds cits bija rediģējis šo klāju — apvienots un saglabāts.',
   'Keuzes toegepast — sla op om ze vast te leggen.':

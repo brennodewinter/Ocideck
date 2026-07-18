@@ -1783,6 +1783,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Soort forge': 'Forgen tyyppi',
+  'Forgejo of Gitea': 'Forgejo tai Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
       'Joku muukin oli muokannut tätä settiä — yhdistetty ja tallennettu.',
   'Keuzes toegepast — sla op om ze vast te leggen.':

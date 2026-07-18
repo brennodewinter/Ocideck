@@ -16,6 +16,7 @@ extension _SettingsGit on _SettingsDialogState {
       owner: _gitOwner.text.trim(),
       repo: _gitRepo.text.trim(),
       trustedInternal: _gitTrusted,
+      provider: _gitProvider,
     );
   }
 
@@ -32,6 +33,36 @@ extension _SettingsGit on _SettingsDialogState {
               'Open presentaties uit een git-repository. Elke opgeslagen versie blijft bewaard. Het token wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.',
             ),
             style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+          ),
+        ),
+        // De soort forge bepaalt welke adapter erachter komt: de REST-API's
+        // verschillen te veel om te raden aan de URL.
+        Padding(
+          padding: const EdgeInsets.only(bottom: 12),
+          child: DropdownButtonFormField<GitProvider>(
+            initialValue: _gitProvider,
+            decoration: InputDecoration(
+              labelText: l10n.d('Soort forge'),
+              prefixIcon: const Icon(Icons.hub_outlined, size: 18),
+              isDense: true,
+              border: const OutlineInputBorder(),
+            ),
+            items: [
+              DropdownMenuItem(
+                value: GitProvider.gitea,
+                child: Text(l10n.d('Forgejo of Gitea')),
+              ),
+              const DropdownMenuItem(
+                value: GitProvider.github,
+                child: Text('GitHub'),
+              ),
+              const DropdownMenuItem(
+                value: GitProvider.gitlab,
+                child: Text('GitLab'),
+              ),
+            ],
+            onChanged: (v) =>
+                _rebuild(() => _gitProvider = v ?? GitProvider.gitea),
           ),
         ),
         _webdavField(

@@ -1811,6 +1811,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Soort forge': 'Τύπος forge',
+  'Forgejo of Gitea': 'Forgejo ή Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
       'Κάποιος άλλος είχε επεξεργαστεί κι αυτός το deck — συγχωνεύτηκε και αποθηκεύτηκε.',
   'Keuzes toegepast — sla op om ze vast te leggen.':
