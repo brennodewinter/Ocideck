@@ -1782,6 +1782,17 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Afbeeldingen in de repository…': 'Bilder i repositoryt…',
+  'Afbeeldingen in de repository': 'Bilder i repositoryt',
+  'afbeeldingen in de gedeelde pool': 'bilder i den delade poolen',
+  'De pool is nog leeg.': 'Poolen är fortfarande tom.',
+  'alleen nog in een uitgebrachte versie:': 'bara i en utgiven version nu:',
+  'nergens meer gevonden': 'hittas inte längre någonstans',
+  'Niet te zeggen wat ongebruikt is: dit kon niet gelezen worden —':
+      'Kan inte avgöra vad som är oanvänt: detta gick inte att läsa —',
+  'Elke afbeelding wordt ergens gebruikt.': 'Varje bild används någonstans.',
+  'afbeeldingen worden nergens meer aangehaald — ook niet in een uitgebrachte versie. Dit is een voorstel, geen oordeel: op een andere branch kunnen ze nog in gebruik zijn.':
+      'bilder refereras inte längre någonstans — inte ens i en utgiven version. Det är ett förslag, inte en dom: de kan fortfarande användas på en annan gren.',
   'Soort forge': 'Typ av forge',
   'Forgejo of Gitea': 'Forgejo eller Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':

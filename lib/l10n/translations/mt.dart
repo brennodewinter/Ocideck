@@ -1806,6 +1806,17 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Afbeeldingen in de repository…': 'Immaġni fir-repożitorju…',
+  'Afbeeldingen in de repository': 'Immaġni fir-repożitorju',
+  'afbeeldingen in de gedeelde pool': 'immaġni fil-ġabra kondiviża',
+  'De pool is nog leeg.': 'Il-ġabra għadha vojta.',
+  'alleen nog in een uitgebrachte versie:': 'issa biss f\'verżjoni maħruġa:',
+  'nergens meer gevonden': 'ma nstabitx aktar imkien',
+  'Niet te zeggen wat ongebruikt is: dit kon niet gelezen worden —':
+      'Ma jistax jingħad x\'mhux użat: dawn ma setgħux jinqraw —',
+  'Elke afbeelding wordt ergens gebruikt.': 'Kull immaġni tintuża x\'imkien.',
+  'afbeeldingen worden nergens meer aangehaald — ook niet in een uitgebrachte versie. Dit is een voorstel, geen oordeel: op een andere branch kunnen ze nog in gebruik zijn.':
+      'immaġni m\'għadhomx jissemmew imkien — lanqas f\'verżjoni maħruġa. Din hija suġġeriment, mhux verdett: jistgħu jkunu għadhom jintużaw fuq fergħa oħra.',
   'Soort forge': 'Tip ta\' forge',
   'Forgejo of Gitea': 'Forgejo jew Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':

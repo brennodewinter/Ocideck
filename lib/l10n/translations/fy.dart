@@ -741,6 +741,18 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Afbeeldingen in de repository…': 'Ofbyldings yn it repository…',
+  'Afbeeldingen in de repository': 'Ofbyldings yn it repository',
+  'afbeeldingen in de gedeelde pool': 'ofbyldings yn de dielde pool',
+  'De pool is nog leeg.': 'De pool is noch leech.',
+  'alleen nog in een uitgebrachte versie:':
+      'allinnich noch yn in útbrochte ferzje:',
+  'nergens meer gevonden': 'nearne mear fûn',
+  'Niet te zeggen wat ongebruikt is: dit kon niet gelezen worden —':
+      'Net te sizzen wat ûnbrûkt is: dit koe net lêzen wurde —',
+  'Elke afbeelding wordt ergens gebruikt.': 'Elke ofbylding wurdt earne brûkt.',
+  'afbeeldingen worden nergens meer aangehaald — ook niet in een uitgebrachte versie. Dit is een voorstel, geen oordeel: op een andere branch kunnen ze nog in gebruik zijn.':
+      'ofbyldings wurde nearne mear oanhelle — ek net yn in útbrochte ferzje. Dit is in foarstel, gjin oardiel: op in oare tûke kinne se noch yn gebrûk wêze.',
   'Soort forge': 'Soarte forge',
   'Forgejo of Gitea': 'Forgejo of Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':

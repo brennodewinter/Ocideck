@@ -1819,6 +1819,17 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Afbeeldingen in de repository…': 'Íomhánna sa stór…',
+  'Afbeeldingen in de repository': 'Íomhánna sa stór',
+  'afbeeldingen in de gedeelde pool': 'íomhá sa linn roinnte',
+  'De pool is nog leeg.': 'Tá an linn folamh fós.',
+  'alleen nog in een uitgebrachte versie:': 'i leagan eisithe amháin anois:',
+  'nergens meer gevonden': 'gan aimsiú in aon áit a thuilleadh',
+  'Niet te zeggen wat ongebruikt is: dit kon niet gelezen worden —':
+      'Ní féidir a rá cad nach bhfuil in úsáid: níorbh fhéidir iad seo a léamh —',
+  'Elke afbeelding wordt ergens gebruikt.': 'Úsáidtear gach íomhá áit éigin.',
+  'afbeeldingen worden nergens meer aangehaald — ook niet in een uitgebrachte versie. Dit is een voorstel, geen oordeel: op een andere branch kunnen ze nog in gebruik zijn.':
+      'íomhá gan tagairt in aon áit a thuilleadh — fiú i leagan eisithe. Moladh é seo, ní breithiúnas: d\'fhéadfaidís a bheith in úsáid fós ar bhrainse eile.',
   'Soort forge': 'Cineál forge',
   'Forgejo of Gitea': 'Forgejo nó Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':

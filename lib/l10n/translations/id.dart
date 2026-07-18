@@ -1783,6 +1783,18 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Afbeeldingen in de repository…': 'Gambar di repositori…',
+  'Afbeeldingen in de repository': 'Gambar di repositori',
+  'afbeeldingen in de gedeelde pool': 'gambar di kumpulan bersama',
+  'De pool is nog leeg.': 'Kumpulan masih kosong.',
+  'alleen nog in een uitgebrachte versie:': 'kini hanya di versi rilis:',
+  'nergens meer gevonden': 'tidak ditemukan di mana pun lagi',
+  'Niet te zeggen wat ongebruikt is: dit kon niet gelezen worden —':
+      'Tidak dapat menentukan mana yang tak terpakai: ini tidak bisa dibaca —',
+  'Elke afbeelding wordt ergens gebruikt.':
+      'Setiap gambar dipakai di suatu tempat.',
+  'afbeeldingen worden nergens meer aangehaald — ook niet in een uitgebrachte versie. Dit is een voorstel, geen oordeel: op een andere branch kunnen ze nog in gebruik zijn.':
+      'gambar tidak lagi dirujuk di mana pun — bahkan tidak di versi rilis. Ini saran, bukan vonis: bisa jadi masih dipakai di branch lain.',
   'Soort forge': 'Jenis forge',
   'Forgejo of Gitea': 'Forgejo atau Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':

@@ -137,6 +137,19 @@ saved version stays retrievable, which a plain folder cannot give you.
   reworded slide shows up as one *changed* entry instead of an addition plus a
   deletion. For a changed slide, *Verschillen* shows the two side by side with
   the differing fields listed.
+- **Which decks use an image — *Afbeeldingen in de repository…*.** Images are
+  stored once and shared by every deck that uses them, so before you touch one it
+  helps to know who else depends on it. This overview lists every image in the
+  repository with the decks that reference it. Three answers are possible, and
+  the difference matters: a deck uses it; no deck uses it any more but a
+  *released version* still does (removing it would break a version you already
+  presented); or nothing references it at all. That last group is listed at the
+  bottom as a suggestion — it is what this branch can see, and another branch may
+  still be using them. If a deck or a released version could not be read, the
+  suggestion list is withheld entirely and the overview says which one was
+  unreadable, because the unreadable one could be the single user of an image and
+  a deletion cannot be undone. Removing an image stays a manual act; this screen
+  only tells you what you would be removing.
 - **A repository is a trust boundary.** Everyone who can read it reads *every*
   deck in it, so use one repository per client, engagement or classification
   level — the forge's permissions are what separate them, not OciDeck.

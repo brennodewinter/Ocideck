@@ -1774,6 +1774,17 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Afbeeldingen in de repository…': 'Pildid repositooriumis…',
+  'Afbeeldingen in de repository': 'Pildid repositooriumis',
+  'afbeeldingen in de gedeelde pool': 'pilti jagatud kogumis',
+  'De pool is nog leeg.': 'Kogum on veel tühi.',
+  'alleen nog in een uitgebrachte versie:': 'nüüd ainult avaldatud versioonis:',
+  'nergens meer gevonden': 'enam kusagilt ei leitud',
+  'Niet te zeggen wat ongebruikt is: dit kon niet gelezen worden —':
+      'Ei saa öelda, mis on kasutamata: neid ei õnnestunud lugeda —',
+  'Elke afbeelding wordt ergens gebruikt.': 'Iga pilti kasutatakse kusagil.',
+  'afbeeldingen worden nergens meer aangehaald — ook niet in een uitgebrachte versie. Dit is een voorstel, geen oordeel: op een andere branch kunnen ze nog in gebruik zijn.':
+      'pilti ei viidata enam kusagil — isegi mitte avaldatud versioonis. See on ettepanek, mitte otsus: teises harus võivad need veel kasutusel olla.',
   'Soort forge': 'Forge\'i tüüp',
   'Forgejo of Gitea': 'Forgejo või Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':

@@ -1786,6 +1786,17 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Afbeeldingen in de repository…': 'Obrázky v repozitáři…',
+  'Afbeeldingen in de repository': 'Obrázky v repozitáři',
+  'afbeeldingen in de gedeelde pool': 'obrázků ve sdílené zásobě',
+  'De pool is nog leeg.': 'Zásoba je zatím prázdná.',
+  'alleen nog in een uitgebrachte versie:': 'už jen ve vydané verzi:',
+  'nergens meer gevonden': 'už nikde nenalezena',
+  'Niet te zeggen wat ongebruikt is: dit kon niet gelezen worden —':
+      'Nelze určit, co je nepoužité: toto nešlo přečíst —',
+  'Elke afbeelding wordt ergens gebruikt.': 'Každý obrázek se někde používá.',
+  'afbeeldingen worden nergens meer aangehaald — ook niet in een uitgebrachte versie. Dit is een voorstel, geen oordeel: op een andere branch kunnen ze nog in gebruik zijn.':
+      'obrázků už nikde není odkazováno — ani ve vydané verzi. Je to návrh, ne verdikt: na jiné větvi se ještě mohou používat.',
   'Soort forge': 'Typ forge',
   'Forgejo of Gitea': 'Forgejo nebo Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':

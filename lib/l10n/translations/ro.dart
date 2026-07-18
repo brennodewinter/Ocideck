@@ -1802,6 +1802,19 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Afbeeldingen in de repository…': 'Imagini din repozitoriu…',
+  'Afbeeldingen in de repository': 'Imagini din repozitoriu',
+  'afbeeldingen in de gedeelde pool': 'imagini în fondul comun',
+  'De pool is nog leeg.': 'Fondul este încă gol.',
+  'alleen nog in een uitgebrachte versie:':
+      'acum doar într-o versiune publicată:',
+  'nergens meer gevonden': 'nu se mai găsește nicăieri',
+  'Niet te zeggen wat ongebruikt is: dit kon niet gelezen worden —':
+      'Nu se poate spune ce este nefolosit: acestea nu au putut fi citite —',
+  'Elke afbeelding wordt ergens gebruikt.':
+      'Fiecare imagine este folosită undeva.',
+  'afbeeldingen worden nergens meer aangehaald — ook niet in een uitgebrachte versie. Dit is een voorstel, geen oordeel: op een andere branch kunnen ze nog in gebruik zijn.':
+      'imagini nu mai sunt referite nicăieri — nici măcar într-o versiune publicată. Este o sugestie, nu un verdict: pot fi încă folosite pe altă ramură.',
   'Soort forge': 'Tip de forge',
   'Forgejo of Gitea': 'Forgejo sau Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':

@@ -1790,6 +1790,17 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Afbeeldingen in de repository…': 'Slike u repozitoriju…',
+  'Afbeeldingen in de repository': 'Slike u repozitoriju',
+  'afbeeldingen in de gedeelde pool': 'slika u zajedničkom skupu',
+  'De pool is nog leeg.': 'Skup je još prazan.',
+  'alleen nog in een uitgebrachte versie:': 'sada samo u objavljenoj verziji:',
+  'nergens meer gevonden': 'više nigdje pronađena',
+  'Niet te zeggen wat ongebruikt is: dit kon niet gelezen worden —':
+      'Nije moguće utvrditi što se ne koristi: ovo se nije moglo pročitati —',
+  'Elke afbeelding wordt ergens gebruikt.': 'Svaka se slika negdje koristi.',
+  'afbeeldingen worden nergens meer aangehaald — ook niet in een uitgebrachte versie. Dit is een voorstel, geen oordeel: op een andere branch kunnen ze nog in gebruik zijn.':
+      'slika se više nigdje ne navodi — čak ni u objavljenoj verziji. Ovo je prijedlog, ne presuda: mogle bi se još koristiti na drugoj grani.',
   'Soort forge': 'Vrsta forgea',
   'Forgejo of Gitea': 'Forgejo ili Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':

@@ -624,6 +624,49 @@ Future<void> _tagRelease(BuildContext context, WidgetRef ref) async {
   }
 }
 
+/// Toon wat er in de gedeelde afbeeldingenpool zit en wie wat gebruikt (§9.3).
+///
+/// Bewust een expliciete handeling: de index leest élk deck en élke uitgebrachte
+/// versie, dus dat bouw je niet per toetsaanslag opnieuw.
+Future<void> _showAssetUsage(BuildContext context, WidgetRef ref) async {
+  final config = ref.read(settingsProvider).gitRepo;
+  if (config == null) return;
+  final forge = await ref.read(gitForgeProvider.future);
+  if (!context.mounted) return;
+  if (forge == null) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          context.l10n.d(
+            'Stel eerst een git-repository in bij Instellingen → Git-repository.',
+          ),
+        ),
+      ),
+    );
+    return;
+  }
+
+  final messenger = ScaffoldMessenger.of(context);
+  final AssetIndexSnapshot snapshot;
+  try {
+    // Mét de uitgebrachte versies: anders lijkt een afbeelding die alleen nog
+    // in een oude release zit ten onrechte ongebruikt.
+    snapshot = await AssetIndex(
+      forge: forge,
+      branch: config.defaultBranch,
+    ).build(includeReleases: true);
+  } on GitForgeException catch (e) {
+    messenger.showSnackBar(SnackBar(content: Text(e.message)));
+    return;
+  }
+  if (!context.mounted) return;
+
+  await showDialog<void>(
+    context: context,
+    builder: (_) => _AssetUsageDialog(snapshot: snapshot),
+  );
+}
+
 /// Maak een geldige deknaam (§6) uit een deck-titel, of een nette terugval.
 String _safeDeckName(String title) {
   final cleaned = title

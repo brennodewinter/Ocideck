@@ -740,6 +740,19 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Afbeeldingen in de repository…': 'Images du dépôt…',
+  'Afbeeldingen in de repository': 'Images du dépôt',
+  'afbeeldingen in de gedeelde pool': 'images dans le pool partagé',
+  'De pool is nog leeg.': 'Le pool est encore vide.',
+  'alleen nog in een uitgebrachte versie:':
+      'plus que dans une version publiée :',
+  'nergens meer gevonden': 'introuvable désormais',
+  'Niet te zeggen wat ongebruikt is: dit kon niet gelezen worden —':
+      'Impossible de dire ce qui est inutilisé : ceci n\'a pas pu être lu —',
+  'Elke afbeelding wordt ergens gebruikt.':
+      'Chaque image est utilisée quelque part.',
+  'afbeeldingen worden nergens meer aangehaald — ook niet in een uitgebrachte versie. Dit is een voorstel, geen oordeel: op een andere branch kunnen ze nog in gebruik zijn.':
+      'images ne sont plus référencées nulle part — pas même dans une version publiée. C\'est une suggestion, pas un verdict : elles peuvent encore servir sur une autre branche.',
   'Soort forge': 'Type de forge',
   'Forgejo of Gitea': 'Forgejo ou Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':

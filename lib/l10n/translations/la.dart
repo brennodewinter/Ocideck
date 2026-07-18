@@ -1799,6 +1799,17 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Afbeeldingen in de repository…': 'Imagines in repositorio…',
+  'Afbeeldingen in de repository': 'Imagines in repositorio',
+  'afbeeldingen in de gedeelde pool': 'imagines in copia communi',
+  'De pool is nog leeg.': 'Copia adhuc vacua est.',
+  'alleen nog in een uitgebrachte versie:': 'iam tantum in versione edita:',
+  'nergens meer gevonden': 'nusquam amplius inventa',
+  'Niet te zeggen wat ongebruikt is: dit kon niet gelezen worden —':
+      'Dici non potest quid inutile sit: haec legi non potuerunt —',
+  'Elke afbeelding wordt ergens gebruikt.': 'Omnis imago alicubi adhibetur.',
+  'afbeeldingen worden nergens meer aangehaald — ook niet in een uitgebrachte versie. Dit is een voorstel, geen oordeel: op een andere branch kunnen ze nog in gebruik zijn.':
+      'imagines nusquam amplius citantur — ne in versione quidem edita. Suasio est, non iudicium: in alio ramo adhuc adhiberi possunt.',
   'Soort forge': 'Genus fabricae',
   'Forgejo of Gitea': 'Forgejo aut Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':

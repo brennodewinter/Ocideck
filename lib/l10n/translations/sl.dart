@@ -1785,6 +1785,17 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Afbeeldingen in de repository…': 'Slike v repozitoriju…',
+  'Afbeeldingen in de repository': 'Slike v repozitoriju',
+  'afbeeldingen in de gedeelde pool': 'slik v skupnem naboru',
+  'De pool is nog leeg.': 'Nabor je še prazen.',
+  'alleen nog in een uitgebrachte versie:': 'zdaj le še v izdani različici:',
+  'nergens meer gevonden': 'nikjer več najdena',
+  'Niet te zeggen wat ongebruikt is: dit kon niet gelezen worden —':
+      'Ni mogoče reči, kaj je neuporabljeno: tega ni bilo mogoče prebrati —',
+  'Elke afbeelding wordt ergens gebruikt.': 'Vsaka slika se nekje uporablja.',
+  'afbeeldingen worden nergens meer aangehaald — ook niet in een uitgebrachte versie. Dit is een voorstel, geen oordeel: op een andere branch kunnen ze nog in gebruik zijn.':
+      'slik ni več nikjer navedenih — niti v izdani različici. To je predlog, ne sodba: na drugi veji so morda še v uporabi.',
   'Soort forge': 'Vrsta forgea',
   'Forgejo of Gitea': 'Forgejo ali Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
