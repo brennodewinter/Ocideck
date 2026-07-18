@@ -5,8 +5,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/git_settings.dart';
 import 'package:ocideck/services/git/git_forge.dart';
 import 'package:ocideck/services/git/gitea_forge.dart';
+import 'package:ocideck/services/git/github_forge.dart';
 
 import 'git_forge_fake.dart';
+import 'git_forge_fake_github.dart';
 
 Uint8List _b(String s) => Uint8List.fromList(utf8.encode(s));
 
@@ -525,6 +527,23 @@ void main() {
       ),
       token: 'pat123',
       transport: FakeGiteaTransport(repo),
+    ),
+  );
+
+  // En dezelfde regels tegen GitHub's heel andere wire-vorm — vier ronden voor
+  // één commit, een ref die je verzet in plaats van een contents-call. Als de
+  // interface stiekem Gitea-vormig was, valt dít om.
+  runGitForgeContract(
+    'GitHubForge',
+    (repo) => GitHubForge(
+      config: const GitRepoConfig(
+        baseUrl: 'https://github.com',
+        owner: 'librekat',
+        repo: 'decks',
+        provider: GitProvider.github,
+      ),
+      token: 'pat123',
+      transport: FakeGitHubTransport(repo),
     ),
   );
 }
