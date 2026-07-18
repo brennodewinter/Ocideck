@@ -117,7 +117,7 @@ theme: ocideck
     expect(origin.baseSha, isNotEmpty); // de clone-HEAD
   });
 
-  test('opslaan landt als echte commit op de origin', () async {
+  test('opslaan landt op een werkbranch op de origin, niet op main (D3)', () async {
     final (container, tabs) = build();
     await tabs.openDeckFromGitNative(
       mirror,
@@ -148,15 +148,32 @@ theme: ocideck
       deckDir: deckDir,
       branch: 'main',
       message: 'bewerkt',
+      now: DateTime(2026, 7, 18),
     );
     expect(result.status, GitSaveStatus.committed);
+    // Het tabblad volgt de concept-branch.
+    expect(
+      container.read(tabsProvider).current!.gitOrigin!.branch,
+      'decks/kwartaalcijfers/2026-07-18',
+    );
 
-    // Verse clone van origin ziet de bewerking.
+    // Verse clone van origin: de bewerking staat op de werkbranch, niet op main.
     final verify = '${temp.path}/verify';
     await _rawGit(['clone', bare, verify], temp.path);
+    final onMain = File('$verify/$deckDir/deck.md').readAsStringSync();
+    expect(onMain, contains('# Kwartaalcijfers')); // de oorspronkelijke inhoud
+    expect(
+      onMain,
+      isNot(contains('Nieuwe kwartaaltitel')),
+      reason: 'main is niet aangeraakt',
+    );
+    await _rawGit(
+      ['checkout', 'decks/kwartaalcijfers/2026-07-18'],
+      verify,
+    );
     expect(
       File('$verify/$deckDir/deck.md').readAsStringSync(),
-      contains('Nieuwe kwartaaltitel'.replaceAll('kwartaal', 'kwartaal')),
+      contains('Nieuwe kwartaaltitel'),
     );
   });
 }
