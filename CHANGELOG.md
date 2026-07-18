@@ -15,9 +15,13 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   controleerde het — zo kan een gebundelde standaard jarenlang verouderen zonder
   dat iemand het merkt. *Instellingen → Over* toont nu per standaard de versie,
   wat er precies van gebundeld is, de licentie en de bron. Daarnaast vergelijkt
-  `make deps-check` die versies met de bron en meldt wat achterloopt. De poort
-  onderscheidt "actueel", "verouderd" en "niet vast te stellen" — dat laatste
-  telt nooit als het eerste, want stilte mag geen goedkeuring worden.
+  `make deps-check` die versies met de bron en meldt wat achterloopt. **Elke**
+  gebundelde standaard wordt echt bevraagd — OWASP via zijn releases, MITRE via
+  de CWE-API, FIRST door te kijken of er al een nieuwere specificatie is
+  gepubliceerd — zodat een nieuwe versie niet in stilte voorbij kan gaan. Bij CWE
+  controleert de poort meteen of de gebundelde lijst even veel zwakheden bevat
+  als de bron zegt, want een half geregenereerde bundel is een stillere fout dan
+  een verouderde.
 - **Search across every deck in the repository, not just the open one.**
   *Zoeken in alle decks…* in the `…` menu searches every deck in the git
   repository and tells you exactly where each hit sits: which deck, which slide,

@@ -64,33 +64,33 @@ void main(List<String> args) async {
   var outdated = 0;
   var unreachable = 0;
 
+  final notes = <String>[];
+
   for (final s in standards) {
-    final byDate = s.probe == 'githubReleaseDate';
-    if (s.probe != 'githubReleases' && !byDate) {
-      rows.add([s.name, s.version, '—', 'onbekend (niet te bevragen)']);
-      continue;
-    }
-    final latest = await _latestGithubRelease(s.target, byDate: byDate);
-    if (latest == null) {
+    final result = await _probe(s);
+    if (result.latest == null) {
       unreachable++;
       rows.add([s.name, s.version, '?', 'onbekend (bron onbereikbaar)']);
       continue;
     }
-    // Op datum is "nieuwer" echt te bepalen; op een tag is elke afwijking reden
-    // om een mens te laten kijken (OWASP hernummerde MASTG van 1.x naar 2.0,
-    // dus groter-is-nieuwer gaat daar niet op).
-    final stale = byDate
-        ? latest.compareTo(s.version) > 0
-        : latest != s.version;
-    if (!stale) {
-      rows.add([s.name, s.version, latest, 'actueel']);
-    } else {
+    if (result.note.isNotEmpty) notes.add(result.note);
+    if (result.stale) {
       outdated++;
-      rows.add([s.name, s.version, latest, 'VEROUDERD']);
+      rows.add([s.name, s.version, result.latest!, 'VEROUDERD']);
+    } else {
+      rows.add([s.name, s.version, result.latest!, 'actueel']);
+    }
+    if (result.integrityProblem.isNotEmpty) {
+      outdated++;
+      notes.add(result.integrityProblem);
     }
   }
 
   _printTable(rows);
+
+  for (final n in notes) {
+    stdout.writeln('\n$n');
+  }
 
   if (unreachable == standards.length) {
     stderr.writeln(
@@ -164,6 +164,135 @@ String _knownExternalConst(String name, String _) {
       '';
 }
 
+/// Wat één probe oplevert.
+class _Result {
+  final String? latest;
+  final bool stale;
+
+  /// Een bevinding die géén veroudering is maar wel fout — nu: een bundel die
+  /// niet zoveel items bevat als de bron zegt.
+  final String integrityProblem;
+
+  /// Vrije toelichting voor onder de tabel.
+  final String note;
+
+  _Result(
+    this.latest, {
+    this.stale = false,
+    this.integrityProblem = '',
+    this.note = '',
+  });
+}
+
+Future<_Result> _probe(_Standard s) async {
+  switch (s.probe) {
+    case 'githubReleases':
+      final latest = await _latestGithubRelease(s.target);
+      // Elke afwijking alarmeert: OWASP hernummerde MASTG van 1.x naar 2.0,
+      // dus groter-is-nieuwer gaat hier niet op.
+      return _Result(latest, stale: latest != null && latest != s.version);
+    case 'githubReleaseDate':
+      final latest = await _latestGithubRelease(s.target, byDate: true);
+      return _Result(
+        latest,
+        stale: latest != null && latest.compareTo(s.version) > 0,
+      );
+    case 'cweApi':
+      return _probeCweApi(s);
+    case 'successorDocument':
+      return _probeSuccessor(s);
+    default:
+      return _Result(null);
+  }
+}
+
+/// MITRE's CWE-API: versie, inhoudsdatum én het aantal zwakheden.
+Future<_Result> _probeCweApi(_Standard s) async {
+  final body = await _get(Uri.parse(s.target));
+  if (body == null) return _Result(null);
+  final Map<String, dynamic> json;
+  try {
+    json = jsonDecode(body) as Map<String, dynamic>;
+  } on Object {
+    return _Result(null);
+  }
+  final version = json['ContentVersion']?.toString();
+  if (version == null || version.isEmpty) return _Result(null);
+  final date = json['ContentDate']?.toString() ?? '';
+
+  // Het aantal is een gratis integriteitscontrole: onze bundel hoort er even
+  // veel te bevatten. Wijkt dat af, dan is hij afgekapt of half geregenereerd —
+  // een ander soort fout dan veroudering, en stiller.
+  var integrity = '';
+  final total = json['TotalWeaknesses'];
+  final bundled = _bundledCweCount();
+  if (total is int && bundled != null && total != bundled) {
+    integrity =
+        'CWE: de bundel bevat $bundled zwakheden, de bron meldt er $total. '
+        'De bundel is onvolledig of half geregenereerd — regenereer hem met '
+        'tool/build_cwe_catalog.dart.';
+  }
+
+  return _Result(
+    version,
+    stale: version != s.version,
+    integrityProblem: integrity,
+    note: date.isEmpty ? '' : 'CWE-inhoudsdatum bij de bron: $date.',
+  );
+}
+
+/// Telt de items in de gebundelde CWE-lijst, of null als die er niet is.
+int? _bundledCweCount() {
+  final f = File('assets/cwe/cwe_full.json');
+  if (!f.existsSync()) return null;
+  try {
+    return (jsonDecode(f.readAsStringSync()) as List).length;
+  } on Object {
+    return null;
+  }
+}
+
+/// Bronnen die geen "laatste versie" publiceren maar wel per versie een
+/// document op een vaste URL: bestaat de opvolger al?
+///
+/// Geeft geen versienummer terug maar wel het antwoord dat telt. Zolang geen
+/// enkele opvolger bestaat, is wat we bundelen de nieuwste — en dát is een
+/// bevestiging, geen stilte.
+Future<_Result> _probeSuccessor(_Standard s) async {
+  final candidates = _successorVersions(s.version);
+  if (candidates.isEmpty) return _Result(null);
+  for (final candidate in candidates) {
+    final url = Uri.parse(s.target.replaceAll('{version}', candidate));
+    final exists = await _exists(url);
+    if (exists == null) return _Result(null); // bron onbereikbaar
+    if (exists) {
+      return _Result(
+        candidate,
+        stale: true,
+        note:
+            '${s.name}: er bestaat een document voor v$candidate '
+            '(${url.toString()}).',
+      );
+    }
+  }
+  return _Result(
+    s.version,
+    note:
+        '${s.name}: geen opvolger gevonden (geprobeerd: '
+        '${candidates.map((c) => 'v$c').join(', ')}).',
+  );
+}
+
+/// De eerstvolgende minor en major na [version]. `4.0` → `4.1`, `5.0`.
+List<String> _successorVersions(String version) {
+  final parts = version.split('.');
+  if (parts.length != 2) return const [];
+  final major = int.tryParse(parts[0]);
+  final minor = int.tryParse(parts[1]);
+  if (major == null || minor == null) return const [];
+  return ['$major.${minor + 1}', '${major + 1}.0'];
+}
+
 /// De laatste release van een GitHub-repo: de tag (ontdaan van een `v`-prefix),
 /// of met [byDate] de publicatiedatum als `JJJJ-MM-DD`.
 Future<String?> _latestGithubRelease(String repo, {bool byDate = false}) async {
@@ -187,6 +316,42 @@ Future<String?> _latestGithubRelease(String repo, {bool byDate = false}) async {
     final tag = json['tag_name'];
     if (tag is! String || tag.isEmpty) return null;
     return tag.startsWith('v') ? tag.substring(1) : tag;
+  } on Object {
+    return null;
+  } finally {
+    client.close(force: true);
+  }
+}
+
+/// Haalt een URL op, of null bij welke fout dan ook.
+Future<String?> _get(Uri uri) async {
+  final client = HttpClient()..connectionTimeout = const Duration(seconds: 15);
+  try {
+    final request = await client.getUrl(uri);
+    request.headers.set('User-Agent', 'OciDeck-reference-data-check');
+    final response = await request.close();
+    if (response.statusCode != 200) return null;
+    return await response.transform(utf8.decoder).join();
+  } on Object {
+    return null;
+  } finally {
+    client.close(force: true);
+  }
+}
+
+/// Bestaat er iets op [uri]? null wanneer dat niet vast te stellen was —
+/// bewust onderscheiden van `false`, want "niet gevonden" en "niet gekeken"
+/// zijn hier verschillende antwoorden.
+Future<bool?> _exists(Uri uri) async {
+  final client = HttpClient()..connectionTimeout = const Duration(seconds: 15);
+  try {
+    final request = await client.headUrl(uri);
+    request.headers.set('User-Agent', 'OciDeck-reference-data-check');
+    final response = await request.close();
+    await response.drain<void>();
+    if (response.statusCode == 200) return true;
+    if (response.statusCode == 404) return false;
+    return null;
   } on Object {
     return null;
   } finally {

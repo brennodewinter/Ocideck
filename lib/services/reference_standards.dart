@@ -35,10 +35,10 @@ const referenceStandards = <ReferenceStandard>[
         'De volledige lijst (id, naam, beschrijving) plus een eigen '
         'geselecteerde kern met onze remediatie-notities.',
     licence: 'MITRE Terms of Use',
-    // MITRE publiceert geen machineleesbare "laatste versie"-aanduiding die we
-    // zonder de hele dataset te downloaden kunnen uitlezen. Liever eerlijk
-    // onbekend dan een fragiele scrape die stil verkeerd gaat antwoorden.
-    probe: UpstreamProbe.manual,
+    // MITRE's eigen REST-API geeft versie, inhoudsdatum én het aantal
+    // zwakheden — dat laatste controleert meteen of onze bundel compleet is.
+    probe: UpstreamProbe.cweApi,
+    probeTarget: 'https://cwe-api.mitre.org/api/v1/cwe/version',
   ),
   ReferenceStandard(
     id: 'miauw',
@@ -60,8 +60,10 @@ const referenceStandards = <ReferenceStandard>[
         'Een eigen Dart-implementatie van de publieke specificatie, inclusief '
         'de MacroVector-tabel en de gepubliceerde bandindeling.',
     licence: 'Specificatie van FIRST.Org — attributie',
-    // Een specificatieversie, geen release-stroom; 4.0 wijzigt niet stilletjes.
-    probe: UpstreamProbe.manual,
+    // FIRST publiceert geen "laatste versie", maar wel per versie een schema op
+    // een vaste URL. We proberen dus of de opvolger al bestaat.
+    probe: UpstreamProbe.successorDocument,
+    probeTarget: 'https://www.first.org/cvss/cvss-v{version}.json',
   ),
 ];
 
