@@ -316,12 +316,17 @@ The available types:
   cell colour follows the value. Label the axes *likelihood* and *impact* and it
   serves as a **risk matrix**.
 
-- **CSV import** — click **CSV importeren**. You can either keep the data **in
-  the slide** (inline) or store it **as a separate file**.
-- **A separate data file** — a linked chart keeps its numbers in a file in the
-  deck's `data/` directory, and the presentation itself keeps only a reference
-  to it. That is what keeps a `.md` readable when a chart has forty rows, and
-  what makes its changes legible in version history.
+- **CSV import** — click **CSV importeren** to fill the grid from a CSV file.
+  Where the data ends up is not something you have to decide: see below.
+- **A separate data file** — chart data is kept in a file in the deck's `data/`
+  directory, and the presentation itself keeps only a reference to it. That is
+  what keeps a `.md` readable when a chart has forty rows, and what makes its
+  changes legible in version history.
+
+  This happens by itself when you save; older presentations move over the first
+  time you save them, and you should not notice anything. The file is named
+  after the chart's title, and keeps that name afterwards even if you rename the
+  chart. A chart you have not put any numbers in yet gets no file.
 
   You lose nothing by linking. The grid stays fully editable — edit it and the
   file is rewritten when you save. You can just as well edit the file itself, in

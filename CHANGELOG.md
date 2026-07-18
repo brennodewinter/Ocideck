@@ -8,6 +8,21 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Chart data moves out of the presentation file by itself.** A chart with
+  forty rows used to bury hundreds of numbers in the `.md`. On save, a chart
+  that still carries its data inline is now given a file of its own in `data/`
+  and the presentation keeps only a reference — so existing presentations
+  convert the first time you save them, with nothing to do and nothing to
+  notice. The file is named after the chart's title and keeps that name
+  afterwards, even if you rename the chart, so its history stays readable. A
+  chart you have not entered numbers in yet gets no file, and copying a chart
+  slide gives the copy its own file rather than letting the two overwrite each
+  other. Data files this deck wrote and no longer uses are cleaned up on save;
+  anything else in `data/` is left alone.
+
+  Because storing the data separately is now automatic, importing a CSV no
+  longer asks whether to keep it in the slide or as a file — one of those two
+  answers could no longer be honoured.
 - **A chart can keep its numbers in a separate file, without giving up the
   grid.** A chart with forty rows used to bury hundreds of numbers in the
   presentation file, which made the markdown hard to read and its version

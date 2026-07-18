@@ -1043,6 +1043,24 @@ they are styling rather than data. That split is what lets the data file be
 regenerated wholesale — from a spreadsheet, a script, an export — without the
 chart losing its look.
 
+**Automatic.** A chart that still carries its data inline is moved to a data
+file **on save**, and the block is left with the reference. Decks written before
+data files existed therefore convert on their next save, with nothing for the
+user to do. The conversion runs on save and never on open — opening must not
+rewrite a deck that was only looked at.
+
+The file is named after the chart title (`data/Omzet_2025.json`, `grafiek.json`
+when untitled), with a numeric suffix when that name is taken. Once assigned, a
+`source` never changes again, even if the title does: renaming on every title
+edit would churn the file and its history for no gain. A chart with no data yet
+gets no file. Copying a chart slide copies its `source` too, so on the next save
+the copy is given a file of its own rather than overwriting its twin's.
+
+On save, data files this deck itself wrote that nothing references any more —
+from a deleted chart, say — are removed. Only files OciDeck read or wrote for
+this deck are eligible; anything else in `data/`, and every `.csv`, is left
+alone.
+
 **Editing.** Both directions work. The grid in the app edits a linked chart just
 like an inline one and writes the file back on save; the file can equally be
 edited outside the app. To keep those from fighting, a save only rewrites a data
