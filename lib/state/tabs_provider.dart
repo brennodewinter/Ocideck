@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/legacy.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
+import '../models/chart.dart';
 import '../models/deck.dart';
 import '../models/deck_template.dart';
 import '../models/settings.dart';
@@ -590,6 +591,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     if (deck == null) return gated.failure;
 
     deck = _attachPackageAssets(deck, entries, mdEntry.name);
+    deck = _attachPackageChartData(deck, entries, mdEntry.name);
     deck = _attachPackageSidecars(deck, entries, mdEntry.name);
     if (!mounted) return OpenResult.unreadable;
     _placeDeckInTab(deck, remoteOrigin: remoteOrigin);
@@ -638,6 +640,60 @@ class TabsNotifier extends StateNotifier<TabsState> {
         ),
     ];
     return deck.copyWith(slides: slides);
+  }
+
+  /// Vul chart-slides die hun data via `source` koppelen aan uit de `data/`-
+  /// leden van het pakket — het tegenhangertje van `_hydrateCharts` op schijf.
+  ///
+  /// Anders dan afbeeldingen gaat dit *niet* via de [WebAssetStore]: de data is
+  /// tekst die in de spec zelf hoort, en er is op web geen projectmap waar een
+  /// los databestand naast kan blijven liggen. Zonder deze stap komt een deck
+  /// met gekoppelde grafieken binnen met lege plots.
+  Deck _attachPackageChartData(
+    Deck deck,
+    List<PackageEntry> entries,
+    String mdName,
+  ) {
+    final mdDir = p.posix.dirname(mdName);
+    final byName = {
+      for (final e in entries) p.posix.normalize(e.name): e.bytes,
+    };
+    var changed = false;
+    final slides = <Slide>[];
+    for (final s in deck.slides) {
+      final spec = s.type == SlideType.chart
+          ? ChartSpec.parse(s.customMarkdown)
+          : null;
+      final source = spec?.source;
+      if (spec == null || source == null || spec.hasInlineData) {
+        slides.add(s);
+        continue;
+      }
+      // Zelfde insluiting als resolveProjectRelative op schijf: een `source`
+      // als ../../geheim.csv mag niet buiten het pakket wijzen.
+      final resolved = p.posix.normalize(
+        mdDir == '.' ? source : p.posix.join(mdDir, source),
+      );
+      final bytes = resolved.startsWith('..') ? null : byName[resolved];
+      if (bytes == null ||
+          bytes.isEmpty ||
+          bytes.length > FileService.maxDeckMarkdownBytes) {
+        slides.add(s);
+        continue;
+      }
+      try {
+        slides.add(
+          s.copyWith(
+            customMarkdown: spec.withCsv(utf8.decode(bytes)).toBlock(),
+          ),
+        );
+        changed = true;
+      } on FormatException catch (e) {
+        logWarning('TabsNotifier._attachPackageChartData: data not UTF-8', e);
+        slides.add(s);
+      }
+    }
+    return changed ? deck.copyWith(slides: slides) : deck;
   }
 
   /// Herstel de sidecar-lagen (ink-annotaties en sprekersnotities) uit de
