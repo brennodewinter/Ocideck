@@ -352,7 +352,14 @@ class ChartSpec {
   }
 
   /// Return a copy with x/series taken from [csv]; keeps [source].
-  ChartSpec withCsv(String csv) => _withParsedData(parseCsv(csv));
+  ///
+  /// Drops [parseCsv]'s `unreadable` report: a spec has nowhere to put it. The
+  /// callers that can actually tell the user something — the import in the
+  /// chart editor, deck hydration — call [parseCsv] themselves for that.
+  ChartSpec withCsv(String csv) {
+    final parsed = parseCsv(csv);
+    return _withParsedData((parsed.$1, parsed.$2));
+  }
 
   /// Return a copy with x/series taken from [json] — the contents of a
   /// `data/<naam>.json`; keeps [source]. Tolerant like [ChartSpec.parse]: a
