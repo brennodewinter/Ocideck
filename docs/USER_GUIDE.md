@@ -113,9 +113,14 @@ saved version stays retrievable, which a plain folder cannot give you.
   version, *Versies…* in the `…` menu lists those versions, newest first. Pick
   one to open it **read-only**: a snapshot of how the deck was at that release,
   to look at — not something you can save over, so reviewing an old version can
-  never overwrite your current work. This works in the browser too. *Releasing* a
-  version (review, merge, and tagging it) is still being built; see
-  [`design/GIT_STORAGE.md`](design/GIT_STORAGE.md).
+  never overwrite your current work. This works in the browser too.
+- **Compare two versions — *Vergelijken…*.** In that same list, *Vergelijken…*
+  lets you pick two releases and see what changed between them: slides added,
+  removed, changed or moved. A deck has no slide IDs, so slides are matched on
+  their content — an identical slide is recognised even if it moved, and a
+  reworded slide shows up as one *changed* entry instead of an addition plus a
+  deletion. For a changed slide, *Verschillen* shows the two side by side with
+  the differing fields listed.
 - **A repository is a trust boundary.** Everyone who can read it reads *every*
   deck in it, so use one repository per client, engagement or classification
   level — the forge's permissions are what separate them, not OciDeck.
