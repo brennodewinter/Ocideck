@@ -1783,6 +1783,31 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Concept mergen…': 'Gabungkan draf…',
+  'Versie vastleggen…': 'Catat versi…',
+  'Concept gemerged naar de hoofdbranch.': 'Draf digabungkan ke branch utama.',
+  'Nog geen review — breng het concept eerst uit ter review.':
+      'Belum ditinjau — kirim draf untuk ditinjau dulu.',
+  'Er is geen concept om te mergen.': 'Tidak ada draf untuk digabungkan.',
+  'Mergen mislukt:': 'Gagal menggabungkan:',
+  'Versie vastgelegd:': 'Versi dicatat:',
+  'Vastleggen geblokkeerd door het classificatiebeleid.':
+      'Pencatatan diblokir oleh kebijakan klasifikasi.',
+  'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
+      'Versi tidak valid — gunakan vX, misalnya v1.0.',
+  'Geen deck om vast te leggen.': 'Tidak ada dek untuk dicatat.',
+  'Vastleggen mislukt:': 'Gagal mencatat:',
+  'Concept mergen': 'Gabungkan draf',
+  'Voegt de review-PR van dit concept samen met de hoofdbranch.':
+      'Menggabungkan PR tinjauan draf ini ke branch utama.',
+  'Concept-branch opruimen na het mergen':
+      'Hapus branch draf setelah penggabungan',
+  'Mergen': 'Gabungkan',
+  'Versie vastleggen': 'Catat versi',
+  'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
+      'Menetapkan tag rilis di kepala branch utama — versi yang Anda presentasikan.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'Gunakan vX, misalnya v1.0.',
+  'Vastleggen': 'Catat',
   'Uitbrengen ter review…': 'Kirim untuk ditinjau…',
   'Uitbrengen ter review': 'Kirim untuk ditinjau',
   'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':

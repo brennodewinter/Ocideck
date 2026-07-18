@@ -1783,6 +1783,31 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Concept mergen…': 'Yhdistä luonnos…',
+  'Versie vastleggen…': 'Merkitse versio…',
+  'Concept gemerged naar de hoofdbranch.': 'Luonnos yhdistettiin päähaaraan.',
+  'Nog geen review — breng het concept eerst uit ter review.':
+      'Ei vielä tarkistusta — lähetä luonnos ensin tarkistettavaksi.',
+  'Er is geen concept om te mergen.': 'Yhdistettävää luonnosta ei ole.',
+  'Mergen mislukt:': 'Yhdistäminen epäonnistui:',
+  'Versie vastgelegd:': 'Versio merkitty:',
+  'Vastleggen geblokkeerd door het classificatiebeleid.':
+      'Merkintä estetty luokittelukäytännön vuoksi.',
+  'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
+      'Virheellinen versio — käytä muotoa vX, esimerkiksi v1.0.',
+  'Geen deck om vast te leggen.': 'Ei merkittävää settiä.',
+  'Vastleggen mislukt:': 'Merkintä epäonnistui:',
+  'Concept mergen': 'Yhdistä luonnos',
+  'Voegt de review-PR van dit concept samen met de hoofdbranch.':
+      'Yhdistää tämän luonnoksen tarkistus-PR:n päähaaraan.',
+  'Concept-branch opruimen na het mergen':
+      'Poista luonnoshaara yhdistämisen jälkeen',
+  'Mergen': 'Yhdistä',
+  'Versie vastleggen': 'Merkitse versio',
+  'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
+      'Asettaa julkaisutunnisteen päähaaran kärkeen — version, jonka esitit.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'Käytä muotoa vX, esimerkiksi v1.0.',
+  'Vastleggen': 'Merkitse',
   'Uitbrengen ter review…': 'Lähetä tarkistettavaksi…',
   'Uitbrengen ter review': 'Lähetä tarkistettavaksi',
   'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':

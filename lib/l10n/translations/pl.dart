@@ -1796,6 +1796,32 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Concept mergen…': 'Scal wersję roboczą…',
+  'Versie vastleggen…': 'Zapisz wersję…',
+  'Concept gemerged naar de hoofdbranch.':
+      'Wersję roboczą scalono z gałęzią główną.',
+  'Nog geen review — breng het concept eerst uit ter review.':
+      'Brak recenzji — najpierw wyślij wersję roboczą do recenzji.',
+  'Er is geen concept om te mergen.': 'Nie ma wersji roboczej do scalenia.',
+  'Mergen mislukt:': 'Scalanie nie powiodło się:',
+  'Versie vastgelegd:': 'Wersja zapisana:',
+  'Vastleggen geblokkeerd door het classificatiebeleid.':
+      'Zapis zablokowany przez zasady klasyfikacji.',
+  'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
+      'Nieprawidłowa wersja — użyj vX, na przykład v1.0.',
+  'Geen deck om vast te leggen.': 'Brak zestawu do zapisania.',
+  'Vastleggen mislukt:': 'Zapis nie powiódł się:',
+  'Concept mergen': 'Scal wersję roboczą',
+  'Voegt de review-PR van dit concept samen met de hoofdbranch.':
+      'Scala PR recenzji tej wersji roboczej z gałęzią główną.',
+  'Concept-branch opruimen na het mergen':
+      'Usuń gałąź wersji roboczej po scaleniu',
+  'Mergen': 'Scal',
+  'Versie vastleggen': 'Zapisz wersję',
+  'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
+      'Ustawia tag wydania na czele gałęzi głównej — wersję, którą zaprezentowałeś.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'Użyj vX, na przykład v1.0.',
+  'Vastleggen': 'Zapisz',
   'Uitbrengen ter review…': 'Wyślij do recenzji…',
   'Uitbrengen ter review': 'Wyślij do recenzji',
   'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':

@@ -1787,6 +1787,32 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Concept mergen…': 'Entwurf zämmefüehre…',
+  'Versie vastleggen…': 'Version festhalte…',
+  'Concept gemerged naar de hoofdbranch.':
+      'Entwurf i de Hauptzwyg zämmegfüehrt.',
+  'Nog geen review — breng het concept eerst uit ter review.':
+      'No kei Prüefig — schick de Entwurf zerscht zur Prüefig.',
+  'Er is geen concept om te mergen.': 'S git kei Entwurf zum zämmefüehre.',
+  'Mergen mislukt:': 'Zämmefüehre fehlgschlage:',
+  'Versie vastgelegd:': 'Version festghalte:',
+  'Vastleggen geblokkeerd door het classificatiebeleid.':
+      'Festhalte dur d Klassifizierigsrichtlinie blockiert.',
+  'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
+      'Uugültigi Version — bruuch vX, zum Byspil v1.0.',
+  'Geen deck om vast te leggen.': 'Kei Deck zum festhalte.',
+  'Vastleggen mislukt:': 'Festhalte fehlgschlage:',
+  'Concept mergen': 'Entwurf zämmefüehre',
+  'Voegt de review-PR van dit concept samen met de hoofdbranch.':
+      'Füehrt d Review-PR vo dem Entwurf i de Hauptzwyg y.',
+  'Concept-branch opruimen na het mergen':
+      'Entwurfszwyg nach em Zämmefüehre entferne',
+  'Mergen': 'Zämmefüehre',
+  'Versie vastleggen': 'Version festhalte',
+  'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
+      'Setzt es Release-Tag uf d Spitze vom Hauptzwyg — d Version wo du präsentiert häsch.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'Bruuch vX, zum Byspil v1.0.',
+  'Vastleggen': 'Festhalte',
   'Uitbrengen ter review…': 'Zur Prüefig ischicke…',
   'Uitbrengen ter review': 'Zur Prüefig ischicke',
   'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':

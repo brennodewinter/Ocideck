@@ -1758,6 +1758,31 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Concept mergen…': 'concept DamuvmoH…',
+  'Versie vastleggen…': 'mI\' DaqonmoH…',
+  'Concept gemerged naar de hoofdbranch.':
+      'nIvbogh branch-Daq concept muvta\'.',
+  'Nog geen review — breng het concept eerst uit ter review.':
+      'review tu\'lu\'be\' — wa\'DIch concept review yIngeH.',
+  'Er is geen concept om te mergen.': 'muvmeH concept tu\'lu\'be\'.',
+  'Mergen mislukt:': 'muv luj:',
+  'Versie vastgelegd:': 'mI\' qonta\':',
+  'Vastleggen geblokkeerd door het classificatiebeleid.':
+      'classification pab qon botlh.',
+  'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
+      'mI\' lI\'be\' — vX yIlo\', ghItlh v1.0.',
+  'Geen deck om vast te leggen.': 'qonmeH deck tu\'lu\'be\'.',
+  'Vastleggen mislukt:': 'qon luj:',
+  'Concept mergen': 'concept DamuvmoH',
+  'Voegt de review-PR van dit concept samen met de hoofdbranch.':
+      'concept vam review PR nIvbogh branch-Daq muvmoH.',
+  'Concept-branch opruimen na het mergen': 'muvpu\'DI\' concept branch yITeq',
+  'Mergen': 'DamuvmoH',
+  'Versie vastleggen': 'mI\' DaqonmoH',
+  'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
+      'nIvbogh branch nach release tag lan — mI\' Dacha\'pu\'bogh.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'vX yIlo\', ghItlh v1.0.',
+  'Vastleggen': 'DaqonmoH',
   'Uitbrengen ter review…': 'review ngeH…',
   'Uitbrengen ter review': 'review ngeH',
   'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':

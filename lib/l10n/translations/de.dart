@@ -740,6 +740,33 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Concept mergen…': 'Entwurf zusammenführen…',
+  'Versie vastleggen…': 'Version festhalten…',
+  'Concept gemerged naar de hoofdbranch.':
+      'Entwurf in den Hauptzweig zusammengeführt.',
+  'Nog geen review — breng het concept eerst uit ter review.':
+      'Noch keine Überprüfung — reiche den Entwurf zuerst zur Überprüfung ein.',
+  'Er is geen concept om te mergen.':
+      'Es gibt keinen Entwurf zum Zusammenführen.',
+  'Mergen mislukt:': 'Zusammenführen fehlgeschlagen:',
+  'Versie vastgelegd:': 'Version festgehalten:',
+  'Vastleggen geblokkeerd door het classificatiebeleid.':
+      'Festhalten durch die Klassifizierungsrichtlinie blockiert.',
+  'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
+      'Ungültige Version — verwende vX, zum Beispiel v1.0.',
+  'Geen deck om vast te leggen.': 'Kein Deck zum Festhalten.',
+  'Vastleggen mislukt:': 'Festhalten fehlgeschlagen:',
+  'Concept mergen': 'Entwurf zusammenführen',
+  'Voegt de review-PR van dit concept samen met de hoofdbranch.':
+      'Führt die Review-PR dieses Entwurfs in den Hauptzweig ein.',
+  'Concept-branch opruimen na het mergen':
+      'Entwurfszweig nach dem Zusammenführen entfernen',
+  'Mergen': 'Zusammenführen',
+  'Versie vastleggen': 'Version festhalten',
+  'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
+      'Setzt ein Release-Tag auf die Spitze des Hauptzweigs — die Version, die du präsentiert hast.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'Verwende vX, zum Beispiel v1.0.',
+  'Vastleggen': 'Festhalten',
   'Uitbrengen ter review…': 'Zur Überprüfung einreichen…',
   'Uitbrengen ter review': 'Zur Überprüfung einreichen',
   'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':

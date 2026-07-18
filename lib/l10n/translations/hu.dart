@@ -1787,6 +1787,31 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Concept mergen…': 'Piszkozat egyesítése…',
+  'Versie vastleggen…': 'Verzió rögzítése…',
+  'Concept gemerged naar de hoofdbranch.': 'A piszkozat egyesítve a fő ággal.',
+  'Nog geen review — breng het concept eerst uit ter review.':
+      'Még nincs felülvizsgálat — előbb küldd be a piszkozatot felülvizsgálatra.',
+  'Er is geen concept om te mergen.': 'Nincs egyesíthető piszkozat.',
+  'Mergen mislukt:': 'Az egyesítés sikertelen:',
+  'Versie vastgelegd:': 'Verzió rögzítve:',
+  'Vastleggen geblokkeerd door het classificatiebeleid.':
+      'A rögzítést a besorolási szabályzat letiltotta.',
+  'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
+      'Érvénytelen verzió — használj vX formát, például v1.0.',
+  'Geen deck om vast te leggen.': 'Nincs rögzíthető csomag.',
+  'Vastleggen mislukt:': 'A rögzítés sikertelen:',
+  'Concept mergen': 'Piszkozat egyesítése',
+  'Voegt de review-PR van dit concept samen met de hoofdbranch.':
+      'Egyesíti ennek a piszkozatnak a felülvizsgálati PR-ját a fő ággal.',
+  'Concept-branch opruimen na het mergen':
+      'A piszkozat ágának eltávolítása egyesítés után',
+  'Mergen': 'Egyesítés',
+  'Versie vastleggen': 'Verzió rögzítése',
+  'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
+      'Kiadási címkét helyez a fő ág tetejére — a bemutatott verziót.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'Használj vX formát, például v1.0.',
+  'Vastleggen': 'Rögzítés',
   'Uitbrengen ter review…': 'Beküldés felülvizsgálatra…',
   'Uitbrengen ter review': 'Beküldés felülvizsgálatra',
   'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':

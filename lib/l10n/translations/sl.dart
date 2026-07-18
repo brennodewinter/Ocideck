@@ -1785,6 +1785,30 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Concept mergen…': 'Združi osnutek…',
+  'Versie vastleggen…': 'Zabeleži različico…',
+  'Concept gemerged naar de hoofdbranch.': 'Osnutek združen v glavno vejo.',
+  'Nog geen review — breng het concept eerst uit ter review.':
+      'Pregleda še ni — najprej pošlji osnutek v pregled.',
+  'Er is geen concept om te mergen.': 'Ni osnutka za združitev.',
+  'Mergen mislukt:': 'Združitev ni uspela:',
+  'Versie vastgelegd:': 'Različica zabeležena:',
+  'Vastleggen geblokkeerd door het classificatiebeleid.':
+      'Beleženje je blokiral pravilnik o klasifikaciji.',
+  'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
+      'Neveljavna različica — uporabi vX, na primer v1.0.',
+  'Geen deck om vast te leggen.': 'Ni kompleta za beleženje.',
+  'Vastleggen mislukt:': 'Beleženje ni uspelo:',
+  'Concept mergen': 'Združi osnutek',
+  'Voegt de review-PR van dit concept samen met de hoofdbranch.':
+      'Združi pregledni PR tega osnutka v glavno vejo.',
+  'Concept-branch opruimen na het mergen': 'Odstrani vejo osnutka po združitvi',
+  'Mergen': 'Združi',
+  'Versie vastleggen': 'Zabeleži različico',
+  'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
+      'Na vrh glavne veje postavi oznako izdaje — različico, ki si jo predstavil.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'Uporabi vX, na primer v1.0.',
+  'Vastleggen': 'Zabeleži',
   'Uitbrengen ter review…': 'Pošlji v pregled…',
   'Uitbrengen ter review': 'Pošlji v pregled',
   'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':

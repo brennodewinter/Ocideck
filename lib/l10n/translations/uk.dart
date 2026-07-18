@@ -1801,6 +1801,32 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Concept mergen…': 'Об\'єднати чернетку…',
+  'Versie vastleggen…': 'Зафіксувати версію…',
+  'Concept gemerged naar de hoofdbranch.':
+      'Чернетку об\'єднано з головною гілкою.',
+  'Nog geen review — breng het concept eerst uit ter review.':
+      'Ще немає рецензії — спершу надішліть чернетку на рецензування.',
+  'Er is geen concept om te mergen.': 'Немає чернетки для об\'єднання.',
+  'Mergen mislukt:': 'Не вдалося об\'єднати:',
+  'Versie vastgelegd:': 'Версію зафіксовано:',
+  'Vastleggen geblokkeerd door het classificatiebeleid.':
+      'Фіксацію заблоковано політикою класифікації.',
+  'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
+      'Недійсна версія — використовуйте vX, наприклад v1.0.',
+  'Geen deck om vast te leggen.': 'Немає колоди для фіксації.',
+  'Vastleggen mislukt:': 'Не вдалося зафіксувати:',
+  'Concept mergen': 'Об\'єднати чернетку',
+  'Voegt de review-PR van dit concept samen met de hoofdbranch.':
+      'Об\'єднує рецензійний PR цієї чернетки з головною гілкою.',
+  'Concept-branch opruimen na het mergen':
+      'Видалити гілку чернетки після об\'єднання',
+  'Mergen': 'Об\'єднати',
+  'Versie vastleggen': 'Зафіксувати версію',
+  'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
+      'Ставить тег випуску на верхівку головної гілки — версію, яку ви презентували.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'Використовуйте vX, наприклад v1.0.',
+  'Vastleggen': 'Зафіксувати',
   'Uitbrengen ter review…': 'Надіслати на рецензування…',
   'Uitbrengen ter review': 'Надіслати на рецензування',
   'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':

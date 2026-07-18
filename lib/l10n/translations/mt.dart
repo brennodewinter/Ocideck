@@ -1806,6 +1806,32 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Concept mergen…': 'Għaqqad l-abbozz…',
+  'Versie vastleggen…': 'Irreġistra l-verżjoni…',
+  'Concept gemerged naar de hoofdbranch.':
+      'L-abbozz ingħaqad mal-fergħa ewlenija.',
+  'Nog geen review — breng het concept eerst uit ter review.':
+      'Għad m\'hemmx reviżjoni — l-ewwel ibgħat l-abbozz għar-reviżjoni.',
+  'Er is geen concept om te mergen.': 'M\'hemm l-ebda abbozz x\'jingħaqad.',
+  'Mergen mislukt:': 'L-għaqda falliet:',
+  'Versie vastgelegd:': 'Il-verżjoni ġiet irreġistrata:',
+  'Vastleggen geblokkeerd door het classificatiebeleid.':
+      'Ir-reġistrazzjoni mblukkata mill-politika ta\' klassifikazzjoni.',
+  'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
+      'Verżjoni invalida — uża vX, pereżempju v1.0.',
+  'Geen deck om vast te leggen.': 'L-ebda deck x\'jiġi rreġistrat.',
+  'Vastleggen mislukt:': 'Ir-reġistrazzjoni falliet:',
+  'Concept mergen': 'Għaqqad l-abbozz',
+  'Voegt de review-PR van dit concept samen met de hoofdbranch.':
+      'Jgħaqqad il-PR ta\' reviżjoni ta\' dan l-abbozz mal-fergħa ewlenija.',
+  'Concept-branch opruimen na het mergen':
+      'Neħħi l-fergħa tal-abbozz wara l-għaqda',
+  'Mergen': 'Għaqqad',
+  'Versie vastleggen': 'Irreġistra l-verżjoni',
+  'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
+      'Ipoġġi tag ta\' ħruġ fuq ir-ras tal-fergħa ewlenija — il-verżjoni li ppreżentajt.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'Uża vX, pereżempju v1.0.',
+  'Vastleggen': 'Irreġistra',
   'Uitbrengen ter review…': 'Ibgħat għar-reviżjoni…',
   'Uitbrengen ter review': 'Ibgħat għar-reviżjoni',
   'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':

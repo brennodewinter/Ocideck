@@ -737,6 +737,32 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Concept mergen…': 'Combinar borrador…',
+  'Versie vastleggen…': 'Registrar versión…',
+  'Concept gemerged naar de hoofdbranch.':
+      'Borrador combinado con la rama principal.',
+  'Nog geen review — breng het concept eerst uit ter review.':
+      'Aún sin revisión: envía primero el borrador para revisión.',
+  'Er is geen concept om te mergen.': 'No hay ningún borrador para combinar.',
+  'Mergen mislukt:': 'Error al combinar:',
+  'Versie vastgelegd:': 'Versión registrada:',
+  'Vastleggen geblokkeerd door het classificatiebeleid.':
+      'Registro bloqueado por la política de clasificación.',
+  'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
+      'Versión no válida: usa vX, por ejemplo v1.0.',
+  'Geen deck om vast te leggen.': 'No hay deck para registrar.',
+  'Vastleggen mislukt:': 'Error al registrar:',
+  'Concept mergen': 'Combinar borrador',
+  'Voegt de review-PR van dit concept samen met de hoofdbranch.':
+      'Combina la PR de revisión de este borrador con la rama principal.',
+  'Concept-branch opruimen na het mergen':
+      'Eliminar la rama del borrador tras combinar',
+  'Mergen': 'Combinar',
+  'Versie vastleggen': 'Registrar versión',
+  'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
+      'Coloca una etiqueta de versión en la cabeza de la rama principal: la versión que presentaste.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'Usa vX, por ejemplo v1.0.',
+  'Vastleggen': 'Registrar',
   'Uitbrengen ter review…': 'Enviar para revisión…',
   'Uitbrengen ter review': 'Enviar para revisión',
   'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':

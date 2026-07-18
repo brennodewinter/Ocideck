@@ -736,6 +736,31 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Concept mergen…': 'Unisci bozza…',
+  'Versie vastleggen…': 'Registra versione…',
+  'Concept gemerged naar de hoofdbranch.': 'Bozza unita nel ramo principale.',
+  'Nog geen review — breng het concept eerst uit ter review.':
+      'Nessuna revisione — invia prima la bozza per la revisione.',
+  'Er is geen concept om te mergen.': 'Non c\'è alcuna bozza da unire.',
+  'Mergen mislukt:': 'Unione non riuscita:',
+  'Versie vastgelegd:': 'Versione registrata:',
+  'Vastleggen geblokkeerd door het classificatiebeleid.':
+      'Registrazione bloccata dalla politica di classificazione.',
+  'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
+      'Versione non valida — usa vX, ad esempio v1.0.',
+  'Geen deck om vast te leggen.': 'Nessun deck da registrare.',
+  'Vastleggen mislukt:': 'Registrazione non riuscita:',
+  'Concept mergen': 'Unisci bozza',
+  'Voegt de review-PR van dit concept samen met de hoofdbranch.':
+      'Unisce la PR di revisione di questa bozza nel ramo principale.',
+  'Concept-branch opruimen na het mergen':
+      'Rimuovi il ramo della bozza dopo l\'unione',
+  'Mergen': 'Unisci',
+  'Versie vastleggen': 'Registra versione',
+  'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
+      'Imposta un tag di rilascio sulla testa del ramo principale — la versione che hai presentato.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'Usa vX, ad esempio v1.0.',
+  'Vastleggen': 'Registra',
   'Uitbrengen ter review…': 'Invia per revisione…',
   'Uitbrengen ter review': 'Invia per revisione',
   'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':

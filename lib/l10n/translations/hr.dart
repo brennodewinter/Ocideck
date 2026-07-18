@@ -1790,6 +1790,31 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Concept mergen…': 'Spoji koncept…',
+  'Versie vastleggen…': 'Zabilježi verziju…',
+  'Concept gemerged naar de hoofdbranch.': 'Koncept spojen u glavnu granu.',
+  'Nog geen review — breng het concept eerst uit ter review.':
+      'Još nema pregleda — najprije pošalji koncept na pregled.',
+  'Er is geen concept om te mergen.': 'Nema koncepta za spajanje.',
+  'Mergen mislukt:': 'Spajanje nije uspjelo:',
+  'Versie vastgelegd:': 'Verzija zabilježena:',
+  'Vastleggen geblokkeerd door het classificatiebeleid.':
+      'Bilježenje blokirano pravilima klasifikacije.',
+  'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
+      'Nevaljana verzija — koristi vX, na primjer v1.0.',
+  'Geen deck om vast te leggen.': 'Nema kompleta za bilježenje.',
+  'Vastleggen mislukt:': 'Bilježenje nije uspjelo:',
+  'Concept mergen': 'Spoji koncept',
+  'Voegt de review-PR van dit concept samen met de hoofdbranch.':
+      'Spaja pregledni PR ovog koncepta u glavnu granu.',
+  'Concept-branch opruimen na het mergen':
+      'Ukloni granu koncepta nakon spajanja',
+  'Mergen': 'Spoji',
+  'Versie vastleggen': 'Zabilježi verziju',
+  'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
+      'Postavlja oznaku izdanja na vrh glavne grane — verziju koju si prezentirao.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'Koristi vX, na primjer v1.0.',
+  'Vastleggen': 'Zabilježi',
   'Uitbrengen ter review…': 'Pošalji na pregled…',
   'Uitbrengen ter review': 'Pošalji na pregled',
   'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
