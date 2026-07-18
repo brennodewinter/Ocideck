@@ -1813,6 +1813,32 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Concept mergen…': 'Mesclar rascunho…',
+  'Versie vastleggen…': 'Registar versão…',
+  'Concept gemerged naar de hoofdbranch.':
+      'Rascunho mesclado no ramo principal.',
+  'Nog geen review — breng het concept eerst uit ter review.':
+      'Ainda sem revisão — envie primeiro o rascunho para revisão.',
+  'Er is geen concept om te mergen.': 'Não há rascunho para mesclar.',
+  'Mergen mislukt:': 'Falha ao mesclar:',
+  'Versie vastgelegd:': 'Versão registada:',
+  'Vastleggen geblokkeerd door het classificatiebeleid.':
+      'Registo bloqueado pela política de classificação.',
+  'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
+      'Versão inválida — use vX, por exemplo v1.0.',
+  'Geen deck om vast te leggen.': 'Nenhum deck para registar.',
+  'Vastleggen mislukt:': 'Falha ao registar:',
+  'Concept mergen': 'Mesclar rascunho',
+  'Voegt de review-PR van dit concept samen met de hoofdbranch.':
+      'Mescla o PR de revisão deste rascunho no ramo principal.',
+  'Concept-branch opruimen na het mergen':
+      'Remover o ramo do rascunho após mesclar',
+  'Mergen': 'Mesclar',
+  'Versie vastleggen': 'Registar versão',
+  'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
+      'Coloca uma etiqueta de versão na cabeça do ramo principal — a versão que apresentou.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'Use vX, por exemplo v1.0.',
+  'Vastleggen': 'Registar',
   'Uitbrengen ter review…': 'Enviar para revisão…',
   'Uitbrengen ter review': 'Enviar para revisão',
   'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':

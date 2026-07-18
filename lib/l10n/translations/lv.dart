@@ -1782,6 +1782,32 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Concept mergen…': 'Apvienot melnrakstu…',
+  'Versie vastleggen…': 'Reģistrēt versiju…',
+  'Concept gemerged naar de hoofdbranch.':
+      'Melnraksts apvienots ar galveno atzaru.',
+  'Nog geen review — breng het concept eerst uit ter review.':
+      'Vēl nav pārskatīšanas — vispirms iesniedziet melnrakstu pārskatīšanai.',
+  'Er is geen concept om te mergen.': 'Nav melnraksta, ko apvienot.',
+  'Mergen mislukt:': 'Neizdevās apvienot:',
+  'Versie vastgelegd:': 'Versija reģistrēta:',
+  'Vastleggen geblokkeerd door het classificatiebeleid.':
+      'Reģistrēšanu bloķē klasifikācijas politika.',
+  'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
+      'Nederīga versija — izmantojiet vX, piemēram, v1.0.',
+  'Geen deck om vast te leggen.': 'Nav klāja, ko reģistrēt.',
+  'Vastleggen mislukt:': 'Neizdevās reģistrēt:',
+  'Concept mergen': 'Apvienot melnrakstu',
+  'Voegt de review-PR van dit concept samen met de hoofdbranch.':
+      'Apvieno šī melnraksta pārskatīšanas PR ar galveno atzaru.',
+  'Concept-branch opruimen na het mergen':
+      'Noņemt melnraksta atzaru pēc apvienošanas',
+  'Mergen': 'Apvienot',
+  'Versie vastleggen': 'Reģistrēt versiju',
+  'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
+      'Uzstāda laidiena tagu galvenā atzara galā — versiju, kuru prezentējāt.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'Izmantojiet vX, piemēram, v1.0.',
+  'Vastleggen': 'Reģistrēt',
   'Uitbrengen ter review…': 'Iesniegt pārskatīšanai…',
   'Uitbrengen ter review': 'Iesniegt pārskatīšanai',
   'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':

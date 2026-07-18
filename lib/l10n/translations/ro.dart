@@ -1802,6 +1802,32 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Concept mergen…': 'Îmbină schița…',
+  'Versie vastleggen…': 'Înregistrează versiunea…',
+  'Concept gemerged naar de hoofdbranch.':
+      'Schița a fost îmbinată în ramura principală.',
+  'Nog geen review — breng het concept eerst uit ter review.':
+      'Încă nicio revizuire — trimite mai întâi schița spre revizuire.',
+  'Er is geen concept om te mergen.': 'Nu există nicio schiță de îmbinat.',
+  'Mergen mislukt:': 'Îmbinarea a eșuat:',
+  'Versie vastgelegd:': 'Versiune înregistrată:',
+  'Vastleggen geblokkeerd door het classificatiebeleid.':
+      'Înregistrarea a fost blocată de politica de clasificare.',
+  'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
+      'Versiune nevalidă — folosește vX, de exemplu v1.0.',
+  'Geen deck om vast te leggen.': 'Niciun deck de înregistrat.',
+  'Vastleggen mislukt:': 'Înregistrarea a eșuat:',
+  'Concept mergen': 'Îmbină schița',
+  'Voegt de review-PR van dit concept samen met de hoofdbranch.':
+      'Îmbină PR-ul de revizuire al acestei schițe în ramura principală.',
+  'Concept-branch opruimen na het mergen':
+      'Elimină ramura schiței după îmbinare',
+  'Mergen': 'Îmbină',
+  'Versie vastleggen': 'Înregistrează versiunea',
+  'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
+      'Pune o etichetă de lansare pe capul ramurii principale — versiunea pe care ai prezentat-o.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'Folosește vX, de exemplu v1.0.',
+  'Vastleggen': 'Înregistrează',
   'Uitbrengen ter review…': 'Trimite spre revizuire…',
   'Uitbrengen ter review': 'Trimite spre revizuire',
   'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':

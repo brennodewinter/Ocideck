@@ -111,11 +111,18 @@ class PullRequestRef {
   final String state;
   final bool merged;
 
+  /// De bron- en doelbranch, wanneer bekend (bij het opsommen/opzoeken van een
+  /// PR). Leeg wanneer het antwoord ze niet meegaf (bv. vlak na een merge).
+  final String head;
+  final String base;
+
   const PullRequestRef({
     required this.number,
     required this.url,
     required this.state,
     this.merged = false,
+    this.head = '',
+    this.base = '',
   });
 }
 
@@ -219,11 +226,17 @@ abstract class GitForge {
   });
 
   /// Merge pull request [number]. Branch-bescherming en verplichte reviews zijn
-  /// de zaak van de forge, niet van OciDeck (§9.4).
+  /// de zaak van de forge, niet van OciDeck (§9.4). Met [deleteBranch] ruimt de
+  /// forge de gemergede werkbranch meteen op — de gebruiker biedt dat aan.
   Future<PullRequestRef> mergePullRequest(
     int number, {
     PullRequestMergeMethod method = PullRequestMergeMethod.merge,
+    bool deleteBranch = false,
   });
+
+  /// De open pull request met [head] als bronbranch, of null als er geen is. Zo
+  /// vindt "Merge concept" de PR van de werkbranch terug, ook een sessie later.
+  Future<PullRequestRef?> pullRequestForBranch(String head);
 }
 
 extension GitForgeDecks on GitForge {

@@ -740,6 +740,32 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Concept mergen…': 'Fusionner le brouillon…',
+  'Versie vastleggen…': 'Enregistrer la version…',
+  'Concept gemerged naar de hoofdbranch.':
+      'Brouillon fusionné dans la branche principale.',
+  'Nog geen review — breng het concept eerst uit ter review.':
+      'Aucune révision — soumettez d\'abord le brouillon pour révision.',
+  'Er is geen concept om te mergen.': 'Il n\'y a aucun brouillon à fusionner.',
+  'Mergen mislukt:': 'Échec de la fusion :',
+  'Versie vastgelegd:': 'Version enregistrée :',
+  'Vastleggen geblokkeerd door het classificatiebeleid.':
+      'Enregistrement bloqué par la politique de classification.',
+  'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
+      'Version non valide — utilisez vX, par exemple v1.0.',
+  'Geen deck om vast te leggen.': 'Aucun deck à enregistrer.',
+  'Vastleggen mislukt:': 'Échec de l\'enregistrement :',
+  'Concept mergen': 'Fusionner le brouillon',
+  'Voegt de review-PR van dit concept samen met de hoofdbranch.':
+      'Fusionne la PR de révision de ce brouillon dans la branche principale.',
+  'Concept-branch opruimen na het mergen':
+      'Supprimer la branche du brouillon après la fusion',
+  'Mergen': 'Fusionner',
+  'Versie vastleggen': 'Enregistrer la version',
+  'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
+      'Pose une étiquette de version sur la tête de la branche principale — la version que vous avez présentée.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'Utilisez vX, par exemple v1.0.',
+  'Vastleggen': 'Enregistrer',
   'Uitbrengen ter review…': 'Soumettre pour révision…',
   'Uitbrengen ter review': 'Soumettre pour révision',
   'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':

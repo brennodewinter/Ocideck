@@ -1811,6 +1811,32 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Concept mergen…': 'Συγχώνευση προχείρου…',
+  'Versie vastleggen…': 'Καταγραφή έκδοσης…',
+  'Concept gemerged naar de hoofdbranch.':
+      'Το πρόχειρο συγχωνεύτηκε στον κύριο κλάδο.',
+  'Nog geen review — breng het concept eerst uit ter review.':
+      'Καμία επισκόπηση ακόμη — υποβάλετε πρώτα το πρόχειρο για έλεγχο.',
+  'Er is geen concept om te mergen.': 'Δεν υπάρχει πρόχειρο προς συγχώνευση.',
+  'Mergen mislukt:': 'Η συγχώνευση απέτυχε:',
+  'Versie vastgelegd:': 'Η έκδοση καταγράφηκε:',
+  'Vastleggen geblokkeerd door het classificatiebeleid.':
+      'Η καταγραφή αποκλείστηκε από την πολιτική διαβάθμισης.',
+  'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
+      'Μη έγκυρη έκδοση — χρησιμοποιήστε vX, για παράδειγμα v1.0.',
+  'Geen deck om vast te leggen.': 'Κανένα deck για καταγραφή.',
+  'Vastleggen mislukt:': 'Η καταγραφή απέτυχε:',
+  'Concept mergen': 'Συγχώνευση προχείρου',
+  'Voegt de review-PR van dit concept samen met de hoofdbranch.':
+      'Συγχωνεύει το PR ελέγχου αυτού του προχείρου στον κύριο κλάδο.',
+  'Concept-branch opruimen na het mergen':
+      'Αφαίρεση του κλάδου προχείρου μετά τη συγχώνευση',
+  'Mergen': 'Συγχώνευση',
+  'Versie vastleggen': 'Καταγραφή έκδοσης',
+  'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
+      'Τοποθετεί μια ετικέτα έκδοσης στην κορυφή του κύριου κλάδου — την έκδοση που παρουσιάσατε.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'Χρησιμοποιήστε vX, για παράδειγμα v1.0.',
+  'Vastleggen': 'Καταγραφή',
   'Uitbrengen ter review…': 'Υποβολή για έλεγχο…',
   'Uitbrengen ter review': 'Υποβολή για έλεγχο',
   'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':

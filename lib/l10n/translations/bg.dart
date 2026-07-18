@@ -1806,6 +1806,32 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Concept mergen…': 'Обединяване на чернова…',
+  'Versie vastleggen…': 'Записване на версия…',
+  'Concept gemerged naar de hoofdbranch.':
+      'Черновата е обединена в главния клон.',
+  'Nog geen review — breng het concept eerst uit ter review.':
+      'Все още няма преглед — първо изпратете черновата за преглед.',
+  'Er is geen concept om te mergen.': 'Няма чернова за обединяване.',
+  'Mergen mislukt:': 'Обединяването е неуспешно:',
+  'Versie vastgelegd:': 'Версията е записана:',
+  'Vastleggen geblokkeerd door het classificatiebeleid.':
+      'Записването е блокирано от политиката за класификация.',
+  'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
+      'Невалидна версия — използвайте vX, например v1.0.',
+  'Geen deck om vast te leggen.': 'Няма тесте за записване.',
+  'Vastleggen mislukt:': 'Записването е неуспешно:',
+  'Concept mergen': 'Обединяване на чернова',
+  'Voegt de review-PR van dit concept samen met de hoofdbranch.':
+      'Обединява прегледния PR на тази чернова в главния клон.',
+  'Concept-branch opruimen na het mergen':
+      'Премахване на клона на черновата след обединяване',
+  'Mergen': 'Обединяване',
+  'Versie vastleggen': 'Записване на версия',
+  'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
+      'Поставя таг за издание на върха на главния клон — версията, която представихте.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'Използвайте vX, например v1.0.',
+  'Vastleggen': 'Записване',
   'Uitbrengen ter review…': 'Изпрати за преглед…',
   'Uitbrengen ter review': 'Изпрати за преглед',
   'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':

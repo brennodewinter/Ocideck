@@ -1799,6 +1799,32 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Concept mergen…': 'Adumbrationem coniungere…',
+  'Versie vastleggen…': 'Versionem consignare…',
+  'Concept gemerged naar de hoofdbranch.':
+      'Adumbratio in ramum principalem coniuncta.',
+  'Nog geen review — breng het concept eerst uit ter review.':
+      'Nulla adhuc recognitio — adumbrationem prius ad recognitionem mitte.',
+  'Er is geen concept om te mergen.': 'Nulla adumbratio ad coniungendum.',
+  'Mergen mislukt:': 'Coniunctio defecit:',
+  'Versie vastgelegd:': 'Versio consignata:',
+  'Vastleggen geblokkeerd door het classificatiebeleid.':
+      'Consignatio ab consilio classificationis impedita.',
+  'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
+      'Versio invalida — utere vX, exempli gratia v1.0.',
+  'Geen deck om vast te leggen.': 'Nullus fasciculus consignandus.',
+  'Vastleggen mislukt:': 'Consignatio defecit:',
+  'Concept mergen': 'Adumbrationem coniungere',
+  'Voegt de review-PR van dit concept samen met de hoofdbranch.':
+      'Coniungit recognitionis PR huius adumbrationis in ramum principalem.',
+  'Concept-branch opruimen na het mergen':
+      'Ramum adumbrationis post coniunctionem removere',
+  'Mergen': 'Coniungere',
+  'Versie vastleggen': 'Versionem consignare',
+  'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
+      'Signum emissionis in capite rami principalis ponit — versionem quam ostendisti.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'Utere vX, exempli gratia v1.0.',
+  'Vastleggen': 'Consignare',
   'Uitbrengen ter review…': 'Ad recognitionem mittere…',
   'Uitbrengen ter review': 'Ad recognitionem mittere',
   'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':

@@ -740,6 +740,31 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Concept mergen…': 'Uni konsept…',
+  'Versie vastleggen…': 'Registrá vershon…',
+  'Concept gemerged naar de hoofdbranch.': 'Konsept uní ku e branch prinsipal.',
+  'Nog geen review — breng het concept eerst uit ter review.':
+      'Ainda no tin revishon — manda e konsept pa revishon promé.',
+  'Er is geen concept om te mergen.': 'No tin konsept pa uni.',
+  'Mergen mislukt:': 'Union a faya:',
+  'Versie vastgelegd:': 'Vershon registrá:',
+  'Vastleggen geblokkeerd door het classificatiebeleid.':
+      'Registrashon blokiá pa e norma di klasifikashon.',
+  'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
+      'Vershon inválido — usa vX, por ehèmpel v1.0.',
+  'Geen deck om vast te leggen.': 'No tin deck pa registrá.',
+  'Vastleggen mislukt:': 'Registrashon a faya:',
+  'Concept mergen': 'Uni konsept',
+  'Voegt de review-PR van dit concept samen met de hoofdbranch.':
+      'Ta uni e review-PR di e konsept aki ku e branch prinsipal.',
+  'Concept-branch opruimen na het mergen':
+      'Kita e branch di konsept despues di uni',
+  'Mergen': 'Uni',
+  'Versie vastleggen': 'Registrá vershon',
+  'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
+      'Ta pone un tag di release riba e kabes di e branch prinsipal — e vershon ku bo a presentá.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'Usa vX, por ehèmpel v1.0.',
+  'Vastleggen': 'Registrá',
   'Uitbrengen ter review…': 'Manda pa revishon…',
   'Uitbrengen ter review': 'Manda pa revishon',
   'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':

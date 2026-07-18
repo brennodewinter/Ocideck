@@ -1819,6 +1819,32 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Concept mergen…': 'Cumaisc an dréacht…',
+  'Versie vastleggen…': 'Taifead an leagan…',
+  'Concept gemerged naar de hoofdbranch.':
+      'Cumascadh an dréacht isteach sa phríomhbhrainse.',
+  'Nog geen review — breng het concept eerst uit ter review.':
+      'Gan athbhreithniú fós — cuir an dréacht isteach le hathbhreithniú ar dtús.',
+  'Er is geen concept om te mergen.': 'Níl aon dréacht le cumasc.',
+  'Mergen mislukt:': 'Theip ar an gcumasc:',
+  'Versie vastgelegd:': 'Leagan taifeadta:',
+  'Vastleggen geblokkeerd door het classificatiebeleid.':
+      'Chuir an polasaí aicmithe bac ar an taifeadadh.',
+  'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
+      'Leagan neamhbhailí — úsáid vX, mar shampla v1.0.',
+  'Geen deck om vast te leggen.': 'Níl aon deic le taifeadadh.',
+  'Vastleggen mislukt:': 'Theip ar an taifeadadh:',
+  'Concept mergen': 'Cumaisc an dréacht',
+  'Voegt de review-PR van dit concept samen met de hoofdbranch.':
+      'Cumascann sé PR athbhreithnithe an dréachta seo isteach sa phríomhbhrainse.',
+  'Concept-branch opruimen na het mergen':
+      'Bain an brainse dréachta tar éis an chumaisc',
+  'Mergen': 'Cumaisc',
+  'Versie vastleggen': 'Taifead an leagan',
+  'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
+      'Socraíonn sé clib eisiúna ar cheann an phríomhbhrainse — an leagan a chuir tú i láthair.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'Úsáid vX, mar shampla v1.0.',
+  'Vastleggen': 'Taifead',
   'Uitbrengen ter review…': 'Cuir isteach le hathbhreithniú…',
   'Uitbrengen ter review': 'Cuir isteach le hathbhreithniú',
   'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':

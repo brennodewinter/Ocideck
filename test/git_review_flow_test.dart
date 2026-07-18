@@ -188,4 +188,123 @@ void main() {
       },
     );
   });
+
+  group('mergeConcept', () {
+    test(
+      'merges the work branch PR onto main, prunes, re-bases the tab',
+      () async {
+        final (container, tabs) = build();
+        final forge = FakeForge(repo());
+        seedOnWorkBranch(container, deckWith(deckTlp: TlpLevel.green));
+        // A review PR is open for the work branch.
+        await forge.openPullRequest(
+          head: workBranch,
+          base: 'main',
+          title: 'Review',
+        );
+
+        final result = await tabs.mergeConcept(forge, config: config);
+
+        expect(result.status, MergeStatus.merged);
+        // main now points at the work branch's commit; the branch is pruned.
+        expect(forge.repo.branches['main'], 'commit-work');
+        expect(forge.repo.branches.containsKey(workBranch), isFalse);
+        // The tab re-bases onto main: a next save starts a fresh round.
+        final origin = container.read(tabsProvider).current!.gitOrigin!;
+        expect(origin.branch, 'main');
+        expect(origin.baseSha, 'commit-work');
+      },
+    );
+
+    test('no open PR for the branch is reported, not merged', () async {
+      final (container, tabs) = build();
+      final forge = FakeForge(repo());
+      seedOnWorkBranch(container, deckWith(deckTlp: TlpLevel.green));
+
+      final result = await tabs.mergeConcept(forge, config: config);
+
+      expect(result.status, MergeStatus.noPullRequest);
+      expect(forge.repo.branches['main'], 'commit-main'); // untouched
+    });
+
+    test('a tab on the default branch has nothing to merge', () async {
+      final (container, tabs) = build();
+      final forge = FakeForge(repo());
+      final tab = container.read(tabsProvider).current!;
+      tab.deckNotifier.loadDeck(deckWith(deckTlp: TlpLevel.green));
+      tab.gitOrigin = const GitOrigin(
+        config: config,
+        branch: 'main',
+        deckDir: deckDir,
+        baseSha: 'commit-main',
+      );
+
+      final result = await tabs.mergeConcept(forge, config: config);
+      expect(result.status, MergeStatus.notOnWorkBranch);
+    });
+  });
+
+  group('tagRelease (gated)', () {
+    test('tags main with decks/<naam>/vX when the gate is green', () async {
+      final (container, tabs) = build();
+      final forge = FakeForge(repo());
+      seedOnWorkBranch(container, deckWith(deckTlp: TlpLevel.green));
+
+      final result = await tabs.tagRelease(
+        forge,
+        config: config,
+        settings: const AppSettings(maxReleaseExportTlpKey: 'amber'),
+        version: 'v1.0',
+        message: 'eerste release',
+      );
+
+      expect(result.status, ReleaseStatus.tagged);
+      expect(result.tag!.name, 'decks/kwartaalcijfers/v1.0');
+      // The tag sits on the main head.
+      expect(forge.repo.tags['decks/kwartaalcijfers/v1.0'], 'commit-main');
+    });
+
+    test('a deck over the ceiling is blocked, and no tag is created', () async {
+      final (container, tabs) = build();
+      final forge = FakeForge(repo());
+      seedOnWorkBranch(
+        container,
+        deckWith(
+          deckTlp: TlpLevel.none,
+          slideTlps: const [TlpLevel.red], // caught by max effective TLP
+        ),
+      );
+
+      final result = await tabs.tagRelease(
+        forge,
+        config: config,
+        settings: const AppSettings(maxReleaseExportTlpKey: 'amber'),
+        version: 'v1.0',
+        message: 'm',
+      );
+
+      expect(result.status, ReleaseStatus.blocked);
+      expect(forge.repo.tags, isEmpty);
+    });
+
+    test(
+      'an invalid version is refused before the gate or the forge',
+      () async {
+        final (container, tabs) = build();
+        final forge = FakeForge(repo());
+        seedOnWorkBranch(container, deckWith(deckTlp: TlpLevel.green));
+
+        final result = await tabs.tagRelease(
+          forge,
+          config: config,
+          settings: const AppSettings(),
+          version: '1.0', // no leading v
+          message: 'm',
+        );
+
+        expect(result.status, ReleaseStatus.invalidVersion);
+        expect(forge.repo.tags, isEmpty);
+      },
+    );
+  });
 }

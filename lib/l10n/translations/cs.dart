@@ -1786,6 +1786,31 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Concept mergen…': 'Sloučit koncept…',
+  'Versie vastleggen…': 'Zaznamenat verzi…',
+  'Concept gemerged naar de hoofdbranch.': 'Koncept sloučen do hlavní větve.',
+  'Nog geen review — breng het concept eerst uit ter review.':
+      'Zatím žádná kontrola — nejprve odešli koncept ke kontrole.',
+  'Er is geen concept om te mergen.': 'Není žádný koncept ke sloučení.',
+  'Mergen mislukt:': 'Sloučení se nezdařilo:',
+  'Versie vastgelegd:': 'Verze zaznamenána:',
+  'Vastleggen geblokkeerd door het classificatiebeleid.':
+      'Záznam zablokován zásadami klasifikace.',
+  'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
+      'Neplatná verze — použij vX, například v1.0.',
+  'Geen deck om vast te leggen.': 'Žádná sada k zaznamenání.',
+  'Vastleggen mislukt:': 'Záznam se nezdařil:',
+  'Concept mergen': 'Sloučit koncept',
+  'Voegt de review-PR van dit concept samen met de hoofdbranch.':
+      'Sloučí kontrolní PR tohoto konceptu do hlavní větve.',
+  'Concept-branch opruimen na het mergen':
+      'Odstranit větev konceptu po sloučení',
+  'Mergen': 'Sloučit',
+  'Versie vastleggen': 'Zaznamenat verzi',
+  'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
+      'Nastaví značku vydání na špičku hlavní větve — verzi, kterou jsi prezentoval.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'Použij vX, například v1.0.',
+  'Vastleggen': 'Zaznamenat',
   'Uitbrengen ter review…': 'Odeslat ke kontrole…',
   'Uitbrengen ter review': 'Odeslat ke kontrole',
   'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':

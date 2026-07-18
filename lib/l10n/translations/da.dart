@@ -1782,6 +1782,30 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Concept mergen…': 'Flet udkast…',
+  'Versie vastleggen…': 'Registrér version…',
+  'Concept gemerged naar de hoofdbranch.': 'Udkast flettet ind i hovedgrenen.',
+  'Nog geen review — breng het concept eerst uit ter review.':
+      'Ingen gennemgang endnu — send først udkastet til gennemgang.',
+  'Er is geen concept om te mergen.': 'Der er intet udkast at flette.',
+  'Mergen mislukt:': 'Fletning mislykkedes:',
+  'Versie vastgelegd:': 'Version registreret:',
+  'Vastleggen geblokkeerd door het classificatiebeleid.':
+      'Registrering blokeret af klassificeringspolitikken.',
+  'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
+      'Ugyldig version — brug vX, for eksempel v1.0.',
+  'Geen deck om vast te leggen.': 'Intet deck at registrere.',
+  'Vastleggen mislukt:': 'Registrering mislykkedes:',
+  'Concept mergen': 'Flet udkast',
+  'Voegt de review-PR van dit concept samen met de hoofdbranch.':
+      'Fletter dette udkasts gennemgangs-PR ind i hovedgrenen.',
+  'Concept-branch opruimen na het mergen': 'Fjern udkastsgrenen efter fletning',
+  'Mergen': 'Flet',
+  'Versie vastleggen': 'Registrér version',
+  'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
+      'Sætter et udgivelses-tag på hovedgrenens spids — den version, du præsenterede.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'Brug vX, for eksempel v1.0.',
+  'Vastleggen': 'Registrér',
   'Uitbrengen ter review…': 'Send til gennemgang…',
   'Uitbrengen ter review': 'Send til gennemgang',
   'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':

@@ -95,6 +95,7 @@ import 'presentation/fullscreen_presenter.dart';
 import 'slides/slide_preview.dart';
 
 part 'app_shell_main_layout.dart';
+part 'app_shell_menu.dart';
 
 // ── Shared helpers ──────────────────────────────────────────────────────────
 

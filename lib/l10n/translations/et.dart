@@ -1774,6 +1774,31 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Concept mergen…': 'Ühenda mustand…',
+  'Versie vastleggen…': 'Salvesta versioon…',
+  'Concept gemerged naar de hoofdbranch.': 'Mustand ühendati peaharusse.',
+  'Nog geen review — breng het concept eerst uit ter review.':
+      'Ülevaatust veel pole — esita mustand esmalt ülevaatuseks.',
+  'Er is geen concept om te mergen.': 'Ühendamiseks pole mustandit.',
+  'Mergen mislukt:': 'Ühendamine ebaõnnestus:',
+  'Versie vastgelegd:': 'Versioon salvestatud:',
+  'Vastleggen geblokkeerd door het classificatiebeleid.':
+      'Salvestamise blokeeris klassifitseerimispoliitika.',
+  'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
+      'Vigane versioon — kasuta vX, näiteks v1.0.',
+  'Geen deck om vast te leggen.': 'Pole dekki, mida salvestada.',
+  'Vastleggen mislukt:': 'Salvestamine ebaõnnestus:',
+  'Concept mergen': 'Ühenda mustand',
+  'Voegt de review-PR van dit concept samen met de hoofdbranch.':
+      'Ühendab selle mustandi ülevaatuse PR-i peaharusse.',
+  'Concept-branch opruimen na het mergen':
+      'Eemalda mustandiharu pärast ühendamist',
+  'Mergen': 'Ühenda',
+  'Versie vastleggen': 'Salvesta versioon',
+  'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
+      'Seab väljalasketagi peaharu tippu — versiooni, mille esitasid.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'Kasuta vX, näiteks v1.0.',
+  'Vastleggen': 'Salvesta',
   'Uitbrengen ter review…': 'Esita ülevaatuseks…',
   'Uitbrengen ter review': 'Esita ülevaatuseks',
   'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':

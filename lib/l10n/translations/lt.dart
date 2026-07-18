@@ -1791,6 +1791,33 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Concept mergen…': 'Sujungti juodraštį…',
+  'Versie vastleggen…': 'Įrašyti versiją…',
+  'Concept gemerged naar de hoofdbranch.':
+      'Juodraštis sujungtas su pagrindine šaka.',
+  'Nog geen review — breng het concept eerst uit ter review.':
+      'Peržiūros dar nėra — pirma pateikite juodraštį peržiūrai.',
+  'Er is geen concept om te mergen.':
+      'Nėra juodraščio, kurį būtų galima sujungti.',
+  'Mergen mislukt:': 'Nepavyko sujungti:',
+  'Versie vastgelegd:': 'Versija įrašyta:',
+  'Vastleggen geblokkeerd door het classificatiebeleid.':
+      'Įrašymą užblokavo klasifikavimo politika.',
+  'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
+      'Netinkama versija — naudokite vX, pavyzdžiui, v1.0.',
+  'Geen deck om vast te leggen.': 'Nėra rinkinio įrašyti.',
+  'Vastleggen mislukt:': 'Nepavyko įrašyti:',
+  'Concept mergen': 'Sujungti juodraštį',
+  'Voegt de review-PR van dit concept samen met de hoofdbranch.':
+      'Sujungia šio juodraščio peržiūros PR su pagrindine šaka.',
+  'Concept-branch opruimen na het mergen':
+      'Pašalinti juodraščio šaką po sujungimo',
+  'Mergen': 'Sujungti',
+  'Versie vastleggen': 'Įrašyti versiją',
+  'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
+      'Uždeda leidimo žymą pagrindinės šakos viršūnėje — versiją, kurią pristatėte.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'Naudokite vX, pavyzdžiui, v1.0.',
+  'Vastleggen': 'Įrašyti',
   'Uitbrengen ter review…': 'Pateikti peržiūrai…',
   'Uitbrengen ter review': 'Pateikti peržiūrai',
   'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':

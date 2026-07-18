@@ -741,6 +741,31 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Concept mergen…': 'Konsept gearfoegje…',
+  'Versie vastleggen…': 'Ferzje fêstlizze…',
+  'Concept gemerged naar de hoofdbranch.': 'Konsept gearfoege yn de haadtûke.',
+  'Nog geen review — breng het concept eerst uit ter review.':
+      'Noch gjin review — bring it konsept earst út ter review.',
+  'Er is geen concept om te mergen.': 'Der is gjin konsept om te gearfoegjen.',
+  'Mergen mislukt:': 'Gearfoegjen mislearre:',
+  'Versie vastgelegd:': 'Ferzje fêstlein:',
+  'Vastleggen geblokkeerd door het classificatiebeleid.':
+      'Fêstlizzen blokkearre troch it klassifikaasjebelied.',
+  'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
+      'Ûnjildige ferzje — brûk vX, bygelyks v1.0.',
+  'Geen deck om vast te leggen.': 'Gjin deck om fêst te lizzen.',
+  'Vastleggen mislukt:': 'Fêstlizzen mislearre:',
+  'Concept mergen': 'Konsept gearfoegje',
+  'Voegt de review-PR van dit concept samen met de hoofdbranch.':
+      'Foeget de review-PR fan dit konsept gear mei de haadtûke.',
+  'Concept-branch opruimen na het mergen':
+      'Konsept-tûke opromje nei it gearfoegjen',
+  'Mergen': 'Gearfoegje',
+  'Versie vastleggen': 'Ferzje fêstlizze',
+  'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
+      'Set in release-tag op de kop fan de haadtûke — de ferzje dy\'tsto presintearre hast.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'Brûk vX, bygelyks v1.0.',
+  'Vastleggen': 'Fêstlizze',
   'Uitbrengen ter review…': 'Foar review yntsjinje…',
   'Uitbrengen ter review': 'Foar review yntsjinje',
   'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':

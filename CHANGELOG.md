@@ -18,8 +18,17 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   before it goes out. That step is gated by the classification policy, fail-closed
   and *before* anything is pushed: unlike the export ceiling it weighs the
   strictest TLP across the whole deck, so a single `TLP:RED` slide in an otherwise
-  unclassified deck stops the release. (Merging the review and tagging the version
-  land in the next step.)
+  unclassified deck stops the release.
+- **Merge a reviewed concept and record the version — "Concept mergen…" and
+  "Versie vastleggen…".** Once the review is done, *Concept mergen…* merges the
+  pull request into the main branch (optionally cleaning up the concept branch)
+  and re-bases your tab onto main, so the next edit starts a fresh round. *Versie
+  vastleggen…* then marks the version you presented with a release tag
+  (`decks/<naam>/vX`) on the main branch — which is exactly what *Versies…* lists.
+  Recording a version passes the same fail-closed classification gate as
+  releasing for review (weighed on the strictest TLP in the deck), so a version
+  can never be tagged past its classification ceiling. Both work on every plane,
+  since pull requests and tags are the forge's job.
 - **Open an earlier released version of a deck — "Versies…".** For a deck opened
   from git, the `…` menu now lists the versions that were released of it (the
   `decks/<naam>/vX` tags), newest first. Pick one and it opens **read-only** — a

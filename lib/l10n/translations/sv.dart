@@ -1782,6 +1782,32 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Concept mergen…': 'Slå ihop utkast…',
+  'Versie vastleggen…': 'Registrera version…',
+  'Concept gemerged naar de hoofdbranch.':
+      'Utkastet sammanfogades med huvudgrenen.',
+  'Nog geen review — breng het concept eerst uit ter review.':
+      'Ingen granskning ännu — skicka först utkastet för granskning.',
+  'Er is geen concept om te mergen.': 'Det finns inget utkast att slå ihop.',
+  'Mergen mislukt:': 'Sammanfogning misslyckades:',
+  'Versie vastgelegd:': 'Version registrerad:',
+  'Vastleggen geblokkeerd door het classificatiebeleid.':
+      'Registrering blockerad av klassificeringspolicyn.',
+  'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
+      'Ogiltig version — använd vX, till exempel v1.0.',
+  'Geen deck om vast te leggen.': 'Inget deck att registrera.',
+  'Vastleggen mislukt:': 'Registrering misslyckades:',
+  'Concept mergen': 'Slå ihop utkast',
+  'Voegt de review-PR van dit concept samen met de hoofdbranch.':
+      'Slår ihop det här utkastets gransknings-PR med huvudgrenen.',
+  'Concept-branch opruimen na het mergen':
+      'Ta bort utkastgrenen efter sammanfogning',
+  'Mergen': 'Slå ihop',
+  'Versie vastleggen': 'Registrera version',
+  'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
+      'Sätter en utgåvetagg på huvudgrenens spets — versionen du presenterade.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'Använd vX, till exempel v1.0.',
+  'Vastleggen': 'Registrera',
   'Uitbrengen ter review…': 'Skicka för granskning…',
   'Uitbrengen ter review': 'Skicka för granskning',
   'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':

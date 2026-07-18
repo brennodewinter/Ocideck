@@ -922,6 +922,32 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Concept mergen…': 'Merge concept…',
+  'Versie vastleggen…': 'Record version…',
+  'Concept gemerged naar de hoofdbranch.':
+      'Concept merged into the main branch.',
+  'Nog geen review — breng het concept eerst uit ter review.':
+      'No review yet — submit the concept for review first.',
+  'Er is geen concept om te mergen.': 'There is no concept to merge.',
+  'Mergen mislukt:': 'Merge failed:',
+  'Versie vastgelegd:': 'Version recorded:',
+  'Vastleggen geblokkeerd door het classificatiebeleid.':
+      'Recording blocked by the classification policy.',
+  'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
+      'Invalid version — use vX, for example v1.0.',
+  'Geen deck om vast te leggen.': 'No deck to record.',
+  'Vastleggen mislukt:': 'Recording failed:',
+  'Concept mergen': 'Merge concept',
+  'Voegt de review-PR van dit concept samen met de hoofdbranch.':
+      'Merges this concept\'s review PR into the main branch.',
+  'Concept-branch opruimen na het mergen':
+      'Remove the concept branch after merging',
+  'Mergen': 'Merge',
+  'Versie vastleggen': 'Record version',
+  'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
+      'Sets a release tag on the head of the main branch — the version you presented.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'Use vX, for example v1.0.',
+  'Vastleggen': 'Record',
   'Uitbrengen ter review…': 'Submit for review…',
   'Uitbrengen ter review': 'Submit for review',
   'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
