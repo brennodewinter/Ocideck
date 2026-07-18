@@ -352,8 +352,13 @@ const List<EisEntry> _entries = [
     id: '4.3.2',
     part: EisPart.rapportage,
     title: 'Managementsamenvatting - Overzicht gebruikte standaarden',
-    derivation: EisDerivation.automatic,
-    check: EisCheck.standardsRecorded,
+    // Blijft handmatig tot het overzicht ook echt in het rapport staat. Het
+    // deck kán de standaarden vastleggen (front matter `standards`), maar die
+    // vastlegging wordt nergens gerenderd: hij bereikt het auditdossier en een
+    // dialoog, niet de slides die de klant krijgt. Deze eis vraagt om een
+    // overzicht ín de managementsamenvatting, dus vastleggen alleen voldoet er
+    // niet aan. Zie CHANGELOG 2026-07-18.
+    derivation: EisDerivation.manual,
   ),
   EisEntry(
     id: '4.3.3',
