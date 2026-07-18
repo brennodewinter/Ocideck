@@ -122,6 +122,103 @@ void main() {
       expect(filled.rowColors, ['#003399', '#FFCC00']);
     });
 
+    test('data round-trips through the JSON data file', () {
+      const spec = ChartSpec(
+        type: ChartType.line,
+        title: 'Omzet',
+        source: 'data/omzet.json',
+        x: ['Jan', 'Feb'],
+        series: [
+          ChartSeries(name: 'Omzet', data: [120, 138]),
+          ChartSeries(name: 'Marge', data: [14, 17]),
+        ],
+      );
+      // Emptied of its data, then refilled from what it wrote itself.
+      final refilled = spec
+          .copyWith(x: const [], series: const [])
+          .withJson(spec.dataToJson());
+      expect(refilled.x, ['Jan', 'Feb']);
+      expect(refilled.series.map((s) => s.name), ['Omzet', 'Marge']);
+      expect(refilled.series[0].data, [120, 138]);
+      expect(refilled.series[1].data, [14, 17]);
+    });
+
+    test('the data file carries values only, never styling', () {
+      const spec = ChartSpec(
+        rowColors: ['#003399'],
+        series: [
+          ChartSeries(name: 'A', data: [1], color: '#FFCC00'),
+        ],
+        x: ['Jan'],
+        title: 'Titel',
+        minBound: 0,
+      );
+      final json = spec.dataToJson();
+      // Colours, title and bounds belong to the block; only x/series travel.
+      expect(json, isNot(contains('#003399')));
+      expect(json, isNot(contains('Titel')));
+      expect(json, isNot(contains('minBound')));
+      expect(json, contains('"x"'));
+    });
+
+    test('withJson keeps the colours the block already had', () {
+      const spec = ChartSpec(
+        source: 'data/o.json',
+        x: ['Jan', 'Feb'],
+        rowColors: ['#003399', '#FFCC00'],
+        series: [ChartSeries(name: 'oud', data: [], color: '#10B981')],
+      );
+      // Sorting the rows in a spreadsheet swaps Jan and Feb. Each row keeps the
+      // colour of its *label*, so the palette travels with the row rather than
+      // staying behind at its old position.
+      final filled = spec.withJson(
+        '{"x":["Feb","Jan"],"series":[{"name":"A","data":[2,1]}]}',
+      );
+      expect(filled.source, 'data/o.json');
+      expect(filled.x, ['Feb', 'Jan']);
+      expect(filled.rowColors, ['#FFCC00', '#003399']);
+      expect(filled.series.single.color, '#10B981');
+    });
+
+    test('a label the block never had falls back to its position colour', () {
+      const spec = ChartSpec(
+        x: ['Jan'],
+        rowColors: ['#003399'],
+        series: [ChartSeries(name: 'oud', data: [])],
+      );
+      // Mrt is new, so there is no label to follow — position decides, which
+      // keeps a freshly added row from arriving colourless.
+      final filled = spec.withJson('{"x":["Mrt"],"series":[]}');
+      expect(filled.rowColors, ['#003399']);
+    });
+
+    test('a corrupt data file leaves the chart as it was', () {
+      const spec = ChartSpec(
+        source: 'data/o.json',
+        x: ['Jan'],
+        series: [
+          ChartSeries(name: 'A', data: [1]),
+        ],
+      );
+      // Blanking the chart would hide the problem behind an empty plot.
+      for (final bad in ['{', 'null', '[]', '{"series":[]}', '']) {
+        final out = spec.withJson(bad);
+        expect(out.x, ['Jan'], reason: 'input: $bad');
+        expect(out.series.single.data, [1], reason: 'input: $bad');
+      }
+    });
+
+    test('withData picks the reader from the extension', () {
+      const spec = ChartSpec(x: [], series: []);
+      expect(
+        spec.withData('{"x":["Jan"],"series":[]}', path: 'data/o.json').x,
+        ['Jan'],
+      );
+      expect(spec.withData(',A\nJan,1', path: 'data/o.csv').x, ['Jan']);
+      // No extension: CSV, the form that existed before JSON did.
+      expect(spec.withData(',A\nJan,1', path: 'data/o').x, ['Jan']);
+    });
+
     test('invalid colors are ignored while valid colors are normalized', () {
       final valid = ChartSeries.fromJson({
         'name': 'A',

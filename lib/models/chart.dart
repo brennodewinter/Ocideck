@@ -179,10 +179,20 @@ double _relativeLuminance(String hex) {
 
 /// The full chart specification, stored as JSON inside a ```chart fenced block.
 ///
-/// Small charts keep their data inline; data-driven charts instead point at an
-/// external CSV via [source] (kept as the living source of truth and packaged
-/// alongside the deck like images). When a [source] is set the inline data is
-/// stripped from the markdown on save and re-hydrated from the CSV on load.
+/// The numbers may live inline, or in a data file next to the deck that
+/// [source] points at (packaged alongside the deck like images). With a
+/// [source] set, the inline data is stripped from the markdown on save and
+/// read back on load, so the `.md` stays about the *shape* of the chart while
+/// the data file holds the values.
+///
+/// Two file forms are supported. New data files are written as JSON
+/// ([dataToJson]); `.csv` is still read, because decks written before the
+/// switch link one and a CSV remains the thing you can hand to a spreadsheet.
+/// [withData] picks on the extension.
+///
+/// What never moves to the data file is styling — per-row and per-series
+/// colours stay in the block. That is what lets the data file be replaced
+/// wholesale without the chart losing its look.
 class ChartSpec {
   final ChartType type;
   final String title;
@@ -342,8 +352,40 @@ class ChartSpec {
   }
 
   /// Return a copy with x/series taken from [csv]; keeps [source].
-  ChartSpec withCsv(String csv) {
-    final parsed = parseCsv(csv);
+  ChartSpec withCsv(String csv) => _withParsedData(parseCsv(csv));
+
+  /// Return a copy with x/series taken from [json] — the contents of a
+  /// `data/<naam>.json`; keeps [source]. Tolerant like [ChartSpec.parse]: a
+  /// malformed file leaves the spec untouched rather than blanking the chart.
+  ChartSpec withJson(String json) {
+    final parsed = parseChartDataJson(json);
+    return parsed == null ? this : _withParsedData(parsed);
+  }
+
+  /// Return a copy filled from the data file at [path] — JSON or CSV, chosen on
+  /// the extension so callers do not have to know which form a deck uses.
+  ChartSpec withData(String content, {required String path}) =>
+      path.toLowerCase().endsWith('.json')
+      ? withJson(content)
+      : withCsv(content);
+
+  /// The data half of this spec as the contents of a `data/<naam>.json`.
+  ///
+  /// Only x and series values: the colours stay behind in the chart block,
+  /// because they are styling rather than data — that split is what lets the
+  /// data file be regenerated from a spreadsheet without losing the deck's
+  /// look. Mirrored by [parseChartDataJson].
+  String dataToJson() => const JsonEncoder.withIndent('  ').convert({
+    'x': x,
+    'series': [for (final s in series) s.toJson()],
+  });
+
+  /// Shared tail of [withCsv]/[withJson]: adopt fresh labels and values while
+  /// keeping the colours. Row colours follow their *label* (so re-ordering or
+  /// inserting rows in a spreadsheet does not shuffle them) and fall back to
+  /// position; series colours follow position.
+  ChartSpec _withParsedData((List<String>, List<ChartSeries>) parsed) {
+    final (labels, parsedSeries) = parsed;
     final colorsByLabel = x.isEmpty
         ? const <String, String?>{}
         : <String, String?>{
@@ -351,21 +393,43 @@ class ChartSpec {
               x[i]: i < rowColors.length ? rowColors[i] : null,
           };
     return copyWith(
-      x: parsed.$1,
+      x: labels,
       rowColors: [
-        for (var i = 0; i < parsed.$1.length; i++)
-          colorsByLabel[parsed.$1[i]] ??
+        for (var i = 0; i < labels.length; i++)
+          colorsByLabel[labels[i]] ??
               (i < rowColors.length ? rowColors[i] : null),
       ],
       series: [
-        for (var i = 0; i < parsed.$2.length; i++)
+        for (var i = 0; i < parsedSeries.length; i++)
           ChartSeries(
-            name: parsed.$2[i].name,
-            data: parsed.$2[i].data,
+            name: parsedSeries[i].name,
+            data: parsedSeries[i].data,
             color: i < series.length ? series[i].color : null,
           ),
       ],
     );
+  }
+}
+
+/// Parse the contents of a `data/<naam>.json` into (x labels, series), or null
+/// when the file is not usable — bad JSON, or not an object with an `x` list.
+///
+/// Null rather than empty on purpose: a chart whose data file is corrupt should
+/// keep whatever it already has instead of silently becoming an empty plot.
+(List<String>, List<ChartSeries>)? parseChartDataJson(String json) {
+  try {
+    final data = jsonDecode(json.trim());
+    if (data is! Map || data['x'] is! List) return null;
+    return (
+      [for (final v in (data['x'] as List)) v.toString()],
+      [
+        for (final s in (data['series'] as List? ?? const []))
+          if (s is Map) ChartSeries.fromJson(Map<String, dynamic>.from(s)),
+      ],
+    );
+  } catch (e, s) {
+    logError('parseChartDataJson: decode chart data file', e, s);
+    return null;
   }
 }
 
