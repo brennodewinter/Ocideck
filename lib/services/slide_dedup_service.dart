@@ -239,6 +239,15 @@ class SlideDedupService {
     return out;
   }
 
+  /// How alike [a] and [b] read, 0..1 (Sørensen–Dice over their visible text).
+  /// Slides of different types never match. The dedup pass uses this internally;
+  /// it is public so a cross-version comparison can pair up an *edited* slide
+  /// with the one it came from (§9.5).
+  double similarity(Slide a, Slide b) {
+    if (a.type != b.type) return 0;
+    return _dice(_grams(a), _grams(b));
+  }
+
   /// The visible textual content of [slide], used for similarity scoring
   /// (paths and notes are deliberately excluded — they are not what a reader
   /// sees on the slide).
