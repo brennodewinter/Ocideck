@@ -494,6 +494,13 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
           child: Image.file(
             File(resolved),
             fit: BoxFit.cover,
+            // Bewijsmateriaal is vaak een schermafdruk van enkele duizenden
+            // pixels breed, terwijl deze duim 44 logische pixels meet. Zonder
+            // decodeerhint gaat de volledige bitmap naar het geheugen — bij een
+            // rapport met tientallen bewijsstukken loopt dat hard op. 176 is
+            // vier keer de weergavebreedte en dus ruim boven elke realistische
+            // pixelverhouding, zodat er niets zichtbaar verslechtert.
+            cacheWidth: 176,
             errorBuilder: (_, _, _) => _evidenceIcon(isVideo),
           ),
         );
