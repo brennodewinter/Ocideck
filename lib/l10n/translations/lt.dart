@@ -1791,6 +1791,17 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Overzicht': 'Apžvalga',
+  'Veelgestelde vragen': 'Dažni klausimai',
+  'Probleemoplossing': 'Trikčių šalinimas',
+  'Begrippenlijst': 'Terminų žodynas',
+  'API-documentatie': 'API dokumentacija',
+  'Prestaties': 'Našumas',
+  'Beveiligingsontwerp': 'Saugumo projektavimas',
+  'Hosting en uitrol': 'Talpinimas ir diegimas',
+  'Bijdragen': 'Prisidėjimas',
+  'Ontwikkelomgeving': 'Kūrimo aplinka',
+  'Migratiegids': 'Migracijos vadovas',
   'Versies…': 'Versijos…',
   'Versies:': 'Versijos:',
   'Nog geen uitgebrachte versies van dit deck.':

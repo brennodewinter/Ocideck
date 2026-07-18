@@ -1806,6 +1806,17 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Overzicht': 'Преглед',
+  'Veelgestelde vragen': 'Често задавани въпроси',
+  'Probleemoplossing': 'Отстраняване на проблеми',
+  'Begrippenlijst': 'Речник на термините',
+  'API-documentatie': 'API документация',
+  'Prestaties': 'Производителност',
+  'Beveiligingsontwerp': 'Дизайн на сигурността',
+  'Hosting en uitrol': 'Хостинг и внедряване',
+  'Bijdragen': 'Принос',
+  'Ontwikkelomgeving': 'Среда за разработка',
+  'Migratiegids': 'Ръководство за миграция',
   'Versies…': 'Версии…',
   'Versies:': 'Версии:',
   'Nog geen uitgebrachte versies van dit deck.':

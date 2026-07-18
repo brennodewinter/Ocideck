@@ -1783,6 +1783,17 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Overzicht': 'Yleiskatsaus',
+  'Veelgestelde vragen': 'Usein kysytyt kysymykset',
+  'Probleemoplossing': 'Vianmääritys',
+  'Begrippenlijst': 'Sanasto',
+  'API-documentatie': 'API-dokumentaatio',
+  'Prestaties': 'Suorituskyky',
+  'Beveiligingsontwerp': 'Tietoturvasuunnittelu',
+  'Hosting en uitrol': 'Isännöinti ja käyttöönotto',
+  'Bijdragen': 'Osallistuminen',
+  'Ontwikkelomgeving': 'Kehitysympäristö',
+  'Migratiegids': 'Siirto-opas',
   'Versies…': 'Versiot…',
   'Versies:': 'Versiot:',
   'Nog geen uitgebrachte versies van dit deck.':

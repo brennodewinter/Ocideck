@@ -1802,6 +1802,17 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Overzicht': 'Prezentare generală',
+  'Veelgestelde vragen': 'Întrebări frecvente',
+  'Probleemoplossing': 'Depanare',
+  'Begrippenlijst': 'Glosar',
+  'API-documentatie': 'Documentație API',
+  'Prestaties': 'Performanță',
+  'Beveiligingsontwerp': 'Proiectarea securității',
+  'Hosting en uitrol': 'Găzduire și implementare',
+  'Bijdragen': 'Contribuție',
+  'Ontwikkelomgeving': 'Mediu de dezvoltare',
+  'Migratiegids': 'Ghid de migrare',
   'Versies…': 'Versiuni…',
   'Versies:': 'Versiuni:',
   'Nog geen uitgebrachte versies van dit deck.':

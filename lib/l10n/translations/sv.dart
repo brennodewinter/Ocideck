@@ -1782,6 +1782,17 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Overzicht': 'Översikt',
+  'Veelgestelde vragen': 'Vanliga frågor',
+  'Probleemoplossing': 'Felsökning',
+  'Begrippenlijst': 'Ordlista',
+  'API-documentatie': 'API-dokumentation',
+  'Prestaties': 'Prestanda',
+  'Beveiligingsontwerp': 'Säkerhetsdesign',
+  'Hosting en uitrol': 'Värdtjänst och driftsättning',
+  'Bijdragen': 'Bidra',
+  'Ontwikkelomgeving': 'Utvecklingsmiljö',
+  'Migratiegids': 'Migreringsguide',
   'Versies…': 'Versioner…',
   'Versies:': 'Versioner:',
   'Nog geen uitgebrachte versies van dit deck.':

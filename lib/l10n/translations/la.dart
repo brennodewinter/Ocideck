@@ -1799,6 +1799,17 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Overzicht': 'Conspectus',
+  'Veelgestelde vragen': 'Quaestiones frequentes',
+  'Probleemoplossing': 'Solutio difficultatum',
+  'Begrippenlijst': 'Glossarium',
+  'API-documentatie': 'Documentatio API',
+  'Prestaties': 'Efficientia',
+  'Beveiligingsontwerp': 'Consilium securitatis',
+  'Hosting en uitrol': 'Hospitium et distributio',
+  'Bijdragen': 'Conferre',
+  'Ontwikkelomgeving': 'Ambitus explicationis',
+  'Migratiegids': 'Dux migrationis',
   'Versies…': 'Versiones…',
   'Versies:': 'Versiones:',
   'Nog geen uitgebrachte versies van dit deck.':

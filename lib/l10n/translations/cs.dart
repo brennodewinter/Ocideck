@@ -1786,6 +1786,17 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Overzicht': 'Přehled',
+  'Veelgestelde vragen': 'Časté dotazy',
+  'Probleemoplossing': 'Řešení potíží',
+  'Begrippenlijst': 'Slovníček pojmů',
+  'API-documentatie': 'Dokumentace API',
+  'Prestaties': 'Výkon',
+  'Beveiligingsontwerp': 'Návrh zabezpečení',
+  'Hosting en uitrol': 'Hosting a nasazení',
+  'Bijdragen': 'Přispívání',
+  'Ontwikkelomgeving': 'Vývojové prostředí',
+  'Migratiegids': 'Průvodce migrací',
   'Versies…': 'Verze…',
   'Versies:': 'Verze:',
   'Nog geen uitgebrachte versies van dit deck.':

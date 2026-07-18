@@ -736,6 +736,17 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Overzicht': 'Panoramica',
+  'Veelgestelde vragen': 'Domande frequenti',
+  'Probleemoplossing': 'Risoluzione dei problemi',
+  'Begrippenlijst': 'Glossario',
+  'API-documentatie': 'Documentazione API',
+  'Prestaties': 'Prestazioni',
+  'Beveiligingsontwerp': 'Progettazione della sicurezza',
+  'Hosting en uitrol': 'Hosting e distribuzione',
+  'Bijdragen': 'Come contribuire',
+  'Ontwikkelomgeving': 'Ambiente di sviluppo',
+  'Migratiegids': 'Guida alla migrazione',
   'Versies…': 'Versioni…',
   'Versies:': 'Versioni:',
   'Nog geen uitgebrachte versies van dit deck.':

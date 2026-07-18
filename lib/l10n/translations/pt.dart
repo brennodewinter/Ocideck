@@ -1813,6 +1813,17 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Overzicht': 'Visão geral',
+  'Veelgestelde vragen': 'Perguntas frequentes',
+  'Probleemoplossing': 'Resolução de problemas',
+  'Begrippenlijst': 'Glossário',
+  'API-documentatie': 'Documentação da API',
+  'Prestaties': 'Desempenho',
+  'Beveiligingsontwerp': 'Design de segurança',
+  'Hosting en uitrol': 'Hospedagem e implantação',
+  'Bijdragen': 'Contribuir',
+  'Ontwikkelomgeving': 'Ambiente de desenvolvimento',
+  'Migratiegids': 'Guia de migração',
   'Versies…': 'Versões…',
   'Versies:': 'Versões:',
   'Nog geen uitgebrachte versies van dit deck.':

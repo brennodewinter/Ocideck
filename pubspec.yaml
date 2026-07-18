@@ -113,6 +113,18 @@ flutter:
     - docs/SOURCE_MAP.md
     - docs/LICENSE_COMPLIANCE.md
     - docs/SBOM.md
+    - docs/README.md
+    - docs/FAQ.md
+    - docs/TROUBLESHOOTING_GUIDE.md
+    - docs/PRIVACY.md
+    - docs/GLOSSARY.md
+    - docs/API_DOCUMENTATION.md
+    - docs/PERFORMANCE_GUIDE.md
+    - docs/SECURITY_DESIGN.md
+    - docs/HOSTING.md
+    - docs/CONTRIBUTING_GUIDELINES.md
+    - docs/DEVELOPMENT_SETUP_GUIDE.md
+    - docs/MIGRATION_GUIDE.md
     - docs/design/COLLABORATION.md
     - docs/design/GIT_STORAGE.md
     - docs/design/PENTEST_MIAUW.md

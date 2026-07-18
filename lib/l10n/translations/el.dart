@@ -1811,6 +1811,17 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Overzicht': 'Επισκόπηση',
+  'Veelgestelde vragen': 'Συχνές ερωτήσεις',
+  'Probleemoplossing': 'Αντιμετώπιση προβλημάτων',
+  'Begrippenlijst': 'Γλωσσάρι',
+  'API-documentatie': 'Τεκμηρίωση API',
+  'Prestaties': 'Επιδόσεις',
+  'Beveiligingsontwerp': 'Σχεδίαση ασφάλειας',
+  'Hosting en uitrol': 'Φιλοξενία και ανάπτυξη',
+  'Bijdragen': 'Συνεισφορά',
+  'Ontwikkelomgeving': 'Περιβάλλον ανάπτυξης',
+  'Migratiegids': 'Οδηγός μετάβασης',
   'Versies…': 'Εκδόσεις…',
   'Versies:': 'Εκδόσεις:',
   'Nog geen uitgebrachte versies van dit deck.':

@@ -1782,6 +1782,17 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Overzicht': 'Pārskats',
+  'Veelgestelde vragen': 'Biežāk uzdotie jautājumi',
+  'Probleemoplossing': 'Problēmu novēršana',
+  'Begrippenlijst': 'Terminu vārdnīca',
+  'API-documentatie': 'API dokumentācija',
+  'Prestaties': 'Veiktspēja',
+  'Beveiligingsontwerp': 'Drošības projektējums',
+  'Hosting en uitrol': 'Mitināšana un izvietošana',
+  'Bijdragen': 'Ieguldījums',
+  'Ontwikkelomgeving': 'Izstrādes vide',
+  'Migratiegids': 'Migrācijas ceļvedis',
   'Versies…': 'Versijas…',
   'Versies:': 'Versijas:',
   'Nog geen uitgebrachte versies van dit deck.':

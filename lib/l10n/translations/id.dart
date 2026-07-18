@@ -1783,6 +1783,17 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Overzicht': 'Ikhtisar',
+  'Veelgestelde vragen': 'Pertanyaan umum',
+  'Probleemoplossing': 'Pemecahan masalah',
+  'Begrippenlijst': 'Glosarium',
+  'API-documentatie': 'Dokumentasi API',
+  'Prestaties': 'Kinerja',
+  'Beveiligingsontwerp': 'Desain keamanan',
+  'Hosting en uitrol': 'Hosting dan penerapan',
+  'Bijdragen': 'Berkontribusi',
+  'Ontwikkelomgeving': 'Lingkungan pengembangan',
+  'Migratiegids': 'Panduan migrasi',
   'Versies…': 'Versi…',
   'Versies:': 'Versi:',
   'Nog geen uitgebrachte versies van dit deck.':
