@@ -75,6 +75,11 @@ class MarkdownService {
     if (deck.keywords.isNotEmpty) {
       buf.writeln('keywords: ${_yamlScalar(deck.keywords)}');
     }
+    if (deck.standardsUsed.isNotEmpty) {
+      // Komma-gescheiden op één regel, net als keywords: de front matter blijft
+      // met het blote oog leesbaar en diff't per regel.
+      buf.writeln('standards: ${_yamlScalar(deck.standardsUsed.join(', '))}');
+    }
     if (deck.language.isNotEmpty) {
       buf.writeln('language: ${_yamlScalar(deck.language)}');
     }

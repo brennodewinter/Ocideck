@@ -227,11 +227,13 @@ Nextcloud integration allows storing presentations directly on your own server:
 
 ### What's planned for future development?
 Current roadmap items include:
-- Enhanced encryption for exported packages
-- More granular privacy controls in exports  
+- More granular privacy controls in exports
 - Improved performance for large presentations
-- Advanced threat detection capabilities
 - Additional chart visualizations and data types
+
+Encrypted package export **has since shipped** — `.ocideck` packages can be
+protected with a password. It was listed here as planned long after it landed;
+corrected 2026-07-18.
 
 ### Are there mobile plans?
 While OciDeck is primarily designed as a desktop application, the team continues to evaluate mobile platform support based on community feedback and requirements.

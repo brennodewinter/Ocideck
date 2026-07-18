@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../models/document_signature.dart';
+import '../../services/reference_standards.dart';
 import '../../theme/app_theme.dart';
 import '../document_signature_view.dart';
 import '../signature_draw_dialog.dart';
@@ -24,15 +25,26 @@ class FinalizeSealDialog extends StatefulWidget {
   /// [DocumentSignature] authored on a sign-off slide). Null = start blank.
   final DocumentSignature? initial;
 
-  const FinalizeSealDialog({super.key, this.initial});
+  /// De standaarden die het deck vastlegt (`naam@versie`, EIS 4.3.2). Wordt
+  /// hier alleen gebruikt om te melden dat er inmiddels een nieuwere versie van
+  /// zo'n standaard bestaat.
+  final List<String> standardsUsed;
+
+  const FinalizeSealDialog({
+    super.key,
+    this.initial,
+    this.standardsUsed = const [],
+  });
 
   static Future<FinalizeSealResult?> show(
     BuildContext context, {
     DocumentSignature? initial,
+    List<String> standardsUsed = const [],
   }) {
     return showDialog<FinalizeSealResult>(
       context: context,
-      builder: (_) => FinalizeSealDialog(initial: initial),
+      builder: (_) =>
+          FinalizeSealDialog(initial: initial, standardsUsed: standardsUsed),
     );
   }
 
@@ -116,7 +128,14 @@ class _FinalizeSealDialogState extends State<FinalizeSealDialog> {
             ),
           ],
         ),
-        content: SizedBox(width: 460, child: _content(l10n)),
+        content: SizedBox(
+          width: 460,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [_staleStandardsNotice(l10n), _content(l10n)],
+          ),
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -215,6 +234,55 @@ class _FinalizeSealDialogState extends State<FinalizeSealDialog> {
       child: DocumentSignatureView(
         signature: signature.copyWith(date: _today()),
         compact: true,
+      ),
+    );
+  }
+
+  /// Meldt dat een standaard waartegen is getoetst inmiddels is bijgewerkt.
+  ///
+  /// Verzegelen is het moment waarop het rapport vast komt te liggen, dus het
+  /// is ook het laatste moment waarop dit nog uitmaakt. Bewust een melding en
+  /// geen blokkade: tegen een oudere versie toetsen is volstrekt legitiem — de
+  /// pentest is nu eenmaal uitgevoerd toen die versie gold — het moet alleen
+  /// een bewuste vaststelling zijn en geen verrassing achteraf.
+  ///
+  /// Vergelijkt wat het deck vastlegde met wat deze build meedraagt; geen
+  /// netwerk, want dat zou hier ongevraagd verkeer zijn.
+  Widget _staleStandardsNotice(AppLocalizations l10n) {
+    final stale = outdatedStandards(widget.standardsUsed);
+    if (stale.isEmpty) return const SizedBox.shrink();
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.only(bottom: 14),
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: AppTheme.amber600.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.d(
+              'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:',
+            ),
+            style: const TextStyle(fontSize: 11.5, fontWeight: FontWeight.w600),
+          ),
+          const SizedBox(height: 4),
+          for (final s in stale)
+            Text(
+              '${s.name}: ${l10n.d('vastgelegd')} ${s.recorded} · '
+              '${l10n.d('nu beschikbaar')} ${s.current}',
+              style: const TextStyle(fontSize: 11.5),
+            ),
+          const SizedBox(height: 4),
+          Text(
+            l10n.d(
+              'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.',
+            ),
+            style: TextStyle(fontSize: 11, color: AppTheme.slate600),
+          ),
+        ],
       ),
     );
   }

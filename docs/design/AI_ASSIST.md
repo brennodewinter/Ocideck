@@ -1,14 +1,22 @@
 # OciDeck — Optional AI Assistance (Design)
 
-> **Status: design proposal — not yet implemented.**
-> This document describes a *future* capability (an optional, privacy-first AI
-> assistance layer) and the architecture chosen for it. It is deliberately kept
-> separate from the current-state contributor docs
-> ([`ARCHITECTURE.md`](../ARCHITECTURE.md), [`SOURCE_MAP.md`](../SOURCE_MAP.md),
-> [`FILE_FORMAT.md`](../FILE_FORMAT.md)) so that those keep describing what
-> exists. When (parts of) this lands, fold the relevant sections into those docs
-> and the [`USER_GUIDE.md`](../USER_GUIDE.md), and update the
-> [`CHANGELOG.md`](../../CHANGELOG.md).
+> **Status: Phases 0–3 are built and shipped. Only Phase 4 (the MCP server
+> surface) is unbuilt.** This header said "design proposal — not yet
+> implemented" long after the code had overtaken it; corrected 2026-07-18.
+>
+> What exists today: the shared `/v1` client and guardrails
+> (`ai_client_service.dart`, `ai_security_gate.dart`, settings in
+> `settings_dialog_ai.dart`), image alt-text (`image_alt_ai_service.dart`,
+> `alt_text_field.dart`), auto-tagging incl. the bulk "tag untagged" action
+> (`image_carousel_picker_actions.dart`), and pentest field drafting
+> (`finding_ai_service.dart`, `ai_suggest_field.dart`).
+>
+> Treat §§1–6 as a **specification of shipped behaviour**, not a proposal — but
+> not as a current-state reference either: it has not been re-read line by line
+> against the code, so where the two disagree, the code wins. The current-state
+> docs are [`ARCHITECTURE.md`](../ARCHITECTURE.md),
+> [`SOURCE_MAP.md`](../SOURCE_MAP.md), [`FILE_FORMAT.md`](../FILE_FORMAT.md) and
+> [`USER_GUIDE.md`](../USER_GUIDE.md).
 >
 > It is written to be **picked up cold**: exact file paths, integration points,
 > data shapes, invariants and open questions are spelled out so a later
@@ -263,11 +271,11 @@ inconsistent across slide types. Rejected.
 
 | Phase | Content |
 |---|---|
-| **0 · Shared backend** | OpenAI-compatible `/v1` client + the §3 settings toggle & 3-tier backend + §4 guardrails; reuse consent/`NetGuard`/keychain. |
-| **1 · Consumer B (image alt-text)** | `imageAltText` field + `ocideck_image_alt` round-trip + `imageSemanticsLabel` preference + vision call + editor "Suggest"/decorative toggle + quality-nudge update. |
-| **2 · Consumer B (tags/library)** | Auto-tag into `DescriptionService`; "auto-tag untagged" bulk action in the carousel; import-time hook. |
-| **3 · Consumer A (pentest)** | Wire the pentest field-drafting (§16 there) onto the shared backend. |
-| **4 · MCP server surface** (optional, additive) | OciDeck as a localhost Streamable-HTTP MCP server (§10) so external agents can drive it. Independent of Consumers A/B — sequence any time after Phase 0; desktop-only. |
+| **0 · Shared backend** — *shipped* | OpenAI-compatible `/v1` client + the §3 settings toggle & 3-tier backend + §4 guardrails; reuse consent/`NetGuard`/keychain. |
+| **1 · Consumer B (image alt-text)** — *shipped* | `imageAltText` field + `ocideck_image_alt` round-trip + `imageSemanticsLabel` preference + vision call + editor "Suggest"/decorative toggle + quality-nudge update. |
+| **2 · Consumer B (tags/library)** — *shipped* | Auto-tag into `DescriptionService`; "auto-tag untagged" bulk action in the carousel; import-time hook. |
+| **3 · Consumer A (pentest)** — *shipped* | Wire the pentest field-drafting (§16 there) onto the shared backend. |
+| **4 · MCP server surface** (optional, additive) — **the only one still open** | OciDeck as a localhost Streamable-HTTP MCP server (§10) so external agents can drive it. Independent of Consumers A/B — sequence any time after Phase 0; desktop-only. |
 
 Consumer B is sequenced before the pentest consumer because it is useful to all
 users and exercises the shared backend end-to-end with a simpler grounding story.
@@ -279,20 +287,28 @@ drives it" capability without touching how OciDeck gets a model.
 
 ## 8. Open questions
 
-1. **AI toggle vs the Informatieveiligheid module.** AI is a *separate* general
-   toggle (image tagging benefits everyone); the pentest module simply *also*
-   uses it when both are on. Confirm that split.
-2. **Alt-text storage.** `.md` comment (recommended, travels in the package) vs a
-   third sidecar — confirm `.md` comment.
-3. **Model roster.** Ship a recommended-model shortlist + "install Ollama" help,
-   or stay fully backend-agnostic and only detect what's pulled?
-4. **Bundled tag vocabulary?** Free-text tags vs a controlled vocabulary for the
-   library search.
-5. **Transport.** `/v1` (portable) as the only path, or keep Ollama `/api/chat`
-   as an internal fallback?
-6. **MCP server surface (§10).** Build it now (Phase 4) or defer? It is optional
-   interop, desktop-only, and depends on a community Dart MCP package
-   (`mcp_dart`) until the official `dart_mcp` ships an HTTP transport.
+Five of the six below were **answered by the code** as Phases 0–3 landed, without
+anyone coming back to close them here. Recorded as settled (2026-07-18) rather
+than deleted, so the reasoning stays findable and nobody reopens a decision that
+is already load-bearing.
+
+1. **AI toggle vs the Informatieveiligheid module.** *Settled: separate.*
+   `AiSettings.enabled` is its own main switch, off by default and independent of
+   the module; the pentest consumer simply also requires it.
+2. **Alt-text storage.** *Settled: `.md` comment.* `<!-- ocideck_image_alt: … -->`
+   (plus `…_alt2`), lifted by `markdown_service_parse.dart`, so it travels in the
+   package — no third sidecar.
+3. **Model roster.** *Settled: backend-agnostic, no shortlist.* The model name is
+   free text the user fills in from what their endpoint offers; `ai_settings.dart`
+   states the reason — the roster shifts, so hard-coding it would date badly.
+4. **Bundled tag vocabulary?** *Settled: free text.* Auto-tagging writes into
+   `DescriptionService`; no controlled vocabulary was introduced.
+5. **Transport.** *Settled: `/v1` only.* No Ollama `/api/chat` fallback was kept;
+   the base URL carries `/v1` and the client appends `chat/completions`.
+6. **MCP server surface (§10).** **Still open** — the one genuine question left.
+   Optional interop, desktop-only, and dependent on a community Dart MCP package
+   (`mcp_dart`) until the official `dart_mcp` ships an HTTP transport. Phase 4
+   exists precisely so this can be decided on its own timing.
 
 ---
 

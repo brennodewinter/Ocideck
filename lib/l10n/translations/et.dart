@@ -1776,6 +1776,18 @@ const _dutchSourceEt = {
 const _dutchSourceAddEt = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Diagrammi andmeid ei õnnestunud lugeda; need diagrammid jäävad tühjaks:',
+  'Meegeleverde versies invullen': 'Täida kaasasolevad versioonid',
+  'vastgelegd': 'salvestatud',
+  'nu beschikbaar': 'nüüd saadaval',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Standardil, mille vastu testiti, on nüüd uuem versioon:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'See ei pruugi olla viga — kontroll tehti ajal, mil see versioon kehtis. Aruanne talletab, mida tegelikult kasutati.',
+  'Gebundelde standaarden': 'Kaasasolevad standardid',
+  'geen versienummer': 'versiooninumbrita',
+  'Bron': 'Allikas',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Selles eksemplaris olevad versioonid. Pentesti aruanne peab ütlema, mille vastu testiti — ja milline versioon see oli.',
   'Zoeken in alle decks…': 'Otsi kõigist pakkidest…',
   'Zoeken in alle decks': 'Otsi kõigist pakkidest',
   'Zoekterm': 'Otsingusõna',

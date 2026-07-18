@@ -924,6 +924,18 @@ const _dutchSourceEn = {
 const _dutchSourceAddEn = {
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Chart data could not be read; those charts stay empty:',
+  'Meegeleverde versies invullen': 'Fill in the bundled versions',
+  'vastgelegd': 'recorded',
+  'nu beschikbaar': 'now available',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'A standard this report was tested against now has a newer version:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'That need not be wrong — the test was carried out while that version applied. The report records what was actually used.',
+  'Gebundelde standaarden': 'Bundled standards',
+  'geen versienummer': 'no version number',
+  'Bron': 'Source',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'The versions in this copy. A pentest report should state what was tested against — and which version that was.',
   'Zoeken in alle decks…': 'Search all decks…',
   'Zoeken in alle decks': 'Search all decks',
   'Zoekterm': 'Search term',

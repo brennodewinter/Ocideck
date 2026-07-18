@@ -1813,6 +1813,18 @@ const _dutchSourceEl = {
 const _dutchSourceAddEl = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Δεν ήταν δυνατή η ανάγνωση των δεδομένων του γραφήματος· αυτά τα γραφήματα παραμένουν κενά:',
+  'Meegeleverde versies invullen': 'Συμπλήρωση ενσωματωμένων εκδόσεων',
+  'vastgelegd': 'καταγράφηκε',
+  'nu beschikbaar': 'τώρα διαθέσιμη',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Ένα πρότυπο βάσει του οποίου ελέγχθηκε έχει πλέον νεότερη έκδοση:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Δεν είναι κατ\' ανάγκη λάθος — ο έλεγχος έγινε όταν ίσχυε εκείνη η έκδοση. Η αναφορά καταγράφει τι χρησιμοποιήθηκε πράγματι.',
+  'Gebundelde standaarden': 'Ενσωματωμένα πρότυπα',
+  'geen versienummer': 'χωρίς αριθμό έκδοσης',
+  'Bron': 'Πηγή',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Οι εκδόσεις σε αυτό το αντίτυπο. Μια αναφορά pentest πρέπει να δηλώνει έναντι τίνος ελέγχθηκε — και σε ποια έκδοση.',
   'Zoeken in alle decks…': 'Αναζήτηση σε όλες τις παρουσιάσεις…',
   'Zoeken in alle decks': 'Αναζήτηση σε όλες τις παρουσιάσεις',
   'Zoekterm': 'Όρος αναζήτησης',

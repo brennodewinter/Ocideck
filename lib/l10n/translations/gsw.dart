@@ -1789,6 +1789,18 @@ const _dutchSourceGsw = {
 const _dutchSourceAddGsw = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'D Diagrammdate hend nöd chöne gläse werde; die Diagramm bliibed leer:',
+  'Meegeleverde versies invullen': 'Mitglieferti Versione ysetze',
+  'vastgelegd': 'festghalte',
+  'nu beschikbaar': 'jetz verfüegbar',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Vome prüefte Standard git s jetz e nöieri Version:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Das mues nid falsch sy — d Prüefig isch gmacht worde, wo die Version golte het. De Bricht haltet fescht, was würkli bruucht worde isch.',
+  'Gebundelde standaarden': 'Mitglieferti Standards',
+  'geen versienummer': 'kei Versionsnummere',
+  'Bron': 'Quelle',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'D Versione i dem Exemplar. E Pentescht-Bricht muess säge, gäge was prüeft worde isch — und i welere Version.',
   'Zoeken in alle decks…': 'In allne Decks sueche…',
   'Zoeken in alle decks': 'In allne Decks sueche',
   'Zoekterm': 'Suechbegriff',

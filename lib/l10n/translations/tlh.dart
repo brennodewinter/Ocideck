@@ -1760,6 +1760,18 @@ const _dutchSourceTlh = {
 const _dutchSourceAddTlh = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'ta\'nom De\' laDlaHbe\'; ta\'nommey chIm rutlh:',
+  'Meegeleverde versies invullen': 'mI\'mey chel',
+  'vastgelegd': 'qonlu\'pu\'',
+  'nu beschikbaar': 'DaH ngaq',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'tetlh chu\' tu\'lu\':',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'qab \'oHbe\'; mI\' vIleghpu\'DI\' qaStaHvIS. lo\'lu\'pu\'bogh qon.',
+  'Gebundelde standaarden': 'tetlh chuv',
+  'geen versienummer': 'mI\' Hutlh',
+  'Bron': 'Daq',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'naDev mI\'mey. pentest ja\'chuq \'e\' Del net poQ — mI\' je.',
   'Zoeken in alle decks…': 'Hoch deck-Daq Sam…',
   'Zoeken in alle decks': 'Hoch deck-Daq Sam',
   'Zoekterm': 'nejwI\' mu\'',

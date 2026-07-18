@@ -1803,6 +1803,18 @@ const _dutchSourceUk = {
 const _dutchSourceAddUk = <String, String>{
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Не вдалося прочитати дані діаграми; ці діаграми залишаться порожніми:',
+  'Meegeleverde versies invullen': 'Підставити вбудовані версії',
+  'vastgelegd': 'зафіксовано',
+  'nu beschikbaar': 'тепер доступна',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Стандарт, щодо якого проводилася перевірка, має новішу версію:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'Це не обов\'язково помилка — перевірку проводили, коли діяла та версія. Звіт фіксує те, що справді використовувалося.',
+  'Gebundelde standaarden': 'Вбудовані стандарти',
+  'geen versienummer': 'без номера версії',
+  'Bron': 'Джерело',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Версії в цьому примірнику. Звіт про пентест має вказувати, щодо чого проводилася перевірка — і яка це була версія.',
   'Zoeken in alle decks…': 'Шукати в усіх колодах…',
   'Zoeken in alle decks': 'Шукати в усіх колодах',
   'Zoekterm': 'Пошуковий запит',

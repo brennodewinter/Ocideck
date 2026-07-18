@@ -739,6 +739,18 @@ const _dutchSourceEs = {
 const _dutchSourceAddEs = {
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'No se pudieron leer los datos del gráfico; esos gráficos quedan vacíos:',
+  'Meegeleverde versies invullen': 'Rellenar con las versiones incluidas',
+  'vastgelegd': 'registrada',
+  'nu beschikbaar': 'ahora disponible',
+  'Er is inmiddels een nieuwere versie van een standaard waartegen is getoetst:':
+      'Un estándar contra el que se probó tiene ahora una versión más reciente:',
+  'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
+      'No tiene por qué ser un error: la prueba se hizo cuando regía esa versión. El informe registra lo que realmente se usó.',
+  'Gebundelde standaarden': 'Estándares incluidos',
+  'geen versienummer': 'sin número de versión',
+  'Bron': 'Fuente',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Las versiones incluidas en esta copia. Un informe de pentest debe indicar contra qué se probó — y qué versión era.',
   'Zoeken in alle decks…': 'Buscar en todas las presentaciones…',
   'Zoeken in alle decks': 'Buscar en todas las presentaciones',
   'Zoekterm': 'Término de búsqueda',

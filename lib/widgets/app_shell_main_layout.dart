@@ -804,7 +804,10 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       );
       return;
     }
-    final result = await FinalizeSealDialog.show(context);
+    final result = await FinalizeSealDialog.show(
+      context,
+      standardsUsed: ref.read(deckProvider).deck?.standardsUsed ?? const [],
+    );
     if (result == null || !mounted) return;
     ref
         .read(deckProvider.notifier)
@@ -832,6 +835,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       description: info.description,
       keywords: info.keywords,
       language: info.language,
+      standardsUsed: info.standardsUsed,
       presentationTargetSeconds: info.presentationTargetSeconds,
       showRehearsalSummary: info.showRehearsalSummary,
       playOnly: info.playOnly,
