@@ -1783,6 +1783,17 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Vergelijken…': 'Vertaa…',
+  'Versies vergelijken': 'Vertaa versioita',
+  'Kies twee versies; de oudste van de twee is het vertrekpunt.':
+      'Valitse kaksi versiota; vanhempi niistä on lähtökohta.',
+  'Vergelijken': 'Vertaa',
+  'Deze twee versies zijn inhoudelijk gelijk.':
+      'Näillä kahdella versiolla on sama sisältö.',
+  'verwijderd': 'poistettu',
+  'gewijzigd': 'muutettu',
+  'verplaatst': 'siirretty',
+  '(zonder titel)': '(nimetön)',
   'Concept mergen…': 'Yhdistä luonnos…',
   'Versie vastleggen…': 'Merkitse versio…',
   'Concept gemerged naar de hoofdbranch.': 'Luonnos yhdistettiin päähaaraan.',

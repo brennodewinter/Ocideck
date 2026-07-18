@@ -1787,6 +1787,17 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Vergelijken…': 'Verglyche…',
+  'Versies vergelijken': 'Versione verglyche',
+  'Kies twee versies; de oudste van de twee is het vertrekpunt.':
+      'Wähl zwei Versione; die elteri vo de zwei isch de Uusgangspunkt.',
+  'Vergelijken': 'Verglyche',
+  'Deze twee versies zijn inhoudelijk gelijk.':
+      'Die zwei Versione sind inhaltlich gliich.',
+  'verwijderd': 'entfernt',
+  'gewijzigd': 'gänderet',
+  'verplaatst': 'verschobe',
+  '(zonder titel)': '(ohni Titel)',
   'Concept mergen…': 'Entwurf zämmefüehre…',
   'Versie vastleggen…': 'Version festhalte…',
   'Concept gemerged naar de hoofdbranch.':

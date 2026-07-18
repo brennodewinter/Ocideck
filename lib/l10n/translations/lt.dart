@@ -1791,6 +1791,17 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Vergelijken…': 'Palyginti…',
+  'Versies vergelijken': 'Palyginti versijas',
+  'Kies twee versies; de oudste van de twee is het vertrekpunt.':
+      'Pasirinkite dvi versijas; senesnė iš jų yra atskaitos taškas.',
+  'Vergelijken': 'Palyginti',
+  'Deze twee versies zijn inhoudelijk gelijk.':
+      'Šios dvi versijos yra identiško turinio.',
+  'verwijderd': 'pašalinta',
+  'gewijzigd': 'pakeista',
+  'verplaatst': 'perkelta',
+  '(zonder titel)': '(be pavadinimo)',
   'Concept mergen…': 'Sujungti juodraštį…',
   'Versie vastleggen…': 'Įrašyti versiją…',
   'Concept gemerged naar de hoofdbranch.':

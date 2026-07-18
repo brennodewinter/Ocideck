@@ -1,7 +1,9 @@
 // Part of the app_shell library — see ../app_shell.dart.
-// Het git-opslaan-pad (handler + dialoog), afgesplitst van shell_actions.dart
-// zodat dat bestand onder de regelratchet blijft. Alle imports staan in de
-// hoofdlibrary; het open-pad staat naast dit in shell_actions.dart.
+// De git-handlers (opslaan, synchroniseren, historie, versies + vergelijken,
+// uitbrengen, mergen, vastleggen), afgesplitst van shell_actions.dart zodat dat
+// bestand onder de regelratchet blijft. Alle imports staan in de hoofdlibrary;
+// de dialogen die deze handlers openen staan in shell_actions_git_dialogs.dart,
+// het open-pad in shell_actions.dart.
 part of '../app_shell.dart';
 
 /// Schrijf het deck van het huidige tabblad terug naar git als één commit.
@@ -210,71 +212,6 @@ Future<void> _showGitHistory(BuildContext context, WidgetRef ref) async {
   );
 }
 
-class _GitHistoryDialog extends StatelessWidget {
-  final String deckName;
-  final List<GitLogEntry> entries;
-  const _GitHistoryDialog({required this.deckName, required this.entries});
-
-  String _when(DateTime? date) {
-    if (date == null) return '';
-    final d = date.toLocal();
-    String two(int n) => n.toString().padLeft(2, '0');
-    return '${d.year}-${two(d.month)}-${two(d.day)} ${two(d.hour)}:${two(d.minute)}';
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    return AlertDialog(
-      title: Text('${l10n.d('Git-geschiedenis:')} $deckName'),
-      content: SizedBox(
-        width: 520,
-        child: entries.isEmpty
-            ? Text(l10n.d('Nog geen commits voor dit deck.'))
-            : ListView.builder(
-                shrinkWrap: true,
-                itemCount: entries.length,
-                itemBuilder: (context, i) {
-                  final e = entries[i];
-                  return ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    dense: true,
-                    leading: Tooltip(
-                      message: e.pushed
-                          ? l10n.d('Gepusht')
-                          : l10n.d('Nog niet gepusht'),
-                      child: Icon(
-                        e.pushed
-                            ? Icons.cloud_done_outlined
-                            : Icons.cloud_upload_outlined,
-                        size: 18,
-                        color: e.pushed ? AppTheme.slate400 : AppTheme.accent,
-                      ),
-                    ),
-                    title: Text(
-                      e.subject,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(fontSize: 13),
-                    ),
-                    subtitle: Text(
-                      '${e.shortSha} · ${e.author} · ${_when(e.date)}',
-                      style: TextStyle(fontSize: 11, color: AppTheme.slate400),
-                    ),
-                  );
-                },
-              ),
-      ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: Text(l10n.d('Sluiten')),
-        ),
-      ],
-    );
-  }
-}
-
 /// Toon de uitgebrachte versies (release-tags) van het huidige deck en open de
 /// gekozen versie read-only (§9.4). Werkt op elk plane — het is een
 /// forge-listing.
@@ -307,11 +244,25 @@ Future<void> _showGitVersions(BuildContext context, WidgetRef ref) async {
   }
   if (!context.mounted) return;
 
-  final chosen = await showDialog<TagRef>(
+  final action = await showDialog<_VersionAction>(
     context: context,
     builder: (_) => _GitVersionsDialog(deckName: deckName, tags: tags),
   );
-  if (chosen == null || !context.mounted) return;
+  if (action == null || !context.mounted) return;
+
+  if (action.compare) {
+    await _compareVersions(
+      context,
+      ref,
+      forge: forge,
+      origin: origin,
+      deckName: deckName,
+      tags: tags,
+    );
+    return;
+  }
+  final chosen = action.open;
+  if (chosen == null) return;
   try {
     final result = await ref
         .read(tabsProvider.notifier)
@@ -327,52 +278,68 @@ Future<void> _showGitVersions(BuildContext context, WidgetRef ref) async {
   }
 }
 
-class _GitVersionsDialog extends StatelessWidget {
-  final String deckName;
-  final List<TagRef> tags;
-  const _GitVersionsDialog({required this.deckName, required this.tags});
+/// Vergelijk twee uitgebrachte versies (§9.5): kies er twee, lees ze allebei
+/// door de importpoort en toon wat er tussen de twee veranderde.
+Future<void> _compareVersions(
+  BuildContext context,
+  WidgetRef ref, {
+  required GitForge forge,
+  required GitOrigin origin,
+  required String deckName,
+  required List<TagRef> tags,
+}) async {
+  final pair = await _showVersionComparePicker(context, deckName, tags);
+  if (pair == null || !context.mounted) return;
 
-  @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    return AlertDialog(
-      title: Text('${l10n.d('Versies:')} $deckName'),
-      content: SizedBox(
-        width: 460,
-        child: tags.isEmpty
-            ? Text(l10n.d('Nog geen uitgebrachte versies van dit deck.'))
-            : ListView.builder(
-                shrinkWrap: true,
-                itemCount: tags.length,
-                itemBuilder: (context, i) {
-                  final tag = tags[i];
-                  final version =
-                      GitRepoLayout.versionOfTag(tag.name, deckName) ??
-                      tag.name;
-                  final shortSha = tag.sha.length >= 7
-                      ? tag.sha.substring(0, 7)
-                      : tag.sha;
-                  return ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    dense: true,
-                    leading: const Icon(Icons.label_outline, size: 18),
-                    title: Text(version, style: const TextStyle(fontSize: 13)),
-                    subtitle: Text(
-                      shortSha,
-                      style: TextStyle(fontSize: 11, color: AppTheme.slate400),
-                    ),
-                    onTap: () => Navigator.pop(context, tag),
-                  );
-                },
-              ),
-      ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: Text(l10n.d('Sluiten')),
-        ),
-      ],
+  final messenger = ScaffoldMessenger.of(context);
+  final l10n = context.l10n;
+  final notifier = ref.read(tabsProvider.notifier);
+  try {
+    // De oudste van de twee is de "voor"-kant, ongeacht de keuzevolgorde.
+    final olderFirst = tags.indexOf(pair.a) > tags.indexOf(pair.b);
+    final beforeTag = olderFirst ? pair.a : pair.b;
+    final afterTag = olderFirst ? pair.b : pair.a;
+
+    final before = await notifier.readVersionDeck(
+      forge,
+      config: origin.config,
+      deckDir: origin.deckDir,
+      tag: beforeTag.name,
     );
+    final after = await notifier.readVersionDeck(
+      forge,
+      config: origin.config,
+      deckDir: origin.deckDir,
+      tag: afterTag.name,
+    );
+    if (!context.mounted) return;
+    if (before.deck == null || after.deck == null) {
+      _reportOpenFailure(
+        messenger,
+        l10n,
+        before.deck == null ? before.failure : after.failure,
+      );
+      return;
+    }
+
+    final diff = diffDeckVersions(before.deck!, after.deck!);
+    if (!context.mounted) return;
+    await showDialog<void>(
+      context: context,
+      builder: (_) => _VersionDiffDialog(
+        beforeLabel:
+            GitRepoLayout.versionOfTag(beforeTag.name, deckName) ??
+            beforeTag.name,
+        afterLabel:
+            GitRepoLayout.versionOfTag(afterTag.name, deckName) ??
+            afterTag.name,
+        beforeDeck: before.deck!,
+        afterDeck: after.deck!,
+        diff: diff,
+      ),
+    );
+  } on GitForgeException catch (e) {
+    messenger.showSnackBar(SnackBar(content: Text(e.message)));
   }
 }
 
@@ -599,362 +566,4 @@ String _safeDeckName(String title) {
       .replaceAll(RegExp(r'^[-.]+|[-.]+$'), '')
       .replaceAll('..', '-');
   return GitRepoLayout.isValidDeckName(cleaned) ? cleaned : 'presentatie';
-}
-
-/// Keuze uit het git-opslaan-dialoog: de deknaam plus de commitboodschap.
-typedef _GitSaveChoice = ({String name, String message});
-
-Future<_GitSaveChoice?> _showGitSaveDialog(
-  BuildContext context, {
-  required String defaultName,
-}) {
-  return showDialog<_GitSaveChoice>(
-    context: context,
-    builder: (_) => _GitSaveDialog(defaultName: defaultName),
-  );
-}
-
-typedef _ReviewChoice = ({String title, String message});
-
-Future<_ReviewChoice?> _showReviewDialog(
-  BuildContext context, {
-  required String deckName,
-}) {
-  return showDialog<_ReviewChoice>(
-    context: context,
-    builder: (_) => _ReviewDialog(deckName: deckName),
-  );
-}
-
-class _ReviewDialog extends StatefulWidget {
-  final String deckName;
-  const _ReviewDialog({required this.deckName});
-
-  @override
-  State<_ReviewDialog> createState() => _ReviewDialogState();
-}
-
-class _ReviewDialogState extends State<_ReviewDialog> {
-  late final TextEditingController _title = TextEditingController(
-    text: 'Concept: ${widget.deckName}',
-  );
-  final TextEditingController _message = TextEditingController();
-
-  @override
-  void dispose() {
-    _title.dispose();
-    _message.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    final title = _title.text.trim();
-    return AlertDialog(
-      title: Text(l10n.d('Uitbrengen ter review')),
-      content: SizedBox(
-        width: 460,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              l10n.d(
-                'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.',
-              ),
-              style: TextStyle(fontSize: 12, color: AppTheme.slate400),
-            ),
-            const SizedBox(height: 14),
-            TextField(
-              controller: _title,
-              autofocus: true,
-              onChanged: (_) => setState(() {}),
-              decoration: InputDecoration(
-                labelText: l10n.d('Titel'),
-                isDense: true,
-                border: const OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 14),
-            TextField(
-              controller: _message,
-              maxLines: 3,
-              decoration: InputDecoration(
-                labelText: l10n.d('Toelichting'),
-                hintText: l10n.d('Wat is er veranderd en waarom?'),
-                isDense: true,
-                border: const OutlineInputBorder(),
-              ),
-            ),
-          ],
-        ),
-      ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: Text(l10n.t('cancel')),
-        ),
-        ElevatedButton.icon(
-          onPressed: title.isEmpty
-              ? null
-              : () => Navigator.pop(context, (
-                  title: title,
-                  message: _message.text.trim(),
-                )),
-          icon: const Icon(Icons.rate_review_outlined, size: 16),
-          label: Text(l10n.d('Uitbrengen')),
-        ),
-      ],
-    );
-  }
-}
-
-/// Bevestig het mergen van een concept; geeft `true`/`false` (concept-branch
-/// opruimen) terug, of `null` bij annuleren.
-Future<bool?> _showMergeDialog(BuildContext context) {
-  return showDialog<bool>(
-    context: context,
-    builder: (_) => const _MergeDialog(),
-  );
-}
-
-class _MergeDialog extends StatefulWidget {
-  const _MergeDialog();
-
-  @override
-  State<_MergeDialog> createState() => _MergeDialogState();
-}
-
-class _MergeDialogState extends State<_MergeDialog> {
-  bool _prune = true;
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    return AlertDialog(
-      title: Text(l10n.d('Concept mergen')),
-      content: SizedBox(
-        width: 460,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              l10n.d(
-                'Voegt de review-PR van dit concept samen met de hoofdbranch.',
-              ),
-              style: TextStyle(fontSize: 12, color: AppTheme.slate400),
-            ),
-            const SizedBox(height: 8),
-            CheckboxListTile(
-              value: _prune,
-              onChanged: (v) => setState(() => _prune = v ?? true),
-              contentPadding: EdgeInsets.zero,
-              controlAffinity: ListTileControlAffinity.leading,
-              dense: true,
-              title: Text(l10n.d('Concept-branch opruimen na het mergen')),
-            ),
-          ],
-        ),
-      ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: Text(l10n.t('cancel')),
-        ),
-        ElevatedButton.icon(
-          onPressed: () => Navigator.pop(context, _prune),
-          icon: const Icon(Icons.merge_outlined, size: 16),
-          label: Text(l10n.d('Mergen')),
-        ),
-      ],
-    );
-  }
-}
-
-typedef _TagChoice = ({String version, String message});
-
-Future<_TagChoice?> _showTagDialog(BuildContext context) {
-  return showDialog<_TagChoice>(
-    context: context,
-    builder: (_) => const _TagDialog(),
-  );
-}
-
-class _TagDialog extends StatefulWidget {
-  const _TagDialog();
-
-  @override
-  State<_TagDialog> createState() => _TagDialogState();
-}
-
-class _TagDialogState extends State<_TagDialog> {
-  final TextEditingController _version = TextEditingController(text: 'v1.0');
-  final TextEditingController _message = TextEditingController();
-
-  @override
-  void dispose() {
-    _version.dispose();
-    _message.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    final version = _version.text.trim();
-    // Valideer de versie los van de deknaam: een geldige tag zou eruit komen.
-    final valid = GitRepoLayout.releaseTag('x', version) != null;
-    return AlertDialog(
-      title: Text(l10n.d('Versie vastleggen')),
-      content: SizedBox(
-        width: 460,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              l10n.d(
-                'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.',
-              ),
-              style: TextStyle(fontSize: 12, color: AppTheme.slate400),
-            ),
-            const SizedBox(height: 14),
-            TextField(
-              controller: _version,
-              autofocus: true,
-              onChanged: (_) => setState(() {}),
-              decoration: InputDecoration(
-                labelText: l10n.d('Versie'),
-                hintText: 'v1.0',
-                errorText: version.isEmpty || valid
-                    ? null
-                    : l10n.d('Gebruik vX, bijvoorbeeld v1.0.'),
-                isDense: true,
-                border: const OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 14),
-            TextField(
-              controller: _message,
-              decoration: InputDecoration(
-                labelText: l10n.d('Toelichting'),
-                isDense: true,
-                border: const OutlineInputBorder(),
-              ),
-            ),
-          ],
-        ),
-      ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: Text(l10n.t('cancel')),
-        ),
-        ElevatedButton.icon(
-          onPressed: valid
-              ? () => Navigator.pop(context, (
-                  version: version,
-                  message: _message.text.trim().isEmpty
-                      ? '$version — vastgelegd met OciDeck'
-                      : _message.text.trim(),
-                ))
-              : null,
-          icon: const Icon(Icons.bookmark_add_outlined, size: 16),
-          label: Text(l10n.d('Vastleggen')),
-        ),
-      ],
-    );
-  }
-}
-
-class _GitSaveDialog extends StatefulWidget {
-  final String defaultName;
-  const _GitSaveDialog({required this.defaultName});
-
-  @override
-  State<_GitSaveDialog> createState() => _GitSaveDialogState();
-}
-
-class _GitSaveDialogState extends State<_GitSaveDialog> {
-  late final TextEditingController _name = TextEditingController(
-    text: widget.defaultName,
-  );
-  final TextEditingController _message = TextEditingController();
-
-  @override
-  void dispose() {
-    _name.dispose();
-    _message.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    final name = _name.text.trim();
-    final valid = GitRepoLayout.isValidDeckName(name);
-    return AlertDialog(
-      title: Text(l10n.d('Opslaan naar git')),
-      content: SizedBox(
-        width: 460,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextField(
-              controller: _name,
-              autofocus: true,
-              onChanged: (_) => setState(() {}),
-              decoration: InputDecoration(
-                labelText: l10n.d('Deknaam'),
-                helperText: l10n.d(
-                  'Wordt de map decks/<naam> in de repository',
-                ),
-                errorText: name.isEmpty || valid
-                    ? null
-                    : l10n.d(
-                        'Alleen letters, cijfers, punt, streep en liggend streepje',
-                      ),
-                isDense: true,
-                border: const OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 14),
-            TextField(
-              controller: _message,
-              decoration: InputDecoration(
-                labelText: l10n.d('Commitboodschap'),
-                hintText: l10n.d('Wat is er veranderd?'),
-                isDense: true,
-                border: const OutlineInputBorder(),
-              ),
-            ),
-          ],
-        ),
-      ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: Text(l10n.t('cancel')),
-        ),
-        ElevatedButton.icon(
-          onPressed: valid
-              ? () {
-                  final message = _message.text.trim();
-                  Navigator.pop(context, (
-                    name: name,
-                    message: message.isEmpty
-                        ? l10n.d('Bijgewerkt met OciDeck')
-                        : message,
-                  ));
-                }
-              : null,
-          icon: const Icon(Icons.cloud_upload_outlined, size: 16),
-          label: Text(l10n.d('Opslaan')),
-        ),
-      ],
-    );
-  }
 }

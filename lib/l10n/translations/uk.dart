@@ -1801,6 +1801,17 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Vergelijken…': 'Порівняти…',
+  'Versies vergelijken': 'Порівняти версії',
+  'Kies twee versies; de oudste van de twee is het vertrekpunt.':
+      'Виберіть дві версії; старіша з двох є відправною точкою.',
+  'Vergelijken': 'Порівняти',
+  'Deze twee versies zijn inhoudelijk gelijk.':
+      'Ці дві версії однакові за змістом.',
+  'verwijderd': 'видалено',
+  'gewijzigd': 'змінено',
+  'verplaatst': 'переміщено',
+  '(zonder titel)': '(без назви)',
   'Concept mergen…': 'Об\'єднати чернетку…',
   'Versie vastleggen…': 'Зафіксувати версію…',
   'Concept gemerged naar de hoofdbranch.':

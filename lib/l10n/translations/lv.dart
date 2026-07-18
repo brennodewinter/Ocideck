@@ -1782,6 +1782,17 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Vergelijken…': 'Salīdzināt…',
+  'Versies vergelijken': 'Salīdzināt versijas',
+  'Kies twee versies; de oudste van de twee is het vertrekpunt.':
+      'Izvēlieties divas versijas; vecākā no tām ir sākumpunkts.',
+  'Vergelijken': 'Salīdzināt',
+  'Deze twee versies zijn inhoudelijk gelijk.':
+      'Šīm divām versijām ir identisks saturs.',
+  'verwijderd': 'noņemts',
+  'gewijzigd': 'mainīts',
+  'verplaatst': 'pārvietots',
+  '(zonder titel)': '(bez nosaukuma)',
   'Concept mergen…': 'Apvienot melnrakstu…',
   'Versie vastleggen…': 'Reģistrēt versiju…',
   'Concept gemerged naar de hoofdbranch.':

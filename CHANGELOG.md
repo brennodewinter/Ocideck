@@ -36,8 +36,14 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   deck can never overwrite this quarter's work. Like every other open from a
   forge, the version passes the same import gate before it is shown. Works on the
   web too, since versions are a forge listing rather than something native `git`
-  has to resolve. (Releasing, merging and tagging themselves land in the next
-  steps of this phase.)
+  has to resolve.
+- **See what changed between two versions — "Vergelijken…".** From the versions
+  list you can now pick two releases and see exactly what happened between them:
+  which slides were added, removed, changed or moved. Because a deck has no slide
+  IDs, slides are matched on content — identical ones find each other even after
+  a reorder, and a *reworded* slide reads as one change rather than an addition
+  plus a deletion. For a changed slide, "Verschillen" puts the two versions side
+  by side with the differing fields called out.
 - **New chart type: horizontal stacked bar.** The stacked bar chart can now be
   laid on its side — one bar per label with the series stacked left-to-right.
   Like the horizontal bar it suits long category names, and it keeps the

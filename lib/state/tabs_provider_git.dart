@@ -89,6 +89,34 @@ extension TabsNotifierGit on TabsNotifier {
     required String deckDir,
     required String tag,
   }) async {
+    final read = await readVersionDeck(
+      forge,
+      config: config,
+      deckDir: deckDir,
+      tag: tag,
+    );
+    final deck = read.deck;
+    if (deck == null) return read.failure;
+    if (!mounted) return OpenResult.unreadable;
+
+    _placeDeckInTab(deck, remoteOrigin: read.label);
+    refreshTabs();
+    return OpenResult.opened;
+  }
+
+  /// Lees het deck van een uitgebrachte versie, zónder het in een tabblad te
+  /// plaatsen — de leeskant onder [openVersionFromGit] en onder het vergelijken
+  /// van twee versies (§9.5).
+  ///
+  /// Loopt door dezelfde fail-closed importpoort als elk ander open uit een
+  /// forge (P5): een versie is niet vertrouwder omdat er een tag op zit. Bij een
+  /// blokkade is `deck` null en vertelt `failure` waarom.
+  Future<({Deck? deck, OpenResult failure, String label})> readVersionDeck(
+    GitForge forge, {
+    required GitRepoConfig config,
+    required String deckDir,
+    required String tag,
+  }) async {
     final deckName = GitRepoLayout.deckNameOf(deckDir);
     if (deckName == null) {
       throw const GitForgeException(
@@ -96,35 +124,36 @@ extension TabsNotifierGit on TabsNotifier {
         'Pad is geen deckmap volgens de repo-layout',
       );
     }
+    final version = GitRepoLayout.versionOfTag(tag, deckName) ?? tag;
+    final label = '${config.slug} · $deckName · $version';
+
     final bytes = await forge.readBlob(tag, '$deckDir/$deckFileName');
     if (bytes.length > FileService.maxDeckMarkdownBytes) {
-      return OpenResult.unreadable;
+      return (deck: null, failure: OpenResult.unreadable, label: label);
     }
     final String raw;
     try {
       raw = utf8.decode(bytes);
     } on FormatException catch (e) {
-      logWarning('openVersionFromGit: deck.md is geen geldige UTF-8', e);
-      return OpenResult.unreadable;
+      logWarning('readVersionDeck: deck.md is geen geldige UTF-8', e);
+      return (deck: null, failure: OpenResult.unreadable, label: label);
     }
 
-    final version = GitRepoLayout.versionOfTag(tag, deckName) ?? tag;
-    final label = '${config.slug} · $deckName · $version';
     final gated = _gateAndParseContent(raw, sourceName: label);
     final parsed = gated.deck;
-    if (parsed == null) return gated.failure;
-    if (!mounted) return OpenResult.unreadable;
+    if (parsed == null) {
+      return (deck: null, failure: gated.failure, label: label);
+    }
+    if (!mounted) {
+      return (deck: null, failure: OpenResult.unreadable, label: label);
+    }
 
     final deck = await _withRepoAssets(
       parsed,
       AssetPool(forge: forge, branch: tag),
       sourceName: label,
     );
-    if (!mounted) return OpenResult.unreadable;
-
-    _placeDeckInTab(deck, remoteOrigin: label);
-    refreshTabs();
-    return OpenResult.opened;
+    return (deck: deck, failure: OpenResult.opened, label: label);
   }
 
   /// Haal de `repo:`-afbeeldingen van [deck] uit de pool en geef het deck terug

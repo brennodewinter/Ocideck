@@ -1799,6 +1799,17 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Vergelijken…': 'Comparare…',
+  'Versies vergelijken': 'Versiones comparare',
+  'Kies twee versies; de oudste van de twee is het vertrekpunt.':
+      'Elige duas versiones; antiquior earum est initium.',
+  'Vergelijken': 'Comparare',
+  'Deze twee versies zijn inhoudelijk gelijk.':
+      'Hae duae versiones eodem contento sunt.',
+  'verwijderd': 'remotum',
+  'gewijzigd': 'mutatum',
+  'verplaatst': 'motum',
+  '(zonder titel)': '(sine titulo)',
   'Concept mergen…': 'Adumbrationem coniungere…',
   'Versie vastleggen…': 'Versionem consignare…',
   'Concept gemerged naar de hoofdbranch.':

@@ -1790,6 +1790,17 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Vergelijken…': 'Porovnať…',
+  'Versies vergelijken': 'Porovnať verzie',
+  'Kies twee versies; de oudste van de twee is het vertrekpunt.':
+      'Vyber dve verzie; staršia z nich je východiskový bod.',
+  'Vergelijken': 'Porovnať',
+  'Deze twee versies zijn inhoudelijk gelijk.':
+      'Tieto dve verzie majú rovnaký obsah.',
+  'verwijderd': 'odstránené',
+  'gewijzigd': 'zmenené',
+  'verplaatst': 'presunuté',
+  '(zonder titel)': '(bez názvu)',
   'Concept mergen…': 'Zlúčiť koncept…',
   'Versie vastleggen…': 'Zaznamenať verziu…',
   'Concept gemerged naar de hoofdbranch.': 'Koncept zlúčený do hlavnej vetvy.',

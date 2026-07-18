@@ -1782,6 +1782,17 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Vergelijken…': 'Jämför…',
+  'Versies vergelijken': 'Jämför versioner',
+  'Kies twee versies; de oudste van de twee is het vertrekpunt.':
+      'Välj två versioner; den äldre av de två är utgångspunkten.',
+  'Vergelijken': 'Jämför',
+  'Deze twee versies zijn inhoudelijk gelijk.':
+      'De här två versionerna har samma innehåll.',
+  'verwijderd': 'borttagen',
+  'gewijzigd': 'ändrad',
+  'verplaatst': 'flyttad',
+  '(zonder titel)': '(utan titel)',
   'Concept mergen…': 'Slå ihop utkast…',
   'Versie vastleggen…': 'Registrera version…',
   'Concept gemerged naar de hoofdbranch.':

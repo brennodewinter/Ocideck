@@ -1782,6 +1782,17 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Vergelijken…': 'Sammenlign…',
+  'Versies vergelijken': 'Sammenlign versioner',
+  'Kies twee versies; de oudste van de twee is het vertrekpunt.':
+      'Vælg to versioner; den ældste af de to er udgangspunktet.',
+  'Vergelijken': 'Sammenlign',
+  'Deze twee versies zijn inhoudelijk gelijk.':
+      'Disse to versioner har samme indhold.',
+  'verwijderd': 'fjernet',
+  'gewijzigd': 'ændret',
+  'verplaatst': 'flyttet',
+  '(zonder titel)': '(uden titel)',
   'Concept mergen…': 'Flet udkast…',
   'Versie vastleggen…': 'Registrér version…',
   'Concept gemerged naar de hoofdbranch.': 'Udkast flettet ind i hovedgrenen.',

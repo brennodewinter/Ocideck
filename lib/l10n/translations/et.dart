@@ -1774,6 +1774,17 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Vergelijken…': 'Võrdle…',
+  'Versies vergelijken': 'Võrdle versioone',
+  'Kies twee versies; de oudste van de twee is het vertrekpunt.':
+      'Vali kaks versiooni; vanem neist on lähtepunkt.',
+  'Vergelijken': 'Võrdle',
+  'Deze twee versies zijn inhoudelijk gelijk.':
+      'Need kaks versiooni on sisult identsed.',
+  'verwijderd': 'eemaldatud',
+  'gewijzigd': 'muudetud',
+  'verplaatst': 'teisaldatud',
+  '(zonder titel)': '(pealkirjata)',
   'Concept mergen…': 'Ühenda mustand…',
   'Versie vastleggen…': 'Salvesta versioon…',
   'Concept gemerged naar de hoofdbranch.': 'Mustand ühendati peaharusse.',

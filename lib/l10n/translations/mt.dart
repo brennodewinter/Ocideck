@@ -1806,6 +1806,17 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Vergelijken…': 'Qabbel…',
+  'Versies vergelijken': 'Qabbel il-verżjonijiet',
+  'Kies twee versies; de oudste van de twee is het vertrekpunt.':
+      'Agħżel żewġ verżjonijiet; l-eqdem miż-żewġ hija l-punt tat-tluq.',
+  'Vergelijken': 'Qabbel',
+  'Deze twee versies zijn inhoudelijk gelijk.':
+      'Dawn iż-żewġ verżjonijiet għandhom l-istess kontenut.',
+  'verwijderd': 'imneħħi',
+  'gewijzigd': 'mibdul',
+  'verplaatst': 'mċaqlaq',
+  '(zonder titel)': '(bla titlu)',
   'Concept mergen…': 'Għaqqad l-abbozz…',
   'Versie vastleggen…': 'Irreġistra l-verżjoni…',
   'Concept gemerged naar de hoofdbranch.':

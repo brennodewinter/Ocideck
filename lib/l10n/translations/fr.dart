@@ -740,6 +740,17 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Vergelijken…': 'Comparer…',
+  'Versies vergelijken': 'Comparer les versions',
+  'Kies twee versies; de oudste van de twee is het vertrekpunt.':
+      'Choisissez deux versions ; la plus ancienne des deux est le point de départ.',
+  'Vergelijken': 'Comparer',
+  'Deze twee versies zijn inhoudelijk gelijk.':
+      'Ces deux versions ont un contenu identique.',
+  'verwijderd': 'supprimé',
+  'gewijzigd': 'modifié',
+  'verplaatst': 'déplacé',
+  '(zonder titel)': '(sans titre)',
   'Concept mergen…': 'Fusionner le brouillon…',
   'Versie vastleggen…': 'Enregistrer la version…',
   'Concept gemerged naar de hoofdbranch.':

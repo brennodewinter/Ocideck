@@ -1790,6 +1790,17 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Vergelijken…': 'Usporedi…',
+  'Versies vergelijken': 'Usporedi verzije',
+  'Kies twee versies; de oudste van de twee is het vertrekpunt.':
+      'Odaberi dvije verzije; starija od njih je polazište.',
+  'Vergelijken': 'Usporedi',
+  'Deze twee versies zijn inhoudelijk gelijk.':
+      'Ove dvije verzije sadržajno su jednake.',
+  'verwijderd': 'uklonjeno',
+  'gewijzigd': 'promijenjeno',
+  'verplaatst': 'premješteno',
+  '(zonder titel)': '(bez naslova)',
   'Concept mergen…': 'Spoji koncept…',
   'Versie vastleggen…': 'Zabilježi verziju…',
   'Concept gemerged naar de hoofdbranch.': 'Koncept spojen u glavnu granu.',

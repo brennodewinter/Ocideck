@@ -741,6 +741,17 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Vergelijken…': 'Ferlykje…',
+  'Versies vergelijken': 'Ferzjes ferlykje',
+  'Kies twee versies; de oudste van de twee is het vertrekpunt.':
+      'Kies twa ferzjes; de âldste fan de twa is it útgongspunt.',
+  'Vergelijken': 'Ferlykje',
+  'Deze twee versies zijn inhoudelijk gelijk.':
+      'Dizze twa ferzjes binne ynhâldlik gelyk.',
+  'verwijderd': 'fuortsmiten',
+  'gewijzigd': 'wizige',
+  'verplaatst': 'ferpleatst',
+  '(zonder titel)': '(sûnder titel)',
   'Concept mergen…': 'Konsept gearfoegje…',
   'Versie vastleggen…': 'Ferzje fêstlizze…',
   'Concept gemerged naar de hoofdbranch.': 'Konsept gearfoege yn de haadtûke.',
