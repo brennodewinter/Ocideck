@@ -95,6 +95,99 @@ extension _FileServiceOpen on FileService {
     return changed ? deck.copyWith(slides: slides) : deck;
   }
 
+  /// Give every chart that still carries its data inline a data file of its
+  /// own, so the markdown keeps a reference instead of the numbers.
+  ///
+  /// This is the conversion that makes the whole thing invisible: decks written
+  /// before data files existed move over on their next save, without the user
+  /// doing anything. It runs on **save** and never on open — opening must not
+  /// rewrite a deck you only looked at, or merely reading a presentation would
+  /// produce a diff.
+  ///
+  /// A `source`, once assigned, never changes again, even when the chart's
+  /// title does. Renaming on every title edit would churn the file (and, in a
+  /// repository, its history) for no gain.
+  Future<Deck> _externalizeCharts(Deck deck, String dir) async {
+    final taken = <String>{};
+    final slides = <Slide>[];
+    for (final s in deck.slides) {
+      if (s.type != SlideType.chart) {
+        slides.add(s);
+        continue;
+      }
+      final spec = ChartSpec.parse(s.customMarkdown);
+      // Nothing to move: an empty starter chart should not leave a file behind.
+      if (!spec.hasInlineData) {
+        slides.add(s);
+        if (spec.source != null) taken.add(spec.source!);
+        continue;
+      }
+      final existing = spec.source;
+      // A duplicated chart slide carries its twin's source. Left alone, the two
+      // would write over each other's numbers, so the second one forks off.
+      if (existing != null && !taken.contains(existing)) {
+        taken.add(existing);
+        slides.add(s);
+        continue;
+      }
+      final source = await _freeChartDataSource(spec.title, dir, taken);
+      taken.add(source);
+      slides.add(
+        s.copyWith(customMarkdown: spec.copyWith(source: source).toBlock()),
+      );
+    }
+    return deck.copyWith(slides: slides);
+  }
+
+  /// `data/<slug>.json` that no other chart in this deck claims and no file on
+  /// disk occupies — so auto-conversion never lands on someone else's file.
+  Future<String> _freeChartDataSource(
+    String title,
+    String dir,
+    Set<String> taken,
+  ) async {
+    final base = title.trim().isEmpty ? 'grafiek' : _safeName(title);
+    for (var i = 1; ; i++) {
+      final name = i == 1 ? '$base.json' : '$base-$i.json';
+      final source = '$chartDataDirName/$name';
+      if (!taken.contains(source) &&
+          !await File(p.join(dir, chartDataDirName, name)).exists()) {
+        return source;
+      }
+    }
+  }
+
+  /// Remove data files this deck left behind — a chart slide that was deleted,
+  /// or one that forked onto a new file.
+  ///
+  /// Deliberately narrow: only files this service itself read or wrote for this
+  /// deck ([_chartDataAtOpen]) are eligible. An unrelated file someone dropped
+  /// in `data/` is none of our business, and `.csv` files are never removed at
+  /// all — those were supplied by the user, not generated here.
+  Future<void> _pruneChartData(Deck deck, String dir) async {
+    final referenced = <String>{
+      for (final s in deck.slides)
+        if (s.type == SlideType.chart)
+          if (ChartSpec.parse(s.customMarkdown).source case final src?)
+            resolveProjectRelative(dir, src) ?? '',
+    };
+    final ours = _chartDataAtOpen.keys
+        .where(
+          (abs) => p.isWithin(dir, abs) && abs.toLowerCase().endsWith('.json'),
+        )
+        .toList();
+    for (final abs in ours) {
+      if (referenced.contains(abs)) continue;
+      try {
+        final file = File(abs);
+        if (await file.exists()) await file.delete();
+      } catch (e) {
+        logWarning('FileService._pruneChartData: stale data file kept', e);
+      }
+      _chartDataAtOpen.remove(abs);
+    }
+  }
+
   /// Write each linked chart's data back to its file — the other half of
   /// [_hydrateCharts], and what makes a linked chart editable in the app.
   ///

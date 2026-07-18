@@ -228,6 +228,180 @@ void main() {
     expect(outcome.warnings, ['data/omzet.json']);
   });
 
+  // The conversion users are not supposed to notice: a deck written before
+  // data files existed carries its numbers inline, and moves over on its next
+  // save without anyone doing anything.
+  group('automatic conversion', () {
+    Slide inlineChart(String title, List<double> values) =>
+        Slide.create(SlideType.chart).copyWith(
+          customMarkdown: ChartSpec(
+            title: title,
+            x: const ['Jan', 'Feb'],
+            series: [ChartSeries(name: 'Omzet', data: values)],
+          ).toBlock(),
+        );
+
+    test('inline data moves to a data file on save', () async {
+      await serviceOf().saveDeck(
+        deckWith(inlineChart('Omzet 2025', [120, 138])),
+        deckPath(),
+      );
+
+      final dataFile = File(p.join(temp.path, 'data', 'Omzet_2025.json'));
+      expect(await dataFile.exists(), isTrue);
+      expect(await dataFile.readAsString(), contains('120'));
+
+      // The markdown is left with the reference and none of the numbers.
+      final md = await File(deckPath()).readAsString();
+      expect(md, contains('data/Omzet_2025.json'));
+      expect(md, isNot(contains('120')));
+
+      // And the user sees no difference: reopening gives the same chart back.
+      final spec = specOf((await serviceOf().openDeck(deckPath()))!);
+      expect(spec.x, ['Jan', 'Feb']);
+      expect(spec.series.single.data, [120, 138]);
+    });
+
+    test('an untitled chart still gets a sensible name', () async {
+      await serviceOf().saveDeck(deckWith(inlineChart('', [1, 2])), deckPath());
+      expect(
+        File(p.join(temp.path, 'data', 'grafiek.json')).existsSync(),
+        isTrue,
+      );
+    });
+
+    test('an empty chart gets no file at all', () async {
+      await serviceOf().saveDeck(
+        deckWith(Slide.create(SlideType.chart)),
+        deckPath(),
+      );
+      final dir = Directory(p.join(temp.path, 'data'));
+      expect(dir.listSync().whereType<File>(), isEmpty);
+    });
+
+    test('two charts with the same title get separate files', () async {
+      await serviceOf().saveDeck(
+        Deck(
+          title: 'Cijfers',
+          slides: [
+            inlineChart('Omzet', [1, 2]),
+            inlineChart('Omzet', [3, 4]),
+          ],
+        ),
+        deckPath(),
+      );
+
+      // Sharing one file would mean the second chart overwrote the first.
+      expect(
+        File(p.join(temp.path, 'data', 'Omzet.json')).existsSync(),
+        isTrue,
+      );
+      expect(
+        File(p.join(temp.path, 'data', 'Omzet-2.json')).existsSync(),
+        isTrue,
+      );
+      final reopened = await serviceOf().openDeck(deckPath());
+      final data = reopened!.slides
+          .map((s) => ChartSpec.parse(s.customMarkdown).series.single.data)
+          .toList();
+      expect(data, [
+        [1, 2],
+        [3, 4],
+      ]);
+    });
+
+    test('a duplicated chart slide forks onto its own file', () async {
+      final service = serviceOf();
+      await service.saveDeck(
+        deckWith(inlineChart('Omzet', [1, 2])),
+        deckPath(),
+      );
+      final opened = await service.openDeck(deckPath());
+
+      // Duplicating a slide copies its source along; both would otherwise
+      // write to the one file and the numbers of one would win.
+      final twin = opened!.slides.single;
+      final copy = Slide.create(
+        SlideType.chart,
+      ).copyWith(customMarkdown: twin.customMarkdown);
+      await service.saveDeck(opened.copyWith(slides: [twin, copy]), deckPath());
+
+      expect(
+        File(p.join(temp.path, 'data', 'Omzet.json')).existsSync(),
+        isTrue,
+      );
+      expect(
+        File(p.join(temp.path, 'data', 'Omzet-2.json')).existsSync(),
+        isTrue,
+      );
+    });
+
+    test('the source stays put when the title changes', () async {
+      final service = serviceOf();
+      await service.saveDeck(
+        deckWith(inlineChart('Omzet', [1, 2])),
+        deckPath(),
+      );
+      final opened = await service.openDeck(deckPath());
+      final renamed = specOf(opened!).copyWith(title: 'Heel andere titel');
+      await service.saveDeck(
+        opened.copyWith(
+          slides: [
+            opened.slides.single.copyWith(customMarkdown: renamed.toBlock()),
+          ],
+        ),
+        deckPath(),
+      );
+
+      // Renaming on every title edit would churn the file and its history.
+      expect(
+        specOf((await serviceOf().openDeck(deckPath()))!).source,
+        'data/Omzet.json',
+      );
+      expect(
+        File(p.join(temp.path, 'data', 'Heel_andere_titel.json')).existsSync(),
+        isFalse,
+      );
+    });
+
+    test('deleting the chart cleans up its data file', () async {
+      final service = serviceOf();
+      await service.saveDeck(
+        deckWith(inlineChart('Omzet', [1, 2])),
+        deckPath(),
+      );
+      final opened = await service.openDeck(deckPath());
+      await service.saveDeck(
+        opened!.copyWith(slides: [Slide.create(SlideType.title)]),
+        deckPath(),
+      );
+      expect(
+        File(p.join(temp.path, 'data', 'Omzet.json')).existsSync(),
+        isFalse,
+      );
+    });
+
+    test('cleanup never touches files it did not create', () async {
+      final service = serviceOf();
+      await Directory(p.join(temp.path, 'data')).create(recursive: true);
+      final stranger = File(
+        p.join(temp.path, 'data', 'van_iemand_anders.json'),
+      );
+      await stranger.writeAsString('{"x":["eigen"],"series":[]}');
+      final csv = File(p.join(temp.path, 'data', 'handmatig.csv'));
+      await csv.writeAsString(',A\nJan,1\n');
+
+      await service.saveDeck(
+        deckWith(inlineChart('Omzet', [1, 2])),
+        deckPath(),
+      );
+
+      // Nothing in data/ that we did not put there is ours to remove.
+      expect(await stranger.readAsString(), '{"x":["eigen"],"series":[]}');
+      expect(await csv.readAsString(), ',A\nJan,1\n');
+    });
+  });
+
   test('a healthy deck reports nothing', () async {
     final service = serviceOf();
     await service.saveDeck(
