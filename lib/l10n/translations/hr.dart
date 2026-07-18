@@ -1790,6 +1790,15 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Zoeken in alle decks…': 'Pretraži sve špilove…',
+  'Zoeken in alle decks': 'Pretraži sve špilove',
+  'Zoekterm': 'Pojam za pretragu',
+  'Niets gevonden.': 'Ništa nije pronađeno.',
+  'vindplaatsen': 'pojavljivanja',
+  'deck-eigenschappen': 'svojstva špila',
+  'Er zijn meer treffers dan hier passen; verfijn de zoekterm.':
+      'Ima više rezultata nego što ovdje stane; suzite pojam pretrage.',
+  'Niet doorzocht, want onleesbaar:': 'Nije pretraženo jer je nečitljivo:',
   'Afbeeldingen in de repository…': 'Slike u repozitoriju…',
   'Afbeeldingen in de repository': 'Slike u repozitoriju',
   'afbeeldingen in de gedeelde pool': 'slika u zajedničkom skupu',

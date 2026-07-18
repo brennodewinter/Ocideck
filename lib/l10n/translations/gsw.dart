@@ -1787,6 +1787,15 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Zoeken in alle decks…': 'In allne Decks sueche…',
+  'Zoeken in alle decks': 'In allne Decks sueche',
+  'Zoekterm': 'Suechbegriff',
+  'Niets gevonden.': 'Nüt gfunde.',
+  'vindplaatsen': 'Fundstelle',
+  'deck-eigenschappen': 'Deck-Eigeschafte',
+  'Er zijn meer treffers dan hier passen; verfijn de zoekterm.':
+      'S git meh Träffer als da inepassed; grenz de Suechbegriff yy.',
+  'Niet doorzocht, want onleesbaar:': 'Nid durchsuecht, wills unläsbar isch:',
   'Afbeeldingen in de repository…': 'Bilder im Repository…',
   'Afbeeldingen in de repository': 'Bilder im Repository',
   'afbeeldingen in de gedeelde pool': 'Bilder im gmeinsame Pool',

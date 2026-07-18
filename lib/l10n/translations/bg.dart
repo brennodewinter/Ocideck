@@ -1806,6 +1806,15 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Zoeken in alle decks…': 'Търсене във всички колоди…',
+  'Zoeken in alle decks': 'Търсене във всички колоди',
+  'Zoekterm': 'Търсен израз',
+  'Niets gevonden.': 'Нищо не е намерено.',
+  'vindplaatsen': 'срещания',
+  'deck-eigenschappen': 'свойства на колодата',
+  'Er zijn meer treffers dan hier passen; verfijn de zoekterm.':
+      'Съвпаденията са повече, отколкото се побират тук; уточнете израза.',
+  'Niet doorzocht, want onleesbaar:': 'Не е претърсено, защото е нечетимо:',
   'Afbeeldingen in de repository…': 'Изображения в хранилището…',
   'Afbeeldingen in de repository': 'Изображения в хранилището',
   'afbeeldingen in de gedeelde pool': 'изображения в споделения пул',

@@ -1801,6 +1801,15 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Zoeken in alle decks…': 'Шукати в усіх колодах…',
+  'Zoeken in alle decks': 'Шукати в усіх колодах',
+  'Zoekterm': 'Пошуковий запит',
+  'Niets gevonden.': 'Нічого не знайдено.',
+  'vindplaatsen': 'збігів',
+  'deck-eigenschappen': 'властивості колоди',
+  'Er zijn meer treffers dan hier passen; verfijn de zoekterm.':
+      'Збігів більше, ніж тут уміщується; уточніть запит.',
+  'Niet doorzocht, want onleesbaar:': 'Не переглянуто, бо не читається:',
   'Afbeeldingen in de repository…': 'Зображення в репозиторії…',
   'Afbeeldingen in de repository': 'Зображення в репозиторії',
   'afbeeldingen in de gedeelde pool': 'зображень у спільному пулі',

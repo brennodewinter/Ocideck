@@ -740,6 +740,16 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Zoeken in alle decks…': 'Buska den tur e deknan…',
+  'Zoeken in alle decks': 'Buska den tur e deknan',
+  'Zoekterm': 'Palabra di buskeda',
+  'Niets gevonden.': 'No a hañá nada.',
+  'vindplaatsen': 'okurensianan',
+  'deck-eigenschappen': 'propiedatnan di dek',
+  'Er zijn meer treffers dan hier passen; verfijn de zoekterm.':
+      'Tin mas resultado ku ta kabe akí; refiná e palabra di buskeda.',
+  'Niet doorzocht, want onleesbaar:':
+      'No a wòrdu buská, pasobra no ta lesabel:',
   'Afbeeldingen in de repository…': 'Imágennan den e repositorio…',
   'Afbeeldingen in de repository': 'Imágennan den e repositorio',
   'afbeeldingen in de gedeelde pool': 'imágennan den e pool kompartí',

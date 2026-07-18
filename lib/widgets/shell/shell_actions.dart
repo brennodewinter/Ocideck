@@ -260,7 +260,16 @@ Future<void> _importUrlWeb(
 /// open het in een tab. Anders dan Nextcloud werkt dit óók op web: het
 /// forge-plane is gewoon https+JSON dat de browser-sandbox al inperkt, terwijl
 /// de WebDAV-client op dart:io-pinning leunt die daar niet bestaat (§4.4).
-Future<void> _openFromGit(BuildContext context, WidgetRef ref) async {
+///
+/// Met [deckDir] slaat het de keuzedialoog over en opent het dat deck direct —
+/// zo komt een zoekresultaat langs precies dezelfde gate en hetzelfde
+/// native/REST-onderscheid als de bladeraar, in plaats van via een tweede
+/// openpad dat uit de pas gaat lopen.
+Future<void> _openFromGit(
+  BuildContext context,
+  WidgetRef ref, {
+  String? deckDir,
+}) async {
   final forge = await ref.read(gitForgeProvider.future);
   if (!context.mounted) return;
   if (forge == null) {
@@ -275,8 +284,8 @@ Future<void> _openFromGit(BuildContext context, WidgetRef ref) async {
     );
     return;
   }
-  final deckDir = await GitBrowserDialog.show(context);
-  if (deckDir == null || !context.mounted) return;
+  final chosen = deckDir ?? await GitBrowserDialog.show(context);
+  if (chosen == null || !context.mounted) return;
 
   final config = ref.read(settingsProvider).gitRepo;
   if (config == null) return;
@@ -293,13 +302,13 @@ Future<void> _openFromGit(BuildContext context, WidgetRef ref) async {
             native,
             forge,
             config: config,
-            deckDir: deckDir,
+            deckDir: chosen,
             branch: config.defaultBranch,
           )
         : await notifier.openDeckFromGit(
             forge,
             config: config,
-            deckDir: deckDir,
+            deckDir: chosen,
             branch: config.defaultBranch,
           );
     _reportOpenFailure(messenger, l10n, result);

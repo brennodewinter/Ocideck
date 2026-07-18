@@ -1783,6 +1783,15 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Zoeken in alle decks…': 'Hae kaikista pakoista…',
+  'Zoeken in alle decks': 'Hae kaikista pakoista',
+  'Zoekterm': 'Hakusana',
+  'Niets gevonden.': 'Ei löytynyt mitään.',
+  'vindplaatsen': 'esiintymää',
+  'deck-eigenschappen': 'pakan ominaisuudet',
+  'Er zijn meer treffers dan hier passen; verfijn de zoekterm.':
+      'Osumia on enemmän kuin tähän mahtuu; tarkenna hakusanaa.',
+  'Niet doorzocht, want onleesbaar:': 'Ei haettu, koska lukukelvoton:',
   'Afbeeldingen in de repository…': 'Kuvat repositoriossa…',
   'Afbeeldingen in de repository': 'Kuvat repositoriossa',
   'afbeeldingen in de gedeelde pool': 'kuvaa jaetussa varastossa',

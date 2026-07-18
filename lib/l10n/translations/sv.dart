@@ -1782,6 +1782,15 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Zoeken in alle decks…': 'Sök i alla decks…',
+  'Zoeken in alle decks': 'Sök i alla decks',
+  'Zoekterm': 'Sökterm',
+  'Niets gevonden.': 'Inget hittades.',
+  'vindplaatsen': 'förekomster',
+  'deck-eigenschappen': 'deckegenskaper',
+  'Er zijn meer treffers dan hier passen; verfijn de zoekterm.':
+      'Det finns fler träffar än vad som får plats här; förfina söktermen.',
+  'Niet doorzocht, want onleesbaar:': 'Inte genomsökt, eftersom oläsbar:',
   'Afbeeldingen in de repository…': 'Bilder i repositoryt…',
   'Afbeeldingen in de repository': 'Bilder i repositoryt',
   'afbeeldingen in de gedeelde pool': 'bilder i den delade poolen',

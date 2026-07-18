@@ -1790,6 +1790,15 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Zoeken in alle decks…': 'Hľadať vo všetkých sadách…',
+  'Zoeken in alle decks': 'Hľadať vo všetkých sadách',
+  'Zoekterm': 'Hľadaný výraz',
+  'Niets gevonden.': 'Nič sa nenašlo.',
+  'vindplaatsen': 'výskytov',
+  'deck-eigenschappen': 'vlastnosti sady',
+  'Er zijn meer treffers dan hier passen; verfijn de zoekterm.':
+      'Výsledkov je viac, než sa sem zmestí; spresnite hľadaný výraz.',
+  'Niet doorzocht, want onleesbaar:': 'Neprehľadané, lebo nečitateľné:',
   'Afbeeldingen in de repository…': 'Obrázky v repozitári…',
   'Afbeeldingen in de repository': 'Obrázky v repozitári',
   'afbeeldingen in de gedeelde pool': 'obrázkov v zdieľanej zásobe',

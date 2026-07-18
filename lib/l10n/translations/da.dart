@@ -1782,6 +1782,15 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Zoeken in alle decks…': 'Søg i alle decks…',
+  'Zoeken in alle decks': 'Søg i alle decks',
+  'Zoekterm': 'Søgeord',
+  'Niets gevonden.': 'Intet fundet.',
+  'vindplaatsen': 'forekomster',
+  'deck-eigenschappen': 'deck-egenskaber',
+  'Er zijn meer treffers dan hier passen; verfijn de zoekterm.':
+      'Der er flere resultater, end der er plads til; præcisér søgeordet.',
+  'Niet doorzocht, want onleesbaar:': 'Ikke gennemsøgt, fordi ulæselig:',
   'Afbeeldingen in de repository…': 'Billeder i repositoriet…',
   'Afbeeldingen in de repository': 'Billeder i repositoriet',
   'afbeeldingen in de gedeelde pool': 'billeder i den delte pulje',

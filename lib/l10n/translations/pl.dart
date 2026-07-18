@@ -1796,6 +1796,15 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Zoeken in alle decks…': 'Szukaj we wszystkich taliach…',
+  'Zoeken in alle decks': 'Szukaj we wszystkich taliach',
+  'Zoekterm': 'Szukane hasło',
+  'Niets gevonden.': 'Nic nie znaleziono.',
+  'vindplaatsen': 'wystąpień',
+  'deck-eigenschappen': 'właściwości talii',
+  'Er zijn meer treffers dan hier passen; verfijn de zoekterm.':
+      'Trafień jest więcej, niż się tu mieści; doprecyzuj hasło.',
+  'Niet doorzocht, want onleesbaar:': 'Nieprzeszukane, bo nieczytelne:',
   'Afbeeldingen in de repository…': 'Obrazy w repozytorium…',
   'Afbeeldingen in de repository': 'Obrazy w repozytorium',
   'afbeeldingen in de gedeelde pool': 'obrazów we wspólnej puli',

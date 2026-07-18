@@ -1785,6 +1785,15 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Zoeken in alle decks…': 'Iskanje po vseh kompletih…',
+  'Zoeken in alle decks': 'Iskanje po vseh kompletih',
+  'Zoekterm': 'Iskalni izraz',
+  'Niets gevonden.': 'Ničesar ni bilo najdeno.',
+  'vindplaatsen': 'pojavitev',
+  'deck-eigenschappen': 'lastnosti kompleta',
+  'Er zijn meer treffers dan hier passen; verfijn de zoekterm.':
+      'Zadetkov je več, kot jih gre sem; natančneje določite iskalni izraz.',
+  'Niet doorzocht, want onleesbaar:': 'Ni preiskano, ker ni berljivo:',
   'Afbeeldingen in de repository…': 'Slike v repozitoriju…',
   'Afbeeldingen in de repository': 'Slike v repozitoriju',
   'afbeeldingen in de gedeelde pool': 'slik v skupnem naboru',

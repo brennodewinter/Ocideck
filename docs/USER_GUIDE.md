@@ -137,6 +137,15 @@ saved version stays retrievable, which a plain folder cannot give you.
   reworded slide shows up as one *changed* entry instead of an addition plus a
   deletion. For a changed slide, *Verschillen* shows the two side by side with
   the differing fields listed.
+- **Search every deck — *Zoeken in alle decks…*.** Find & replace works inside
+  the deck you have open; this searches every deck in the repository. Each hit
+  names the deck and the slide it is on, with the line it was found in, so you
+  can tell a passing mention from the slide you actually wanted. Pick a hit and
+  that deck opens. Two things it will tell you rather than hide: if a deck could
+  not be read it is named as skipped (the hits you do see are still real), and
+  if there were more hits than fit it says so instead of quietly cutting the
+  list. Searching reads every deck in the repository, so it runs when you press
+  *Zoeken* — not while you type.
 - **Which decks use an image — *Afbeeldingen in de repository…*.** Images are
   stored once and shared by every deck that uses them, so before you touch one it
   helps to know who else depends on it. This overview lists every image in the

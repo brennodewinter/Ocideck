@@ -1813,6 +1813,15 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Zoeken in alle decks…': 'Pesquisar em todos os decks…',
+  'Zoeken in alle decks': 'Pesquisar em todos os decks',
+  'Zoekterm': 'Termo de pesquisa',
+  'Niets gevonden.': 'Nada encontrado.',
+  'vindplaatsen': 'ocorrências',
+  'deck-eigenschappen': 'propriedades do deck',
+  'Er zijn meer treffers dan hier passen; verfijn de zoekterm.':
+      'Há mais resultados do que cabem aqui; refine o termo de pesquisa.',
+  'Niet doorzocht, want onleesbaar:': 'Não pesquisado, por ser ilegível:',
   'Afbeeldingen in de repository…': 'Imagens no repositório…',
   'Afbeeldingen in de repository': 'Imagens no repositório',
   'afbeeldingen in de gedeelde pool': 'imagens no conjunto partilhado',

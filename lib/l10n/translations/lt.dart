@@ -1791,6 +1791,15 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Zoeken in alle decks…': 'Ieškoti visose kaladėse…',
+  'Zoeken in alle decks': 'Ieškoti visose kaladėse',
+  'Zoekterm': 'Paieškos žodis',
+  'Niets gevonden.': 'Nieko nerasta.',
+  'vindplaatsen': 'radiniai',
+  'deck-eigenschappen': 'kaladės savybės',
+  'Er zijn meer treffers dan hier passen; verfijn de zoekterm.':
+      'Atitikmenų yra daugiau, nei čia telpa; patikslinkite paieškos žodį.',
+  'Niet doorzocht, want onleesbaar:': 'Neieškota, nes neįskaitoma:',
   'Afbeeldingen in de repository…': 'Vaizdai saugykloje…',
   'Afbeeldingen in de repository': 'Vaizdai saugykloje',
   'afbeeldingen in de gedeelde pool': 'vaizdų bendrame telkinyje',

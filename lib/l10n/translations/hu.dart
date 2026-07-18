@@ -1787,6 +1787,15 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Zoeken in alle decks…': 'Keresés minden pakliban…',
+  'Zoeken in alle decks': 'Keresés minden pakliban',
+  'Zoekterm': 'Keresőkifejezés',
+  'Niets gevonden.': 'Nincs találat.',
+  'vindplaatsen': 'előfordulás',
+  'deck-eigenschappen': 'pakli tulajdonságai',
+  'Er zijn meer treffers dan hier passen; verfijn de zoekterm.':
+      'Több találat van, mint amennyi ide fér; pontosítsa a keresőkifejezést.',
+  'Niet doorzocht, want onleesbaar:': 'Nem lett átnézve, mert olvashatatlan:',
   'Afbeeldingen in de repository…': 'Képek a tárolóban…',
   'Afbeeldingen in de repository': 'Képek a tárolóban',
   'afbeeldingen in de gedeelde pool': 'kép a közös készletben',
