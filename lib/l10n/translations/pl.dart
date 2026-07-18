@@ -1796,6 +1796,17 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Afbeeldingen in de repository…': 'Obrazy w repozytorium…',
+  'Afbeeldingen in de repository': 'Obrazy w repozytorium',
+  'afbeeldingen in de gedeelde pool': 'obrazów we wspólnej puli',
+  'De pool is nog leeg.': 'Pula jest jeszcze pusta.',
+  'alleen nog in een uitgebrachte versie:': 'już tylko w wydanej wersji:',
+  'nergens meer gevonden': 'nigdzie już nieznaleziona',
+  'Niet te zeggen wat ongebruikt is: dit kon niet gelezen worden —':
+      'Nie można stwierdzić, co jest nieużywane: nie udało się odczytać —',
+  'Elke afbeelding wordt ergens gebruikt.': 'Każdy obraz jest gdzieś używany.',
+  'afbeeldingen worden nergens meer aangehaald — ook niet in een uitgebrachte versie. Dit is een voorstel, geen oordeel: op een andere branch kunnen ze nog in gebruik zijn.':
+      'obrazów nie jest już nigdzie przywoływanych — nawet w wydanej wersji. To sugestia, nie werdykt: mogą być nadal używane na innej gałęzi.',
   'Soort forge': 'Rodzaj forge',
   'Forgejo of Gitea': 'Forgejo lub Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':

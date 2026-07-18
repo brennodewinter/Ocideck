@@ -46,6 +46,11 @@ extension _MainLayoutMenu on _MainLayoutState {
         l10n.d('Opslaan naar git…'),
       ),
       _menuItem('sync_git', Icons.sync, l10n.d('Nu synchroniseren')),
+      _menuItem(
+        'assets_git',
+        Icons.photo_library_outlined,
+        l10n.d('Afbeeldingen in de repository…'),
+      ),
       // Echte historie bestaat alleen op het native plane (§8.1): het item
       // verschijnt zodra dit deck uit git is geopend én er een lokale clone is.
       if (ref.read(tabsProvider).current?.gitOrigin != null &&

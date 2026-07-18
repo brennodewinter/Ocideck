@@ -1758,6 +1758,17 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Afbeeldingen in de repository…': 'repository nagh mIllogh…',
+  'Afbeeldingen in de repository': 'repository nagh mIllogh',
+  'afbeeldingen in de gedeelde pool': 'pool-Daq mIllogh',
+  'De pool is nog leeg.': 'pool chIm.',
+  'alleen nog in een uitgebrachte versie:': 'ngeHta\'bogh mI\'-Daq neH:',
+  'nergens meer gevonden': 'not tu\'lu\'',
+  'Niet te zeggen wat ongebruikt is: dit kon niet gelezen worden —':
+      'lo\'lu\'be\'bogh Sovlu\'be\': laDlaHbe\' —',
+  'Elke afbeelding wordt ergens gebruikt.': 'Hoch mIllogh lo\'lu\'.',
+  'afbeeldingen worden nergens meer aangehaald — ook niet in een uitgebrachte versie. Dit is een voorstel, geen oordeel: op een andere branch kunnen ze nog in gebruik zijn.':
+      'mIllogh not lo\'lu\' — ngeHta\'bogh mI\'-Daq je. wIv \'oHbe\', qech \'oH: latlh branch-Daq lo\'lu\'laH.',
   'Soort forge': 'forge Segh',
   'Forgejo of Gitea': 'Forgejo pagh Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':

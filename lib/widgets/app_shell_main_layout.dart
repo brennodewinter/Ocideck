@@ -427,6 +427,8 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
               _syncGit(context, ref);
             case 'history_git':
               _showGitHistory(context, ref);
+            case 'assets_git':
+              _showAssetUsage(context, ref);
             case 'versions_git':
               _showGitVersions(context, ref);
             case 'review_git':

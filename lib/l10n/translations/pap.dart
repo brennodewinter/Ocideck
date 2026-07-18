@@ -740,6 +740,18 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Afbeeldingen in de repository…': 'Imágennan den e repositorio…',
+  'Afbeeldingen in de repository': 'Imágennan den e repositorio',
+  'afbeeldingen in de gedeelde pool': 'imágennan den e pool kompartí',
+  'De pool is nog leeg.': 'E pool ta bashí ainda.',
+  'alleen nog in een uitgebrachte versie:': 'solamente den un vershon publiká:',
+  'nergens meer gevonden': 'no ta wòrdu hañá mas na ningun kaminda',
+  'Niet te zeggen wat ongebruikt is: dit kon niet gelezen worden —':
+      'No por bisa kiko no ta na uso: esaki no por a wòrdu lesá —',
+  'Elke afbeelding wordt ergens gebruikt.':
+      'Tur imágen ta na uso na un kaminda.',
+  'afbeeldingen worden nergens meer aangehaald — ook niet in een uitgebrachte versie. Dit is een voorstel, geen oordeel: op een andere branch kunnen ze nog in gebruik zijn.':
+      'imágennan no ta wòrdu referí mas na ningun kaminda — tampoko den un vershon publiká. Esaki ta un sugerensia, no un veredikto: nan por ta na uso ainda riba un otro branch.',
   'Soort forge': 'Tipo di forge',
   'Forgejo of Gitea': 'Forgejo of Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':

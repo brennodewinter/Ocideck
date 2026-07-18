@@ -1782,6 +1782,18 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Afbeeldingen in de repository…': 'Attēli repozitorijā…',
+  'Afbeeldingen in de repository': 'Attēli repozitorijā',
+  'afbeeldingen in de gedeelde pool': 'attēli koplietošanas kopā',
+  'De pool is nog leeg.': 'Kopa vēl ir tukša.',
+  'alleen nog in een uitgebrachte versie:': 'tagad tikai publicētā versijā:',
+  'nergens meer gevonden': 'vairs nekur nav atrasts',
+  'Niet te zeggen wat ongebruikt is: dit kon niet gelezen worden —':
+      'Nevar noteikt, kas netiek izmantots: šos nevarēja nolasīt —',
+  'Elke afbeelding wordt ergens gebruikt.':
+      'Katrs attēls kaut kur tiek izmantots.',
+  'afbeeldingen worden nergens meer aangehaald — ook niet in een uitgebrachte versie. Dit is een voorstel, geen oordeel: op een andere branch kunnen ze nog in gebruik zijn.':
+      'attēli vairs nekur netiek izmantoti — pat ne publicētā versijā. Šis ir ieteikums, nevis spriedums: citā atzarā tie vēl var būt lietošanā.',
   'Soort forge': 'Forge veids',
   'Forgejo of Gitea': 'Forgejo vai Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':

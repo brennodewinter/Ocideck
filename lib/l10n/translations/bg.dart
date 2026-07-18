@@ -1806,6 +1806,18 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Afbeeldingen in de repository…': 'Изображения в хранилището…',
+  'Afbeeldingen in de repository': 'Изображения в хранилището',
+  'afbeeldingen in de gedeelde pool': 'изображения в споделения пул',
+  'De pool is nog leeg.': 'Пулът все още е празен.',
+  'alleen nog in een uitgebrachte versie:': 'вече само в издадена версия:',
+  'nergens meer gevonden': 'вече не се намира никъде',
+  'Niet te zeggen wat ongebruikt is: dit kon niet gelezen worden —':
+      'Не може да се определи какво не се използва: това не можа да се прочете —',
+  'Elke afbeelding wordt ergens gebruikt.':
+      'Всяко изображение се използва някъде.',
+  'afbeeldingen worden nergens meer aangehaald — ook niet in een uitgebrachte versie. Dit is een voorstel, geen oordeel: op een andere branch kunnen ze nog in gebruik zijn.':
+      'изображения вече не се използват никъде — дори не и в издадена версия. Това е предложение, не присъда: може още да се използват в друг клон.',
   'Soort forge': 'Вид forge',
   'Forgejo of Gitea': 'Forgejo или Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':

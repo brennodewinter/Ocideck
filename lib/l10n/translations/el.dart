@@ -1811,6 +1811,19 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Afbeeldingen in de repository…': 'Εικόνες στο αποθετήριο…',
+  'Afbeeldingen in de repository': 'Εικόνες στο αποθετήριο',
+  'afbeeldingen in de gedeelde pool': 'εικόνες στην κοινή δεξαμενή',
+  'De pool is nog leeg.': 'Η δεξαμενή είναι ακόμη άδεια.',
+  'alleen nog in een uitgebrachte versie:':
+      'μόνο σε δημοσιευμένη έκδοση πλέον:',
+  'nergens meer gevonden': 'δεν βρέθηκε πλέον πουθενά',
+  'Niet te zeggen wat ongebruikt is: dit kon niet gelezen worden —':
+      'Δεν μπορεί να προσδιοριστεί τι είναι αχρησιμοποίητο: αυτά δεν διαβάστηκαν —',
+  'Elke afbeelding wordt ergens gebruikt.':
+      'Κάθε εικόνα χρησιμοποιείται κάπου.',
+  'afbeeldingen worden nergens meer aangehaald — ook niet in een uitgebrachte versie. Dit is een voorstel, geen oordeel: op een andere branch kunnen ze nog in gebruik zijn.':
+      'εικόνες δεν αναφέρονται πλέον πουθενά — ούτε καν σε δημοσιευμένη έκδοση. Είναι πρόταση, όχι ετυμηγορία: μπορεί να χρησιμοποιούνται ακόμη σε άλλον κλάδο.',
   'Soort forge': 'Τύπος forge',
   'Forgejo of Gitea': 'Forgejo ή Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':

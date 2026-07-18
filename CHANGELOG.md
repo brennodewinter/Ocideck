@@ -8,6 +8,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **See which decks use which image — and what nothing uses any more.**
+  *Afbeeldingen in de repository…* in the `…` menu lists every image in the
+  shared pool with the decks that reference it. Images pulled from the current
+  text but still present in a released version are shown as exactly that, not as
+  junk: deleting one would break a version someone already presented. At the
+  bottom, the images nothing references any more — a proposal, not a verdict,
+  since another branch may still use them. If any deck or released version could
+  not be read, that list is not shown at all: an unreadable deck could be the one
+  user of an image, and there is no undo for a deletion. The overview only tells
+  you; removing an image is still a deliberate manual act.
 - **GitHub and GitLab now work too, not just Forgejo/Gitea.** *Settings → Git*
   gained a **forge type** you pick alongside the server URL, and everything the
   git storage does — opening, saving, concept branches, review, merging, version

@@ -1791,6 +1791,18 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Afbeeldingen in de repository…': 'Vaizdai saugykloje…',
+  'Afbeeldingen in de repository': 'Vaizdai saugykloje',
+  'afbeeldingen in de gedeelde pool': 'vaizdų bendrame telkinyje',
+  'De pool is nog leeg.': 'Telkinys dar tuščias.',
+  'alleen nog in een uitgebrachte versie:': 'dabar tik išleistoje versijoje:',
+  'nergens meer gevonden': 'niekur nebrasta',
+  'Niet te zeggen wat ongebruikt is: dit kon niet gelezen worden —':
+      'Neįmanoma nustatyti, kas nenaudojama: šių nepavyko perskaityti —',
+  'Elke afbeelding wordt ergens gebruikt.':
+      'Kiekvienas vaizdas kažkur naudojamas.',
+  'afbeeldingen worden nergens meer aangehaald — ook niet in een uitgebrachte versie. Dit is een voorstel, geen oordeel: op een andere branch kunnen ze nog in gebruik zijn.':
+      'vaizdų niekur nebenurodoma — net ir išleistoje versijoje. Tai pasiūlymas, o ne nuosprendis: kitoje šakoje jie dar gali būti naudojami.',
   'Soort forge': 'Forge tipas',
   'Forgejo of Gitea': 'Forgejo arba Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':

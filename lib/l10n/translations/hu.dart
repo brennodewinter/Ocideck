@@ -1787,6 +1787,18 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Afbeeldingen in de repository…': 'Képek a tárolóban…',
+  'Afbeeldingen in de repository': 'Képek a tárolóban',
+  'afbeeldingen in de gedeelde pool': 'kép a közös készletben',
+  'De pool is nog leeg.': 'A készlet még üres.',
+  'alleen nog in een uitgebrachte versie:': 'már csak egy kiadott verzióban:',
+  'nergens meer gevonden': 'már sehol sem található',
+  'Niet te zeggen wat ongebruikt is: dit kon niet gelezen worden —':
+      'Nem állapítható meg, mi használatlan: ezeket nem sikerült beolvasni —',
+  'Elke afbeelding wordt ergens gebruikt.':
+      'Minden kép használatban van valahol.',
+  'afbeeldingen worden nergens meer aangehaald — ook niet in een uitgebrachte versie. Dit is een voorstel, geen oordeel: op een andere branch kunnen ze nog in gebruik zijn.':
+      'kép már sehol sincs hivatkozva — még kiadott verzióban sem. Ez javaslat, nem ítélet: egy másik ágon még használatban lehetnek.',
   'Soort forge': 'Forge típusa',
   'Forgejo of Gitea': 'Forgejo vagy Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':

@@ -1801,6 +1801,18 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Afbeeldingen in de repository…': 'Зображення в репозиторії…',
+  'Afbeeldingen in de repository': 'Зображення в репозиторії',
+  'afbeeldingen in de gedeelde pool': 'зображень у спільному пулі',
+  'De pool is nog leeg.': 'Пул ще порожній.',
+  'alleen nog in een uitgebrachte versie:': 'тепер лише у випущеній версії:',
+  'nergens meer gevonden': 'більше ніде не знайдено',
+  'Niet te zeggen wat ongebruikt is: dit kon niet gelezen worden —':
+      'Неможливо визначити, що не використовується: це не вдалося прочитати —',
+  'Elke afbeelding wordt ergens gebruikt.':
+      'Кожне зображення десь використовується.',
+  'afbeeldingen worden nergens meer aangehaald — ook niet in een uitgebrachte versie. Dit is een voorstel, geen oordeel: op een andere branch kunnen ze nog in gebruik zijn.':
+      'зображень більше ніде не згадуються — навіть у випущеній версії. Це пропозиція, а не вирок: вони можуть ще використовуватися в іншій гілці.',
   'Soort forge': 'Тип форджа',
   'Forgejo of Gitea': 'Forgejo або Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':

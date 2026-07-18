@@ -1813,6 +1813,17 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Afbeeldingen in de repository…': 'Imagens no repositório…',
+  'Afbeeldingen in de repository': 'Imagens no repositório',
+  'afbeeldingen in de gedeelde pool': 'imagens no conjunto partilhado',
+  'De pool is nog leeg.': 'O conjunto ainda está vazio.',
+  'alleen nog in een uitgebrachte versie:': 'agora só numa versão publicada:',
+  'nergens meer gevonden': 'já não encontrada em lado nenhum',
+  'Niet te zeggen wat ongebruikt is: dit kon niet gelezen worden —':
+      'Não é possível dizer o que está sem uso: não foi possível ler —',
+  'Elke afbeelding wordt ergens gebruikt.': 'Cada imagem é usada nalgum lado.',
+  'afbeeldingen worden nergens meer aangehaald — ook niet in een uitgebrachte versie. Dit is een voorstel, geen oordeel: op een andere branch kunnen ze nog in gebruik zijn.':
+      'imagens já não são referenciadas em lado nenhum — nem sequer numa versão publicada. Isto é uma sugestão, não um veredicto: podem ainda estar em uso noutro ramo.',
   'Soort forge': 'Tipo de forge',
   'Forgejo of Gitea': 'Forgejo ou Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':

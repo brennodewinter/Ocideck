@@ -1782,6 +1782,17 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Afbeeldingen in de repository…': 'Billeder i repositoriet…',
+  'Afbeeldingen in de repository': 'Billeder i repositoriet',
+  'afbeeldingen in de gedeelde pool': 'billeder i den delte pulje',
+  'De pool is nog leeg.': 'Puljen er stadig tom.',
+  'alleen nog in een uitgebrachte versie:': 'kun i en udgivet version nu:',
+  'nergens meer gevonden': 'findes ikke længere nogen steder',
+  'Niet te zeggen wat ongebruikt is: dit kon niet gelezen worden —':
+      'Kan ikke afgøre, hvad der er ubrugt: dette kunne ikke læses —',
+  'Elke afbeelding wordt ergens gebruikt.': 'Hvert billede bruges et sted.',
+  'afbeeldingen worden nergens meer aangehaald — ook niet in een uitgebrachte versie. Dit is een voorstel, geen oordeel: op een andere branch kunnen ze nog in gebruik zijn.':
+      'billeder refereres ikke længere nogen steder — heller ikke i en udgivet version. Det er et forslag, ikke en dom: de kan stadig være i brug på en anden gren.',
   'Soort forge': 'Forge-type',
   'Forgejo of Gitea': 'Forgejo eller Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':

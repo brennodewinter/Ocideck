@@ -1787,6 +1787,18 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Afbeeldingen in de repository…': 'Bilder im Repository…',
+  'Afbeeldingen in de repository': 'Bilder im Repository',
+  'afbeeldingen in de gedeelde pool': 'Bilder im gmeinsame Pool',
+  'De pool is nog leeg.': 'De Pool isch no leer.',
+  'alleen nog in een uitgebrachte versie:':
+      'nume no in ere veröffentlichte Version:',
+  'nergens meer gevonden': 'niene meh gfunde',
+  'Niet te zeggen wat ongebruikt is: dit kon niet gelezen worden —':
+      'Nid feststellbar, was ungnutzt isch: das het mer nid chöne läse —',
+  'Elke afbeelding wordt ergens gebruikt.': 'Jedes Bild wird öppis brucht.',
+  'afbeeldingen worden nergens meer aangehaald — ook niet in een uitgebrachte versie. Dit is een voorstel, geen oordeel: op een andere branch kunnen ze nog in gebruik zijn.':
+      'Bilder werde niene meh referenziert — au nid in ere veröffentlichte Version. Das isch e Vorschlag, kes Urteil: uf eme andere Zwyg chönd si no bruucht werde.',
   'Soort forge': 'Forge-Typ',
   'Forgejo of Gitea': 'Forgejo oder Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':

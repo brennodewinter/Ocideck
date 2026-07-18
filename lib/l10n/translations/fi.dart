@@ -1783,6 +1783,17 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Afbeeldingen in de repository…': 'Kuvat repositoriossa…',
+  'Afbeeldingen in de repository': 'Kuvat repositoriossa',
+  'afbeeldingen in de gedeelde pool': 'kuvaa jaetussa varastossa',
+  'De pool is nog leeg.': 'Varasto on vielä tyhjä.',
+  'alleen nog in een uitgebrachte versie:': 'enää vain julkaistussa versiossa:',
+  'nergens meer gevonden': 'ei enää löydy mistään',
+  'Niet te zeggen wat ongebruikt is: dit kon niet gelezen worden —':
+      'Ei voi sanoa, mikä on käyttämätöntä: näitä ei voitu lukea —',
+  'Elke afbeelding wordt ergens gebruikt.': 'Jokaista kuvaa käytetään jossain.',
+  'afbeeldingen worden nergens meer aangehaald — ook niet in een uitgebrachte versie. Dit is een voorstel, geen oordeel: op een andere branch kunnen ze nog in gebruik zijn.':
+      'kuvaan ei enää viitata missään — ei edes julkaistussa versiossa. Tämä on ehdotus, ei tuomio: ne voivat olla yhä käytössä toisessa haarassa.',
   'Soort forge': 'Forgen tyyppi',
   'Forgejo of Gitea': 'Forgejo tai Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':

@@ -946,13 +946,35 @@ Each phase is shippable and preserves the invariants.
   the largest remaining risk in this phase.
 
 ### Phase 6 — Cross-deck search & polish
-- Server-side code/image search per provider, native `git grep` on a clone, local
-  index fallback; token-scope guidance UI.
-- `AssetIndex` — the reverse index over the pool (moved here from Phase 1: this
-  is where "which decks use this image" and the manual asset GC of §6.2 finally
-  have a caller). Note the split it must keep: image search may answer from an
-  incomplete index, but "nothing uses this" may not — an unreadable deck could be
-  the one user of an asset, and deleting is irreversible (P2).
+
+**Shipped: `AssetIndex` and its viewer.** The reverse index over the pool moved
+here from Phase 1 because this is where it finally has a caller. One pass over
+the repo — every `deck.md`, then the pool — inverted into asset → users, behind
+*Afbeeldingen in de repository…*.
+
+- References are found by **scanning the raw markdown**, not by parsing it. A
+  slide type the parser skips would otherwise hide a reference, and a missed
+  reference marks an asset as unused. That error is the expensive one.
+- **Release tags count as users.** An image pulled from the current text is
+  usually still in the version presented last quarter, and that version has to
+  keep rendering. So `unusedAssets()` always scans the tags too — never the
+  cheaper branch-only pass. `build(includeReleases: false)` stays for image
+  search, which does not need them and would pay a read per tag.
+- The split the index has to keep: **image search may answer from an incomplete
+  index; "nothing uses this" may not.** Whoever the search lists really is a
+  user, so a deck that failed to read only shortens that answer. But an
+  unreadable deck — or an unreadable release — could be the *one* user of an
+  asset, and deleting is irreversible (P2). So an incomplete round makes
+  `unusedAssets()` throw, and the viewer shows what could not be read instead of
+  a candidate list.
+- Even a complete list is a **proposal, not a verdict**: the round covers one
+  branch, and another branch may still use what looks orphaned here. The viewer
+  says so where the number is.
+- **Deletion is not built.** The index names candidates; removing them is the
+  irreversible half and is deliberately still §6.2's manual job.
+
+**Open:** server-side code/image search per provider, native `git grep` on a
+clone, local index fallback; token-scope guidance UI.
 
 ### Coverage against the requirements
 | Requirement | Delivered by |
@@ -967,7 +989,7 @@ Each phase is shippable and preserves the invariants.
 | Versions of one deck = tags | Phase 4 |
 | Async collaboration | Phase 4 (falls out of PR + attribution) |
 | Forgejo / GitHub / GitLab | All three, behind one `GitForge` (Phase 5) |
-| Text + image search | Phase 6 (within-deck already works) |
+| Text + image search | Image side: `AssetIndex` (Phase 6). Text side: open |
 
 > **On "real merges".** This row said *Phase 3* until it was corrected: Phase 3
 > shipped the native clone and durable local commits, but merging a concurrent
