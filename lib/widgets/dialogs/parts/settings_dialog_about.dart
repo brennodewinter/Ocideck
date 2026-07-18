@@ -121,6 +121,9 @@ extension _SettingsAbout on _SettingsDialogState {
         const SizedBox(height: 18),
 
         // ── Contact details ──────────────────────────────────────────────────
+        _standardsSection(l10n),
+        const SizedBox(height: 18),
+
         _aboutHeading(Icons.contact_mail_outlined, l10n.d('Contact')),
         _aboutCard(
           Column(

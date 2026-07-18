@@ -1790,6 +1790,11 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Gebundelde standaarden': 'Uključeni standardi',
+  'geen versienummer': 'bez broja verzije',
+  'Bron': 'Izvor',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Verzije u ovom primjerku. Izvještaj o pentestu treba navesti prema čemu se testiralo — i koja je to verzija bila.',
   'Zoeken in alle decks…': 'Pretraži sve špilove…',
   'Zoeken in alle decks': 'Pretraži sve špilove',
   'Zoekterm': 'Pojam za pretragu',

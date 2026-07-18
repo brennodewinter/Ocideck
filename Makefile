@@ -254,6 +254,14 @@ deps-check:
 	@echo "Failure means: a bundle drifted from the manifest, or a pinned version"
 	@echo "        now has a known vulnerability — upgrade it and refresh the manifest."
 	dart run tool/check_bundled_js.dart
+	@echo ""
+	@echo "== OciDeck check: bundled reference standards =="
+	@echo "Command: dart run tool/check_reference_data.dart"
+	@echo "Covers: WSTG, CWE, MIAUW and CVSS — the bundled version vs upstream."
+	@echo "Failure means: a standard we bundle has moved on. Update the catalogue,"
+	@echo "        the version in lib/services/reference_standards.dart and"
+	@echo "        docs/LICENSE_COMPLIANCE.md, and re-check the source licence."
+	dart run tool/check_reference_data.dart
 
 # Open-source licence compliance check for all resolved dependencies.
 licenses:

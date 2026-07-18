@@ -1783,6 +1783,11 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Gebundelde standaarden': 'Standar bawaan',
+  'geen versienummer': 'tanpa nomor versi',
+  'Bron': 'Sumber',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Versi yang ada dalam salinan ini. Laporan pentest harus menyebutkan terhadap apa pengujian dilakukan — dan versi mana itu.',
   'Zoeken in alle decks…': 'Cari di semua dek…',
   'Zoeken in alle decks': 'Cari di semua dek',
   'Zoekterm': 'Kata pencarian',

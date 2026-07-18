@@ -740,6 +740,11 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Gebundelde standaarden': 'Standarnan inkluí',
+  'geen versienummer': 'sin number di vershon',
+  'Bron': 'Fuente',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'E vershonnan den e kopia aki. Un rapòrt di pentest mester menshoná kontra kiko a wòrdu testá — i kua vershon esei tabata.',
   'Zoeken in alle decks…': 'Buska den tur e deknan…',
   'Zoeken in alle decks': 'Buska den tur e deknan',
   'Zoekterm': 'Palabra di buskeda',

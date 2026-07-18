@@ -1806,6 +1806,11 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Gebundelde standaarden': 'Вградени стандарти',
+  'geen versienummer': 'без номер на версия',
+  'Bron': 'Източник',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Версиите в това копие. Докладът от пентест трябва да посочва спрямо какво е тествано — и коя версия.',
   'Zoeken in alle decks…': 'Търсене във всички колоди…',
   'Zoeken in alle decks': 'Търсене във всички колоди',
   'Zoekterm': 'Търсен израз',

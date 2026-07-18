@@ -1811,6 +1811,11 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Gebundelde standaarden': 'Ενσωματωμένα πρότυπα',
+  'geen versienummer': 'χωρίς αριθμό έκδοσης',
+  'Bron': 'Πηγή',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'Οι εκδόσεις σε αυτό το αντίτυπο. Μια αναφορά pentest πρέπει να δηλώνει έναντι τίνος ελέγχθηκε — και σε ποια έκδοση.',
   'Zoeken in alle decks…': 'Αναζήτηση σε όλες τις παρουσιάσεις…',
   'Zoeken in alle decks': 'Αναζήτηση σε όλες τις παρουσιάσεις',
   'Zoekterm': 'Όρος αναζήτησης',

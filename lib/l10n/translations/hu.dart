@@ -1787,6 +1787,11 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Gebundelde standaarden': 'Mellékelt szabványok',
+  'geen versienummer': 'nincs verziószám',
+  'Bron': 'Forrás',
+  'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
+      'A példányban szereplő verziók. A pentestjelentésnek meg kell adnia, mihez képest történt a vizsgálat — és melyik verzióhoz.',
   'Zoeken in alle decks…': 'Keresés minden pakliban…',
   'Zoeken in alle decks': 'Keresés minden pakliban',
   'Zoekterm': 'Keresőkifejezés',
