@@ -39,18 +39,34 @@ class BrowserGitTransport implements GitTransport {
   }) => _send(uri, headers: headers, maxBytes: maxBytes);
 
   @override
-  Future<GitResponse> post(
+  Future<GitResponse> send(
+    String method,
     Uri uri, {
     required Map<String, String> headers,
     required List<int> body,
     required int maxBytes,
-  }) => _send(uri, headers: headers, body: body, maxBytes: maxBytes);
+  }) async {
+    if (!GitTransport.writeMethods.contains(method)) {
+      throw GitForgeException(
+        GitForgeError.malformed,
+        'Onbekend schrijf-werkwoord: $method',
+      );
+    }
+    return _send(
+      uri,
+      headers: headers,
+      body: body,
+      maxBytes: maxBytes,
+      method: method,
+    );
+  }
 
   Future<GitResponse> _send(
     Uri uri, {
     required Map<String, String> headers,
     required int maxBytes,
     List<int>? body,
+    String method = 'GET',
   }) async {
     if (!config.isConfigured) {
       throw const GitForgeException(
@@ -66,7 +82,13 @@ class BrowserGitTransport implements GitTransport {
       );
     }
 
-    final direct = await _fetchCapped(uri, headers, maxBytes, body: body);
+    final direct = await _fetchCapped(
+      uri,
+      headers,
+      maxBytes,
+      body: body,
+      method: method,
+    );
     if (direct != null) return direct;
 
     // Een schrijfactie gaat nooit door het fetch-hulppunt. Los van het token
@@ -108,6 +130,28 @@ class BrowserGitTransport implements GitTransport {
     );
   }
 
+  /// Eén http-verzoek met het gevraagde werkwoord. De browser-client kent ze
+  /// allemaal; dit vertaalt alleen de naam naar de juiste aanroep.
+  Future<http.Response> _issue(
+    String method,
+    Uri uri,
+    Map<String, String>? headers,
+    List<int>? body,
+  ) {
+    switch (method) {
+      case 'POST':
+        return _client.post(uri, headers: headers, body: body);
+      case 'PUT':
+        return _client.put(uri, headers: headers, body: body);
+      case 'PATCH':
+        return _client.patch(uri, headers: headers, body: body);
+      case 'DELETE':
+        return _client.delete(uri, headers: headers, body: body);
+      default:
+        return _client.get(uri, headers: headers);
+    }
+  }
+
   /// Een verzoek mét token gaat **nooit** door het fetch-hulppunt. Dat punt
   /// haalt server-zijdig op, dus het zou het personal access token in handen
   /// krijgen en het namens de gebruiker doorsturen — precies wat §10.1 met
@@ -125,14 +169,11 @@ class BrowserGitTransport implements GitTransport {
     int maxBytes, {
     Duration timeout = const Duration(seconds: 30),
     List<int>? body,
+    String method = 'GET',
   }) async {
     try {
       final h = headers.isEmpty ? null : headers;
-      final response =
-          await (body == null
-                  ? _client.get(uri, headers: h)
-                  : _client.post(uri, headers: h, body: body))
-              .timeout(timeout);
+      final response = await _issue(method, uri, h, body).timeout(timeout);
       final bytes = response.bodyBytes;
       if (bytes.length > maxBytes) {
         throw const GitForgeException(

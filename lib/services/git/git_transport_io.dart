@@ -33,12 +33,21 @@ class PinnedGitTransport implements GitTransport {
   }) => _send('GET', uri, headers: headers, maxBytes: maxBytes);
 
   @override
-  Future<GitResponse> post(
+  Future<GitResponse> send(
+    String method,
     Uri uri, {
     required Map<String, String> headers,
     required List<int> body,
     required int maxBytes,
-  }) => _send('POST', uri, headers: headers, body: body, maxBytes: maxBytes);
+  }) async {
+    if (!GitTransport.writeMethods.contains(method)) {
+      throw GitForgeException(
+        GitForgeError.malformed,
+        'Onbekend schrijf-werkwoord: $method',
+      );
+    }
+    return _send(method, uri, headers: headers, body: body, maxBytes: maxBytes);
+  }
 
   Future<GitResponse> _send(
     String method,

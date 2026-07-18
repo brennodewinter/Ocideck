@@ -245,6 +245,31 @@ void main() {
       },
     );
 
+    test('refuses a write method outside the allowlist', () async {
+      // `send` takes the verb as a string because the forges disagree about
+      // which one goes where. That is convenient for the adapters and exactly
+      // why the transport, being the chokepoint, pins down the set.
+      for (final method in ['TRACE', 'CONNECT', 'get', 'POST ', '']) {
+        await expectLater(
+          PinnedGitTransport(_config).send(
+            method,
+            Uri.parse('https://git.example.org/x'),
+            headers: const {},
+            body: const [],
+            maxBytes: 8,
+          ),
+          throwsA(
+            isA<GitForgeException>().having(
+              (e) => e.kind,
+              'kind',
+              GitForgeError.malformed,
+            ),
+          ),
+          reason: method,
+        );
+      }
+    });
+
     test('refuses a uri that leaves the configured origin', () async {
       // A pinned client must never be pointed at another host: that is what the
       // pin is for.
