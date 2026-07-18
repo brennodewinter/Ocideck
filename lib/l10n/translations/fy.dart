@@ -741,6 +741,15 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Zoeken in alle decks…': 'Sykje yn alle decks…',
+  'Zoeken in alle decks': 'Sykje yn alle decks',
+  'Zoekterm': 'Sykterm',
+  'Niets gevonden.': 'Neat fûn.',
+  'vindplaatsen': 'fynplakken',
+  'deck-eigenschappen': 'deck-eigenskippen',
+  'Er zijn meer treffers dan hier passen; verfijn de zoekterm.':
+      'Der binne mear treffers as hjir passe; ferfynje de sykterm.',
+  'Niet doorzocht, want onleesbaar:': 'Net trochsocht, want ûnlêsber:',
   'Afbeeldingen in de repository…': 'Ofbyldings yn it repository…',
   'Afbeeldingen in de repository': 'Ofbyldings yn it repository',
   'afbeeldingen in de gedeelde pool': 'ofbyldings yn de dielde pool',

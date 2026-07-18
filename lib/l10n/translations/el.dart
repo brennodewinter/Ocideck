@@ -1811,6 +1811,15 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Zoeken in alle decks…': 'Αναζήτηση σε όλες τις παρουσιάσεις…',
+  'Zoeken in alle decks': 'Αναζήτηση σε όλες τις παρουσιάσεις',
+  'Zoekterm': 'Όρος αναζήτησης',
+  'Niets gevonden.': 'Δεν βρέθηκε τίποτα.',
+  'vindplaatsen': 'εμφανίσεις',
+  'deck-eigenschappen': 'ιδιότητες παρουσίασης',
+  'Er zijn meer treffers dan hier passen; verfijn de zoekterm.':
+      'Υπάρχουν περισσότερα αποτελέσματα από όσα χωρούν εδώ· περιορίστε τον όρο.',
+  'Niet doorzocht, want onleesbaar:': 'Δεν αναζητήθηκε, γιατί δεν διαβάζεται:',
   'Afbeeldingen in de repository…': 'Εικόνες στο αποθετήριο…',
   'Afbeeldingen in de repository': 'Εικόνες στο αποθετήριο',
   'afbeeldingen in de gedeelde pool': 'εικόνες στην κοινή δεξαμενή',

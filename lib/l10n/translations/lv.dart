@@ -1782,6 +1782,15 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Zoeken in alle decks…': 'Meklēt visās kavās…',
+  'Zoeken in alle decks': 'Meklēt visās kavās',
+  'Zoekterm': 'Meklējamais vārds',
+  'Niets gevonden.': 'Nekas nav atrasts.',
+  'vindplaatsen': 'atradumi',
+  'deck-eigenschappen': 'kavas rekvizīti',
+  'Er zijn meer treffers dan hier passen; verfijn de zoekterm.':
+      'Rezultātu ir vairāk, nekā šeit ietilpst; precizējiet meklējamo vārdu.',
+  'Niet doorzocht, want onleesbaar:': 'Nav pārmeklēts, jo nav nolasāms:',
   'Afbeeldingen in de repository…': 'Attēli repozitorijā…',
   'Afbeeldingen in de repository': 'Attēli repozitorijā',
   'afbeeldingen in de gedeelde pool': 'attēli koplietošanas kopā',

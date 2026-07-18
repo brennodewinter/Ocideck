@@ -1819,6 +1819,16 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Zoeken in alle decks…': 'Cuardaigh gach deic…',
+  'Zoeken in alle decks': 'Cuardaigh gach deic',
+  'Zoekterm': 'Téarma cuardaigh',
+  'Niets gevonden.': 'Níor aimsíodh aon rud.',
+  'vindplaatsen': 'teagmhais',
+  'deck-eigenschappen': 'airíonna na deice',
+  'Er zijn meer treffers dan hier passen; verfijn de zoekterm.':
+      'Tá níos mó torthaí ann ná mar a oireann anseo; beachtaigh an téarma cuardaigh.',
+  'Niet doorzocht, want onleesbaar:':
+      'Gan chuardach, toisc go bhfuil sé doléite:',
   'Afbeeldingen in de repository…': 'Íomhánna sa stór…',
   'Afbeeldingen in de repository': 'Íomhánna sa stór',
   'afbeeldingen in de gedeelde pool': 'íomhá sa linn roinnte',

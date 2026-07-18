@@ -8,6 +8,14 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Search across every deck in the repository, not just the open one.**
+  *Zoeken in alle decks…* in the `…` menu searches every deck in the git
+  repository and tells you exactly where each hit sits: which deck, which slide,
+  and the line it is on. Pick one and that deck opens. If a deck could not be
+  read, you still get the hits from the rest — with a note naming the deck that
+  was skipped, because a search that is quietly short is worse than one that
+  admits it. The same when there are more hits than fit: it says so instead of
+  cutting the list in silence.
 - **See which decks use which image — and what nothing uses any more.**
   *Afbeeldingen in de repository…* in the `…` menu lists every image in the
   shared pool with the decks that reference it. Images pulled from the current

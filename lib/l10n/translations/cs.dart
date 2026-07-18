@@ -1786,6 +1786,15 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Zoeken in alle decks…': 'Hledat ve všech sadách…',
+  'Zoeken in alle decks': 'Hledat ve všech sadách',
+  'Zoekterm': 'Hledaný výraz',
+  'Niets gevonden.': 'Nic nenalezeno.',
+  'vindplaatsen': 'výskytů',
+  'deck-eigenschappen': 'vlastnosti sady',
+  'Er zijn meer treffers dan hier passen; verfijn de zoekterm.':
+      'Výsledků je víc, než se sem vejde; zpřesněte hledaný výraz.',
+  'Niet doorzocht, want onleesbaar:': 'Neprohledáno, protože nečitelné:',
   'Afbeeldingen in de repository…': 'Obrázky v repozitáři…',
   'Afbeeldingen in de repository': 'Obrázky v repozitáři',
   'afbeeldingen in de gedeelde pool': 'obrázků ve sdílené zásobě',

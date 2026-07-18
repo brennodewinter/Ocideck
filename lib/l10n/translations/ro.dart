@@ -1802,6 +1802,15 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Zoeken in alle decks…': 'Caută în toate pachetele…',
+  'Zoeken in alle decks': 'Caută în toate pachetele',
+  'Zoekterm': 'Termen de căutare',
+  'Niets gevonden.': 'Nu s-a găsit nimic.',
+  'vindplaatsen': 'apariții',
+  'deck-eigenschappen': 'proprietățile pachetului',
+  'Er zijn meer treffers dan hier passen; verfijn de zoekterm.':
+      'Sunt mai multe rezultate decât încap aici; rafinați termenul de căutare.',
+  'Niet doorzocht, want onleesbaar:': 'Nu a fost căutat, fiind ilizibil:',
   'Afbeeldingen in de repository…': 'Imagini din repozitoriu…',
   'Afbeeldingen in de repository': 'Imagini din repozitoriu',
   'afbeeldingen in de gedeelde pool': 'imagini în fondul comun',

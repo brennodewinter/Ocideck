@@ -737,6 +737,15 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Zoeken in alle decks…': 'Buscar en todas las presentaciones…',
+  'Zoeken in alle decks': 'Buscar en todas las presentaciones',
+  'Zoekterm': 'Término de búsqueda',
+  'Niets gevonden.': 'No se encontró nada.',
+  'vindplaatsen': 'apariciones',
+  'deck-eigenschappen': 'propiedades de la presentación',
+  'Er zijn meer treffers dan hier passen; verfijn de zoekterm.':
+      'Hay más coincidencias de las que caben aquí; afina el término de búsqueda.',
+  'Niet doorzocht, want onleesbaar:': 'No buscado, por ilegible:',
   'Afbeeldingen in de repository…': 'Imágenes del repositorio…',
   'Afbeeldingen in de repository': 'Imágenes del repositorio',
   'afbeeldingen in de gedeelde pool': 'imágenes en el grupo compartido',

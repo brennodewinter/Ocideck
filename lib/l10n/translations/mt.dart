@@ -1806,6 +1806,15 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Zoeken in alle decks…': 'Fittex fid-decks kollha…',
+  'Zoeken in alle decks': 'Fittex fid-decks kollha',
+  'Zoekterm': 'Terminu tat-tfittxija',
+  'Niets gevonden.': 'Ma nstab xejn.',
+  'vindplaatsen': 'okkorrenzi',
+  'deck-eigenschappen': 'proprjetajiet tad-deck',
+  'Er zijn meer treffers dan hier passen; verfijn de zoekterm.':
+      'Hemm aktar riżultati milli jidħlu hawn; irfina t-terminu tat-tfittxija.',
+  'Niet doorzocht, want onleesbaar:': 'Ma ġiex imfittex, għax ma jinqarax:',
   'Afbeeldingen in de repository…': 'Immaġni fir-repożitorju…',
   'Afbeeldingen in de repository': 'Immaġni fir-repożitorju',
   'afbeeldingen in de gedeelde pool': 'immaġni fil-ġabra kondiviża',

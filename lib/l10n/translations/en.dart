@@ -922,6 +922,15 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Zoeken in alle decks…': 'Search all decks…',
+  'Zoeken in alle decks': 'Search all decks',
+  'Zoekterm': 'Search term',
+  'Niets gevonden.': 'Nothing found.',
+  'vindplaatsen': 'occurrences',
+  'deck-eigenschappen': 'deck properties',
+  'Er zijn meer treffers dan hier passen; verfijn de zoekterm.':
+      'There are more matches than fit here; refine the search term.',
+  'Niet doorzocht, want onleesbaar:': 'Not searched, because unreadable:',
   'Afbeeldingen in de repository…': 'Images in the repository…',
   'Afbeeldingen in de repository': 'Images in the repository',
   'afbeeldingen in de gedeelde pool': 'images in the shared pool',

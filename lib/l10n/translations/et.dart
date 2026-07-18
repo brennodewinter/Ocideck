@@ -1774,6 +1774,15 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Zoeken in alle decks…': 'Otsi kõigist pakkidest…',
+  'Zoeken in alle decks': 'Otsi kõigist pakkidest',
+  'Zoekterm': 'Otsingusõna',
+  'Niets gevonden.': 'Midagi ei leitud.',
+  'vindplaatsen': 'esinemist',
+  'deck-eigenschappen': 'paki omadused',
+  'Er zijn meer treffers dan hier passen; verfijn de zoekterm.':
+      'Vasteid on rohkem, kui siia mahub; täpsusta otsingusõna.',
+  'Niet doorzocht, want onleesbaar:': 'Ei otsitud, sest pole loetav:',
   'Afbeeldingen in de repository…': 'Pildid repositooriumis…',
   'Afbeeldingen in de repository': 'Pildid repositooriumis',
   'afbeeldingen in de gedeelde pool': 'pilti jagatud kogumis',

@@ -1758,6 +1758,15 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Zoeken in alle decks…': 'Hoch deck-Daq Sam…',
+  'Zoeken in alle decks': 'Hoch deck-Daq Sam',
+  'Zoekterm': 'nejwI\' mu\'',
+  'Niets gevonden.': 'pagh tu\'lu\'.',
+  'vindplaatsen': 'tu\'lu\'ghach',
+  'deck-eigenschappen': 'deck Segh',
+  'Er zijn meer treffers dan hier passen; verfijn de zoekterm.':
+      'law\' law\' tu\'lu\'; nejwI\' mu\' choH.',
+  'Niet doorzocht, want onleesbaar:': 'laDlaHbe\'mo\' nejlu\'be\':',
   'Afbeeldingen in de repository…': 'repository nagh mIllogh…',
   'Afbeeldingen in de repository': 'repository nagh mIllogh',
   'afbeeldingen in de gedeelde pool': 'pool-Daq mIllogh',

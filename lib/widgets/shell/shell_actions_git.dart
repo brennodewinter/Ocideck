@@ -667,6 +667,36 @@ Future<void> _showAssetUsage(BuildContext context, WidgetRef ref) async {
   );
 }
 
+/// Zoek over alle decks in de repo en open de gekozen vindplaats.
+Future<void> _searchDecks(BuildContext context, WidgetRef ref) async {
+  final config = ref.read(settingsProvider).gitRepo;
+  if (config == null) return;
+  final forge = await ref.read(gitForgeProvider.future);
+  if (!context.mounted) return;
+  if (forge == null) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          context.l10n.d(
+            'Stel eerst een git-repository in bij Instellingen → Git-repository.',
+          ),
+        ),
+      ),
+    );
+    return;
+  }
+
+  final deckDir = await showDialog<String>(
+    context: context,
+    builder: (_) => _GitSearchDialog(
+      searcher: DeckSearch(forge: forge, branch: config.defaultBranch),
+    ),
+  );
+  if (deckDir == null || !context.mounted) return;
+  // Langs het gewone openpad: dezelfde gate, dezelfde native/REST-keuze.
+  await _openFromGit(context, ref, deckDir: deckDir);
+}
+
 /// Maak een geldige deknaam (§6) uit een deck-titel, of een nette terugval.
 String _safeDeckName(String title) {
   final cleaned = title

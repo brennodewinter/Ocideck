@@ -1799,6 +1799,15 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Zoeken in alle decks…': 'In omnibus fasciculis quaerere…',
+  'Zoeken in alle decks': 'In omnibus fasciculis quaerere',
+  'Zoekterm': 'Vocabulum quaesitum',
+  'Niets gevonden.': 'Nihil inventum.',
+  'vindplaatsen': 'loci reperti',
+  'deck-eigenschappen': 'proprietates fasciculi',
+  'Er zijn meer treffers dan hier passen; verfijn de zoekterm.':
+      'Plura sunt inventa quam hic capiuntur; vocabulum quaesitum acue.',
+  'Niet doorzocht, want onleesbaar:': 'Non quaesitum, quia illegibile:',
   'Afbeeldingen in de repository…': 'Imagines in repositorio…',
   'Afbeeldingen in de repository': 'Imagines in repositorio',
   'afbeeldingen in de gedeelde pool': 'imagines in copia communi',

@@ -740,6 +740,15 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Zoeken in alle decks…': 'Rechercher dans tous les decks…',
+  'Zoeken in alle decks': 'Rechercher dans tous les decks',
+  'Zoekterm': 'Terme recherché',
+  'Niets gevonden.': 'Aucun résultat.',
+  'vindplaatsen': 'occurrences',
+  'deck-eigenschappen': 'propriétés du deck',
+  'Er zijn meer treffers dan hier passen; verfijn de zoekterm.':
+      'Il y a plus de résultats que ce qui tient ici ; affinez le terme recherché.',
+  'Niet doorzocht, want onleesbaar:': 'Non parcouru, car illisible :',
   'Afbeeldingen in de repository…': 'Images du dépôt…',
   'Afbeeldingen in de repository': 'Images du dépôt',
   'afbeeldingen in de gedeelde pool': 'images dans le pool partagé',

@@ -973,8 +973,28 @@ the repo — every `deck.md`, then the pool — inverted into asset → users, b
 - **Deletion is not built.** The index names candidates; removing them is the
   irreversible half and is deliberately still §6.2's manual job.
 
-**Open:** server-side code/image search per provider, native `git grep` on a
-clone, local index fallback; token-scope guidance UI.
+**Shipped: cross-deck text search.** `DeckSearch` — the text twin of the asset
+index, same one pass over the repo, behind *Zoeken in alle decks…*.
+
+- **The opposite failure direction from the asset index, on purpose.** There the
+  answer is "nothing uses this" and an irreversible deletion follows, so an
+  unreadable deck makes it refuse. Here every hit shown is true whatever else
+  failed to read, so a partial answer beats no answer — as long as the screen
+  says which deck it could not read. Silently short is the bad outcome, not
+  short.
+- Hits are attributed to a **slide**, using the parser's own fence-aware
+  `splitSlideBlocks`. A naive `split('---')` would treat a `---` inside a YAML
+  or diff code block as a slide boundary and point the user at the wrong slide.
+  The splitter, not the full parse: search has to work on a deck that does not
+  currently parse.
+- Truncation means **a real match went unreported** — not "the list happens to
+  be full". A cap that quietly drops matches would make search lie by omission.
+- Opening a hit goes through the **existing** open-from-git path (`_openFromGit`
+  gained an optional `deckDir`), so it passes the same import gate and the same
+  native/REST choice as the browser instead of growing a second open path.
+
+**Open:** server-side search per provider (the forges can do this far cheaper
+than N reads), native `git grep` on a clone, and token-scope guidance UI.
 
 ### Coverage against the requirements
 | Requirement | Delivered by |
@@ -989,7 +1009,7 @@ clone, local index fallback; token-scope guidance UI.
 | Versions of one deck = tags | Phase 4 |
 | Async collaboration | Phase 4 (falls out of PR + attribution) |
 | Forgejo / GitHub / GitLab | All three, behind one `GitForge` (Phase 5) |
-| Text + image search | Image side: `AssetIndex` (Phase 6). Text side: open |
+| Text + image search | Both: `AssetIndex` + `DeckSearch` (Phase 6) |
 
 > **On "real merges".** This row said *Phase 3* until it was corrected: Phase 3
 > shipped the native clone and durable local commits, but merging a concurrent

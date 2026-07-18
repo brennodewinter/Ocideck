@@ -1783,6 +1783,15 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Zoeken in alle decks…': 'Cari di semua dek…',
+  'Zoeken in alle decks': 'Cari di semua dek',
+  'Zoekterm': 'Kata pencarian',
+  'Niets gevonden.': 'Tidak ada yang ditemukan.',
+  'vindplaatsen': 'kemunculan',
+  'deck-eigenschappen': 'properti dek',
+  'Er zijn meer treffers dan hier passen; verfijn de zoekterm.':
+      'Ada lebih banyak hasil daripada yang muat di sini; persempit kata pencarian.',
+  'Niet doorzocht, want onleesbaar:': 'Tidak dicari, karena tak terbaca:',
   'Afbeeldingen in de repository…': 'Gambar di repositori…',
   'Afbeeldingen in de repository': 'Gambar di repositori',
   'afbeeldingen in de gedeelde pool': 'gambar di kumpulan bersama',
