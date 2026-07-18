@@ -17,8 +17,8 @@ import 'package:ocideck/services/secmodule/sec_reference_inventory.dart';
 ///
 /// So the rule is mechanical now: a dataset the app offers is a dataset whose
 /// licence is written down. `SecReferenceInventory` is the app's own registry of
-/// what it can serve, so a sixth catalogue cannot appear in the UI without
-/// failing here first.
+/// what it can serve, so a new catalogue cannot appear in the UI without
+/// failing here first. It did its job again when MASTG and MASWE landed.
 void main() {
   final doc = File('docs/LICENSE_COMPLIANCE.md').readAsStringSync();
 
@@ -28,6 +28,8 @@ void main() {
   const recorded = {
     'Zwakheden (CWE)': 'MITRE Terms of Use',
     'Testgevallen (WSTG)': 'CC-BY-SA-4.0',
+    'Testgevallen (MASTG)': 'CC-BY-SA-4.0',
+    'Mobiele zwakheden (MASWE)': 'CC-BY-SA-4.0',
     'MIAUW-eisen': 'EUPL-1.2 (same as OciDeck)',
     'CVSS-scoretabel': 'FIRST.Org',
     'Bevindingsjablonen': 'EUPL-1.2 — our content',

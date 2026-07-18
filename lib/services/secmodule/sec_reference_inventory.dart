@@ -2,6 +2,8 @@ import '../cvss/cvss4.dart';
 import '../cwe_catalog.dart';
 import '../finding_template_library.dart';
 import '../miauw_eis_catalog.dart';
+import '../mastg_catalog.dart';
+import '../maswe_catalog.dart';
 import '../wstg_catalog.dart';
 
 /// Eén referentiecatalogus zoals hij lokaal beschikbaar is: hoeveel erin zit,
@@ -59,6 +61,18 @@ class SecReferenceInventory {
       count: WstgCatalog.instance.tests.length,
       standard: WstgCatalog.instance.standardLabel,
       source: 'owasp.org',
+    ),
+    ReferenceCatalog(
+      name: 'Testgevallen (MASTG)',
+      count: MastgCatalog.instance.tests.length,
+      standard: MastgCatalog.instance.standardLabel,
+      source: 'mas.owasp.org',
+    ),
+    ReferenceCatalog(
+      name: 'Mobiele zwakheden (MASWE)',
+      count: MasweCatalog.instance.weaknesses.length,
+      standard: MasweCatalog.instance.standardLabel,
+      source: 'mas.owasp.org',
     ),
     ReferenceCatalog(
       name: 'MIAUW-eisen',

@@ -8,6 +8,20 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **De mobiele zwakhedenlijst (OWASP MASWE) zit erin, met de koppeling naar
+  CWE.** Elke MASTG-test verwijst naar een zwakheid; die zwakheden zijn er nu
+  ook, inclusief het CWE-nummer waar ze op uitkomen — zodat een mobiele
+  bevinding zowel in de mobiele als in de algemene taal te leggen valt. Bij de
+  gebundelde standaarden staan nu ook MASTG en MASWE vermeld.
+
+  Twee dingen die eerlijk gezegd moeten worden over deze lijst. Drie kwart van
+  de zwakheden is bij OWASP zelf nog niet uitgeschreven; die staan er wél in
+  (ernaar verwijzen is gewoon juist — je haalt een lijst aan, geen handleiding)
+  maar ze zijn gemarkeerd, zodat je weet dat de toelichting bij de bron nog dun
+  is. En MASWE brengt geen genummerde versies uit, dus wat wordt vastgelegd is
+  de **datum** van de momentopname. Dat is een zwakkere aanhaling dan bij WSTG
+  of MASTG, en het staat er zo bij in plaats van dat er een versienummer bij
+  wordt verzonnen.
 - **Mobiele pentests krijgen hun checklist: OWASP MASTG zit erin.** Tot nu toe
   kon je een scope-object wel als *mobiel* aanmerken — met MASTG als standaard —
   maar viel die checklist niet te vullen; alleen de webkant (WSTG) was gebundeld.

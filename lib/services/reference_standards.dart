@@ -1,5 +1,6 @@
 import '../models/reference_standard.dart';
 import 'mastg_catalog.dart';
+import 'maswe_catalog.dart';
 import 'wstg_catalog.dart';
 
 /// Elke referentiestandaard die OciDeck meedraagt, als data.
@@ -40,6 +41,20 @@ const referenceStandards = <ReferenceStandard>[
     licence: 'CC-BY-SA-4.0',
     probe: UpstreamProbe.githubReleases,
     probeTarget: 'OWASP/mastg',
+  ),
+  ReferenceStandard(
+    id: 'maswe',
+    name: 'OWASP MASWE',
+    bundledVersion: masweSnapshotDate,
+    url: 'https://mas.owasp.org/MASWE/',
+    bundled:
+        'De zwakhedenlijst (117): id, titel, MASVS-categorie, platform en de '
+        'CWE-koppeling. Drie kwart is bij de bron nog niet uitgeschreven; die '
+        'staan er wél in, gemarkeerd. Ingetrokken zwakheden niet.',
+    licence: 'CC-BY-SA-4.0',
+    // Geen releases, geen tags — alleen een doorlopende branch.
+    probe: UpstreamProbe.githubCommitDate,
+    probeTarget: 'OWASP/maswe',
   ),
   ReferenceStandard(
     id: 'cwe',
