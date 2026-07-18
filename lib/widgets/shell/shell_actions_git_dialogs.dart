@@ -70,6 +70,131 @@ class _GitHistoryDialog extends StatelessWidget {
   }
 }
 
+/// Kiezen per botsende slide (§8.6). Geeft terug wat er in het samengevoegde
+/// deck omgewisseld moet worden: index → de slide die daar komt, of `null` om
+/// hem weg te halen. Slides waar de gebruiker ónze kant houdt staan er niet in;
+/// die staan er al.
+class _MergeConflictDialog extends StatefulWidget {
+  final List<SlideConflict> conflicts;
+  const _MergeConflictDialog({required this.conflicts});
+
+  @override
+  State<_MergeConflictDialog> createState() => _MergeConflictDialogState();
+}
+
+class _MergeConflictDialogState extends State<_MergeConflictDialog> {
+  /// baseIndex → nemen we die van de ander? Standaard nee: onze kant blijft.
+  final Map<int, bool> _takeTheirs = {};
+
+  String _titleOf(SlideConflict c, AppLocalizations l10n) {
+    final title = (c.ours ?? c.theirs ?? c.base).title.trim();
+    return title.isEmpty ? l10n.d('(zonder titel)') : title;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return AlertDialog(
+      title: Text(l10n.d('Allebei bewerkt — kies per slide')),
+      content: SizedBox(
+        width: 560,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              l10n.d(
+                'Iemand anders bewerkte dit deck tegelijk met jou. Alles wat vanzelf kon is al samengevoegd; deze slides niet.',
+              ),
+              style: TextStyle(fontSize: 12, color: AppTheme.slate400),
+            ),
+            const SizedBox(height: 12),
+            Flexible(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: widget.conflicts.length,
+                itemBuilder: (context, i) => _row(l10n, widget.conflicts[i]),
+              ),
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text(l10n.t('cancel')),
+        ),
+        ElevatedButton(
+          onPressed: () => Navigator.pop(context, _resolution()),
+          child: Text(l10n.d('Toepassen')),
+        ),
+      ],
+    );
+  }
+
+  Widget _row(AppLocalizations l10n, SlideConflict c) {
+    final theirs = _takeTheirs[c.baseIndex] ?? false;
+    // Een verwijdering heeft geen tekst om te tonen; benoem hem dan als zodanig.
+    String label(Slide? slide, String whose) =>
+        slide == null ? '$whose — ${l10n.d('verwijderd')}' : whose;
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            _titleOf(c, l10n),
+            style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+          ),
+          const SizedBox(height: 6),
+          SegmentedButton<bool>(
+            showSelectedIcon: false,
+            segments: [
+              ButtonSegment(
+                value: false,
+                label: Text(
+                  label(c.ours, l10n.d('Mijn versie')),
+                  style: const TextStyle(fontSize: 12),
+                ),
+              ),
+              ButtonSegment(
+                value: true,
+                label: Text(
+                  label(c.theirs, l10n.d('Hun versie')),
+                  style: const TextStyle(fontSize: 12),
+                ),
+              ),
+            ],
+            selected: {theirs},
+            onSelectionChanged: (s) =>
+                setState(() => _takeTheirs[c.baseIndex] = s.first),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// Vertaal de keuzes naar wat er in het samengevoegde deck moet gebeuren.
+  /// Daar staat nu `ours ?? theirs`; alleen afwijkingen daarvan zijn werk.
+  Map<int, Slide?> _resolution() {
+    final out = <int, Slide?>{};
+    for (final c in widget.conflicts) {
+      final index = c.mergedIndex;
+      if (index == null) continue;
+      final theirs = _takeTheirs[c.baseIndex] ?? false;
+      if (theirs) {
+        // Hun kant: hun slide, of weghalen als zij hem juist weggooiden.
+        out[index] = c.theirs;
+      } else if (c.ours == null) {
+        // Onze kant wás een verwijdering, maar er staat nu hun slide.
+        out[index] = null;
+      }
+    }
+    return out;
+  }
+}
+
 /// Wat de versiekiezer teruggeeft: een versie om te openen, of het verzoek om
 /// er twee te vergelijken.
 typedef _VersionAction = ({TagRef? open, bool compare});

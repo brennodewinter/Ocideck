@@ -28,12 +28,26 @@ class SlideConflict {
   final Slide? ours;
   final Slide? theirs;
 
+  /// Waar de voorlopige keuze in [DeckMergeResult.merged] staat, of null wanneer
+  /// beide kanten hem weggooiden. Hiermee kan de UI de andere kant er zó
+  /// inwisselen zonder de merge over te doen.
+  final int? mergedIndex;
+
   const SlideConflict({
     required this.baseIndex,
     required this.base,
     required this.ours,
     required this.theirs,
+    this.mergedIndex,
   });
+
+  SlideConflict _at(int? index) => SlideConflict(
+    baseIndex: baseIndex,
+    base: base,
+    ours: ours,
+    theirs: theirs,
+    mergedIndex: index,
+  );
 
   /// Of het een verwijder-tegen-wijzig-botsing is: die leest anders dan twee
   /// concurrerende bewerkingen, want er is geen "beide versies" om te tonen.
@@ -136,9 +150,11 @@ DeckMergeResult mergeDeckVersions(
     resolved[i] = a ?? b;
   }
 
-  // Bouw op langs ónze volgorde.
+  // Bouw op langs ónze volgorde, en onthoud waar elke base-slide belandde zodat
+  // een conflict straks ter plekke omgewisseld kan worden.
   final out = <Slide>[];
   final placed = <int>{};
+  final landedAt = <int, int>{};
   for (var j = 0; j < ours.slides.length; j++) {
     final baseIndex = _baseIndexOfAfter(ourDiff, j);
     if (baseIndex == null) {
@@ -147,14 +163,20 @@ DeckMergeResult mergeDeckVersions(
     }
     placed.add(baseIndex);
     final keep = resolved[baseIndex];
-    if (keep != null) out.add(keep);
+    if (keep != null) {
+      landedAt[baseIndex] = out.length;
+      out.add(keep);
+    }
   }
   // Base-slides die wij weggooiden maar die het overleefden (de ander bewerkte
   // ze) horen er alsnog in — anders verdwijnt andermans werk stil.
   for (var i = 0; i < base.slides.length; i++) {
     if (placed.contains(i)) continue;
     final keep = resolved[i];
-    if (keep != null) out.add(keep);
+    if (keep != null) {
+      landedAt[i] = out.length;
+      out.add(keep);
+    }
   }
   // En wat alleen de ander toevoegde.
   for (var j = 0; j < theirs.slides.length; j++) {
@@ -166,7 +188,9 @@ DeckMergeResult mergeDeckVersions(
   // TLP-verhoging weggooien, en dat is precies het soort fail-open dat de rest
   // van dit pad juist dichttimmert (§9.4).
   final tlp = effectiveTlp(deckTlp: ours.tlp, slideTlp: theirs.tlp);
-  return DeckMergeResult(ours.copyWith(slides: out, tlp: tlp), conflicts);
+  return DeckMergeResult(ours.copyWith(slides: out, tlp: tlp), [
+    for (final c in conflicts) c._at(landedAt[c.baseIndex]),
+  ]);
 }
 
 /// De wijziging per base-slide, op index van de voorouder.

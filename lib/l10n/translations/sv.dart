@@ -1782,6 +1782,15 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
+      'Någon annan hade också redigerat det här decket — sammanfogat och sparat.',
+  'Keuzes toegepast — sla op om ze vast te leggen.':
+      'Valen tillämpade — spara för att registrera dem.',
+  'Allebei bewerkt — kies per slide': 'Båda har redigerat — välj per bild',
+  'Iemand anders bewerkte dit deck tegelijk met jou. Alles wat vanzelf kon is al samengevoegd; deze slides niet.':
+      'Någon annan redigerade det här decket samtidigt som du. Allt som kunde sammanfogas automatiskt har redan sammanfogats; inte de här bilderna.',
+  'Mijn versie': 'Min version',
+  'Hun versie': 'Deras version',
   'Vergelijken…': 'Jämför…',
   'Versies vergelijken': 'Jämför versioner',
   'Kies twee versies; de oudste van de twee is het vertrekpunt.':

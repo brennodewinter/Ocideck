@@ -1785,6 +1785,16 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
+      'Ta komplet je urejal še nekdo drug — združeno in shranjeno.',
+  'Keuzes toegepast — sla op om ze vast te leggen.':
+      'Izbire uporabljene — shrani, da jih zabeležiš.',
+  'Allebei bewerkt — kies per slide':
+      'Urejala sta oba — izberi za vsak diapozitiv',
+  'Iemand anders bewerkte dit deck tegelijk met jou. Alles wat vanzelf kon is al samengevoegd; deze slides niet.':
+      'Ta komplet je hkrati s tabo urejal še nekdo. Vse, kar se je dalo združiti samodejno, je že združeno; ti diapozitivi ne.',
+  'Mijn versie': 'Moja različica',
+  'Hun versie': 'Njihova različica',
   'Vergelijken…': 'Primerjaj…',
   'Versies vergelijken': 'Primerjaj različice',
   'Kies twee versies; de oudste van de twee is het vertrekpunt.':

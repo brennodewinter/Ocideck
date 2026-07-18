@@ -740,6 +740,15 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
+      'Un otro hende tabata editá e deck aki tambe — uní i wardá.',
+  'Keuzes toegepast — sla op om ze vast te leggen.':
+      'Skohonan aplicá — warda pa registrá nan.',
+  'Allebei bewerkt — kies per slide': 'Tur dos a editá — skohe pa slide',
+  'Iemand anders bewerkte dit deck tegelijk met jou. Alles wat vanzelf kon is al samengevoegd; deze slides niet.':
+      'Un otro hende a editá e deck aki na mesun momento ku bo. Tur loke por a uni outomátikamente ta uní kaba; e slides aki no.',
+  'Mijn versie': 'Mi vershon',
+  'Hun versie': 'Nan vershon',
   'Vergelijken…': 'Kompará…',
   'Versies vergelijken': 'Kompará vershonnan',
   'Kies twee versies; de oudste van de twee is het vertrekpunt.':

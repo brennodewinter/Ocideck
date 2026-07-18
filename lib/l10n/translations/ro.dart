@@ -1802,6 +1802,16 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
+      'Altcineva editase și el acest deck — îmbinat și salvat.',
+  'Keuzes toegepast — sla op om ze vast te leggen.':
+      'Alegerile au fost aplicate — salvează pentru a le înregistra.',
+  'Allebei bewerkt — kies per slide':
+      'Au editat amândoi — alege pentru fiecare diapozitiv',
+  'Iemand anders bewerkte dit deck tegelijk met jou. Alles wat vanzelf kon is al samengevoegd; deze slides niet.':
+      'Altcineva a editat acest deck în același timp cu tine. Tot ce a putut fi îmbinat automat a fost deja; aceste diapozitive nu.',
+  'Mijn versie': 'Versiunea mea',
+  'Hun versie': 'Versiunea lor',
   'Vergelijken…': 'Compară…',
   'Versies vergelijken': 'Compară versiunile',
   'Kies twee versies; de oudste van de twee is het vertrekpunt.':

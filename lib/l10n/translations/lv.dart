@@ -1782,6 +1782,16 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
+      'Arī kāds cits bija rediģējis šo klāju — apvienots un saglabāts.',
+  'Keuzes toegepast — sla op om ze vast te leggen.':
+      'Izvēles piemērotas — saglabājiet, lai tās reģistrētu.',
+  'Allebei bewerkt — kies per slide':
+      'Rediģēja abi — izvēlieties katram slaidam',
+  'Iemand anders bewerkte dit deck tegelijk met jou. Alles wat vanzelf kon is al samengevoegd; deze slides niet.':
+      'Kāds cits rediģēja šo klāju vienlaikus ar jums. Viss, ko varēja apvienot automātiski, jau ir apvienots; šie slaidi nē.',
+  'Mijn versie': 'Mana versija',
+  'Hun versie': 'Viņu versija',
   'Vergelijken…': 'Salīdzināt…',
   'Versies vergelijken': 'Salīdzināt versijas',
   'Kies twee versies; de oudste van de twee is het vertrekpunt.':

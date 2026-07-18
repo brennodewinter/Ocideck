@@ -84,16 +84,32 @@ Future<void> _saveToGit(BuildContext context, WidgetRef ref) async {
             ),
           ),
         );
-      case GitSaveStatus.conflict:
+      case GitSaveStatus.merged:
         messenger.showSnackBar(
           SnackBar(
             content: Text(
               l10n.d(
-                'De branch is verplaatst; herlaad het deck en sla opnieuw op.',
+                'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.',
               ),
             ),
           ),
         );
+      case GitSaveStatus.conflict:
+        // Samenvoegen lukte deels: het samengevoegde deck staat al in het
+        // tabblad met ónze kant voorop. Laat de gebruiker per slide kiezen.
+        if (result.conflicts.isNotEmpty && context.mounted) {
+          await _resolveMergeConflicts(context, ref, result.conflicts);
+        } else {
+          messenger.showSnackBar(
+            SnackBar(
+              content: Text(
+                l10n.d(
+                  'De branch is verplaatst; herlaad het deck en sla opnieuw op.',
+                ),
+              ),
+            ),
+          );
+        }
       case GitSaveStatus.failed:
         showErrorSnackBar(
           messenger,
@@ -110,6 +126,54 @@ Future<void> _saveToGit(BuildContext context, WidgetRef ref) async {
     // De uitzondering draagt al een uitlegbare tekst voor de gebruiker.
     messenger.showSnackBar(SnackBar(content: Text(e.message)));
   }
+}
+
+/// Laat de gebruiker per botsende slide kiezen welke kant blijft, en wissel die
+/// keuze in het samengevoegde deck (§8.6).
+///
+/// Opslaan gebeurt daarna gewoon met de knop die hij al kent: de basis staat
+/// inmiddels op de kop van de ander, dus die opslag landt schoon. Hem hier
+/// ongevraagd nóg een commitdialoog voorschotelen zou verwarrender zijn dan één
+/// bewuste handeling.
+Future<void> _resolveMergeConflicts(
+  BuildContext context,
+  WidgetRef ref,
+  List<SlideConflict> conflicts,
+) async {
+  final choices = await showDialog<Map<int, Slide?>>(
+    context: context,
+    builder: (_) => _MergeConflictDialog(conflicts: conflicts),
+  );
+  if (choices == null || !context.mounted) return;
+
+  final tab = ref.read(tabsProvider).current;
+  final deck = tab?.deckNotifier.currentState.deck;
+  if (tab == null || deck == null) return;
+
+  final slides = [...deck.slides];
+  final drop = <int>[];
+  choices.forEach((index, slide) {
+    if (index < 0 || index >= slides.length) return;
+    if (slide == null) {
+      drop.add(index);
+    } else {
+      slides[index] = slide;
+    }
+  });
+  // Van achter naar voren weghalen, anders schuiven de indices onder je weg.
+  drop.sort((a, b) => b.compareTo(a));
+  for (final i in drop) {
+    slides.removeAt(i);
+  }
+  tab.deckNotifier.loadDeck(deck.copyWith(slides: slides));
+
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(
+        context.l10n.d('Keuzes toegepast — sla op om ze vast te leggen.'),
+      ),
+    ),
+  );
 }
 
 /// Loop de wachtrij van nog niet gepushte decks leeg (§8.5). Handmatig via het
@@ -154,7 +218,8 @@ Future<void> _flushGitQueue(
     messenger.showSnackBar(
       SnackBar(
         content: Text(switch (result.status) {
-          GitSaveStatus.committed => l10n.d('Gesynchroniseerd met git.'),
+          GitSaveStatus.committed ||
+          GitSaveStatus.merged => l10n.d('Gesynchroniseerd met git.'),
           GitSaveStatus.queued => l10n.d(
             'Nog geen verbinding — het gaat later mee.',
           ),

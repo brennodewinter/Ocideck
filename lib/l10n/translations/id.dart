@@ -1783,6 +1783,15 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
+      'Orang lain juga mengedit dek ini — digabungkan dan disimpan.',
+  'Keuzes toegepast — sla op om ze vast te leggen.':
+      'Pilihan diterapkan — simpan untuk mencatatnya.',
+  'Allebei bewerkt — kies per slide': 'Diedit keduanya — pilih per slide',
+  'Iemand anders bewerkte dit deck tegelijk met jou. Alles wat vanzelf kon is al samengevoegd; deze slides niet.':
+      'Orang lain mengedit dek ini bersamaan dengan Anda. Semua yang bisa digabungkan otomatis sudah digabungkan; slide ini tidak.',
+  'Mijn versie': 'Versi saya',
+  'Hun versie': 'Versi mereka',
   'Vergelijken…': 'Bandingkan…',
   'Versies vergelijken': 'Bandingkan versi',
   'Kies twee versies; de oudste van de twee is het vertrekpunt.':

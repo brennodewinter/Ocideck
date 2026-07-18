@@ -1796,6 +1796,16 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
+      'Ktoś inny też edytował ten zestaw — scalono i zapisano.',
+  'Keuzes toegepast — sla op om ze vast te leggen.':
+      'Wybory zastosowane — zapisz, aby je utrwalić.',
+  'Allebei bewerkt — kies per slide':
+      'Obie strony edytowały — wybierz dla każdego slajdu',
+  'Iemand anders bewerkte dit deck tegelijk met jou. Alles wat vanzelf kon is al samengevoegd; deze slides niet.':
+      'Ktoś inny edytował ten zestaw w tym samym czasie co Ty. Wszystko, co dało się scalić automatycznie, już scalono; tych slajdów nie.',
+  'Mijn versie': 'Moja wersja',
+  'Hun versie': 'Ich wersja',
   'Vergelijken…': 'Porównaj…',
   'Versies vergelijken': 'Porównaj wersje',
   'Kies twee versies; de oudste van de twee is het vertrekpunt.':

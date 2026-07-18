@@ -1786,6 +1786,15 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
+      'Tuto sadu upravoval i někdo jiný — sloučeno a uloženo.',
+  'Keuzes toegepast — sla op om ze vast te leggen.':
+      'Volby použity — ulož je pro zaznamenání.',
+  'Allebei bewerkt — kies per slide': 'Upravili oba — vyber u každého snímku',
+  'Iemand anders bewerkte dit deck tegelijk met jou. Alles wat vanzelf kon is al samengevoegd; deze slides niet.':
+      'Tuto sadu upravoval někdo jiný ve stejnou dobu jako ty. Vše, co šlo sloučit automaticky, už sloučeno je; tyto snímky ne.',
+  'Mijn versie': 'Moje verze',
+  'Hun versie': 'Jejich verze',
   'Vergelijken…': 'Porovnat…',
   'Versies vergelijken': 'Porovnat verze',
   'Kies twee versies; de oudste van de twee is het vertrekpunt.':

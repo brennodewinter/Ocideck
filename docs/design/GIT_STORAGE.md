@@ -934,7 +934,7 @@ Each phase is shippable and preserves the invariants.
 | Saving = commit (+ push) | Phase 2 |
 | Offline (one draft, any platform) | Phase 2 |
 | Offline (real history, airplane) | Phase 3 |
-| Real merges | **Not yet built** — deferred out of Phase 3, see below |
+| Real merges | Slide-level three-way merge on the REST plane; native still pending |
 | Release = reviewed PR | Phase 4 |
 | Versions of one deck = tags | Phase 4 |
 | Async collaboration | Phase 4 (falls out of PR + attribution) |
@@ -943,20 +943,30 @@ Each phase is shippable and preserves the invariants.
 
 > **On "real merges".** This row said *Phase 3* until it was corrected: Phase 3
 > shipped the native clone and durable local commits, but merging a concurrent
-> edit was deliberately left out of it, and Phase 4 did not pick it up either.
-> What actually happens today when someone else moved the ref:
-> - **REST plane** — the commit is refused on the `baseSha` guard and comes back
->   as `GitSaveStatus.conflict`; the user is told to reload and save again.
-> - **Native plane** — the commit is made locally and the *push* is refused
->   (`GitCommitOutcome.committedConflict`); the work is real git history on the
->   machine, but it stays there until someone resolves it outside OciDeck.
+> edit was left out of it, and Phase 4 did not pick it up. It exists now on the
+> **REST plane** (`deck_merge.dart`), and the shape of it is worth recording.
 >
-> Nothing is ever lost either way (P2) — but nothing is merged either, so two
-> people editing one deck still have to take turns. Building this means deciding
-> what a merge *means* for a deck: a three-way text merge over `deck.md` is what
-> git would do, but a slide is the unit the user thinks in, and the two answers
-> disagree about what a conflict looks like. That decision is why it keeps
-> getting deferred, and it should be made deliberately rather than in passing.
+> The merge is **per slide, not per line**. Git's own answer would be a three-way
+> text merge over `deck.md`, but a conflicted `deck.md` carries `<<<<<<<`
+> markers and then no longer parses — so at exactly the moment the user has to
+> choose, there would be nothing to show them. A slide is also the unit they
+> think in. So slides are paired (the two-pass alignment of `diffDeckVersions`),
+> and only genuinely competing edits become a conflict.
+>
+> What it decides by itself: one side changed, both changed identically, both
+> deleted, each added something, or one side merely reordered (a move does not
+> collide with an edit). What it refuses to decide: two different edits to the
+> same slide, and delete-against-edit. Those come back as `SlideConflict` and the
+> user picks per slide.
+>
+> Two deliberate fail-safes. A conflicted slide provisionally keeps **our** side
+> in the result, never silently theirs. And the deck's classification becomes the
+> **stricter** of the two — otherwise a merge would quietly discard someone
+> else's TLP escalation, which is the one direction this path must never fail in.
+>
+> Still on the **native plane**: a rejected push leaves the commit local
+> (`GitCommitOutcome.committedConflict`) and is not yet merged.
+>
 
 ---
 

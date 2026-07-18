@@ -1758,6 +1758,14 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
+      'latlh vay\' je deck vam choHpu\' — muvta\' \'ej qonta\'.',
+  'Keuzes toegepast — sla op om ze vast te leggen.': 'wIvmey lo\'ta\' — yIqon.',
+  'Allebei bewerkt — kies per slide': 'cha\'logh choHlu\' — Hoch page yIwIv',
+  'Iemand anders bewerkte dit deck tegelijk met jou. Alles wat vanzelf kon is al samengevoegd; deze slides niet.':
+      'rap poH deck vam choHpu\' latlh vay\'. muvlaHbogh Hoch muvta\'; page vam muvlaHbe\'.',
+  'Mijn versie': 'mI\'wIj',
+  'Hun versie': 'mI\'chaj',
   'Vergelijken…': 'rap\'a\'…',
   'Versies vergelijken': 'mI\'mey rap\'a\'',
   'Kies twee versies; de oudste van de twee is het vertrekpunt.':

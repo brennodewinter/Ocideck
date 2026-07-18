@@ -17,6 +17,7 @@ import '../services/duplicate_service.dart';
 import '../services/file_service.dart';
 import '../services/git/asset_pool.dart';
 import '../services/git/deck_mirror.dart';
+import '../services/git/deck_merge.dart';
 import '../services/git/deck_repo_serializer.dart';
 import '../services/git/git_forge.dart';
 import '../services/git/native_git_mirror_api.dart';

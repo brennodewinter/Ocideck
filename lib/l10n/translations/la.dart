@@ -1799,6 +1799,15 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
+      'Alius quoque hunc fasciculum mutaverat — coniunctum et servatum.',
+  'Keuzes toegepast — sla op om ze vast te leggen.':
+      'Electiones adhibitae — serva ut consignentur.',
+  'Allebei bewerkt — kies per slide': 'Ab utroque mutatum — per paginam elige',
+  'Iemand anders bewerkte dit deck tegelijk met jou. Alles wat vanzelf kon is al samengevoegd; deze slides niet.':
+      'Alius hunc fasciculum simul tecum mutavit. Quidquid sua sponte coniungi potuit iam coniunctum est; hae paginae non.',
+  'Mijn versie': 'Versio mea',
+  'Hun versie': 'Versio eorum',
   'Vergelijken…': 'Comparare…',
   'Versies vergelijken': 'Versiones comparare',
   'Kies twee versies; de oudste van de twee is het vertrekpunt.':

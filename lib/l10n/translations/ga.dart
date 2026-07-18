@@ -1819,6 +1819,16 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
+      'Bhí duine eile tar éis an deic seo a chur in eagar freisin — cumascadh agus sábháladh é.',
+  'Keuzes toegepast — sla op om ze vast te leggen.':
+      'Roghanna curtha i bhfeidhm — sábháil chun iad a thaifeadadh.',
+  'Allebei bewerkt — kies per slide':
+      'Chuir an bheirt in eagar — roghnaigh de réir sleamhnáin',
+  'Iemand anders bewerkte dit deck tegelijk met jou. Alles wat vanzelf kon is al samengevoegd; deze slides niet.':
+      'Chuir duine eile an deic seo in eagar ag an am céanna leat. Tá gach rud a d\'fhéadfaí a chumasc go huathoibríoch cumasctha cheana; níorbh fhéidir na sleamhnáin seo.',
+  'Mijn versie': 'Mo leagan',
+  'Hun versie': 'A leagan siúd',
   'Vergelijken…': 'Cuir i gcomparáid…',
   'Versies vergelijken': 'Cuir leaganacha i gcomparáid',
   'Kies twee versies; de oudste van de twee is het vertrekpunt.':

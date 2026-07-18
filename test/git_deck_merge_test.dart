@@ -150,6 +150,31 @@ void main() {
       },
     );
 
+    test('een conflict wijst naar zijn plek in het samengevoegde deck', () {
+      // Hier steunt de keuzedialoog op: hij wisselt de andere kant er op deze
+      // index in, zonder de merge over te doen.
+      final ourTwo = bullets('Twee', const ['onze tekst']);
+      final theirTwo = bullets('Twee', const ['hun tekst']);
+      final result = mergeDeckVersions(
+        deckOf([one, two, three]),
+        deckOf([one, ourTwo, three]),
+        deckOf([one, theirTwo, three]),
+      );
+
+      final conflict = result.conflicts.single;
+      expect(conflict.mergedIndex, isNotNull);
+      expect(
+        result.merged.slides[conflict.mergedIndex!].bullets,
+        const ['onze tekst'],
+        reason: 'daar staat de voorlopige keuze',
+      );
+      // En de andere kant erin wisselen levert een geldig deck op.
+      final swapped = [...result.merged.slides];
+      swapped[conflict.mergedIndex!] = conflict.theirs!;
+      expect(swapped.map((s) => s.title), ['Eén', 'Twee', 'Drie']);
+      expect(swapped[1].bullets, const ['hun tekst']);
+    });
+
     test('verplaatsen botst niet met bewerken', () {
       // Wij schoven hem op, zij pasten de tekst aan: dat is geen echt conflict.
       final theirTwo = bullets('Twee', const ['hun tekst']);

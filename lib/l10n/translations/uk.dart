@@ -1801,6 +1801,16 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
+      'Хтось інший теж редагував цю колоду — об\'єднано та збережено.',
+  'Keuzes toegepast — sla op om ze vast te leggen.':
+      'Вибір застосовано — збережіть, щоб зафіксувати.',
+  'Allebei bewerkt — kies per slide':
+      'Редагували обидва — виберіть для кожного слайда',
+  'Iemand anders bewerkte dit deck tegelijk met jou. Alles wat vanzelf kon is al samengevoegd; deze slides niet.':
+      'Хтось інший редагував цю колоду одночасно з вами. Усе, що можна було об\'єднати автоматично, вже об\'єднано; ці слайди — ні.',
+  'Mijn versie': 'Моя версія',
+  'Hun versie': 'Їхня версія',
   'Vergelijken…': 'Порівняти…',
   'Versies vergelijken': 'Порівняти версії',
   'Kies twee versies; de oudste van de twee is het vertrekpunt.':

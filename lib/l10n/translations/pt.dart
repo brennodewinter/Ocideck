@@ -1813,6 +1813,16 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
+      'Outra pessoa também tinha editado este deck — mesclado e guardado.',
+  'Keuzes toegepast — sla op om ze vast te leggen.':
+      'Escolhas aplicadas — guarde para as registar.',
+  'Allebei bewerkt — kies per slide':
+      'Ambos editaram — escolha por diapositivo',
+  'Iemand anders bewerkte dit deck tegelijk met jou. Alles wat vanzelf kon is al samengevoegd; deze slides niet.':
+      'Outra pessoa editou este deck ao mesmo tempo que você. Tudo o que podia ser mesclado automaticamente já foi; estes diapositivos não.',
+  'Mijn versie': 'A minha versão',
+  'Hun versie': 'A versão deles',
   'Vergelijken…': 'Comparar…',
   'Versies vergelijken': 'Comparar versões',
   'Kies twee versies; de oudste van de twee is het vertrekpunt.':

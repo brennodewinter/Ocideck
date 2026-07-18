@@ -338,11 +338,19 @@ extension TabsNotifierGit on TabsNotifier {
         warnings: files.warnings,
       );
     } on GitConflictException catch (e) {
-      // Geen fout maar een uitkomst: het werk is niet weg, het kan alleen niet
-      // zó landen. In Fase 2-vervolg wordt dit mergen; nu is het herladen.
-      return GitSaveResult(
-        status: GitSaveStatus.conflict,
-        message: e.message,
+      // Geen fout maar een uitkomst: iemand anders verzette de branch. Probeer
+      // samen te voegen in plaats van de gebruiker terug te sturen met "herlaad
+      // maar" (§8.6). Lukt dat niet, dan is het alsnog een conflict — maar het
+      // werk is nooit weg.
+      return _mergeOnConflict(
+        forge,
+        config: config,
+        deckDir: deckDir,
+        branch: workBranch,
+        baseSha: midRound ? origin.baseSha : '',
+        ours: deck,
+        message: message,
+        fallback: e.message,
         warnings: files.warnings,
       );
     } on GitForgeException catch (e) {
@@ -368,6 +376,140 @@ extension TabsNotifierGit on TabsNotifier {
         status: GitSaveStatus.failed,
         message: e.message,
         warnings: files.warnings,
+      );
+    }
+  }
+
+  /// Een opslag botste: iemand anders verzette de branch sinds wij hem lazen.
+  /// Voeg de twee samen in plaats van de gebruiker terug te sturen (§8.6).
+  ///
+  /// Drie punten: [baseSha] is de gemeenschappelijke voorouder (waar wij op
+  /// begonnen), de branchkop is wat de ander ervan maakte, en [ours] is wat er
+  /// in de editor staat. Wat de merge zelf kan beslissen beslist hij; de rest
+  /// komt als [SlideConflict] terug.
+  ///
+  /// Hoe het afloopt, loopt het tabblad hoe dan ook bij naar hún staat als
+  /// nieuwe basis: of de merge nu schoon was of niet, de volgende opslag botst
+  /// niet meer op ditzelfde punt. Bij een schone merge slaat hij meteen door
+  /// (de melding vertelt wat er van de ander bij kwam); bij een conflict blijft
+  /// het samengevoegde deck in het tabblad staan met ónze kant voorop, zodat de
+  /// gebruiker kan kiezen en daarna gewoon opnieuw opslaat.
+  Future<GitSaveResult> _mergeOnConflict(
+    GitForge forge, {
+    required GitRepoConfig config,
+    required String deckDir,
+    required String branch,
+    required String baseSha,
+    required Deck ours,
+    required String message,
+    required String fallback,
+    required List<String> warnings,
+  }) async {
+    // Zonder gemeenschappelijke voorouder valt er niets driewegs te doen.
+    if (baseSha.isEmpty) {
+      return GitSaveResult(
+        status: GitSaveStatus.conflict,
+        message: fallback,
+        warnings: warnings,
+      );
+    }
+    try {
+      final base = await readVersionDeck(
+        forge,
+        config: config,
+        deckDir: deckDir,
+        tag: baseSha,
+      );
+      final theirs = await readVersionDeck(
+        forge,
+        config: config,
+        deckDir: deckDir,
+        tag: branch,
+      );
+      if (base.deck == null || theirs.deck == null) {
+        return GitSaveResult(
+          status: GitSaveStatus.conflict,
+          message: fallback,
+          warnings: warnings,
+        );
+      }
+
+      final merge = mergeDeckVersions(base.deck!, ours, theirs.deck!);
+      final head = await forge.headSha(branch);
+      if (!mounted) {
+        return GitSaveResult(status: GitSaveStatus.failed, warnings: warnings);
+      }
+
+      // Het samengevoegde deck ín het tabblad, met hún kop als nieuwe basis.
+      final tab = currentState.current;
+      tab?.deckNotifier.loadDeck(merge.merged);
+      tab?.gitOrigin = GitOrigin(
+        config: config,
+        branch: branch,
+        deckDir: deckDir,
+        baseSha: head,
+      );
+      refreshTabs();
+
+      if (!merge.isClean) {
+        // Kiezen is aan de gebruiker; opslaan gebeurt daarna gewoon opnieuw.
+        return GitSaveResult(
+          status: GitSaveStatus.conflict,
+          conflicts: merge.conflicts,
+          warnings: warnings,
+        );
+      }
+
+      // Schoon samengevoegd: doorgaan met opslaan, en achteraf melden wat er van
+      // de ander bij kwam.
+      final image = ImageService();
+      final mergedFiles = await buildDeckRepoFiles(
+        merge.merged,
+        md: _md,
+        pool: AssetPool(forge: forge, branch: branch),
+        deckDir: deckDir,
+        resolveBytes: (path) async => WebAssetStore.isMemPath(path)
+            ? WebAssetStore.bytesFor(path)
+            : image.readSlideImageBytes(
+                path,
+                projectPath: merge.merged.projectPath,
+              ),
+      );
+      final result = await forge.commitFiles(
+        branch: branch,
+        message: message,
+        upserts: mergedFiles.upserts,
+        deletes: const [],
+        baseSha: head,
+      );
+      if (!mounted) {
+        return GitSaveResult(status: GitSaveStatus.failed, warnings: warnings);
+      }
+      currentState.current?.gitOrigin = GitOrigin(
+        config: config,
+        branch: branch,
+        deckDir: deckDir,
+        baseSha: result.sha,
+      );
+      refreshTabs();
+      return GitSaveResult(
+        status: GitSaveStatus.merged,
+        sha: result.sha,
+        warnings: [...warnings, ...mergedFiles.warnings],
+      );
+    } on GitConflictException {
+      // De branch bewoog opnieuw terwijl we aan het samenvoegen waren.
+      return GitSaveResult(
+        status: GitSaveStatus.conflict,
+        message: fallback,
+        warnings: warnings,
+      );
+    } on GitForgeException catch (e) {
+      logWarning('_mergeOnConflict: samenvoegen mislukt', e);
+      return GitSaveResult(
+        status: GitSaveStatus.conflict,
+        message: e.message,
+        warnings: warnings,
       );
     }
   }
@@ -622,9 +764,14 @@ enum GitSaveStatus {
   /// wachtrij, en gaat mee bij de volgende synchronisatie (§8.5).
   queued,
 
-  /// Iemand anders heeft de branch verzet sinds de basis. Herladen (of, later,
-  /// mergen).
+  /// Iemand anders verzette de branch én de twee waren niet vanzelf samen te
+  /// voegen. [GitSaveResult.conflicts] vertelt per slide wat er botst; het
+  /// tabblad draagt intussen het samengevoegde deck met ónze kant voorop.
   conflict,
+
+  /// Iemand anders had de branch verzet, maar de twee bewerkingen vielen samen
+  /// te voegen — dat is gebeurd en meteen gecommit (§8.6).
+  merged,
 
   /// Auth of forge deed het niet — of er was geen deck om op te slaan.
   failed,
@@ -643,11 +790,16 @@ class GitSaveResult {
   /// afbeeldingen). Het deck sloeg wel op; de UI meldt wat er niet meeging.
   final List<String> warnings;
 
+  /// Bij [GitSaveStatus.conflict]: de slides waar beide kanten iets anders mee
+  /// deden. Leeg wanneer er niet eens een driewegs-merge geprobeerd kon worden.
+  final List<SlideConflict> conflicts;
+
   const GitSaveResult({
     required this.status,
     this.sha,
     this.message,
     this.warnings = const [],
+    this.conflicts = const [],
   });
 }
 

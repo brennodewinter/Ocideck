@@ -922,6 +922,15 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
+      'Someone else had edited this deck too — merged and saved.',
+  'Keuzes toegepast — sla op om ze vast te leggen.':
+      'Choices applied — save to record them.',
+  'Allebei bewerkt — kies per slide': 'Both edited — choose per slide',
+  'Iemand anders bewerkte dit deck tegelijk met jou. Alles wat vanzelf kon is al samengevoegd; deze slides niet.':
+      'Someone else edited this deck at the same time as you. Everything that could be merged automatically already has been; these slides could not.',
+  'Mijn versie': 'My version',
+  'Hun versie': 'Their version',
   'Vergelijken…': 'Compare…',
   'Versies vergelijken': 'Compare versions',
   'Kies twee versies; de oudste van de twee is het vertrekpunt.':
