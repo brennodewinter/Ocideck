@@ -193,6 +193,7 @@ search (Phase 6) and asset deletion (§6.2, deliberately manual).
 - `atomic_file.dart` — Atomic writes (temp file + rename) to prevent data loss on crash.
 - `bundled_asset.dart` — `asset:`-schema voor méégebundelde logo's van ingebouwde stijlprofielen.
 - `color_contrast.dart` — WCAG 2.1 contrast-ratio calculation and hex colour parsing.
+- `csv.dart` — The one implementation of RFC 4180 quoting, in two framings: `parseCsvRows` reads a whole document (a quoted field may hold a line break — MITRE's CWE export needs that) and `parseCsvLine` reads one already-split line, so a stray quote stops there instead of swallowing the file. Used by `models/chart.dart` and `tool/build_cwe_catalog.dart`.
 - `deck_markdown_dashes.dart` — Escapes standalone dash lines so the deck parser can't misread them.
 - `file_download.dart` — Browserdownload (blob + anker) voor web-opslaan; conditional import met stub.
 - `image_focal.dart` — Maps a normalized image crop focal point (0..1) to the `Alignment` used to reposition a cropped/cover image.

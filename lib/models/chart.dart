@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math' as math;
 
+import '../utils/csv.dart';
 import '../utils/log.dart';
 
 /// Directory (relative to the deck) where linked chart CSVs are kept, so the
@@ -471,69 +472,15 @@ String _csvValue(String raw) =>
   }
 }
 
-/// Split one CSV line into cells, honouring RFC 4180 quoting: a field wrapped
-/// in double quotes may contain commas, and a doubled `""` inside it is one
-/// literal quote. Unquoted fields keep the historical behaviour and are
-/// trimmed; a quoted field's content is taken verbatim, so `" a "` keeps its
-/// inner spaces.
-///
-/// Deliberately lenient about malformed input, because the CSV comes from
-/// whatever a user exported: an unterminated quote runs to the end of the line,
-/// and characters between a closing quote and the next separator are discarded.
-List<String> _csvCells(String line, String delimiter) {
-  final cells = <String>[];
-  var i = 0;
-  while (true) {
-    final start = i;
-    // Tolerate space before an opening quote, so ` "Amsterdam, NL"` still reads
-    // as one quoted field — but never eat the separator itself, or a
-    // tab-delimited line would collapse into a single cell.
-    while (i < line.length &&
-        line[i] != delimiter &&
-        (line[i] == ' ' || line[i] == '\t')) {
-      i++;
-    }
-
-    if (i < line.length && line[i] == '"') {
-      i++; // opening quote
-      final field = StringBuffer();
-      while (i < line.length) {
-        if (line[i] != '"') {
-          field.write(line[i]);
-          i++;
-        } else if (i + 1 < line.length && line[i + 1] == '"') {
-          field.write('"');
-          i += 2;
-        } else {
-          i++; // closing quote
-          break;
-        }
-      }
-      cells.add(field.toString());
-      while (i < line.length && line[i] != delimiter) {
-        i++;
-      }
-    } else {
-      final next = line.indexOf(delimiter, i);
-      final end = next == -1 ? line.length : next;
-      cells.add(line.substring(start, end).trim());
-      i = end;
-    }
-
-    if (i >= line.length) return cells;
-    i++; // the separator
-  }
-}
-
 /// Pick the separator a file actually uses: whichever of `,` `;` or tab carves
 /// the header into the most cells. A Dutch Excel writes `;` whenever the system
 /// decimal mark is a comma, so assuming `,` silently produced a chart with no
 /// series at all. Ties fall back to `,`, which is what the format nominally is.
 String _detectDelimiter(String headerLine) {
   var best = ',';
-  var bestCount = _csvCells(headerLine, ',').length;
+  var bestCount = parseCsvLine(headerLine).length;
   for (final candidate in const [';', '\t']) {
-    final count = _csvCells(headerLine, candidate).length;
+    final count = parseCsvLine(headerLine, delimiter: candidate).length;
     if (count > bestCount) {
       best = candidate;
       bestCount = count;
@@ -570,12 +517,12 @@ double? _parseCsvNumber(String raw, String delimiter) {
 /// The separator is detected per file (see [_detectDelimiter]), so a Dutch
 /// Excel export using `;` reads as well as a comma-separated one.
 ///
-/// Quoted fields are understood per RFC 4180 (see [_csvCells]), with one
+/// Quoted fields are understood per RFC 4180 (see [parseCsvLine]), with one
 /// documented exception: a newline inside a quoted field is **not** supported.
 /// Rows are split on line breaks before fields are parsed, so such a value is
-/// torn across two rows. Chart data is one label plus numbers per row, where an
-/// embedded newline has no legitimate use; supporting it would mean scanning
-/// the whole document instead of per line. Blank lines are skipped.
+/// torn across two rows. That is the trade [parseCsvLine] exists to make —
+/// chart rows have no use for a multi-line value, and splitting first keeps a
+/// stray quote from swallowing the rest of the file. Blank lines are skipped.
 ///
 /// A cell that holds something other than a number still counts as 0 — a chart
 /// has to draw *something* — but every such cell is also returned in
@@ -594,14 +541,14 @@ double? _parseCsvNumber(String raw, String delimiter) {
   if (lines.isEmpty) return (const [], const [], unreadable: const []);
 
   final delimiter = _detectDelimiter(lines.first);
-  final header = _csvCells(lines.first, delimiter);
+  final header = parseCsvLine(lines.first, delimiter: delimiter);
   final seriesNames = header.length > 1 ? header.sublist(1) : <String>[];
   final x = <String>[];
   final seriesData = [for (final _ in seriesNames) <double>[]];
   final unreadable = <String>[];
 
   for (final line in lines.skip(1)) {
-    final row = _csvCells(line, delimiter);
+    final row = parseCsvLine(line, delimiter: delimiter);
     if (row.isEmpty) continue;
     x.add(row.first);
     for (var i = 0; i < seriesNames.length; i++) {
