@@ -21,8 +21,10 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   `deck.md` and an unparseable deck is exactly what you cannot be shown while
   choosing. One safeguard worth naming: the deck's classification becomes the
   stricter of the two, so a merge can never quietly drop someone's TLP
-  escalation. (On desktop with native `git` a rejected push still keeps your
-  commit local for now.)
+  escalation. On desktop with native `git` the same thing happens, but
+  with git doing more of the work: it finds the real common ancestor, merges the
+  rest of the tree itself, and records a proper merge commit — so the history
+  shows what actually happened instead of a flattened overwrite.
 - **Editing a git deck now happens on a concept branch, and you release it for
   review.** Saving a deck opened from git no longer commits straight to the main
   branch: the first save of an editing round starts a dated *concept* branch

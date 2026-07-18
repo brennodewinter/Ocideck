@@ -934,7 +934,7 @@ Each phase is shippable and preserves the invariants.
 | Saving = commit (+ push) | Phase 2 |
 | Offline (one draft, any platform) | Phase 2 |
 | Offline (real history, airplane) | Phase 3 |
-| Real merges | Slide-level three-way merge on the REST plane; native still pending |
+| Real merges | Slide-level three-way merge, both planes |
 | Release = reviewed PR | Phase 4 |
 | Versions of one deck = tags | Phase 4 |
 | Async collaboration | Phase 4 (falls out of PR + attribution) |
@@ -964,8 +964,15 @@ Each phase is shippable and preserves the invariants.
 > **stricter** of the two — otherwise a merge would quietly discard someone
 > else's TLP escalation, which is the one direction this path must never fail in.
 >
-> Still on the **native plane**: a rejected push leaves the commit local
-> (`GitCommitOutcome.committedConflict`) and is not yet merged.
+> **Both planes** do this. They differ in one honest way: the REST plane has to
+> take the tab's recorded `baseSha` for the common ancestor, while the native
+> plane can ask git for the real one (`git merge-base`). Native also lets git
+> merge the rest of the tree — the pool blobs are content-addressed and simply
+> come along — and resolves only `deck.md` itself, then records a true merge
+> commit with two parents so the next push fast-forwards. When the slide merge
+> does *not* come out clean, native still makes that merge commit locally (so the
+> branch stops diverging and the next attempt cannot collide on the same point)
+> but does not push it until the user has chosen.
 >
 
 ---

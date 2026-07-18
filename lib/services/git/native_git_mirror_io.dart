@@ -225,6 +225,111 @@ class _NativeGitMirror implements NativeGitMirror {
     return _push();
   }
 
+  @override
+  Future<GitCommitResult> mergeRemote({
+    required String branch,
+    required String deckDir,
+    required String deckFile,
+    required String message,
+    required Future<({Map<String, Uint8List> files, bool clean})> Function(
+      Uint8List? base,
+      Uint8List? ours,
+      Uint8List? theirs,
+    )
+    resolve,
+  }) async {
+    if (!_cloned) return const GitCommitResult(GitCommitOutcome.unchanged);
+    final remote = 'origin/$branch';
+
+    // Zonder verse ophaal weten we niet wat "die van hen" is.
+    try {
+      await _run(['fetch', 'origin'], operands: [branch]);
+    } on GitCliException catch (e) {
+      logWarning('mergeRemote: fetch mislukt (offline?)', e);
+      return GitCommitResult(
+        GitCommitOutcome.committedOffline,
+        sha: await headSha(),
+      );
+    }
+
+    // De gemeenschappelijke voorouder is hier écht op te vragen — anders dan op
+    // het REST-pad, waar de gelezen basis-sha ervoor door moet gaan.
+    final String base;
+    try {
+      final res = await _run(['merge-base'], operands: ['HEAD', remote]);
+      base = res.stdout.trim();
+    } on GitCliException catch (e) {
+      logWarning('mergeRemote: geen gemeenschappelijke voorouder', e);
+      return GitCommitResult(
+        GitCommitOutcome.committedConflict,
+        sha: await headSha(),
+      );
+    }
+    if (base.isEmpty) {
+      return GitCommitResult(
+        GitCommitOutcome.committedConflict,
+        sha: await headSha(),
+      );
+    }
+
+    final resolved = await resolve(
+      await _showAtRef(base, deckFile),
+      await _showAtRef('HEAD', deckFile),
+      await _showAtRef(remote, deckFile),
+    );
+
+    // Laat git de rest van de boom samenvoegen — de pool-blobs zijn
+    // inhoudsgeadresseerd en komen er dus gewoon bij. Dat `deck.md` daarbij
+    // botst is verwacht; die schrijven we er zo overheen.
+    try {
+      await _run(['merge', '--no-commit', '--no-ff'], operands: [remote]);
+    } on GitCliException catch (e) {
+      logWarning('mergeRemote: merge meldde botsingen (verwacht)', e);
+    }
+
+    try {
+      final deckAbs = Directory(
+        p.join(_worktree.path, p.joinAll(deckDir.split('/'))),
+      );
+      if (await deckAbs.exists()) await deckAbs.delete(recursive: true);
+      await _writeAll(resolved.files);
+      await _run(['add', '-A']);
+      await _commit(message);
+    } on GitCliException catch (e) {
+      logWarning('mergeRemote: samengevoegde commit mislukt', e);
+      try {
+        await _run(['merge', '--abort']);
+      } on GitCliException catch (e2) {
+        logWarning('mergeRemote: afbreken mislukt', e2);
+      }
+      return GitCommitResult(
+        GitCommitOutcome.committedConflict,
+        sha: await headSha(),
+      );
+    }
+
+    // Niet schoon? De merge-commit staat lokaal (de branch bevat nu hún werk,
+    // dus de volgende poging botst niet opnieuw), maar publiceren doen we pas
+    // als de gebruiker gekozen heeft.
+    if (!resolved.clean) {
+      return GitCommitResult(
+        GitCommitOutcome.committedConflict,
+        sha: await headSha(),
+      );
+    }
+    return _push();
+  }
+
+  /// De bytes van [path] op [ref], of null wanneer het er niet staat.
+  Future<Uint8List?> _showAtRef(String ref, String path) async {
+    try {
+      final res = await _run(['show'], operands: ['$ref:$path']);
+      return Uint8List.fromList(utf8.encode(res.stdout));
+    } on GitCliException {
+      return null;
+    }
+  }
+
   Future<void> _ensureClone() async {
     if (_cloned) return;
     await _worktree.parent.create(recursive: true);

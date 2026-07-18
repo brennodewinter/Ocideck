@@ -104,7 +104,9 @@ saved version stays retrievable, which a plain folder cannot give you.
   goes through. Only slides you both changed differently — or where one of you
   deleted what the other edited — are put to you as a choice per slide, with your
   own version kept until you pick. Neither side's work is thrown away. If the
-  deck's classification differs, the stricter of the two wins.
+  deck's classification differs, the stricter of the two wins. This works both in
+  the browser and on desktop with native `git`; on desktop it becomes a real
+  merge commit, so `git log` shows the two lines of work coming together.
 - **Native git (desktop):** if you have `git` installed (2.19 or newer),
   *Settings → Git* shows it, and OciDeck keeps a real clone of the repository.
   Then **each save is a genuine local commit** — durable and offline: edit away

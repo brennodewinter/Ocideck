@@ -134,6 +134,22 @@ extension TabsNotifierGitNative on TabsNotifier {
       workBranch: workBranch,
       forkFrom: branch,
     );
+
+    // De push is geweigerd: iemand anders verzette de branch. De commit staat
+    // lokaal (dus niets is weg), maar we laten het daar niet bij — samenvoegen
+    // (§8.6), net als op het REST-pad.
+    if (result.outcome == GitCommitOutcome.committedConflict) {
+      final merged = await _mergeNative(
+        mirror,
+        config: config,
+        deckDir: deckDir,
+        branch: workBranch,
+        message: message,
+        warnings: files.warnings,
+      );
+      if (merged != null) return merged;
+    }
+
     // De lokale HEAD is de nieuwe basis waarop de volgende opslag voortbouwt.
     if (result.sha != null) {
       currentState.current?.gitOrigin = GitOrigin(
@@ -145,6 +161,106 @@ extension TabsNotifierGitNative on TabsNotifier {
       refreshTabs();
     }
     return _mapCommitOutcome(result, files.warnings);
+  }
+
+  /// Voeg samen wat de ander op deze branch deed met wat wij lokaal committen
+  /// (§8.6). Geeft null wanneer er niets te mergen viel en de gewone afhandeling
+  /// het overneemt.
+  ///
+  /// De git-kant zit in [NativeGitMirror.mergeRemote]; hier zit alleen het deck:
+  /// de drie versies door dezelfde fail-closed importpoort (P5 — de branch van
+  /// een ander is niet vertrouwder dan welke andere invoer ook), dan
+  /// [mergeDeckVersions], en het resultaat terug als bestandenset.
+  Future<GitSaveResult?> _mergeNative(
+    NativeGitMirror mirror, {
+    required GitRepoConfig config,
+    required String deckDir,
+    required String branch,
+    required String message,
+    required List<String> warnings,
+  }) async {
+    final deckFile = '$deckDir/${TabsNotifierGit.deckFileName}';
+    final label = '${config.slug} · $deckDir';
+    Deck? mergedDeck;
+    var conflicts = const <SlideConflict>[];
+
+    Deck? gated(Uint8List? bytes) {
+      if (bytes == null) return null;
+      try {
+        return _gateAndParseContent(utf8.decode(bytes), sourceName: label).deck;
+      } on FormatException {
+        return null;
+      }
+    }
+
+    final outcome = await mirror.mergeRemote(
+      branch: branch,
+      deckDir: deckDir,
+      deckFile: deckFile,
+      message: message,
+      resolve: (baseBytes, ourBytes, theirBytes) async {
+        // Komen we er niet uit, dan blijft ónze kant staan zoals hij was: een
+        // lege set zou de deckmap wissen, en dat is precies wat nooit mag.
+        final fallback = <String, Uint8List>{deckFile: ?ourBytes};
+        final base = gated(baseBytes);
+        final ours = gated(ourBytes);
+        final theirs = gated(theirBytes);
+        if (base == null || ours == null || theirs == null) {
+          return (files: fallback, clean: false);
+        }
+
+        final merge = mergeDeckVersions(base, ours, theirs);
+        mergedDeck = merge.merged;
+        conflicts = merge.conflicts;
+        final image = ImageService();
+        final built = await buildDeckRepoFiles(
+          merge.merged,
+          md: _md,
+          pool: null, // native: git ontdubbelt zelf
+          deckDir: deckDir,
+          resolveBytes: (path) async => WebAssetStore.isMemPath(path)
+              ? WebAssetStore.bytesFor(path)
+              : image.readSlideImageBytes(
+                  path,
+                  projectPath: merge.merged.projectPath,
+                ),
+        );
+        return (files: built.upserts, clean: merge.isClean);
+      },
+    );
+
+    // Niets samengevoegd (offline, of geen voorouder): de gewone afhandeling
+    // hierboven neemt het over — de commit staat dan nog steeds lokaal.
+    if (mergedDeck == null) return null;
+    if (!mounted) return const GitSaveResult(status: GitSaveStatus.failed);
+
+    // Het samengevoegde deck in het tabblad, met de nieuwe lokale kop als basis.
+    final tab = currentState.current;
+    tab?.deckNotifier.loadDeck(mergedDeck!);
+    if (outcome.sha != null) {
+      tab?.gitOrigin = GitOrigin(
+        config: config,
+        branch: branch,
+        deckDir: deckDir,
+        baseSha: outcome.sha!,
+      );
+    }
+    refreshTabs();
+
+    if (conflicts.isNotEmpty) {
+      return GitSaveResult(
+        status: GitSaveStatus.conflict,
+        conflicts: conflicts,
+        warnings: warnings,
+      );
+    }
+    return GitSaveResult(
+      status: outcome.outcome == GitCommitOutcome.pushed
+          ? GitSaveStatus.merged
+          : GitSaveStatus.queued,
+      sha: outcome.sha,
+      warnings: warnings,
+    );
   }
 
   /// Duw wat nog lokaal wacht alsnog naar de forge.
