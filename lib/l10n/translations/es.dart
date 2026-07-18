@@ -737,6 +737,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Soort forge': 'Tipo de forge',
+  'Forgejo of Gitea': 'Forgejo o Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
       'Otra persona también había editado este deck: combinado y guardado.',
   'Keuzes toegepast — sla op om ze vast te leggen.':

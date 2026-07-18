@@ -1806,6 +1806,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Soort forge': 'Вид forge',
+  'Forgejo of Gitea': 'Forgejo или Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
       'Някой друг също беше редактирал това тесте — обединено и запазено.',
   'Keuzes toegepast — sla op om ze vast te leggen.':

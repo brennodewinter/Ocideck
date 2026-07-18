@@ -1790,6 +1790,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Soort forge': 'Vrsta forgea',
+  'Forgejo of Gitea': 'Forgejo ili Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
       'Netko drugi također je uređivao ovaj komplet — spojeno i spremljeno.',
   'Keuzes toegepast — sla op om ze vast te leggen.':

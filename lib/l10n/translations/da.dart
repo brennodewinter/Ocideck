@@ -1782,6 +1782,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Soort forge': 'Forge-type',
+  'Forgejo of Gitea': 'Forgejo eller Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
       'En anden havde også redigeret dette deck — flettet og gemt.',
   'Keuzes toegepast — sla op om ze vast te leggen.':

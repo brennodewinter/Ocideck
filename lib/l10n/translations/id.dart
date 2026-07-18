@@ -1783,6 +1783,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Soort forge': 'Jenis forge',
+  'Forgejo of Gitea': 'Forgejo atau Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
       'Orang lain juga mengedit dek ini — digabungkan dan disimpan.',
   'Keuzes toegepast — sla op om ze vast te leggen.':

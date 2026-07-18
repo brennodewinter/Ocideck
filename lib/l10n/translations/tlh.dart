@@ -1758,6 +1758,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Soort forge': 'forge Segh',
+  'Forgejo of Gitea': 'Forgejo pagh Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
       'latlh vay\' je deck vam choHpu\' — muvta\' \'ej qonta\'.',
   'Keuzes toegepast — sla op om ze vast te leggen.': 'wIvmey lo\'ta\' — yIqon.',

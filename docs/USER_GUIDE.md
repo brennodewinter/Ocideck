@@ -75,6 +75,12 @@ saved version stays retrievable, which a plain folder cannot give you.
   unless you close the app first (an unsaved in-memory image does not survive a
   restart, the same limit a plain saved deck already has). Your text is always
   safe.
+- **Which forge**: pick the **forge type** in *Settings → Git* — Forgejo/Gitea,
+  GitHub, or GitLab — next to the server URL, owner and repository. Everything
+  below works the same whichever you choose; only the token differs (a personal
+  access token in all three, but each calls it something slightly different). On
+  GitLab the deck browser cannot show file sizes: its listing does not include
+  them.
 - **Layout**: a repository holds many decks under `decks/<name>/deck.md`, with
   images shared in one `assets/` pool so the same picture is stored once.
 - **Editing happens on a concept branch — *Uitbrengen ter review…*.** When you

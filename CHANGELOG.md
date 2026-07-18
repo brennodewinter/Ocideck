@@ -8,6 +8,15 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **GitHub and GitLab now work too, not just Forgejo/Gitea.** *Settings → Git*
+  gained a **forge type** you pick alongside the server URL, and everything the
+  git storage does — opening, saving, concept branches, review, merging, version
+  tags, comparing — works the same on all three. The differences are real and
+  hidden on purpose: the three disagree about how to commit several files at
+  once, how they authenticate, how they number merge requests, and how they
+  detect that someone else got there first. One caveat worth knowing: on GitLab
+  the file browser cannot show file sizes, because its listing does not carry
+  them.
 - **Two people editing one deck no longer take turns — concurrent edits are
   merged.** If someone else saved while you were working, saving used to bounce
   you back with "reload and try again". Now the two edits are merged: everything

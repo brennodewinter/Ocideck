@@ -1782,6 +1782,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Soort forge': 'Typ av forge',
+  'Forgejo of Gitea': 'Forgejo eller Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
       'Någon annan hade också redigerat det här decket — sammanfogat och sparat.',
   'Keuzes toegepast — sla op om ze vast te leggen.':

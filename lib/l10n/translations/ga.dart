@@ -1819,6 +1819,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Soort forge': 'Cineál forge',
+  'Forgejo of Gitea': 'Forgejo nó Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
       'Bhí duine eile tar éis an deic seo a chur in eagar freisin — cumascadh agus sábháladh é.',
   'Keuzes toegepast — sla op om ze vast te leggen.':

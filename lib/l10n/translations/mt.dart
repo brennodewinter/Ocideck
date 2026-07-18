@@ -1806,6 +1806,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Soort forge': 'Tip ta\' forge',
+  'Forgejo of Gitea': 'Forgejo jew Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
       'Xi ħadd ieħor kien editja dan id-deck ukoll — ingħaqad u ġie ssejvjat.',
   'Keuzes toegepast — sla op om ze vast te leggen.':

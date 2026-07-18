@@ -1799,6 +1799,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Soort forge': 'Genus fabricae',
+  'Forgejo of Gitea': 'Forgejo aut Gitea',
   'Iemand anders had dit deck ook bewerkt — samengevoegd en opgeslagen.':
       'Alius quoque hunc fasciculum mutaverat — coniunctum et servatum.',
   'Keuzes toegepast — sla op om ze vast te leggen.':

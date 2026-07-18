@@ -136,6 +136,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   late TextEditingController _gitRepo;
   late TextEditingController _gitToken;
   bool _gitTrusted = false;
+  GitProvider _gitProvider = GitProvider.gitea;
   String _initialGitIdentity = '';
   String? _loadedGitToken;
 
@@ -283,6 +284,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     _gitRepo = TextEditingController(text: git?.repo ?? '');
     _gitToken = TextEditingController();
     _gitTrusted = git?.trustedInternal ?? false;
+    _gitProvider = git?.provider ?? GitProvider.gitea;
     _initialGitIdentity = '${git?.baseUrl ?? ''}|${git?.owner ?? ''}';
     if (git != null && git.isConfigured) {
       // Zelfde reden als bij het WebDAV-wachtwoord: het token staat in de
