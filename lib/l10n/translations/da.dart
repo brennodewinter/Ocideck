@@ -1786,6 +1786,11 @@ const _dutchSourceAddDa = <String, String>{
   'Zoek op naam, id of categorie': 'Søg på navn, id eller kategori',
   'Geen zwakheid gevonden': 'Ingen svaghed fundet',
   'uitleg nog niet geschreven': 'vejledning endnu ikke skrevet',
+  'Getalnotatie herkennen': 'Genkend talformatet',
+  'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
+      'Denne fil indeholder tal, hvor kommaet kan læses på to måder:',
+  'Duizendtalscheiding': 'Tusindtalsseparator',
+  'Decimaalteken': 'Decimaltegn',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Diagramdata kunne ikke læses; de diagrammer forbliver tomme:',
   'Bijlage hulpmiddelen invoegen…': 'Indsæt bilag med værktøjer…',

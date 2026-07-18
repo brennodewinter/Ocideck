@@ -1791,6 +1791,11 @@ const _dutchSourceAddGsw = <String, String>{
   'Zoek op naam, id of categorie': 'Nach Name, ID oder Kategorie sueche',
   'Geen zwakheid gevonden': 'Kei Schwachstell gfunde',
   'uitleg nog niet geschreven': 'Erklärig no nid gschribe',
+  'Getalnotatie herkennen': 'Zahleformat erkenne',
+  'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
+      'Die Datei het Zahle, wo s Komma uf zwei Arte glääse werde cha:',
+  'Duizendtalscheiding': 'Tuusendertrennzeiche',
+  'Decimaalteken': 'Dezimaltrennzeiche',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'D Diagrammdate hend nöd chöne gläse werde; die Diagramm bliibed leer:',
   'Bijlage hulpmiddelen invoegen…': 'Ahang Hilfsmittel yfüege…',

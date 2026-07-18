@@ -1810,6 +1810,11 @@ const _dutchSourceAddBg = <String, String>{
   'Zoek op naam, id of categorie': 'Търсене по име, id или категория',
   'Geen zwakheid gevonden': 'Не е намерена слабост',
   'uitleg nog niet geschreven': 'обяснението още не е написано',
+  'Getalnotatie herkennen': 'Разпознаване на формата на числата',
+  'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
+      'Този файл съдържа числа, чиято запетая може да се чете по два начина:',
+  'Duizendtalscheiding': 'Разделител на хиляди',
+  'Decimaalteken': 'Десетичен знак',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Данните на диаграмата не можаха да бъдат прочетени; тези диаграми остават празни:',
   'Bijlage hulpmiddelen invoegen…': 'Вмъкване на приложение с инструменти…',

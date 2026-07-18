@@ -1787,6 +1787,11 @@ const _dutchSourceAddFi = <String, String>{
   'Zoek op naam, id of categorie': 'Hae nimellä, tunnuksella tai luokalla',
   'Geen zwakheid gevonden': 'Heikkoutta ei löytynyt',
   'uitleg nog niet geschreven': 'ohjeistusta ei ole vielä kirjoitettu',
+  'Getalnotatie herkennen': 'Tunnista lukumuoto',
+  'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
+      'Tässä tiedostossa on lukuja, joiden pilkku voidaan lukea kahdella tavalla:',
+  'Duizendtalscheiding': 'Tuhaterotin',
+  'Decimaalteken': 'Desimaalierotin',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Kaavion tietoja ei voitu lukea; nämä kaaviot jäävät tyhjiksi:',
   'Bijlage hulpmiddelen invoegen…': 'Lisää työkaluliite…',

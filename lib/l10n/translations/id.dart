@@ -1787,6 +1787,11 @@ const _dutchSourceAddId = <String, String>{
   'Zoek op naam, id of categorie': 'Cari berdasarkan nama, id, atau kategori',
   'Geen zwakheid gevonden': 'Tidak ada kelemahan ditemukan',
   'uitleg nog niet geschreven': 'penjelasan belum ditulis',
+  'Getalnotatie herkennen': 'Kenali format angka',
+  'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
+      'Berkas ini berisi angka yang komanya dapat dibaca dengan dua cara:',
+  'Duizendtalscheiding': 'Pemisah ribuan',
+  'Decimaalteken': 'Tanda desimal',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Data bagan tidak dapat dibaca; bagan tersebut tetap kosong:',
   'Bijlage hulpmiddelen invoegen…': 'Sisipkan lampiran perkakas…',

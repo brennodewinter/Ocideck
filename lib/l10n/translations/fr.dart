@@ -744,6 +744,11 @@ const _dutchSourceAddFr = {
   'Zoek op naam, id of categorie': 'Rechercher par nom, id ou catégorie',
   'Geen zwakheid gevonden': 'Aucune faiblesse trouvée',
   'uitleg nog niet geschreven': 'explication pas encore rédigée',
+  'Getalnotatie herkennen': 'Reconnaître le format des nombres',
+  'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
+      'Ce fichier contient des nombres dont la virgule se lit de deux façons :',
+  'Duizendtalscheiding': 'Séparateur de milliers',
+  'Decimaalteken': 'Séparateur décimal',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Les données du graphique n\'ont pas pu être lues ; ces graphiques restent vides :',
   'Bijlage hulpmiddelen invoegen…': 'Insérer l\'annexe outils…',

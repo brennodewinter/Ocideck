@@ -1806,6 +1806,11 @@ const _dutchSourceAddRo = <String, String>{
   'Zoek op naam, id of categorie': 'Caută după nume, id sau categorie',
   'Geen zwakheid gevonden': 'Nu s-a găsit nicio slăbiciune',
   'uitleg nog niet geschreven': 'explicația nu a fost încă scrisă',
+  'Getalnotatie herkennen': 'Recunoaște formatul numerelor',
+  'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
+      'Acest fișier conține numere a căror virgulă poate fi citită în două moduri:',
+  'Duizendtalscheiding': 'Separator de mii',
+  'Decimaalteken': 'Separator zecimal',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Datele graficului nu au putut fi citite; acele grafice rămân goale:',
   'Bijlage hulpmiddelen invoegen…': 'Inserează anexa cu instrumente…',

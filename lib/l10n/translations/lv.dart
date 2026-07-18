@@ -1786,6 +1786,11 @@ const _dutchSourceAddLv = <String, String>{
   'Zoek op naam, id of categorie': 'Meklēt pēc nosaukuma, id vai kategorijas',
   'Geen zwakheid gevonden': 'Vājums nav atrasts',
   'uitleg nog niet geschreven': 'skaidrojums vēl nav uzrakstīts',
+  'Getalnotatie herkennen': 'Atpazīt skaitļu formātu',
+  'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
+      'Šajā failā ir skaitļi, kuru komatu var lasīt divos veidos:',
+  'Duizendtalscheiding': 'Tūkstošu atdalītājs',
+  'Decimaalteken': 'Decimālzīme',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Diagrammas datus nevarēja nolasīt; šīs diagrammas paliek tukšas:',
   'Bijlage hulpmiddelen invoegen…': 'Ievietot rīku pielikumu…',

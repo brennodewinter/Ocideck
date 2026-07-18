@@ -1786,6 +1786,11 @@ const _dutchSourceAddSv = <String, String>{
   'Zoek op naam, id of categorie': 'Sök på namn, id eller kategori',
   'Geen zwakheid gevonden': 'Ingen svaghet hittades',
   'uitleg nog niet geschreven': 'vägledning ännu inte skriven',
+  'Getalnotatie herkennen': 'Känn igen talformatet',
+  'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
+      'Den här filen innehåller tal där kommatecknet kan läsas på två sätt:',
+  'Duizendtalscheiding': 'Tusentalsavgränsare',
+  'Decimaalteken': 'Decimaltecken',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Diagramdata kunde inte läsas; de diagrammen förblir tomma:',
   'Bijlage hulpmiddelen invoegen…': 'Infoga bilaga med verktyg…',

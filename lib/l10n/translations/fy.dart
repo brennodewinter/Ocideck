@@ -745,6 +745,11 @@ const _dutchSourceAddFy = {
   'Zoek op naam, id of categorie': 'Sykje op namme, id of kategory',
   'Geen zwakheid gevonden': 'Gjin swakte fûn',
   'uitleg nog niet geschreven': 'útlis noch net skreaun',
+  'Getalnotatie herkennen': 'Getalnotaasje werkenne',
+  'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
+      'Yn dit bestân steane getallen wêrfan de komma op twa manieren te lêzen is:',
+  'Duizendtalscheiding': 'Tûzentalskieding',
+  'Decimaalteken': 'Desimaalteken',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Grafykdata koe net lêzen wurde; dy grafiken bliuwe leech:',
   'Bijlage hulpmiddelen invoegen…': 'Bylage helpmiddels ynfoegje…',

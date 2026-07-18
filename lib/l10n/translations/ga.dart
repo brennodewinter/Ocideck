@@ -1824,6 +1824,11 @@ const _dutchSourceAddGa = <String, String>{
       'Cuardaigh de réir ainm, aitheantóir nó catagóir',
   'Geen zwakheid gevonden': 'Níor aimsíodh aon laige',
   'uitleg nog niet geschreven': 'níl an treoir scríofa fós',
+  'Getalnotatie herkennen': 'Aithin formáid na n-uimhreacha',
+  'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
+      'Tá uimhreacha sa chomhad seo ar féidir an camóg iontu a léamh ar dhá bhealach:',
+  'Duizendtalscheiding': 'Deighilteoir mílte',
+  'Decimaalteken': 'Marc deachúlach',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Níorbh fhéidir sonraí an chairt a léamh; fanfaidh na cairteacha sin folamh:',
   'Bijlage hulpmiddelen invoegen…': 'Ionsáigh aguisín na n-uirlisí…',

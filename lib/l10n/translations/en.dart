@@ -926,6 +926,11 @@ const _dutchSourceAddEn = {
   'Zoek op naam, id of categorie': 'Search by name, id or category',
   'Geen zwakheid gevonden': 'No weakness found',
   'uitleg nog niet geschreven': 'guidance not written yet',
+  'Getalnotatie herkennen': 'Recognise the number format',
+  'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
+      'This file contains numbers whose comma can be read in two ways:',
+  'Duizendtalscheiding': 'Thousands separator',
+  'Decimaalteken': 'Decimal mark',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Chart data could not be read; those charts stay empty:',
   'Bijlage hulpmiddelen invoegen…': 'Insert tools appendix…',

@@ -1815,6 +1815,11 @@ const _dutchSourceAddEl = <String, String>{
   'Zoek op naam, id of categorie': 'Αναζήτηση με όνομα, id ή κατηγορία',
   'Geen zwakheid gevonden': 'Δεν βρέθηκε αδυναμία',
   'uitleg nog niet geschreven': 'η επεξήγηση δεν έχει γραφτεί ακόμη',
+  'Getalnotatie herkennen': 'Αναγνώριση μορφής αριθμών',
+  'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
+      'Αυτό το αρχείο περιέχει αριθμούς των οποίων το κόμμα διαβάζεται με δύο τρόπους:',
+  'Duizendtalscheiding': 'Διαχωριστικό χιλιάδων',
+  'Decimaalteken': 'Υποδιαστολή',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Δεν ήταν δυνατή η ανάγνωση των δεδομένων του γραφήματος· αυτά τα γραφήματα παραμένουν κενά:',
   'Bijlage hulpmiddelen invoegen…': 'Εισαγωγή παραρτήματος εργαλείων…',

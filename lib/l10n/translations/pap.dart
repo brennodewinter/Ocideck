@@ -744,6 +744,11 @@ const _dutchSourceAddPap = {
   'Zoek op naam, id of categorie': 'Buska pa nòmber, id òf kategoria',
   'Geen zwakheid gevonden': 'No a hañá ningun debilidat',
   'uitleg nog niet geschreven': 'splikashon ainda no skirbí',
+  'Getalnotatie herkennen': 'Rekonosé e formato di number',
+  'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
+      'E archivo aki tin number kua nan koma por wòrdu lesá di dos manera:',
+  'Duizendtalscheiding': 'Separador di mil',
+  'Decimaalteken': 'Marka desimal',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'No por a lesa e datos di grafiko; e grafikonan ei ta keda bashí:',
   'Bijlage hulpmiddelen invoegen…': 'Inserta anekso di hèrmèntnan…',

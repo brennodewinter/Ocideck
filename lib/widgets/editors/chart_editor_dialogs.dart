@@ -295,3 +295,77 @@ extension _ChartEditorUnlink on _ChartEditorState {
     _emit();
   }
 }
+
+/// One number as it would read under a convention, for the preview in
+/// [askDecimalConvention]. Kept local and blunt: this is a sample, not output.
+String _previewNumber(double? value) {
+  if (value == null) return '?';
+  return value == value.roundToDouble()
+      ? value.toInt().toString()
+      : value.toString();
+}
+
+/// Ask how the commas in an imported CSV are meant.
+///
+/// Only reached when the file itself does not settle it — see
+/// [scanDecimalConvention]. Rather than describe the two conventions in the
+/// abstract, both options show what *these* values become, because "1,234 or
+/// 1234?" is a question anyone can answer about their own data while "decimal
+/// separator" is not.
+///
+/// Returns null when the user backs out, which cancels the import rather than
+/// falling back to a reading nobody chose.
+Future<DecimalConvention?> askDecimalConvention(
+  BuildContext context,
+  List<String> values,
+) {
+  final l10n = context.l10n;
+  final samples = values.toSet().take(3).toList();
+  String previewOf(DecimalConvention convention) => [
+    for (final v in samples) _previewNumber(parseNumberUnder(v, convention)),
+  ].join(' · ');
+
+  return showDialog<DecimalConvention>(
+    context: context,
+    builder: (ctx) => AlertDialog(
+      title: Text(l10n.d('Getalnotatie herkennen')),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.d(
+              'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:',
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            samples.join(' · '),
+            style: const TextStyle(
+              fontFeatures: [FontFeature.tabularFigures()],
+            ),
+          ),
+          const SizedBox(height: 16),
+          ListTile(
+            key: const ValueKey('csv-convention-thousands'),
+            title: Text(l10n.d('Duizendtalscheiding')),
+            subtitle: Text(previewOf(DecimalConvention.dot)),
+            onTap: () => Navigator.pop(ctx, DecimalConvention.dot),
+          ),
+          ListTile(
+            key: const ValueKey('csv-convention-decimal'),
+            title: Text(l10n.d('Decimaalteken')),
+            subtitle: Text(previewOf(DecimalConvention.comma)),
+            onTap: () => Navigator.pop(ctx, DecimalConvention.comma),
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(ctx),
+          child: Text(l10n.t('cancel')),
+        ),
+      ],
+    ),
+  );
+}
