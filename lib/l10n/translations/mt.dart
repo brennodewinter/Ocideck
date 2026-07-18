@@ -1806,6 +1806,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'MASWE-zwakheid kiezen': 'Agħżel dgħufija MASWE',
+  'Zoek op naam, id of categorie': 'Fittex bl-isem, l-id jew il-kategorija',
+  'Geen zwakheid gevonden': 'Ma nstabet l-ebda dgħufija',
+  'uitleg nog niet geschreven': 'l-ispjegazzjoni għadha ma nkitbitx',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Id-data tal-graff ma setgħetx tinqara; dawk il-graffs jibqgħu vojta:',
   'Bijlage hulpmiddelen invoegen…': 'Daħħal l-anness tal-għodod…',

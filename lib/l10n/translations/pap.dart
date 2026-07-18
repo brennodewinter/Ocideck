@@ -740,6 +740,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'MASWE-zwakheid kiezen': 'Skohe un debilidat MASWE',
+  'Zoek op naam, id of categorie': 'Buska pa nòmber, id òf kategoria',
+  'Geen zwakheid gevonden': 'No a hañá ningun debilidat',
+  'uitleg nog niet geschreven': 'splikashon ainda no skirbí',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'No por a lesa e datos di grafiko; e grafikonan ei ta keda bashí:',
   'Bijlage hulpmiddelen invoegen…': 'Inserta anekso di hèrmèntnan…',

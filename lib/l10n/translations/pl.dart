@@ -1796,6 +1796,10 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'MASWE-zwakheid kiezen': 'Wybierz słabość MASWE',
+  'Zoek op naam, id of categorie': 'Szukaj po nazwie, id lub kategorii',
+  'Geen zwakheid gevonden': 'Nie znaleziono słabości',
+  'uitleg nog niet geschreven': 'opis jeszcze nienapisany',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Nie można odczytać danych wykresu; te wykresy pozostaną puste:',
   'Bijlage hulpmiddelen invoegen…': 'Wstaw załącznik z narzędziami…',

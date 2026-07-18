@@ -1786,6 +1786,10 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'MASWE-zwakheid kiezen': 'Vybrat slabinu MASWE',
+  'Zoek op naam, id of categorie': 'Hledat podle názvu, id nebo kategorie',
+  'Geen zwakheid gevonden': 'Nenalezena žádná slabina',
+  'uitleg nog niet geschreven': 'vysvětlení zatím nenapsáno',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Data grafu se nepodařilo načíst; tyto grafy zůstanou prázdné:',
   'Bijlage hulpmiddelen invoegen…': 'Vložit přílohu s nástroji…',

@@ -1813,6 +1813,10 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'MASWE-zwakheid kiezen': 'Escolher uma fraqueza MASWE',
+  'Zoek op naam, id of categorie': 'Pesquisar por nome, id ou categoria',
+  'Geen zwakheid gevonden': 'Nenhuma fraqueza encontrada',
+  'uitleg nog niet geschreven': 'explicação ainda não escrita',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Não foi possível ler os dados do gráfico; esses gráficos ficam vazios:',
   'Bijlage hulpmiddelen invoegen…': 'Inserir anexo de ferramentas…',

@@ -740,6 +740,10 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'MASWE-zwakheid kiezen': 'MASWE-Schwachstelle wählen',
+  'Zoek op naam, id of categorie': 'Nach Name, ID oder Kategorie suchen',
+  'Geen zwakheid gevonden': 'Keine Schwachstelle gefunden',
+  'uitleg nog niet geschreven': 'Erläuterung noch nicht geschrieben',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Diagrammdaten konnten nicht gelesen werden; diese Diagramme bleiben leer:',
   'Bijlage hulpmiddelen invoegen…': 'Anhang Hilfsmittel einfügen…',

@@ -1811,6 +1811,10 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'MASWE-zwakheid kiezen': 'Επιλογή αδυναμίας MASWE',
+  'Zoek op naam, id of categorie': 'Αναζήτηση με όνομα, id ή κατηγορία',
+  'Geen zwakheid gevonden': 'Δεν βρέθηκε αδυναμία',
+  'uitleg nog niet geschreven': 'η επεξήγηση δεν έχει γραφτεί ακόμη',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Δεν ήταν δυνατή η ανάγνωση των δεδομένων του γραφήματος· αυτά τα γραφήματα παραμένουν κενά:',
   'Bijlage hulpmiddelen invoegen…': 'Εισαγωγή παραρτήματος εργαλείων…',

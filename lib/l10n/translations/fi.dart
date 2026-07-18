@@ -1783,6 +1783,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'MASWE-zwakheid kiezen': 'Valitse MASWE-heikkous',
+  'Zoek op naam, id of categorie': 'Hae nimellä, tunnuksella tai luokalla',
+  'Geen zwakheid gevonden': 'Heikkoutta ei löytynyt',
+  'uitleg nog niet geschreven': 'ohjeistusta ei ole vielä kirjoitettu',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Kaavion tietoja ei voitu lukea; nämä kaaviot jäävät tyhjiksi:',
   'Bijlage hulpmiddelen invoegen…': 'Lisää työkaluliite…',

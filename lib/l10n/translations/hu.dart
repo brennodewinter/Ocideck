@@ -1787,6 +1787,11 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'MASWE-zwakheid kiezen': 'MASWE-gyengeség kiválasztása',
+  'Zoek op naam, id of categorie':
+      'Keresés név, azonosító vagy kategória szerint',
+  'Geen zwakheid gevonden': 'Nincs találat gyengeségre',
+  'uitleg nog niet geschreven': 'a magyarázat még nem készült el',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'A diagram adatai nem olvashatók; ezek a diagramok üresen maradnak:',
   'Bijlage hulpmiddelen invoegen…': 'Eszközök melléklet beszúrása…',

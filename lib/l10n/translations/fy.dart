@@ -741,6 +741,10 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'MASWE-zwakheid kiezen': 'MASWE-swakte kieze',
+  'Zoek op naam, id of categorie': 'Sykje op namme, id of kategory',
+  'Geen zwakheid gevonden': 'Gjin swakte fûn',
+  'uitleg nog niet geschreven': 'útlis noch net skreaun',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Grafykdata koe net lêzen wurde; dy grafiken bliuwe leech:',
   'Bijlage hulpmiddelen invoegen…': 'Bylage helpmiddels ynfoegje…',

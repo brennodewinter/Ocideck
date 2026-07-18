@@ -31,7 +31,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `deck_template_security.dart` — The module-only **MIAUW-pentestrapport** deck template (`_buildMiauwReport`): scaffolds the full MIAUW report structure across the security slide types.
 - `document_signature.dart` — `DocumentSignature`, the reusable visual signature for sign-off and the document seal.
 - `eis_entry.dart` — `EisEntry`/`EisPart`/`EisDerivation`/`EisCheck` for the MIAUW compliance schema.
-- `finding_spec.dart` — `FindingSpec`: the structured content of a `finding` header slide (scope, CVSS, CWE, CVE, retest status, sections); `RetestStatus` (hertest outcome).
+- `finding_spec.dart` — `FindingSpec`: the structured content of a `finding` header slide (scope, CVSS, CWE, **MASWE**, CVE, retest status, sections). Van MASWE wordt alleen het *id* opgeslagen; titel en categorie (die in de URL zit) komen uit `MasweCatalog` bij het schrijven, zodat een bijgestelde titel niet in een oud rapport bevriest. Een onbekend id blijft staan zonder link — liever geen link dan een 404; `RetestStatus` (hertest outcome).
 - `finding_template.dart` — `FindingTemplate`, a reusable finding starter parsed from Markdown with YAML front matter.
 - `findings_summary_spec.dart` — per-severity findings-summary counts + retest-resolved total + `deckFindingSeverities` / `deckRetestResolvedCount` derivations.
 - `markdown_validation.dart` — `MarkdownValidationResult`/`MarkdownValidationIssue` for linting markdown content.
@@ -288,6 +288,7 @@ search (Phase 6) and asset deletion (§6.2, deliberately manual).
 - `command_palette.dart` — Searchable command overlay (Ctrl/Cmd+K); filters actions, keyboard-navigable.
 - `consent_dialog.dart` — Initial consent/welcome dialog (privacy and license).
 - `cvss_builder_dialog.dart` — Reusable per-metric CVSS 4.0 builder (`CvssBuilder`) + modal wrapper (`CvssBuilderDialog`) with a base/context score read-out; shared by the finding wizard and editor.
+- `maswe_picker.dart` — `MaswePicker`: doorzoekbare kiezer over de MASWE-lijst voor het MASWE-veld van een bevinding. Zet onuitgeschreven zwakheden onderaan en markeert ze; vult bewust géén beschrijving in, want die is bij de bron nog concept.
 - `cwe_picker.dart` — Searchable picker over the offline CWE catalog (finding editor / wizard).
 - `cve_picker.dart` — Gated online CVE lookup dialog (by id pattern) returning the chosen id to the finding editor / wizard.
 - `export_dialog.dart` — WYSIWYG export dialog for PDF/PPTX/HTML.

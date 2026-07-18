@@ -1783,6 +1783,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'MASWE-zwakheid kiezen': 'Pilih kelemahan MASWE',
+  'Zoek op naam, id of categorie': 'Cari berdasarkan nama, id, atau kategori',
+  'Geen zwakheid gevonden': 'Tidak ada kelemahan ditemukan',
+  'uitleg nog niet geschreven': 'penjelasan belum ditulis',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Data bagan tidak dapat dibaca; bagan tersebut tetap kosong:',
   'Bijlage hulpmiddelen invoegen…': 'Sisipkan lampiran perkakas…',

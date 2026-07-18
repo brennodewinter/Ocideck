@@ -1791,6 +1791,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'MASWE-zwakheid kiezen': 'Pasirinkite MASWE silpnybę',
+  'Zoek op naam, id of categorie': 'Ieškoti pagal pavadinimą, id ar kategoriją',
+  'Geen zwakheid gevonden': 'Silpnybių nerasta',
+  'uitleg nog niet geschreven': 'paaiškinimas dar neparašytas',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Nepavyko nuskaityti diagramos duomenų; šios diagramos liks tuščios:',
   'Bijlage hulpmiddelen invoegen…': 'Įterpti įrankių priedą…',

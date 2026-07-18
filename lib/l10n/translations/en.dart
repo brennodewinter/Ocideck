@@ -922,6 +922,10 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'MASWE-zwakheid kiezen': 'Choose a MASWE weakness',
+  'Zoek op naam, id of categorie': 'Search by name, id or category',
+  'Geen zwakheid gevonden': 'No weakness found',
+  'uitleg nog niet geschreven': 'guidance not written yet',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Chart data could not be read; those charts stay empty:',
   'Bijlage hulpmiddelen invoegen…': 'Insert tools appendix…',

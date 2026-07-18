@@ -1790,6 +1790,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'MASWE-zwakheid kiezen': 'Odaberi MASWE slabost',
+  'Zoek op naam, id of categorie': 'Pretraži po nazivu, id-u ili kategoriji',
+  'Geen zwakheid gevonden': 'Nije pronađena slabost',
+  'uitleg nog niet geschreven': 'objašnjenje još nije napisano',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Podaci grafikona nisu se mogli pročitati; ti grafikoni ostaju prazni:',
   'Bijlage hulpmiddelen invoegen…': 'Umetni prilog s alatima…',

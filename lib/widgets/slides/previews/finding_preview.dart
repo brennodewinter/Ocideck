@@ -3,7 +3,7 @@
 part of '../slide_preview.dart';
 
 /// Preview for a `finding` header slide (PENTEST_MIAUW §3.1, §11): a
-/// severity-coloured header card — heading, CVSS score/severity badge, CWE/CVE
+/// severity-coloured header card — heading, CVSS score/severity badge, CWE/MASWE/CVE
 /// chips and the scope object — above the finding's prose sections. All content
 /// comes from [FindingSpec.parse] over [Slide.customMarkdown]; the severity band
 /// is derived from the CVSS vector, so it is deterministic and flows unchanged
@@ -225,6 +225,10 @@ class _FindingPreview extends StatelessWidget {
             band(base),
           ),
         if (spec.cweId != null) _outlinedChip('CWE-${spec.cweId}'),
+        // MASWE naast CWE, niet in plaats van: een mobiele bevinding hoort in
+        // beide talen leesbaar te zijn, en de zwakheid verwijst zelf ook naar
+        // een CWE.
+        if (spec.masweId.isNotEmpty) _outlinedChip(spec.masweId),
         for (final cve in spec.cveIds) _outlinedChip(cve),
         if (spec.testId.isNotEmpty) _outlinedChip(spec.testId),
         if (spec.retest.isRetested)

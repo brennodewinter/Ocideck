@@ -1802,6 +1802,10 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'MASWE-zwakheid kiezen': 'Alege o slăbiciune MASWE',
+  'Zoek op naam, id of categorie': 'Caută după nume, id sau categorie',
+  'Geen zwakheid gevonden': 'Nu s-a găsit nicio slăbiciune',
+  'uitleg nog niet geschreven': 'explicația nu a fost încă scrisă',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Datele graficului nu au putut fi citite; acele grafice rămân goale:',
   'Bijlage hulpmiddelen invoegen…': 'Inserează anexa cu instrumente…',

@@ -1782,6 +1782,10 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'MASWE-zwakheid kiezen': 'Izvēlieties MASWE vājumu',
+  'Zoek op naam, id of categorie': 'Meklēt pēc nosaukuma, id vai kategorijas',
+  'Geen zwakheid gevonden': 'Vājums nav atrasts',
+  'uitleg nog niet geschreven': 'skaidrojums vēl nav uzrakstīts',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Diagrammas datus nevarēja nolasīt; šīs diagrammas paliek tukšas:',
   'Bijlage hulpmiddelen invoegen…': 'Ievietot rīku pielikumu…',

@@ -1782,6 +1782,10 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'MASWE-zwakheid kiezen': 'Välj en MASWE-svaghet',
+  'Zoek op naam, id of categorie': 'Sök på namn, id eller kategori',
+  'Geen zwakheid gevonden': 'Ingen svaghet hittades',
+  'uitleg nog niet geschreven': 'vägledning ännu inte skriven',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Diagramdata kunde inte läsas; de diagrammen förblir tomma:',
   'Bijlage hulpmiddelen invoegen…': 'Infoga bilaga med verktyg…',

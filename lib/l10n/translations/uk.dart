@@ -1801,6 +1801,10 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'MASWE-zwakheid kiezen': 'Вибрати слабкість MASWE',
+  'Zoek op naam, id of categorie': 'Пошук за назвою, id або категорією',
+  'Geen zwakheid gevonden': 'Слабкість не знайдено',
+  'uitleg nog niet geschreven': 'пояснення ще не написано',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Не вдалося прочитати дані діаграми; ці діаграми залишаться порожніми:',
   'Bijlage hulpmiddelen invoegen…': 'Вставити додаток з інструментами…',
