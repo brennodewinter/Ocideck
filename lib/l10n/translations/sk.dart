@@ -1790,6 +1790,10 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'MASWE-zwakheid kiezen': 'Vybrať slabinu MASWE',
+  'Zoek op naam, id of categorie': 'Hľadať podľa názvu, id alebo kategórie',
+  'Geen zwakheid gevonden': 'Nenašla sa žiadna slabina',
+  'uitleg nog niet geschreven': 'vysvetlenie zatiaľ nenapísané',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Údaje grafu sa nepodarilo načítať; tieto grafy zostanú prázdne:',
   'Bijlage hulpmiddelen invoegen…': 'Vložiť prílohu s nástrojmi…',

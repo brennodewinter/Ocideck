@@ -1799,6 +1799,10 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'MASWE-zwakheid kiezen': 'Infirmitatem MASWE eligere',
+  'Zoek op naam, id of categorie': 'Quaerere nomine, id vel genere',
+  'Geen zwakheid gevonden': 'Nulla infirmitas inventa',
+  'uitleg nog niet geschreven': 'explicatio nondum scripta',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Data diagrammatis legi non potuerunt; illa diagrammata vacua manent:',
   'Bijlage hulpmiddelen invoegen…': 'Appendicem instrumentorum inserere…',

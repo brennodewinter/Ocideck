@@ -1774,6 +1774,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'MASWE-zwakheid kiezen': 'Vali MASWE nõrkus',
+  'Zoek op naam, id of categorie': 'Otsi nime, id või kategooria järgi',
+  'Geen zwakheid gevonden': 'Nõrkust ei leitud',
+  'uitleg nog niet geschreven': 'juhis pole veel kirjutatud',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Diagrammi andmeid ei õnnestunud lugeda; need diagrammid jäävad tühjaks:',
   'Bijlage hulpmiddelen invoegen…': 'Lisa tööriistade lisa…',

@@ -1806,6 +1806,10 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'MASWE-zwakheid kiezen': 'Избор на слабост MASWE',
+  'Zoek op naam, id of categorie': 'Търсене по име, id или категория',
+  'Geen zwakheid gevonden': 'Не е намерена слабост',
+  'uitleg nog niet geschreven': 'обяснението още не е написано',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Данните на диаграмата не можаха да бъдат прочетени; тези диаграми остават празни:',
   'Bijlage hulpmiddelen invoegen…': 'Вмъкване на приложение с инструменти…',

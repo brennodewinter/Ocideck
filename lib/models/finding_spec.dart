@@ -1,4 +1,5 @@
 import '../services/cvss/cvss4.dart';
+import '../services/maswe_catalog.dart';
 
 /// Whether — and with what outcome — a finding was **retested** (hertest,
 /// PENTEST_MIAUW §4.13). The [token] is the stable English word written to the
@@ -58,6 +59,7 @@ class FindingSpec {
     this.cvssVector = '',
     this.cweId,
     this.cweName = '',
+    this.masweId = '',
     this.cveIds = const [],
     this.description = '',
     this.confirmation = '',
@@ -88,6 +90,18 @@ class FindingSpec {
 
   /// The CWE name shown after the id; optional (coverage is uneven, §6).
   final String cweName;
+
+  /// De MASWE-zwakheid waar deze bevinding op uitkomt, bv. `MASWE-0005`. Leeg
+  /// wanneer er geen is. De mobiele tegenhanger van [cweId]; beide mogen naast
+  /// elkaar staan, want MASWE-zwakheden verwijzen zelf ook naar een CWE.
+  ///
+  /// Alleen het id wordt opgeslagen. Titel en categorie komen uit de gebundelde
+  /// `MasweCatalog` — anders zou een bevinding een titel bevriezen die bij de
+  /// bron intussen is bijgesteld, terwijl het id juist stabiel is. Dat is de
+  /// omgekeerde afweging van de gebruikte standaarden op het deck, en met
+  /// reden: dáár is de *versie* het feit dat vast moet liggen, hier is het id
+  /// de aanhaling en is de tekst eromheen toelichting.
+  final String masweId;
 
   /// Zero or more CVE ids (e.g. `CVE-2024-1234`), rendered as NVD links.
   final List<String> cveIds;
@@ -122,6 +136,22 @@ class FindingSpec {
       ? null
       : 'https://cwe.mitre.org/data/definitions/$cweId.html';
 
+  /// De canonieke MASWE-pagina voor [masweId], of null.
+  ///
+  /// De URL bevat de MASVS-categorie, dus die wordt uit de gebundelde catalogus
+  /// gehaald in plaats van hem in de bevinding op te slaan. Kent de catalogus
+  /// het id niet — een handmatig getypt of nieuwer id — dan is er geen link.
+  /// Liever geen link dan een die naar een 404 wijst.
+  String? get masweUrl {
+    if (masweId.isEmpty) return null;
+    final w = MasweCatalog.instance.byId(masweId);
+    if (w == null) return null;
+    return 'https://mas.owasp.org/MASWE/${w.category}/${w.id}/';
+  }
+
+  /// De titel van [masweId] volgens de gebundelde catalogus, of leeg.
+  String get masweTitle => MasweCatalog.instance.byId(masweId)?.title ?? '';
+
   /// The canonical NVD URL for a CVE id.
   static String cveUrl(String cve) => 'https://nvd.nist.gov/vuln/detail/$cve';
 
@@ -130,6 +160,7 @@ class FindingSpec {
   static final _reSection = RegExp(r'^##\s+(.*)$');
   static final _reBacktick = RegExp(r'`([^`]*)`');
   static final _reCwe = RegExp(r'CWE-(\d+)');
+  static final _reMaswe = RegExp(r'MASWE-\d+');
   static final _reCweName = RegExp(r'—\s*([^\]]+?)\s*\]');
   static final _reCve = RegExp(r'CVE-\d{4}-\d+');
   static final _reVector = RegExp(r'CVSS:4\.0/[A-Za-z0-9:/]+');
@@ -170,6 +201,7 @@ class FindingSpec {
     var cvssVector = '';
     int? cweId;
     var cweName = '';
+    var maswe = '';
     final cveIds = <String>[];
     var retest = RetestStatus.notRetested;
     var retestNote = '';
@@ -207,6 +239,8 @@ class FindingSpec {
           scopeObject = _reBacktick.firstMatch(value)?.group(1) ?? value;
         case 'cvss 4.0':
           cvssVector = _reVector.firstMatch(value)?.group(0) ?? '';
+        case 'maswe':
+          maswe = _reMaswe.firstMatch(value)?.group(0) ?? '';
         case 'cwe':
           cweId = int.tryParse(_reCwe.firstMatch(value)?.group(1) ?? '');
           cweName = _reCweName.firstMatch(value)?.group(1)?.trim() ?? '';
@@ -236,6 +270,7 @@ class FindingSpec {
       cvssVector: cvssVector,
       cweId: cweId,
       cweName: cweName,
+      masweId: maswe,
       cveIds: cveIds,
       retest: retest,
       retestNote: retestNote,
@@ -263,6 +298,7 @@ class FindingSpec {
     }
     if (cvssVector.isNotEmpty) metaLines.add('**CVSS 4.0:** ${_cvssText()}');
     if (cweId != null) metaLines.add('**CWE:** ${_cweLink()}');
+    if (masweId.isNotEmpty) metaLines.add('**MASWE:** ${_masweLink()}');
     if (cveIds.isNotEmpty) {
       final links = cveIds.map((c) => '[$c](${cveUrl(c)})').join(', ');
       metaLines.add('**CVE:** $links');
@@ -297,6 +333,15 @@ class FindingSpec {
   String _cweLink() {
     final label = cweName.isEmpty ? 'CWE-$cweId' : 'CWE-$cweId — $cweName';
     return '[$label]($cweUrl)';
+  }
+
+  /// De MASWE-regel. Zonder bekende categorie geen link, maar wél het id: de
+  /// aanhaling zelf blijft staan, ook als de catalogus hem niet kent.
+  String _masweLink() {
+    final title = masweTitle;
+    final label = title.isEmpty ? masweId : '$masweId — $title';
+    final url = masweUrl;
+    return url == null ? label : '[$label]($url)';
   }
 
   void _writeSection(StringBuffer buf, String title, String text) {

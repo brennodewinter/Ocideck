@@ -740,6 +740,10 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'MASWE-zwakheid kiezen': 'Choisir une faiblesse MASWE',
+  'Zoek op naam, id of categorie': 'Rechercher par nom, id ou catégorie',
+  'Geen zwakheid gevonden': 'Aucune faiblesse trouvée',
+  'uitleg nog niet geschreven': 'explication pas encore rédigée',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Les données du graphique n\'ont pas pu être lues ; ces graphiques restent vides :',
   'Bijlage hulpmiddelen invoegen…': 'Insérer l\'annexe outils…',

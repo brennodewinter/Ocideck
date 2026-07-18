@@ -1758,6 +1758,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'MASWE-zwakheid kiezen': 'MASWE puj wIv',
+  'Zoek op naam, id of categorie': 'pong, id, Segh je Sam',
+  'Geen zwakheid gevonden': 'puj tu\'lu\'be\'',
+  'uitleg nog niet geschreven': 'QIn qonlu\'be\'taH',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'ta\'nom De\' laDlaHbe\'; ta\'nommey chIm rutlh:',
   'Bijlage hulpmiddelen invoegen…': 'jan tetlh chel…',

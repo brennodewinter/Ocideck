@@ -1787,6 +1787,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'MASWE-zwakheid kiezen': 'MASWE-Schwachstell uswähle',
+  'Zoek op naam, id of categorie': 'Nach Name, ID oder Kategorie sueche',
+  'Geen zwakheid gevonden': 'Kei Schwachstell gfunde',
+  'uitleg nog niet geschreven': 'Erklärig no nid gschribe',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'D Diagrammdate hend nöd chöne gläse werde; die Diagramm bliibed leer:',
   'Bijlage hulpmiddelen invoegen…': 'Ahang Hilfsmittel yfüege…',

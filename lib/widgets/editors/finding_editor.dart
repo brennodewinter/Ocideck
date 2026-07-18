@@ -21,6 +21,7 @@ import '../../utils/project_path.dart';
 import '../dialogs/cve_picker.dart';
 import '../dialogs/cvss_builder_dialog.dart';
 import '../dialogs/cwe_picker.dart';
+import '../dialogs/maswe_picker.dart';
 import '../dialogs/finding_template_picker.dart';
 import '_editor_field.dart';
 import 'ai_suggest_field.dart';
@@ -63,6 +64,7 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
   late final TextEditingController _scope;
   late final TextEditingController _cvss;
   late final TextEditingController _cwe;
+  late final TextEditingController _maswe;
   late final TextEditingController _cve;
   late final TextEditingController _description;
   late final TextEditingController _confirmation;
@@ -77,6 +79,7 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
   /// drives it and writes it back to the matching checklist row.
   String _testId = '';
 
+  static final _reMasweId = RegExp(r'MASWE-\d+');
   static final _reCweId = RegExp(r'\d+');
   static final _reCweStrip = RegExp(r'^\s*CWE[-\s]*\d+\s*');
   static final _reCweSep = RegExp(r'^[—:·-]\s*');
@@ -97,6 +100,7 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
     _scope = newController(spec.scopeObject, _onChanged);
     _cvss = newController(spec.cvssVector, _onChanged);
     _cwe = newController(_composeCwe(spec), _onChanged);
+    _maswe = newController(spec.masweId, _onChanged);
     _cve = newController(spec.cveIds.join(', '), _onChanged);
     _description = newController(spec.description, _onChanged);
     _confirmation = newController(spec.confirmation, _onChanged);
@@ -138,6 +142,7 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
       scopeObject: _scope.text.trim(),
       cvssVector: _cvss.text.trim(),
       cweId: cweId,
+      masweId: _reMasweId.firstMatch(_maswe.text)?.group(0) ?? '',
       cweName: cweName,
       cveIds: cveIds,
       description: _description.text,
@@ -221,11 +226,36 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
     _heading.text = spec.heading;
     _cvss.text = spec.cvssVector;
     _cwe.text = _composeCwe(spec);
+    _maswe.text = spec.masweId;
     _description.text = spec.description;
     _confirmation.text = spec.confirmation;
     _impact.text = spec.impact;
     _recommendation.text = spec.recommendation;
   }
+
+  /// Het MASWE-veld met zijn kiezer ernaast. Vrij te typen, zodat een id dat
+  /// nieuwer is dan onze momentopname ook vastgelegd kan worden.
+  Widget _masweField(BuildContext context) => Row(
+    crossAxisAlignment: CrossAxisAlignment.end,
+    children: [
+      Expanded(
+        child: EditorField(
+          label: 'MASWE',
+          controller: _maswe,
+          hint: 'MASWE-0005',
+        ),
+      ),
+      const SizedBox(width: 8),
+      Padding(
+        padding: const EdgeInsets.only(bottom: 6),
+        child: OutlinedButton.icon(
+          onPressed: _pickMaswe,
+          icon: const Icon(Icons.search, size: 16),
+          label: Text(context.l10n.d('Kiezen')),
+        ),
+      ),
+    ],
+  );
 
   /// Pick a weakness from the offline CWE catalog (§10.6): always set the CWE
   /// field, and fill the description / recommendation **only when they are
@@ -239,6 +269,18 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
     if (_recommendation.text.trim().isEmpty) {
       _recommendation.text = entry.recommendation;
     }
+  }
+
+  /// Kies een mobiele zwakheid uit de gebundelde MASWE-lijst.
+  ///
+  /// Anders dan bij CWE wordt hier géén beschrijving ingevuld: drie kwart van
+  /// MASWE is bij de bron nog een concept, en die conceptomschrijving in het
+  /// rapport van een klant laten belanden zou tekst van OWASP presenteren als
+  /// bevinding van de tester. Alleen de aanhaling wordt gezet.
+  Future<void> _pickMaswe() async {
+    final w = await MaswePicker.show(context);
+    if (w == null) return;
+    _maswe.text = w.id;
   }
 
   /// Look up a CVE online (gated) and append its id to the CVE field, without
@@ -328,6 +370,7 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
           controller: _cwe,
           hint: 'CWE-89 — Improper Neutralization of SQL',
         ),
+        _masweField(context),
         EditorField(
           label: 'CVE',
           controller: _cve,

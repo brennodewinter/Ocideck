@@ -8,6 +8,18 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Een bevinding kan nu ook een mobiele zwakheid aanwijzen (MASWE).** Naast het
+  CWE-veld staat een MASWE-veld met een eigen zoeker over de gebundelde lijst.
+  Beide mogen naast elkaar: een mobiele zwakheid verwijst zelf ook naar een CWE,
+  dus de bevinding wordt in beide talen leesbaar. In het rapport verschijnt de
+  zwakheid als aanhaling met een link naar de OWASP-pagina, en op de dia als
+  label naast het CWE-label.
+
+  Twee keuzes die je merkt bij het gebruik. De zoeker zet zwakheden waarvan de
+  uitleg bij OWASP nog niet is geschreven onderaan en markeert ze, zodat je niet
+  verrast op een lege pagina belandt. En anders dan bij CWE vult het kiezen géén
+  beschrijving in: die tekst is bij OWASP nog concept, en dat als jouw bevinding
+  in een klantrapport laten belanden zou niet kloppen.
 - **De mobiele zwakhedenlijst (OWASP MASWE) zit erin, met de koppeling naar
   CWE.** Elke MASTG-test verwijst naar een zwakheid; die zwakheden zijn er nu
   ook, inclusief het CWE-nummer waar ze op uitkomen — zodat een mobiele

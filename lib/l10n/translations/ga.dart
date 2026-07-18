@@ -1819,6 +1819,11 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'MASWE-zwakheid kiezen': 'Roghnaigh laige MASWE',
+  'Zoek op naam, id of categorie':
+      'Cuardaigh de réir ainm, aitheantóir nó catagóir',
+  'Geen zwakheid gevonden': 'Níor aimsíodh aon laige',
+  'uitleg nog niet geschreven': 'níl an treoir scríofa fós',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Níorbh fhéidir sonraí an chairt a léamh; fanfaidh na cairteacha sin folamh:',
   'Bijlage hulpmiddelen invoegen…': 'Ionsáigh aguisín na n-uirlisí…',

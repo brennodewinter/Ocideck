@@ -1782,6 +1782,10 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'MASWE-zwakheid kiezen': 'Vælg en MASWE-svaghed',
+  'Zoek op naam, id of categorie': 'Søg på navn, id eller kategori',
+  'Geen zwakheid gevonden': 'Ingen svaghed fundet',
+  'uitleg nog niet geschreven': 'vejledning endnu ikke skrevet',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Diagramdata kunne ikke læses; de diagrammer forbliver tomme:',
   'Bijlage hulpmiddelen invoegen…': 'Indsæt bilag med værktøjer…',
