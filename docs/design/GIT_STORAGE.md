@@ -934,12 +934,29 @@ Each phase is shippable and preserves the invariants.
 | Saving = commit (+ push) | Phase 2 |
 | Offline (one draft, any platform) | Phase 2 |
 | Offline (real history, airplane) | Phase 3 |
-| Real merges | Phase 3 |
+| Real merges | **Not yet built** — deferred out of Phase 3, see below |
 | Release = reviewed PR | Phase 4 |
 | Versions of one deck = tags | Phase 4 |
 | Async collaboration | Phase 4 (falls out of PR + attribution) |
 | Forgejo / GitHub / GitLab | Phase 0–4 (Forgejo) → Phase 5 (the others) |
 | Text + image search | Phase 6 (within-deck already works) |
+
+> **On "real merges".** This row said *Phase 3* until it was corrected: Phase 3
+> shipped the native clone and durable local commits, but merging a concurrent
+> edit was deliberately left out of it, and Phase 4 did not pick it up either.
+> What actually happens today when someone else moved the ref:
+> - **REST plane** — the commit is refused on the `baseSha` guard and comes back
+>   as `GitSaveStatus.conflict`; the user is told to reload and save again.
+> - **Native plane** — the commit is made locally and the *push* is refused
+>   (`GitCommitOutcome.committedConflict`); the work is real git history on the
+>   machine, but it stays there until someone resolves it outside OciDeck.
+>
+> Nothing is ever lost either way (P2) — but nothing is merged either, so two
+> people editing one deck still have to take turns. Building this means deciding
+> what a merge *means* for a deck: a three-way text merge over `deck.md` is what
+> git would do, but a slide is the unit the user thinks in, and the two answers
+> disagree about what a conflict looks like. That decision is why it keeps
+> getting deferred, and it should be made deliberately rather than in passing.
 
 ---
 
