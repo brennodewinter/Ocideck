@@ -1017,7 +1017,11 @@ from `images/`/`media/`. When opening, the file is read and attached to the
 chart in memory; the `.md` keeps only the `source` reference, so the markdown
 stays about the *shape* of the chart while the file holds the values.
 
-The file is copied along during save/`Save as...` and included in packages (§7).
+The file is copied along during save/`Save as...` and included in packages
+(§7). A package is written from the deck **in memory**, not by copying the file
+from disk, so an export made before saving carries the numbers you see on
+screen rather than the older ones still in the file. An HTML/PDF export has no
+folder to resolve a reference against, so it inlines the data instead.
 
 **Two forms.** New data files are written as **JSON**; **CSV** is still read,
 and a deck that already links a `.csv` keeps getting CSV on save — silently

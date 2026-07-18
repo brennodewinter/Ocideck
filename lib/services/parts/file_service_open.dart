@@ -262,17 +262,16 @@ extension _FileServiceOpen on FileService {
   /// path; if the CSV is missing, fall back to keeping the data inline.
   Future<Slide> _packChartSlide(
     Slide s,
-    Future<String?> Function(String, String) addAsset,
+    String Function(String name, String content) addChartData,
   ) async {
     final spec = ChartSpec.parse(s.customMarkdown);
     final src = spec.source;
-    if (src == null) return s;
-    final rel = await addAsset(src, chartDataDirName);
-    if (rel == null) {
-      return s.copyWith(
-        customMarkdown: spec.copyWith(clearSource: true).toBlock(),
-      );
-    }
+    // Data staat inline (nooit opgeslagen deck, of web): dan reist ze zo mee.
+    if (src == null || !spec.hasInlineData) return s;
+    final rel = addChartData(
+      p.posix.basename(src),
+      _chartDataFor(spec, path: src),
+    );
     return s.copyWith(
       customMarkdown: spec.copyWith(source: rel).toBlock(forStorage: true),
     );

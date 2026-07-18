@@ -81,6 +81,32 @@ extension FileServicePackage on FileService {
     };
   }
 
+  /// Schrijf de data van één grafiek als lid onder `data/` en geef het lidpad
+  /// terug; [added] houdt naamconflicten uit elkaar.
+  ///
+  /// Bewust uit het geheugen, en niet door het bestand van schijf te kopiëren.
+  /// Het deck in de editor kan bewerkingen bevatten die nog niet zijn
+  /// opgeslagen; dan is het bestand op schijf verouderd en zou exporteren
+  /// stilzwijgend de oude cijfers meesturen.
+  String _addChartDataTo(
+    Archive archive,
+    Set<String> added,
+    String name,
+    String content,
+  ) {
+    final base = _safeName(p.basenameWithoutExtension(name));
+    final ext = p.extension(name).toLowerCase() == '.csv' ? '.csv' : '.json';
+    var rel = p.posix.join(chartDataDirName, '$base$ext');
+    var i = 2;
+    while (added.contains(rel)) {
+      rel = p.posix.join(chartDataDirName, '$base (${i++})$ext');
+    }
+    final bytes = utf8.encode(content);
+    archive.add(ArchiveFile(rel, bytes.length, bytes));
+    added.add(rel);
+    return rel;
+  }
+
   Future<Archive> _buildPackageArchive(Deck deck) async {
     final archive = Archive();
     final added = <String>{};
@@ -156,12 +182,15 @@ extension FileServicePackage on FileService {
         ),
     ];
 
-    // Chart slides link their data via a CSV path inside the JSON block; bring
-    // the file along under data/ and rewrite the path to match.
+    // Chart slides link their data through a path inside the JSON block; write
+    // that data as its own member under data/ and point the path at it.
     final packedSlides = [
       for (final s in slides)
         if (s.type == SlideType.chart)
-          await _packChartSlide(s, addAsset)
+          await _packChartSlide(
+            s,
+            (name, content) => _addChartDataTo(archive, added, name, content),
+          )
         else
           s,
     ];
