@@ -89,6 +89,14 @@ saved version stays retrievable, which a plain folder cannot give you.
   ceiling, the release is checked against the **strictest** classification
   anywhere in the deck (a single `TLP:RED` slide counts), and a deck over the
   ceiling is refused before anything is pushed.
+- **Merge the concept and record the version — *Concept mergen…* and *Versie
+  vastleggen…*.** Once the review is done, *Concept mergen…* merges the pull
+  request into the main branch (you can let it clean up the concept branch) and
+  puts your tab back on the main branch, so your next edit starts a fresh round.
+  *Versie vastleggen…* then records the version you presented as a release tag
+  (`decks/<name>/vX`) on the main branch — the same versions *Versies…* lists and
+  opens read-only. Recording a version passes the same classification check as
+  releasing for review, so a version can never be tagged past its ceiling.
 - **Native git (desktop):** if you have `git` installed (2.19 or newer),
   *Settings → Git* shows it, and OciDeck keeps a real clone of the repository.
   Then **each save is a genuine local commit** — durable and offline: edit away
