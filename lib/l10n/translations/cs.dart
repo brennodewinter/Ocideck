@@ -1786,6 +1786,20 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Uitbrengen ter review…': 'Odeslat ke kontrole…',
+  'Uitbrengen ter review': 'Odeslat ke kontrole',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'Otevře pull request z tvého konceptu do hlavní větve, aby mohl být zkontrolován před vydáním.',
+  'Toelichting': 'Podrobnosti',
+  'Wat is er veranderd en waarom?': 'Co se změnilo a proč?',
+  'Uitbrengen': 'Odeslat',
+  'Uitgebracht ter review:': 'Odesláno ke kontrole:',
+  'Kopieer link': 'Kopírovat odkaz',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'Vydání zablokováno zásadami klasifikace.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'Zatím není žádný koncept k odeslání — nejprve ulož změnu.',
+  'Uitbrengen mislukt:': 'Odeslání se nezdařilo:',
   'Overzicht': 'Přehled',
   'Veelgestelde vragen': 'Časté dotazy',
   'Probleemoplossing': 'Řešení potíží',

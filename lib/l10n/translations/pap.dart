@@ -740,6 +740,20 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Uitbrengen ter review…': 'Manda pa revishon…',
+  'Uitbrengen ter review': 'Manda pa revishon',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'Ta habri un pull request for di bo konsept pa e branch prinsipal, pa e por wòrdu revisá promé ku e sali.',
+  'Toelichting': 'Detaye',
+  'Wat is er veranderd en waarom?': 'Kiko a kambia i pakiko?',
+  'Uitbrengen': 'Manda',
+  'Uitgebracht ter review:': 'Mandá pa revishon:',
+  'Kopieer link': 'Kopia link',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'Publikashon blokiá pa e norma di klasifikashon.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'No tin ainda un konsept pa manda — warda promé un kambio.',
+  'Uitbrengen mislukt:': 'Mandamentu a faya:',
   'Overzicht': 'Resúmen',
   'Veelgestelde vragen': 'Preguntanan frekuente',
   'Probleemoplossing': 'Solushon di problema',

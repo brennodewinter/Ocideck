@@ -23,6 +23,16 @@ TlpLevel effectiveTlp({
   required TlpLevel slideTlp,
 }) => deckTlp.index >= slideTlp.index ? deckTlp : slideTlp;
 
+/// De strengste classificatie in een héél deck: het hoogste van het deck-niveau
+/// en elk slide-niveau. Waar [effectiveTlp] één slide markeert, is dit wat een
+/// duurzame vrijgave (een review-PR of een release-tag, §9.4) moet toetsen —
+/// één TLP:RED-slide in een TLP:none-deck telt dan mee. Dat is strenger dan de
+/// export-gate, die alleen naar `deck.tlp` kijkt, en dus fail-safe.
+TlpLevel deckReleaseTlp(Deck deck) => deck.slides.fold(
+  deck.tlp,
+  (strengste, slide) => effectiveTlp(deckTlp: strengste, slideTlp: slide.tlp),
+);
+
 extension TlpLevelX on TlpLevel {
   /// De officiële markering die op de slides verschijnt ('' bij [none]).
   String get label {

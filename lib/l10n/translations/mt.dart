@@ -1806,6 +1806,20 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Uitbrengen ter review…': 'Ibgħat għar-reviżjoni…',
+  'Uitbrengen ter review': 'Ibgħat għar-reviżjoni',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'Jiftaħ pull request mill-abbozz tiegħek għall-fergħa ewlenija, biex tkun tista\' tiġi riveduta qabel ma toħroġ.',
+  'Toelichting': 'Dettalji',
+  'Wat is er veranderd en waarom?': 'X\'inbidel u għaliex?',
+  'Uitbrengen': 'Ibgħat',
+  'Uitgebracht ter review:': 'Mibgħut għar-reviżjoni:',
+  'Kopieer link': 'Ikkopja l-link',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'Il-pubblikazzjoni mblukkata mill-politika ta\' klassifikazzjoni.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'Għad m\'hemmx abbozz x\'jintbagħat — l-ewwel issejvja bidla.',
+  'Uitbrengen mislukt:': 'Il-preżentazzjoni falliet:',
   'Overzicht': 'Ħarsa ġenerali',
   'Veelgestelde vragen': 'Mistoqsijiet frekwenti',
   'Probleemoplossing': 'Soluzzjoni tal-problemi',

@@ -1813,6 +1813,20 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Uitbrengen ter review…': 'Enviar para revisão…',
+  'Uitbrengen ter review': 'Enviar para revisão',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'Abre um pull request do seu rascunho para o ramo principal, para que possa ser revisado antes de sair.',
+  'Toelichting': 'Detalhes',
+  'Wat is er veranderd en waarom?': 'O que mudou e por quê?',
+  'Uitbrengen': 'Enviar',
+  'Uitgebracht ter review:': 'Enviado para revisão:',
+  'Kopieer link': 'Copiar link',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'Publicação bloqueada pela política de classificação.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'Ainda não há rascunho para enviar — guarde primeiro uma alteração.',
+  'Uitbrengen mislukt:': 'Falha ao enviar:',
   'Overzicht': 'Visão geral',
   'Veelgestelde vragen': 'Perguntas frequentes',
   'Probleemoplossing': 'Resolução de problemas',

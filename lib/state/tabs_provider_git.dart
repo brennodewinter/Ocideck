@@ -212,8 +212,10 @@ extension TabsNotifierGit on TabsNotifier {
     required String message,
     DeckMirror? mirror,
     Outbox? outbox,
+    DateTime? now,
   }) async {
-    if (GitRepoLayout.deckNameOf(deckDir) == null) {
+    final deckName = GitRepoLayout.deckNameOf(deckDir);
+    if (deckName == null) {
       throw const GitForgeException(
         GitForgeError.malformed,
         'Pad is geen deckmap volgens de repo-layout',
@@ -224,22 +226,42 @@ extension TabsNotifierGit on TabsNotifier {
       return const GitSaveResult(status: GitSaveStatus.failed);
     }
 
-    // Terugschrijven naar de eigen herkomst gebruikt de basis waarop dit werk is
-    // gelezen; een nieuw of verplaatst deck valt terug op de huidige branchkop.
+    // D3: bewerken gebeurt op een werkbranch, nooit rechtstreeks op [branch] (de
+    // standaardbranch). Zit dit tabblad al midden in een ronde op zo'n branch,
+    // dan blijft het daar; anders start (of hervat) het de ronde van vandaag op
+    // `decks/<naam>/<datum>`. De naam wordt gegenereerd, niet getypt — de UI
+    // spreekt van "concept".
     final origin = currentState.current?.gitOrigin;
-    final String baseSha;
-    if (origin != null &&
+    final bool midRound =
+        origin != null &&
         origin.matchesRepo(config) &&
-        origin.branch == branch &&
-        origin.deckDir == deckDir) {
-      baseSha = origin.baseSha;
+        origin.deckDir == deckDir &&
+        origin.branch != branch;
+    final String workBranch;
+    final String? forkFrom;
+    if (midRound) {
+      workBranch = origin.branch;
+      forkFrom = null;
     } else {
-      baseSha = await forge.headSha(branch);
+      final generated = GitRepoLayout.workBranch(
+        deckName,
+        now ?? DateTime.now(),
+      );
+      if (generated == null) {
+        throw const GitForgeException(
+          GitForgeError.malformed,
+          'Kon geen geldige werkbranch-naam maken',
+        );
+      }
+      workBranch = generated;
+      forkFrom = branch;
     }
 
     // Een uit-git-geopend deck houdt zijn afbeeldingen als mem: op élk platform
     // (zie [_withRepoAssets]); [ImageService.readSlideImageBytes] leest mem:
-    // alleen op web. Dus mem: eerst zelf, en pas daarna het bestandspad-pad.
+    // alleen op web. Dus mem: eerst zelf, en pas daarna het bestandspad-pad. De
+    // pool leest van [branch]: de werkbranch takt daarvan af en deelt dus zijn
+    // boom, dus dezelfde blobs.
     final image = ImageService();
     final files = await buildDeckRepoFiles(
       deck,
@@ -252,8 +274,23 @@ extension TabsNotifierGit on TabsNotifier {
     );
 
     try {
+      // Zorg dat de werkbranch bestaat en bepaal de basis. Midden in een ronde
+      // is dat de gelezen basis (conflictdetectie blijft heel); de eerste commit
+      // van een ronde landt op de kop van de werkbranch — hij tákt net af, dus er
+      // is nog geen basis om tegen te botsen.
+      final String baseSha;
+      if (midRound) {
+        baseSha = origin.baseSha;
+      } else {
+        final branches = await forge.listBranches();
+        final match = branches.where((b) => b.name == workBranch);
+        baseSha = match.isNotEmpty
+            ? match.first.sha
+            : (await forge.createBranch(workBranch, fromRef: branch)).sha;
+      }
+
       final result = await forge.commitFiles(
-        branch: branch,
+        branch: workBranch,
         message: message,
         upserts: files.upserts,
         deletes: const [],
@@ -261,7 +298,7 @@ extension TabsNotifierGit on TabsNotifier {
       );
       currentState.current?.gitOrigin = GitOrigin(
         config: config,
-        branch: branch,
+        branch: workBranch,
         deckDir: deckDir,
         baseSha: result.sha,
       );
@@ -281,17 +318,19 @@ extension TabsNotifierGit on TabsNotifier {
       );
     } on GitForgeException catch (e) {
       // Verbinding kwijt is uitstel, geen mislukking: parkeer het werk als er
-      // een wachtrij is (§8.5). Auth- of vormfouten zijn dat niet — die blijven
-      // een echte mislukking, want opnieuw proberen lost ze niet op.
+      // een wachtrij is (§8.5). De werkbranch bestaat dan misschien nog niet —
+      // [forkFrom] reist mee zodat het flushen hem alsnog aanmaakt (D3). Auth- of
+      // vormfouten blijven een echte mislukking; opnieuw proberen lost ze niet op.
       if (e.kind == GitForgeError.network && mirror != null && outbox != null) {
         return _queueGitSave(
           mirror,
           outbox,
           deck: deck,
           deckDir: deckDir,
-          branch: branch,
+          branch: workBranch,
           message: message,
-          baseSha: baseSha,
+          baseSha: midRound ? origin.baseSha : '',
+          forkFrom: forkFrom,
           warnings: files.warnings,
         );
       }
@@ -322,6 +361,7 @@ extension TabsNotifierGit on TabsNotifier {
     required String message,
     required String baseSha,
     required List<String> warnings,
+    String? forkFrom,
   }) async {
     final deckFiles = <String, Uint8List>{
       p.posix.join(deckDir, deckRepoFileName): Uint8List.fromList(
@@ -335,6 +375,7 @@ extension TabsNotifierGit on TabsNotifier {
         branch: branch,
         message: message,
         baseSha: baseSha,
+        forkFrom: forkFrom,
       ),
     );
     return GitSaveResult(status: GitSaveStatus.queued, warnings: warnings);
@@ -396,6 +437,61 @@ extension TabsNotifierGit on TabsNotifier {
     if (changed) refreshTabs();
     return outcomes;
   }
+
+  /// Breng het concept van het huidige tabblad uit ter review (§9.4): open een
+  /// pull request van de werkbranch naar de standaardbranch.
+  ///
+  /// Eerst de classificatiepoort, fail-closed en vóór élke netwerk-bijwerking —
+  /// net als [ExportService.export] (export_service.dart:142), maar op de máx
+  /// effective TLP van het hele deck ([deckReleaseTlp]), want een release is
+  /// duurzaam en geadverteerd: één TLP:RED-slide in een TLP:none-deck hoort hem
+  /// tegen te houden. Pas als de poort groen geeft gaat er iets naar de forge.
+  ///
+  /// Vereist dat het tabblad op een werkbranch staat (een lopende ronde) en dat
+  /// die branch al op de forge staat — een gewone opslag pusht hem. Staat hij er
+  /// nog niet (offline gecommit), dan komt dat als [ReviewStatus.failed] terug;
+  /// synchroniseer dan eerst.
+  Future<ReviewResult> openForReview(
+    GitForge forge, {
+    required GitRepoConfig config,
+    required AppSettings settings,
+    required String title,
+    required String body,
+  }) async {
+    final tab = currentState.current;
+    final origin = tab?.gitOrigin;
+    final deck = tab?.deckNotifier.currentState.deck;
+    if (origin == null || deck == null || !origin.matchesRepo(config)) {
+      return const ReviewResult(status: ReviewStatus.notOnWorkBranch);
+    }
+    // Een review hoort bij een concept-ronde, niet bij de standaardbranch zelf.
+    if (origin.branch == config.defaultBranch) {
+      return const ReviewResult(status: ReviewStatus.notOnWorkBranch);
+    }
+
+    final decision = ClassificationEnforcementPolicy.fromAppSettings(
+      settings,
+    ).evaluate(deckReleaseTlp(deck));
+    if (!decision.allowed) {
+      return ReviewResult(
+        status: ReviewStatus.blocked,
+        message: decision.reason,
+      );
+    }
+
+    try {
+      final pr = await forge.openPullRequest(
+        head: origin.branch,
+        base: config.defaultBranch,
+        title: title,
+        body: body,
+      );
+      return ReviewResult(status: ReviewStatus.opened, pr: pr);
+    } on GitForgeException catch (e) {
+      logWarning('openForReview: PR openen mislukt', e);
+      return ReviewResult(status: ReviewStatus.failed, message: e.message);
+    }
+  }
 }
 
 /// Hoe een [TabsNotifierGit.saveToGit] afliep.
@@ -434,4 +530,33 @@ class GitSaveResult {
     this.message,
     this.warnings = const [],
   });
+}
+
+/// Hoe een [TabsNotifierGit.openForReview] afliep.
+enum ReviewStatus {
+  /// De pull request is geopend; [ReviewResult.pr] draagt het nummer + de link.
+  opened,
+
+  /// De classificatiepoort weigerde: het deck mag niet uitgebracht worden.
+  /// [ReviewResult.message] draagt de uitlegbare reden.
+  blocked,
+
+  /// Er was geen concept om uit te brengen (geen tabblad, of het staat niet op
+  /// een werkbranch).
+  notOnWorkBranch,
+
+  /// De forge deed het niet (netwerk, auth, of de branch staat er nog niet).
+  failed,
+}
+
+class ReviewResult {
+  final ReviewStatus status;
+
+  /// De geopende pull request bij [ReviewStatus.opened].
+  final PullRequestRef? pr;
+
+  /// Uitlegbare tekst bij [ReviewStatus.blocked] en [ReviewStatus.failed].
+  final String? message;
+
+  const ReviewResult({required this.status, this.pr, this.message});
 }

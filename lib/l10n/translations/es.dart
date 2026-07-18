@@ -737,6 +737,20 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Uitbrengen ter review…': 'Enviar para revisión…',
+  'Uitbrengen ter review': 'Enviar para revisión',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'Abre una pull request desde tu borrador a la rama principal, para que pueda revisarse antes de publicarse.',
+  'Toelichting': 'Detalles',
+  'Wat is er veranderd en waarom?': '¿Qué cambió y por qué?',
+  'Uitbrengen': 'Enviar',
+  'Uitgebracht ter review:': 'Enviado para revisión:',
+  'Kopieer link': 'Copiar enlace',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'Publicación bloqueada por la política de clasificación.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'Aún no hay borrador para enviar: guarda primero un cambio.',
+  'Uitbrengen mislukt:': 'Error al enviar:',
   'Overzicht': 'Resumen',
   'Veelgestelde vragen': 'Preguntas frecuentes',
   'Probleemoplossing': 'Solución de problemas',

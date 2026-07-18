@@ -8,6 +8,18 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Editing a git deck now happens on a concept branch, and you release it for
+  review.** Saving a deck opened from git no longer commits straight to the main
+  branch: the first save of an editing round starts a dated *concept* branch
+  (`decks/<naam>/<datum>`) and every save lands there — durable and offline-safe
+  on both the REST and native-git planes, and you never have to name or pick the
+  branch. When the round is ready, **"Uitbrengen ter review…"** in the `…` menu
+  opens a pull request from your concept to the main branch so it can be reviewed
+  before it goes out. That step is gated by the classification policy, fail-closed
+  and *before* anything is pushed: unlike the export ceiling it weighs the
+  strictest TLP across the whole deck, so a single `TLP:RED` slide in an otherwise
+  unclassified deck stops the release. (Merging the review and tagging the version
+  land in the next step.)
 - **Open an earlier released version of a deck — "Versies…".** For a deck opened
   from git, the `…` menu now lists the versions that were released of it (the
   `decks/<naam>/vX` tags), newest first. Pick one and it opens **read-only** — a

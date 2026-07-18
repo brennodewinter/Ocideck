@@ -1802,6 +1802,20 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Uitbrengen ter review…': 'Trimite spre revizuire…',
+  'Uitbrengen ter review': 'Trimite spre revizuire',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'Deschide un pull request din schița ta către ramura principală, ca să poată fi revizuită înainte de publicare.',
+  'Toelichting': 'Detalii',
+  'Wat is er veranderd en waarom?': 'Ce s-a schimbat și de ce?',
+  'Uitbrengen': 'Trimite',
+  'Uitgebracht ter review:': 'Trimis spre revizuire:',
+  'Kopieer link': 'Copiază linkul',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'Publicarea a fost blocată de politica de clasificare.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'Nu există încă o schiță de trimis — salvează mai întâi o modificare.',
+  'Uitbrengen mislukt:': 'Trimiterea a eșuat:',
   'Overzicht': 'Prezentare generală',
   'Veelgestelde vragen': 'Întrebări frecvente',
   'Probleemoplossing': 'Depanare',

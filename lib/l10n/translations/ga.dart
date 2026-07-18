@@ -1819,6 +1819,20 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Uitbrengen ter review…': 'Cuir isteach le hathbhreithniú…',
+  'Uitbrengen ter review': 'Cuir isteach le hathbhreithniú',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'Osclaíonn sé pull request ó do dhréacht go dtí an phríomhbhrainse, ionas gur féidir é a athbhreithniú sula n-eisítear é.',
+  'Toelichting': 'Sonraí',
+  'Wat is er veranderd en waarom?': 'Cad a athraíodh agus cén fáth?',
+  'Uitbrengen': 'Cuir isteach',
+  'Uitgebracht ter review:': 'Curtha isteach le hathbhreithniú:',
+  'Kopieer link': 'Cóipeáil an nasc',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'Chuir an polasaí aicmithe bac ar an eisiúint.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'Níl aon dréacht le cur isteach fós — sábháil athrú ar dtús.',
+  'Uitbrengen mislukt:': 'Theip ar an gcur isteach:',
   'Overzicht': 'Forbhreathnú',
   'Veelgestelde vragen': 'Ceisteanna coitianta',
   'Probleemoplossing': 'Fabhtcheartú',

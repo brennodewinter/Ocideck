@@ -159,9 +159,19 @@ class _NativeGitMirror implements NativeGitMirror {
   Future<GitCommitResult> commitDeck(
     String deckDir,
     Map<String, Uint8List> repoFiles,
-    String message,
-  ) async {
+    String message, {
+    String? workBranch,
+    String? forkFrom,
+  }) async {
     await _ensureClone();
+
+    // D3: een bewerkingsronde landt op een werkbranch, niet op de
+    // standaardbranch. Check hem uit (of maak hem, afgetakt van [forkFrom]); de
+    // push en het ongepusht-tellen volgen daarna de uitgecheckte branch. Zonder
+    // werkbranch blijft alles op de standaardbranch, precies als voorheen.
+    if (workBranch != null && workBranch != _branch) {
+      await _ensureOnWorkBranch(workBranch, forkFrom ?? _branch);
+    }
 
     // Scheid de deckmap-leden (die de map volledig vervangen) van de pool-blobs
     // (die er alleen bij komen — de pool wordt nooit hier opgeschoond, §6.2).
@@ -233,6 +243,47 @@ class _NativeGitMirror implements NativeGitMirror {
       config: _config0,
       timeout: const Duration(minutes: 5),
     );
+  }
+
+  /// Zorg dat de werkboom op [branch] staat: check hem uit als hij al bestaat
+  /// (lokaal of op origin), maak hem anders af van [start]. De clone blíjft op de
+  /// werkbranch achter — daar wordt verder aan gewerkt tot de ronde uitkomt.
+  ///
+  /// Aanmaken en uitchecken zijn twee stappen (`git branch` dan `git checkout`),
+  /// niet `checkout -b`: de gehardde runner schuift de branchnaam als operand
+  /// achter `--end-of-options`, en `-b` eist zijn naam er juist pal naast.
+  Future<void> _ensureOnWorkBranch(String branch, String start) async {
+    if (await _currentBranch() == branch) return;
+    if (!await _refExists(branch)) {
+      final from = await _refExists('origin/$branch')
+          ? 'origin/$branch'
+          : start;
+      await _run(['branch'], operands: [branch, from]);
+    }
+    await _run(['checkout'], operands: [branch]);
+  }
+
+  /// De naam van de uitgecheckte branch (`main`, of een werkbranch).
+  Future<String> _currentBranch() async {
+    try {
+      final res = await _run(['rev-parse', '--abbrev-ref', 'HEAD']);
+      return res.stdout.trim();
+    } on GitCliException {
+      return _branch;
+    }
+  }
+
+  /// Of [ref] naar een commit verwijst (een branch bestaat, lokaal of remote).
+  Future<bool> _refExists(String ref) async {
+    try {
+      await _run(
+        ['rev-parse', '--verify', '--quiet'],
+        operands: ['$ref^{commit}'],
+      );
+      return true;
+    } on GitCliException {
+      return false;
+    }
   }
 
   Future<void> _writeAll(Map<String, Uint8List> files) async {
@@ -307,8 +358,9 @@ class _NativeGitMirror implements NativeGitMirror {
   }
 
   Future<Set<String>> _unpushedShas() async {
+    final branch = await _currentBranch();
     try {
-      final res = await _run(['rev-list', 'origin/$_branch..HEAD']);
+      final res = await _run(['rev-list', 'origin/$branch..HEAD']);
       return const LineSplitter()
           .convert(res.stdout)
           .map((s) => s.trim())
@@ -320,19 +372,22 @@ class _NativeGitMirror implements NativeGitMirror {
   }
 
   Future<int> _unpushedCount() async {
+    final branch = await _currentBranch();
     try {
-      final res = await _run(['rev-list', '--count', 'origin/$_branch..HEAD']);
+      final res = await _run(['rev-list', '--count', 'origin/$branch..HEAD']);
       return int.tryParse(res.stdout.trim()) ?? 0;
     } on GitCliException {
-      // Geen origin-ref bekend (nooit gefetcht): behandel alles als ongepusht.
+      // Geen origin-ref bekend (nooit gefetcht, of een verse werkbranch):
+      // behandel alles als ongepusht.
       return 1;
     }
   }
 
   Future<GitCommitResult> _push() async {
     final sha = await headSha();
+    final branch = await _currentBranch();
     try {
-      await _run(['push', 'origin'], operands: ['HEAD:$_branch']);
+      await _run(['push', 'origin'], operands: ['HEAD:$branch']);
       return GitCommitResult(GitCommitOutcome.pushed, sha: sha);
     } on GitCliException catch (e) {
       final lower = e.stderr.toLowerCase();

@@ -1758,6 +1758,20 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Uitbrengen ter review…': 'review ngeH…',
+  'Uitbrengen ter review': 'review ngeH',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'concept pull request poSmoH, ghaytan review qaS \'ej ngeHpu\'be\'chugh.',
+  'Toelichting': 'De\' latlh',
+  'Wat is er veranderd en waarom?': 'nuq choHlu\' \'ej qatlh?',
+  'Uitbrengen': 'ngeH',
+  'Uitgebracht ter review:': 'review ngeHta\':',
+  'Kopieer link': 'link velqa\'',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'classification pab review ngeH botlh.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'DaH ngeHmeH concept tu\'lu\'be\' — wa\'DIch choH yISaH.',
+  'Uitbrengen mislukt:': 'ngeH luj:',
   'Overzicht': 'Hoch legh',
   'Veelgestelde vragen': 'pIj yu\'lu\'bogh',
   'Probleemoplossing': 'Qagh tI\'',

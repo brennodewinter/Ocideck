@@ -77,6 +77,18 @@ saved version stays retrievable, which a plain folder cannot give you.
   safe.
 - **Layout**: a repository holds many decks under `decks/<name>/deck.md`, with
   images shared in one `assets/` pool so the same picture is stored once.
+- **Editing happens on a concept branch — *Uitbrengen ter review…*.** When you
+  edit a deck opened from git, your saves do not land straight on the main
+  branch. The first save of an editing round starts a dated *concept* branch
+  (`decks/<name>/<date>`) and every save goes there; you never have to name or
+  pick it. This works the same on the REST and native-git planes, and stays
+  offline-safe — a round can begin on a plane and the branch is created for you on
+  reconnect. When it is ready, *Uitbrengen ter review…* in the `…` menu opens a
+  pull request from your concept to the main branch, so it can be reviewed before
+  it goes out; you get the link back. If your organisation has set a TLP release
+  ceiling, the release is checked against the **strictest** classification
+  anywhere in the deck (a single `TLP:RED` slide counts), and a deck over the
+  ceiling is refused before anything is pushed.
 - **Native git (desktop):** if you have `git` installed (2.19 or newer),
   *Settings → Git* shows it, and OciDeck keeps a real clone of the repository.
   Then **each save is a genuine local commit** — durable and offline: edit away

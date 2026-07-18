@@ -78,8 +78,10 @@ extension TabsNotifierGitNative on TabsNotifier {
     required String deckDir,
     required String branch,
     required String message,
+    DateTime? now,
   }) async {
-    if (GitRepoLayout.deckNameOf(deckDir) == null) {
+    final deckName = GitRepoLayout.deckNameOf(deckDir);
+    if (deckName == null) {
       throw const GitForgeException(
         GitForgeError.malformed,
         'Pad is geen deckmap volgens de repo-layout',
@@ -88,6 +90,30 @@ extension TabsNotifierGitNative on TabsNotifier {
     final deck = currentState.current?.deckNotifier.currentState.deck;
     if (deck == null) {
       return const GitSaveResult(status: GitSaveStatus.failed);
+    }
+
+    // D3: dezelfde werkbranch-logica als het REST-pad. Al midden in een ronde op
+    // een werkbranch? Blijf daar; anders start (of hervat) de ronde van vandaag
+    // op `decks/<naam>/<datum>`. De clone checkt hem uit en commit erop.
+    final origin = currentState.current?.gitOrigin;
+    final String workBranch;
+    if (origin != null &&
+        origin.matchesRepo(config) &&
+        origin.deckDir == deckDir &&
+        origin.branch != branch) {
+      workBranch = origin.branch;
+    } else {
+      final generated = GitRepoLayout.workBranch(
+        deckName,
+        now ?? DateTime.now(),
+      );
+      if (generated == null) {
+        throw const GitForgeException(
+          GitForgeError.malformed,
+          'Kon geen geldige werkbranch-naam maken',
+        );
+      }
+      workBranch = generated;
     }
 
     final image = ImageService();
@@ -101,12 +127,18 @@ extension TabsNotifierGitNative on TabsNotifier {
           : image.readSlideImageBytes(path, projectPath: deck.projectPath),
     );
 
-    final result = await mirror.commitDeck(deckDir, files.upserts, message);
+    final result = await mirror.commitDeck(
+      deckDir,
+      files.upserts,
+      message,
+      workBranch: workBranch,
+      forkFrom: branch,
+    );
     // De lokale HEAD is de nieuwe basis waarop de volgende opslag voortbouwt.
     if (result.sha != null) {
       currentState.current?.gitOrigin = GitOrigin(
         config: config,
-        branch: branch,
+        branch: workBranch,
         deckDir: deckDir,
         baseSha: result.sha!,
       );

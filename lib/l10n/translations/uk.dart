@@ -1801,6 +1801,20 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Uitbrengen ter review…': 'Надіслати на рецензування…',
+  'Uitbrengen ter review': 'Надіслати на рецензування',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'Відкриває pull request з вашої чернетки до головної гілки, щоб її можна було переглянути перед випуском.',
+  'Toelichting': 'Пояснення',
+  'Wat is er veranderd en waarom?': 'Що змінилося і чому?',
+  'Uitbrengen': 'Надіслати',
+  'Uitgebracht ter review:': 'Надіслано на рецензування:',
+  'Kopieer link': 'Копіювати посилання',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'Випуск заблоковано політикою класифікації.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'Ще немає чернетки для надсилання — спершу збережіть зміну.',
+  'Uitbrengen mislukt:': 'Не вдалося надіслати:',
   'Overzicht': 'Огляд',
   'Veelgestelde vragen': 'Поширені запитання',
   'Probleemoplossing': 'Усунення несправностей',

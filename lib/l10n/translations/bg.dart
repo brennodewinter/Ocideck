@@ -1806,6 +1806,20 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Uitbrengen ter review…': 'Изпрати за преглед…',
+  'Uitbrengen ter review': 'Изпрати за преглед',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'Отваря pull request от вашата чернова към главния клон, за да може да се прегледа преди публикуване.',
+  'Toelichting': 'Подробности',
+  'Wat is er veranderd en waarom?': 'Какво се промени и защо?',
+  'Uitbrengen': 'Изпрати',
+  'Uitgebracht ter review:': 'Изпратено за преглед:',
+  'Kopieer link': 'Копирай връзката',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'Публикуването е блокирано от политиката за класификация.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'Все още няма чернова за изпращане — първо запазете промяна.',
+  'Uitbrengen mislukt:': 'Изпращането е неуспешно:',
   'Overzicht': 'Преглед',
   'Veelgestelde vragen': 'Често задавани въпроси',
   'Probleemoplossing': 'Отстраняване на проблеми',

@@ -1782,6 +1782,20 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Uitbrengen ter review…': 'Iesniegt pārskatīšanai…',
+  'Uitbrengen ter review': 'Iesniegt pārskatīšanai',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'Atver pull request no jūsu melnraksta uz galveno atzaru, lai to varētu pārskatīt pirms publicēšanas.',
+  'Toelichting': 'Sīkāka informācija',
+  'Wat is er veranderd en waarom?': 'Kas mainījās un kāpēc?',
+  'Uitbrengen': 'Iesniegt',
+  'Uitgebracht ter review:': 'Iesniegts pārskatīšanai:',
+  'Kopieer link': 'Kopēt saiti',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'Publicēšanu bloķē klasifikācijas politika.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'Vēl nav melnraksta, ko iesniegt — vispirms saglabājiet izmaiņu.',
+  'Uitbrengen mislukt:': 'Neizdevās iesniegt:',
   'Overzicht': 'Pārskats',
   'Veelgestelde vragen': 'Biežāk uzdotie jautājumi',
   'Probleemoplossing': 'Problēmu novēršana',

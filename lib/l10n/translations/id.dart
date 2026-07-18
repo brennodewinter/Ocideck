@@ -1783,6 +1783,20 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Uitbrengen ter review…': 'Kirim untuk ditinjau…',
+  'Uitbrengen ter review': 'Kirim untuk ditinjau',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'Membuka pull request dari draf Anda ke branch utama, agar dapat ditinjau sebelum dirilis.',
+  'Toelichting': 'Keterangan',
+  'Wat is er veranderd en waarom?': 'Apa yang berubah dan mengapa?',
+  'Uitbrengen': 'Kirim',
+  'Uitgebracht ter review:': 'Dikirim untuk ditinjau:',
+  'Kopieer link': 'Salin tautan',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'Rilis diblokir oleh kebijakan klasifikasi.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'Belum ada draf untuk dikirim — simpan perubahan dulu.',
+  'Uitbrengen mislukt:': 'Gagal mengirim:',
   'Overzicht': 'Ikhtisar',
   'Veelgestelde vragen': 'Pertanyaan umum',
   'Probleemoplossing': 'Pemecahan masalah',

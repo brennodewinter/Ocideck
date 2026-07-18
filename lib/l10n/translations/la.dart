@@ -1799,6 +1799,20 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Uitbrengen ter review…': 'Ad recognitionem mittere…',
+  'Uitbrengen ter review': 'Ad recognitionem mittere',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'Aperit pull request ab adumbratione tua ad ramum principalem, ut recognosci possit antequam emittatur.',
+  'Toelichting': 'Explicatio',
+  'Wat is er veranderd en waarom?': 'Quid mutatum est et cur?',
+  'Uitbrengen': 'Mittere',
+  'Uitgebracht ter review:': 'Ad recognitionem missum:',
+  'Kopieer link': 'Nexum exscribere',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'Emissio ab consilio classificationis impedita.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'Nulla adhuc adumbratio ad mittendum — muta prius aliquid serva.',
+  'Uitbrengen mislukt:': 'Missio defecit:',
   'Overzicht': 'Conspectus',
   'Veelgestelde vragen': 'Quaestiones frequentes',
   'Probleemoplossing': 'Solutio difficultatum',

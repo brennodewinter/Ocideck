@@ -1782,6 +1782,20 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Uitbrengen ter review…': 'Send til gennemgang…',
+  'Uitbrengen ter review': 'Send til gennemgang',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'Åbner en pull request fra dit udkast til hovedgrenen, så den kan gennemgås, før den udgives.',
+  'Toelichting': 'Detaljer',
+  'Wat is er veranderd en waarom?': 'Hvad blev ændret og hvorfor?',
+  'Uitbrengen': 'Send',
+  'Uitgebracht ter review:': 'Sendt til gennemgang:',
+  'Kopieer link': 'Kopiér link',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'Udgivelse blokeret af klassificeringspolitikken.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'Der er endnu intet udkast at sende — gem først en ændring.',
+  'Uitbrengen mislukt:': 'Indsendelse mislykkedes:',
   'Overzicht': 'Oversigt',
   'Veelgestelde vragen': 'Ofte stillede spørgsmål',
   'Probleemoplossing': 'Fejlfinding',

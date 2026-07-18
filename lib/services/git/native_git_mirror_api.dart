@@ -73,11 +73,18 @@ abstract class NativeGitMirror implements DeckMirror {
   /// Zet de bestandenset van een deck in de werkkopie, commit als er iets
   /// veranderd is, en probeer te pushen. De commit is altijd duurzaam; de push
   /// is best-effort (zie [GitCommitOutcome]).
+  ///
+  /// Geef [workBranch] mee om de commit op een werkbranch te laten landen in
+  /// plaats van op de standaardbranch (D3): de clone checkt die branch uit (of
+  /// maakt hem, afgetakt van [forkFrom]), commit erop en pusht hem. Zonder
+  /// [workBranch] is het gedrag ongewijzigd — commit op de uitgecheckte branch.
   Future<GitCommitResult> commitDeck(
     String deckDir,
     Map<String, Uint8List> repoFiles,
-    String message,
-  );
+    String message, {
+    String? workBranch,
+    String? forkFrom,
+  });
 
   /// Push wat nog niet gepusht is (drain de lokale historie naar de forge).
   Future<GitCommitResult> sync();

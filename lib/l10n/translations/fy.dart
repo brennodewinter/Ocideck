@@ -741,6 +741,20 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Uitbrengen ter review…': 'Foar review yntsjinje…',
+  'Uitbrengen ter review': 'Foar review yntsjinje',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'Iepenet in pull request fan dyn konsept nei de haadtûke, sadat it beoardiele wurde kin foar\'t it útkomt.',
+  'Toelichting': 'Taljochting',
+  'Wat is er veranderd en waarom?': 'Wat is der feroare en wêrom?',
+  'Uitbrengen': 'Yntsjinje',
+  'Uitgebracht ter review:': 'Foar review yntsjinne:',
+  'Kopieer link': 'Keppeling kopiearje',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'Utbringen blokkearre troch it klassifikaasjebelied.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'Der is noch gjin konsept om út te bringen — bewarje earst in wiziging.',
+  'Uitbrengen mislukt:': 'Yntsjinjen mislearre:',
   'Overzicht': 'Oersjoch',
   'Veelgestelde vragen': 'Faak stelde fragen',
   'Probleemoplossing': 'Swierrichheden oplosse',

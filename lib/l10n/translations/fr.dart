@@ -740,6 +740,20 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Uitbrengen ter review…': 'Soumettre pour révision…',
+  'Uitbrengen ter review': 'Soumettre pour révision',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'Ouvre une pull request de votre brouillon vers la branche principale, pour qu\'elle puisse être révisée avant sa publication.',
+  'Toelichting': 'Détails',
+  'Wat is er veranderd en waarom?': 'Qu\'est-ce qui a changé et pourquoi ?',
+  'Uitbrengen': 'Soumettre',
+  'Uitgebracht ter review:': 'Soumis pour révision :',
+  'Kopieer link': 'Copier le lien',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'Publication bloquée par la politique de classification.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'Aucun brouillon à soumettre pour l\'instant — enregistrez d\'abord une modification.',
+  'Uitbrengen mislukt:': 'Échec de la soumission :',
   'Overzicht': 'Aperçu',
   'Veelgestelde vragen': 'Questions fréquentes',
   'Probleemoplossing': 'Dépannage',

@@ -740,6 +740,20 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Uitbrengen ter review…': 'Zur Überprüfung einreichen…',
+  'Uitbrengen ter review': 'Zur Überprüfung einreichen',
+  'Opent een pull request van je concept naar de hoofdbranch, zodat het beoordeeld kan worden vóór het uitkomt.':
+      'Öffnet einen Pull Request von deinem Entwurf zum Hauptzweig, damit er vor der Veröffentlichung geprüft werden kann.',
+  'Toelichting': 'Erläuterung',
+  'Wat is er veranderd en waarom?': 'Was hat sich geändert und warum?',
+  'Uitbrengen': 'Einreichen',
+  'Uitgebracht ter review:': 'Zur Überprüfung eingereicht:',
+  'Kopieer link': 'Link kopieren',
+  'Uitbrengen geblokkeerd door het classificatiebeleid.':
+      'Freigabe durch die Klassifizierungsrichtlinie blockiert.',
+  'Er is nog geen concept om uit te brengen — sla eerst een wijziging op.':
+      'Es gibt noch keinen Entwurf zum Einreichen — speichere zuerst eine Änderung.',
+  'Uitbrengen mislukt:': 'Einreichen fehlgeschlagen:',
   'Overzicht': 'Übersicht',
   'Veelgestelde vragen': 'Häufige Fragen',
   'Probleemoplossing': 'Fehlerbehebung',
