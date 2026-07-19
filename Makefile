@@ -8,6 +8,28 @@
 # lower than 8192 (there the limit simply stays where it was).
 RAISE_FDS := ulimit -n 8192 2>/dev/null || true;
 
+# De beeldcontrole (`image_face_scan_io.dart`) draait op OpenCV via FFI. Die
+# native bibliotheek zit in de app-bundel, niet in `flutter test`: een testrun op
+# de Dart-VM heeft haar dus niet, en de detectietests slaan zichzelf over.
+#
+# Dat is geen theoretisch probleem. Het is precies één keer misgegaan: de tests
+# stonden groen terwijl de bibliotheek niet laadde, elke aanroep in de
+# foutafhandeling viel en de scanner nul gezichten meldde. Groen om de verkeerde
+# reden is erger dan rood.
+#
+# `dartcv` leest het pad uit DARTCV_LIB_PATH. Heeft deze werkkopie ooit een
+# platformbuild gedaan, dan staat de bibliotheek in `build/` en zetten we hem
+# hier — dan draaien de detectietests echt, zonder dat iemand een variabele hoeft
+# te onthouden. Is er geen build, dan blijft alles zoals het was: de tests slaan
+# zichzelf over en zeggen dat ook.
+#
+# Bewust gezocht op bestandsnaam en niet op een vast pad: dat verschilt per
+# platform (framework/`.so`/`.dll`) én per bouwmodus (Debug/Release/Profile).
+DARTCV_LIB := $(firstword $(wildcard   build/macos/Build/Products/*/DartCvMacOS/DartCvMacOS.framework/Versions/A/DartCvMacOS   build/linux/*/*/bundle/lib/libdartcv.so   build/windows/*/runner/*/dartcv.dll))
+ifneq ($(DARTCV_LIB),)
+export DARTCV_LIB_PATH := $(abspath $(DARTCV_LIB))
+endif
+
 help:
 	@echo "OciDeck quality targets:"
 	@echo "  make check           Format check + static analysis + full Flutter test suite + coverage floor."

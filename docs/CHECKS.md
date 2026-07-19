@@ -221,6 +221,17 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Failure means:** inspect the named failing test file and case in the output.
   If it only fails for some seeds, you have an order-dependent test — the seed is
   printed at the top of the run so you can reproduce it.
+- **One suite needs a platform build first.** The image privacy check (recognisable
+  faces on slide images) runs on OpenCV through FFI, and that native library lives
+  in the app bundle — a bare `flutter test` on the Dart VM does not have it, so
+  those tests skip themselves and report `~2`.
+
+  If this working copy has ever run `flutter build macos|linux|windows`, the
+  Makefile finds the library under `build/` and exports `DARTCV_LIB_PATH`
+  automatically; the tests then run for real. No variable to remember — but if you
+  are changing the detector, do a platform build first, or you are testing
+  nothing. In CI only the macOS job builds, and it fails loudly if the library is
+  not where it expects, rather than falling back to skipping.
 
 ### `make coverage`
 - **Runs:** `flutter test --coverage --test-randomize-ordering-seed random --exclude-tags golden`
