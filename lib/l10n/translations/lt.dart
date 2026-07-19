@@ -1789,6 +1789,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV nesukonfigūruotas (teisingai) — patikrinkite serverio duomenis skiltyje Nustatymai → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Šis serveris neleidžiamas. Pirmiausia pažymėkite privatų/LAN serverį kaip patikimą skiltyje Nustatymai → WebDAV.',
   'Servertype': 'Serverio tipas',
   'Nextcloud of ownCloud': 'Nextcloud arba ownCloud',
   'Andere WebDAV-server': 'Kitas WebDAV serveris',

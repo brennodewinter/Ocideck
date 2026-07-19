@@ -1788,6 +1788,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV nije (ispravno) postavljen — provjerite podatke poslužitelja u Postavke → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Ovaj poslužitelj nije dopušten. Prvo označite privatni/LAN poslužitelj kao pouzdan u Postavke → WebDAV.',
   'Servertype': 'Vrsta poslužitelja',
   'Nextcloud of ownCloud': 'Nextcloud ili ownCloud',
   'Andere WebDAV-server': 'Drugi WebDAV poslužitelj',

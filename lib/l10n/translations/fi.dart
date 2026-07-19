@@ -1781,6 +1781,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAVia ei ole määritetty (oikein) — tarkista palvelimen tiedot kohdasta Asetukset → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Tämä palvelin ei ole sallittu. Merkitse yksityinen/LAN-palvelin ensin luotetuksi kohdassa Asetukset → WebDAV.',
   'Servertype': 'Palvelimen tyyppi',
   'Nextcloud of ownCloud': 'Nextcloud tai ownCloud',
   'Andere WebDAV-server': 'Muu WebDAV-palvelin',

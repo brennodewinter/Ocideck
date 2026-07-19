@@ -1785,6 +1785,10 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'A WebDAV nincs (jól) beállítva — ellenőrizd a szerveradatokat a Beállítások → WebDAV alatt.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Ez a szerver nem engedélyezett. Először jelöld megbízhatónak a privát/LAN szervert a Beállítások → WebDAV alatt.',
   'Servertype': 'Kiszolgáló típusa',
   'Nextcloud of ownCloud': 'Nextcloud vagy ownCloud',
   'Andere WebDAV-server': 'Másik WebDAV-kiszolgáló',

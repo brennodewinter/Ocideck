@@ -1811,6 +1811,10 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'O WebDAV não está (bem) configurado — verifique os dados do servidor em Definições → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Este servidor não é permitido. Marque primeiro um servidor privado/LAN como fiável em Definições → WebDAV.',
   'Servertype': 'Tipo de servidor',
   'Nextcloud of ownCloud': 'Nextcloud ou ownCloud',
   'Andere WebDAV-server': 'Outro servidor WebDAV',

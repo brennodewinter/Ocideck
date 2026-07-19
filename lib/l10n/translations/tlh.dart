@@ -1756,6 +1756,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV lIjchoHbe\'lu\' — Settings → WebDAV Daq jabwI\' De\' yI\'ol.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'jabwI\'vam chaw\'be\'lu\'. Settings → WebDAV Daq jabwI\' pegh/LAN voqmoH \'e\' yIper.',
   'Servertype': 'De\'wI\' Segh',
   'Nextcloud of ownCloud': 'Nextcloud ownCloud joq',
   'Andere WebDAV-server': 'latlh WebDAV De\'wI\'',

@@ -1785,6 +1785,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV isch nit (richtig) iigrichtet — lueg d Serverdate under Iistellige → WebDAV aa.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Dä Server isch nit erlaubt. Markier en private/LAN-Server zerscht als vertraut under Iistellige → WebDAV.',
   'Servertype': 'Servertyp',
   'Nextcloud of ownCloud': 'Nextcloud oder ownCloud',
   'Andere WebDAV-server': 'En andere WebDAV-Server',

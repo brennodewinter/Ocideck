@@ -60,14 +60,17 @@ String importFailureMessage(AppLocalizations l10n, ImportFailure failure) {
 }
 
 /// Begrijpelijke melding per WebDAV-foutsoort, met bij aanmeldfouten de
-/// Nextcloud-tip over app-wachtwoorden (de meest gemaakte instelfout).
+/// Nextcloud-tip over app-wachtwoorden (de meest gemaakte instelfout). Die tip
+/// staat er voorwaardelijk ("bij Nextcloud") in: deze meldingen komen uit de
+/// laag die het servertype niet kent, en voor een andere server is het advies
+/// niet fout maar niet van toepassing.
 String webdavErrorMessage(AppLocalizations l10n, WebdavException e) {
   return switch (e.kind) {
     WebdavError.config => l10n.d(
-      'Nextcloud is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Nextcloud.',
+      'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.',
     ),
     WebdavError.blockedHost => l10n.d(
-      'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → Nextcloud.',
+      'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.',
     ),
     WebdavError.network => l10n.d(
       'Server niet bereikbaar — controleer je verbinding en de server-URL.',

@@ -24,6 +24,10 @@ class WebdavForm {
   /// vlag weigert de SSRF-beveiliging de verbinding.
   bool trusted = false;
 
+  /// Welk padschema de server voert. Bepaalt of de server-URL alleen de
+  /// origin mag zijn (Nextcloud leidt het pad af) of juist de hele DAV-wortel.
+  WebdavServerKind kind = WebdavServerKind.nextcloud;
+
   /// Uitslag van de verbindingstest: `null` = nog niet getest.
   bool? testOk;
   String? testMessage;
@@ -38,6 +42,7 @@ class WebdavForm {
     user.text = server?.username ?? '';
     root.text = server?.rootPath ?? '';
     trusted = server?.trustedInternal ?? false;
+    kind = server?.kind ?? WebdavServerKind.nextcloud;
     password.rememberIdentity(
       identityOf(server?.baseUrl ?? '', server?.username ?? ''),
     );
@@ -54,6 +59,7 @@ class WebdavForm {
       username: user.text.trim(),
       rootPath: WebdavServer.normalizeRoot(root.text),
       trustedInternal: trusted,
+      kind: kind,
     );
   }
 

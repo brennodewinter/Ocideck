@@ -1799,6 +1799,10 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV nu este configurat (corect) — verificați datele serverului la Setări → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Acest server nu este permis. Marcați mai întâi un server privat/LAN ca de încredere la Setări → WebDAV.',
   'Servertype': 'Tip de server',
   'Nextcloud of ownCloud': 'Nextcloud sau ownCloud',
   'Andere WebDAV-server': 'Alt server WebDAV',

@@ -738,6 +738,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV no ta konfigurá (bon) — kontrolá e datonan di server na Konfigurashon → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'E server aki no ta permití. Marka un server privá/LAN promé komo konfiabel na Konfigurashon → WebDAV.',
   'Servertype': 'Tipo di server',
   'Nextcloud of ownCloud': 'Nextcloud òf ownCloud',
   'Andere WebDAV-server': 'Otro server WebDAV',

@@ -1780,6 +1780,10 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV er ikke sat (korrekt) op — tjek serveroplysningerne under Indstillinger → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Denne server er ikke tilladt. Markér først en privat/LAN-server som betroet under Indstillinger → WebDAV.',
   'Servertype': 'Servertype',
   'Nextcloud of ownCloud': 'Nextcloud eller ownCloud',
   'Andere WebDAV-server': 'Anden WebDAV-server',

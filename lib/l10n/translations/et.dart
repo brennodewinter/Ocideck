@@ -1772,6 +1772,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV pole (õigesti) seadistatud — kontrolli serveri andmeid jaotises Seaded → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'See server pole lubatud. Märgi privaatne/LAN-server esmalt usaldusväärseks jaotises Seaded → WebDAV.',
   'Servertype': 'Serveri tüüp',
   'Nextcloud of ownCloud': 'Nextcloud või ownCloud',
   'Andere WebDAV-server': 'Muu WebDAV-server',

@@ -1804,6 +1804,10 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV не е настроен (правилно) — проверете данните за сървъра в Настройки → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Този сървър не е разрешен. Първо отбележете частен/LAN сървър като доверен в Настройки → WebDAV.',
   'Servertype': 'Тип сървър',
   'Nextcloud of ownCloud': 'Nextcloud или ownCloud',
   'Andere WebDAV-server': 'Друг WebDAV сървър',

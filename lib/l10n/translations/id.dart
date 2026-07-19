@@ -1781,6 +1781,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV belum diatur (dengan benar) — periksa detail server di Pengaturan → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Server ini tidak diizinkan. Tandai server privat/LAN sebagai tepercaya dulu di Pengaturan → WebDAV.',
   'Servertype': 'Jenis server',
   'Nextcloud of ownCloud': 'Nextcloud atau ownCloud',
   'Andere WebDAV-server': 'Server WebDAV lainnya',

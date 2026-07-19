@@ -1803,6 +1803,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV mhux issettjat (sew) — iċċekkja d-dettalji tas-server taħt Settings → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Dan is-server mhux permess. L-ewwel immarka server privat/LAN bħala fdat taħt Settings → WebDAV.',
   'Servertype': 'Tip ta\' server',
   'Nextcloud of ownCloud': 'Nextcloud jew ownCloud',
   'Andere WebDAV-server': 'Server WebDAV ieħor',

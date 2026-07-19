@@ -1797,6 +1797,10 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV non (recte) constitutum est — indicia moderatri in Optionibus → WebDAV proba.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Hic moderatrus non permittitur. Moderatrum privatum/LAN primum ut fidum in Optionibus → WebDAV designa.',
   'Servertype': 'Genus servitoris',
   'Nextcloud of ownCloud': 'Nextcloud vel ownCloud',
   'Andere WebDAV-server': 'Alius servitor WebDAV',

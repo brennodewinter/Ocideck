@@ -1817,6 +1817,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'Níl WebDAV socraithe (i gceart) — seiceáil sonraí an fhreastalaí faoi Socruithe → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Ní cheadaítear an freastalaí seo. Marcáil freastalaí príobháideach/LAN mar iontaofa ar dtús faoi Socruithe → WebDAV.',
   'Servertype': 'Cineál freastalaí',
   'Nextcloud of ownCloud': 'Nextcloud nó ownCloud',
   'Andere WebDAV-server': 'Freastalaí WebDAV eile',

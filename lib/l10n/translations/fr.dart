@@ -738,6 +738,10 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV n\'est pas (bien) configuré — vérifiez les paramètres du serveur dans Réglages → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Ce serveur n\'est pas autorisé. Marquez d\'abord un serveur privé/LAN comme fiable dans Réglages → WebDAV.',
   'Servertype': 'Type de serveur',
   'Nextcloud of ownCloud': 'Nextcloud ou ownCloud',
   'Andere WebDAV-server': 'Autre serveur WebDAV',

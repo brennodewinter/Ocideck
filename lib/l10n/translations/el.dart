@@ -1809,6 +1809,10 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'Το WebDAV δεν έχει ρυθμιστεί (σωστά) — ελέγξτε τα στοιχεία διακομιστή στις Ρυθμίσεις → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Αυτός ο διακομιστής δεν επιτρέπεται. Επισημάνετε πρώτα έναν ιδιωτικό/LAN διακομιστή ως αξιόπιστο στις Ρυθμίσεις → WebDAV.',
   'Servertype': 'Τύπος διακομιστή',
   'Nextcloud of ownCloud': 'Nextcloud ή ownCloud',
   'Andere WebDAV-server': 'Άλλος διακομιστής WebDAV',

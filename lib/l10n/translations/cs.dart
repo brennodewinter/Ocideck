@@ -1784,6 +1784,10 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV není (správně) nastaven — zkontrolujte údaje serveru v Nastavení → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Tento server není povolen. Nejprve označte privátní/LAN server jako důvěryhodný v Nastavení → WebDAV.',
   'Servertype': 'Typ serveru',
   'Nextcloud of ownCloud': 'Nextcloud nebo ownCloud',
   'Andere WebDAV-server': 'Jiný server WebDAV',
