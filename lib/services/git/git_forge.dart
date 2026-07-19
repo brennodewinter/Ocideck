@@ -281,6 +281,12 @@ abstract class GitForge {
   /// De open pull request met [head] als bronbranch, of null als er geen is. Zo
   /// vindt "Merge concept" de PR van de werkbranch terug, ook een sessie later.
   Future<PullRequestRef?> pullRequestForBranch(String head);
+
+  /// Geef het onderliggende transport vrij. Alle drie de adapters hadden dit
+  /// al; het stond alleen niet in het contract, waardoor een aanroeper die met
+  /// een [GitForge] werkt in plaats van met een concrete adapter hem niet kón
+  /// sluiten — precies het geval van de verbindingstest.
+  void close();
 }
 
 extension GitForgeDecks on GitForge {

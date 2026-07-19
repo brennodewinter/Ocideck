@@ -1785,6 +1785,22 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Bruucht\'s, wenn d Forge im private oder Heimnetz lauft. Ohni dä Haken wyst d Sicherheitsprüefig e privati Adrässe ab.',
+  'Vul server-URL, eigenaar en repository in':
+      'Fülle Server-URL, Bsitzer und Repository us',
+  'de standaardbranch heet': 'de Standardbranch heisst',
+  'die wordt voortaan gebruikt': 'dä wird ab jetz bruucht',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      's Repository isch no läär; s erste Speichere füllt\'s',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'Achtig: das Token darf nume läse, s Speichere wird also fähle',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      'Ahmälde het nid klappet — prüef s Token. Es bruucht Läsrächt uf s Repository und Schrybrächt zum Speichere.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'Repository nid gfunde — oder dis Token darf\'s nid gseh. Prüef Bsitzer und Repository-Name.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'Die Adrässe antwortet nid wie e Forge. Stimmt d Forge-Art wo du gwählt hesch?',
   'kenteken': 'Autonummere',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Für d Sproch vo dere Presentation git s kei Stichwortlischte für bsunderi persönlichi Date. Muschter mit ere Prüefziffere (Steuer-ID, IBAN, Pass) laufe; Wörter wie "Diagnose" oder "Verdächtige" wärde nid erkennt.',

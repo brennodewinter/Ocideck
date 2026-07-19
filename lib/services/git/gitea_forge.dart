@@ -675,5 +675,6 @@ class GiteaForge implements GitForge {
     }
   }
 
+  @override
   void close() => _transport.close();
 }

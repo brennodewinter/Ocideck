@@ -676,5 +676,6 @@ class GitHubForge implements GitForge {
     }
   }
 
+  @override
   void close() => _transport.close();
 }

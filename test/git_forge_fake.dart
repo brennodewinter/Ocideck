@@ -114,6 +114,9 @@ class FakeForge implements GitForge {
   }
 
   @override
+  void close() {}
+
+  @override
   Future<RepoProbe> probe() async => RepoProbe(
     // De eerste branch is de standaard: de fake kent geen aparte instelling en
     // een testrepo heeft er in de praktijk één.

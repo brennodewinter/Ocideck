@@ -1788,6 +1788,22 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Potrebno kada forge radi na privatnoj ili kućnoj mreži. Bez ove oznake sigurnosna provjera odbija privatnu adresu.',
+  'Vul server-URL, eigenaar en repository in':
+      'Ispunite URL poslužitelja, vlasnika i repozitorij',
+  'de standaardbranch heet': 'zadana grana zove se',
+  'die wordt voortaan gebruikt': 'ona će se odsad koristiti',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      'repozitorij je još prazan; prvo spremanje će ga popuniti',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'napomena: ovaj token smije samo čitati, pa spremanje neće uspjeti',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      'Prijava nije uspjela — provjerite token. Treba mu pravo čitanja repozitorija i pisanja da bi mogao spremati.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'Repozitorij nije pronađen — ili ga vaš token ne smije vidjeti. Provjerite vlasnika i naziv repozitorija.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'Ova adresa ne odgovara kao forge. Je li vrsta forgea koju ste odabrali točna?',
   'kenteken': 'registarska oznaka',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Za jezik ove prezentacije ne postoji popis ključnih riječi za posebne kategorije osobnih podataka. Uzorci s kontrolnom znamenkom (OIB, IBAN, putovnica) rade; riječi poput "dijagnoza" ili "osumnjičenik" ne prepoznaju se.',

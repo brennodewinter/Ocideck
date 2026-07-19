@@ -1788,6 +1788,22 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Potrebné, keď forge beží v privátnej alebo domácej sieti. Bez tohto príznaku bezpečnostná kontrola odmietne privátnu adresu.',
+  'Vul server-URL, eigenaar en repository in':
+      'Vyplň URL servera, vlastníka a repozitár',
+  'de standaardbranch heet': 'predvolená vetva sa volá',
+  'die wordt voortaan gebruikt': 'tá sa bude odteraz používať',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      'repozitár je ešte prázdny; prvé uloženie ho naplní',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'pozor: tento token smie iba čítať, uloženie teda zlyhá',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      'Prihlásenie zlyhalo — skontroluj token. Potrebuje právo čítať repozitár a právo zapisovať, aby mohol ukladať.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'Repozitár sa nenašiel — alebo ho tvoj token nesmie vidieť. Skontroluj vlastníka a názov repozitára.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'Táto adresa neodpovedá ako forge. Je zvolený druh forge správny?',
   'kenteken': 'evidenčné číslo',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Pre jazyk tejto prezentácie neexistuje zoznam kľúčových slov pre osobitné kategórie osobných údajov. Vzory s kontrolnou číslicou (rodné číslo, IBAN, pas) fungujú; slová ako „diagnóza“ alebo „podozrivý“ sa nerozpoznajú.',

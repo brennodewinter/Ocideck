@@ -738,6 +738,22 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Nötig, wenn die Forge in einem privaten oder Heimnetzwerk läuft. Ohne dieses Häkchen weist die Sicherheitsprüfung eine private Adresse ab.',
+  'Vul server-URL, eigenaar en repository in':
+      'Server-URL, Eigentümer und Repository ausfüllen',
+  'de standaardbranch heet': 'der Standardbranch heißt',
+  'die wordt voortaan gebruikt': 'der wird ab jetzt verwendet',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      'das Repository ist noch leer; die erste Speicherung füllt es',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'Achtung: dieses Token darf nur lesen, Speichern wird also fehlschlagen',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      'Anmeldung fehlgeschlagen — prüfe das Token. Es braucht Lesezugriff auf das Repository und Schreibzugriff zum Speichern.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'Repository nicht gefunden — oder dein Token darf es nicht sehen. Prüfe Eigentümer und Repository-Namen.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'Diese Adresse antwortet nicht wie eine Forge. Stimmt die gewählte Forge-Art?',
   'kenteken': 'Kfz-Kennzeichen',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Für die Sprache dieser Präsentation gibt es keine Stichwortliste für besondere Kategorien personenbezogener Daten. Muster mit Prüfziffer (Steuer-ID, IBAN, Pass) funktionieren; Wörter wie "Diagnose" oder "Verdächtiger" werden nicht erkannt.',

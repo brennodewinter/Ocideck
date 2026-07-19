@@ -608,5 +608,6 @@ class GitLabForge implements GitForge {
     }
   }
 
+  @override
   void close() => _transport.close();
 }

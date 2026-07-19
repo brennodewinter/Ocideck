@@ -1809,6 +1809,22 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Χρειάζεται όταν το forge τρέχει σε ιδιωτικό ή οικιακό δίκτυο. Χωρίς αυτή τη σήμανση ο έλεγχος ασφαλείας απορρίπτει ιδιωτική διεύθυνση.',
+  'Vul server-URL, eigenaar en repository in':
+      'Συμπληρώστε URL διακομιστή, κάτοχο και αποθετήριο',
+  'de standaardbranch heet': 'ο προεπιλεγμένος κλάδος ονομάζεται',
+  'die wordt voortaan gebruikt': 'αυτός θα χρησιμοποιείται από εδώ και πέρα',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      'το αποθετήριο είναι ακόμη κενό· η πρώτη αποθήκευση θα το γεμίσει',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'προσοχή: αυτό το διακριτικό μπορεί μόνο να διαβάζει, άρα η αποθήκευση θα αποτύχει',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      'Η σύνδεση απέτυχε — ελέγξτε το διακριτικό. Χρειάζεται δικαίωμα ανάγνωσης στο αποθετήριο και εγγραφής για να αποθηκεύει.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'Το αποθετήριο δεν βρέθηκε — ή το διακριτικό σου δεν επιτρέπεται να το δει. Έλεγξε τον κάτοχο και το όνομα αποθετηρίου.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'Αυτή η διεύθυνση δεν απαντά σαν forge. Είναι σωστό το είδος forge που επέλεξες;',
   'kenteken': 'αριθμός κυκλοφορίας',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Για τη γλώσσα αυτής της παρουσίασης δεν υπάρχει λίστα λέξεων-κλειδιών για ειδικές κατηγορίες προσωπικών δεδομένων. Τα μοτίβα με ψηφίο ελέγχου (ΑΜΚΑ, IBAN, διαβατήριο) λειτουργούν· λέξεις όπως «διάγνωση» ή «ύποπτος» δεν αναγνωρίζονται.',

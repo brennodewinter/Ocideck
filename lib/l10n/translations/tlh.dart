@@ -1756,6 +1756,22 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'privé ghap juH Sammey forge vangDI\' poQlu\'. vam degh Hutlhchugh, Hung waw\' privé inscription lajQo\'.',
+  'Vul server-URL, eigenaar en repository in':
+      'pat URL, ghajwI\', repository je yIbuS',
+  'de standaardbranch heet': 'DevwI\' branch pong',
+  'die wordt voortaan gebruikt': 'DaH vam lo\'lu\'',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      'repository chIm \'oH; wa\'DIch polmeH \'oH teb',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'yIqIm: vam token laD neH, vaj polmeH Qapbe\'',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      '\'el Qapbe\' — token yIlaD. repository laDmeH ghob poQ, \'ej polmeH ghItlh ghob poQ.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'repository tu\'lu\'be\' — ghap token legh net chaw\'be\'. ghajwI\' repository pong je yIlaD.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'inscription vam forge rur pagh. forge Segh DawIvpu\' lugh\'a\'?',
   'kenteken': 'Duj mI\'',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'vam De\' Hol vIghaj be\' potlhqu\' nuv De\' mu\' tetlh. mI\' toblu\'ta\' (BSN, IBAN, nav) vumtaH; mu\'mey rur "rop ngu\'" ghap "pIch ghaj" luleghbe\'.',
