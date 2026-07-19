@@ -213,7 +213,7 @@ is a deliberate, documented trade-off rather than an oversight:
 Enabling the sandbox is therefore tracked as a migration, not a one-line
 entitlement flip; doing it blindly would silently deny file access. The minimal
 target entitlement set, once the file model is bookmark-based, is
-`com.apple.security.app-sandbox`, `…network.client` (WebDAV),
+`com.apple.security.app-sandbox`, `…network.client` (WebDAV, S3, git),
 `…files.user-selected.read-write`, and `…files.downloads.read-write`. Until then,
 the app relies on the in-process defences documented above (SSRF guards, import
 size/entry caps, path containment, the executable-content scanner) rather than

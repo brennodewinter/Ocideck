@@ -108,6 +108,7 @@ services named below.
 |---|---|---|
 | Local project folders, sidecar files | ✗ | No filesystem. Open/save go through the browser; decks live in tab memory. |
 | WebDAV / Nextcloud as a deck source | ✗ | The client is `dart:io` with its own SSRF pinning, and from a browser it would need CORS agreed with the server admin. |
+| S3 buckets as a deck source | ✗ | The client is `dart:io` with hand-rolled SigV4 and its own SSRF pinning; a browser has neither, and would need CORS agreed on the bucket. |
 | Git as a deck source | ✗ | Needs a native `git` subprocess. |
 | Second-screen presenter view | ✗ | Needs native windowing. |
 | Crash recovery / autosave snapshots | ✗ | No app-support directory, so every snapshot call is a silent no-op. **Nothing is recovered after a browser crash.** |

@@ -768,6 +768,12 @@ const _dutchSourceAddFy = {
       'Allinnich dit iene sertifikaat wurdt fertroud. Ferfangt de server it letter, dan freget OciDeck it opnij.',
   'Vertrouwen': 'Fertrouwe',
   'Certificaat bekijken': 'Sertifikaat besjen',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'De plakken dêr\'tst dyn presintaasjes bewarrest en trochsikest — mappen op dizze kompjûter, WebDAV-servers, S3-buckets en git-repositories trochinoar. Sleep se yn de folchoarder dy\'tst wolst: de boppeste fan in soarte jildt as standert.',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  S3-opslach: ferbynst dy mei in bucket, dan wurde it endpoint, de bucketnamme en dyn tagongskaai bewarre (de geheime kaai feilich yn de kaaibosk fan dyn systeem) en wurde de presintaasjes dy\'tst iepenst of bewarrest nei dy opslachtsjinst stjoerd.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Git-opslach: ferbynst dy mei in repository, dan wurdt dyn tagongstoken bewarre (feilich yn de kaaibosk fan dyn systeem) en wurde de presintaasjes dy\'tst bewarrest as commits nei dy server stjoerd. In wurkkopy fan de repository bliuwt ûnfersifere op dit apparaat stean.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Foar de taal fan dit deck ûntbrekke de sykte- en oandwaningsnammen. Religy, politike oertsjûging en fakbûnstermen wurde wol herkend, en kontrôlesifers (BSN, IBAN, paspoart) wurkje altyd — mar rekkenje der net op dat in diagnoaze fûn wurdt.',
   'niet getest': 'net test',

@@ -357,6 +357,48 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   `http://127.0.0.1`, dus het TLS-pad werd nooit aangeraakt. Er is nu een test
   die naar de eerste bytes op de lijn kijkt — een TLS-verbinding begint met een
   handshake-record, platte HTTP met de naam van de methode.
+
+- **De native git-weg ging buiten de adrescontrole om.** Elke uitgaande
+  verbinding in OciDeck wordt geresolved, gefilterd en op het goedgekeurde adres
+  vastgezet — behalve clone, fetch en push. Die draaien in een echt
+  `git`-subproces, en dat deed zijn eigen DNS, zijn eigen omleidingen en zijn
+  eigen verbinding. De server-URL ging er ongetoetst in, zonder adresfiltering
+  en zonder schemacontrole.
+
+  Wat het makkelijk maakte om te missen: wie in Instellingen de git-verbinding
+  testte, gebruikte de REST-weg, en die ís volledig gepind. De guard zien afgaan
+  bewees niets over clone/fetch/push.
+
+  NetGuard eromheen leggen kan niet — er is geen socket van ons om in te haken.
+  Nu krijgt git de uitkomst opgelegd: `http.curloptResolve` bindt de hostnaam aan
+  het goedgekeurde adres (TLS blijft tegen de náám valideren, dus een DNS-rebind
+  kan de bestemming niet meer verzetten), en `http.followRedirects=false` maakt
+  van elke omleiding een fout. Dat laatste weegt hier zwaarder dan elders: het
+  token reist als HTTP-header mee, en een header volgt een omleiding gewoon mee.
+  Verder dezelfde eis als bij WebDAV en S3: https, tenzij de server bewust als
+  vertrouwd intern is gemarkeerd.
+
+  De test toetst niet alleen dat OciDeck de juiste instellingen meegeeft, maar
+  ook dat `git` zich eraan houdt — anders is het een papieren maatregel.
+
+- **De privacyverklaring verzweeg S3 en git.** De toestemmingspoort somt op wat
+  het apparaat verlaat, en die opsomming eindigt op een dubbele punt: *"Gegevens
+  verlaten dit apparaat alleen als jij dat kiest:"*. Wie zo'n lijst leest, leest
+  hem als volledig. Hij was het niet. S3 stond er nooit in en git al sinds het
+  bestaat niet — twee opslagsoorten die decks naar een server sturen, ontbraken
+  in precies de tekst waarop je aftekent dat je weet wat er weggaat.
+
+  Er stond ook niets over de **git-werkkopie**: een verbonden repository zet een
+  echte clone met volledige deckinhoud op je schijf, en anders dan de
+  herstelkopieën wordt die *niet* na zeven dagen opgeruimd. En "geheimen staan
+  in de sleutelbos" bleek twee randen te hebben: bij S3 geldt dat voor de geheime
+  sleutel, niet voor de access key ID, en het git-token verlaat de sleutelbos
+  zolang er een push loopt.
+
+  Dat dit zo lang kon blijven staan, kwam doordat niets het zag. De opsomming
+  wordt nu getoetst tegen `StorageConnectionKind`, een sealed enum — een vijfde
+  opslagsoort breekt de test en dwingt de auteur langs de verklaring.
+
 - **"Geen toegang" en "verkeerd wachtwoord" waren dezelfde melding.** Een 401
   en een 403 leverden allebei *"Aanmelden mislukt — controleer gebruikersnaam
   en wachtwoord"*. Bij een 403 is dat het enige advies dat zéker niet helpt: je

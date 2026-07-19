@@ -1809,6 +1809,12 @@ const _dutchSourceAddSv = <String, String>{
       'Endast just detta certifikat betros. Byter servern ut det senare frågar OciDeck igen.',
   'Vertrouwen': 'Lita på',
   'Certificaat bekijken': 'Visa certifikat',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Platserna där du sparar och söker dina presentationer — mappar på den här datorn, WebDAV-servrar, S3-buckets och git-repositories om vartannat. Dra dem i den ordning du vill: den översta av ett slag gäller som standard.',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  S3-lagring: när du ansluter till en bucket sparas endpointen, bucketnamnet och din åtkomstnyckel (den hemliga nyckeln säkert i systemets nyckelring) och de presentationer du öppnar eller sparar skickas till den lagringstjänsten.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Git-lagring: när du ansluter till ett repository sparas din åtkomsttoken (säkert i systemets nyckelring) och de presentationer du sparar skickas till den servern som commits. En arbetskopia av repositoryt ligger kvar okrypterad på den här enheten.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Sjukdomsnamn saknas för det här däckets språk. Religion, politisk uppfattning och fackliga termer känns igen, och mönster med kontrollsiffra (personnummer, IBAN, pass) fungerar alltid — men räkna inte med att en diagnos hittas.',
   'niet getest': 'inte testad',

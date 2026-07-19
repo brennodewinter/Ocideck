@@ -8,6 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import '../../models/git_settings.dart';
 import '../../utils/atomic_file.dart';
 import '../../utils/log.dart';
+import '../../utils/net_guard.dart';
 import 'deck_mirror.dart';
 import 'draft_store_io.dart';
 import 'git_cli.dart';
@@ -90,15 +91,98 @@ class _NativeGitMirror implements NativeGitMirror {
     return overrides;
   }
 
+  /// Dezelfde poort als elke andere uitgaande weg, maar voor een verbinding die
+  /// wij niet zelf leggen.
+  ///
+  /// `git` doet zijn eigen DNS en zijn eigen socket, dus `NetGuard` kan er niet
+  /// omheen zoals bij een `HttpClient`: er is geen `connectionFactory` om in te
+  /// haken. Wat wél kan is git de uitkomst ópleggen. `http.curloptResolve`
+  /// bindt de hostnaam aan het adres dat NetGuard goedkeurde — TLS blijft tegen
+  /// de naam valideren, dus er hoeft geen certificaat op een IP te staan —
+  /// en `http.followRedirects=false` maakt van elke omleiding een fout in
+  /// plaats van een tweede host die niemand heeft getoetst.
+  ///
+  /// Die tweede is hier belangrijker dan elders. Het token reist als
+  /// `http.extraHeader` mee, en een header volgt een omleiding gewoon mee: een
+  /// remote die 302 antwoordt, kreeg anders de `Authorization` cadeau.
+  ///
+  /// Getoetst dat git dit ook echt doet en het geen papieren maatregel is: met
+  /// een opzettelijk verkeerd adres weigert de verbinding
+  /// (`test/git_network_guard_test.dart`).
+  Future<List<GitConfigOverride>> _networkConfig() async {
+    final base = Uri.tryParse(_config.baseUrl.trim());
+    if (base == null) {
+      throw const GitForgeException(
+        GitForgeError.config,
+        'Server-URL onbruikbaar',
+      );
+    }
+    final scheme = base.scheme.toLowerCase();
+    // `file://` gaat de lijn niet op: geen host, geen DNS, geen TLS. Er valt
+    // hier niets te pinnen en niets te weigeren — de guard hoort over
+    // netwerkverkeer te gaan, niet over een pad op deze schijf. (Het is ook wat
+    // de tests als origin gebruiken.)
+    if (scheme == 'file') return _config0;
+    // Verder dezelfde eis als bij WebDAV en S3: https, tenzij de gebruiker de
+    // server bewust als vertrouwd intern heeft gemarkeerd. Al het overige —
+    // `git://` (onversleuteld), `ssh://`, wat dan ook — gaat er niet in: de app
+    // ondersteunt het niet, en een schema dat hier stilletjes doorglipt is
+    // precies hoe dit gat is ontstaan.
+    if (scheme != 'https' && !(scheme == 'http' && _config.trustedInternal)) {
+      throw GitForgeException(
+        GitForgeError.config,
+        scheme == 'http'
+            ? 'Gebruik https of markeer de server als vertrouwd intern; anders '
+                  'gaan je presentaties onversleuteld over het netwerk.'
+            : 'Alleen https-servers worden ondersteund.',
+      );
+    }
+    if (base.host.isEmpty) {
+      throw const GitForgeException(
+        GitForgeError.config,
+        'Server-URL mist een hostnaam',
+      );
+    }
+    final resolved = await NetGuard.resolveConfigured(
+      base.host,
+      allowPrivate: _config.trustedInternal,
+    );
+    if (!resolved.isOk) {
+      throw switch (resolved.refusal!) {
+        HostRefusal.unknownHost => const GitForgeException(
+          GitForgeError.unknownHost,
+          'Servernaam niet gevonden',
+        ),
+        HostRefusal.blocked => const GitForgeException(
+          GitForgeError.blockedHost,
+          'Server-host geweigerd',
+        ),
+      };
+    }
+    final port = base.hasPort ? base.port : (scheme == 'https' ? 443 : 80);
+    return [
+      ..._config0,
+      GitConfigOverride(
+        'http.curloptResolve',
+        '${base.host}:$port:${resolved.addresses!.first.address}',
+      ),
+      const GitConfigOverride('http.followRedirects', 'false'),
+    ];
+  }
+
+  /// [network] hoort aan te staan voor alles wat de lijn op gaat — clone,
+  /// fetch, push. Lokale aanroepen (commit, checkout) hebben de guard niet
+  /// nodig en zouden er een DNS-lookup per aanroep bij krijgen.
   Future<GitResult> _run(
     List<String> args, {
     List<String> operands = const [],
     Duration timeout = const Duration(seconds: 60),
-  }) => _git.run(
+    bool network = false,
+  }) async => _git.run(
     args,
     operands: operands,
     workingDirectory: _worktree.path,
-    config: _config0,
+    config: network ? await _networkConfig() : _config0,
     timeout: timeout,
   );
 
@@ -126,7 +210,7 @@ class _NativeGitMirror implements NativeGitMirror {
     await _ensureClone();
     // Best-effort: offline openen mag, dan werken we met wat er lokaal is.
     try {
-      await _run(['fetch', 'origin'], operands: [_branch]);
+      await _run(['fetch', 'origin'], operands: [_branch], network: true);
       // Alleen fast-forward: staat de branch verder, dan halen we die op; hebben
       // we zelf nog niet-gepushte commits (divergentie), dan faalt dit en houden
       // we ons eigen werk. Zo openen we de nieuwste versie zonder ooit iets weg
@@ -236,7 +320,7 @@ class _NativeGitMirror implements NativeGitMirror {
 
     // Zonder verse ophaal weten we niet wat "die van hen" is.
     try {
-      await _run(['fetch', 'origin'], operands: [branch]);
+      await _run(['fetch', 'origin'], operands: [branch], network: true);
     } on GitCliException catch (e) {
       logWarning('mergeRemote: fetch mislukt (offline?)', e);
       return GitCommitResult(
@@ -338,7 +422,7 @@ class _NativeGitMirror implements NativeGitMirror {
       ],
       operands: [_cloneUrl, _worktree.path],
       workingDirectory: _worktree.parent.path,
-      config: _config0,
+      config: await _networkConfig(),
       timeout: const Duration(minutes: 5),
     );
   }
@@ -485,7 +569,7 @@ class _NativeGitMirror implements NativeGitMirror {
     final sha = await headSha();
     final branch = await _currentBranch();
     try {
-      await _run(['push', 'origin'], operands: ['HEAD:$branch']);
+      await _run(['push', 'origin'], operands: ['HEAD:$branch'], network: true);
       return GitCommitResult(GitCommitOutcome.pushed, sha: sha);
     } on GitCliException catch (e) {
       logWarning('NativeGitMirror: push mislukt', e);

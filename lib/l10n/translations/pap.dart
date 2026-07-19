@@ -767,6 +767,12 @@ const _dutchSourceAddPap = {
       'Solamente e sertifikado aki ta konfiá. Si e servidor kambi\'é despues, OciDeck lo puntra atrobe.',
   'Vertrouwen': 'Konfia',
   'Certificaat bekijken': 'Wak sertifikado',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'E lugánan kaminda bo ta warda i buska bo presentashonnan — kartafolionan riba e kòmpiuter aki, servidónan WebDAV, bucket di S3 i repositorionan di git meskla. Lastra nan den e òrdu ku bo ke: esun di ariba di un tipo ta konta komo standard.',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  Almasenamentu S3: ora bo konektá ku un bucket, e endpoint, e nòmber di e bucket i bo yabi di akseso ta keda wardá (e yabi sekreto sigur den e yaberu di bo sistema) i e presentashonnan ku bo ta habri òf warda ta wòrdu mandá pa e servisio di almasenamentu ei.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Almasenamentu Git: ora bo konektá ku un repositorio, bo token di akseso ta keda wardá (sigur den e yaberu di bo sistema) i e presentashonnan ku bo ta warda ta wòrdu mandá pa e servidó ei komo commit. Un kopia di trabou di e repositorio ta keda sin sifrá riba e aparato aki.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Pa e idioma di e presentashon aki ta falta nòmber di malesa. Religion, opinion polítiko i término sindikal sí ta wòrdu rekonosí, i patronchi ku sifra di kontrol (BSN, IBAN, pasaporte) semper ta funshoná — ma no konta ku deteshon di un diagnóstiko.',
   'niet getest': 'no testá',

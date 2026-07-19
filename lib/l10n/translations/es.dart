@@ -765,6 +765,12 @@ const _dutchSourceAddEs = {
       'Solo se confía en este certificado. Si el servidor lo sustituye más adelante, OciDeck volverá a preguntar.',
   'Vertrouwen': 'Confiar',
   'Certificaat bekijken': 'Ver certificado',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Los lugares donde guardas y buscas tus presentaciones — carpetas en este ordenador, servidores WebDAV, buckets S3 y repositorios git mezclados. Arrástralos en el orden que quieras: el primero de cada tipo vale como predeterminado.',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  Almacenamiento S3: cuando te conectas a un bucket, se guardan el endpoint, el nombre del bucket y tu clave de acceso (la clave secreta de forma segura en el llavero de tu sistema) y las presentaciones que abres o guardas se envían a ese servicio de almacenamiento.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Almacenamiento Git: cuando te conectas a un repositorio, se guarda tu token de acceso (de forma segura en el llavero de tu sistema) y las presentaciones que guardas se envían a ese servidor como commits. Una copia de trabajo del repositorio permanece sin cifrar en este dispositivo.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Faltan los nombres de enfermedades para el idioma de esta presentación. La religión, la opinión política y los términos sindicales sí se reconocen, y los patrones con dígito de control (DNI, IBAN, pasaporte) siempre funcionan, pero no cuentes con que se detecte un diagnóstico.',
   'niet getest': 'sin probar',

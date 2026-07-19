@@ -1814,6 +1814,12 @@ const _dutchSourceAddGsw = <String, String>{
       'Nur däm eine Zertifikat wird vertrout. Ersetzt de Server s spöter, frögt OciDeck nomol.',
   'Vertrouwen': 'Vertroue',
   'Certificaat bekijken': 'Zertifikat aluege',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'D Ort, wo du dyni Präsentatione ufbewahrsch und durchsuechsch — Ordner uf dëm Computer, WebDAV-Server, S3-Buckets und git-Repositories dureenand. Zieh si i d Reihefolg, wo du wottsch: s oberschte vo ere Art gilt als Standard.',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  S3-Spycher: Wenn du di mit eme Bucket verbindisch, wärde de Endpunkt, de Bucket-Name und dyn Zuegriffsschlüssel gspycheret (de gheimi Schlüssel sicher im Schlüsselbund vo dym System) und d Präsentatione, wo du ufmachsch oder spycherisch, wärde a dää Spycherdienscht gschickt.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Git-Spycher: Wenn du di mit eme Repository verbindisch, wird dyn Zuegriffstoken gspycheret (sicher im Schlüsselbund vo dym System) und d Präsentatione, wo du spycherisch, wärde als Commits a dää Server gschickt. E Arbetskopie vom Repository blybt unverschlüsselt uf däm Grät.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Für d Sproch vo dere Presentation fähle d Chrankheitsname. Religion, politischi Meinig und Gwerkschaftsbegriff wärde erkennt, und Prüefziffere (Steuer-ID, IBAN, Pass) laufe immer — aber verloss di nid druf, dass e Diagnose gfunde wird.',
   'niet getest': 'nid teschtet',

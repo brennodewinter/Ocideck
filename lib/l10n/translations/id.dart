@@ -1810,6 +1810,12 @@ const _dutchSourceAddId = <String, String>{
       'Hanya sertifikat ini yang dipercaya. Jika server menggantinya nanti, OciDeck akan bertanya lagi.',
   'Vertrouwen': 'Percayai',
   'Certificaat bekijken': 'Lihat sertifikat',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Tempat kamu menyimpan dan mencari presentasimu — folder di komputer ini, server WebDAV, bucket S3, dan repositori git bercampur. Seret sesuai urutan yang kamu mau: yang teratas dari satu jenis berlaku sebagai baku.',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  Penyimpanan S3: saat kamu terhubung ke sebuah bucket, endpoint, nama bucket, dan kunci aksesmu disimpan (kunci rahasia disimpan aman di gantungan kunci sistemmu) dan presentasi yang kamu buka atau simpan dikirim ke layanan penyimpanan tersebut.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Penyimpanan Git: saat kamu terhubung ke sebuah repositori, token aksesmu disimpan (aman di gantungan kunci sistemmu) dan presentasi yang kamu simpan dikirim ke server tersebut sebagai commit. Salinan kerja repositori tetap tidak terenkripsi di perangkat ini.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Nama penyakit tidak tersedia untuk bahasa dek ini. Agama, pandangan politik, dan istilah serikat pekerja dikenali, dan pola dengan digit periksa (NIK, IBAN, paspor) selalu bekerja — tetapi jangan mengandalkan diagnosis ditemukan.',
   'niet getest': 'belum diuji',

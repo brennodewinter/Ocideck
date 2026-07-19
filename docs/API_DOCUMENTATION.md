@@ -172,9 +172,9 @@ and `../` escapes are refused on the render/present/export paths.
 `lib/services/secret_store.dart` — OS keychain integration via
 `flutter_secure_storage` (macOS Keychain, Windows Credential Manager, and the
 platform-appropriate backend elsewhere). Typed accessors:
-`write/read/deleteWebdavPassword`, `write/read/deleteAiApiKey`,
-`write/read/deleteGitToken`. Only secrets go here; server URLs and usernames stay
-in the prefs domain.
+`write/read/deleteWebdavPassword`, `write/read/deleteS3SecretKey`,
+`write/read/deleteAiApiKey`, `write/read/deleteGitToken`. Only secrets go here;
+server URLs, usernames and the S3 access key ID stay in the prefs domain.
 
 ### ClassificationEnforcementPolicy
 `lib/services/classification_enforcement_policy.dart` — export classification gate:

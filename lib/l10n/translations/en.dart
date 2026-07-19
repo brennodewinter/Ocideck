@@ -949,6 +949,12 @@ const _dutchSourceAddEn = {
       'Only this one certificate is trusted. If the server replaces it later, OciDeck will ask again.',
   'Vertrouwen': 'Trust',
   'Certificaat bekijken': 'View certificate',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'The places where you keep and search your presentations — folders on this computer, WebDAV servers, S3 buckets and git repositories side by side. Drag them into the order you want: the topmost of a kind counts as the default.',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  S3 storage: when you connect to a bucket, the endpoint, the bucket name and your access key are kept (the secret key safely in your system keychain) and the presentations you open or save are sent to that storage service.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Git storage: when you connect to a repository, your access token is kept (safely in your system keychain) and the presentations you save are sent to that server as commits. A working copy of the repository stays unencrypted on this device.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Disease and condition names are missing for this deck\'s language. Religion, political opinion and trade-union terms are recognised, and check-digit patterns (national ID, IBAN, passport) always work — but do not count on a diagnosis being found.',
   'niet getest': 'not tested',

@@ -1828,6 +1828,12 @@ const _dutchSourceAddUk = <String, String>{
       'Довіра стосується лише цього сертифіката. Якщо сервер його згодом замінить, OciDeck запитає знову.',
   'Vertrouwen': 'Довіряти',
   'Certificaat bekijken': 'Переглянути сертифікат',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Місця, де ти зберігаєш і шукаєш свої презентації — теки на цьому комп\'ютері, сервери WebDAV, бакети S3 і репозиторії git упереміш. Перетягни їх у потрібному порядку: найвищий свого роду вважається типовим.',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  Сховище S3: коли ти під\'єднуєшся до бакета, зберігаються кінцева точка, назва бакета і твій ключ доступу (таємний ключ безпечно у сховищі ключів твоєї системи), а презентації, які ти відкриваєш або зберігаєш, надсилаються до цієї служби зберігання.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Сховище Git: коли ти під\'єднуєшся до репозиторію, зберігається твій токен доступу (безпечно у сховищі ключів твоєї системи), а презентації, які ти зберігаєш, надсилаються на цей сервер як коміти. Робоча копія репозиторію залишається незашифрованою на цьому пристрої.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Для мови цієї презентації бракує назв хвороб. Релігію, політичні погляди та профспілкові терміни розпізнано, а шаблони з контрольною цифрою (ІПН, IBAN, паспорт) працюють завжди — але не розраховуйте на виявлення діагнозу.',
   'niet getest': 'не перевірено',

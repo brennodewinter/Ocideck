@@ -1826,6 +1826,12 @@ const _dutchSourceAddLa = <String, String>{
       'Huic uni testimonio tantum creditur. Si servitor id postea mutabit, OciDeck iterum rogabit.',
   'Vertrouwen': 'Credere',
   'Certificaat bekijken': 'Testimonium inspicere',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Loci ubi exhibitiones tuas servas et perscrutaris — scrinia in hoc computatro, servi WebDAV, vasa S3 et promptuaria git permixta. Trahe ea in ordinem quem vis: summum cuiusque generis pro consueto valet.',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  Repositorium S3: cum ad vas te coniungis, terminus, nomen vasis et clavis tua accessus servantur (clavis secreta tuto in clavario systematis tui) et exhibitiones quas aperis vel servas ad illud repositorium mittuntur.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Repositorium Git: cum ad promptuarium te coniungis, tessera tua accessus servatur (tuto in clavario systematis tui) et exhibitiones quas servas ad illum servum tamquam commissa mittuntur. Exemplar operis promptuarii sine cifris in hoc instrumento manet.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Nomina morborum huic linguae desunt. Religio, opinio politica et vocabula collegiorum opificum agnoscuntur, et formae cum numero probationis (BSN, IBAN, diploma) semper valent — sed noli confidere diagnosin inventum iri.',
   'niet getest': 'non probatum',
