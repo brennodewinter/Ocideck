@@ -27,6 +27,7 @@ accepteren, waarschuwen met een shield-badge, of redigeren op scherm en in expor
 | §13.5 Beeldcontrole: herkenbare gezichten op afbeeldingen (YuNet, lokaal) | **geleverd** |
 | §13.2 Persoonskoppelingspoort, lexiconmodel als data | open — fase 11/12 |
 | §13.3 Taaldekking zichtbaar, gebundelde lexicons | open — fase 13 |
+| §14 Onderzoeksdossier DLP-technieken (annex, geen ontwerp) | naslag |
 
 De genomen beslissingen staan in §11; die zijn niet meer open.
 
@@ -1419,3 +1420,277 @@ een paar minuten CI-tijd per platform.
 
 Android en iOS zijn geen leverplatform: de release-workflow bouwt web, macOS, Windows
 en Linux. De mappen bestaan, het product niet.
+
+---
+
+## 14. Onderzoeksdossier: DLP-technieken en wat ervan gemeten is
+
+Deze sectie is een **annex, geen ontwerp**. §13 bevat de beslissingen; hier staat
+het materiaal waarop ze rusten, zodat een volgende sessie niet opnieuw hoeft te
+zoeken. Alles is nagelopen tot de primaire bron; waar dat niet lukte staat het
+erbij.
+
+Eén ding vooraf, want het kleurt de rest: **er bestaat geen onafhankelijke
+accuratessebenchmark voor enterprise-DLP.** Gartner schrapte de Magic Quadrant in
+2018, NSS Labs heeft DLP nooit getest, en geen enkele leverancier publiceert
+precisie of recall voor zijn detectoren. De reden staat in de literatuur zelf: de
+producten zijn zwarte dozen (Katz et al. §4.2) en bedrijven geven hun
+vertrouwelijke corpora niet vrij (Hart et al. §6). Elk rondzingend
+FP-percentage is dus een leverancierclaim.
+
+### 14.1 Wat de leveranciers werkelijk doen
+
+| | Purview | Google SDP | Macie | Presidio |
+| --- | --- | --- | --- | --- |
+| Detectoren | 325 SIT's | 260 infoTypes | 162 MDI's | 81 entiteiten / 74 recognizers |
+| Landspecifiek | 249 (62 landen + EU) | 126 (50 landen) | ~141 (67 prefixen, 51 alleen IBAN) | 60 (18 landen) |
+| EU-27 nationale ID | alle 27 | 15 van 27 | 10 landen (géén NL/PL/SE) | 8 landen |
+| Trefwoorden gelokaliseerd? | **inconsistent** — mediaan 4 lokale termen bovenop één gedeeld blok van 126 Engelse | **niet gepubliceerd** | **ja**, per land in de lokale taal | Engels standaard; schrijf je zelf |
+
+**Niemand lost meertaligheid systematisch op.** Microsoft stelt het expliciet in
+eigen documentatie: *"You can't use localized strings to provide different
+localized versions of a keyword list or regular expression."* Hun 27
+EU-rijbewijstypes delen datzelfde Engelse blok, met zichtbare knip-en-plakfouten:
+het Nederlandse lijstje bevat `permis de conduire`, het Zweedse bevat Fins.
+Purview's trainable classifiers zijn bovendien **Engels-only**.
+
+**De ijking die je wilt overnemen** komt uit Microsofts Franse INSEE-definitie:
+
+```xml
+<Entity patternsProximity="300" recommendedConfidence="75">
+  <Pattern confidenceLevel="75">   <!-- patroon + checksum, géén trefwoord -->
+  <Pattern confidenceLevel="85">   <!-- patroon + checksum + trefwoord binnen 300 tekens -->
+```
+
+De checksum draagt al 75; het taalsignaal voegt 10 toe. Precies de verhouding die
+een 30-talenproduct nodig heeft. Let op: `patternsProximity` is **±N tekens** rond
+de match, dus 300 betekent een venster van 600 breed.
+
+**Nabijheidsvensters lopen ver uiteen** — Purview 300 (±), Macie **30** voor
+managed identifiers (en asymmetrisch: het trefwoord moet vóór de match staan;
+custom is default 50, bereik 1-300), Google maximaal 1000 totaal, Presidio 5
+wóórden ervoor en 0 erna. OciDeck zit met `kContextWindow = 40` dicht bij Macie.
+
+**Purview rékent niet.** De waarden 65/75/85 zijn volgens Microsofts eigen
+PowerShell-referentie *"a unique ID for each pattern in an entity"* — met de hand
+toegekende labels, geen som en geen Bayes. Bij creditcards is het Luhn alleen = 65,
+Luhn + context = 85; er is geen 75-trede. Dat is bevrijdend: OciDeck's drie
+zekerheidsniveaus zijn hetzelfde soort ding, geen simpelere versie van iets
+geavanceerders.
+
+**Presidio is het enige systeem waar je de rekensom kunt lézen:** regex geeft 0,3;
+de Luhn-validator is een **harde override naar 1,0 of 0,0**, geen weging;
+context-boost is +0,35 additief met ondergrens 0,4.
+
+### 14.2 De technieken, en wat ze kosten
+
+**Exact Data Matching (EDM).** Je indexeert een echte brontabel als gehashte
+waarden en matcht daartegen. Purview: 100 miljoen rijen, 32 kolommen, max 10
+doorzoekbaar, 5 uploads per 24 uur. Hashing gebeurt met een salt, maar **het
+algoritme en de saltlengte staan nergens in de publieke documentatie** — wie
+schrijft dat Purview SHA-256 gebruikt, citeert iets wat Microsoft niet publiceert.
+
+De architectonisch belangrijkste beperking: een primair element *moet* al vindbaar
+zijn via een bestaande SIT met een detecteerbaar patroon. Vrije-tekstvelden (namen,
+adressen) kunnen géén primair element zijn. **EDM is dus geen zelfstandige exacte
+matcher maar een corroboratielaag over patroonmatching** — het kan de FP-ratio
+nooit onder de kandidatenset van de onderliggende regex duwen.
+
+Symantec publiceert wél harde cijfers: **+3 bytes per cel** boven 500 miljoen
+cellen (4 bytes voor CJK), tijdelijke index ≈ `rijen × kolommen × 25` bytes, tot 6
+miljard cellen. En een FN-bron om te onthouden: *"by default, EDM scans only the
+first 30.000 tokens"*.
+
+**Document fingerprinting.** Purview: partiële match instelbaar op **30–90%** van
+de tekst, bestand max 4 MB, template 256–204.800 tekens, ~100 fingerprints per
+tenant. Blinde vlekken: wachtwoordbeveiligde bestanden, beeld-only bestanden,
+ingesloten documenten. Symantec IDM is algoritmisch openhartiger: *"uses a rolling
+hash algorithm"* (Rabin-Karp) plus *"a selection method … not all text is hashed"*
+(de winnowing-familie), minimaal 50 genormaliseerde tekens voor exacte en 300 voor
+partiële match.
+
+Winnowing zelf (Schleimer, Wilkerson & Aiken, SIGMOD 2003) heeft een nette
+garantie: venster `w = t − k + 1`, dichtheid `2/(w+1)`, ondergrens voor élk lokaal
+algoritme `1,5/(w+1)` — dus binnen 33% van optimaal. Het overtuigendste empirische
+resultaat is negatief: op 500.000 HTML-pagina's liet de naïeve "0 mod p"-selectie
+een aaneengesloten stuk van **29.983 tekens zonder enkele vingerafdruk**.
+
+**Checksums.** Wiskundige eigenschappen, geen metingen — en **geen enkele studie
+kwantificeert de FP-reductie van checksums in DLP**:
+
+| Validator | P(willekeurig passeert) |
+| --- | --- |
+| Elfproef / BSN | ≈ 1/11 = 9,1 % |
+| Luhn | 1/10 = 10 % |
+| IBAN mod-97 | ≈ 1/97 = 1,03 % |
+
+Het ontwerpprincipe dat eruit volgt is de **asymmetrie**: een gefaalde checksum is
+bijna sluitend bewijs van géén match, een geslaagde is zwak bewijs vóór. En:
+**formaatbeperkingen leveren vaak méér precisie dan de checksum zelf** — IBAN's
+landcode plus vaste lengte per land is sterker dan de mod-97, en creditcard-IIN's
+beperken de eerste zes cijfers, wat meer waard is dan één controlecijfer. Voor
+uitbreiding naar EU-nummers betekent dat: investeer eerst in de formaattabel.
+
+**Entropie voor secrets — het oordeel staat op zijn kop.** truffleHog's drempels
+zijn 4,5 bits base64 en 3,0 hex (beide 75% van het theoretisch maximum; geverifieerd
+in de broncode). Het gangbare verhaal is dat entropie ruis oplevert. Meli et al.
+(NDSS 2019) maten het tegenovergestelde: entropie vond het merendeel van de
+secrets, en overstappen op alleen regex zou de recall van 25% naar 19% hebben
+gedrukt. Het probleem van entropie is **precisie, niet recall** — Basak et al.
+geven het mooiste bewijs: `ThisIsAReallyLongString` scoort entropie **4,11**, een
+echte sleutel **4,08**.
+
+**Bloomfilters.** Zie §13.7 voor waarom ze hier niet kunnen. De wiskunde voor het
+geval je ze elders overweegt: `m/n ≈ 1,44·log₂(1/ε)`, optimaal `k = (m/n)·ln 2` —
+9,6 bits per element voor 1% FP, 14,4 voor 0,1%. Elke factor 10 minder FP kost
+~4,8 bits. **Geen enkele commerciële DLP-leverancier documenteert het gebruik
+ervan**; in onderzoek wel (Shu, Yao & Bertino, IEEE TIFS 2015), en daar zijn
+botsingen juist een *feature*.
+
+**OCR.** Purview is gemeterd, niet gelicentieerd: elke PDF-pagina telt als een
+aparte scan. Limieten: 20 MB (Exchange/Teams), 50 MB (SharePoint/endpoints), eerste
+2 miljoen tekens, 1.024 MB per apparaat per dag. Blinde vlek die telt: *"Only
+images uploaded after OCR is enabled are scanned"* — geen terugwerkende scan.
+Netskope is het eerlijkst over de grens: *"English is the only supported language
+for extraction with OCR"*. **Geen enkele leverancier publiceert een
+OCR-accuratessecijfer.**
+
+### 14.3 Wat er werkelijk gemeten is
+
+De peer-reviewed cijfers, met hun voorbehouden.
+
+| Meting | Uitkomst | Bron |
+| --- | --- | --- |
+| Regex: *attribuut*detectie (is dit een telefoonnummer?) | **F1 90,20%** | VACCINE, WWW 2019, Enron |
+| Regex: *subject*detectie (van wíé is dit nummer?) | **F1 48,35%** | idem |
+| Presidio, recall directe identificatoren | **0,46** | TAB, Computational Linguistics 48(4) |
+| Presidio + ORG: recall +0,003, precisie **−0,219** | 0,761 → 0,542 | idem |
+| Google Cloud DLP / Presidio op echte tabellen | F1 **0,576** / **0,565** | Telkamp & Hulsebos 2025 |
+| Acht PII-systemen, cross-domein | span-F1 **< 0,14** | PIIBench (preprint) |
+| Regex-precisie op sleutels | **3,62%** (NER: 60%) | StarPII / BigCode, TMLR 2023 |
+| Gebruikersnamen, beste model | F1 **61,5%** | idem |
+| Fingerprinting, ingebedde passages | max **90%**, na naïeve synoniemvervanging **~65%** | CoBAn, Information Sciences 262 |
+| Naïeve classifier op niet-bedrijfstekst | FP tot **87,2%** | Hart et al., PETS 2011 |
+| Vijf van negen secret-scanners | precisie **< 7%** | Basak et al., ESEM 2023 |
+| Korte termen (1–2 tekens) | 2.044 termen → **~1,9 miljard** valse MEDLINE-matches | Hettne et al., J Biomed Semantics 2010 |
+
+Twee cijfers verdienen extra aandacht.
+
+**VACCINE's 90,20 versus 48,35** is de meting die de persoonskoppelingspoort
+(§13.2) zowel rechtvaardigt als tempert: het patroon is het makkelijke deel, de
+koppeling aan een persoon het moeilijke — en juist die bepaalt of iets een lek is.
+Reken op de helft, niet op negentig procent.
+
+**Hart's mooie cijfers rusten op een aanname.** De false-discovery-rate van 0,47%
+geldt bij een verondersteld verkeer van *25% vertrouwelijke documenten*. In een echt
+netwerk ligt die basisfrequentie ordes van grootte lager, en FDR verslechtert daar
+recht evenredig mee.
+
+**En er is geen grondwaarheid.** TAB's menselijke annotatoren maskeerden gemiddeld
+**67,9%** van de entiteiten met SD **8,3%** en **4.299** unieke meningsverschillen
+(waarvan 4.062 over quasi-identificator versus niet-maskeren). Getrainde
+annotatoren, één taal, één domein, expliciete richtlijnen — en ze komen niet tot
+overeenstemming. Dat plafonneert wat élke classifier kan halen.
+
+**"Vals positief" is als begrip zelfs betwist.** Alahmadi et al. (USENIX Security
+2022) tonen dat het rondzingende "99% van DLP-alerts is vals positief" een citaat
+van één analist is, geen meting. Hun werkelijke bevinding: het merendeel zijn
+**benign triggers** — technisch correcte treffers die de organisatie bewust
+negeert. Dat is precies wat de acceptatie-badge modelleert.
+
+### 14.4 Bronnen voor lexicons, met licentiestatus
+
+**Bundelen kan:** ORDO 4.9 (CC BY 4.0, **16.378 Nederlandse labels** + 30.662
+synoniemen — de enige bron met eersteklas NL-editie), DOID (CC0), MONDO (CC BY
+4.0), Wikidata (CC0), EuroVoc (24 EU-talen incl. MT en GA), IATE, HGNC (CC0), CBS
+Standaardclassificatie Misdrijven (75 categorieën, CC BY 4.0), **RvIG BRP Tabel 32**
+(217 rijen in de *adjectivische* vorm — `Marokkaanse`, `Syrische` — precies wat je
+in lopende tekst tegenkomt), Wetboek van Strafrecht XML (CC0), OpenCage
+`address-formatting` (MIT, 251 gebieden, encodeert de straat/huisnummer-vólgorde
+die per land verschilt), CLDR (datums, naamvolgorde), RxNorm *Current Prescribable*
+alleen.
+
+**Bundelen kan niet:** SNOMED CT NL (gratis, maar sublicentiehouders moeten
+geadministreerd en op verzoek aan Nictiz overlegd), ICD-11 (CC BY-**ND**: verbatim
+mag, een lexicon eruit afleiden niet), MeSH-vertalingen (UMLS categorie 3), ATC
+(NC + no-modification), G-Standaard, LOINC (§4 geen afgeleide werken; **§12 draagt
+vertaalwerk automatisch over aan Regenstrief** — onwerkbaar in een repo waar
+bijdragers forken).
+
+**Nog uit te zoeken:** zie §13.8.
+
+**Gat zonder oplossing:** vakbondslidmaatschap. Er is geen open vakbondenregister;
+het KvK-open-bestand dekt alleen BV's en NV's, en vakbonden zijn verenigingen.
+Realistisch honderd entries met de hand.
+
+### 14.5 Meertaligheid en rolonderscheid: wat niet bestaat
+
+**Er is geen erkende meertalige PII-benchmark voor de EU-talen.** TAB is Engels,
+de Kaggle-set Engels, n2c2 Engels, MEDDOCAN Spaans en klinisch, ai4privacy zes
+talen en synthetisch, MultiCoNER twaalf talen maar generieke NER. De claim
+"detecteert persoonsgegevens in 30 talen" is door niemand te valideren.
+
+**ML is geen uitweg voor kleine talen.** Zero-shot transfer verliest bij XLM-R
+gemiddeld 9,3 F1 op de makkelijke West-Europese talen; XTREME's NER-kloof blijft
+~19–24 punten; MasakhaNER 2.0 meet een instorting van ~30 punten. En Wu & Dredze
+tonen dat mBERT onder een corpusdrempel **~6 punten achterblijft bij niet-neurale
+baselines** — voor kleine talen zijn regels dus de bétere keuze, niet de armoedige.
+Papiaments zit in geen enkel meertalig model en in geen enkele NER-dataset;
+Maltees ontbreekt in XLM-R; Fries heeft 0,2 GiB CC-100 tegenover Bulgaars 57,5.
+
+**Rolonderscheid (fase 14).** ConText (Harkema et al. 2009) levert de mechaniek:
+cue + scope + terminatie + pseudo-triggers, zonder parser of model. ContextD
+(Afzal et al., BMC Bioinformatics 2014, CC-BY) is de Nederlandse port, 509
+triggers. **Maar geloof het cijfer niet dat je zult tegenkomen:** de gerapporteerde
+experiencer-F van 0,99–1,00 is gemeten met *Patient* als positieve klasse op een
+verdeling waar 'Other' 0,1–2% is — de triviale baseline. De prestatie op de
+zeldzame rol-flip is nooit apart gerapporteerd, en in het hele corpus vuurden 10
+unieke 'other'-triggers waarvan `moeder` de frequentste. Het is een
+familielid-lexicon, geen redenering over argumentstructuur.
+
+Ter kalibratie voor wat handgebouwde patronen halen: XARA (regelgebaseerde SRL,
+Nederlands) haalt **F1 53,80** tegen 70,43 voor een getrainde classifier, en het
+beste vergelijkbare frame-patroonwerk (slachtofferherkenning in Portugese
+dossiers) rapporteert precisie **0,726** — en recall niet.
+
+**Offline in Dart kan het niet met een parser.** Alpino draait op SICStus 3 of
+SWI-Prolog 6.6.4 (2013), Frog is **GPLv3** (viraal), spaCy `nl_core_news_lg` is
+568 MB Python, Stanza wil PyTorch. Er bestaat geen Dart-native Nederlandse
+dependency parser of SRL. De enige route naar een gelérd model is een
+gekwantiseerde ONNX-classifier via `dart:ffi` — en Nederlandse trainingsdata voor
+misdaadrollen bestaat niet.
+
+### 14.6 Wat marketing is, expliciet
+
+Zodat niemand het per ongeluk citeert:
+
+* **"51% van DLP-alerts is vals positief"** en **"legacy-DLP gemiddeld 35%, soms
+  90%"** — zelfgerapporteerde enquêtes van een leverancier die het middel verkoopt.
+* **"99% vals positief"** — één analist in een interview, geen meting.
+* **Microsoft "fewer false positives"** voor EDM, **Symantec "much more reliable"**
+  voor partial matching — onfalsifieerbaar.
+* **Nightfall's "Possible 40%+, Likely 60%+, Very Likely 80%+"** — ordinale labels
+  in procentkleding, nergens een kalibratiestudie.
+* Elke leveranciers-whitepaper waarin de opdrachtgever wint.
+
+### 14.7 Waar je verder leest
+
+Techniek en evaluatie: Hart, Manadhata & Johnson (PETS 2011); Katz, Elovici &
+Shapira, *CoBAn* (Information Sciences 262, 2014); Shvartzshnaider et al.,
+*VACCINE* (WWW 2019); Pilán et al., *Text Anonymization Benchmark* (Computational
+Linguistics 48(4), 2022); Meli, McNiece & Reaves (NDSS 2019); Basak et al. (ESEM
+2023); Alneyadi, Sithirasenan & Muthukkumarasamy (JNCA 62, 2016).
+
+Meertaligheid: XLM-R (arXiv 1911.02116); XTREME (arXiv 2003.11080); MasakhaNER 2.0
+(EMNLP 2022); Wu & Dredze (RepL4NLP 2020); ELE-project en de DLE-metriek; MAPA
+(CEF, 24 EU-talen, code Apache-2.0 maar dormant, datasets op ELRC-SHARE).
+
+Rolonderscheid: Harkema et al. (J Biomed Inform 2009); Afzal et al. (BMC
+Bioinformatics 2014); van Es et al. (BMC Bioinformatics 2023); medspaCy; Open Dutch
+FrameNet; `vmenger/docdeid` (MIT — de architectuurreferentie; DEDUCE zelf is
+GPL-3.0).
+
+Juridisch: HvJ C-184/20 (*OT*), C-252/21 (*Meta*), C-21/23 (*Lindenapotheke*),
+C-446/21 (*Schrems*); WP29 WP136 (het inhoud/doel/resultaat-criterium); EDPB
+Richtsnoeren 8/2020 §8.1.2 en 3/2019 §62-76; AP-onderzoeken kinderopvangtoeslag
+(z2018-22445) en FSV (z2020-04615).
