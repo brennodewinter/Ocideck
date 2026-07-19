@@ -1799,6 +1799,18 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Nog niet opgeslagen': 'Încă nesalvat',
+  'Buiten de presentatie': 'În afara prezentării',
+  'Van internet': 'De pe internet',
+  'Alleen in deze sessie': 'Doar în această sesiune',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'Acest fișier a fost deja copiat și este în siguranță. Își va primi locul în folderul prezentării de îndată ce salvați.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'Acest fișier se află în afara folderului prezentării și nu călătorește cu ea. Cine primește prezentarea de la dumneavoastră nu va vedea nimic aici. Salvați pentru a crea o copie.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'Acest fișier se află pe internet și nu face parte din prezentare. Fără conexiune sau dacă sursa dispare, nu mai există.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'În versiunea web acest fișier rămâne doar în memoria acestei sesiuni. După reîncărcarea paginii, nu mai există.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Deschide și păstrează prezentări într-un compartiment S3: AWS S3 sau un serviciu compatibil S3 precum un MinIO propriu. Cheia de acces secretă este păstrată criptată în inelul de chei, nu împreună cu celelalte setări.',
   'Openen vanuit S3': 'Deschide din S3',

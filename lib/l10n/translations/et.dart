@@ -1772,6 +1772,18 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Nog niet opgeslagen': 'Veel salvestamata',
+  'Buiten de presentatie': 'Väljaspool esitlust',
+  'Van internet': 'Internetist',
+  'Alleen in deze sessie': 'Ainult selles seansis',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'See fail on juba kopeeritud ja on turvaliselt alles. Oma koha esitluse kaustas saab see kohe, kui salvestate.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'See fail asub väljaspool esitluse kausta ega tule kaasa. See, kes saab esitluse teilt, ei näe siin midagi. Salvestage, et sellest tehtaks koopia.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'See fail asub internetis ega kuulu esitluse juurde. Ilma ühenduseta või kui allikas kaob, on see läinud.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'Veebiversioonis püsib see fail ainult selle seansi mälus. Pärast lehe uuesti laadimist on see läinud.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Ava ja hoia esitlusi S3 ämbris: AWS S3 või S3-ga ühilduv teenus, näiteks oma MinIO. Salajane juurdepääsuvõti hoitakse krüpteeritult võtmehoidjas, mitte koos teiste seadetega.',
   'Openen vanuit S3': 'Ava S3-st',

@@ -1788,6 +1788,18 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Nog niet opgeslagen': 'Zatiaľ neuložené',
+  'Buiten de presentatie': 'Mimo prezentácie',
+  'Van internet': 'Z internetu',
+  'Alleen in deze sessie': 'Len v tejto relácii',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'Tento súbor je už skopírovaný a je v bezpečí. Svoje miesto v priečinku prezentácie dostane, len čo uložíte.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'Tento súbor leží mimo priečinka prezentácie a neputuje s ňou. Kto od vás prezentáciu dostane, tu neuvidí nič. Uložte, aby vznikla kópia.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'Tento súbor leží na internete a k prezentácii nepatrí. Bez pripojenia, alebo keď zdroj zmizne, je preč.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'Vo webovej verzii zostáva tento súbor len v pamäti tejto relácie. Po opätovnom načítaní stránky je preč.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Otváraj a uchovávaj prezentácie v úložisku S3: AWS S3 alebo služba kompatibilná s S3, napríklad vlastné MinIO. Tajný prístupový kľúč sa ukladá zašifrovaný v zväzku kľúčov, nie k ostatným nastaveniam.',
   'Openen vanuit S3': 'Otvoriť z S3',

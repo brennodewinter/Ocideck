@@ -1793,6 +1793,18 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Nog niet opgeslagen': 'Jeszcze nie zapisano',
+  'Buiten de presentatie': 'Poza prezentacją',
+  'Van internet': 'Z internetu',
+  'Alleen in deze sessie': 'Tylko w tej sesji',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'Ten plik został już skopiowany i jest bezpieczny. Trafi do folderu prezentacji, gdy tylko zapiszesz.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'Ten plik znajduje się poza folderem prezentacji i nie wędruje razem z nią. Kto otrzyma od ciebie prezentację, nie zobaczy tu nic. Zapisz, aby powstała kopia.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'Ten plik znajduje się w internecie i nie należy do prezentacji. Bez połączenia albo gdy źródło zniknie, przepada.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'W wersji webowej ten plik pozostaje tylko w pamięci tej sesji. Po przeładowaniu strony przepada.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Otwieraj i przechowuj prezentacje w zasobniku S3: AWS S3 lub usłudze zgodnej z S3, na przykład własnym MinIO. Tajny klucz dostępu jest przechowywany zaszyfrowany w pęku kluczy, a nie razem z pozostałymi ustawieniami.',
   'Openen vanuit S3': 'Otwórz z S3',

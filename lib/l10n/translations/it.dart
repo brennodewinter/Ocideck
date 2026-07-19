@@ -734,6 +734,18 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Nog niet opgeslagen': 'Non ancora salvato',
+  'Buiten de presentatie': 'Fuori dalla presentazione',
+  'Van internet': 'Da internet',
+  'Alleen in deze sessie': 'Solo in questa sessione',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'Questo file è già stato copiato ed è al sicuro. Prenderà posto nella cartella della presentazione appena salvi.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'Questo file si trova fuori dalla cartella della presentazione e non la accompagna. Chi riceve la presentazione da te non vedrà nulla qui. Salva per crearne una copia.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'Questo file si trova su internet e non fa parte della presentazione. Senza connessione, o se la fonte scompare, non c\'è più.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'Nella versione web questo file resta solo nella memoria di questa sessione. Dopo il ricaricamento della pagina non c\'è più.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Apri e conserva presentazioni in un bucket S3: AWS S3 o un servizio compatibile con S3 come un MinIO tuo. La chiave di accesso segreta è conservata cifrata nel portachiavi, non con le altre impostazioni.',
   'Openen vanuit S3': 'Apri da S3',

@@ -1797,6 +1797,18 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Nog niet opgeslagen': 'Nondum servatum',
+  'Buiten de presentatie': 'Extra praesentationem',
+  'Van internet': 'Ex interrete',
+  'Alleen in deze sessie': 'Tantum in hac sessione',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'Hic fasciculus iam descriptus est et tutus est. Locum suum in plica praesentationis accipiet simul ac servaveris.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'Hic fasciculus extra plicam praesentationis iacet neque cum ea proficiscitur. Qui praesentationem a te accipiet, hic nihil videbit. Serva ut exemplum fiat.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'Hic fasciculus in interrete est neque ad praesentationem pertinet. Sine nexu, aut si fons evanuerit, abest.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'In versione interretiali hic fasciculus tantum in memoria huius sessionis manet. Pagina iterum onerata, abest.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Presentationes in situla S3 aperi et serva: AWS S3, vel officium S3-compatibile ut MinIO proprium. Clavis accessus secreta cifrata in claviculario servatur, non apud ceteras optiones.',
   'Openen vanuit S3': 'Ex S3 aperire',

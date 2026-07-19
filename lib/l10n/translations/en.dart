@@ -920,6 +920,18 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Nog niet opgeslagen': 'Not yet saved',
+  'Buiten de presentatie': 'Outside the presentation',
+  'Van internet': 'From the internet',
+  'Alleen in deze sessie': 'Only in this session',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'This file has already been copied and is safe. It takes its place in the presentation folder as soon as you save.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'This file sits outside the presentation folder and does not travel with it. Anyone who gets the presentation from you will see nothing here. Save to make a copy.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'This file lives on the internet and is not part of the presentation. Without a connection, or if the source disappears, it is gone.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'In the web version this file stays only in this session\'s memory. Once the page is reloaded, it is gone.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Open and store presentations in an S3 bucket: AWS S3, or an S3-compatible service such as your own MinIO. The secret access key is stored encrypted in the keychain, not with the other settings.',
   'Openen vanuit S3': 'Open from S3',

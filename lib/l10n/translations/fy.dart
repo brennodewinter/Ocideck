@@ -739,6 +739,18 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Nog niet opgeslagen': 'Noch net bewarre',
+  'Buiten de presentatie': 'Bûten de presintaasje',
+  'Van internet': 'Fan it ynternet',
+  'Alleen in deze sessie': 'Allinne yn dizze sesje',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'Dit bestân is al kopiearre en stiet feilich. It krijt syn plak yn de presintaasjemap sa gau\'t jo bewarje.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'Dit bestân leit bûten de presintaasjemap en giet net mei. Wa\'t de presintaasje fan jo krijt, sjocht hjir neat. Bewarje om in kopy te meitsjen.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'Dit bestân stiet op it ynternet en heart net by de presintaasje. Sûnder ferbining, of as de boarne ferdwynt, is it fuort.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'Yn de webferzje bliuwt dit bestân allinne yn it ûnthâld fan dizze sesje. Nei it opnij laden fan de side is it fuort.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Iepenje en bewarje presintaasjes yn in S3-bucket: AWS S3, of in S3-kompatibele tsjinst lykas in eigen MinIO. De geheime tagongskaai wurdt fersifere yn de kaaibosk bewarre, net by de oare ynstellings.',
   'Openen vanuit S3': 'Iepenje fanút S3',

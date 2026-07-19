@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 import '../../services/caption_service.dart';
 import '../../services/description_service.dart';
+import '../../models/asset_origin.dart';
 import '../../models/slide.dart';
 import '../../services/image_service.dart';
 import '../../state/deck_provider.dart';
@@ -15,6 +16,7 @@ import '../../state/deck_quality_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/project_path.dart';
+import '../asset_origin_badge.dart';
 import '../dialogs/image_carousel_picker.dart';
 import '../../theme/app_theme.dart';
 
@@ -533,13 +535,29 @@ class ImagePickerBar extends ConsumerWidget {
             borderRadius: BorderRadius.circular(6),
             color: AppTheme.paper,
           ),
-          child: Text(
-            imagePath.isEmpty ? l10n.d(label) : imagePath,
-            style: TextStyle(
-              fontSize: 12,
-              color: imagePath.isEmpty ? AppTheme.slate500 : AppTheme.slate700,
-            ),
-            overflow: TextOverflow.ellipsis,
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  imagePath.isEmpty ? l10n.d(label) : imagePath,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: imagePath.isEmpty
+                        ? AppTheme.slate500
+                        : AppTheme.slate700,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              // Het ruwe pad hiernaast is alleen te duiden door wie paden
+              // leest; de badge zegt wat het betekent voor de ontvanger.
+              if (imagePath.isNotEmpty) ...[
+                const SizedBox(width: 8),
+                AssetOriginBadge(
+                  origin: classifyAssetPath(imagePath, captionBasePath),
+                ),
+              ],
+            ],
           ),
         ),
         const SizedBox(height: 8),

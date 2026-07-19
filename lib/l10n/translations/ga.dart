@@ -1817,6 +1817,18 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Nog niet opgeslagen': 'Gan sábháil fós',
+  'Buiten de presentatie': 'Lasmuigh den láithreoireacht',
+  'Van internet': 'Ón idirlíon',
+  'Alleen in deze sessie': 'Sa seisiún seo amháin',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'Tá an comhad seo cóipeáilte cheana agus tá sé slán. Gheobhaidh sé a áit i bhfillteán na láithreoireachta chomh luath is a shábhálfaidh tú.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'Tá an comhad seo lasmuigh d\'fhillteán na láithreoireachta agus ní rachaidh sé léi. Ní fheicfidh aon duine a bhfaigheann an láithreoireacht uait rud ar bith anseo. Sábháil chun cóip a dhéanamh.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'Tá an comhad seo ar an idirlíon agus ní cuid den láithreoireacht é. Gan ceangal, nó má imíonn an fhoinse, tá sé imithe.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'Sa leagan gréasáin ní fhanann an comhad seo ach i gcuimhne an tseisiúin seo. Tar éis an leathanach a athlódáil, tá sé imithe.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Oscail agus coinnigh láithreoireachtaí i mbuicéad S3: AWS S3, nó seirbhís atá comhoiriúnach le S3 ar nós do MinIO féin. Coinnítear an eochair rochtana rúnda criptithe sa slabhra eochracha, ní leis na socruithe eile.',
   'Openen vanuit S3': 'Oscail ó S3',

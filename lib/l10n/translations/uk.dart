@@ -1799,6 +1799,18 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Nog niet opgeslagen': 'Ще не збережено',
+  'Buiten de presentatie': 'Поза презентацією',
+  'Van internet': 'З інтернету',
+  'Alleen in deze sessie': 'Лише в цьому сеансі',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'Цей файл уже скопійовано, він у безпеці. Він потрапить до теки презентації, щойно ви збережете.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'Цей файл лежить поза текою презентації і не мандрує разом із нею. Той, хто отримає презентацію від вас, тут нічого не побачить. Збережіть, щоб створити копію.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'Цей файл лежить в інтернеті й не належить до презентації. Без з\'єднання або якщо джерело зникне, його не буде.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'У вебверсії цей файл лишається лише в пам\'яті цього сеансу. Після перезавантаження сторінки його не буде.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Відкривайте та зберігайте презентації в сегменті S3: AWS S3 або S3-сумісній службі на кшталт власного MinIO. Секретний ключ доступу зберігається зашифрованим у в’язці ключів, а не разом з іншими налаштуваннями.',
   'Openen vanuit S3': 'Відкрити з S3',

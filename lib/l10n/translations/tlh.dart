@@ -1756,6 +1756,18 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Nog niet opgeslagen': 'polbe\'lu\'',
+  'Buiten de presentatie': 'cha\'nob HurDaq',
+  'Van internet': 'internetvo\'',
+  'Alleen in deze sessie': 'Qu\'vamDaq neH',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'mob velqa\'lu\'ta\' \'ej QanlI\'. DapolDI\' cha\'nob ghomDaq DaqDaj Suq.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'cha\'nob ghom HurDaq mob \'ej tlheDbe\'. cha\'nob Hevbogh nuv pagh legh. velqa\' chenmoHmeH yIpol.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'internetDaq mob \'ej cha\'nob rurbe\'. rarbe\'lu\'chugh, pagh Hal chIlchugh, chIlpu\'.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'web mIw\'a\'Daq Qu\'vam qawHaqDaq neH ratlh mob. HochHom nISlu\'DI\' chIlpu\'.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'S3 nagh baSDaq HaSta yIpoSmoH \'ej yIQIj: AWS S3, pagh S3 rurbogh MinIO. pegh ngaQHa\'moH So\'lu\'bogh ngaQHa\'moH nagh ngaSwI\'Daq QIjlu\', latlh DuHIvmeymey rurbe\'.',
   'Openen vanuit S3': 'S3 yIpoSmoH',

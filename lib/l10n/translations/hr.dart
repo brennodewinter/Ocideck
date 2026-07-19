@@ -1788,6 +1788,18 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Nog niet opgeslagen': 'Još nije spremljeno',
+  'Buiten de presentatie': 'Izvan prezentacije',
+  'Van internet': 'S interneta',
+  'Alleen in deze sessie': 'Samo u ovoj sesiji',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'Ova datoteka već je kopirana i sigurna je. Svoje mjesto u mapi prezentacije dobiva čim spremite.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'Ova datoteka nalazi se izvan mape prezentacije i ne putuje s njom. Tko od vas dobije prezentaciju, ovdje neće vidjeti ništa. Spremite da biste napravili kopiju.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'Ova datoteka nalazi se na internetu i ne pripada prezentaciji. Bez veze, ili ako izvor nestane, više je nema.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'U web-verziji ova datoteka ostaje samo u memoriji ove sesije. Nakon ponovnog učitavanja stranice više je nema.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Otvaraj i čuvaj prezentacije u S3 spremniku: AWS S3 ili usluga kompatibilna s S3 poput vlastitog MinIO-a. Tajni pristupni ključ čuva se šifriran u privjesku ključeva, a ne uz ostale postavke.',
   'Openen vanuit S3': 'Otvori iz S3',

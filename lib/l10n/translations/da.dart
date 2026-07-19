@@ -1780,6 +1780,18 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Nog niet opgeslagen': 'Endnu ikke gemt',
+  'Buiten de presentatie': 'Uden for præsentationen',
+  'Van internet': 'Fra internettet',
+  'Alleen in deze sessie': 'Kun i denne session',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'Denne fil er allerede kopieret og er i sikkerhed. Den får sin plads i præsentationsmappen, så snart du gemmer.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'Denne fil ligger uden for præsentationsmappen og følger ikke med. Den, der får præsentationen af dig, ser ingenting her. Gem for at lave en kopi.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'Denne fil ligger på internettet og hører ikke til præsentationen. Uden forbindelse, eller hvis kilden forsvinder, er den væk.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'I webversionen bliver denne fil kun i denne sessions hukommelse. Når siden genindlæses, er den væk.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Åbn og opbevar præsentationer i en S3-bucket: AWS S3 eller en S3-kompatibel tjeneste som din egen MinIO. Den hemmelige adgangsnøgle gemmes krypteret i nøgleringen, ikke sammen med de øvrige indstillinger.',
   'Openen vanuit S3': 'Åbn fra S3',

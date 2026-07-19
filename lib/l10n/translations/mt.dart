@@ -1803,6 +1803,18 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Nog niet opgeslagen': 'Għadu ma ġiex issejvjat',
+  'Buiten de presentatie': 'Barra mill-preżentazzjoni',
+  'Van internet': 'Mill-internet',
+  'Alleen in deze sessie': 'Biss f\'din is-sessjoni',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'Dan il-fajl diġà ġie kkupjat u huwa fis-sigur. Jieħu postu fil-folder tal-preżentazzjoni malli tissejvja.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'Dan il-fajl jinsab barra mill-folder tal-preżentazzjoni u ma jivvjaġġax magħha. Min jirċievi l-preżentazzjoni mingħandek mhu se jara xejn hawn. Issejvja biex issir kopja.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'Dan il-fajl jinsab fuq l-internet u mhuwiex parti mill-preżentazzjoni. Mingħajr konnessjoni, jew jekk is-sors jisparixxi, jispiċċa.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'Fil-verżjoni tal-web dan il-fajl jibqa\' biss fil-memorja ta\' din is-sessjoni. Wara li l-paġna terġa\' titgħabba, jispiċċa.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Iftaħ u żomm preżentazzjonijiet f’barmil S3: AWS S3, jew servizz kompatibbli ma’ S3 bħal MinIO tiegħek. Iċ-ċavetta sigrieta tal-aċċess tinżamm kriptata fil-keychain, mhux mas-settings l-oħra.',
   'Openen vanuit S3': 'Iftaħ minn S3',
