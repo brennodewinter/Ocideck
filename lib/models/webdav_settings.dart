@@ -60,6 +60,15 @@ class WebdavServer {
   /// server is; pas dán mag een privé/LAN-host de SSRF-blokkade passeren.
   final bool trustedInternal;
 
+  /// SHA-256 van het certificaat dat de gebruiker uitdrukkelijk heeft
+  /// vertrouwd, of leeg wanneer alleen de normale keten van erkende uitgevers
+  /// telt. Zie [NetGuard.pinnedCertCheck].
+  ///
+  /// Bewust een vingerafdruk en geen vlag als "accepteer zelfondertekend": dat
+  /// laatste zou élk certificaat toelaten, ook dat van een aanvaller. Nu geldt
+  /// de uitzondering voor precies dit ene certificaat.
+  final String pinnedCertSha256;
+
   /// Welk padschema de server aanhoudt. Standaard [WebdavServerKind.nextcloud]
   /// omdat dat het enige was voordat andere servers ondersteund werden — zo
   /// blijven bestaande, opgeslagen bronnen zonder migratie werken.
@@ -71,6 +80,7 @@ class WebdavServer {
     this.rootPath = '',
     this.trustedInternal = false,
     this.kind = WebdavServerKind.nextcloud,
+    this.pinnedCertSha256 = '',
   });
 
   bool get isConfigured =>
@@ -211,6 +221,7 @@ class WebdavServer {
     String? rootPath,
     bool? trustedInternal,
     WebdavServerKind? kind,
+    String? pinnedCertSha256,
   }) {
     return WebdavServer(
       baseUrl: baseUrl ?? this.baseUrl,
@@ -218,6 +229,7 @@ class WebdavServer {
       rootPath: rootPath ?? this.rootPath,
       trustedInternal: trustedInternal ?? this.trustedInternal,
       kind: kind ?? this.kind,
+      pinnedCertSha256: pinnedCertSha256 ?? this.pinnedCertSha256,
     );
   }
 
@@ -227,6 +239,7 @@ class WebdavServer {
     'rootPath': rootPath,
     'trustedInternal': trustedInternal,
     'kind': kind.name,
+    if (pinnedCertSha256.isNotEmpty) 'pinnedCertSha256': pinnedCertSha256,
   };
 
   factory WebdavServer.fromJson(Map<String, Object?> json) {
@@ -242,6 +255,7 @@ class WebdavServer {
         (k) => k.name == json['kind'],
         orElse: () => WebdavServerKind.nextcloud,
       ),
+      pinnedCertSha256: (json['pinnedCertSha256'] as String?) ?? '',
     );
   }
 }

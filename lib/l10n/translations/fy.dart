@@ -743,6 +743,19 @@ const _dutchSourceAddFy = {
   'beveiligingscode van een creditcard': 'befeiligingskoade fan in kredytkaart',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
       'gegevens yn de sprekersnotysjes — ûnsichtber op de dia, wol yn de eksport',
+  'Certificaat vertrouwen?': 'Sertifikaat fertrouwe?',
+  'Het certificaat van deze server is niet ondertekend door een erkende uitgever. Dat is gewoon bij een zelf gehoste server, maar het is ook hoe een afgeluisterde verbinding eruitziet.':
+      'It sertifikaat fan dizze server is net ûndertekene troch in erkende útjouwer. Dat is gewoan by in sels hoste server, mar sa sjocht in ôflústere ferbining der ek út.',
+  'Vergelijk de vingerafdruk hieronder met wat je server zelf toont. Komen ze overeen, dan praat je met de juiste machine.':
+      'Ferlykje de fingerprint hjirûnder mei wat dyn server sels toant. Komme se oerien, dan praatst mei de goede masine.',
+  'Uitgegeven aan': 'Utjûn oan',
+  'Uitgegeven door': 'Utjûn troch',
+  'Geldig tot': 'Jildich oant',
+  'Vingerafdruk (SHA-256)': 'Fingerprint (SHA-256)',
+  'Alleen dit ene certificaat wordt vertrouwd. Vervangt de server het later, dan vraagt OciDeck het opnieuw.':
+      'Allinnich dit iene sertifikaat wurdt fertroud. Ferfangt de server it letter, dan freget OciDeck it opnij.',
+  'Vertrouwen': 'Fertrouwe',
+  'Certificaat bekijken': 'Sertifikaat besjen',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Foar de taal fan dit deck ûntbrekke de sykte- en oandwaningsnammen. Religy, politike oertsjûging en fakbûnstermen wurde wol herkend, en kontrôlesifers (BSN, IBAN, paspoart) wurkje altyd — mar rekkenje der net op dat in diagnoaze fûn wurdt.',
   'niet getest': 'net test',

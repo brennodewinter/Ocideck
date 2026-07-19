@@ -1789,6 +1789,19 @@ const _dutchSourceAddGsw = <String, String>{
   'beveiligingscode van een creditcard': 'Charteprüefnummere (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
       'Date i de Sprächernotize — uf de Folie unsichtbar, aber im Export drin',
+  'Certificaat vertrouwen?': 'Däm Zertifikat vertroue?',
+  'Het certificaat van deze server is niet ondertekend door een erkende uitgever. Dat is gewoon bij een zelf gehoste server, maar het is ook hoe een afgeluisterde verbinding eruitziet.':
+      'S Zertifikat vo däm Server isch nid vo mene anerkännte Usschteller signiert. Bi mene sälber ghoschtete Server isch das normal — so gseht aber au e abghörti Verbindig uus.',
+  'Vergelijk de vingerafdruk hieronder met wat je server zelf toont. Komen ze overeen, dan praat je met de juiste machine.':
+      'Vergliich de Fingerabdruck da unde mit dem, wo din Server sälber azeigt. Stimmed si überii, redsch mit de richtige Maschine.',
+  'Uitgegeven aan': 'Usgstellt für',
+  'Uitgegeven door': 'Usgstellt vo',
+  'Geldig tot': 'Gültig bis',
+  'Vingerafdruk (SHA-256)': 'Fingerabdruck (SHA-256)',
+  'Alleen dit ene certificaat wordt vertrouwd. Vervangt de server het later, dan vraagt OciDeck het opnieuw.':
+      'Nur däm eine Zertifikat wird vertrout. Ersetzt de Server s spöter, frögt OciDeck nomol.',
+  'Vertrouwen': 'Vertroue',
+  'Certificaat bekijken': 'Zertifikat aluege',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Für d Sproch vo dere Presentation fähle d Chrankheitsname. Religion, politischi Meinig und Gwerkschaftsbegriff wärde erkennt, und Prüefziffere (Steuer-ID, IBAN, Pass) laufe immer — aber verloss di nid druf, dass e Diagnose gfunde wird.',
   'niet getest': 'nid teschtet',

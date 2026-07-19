@@ -1804,6 +1804,19 @@ const _dutchSourceAddRo = <String, String>{
       'codul de securitate al cardului (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
       'date în notele vorbitorului — invizibile pe diapozitiv, dar exportate',
+  'Certificaat vertrouwen?': 'Ai încredere în acest certificat?',
+  'Het certificaat van deze server is niet ondertekend door een erkende uitgever. Dat is gewoon bij een zelf gehoste server, maar het is ook hoe een afgeluisterde verbinding eruitziet.':
+      'Certificatul acestui server nu este semnat de un emitent recunoscut. Este normal pentru un server propriu, dar așa arată și o conexiune interceptată.',
+  'Vergelijk de vingerafdruk hieronder met wat je server zelf toont. Komen ze overeen, dan praat je met de juiste machine.':
+      'Compară amprenta de mai jos cu cea afișată de serverul tău. Dacă se potrivesc, vorbești cu mașina corectă.',
+  'Uitgegeven aan': 'Emis pentru',
+  'Uitgegeven door': 'Emis de',
+  'Geldig tot': 'Valabil până la',
+  'Vingerafdruk (SHA-256)': 'Amprentă (SHA-256)',
+  'Alleen dit ene certificaat wordt vertrouwd. Vervangt de server het later, dan vraagt OciDeck het opnieuw.':
+      'Se acordă încredere doar acestui certificat. Dacă serverul îl înlocuiește ulterior, OciDeck va întreba din nou.',
+  'Vertrouwen': 'Am încredere',
+  'Certificaat bekijken': 'Vezi certificatul',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Pentru limba acestei prezentări lipsesc denumirile de boli. Religia, opinia politică și termenii sindicali sunt recunoscuți, iar tiparele cu cifră de control (CNP, IBAN, pașaport) funcționează întotdeauna — dar nu vă bazați pe găsirea unui diagnostic.',
   'niet getest': 'netestată',

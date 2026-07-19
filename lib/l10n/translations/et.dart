@@ -1776,6 +1776,19 @@ const _dutchSourceAddEt = <String, String>{
   'beveiligingscode van een creditcard': 'kaardi turvakood (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
       'andmed esineja märkmetes — slaidil nähtamatud, kuid lähevad ekspordiga kaasa',
+  'Certificaat vertrouwen?': 'Kas usaldada seda sertifikaati?',
+  'Het certificaat van deze server is niet ondertekend door een erkende uitgever. Dat is gewoon bij een zelf gehoste server, maar het is ook hoe een afgeluisterde verbinding eruitziet.':
+      'Selle serveri sertifikaati ei ole allkirjastanud tunnustatud väljaandja. Ise majutatud serveri puhul on see tavaline, kuid täpselt nii näeb välja ka pealtkuulatud ühendus.',
+  'Vergelijk de vingerafdruk hieronder met wat je server zelf toont. Komen ze overeen, dan praat je met de juiste machine.':
+      'Võrdle allolevat sõrmejälge sellega, mida su server ise näitab. Kui need kattuvad, räägid õige masinaga.',
+  'Uitgegeven aan': 'Väljastatud',
+  'Uitgegeven door': 'Väljaandja',
+  'Geldig tot': 'Kehtib kuni',
+  'Vingerafdruk (SHA-256)': 'Sõrmejälg (SHA-256)',
+  'Alleen dit ene certificaat wordt vertrouwd. Vervangt de server het later, dan vraagt OciDeck het opnieuw.':
+      'Usaldatakse ainult seda üht sertifikaati. Kui server selle hiljem asendab, küsib OciDeck uuesti.',
+  'Vertrouwen': 'Usalda',
+  'Certificaat bekijken': 'Vaata sertifikaati',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Selle esitluse keele jaoks puuduvad haiguste nimetused. Religiooni, poliitilist veendumust ja ametiühingutermineid tuntakse ära ning kontrollnumbriga mustrid (isikukood, IBAN, pass) töötavad alati — kuid ära looda, et diagnoos leitakse.',
   'niet getest': 'testimata',

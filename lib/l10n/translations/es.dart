@@ -740,6 +740,19 @@ const _dutchSourceAddEs = {
       'código de seguridad de la tarjeta (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
       'datos en las notas del orador: invisibles en la diapositiva, pero sí en la exportación',
+  'Certificaat vertrouwen?': '¿Confiar en este certificado?',
+  'Het certificaat van deze server is niet ondertekend door een erkende uitgever. Dat is gewoon bij een zelf gehoste server, maar het is ook hoe een afgeluisterde verbinding eruitziet.':
+      'El certificado de este servidor no está firmado por una entidad reconocida. Es normal en un servidor autoalojado, pero también es el aspecto de una conexión interceptada.',
+  'Vergelijk de vingerafdruk hieronder met wat je server zelf toont. Komen ze overeen, dan praat je met de juiste machine.':
+      'Compara la huella de abajo con la que muestra tu propio servidor. Si coinciden, estás hablando con la máquina correcta.',
+  'Uitgegeven aan': 'Emitido para',
+  'Uitgegeven door': 'Emitido por',
+  'Geldig tot': 'Válido hasta',
+  'Vingerafdruk (SHA-256)': 'Huella (SHA-256)',
+  'Alleen dit ene certificaat wordt vertrouwd. Vervangt de server het later, dan vraagt OciDeck het opnieuw.':
+      'Solo se confía en este certificado. Si el servidor lo sustituye más adelante, OciDeck volverá a preguntar.',
+  'Vertrouwen': 'Confiar',
+  'Certificaat bekijken': 'Ver certificado',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Faltan los nombres de enfermedades para el idioma de esta presentación. La religión, la opinión política y los términos sindicales sí se reconocen, y los patrones con dígito de control (DNI, IBAN, pasaporte) siempre funcionan, pero no cuentes con que se detecte un diagnóstico.',
   'niet getest': 'sin probar',

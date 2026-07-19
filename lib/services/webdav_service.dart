@@ -207,8 +207,11 @@ class WebdavService {
     final pinned = resolved.addresses!.first;
     return HttpClient()
       ..connectionTimeout = const Duration(seconds: 15)
-      ..connectionFactory = (u, proxyHost, proxyPort) =>
-          NetGuard.connectPinned(pinned, u);
+      ..connectionFactory = (u, proxyHost, proxyPort) => NetGuard.connectPinned(
+        pinned,
+        u,
+        onBadCertificate: NetGuard.pinnedCertCheck(server.pinnedCertSha256),
+      );
   }
 
   Future<HttpClientRequest> _openRequest(

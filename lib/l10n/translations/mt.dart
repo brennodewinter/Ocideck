@@ -1807,6 +1807,19 @@ const _dutchSourceAddMt = <String, String>{
   'beveiligingscode van een creditcard': 'kodiċi tas-sigurtà tal-karta (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
       'data fin-noti tal-kelliem — inviżibbli fuq is-slajd, imma jiġu esportati',
+  'Certificaat vertrouwen?': 'Tafda dan iċ-ċertifikat?',
+  'Het certificaat van deze server is niet ondertekend door een erkende uitgever. Dat is gewoon bij een zelf gehoste server, maar het is ook hoe een afgeluisterde verbinding eruitziet.':
+      'Iċ-ċertifikat ta\' dan is-server mhuwiex iffirmat minn emittent rikonoxxut. Dan huwa normali għal server tiegħek stess, imma hekk tidher ukoll konnessjoni interċettata.',
+  'Vergelijk de vingerafdruk hieronder met wat je server zelf toont. Komen ze overeen, dan praat je met de juiste machine.':
+      'Qabbel il-marka tas-swaba\' hawn taħt ma\' dik li juri s-server tiegħek. Jekk jaqblu, qed titkellem mal-magna t-tajba.',
+  'Uitgegeven aan': 'Maħruġ lil',
+  'Uitgegeven door': 'Maħruġ minn',
+  'Geldig tot': 'Validu sa',
+  'Vingerafdruk (SHA-256)': 'Marka tas-swaba\' (SHA-256)',
+  'Alleen dit ene certificaat wordt vertrouwd. Vervangt de server het later, dan vraagt OciDeck het opnieuw.':
+      'Dan iċ-ċertifikat biss huwa fdat. Jekk is-server jibdlu aktar tard, OciDeck jerġa\' jistaqsi.',
+  'Vertrouwen': 'Afda',
+  'Certificaat bekijken': 'Ara ċ-ċertifikat',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Għal-lingwa ta\' din il-preżentazzjoni jonqsu l-ismijiet tal-mardiet. Ir-reliġjon, l-opinjoni politika u t-termini tat-trejdjunjins jingħarfu, u l-mudelli b\'ċifra ta\' kontroll (ID, IBAN, passaport) dejjem jaħdmu — imma toqgħodx tistenna li tinstab dijanjosi.',
   'niet getest': 'mhux ittestjat',

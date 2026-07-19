@@ -1801,6 +1801,19 @@ const _dutchSourceAddLa = <String, String>{
   'beveiligingscode van een creditcard': 'codex securitatis chartae',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
       'data in notis oratoris — in tabella invisibilia, sed in exportatione praesentia',
+  'Certificaat vertrouwen?': 'Huic testimonio credere?',
+  'Het certificaat van deze server is niet ondertekend door een erkende uitgever. Dat is gewoon bij een zelf gehoste server, maar het is ook hoe een afgeluisterde verbinding eruitziet.':
+      'Testimonium huius servitoris ab editore agnito signatum non est. Id in servitore proprio usitatum est, sed etiam nexus interceptus talis apparet.',
+  'Vergelijk de vingerafdruk hieronder met wat je server zelf toont. Komen ze overeen, dan praat je met de juiste machine.':
+      'Vestigium infra cum eo quod servitor tuus ipse ostendit compara. Si congruunt, cum recta machina loqueris.',
+  'Uitgegeven aan': 'Datum ad',
+  'Uitgegeven door': 'Datum ab',
+  'Geldig tot': 'Validum usque ad',
+  'Vingerafdruk (SHA-256)': 'Vestigium (SHA-256)',
+  'Alleen dit ene certificaat wordt vertrouwd. Vervangt de server het later, dan vraagt OciDeck het opnieuw.':
+      'Huic uni testimonio tantum creditur. Si servitor id postea mutabit, OciDeck iterum rogabit.',
+  'Vertrouwen': 'Credere',
+  'Certificaat bekijken': 'Testimonium inspicere',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Nomina morborum huic linguae desunt. Religio, opinio politica et vocabula collegiorum opificum agnoscuntur, et formae cum numero probationis (BSN, IBAN, diploma) semper valent — sed noli confidere diagnosin inventum iri.',
   'niet getest': 'non probatum',

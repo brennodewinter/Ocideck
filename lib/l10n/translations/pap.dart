@@ -742,6 +742,19 @@ const _dutchSourceAddPap = {
   'beveiligingscode van een creditcard': 'kódigo di siguridat di karchi',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
       'dato den e notanan di presentadó — invisibel riba e slide, ma sí den e eksportashon',
+  'Certificaat vertrouwen?': 'Konfia e sertifikado aki?',
+  'Het certificaat van deze server is niet ondertekend door een erkende uitgever. Dat is gewoon bij een zelf gehoste server, maar het is ook hoe een afgeluisterde verbinding eruitziet.':
+      'E sertifikado di e servidor aki no ta firmá pa un emisor rekonosí. Esei ta normal pa un servidor propio, pero ta tambe kon un konekshon interseptá ta parse.',
+  'Vergelijk de vingerafdruk hieronder met wat je server zelf toont. Komen ze overeen, dan praat je met de juiste machine.':
+      'Kompará e wela di dede aki bou ku loke bo servidor mes ta mustra. Si nan ta igual, bo ta papia ku e mashin korekto.',
+  'Uitgegeven aan': 'Emití na',
+  'Uitgegeven door': 'Emití pa',
+  'Geldig tot': 'Bálido te',
+  'Vingerafdruk (SHA-256)': 'Wela di dede (SHA-256)',
+  'Alleen dit ene certificaat wordt vertrouwd. Vervangt de server het later, dan vraagt OciDeck het opnieuw.':
+      'Solamente e sertifikado aki ta konfiá. Si e servidor kambi\'é despues, OciDeck lo puntra atrobe.',
+  'Vertrouwen': 'Konfia',
+  'Certificaat bekijken': 'Wak sertifikado',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Pa e idioma di e presentashon aki ta falta nòmber di malesa. Religion, opinion polítiko i término sindikal sí ta wòrdu rekonosí, i patronchi ku sifra di kontrol (BSN, IBAN, pasaporte) semper ta funshoná — ma no konta ku deteshon di un diagnóstiko.',
   'niet getest': 'no testá',

@@ -101,6 +101,22 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   Geen netwerk breekt de release evenmin af, maar het zegt wél dát er niet
   gekeken is. Stilte mag hier niet als goedkeuring lezen.
 
+- **Een zelfondertekend certificaat kun je nu vertrouwen — precies dat ene.**
+  Een zelf gehoste server op je eigen netwerk heeft vaak geen certificaat van
+  een erkende uitgever. Dat is juist de groep waarvoor "vertrouwde interne
+  server" bestaat, en tot nu toe strandde die verbinding gewoon.
+
+  Alles doorlaten wat zelfondertekend is, zou de beveiliging weggooien: het
+  certificaat van iemand die tussen jou en de server zit, is óók
+  zelfondertekend. Daarom gaat het per certificaat. Strandt de verbindingstest
+  op het certificaat, dan toont *Certificaat bekijken* wie het heeft
+  uitgegeven, tot wanneer het geldig is en zijn SHA-256-vingerafdruk. Die
+  vergelijk je met wat je server zelf meldt — komen ze overeen, dan praat je
+  met de juiste machine — en pas dan kies je *Vertrouwen*.
+
+  Vervangt de server het certificaat later, dan vraagt OciDeck het opnieuw. Van
+  de app uit gezien zien een verlenging en een aanvaller er namelijk hetzelfde
+  uit, dus die afweging hoort bij de mens die de server kent.
 - **De statusregel zegt nu of een bron ooit heeft geántwoord, niet alleen of
   hij is ingevuld.** Een verbinding werd groen zodra de velden gevuld waren —
   ook bij een server die nog nooit was aangeraakt. Dat groene vinkje beloofde

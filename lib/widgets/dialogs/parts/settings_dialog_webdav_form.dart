@@ -28,6 +28,15 @@ class WebdavForm {
   /// origin mag zijn (Nextcloud leidt het pad af) of juist de hele DAV-wortel.
   WebdavServerKind kind = WebdavServerKind.nextcloud;
 
+  /// De vingerafdruk van het certificaat dat de gebruiker heeft vertrouwd, of
+  /// leeg. Geen invoerveld: die vult zich alleen via de bevestigingsdialoog,
+  /// want een vingerafdruk overtypen is geen bewuste keuze maar een klus.
+  String pinnedCertSha256 = '';
+
+  /// De laatste test strandde op het certificaat. Alleen dán heeft het zin de
+  /// gebruiker te vragen of hij het wil vertrouwen.
+  bool testCertRejected = false;
+
   /// Uitslag van de verbindingstest: `null` = nog niet getest.
   bool? testOk;
   String? testMessage;
@@ -43,6 +52,7 @@ class WebdavForm {
     root.text = server?.rootPath ?? '';
     trusted = server?.trustedInternal ?? false;
     kind = server?.kind ?? WebdavServerKind.nextcloud;
+    pinnedCertSha256 = server?.pinnedCertSha256 ?? '';
     password.rememberIdentity(
       identityOf(server?.baseUrl ?? '', server?.username ?? ''),
     );
@@ -60,6 +70,7 @@ class WebdavForm {
       rootPath: WebdavServer.normalizeRoot(root.text),
       trustedInternal: trusted,
       kind: kind,
+      pinnedCertSha256: pinnedCertSha256,
     );
   }
 

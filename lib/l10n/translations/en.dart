@@ -924,6 +924,19 @@ const _dutchSourceAddEn = {
   'beveiligingscode van een creditcard': 'card security code (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
       'data in the speaker notes — invisible on the slide, but exported',
+  'Certificaat vertrouwen?': 'Trust this certificate?',
+  'Het certificaat van deze server is niet ondertekend door een erkende uitgever. Dat is gewoon bij een zelf gehoste server, maar het is ook hoe een afgeluisterde verbinding eruitziet.':
+      'This server\'s certificate is not signed by a recognised issuer. That is normal for a self-hosted server, but it is also what an intercepted connection looks like.',
+  'Vergelijk de vingerafdruk hieronder met wat je server zelf toont. Komen ze overeen, dan praat je met de juiste machine.':
+      'Compare the fingerprint below with what your server itself shows. If they match, you are talking to the right machine.',
+  'Uitgegeven aan': 'Issued to',
+  'Uitgegeven door': 'Issued by',
+  'Geldig tot': 'Valid until',
+  'Vingerafdruk (SHA-256)': 'Fingerprint (SHA-256)',
+  'Alleen dit ene certificaat wordt vertrouwd. Vervangt de server het later, dan vraagt OciDeck het opnieuw.':
+      'Only this one certificate is trusted. If the server replaces it later, OciDeck will ask again.',
+  'Vertrouwen': 'Trust',
+  'Certificaat bekijken': 'View certificate',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Disease and condition names are missing for this deck\'s language. Religion, political opinion and trade-union terms are recognised, and check-digit patterns (national ID, IBAN, passport) always work — but do not count on a diagnosis being found.',
   'niet getest': 'not tested',

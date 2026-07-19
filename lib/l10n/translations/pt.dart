@@ -1815,6 +1815,19 @@ const _dutchSourceAddPt = <String, String>{
   'beveiligingscode van een creditcard': 'código de segurança do cartão (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
       'dados nas notas do orador — invisíveis no diapositivo, mas exportados',
+  'Certificaat vertrouwen?': 'Confiar neste certificado?',
+  'Het certificaat van deze server is niet ondertekend door een erkende uitgever. Dat is gewoon bij een zelf gehoste server, maar het is ook hoe een afgeluisterde verbinding eruitziet.':
+      'O certificado deste servidor não está assinado por uma entidade reconhecida. Isso é normal num servidor próprio, mas é também o aspeto de uma ligação intercetada.',
+  'Vergelijk de vingerafdruk hieronder met wat je server zelf toont. Komen ze overeen, dan praat je met de juiste machine.':
+      'Compara a impressão digital abaixo com a que o teu servidor mostra. Se coincidirem, estás a falar com a máquina certa.',
+  'Uitgegeven aan': 'Emitido para',
+  'Uitgegeven door': 'Emitido por',
+  'Geldig tot': 'Válido até',
+  'Vingerafdruk (SHA-256)': 'Impressão digital (SHA-256)',
+  'Alleen dit ene certificaat wordt vertrouwd. Vervangt de server het later, dan vraagt OciDeck het opnieuw.':
+      'Apenas este certificado é fidedigno. Se o servidor o substituir mais tarde, o OciDeck perguntará de novo.',
+  'Vertrouwen': 'Confiar',
+  'Certificaat bekijken': 'Ver certificado',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Faltam os nomes de doenças para o idioma desta apresentação. Religião, opinião política e termos sindicais são reconhecidos, e os padrões com dígito de controlo (NIF, IBAN, passaporte) funcionam sempre — mas não conte com a deteção de um diagnóstico.',
   'niet getest': 'não testada',

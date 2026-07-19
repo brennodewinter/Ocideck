@@ -1788,6 +1788,19 @@ const _dutchSourceAddCs = <String, String>{
   'beveiligingscode van een creditcard': 'bezpečnostní kód karty (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
       'údaje v poznámkách řečníka — na snímku neviditelné, ale v exportu ano',
+  'Certificaat vertrouwen?': 'Důvěřovat tomuto certifikátu?',
+  'Het certificaat van deze server is niet ondertekend door een erkende uitgever. Dat is gewoon bij een zelf gehoste server, maar het is ook hoe een afgeluisterde verbinding eruitziet.':
+      'Certifikát tohoto serveru není podepsán uznávaným vydavatelem. U vlastního serveru je to běžné, ale tak vypadá i odposlouchávané spojení.',
+  'Vergelijk de vingerafdruk hieronder met wat je server zelf toont. Komen ze overeen, dan praat je met de juiste machine.':
+      'Porovnejte otisk níže s tím, co ukazuje váš server. Pokud se shodují, mluvíte se správným strojem.',
+  'Uitgegeven aan': 'Vydáno pro',
+  'Uitgegeven door': 'Vydal',
+  'Geldig tot': 'Platný do',
+  'Vingerafdruk (SHA-256)': 'Otisk (SHA-256)',
+  'Alleen dit ene certificaat wordt vertrouwd. Vervangt de server het later, dan vraagt OciDeck het opnieuw.':
+      'Důvěřuje se pouze tomuto certifikátu. Pokud jej server později vymění, OciDeck se zeptá znovu.',
+  'Vertrouwen': 'Důvěřovat',
+  'Certificaat bekijken': 'Zobrazit certifikát',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Pro jazyk této prezentace chybí názvy nemocí. Náboženství, politické přesvědčení a odborové pojmy se rozpoznávají a vzory s kontrolní číslicí (rodné číslo, IBAN, pas) fungují vždy — ale nepočítejte s tím, že se najde diagnóza.',
   'niet getest': 'neotestováno',
