@@ -231,6 +231,25 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   gedrag waardoor mensen een privacycontrole uitzetten.
 
 ### Fixed
+- **Een geplakte Nextcloud-DAV-URL wordt opgemerkt in plaats van half
+  genegeerd.** Nextcloud toont in zijn eigen instellingenscherm de volledige
+  DAV-URL — `https://cloud.example.nl/remote.php/dav/files/jan/Presentaties` —
+  en dat is wat mensen hier in het serverveld plakken.
+
+  Bij servertype *Nextcloud* leidt OciDeck het DAV-pad zelf af en gooide het
+  geplakte pad weg. De verbinding wérkte daardoor meestal gewoon, maar de
+  submap die iemand er bewust in had staan verdween zonder een woord, en het
+  veld bleef iets tonen dat niet was wat de app gebruikte. Bij *Andere
+  WebDAV-server* is datzelfde pad juist de wortel, dus de twee standen faalden
+  in tegengestelde richting — en geen van beide zei waarom.
+
+  OciDeck herkent de vorm nu (zowel het huidige `/remote.php/dav/files/…` als
+  het oudere `/remote.php/webdav/…`) en biedt aan hem uit elkaar te halen: de
+  server in het URL-veld, de gebruikersnaam en de submap op hun eigen plek. Met
+  een knop en niet automatisch — het herschrijft wat je zojuist plakte, en dat
+  hoort je eigen keuze te blijven. Velden die je zelf al had ingevuld blijven
+  staan; alleen de server-URL wordt altijd opgeschoond, want daar staat de knop
+  voor.
 - **Git-fouten kwamen onvertaald en onafgemaakt op je scherm.** WebDAV en S3
   hadden allebei een tabel die een foutsoort omzet in een uitlegbare,
   vertaalde melding. Git had er geen. `GitForgeException` viel door de

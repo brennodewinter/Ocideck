@@ -1791,6 +1791,9 @@ const _dutchSourceLt = {
 const _dutchSourceAddLt = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Leksikonų licencijos: ko dar reikia paklausti',
+  'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
+      'Tai atrodo kaip pilnas DAV URL. Su Nextcloud OciDeck šį kelią išveda pats — čia turi būti tik serveris.',
+  'Overnemen': 'Taikyti',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
       'WebDAV nėra (tinkamai) nustatytas — patikrinkite serverio duomenis skiltyje Nustatymai → Saugykla.',
   'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':

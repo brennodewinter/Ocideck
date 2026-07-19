@@ -1819,6 +1819,9 @@ const _dutchSourceGa = {
 const _dutchSourceAddGa = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Ceadúnais foclóra: a bhfuil fós le fiafraí',
+  'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
+      'Tá cuma URL DAV iomlán air seo. I gcás Nextcloud, díorthaíonn OciDeck an chonair sin é féin — níl anseo ach an freastalaí.',
+  'Overnemen': 'Cuir i bhfeidhm',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
       'Níl WebDAV socraithe i gceart — seiceáil sonraí an fhreastalaí faoi Socruithe → Stóráil.',
   'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':

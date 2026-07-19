@@ -1811,6 +1811,9 @@ const _dutchSourceEl = {
 const _dutchSourceAddEl = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Άδειες λεξικών: τι μένει να ρωτηθεί',
+  'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
+      'Αυτό μοιάζει με πλήρες URL DAV. Στο Nextcloud το OciDeck παράγει μόνο του αυτή τη διαδρομή — εδώ ανήκει μόνο ο διακομιστής.',
+  'Overnemen': 'Εφαρμογή',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
       'Το WebDAV δεν έχει ρυθμιστεί σωστά — ελέγξτε τα στοιχεία διακομιστή στις Ρυθμίσεις → Αποθήκευση.',
   'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':

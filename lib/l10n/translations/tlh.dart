@@ -1758,6 +1758,9 @@ const _dutchSourceTlh = {
 const _dutchSourceAddTlh = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'mu\' tetlh chaw\': nuq ghItlhnISlu\'',
+  'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
+      'DAV URL naQ rur vam. Nextcloud-Daq He \'oH OciDeck \'e\' chenmoH — naDev pat neH.',
+  'Overnemen': 'yIlo\'',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
       'WebDAV lugh cherlu\'be\' — Settings → Storage-Daq pat De\' yIlaD.',
   'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':

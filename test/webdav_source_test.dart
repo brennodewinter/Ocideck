@@ -186,6 +186,102 @@ void main() {
     });
   });
 
+  group('WebdavServer.readPastedDavUrl', () {
+    // De meest gemaakte instelfout: Nextcloud toont in zijn eigen scherm de
+    // volledige DAV-URL, en die plakken mensen hier in. Tot nu toe verdween
+    // het pad — inclusief een submap die ze er bewust in hadden staan.
+    test('reads server, user and subfolder from a current-style DAV url', () {
+      final parsed = WebdavServer.readPastedDavUrl(
+        'https://cloud.example.com/remote.php/dav/files/jan/Presentaties/',
+      );
+      expect(parsed, isNotNull);
+      expect(parsed!.baseUrl, 'https://cloud.example.com');
+      expect(parsed.username, 'jan');
+      expect(parsed.rootPath, '/Presentaties');
+      expect(parsed.hasSomethingToApply, isTrue);
+    });
+
+    test('keeps a nested subfolder whole', () {
+      final parsed = WebdavServer.readPastedDavUrl(
+        'https://cloud.example.com/remote.php/dav/files/jan/Werk/2026',
+      );
+      expect(parsed!.rootPath, '/Werk/2026');
+    });
+
+    test('handles the DAV root without a subfolder', () {
+      final parsed = WebdavServer.readPastedDavUrl(
+        'https://cloud.example.com/remote.php/dav/files/jan',
+      );
+      expect(parsed!.username, 'jan');
+      expect(parsed.rootPath, '');
+      expect(parsed.hasSomethingToApply, isTrue);
+    });
+
+    test('handles the older webdav form, which carries no username', () {
+      final parsed = WebdavServer.readPastedDavUrl(
+        'https://cloud.example.com/remote.php/webdav/Presentaties',
+      );
+      expect(parsed!.username, isEmpty);
+      expect(parsed.rootPath, '/Presentaties');
+    });
+
+    test('keeps a non-default port', () {
+      final parsed = WebdavServer.readPastedDavUrl(
+        'https://cloud.example.com:8443/remote.php/dav/files/jan',
+      );
+      expect(parsed!.baseUrl, 'https://cloud.example.com:8443');
+    });
+
+    test('accepts a pasted url without a scheme', () {
+      // Het URL-veld vult https:// aan; deze herkenning moet dat óók doen,
+      // anders werkt de hint niet voor wie het schema wegliet.
+      final parsed = WebdavServer.readPastedDavUrl(
+        'cloud.example.com/remote.php/dav/files/jan',
+      );
+      expect(parsed!.baseUrl, 'https://cloud.example.com');
+    });
+
+    test('a plain origin is not a paste to correct', () {
+      expect(
+        WebdavServer.readPastedDavUrl('https://cloud.example.com'),
+        isNull,
+      );
+      expect(WebdavServer.readPastedDavUrl(''), isNull);
+      expect(WebdavServer.readPastedDavUrl('   '), isNull);
+    });
+
+    test('an unrelated path is left alone', () {
+      // Bij servertype "Andere WebDAV-server" is een pad juist bedoeld; alleen
+      // de herkenbare Nextcloud-vorm mag een hint opleveren.
+      expect(
+        WebdavServer.readPastedDavUrl('https://dav.example.com/dav/bestanden'),
+        isNull,
+      );
+      expect(
+        WebdavServer.readPastedDavUrl('https://x.example.com/remote.php'),
+        isNull,
+      );
+      expect(
+        WebdavServer.readPastedDavUrl('https://x.example.com/remote.php/iets'),
+        isNull,
+      );
+    });
+
+    test('the parsed pieces rebuild the same DAV url', () {
+      // De echte eis: wat we voorstellen moet naar hetzelfde bestand wijzen als
+      // wat de gebruiker plakte. Anders is de "correctie" een verplaatsing.
+      const pasted =
+          'https://cloud.example.com/remote.php/dav/files/jan/Presentaties';
+      final parsed = WebdavServer.readPastedDavUrl(pasted)!;
+      final server = WebdavServer(
+        baseUrl: parsed.baseUrl,
+        username: parsed.username,
+        rootPath: parsed.rootPath,
+      );
+      expect(server.uriFor('deck.ocideck').toString(), '$pasted/deck.ocideck');
+    });
+  });
+
   group('WebdavService.parseMultistatus', () {
     String body(String inner) =>
         '<?xml version="1.0"?><d:multistatus xmlns:d="DAV:">$inner</d:multistatus>';

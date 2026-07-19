@@ -740,6 +740,9 @@ const _dutchSourcePap = {
 const _dutchSourceAddPap = {
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Lisensia di leksikon: kiko mester puntra ainda',
+  'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
+      'Esaki ta parse un URL DAV kompleto. Ku Nextcloud, OciDeck ta deriva e kaminda su mes — aki solamente e servidor ta pertenesé.',
+  'Overnemen': 'Apliká',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
       'WebDAV no ta konfigurá (bon) — kontrolá e datos di servidor na Konfigurashon → Almasenamentu.',
   'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':

@@ -13,6 +13,30 @@ enum WebdavServerKind {
   generic,
 }
 
+/// Wat er in een geplakte, volledige Nextcloud/ownCloud-DAV-URL bleek te
+/// zitten. Zie [WebdavServer.readPastedDavUrl].
+class PastedDavUrl {
+  /// De server-origin, zonder pad — wat er in het URL-veld hoort te staan.
+  final String baseUrl;
+
+  /// De gebruikersnaam uit `/files/<user>/`, of leeg wanneer de URL die vorm
+  /// niet had (de oude `/remote.php/webdav`-vorm draagt geen naam).
+  final String username;
+
+  /// Wat er ná de DAV-wortel stond: de submap die de gebruiker kennelijk
+  /// bedoelde. Genormaliseerd, leeg wanneer er niets stond.
+  final String rootPath;
+
+  const PastedDavUrl({
+    required this.baseUrl,
+    required this.username,
+    required this.rootPath,
+  });
+
+  /// Of er iets te corrigeren valt — bij een kale origin zonder DAV-pad niet.
+  bool get hasSomethingToApply => username.isNotEmpty || rootPath.isNotEmpty;
+}
+
 /// Configuratie van één WebDAV-bron. Bewust géén wachtwoord: dat staat
 /// versleuteld in de keychain (zie `SecretStore`), gekeyd op [baseUrl] +
 /// [username]. Deze waarden mogen wél in het prefs-domein.
@@ -93,6 +117,63 @@ class WebdavServer {
 
   /// Normaliseer een door de UI gegeven (mogelijk lege) submap tot een pad dat
   /// met `/` begint en geen trailing slash heeft. Geen `..` toegestaan.
+  /// Leest een geplakte, volledige Nextcloud/ownCloud-DAV-URL uit elkaar, of
+  /// `null` wanneer [raw] daar niet op lijkt.
+  ///
+  /// Dit is de meest gemaakte instelfout, en tot nu toe een stille: Nextcloud
+  /// toont in zijn eigen instellingenscherm de volledige DAV-URL, en die
+  /// plakken mensen hier in. Bij servertype *Nextcloud* gooit [origin] het pad
+  /// weg — de verbinding wérkt dan meestal, maar een submap die de gebruiker
+  /// erin had staan is verdwenen zonder dat iets dat zei. Bij *Andere
+  /// WebDAV-server* is datzelfde pad juist de wortel, dus de twee standen
+  /// falen in tegengestelde richting.
+  ///
+  /// Herkent beide vormen die Nextcloud/ownCloud in omloop hebben:
+  ///   `/remote.php/dav/files/<user>/<submap...>`  (huidig)
+  ///   `/remote.php/webdav/<submap...>`            (ouder, zonder naam)
+  static PastedDavUrl? readPastedDavUrl(String raw) {
+    var text = raw.trim();
+    if (text.isEmpty) return null;
+    if (!text.contains('://')) text = 'https://$text';
+    final uri = Uri.tryParse(text);
+    if (uri == null || !uri.hasScheme || !uri.hasAuthority) return null;
+
+    final segments = uri.pathSegments.where((s) => s.isNotEmpty).toList();
+    final start = segments.indexOf('remote.php');
+    if (start < 0 || start + 1 >= segments.length) return null;
+
+    final String username;
+    final int restFrom;
+    final after = segments[start + 1];
+    if (after == 'dav' &&
+        start + 2 < segments.length &&
+        segments[start + 2] == 'files') {
+      // .../remote.php/dav/files/<user>/<rest>
+      final hasUser = start + 3 < segments.length;
+      username = hasUser ? segments[start + 3] : '';
+      restFrom = start + 4;
+    } else if (after == 'webdav') {
+      // .../remote.php/webdav/<rest> — draagt geen gebruikersnaam.
+      username = '';
+      restFrom = start + 2;
+    } else {
+      return null;
+    }
+
+    final rest = restFrom < segments.length
+        ? segments.sublist(restFrom).join('/')
+        : '';
+    return PastedDavUrl(
+      baseUrl: Uri(
+        scheme: uri.scheme,
+        host: uri.host,
+        port: uri.hasPort ? uri.port : null,
+      ).toString(),
+      username: username,
+      rootPath: normalizeRoot(rest),
+    );
+  }
+
   static String normalizeRoot(String raw) {
     var r = raw.trim();
     if (r.isEmpty) return '';

@@ -1787,6 +1787,9 @@ const _dutchSourceHu = {
 const _dutchSourceAddHu = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Lexikonlicencek: mit kell még megkérdezni',
+  'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
+      'Ez teljes DAV URL-nek tűnik. Nextcloud esetén az OciDeck maga vezeti le ezt az útvonalat — ide csak a kiszolgáló való.',
+  'Overnemen': 'Alkalmaz',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
       'A WebDAV nincs (jól) beállítva — ellenőrizd a kiszolgáló adatait a Beállítások → Tárhely alatt.',
   'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':

@@ -1805,6 +1805,9 @@ const _dutchSourceMt = {
 const _dutchSourceAddMt = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Liċenzji tal-lessiku: x\'fadal x\'nistaqsu',
+  'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
+      'Dan jidher bħal URL DAV sħiħ. Bi Nextcloud, OciDeck jidderiva dak il-mogħdija waħdu — hawn jappartjeni s-server biss.',
+  'Overnemen': 'Applika',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
       'WebDAV mhuwiex issettjat sew — iċċekkja d-dettalji tas-server taħt Settings → Ħażna.',
   'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':
