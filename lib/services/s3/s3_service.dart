@@ -82,7 +82,14 @@ enum S3Error {
 class S3Exception implements Exception {
   final S3Error kind;
   final String message;
-  S3Exception(this.kind, this.message);
+
+  /// Of dit een storing is die zómaar weer over kan zijn: een verbinding die
+  /// wegviel of werd geweigerd. Alleen dán is het zinnig een *leesactie* nog
+  /// eens te proberen. Spiegelt `WebdavException.transient`, met dezelfde
+  /// uitzondering: een time-out telt niet mee.
+  final bool transient;
+
+  S3Exception(this.kind, this.message, {this.transient = false});
   @override
   String toString() => 'S3Exception($kind): $message';
 }
@@ -239,7 +246,51 @@ class S3Service {
   /// Listing van [remotePath] (relatief aan de wortelprefix), met een delimiter
   /// zodat onderliggende prefixen als mappen terugkomen in plaats van als één
   /// platte sleutellijst.
-  Future<List<S3Entry>> list(String remotePath) async {
+  /// Vertaal een gevangen laag-niveau fout naar een [S3Exception] die weet of
+  /// hij het opnieuw proberen waard is. Spiegelt `WebdavService._asFailure`.
+  static Never _asFailure(String where, Object e, String fallback) {
+    if (e is SocketException) {
+      logWarning('S3Service.$where: endpoint onbereikbaar', e);
+      throw S3Exception(
+        S3Error.network,
+        'Endpoint niet bereikbaar',
+        transient: true,
+      );
+    }
+    // Een verbinding die halverwege wegviel meldt Dart als HttpException.
+    if (e is HttpException) {
+      logWarning('S3Service.$where: verbinding afgebroken', e);
+      throw S3Exception(
+        S3Error.network,
+        'Verbinding afgebroken',
+        transient: true,
+      );
+    }
+    logError('S3Service.$where: mislukt', e);
+    throw S3Exception(S3Error.network, fallback);
+  }
+
+  /// Voer een *leesactie* uit en probeer hem één keer opnieuw wanneer de
+  /// verbinding wegviel. Alleen voor lezen — zie `WebdavService._retryRead`
+  /// voor waarom schrijven er niet in hoort.
+  static Future<T> _retryRead<T>(
+    String where,
+    Future<T> Function() attempt,
+  ) async {
+    try {
+      return await attempt();
+    } on S3Exception catch (e) {
+      if (!e.transient) rethrow;
+      logWarning('S3Service.$where: verbinding weg, nog één poging', e);
+      await Future<void>.delayed(const Duration(milliseconds: 400));
+      return attempt();
+    }
+  }
+
+  Future<List<S3Entry>> list(String remotePath) =>
+      _retryRead('list', () => _listOnce(remotePath));
+
+  Future<List<S3Entry>> _listOnce(String remotePath) async {
     final prefixKey = bucket.keyFor(remotePath);
     if (prefixKey == null) {
       throw S3Exception(S3Error.config, 'Pad buiten de wortelprefix');
@@ -298,8 +349,7 @@ class S3Service {
     } on TimeoutException {
       throw S3Exception(S3Error.network, 'Time-out');
     } catch (e) {
-      logError('S3Service.list: mislukt', e);
-      throw S3Exception(S3Error.network, 'Listing mislukt');
+      _asFailure('list', e, 'Listing mislukt');
     } finally {
       client.close(force: true);
     }
@@ -307,6 +357,14 @@ class S3Service {
 
   /// Download het object op [remotePath].
   Future<S3File> download(
+    String remotePath, {
+    int maxBytes = maxDownloadBytes,
+  }) => _retryRead(
+    'download',
+    () => _downloadOnce(remotePath, maxBytes: maxBytes),
+  );
+
+  Future<S3File> _downloadOnce(
     String remotePath, {
     int maxBytes = maxDownloadBytes,
   }) async {
@@ -346,8 +404,7 @@ class S3Service {
     } on TimeoutException {
       throw S3Exception(S3Error.network, 'Time-out');
     } catch (e) {
-      logError('S3Service.download: mislukt', e);
-      throw S3Exception(S3Error.network, 'Download mislukt');
+      _asFailure('download', e, 'Download mislukt');
     } finally {
       client.close(force: true);
     }
@@ -445,7 +502,9 @@ class S3Service {
   /// Bewust geen proefobject wegschrijven om te zien of voorwaardelijk
   /// schrijven werkt — dat zou rommel achterlaten in de bucket van de
   /// gebruiker. Die eigenschap blijkt vanzelf bij de eerste echte opslag.
-  Future<void> probe() async {
+  Future<void> probe() => _retryRead('probe', _probeOnce);
+
+  Future<void> _probeOnce() async {
     final uri = bucket.uriForKey(
       '',
       query: {'list-type': '2', 'max-keys': '0'},
@@ -477,8 +536,7 @@ class S3Service {
     } on TimeoutException {
       throw S3Exception(S3Error.network, 'Time-out');
     } catch (e) {
-      logError('S3Service.probe: mislukt', e);
-      throw S3Exception(S3Error.network, 'Verbinding mislukt');
+      _asFailure('probe', e, 'Verbinding mislukt');
     } finally {
       client.close(force: true);
     }

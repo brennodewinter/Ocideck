@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data' show BytesBuilder;
 
 import '../../models/git_settings.dart';
+import '../../utils/log.dart';
 import '../../utils/net_guard.dart';
 import 'git_forge.dart';
 import 'git_transport.dart';
@@ -30,7 +31,19 @@ class PinnedGitTransport implements GitTransport {
     Uri uri, {
     required Map<String, String> headers,
     required int maxBytes,
-  }) => _send('GET', uri, headers: headers, maxBytes: maxBytes);
+  }) async {
+    // Eén nieuwe poging bij een weggevallen verbinding — de hik waar het om
+    // gaat. Alleen hier, niet in [send]: een commit opnieuw sturen is niet
+    // hetzelfde als hem één keer sturen.
+    try {
+      return await _send('GET', uri, headers: headers, maxBytes: maxBytes);
+    } on GitForgeException catch (e) {
+      if (!e.transient) rethrow;
+      logWarning('GitTransport.get: verbinding weg, nog één poging', e);
+      await Future<void>.delayed(const Duration(milliseconds: 400));
+      return _send('GET', uri, headers: headers, maxBytes: maxBytes);
+    }
+  }
 
   @override
   Future<GitResponse> send(
@@ -89,6 +102,20 @@ class PinnedGitTransport implements GitTransport {
       return GitResponse(response.statusCode, builder.takeBytes());
     } on GitForgeException {
       rethrow;
+    } on SocketException catch (e) {
+      throw GitForgeException(
+        GitForgeError.network,
+        'Netwerkfout: $e',
+        transient: true,
+      );
+    } on HttpException catch (e) {
+      // Een verbinding die halverwege wegviel; juist het geval waarvoor
+      // opnieuw proberen bestaat.
+      throw GitForgeException(
+        GitForgeError.network,
+        'Netwerkfout: $e',
+        transient: true,
+      );
     } catch (e) {
       throw GitForgeException(GitForgeError.network, 'Netwerkfout: $e');
     }

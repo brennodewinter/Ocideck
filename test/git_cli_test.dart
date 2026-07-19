@@ -171,6 +171,21 @@ void main() {
       expect(env['GIT_TRACE_REDACT'], '1');
     });
 
+    test(
+      'git antwoordt altijd in het Engels, wat de schil ook spreekt',
+      () async {
+        // Wij lézen zijn uitvoer: of een push werd afgewezen dan wel of we
+        // offline zijn, staat in zijn stderr. Sprak git de taal van de gebruiker,
+        // dan matchte de herkenning niets en werd elke afwijzing als "offline"
+        // weggeschreven — waarna het werk stil in de wachtrij verdween.
+        await git.run(['status'], workingDirectory: sandbox.path);
+        final env = rec.calls.single.env!;
+        expect(env['LC_ALL'], 'C');
+        // gettext laat LANGUAGE vóór LC_ALL gaan; leeg zetten schakelt hem uit.
+        expect(env['LANGUAGE'], '');
+      },
+    );
+
     test('de omgeving is compleet genoeg om git te kúnnen starten', () async {
       // De keerzijde van dichttimmeren: zonder PATH vindt het proces `git` niet
       // meer, en op Windows zonder SystemRoot laden de socket-DLL's niet. Dit is
@@ -288,6 +303,50 @@ void main() {
         ], timeout: const Duration(milliseconds: 200)),
         throwsA(isA<GitCliException>()),
       );
+    });
+  });
+
+  group('isPushRejection', () {
+    // Het onderscheid bepaalt wat er met het werk gebeurt: een afwijzing hoort
+    // een conflictmelding te geven, een storing gaat de wachtrij in.
+    test('herkent de zinnen waarmee git een ref weigert', () {
+      const gevallen = [
+        ' ! [rejected]        main -> main (non-fast-forward)',
+        'error: failed to push some refs\nhint: Updates were rejected because '
+            'the remote contains work that you do not have locally.\n'
+            'hint: fetch first',
+        ' ! [remote rejected] main -> main (stale info)',
+      ];
+      for (final stderr in gevallen) {
+        expect(isPushRejection(stderr), isTrue, reason: stderr);
+      }
+    });
+
+    test('een netwerkstoring is géén afwijzing', () {
+      const gevallen = [
+        "fatal: unable to access 'https://git.example.org/a/b.git/': "
+            'Could not resolve host: git.example.org',
+        'fatal: unable to access: Failed to connect to git.example.org port 443'
+            ': Connection refused',
+        'ssh: connect to host git.example.org port 22: Network is unreachable',
+        '',
+      ];
+      for (final stderr in gevallen) {
+        expect(isPushRejection(stderr), isFalse, reason: stderr);
+      }
+    });
+
+    test('een merge-conflict in de werkkopie is géén push-afwijzing', () {
+      // Het vangnet let op "rejected"; deze tekst noemt "resolve" en hoort er
+      // niet in te trappen.
+      const stderr =
+          'error: Merge conflict in deck.md\n'
+          'hint: Resolve all conflicts manually, then run git commit.';
+      expect(isPushRejection(stderr), isFalse);
+    });
+
+    test('hoofdlettergebruik doet er niet toe', () {
+      expect(isPushRejection('! [REJECTED] (NON-FAST-FORWARD)'), isTrue);
     });
   });
 }

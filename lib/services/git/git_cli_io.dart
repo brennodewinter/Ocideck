@@ -143,11 +143,11 @@ class NativeGitCli implements GitCli {
   /// een CA-bundel aan, dus wie ze kan zetten kan de app een eigen CA laten
   /// vertrouwen — maar wie de omgeving van het proces kan zetten, kan sowieso
   /// meer. De kans dat ze wegvallen bij een échte gebruiker weegt zwaarder.
+  /// `LANG`/`LC_ALL` staan hier bewust *niet* bij: die worden hieronder op `C`
+  /// vastgezet. Zie [_hardenedEnv].
   static const _carriedPosix = {
     'PATH',
     'TMPDIR',
-    'LANG',
-    'LC_ALL',
     'SSL_CERT_FILE',
     'SSL_CERT_DIR',
   };
@@ -210,6 +210,17 @@ class NativeGitCli implements GitCli {
       // Vangnet, voor het geval een header tóch ergens langs een trace komt: laat
       // git redigeren. Standaard doet hij dat al; dit zet het vast.
       'GIT_TRACE_REDACT': '1',
+      // Git spreekt de taal van de schil. Wij lézen zijn uitvoer — of een push
+      // werd afgewezen dan wel of we offline zijn, staat in zijn stderr — en
+      // die twee betekenen iets heel anders voor het werk van de gebruiker.
+      // Met een Nederlandse of Duitse git matchte "non-fast-forward" nergens
+      // op, werd een afwijzing als "offline" geclassificeerd, en verdween het
+      // werk stil in de wachtrij in plaats van een conflictmelding te geven.
+      //
+      // `LANGUAGE` staat erbij omdat gettext die vóór LC_ALL laat gaan; leeg
+      // zetten is de enige manier om hem uit te schakelen.
+      'LC_ALL': 'C',
+      'LANGUAGE': '',
     };
     if (config.isNotEmpty) {
       env['GIT_CONFIG_COUNT'] = '${config.length}';

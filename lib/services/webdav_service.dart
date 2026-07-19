@@ -94,7 +94,18 @@ enum WebdavError {
 class WebdavException implements Exception {
   final WebdavError kind;
   final String message;
-  WebdavException(this.kind, this.message);
+
+  /// Of dit een storing is die zómaar weer over kan zijn: een verbinding die
+  /// werd verbroken of geweigerd. Alleen dán is het zinnig een leesactie nog
+  /// eens te proberen.
+  ///
+  /// Nadrukkelijk níet gezet bij een time-out: die kostte de gebruiker al de
+  /// volle wachttijd, en er nog een ronde bovenop doen maakt een trage server
+  /// twee keer zo traag zonder dat er iets aan de oorzaak verandert. Ook niet
+  /// bij auth, notFound, tls of config — dat zijn antwoorden, geen storingen.
+  final bool transient;
+
+  WebdavException(this.kind, this.message, {this.transient = false});
   @override
   String toString() => 'WebdavException($kind): $message';
 }
@@ -239,10 +250,50 @@ class WebdavService {
     }
     if (e is SocketException) {
       logWarning('WebdavService.$where: socket onbereikbaar', e);
-      throw WebdavException(WebdavError.network, 'Server niet bereikbaar');
+      throw WebdavException(
+        WebdavError.network,
+        'Server niet bereikbaar',
+        transient: true,
+      );
+    }
+    // Een verbinding die halverwege wegviel meldt Dart als HttpException
+    // ("Connection closed before full header was received"), niet als
+    // SocketException. Dat is juist het geval waarvoor opnieuw proberen bestaat.
+    if (e is HttpException) {
+      logWarning('WebdavService.$where: verbinding afgebroken', e);
+      throw WebdavException(
+        WebdavError.network,
+        'Verbinding afgebroken',
+        transient: true,
+      );
     }
     logError('WebdavService.$where: mislukt', e);
     throw WebdavException(WebdavError.network, fallback);
+  }
+
+  /// Voer een *leesactie* uit en probeer hem één keer opnieuw wanneer de
+  /// verbinding wegviel.
+  ///
+  /// Eén keer, want een tweede poging vangt de hik op waar het om gaat — een
+  /// verbroken socket, een net-herstelde wifi — en alles daarna is wachten op
+  /// iets dat structureel stuk is. Met een korte pauze ertussen, zodat we niet
+  /// binnen dezelfde milliseconde tegen dezelfde muur lopen.
+  ///
+  /// Alleen voor lezen. Een mislukte upload opnieuw sturen is niet hetzelfde
+  /// als hem één keer sturen: de `If-Match`-bewaking hangt aan wat er op dat
+  /// moment op de server staat, en dat kan intussen veranderd zijn.
+  static Future<T> _retryRead<T>(
+    String where,
+    Future<T> Function() attempt,
+  ) async {
+    try {
+      return await attempt();
+    } on WebdavException catch (e) {
+      if (!e.transient) rethrow;
+      logWarning('WebdavService.$where: verbinding weg, nog één poging', e);
+      await Future<void>.delayed(const Duration(milliseconds: 400));
+      return attempt();
+    }
   }
 
   static const String _propfindBody =
@@ -259,7 +310,10 @@ class WebdavService {
 
   /// Lijst de inhoud van [remotePath] (relatief aan `rootPath`) met `Depth: 1`.
   /// De map zelf wordt uit het resultaat gefilterd. Sorteert mappen eerst.
-  Future<List<WebdavEntry>> list(String remotePath) async {
+  Future<List<WebdavEntry>> list(String remotePath) =>
+      _retryRead('list', () => _listOnce(remotePath));
+
+  Future<List<WebdavEntry>> _listOnce(String remotePath) async {
     final uri = server.uriFor(remotePath, isCollection: true);
     if (uri == null) {
       throw WebdavException(WebdavError.config, 'Pad buiten de wortelmap');
@@ -406,6 +460,14 @@ class WebdavService {
   /// Download het bestand op [remotePath]. Streamt met een harde limiet en
   /// volgt geen redirects. Geeft de bytes, of gooit [WebdavException].
   Future<WebdavFile> download(
+    String remotePath, {
+    int maxBytes = maxDownloadBytes,
+  }) => _retryRead(
+    'download',
+    () => _downloadOnce(remotePath, maxBytes: maxBytes),
+  );
+
+  Future<WebdavFile> _downloadOnce(
     String remotePath, {
     int maxBytes = maxDownloadBytes,
   }) async {
@@ -559,7 +621,9 @@ class WebdavService {
   }
 
   /// Korte verbindingstest: een PROPFIND op de wortel met `Depth: 0`.
-  Future<void> probe() async {
+  Future<void> probe() => _retryRead('probe', _probeOnce);
+
+  Future<void> _probeOnce() async {
     final uri = server.uriFor('', isCollection: true);
     if (uri == null) {
       throw WebdavException(WebdavError.config, 'Ongeldige server-URL');

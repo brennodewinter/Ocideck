@@ -74,7 +74,13 @@ enum GitForgeError {
 class GitForgeException implements Exception {
   final GitForgeError kind;
   final String message;
-  const GitForgeException(this.kind, this.message);
+
+  /// Of dit een storing is die zómaar weer over kan zijn: een verbinding die
+  /// wegviel of werd geweigerd. Alleen dán is het zinnig een *leesactie* nog
+  /// eens te proberen. Zie `GitTransport.get`.
+  final bool transient;
+
+  const GitForgeException(this.kind, this.message, {this.transient = false});
 
   @override
   String toString() => 'GitForgeException($kind): $message';
