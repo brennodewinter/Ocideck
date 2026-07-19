@@ -10,6 +10,24 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Added
+- **Vóór een release-build zie je nu of er upstream iets nieuwers is.** OciDeck
+  bundelt referentiedata — WSTG, MASTG, MASWE, CWE, MIAUW, CVSS — en die
+  wandelt mee in elk artefact dat je uitbrengt. Er was al een controle die
+  meldt wanneer een bron verder is, maar die zat in de merge-poort: hij
+  blokkeert, en hij draait niet op het moment dat je een release maakt.
+
+  `make catalogs-outdated` stelt dezelfde vraag op het moment dat hij ertoe
+  doet, en breekt niets. Hij draait vanzelf als eerste stap van
+  `make build-release`, vóór de builds, zodat de melding niet onder twintig
+  minuten compileruitvoer verdwijnt. Een nieuwe upstreamversie is namelijk geen
+  defect in wat je bouwt — het is een afweging, en die is aan de mens die de
+  release maakt. Een controle die de release zou afbreken, wordt binnen twee
+  releases weggevlagd, en dan ben je precies de zichtbaarheid kwijt die je
+  wilde.
+
+  Geen netwerk breekt de release evenmin af, maar het zegt wél dát er niet
+  gekeken is. Stilte mag hier niet als goedkeuring lezen.
+
 - **Afbeeldingen en media gaan nu écht mee met de presentatie — en je ziet
   wanneer dat níet zo is.** Je kunt er niet van uitgaan dat de ontvanger
   dezelfde schijven, netwerkmappen of rechten heeft als jij. Een verwijzing naar

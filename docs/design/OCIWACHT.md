@@ -1272,6 +1272,23 @@ ICD-11 (CC BY-**ND**), MeSH-vertalingen (UMLS categorie 3), ATC (NC +
 no-modification), LOINC (§4 geen afgeleide werken; §12 draagt vertaalwerk
 automatisch over aan Regenstrief).
 
+**Wat bundelen kost ná de eerste keer.** Een gebundeld lexicon is geen
+eenmalige import maar een terugkerende beslissing, en die kost meer dan het
+regenereren. Bij een referentiecatalogus als CWE is een verouderde regel
+*cosmetisch* — er staat een verkeerd nummer in een lijst die de gebruiker leest.
+Bij een lexicon **vuurt** elke term. Een nieuwe batch labels kan homoniemen
+binnenbrengen (`griep` heeft er tien, `Syndroom van Epstein` geen), en dan gaat
+de scanner af op gewone tekst. Een verversing is dus: generator draaien,
+**termdiff lezen**, vals-positievencorpus draaien, en oordelen.
+
+Daarom horen deze bronnen **niet** in de blokkerende poort van `make deps-check`
+te belanden. ORDO brengt ongeveer maandelijks uit; een CI die daarop rood wordt,
+staat binnen twee maanden permanent rood en wordt uitgezet — precies de
+zichtbaarheid kwijt die de poort moest opleveren. Ze horen in
+`make catalogs-outdated`: adviserend, en het draait vanzelf vóór een
+release-build. Dan weet je wat je inpakt zonder dat "er is iets nieuws" als
+defect wordt behandeld. Zie `docs/CHECKS.md`.
+
 ### 13.4 Pijplijnvolgorde: goedkoop eerst, duur laatst
 
 De controles verschillen orden van grootte in kosten, en de UI hangt aan de

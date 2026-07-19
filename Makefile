@@ -1,4 +1,4 @@
-.PHONY: refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions licenses sbom sbom-verify check-conventions check-method-length check-dead-code add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
+.PHONY: refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions catalogs-outdated licenses sbom sbom-verify check-conventions check-method-length check-dead-code add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -55,6 +55,7 @@ help:
 	@echo "  make check-method-length  Per-method length ratchet (AST-measured, max 150)."
 	@echo "  make check-dead-code Fail on orphaned lib/ files (unreachable from any entrypoint)."
 	@echo "  make add-l10n SPEC=… Add d('…') source strings to every language from a JSON spec."
+	@echo "  make catalogs-outdated Advisory: bundled reference data vs upstream (run before a release build)."
 	@echo "  make refresh-catalogs Regenerate WSTG/MASTG/MASWE from upstream (not in check)."
 	@echo "  make l10n-check      Fast l10n gate: duplicate keys, per-language coverage, and formatting."
 	@echo "  make fix             Auto-apply 'dart fix' and reformat (local cleanup helper)."
@@ -296,6 +297,15 @@ deps-check:
 # Afterwards: bump the version in lib/services/reference_standards.dart (and in
 # the catalogue's own const), update docs/LICENSE_COMPLIANCE.md, and re-run
 # `make deps-check` so the staleness gate agrees.
+catalogs-outdated:
+	@echo "== OciDeck: is er upstream iets nieuws? (adviserend) =="
+	@echo "Command: dart run tool/check_reference_data.dart --advisory"
+	@echo "Covers: dezelfde bronnen als 'make deps-check', maar dit breekt niets."
+	@echo "Bedoeld vóór een release-build: je wilt weten wat je inpakt, en een"
+	@echo "        nieuwe upstreamversie is geen defect in wat je bouwt."
+	@echo "Daarna: 'make refresh-catalogs' om ze op te halen."
+	dart run tool/check_reference_data.dart --advisory
+
 refresh-catalogs:
 	@echo "== OciDeck: refresh bundled reference catalogues =="
 	@echo "Sources: OWASP WSTG + MASTG + MASWE, MITRE CWE."
