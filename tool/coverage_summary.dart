@@ -44,6 +44,12 @@ const Set<String> uncoveredBaseline = {
   // NO EXECUTABLE LINES: idem voor de WSTG-index, sinds die uit
   // tool/build_wstg_catalog.dart komt in plaats van met de hand overgetikt.
   'lib/services/wstg_catalog_data.dart',
+  // NO EXECUTABLE LINES: de woordenlijst van de markdown-checker — een `part`
+  // met alleen const sets (class-tokens, front-matter sleutels, directives).
+  // Ruim gedekt via markdown_validator_test.dart, maar lcov ziet niets om uit
+  // te voeren. Afgesplitst omdat de validator anders de 1000-regel-ratchet
+  // overschrijdt.
+  'lib/services/markdown_validator_vocabulary.dart',
   // PLATFORM: entrypoint — runApp() never executes under the test runner.
   'lib/main.dart',
   // PLATFORM: conditional-import facades + their io/web halves.

@@ -620,6 +620,42 @@ marp: true
       expect(validator.validate(md).warningCount, 0);
     });
 
+    test('does not warn on front-matter keys the parser actually reads', () {
+      // Regressie: deze zeven sleutels worden door `markdown_service_parse`
+      // verwerkt, maar ontbraken in de whitelist van de checker. Die meldde ze
+      // als "wordt genegeerd" terwijl ze juist effect hebben.
+      const md =
+          '---\nmarp: true\n'
+          'language: nl\n'
+          'tool: Burp Suite@2026.1\n'
+          'standards: WSTG, MASTG\n'
+          'privacy: redact\n'
+          'ocideck_seal_tsr: MIICxDCCAaw=\n'
+          'ocideck_miauw_waivers: e30=\n'
+          'ocideck_miauw_confirmations: e30=\n'
+          '---\n\n# Slide\n';
+      final result = validator.validate(md);
+      expect(
+        result.issues.where(
+          (i) => i.message.contains('Onbekende front-matter'),
+        ),
+        isEmpty,
+        reason: 'de parser leest deze sleutels, dus de checker mag niet klagen',
+      );
+    });
+
+    test('does not warn on the checklist-scope directive', () {
+      const md =
+          '---\nmarp: true\n---\n\n<!-- _class: checklist -->\n'
+          '<!-- ocideck_checklist_scope: https://app.example/login -->\n\n'
+          '# Checklist\n';
+      final result = validator.validate(md);
+      expect(
+        result.issues.any((i) => i.message.contains('ocideck_checklist_scope')),
+        isFalse,
+      );
+    });
+
     test('warns on an unsupported scoped Marp directive', () {
       const md =
           '---\nmarp: true\n---\n\n<!-- _paginate: false -->\n\n# Slide\n';
