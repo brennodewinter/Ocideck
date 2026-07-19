@@ -1580,8 +1580,8 @@ const _dutchSourceUk = {
   'Projectstart / kick-off': 'Старт проєкту / kick-off',
   'Voorbespreking communicatie': 'Підготовча нарада з комунікації',
   'Projecttijdlijn': 'Часова шкала проєкту',
-  'Informatiebeveiliging: RASCI / TVB': 'Інформаційна безпека: RASCI / TVB',
-  'Security-takenplan': 'План завдань з безпеки',
+  'Informatieveiligheid: RASCI / TVB': 'Інформаційна безпека: RASCI / TVB',
+  'Takenplan informatieveiligheid': 'План завдань з безпеки',
   'Certificering voortgang': 'Прогрес сертифікації',
   'Training / workshop': 'Тренінг / воркшоп',
   'Rapportage': 'Звіт',
@@ -1996,7 +1996,7 @@ const _dutchSourceAddUk = <String, String>{
       'У цьому репозиторії немає презентацій.',
   'Rapportagetaal': 'Мова звіту',
   'Niet vastgelegd': 'Не зафіксовано',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Слайди звітів і довідкові дані для інформаційної безпеки: висновки, контрольні списки, матриці обсягу та підписання. Структуровано за MIAUW і широко застосовно для пентестів, аудитів і досліджень безпеки. Довідкові дані містяться в самому застосунку, тож модуль працює одразу й повністю офлайн.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Необов\'язкові модулі. Типово вимкнені; вони лишаються прихованими, доки ви їх не увімкнете.',

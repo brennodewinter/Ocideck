@@ -1568,8 +1568,8 @@ const _dutchSourceCs = {
   'Projectstart / kick-off': 'Zahájení projektu / kick-off',
   'Voorbespreking communicatie': 'Předběžná porada o komunikaci',
   'Projecttijdlijn': 'Časová osa projektu',
-  'Informatiebeveiliging: RASCI / TVB': 'Bezpečnost informací: RASCI / TVB',
-  'Security-takenplan': 'Plán bezpečnostních úkolů',
+  'Informatieveiligheid: RASCI / TVB': 'Bezpečnost informací: RASCI / TVB',
+  'Takenplan informatieveiligheid': 'Plán bezpečnostních úkolů',
   'Certificering voortgang': 'Postup certifikace',
   'Training / workshop': 'Školení / workshop',
   'Rapportage': 'Zpráva',
@@ -1978,7 +1978,7 @@ const _dutchSourceAddCs = <String, String>{
       'V tomto repozitáři nejsou žádné prezentace.',
   'Rapportagetaal': 'Jazyk zprávy',
   'Niet vastgelegd': 'Nezaznamenáno',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Reportové snímky a referenční data pro informační bezpečnost: zjištění, kontrolní seznamy, matice rozsahu a podpis. Strukturováno podle MIAUW a široce použitelné pro pentesty, audity a bezpečnostní výzkum. Referenční data jsou přímo v aplikaci, takže modul funguje ihned a zcela offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Volitelné moduly. Ve výchozím nastavení vypnuté; zůstávají skryté, dokud je nezapnete.',

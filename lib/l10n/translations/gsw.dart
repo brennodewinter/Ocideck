@@ -1568,8 +1568,8 @@ const _dutchSourceGsw = {
   'Projectstart / kick-off': 'Projäktschtart / Kick-off',
   'Voorbespreking communicatie': 'Vorbeschprächig Kommunikation',
   'Projecttijdlijn': 'Projäkt-Ziitlinie',
-  'Informatiebeveiliging: RASCI / TVB': 'Informationssicherheit: RASCI / TVB',
-  'Security-takenplan': 'Security-Ufgabeplan',
+  'Informatieveiligheid: RASCI / TVB': 'Informationssicherheit: RASCI / TVB',
+  'Takenplan informatieveiligheid': 'Security-Ufgabeplan',
   'Certificering voortgang': 'Zertifizierigs-Fortschritt',
   'Training / workshop': 'Training / Workshop',
   'Rapportage': 'Bricht',
@@ -1981,7 +1981,7 @@ const _dutchSourceAddGsw = <String, String>{
       'Kei Presentatione i dem Repository.',
   'Rapportagetaal': 'Brichtsprach',
   'Niet vastgelegd': 'Nid festghalte',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Bricht-Slides und Referänzdate für d\'Informationssicherheit: Befund, Checkliste, Scope-Matrize und Underzeichnig. Nach MIAUW strukturiert und breit iisetzbar für Pentest, Audits und Sicherheitsforschig. D\'Referänzdate stecke i de App sälber, drum lauft s Modul grad und ganz offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Optionali Modul. Standardmässig us; si bliibe verborge, bis du si iischaltisch.',

@@ -1576,9 +1576,8 @@ const _dutchSourceRo = {
   'Projectstart / kick-off': 'Start de proiect / kick-off',
   'Voorbespreking communicatie': 'Discuție preliminară de comunicare',
   'Projecttijdlijn': 'Cronologia proiectului',
-  'Informatiebeveiliging: RASCI / TVB':
-      'Securitatea informațiilor: RASCI / TVB',
-  'Security-takenplan': 'Plan de sarcini de securitate',
+  'Informatieveiligheid: RASCI / TVB': 'Securitatea informațiilor: RASCI / TVB',
+  'Takenplan informatieveiligheid': 'Plan de sarcini de securitate',
   'Certificering voortgang': 'Progresul certificării',
   'Training / workshop': 'Instruire / workshop',
   'Rapportage': 'Raportare',
@@ -1998,7 +1997,7 @@ const _dutchSourceAddRo = <String, String>{
   'Geen presentaties in deze repository.': 'Nicio prezentare în acest depozit.',
   'Rapportagetaal': 'Limba raportului',
   'Niet vastgelegd': 'Neînregistrat',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Slide-uri de raportare și date de referință pentru securitatea informațiilor: constatări, liste de verificare, matrice de domeniu și semnare. Structurat conform MIAUW și utilizabil pe scară largă pentru pentesturi, audituri și cercetare de securitate. Datele de referință se află în aplicația însăși, așa că modulul funcționează imediat și complet offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Module opționale. Dezactivate implicit; rămân ascunse până nu le activați.',

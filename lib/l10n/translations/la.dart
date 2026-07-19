@@ -1574,8 +1574,8 @@ const _dutchSourceLa = {
   'Projectstart / kick-off': 'Initium proiecti / kick-off',
   'Voorbespreking communicatie': 'Colloquium praevium communicationis',
   'Projecttijdlijn': 'Linea temporis proiecti',
-  'Informatiebeveiliging: RASCI / TVB': 'Securitas informationis: RASCI / TVB',
-  'Security-takenplan': 'Consilium operum securitatis',
+  'Informatieveiligheid: RASCI / TVB': 'Securitas informationis: RASCI / TVB',
+  'Takenplan informatieveiligheid': 'Consilium operum securitatis',
   'Certificering voortgang': 'Progressus certificationis',
   'Training / workshop': 'Exercitatio / officina',
   'Rapportage': 'Relatio',
@@ -1992,7 +1992,7 @@ const _dutchSourceAddLa = <String, String>{
       'Nullae presentationes in hoc repositorio.',
   'Rapportagetaal': 'Lingua relationis',
   'Niet vastgelegd': 'Non consignatum',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Tabellae relationis et data referentiae ad securitatem informationis: inventa, indices agendorum, matrices ambitus et subscriptio. Secundum MIAUW ordinata et late adhibenda ad pentest, recognitiones et investigationem securitatis. Data referentiae in ipsa applicatione insunt, itaque modulus statim et plene sine rete operatur.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Moduli optionales. Praedefinite exstincti; latent donec eos actives.',

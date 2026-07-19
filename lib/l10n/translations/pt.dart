@@ -1589,8 +1589,8 @@ const _dutchSourcePt = {
   'Projectstart / kick-off': 'Início de projeto / kick-off',
   'Voorbespreking communicatie': 'Reunião prévia de comunicação',
   'Projecttijdlijn': 'Cronograma do projeto',
-  'Informatiebeveiliging: RASCI / TVB': 'Segurança da informação: RASCI / TVB',
-  'Security-takenplan': 'Plano de tarefas de segurança',
+  'Informatieveiligheid: RASCI / TVB': 'Segurança da informação: RASCI / TVB',
+  'Takenplan informatieveiligheid': 'Plano de tarefas de segurança',
   'Certificering voortgang': 'Progresso da certificação',
   'Training / workshop': 'Formação / workshop',
   'Rapportage': 'Relatório',
@@ -2007,7 +2007,7 @@ const _dutchSourceAddPt = <String, String>{
       'Nenhuma apresentação neste repositório.',
   'Rapportagetaal': 'Idioma do relatório',
   'Niet vastgelegd': 'Não registado',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Diapositivos de relatório e dados de referência para a segurança da informação: constatações, listas de tarefas, matrizes de escopo e assinatura. Estruturado segundo o MIAUW e amplamente utilizável para pentests, auditorias e investigação de segurança. Os dados de referência estão na própria aplicação, pelo que o módulo funciona de imediato e totalmente offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Módulos opcionais. Desativados por predefinição; permanecem ocultos até os ativar.',

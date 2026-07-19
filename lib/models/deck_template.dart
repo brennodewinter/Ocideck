@@ -128,14 +128,14 @@ final List<DeckTemplate> deckTemplates = [
   ),
   DeckTemplate(
     id: 'rasci',
-    title: 'Informatiebeveiliging: RASCI / TVB',
+    title: 'Informatieveiligheid: RASCI / TVB',
     description: 'Rollen, RASCI-matrix en taakafspraken vastleggen.',
     icon: 'rasci',
     buildSlides: _buildRasci,
   ),
   DeckTemplate(
     id: 'securityTasks',
-    title: 'Security-takenplan',
+    title: 'Takenplan informatieveiligheid',
     description: 'Taken, prioriteiten, eigenaren en bewijsstukken.',
     icon: 'securityTasks',
     buildSlides: _buildSecurityTasks,

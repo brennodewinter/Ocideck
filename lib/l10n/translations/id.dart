@@ -1565,8 +1565,8 @@ const _dutchSourceId = {
   'Projectstart / kick-off': 'Awal proyek / kick-off',
   'Voorbespreking communicatie': 'Diskusi awal komunikasi',
   'Projecttijdlijn': 'Linimasa proyek',
-  'Informatiebeveiliging: RASCI / TVB': 'Keamanan informasi: RASCI / TVB',
-  'Security-takenplan': 'Rencana tugas keamanan',
+  'Informatieveiligheid: RASCI / TVB': 'Keamanan informasi: RASCI / TVB',
+  'Takenplan informatieveiligheid': 'Rencana tugas keamanan',
   'Certificering voortgang': 'Kemajuan sertifikasi',
   'Training / workshop': 'Pelatihan / workshop',
   'Rapportage': 'Laporan',
@@ -1975,7 +1975,7 @@ const _dutchSourceAddId = <String, String>{
       'Tidak ada presentasi di repositori ini.',
   'Rapportagetaal': 'Bahasa laporan',
   'Niet vastgelegd': 'Tidak dicatat',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Slide pelaporan dan data referensi untuk keamanan informasi: temuan, daftar periksa, matriks ruang lingkup, dan penandatanganan. Terstruktur menurut MIAUW dan dapat digunakan secara luas untuk pentest, audit, dan riset keamanan. Data referensi ada di dalam aplikasi itu sendiri, jadi modul langsung bekerja dan sepenuhnya offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Modul opsional. Mati secara bawaan; tetap tersembunyi sampai Anda mengaktifkannya.',

@@ -1581,9 +1581,8 @@ const _dutchSourceMt = {
   'Projectstart / kick-off': 'Bidu tal-proġett / kick-off',
   'Voorbespreking communicatie': 'Diskussjoni preliminari tal-komunikazzjoni',
   'Projecttijdlijn': 'Kronoloġija tal-proġett',
-  'Informatiebeveiliging: RASCI / TVB':
-      'Sigurtà tal-informazzjoni: RASCI / TVB',
-  'Security-takenplan': 'Pjan tal-kompiti tas-sigurtà',
+  'Informatieveiligheid: RASCI / TVB': 'Sigurtà tal-informazzjoni: RASCI / TVB',
+  'Takenplan informatieveiligheid': 'Pjan tal-kompiti tas-sigurtà',
   'Certificering voortgang': 'Progress taċ-ċertifikazzjoni',
   'Training / workshop': 'Taħriġ / workshop',
   'Rapportage': 'Rappurtar',
@@ -2000,7 +1999,7 @@ const _dutchSourceAddMt = <String, String>{
       'L-ebda preżentazzjoni f\'dan ir-repożitorju.',
   'Rapportagetaal': 'Lingwa tar-rapport',
   'Niet vastgelegd': 'Mhux irreġistrat',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Slajds ta\' rappurtar u dejta ta\' referenza għas-sigurtà tal-informazzjoni: sejbiet, listi ta\' verifika, matriċi tal-ambitu u firma. Strutturat skont MIAUW u użabbli fuq firxa wiesgħa għall-pentests, l-awditi u r-riċerka tas-sigurtà. Id-dejta ta\' referenza tinsab fl-app innifisha, għalhekk il-modulu jaħdem mill-ewwel u kompletament offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Moduli fakultattivi. Mitfija b\'mod awtomatiku; jibqgħu moħbija sakemm ma tattivahomx.',

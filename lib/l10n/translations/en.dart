@@ -1115,7 +1115,7 @@ const _dutchSourceAddEn = {
       'No presentations in this repository.',
   'Rapportagetaal': 'Report language',
   'Niet vastgelegd': 'Not recorded',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Reporting slides and reference data for information security: findings, checklists, scope matrices and sign-off. Structured per MIAUW and broadly usable for pentests, audits and security research. The reference data sits inside the app itself, so the module works right away and fully offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Optional modules. Off by default; they stay hidden until you enable them.',
@@ -2154,9 +2154,9 @@ const _dutchSourceAddEn = {
   'Projectstart / kick-off': 'Project start / kick-off',
   'Voorbespreking communicatie': 'Communications pre-brief',
   'Projecttijdlijn': 'Project timeline',
-  'Informatiebeveiliging: RASCI / TVB':
+  'Informatieveiligheid: RASCI / TVB':
       'Information security: RASCI / responsibilities',
-  'Security-takenplan': 'Security task plan',
+  'Takenplan informatieveiligheid': 'Security task plan',
   'Certificering voortgang': 'Certification progress',
   'Training / workshop': 'Training / workshop',
   'Rapportage': 'Report',

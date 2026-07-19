@@ -1569,8 +1569,8 @@ const _dutchSourceHu = {
   'Projectstart / kick-off': 'Projektindítás / kick-off',
   'Voorbespreking communicatie': 'Kommunikációs előkészítő megbeszélés',
   'Projecttijdlijn': 'Projekt-idővonal',
-  'Informatiebeveiliging: RASCI / TVB': 'Információbiztonság: RASCI / TVB',
-  'Security-takenplan': 'Biztonsági feladatterv',
+  'Informatieveiligheid: RASCI / TVB': 'Információbiztonság: RASCI / TVB',
+  'Takenplan informatieveiligheid': 'Biztonsági feladatterv',
   'Certificering voortgang': 'Tanúsítás előrehaladása',
   'Training / workshop': 'Képzés / workshop',
   'Rapportage': 'Beszámoló',
@@ -1982,7 +1982,7 @@ const _dutchSourceAddHu = <String, String>{
       'Nincsenek bemutatók ebben a tárolóban.',
   'Rapportagetaal': 'A jelentés nyelve',
   'Niet vastgelegd': 'Nincs rögzítve',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Jelentésdiák és referenciaadatok az információbiztonsághoz: megállapítások, ellenőrzőlisták, hatókörmátrixok és aláírás. MIAUW szerint strukturálva és széles körben használható pentesztekhez, auditokhoz és biztonsági kutatáshoz. A referenciaadatok magában az alkalmazásban vannak, így a modul azonnal és teljesen offline működik.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Választható modulok. Alapértelmezetten kikapcsolva; rejtve maradnak, amíg be nem kapcsolja őket.',
