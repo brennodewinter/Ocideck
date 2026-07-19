@@ -11,14 +11,14 @@ Run `make help` for a one-line summary of every target.
 ## The one command
 
 ```sh
-make check        # format-check + analyze + full test suite — the quality gate
+make check        # format-check + analyze + conventions + method-length + dead-code + coverage
 ```
 
 Run this before every push — it is the enforced gate. For the extended
 local sweep that also covers licences and dependency health:
 
 ```sh
-make check-full   # check + licenses + sbom-verify + deps-check + deps-outdated
+make check-full   # check + licenses + sbom-verify + deps-check + check-web + deps-outdated
 ```
 
 ## Localisation helpers
@@ -44,9 +44,9 @@ To give a sense of scale (point-in-time figures — they only grow):
 
 | Metric | Approx. |
 | --- | ---: |
-| Automated tests in the suite | **~1920** |
-| Test files under `test/` | **~225** |
-| Source files under `lib/` | ~352 excl. translations (indexed in [`SOURCE_MAP.md`](SOURCE_MAP.md)) |
+| Automated tests in the suite | **~3355** |
+| Test files under `test/` | **~339** |
+| Source files under `lib/` | ~483 excl. translations (indexed in [`SOURCE_MAP.md`](SOURCE_MAP.md)) |
 | Line coverage (enforced floor: 78%) | **≥ 78%** |
 
 Coverage is a floor **and** a census: `make coverage` also fails when a `lib/`
@@ -212,9 +212,10 @@ also declares them, but see the [CI note](#continuous-integration).)
   sweep the analyzer-visible kinds; `make analyze` then enforces the result.
 
 ### `make test`
-- **Runs:** `flutter test --test-randomize-ordering-seed random` — the full
-  unit/widget suite under `test/`, in a randomised order so no test can silently
-  depend on another running first.
+- **Runs:** `flutter test --test-randomize-ordering-seed random --exclude-tags golden`
+  — the full unit/widget suite under `test/`, in a randomised order so no test can
+  silently depend on another running first. The golden (visual-regression) tests
+  are excluded here and run separately via `make test-golden`.
 - **Covers:** Markdown round-trip, preview/rendering, export, providers/state,
   services, the presenter, localization, and more.
 - **Failure means:** inspect the named failing test file and case in the output.
@@ -222,8 +223,8 @@ also declares them, but see the [CI note](#continuous-integration).)
   printed at the top of the run so you can reproduce it.
 
 ### `make coverage`
-- **Runs:** `flutter test --coverage` then
-  `dart run tool/coverage_summary.dart --min=78 --require-instrumented`.
+- **Runs:** `flutter test --coverage --test-randomize-ordering-seed random --exclude-tags golden`
+  then `dart run tool/coverage_summary.dart --min=78 --require-instrumented`.
 - **Covers:** two things. (1) Line coverage across every `lib/` file a test
   imports. (2) That there **is** such a test for every `lib/` file.
 - **Failure means:** coverage dropped below the floor (currently **78%**), **or**
@@ -233,11 +234,12 @@ also declares them, but see the [CI note](#continuous-integration).)
   brand-new, wholly untested file and the percentage does not move a hair: the
   one case a coverage floor exists to catch is the one case it structurally
   cannot see. `--require-instrumented` enumerates `lib/` from disk instead and
-  fails on any file missing from the report. The 16 files legitimately absent
-  today are baselined in `uncoveredBaseline` with a reason each — 12 platform
+  fails on any file missing from the report. The 60 files legitimately absent
+  today are baselined in `uncoveredBaseline` with a reason each — platform
   halves / conditional-import facades (the VM test runner cannot load
-  `dart:js_interop` code at all) and 4 with no executable lines (an `export`
-  barrel, an enum, a const data table). It is a **ratchet**: it may shrink, and
+  `dart:js_interop` code at all), files with no executable lines (`export`
+  barrels, enums, const data tables), and the per-language finding-template data
+  tables under `lib/services/finding_templates/`. It is a **ratchet**: it may shrink, and
   the run prints a tip when a baselined file becomes covered.
 - Since this supersedes `make test` (same suite, one run, plus the floor),
   `make check` depends on **`coverage`** rather than `test`.
@@ -326,10 +328,10 @@ also declares them, but see the [CI note](#continuous-integration).)
 
 - **Localization is enforced by a test.** `test/app_localizations_test.dart`
   fails if any `context.l10n.d('Nederlandse brontekst')` string lacks a
-  translation in **every** supported language (Dutch is the source;
-  en/it/de/fr/es/fy/pap each need an entry). Add the translations to the relevant
-  per-language file in `lib/l10n/translations/` for every language or `make test`
-  goes red.
+  translation in **every** supported language (Dutch is the source, so each of
+  the other **30** languages needs an entry). Use `make add-l10n SPEC=…` to insert
+  a string into every per-language file in `lib/l10n/translations/` at once, or
+  `make test` goes red.
 - **Path / SSRF guards** are covered by `test/asset_path_guard_test.dart`,
   `test/project_path_security_test.dart`, and the net-guard tests — they keep
   deck-supplied paths and URLs from escaping the project or reaching internal
@@ -435,8 +437,9 @@ each platform builds on its own runner:
 
 | Job | Runner | Output artifact |
 | --- | --- | --- |
+| SBOM | ubuntu | `ocideck-sbom` — the `sbom/` directory (runs `make sbom-verify` then `make sbom`) |
 | web | ubuntu | `ocideck-web` — hardened bundle (`--no-web-resources-cdn --csp`) |
-| macOS | macos | `ocideck-macos` — the `.app` |
+| macOS | macos | `ocideck-macos` — `build/macos/Build/Products/Release` |
 | Windows | windows | `ocideck-windows` — the runner `Release` folder |
 | Linux | ubuntu | `ocideck-linux` — the `bundle` folder |
 

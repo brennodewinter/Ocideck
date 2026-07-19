@@ -192,7 +192,7 @@ You can use a folder on your Nextcloud as a source for decks and assets.
 
 Add a slide and pick a type: **title**, **section** divider, **bullets**, **two
 bullet columns**, **bullets + image**, **two images**, **large image**, **video**,
-**audio**, **quote**, **table**, **source code**, **chart** (bar, horizontal
+**quote**, **table**, **source code**, **chart** (bar, horizontal
 bar, stacked bar, horizontal stacked bar, combo, line, area, pie, donut,
 spider/radar, scatter, waterfall, or heatmap/risk matrix), **cockpit** (a
 dashboard of aviation-style instrument gauges),
@@ -204,7 +204,9 @@ wireframe of the layout, and the dialog works entirely with the keyboard
 the left and a live preview on the right. You can change an existing slide's type
 at any time from the **TYPE** control in the editor header: it opens the same
 chooser, so adding and re-typing a slide always offer exactly the same set of
-types.
+types. (Both pickers are category-filtered: the five Informatieveiligheid types —
+finding, findings-summary, checklist, scope matrix and sign-off — appear only once
+the security module is enabled; see the pentest-reporting section below.)
 
 Not sure what a slide type is for? Click the small **"What can I do here?"**
 button at the top of the editor for a one-line hint about the selected type (for
@@ -1065,7 +1067,7 @@ OciDeck aims for WCAG 2.1 in the editor:
   then a generic "image"; the slide-quality check nudges until either is present.
   Alt-text travels in the `.md` (see [FILE_FORMAT.md](FILE_FORMAT.md) §8). When the
   optional AI backend is on, a **Stel alt-tekst voor (AI)** button drafts one with
-  a local vision model — draft-only, marked as an AI concept and cleared for
+  the configured AI backend — draft-only, marked as an AI concept and cleared for
   sealing only after you review it; a **Wis AI-alt-teksten** command removes every
   still-unreviewed AI draft in one undoable step.
 - **Slide quality** — while you edit, OciDeck continuously checks the deck for
@@ -1077,7 +1079,7 @@ The **Slide quality** bar sits below the editor preview. It summarises open
 issues and can be expanded to browse them. Filter chips let you show **All
 issues** or only **Errors**, **Warnings**, or **Tips**. Click a slide-specific
 issue to jump to that slide and focus the relevant editor field; click a **theme
-(entire presentation)** issue to open *Settings → Colours* with the matching
+(entire presentation)** issue to open *Settings → Presentation style → Colours* with the matching
 colour field scrolled into view and highlighted.
 
 Issues also appear as badges on slide thumbnails (amber for warnings, red when
@@ -1313,7 +1315,8 @@ findings-summary and management-summary counts use the context severity band.
 
 When the optional AI backend is on, the finding editor shows a **Tekst voorstellen
 (AI)** button under the *Beschrijving*, *Mogelijke impact* and *Aanbeveling*
-fields. It drafts that field with a local model, grounded **only** on your own
+fields. It drafts that field with your configured AI backend — local, self-hosted
+or cloud, as set under *Settings → AI-assistentie* — grounded **only** on your own
 facts for this finding (title, scope object, CVSS, CWE/CVE and the fields you have
 already filled) — and it is forbidden to invent identifiers: any CWE, CVE or CVSS
 id the model emits that is not already in your facts is stripped out

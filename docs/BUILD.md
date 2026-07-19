@@ -4,8 +4,10 @@ How to build OciDeck from source and produce distributable apps.
 
 ## Prerequisites
 
-- **Flutter 3.44.6** (stable) / **Dart 3.12.2** — the exact version CI pins
-  (see `.tool-versions` and both `.github/workflows/*.yml`). Building tolerates
+- **Flutter 3.44.6** (stable) — the exact version CI pins (see `.tool-versions`
+  and both `.github/workflows/*.yml`). Only Flutter is pinned; the Dart SDK comes
+  bundled with it, and `pubspec.yaml` merely constrains it (`sdk: ^3.12.0`).
+  Building tolerates
   3.44+, but **`make format-check` is version-sensitive**: a different
   `dart format` reflows whitespace and fails the gate. Use the Flutter-bundled
   `dart` (not a separately installed standalone Dart, which can drift) so
@@ -42,6 +44,11 @@ OciDeck also builds for the browser. Use the hardened target:
 ```sh
 make build-web        # flutter build web --release --no-web-resources-cdn --csp
 ```
+
+Note this target has prerequisites: it first runs `deps-verify-offline` (bundled-JS
+integrity against the manifest) and `sbom-verify` (SBOM drift), either of which can
+fail the build *before* Flutter is invoked. Afterwards it copies the SBOM into
+`build/web/sbom/` and normalises file permissions.
 
 The two flags make the bundle **self-contained and CSP-safe**:
 
@@ -106,7 +113,7 @@ hulppunt blijft alles werken en legt de foutmelding de CORS-beperking uit.
 ## Quality gate
 
 ```sh
-make check        # format-check + flutter analyze + full test suite
+make check        # format-check + analyze + conventions + method-length + dead-code + coverage
 ```
 
 ## Building release apps

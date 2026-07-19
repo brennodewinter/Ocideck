@@ -1,6 +1,9 @@
 # OciDeck — Source Map
 
-A one-line index of every Dart file under `lib/`, grouped by directory. It
+A one-line index of the Dart files under `lib/`, grouped by directory. It aims at
+the files worth naming; large uniform families (the 31 per-language translation
+files, the 32 per-language finding-template tables, the `settings_dialog_*` parts)
+are described as a group rather than file by file. It
 complements [`ARCHITECTURE.md`](ARCHITECTURE.md) (the *why* and the cross-cutting
 flows) with a *what-is-this-file* lookup. For the on-disk file format see
 [`FILE_FORMAT.md`](FILE_FORMAT.md).
@@ -141,8 +144,9 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 
 Reading, writing, concept branches, review PRs, merges and release tags, over
 the forge REST plane (all platforms) and — on desktop, when `git` is present —
-over a real partial clone. Three forges behind one interface. Open: cross-deck
-search (Phase 6) and asset deletion (§6.2, deliberately manual).
+over a real partial clone. Three forges behind one interface. Cross-deck search
+ships (`deck_search.dart` + its shell UI). Open: asset deletion (§6.2,
+deliberately manual).
 
 - `git_forge.dart` — The provider-agnostic `GitForge` interface (`listTree`, `readBlob`, `headSha`; the release surface `listBranches`/`createBranch`/`listTags`/`createTag`/`openPullRequest`/`mergePullRequest` (with a `deleteBranch` flag to prune the merged branch)/`pullRequestForBranch`) plus its value types (`BranchRef`, `TagRef`, `PullRequestRef` carrying head/base, `PullRequestMergeMethod`), `GitForgeException` and the `listDecks` extension. Everything git itself has no notion of lives behind this.
 - `gitea_forge.dart` — Forgejo/Gitea adapter (one adapter: same REST surface). The only place provider-specific knowledge may live. The release ops map onto the REST endpoints (`branches`, `tags`, `pulls`, `pulls/{n}/merge`) through the same `_apiUri`/`_headers`/`_checkStatus` skeleton.
@@ -156,7 +160,7 @@ search (Phase 6) and asset deletion (§6.2, deliberately manual).
 - `git_cli.dart` / `git_cli_io.dart` / `git_cli_web.dart` (+ `_factory`) — the hardened native-`git` runner (§10.2), the only place in the tree that may spawn a process. `NativeGitCli` (io) builds a shell-free argv (user data as operands after `--end-of-options`), a genuinely closed environment — `includeParentEnvironment: false` plus an allowlist carrying only what a process needs to start, so no `GIT_TRACE_*` from the user's shell can write the token's `Authorization:` header to a trace and no `GIT_ASKPASS`/`GIT_SSH_COMMAND`/`GIT_CONFIG_PARAMETERS` can steer git (OQ-10), supplies the token via `GIT_CONFIG_*` never argv, caps output and enforces a timeout; `probe()` finds usable git (≥2.19) with the macOS xcode-select guard. The web half is an honest unavailable stub.
 - `asset_pool.dart` — The shared content-addressed pool (`repo:assets/<sha256>.<ext>`): SHA-256 naming, fetch-once cache, and re-hashing of every fetched blob — a hash-named path from an untrusted forge proves nothing until checked. `refFor`/`existing` are the save side: hash bytes to a ref, skip blobs already pooled.
 - `deck_repo_serializer.dart` — `buildDeckRepoFiles`: turns a deck into its repo file set — `deck.md` bytes plus the missing image blobs, images rewritten `mem:`→`repo:`. The exact inverse of the open path's `repo:`→`mem:`; video/audio are reported, not written as broken refs. Chart data gets its own file next to `deck.md` at the path its `source` names (`chartDataFilesOf` writing, `withRepoChartData` reading) — deliberately not in the content-addressed pool, since a hash path turns every edited cell into a new file instead of a diff.
-- `deck_mirror.dart` — `DeckMirror` interface + `DraftMirror`: the durable offline working copy a save falls back to. Text only, one draft per deck (`hasRealHistory == false`); native git history comes later.
+- `deck_mirror.dart` — `DeckMirror` interface + `DraftMirror`: the durable offline working copy a save falls back to. Text only, one draft per deck (`hasRealHistory == false`). `NativeGitMirror` is the other implementation: it makes real local commits (`hasRealHistory == true`) and serves the history dialog.
 - `draft_store.dart` / `draft_store_factory.dart` / `draft_store_io.dart` / `draft_store_web.dart` — the mirror's storage: files on desktop (`FileDraftStore`), the browser key/value store on web (`PrefsDraftStore`), picked by conditional import.
 - `outbox.dart` — `Outbox`/`PendingCommit`: the per-deck queue of not-yet-pushed saves, in `shared_preferences` so it survives restart. Carries the intent (deckDir, branch, message, `baseSha`, and an optional `forkFrom` so a work branch queued offline can be created on flush), never the bytes — the mirror holds those.
 - `sync_engine.dart` — `SyncEngine`: drains the outbox against the forge (`flush`/`flushDeck`), with `baseSha` conflict detection and content-based idempotency (a commit that already landed is skipped, not duplicated). When a queued commit carries a `forkFrom`, the flush creates its work branch (off `forkFrom`) if it is not there yet — so a review round that began offline still lands (D3). A `DeckFilePreparer` hook runs just before each commit — how `flushGit` pools an offline-added image into the reconnect commit; idempotency and deletes compare the deck-dir files only, not the pool blobs.
@@ -233,9 +237,6 @@ search (Phase 6) and asset deletion (§6.2, deliberately manual).
 - `presenter_fullscreen.dart` — Export selector: volledig scherm voor de presentatiemodus (desktop-venster of browser-API).
 - `presenter_fullscreen_io.dart` — Desktop: window_manager fullscreen (part of `presenter_fullscreen`).
 - `presenter_fullscreen_web.dart` — Web: browser-Fullscreen-API (part of `presenter_fullscreen`).
-- `runtime_flags.dart` — Export selector for platform-specific runtime detection.
-- `runtime_flags_io.dart` — Detects the flutter-test environment (part of `runtime_flags`).
-- `runtime_flags_web.dart` — No test detection on web (part of `runtime_flags`).
 
 ## `lib/theme/`
 
@@ -249,9 +250,12 @@ search (Phase 6) and asset deletion (§6.2, deliberately manual).
 
 ### `lib/l10n/translations/` (each `part of app_localizations.dart`)
 
-- `nl.dart` — Dutch (the source language).
-- `en.dart` — English. · `de.dart` — German. · `fr.dart` — French. · `es.dart` — Spanish.
-- `it.dart` — Italian. · `fy.dart` — Frisian. · `pap.dart` — Papiamento.
+One file per language, 31 in total. `nl.dart` is the source language; the other 30
+carry the translations and are kept in step by `make add-l10n` / `make l10n-check`:
+`en` (English), `de`, `fr`, `es`, `it`, `pt`, `pl`, `uk`, `el`, `da`, `sv`, `fi`,
+`cs`, `sk`, `sl`, `hr`, `hu`, `ro`, `bg`, `et`, `lv`, `lt`, `ga`, `mt`, `id`,
+`fy` (Frisian), `pap` (Papiamento), `gsw` (Swiss German), `la` (Latin) and
+`tlh` (Klingon).
 
 ## `lib/widgets/` — UI
 

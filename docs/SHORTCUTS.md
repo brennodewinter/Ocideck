@@ -45,6 +45,7 @@ Navigation:
 | `←` · `Page Up` | Previous slide |
 | `Enter` | Next slide (or jump, if a number was typed) |
 | digits, then `Enter` | Jump to that slide number |
+| `Backspace` | Erase the last digit of a typed slide number |
 | `Home` · `End` | First · last slide |
 | `G` | Slide-grid overview (arrows + `Enter` to jump) |
 
@@ -56,7 +57,7 @@ View & timing:
 | `Ctrl/Cmd + N` | Toggle **my notes** panel (recipient/course notes; local only, never on beamer) |
 | `S` | Move the presentation to another screen |
 | `B` · `W` | Black · white screen |
-| `K` | Set the target time / countdown (type `MMSS`, `Enter` to confirm, `0` = off) |
+| `K` | Set the target time / countdown (type `MMSS`, `Backspace` erases a digit, `Enter` to confirm, `0` = off) |
 | `R` | Reset the time & rehearsal run (elapsed and per-slide timings; the target stays) |
 | `A` | Auto-advance on/off |
 | `L` | Loop (restart after the last slide) on/off |
