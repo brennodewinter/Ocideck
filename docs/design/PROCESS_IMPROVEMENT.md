@@ -576,7 +576,7 @@ What is **hardcoded to one module** and must be generalised first:
 |---|---|---|
 | `infoSafetyRevealProvider` (`info_safety_provider.dart:56`) | a single global `Provider<bool>` | `moduleRevealProvider(ModuleId)` family |
 | 7 consumer call sites | each names the sec module | read by `ModuleId` |
-| `AddSlideDialog` (`:19`) | `bool revealSecurityModule` | `Set<ModuleId> revealed` |
+| `AddSlideDialog` (`:19`) | `bool revealInfoSafety` | `Set<ModuleId> revealed` |
 | `SlideCategory` (`slide.dart:49`) | closed 2-value enum | + `procesverbetering` |
 | `DeckTemplate.requiresSecurityModule` (`deck_template.dart:45`) | `bool` | `ModuleId? requiresModule` |
 | `_securityCommands` (`command_palette_actions.dart:127`) | hand-spliced at `:61` | contribution list keyed by module |

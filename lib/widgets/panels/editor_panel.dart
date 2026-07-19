@@ -56,7 +56,7 @@ class EditorPanel extends ConsumerWidget {
     final settings = ref.watch(settingsProvider);
     // Gate de informatieveiligheid-slidetypes in de TYPE-kiezer net als in
     // 'Slide toevoegen', zodat beide plekken exact dezelfde types aanbieden.
-    final secReveal = ref.watch(infoSafetyRevealProvider);
+    final revealed = ref.watch(infoSafetyRevealProvider);
 
     // Zoekpaden voor de afbeeldingencarousel: projectmap eerst, dan alle
     // bibliotheken als (recursief gescande) zoekwortels.
@@ -84,7 +84,7 @@ class EditorPanel extends ConsumerWidget {
             profiles: settings.themeProfiles,
             activeProfile: deck.themeProfile,
             defaultProfile: settings.themeProfile,
-            revealSecurityModule: secReveal,
+            revealInfoSafety: revealed,
             onTypeChanged: (newType) {
               if (newType == slide.type) return;
               update(_convertSlideType(slide, newType));

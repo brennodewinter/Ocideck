@@ -16,18 +16,17 @@ class AddSlideDialog extends StatefulWidget {
   /// pack provisioned). Gates the security slide types and their picker tab, so
   /// they stay hidden until the module is on (see `infoSafetyRevealProvider`,
   /// PENTEST_MIAUW §6). Off by default; the caller passes the provider's value.
-  final bool revealSecurityModule;
+  final bool revealInfoSafety;
 
-  const AddSlideDialog({super.key, this.revealSecurityModule = false});
+  const AddSlideDialog({super.key, this.revealInfoSafety = false});
 
   static Future<SlideType?> show(
     BuildContext context, {
-    bool revealSecurityModule = false,
+    bool revealInfoSafety = false,
   }) {
     return showDialog<SlideType>(
       context: context,
-      builder: (_) =>
-          AddSlideDialog(revealSecurityModule: revealSecurityModule),
+      builder: (_) => AddSlideDialog(revealInfoSafety: revealInfoSafety),
     );
   }
 
@@ -98,7 +97,7 @@ class _AddSlideDialogState extends State<AddSlideDialog> {
   /// [slideTypeMeta] so a new type shows up automatically.
   Iterable<SlideType> _availableTypes() => slideTypeMeta.keys.where(
     (t) =>
-        widget.revealSecurityModule ||
+        widget.revealInfoSafety ||
         t.category != SlideCategory.informatieveiligheid,
   );
 
