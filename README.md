@@ -14,7 +14,7 @@ Built with Flutter for macOS, Windows, Linux, and **web**.
 
 - **Structured slide editors** — dedicated editors per slide type: title, bullets, two-column bullets, bullets + image, single/two images, quote, table, section divider, image-only, video, audio, source code, charts, cockpit dashboards, interactive question (quiz) slides, animated timelines, and free-form Markdown.
 - **Source-code slides** — a "code sheet" with per-language syntax highlighting, stored as a fenced code block. Background, text colour and monospace font come from the style profile, with an optional syntax-colouring toggle (turn it off for a single-colour, CRT-terminal look). The code auto-sizes to fill the panel.
-- **Charts** — bar, horizontal bar, stacked bar, combo (bars + a line on a second axis), line, area, pie, donut, spider/radar, scatter, waterfall, and heatmap (doubles as a likelihood × impact risk matrix) charts rendered natively (preview, presenter, PDF, PPTX) and as self-contained SVG in the HTML export. Data is entered in an in-app grid or imported from CSV; the spec is stored as JSON in the Markdown, with optional linking to a CSV kept in a tidy `data/` directory. Optional min/max draw reference lines (bar/line/area/combo/waterfall) or fix the scale (radar); legend hover highlights a series, and line tooltips pick the dot under the cursor.
+- **Charts** — bar, horizontal bar, stacked bar, horizontal stacked bar, combo (bars + a line on a second axis), line, area, pie, donut, spider/radar, scatter, waterfall, and heatmap (doubles as a likelihood × impact risk matrix) charts rendered natively (preview, presenter, PDF, PPTX) and as self-contained SVG in the HTML export. Data is entered in an in-app grid or imported from CSV; the spec is stored as JSON in the Markdown, with optional linking to a CSV kept in a tidy `data/` directory. Optional min/max draw reference lines (bar/line/area/combo/waterfall) or fix the scale (radar); legend hover highlights a series, and line tooltips pick the dot under the cursor.
 - **Question slides (interactive quiz)** — multiple choice, true/false, multiple-correct, or ordering questions (tap the shuffled options into the right order), with the kind chosen in the editor. The answer pool is unlimited; a configurable number of options (default 4) is drawn at random each run. Optional answer-time countdown, an on-wrong policy (retry until correct, or reveal-and-continue), and an optional image with a pan-and-zoom detail view. Presenting blocks advancing until answered correctly; the audience window is interactive and stays in sync. The spec round-trips as a JSON block; answer state is session-only.
 - **Timeline slides** — turn a list of dated events into an animated timeline: a glowing accent spine with nodes and cards that alternate above/below (horizontal) or left/right (vertical), styled from the active profile. Layout is automatic (horizontal for short timelines, vertical for longer ones) or forced; animation is draw-in-on-open, step-by-step (one event per click, synced to the audience window), or none. Events are an ordinary Markdown list (`marker :: title :: description`), so the `.md` stays readable; layout and animation round-trip as `_class` tokens.
 - **Live preview** — see each slide rendered as you edit, with inline Markdown, footers, and TLP (Traffic Light Protocol) marking. Free-Markdown slides render fenced code with syntax highlighting, `$…$` / `$$…$$` LaTeX math, and Mermaid diagrams.
@@ -57,8 +57,8 @@ flutter run -d macos   # or -d windows / -d linux / -d chrome
 The `Makefile` is the entry point for all quality checks. Run `make help` for the full list.
 
 ```sh
-make check        # format check + static analysis + full test suite (the quality gate)
-make check-full   # check + dependency freshness report
+make check        # format + analysis + conventions + method length + dead code + tests & coverage
+make check-full   # check + licences + SBOM freshness + web hardening + dependency report
 make format       # auto-format all Dart code
 make analyze      # flutter analyze only
 make test         # full test suite only
@@ -119,7 +119,7 @@ package format — is documented in
 | --- | --- |
 | [Architecture](docs/ARCHITECTURE.md) | How the code fits together (for contributors) |
 | [Build & release](docs/BUILD.md) | Building from source and producing distributables |
-| [Changelog](CHANGELOG.md) | Notable changes per version |
+| [Changelog](CHANGELOG.md) | Notable changes (nothing is released yet) |
 | [Checks & CI](docs/CHECKS.md) | Every automated check, what it covers, and how each is enforced |
 | [Contributing](CONTRIBUTING.md) | Setup, the quality gate, and how to propose changes |
 | [File format](docs/FILE_FORMAT.md) | The Marp Markdown, front matter, sidecars, the `.ocideck` package, and the `.ocideckstyle` style profile |
@@ -127,7 +127,7 @@ package format — is documented in
 | [Licence compliance](docs/LICENSE_COMPLIANCE.md) | Open-source policy and the `make licenses` check |
 | [SBOM](docs/SBOM.md) | The machine-readable Software Bill of Materials and its CRA mapping |
 | [Security policy](SECURITY.md) | How to report a vulnerability |
-| [Source map](docs/SOURCE_MAP.md) | One-line description of every file under `lib/` |
+| [Source map](docs/SOURCE_MAP.md) | An index of the files under `lib/`, grouped per directory |
 | [Third-party notices](THIRD_PARTY_NOTICES.md) | Bundled components and their licences |
 | [User Guide](docs/USER_GUIDE.md) | Using the app: slide types, charts, presenting, exporting, theming, the privacy check and redaction, and the information-security (pentest) module |
 
@@ -135,8 +135,9 @@ package format — is documented in
 
 The design rationale and chosen architecture, kept separate from the
 current-state docs above. The **OciWacht**, **pentest-reporting (MIAUW)**
-and **AI-assistance** designs are now **implemented** (see the User Guide and the
-Features list); Collaboration and Git storage remain forward-looking proposals.
+**AI-assistance** and **Git storage** designs are now **implemented** (see the
+User Guide and the Features list); Collaboration remains a forward-looking
+proposal.
 
 | Document | Status | What it covers |
 | --- | --- | --- |
@@ -145,7 +146,7 @@ Features list); Collaboration and Git storage remain forward-looking proposals.
 | [AI assistance](docs/design/AI_ASSIST.md) | **Implemented** | Optional, privacy-first AI assistance (finding text drafting and image tagging) |
 | [Agentic build plan](docs/design/AGENTIC_BUILD_PLAN.md) | Executed | How the pentest and AI feature set was built with autonomous agents |
 | [Collaboration](docs/design/COLLABORATION.md) | Proposal | Real-time co-authoring, presenting, and calls |
-| [Git storage](docs/design/GIT_STORAGE.md) | Proposal | Decks in a git repository: history, releases as tags, review as pull requests |
+| [Git storage](docs/design/GIT_STORAGE.md) | **Implemented** (merge open) | Decks in a git repository: history, releases as tags, review as pull requests |
 
 ## Contributing
 

@@ -8,14 +8,15 @@ Welcome to the OciDeck project! We appreciate your interest in contributing. Thi
 
 Before creating a new issue, please:
 1. Search existing issues to avoid duplicates
-2. Check if you're using the latest version of OciDeck
+2. Check whether you are on the latest `main` — there are no released versions
 3. Include detailed information about your environment and steps to reproduce
 
 When reporting bugs or requesting features:
 - Use clear and descriptive titles
 - Provide detailed descriptions with examples when possible
 - Include screenshots or screen recordings where relevant
-- Specify your operating system, Flutter/Dart versions, and OciDeck version
+- Specify your operating system, your Flutter/Dart versions, and the commit hash
+  you are on (the app has no version number to read off)
 
 ### Pull Request Process
 
@@ -31,7 +32,8 @@ When reporting bugs or requesting features:
 ### Code Style and Conventions
 
 Our codebase follows strict conventions:
-- Dart formatting: `dart format` (ensured by CI)
+- Dart formatting: `dart format` (enforced by `make format-check`, which you run
+  locally — the CI workflows are defined but no runner executes them)
 - No raw `print()` statements, use logging instead  
 - Strict type checking with `strict-casts`, `strict-raw-types`, `strict-inference`
 - Layering rules: models don't import UI layers
@@ -41,7 +43,8 @@ Our codebase follows strict conventions:
 
 All code changes should include:
 - Unit tests for new functionality
-- Integration tests where appropriate  
+- Widget tests where behaviour is visible in the UI (there is no
+  `integration_test/` suite)
 - Coverage maintained at or above the enforced floor (78% line coverage, checked by `make coverage`)
 - Test the specific behavior being changed
 
@@ -115,11 +118,14 @@ categorized by:
 
 ## Release Process
 
-1. Changes are merged to the main branch through pull requests
-2. Version bumps follow semantic versioning (SemVer)
-3. Release candidates are tested internally before final release  
-4. Documentation is updated in conjunction with releases
-5. Assets and binaries are built for all supported platforms
+**There is no release process yet, because there has been no release.** `git tag`
+is empty and the version sits at `0.2.0+1`. Changes are merged to `main` through
+pull requests and that is the whole of it; you run what you build.
+
+The release workflow in `.github/workflows/` is written but has never fired — it
+triggers on a `v*` tag. When the project does adopt a release scheme, this
+section and [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) are where it gets written
+down.
 
 ## Code of Conduct
 
@@ -131,7 +137,9 @@ All contributors are expected to follow our code of conduct:
 
 ## Contact
 
-For questions about contributing, contact the project maintainers through the repository's issue tracker or the appropriate communication channels.
+For questions about contributing, open an issue in the Forgejo tracker. That is
+the only channel; security reports are the exception and follow
+[SECURITY.md](../SECURITY.md).
 
 ## License
 

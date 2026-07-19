@@ -38,14 +38,14 @@ optimisation.
 - Slides render as native Flutter widgets for preview and presentation.
 - Charts use the `fl_chart` library; the categorical palette is **10 colours**
   and cycles (`index % 10`) beyond that (`lib/models/chart.dart:10`), and legend
-  tiles lay out in **≤ 6 columns × 1–3 rows** (`marp_html_service_charts.dart:121`).
+  tiles lay out in **≤ 6 columns × 1–3 rows** (`marp_html_service_charts.dart`, `maxColumns`).
 - Mermaid diagrams render to sanitised inline SVG via a shared WebView.
 - Video plays through a shared media host so only one heavy player is live.
 
 ## Export
 
 - PDF/PPTX exports rasterize each slide to a PNG at a default **1920 × 1080**
-  (16:9) target (`lib/services/slide_rasterizer.dart:37,48`); rasterization cost
+  (16:9) target (`lib/services/slide_rasterizer.dart`, `logicalSize` and `targetWidth`); rasterization cost
   scales with slide count and per-slide complexity.
 - HTML export pre-renders charts to inline SVG in Dart and inlines the vendored
   JS/CSS, producing a self-contained file (see measured bundle sizes below).
@@ -58,9 +58,9 @@ timeouts live at the call sites:
 
 | Operation | Cap / timeout | Source |
 |---|---|---|
-| Deck markdown fetch/open | **32 MiB** | `lib/services/file_service.dart:731` |
-| Package (`.ocideck`/zip) | **512 MiB** | `lib/services/file_service.dart:732` |
-| Style profile / logo | **16 MiB / 8 MiB** | `lib/services/file_service.dart:742` |
+| Deck markdown fetch/open | **32 MiB** | `file_service.dart`, `maxDeckMarkdownBytes` |
+| Package (`.ocideck`/zip) | **512 MiB** | `file_service.dart`, `maxPackageBytes` |
+| Style profile / logo | **16 MiB / 8 MiB** | `file_service.dart`, `maxStyleProfileBytes` / `maxStyleProfileLogoBytes` |
 | CVE search fetch | **2 MiB** | `lib/services/cve_transport_io.dart:17` |
 | Default fetch timeout | **30 s** | `lib/services/parts/file_service_net.dart:63` |
 | Proxy/fallback timeout | **120 s** | `lib/services/parts/file_service_net.dart:49` |
@@ -75,8 +75,8 @@ hang the app:
 | Scan | Ceiling | Source |
 |---|---|---|
 | Image-reference scan | **20 000** files, depth **32** | `lib/services/image_reference_service.dart:24,28` |
-| Deck listing | **5 000** files, depth **32** | `lib/services/file_service.dart:271` |
-| Content search | **20 000** files, depth **8** | `lib/services/file_service.dart:376` |
+| Deck listing | **5 000** files, depth **32** | `file_service.dart`, `listDecks` defaults |
+| Content search | **20 000** files, depth **8** | `file_service.dart`, `searchDecks` defaults |
 
 **Optimisation tips:** compress high-resolution photos before import; keep chart
 series modest (the palette cycles after 10); split very large decks; and keep
@@ -84,7 +84,7 @@ project folders reasonably shallow.
 
 ## Autosave & recovery
 
-- Autosave ticks every **25 s** (`lib/state/tabs_provider.dart:192`), writing an
+- Autosave ticks every **25 s** (`lib/state/tabs_provider.dart`, `_autosaveInterval`), writing an
   atomic snapshot so a crash never truncates the open file.
 - Recovery snapshots are retained for **7 days** by default
   (`lib/services/recovery_service.dart:134`), then pruned.
@@ -93,9 +93,9 @@ project folders reasonably shallow.
 
 | Ratchet | Value | Source |
 |---|---|---|
-| Max file length | **1000 lines** | `tool/check_conventions.dart:67` |
+| Max file length | **1000 lines** | `tool/check_conventions.dart`, `maxFileLines` |
 | Max method/function length | **150 lines** | `tool/check_method_length.dart:26` |
-| Coverage floor | **78 %** line coverage | `Makefile:103,107` |
+| Coverage floor | **78 %** line coverage | `Makefile`, the `coverage` target |
 
 ## Measured figures
 
@@ -119,9 +119,12 @@ where a deck actually uses diagrams or math.
 ### Codebase & test suite
 | Item | Value |
 |---|---|
-| `lib/` Dart files / lines | ~484 files, ~177 000 lines |
-| Test files | ~316 |
-| `test(` / `testWidgets(` cases | ~2 140 / ~696 |
+| `lib/` Dart files / lines | ~545 files, ~201 000 lines |
+| Test files | ~356 |
+| `test(` / `testWidgets(` cases | ~2 510 / ~750 |
+
+Counted on 2026-07-19. These grow with every feature; treat them as an order of
+magnitude, not a current figure.
 
 ### Measured timing
 A single small test (`flutter test test/tlp_test.dart`, 15 cases) completes in

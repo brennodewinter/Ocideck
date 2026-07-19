@@ -38,7 +38,7 @@ be password-encrypted.
 **`.ocideckstyle`** — a shareable theme/style profile file.
 
 **Forge** — a git hosting service OciDeck can talk to over REST (Gitea/Forgejo,
-GitLab). The git backend is "WebDAV with version history" — the same source shape
+GitHub, GitLab). The git backend is "WebDAV with version history" — the same source shape
 plus commits, tags, and a version chooser.
 
 **Fetch-proxy** — a small optional server-side endpoint (`fetch-proxy?url=…`) the
@@ -48,7 +48,8 @@ applies the same SSRF rules as NetGuard. See [HOSTING.md](HOSTING.md).
 ## Privacy & classification
 
 **OciWacht** — OciDeck's built-in privacy scanner. It detects personal data
-(email, phone, IBAN, BSN and ~30 EU national IDs, addresses, names, secrets) and
+(email, phone, IBAN, BSN and national IDs for 13 EU member states plus two UK
+ones, addresses, names, secrets) and
 can flag or redact it. Name detection is deliberately not NER (see
 [design/OCIWACHT.md](design/OCIWACHT.md)).
 

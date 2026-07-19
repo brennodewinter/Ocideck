@@ -117,7 +117,8 @@ OciDeck can scan your deck for personal and sensitive data and either flag it or
 redact it. It detects, among others:
 
 - Email addresses, phone numbers, postal addresses and postcodes
-- IBAN/bank numbers (checksum-validated) and BSN / ~30 EU national identifiers
+- IBAN/bank numbers (checksum-validated), BSN, and national identifiers for 13
+  EU member states plus two UK ones
 - Secrets (API tokens, private keys, JWTs, plaintext passwords)
 - GDPR Article 9 special-category keywords
 - Structural leaks such as tokens embedded in URLs or local file paths

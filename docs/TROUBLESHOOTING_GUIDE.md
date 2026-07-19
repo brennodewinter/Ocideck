@@ -44,8 +44,7 @@ This guide addresses frequently encountered problems, their causes, and step-by-
 
 2. **Memory Management**:
    - Close other applications to free system resources  
-   - Break large presentations into smaller chunks if needed
-   - Try exporting individual slides instead of full decks
+   - Break large presentations into smaller decks if needed
 
 3. **Format-Specific Issues**:
    - For PDF/PPTX: Ensure no complex charts or media causing rendering issues  
@@ -99,7 +98,8 @@ This guide addresses frequently encountered problems, their causes, and step-by-
 3. **Privacy Scan Issues**:
    - Review privacy disposition settings for the deck/individual slides  
    - Check that redaction markers are properly formatted (`[[...]]`)
-   - Adjust sensitivity thresholds in security preferences
+   - A rule that keeps flagging something you accept can be switched off
+     individually — *Deze regel nooit meer melden* on the finding itself
 
 ### Installation and Setup Problems
 
@@ -129,8 +129,9 @@ This guide addresses frequently encountered problems, their causes, and step-by-
 ### Debugging Tools and Logs
 
 1. **Application Logging**: 
-   - Enable verbose logging in preferences for detailed diagnostics  
-   - Check application logs in system console or log files
+   - OciDeck logs warnings and errors to the platform debug console via
+     `dart:developer`. There is no verbose-logging preference and no log file
+     on disk — if you need the output, run a debug build from a terminal.
 
 2. **Error Analysis**:
    - Capture error messages with stack traces when possible
@@ -166,7 +167,7 @@ This guide addresses frequently encountered problems, their causes, and step-by-
 
 2. **Branch/Tag Management**: 
    - Ensure branch names match expectations in configuration
-   - Verify that release tags haven't been moved or deleted
+   - If your deck repository uses tags, check they haven't been moved or deleted
 
 ### File System Integration  
 
@@ -223,30 +224,20 @@ When submitting bug reports or support requests:
 4. Mention system specifications and environment details
 5. Specify whether the problem occurs with all files or just specific ones
 
-## Community Resources
+## Where to report a problem
 
-### Support Channels
-
-1. **Official Forums**: 
-   - User discussion board for general questions
-   - Developer discussions for technical issues  
-
-2. **Documentation Sources**:
-   - Official API documentation  
-   - Troubleshooting articles and guides
-   - Release notes with known issue tracking
-
-3. **Community Help**:
-   - Peer support through user groups or communities  
-   - Contributing guidelines for reporting bugs effectively
+The Forgejo issue tracker is the only channel. There is no forum, no mailing
+list, no chat and no separate documentation site — the `docs/` directory in this
+repository is the documentation. Security issues follow a different route; see
+[SECURITY.md](../SECURITY.md).
 
 ## Prevention Best Practices
 
 ### Regular Maintenance
 
 1. **System Updates**: 
-   - Keep OciDeck updated to latest stable version
-   - Apply system and toolchain updates regularly  
+   - Apply system and toolchain updates regularly. (OciDeck itself has no
+     released versions yet and no update mechanism — you run what you built.)
 
 2. **Backup Strategies**:
    - Implement regular backup of important presentations
@@ -276,4 +267,5 @@ When submitting bug reports or support requests:
    - Include relevant logs and environment information  
    - Follow project contribution guidelines for issue tracking
 
-This guide should help users resolve most common problems they encounter while using OciDeck. For persistent or complex issues, please consult the official documentation or contact support channels.
+This guide should help you resolve the most common problems. For anything that
+persists, open an issue in the Forgejo tracker with the details listed above.
