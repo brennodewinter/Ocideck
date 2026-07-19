@@ -341,11 +341,17 @@ class Deck {
     );
   }
 
-  /// True when this deck carries any Informatieveiligheid slide type (finding,
-  /// findingsSummary, checklist, scopeMatrix, signOff — see
-  /// [SlideCategory.informatieveiligheid]). Drives the one-time
-  /// "enable the module" discovery prompt when such a deck is opened while the
-  /// module is off; the slides render regardless (MODUS-REGEL).
-  bool get hasSecuritySlides =>
-      slides.any((s) => s.type.category == SlideCategory.informatieveiligheid);
+  /// Index of the first Informatieveiligheid slide (finding, findingsSummary,
+  /// checklist, scopeMatrix, signOff — see [SlideCategory.informatieveiligheid]),
+  /// or -1 when there is none. The discovery prompt carries this index so the
+  /// user can jump straight to the slide the message is about and check for
+  /// themselves before deciding to switch the module on.
+  int get firstSecuritySlideIndex => slides.indexWhere(
+    (s) => s.type.category == SlideCategory.informatieveiligheid,
+  );
+
+  /// True when this deck carries any Informatieveiligheid slide type. Drives the
+  /// one-time "enable the module" discovery prompt when such a deck is opened
+  /// while the module is off; the slides render regardless (MODUS-REGEL).
+  bool get hasSecuritySlides => firstSecuritySlideIndex >= 0;
 }
