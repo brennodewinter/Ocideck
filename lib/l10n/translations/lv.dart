@@ -1782,6 +1782,16 @@ const _dutchSourceLv = {
 const _dutchSourceAddLv = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'dzimšanas datums, pasta indekss un dzimums kopā — šie trīs parasti norāda uz vienu personu, arī bez vārda',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Šī servera sertifikāts nav uzticams. Pašmitinātā servera to var apskatīt un uzticēties tam sadaļā Iestatījumi → Krātuve.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Šī forge sertifikāts nav uzticams. Pašmitinātā forge to var apskatīt un uzticēties tam sadaļā Iestatījumi → Krātuve.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Šī endpoint sertifikāts nav uzticams. Pašmitinātā endpoint to var apskatīt un uzticēties tam sadaļā Iestatījumi → Krātuve.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'forge sertifikāts nav uzticams — pašparakstīts, beidzies vai izdots citam nosaukumam.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'endpoint sertifikāts nav uzticams — pašparakstīts, beidzies vai izdots citam nosaukumam.',
   'creditcardnummer': 'kredītkartes numurs',
   'beveiligingscode van een creditcard': 'kartes drošības kods (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

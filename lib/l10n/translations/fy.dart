@@ -741,6 +741,16 @@ const _dutchSourceFy = {
 const _dutchSourceAddFy = {
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'bertedatum, postkoade en geslacht tegearre — dy trije wize meastal ien persoan oan, ek sûnder namme',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'It sertifikaat fan dizze server wurdt net fertroud. By in sels hoste server kinst it besjen en fertrouwe by Ynstellingen → Opslach.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'It sertifikaat fan dizze forge wurdt net fertroud. By in sels hoste forge kinst it besjen en fertrouwe by Ynstellingen → Opslach.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'It sertifikaat fan dizze endpoint wurdt net fertroud. By in sels hoste endpoint kinst it besjen en fertrouwe by Ynstellingen → Opslach.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'It sertifikaat fan de forge wurdt net fertroud — sels-ûndertekene, ferrûn, of op in oare namme steld.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'It sertifikaat fan de endpoint wurdt net fertroud — sels-ûndertekene, ferrûn, of op in oare namme steld.',
   'creditcardnummer': 'kredytkaartnûmer',
   'beveiligingscode van een creditcard': 'befeiligingskoade fan in kredytkaart',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

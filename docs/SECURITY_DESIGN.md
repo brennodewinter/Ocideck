@@ -143,6 +143,10 @@ SSRF-pinned transports.
   deliberate: a renewal and an attacker are indistinguishable from here, so the
   decision belongs to the person who knows the server.
 
+  All three network sources honour a pin — WebDAV, S3 and git — and each of
+  their panels can capture one, through a single shared confirmation step: a
+  security decision copied three times is two copies too many.
+
   `test/cert_pinning_test.dart` runs against a real TLS server with a real
   self-signed certificate (generated per run with `openssl`; it is not in the
   repo, and the suite reports itself skipped when `openssl` is absent). It

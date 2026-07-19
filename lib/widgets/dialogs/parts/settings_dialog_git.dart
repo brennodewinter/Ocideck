@@ -125,6 +125,15 @@ extension _SettingsGit on _SettingsDialogState {
               : const Icon(Icons.wifi_tethering, size: 16),
           label: Text(l10n.d('Verbinding testen')),
         ),
+        if (form.testCertRejected)
+          Padding(
+            padding: const EdgeInsets.only(top: 6),
+            child: TextButton.icon(
+              onPressed: () => _trustGitCertificate(form),
+              icon: const Icon(Icons.verified_user_outlined, size: 16),
+              label: Text(l10n.d('Certificaat bekijken')),
+            ),
+          ),
         if (form.testOk != null && message != null)
           Padding(
             padding: const EdgeInsets.only(top: 10),
@@ -170,10 +179,12 @@ extension _SettingsGit on _SettingsDialogState {
     final forge = createGitForge(config: config, token: form.token.field.text);
     RepoProbe? probe;
     String? error;
+    var certRejected = false;
     try {
       probe = await forge.probe();
     } on GitForgeException catch (e) {
       error = _gitErrorText(l10n, e);
+      certRejected = e.kind == GitForgeError.tls;
     } catch (e, st) {
       logError('SettingsDialog: git-verbindingstest', e, st);
       error = l10n.d('Verbinding mislukt');
@@ -186,7 +197,26 @@ extension _SettingsGit on _SettingsDialogState {
       form.testOk = error == null;
       form.testWarning = probe?.canPush == false;
       form.testMessage = error ?? _gitProbeSummary(l10n, form, probe!);
+      form.testCertRejected = certRejected;
     });
+  }
+
+  /// Laat het certificaat zien en pin het als de gebruiker het vertrouwt.
+  Future<void> _trustGitCertificate(GitForm form) async {
+    final config = form.config;
+    final origin = config.origin;
+    if (origin == null) return;
+    final fingerprint = await _confirmCertificate(
+      origin: origin,
+      host: config.host,
+      allowPrivate: config.trustedInternal,
+    );
+    if (fingerprint == null || !mounted) return;
+    _rebuild(() {
+      form.pinnedCertSha256 = fingerprint;
+      form.clearTestResult();
+    });
+    await _testGitConnection(form);
   }
 
   /// Vat samen wat de test opleverde, en neem de standaardbranch over.
@@ -242,6 +272,9 @@ extension _SettingsGit on _SettingsDialogState {
       ),
       // Bereikbaar, maar de forge zelf gaf een fout — iets anders dan
       // "verbinding mislukt", en het vraagt om iets anders van de gebruiker.
+      GitForgeError.tls => l10n.d(
+        'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.',
+      ),
       GitForgeError.server => l10n.d(
         'De forge gaf een fout. Probeer het later opnieuw.',
       ),

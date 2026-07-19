@@ -1811,6 +1811,16 @@ const _dutchSourceEl = {
 const _dutchSourceAddEl = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'ημερομηνία γέννησης, ταχυδρομικός κώδικας και φύλο μαζί — αυτά τα τρία συνήθως προσδιορίζουν ένα άτομο, ακόμη και χωρίς όνομα',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Το πιστοποιητικό αυτού του διακομιστή δεν είναι έμπιστο. Σε αυτο-φιλοξενούμενο διακομιστή μπορείς να το δεις και να το εμπιστευτείς στις Ρυθμίσεις → Αποθήκευση.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Το πιστοποιητικό αυτού του forge δεν είναι έμπιστο. Σε αυτο-φιλοξενούμενο forge μπορείς να το δεις και να το εμπιστευτείς στις Ρυθμίσεις → Αποθήκευση.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Το πιστοποιητικό αυτού του τελικού σημείου δεν είναι έμπιστο. Σε αυτο-φιλοξενούμενο τελικού σημείου μπορείς να το δεις και να το εμπιστευτείς στις Ρυθμίσεις → Αποθήκευση.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Το πιστοποιητικό του forge δεν είναι έμπιστο — αυτο-υπογεγραμμένο, ληγμένο ή εκδοθέν σε άλλο όνομα.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Το πιστοποιητικό του τελικού σημείου δεν είναι έμπιστο — αυτο-υπογεγραμμένο, ληγμένο ή εκδοθέν σε άλλο όνομα.',
   'creditcardnummer': 'αριθμός πιστωτικής κάρτας',
   'beveiligingscode van een creditcard': 'κωδικός ασφαλείας κάρτας (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

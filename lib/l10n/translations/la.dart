@@ -1799,6 +1799,16 @@ const _dutchSourceLa = {
 const _dutchSourceAddLa = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'dies natalis, numerus postalis et sexus simul — haec tria plerumque unam personam designant, etiam sine nomine',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Testimonium huius servitoris non creditur. In servitoris proprio id inspicere et ei credere potes apud Optiones → Repositorium.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Testimonium huius forge non creditur. In forge proprio id inspicere et ei credere potes apud Optiones → Repositorium.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Testimonium huius endpoint non creditur. In endpoint proprio id inspicere et ei credere potes apud Optiones → Repositorium.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Testimonium forge non creditur — a se signatum, exspiratum, vel alii nomini datum.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Testimonium endpoint non creditur — a se signatum, exspiratum, vel alii nomini datum.',
   'creditcardnummer': 'numerus chartae creditoriae',
   'beveiligingscode van een creditcard': 'codex securitatis chartae',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

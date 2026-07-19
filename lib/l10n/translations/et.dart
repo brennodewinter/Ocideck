@@ -1774,6 +1774,16 @@ const _dutchSourceEt = {
 const _dutchSourceAddEt = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'sünnikuupäev, sihtnumber ja sugu koos — need kolm osutavad tavaliselt ühele inimesele, ka ilma nimeta',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Selle serveri sertifikaati ei usaldata. Ise majutatud serveri puhul saad seda vaadata ja usaldada jaotises Seaded → Salvestusruum.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Selle forge sertifikaati ei usaldata. Ise majutatud forge puhul saad seda vaadata ja usaldada jaotises Seaded → Salvestusruum.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Selle endpoint sertifikaati ei usaldata. Ise majutatud endpoint puhul saad seda vaadata ja usaldada jaotises Seaded → Salvestusruum.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'forge sertifikaati ei usaldata — ise allkirjastatud, aegunud või välja antud teisele nimele.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'endpoint sertifikaati ei usaldata — ise allkirjastatud, aegunud või välja antud teisele nimele.',
   'creditcardnummer': 'krediitkaardi number',
   'beveiligingscode van een creditcard': 'kaardi turvakood (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

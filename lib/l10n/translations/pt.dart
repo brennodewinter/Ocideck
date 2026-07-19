@@ -1813,6 +1813,16 @@ const _dutchSourcePt = {
 const _dutchSourceAddPt = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'data de nascimento, código postal e sexo em conjunto — esses três costumam identificar uma só pessoa, mesmo sem nome',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'O certificado deste servidor não é fidedigno. Num servidor próprio podes vê-lo e escolher confiar nele em Definições → Armazenamento.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'O certificado deste forge não é fidedigno. Num forge próprio podes vê-lo e escolher confiar nele em Definições → Armazenamento.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'O certificado deste endpoint não é fidedigno. Num endpoint próprio podes vê-lo e escolher confiar nele em Definições → Armazenamento.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'O certificado do forge não é fidedigno — autoassinado, expirado ou emitido para outro nome.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'O certificado do endpoint não é fidedigno — autoassinado, expirado ou emitido para outro nome.',
   'creditcardnummer': 'número de cartão de crédito',
   'beveiligingscode van een creditcard': 'código de segurança do cartão (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

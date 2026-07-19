@@ -740,6 +740,16 @@ const _dutchSourcePap = {
 const _dutchSourceAddPap = {
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'fecha di nasementu, kódigo postal i sekso huntu — e tres ei generalmente ta indiká un solo persona, asta sin nòmber',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'E sertifikado di e servidor aki no ta konfiá. Riba un servidor propio bo por wak e i konfia e na Konfigurashon → Almasenamentu.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'E sertifikado di e forge aki no ta konfiá. Riba un forge propio bo por wak e i konfia e na Konfigurashon → Almasenamentu.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'E sertifikado di e endpoint aki no ta konfiá. Riba un endpoint propio bo por wak e i konfia e na Konfigurashon → Almasenamentu.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'E sertifikado di e forge no ta konfiá — outo-firmá, vensí, of pone na un otro nòmber.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'E sertifikado di e endpoint no ta konfiá — outo-firmá, vensí, of pone na un otro nòmber.',
   'creditcardnummer': 'number di karchi di krédito',
   'beveiligingscode van een creditcard': 'kódigo di siguridat di karchi',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

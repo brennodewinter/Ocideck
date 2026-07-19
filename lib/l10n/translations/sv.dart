@@ -1782,6 +1782,16 @@ const _dutchSourceSv = {
 const _dutchSourceAddSv = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'födelsedatum, postnummer och kön tillsammans — de tre pekar oftast ut en enda person, även utan namn',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Certifikatet för denna server är inte betrott. På en egen server kan du visa det och välja att lita på det under Inställningar → Lagring.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Certifikatet för denna forge är inte betrott. På en egen forge kan du visa det och välja att lita på det under Inställningar → Lagring.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Certifikatet för denna endpoint är inte betrott. På en egen endpoint kan du visa det och välja att lita på det under Inställningar → Lagring.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Certifikatet för forge är inte betrott — självsignerat, utgånget eller utfärdat till ett annat namn.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Certifikatet för endpoint är inte betrott — självsignerat, utgånget eller utfärdat till ett annat namn.',
   'creditcardnummer': 'kreditkortsnummer',
   'beveiligingscode van een creditcard': 'kortets säkerhetskod (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

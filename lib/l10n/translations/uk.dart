@@ -1801,6 +1801,16 @@ const _dutchSourceUk = {
 const _dutchSourceAddUk = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'дата народження, поштовий індекс і стать разом — ці три зазвичай вказують на одну особу, навіть без імені',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Сертифікат цього сервера не є довіреним. На власному сервера ви можете переглянути його та довіритися йому в Налаштування → Сховище.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Сертифікат цього forge не є довіреним. На власному forge ви можете переглянути його та довіритися йому в Налаштування → Сховище.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Сертифікат цього кінцевої точки не є довіреним. На власному кінцевої точки ви можете переглянути його та довіритися йому в Налаштування → Сховище.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Сертифікат forge не є довіреним — самопідписаний, прострочений або виданий на інше ім\'я.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Сертифікат кінцевої точки не є довіреним — самопідписаний, прострочений або виданий на інше ім\'я.',
   'creditcardnummer': 'номер кредитної картки',
   'beveiligingscode van een creditcard': 'код безпеки картки (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

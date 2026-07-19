@@ -1787,6 +1787,16 @@ const _dutchSourceGsw = {
 const _dutchSourceAddGsw = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'Geburtsdatum, Poschtleitzahl und Gschlächt zäme — die drü zeige meischtens uf ei Person, au ohni Name',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Em Zertifikat vo däm Server wird nid vertrout. Bi mene sälber ghoschtete Server chasch es under Istellige → Spycher aluege und ihm vertroue.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Em Zertifikat vo däm Forge wird nid vertrout. Bi mene sälber ghoschtete Forge chasch es under Istellige → Spycher aluege und ihm vertroue.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Em Zertifikat vo däm endpoint wird nid vertrout. Bi mene sälber ghoschtete endpoint chasch es under Istellige → Spycher aluege und ihm vertroue.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Em Zertifikat vom Forge wird nid vertrout — sälbersigniert, abgloffe, oder uf en andere Name usgstellt.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Em Zertifikat vom endpoint wird nid vertrout — sälbersigniert, abgloffe, oder uf en andere Name usgstellt.',
   'creditcardnummer': 'Kreditcharte-Nummere',
   'beveiligingscode van een creditcard': 'Charteprüefnummere (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

@@ -1758,6 +1758,16 @@ const _dutchSourceTlh = {
 const _dutchSourceAddTlh = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'boghDIS, Sep mI\', ghaH je — wej vam wa\' nuv \'ang, pong Hutlh\'a\'',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'pat teywI\' voqlu\'be\'. pat Daghajbogh, Settings → Storage-Daq yIlegh \'ej yIvoq.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'forge teywI\' voqlu\'be\'. forge Daghajbogh, Settings → Storage-Daq yIlegh \'ej yIvoq.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'endpoint teywI\' voqlu\'be\'. endpoint Daghajbogh, Settings → Storage-Daq yIlegh \'ej yIvoq.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'forge teywI\' voqlu\'be\' — ngoq\'egh, tlhue\'pu\', ghap latlh pong.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'endpoint teywI\' voqlu\'be\' — ngoq\'egh, tlhue\'pu\', ghap latlh pong.',
   'creditcardnummer': 'HuchQeD mI\'',
   'beveiligingscode van een creditcard': 'HuchQeD Hurgh mI\'',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

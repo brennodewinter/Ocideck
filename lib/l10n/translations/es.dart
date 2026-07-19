@@ -737,6 +737,16 @@ const _dutchSourceEs = {
 const _dutchSourceAddEs = {
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'fecha de nacimiento, código postal y sexo juntos: esos tres suelen señalar a una sola persona, incluso sin nombre',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'El certificado de este servidor no es de confianza. En un servidor autoalojado puedes verlo y confiar en él en Ajustes → Almacenamiento.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'El certificado de este forge no es de confianza. En un forge autoalojado puedes verlo y confiar en él en Ajustes → Almacenamiento.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'El certificado de este punto de conexión no es de confianza. En un punto de conexión autoalojado puedes verlo y confiar en él en Ajustes → Almacenamiento.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'El certificado del forge no es de confianza: autofirmado, caducado o emitido a otro nombre.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'El certificado del punto de conexión no es de confianza: autofirmado, caducado o emitido a otro nombre.',
   'creditcardnummer': 'número de tarjeta de crédito',
   'beveiligingscode van een creditcard':
       'código de seguridad de la tarjeta (CVV)',

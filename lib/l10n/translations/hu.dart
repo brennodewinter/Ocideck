@@ -1787,6 +1787,16 @@ const _dutchSourceHu = {
 const _dutchSourceAddHu = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'születési dátum, irányítószám és nem együtt — ez a három rendszerint egyetlen személyre mutat, név nélkül is',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Ennek a kiszolgáló tanúsítványa nem megbízható. Saját üzemeltetésű kiszolgáló esetén megtekintheted és megbízhatsz benne a Beállítások → Tárhely alatt.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Ennek a forge tanúsítványa nem megbízható. Saját üzemeltetésű forge esetén megtekintheted és megbízhatsz benne a Beállítások → Tárhely alatt.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Ennek a endpoint tanúsítványa nem megbízható. Saját üzemeltetésű endpoint esetén megtekintheted és megbízhatsz benne a Beállítások → Tárhely alatt.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'A forge tanúsítványa nem megbízható — önaláírt, lejárt, vagy más névre szól.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'A endpoint tanúsítványa nem megbízható — önaláírt, lejárt, vagy más névre szól.',
   'creditcardnummer': 'bankkártyaszám',
   'beveiligingscode van een creditcard': 'kártya biztonsági kódja (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

@@ -1801,6 +1801,16 @@ const _dutchSourceRo = {
 const _dutchSourceAddRo = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'data nașterii, codul poștal și sexul împreună — aceste trei indică de obicei o singură persoană, chiar și fără nume',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Certificatul acestui server nu este de încredere. Pe un server propriu îl poți vedea și îi poți acorda încredere în Setări → Stocare.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Certificatul acestui forge nu este de încredere. Pe un forge propriu îl poți vedea și îi poți acorda încredere în Setări → Stocare.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Certificatul acestui endpoint nu este de încredere. Pe un endpoint propriu îl poți vedea și îi poți acorda încredere în Setări → Stocare.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Certificatul forge nu este de încredere — autosemnat, expirat sau emis pe alt nume.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Certificatul endpoint nu este de încredere — autosemnat, expirat sau emis pe alt nume.',
   'creditcardnummer': 'număr de card bancar',
   'beveiligingscode van een creditcard':
       'codul de securitate al cardului (CVV)',

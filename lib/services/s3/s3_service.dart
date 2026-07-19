@@ -67,6 +67,10 @@ enum S3Error {
   /// [blockedHost]: die twee vragen om tegengesteld advies.
   unknownHost,
   blockedHost,
+
+  /// Het TLS-certificaat van het endpoint werd niet vertrouwd. Eigen soort
+  /// omdat de gebruiker het kan bekijken en vertrouwen.
+  tls,
   network,
   auth,
   notFound,
@@ -252,6 +256,11 @@ class S3Service {
   /// Vertaal een gevangen laag-niveau fout naar een [S3Exception] die weet of
   /// hij het opnieuw proberen waard is. Spiegelt `WebdavService._asFailure`.
   static Never _asFailure(String where, Object e, String fallback) {
+    // TlsException dekt zowel HandshakeException als CertificateException.
+    if (e is TlsException) {
+      logWarning('S3Service.$where: TLS geweigerd', e);
+      throw S3Exception(S3Error.tls, 'Certificaat niet vertrouwd');
+    }
     if (e is SocketException) {
       logWarning('S3Service.$where: endpoint onbereikbaar', e);
       throw S3Exception(

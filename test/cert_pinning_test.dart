@@ -5,6 +5,8 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/webdav_settings.dart';
+import 'package:ocideck/models/s3_settings.dart';
+import 'package:ocideck/services/s3/s3_service.dart';
 import 'package:ocideck/services/webdav_service.dart';
 import 'package:ocideck/utils/net_guard.dart';
 import 'package:ocideck/widgets/dialogs/certificate_trust_dialog.dart';
@@ -158,6 +160,43 @@ void main() {
       onError: (Object e) => e,
     );
     expect(e, isA<WebdavException>());
+  });
+
+  test('an S3 endpoint honours the same pin', () async {
+    if (!haveOpenssl) {
+      markTestSkipped('openssl ontbreekt: geen zelfondertekend certificaat');
+      return;
+    }
+    // Dezelfde afspraak voor alle drie de opslagsoorten: zonder pin dicht,
+    // met de juiste pin open.
+    S3Service serviceWith(String pin) => S3Service(
+      bucket: S3Bucket(
+        endpoint: 'https://localhost:${server.port}',
+        bucket: 'decks',
+        region: 'us-east-1',
+        accessKeyId: 'AKIA1',
+        trustedInternal: true,
+        addressingStyle: S3AddressingStyle.path,
+        pinnedCertSha256: pin,
+      ),
+      secretAccessKey: 'geheim',
+    );
+
+    final zonder = await serviceWith(
+      '',
+    ).probe().then<Object?>((_) => null, onError: (Object e) => e);
+    expect((zonder! as S3Exception).kind, S3Error.tls);
+
+    // Mét de pin komt de handshake door; wat de nepserver daarna antwoordt is
+    // geen geldige S3-listing, en dat is hier niet de vraag.
+    final met = await serviceWith(
+      fingerprint,
+    ).probe().then<Object?>((_) => null, onError: (Object e) => e);
+    expect(
+      met is S3Exception ? met.kind : null,
+      isNot(S3Error.tls),
+      reason: 'de handshake mag niet meer op het certificaat stranden',
+    );
   });
 
   test('the fingerprint is shown in readable groups', () {

@@ -1783,6 +1783,16 @@ const _dutchSourceFi = {
 const _dutchSourceAddFi = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'syntymäaika, postinumero ja sukupuoli yhdessä — nämä kolme osoittavat yleensä yhden henkilön, myös ilman nimeä',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Tämän palvelimen varmennetta ei luoteta. Itse ylläpidetyllä palvelimen voit tarkastella sitä ja luottaa siihen kohdassa Asetukset → Tallennus.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Tämän forge varmennetta ei luoteta. Itse ylläpidetyllä forge voit tarkastella sitä ja luottaa siihen kohdassa Asetukset → Tallennus.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Tämän päätepisteen varmennetta ei luoteta. Itse ylläpidetyllä päätepisteen voit tarkastella sitä ja luottaa siihen kohdassa Asetukset → Tallennus.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'forge varmennetta ei luoteta — itse allekirjoitettu, vanhentunut tai myönnetty toiselle nimelle.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'päätepisteen varmennetta ei luoteta — itse allekirjoitettu, vanhentunut tai myönnetty toiselle nimelle.',
   'creditcardnummer': 'luottokortin numero',
   'beveiligingscode van een creditcard': 'kortin turvakoodi (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

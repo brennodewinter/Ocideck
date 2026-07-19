@@ -1806,6 +1806,16 @@ const _dutchSourceBg = {
 const _dutchSourceAddBg = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'дата на раждане, пощенски код и пол заедно — тези три обикновено сочат един човек, дори без име',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Сертификатът на този сървър не е доверен. При собствен сървър можете да го прегледате и да му се доверите в Настройки → Хранилище.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Сертификатът на този forge не е доверен. При собствен forge можете да го прегледате и да му се доверите в Настройки → Хранилище.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Сертификатът на този endpoint не е доверен. При собствен endpoint можете да го прегледате и да му се доверите в Настройки → Хранилище.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Сертификатът на forge не е доверен — самоподписан, изтекъл или издаден на друго име.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Сертификатът на endpoint не е доверен — самоподписан, изтекъл или издаден на друго име.',
   'creditcardnummer': 'номер на кредитна карта',
   'beveiligingscode van een creditcard': 'код за сигурност на картата (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

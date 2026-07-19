@@ -1786,6 +1786,16 @@ const _dutchSourceCs = {
 const _dutchSourceAddCs = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'datum narození, PSČ a pohlaví dohromady — tyto tři obvykle označují jednu osobu, i bez jména',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Certifikát tohoto serveru není důvěryhodný. U vlastního serveru jej můžeš zobrazit a důvěřovat mu v Nastavení → Úložiště.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Certifikát tohoto forge není důvěryhodný. U vlastního forge jej můžeš zobrazit a důvěřovat mu v Nastavení → Úložiště.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Certifikát tohoto koncového bodu není důvěryhodný. U vlastního koncového bodu jej můžeš zobrazit a důvěřovat mu v Nastavení → Úložiště.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Certifikát forge není důvěryhodný — vlastnoručně podepsaný, vypršelý nebo vydaný na jiné jméno.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Certifikát koncového bodu není důvěryhodný — vlastnoručně podepsaný, vypršelý nebo vydaný na jiné jméno.',
   'creditcardnummer': 'číslo kreditní karty',
   'beveiligingscode van een creditcard': 'bezpečnostní kód karty (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
