@@ -40,7 +40,7 @@ class DeckTemplate {
 
   /// True for templates that only make sense with the "Informatieveiligheid"
   /// module on (they scaffold module-only slide types like `finding` /
-  /// `scopeMatrix`). The picker hides them until `secModuleRevealProvider` is
+  /// `scopeMatrix`). The picker hides them until `infoSafetyRevealProvider` is
   /// true, so the flat catalogue stays uncluttered for everyone else.
   final bool requiresSecurityModule;
 

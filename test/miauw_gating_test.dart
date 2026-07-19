@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck_template.dart';
 import 'package:ocideck/models/slide.dart';
-import 'package:ocideck/state/sec_module_provider.dart';
+import 'package:ocideck/state/info_safety_provider.dart';
 
 /// Regression guards for feedback #1: self-authoring MIAUW/security content is
 /// only offered when the "informatieveiligheid" module is on. The dialog
@@ -10,7 +10,7 @@ import 'package:ocideck/state/sec_module_provider.dart';
 /// template can't slip through ungated.
 void main() {
   test('the security module is off (and nothing revealed) by default', () {
-    const state = SecModuleState();
+    const state = InfoSafetyState();
     expect(state.enabled, isFalse);
     expect(state.revealed, isFalse);
   });

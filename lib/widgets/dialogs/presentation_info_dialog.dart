@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/deck.dart';
 import '../../l10n/app_localizations.dart';
-import '../../state/sec_module_provider.dart';
+import '../../state/info_safety_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../models/used_tool.dart';
 import '../../services/reference_standards.dart';
@@ -354,7 +354,7 @@ class _PresentationInfoDialogState
   /// Of de MIAUW-vastleggingsvelden in beeld horen: module aan, of dit deck
   /// draagt de gegevens al.
   bool get _showMiauwFields =>
-      ref.watch(secModuleRevealProvider) ||
+      ref.watch(infoSafetyRevealProvider) ||
       widget.deck.standardsUsed.isNotEmpty ||
       widget.deck.toolsUsed.isNotEmpty;
 

@@ -558,7 +558,7 @@ that is **out of scope here** (do not refactor charts as part of this module).
 ## 8. Module framework — the Phase 0 that is not optional
 
 **Honest finding from the codebase, and it contradicts the code's own comments.**
-`sec_module_provider.dart:11-12` claims *"This is deliberately reusable: a future
+`info_safety_provider.dart:11-12` claims *"This is deliberately reusable: a future
 domain extension can reuse the same enable → provision → reveal pattern."* The
 claim outruns the implementation.
 
@@ -574,7 +574,7 @@ What is **hardcoded to one module** and must be generalised first:
 
 | Site | Today | Needs |
 |---|---|---|
-| `secModuleRevealProvider` (`sec_module_provider.dart:56`) | a single global `Provider<bool>` | `moduleRevealProvider(ModuleId)` family |
+| `infoSafetyRevealProvider` (`info_safety_provider.dart:56`) | a single global `Provider<bool>` | `moduleRevealProvider(ModuleId)` family |
 | 7 consumer call sites | each names the sec module | read by `ModuleId` |
 | `AddSlideDialog` (`:19`) | `bool revealSecurityModule` | `Set<ModuleId> revealed` |
 | `SlideCategory` (`slide.dart:49`) | closed 2-value enum | + `procesverbetering` |
@@ -590,7 +590,7 @@ switch (`add_slide_dialog.dart:136-143`) — that is a *feature*: a compile erro
 a guided migration.
 
 Behaviour is inherited unchanged from the sec module, and it is already right:
-- Reveal is **enabled AND provisioned** (`sec_module_provider.dart:86`).
+- Reveal is **enabled AND provisioned** (`info_safety_provider.dart:86`).
 - **The gate is authoring-only.** Slides always render — `app_shell.dart:470` calls
   this the MODUS-REGEL. An LSS deck opened without the module still presents.
 - **Auto-discovery**: opening a deck containing `matrix`/`canvas`/`tree`/`flow` classes offers to enable
@@ -1094,7 +1094,7 @@ Nothing here is novel; almost every mechanism has a working precedent:
 
 | This module needs | Existing precedent |
 |---|---|
-| Opt-in module, enable → reveal | `lib/state/sec_module_provider.dart` |
+| Opt-in module, enable → reveal | `lib/state/info_safety_provider.dart` |
 | Native domain engine, no dependency | `lib/services/cvss/` (CVSS 4.0) |
 | Lookup-table-driven maths | CVSS MacroVector table |
 | Structured slide type + `_class` round-trip | `finding`, `checklist`, `scopeMatrix` |

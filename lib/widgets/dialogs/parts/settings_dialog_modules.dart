@@ -9,7 +9,7 @@ part of '../settings_dialog.dart';
 extension _SettingsModules on _SettingsDialogState {
   Widget _modulesTab() {
     final l10n = context.l10n;
-    final module = ref.watch(secModuleProvider);
+    final module = ref.watch(infoSafetyProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -28,7 +28,7 @@ extension _SettingsModules on _SettingsDialogState {
 
   Widget _informationSecurityCard(
     AppLocalizations l10n,
-    SecModuleState module,
+    InfoSafetyState module,
   ) {
     return Material(
       color: AppTheme.paper,
@@ -42,7 +42,7 @@ extension _SettingsModules on _SettingsDialogState {
         children: [
           SwitchListTile(
             value: module.enabled,
-            onChanged: (v) => _toggleSecModule(v),
+            onChanged: (v) => _toggleInfoSafety(v),
             title: Text(
               l10n.d('Informatieveiligheid'),
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
@@ -58,14 +58,14 @@ extension _SettingsModules on _SettingsDialogState {
           if (module.enabled)
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 14),
-              child: _secModuleStatus(l10n),
+              child: _infoSafetyStatus(l10n),
             ),
         ],
       ),
     );
   }
 
-  Widget _secModuleStatus(AppLocalizations l10n) {
+  Widget _infoSafetyStatus(AppLocalizations l10n) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -92,17 +92,17 @@ extension _SettingsModules on _SettingsDialogState {
         // niets: het liet in het midden of daar een volledige CWE-lijst achter
         // zat of een lege huls.
         const SizedBox(height: 16),
-        _secModuleInventory(l10n),
+        _infoSafetyInventory(l10n),
       ],
     );
   }
 
   /// De inhoudsopgave van de referentiegegevens: hoeveel records er per
   /// catalogus daadwerkelijk bediend worden, met versie en herkomst.
-  Widget _secModuleInventory(AppLocalizations l10n) {
+  Widget _infoSafetyInventory(AppLocalizations l10n) {
     return FutureBuilder<List<ReferenceCatalog>>(
       future: _referenceInventory,
-      builder: (context, snap) => _secModuleInventoryCard(
+      builder: (context, snap) => _infoSafetyInventoryCard(
         l10n,
         // Tot de volledige CWE-lijst geladen is telt de snapshot de curated
         // bodem. Dat is een eerlijk tussengetal, geen leugen — en het staat er
@@ -112,7 +112,7 @@ extension _SettingsModules on _SettingsDialogState {
     );
   }
 
-  Widget _secModuleInventoryCard(
+  Widget _infoSafetyInventoryCard(
     AppLocalizations l10n,
     List<ReferenceCatalog> catalogs,
   ) {
@@ -174,8 +174,8 @@ extension _SettingsModules on _SettingsDialogState {
     );
   }
 
-  Future<void> _toggleSecModule(bool enabled) async {
-    final notifier = ref.read(secModuleProvider.notifier);
+  Future<void> _toggleInfoSafety(bool enabled) async {
+    final notifier = ref.read(infoSafetyProvider.notifier);
     if (enabled) {
       await notifier.enable();
     } else {

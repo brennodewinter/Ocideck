@@ -139,7 +139,7 @@ extension _MainLayoutMenu on _MainLayoutState {
       // (EIS 4.8.2), dus alleen met de informatieveiligheidsmodule aan — zonder
       // die module is er ook nooit een ingevulde hulpmiddelenlijst en liep dit
       // item altijd op de "niets in te voegen"-melding vast.
-      if (ref.read(secModuleRevealProvider))
+      if (ref.read(infoSafetyRevealProvider))
         _menuItem(
           'tools_appendix',
           Icons.handyman_outlined,

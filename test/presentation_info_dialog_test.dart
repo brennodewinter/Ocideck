@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/used_tool.dart';
-import 'package:ocideck/state/sec_module_provider.dart';
+import 'package:ocideck/state/info_safety_provider.dart';
 import 'package:ocideck/widgets/dialogs/presentation_info_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -24,7 +24,7 @@ void main() {
   }) async {
     await tester.pumpWidget(
       ProviderScope(
-        overrides: [secModuleRevealProvider.overrideWithValue(reveal)],
+        overrides: [infoSafetyRevealProvider.overrideWithValue(reveal)],
         child: MaterialApp(
           home: Scaffold(body: PresentationInfoDialog(deck: deck)),
         ),

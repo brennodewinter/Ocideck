@@ -12,7 +12,7 @@ import '../../services/slide_layout_metrics.dart';
 import '../../services/split_run.dart';
 import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
-import '../../state/sec_module_provider.dart';
+import '../../state/info_safety_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
@@ -56,7 +56,7 @@ class EditorPanel extends ConsumerWidget {
     final settings = ref.watch(settingsProvider);
     // Gate de informatieveiligheid-slidetypes in de TYPE-kiezer net als in
     // 'Slide toevoegen', zodat beide plekken exact dezelfde types aanbieden.
-    final secReveal = ref.watch(secModuleRevealProvider);
+    final secReveal = ref.watch(infoSafetyRevealProvider);
 
     // Zoekpaden voor de afbeeldingencarousel: projectmap eerst, dan alle
     // bibliotheken als (recursief gescande) zoekwortels.
