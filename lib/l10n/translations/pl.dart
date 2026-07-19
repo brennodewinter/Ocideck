@@ -1822,6 +1822,8 @@ const _dutchSourceAddPl = <String, String>{
       'Zaufanie dotyczy tylko tego jednego certyfikatu. Jeśli serwer go później wymieni, OciDeck zapyta ponownie.',
   'Vertrouwen': 'Zaufaj',
   'Certificaat bekijken': 'Pokaż certyfikat',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Miejsca, w których przechowujesz i przeszukujesz swoje prezentacje — foldery na tym komputerze, serwery WebDAV, zasobniki S3 i repozytoria git razem. Przeciągnij je w kolejności, jaką chcesz: najwyższy danego rodzaju liczy się jako domyślny.',
   '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
       '•  Magazyn S3: gdy łączysz się z zasobnikiem, zapisywane są punkt końcowy, nazwa zasobnika i twój klucz dostępu (tajny klucz bezpiecznie w pęku kluczy twojego systemu), a prezentacje, które otwierasz lub zapisujesz, są wysyłane do tej usługi magazynowania.',
   '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':

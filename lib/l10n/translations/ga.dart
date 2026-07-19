@@ -1846,6 +1846,8 @@ const _dutchSourceAddGa = <String, String>{
       'Ní chuirtear muinín ach sa teastas seo amháin. Má chuireann an freastalaí ceann eile ina áit, fiafróidh OciDeck arís.',
   'Vertrouwen': 'Muinín',
   'Certificaat bekijken': 'Féach ar an teastas',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Na háiteanna ina gcoinníonn tú agus ina gcuardaíonn tú do chuid cur i láthair — fillteáin ar an ríomhaire seo, freastalaithe WebDAV, buicéid S3 agus stórais git measctha. Tarraing iad san ord is mian leat: an ceann is airde de chineál, is é an réamhshocrú é.',
   '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
       '•  Stóráil S3: nuair a cheanglaíonn tú le buicéad, coinnítear an críochphointe, ainm an bhuicéid agus d\'eochair rochtana (an eochair rúnda go sábháilte in eochairslabhra do chórais) agus seoltar na cur i láthair a osclaíonn nó a shábhálann tú chuig an tseirbhís stórála sin.',
   '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':

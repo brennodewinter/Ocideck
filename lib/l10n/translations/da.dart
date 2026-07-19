@@ -1809,6 +1809,8 @@ const _dutchSourceAddDa = <String, String>{
       'Kun netop dette certifikat betros. Udskifter serveren det senere, spørger OciDeck igen.',
   'Vertrouwen': 'Stol på',
   'Certificaat bekijken': 'Vis certifikat',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Stederne hvor du gemmer og søger i dine præsentationer — mapper på denne computer, WebDAV-servere, S3-buckets og git-repositories mellem hinanden. Træk dem i den rækkefølge, du vil: den øverste af en slags gælder som standard.',
   '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
       '•  S3-lagring: når du forbinder til en bucket, gemmes endpointet, bucket-navnet og din adgangsnøgle (den hemmelige nøgle sikkert i dit systems nøglering), og de præsentationer, du åbner eller gemmer, sendes til den lagringstjeneste.',
   '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':

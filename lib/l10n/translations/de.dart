@@ -767,6 +767,8 @@ const _dutchSourceAddDe = {
       'Nur genau diesem Zertifikat wird vertraut. Ersetzt der Server es später, fragt OciDeck erneut.',
   'Vertrouwen': 'Vertrauen',
   'Certificaat bekijken': 'Zertifikat ansehen',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Die Orte, an denen du deine Präsentationen aufbewahrst und durchsuchst — Ordner auf diesem Computer, WebDAV-Server, S3-Buckets und git-Repositories durcheinander. Zieh sie in die Reihenfolge, die du willst: das oberste einer Art gilt als Standard.',
   '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
       '•  S3-Speicher: Wenn du dich mit einem Bucket verbindest, werden der Endpunkt, der Bucket-Name und dein Zugriffsschlüssel gespeichert (der geheime Schlüssel sicher im Schlüsselbund deines Systems) und die Präsentationen, die du öffnest oder speicherst, werden an diesen Speicherdienst gesendet.',
   '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':

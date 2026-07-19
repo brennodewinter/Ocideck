@@ -1833,6 +1833,8 @@ const _dutchSourceAddBg = <String, String>{
       'Доверява се само на този сертификат. Ако сървърът го смени по-късно, OciDeck ще попита отново.',
   'Vertrouwen': 'Доверяване',
   'Certificaat bekijken': 'Преглед на сертификата',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Местата, където пазиш и търсиш презентациите си — папки на този компютър, WebDAV сървъри, S3 кофи и git хранилища разбъркани. Плъзни ги в реда, който искаш: най-горното от даден вид важи като подразбиращо се.',
   '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
       '•  Хранилище S3: когато се свържеш с кофа, се запазват крайната точка, името на кофата и твоят ключ за достъп (тайният ключ сигурно в ключодържателя на системата ти), а презентациите, които отваряш или запазваш, се изпращат към тази услуга за съхранение.',
   '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':

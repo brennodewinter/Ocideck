@@ -1814,6 +1814,8 @@ const _dutchSourceAddHu = <String, String>{
       'Csak ez az egy tanúsítvány megbízható. Ha a kiszolgáló később lecseréli, az OciDeck újra rákérdez.',
   'Vertrouwen': 'Megbízom',
   'Certificaat bekijken': 'Tanúsítvány megtekintése',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'A helyek, ahol a prezentációidat tárolod és keresed — mappák ezen a számítógépen, WebDAV-kiszolgálók, S3-bucketek és git-repozitóriumok vegyesen. Húzd őket olyan sorrendbe, amilyet szeretnél: a fajtájában legfelső számít alapértelmezettnek.',
   '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
       '•  S3-tároló: amikor csatlakozol egy buckethez, elmentődik a végpont, a bucket neve és a hozzáférési kulcsod (a titkos kulcs biztonságosan a rendszered kulcstartójában), és a prezentációk, amelyeket megnyitsz vagy mentesz, elküldődnek arra a tárolószolgáltatásra.',
   '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':

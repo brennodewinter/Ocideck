@@ -1813,6 +1813,8 @@ const _dutchSourceAddCs = <String, String>{
       'Důvěřuje se pouze tomuto certifikátu. Pokud jej server později vymění, OciDeck se zeptá znovu.',
   'Vertrouwen': 'Důvěřovat',
   'Certificaat bekijken': 'Zobrazit certifikát',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Místa, kde uchováváš a prohledáváš své prezentace — složky v tomto počítači, servery WebDAV, buckety S3 a git repozitáře dohromady. Přetáhni je do pořadí, jaké chceš: nejvyšší svého druhu platí jako výchozí.',
   '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
       '•  Úložiště S3: když se připojíš k bucketu, uloží se endpoint, název bucketu a tvůj přístupový klíč (tajný klíč bezpečně v klíčence tvého systému) a prezentace, které otevřeš nebo uložíš, se odešlou do této úložné služby.',
   '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':

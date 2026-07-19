@@ -89,7 +89,7 @@ extension _SettingsStorageTab on _SettingsDialogState {
       _sectionTitle(l10n.d('Bestandsverbindingen')),
       Text(
         l10n.d(
-          'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.',
+          'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.',
         ),
         style: TextStyle(fontSize: 11, color: AppTheme.slate400),
       ),

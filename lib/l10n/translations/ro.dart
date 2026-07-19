@@ -1829,6 +1829,8 @@ const _dutchSourceAddRo = <String, String>{
       'Se acordă încredere doar acestui certificat. Dacă serverul îl înlocuiește ulterior, OciDeck va întreba din nou.',
   'Vertrouwen': 'Am încredere',
   'Certificaat bekijken': 'Vezi certificatul',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Locurile unde îți păstrezi și îți cauți prezentările — foldere pe acest calculator, servere WebDAV, buckets S3 și depozite git amestecate. Trage-le în ordinea pe care o vrei: primul dintr-un fel contează ca implicit.',
   '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
       '•  Stocare S3: când te conectezi la un bucket, se păstrează endpointul, numele bucketului și cheia ta de acces (cheia secretă în siguranță în inelul de chei al sistemului tău), iar prezentările pe care le deschizi sau le salvezi sunt trimise către acel serviciu de stocare.',
   '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':

@@ -1817,6 +1817,8 @@ const _dutchSourceAddHr = <String, String>{
       'Pouzdanim se smatra samo ovaj certifikat. Ako ga poslužitelj kasnije zamijeni, OciDeck će pitati ponovno.',
   'Vertrouwen': 'Vjeruj',
   'Certificaat bekijken': 'Prikaži certifikat',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Mjesta na kojima čuvaš i pretražuješ svoje prezentacije — mape na ovom računalu, WebDAV poslužitelji, S3 spremnici i git repozitoriji izmiješani. Povuci ih u redoslijed koji želiš: najgornji svoje vrste vrijedi kao zadani.',
   '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
       '•  S3 pohrana: kada se povežeš sa spremnikom, spremaju se krajnja točka, naziv spremnika i tvoj pristupni ključ (tajni ključ sigurno u svežnju ključeva tvojeg sustava), a prezentacije koje otvaraš ili spremaš šalju se toj usluzi pohrane.',
   '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':

@@ -1838,6 +1838,8 @@ const _dutchSourceAddEl = <String, String>{
       'Μόνο αυτό το πιστοποιητικό γίνεται έμπιστο. Αν ο διακομιστής το αντικαταστήσει αργότερα, το OciDeck θα ρωτήσει ξανά.',
   'Vertrouwen': 'Εμπιστεύομαι',
   'Certificaat bekijken': 'Προβολή πιστοποιητικού',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Τα μέρη όπου κρατάς και αναζητάς τις παρουσιάσεις σου — φάκελοι σε αυτόν τον υπολογιστή, διακομιστές WebDAV, κάδοι S3 και αποθετήρια git ανακατεμένα. Σύρε τα στη σειρά που θέλεις: το πρώτο κάθε είδους μετράει ως προεπιλογή.',
   '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
       '•  Αποθήκευση S3: όταν συνδέεσαι σε έναν κάδο, αποθηκεύονται το endpoint, το όνομα του κάδου και το κλειδί πρόσβασής σου (το μυστικό κλειδί με ασφάλεια στην κλειδοθήκη του συστήματός σου) και οι παρουσιάσεις που ανοίγεις ή αποθηκεύεις στέλνονται σε αυτήν την υπηρεσία αποθήκευσης.',
   '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':

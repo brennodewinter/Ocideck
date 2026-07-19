@@ -1832,6 +1832,8 @@ const _dutchSourceAddMt = <String, String>{
       'Dan iċ-ċertifikat biss huwa fdat. Jekk is-server jibdlu aktar tard, OciDeck jerġa\' jistaqsi.',
   'Vertrouwen': 'Afda',
   'Certificaat bekijken': 'Ara ċ-ċertifikat',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Il-postijiet fejn iżżomm u tfittex il-preżentazzjonijiet tiegħek — folders fuq dan il-kompjuter, servers WebDAV, buckets S3 u repożitorji git imħalltin. Iġbedhom fl-ordni li trid: ta\' fuq nett ta\' kull tip jgħodd bħala l-istandard.',
   '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
       '•  Ħażna S3: meta tikkonnettja ma\' bucket, jinżammu l-endpoint, l-isem tal-bucket u ċ-ċavetta tal-aċċess tiegħek (iċ-ċavetta sigrieta b\'mod sigur fil-keychain tas-sistema tiegħek) u l-preżentazzjonijiet li tiftaħ jew tissejvja jintbagħtu lil dak is-servizz ta\' ħażna.',
   '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':

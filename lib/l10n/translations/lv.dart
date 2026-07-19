@@ -1809,6 +1809,8 @@ const _dutchSourceAddLv = <String, String>{
       'Uzticēšanās attiecas tikai uz šo vienu sertifikātu. Ja serveris to vēlāk nomainīs, OciDeck jautās vēlreiz.',
   'Vertrouwen': 'Uzticēties',
   'Certificaat bekijken': 'Skatīt sertifikātu',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Vietas, kur glabā un meklē savas prezentācijas — mapes šajā datorā, WebDAV serveri, S3 kopas un git repozitoriji jauktā secībā. Velc tos vēlamajā secībā: augšējais no katra veida ir noklusējums.',
   '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
       '•  S3 krātuve: kad savienojies ar kopu, tiek saglabāts galapunkts, kopas nosaukums un tava piekļuves atslēga (slepenā atslēga droši tavas sistēmas atslēgu saišķī), un prezentācijas, ko atver vai saglabā, tiek nosūtītas uz šo krātuves pakalpojumu.',
   '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
