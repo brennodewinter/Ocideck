@@ -1783,6 +1783,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Naar de slide': 'Na prosojnico',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Povezava git te predstavitve ne obstaja več.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':

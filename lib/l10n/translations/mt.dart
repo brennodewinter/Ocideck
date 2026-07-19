@@ -1803,6 +1803,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Naar de slide': 'Mur għall-islajd',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Il-konnessjoni git ta\' din il-preżentazzjoni ma għadhiex teżisti.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':

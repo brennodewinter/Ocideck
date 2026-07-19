@@ -1817,6 +1817,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Naar de slide': 'Go dtí an sleamhnán',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Níl nasc git na láithreoireachta seo ann a thuilleadh.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':

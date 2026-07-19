@@ -1780,6 +1780,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Naar de slide': 'Uz slaidu',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Šīs prezentācijas git savienojuma vairs nav.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':

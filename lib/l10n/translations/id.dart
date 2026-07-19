@@ -1781,6 +1781,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Naar de slide': 'Ke slide',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Koneksi git untuk presentasi ini tidak ada lagi.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':

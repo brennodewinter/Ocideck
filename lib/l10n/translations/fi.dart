@@ -1781,6 +1781,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Naar de slide': 'Siirry diaan',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Tämän esityksen git-yhteyttä ei enää ole.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':

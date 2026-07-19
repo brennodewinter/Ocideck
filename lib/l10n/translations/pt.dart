@@ -1811,6 +1811,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Naar de slide': 'Ir para o slide',
   'De git-verbinding van dit deck bestaat niet meer.':
       'A ligação git desta apresentação já não existe.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':

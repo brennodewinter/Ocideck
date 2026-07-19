@@ -1772,6 +1772,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Naar de slide': 'Slaidile',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Selle esitluse git-ühendust enam pole.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':

@@ -739,6 +739,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Naar de slide': 'Nei de slide',
   'De git-verbinding van dit deck bestaat niet meer.':
       'De git-ferbining fan dizze presintaasje bestiet net mear.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':

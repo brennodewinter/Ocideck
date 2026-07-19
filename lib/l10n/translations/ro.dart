@@ -1799,6 +1799,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Naar de slide': 'La slide',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Conexiunea git a acestei prezentări nu mai există.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':

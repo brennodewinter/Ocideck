@@ -1788,6 +1788,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Naar de slide': 'Prejsť na snímku',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Pripojenie git tejto prezentácie už neexistuje.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
