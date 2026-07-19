@@ -26,6 +26,14 @@ enum UpstreamProbe {
   /// ordenbaar, dus hier kan "nieuwer dan wat wij hebben" echt worden vastgesteld.
   githubReleaseDate,
 
+  /// De `JDBOR`-datum in de kop van een Orphanet-productbestand.
+  ///
+  /// Orphanet voert geen versienummers maar datumt elke uitgave in de wortel van
+  /// het XML-bestand. Die bestanden zijn ruim 50 MB per taal, dus de poort haalt
+  /// alleen de eerste kilobytes op met een range-verzoek — de datum staat in de
+  /// eerste regel.
+  orphanetDate,
+
   /// De datum van de laatste commit op de standaardbranch.
   ///
   /// Voor bronnen die géén releases en géén tags voeren — MASWE is er zo een.
@@ -87,6 +95,21 @@ class ReferenceStandard {
   /// Waar [probe] naar kijkt, bv. `OWASP/wstg`. Leeg bij [UpstreamProbe.manual].
   final String probeTarget;
 
+  /// Of een nieuwere upstreamversie de **poort** mag laten falen.
+  ///
+  /// Standaard niet-adviserend: een verouderde standaard is een blokkade, want
+  /// anders sluipt hij erin. Maar dat is de goede regel voor een catalogus die
+  /// de gebruiker *leest* — bij een verouderde CWE-regel staat er een verkeerd
+  /// nummer in een lijst.
+  ///
+  /// Voor een **detectielexicon** klopt hij niet. Daar vuurt elke term, dus een
+  /// verversing kost een termdiff lezen en de vals-positievencorpus opnieuw
+  /// wegen; en de bron brengt maandelijks uit. Een poort die daarop rood wordt,
+  /// staat binnen twee maanden permanent rood en gaat uit — en dan is de
+  /// zichtbaarheid weg die het hele doel was. Zulke bronnen melden zich wél,
+  /// maar alleen adviserend (`make catalogs-outdated`).
+  final bool advisory;
+
   const ReferenceStandard({
     required this.id,
     required this.name,
@@ -96,6 +119,7 @@ class ReferenceStandard {
     required this.licence,
     required this.probe,
     this.probeTarget = '',
+    this.advisory = false,
   });
 
   /// Naam met versie, zoals hij in een rapportbijlage hoort te staan.

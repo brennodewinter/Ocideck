@@ -1799,6 +1799,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Licențele lexicoanelor: ce mai trebuie întrebat',
   'kenteken': 'număr de înmatriculare',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Pentru limba acestei prezentări nu există o listă de cuvinte-cheie pentru categorii speciale de date personale. Tiparele cu cifră de control (CNP, IBAN, pașaport) funcționează; cuvinte precum „diagnostic” sau „suspect” nu sunt recunoscute.',

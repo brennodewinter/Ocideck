@@ -738,6 +738,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Lisensia di leksikon: kiko mester puntra ainda',
   'kenteken': 'number di plachi',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Pa e idioma di e presentashon aki no tin un lista di palabra klave pa datonan personal spesial. Patronchi ku sifra di kontrol (BSN, IBAN, pasaporte) ta funshoná; palabranan manera "diagnóstiko" òf "sospechoso" no ta wòrdu rekonosí.',

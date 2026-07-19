@@ -1756,6 +1756,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'mu\' tetlh chaw\': nuq ghItlhnISlu\'',
   'kenteken': 'Duj mI\'',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'vam De\' Hol vIghaj be\' potlhqu\' nuv De\' mu\' tetlh. mI\' toblu\'ta\' (BSN, IBAN, nav) vumtaH; mu\'mey rur "rop ngu\'" ghap "pIch ghaj" luleghbe\'.',

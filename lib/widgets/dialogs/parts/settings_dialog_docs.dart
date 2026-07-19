@@ -167,6 +167,11 @@ extension _SettingsDocs on _SettingsDialogState {
         assetBase: 'docs/design/OCIWACHT.md',
       ),
       DocEntry(
+        icon: Icons.gavel_outlined,
+        title: l10n.d('Lexiconlicenties: wat er nog nagevraagd moet worden'),
+        assetBase: 'docs/design/LEXICON_LICENTIENAVRAAG.md',
+      ),
+      DocEntry(
         icon: Icons.groups_outlined,
         title: l10n.d('Samenwerking (ontwerp)'),
         assetBase: 'docs/design/COLLABORATION.md',

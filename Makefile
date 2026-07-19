@@ -1,4 +1,4 @@
-.PHONY: refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions catalogs-outdated licenses sbom sbom-verify check-conventions check-method-length check-dead-code add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
+.PHONY: refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-method-length check-dead-code add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -57,6 +57,7 @@ help:
 	@echo "  make add-l10n SPEC=… Add d('…') source strings to every language from a JSON spec."
 	@echo "  make catalogs-outdated Advisory: bundled reference data vs upstream (run before a release build)."
 	@echo "  make refresh-catalogs Regenerate WSTG/MASTG/MASWE from upstream (not in check)."
+	@echo "  make refresh-lexicon  Regenerate the bundled health lexicon from Orphanet (read the term diff)."
 	@echo "  make l10n-check      Fast l10n gate: duplicate keys, per-language coverage, and formatting."
 	@echo "  make fix             Auto-apply 'dart fix' and reformat (local cleanup helper)."
 	@echo "  make build-web       Build the hardened web bundle (self-hosted CanvasKit + CSP-safe loader)."
@@ -297,6 +298,27 @@ deps-check:
 # Afterwards: bump the version in lib/services/reference_standards.dart (and in
 # the catalogue's own const), update docs/LICENSE_COMPLIANCE.md, and re-run
 # `make deps-check` so the staleness gate agrees.
+refresh-lexicon:
+	@echo "== OciDeck: gezondheidslexicon opnieuw genereren (Orphanet) =="
+	@echo "Bron: https://www.orphadata.com/data/xml/ — CC BY 4.0."
+	@echo "Dit herschrijft assets/privacy/health_lexicon.json."
+	@echo ""
+	@echo "LEES DE TERMDIFF. Bij een lexicon vuurt elke term, dus een nieuwe"
+	@echo "        uitgave kan valse positieven binnenbrengen die een catalogus"
+	@echo "        nooit zou opleveren. Draai daarna 'make check' en let op"
+	@echo "        privacy_false_positive_corpus_test."
+	@set -e; \
+	tmp=$$(mktemp -d); \
+	for l in nl en de fr es it pl pt cs; do \
+	  echo "-- $$l"; \
+	  curl -sfL "https://www.orphadata.com/data/xml/$${l}_product1.xml" -o "$$tmp/$$l.xml"; \
+	done; \
+	dart run tool/build_privacy_lexicon.dart "$$tmp"; \
+	rm -rf "$$tmp"
+	@echo ""
+	@echo "Werk orphanetBundledVersion bij in lib/services/reference_standards.dart"
+	@echo "als de datum is opgeschoven."
+
 catalogs-outdated:
 	@echo "== OciDeck: is er upstream iets nieuws? (adviserend) =="
 	@echo "Command: dart run tool/check_reference_data.dart --advisory"

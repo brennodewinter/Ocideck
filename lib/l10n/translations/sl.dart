@@ -1783,6 +1783,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Licence leksikonov: kaj je treba še vprašati',
   'kenteken': 'registrska številka',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Za jezik te predstavitve ni seznama ključnih besed za posebne vrste osebnih podatkov. Vzorci s kontrolno številko (EMŠO, IBAN, potni list) delujejo; besede kot »diagnoza« ali »osumljenec« niso prepoznane.',

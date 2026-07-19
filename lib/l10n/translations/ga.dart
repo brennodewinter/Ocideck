@@ -1817,6 +1817,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Ceadúnais foclóra: a bhfuil fós le fiafraí',
   'kenteken': 'uimhir chláraithe feithicle',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Níl liosta eochairfhocal ann do chatagóirí speisialta sonraí pearsanta i dteanga an deic seo. Oibríonn patrúin le digit seiceála (PPS, IBAN, pas); ní aithnítear focail ar nós "diagnóis" nó "duine faoi amhras".',

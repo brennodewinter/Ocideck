@@ -1809,6 +1809,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Άδειες λεξικών: τι μένει να ρωτηθεί',
   'kenteken': 'αριθμός κυκλοφορίας',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Για τη γλώσσα αυτής της παρουσίασης δεν υπάρχει λίστα λέξεων-κλειδιών για ειδικές κατηγορίες προσωπικών δεδομένων. Τα μοτίβα με ψηφίο ελέγχου (ΑΜΚΑ, IBAN, διαβατήριο) λειτουργούν· λέξεις όπως «διάγνωση» ή «ύποπτος» δεν αναγνωρίζονται.',

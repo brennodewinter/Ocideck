@@ -739,6 +739,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Leksikonlisinsjes: wat noch neifrege wurde moat',
   'kenteken': 'kenteken',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Foar de taal fan dit deck is der gjin trefwurdlist foar bysûndere persoansgegevens. Patroanen mei in kontrôlesifer (BSN, IBAN, paspoart) wurkje wol; wurden as "diagnoaze" of "fertochte" wurde net herkend.',

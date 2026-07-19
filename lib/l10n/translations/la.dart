@@ -1797,6 +1797,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Licentiae lexicorum: quae adhuc roganda sunt',
   'kenteken': 'numerus vehiculi',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Pro lingua huius fasciculi nullus est index verborum clavium pro singularibus generibus datorum personalium. Formae cum numero probationis (BSN, IBAN, diploma) valent; verba ut "diagnosis" vel "suspectus" non agnoscuntur.',

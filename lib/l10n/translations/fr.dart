@@ -738,6 +738,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Licences des lexiques : ce qu\'il reste à demander',
   'kenteken': 'plaque d\'immatriculation',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Il n\'existe pas de liste de mots-clés pour les catégories particulières de données personnelles dans la langue de cette présentation. Les motifs avec chiffre de contrôle (NIR, IBAN, passeport) fonctionnent ; des mots comme « diagnostic » ou « suspect » ne sont pas reconnus.',

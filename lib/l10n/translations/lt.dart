@@ -1789,6 +1789,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Leksikonų licencijos: ko dar reikia paklausti',
   'kenteken': 'valstybinis numeris',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Šios pateikties kalbai nėra raktinių žodžių sąrašo ypatingų kategorijų asmens duomenims. Šablonai su kontroliniu skaitmeniu (asmens kodas, IBAN, pasas) veikia; žodžiai kaip „diagnozė“ ar „įtariamasis“ neatpažįstami.',

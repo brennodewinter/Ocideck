@@ -1785,6 +1785,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Lexikonlizänze: was no z klääre isch',
   'kenteken': 'Autonummere',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Für d Sproch vo dere Presentation git s kei Stichwortlischte für bsunderi persönlichi Date. Muschter mit ere Prüefziffere (Steuer-ID, IBAN, Pass) laufe; Wörter wie "Diagnose" oder "Verdächtige" wärde nid erkennt.',

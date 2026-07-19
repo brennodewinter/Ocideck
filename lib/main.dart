@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'app.dart';
 import 'platform/launch_files.dart';
 import 'platform/native_window.dart';
+import 'services/privacy/privacy_health_lexicon.dart';
 import 'services/asset_staging.dart';
 import 'utils/log.dart';
 import 'widgets/presentation/audience_window.dart';
@@ -43,6 +44,17 @@ void main(List<String> args) {
     // Oude sessiemappen opruimen mag de start niet ophouden — het is
     // huishouding, geen voorwaarde om te kunnen werken.
     unawaited(AssetStaging.pruneStale());
+
+    // Het gebundelde gezondheidslexicon vóór de eerste frame, en bewust met
+    // `await`. De privacyscan is synchroon en memoiseert per slide; zou dit
+    // lexicon halverwege binnenkomen, dan zou dezelfde slide vóór en ná het
+    // laden een ander antwoord geven en het gememoiseerde antwoord het oude
+    // blijven. Eén keer wachten op een asset van twee megabyte is goedkoper dan
+    // die klasse bugs.
+    //
+    // Faalt het laden, dan draait de scanner op de ingebakken vloer verder —
+    // zie PrivacyHealthLexicon.
+    await PrivacyHealthLexicon.instance.ensureLoaded();
 
     await configureNativeWindow();
 

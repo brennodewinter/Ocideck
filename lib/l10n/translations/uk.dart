@@ -1799,6 +1799,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Ліцензії лексиконів: що ще треба з\'ясувати',
   'kenteken': 'номерний знак',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Для мови цієї презентації немає списку ключових слів для особливих категорій персональних даних. Шаблони з контрольною цифрою (ІПН, IBAN, паспорт) працюють; слова на кшталт «діагноз» або «підозрюваний» не розпізнаються.',

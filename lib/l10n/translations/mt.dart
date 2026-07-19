@@ -1803,6 +1803,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Liċenzji tal-lessiku: x\'fadal x\'nistaqsu',
   'kenteken': 'numru tar-reġistrazzjoni',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Għal-lingwa ta\' din il-preżentazzjoni ma hemmx lista ta\' kliem ewlieni għal kategoriji speċjali ta\' data personali. Mudelli b\'ċifra ta\' kontroll (ID, IBAN, passaport) jaħdmu; kliem bħal "dijanjosi" jew "suspettat" ma jingħarfux.',

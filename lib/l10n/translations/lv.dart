@@ -1780,6 +1780,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Leksikonu licences: kas vēl jānoskaidro',
   'kenteken': 'transportlīdzekļa numurs',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Šīs prezentācijas valodai nav atslēgvārdu saraksta īpašām personas datu kategorijām. Raksti ar kontrolciparu (personas kods, IBAN, pase) darbojas; vārdi kā "diagnoze" vai "aizdomās turētais" netiek atpazīti.',

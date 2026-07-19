@@ -266,4 +266,163 @@ extension PrivacyScannerDetectors on PrivacyScanner {
       }
     }
   }
+
+  // ── Bijzondere persoonsgegevens (AVG art. 9/10) ───────────────────────────
+
+  /// Trefwoorden, genetische notatie, en het parketnummer.
+  ///
+  /// De trefwoorden leveren bewust niet meer dan `possible` op. Ze worden pas een
+  /// echte melding via de escalator, wanneer er op dezelfde slide iemand staat om
+  /// ze aan te koppelen.
+  void _scanSpecialCategories(
+    _Fragment fragment,
+    int slideIndex,
+    List<PrivacyFinding> out,
+  ) {
+    final lower = fragment.text.toLowerCase();
+
+    // Eén melding per familie per fragment: tien synoniemen in één zin leveren
+    // geen tien meldingen op. Wélke van die tien de melding draagt, is sinds
+    // fase 12 niet meer "de eerste in de lijst" maar de meest specifieke — het
+    // gewicht uit het lexicon. Dat is het verschil tussen een melding die
+    // "diagnose" aanwijst (een woord dat in elke projectvergadering valt) en één
+    // die "ziekteverzuim" aanwijst, in dezelfde zin.
+    final best = <String, ({PrivacyLexiconEntry entry, int at})>{};
+    for (final entry in bundledPrivacyLexicon) {
+      final at = findPrivacyTermIn(lower, entry.term, entry.effectiveMatch);
+      if (at < 0) continue;
+      final current = best[entry.category];
+      if (current == null || entry.weight > current.entry.weight) {
+        best[entry.category] = (entry: entry, at: at);
+      }
+    }
+    // De bulk uit Orphanet (§13.3). Draait naast de vloer en niet ervoor: de
+    // vloer levert de *aanwijzingen* ("diagnose"), de bulk de *waarden*
+    // (aandoeningsnamen). Gewicht 5, dus een aandoeningsnaam wint van een
+    // signaalwoord in hetzelfde fragment — de melding wijst dan het gegeven aan
+    // in plaats van het woord dat ernaar verwijst.
+    for (final hit in PrivacyHealthLexicon.instance.findIn(lower)) {
+      final current = best['special.health'];
+      if (current != null && current.entry.weight >= _kBulkHealthWeight) break;
+      best['special.health'] = (
+        entry: PrivacyLexiconEntry(
+          term: lower.substring(hit.start, hit.end),
+          category: 'special.health',
+          lang: 'mul',
+          match: PrivacyTermMatch.word,
+          weight: _kBulkHealthWeight,
+          role: PrivacyLexiconRole.value,
+        ),
+        at: hit.start,
+      );
+      break;
+    }
+
+    for (final hit in best.values) {
+      _emit(
+        out,
+        _keywordFinding(
+          fragment,
+          slideIndex,
+          hit.entry.category,
+          hit.at,
+          hit.entry.term.length,
+          // De rol komt nu uit het lexicon in plaats van uit een aanname per
+          // familie. Binnen één familie komen namelijk beide voor: "diagnose"
+          // wijst naar het gegeven, "diabetes" ís het — en dat verschil bepaalt
+          // of redactie werkelijk iets weghaalt.
+          role: hit.entry.role == PrivacyLexiconRole.value
+              ? PrivacyTermRole.value
+              : PrivacyTermRole.indicator,
+          // Alleen bij artikel 10 heeft "wiens rol is dit" betekenis. Een
+          // diagnose kent geen verdachte.
+          personRole: hit.entry.category == 'special.criminal'
+              ? personRoleFor(
+                  fragment.text,
+                  hit.at,
+                  hit.at + hit.entry.term.length,
+                )
+              : PrivacyPersonRole.unknown,
+        ),
+      );
+    }
+
+    for (final genetic in geneticPatterns) {
+      for (final match in genetic.pattern.allMatches(fragment.text)) {
+        _emit(
+          out,
+          _finding(
+            fragment,
+            slideIndex,
+            match,
+            ruleId: genetic.id,
+            family: PrivacyFamily.specialCategory,
+            confidence: PrivacyConfidence.possible,
+          ),
+        );
+      }
+    }
+
+    // ICD-10 en ATC. Contextwoord verplicht: `A12` is ook een tabelverwijzing,
+    // een zaalnummer en een vitamine.
+    for (final rule in medicalCodePatterns) {
+      for (final match in rule.pattern.allMatches(fragment.text)) {
+        if (!_hasContextWord(fragment.text, match.start, rule.contextWords)) {
+          continue;
+        }
+        _emit(
+          out,
+          _finding(
+            fragment,
+            slideIndex,
+            match,
+            ruleId: rule.id,
+            family: PrivacyFamily.specialCategory,
+            confidence: PrivacyConfidence.likely,
+          ),
+        );
+      }
+    }
+
+    for (final match in parketnummerPattern.allMatches(fragment.text)) {
+      _emit(
+        out,
+        _finding(
+          fragment,
+          slideIndex,
+          match,
+          ruleId: 'nl.parketnummer',
+          family: PrivacyFamily.specialCategory,
+          // Geen checksum, maar een formaat dat in gewone tekst niet voorkomt.
+          confidence: PrivacyConfidence.likely,
+        ),
+      );
+    }
+  }
+
+  PrivacyFinding _keywordFinding(
+    _Fragment fragment,
+    int slideIndex,
+    String ruleId,
+    int start,
+    int length, {
+    PrivacyTermRole role = PrivacyTermRole.indicator,
+    PrivacyPersonRole personRole = PrivacyPersonRole.unknown,
+  }) => PrivacyFinding(
+    ruleId: ruleId,
+    family: PrivacyFamily.specialCategory,
+    confidence: PrivacyConfidence.possible,
+    slideIndex: slideIndex,
+    field: fragment.field,
+    fragmentIndex: fragment.index,
+    start: start,
+    end: start + length,
+    maskedSample: maskValue(fragment.text.substring(start, start + length)),
+    // Meestal wijst een trefwoord naar het gegeven en ís het het niet — zie
+    // [PrivacyTermRole] voor waarom dat verschil bij redactie telt. Maar niet
+    // altijd: "diabetes" en "strafblad" zíjn het gegeven. Het lexicon zegt
+    // welke van de twee, en de standaard blijft de voorzichtige.
+    role: role,
+    personRole: personRole,
+  );
 }

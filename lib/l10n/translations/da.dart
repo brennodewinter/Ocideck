@@ -1780,6 +1780,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Leksikonlicenser: hvad der stadig skal spørges om',
   'kenteken': 'nummerplade',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Der findes ingen nøgleordsliste for særlige kategorier af personoplysninger på dette decks sprog. Mønstre med kontrolciffer (CPR, IBAN, pas) virker; ord som "diagnose" eller "mistænkt" genkendes ikke.',

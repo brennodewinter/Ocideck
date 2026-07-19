@@ -35,7 +35,8 @@ accepteren, waarschuwen met een shield-badge, of redigeren op scherm en in expor
 | §13.6 fase 14 Rolonderscheid verdachte/aangever/getuige (ConText, drieweg) | **geleverd** |
 | §13.3 Taaldekking zichtbaar in het paneel | **geleverd** |
 | §5.7/§7 Regiopakketten werkend (instelling + poort) | **geleverd** |
-| §13.3 Gebundelde lexicons (EuroVoc, ORDO) | open — fase 13b |
+| §13.3 Gebundeld gezondheidslexicon (Orphanet, 62.490 namen, 9 talen) | **geleverd** |
+| §13.3 EuroVoc voor religie/politiek/vakbond | **vervallen** — gemeten en ongeschikt, zie §13.3 |
 | §14 Onderzoeksdossier DLP-technieken (annex, geen ontwerp) | naslag |
 
 De genomen beslissingen staan in §11; die zijn niet meer open.
@@ -1255,10 +1256,37 @@ Maltees ontbreekt in XLM-R; Fries heeft 0,2 GiB tegenover Bulgaars 57,5 GiB.
    = confidence 75; het trefwoord voegt 10 toe.
 2. **Lokale taal + Engels**, niet 30 talen. Dat is wat Microsoft feitelijk doet, en
    het past bij gemengd taalgebruik in zakelijke decks.
-3. **Bulk waar het kan** — EuroVoc (24 EU-talen incl. MT en GA, SKOS) en IATE voor
-   religie/politiek/vakbond; ORDO in 9 talen voor gezondheid (CC BY 4.0, 16.378
-   Nederlandse labels); CLDR voor datums en naamvolgorde; OpenCage
-   `address-formatting` (MIT, 251 gebieden) voor de straat/huisnummer-volgorde.
+3. **Bulk waar het kan** — zie de correctie hieronder: van de bronnen die hier
+   stonden is er één gebundeld en één afgevallen. CLDR voor datums en
+   naamvolgorde en OpenCage `address-formatting` (MIT, 251 gebieden) voor de
+   straat/huisnummer-volgorde staan nog open.
+
+> **Gecorrigeerd bij de bouw (2026-07-19).** Twee claims in de regel hierboven
+> hielden geen stand toen ze werden nagemeten.
+>
+> **"ORDO in 9 talen (16.378 Nederlandse labels)" klopt niet zoals het er stond.**
+> ORDO is de OWL-ontologie, en die is **Engelstalig**: versie 4.9 draagt 1179
+> `xml:lang="en"`-tags in de eerste 600 kB en geen enkele andere taal, ook niet
+> halverwege het bestand. De meertalige gegevens zitten in een ander product van
+> dezelfde uitgever — de `product1`-bestanden van Orphadata, met 11.645
+> aandoeningen per taal in negen talen. Zelfde bron, zelfde licentie, ander
+> artefact. **Dát is nu gebundeld**, gefilterd tot 62.490 namen in de band 10-45
+> tekens; zie `tool/build_privacy_lexicon.dart` voor waarom die band.
+>
+> **EuroVoc is afgevallen, en niet om licentieredenen.** Het is een thesaurus om
+> EU-*documenten* te indexeren, geen lexicon van persoonsgegeven-indicatoren. Wat
+> de Nederlandse concepten voor onze categorieën opleveren, letterlijk
+> opgevraagd: "Europees Vakbondsinstituut", "Politieke Commissie (73)", "Antwoord
+> op een advies van een nationaal parlement in het kader van de politieke
+> dialoog", "discriminatie op grond van godsdienst". Instellingsnamen en
+> beleidsbegrippen dus. Die zeggen niets over de vraag of er op een slide iemands
+> religie of vakbondslidmaatschap staat — en erger: "discriminatie op grond van
+> politieke opvatting" is precies de beleidsslide-formulering waar §3-G voor
+> waarschuwt. Bundelen zou de vals-positievenlast verhogen bij vrijwel geen
+> recallwinst, en dat is de verkeerde kant op voor uitgangspunt 3.
+>
+> Voor religie, politiek en vakbond blijft het dus bij de handgeschreven termen,
+> plus wat er uit de drie navraagbronnen komt (`LEXICON_LICENTIENAVRAAG.md`).
 
 **De fallback is de kern.** `Deck.language` bestaat al en stuurt de
 bevindingssjablonen — maar daar valt een ontbrekende taal terug op Engels. Voor een

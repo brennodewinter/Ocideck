@@ -1793,6 +1793,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Licencje leksykonów: o co jeszcze trzeba zapytać',
   'kenteken': 'numer rejestracyjny',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Dla języka tej prezentacji nie ma listy słów kluczowych dla szczególnych kategorii danych osobowych. Wzorce z cyfrą kontrolną (PESEL, IBAN, paszport) działają; słowa takie jak „diagnoza” czy „podejrzany” nie są rozpoznawane.',

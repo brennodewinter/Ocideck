@@ -920,6 +920,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Lexicon licences: what still needs to be asked',
   'kenteken': 'vehicle registration number',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'There is no keyword list for special categories of personal data in this deck\'s language. Patterns with a check digit (national ID, IBAN, passport) still work; words like "diagnosis" or "suspect" are not recognised.',

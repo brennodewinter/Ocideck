@@ -734,6 +734,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Licenze dei lessici: cosa resta da chiedere',
   'kenteken': 'targa del veicolo',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Per la lingua di questa presentazione non esiste un elenco di parole chiave per le categorie particolari di dati personali. I modelli con cifra di controllo (codice fiscale, IBAN, passaporto) funzionano; parole come "diagnosi" o "indagato" non vengono riconosciute.',
