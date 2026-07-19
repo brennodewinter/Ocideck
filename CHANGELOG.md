@@ -347,6 +347,24 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   gedrag waardoor mensen een privacycontrole uitzetten.
 
 ### Fixed
+- **Een vastgepind certificaat gold wel voor de verbindingstest, niet voor het
+  klonen.** Wie op een eigen forge een zelfondertekend certificaat vertrouwde,
+  kreeg een groen vinkje bij het testen en daarna een clone die afketste op
+  datzelfde certificaat. De twee wegen naar dezelfde server gaven een
+  verschillend antwoord: de REST-weg vergelijkt de vingerafdruk zelf, en `git`
+  kent zoiets niet.
+
+  De handleiding beloofde het overigens al — *"each connection carries its own
+  pinned certificate"* — dus dit was niet alleen een gat, het was een gat waar
+  de documentatie overheen las.
+
+  Git kent alleen een CA-bestand, geen vingerafdruk. OciDeck vraagt het
+  certificaat nu zelf op bij het gecontroleerde adres, vergelijkt de
+  vingerafdruk, en geeft het pas dán aan git als vertrouwd anker. De beslissing
+  blijft dus hier liggen. De certificaatcontrole van git blijft gewoon aan staan
+  — hem uitzetten zou ook de naamcontrole slopen, en dan was het vastpinnen
+  niets meer waard.
+
 - **Verzoeken naar `https`-servers gingen onversleuteld over de lijn.** Om een
   DNS-rebind onmogelijk te maken zet OciDeck de socket vast op het adres dat de
   veiligheidscontrole heeft goedgekeurd. Dat gebeurt met een eigen
