@@ -1787,6 +1787,8 @@ const _dutchSourceGsw = {
 const _dutchSourceAddGsw = <String, String>{
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Für d Sproch vo dere Presentation fähle d Chrankheitsname. Religion, politischi Meinig und Gwerkschaftsbegriff wärde erkennt, und Prüefziffere (Steuer-ID, IBAN, Pass) laufe immer — aber verloss di nid druf, dass e Diagnose gfunde wird.',
+  'niet getest': 'nid teschtet',
+  'Werkte op': 'Het funktioniert am',
   'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
       'Du bisch ahgmäldet, hesch aber da kein Zuegriff. Dis Passwort isch nid s Problem — frag de Administrator um Rächt für dä Ordner.',
   'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':

@@ -1806,6 +1806,8 @@ const _dutchSourceBg = {
 const _dutchSourceAddBg = <String, String>{
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'За езика на тази презентация липсват имената на заболявания. Религия, политически убеждения и синдикални термини се разпознават, а шаблоните с контролна цифра (ЕГН, IBAN, паспорт) работят винаги — но не разчитайте да бъде открита диагноза.',
+  'niet getest': 'не е тествано',
+  'Werkte op': 'Работеше на',
   'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
       'Влезли сте, но нямате достъп тук. Паролата не е проблемът — поискайте от администратора права за тази папка.',
   'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':

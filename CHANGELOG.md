@@ -74,6 +74,21 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   Geen netwerk breekt de release evenmin af, maar het zegt wél dát er niet
   gekeken is. Stilte mag hier niet als goedkeuring lezen.
 
+- **De statusregel zegt nu of een bron ooit heeft geántwoord, niet alleen of
+  hij is ingevuld.** Een verbinding werd groen zodra de velden gevuld waren —
+  ook bij een server die nog nooit was aangeraakt. Dat groene vinkje beloofde
+  iets wat niemand had gecontroleerd.
+
+  Er zijn nu drie standen in plaats van twee: *niet ingesteld* (grijs),
+  *ingesteld maar niet getest* (amber, en het staat er in woorden bij — kleur
+  alleen is geen boodschap), en *werkte* (groen, met datum en tijd in de
+  tooltip). Een geslaagde verbindingstest wordt bewaard, dus je ziet het ook
+  nog na het afsluiten van de app.
+
+  Wijzig je de server, dan vervalt die waarneming: ze ging over iets anders.
+  Een *mislukte* test wist juist niets — die bewijst dat het nú niet gaat, niet
+  dat het vorige week niet ging, en die eerdere waarneming is nog steeds het
+  beste dat we hebben.
 - **Een git-repository kun je testen vóórdat je hem gebruikt.** WebDAV en S3
   hadden allebei een knop *Verbinding testen*; bij git zei het paneel alleen of
   er ergens op de machine een `git` stond — wat niets zegt over de URL, de

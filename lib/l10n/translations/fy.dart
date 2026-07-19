@@ -741,6 +741,8 @@ const _dutchSourceFy = {
 const _dutchSourceAddFy = {
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Foar de taal fan dit deck ûntbrekke de sykte- en oandwaningsnammen. Religy, politike oertsjûging en fakbûnstermen wurde wol herkend, en kontrôlesifers (BSN, IBAN, paspoart) wurkje altyd — mar rekkenje der net op dat in diagnoaze fûn wurdt.',
+  'niet getest': 'net test',
+  'Werkte op': 'Wurke op',
   'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
       'Do bist oanmeld, mar hast hjir gjin tagong. Dyn wachtwurd is net it probleem — freegje de behearder om rjochten op dizze map.',
   'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':

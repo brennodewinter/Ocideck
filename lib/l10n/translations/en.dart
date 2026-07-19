@@ -922,6 +922,8 @@ const _dutchSourceEn = {
 const _dutchSourceAddEn = {
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Disease and condition names are missing for this deck\'s language. Religion, political opinion and trade-union terms are recognised, and check-digit patterns (national ID, IBAN, passport) always work — but do not count on a diagnosis being found.',
+  'niet getest': 'not tested',
+  'Werkte op': 'Worked on',
   'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
       'You are signed in, but have no access here. Your password is not the problem — ask the administrator for rights on this folder.',
   'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':

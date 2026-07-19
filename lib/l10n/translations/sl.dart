@@ -1785,6 +1785,8 @@ const _dutchSourceSl = {
 const _dutchSourceAddSl = <String, String>{
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Za jezik te predstavitve manjkajo imena bolezni. Vera, politično prepričanje in sindikalni izrazi so prepoznani, vzorci s kontrolno številko (EMŠO, IBAN, potni list) pa delujejo vedno — vendar ne računajte, da bo diagnoza najdena.',
+  'niet getest': 'ni preizkušeno',
+  'Werkte op': 'Delovalo je',
   'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
       'Prijavljen si, a tu nimaš dostopa. Geslo ni težava — prosi skrbnika za pravice na tej mapi.',
   'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':

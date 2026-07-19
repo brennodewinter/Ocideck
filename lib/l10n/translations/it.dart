@@ -736,6 +736,8 @@ const _dutchSourceIt = {
 const _dutchSourceAddIt = {
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Per la lingua di questa presentazione mancano i nomi di malattie e patologie. Religione, opinione politica e termini sindacali vengono riconosciuti, e i controlli con cifra di controllo (codice fiscale, IBAN, passaporto) funzionano sempre — ma non contare sul rilevamento di una diagnosi.',
+  'niet getest': 'non testata',
+  'Werkte op': 'Ha funzionato il',
   'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
       'Hai effettuato l\'accesso, ma non hai i permessi qui. La password non è il problema: chiedi all\'amministratore i diritti su questa cartella.',
   'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':

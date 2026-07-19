@@ -1782,6 +1782,8 @@ const _dutchSourceSv = {
 const _dutchSourceAddSv = <String, String>{
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Sjukdomsnamn saknas för det här däckets språk. Religion, politisk uppfattning och fackliga termer känns igen, och mönster med kontrollsiffra (personnummer, IBAN, pass) fungerar alltid — men räkna inte med att en diagnos hittas.',
+  'niet getest': 'inte testad',
+  'Werkte op': 'Fungerade den',
   'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
       'Du är inloggad, men har ingen åtkomst här. Ditt lösenord är inte problemet — be administratören om rättigheter till den här mappen.',
   'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':

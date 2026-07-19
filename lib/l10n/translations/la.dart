@@ -1799,6 +1799,8 @@ const _dutchSourceLa = {
 const _dutchSourceAddLa = <String, String>{
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Nomina morborum huic linguae desunt. Religio, opinio politica et vocabula collegiorum opificum agnoscuntur, et formae cum numero probationis (BSN, IBAN, diploma) semper valent — sed noli confidere diagnosin inventum iri.',
+  'niet getest': 'non probatum',
+  'Werkte op': 'Valuit die',
   'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
       'Admissus es, sed hic aditum non habes. Tessera tua non est impedimentum — administratorem de iuribus in hac plica roga.',
   'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':

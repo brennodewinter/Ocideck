@@ -1783,6 +1783,8 @@ const _dutchSourceId = {
 const _dutchSourceAddId = <String, String>{
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Nama penyakit tidak tersedia untuk bahasa dek ini. Agama, pandangan politik, dan istilah serikat pekerja dikenali, dan pola dengan digit periksa (NIK, IBAN, paspor) selalu bekerja — tetapi jangan mengandalkan diagnosis ditemukan.',
+  'niet getest': 'belum diuji',
+  'Werkte op': 'Berhasil pada',
   'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
       'Anda sudah masuk, tetapi tidak punya akses di sini. Kata sandi bukan masalahnya — mintalah hak atas folder ini kepada administrator.',
   'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':

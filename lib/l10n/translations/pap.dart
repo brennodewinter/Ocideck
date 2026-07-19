@@ -740,6 +740,8 @@ const _dutchSourcePap = {
 const _dutchSourceAddPap = {
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Pa e idioma di e presentashon aki ta falta nòmber di malesa. Religion, opinion polítiko i término sindikal sí ta wòrdu rekonosí, i patronchi ku sifra di kontrol (BSN, IBAN, pasaporte) semper ta funshoná — ma no konta ku deteshon di un diagnóstiko.',
+  'niet getest': 'no testá',
+  'Werkte op': 'A funshoná riba',
   'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
       'Bo ta logiá aden, pero bo no tin akseso aki. Bo kontraseña no ta e problema — pidi e administrador derecho riba e karpeta aki.',
   'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':

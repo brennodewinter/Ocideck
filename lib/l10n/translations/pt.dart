@@ -1813,6 +1813,8 @@ const _dutchSourcePt = {
 const _dutchSourceAddPt = <String, String>{
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Faltam os nomes de doenças para o idioma desta apresentação. Religião, opinião política e termos sindicais são reconhecidos, e os padrões com dígito de controlo (NIF, IBAN, passaporte) funcionam sempre — mas não conte com a deteção de um diagnóstico.',
+  'niet getest': 'não testada',
+  'Werkte op': 'Funcionou em',
   'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
       'Tens sessão iniciada, mas não tens acesso aqui. A tua palavra-passe não é o problema — pede ao administrador permissões nesta pasta.',
   'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':

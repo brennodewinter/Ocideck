@@ -1786,6 +1786,8 @@ const _dutchSourceCs = {
 const _dutchSourceAddCs = <String, String>{
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Pro jazyk této prezentace chybí názvy nemocí. Náboženství, politické přesvědčení a odborové pojmy se rozpoznávají a vzory s kontrolní číslicí (rodné číslo, IBAN, pas) fungují vždy — ale nepočítejte s tím, že se najde diagnóza.',
+  'niet getest': 'neotestováno',
+  'Werkte op': 'Fungovalo dne',
   'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
       'Jsi přihlášen, ale zde nemáš přístup. Heslo není problém — požádej správce o práva k této složce.',
   'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':

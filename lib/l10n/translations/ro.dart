@@ -1801,6 +1801,8 @@ const _dutchSourceRo = {
 const _dutchSourceAddRo = <String, String>{
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Pentru limba acestei prezentări lipsesc denumirile de boli. Religia, opinia politică și termenii sindicali sunt recunoscuți, iar tiparele cu cifră de control (CNP, IBAN, pașaport) funcționează întotdeauna — dar nu vă bazați pe găsirea unui diagnostic.',
+  'niet getest': 'netestată',
+  'Werkte op': 'A funcționat pe',
   'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
       'Ești autentificat, dar nu ai acces aici. Parola nu este problema — cere administratorului drepturi pe acest dosar.',
   'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':

@@ -1819,6 +1819,8 @@ const _dutchSourceGa = {
 const _dutchSourceAddGa = <String, String>{
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Tá ainmneacha galar in easnamh do theanga an deic seo. Aithnítear reiligiún, tuairim pholaitiúil agus téarmaí ceardchumainn, agus oibríonn patrúin le digit seiceála (PPS, IBAN, pas) i gcónaí — ach ná bí ag brath ar dhiagnóis a aimsiú.',
+  'niet getest': 'gan tástáil',
+  'Werkte op': 'D\'oibrigh sé ar',
   'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
       'Tá tú sínithe isteach, ach níl rochtain agat anseo. Ní hé do phasfhocal an fhadhb — iarr cearta ar an riarthóir don fhillteán seo.',
   'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':

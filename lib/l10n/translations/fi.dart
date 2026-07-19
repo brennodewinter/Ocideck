@@ -1783,6 +1783,8 @@ const _dutchSourceFi = {
 const _dutchSourceAddFi = <String, String>{
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Tämän esityksen kielelle puuttuvat sairauksien nimet. Uskonto, poliittinen mielipide ja ammattiyhdistystermit tunnistetaan, ja tarkistusnumerolliset kuviot (hetu, IBAN, passi) toimivat aina — mutta älä luota siihen, että diagnoosi löytyy.',
+  'niet getest': 'ei testattu',
+  'Werkte op': 'Toimi',
   'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
       'Olet kirjautunut sisään, mutta sinulla ei ole tänne pääsyä. Salasana ei ole ongelma — pyydä ylläpitäjältä oikeuksia tähän kansioon.',
   'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':

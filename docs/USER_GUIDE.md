@@ -132,6 +132,13 @@ saved version stays retrievable, which a plain folder cannot give you.
   no token at all.
 - **Self-hosted on a private address**: tick **Trusted internal server**, the
   same safeguard as for Nextcloud.
+- **The status line of each connection** has three states, not two: *not set
+  up* (grey), *set up but never tested* (amber — filling in the fields is not
+  the same as knowing they work), and *worked*, with the date and time in the
+  tooltip. A successful connection test is remembered across restarts. Changing
+  the server clears it, because the earlier result was about something else; a
+  *failed* test clears nothing, since it only proves the connection is down
+  now.
 - **Test the connection** before saving. One call answers four questions at
   once, and each answer heads off a failure you would otherwise only meet at
   your first save:

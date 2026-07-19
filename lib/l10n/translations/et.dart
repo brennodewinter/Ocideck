@@ -1774,6 +1774,8 @@ const _dutchSourceEt = {
 const _dutchSourceAddEt = <String, String>{
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Selle esitluse keele jaoks puuduvad haiguste nimetused. Religiooni, poliitilist veendumust ja ametiühingutermineid tuntakse ära ning kontrollnumbriga mustrid (isikukood, IBAN, pass) töötavad alati — kuid ära looda, et diagnoos leitakse.',
+  'niet getest': 'testimata',
+  'Werkte op': 'Töötas',
   'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
       'Oled sisse logitud, kuid sul pole siia ligipääsu. Parool ei ole probleem — küsi administraatorilt õigusi sellele kaustale.',
   'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':

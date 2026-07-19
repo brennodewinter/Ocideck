@@ -1811,6 +1811,8 @@ const _dutchSourceEl = {
 const _dutchSourceAddEl = <String, String>{
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Για τη γλώσσα αυτής της παρουσίασης λείπουν τα ονόματα ασθενειών. Η θρησκεία, η πολιτική άποψη και οι συνδικαλιστικοί όροι αναγνωρίζονται, και τα μοτίβα με ψηφίο ελέγχου (ΑΜΚΑ, IBAN, διαβατήριο) λειτουργούν πάντα — αλλά μη βασίζεστε στον εντοπισμό διάγνωσης.',
+  'niet getest': 'μη δοκιμασμένη',
+  'Werkte op': 'Λειτούργησε στις',
   'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
       'Έχεις συνδεθεί, αλλά δεν έχεις πρόσβαση εδώ. Ο κωδικός σου δεν είναι το πρόβλημα — ζήτησε από τον διαχειριστή δικαιώματα σε αυτόν τον φάκελο.',
   'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':

@@ -1782,6 +1782,8 @@ const _dutchSourceLv = {
 const _dutchSourceAddLv = <String, String>{
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Šīs prezentācijas valodai trūkst slimību nosaukumu. Reliģija, politiskā pārliecība un arodbiedrību termini tiek atpazīti, un raksti ar kontrolciparu (personas kods, IBAN, pase) darbojas vienmēr — bet nepaļaujieties, ka tiks atrasta diagnoze.',
+  'niet getest': 'nav pārbaudīts',
+  'Werkte op': 'Darbojās',
   'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
       'Esi pieteicies, bet šeit nav piekļuves. Parole nav problēma — palūdz administratoram tiesības uz šo mapi.',
   'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':
