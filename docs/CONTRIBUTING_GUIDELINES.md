@@ -134,6 +134,10 @@ All contributors are expected to follow our code of conduct:
 - Focus on constructive feedback and improvement 
 - Avoid personal attacks or discriminatory behavior
 - Maintain professional standards in communications
+- Work in a **Just Culture**: mistakes are information, not offences. Report your
+  own errors and other people's early; we fix the system before we correct the
+  person. See the [Just Culture](../CODE_OF_CONDUCT.md#just-culture) section of
+  the Code of Conduct.
 
 ## Contact
 
