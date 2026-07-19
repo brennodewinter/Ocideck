@@ -12,15 +12,59 @@ orientation.
 We pledge to act and interact in ways that contribute to an open, welcoming,
 diverse, inclusive, and healthy community.
 
+## Our Core Values
+
+OciDeck is developed under the wing of **Stichting LibreKAT**, and the
+foundation's core values apply to this project. Working on OciDeck means
+committing to them — they are not decoration, they are what we are here to do:
+
+1. **Safety first.** For LibreKAT, safety comes first, and that is why we promote
+   the "safety first" mentality in information technology.
+2. **Freedom and openness.** We believe in free and open technologies that
+   everyone can study, improve, and share. Transparency in source code,
+   decision-making, and collaboration is the basis of trust and innovation.
+3. **Sovereignty and autonomy.** We strive for digital sovereignty: the ability
+   to use, manage, and further develop technology without dependence on closed or
+   foreign platforms.
+4. **Integrity and independence.** We act on public values, not commercial
+   interests. Our choices are verifiable, ethically substantiated, and aimed at
+   sustainable digital autonomy for organisations and citizens.
+5. **Knowledge sharing and collaboration.** Knowledge is only valuable if it is
+   shared. We build bridges between government, business, education, and
+   community to grow open knowledge.
+6. **Reliability and safety.** We promote technology that is reliable,
+   verifiable, and secure: careful development, documentation, and testing,
+   without compromises on security or privacy.
+7. **Humanity and respect.** There is a human being behind every line of code,
+   system, or security measure. We value an inclusive, respectful community in
+   which cooperation, empathy, and mutual understanding are central.
+8. **Listen and connect.** Real collaboration starts with listening — to each
+   other, to users, and to society. Open dialogue builds understanding, trust,
+   and better decision-making.
+9. **Just Culture.** Mistakes are opportunities to learn, not to punish. We
+   encourage a culture in which people feel safe to report problems, share
+   experiences, and improve together, with respect for responsibility and growth.
+10. **Sustainability and continuity.** We take care of the long term: good
+    software maintenance, sustainable governance, and transferable knowledge, so
+    that public digital infrastructure keeps existing even when individuals
+    leave.
+
+The authoritative list is published by the foundation, in
+[English](https://librekat.nl/en/over/) and in
+[Dutch](https://librekat.nl/nl/over/). Where this file and the foundation's own
+page differ, the foundation's page is leading.
+
+The two values that most directly shape how this community handles conflict and
+error — **Just Culture** and **Humanity and respect** — are worked out below.
+
 ## Just Culture
 
-Just Culture is one of the core values of Stichting LibreKAT — alongside *de
-menselijke maat*, the human dimension — so we state it here rather than leave it
-implied. The Contributor Covenant below is our base; this section is where the
-foundation's own values are written down. We build security tooling, and that
-work depends on people being willing to say "I broke it", "I don't understand
-this", or "I found something bad" — out loud and early. A community that punishes
-those sentences does not get safer; it only gets quieter.
+Just Culture is a core value of Stichting LibreKAT, so we state it here rather
+than leave it implied. The Contributor Covenant below is our base; this section
+is where that value becomes concrete. We build security tooling, and that work
+depends on people being willing to say "I broke it", "I don't understand this",
+or "I found something bad" — out loud and early. A community that punishes those
+sentences does not get safer; it only gets quieter.
 
 In practice:
 
@@ -44,11 +88,12 @@ In practice:
   outcomes with responsibility for behaviour and for repair: understanding the
   harm, putting it right, and improving whatever made it possible.
 
-Its companion value is *de menselijke maat* — the human dimension. We deal with a
-person, not a case number: we look at the situation someone was actually in,
-leave room for circumstances a rule never anticipated, and keep our procedures in
-proportion to what is at stake. Process serves people here, not the other way
-around, and "the rules say so" is never the end of a conversation.
+Its companion value is **Humanity and respect** — there is a human being behind
+every line of code, and we keep things to *de menselijke maat*, a human scale. We
+deal with a person, not a case number: we look at the situation someone was
+actually in, leave room for circumstances a rule never anticipated, and keep our
+procedures in proportion to what is at stake. Process serves people here, not the
+other way around, and "the rules say so" is never the end of a conversation.
 
 Nobody is exempt, maintainers least of all. Leaders who cannot own their own
 mistakes reduce this section to a slogan.
@@ -106,9 +151,10 @@ This Code of Conduct is adapted from the [Contributor Covenant][homepage],
 version 2.1, available at
 https://www.contributor-covenant.org/version/2/1/code_of_conduct.html.
 
-The **Just Culture** section — including *de menselijke maat* — and the paragraph
-on proportionate corrective action are additions by Stichting LibreKAT, drawn
-from the foundation's own core values. They are not part of the Contributor
-Covenant.
+The **Our Core Values** and **Just Culture** sections, and the paragraph on
+proportionate corrective action, are additions by Stichting LibreKAT. The core
+values are the foundation's own, published at
+[librekat.nl](https://librekat.nl/en/over/). None of it is part of the
+Contributor Covenant.
 
 [homepage]: https://www.contributor-covenant.org

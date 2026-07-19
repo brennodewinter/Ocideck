@@ -129,7 +129,9 @@ down.
 
 ## Code of Conduct
 
-All contributors are expected to follow our code of conduct:
+All contributors are expected to follow our code of conduct, and to commit to the
+[core values of Stichting LibreKAT](../CODE_OF_CONDUCT.md#our-core-values)
+(published at [librekat.nl](https://librekat.nl/en/over/)):
 - Be respectful and inclusive to others
 - Focus on constructive feedback and improvement 
 - Avoid personal attacks or discriminatory behavior
