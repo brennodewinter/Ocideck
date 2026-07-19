@@ -19,6 +19,12 @@ extension TabsNotifierGitNative on TabsNotifier {
     required GitRepoConfig config,
     required String deckDir,
     required String branch,
+
+    /// De verbinding waar dit deck bij hoort. Reist mee de [GitOrigin] in, zodat
+    /// een volgende opslag terug kan naar dezelfde opdrachtgever zonder opnieuw
+    /// te vragen. Leeg is toegestaan: dan valt de app terug op het vergelijken
+    /// van de configuratie.
+    String connectionId = '',
   }) async {
     final deckName = GitRepoLayout.deckNameOf(deckDir);
     if (deckName == null) {
@@ -64,6 +70,7 @@ extension TabsNotifierGitNative on TabsNotifier {
       branch: branch,
       deckDir: deckDir,
       baseSha: baseSha ?? '',
+      connectionId: connectionId,
     );
     refreshTabs();
     return OpenResult.opened;
@@ -78,6 +85,12 @@ extension TabsNotifierGitNative on TabsNotifier {
     required String deckDir,
     required String branch,
     required String message,
+
+    /// De verbinding waar dit deck bij hoort. Reist mee de [GitOrigin] in, zodat
+    /// een volgende opslag terug kan naar dezelfde opdrachtgever zonder opnieuw
+    /// te vragen. Leeg is toegestaan: dan valt de app terug op het vergelijken
+    /// van de configuratie.
+    String connectionId = '',
     DateTime? now,
   }) async {
     final deckName = GitRepoLayout.deckNameOf(deckDir);
@@ -157,6 +170,7 @@ extension TabsNotifierGitNative on TabsNotifier {
         branch: workBranch,
         deckDir: deckDir,
         baseSha: result.sha!,
+        connectionId: connectionId,
       );
       refreshTabs();
     }

@@ -739,6 +739,10 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'De git-verbinding van dit deck bestaat niet meer.':
+      'De git-ferbining fan dizze presintaasje bestiet net mear.',
+  'Stel eerst een git-repository in bij Instellingen → Opslag.':
+      'Stel earst in git-repository yn by Ynstellings → Opslach.',
   'Geen meldingen meer op deze slide.': 'Gjin meldingen mear op dizze slide.',
   'Kwaliteitsproblemen geaccepteerd': 'Kwaliteitsproblemen akseptearre',
   'Mogelijk persoonsgegevens': 'Mooglik persoansgegevens',

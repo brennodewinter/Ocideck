@@ -735,6 +735,10 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'De git-verbinding van dit deck bestaat niet meer.':
+      'La conexión git de esta presentación ya no existe.',
+  'Stel eerst een git-repository in bij Instellingen → Opslag.':
+      'Configura primero un repositorio git en Ajustes → Almacenamiento.',
   'Geen meldingen meer op deze slide.': 'No quedan avisos en esta diapositiva.',
   'Kwaliteitsproblemen geaccepteerd': 'Problemas de calidad aceptados',
   'Mogelijk persoonsgegevens': 'Posibles datos personales',

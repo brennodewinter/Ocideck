@@ -1784,6 +1784,10 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'De git-verbinding van dit deck bestaat niet meer.':
+      'Připojení git této prezentace už neexistuje.',
+  'Stel eerst een git-repository in bij Instellingen → Opslag.':
+      'Nejprve nastavte git repozitář v Nastavení → Úložiště.',
   'Geen meldingen meer op deze slide.':
       'Na tomto snímku už nejsou žádná hlášení.',
   'Kwaliteitsproblemen geaccepteerd': 'Problémy s kvalitou přijaty',

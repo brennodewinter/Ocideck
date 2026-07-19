@@ -920,6 +920,10 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'De git-verbinding van dit deck bestaat niet meer.':
+      'The git connection for this deck no longer exists.',
+  'Stel eerst een git-repository in bij Instellingen → Opslag.':
+      'Set up a git repository first, under Settings → Storage.',
   'Geen meldingen meer op deze slide.': 'No findings left on this slide.',
   'Kwaliteitsproblemen geaccepteerd': 'Quality issues accepted',
   'Mogelijk persoonsgegevens': 'Possibly personal data',

@@ -1809,6 +1809,10 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'De git-verbinding van dit deck bestaat niet meer.':
+      'Η σύνδεση git αυτής της παρουσίασης δεν υπάρχει πλέον.',
+  'Stel eerst een git-repository in bij Instellingen → Opslag.':
+      'Ρυθμίστε πρώτα ένα αποθετήριο git στις Ρυθμίσεις → Αποθήκευση.',
   'Geen meldingen meer op deze slide.':
       'Δεν υπάρχουν άλλα ευρήματα σε αυτή τη διαφάνεια.',
   'Kwaliteitsproblemen geaccepteerd': 'Τα ζητήματα ποιότητας έγιναν αποδεκτά',

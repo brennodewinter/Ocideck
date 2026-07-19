@@ -1772,6 +1772,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'De git-verbinding van dit deck bestaat niet meer.':
+      'Selle esitluse git-ühendust enam pole.',
+  'Stel eerst een git-repository in bij Instellingen → Opslag.':
+      'Seadista kõigepealt git-hoidla jaotises Seaded → Salvestus.',
   'Geen meldingen meer op deze slide.': 'Sellel slaidil pole enam teateid.',
   'Kwaliteitsproblemen geaccepteerd': 'Kvaliteediprobleemid aktsepteeritud',
   'Mogelijk persoonsgegevens': 'Võimalikud isikuandmed',

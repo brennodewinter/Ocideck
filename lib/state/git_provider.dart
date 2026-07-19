@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/git_settings.dart';
+import '../models/storage_connection.dart';
 import '../platform/platform_features.dart';
 import '../services/git/deck_mirror.dart';
 import '../services/git/git_cli.dart';
@@ -19,15 +20,44 @@ import '../services/git/draft_store_factory.dart';
 import '../utils/log.dart';
 import 'settings_provider.dart';
 
-/// Bouwt de forge-adapter uit de geconfigureerde repo plus het token uit de
-/// keychain. Geeft `null` wanneer er geen repo is ingesteld. Wordt herbouwd
-/// zodra de config wijzigt. Spiegelt `webdavServiceProvider`.
+/// Alle bruikbare git-verbindingen, in de volgorde die de gebruiker sleepte —
+/// de lijst die de keuzedialoog toont.
+final gitConnectionsProvider = Provider<List<GitConnection>>(
+  (ref) => ref.watch(settingsProvider).connectionsOf<GitConnection>(),
+);
+
+/// De verbinding waarmee de app werkt als er niet is gevraagd te kiezen: de
+/// bovenste bruikbare git-verbinding, of `null`.
+final primaryGitConnectionProvider = Provider<GitConnection?>(
+  (ref) =>
+      ref.watch(settingsProvider).primaryOf(StorageConnectionKind.git)
+          as GitConnection?,
+);
+
+/// De configuratie van één git-verbinding, of `null` als hij niet (meer)
+/// bestaat of half is ingevuld.
+final gitConfigProvider = Provider.family<GitRepoConfig?, String>((
+  ref,
+  connectionId,
+) {
+  final c = ref.watch(settingsProvider).connectionById(connectionId);
+  return c is GitConnection && c.isConfigured ? c.repo : null;
+});
+
+/// Bouwt de forge-adapter voor één verbinding: de opgeslagen repo plus het
+/// token uit de keychain. Geeft `null` wanneer de verbinding niet (meer)
+/// bestaat. Wordt herbouwd zodra de config wijzigt. Spiegelt
+/// `webdavServiceProvider`, tot en met het keyen op verbindings-id: dat blijft
+/// gelijk als de gebruiker een typefout in de URL herstelt.
 ///
 /// Een leeg token is géén reden om null te geven — anders dan bij WebDAV, want
 /// een publieke repo lezen mag zonder.
-final gitForgeProvider = FutureProvider<GitForge?>((ref) async {
-  final config = ref.watch(settingsProvider).gitRepo;
-  if (config == null || !config.isConfigured) return null;
+final gitForgeProvider = FutureProvider.family<GitForge?, String>((
+  ref,
+  connectionId,
+) async {
+  final config = ref.watch(gitConfigProvider(connectionId));
+  if (config == null) return null;
   final token =
       await ref
           .read(settingsProvider.notifier)
@@ -75,36 +105,42 @@ final nativeGitVersionProvider = FutureProvider<GitVersion?>((ref) async {
 ///
 /// Wordt herbouwd zodra de git-config wijzigt; de probe erachter draait maar
 /// één keer (zie [nativeGitVersionProvider]).
-final nativeGitMirrorProvider = FutureProvider<NativeGitMirror?>((ref) async {
-  final version = await ref.watch(nativeGitVersionProvider.future);
-  if (version == null) return null;
-  final config = ref.watch(settingsProvider).gitRepo;
-  if (config == null || !config.isConfigured) return null;
-  final token =
-      await ref
-          .read(settingsProvider.notifier)
-          .readGitToken(config.baseUrl, config.owner) ??
-      '';
-  return createNativeGitMirror(
-    git: ref.watch(gitCliProvider),
-    config: config,
-    token: token,
-  );
-});
+final nativeGitMirrorProvider = FutureProvider.family<NativeGitMirror?, String>(
+  (ref, connectionId) async {
+    final version = await ref.watch(nativeGitVersionProvider.future);
+    if (version == null) return null;
+    final config = ref.watch(gitConfigProvider(connectionId));
+    if (config == null) return null;
+    final token =
+        await ref
+            .read(settingsProvider.notifier)
+            .readGitToken(config.baseUrl, config.owner) ??
+        '';
+    return createNativeGitMirror(
+      git: ref.watch(gitCliProvider),
+      config: config,
+      token: token,
+    );
+  },
+);
 
-/// De opslagsleutel van de ingestelde repo, of leeg wanneer er geen is. Alles
-/// wat per repo gescheiden moet blijven — de werkkopie, de wachtrij — hangt
-/// hieraan.
-final _repoScopeProvider = Provider<String>(
-  (ref) => ref.watch(settingsProvider).gitRepo?.storageSlug ?? '',
+/// De opslagsleutel van één verbinding, of leeg wanneer hij niet bruikbaar is.
+/// Alles wat per repo gescheiden moet blijven — de werkkopie, de wachtrij —
+/// hangt hieraan.
+final _repoScopeProvider = Provider.family<String, String>(
+  (ref, connectionId) =>
+      ref.watch(gitConfigProvider(connectionId))?.storageSlug ?? '',
 );
 
 /// De werkkopie waar een offline REST-opslag naartoe schrijft (§8.1) — op web en
 /// op desktop-zonder-git. Per repo gescheiden: een repo is een
 /// vertrouwensgrens, en twee repo's met een gelijknamig deck deelden anders
 /// dezelfde bestanden.
-final draftMirrorProvider = Provider<DeckMirror>((ref) {
-  final scope = ref.watch(_repoScopeProvider);
+final draftMirrorProvider = Provider.family<DeckMirror, String>((
+  ref,
+  connectionId,
+) {
+  final scope = ref.watch(_repoScopeProvider(connectionId));
   final store = createDraftStore(scope: scope);
   // Werk uit de tijd van één repo hoort bij de repo die toen was ingesteld —
   // en dat is deze. Eenmalig; daarna vindt de sweep niets meer.
@@ -116,8 +152,8 @@ final draftMirrorProvider = Provider<DeckMirror>((ref) {
 /// afsluiten: hij zit in de sleutel/waarde-opslag. Ook per repo gescheiden —
 /// zonder dat duwde een flush de hele wachtrij naar de forge die op dat moment
 /// was ingesteld, ongeacht voor welke repo het werk bedoeld was.
-final outboxProvider = Provider<Outbox>((ref) {
-  final outbox = Outbox(scope: ref.watch(_repoScopeProvider));
+final outboxProvider = Provider.family<Outbox, String>((ref, connectionId) {
+  final outbox = Outbox(scope: ref.watch(_repoScopeProvider(connectionId)));
   unawaited(_adoptLegacy(outbox.adoptLegacyEntries, 'wachtrij'));
   return outbox;
 });
@@ -136,35 +172,42 @@ Future<void> _adoptLegacy(Future<int> Function() adopt, String wat) async {
 /// Verzoent de werkkopie met de forge (§8): maakt commits van wat wacht zodra
 /// dat kan. `null` wanneer er geen repo is ingesteld — dan is er niets te
 /// synchroniseren. Herbouwd zodra de forge-config wijzigt.
-final syncEngineProvider = FutureProvider<SyncEngine?>((ref) async {
-  final forge = await ref.watch(gitForgeProvider.future);
+final syncEngineProvider = FutureProvider.family<SyncEngine?, String>((
+  ref,
+  connectionId,
+) async {
+  final forge = await ref.watch(gitForgeProvider(connectionId).future);
   if (forge == null) return null;
   return SyncEngine(
     forge: forge,
-    mirror: ref.watch(draftMirrorProvider),
-    outbox: ref.watch(outboxProvider),
+    mirror: ref.watch(draftMirrorProvider(connectionId)),
+    outbox: ref.watch(outboxProvider(connectionId)),
   );
 });
 
 /// De deckmappen op [branch], als deknaam → pad. `autoDispose` zodat een
 /// gesloten dialoog de cache niet vasthoudt.
+typedef GitDeckListKey = ({String connectionId, String branch});
+
 final gitDeckListProvider = FutureProvider.autoDispose
-    .family<Map<String, String>, String>((ref, branch) async {
-      final forge = await ref.watch(gitForgeProvider.future);
+    .family<Map<String, String>, GitDeckListKey>((ref, key) async {
+      final forge = await ref.watch(gitForgeProvider(key.connectionId).future);
       if (forge == null) {
         throw const GitForgeException(
           GitForgeError.config,
           'Geen git-repository ingesteld',
         );
       }
-      return forge.listDecks(branch);
+      return forge.listDecks(key.branch);
     });
 
 /// De release-tags van één deck (§9.4), nieuwste bovenaan. `autoDispose` zodat
 /// een gesloten versiekiezer de cache niet vasthoudt.
+typedef GitDeckTagsKey = ({String connectionId, String deckName});
+
 final gitDeckTagsProvider = FutureProvider.autoDispose
-    .family<List<TagRef>, String>((ref, deckName) async {
-      final forge = await ref.watch(gitForgeProvider.future);
+    .family<List<TagRef>, GitDeckTagsKey>((ref, key) async {
+      final forge = await ref.watch(gitForgeProvider(key.connectionId).future);
       if (forge == null) {
         throw const GitForgeException(
           GitForgeError.config,
@@ -173,7 +216,7 @@ final gitDeckTagsProvider = FutureProvider.autoDispose
       }
       final mine = [
         for (final tag in await forge.listTags())
-          if (GitRepoLayout.isReleaseTagFor(tag.name, deckName)) tag,
+          if (GitRepoLayout.isReleaseTagFor(tag.name, key.deckName)) tag,
       ]..sort((a, b) => b.name.compareTo(a.name));
       return mine;
     });

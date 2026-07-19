@@ -10,28 +10,53 @@ part of '../app_shell.dart';
 /// Vraagt de deknaam (voorin gevuld met de herkomst, zodat terugschrijven één
 /// bevestiging is) en een commitboodschap. Anders dan Nextcloud werkt dit óók op
 /// web (§4.4).
+/// De git-verbinding waar een geopend deck bij hoort.
+///
+/// Deck-gebonden acties — historie, versies, review, samenvoegen, taggen — mogen
+/// niets vragen: de herkomst wéét al bij welke opdrachtgever dit werk hoort, en
+/// een keuzedialoog zou de gebruiker de kans geven daar per ongeluk van af te
+/// wijken. Is de verbinding intussen verwijderd, dan valt er niets zinnigs te
+/// doen (de repo is weg en het token ook) en zegt de app dat.
+GitConnection? _originConnection(
+  BuildContext context,
+  WidgetRef ref,
+  GitOrigin origin,
+) {
+  final connection = ref
+      .read(settingsProvider)
+      .gitConnectionFor(origin.connectionId, origin.config);
+  if (connection == null) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          context.l10n.d('De git-verbinding van dit deck bestaat niet meer.'),
+        ),
+      ),
+    );
+  }
+  return connection;
+}
+
 Future<void> _saveToGit(BuildContext context, WidgetRef ref) async {
   final tab = ref.read(tabsProvider).current;
   final deck = tab?.deckNotifier.currentState.deck;
   if (tab == null || deck == null) return;
-  final forge = await ref.read(gitForgeProvider.future);
+  // Kwam dit deck uit een repo die nog bestaat, dan gaat het daar zonder vragen
+  // naartoe terug. Alleen een deck zonder herkomst laat kiezen.
+  final origin = tab.gitOrigin;
+  final connection = origin == null
+      ? await _pickGitConnection(context, ref)
+      : _originConnection(context, ref, origin);
+  if (connection == null || !context.mounted) return;
+  final forge = await ref.read(gitForgeProvider(connection.id).future);
   if (!context.mounted) return;
   if (forge == null) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          context.l10n.d(
-            'Stel eerst een git-repository in bij Instellingen → Git-repository.',
-          ),
-        ),
-      ),
-    );
+    _gitNotConfigured(context);
     return;
   }
-  final config = ref.read(settingsProvider).gitRepo;
-  if (config == null) return;
+  final config = connection.repo;
 
-  final defaultName = tab.gitOrigin?.deckName ?? _safeDeckName(deck.title);
+  final defaultName = origin?.deckName ?? _safeDeckName(deck.title);
   final choice = await _showGitSaveDialog(context, defaultName: defaultName);
   if (choice == null || !context.mounted) return;
   // Het dialoog valideert de naam al; dit is de vangnet-tak.
@@ -39,7 +64,7 @@ Future<void> _saveToGit(BuildContext context, WidgetRef ref) async {
   if (deckDir == null) return;
 
   // Native git als het er is: een echte lokale commit. Anders het REST-pad.
-  final native = await ref.read(nativeGitMirrorProvider.future);
+  final native = await ref.read(nativeGitMirrorProvider(connection.id).future);
   if (!context.mounted) return;
 
   final messenger = ScaffoldMessenger.of(context);
@@ -53,6 +78,7 @@ Future<void> _saveToGit(BuildContext context, WidgetRef ref) async {
             deckDir: deckDir,
             branch: config.defaultBranch,
             message: choice.message,
+            connectionId: connection.id,
           )
         : await notifier.saveToGit(
             forge,
@@ -60,8 +86,9 @@ Future<void> _saveToGit(BuildContext context, WidgetRef ref) async {
             deckDir: deckDir,
             branch: config.defaultBranch,
             message: choice.message,
-            mirror: ref.read(draftMirrorProvider),
-            outbox: ref.read(outboxProvider),
+            mirror: ref.read(draftMirrorProvider(connection.id)),
+            outbox: ref.read(outboxProvider(connection.id)),
+            connectionId: connection.id,
           );
     if (!context.mounted) return;
     switch (result.status) {
@@ -120,7 +147,7 @@ Future<void> _saveToGit(BuildContext context, WidgetRef ref) async {
     // Een geslaagde opslag is een goed moment om te kijken of er nog iets in de
     // wachtrij stond van een eerdere offline-sessie: leeg die op de koop toe.
     if (result.status == GitSaveStatus.committed && context.mounted) {
-      await _flushGitQueue(context, ref, config, silent: true);
+      await _flushGitQueue(context, ref, config, connection.id, silent: true);
     }
   } on GitForgeException catch (e) {
     // De uitzondering draagt al een uitlegbare tekst voor de gebruiker.
@@ -180,29 +207,28 @@ Future<void> _resolveMergeConflicts(
 /// menu, of stilletjes ([silent]) na een geslaagde opslag. Meldt de uitkomst
 /// alleen als er iets te melden was, of wanneer de gebruiker er zelf om vroeg.
 Future<void> _syncGit(BuildContext context, WidgetRef ref) async {
-  final forge = await ref.read(gitForgeProvider.future);
+  final connection = await _pickGitConnection(context, ref);
+  if (connection == null || !context.mounted) return;
+  final forge = await ref.read(gitForgeProvider(connection.id).future);
   if (!context.mounted) return;
   if (forge == null) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          context.l10n.d(
-            'Stel eerst een git-repository in bij Instellingen → Git-repository.',
-          ),
-        ),
-      ),
-    );
+    _gitNotConfigured(context);
     return;
   }
-  final config = ref.read(settingsProvider).gitRepo;
-  if (config == null) return;
-  await _flushGitQueue(context, ref, config, silent: false);
+  await _flushGitQueue(
+    context,
+    ref,
+    connection.repo,
+    connection.id,
+    silent: false,
+  );
 }
 
 Future<void> _flushGitQueue(
   BuildContext context,
   WidgetRef ref,
-  GitRepoConfig config, {
+  GitRepoConfig config,
+  String connectionId, {
   required bool silent,
 }) async {
   final l10n = context.l10n;
@@ -210,7 +236,7 @@ Future<void> _flushGitQueue(
 
   // Native: duw de lokale historie omhoog. Er is geen wachtrij — niet-gepushte
   // commits zíjn de wachtrij.
-  final native = await ref.read(nativeGitMirrorProvider.future);
+  final native = await ref.read(nativeGitMirrorProvider(connectionId).future);
   if (!context.mounted) return;
   if (native != null) {
     final result = await ref.read(tabsProvider.notifier).syncGitNative(native);
@@ -233,9 +259,9 @@ Future<void> _flushGitQueue(
     return;
   }
 
-  final engine = await ref.read(syncEngineProvider.future);
+  final engine = await ref.read(syncEngineProvider(connectionId).future);
   if (engine == null) return;
-  if (silent && await ref.read(outboxProvider).isEmpty) return;
+  if (silent && await ref.read(outboxProvider(connectionId)).isEmpty) return;
 
   final outcomes = await ref
       .read(tabsProvider.notifier)
@@ -264,7 +290,9 @@ Future<void> _flushGitQueue(
 Future<void> _showGitHistory(BuildContext context, WidgetRef ref) async {
   final origin = ref.read(tabsProvider).current?.gitOrigin;
   if (origin == null) return;
-  final native = await ref.read(nativeGitMirrorProvider.future);
+  final connection = _originConnection(context, ref, origin);
+  if (connection == null) return;
+  final native = await ref.read(nativeGitMirrorProvider(connection.id).future);
   if (!context.mounted || native == null) return;
   final entries = await native.history(origin.deckDir);
   if (!context.mounted) return;
@@ -284,25 +312,24 @@ Future<void> _showGitVersions(BuildContext context, WidgetRef ref) async {
   final origin = ref.read(tabsProvider).current?.gitOrigin;
   final deckName = origin?.deckName;
   if (origin == null || deckName == null) return;
-  final forge = await ref.read(gitForgeProvider.future);
+  final connection = _originConnection(context, ref, origin);
+  if (connection == null) return;
+  final forge = await ref.read(gitForgeProvider(connection.id).future);
   if (!context.mounted) return;
   if (forge == null) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          context.l10n.d(
-            'Stel eerst een git-repository in bij Instellingen → Git-repository.',
-          ),
-        ),
-      ),
-    );
+    _gitNotConfigured(context);
     return;
   }
   final messenger = ScaffoldMessenger.of(context);
   final l10n = context.l10n;
   final List<TagRef> tags;
   try {
-    tags = await ref.read(gitDeckTagsProvider(deckName).future);
+    tags = await ref.read(
+      gitDeckTagsProvider((
+        connectionId: connection.id,
+        deckName: deckName,
+      )).future,
+    );
   } on GitForgeException catch (e) {
     messenger.showSnackBar(SnackBar(content: Text(e.message)));
     return;
@@ -417,20 +444,13 @@ Future<void> _openForReview(BuildContext context, WidgetRef ref) async {
   final origin = tab?.gitOrigin;
   final deck = tab?.deckNotifier.currentState.deck;
   if (origin == null || deck == null) return;
-  final config = ref.read(settingsProvider).gitRepo;
-  if (config == null) return;
-  final forge = await ref.read(gitForgeProvider.future);
+  final connection = _originConnection(context, ref, origin);
+  if (connection == null) return;
+  final config = connection.repo;
+  final forge = await ref.read(gitForgeProvider(connection.id).future);
   if (!context.mounted) return;
   if (forge == null) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          context.l10n.d(
-            'Stel eerst een git-repository in bij Instellingen → Git-repository.',
-          ),
-        ),
-      ),
-    );
+    _gitNotConfigured(context);
     return;
   }
 
@@ -497,20 +517,13 @@ Future<void> _openForReview(BuildContext context, WidgetRef ref) async {
 Future<void> _mergeConcept(BuildContext context, WidgetRef ref) async {
   final origin = ref.read(tabsProvider).current?.gitOrigin;
   if (origin == null) return;
-  final config = ref.read(settingsProvider).gitRepo;
-  if (config == null) return;
-  final forge = await ref.read(gitForgeProvider.future);
+  final connection = _originConnection(context, ref, origin);
+  if (connection == null) return;
+  final config = connection.repo;
+  final forge = await ref.read(gitForgeProvider(connection.id).future);
   if (!context.mounted) return;
   if (forge == null) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          context.l10n.d(
-            'Stel eerst een git-repository in bij Instellingen → Git-repository.',
-          ),
-        ),
-      ),
-    );
+    _gitNotConfigured(context);
     return;
   }
 
@@ -557,20 +570,13 @@ Future<void> _mergeConcept(BuildContext context, WidgetRef ref) async {
 Future<void> _tagRelease(BuildContext context, WidgetRef ref) async {
   final origin = ref.read(tabsProvider).current?.gitOrigin;
   if (origin == null) return;
-  final config = ref.read(settingsProvider).gitRepo;
-  if (config == null) return;
-  final forge = await ref.read(gitForgeProvider.future);
+  final connection = _originConnection(context, ref, origin);
+  if (connection == null) return;
+  final config = connection.repo;
+  final forge = await ref.read(gitForgeProvider(connection.id).future);
   if (!context.mounted) return;
   if (forge == null) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          context.l10n.d(
-            'Stel eerst een git-repository in bij Instellingen → Git-repository.',
-          ),
-        ),
-      ),
-    );
+    _gitNotConfigured(context);
     return;
   }
 
@@ -629,26 +635,19 @@ Future<void> _tagRelease(BuildContext context, WidgetRef ref) async {
 /// Bewust een expliciete handeling: de index leest élk deck en élke uitgebrachte
 /// versie, dus dat bouw je niet per toetsaanslag opnieuw.
 Future<void> _showAssetUsage(BuildContext context, WidgetRef ref) async {
-  // Eerst de forge-poort, dán de config: andersom viel een niet-ingestelde
-  // repository stil terug zonder ook maar iets te melden, waardoor het menu-item
-  // in de beleving van de gebruiker gewoon niets deed.
-  final forge = await ref.read(gitForgeProvider.future);
+  // Repo-breed: dit gaat over álle decks in één repository, dus welke dat is
+  // moet vaststaan voor er iets gebeurt. De kiezer meldt zelf wanneer er nog
+  // geen repository is — een menu-item dat stil terugvalt lijkt kapot.
+  final connection = await _pickGitConnection(context, ref);
+  if (connection == null || !context.mounted) return;
+  final forge = await ref.read(gitForgeProvider(connection.id).future);
   if (!context.mounted) return;
   if (forge == null) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          context.l10n.d(
-            'Stel eerst een git-repository in bij Instellingen → Git-repository.',
-          ),
-        ),
-      ),
-    );
+    _gitNotConfigured(context);
     return;
   }
 
-  final config = ref.read(settingsProvider).gitRepo;
-  if (config == null) return;
+  final config = connection.repo;
 
   final messenger = ScaffoldMessenger.of(context);
   final AssetIndexSnapshot snapshot;
@@ -673,25 +672,17 @@ Future<void> _showAssetUsage(BuildContext context, WidgetRef ref) async {
 
 /// Zoek over alle decks in de repo en open de gekozen vindplaats.
 Future<void> _searchDecks(BuildContext context, WidgetRef ref) async {
-  // Zie _showAssetUsage: de forge-poort moet vóór de config-check staan, anders
-  // is de melding onbereikbaar en lijkt het item kapot.
-  final forge = await ref.read(gitForgeProvider.future);
+  // Zie _showAssetUsage: repo-breed, dus eerst de verbinding vaststellen.
+  final connection = await _pickGitConnection(context, ref);
+  if (connection == null || !context.mounted) return;
+  final forge = await ref.read(gitForgeProvider(connection.id).future);
   if (!context.mounted) return;
   if (forge == null) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          context.l10n.d(
-            'Stel eerst een git-repository in bij Instellingen → Git-repository.',
-          ),
-        ),
-      ),
-    );
+    _gitNotConfigured(context);
     return;
   }
 
-  final config = ref.read(settingsProvider).gitRepo;
-  if (config == null) return;
+  final config = connection.repo;
 
   final deckDir = await showDialog<String>(
     context: context,

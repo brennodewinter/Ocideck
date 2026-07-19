@@ -1804,6 +1804,10 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'De git-verbinding van dit deck bestaat niet meer.':
+      'Git връзката на тази презентация вече не съществува.',
+  'Stel eerst een git-repository in bij Instellingen → Opslag.':
+      'Първо настройте git хранилище в Настройки → Хранилище.',
   'Geen meldingen meer op deze slide.': 'Няма повече съобщения на този слайд.',
   'Kwaliteitsproblemen geaccepteerd': 'Проблемите с качеството са приети',
   'Mogelijk persoonsgegevens': 'Възможно лични данни',

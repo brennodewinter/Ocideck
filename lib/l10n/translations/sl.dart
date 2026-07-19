@@ -1783,6 +1783,10 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'De git-verbinding van dit deck bestaat niet meer.':
+      'Povezava git te predstavitve ne obstaja več.',
+  'Stel eerst een git-repository in bij Instellingen → Opslag.':
+      'Najprej nastavite repozitorij git v Nastavitve → Shramba.',
   'Geen meldingen meer op deze slide.': 'Na tem diapozitivu ni več obvestil.',
   'Kwaliteitsproblemen geaccepteerd': 'Težave s kakovostjo sprejete',
   'Mogelijk persoonsgegevens': 'Morda osebni podatki',

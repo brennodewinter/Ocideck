@@ -1793,6 +1793,10 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'De git-verbinding van dit deck bestaat niet meer.':
+      'Połączenie git tej prezentacji już nie istnieje.',
+  'Stel eerst een git-repository in bij Instellingen → Opslag.':
+      'Najpierw skonfiguruj repozytorium git w Ustawienia → Pamięć.',
   'Geen meldingen meer op deze slide.': 'Brak zgłoszeń na tym slajdzie.',
   'Kwaliteitsproblemen geaccepteerd': 'Zaakceptowano problemy z jakością',
   'Mogelijk persoonsgegevens': 'Możliwe dane osobowe',

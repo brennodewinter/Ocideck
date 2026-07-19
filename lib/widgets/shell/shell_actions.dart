@@ -269,29 +269,24 @@ Future<void> _openFromGit(
   BuildContext context,
   WidgetRef ref, {
   String? deckDir,
+  GitConnection? connection,
 }) async {
-  final forge = await ref.read(gitForgeProvider.future);
+  final chosen0 = connection ?? await _pickGitConnection(context, ref);
+  if (chosen0 == null || !context.mounted) return;
+  final forge = await ref.read(gitForgeProvider(chosen0.id).future);
   if (!context.mounted) return;
   if (forge == null) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          context.l10n.d(
-            'Stel eerst een git-repository in bij Instellingen → Git-repository.',
-          ),
-        ),
-      ),
-    );
+    _gitNotConfigured(context);
     return;
   }
-  final chosen = deckDir ?? await GitBrowserDialog.show(context);
+  final chosen =
+      deckDir ?? await GitBrowserDialog.show(context, connectionId: chosen0.id);
   if (chosen == null || !context.mounted) return;
 
-  final config = ref.read(settingsProvider).gitRepo;
-  if (config == null) return;
+  final config = chosen0.repo;
   // Native git als het er is: openen uit de lokale clone, met de clone-HEAD als
   // basis. Anders het REST-pad.
-  final native = await ref.read(nativeGitMirrorProvider.future);
+  final native = await ref.read(nativeGitMirrorProvider(chosen0.id).future);
   if (!context.mounted) return;
   final messenger = ScaffoldMessenger.of(context);
   final l10n = context.l10n;
@@ -304,12 +299,14 @@ Future<void> _openFromGit(
             config: config,
             deckDir: chosen,
             branch: config.defaultBranch,
+            connectionId: chosen0.id,
           )
         : await notifier.openDeckFromGit(
             forge,
             config: config,
             deckDir: chosen,
             branch: config.defaultBranch,
+            connectionId: chosen0.id,
           );
     _reportOpenFailure(messenger, l10n, result);
   } on GitForgeException catch (e) {
@@ -480,33 +477,6 @@ Future<_WebdavConflict?> _showWebdavConflictDialog(BuildContext context) {
           child: Text(l10n.d('Opslaan als')),
         ),
       ],
-    ),
-  );
-}
-
-/// Laat de gebruiker een WebDAV-verbinding kiezen. Bij één verbinding gebeurt
-/// dat zonder dialoog; bij geen enkele volgt de melding dat er niets staat
-/// ingesteld.
-Future<WebdavConnection?> _pickWebdavConnection(
-  BuildContext context,
-  WidgetRef ref,
-) async {
-  final connections = ref.read(webdavConnectionsProvider);
-  if (connections.isEmpty) {
-    _webdavNotConfigured(context);
-    return null;
-  }
-  return StorageConnectionPicker.show(context, connections);
-}
-
-void _webdavNotConfigured(BuildContext context) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: Text(
-        context.l10n.d(
-          'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.',
-        ),
-      ),
     ),
   );
 }

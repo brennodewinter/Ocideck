@@ -1780,6 +1780,10 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'De git-verbinding van dit deck bestaat niet meer.':
+      'Git-anslutningen för den här presentationen finns inte längre.',
+  'Stel eerst een git-repository in bij Instellingen → Opslag.':
+      'Ställ först in ett git-arkiv under Inställningar → Lagring.',
   'Geen meldingen meer op deze slide.':
       'Inga meddelanden kvar på den här bilden.',
   'Kwaliteitsproblemen geaccepteerd': 'Kvalitetsproblem accepterade',

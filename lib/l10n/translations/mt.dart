@@ -1803,6 +1803,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'De git-verbinding van dit deck bestaat niet meer.':
+      'Il-konnessjoni git ta\' din il-preżentazzjoni ma għadhiex teżisti.',
+  'Stel eerst een git-repository in bij Instellingen → Opslag.':
+      'L-ewwel issettja repożitorju git f\'Settings → Ħażna.',
   'Geen meldingen meer op deze slide.':
       'M\'hemmx aktar avviżi f\'din is-slajd.',
   'Kwaliteitsproblemen geaccepteerd': 'Problemi ta\' kwalità aċċettati',

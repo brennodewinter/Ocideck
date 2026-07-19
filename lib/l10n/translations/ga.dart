@@ -1817,6 +1817,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'De git-verbinding van dit deck bestaat niet meer.':
+      'Níl nasc git na láithreoireachta seo ann a thuilleadh.',
+  'Stel eerst een git-repository in bij Instellingen → Opslag.':
+      'Socraigh stóras git ar dtús faoi Socruithe → Stóráil.',
   'Geen meldingen meer op deze slide.':
       'Níl aon fholáireamh fágtha ar an sleamhnán seo.',
   'Kwaliteitsproblemen geaccepteerd': 'Fadhbanna cáilíochta glactha',

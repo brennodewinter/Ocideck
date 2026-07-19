@@ -1780,6 +1780,10 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'De git-verbinding van dit deck bestaat niet meer.':
+      'Šīs prezentācijas git savienojuma vairs nav.',
+  'Stel eerst een git-repository in bij Instellingen → Opslag.':
+      'Vispirms iestatiet git repozitoriju sadaļā Iestatījumi → Krātuve.',
   'Geen meldingen meer op deze slide.': 'Šajā slaidā vairs nav ziņojumu.',
   'Kwaliteitsproblemen geaccepteerd': 'Kvalitātes problēmas pieņemtas',
   'Mogelijk persoonsgegevens': 'Iespējami personas dati',

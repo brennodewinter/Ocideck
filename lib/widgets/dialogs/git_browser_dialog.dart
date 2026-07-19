@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../l10n/app_localizations.dart';
 import '../../services/git/git_forge.dart';
 import '../../state/git_provider.dart';
-import '../../state/settings_provider.dart';
 import '../../theme/app_theme.dart';
 
 /// Kiest een deck uit de geconfigureerde git-repository en geeft de deckmap
@@ -15,19 +14,27 @@ import '../../theme/app_theme.dart';
 /// Fase 0 is read-only en toont alleen de hoofdbranch. De branchkiezer hoort bij
 /// Fase 4, waar branches en tags betekenis krijgen.
 class GitBrowserDialog extends ConsumerWidget {
-  const GitBrowserDialog({super.key});
+  /// De verbinding waaruit gebladerd wordt. Meegegeven en niet zelf uit de
+  /// instellingen gelezen: de aanroeper heeft de gebruiker al laten kiezen, en
+  /// die keuze mag hier niet stilletjes een andere worden.
+  final String connectionId;
 
-  static Future<String?> show(BuildContext context) {
+  const GitBrowserDialog({super.key, required this.connectionId});
+
+  static Future<String?> show(
+    BuildContext context, {
+    required String connectionId,
+  }) {
     return showDialog<String>(
       context: context,
-      builder: (_) => const GitBrowserDialog(),
+      builder: (_) => GitBrowserDialog(connectionId: connectionId),
     );
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final config = ref.watch(settingsProvider).gitRepo;
+    final config = ref.watch(gitConfigProvider(connectionId));
     final branch = config?.defaultBranch ?? 'main';
 
     return Dialog(
@@ -79,7 +86,9 @@ class GitBrowserDialog extends ConsumerWidget {
 
   Widget _body(BuildContext context, WidgetRef ref, String branch) {
     final l10n = context.l10n;
-    final decks = ref.watch(gitDeckListProvider(branch));
+    final decks = ref.watch(
+      gitDeckListProvider((connectionId: connectionId, branch: branch)),
+    );
 
     return decks.when(
       loading: () => const Center(child: CircularProgressIndicator()),

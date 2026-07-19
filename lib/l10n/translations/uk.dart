@@ -1799,6 +1799,10 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'De git-verbinding van dit deck bestaat niet meer.':
+      'Git-з\'єднання цієї презентації більше не існує.',
+  'Stel eerst een git-repository in bij Instellingen → Opslag.':
+      'Спершу налаштуйте git-репозиторій у Налаштування → Сховище.',
   'Geen meldingen meer op deze slide.':
       'На цьому слайді більше немає повідомлень.',
   'Kwaliteitsproblemen geaccepteerd': 'Проблеми якості прийнято',

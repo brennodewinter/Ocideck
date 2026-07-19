@@ -28,6 +28,12 @@ extension TabsNotifierGit on TabsNotifier {
     required GitRepoConfig config,
     required String deckDir,
     required String branch,
+
+    /// De verbinding waar dit deck bij hoort. Reist mee de [GitOrigin] in, zodat
+    /// een volgende opslag terug kan naar dezelfde opdrachtgever zonder opnieuw
+    /// te vragen. Leeg is toegestaan: dan valt de app terug op het vergelijken
+    /// van de configuratie.
+    String connectionId = '',
   }) async {
     final deckName = GitRepoLayout.deckNameOf(deckDir);
     if (deckName == null) {
@@ -84,6 +90,7 @@ extension TabsNotifierGit on TabsNotifier {
       branch: branch,
       deckDir: deckDir,
       baseSha: baseSha,
+      connectionId: connectionId,
     );
     refreshTabs();
     return OpenResult.opened;
@@ -251,6 +258,53 @@ extension TabsNotifierGit on TabsNotifier {
   /// verloren werk: bij een netwerkfout gaat de tekst naar de werkkopie en komt
   /// het deck in de wachtrij, die bij de volgende synchronisatie leegloopt (P2,
   /// §8.5). Zonder die twee is het pad online-only.
+  /// Op welke branch deze opslag landt, en of hij daar zelf van aftakt.
+  ///
+  /// D3: bewerken gebeurt op een werkbranch, nooit rechtstreeks op de
+  /// standaardbranch. Zit dit tabblad al midden in een ronde op zo'n branch —
+  /// zelfde repo, zelfde deck, andere branch — dan blijft het daar en is er
+  /// niets af te takken. Anders start (of hervat) het de ronde van vandaag op
+  /// `decks/<naam>/<datum>`. De naam wordt gegenereerd, niet getypt; de UI
+  /// spreekt van "concept".
+  ({String workBranch, String? forkFrom, bool midRound, String baseSha})
+  _workBranchFor({
+    required GitOrigin? origin,
+    required GitRepoConfig config,
+    required String deckDir,
+    required String deckName,
+    required String branch,
+    required DateTime? now,
+  }) {
+    final midRound =
+        origin != null &&
+        origin.matchesRepo(config) &&
+        origin.deckDir == deckDir &&
+        origin.branch != branch;
+    if (midRound) {
+      return (
+        workBranch: origin.branch,
+        forkFrom: null,
+        midRound: true,
+        // Alleen midden in een ronde is er een basis om tegen te botsen; bij een
+        // verse ronde bestaat de branch nog niet.
+        baseSha: origin.baseSha,
+      );
+    }
+    final generated = GitRepoLayout.workBranch(deckName, now ?? DateTime.now());
+    if (generated == null) {
+      throw const GitForgeException(
+        GitForgeError.malformed,
+        'Kon geen geldige werkbranch-naam maken',
+      );
+    }
+    return (
+      workBranch: generated,
+      forkFrom: branch,
+      midRound: false,
+      baseSha: '',
+    );
+  }
+
   Future<GitSaveResult> saveToGit(
     GitForge forge, {
     required GitRepoConfig config,
@@ -259,6 +313,12 @@ extension TabsNotifierGit on TabsNotifier {
     required String message,
     DeckMirror? mirror,
     Outbox? outbox,
+
+    /// De verbinding waar dit deck bij hoort. Reist mee de [GitOrigin] in, zodat
+    /// een volgende opslag terug kan naar dezelfde opdrachtgever zonder opnieuw
+    /// te vragen. Leeg is toegestaan: dan valt de app terug op het vergelijken
+    /// van de configuratie.
+    String connectionId = '',
     DateTime? now,
   }) async {
     final deckName = GitRepoLayout.deckNameOf(deckDir);
@@ -273,36 +333,19 @@ extension TabsNotifierGit on TabsNotifier {
       return const GitSaveResult(status: GitSaveStatus.failed);
     }
 
-    // D3: bewerken gebeurt op een werkbranch, nooit rechtstreeks op [branch] (de
-    // standaardbranch). Zit dit tabblad al midden in een ronde op zo'n branch,
-    // dan blijft het daar; anders start (of hervat) het de ronde van vandaag op
-    // `decks/<naam>/<datum>`. De naam wordt gegenereerd, niet getypt — de UI
-    // spreekt van "concept".
+    // Welke branch dit wordt, en of we ervan aftakken: zie [_workBranchFor].
     final origin = currentState.current?.gitOrigin;
-    final bool midRound =
-        origin != null &&
-        origin.matchesRepo(config) &&
-        origin.deckDir == deckDir &&
-        origin.branch != branch;
-    final String workBranch;
-    final String? forkFrom;
-    if (midRound) {
-      workBranch = origin.branch;
-      forkFrom = null;
-    } else {
-      final generated = GitRepoLayout.workBranch(
-        deckName,
-        now ?? DateTime.now(),
-      );
-      if (generated == null) {
-        throw const GitForgeException(
-          GitForgeError.malformed,
-          'Kon geen geldige werkbranch-naam maken',
-        );
-      }
-      workBranch = generated;
-      forkFrom = branch;
-    }
+    final round = _workBranchFor(
+      origin: origin,
+      config: config,
+      deckDir: deckDir,
+      deckName: deckName,
+      branch: branch,
+      now: now,
+    );
+    final workBranch = round.workBranch;
+    final forkFrom = round.forkFrom;
+    final midRound = round.midRound;
 
     // Een uit-git-geopend deck houdt zijn afbeeldingen als mem: op élk platform
     // (zie [_withRepoAssets]); [ImageService.readSlideImageBytes] leest mem:
@@ -327,7 +370,7 @@ extension TabsNotifierGit on TabsNotifier {
       // is nog geen basis om tegen te botsen.
       final String baseSha;
       if (midRound) {
-        baseSha = origin.baseSha;
+        baseSha = round.baseSha;
       } else {
         final branches = await forge.listBranches();
         final match = branches.where((b) => b.name == workBranch);
@@ -348,6 +391,7 @@ extension TabsNotifierGit on TabsNotifier {
         branch: workBranch,
         deckDir: deckDir,
         baseSha: result.sha,
+        connectionId: connectionId,
       );
       refreshTabs();
       return GitSaveResult(
@@ -365,11 +409,12 @@ extension TabsNotifierGit on TabsNotifier {
         config: config,
         deckDir: deckDir,
         branch: workBranch,
-        baseSha: midRound ? origin.baseSha : '',
+        baseSha: round.baseSha,
         ours: deck,
         message: message,
         fallback: e.message,
         warnings: files.warnings,
+        connectionId: connectionId,
       );
     } on GitForgeException catch (e) {
       // Verbinding kwijt is uitstel, geen mislukking: parkeer het werk als er
@@ -384,7 +429,7 @@ extension TabsNotifierGit on TabsNotifier {
           deckDir: deckDir,
           branch: workBranch,
           message: message,
-          baseSha: midRound ? origin.baseSha : '',
+          baseSha: round.baseSha,
           forkFrom: forkFrom,
           warnings: files.warnings,
         );
@@ -422,6 +467,7 @@ extension TabsNotifierGit on TabsNotifier {
     required String message,
     required String fallback,
     required List<String> warnings,
+    String connectionId = '',
   }) async {
     // Zonder gemeenschappelijke voorouder valt er niets driewegs te doen.
     if (baseSha.isEmpty) {
@@ -466,6 +512,7 @@ extension TabsNotifierGit on TabsNotifier {
         branch: branch,
         deckDir: deckDir,
         baseSha: head,
+        connectionId: connectionId,
       );
       refreshTabs();
 
@@ -508,6 +555,7 @@ extension TabsNotifierGit on TabsNotifier {
         branch: branch,
         deckDir: deckDir,
         baseSha: result.sha,
+        connectionId: connectionId,
       );
       refreshTabs();
       return GitSaveResult(
@@ -731,6 +779,7 @@ extension TabsNotifierGit on TabsNotifier {
         branch: config.defaultBranch,
         deckDir: origin.deckDir,
         baseSha: head,
+        connectionId: origin.connectionId,
       );
       refreshTabs();
       return const MergeResult(status: MergeStatus.merged);

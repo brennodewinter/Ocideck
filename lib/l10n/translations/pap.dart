@@ -738,6 +738,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'De git-verbinding van dit deck bestaat niet meer.':
+      'E konekshon git di e presentashon akí no ta eksistí mas.',
+  'Stel eerst een git-repository in bij Instellingen → Opslag.':
+      'Konfigurá promé un repositorio git na Konfigurashon → Almasenahe.',
   'Geen meldingen meer op deze slide.': 'No tin mas avisonan riba e slide aki.',
   'Kwaliteitsproblemen geaccepteerd': 'Problemanan di kalidat aseptá',
   'Mogelijk persoonsgegevens': 'Posiblemente datonan personal',
