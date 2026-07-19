@@ -25,7 +25,7 @@ void main() {
   }
 
   group('stage', () {
-    test('kopieert de bron naar de subdir van de wachtkamer', () async {
+    test('kopieert de bron naar de subdir van de stagingmap', () async {
       final src = source('foto.png', 'bytes');
 
       final staged = await AssetStaging.stage(src.path, subdir: 'images');
@@ -91,7 +91,7 @@ void main() {
       expect(File(first!).readAsStringSync(), 'een');
     });
 
-    test('geeft null zonder wachtkamer', () async {
+    test('geeft null zonder stagingmap', () async {
       AssetStaging.overrideRootForTest(null);
 
       expect(
@@ -149,7 +149,7 @@ void main() {
       expect(AssetStaging.isStagedPath(''), isFalse);
     });
 
-    test('is onwaar zonder wachtkamer', () {
+    test('is onwaar zonder stagingmap', () {
       AssetStaging.overrideRootForTest(null);
 
       expect(AssetStaging.isStagedPath('/wat/dan/ook.png'), isFalse);

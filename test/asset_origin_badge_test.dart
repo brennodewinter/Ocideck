@@ -47,7 +47,7 @@ void main() {
     expect(tooltip.message, contains('Sla op'));
   });
 
-  testWidgets('meldt de wachtkamer als tussenstand, niet als fout', (
+  testWidgets('meldt de stagingmap als tussenstand, niet als fout', (
     tester,
   ) async {
     await tester.pumpWidget(

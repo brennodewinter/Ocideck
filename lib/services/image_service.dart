@@ -298,7 +298,7 @@ class ImageService {
           p.relative(file.path, from: projectPath),
         );
       }
-      // Geen projectmap: de wachtkamer, met dezelfde images/-indeling, zodat
+      // Geen projectmap: de stagingmap, met dezelfde images/-indeling, zodat
       // een geplakte afbeelding bij de eerste opslag meeverhuist net als elke
       // andere — en tot die tijd als "nog niet opgeslagen" herkenbaar is.
       final name = 'pasted_${DateTime.now().millisecondsSinceEpoch}.png';
@@ -324,7 +324,7 @@ class ImageService {
   /// Zonder deze stap zou de presentatie afhangen van een bestand op een plek
   /// die alleen deze gebruiker heeft; wie het deck doorstuurt, stuurt een gat
   /// mee. Geeft de verwijzing terug die de slide moet vasthouden:
-  /// projectrelatief bij een opgeslagen deck, anders een pad in de wachtkamer.
+  /// projectrelatief bij een opgeslagen deck, anders een pad in de stagingmap.
   ///
   /// Lukt het kopiëren niet, dan komt het bronpad terug in plaats van null: een
   /// zichtbare afbeelding met een waarschuwingsbadge is bruikbaarder dan een
@@ -350,7 +350,7 @@ class ImageService {
     required String subdir,
   }) async {
     // Nog geen map op schijf: niet het bronpad onthouden (dat breekt zodra
-    // iemand het bestand verplaatst), maar kopiëren naar de wachtkamer, die
+    // iemand het bestand verplaatst), maar kopiëren naar de stagingmap, die
     // dezelfde indeling heeft als een echt project. Lukt zelfs dat niet, dan
     // is het bronpad nog altijd beter dan niets.
     if (projectPath == null || projectPath.isEmpty) {
