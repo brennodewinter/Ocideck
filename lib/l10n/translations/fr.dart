@@ -738,6 +738,24 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Sla de presentatie op om een kopie te maken.':
+      'Enregistrez la présentation pour en faire une copie.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': se trouve hors de la présentation et ne l\'accompagne pas (',
+  'Bestand niet gevonden': 'Fichier introuvable',
+  'Weg na herladen': 'Perdu après rechargement',
+  'Nog niet opgeslagen': 'Pas encore enregistré',
+  'Buiten de presentatie': 'Hors de la présentation',
+  'Van internet': 'Depuis internet',
+  'Alleen in deze sessie': 'Uniquement dans cette session',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'Ce fichier a déjà été copié et est en sécurité. Il prendra sa place dans le dossier de la présentation dès que vous enregistrerez.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'Ce fichier se trouve hors du dossier de la présentation et ne l\'accompagne pas. Les personnes à qui vous transmettez la présentation ne verront rien ici. Enregistrez pour en faire une copie.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'Ce fichier se trouve sur internet et ne fait pas partie de la présentation. Sans connexion, ou si la source disparaît, il n\'est plus là.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'Dans la version web, ce fichier ne reste que dans la mémoire de cette session. Après le rechargement de la page, il n\'est plus là.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Ouvrez et conservez des présentations dans un compartiment S3 : AWS S3, ou un service compatible S3 comme votre propre MinIO. La clé d’accès secrète est conservée chiffrée dans le trousseau, pas avec les autres réglages.',
   'Openen vanuit S3': 'Ouvrir depuis S3',

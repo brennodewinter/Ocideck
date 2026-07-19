@@ -3,13 +3,14 @@ import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:pasteboard/pasteboard.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
 import '../l10n/app_localizations.dart';
 import '../models/slide.dart';
+import '../utils/asset_destination.dart';
 import '../utils/atomic_file.dart';
 import '../utils/log.dart';
 import '../utils/project_path.dart';
+import 'asset_staging.dart';
 import 'web_asset_store.dart';
 
 /// Waarom een afbeelding kiezen/plakken géén pad opleverde. [cancelled] is een
@@ -297,26 +298,64 @@ class ImageService {
           p.relative(file.path, from: projectPath),
         );
       }
-      final cacheDir = await getTemporaryDirectory();
-      final dir = Directory(p.join(cacheDir.path, 'pasted_images'));
-      await dir.create(recursive: true);
-      final file = File(
-        p.join(dir.path, 'pasted_${DateTime.now().millisecondsSinceEpoch}.png'),
+      // Geen projectmap: de wachtkamer, met dezelfde images/-indeling, zodat
+      // een geplakte afbeelding bij de eerste opslag meeverhuist net als elke
+      // andere — en tot die tijd als "nog niet opgeslagen" herkenbaar is.
+      final name = 'pasted_${DateTime.now().millisecondsSinceEpoch}.png';
+      final staged = await AssetStaging.stageBytes(
+        bytes,
+        subdir: 'images',
+        filename: name,
       );
-      await writeBytesAtomic(file, bytes);
-      return ImageImportOutcome.success(file.path);
+      if (staged == null) {
+        return const ImageImportOutcome.failed(ImageImportFailure.writeFailed);
+      }
+      return ImageImportOutcome.success(staged);
     } on FileSystemException catch (e) {
       logWarning('ImageService.pasteImage: write failed', e);
       return const ImageImportOutcome.failed(ImageImportFailure.writeFailed);
     }
   }
 
+  /// Neem een bestand op dat de gebruiker al heeft aangewezen — gesleept op de
+  /// app, of gekozen uit de afbeeldingenbibliotheek — in plaats van er alleen
+  /// naar te verwijzen.
+  ///
+  /// Zonder deze stap zou de presentatie afhangen van een bestand op een plek
+  /// die alleen deze gebruiker heeft; wie het deck doorstuurt, stuurt een gat
+  /// mee. Geeft de verwijzing terug die de slide moet vasthouden:
+  /// projectrelatief bij een opgeslagen deck, anders een pad in de wachtkamer.
+  ///
+  /// Lukt het kopiëren niet, dan komt het bronpad terug in plaats van null: een
+  /// zichtbare afbeelding met een waarschuwingsbadge is bruikbaarder dan een
+  /// slide die stil leeg blijft, en de badge vertelt de gebruiker precies wat
+  /// er nog buiten de presentatie ligt.
+  Future<String> importIntoDeck(
+    String sourcePath, {
+    String? projectPath,
+    String subdir = 'images',
+  }) async =>
+      await _importIntoProject(sourcePath, projectPath, subdir: subdir) ??
+      sourcePath;
+
+  /// Of [path] binnen de importlimiet valt en werkelijk een rasterafbeelding
+  /// is. De extensie zegt niets — een hernoemd script heet net zo makkelijk
+  /// `.png`.
+  Future<bool> isAcceptableImageFile(String path) =>
+      _isAcceptableImageFile(path);
+
   Future<String?> _importIntoProject(
     String sourcePath,
     String? projectPath, {
     required String subdir,
   }) async {
-    if (projectPath == null || projectPath.isEmpty) return sourcePath;
+    // Nog geen map op schijf: niet het bronpad onthouden (dat breekt zodra
+    // iemand het bestand verplaatst), maar kopiëren naar de wachtkamer, die
+    // dezelfde indeling heeft als een echt project. Lukt zelfs dat niet, dan
+    // is het bronpad nog altijd beter dan niets.
+    if (projectPath == null || projectPath.isEmpty) {
+      return await AssetStaging.stage(sourcePath, subdir: subdir) ?? sourcePath;
+    }
     final destDir = Directory(p.join(projectPath, subdir));
     await destDir.create(recursive: true);
     final normalized = p.normalize(sourcePath);
@@ -325,12 +364,14 @@ class ImageService {
     }
     final src = File(sourcePath);
     if (!await src.exists()) return null;
-    final filename = p.basename(sourcePath);
-    final dest = File(p.join(destDir.path, filename));
-    if (!await dest.exists()) {
-      await src.copy(dest.path);
-    }
-    return '$subdir/$filename';
+    final dest = await resolveAssetDestination(
+      destDir,
+      p.basename(sourcePath),
+      src,
+    );
+    if (dest == null) return null;
+    if (!dest.alreadyPresent) await src.copy(dest.file.path);
+    return '$subdir/${p.basename(dest.file.path)}';
   }
 
   /// Copy images referenced by absolute path into the project images/ dir
@@ -387,16 +428,8 @@ class ImageService {
         p.isAbsolute(path);
   }
 
-  Future<String?> _copyToDir(String sourcePath, Directory destDir) async {
-    final src = File(sourcePath);
-    if (!await src.exists()) return null;
-    final filename = p.basename(sourcePath);
-    final dest = File(p.join(destDir.path, filename));
-    if (!await dest.exists()) {
-      await src.copy(dest.path);
-    }
-    return 'media/$filename';
-  }
+  Future<String?> _copyToDir(String sourcePath, Directory destDir) async =>
+      _copyInto(sourcePath, destDir, 'media');
 
   Future<String?> _copyImageToProject(
     String sourcePath,
@@ -407,14 +440,28 @@ class ImageService {
         !p.isAbsolute(sourcePath)) {
       return null;
     }
+    return _copyInto(sourcePath, imagesDir, 'images');
+  }
+
+  /// Kopieer [sourcePath] naar [destDir] en geef de projectrelatieve
+  /// verwijzing terug. Botst de naam met andere inhoud, dan wijkt de kopie uit
+  /// naar een vrije naam — vandaar dat de teruggegeven naam die van de
+  /// bestemming is en niet die van de bron.
+  Future<String?> _copyInto(
+    String sourcePath,
+    Directory destDir,
+    String subdir,
+  ) async {
     final src = File(sourcePath);
     if (!await src.exists()) return null;
-    final filename = p.basename(sourcePath);
-    final dest = File(p.join(imagesDir.path, filename));
-    if (!await dest.exists()) {
-      await src.copy(dest.path);
-    }
-    return 'images/$filename';
+    final dest = await resolveAssetDestination(
+      destDir,
+      p.basename(sourcePath),
+      src,
+    );
+    if (dest == null) return null;
+    if (!dest.alreadyPresent) await src.copy(dest.file.path);
+    return '$subdir/${p.basename(dest.file.path)}';
   }
 
   /// Resolve a slide image path to an absolute path for display.

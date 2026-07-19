@@ -1780,6 +1780,24 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Sla de presentatie op om een kopie te maken.':
+      'Spara presentationen för att skapa en kopia.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': ligger utanför presentationen och följer inte med (',
+  'Bestand niet gevonden': 'Filen hittades inte',
+  'Weg na herladen': 'Borta efter omladdning',
+  'Nog niet opgeslagen': 'Inte sparat ännu',
+  'Buiten de presentatie': 'Utanför presentationen',
+  'Van internet': 'Från internet',
+  'Alleen in deze sessie': 'Endast i den här sessionen',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'Den här filen är redan kopierad och ligger säkert. Den får sin plats i presentationsmappen så snart du sparar.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'Den här filen ligger utanför presentationsmappen och följer inte med. Den som får presentationen av dig ser ingenting här. Spara för att skapa en kopia.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'Den här filen ligger på internet och hör inte till presentationen. Utan uppkoppling, eller om källan försvinner, är den borta.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'I webbversionen finns den här filen bara i den här sessionens minne. När sidan laddas om är den borta.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Öppna och förvara presentationer i en S3-hink: AWS S3 eller en S3-kompatibel tjänst som en egen MinIO. Den hemliga åtkomstnyckeln sparas krypterad i nyckelringen, inte tillsammans med övriga inställningar.',
   'Openen vanuit S3': 'Öppna från S3',

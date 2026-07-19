@@ -1780,6 +1780,24 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Sla de presentatie op om een kopie te maken.':
+      'Saglabājiet prezentāciju, lai izveidotu kopiju.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': atrodas ārpus prezentācijas un līdzi neceļo (',
+  'Bestand niet gevonden': 'Fails nav atrasts',
+  'Weg na herladen': 'Pazudis pēc pārlādēšanas',
+  'Nog niet opgeslagen': 'Vēl nav saglabāts',
+  'Buiten de presentatie': 'Ārpus prezentācijas',
+  'Van internet': 'No interneta',
+  'Alleen in deze sessie': 'Tikai šajā sesijā',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'Šis fails jau ir nokopēts un ir drošībā. Savu vietu prezentācijas mapē tas iegūs, tiklīdz saglabāsiet.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'Šis fails atrodas ārpus prezentācijas mapes un līdzi neceļo. Tas, kurš saņems prezentāciju no jums, šeit neredzēs neko. Saglabājiet, lai izveidotu kopiju.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'Šis fails atrodas internetā un prezentācijai nepieder. Bez savienojuma vai ja avots pazūd, tā vairs nav.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'Tīmekļa versijā šis fails paliek tikai šīs sesijas atmiņā. Pēc lapas pārlādēšanas tā vairs nav.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Atver un glabā prezentācijas S3 tvertnē: AWS S3 vai ar S3 saderīgs pakalpojums, piemēram, paša MinIO. Slepenā piekļuves atslēga tiek glabāta šifrēta atslēgu saišķī, nevis kopā ar pārējiem iestatījumiem.',
   'Openen vanuit S3': 'Atvērt no S3',

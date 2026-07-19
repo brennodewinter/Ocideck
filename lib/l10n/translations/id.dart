@@ -1781,6 +1781,24 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Sla de presentatie op om een kopie te maken.':
+      'Simpan presentasi untuk membuat salinan.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': berada di luar presentasi dan tidak ikut serta (',
+  'Bestand niet gevonden': 'Berkas tidak ditemukan',
+  'Weg na herladen': 'Hilang setelah dimuat ulang',
+  'Nog niet opgeslagen': 'Belum disimpan',
+  'Buiten de presentatie': 'Di luar presentasi',
+  'Van internet': 'Dari internet',
+  'Alleen in deze sessie': 'Hanya dalam sesi ini',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'Berkas ini sudah disalin dan aman. Berkas akan menempati folder presentasi begitu Anda menyimpan.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'Berkas ini berada di luar folder presentasi dan tidak ikut serta. Orang yang menerima presentasi dari Anda tidak akan melihat apa pun di sini. Simpan untuk membuat salinan.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'Berkas ini berada di internet dan bukan bagian dari presentasi. Tanpa koneksi, atau jika sumbernya hilang, berkas itu lenyap.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'Di versi web, berkas ini hanya tersimpan dalam memori sesi ini. Setelah halaman dimuat ulang, berkas itu lenyap.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Buka dan simpan presentasi di bucket S3: AWS S3, atau layanan yang kompatibel dengan S3 seperti MinIO sendiri. Kunci akses rahasia disimpan terenkripsi di gantungan kunci, bukan bersama pengaturan lain.',
   'Openen vanuit S3': 'Buka dari S3',

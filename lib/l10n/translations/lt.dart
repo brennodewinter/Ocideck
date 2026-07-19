@@ -1789,6 +1789,24 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Sla de presentatie op om een kopie te maken.':
+      'Įrašykite pristatymą, kad būtų sukurta kopija.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': yra už pristatymo ribų ir kartu nekeliauja (',
+  'Bestand niet gevonden': 'Failas nerastas',
+  'Weg na herladen': 'Dingo perkrovus',
+  'Nog niet opgeslagen': 'Dar neįrašyta',
+  'Buiten de presentatie': 'Už pristatymo ribų',
+  'Van internet': 'Iš interneto',
+  'Alleen in deze sessie': 'Tik šioje sesijoje',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'Šis failas jau nukopijuotas ir yra saugus. Savo vietą pristatymo aplanke jis gaus, kai tik įrašysite.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'Šis failas yra už pristatymo aplanko ribų ir kartu nekeliauja. Tas, kuris gaus pristatymą iš jūsų, čia nieko nematys. Įrašykite, kad būtų sukurta kopija.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'Šis failas yra internete ir pristatymui nepriklauso. Be ryšio arba jei šaltinis dings, jo nebebus.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'Žiniatinklio versijoje šis failas lieka tik šios sesijos atmintyje. Perkrovus puslapį jo nebebus.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Atverk ir laikyk pristatymus S3 saugykloje: AWS S3 arba su S3 suderinama paslauga, pavyzdžiui savas MinIO. Slaptas prieigos raktas laikomas užšifruotas raktinėje, o ne su kitais nustatymais.',
   'Openen vanuit S3': 'Atverti iš S3',

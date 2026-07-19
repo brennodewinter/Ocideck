@@ -165,6 +165,10 @@ void main() {
         'label': 'Afbeelding',
         'path': 'images/x.png',
       },
+      SlideQualityIssueKind.externalMediaFile: {
+        'label': 'Afbeelding',
+        'path': '/elders/x.png',
+      },
       SlideQualityIssueKind.textDensityWarning: {'percent': '80%'},
       SlideQualityIssueKind.textDensityCritical: {'percent': '55%'},
       SlideQualityIssueKind.splitRunDragged: {

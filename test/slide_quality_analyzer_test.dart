@@ -737,6 +737,100 @@ void main() {
       );
     });
 
+    // Juist een deck dat nog niet is opgeslagen heeft de grootste kans op een
+    // kapotte verwijzing — daar hangt de slide nog aan een pad elders op de
+    // schijf. Tot voor kort zweeg de controle precies daar.
+    test('detects a missing file in a deck that has no project path', () {
+      final deck = Deck(
+        title: 'Demo',
+        slides: [
+          Slide.create(
+            SlideType.image,
+          ).copyWith(imagePath: '/elders/bestaat-niet.png'),
+        ],
+      );
+
+      expect(
+        analyzer
+            .analyze(deck)
+            .issues
+            .any((i) => i.kind == SlideQualityIssueKind.missingMediaFile),
+        isTrue,
+      );
+    });
+
+    test(
+      'stays quiet about a file that does exist without a project',
+      () async {
+        final dir = await Directory.systemTemp.createTemp('ocideck-quality-');
+        addTearDown(() => dir.delete(recursive: true));
+        final file = File('${dir.path}/foto.png')..writeAsStringSync('x');
+
+        final deck = Deck(
+          title: 'Demo',
+          slides: [
+            Slide.create(SlideType.image).copyWith(imagePath: file.path),
+          ],
+        );
+
+        expect(
+          analyzer
+              .analyze(deck)
+              .issues
+              .any((i) => i.kind == SlideQualityIssueKind.missingMediaFile),
+          isFalse,
+        );
+      },
+    );
+
+    test('flags an image that lies outside the presentation folder', () async {
+      final dir = await Directory.systemTemp.createTemp('ocideck-quality-');
+      addTearDown(() => dir.delete(recursive: true));
+
+      final deck = Deck(
+        title: 'Demo',
+        projectPath: dir.path,
+        slides: [
+          Slide.create(SlideType.image).copyWith(imagePath: '/elders/foto.png'),
+        ],
+      );
+
+      final issues = analyzer.analyze(deck).issues;
+      expect(
+        issues.any((i) => i.kind == SlideQualityIssueKind.externalMediaFile),
+        isTrue,
+      );
+      // Niet ook nog als "niet gevonden" melden: dat is dezelfde afbeelding,
+      // en het externe pad is de bruikbare boodschap.
+      expect(
+        issues.any((i) => i.kind == SlideQualityIssueKind.missingMediaFile),
+        isFalse,
+      );
+    });
+
+    test('stays quiet about an image inside the presentation folder', () async {
+      final dir = await Directory.systemTemp.createTemp('ocideck-quality-');
+      addTearDown(() => dir.delete(recursive: true));
+      Directory('${dir.path}/images').createSync();
+      File('${dir.path}/images/foto.png').writeAsStringSync('x');
+
+      final deck = Deck(
+        title: 'Demo',
+        projectPath: dir.path,
+        slides: [
+          Slide.create(SlideType.image).copyWith(imagePath: 'images/foto.png'),
+        ],
+      );
+
+      expect(
+        analyzer
+            .analyze(deck)
+            .issues
+            .any((i) => i.kind == SlideQualityIssueKind.externalMediaFile),
+        isFalse,
+      );
+    });
+
     // Een online bron is geen ontbrekend bestand: zonder URL-poort plakt de
     // resolver de URL achter de projectmap en meldt hem als "niet gevonden".
     test('does not report an online media URL as a missing file', () async {

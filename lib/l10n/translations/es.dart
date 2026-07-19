@@ -735,6 +735,24 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Sla de presentatie op om een kopie te maken.':
+      'Guarde la presentación para crear una copia.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': está fuera de la presentación y no viaja con ella (',
+  'Bestand niet gevonden': 'Archivo no encontrado',
+  'Weg na herladen': 'Perdido tras recargar',
+  'Nog niet opgeslagen': 'Aún no guardado',
+  'Buiten de presentatie': 'Fuera de la presentación',
+  'Van internet': 'De internet',
+  'Alleen in deze sessie': 'Solo en esta sesión',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'Este archivo ya se ha copiado y está a salvo. Ocupará su lugar en la carpeta de la presentación en cuanto guarde.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'Este archivo está fuera de la carpeta de la presentación y no viaja con ella. Quien reciba la presentación de usted no verá nada aquí. Guarde para crear una copia.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'Este archivo está en internet y no forma parte de la presentación. Sin conexión, o si la fuente desaparece, ya no está.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'En la versión web este archivo solo permanece en la memoria de esta sesión. Tras recargar la página, ya no está.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Abre y guarda presentaciones en un bucket de S3: AWS S3, o un servicio compatible con S3 como tu propio MinIO. La clave de acceso secreta se guarda cifrada en el llavero, no con el resto de ajustes.',
   'Openen vanuit S3': 'Abrir desde S3',

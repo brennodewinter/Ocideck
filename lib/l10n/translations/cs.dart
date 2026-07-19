@@ -1784,6 +1784,24 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Sla de presentatie op om een kopie te maken.':
+      'Uložte prezentaci, aby vznikla kopie.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': leží mimo prezentaci a neputuje s ní (',
+  'Bestand niet gevonden': 'Soubor nenalezen',
+  'Weg na herladen': 'Po znovunačtení pryč',
+  'Nog niet opgeslagen': 'Zatím neuloženo',
+  'Buiten de presentatie': 'Mimo prezentaci',
+  'Van internet': 'Z internetu',
+  'Alleen in deze sessie': 'Jen v této relaci',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'Tento soubor už je zkopírovaný a je v bezpečí. Své místo ve složce prezentace dostane, jakmile uložíte.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'Tento soubor leží mimo složku prezentace a neputuje s ní. Kdo od vás prezentaci dostane, tady neuvidí nic. Uložte, aby vznikla kopie.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'Tento soubor leží na internetu a k prezentaci nepatří. Bez připojení, nebo když zdroj zmizí, je pryč.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'Ve webové verzi zůstává tento soubor jen v paměti této relace. Po znovunačtení stránky je pryč.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Otevírej a uchovávej prezentace v úložišti S3: AWS S3 nebo služba kompatibilní s S3, třeba vlastní MinIO. Tajný přístupový klíč se ukládá zašifrovaný v klíčence, ne k ostatním nastavením.',
   'Openen vanuit S3': 'Otevřít z S3',

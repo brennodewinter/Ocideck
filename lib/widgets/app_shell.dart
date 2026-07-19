@@ -409,10 +409,39 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
           );
         }
       } else if (_imageExtensions.contains(ext)) {
-        images.add(path);
+        final adopted = await _adoptDroppedImage(path);
+        if (adopted != null) images.add(adopted);
       }
     }
     if (images.isNotEmpty) _addImagesToActiveDeck(images);
+  }
+
+  /// Neem een gesleepte afbeelding op in het deck in plaats van naar de plek op
+  /// schijf te blijven wijzen: die plek heeft de volgende lezer niet.
+  ///
+  /// Valideert eerst op magic bytes, net als de bestandskiezer en de
+  /// webvariant hierboven — de extensie van een gesleept bestand is niet meer
+  /// dan een bewering. Lukt het kopiëren niet, dan gaat het bronpad alsnog mee:
+  /// een zichtbare afbeelding met een waarschuwingsbadge is beter dan een
+  /// slide die stil leeg blijft.
+  Future<String?> _adoptDroppedImage(String path) async {
+    final service = ref.read(imageServiceProvider);
+    if (!await service.isAcceptableImageFile(path)) {
+      logWarning(
+        'AppShell._onFilesDropped: afbeelding geweigerd '
+        '(te groot of geen afbeelding)',
+        path,
+      );
+      return null;
+    }
+    final projectPath = ref
+        .read(tabsProvider)
+        .current
+        ?.deckNotifier
+        .currentState
+        .deck
+        ?.projectPath;
+    return service.importIntoDeck(path, projectPath: projectPath);
   }
 
   void _addImagesToActiveDeck(List<String> paths) {

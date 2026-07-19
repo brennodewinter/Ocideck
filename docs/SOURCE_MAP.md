@@ -50,6 +50,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `reference_standard.dart` — `ReferenceStandard`/`StandardFreshness`/`UpstreamProbe`: één gebundelde referentiestandaard als data (versie, bron-URL, wat er precies gebundeld is, licentie, en hoe upstream te bevragen). `UpstreamProbe` kent vier strategieën en met opzet géén `manual`: CWE en CVSS stonden eerst als "niet te bevragen" tot bleek dat MITRE een REST-API heeft en FIRST per versie een schema op een vaste URL publiceert. "Onbekend" (bron onbereikbaar) mag nooit als "actueel" lezen.
 - `settings.dart` — `AppSettings`, `ThemeProfile` (incl. severity tokens + built-in Security profile), `AppAppearanceProfile`, `CockpitColorScheme` config.
 - `slide.dart` — `Slide` model with typed fields; `SlideType` enum for the slide layout variants. Inline bullet-item helpers: checklist (`checklistBullet`/`checklistItemChecked`/`checklistItemText`) and group headings (`kGroupHeadingMarker`/`isGroupHeading`/`groupHeadingBullet`/`groupHeadingText`).
+- `asset_origin.dart` — `AssetOrigin` + `classifyAssetPath`: answers the only question that matters about a slide's media — does it travel along when the presentation goes to someone else? Purely lexical (no disk access), because the UI asks it per frame; whether the file still exists is a separate question for the quality analyser.
 - `slide_quality.dart` — `SlideQualityResult`/`SlideQualityIssue` for accessibility/contrast/density/privacy audits.
 - `timeline.dart` — `TimelineEvent` and `TimelineLayout`/`TimelineReveal` enums for animated timeline slides.
 - `video_source.dart` — `VideoSource` parser for local files, YouTube, Vimeo, and remote video URLs.
@@ -101,7 +102,8 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `image_dedup_service.dart` — Finds byte-identical image files by md5 to clean up libraries.
 - `image_sidecar_store.dart` — Shared read/mutate/atomic-write layer for the per-directory JSON sidecars of captions and descriptions.
 - `image_reference_service.dart` — Finds and rewrites image references in Marp markdown files.
-- `image_service.dart` — Validates and manages imported image and media asset files.
+- `asset_staging.dart` — `AssetStaging`: the waiting room for media of a deck that has no folder on disk yet. Per session a temp folder laid out like a real project (`images/`, `media/`), so bytes are safe on insert and the ordinary save-time copy lifts them into place. `isStagedPath` tests against the *root*, not the session folder, so a deck recovered after a restart still recognises its earlier copies instead of calling them external.
+- `image_service.dart` — Validates and manages imported image and media asset files. `importIntoDeck` is the single entry for material the user already pointed at (dropped, or picked from the library); it returns the source path rather than null when copying fails, so a slide never silently goes blank.
 - `markdown_body_blocks.dart` — Splits markdown into code blocks and paragraphs.
 - `markdown_safety.dart` — Scans raw `.md` for executable content and blocks unsafe imports.
 - `management_summary.dart` — Derives the management summary from the deck (severity counts, scope coverage, standards used).
@@ -209,6 +211,7 @@ deliberately manual).
 ## `lib/utils/` — small shared helpers
 
 - `asn1_der.dart` — Minimal dependency-free ASN.1/DER encode + parse for RFC 3161 timestamping.
+- `asset_destination.dart` — `resolveAssetDestination`: picks where an imported asset lands. On a name clash it compares contents — identical means reuse, different means a numbered suffix — so two pictures both called `screenshot.png` stay two pictures instead of silently becoming one.
 - `atomic_file.dart` — Atomic writes (temp file + rename) to prevent data loss on crash.
 - `bundled_asset.dart` — `asset:`-schema voor méégebundelde logo's van ingebouwde stijlprofielen.
 - `color_contrast.dart` — WCAG 2.1 contrast-ratio calculation and hex colour parsing.
@@ -271,6 +274,7 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 
 - `app_shell.dart` — Main application shell: layout, file IO, and dialog coordination.
 - `markdown_notes_editor.dart` — Barrel re-export of the markdown notes editor.
+- `asset_origin_badge.dart` — `AssetOriginBadge`: makes visible what happens to a slide's media once the presentation is passed on. Says what the origin *means* rather than where the file sits, with the consequence and the way out in the tooltip. Deliberately confined to the editor — the rendered slide is also what the audience and the export see, and a work instruction does not belong there.
 - `privacy_badge.dart` — `PrivacyBadge`, the bare `PrivacyKatMark`, and the `privacyKatSvg` mark: the non-blocking marker (with an explanation on hover) for a spot where personal data is pointed at or something leaves the device. Used by the status bar's remote-origin badge, the export-readiness chip's privacy warnings, and the Security tab's online-CVE switch.
 - `privacy_statement_content.dart` — Privacy/license content shared by the consent and settings dialogs.
 

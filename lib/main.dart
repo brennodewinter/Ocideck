@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'app.dart';
 import 'platform/launch_files.dart';
 import 'platform/native_window.dart';
+import 'services/asset_staging.dart';
 import 'utils/log.dart';
 import 'widgets/presentation/audience_window.dart';
 
@@ -35,6 +36,10 @@ void main(List<String> args) {
     if (!kIsWeb) {
       pendingLaunchFiles.addAll(args.where(looksLikeDeckLaunchArg));
     }
+
+    // Bepaal de wachtkamer voor media vóór de eerste frame: de UI moet
+    // synchroon kunnen zien of een afbeelding daar staat (zie AssetStaging).
+    await AssetStaging.initialize();
 
     await configureNativeWindow();
 
