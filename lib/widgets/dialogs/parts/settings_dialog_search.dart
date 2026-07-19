@@ -36,8 +36,8 @@ class SettingsSearchEntry {
   /// Idem, maar uit de sleuteltabel (`l10n.t`).
   final String? sectionKey;
 
-  /// Index van het tabblad in de zijbalk.
-  final int tab;
+  /// Het tabblad waar deze instelling op staat.
+  final SettingsSection tab;
 
   /// Extra zoektermen die níét op het scherm staan — synoniemen en de woorden
   /// die iemand intypt als hij de officiële term niet kent ("video", "youtube",
@@ -64,24 +64,6 @@ class SettingsSearchEntry {
 }
 
 extension _SettingsSearch on _SettingsDialogState {
-  /// De namen van de tabbladen, in de volgorde van de zijbalk. Ook de index
-  /// waar [SettingsSearchEntry.tab] naar wijst.
-  List<String> _tabLabels(AppLocalizations l10n) => <String>[
-    l10n.t('settingsGeneral'),
-    l10n.d('App-thema'),
-    l10n.d('Presentatiestijl'),
-    l10n.d('Cockpit'),
-    l10n.d('Licentie en Privacy'),
-    l10n.d('Beveiliging'),
-    l10n.d('AI-assistentie'),
-    l10n.d('Nextcloud'),
-    l10n.d('Git-repository'),
-    l10n.d('Checklists'),
-    l10n.d('Uitbreidingen'),
-    l10n.d('Documentatie'),
-    l10n.d('Over OciDeck'),
-  ];
-
   /// De sectiekop. Registreert zijn eigen anker en licht op wanneer een
   /// zoekresultaat hiernaartoe sprong.
   Widget _sectionTitle(String text) {
@@ -182,7 +164,6 @@ extension _SettingsSearch on _SettingsDialogState {
 
   Widget _settingsSearchResults(AppLocalizations l10n) {
     final hits = _settingsSearchHits(l10n);
-    final labels = _tabLabels(l10n);
 
     return Material(
       color: AppTheme.slate50,
@@ -201,9 +182,7 @@ extension _SettingsSearch on _SettingsDialogState {
               itemCount: hits.length,
               itemBuilder: (context, i) {
                 final entry = hits[i];
-                final tab = entry.tab >= 0 && entry.tab < labels.length
-                    ? labels[entry.tab]
-                    : '';
+                final tab = entry.tab.label(l10n);
                 final section = entry.resolvedSection(l10n);
                 return ListTile(
                   dense: true,
@@ -231,6 +210,14 @@ extension _SettingsSearch on _SettingsDialogState {
     _rebuild(() {
       _selectedTab = entry.tab;
       _highlightedSection = section.isEmpty ? null : section;
+      // Een treffer in een opslagwijze klapt die wijze open. Zonder dit staat
+      // het anker niet in de boom en scrollt de sprong nergens naartoe — de
+      // gebruiker belandt op het tabblad en mag zelf gaan zoeken.
+      if (entry.tab == SettingsSection.storage) {
+        _expandedModality = StorageModality.values
+            .where((m) => m.sectionSource == entry.section)
+            .firstOrNull;
+      }
     });
     if (section.isEmpty) return; // hangt onder geen kop: tabblad is genoeg
 

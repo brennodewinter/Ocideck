@@ -20,7 +20,7 @@ extension _SettingsGit on _SettingsDialogState {
     );
   }
 
-  Widget _gitTab() {
+  Widget _gitPanel() {
     final l10n = context.l10n;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

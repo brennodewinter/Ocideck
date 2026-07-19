@@ -43,7 +43,9 @@ import '../privacy_badge.dart';
 import '../privacy_statement_content.dart';
 import '../reader/documentation_search_tab.dart';
 
+part 'parts/settings_dialog_sections.dart';
 part 'parts/settings_dialog_general.dart';
+part 'parts/settings_dialog_storage.dart';
 part 'parts/settings_dialog_presentation.dart';
 part 'parts/settings_dialog_appearance.dart';
 part 'parts/settings_dialog_colors.dart';
@@ -77,7 +79,8 @@ Color _parseHexColor(String hex) {
 }
 
 class SettingsDialog extends ConsumerStatefulWidget {
-  final int initialTab;
+  /// Het tabblad dat bij openen actief is.
+  final SettingsSection initialSection;
 
   /// Theme profile field to scroll to and briefly highlight on the Colours tab
   /// (e.g. `textColor`, `accentColor`). See [SlideQualityIssue.field].
@@ -85,19 +88,19 @@ class SettingsDialog extends ConsumerStatefulWidget {
 
   const SettingsDialog({
     super.key,
-    this.initialTab = 0,
+    this.initialSection = SettingsSection.general,
     this.highlightThemeField,
   });
 
   static Future<void> show(
     BuildContext context, {
-    int initialTab = 0,
+    SettingsSection initialSection = SettingsSection.general,
     String? highlightThemeField,
   }) {
     return showDialog(
       context: context,
       builder: (_) => SettingsDialog(
-        initialTab: initialTab,
+        initialSection: initialSection,
         highlightThemeField: highlightThemeField,
       ),
     );
@@ -205,8 +208,13 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   late final Future<List<ReferenceCatalog>> _referenceInventory =
       SecReferenceInventory.load();
 
-  /// Index of the section shown in the sidebar navigation (0..4).
-  late int _selectedTab;
+  /// Het tabblad dat de zijbalk op dit moment toont.
+  late SettingsSection _selectedTab;
+
+  /// De opslagwijze die op het tabblad Opslag is uitgeklapt, of `null` als ze
+  /// alle drie dicht staan. Er staat er hooguit één open: de panelen zijn lang
+  /// genoeg dat twee tegelijk de lijst onleesbaar maken.
+  StorageModality? _expandedModality;
 
   /// De taal zoals die bij het openen actief was, plus of er is opgeslagen. De
   /// taalkeuze wisselt de interface meteen (dat is de bedoeling: je wilt zien
@@ -215,27 +223,6 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   /// je wijzigingen verwerpt.
   late final String _initialLanguageCode;
   bool _saved = false;
-
-  static const _navIcons = [
-    Icons.tune,
-    Icons.format_paint_outlined,
-    Icons.slideshow_outlined,
-    Icons.speed_outlined,
-    Icons.privacy_tip_outlined,
-    Icons.shield_outlined,
-    Icons.smart_toy_outlined,
-    Icons.cloud_outlined,
-    Icons.account_tree_outlined,
-    Icons.checklist_outlined,
-    Icons.extension_outlined,
-    Icons.menu_book_outlined,
-    Icons.info_outline,
-  ];
-
-  /// Index of the "Over OciDeck" pane. It is the last entry in the tab lists
-  /// but is opened from the branded footer at the bottom of the sidebar rather
-  /// than from a regular nav item, so the nav list stops one short of it.
-  static const _aboutTabIndex = 12;
 
   static const _colorPresets = [
     '#FFFFFF',
@@ -328,7 +315,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     }
     _initAiFields(settings.aiSettings);
     _highlightedThemeField = widget.highlightThemeField;
-    _selectedTab = widget.initialTab.clamp(0, _aboutTabIndex);
+    _selectedTab = widget.initialSection;
     if (widget.highlightThemeField != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _scrollToThemeField(widget.highlightThemeField!);
@@ -561,22 +548,24 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         .min(760.0, screen.height * 0.86)
         .clamp(560.0, 760.0);
 
-    final labels = _tabLabels(l10n);
-
-    final bodies = <Widget>[
-      _tabBody(_generalTab()),
-      _tabBody(_appearanceTab()),
-      _tabBody(_presentationStyleTab(profiles)),
-      _tabBody(_cockpitTab()),
-      _tabBody(_privacyTab()),
-      _tabBody(_securityTab()),
-      _tabBody(_aiTab()),
-      _tabBody(_webdavTab()),
-      _tabBody(_gitTab()),
-      _tabBody(_checklistsTab()),
-      _tabBody(_modulesTab()),
-      _tabBody(_documentationTab()),
-      _tabBody(_aboutTab()),
+    // Eén ingang per tabblad, in de volgorde van de enum, zodat de IndexedStack
+    // hieronder nooit uit de pas kan lopen met de zijbalk.
+    final bodies = [
+      for (final section in SettingsSection.values)
+        _tabBody(switch (section) {
+          SettingsSection.general => _generalTab(),
+          SettingsSection.storage => _storageTab(),
+          SettingsSection.appearance => _appearanceTab(),
+          SettingsSection.presentation => _presentationStyleTab(profiles),
+          SettingsSection.cockpit => _cockpitTab(),
+          SettingsSection.privacy => _privacyTab(),
+          SettingsSection.security => _securityTab(),
+          SettingsSection.ai => _aiTab(),
+          SettingsSection.checklists => _checklistsTab(),
+          SettingsSection.modules => _modulesTab(),
+          SettingsSection.documentation => _documentationTab(),
+          SettingsSection.about => _aboutTab(),
+        }),
     ];
 
     return PopScope(
@@ -596,7 +585,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              _sidebar(l10n, labels),
+              _sidebar(l10n),
               Expanded(
                 // Material (not ColoredBox) so ListTiles inside the tab bodies
                 // paint their ink/selected state onto this surface instead of a
@@ -605,7 +594,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                   color: AppTheme.slate50,
                   child: Column(
                     children: [
-                      _contentHeader(labels[_selectedTab]),
+                      _contentHeader(_selectedTab.label(l10n)),
                       Expanded(
                         // De zoekresultaten leggen zich óver de actieve tab; de
                         // IndexedStack blijft eronder staan zodat zijn GlobalKeys
@@ -614,7 +603,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
                         child: Stack(
                           children: [
                             IndexedStack(
-                              index: _selectedTab,
+                              index: _selectedTab.index,
                               sizing: StackFit.expand,
                               children: bodies,
                             ),
@@ -646,7 +635,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     ref.read(settingsProvider.notifier).setLanguageCode(_initialLanguageCode);
   }
 
-  Widget _sidebar(AppLocalizations l10n, List<String> labels) {
+  Widget _sidebar(AppLocalizations l10n) {
     return Container(
       width: 234,
       decoration: const BoxDecoration(
@@ -703,22 +692,21 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
               ],
             ),
           ),
-          // The last label ("Over OciDeck") is not a regular nav item; it is
-          // reached from the branded footer below, so stop one short. The nav
-          // list scrolls so extra tabs (AI, Modules, …) never overflow the
-          // sidebar; the footer stays pinned at the bottom.
+          // "Over OciDeck" ontbreekt hier met opzet: dat tabblad wordt vanuit
+          // de merkvoet hieronder geopend. De lijst scrollt, zodat extra
+          // tabbladen de zijbalk nooit doen overlopen; de voet blijft staan.
           Expanded(
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  for (var i = 0; i < labels.length - 1; i++)
-                    _navItem(i, _navIcons[i], labels[i]),
+                  for (final section in SettingsSection.navItems)
+                    _navItem(section, l10n),
                 ],
               ),
             ),
           ),
-          _aboutFooter(labels.last),
+          _aboutFooter(SettingsSection.about.label(l10n)),
         ],
       ),
     );
@@ -728,14 +716,14 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   /// point to the "Over OciDeck" pane: tapping it selects that tab and the
   /// footer lights up like a selected nav item.
   Widget _aboutFooter(String aboutLabel) {
-    final selected = _selectedTab == _aboutTabIndex;
+    final selected = _selectedTab == SettingsSection.about;
     return Padding(
       padding: const EdgeInsets.fromLTRB(12, 12, 12, 14),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(11),
-          onTap: () => setState(() => _selectedTab = _aboutTabIndex),
+          onTap: () => setState(() => _selectedTab = SettingsSection.about),
           child: Tooltip(
             message: aboutLabel,
             child: AnimatedContainer(
@@ -793,15 +781,17 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     );
   }
 
-  Widget _navItem(int index, IconData icon, String label) {
-    final selected = _selectedTab == index;
+  Widget _navItem(SettingsSection section, AppLocalizations l10n) {
+    final selected = _selectedTab == section;
+    final icon = section.icon;
+    final label = section.label(l10n);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(11),
-          onTap: () => setState(() => _selectedTab = index),
+          onTap: () => setState(() => _selectedTab = section),
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 150),
             padding: const EdgeInsets.fromLTRB(12, 11, 14, 11),

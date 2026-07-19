@@ -454,7 +454,10 @@ class _PresentationInfoDialogState
               message: l10n.d('Stijlprofielen beheren…'),
               child: IconButton(
                 icon: const Icon(Icons.tune, size: 18),
-                onPressed: () => SettingsDialog.show(context, initialTab: 2),
+                onPressed: () => SettingsDialog.show(
+                  context,
+                  initialSection: SettingsSection.presentation,
+                ),
               ),
             ),
           ],
