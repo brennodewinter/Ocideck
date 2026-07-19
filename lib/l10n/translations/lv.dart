@@ -1780,6 +1780,31 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Openen vanuit S3': 'Atvērt no S3',
+  'Afbeelding kiezen in S3': 'Izvēlēties attēlu S3',
+  'Opslaan naar S3': 'Saglabāt S3',
+  'Opgeslagen in S3:': 'Saglabāts S3:',
+  'Hier staat niets': 'Šeit nekā nav',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Saturu neizdevās ielādēt. Pārbaudi savienojumu un iestatījumus.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Galapunkts nav sasniedzams — pārbaudi savienojumu un galapunktu.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Pieteikšanās neizdevās. Pārbaudi piekļuves atslēgu, slepeno atslēgu un reģionu — nepareizs reģions dod tādu pašu kļūdu kā nepareiza atslēga.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Galapunkts atgrieza kļūdu. Mēģini vēlāk vēlreiz.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Šis galapunkts nevar rakstīt nosacīti, tāpēc tavs darbs nav aizsargāts no cita darba. Saglabā ar jaunu nosaukumu, ja pie šīs prezentācijas strādā vēl kāds.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Nav iestatīta S3 tvertne. Iestati to sadaļā Iestatījumi → Krātuve.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Vispirms iestati S3 tvertni sadaļā Iestatījumi → Krātuve.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'S3 tvertne nav (pareizi) iestatīta — pārbaudi galapunktu, tvertni un atslēgas sadaļā Iestatījumi → Krātuve.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Šis galapunkts nav atļauts. Vispirms atzīmē privātu/LAN galapunktu kā uzticamu sadaļā Iestatījumi → Krātuve.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Tvertnē nav atrasts. Ja nosaukums ir pareizs, izmēģini otru adresēšanu sadaļā Iestatījumi → Krātuve.',
   'S3-bucket': 'S3 tvertne',
   'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
       'S3 tvertne, piemēram, AWS S3 vai paša MinIO serveris.',

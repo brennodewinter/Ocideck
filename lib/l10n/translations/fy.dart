@@ -739,6 +739,31 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Openen vanuit S3': 'Iepenje fanút S3',
+  'Afbeelding kiezen in S3': 'Ofbylding kieze yn S3',
+  'Opslaan naar S3': 'Bewarje nei S3',
+  'Opgeslagen in S3:': 'Bewarre yn S3:',
+  'Hier staat niets': 'Hjir stiet neat',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Koe de ynhâld net lade. Kontrolearje dyn ferbining en ynstellings.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Einpunt net berikber — kontrolearje dyn ferbining en it einpunt.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Oanmelden mislearre. Kontrolearje de tagongskaai, de geheime kaai en de regio — in ferkearde regio jout deselde flater as in ferkearde kaai.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'It einpunt joech in flater. Besykje it letter opnij.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Dit einpunt kin net betingst skriuwe, dus dyn wurk is net beskerme tsjin dat fan in oar. Bewarje ûnder in nije namme as der immen oars oan dizze presintaasje wurket.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Gjin S3-bucket ynsteld. Stel der ien yn by Ynstellings → Opslach.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Stel earst in S3-bucket yn by Ynstellings → Opslach.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'De S3-bucket is net (goed) ynsteld — kontrolearje einpunt, bucket en kaaien by Ynstellings → Opslach.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Dit einpunt is net tastien. Markearje in privee/LAN-einpunt earst as fertroud by Ynstellings → Opslach.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Net fûn yn de bucket. Kloppet de bucketnamme, besykje dan de oare adressearring by Ynstellings → Opslach.',
   'S3-bucket': 'S3-bucket',
   'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
       'In S3-bucket, bygelyks AWS S3 of in eigen MinIO-server.',

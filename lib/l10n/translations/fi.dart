@@ -1781,6 +1781,31 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Openen vanuit S3': 'Avaa S3:sta',
+  'Afbeelding kiezen in S3': 'Valitse kuva S3:sta',
+  'Opslaan naar S3': 'Tallenna S3:een',
+  'Opgeslagen in S3:': 'Tallennettu S3:een:',
+  'Hier staat niets': 'Täällä ei ole mitään',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Sisältöä ei voitu ladata. Tarkista yhteys ja asetukset.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Päätepistettä ei tavoiteta — tarkista yhteys ja päätepiste.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Kirjautuminen epäonnistui. Tarkista käyttöavain, salainen avain ja alue — väärä alue antaa saman virheen kuin väärä avain.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Päätepiste palautti virheen. Yritä myöhemmin uudelleen.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Tämä päätepiste ei osaa kirjoittaa ehdollisesti, joten työsi ei ole suojattu toisen työltä. Tallenna uudella nimellä, jos joku muukin työstää tätä esitystä.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'S3-säilöä ei ole määritetty. Määritä se kohdassa Asetukset → Tallennus.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Määritä ensin S3-säilö kohdassa Asetukset → Tallennus.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'S3-säilöä ei ole määritetty oikein — tarkista päätepiste, säilö ja avaimet kohdassa Asetukset → Tallennus.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Tätä päätepistettä ei sallita. Merkitse yksityinen/LAN-päätepiste ensin luotetuksi kohdassa Asetukset → Tallennus.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Ei löytynyt säilöstä. Jos nimi on oikein, kokeile toista osoitteistusta kohdassa Asetukset → Tallennus.',
   'S3-bucket': 'S3-säilö',
   'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
       'S3-säilö, esimerkiksi AWS S3 tai oma MinIO-palvelin.',

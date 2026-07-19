@@ -920,6 +920,31 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Openen vanuit S3': 'Open from S3',
+  'Afbeelding kiezen in S3': 'Choose an image in S3',
+  'Opslaan naar S3': 'Save to S3',
+  'Opgeslagen in S3:': 'Saved to S3:',
+  'Hier staat niets': 'Nothing here',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Could not load the contents. Check your connection and settings.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Endpoint unreachable — check your connection and the endpoint.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Sign-in failed. Check the access key, the secret key and the region — a wrong region gives the same error as a wrong key.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'The endpoint returned an error. Try again later.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'This endpoint cannot write conditionally, so your work is not protected against someone else’s. Save under a new name if anyone else is working on this deck.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'No S3 bucket configured. Set one up in Settings → Storage.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'First set up an S3 bucket in Settings → Storage.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'The S3 bucket is not (properly) configured — check the endpoint, bucket and keys in Settings → Storage.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'This endpoint is not allowed. Mark a private/LAN endpoint as trusted in Settings → Storage first.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Not found in the bucket. If the bucket name is right, try the other addressing in Settings → Storage.',
   'S3-bucket': 'S3 bucket',
   'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
       'An S3 bucket, for example AWS S3 or your own MinIO server.',

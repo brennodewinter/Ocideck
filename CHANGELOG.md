@@ -30,6 +30,11 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   Waar een endpoint het niet kan, zegt OciDeck dat — in plaats van stilletjes
   te overschrijven.
 
+  Openen en opslaan gaat via *Openen vanuit S3* en *Opslaan naar S3* in het
+  bestandsmenu, met dezelfde bladeraar, dezelfde formaatkeuze en dezelfde
+  conflictafhandeling als bij WebDAV. Een deck dat je uit een bucket opende,
+  gaat bij opslaan vanzelf naar diezelfde bucket terug.
+
 ### Fixed
 - **De melding over de Informatieveiligheidsmodule bleef hangen boven een
   presentatie waar ze niet over ging.** Open je een rapport met

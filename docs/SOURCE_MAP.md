@@ -370,7 +370,8 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
   into view without any of the tab bodies knowing about search.
 - `slide_finder_dialog.dart` — Stay-open searcher for gathering slides from many presentations.
 - `slide_quality_details_dialog.dart` — Issues grouped by severity with counts and navigation.
-- `storage_connection_picker.dart` — Asks which file connection an action works with, for both WebDAV and git. Shows nothing at all when there is exactly one usable connection of that kind, so the single-server case keeps the flow it always had; the question only appears once it is a real question. Deck-bound actions never reach it — they follow the origin (see `AppSettings.gitConnectionFor`).
+- `storage_connection_picker.dart` — Asks which file connection an action works with, for WebDAV, S3 and git alike. Shows nothing at all when there is exactly one usable connection of that kind, so the single-server case keeps the flow it always had; the question only appears once it is a real question. Deck-bound actions never reach it — they follow the origin (see `AppSettings.gitConnectionFor`).
+- `s3_browser_dialog.dart` — Browses an S3 bucket to pick a deck or images, on the connection it is given rather than one it looks up itself. S3 has no folders; the common prefixes a delimited listing returns arrive as `S3Entry.isCollection`, so this screen needs to know nothing about prefixes.
 - `webdav_browser_dialog.dart` — Browses WebDAV folders to pick a deck or images, on the connection it is given rather than one it looks up itself.
 
 ### `lib/widgets/editors/` — per-slide-type editors

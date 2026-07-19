@@ -1804,6 +1804,31 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Openen vanuit S3': 'Отваряне от S3',
+  'Afbeelding kiezen in S3': 'Избор на изображение в S3',
+  'Opslaan naar S3': 'Запис в S3',
+  'Opgeslagen in S3:': 'Записано в S3:',
+  'Hier staat niets': 'Тук няма нищо',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Съдържанието не можа да се зареди. Провери връзката и настройките.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Крайната точка е недостъпна — провери връзката и крайната точка.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Влизането е неуспешно. Проверете ключа за достъп, тайния ключ и региона — грешен регион дава същата грешка като грешен ключ.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Крайната точка върна грешка. Опитайте по-късно.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Тази крайна точка не може да пише условно, така че работата ви не е защитена от чужда. Запишете под ново име, ако и някой друг работи по тази презентация.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Няма настроен S3 контейнер. Настройте го от Настройки → Съхранение.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Първо настройте S3 контейнер от Настройки → Съхранение.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'S3 контейнерът не е настроен правилно — проверете крайната точка, контейнера и ключовете от Настройки → Съхранение.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Тази крайна точка не е разрешена. Първо отбележете частна/LAN крайна точка като надеждна от Настройки → Съхранение.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Не е намерено в контейнера. Ако името е вярно, опитайте другото адресиране от Настройки → Съхранение.',
   'S3-bucket': 'S3 контейнер',
   'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
       'S3 контейнер, например AWS S3 или собствен сървър MinIO.',

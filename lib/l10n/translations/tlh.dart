@@ -1756,6 +1756,31 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Openen vanuit S3': 'S3 yIpoSmoH',
+  'Afbeelding kiezen in S3': 'S3 nagh beQ yIwIv',
+  'Opslaan naar S3': 'S3 yIQIj',
+  'Opgeslagen in S3:': 'S3 QIjlu\':',
+  'Hier staat niets': 'pagh tu\'lu\'',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'qawHaq laDlaHbe\'. rar \'ej DuHIvmeymey yInoH.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Dech SIchlaHbe\' — rar \'ej Dech yInoH.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Qapbe\'. ngaQHa\'moH, pegh ngaQHa\'moH, Sep je yInoH — Sep lughbe\'chugh, ngaQHa\'moH lughbe\'bogh rur Qagh.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Qagh ngeH Dech. tugh yInID.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'qonwI\' chotbe\' Dechvam, vaj Qu\'lIj QanlaHbe\'. latlh vumchugh, pong chu\' yIlo\'.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'S3 nagh baS tu\'lu\'be\'. DuHIvmeymey → waHtaHghach yIchenmoH.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'wa\'DIch DuHIvmeymey → waHtaHghach S3 nagh baS yIchenmoH.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'S3 nagh baS lughbe\' — Dech, nagh baS, ngaQHa\'moH je DuHIvmeymey → waHtaHghach yInoH.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Dechvam chaw\'be\'lu\'. DuHIvmeymey → waHtaHghach vItlhorghqutlu\' yIwIv.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'nagh baSDaq Sambe\'lu\'. pong lughchugh, DuHIvmeymey → waHtaHghach latlh Degh yInID.',
   'S3-bucket': 'S3 nagh baS',
   'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
       'S3 nagh baS, ghojmeH AWS S3 pagh MinIO De\'wI\'pIm.',

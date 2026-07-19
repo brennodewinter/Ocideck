@@ -1797,6 +1797,31 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Openen vanuit S3': 'Ex S3 aperire',
+  'Afbeelding kiezen in S3': 'Imaginem in S3 eligere',
+  'Opslaan naar S3': 'In S3 servare',
+  'Opgeslagen in S3:': 'In S3 servatum:',
+  'Hier staat niets': 'Hic nihil est',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Contenta onerari non potuerunt. Conexionem et optiones inspice.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Terminus inaccessibilis — conexionem et terminum inspice.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Aditus defecit. Clavem accessus, clavem secretam et regionem inspice — regio falsa eundem errorem dat quam clavis falsa.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Terminus errorem reddidit. Postea itera.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Hic terminus condicionaliter scribere non potest, ergo opus tuum ab alieno non tutum est. Sub novo nomine serva si alius in hac presentatione laborat.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Nulla situla S3 constituta. Unam apud Optiones → Repositorium constitue.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Primum situlam S3 constitue apud Optiones → Repositorium.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'Situla S3 non (recte) constituta est — terminum, situlam et claves apud Optiones → Repositorium inspice.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Hic terminus non permittitur. Terminum privatum/LAN primum ut fidum apud Optiones → Repositorium nota.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'In situla non inventum. Si nomen rectum est, alteram inscriptionem apud Optiones → Repositorium tempta.',
   'S3-bucket': 'Situla S3',
   'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
       'Situla S3, exempli gratia AWS S3 vel servator MinIO proprius.',

@@ -1788,6 +1788,31 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Openen vanuit S3': 'Otvoriť z S3',
+  'Afbeelding kiezen in S3': 'Vybrať obrázok v S3',
+  'Opslaan naar S3': 'Uložiť do S3',
+  'Opgeslagen in S3:': 'Uložené do S3:',
+  'Hier staat niets': 'Tu nič nie je',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Obsah sa nepodarilo načítať. Skontroluj pripojenie a nastavenia.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Koncový bod nie je dostupný — skontroluj pripojenie a koncový bod.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Prihlásenie zlyhalo. Skontroluj prístupový kľúč, tajný kľúč a oblasť — nesprávna oblasť dá rovnakú chybu ako nesprávny kľúč.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Koncový bod vrátil chybu. Skús to neskôr.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Tento koncový bod nevie zapisovať podmienene, takže tvoja práca nie je chránená pred cudzou. Ulož pod novým názvom, ak na tejto prezentácii pracuje ešte niekto.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Nie je nastavené úložisko S3. Nastav ho v Nastavenia → Úložisko.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Najprv nastav úložisko S3 v Nastavenia → Úložisko.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'Úložisko S3 nie je (správne) nastavené — skontroluj koncový bod, úložisko a kľúče v Nastavenia → Úložisko.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Tento koncový bod nie je povolený. Najprv označ súkromný/LAN koncový bod ako dôveryhodný v Nastavenia → Úložisko.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Nenašlo sa v úložisku. Ak je názov správny, skús iné adresovanie v Nastavenia → Úložisko.',
   'S3-bucket': 'Úložisko S3',
   'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
       'Úložisko S3, napríklad AWS S3 alebo vlastný server MinIO.',

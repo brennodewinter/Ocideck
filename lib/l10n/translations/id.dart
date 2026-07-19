@@ -1781,6 +1781,31 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Openen vanuit S3': 'Buka dari S3',
+  'Afbeelding kiezen in S3': 'Pilih gambar di S3',
+  'Opslaan naar S3': 'Simpan ke S3',
+  'Opgeslagen in S3:': 'Disimpan ke S3:',
+  'Hier staat niets': 'Tidak ada apa-apa di sini',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Tidak dapat memuat isi. Periksa koneksi dan pengaturan Anda.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Titik akhir tidak dapat dijangkau — periksa koneksi dan titik akhirnya.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Masuk gagal. Periksa kunci akses, kunci rahasia, dan wilayah — wilayah yang salah memberi galat yang sama seperti kunci yang salah.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Titik akhir mengembalikan galat. Coba lagi nanti.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Titik akhir ini tidak bisa menulis bersyarat, jadi pekerjaanmu tidak terlindungi dari pekerjaan orang lain. Simpan dengan nama baru jika ada orang lain yang mengerjakan presentasi ini.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Belum ada bucket S3. Siapkan satu di Pengaturan → Penyimpanan.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Siapkan dulu bucket S3 di Pengaturan → Penyimpanan.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'Bucket S3 belum dikonfigurasi dengan benar — periksa titik akhir, bucket, dan kunci di Pengaturan → Penyimpanan.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Titik akhir ini tidak diizinkan. Tandai dulu titik akhir pribadi/LAN sebagai tepercaya di Pengaturan → Penyimpanan.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Tidak ditemukan di bucket. Jika nama bucket benar, coba pengalamatan lain di Pengaturan → Penyimpanan.',
   'S3-bucket': 'Bucket S3',
   'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
       'Bucket S3, misalnya AWS S3 atau server MinIO sendiri.',

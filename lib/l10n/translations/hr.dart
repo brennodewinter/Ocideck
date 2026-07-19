@@ -1788,6 +1788,31 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Openen vanuit S3': 'Otvori iz S3',
+  'Afbeelding kiezen in S3': 'Odaberi sliku u S3',
+  'Opslaan naar S3': 'Spremi u S3',
+  'Opgeslagen in S3:': 'Spremljeno u S3:',
+  'Hier staat niets': 'Ovdje nema ničega',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Sadržaj nije moguće učitati. Provjeri vezu i postavke.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Krajnja točka nije dostupna — provjeri vezu i krajnju točku.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Prijava nije uspjela. Provjeri pristupni ključ, tajni ključ i regiju — pogrešna regija daje istu pogrešku kao pogrešan ključ.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Krajnja točka vratila je pogrešku. Pokušaj kasnije.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Ova krajnja točka ne može uvjetno pisati, pa tvoj rad nije zaštićen od tuđeg. Spremi pod novim nazivom ako netko drugi radi na ovoj prezentaciji.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Nije postavljen S3 spremnik. Postavi ga u Postavke → Pohrana.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Prvo postavi S3 spremnik u Postavke → Pohrana.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'S3 spremnik nije (ispravno) postavljen — provjeri krajnju točku, spremnik i ključeve u Postavke → Pohrana.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Ova krajnja točka nije dopuštena. Prvo označi privatnu/LAN krajnju točku kao pouzdanu u Postavke → Pohrana.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Nije pronađeno u spremniku. Ako je naziv točan, isprobaj drugo adresiranje u Postavke → Pohrana.',
   'S3-bucket': 'S3 spremnik',
   'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
       'S3 spremnik, primjerice AWS S3 ili vlastiti MinIO poslužitelj.',

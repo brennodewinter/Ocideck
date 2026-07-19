@@ -1789,6 +1789,31 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Openen vanuit S3': 'Atverti iš S3',
+  'Afbeelding kiezen in S3': 'Pasirinkti paveikslėlį S3',
+  'Opslaan naar S3': 'Įrašyti į S3',
+  'Opgeslagen in S3:': 'Įrašyta į S3:',
+  'Hier staat niets': 'Čia nieko nėra',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Nepavyko įkelti turinio. Patikrink ryšį ir nustatymus.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Galinis taškas nepasiekiamas — patikrink ryšį ir galinį tašką.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Prisijungti nepavyko. Patikrink prieigos raktą, slaptą raktą ir regioną — neteisingas regionas duoda tą pačią klaidą kaip neteisingas raktas.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Galinis taškas grąžino klaidą. Bandyk vėliau.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Šis galinis taškas negali rašyti sąlygiškai, todėl tavo darbas neapsaugotas nuo kito darbo. Įrašyk nauju pavadinimu, jei prie šios prezentacijos dirba dar kas nors.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Nenustatyta S3 saugykla. Nustatyk ją per Nustatymai → Saugykla.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Pirmiausia nustatyk S3 saugyklą per Nustatymai → Saugykla.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'S3 saugykla nenustatyta (teisingai) — patikrink galinį tašką, saugyklą ir raktus per Nustatymai → Saugykla.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Šis galinis taškas neleidžiamas. Pirmiausia pažymėk privatų/LAN galinį tašką kaip patikimą per Nustatymai → Saugykla.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Saugykloje nerasta. Jei pavadinimas teisingas, išbandyk kitą adresavimą per Nustatymai → Saugykla.',
   'S3-bucket': 'S3 saugykla',
   'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
       'S3 saugykla, pavyzdžiui AWS S3 arba savas MinIO serveris.',

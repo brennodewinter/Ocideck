@@ -1811,6 +1811,31 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Openen vanuit S3': 'Abrir a partir do S3',
+  'Afbeelding kiezen in S3': 'Escolher uma imagem no S3',
+  'Opslaan naar S3': 'Guardar no S3',
+  'Opgeslagen in S3:': 'Guardado no S3:',
+  'Hier staat niets': 'Aqui não há nada',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Não foi possível carregar o conteúdo. Verifica a ligação e as definições.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Ponto de extremidade inacessível — verifica a ligação e o ponto de extremidade.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Falha ao iniciar sessão. Verifica a chave de acesso, a chave secreta e a região — uma região errada dá o mesmo erro que uma chave errada.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'O ponto de extremidade devolveu um erro. Tenta mais tarde.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Este ponto de extremidade não consegue escrever condicionalmente, por isso o teu trabalho não está protegido do de outra pessoa. Guarda com um nome novo se houver mais alguém a trabalhar nesta apresentação.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Nenhum bucket S3 configurado. Configure um em Definições → Armazenamento.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Configure primeiro um bucket S3 em Definições → Armazenamento.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'O bucket S3 não está (bem) configurado — verifique o ponto de extremidade, o bucket e as chaves em Definições → Armazenamento.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Este ponto de extremidade não é permitido. Marque primeiro um ponto de extremidade privado/LAN como fidedigno em Definições → Armazenamento.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Não encontrado no bucket. Se o nome estiver certo, experimente o outro endereçamento em Definições → Armazenamento.',
   'S3-bucket': 'Bucket S3',
   'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
       'Um bucket S3, por exemplo AWS S3 ou um servidor MinIO próprio.',

@@ -1803,6 +1803,31 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Openen vanuit S3': 'Iftaħ minn S3',
+  'Afbeelding kiezen in S3': 'Agħżel stampa f’S3',
+  'Opslaan naar S3': 'Issejvja f’S3',
+  'Opgeslagen in S3:': 'Issejvjat f’S3:',
+  'Hier staat niets': 'M’hawn xejn hawn',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Ma setax jitgħabba l-kontenut. Iċċekkja l-konnessjoni u s-settings.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Il-punt tat-tmiem ma jistax jintlaħaq — iċċekkja l-konnessjoni u l-punt tat-tmiem.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Il-login falla. Iċċekkja ċ-ċavetta tal-aċċess, iċ-ċavetta sigrieta u r-reġjun — reġjun ħażin jagħti l-istess żball bħal ċavetta ħażina.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Il-punt tat-tmiem ta żball. Erġa’ pprova aktar tard.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Dan il-punt tat-tmiem ma jistax jikteb b’mod kondizzjonali, allura x-xogħol tiegħek mhux protett minn ta’ ħaddieħor. Issejvja b’isem ġdid jekk hemm ħaddieħor jaħdem fuq din il-preżentazzjoni.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'L-ebda barmil S3 issettjat. Issettja wieħed f’Settings → Ħażna.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'L-ewwel issettja barmil S3 f’Settings → Ħażna.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'Il-barmil S3 mhux issettjat (sew) — iċċekkja l-punt tat-tmiem, il-barmil u ċ-ċwievet f’Settings → Ħażna.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Dan il-punt tat-tmiem mhux permess. L-ewwel immarka punt tat-tmiem privat/LAN bħala fdat f’Settings → Ħażna.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Ma nstabx fil-barmil. Jekk l-isem huwa tajjeb, ipprova l-indirizzar l-ieħor f’Settings → Ħażna.',
   'S3-bucket': 'Barmil S3',
   'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
       'Barmil S3, per eżempju AWS S3 jew server MinIO tiegħek.',

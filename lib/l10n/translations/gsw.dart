@@ -1785,6 +1785,31 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Openen vanuit S3': 'Us S3 uufmache',
+  'Afbeelding kiezen in S3': 'Bild i S3 uuswähle',
+  'Opslaan naar S3': 'I S3 spichere',
+  'Opgeslagen in S3:': 'I S3 gspicheret:',
+  'Hier staat niets': 'Da isch nüt',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Inhalt het nöd chöne glade werde. Prüef Verbindig und Iistellige.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Ändpunkt nöd erreichbar — prüef dini Verbindig und de Ändpunkt.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Aamäldig fehlgschlage. Prüef Zuegriffsschlüssel, gheime Schlüssel und Region — e falschi Region git dr glich Fähler wie en falsche Schlüssel.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'De Ändpunkt het en Fähler gmäldet. Probier s spöter nomol.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Dä Ändpunkt cha nöd bedingt schriibe, drum isch dini Arbet nöd vor dere vomene andere gschützt. Spicher under eme neue Name, wenn no öpper anders a dere Präsentation schaffet.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Kei S3-Bucket iigrichtet. Richt eine under Iistellige → Spiicher ii.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Richt zerscht en S3-Bucket ii under Iistellige → Spiicher.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'De S3-Bucket isch nöd (richtig) iigrichtet — prüef Ändpunkt, Bucket und Schlüssel under Iistellige → Spiicher.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Dä Ändpunkt isch nöd erlaubt. Markier en private/LAN-Ändpunkt zerscht under Iistellige → Spiicher als vertraut.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Nöd im Bucket gfunde. Stimmt de Name, denn probier di anderi Adressierig under Iistellige → Spiicher.',
   'S3-bucket': 'S3-Bucket',
   'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
       'En S3-Bucket, zum Bispil AWS S3 oder en eigene MinIO-Server.',

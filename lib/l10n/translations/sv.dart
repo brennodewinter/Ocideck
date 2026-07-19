@@ -1780,6 +1780,31 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Openen vanuit S3': 'Öppna från S3',
+  'Afbeelding kiezen in S3': 'Välj en bild i S3',
+  'Opslaan naar S3': 'Spara till S3',
+  'Opgeslagen in S3:': 'Sparad i S3:',
+  'Hier staat niets': 'Här finns ingenting',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Det gick inte att läsa in innehållet. Kontrollera anslutning och inställningar.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Slutpunkten kan inte nås — kontrollera anslutningen och slutpunkten.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Inloggningen misslyckades. Kontrollera åtkomstnyckeln, den hemliga nyckeln och regionen — fel region ger samma fel som fel nyckel.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Slutpunkten returnerade ett fel. Försök igen senare.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Den här slutpunkten kan inte skriva villkorligt, så ditt arbete skyddas inte mot någon annans. Spara under ett nytt namn om någon annan arbetar med den här presentationen.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Ingen S3-hink konfigurerad. Ställ in en under Inställningar → Lagring.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Ställ först in en S3-hink under Inställningar → Lagring.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'S3-hinken är inte (rätt) konfigurerad — kontrollera slutpunkt, hink och nycklar under Inställningar → Lagring.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Den här slutpunkten är inte tillåten. Markera först en privat/LAN-slutpunkt som betrodd under Inställningar → Lagring.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Hittades inte i hinken. Om namnet stämmer, prova den andra adresseringen under Inställningar → Lagring.',
   'S3-bucket': 'S3-hink',
   'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
       'En S3-hink, till exempel AWS S3 eller en egen MinIO-server.',

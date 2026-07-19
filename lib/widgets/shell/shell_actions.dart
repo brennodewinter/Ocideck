@@ -384,7 +384,11 @@ Future<void> _saveToNextcloud(BuildContext context, WidgetRef ref) async {
   final defaultBase = reuse
       ? origin.remotePath.replaceAll(RegExp(r'\.(ocideck|zip|md)$'), '')
       : _safeRemoteName(deck.title);
-  var choice = await _showWebdavSaveDialog(context, defaultBase: defaultBase);
+  var choice = await _showRemoteSaveDialog(
+    context,
+    defaultBase: defaultBase,
+    title: context.l10n.d('Opslaan naar WebDAV'),
+  );
   if (choice == null || !context.mounted) return;
 
   final messenger = ScaffoldMessenger.of(context);
@@ -393,7 +397,7 @@ Future<void> _saveToNextcloud(BuildContext context, WidgetRef ref) async {
   // onder een nieuwe naam opslaan, of alsnog overschrijven.
   var overwrite = false;
   while (true) {
-    final ext = choice!.format == WebdavSaveFormat.ocideck ? '.ocideck' : '.md';
+    final ext = choice!.format == DeckSaveFormat.ocideck ? '.ocideck' : '.md';
     final targetPath = '${choice.base}$ext';
     try {
       await ref
@@ -416,15 +420,16 @@ Future<void> _saveToNextcloud(BuildContext context, WidgetRef ref) async {
     } on WebdavConflictException catch (e) {
       logWarning('shell: WebDAV-opslaan botste met een nieuwere versie', e);
       if (!context.mounted) return;
-      final resolution = await _showWebdavConflictDialog(context);
+      final resolution = await _showRemoteConflictDialog(context);
       if (resolution == null || !context.mounted) return;
       switch (resolution) {
-        case _WebdavConflict.overwrite:
+        case _RemoteConflict.overwrite:
           overwrite = true;
-        case _WebdavConflict.saveAs:
-          final next = await _showWebdavSaveDialog(
+        case _RemoteConflict.saveAs:
+          final next = await _showRemoteSaveDialog(
             context,
             defaultBase: choice.base,
+            title: l10n.d('Opslaan naar WebDAV'),
           );
           if (next == null || !context.mounted) return;
           choice = next;
@@ -446,13 +451,13 @@ Future<void> _saveToNextcloud(BuildContext context, WidgetRef ref) async {
 
 /// Wat de gebruiker doet als het bestand op de server inmiddels van iemand
 /// anders is. Bewust geen samenvoegkeuze zoals bij git: die leunt erop dat de
-/// basisversie nog opvraagbaar is, en bij WebDAV is die weg zodra de ander
-/// heeft geüpload.
-enum _WebdavConflict { saveAs, overwrite }
+/// basisversie nog opvraagbaar is, en bij WebDAV en S3 is die weg zodra de
+/// ander heeft geüpload.
+enum _RemoteConflict { saveAs, overwrite }
 
-Future<_WebdavConflict?> _showWebdavConflictDialog(BuildContext context) {
+Future<_RemoteConflict?> _showRemoteConflictDialog(BuildContext context) {
   final l10n = context.l10n;
-  return showDialog<_WebdavConflict>(
+  return showDialog<_RemoteConflict>(
     context: context,
     builder: (ctx) => AlertDialog(
       title: Text(l10n.d('Iemand anders heeft dit bestand gewijzigd')),
@@ -467,13 +472,13 @@ Future<_WebdavConflict?> _showWebdavConflictDialog(BuildContext context) {
           child: Text(l10n.t('cancel')),
         ),
         TextButton(
-          onPressed: () => Navigator.pop(ctx, _WebdavConflict.overwrite),
+          onPressed: () => Navigator.pop(ctx, _RemoteConflict.overwrite),
           child: Text(l10n.d('Overschrijven')),
         ),
         // Als voorkeursknop rechts: hij behoudt beide versies, en dat is wat
         // je wilt aanraden aan iemand die dit scherm onverwacht krijgt.
         FilledButton(
-          onPressed: () => Navigator.pop(ctx, _WebdavConflict.saveAs),
+          onPressed: () => Navigator.pop(ctx, _RemoteConflict.saveAs),
           child: Text(l10n.d('Opslaan als')),
         ),
       ],
@@ -492,31 +497,36 @@ String _safeRemoteName(String title) {
 
 /// Keuze uit het opslaan-dialoog: formaat plus doelpad (zonder extensie,
 /// relatief aan de wortelmap).
-typedef _WebdavSaveChoice = ({WebdavSaveFormat format, String base});
+typedef _RemoteSaveChoice = ({DeckSaveFormat format, String base});
 
-Future<_WebdavSaveChoice?> _showWebdavSaveDialog(
+Future<_RemoteSaveChoice?> _showRemoteSaveDialog(
   BuildContext context, {
   required String defaultBase,
+  required String title,
 }) {
-  return showDialog<_WebdavSaveChoice>(
+  return showDialog<_RemoteSaveChoice>(
     context: context,
-    builder: (_) => _WebdavSaveDialog(defaultBase: defaultBase),
+    builder: (_) => _RemoteSaveDialog(defaultBase: defaultBase, title: title),
   );
 }
 
-class _WebdavSaveDialog extends StatefulWidget {
+class _RemoteSaveDialog extends StatefulWidget {
   final String defaultBase;
-  const _WebdavSaveDialog({required this.defaultBase});
+
+  /// De kop verschilt per bron ("naar WebDAV" / "naar S3"); de rest van het
+  /// dialoog is dezelfde vraag.
+  final String title;
+  const _RemoteSaveDialog({required this.defaultBase, required this.title});
 
   @override
-  State<_WebdavSaveDialog> createState() => _WebdavSaveDialogState();
+  State<_RemoteSaveDialog> createState() => _RemoteSaveDialogState();
 }
 
-class _WebdavSaveDialogState extends State<_WebdavSaveDialog> {
+class _RemoteSaveDialogState extends State<_RemoteSaveDialog> {
   late final TextEditingController _path = TextEditingController(
     text: widget.defaultBase,
   );
-  WebdavSaveFormat _format = WebdavSaveFormat.ocideck;
+  DeckSaveFormat _format = DeckSaveFormat.ocideck;
 
   @override
   void dispose() {
@@ -528,7 +538,7 @@ class _WebdavSaveDialogState extends State<_WebdavSaveDialog> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return AlertDialog(
-      title: Text(l10n.d('Opslaan naar WebDAV')),
+      title: Text(widget.title),
       content: SizedBox(
         width: 460,
         child: Column(
@@ -545,25 +555,25 @@ class _WebdavSaveDialogState extends State<_WebdavSaveDialog> {
               ),
             ),
             const SizedBox(height: 14),
-            RadioGroup<WebdavSaveFormat>(
+            RadioGroup<DeckSaveFormat>(
               groupValue: _format,
               onChanged: (v) => setState(() => _format = v!),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  RadioListTile<WebdavSaveFormat>(
+                  RadioListTile<DeckSaveFormat>(
                     contentPadding: EdgeInsets.zero,
                     dense: true,
-                    value: WebdavSaveFormat.ocideck,
+                    value: DeckSaveFormat.ocideck,
                     title: Text(
                       l10n.d('Als .ocideck-pakket (één bestand, met assets)'),
                       style: const TextStyle(fontSize: 13),
                     ),
                   ),
-                  RadioListTile<WebdavSaveFormat>(
+                  RadioListTile<DeckSaveFormat>(
                     contentPadding: EdgeInsets.zero,
                     dense: true,
-                    value: WebdavSaveFormat.flat,
+                    value: DeckSaveFormat.flat,
                     title: Text(
                       l10n.d('Als losse .md plus afbeeldingen'),
                       style: const TextStyle(fontSize: 13),

@@ -735,6 +735,31 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Openen vanuit S3': 'Abrir desde S3',
+  'Afbeelding kiezen in S3': 'Elegir una imagen en S3',
+  'Opslaan naar S3': 'Guardar en S3',
+  'Opgeslagen in S3:': 'Guardado en S3:',
+  'Hier staat niets': 'Aquí no hay nada',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'No se pudo cargar el contenido. Comprueba tu conexión y ajustes.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Punto de conexión inaccesible — comprueba tu conexión y el punto de conexión.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Error de inicio de sesión. Comprueba la clave de acceso, la clave secreta y la región — una región incorrecta da el mismo error que una clave incorrecta.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'El punto de conexión devolvió un error. Inténtalo más tarde.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Este punto de conexión no puede escribir de forma condicional, así que tu trabajo no está protegido del de otra persona. Guarda con un nombre nuevo si alguien más está trabajando en esta presentación.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Ningún bucket de S3 configurado. Configura uno en Ajustes → Almacenamiento.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Primero configura un bucket de S3 en Ajustes → Almacenamiento.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'El bucket de S3 no está (bien) configurado — comprueba el punto de conexión, el bucket y las claves en Ajustes → Almacenamiento.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Este punto de conexión no está permitido. Marca primero un punto de conexión privado/LAN como de confianza en Ajustes → Almacenamiento.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'No se encontró en el bucket. Si el nombre es correcto, prueba el otro direccionamiento en Ajustes → Almacenamiento.',
   'S3-bucket': 'Bucket de S3',
   'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
       'Un bucket de S3, por ejemplo AWS S3 o tu propio servidor MinIO.',

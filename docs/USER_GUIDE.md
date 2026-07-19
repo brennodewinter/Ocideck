@@ -107,6 +107,11 @@ MinIO on your own server, Ceph, Wasabi, Scaleway, Hetzner.
   home network, which is the normal case for your own MinIO. Without it the
   SSRF protection refuses the connection.
 
+**Open and save** through *Open from S3* and *Save to S3* in the file menu. A
+deck you opened from a bucket saves back to that same bucket without asking,
+just as it does for WebDAV and git. You choose between one `.ocideck` package
+and a flat `.md` with its asset folders, exactly as for WebDAV.
+
 One difference from the other kinds is worth knowing. S3 is object storage, not
 a file system, and the guard against two people overwriting each other's work
 depends on the endpoint supporting *conditional writes*. AWS has done so since

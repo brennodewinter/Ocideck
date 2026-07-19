@@ -1809,6 +1809,31 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Openen vanuit S3': 'Άνοιγμα από S3',
+  'Afbeelding kiezen in S3': 'Επιλογή εικόνας στο S3',
+  'Opslaan naar S3': 'Αποθήκευση στο S3',
+  'Opgeslagen in S3:': 'Αποθηκεύτηκε στο S3:',
+  'Hier staat niets': 'Εδώ δεν υπάρχει τίποτα',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Δεν ήταν δυνατή η φόρτωση του περιεχομένου. Έλεγξε τη σύνδεση και τις ρυθμίσεις.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Το τελικό σημείο δεν είναι προσβάσιμο — έλεγξε τη σύνδεση και το τελικό σημείο.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Η σύνδεση απέτυχε. Έλεγξε το κλειδί πρόσβασης, το μυστικό κλειδί και την περιοχή — λάθος περιοχή δίνει το ίδιο σφάλμα με λάθος κλειδί.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Το τελικό σημείο επέστρεψε σφάλμα. Δοκίμασε ξανά αργότερα.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Αυτό το τελικό σημείο δεν μπορεί να γράψει υπό όρους, οπότε η δουλειά σου δεν προστατεύεται από κάποιου άλλου. Αποθήκευσε με νέο όνομα αν δουλεύει και κάποιος άλλος σε αυτή την παρουσίαση.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Δεν έχει ρυθμιστεί κάδος S3. Ρύθμισε έναν στις Ρυθμίσεις → Αποθήκευση.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Ρύθμισε πρώτα έναν κάδο S3 στις Ρυθμίσεις → Αποθήκευση.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'Ο κάδος S3 δεν έχει ρυθμιστεί σωστά — έλεγξε το τελικό σημείο, τον κάδο και τα κλειδιά στις Ρυθμίσεις → Αποθήκευση.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Αυτό το τελικό σημείο δεν επιτρέπεται. Σήμανε πρώτα ένα ιδιωτικό/LAN τελικό σημείο ως αξιόπιστο στις Ρυθμίσεις → Αποθήκευση.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Δεν βρέθηκε στον κάδο. Αν το όνομα είναι σωστό, δοκίμασε την άλλη διευθυνσιοδότηση στις Ρυθμίσεις → Αποθήκευση.',
   'S3-bucket': 'Κάδος S3',
   'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
       'Ένας κάδος S3, για παράδειγμα AWS S3 ή δικός σου διακομιστής MinIO.',

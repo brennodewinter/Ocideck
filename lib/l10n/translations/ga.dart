@@ -1817,6 +1817,31 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Openen vanuit S3': 'Oscail ó S3',
+  'Afbeelding kiezen in S3': 'Roghnaigh íomhá in S3',
+  'Opslaan naar S3': 'Sábháil chuig S3',
+  'Opgeslagen in S3:': 'Sábháilte chuig S3:',
+  'Hier staat niets': 'Níl aon rud anseo',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Níorbh fhéidir an t-ábhar a lódáil. Seiceáil do cheangal agus do shocruithe.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Ní féidir an críochphointe a bhaint amach — seiceáil do cheangal agus an críochphointe.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Theip ar an síniú isteach. Seiceáil an eochair rochtana, an eochair rúnda agus an réigiún — tugann réigiún mícheart an earráid chéanna le heochair mhícheart.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Thug an críochphointe earráid ar ais. Bain triail eile as ar ball.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Ní féidir leis an gcríochphointe seo scríobh go coinníollach, mar sin níl do chuid oibre cosanta ar obair duine eile. Sábháil faoi ainm nua má tá duine eile ag obair ar an láithreoireacht seo.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Níl buicéad S3 socraithe. Socraigh ceann i Socruithe → Stóráil.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Socraigh buicéad S3 ar dtús i Socruithe → Stóráil.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'Níl an buicéad S3 socraithe (i gceart) — seiceáil an críochphointe, an buicéad agus na heochracha i Socruithe → Stóráil.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Níl an críochphointe seo ceadaithe. Marcáil críochphointe príobháideach/LAN mar iontaofa i Socruithe → Stóráil ar dtús.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Gan aimsiú sa bhuicéad. Má tá an t-ainm ceart, bain triail as an seoladh eile i Socruithe → Stóráil.',
   'S3-bucket': 'Buicéad S3',
   'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
       'Buicéad S3, mar shampla AWS S3 nó do fhreastalaí MinIO féin.',

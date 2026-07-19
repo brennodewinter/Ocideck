@@ -1793,6 +1793,31 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Openen vanuit S3': 'Otwórz z S3',
+  'Afbeelding kiezen in S3': 'Wybierz obraz w S3',
+  'Opslaan naar S3': 'Zapisz w S3',
+  'Opgeslagen in S3:': 'Zapisano w S3:',
+  'Hier staat niets': 'Tu nic nie ma',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Nie udało się wczytać zawartości. Sprawdź połączenie i ustawienia.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Punkt końcowy nieosiągalny — sprawdź połączenie i punkt końcowy.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Logowanie nie powiodło się. Sprawdź klucz dostępu, klucz tajny i region — zły region daje ten sam błąd co zły klucz.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Punkt końcowy zwrócił błąd. Spróbuj później.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Ten punkt końcowy nie potrafi zapisywać warunkowo, więc twoja praca nie jest chroniona przed cudzą. Zapisz pod nową nazwą, jeśli ktoś jeszcze pracuje nad tą prezentacją.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Nie skonfigurowano zasobnika S3. Skonfiguruj go w Ustawienia → Przechowywanie.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Najpierw skonfiguruj zasobnik S3 w Ustawienia → Przechowywanie.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'Zasobnik S3 nie jest (dobrze) skonfigurowany — sprawdź punkt końcowy, zasobnik i klucze w Ustawienia → Przechowywanie.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Ten punkt końcowy jest niedozwolony. Najpierw oznacz prywatny punkt końcowy/LAN jako zaufany w Ustawienia → Przechowywanie.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Nie znaleziono w zasobniku. Jeśli nazwa jest poprawna, wypróbuj inne adresowanie w Ustawienia → Przechowywanie.',
   'S3-bucket': 'Zasobnik S3',
   'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
       'Zasobnik S3, na przykład AWS S3 lub własny serwer MinIO.',

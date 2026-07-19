@@ -1780,6 +1780,31 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Openen vanuit S3': 'Åbn fra S3',
+  'Afbeelding kiezen in S3': 'Vælg et billede i S3',
+  'Opslaan naar S3': 'Gem til S3',
+  'Opgeslagen in S3:': 'Gemt i S3:',
+  'Hier staat niets': 'Her er ingenting',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Indholdet kunne ikke indlæses. Kontrollér din forbindelse og dine indstillinger.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Slutpunktet kan ikke nås — kontrollér din forbindelse og slutpunktet.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Login mislykkedes. Kontrollér adgangsnøglen, den hemmelige nøgle og regionen — en forkert region giver samme fejl som en forkert nøgle.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Slutpunktet returnerede en fejl. Prøv igen senere.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Dette slutpunkt kan ikke skrive betinget, så dit arbejde er ikke beskyttet mod en andens. Gem under et nyt navn, hvis andre arbejder på denne præsentation.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Ingen S3-bucket konfigureret. Opsæt en under Indstillinger → Lagring.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Konfigurér først en S3-bucket under Indstillinger → Lagring.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'S3-bucketten er ikke (korrekt) konfigureret — kontrollér slutpunkt, bucket og nøgler under Indstillinger → Lagring.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Dette slutpunkt er ikke tilladt. Markér først et privat/LAN-slutpunkt som betroet under Indstillinger → Lagring.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Ikke fundet i bucketten. Hvis navnet er rigtigt, så prøv den anden adressering under Indstillinger → Lagring.',
   'S3-bucket': 'S3-bucket',
   'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
       'En S3-bucket, for eksempel AWS S3 eller din egen MinIO-server.',

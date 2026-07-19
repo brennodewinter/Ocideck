@@ -1799,6 +1799,31 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Openen vanuit S3': 'Відкрити з S3',
+  'Afbeelding kiezen in S3': 'Вибрати зображення в S3',
+  'Opslaan naar S3': 'Зберегти в S3',
+  'Opgeslagen in S3:': 'Збережено в S3:',
+  'Hier staat niets': 'Тут нічого немає',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Не вдалося завантажити вміст. Перевірте з’єднання та налаштування.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Кінцева точка недоступна — перевірте з’єднання та кінцеву точку.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Не вдалося ввійти. Перевірте ключ доступу, секретний ключ і регіон — хибний регіон дає ту саму помилку, що й хибний ключ.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Кінцева точка повернула помилку. Спробуйте пізніше.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Ця кінцева точка не вміє записувати умовно, тому ваша робота не захищена від чужої. Збережіть під новою назвою, якщо над цією презентацією працює ще хтось.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Сегмент S3 не налаштовано. Налаштуйте його в Налаштування → Сховище.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Спершу налаштуйте сегмент S3 у Налаштування → Сховище.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'Сегмент S3 налаштовано неправильно — перевірте кінцеву точку, сегмент і ключі в Налаштування → Сховище.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Ця кінцева точка не дозволена. Спершу позначте приватну/LAN кінцеву точку як довірену в Налаштування → Сховище.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Не знайдено в сегменті. Якщо назва правильна, спробуйте іншу адресацію в Налаштування → Сховище.',
   'S3-bucket': 'Сегмент S3',
   'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
       'Сегмент S3, наприклад AWS S3 або власний сервер MinIO.',

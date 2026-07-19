@@ -738,6 +738,31 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Openen vanuit S3': 'Ouvrir depuis S3',
+  'Afbeelding kiezen in S3': 'Choisir une image dans S3',
+  'Opslaan naar S3': 'Enregistrer sur S3',
+  'Opgeslagen in S3:': 'Enregistré sur S3 :',
+  'Hier staat niets': 'Il n’y a rien ici',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Impossible de charger le contenu. Vérifiez votre connexion et vos réglages.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Point de terminaison injoignable — vérifiez votre connexion et le point de terminaison.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Échec de la connexion. Vérifiez la clé d’accès, la clé secrète et la région — une région incorrecte donne la même erreur qu’une clé incorrecte.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Le point de terminaison a renvoyé une erreur. Réessayez plus tard.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Ce point de terminaison ne peut pas écrire de façon conditionnelle : votre travail n’est donc pas protégé de celui d’un autre. Enregistrez sous un nouveau nom si quelqu’un d’autre travaille sur cette présentation.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Aucun compartiment S3 configuré. Configurez-en un dans Réglages → Stockage.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Configurez d’abord un compartiment S3 dans Réglages → Stockage.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'Le compartiment S3 n’est pas (bien) configuré — vérifiez le point de terminaison, le compartiment et les clés dans Réglages → Stockage.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Ce point de terminaison n’est pas autorisé. Marquez d’abord un point de terminaison privé/LAN comme fiable dans Réglages → Stockage.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Introuvable dans le compartiment. Si le nom est correct, essayez l’autre adressage dans Réglages → Stockage.',
   'S3-bucket': 'Compartiment S3',
   'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
       'Un compartiment S3, par exemple AWS S3 ou votre propre serveur MinIO.',

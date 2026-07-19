@@ -228,3 +228,43 @@ class S3Bucket {
     trustedInternal,
   );
 }
+
+/// Herkomst van een tab die uit een S3-bron is geopend, zodat "Opslaan naar S3"
+/// weet waar (en in welke bucket) terug te schrijven. Spiegelt `WebdavOrigin`;
+/// [endpoint] en [bucket] dienen om een bronwissel te detecteren.
+class S3Origin {
+  /// De verbinding waar dit deck vandaan kwam. Hiermee gaat "Opslaan naar S3"
+  /// terug naar dezelfde klant zonder opnieuw te vragen — en blijft dat kloppen
+  /// als de gebruiker de verbinding hernoemt of het endpoint corrigeert.
+  final String connectionId;
+
+  final String endpoint;
+  final String bucket;
+
+  /// Pad van het oorspronkelijk geopende object, relatief aan de wortelprefix.
+  final String remotePath;
+
+  /// De versie die in de bucket stond toen wij dit object ophaalden (of er voor
+  /// het laatst naartoe schreven). Hiermee kan een volgende opslag zeggen
+  /// "alleen als er sindsdien niets veranderd is". `null` wanneer het endpoint
+  /// geen ETag gaf — dan valt er niets te bewaken en schrijven we onvoorwaardelijk.
+  final String? etag;
+
+  const S3Origin({
+    required this.endpoint,
+    required this.bucket,
+    required this.remotePath,
+    this.connectionId = '',
+    this.etag,
+  });
+
+  /// Prefix waarin het object staat (relatief aan de wortel), of leeg.
+  String get parentPath {
+    final i = remotePath.lastIndexOf('/');
+    return i < 0 ? '' : remotePath.substring(0, i);
+  }
+
+  bool matchesBucket(S3Bucket config) =>
+      config.endpoint.trim() == endpoint.trim() &&
+      config.bucket.trim() == bucket.trim();
+}

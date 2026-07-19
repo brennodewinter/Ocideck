@@ -738,6 +738,31 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Openen vanuit S3': 'Habri for di S3',
+  'Afbeelding kiezen in S3': 'Skohe un imágen den S3',
+  'Opslaan naar S3': 'Warda den S3',
+  'Opgeslagen in S3:': 'Wardá den S3:',
+  'Hier staat niets': 'Aki no tin nada',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'No por a karga e kontenido. Kontrolá bo konekshon i konfigurashon.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Punto final no ta alkansabel — kontrolá bo konekshon i e punto final.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Login a faya. Kontrolá e yabi di akseso, e yabi sekreto i e region — un region robes ta duna e mesun eror ku un yabi robes.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'E punto final a duna un eror. Purba atrobe despues.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'E punto final aki no por skirbi kondishonal, pues bo trabou no ta protehá kontra esun di otro. Warda bou di un nòmber nobo si tin otro hende ta traha riba e presentashon aki.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'No tin bucket di S3 konfigurá. Konfigurá un na Konfigurashon → Almasenamentu.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Promé konfigurá un bucket di S3 na Konfigurashon → Almasenamentu.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'E bucket di S3 no ta konfigurá (bon) — kontrolá e punto final, bucket i yabinan na Konfigurashon → Almasenamentu.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'E punto final aki no ta permití. Marka un punto final privá/LAN promé komo konfiabel na Konfigurashon → Almasenamentu.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'No a haña den e bucket. Si e nòmber ta bon, purba e otro direkshonamentu na Konfigurashon → Almasenamentu.',
   'S3-bucket': 'Bucket di S3',
   'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
       'Un bucket di S3, por ehèmpel AWS S3 of bo mes servidó MinIO.',

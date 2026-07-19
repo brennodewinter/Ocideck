@@ -3,6 +3,7 @@ import 'dart:io';
 
 import '../l10n/app_localizations.dart';
 import '../services/file_service.dart';
+import '../services/s3/s3_service.dart';
 import '../services/webdav_service.dart';
 
 /// Vertaal een gevangen [error] naar een korte melding met
@@ -10,6 +11,7 @@ import '../services/webdav_service.dart';
 /// details horen in het log (logError/logWarning), niet bij de gebruiker.
 String userFacingError(AppLocalizations l10n, Object error) {
   if (error is WebdavException) return webdavErrorMessage(l10n, error);
+  if (error is S3Exception) return s3ErrorMessage(l10n, error);
   if (error is FileSystemException) {
     final code = error.osError?.errorCode;
     // EPERM(1) / EACCES(13): geen rechten; ENOENT(2): weg; ENOSPC(28): vol.
@@ -86,6 +88,39 @@ String webdavErrorMessage(AppLocalizations l10n, WebdavException e) {
     ),
     WebdavError.server => l10n.d(
       'De server gaf een fout. Probeer het later opnieuw.',
+    ),
+  };
+}
+
+/// Begrijpelijke melding per S3-foutsoort. Twee ervan verwijzen naar een knop
+/// in de instellingen, omdat dat in de praktijk de oorzaak is: een 404 op een
+/// bucket die zeker bestaat komt vrijwel altijd door de adressering, en een
+/// geweigerde privé-host door de ontbrekende "vertrouwd intern"-vink.
+String s3ErrorMessage(AppLocalizations l10n, S3Exception e) {
+  return switch (e.kind) {
+    S3Error.config => l10n.d(
+      'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.',
+    ),
+    S3Error.blockedHost => l10n.d(
+      'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.',
+    ),
+    S3Error.network => l10n.d(
+      'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.',
+    ),
+    S3Error.auth => l10n.d(
+      'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.',
+    ),
+    S3Error.notFound => l10n.d(
+      'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.',
+    ),
+    S3Error.tooLarge => l10n.d(
+      'Het bestand is groter dan de toegestane limiet.',
+    ),
+    S3Error.conditionalUnsupported => l10n.d(
+      'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.',
+    ),
+    S3Error.server => l10n.d(
+      'Het endpoint gaf een fout. Probeer het later opnieuw.',
     ),
   };
 }

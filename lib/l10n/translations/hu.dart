@@ -1785,6 +1785,31 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Openen vanuit S3': 'Megnyitás S3-ból',
+  'Afbeelding kiezen in S3': 'Kép választása S3-ban',
+  'Opslaan naar S3': 'Mentés S3-ba',
+  'Opgeslagen in S3:': 'Mentve S3-ba:',
+  'Hier staat niets': 'Itt nincs semmi',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'A tartalom nem tölthető be. Ellenőrizd a kapcsolatot és a beállításokat.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'A végpont nem érhető el — ellenőrizd a kapcsolatot és a végpontot.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'A bejelentkezés nem sikerült. Ellenőrizd a hozzáférési kulcsot, a titkos kulcsot és a régiót — a rossz régió ugyanazt a hibát adja, mint a rossz kulcs.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'A végpont hibát adott vissza. Próbáld később.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Ez a végpont nem tud feltételesen írni, így a munkád nincs védve másokétól. Ments új néven, ha valaki más is dolgozik ezen a bemutatón.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Nincs beállítva S3 tároló. Állíts be egyet a Beállítások → Tárolás alatt.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Előbb állíts be egy S3 tárolót a Beállítások → Tárolás alatt.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'Az S3 tároló nincs (jól) beállítva — ellenőrizd a végpontot, a tárolót és a kulcsokat a Beállítások → Tárolás alatt.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Ez a végpont nem engedélyezett. Előbb jelöld megbízhatónak a magán-/LAN-végpontot a Beállítások → Tárolás alatt.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Nem található a tárolóban. Ha a név helyes, próbáld a másik címzést a Beállítások → Tárolás alatt.',
   'S3-bucket': 'S3 tároló',
   'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
       'S3 tároló, például AWS S3 vagy saját MinIO-kiszolgáló.',
