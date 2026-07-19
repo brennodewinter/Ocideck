@@ -300,6 +300,23 @@ class Slide {
   final int videoEndMs;
   final String audioPath;
   final bool audioAutoplay;
+
+  /// Of de media op deze slide door de privacyprojectie is weggehaald.
+  ///
+  /// **Alleen voor de projectie — dit veld wordt niet geserialiseerd en staat
+  /// dus in geen enkel opgeslagen deck.** Zie `markdown_service_serialize.dart`:
+  /// die schrijft veld voor veld, en dit veld staat er bewust niet bij.
+  ///
+  /// Waarom het er toch is. De redactie van media is het wíssen van het pad
+  /// (`privacy_projection.dart`), en daarmee ging precies één ding verloren:
+  /// het verschíl tussen "hier is een foto weggehaald" en "hier heeft de auteur
+  /// nog geen foto gekozen". De renderer zag alleen een leeg pad en toonde in
+  /// beide gevallen hetzelfde grijze vak met het woord "Afbeelding". Op een
+  /// geredigeerde slide leest dat als een vergeten plaatje, niet als een
+  /// bewuste ingreep — terwijl de tekst ernaast wél zwarte blokken laat zien.
+  ///
+  /// Dat verschil kán niet uit het lege pad worden afgeleid, dus reist het mee.
+  final bool mediaRedacted;
   final String quote;
   final String quoteAuthor;
   final String customMarkdown;
@@ -423,6 +440,7 @@ class Slide {
     this.videoEndMs = 0,
     this.audioPath = '',
     this.audioAutoplay = false,
+    this.mediaRedacted = false,
     this.quote = '',
     this.quoteAuthor = '',
     this.customMarkdown = '',
@@ -584,6 +602,7 @@ class Slide {
     int? videoEndMs,
     String? audioPath,
     bool? audioAutoplay,
+    bool? mediaRedacted,
     String? quote,
     String? quoteAuthor,
     String? customMarkdown,
@@ -645,6 +664,7 @@ class Slide {
       videoStartMs: videoStartMs ?? this.videoStartMs,
       videoEndMs: videoEndMs ?? this.videoEndMs,
       audioPath: audioPath ?? this.audioPath,
+      mediaRedacted: mediaRedacted ?? this.mediaRedacted,
       audioAutoplay: audioAutoplay ?? this.audioAutoplay,
       quote: quote ?? this.quote,
       quoteAuthor: quoteAuthor ?? this.quoteAuthor,

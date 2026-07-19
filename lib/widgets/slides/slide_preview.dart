@@ -100,10 +100,21 @@ class _SlideLinkScope extends InheritedWidget {
   /// worden. Standaard uit; de media-renderers tonen anders een placeholder met
   /// de URL i.p.v. naar buiten te bellen.
   final bool allowRemoteMedia;
+
+  /// Of de media op deze slide door de privacyprojectie is weggehaald.
+  ///
+  /// Reist mee in de scope en niet als parameter langs de renderers, omdat het
+  /// anders precies dáár misgaat waar het al eens misging: er zijn negen
+  /// aanroepplekken van `_resolvedImage`, en een tiende die de vlag vergeet
+  /// levert stilzwijgend weer een grijs "Afbeelding"-vak op een geredigeerde
+  /// slide. Zie [Slide.mediaRedacted].
+  final bool mediaRedacted;
+
   const _SlideLinkScope({
     required this.onTapLink,
     this.hasBottomTlp = false,
     this.allowRemoteMedia = false,
+    this.mediaRedacted = false,
     required super.child,
   });
 
@@ -127,11 +138,19 @@ class _SlideLinkScope extends InheritedWidget {
         false;
   }
 
+  static bool mediaRedactedOf(BuildContext context) {
+    return context
+            .dependOnInheritedWidgetOfExactType<_SlideLinkScope>()
+            ?.mediaRedacted ??
+        false;
+  }
+
   @override
   bool updateShouldNotify(_SlideLinkScope oldWidget) =>
       oldWidget.onTapLink != onTapLink ||
       oldWidget.hasBottomTlp != hasBottomTlp ||
-      oldWidget.allowRemoteMedia != allowRemoteMedia;
+      oldWidget.allowRemoteMedia != allowRemoteMedia ||
+      oldWidget.mediaRedacted != mediaRedacted;
 }
 
 /// Tekst met inline-markdown (**vet**, *cursief*, `code`, ~~door~~, [link](url)).
@@ -427,6 +446,7 @@ class SlidePreviewWidget extends StatelessWidget {
                 onTapLink: onLinkTap,
                 hasBottomTlp: hasBottomRightTlp,
                 allowRemoteMedia: allowRemoteMedia,
+                mediaRedacted: slide.mediaRedacted,
                 child: _buildSlide(),
               ),
             ),

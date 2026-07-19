@@ -91,7 +91,15 @@ Widget _resolvedImage(
   String? semanticLabel,
 }) {
   if (imagePath.isEmpty) {
-    return _imagePlaceholder(context, ImagePlaceholderReason.noImage);
+    // Een leeg pad heeft twee heel verschillende betekenissen, en alleen de
+    // scope weet welke: de auteur heeft nog niets gekozen, óf de projectie
+    // heeft de afbeelding weggehaald. Zie `_SlideLinkScope.mediaRedacted`.
+    return _imagePlaceholder(
+      context,
+      _SlideLinkScope.mediaRedactedOf(context)
+          ? ImagePlaceholderReason.redacted
+          : ImagePlaceholderReason.noImage,
+    );
   }
 
   // Méégebundelde asset (ingebouwde stijlprofielen, bv. het LibreKAT-logo):
@@ -285,7 +293,16 @@ Widget _remoteBlockedPlaceholder(BuildContext context, String url) {
   );
 }
 
-Widget _mediaPlaceholder(IconData icon, String label) {
+/// Het vak voor video en audio zonder bron.
+///
+/// Neemt een [context] om dezelfde reden als [_resolvedImage]: een geredigeerde
+/// video is óók media die is weggehaald, en die hoort hetzelfde zwarte vlak te
+/// krijgen als een geredigeerde foto. Zonder deze tak toont een geredigeerde
+/// videoslide een grijs vak met het woord "Video" — hetzelfde gat, andere naam.
+Widget _mediaPlaceholder(BuildContext context, IconData icon, String label) {
+  if (_SlideLinkScope.mediaRedactedOf(context)) {
+    return _redactedMediaPlaceholder(context);
+  }
   return Container(
     color: AppTheme.slate200,
     child: Center(
@@ -303,13 +320,22 @@ Widget _mediaPlaceholder(IconData icon, String label) {
 
 /// Waarom er geen afbeelding staat.
 ///
-/// Deze vier gevallen zagen er tot nu toe identiek uit: hetzelfde grijze vlak
+/// Deze gevallen zagen er tot nu toe identiek uit: hetzelfde grijze vlak
 /// met het woord "Afbeelding". Dat is precies verkeerd om — een leeg veld is
 /// werk dat nog moet gebeuren, een ontbrekend bestand is een presentatie die
 /// stuk is, en dat verschil moet je kunnen zien zonder de code te kennen.
 enum ImagePlaceholderReason {
   /// Er is nog geen afbeelding gekozen.
   noImage,
+
+  /// De privacyprojectie heeft de afbeelding weggehaald.
+  ///
+  /// Dit is de enige reden die geen grijs vak krijgt maar een zwart. Een
+  /// geredigeerde foto onder hetzelfde lichte "Afbeelding"-vak als een lege
+  /// plek zetten leest als vergeetachtigheid, terwijl de tekst ernaast wél
+  /// zwarte blokken toont — en de ontvanger die het verschil niet ziet, kan het
+  /// verschil ook niet controleren. Zie `privacy_projection.dart`.
+  redacted,
 
   /// Er is een verwijzing, maar het bestand is er niet (meer).
   missing,
@@ -322,9 +348,69 @@ enum ImagePlaceholderReason {
   memoryGone,
 }
 
+/// Het vlak dat in de plaats komt van weggeredigeerde media.
+///
+/// Zwart en dekkend, want dat is wat "geredigeerd" er in elk vrijgegeven
+/// document uitziet, en het is dezelfde taal als de `█`-blokken die de
+/// tekstredactie gebruikt (`kRedactionToken` in `privacy_projection.dart`).
+/// Grijs zou hier niet alleen lelijk zijn maar onwaar: grijs is in deze app de
+/// kleur van "er staat nog niets". Waaróm die kleuren de themastand niet volgen
+/// staat bij [AppTheme.redactionInk].
+///
+/// Het label erbij, en niet alleen het vlak, omdat een zwart vlak op een dia
+/// ook een ontwerpkeuze kan zijn. De ontvanger hoort te kunnen zien dát hier is
+/// ingegrepen — dat is het hele punt van redigeren in plaats van weglaten.
+/// Onder de 48 px is er geen ruimte voor tekst en blijft het vlak met het
+/// icoon over; onder de 16 px alleen het vlak.
+Widget _redactedMediaPlaceholder(BuildContext context) {
+  return ColoredBox(
+    color: AppTheme.redactionInk,
+    child: LayoutBuilder(
+      builder: (context, constraints) {
+        final shortestSide = constraints.biggest.shortestSide;
+        if (shortestSide < 16) return const SizedBox.expand();
+        if (shortestSide < 48) {
+          return Center(
+            child: Icon(
+              Icons.block,
+              color: AppTheme.redactionMark,
+              size: shortestSide * 0.5,
+            ),
+          );
+        }
+
+        return Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.block, color: AppTheme.redactionMark, size: 24),
+              const SizedBox(height: 4),
+              Text(
+                context.l10n.d('Geredigeerd'),
+                style: TextStyle(
+                  color: AppTheme.redactionMark,
+                  fontSize: 10,
+                  letterSpacing: 0.5,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        );
+      },
+    ),
+  );
+}
+
 Widget _imagePlaceholder(BuildContext context, ImagePlaceholderReason reason) {
+  if (reason == ImagePlaceholderReason.redacted) {
+    return _redactedMediaPlaceholder(context);
+  }
+
   final (icon, label) = switch (reason) {
-    ImagePlaceholderReason.noImage => (
+    // `redacted` is hierboven al afgevangen en komt hier nooit; de tak staat er
+    // omdat Dart de switch volledig wil hebben.
+    ImagePlaceholderReason.redacted || ImagePlaceholderReason.noImage => (
       Icons.image_outlined,
       context.l10n.d('Afbeelding'),
     ),
