@@ -1787,6 +1787,30 @@ const _dutchSourceAddId = <String, String>{
   'Persoonsgegevens geaccepteerd': 'Data pribadi diterima',
   'Persoonsgegevens gevonden': 'Data pribadi ditemukan',
   'Organisatie': 'Organisasi',
+  'Welke verbinding?': 'Koneksi yang mana?',
+  'Bestandsverbindingen': 'Koneksi berkas',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Tempat Anda menyimpan dan mencari presentasi — folder di komputer ini, server WebDAV, dan repositori git bercampur. Seret ke urutan yang Anda inginkan: yang teratas dari setiap jenis menjadi bawaan.',
+  'Een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Repositori git; setiap versi yang disimpan tetap tersimpan.',
+  'Een map op de schijf van deze computer.': 'Folder di diska komputer ini.',
+  'Een map op een WebDAV-server, bijvoorbeeld Nextcloud.':
+      'Folder di server WebDAV, misalnya Nextcloud.',
+  'Instellingen tonen': 'Tampilkan pengaturan',
+  'Instellingen verbergen': 'Sembunyikan pengaturan',
+  'Map op deze computer': 'Folder di komputer ini',
+  'Naam van deze verbinding': 'Nama koneksi ini',
+  'Nog geen verbinding — voeg er hieronder een toe.':
+      'Belum ada koneksi — tambahkan satu di bawah.',
+  'Sleep om de volgorde te wijzigen': 'Seret untuk mengubah urutan',
+  'Verbinding toevoegen': 'Tambah koneksi',
+  'Verbinding verwijderen': 'Hapus koneksi',
+  'WebDAV-server': 'Server WebDAV',
+  'Iemand anders heeft dit bestand gewijzigd':
+      'Orang lain telah mengubah berkas ini',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'Versi di server telah berubah sejak Anda membuka presentasi ini. Menimpa akan menghapus pekerjaan orang lain.',
+  'Overschrijven': 'Timpa',
   'Openen vanaf WebDAV': 'Buka dari WebDAV',
   'Opslaan naar WebDAV': 'Simpan ke WebDAV',
   'Opgeslagen op WebDAV:': 'Disimpan ke WebDAV:',

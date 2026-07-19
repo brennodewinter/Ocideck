@@ -1778,6 +1778,30 @@ const _dutchSourceAddEt = <String, String>{
   'Persoonsgegevens geaccepteerd': 'Isikuandmed aktsepteeritud',
   'Persoonsgegevens gevonden': 'Leiti isikuandmeid',
   'Organisatie': 'Organisatsioon',
+  'Welke verbinding?': 'Milline ühendus?',
+  'Bestandsverbindingen': 'Failiühendused',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Kohad, kus hoiad ja otsid oma esitlusi — kaustad selles arvutis, WebDAV-serverid ja git-hoidlad läbisegi. Lohista need soovitud järjekorda: iga liigi ülemine kehtib vaikimisi.',
+  'Een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Git-hoidla; iga salvestatud versioon säilib.',
+  'Een map op de schijf van deze computer.': 'Kaust selle arvuti kettal.',
+  'Een map op een WebDAV-server, bijvoorbeeld Nextcloud.':
+      'Kaust WebDAV-serveris, näiteks Nextcloud.',
+  'Instellingen tonen': 'Näita seadeid',
+  'Instellingen verbergen': 'Peida seaded',
+  'Map op deze computer': 'Kaust selles arvutis',
+  'Naam van deze verbinding': 'Selle ühenduse nimi',
+  'Nog geen verbinding — voeg er hieronder een toe.':
+      'Ühendust veel pole — lisa üks allpool.',
+  'Sleep om de volgorde te wijzigen': 'Lohista järjekorra muutmiseks',
+  'Verbinding toevoegen': 'Lisa ühendus',
+  'Verbinding verwijderen': 'Eemalda ühendus',
+  'WebDAV-server': 'WebDAV-server',
+  'Iemand anders heeft dit bestand gewijzigd':
+      'Keegi teine on seda faili muutnud',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'Serveris olev versioon on muutunud pärast selle esitluse avamist. Ülekirjutamine hävitab teise inimese töö.',
+  'Overschrijven': 'Kirjuta üle',
   'Openen vanaf WebDAV': 'Ava WebDAV\'ist',
   'Opslaan naar WebDAV': 'Salvesta WebDAV\'i',
   'Opgeslagen op WebDAV:': 'Salvestatud WebDAV\'i:',

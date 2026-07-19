@@ -1787,6 +1787,31 @@ const _dutchSourceAddFi = <String, String>{
   'Persoonsgegevens geaccepteerd': 'Henkilötiedot hyväksytty',
   'Persoonsgegevens gevonden': 'Henkilötietoja löytyi',
   'Organisatie': 'Organisaatio',
+  'Welke verbinding?': 'Mikä yhteys?',
+  'Bestandsverbindingen': 'Tiedostoyhteydet',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Paikat, joissa säilytät ja haet esityksiäsi — kansiot tässä tietokoneessa, WebDAV-palvelimet ja git-arkistot sekaisin. Vedä ne haluamaasi järjestykseen: kunkin lajin ylin on oletus.',
+  'Een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Git-arkisto; jokainen tallennettu versio säilyy.',
+  'Een map op de schijf van deze computer.':
+      'Kansio tämän tietokoneen levyllä.',
+  'Een map op een WebDAV-server, bijvoorbeeld Nextcloud.':
+      'Kansio WebDAV-palvelimella, esimerkiksi Nextcloud.',
+  'Instellingen tonen': 'Näytä asetukset',
+  'Instellingen verbergen': 'Piilota asetukset',
+  'Map op deze computer': 'Kansio tässä tietokoneessa',
+  'Naam van deze verbinding': 'Tämän yhteyden nimi',
+  'Nog geen verbinding — voeg er hieronder een toe.':
+      'Ei vielä yhteyttä — lisää yksi alta.',
+  'Sleep om de volgorde te wijzigen': 'Vedä muuttaaksesi järjestystä',
+  'Verbinding toevoegen': 'Lisää yhteys',
+  'Verbinding verwijderen': 'Poista yhteys',
+  'WebDAV-server': 'WebDAV-palvelin',
+  'Iemand anders heeft dit bestand gewijzigd':
+      'Joku muu on muuttanut tätä tiedostoa',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'Palvelimella oleva versio on muuttunut sen jälkeen, kun avasit tämän esityksen. Korvaaminen hylkää toisen tekemän työn.',
+  'Overschrijven': 'Korvaa',
   'Openen vanaf WebDAV': 'Avaa WebDAVista',
   'Opslaan naar WebDAV': 'Tallenna WebDAViin',
   'Opgeslagen op WebDAV:': 'Tallennettu WebDAViin:',

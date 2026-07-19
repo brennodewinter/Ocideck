@@ -322,13 +322,18 @@ Future<void> _openFromGit(
 /// Blader door de Nextcloud/WebDAV-bron, download het gekozen deck, haal het
 /// door de security-gate en open het in een tab. Toont waar nodig een melding.
 Future<void> _openFromNextcloud(BuildContext context, WidgetRef ref) async {
-  final service = await ref.read(webdavServiceProvider.future);
+  final connection = await _pickWebdavConnection(context, ref);
+  if (connection == null || !context.mounted) return;
+  final service = await ref.read(webdavServiceProvider(connection.id).future);
   if (!context.mounted) return;
   if (service == null) {
     _webdavNotConfigured(context);
     return;
   }
-  final entry = await WebdavBrowserDialog.show(context);
+  final entry = await WebdavBrowserDialog.show(
+    context,
+    connectionId: connection.id,
+  );
   if (entry == null || !context.mounted) return;
   final messenger = ScaffoldMessenger.of(context);
   final l10n = context.l10n;
@@ -338,6 +343,7 @@ Future<void> _openFromNextcloud(BuildContext context, WidgetRef ref) async {
         .openFromWebdav(
           service,
           entry,
+          connectionId: connection.id,
           homeDir: ref.read(settingsProvider).homeDirectory,
         );
     _reportOpenFailure(messenger, l10n, result);
@@ -358,7 +364,18 @@ Future<void> _saveToNextcloud(BuildContext context, WidgetRef ref) async {
   final tab = ref.read(tabsProvider).current;
   final deck = tab?.deckNotifier.currentState.deck;
   if (tab == null || deck == null) return;
-  final service = await ref.read(webdavServiceProvider.future);
+  // Kwam dit deck van een WebDAV-verbinding die nog bestaat, dan gaat het
+  // daarnaartoe terug zonder te vragen. Opnieuw laten kiezen zou de gebruiker
+  // elke keer de kans geven het bij de verkeerde klant te laten belanden.
+  final origin = tab.webdavOrigin;
+  final settings = ref.read(settingsProvider);
+  final known = settings.connectionById(origin?.connectionId);
+  final connection = known is WebdavConnection && known.isConfigured
+      ? known
+      : await _pickWebdavConnection(context, ref);
+  if (connection == null || !context.mounted) return;
+
+  final service = await ref.read(webdavServiceProvider(connection.id).future);
   if (!context.mounted) return;
   if (service == null) {
     _webdavNotConfigured(context);
@@ -366,41 +383,120 @@ Future<void> _saveToNextcloud(BuildContext context, WidgetRef ref) async {
   }
   // Standaardpad: hergebruik de herkomst als die van dezelfde server komt,
   // anders een nette bestandsnaam uit de deck-titel in de wortelmap.
-  final origin = tab.webdavOrigin;
   final reuse = origin != null && origin.matchesServer(service.server);
   final defaultBase = reuse
       ? origin.remotePath.replaceAll(RegExp(r'\.(ocideck|zip|md)$'), '')
       : _safeRemoteName(deck.title);
-  final choice = await _showWebdavSaveDialog(context, defaultBase: defaultBase);
+  var choice = await _showWebdavSaveDialog(context, defaultBase: defaultBase);
   if (choice == null || !context.mounted) return;
 
   final messenger = ScaffoldMessenger.of(context);
   final l10n = context.l10n;
-  final ext = choice.format == WebdavSaveFormat.ocideck ? '.ocideck' : '.md';
-  final targetPath = '${choice.base}$ext';
-  try {
-    await ref
-        .read(tabsProvider.notifier)
-        .saveToWebdav(
-          tab,
-          service,
-          format: choice.format,
-          targetPath: targetPath,
-        );
-    if (!context.mounted) return;
-    messenger.showSnackBar(
-      SnackBar(
-        content: Text('${l10n.d('Opgeslagen op WebDAV:')} /$targetPath'),
-      ),
-    );
-  } on WebdavException catch (e) {
-    logWarning('shell: WebDAV-opslaan mislukt', e);
-    showErrorSnackBar(
-      messenger,
-      l10n,
-      '${l10n.d('Opslaan mislukt:')} ${webdavErrorMessage(l10n, e)}',
-    );
+  // Blijft doorlopen zolang de gebruiker na een botsing een andere weg kiest:
+  // onder een nieuwe naam opslaan, of alsnog overschrijven.
+  var overwrite = false;
+  while (true) {
+    final ext = choice!.format == WebdavSaveFormat.ocideck ? '.ocideck' : '.md';
+    final targetPath = '${choice.base}$ext';
+    try {
+      await ref
+          .read(tabsProvider.notifier)
+          .saveToWebdav(
+            tab,
+            service,
+            connectionId: connection.id,
+            format: choice.format,
+            targetPath: targetPath,
+            overwrite: overwrite,
+          );
+      if (!context.mounted) return;
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text('${l10n.d('Opgeslagen op WebDAV:')} /$targetPath'),
+        ),
+      );
+      return;
+    } on WebdavConflictException catch (e) {
+      logWarning('shell: WebDAV-opslaan botste met een nieuwere versie', e);
+      if (!context.mounted) return;
+      final resolution = await _showWebdavConflictDialog(context);
+      if (resolution == null || !context.mounted) return;
+      switch (resolution) {
+        case _WebdavConflict.overwrite:
+          overwrite = true;
+        case _WebdavConflict.saveAs:
+          final next = await _showWebdavSaveDialog(
+            context,
+            defaultBase: choice.base,
+          );
+          if (next == null || !context.mounted) return;
+          choice = next;
+          // Een ander doelpad wordt niet bewaakt (we haalden het nooit op),
+          // maar een ongewijzigd pad moet de guard hóuden.
+          overwrite = false;
+      }
+    } on WebdavException catch (e) {
+      logWarning('shell: WebDAV-opslaan mislukt', e);
+      showErrorSnackBar(
+        messenger,
+        l10n,
+        '${l10n.d('Opslaan mislukt:')} ${webdavErrorMessage(l10n, e)}',
+      );
+      return;
+    }
   }
+}
+
+/// Wat de gebruiker doet als het bestand op de server inmiddels van iemand
+/// anders is. Bewust geen samenvoegkeuze zoals bij git: die leunt erop dat de
+/// basisversie nog opvraagbaar is, en bij WebDAV is die weg zodra de ander
+/// heeft geüpload.
+enum _WebdavConflict { saveAs, overwrite }
+
+Future<_WebdavConflict?> _showWebdavConflictDialog(BuildContext context) {
+  final l10n = context.l10n;
+  return showDialog<_WebdavConflict>(
+    context: context,
+    builder: (ctx) => AlertDialog(
+      title: Text(l10n.d('Iemand anders heeft dit bestand gewijzigd')),
+      content: Text(
+        l10n.d(
+          'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.',
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(ctx),
+          child: Text(l10n.t('cancel')),
+        ),
+        TextButton(
+          onPressed: () => Navigator.pop(ctx, _WebdavConflict.overwrite),
+          child: Text(l10n.d('Overschrijven')),
+        ),
+        // Als voorkeursknop rechts: hij behoudt beide versies, en dat is wat
+        // je wilt aanraden aan iemand die dit scherm onverwacht krijgt.
+        FilledButton(
+          onPressed: () => Navigator.pop(ctx, _WebdavConflict.saveAs),
+          child: Text(l10n.d('Opslaan als')),
+        ),
+      ],
+    ),
+  );
+}
+
+/// Laat de gebruiker een WebDAV-verbinding kiezen. Bij één verbinding gebeurt
+/// dat zonder dialoog; bij geen enkele volgt de melding dat er niets staat
+/// ingesteld.
+Future<WebdavConnection?> _pickWebdavConnection(
+  BuildContext context,
+  WidgetRef ref,
+) async {
+  final connections = ref.read(webdavConnectionsProvider);
+  if (connections.isEmpty) {
+    _webdavNotConfigured(context);
+    return null;
+  }
+  return StorageConnectionPicker.show(context, connections);
 }
 
 void _webdavNotConfigured(BuildContext context) {

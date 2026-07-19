@@ -1762,6 +1762,29 @@ const _dutchSourceAddTlh = <String, String>{
   'Persoonsgegevens geaccepteerd': 'nuv De\' lajlu\'',
   'Persoonsgegevens gevonden': 'nuv De\' tu\'lu\'',
   'Organisatie': 'ghom',
+  'Welke verbinding?': 'nuq rar?',
+  'Bestandsverbindingen': 'De\' rarmey',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Daqmey, nuqDaq QIchmey Dapol \'ej DanejlaH — De\'wI\'vamDaq Daqmey, WebDAV lIwmey, git qawHaqmey je. mIr DaneHbogh yIchenmoH: Hoch Segh joqDaq ratlhbogh \'oH De\' motlh\'e\'.',
+  'Een git-repository; elke opgeslagen versie blijft bewaard.':
+      'git qawHaq; Hoch mucher pollu\'pu\'bogh ratlh.',
+  'Een map op de schijf van deze computer.': 'De\'wI\'vam naQHomDaq Daq.',
+  'Een map op een WebDAV-server, bijvoorbeeld Nextcloud.':
+      'WebDAV lIwDaq Daq, WebDAV lIw Segh \'oH Nextcloud\'e\'.',
+  'Instellingen tonen': 'DuHmey \'ang',
+  'Instellingen verbergen': 'DuHmey So\'',
+  'Map op deze computer': 'De\'wI\'vamDaq Daq',
+  'Naam van deze verbinding': 'rarvam pong',
+  'Nog geen verbinding — voeg er hieronder een toe.':
+      'rar tu\'lu\'be\' — bIngDaq wa\' yIchel.',
+  'Sleep om de volgorde te wijzigen': 'mIr yIchoH \'e\' DaneHchugh yIjop',
+  'Verbinding toevoegen': 'rar chel',
+  'Verbinding verwijderen': 'rar teq',
+  'WebDAV-server': 'WebDAV lIw',
+  'Iemand anders heeft dit bestand gewijzigd': 'latlh nuv De\' choHta\'',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'De\'wI\'Daq cha\'nav choHlu\'pu\', SoH poSmoHpu\'DI\'. DaSIchchugh, latlh Qu\' Qaw\'lu\'.',
+  'Overschrijven': 'yISIch',
   'Openen vanaf WebDAV': 'WebDAVvo\' poSmoH',
   'Opslaan naar WebDAV': 'WebDAVDaq pol',
   'Opgeslagen op WebDAV:': 'WebDAVDaq polpu\':',

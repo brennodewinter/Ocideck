@@ -736,16 +736,18 @@ class TabsNotifier extends StateNotifier<TabsState> {
   Future<OpenResult> openFromWebdav(
     WebdavService service,
     WebdavEntry entry, {
+    String connectionId = '',
     String? homeDir,
   }) async {
     final dest = await _importDestDir(homeDir);
     final maxBytes = entry.isMarkdown
         ? FileService.maxDeckMarkdownBytes
         : FileService.maxPackageBytes;
-    final bytes = await service.download(
+    final downloaded = await service.download(
       entry.relativePath,
       maxBytes: maxBytes,
     );
+    final bytes = downloaded.bytes;
     if (!mounted) return OpenResult.unreadable;
     final String? mdPath;
     if (entry.isMarkdown) {
@@ -766,9 +768,12 @@ class TabsNotifier extends StateNotifier<TabsState> {
     if (result != OpenResult.opened) return result;
     // De zojuist geopende deck zit in het huidige tabblad (zie openFileByPath).
     state.current?.webdavOrigin = WebdavOrigin(
+      connectionId: connectionId,
       baseUrl: service.server.baseUrl,
       username: service.server.username,
       remotePath: entry.relativePath,
+      // De versie die we nét ophaalden; hierop toetst een latere opslag.
+      etag: downloaded.etag,
     );
     // Herkomst voor de wolk-badge in recente presentaties.
     await _settings.setRecentFileOrigin(
@@ -789,12 +794,26 @@ class TabsNotifier extends StateNotifier<TabsState> {
     WebdavService service, {
     required WebdavSaveFormat format,
     required String targetPath,
+    String connectionId = '',
+    bool overwrite = false,
   }) async {
     final deck = tab.deckNotifier.currentState.deck;
     if (deck == null) return;
+    // Alleen terugschrijven naar precies het bestand dat we ophaalden valt te
+    // bewaken; voor elk ander doelpad hebben we geen versie om tegen te
+    // toetsen, en koos de gebruiker het pad zelf.
+    final origin = tab.webdavOrigin;
+    final guard =
+        (!overwrite &&
+            origin != null &&
+            origin.matchesServer(service.server) &&
+            origin.remotePath == targetPath)
+        ? origin.etag
+        : null;
+    String? savedEtag;
     if (format == WebdavSaveFormat.ocideck) {
       final bytes = await _file.buildPackageBytes(deck);
-      await service.upload(targetPath, bytes);
+      savedEtag = await service.upload(targetPath, bytes, ifMatch: guard);
     } else {
       final members = await _file.buildPackageMembers(deck);
       final dir = p.posix.dirname(targetPath);
@@ -807,13 +826,29 @@ class TabsNotifier extends StateNotifier<TabsState> {
         final remote = isRootMd
             ? p.posix.join(dir, mdBase)
             : p.posix.join(dir, entry.key);
-        await service.upload(remote, entry.value);
+        // Alleen het markdownbestand ís het deck; de assets ernaast hebben we
+        // nooit opgehaald, dus daar valt niets te toetsen.
+        final etag = await service.upload(
+          remote,
+          entry.value,
+          ifMatch: isRootMd ? guard : null,
+        );
+        if (isRootMd) savedEtag = etag;
       }
     }
     tab.webdavOrigin = WebdavOrigin(
+      // Een leeg id bij opslaan zou de herkomst van een geopend deck wissen;
+      // val dan terug op wat er al stond.
+      connectionId: connectionId.isEmpty
+          ? (tab.webdavOrigin?.connectionId ?? '')
+          : connectionId,
       baseUrl: service.server.baseUrl,
       username: service.server.username,
       remotePath: targetPath,
+      // Vanaf nu is dít de versie waarop we verder werken. Gaf de server er
+      // geen, dan blijft het `null` en is de volgende opslag onbewaakt — dat
+      // is zichtbaar zo, en niet een gok die stil de guard uitzet.
+      etag: savedEtag,
     );
     if (mounted) state = state.copyWith(tabs: List.from(state.tabs));
   }

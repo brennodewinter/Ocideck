@@ -1806,6 +1806,31 @@ const _dutchSourceAddRo = <String, String>{
   'Persoonsgegevens geaccepteerd': 'Date cu caracter personal acceptate',
   'Persoonsgegevens gevonden': 'Date cu caracter personal găsite',
   'Organisatie': 'Organizație',
+  'Welke verbinding?': 'Care conexiune?',
+  'Bestandsverbindingen': 'Conexiuni de fișiere',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Locurile unde îți păstrezi și cauți prezentările — dosare pe acest computer, servere WebDAV și depozite git amestecate. Trage-le în ordinea dorită: primul din fiecare tip este cel implicit.',
+  'Een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Un depozit git; fiecare versiune salvată se păstrează.',
+  'Een map op de schijf van deze computer.':
+      'Un dosar pe discul acestui computer.',
+  'Een map op een WebDAV-server, bijvoorbeeld Nextcloud.':
+      'Un dosar pe un server WebDAV, de exemplu Nextcloud.',
+  'Instellingen tonen': 'Afișează setările',
+  'Instellingen verbergen': 'Ascunde setările',
+  'Map op deze computer': 'Dosar pe acest computer',
+  'Naam van deze verbinding': 'Numele acestei conexiuni',
+  'Nog geen verbinding — voeg er hieronder een toe.':
+      'Încă nicio conexiune — adaugă una mai jos.',
+  'Sleep om de volgorde te wijzigen': 'Trage pentru a schimba ordinea',
+  'Verbinding toevoegen': 'Adaugă conexiune',
+  'Verbinding verwijderen': 'Elimină conexiunea',
+  'WebDAV-server': 'Server WebDAV',
+  'Iemand anders heeft dit bestand gewijzigd':
+      'Altcineva a modificat acest fișier',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'Versiunea de pe server s-a schimbat de când ați deschis această prezentare. Suprascrierea anulează munca celuilalt.',
+  'Overschrijven': 'Suprascrie',
   'Openen vanaf WebDAV': 'Deschide din WebDAV',
   'Opslaan naar WebDAV': 'Salvează pe WebDAV',
   'Opgeslagen op WebDAV:': 'Salvat pe WebDAV:',

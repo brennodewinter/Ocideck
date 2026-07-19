@@ -1787,6 +1787,30 @@ const _dutchSourceAddSv = <String, String>{
   'Persoonsgegevens geaccepteerd': 'Personuppgifter accepterade',
   'Persoonsgegevens gevonden': 'Personuppgifter hittades',
   'Organisatie': 'Organisation',
+  'Welke verbinding?': 'Vilken anslutning?',
+  'Bestandsverbindingen': 'Filanslutningar',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Platserna där du sparar och söker dina presentationer — mappar på den här datorn, WebDAV-servrar och git-arkiv om vartannat. Dra dem i den ordning du vill: den översta av varje sort gäller som standard.',
+  'Een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Ett git-arkiv; varje sparad version bevaras.',
+  'Een map op de schijf van deze computer.': 'En mapp på den här datorns disk.',
+  'Een map op een WebDAV-server, bijvoorbeeld Nextcloud.':
+      'En mapp på en WebDAV-server, till exempel Nextcloud.',
+  'Instellingen tonen': 'Visa inställningar',
+  'Instellingen verbergen': 'Dölj inställningar',
+  'Map op deze computer': 'Mapp på den här datorn',
+  'Naam van deze verbinding': 'Namn på den här anslutningen',
+  'Nog geen verbinding — voeg er hieronder een toe.':
+      'Ingen anslutning ännu — lägg till en nedan.',
+  'Sleep om de volgorde te wijzigen': 'Dra för att ändra ordningen',
+  'Verbinding toevoegen': 'Lägg till anslutning',
+  'Verbinding verwijderen': 'Ta bort anslutning',
+  'WebDAV-server': 'WebDAV-server',
+  'Iemand anders heeft dit bestand gewijzigd':
+      'Någon annan har ändrat den här filen',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'Versionen på servern har ändrats sedan du öppnade den här presentationen. Att skriva över kastar bort den andras arbete.',
+  'Overschrijven': 'Skriv över',
   'Openen vanaf WebDAV': 'Öppna från WebDAV',
   'Opslaan naar WebDAV': 'Spara till WebDAV',
   'Opgeslagen op WebDAV:': 'Sparad till WebDAV:',

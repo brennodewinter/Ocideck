@@ -46,29 +46,46 @@ but greyed out. The palette is also in the `⋮` menu.
 
 ## Storage
 
-Everything about *where your decks live* sits under *Settings → Storage*, in the
-order you'd ask about it: first where your work is kept, then how it gets there.
+Everything about *where your decks live* sits under *Settings → Storage*, as one
+list: **File connections**.
 
-- **Libraries** are the folders OciDeck searches. Give each one a name so you can
-  tell them apart — a private and a work library, say. All of them are searched
-  when you open a deck and in the image library.
+A connection is a place your presentations come from and go to. Folders on this
+computer, WebDAV servers and git repositories all sit in that one list, mixed
+together — because the question you actually ask is "where does this client's
+work live?", not "which protocol is this?". Give each one a name (*Client A –
+Nextcloud*, *Private*) so you can tell them apart at a glance.
+
+- **Add** one with *Add connection* and pick the kind. A folder is done as soon
+  as you pick it; a WebDAV server or git repository opens its settings straight
+  away so you can fill them in.
+- **Order matters.** Drag connections with the handle on the left. The topmost
+  usable connection *of each kind* is the default for that kind: it is the
+  library that opening and saving start from, and the server the app reaches for
+  when it doesn't ask. So promoting a connection is how you say "this client is
+  what I'm working on now" — without deleting anything.
+- **Every row shows its status**: the folder name, the server host, or
+  `owner/repo`, in green once the connection is usable and grey while it is
+  still incomplete. A half-filled connection stays in the list; it just doesn't
+  count as a usable source.
 - **Export folder** is where exports land. Leave it empty and they land next to
   the presentation file.
-- **Storage methods** lists the routes a deck can travel: **This computer**,
-  **Nextcloud** and **Git repository**. Each row shows its status at a glance —
-  configured, and for the network ones which server — and clicking one open
-  reveals its settings. "This computer" has nothing to configure; it is driven by
-  the libraries above, and it is listed so the local disk reads as the normal
-  case rather than an afterthought.
 
-The two network methods are described in full below.
+When an action needs a server and you have more than one of that kind, OciDeck
+asks which. With exactly one it doesn't ask at all, and a deck you opened from a
+connection saves back to that same connection without asking either.
+
+Upgrading from an older version needs no work: your libraries, your WebDAV
+server and your git repository become connections in that order, so the ones
+that were the default stay the default.
+
+The two network kinds are described in full below.
 
 ## Git repository
 
 You can open decks from a git repository — your own Forgejo, for now. Every
 saved version stays retrievable, which a plain folder cannot give you.
 
-- **Set it up** in *Settings → Storage → Git repository*: the server URL
+- **Set it up** on a git connection in *Settings → Storage*: the server URL
   (`https://git.example.org`), the owner (user or organisation), the repository
   name, and a **personal access token**. Scope the token to just that repository
   where your forge supports it. It is stored encrypted in your operating
@@ -97,9 +114,9 @@ saved version stays retrievable, which a plain folder cannot give you.
   unless you close the app first (an unsaved in-memory image does not survive a
   restart, the same limit a plain saved deck already has). Your text is always
   safe.
-- **Which forge**: pick the **forge type** in *Settings → Storage → Git
-  repository* — Forgejo/Gitea,
-  GitHub, or GitLab — next to the server URL, owner and repository. Everything
+- **Which forge**: pick the **forge type** on the git connection in *Settings →
+  Storage* — Forgejo/Gitea, GitHub, or GitLab — next to the server URL, owner
+  and repository. Everything
   below works the same whichever you choose; only the token differs (a personal
   access token in all three, but each calls it something slightly different). On
   GitLab the deck browser cannot show file sizes: its listing does not include
@@ -137,8 +154,8 @@ saved version stays retrievable, which a plain folder cannot give you.
   the browser and on desktop with native `git`; on desktop it becomes a real
   merge commit, so `git log` shows the two lines of work coming together.
 - **Native git (desktop):** if you have `git` installed (2.19 or newer),
-  *Settings → Storage → Git repository* shows it, and OciDeck keeps a real clone
-  of the repository.
+  the git connection in *Settings → Storage* shows it, and OciDeck keeps a real
+  clone of the repository.
   Then **each save is a genuine local commit** — durable and offline: edit away
   from a network, save as often as you like, and every commit is waiting to push
   when you reconnect (*Sync now*, or automatically on your next successful save).
@@ -194,8 +211,8 @@ Unlike WebDAV, this also works in the browser version.
 You can use a folder on a WebDAV server as a source for decks and assets.
 Nextcloud is the most common one, but any WebDAV server works.
 
-- **Pick the server type** in *Settings → Storage → WebDAV*. This is the only
-  thing that differs between servers — the protocol underneath is plain WebDAV
+- **Pick the server type** on the WebDAV connection in *Settings → Storage*.
+  This is the only thing that differs between servers — the protocol underneath is plain WebDAV
   either way:
   - **Nextcloud or ownCloud** — enter just the server URL
     (`https://cloud.example.com`). The DAV path
@@ -220,6 +237,11 @@ Nextcloud is the most common one, but any WebDAV server works.
   **flat `.md` plus its asset folders** (`images/`, `themes/`, …) mirrored into
   the same folder. A deck opened from WebDAV remembers where it came from, so
   saving suggests the original location.
+- **If someone else got there first**: saving back to the file you opened only
+  goes through if that file hasn't changed on the server since. If it has, you
+  get a choice — *Save as* (keep both versions) or *Overwrite* (discard theirs).
+  Nothing is overwritten silently. Servers that don't report a version (an
+  `ETag`) can't be checked; there you keep the old behaviour of a plain write.
 
 ## Slide types
 

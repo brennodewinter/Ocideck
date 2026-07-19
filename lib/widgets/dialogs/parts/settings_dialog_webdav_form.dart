@@ -63,15 +63,12 @@ class WebdavForm {
     );
   }
 
-  /// Schrijf de bron weg: config bij de instellingen, wachtwoord in de
-  /// sleutelhanger — en dat tweede alleen wanneer het écht nodig is.
-  void save(SettingsNotifier notifier) {
+  /// Zet het wachtwoord in de sleutelhanger, en alleen wanneer het écht nodig
+  /// is. De configuratie zelf gaat niet meer hierlangs: die is onderdeel van de
+  /// verbindingenlijst, die het opslag-tabblad in één keer wegschrijft.
+  void saveSecret(SettingsNotifier notifier) {
     final current = server;
-    if (!current.isConfigured) {
-      notifier.setWebdavServer(null);
-      return;
-    }
-    notifier.setWebdavServer(current);
+    if (!current.isConfigured) return;
     if (password.shouldWrite(identityOf(current.baseUrl, current.username))) {
       notifier.setWebdavPassword(
         current.baseUrl,

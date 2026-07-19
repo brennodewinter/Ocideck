@@ -23,10 +23,17 @@ import 'draft_store.dart';
 /// niet gepushte nieuwe afbeelding leeft in de `WebAssetStore`, die al expliciet
 /// vluchtig is. Deze store erft die beperking, hij voegt er geen toe — en is nog
 /// altijd beter dan vandaag, waar op web niets een herlaad overleeft.
-DraftStore createDraftStore() => PrefsDraftStore();
+DraftStore createDraftStore({String scope = ''}) =>
+    PrefsDraftStore(scope: scope);
 
 class PrefsDraftStore implements DraftStore {
-  PrefsDraftStore({SharedPreferences? prefs}) : _injected = prefs;
+  PrefsDraftStore({SharedPreferences? prefs, this.scope = ''})
+    : _injected = prefs;
+
+  /// De repo waar deze werkkopie bij hoort (`GitRepoConfig.storageSlug`). Zonder
+  /// scope deelden twee repo's met een gelijknamig deck één sleutel, en won
+  /// simpelweg wie het laatst opsloeg.
+  final String scope;
 
   final SharedPreferences? _injected;
   SharedPreferences? _cached;
@@ -47,7 +54,31 @@ class PrefsDraftStore implements DraftStore {
   Future<SharedPreferences> _prefs() async =>
       _injected ?? (_cached ??= await SharedPreferences.getInstance());
 
-  String _keyFor(String deckDir) => '$_prefix$deckDir';
+  String get _scopedPrefix => scope.isEmpty ? _prefix : '$_prefix$scope::';
+
+  String _keyFor(String deckDir) => '$_scopedPrefix$deckDir';
+
+  @override
+  Future<int> adoptLegacyEntries() async {
+    if (scope.isEmpty) return 0;
+    final prefs = await _prefs();
+    var moved = 0;
+    for (final key in prefs.getKeys().toList()) {
+      if (!key.startsWith(_prefix)) continue;
+      final rest = key.substring(_prefix.length);
+      if (rest.contains('::')) continue; // hoort al bij een repo
+      final raw = prefs.getString(key);
+      if (raw == null) continue;
+      final target = _keyFor(rest);
+      // Staat er al iets onder de nieuwe sleutel, dan is dát het actuele werk.
+      if (!prefs.containsKey(target)) {
+        await prefs.setString(target, raw);
+        moved++;
+      }
+      await prefs.remove(key);
+    }
+    return moved;
+  }
 
   @override
   Future<void> writeDeck(String deckDir, Map<String, Uint8List> files) async {
@@ -111,7 +142,11 @@ class PrefsDraftStore implements DraftStore {
     final prefs = await _prefs();
     final dirs = <String>[
       for (final key in prefs.getKeys())
-        if (key.startsWith(_prefix)) key.substring(_prefix.length),
+        if (key.startsWith(_scopedPrefix) &&
+            // Ongescoped mag de sleutels van andere repo's niet oppikken.
+            !(scope.isEmpty &&
+                key.substring(_scopedPrefix.length).contains('::')))
+          key.substring(_scopedPrefix.length),
     ]..sort();
     // Alleen wat de layout volgt: een sleutel die iets anders is geworden is
     // geen deck.

@@ -744,6 +744,31 @@ const _dutchSourceAddDe = {
   'Mogelijk persoonsgegevens': 'Möglicherweise personenbezogene Daten',
   'Persoonsgegevens geaccepteerd': 'Personenbezogene Daten akzeptiert',
   'Persoonsgegevens gevonden': 'Personenbezogene Daten gefunden',
+  'Welke verbinding?': 'Welche Verbindung?',
+  'Bestandsverbindingen': 'Dateiverbindungen',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Die Orte, an denen du deine Präsentationen aufbewahrst und durchsuchst — Ordner auf diesem Computer, WebDAV-Server und git-Repositories nebeneinander. Zieh sie in die gewünschte Reihenfolge: das oberste je Art gilt als Standard.',
+  'Een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Ein git-Repository; jede gespeicherte Version bleibt erhalten.',
+  'Een map op de schijf van deze computer.':
+      'Ein Ordner auf der Festplatte dieses Computers.',
+  'Een map op een WebDAV-server, bijvoorbeeld Nextcloud.':
+      'Ein Ordner auf einem WebDAV-Server, zum Beispiel Nextcloud.',
+  'Instellingen tonen': 'Einstellungen anzeigen',
+  'Instellingen verbergen': 'Einstellungen ausblenden',
+  'Map op deze computer': 'Ordner auf diesem Computer',
+  'Naam van deze verbinding': 'Name dieser Verbindung',
+  'Nog geen verbinding — voeg er hieronder een toe.':
+      'Noch keine Verbindung — füge unten eine hinzu.',
+  'Sleep om de volgorde te wijzigen': 'Ziehen, um die Reihenfolge zu ändern',
+  'Verbinding toevoegen': 'Verbindung hinzufügen',
+  'Verbinding verwijderen': 'Verbindung entfernen',
+  'WebDAV-server': 'WebDAV-Server',
+  'Iemand anders heeft dit bestand gewijzigd':
+      'Jemand anderes hat diese Datei geändert',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'Die Version auf dem Server hat sich geändert, seit du diese Präsentation geöffnet hast. Überschreiben verwirft die Arbeit der anderen Person.',
+  'Overschrijven': 'Überschreiben',
   'Openen vanaf WebDAV': 'Von WebDAV öffnen',
   'Opslaan naar WebDAV': 'Auf WebDAV speichern',
   'Opgeslagen op WebDAV:': 'Auf WebDAV gespeichert:',

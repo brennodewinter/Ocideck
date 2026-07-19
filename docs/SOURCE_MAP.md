@@ -52,7 +52,9 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `slide_quality.dart` — `SlideQualityResult`/`SlideQualityIssue` for accessibility/contrast/density/privacy audits.
 - `timeline.dart` — `TimelineEvent` and `TimelineLayout`/`TimelineReveal` enums for animated timeline slides.
 - `video_source.dart` — `VideoSource` parser for local files, YouTube, Vimeo, and remote video URLs.
-- `webdav_settings.dart` — `WebdavServer`/`WebdavOrigin` for WebDAV source configuration (Nextcloud, ownCloud, or any other server).
+- `parts/app_appearance_profile.dart` — `AppAppearanceProfile`: how the application itself looks, as opposed to `ThemeProfile`, which styles a slide and travels inside the deck. A `part` of `settings.dart` so callers need no second import.
+- `storage_connection.dart` — `StorageConnection` (sealed: `LocalConnection`/`WebdavConnection`/`GitConnection`) — the single notion of "a place decks live". One list, user-ordered, replacing the old split between a libraries list and one-of-each network source. Each carries a stable `id` so renaming a connection or fixing a typo in its URL never detaches an open deck from its origin; secrets stay in the keychain, keyed on server + user, so two connections to one account share one password.
+- `webdav_settings.dart` — `WebdavServer`/`WebdavOrigin` (the origin carries the `etag` a save is checked against, plus the `connectionId` that sends a save back to the connection it came from) for WebDAV source configuration (Nextcloud, ownCloud, or any other server).
 
 ## `lib/services/` — business logic & IO
 
@@ -140,7 +142,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `text_measurement.dart` — `measureTextHeight`/`measureTextWidth` for rendered text dimensions.
 - `user_notes_codec.dart` — Serializes per-slide user notes with content fingerprints.
 - `web_asset_store.dart` — In-memory afbeeldingsopslag (`mem:`-paden) voor de webversie; per-pagina levensduur.
-- `webdav_service.dart` — Talks WebDAV over a pinned, redirect-free `HttpClient`.
+- `webdav_service.dart` — Talks WebDAV over a pinned, redirect-free `HttpClient`. Writes are guarded with `If-Match` so a file changed on the server surfaces as `WebdavConflictException` instead of a silent overwrite.
 
 ### `lib/services/git/` — Git-repository storage (design: `docs/design/GIT_STORAGE.md`)
 
@@ -164,7 +166,7 @@ deliberately manual).
 - `deck_repo_serializer.dart` — `buildDeckRepoFiles`: turns a deck into its repo file set — `deck.md` bytes plus the missing image blobs, images rewritten `mem:`→`repo:`. The exact inverse of the open path's `repo:`→`mem:`; video/audio are reported, not written as broken refs. Chart data gets its own file next to `deck.md` at the path its `source` names (`chartDataFilesOf` writing, `withRepoChartData` reading) — deliberately not in the content-addressed pool, since a hash path turns every edited cell into a new file instead of a diff.
 - `deck_mirror.dart` — `DeckMirror` interface + `DraftMirror`: the durable offline working copy a save falls back to. Text only, one draft per deck (`hasRealHistory == false`). `NativeGitMirror` is the other implementation: it makes real local commits (`hasRealHistory == true`) and serves the history dialog.
 - `draft_store.dart` / `draft_store_factory.dart` / `draft_store_io.dart` / `draft_store_web.dart` — the mirror's storage: files on desktop (`FileDraftStore`), the browser key/value store on web (`PrefsDraftStore`), picked by conditional import.
-- `outbox.dart` — `Outbox`/`PendingCommit`: the per-deck queue of not-yet-pushed saves, in `shared_preferences` so it survives restart. Carries the intent (deckDir, branch, message, `baseSha`, and an optional `forkFrom` so a work branch queued offline can be created on flush), never the bytes — the mirror holds those.
+- `outbox.dart` — `Outbox`/`PendingCommit`: the per-deck queue of not-yet-pushed saves, in `shared_preferences` so it survives restart. Carries the intent (deckDir, branch, message, `baseSha`, and an optional `forkFrom` so a work branch queued offline can be created on flush), never the bytes — the mirror holds those. Keyed per repository (`GitRepoConfig.storageSlug`): a repo is a trust boundary, and an unscoped queue meant two repos with a same-named deck overwrote each other's pending commit while a flush pushed the lot to whichever forge happened to be configured. `adoptLegacyEntries()` carries commits from the unscoped era over to the repo that was configured then — that work has reached no server yet, so leaving it behind would silently strand it.
 - `sync_engine.dart` — `SyncEngine`: drains the outbox against the forge (`flush`/`flushDeck`), with `baseSha` conflict detection and content-based idempotency (a commit that already landed is skipped, not duplicated). When a queued commit carries a `forkFrom`, the flush creates its work branch (off `forkFrom`) if it is not there yet — so a review round that began offline still lands (D3). A `DeckFilePreparer` hook runs just before each commit — how `flushGit` pools an offline-added image into the reconnect commit; idempotency and deletes compare the deck-dir files only, not the pool blobs.
 - `deck_merge.dart` — `mergeDeckVersions`: a three-way merge of one deck against its common ancestor (§8.6). Per *slide*, not per line — a text merge would leave conflict markers in `deck.md`, and an unparseable deck is what you cannot show the user while they choose. Resolves what it can (one-sided edits, identical edits, both-deleted, reorders) and returns the rest as `SlideConflict`, each pointing at where its provisional choice sits in the merged deck so the dialog can swap the other side in. Two fail-safes: a conflict keeps *our* side provisionally, never silently theirs, and the deck TLP becomes the stricter of the two.
 - `version_diff.dart` — `diffDeckVersions`: what changed between two released versions (§9.5). A deck has no slide IDs, so matching is two-pass — first on content signature (identical slides find each other even after a reorder → *moved*), then on same-type similarity, so a reworded slide reads as one *edited* change instead of an addition plus a deletion. Leans on `SlideDedupService` for `signatureOf`, `similarity` and the per-field `diff`.
@@ -191,12 +193,13 @@ deliberately manual).
 - `local_cve_provider.dart` — `LocalCveNotifier`/`LocalCveState`: the local CVE database's status, build progress and cancellation, plus `localCveAvailableProvider` — which the CVE picker uses to search offline (and then deliberately *not* fall back online).
 - `provider_warmup.dart` — `warmTabDerivedProviders`: keeps the tab's derived chain subscribed for as long as the tab lives, so a deck change schedules its refresh *before* the frame. Without it an unread chain goes dirty unnoticed and the first widget to read it flushes mid-build, which Flutter answers with "setState() called during build". Guarded by `provider_warmup_test.dart`.
 - `privacy_provider.dart` — Runs the privacy scan for the active deck (per-tab scoped) and surfaces it everywhere the deck's quality is shown. The raw scan (`privacyRawScanProvider`) feeds two views: the panel/thumbnail issues (`privacyScanProvider` → `privacyQualityIssuesProvider`, which suppress already-handled slides) and the export gate's count (`privacyExportSummaryProvider`, which must *not* suppress them — a gate has to know how much was handled).
+- `parts/settings_provider_connections.dart` — The file connections: add/update/remove/reorder, and the one-time migration out of the three older prefs keys (`libraries`, `webdavServer`, `gitRepo`). Those keys are left alone until the first change, so falling back to an older build costs nothing.
 - `parts/settings_provider_privacy.dart` — The privacy switches (master, per-rule, own identity, export gate).
 - `settings_provider.dart` — `SettingsNotifier`: app settings, theme/appearance profiles, cockpit schemes.
 - `slide_clipboard_provider.dart` — Global slide clipboard for copy/paste across tabs.
 - `tabs_provider_package.dart` — `_TabsPackageAssets` extension: the unpack path of an `.ocideck` opened in memory (web, or an import without a project folder). Images go to the `WebAssetStore` and slide paths are rewritten to `mem:`; chart data is inlined into the spec (it is text belonging in the spec, and on web there is no project folder for a separate file to sit in); the sidecars are re-attached as layers. All three refuse a reference that points outside the package root with `../`.
 - `tabs_provider.dart` — `TabInfo` and the tabs notifier: open editor tabs, recovery, WebDAV origin. Also hosts the one-shot open-time signals the shell listens on, including `securityModulePromptProvider` — set once per open when a deck carries Informatieveiligheid slide types, driving the "enable the module" discovery snackbar.
-- `webdav_provider.dart` — Providers for `WebdavService`, server config, and directory listings.
+- `webdav_provider.dart` — Providers for `WebdavService`, connection lookup and directory listings, all keyed on connection id. The listing key carries the connection too: two servers with the same folder name were otherwise served each other's contents from cache.
 
 ## `lib/utils/` — small shared helpers
 
@@ -340,13 +343,18 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
   footer bar — is `parts/settings_dialog_chrome.dart`. It is the one block that
   reads only the selected section and writes it back, touching none of the
   settings, so it can be read without holding the rest of the state in mind.
-  Storage is one tab: `parts/settings_dialog_storage.dart` carries the libraries
-  and the export folder (moved out of Algemeen) plus `StorageModality` — a row
-  per route (disk, WebDAV, git) with its status, expanding to that route's own
-  panel. The panels themselves stayed where they were,
-  `parts/settings_dialog_webdav.dart` and `parts/settings_dialog_git.dart`, now
-  built as `_webdavPanel()`/`_gitPanel()` instead of whole tabs. A fourth route
-  is a value in the enum plus a branch in `_modalityPanel`.
+  Storage is one tab and one list: `parts/settings_dialog_storage.dart` renders
+  the file connections as a single reorderable list — folders, WebDAV servers
+  and git repositories mixed — plus the export folder. Order is not decoration:
+  the topmost usable connection of a kind is that kind's default
+  (`AppSettings.primaryOf`), so dragging is how the user says which server is
+  *the* server. Each row expands to that kind's own panel, which stayed where it
+  was: `parts/settings_dialog_webdav.dart` and `parts/settings_dialog_git.dart`,
+  now taking the form object of one connection (`_webdavPanel(form)` /
+  `_gitPanel(form)`) instead of reading the single global one. The form objects
+  live per connection id in `_webdavForms`/`_gitForms`, because a
+  `TextEditingController` cannot sit in an immutable model. A fourth kind is a
+  value in `StorageConnectionKind` plus a branch in `_connectionPanel`.
   Search over the settings lives in `parts/settings_dialog_search.dart`
   (`SettingsSearchEntry`, the search field, and the jump-and-flash), with the
   index of what is searchable in `parts/settings_dialog_search_index.dart`.
@@ -359,7 +367,8 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
   into view without any of the tab bodies knowing about search.
 - `slide_finder_dialog.dart` — Stay-open searcher for gathering slides from many presentations.
 - `slide_quality_details_dialog.dart` — Issues grouped by severity with counts and navigation.
-- `webdav_browser_dialog.dart` — Browses WebDAV folders to pick a deck or images.
+- `storage_connection_picker.dart` — Asks which file connection an action works with. Shows nothing at all when there is exactly one usable connection of that kind, so the single-server case keeps the flow it always had; the question only appears once it is a real question.
+- `webdav_browser_dialog.dart` — Browses WebDAV folders to pick a deck or images, on the connection it is given rather than one it looks up itself.
 
 ### `lib/widgets/editors/` — per-slide-type editors
 

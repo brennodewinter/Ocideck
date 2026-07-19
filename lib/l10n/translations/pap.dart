@@ -743,6 +743,31 @@ const _dutchSourceAddPap = {
   'Mogelijk persoonsgegevens': 'Posiblemente datonan personal',
   'Persoonsgegevens geaccepteerd': 'Datonan personal aseptá',
   'Persoonsgegevens gevonden': 'Datonan personal hañá',
+  'Welke verbinding?': 'Kua konekshon?',
+  'Bestandsverbindingen': 'Konekshonnan di archivo',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'E lugánan kaminda bo ta warda i buska bo presentashonnan — kárpetanan riba e komputadó akí, servidónan WebDAV i repositorionan git huntu. Lastra nan den e órden ku bo ke: esun di ariba di kada tipo ta e standard.',
+  'Een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Un repositorio git; kada vershon wardá ta keda konservá.',
+  'Een map op de schijf van deze computer.':
+      'Un kárpeta riba e disko di e komputadó akí.',
+  'Een map op een WebDAV-server, bijvoorbeeld Nextcloud.':
+      'Un kárpeta riba un servidó WebDAV, por ehèmpel Nextcloud.',
+  'Instellingen tonen': 'Mustra konfigurashon',
+  'Instellingen verbergen': 'Skonde konfigurashon',
+  'Map op deze computer': 'Kárpeta riba e komputadó akí',
+  'Naam van deze verbinding': 'Nòmber di e konekshon akí',
+  'Nog geen verbinding — voeg er hieronder een toe.':
+      'Ainda no tin konekshon — agregá un abou.',
+  'Sleep om de volgorde te wijzigen': 'Lastra pa kambia e órden',
+  'Verbinding toevoegen': 'Agregá konekshon',
+  'Verbinding verwijderen': 'Kita konekshon',
+  'WebDAV-server': 'Servidó WebDAV',
+  'Iemand anders heeft dit bestand gewijzigd':
+      'Un otro hende a kambia e archivo aki',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'E vershon riba e server a kambia for di ora bo a habri e presentashon aki. Sobreskirbi ta pèrdè e trabou di e otro persona.',
+  'Overschrijven': 'Sobreskirbi',
   'Openen vanaf WebDAV': 'Habri for di WebDAV',
   'Opslaan naar WebDAV': 'Warda riba WebDAV',
   'Opgeslagen op WebDAV:': 'Wardá riba WebDAV:',

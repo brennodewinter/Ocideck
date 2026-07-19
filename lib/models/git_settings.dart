@@ -68,6 +68,23 @@ class GitRepoConfig {
   /// Menselijke aanduiding `owner/repo`, voor UI en logregels.
   String get slug => '${owner.trim()}/${repo.trim()}';
 
+  /// Een stabiele, veilige sleutel per repo: host + owner + repo, gestript tot
+  /// tekens die overal mogen — in een mapnaam én in een prefs-sleutel.
+  ///
+  /// Dit is wat een repo van een andere onderscheidt in de opslag eromheen: de
+  /// clone-map, de wachtrij met nog niet gepushte commits, en de werkkopie. Een
+  /// repo is een vertrouwensgrens (§6), dus die drie mogen nooit gedeeld worden
+  /// — twee repo's met een gelijknamig deck zouden elkaars werk overschrijven.
+  ///
+  /// Bevat per constructie geen `:`, waardoor een gescopede sleutel
+  /// (`<prefix>::<storageSlug>::<deckDir>`) niet te verwarren is met een oude,
+  /// ongescopede (`<prefix>::<deckDir>`) — deckmappen mogen ook geen `:`
+  /// bevatten (zie [GitRepoLayout]).
+  String get storageSlug {
+    final raw = '${host}_${owner.trim()}_${repo.trim()}';
+    return raw.replaceAll(RegExp(r'[^A-Za-z0-9._-]+'), '-');
+  }
+
   GitRepoConfig copyWith({
     String? baseUrl,
     String? owner,

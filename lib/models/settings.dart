@@ -5,6 +5,7 @@ import 'chart.dart' show normalizeChartColor;
 import 'checklist_template.dart';
 import 'library_folder.dart';
 import 'recent_file.dart';
+import 'storage_connection.dart';
 import 'git_settings.dart';
 import 'webdav_settings.dart';
 
@@ -14,6 +15,8 @@ export 'library_folder.dart';
 export 'recent_file.dart';
 export 'git_settings.dart';
 export 'webdav_settings.dart';
+
+part 'parts/app_appearance_profile.dart';
 
 /// Glyph used for unordered (bullet) list markers. [dot] is the classic
 /// typographic bullet; [paw] swaps in a small cat-paw drawn in the accent
@@ -411,160 +414,6 @@ class ThemeProfile {
   }
 }
 
-class AppAppearanceProfile {
-  final String name;
-  final bool isBuiltIn;
-  final bool isDark;
-  final String primaryColor;
-  final String accentColor;
-  final String backgroundColor;
-  final String surfaceColor;
-  final String textColor;
-  final String mutedTextColor;
-  final String panelColor;
-  final String panelTextColor;
-
-  /// The interface font family — one of [uiFonts], all bundled so the choice
-  /// renders on every platform (including the hardened web build). Default
-  /// Roboto.
-  final String fontFamily;
-
-  const AppAppearanceProfile({
-    required this.name,
-    this.isBuiltIn = false,
-    this.isDark = false,
-    required this.primaryColor,
-    required this.accentColor,
-    required this.backgroundColor,
-    required this.surfaceColor,
-    required this.textColor,
-    required this.mutedTextColor,
-    required this.panelColor,
-    required this.panelTextColor,
-    this.fontFamily = 'Roboto',
-  });
-
-  /// Interface fonts the user can pick for the app UI. All bundled in
-  /// pubspec.yaml so they work on desktop, the hardened web build, and export.
-  static const uiFonts = ['Roboto', 'Inter', 'Lora', 'EB Garamond'];
-
-  static const basic = AppAppearanceProfile(
-    name: 'Basic',
-    isBuiltIn: true,
-    primaryColor: '#1C2B47',
-    accentColor: '#2563EB',
-    backgroundColor: '#F8F9FA',
-    surfaceColor: '#FFFFFF',
-    textColor: '#1E293B',
-    mutedTextColor: '#64748B',
-    // EU-vlagblauw voor de bovenbalk/panelen (huisstijl), i.p.v. near-black.
-    panelColor: '#003399',
-    panelTextColor: '#FFFFFF',
-  );
-
-  static const europa = AppAppearanceProfile(
-    name: 'Europa',
-    isBuiltIn: true,
-    primaryColor: '#003399',
-    accentColor: '#FFCC00',
-    backgroundColor: '#F4F7FC',
-    surfaceColor: '#FFFFFF',
-    textColor: '#003399',
-    mutedTextColor: '#5D6B85',
-    // Zelfde EU-vlagblauw als de bovenbalk-keuze in het Basic-profiel.
-    panelColor: '#003399',
-    panelTextColor: '#FFFFFF',
-  );
-
-  static const dark = AppAppearanceProfile(
-    name: 'Donker',
-    isBuiltIn: true,
-    isDark: true,
-    primaryColor: '#111827',
-    accentColor: '#60A5FA',
-    backgroundColor: '#0F172A',
-    surfaceColor: '#1E293B',
-    textColor: '#F1F5F9',
-    mutedTextColor: '#94A3B8',
-    panelColor: '#090E1A',
-    panelTextColor: '#E2E8F0',
-  );
-
-  static const builtIns = [basic, europa, dark];
-
-  AppAppearanceProfile copyWith({
-    String? name,
-    bool? isBuiltIn,
-    bool? isDark,
-    String? primaryColor,
-    String? accentColor,
-    String? backgroundColor,
-    String? surfaceColor,
-    String? textColor,
-    String? mutedTextColor,
-    String? panelColor,
-    String? panelTextColor,
-    String? fontFamily,
-  }) {
-    return AppAppearanceProfile(
-      name: name ?? this.name,
-      isBuiltIn: isBuiltIn ?? this.isBuiltIn,
-      isDark: isDark ?? this.isDark,
-      primaryColor: primaryColor ?? this.primaryColor,
-      accentColor: accentColor ?? this.accentColor,
-      backgroundColor: backgroundColor ?? this.backgroundColor,
-      surfaceColor: surfaceColor ?? this.surfaceColor,
-      textColor: textColor ?? this.textColor,
-      mutedTextColor: mutedTextColor ?? this.mutedTextColor,
-      panelColor: panelColor ?? this.panelColor,
-      panelTextColor: panelTextColor ?? this.panelTextColor,
-      fontFamily: fontFamily ?? this.fontFamily,
-    );
-  }
-
-  Map<String, Object?> toJson() {
-    return {
-      'name': name,
-      'isBuiltIn': isBuiltIn,
-      'isDark': isDark,
-      'primaryColor': primaryColor,
-      'accentColor': accentColor,
-      'backgroundColor': backgroundColor,
-      'surfaceColor': surfaceColor,
-      'textColor': textColor,
-      'mutedTextColor': mutedTextColor,
-      'panelColor': panelColor,
-      'panelTextColor': panelTextColor,
-      'fontFamily': fontFamily,
-    };
-  }
-
-  factory AppAppearanceProfile.fromJson(Map<String, Object?> json) {
-    return AppAppearanceProfile(
-      name: json['name'] as String? ?? 'Eigen thema',
-      isBuiltIn: json['isBuiltIn'] as bool? ?? false,
-      isDark: json['isDark'] as bool? ?? false,
-      primaryColor: json['primaryColor'] as String? ?? basic.primaryColor,
-      accentColor: json['accentColor'] as String? ?? basic.accentColor,
-      backgroundColor:
-          json['backgroundColor'] as String? ?? basic.backgroundColor,
-      surfaceColor: json['surfaceColor'] as String? ?? basic.surfaceColor,
-      textColor: json['textColor'] as String? ?? basic.textColor,
-      mutedTextColor: json['mutedTextColor'] as String? ?? basic.mutedTextColor,
-      panelColor: json['panelColor'] as String? ?? basic.panelColor,
-      panelTextColor: json['panelTextColor'] as String? ?? basic.panelTextColor,
-      fontFamily: json['fontFamily'] as String? ?? 'Roboto',
-    );
-  }
-}
-
-/// A named set of cockpit instrument colours. The status colours map to the
-/// gauge zones: [good] (default green), [warning] (amber), [critical] (red) and
-/// [cold] (blue, used below a meter's lower bound). [sky] and [ground] colour
-/// the artificial horizon. Users can create and name several schemes
-/// ("variants"); the active one is selected globally in [AppSettings], just like
-/// [ThemeProfile]/[AppAppearanceProfile]. The defaults match the values the
-/// instruments used when colours were hardcoded.
 class CockpitColorScheme {
   final String name;
   final bool isBuiltIn;
@@ -645,12 +494,52 @@ class CockpitColorScheme {
 class AppSettings {
   final String languageCode;
 
-  /// Benoemde opslaglocaties ("bibliotheken") waarmee de gebruiker onderscheid
-  /// maakt tussen bijv. privé en werk. Dient als startpunt voor openen/opslaan
-  /// en als zoekwortel voor de presentatie- en afbeeldingenbibliotheek.
-  /// Vervangt de vroegere enkele `homeDirectory`-instelling; de eerste
-  /// bibliotheek geldt als standaardmap (zie [homeDirectory]).
-  final List<LibraryFolder> libraries;
+  /// Alle bestandsverbindingen, in de volgorde die de gebruiker zelf sleept.
+  ///
+  /// Dit is de enige bron van waarheid over waar presentaties vandaan komen.
+  /// Lokale mappen, WebDAV-servers en git-repositories staan hier door elkaar,
+  /// zodat je per opdrachtgever kunt inrichten in plaats van per techniek.
+  ///
+  /// De volgorde is betekenisvol: de bovenste bruikbare verbinding van een
+  /// soort is de standaard voor die soort (zie [primaryOf]). Herordenen is dus
+  /// hoe je kiest welke server "de" server is, zonder iets te hoeven wissen.
+  final List<StorageConnection> connections;
+
+  /// De bovenste bruikbare verbinding van een soort, of `null` als er geen is.
+  /// Half ingevulde verbindingen worden overgeslagen: die staan in de lijst
+  /// omdat de gebruiker er nog aan werkt, niet omdat ze dienst kunnen doen.
+  StorageConnection? primaryOf(StorageConnectionKind kind) {
+    for (final c in connections) {
+      if (c.kind == kind && c.isConfigured) return c;
+    }
+    return null;
+  }
+
+  /// Alle bruikbare verbindingen van één soort, in gebruikersvolgorde — de
+  /// lijst die een keuzedialoog toont.
+  List<T> connectionsOf<T extends StorageConnection>() => [
+    for (final c in connections)
+      if (c is T && c.isConfigured) c,
+  ];
+
+  /// Zoek een verbinding op id; `null` als hij is verwijderd. Herkomstgegevens
+  /// van een geopend deck wijzen via id, dus dit is de plek waar "de bron van
+  /// dit deck bestaat niet meer" zichtbaar wordt.
+  StorageConnection? connectionById(String? id) {
+    if (id == null || id.isEmpty) return null;
+    for (final c in connections) {
+      if (c.id == id) return c;
+    }
+    return null;
+  }
+
+  /// De lokale mappen als bibliotheken — de vorm die de zoek- en
+  /// openen-schermen al verwachten. Afgeleid, niet opgeslagen.
+  List<LibraryFolder> get libraries => [
+    for (final c in connections)
+      if (c is LocalConnection && c.isConfigured)
+        LibraryFolder(name: c.name, path: c.path),
+  ];
 
   /// De standaard-startmap: het pad van de eerste bibliotheek, of null wanneer
   /// er geen is. Compat-toegang voor de vele plekken die één "thuismap"
@@ -783,13 +672,15 @@ class AppSettings {
   /// gebruiken. Leeg = de standaard ([defaultCveApiBaseUrl]).
   final String cveApiBaseUrl;
 
-  /// Geconfigureerde WebDAV/Nextcloud-bron, of `null` wanneer geen server is
-  /// ingesteld. Bevat nooit het wachtwoord (dat staat in de keychain).
-  final WebdavServer? webdavServer;
+  /// De standaard-WebDAV-bron: de bovenste bruikbare WebDAV-verbinding, of
+  /// `null` wanneer er geen is. Afgeleid uit [connections] — de plekken die
+  /// zonder keuze van de gebruiker één server nodig hebben lezen hier.
+  WebdavServer? get webdavServer =>
+      (primaryOf(StorageConnectionKind.webdav) as WebdavConnection?)?.server;
 
-  /// Geconfigureerde git-repository als deck-bron, of `null` wanneer er geen is
-  /// ingesteld. Bevat nooit het token (dat staat in de keychain).
-  final GitRepoConfig? gitRepo;
+  /// De standaard-git-repository, langs dezelfde regel als [webdavServer].
+  GitRepoConfig? get gitRepo =>
+      (primaryOf(StorageConnectionKind.git) as GitConnection?)?.repo;
 
   /// Instellingen voor de optionele AI-assistentie. Standaard uit; bevat nooit
   /// een API-sleutel (die staat in de keychain).
@@ -797,7 +688,7 @@ class AppSettings {
 
   const AppSettings({
     this.languageCode = 'nl',
-    this.libraries = const [],
+    this.connections = const [],
     this.customChecklists = const [],
     this.exportDirectory,
     this.themeProfiles = ThemeProfile.builtIns,
@@ -824,8 +715,6 @@ class AppSettings {
     this.allowRemoteMedia = false,
     this.allowCveLookup = false,
     this.cveApiBaseUrl = defaultCveApiBaseUrl,
-    this.webdavServer,
-    this.gitRepo,
     this.aiSettings = const AiSettings(),
   });
 
@@ -878,7 +767,7 @@ class AppSettings {
 
   AppSettings copyWith({
     String? languageCode,
-    List<LibraryFolder>? libraries,
+    List<StorageConnection>? connections,
     List<ChecklistTemplate>? customChecklists,
     String? exportDirectory,
     ThemeProfile? themeProfile,
@@ -906,19 +795,15 @@ class AppSettings {
     bool? allowRemoteMedia,
     bool? allowCveLookup,
     String? cveApiBaseUrl,
-    WebdavServer? webdavServer,
-    GitRepoConfig? gitRepo,
     AiSettings? aiSettings,
     bool clearExportDirectory = false,
     bool clearMaxReleaseExportTlp = false,
     bool clearMinRequiredExportTlp = false,
-    bool clearWebdavServer = false,
-    bool clearGitRepo = false,
   }) {
     final nextProfiles = themeProfiles ?? this.themeProfiles;
     return AppSettings(
       languageCode: languageCode ?? this.languageCode,
-      libraries: libraries ?? this.libraries,
+      connections: connections ?? this.connections,
       customChecklists: customChecklists ?? this.customChecklists,
       exportDirectory: clearExportDirectory
           ? null
@@ -972,10 +857,6 @@ class AppSettings {
       allowRemoteMedia: allowRemoteMedia ?? this.allowRemoteMedia,
       allowCveLookup: allowCveLookup ?? this.allowCveLookup,
       cveApiBaseUrl: cveApiBaseUrl ?? this.cveApiBaseUrl,
-      webdavServer: clearWebdavServer
-          ? null
-          : (webdavServer ?? this.webdavServer),
-      gitRepo: clearGitRepo ? null : (gitRepo ?? this.gitRepo),
       aiSettings: aiSettings ?? this.aiSettings,
     );
   }

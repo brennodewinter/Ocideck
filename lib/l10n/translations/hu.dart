@@ -1791,6 +1791,31 @@ const _dutchSourceAddHu = <String, String>{
   'Persoonsgegevens geaccepteerd': 'Személyes adat elfogadva',
   'Persoonsgegevens gevonden': 'Személyes adat található',
   'Organisatie': 'Szervezet',
+  'Welke verbinding?': 'Melyik kapcsolat?',
+  'Bestandsverbindingen': 'Fájlkapcsolatok',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'A helyek, ahol a bemutatóidat tárolod és keresed — mappák ezen a számítógépen, WebDAV-kiszolgálók és git-tárolók vegyesen. Húzd őket a kívánt sorrendbe: fajtánként a legfelső számít alapértelmezettnek.',
+  'Een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Egy git-tároló; minden mentett változat megmarad.',
+  'Een map op de schijf van deze computer.':
+      'Mappa ennek a számítógépnek a lemezén.',
+  'Een map op een WebDAV-server, bijvoorbeeld Nextcloud.':
+      'Mappa egy WebDAV-kiszolgálón, például Nextcloud.',
+  'Instellingen tonen': 'Beállítások megjelenítése',
+  'Instellingen verbergen': 'Beállítások elrejtése',
+  'Map op deze computer': 'Mappa ezen a számítógépen',
+  'Naam van deze verbinding': 'Ennek a kapcsolatnak a neve',
+  'Nog geen verbinding — voeg er hieronder een toe.':
+      'Még nincs kapcsolat — adj hozzá egyet alább.',
+  'Sleep om de volgorde te wijzigen': 'Húzd a sorrend módosításához',
+  'Verbinding toevoegen': 'Kapcsolat hozzáadása',
+  'Verbinding verwijderen': 'Kapcsolat eltávolítása',
+  'WebDAV-server': 'WebDAV-kiszolgáló',
+  'Iemand anders heeft dit bestand gewijzigd':
+      'Valaki más módosította ezt a fájlt',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'A kiszolgálón lévő változat megváltozott, amióta megnyitottad ezt a bemutatót. A felülírás eldobja a másik munkáját.',
+  'Overschrijven': 'Felülírás',
   'Openen vanaf WebDAV': 'Megnyitás a WebDAVról',
   'Opslaan naar WebDAV': 'Mentés a WebDAVra',
   'Opgeslagen op WebDAV:': 'Mentve a WebDAVra:',

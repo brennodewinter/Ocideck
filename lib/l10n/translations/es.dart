@@ -740,6 +740,31 @@ const _dutchSourceAddEs = {
   'Mogelijk persoonsgegevens': 'Posibles datos personales',
   'Persoonsgegevens geaccepteerd': 'Datos personales aceptados',
   'Persoonsgegevens gevonden': 'Datos personales encontrados',
+  'Welke verbinding?': '¿Qué conexión?',
+  'Bestandsverbindingen': 'Conexiones de archivos',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Los lugares donde guardas y buscas tus presentaciones: carpetas en este equipo, servidores WebDAV y repositorios git mezclados. Arrástralos en el orden que quieras: el primero de cada tipo es el predeterminado.',
+  'Een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Un repositorio git; se conserva cada versión guardada.',
+  'Een map op de schijf van deze computer.':
+      'Una carpeta en el disco de este equipo.',
+  'Een map op een WebDAV-server, bijvoorbeeld Nextcloud.':
+      'Una carpeta en un servidor WebDAV, por ejemplo Nextcloud.',
+  'Instellingen tonen': 'Mostrar ajustes',
+  'Instellingen verbergen': 'Ocultar ajustes',
+  'Map op deze computer': 'Carpeta en este equipo',
+  'Naam van deze verbinding': 'Nombre de esta conexión',
+  'Nog geen verbinding — voeg er hieronder een toe.':
+      'Aún no hay ninguna conexión: añade una abajo.',
+  'Sleep om de volgorde te wijzigen': 'Arrastra para cambiar el orden',
+  'Verbinding toevoegen': 'Añadir conexión',
+  'Verbinding verwijderen': 'Eliminar conexión',
+  'WebDAV-server': 'Servidor WebDAV',
+  'Iemand anders heeft dit bestand gewijzigd':
+      'Otra persona ha modificado este archivo',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'La versión del servidor ha cambiado desde que abriste esta presentación. Sobrescribir descarta el trabajo de la otra persona.',
+  'Overschrijven': 'Sobrescribir',
   'Openen vanaf WebDAV': 'Abrir desde WebDAV',
   'Opslaan naar WebDAV': 'Guardar en WebDAV',
   'Opgeslagen op WebDAV:': 'Guardado en WebDAV:',

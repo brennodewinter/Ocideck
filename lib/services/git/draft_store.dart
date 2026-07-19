@@ -9,6 +9,15 @@ abstract class DraftStore {
   Future<void> discardDeck(String deckDir);
   Future<List<String>> deckDirs();
 
+  /// Neem een werkkopie over uit de tijd dat die nog niet per repository was
+  /// gescheiden. Levert het aantal overgenomen decks. Idempotent, en een no-op
+  /// zonder scope.
+  ///
+  /// Alleen aan te roepen voor de repo die tóén was ingesteld: er was er maar
+  /// één, dus die is de enige rechthebbende. Het alternatief — laten liggen —
+  /// maakt nog niet gepusht werk stil onbereikbaar.
+  Future<int> adoptLegacyEntries();
+
   /// Overleeft wat hier geschreven wordt het afsluiten van de app?
   ///
   /// Dit is geen detail maar de kern van P2. Een store die dit onwaar meldt mag

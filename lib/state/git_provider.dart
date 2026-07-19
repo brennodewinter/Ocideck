@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/git_settings.dart';
@@ -13,6 +15,8 @@ import '../services/git/native_git_mirror_api.dart';
 import '../services/git/native_git_mirror_factory.dart';
 import '../services/git/outbox.dart';
 import '../services/git/sync_engine.dart';
+import '../services/git/draft_store_factory.dart';
+import '../utils/log.dart';
 import 'settings_provider.dart';
 
 /// Bouwt de forge-adapter uit de geconfigureerde repo plus het token uit de
@@ -88,13 +92,46 @@ final nativeGitMirrorProvider = FutureProvider<NativeGitMirror?>((ref) async {
   );
 });
 
+/// De opslagsleutel van de ingestelde repo, of leeg wanneer er geen is. Alles
+/// wat per repo gescheiden moet blijven — de werkkopie, de wachtrij — hangt
+/// hieraan.
+final _repoScopeProvider = Provider<String>(
+  (ref) => ref.watch(settingsProvider).gitRepo?.storageSlug ?? '',
+);
+
 /// De werkkopie waar een offline REST-opslag naartoe schrijft (§8.1) — op web en
-/// op desktop-zonder-git. Levenslang, want hij houdt geen dure staat vast.
-final draftMirrorProvider = Provider<DeckMirror>((ref) => DraftMirror());
+/// op desktop-zonder-git. Per repo gescheiden: een repo is een
+/// vertrouwensgrens, en twee repo's met een gelijknamig deck deelden anders
+/// dezelfde bestanden.
+final draftMirrorProvider = Provider<DeckMirror>((ref) {
+  final scope = ref.watch(_repoScopeProvider);
+  final store = createDraftStore(scope: scope);
+  // Werk uit de tijd van één repo hoort bij de repo die toen was ingesteld —
+  // en dat is deze. Eenmalig; daarna vindt de sweep niets meer.
+  unawaited(_adoptLegacy(store.adoptLegacyEntries, 'werkkopie'));
+  return DraftMirror(store: store);
+});
 
 /// De duurzame wachtrij van nog niet gepushte decks (§8.5). Overleeft het
-/// afsluiten: hij zit in de sleutel/waarde-opslag.
-final outboxProvider = Provider<Outbox>((ref) => Outbox());
+/// afsluiten: hij zit in de sleutel/waarde-opslag. Ook per repo gescheiden —
+/// zonder dat duwde een flush de hele wachtrij naar de forge die op dat moment
+/// was ingesteld, ongeacht voor welke repo het werk bedoeld was.
+final outboxProvider = Provider<Outbox>((ref) {
+  final outbox = Outbox(scope: ref.watch(_repoScopeProvider));
+  unawaited(_adoptLegacy(outbox.adoptLegacyEntries, 'wachtrij'));
+  return outbox;
+});
+
+/// De overname mag de provider niet ophouden en mag hem al helemaal niet laten
+/// omvallen: mislukt hij, dan staat het oude werk er nog steeds — onbereikbaar,
+/// maar niet weg — en dat is een logregel waard, geen crash.
+Future<void> _adoptLegacy(Future<int> Function() adopt, String wat) async {
+  try {
+    await adopt();
+  } catch (e, s) {
+    logError('git: overnemen van de oude $wat mislukt', e, s);
+  }
+}
 
 /// Verzoent de werkkopie met de forge (§8): maakt commits van wat wacht zodra
 /// dat kan. `null` wanneer er geen repo is ingesteld — dan is er niets te

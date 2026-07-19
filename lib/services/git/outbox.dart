@@ -76,18 +76,70 @@ class PendingCommit {
 /// geen inconsistentie met de mirror: die draagt deckinhoud en wil op desktop
 /// echte bestanden (want in Fase 3 wórdt die map een clone). Dit is een handvol
 /// JSON per deck — daar is een bestandssysteem niets voor.
+///
+/// De wachtrij hoort bij één repository. Vroeger niet: de sleutel was alleen de
+/// deckmap, waardoor twee repo's met een gelijknamig deck elkaars wachtende
+/// commit overschreven — en een flush duwde de hele wachtrij naar de forge die
+/// op dát moment was ingesteld. Met één repo viel dat niet op; met twee zou het
+/// werk van de ene opdrachtgever in de repository van de andere belanden,
+/// zonder foutmelding, want elke stap op zich klopt.
 class Outbox {
-  Outbox({SharedPreferences? prefs}) : _injected = prefs;
+  /// [scope] is `GitRepoConfig.storageSlug` van de repo waar deze wachtrij bij
+  /// hoort. Leeg is toegestaan voor tests die maar één repo kennen; dan gedraagt
+  /// hij zich als de oude, ongescopede wachtrij.
+  Outbox({SharedPreferences? prefs, this.scope = ''}) : _injected = prefs;
 
   final SharedPreferences? _injected;
   SharedPreferences? _cached;
 
+  final String scope;
+
   static const String _prefix = 'git_outbox::';
+
+  /// Het sleutelvoorvoegsel van déze wachtrij.
+  String get _scopedPrefix => scope.isEmpty ? _prefix : '$_prefix$scope::';
 
   Future<SharedPreferences> _prefs() async =>
       _injected ?? (_cached ??= await SharedPreferences.getInstance());
 
-  String _keyFor(String deckDir) => '$_prefix$deckDir';
+  String _keyFor(String deckDir) => '$_scopedPrefix$deckDir';
+
+  /// Neem wachtende commits over uit de tijd dat de wachtrij nog niet per repo
+  /// was gescheiden.
+  ///
+  /// Alleen aan te roepen voor de repo die toen was ingesteld — er was er maar
+  /// één, dus dat is de enige die er aanspraak op maakt. Wat hier staat is werk
+  /// dat nog nergens op een server terecht is gekomen; het laten liggen zou het
+  /// stilletjes onbereikbaar maken.
+  ///
+  /// Een oude sleutel is te herkennen aan wat er ná het voorvoegsel staat: een
+  /// gescopede draagt daar nog een `::`, een deckmap nooit (zie
+  /// [GitRepoConfig.storageSlug]). Idempotent: na de eerste keer is er niets
+  /// meer te vinden.
+  Future<int> adoptLegacyEntries() async {
+    if (scope.isEmpty) return 0;
+    final prefs = await _prefs();
+    var moved = 0;
+    for (final key in prefs.getKeys().toList()) {
+      if (!key.startsWith(_prefix)) continue;
+      final rest = key.substring(_prefix.length);
+      if (rest.contains('::')) continue; // hoort al bij een repo
+      final raw = prefs.getString(key);
+      if (raw == null) continue;
+      // Niet overschrijven: staat er voor dit deck al iets onder de nieuwe
+      // sleutel, dan is dát het actuele werk.
+      final target = _keyFor(rest);
+      if (!prefs.containsKey(target)) {
+        await prefs.setString(target, raw);
+        moved++;
+      }
+      await prefs.remove(key);
+    }
+    if (moved > 0) {
+      logWarning('Outbox: $moved wachtende commit(s) overgenomen naar $scope');
+    }
+    return moved;
+  }
 
   /// Zet [commit] in de wachtrij.
   ///
@@ -133,8 +185,12 @@ class Outbox {
     final prefs = await _prefs();
     final out = <PendingCommit>[];
     for (final key in prefs.getKeys().toList()..sort()) {
-      if (!key.startsWith(_prefix)) continue;
-      final commit = await forDeck(key.substring(_prefix.length));
+      if (!key.startsWith(_scopedPrefix)) continue;
+      final rest = key.substring(_scopedPrefix.length);
+      // Zonder scope zou de ongescopede lus ook de gescopede sleutels van álle
+      // repo's oppikken — precies de vermenging die dit moet uitsluiten.
+      if (scope.isEmpty && rest.contains('::')) continue;
+      final commit = await forDeck(rest);
       if (commit != null) out.add(commit);
     }
     return out;

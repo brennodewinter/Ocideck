@@ -1787,6 +1787,30 @@ const _dutchSourceAddDa = <String, String>{
   'Persoonsgegevens geaccepteerd': 'Personoplysninger accepteret',
   'Persoonsgegevens gevonden': 'Personoplysninger fundet',
   'Organisatie': 'Organisation',
+  'Welke verbinding?': 'Hvilken forbindelse?',
+  'Bestandsverbindingen': 'Filforbindelser',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'De steder, hvor du gemmer og søger i dine præsentationer — mapper på denne computer, WebDAV-servere og git-arkiver mellem hinanden. Træk dem i den rækkefølge, du vil have: den øverste af hver slags gælder som standard.',
+  'Een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Et git-arkiv; hver gemt version bevares.',
+  'Een map op de schijf van deze computer.':
+      'En mappe på denne computers disk.',
+  'Een map op een WebDAV-server, bijvoorbeeld Nextcloud.':
+      'En mappe på en WebDAV-server, for eksempel Nextcloud.',
+  'Instellingen tonen': 'Vis indstillinger',
+  'Instellingen verbergen': 'Skjul indstillinger',
+  'Map op deze computer': 'Mappe på denne computer',
+  'Naam van deze verbinding': 'Navn på denne forbindelse',
+  'Nog geen verbinding — voeg er hieronder een toe.':
+      'Ingen forbindelse endnu — tilføj en nedenfor.',
+  'Sleep om de volgorde te wijzigen': 'Træk for at ændre rækkefølgen',
+  'Verbinding toevoegen': 'Tilføj forbindelse',
+  'Verbinding verwijderen': 'Fjern forbindelse',
+  'WebDAV-server': 'WebDAV-server',
+  'Iemand anders heeft dit bestand gewijzigd': 'En anden har ændret denne fil',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'Versionen på serveren er ændret, siden du åbnede denne præsentation. Overskrivning kasserer den andens arbejde.',
+  'Overschrijven': 'Overskriv',
   'Openen vanaf WebDAV': 'Åbn fra WebDAV',
   'Opslaan naar WebDAV': 'Gem til WebDAV',
   'Opgeslagen op WebDAV:': 'Gemt på WebDAV:',

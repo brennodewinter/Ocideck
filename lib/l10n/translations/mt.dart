@@ -1810,6 +1810,31 @@ const _dutchSourceAddMt = <String, String>{
   'Persoonsgegevens geaccepteerd': 'Data personali aċċettata',
   'Persoonsgegevens gevonden': 'Instabet data personali',
   'Organisatie': 'Organizzazzjoni',
+  'Welke verbinding?': 'Liema konnessjoni?',
+  'Bestandsverbindingen': 'Konnessjonijiet tal-fajls',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Il-postijiet fejn iżżomm u tfittex il-preżentazzjonijiet tiegħek — folders fuq dan il-kompjuter, servers WebDAV u repożitorji git flimkien. Kaxkarhom fl-ordni li trid: ta\' fuq ta\' kull tip jgħodd bħala l-istandard.',
+  'Een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Repożitorju git; kull verżjoni salvata tinżamm.',
+  'Een map op de schijf van deze computer.':
+      'Folder fuq id-diska ta\' dan il-kompjuter.',
+  'Een map op een WebDAV-server, bijvoorbeeld Nextcloud.':
+      'Folder fuq server WebDAV, pereżempju Nextcloud.',
+  'Instellingen tonen': 'Uri s-settings',
+  'Instellingen verbergen': 'Aħbi s-settings',
+  'Map op deze computer': 'Folder fuq dan il-kompjuter',
+  'Naam van deze verbinding': 'Isem ta\' din il-konnessjoni',
+  'Nog geen verbinding — voeg er hieronder een toe.':
+      'Għadha l-ebda konnessjoni — żid waħda hawn taħt.',
+  'Sleep om de volgorde te wijzigen': 'Kaxkar biex tbiddel l-ordni',
+  'Verbinding toevoegen': 'Żid konnessjoni',
+  'Verbinding verwijderen': 'Neħħi l-konnessjoni',
+  'WebDAV-server': 'Server WebDAV',
+  'Iemand anders heeft dit bestand gewijzigd':
+      'Xi ħadd ieħor biddel dan il-fajl',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'Il-verżjoni fuq is-server inbidlet minn meta ftaħt din il-preżentazzjoni. Jekk tikteb fuqha, taħli x-xogħol tal-persuna l-oħra.',
+  'Overschrijven': 'Ikteb fuqu',
   'Openen vanaf WebDAV': 'Iftaħ minn WebDAV',
   'Opslaan naar WebDAV': 'Issalva fuq WebDAV',
   'Opgeslagen op WebDAV:': 'Salvat fuq WebDAV:',

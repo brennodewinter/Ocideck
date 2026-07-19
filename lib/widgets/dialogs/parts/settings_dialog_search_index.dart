@@ -22,9 +22,17 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
   ),
   SettingsSearchEntry(
     tab: SettingsSection.storage,
-    label: 'Map toevoegen',
-    section: 'Bibliotheken',
-    keywords: ['bibliotheek', 'mappen', 'afbeeldingen', 'media'],
+    label: 'Verbinding toevoegen',
+    section: 'Bestandsverbindingen',
+    keywords: [
+      'bibliotheek',
+      'mappen',
+      'afbeeldingen',
+      'media',
+      'verbinding',
+      'volgorde',
+      'bron',
+    ],
   ),
   SettingsSearchEntry(
     tab: SettingsSection.storage,

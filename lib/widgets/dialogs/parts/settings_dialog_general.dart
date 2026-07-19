@@ -62,47 +62,6 @@ extension _SettingsGeneralTab on _SettingsDialogState {
     );
   }
 
-  /// Eén bibliotheekrij: bewerkbaar naamveld, het pad (afgekort, volledig in de
-  /// tooltip) en een verwijderknop. Wijzigingen gaan direct naar [_libraries]
-  /// en worden pas bij Opslaan weggeschreven.
-  Widget _libraryRow(int index) {
-    final l10n = context.l10n;
-    final lib = _libraries[index];
-    return Padding(
-      key: ValueKey('library_${index}_${lib.path}'),
-      padding: const EdgeInsets.only(bottom: 8),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 150,
-            child: TextFormField(
-              initialValue: lib.name,
-              decoration: InputDecoration(
-                isDense: true,
-                labelText: l10n.d('Naam'),
-                prefixIcon: const Icon(
-                  Icons.drive_file_rename_outline,
-                  size: 16,
-                ),
-              ),
-              onChanged: (value) =>
-                  _libraries[index] = _libraries[index].copyWith(name: value),
-            ),
-          ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Tooltip(message: lib.path, child: _pathBox(lib.path)),
-          ),
-          IconButton(
-            onPressed: () => _rebuild(() => _libraries.removeAt(index)),
-            icon: const Icon(Icons.delete_outline, size: 18),
-            tooltip: l10n.d('Bibliotheek verwijderen'),
-          ),
-        ],
-      ),
-    );
-  }
-
   List<Widget> _accessibilitySettings() {
     final l10n = context.l10n;
     return [
