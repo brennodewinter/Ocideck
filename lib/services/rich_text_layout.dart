@@ -358,6 +358,28 @@ double logoSafeReserve(double w, ThemeProfile profile) {
   return size * (1 + edgeInset) + w * 0.014;
 }
 
+/// Waar de logostrook aan de boven- en onderkant ruimte opeist, als `(boven,
+/// onder)` — één van beide is altijd nul, want een logo staat maar op één rand.
+///
+/// De enige plek waar die regel staat. De previews gieten het resultaat in
+/// `EdgeInsets` om tekst weg te duwen; de split-run-meting telt boven en onder
+/// bij elkaar op om te weten hoeveel hoogte er overblijft. Zouden die twee elk
+/// hun eigen versie hebben, dan kan de kwaliteitscontrole een grootte melden die
+/// niet is wat je op het scherm ziet.
+///
+/// [splitText] voor de smalle tekstkolom van een split-slide: die staat naast
+/// het beeld, dus een logo rechts zit hem niet in de weg en reserveert niets.
+(double, double) logoSafeReserveEdges(
+  double w,
+  ThemeProfile profile, {
+  bool splitText = false,
+}) {
+  if (profile.logoPath?.isEmpty ?? true) return (0, 0);
+  if (splitText && profile.logoPosition.endsWith('right')) return (0, 0);
+  final reserved = logoSafeReserve(w, profile);
+  return profile.logoPosition.startsWith('top') ? (reserved, 0) : (0, reserved);
+}
+
 /// The rich-text/bullets body height for [slide] at 16:9 width [w], after the
 /// top/bottom padding the preview applies — including the logo-safe reserve and
 /// footer clearance. Shared by the rendered pagination and the presenter's

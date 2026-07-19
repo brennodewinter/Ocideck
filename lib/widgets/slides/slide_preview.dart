@@ -37,6 +37,12 @@ import '../../services/cvss/cvss4.dart';
 import '../../services/finding_context_score.dart';
 import '../../services/slide_layout_metrics.dart';
 import '../../services/rich_text_layout.dart';
+// De split-run-metingen zijn services (headless rekenwerk), maar hun natuurlijke
+// vindplek is deze bibliotheek: elke aanroeper vraagt ze op naast
+// `SlidePreviewWidget.fitScaleOverride`.
+import '../../services/split_run.dart';
+export '../../services/split_run.dart'
+    show sharedSplitFitScale, splitRunMemberScale;
 import '../../services/web_asset_store.dart';
 import '../../utils/bundled_asset.dart';
 import '../../utils/image_focal.dart';
@@ -162,12 +168,8 @@ Color _hexColor(String hex) {
 }
 
 EdgeInsets _logoSafeInsets(double w, ThemeProfile profile) {
-  if (profile.logoPath?.isEmpty ?? true) return EdgeInsets.zero;
-  final reserved = logoSafeReserve(w, profile);
-  if (profile.logoPosition.startsWith('top')) {
-    return EdgeInsets.only(top: reserved);
-  }
-  return EdgeInsets.only(bottom: reserved);
+  final (top, bottom) = logoSafeReserveEdges(w, profile);
+  return EdgeInsets.only(top: top, bottom: bottom);
 }
 
 double _logoAwareBottomPadding(double defaultPad, double safeBottom) {
@@ -204,93 +206,8 @@ EdgeInsets _bulletsPadding({
 }
 
 EdgeInsets _splitTextLogoSafeInsets(double w, ThemeProfile profile) {
-  if (profile.logoPath?.isEmpty ?? true) return EdgeInsets.zero;
-  if (profile.logoPosition.endsWith('right')) return EdgeInsets.zero;
-  final reserved = logoSafeReserve(w, profile);
-  if (profile.logoPosition.startsWith('top')) {
-    return EdgeInsets.only(top: reserved);
-  }
-  return EdgeInsets.only(bottom: reserved);
-}
-
-/// The one font scale shared by every page of the split run that slide [index]
-/// belongs to, or null when the slide is not part of a multi-page split. A run
-/// is a maximal group of same-type, same-list-style bullet slides where every
-/// page after the first is a split continuation ([Slide.continuesSplit]). The
-/// shared scale is the group's smallest fit — the fullest page — so a list
-/// split across pages renders at one consistent size instead of each page
-/// growing to fill its own slide. Logo-aware, so the shared size still clears a
-/// reserved logo strip. Passed to [SlidePreviewWidget.fitScaleOverride] by
-/// callers that hold the whole deck (previews, presenter, audience, export).
-double? sharedSplitFitScale(
-  List<Slide> slides,
-  int index,
-  ThemeProfile profile,
-  String font,
-) {
-  if (index < 0 || index >= slides.length) return null;
-  bool splittable(SlideType t) =>
-      t == SlideType.bullets ||
-      t == SlideType.twoBullets ||
-      t == SlideType.bulletsImage;
-  if (!splittable(slides[index].type)) return null;
-  bool sameRun(Slide a, Slide b) =>
-      a.type == b.type && a.listStyle == b.listStyle;
-
-  var start = index;
-  while (start > 0 &&
-      slides[start].continuesSplit &&
-      sameRun(slides[start - 1], slides[start])) {
-    start--;
-  }
-  var end = index;
-  while (end + 1 < slides.length &&
-      slides[end + 1].continuesSplit &&
-      sameRun(slides[end], slides[end + 1])) {
-    end++;
-  }
-  if (start == end) return null; // a single page — nothing to share
-
-  var minScale = double.infinity;
-  for (var i = start; i <= end; i++) {
-    final s = _memberRenderScale(slides[i], profile, font);
-    if (s < minScale) minScale = s;
-  }
-  return minScale.isFinite ? minScale : null;
-}
-
-/// The reference-width fit scale one split-run member renders its text at,
-/// reserving the logo strip so the shared scale clears the logo just as the
-/// live layout does.
-double _memberRenderScale(Slide slide, ThemeProfile profile, String font) {
-  if (slide.type == SlideType.bulletsImage) {
-    // De smalle tekstkolom reserveert de logostrook via de split-tekst-insets,
-    // net als de live layout.
-    final safe = slide.showLogo
-        ? _splitTextLogoSafeInsets(kReferenceSlideWidth, profile)
-        : EdgeInsets.zero;
-    return bulletsImageSlideFitScale(
-      slide: slide,
-      font: font,
-      extraVReserve: safe.top + safe.bottom,
-    );
-  }
-  final safe = slide.showLogo
-      ? _logoSafeInsets(kReferenceSlideWidth, profile)
-      : EdgeInsets.zero;
-  final vReserve = safe.top + safe.bottom;
-  if (slide.type == SlideType.twoBullets) {
-    return twoBulletsSlideFitScale(
-      slide: slide,
-      font: font,
-      extraVReserve: vReserve,
-    );
-  }
-  return bulletsSlideFitScale(
-    slide: slide,
-    font: font,
-    extraVReserve: vReserve,
-  );
+  final (top, bottom) = logoSafeReserveEdges(w, profile, splitText: true);
+  return EdgeInsets.only(top: top, bottom: bottom);
 }
 
 /// Renders a visual approximation of a Marp slide inside a 16:9 container.

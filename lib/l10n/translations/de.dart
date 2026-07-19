@@ -740,6 +740,15 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Voortzetting van vorige slide': 'Fortsetzung der vorherigen Folie',
+  'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
+      'Diese Folie gehört zur Liste der vorherigen Folie und teilt damit eine Schriftgröße: die der vollsten Seite.',
+  'Losmaken': 'Lösen',
+  'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
+      'Diese Folie wird mit {klein} der Entwurfsgröße statt {eigen} dargestellt, weil sie eine geteilte Reihe mit der viel volleren Folie {pagina} teilt.',
+  'Niet de tekst op deze slide is het probleem, maar de reeks.':
+      'Nicht der Text auf dieser Folie ist das Problem, sondern die Reihe.',
+  'Haal volle pagina uit de reeks': 'Volle Seite aus der Reihe nehmen',
   'Nog te verifiëren': 'Noch zu verifizieren',
   'MASWE-zwakheid kiezen': 'MASWE-Schwachstelle wählen',
   'Zoek op naam, id of categorie': 'Nach Name, ID oder Kategorie suchen',

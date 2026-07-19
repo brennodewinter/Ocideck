@@ -1796,6 +1796,15 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Voortzetting van vorige slide': 'Kontynuacja poprzedniego slajdu',
+  'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
+      'Ten slajd należy do listy poprzedniego slajdu i dzieli z nim jeden rozmiar czcionki: rozmiar najpełniejszej strony.',
+  'Losmaken': 'Odłącz',
+  'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
+      'Ten slajd jest wyświetlany w {klein} rozmiaru projektowego zamiast {eigen}, ponieważ dzieli podzieloną serię ze znacznie pełniejszym slajdem {pagina}.',
+  'Niet de tekst op deze slide is het probleem, maar de reeks.':
+      'Problemem nie jest tekst na tym slajdzie, lecz seria.',
+  'Haal volle pagina uit de reeks': 'Usuń pełną stronę z serii',
   'Nog te verifiëren': 'Do zweryfikowania',
   'MASWE-zwakheid kiezen': 'Wybierz słabość MASWE',
   'Zoek op naam, id of categorie': 'Szukaj po nazwie, id lub kategorii',

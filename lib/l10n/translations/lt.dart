@@ -1791,6 +1791,15 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Voortzetting van vorige slide': 'Ankstesnės skaidrės tęsinys',
+  'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
+      'Ši skaidrė priklauso ankstesnės skaidrės sąrašui, todėl dalijasi vienu šrifto dydžiu – pilniausio puslapio.',
+  'Losmaken': 'Atskirti',
+  'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
+      'Ši skaidrė rodoma {klein} projektinio dydžio, o ne {eigen}, nes ji dalijasi padalyta seka su daug pilnesne skaidre {pagina}.',
+  'Niet de tekst op deze slide is het probleem, maar de reeks.':
+      'Problema ne šios skaidrės tekstas, o seka.',
+  'Haal volle pagina uit de reeks': 'Pašalinti pilną puslapį iš sekos',
   'Nog te verifiëren': 'Dar reikia patikrinti',
   'MASWE-zwakheid kiezen': 'Pasirinkite MASWE silpnybę',
   'Zoek op naam, id of categorie': 'Ieškoti pagal pavadinimą, id ar kategoriją',

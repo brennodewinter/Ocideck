@@ -10,6 +10,7 @@ import '../markdown_editor/markdown_editor.dart';
 import '_editor_field.dart';
 import 'bullet_marker_selector.dart';
 import 'list_style_selector.dart';
+import 'split_continuation_switch.dart';
 import '../../theme/app_theme.dart';
 
 class BulletsImageEditor extends StatefulWidget {
@@ -23,6 +24,11 @@ class BulletsImageEditor extends StatefulWidget {
   /// "continue numbering" toggle offered (e.g. the second half of a split
   /// numbered bullets-with-image slide can carry on the count).
   final bool previousSlideIsNumbered;
+
+  /// Of de vorige slide met deze een gesplitste reeks kan vormen — bepaalt of
+  /// de voortzettingsschakelaar zin heeft.
+  final bool canContinueSplit;
+
   final bool nestedInScrollView;
 
   const BulletsImageEditor({
@@ -33,6 +39,7 @@ class BulletsImageEditor extends StatefulWidget {
     this.searchPaths = const [],
     this.captionBasePath,
     this.previousSlideIsNumbered = false,
+    this.canContinueSplit = false,
     this.nestedInScrollView = false,
   });
 
@@ -51,6 +58,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
   BulletMarker? _bulletMarkerOverride;
   late bool _showChecklistProgress;
   late bool _continueNumbering;
+  late bool _continuesSplit;
   late final TextEditingController _richText;
 
   static const _maxLevel = 4;
@@ -64,6 +72,7 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
     _bulletMarkerOverride = widget.slide.bulletMarkerOverride;
     _showChecklistProgress = widget.slide.showChecklistProgress;
     _continueNumbering = widget.slide.continueNumbering;
+    _continuesSplit = widget.slide.continuesSplit;
     _richText = TextEditingController(
       text: normalizeRichTextMarkdown(widget.slide.customMarkdown),
     );
@@ -110,6 +119,10 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
         // later switch to bullets/checklist doesn't leave a stale flag behind.
         continueNumbering:
             _listStyle == ListStyle.numbered && _continueNumbering,
+        // Alleen een slide die daadwerkelijk op een gelijksoortige voorganger
+        // volgt kan een voortzetting zijn; anders blijft er een stale vlag in
+        // de markdown staan die de opmaak stilletjes stuurt.
+        continuesSplit: widget.canContinueSplit && _continuesSplit,
         customMarkdown: _listStyle == ListStyle.richText
             ? normalizeRichTextMarkdown(_richText.text)
             : widget.slide.customMarkdown,
@@ -363,6 +376,14 @@ class _BulletsImageEditorState extends State<BulletsImageEditor> {
             value: _continueNumbering,
             onChanged: (value) {
               setState(() => _continueNumbering = value);
+              _emit();
+            },
+          ),
+        if (widget.canContinueSplit)
+          SplitContinuationSwitch(
+            value: _continuesSplit,
+            onChanged: (value) {
+              setState(() => _continuesSplit = value);
               _emit();
             },
           ),

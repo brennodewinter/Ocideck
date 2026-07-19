@@ -18,6 +18,7 @@ enum SlideQualityIssueKind {
   missingMediaFile,
   textDensityWarning,
   textDensityCritical,
+  splitRunDragged,
   tableDensityMinimum,
   codeDensityHigh,
   freeMarkdownDensityHigh,

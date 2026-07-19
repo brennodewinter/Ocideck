@@ -26,6 +26,31 @@ class SlideQualityAction {
   });
 }
 
+/// Meegetrokken door een overvolle pagina in dezelfde split-run: haal die pagina
+/// uit de reeks, dan komt deze slide terug op zijn eigen grootte. De overvolle
+/// pagina zelf houdt zijn eigen meldingen en acties — losmaken zegt alleen dat
+/// hij niet bij de lijst hoort, het maakt hem niet korter.
+///
+/// `null` wanneer deze melding er niet over gaat.
+///
+/// Publiek omdat dezelfde actie op twee plekken zit: in het kwaliteitspaneel
+/// naast de melding, en als knop naast de Kwaliteit-chip in de editor-kopregel
+/// (waar je hem nodig hebt zónder eerst het paneel open te klappen).
+SlideQualityAction? detachSplitPageAction({
+  required AppLocalizations l10n,
+  required WidgetRef ref,
+  required SlideQualityIssue issue,
+}) {
+  if (issue.kind != SlideQualityIssueKind.splitRunDragged) return null;
+  final offender = int.tryParse(issue.args['offender'] ?? '');
+  if (offender == null) return null;
+  return SlideQualityAction(
+    label: l10n.d('Haal volle pagina uit de reeks'),
+    icon: Icons.link_off,
+    run: () => ref.read(deckProvider.notifier).detachSplitPage(offender),
+  );
+}
+
 /// De acties die deze melding direct kunnen oplossen (of de gebruiker naar
 /// de juiste plek brengen), in volgorde van voorkeur. Leeg wanneer er niets
 /// beters is dan de gewone tik-navigatie van de melding zelf.
@@ -127,6 +152,9 @@ List<SlideQualityAction> buildSlideQualityActions({
       ),
     );
   }
+
+  final detach = detachSplitPageAction(l10n: l10n, ref: ref, issue: issue);
+  if (detach != null) actions.add(detach);
 
   // Meerzinnige bullets: knip ze op zinsgrenzen in losse bullets.
   if (issue.kind == SlideQualityIssueKind.bulletMultiSentence &&

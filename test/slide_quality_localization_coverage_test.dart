@@ -167,6 +167,12 @@ void main() {
       },
       SlideQualityIssueKind.textDensityWarning: {'percent': '80%'},
       SlideQualityIssueKind.textDensityCritical: {'percent': '55%'},
+      SlideQualityIssueKind.splitRunDragged: {
+        'percent': '20%',
+        'own': '85%',
+        'page': '5',
+        'offender': '4',
+      },
       SlideQualityIssueKind.tableDensityMinimum: {'rows': '12', 'cols': '6'},
       SlideQualityIssueKind.codeDensityHigh: {'lines': '40'},
       SlideQualityIssueKind.freeMarkdownDensityHigh: {'lines': '35'},

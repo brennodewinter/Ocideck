@@ -1801,6 +1801,15 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Voortzetting van vorige slide': 'Продовження попереднього слайда',
+  'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
+      'Цей слайд належить до списку попереднього слайда й тому має спільний розмір шрифту — розмір найповнішої сторінки.',
+  'Losmaken': 'Від\'єднати',
+  'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
+      'Цей слайд відображається на {klein} проєктного розміру замість {eigen}, оскільки він у спільній розділеній серії зі значно повнішим слайдом {pagina}.',
+  'Niet de tekst op deze slide is het probleem, maar de reeks.':
+      'Проблема не в тексті на цьому слайді, а в серії.',
+  'Haal volle pagina uit de reeks': 'Вилучити повну сторінку із серії',
   'Nog te verifiëren': 'Ще перевірити',
   'MASWE-zwakheid kiezen': 'Вибрати слабкість MASWE',
   'Zoek op naam, id of categorie': 'Пошук за назвою, id або категорією',

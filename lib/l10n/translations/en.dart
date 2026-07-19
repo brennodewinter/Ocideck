@@ -922,6 +922,15 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Voortzetting van vorige slide': 'Continuation of the previous slide',
+  'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
+      'This slide belongs to the previous slide\'s list and therefore shares one font size: that of the fullest page.',
+  'Losmaken': 'Detach',
+  'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
+      'This slide renders at {klein} of its design size instead of {eigen}, because it shares a split run with the much fuller slide {pagina}.',
+  'Niet de tekst op deze slide is het probleem, maar de reeks.':
+      'The text on this slide is not the problem — the run is.',
+  'Haal volle pagina uit de reeks': 'Take the full page out of the run',
   'Nog te verifiëren': 'Still to verify',
   'MASWE-zwakheid kiezen': 'Choose a MASWE weakness',
   'Zoek op naam, id of categorie': 'Search by name, id or category',

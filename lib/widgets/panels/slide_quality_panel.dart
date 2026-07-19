@@ -8,6 +8,7 @@ import '../../l10n/slide_quality_navigation.dart';
 import '../../models/markdown_validation.dart';
 import '../../models/slide_quality.dart';
 import '../../state/deck_quality_provider.dart';
+import '../../state/editor_provider.dart';
 import '../../state/image_contrast_provider.dart';
 import '../../state/privacy_provider.dart';
 import '../../state/settings_provider.dart';
@@ -118,6 +119,64 @@ class SlideQualitySummaryChip extends ConsumerWidget {
                 open ? Icons.expand_less : Icons.expand_more,
                 size: 15,
                 color: fg,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// De losmaak-knop naast de Kwaliteit-chip, zichtbaar zodra de slide die je nu
+/// bewerkt klein wordt gerenderd doordat hij een gesplitste reeks deelt met een
+/// veel vollere pagina.
+///
+/// Staat hier en niet alleen in het paneel omdat dit de melding is die je juist
+/// niet gaat zoeken: de slide op je scherm ziet er kapot uit terwijl er niets
+/// mis is met zijn eigen tekst, en in het paneel staat hij ónder de meldingen
+/// van de volle pagina. Verder niets: dit is geen tweede plek voor alle fixes,
+/// alleen voor de melding waarvan de oorzaak niet op deze slide te zien is.
+class SplitRunDetachChip extends ConsumerWidget {
+  const SplitRunDetachChip({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final index = ref.watch(editorProvider).selectedIndex;
+    final issue = combinedSlideQualityResult(ref).issues
+        .where(
+          (i) =>
+              i.kind == SlideQualityIssueKind.splitRunDragged &&
+              i.slideIndex == index,
+        )
+        .firstOrNull;
+    if (issue == null) return const SizedBox.shrink();
+
+    final l10n = context.l10n;
+    final action = detachSplitPageAction(l10n: l10n, ref: ref, issue: issue);
+    if (action == null) return const SizedBox.shrink();
+
+    // De volledige uitleg zit in de tooltip: in de kopregel is geen ruimte voor
+    // twee zinnen, maar zonder het waaróm is losmaken een sprong in het duister.
+    return Tooltip(
+      message: '${action.label}\n\n${formatSlideQualityIssue(l10n, issue)}',
+      child: InkWell(
+        onTap: action.run,
+        borderRadius: BorderRadius.circular(6),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(action.icon, size: 14, color: AppTheme.dangerFg),
+              const SizedBox(width: 5),
+              Text(
+                l10n.d('Losmaken'),
+                style: TextStyle(
+                  fontSize: 11.5,
+                  color: AppTheme.dangerFg,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ],
           ),

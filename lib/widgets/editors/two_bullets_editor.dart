@@ -6,6 +6,7 @@ import '../../l10n/app_localizations.dart';
 import '_editor_field.dart';
 import 'bullet_marker_selector.dart';
 import 'list_style_selector.dart';
+import 'split_continuation_switch.dart';
 import '../../theme/app_theme.dart';
 
 typedef _Mutate = void Function(VoidCallback fn);
@@ -13,12 +14,18 @@ typedef _Mutate = void Function(VoidCallback fn);
 class TwoBulletsEditor extends StatefulWidget {
   final Slide slide;
   final ValueChanged<Slide> onUpdate;
+
+  /// Of de vorige slide met deze een gesplitste reeks kan vormen — bepaalt of
+  /// de voortzettingsschakelaar zin heeft.
+  final bool canContinueSplit;
+
   final bool nestedInScrollView;
 
   const TwoBulletsEditor({
     super.key,
     required this.slide,
     required this.onUpdate,
+    this.canContinueSplit = false,
     this.nestedInScrollView = false,
   });
 
@@ -35,6 +42,7 @@ class _TwoBulletsEditorState extends State<TwoBulletsEditor> {
   late ListStyle _listStyle;
   BulletMarker? _bulletMarkerOverride;
   late bool _showChecklistProgress;
+  late bool _continuesSplit;
 
   @override
   void initState() {
@@ -50,6 +58,7 @@ class _TwoBulletsEditorState extends State<TwoBulletsEditor> {
         : widget.slide.listStyle;
     _bulletMarkerOverride = widget.slide.bulletMarkerOverride;
     _showChecklistProgress = widget.slide.showChecklistProgress;
+    _continuesSplit = widget.slide.continuesSplit;
     _left = _BulletSet(widget.slide.bullets, _emit);
     _right = _BulletSet(widget.slide.bullets2, _emit);
   }
@@ -64,6 +73,9 @@ class _TwoBulletsEditorState extends State<TwoBulletsEditor> {
         bulletMarkerOverride: _bulletMarkerOverride,
         clearBulletMarkerOverride: _bulletMarkerOverride == null,
         showChecklistProgress: _showChecklistProgress,
+        // Alleen een slide die daadwerkelijk op een gelijksoortige voorganger
+        // volgt kan een voortzetting zijn.
+        continuesSplit: widget.canContinueSplit && _continuesSplit,
         bullets: _left.values(_listStyle),
         bullets2: _right.values(_listStyle),
       ),
@@ -105,6 +117,14 @@ class _TwoBulletsEditorState extends State<TwoBulletsEditor> {
             },
           ),
         ],
+        if (widget.canContinueSplit)
+          SplitContinuationSwitch(
+            value: _continuesSplit,
+            onChanged: (value) {
+              setState(() => _continuesSplit = value);
+              _emit();
+            },
+          ),
         if (_listStyle == ListStyle.checklist)
           SwitchListTile(
             contentPadding: EdgeInsets.zero,

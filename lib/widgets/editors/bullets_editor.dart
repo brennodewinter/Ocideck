@@ -8,6 +8,7 @@ import '../markdown_editor/markdown_editor.dart';
 import '_editor_field.dart';
 import 'bullet_marker_selector.dart';
 import 'list_style_selector.dart';
+import 'split_continuation_switch.dart';
 import '../../theme/app_theme.dart';
 
 class BulletsEditor extends StatefulWidget {
@@ -17,6 +18,11 @@ class BulletsEditor extends StatefulWidget {
   /// Whether the preceding slide renders a numbered list — only then is the
   /// "continue numbering from the previous slide" option offered.
   final bool previousSlideIsNumbered;
+
+  /// Of de vorige slide met deze een gesplitste reeks kan vormen — bepaalt of
+  /// de voortzettingsschakelaar zin heeft.
+  final bool canContinueSplit;
+
   final bool nestedInScrollView;
 
   const BulletsEditor({
@@ -24,6 +30,7 @@ class BulletsEditor extends StatefulWidget {
     required this.slide,
     required this.onUpdate,
     this.previousSlideIsNumbered = false,
+    this.canContinueSplit = false,
     this.nestedInScrollView = false,
   });
 
@@ -43,6 +50,7 @@ class _BulletsEditorState extends State<BulletsEditor> {
   BulletMarker? _bulletMarkerOverride;
   late bool _showChecklistProgress;
   late bool _continueNumbering;
+  late bool _continuesSplit;
   late final TextEditingController _richText;
 
   static const _maxLevel = 4;
@@ -58,6 +66,7 @@ class _BulletsEditorState extends State<BulletsEditor> {
     _bulletMarkerOverride = widget.slide.bulletMarkerOverride;
     _showChecklistProgress = widget.slide.showChecklistProgress;
     _continueNumbering = widget.slide.continueNumbering;
+    _continuesSplit = widget.slide.continuesSplit;
     _richText = TextEditingController(
       text: normalizeRichTextMarkdown(widget.slide.customMarkdown),
     );
@@ -109,6 +118,10 @@ class _BulletsEditorState extends State<BulletsEditor> {
         // later style switch doesn't leave a stale flag in the markdown.
         continueNumbering:
             _listStyle == ListStyle.numbered && _continueNumbering,
+        // Alleen een slide die daadwerkelijk op een gelijksoortige voorganger
+        // volgt kan een voortzetting zijn; anders zou een stale vlag in de
+        // markdown blijven staan die de opmaak stilletjes stuurt.
+        continuesSplit: widget.canContinueSplit && _continuesSplit,
         customMarkdown: _listStyle == ListStyle.richText
             ? normalizeRichTextMarkdown(_richText.text)
             : widget.slide.customMarkdown,
@@ -316,6 +329,14 @@ class _BulletsEditorState extends State<BulletsEditor> {
             value: _continueNumbering,
             onChanged: (value) {
               setState(() => _continueNumbering = value);
+              _emit();
+            },
+          ),
+        if (widget.canContinueSplit)
+          SplitContinuationSwitch(
+            value: _continuesSplit,
+            onChanged: (value) {
+              setState(() => _continuesSplit = value);
               _emit();
             },
           ),

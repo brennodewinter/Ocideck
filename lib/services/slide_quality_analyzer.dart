@@ -15,6 +15,7 @@ import '../utils/color_contrast.dart';
 import '../utils/project_path.dart';
 import '../widgets/slides/inline_markdown.dart';
 import 'slide_layout_metrics.dart';
+import 'split_run.dart';
 
 part 'parts/slide_quality_analyzer_density.dart';
 
@@ -114,6 +115,10 @@ class SlideQualityAnalyzer {
       if (slide.skipped) continue;
       issues.addAll(_memoizedSlideIssues(slide, i, theme, font, projectPath));
     }
+    // Bewust buiten de per-slide memo: of een slide klein rendert hangt af van
+    // zijn buren, en die cache is op slide-identiteit gesleuteld. Binnen de memo
+    // zou een melding blijven staan nadat de buurslide veranderde.
+    _checkSplitRuns(slides, theme, font, issues);
     return SlideQualityResult(issues);
   }
 
@@ -612,6 +617,23 @@ class _FitMemo {
   final double scale;
 
   const _FitMemo(this.font, this.scale);
+}
+
+/// Gememoiseerde split-run-schaal per slide. Een aparte cache naast
+/// [_fitScaleCache] omdat dit een ándere meting van dezelfde slide is: deze
+/// reserveert de logostrook, net als de live layout. Eén cache delen zou de twee
+/// waarden door elkaar halen, want slide en lettertype zijn voor beide gelijk.
+/// Het thema hoort daarom wél bij de sleutel — het bepaalt de logostrook.
+final Expando<_RunScaleMemo> _runScaleCache = Expando<_RunScaleMemo>(
+  'splitRunMemberScale',
+);
+
+class _RunScaleMemo {
+  final String font;
+  final ThemeProfile theme;
+  final double scale;
+
+  const _RunScaleMemo(this.font, this.theme, this.scale);
 }
 
 /// Gememoiseerde per-slide issues plus alles waarvan de analyse afhangt, zodat

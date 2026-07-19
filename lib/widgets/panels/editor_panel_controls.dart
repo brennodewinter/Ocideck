@@ -203,6 +203,9 @@ class _EditorHeaderBarState extends State<_EditorHeaderBar> {
               open: _qualityOpen,
               onToggle: () => setState(() => _qualityOpen = !_qualityOpen),
             ),
+            // Verschijnt alleen wanneer déze slide door zijn reeks klein wordt
+            // gerenderd; anders neemt hij geen ruimte in.
+            const SplitRunDetachChip(),
           ],
         ),
         if (_helpOpen) ...[
