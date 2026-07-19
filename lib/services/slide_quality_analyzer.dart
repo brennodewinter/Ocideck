@@ -494,7 +494,13 @@ class SlideQualityAnalyzer {
     String? projectPath,
     List<SlideQualityIssue> issues,
   ) {
-    if (kIsWeb || projectPath == null || projectPath.trim().isEmpty) return;
+    // Bewust géén poort meer op projectPath. Een deck dat nog niet is
+    // opgeslagen heeft er geen, en juist daar is de kans op een kapotte
+    // verwijzing het grootst — dat was precies het geval waarin deze controle
+    // zweeg. Zonder projectmap blijft resolveSlideAssetPath alleen absolute
+    // paden oplossen; relatieve hebben dan nog geen betekenis en worden
+    // overgeslagen.
+    if (kIsWeb) return;
 
     void missingFile({
       required String path,
