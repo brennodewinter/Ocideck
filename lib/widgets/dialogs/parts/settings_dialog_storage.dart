@@ -265,8 +265,8 @@ extension _SettingsStorageTab on _SettingsDialogState {
     final sources = switch (modality) {
       // De bibliotheken zijn geen invoervelden; die lopen al via _rebuild.
       StorageModality.disk => const <Listenable>[],
-      StorageModality.nextcloud => [_webdavUrl, _webdavUser],
-      StorageModality.git => [_gitUrl, _gitOwner, _gitRepo],
+      StorageModality.nextcloud => [_webdav.url, _webdav.user],
+      StorageModality.git => [_git.url, _git.owner, _git.repo],
     };
     if (sources.isEmpty) return line(context, null);
     return ListenableBuilder(
@@ -295,15 +295,15 @@ extension _SettingsStorageTab on _SettingsDialogState {
         // dertig keer anders werkt.
         return (text: '${l10n.d('Bibliotheken')}: $count', configured: true);
       case StorageModality.nextcloud:
-        final host = _hostOf(_webdavUrl.text);
-        if (host == null || _webdavUser.text.trim().isEmpty) {
+        final host = _hostOf(_webdav.url.text);
+        if (host == null || _webdav.user.text.trim().isEmpty) {
           return (text: l10n.d('Niet ingesteld'), configured: false);
         }
         return (text: '${l10n.d('Ingesteld')} · $host', configured: true);
       case StorageModality.git:
-        final owner = _gitOwner.text.trim();
-        final repo = _gitRepo.text.trim();
-        if (_hostOf(_gitUrl.text) == null || owner.isEmpty || repo.isEmpty) {
+        final owner = _git.owner.text.trim();
+        final repo = _git.repo.text.trim();
+        if (_hostOf(_git.url.text) == null || owner.isEmpty || repo.isEmpty) {
           return (text: l10n.d('Niet ingesteld'), configured: false);
         }
         return (

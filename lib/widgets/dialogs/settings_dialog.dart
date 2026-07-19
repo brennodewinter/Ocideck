@@ -44,6 +44,10 @@ import '../privacy_statement_content.dart';
 import '../reader/documentation_search_tab.dart';
 
 part 'parts/settings_dialog_sections.dart';
+part 'parts/settings_dialog_secret.dart';
+part 'parts/settings_dialog_webdav_form.dart';
+part 'parts/settings_dialog_git_form.dart';
+part 'parts/settings_dialog_ai_form.dart';
 part 'parts/settings_dialog_chrome.dart';
 part 'parts/settings_dialog_general.dart';
 part 'parts/settings_dialog_storage.dart';
@@ -136,57 +140,15 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   late TextEditingController _footerText;
   late TextEditingController _closingSlideMarkdown;
 
-  // WebDAV/Nextcloud-bron.
-  // Git-repository als deck-bron.
-  late TextEditingController _gitUrl;
-  late TextEditingController _gitOwner;
-  late TextEditingController _gitRepo;
-  late TextEditingController _gitToken;
-  bool _gitTrusted = false;
-  GitProvider _gitProvider = GitProvider.gitea;
-  String _initialGitIdentity = '';
-  String? _loadedGitToken;
+  /// De git-bron: velden, forgekeuze en token bij elkaar.
+  final GitForm _git = GitForm();
 
-  late TextEditingController _webdavUrl;
-  late TextEditingController _webdavUser;
-  late TextEditingController _webdavRoot;
-  late TextEditingController _webdavPassword;
+  /// De Nextcloud-bron: velden, testuitslag en wachtwoord bij elkaar in één
+  /// object in plaats van dertien losse velden op deze klasse.
+  final WebdavForm _webdav = WebdavForm();
 
-  /// Het wachtwoord zoals uit de keychain geladen, om bij opslaan te bepalen of
-  /// het écht gewijzigd is. Voorkomt dat een snelle Opslaan vóórdat de
-  /// asynchrone keychain-load klaar is het wachtwoord met leeg overschrijft.
-  String _loadedWebdavPassword = '';
-
-  /// Server-identiteit (URL|gebruiker) bij het openen, om te detecteren dat de
-  /// keychain-sleutel wijzigt en het wachtwoord onder de nieuwe sleutel moet.
-  String _initialWebdavIdentity = '';
-  bool _webdavTrusted = false;
-
-  /// Status van de verbindingstest: null = nog niet getest, true = ok,
-  /// false = mislukt (met [_webdavTestMessage]).
-  bool? _webdavTestOk;
-  String? _webdavTestMessage;
-  bool _webdavTesting = false;
-
-  // AI-assistentie (optioneel, standaard uit).
-  late bool _aiEnabled;
-  late AiBackendMode _aiMode;
-  late bool _aiTrusted;
-  late bool _aiCloudConfirmed;
-  late TextEditingController _aiBaseUrl;
-  late TextEditingController _aiModel;
-  late TextEditingController _aiApiKey;
-
-  /// De API-sleutel zoals uit de keychain geladen, om bij opslaan te bepalen of
-  /// hij écht gewijzigd is (zelfde patroon als het WebDAV-wachtwoord).
-  String _loadedAiApiKey = '';
-
-  /// Basis-URL bij het openen, om te detecteren dat de keychain-sleutel wijzigt
-  /// en de API-sleutel onder de nieuwe sleutel moet.
-  String _initialAiBaseUrl = '';
-  bool? _aiTestOk;
-  String? _aiTestMessage;
-  bool _aiTesting = false;
+  /// De AI-backend (optioneel, standaard uit): velden, modus en API-sleutel.
+  final AiForm _ai = AiForm();
 
   /// Whether the user changed the active profile in this session. Used to
   /// decide whether to apply the profile to the currently open presentation.
@@ -270,13 +232,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       text: _themeProfile.closingSlideMarkdown,
     );
     final git = settings.gitRepo;
-    _gitUrl = TextEditingController(text: git?.baseUrl ?? '');
-    _gitOwner = TextEditingController(text: git?.owner ?? '');
-    _gitRepo = TextEditingController(text: git?.repo ?? '');
-    _gitToken = TextEditingController();
-    _gitTrusted = git?.trustedInternal ?? false;
-    _gitProvider = git?.provider ?? GitProvider.gitea;
-    _initialGitIdentity = '${git?.baseUrl ?? ''}|${git?.owner ?? ''}';
+    _git.adoptFrom(git);
     if (git != null && git.isConfigured) {
       // Zelfde reden als bij het WebDAV-wachtwoord: het token staat in de
       // keychain, laad het in zodat de gebruiker ziet dát het er is.
@@ -285,20 +241,11 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           .readGitToken(git.baseUrl, git.owner)
           .then((token) {
             if (!mounted || token == null) return;
-            setState(() {
-              _loadedGitToken = token;
-              _gitToken.text = token;
-            });
+            setState(() => _git.token.adopt(token));
           });
     }
     final webdav = settings.webdavServer;
-    _webdavUrl = TextEditingController(text: webdav?.baseUrl ?? '');
-    _webdavUser = TextEditingController(text: webdav?.username ?? '');
-    _webdavRoot = TextEditingController(text: webdav?.rootPath ?? '');
-    _webdavPassword = TextEditingController();
-    _webdavTrusted = webdav?.trustedInternal ?? false;
-    _initialWebdavIdentity =
-        '${webdav?.baseUrl ?? ''}|${webdav?.username ?? ''}';
+    _webdav.adoptFrom(webdav);
     if (webdav != null && webdav.isConfigured) {
       // Het wachtwoord staat in de keychain; laad het in zodat de gebruiker
       // ziet dat het er is en het niet opnieuw hoeft te typen.
@@ -307,10 +254,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           .readWebdavPassword(webdav.baseUrl, webdav.username)
           .then((pw) {
             if (mounted && pw != null) {
-              setState(() {
-                _webdavPassword.text = pw;
-                _loadedWebdavPassword = pw;
-              });
+              setState(() => _webdav.password.adopt(pw));
             }
           });
     }
@@ -333,17 +277,9 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     _closingSlideMarkdown.dispose();
     _appearanceName.dispose();
     _cockpitName.dispose();
-    _gitUrl.dispose();
-    _gitOwner.dispose();
-    _gitRepo.dispose();
-    _gitToken.dispose();
-    _webdavUrl.dispose();
-    _webdavUser.dispose();
-    _webdavRoot.dispose();
-    _webdavPassword.dispose();
-    _aiBaseUrl.dispose();
-    _aiModel.dispose();
-    _aiApiKey.dispose();
+    _git.dispose();
+    _webdav.dispose();
+    _ai.dispose();
     super.dispose();
   }
 
@@ -351,20 +287,6 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   /// cannot call the `@protected` [setState] directly (it is only callable from
   /// instance members of a State subclass), so they route through this wrapper.
   void _rebuild(VoidCallback fn) => setState(fn);
-
-  /// Bouw een [WebdavServer] uit de huidige veldwaarden (zonder wachtwoord).
-  WebdavServer _webdavServerFromFields() {
-    var url = _webdavUrl.text.trim();
-    // "cloud.example.com" zonder schema is de meest gemaakte invoerfout;
-    // vul https:// aan i.p.v. later op een ongeldige URL te stranden.
-    if (url.isNotEmpty && !url.contains('://')) url = 'https://$url';
-    return WebdavServer(
-      baseUrl: url,
-      username: _webdavUser.text.trim(),
-      rootPath: WebdavServer.normalizeRoot(_webdavRoot.text),
-      trustedInternal: _webdavTrusted,
-    );
-  }
 
   List<ThemeProfile> get _profiles {
     final seen = <String>{};
@@ -497,42 +419,10 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       ref.read(tabsProvider).current?.deckNotifier.updateThemeProfile(profile);
     }
 
-    // Git-repository: config in prefs, token in de keychain. Zelfde scheiding
-    // als bij WebDAV hieronder, en om dezelfde reden (D2, §10.1).
-    final gitRepo = _gitRepoFromFields();
-    if (gitRepo.isConfigured) {
-      notifier.setGitRepo(gitRepo);
-      final gitIdentityChanged =
-          '${gitRepo.baseUrl}|${gitRepo.owner}' != _initialGitIdentity;
-      if (_gitToken.text != _loadedGitToken || gitIdentityChanged) {
-        notifier.writeGitToken(gitRepo.baseUrl, gitRepo.owner, _gitToken.text);
-      }
-    } else {
-      notifier.setGitRepo(null);
-    }
+    _git.save(notifier);
+    _webdav.save(notifier);
 
-    // WebDAV/Nextcloud-bron: serverconfig in prefs, wachtwoord in de keychain.
-    final server = _webdavServerFromFields();
-    if (server.isConfigured) {
-      notifier.setWebdavServer(server);
-      // Schrijf het wachtwoord als het is gewijzigd, of wanneer de server-
-      // identiteit (en dus de keychain-sleutel) wijzigde. Zo leegt een Opslaan
-      // vóór de asynchrone keychain-load het wachtwoord niet, maar verhuist het
-      // wél mee bij een nieuwe gebruikersnaam/URL.
-      final identityChanged =
-          '${server.baseUrl}|${server.username}' != _initialWebdavIdentity;
-      if (_webdavPassword.text != _loadedWebdavPassword || identityChanged) {
-        notifier.setWebdavPassword(
-          server.baseUrl,
-          server.username,
-          _webdavPassword.text,
-        );
-      }
-    } else {
-      notifier.setWebdavServer(null);
-    }
-
-    _saveAiSettings(notifier);
+    _ai.save(notifier);
 
     Navigator.pop(context);
   }

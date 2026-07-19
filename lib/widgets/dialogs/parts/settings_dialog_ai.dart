@@ -8,52 +8,11 @@ extension _SettingsAi on _SettingsDialogState {
   /// Initialiseer de AI-velden vanuit de opgeslagen [ai]-instellingen. Laadt de
   /// API-sleutel asynchroon uit de keychain (zelfde patroon als WebDAV).
   void _initAiFields(AiSettings ai) {
-    _aiEnabled = ai.enabled;
-    _aiMode = ai.mode;
-    _aiTrusted = ai.trustedInternal;
-    _aiCloudConfirmed = ai.cloudConfirmed;
-    _aiBaseUrl = TextEditingController(text: ai.baseUrl);
-    _aiModel = TextEditingController(text: ai.model);
-    _aiApiKey = TextEditingController();
-    _initialAiBaseUrl = ai.baseUrl;
+    _ai.adoptFrom(ai);
     if (ai.baseUrl.trim().isEmpty) return;
     ref.read(settingsProvider.notifier).readAiApiKey(ai.baseUrl).then((key) {
-      if (mounted && key != null) {
-        _rebuild(() {
-          _aiApiKey.text = key;
-          _loadedAiApiKey = key;
-        });
-      }
+      if (mounted && key != null) _rebuild(() => _ai.apiKey.adopt(key));
     });
-  }
-
-  /// Bouw de [AiSettings] uit de huidige veldwaarden (zonder API-sleutel).
-  AiSettings _aiSettingsFromFields() {
-    var url = _aiBaseUrl.text.trim();
-    // Zonder schema is loopback de meest waarschijnlijke bedoeling; vul http://
-    // aan. De veiligheidsgate valideert daarna alsnog scheme én host.
-    if (url.isNotEmpty && !url.contains('://')) url = 'http://$url';
-    return AiSettings(
-      enabled: _aiEnabled,
-      mode: _aiMode,
-      baseUrl: url,
-      model: _aiModel.text.trim(),
-      trustedInternal: _aiTrusted,
-      cloudConfirmed: _aiCloudConfirmed,
-    );
-  }
-
-  void _saveAiSettings(SettingsNotifier notifier) {
-    final settings = _aiSettingsFromFields();
-    notifier.setAiSettings(settings);
-    // Schrijf de API-sleutel als hij is gewijzigd, of wanneer de basis-URL (en
-    // dus de keychain-sleutel) wijzigde. Zo leegt Opslaan vóór de asynchrone
-    // keychain-load de sleutel niet, maar verhuist hij wél mee.
-    final baseUrlChanged = settings.baseUrl != _initialAiBaseUrl;
-    if ((_aiApiKey.text != _loadedAiApiKey || baseUrlChanged) &&
-        settings.baseUrl.trim().isNotEmpty) {
-      notifier.setAiApiKey(settings.baseUrl, _aiApiKey.text);
-    }
   }
 
   Widget _aiTab() {
@@ -86,14 +45,14 @@ extension _SettingsAi on _SettingsDialogState {
             l10n.d('AI-assistentie inschakelen'),
             style: const TextStyle(fontSize: 13),
           ),
-          value: _aiEnabled,
+          value: _ai.enabled,
           onChanged: (value) => _rebuild(() {
-            _aiEnabled = value;
-            _aiTestOk = null;
-            _aiTestMessage = null;
+            _ai.enabled = value;
+            _ai.testOk = null;
+            _ai.testMessage = null;
           }),
         ),
-        if (_aiEnabled) ..._aiConfigSection(l10n),
+        if (_ai.enabled) ..._aiConfigSection(l10n),
       ],
     );
   }
@@ -103,13 +62,13 @@ extension _SettingsAi on _SettingsDialogState {
       const SizedBox(height: 12),
       _aiModeDropdown(l10n),
       const SizedBox(height: 12),
-      if (_aiMode != AiBackendMode.none) ..._aiBackendFields(l10n),
+      if (_ai.mode != AiBackendMode.none) ..._aiBackendFields(l10n),
     ];
   }
 
   Widget _aiModeDropdown(AppLocalizations l10n) {
     return DropdownButtonFormField<AiBackendMode>(
-      initialValue: _aiMode,
+      initialValue: _ai.mode,
       isDense: true,
       decoration: InputDecoration(
         isDense: true,
@@ -144,35 +103,36 @@ extension _SettingsAi on _SettingsDialogState {
         ),
       ],
       onChanged: (value) => _rebuild(() {
-        _aiMode = value ?? AiBackendMode.none;
-        if (_aiMode == AiBackendMode.local && _aiBaseUrl.text.trim().isEmpty) {
-          _aiBaseUrl.text = AiSettings.defaultLocalBaseUrl;
+        _ai.mode = value ?? AiBackendMode.none;
+        if (_ai.mode == AiBackendMode.local &&
+            _ai.baseUrl.text.trim().isEmpty) {
+          _ai.baseUrl.text = AiSettings.defaultLocalBaseUrl;
         }
-        _aiTestOk = null;
-        _aiTestMessage = null;
+        _ai.testOk = null;
+        _ai.testMessage = null;
       }),
     );
   }
 
   List<Widget> _aiBackendFields(AppLocalizations l10n) {
-    final isSelfHosted = _aiMode == AiBackendMode.selfHosted;
-    final isCloud = _aiMode == AiBackendMode.cloud;
+    final isSelfHosted = _ai.mode == AiBackendMode.selfHosted;
+    final isCloud = _ai.mode == AiBackendMode.cloud;
     return [
       _webdavField(
-        _aiBaseUrl,
+        _ai.baseUrl,
         l10n.d('Server-URL'),
         hint: 'http://127.0.0.1:11434/v1',
         icon: Icons.link,
       ),
       _webdavField(
-        _aiModel,
+        _ai.model,
         l10n.d('Modelnaam'),
         hint: 'gemma3:4b',
         icon: Icons.memory_outlined,
       ),
       if (isSelfHosted || isCloud)
         _webdavField(
-          _aiApiKey,
+          _ai.apiKey.field,
           l10n.d('API-sleutel (optioneel)'),
           obscure: true,
           icon: Icons.key_outlined,
@@ -197,11 +157,11 @@ extension _SettingsAi on _SettingsDialogState {
         ),
         style: TextStyle(fontSize: 11, color: AppTheme.slate400),
       ),
-      value: _aiTrusted,
+      value: _ai.trusted,
       onChanged: (value) => _rebuild(() {
-        _aiTrusted = value;
-        _aiTestOk = null;
-        _aiTestMessage = null;
+        _ai.trusted = value;
+        _ai.testOk = null;
+        _ai.testMessage = null;
       }),
     );
   }
@@ -225,26 +185,26 @@ extension _SettingsAi on _SettingsDialogState {
           ),
           style: const TextStyle(fontSize: 13),
         ),
-        value: _aiCloudConfirmed,
+        value: _ai.cloudConfirmed,
         onChanged: (value) => _rebuild(() {
-          _aiCloudConfirmed = value;
-          _aiTestOk = null;
-          _aiTestMessage = null;
+          _ai.cloudConfirmed = value;
+          _ai.testOk = null;
+          _ai.testMessage = null;
         }),
       ),
     ];
   }
 
   Widget _aiTestRow(AppLocalizations l10n) {
-    final testMsg = _aiTestMessage;
+    final testMsg = _ai.testMessage;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
             ElevatedButton.icon(
-              onPressed: _aiTesting ? null : _testAiConnection,
-              icon: _aiTesting
+              onPressed: _ai.testing ? null : _testAiConnection,
+              icon: _ai.testing
                   ? const SizedBox(
                       width: 16,
                       height: 16,
@@ -254,7 +214,7 @@ extension _SettingsAi on _SettingsDialogState {
               label: Text(l10n.d('Verbinding testen')),
             ),
             const SizedBox(width: 12),
-            if (_aiTestOk == true)
+            if (_ai.testOk == true)
               Row(
                 children: [
                   const Icon(
@@ -271,7 +231,7 @@ extension _SettingsAi on _SettingsDialogState {
               ),
           ],
         ),
-        if (_aiTestOk == false && testMsg != null)
+        if (_ai.testOk == false && testMsg != null)
           Padding(
             padding: const EdgeInsets.only(top: 10),
             child: Row(
@@ -307,14 +267,14 @@ extension _SettingsAi on _SettingsDialogState {
   Future<void> _testAiConnection() async {
     final l10n = context.l10n;
     _rebuild(() {
-      _aiTesting = true;
-      _aiTestOk = null;
-      _aiTestMessage = null;
+      _ai.testing = true;
+      _ai.testOk = null;
+      _ai.testMessage = null;
     });
     final client = AiClientService(
-      settings: _aiSettingsFromFields(),
+      settings: _ai.settings,
       hasOutboundConsent: ref.read(consentProvider).hasAccepted,
-      apiKey: _aiApiKey.text,
+      apiKey: _ai.apiKey.field.text,
     );
     String? error;
     try {
@@ -329,9 +289,9 @@ extension _SettingsAi on _SettingsDialogState {
     }
     if (!mounted) return;
     _rebuild(() {
-      _aiTesting = false;
-      _aiTestOk = error == null;
-      _aiTestMessage = error;
+      _ai.testing = false;
+      _ai.testOk = error == null;
+      _ai.testMessage = error;
     });
   }
 }
