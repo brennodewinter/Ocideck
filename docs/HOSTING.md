@@ -1,7 +1,7 @@
 # OciDeck — Hosting & Deployment Guide
 
 How to build and serve the OciDeck **web** build safely. The desktop apps are
-distributed as native binaries and need no hosting; this guide is about the web
+built as native binaries and need no hosting; this guide is about the web
 bundle. For build internals see [BUILD.md](BUILD.md); for the security rationale
 see [SECURITY_DESIGN.md](SECURITY_DESIGN.md).
 
@@ -55,8 +55,14 @@ as a real response header. A good baseline mirrors the meta policy and adds an
 enforceable `frame-ancestors`:
 
 ```
-Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'
+Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https:; worker-src 'self' blob:; child-src 'self' blob: data:; frame-src 'self' blob: data:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'
 ```
+
+Copy it exactly, `child-src` and `frame-src` included. A header CSP and a meta
+CSP are enforced **cumulatively** — per directive the stricter one wins — so
+leaving those two out does not fall back to the meta policy that has them. It
+falls back to `default-src 'self'`, and the `blob:`/`data:` frames the app
+relies on stop loading.
 
 - **Standalone hosting:** keep `frame-ancestors 'none'` (no embedding).
 - **Embedding inside Nextcloud (or another host):** set
