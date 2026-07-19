@@ -1772,6 +1772,14 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
+      'ravikindlustuse number (RAMQ) — terviseandmed',
+  'zorgverzekeringsnummer (OHIP) — een zorggegeven':
+      'ravikindlustuse number (OHIP) — terviseandmed',
+  'bedrijfsnummer (BN)': 'ettevõtte number (BN)',
+  'zorgverlenersnummer (NPI)': 'tervishoiuteenuse osutaja number (NPI)',
+  'Medicare-nummer (MBI) — een zorggegeven':
+      'Medicare number (MBI) — terviseandmed',
   'wacht op verbinding': 'ootab ühendust',
   'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
       'Salvestatud sellesse arvutisse, veel mitte hoidlasse. Läheb kaasa kohe, kui ühendus taastub — või kohe, valikuga „Tühjenda järjekord“.',

@@ -164,4 +164,101 @@ void main() {
       );
     });
   });
+
+  // ── De zorgnummers ─────────────────────────────────────────────────────────
+  //
+  // Dezelfde terughoudendheid als hierboven, om een andere reden. Een NPI staat
+  // in een openbaar register: een "geldig voorbeeld" dat ik hier construeer,
+  // is met redelijke kans het nummer van een echte zorgverlener. Dus ook hier
+  // eigenschappen in plaats van voorbeelden, behalve waar CMS zélf een
+  // voorbeeldnummer publiceert.
+
+  group('us.npi', () {
+    test('precies één controlecijfer past bij een gegeven voorloop', () {
+      // Toetst het algoritme (Luhn over 80840 + negen cijfers) in plaats van
+      // mijn geheugen van een voorbeeldnummer.
+      final passend = [
+        for (var laatste = 0; laatste <= 9; laatste++)
+          if (isValidUsNpi('123456789$laatste')) laatste,
+      ];
+      expect(passend, hasLength(1));
+    });
+
+    test('alleen 1 en 2 zijn uitgegeven voorlopen', () {
+      // Zoek voor elke beginpositie het passende controlecijfer; alleen 1 en 2
+      // horen überhaupt een geldige uitkomst te kunnen geven.
+      final geaccepteerd = [
+        for (var eerste = 0; eerste <= 9; eerste++)
+          if ([
+            for (var laatste = 0; laatste <= 9; laatste++)
+              if (isValidUsNpi('${eerste}23456789$laatste')) laatste,
+          ].isNotEmpty)
+            eerste,
+      ];
+      expect(geaccepteerd, [1, 2]);
+    });
+
+    test('vuurt met context en zwijgt zonder', () {
+      // Luhn over tien cijfers laat één op de tien door, dus de poort draagt
+      // hier het bewijs — niet de checksum.
+      expect(rulesIn('NPI 1234567893'), contains('us.npi'));
+      expect(rulesIn('Bestelnummer 1234567893'), isNot(contains('us.npi')));
+    });
+  });
+
+  group('us.medicare_mbi', () {
+    test('het voorbeeldnummer van CMS is geldig', () {
+      // Uit de CMS-documentatie, met en zonder koppeltekens.
+      expect(isValidUsMbi('1EG4-TE5-MK73'), isTrue);
+      expect(isValidUsMbi('1EG4TE5MK73'), isTrue);
+    });
+
+    test('de zes verwarrende letters zijn uitgesloten', () {
+      // S/5, L/1, O/0, I/1, B/8, Z/2 — eruit gelaten omdat ze bij overtypen op
+      // een cijfer lijken. Twintig van de zesentwintig blijven over.
+      final toegestaan = [
+        for (final c in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''))
+          if (isValidUsMbi('1${c}G4TE5MK73')) c,
+      ];
+      expect(toegestaan, hasLength(20));
+      for (final uit in ['S', 'L', 'O', 'I', 'B', 'Z']) {
+        expect(toegestaan, isNot(contains(uit)), reason: '\$uit hoort eruit');
+      }
+    });
+
+    test('positie 1 is nooit nul', () {
+      expect(isValidUsMbi('0EG4TE5MK73'), isFalse);
+    });
+
+    test('vuurt met context en zwijgt zonder', () {
+      // Er is geen checksum; de vorm alleen is niet genoeg, want een
+      // artikelnummer kan dezelfde afwisseling volgen.
+      expect(rulesIn('MBI 1EG4-TE5-MK73'), contains('us.medicare_mbi'));
+      expect(
+        rulesIn('Artikel 1EG4-TE5-MK73'),
+        isNot(contains('us.medicare_mbi')),
+      );
+    });
+  });
+
+  group('us.dea', () {
+    test('precies één controlecijfer past bij een gegeven voorloop', () {
+      final passend = [
+        for (var laatste = 0; laatste <= 9; laatste++)
+          if (isValidUsDea('AB123456$laatste')) laatste,
+      ];
+      expect(passend, hasLength(1));
+    });
+
+    test('wijst een onbestaand registrantentype af', () {
+      // De eerste letter is het type; V en W zijn niet uitgegeven.
+      expect(isValidUsDea('AB1234563'), isTrue);
+      expect(isValidUsDea('VB1234563'), isFalse);
+    });
+
+    test('vuurt met context en zwijgt zonder', () {
+      expect(rulesIn('DEA AB1234563'), contains('us.dea'));
+      expect(rulesIn('Code AB1234563'), isNot(contains('us.dea')));
+    });
+  });
 }

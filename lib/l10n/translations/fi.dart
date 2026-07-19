@@ -1781,6 +1781,14 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
+      'sairausvakuutusnumero (RAMQ) — terveystieto',
+  'zorgverzekeringsnummer (OHIP) — een zorggegeven':
+      'sairausvakuutusnumero (OHIP) — terveystieto',
+  'bedrijfsnummer (BN)': 'yritysnumero (BN)',
+  'zorgverlenersnummer (NPI)': 'terveydenhuollon tuottajanumero (NPI)',
+  'Medicare-nummer (MBI) — een zorggegeven':
+      'Medicare-numero (MBI) — terveystieto',
   'wacht op verbinding': 'odottaa yhteyttä',
   'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
       'Tallennettu tälle tietokoneelle, ei vielä repositorioon. Lähtee heti kun yhteys palaa — tai nyt, valinnalla "Tyhjennä jono".',

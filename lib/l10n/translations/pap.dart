@@ -738,6 +738,14 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
+      'number di seguro di salú (RAMQ) — un dato di salú',
+  'zorgverzekeringsnummer (OHIP) — een zorggegeven':
+      'number di seguro di salú (OHIP) — un dato di salú',
+  'bedrijfsnummer (BN)': 'number di empresa (BN)',
+  'zorgverlenersnummer (NPI)': 'number di proveedó di kuido (NPI)',
+  'Medicare-nummer (MBI) — een zorggegeven':
+      'number di Medicare (MBI) — un dato di salú',
   'wacht op verbinding': 'ta warda konekshon',
   'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
       'Wardá riba e komputadó aki, ainda no den e repositorio. Lo bai ora tin konekshon atrobe — of awor, ku "Bashí e kua".',

@@ -735,6 +735,14 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
+      'número de seguro médico (RAMQ) — dato de salud',
+  'zorgverzekeringsnummer (OHIP) — een zorggegeven':
+      'número de seguro médico (OHIP) — dato de salud',
+  'bedrijfsnummer (BN)': 'número de empresa (BN)',
+  'zorgverlenersnummer (NPI)': 'número de proveedor sanitario (NPI)',
+  'Medicare-nummer (MBI) — een zorggegeven':
+      'número de Medicare (MBI) — un dato de salud',
   'wacht op verbinding': 'esperando conexión',
   'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
       'Guardado en este ordenador, todavía no en el repositorio. Se enviará en cuanto haya conexión de nuevo — o ahora, con "Vaciar cola".',

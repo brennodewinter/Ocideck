@@ -1804,6 +1804,14 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
+      'номер на здравна осигуровка (RAMQ) — здравни данни',
+  'zorgverzekeringsnummer (OHIP) — een zorggegeven':
+      'номер на здравна осигуровка (OHIP) — здравни данни',
+  'bedrijfsnummer (BN)': 'номер на предприятие (BN)',
+  'zorgverlenersnummer (NPI)': 'номер на здравен доставчик (NPI)',
+  'Medicare-nummer (MBI) — een zorggegeven':
+      'номер Medicare (MBI) — здравно данно',
   'wacht op verbinding': 'чака връзка',
   'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
       'Запазено на този компютър, още не в хранилището. Ще замине веднага щом има връзка — или сега, с „Изпразване на опашката“.',

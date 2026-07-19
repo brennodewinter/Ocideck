@@ -1799,6 +1799,14 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
+      'număr de asigurare de sănătate (RAMQ) — dată de sănătate',
+  'zorgverzekeringsnummer (OHIP) — een zorggegeven':
+      'număr de asigurare de sănătate (OHIP) — dată de sănătate',
+  'bedrijfsnummer (BN)': 'număr de întreprindere (BN)',
+  'zorgverlenersnummer (NPI)': 'număr de furnizor de servicii medicale (NPI)',
+  'Medicare-nummer (MBI) — een zorggegeven':
+      'număr Medicare (MBI) — o dată privind sănătatea',
   'wacht op verbinding': 'așteaptă conexiune',
   'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
       'Salvat pe acest calculator, încă nu în depozit. Va pleca imediat ce există din nou conexiune — sau acum, cu „Golește coada”.',

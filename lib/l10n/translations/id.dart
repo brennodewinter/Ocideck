@@ -1781,6 +1781,14 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
+      'nomor asuransi kesehatan (RAMQ) — data kesehatan',
+  'zorgverzekeringsnummer (OHIP) — een zorggegeven':
+      'nomor asuransi kesehatan (OHIP) — data kesehatan',
+  'bedrijfsnummer (BN)': 'nomor perusahaan (BN)',
+  'zorgverlenersnummer (NPI)': 'nomor penyedia layanan kesehatan (NPI)',
+  'Medicare-nummer (MBI) — een zorggegeven':
+      'nomor Medicare (MBI) — data kesehatan',
   'wacht op verbinding': 'menunggu koneksi',
   'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
       'Disimpan di komputer ini, belum ada di repositori. Akan ikut begitu ada koneksi lagi — atau sekarang, dengan "Kosongkan antrean".',

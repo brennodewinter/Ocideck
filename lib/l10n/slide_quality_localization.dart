@@ -501,7 +501,12 @@ String privacyRuleLabel(AppLocalizations l10n, String ruleId) {
       'ingesloten afbeelding — wij kunnen er niet in kijken',
     ),
     'us.ein' => l10n.d('werkgeversnummer (EIN)'),
+    'us.npi' => l10n.d('zorgverlenersnummer (NPI)'),
+    'us.medicare_mbi' => l10n.d('Medicare-nummer (MBI) — een zorggegeven'),
     'us.ssn_last4' => l10n.d('laatste vier cijfers van een SSN'),
+    'ca.ramq' => l10n.d('zorgverzekeringsnummer (RAMQ) — een zorggegeven'),
+    'ca.ohip' => l10n.d('zorgverzekeringsnummer (OHIP) — een zorggegeven'),
+    'ca.bn' => l10n.d('bedrijfsnummer (BN)'),
     _ when _nationalNumberNames.containsKey(ruleId) =>
       '${l10n.d('nationaal identificatienummer')} (${_nationalNumberNames[ruleId]})',
     'secret.private_key' => l10n.d('private sleutel'),
@@ -518,7 +523,9 @@ String privacyRuleLabel(AppLocalizations l10n, String ruleId) {
 /// PESEL heet in elke taal een PESEL.
 const Map<String, String> _nationalNumberNames = {
   'us.ssn': 'Social Security Number',
+  'ca.sin': 'Social Insurance Number',
   'us.itin': 'ITIN',
+  'us.dea': 'DEA-nummer',
   'be.rijksregister': 'rijksregisternummer',
   'at.svnr': 'Sozialversicherungsnummer',
   'ch.ahv': 'AHV-Nummer',

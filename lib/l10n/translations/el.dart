@@ -1809,6 +1809,14 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
+      'αριθμός ασφάλισης υγείας (RAMQ) — δεδομένο υγείας',
+  'zorgverzekeringsnummer (OHIP) — een zorggegeven':
+      'αριθμός ασφάλισης υγείας (OHIP) — δεδομένο υγείας',
+  'bedrijfsnummer (BN)': 'αριθμός επιχείρησης (BN)',
+  'zorgverlenersnummer (NPI)': 'αριθμός παρόχου υγείας (NPI)',
+  'Medicare-nummer (MBI) — een zorggegeven':
+      'αριθμός Medicare (MBI) — δεδομένο υγείας',
   'wacht op verbinding': 'αναμονή σύνδεσης',
   'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
       'Αποθηκευμένο σε αυτόν τον υπολογιστή, όχι ακόμη στο αποθετήριο. Θα σταλεί μόλις υπάρξει ξανά σύνδεση — ή τώρα, με «Άδειασμα ουράς».',

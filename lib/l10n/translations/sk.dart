@@ -1788,6 +1788,15 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
+      'číslo zdravotného poistenia (RAMQ) — údaj o zdraví',
+  'zorgverzekeringsnummer (OHIP) — een zorggegeven':
+      'číslo zdravotného poistenia (OHIP) — údaj o zdraví',
+  'bedrijfsnummer (BN)': 'číslo podniku (BN)',
+  'zorgverlenersnummer (NPI)':
+      'číslo poskytovateľa zdravotnej starostlivosti (NPI)',
+  'Medicare-nummer (MBI) — een zorggegeven':
+      'číslo Medicare (MBI) — údaj o zdraví',
   'wacht op verbinding': 'čaká na pripojenie',
   'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
       'Uložené v tomto počítači, ešte nie v repozitári. Pôjde s tým, len čo bude opäť pripojenie — alebo teraz, cez „Vyprázdniť front“.',

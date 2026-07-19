@@ -1756,6 +1756,14 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
+      'pIvlob QeD mI\' (RAMQ) — pIvlob De\'',
+  'zorgverzekeringsnummer (OHIP) — een zorggegeven':
+      'pIvlob QeD mI\' (OHIP) — pIvlob De\'',
+  'bedrijfsnummer (BN)': 'yaHmey mI\' (BN)',
+  'zorgverlenersnummer (NPI)': 'Hergh chenmoHwI\' mI\' (NPI)',
+  'Medicare-nummer (MBI) — een zorggegeven':
+      'Medicare mI\' (MBI) — pIvghach De\'',
   'wacht op verbinding': 'rar loS',
   'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
       'De\' vam jonwI\'Daq pollu\', repository-Daq not. rar chugh jaH — ghap DaH, "wachtrij yIchIm" lo\'taHvIS.',

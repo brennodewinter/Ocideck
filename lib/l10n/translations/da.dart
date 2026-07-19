@@ -1780,6 +1780,14 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
+      'sygeforsikringsnummer (RAMQ) — en helbredsoplysning',
+  'zorgverzekeringsnummer (OHIP) — een zorggegeven':
+      'sygeforsikringsnummer (OHIP) — en helbredsoplysning',
+  'bedrijfsnummer (BN)': 'virksomhedsnummer (BN)',
+  'zorgverlenersnummer (NPI)': 'sundhedsudbydernummer (NPI)',
+  'Medicare-nummer (MBI) — een zorggegeven':
+      'Medicare-nummer (MBI) — en helbredsoplysning',
   'wacht op verbinding': 'venter på forbindelse',
   'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
       'Gemt på denne computer, endnu ikke i repositoryet. Det følger med, så snart der er forbindelse igen — eller nu, med "Tøm kø".',

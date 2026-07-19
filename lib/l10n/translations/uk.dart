@@ -1799,6 +1799,14 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
+      'номер медичного страхування (RAMQ) — дані про здоров\'я',
+  'zorgverzekeringsnummer (OHIP) — een zorggegeven':
+      'номер медичного страхування (OHIP) — дані про здоров\'я',
+  'bedrijfsnummer (BN)': 'номер підприємства (BN)',
+  'zorgverlenersnummer (NPI)': 'номер медичного працівника (NPI)',
+  'Medicare-nummer (MBI) — een zorggegeven':
+      'номер Medicare (MBI) — дані про здоров\'я',
   'wacht op verbinding': 'очікує з\'єднання',
   'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
       'Збережено на цьому комп\'ютері, ще не в репозиторії. Потрапить туди, щойно з\'явиться з\'єднання — або зараз, через «Очистити чергу».',
