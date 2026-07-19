@@ -1441,9 +1441,9 @@ gepubliceerd. Vraag de Nictiz-servicedesk **expliciet** of herdistributie binnen
 open gelicentieerde applicatie is toegestaan — "kosteloos" is niet hetzelfde als
 "herdistribueerbaar", en dat onderscheid velt ook SNOMED CT NL (§13.3).
 
-#### Bundelgrootte: winst die nu blijft liggen
+#### Bundelgrootte: geconfigureerd, winst nog ongemeten
 
-`dartcv` kent module-selectie via hooks:
+`dartcv` kent module-selectie via hooks, en die staat nu in `pubspec.yaml`:
 
 ```yaml
 hooks:
@@ -1452,32 +1452,47 @@ hooks:
       include_modules: [core, imgproc, imgcodecs, objdetect, dnn]
 ```
 
-Dat zijn precies de vijf modules die de beeldcontrole gebruikt. Dit is **niet**
-geconfigureerd, dus Linux, Windows en Android dragen nu de volledige OpenCV-modulelijst
-mee. Twee dingen om te weten voor je het aanzet:
+Dat zijn precies de vijf modules die de beeldcontrole aanroept. Wat er zonder
+deze lijst meeging en nergens gebruikt wordt: `stitching`, `photo`, `video`,
+`videoio`, `features2d`, `calib3d`, `flann`, `contrib`.
 
-* module-exclusie werkt **alleen op Android, Windows en Linux** — op macOS krijg je
-  hoe dan ook de volle build, en daar is 27 MB gemeten;
+Twee dingen die golden en nog steeds gelden:
+
+* module-exclusie werkt **alleen op Android, Windows en Linux** — op macOS krijg
+  je hoe dan ook de volle build, en daar is 27 MB gemeten (opnieuw bevestigd na
+  deze wijziging: exact hetzelfde bestand, 28.499.624 bytes);
 * een uitgesloten module houdt zijn Dart-API maar gooit "symbol not found" bij
-  aanroep. Uitsluiten zonder meten is dus een tijdbom.
+  aanroep. Geen compilatiefout dus: het valt pas om bij de eerste echte aanroep.
 
-De winst op de drie andere platforms is nooit gemeten. Meet vóór en ná.
+Dat tweede was de reden om dit nog niet te doen, en het is opgelost door de
+volgorde om te draaien: **eerst** CI op Linux en Windows de beeldtests laten
+draaien (zie hieronder), **daarna** pas de modulelijst. Die tests roepen alle
+vijf de modules aan, dus een verkeerde lijst valt nu om in CI in plaats van bij
+een gebruiker.
 
-#### De detectietests draaien maar op één platform
+**Wat nog niet gemeten is: de winst.** De bundelgrootte op Linux, Windows en
+Android vóór en ná staat nog open — daarvoor moet je op die platforms bouwen.
+Het risico is afgedekt, het voordeel is nog onbekend.
 
-De Makefile vindt de OpenCV-bibliotheek zelf zodra er een platformbuild in `build/`
-staat (zie CHECKS.md), en de CI bouwt alleen in de macOS-taak. Gevolg: **een
-runtime-fout in de native laag op Linux of Windows blijft groen.** Een
-*compilatie*fout valt wél op, want de release-workflow bouwt beide.
+#### De detectietests draaien nu op drie platforms
 
-Linux en Windows zijn overigens nooit werkelijk getest: `opencv_core` declareert
-`ffiPlugin: true` voor android/ios/linux/macos/windows, en de voorwaardelijke import
-kiest op elk native platform de echte implementatie — maar alleen macOS is
-aantoonbaar gedraaid. Dichten kost dezelfde buildstap in de Linux- en Windows-taken,
-een paar minuten CI-tijd per platform.
+**Was:** de Makefile vindt de OpenCV-bibliotheek zodra er een platformbuild in
+`build/` staat, en de CI bouwde alleen in de macOS-taak. Gevolg: een
+*runtime*fout in de native laag op Linux of Windows bleef groen. Een
+*compilatie*fout viel wél op, want de release-workflow bouwt beide — het gat zat
+precies daartussen: bouwt wel, werkt niet.
 
-Android en iOS zijn geen leverplatform: de release-workflow bouwt web, macOS, Windows
-en Linux. De mappen bestaan, het product niet.
+**Nu:** de Linux-gate bouwt `flutter build linux --debug` vóór `make coverage`
+(de Makefile vindt de `.so` dan zelf), en de Windows-taak in de testmatrix bouwt
+en zet `DARTCV_LIB_PATH` expliciet, want `make` staat niet op die runner. Beide
+stappen falen hard als de bibliotheek niet op zijn plek staat, in plaats van
+stilletjes terug te vallen op overslaan — precies zoals de macOS-stap dat al deed.
+
+Daarmee is `opencv_core`'s `ffiPlugin: true` voor linux/macos/windows voor het
+eerst op alle drie aantoonbaar gedraaid, in plaats van alleen op macOS.
+
+Android en iOS zijn nog steeds geen leverplatform: de release-workflow bouwt web,
+macOS, Windows en Linux. De mappen bestaan, het product niet.
 
 ---
 

@@ -60,6 +60,31 @@ jobs:
       - name: Dead code (make check-dead-code)
         run: make check-dead-code
 
+      # De beeldcontrole draait op OpenCV via FFI, en die native bibliotheek zit
+      # in een platformbuild — niet in een kale `flutter test`. Zonder deze stap
+      # sloegen de detectietests zichzelf op Linux over, en bleef een
+      # runtime-fout in de native laag hier dus altijd groen (OCIWACHT §13.8).
+      #
+      # Een compilatiefout viel wél op, want de release-workflow bouwt Linux al.
+      # Het gat zat precies tussen die twee in: bouwt wel, werkt niet.
+      #
+      # De Makefile vindt de bibliotheek zelf zodra `build/` een platformbuild
+      # bevat, dus dit hoeft alleen vóór `make coverage` te draaien.
+      - name: Linux-buildafhankelijkheden
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build libgtk-3-dev
+
+      - name: Build Linux (levert de OpenCV-bibliotheek aan de beeldtests)
+        run: |
+          flutter build linux --debug
+          LIB="$(ls build/linux/*/*/bundle/lib/libdartcv.so 2>/dev/null | head -n1)"
+          # Hard falen in plaats van stilletjes terugvallen op overslaan: als een
+          # nieuwe opencv_core dit pad verlegt, moet dat hier opvallen en niet
+          # pas als iemand zich afvraagt waarom de detectietests nooit draaien.
+          test -n "$LIB" || { echo "::error::libdartcv.so niet gevonden onder build/linux — pad gewijzigd?"; exit 1; }
+          echo "Gevonden: $LIB"
+
       # Runs the full suite with coverage and enforces a line-coverage floor.
       - name: Test + coverage (make coverage)
         run: make coverage
@@ -124,9 +149,11 @@ jobs:
       # foutafhandeling viel en de scanner nul gezichten meldde. Groen om de
       # verkeerde reden is erger dan rood.
       #
-      # Alleen op macOS: één platform waar ze echt draaien volstaat om een
-      # regressie in de detector te vangen, en een Linux-build zou GTK-pakketten
-      # op de runner vragen voor dezelfde twee tests.
+      # Op élk platform van de matrix, en dat is sinds OCIWACHT §13.8 het punt:
+      # `opencv_core` declareert `ffiPlugin: true` voor macOS, Windows én Linux,
+      # en de voorwaardelijke import kiest overal de echte implementatie — maar
+      # alleen macOS was ooit aantoonbaar gedraaid. Een runtime-fout in de native
+      # laag op Windows bleef dus groen.
       - name: Build macOS (levert de OpenCV-bibliotheek aan de beeldtests)
         if: runner.os == 'macOS'
         run: |
@@ -137,6 +164,21 @@ jobs:
           # pas als iemand zich afvraagt waarom de detectietests nooit draaien.
           test -f "$LIB" || { echo "::error::OpenCV-bibliotheek niet op $LIB — pad gewijzigd?"; exit 1; }
           echo "DARTCV_LIB_PATH=$LIB" >> "$GITHUB_ENV"
+
+      # Windows kent geen `make` op de runner, dus hier wordt het pad expliciet
+      # gezet in plaats van door de Makefile gevonden.
+      - name: Build Windows (levert de OpenCV-bibliotheek aan de beeldtests)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          flutter build windows --debug
+          $lib = Get-ChildItem -Path build/windows -Filter dartcv.dll -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1
+          if (-not $lib) {
+            Write-Output "::error::dartcv.dll niet gevonden onder build/windows — pad gewijzigd?"
+            exit 1
+          }
+          Write-Output "Gevonden: $($lib.FullName)"
+          "DARTCV_LIB_PATH=$($lib.FullName)" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
 
       - name: Test
         run: flutter test --test-randomize-ordering-seed random --exclude-tags golden
