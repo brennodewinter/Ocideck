@@ -521,7 +521,7 @@ class PrivacyScanner {
 
   /// De landpakketten (`privacy_eu_rules.dart`).
   ///
-  /// Ruim twintig van de dertig Europese nummers zijn zelfvalidereend, en een
+  /// Ruim twintig van de dertig Europese nummers zijn zelfvaliderend, en een
   /// checksum kóst geen precisie — hij wínt precisie. Daarom mogen ze allemaal
   /// aan staan. De handvol zonder bruikbare checksum draagt een contextwoordeis,
   /// precies zoals het BSN, en komt nooit hoger dan `likely`.

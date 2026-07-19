@@ -1,6 +1,6 @@
 // De checksums van de Europese persoonsnummers.
 //
-// Ruim twintig van de dertig Europese identificatienummers zijn zelfvalidereend:
+// Ruim twintig van de dertig Europese identificatienummers zijn zelfvaliderend:
 // mod-97, mod-11, ISO 7064, Luhn. Dat is de reden dat "heel Europa aanzetten"
 // verdedigbaar is — een checksum kost geen precisie, hij wínt precisie. De
 // handvol zonder bruikbare checksum (Deens CPR sinds 2007, Brits NINO, Malta,

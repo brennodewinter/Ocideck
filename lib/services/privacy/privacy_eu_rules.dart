@@ -1,7 +1,7 @@
 // De Europese landpakketten.
 //
 // Waarom "heel Europa" standaard aan mag staan: ruim twintig van de dertig
-// nummers zijn zelfvalidereend. Een checksum kóst geen precisie, hij wint
+// nummers zijn zelfvaliderend. Een checksum kóst geen precisie, hij wint
 // precisie — het aanzetten van het Kroatische OIB maakt de scanner niet luider,
 // alleen breder. De ruis zat nooit in de checksum-nummers maar in de handvol
 // zónder, en díé zijn contextpoort-gebonden, precies zoals het BSN dat is.
@@ -11,40 +11,12 @@
 
 import '../../models/privacy_finding.dart';
 import 'privacy_checksums_eu.dart';
-
-/// Eén nationaal identificatienummer.
-class EuIdentifierRule {
-  final String id;
-
-  /// ISO-landcode. Bepaalt of de regel meedraait bij het gekozen regiopakket.
-  final String country;
-
-  final RegExp pattern;
-
-  /// De checksum. Null = er ís er geen, en dan is een contextwoord verplicht.
-  final bool Function(String)? validate;
-
-  /// Woorden die in de buurt moeten staan wanneer er geen checksum is, of
-  /// wanneer de checksum te zwak is om alleen op af te gaan.
-  final List<String> contextWords;
-
-  /// Zonder checksum is het formaat geen bewijs: dan hooguit `likely`.
-  final PrivacyConfidence confidence;
-
-  const EuIdentifierRule({
-    required this.id,
-    required this.country,
-    required this.pattern,
-    this.validate,
-    this.contextWords = const [],
-    this.confidence = PrivacyConfidence.certain,
-  });
-}
+import 'privacy_national_rule.dart';
 
 /// De landpakketten. EU-27 plus EER, Zwitserland en het VK — decks reizen, en een
 /// Nederlandse organisatie ziet Britse en Zwitserse gegevens routinematig.
-final List<EuIdentifierRule> euIdentifierRules = [
-  EuIdentifierRule(
+final List<NationalIdentifierRule> euIdentifierRules = [
+  NationalIdentifierRule(
     id: 'be.rijksregister',
     country: 'BE',
     pattern: RegExp(
@@ -52,13 +24,13 @@ final List<EuIdentifierRule> euIdentifierRules = [
     ),
     validate: isValidBeRijksregister,
   ),
-  EuIdentifierRule(
+  NationalIdentifierRule(
     id: 'de.steuer_id',
     country: 'DE',
     pattern: RegExp(r'(?<!\d)\d{2}[\s]?\d{3}[\s]?\d{3}[\s]?\d{3}(?!\d)'),
     validate: isValidDeSteuerId,
   ),
-  EuIdentifierRule(
+  NationalIdentifierRule(
     id: 'fr.nir',
     country: 'FR',
     pattern: RegExp(
@@ -68,13 +40,13 @@ final List<EuIdentifierRule> euIdentifierRules = [
     ),
     validate: isValidFrNir,
   ),
-  EuIdentifierRule(
+  NationalIdentifierRule(
     id: 'es.dni',
     country: 'ES',
     pattern: RegExp(r'\b[XYZ]?\d{7,8}[-\s]?[A-Z]\b'),
     validate: isValidEsDniNie,
   ),
-  EuIdentifierRule(
+  NationalIdentifierRule(
     id: 'pt.nif',
     country: 'PT',
     pattern: RegExp(r'(?<!\d)\d{9}(?!\d)'),
@@ -83,37 +55,37 @@ final List<EuIdentifierRule> euIdentifierRules = [
     // met precies dezelfde ordernummers als het BSN.
     contextWords: ['nif', 'contribuinte', 'fiscal'],
   ),
-  EuIdentifierRule(
+  NationalIdentifierRule(
     id: 'pl.pesel',
     country: 'PL',
     pattern: RegExp(r'(?<!\d)\d{11}(?!\d)'),
     validate: isValidPlPesel,
   ),
-  EuIdentifierRule(
+  NationalIdentifierRule(
     id: 'it.codice_fiscale',
     country: 'IT',
     pattern: RegExp(r'\b[A-Z]{6}\d{2}[A-EHLMPR-T]\d{2}[A-Z]\d{3}[A-Z]\b'),
     validate: isValidItCodiceFiscale,
   ),
-  EuIdentifierRule(
+  NationalIdentifierRule(
     id: 'hr.oib',
     country: 'HR',
     pattern: RegExp(r'(?<!\d)\d{11}(?!\d)'),
     validate: isValidHrOib,
   ),
-  EuIdentifierRule(
+  NationalIdentifierRule(
     id: 'bg.egn',
     country: 'BG',
     pattern: RegExp(r'(?<!\d)\d{10}(?!\d)'),
     validate: isValidBgEgn,
   ),
-  EuIdentifierRule(
+  NationalIdentifierRule(
     id: 'ro.cnp',
     country: 'RO',
     pattern: RegExp(r'(?<!\d)[1-8]\d{12}(?!\d)'),
     validate: isValidRoCnp,
   ),
-  EuIdentifierRule(
+  NationalIdentifierRule(
     id: 'se.personnummer',
     country: 'SE',
     pattern: RegExp(r'(?<!\d)(?:19|20)?\d{6}[-+\s]?\d{4}(?!\d)'),
@@ -121,19 +93,19 @@ final List<EuIdentifierRule> euIdentifierRules = [
     // Luhn over tien cijfers is zwak: één op de tien willekeurige reeksen slaagt.
     contextWords: ['personnummer', 'personnr', 'pnr'],
   ),
-  EuIdentifierRule(
+  NationalIdentifierRule(
     id: 'fi.hetu',
     country: 'FI',
     pattern: RegExp(r'\b\d{6}[-+A]\d{3}[0-9A-Y]\b'),
     validate: isValidFiHetu,
   ),
-  EuIdentifierRule(
+  NationalIdentifierRule(
     id: 'ee.isikukood',
     country: 'EE',
     pattern: RegExp(r'(?<!\d)[1-6]\d{10}(?!\d)'),
     validate: isValidBalticPersonalCode,
   ),
-  EuIdentifierRule(
+  NationalIdentifierRule(
     id: 'uk.nhs',
     country: 'GB',
     pattern: RegExp(r'(?<!\d)\d{3}[\s-]?\d{3}[\s-]?\d{4}(?!\d)'),
@@ -142,7 +114,7 @@ final List<EuIdentifierRule> euIdentifierRules = [
     // telefoonnummer, een klantnummer en een ordernummer.
     contextWords: ['nhs', 'patient', 'patiënt'],
   ),
-  EuIdentifierRule(
+  NationalIdentifierRule(
     id: 'uk.nino',
     country: 'GB',
     pattern: RegExp(r'\b[A-Z]{2}[\s]?\d{2}[\s]?\d{2}[\s]?\d{2}[\s]?[A-D]\b'),
@@ -152,13 +124,13 @@ final List<EuIdentifierRule> euIdentifierRules = [
     confidence: PrivacyConfidence.likely,
   ),
   // ── Nummers met een eigen checksum ────────────────────────────────────────
-  EuIdentifierRule(
+  NationalIdentifierRule(
     id: 'at.svnr',
     country: 'AT',
     pattern: RegExp(r'(?<!\d)\d{10}(?!\d)'),
     validate: isValidAtSvnr,
   ),
-  EuIdentifierRule(
+  NationalIdentifierRule(
     id: 'ch.ahv',
     country: 'CH',
     // Altijd `756`, meestal met punten. Dat prefix doet hier het meeste
@@ -167,7 +139,7 @@ final List<EuIdentifierRule> euIdentifierRules = [
     pattern: RegExp(r'(?<![\d.])756[. ]?\d{4}[. ]?\d{4}[. ]?\d{2}(?![\d.])'),
     validate: isValidChAhv,
   ),
-  EuIdentifierRule(
+  NationalIdentifierRule(
     id: 'cz.rodne_cislo',
     country: 'CZ',
     // Ook met de schuine streep waarmee het meestal wordt geschreven.
@@ -177,13 +149,13 @@ final List<EuIdentifierRule> euIdentifierRules = [
     pattern: RegExp(r'(?<!\d)\d{6}/?\d{4}(?!\d)'),
     validate: isValidCzSkRodneCislo,
   ),
-  EuIdentifierRule(
+  NationalIdentifierRule(
     id: 'gr.amka',
     country: 'GR',
     pattern: RegExp(r'(?<!\d)\d{11}(?!\d)'),
     validate: isValidGrAmka,
   ),
-  EuIdentifierRule(
+  NationalIdentifierRule(
     id: 'hu.taj',
     country: 'HU',
     pattern: RegExp(r'(?<!\d)\d{3}[ -]?\d{3}[ -]?\d{3}(?!\d)'),
@@ -201,26 +173,26 @@ final List<EuIdentifierRule> euIdentifierRules = [
     contextWords: ['taj', 'társadalombiztosítási', 'tb-szám', 'taj-szám'],
     confidence: PrivacyConfidence.likely,
   ),
-  EuIdentifierRule(
+  NationalIdentifierRule(
     id: 'ie.pps',
     country: 'IE',
     pattern: RegExp(r'\b\d{7}[A-W]{1,2}\b'),
     validate: isValidIePps,
   ),
-  EuIdentifierRule(
+  NationalIdentifierRule(
     id: 'no.fodselsnummer',
     country: 'NO',
     pattern: RegExp(r'(?<!\d)\d{6}[ ]?\d{5}(?!\d)'),
     validate: isValidNoFodselsnummer,
   ),
-  EuIdentifierRule(
+  NationalIdentifierRule(
     id: 'si.emso',
     country: 'SI',
     pattern: RegExp(r'(?<!\d)\d{13}(?!\d)'),
     validate: isValidSiEmso,
   ),
   // ── En het nummer zonder checksum ─────────────────────────────────────────
-  EuIdentifierRule(
+  NationalIdentifierRule(
     id: 'dk.cpr',
     country: 'DK',
     pattern: RegExp(r'(?<!\d)\d{6}-?\d{4}(?!\d)'),
