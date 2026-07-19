@@ -1821,6 +1821,19 @@ const _dutchSourceAddGa = <String, String>{
   'beveiligingscode van een creditcard': 'cód slándála cárta (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
       'sonraí i nótaí an chainteora — dofheicthe ar an sleamhnán, ach easpórtáiltear iad',
+  'Certificaat vertrouwen?': 'Muinín as an teastas seo?',
+  'Het certificaat van deze server is niet ondertekend door een erkende uitgever. Dat is gewoon bij een zelf gehoste server, maar het is ook hoe een afgeluisterde verbinding eruitziet.':
+      'Níl teastas an fhreastalaí seo sínithe ag eisitheoir aitheanta. Tá sin gnách i gcás freastalaí féin-óstáilte, ach sin an chuma a bhíonn ar nasc idircheaptha freisin.',
+  'Vergelijk de vingerafdruk hieronder met wat je server zelf toont. Komen ze overeen, dan praat je met de juiste machine.':
+      'Cuir an mhéarlorg thíos i gcomparáid leis an gceann a thaispeánann do fhreastalaí féin. Má tá siad mar an gcéanna, tá tú ag caint leis an meaisín ceart.',
+  'Uitgegeven aan': 'Eisithe chuig',
+  'Uitgegeven door': 'Eisithe ag',
+  'Geldig tot': 'Bailí go dtí',
+  'Vingerafdruk (SHA-256)': 'Méarlorg (SHA-256)',
+  'Alleen dit ene certificaat wordt vertrouwd. Vervangt de server het later, dan vraagt OciDeck het opnieuw.':
+      'Ní chuirtear muinín ach sa teastas seo amháin. Má chuireann an freastalaí ceann eile ina áit, fiafróidh OciDeck arís.',
+  'Vertrouwen': 'Muinín',
+  'Certificaat bekijken': 'Féach ar an teastas',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Tá ainmneacha galar in easnamh do theanga an deic seo. Aithnítear reiligiún, tuairim pholaitiúil agus téarmaí ceardchumainn, agus oibríonn patrúin le digit seiceála (PPS, IBAN, pas) i gcónaí — ach ná bí ag brath ar dhiagnóis a aimsiú.',
   'niet getest': 'gan tástáil',

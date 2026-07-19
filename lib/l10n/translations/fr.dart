@@ -742,6 +742,19 @@ const _dutchSourceAddFr = {
   'beveiligingscode van een creditcard': 'code de sécurité de la carte (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
       'données dans les notes de l\'orateur — invisibles sur la diapositive, mais exportées',
+  'Certificaat vertrouwen?': 'Faire confiance à ce certificat ?',
+  'Het certificaat van deze server is niet ondertekend door een erkende uitgever. Dat is gewoon bij een zelf gehoste server, maar het is ook hoe een afgeluisterde verbinding eruitziet.':
+      'Le certificat de ce serveur n\'est pas signé par une autorité reconnue. C\'est normal pour un serveur auto-hébergé, mais c\'est aussi à quoi ressemble une connexion interceptée.',
+  'Vergelijk de vingerafdruk hieronder met wat je server zelf toont. Komen ze overeen, dan praat je met de juiste machine.':
+      'Comparez l\'empreinte ci-dessous avec celle qu\'affiche votre serveur. Si elles correspondent, vous parlez à la bonne machine.',
+  'Uitgegeven aan': 'Délivré à',
+  'Uitgegeven door': 'Délivré par',
+  'Geldig tot': 'Valable jusqu\'au',
+  'Vingerafdruk (SHA-256)': 'Empreinte (SHA-256)',
+  'Alleen dit ene certificaat wordt vertrouwd. Vervangt de server het later, dan vraagt OciDeck het opnieuw.':
+      'Seul ce certificat est approuvé. Si le serveur le remplace plus tard, OciDeck redemandera.',
+  'Vertrouwen': 'Faire confiance',
+  'Certificaat bekijken': 'Afficher le certificat',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Les noms de maladies manquent pour la langue de cette présentation. La religion, l\'opinion politique et les termes syndicaux sont reconnus, et les motifs à chiffre de contrôle (NIR, IBAN, passeport) fonctionnent toujours — mais ne comptez pas sur la détection d\'un diagnostic.',
   'niet getest': 'non testée',

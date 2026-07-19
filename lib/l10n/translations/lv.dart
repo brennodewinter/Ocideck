@@ -1784,6 +1784,19 @@ const _dutchSourceAddLv = <String, String>{
   'beveiligingscode van een creditcard': 'kartes drošības kods (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
       'dati runātāja piezīmēs — slaidā neredzami, bet nonāk eksportā',
+  'Certificaat vertrouwen?': 'Uzticēties šim sertifikātam?',
+  'Het certificaat van deze server is niet ondertekend door een erkende uitgever. Dat is gewoon bij een zelf gehoste server, maar het is ook hoe een afgeluisterde verbinding eruitziet.':
+      'Šī servera sertifikātu nav parakstījis atzīts izdevējs. Pašmitinātam serverim tas ir normāli, taču tieši tā izskatās arī pārtverts savienojums.',
+  'Vergelijk de vingerafdruk hieronder met wat je server zelf toont. Komen ze overeen, dan praat je met de juiste machine.':
+      'Salīdziniet zemāk redzamo nospiedumu ar to, ko rāda pats jūsu serveris. Ja tie sakrīt, jūs sarunājaties ar pareizo mašīnu.',
+  'Uitgegeven aan': 'Izdots',
+  'Uitgegeven door': 'Izdevējs',
+  'Geldig tot': 'Derīgs līdz',
+  'Vingerafdruk (SHA-256)': 'Nospiedums (SHA-256)',
+  'Alleen dit ene certificaat wordt vertrouwd. Vervangt de server het later, dan vraagt OciDeck het opnieuw.':
+      'Uzticēšanās attiecas tikai uz šo vienu sertifikātu. Ja serveris to vēlāk nomainīs, OciDeck jautās vēlreiz.',
+  'Vertrouwen': 'Uzticēties',
+  'Certificaat bekijken': 'Skatīt sertifikātu',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Šīs prezentācijas valodai trūkst slimību nosaukumu. Reliģija, politiskā pārliecība un arodbiedrību termini tiek atpazīti, un raksti ar kontrolciparu (personas kods, IBAN, pase) darbojas vienmēr — bet nepaļaujieties, ka tiks atrasta diagnoze.',
   'niet getest': 'nav pārbaudīts',

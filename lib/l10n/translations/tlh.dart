@@ -1760,6 +1760,19 @@ const _dutchSourceAddTlh = <String, String>{
   'beveiligingscode van een creditcard': 'HuchQeD Hurgh mI\'',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
       'jatlhwI\' qawHaq De\' — HaSta legh lu\'be\', \'ach nge\'lu\'',
+  'Certificaat vertrouwen?': 'teywI\' vam yIvoq\'a\'?',
+  'Het certificaat van deze server is niet ondertekend door een erkende uitgever. Dat is gewoon bij een zelf gehoste server, maar het is ook hoe een afgeluisterde verbinding eruitziet.':
+      'pat vam teywI\' Sovbogh nuvpu\' qImHa\'. pat Daghajbogh vaj motlh, \'ach \'ejyo\' rar rur je.',
+  'Vergelijk de vingerafdruk hieronder met wat je server zelf toont. Komen ze overeen, dan praat je met de juiste machine.':
+      'bIng nItlhDu\' Segh pat cha\'bogh yIrar. rap chugh, jonwI\' lugh yIja\'.',
+  'Uitgegeven aan': 'noblu\'bogh',
+  'Uitgegeven door': 'nobwI\'',
+  'Geldig tot': 'poH ngeD',
+  'Vingerafdruk (SHA-256)': 'nItlhDu\' Segh (SHA-256)',
+  'Alleen dit ene certificaat wordt vertrouwd. Vervangt de server het later, dan vraagt OciDeck het opnieuw.':
+      'teywI\' vam neH voqlu\'. tugh choHchugh pat, OciDeck tlhob je.',
+  'Vertrouwen': 'yIvoq',
+  'Certificaat bekijken': 'teywI\' yIlegh',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'vam Hol rop pong tu\'lu\'be\'. lalDan, woQ qeS, ghom mu\' je luleghlu\', \'ej mI\' toblu\'ta\' (BSN, IBAN, nav) reH vumtaH — \'ach rop ngu\' tu\'lu\'meH Qob.',
   'niet getest': 'wIvbe\'',

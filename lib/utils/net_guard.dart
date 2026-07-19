@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:crypto/crypto.dart';
+
 import 'log.dart';
 
 /// Waarom een hostcontrole geen adressen opleverde.
@@ -263,6 +265,78 @@ class NetGuard {
   ///
   /// [onBadCertificate] is de enige plek waar een afgewezen certificaat alsnog
   /// door mag. `null` betekent: geen enkele uitzondering.
+  /// Bouw de certificaatcontrole voor een verbinding met [pinnedSha256].
+  ///
+  /// Geeft `null` wanneer er geen pin is — en `null` betekent bij
+  /// [connectPinned] geen enkele uitzondering, dus dan geldt gewoon de
+  /// normale keten van erkende uitgevers.
+  ///
+  /// Staat er wél een pin, dan wordt uitsluitend dát ene certificaat
+  /// geaccepteerd, vergeleken op de SHA-256 van zijn DER-vorm. Niet op naam,
+  /// niet op uitgever, niet op geldigheidsduur: die kan een aanvaller allemaal
+  /// kiezen. De vingerafdruk kan hij alleen kloppend krijgen door de
+  /// bijbehorende privésleutel te hebben.
+  ///
+  /// Verlengt de server zijn certificaat, dan klopt de pin niet meer en faalt
+  /// de verbinding — waarna de gebruiker de nieuwe vingerafdruk opnieuw moet
+  /// bevestigen. Dat is bedoeld: een vernieuwd certificaat en een aanvaller
+  /// zien er van hier af precies hetzelfde uit, dus die keuze hoort bij de
+  /// mens die de server kent.
+  static bool Function(X509Certificate)? pinnedCertCheck(String pinnedSha256) {
+    final expected = pinnedSha256.trim().toLowerCase();
+    if (expected.isEmpty) return null;
+    return (cert) {
+      final actual = sha256.convert(cert.der).toString().toLowerCase();
+      // Vergelijking in constante tijd is hier niet nodig: de vingerafdruk is
+      // openbaar, er valt niets uit te lekken.
+      final ok = actual == expected;
+      if (!ok) {
+        logWarning(
+          'NetGuard: certificaat wijkt af van de vastgelegde vingerafdruk',
+        );
+      }
+      return ok;
+    };
+  }
+
+  /// De vingerafdruk van [cert], zoals hij wordt vastgelegd en getoond.
+  static String certificateFingerprint(X509Certificate cert) =>
+      sha256.convert(cert.der).toString().toLowerCase();
+
+  /// Haal het certificaat op dat [uri] aanbiedt, zónder het te vertrouwen.
+  ///
+  /// Voor de bevestigingsstap: de gebruiker moet kunnen zien wát hij zou
+  /// gaan vertrouwen voordat hij dat doet. De verbinding wordt altijd
+  /// afgebroken — deze functie praat nooit met de server, ze kijkt alleen wie
+  /// er opneemt. Geeft `null` als het certificaat gewoon in orde was (dan is
+  /// er niets te bevestigen) of als er helemaal geen TLS tot stand kwam.
+  static Future<X509Certificate?> peekCertificate(
+    InternetAddress pinned,
+    Uri uri,
+  ) async {
+    X509Certificate? seen;
+    final task = await Socket.startConnect(pinned, uri.port);
+    final socket = await task.socket;
+    try {
+      final secured = await SecureSocket.secure(
+        socket,
+        host: uri.host,
+        onBadCertificate: (cert) {
+          seen = cert;
+          return false; // nooit doorlaten; we kijken alleen
+        },
+      ).timeout(const Duration(seconds: 15));
+      // Het certificaat was in orde: er valt niets vast te leggen.
+      secured.destroy();
+      return null;
+    } catch (e) {
+      // Verwacht: de handshake strandt doordat wij hem afwijzen.
+      logWarning('NetGuard.peekCertificate: handshake afgebroken', e);
+      socket.destroy();
+      return seen;
+    }
+  }
+
   static Future<ConnectionTask<Socket>> connectPinned(
     InternetAddress pinned,
     Uri uri, {

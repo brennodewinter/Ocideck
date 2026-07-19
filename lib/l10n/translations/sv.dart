@@ -1784,6 +1784,19 @@ const _dutchSourceAddSv = <String, String>{
   'beveiligingscode van een creditcard': 'kortets säkerhetskod (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
       'data i anteckningarna — osynliga på bilden, men med i exporten',
+  'Certificaat vertrouwen?': 'Lita på det här certifikatet?',
+  'Het certificaat van deze server is niet ondertekend door een erkende uitgever. Dat is gewoon bij een zelf gehoste server, maar het is ook hoe een afgeluisterde verbinding eruitziet.':
+      'Serverns certifikat är inte signerat av en erkänd utfärdare. Det är normalt för en egen server, men det är också så en avlyssnad anslutning ser ut.',
+  'Vergelijk de vingerafdruk hieronder met wat je server zelf toont. Komen ze overeen, dan praat je met de juiste machine.':
+      'Jämför fingeravtrycket nedan med det som din server själv visar. Stämmer de överens pratar du med rätt maskin.',
+  'Uitgegeven aan': 'Utfärdat till',
+  'Uitgegeven door': 'Utfärdat av',
+  'Geldig tot': 'Giltigt till',
+  'Vingerafdruk (SHA-256)': 'Fingeravtryck (SHA-256)',
+  'Alleen dit ene certificaat wordt vertrouwd. Vervangt de server het later, dan vraagt OciDeck het opnieuw.':
+      'Endast just detta certifikat betros. Byter servern ut det senare frågar OciDeck igen.',
+  'Vertrouwen': 'Lita på',
+  'Certificaat bekijken': 'Visa certifikat',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Sjukdomsnamn saknas för det här däckets språk. Religion, politisk uppfattning och fackliga termer känns igen, och mönster med kontrollsiffra (personnummer, IBAN, pass) fungerar alltid — men räkna inte med att en diagnos hittas.',
   'niet getest': 'inte testad',

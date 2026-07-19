@@ -1813,6 +1813,19 @@ const _dutchSourceAddEl = <String, String>{
   'beveiligingscode van een creditcard': 'κωδικός ασφαλείας κάρτας (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
       'δεδομένα στις σημειώσεις ομιλητή — αόρατα στη διαφάνεια, αλλά εξάγονται',
+  'Certificaat vertrouwen?': 'Εμπιστοσύνη σε αυτό το πιστοποιητικό;',
+  'Het certificaat van deze server is niet ondertekend door een erkende uitgever. Dat is gewoon bij een zelf gehoste server, maar het is ook hoe een afgeluisterde verbinding eruitziet.':
+      'Το πιστοποιητικό αυτού του διακομιστή δεν έχει υπογραφεί από αναγνωρισμένο εκδότη. Αυτό είναι φυσιολογικό σε αυτο-φιλοξενούμενο διακομιστή, αλλά έτσι φαίνεται και μια υποκλαπείσα σύνδεση.',
+  'Vergelijk de vingerafdruk hieronder met wat je server zelf toont. Komen ze overeen, dan praat je met de juiste machine.':
+      'Σύγκρινε το αποτύπωμα παρακάτω με αυτό που δείχνει ο ίδιος ο διακομιστής σου. Αν ταιριάζουν, μιλάς με τη σωστή μηχανή.',
+  'Uitgegeven aan': 'Εκδόθηκε για',
+  'Uitgegeven door': 'Εκδόθηκε από',
+  'Geldig tot': 'Ισχύει έως',
+  'Vingerafdruk (SHA-256)': 'Αποτύπωμα (SHA-256)',
+  'Alleen dit ene certificaat wordt vertrouwd. Vervangt de server het later, dan vraagt OciDeck het opnieuw.':
+      'Μόνο αυτό το πιστοποιητικό γίνεται έμπιστο. Αν ο διακομιστής το αντικαταστήσει αργότερα, το OciDeck θα ρωτήσει ξανά.',
+  'Vertrouwen': 'Εμπιστεύομαι',
+  'Certificaat bekijken': 'Προβολή πιστοποιητικού',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Για τη γλώσσα αυτής της παρουσίασης λείπουν τα ονόματα ασθενειών. Η θρησκεία, η πολιτική άποψη και οι συνδικαλιστικοί όροι αναγνωρίζονται, και τα μοτίβα με ψηφίο ελέγχου (ΑΜΚΑ, IBAN, διαβατήριο) λειτουργούν πάντα — αλλά μη βασίζεστε στον εντοπισμό διάγνωσης.',
   'niet getest': 'μη δοκιμασμένη',

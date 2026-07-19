@@ -195,8 +195,11 @@ class S3Service {
     final pinned = resolved.addresses!.first;
     return HttpClient()
       ..connectionTimeout = const Duration(seconds: 15)
-      ..connectionFactory = (u, proxyHost, proxyPort) =>
-          NetGuard.connectPinned(pinned, u);
+      ..connectionFactory = (u, proxyHost, proxyPort) => NetGuard.connectPinned(
+        pinned,
+        u,
+        onBadCertificate: NetGuard.pinnedCertCheck(bucket.pinnedCertSha256),
+      );
   }
 
   /// De `Host`-header zoals `HttpClient` hem zal versturen. Moet exact zo mee
