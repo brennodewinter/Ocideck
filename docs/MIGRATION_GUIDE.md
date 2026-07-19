@@ -1,164 +1,79 @@
 # OciDeck — Migration Guide
 
-This document provides guidance for migrating between different versions of OciDeck, including breaking changes and recommended procedures.
+## There is nothing to migrate between yet
 
-## Overview
+OciDeck has **never tagged a release**. `git tag` is empty, `pubspec.yaml` says
+`0.2.0+1`, and there is no versioning or release scheme. There are no numbered
+versions, so there are no migration paths between them, no release notes, and no
+conversion tooling.
 
-OciDeck follows semantic versioning to help users understand the impact of updates. This guide outlines migration paths from previous versions to newer ones, helping maintain continuity in workflows while adopting new features.
+Until that changes, this document records only what is true today: what the app
+migrates on its own, and the rules that migration follows.
 
-> **Status:** OciDeck is **pre-release (currently 0.2.0) and has no formal
-> versioning or release scheme yet** — there are no numbered releases to migrate
-> between today. The version-specific sections below are **illustrative
-> placeholders** showing the shape of the migration notes real releases will
-> carry once versioning begins (breaking-change summary, migration steps,
-> rollback). Treat the "1.x/2.x/3.x" headings as examples of the format, not as
-> versions that exist. This guide will be rewritten with concrete steps when the
-> project adopts a release scheme.
+> An earlier version of this guide described migrations from "1.x to 2.x" and
+> "2.x to 3.x", automated file-format converters, theme-profile migration tools,
+> and community support forums. None of those existed. The guide was generated
+> boilerplate; it is replaced here with the real picture. Corrected 2026-07-19.
 
-## Version 1.x to 2.x Migration (illustrative — no such release exists)
+## What does migrate: stored settings
 
-### Breaking Changes
+Deck files and theme profiles need no migration — see below. What does change
+shape between builds is the app's own stored settings, in `SharedPreferences`.
+Those migrations run silently at startup; a user never sees them and has nothing
+to do.
 
-#### File Format Updates
-- Updated Markdown format with enhanced TLP handling
-- New privacy disposition fields in front matter  
-- Enhanced classification enforcement policies
-- Updated `.ocideckstyle` file format (version 2.0)
+The one that exists today is in
+`lib/state/parts/settings_provider_connections.dart`: the old separate `libraries`, `homeDirectory`, `webdavServer` and `gitRepo` keys
+are folded into one ordered `storageConnections` list. Libraries come first in
+their existing order, then WebDAV, then git — so whatever was the default before
+is still the default after.
 
-#### API Changes
-- `MarkdownService` interface modifications for better error handling
-- Changed `ExportBundle` structure to support new audience profiles
-- Updated privacy projection APIs with stricter enforcement
+## The rules these migrations follow
 
-### Migration Steps
+These are the conventions to keep to when you add the next one. They are the
+reason the code looks the way it does, and they are not obvious from reading it.
 
-1. **Backup All Presentations**: Create backups of all decks before updating
-2. **Update Dependencies**: Ensure Flutter/Dart toolchain matches requirements  
-3. **Test Import Process**: Open a few sample decks in the new version to verify compatibility
-4. **Review TLP Settings**: Re-examine deck classification levels as enforcement has been strengthened
-5. **Verify Privacy Settings**: Check that privacy disposition settings are properly applied
+**Migrate on read, persist on first write.** `_loadConnections` computes the
+migrated list but does not save it. The legacy keys stay on disk until the user
+actually changes something. That is what makes downgrading to an older build
+safe for anyone who has not touched the settings yet.
 
-## Version 2.x to 3.x Migration (illustrative — no such release exists)
+**An emptied list is a decision, not an absence.** If the new key exists but
+holds nothing, the user deleted everything. Migrating again would resurrect it
+at every launch. Distinguish "key missing" from "key empty".
 
-### Breaking Changes
+**Never rename a persisted key just to tidy up.** The info-safety module's key
+is still `secModuleEnabled` even though every identifier around it was renamed —
+see `lib/state/info_safety_provider.dart`. Renaming it would flip the toggle off for everyone who had switched it on, and
+nobody would report it, because it looks exactly like the module was never
+enabled. If you want the names aligned, write the migration that reads the old
+key first.
 
-#### Security Enhancements
-- New stricter network security gates (NetGuard)
-- Enhanced privacy scanning with new redaction options  
-- Updated classification enforcement policies
-- Improved asset path containment rules
+**Pick defaults that preserve the old meaning.** `WebdavServer.kind` defaults to
+`nextcloud` because Nextcloud was the only option before other servers were
+supported. Stored records that predate the field therefore keep working without
+any migration at all. A default chosen this way is cheaper than a migration.
 
-#### Feature Removals and Additions
-- Removed legacy slide types that were rarely used
-- Added support for new chart visualizations 
-- Enhanced AI integration capabilities
+**Remove orphan keys on load.** When a feature is dropped, its key should be
+deleted when encountered, so an upgraded install does not carry it forever.
 
-### Migration Steps
+## Deck files and theme profiles
 
-1. **Review Security Settings**: Update any security configurations to match new requirements  
-2. **Test Network Access**: Verify that external URL imports still work correctly with new restrictions
-3. **Update Privacy Policies**: Review and update privacy classification policies
-4. **Validate Export Settings**: Test all export operations, especially those involving sensitive content
+Deck `.md` files and `.ocideckstyle` profiles carry no format version, and there
+are no converters. Format changes so far have been additive: new front-matter
+fields that older builds ignore and newer builds default. An older deck opens in
+a newer build.
 
-## Migration Best Practices
+This holds only as long as changes stay additive. The first change that does not
+is the point at which this project needs a real format version and a real
+migration path — and that decision belongs in
+[FILE_FORMAT.md](FILE_FORMAT.md), documented before it ships, not after.
 
-### Before Updating
-1. **Create Comprehensive Backups**:
-   - Backup all presentation files (.md)
-   - Save custom theme profiles (`.ocideckstyle`)  
-   - Document any custom configurations or workflows
-2. **Review Current Version**: Note current version and configuration settings
-3. **Test Environment**: Set up test environment with new version for verification
+## When there is a release scheme
 
-### During Update Process
-1. **Incremental Migration**:
-   - Migrate one presentation at a time to verify compatibility
-   - Test critical workflow scenarios after each migration  
-2. **Validation Testing**:
-   - Check that all slides render correctly
-   - Verify export functionality works as expected
-3. **Feature Verification**: Ensure new features work according to documentation
+Once versions are actually tagged, this document becomes the place to record,
+per release: what breaks, what the user must do, and how to go back. Written at
+the time the breaking change lands, not reconstructed later.
 
-### After Update Completion
-1. **Full Validation Suite**:
-   - Run through typical workflows with full presentation testing  
-   - Validate privacy and security settings are functioning correctly
-2. **Performance Testing**: Check that performance characteristics match expectations
-3. **Documentation Update**: Update any internal documentation or processes  
-
-## Handling Specific Issues
-
-### File Format Incompatibilities
-
-If older files don't open properly:
-1. Use the "Recover" feature for corrupted files (if available)
-2. Manual backup restoration from previous version if needed  
-3. Recreate critical presentations using new format specifications
-4. Contact support with detailed error information if problems persist
-
-### Security Gate Issues  
-
-When encountering network security restrictions:
-- Review NetGuard settings and update configurations as needed
-- Configure trusted internal servers properly for WebDAV connections  
-- Understand the stricter enforcement of external access policies
-
-### Privacy Enforcement Problems
-
-If privacy enforcement prevents expected functionality:
-1. Check TLP classification levels in decks
-2. Verify that required permissions are set appropriately  
-3. Review privacy disposition settings on slides and decks
-4. Consult updated documentation on new privacy features
-
-## Automated Migration Tools
-
-OciDeck provides migration assistance for major version changes:
-
-### File Format Converters
-- Automatic conversion of older Markdown format to current specification
-- Theme profile migration tools (`.ocideckstyle`)
-- Backward compatibility layer for some legacy features
-
-### Configuration Migration
-- Settings preservation across versions  
-- Automatic cleanup of deprecated configuration options
-
-## Version-Specific Considerations
-
-### For Desktop Users
-1. **File System Permissions**: Ensure proper access to project directories after update
-2. **Plugin Updates**: Check that vendored plugin forks are compatible with new version
-3. **Hardware Compatibility**: Verify system requirements for newer features
-
-### For Web Users  
-1. **Browser Requirements**: Confirm browser support for new web APIs
-2. **CSP Configuration**: Ensure Content Security Policy settings remain effective
-3. **Proxy Setup**: Validate fetch-proxy configuration if using external decks
-
-## Rolling Back to Previous Versions
-
-In case of critical issues:
-1. Use versioned backups created before update  
-2. Uninstall current version and install previous compatible version
-3. Restore from backup files (ensure they are compatible with older version)
-4. Document the rollback for future reference  
-
-## Support Resources
-
-For migration assistance or specific issues:
-- Community forums and support channels
-- Official documentation updates 
-- The project's issue tracker (Forgejo) for bug reports
-- Release notes detailing breaking changes
-
-## Future Migration Considerations
-
-### Planned Migration Paths
-The development team plans to make future migrations smoother by:
-1. Providing clearer migration tooling  
-2. Maintaining backward compatibility for major features
-3. Adding comprehensive auto-conversion tools where possible
-4. Documenting breaking changes in advance of releases
-
-This guide will be updated with each version release to reflect current and upcoming migration considerations.
+Bugs and questions go to the project's issue tracker (Forgejo). There is no
+community forum, no support channel, and no mailing list.

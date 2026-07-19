@@ -30,7 +30,7 @@ documentation. Start here and jump to what you need.
 | [BUILD.md](BUILD.md) | Build targets and the version pin. |
 | [CHECKS.md](CHECKS.md) | The quality gates (`make check`) and what each enforces. |
 | [PERFORMANCE_GUIDE.md](PERFORMANCE_GUIDE.md) | Enforced limits, measured sizes, and optimisation tips. |
-| [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) | Migration format template (no numbered releases exist yet). |
+| [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) | What the app migrates by itself (settings), and the rules for adding the next one. No releases are tagged yet. |
 
 ## For operators & compliance
 
