@@ -855,6 +855,52 @@ range, the card schemes' test numbers, `example.com` addresses, the reserved
 none of them belong to anyone, and a deck that lights up red on its own demo
 content destroys your trust in every other finding.
 
+### Which countries it knows
+
+The check is not limited to Europe. It knows the national identification numbers
+of the EU-27, the EEA, Switzerland and the UK, and beyond that the United States,
+Canada, Australia, India, Brazil, South Africa, Curaçao and Aruba. **All of them
+are on by default.**
+
+That last part is a deliberate decision rather than a convenience. Turning a
+country pack on costs almost nothing in noise, because every rule carries either
+a checksum or a context-word gate — a Brazilian CPF has two independent mod-11
+checks, and a US social security number says nothing at all unless the words
+"SSN" or "social security" stand next to it. But the reason it *must* be on by
+default is not technical. Protection should not depend on whether the author knew
+there was a checkbox. Whoever opens a deck with American or South African
+personal data in it needs the check most at the moment they are least likely to
+think of it.
+
+You can still switch individual countries off under *Settings → Security* if a
+pack turns out to be noisy for your work.
+
+### Why the yardstick is the GDPR, not the local law
+
+For countries outside Europe, OciDeck deliberately does not follow the local
+definition of personal data. US law, for instance, is sectoral — different rules
+for health, for finance, for education — and works from an *enumerated* list.
+The GDPR works from an open norm: any information relating to an identifiable
+natural person.
+
+That difference is not academic; it changes what gets flagged:
+
+- **Health identifiers count as special-category data.** A Medicare number or a
+  provider number is routine administration in the US and Australia. Under the
+  GDPR it is data concerning health, and OciDeck treats it that way.
+- **A masked number is still a number.** "Last 4 of SSN" passes as adequately
+  masked in American practice. Under an open norm those four digits, next to a
+  name or a date of birth, still point at one person — so `XXX-XX-1234` is
+  reported.
+- **A tax number can say more than tax.** A US ITIN identifies someone who pays
+  tax without being entitled to a social security number, which touches on
+  residence status.
+
+The reverse also applies. An Indian PAN encodes the *kind* of holder in its
+fourth letter, and only one of those values means a natural person — so a
+company's PAN is not reported at all. Being right about what is personal data
+cuts both ways.
+
 ### A special-category datum is a statement, not a word
 
 When health, criminal, religious or union data is traceable to a person on the

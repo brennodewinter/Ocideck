@@ -4,13 +4,12 @@
 // plaats van een voorbeeld. Bij een checksumnummer is dat niet alleen netter
 // maar ook eerlijker — het toetst het algoritme, niet mijn geheugen ervan.
 //
-// Voor `ca.ohip` doet die keuze extra werk. Of het tiende cijfer werkelijk een
-// Luhn-controle is, heb ik niet tegen een gezaghebbende bron kunnen leggen; de
-// bewering circuleert wel. De test hieronder stelt daarom vast dát de
-// implementatie discrimineert (precies één controlecijfer past), en niet dat
-// Luhn het juiste algoritme ís. Zolang dat open staat draagt de regel een
-// contextpoort en blijft hij op `likely`, zodat een verkeerde keuze hooguit
-// treffers mist in plaats van valse zekerheid produceert.
+// Voor `ca.ohip` doet die keuze extra werk, en daar is het inmiddels een besluit
+// geworden: er ís geen gezaghebbende bron voor de bewering dat het tiende cijfer
+// een Luhn-controle is. De regel blijft daarom op `likely` met een contextpoort,
+// zodat een verkeerd gekozen algoritme hooguit treffers mist in plaats van valse
+// zekerheid te produceren. De test stelt vast dát de implementatie
+// discrimineert — precies één controlecijfer past — en niet dat Luhn klopt.
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
