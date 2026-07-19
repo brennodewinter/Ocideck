@@ -1789,10 +1789,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Repareer slide': 'Taisyti skaidrę',
   'Voortzetting van vorige slide': 'Ankstesnės skaidrės tęsinys',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
       'Ši skaidrė priklauso ankstesnės skaidrės sąrašui, todėl dalijasi vienu šrifto dydžiu – pilniausio puslapio.',
-  'Losmaken': 'Atskirti',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Ši skaidrė rodoma {klein} projektinio dydžio, o ne {eigen}, nes ji dalijasi padalyta seka su daug pilnesne skaidre {pagina}.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

@@ -1756,10 +1756,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Repareer slide': '\'echletHom yItI\'',
   'Voortzetting van vorige slide': '\'echletHom wa\'DIch chu\'Ha\'',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
       '\'echletHom wa\'DIch tetlh tlhej \'echletHomvam; vaj wa\' ghItlh \'ar lulo\'chuq — \'echletHom buy\'qu\' \'ar.',
-  'Losmaken': 'yIchIm',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'nab\'a\' Sach {eigen} \'oHbe\'; {klein} neH \'oH. {pagina} \'echletHom buy\'qu\' tlhej rarlu\'pu\'mo\' qaS.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

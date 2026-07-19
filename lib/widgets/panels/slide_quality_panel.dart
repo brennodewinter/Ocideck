@@ -128,7 +128,7 @@ class SlideQualitySummaryChip extends ConsumerWidget {
   }
 }
 
-/// De losmaak-knop naast de Kwaliteit-chip, zichtbaar zodra de slide die je nu
+/// De repareerknop naast de Kwaliteit-chip, zichtbaar zodra de slide die je nu
 /// bewerkt klein wordt gerenderd doordat hij een gesplitste reeks deelt met een
 /// veel vollere pagina.
 ///
@@ -157,7 +157,8 @@ class SplitRunDetachChip extends ConsumerWidget {
     if (action == null) return const SizedBox.shrink();
 
     // De volledige uitleg zit in de tooltip: in de kopregel is geen ruimte voor
-    // twee zinnen, maar zonder het waaróm is losmaken een sprong in het duister.
+    // twee zinnen, maar zonder het waaróm is repareren een sprong in het duister
+    // — en de knop noemt niet wat hij precies losmaakt.
     return Tooltip(
       message: '${action.label}\n\n${formatSlideQualityIssue(l10n, issue)}',
       child: InkWell(
@@ -171,7 +172,7 @@ class SplitRunDetachChip extends ConsumerWidget {
               Icon(action.icon, size: 14, color: AppTheme.dangerFg),
               const SizedBox(width: 5),
               Text(
-                l10n.d('Losmaken'),
+                l10n.d('Repareer slide'),
                 style: TextStyle(
                   fontSize: 11.5,
                   color: AppTheme.dangerFg,

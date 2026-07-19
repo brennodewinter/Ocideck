@@ -1788,10 +1788,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Repareer slide': 'Popravi slajd',
   'Voortzetting van vorige slide': 'Nastavak prethodnog slajda',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
       'Ovaj slajd pripada popisu prethodnog slajda i stoga dijeli jednu veličinu slova: onu najpunijeg slajda.',
-  'Losmaken': 'Odvoji',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Ovaj se slajd prikazuje na {klein} projektne veličine umjesto {eigen} jer dijeli podijeljeni niz s mnogo punijim slajdom {pagina}.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

@@ -734,10 +734,10 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Repareer slide': 'Correggi diapositiva',
   'Voortzetting van vorige slide': 'Continuazione della diapositiva precedente',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
       'Questa diapositiva fa parte dell\'elenco della diapositiva precedente e ne condivide quindi la dimensione del carattere: quella della pagina più piena.',
-  'Losmaken': 'Stacca',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Questa diapositiva viene resa al {klein} della dimensione di progetto anziché al {eigen}, perché condivide una sequenza divisa con la diapositiva {pagina}, molto più piena.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

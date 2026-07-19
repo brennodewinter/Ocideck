@@ -1772,10 +1772,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Repareer slide': 'Paranda slaid',
   'Voortzetting van vorige slide': 'Eelmise slaidi jätk',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
       'See slaid kuulub eelmise slaidi loendisse ja jagab seetõttu ühte kirjasuurust – kõige täidetuma lehekülje oma.',
-  'Losmaken': 'Eralda',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'See slaid kuvatakse {klein} kavandatud suurusest {eigen} asemel, sest see jagab jaotatud jada palju täidetuma slaidiga {pagina}.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

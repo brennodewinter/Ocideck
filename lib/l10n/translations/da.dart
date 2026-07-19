@@ -1780,10 +1780,10 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Repareer slide': 'Reparer slide',
   'Voortzetting van vorige slide': 'Fortsættelse af forrige dias',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
       'Dette dias hører til det forrige dias\' liste og deler derfor én skriftstørrelse: den fra den fyldigste side.',
-  'Losmaken': 'Frigør',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Dette dias vises med {klein} af designstørrelsen i stedet for {eigen}, fordi det deler en opdelt række med det langt fyldigere dias {pagina}.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

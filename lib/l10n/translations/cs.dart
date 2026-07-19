@@ -1784,10 +1784,10 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Repareer slide': 'Opravit snímek',
   'Voortzetting van vorige slide': 'Pokračování předchozího snímku',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
       'Tento snímek patří k seznamu předchozího snímku, a sdílí proto jednu velikost písma: velikost nejplnější stránky.',
-  'Losmaken': 'Odpojit',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Tento snímek se zobrazuje na {klein} návrhové velikosti místo {eigen}, protože sdílí rozdělenou řadu s mnohem plnějším snímkem {pagina}.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

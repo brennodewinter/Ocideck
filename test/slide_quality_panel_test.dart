@@ -278,7 +278,7 @@ void main() {
     );
   });
 
-  testWidgets('de losmaak-knop staat naast de Kwaliteit-chip', (tester) async {
+  testWidgets('de repareerknop staat naast de Kwaliteit-chip', (tester) async {
     await tester.binding.setSurfaceSize(const Size(1600, 1000));
     addTearDown(() => tester.binding.setSurfaceSize(null));
     SharedPreferences.setMockInitialValues({'app_consent_accepted': true});
@@ -297,18 +297,18 @@ void main() {
     // Slide 1 (de korte) is geselecteerd: de knop hoort er te staan, zonder dat
     // het kwaliteitspaneel open hoeft.
     expect(find.text('Kwaliteit'), findsOneWidget);
-    expect(find.text('Losmaken'), findsOneWidget);
+    expect(find.text('Repareer slide'), findsOneWidget);
 
-    await tester.tap(find.text('Losmaken'));
+    await tester.tap(find.text('Repareer slide'));
     await tester.pumpAndSettle();
 
     // De vlag is weg, de tekst onaangeroerd, en de knop verdwijnt weer.
     expect(notifier.state.deck!.slides[1].continuesSplit, isFalse);
     expect(notifier.state.deck!.slides[1].bullets, hasLength(40));
-    expect(find.text('Losmaken'), findsNothing);
+    expect(find.text('Repareer slide'), findsNothing);
   });
 
-  testWidgets('geen losmaak-knop op een deck zonder meegetrokken slide', (
+  testWidgets('geen repareerknop op een deck zonder meegetrokken slide', (
     tester,
   ) async {
     await tester.binding.setSurfaceSize(const Size(1600, 1000));
@@ -326,6 +326,6 @@ void main() {
 
     // Wel degelijk een overvolle slide, maar geen reeks — dus geen knop.
     expect(find.text('Kwaliteit'), findsOneWidget);
-    expect(find.text('Losmaken'), findsNothing);
+    expect(find.text('Repareer slide'), findsNothing);
   });
 }
