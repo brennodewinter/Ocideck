@@ -329,7 +329,7 @@ const _dutchSourceLt = {
   'Zoek een slidetype': 'Ieškoti skaidrės tipo',
   'Alfabetisch sorteren': 'Rūšiuoti abėcėlės tvarka',
   'Algemeen': 'Bendra',
-  'Informatieveiligheid': 'Informacijos saugumas',
+  'Informatieveiligheid': 'Informacijos sauga',
   'Alle': 'Visi',
   'Pentestrapportage (ontwerp)': 'Įsiskverbimo testo ataskaita (projektas)',
   'AI-assistentie (ontwerp)': 'DI pagalba (projektas)',

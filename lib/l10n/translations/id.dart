@@ -329,7 +329,7 @@ const _dutchSourceId = {
   'Zoek een slidetype': 'Cari tipe slide',
   'Alfabetisch sorteren': 'Urutkan menurut abjad',
   'Algemeen': 'Umum',
-  'Informatieveiligheid': 'Keamanan informasi',
+  'Informatieveiligheid': 'Keselamatan informasi',
   'Alle': 'Semua',
   'Pentestrapportage (ontwerp)': 'Laporan pentest (desain)',
   'AI-assistentie (ontwerp)': 'Bantuan AI (desain)',

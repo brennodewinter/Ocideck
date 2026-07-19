@@ -331,7 +331,7 @@ const _dutchSourceBg = {
   'Zoek een slidetype': 'Търсене на тип слайд',
   'Alfabetisch sorteren': 'Азбучно сортиране',
   'Algemeen': 'Общи',
-  'Informatieveiligheid': 'Информационна сигурност',
+  'Informatieveiligheid': 'Информационна безопасност',
   'Alle': 'Всички',
   'Pentestrapportage (ontwerp)': 'Доклад от пентест (проект)',
   'AI-assistentie (ontwerp)': 'AI помощ (проект)',

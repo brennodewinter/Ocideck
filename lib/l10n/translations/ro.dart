@@ -331,7 +331,7 @@ const _dutchSourceRo = {
   'Zoek een slidetype': 'Căutați un tip de slide',
   'Alfabetisch sorteren': 'Sortează alfabetic',
   'Algemeen': 'General',
-  'Informatieveiligheid': 'Securitatea informației',
+  'Informatieveiligheid': 'Siguranța informației',
   'Alle': 'Toate',
   'Pentestrapportage (ontwerp)': 'Raport de pentest (proiectare)',
   'AI-assistentie (ontwerp)': 'Asistență AI (proiectare)',
