@@ -259,6 +259,11 @@ final RegExp addressLabelPattern = RegExp(
   caseSensitive: false,
 );
 
+/// Iets dat een huisnummer kan zijn: één tot vier cijfers, eventueel met een
+/// toevoegingsletter. Alleen bedoeld als *inhoudseis* achter een adreslabel —
+/// nooit als zelfstandige adresregel, want los is dit gewoon een getal.
+final RegExp houseNumberish = RegExp(r'\b\d{1,4}\s?[a-zA-Z]?\b');
+
 /// Is dit adreslabel er een die per definitie over een persoon gaat?
 bool isResidentialAddressLabel(String label) =>
     residentialAddressLabels.contains(label.toLowerCase().trim());

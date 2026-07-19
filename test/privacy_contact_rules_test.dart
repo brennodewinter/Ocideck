@@ -184,6 +184,30 @@ void main() {
       expect(address.confidence, PrivacyConfidence.certain);
     });
 
+    test('een zin óver adressen is geen adres', () {
+      // Deze regel ging in haar eerste vorm af op de eigen documentatie: daar
+      // staan zinnen als "een `Woonadres:`-label", en het label alleen maakte
+      // dat al `certain`. Hetzelfde gold voor een leeg formulierveld.
+      //
+      // Deze test staat hier los van het docs-corpus met opzet. Die corpustest
+      // kent een uitzonderingslijst per document, en een uitzondering kan een
+      // teruggekeerde vals-positief maskeren — dan is de suite groen om de
+      // verkeerde reden. Dit is de directe toets, zonder ontsnappingsluik.
+      for (final text in [
+        'Gebruik een `Woonadres:`-label om dit af te dwingen',
+        'Woonadres:',
+        'Woonadres: ',
+        'Adres: onbekend',
+        'Het veld Woonadres is verplicht',
+      ]) {
+        expect(
+          scanText(text).certain.where((f) => f.ruleId == 'contact.address'),
+          isEmpty,
+          reason: 'ten onrechte een zeker adres in "$text"',
+        );
+      }
+    });
+
     test('een kaal Adres-label zonder pandaanwijzing blijft een hint', () {
       // Dit kan het kantoor zijn, en een scanner die daarop rood kleurt wordt
       // uitgezet. Zie de vals-positieven-strategie in privacy_contact_rules.

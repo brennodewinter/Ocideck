@@ -567,13 +567,21 @@ extension PrivacyScannerDetectors on PrivacyScanner {
       final start = end - value.length;
       if (spans.any((s) => start >= s.start && end <= s.end)) continue;
 
+      // Het label alleen is niet genoeg, en dat is duur geleerd: deze regel
+      // ging in haar eerste vorm af op háár eigen documentatie, waar zinnen
+      // staan als "een `Woonadres:`-label". Dat is geen adres maar een zin
+      // óver adressen — en hetzelfde geldt voor een leeg formulierveld met
+      // `Woonadres:` ervoor. Er moet dus iets adresachtigs ná het label staan.
+      final hasPostcode = dutchPostcodePattern.hasMatch(value);
+      final hasStreet = streetAddressPattern.hasMatch(value);
+      final hasHouseNumber = houseNumberish.hasMatch(value);
+      if (!hasPostcode && !hasStreet && !hasHouseNumber) continue;
+
       // Een woonadres is per definitie van een persoon. Een kaal `Adres:` kan
       // het kantoor zijn en blijft daarom een hint — tenzij er een huisnummer
       // of postcode in staat, want dan wijst het een pand aan.
       final specific =
-          isResidentialAddressLabel(label) ||
-          dutchPostcodePattern.hasMatch(value) ||
-          streetAddressPattern.hasMatch(value);
+          isResidentialAddressLabel(label) || hasPostcode || hasStreet;
       spans.add((start: start, end: end));
       _emit(
         out,
