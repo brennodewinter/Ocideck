@@ -26,6 +26,14 @@ machine (desktop) or in your browser tab (web). This includes:
 - Autosave/recovery snapshots — written to a per-user application-support folder,
   kept for 7 days, then removed. They are not encrypted; they rely on your
   operating-system account protections, just like your other files.
+- **Git working copies.** Connecting a git repository puts a real clone — full
+  deck content and history — in a per-user application-support folder, plus a
+  queue of commits that haven't been pushed yet. Unlike autosave snapshots these
+  are **not** cleared after 7 days: a working copy is meant to persist, so it
+  stays until you remove the connection. They are not encrypted either, and the
+  queued commit *messages* you typed are stored in the ordinary settings file.
+  If a repository's contents are sensitive, that sensitivity is on this disk too,
+  not only on the server.
 
 There is **no analytics, tracking, or usage reporting of any kind.**
 
@@ -80,17 +88,33 @@ against accessing internal/private network addresses.
 |---|---|---|
 | **Import from URL** | An HTTP(S) request for the deck/asset you named | The URL you entered |
 | **Save/Open — Nextcloud/WebDAV** | Your deck files | Your configured server |
-| **Save/Open — Git** | Your deck files (commits) | Your configured forge (Gitea/Forgejo/GitLab) |
+| **Save/Open — S3** | Your deck files (objects) | Your configured endpoint (AWS S3, MinIO, or any S3-compatible service) |
+| **Save/Open — Git** | Your deck files (commits) | Your configured forge (Gitea/Forgejo/GitLab/GitHub) |
 | **AI assistant** (off by default) | The specific text/image you request help with | The endpoint you configured |
 
 Nothing here goes to OciDeck — it goes to servers **you** point it at.
 
 ### Secrets are stored in your OS keychain
 
-Passwords and tokens (your Nextcloud/WebDAV password, git access token, and any
-AI API key) are stored in the operating-system keychain (macOS Keychain, Windows
-Credential Manager, or the platform-appropriate secure store) — never in a plain
-config file. Server URLs and usernames are ordinary settings.
+Passwords and tokens (your Nextcloud/WebDAV password, S3 secret access key, git
+access token, and any AI API key) are stored in the operating-system keychain
+(macOS Keychain, Windows Credential Manager, or the platform-appropriate secure
+store) — never in a plain config file. Server URLs and usernames are ordinary
+settings.
+
+Two boundaries of that sentence are worth naming, because "in the keychain" is
+easy to over-read:
+
+- For S3 it is the **secret** access key that is protected. The **access key ID**
+  sits in the ordinary settings file alongside the endpoint and bucket name. It
+  is an identifier rather than a password, but it is closer to a credential than
+  a username is, and on its own it tells a reader of that file which account you
+  use.
+- The git token is stored in the keychain, but at the moment a push or fetch
+  runs it is handed to the `git` process in its environment. It is deliberately
+  kept out of the command line, out of the remote URL and out of `.git/config`,
+  and the subprocess runs with a stripped environment — but for the life of that
+  process the token exists outside the keychain.
 
 ### The AI assistant is off by default and fail-closed
 

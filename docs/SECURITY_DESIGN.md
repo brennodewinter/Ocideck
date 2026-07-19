@@ -15,8 +15,8 @@ OciDeck has a strong client-side security model with **no application backend**.
 The app runs locally on the user's machine (desktop) or in a browser tab (web);
 presentation content never leaves the device during editing, previewing,
 presenting, or exporting. The only network traffic is explicit and
-user-initiated (URL import, WebDAV/Nextcloud, git storage, optional AI), and each
-path is individually gated.
+user-initiated (URL import, WebDAV/Nextcloud, S3, git storage, optional AI), and
+each path is individually gated.
 
 ## Core principles
 
@@ -272,18 +272,27 @@ model.
   (`lib/utils/atomic_file.dart`) — write-to-temp-then-rename — so a crash never
   truncates a file. A `check_conventions` ratchet forbids raw
   `writeAsString`/`writeAsBytes` anywhere else.
-- **Secret storage.** WebDAV/Nextcloud passwords, the AI API key, and the git
-  personal-access token live in the OS keychain via `flutter_secure_storage`
-  (`lib/services/secret_store.dart`), keyed per server/account; only the secret
-  goes there — URLs and usernames stay in the prefs domain.
+- **Secret storage.** WebDAV/Nextcloud passwords, the S3 secret access key, the
+  AI API key, and the git personal-access token live in the OS keychain via
+  `flutter_secure_storage` (`lib/services/secret_store.dart`), keyed per
+  server/account; only the secret goes there — URLs, usernames and the S3
+  **access key ID** stay in the prefs domain. The git token leaves the keychain
+  for the lifetime of a `git` subprocess, passed via `GIT_CONFIG_*` so it reaches
+  neither argv, nor the remote URL, nor `.git/config`
+  (`lib/services/git/native_git_mirror_io.dart`).
+- **Git working copies.** A native clone (`git_clone/<storageSlug>/`), a draft
+  mirror (`git_mirror/<storageSlug>/`) and the pending-commit outbox hold full
+  deck content under app-support. They are **not** encrypted and — unlike
+  recovery snapshots — have **no** expiry, since a working copy is meant to
+  survive between sessions.
 - **Recovery snapshots** are written atomically to a per-user app-support
   directory, are **not** encrypted (they inherit OS user-account file
   protections), and are pruned after 7 days.
 
 ## 10. Trusted-internal opt-in
 
-WebDAV/Nextcloud, git, and self-hosted AI each expose an explicit
-`trustedInternal` flag. Only when the user sets it does
+WebDAV/Nextcloud, S3, git, and self-hosted AI each expose an explicit
+`trustedInternal` flag — for S3 it is what makes a MinIO box on the LAN usable. Only when the user sets it does
 `NetGuard.safeResolveTrusted(host, allowPrivate: true)` relax the private-range
 block (still resolving and pinning), and only then is plain `http` accepted for
 that user-configured host (so a token isn't sent in the clear on a TLS-less
