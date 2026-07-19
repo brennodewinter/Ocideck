@@ -43,9 +43,16 @@ wholly inside a browser tab. Areas of particular interest:
 - Parsing of untrusted decks (`.md`), packages (`.ocideck`), style profiles
   (`.ocideckstyle`), sidecars (`.ink.json`, captions), and linked CSV data.
 - Importing presentations from a URL.
-- The **Nextcloud (WebDAV) source** — a user-configured server the app
-  authenticates to (basic auth) and reads/writes files on, including how its
-  credentials are stored and how its host is reached (see below).
+- The **network deck sources** — user-configured servers the app authenticates
+  to and reads or writes decks on, including how each one's credentials are
+  stored and how its host is reached (see below). There are three, and all
+  three are in scope:
+  - **Nextcloud/WebDAV** (basic auth);
+  - **S3** — AWS S3 or any S3-compatible endpoint (MinIO, Ceph, Wasabi), signed
+    with a hand-written SigV4 rather than the AWS SDK;
+  - **Git** — a forge over REST (Gitea/Forgejo, GitHub, GitLab) *and* a native
+    `git` subprocess. That subprocess is the one outbound path where the socket
+    is not ours to pin, which makes it the most interesting of the three.
 - The HTML export, which inlines third-party JavaScript (marked, highlight.js,
   mermaid, MathJax) to render offline.
 - The export classification gate (`ClassificationPolicy`) — any way to export a
@@ -152,6 +159,46 @@ OciDeck constrains what an opened deck can do:
   and listing entries with a traversal segment are dropped. Downloaded decks go
   through the same `MarkdownSafetyScanner` gate and `.ocideck`/`.md` limits as
   every other import.
+- **S3 source — credentials, signing and trust boundary.** The **secret** access
+  key is stored in the OS keychain (`SecretStore`); the endpoint, bucket, region
+  and the **access key ID** stay in prefs. The key ID is an identifier rather
+  than a password, but it names the account to anyone who reads that file.
+  Requests are signed by a hand-written SigV4 (`lib/services/s3/s3_sigv4.dart`)
+  rather than by the AWS SDK, deliberately: an SDK brings its own HTTP stack and
+  would connect *around* `NetGuard`, and the algorithm is small enough to test
+  against AWS's own vectors (`test/s3_sigv4_test.dart`). Plain `http` is refused
+  unless the bucket is ticked **Trusted internal** (the MinIO-on-the-LAN case),
+  which is also the only thing that lifts the private-address block; the host is
+  still resolved and the socket pinned exactly as for WebDAV. Requests follow no
+  redirects (a 3xx must not walk around the host check), downloads are capped
+  both by `Content-Length` pre-check and by streaming cap, listings are capped
+  in entry count across all pages taken together, and object keys are contained
+  to the configured root prefix — `S3Bucket.keyFor` returns null on a `..`
+  escape, including an escape out of the bucket when no prefix is configured.
+- **Git source — a token that leaves the keychain, and a socket that isn't
+  ours.** The personal-access token is stored in the OS keychain; base URL,
+  owner, repo and trust flag are prefs. Two transports carry it. The REST path
+  (Gitea/Forgejo, GitHub, GitLab) is an ordinary `HttpClient` under the same
+  resolve-and-pin as WebDAV and S3. The **native path** is a `git` subprocess,
+  and there no `connectionFactory` of ours exists to hook into: git does its own
+  DNS and opens its own socket. So the guard is *imposed* on it instead —
+  `http.curloptResolve` binds the hostname to the address `NetGuard` approved
+  (TLS still validates against the name, so no certificate has to name an IP),
+  and `http.followRedirects=false` turns a redirect into an error rather than a
+  second host nobody vetted. The second matters more here than elsewhere: the
+  token travels as an `http.extraHeader`, and a header follows a redirect — a
+  remote answering 302 would otherwise be handed the `Authorization`. Config
+  reaches git through `GIT_CONFIG_*` environment variables, so the token lands
+  in neither argv, nor the remote URL, nor `.git/config`. The process starts
+  with `includeParentEnvironment: false` and an **allowlisted** environment:
+  only what a process needs in order to run, plus `GIT_TERMINAL_PROMPT=0`,
+  `GIT_CONFIG_NOSYSTEM=1`, a `GIT_CONFIG_GLOBAL` pointed at `/dev/null` and a
+  controlled empty `HOME` — so no `~/.gitconfig`, credential cache or alias
+  reaches it, and neither does a `GIT_TRACE_CURL`, `GIT_ASKPASS` or
+  `GIT_CONFIG_PARAMETERS` that happened to sit in the user's shell. Residual, and
+  stated plainly: for the lifetime of that process the token exists outside the
+  keychain. That the imposition is real and not paper is asserted against a live
+  server in `test/git_network_guard_test.dart`.
 - **Symlink containment.** Both the copy-to-clipboard sink
   (`resolveContainedRealPath`) and the render/export path (`isRenderPathContained`,
   cached so the per-frame cost is O(1)) resolve the real (symlink-followed)
@@ -193,6 +240,13 @@ per-user, OS-permissioned app-support path; snapshots are deleted on save and on
 startup (`RecoveryService.pruneOlderThan`) so a forgotten crash file can't linger
 indefinitely. Encrypting these snapshots at rest (keyed via the keychain) is a
 known residual improvement, not yet implemented.
+
+A connected **git repository** puts far more than a snapshot there: a native
+clone under `<app-support>/git_clone/<storageSlug>/` holds the full deck content
+*and its history*, next to a draft store and an outbox of commits not yet
+pushed, all unencrypted. The 7-day prune deliberately does not apply — a working
+copy is meant to persist — so it stays until the connection is removed. Whatever
+sensitivity the repository has on the server, it has on this disk too.
 
 ## Platform sandboxing (macOS)
 
