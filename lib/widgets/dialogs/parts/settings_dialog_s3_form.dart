@@ -26,6 +26,14 @@ class S3Form {
   /// zelf gehoste endpoints erachter.
   S3AddressingStyle addressingStyle = S3AddressingStyle.virtualHosted;
 
+  /// De vingerafdruk van het certificaat dat de gebruiker heeft vertrouwd, of
+  /// leeg. Geen invoerveld: die vult zich alleen via de bevestigingsdialoog.
+  String pinnedCertSha256 = '';
+
+  /// De laatste test strandde op het certificaat. Alleen dán heeft het zin de
+  /// gebruiker te vragen of hij het wil vertrouwen.
+  bool testCertRejected = false;
+
   /// Uitslag van de verbindingstest: `null` = nog niet getest.
   bool? testOk;
   String? testMessage;
@@ -44,6 +52,7 @@ class S3Form {
     trusted = config?.trustedInternal ?? false;
     addressingStyle =
         config?.addressingStyle ?? S3AddressingStyle.virtualHosted;
+    pinnedCertSha256 = config?.pinnedCertSha256 ?? '';
     secret.rememberIdentity(
       identityOf(config?.endpoint ?? '', config?.accessKeyId ?? ''),
     );
@@ -66,6 +75,7 @@ class S3Form {
       rootPath: S3Bucket.normalizeRoot(root.text),
       addressingStyle: addressingStyle,
       trustedInternal: trusted,
+      pinnedCertSha256: pinnedCertSha256,
     );
   }
 

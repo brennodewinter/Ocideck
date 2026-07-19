@@ -1791,6 +1791,16 @@ const _dutchSourceLt = {
 const _dutchSourceAddLt = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'gimimo data, pašto kodas ir lytis kartu — šie trys paprastai nurodo vieną asmenį, net be vardo',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Šio serverio sertifikatas nėra patikimas. Savarankiškai talpinamame serverio galite jį peržiūrėti ir juo pasitikėti skiltyje Nustatymai → Saugykla.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Šio forge sertifikatas nėra patikimas. Savarankiškai talpinamame forge galite jį peržiūrėti ir juo pasitikėti skiltyje Nustatymai → Saugykla.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Šio endpoint sertifikatas nėra patikimas. Savarankiškai talpinamame endpoint galite jį peržiūrėti ir juo pasitikėti skiltyje Nustatymai → Saugykla.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'forge sertifikatas nėra patikimas — savarankiškai pasirašytas, nebegaliojantis arba išduotas kitam vardui.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'endpoint sertifikatas nėra patikimas — savarankiškai pasirašytas, nebegaliojantis arba išduotas kitam vardui.',
   'creditcardnummer': 'kredito kortelės numeris',
   'beveiligingscode van een creditcard': 'kortelės saugos kodas (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
@@ -1808,6 +1818,12 @@ const _dutchSourceAddLt = <String, String>{
       'Pasitikima tik šiuo vienu sertifikatu. Jei serveris jį vėliau pakeis, OciDeck paklaus dar kartą.',
   'Vertrouwen': 'Pasitikėti',
   'Certificaat bekijken': 'Peržiūrėti sertifikatą',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Vietos, kur laikai ir ieškai savo pristatymų — aplankai šiame kompiuteryje, WebDAV serveriai, S3 kaušai ir git saugyklos pramaišiui. Vilk juos norima tvarka: viršutinis kiekvienos rūšies laikomas numatytuoju.',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  S3 saugykla: kai prisijungi prie kaušo, išsaugomi galinis taškas, kaušo pavadinimas ir tavo prieigos raktas (slaptasis raktas saugiai tavo sistemos raktinėje), o pristatymai, kuriuos atidarai ar išsaugai, siunčiami į tą saugyklos paslaugą.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Git saugykla: kai prisijungi prie saugyklos, išsaugomas tavo prieigos žetonas (saugiai tavo sistemos raktinėje), o pristatymai, kuriuos išsaugai, siunčiami į tą serverį kaip commitai. Darbinė saugyklos kopija lieka nešifruota šiame įrenginyje.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Šios pateikties kalbai trūksta ligų pavadinimų. Religija, politinės pažiūros ir profsąjungų terminai atpažįstami, o šablonai su kontroliniu skaitmeniu (asmens kodas, IBAN, pasas) veikia visada — bet nesitikėkite, kad bus rasta diagnozė.',
   'niet getest': 'nepatikrinta',

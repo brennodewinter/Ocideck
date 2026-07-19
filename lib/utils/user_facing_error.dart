@@ -80,7 +80,7 @@ String webdavErrorMessage(AppLocalizations l10n, WebdavException e) {
       'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.',
     ),
     WebdavError.tls => l10n.d(
-      'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.',
+      'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.',
     ),
     WebdavError.redirect => l10n.d(
       'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.',
@@ -129,6 +129,9 @@ String gitForgeErrorMessage(AppLocalizations l10n, GitForgeException e) {
     GitForgeError.blockedHost => l10n.d(
       'Deze forge heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.',
     ),
+    GitForgeError.tls => l10n.d(
+      'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.',
+    ),
     GitForgeError.network => l10n.d(
       'De forge is niet bereikbaar — controleer je verbinding en de server-URL.',
     ),
@@ -170,6 +173,9 @@ String s3ErrorMessage(AppLocalizations l10n, S3Exception e) {
     ),
     S3Error.blockedHost => l10n.d(
       'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.',
+    ),
+    S3Error.tls => l10n.d(
+      'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.',
     ),
     S3Error.network => l10n.d(
       'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.',

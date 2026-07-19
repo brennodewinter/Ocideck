@@ -1783,6 +1783,16 @@ const _dutchSourceFi = {
 const _dutchSourceAddFi = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'syntymäaika, postinumero ja sukupuoli yhdessä — nämä kolme osoittavat yleensä yhden henkilön, myös ilman nimeä',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Tämän palvelimen varmennetta ei luoteta. Itse ylläpidetyllä palvelimen voit tarkastella sitä ja luottaa siihen kohdassa Asetukset → Tallennus.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Tämän forge varmennetta ei luoteta. Itse ylläpidetyllä forge voit tarkastella sitä ja luottaa siihen kohdassa Asetukset → Tallennus.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Tämän päätepisteen varmennetta ei luoteta. Itse ylläpidetyllä päätepisteen voit tarkastella sitä ja luottaa siihen kohdassa Asetukset → Tallennus.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'forge varmennetta ei luoteta — itse allekirjoitettu, vanhentunut tai myönnetty toiselle nimelle.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'päätepisteen varmennetta ei luoteta — itse allekirjoitettu, vanhentunut tai myönnetty toiselle nimelle.',
   'creditcardnummer': 'luottokortin numero',
   'beveiligingscode van een creditcard': 'kortin turvakoodi (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
@@ -1800,6 +1810,12 @@ const _dutchSourceAddFi = <String, String>{
       'Vain tähän yhteen varmenteeseen luotetaan. Jos palvelin vaihtaa sen myöhemmin, OciDeck kysyy uudelleen.',
   'Vertrouwen': 'Luota',
   'Certificaat bekijken': 'Näytä varmenne',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Paikat, joissa säilytät ja haet esityksiäsi — kansiot tällä tietokoneella, WebDAV-palvelimet, S3-ämpärit ja git-arkistot sekaisin. Vedä ne haluamaasi järjestykseen: kunkin lajin ylin toimii oletuksena.',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  S3-tallennus: kun yhdistät ämpäriin, päätepiste, ämpärin nimi ja käyttöavaimesi tallennetaan (salainen avain turvallisesti järjestelmäsi avainnippuun), ja esitykset, jotka avaat tai tallennat, lähetetään siihen tallennuspalveluun.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Git-tallennus: kun yhdistät arkistoon, käyttöpoletti tallennetaan (turvallisesti järjestelmäsi avainnippuun), ja esitykset, jotka tallennat, lähetetään sille palvelimelle committeina. Arkiston työkopio jää salaamattomana tälle laitteelle.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Tämän esityksen kielelle puuttuvat sairauksien nimet. Uskonto, poliittinen mielipide ja ammattiyhdistystermit tunnistetaan, ja tarkistusnumerolliset kuviot (hetu, IBAN, passi) toimivat aina — mutta älä luota siihen, että diagnoosi löytyy.',
   'niet getest': 'ei testattu',

@@ -1785,6 +1785,16 @@ const _dutchSourceSl = {
 const _dutchSourceAddSl = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'datum rojstva, poštna številka in spol skupaj — ti trije običajno kažejo na eno osebo, tudi brez imena',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Potrdilu tega strežnika ni zaupanja. Pri lastnem strežnika ga lahko pregledaš in mu zaupaš v Nastavitve → Shramba.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Potrdilu tega forge ni zaupanja. Pri lastnem forge ga lahko pregledaš in mu zaupaš v Nastavitve → Shramba.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Potrdilu tega endpoint ni zaupanja. Pri lastnem endpoint ga lahko pregledaš in mu zaupaš v Nastavitve → Shramba.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Potrdilu forge ni zaupanja — samopodpisano, poteklo ali izdano na drugo ime.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Potrdilu endpoint ni zaupanja — samopodpisano, poteklo ali izdano na drugo ime.',
   'creditcardnummer': 'številka kreditne kartice',
   'beveiligingscode van een creditcard': 'varnostna koda kartice (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
@@ -1802,6 +1812,12 @@ const _dutchSourceAddSl = <String, String>{
       'Zaupa se le temu enemu potrdilu. Če ga strežnik pozneje zamenja, bo OciDeck znova vprašal.',
   'Vertrouwen': 'Zaupaj',
   'Certificaat bekijken': 'Prikaži potrdilo',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Mesta, kjer hraniš in prebrskaš svoje predstavitve — mape v tem računalniku, strežniki WebDAV, vedra S3 in skladišča git pomešano. Povleci jih v vrstni red, ki ga želiš: najvišji svoje vrste velja kot privzeti.',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  Shramba S3: ko se povežeš z vedrom, se shranijo končna točka, ime vedra in tvoj dostopni ključ (skrivni ključ varno v zbirki ključev tvojega sistema), predstavitve, ki jih odpreš ali shraniš, pa se pošljejo tej storitvi shrambe.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Shramba Git: ko se povežeš s skladiščem, se shrani tvoj dostopni žeton (varno v zbirki ključev tvojega sistema), predstavitve, ki jih shraniš, pa se pošljejo temu strežniku kot commiti. Delovna kopija skladišča ostane nešifrirana na tej napravi.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Za jezik te predstavitve manjkajo imena bolezni. Vera, politično prepričanje in sindikalni izrazi so prepoznani, vzorci s kontrolno številko (EMŠO, IBAN, potni list) pa delujejo vedno — vendar ne računajte, da bo diagnoza najdena.',
   'niet getest': 'ni preizkušeno',

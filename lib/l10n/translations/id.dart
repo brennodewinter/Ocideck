@@ -1783,6 +1783,16 @@ const _dutchSourceId = {
 const _dutchSourceAddId = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'tanggal lahir, kode pos, dan jenis kelamin bersama-sama — ketiganya biasanya menunjuk satu orang, bahkan tanpa nama',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Sertifikat server ini tidak tepercaya. Pada server yang di-host sendiri Anda dapat melihatnya dan memercayainya di Pengaturan → Penyimpanan.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Sertifikat forge ini tidak tepercaya. Pada forge yang di-host sendiri Anda dapat melihatnya dan memercayainya di Pengaturan → Penyimpanan.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Sertifikat endpoint ini tidak tepercaya. Pada endpoint yang di-host sendiri Anda dapat melihatnya dan memercayainya di Pengaturan → Penyimpanan.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Sertifikat forge tidak tepercaya — ditandatangani sendiri, kedaluwarsa, atau diterbitkan atas nama lain.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Sertifikat endpoint tidak tepercaya — ditandatangani sendiri, kedaluwarsa, atau diterbitkan atas nama lain.',
   'creditcardnummer': 'nomor kartu kredit',
   'beveiligingscode van een creditcard': 'kode keamanan kartu (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
@@ -1800,6 +1810,12 @@ const _dutchSourceAddId = <String, String>{
       'Hanya sertifikat ini yang dipercaya. Jika server menggantinya nanti, OciDeck akan bertanya lagi.',
   'Vertrouwen': 'Percayai',
   'Certificaat bekijken': 'Lihat sertifikat',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Tempat kamu menyimpan dan mencari presentasimu — folder di komputer ini, server WebDAV, bucket S3, dan repositori git bercampur. Seret sesuai urutan yang kamu mau: yang teratas dari satu jenis berlaku sebagai baku.',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  Penyimpanan S3: saat kamu terhubung ke sebuah bucket, endpoint, nama bucket, dan kunci aksesmu disimpan (kunci rahasia disimpan aman di gantungan kunci sistemmu) dan presentasi yang kamu buka atau simpan dikirim ke layanan penyimpanan tersebut.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Penyimpanan Git: saat kamu terhubung ke sebuah repositori, token aksesmu disimpan (aman di gantungan kunci sistemmu) dan presentasi yang kamu simpan dikirim ke server tersebut sebagai commit. Salinan kerja repositori tetap tidak terenkripsi di perangkat ini.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Nama penyakit tidak tersedia untuk bahasa dek ini. Agama, pandangan politik, dan istilah serikat pekerja dikenali, dan pola dengan digit periksa (NIK, IBAN, paspor) selalu bekerja — tetapi jangan mengandalkan diagnosis ditemukan.',
   'niet getest': 'belum diuji',

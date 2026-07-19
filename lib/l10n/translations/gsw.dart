@@ -1787,6 +1787,16 @@ const _dutchSourceGsw = {
 const _dutchSourceAddGsw = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'Geburtsdatum, Poschtleitzahl und Gschlächt zäme — die drü zeige meischtens uf ei Person, au ohni Name',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Em Zertifikat vo däm Server wird nid vertrout. Bi mene sälber ghoschtete Server chasch es under Istellige → Spycher aluege und ihm vertroue.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Em Zertifikat vo däm Forge wird nid vertrout. Bi mene sälber ghoschtete Forge chasch es under Istellige → Spycher aluege und ihm vertroue.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Em Zertifikat vo däm endpoint wird nid vertrout. Bi mene sälber ghoschtete endpoint chasch es under Istellige → Spycher aluege und ihm vertroue.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Em Zertifikat vom Forge wird nid vertrout — sälbersigniert, abgloffe, oder uf en andere Name usgstellt.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Em Zertifikat vom endpoint wird nid vertrout — sälbersigniert, abgloffe, oder uf en andere Name usgstellt.',
   'creditcardnummer': 'Kreditcharte-Nummere',
   'beveiligingscode van een creditcard': 'Charteprüefnummere (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
@@ -1804,6 +1814,12 @@ const _dutchSourceAddGsw = <String, String>{
       'Nur däm eine Zertifikat wird vertrout. Ersetzt de Server s spöter, frögt OciDeck nomol.',
   'Vertrouwen': 'Vertroue',
   'Certificaat bekijken': 'Zertifikat aluege',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'D Ort, wo du dyni Präsentatione ufbewahrsch und durchsuechsch — Ordner uf dëm Computer, WebDAV-Server, S3-Buckets und git-Repositories dureenand. Zieh si i d Reihefolg, wo du wottsch: s oberschte vo ere Art gilt als Standard.',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  S3-Spycher: Wenn du di mit eme Bucket verbindisch, wärde de Endpunkt, de Bucket-Name und dyn Zuegriffsschlüssel gspycheret (de gheimi Schlüssel sicher im Schlüsselbund vo dym System) und d Präsentatione, wo du ufmachsch oder spycherisch, wärde a dää Spycherdienscht gschickt.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Git-Spycher: Wenn du di mit eme Repository verbindisch, wird dyn Zuegriffstoken gspycheret (sicher im Schlüsselbund vo dym System) und d Präsentatione, wo du spycherisch, wärde als Commits a dää Server gschickt. E Arbetskopie vom Repository blybt unverschlüsselt uf däm Grät.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Für d Sproch vo dere Presentation fähle d Chrankheitsname. Religion, politischi Meinig und Gwerkschaftsbegriff wärde erkennt, und Prüefziffere (Steuer-ID, IBAN, Pass) laufe immer — aber verloss di nid druf, dass e Diagnose gfunde wird.',
   'niet getest': 'nid teschtet',

@@ -740,6 +740,16 @@ const _dutchSourceFr = {
 const _dutchSourceAddFr = {
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'date de naissance, code postal et sexe réunis : ces trois-là désignent généralement une seule personne, même sans nom',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Le certificat de ce serveur n\'est pas approuvé. Sur un serveur auto-hébergé, vous pouvez l\'afficher et lui faire confiance dans Paramètres → Stockage.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Le certificat de ce forge n\'est pas approuvé. Sur un forge auto-hébergé, vous pouvez l\'afficher et lui faire confiance dans Paramètres → Stockage.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Le certificat de ce point de terminaison n\'est pas approuvé. Sur un point de terminaison auto-hébergé, vous pouvez l\'afficher et lui faire confiance dans Paramètres → Stockage.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Le certificat du forge n\'est pas approuvé : auto-signé, expiré ou établi à un autre nom.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Le certificat du point de terminaison n\'est pas approuvé : auto-signé, expiré ou établi à un autre nom.',
   'creditcardnummer': 'numéro de carte bancaire',
   'beveiligingscode van een creditcard': 'code de sécurité de la carte (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
@@ -757,6 +767,12 @@ const _dutchSourceAddFr = {
       'Seul ce certificat est approuvé. Si le serveur le remplace plus tard, OciDeck redemandera.',
   'Vertrouwen': 'Faire confiance',
   'Certificaat bekijken': 'Afficher le certificat',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Les endroits où tu conserves et recherches tes présentations — dossiers sur cet ordinateur, serveurs WebDAV, buckets S3 et dépôts git mélangés. Fais-les glisser dans l\'ordre que tu veux : le premier d\'un type sert de valeur par défaut.',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  Stockage S3 : lorsque tu te connectes à un bucket, le point de terminaison, le nom du bucket et ta clé d\'accès sont conservés (la clé secrète en sécurité dans le trousseau de ton système) et les présentations que tu ouvres ou enregistres sont envoyées à ce service de stockage.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Stockage Git : lorsque tu te connectes à un dépôt, ton jeton d\'accès est conservé (en sécurité dans le trousseau de ton système) et les présentations que tu enregistres sont envoyées à ce serveur sous forme de commits. Une copie de travail du dépôt reste non chiffrée sur cet appareil.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Les noms de maladies manquent pour la langue de cette présentation. La religion, l\'opinion politique et les termes syndicaux sont reconnus, et les motifs à chiffre de contrôle (NIR, IBAN, passeport) fonctionnent toujours — mais ne comptez pas sur la détection d\'un diagnostic.',
   'niet getest': 'non testée',

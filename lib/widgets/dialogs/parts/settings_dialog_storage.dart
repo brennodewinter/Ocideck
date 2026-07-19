@@ -89,7 +89,7 @@ extension _SettingsStorageTab on _SettingsDialogState {
       _sectionTitle(l10n.d('Bestandsverbindingen')),
       Text(
         l10n.d(
-          'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.',
+          'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.',
         ),
         style: TextStyle(fontSize: 11, color: AppTheme.slate400),
       ),
@@ -331,6 +331,30 @@ extension _SettingsStorageTab on _SettingsDialogState {
       listenable: Listenable.merge(sources),
       builder: line,
     );
+  }
+
+  /// Haal het certificaat van [origin] op, laat het zien, en geef de
+  /// vingerafdruk terug wanneer de gebruiker het vertrouwt. `null` bij
+  /// annuleren, of wanneer er niets te bevestigen viel.
+  ///
+  /// Gedeeld door de drie netwerkbronnen: de vraag is voor alle drie dezelfde,
+  /// en drie kopieën van een beveiligingsbeslissing is er twee te veel.
+  Future<String?> _confirmCertificate({
+    required Uri origin,
+    required String host,
+    required bool allowPrivate,
+  }) async {
+    final resolved = await NetGuard.resolveConfigured(
+      host,
+      allowPrivate: allowPrivate,
+    );
+    if (!resolved.isOk || !mounted) return null;
+    final cert = await NetGuard.peekCertificate(
+      resolved.addresses!.first,
+      origin,
+    );
+    if (cert == null || !mounted) return null;
+    return CertificateTrustDialog.show(context, certificate: cert, host: host);
   }
 
   /// Dag en tijd, kort genoeg voor een tooltip. Lokale tijd: de gebruiker

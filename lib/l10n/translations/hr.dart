@@ -1790,6 +1790,16 @@ const _dutchSourceHr = {
 const _dutchSourceAddHr = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'datum rođenja, poštanski broj i spol zajedno — to troje obično upućuje na jednu osobu, i bez imena',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Certifikat ovog poslužitelja nije pouzdan. Na samostalno hostanom poslužitelja možete ga pregledati i označiti pouzdanim u Postavke → Pohrana.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Certifikat ovog forge nije pouzdan. Na samostalno hostanom forge možete ga pregledati i označiti pouzdanim u Postavke → Pohrana.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Certifikat ovog endpoint nije pouzdan. Na samostalno hostanom endpoint možete ga pregledati i označiti pouzdanim u Postavke → Pohrana.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Certifikat forge nije pouzdan — samopotpisan, istekao ili izdan na drugo ime.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Certifikat endpoint nije pouzdan — samopotpisan, istekao ili izdan na drugo ime.',
   'creditcardnummer': 'broj kreditne kartice',
   'beveiligingscode van een creditcard': 'sigurnosni kod kartice (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
@@ -1807,6 +1817,12 @@ const _dutchSourceAddHr = <String, String>{
       'Pouzdanim se smatra samo ovaj certifikat. Ako ga poslužitelj kasnije zamijeni, OciDeck će pitati ponovno.',
   'Vertrouwen': 'Vjeruj',
   'Certificaat bekijken': 'Prikaži certifikat',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Mjesta na kojima čuvaš i pretražuješ svoje prezentacije — mape na ovom računalu, WebDAV poslužitelji, S3 spremnici i git repozitoriji izmiješani. Povuci ih u redoslijed koji želiš: najgornji svoje vrste vrijedi kao zadani.',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  S3 pohrana: kada se povežeš sa spremnikom, spremaju se krajnja točka, naziv spremnika i tvoj pristupni ključ (tajni ključ sigurno u svežnju ključeva tvojeg sustava), a prezentacije koje otvaraš ili spremaš šalju se toj usluzi pohrane.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Git pohrana: kada se povežeš s repozitorijem, sprema se tvoj pristupni token (sigurno u svežnju ključeva tvojeg sustava), a prezentacije koje spremaš šalju se tom poslužitelju kao commitovi. Radna kopija repozitorija ostaje nešifrirana na ovom uređaju.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Za jezik ove prezentacije nedostaju nazivi bolesti. Vjera, političko uvjerenje i sindikalni pojmovi se prepoznaju, a uzorci s kontrolnom znamenkom (OIB, IBAN, putovnica) uvijek rade — ali ne računajte na to da će dijagnoza biti pronađena.',
   'niet getest': 'nije testirano',

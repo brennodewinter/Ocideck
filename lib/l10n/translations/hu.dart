@@ -1787,6 +1787,16 @@ const _dutchSourceHu = {
 const _dutchSourceAddHu = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'születési dátum, irányítószám és nem együtt — ez a három rendszerint egyetlen személyre mutat, név nélkül is',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Ennek a kiszolgáló tanúsítványa nem megbízható. Saját üzemeltetésű kiszolgáló esetén megtekintheted és megbízhatsz benne a Beállítások → Tárhely alatt.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Ennek a forge tanúsítványa nem megbízható. Saját üzemeltetésű forge esetén megtekintheted és megbízhatsz benne a Beállítások → Tárhely alatt.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Ennek a endpoint tanúsítványa nem megbízható. Saját üzemeltetésű endpoint esetén megtekintheted és megbízhatsz benne a Beállítások → Tárhely alatt.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'A forge tanúsítványa nem megbízható — önaláírt, lejárt, vagy más névre szól.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'A endpoint tanúsítványa nem megbízható — önaláírt, lejárt, vagy más névre szól.',
   'creditcardnummer': 'bankkártyaszám',
   'beveiligingscode van een creditcard': 'kártya biztonsági kódja (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
@@ -1804,6 +1814,12 @@ const _dutchSourceAddHu = <String, String>{
       'Csak ez az egy tanúsítvány megbízható. Ha a kiszolgáló később lecseréli, az OciDeck újra rákérdez.',
   'Vertrouwen': 'Megbízom',
   'Certificaat bekijken': 'Tanúsítvány megtekintése',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'A helyek, ahol a prezentációidat tárolod és keresed — mappák ezen a számítógépen, WebDAV-kiszolgálók, S3-bucketek és git-repozitóriumok vegyesen. Húzd őket olyan sorrendbe, amilyet szeretnél: a fajtájában legfelső számít alapértelmezettnek.',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  S3-tároló: amikor csatlakozol egy buckethez, elmentődik a végpont, a bucket neve és a hozzáférési kulcsod (a titkos kulcs biztonságosan a rendszered kulcstartójában), és a prezentációk, amelyeket megnyitsz vagy mentesz, elküldődnek arra a tárolószolgáltatásra.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Git-tároló: amikor csatlakozol egy repozitóriumhoz, elmentődik a hozzáférési tokened (biztonságosan a rendszered kulcstartójában), és a prezentációk, amelyeket mentesz, commitként elküldődnek arra a kiszolgálóra. A repozitórium munkamásolata titkosítatlanul marad ezen az eszközön.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Ennek a bemutatónak a nyelvéhez hiányoznak a betegségnevek. A vallás, a politikai vélemény és a szakszervezeti kifejezések felismerhetők, és az ellenőrző számjegyes minták (adóazonosító, IBAN, útlevél) mindig működnek — de ne számítson arra, hogy egy diagnózist megtalál.',
   'niet getest': 'nincs tesztelve',

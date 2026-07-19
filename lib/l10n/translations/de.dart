@@ -740,6 +740,16 @@ const _dutchSourceDe = {
 const _dutchSourceAddDe = {
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'Geburtsdatum, Postleitzahl und Geschlecht zusammen — diese drei bezeichnen meist eine einzige Person, auch ohne Namen',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Dem Zertifikat dieses Servers wird nicht vertraut. Bei einem selbst gehosteten Servers kannst du es unter Einstellungen → Speicher ansehen und ihm vertrauen.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Dem Zertifikat dieses Forge wird nicht vertraut. Bei einem selbst gehosteten Forge kannst du es unter Einstellungen → Speicher ansehen und ihm vertrauen.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Dem Zertifikat dieses Endpunkts wird nicht vertraut. Bei einem selbst gehosteten Endpunkts kannst du es unter Einstellungen → Speicher ansehen und ihm vertrauen.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Dem Zertifikat des Forge wird nicht vertraut — selbstsigniert, abgelaufen oder auf einen anderen Namen ausgestellt.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Dem Zertifikat des Endpunkts wird nicht vertraut — selbstsigniert, abgelaufen oder auf einen anderen Namen ausgestellt.',
   'creditcardnummer': 'Kreditkartennummer',
   'beveiligingscode van een creditcard': 'Kartenprüfnummer (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
@@ -757,6 +767,12 @@ const _dutchSourceAddDe = {
       'Nur genau diesem Zertifikat wird vertraut. Ersetzt der Server es später, fragt OciDeck erneut.',
   'Vertrouwen': 'Vertrauen',
   'Certificaat bekijken': 'Zertifikat ansehen',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Die Orte, an denen du deine Präsentationen aufbewahrst und durchsuchst — Ordner auf diesem Computer, WebDAV-Server, S3-Buckets und git-Repositories durcheinander. Zieh sie in die Reihenfolge, die du willst: das oberste einer Art gilt als Standard.',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  S3-Speicher: Wenn du dich mit einem Bucket verbindest, werden der Endpunkt, der Bucket-Name und dein Zugriffsschlüssel gespeichert (der geheime Schlüssel sicher im Schlüsselbund deines Systems) und die Präsentationen, die du öffnest oder speicherst, werden an diesen Speicherdienst gesendet.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Git-Speicher: Wenn du dich mit einem Repository verbindest, wird dein Zugriffstoken gespeichert (sicher im Schlüsselbund deines Systems) und die Präsentationen, die du speicherst, werden als Commits an diesen Server gesendet. Eine Arbeitskopie des Repositorys bleibt unverschlüsselt auf diesem Gerät.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Für die Sprache dieser Präsentation fehlen die Krankheitsbezeichnungen. Religion, politische Meinung und Gewerkschaftsbegriffe werden erkannt, und Prüfziffernmuster (Steuer-ID, IBAN, Pass) funktionieren immer — aber verlassen Sie sich nicht darauf, dass eine Diagnose gefunden wird.',
   'niet getest': 'nicht getestet',

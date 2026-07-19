@@ -1795,6 +1795,16 @@ const _dutchSourcePl = {
 const _dutchSourceAddPl = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'data urodzenia, kod pocztowy i płeć razem — te trzy zwykle wskazują jedną osobę, nawet bez nazwiska',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Certyfikat tego serwera nie jest zaufany. We własnym serwera możesz go obejrzeć i zaufać mu w Ustawienia → Magazyn.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Certyfikat tego forge nie jest zaufany. We własnym forge możesz go obejrzeć i zaufać mu w Ustawienia → Magazyn.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Certyfikat tego punktu końcowego nie jest zaufany. We własnym punktu końcowego możesz go obejrzeć i zaufać mu w Ustawienia → Magazyn.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Certyfikat forge nie jest zaufany — samopodpisany, wygasły lub wystawiony na inną nazwę.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Certyfikat punktu końcowego nie jest zaufany — samopodpisany, wygasły lub wystawiony na inną nazwę.',
   'creditcardnummer': 'numer karty kredytowej',
   'beveiligingscode van een creditcard': 'kod bezpieczeństwa karty (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
@@ -1812,6 +1822,12 @@ const _dutchSourceAddPl = <String, String>{
       'Zaufanie dotyczy tylko tego jednego certyfikatu. Jeśli serwer go później wymieni, OciDeck zapyta ponownie.',
   'Vertrouwen': 'Zaufaj',
   'Certificaat bekijken': 'Pokaż certyfikat',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Miejsca, w których przechowujesz i przeszukujesz swoje prezentacje — foldery na tym komputerze, serwery WebDAV, zasobniki S3 i repozytoria git razem. Przeciągnij je w kolejności, jaką chcesz: najwyższy danego rodzaju liczy się jako domyślny.',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  Magazyn S3: gdy łączysz się z zasobnikiem, zapisywane są punkt końcowy, nazwa zasobnika i twój klucz dostępu (tajny klucz bezpiecznie w pęku kluczy twojego systemu), a prezentacje, które otwierasz lub zapisujesz, są wysyłane do tej usługi magazynowania.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Magazyn Git: gdy łączysz się z repozytorium, zapisywany jest twój token dostępu (bezpiecznie w pęku kluczy twojego systemu), a prezentacje, które zapisujesz, są wysyłane na ten serwer jako commity. Kopia robocza repozytorium pozostaje niezaszyfrowana na tym urządzeniu.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Dla języka tej prezentacji brakuje nazw chorób. Religia, poglądy polityczne i terminy związkowe są rozpoznawane, a wzorce z cyfrą kontrolną (PESEL, IBAN, paszport) działają zawsze — ale nie licz na wykrycie diagnozy.',
   'niet getest': 'nieprzetestowane',

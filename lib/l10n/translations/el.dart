@@ -1811,6 +1811,16 @@ const _dutchSourceEl = {
 const _dutchSourceAddEl = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'ημερομηνία γέννησης, ταχυδρομικός κώδικας και φύλο μαζί — αυτά τα τρία συνήθως προσδιορίζουν ένα άτομο, ακόμη και χωρίς όνομα',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Το πιστοποιητικό αυτού του διακομιστή δεν είναι έμπιστο. Σε αυτο-φιλοξενούμενο διακομιστή μπορείς να το δεις και να το εμπιστευτείς στις Ρυθμίσεις → Αποθήκευση.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Το πιστοποιητικό αυτού του forge δεν είναι έμπιστο. Σε αυτο-φιλοξενούμενο forge μπορείς να το δεις και να το εμπιστευτείς στις Ρυθμίσεις → Αποθήκευση.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Το πιστοποιητικό αυτού του τελικού σημείου δεν είναι έμπιστο. Σε αυτο-φιλοξενούμενο τελικού σημείου μπορείς να το δεις και να το εμπιστευτείς στις Ρυθμίσεις → Αποθήκευση.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Το πιστοποιητικό του forge δεν είναι έμπιστο — αυτο-υπογεγραμμένο, ληγμένο ή εκδοθέν σε άλλο όνομα.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Το πιστοποιητικό του τελικού σημείου δεν είναι έμπιστο — αυτο-υπογεγραμμένο, ληγμένο ή εκδοθέν σε άλλο όνομα.',
   'creditcardnummer': 'αριθμός πιστωτικής κάρτας',
   'beveiligingscode van een creditcard': 'κωδικός ασφαλείας κάρτας (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
@@ -1828,6 +1838,12 @@ const _dutchSourceAddEl = <String, String>{
       'Μόνο αυτό το πιστοποιητικό γίνεται έμπιστο. Αν ο διακομιστής το αντικαταστήσει αργότερα, το OciDeck θα ρωτήσει ξανά.',
   'Vertrouwen': 'Εμπιστεύομαι',
   'Certificaat bekijken': 'Προβολή πιστοποιητικού',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Τα μέρη όπου κρατάς και αναζητάς τις παρουσιάσεις σου — φάκελοι σε αυτόν τον υπολογιστή, διακομιστές WebDAV, κάδοι S3 και αποθετήρια git ανακατεμένα. Σύρε τα στη σειρά που θέλεις: το πρώτο κάθε είδους μετράει ως προεπιλογή.',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  Αποθήκευση S3: όταν συνδέεσαι σε έναν κάδο, αποθηκεύονται το endpoint, το όνομα του κάδου και το κλειδί πρόσβασής σου (το μυστικό κλειδί με ασφάλεια στην κλειδοθήκη του συστήματός σου) και οι παρουσιάσεις που ανοίγεις ή αποθηκεύεις στέλνονται σε αυτήν την υπηρεσία αποθήκευσης.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Αποθήκευση Git: όταν συνδέεσαι σε ένα αποθετήριο, αποθηκεύεται το διακριτικό πρόσβασής σου (με ασφάλεια στην κλειδοθήκη του συστήματός σου) και οι παρουσιάσεις που αποθηκεύεις στέλνονται σε αυτόν τον διακομιστή ως commits. Ένα αντίγραφο εργασίας του αποθετηρίου παραμένει μη κρυπτογραφημένο σε αυτήν τη συσκευή.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Για τη γλώσσα αυτής της παρουσίασης λείπουν τα ονόματα ασθενειών. Η θρησκεία, η πολιτική άποψη και οι συνδικαλιστικοί όροι αναγνωρίζονται, και τα μοτίβα με ψηφίο ελέγχου (ΑΜΚΑ, IBAN, διαβατήριο) λειτουργούν πάντα — αλλά μη βασίζεστε στον εντοπισμό διάγνωσης.',
   'niet getest': 'μη δοκιμασμένη',

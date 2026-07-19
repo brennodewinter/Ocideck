@@ -31,6 +31,14 @@ class GitForm {
     repo: '',
   ).defaultBranch;
 
+  /// De vingerafdruk van het certificaat dat de gebruiker heeft vertrouwd, of
+  /// leeg. Geen invoerveld: die vult zich alleen via de bevestigingsdialoog.
+  String pinnedCertSha256 = '';
+
+  /// De laatste test strandde op het certificaat. Alleen dán heeft het zin de
+  /// gebruiker te vragen of hij het wil vertrouwen.
+  bool testCertRejected = false;
+
   /// Uitslag van de verbindingstest: `null` = nog niet getest.
   bool? testOk;
   String? testMessage;
@@ -51,6 +59,7 @@ class GitForm {
     trusted = git?.trustedInternal ?? false;
     provider = git?.provider ?? GitProvider.gitea;
     if (git != null) defaultBranch = git.defaultBranch;
+    pinnedCertSha256 = git?.pinnedCertSha256 ?? '';
     token.rememberIdentity(identityOf(git?.baseUrl ?? '', git?.owner ?? ''));
   }
 
@@ -60,6 +69,7 @@ class GitForm {
     testOk = null;
     testMessage = null;
     testWarning = false;
+    testCertRejected = false;
   }
 
   /// De repo zoals hij nu in de velden staat. Vult een ontbrekend schema aan:
@@ -75,6 +85,7 @@ class GitForm {
       trustedInternal: trusted,
       provider: provider,
       defaultBranch: defaultBranch,
+      pinnedCertSha256: pinnedCertSha256,
     );
   }
 

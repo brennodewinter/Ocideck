@@ -102,6 +102,13 @@ class PinnedGitTransport implements GitTransport {
       return GitResponse(response.statusCode, builder.takeBytes());
     } on GitForgeException {
       rethrow;
+    } on TlsException catch (e) {
+      // Dekt HandshakeException en CertificateException. Niet transient: een
+      // afgewezen certificaat verandert niet door het nog eens te proberen.
+      throw GitForgeException(
+        GitForgeError.tls,
+        'Certificaat niet vertrouwd: $e',
+      );
     } on SocketException catch (e) {
       throw GitForgeException(
         GitForgeError.network,

@@ -1782,6 +1782,16 @@ const _dutchSourceDa = {
 const _dutchSourceAddDa = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'fødselsdato, postnummer og køn tilsammen — de tre peger som regel på én person, også uden navn',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Dette servers certifikat er ikke betroet. På en selvhostet server kan du se det og vælge at stole på det under Indstillinger → Lagring.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Dette forges certifikat er ikke betroet. På en selvhostet forge kan du se det og vælge at stole på det under Indstillinger → Lagring.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Dette endpoints certifikat er ikke betroet. På en selvhostet endpoint kan du se det og vælge at stole på det under Indstillinger → Lagring.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'forgeens certifikat er ikke betroet — selvsigneret, udløbet eller udstedt til et andet navn.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'endpointens certifikat er ikke betroet — selvsigneret, udløbet eller udstedt til et andet navn.',
   'creditcardnummer': 'kreditkortnummer',
   'beveiligingscode van een creditcard': 'kortsikkerhedskode (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
@@ -1799,6 +1809,12 @@ const _dutchSourceAddDa = <String, String>{
       'Kun netop dette certifikat betros. Udskifter serveren det senere, spørger OciDeck igen.',
   'Vertrouwen': 'Stol på',
   'Certificaat bekijken': 'Vis certifikat',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Stederne hvor du gemmer og søger i dine præsentationer — mapper på denne computer, WebDAV-servere, S3-buckets og git-repositories mellem hinanden. Træk dem i den rækkefølge, du vil: den øverste af en slags gælder som standard.',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  S3-lagring: når du forbinder til en bucket, gemmes endpointet, bucket-navnet og din adgangsnøgle (den hemmelige nøgle sikkert i dit systems nøglering), og de præsentationer, du åbner eller gemmer, sendes til den lagringstjeneste.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Git-lagring: når du forbinder til et repository, gemmes dit adgangstoken (sikkert i dit systems nøglering), og de præsentationer, du gemmer, sendes til den server som commits. En arbejdskopi af repositoryet forbliver ukrypteret på denne enhed.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Sygdomsnavne mangler for dette decks sprog. Religion, politisk overbevisning og fagforeningsudtryk genkendes, og mønstre med kontrolciffer (CPR, IBAN, pas) virker altid — men regn ikke med, at en diagnose bliver fundet.',
   'niet getest': 'ikke testet',

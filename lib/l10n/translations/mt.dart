@@ -1805,6 +1805,16 @@ const _dutchSourceMt = {
 const _dutchSourceAddMt = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'data tat-twelid, kodiċi postali u sess flimkien — dawn it-tlieta ġeneralment jindikaw persuna waħda, anke mingħajr isem',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Iċ-ċertifikat ta\' dan il-server mhuwiex fdat. Fuq server tiegħek stess tista\' tarah u tagħżel li tafdah taħt Settings → Ħażna.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Iċ-ċertifikat ta\' dan il-forge mhuwiex fdat. Fuq forge tiegħek stess tista\' tarah u tagħżel li tafdah taħt Settings → Ħażna.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Iċ-ċertifikat ta\' dan il-endpoint mhuwiex fdat. Fuq endpoint tiegħek stess tista\' tarah u tagħżel li tafdah taħt Settings → Ħażna.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Iċ-ċertifikat tal-forge mhuwiex fdat — iffirmat minnu nnifsu, skadut, jew maħruġ f\'isem ieħor.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Iċ-ċertifikat tal-endpoint mhuwiex fdat — iffirmat minnu nnifsu, skadut, jew maħruġ f\'isem ieħor.',
   'creditcardnummer': 'numru tal-karta tal-kreditu',
   'beveiligingscode van een creditcard': 'kodiċi tas-sigurtà tal-karta (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
@@ -1822,6 +1832,12 @@ const _dutchSourceAddMt = <String, String>{
       'Dan iċ-ċertifikat biss huwa fdat. Jekk is-server jibdlu aktar tard, OciDeck jerġa\' jistaqsi.',
   'Vertrouwen': 'Afda',
   'Certificaat bekijken': 'Ara ċ-ċertifikat',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Il-postijiet fejn iżżomm u tfittex il-preżentazzjonijiet tiegħek — folders fuq dan il-kompjuter, servers WebDAV, buckets S3 u repożitorji git imħalltin. Iġbedhom fl-ordni li trid: ta\' fuq nett ta\' kull tip jgħodd bħala l-istandard.',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  Ħażna S3: meta tikkonnettja ma\' bucket, jinżammu l-endpoint, l-isem tal-bucket u ċ-ċavetta tal-aċċess tiegħek (iċ-ċavetta sigrieta b\'mod sigur fil-keychain tas-sistema tiegħek) u l-preżentazzjonijiet li tiftaħ jew tissejvja jintbagħtu lil dak is-servizz ta\' ħażna.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Ħażna Git: meta tikkonnettja ma\' repożitorju, jinżamm it-token tal-aċċess tiegħek (b\'mod sigur fil-keychain tas-sistema tiegħek) u l-preżentazzjonijiet li tissejvja jintbagħtu lil dak is-server bħala commits. Kopja tax-xogħol tar-repożitorju tibqa\' mhux ikkriptata fuq dan l-apparat.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Għal-lingwa ta\' din il-preżentazzjoni jonqsu l-ismijiet tal-mardiet. Ir-reliġjon, l-opinjoni politika u t-termini tat-trejdjunjins jingħarfu, u l-mudelli b\'ċifra ta\' kontroll (ID, IBAN, passaport) dejjem jaħdmu — imma toqgħodx tistenna li tinstab dijanjosi.',
   'niet getest': 'mhux ittestjat',

@@ -302,6 +302,9 @@ Nextcloud is the most common one, but any WebDAV server works.
   eavesdropper's certificate is self-signed too. When the server replaces its
   certificate later, OciDeck asks again, because from the app's side a renewal
   and an attacker look identical.
+
+  The same applies to a self-hosted S3 endpoint and a self-hosted forge: each
+  connection carries its own pinned certificate.
 - **Open** via the welcome screen (*Open from WebDAV*) or the `…` menu:
   browse the folder and pick an `.ocideck` package or a Marp `.md`. The file is
   downloaded, checked by the same safety scan as any other deck, and opened in a
@@ -1825,6 +1828,7 @@ are not switched off somewhere — there is no setting to find.
 |---|---|
 | Local project folders and sidecar files | Absent. Opening and saving go through the browser, and your deck lives in the tab. |
 | WebDAV / Nextcloud as a deck source | Absent. |
+| An S3 bucket as a deck source | Absent. |
 | A git repository as a deck source | Absent — it needs the real `git` program. |
 | The second-screen presenter view | Absent — it needs a real second window. |
 | **Recovery after a crash** | Absent. Nothing is autosaved, so a browser crash loses unsaved work. |

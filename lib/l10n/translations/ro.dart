@@ -1801,6 +1801,16 @@ const _dutchSourceRo = {
 const _dutchSourceAddRo = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'data nașterii, codul poștal și sexul împreună — aceste trei indică de obicei o singură persoană, chiar și fără nume',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Certificatul acestui server nu este de încredere. Pe un server propriu îl poți vedea și îi poți acorda încredere în Setări → Stocare.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Certificatul acestui forge nu este de încredere. Pe un forge propriu îl poți vedea și îi poți acorda încredere în Setări → Stocare.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Certificatul acestui endpoint nu este de încredere. Pe un endpoint propriu îl poți vedea și îi poți acorda încredere în Setări → Stocare.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Certificatul forge nu este de încredere — autosemnat, expirat sau emis pe alt nume.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Certificatul endpoint nu este de încredere — autosemnat, expirat sau emis pe alt nume.',
   'creditcardnummer': 'număr de card bancar',
   'beveiligingscode van een creditcard':
       'codul de securitate al cardului (CVV)',
@@ -1819,6 +1829,12 @@ const _dutchSourceAddRo = <String, String>{
       'Se acordă încredere doar acestui certificat. Dacă serverul îl înlocuiește ulterior, OciDeck va întreba din nou.',
   'Vertrouwen': 'Am încredere',
   'Certificaat bekijken': 'Vezi certificatul',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Locurile unde îți păstrezi și îți cauți prezentările — foldere pe acest calculator, servere WebDAV, buckets S3 și depozite git amestecate. Trage-le în ordinea pe care o vrei: primul dintr-un fel contează ca implicit.',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  Stocare S3: când te conectezi la un bucket, se păstrează endpointul, numele bucketului și cheia ta de acces (cheia secretă în siguranță în inelul de chei al sistemului tău), iar prezentările pe care le deschizi sau le salvezi sunt trimise către acel serviciu de stocare.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Stocare Git: când te conectezi la un depozit, se păstrează tokenul tău de acces (în siguranță în inelul de chei al sistemului tău), iar prezentările pe care le salvezi sunt trimise către acel server ca commituri. O copie de lucru a depozitului rămâne necriptată pe acest dispozitiv.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Pentru limba acestei prezentări lipsesc denumirile de boli. Religia, opinia politică și termenii sindicali sunt recunoscuți, iar tiparele cu cifră de control (CNP, IBAN, pașaport) funcționează întotdeauna — dar nu vă bazați pe găsirea unui diagnostic.',
   'niet getest': 'netestată',

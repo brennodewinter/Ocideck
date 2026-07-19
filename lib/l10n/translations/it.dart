@@ -736,6 +736,16 @@ const _dutchSourceIt = {
 const _dutchSourceAddIt = {
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'data di nascita, CAP e sesso insieme: quei tre di solito individuano una sola persona, anche senza nome',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Il certificato di questo server non è attendibile. Su un server self-hosted puoi visualizzarlo e sceglierlo come attendibile in Impostazioni → Archiviazione.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Il certificato di questo forge non è attendibile. Su un forge self-hosted puoi visualizzarlo e sceglierlo come attendibile in Impostazioni → Archiviazione.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Il certificato di questo endpoint non è attendibile. Su un endpoint self-hosted puoi visualizzarlo e sceglierlo come attendibile in Impostazioni → Archiviazione.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Il certificato del forge non è attendibile: autofirmato, scaduto o intestato a un altro nome.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Il certificato del endpoint non è attendibile: autofirmato, scaduto o intestato a un altro nome.',
   'creditcardnummer': 'numero di carta di credito',
   'beveiligingscode van een creditcard':
       'codice di sicurezza della carta (CVV)',
@@ -754,6 +764,12 @@ const _dutchSourceAddIt = {
       'Viene considerato attendibile solo questo certificato. Se il server lo sostituirà, OciDeck lo chiederà di nuovo.',
   'Vertrouwen': 'Considera attendibile',
   'Certificaat bekijken': 'Visualizza certificato',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'I posti dove conservi e cerchi le tue presentazioni — cartelle su questo computer, server WebDAV, bucket S3 e repository git mescolati. Trascinali nell\'ordine che preferisci: il primo di un tipo vale come predefinito.',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  Archiviazione S3: quando ti colleghi a un bucket, vengono conservati l\'endpoint, il nome del bucket e la tua chiave di accesso (la chiave segreta al sicuro nel portachiavi del sistema) e le presentazioni che apri o salvi vengono inviate a quel servizio di archiviazione.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Archiviazione Git: quando ti colleghi a un repository, viene conservato il tuo token di accesso (al sicuro nel portachiavi del sistema) e le presentazioni che salvi vengono inviate a quel server come commit. Una copia di lavoro del repository resta non cifrata su questo dispositivo.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Per la lingua di questa presentazione mancano i nomi di malattie e patologie. Religione, opinione politica e termini sindacali vengono riconosciuti, e i controlli con cifra di controllo (codice fiscale, IBAN, passaporto) funzionano sempre — ma non contare sul rilevamento di una diagnosi.',
   'niet getest': 'non testata',

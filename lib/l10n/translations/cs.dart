@@ -1786,6 +1786,16 @@ const _dutchSourceCs = {
 const _dutchSourceAddCs = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'datum narození, PSČ a pohlaví dohromady — tyto tři obvykle označují jednu osobu, i bez jména',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Certifikát tohoto serveru není důvěryhodný. U vlastního serveru jej můžeš zobrazit a důvěřovat mu v Nastavení → Úložiště.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Certifikát tohoto forge není důvěryhodný. U vlastního forge jej můžeš zobrazit a důvěřovat mu v Nastavení → Úložiště.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Certifikát tohoto koncového bodu není důvěryhodný. U vlastního koncového bodu jej můžeš zobrazit a důvěřovat mu v Nastavení → Úložiště.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Certifikát forge není důvěryhodný — vlastnoručně podepsaný, vypršelý nebo vydaný na jiné jméno.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Certifikát koncového bodu není důvěryhodný — vlastnoručně podepsaný, vypršelý nebo vydaný na jiné jméno.',
   'creditcardnummer': 'číslo kreditní karty',
   'beveiligingscode van een creditcard': 'bezpečnostní kód karty (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
@@ -1803,6 +1813,12 @@ const _dutchSourceAddCs = <String, String>{
       'Důvěřuje se pouze tomuto certifikátu. Pokud jej server později vymění, OciDeck se zeptá znovu.',
   'Vertrouwen': 'Důvěřovat',
   'Certificaat bekijken': 'Zobrazit certifikát',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Místa, kde uchováváš a prohledáváš své prezentace — složky v tomto počítači, servery WebDAV, buckety S3 a git repozitáře dohromady. Přetáhni je do pořadí, jaké chceš: nejvyšší svého druhu platí jako výchozí.',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  Úložiště S3: když se připojíš k bucketu, uloží se endpoint, název bucketu a tvůj přístupový klíč (tajný klíč bezpečně v klíčence tvého systému) a prezentace, které otevřeš nebo uložíš, se odešlou do této úložné služby.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Úložiště Git: když se připojíš k repozitáři, uloží se tvůj přístupový token (bezpečně v klíčence tvého systému) a prezentace, které uložíš, se odešlou na tento server jako commity. Pracovní kopie repozitáře zůstává na tomto zařízení nešifrovaná.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Pro jazyk této prezentace chybí názvy nemocí. Náboženství, politické přesvědčení a odborové pojmy se rozpoznávají a vzory s kontrolní číslicí (rodné číslo, IBAN, pas) fungují vždy — ale nepočítejte s tím, že se najde diagnóza.',
   'niet getest': 'neotestováno',

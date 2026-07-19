@@ -1819,6 +1819,16 @@ const _dutchSourceGa = {
 const _dutchSourceAddGa = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'dáta breithe, cód poist agus inscne le chéile — is gnách go gcuireann an triúr sin duine amháin in iúl, fiú gan ainm',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Níl muinín as teastas an fhreastalaí seo. Ar fhreastalaí féin-óstáilte is féidir leat féachaint air agus muinín a chur ann faoi Socruithe → Stóráil.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Níl muinín as teastas an forge seo. Ar forge féin-óstáilte is féidir leat féachaint air agus muinín a chur ann faoi Socruithe → Stóráil.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Níl muinín as teastas an endpoint seo. Ar endpoint féin-óstáilte is féidir leat féachaint air agus muinín a chur ann faoi Socruithe → Stóráil.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Níl muinín as teastas an forge — féinsínithe, as feidhm, nó eisithe chuig ainm eile.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Níl muinín as teastas an endpoint — féinsínithe, as feidhm, nó eisithe chuig ainm eile.',
   'creditcardnummer': 'uimhir chárta creidmheasa',
   'beveiligingscode van een creditcard': 'cód slándála cárta (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
@@ -1836,6 +1846,12 @@ const _dutchSourceAddGa = <String, String>{
       'Ní chuirtear muinín ach sa teastas seo amháin. Má chuireann an freastalaí ceann eile ina áit, fiafróidh OciDeck arís.',
   'Vertrouwen': 'Muinín',
   'Certificaat bekijken': 'Féach ar an teastas',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Na háiteanna ina gcoinníonn tú agus ina gcuardaíonn tú do chuid cur i láthair — fillteáin ar an ríomhaire seo, freastalaithe WebDAV, buicéid S3 agus stórais git measctha. Tarraing iad san ord is mian leat: an ceann is airde de chineál, is é an réamhshocrú é.',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  Stóráil S3: nuair a cheanglaíonn tú le buicéad, coinnítear an críochphointe, ainm an bhuicéid agus d\'eochair rochtana (an eochair rúnda go sábháilte in eochairslabhra do chórais) agus seoltar na cur i láthair a osclaíonn nó a shábhálann tú chuig an tseirbhís stórála sin.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Stóráil Git: nuair a cheanglaíonn tú le stór, coinnítear do chomhartha rochtana (go sábháilte in eochairslabhra do chórais) agus seoltar na cur i láthair a shábhálann tú chuig an bhfreastalaí sin mar commits. Fanann cóip oibre den stór gan chriptiú ar an ngléas seo.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Tá ainmneacha galar in easnamh do theanga an deic seo. Aithnítear reiligiún, tuairim pholaitiúil agus téarmaí ceardchumainn, agus oibríonn patrúin le digit seiceála (PPS, IBAN, pas) i gcónaí — ach ná bí ag brath ar dhiagnóis a aimsiú.',
   'niet getest': 'gan tástáil',

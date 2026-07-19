@@ -1774,6 +1774,16 @@ const _dutchSourceEt = {
 const _dutchSourceAddEt = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'sünnikuupäev, sihtnumber ja sugu koos — need kolm osutavad tavaliselt ühele inimesele, ka ilma nimeta',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Selle serveri sertifikaati ei usaldata. Ise majutatud serveri puhul saad seda vaadata ja usaldada jaotises Seaded → Salvestusruum.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Selle forge sertifikaati ei usaldata. Ise majutatud forge puhul saad seda vaadata ja usaldada jaotises Seaded → Salvestusruum.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Selle endpoint sertifikaati ei usaldata. Ise majutatud endpoint puhul saad seda vaadata ja usaldada jaotises Seaded → Salvestusruum.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'forge sertifikaati ei usaldata — ise allkirjastatud, aegunud või välja antud teisele nimele.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'endpoint sertifikaati ei usaldata — ise allkirjastatud, aegunud või välja antud teisele nimele.',
   'creditcardnummer': 'krediitkaardi number',
   'beveiligingscode van een creditcard': 'kaardi turvakood (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
@@ -1791,6 +1801,12 @@ const _dutchSourceAddEt = <String, String>{
       'Usaldatakse ainult seda üht sertifikaati. Kui server selle hiljem asendab, küsib OciDeck uuesti.',
   'Vertrouwen': 'Usalda',
   'Certificaat bekijken': 'Vaata sertifikaati',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Kohad, kus hoiad ja otsid oma esitlusi — kaustad selles arvutis, WebDAV-serverid, S3-ämbrid ja git-hoidlad läbisegi. Lohista need soovitud järjekorda: iga liigi ülemine kehtib vaikimisi valikuna.',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  S3-salvestus: kui ühendud ämbriga, salvestatakse lõpp-punkt, ämbri nimi ja sinu juurdepääsuvõti (salajane võti turvaliselt su süsteemi võtmehoidlasse) ning esitlused, mida avad või salvestad, saadetakse sellesse salvestusteenusesse.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Git-salvestus: kui ühendud hoidlaga, salvestatakse sinu juurdepääsuluba (turvaliselt su süsteemi võtmehoidlasse) ning esitlused, mida salvestad, saadetakse sellesse serverisse commit\'idena. Hoidla töökoopia jääb sellesse seadmesse krüpteerimata.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Selle esitluse keele jaoks puuduvad haiguste nimetused. Religiooni, poliitilist veendumust ja ametiühingutermineid tuntakse ära ning kontrollnumbriga mustrid (isikukood, IBAN, pass) töötavad alati — kuid ära looda, et diagnoos leitakse.',
   'niet getest': 'testimata',

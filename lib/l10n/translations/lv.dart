@@ -1782,6 +1782,16 @@ const _dutchSourceLv = {
 const _dutchSourceAddLv = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'dzimšanas datums, pasta indekss un dzimums kopā — šie trīs parasti norāda uz vienu personu, arī bez vārda',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Šī servera sertifikāts nav uzticams. Pašmitinātā servera to var apskatīt un uzticēties tam sadaļā Iestatījumi → Krātuve.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Šī forge sertifikāts nav uzticams. Pašmitinātā forge to var apskatīt un uzticēties tam sadaļā Iestatījumi → Krātuve.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Šī endpoint sertifikāts nav uzticams. Pašmitinātā endpoint to var apskatīt un uzticēties tam sadaļā Iestatījumi → Krātuve.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'forge sertifikāts nav uzticams — pašparakstīts, beidzies vai izdots citam nosaukumam.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'endpoint sertifikāts nav uzticams — pašparakstīts, beidzies vai izdots citam nosaukumam.',
   'creditcardnummer': 'kredītkartes numurs',
   'beveiligingscode van een creditcard': 'kartes drošības kods (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
@@ -1799,6 +1809,12 @@ const _dutchSourceAddLv = <String, String>{
       'Uzticēšanās attiecas tikai uz šo vienu sertifikātu. Ja serveris to vēlāk nomainīs, OciDeck jautās vēlreiz.',
   'Vertrouwen': 'Uzticēties',
   'Certificaat bekijken': 'Skatīt sertifikātu',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers, S3-buckets en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Vietas, kur glabā un meklē savas prezentācijas — mapes šajā datorā, WebDAV serveri, S3 kopas un git repozitoriji jauktā secībā. Velc tos vēlamajā secībā: augšējais no katra veida ir noklusējums.',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  S3 krātuve: kad savienojies ar kopu, tiek saglabāts galapunkts, kopas nosaukums un tava piekļuves atslēga (slepenā atslēga droši tavas sistēmas atslēgu saišķī), un prezentācijas, ko atver vai saglabā, tiek nosūtītas uz šo krātuves pakalpojumu.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Git krātuve: kad savienojies ar repozitoriju, tiek saglabāta tava piekļuves pilnvara (droši tavas sistēmas atslēgu saišķī), un prezentācijas, ko saglabā, tiek nosūtītas uz šo serveri kā commit. Repozitorija darba kopija paliek nešifrēta šajā ierīcē.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Šīs prezentācijas valodai trūkst slimību nosaukumu. Reliģija, politiskā pārliecība un arodbiedrību termini tiek atpazīti, un raksti ar kontrolciparu (personas kods, IBAN, pase) darbojas vienmēr — bet nepaļaujieties, ka tiks atrasta diagnoze.',
   'niet getest': 'nav pārbaudīts',
