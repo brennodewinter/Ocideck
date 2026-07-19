@@ -1798,6 +1798,12 @@ const _dutchSourceAddPl = <String, String>{
       'Połączenie git tej prezentacji już nie istnieje.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Najpierw skonfiguruj repozytorium git w Ustawienia → Pamięć.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Ten obraz przedstawia co najmniej jedną rozpoznawalną twarz.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Ten obraz przedstawia co najmniej tyle rozpoznawalnych twarzy: {count}.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Nie udało się sprawdzić tego obrazu pod kątem twarzy. Format nie jest obsługiwany (na przykład HEIC). To nie znaczy, że nikogo na nim nie ma — to znaczy, że nikt nie sprawdził.',
   'Deze afbeelding toont een herkenbaar gezicht.':
       'Ten obraz przedstawia rozpoznawalną twarz.',
   'Deze afbeelding toont {count} herkenbare gezichten.':

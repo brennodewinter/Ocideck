@@ -1785,6 +1785,12 @@ const _dutchSourceAddLv = <String, String>{
       'Šīs prezentācijas git savienojuma vairs nav.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Vispirms iestatiet git repozitoriju sadaļā Iestatījumi → Krātuve.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Šajā attēlā redzama vismaz viena atpazīstama seja.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Šajā attēlā redzamas vismaz tik atpazīstamas sejas: {count}.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Šo attēlu nevarēja pārbaudīt uz sejām. Formāts netiek atbalstīts (piemēram, HEIC). Tas nenozīmē, ka tajā nav neviena, — tas nozīmē, ka nav skatīts.',
   'Deze afbeelding toont een herkenbaar gezicht.':
       'Šajā attēlā redzama atpazīstama seja.',
   'Deze afbeelding toont {count} herkenbare gezichten.':

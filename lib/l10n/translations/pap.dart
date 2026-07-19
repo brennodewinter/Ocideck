@@ -743,6 +743,12 @@ const _dutchSourceAddPap = {
       'E konekshon git di e presentashon akí no ta eksistí mas.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Konfigurá promé un repositorio git na Konfigurashon → Almasenahe.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'E imagen aki ta mustra por lo ménos un kara rekonosibel.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'E imagen aki ta mustra por lo ménos {count} kara rekonosibel.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'No por a chek e imagen aki pa kara. E formato no ta soportá (HEIC por ehèmpel). Esaki no ta nifiká ku no tin ningun hende — ta nifiká ku no a wak.',
   'Deze afbeelding toont een herkenbaar gezicht.':
       'E imagen aki ta mustra un kara rekonosibel.',
   'Deze afbeelding toont {count} herkenbare gezichten.':

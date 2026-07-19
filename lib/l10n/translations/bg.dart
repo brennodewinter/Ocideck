@@ -1809,6 +1809,12 @@ const _dutchSourceAddBg = <String, String>{
       'Git връзката на тази презентация вече не съществува.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Първо настройте git хранилище в Настройки → Хранилище.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Това изображение показва поне едно разпознаваемо лице.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Това изображение показва поне толкова разпознаваеми лица: {count}.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Това изображение не можа да бъде проверено за лица. Форматът не се поддържа (например HEIC). Това не означава, че на него няма никого — означава, че не е проверявано.',
   'Deze afbeelding toont een herkenbaar gezicht.':
       'Това изображение показва разпознаваемо лице.',
   'Deze afbeelding toont {count} herkenbare gezichten.':

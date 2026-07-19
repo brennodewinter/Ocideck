@@ -743,6 +743,12 @@ const _dutchSourceAddDe = {
       'Die git-Verbindung dieser Präsentation gibt es nicht mehr.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Richte zuerst ein git-Repository unter Einstellungen → Speicher ein.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Dieses Bild zeigt mindestens ein erkennbares Gesicht.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Dieses Bild zeigt mindestens {count} erkennbare Gesichter.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Dieses Bild konnte nicht auf Gesichter geprüft werden. Das Format wird nicht unterstützt (etwa HEIC). Das heißt nicht, dass niemand darauf ist — es heißt, dass nicht nachgesehen wurde.',
   'Deze afbeelding toont een herkenbaar gezicht.':
       'Dieses Bild zeigt ein erkennbares Gesicht.',
   'Deze afbeelding toont {count} herkenbare gezichten.':

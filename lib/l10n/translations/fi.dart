@@ -1786,6 +1786,12 @@ const _dutchSourceAddFi = <String, String>{
       'Tämän esityksen git-yhteyttä ei enää ole.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Määritä ensin git-arkisto kohdassa Asetukset → Tallennus.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Tässä kuvassa näkyy vähintään yhdet tunnistettavat kasvot.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Tässä kuvassa näkyy vähintään {count} tunnistettavaa kasvoa.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Tätä kuvaa ei voitu tarkistaa kasvojen varalta. Muotoa ei tueta (esimerkiksi HEIC). Se ei tarkoita, ettei kuvassa ole ketään — se tarkoittaa, ettei ole katsottu.',
   'Deze afbeelding toont een herkenbaar gezicht.':
       'Tässä kuvassa näkyy tunnistettavat kasvot.',
   'Deze afbeelding toont {count} herkenbare gezichten.':

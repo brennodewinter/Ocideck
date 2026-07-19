@@ -18,7 +18,8 @@ class _UnsupportedImageFaceScanner implements ImageFaceScanner {
   bool get isSupported => false;
 
   @override
-  Future<int> countFaces(Uint8List imageBytes) async => 0;
+  Future<ImageFaceScanResult> countFaces(Uint8List imageBytes) async =>
+      ImageFaceScanResult.none;
 
   @override
   void dispose() {}

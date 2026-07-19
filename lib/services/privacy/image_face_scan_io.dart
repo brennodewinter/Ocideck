@@ -12,14 +12,31 @@ import '../../utils/log.dart';
 
 import 'image_face_scan.dart';
 
-/// De werkbreedte waarop gedetecteerd wordt.
+/// De breedtes waarop gedetecteerd wordt, van grof naar fijn.
 ///
-/// YuNet is getraind op gezichten van ongeveer 10 tot 300 pixels. Een foto van
-/// 6000 pixels breed heeft gezichten die dáár ruim boven zitten, en die worden
-/// juist *slechter* gevonden — plus het kost onnodig veel rekentijd. Terugbrengen
-/// naar deze breedte houdt gezichten in het bereik waar het model goed is, en
-/// scheelt op een gewone dia-afbeelding een veelvoud aan tijd.
-const int kFaceScanWorkingWidth = 640;
+/// **Waarom meer dan één.** YuNet is getraind op gezichten van ongeveer 10 tot
+/// 300 pixels. Op één vaste breedte hangt het dus volledig van de compositie af
+/// of een gezicht in dat venster valt: een portret heeft een gezicht van halve
+/// beeldhoogte, een groepsfoto op een startbaan heeft er acht van dertig pixels.
+///
+/// Dat is gemeten, niet beredeneerd. Op een reeks van zeven echte foto's vond
+/// één vaste breedte van 640 er twee; per foto verschilde de béste breedte, en
+/// geen enkele was overal goed:
+///
+///     foto            orig  1920  1280   640
+///     startbaan          0     0     1     0
+///     twee personen      3     3     1     0
+///     portret staand     0     -     -     1
+///
+/// Drie schalen met het maximum eroverheen vindt er zes van zeven. De zevende is
+/// een strandfoto waarop iemand omlaag kijkt met een zonnebril op — die hoort een
+/// gezichtsdetector te missen, en dat is precies waarom de melding "herkenbaar
+/// gezicht" zegt en niet "persoon".
+///
+/// De bovengrens van 1920 is er tegen de kosten: 4K doorrekenen levert boven deze
+/// breedte niets extra's op, want de gezichten zitten dan ver boven het bereik
+/// waar het model op getraind is.
+const List<int> kFaceScanWidths = [1920, 1280, 640];
 
 /// Boven deze bestandsgrootte slaan we een afbeelding over.
 ///
@@ -60,53 +77,79 @@ class _OpenCvImageFaceScanner implements ImageFaceScanner {
   }
 
   @override
-  Future<int> countFaces(Uint8List imageBytes) async {
-    if (!isSupported || imageBytes.isEmpty) return 0;
-    if (imageBytes.lengthInBytes > kFaceScanMaxBytes) return 0;
+  Future<ImageFaceScanResult> countFaces(Uint8List imageBytes) async {
+    if (!isSupported || imageBytes.isEmpty) {
+      return ImageFaceScanResult.unreadable;
+    }
+    if (imageBytes.lengthInBytes > kFaceScanMaxBytes) {
+      return ImageFaceScanResult.unreadable;
+    }
 
     cv.Mat? source;
-    cv.Mat? working;
-    cv.Mat? faces;
     try {
       source = cv.imdecode(imageBytes, cv.IMREAD_COLOR);
-      // Een niet-ondersteund formaat (SVG, een kapot bestand) geeft een lege
-      // matrix. Dat is geen fout om over te klagen — er valt alleen niets te
-      // bekijken.
-      if (source.isEmpty || source.cols <= 0 || source.rows <= 0) return 0;
-
-      working = _fitForDetection(source);
-      final detector = _detectorFor(working.cols, working.rows);
-      if (detector == null) return 0;
-
-      faces = detector.detect(working);
-      // **Hier zit de grens.** `faces` bevat per gezicht een kader, vijf
-      // landmarks en een score. We lezen uitsluitend het aantal rijen; de
-      // coördinaten worden nooit uitgelezen en de matrix wordt hieronder
-      // vrijgegeven. Wie hier ooit `faces.at(...)` toevoegt, verandert de
-      // juridische kwalificatie van deze functie — lees eerst de kop van
-      // `image_face_scan.dart`.
-      return faces.rows;
+      // Een formaat dat OpenCV niet kent geeft een lege matrix. Dat is géén
+      // "nul gezichten" — HEIC valt hier bijvoorbeeld in, en iPhone-foto's zijn
+      // standaard HEIC. Een deck vol iPhone-portretten meldde daardoor niets.
+      if (source.isEmpty || source.cols <= 0 || source.rows <= 0) {
+        return ImageFaceScanResult.unreadable;
+      }
+      return ImageFaceScanResult(
+        faces: _countAcrossScales(source),
+        readable: true,
+      );
     } catch (e, s) {
       // Eén kapotte afbeelding mag de hele controle niet meenemen. We zetten de
       // scanner niet stil: de volgende afbeelding kan prima leesbaar zijn.
       // Bewust zonder pad of slide-nummer: dit is de component die over
       // afbeeldingen mét personen gaat, en een logregel is ook een verwerking.
       logError('ImageFaceScanner.countFaces', e, s);
-      return 0;
+      return ImageFaceScanResult.unreadable;
     } finally {
-      faces?.dispose();
-      if (!identical(working, source)) working?.dispose();
       source?.dispose();
     }
   }
 
-  /// Verkleint naar [kFaceScanWorkingWidth] als dat winst oplevert. Geeft
-  /// anders de bron terug — dan is er niets te kopiëren en niets te ruimen.
-  cv.Mat _fitForDetection(cv.Mat source) {
-    if (source.cols <= kFaceScanWorkingWidth) return source;
-    final scale = kFaceScanWorkingWidth / source.cols;
-    final height = (source.rows * scale).round().clamp(1, 1 << 20);
-    return cv.resize(source, (kFaceScanWorkingWidth, height));
+  /// Het hoogste aantal dat één van de schalen vindt.
+  ///
+  /// Het maximum en niet het gemiddelde: dit is een waarschuwing, en een gezicht
+  /// dat op één schaal zichtbaar is, staat er ook werkelijk op. Bij twijfel
+  /// melden is hier de goede kant om ernaast te zitten.
+  int _countAcrossScales(cv.Mat source) {
+    var best = 0;
+    var previousWidth = 0;
+    for (final target in kFaceScanWidths) {
+      final width = target > source.cols ? source.cols : target;
+      // Is de bron al smaller dan de volgende schaal, dan zou die schaal dezelfde
+      // meting herhalen. Eén keer is genoeg.
+      if (width == previousWidth) continue;
+      previousWidth = width;
+
+      final height = (source.rows * width / source.cols).round().clamp(
+        1,
+        1 << 20,
+      );
+      final scaled = width == source.cols
+          ? source
+          : cv.resize(source, (width, height));
+      cv.Mat? faces;
+      try {
+        final detector = _detectorFor(width, height);
+        if (detector == null) return best;
+        faces = detector.detect(scaled);
+        // **Hier zit de grens.** `faces` bevat per gezicht een kader, vijf
+        // landmarks en een score. We lezen uitsluitend het aantal rijen; de
+        // coördinaten worden nooit uitgelezen en de matrix wordt hieronder
+        // vrijgegeven. Wie hier ooit `faces.at(...)` toevoegt, verandert de
+        // juridische kwalificatie van deze functie — lees eerst de kop van
+        // `image_face_scan.dart`.
+        if (faces.rows > best) best = faces.rows;
+      } finally {
+        faces?.dispose();
+        if (!identical(scaled, source)) scaled.dispose();
+      }
+    }
+    return best;
   }
 
   cv.FaceDetectorYN? _detectorFor(int width, int height) {

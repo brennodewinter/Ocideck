@@ -1790,6 +1790,12 @@ const _dutchSourceAddGsw = <String, String>{
       'D git-Verbindig vo dere Präsentation git\'s nüme.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Richt zerscht es git-Repository i unter Istellige → Spycher.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Das Bild zeigt mindeschtens es erkennbars Gsicht.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Das Bild zeigt mindeschtens {count} erkennbari Gsichter.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Das Bild het nöd chöne uf Gsichter prüeft werde. S Format wird nöd unterstützt (zum Bispil HEIC). Das heisst nöd, dass niemert drufisch — es heisst, dass niemert nagluegt het.',
   'Deze afbeelding toont een herkenbaar gezicht.':
       'Das Bild zeigt es erkennbars Gsicht.',
   'Deze afbeelding toont {count} herkenbare gezichten.':

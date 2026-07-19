@@ -1793,6 +1793,12 @@ const _dutchSourceAddSk = <String, String>{
       'Pripojenie git tejto prezentácie už neexistuje.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Najprv nastavte git repozitár v Nastavenia → Úložisko.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Tento obrázok zobrazuje aspoň jednu rozpoznateľnú tvár.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Tento obrázok zobrazuje aspoň toľko rozpoznateľných tvárí: {count}.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Tento obrázok sa nepodarilo skontrolovať na tváre. Formát nie je podporovaný (napríklad HEIC). Neznamená to, že na ňom nikto nie je — znamená to, že sa nekontrolovalo.',
   'Deze afbeelding toont een herkenbaar gezicht.':
       'Tento obrázok zobrazuje rozpoznateľnú tvár.',
   'Deze afbeelding toont {count} herkenbare gezichten.':

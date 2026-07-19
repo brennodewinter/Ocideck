@@ -1814,6 +1814,12 @@ const _dutchSourceAddEl = <String, String>{
       'Η σύνδεση git αυτής της παρουσίασης δεν υπάρχει πλέον.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Ρυθμίστε πρώτα ένα αποθετήριο git στις Ρυθμίσεις → Αποθήκευση.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Αυτή η εικόνα δείχνει τουλάχιστον ένα αναγνωρίσιμο πρόσωπο.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Αυτή η εικόνα δείχνει τουλάχιστον {count} αναγνωρίσιμα πρόσωπα.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Δεν ήταν δυνατός ο έλεγχος αυτής της εικόνας για πρόσωπα. Η μορφή δεν υποστηρίζεται (π.χ. HEIC). Αυτό δεν σημαίνει ότι δεν υπάρχει κανείς — σημαίνει ότι δεν έγινε έλεγχος.',
   'Deze afbeelding toont een herkenbaar gezicht.':
       'Αυτή η εικόνα δείχνει ένα αναγνωρίσιμο πρόσωπο.',
   'Deze afbeelding toont {count} herkenbare gezichten.':

@@ -1804,6 +1804,12 @@ const _dutchSourceAddUk = <String, String>{
       'Git-з\'єднання цієї презентації більше не існує.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Спершу налаштуйте git-репозиторій у Налаштування → Сховище.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'На цьому зображенні видно щонайменше одне впізнаване обличчя.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'На цьому зображенні видно щонайменше стільки впізнаваних облич: {count}.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Це зображення не вдалося перевірити на обличчя. Формат не підтримується (наприклад, HEIC). Це не означає, що на ньому нікого немає, — це означає, що ніхто не дивився.',
   'Deze afbeelding toont een herkenbaar gezicht.':
       'На цьому зображенні видно впізнаване обличчя.',
   'Deze afbeelding toont {count} herkenbare gezichten.':

@@ -1788,6 +1788,12 @@ const _dutchSourceAddSl = <String, String>{
       'Povezava git te predstavitve ne obstaja več.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Najprej nastavite repozitorij git v Nastavitve → Shramba.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Ta slika prikazuje vsaj en prepoznaven obraz.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Ta slika prikazuje vsaj toliko prepoznavnih obrazov: {count}.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Te slike ni bilo mogoče preveriti za obraze. Format ni podprt (na primer HEIC). To ne pomeni, da na njej ni nikogar — pomeni, da ni bilo pregledano.',
   'Deze afbeelding toont een herkenbaar gezicht.':
       'Ta slika prikazuje prepoznaven obraz.',
   'Deze afbeelding toont {count} herkenbare gezichten.':

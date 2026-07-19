@@ -1785,6 +1785,12 @@ const _dutchSourceAddSv = <String, String>{
       'Git-anslutningen för den här presentationen finns inte längre.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Ställ först in ett git-arkiv under Inställningar → Lagring.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Den här bilden visar minst ett igenkännbart ansikte.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Den här bilden visar minst {count} igenkännbara ansikten.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Den här bilden kunde inte kontrolleras efter ansikten. Formatet stöds inte (till exempel HEIC). Det betyder inte att ingen finns på den — det betyder att ingen har tittat.',
   'Deze afbeelding toont een herkenbaar gezicht.':
       'Den här bilden visar ett igenkännbart ansikte.',
   'Deze afbeelding toont {count} herkenbare gezichten.':

@@ -1816,6 +1816,12 @@ const _dutchSourceAddPt = <String, String>{
       'A ligação git desta apresentação já não existe.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Configure primeiro um repositório git em Definições → Armazenamento.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Esta imagem mostra pelo menos um rosto reconhecível.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Esta imagem mostra pelo menos {count} rostos reconhecíveis.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Não foi possível verificar rostos nesta imagem. O formato não é suportado (HEIC, por exemplo). Isso não significa que não há ninguém — significa que não se olhou.',
   'Deze afbeelding toont een herkenbaar gezicht.':
       'Esta imagem mostra um rosto reconhecível.',
   'Deze afbeelding toont {count} herkenbare gezichten.':

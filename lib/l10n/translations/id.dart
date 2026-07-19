@@ -1786,6 +1786,12 @@ const _dutchSourceAddId = <String, String>{
       'Koneksi git untuk presentasi ini tidak ada lagi.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Siapkan dulu repositori git di Pengaturan → Penyimpanan.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Gambar ini menampilkan setidaknya satu wajah yang dapat dikenali.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Gambar ini menampilkan setidaknya {count} wajah yang dapat dikenali.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Gambar ini tidak dapat diperiksa untuk wajah. Formatnya tidak didukung (misalnya HEIC). Itu tidak berarti tidak ada orang di dalamnya — artinya belum diperiksa.',
   'Deze afbeelding toont een herkenbaar gezicht.':
       'Gambar ini menampilkan wajah yang dapat dikenali.',
   'Deze afbeelding toont {count} herkenbare gezichten.':

@@ -74,9 +74,17 @@ Future<List<SlideQualityIssue>> computeImagePrivacyIssues(Ref ref) async {
       projectPath: deck.projectPath,
     );
     if (bytes == null) continue;
-    final faces = await scanner.countFaces(bytes);
-    if (faces <= 0) continue;
-    issues.add(_issueFor(image, faces));
+    final result = await scanner.countFaces(bytes);
+    if (!result.readable) {
+      // Niet kunnen kijken is iets anders dan niets vinden. HEIC is het
+      // praktijkgeval: OpenCV leest het niet, en iPhone-foto's zijn standaard
+      // HEIC. Zonder deze melding zou een deck vol iPhone-portretten
+      // rapporteren dat er geen gezichten op staan.
+      issues.add(_unreadableIssueFor(image));
+      continue;
+    }
+    if (result.faces <= 0) continue;
+    issues.add(_issueFor(image, result.faces));
   }
   return issues;
 }
@@ -115,6 +123,17 @@ SlideQualityIssue _issueFor(_SlideImage image, int faces) => SlideQualityIssue(
     // te maskeren, en het getal zelf verraadt niemand.
     'sample': '$faces',
   },
+);
+
+SlideQualityIssue _unreadableIssueFor(_SlideImage image) => SlideQualityIssue(
+  slideIndex: image.slideIndex,
+  kind: SlideQualityIssueKind.privacyImageUnreadable,
+  category: SlideQualityCategory.privacy,
+  // Informatief: er is geen bevinding, alleen een gat in de dekking. Dit mag
+  // niemand onderbreken, maar het mag ook niet verzwegen worden.
+  severity: MarkdownValidationSeverity.informational,
+  field: image.field,
+  args: const {'rule': 'image.face'},
 );
 
 /// De familie waar deze melding onder valt, voor de badge en het paneel.

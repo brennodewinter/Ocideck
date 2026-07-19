@@ -925,6 +925,12 @@ const _dutchSourceAddEn = {
       'The git connection for this deck no longer exists.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Set up a git repository first, under Settings → Storage.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'This image shows at least one recognisable face.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'This image shows at least {count} recognisable faces.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'This image could not be checked for faces. The format is not supported (HEIC, for instance). That does not mean nobody is in it — it means nobody looked.',
   'Deze afbeelding toont een herkenbaar gezicht.':
       'This image shows a recognisable face.',
   'Deze afbeelding toont {count} herkenbare gezichten.':

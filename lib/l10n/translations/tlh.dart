@@ -1761,6 +1761,12 @@ const _dutchSourceAddTlh = <String, String>{
       'QIchvam git rar tu\'lu\'be\'qu\'.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'wa\'DIch git qawHaq yIcher: DuHmey → waHtaHghach.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'qab ngu\'lu\'bogh wa\' puS \'oS nagh beq vam.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'qab ngu\'lu\'bogh {count} puS \'oS nagh beq vam.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'nagh beq vam qab ngu\'meH nujDaq Qapbe\'. rap Sovbe\'lu\'. nuv tu\'be\'lu\' \'e\' \'oSbe\'; bejbe\'lu\' \'e\' \'oS.',
   'Deze afbeelding toont een herkenbaar gezicht.':
       'qab ngu\'lu\'bogh \'oS nagh beq vam.',
   'Deze afbeelding toont {count} herkenbare gezichten.':

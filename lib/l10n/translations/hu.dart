@@ -1790,6 +1790,12 @@ const _dutchSourceAddHu = <String, String>{
       'Ennek a bemutatónak a git-kapcsolata már nem létezik.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Előbb állíts be egy git-tárolót a Beállítások → Tárolás alatt.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Ezen a képen legalább egy felismerhető arc látható.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Ezen a képen legalább {count} felismerhető arc látható.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Ezt a képet nem lehetett arcokra ellenőrizni. A formátum nem támogatott (például HEIC). Ez nem azt jelenti, hogy nincs rajta senki — azt jelenti, hogy nem néztük meg.',
   'Deze afbeelding toont een herkenbaar gezicht.':
       'Ezen a képen felismerhető arc látható.',
   'Deze afbeelding toont {count} herkenbare gezichten.':

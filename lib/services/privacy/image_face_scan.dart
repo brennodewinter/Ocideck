@@ -41,6 +41,25 @@ import 'dart:typed_data';
 import 'image_face_scan_stub.dart'
     if (dart.library.io) 'image_face_scan_io.dart';
 
+/// De uitkomst van één afbeelding.
+///
+/// `faces` en `readable` staan er los van elkaar in, en dat is het hele punt.
+/// Een afbeelding die niet te decoderen is (HEIC bijvoorbeeld — OpenCV leest dat
+/// niet, en iPhone-foto's zijn standaard HEIC) leverde eerst gewoon nul
+/// gezichten op. Dat is de stille nul waar deze controle juist tegen bestaat:
+/// "wij vonden niets" en "hier is niet gekeken" mogen nooit hetzelfde lezen.
+class ImageFaceScanResult {
+  final int faces;
+
+  /// Of de afbeelding überhaupt te lezen was.
+  final bool readable;
+
+  const ImageFaceScanResult({required this.faces, required this.readable});
+
+  static const unreadable = ImageFaceScanResult(faces: 0, readable: false);
+  static const none = ImageFaceScanResult(faces: 0, readable: true);
+}
+
 /// Telt gezichten in afbeeldingen. Zie de kop van dit bestand voor waarom er
 /// alleen geteld wordt.
 abstract interface class ImageFaceScanner {
@@ -51,9 +70,9 @@ abstract interface class ImageFaceScanner {
   /// zegt dat ook, want een stille nul is niet hetzelfde als "niets gevonden".
   bool get isSupported;
 
-  /// Het aantal herkenbare gezichten in [imageBytes]. Nul bij een onleesbare of
-  /// niet-ondersteunde afbeelding: een beeldcontrole hoort geen scan te breken.
-  Future<int> countFaces(Uint8List imageBytes);
+  /// Het aantal herkenbare gezichten in [imageBytes], plus of het bestand
+  /// leesbaar was. Gooit nooit: een beeldcontrole hoort geen scan te breken.
+  Future<ImageFaceScanResult> countFaces(Uint8List imageBytes);
 
   void dispose();
 }

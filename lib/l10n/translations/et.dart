@@ -1777,6 +1777,12 @@ const _dutchSourceAddEt = <String, String>{
       'Selle esitluse git-ühendust enam pole.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Seadista kõigepealt git-hoidla jaotises Seaded → Salvestus.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Sellel pildil on vähemalt üks äratuntav nägu.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Sellel pildil on vähemalt {count} äratuntavat nägu.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Seda pilti ei saanud nägude suhtes kontrollida. Vorming ei ole toetatud (näiteks HEIC). See ei tähenda, et pildil poleks kedagi — see tähendab, et ei vaadatud.',
   'Deze afbeelding toont een herkenbaar gezicht.':
       'Sellel pildil on äratuntav nägu.',
   'Deze afbeelding toont {count} herkenbare gezichten.':

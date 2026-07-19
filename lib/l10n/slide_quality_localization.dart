@@ -344,6 +344,9 @@ String formatSlideQualityIssue(AppLocalizations l10n, SlideQualityIssue issue) {
     SlideQualityIssueKind.privacyBulk ||
     SlideQualityIssueKind.privacyStructural => _formatPrivacy(l10n, issue),
     SlideQualityIssueKind.privacyImage => _formatImagePrivacy(l10n, issue),
+    SlideQualityIssueKind.privacyImageUnreadable => l10n.d(
+      'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.',
+    ),
   };
 }
 
@@ -403,10 +406,16 @@ String _formatImagePrivacy(AppLocalizations l10n, SlideQualityIssue issue) {
   // Twee complete zinnen in plaats van losse woorden aan elkaar geplakt: de
   // woordvolgorde van "toont N gezichten" verschilt per taal, en een vertaler
   // die alleen `herkenbare gezichten` te zien krijgt kan er niets mee.
+  // "Minstens", en dat is geen slag om de arm maar een meting: op een
+  // groepsfoto van acht mensen bij tegenlicht vond de detector er drie. Voor de
+  // waarschuwing maakt dat niets uit — één gezicht is al een persoonsgegeven —
+  // maar een exact klinkend getal zou liegen.
   final lead = count == 1
-      ? l10n.d('Deze afbeelding toont een herkenbaar gezicht.')
+      ? l10n.d('Deze afbeelding toont minstens één herkenbaar gezicht.')
       : _fillParams(
-          l10n.d('Deze afbeelding toont {count} herkenbare gezichten.'),
+          l10n.d(
+            'Deze afbeelding toont minstens {count} herkenbare gezichten.',
+          ),
           {'count': count},
         );
   return '$lead ${l10n.d('Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.')}';

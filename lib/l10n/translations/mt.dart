@@ -1808,6 +1808,12 @@ const _dutchSourceAddMt = <String, String>{
       'Il-konnessjoni git ta\' din il-preżentazzjoni ma għadhiex teżisti.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'L-ewwel issettja repożitorju git f\'Settings → Ħażna.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Din l-immaġni turi mill-inqas wiċċ rikonoxxibbli wieħed.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Din l-immaġni turi mill-inqas {count} uċuħ rikonoxxibbli.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Din l-immaġni ma setgħetx tiġi ċċekkjata għal uċuħ. Il-format mhuwiex appoġġjat (per eżempju HEIC). Dan ma jfissirx li m\'hemm ħadd fiha — ifisser li ħadd ma ħares.',
   'Deze afbeelding toont een herkenbaar gezicht.':
       'Din l-immaġni turi wiċċ rikonoxxibbli.',
   'Deze afbeelding toont {count} herkenbare gezichten.':

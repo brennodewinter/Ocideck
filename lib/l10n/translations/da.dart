@@ -1785,6 +1785,12 @@ const _dutchSourceAddDa = <String, String>{
       'Git-forbindelsen til denne præsentation findes ikke længere.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Opsæt først et git-arkiv under Indstillinger → Lagring.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Dette billede viser mindst ét genkendeligt ansigt.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Dette billede viser mindst {count} genkendelige ansigter.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Dette billede kunne ikke kontrolleres for ansigter. Formatet understøttes ikke (for eksempel HEIC). Det betyder ikke, at der ikke er nogen på det — det betyder, at der ikke er set efter.',
   'Deze afbeelding toont een herkenbaar gezicht.':
       'Dette billede viser et genkendeligt ansigt.',
   'Deze afbeelding toont {count} herkenbare gezichten.':

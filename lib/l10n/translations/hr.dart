@@ -1793,6 +1793,12 @@ const _dutchSourceAddHr = <String, String>{
       'Git veza ove prezentacije više ne postoji.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Najprije postavite git repozitorij u Postavke → Pohrana.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Ova slika prikazuje najmanje jedno prepoznatljivo lice.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Ova slika prikazuje najmanje ovoliko prepoznatljivih lica: {count}.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Ovu sliku nije bilo moguće provjeriti na lica. Format nije podržan (primjerice HEIC). To ne znači da na njoj nema nikoga — znači da nije provjereno.',
   'Deze afbeelding toont een herkenbaar gezicht.':
       'Ova slika prikazuje prepoznatljivo lice.',
   'Deze afbeelding toont {count} herkenbare gezichten.':

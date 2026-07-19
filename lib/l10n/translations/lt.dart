@@ -1794,6 +1794,12 @@ const _dutchSourceAddLt = <String, String>{
       'Šio pristatymo git jungties nebėra.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Pirmiausia nustatykite git saugyklą skiltyje Nustatymai → Saugykla.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Šiame vaizde matomas bent vienas atpažįstamas veidas.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Šiame vaizde matoma bent tiek atpažįstamų veidų: {count}.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Šio vaizdo nepavyko patikrinti dėl veidų. Formatas nepalaikomas (pavyzdžiui, HEIC). Tai nereiškia, kad jame nieko nėra, — tai reiškia, kad nebuvo tikrinta.',
   'Deze afbeelding toont een herkenbaar gezicht.':
       'Šiame vaizde matomas atpažįstamas veidas.',
   'Deze afbeelding toont {count} herkenbare gezichten.':

@@ -744,6 +744,12 @@ const _dutchSourceAddFy = {
       'De git-ferbining fan dizze presintaasje bestiet net mear.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Stel earst in git-repository yn by Ynstellings → Opslach.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Dizze ôfbylding lit op syn minst ien werkenber gesicht sjen.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Dizze ôfbylding lit op syn minst {count} werkenbere gesichten sjen.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Dizze ôfbylding koe net neisjoen wurde op gesichten. It formaat wurdt net stipe (HEIC bygelyks). Dat betsjut net dat der nimmen op stiet — der is net sjoen.',
   'Deze afbeelding toont een herkenbaar gezicht.':
       'Dizze ôfbylding lit in werkenber gesicht sjen.',
   'Deze afbeelding toont {count} herkenbare gezichten.':

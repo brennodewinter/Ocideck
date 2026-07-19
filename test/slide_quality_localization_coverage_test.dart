@@ -188,6 +188,7 @@ void main() {
       SlideQualityIssueKind.bulletColumnImbalance: {'left': '8', 'right': '1'},
       SlideQualityIssueKind.questionNotAnswerable: {},
       SlideQualityIssueKind.privacyImage: {'rule': 'image.face', 'sample': '2'},
+      SlideQualityIssueKind.privacyImageUnreadable: {'rule': 'image.face'},
       SlideQualityIssueKind.privacyIdentifier: {
         'rule': 'nl.bsn',
         'sample': 'j…l',

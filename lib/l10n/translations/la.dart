@@ -1802,6 +1802,12 @@ const _dutchSourceAddLa = <String, String>{
       'Conexio git huius praesentationis non iam exstat.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Prius repositorium git in Optionibus → Repositorio constitue.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Haec imago saltem unum vultum agnoscibilem ostendit.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Haec imago saltem {count} vultus agnoscibiles ostendit.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Haec imago de vultibus inspici non potuit. Forma non sustinetur (velut HEIC). Non significat neminem adesse — significat non esse inspectum.',
   'Deze afbeelding toont een herkenbaar gezicht.':
       'Haec imago vultum agnoscibilem ostendit.',
   'Deze afbeelding toont {count} herkenbare gezichten.':

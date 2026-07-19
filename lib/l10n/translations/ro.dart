@@ -1804,6 +1804,12 @@ const _dutchSourceAddRo = <String, String>{
       'Conexiunea git a acestei prezentări nu mai există.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Configurează mai întâi un depozit git în Setări → Stocare.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Această imagine arată cel puțin un chip recognoscibil.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Această imagine arată cel puțin {count} chipuri recognoscibile.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Această imagine nu a putut fi verificată pentru chipuri. Formatul nu este acceptat (de exemplu HEIC). Asta nu înseamnă că nu este nimeni în ea — înseamnă că nu s-a verificat.',
   'Deze afbeelding toont een herkenbaar gezicht.':
       'Această imagine arată un chip recognoscibil.',
   'Deze afbeelding toont {count} herkenbare gezichten.':

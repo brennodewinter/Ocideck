@@ -1822,6 +1822,12 @@ const _dutchSourceAddGa = <String, String>{
       'Níl nasc git na láithreoireachta seo ann a thuilleadh.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Socraigh stóras git ar dtús faoi Socruithe → Stóráil.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Taispeánann an íomhá seo aghaidh inaitheanta amháin ar a laghad.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Taispeánann an íomhá seo {count} aghaidh inaitheanta ar a laghad.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Níorbh fhéidir an íomhá seo a sheiceáil le haghaidh aghaidheanna. Ní thacaítear leis an bhformáid (HEIC mar shampla). Ní chiallaíonn sé sin nach bhfuil aon duine inti — ciallaíonn sé nár breathnaíodh.',
   'Deze afbeelding toont een herkenbaar gezicht.':
       'Taispeánann an íomhá seo aghaidh inaitheanta.',
   'Deze afbeelding toont {count} herkenbare gezichten.':

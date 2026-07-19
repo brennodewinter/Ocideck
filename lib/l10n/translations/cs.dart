@@ -1789,6 +1789,12 @@ const _dutchSourceAddCs = <String, String>{
       'Připojení git této prezentace už neexistuje.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Nejprve nastavte git repozitář v Nastavení → Úložiště.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Tento obrázek zobrazuje alespoň jednu rozpoznatelnou tvář.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Tento obrázek zobrazuje alespoň tolik rozpoznatelných tváří: {count}.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Tento obrázek nebylo možné zkontrolovat na tváře. Formát není podporován (například HEIC). Neznamená to, že na něm nikdo není — znamená to, že se nekontrolovalo.',
   'Deze afbeelding toont een herkenbaar gezicht.':
       'Tento obrázek zobrazuje rozpoznatelnou tvář.',
   'Deze afbeelding toont {count} herkenbare gezichten.':

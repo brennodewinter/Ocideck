@@ -47,6 +47,7 @@ enum SlideQualityIssueKind {
   privacyBulk,
   privacyStructural,
   privacyImage,
+  privacyImageUnreadable,
 }
 
 /// Waar binnen een veld een melding precies zit.
