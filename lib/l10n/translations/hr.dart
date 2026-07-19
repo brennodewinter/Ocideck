@@ -1790,6 +1790,16 @@ const _dutchSourceHr = {
 const _dutchSourceAddHr = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'datum rođenja, poštanski broj i spol zajedno — to troje obično upućuje na jednu osobu, i bez imena',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Certifikat ovog poslužitelja nije pouzdan. Na samostalno hostanom poslužitelja možete ga pregledati i označiti pouzdanim u Postavke → Pohrana.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Certifikat ovog forge nije pouzdan. Na samostalno hostanom forge možete ga pregledati i označiti pouzdanim u Postavke → Pohrana.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Certifikat ovog endpoint nije pouzdan. Na samostalno hostanom endpoint možete ga pregledati i označiti pouzdanim u Postavke → Pohrana.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Certifikat forge nije pouzdan — samopotpisan, istekao ili izdan na drugo ime.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Certifikat endpoint nije pouzdan — samopotpisan, istekao ili izdan na drugo ime.',
   'creditcardnummer': 'broj kreditne kartice',
   'beveiligingscode van een creditcard': 'sigurnosni kod kartice (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

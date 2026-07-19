@@ -1805,6 +1805,16 @@ const _dutchSourceMt = {
 const _dutchSourceAddMt = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'data tat-twelid, kodiċi postali u sess flimkien — dawn it-tlieta ġeneralment jindikaw persuna waħda, anke mingħajr isem',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Iċ-ċertifikat ta\' dan il-server mhuwiex fdat. Fuq server tiegħek stess tista\' tarah u tagħżel li tafdah taħt Settings → Ħażna.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Iċ-ċertifikat ta\' dan il-forge mhuwiex fdat. Fuq forge tiegħek stess tista\' tarah u tagħżel li tafdah taħt Settings → Ħażna.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Iċ-ċertifikat ta\' dan il-endpoint mhuwiex fdat. Fuq endpoint tiegħek stess tista\' tarah u tagħżel li tafdah taħt Settings → Ħażna.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Iċ-ċertifikat tal-forge mhuwiex fdat — iffirmat minnu nnifsu, skadut, jew maħruġ f\'isem ieħor.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Iċ-ċertifikat tal-endpoint mhuwiex fdat — iffirmat minnu nnifsu, skadut, jew maħruġ f\'isem ieħor.',
   'creditcardnummer': 'numru tal-karta tal-kreditu',
   'beveiligingscode van een creditcard': 'kodiċi tas-sigurtà tal-karta (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

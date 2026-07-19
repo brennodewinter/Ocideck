@@ -1819,6 +1819,16 @@ const _dutchSourceGa = {
 const _dutchSourceAddGa = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'dáta breithe, cód poist agus inscne le chéile — is gnách go gcuireann an triúr sin duine amháin in iúl, fiú gan ainm',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Níl muinín as teastas an fhreastalaí seo. Ar fhreastalaí féin-óstáilte is féidir leat féachaint air agus muinín a chur ann faoi Socruithe → Stóráil.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Níl muinín as teastas an forge seo. Ar forge féin-óstáilte is féidir leat féachaint air agus muinín a chur ann faoi Socruithe → Stóráil.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Níl muinín as teastas an endpoint seo. Ar endpoint féin-óstáilte is féidir leat féachaint air agus muinín a chur ann faoi Socruithe → Stóráil.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Níl muinín as teastas an forge — féinsínithe, as feidhm, nó eisithe chuig ainm eile.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Níl muinín as teastas an endpoint — féinsínithe, as feidhm, nó eisithe chuig ainm eile.',
   'creditcardnummer': 'uimhir chárta creidmheasa',
   'beveiligingscode van een creditcard': 'cód slándála cárta (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

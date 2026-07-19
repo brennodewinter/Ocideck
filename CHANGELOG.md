@@ -130,6 +130,11 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   Vervangt de server het certificaat later, dan vraagt OciDeck het opnieuw. Van
   de app uit gezien zien een verlenging en een aanvaller er namelijk hetzelfde
   uit, dus die afweging hoort bij de mens die de server kent.
+
+  Geldt voor alle drie de netwerkbronnen: WebDAV, S3 en git. Bij S3 en git
+  werd een certificaatprobleem tot nu toe als gewone netwerkstoring gemeld —
+  die kennen nu, net als WebDAV, een eigen foutsoort ervoor, zodat de weg naar
+  *Certificaat bekijken* er überhaupt is.
 - **De statusregel zegt nu of een bron ooit heeft geántwoord, niet alleen of
   hij is ingevuld.** Een verbinding werd groen zodra de velden gevuld waren —
   ook bij een server die nog nooit was aangeraakt. Dat groene vinkje beloofde

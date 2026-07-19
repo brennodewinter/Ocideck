@@ -736,6 +736,16 @@ const _dutchSourceIt = {
 const _dutchSourceAddIt = {
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'data di nascita, CAP e sesso insieme: quei tre di solito individuano una sola persona, anche senza nome',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Il certificato di questo server non è attendibile. Su un server self-hosted puoi visualizzarlo e sceglierlo come attendibile in Impostazioni → Archiviazione.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Il certificato di questo forge non è attendibile. Su un forge self-hosted puoi visualizzarlo e sceglierlo come attendibile in Impostazioni → Archiviazione.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Il certificato di questo endpoint non è attendibile. Su un endpoint self-hosted puoi visualizzarlo e sceglierlo come attendibile in Impostazioni → Archiviazione.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Il certificato del forge non è attendibile: autofirmato, scaduto o intestato a un altro nome.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Il certificato del endpoint non è attendibile: autofirmato, scaduto o intestato a un altro nome.',
   'creditcardnummer': 'numero di carta di credito',
   'beveiligingscode van een creditcard':
       'codice di sicurezza della carta (CVV)',

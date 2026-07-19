@@ -740,6 +740,16 @@ const _dutchSourceFr = {
 const _dutchSourceAddFr = {
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'date de naissance, code postal et sexe réunis : ces trois-là désignent généralement une seule personne, même sans nom',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Le certificat de ce serveur n\'est pas approuvé. Sur un serveur auto-hébergé, vous pouvez l\'afficher et lui faire confiance dans Paramètres → Stockage.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Le certificat de ce forge n\'est pas approuvé. Sur un forge auto-hébergé, vous pouvez l\'afficher et lui faire confiance dans Paramètres → Stockage.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Le certificat de ce point de terminaison n\'est pas approuvé. Sur un point de terminaison auto-hébergé, vous pouvez l\'afficher et lui faire confiance dans Paramètres → Stockage.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Le certificat du forge n\'est pas approuvé : auto-signé, expiré ou établi à un autre nom.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Le certificat du point de terminaison n\'est pas approuvé : auto-signé, expiré ou établi à un autre nom.',
   'creditcardnummer': 'numéro de carte bancaire',
   'beveiligingscode van een creditcard': 'code de sécurité de la carte (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

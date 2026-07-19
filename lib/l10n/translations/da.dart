@@ -1782,6 +1782,16 @@ const _dutchSourceDa = {
 const _dutchSourceAddDa = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'fødselsdato, postnummer og køn tilsammen — de tre peger som regel på én person, også uden navn',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Dette servers certifikat er ikke betroet. På en selvhostet server kan du se det og vælge at stole på det under Indstillinger → Lagring.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Dette forges certifikat er ikke betroet. På en selvhostet forge kan du se det og vælge at stole på det under Indstillinger → Lagring.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Dette endpoints certifikat er ikke betroet. På en selvhostet endpoint kan du se det og vælge at stole på det under Indstillinger → Lagring.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'forgeens certifikat er ikke betroet — selvsigneret, udløbet eller udstedt til et andet navn.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'endpointens certifikat er ikke betroet — selvsigneret, udløbet eller udstedt til et andet navn.',
   'creditcardnummer': 'kreditkortnummer',
   'beveiligingscode van een creditcard': 'kortsikkerhedskode (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

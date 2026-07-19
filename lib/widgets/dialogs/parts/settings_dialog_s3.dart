@@ -154,6 +154,18 @@ extension _SettingsS3 on _SettingsDialogState {
               ),
           ],
         ),
+        if (form.testCertRejected)
+          Padding(
+            padding: const EdgeInsets.only(top: 6),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton.icon(
+                onPressed: () => _trustS3Certificate(form),
+                icon: const Icon(Icons.verified_user_outlined, size: 16),
+                label: Text(l10n.d('Certificaat bekijken')),
+              ),
+            ),
+          ),
         if (form.testOk == false && testMsg != null)
           Padding(
             padding: const EdgeInsets.only(top: 10),
@@ -207,10 +219,12 @@ extension _SettingsS3 on _SettingsDialogState {
       secretAccessKey: form.secret.field.text,
     );
     String? error;
+    var certRejected = false;
     try {
       await service.probe();
     } on S3Exception catch (e) {
       error = _s3ErrorText(l10n, e.kind);
+      certRejected = e.kind == S3Error.tls;
     } catch (e, st) {
       logError('SettingsDialog: S3-verbindingstest', e, st);
       error = l10n.d('Verbinding mislukt');
@@ -220,7 +234,28 @@ extension _SettingsS3 on _SettingsDialogState {
       form.testing = false;
       form.testOk = error == null;
       form.testMessage = error;
+      form.testCertRejected = certRejected;
     });
+  }
+
+  /// Laat het certificaat zien en pin het als de gebruiker het vertrouwt.
+  Future<void> _trustS3Certificate(S3Form form) async {
+    final config = form.config;
+    final origin = config.origin;
+    if (origin == null) return;
+    final fingerprint = await _confirmCertificate(
+      origin: origin,
+      host: config.endpointHost,
+      allowPrivate: config.trustedInternal,
+    );
+    if (fingerprint == null || !mounted) return;
+    _rebuild(() {
+      form.pinnedCertSha256 = fingerprint;
+      form.testCertRejected = false;
+      form.testOk = null;
+      form.testMessage = null;
+    });
+    await _testS3Connection(form);
   }
 
   String _s3ErrorText(AppLocalizations l10n, S3Error kind) {
@@ -248,6 +283,10 @@ extension _SettingsS3 on _SettingsDialogState {
       case S3Error.conditionalUnsupported:
         return l10n.d(
           'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.',
+        );
+      case S3Error.tls:
+        return l10n.d(
+          'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.',
         );
       case S3Error.server:
         return l10n.d('Het endpoint gaf een fout. Probeer het later opnieuw.');

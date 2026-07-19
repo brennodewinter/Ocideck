@@ -61,6 +61,11 @@ enum GitForgeError {
 
   network,
 
+  /// Het TLS-certificaat van de forge werd niet vertrouwd — zelfondertekend,
+  /// verlopen, of op een andere naam. Eigen soort omdat de gebruiker het
+  /// certificaat kan bekijken en vertrouwen; als [network] verdween die weg.
+  tls,
+
   /// De forge accepteerde het token niet (401).
   auth,
 

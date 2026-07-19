@@ -922,6 +922,16 @@ const _dutchSourceEn = {
 const _dutchSourceAddEn = {
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'date of birth, postcode and gender together — those three usually pinpoint one person, even without a name',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'This server\'s certificate is not trusted. On a self-hosted server you can view it and choose to trust it under Settings → Storage.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'This forge\'s certificate is not trusted. On a self-hosted forge you can view it and choose to trust it under Settings → Storage.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'This endpoint\'s certificate is not trusted. On a self-hosted endpoint you can view it and choose to trust it under Settings → Storage.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'The forge\'s certificate is not trusted — self-signed, expired, or issued to a different name.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'The endpoint\'s certificate is not trusted — self-signed, expired, or issued to a different name.',
   'creditcardnummer': 'credit card number',
   'beveiligingscode van een creditcard': 'card security code (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

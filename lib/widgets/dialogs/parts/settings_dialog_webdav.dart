@@ -356,20 +356,10 @@ extension _SettingsWebdav on _SettingsDialogState {
     final server = form.server;
     final origin = server.origin;
     if (origin == null) return;
-    final resolved = await NetGuard.resolveConfigured(
-      server.host,
-      allowPrivate: server.trustedInternal,
-    );
-    if (!resolved.isOk || !mounted) return;
-    final cert = await NetGuard.peekCertificate(
-      resolved.addresses!.first,
-      origin,
-    );
-    if (cert == null || !mounted) return;
-    final fingerprint = await CertificateTrustDialog.show(
-      context,
-      certificate: cert,
+    final fingerprint = await _confirmCertificate(
+      origin: origin,
       host: server.host,
+      allowPrivate: server.trustedInternal,
     );
     if (fingerprint == null || !mounted) return;
     _rebuild(() {

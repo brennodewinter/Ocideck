@@ -333,6 +333,30 @@ extension _SettingsStorageTab on _SettingsDialogState {
     );
   }
 
+  /// Haal het certificaat van [origin] op, laat het zien, en geef de
+  /// vingerafdruk terug wanneer de gebruiker het vertrouwt. `null` bij
+  /// annuleren, of wanneer er niets te bevestigen viel.
+  ///
+  /// Gedeeld door de drie netwerkbronnen: de vraag is voor alle drie dezelfde,
+  /// en drie kopieën van een beveiligingsbeslissing is er twee te veel.
+  Future<String?> _confirmCertificate({
+    required Uri origin,
+    required String host,
+    required bool allowPrivate,
+  }) async {
+    final resolved = await NetGuard.resolveConfigured(
+      host,
+      allowPrivate: allowPrivate,
+    );
+    if (!resolved.isOk || !mounted) return null;
+    final cert = await NetGuard.peekCertificate(
+      resolved.addresses!.first,
+      origin,
+    );
+    if (cert == null || !mounted) return null;
+    return CertificateTrustDialog.show(context, certificate: cert, host: host);
+  }
+
   /// Dag en tijd, kort genoeg voor een tooltip. Lokale tijd: de gebruiker
   /// herkent "gisteren om half vier", niet een UTC-stempel.
   static String _shortDate(DateTime when) {

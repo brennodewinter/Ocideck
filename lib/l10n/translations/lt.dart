@@ -1791,6 +1791,16 @@ const _dutchSourceLt = {
 const _dutchSourceAddLt = <String, String>{
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'gimimo data, pašto kodas ir lytis kartu — šie trys paprastai nurodo vieną asmenį, net be vardo',
+  'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Šio serverio sertifikatas nėra patikimas. Savarankiškai talpinamame serverio galite jį peržiūrėti ir juo pasitikėti skiltyje Nustatymai → Saugykla.',
+  'Het certificaat van de forge wordt niet vertrouwd. Bij een zelf gehoste forge kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Šio forge sertifikatas nėra patikimas. Savarankiškai talpinamame forge galite jį peržiūrėti ir juo pasitikėti skiltyje Nustatymai → Saugykla.',
+  'Het certificaat van het endpoint wordt niet vertrouwd. Bij een zelf gehost endpoint kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
+      'Šio endpoint sertifikatas nėra patikimas. Savarankiškai talpinamame endpoint galite jį peržiūrėti ir juo pasitikėti skiltyje Nustatymai → Saugykla.',
+  'Het certificaat van de forge wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'forge sertifikatas nėra patikimas — savarankiškai pasirašytas, nebegaliojantis arba išduotas kitam vardui.',
+  'Het certificaat van het endpoint wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'endpoint sertifikatas nėra patikimas — savarankiškai pasirašytas, nebegaliojantis arba išduotas kitam vardui.',
   'creditcardnummer': 'kredito kortelės numeris',
   'beveiligingscode van een creditcard': 'kortelės saugos kodas (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
