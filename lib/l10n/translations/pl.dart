@@ -1822,6 +1822,10 @@ const _dutchSourceAddPl = <String, String>{
       'Zaufanie dotyczy tylko tego jednego certyfikatu. Jeśli serwer go później wymieni, OciDeck zapyta ponownie.',
   'Vertrouwen': 'Zaufaj',
   'Certificaat bekijken': 'Pokaż certyfikat',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  Magazyn S3: gdy łączysz się z zasobnikiem, zapisywane są punkt końcowy, nazwa zasobnika i twój klucz dostępu (tajny klucz bezpiecznie w pęku kluczy twojego systemu), a prezentacje, które otwierasz lub zapisujesz, są wysyłane do tej usługi magazynowania.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Magazyn Git: gdy łączysz się z repozytorium, zapisywany jest twój token dostępu (bezpiecznie w pęku kluczy twojego systemu), a prezentacje, które zapisujesz, są wysyłane na ten serwer jako commity. Kopia robocza repozytorium pozostaje niezaszyfrowana na tym urządzeniu.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Dla języka tej prezentacji brakuje nazw chorób. Religia, poglądy polityczne i terminy związkowe są rozpoznawane, a wzorce z cyfrą kontrolną (PESEL, IBAN, paszport) działają zawsze — ale nie licz na wykrycie diagnozy.',
   'niet getest': 'nieprzetestowane',

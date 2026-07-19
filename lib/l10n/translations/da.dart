@@ -1809,6 +1809,10 @@ const _dutchSourceAddDa = <String, String>{
       'Kun netop dette certifikat betros. Udskifter serveren det senere, spørger OciDeck igen.',
   'Vertrouwen': 'Stol på',
   'Certificaat bekijken': 'Vis certifikat',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  S3-lagring: når du forbinder til en bucket, gemmes endpointet, bucket-navnet og din adgangsnøgle (den hemmelige nøgle sikkert i dit systems nøglering), og de præsentationer, du åbner eller gemmer, sendes til den lagringstjeneste.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Git-lagring: når du forbinder til et repository, gemmes dit adgangstoken (sikkert i dit systems nøglering), og de præsentationer, du gemmer, sendes til den server som commits. En arbejdskopi af repositoryet forbliver ukrypteret på denne enhed.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Sygdomsnavne mangler for dette decks sprog. Religion, politisk overbevisning og fagforeningsudtryk genkendes, og mønstre med kontrolciffer (CPR, IBAN, pas) virker altid — men regn ikke med, at en diagnose bliver fundet.',
   'niet getest': 'ikke testet',

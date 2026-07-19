@@ -1817,6 +1817,10 @@ const _dutchSourceAddSk = <String, String>{
       'Dôveruje sa iba tomuto certifikátu. Ak ho server neskôr vymení, OciDeck sa spýta znova.',
   'Vertrouwen': 'Dôverovať',
   'Certificaat bekijken': 'Zobraziť certifikát',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  Úložisko S3: keď sa pripojíš k bucketu, uložia sa endpoint, názov bucketu a tvoj prístupový kľúč (tajný kľúč bezpečne vo zväzku kľúčov tvojho systému) a prezentácie, ktoré otvoríš alebo uložíš, sa odošlú do tejto úložnej služby.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Úložisko Git: keď sa pripojíš k repozitáru, uloží sa tvoj prístupový token (bezpečne vo zväzku kľúčov tvojho systému) a prezentácie, ktoré uložíš, sa odošlú na tento server ako commity. Pracovná kópia repozitára zostáva na tomto zariadení nezašifrovaná.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Pre jazyk tejto prezentácie chýbajú názvy chorôb. Náboženstvo, politické presvedčenie a odborové pojmy sa rozpoznávajú a vzory s kontrolnou číslicou (rodné číslo, IBAN, pas) fungujú vždy — ale nepočítajte s tým, že sa nájde diagnóza.',
   'niet getest': 'neotestované',

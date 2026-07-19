@@ -106,6 +106,24 @@ class PrivacyStatementContent extends StatelessWidget {
                 ),
                 style: _bodyStyle,
               ),
+              // S3 en git staan hier als eigen regel, niet in de opsomming
+              // hierboven. Die opsomming is één string in dertig talen; elke
+              // opslagsoort erbij zou hem opnieuw de deur uit sturen — en
+              // precies daarom is git er jaren buiten gebleven. Eén bullet per
+              // backend maakt de volgende additief. Dát hij er moet zijn,
+              // bewaakt privacy_promise_test tegen StorageConnection.
+              Text(
+                l10n.d(
+                  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.',
+                ),
+                style: _bodyStyle,
+              ),
+              Text(
+                l10n.d(
+                  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.',
+                ),
+                style: _bodyStyle,
+              ),
               const SizedBox(height: 8),
               Text(
                 l10n.d(

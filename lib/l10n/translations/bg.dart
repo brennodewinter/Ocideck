@@ -1833,6 +1833,10 @@ const _dutchSourceAddBg = <String, String>{
       'Доверява се само на този сертификат. Ако сървърът го смени по-късно, OciDeck ще попита отново.',
   'Vertrouwen': 'Доверяване',
   'Certificaat bekijken': 'Преглед на сертификата',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  Хранилище S3: когато се свържеш с кофа, се запазват крайната точка, името на кофата и твоят ключ за достъп (тайният ключ сигурно в ключодържателя на системата ти), а презентациите, които отваряш или запазваш, се изпращат към тази услуга за съхранение.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Хранилище Git: когато се свържеш с хранилище, се запазва твоят токен за достъп (сигурно в ключодържателя на системата ти), а презентациите, които запазваш, се изпращат към този сървър като комити. Работно копие на хранилището остава нешифровано на това устройство.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'За езика на тази презентация липсват имената на заболявания. Религия, политически убеждения и синдикални термини се разпознават, а шаблоните с контролна цифра (ЕГН, IBAN, паспорт) работят винаги — но не разчитайте да бъде открита диагноза.',
   'niet getest': 'не е тествано',

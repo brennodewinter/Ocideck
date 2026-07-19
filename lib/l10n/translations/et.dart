@@ -1801,6 +1801,10 @@ const _dutchSourceAddEt = <String, String>{
       'Usaldatakse ainult seda üht sertifikaati. Kui server selle hiljem asendab, küsib OciDeck uuesti.',
   'Vertrouwen': 'Usalda',
   'Certificaat bekijken': 'Vaata sertifikaati',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  S3-salvestus: kui ühendud ämbriga, salvestatakse lõpp-punkt, ämbri nimi ja sinu juurdepääsuvõti (salajane võti turvaliselt su süsteemi võtmehoidlasse) ning esitlused, mida avad või salvestad, saadetakse sellesse salvestusteenusesse.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Git-salvestus: kui ühendud hoidlaga, salvestatakse sinu juurdepääsuluba (turvaliselt su süsteemi võtmehoidlasse) ning esitlused, mida salvestad, saadetakse sellesse serverisse commit\'idena. Hoidla töökoopia jääb sellesse seadmesse krüpteerimata.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Selle esitluse keele jaoks puuduvad haiguste nimetused. Religiooni, poliitilist veendumust ja ametiühingutermineid tuntakse ära ning kontrollnumbriga mustrid (isikukood, IBAN, pass) töötavad alati — kuid ära looda, et diagnoos leitakse.',
   'niet getest': 'testimata',

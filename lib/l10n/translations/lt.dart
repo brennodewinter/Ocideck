@@ -1818,6 +1818,10 @@ const _dutchSourceAddLt = <String, String>{
       'Pasitikima tik šiuo vienu sertifikatu. Jei serveris jį vėliau pakeis, OciDeck paklaus dar kartą.',
   'Vertrouwen': 'Pasitikėti',
   'Certificaat bekijken': 'Peržiūrėti sertifikatą',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  S3 saugykla: kai prisijungi prie kaušo, išsaugomi galinis taškas, kaušo pavadinimas ir tavo prieigos raktas (slaptasis raktas saugiai tavo sistemos raktinėje), o pristatymai, kuriuos atidarai ar išsaugai, siunčiami į tą saugyklos paslaugą.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Git saugykla: kai prisijungi prie saugyklos, išsaugomas tavo prieigos žetonas (saugiai tavo sistemos raktinėje), o pristatymai, kuriuos išsaugai, siunčiami į tą serverį kaip commitai. Darbinė saugyklos kopija lieka nešifruota šiame įrenginyje.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Šios pateikties kalbai trūksta ligų pavadinimų. Religija, politinės pažiūros ir profsąjungų terminai atpažįstami, o šablonai su kontroliniu skaitmeniu (asmens kodas, IBAN, pasas) veikia visada — bet nesitikėkite, kad bus rasta diagnozė.',
   'niet getest': 'nepatikrinta',

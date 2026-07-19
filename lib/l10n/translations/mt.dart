@@ -1832,6 +1832,10 @@ const _dutchSourceAddMt = <String, String>{
       'Dan iċ-ċertifikat biss huwa fdat. Jekk is-server jibdlu aktar tard, OciDeck jerġa\' jistaqsi.',
   'Vertrouwen': 'Afda',
   'Certificaat bekijken': 'Ara ċ-ċertifikat',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  Ħażna S3: meta tikkonnettja ma\' bucket, jinżammu l-endpoint, l-isem tal-bucket u ċ-ċavetta tal-aċċess tiegħek (iċ-ċavetta sigrieta b\'mod sigur fil-keychain tas-sistema tiegħek) u l-preżentazzjonijiet li tiftaħ jew tissejvja jintbagħtu lil dak is-servizz ta\' ħażna.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Ħażna Git: meta tikkonnettja ma\' repożitorju, jinżamm it-token tal-aċċess tiegħek (b\'mod sigur fil-keychain tas-sistema tiegħek) u l-preżentazzjonijiet li tissejvja jintbagħtu lil dak is-server bħala commits. Kopja tax-xogħol tar-repożitorju tibqa\' mhux ikkriptata fuq dan l-apparat.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Għal-lingwa ta\' din il-preżentazzjoni jonqsu l-ismijiet tal-mardiet. Ir-reliġjon, l-opinjoni politika u t-termini tat-trejdjunjins jingħarfu, u l-mudelli b\'ċifra ta\' kontroll (ID, IBAN, passaport) dejjem jaħdmu — imma toqgħodx tistenna li tinstab dijanjosi.',
   'niet getest': 'mhux ittestjat',

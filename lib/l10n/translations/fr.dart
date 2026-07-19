@@ -767,6 +767,10 @@ const _dutchSourceAddFr = {
       'Seul ce certificat est approuvé. Si le serveur le remplace plus tard, OciDeck redemandera.',
   'Vertrouwen': 'Faire confiance',
   'Certificaat bekijken': 'Afficher le certificat',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  Stockage S3 : lorsque tu te connectes à un bucket, le point de terminaison, le nom du bucket et ta clé d\'accès sont conservés (la clé secrète en sécurité dans le trousseau de ton système) et les présentations que tu ouvres ou enregistres sont envoyées à ce service de stockage.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Stockage Git : lorsque tu te connectes à un dépôt, ton jeton d\'accès est conservé (en sécurité dans le trousseau de ton système) et les présentations que tu enregistres sont envoyées à ce serveur sous forme de commits. Une copie de travail du dépôt reste non chiffrée sur cet appareil.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Les noms de maladies manquent pour la langue de cette présentation. La religion, l\'opinion politique et les termes syndicaux sont reconnus, et les motifs à chiffre de contrôle (NIR, IBAN, passeport) fonctionnent toujours — mais ne comptez pas sur la détection d\'un diagnostic.',
   'niet getest': 'non testée',

@@ -1840,6 +1840,10 @@ const _dutchSourceAddPt = <String, String>{
       'Apenas este certificado é fidedigno. Se o servidor o substituir mais tarde, o OciDeck perguntará de novo.',
   'Vertrouwen': 'Confiar',
   'Certificaat bekijken': 'Ver certificado',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  Armazenamento S3: quando te ligas a um bucket, são guardados o endpoint, o nome do bucket e a tua chave de acesso (a chave secreta em segurança no porta-chaves do teu sistema) e as apresentações que abres ou guardas são enviadas para esse serviço de armazenamento.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Armazenamento Git: quando te ligas a um repositório, é guardado o teu token de acesso (em segurança no porta-chaves do teu sistema) e as apresentações que guardas são enviadas para esse servidor como commits. Uma cópia de trabalho do repositório permanece não cifrada neste dispositivo.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Faltam os nomes de doenças para o idioma desta apresentação. Religião, opinião política e termos sindicais são reconhecidos, e os padrões com dígito de controlo (NIF, IBAN, passaporte) funcionam sempre — mas não conte com a deteção de um diagnóstico.',
   'niet getest': 'não testada',

@@ -1838,6 +1838,10 @@ const _dutchSourceAddEl = <String, String>{
       'Μόνο αυτό το πιστοποιητικό γίνεται έμπιστο. Αν ο διακομιστής το αντικαταστήσει αργότερα, το OciDeck θα ρωτήσει ξανά.',
   'Vertrouwen': 'Εμπιστεύομαι',
   'Certificaat bekijken': 'Προβολή πιστοποιητικού',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  Αποθήκευση S3: όταν συνδέεσαι σε έναν κάδο, αποθηκεύονται το endpoint, το όνομα του κάδου και το κλειδί πρόσβασής σου (το μυστικό κλειδί με ασφάλεια στην κλειδοθήκη του συστήματός σου) και οι παρουσιάσεις που ανοίγεις ή αποθηκεύεις στέλνονται σε αυτήν την υπηρεσία αποθήκευσης.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Αποθήκευση Git: όταν συνδέεσαι σε ένα αποθετήριο, αποθηκεύεται το διακριτικό πρόσβασής σου (με ασφάλεια στην κλειδοθήκη του συστήματός σου) και οι παρουσιάσεις που αποθηκεύεις στέλνονται σε αυτόν τον διακομιστή ως commits. Ένα αντίγραφο εργασίας του αποθετηρίου παραμένει μη κρυπτογραφημένο σε αυτήν τη συσκευή.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Για τη γλώσσα αυτής της παρουσίασης λείπουν τα ονόματα ασθενειών. Η θρησκεία, η πολιτική άποψη και οι συνδικαλιστικοί όροι αναγνωρίζονται, και τα μοτίβα με ψηφίο ελέγχου (ΑΜΚΑ, IBAN, διαβατήριο) λειτουργούν πάντα — αλλά μη βασίζεστε στον εντοπισμό διάγνωσης.',
   'niet getest': 'μη δοκιμασμένη',

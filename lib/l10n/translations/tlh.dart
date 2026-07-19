@@ -1785,6 +1785,10 @@ const _dutchSourceAddTlh = <String, String>{
       'teywI\' vam neH voqlu\'. tugh choHchugh pat, OciDeck tlhob je.',
   'Vertrouwen': 'yIvoq',
   'Certificaat bekijken': 'teywI\' yIlegh',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  S3 pol: bucket DamuvchughvaD, endpoint, bucket pong je ngaQHa\'moHwI\'lIj pol (pegh ngaQHa\'moHwI\' QaQ ghewmey velDaq) \'ej cha\'nav DapoSmoHbogh pagh Dapolbogh polmeH Daq ngeH.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Git pol: repository DamuvchughvaD, tokenlIj pol (QaQ ghewmey velDaq) \'ej cha\'nav Dapolbogh commit rur Server ngeH. repository vumwI\' vel ngaQHa\'be\'bogh jan vamDaq ratlh.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'vam Hol rop pong tu\'lu\'be\'. lalDan, woQ qeS, ghom mu\' je luleghlu\', \'ej mI\' toblu\'ta\' (BSN, IBAN, nav) reH vumtaH — \'ach rop ngu\' tu\'lu\'meH Qob.',
   'niet getest': 'wIvbe\'',

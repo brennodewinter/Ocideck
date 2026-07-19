@@ -1810,6 +1810,10 @@ const _dutchSourceAddFi = <String, String>{
       'Vain tähän yhteen varmenteeseen luotetaan. Jos palvelin vaihtaa sen myöhemmin, OciDeck kysyy uudelleen.',
   'Vertrouwen': 'Luota',
   'Certificaat bekijken': 'Näytä varmenne',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  S3-tallennus: kun yhdistät ämpäriin, päätepiste, ämpärin nimi ja käyttöavaimesi tallennetaan (salainen avain turvallisesti järjestelmäsi avainnippuun), ja esitykset, jotka avaat tai tallennat, lähetetään siihen tallennuspalveluun.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Git-tallennus: kun yhdistät arkistoon, käyttöpoletti tallennetaan (turvallisesti järjestelmäsi avainnippuun), ja esitykset, jotka tallennat, lähetetään sille palvelimelle committeina. Arkiston työkopio jää salaamattomana tälle laitteelle.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Tämän esityksen kielelle puuttuvat sairauksien nimet. Uskonto, poliittinen mielipide ja ammattiyhdistystermit tunnistetaan, ja tarkistusnumerolliset kuviot (hetu, IBAN, passi) toimivat aina — mutta älä luota siihen, että diagnoosi löytyy.',
   'niet getest': 'ei testattu',

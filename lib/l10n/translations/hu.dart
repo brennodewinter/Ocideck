@@ -1814,6 +1814,10 @@ const _dutchSourceAddHu = <String, String>{
       'Csak ez az egy tanúsítvány megbízható. Ha a kiszolgáló később lecseréli, az OciDeck újra rákérdez.',
   'Vertrouwen': 'Megbízom',
   'Certificaat bekijken': 'Tanúsítvány megtekintése',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  S3-tároló: amikor csatlakozol egy buckethez, elmentődik a végpont, a bucket neve és a hozzáférési kulcsod (a titkos kulcs biztonságosan a rendszered kulcstartójában), és a prezentációk, amelyeket megnyitsz vagy mentesz, elküldődnek arra a tárolószolgáltatásra.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Git-tároló: amikor csatlakozol egy repozitóriumhoz, elmentődik a hozzáférési tokened (biztonságosan a rendszered kulcstartójában), és a prezentációk, amelyeket mentesz, commitként elküldődnek arra a kiszolgálóra. A repozitórium munkamásolata titkosítatlanul marad ezen az eszközön.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Ennek a bemutatónak a nyelvéhez hiányoznak a betegségnevek. A vallás, a politikai vélemény és a szakszervezeti kifejezések felismerhetők, és az ellenőrző számjegyes minták (adóazonosító, IBAN, útlevél) mindig működnek — de ne számítson arra, hogy egy diagnózist megtalál.',
   'niet getest': 'nincs tesztelve',

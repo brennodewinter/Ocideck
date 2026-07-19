@@ -1812,6 +1812,10 @@ const _dutchSourceAddSl = <String, String>{
       'Zaupa se le temu enemu potrdilu. Če ga strežnik pozneje zamenja, bo OciDeck znova vprašal.',
   'Vertrouwen': 'Zaupaj',
   'Certificaat bekijken': 'Prikaži potrdilo',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  Shramba S3: ko se povežeš z vedrom, se shranijo končna točka, ime vedra in tvoj dostopni ključ (skrivni ključ varno v zbirki ključev tvojega sistema), predstavitve, ki jih odpreš ali shraniš, pa se pošljejo tej storitvi shrambe.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Shramba Git: ko se povežeš s skladiščem, se shrani tvoj dostopni žeton (varno v zbirki ključev tvojega sistema), predstavitve, ki jih shraniš, pa se pošljejo temu strežniku kot commiti. Delovna kopija skladišča ostane nešifrirana na tej napravi.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Za jezik te predstavitve manjkajo imena bolezni. Vera, politično prepričanje in sindikalni izrazi so prepoznani, vzorci s kontrolno številko (EMŠO, IBAN, potni list) pa delujejo vedno — vendar ne računajte, da bo diagnoza najdena.',
   'niet getest': 'ni preizkušeno',

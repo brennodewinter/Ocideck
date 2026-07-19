@@ -1846,6 +1846,10 @@ const _dutchSourceAddGa = <String, String>{
       'Ní chuirtear muinín ach sa teastas seo amháin. Má chuireann an freastalaí ceann eile ina áit, fiafróidh OciDeck arís.',
   'Vertrouwen': 'Muinín',
   'Certificaat bekijken': 'Féach ar an teastas',
+  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.':
+      '•  Stóráil S3: nuair a cheanglaíonn tú le buicéad, coinnítear an críochphointe, ainm an bhuicéid agus d\'eochair rochtana (an eochair rúnda go sábháilte in eochairslabhra do chórais) agus seoltar na cur i láthair a osclaíonn nó a shábhálann tú chuig an tseirbhís stórála sin.',
+  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.':
+      '•  Stóráil Git: nuair a cheanglaíonn tú le stór, coinnítear do chomhartha rochtana (go sábháilte in eochairslabhra do chórais) agus seoltar na cur i láthair a shábhálann tú chuig an bhfreastalaí sin mar commits. Fanann cóip oibre den stór gan chriptiú ar an ngléas seo.',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Tá ainmneacha galar in easnamh do theanga an deic seo. Aithnítear reiligiún, tuairim pholaitiúil agus téarmaí ceardchumainn, agus oibríonn patrúin le digit seiceála (PPS, IBAN, pas) i gcónaí — ach ná bí ag brath ar dhiagnóis a aimsiú.',
   'niet getest': 'gan tástáil',
