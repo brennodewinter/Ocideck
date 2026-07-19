@@ -358,37 +358,36 @@ extension _SettingsStorageTab on _SettingsDialogState {
 
     return Align(
       alignment: Alignment.centerLeft,
-      child: PopupMenuButton<StorageConnectionKind>(
-        tooltip: '',
-        onSelected: (kind) => kind == StorageConnectionKind.local
-            ? _addLocalConnection()
-            : _addNetworkConnection(kind),
-        itemBuilder: (context) => [
+      child: MenuAnchor(
+        builder: (context, controller, _) => ElevatedButton.icon(
+          onPressed: () =>
+              controller.isOpen ? controller.close() : controller.open(),
+          icon: const Icon(Icons.add, size: 16),
+          label: Text(l10n.d('Verbinding toevoegen')),
+        ),
+        menuChildren: [
           for (final kind in kinds)
-            PopupMenuItem(
-              value: kind,
-              child: ListTile(
-                dense: true,
-                contentPadding: EdgeInsets.zero,
-                leading: Icon(kind.icon, size: 19),
-                title: Text(kind.label(l10n)),
-                subtitle: Text(
-                  kind.summary(l10n),
-                  style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+            MenuItemButton(
+              onPressed: () => kind == StorageConnectionKind.local
+                  ? _addLocalConnection()
+                  : _addNetworkConnection(kind),
+              leadingIcon: Icon(kind.icon, size: 19),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(kind.label(l10n)),
+                    Text(
+                      kind.summary(l10n),
+                      style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+                    ),
+                  ],
                 ),
               ),
             ),
         ],
-        child: AbsorbPointer(
-          child: ElevatedButton.icon(
-            // De knop opent zelf niets: de PopupMenuButton eromheen vangt de
-            // tik. AbsorbPointer houdt hem visueel ingeschakeld — een
-            // uitgegrijsde knop zou beloven dat er niets gebeurt.
-            onPressed: () {},
-            icon: const Icon(Icons.add, size: 16),
-            label: Text(l10n.d('Verbinding toevoegen')),
-          ),
-        ),
       ),
     );
   }
