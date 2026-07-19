@@ -59,9 +59,10 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
   De melding zegt bewust *gezicht* en niet *persoon*: iemand van achteren, in
   profiel, met zonnebril omlaag kijkend of met het hoofd buiten de uitsnede wordt
-  gemist. Op een groepsfoto van acht bij tegenlicht vond hij er drie, dus staat er
-  "minstens drie". En een afbeelding in een formaat dat niet te lezen is — HEIC,
-  de iPhone-standaard — meldt *niet gecontroleerd*, nooit *niets gevonden*.
+  gemist. Omdat hij daardoor structureel ondertelt en nooit overtelt, staat er
+  "minstens N" in plaats van een exact klinkend getal. En een afbeelding in een
+  formaat dat niet te lezen is — HEIC, de iPhone-standaard — meldt *niet
+  gecontroleerd*, nooit *niets gevonden*.
 
   Eigen schakelaar onder *Instellingen → Veiligheid*: dit is de zwaarste controle,
   en hem uitzetten laat de tekstcontrole gewoon draaien.

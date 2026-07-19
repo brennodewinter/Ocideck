@@ -406,10 +406,11 @@ String _formatImagePrivacy(AppLocalizations l10n, SlideQualityIssue issue) {
   // Twee complete zinnen in plaats van losse woorden aan elkaar geplakt: de
   // woordvolgorde van "toont N gezichten" verschilt per taal, en een vertaler
   // die alleen `herkenbare gezichten` te zien krijgt kan er niets mee.
-  // "Minstens", en dat is geen slag om de arm maar een meting: op een
-  // groepsfoto van acht mensen bij tegenlicht vond de detector er drie. Voor de
-  // waarschuwing maakt dat niets uit — één gezicht is al een persoonsgegeven —
-  // maar een exact klinkend getal zou liegen.
+  // "Minstens", omdat de detector structureel ondertelt en nooit overtelt: hij
+  // vindt gezichten, dus iemand van achteren of met het hoofd buiten de uitsnede
+  // ontbreekt per definitie. Voor de waarschuwing maakt het niets uit — één
+  // gezicht is al een persoonsgegeven — maar een exact klinkend getal zou meer
+  // beloven dan er gekeken is.
   final lead = count == 1
       ? l10n.d('Deze afbeelding toont minstens één herkenbaar gezicht.')
       : _fillParams(

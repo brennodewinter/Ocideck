@@ -44,6 +44,35 @@ const List<int> kFaceScanWidths = [1920, 1280, 640];
 /// haperen. De grens is ruim: gewone dia-afbeeldingen zitten er ver onder.
 const int kFaceScanMaxBytes = 24 * 1024 * 1024;
 
+/// De scoredrempel waarboven een treffer als gezicht telt.
+///
+/// **Het midden van een plateau, niet de rand ervan.** Gemeten op zeven echte
+/// foto's plus elf mensloze app-assets:
+///
+///     drempel   gezichten   valse-positieven
+///        0,95           0                  0
+///        0,92           8                  0
+///        0,90          11                  0
+///        0,85          14                  0
+///        0,80          14                  0
+///        0,70          14                  0
+///        0,60          15                  0
+///        0,50          15                  2
+///
+/// Hier stond eerst 0,92, "om zeker te zijn" — en dat bleek drie honderdsten van
+/// een detector die letterlijk niets meer vindt. Tussen 0,85 en 0,70 ligt een
+/// vlak gebied waar het aantal niet verandert en er geen enkele valse positief
+/// bijkomt; pas onder 0,60 begint de precisie te zakken. 0,80 ligt daar in het
+/// midden en dus zo ver mogelijk van beide kliffen.
+///
+/// Wat híer níet in zit, ook gemeten: extra tussenschalen (960, 480) en
+/// contrastnormalisatie (CLAHE, voor tegenlicht) leverden geen enkel extra
+/// gezicht op. Die complexiteit is dus niet toegevoegd.
+///
+/// Voorbehoud: zeven foto's en elf negatieven is een kleine steekproef. Het
+/// plateau is geruststellend, maar dit is geen benchmark.
+const double kFaceScanScoreThreshold = 0.80;
+
 class _OpenCvImageFaceScanner implements ImageFaceScanner {
   final Uint8List _modelBytes;
   cv.FaceDetectorYN? _detector;
@@ -159,10 +188,7 @@ class _OpenCvImageFaceScanner implements ImageFaceScanner {
         _modelBytes,
         Uint8List(0),
         (width, height),
-        // Bewust hoger dan de standaard 0,9. Deze controle onderbreekt de
-        // auteur, dus een twijfelgeval mag hier niet doorheen: liever een
-        // gezicht missen dan de gebruiker leren dat de melding onzin is.
-        scoreThreshold: 0.92,
+        scoreThreshold: kFaceScanScoreThreshold,
       );
       detector.setInputSize((width, height));
       return detector;

@@ -779,9 +779,9 @@ only the number of faces and throws the rest away. Nothing is stored and nothing
 compared. That is what keeps this out of Article 9 biometrics — see PRIVACY.md.
 
 Read the wording carefully, because it is precise. It says **face**, not person.
-Someone photographed from behind, in profile, wearing sunglasses and looking down,
-or with their head outside the crop is missed. On a backlit group photo of eight
-people it found three, which is why the message says "at least three".
+Someone photographed from behind, in profile, or with their head outside the crop
+is missed. Because it therefore undercounts and never overcounts, the message says
+"at least N" rather than a number that sounds exact.
 
 And an image in a format the check cannot read — **HEIC**, the iPhone default —
 is reported as *not checked*, never as *nothing found*. A green result must never

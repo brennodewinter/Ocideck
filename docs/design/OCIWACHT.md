@@ -1269,11 +1269,38 @@ Drie schalen met het maximum eroverheen vindt er zes van zeven. De zevende is ee
 strandfoto waarop iemand omlaag kijkt met een zonnebril op — die hóórt een
 gezichtsdetector te missen.
 
-**Eerlijkheid in de melding.** Op een groepsfoto van acht mensen bij tegenlicht
-vindt de detector er drie. Geen valse positieven, een óndertelling. De melding
-zegt daarom "minstens N", en spreekt van *gezicht* en niet van *persoon* — iemand
-van achteren, in profiel, met mondkapje of met het hoofd buiten de uitsnede wordt
-gemist.
+**De scoredrempel bleek de belangrijkste knop, en hij stond bijna op de klif.**
+Gemeten op zeven foto's plus elf mensloze app-assets:
+
+```
+drempel   gezichten   valse-positieven
+   0,95           0                  0
+   0,92           8                  0
+   0,90          11                  0
+   0,85          14                  0
+   0,80          14                  0
+   0,70          14                  0
+   0,60          15                  0
+   0,50          15                  2
+```
+
+Er stond eerst 0,92, "om zeker te zijn" — drie honderdsten van een detector die
+letterlijk niets meer vindt. Tussen 0,85 en 0,70 ligt een vlak gebied zonder
+enkele valse positief; 0,80 ligt daar in het midden, dus zo ver mogelijk van
+beide kliffen. Op die drempel gaat de groepsfoto van drie naar **acht van acht**
+en wordt zelfs de strandfoto gevonden.
+
+Ook gemeten en daarom *niet* gebouwd: extra tussenschalen (960, 480) en
+contrastnormalisatie (CLAHE, voor tegenlicht) leverden geen enkel extra gezicht
+op. Die complexiteit is niet toegevoegd.
+
+**Eerlijkheid in de melding.** De detector telt structureel onder en nooit over —
+hij vindt gezichten, dus iemand van achteren of met het hoofd buiten de uitsnede
+ontbreekt per definitie. De melding zegt daarom "minstens N", en spreekt van
+*gezicht* en niet van *persoon*.
+
+*Voorbehoud:* zeven foto's en elf negatieven is een kleine steekproef. Het plateau
+is geruststellend, maar dit is geen benchmark.
 
 ### 13.6 Fasering
 
