@@ -433,6 +433,10 @@ String privacyRuleLabel(AppLocalizations l10n, String ruleId) {
   return switch (ruleId) {
     'nl.bsn' => l10n.d('burgerservicenummer (BSN)'),
     'fin.iban' => l10n.d('bankrekeningnummer (IBAN)'),
+    // Zelfde begrip voor de gebruiker als een IBAN: er staat een
+    // bankrekening op de slide. Het onderscheid tussen de twee notaties is
+    // een detail van de regel, niet van de melding.
+    'fin.us_routing' => l10n.d('bankrekeningnummer (IBAN)'),
     'fin.pan' => l10n.d('creditcardnummer'),
     'fin.cvv' => l10n.d('beveiligingscode van een creditcard'),
     'contact.email' => l10n.d('e-mailadres'),

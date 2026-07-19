@@ -42,7 +42,9 @@ accepteren, waarschuwen met een shield-badge, of redigeren op scherm en in expor
 | §13.3 Gebundeld gezondheidslexicon (Orphanet, 62.490 namen, 9 talen) | **geleverd** |
 | §13.3 EuroVoc voor religie/politiek/vakbond/etniciteit (27 talen) | **geleverd** |
 | §14 Onderzoeksdossier DLP-technieken (annex, geen ontwerp) | naslag |
-| §15 Fase 8 wereldpakketten (VS, Canada, art. 9) | **ontworpen, nog niet gebouwd** |
+| §15 Fase 8 wereldpakketten (VS, Canada, art. 9) | **ontworpen**; 8a geleverd |
+| §15.7 fase 8a `us.ssn`, `us.ssn_last4`, `us.itin`, `us.ein`, `fin.us_routing` | **geleverd** |
+| §15.8 Labeldekkingstest over de regeltabellen | **geleverd** |
 
 De genomen beslissingen staan in §11; die zijn niet meer open.
 

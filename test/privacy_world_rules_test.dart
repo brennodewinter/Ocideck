@@ -144,5 +144,24 @@ void main() {
       expect(isValidAbaRouting('000000000'), isFalse);
       expect(isValidAbaRouting('400000004'), isFalse); // 40 bestaat niet
     });
+
+    test('vuurt met context en zwijgt zonder', () {
+      // Negen cijfers halen de mod-10 één op de tien keer, dus ook hier draagt
+      // de contextpoort mee.
+      expect(rulesIn('Routing number 021000021'), contains('fin.us_routing'));
+      expect(
+        rulesIn('Artikelcode 021000021'),
+        isNot(contains('fin.us_routing')),
+      );
+    });
+
+    test('hangt niet aan het VS-pakket', () {
+      // Anders dan us.ssn: financiële data hoort niet stil te blijven omdat
+      // iemand een landchip uit had staan.
+      expect(
+        rulesIn('Routing number 021000021', regions: defaultPrivacyRegions),
+        contains('fin.us_routing'),
+      );
+    });
   });
 }

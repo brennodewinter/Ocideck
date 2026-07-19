@@ -23,6 +23,7 @@ import 'privacy_allowlist.dart';
 import 'privacy_bulk_rules.dart';
 import 'privacy_card_rules.dart';
 import 'privacy_checksums.dart';
+import 'privacy_checksums_world.dart';
 import 'privacy_context_role.dart';
 import 'privacy_contact_rules.dart';
 import 'privacy_digital_rules.dart';
@@ -75,6 +76,11 @@ final _reEmail = RegExp(r"[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}");
 /// Een IBAN staat vaak met spaties in een tekst. We accepteren die en
 /// normaliseren pas in de validatie.
 final _reIban = RegExp(r'\b[A-Z]{2}\d{2}(?:[ -]?[A-Z0-9]){10,30}\b');
+
+/// Negen kale cijfers; de mod-10 en de contextpoort doen het echte werk.
+final _reAbaRouting = RegExp(r'(?<!\d)\d{9}(?!\d)');
+
+const _abaContextWords = ['routing', 'aba', 'ach', 'wire', 'bank'];
 
 /// Negen losstaande cijfers. Bewust ruim: de 11-proef en de contextpoort doen
 /// het filterwerk, niet de regex.
@@ -297,6 +303,7 @@ class PrivacyScanner {
     _scanPlateAndIntlPostcode(fragment, slideIndex, out);
     _scanSecrets(fragment, slideIndex, out);
     _scanNationalIdentifiers(fragment, slideIndex, out);
+    _scanAbaRouting(fragment, slideIndex, out);
     _scanSpecialCategories(fragment, slideIndex, out);
     _scanAddress(fragment, slideIndex, out);
     _scanName(fragment, slideIndex, out);
@@ -718,6 +725,42 @@ class PrivacyScanner {
           ruleId: 'fin.iban',
           family: PrivacyFamily.financial,
           confidence: PrivacyConfidence.certain,
+        ),
+      );
+    }
+  }
+
+  // ── fin.us_routing ────────────────────────────────────────────────────────
+
+  /// Het Amerikaanse ABA routing number.
+  ///
+  /// Zit in de financiële familie en niet in het VS-landpakket, en dat is een
+  /// bewuste keuze: een Amerikaans rekeningnummer in een Nederlands deck hoort
+  /// niet stil te blijven omdat de auteur het VS-pakket uit had staan. Zo staat
+  /// `fin.iban` er ook in — die geldt voor negenentachtig landen tegelijk.
+  ///
+  /// De mod-10 draagt hier het bewijs, anders dan bij de rest van §15. Vandaar
+  /// de contextpoort: negen cijfers halen de controle één op de tien keer, en
+  /// een bankrekening zonder het woord erbij is meestal een ordernummer.
+  void _scanAbaRouting(
+    _Fragment fragment,
+    int slideIndex,
+    List<PrivacyFinding> out,
+  ) {
+    for (final match in _reAbaRouting.allMatches(fragment.text)) {
+      if (!isValidAbaRouting(match.group(0)!)) continue;
+      if (!_hasContextWord(fragment.text, match.start, _abaContextWords)) {
+        continue;
+      }
+      _emit(
+        out,
+        _finding(
+          fragment,
+          slideIndex,
+          match,
+          ruleId: 'fin.us_routing',
+          family: PrivacyFamily.financial,
+          confidence: PrivacyConfidence.likely,
         ),
       );
     }
