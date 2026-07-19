@@ -1785,6 +1785,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'creditcardnummer': 'Kreditcharte-Nummere',
+  'beveiligingscode van een creditcard': 'Charteprüefnummere (CVV)',
+  'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
+      'Date i de Sprächernotize — uf de Folie unsichtbar, aber im Export drin',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Für d Sproch vo dere Presentation fähle d Chrankheitsname. Religion, politischi Meinig und Gwerkschaftsbegriff wärde erkennt, und Prüefziffere (Steuer-ID, IBAN, Pass) laufe immer — aber verloss di nid druf, dass e Diagnose gfunde wird.',
   'niet getest': 'nid teschtet',

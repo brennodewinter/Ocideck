@@ -1817,6 +1817,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'creditcardnummer': 'uimhir chárta creidmheasa',
+  'beveiligingscode van een creditcard': 'cód slándála cárta (CVV)',
+  'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
+      'sonraí i nótaí an chainteora — dofheicthe ar an sleamhnán, ach easpórtáiltear iad',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Tá ainmneacha galar in easnamh do theanga an deic seo. Aithnítear reiligiún, tuairim pholaitiúil agus téarmaí ceardchumainn, agus oibríonn patrúin le digit seiceála (PPS, IBAN, pas) i gcónaí — ach ná bí ag brath ar dhiagnóis a aimsiú.',
   'niet getest': 'gan tástáil',

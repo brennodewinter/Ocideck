@@ -145,7 +145,13 @@ void main() {
       // 34/37 uitsluiten ruimt de hele botsing op. Het testnummer hieronder
       // stáát in OCIWACHT.md, en de corpustest ging er dan ook op af.
       expect(rulesIn('Testkaart 378282246310005'), isEmpty);
-      expect(rulesIn('Kaart 343434343434343'), isEmpty);
+
+      // Sinds `fin.pan` bestaat vuurt de andere helft van die botsing wél, en
+      // dat is precies de bedoeling: één van de twee regels pakt het nummer op,
+      // nooit allebei. Vóór `fin.pan` viel dit nummer tussen wal en schip.
+      final amex = rulesIn('Kaart 343434343434343');
+      expect(amex, isNot(contains('digital.imei')));
+      expect(amex, contains('fin.pan'));
     });
 
     test('een ICCID begint met 89 en draagt een Luhn', () {

@@ -1780,6 +1780,10 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'creditcardnummer': 'kredītkartes numurs',
+  'beveiligingscode van een creditcard': 'kartes drošības kods (CVV)',
+  'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
+      'dati runātāja piezīmēs — slaidā neredzami, bet nonāk eksportā',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Šīs prezentācijas valodai trūkst slimību nosaukumu. Reliģija, politiskā pārliecība un arodbiedrību termini tiek atpazīti, un raksti ar kontrolciparu (personas kods, IBAN, pase) darbojas vienmēr — bet nepaļaujieties, ka tiks atrasta diagnoze.',
   'niet getest': 'nav pārbaudīts',

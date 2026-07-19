@@ -1780,6 +1780,10 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'creditcardnummer': 'kreditkortnummer',
+  'beveiligingscode van een creditcard': 'kortsikkerhedskode (CVV)',
+  'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
+      'data i talernoterne — usynlige på diasset, men med i eksporten',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Sygdomsnavne mangler for dette decks sprog. Religion, politisk overbevisning og fagforeningsudtryk genkendes, og mønstre med kontrolciffer (CPR, IBAN, pas) virker altid — men regn ikke med, at en diagnose bliver fundet.',
   'niet getest': 'ikke testet',

@@ -29,6 +29,8 @@ accepteren, waarschuwen met een shield-badge, of redigeren op scherm en in expor
 | §3-E Digitale identificatoren (IP, MAC, IMEI, ICCID, IMSI, handle, device-ID) | **geleverd** |
 | §3-D `contact.birthdate` + `contact.geo` | **geleverd** |
 | §3-D kenteken (`nl.plate`) + buitenlandse postcodes (`<land>.postcode`) | **geleverd** |
+| §3-C `fin.pan` + `fin.cvv` (Luhn + IIN-bereik, CVV alleen in gezelschap) | **geleverd** |
+| §3-I `struct.notes_leak` | **geleverd** |
 | §13.2 Persoonskoppelingspoort (naam als koppeling, mededeling als bereik) | **geleverd** |
 | §13.2 Lexiconmodel als data (`role`/`match`/`weight`/`lang`) | **geleverd** |
 | §3-G `special.icd10` + `special.atc` (notatie met contextpoort) | **geleverd** |
@@ -132,6 +134,7 @@ groeit de regelset zonder de compile te breken.
 | `lib/services/privacy/privacy_regions.dart` | Landpakketten: welke regio's aan staan, en welke regels daaraan hangen |
 | `lib/services/privacy/privacy_context_role.dart` | ConText: rolherkenning (verdachte/aangever/getuige) met terminatiewoorden en drieweg-uitkomst |
 | `lib/services/privacy/privacy_lexicon_data.dart` | Het gebundelde art. 9/10-lexicon: term, categorie, taal, matchmodus, gewicht, rol |
+| `lib/services/privacy/privacy_card_rules.dart` | Creditcards: IIN-bereiken per schema, Luhn, CVV-patroon |
 | `lib/services/privacy/privacy_digital_rules.dart` | Digitale identificatoren: IPv4/IPv6, MAC, IMEI, ICCID, IMSI, social handles, device-ID's |
 | `lib/services/privacy/privacy_location_rules.dart` | Geboortedatum en coördinaten: datumvormen, contextwoorden, lat/lon, `geo:`-URI, plus-code, what3words |
 | `lib/services/privacy/privacy_scanner_detectors.dart` | `part of` de scanner: de detectoren voor MRZ, digitaal, geboortedatum en geo — puur om het hoofdbestand onder de 1000-regelgrens te houden |
@@ -253,6 +256,27 @@ nul. Waar géén checksum bestaat (US SSN, V-nummer), is een contextwoord verpli
 | `fin.iban` | IBAN | mod-97 = 1 na herschikking + landspecifieke lengtetabel. Bekende voorbeeld-IBANs uitgesloten (`NL91ABNA0417164300`, `DE89370400440532013000`, `GB82WEST…`) | zeker | ✓ |
 | `fin.pan` | Creditcardnummer | Luhn + geldig IIN-bereik (Visa/Mastercard/Amex/Discover/JCB/UnionPay/Maestro). Testkaarten uitgesloten (`4111111111111111`, `4242424242424242`, `5555555555554444`, `378282246310005`). Staat er ook een CVV (`cvv`, `cvc` + 3-4 cijfers) of vervaldatum bij → `error` | zeker | ✓ |
 | `fin.cvv` | CVV/CVC | alleen in combinatie met `fin.pan`; los is `123` betekenisloos | zeker (in combinatie) | ✓ |
+
+> **Gebouwd (2026-07-19).** `fin.pan` en `fin.cvv` staan er, met één afwijking
+> van de tekst hierboven: de escalatie naar **`error`** bij een PAN met een CVV
+> of vervaldatum ernaast is er *niet*. Dat kan nog niet — beslissing §11.3 houdt
+> `zeker` bewust op *waarschuwing*, omdat een fout `qualityBlockExportOnErrors`
+> bij bestaande gebruikers onbedoeld scherp zou zetten. De combinatie is daarom
+> zichtbaar in de melding en niet in de ernst; de strengere variant hoort bij
+> `privacyStrictSeverity` (§7), en die instelling bestaat nog niet. Het
+> vervaldatumpatroon is om dezelfde reden niet gebouwd: een patroon dat niets
+> verandert is dode code.
+>
+> De IIN-controle doet echt werk naast de Luhn. Eén op de tien willekeurige
+> reeksen haalt de Luhn, dus zonder het bereik zou elk ordernummer van zestien
+> cijfers een kaart zijn. Let bij het Mastercard-bereik op de bovengrens: het in
+> 2017 bijgekomen bereik loopt tot en met **2720**, en een prefixvergelijking op
+> twee tekens zou 2721 ten onrechte meenemen.
+>
+> Hiermee is ook de botsing gesloten die bij `digital.imei` half was opgelost:
+> een Amex-nummer is vijftien cijfers met een geldige Luhn en dus op vorm niet
+> van een IMEI te onderscheiden. Daar zijn de bereiken 34/37 uitgesloten; hier
+> worden ze opgepakt. Precies één van de twee regels vuurt.
 | `fin.bic` | BIC/SWIFT | formaat `AAAABBCC(XXX)`, geldige landcode. Los is dit bedrijfsdata → `info`; naast een IBAN → escaleert | waarschijnlijk | ✓ |
 | `fin.nl_bankrekening` | Oud NL-rekeningnummer | 9-10 cijfers, 11-proef | zeker | ◐ |
 | `fin.us_routing` | ABA routing number | mod-10-checksum | zeker | ◐ |
@@ -411,7 +435,7 @@ Dit is de familie die generieke PII-scanners missen en die voor Ocideck juist ei
 | `struct.url_pii` | Persoonsgegeven in een URL-query | `?email=`, `?user=`, `?phone=`, plus een JWT of e-mailadres in het pad | zeker | ✓ |
 | `struct.share_link` | Deellink met ingebakken toegang | SharePoint/OneDrive/Google Drive/Dropbox/WeTransfer-links met een token-segment. Wie de link heeft, heeft het bestand | waarschijnlijk | ✓ |
 | `struct.mailto` | `mailto:`-link | idem `contact.email`, maar ook in de link-URL en niet alleen in de tekst | zeker | ✓ |
-| `struct.notes_leak` | Sprekersnotities met een bevinding | Elke bevinding in `notes` krijgt een eigen accent in de melding: notities zijn onzichtbaar in de preview **maar gaan mee in PPTX-export** (`export_service.dart:298`). Dit is de meest onderschatte lek | zeker | ✓ |
+| `struct.notes_leak` | Sprekersnotities met een bevinding | Notities zijn onzichtbaar in de preview **maar gaan mee in PPTX-export** (`export_service.dart:298`). Dit is de meest onderschatte lek. **Geleverd**, maar als één bevinding per slide in plaats van een accent per treffer: het paneel zegt bij elke losse melding al in welk veld ze staat, dus wat ontbreekt is niet de plaats maar het *waarom*. Dat is één mededeling waard, geen herhaling. Telt alleen bevindingen die zichzelf al melden — een informatieve treffer in de notities is geen lek om over te waarschuwen | zeker | ✓ |
 | `struct.strike_not_redaction` | Doorhaling als "redactie" | Een bevinding binnen `~~…~~` → "doorhalen verwijdert de tekst niet". Idem voor tekst die in de themakleur van de achtergrond is gezet | zeker | ✓ |
 | `struct.data_uri` | Base64 data-URI-afbeelding | Onscanbaar. Melding is `privacyUnscannable`/`info`: "deze afbeelding kan niet gecontroleerd worden; controleer zelf op zichtbare persoonsgegevens" | zeker | ✓ |
 | `struct.remote_media` | Remote afbeelding/video | Lekt het IP-adres van de kijker naar een derde bij het openen. Bestaat al als instelling (`allowRemoteMedia`); hier wordt het een privacybevinding | zeker | ✓ |

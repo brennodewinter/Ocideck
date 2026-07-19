@@ -1781,6 +1781,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'creditcardnummer': 'luottokortin numero',
+  'beveiligingscode van een creditcard': 'kortin turvakoodi (CVV)',
+  'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
+      'tietoja puhujan muistiinpanoissa — näkymättömiä dialla, mutta mukana viennissä',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Tämän esityksen kielelle puuttuvat sairauksien nimet. Uskonto, poliittinen mielipide ja ammattiyhdistystermit tunnistetaan, ja tarkistusnumerolliset kuviot (hetu, IBAN, passi) toimivat aina — mutta älä luota siihen, että diagnoosi löytyy.',
   'niet getest': 'ei testattu',

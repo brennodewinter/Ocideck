@@ -735,6 +735,11 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'creditcardnummer': 'número de tarjeta de crédito',
+  'beveiligingscode van een creditcard':
+      'código de seguridad de la tarjeta (CVV)',
+  'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
+      'datos en las notas del orador: invisibles en la diapositiva, pero sí en la exportación',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Faltan los nombres de enfermedades para el idioma de esta presentación. La religión, la opinión política y los términos sindicales sí se reconocen, y los patrones con dígito de control (DNI, IBAN, pasaporte) siempre funcionan, pero no cuentes con que se detecte un diagnóstico.',
   'niet getest': 'sin probar',

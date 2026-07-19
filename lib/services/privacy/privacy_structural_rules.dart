@@ -180,3 +180,42 @@ final List<StructuralRule> structuralRules = [
 final RegExp dataUriPattern = RegExp(
   r'data:image/[a-z+]+;base64,[A-Za-z0-9+/=]{40,}',
 );
+
+/// De bevinding die zegt dat er iets in de sprekersnotities staat.
+///
+/// §3-I noemt dit "de meest onderschatte lek", en dat is geen overdrijving: een
+/// notitieveld is **onzichtbaar in de preview** en gaat **wél mee in
+/// PPTX-export**, als platte tekst in de notitiepagina's. Een auteur die zijn
+/// slides nakijkt op wat er te zien is, kijkt dus precies langs het vuilste veld
+/// heen.
+///
+/// Eén bevinding per slide en niet per treffer. Het paneel zegt bij elke losse
+/// melding al in welk veld ze staat ("Notities"); wat ontbreekt is niet de
+/// plaats maar het *waarom* — dat notities meereizen terwijl je ze niet ziet.
+/// Dat is één mededeling per slide waard, geen herhaling per treffer.
+///
+/// Telt alleen wat de auteur zou willen weten: bevindingen die zichzelf al
+/// melden. Een informatieve treffer in de notities is geen lek om over te
+/// waarschuwen.
+PrivacyFinding? notesLeakFinding(
+  int slideIndex,
+  List<PrivacyFinding> findings,
+) {
+  final inNotes = [
+    for (final f in findings)
+      if (f.field == 'notes' && f.confidence != PrivacyConfidence.possible) f,
+  ];
+  if (inNotes.isEmpty) return null;
+  return PrivacyFinding(
+    ruleId: 'struct.notes_leak',
+    family: PrivacyFamily.structural,
+    confidence: PrivacyConfidence.certain,
+    slideIndex: slideIndex,
+    field: 'notes',
+    start: 0,
+    end: 0,
+    // Het aantal, niet de waarden — net als bij de massa-bevinding. Dít is wat
+    // de auteur moet weten: er staat iets in een veld dat hij niet ziet.
+    maskedSample: '${inNotes.length}',
+  );
+}
