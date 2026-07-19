@@ -1780,6 +1780,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Geen meldingen meer op deze slide.':
+      'Ingen meddelelser tilbage på dette dias.',
   'Kwaliteitsproblemen geaccepteerd': 'Kvalitetsproblemer accepteret',
   'Mogelijk persoonsgegevens': 'Muligvis personoplysninger',
   'Persoonsgegevens geaccepteerd': 'Personoplysninger accepteret',

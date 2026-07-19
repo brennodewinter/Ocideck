@@ -738,6 +738,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Geen meldingen meer op deze slide.': 'No tin mas avisonan riba e slide aki.',
   'Kwaliteitsproblemen geaccepteerd': 'Problemanan di kalidat aseptá',
   'Mogelijk persoonsgegevens': 'Posiblemente datonan personal',
   'Persoonsgegevens geaccepteerd': 'Datonan personal aseptá',

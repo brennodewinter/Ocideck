@@ -1799,6 +1799,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Geen meldingen meer op deze slide.':
+      'Nu mai există notificări pe acest slide.',
   'Kwaliteitsproblemen geaccepteerd': 'Probleme de calitate acceptate',
   'Mogelijk persoonsgegevens': 'Posibile date cu caracter personal',
   'Persoonsgegevens geaccepteerd': 'Date cu caracter personal acceptate',

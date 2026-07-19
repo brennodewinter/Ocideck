@@ -1809,6 +1809,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Geen meldingen meer op deze slide.':
+      'Δεν υπάρχουν άλλα ευρήματα σε αυτή τη διαφάνεια.',
   'Kwaliteitsproblemen geaccepteerd': 'Τα ζητήματα ποιότητας έγιναν αποδεκτά',
   'Mogelijk persoonsgegevens': 'Πιθανώς προσωπικά δεδομένα',
   'Persoonsgegevens geaccepteerd': 'Τα προσωπικά δεδομένα έγιναν αποδεκτά',

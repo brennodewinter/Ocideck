@@ -1781,6 +1781,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Geen meldingen meer op deze slide.': 'Tidak ada temuan lagi di slide ini.',
   'Kwaliteitsproblemen geaccepteerd': 'Masalah kualitas diterima',
   'Mogelijk persoonsgegevens': 'Mungkin data pribadi',
   'Persoonsgegevens geaccepteerd': 'Data pribadi diterima',

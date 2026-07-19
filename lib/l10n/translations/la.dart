@@ -1797,6 +1797,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Geen meldingen meer op deze slide.': 'Nulla monita in hac tabula supersunt.',
   'Kwaliteitsproblemen geaccepteerd': 'Vitia qualitatis accepta',
   'Mogelijk persoonsgegevens': 'Fortasse data personalia',
   'Persoonsgegevens geaccepteerd': 'Data personalia accepta',

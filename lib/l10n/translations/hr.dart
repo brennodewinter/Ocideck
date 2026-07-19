@@ -1788,6 +1788,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Geen meldingen meer op deze slide.': 'Na ovom slajdu više nema obavijesti.',
   'Kwaliteitsproblemen geaccepteerd': 'Problemi kvalitete prihvaćeni',
   'Mogelijk persoonsgegevens': 'Možda osobni podaci',
   'Persoonsgegevens geaccepteerd': 'Osobni podaci prihvaćeni',

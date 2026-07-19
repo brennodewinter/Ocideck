@@ -1785,6 +1785,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Geen meldingen meer op deze slide.': 'Nincs több jelzés ezen a dián.',
   'Kwaliteitsproblemen geaccepteerd': 'Minőségi problémák elfogadva',
   'Mogelijk persoonsgegevens': 'Esetleg személyes adat',
   'Persoonsgegevens geaccepteerd': 'Személyes adat elfogadva',

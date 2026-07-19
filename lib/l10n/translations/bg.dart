@@ -1804,6 +1804,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Geen meldingen meer op deze slide.': 'Няма повече съобщения на този слайд.',
   'Kwaliteitsproblemen geaccepteerd': 'Проблемите с качеството са приети',
   'Mogelijk persoonsgegevens': 'Възможно лични данни',
   'Persoonsgegevens geaccepteerd': 'Личните данни са приети',

@@ -16,6 +16,7 @@ import '../../state/slide_clipboard_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
 import '../privacy_badge.dart' show privacyKatSvg;
+import 'slide_badge_popover.dart';
 import 'slide_badge_tone.dart';
 import 'slide_preview.dart';
 
@@ -35,29 +36,67 @@ String _privacyBadgeTooltip(AppLocalizations l10n, SlideBadgeTone tone) =>
       _ => l10n.d('Persoonsgegevens gevonden'),
     };
 
-/// Het badge-plaatje zelf: een gekleurd blokje met een icoon.
-class _SlideBadge extends StatelessWidget {
+/// Het badge-plaatje zelf: een gekleurd blokje met een icoon, dat antwoord geeft.
+///
+/// Twee gebaren, en het onderscheid ertussen is de hele afspraak:
+///
+///   * **enkele klik** opent het lijstje meldingen. Dat is de veilige actie, en
+///     dus de makkelijkste;
+///   * **dubbelklik** beslist. Op een gekleurde badge accepteer je wat er staat,
+///     op een grijze draai je die acceptatie terug.
+///
+/// Dat dubbelklikken twee kanten op werkt is geen symmetrie om de symmetrie: een
+/// beslissing die je niet met hetzelfde gebaar kunt terugnemen, durf je niet te
+/// nemen.
+class _SlideBadge extends ConsumerStatefulWidget {
   final SlideBadgeTone tone;
   final String message;
+  final int slideIndex;
+  final SlideBadgeFamily family;
   final Widget child;
 
   const _SlideBadge({
     required this.tone,
     required this.message,
+    required this.slideIndex,
+    required this.family,
     required this.child,
   });
 
   @override
+  ConsumerState<_SlideBadge> createState() => _SlideBadgeState();
+}
+
+class _SlideBadgeState extends ConsumerState<_SlideBadge> {
+  @override
   Widget build(BuildContext context) {
-    return Tooltip(
-      message: message,
-      child: Container(
-        padding: const EdgeInsets.all(3),
-        decoration: BoxDecoration(
-          color: tone.background,
-          borderRadius: BorderRadius.circular(4),
+    return Semantics(
+      button: true,
+      label: widget.message,
+      child: GestureDetector(
+        // Vangt de tik af vóór de kaart eronder: klikken op de badge hoort de
+        // meldingen te openen, niet alleen de slide te selecteren.
+        behavior: HitTestBehavior.opaque,
+        onTap: () => showSlideBadgeFindings(
+          context: context,
+          ref: ref,
+          slideIndex: widget.slideIndex,
+          family: widget.family,
+          tone: widget.tone,
         ),
-        child: child,
+        onDoubleTap: () =>
+            toggleSlideBadgeAcceptance(ref, widget.slideIndex, widget.family),
+        child: Tooltip(
+          message: widget.message,
+          child: Container(
+            padding: const EdgeInsets.all(3),
+            decoration: BoxDecoration(
+              color: widget.tone.background,
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: widget.child,
+          ),
+        ),
       ),
     );
   }
@@ -357,6 +396,8 @@ class SlideThumbnail extends ConsumerWidget {
                         _SlideBadge(
                           tone: qualityTone,
                           message: _qualityBadgeTooltip(l10n, qualityTone),
+                          slideIndex: index,
+                          family: SlideBadgeFamily.quality,
                           child: Icon(
                             Icons.accessibility_new_outlined,
                             size: 10,
@@ -369,6 +410,8 @@ class SlideThumbnail extends ConsumerWidget {
                         _SlideBadge(
                           tone: privacyTone,
                           message: _privacyBadgeTooltip(l10n, privacyTone),
+                          slideIndex: index,
+                          family: SlideBadgeFamily.privacy,
                           child: SvgPicture.string(
                             privacyKatSvg,
                             width: 10,

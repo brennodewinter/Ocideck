@@ -1811,6 +1811,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Geen meldingen meer op deze slide.': 'Não há mais avisos neste diapositivo.',
   'Kwaliteitsproblemen geaccepteerd': 'Problemas de qualidade aceites',
   'Mogelijk persoonsgegevens': 'Possíveis dados pessoais',
   'Persoonsgegevens geaccepteerd': 'Dados pessoais aceites',

@@ -735,6 +735,7 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Geen meldingen meer op deze slide.': 'No quedan avisos en esta diapositiva.',
   'Kwaliteitsproblemen geaccepteerd': 'Problemas de calidad aceptados',
   'Mogelijk persoonsgegevens': 'Posibles datos personales',
   'Persoonsgegevens geaccepteerd': 'Datos personales aceptados',

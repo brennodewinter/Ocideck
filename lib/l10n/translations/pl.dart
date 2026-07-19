@@ -1793,6 +1793,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Geen meldingen meer op deze slide.': 'Brak zgłoszeń na tym slajdzie.',
   'Kwaliteitsproblemen geaccepteerd': 'Zaakceptowano problemy z jakością',
   'Mogelijk persoonsgegevens': 'Możliwe dane osobowe',
   'Persoonsgegevens geaccepteerd': 'Zaakceptowano dane osobowe',

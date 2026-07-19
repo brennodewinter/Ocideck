@@ -1772,6 +1772,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Geen meldingen meer op deze slide.': 'Sellel slaidil pole enam teateid.',
   'Kwaliteitsproblemen geaccepteerd': 'Kvaliteediprobleemid aktsepteeritud',
   'Mogelijk persoonsgegevens': 'Võimalikud isikuandmed',
   'Persoonsgegevens geaccepteerd': 'Isikuandmed aktsepteeritud',

@@ -1783,6 +1783,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Geen meldingen meer op deze slide.': 'Na tem diapozitivu ni več obvestil.',
   'Kwaliteitsproblemen geaccepteerd': 'Težave s kakovostjo sprejete',
   'Mogelijk persoonsgegevens': 'Morda osebni podatki',
   'Persoonsgegevens geaccepteerd': 'Osebni podatki sprejeti',

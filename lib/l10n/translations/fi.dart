@@ -1781,6 +1781,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Geen meldingen meer op deze slide.': 'Tällä dialla ei ole enää ilmoituksia.',
   'Kwaliteitsproblemen geaccepteerd': 'Laatuongelmat hyväksytty',
   'Mogelijk persoonsgegevens': 'Mahdollisesti henkilötietoja',
   'Persoonsgegevens geaccepteerd': 'Henkilötiedot hyväksytty',

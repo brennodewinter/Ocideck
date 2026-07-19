@@ -1788,6 +1788,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Geen meldingen meer op deze slide.':
+      'Na tejto snímke už nie sú žiadne hlásenia.',
   'Kwaliteitsproblemen geaccepteerd': 'Problémy s kvalitou prijaté',
   'Mogelijk persoonsgegevens': 'Možné osobné údaje',
   'Persoonsgegevens geaccepteerd': 'Osobné údaje prijaté',

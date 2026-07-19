@@ -1780,6 +1780,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Geen meldingen meer op deze slide.': 'Šajā slaidā vairs nav ziņojumu.',
   'Kwaliteitsproblemen geaccepteerd': 'Kvalitātes problēmas pieņemtas',
   'Mogelijk persoonsgegevens': 'Iespējami personas dati',
   'Persoonsgegevens geaccepteerd': 'Personas dati pieņemti',

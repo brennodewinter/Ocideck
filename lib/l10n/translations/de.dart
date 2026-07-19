@@ -738,6 +738,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Geen meldingen meer op deze slide.':
+      'Keine Meldungen mehr auf dieser Folie.',
   'Kwaliteitsproblemen geaccepteerd': 'Qualitätsprobleme akzeptiert',
   'Mogelijk persoonsgegevens': 'Möglicherweise personenbezogene Daten',
   'Persoonsgegevens geaccepteerd': 'Personenbezogene Daten akzeptiert',

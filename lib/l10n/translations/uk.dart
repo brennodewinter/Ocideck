@@ -1799,6 +1799,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Geen meldingen meer op deze slide.':
+      'На цьому слайді більше немає повідомлень.',
   'Kwaliteitsproblemen geaccepteerd': 'Проблеми якості прийнято',
   'Mogelijk persoonsgegevens': 'Можливо, персональні дані',
   'Persoonsgegevens geaccepteerd': 'Персональні дані прийнято',

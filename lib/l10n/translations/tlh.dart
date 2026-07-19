@@ -1756,6 +1756,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Geen meldingen meer op deze slide.': 'yaHnIv vam Sovbe\'lu\'.',
   'Kwaliteitsproblemen geaccepteerd': '\'ul Qob lajlu\'',
   'Mogelijk persoonsgegevens': 'chaq nuv De\'',
   'Persoonsgegevens geaccepteerd': 'nuv De\' lajlu\'',

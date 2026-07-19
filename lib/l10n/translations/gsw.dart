@@ -1785,6 +1785,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Geen meldingen meer op deze slide.': 'Kei Mäldige meh uf dere Folie.',
   'Kwaliteitsproblemen geaccepteerd': 'Qualitätsprobläm akzeptiert',
   'Mogelijk persoonsgegevens': 'Villicht persöönlichi Date',
   'Persoonsgegevens geaccepteerd': 'Persöönlichi Date akzeptiert',

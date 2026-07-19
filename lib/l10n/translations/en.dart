@@ -920,6 +920,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Geen meldingen meer op deze slide.': 'No findings left on this slide.',
   'Kwaliteitsproblemen geaccepteerd': 'Quality issues accepted',
   'Mogelijk persoonsgegevens': 'Possibly personal data',
   'Persoonsgegevens geaccepteerd': 'Personal data accepted',

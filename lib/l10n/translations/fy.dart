@@ -739,6 +739,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Geen meldingen meer op deze slide.': 'Gjin meldingen mear op dizze slide.',
   'Kwaliteitsproblemen geaccepteerd': 'Kwaliteitsproblemen akseptearre',
   'Mogelijk persoonsgegevens': 'Mooglik persoansgegevens',
   'Persoonsgegevens geaccepteerd': 'Persoansgegevens akseptearre',

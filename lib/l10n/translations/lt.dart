@@ -1789,6 +1789,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Geen meldingen meer op deze slide.': 'Šioje skaidrėje pranešimų nebeliko.',
   'Kwaliteitsproblemen geaccepteerd': 'Kokybės problemos priimtos',
   'Mogelijk persoonsgegevens': 'Galimi asmens duomenys',
   'Persoonsgegevens geaccepteerd': 'Asmens duomenys priimti',

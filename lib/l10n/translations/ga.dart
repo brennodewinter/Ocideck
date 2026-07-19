@@ -1817,6 +1817,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Geen meldingen meer op deze slide.':
+      'Níl aon fholáireamh fágtha ar an sleamhnán seo.',
   'Kwaliteitsproblemen geaccepteerd': 'Fadhbanna cáilíochta glactha',
   'Mogelijk persoonsgegevens': 'Sonraí pearsanta b\'fhéidir',
   'Persoonsgegevens geaccepteerd': 'Sonraí pearsanta glactha',

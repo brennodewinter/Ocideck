@@ -1780,6 +1780,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Geen meldingen meer op deze slide.':
+      'Inga meddelanden kvar på den här bilden.',
   'Kwaliteitsproblemen geaccepteerd': 'Kvalitetsproblem accepterade',
   'Mogelijk persoonsgegevens': 'Möjligen personuppgifter',
   'Persoonsgegevens geaccepteerd': 'Personuppgifter accepterade',
