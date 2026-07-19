@@ -1344,10 +1344,16 @@ presentation is not asked for pentest metadata it has no use for:
   table slide.
 
 **Opening a security report while the module is off** surfaces a one-time
-prompt — a snackbar with an **Enable** action — so you can turn the module on
-right there instead of hunting through settings. It appears only when a deck you
-open actually contains security slide types and the module is off, once per open
-(never while you edit), and the slides render either way; it is purely a way to
+prompt — a banner at the top of the window — so you can turn the module on right
+there instead of hunting through settings. It gives you all three answers:
+**Naar de slide (Go to slide)** jumps to the first security slide so you can see
+for yourself what the message is about, **Inschakelen (Enable)** turns the module
+on, and the **✕** dismisses it. Looking does not close the banner; you looked in
+order to decide. The banner appears only when a deck you open actually contains
+security slide types and the module is off, once per open (never while you edit),
+and it disappears by itself as soon as you switch to another tab or close the
+presentation — it is a statement about *that* presentation, so it never lingers
+over a different one. The slides render either way; this is purely a way to
 discover the module.
 
 The module's reference data is **part of the app itself**, so enabling it works
