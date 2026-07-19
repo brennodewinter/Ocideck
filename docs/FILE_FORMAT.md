@@ -99,6 +99,7 @@ ocideck_style_profile: <base64url(JSON)>
 | Key | Type | Meaning |
 | --- | --- | --- |
 | `marp` | `true` | Fixed Marp marker. |
+| `title` | string | Deck title. Written and parsed; also used as the export document title. |
 | `theme` | string | Theme name; defaults to `ocideck`. Refers to `themes/<theme>.css`. |
 | `paginate` | `true`/absent | Written only when pagination is enabled. |
 | `author` | string | Author. |
@@ -116,6 +117,7 @@ ocideck_style_profile: <base64url(JSON)>
 | `ocideck_play_only` | `true`/absent | Play-only lock. When `true`, the deck opens locked: no editor, toolbar, menus, or export — only the first slide with a play button, presented full screen. Closing the deck restores normal editing. Default (unlocked) stays out of the file; only `true` is written. Removing this key unlocks the deck. |
 | `ocideck_style_profile` | base64url | Complete style profile as JSON (§3.2). |
 | `ocideck_miauw_waivers` | base64url | MIAUW compliance exclusions as JSON: EIS id → mandatory reason. Written only when non-empty; a corrupt value is ignored. Drives the compliance overview (PENTEST_MIAUW §9). |
+| `ocideck_miauw_confirmations` | base64url | The counterpart of the waivers: MIAUW confirmations as JSON. Same encoding and same "written only when non-empty, corrupt value ignored" rule. |
 | `ocideck_seal_tsr` | base64url | RFC 3161 trusted-timestamp token (`.tsr`) over `ocideck_seal_hash` (PENTEST_MIAUW §8-A2). Written only when present; excluded from the sealed content hash. Verified in-app on open. |
 | `ocideck_finalized` | `true`/absent | Document integrity (§8 A1): the deck is finalised and read-only. Written only when `true`. |
 | `ocideck_seal_hash` · `ocideck_seal_algo` · `ocideck_seal_at` | string | The content seal: a SHA-512 hash over the canonical content (styling and the seal fields themselves excluded), the algorithm (`sha-512`), and the ISO-8601 UTC timestamp. Recomputed on open → *intact* / *changed after finalising*. |
@@ -750,6 +752,8 @@ block. All structured fields are inline and re-parsed on load:
 …
 ## Recommendation
 …
+```
+
 **Uitvoering testen conform standaard** (`checklist` — the UI label was renamed
 from "Checklist"; the class token is unchanged) — a standard-driven test list,
 stored as a normal Markdown table so it aligns with the `table` slide and
@@ -1255,7 +1259,7 @@ not model is not reported.
 | **Code blocks** | error | Odd number of ` ``` ` lines (not closed). |
 | **`_class`** | error | Malformed `<!-- _class: ... -->`. |
 | **`_class`** | warning | Unknown token in `_class` (known: `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `logo-safe`, `no-logo`, `no-footer`, `table-editable`). |
-| **Slide metadata** | error | Unknown `<!-- tlp: ... -->`, non-numeric `<!-- advance: ... -->`, or invalid `<!-- ocideck_list_style: ... -->` (`bullets`, `numbered`, `checklist`). |
+| **Slide metadata** | error | Unknown `<!-- tlp: ... -->`, non-numeric `<!-- advance: ... -->`, or invalid `<!-- ocideck_list_style: ... -->` (`bullets`, `numbered`, `checklist`, `richText`). |
 | **Two columns** | error | Invalid base64/JSON in `ocideck_two_bullets_*` comments. |
 | **Images** | error | `![...](...` without closing `)`. |
 | **Video/audio** | error | Incomplete `<video>`/`<audio>` tag, or `<video>` without `src="..."`. |

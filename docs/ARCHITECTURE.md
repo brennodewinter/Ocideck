@@ -2,7 +2,7 @@
 
 A high-level map of how OciDeck is put together, for contributors. For how files
 are stored on disk, see [`FILE_FORMAT.md`](FILE_FORMAT.md). For a one-line
-description of **every** file under `lib/`, see [`SOURCE_MAP.md`](SOURCE_MAP.md).
+description of the files under `lib/`, see [`SOURCE_MAP.md`](SOURCE_MAP.md).
 
 ## Stack
 
@@ -70,8 +70,10 @@ lib/
               # image_reference (.md rewrites), recovery, rasterizer,
               # marp_html, annotation_codec, rehearsal_controller,
               # webdav (Nextcloud source), secret_store (keychain)
-  state/      # Riverpod providers: deck, editor, settings, tabs, clipboard,
-              # webdav
+  state/      # Riverpod providers (21 top-level + parts/): deck, editor,
+              # settings, tabs, clipboard, webdav, git, consent, privacy,
+              # sec_module, local_cve, deck_quality, …
+  platform/   # conditional-import platform abstraction (io/web halves)
   widgets/    # app shell, panels, dialogs, per-type editors, slides, presenter
   l10n/       # AppLocalizations + translations/<lang>.dart (31 languages)
   theme/      # app theming
@@ -206,7 +208,6 @@ In-app slides (`SlidePreviewWidget`) compute `effectiveTlp(deckTlp, slideTlp)` �
 the stricter of deck and slide — and render FIRST TLP 2.0 markings from
 `widgets/slides/previews/overlays.dart`:
 
-- `_ClassificationBanner` — full-width top bar
 - `_TlpOverlay` — bottom-right (or bottom-left) badge
 - `_ClassificationWatermark` — optional diagonal watermark (`TLP · organisation`),
   controlled by `AppSettings.classificationWatermarkEnabled`
@@ -258,7 +259,7 @@ hence the vendored multi-window fork below.
 
 ## Sidecars (separate layers)
 
-To keep the `.md` pure Marp, four kinds of data live beside it (see
+To keep the `.md` pure Marp, five kinds of data live beside it (see
 `FILE_FORMAT.md` §6):
 
 - **Captions** — `.ocideck_captions.json` (per image, in `images/`).
@@ -269,6 +270,45 @@ To keep the `.md` pure Marp, four kinds of data live beside it (see
   In the visual editor, slides with user notes are marked on thumbnails in the
   slide list (`widgets/slides/slide_thumbnail.dart`).
 - **Linked chart data** — `data/*.csv` (the living source for a chart).
+
+## Git storage (`services/git/`)
+
+A deck source that is "WebDAV with version history". Two planes sit behind one
+interface:
+
+- **Forge REST plane** (all platforms) — `GitForge` with three adapters
+  (`gitea_forge.dart` for Gitea/Forgejo, `github_forge.dart`, `gitlab_forge.dart`).
+  Transport is SSRF-pinned (`git_transport_io.dart` / `_web.dart`): https-only
+  unless the server is marked trusted-internal, resolve-then-pin against DNS
+  rebinding, no redirects, byte caps.
+- **Native git plane** (desktop, when `git` is present) — `NativeGitMirror` over a
+  real partial clone. It makes true local commits (`hasRealHistory == true`), so
+  work survives offline and the history dialog and release/version chooser have
+  something real to show.
+
+`DeckMirror` is the seam between them: the editor always writes to the mirror, and
+`SyncEngine` + `outbox.dart` reconcile with the forge later — losing the connection
+must never lose work. Deck↔repo conversion lives in `deck_repo_serializer.dart`;
+`deck_search.dart` adds cross-deck search. State: `state/git_provider.dart` and the
+`tabs_provider_git*` files; UI: the `shell_actions_git*` family. Design rationale:
+[`design/GIT_STORAGE.md`](design/GIT_STORAGE.md).
+
+## The privacy projection boundary
+
+`services/privacy/privacy_projection.dart` is a type-enforced chokepoint, not a
+convention. `PrivacyProjection.forAudience(...)` is the only way to obtain an
+`AudienceDeck` (its constructor is private), and every surface that can *emit*
+content — the rasterizer, the export bundle and dialog, the fullscreen presenter,
+the slide-list clipboard — accepts an `AudienceDeck` rather than a raw `Deck`. A
+`check_conventions` guard (`audienceBoundary`) fails the build if a receiving
+surface takes a raw `Deck`/`List<Slide>`, so redaction cannot be bypassed by
+forgetting a call. `forExternalProcessing(...)` is the stricter variant for
+hand-off outside the app.
+
+Adjacent egress control: `services/ai_security_gate.dart` is a pure, I/O-free
+decision run before every AI request (mode, consent, loopback/trusted-internal/
+cloud rules, fail-closed on web); `utils/zip_encryption.dart` backs encrypted
+`.ocideck` packages; `services/cve/` holds the desktop-only offline CVE index.
 
 ## Vendored forks
 
