@@ -1295,6 +1295,30 @@ Ook gemeten en daarom *niet* gebouwd: extra tussenschalen (960, 480) en
 contrastnormalisatie (CLAHE, voor tegenlicht) leverden geen enkel extra gezicht
 op. Die complexiteit is niet toegevoegd.
 
+**Redactie haalt de héle mediaverwijzing weg, niet het gedetecteerde gezicht.**
+Op een slide die op `redact` staat verdwijnen afbeeldingen, video en audio; de
+bestaande placeholder toont een zichtbaar vak, zodat de ontvanger ziet dát er iets
+weg is. De bron houdt haar afbeelding — dit raakt alleen wat getoond en
+geëxporteerd wordt.
+
+Alleen het gezicht zwart maken zou aantrekkelijker lijken, en is precies de val.
+De detector vindt *gezichten* en mist er aantoonbaar; hij leest geen HEIC, ziet
+geen tekst in beeld (een gefotografeerd formulier met een BSN erop dus niet), en de
+gebruiker mag hem uitzetten. Het resultaat zou een afbeelding zijn die eruitziet
+alsof ze is afgehandeld, met een gemist gezicht er nog op — dezelfde fout als het
+zwarte blok op "diagnose" dat niets verborg. De afweging uit `statementSpan` geldt
+onverkort: *te ruim redigeren is hinderlijk, te krap redigeren is een lek*.
+
+Dat een logo op zo'n slide meesneuvelt is de hinderlijke kant, en bewust gekozen.
+
+Dit repareerde meteen een tweede lek van dezelfde soort. `struct.user_path`
+detecteert een gebruikersnaam in een mediapad, en het ontwerp meldde die wel maar
+redigeerde hem niet — met als reden dat een pad met blokjes erin een kapotte
+verwijzing is. Klopt, maar het gevolg was dat op een `redact`-slide
+`/Users/jan.jansen/…` letterlijk in de geëxporteerde markdown belandde:
+gedetecteerd, gemeld, en vervolgens meegeleverd. Nu verdwijnt de verwijzing als
+geheel, dus het pad kán er niet meer in staan.
+
 **Eerlijkheid in de melding.** De detector telt structureel onder en nooit over —
 hij vindt gezichten, dus iemand van achteren of met het hoofd buiten de uitsnede
 ontbreekt per definitie. De melding zegt daarom "minstens N", en spreekt van
