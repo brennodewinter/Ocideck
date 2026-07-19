@@ -1797,6 +1797,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
+      'Nomina morborum huic linguae desunt. Religio, opinio politica et vocabula collegiorum opificum agnoscuntur, et formae cum numero probationis (BSN, IBAN, diploma) semper valent — sed noli confidere diagnosin inventum iri.',
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Licentiae lexicorum: quae adhuc roganda sunt',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':

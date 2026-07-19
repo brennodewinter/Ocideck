@@ -1799,6 +1799,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
+      'Для мови цієї презентації бракує назв хвороб. Релігію, політичні погляди та профспілкові терміни розпізнано, а шаблони з контрольною цифрою (ІПН, IBAN, паспорт) працюють завжди — але не розраховуйте на виявлення діагнозу.',
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Ліцензії лексиконів: що ще треба з\'ясувати',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':

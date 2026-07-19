@@ -10,6 +10,16 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Added
+- **De taalmelding in het kwaliteitspaneel is preciezer geworden.** Hij keek per
+  taal, en zei "gedekt" zodra er íéts voor die taal was. Daardoor kregen vijftien
+  talen — Zweeds, Deens, Fins, Grieks, Hongaars en meer — een groene melding op
+  grond van alleen religie- en ideologietermen, terwijl er voor die talen geen
+  enkele ziektenaam is. Een Zweeds dossier met een diagnose erin zag er dus
+  gecontroleerd uit zonder dat te zijn.
+
+  De melding zegt nu wat er precies ontbreekt, en gaat uit van de ziektenamen —
+  veruit de grootste categorie.
+
 - **Religies, ideologieën en vakbondstermen worden nu in 27 talen herkend.** Voor
   bijzondere persoonsgegevens over geloof, politieke overtuiging,
   vakbondslidmaatschap en etnische afkomst kende OciDeck een handvol

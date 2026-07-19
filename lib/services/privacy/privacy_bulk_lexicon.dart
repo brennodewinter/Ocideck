@@ -69,13 +69,29 @@ class PrivacyBulkLexicon {
   /// een paar honderd vergelijkingen niets.
   Map<String, List<BulkTerm>> _index = const {};
 
-  /// De talen waarvoor er bulktermen geladen zijn. Voedt de dekkingsmeter.
-  Set<String> _languages = const {};
+  /// De talen waarvoor er bulktermen geladen zijn, **per categorie**.
+  ///
+  /// Per categorie en niet als één verzameling, en dat verschil is geen
+  /// boekhouding. Vijftien van de gedekte talen — Zweeds, Deens, Fins, Grieks,
+  /// Hongaars en meer — krijgen hun termen uitsluitend uit EuroVoc en hebben dus
+  /// géén ziektenamen. Telde de meter die talen simpelweg als "gedekt", dan zou
+  /// een Zweeds dossier met een diagnose erin een groene balk opleveren terwijl
+  /// er voor gezondheid niets te vinden vált. Dat is exact de leugen waartegen
+  /// deze meter bestaat.
+  Map<String, Set<String>> _languagesByCategory = const {};
 
   int _termCount = 0;
 
   bool get isLoaded => _index.isNotEmpty;
-  Set<String> get languages => _languages;
+
+  /// Alle talen waarvoor er iets geladen is, ongeacht categorie.
+  Set<String> get languages => {
+    for (final langs in _languagesByCategory.values) ...langs,
+  };
+
+  /// De talen waarvoor [category] termen heeft.
+  Set<String> languagesFor(String category) =>
+      _languagesByCategory[category] ?? const {};
   int get termCount => _termCount;
 
   /// De bronvermeldingen die de licenties eisen — één per geladen asset.
@@ -93,7 +109,7 @@ class PrivacyBulkLexicon {
   Future<void> ensureLoaded({AssetBundle? bundle}) async {
     if (isLoaded) return;
     final index = <String, List<BulkTerm>>{};
-    final languages = <String>{};
+    final byCategory = <String, Set<String>>{};
     final attributions = <String>[];
     var count = 0;
 
@@ -113,7 +129,7 @@ class PrivacyBulkLexicon {
 
         for (final block in blocks.entries) {
           for (final byLang in (block.value as Map).entries) {
-            languages.add(byLang.key as String);
+            (byCategory[block.key] ??= <String>{}).add(byLang.key as String);
             for (final label in (byLang.value as List).cast<String>()) {
               final term = label.toLowerCase();
               final head = _firstToken(term);
@@ -148,7 +164,7 @@ class PrivacyBulkLexicon {
     }
 
     _index = index;
-    _languages = languages;
+    _languagesByCategory = byCategory;
     _termCount = count;
     this.attributions = attributions;
   }
@@ -195,7 +211,7 @@ class PrivacyBulkLexicon {
   @visibleForTesting
   void resetForTest() {
     _index = const {};
-    _languages = const {};
+    _languagesByCategory = const {};
     _termCount = 0;
     attributions = const [];
     version = '';
@@ -222,7 +238,7 @@ class PrivacyBulkLexicon {
       bucket.sort((a, b) => b.term.length.compareTo(a.term.length));
     }
     _index = index;
-    _languages = terms.keys.toSet();
+    _languagesByCategory = {category: terms.keys.toSet()};
     _termCount = count;
   }
 }

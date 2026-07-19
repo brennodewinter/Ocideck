@@ -1803,6 +1803,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
+      'Għal-lingwa ta\' din il-preżentazzjoni jonqsu l-ismijiet tal-mardiet. Ir-reliġjon, l-opinjoni politika u t-termini tat-trejdjunjins jingħarfu, u l-mudelli b\'ċifra ta\' kontroll (ID, IBAN, passaport) dejjem jaħdmu — imma toqgħodx tistenna li tinstab dijanjosi.',
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Liċenzji tal-lessiku: x\'fadal x\'nistaqsu',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':

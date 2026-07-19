@@ -1817,6 +1817,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
+      'Tá ainmneacha galar in easnamh do theanga an deic seo. Aithnítear reiligiún, tuairim pholaitiúil agus téarmaí ceardchumainn, agus oibríonn patrúin le digit seiceála (PPS, IBAN, pas) i gcónaí — ach ná bí ag brath ar dhiagnóis a aimsiú.',
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Ceadúnais foclóra: a bhfuil fós le fiafraí',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':

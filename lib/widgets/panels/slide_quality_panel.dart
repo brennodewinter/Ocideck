@@ -486,7 +486,7 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
                                 'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.',
                               )
                             : l10n.d(
-                                'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.',
+                                'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.',
                               ),
                         style: TextStyle(
                           fontSize: 10,

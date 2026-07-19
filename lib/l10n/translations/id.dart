@@ -1781,6 +1781,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
+      'Nama penyakit tidak tersedia untuk bahasa dek ini. Agama, pandangan politik, dan istilah serikat pekerja dikenali, dan pola dengan digit periksa (NIK, IBAN, paspor) selalu bekerja — tetapi jangan mengandalkan diagnosis ditemukan.',
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Lisensi leksikon: apa yang masih perlu ditanyakan',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':

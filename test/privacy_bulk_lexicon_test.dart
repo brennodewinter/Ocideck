@@ -145,6 +145,23 @@ void main() {
       expect(healthIn('De medicatie is aangepast'), isNotNull);
     });
 
+    test('een taal met alleen overtuigingstermen heet niet gedekt', () {
+      // Vijftien app-talen — Zweeds, Deens, Fins, Grieks, Hongaars — krijgen hun
+      // termen uitsluitend uit EuroVoc en hebben géén ziektenaam. Ze "gedekt"
+      // noemen zou een Zweeds dossier met een diagnose een groene balk geven
+      // terwijl er voor gezondheid niets te vinden vált.
+      lexicon.loadForTest({
+        'sv': ['katolicism', 'protestantism'],
+      }, category: 'special.religion');
+      expect(privacyLexiconCoverage('sv'), PrivacyLexiconCoverage.partial);
+
+      // Dezelfde taal mét ziektenamen is wél gedekt.
+      lexicon.loadForTest({
+        'sv': ['sklerodermi', 'cystinos'],
+      }, category: 'special.health');
+      expect(privacyLexiconCoverage('sv'), PrivacyLexiconCoverage.covered);
+    });
+
     test('de dekkingsmeter belooft niets wat er niet is', () {
       // Pools heeft geen vloertermen. Zolang de bulk niet geladen is, hoort de
       // meter dat te zeggen — niet alvast dekking beloven.

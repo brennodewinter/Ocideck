@@ -1337,6 +1337,35 @@ zichtbaarheid kwijt die de poort moest opleveren. Ze horen in
 release-build. Dan weet je wat je inpakt zonder dat "er is iets nieuws" als
 defect wordt behandeld. Zie `docs/CHECKS.md`.
 
+**De Latijnse aanname klopt niet, en dat is gemeten.** De intuïtie is
+verleidelijk: ziektenamen zijn Grieks-Latijns, dus één lijst zou voor alle talen
+werken. Op de gebundelde 59.564 termen gemeten:
+
+| | |
+| --- | --- |
+| in precies één taal | 57.704 (97%) |
+| in twee of meer talen | 1.860 (3%) |
+| in alle negen | 8 (0%) — en dat zijn gensymbolen als `ccdc115-cdg`, geen ziektenamen |
+
+De wortel is gedeeld, de spelling niet: `sclerodermie` · `esclerodermia` ·
+`sclerodermia` · `sklerodermie`. Daar komt woordvolgorde bovenop ("Cystinose
+néphropathique infantile" tegen "Infantiele nefropathische cystinose"). Een ruwe
+normalisatie — accenten weg, klinkerstaarten weg — tilt het van 3% naar 6%, en
+dat is de moeite en het vals-positievenrisico niet waard op 60.000 medische
+termen.
+
+**Gevolg voor de dekkingsmeter.** Een taal die niet in de bundel zit, krijgt van
+die bundel vrijwel niets. `covered` betekent daarom sinds fase 13b: er zijn
+gebundelde *ziektenamen* voor deze taal, en niet "deze taal komt ergens in een
+asset voor". Zonder dat onderscheid zouden vijftien app-talen — Zweeds, Deens,
+Fins, Grieks, Hongaars en meer — gedekt heten op grond van uitsluitend
+EuroVoc-termen, terwijl er voor gezondheid geen enkele naam is. Dat is precies de
+leugen waartegen deze meter bestaat.
+
+Stand voor de 31 app-talen: **9 volledig** (nl/en/de/fr/es/it/pl/pt/cs), **15
+gedeeltelijk** (wel overtuigingen, geen ziektenamen), **7 zonder lexicon** (fy,
+gsw, id, la, pap, tlh, uk).
+
 ### 13.4 Pijplijnvolgorde: goedkoop eerst, duur laatst
 
 De controles verschillen orden van grootte in kosten, en de UI hangt aan de
