@@ -24,14 +24,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   tabblad erbij.
 
 ### Fixed
-- **Zoeken in de instellingen sprong soms naar het verkeerde tabblad.** Zoeken
-  op "checklist" kwam uit bij Git-repository, en op "cwe" bij Checklists. De
-  tabbladen werden met een volgnummer aangewezen; toen het git-tabblad ertussen
-  werd geschoven is de zoekindex eronder niet mee hernummerd, en sindsdien wees
-  elke ingang daaronder één plek mis. Zo'n fout geeft geen melding — je landt
-  gewoon ergens anders — dus hij heeft er lang gezeten. De tabbladen worden nu
-  op naam aangewezen in plaats van op nummer, waarmee dit niet meer kán
-  ontstaan.
+- **De statusregel van een opslagwijze liep achter op het typen.** Hij bleef
+  "Niet ingesteld" melden terwijl de server er vlak boven al was ingevuld.
+  Dichtgeklapt is die regel het enige wat je van een opslagwijze ziet, dus als
+  hij tijdens het invullen niet klopt, klopt het onderdeel niet.
+- **Zoekresultaten kunnen niet meer naar het verkeerde tabblad springen.** De
+  verkeerde sprongen zelf waren al rechtgezet door de zoekindex te hernummeren;
+  wat hier verandert is dat de fout niet meer kán ontstaan. Een zoekingang wees
+  naar een volgnummer, en niets koppelde dat getal aan een tabblad — een tabblad
+  ertussen schuiven verschoof stilzwijgend de betekenis van elk nummer daarna.
+  Ingangen wijzen nu op naam, dus er is geen nummer meer dat kan verschuiven.
 
 ### Added
 - **Een slide die klein wordt gerenderd door zijn buren zegt dat nu zelf.** De
