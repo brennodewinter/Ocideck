@@ -13,8 +13,11 @@ Elk punt noemt **wat je draait** en **wat als bewijs telt**. Dat tweede is het
 belangrijkste: "het leek te werken" is geen bewijs, en een groene testsuite op
 je eigen machine bewijst niets over een platform waar hij nooit heeft gedraaid.
 
-De volgorde is op wat er op het spel staat, niet op moeite. Punt 1 en 2 zijn de
-enige waar een fout *stil* blijft — de rest merk je meteen.
+De volgorde is op wat er op het spel staat, niet op moeite. Let vooral op de
+punten waar een fout **stil** blijft — 1, 2 en 8. Daar krijg je geen melding en
+geen crash: de adapter antwoordt gewoon verkeerd, het native pad valt terug op
+REST, of een bestand landt in de verkeerde bibliotheek. Zulke fouten worden
+gevonden door een gebruiker die iets niet kan terugvinden, niet door een test.
 
 Afvinken doe je hier: zet een punt om naar "bewezen op «datum», «platform»", of
 schrap het. Laat geen half afgevinkte punten staan; dan wordt dit document
@@ -116,7 +119,42 @@ gedraaid.
 `lib/services/reference_standards.dart` kunstmatig terugzetten en zien dat de
 poort rood wordt met de juiste melding — en daarna terugdraaien.
 
-## 8. PDF/A-conformiteit (open vraag, geen taak)
+## 8. Meerdere bibliotheken en opslagwijzen naast elkaar
+
+**Waarom dit apart staat.** Elke opslagwijze is los getest — schijf, Nextcloud
+(WebDAV) en git hebben elk hun eigen suite — maar nooit *tegelijk*, en dat is
+wel hoe het gebruikt wordt. Iemand heeft een privébibliotheek en een
+werkbibliotheek, haalt een deck van Nextcloud, slaat een ander op in git en
+werkt aan een derde op schijf. De naden tussen die drie zijn nergens beproefd.
+
+**Wat je draait.** Richt minstens twee bibliotheken in (Instellingen → mappen)
+en zet er decks in via alle drie de wegen. Werk daarna door elkaar heen:
+openen, opslaan, exporteren, zoeken en de afbeeldingenbibliotheek gebruiken.
+
+**Waar je specifiek naar kijkt** — dit zijn de plekken waar aannames op de loer
+liggen:
+
+- **Zoeken over bibliotheken.** De brede scan en de afbeeldingenbibliotheek
+  gebruiken alle bibliotheekpaden als wortel. Vindt hij decks in de tweede
+  bibliotheek net zo goed als in de eerste?
+- **De "thuismap".** Veel plekken vragen om één startmap en krijgen de *eerste*
+  bibliotheek. Wat gebeurt er als het deck waaraan je werkt in de tweede staat —
+  landen exports, logo's en relatieve paden dan nog waar je ze verwacht?
+- **Afbeeldingen over de grens.** Een deck uit git draagt zijn afbeeldingen in
+  een gedeelde pool; een deck op schijf heeft ze naast zich liggen. Wat gebeurt
+  er als je een slide van het een naar het ander kopieert, of een deck uit git
+  op schijf opslaat en andersom?
+- **Twee wegen naar hetzelfde deck.** Een deck dat zowel via Nextcloud als via
+  git bereikbaar is: welke wint, en merkt de gebruiker dat?
+- **Exportmap.** Die is app-breed instelbaar en staat los van de bibliotheken.
+  Klopt dat nog met een deck uit git, dat geen pad op schijf heeft?
+
+**Wat als bewijs telt.** Dat geen enkele actie stil naar de verkeerde
+bibliotheek of de verkeerde opslagwijze schrijft. Fouten hier zijn zeldzaam maar
+duur: je merkt pas dat een export ergens anders landde als iemand hem niet kan
+vinden.
+
+## 9. PDF/A-conformiteit (open vraag, geen taak)
 
 De huidige PDF-export versus echte PDF/A (ingesloten lettertypen + metadata).
 MIAUW EIS 1.1 raakt hieraan. Dit is nog geen werk maar een **beslissing**: hoe
@@ -144,6 +182,7 @@ Zodat deze lijst niet als een lijst met gaten leest:
 ## Verwante documenten
 
 - [`GIT_STORAGE.md`](GIT_STORAGE.md) — het ontwerp achter punten 1 tot en met 5.
-- [`PENTEST_MIAUW.md`](PENTEST_MIAUW.md) — het ontwerp achter punt 6 en 8.
+- [`PENTEST_MIAUW.md`](PENTEST_MIAUW.md) — het ontwerp achter punt 6 en 9; de
+  beslissingsgeschiedenis van die module staat daar, het openstaande werk hier.
 - [`CHECKS.md`](../CHECKS.md) — wat `make check` wél al bewijst, en waarom er
   geen CI-runner is (lokaal draaien ís hier de poort).
