@@ -230,8 +230,9 @@ also declares them, but see the [CI note](#continuous-integration).)
   Makefile finds the library under `build/` and exports `DARTCV_LIB_PATH`
   automatically; the tests then run for real. No variable to remember — but if you
   are changing the detector, do a platform build first, or you are testing
-  nothing. In CI only the macOS job builds, and it fails loudly if the library is
-  not where it expects, rather than falling back to skipping.
+  nothing. In CI all three desktop jobs build first — Linux in the gate, macOS and
+  Windows in the matrix — and each fails loudly if the library is not where it
+  expects, rather than falling back to skipping.
 
 ### `make coverage`
 - **Runs:** `flutter test --coverage --test-randomize-ordering-seed random --exclude-tags golden`

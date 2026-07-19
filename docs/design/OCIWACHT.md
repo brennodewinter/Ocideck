@@ -1315,7 +1315,7 @@ Dit repareerde meteen een tweede lek van dezelfde soort. `struct.user_path`
 detecteert een gebruikersnaam in een mediapad, en het ontwerp meldde die wel maar
 redigeerde hem niet — met als reden dat een pad met blokjes erin een kapotte
 verwijzing is. Klopt, maar het gevolg was dat op een `redact`-slide
-`/Users/jan.jansen/…` letterlijk in de geëxporteerde markdown belandde:
+`/Users/<voornaam.achternaam>/…` letterlijk in de geëxporteerde markdown belandde:
 gedetecteerd, gemeld, en vervolgens meegeleverd. Nu verdwijnt de verwijzing als
 geheel, dus het pad kán er niet meer in staan.
 
@@ -1409,38 +1409,73 @@ open gelicentieerde applicatie is toegestaan — "kosteloos" is niet hetzelfde a
 
 #### Bundelgrootte: winst die nu blijft liggen
 
-`dartcv` kent module-selectie via hooks:
+**Eerst een correctie op wat hier eerder stond.** De voor de hand liggende
+configuratie is `include_modules`, en die doet **niets**. Lees `gen_cmake_vars.dart`
+in dartcv4:
+
+```dart
+final result = {
+  for (final e in defaultModuleSettings.keys)
+    e: exclude.contains(e) ? "OFF" : defaultModuleSettings[e]!,
+};
+```
+
+Alleen `exclude_modules` zet een module uit; `include_modules` dient uitsluitend om
+een module tégen uitsluiting te beschermen. Wie `include_modules: [core, imgproc,
+…]` opschrijft, krijgt een build die er geconfigureerd uitziet en niets uitsluit.
+
+De juiste vorm is dus omgekeerd — noem wat eruit mág:
 
 ```yaml
 hooks:
   user_defines:
     dartcv4:
-      include_modules: [core, imgproc, imgcodecs, objdetect, dnn]
+      exclude_modules:
+        [calib3d, contrib, features2d, flann, photo, stitching, video, videoio]
 ```
 
-Dat zijn precies de vijf modules die de beeldcontrole gebruikt. Dit is **niet**
-geconfigureerd, dus Linux, Windows en Android dragen nu de volledige OpenCV-modulelijst
-mee. Twee dingen om te weten voor je het aanzet:
+De standaardwaarden staan in `defaultModuleSettings`: alles hierboven staat AAN,
+`freetype` en `highgui` staan al UIT, en `core` is niet configureerbaar. De
+beeldcontrole gebruikt `core`, `imgproc` (resize), `imgcodecs` (decode), `objdetect`
+(`FaceDetectorYN`) en `dnn` (het model draait door de dnn-module). De acht
+hierboven zijn de rest.
 
-* module-exclusie werkt **alleen op Android, Windows en Linux** — op macOS krijg je
-  hoe dan ook de volle build, en daar is 27 MB gemeten;
-* een uitgesloten module houdt zijn Dart-API maar gooit "symbol not found" bij
-  aanroep. Uitsluiten zonder meten is dus een tijdbom.
+**Het werkt alleen op Linux, Windows en Android.** Die drie lopen via
+`src/CMakeLists.txt`, dat `dart run dartcv4:gen_cmake_vars` aanroept. macOS en iOS
+krijgen een voorgebouwde CocoaPod (`DartCvMacOS` plus de `/dnn`-subspec) waar niets
+aan te snoeien valt — daar is 27 MB gemeten en dat blijft zo.
 
-De winst op de drie andere platforms is nooit gemeten. Meet vóór en ná.
+**Niet aangezet, en dat is opzet.** Dit is nooit gemeten: er was geen Linux- of
+Windows-machine beschikbaar. En een uitgesloten module houdt zijn Dart-API maar
+gooit "symbol not found" bij aanroep — precies het soort stille runtimefout dat deze
+codebase elders al twee keer heeft opgeleverd. Blind aanzetten zou die val zelf
+zetten.
 
-#### De detectietests draaien maar op één platform
+Het experiment, in volgorde, op een Linux- of Windows-machine:
+
+1. `flutter build linux` zonder het blok, en meet `build/linux/*/*/bundle/lib/libdartcv.so`;
+2. voeg het blok toe, `flutter clean`, opnieuw bouwen, opnieuw meten;
+3. **verifieer dat de detector nog werkt** — bouwen is niet genoeg, want de fout
+   valt pas bij aanroep. Draai `flutter test test/image_face_scan_test.dart` met
+   `DARTCV_LIB_PATH` naar de nieuwe `.so`; de kattenfoto's moeten nul geven en
+   `isSupported` moet waar zijn;
+4. zakt er iets om, dan is de kortste weg één module tegelijk terugzetten —
+   `dnn` en `objdetect` hebben interne afhankelijkheden die niet gedocumenteerd zijn.
+
+#### De detectietests en de platformdekking
 
 De Makefile vindt de OpenCV-bibliotheek zelf zodra er een platformbuild in `build/`
-staat (zie CHECKS.md), en de CI bouwt alleen in de macOS-taak. Gevolg: **een
-runtime-fout in de native laag op Linux of Windows blijft groen.** Een
-*compilatie*fout valt wél op, want de release-workflow bouwt beide.
+staat (zie CHECKS.md). De CI bouwt inmiddels op alle drie de desktopplatforms —
+Linux in de gate, macOS en Windows in de matrix — zodat de detectietests daar echt
+draaien in plaats van zichzelf over te slaan.
 
-Linux en Windows zijn overigens nooit werkelijk getest: `opencv_core` declareert
-`ffiPlugin: true` voor android/ios/linux/macos/windows, en de voorwaardelijke import
-kiest op elk native platform de echte implementatie — maar alleen macOS is
-aantoonbaar gedraaid. Dichten kost dezelfde buildstap in de Linux- en Windows-taken,
-een paar minuten CI-tijd per platform.
+Wat daarmee nog niet is aangetoond: **alleen macOS is door een mens gedraaid gezien.**
+`opencv_core` declareert `ffiPlugin: true` voor android/ios/linux/macos/windows en de
+voorwaardelijke import kiest op elk native platform de echte implementatie, maar de
+Linux- en Windows-paden in de Makefile en de CI zijn op patroon geschreven en niet op
+een draaiende build geverifieerd. De eerste CI-run op die takken is dus tegelijk het
+bewijs — en faalt hard als een pad niet klopt, in plaats van stil terug te vallen op
+overslaan.
 
 Android en iOS zijn geen leverplatform: de release-workflow bouwt web, macOS, Windows
 en Linux. De mappen bestaan, het product niet.
