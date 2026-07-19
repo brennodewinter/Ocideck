@@ -1799,6 +1799,9 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Voortzetting van vorige slide': 'Continuatio paginae praecedentis',
+  'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
+      'Haec pagina ad indicem paginae praecedentis pertinet ideoque unam litterarum magnitudinem communicat: eam paginae plenissimae.',
   'Losmaken': 'Seiunge',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Haec pagina ad {klein} magnitudinis destinatae exhibetur pro {eigen}, quia seriem divisam cum pagina {pagina} multo pleniore communicat.',

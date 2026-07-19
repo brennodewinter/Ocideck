@@ -1802,6 +1802,9 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Voortzetting van vorige slide': 'Continuarea diapozitivului anterior',
+  'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
+      'Acest diapozitiv face parte din lista diapozitivului anterior și împarte astfel o singură dimensiune a fontului: cea a paginii celei mai pline.',
   'Losmaken': 'Detașează',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Acest diapozitiv este afișat la {klein} din dimensiunea de proiectare în loc de {eigen}, deoarece împarte o serie divizată cu diapozitivul {pagina}, mult mai plin.',

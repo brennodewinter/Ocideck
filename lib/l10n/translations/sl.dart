@@ -1785,6 +1785,9 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Voortzetting van vorige slide': 'Nadaljevanje prejšnje prosojnice',
+  'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
+      'Ta prosojnica spada k seznamu prejšnje prosojnice in zato deli eno velikost pisave: velikost najpolnejše strani.',
   'Losmaken': 'Odklopi',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Ta prosojnica se izriše pri {klein} načrtovane velikosti namesto {eigen}, ker si deli razdeljeno zaporedje z veliko polnejšo prosojnico {pagina}.',

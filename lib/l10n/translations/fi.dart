@@ -1783,6 +1783,9 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Voortzetting van vorige slide': 'Edellisen dian jatko',
+  'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
+      'Tämä dia kuuluu edellisen dian luetteloon ja jakaa siksi yhden fonttikoon: täydemmän sivun koon.',
   'Losmaken': 'Irrota',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Tämä dia näkyy {klein} suunnittelukoosta odotetun {eigen} sijaan, koska se jakaa jaetun sarjan paljon täydemmän dian {pagina} kanssa.',

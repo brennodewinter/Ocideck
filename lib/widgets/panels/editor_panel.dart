@@ -9,6 +9,7 @@ import '../../models/timeline.dart';
 import '../../services/cvss/cvss4.dart';
 import '../../services/image_service.dart';
 import '../../services/slide_layout_metrics.dart';
+import '../../services/split_run.dart';
 import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../state/sec_module_provider.dart';
@@ -115,6 +116,7 @@ class EditorPanel extends ConsumerWidget {
                       deck.themeProfile.animationDurationMs,
                   previousSlideIsNumbered:
                       idx > 0 && isNumberedListSlide(deck.slides[idx - 1]),
+                  canContinueSplit: canContinueSplitFrom(deck.slides, idx),
                   // Only the findingsSummary editor uses it; skip the parse for
                   // every other type.
                   deckFindingSeverities: slide.type == SlideType.findingsSummary
@@ -315,6 +317,7 @@ class EditorPanel extends ConsumerWidget {
     ValueChanged<List<Slide>> onAddChartVariants, {
     required int themeAnimationDurationMs,
     bool previousSlideIsNumbered = false,
+    bool canContinueSplit = false,
     bool nestedInScrollView = false,
     void Function(int atMs)? onSplitVideo,
     List<Cvss4Severity> deckFindingSeverities = const [],
@@ -330,6 +333,7 @@ class EditorPanel extends ConsumerWidget {
         onAddChartVariants: onAddChartVariants,
         themeAnimationDurationMs: themeAnimationDurationMs,
         previousSlideIsNumbered: previousSlideIsNumbered,
+        canContinueSplit: canContinueSplit,
         nestedInScrollView: nestedInScrollView,
         onSplitVideo: onSplitVideo,
         deckFindingSeverities: deckFindingSeverities,

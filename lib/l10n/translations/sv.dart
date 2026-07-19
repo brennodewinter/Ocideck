@@ -1782,6 +1782,9 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Voortzetting van vorige slide': 'Fortsättning på föregående bild',
+  'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
+      'Den här bilden hör till föregående bilds lista och delar därför en teckenstorlek: den från den fylligaste sidan.',
   'Losmaken': 'Koppla loss',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Den här bilden visas i {klein} av designstorleken i stället för {eigen}, eftersom den delar en uppdelad serie med den mycket fylligare bilden {pagina}.',

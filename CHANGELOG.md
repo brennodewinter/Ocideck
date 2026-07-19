@@ -31,6 +31,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   ook in de editor-kopregel, als **Losmaken** naast de Kwaliteit-chip. Hij
   verschijnt alleen zolang de slide die je bewerkt wordt meegetrokken, en de
   tooltip draagt de volledige uitleg. Alle andere fixes blijven in het paneel.
+- **De voortzettingsvlag is nu een gewone instelling in de editor.**
+  `continuesSplit` bepaalde hoe groot je tekst werd weergegeven, maar ontstond
+  alleen als bijproduct van "Splits slide" en was daarna nergens meer te zien of
+  te wijzigen — behalve in de Markdown. Bulletslides (één kolom, twee kolommen,
+  bullets + afbeelding) hebben nu een schakelaar **Voortzetting van vorige
+  slide**, zichtbaar zodra de vorige slide er een reeks mee kan vormen. De
+  ondertitel noemt wat het kost — je deelt één lettergrootte met de volste
+  pagina van de reeks — want dat is de reden dat je hem zou willen uitzetten.
+  Zet je de slide om naar een type of liststyle die geen reeks kan vormen, dan
+  wordt de vlag gewist in plaats van onzichtbaar te blijven staan.
 - **Een bevinding kan nu ook een mobiele zwakheid aanwijzen (MASWE).** Naast het
   CWE-veld staat een MASWE-veld met een eigen zoeker over de gebundelde lijst.
   Beide mogen naast elkaar: een mobiele zwakheid verwijst zelf ook naar een CWE,

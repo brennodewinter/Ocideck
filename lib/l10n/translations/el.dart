@@ -1811,6 +1811,9 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Voortzetting van vorige slide': 'Συνέχεια της προηγούμενης διαφάνειας',
+  'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
+      'Αυτή η διαφάνεια ανήκει στη λίστα της προηγούμενης διαφάνειας και μοιράζεται έτσι ένα μέγεθος γραμματοσειράς: αυτό της πιο γεμάτης σελίδας.',
   'Losmaken': 'Αποσύνδεση',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Αυτή η διαφάνεια εμφανίζεται στο {klein} του μεγέθους σχεδίασης αντί για {eigen}, επειδή μοιράζεται μια χωρισμένη σειρά με την πολύ πιο γεμάτη διαφάνεια {pagina}.',

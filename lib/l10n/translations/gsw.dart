@@ -1787,6 +1787,9 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Voortzetting van vorige slide': 'Fortsetzig vo dr vorige Folie',
+  'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
+      'Die Folie ghört zur Liste vo dr vorige Folie und teilt drum ei Schriftgrössi: die vo dr vollste Site.',
   'Losmaken': 'Löse',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Die Folie wird mit {klein} vo dr Entwurfsgrössi statt {eigen} aazeigt, wil si e gteilti Reihe mit dr viel vollere Folie {pagina} teilt.',

@@ -1806,6 +1806,9 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Voortzetting van vorige slide': 'Продължение на предишния слайд',
+  'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
+      'Този слайд принадлежи към списъка на предишния слайд и затова споделя един размер на шрифта — този на най-пълната страница.',
   'Losmaken': 'Отделяне',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Този слайд се показва при {klein} от проектния размер вместо {eigen}, защото споделя разделена поредица с много по-пълния слайд {pagina}.',

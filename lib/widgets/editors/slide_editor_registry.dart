@@ -46,6 +46,11 @@ class SlideEditorContext {
   /// "continue numbering from the previous slide" option in the bullets editor.
   final bool previousSlideIsNumbered;
 
+  /// Whether the slide before this one can form a split run with it (same type,
+  /// same list style) — gates the "continuation of the previous slide" switch,
+  /// which controls the shared font size of a split run.
+  final bool canContinueSplit;
+
   /// The severity band of every finding in the deck, for the `findingsSummary`
   /// editor's "refresh from deck". Computed by the panel (which has the deck);
   /// empty for the other editors, which ignore it.
@@ -64,6 +69,7 @@ class SlideEditorContext {
     required this.onAddChartVariants,
     required this.themeAnimationDurationMs,
     this.previousSlideIsNumbered = false,
+    this.canContinueSplit = false,
     this.nestedInScrollView = false,
     this.onSplitVideo,
     this.deckFindingSeverities = const [],
@@ -98,12 +104,14 @@ final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
         slide: c.slide,
         onUpdate: c.onUpdate,
         previousSlideIsNumbered: c.previousSlideIsNumbered,
+        canContinueSplit: c.canContinueSplit,
         nestedInScrollView: c.nestedInScrollView,
       ),
       SlideType.twoBullets: (c) => TwoBulletsEditor(
         key: c._key,
         slide: c.slide,
         onUpdate: c.onUpdate,
+        canContinueSplit: c.canContinueSplit,
         nestedInScrollView: c.nestedInScrollView,
       ),
       SlideType.bulletsImage: (c) => BulletsImageEditor(
@@ -114,6 +122,7 @@ final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
         searchPaths: c.searchPaths,
         captionBasePath: c.captionBasePath,
         previousSlideIsNumbered: c.previousSlideIsNumbered,
+        canContinueSplit: c.canContinueSplit,
         nestedInScrollView: c.nestedInScrollView,
       ),
       SlideType.twoImages: (c) => TwoImagesEditor(

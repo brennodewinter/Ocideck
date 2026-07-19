@@ -1161,6 +1161,15 @@ only while the slide you are editing is being dragged down, and disappears once
 you press it; the tooltip carries the full explanation. Every other fix stays in
 the quality panel.
 
+You do not have to wait for the warning. The continuation state is an ordinary
+editor setting: bullet slides (one column, two columns, bullets + image) carry a
+**Continuation of the previous slide** switch, shown whenever the slide before
+could form a run with this one (same type, same list style). It states what it
+costs — the slide shares one font size with the fullest page of the run — so you
+can join or detach a page deliberately, without opening Markdown mode. Switching
+the slide to a type or list style that cannot continue a run clears the flag
+rather than leaving it behind invisibly.
+
 This most often happens when a page was marked as a continuation by hand in
 Markdown mode, or when one page of an existing split was later filled with pasted
 prose. The over-full page keeps its own density warning and its own fixes (**Split

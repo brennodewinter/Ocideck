@@ -740,6 +740,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Voortzetting van vorige slide': 'Kontinuashon di e slide anterior',
+  'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
+      'E slide aki ta pertenesé na e lista di e slide anterior i pesei ta kompartí un tamaño di lèter: esun di e página mas yen.',
   'Losmaken': 'Separá',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'E slide aki ta wordu mustrá na {klein} di e tamaño di diseño en bes di {eigen}, pasobra e ta kompartí un serie partí ku e slide {pagina} ku ta hopi mas yen.',
