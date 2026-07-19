@@ -1788,6 +1788,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'creditcardnummer': 'broj kreditne kartice',
+  'beveiligingscode van een creditcard': 'sigurnosni kod kartice (CVV)',
+  'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
+      'podaci u bilješkama izlagača — nevidljivi na slajdu, ali su u izvozu',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Za jezik ove prezentacije nedostaju nazivi bolesti. Vjera, političko uvjerenje i sindikalni pojmovi se prepoznaju, a uzorci s kontrolnom znamenkom (OIB, IBAN, putovnica) uvijek rade — ali ne računajte na to da će dijagnoza biti pronađena.',
   'niet getest': 'nije testirano',

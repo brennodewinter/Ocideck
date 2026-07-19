@@ -10,6 +10,22 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Added
+- **Creditcardnummers worden herkend.** Een kaartnummer draagt twee
+  onafhankelijke bewijzen in zich: een controlecijfer én een nummerreeks die
+  zegt van welke kaartmaatschappij het is. Allebei moeten kloppen, want één op
+  de tien willekeurige cijferreeksen haalt dat controlecijfer — zonder de tweede
+  eis zou elk ordernummer van zestien cijfers een creditcard zijn.
+
+  De beveiligingscode (CVV) wordt alleen gemeld als er ook een kaartnummer bij
+  staat. Los is "123" niets; samen zijn het een bruikbare betaalinstructie. De
+  officiële testkaartnummers uit betaalhandleidingen blijven buiten schot.
+
+- **Gegevens in de sprekersnotities worden apart gemeld.** Notities zijn
+  onzichtbaar op de slide maar gaan wél mee in een PowerPoint-export. Wie zijn
+  presentatie nakijkt op wat er te zien is, kijkt daar dus precies langsheen.
+  Staat er iets in dat een waarschuwing waard is, dan zegt OciDeck dat nu met
+  zoveel woorden.
+
 - **"Betrokkene is katholiek opgevoed" wordt nu herkend.** De meertalige
   begrippenlijst levert zelfstandige naamwoorden — *katholicisme*, *socialisme*,
   *jodendom* — en zo schrijft niemand over een persoon. Voor het Nederlands zijn

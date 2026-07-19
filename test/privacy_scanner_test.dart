@@ -148,8 +148,14 @@ void main() {
         ],
       );
       final result = scanner.scan(deck);
-      expect(result.findings.single.field, 'notes');
-      expect(result.findings.single.confidence, PrivacyConfidence.certain);
+      final bsn = result.findings.singleWhere((f) => f.ruleId == 'nl.bsn');
+      expect(bsn.field, 'notes');
+      expect(bsn.confidence, PrivacyConfidence.certain);
+
+      // En sinds §3-I: bovenop de treffer zelf één melding dát er iets in de
+      // notities staat. Dat veld is onzichtbaar in de preview en gaat wél mee
+      // in de PPTX-export, en dat is wat de auteur niet uit zichzelf ziet.
+      expect(result.firedRules, contains('struct.notes_leak'));
     });
 
     test('scant bullets, tabelcellen en bijschriften met hun index', () {

@@ -1799,6 +1799,10 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'creditcardnummer': 'номер кредитної картки',
+  'beveiligingscode van een creditcard': 'код безпеки картки (CVV)',
+  'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
+      'дані в нотатках доповідача — невидимі на слайді, але потрапляють в експорт',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Для мови цієї презентації бракує назв хвороб. Релігію, політичні погляди та профспілкові терміни розпізнано, а шаблони з контрольною цифрою (ІПН, IBAN, паспорт) працюють завжди — але не розраховуйте на виявлення діагнозу.',
   'niet getest': 'не перевірено',

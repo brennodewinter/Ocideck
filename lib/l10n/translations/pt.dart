@@ -1811,6 +1811,10 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'creditcardnummer': 'número de cartão de crédito',
+  'beveiligingscode van een creditcard': 'código de segurança do cartão (CVV)',
+  'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
+      'dados nas notas do orador — invisíveis no diapositivo, mas exportados',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Faltam os nomes de doenças para o idioma desta apresentação. Religião, opinião política e termos sindicais são reconhecidos, e os padrões com dígito de controlo (NIF, IBAN, passaporte) funcionam sempre — mas não conte com a deteção de um diagnóstico.',
   'niet getest': 'não testada',

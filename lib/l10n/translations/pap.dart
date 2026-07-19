@@ -738,6 +738,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'creditcardnummer': 'number di karchi di krédito',
+  'beveiligingscode van een creditcard': 'kódigo di siguridat di karchi',
+  'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
+      'dato den e notanan di presentadó — invisibel riba e slide, ma sí den e eksportashon',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Pa e idioma di e presentashon aki ta falta nòmber di malesa. Religion, opinion polítiko i término sindikal sí ta wòrdu rekonosí, i patronchi ku sifra di kontrol (BSN, IBAN, pasaporte) semper ta funshoná — ma no konta ku deteshon di un diagnóstiko.',
   'niet getest': 'no testá',

@@ -739,6 +739,10 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'creditcardnummer': 'kredytkaartnûmer',
+  'beveiligingscode van een creditcard': 'befeiligingskoade fan in kredytkaart',
+  'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
+      'gegevens yn de sprekersnotysjes — ûnsichtber op de dia, wol yn de eksport',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Foar de taal fan dit deck ûntbrekke de sykte- en oandwaningsnammen. Religy, politike oertsjûging en fakbûnstermen wurde wol herkend, en kontrôlesifers (BSN, IBAN, paspoart) wurkje altyd — mar rekkenje der net op dat in diagnoaze fûn wurdt.',
   'niet getest': 'net test',

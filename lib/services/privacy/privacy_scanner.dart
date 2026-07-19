@@ -21,6 +21,7 @@ import '../../models/privacy_lexicon.dart';
 import '../../models/slide.dart';
 import 'privacy_allowlist.dart';
 import 'privacy_bulk_rules.dart';
+import 'privacy_card_rules.dart';
 import 'privacy_checksums.dart';
 import 'privacy_context_role.dart';
 import 'privacy_contact_rules.dart';
@@ -142,6 +143,7 @@ class PrivacyScanner {
       findings.addAll(
         _enabled(bulkFindingsFor(deck.slides[i], i, enabled).toList()),
       );
+      _emit(findings, _enabledOne(notesLeakFinding(i, enabled)));
     }
     return PrivacyScanResult(findings);
   }
@@ -160,6 +162,7 @@ class PrivacyScanner {
     return PrivacyScanResult([
       ...enabled,
       ..._enabled(bulkFindingsFor(slide, index, enabled).toList()),
+      ?_enabledOne(notesLeakFinding(index, enabled)),
     ]);
   }
 
@@ -176,6 +179,12 @@ class PrivacyScanner {
             privacyRuleInRegions(f.ruleId, regions))
           f,
     ];
+  }
+
+  /// Eén bevinding door dezelfde filters als de rest.
+  PrivacyFinding? _enabledOne(PrivacyFinding? finding) {
+    if (finding == null) return null;
+    return _enabled([finding]).firstOrNull;
   }
 
   /// De co-occurrence-escalator (OCIWACHT §5.6).
@@ -259,6 +268,7 @@ class PrivacyScanner {
     _scanEmail(fragment, slideIndex, out);
     _scanPhone(fragment, slideIndex, out);
     _scanIban(fragment, slideIndex, out);
+    _scanCard(fragment, slideIndex, out);
     _scanBsn(fragment, slideIndex, out);
     _scanMrz(fragment, slideIndex, out);
     _scanDigital(fragment, slideIndex, out);

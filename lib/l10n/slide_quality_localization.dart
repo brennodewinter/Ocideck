@@ -433,6 +433,8 @@ String privacyRuleLabel(AppLocalizations l10n, String ruleId) {
   return switch (ruleId) {
     'nl.bsn' => l10n.d('burgerservicenummer (BSN)'),
     'fin.iban' => l10n.d('bankrekeningnummer (IBAN)'),
+    'fin.pan' => l10n.d('creditcardnummer'),
+    'fin.cvv' => l10n.d('beveiligingscode van een creditcard'),
     'contact.email' => l10n.d('e-mailadres'),
     'contact.phone' => l10n.d('telefoonnummer'),
     'contact.address' => l10n.d('adres'),
@@ -485,6 +487,9 @@ String privacyRuleLabel(AppLocalizations l10n, String ruleId) {
     'struct.url_pii' => l10n.d('persoonsgegeven in een link'),
     'struct.share_link' => l10n.d('deellink met ingebakken toegang'),
     'struct.mailto' => l10n.d('e-mailadres in een link'),
+    'struct.notes_leak' => l10n.d(
+      'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export',
+    ),
     'struct.data_uri' => l10n.d(
       'ingesloten afbeelding — wij kunnen er niet in kijken',
     ),

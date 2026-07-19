@@ -428,4 +428,57 @@ extension PrivacyScannerDetectors on PrivacyScanner {
     role: role,
     personRole: personRole,
   );
+
+  // ── fin.pan en fin.cvv ────────────────────────────────────────────────────
+
+  /// Creditcardnummers, en de beveiligingscode als die erbij staat.
+  ///
+  /// De PAN staat op zichzelf: Luhn plus een bestaand IIN-bereik met de juiste
+  /// lengte is bewijs genoeg. De CVV niet — `123` betekent niets, en drie
+  /// cijfers achter het woord `cvv` betekenen alleen iets als er ook een
+  /// kaartnummer in hetzelfde fragment staat. Dán betekenen ze meteen veel,
+  /// want nummer plus code is een bruikbare betaalinstructie.
+  ///
+  /// Het ontwerp (§3-C, §5.6) wil voor die combinatie `error`. Dat kan nog niet:
+  /// beslissing §11.3 houdt `zeker` bewust op *waarschuwing*, omdat een fout
+  /// `qualityBlockExportOnErrors` bij bestaande gebruikers onbedoeld scherp zou
+  /// zetten. De combinatie is daarom zichtbaar in de melding en niet in de
+  /// ernst; de strengere variant hoort bij `privacyStrictSeverity` (§7), en die
+  /// bestaat nog niet.
+  void _scanCard(_Fragment fragment, int slideIndex, List<PrivacyFinding> out) {
+    final pans = <Match>[];
+    for (final match in cardNumberPattern.allMatches(fragment.text)) {
+      final digits = cardDigits(match.group(0)!);
+      if (isTestCardNumber(digits)) continue;
+      if (!isPlausibleCardNumber(digits)) continue;
+      pans.add(match);
+      _emit(
+        out,
+        _finding(
+          fragment,
+          slideIndex,
+          match,
+          ruleId: 'fin.pan',
+          family: PrivacyFamily.financial,
+          confidence: PrivacyConfidence.certain,
+        ),
+      );
+    }
+    if (pans.isEmpty) return;
+
+    // Alleen in gezelschap van een kaartnummer.
+    for (final match in cvvPattern.allMatches(fragment.text)) {
+      _emit(
+        out,
+        _finding(
+          fragment,
+          slideIndex,
+          match,
+          ruleId: 'fin.cvv',
+          family: PrivacyFamily.financial,
+          confidence: PrivacyConfidence.certain,
+        ),
+      );
+    }
+  }
 }

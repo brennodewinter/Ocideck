@@ -920,6 +920,10 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'creditcardnummer': 'credit card number',
+  'beveiligingscode van een creditcard': 'card security code (CVV)',
+  'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
+      'data in the speaker notes — invisible on the slide, but exported',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Disease and condition names are missing for this deck\'s language. Religion, political opinion and trade-union terms are recognised, and check-digit patterns (national ID, IBAN, passport) always work — but do not count on a diagnosis being found.',
   'niet getest': 'not tested',

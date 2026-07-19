@@ -1756,6 +1756,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'creditcardnummer': 'HuchQeD mI\'',
+  'beveiligingscode van een creditcard': 'HuchQeD Hurgh mI\'',
+  'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
+      'jatlhwI\' qawHaq De\' — HaSta legh lu\'be\', \'ach nge\'lu\'',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'vam Hol rop pong tu\'lu\'be\'. lalDan, woQ qeS, ghom mu\' je luleghlu\', \'ej mI\' toblu\'ta\' (BSN, IBAN, nav) reH vumtaH — \'ach rop ngu\' tu\'lu\'meH Qob.',
   'niet getest': 'wIvbe\'',
