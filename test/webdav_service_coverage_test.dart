@@ -140,6 +140,60 @@ void main() {
       expect(utf8.decode(r.body), contains('<d:propfind'));
     });
 
+    test('a dropped connection is retried once, and then succeeds', () async {
+      // De hik waar dit voor bestaat: de verbinding valt weg, de volgende
+      // poging lukt gewoon. Zonder tweede poging was dit een mislukte opslag
+      // of een leeg mappenoverzicht.
+      var n = 0;
+      final fake = await _FakeWebdav.start((req) async {
+        n++;
+        if (n == 1) {
+          // Abrupt de verbinding verbreken: dat komt bij de client aan als een
+          // afgebroken antwoord, niet als een nette foutstatus.
+          final socket = await req.response.detachSocket();
+          socket.destroy();
+          return;
+        }
+        req.response.statusCode = 207;
+        req.response.write('<ok/>');
+      });
+      addTearDown(fake.stop);
+
+      await svcFor(fake.port).probe();
+      expect(n, 2, reason: 'precies één nieuwe poging, niet meer');
+    });
+
+    test('a refused answer is not retried', () async {
+      // 401 is een antwoord, geen storing. Nog eens proberen levert hetzelfde
+      // op en laat de gebruiker langer wachten op dezelfde uitslag.
+      var n = 0;
+      final fake = await _FakeWebdav.start((req) async {
+        n++;
+        req.response.statusCode = 401;
+      });
+      addTearDown(fake.stop);
+
+      final e = await _catch(() => svcFor(fake.port).probe());
+      expect((e as WebdavException).kind, WebdavError.auth);
+      expect(n, 1);
+    });
+
+    test('a dropped connection during upload is never retried', () async {
+      // Schrijven is geen lezen: de If-Match-bewaking hangt aan wat er op dát
+      // moment op de server staat. Blind opnieuw sturen is precies de
+      // overschrijving die die bewaking moet voorkomen.
+      var n = 0;
+      final fake = await _FakeWebdav.start((req) async {
+        n++;
+        final socket = await req.response.detachSocket();
+        socket.destroy();
+      });
+      addTearDown(fake.stop);
+
+      await _catch(() => svcFor(fake.port).upload('file.bin', [1]));
+      expect(n, 1);
+    });
+
     test('maps 401 to an auth error', () async {
       final fake = await _FakeWebdav.start((req) async {
         req.response.statusCode = 401;

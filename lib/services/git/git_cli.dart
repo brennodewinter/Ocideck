@@ -97,6 +97,37 @@ class GitCliException implements Exception {
   String toString() => 'GitCliException($message)';
 }
 
+/// Of een mislukte `git push` een *afwijzing* was — iemand anders is je voor
+/// geweest — in plaats van een storing onderweg.
+///
+/// Het onderscheid bepaalt wat er met het werk van de gebruiker gebeurt: een
+/// afwijzing hoort een conflictmelding te geven, een storing gaat de wachtrij
+/// in om later vanzelf mee te gaan. Ze verwarren is duur, en het gebeurde: de
+/// herkenning leest Engelse tekst, terwijl `git` de taal van de schil sprak.
+/// Met een Nederlandse of Duitse git matchte niets, en werd elke afwijzing als
+/// "offline" weggeschreven — het werk verdween stil in de wachtrij en de
+/// gebruiker hoorde nooit dat er een conflict was.
+///
+/// Dat het nu wél mag: `GitCli` zet `LC_ALL=C` en leegt `LANGUAGE`, dus git
+/// antwoordt altijd in het Engels. Zonder die vastzetting is deze functie niet
+/// betrouwbaar en hoort ze niet gebruikt te worden.
+///
+/// Aparte, pure functie zodat de gevallen te testen zijn zonder een echte
+/// remote te hoeven afwijzen.
+bool isPushRejection(String stderr) {
+  final lower = stderr.toLowerCase();
+  // De drie zinnen waarmee git een geweigerde ref benoemt.
+  if (lower.contains('non-fast-forward') ||
+      lower.contains('fetch first') ||
+      lower.contains('stale info')) {
+    return true;
+  }
+  // Vangnet voor formuleringen die we niet bij naam kennen. "resolve" sluit de
+  // gevallen uit waarin git juist over een merge-conflict in de werkkopie
+  // praat; dat is geen push-afwijzing.
+  return lower.contains('rejected') && !lower.contains('resolve');
+}
+
 /// De gehardde git-uitvoerder (§10.2). Eén implementatie per platform; op web is
 /// het een stub die [isSupported] `false` meldt en bij gebruik gooit.
 abstract class GitCli {
