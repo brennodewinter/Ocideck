@@ -1340,3 +1340,82 @@ gemiddeld 67,9% van de entiteiten met SD 8,3% en 4.299 unieke meningsverschillen
 classifier kan halen, en het is de reden dat de belofte van dit product — *een
 hulpmiddel, geen garantie* — geen bescheidenheidsfiguur is maar de enige uitspraak
 die door de meting gedekt wordt.
+
+### 13.8 Open einden
+
+Drie dingen die nog niet in code of documentatie zaten, en die je koud moet kunnen
+oppakken zonder de sessie waarin ze ontdekt zijn.
+
+#### Drie licentievragen die fase 13 blokkeren
+
+Voordat er een lexicon gebundeld wordt, moet dit uitgezocht — per bron één e-mail.
+De bronnen zijn interessant genoeg om het te vragen, en géén ervan mag mee op basis
+van wat er nu bekend is.
+
+**Homosaurus (seksuele geaardheid).** Via het RCE/NDE-endpoint 5.811 SKOS-concepten,
+állemaal met een Nederlandse `prefLabel`, plus 3.187 Nederlandse `altLabel`s, actief
+onderhouden. Veruit de beste bron voor deze categorie. Maar de licentie is
+tegenstrijdig: [homosaurus.org/about](https://homosaurus.org/about) zegt
+**CC BY-NC-ND 4.0** (dodelijk voor bundelen), terwijl IHLIA's eigen dataset-metadata
+live `dcterms:license → CC BY 4.0` teruggeeft. Plausibel is dat de internationale
+redactieraad BY-NC-ND hanteert en IHLIA zijn Nederlandse dataset onder BY 4.0
+publiceert. **Niet bundelen op dat triple alleen** — schriftelijke bevestiging vragen
+bij IHLIA, via de contactgegevens op hun eigen site. Het triple is sterk genoeg om
+dat gesprek mee te openen.
+
+> Terzijde, en leerzaam: hier stond eerst het letterlijke e-mailadres van IHLIA. De
+> vals-positievencorpustest sloeg daarop aan — niet op het adres zelf, maar omdat de
+> co-occurrence-escalator een e-mailadres als "identificeert een persoon" telt en
+> daarmee élk artikel 9-trefwoord in dit document naar `zeker` tilde. In een
+> ontwerpdocument over artikel 9 staan die woorden in elke alinea. De controle ving
+> dus haar eigen documentatie, en precies zoals bedoeld.
+
+**IISG-religietaxonomieën.** De religietaxonomie telt 288 SKOS-concepten, schoon en
+tweetalig; de denominatielijst 3.219, inclusief historische spellingsvarianten maar
+vervuild met transcriptie-afval (`!geen<`, kale interpunctie — filter op ≥3 letters).
+**Beide datasets declareren geen licentie.** Vragen bij IISG.
+
+**Thesaurus Zorg en Welzijn.** Met ~50.000 Nederlandse termen veruit het rijkste
+NL-corpus voor de gezondheidscategorie, SKOS-RDF, sinds 1 januari 2023 beheerd door
+Nictiz en kosteloos. Maar de tekst van de bilaterale overeenkomst is nergens
+gepubliceerd. Vraag de Nictiz-servicedesk **expliciet** of herdistributie binnen een
+open gelicentieerde applicatie is toegestaan — "kosteloos" is niet hetzelfde als
+"herdistribueerbaar", en dat onderscheid velt ook SNOMED CT NL (§13.3).
+
+#### Bundelgrootte: winst die nu blijft liggen
+
+`dartcv` kent module-selectie via hooks:
+
+```yaml
+hooks:
+  user_defines:
+    dartcv4:
+      include_modules: [core, imgproc, imgcodecs, objdetect, dnn]
+```
+
+Dat zijn precies de vijf modules die de beeldcontrole gebruikt. Dit is **niet**
+geconfigureerd, dus Linux, Windows en Android dragen nu de volledige OpenCV-modulelijst
+mee. Twee dingen om te weten voor je het aanzet:
+
+* module-exclusie werkt **alleen op Android, Windows en Linux** — op macOS krijg je
+  hoe dan ook de volle build, en daar is 27 MB gemeten;
+* een uitgesloten module houdt zijn Dart-API maar gooit "symbol not found" bij
+  aanroep. Uitsluiten zonder meten is dus een tijdbom.
+
+De winst op de drie andere platforms is nooit gemeten. Meet vóór en ná.
+
+#### De detectietests draaien maar op één platform
+
+De Makefile vindt de OpenCV-bibliotheek zelf zodra er een platformbuild in `build/`
+staat (zie CHECKS.md), en de CI bouwt alleen in de macOS-taak. Gevolg: **een
+runtime-fout in de native laag op Linux of Windows blijft groen.** Een
+*compilatie*fout valt wél op, want de release-workflow bouwt beide.
+
+Linux en Windows zijn overigens nooit werkelijk getest: `opencv_core` declareert
+`ffiPlugin: true` voor android/ios/linux/macos/windows, en de voorwaardelijke import
+kiest op elk native platform de echte implementatie — maar alleen macOS is
+aantoonbaar gedraaid. Dichten kost dezelfde buildstap in de Linux- en Windows-taken,
+een paar minuten CI-tijd per platform.
+
+Android en iOS zijn geen leverplatform: de release-workflow bouwt web, macOS, Windows
+en Linux. De mappen bestaan, het product niet.
