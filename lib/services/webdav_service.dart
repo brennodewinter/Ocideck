@@ -68,7 +68,22 @@ class WebdavFile {
 /// melding kan tonen zonder de ruwe fout te lekken.
 enum WebdavError {
   config,
+
+  /// De hostnaam bestaat niet of DNS antwoordde niet. Bewust gescheiden van
+  /// [blockedHost]: die twee vragen om tegengesteld advies.
+  unknownHost,
   blockedHost,
+
+  /// Het TLS-certificaat van de server werd niet vertrouwd — zelfondertekend,
+  /// verlopen, of op een andere naam. Zonder eigen soort verdween dit in
+  /// [network] en las de gebruiker "verbinding mislukt" bij een server die
+  /// prima bereikbaar was.
+  tls,
+
+  /// De server stuurde een omleiding. Die volgen we niet (dat zou de
+  /// host-controle omzeilen), maar het is geen storing: meestal staat er een
+  /// `http`-URL ingevuld waar de server `https` van maakt.
+  redirect,
   network,
   auth,
   notFound,
@@ -154,17 +169,23 @@ class WebdavService {
             : 'Alleen https-servers worden ondersteund.',
       );
     }
-    final addrs = await NetGuard.safeResolveTrusted(
+    final resolved = await NetGuard.resolveConfigured(
       host,
       allowPrivate: server.trustedInternal,
     );
-    if (addrs == null) {
-      throw WebdavException(
-        WebdavError.blockedHost,
-        'Server-host geweigerd of onbereikbaar',
-      );
+    if (!resolved.isOk) {
+      throw switch (resolved.refusal!) {
+        HostRefusal.unknownHost => WebdavException(
+          WebdavError.unknownHost,
+          'Servernaam niet gevonden',
+        ),
+        HostRefusal.blocked => WebdavException(
+          WebdavError.blockedHost,
+          'Server-host geweigerd',
+        ),
+      };
     }
-    final pinned = addrs.first;
+    final pinned = resolved.addresses!.first;
     return HttpClient()
       ..connectionTimeout = const Duration(seconds: 15)
       ..connectionFactory = (u, proxyHost, proxyPort) =>
@@ -189,9 +210,39 @@ class WebdavService {
     if (status == 404) {
       throw WebdavException(WebdavError.notFound, 'Niet gevonden');
     }
+    // Redirects volgen we niet (zie [_openRequest]); als "onverwachte status"
+    // was dit cryptisch, terwijl het bijna altijd één herkenbare oorzaak heeft.
+    if (status >= 300 && status < 400) {
+      throw WebdavException(
+        WebdavError.redirect,
+        'Server stuurt door ($status)',
+      );
+    }
     if (status >= 500) {
       throw WebdavException(WebdavError.server, 'Serverfout ($status)');
     }
+  }
+
+  /// Vertaal een gevangen laag-niveau fout naar een [WebdavException] die de
+  /// oorzaak nog draagt.
+  ///
+  /// Hiervoor eindigde elke bewerking op `catch (e) → network / "Verbinding
+  /// mislukt"`. Een afgewezen certificaat, een dichte poort en een geweigerde
+  /// verbinding werden zo één zin, en de enige plek waar het verschil nog
+  /// stond was het logboek — waar de gebruiker niet kijkt. De informatie was
+  /// er al; ze werd één laag te vroeg weggegooid.
+  static Never _asFailure(String where, Object e, String fallback) {
+    // TlsException dekt zowel HandshakeException als CertificateException.
+    if (e is TlsException) {
+      logWarning('WebdavService.$where: TLS geweigerd', e);
+      throw WebdavException(WebdavError.tls, 'Certificaat niet vertrouwd');
+    }
+    if (e is SocketException) {
+      logWarning('WebdavService.$where: socket onbereikbaar', e);
+      throw WebdavException(WebdavError.network, 'Server niet bereikbaar');
+    }
+    logError('WebdavService.$where: mislukt', e);
+    throw WebdavException(WebdavError.network, fallback);
   }
 
   static const String _propfindBody =
@@ -246,8 +297,7 @@ class WebdavService {
     } on TimeoutException {
       throw WebdavException(WebdavError.network, 'Time-out');
     } catch (e) {
-      logError('WebdavService.list: mislukt', e);
-      throw WebdavException(WebdavError.network, 'Verbinding mislukt');
+      _asFailure('list', e, 'Verbinding mislukt');
     } finally {
       client.close(force: true);
     }
@@ -395,8 +445,7 @@ class WebdavService {
     } on TimeoutException {
       throw WebdavException(WebdavError.network, 'Time-out');
     } catch (e) {
-      logError('WebdavService.download: mislukt', e);
-      throw WebdavException(WebdavError.network, 'Download mislukt');
+      _asFailure('download', e, 'Download mislukt');
     } finally {
       client.close(force: true);
     }
@@ -476,8 +525,7 @@ class WebdavService {
     } on TimeoutException {
       throw WebdavException(WebdavError.network, 'Time-out');
     } catch (e) {
-      logError('WebdavService.upload: mislukt', e);
-      throw WebdavException(WebdavError.network, 'Upload mislukt');
+      _asFailure('upload', e, 'Upload mislukt');
     } finally {
       client.close(force: true);
     }
@@ -542,8 +590,7 @@ class WebdavService {
     } on TimeoutException {
       throw WebdavException(WebdavError.network, 'Time-out');
     } catch (e) {
-      logError('WebdavService.probe: mislukt', e);
-      throw WebdavException(WebdavError.network, 'Verbinding mislukt');
+      _asFailure('probe', e, 'Verbinding mislukt');
     } finally {
       client.close(force: true);
     }

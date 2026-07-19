@@ -1810,6 +1810,24 @@ const _dutchSourceAddCs = <String, String>{
   'IP-adres': 'IP adresa',
   'machineleesbare zone van een paspoort of ID':
       'strojově čitelná zóna pasu nebo průkazu totožnosti',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'Název koncového bodu neexistuje nebo jej nelze vyhledat. Zkontrolujte, zda v něm není překlep.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'Název koncového bodu neexistuje. Zkontrolujte, zda v něm není překlep.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Název serveru neexistuje nebo jej nelze vyhledat. Zkontrolujte, zda v URL serveru není překlep.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Tento server má privátní nebo LAN adresu. Označte jej jako důvěryhodný interní v Nastavení → Úložiště.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'Certifikát tohoto serveru není důvěryhodný. Vlastnoručně podepsaný certifikát nefunguje; použijte certifikát od uznávaného vydavatele.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Server přesměrovává na jinou adresu. Zadejte tuto adresu přímo — přesměrování nenásledujeme, protože může obejít bezpečnostní kontrolu.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'Název serveru neexistuje. Zkontrolujte, zda v URL serveru není překlep.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Certifikát serveru není důvěryhodný — vlastnoručně podepsaný, vypršelý nebo vydaný na jiné jméno.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'Server přesměrovává na jinou adresu. Zadejte tuto adresu zde.',
   'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
       'Uložení do klíčenky se nezdařilo. Připojení bude vyžadovat heslo, dokud se to nepodaří.',
   'Sla de presentatie op om een kopie te maken.':

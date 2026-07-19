@@ -71,8 +71,17 @@ String webdavErrorMessage(AppLocalizations l10n, WebdavException e) {
     WebdavError.config => l10n.d(
       'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.',
     ),
+    WebdavError.unknownHost => l10n.d(
+      'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.',
+    ),
     WebdavError.blockedHost => l10n.d(
-      'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.',
+      'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.',
+    ),
+    WebdavError.tls => l10n.d(
+      'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.',
+    ),
+    WebdavError.redirect => l10n.d(
+      'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.',
     ),
     WebdavError.network => l10n.d(
       'Server niet bereikbaar — controleer je verbinding en de server-URL.',
@@ -100,6 +109,9 @@ String s3ErrorMessage(AppLocalizations l10n, S3Exception e) {
   return switch (e.kind) {
     S3Error.config => l10n.d(
       'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.',
+    ),
+    S3Error.unknownHost => l10n.d(
+      'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.',
     ),
     S3Error.blockedHost => l10n.d(
       'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.',

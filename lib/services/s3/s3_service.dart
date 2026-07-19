@@ -62,6 +62,10 @@ class S3File {
 /// kan tonen zonder de ruwe fout te lekken.
 enum S3Error {
   config,
+
+  /// De endpoint-naam bestaat niet of DNS antwoordde niet. Gescheiden van
+  /// [blockedHost]: die twee vragen om tegengesteld advies.
+  unknownHost,
   blockedHost,
   network,
   auth,
@@ -165,17 +169,23 @@ class S3Service {
             : 'Alleen https-endpoints worden ondersteund.',
       );
     }
-    final addrs = await NetGuard.safeResolveTrusted(
+    final resolved = await NetGuard.resolveConfigured(
       host,
       allowPrivate: bucket.trustedInternal,
     );
-    if (addrs == null) {
-      throw S3Exception(
-        S3Error.blockedHost,
-        'Endpoint-host geweigerd of onbereikbaar',
-      );
+    if (!resolved.isOk) {
+      throw switch (resolved.refusal!) {
+        HostRefusal.unknownHost => S3Exception(
+          S3Error.unknownHost,
+          'Endpoint-naam niet gevonden',
+        ),
+        HostRefusal.blocked => S3Exception(
+          S3Error.blockedHost,
+          'Endpoint-host geweigerd',
+        ),
+      };
     }
-    final pinned = addrs.first;
+    final pinned = resolved.addresses!.first;
     return HttpClient()
       ..connectionTimeout = const Duration(seconds: 15)
       ..connectionFactory = (u, proxyHost, proxyPort) =>

@@ -94,6 +94,37 @@ void main() {
       }
     });
 
+    test('no two error kinds share a message', () {
+      // Een gedeelde melding betekent dat de UI twee oorzaken niet uit elkaar
+      // houdt, en dat is precies waar dit stukje over gaat: wie ze weer
+      // samenvoegt, plakt de diagnose dicht die de servicelaag al had.
+      final byMessage = <String, List<WebdavError>>{};
+      for (final kind in WebdavError.values) {
+        final msg = webdavErrorMessage(l10n, WebdavException(kind, 'x'));
+        byMessage.putIfAbsent(msg, () => []).add(kind);
+      }
+      final shared = byMessage.values.where((k) => k.length > 1).toList();
+      expect(shared, isEmpty, reason: 'delen dezelfde melding: $shared');
+    });
+
+    test('an unknown host is not blamed on the trusted-internal setting', () {
+      // De oude tekst stuurde bij een tikfout in de hostnaam aan op het
+      // omzetten van een veiligheidsvink. Dat loste niets op en verzwakte de
+      // instelling: het advies hoort alleen bij een écht privé-adres.
+      final unknown = webdavErrorMessage(
+        l10n,
+        WebdavException(WebdavError.unknownHost, 'x'),
+      );
+      expect(unknown, contains('typefout'));
+      expect(unknown, isNot(contains('vertrouwd')));
+
+      final blocked = webdavErrorMessage(
+        l10n,
+        WebdavException(WebdavError.blockedHost, 'x'),
+      );
+      expect(blocked, contains('vertrouwd intern'));
+    });
+
     test('the auth message carries the Nextcloud app-password tip', () {
       final msg = webdavErrorMessage(
         l10n,

@@ -2,6 +2,37 @@ import 'dart:io';
 
 import 'log.dart';
 
+/// Waarom een hostcontrole geen adressen opleverde.
+///
+/// Het onderscheid is het hele punt. Beide gevallen gaven hiervoor `null`, en
+/// de aanroeper maakte er één melding van: "markeer een privé/LAN-server eerst
+/// als vertrouwd". Bij een tikfout in de hostnaam is dat advies niet alleen
+/// nutteloos maar schadelijk — de gebruiker zet een veiligheidsvink om, en het
+/// werkt nog steeds niet. De guard wéét welk van de twee het is; hij hoort het
+/// door te geven.
+enum HostRefusal {
+  /// De naam is niet op te lossen: hij bestaat niet, of DNS antwoordde niet.
+  unknownHost,
+
+  /// De naam lost wél op, maar (mede) naar een intern adres. Hier — en alleen
+  /// hier — helpt "vertrouwd intern" wél.
+  blocked,
+}
+
+/// De uitkomst van een hostcontrole: gevalideerde adressen, of de reden waarom
+/// niet. Precies één van beide is gevuld.
+class HostResolution {
+  final List<InternetAddress>? addresses;
+  final HostRefusal? refusal;
+
+  const HostResolution._(this.addresses, this.refusal);
+  const HostResolution.ok(List<InternetAddress> addresses)
+    : this._(addresses, null);
+  const HostResolution.refused(HostRefusal refusal) : this._(null, refusal);
+
+  bool get isOk => addresses != null;
+}
+
 /// Shared SSRF guards for any code that turns a deck-supplied string into a
 /// network request. Extracted from `FileService` so the URL-import path and the
 /// live remote-media path apply exactly the same host/address rules.
@@ -13,6 +44,10 @@ import 'log.dart';
 ///  * [safeResolve] — resolves a hostname and rejects it when ANY address is
 ///    internal, returning the validated addresses so the caller can pin the
 ///    socket against a DNS rebind. Use right before an `HttpClient` connect.
+///
+/// Wie de *reden* van een weigering aan de gebruiker moet uitleggen — de
+/// opslagverbindingen, want die host heeft hij zelf ingetypt — gebruikt
+/// [resolveConfigured] in plaats van [safeResolveTrusted].
 class NetGuard {
   NetGuard._();
 
@@ -122,16 +157,43 @@ class NetGuard {
     String host, {
     required bool allowPrivate,
   }) async {
-    if (!allowPrivate) return safeResolve(host);
+    final result = await resolveConfigured(host, allowPrivate: allowPrivate);
+    return result.addresses;
+  }
+
+  /// Als [safeResolveTrusted], maar geeft bij een weigering de *reden* terug.
+  ///
+  /// Voor een host die de gebruiker zelf heeft ingevuld. De naam mag hier wél
+  /// in het log: anders dan bij een deck-URL is dit zijn eigen server, en juist
+  /// die naam is het enige dat de twee weigeringsredenen uit elkaar houdt
+  /// wanneer je achteraf een logboek zit te lezen.
+  static Future<HostResolution> resolveConfigured(
+    String host, {
+    required bool allowPrivate,
+  }) async {
     final literal = InternetAddress.tryParse(host);
-    if (literal != null) return [literal];
-    try {
-      final addrs = await InternetAddress.lookup(host);
-      return addrs.isEmpty ? null : addrs;
-    } catch (e) {
-      logWarning('NetGuard.safeResolveTrusted: DNS lookup failed', e);
-      return null;
+    if (literal != null) {
+      if (!allowPrivate && isBlockedAddress(literal)) {
+        return const HostResolution.refused(HostRefusal.blocked);
+      }
+      return HostResolution.ok([literal]);
     }
+    final List<InternetAddress> addrs;
+    try {
+      addrs = await InternetAddress.lookup(host);
+    } catch (e) {
+      logWarning('NetGuard.resolveConfigured: DNS lookup failed for $host', e);
+      return const HostResolution.refused(HostRefusal.unknownHost);
+    }
+    // Een lege uitslag is geen blokkade maar een naam zonder adres: dezelfde
+    // uitkomst als een mislukte lookup, en hetzelfde advies.
+    if (addrs.isEmpty) {
+      return const HostResolution.refused(HostRefusal.unknownHost);
+    }
+    if (!allowPrivate && addrs.any(isBlockedAddress)) {
+      return const HostResolution.refused(HostRefusal.blocked);
+    }
+    return HostResolution.ok(addrs);
   }
 
   /// Lexical, synchronous check for whether [url] is a usable `http(s)` media

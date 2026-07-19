@@ -1811,6 +1811,24 @@ const _dutchSourceAddHu = <String, String>{
   'IP-adres': 'IP-cím',
   'machineleesbare zone van een paspoort of ID':
       'útlevél vagy személyazonosító igazolvány géppel olvasható zónája',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'A végpont neve nem létezik, vagy nem kereshető ki. Ellenőrizd, nincs-e benne elgépelés.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'A végpont neve nem létezik. Ellenőrizd, nincs-e benne elgépelés.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'A kiszolgáló neve nem létezik, vagy nem kereshető ki. Ellenőrizd, nincs-e elgépelés a kiszolgáló URL-jében.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Ennek a kiszolgálónak privát vagy LAN-címe van. Jelöld megbízható belsőként a Beállítások → Tárhely alatt.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'Ennek a kiszolgálónak a tanúsítványa nem megbízható. Az önaláírt tanúsítvány nem működik; használj elismert kibocsátótól származót.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'A kiszolgáló másik címre irányít át. Add meg közvetlenül azt a címet — az átirányításokat nem követjük, mert megkerülhetik a biztonsági ellenőrzést.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'A kiszolgáló neve nem létezik. Ellenőrizd, nincs-e elgépelés a kiszolgáló URL-jében.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'A kiszolgáló tanúsítványa nem megbízható — önaláírt, lejárt, vagy más névre szól.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'A kiszolgáló másik címre irányít át. Add meg itt azt a címet.',
   'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
       'A kulcstartóba mentés nem sikerült. A kapcsolat továbbra is kérni fogja a jelszavadat, amíg ez nem sikerül.',
   'Sla de presentatie op om een kopie te maken.':

@@ -428,6 +428,56 @@ void main() {
     });
   });
 
+  group('NetGuard.resolveConfigured names the reason', () {
+    test('a private literal is refused as blocked, not as unknown', () async {
+      final result = await NetGuard.resolveConfigured(
+        '192.168.1.10',
+        allowPrivate: false,
+      );
+      expect(result.isOk, isFalse);
+      expect(result.refusal, HostRefusal.blocked);
+    });
+
+    test('a name that cannot be resolved is unknownHost', () async {
+      // `.invalid` is bij RFC 2606 gereserveerd om nooit op te lossen, dus dit
+      // is dezelfde uitkomst met én zonder netwerk — geen flakiness.
+      final result = await NetGuard.resolveConfigured(
+        'geen-server.invalid',
+        allowPrivate: false,
+      );
+      expect(result.isOk, isFalse);
+      expect(result.refusal, HostRefusal.unknownHost);
+    });
+
+    test('the trusted flag does not turn a typo into a blocked host', () async {
+      // De kern van de klacht: wie de vink al aan had staan, kreeg tóch het
+      // advies om hem aan te zetten. Nu blijft de reden dezelfde.
+      final result = await NetGuard.resolveConfigured(
+        'geen-server.invalid',
+        allowPrivate: true,
+      );
+      expect(result.refusal, HostRefusal.unknownHost);
+    });
+
+    test('a public literal resolves and carries its address', () async {
+      final result = await NetGuard.resolveConfigured(
+        '93.184.216.34',
+        allowPrivate: false,
+      );
+      expect(result.isOk, isTrue);
+      expect(result.addresses!.single.address, '93.184.216.34');
+      expect(result.refusal, isNull);
+    });
+
+    test('a private literal is allowed when the user trusts it', () async {
+      final result = await NetGuard.resolveConfigured(
+        '10.0.0.5',
+        allowPrivate: true,
+      );
+      expect(result.isOk, isTrue);
+    });
+  });
+
   group('NetGuard.isAllowedMediaUrlResolved', () {
     test('rejects a non-http(s) scheme', () async {
       expect(

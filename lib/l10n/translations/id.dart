@@ -1807,6 +1807,24 @@ const _dutchSourceAddId = <String, String>{
   'IP-adres': 'alamat IP',
   'machineleesbare zone van een paspoort of ID':
       'zona terbaca mesin pada paspor atau KTP',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'Nama endpoint tidak ada, atau tidak dapat dicari. Periksa endpoint dari salah ketik.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'Nama endpoint tidak ada. Periksa endpoint dari salah ketik.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Nama server tidak ada, atau tidak dapat dicari. Periksa URL server dari salah ketik.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Server ini memiliki alamat privat atau LAN. Tandai sebagai internal tepercaya di Pengaturan → Penyimpanan.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'Sertifikat server ini tidak tepercaya. Sertifikat yang ditandatangani sendiri tidak berfungsi; gunakan sertifikat dari penerbit yang diakui.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Server mengalihkan ke alamat lain. Masukkan alamat itu secara langsung — kami tidak mengikuti pengalihan, karena dapat melewati pemeriksaan keamanan.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'Nama server tidak ada. Periksa URL server dari salah ketik.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Sertifikat server tidak tepercaya — ditandatangani sendiri, kedaluwarsa, atau diterbitkan atas nama lain.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'Server mengalihkan ke alamat lain. Masukkan alamat itu di sini.',
   'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
       'Gagal menyimpan ke gantungan kunci. Koneksi akan terus meminta kata sandi Anda sampai berhasil.',
   'Sla de presentatie op om een kopie te maken.':

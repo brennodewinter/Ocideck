@@ -51,7 +51,12 @@ enum GitForgeError {
   /// De repo-configuratie is onvolledig of onbruikbaar (geen host, geen owner).
   config,
 
-  /// De host is door NetGuard geweigerd, of onbereikbaar.
+  /// De servernaam bestaat niet of DNS antwoordde niet. Gescheiden van
+  /// [blockedHost]: die twee vragen om tegengesteld advies.
+  unknownHost,
+
+  /// De host is door NetGuard geweigerd omdat hij (mede) naar een intern adres
+  /// wijst. Alleen hier helpt "vertrouwd intern".
   blockedHost,
 
   network,

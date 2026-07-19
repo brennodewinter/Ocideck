@@ -1829,6 +1829,24 @@ const _dutchSourceAddMt = <String, String>{
   'IP-adres': 'indirizz IP',
   'machineleesbare zone van een paspoort of ID':
       'żona li tinqara bil-magna ta\' passaport jew karta tal-identità',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'L-isem tal-endpoint ma jeżistix, jew ma jistax jinstab. Iċċekkja l-endpoint għal żball tal-ittajpjar.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'L-isem tal-endpoint ma jeżistix. Iċċekkja l-endpoint għal żball tal-ittajpjar.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'L-isem tas-server ma jeżistix, jew ma jistax jinstab. Iċċekkja l-URL tas-server għal żball tal-ittajpjar.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Dan is-server għandu indirizz privat jew tal-LAN. Immarkah bħala intern fdat taħt Settings → Ħażna.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'Iċ-ċertifikat ta\' dan is-server mhuwiex fdat. Ċertifikat iffirmat minnu nnifsu ma jaħdimx; uża wieħed minn emittent rikonoxxut.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Is-server jidderieġi lejn indirizz ieħor. Daħħal dak l-indirizz direttament — ma nsegwux ridirezzjonijiet, għax jistgħu jevitaw il-kontroll tas-sigurtà.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'L-isem tas-server ma jeżistix. Iċċekkja l-URL tas-server għal żball tal-ittajpjar.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Iċ-ċertifikat tas-server mhuwiex fdat — iffirmat minnu nnifsu, skadut, jew maħruġ f\'isem ieħor.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'Is-server jidderieġi lejn indirizz ieħor. Daħħal dak l-indirizz hawn.',
   'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
       'Is-salvataġġ fiċ-ċurkett taċ-ċwievet falla. Il-konnessjoni tibqa\' titlob il-password tiegħek sakemm dan jirnexxi.',
   'Sla de presentatie op om een kopie te maken.':

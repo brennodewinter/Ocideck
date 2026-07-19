@@ -1823,6 +1823,24 @@ const _dutchSourceAddLa = <String, String>{
   'IP-adres': 'inscriptio IP',
   'machineleesbare zone van een paspoort of ID':
       'zona machina legibilis diplomatis vel identitatis',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'Nomen termini non exstat, vel inveniri non potest. Terminum de mendo typographico inspice.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'Nomen termini non exstat. Terminum de mendo typographico inspice.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Nomen servitoris non exstat, vel inveniri non potest. URL servitoris de mendo typographico inspice.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Hic servitor inscriptionem privatam vel LAN habet. Eum ut internum fidum nota apud Optiones → Repositorium.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'Testimonium huius servitoris non creditur. Testimonium a se signatum non valet; utere uno ab editore agnito.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Servitor ad aliam inscriptionem dirigit. Illam inscriptionem recta insere — deductiones non sequimur, quia custodiam securitatis circumire possunt.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'Nomen servitoris non exstat. URL servitoris de mendo typographico inspice.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Testimonium servitoris non creditur — a se signatum, exspiratum, vel alii nomini datum.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'Servitor ad aliam inscriptionem dirigit. Illam inscriptionem hic insere.',
   'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
       'Servare in clavium anulo defecit. Nexus tuam tesseram petere perget donec succedat.',
   'Sla de presentatie op om een kopie te maken.':

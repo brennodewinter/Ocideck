@@ -761,6 +761,24 @@ const _dutchSourceAddEs = {
   'IP-adres': 'dirección IP',
   'machineleesbare zone van een paspoort of ID':
       'zona de lectura mecánica de un pasaporte o documento de identidad',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'El nombre del punto de conexión no existe o no se puede resolver. Comprueba si hay una errata en el punto de conexión.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'El nombre del punto de conexión no existe. Comprueba si hay una errata en el punto de conexión.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'El nombre del servidor no existe o no se puede resolver. Comprueba si hay una errata en la URL del servidor.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Este servidor tiene una dirección privada o de LAN. Márcalo como interno de confianza en Ajustes → Almacenamiento.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'El certificado de este servidor no es de confianza. Un certificado autofirmado no funciona; usa uno de una entidad reconocida.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'El servidor redirige a otra dirección. Introduce esa dirección directamente: no seguimos redirecciones, porque pueden eludir la comprobación de seguridad.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'El nombre del servidor no existe. Comprueba si hay una errata en la URL del servidor.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'El certificado del servidor no es de confianza: autofirmado, caducado o emitido a otro nombre.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'El servidor redirige a otra dirección. Introduce esa dirección aquí.',
   'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
       'No se pudo guardar en el llavero. La conexión seguirá pidiendo tu contraseña hasta que se consiga.',
   'Sla de presentatie op om een kopie te maken.':

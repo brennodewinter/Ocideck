@@ -1811,6 +1811,24 @@ const _dutchSourceAddGsw = <String, String>{
   'IP-adres': 'IP-Adrässe',
   'machineleesbare zone van een paspoort of ID':
       'maschineläsbari Zone vun eme Pass oder Uswiis',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'De Endpunktname git\'s nid, oder er lat sich nid uflöse. Lueg de Endpunkt uf en Tippfähler ah.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'De Endpunktname git\'s nid. Lueg de Endpunkt uf en Tippfähler ah.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'De Servername git\'s nid, oder er lat sich nid uflöse. Lueg d Server-URL uf en Tippfähler ah.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Dä Server het e privati oder LAN-Adrässe. Markier ne under Istellige → Spycher als vertrouenswürdig intern.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'Em Zertifikat vo däm Server wird nid vertrout. Es sälbersignierts Zertifikat funktioniert nid; nimm eis vo mene anerkännte Userschtäller.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'De Server leitet uf en anderi Adrässe um. Gib die Adrässe direkt ih — Wyterleitige folge mer nid, wil si d Sicherheitsprüefig umgah chöi.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'De Servername git\'s nid. Lueg d Server-URL uf en Tippfähler ah.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Em Zertifikat vom Server wird nid vertrout — sälbersigniert, abgloffe, oder uf en andere Name usgstellt.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'De Server leitet uf en anderi Adrässe um. Gib die Adrässe da ih.',
   'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
       'Speichere im Schlüsselbund het nid klappet. D Verbindig fragt witer nach dim Passwort, bis es klappt.',
   'Sla de presentatie op om een kopie te maken.':

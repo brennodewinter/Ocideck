@@ -1825,6 +1825,24 @@ const _dutchSourceAddRo = <String, String>{
   'IP-adres': 'adresă IP',
   'machineleesbare zone van een paspoort of ID':
       'zona citibilă automat a unui pașaport sau act de identitate',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'Numele punctului final nu există sau nu poate fi căutat. Verifică dacă acesta conține o greșeală de tastare.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'Numele punctului final nu există. Verifică dacă acesta conține o greșeală de tastare.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Numele serverului nu există sau nu poate fi căutat. Verifică dacă adresa URL a serverului conține o greșeală de tastare.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Acest server are o adresă privată sau de LAN. Marchează-l ca intern de încredere în Setări → Stocare.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'Certificatul acestui server nu este de încredere. Un certificat autosemnat nu funcționează; folosește unul de la un emitent recunoscut.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Serverul redirecționează către o altă adresă. Introdu direct acea adresă — nu urmăm redirecționări, deoarece pot ocoli verificarea de securitate.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'Numele serverului nu există. Verifică dacă adresa URL a serverului conține o greșeală de tastare.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Certificatul serverului nu este de încredere — autosemnat, expirat sau emis pe alt nume.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'Serverul redirecționează către o altă adresă. Introdu acea adresă aici.',
   'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
       'Salvarea în inelul de chei a eșuat. Conexiunea va continua să ceară parola până când reușește.',
   'Sla de presentatie op om een kopie te maken.':

@@ -765,6 +765,24 @@ const _dutchSourceAddFy = {
   'IP-adres': 'IP-adres',
   'machineleesbare zone van een paspoort of ID':
       'masinelêsbere sône fan in paspoart of ID',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'De endpoint-namme bestiet net, of is net op te sykjen. Kontrolearje it endpoint op in typflater.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'De endpoint-namme bestiet net. Kontrolearje it endpoint op in typflater.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'De servernamme bestiet net, of is net op te sykjen. Kontrolearje de server-URL op in typflater.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Dizze server hat in privee- of LAN-adres. Markearje him as fertroud yntern by Ynstellingen → Opslach.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'It sertifikaat fan dizze server wurdt net fertroud. In sels-ûndertekene sertifikaat wurket net; brûk der ien fan in erkende útjouwer.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'De server stjoert troch nei in oar adres. Folje dat adres streekrjocht yn — in trochferwizing folgje wy net, want dy kin de feilichheidskontrôle omsile.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'De servernamme bestiet net. Kontrolearje de server-URL op in typflater.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'It sertifikaat fan de server wurdt net fertroud — sels-ûndertekene, ferrûn, of op in oare namme steld.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'De server stjoert troch nei in oar adres. Folje dat adres hjir yn.',
   'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
       'Bewarjen yn de kaaihinger is mislearre. De ferbining bliuwt om dyn wachtwurd freegjen oant it slagget.',
   'Sla de presentatie op om een kopie te maken.':

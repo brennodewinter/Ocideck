@@ -1830,6 +1830,24 @@ const _dutchSourceAddBg = <String, String>{
   'IP-adres': 'IP адрес',
   'machineleesbare zone van een paspoort of ID':
       'машинночетима зона на паспорт или лична карта',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'Името на крайната точка не съществува или не може да бъде намерено. Проверете я за печатна грешка.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'Името на крайната точка не съществува. Проверете я за печатна грешка.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Името на сървъра не съществува или не може да бъде намерено. Проверете URL адреса на сървъра за печатна грешка.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Този сървър има частен или LAN адрес. Отбележете го като доверен вътрешен в Настройки → Хранилище.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'Сертификатът на този сървър не е доверен. Самоподписан сертификат не работи; използвайте такъв от признат издател.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Сървърът пренасочва към друг адрес. Въведете този адрес директно — не следваме пренасочвания, защото могат да заобиколят проверката за сигурност.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'Името на сървъра не съществува. Проверете URL адреса на сървъра за печатна грешка.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Сертификатът на сървъра не е доверен — самоподписан, изтекъл или издаден на друго име.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'Сървърът пренасочва към друг адрес. Въведете този адрес тук.',
   'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
       'Записът в ключодържателя е неуспешен. Връзката ще продължи да иска паролата ти, докато не успее.',
   'Sla de presentatie op om een kopie te maken.':

@@ -764,6 +764,24 @@ const _dutchSourceAddPap = {
   'IP-adres': 'adres IP',
   'machineleesbare zone van een paspoort of ID':
       'zona lesibel pa mashin di un pasaporte òf ID',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'E nòmber di endpoint no ta eksistí, of no por wòrdu buskí. Kontrolá e endpoint pa un eror di tipeo.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'E nòmber di endpoint no ta eksistí. Kontrolá e endpoint pa un eror di tipeo.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'E nòmber di servidor no ta eksistí, of no por wòrdu buskí. Kontrolá e URL di servidor pa un eror di tipeo.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'E servidor aki tin un adrès privá of di LAN. Marké e komo konfiá interno na Konfigurashon → Almasenamentu.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'E sertifikado di e servidor aki no ta konfiá. Un sertifikado outo-firmá no ta funshoná; usa un di un emisor rekonosí.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'E servidor ta redirigí na un otro adrès. Yena e adrès ei direktamente — nos no ta sigui redirekshon, pasobra nan por evitá e kontrol di siguridat.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'E nòmber di servidor no ta eksistí. Kontrolá e URL di servidor pa un eror di tipeo.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'E sertifikado di e servidor no ta konfiá — outo-firmá, vensí, of pone na un otro nòmber.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'E servidor ta redirigí na un otro adrès. Yena e adrès ei aki.',
   'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
       'Warda den yabero a faya. E konekshon lo sigui pidi bo kontraseña te ora e logra.',
   'Sla de presentatie op om een kopie te maken.':

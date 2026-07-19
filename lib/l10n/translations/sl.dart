@@ -1809,6 +1809,24 @@ const _dutchSourceAddSl = <String, String>{
   'IP-adres': 'naslov IP',
   'machineleesbare zone van een paspoort of ID':
       'strojno berljivo območje potnega lista ali osebne izkaznice',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'Ime končne točke ne obstaja ali ga ni mogoče poiskati. Preveri, ali je v njem tipkarska napaka.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'Ime končne točke ne obstaja. Preveri, ali je v njem tipkarska napaka.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Ime strežnika ne obstaja ali ga ni mogoče poiskati. Preveri, ali je v URL-ju strežnika tipkarska napaka.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Ta strežnik ima zasebni ali LAN naslov. Označi ga kot zaupanja vreden interni v Nastavitve → Shramba.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'Potrdilu tega strežnika ni zaupanja. Samopodpisano potrdilo ne deluje; uporabi potrdilo priznanega izdajatelja.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Strežnik preusmerja na drug naslov. Vnesi ta naslov neposredno — preusmeritvam ne sledimo, ker lahko obidejo varnostno preverjanje.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'Ime strežnika ne obstaja. Preveri, ali je v URL-ju strežnika tipkarska napaka.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Potrdilu strežnika ni zaupanja — samopodpisano, poteklo ali izdano na drugo ime.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'Strežnik preusmerja na drug naslov. Vnesi ta naslov sem.',
   'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
       'Shranjevanje v zbirko ključev ni uspelo. Povezava bo še naprej zahtevala geslo, dokler ne uspe.',
   'Sla de presentatie op om een kopie te maken.':

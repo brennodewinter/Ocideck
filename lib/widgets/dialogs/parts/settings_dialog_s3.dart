@@ -229,6 +229,10 @@ extension _SettingsS3 on _SettingsDialogState {
         return l10n.d(
           'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.',
         );
+      case S3Error.unknownHost:
+        return l10n.d(
+          'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.',
+        );
       case S3Error.blockedHost:
         return l10n.d(
           'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.',

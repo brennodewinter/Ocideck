@@ -1814,6 +1814,24 @@ const _dutchSourceAddSk = <String, String>{
   'IP-adres': 'IP adresa',
   'machineleesbare zone van een paspoort of ID':
       'strojovo čitateľná zóna pasu alebo občianskeho preukazu',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'Názov koncového bodu neexistuje alebo sa nedá vyhľadať. Skontroluj, či v ňom nie je preklep.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'Názov koncového bodu neexistuje. Skontroluj, či v ňom nie je preklep.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Názov servera neexistuje alebo sa nedá vyhľadať. Skontroluj, či v URL servera nie je preklep.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Tento server má privátnu alebo LAN adresu. Označ ho ako dôveryhodný interný v Nastavenia → Úložisko.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'Certifikát tohto servera nie je dôveryhodný. Vlastnoručne podpísaný certifikát nefunguje; použi certifikát od uznávaného vydavateľa.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Server presmerúva na inú adresu. Zadaj túto adresu priamo — presmerovania nenasledujeme, pretože môžu obísť bezpečnostnú kontrolu.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'Názov servera neexistuje. Skontroluj, či v URL servera nie je preklep.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Certifikát servera nie je dôveryhodný — vlastnoručne podpísaný, expirovaný alebo vydaný na iné meno.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'Server presmerúva na inú adresu. Zadaj túto adresu sem.',
   'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
       'Uloženie do zväzku kľúčov zlyhalo. Pripojenie bude naďalej žiadať heslo, kým sa to nepodarí.',
   'Sla de presentatie op om een kopie te maken.':

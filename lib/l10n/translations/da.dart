@@ -1806,6 +1806,24 @@ const _dutchSourceAddDa = <String, String>{
   'IP-adres': 'IP-adresse',
   'machineleesbare zone van een paspoort of ID':
       'maskinlæsbar zone i et pas eller id-kort',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'Endepunktsnavnet findes ikke eller kan ikke slås op. Tjek endepunktet for en tastefejl.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'Endepunktsnavnet findes ikke. Tjek endepunktet for en tastefejl.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Servernavnet findes ikke eller kan ikke slås op. Tjek server-URL\'en for en tastefejl.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Denne server har en privat- eller LAN-adresse. Marker den som betroet intern under Indstillinger → Lagring.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'Denne servers certifikat er ikke betroet. Et selvsigneret certifikat virker ikke; brug et fra en anerkendt udsteder.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Serveren omdirigerer til en anden adresse. Indtast den adresse direkte — vi følger ikke omdirigeringer, fordi de kan omgå sikkerhedskontrollen.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'Servernavnet findes ikke. Tjek server-URL\'en for en tastefejl.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Serverens certifikat er ikke betroet — selvsigneret, udløbet eller udstedt til et andet navn.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'Serveren omdirigerer til en anden adresse. Indtast den adresse her.',
   'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
       'Det mislykkedes at gemme i nøgleringen. Forbindelsen bliver ved med at bede om din adgangskode, indtil det lykkes.',
   'Sla de presentatie op om een kopie te maken.':
