@@ -8,6 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import '../utils/asset_destination.dart';
 import '../utils/atomic_file.dart';
 import '../utils/log.dart';
+import 'recovery_service.dart';
 
 /// De stagingmap: waar media landt van een deck dat nog geen eigen map op
 /// schijf heeft.
@@ -25,9 +26,9 @@ import '../utils/log.dart';
 /// `copyMediaToProject`) hem vanzelf naar zijn definitieve plek — de layout is
 /// immers al dezelfde.
 ///
-/// De stagingmap leeft onder de tijdelijke map van het OS en wordt niet zelf
-/// opgeruimd; dat volgt de lijn van de geplakte-afbeeldingencache die hieraan
-/// voorafging.
+/// De stagingmap leeft onder de tijdelijke map van het OS. Bij het opstarten
+/// ruimt [pruneStale] sessiemappen op die niemand meer kan gebruiken, zodat
+/// zwaar gebruik zonder opslaan zich niet stilletjes opstapelt.
 class AssetStaging {
   AssetStaging._();
 
@@ -56,6 +57,88 @@ class AssetStaging {
 
   /// De wortelmap, of null zolang die niet bepaald kon worden.
   static String? get rootPath => _rootPath;
+
+  /// Hoe lang een sessiemap blijft staan.
+  ///
+  /// Bewust dezelfde termijn als de herstelbestanden: een niet-opgeslagen deck
+  /// dat na een crash wordt teruggehaald verwijst naar paden in zijn oude
+  /// sessiemap. Zou staging eerder opruimen dan herstel, dan kreeg je een deck
+  /// terug met gaten waar de afbeeldingen zaten. Door dezelfde constante te
+  /// gebruiken kunnen de twee niet uit elkaar lopen.
+  static Duration get defaultMaxAge => RecoveryService.defaultMaxAge;
+
+  /// Gooi sessiemappen weg waar niemand meer iets aan heeft.
+  ///
+  /// Best-effort en stil: dit draait bij het opstarten en mag nooit in de weg
+  /// zitten. Geeft terug hoeveel mappen zijn verwijderd.
+  ///
+  /// De leeftijd is die van het jóngste bestand in de map, niet die van de map
+  /// zelf. Een sessiemap krijgt zijn tijdstempel bij aanmaken en verandert
+  /// daarna niet meer — de bestanden komen in `images/` en `media/` terecht —
+  /// dus op de map zelf afgaan zou een sessie opruimen die vanochtend nog is
+  /// gebruikt.
+  ///
+  /// Wat dit níet ziet: een app die al langer dan [maxAge] draait met een deck
+  /// dat even lang niet is aangeraakt én nooit is opgeslagen. Die verliest zijn
+  /// kopieën. Dat vraagt om een vergrendeling per sessie, en dat is meer
+  /// machinerie dan dit randgeval waard is; het gevolg is bovendien zichtbaar
+  /// (ontbrekend bestand in preview en kwaliteitspaneel) in plaats van stil.
+  static Future<int> pruneStale({Duration? maxAge}) async {
+    if (kIsWeb) return 0;
+    await initialize();
+    final root = _rootPath;
+    if (root == null) return 0;
+    final limit = maxAge ?? defaultMaxAge;
+    final keep = _sessionDir?.path;
+    var removed = 0;
+    try {
+      final dir = Directory(root);
+      if (!dir.existsSync()) return 0;
+      final now = DateTime.now();
+      for (final entry in dir.listSync()) {
+        if (entry is! Directory) continue;
+        if (keep != null && p.equals(entry.path, keep)) continue;
+        try {
+          final touched = _newestModified(entry);
+          if (touched == null || now.difference(touched) <= limit) continue;
+          await entry.delete(recursive: true);
+          removed++;
+        } catch (e) {
+          logWarning('AssetStaging.pruneStale: stat/delete', e);
+        }
+      }
+    } catch (e) {
+      logWarning('AssetStaging.pruneStale: list staging root', e);
+    }
+    return removed;
+  }
+
+  /// Het jongste wijzigingstijdstip van de béstanden in [dir].
+  ///
+  /// Alleen bestanden: de tijdstempel van een map zegt per platform iets
+  /// anders en verspringt al bij het aanmaken van een submap, dus daarop
+  /// afgaan zou een sessie te oud of te jong maken zonder dat er iets is
+  /// gebeurd. Elk gestaged bestand krijgt bij het kopiëren zijn eigen verse
+  /// tijdstempel, dus dat is de betrouwbare maat voor "hier is nog gewerkt".
+  ///
+  /// Staat er niets in — een sessie die is aangemaakt maar nooit gebruikt —
+  /// dan is de map zelf de enige aanwijzing die er is. Null als er niets te
+  /// lezen viel; dan blijft de map staan, want opruimen op grond van iets wat
+  /// je niet hebt kunnen lezen is geen opruimen maar gokken.
+  static DateTime? _newestModified(Directory dir) {
+    DateTime? newest;
+    try {
+      for (final entry in dir.listSync(recursive: true, followLinks: false)) {
+        if (entry is! File) continue;
+        final modified = entry.statSync().modified;
+        if (newest == null || modified.isAfter(newest)) newest = modified;
+      }
+      return newest ?? dir.statSync().modified;
+    } catch (e) {
+      logWarning('AssetStaging._newestModified: stat', e);
+      return null;
+    }
+  }
 
   /// True als [path] in de stagingmap staat: gekopieerd en veilig, maar nog
   /// niet bij een opgeslagen deck ondergebracht.

@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/asset_staging.dart';
+import 'package:ocideck/services/recovery_service.dart';
 import 'package:path/path.dart' as p;
 
 void main() {
@@ -111,6 +112,88 @@ void main() {
 
       expect(File(staged!).readAsBytesSync(), [1, 2, 3]);
       expect(p.basename(staged), 'geplakt.png');
+    });
+  });
+
+  group('pruneStale', () {
+    /// Zet de tijdstempels van elk bestand in een sessieboom [age] terug,
+    /// zodat een test niet hoeft te wachten om oud te zijn. Mapdatums zijn niet
+    /// te zetten in dart:io — en dat hoeft ook niet, want de opruimer kijkt
+    /// bewust alleen naar bestanden.
+    void age(Directory session, Duration age) {
+      final when = DateTime.now().subtract(age);
+      for (final entry in session.listSync(recursive: true)) {
+        if (entry is File) entry.setLastModifiedSync(when);
+      }
+    }
+
+    Directory sessionOf(String stagedPath) =>
+        Directory(p.dirname(p.dirname(stagedPath)));
+
+    test('laat een verse sessiemap staan', () async {
+      final staged = await AssetStaging.stage(
+        source('a.png', 'x').path,
+        subdir: 'images',
+      );
+
+      expect(await AssetStaging.pruneStale(), 0);
+      expect(File(staged!).existsSync(), isTrue);
+    });
+
+    test('ruimt een sessiemap op die over de datum is', () async {
+      final staged = await AssetStaging.stage(
+        source('a.png', 'x').path,
+        subdir: 'images',
+      );
+      final session = sessionOf(staged!);
+      age(session, const Duration(days: 30));
+      // Vergeet de sessie, zoals bij een herstart: anders wordt hij ontzien.
+      AssetStaging.overrideRootForTest(AssetStaging.rootPath);
+
+      expect(await AssetStaging.pruneStale(), 1);
+      expect(session.existsSync(), isFalse);
+    });
+
+    test('kijkt naar het jongste bestand, niet naar de map', () async {
+      final staged = await AssetStaging.stage(
+        source('a.png', 'x').path,
+        subdir: 'images',
+      );
+      final session = sessionOf(staged!);
+      age(session, const Duration(days: 30));
+      // Eén recent bestand: de sessie is dus wél in gebruik. Zou de map zelf
+      // de maatstaf zijn, dan werd dit werk weggegooid.
+      File(staged).setLastModifiedSync(DateTime.now());
+      AssetStaging.overrideRootForTest(AssetStaging.rootPath);
+
+      expect(await AssetStaging.pruneStale(), 0);
+      expect(File(staged).existsSync(), isTrue);
+    });
+
+    test('ontziet de sessie van de draaiende app', () async {
+      final staged = await AssetStaging.stage(
+        source('a.png', 'x').path,
+        subdir: 'images',
+      );
+      age(sessionOf(staged!), const Duration(days: 30));
+
+      // Geen override: deze sessie is de huidige en moet blijven, hoe oud de
+      // tijdstempels ook zijn.
+      expect(await AssetStaging.pruneStale(), 0);
+      expect(File(staged).existsSync(), isTrue);
+    });
+
+    test('houdt het minstens zo lang vol als de herstelbestanden', () {
+      expect(
+        AssetStaging.defaultMaxAge,
+        greaterThanOrEqualTo(RecoveryService.defaultMaxAge),
+      );
+    });
+
+    test('doet niets zonder stagingmap', () async {
+      AssetStaging.overrideRootForTest(null);
+
+      expect(await AssetStaging.pruneStale(), 0);
     });
   });
 

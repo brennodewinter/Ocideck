@@ -50,6 +50,12 @@ breaks the deck — and the ordinary save-time copy moves them into the project
 folder because the layout already matches. Until then the editor marks such an
 asset as *not yet saved*.
 
+The staging folder is housekeeping, not storage: at startup OciDeck deletes
+session folders nothing has touched for the same period recovery files are kept
+(7 days), so heavy use without saving does not quietly pile up. The two periods
+share one constant on purpose — a recovered draft points at its old session
+folder, so staging must never be cleared before recovery is.
+
 When a copy would land on a name that is already taken, the existing file is
 reused only if its contents are byte-identical; otherwise the newcomer gets a
 numbered suffix (`screenshot_2.png`). Two different pictures that happen to
