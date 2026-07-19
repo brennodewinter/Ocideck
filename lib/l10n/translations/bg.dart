@@ -1804,6 +1804,12 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'wacht op verbinding': 'чака връзка',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'Запазено на този компютър, още не в хранилището. Ще замине веднага щом има връзка — или сега, с „Изпразване на опашката“.',
+  'Branch (optioneel)': 'Клон (по избор)',
+  'let op: de standaardbranch is': 'внимание: клонът по подразбиране е',
+  'jij werkt op': 'вие работите на',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'дата на раждане, пощенски код и пол заедно — тези три обикновено сочат един човек, дори без име',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

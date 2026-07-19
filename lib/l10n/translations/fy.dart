@@ -739,6 +739,12 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'wacht op verbinding': 'wachtet op ferbining',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'Bewarre op dizze kompjûter, noch net yn de repository. Giet mei sadree\'t der wer ferbining is — of no, mei "Wachtrige leegje".',
+  'Branch (optioneel)': 'Branch (opsjoneel)',
+  'let op: de standaardbranch is': 'let op: de standertbranch is',
+  'jij werkt op': 'do wurkest op',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'bertedatum, postkoade en geslacht tegearre — dy trije wize meastal ien persoan oan, ek sûnder namme',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

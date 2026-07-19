@@ -1781,6 +1781,12 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'wacht op verbinding': 'menunggu koneksi',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'Disimpan di komputer ini, belum ada di repositori. Akan ikut begitu ada koneksi lagi — atau sekarang, dengan "Kosongkan antrean".',
+  'Branch (optioneel)': 'Cabang (opsional)',
+  'let op: de standaardbranch is': 'perhatian: cabang bawaan adalah',
+  'jij werkt op': 'Anda bekerja di',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'tanggal lahir, kode pos, dan jenis kelamin bersama-sama — ketiganya biasanya menunjuk satu orang, bahkan tanpa nama',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

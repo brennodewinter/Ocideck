@@ -1789,6 +1789,12 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'wacht op verbinding': 'laukia ryšio',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'Įrašyta šiame kompiuteryje, dar ne saugykloje. Iškeliaus vos atsiradus ryšiui — arba dabar, pasirinkus „Išvalyti eilę“.',
+  'Branch (optioneel)': 'Šaka (nebūtina)',
+  'let op: de standaardbranch is': 'dėmesio: numatytoji šaka yra',
+  'jij werkt op': 'jūs dirbate su',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'gimimo data, pašto kodas ir lytis kartu — šie trys paprastai nurodo vieną asmenį, net be vardo',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

@@ -738,6 +738,12 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'wacht op verbinding': 'ta warda konekshon',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'Wardá riba e komputadó aki, ainda no den e repositorio. Lo bai ora tin konekshon atrobe — of awor, ku "Bashí e kua".',
+  'Branch (optioneel)': 'Branch (opshonal)',
+  'let op: de standaardbranch is': 'atenshon: e branch prinsipal ta',
+  'jij werkt op': 'bo ta traha riba',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'fecha di nasementu, kódigo postal i sekso huntu — e tres ei generalmente ta indiká un solo persona, asta sin nòmber',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

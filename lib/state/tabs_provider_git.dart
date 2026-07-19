@@ -623,6 +623,7 @@ extension TabsNotifierGit on TabsNotifier {
         forkFrom: forkFrom,
       ),
     );
+    _ref.invalidate(gitQueueCountProvider);
     return GitSaveResult(status: GitSaveStatus.queued, warnings: warnings);
   }
 

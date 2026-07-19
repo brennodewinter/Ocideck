@@ -1803,6 +1803,12 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'wacht op verbinding': 'jistenna konnessjoni',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'Issejvjat fuq dan il-kompjuter, għadu mhux fir-repożitorju. Jitlaq malli jkun hemm konnessjoni mill-ġdid — jew issa, b\'"Battal il-kju".',
+  'Branch (optioneel)': 'Fergħa (mhux obbligatorju)',
+  'let op: de standaardbranch is': 'nota: il-fergħa awtomatika hija',
+  'jij werkt op': 'inti qed taħdem fuq',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'data tat-twelid, kodiċi postali u sess flimkien — dawn it-tlieta ġeneralment jindikaw persuna waħda, anke mingħajr isem',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

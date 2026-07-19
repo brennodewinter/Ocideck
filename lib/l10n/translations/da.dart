@@ -1780,6 +1780,12 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'wacht op verbinding': 'venter på forbindelse',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'Gemt på denne computer, endnu ikke i repositoryet. Det følger med, så snart der er forbindelse igen — eller nu, med "Tøm kø".',
+  'Branch (optioneel)': 'Gren (valgfrit)',
+  'let op: de standaardbranch is': 'bemærk: standardgrenen er',
+  'jij werkt op': 'du arbejder på',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'fødselsdato, postnummer og køn tilsammen — de tre peger som regel på én person, også uden navn',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

@@ -1785,6 +1785,12 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'wacht op verbinding': 'kapcsolatra vár',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'Ezen a gépen mentve, a tárolóban még nincs. Elmegy, amint újra van kapcsolat — vagy most, a „Sor ürítése” paranccsal.',
+  'Branch (optioneel)': 'Ág (nem kötelező)',
+  'let op: de standaardbranch is': 'figyelem: az alapértelmezett ág',
+  'jij werkt op': 'te ezen dolgozol:',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'születési dátum, irányítószám és nem együtt — ez a három rendszerint egyetlen személyre mutat, név nélkül is',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

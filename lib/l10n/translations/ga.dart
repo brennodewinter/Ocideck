@@ -1817,6 +1817,13 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'wacht op verbinding': 'ag fanacht le nasc',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'Sábháilte ar an ríomhaire seo, níl sé sa stór fós. Rachaidh sé leis a luaithe a bheidh nasc ann arís — nó anois, le "Folmhaigh an scuaine".',
+  'Branch (optioneel)': 'Brainse (roghnach)',
+  'let op: de standaardbranch is':
+      'tabhair faoi deara: is é an brainse réamhshocraithe',
+  'jij werkt op': 'tá tú ag obair ar',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'dáta breithe, cód poist agus inscne le chéile — is gnách go gcuireann an triúr sin duine amháin in iúl, fiú gan ainm',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

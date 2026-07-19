@@ -139,6 +139,10 @@ saved version stays retrievable, which a plain folder cannot give you.
   the server clears it, because the earlier result was about something else; a
   *failed* test clears nothing, since it only proves the connection is down
   now.
+- **Branch**: leave it empty and the connection test adopts whatever the forge
+  reports as its default — that is the common case, and the only way a repo on
+  `master` works without you having to know. Fill something in and the test
+  will point out a mismatch but leave your choice alone.
 - **Test the connection** before saving. One call answers four questions at
   once, and each answer heads off a failure you would otherwise only meet at
   your first save:
@@ -152,6 +156,11 @@ saved version stays retrievable, which a plain folder cannot give you.
 - The git entries below only appear in the `…` menu **once a repository is
   configured**. Until then they are hidden rather than shown-but-failing, so the
   menu never offers an action that cannot succeed.
+- **Work waiting for a connection** shows in the status bar, in amber, with a
+  count across all your git connections. Saving while the forge is unreachable
+  keeps the deck on this computer until there is a connection again; the bar is
+  what tells you it is still there. It stays quiet when nothing is waiting, and
+  it is not clickable — use *Flush queue* in the `…` menu to send it now.
 - **Open** via the `…` menu (*Open from git…*): pick a deck and it is fetched,
   checked by the same safety scan as any other deck, and opened. A repository is
   untrusted input — coming from your own forge does not make it trusted.

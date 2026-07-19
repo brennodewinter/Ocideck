@@ -434,6 +434,37 @@ void main() {
     expect(find.textContaining('niet getest'), findsOneWidget);
   });
 
+  testWidgets('de branch is in te vullen en blijft bewaard', (tester) async {
+    // Er was geen veld voor, dus stond hij altijd op `main`: een repo op
+    // `master` was via de instellingen onbruikbaar, en bewust op een andere
+    // branch werken kon niet.
+    seedConnections([
+      {
+        ...git('g', 'Werk', owner: 'librekat', repo: 'decks'),
+        'config': {
+          'baseUrl': 'https://git.voorbeeld.nl',
+          'owner': 'librekat',
+          'repo': 'decks',
+          'provider': 'gitea',
+          'defaultBranch': 'ontwikkel',
+        },
+      },
+    ]);
+    await openSettings(tester);
+    await tester.tap(find.byIcon(Icons.expand_more));
+    await tester.pumpAndSettle();
+
+    expect(
+      tester
+          .widget<TextField>(
+            find.widgetWithText(TextField, 'Branch (optioneel)'),
+          )
+          .controller!
+          .text,
+      'ontwikkel',
+    );
+  });
+
   testWidgets('een verbinding verwijderen haalt hem uit de lijst', (
     tester,
   ) async {

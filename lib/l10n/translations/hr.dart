@@ -1788,6 +1788,12 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'wacht op verbinding': 'čeka vezu',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'Spremljeno na ovom računalu, još nije u repozitoriju. Ide čim ponovno bude veze — ili sada, s "Isprazni red".',
+  'Branch (optioneel)': 'Grana (neobavezno)',
+  'let op: de standaardbranch is': 'napomena: zadana grana je',
+  'jij werkt op': 'vi radite na',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'datum rođenja, poštanski broj i spol zajedno — to troje obično upućuje na jednu osobu, i bez imena',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

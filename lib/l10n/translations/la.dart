@@ -1797,6 +1797,12 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'wacht op verbinding': 'nexum exspectat',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'In hoc computatro servatum, nondum in promptuario. Ibit simulac nexus redierit — vel nunc, per "Ordinem vacuare".',
+  'Branch (optioneel)': 'Ramus (optativus)',
+  'let op: de standaardbranch is': 'cave: ramus praedefinitus est',
+  'jij werkt op': 'tu in eo laboras',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'dies natalis, numerus postalis et sexus simul — haec tria plerumque unam personam designant, etiam sine nomine',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

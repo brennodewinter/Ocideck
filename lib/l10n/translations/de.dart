@@ -738,6 +738,12 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'wacht op verbinding': 'wartet auf Verbindung',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'Auf diesem Rechner gespeichert, noch nicht im Repository. Geht mit, sobald wieder eine Verbindung besteht — oder jetzt, mit "Warteschlange leeren".',
+  'Branch (optioneel)': 'Branch (optional)',
+  'let op: de standaardbranch is': 'Achtung: der Standardbranch ist',
+  'jij werkt op': 'du arbeitest auf',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'Geburtsdatum, Postleitzahl und Geschlecht zusammen — diese drei bezeichnen meist eine einzige Person, auch ohne Namen',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

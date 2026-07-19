@@ -734,6 +734,12 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'wacht op verbinding': 'in attesa di connessione',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'Salvato su questo computer, non ancora nel repository. Partirà appena ci sarà di nuovo connessione — o subito, con "Svuota coda".',
+  'Branch (optioneel)': 'Ramo (facoltativo)',
+  'let op: de standaardbranch is': 'attenzione: il ramo predefinito è',
+  'jij werkt op': 'tu stai lavorando su',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'data di nascita, CAP e sesso insieme: quei tre di solito individuano una sola persona, anche senza nome',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

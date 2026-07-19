@@ -1781,6 +1781,12 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'wacht op verbinding': 'odottaa yhteyttä',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'Tallennettu tälle tietokoneelle, ei vielä repositorioon. Lähtee heti kun yhteys palaa — tai nyt, valinnalla "Tyhjennä jono".',
+  'Branch (optioneel)': 'Haara (valinnainen)',
+  'let op: de standaardbranch is': 'huomio: oletushaara on',
+  'jij werkt op': 'sinä työskentelet haarassa',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'syntymäaika, postinumero ja sukupuoli yhdessä — nämä kolme osoittavat yleensä yhden henkilön, myös ilman nimeä',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

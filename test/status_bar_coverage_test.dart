@@ -1,8 +1,11 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/app.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
+import 'package:ocideck/services/git/outbox.dart';
+import 'package:ocideck/models/git_settings.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/state/tabs_provider.dart';
@@ -56,6 +59,39 @@ void main() {
     await tester.pumpAndSettle();
     return tab;
   }
+
+  testWidgets('werk dat op verbinding wacht staat in de balk', (tester) async {
+    // Offline opgeslagen werk is niet weg, maar staat ook nergens waar een
+    // ander erbij kan. Tot nu toe zag je dat alleen als je er zelf naar vroeg.
+    const repo = GitRepoConfig(
+      baseUrl: 'https://git.voorbeeld.nl',
+      owner: 'librekat',
+      repo: 'decks',
+    );
+    SharedPreferences.setMockInitialValues({
+      'app_consent_accepted': true,
+      'storageConnections': jsonEncode([
+        {'id': 'g', 'name': 'Werk', 'kind': 'git', 'config': repo.toJson()},
+      ]),
+    });
+    await Outbox(scope: repo.storageSlug).enqueue(
+      const PendingCommit(
+        deckDir: 'decks/kwartaalcijfers',
+        branch: 'main',
+        message: 'werk',
+        baseSha: 'abc123',
+      ),
+    );
+
+    await pumpShell(tester);
+    expect(find.textContaining(l10n.d('wacht op verbinding')), findsOneWidget);
+  });
+
+  testWidgets('zonder wachtend werk zwijgt de balk erover', (tester) async {
+    // Een balk die altijd iets meldt, wordt niet meer gelezen.
+    await pumpShell(tester);
+    expect(find.textContaining(l10n.d('wacht op verbinding')), findsNothing);
+  });
 
   testWidgets('a freshly loaded deck shows the "saved" state and slide count', (
     tester,

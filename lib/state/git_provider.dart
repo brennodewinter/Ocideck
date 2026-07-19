@@ -83,6 +83,31 @@ GitForge createGitForge({
   GitProvider.gitlab => GitLabForge(config: config, token: token),
 };
 
+/// Hoeveel decks er over alle git-verbindingen samen nog in een wachtrij
+/// staan.
+///
+/// Werk dat offline is opgeslagen blijft wachten tot er weer verbinding is, en
+/// dat is precies het soort ding dat je vergeet. Tot nu toe zag je het alleen
+/// wanneer je er zelf naar vroeg — dan stond het er al dagen.
+///
+/// Ververst niet vanzelf. De wachtrij verandert op precies twee plekken — bij
+/// het inschuiven van een opslag en bij het legen — en die roepen daar
+/// `invalidate(gitQueueCountProvider)` aan. Een timer zou hetzelfde antwoord
+/// telkens opnieuw van schijf lezen; hem vergeten geeft een badge die
+/// achterloopt, en dat is erger dan geen badge.
+final gitQueueCountProvider = FutureProvider<int>((ref) async {
+  final connections = ref
+      .watch(settingsProvider)
+      .connections
+      .whereType<GitConnection>();
+  var total = 0;
+  for (final connection in connections) {
+    final pending = await ref.read(outboxProvider(connection.id)).pending();
+    total += pending.length;
+  }
+  return total;
+});
+
 /// De gehardde git-uitvoerder (§10.2). Eén per proces; op web een stub die
 /// [GitCli.isSupported] `false` meldt.
 final gitCliProvider = Provider<GitCli>((ref) => createGitCli());

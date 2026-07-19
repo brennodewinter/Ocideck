@@ -1780,6 +1780,12 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'wacht op verbinding': 'väntar på anslutning',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'Sparat på den här datorn, ännu inte i repositoryt. Det följer med så snart det finns anslutning igen — eller nu, med "Töm kö".',
+  'Branch (optioneel)': 'Gren (valfritt)',
+  'let op: de standaardbranch is': 'obs: standardgrenen är',
+  'jij werkt op': 'du arbetar på',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'födelsedatum, postnummer och kön tillsammans — de tre pekar oftast ut en enda person, även utan namn',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

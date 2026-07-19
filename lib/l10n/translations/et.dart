@@ -1772,6 +1772,12 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'wacht op verbinding': 'ootab ühendust',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'Salvestatud sellesse arvutisse, veel mitte hoidlasse. Läheb kaasa kohe, kui ühendus taastub — või kohe, valikuga „Tühjenda järjekord“.',
+  'Branch (optioneel)': 'Haru (valikuline)',
+  'let op: de standaardbranch is': 'märkus: vaikeharu on',
+  'jij werkt op': 'sina töötad harul',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'sünnikuupäev, sihtnumber ja sugu koos — need kolm osutavad tavaliselt ühele inimesele, ka ilma nimeta',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
