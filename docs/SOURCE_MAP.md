@@ -199,7 +199,7 @@ search (Phase 6) and asset deletion (§6.2, deliberately manual).
 - `bundled_asset.dart` — `asset:`-schema voor méégebundelde logo's van ingebouwde stijlprofielen.
 - `color_contrast.dart` — WCAG 2.1 contrast-ratio calculation and hex colour parsing.
 - `number_convention.dart` — Works out whether a file writes `1.234,56` or `1,234.56`, from evidence across all its values rather than per cell (`scanDecimalConvention`), and reads a value under a settled convention (`parseNumberUnder`). Deduces or refuses: what no value settles comes back as `undecided` for the chart import to ask about, never guessed from locale.
-- `csv.dart` — The one implementation of RFC 4180 quoting, in two framings: `parseCsvRows` reads a whole document (a quoted field may hold a line break — MITRE's CWE export needs that) and `parseCsvLine` reads one already-split line, so a stray quote stops there instead of swallowing the file. Used by `models/chart.dart` and `tool/build_cwe_catalog.dart`.
+- `csv.dart` — RFC 4180 quoting for the two readers of CSV *files*, in two framings: `parseCsvRows` reads a whole document (a quoted field may hold a line break — MITRE's CWE export needs that) and `parseCsvLine` reads one already-split line, so a stray quote stops there instead of swallowing the file. Used by `models/chart.dart` and `tool/build_cwe_catalog.dart`. Also the scan behind `table_clipboard.dart` (spreadsheet paste). A fourth hand-rolled quote scanner fails `check_conventions.dart` — three had accumulated unnoticed before this was one file.
 - `deck_markdown_dashes.dart` — Escapes standalone dash lines so the deck parser can't misread them.
 - `file_download.dart` — Browserdownload (blob + anker) voor web-opslaan; conditional import met stub.
 - `image_focal.dart` — Maps a normalized image crop focal point (0..1) to the `Alignment` used to reposition a cropped/cover image.
@@ -215,7 +215,7 @@ search (Phase 6) and asset deletion (§6.2, deliberately manual).
 - `password_strength.dart` — Entropy-based password-strength estimate (warn-only) for the encrypt dialog.
 - `project_path.dart` — Path resolution with project containment and symlink checking.
 - `sanitize_svg.dart` — Strips dangerous elements/attributes from Mermaid SVG output.
-- `table_clipboard.dart` — Parses tabular clipboard content (TSV, CSV, markdown tables).
+- `table_clipboard.dart` — Recognises whether clipboard content is a table and which separator it uses (the part that is genuinely about a paste); the field scanning is `csv.dart`. Parses tabular clipboard content (TSV, CSV, markdown tables).
 - `text_search.dart` — Case-insensitive text search/replace with match tracking.
 - `title_contrast.dart` — Evaluates title contrast and recommends WCAG fixes.
 - `url_launcher_util.dart` — Opens external links with scheme and SSRF validation.
