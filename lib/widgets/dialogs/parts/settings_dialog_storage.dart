@@ -272,22 +272,42 @@ extension _SettingsStorageTab on _SettingsDialogState {
   ) {
     Widget line(BuildContext _, Widget? _) {
       final status = _connectionStatus(connection, l10n);
+      // Drie standen, niet twee. "Ingevuld" is niet hetzelfde als "werkt": de
+      // regel werd groen bij een server die nooit was aangeraakt, en beloofde
+      // daarmee iets wat niemand had gecontroleerd. Een netwerkbron die nog
+      // nooit heeft geantwoord leest daarom amber en zegt het er in woorden
+      // bij — kleur alleen is geen boodschap.
+      final verifiedAt = status.configured
+          ? _verificationFor(connection)
+          : null;
+      final needsTest =
+          status.configured &&
+          verifiedAt == null &&
+          connection is! LocalConnection;
+      final label = needsTest
+          ? '${status.text} · ${l10n.d('niet getest')}'
+          : status.text;
       final text = Text(
-        status.text,
+        label,
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
           fontSize: 11,
-          color: status.configured ? AppTheme.teal : AppTheme.slate400,
+          color: !status.configured
+              ? AppTheme.slate400
+              : needsTest
+              ? AppTheme.amber700
+              : AppTheme.teal,
         ),
       );
+      final tip = verifiedAt != null
+          ? '${l10n.d('Werkte op')} ${_shortDate(verifiedAt)}'
+          : status.detail;
       return ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 220),
         // Een lokale map toont haar mapnaam; het volledige pad zou de rij
         // opeten terwijl juist het einde ervan onderscheidend is. De tooltip
         // houdt het pad bereikbaar.
-        child: status.detail == null
-            ? text
-            : Tooltip(message: status.detail!, child: text),
+        child: tip == null ? text : Tooltip(message: tip, child: text),
       );
     }
 
@@ -311,6 +331,15 @@ extension _SettingsStorageTab on _SettingsDialogState {
       listenable: Listenable.merge(sources),
       builder: line,
     );
+  }
+
+  /// Dag en tijd, kort genoeg voor een tooltip. Lokale tijd: de gebruiker
+  /// herkent "gisteren om half vier", niet een UTC-stempel.
+  static String _shortDate(DateTime when) {
+    final local = when.toLocal();
+    String two(int v) => v.toString().padLeft(2, '0');
+    return '${two(local.day)}-${two(local.month)}-${local.year} '
+        '${two(local.hour)}:${two(local.minute)}';
   }
 
   /// De stand van zaken in één zin, plus of de verbinding bruikbaar is — dat

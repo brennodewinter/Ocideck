@@ -36,7 +36,25 @@ sealed class StorageConnection {
   /// terug op een afgeleide omschrijving ([fallbackLabel]).
   final String name;
 
-  const StorageConnection({required this.id, required this.name});
+  /// Wanneer deze verbinding voor het laatst écht antwoord gaf, of `null` als
+  /// dat nooit is gebeurd.
+  ///
+  /// [isConfigured] zegt alleen dat de vélden zijn ingevuld — dat werd groen
+  /// bij een server die nooit is aangeraakt, en beloofde daarmee iets wat
+  /// niemand had gecontroleerd. Dit is het verschil tussen "ingevuld" en
+  /// "werkte".
+  ///
+  /// Hoort bij de verbinding en niet bij de serverconfiguratie: het is geen
+  /// instelling die je kiest, maar een waarneming. Wijzigt de configuratie,
+  /// dan slaat de waarneming nergens meer op en wordt hij gewist — dat gebeurt
+  /// waar de wijziging vandaan komt, in de instellingendialoog.
+  final DateTime? verifiedAt;
+
+  const StorageConnection({
+    required this.id,
+    required this.name,
+    this.verifiedAt,
+  });
 
   /// Genereer een nieuwe, stabiele verbindings-id.
   static String newId() => const Uuid().v4();
@@ -86,6 +104,9 @@ sealed class StorageConnection {
     final id = (json['id'] as String?)?.trim() ?? '';
     if (id.isEmpty) return null;
     final name = (json['name'] as String?) ?? '';
+    // Een onleesbare datum is geen reden de verbinding weg te gooien; dan is
+    // hij simpelweg "nooit getest".
+    final verifiedAt = DateTime.tryParse((json['verifiedAt'] as String?) ?? '');
     final rawConfig = json['config'];
     final config = rawConfig is Map
         ? Map<String, Object?>.from(rawConfig)
@@ -94,21 +115,25 @@ sealed class StorageConnection {
       'local' => LocalConnection(
         id: id,
         name: name,
+        verifiedAt: verifiedAt,
         path: (config['path'] as String?) ?? '',
       ),
       'webdav' => WebdavConnection(
         id: id,
         name: name,
+        verifiedAt: verifiedAt,
         server: WebdavServer.fromJson(config),
       ),
       'git' => GitConnection(
         id: id,
         name: name,
+        verifiedAt: verifiedAt,
         repo: GitRepoConfig.fromJson(config),
       ),
       's3' => S3Connection(
         id: id,
         name: name,
+        verifiedAt: verifiedAt,
         bucket: S3Bucket.fromJson(config),
       ),
       _ => null,
@@ -130,6 +155,7 @@ final class LocalConnection extends StorageConnection {
   const LocalConnection({
     required super.id,
     required super.name,
+    super.verifiedAt,
     required this.path,
   });
 
@@ -142,14 +168,24 @@ final class LocalConnection extends StorageConnection {
   @override
   String get fallbackLabel => path;
 
-  LocalConnection copyWith({String? name, String? path}) =>
-      LocalConnection(id: id, name: name ?? this.name, path: path ?? this.path);
+  LocalConnection copyWith({
+    String? name,
+    String? path,
+    DateTime? verifiedAt,
+    bool clearVerified = false,
+  }) => LocalConnection(
+    id: id,
+    name: name ?? this.name,
+    path: path ?? this.path,
+    verifiedAt: clearVerified ? null : (verifiedAt ?? this.verifiedAt),
+  );
 
   @override
   Map<String, Object?> toJson() => {
     'id': id,
     'name': name,
     'kind': 'local',
+    if (verifiedAt != null) 'verifiedAt': verifiedAt!.toIso8601String(),
     'config': {'path': path},
   };
 }
@@ -161,6 +197,7 @@ final class WebdavConnection extends StorageConnection {
   const WebdavConnection({
     required super.id,
     required super.name,
+    super.verifiedAt,
     required this.server,
   });
 
@@ -173,18 +210,24 @@ final class WebdavConnection extends StorageConnection {
   @override
   String get fallbackLabel => server.host;
 
-  WebdavConnection copyWith({String? name, WebdavServer? server}) =>
-      WebdavConnection(
-        id: id,
-        name: name ?? this.name,
-        server: server ?? this.server,
-      );
+  WebdavConnection copyWith({
+    String? name,
+    WebdavServer? server,
+    DateTime? verifiedAt,
+    bool clearVerified = false,
+  }) => WebdavConnection(
+    id: id,
+    name: name ?? this.name,
+    server: server ?? this.server,
+    verifiedAt: clearVerified ? null : (verifiedAt ?? this.verifiedAt),
+  );
 
   @override
   Map<String, Object?> toJson() => {
     'id': id,
     'name': name,
     'kind': 'webdav',
+    if (verifiedAt != null) 'verifiedAt': verifiedAt!.toIso8601String(),
     'config': server.toJson(),
   };
 }
@@ -197,6 +240,7 @@ final class S3Connection extends StorageConnection {
   const S3Connection({
     required super.id,
     required super.name,
+    super.verifiedAt,
     required this.bucket,
   });
 
@@ -211,10 +255,16 @@ final class S3Connection extends StorageConnection {
   @override
   String get fallbackLabel => bucket.bucket;
 
-  S3Connection copyWith({String? name, S3Bucket? bucket}) => S3Connection(
+  S3Connection copyWith({
+    String? name,
+    S3Bucket? bucket,
+    DateTime? verifiedAt,
+    bool clearVerified = false,
+  }) => S3Connection(
     id: id,
     name: name ?? this.name,
     bucket: bucket ?? this.bucket,
+    verifiedAt: clearVerified ? null : (verifiedAt ?? this.verifiedAt),
   );
 
   @override
@@ -222,6 +272,7 @@ final class S3Connection extends StorageConnection {
     'id': id,
     'name': name,
     'kind': 's3',
+    if (verifiedAt != null) 'verifiedAt': verifiedAt!.toIso8601String(),
     'config': bucket.toJson(),
   };
 }
@@ -233,6 +284,7 @@ final class GitConnection extends StorageConnection {
   const GitConnection({
     required super.id,
     required super.name,
+    super.verifiedAt,
     required this.repo,
   });
 
@@ -245,14 +297,24 @@ final class GitConnection extends StorageConnection {
   @override
   String get fallbackLabel => repo.slug;
 
-  GitConnection copyWith({String? name, GitRepoConfig? repo}) =>
-      GitConnection(id: id, name: name ?? this.name, repo: repo ?? this.repo);
+  GitConnection copyWith({
+    String? name,
+    GitRepoConfig? repo,
+    DateTime? verifiedAt,
+    bool clearVerified = false,
+  }) => GitConnection(
+    id: id,
+    name: name ?? this.name,
+    repo: repo ?? this.repo,
+    verifiedAt: clearVerified ? null : (verifiedAt ?? this.verifiedAt),
+  );
 
   @override
   Map<String, Object?> toJson() => {
     'id': id,
     'name': name,
     'kind': 'git',
+    if (verifiedAt != null) 'verifiedAt': verifiedAt!.toIso8601String(),
     'config': repo.toJson(),
   };
 }

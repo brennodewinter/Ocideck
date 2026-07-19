@@ -85,7 +85,15 @@ enum WebdavError {
   /// `http`-URL ingevuld waar de server `https` van maakt.
   redirect,
   network,
+
+  /// De server accepteerde de aanmelding niet: verkeerde gebruikersnaam of
+  /// wachtwoord (401).
   auth,
+
+  /// De aanmelding klópte, maar deze gebruiker mag hier niet bij (403).
+  /// Gescheiden van [auth] omdat het advies tegengesteld is: je wachtwoord
+  /// nóg eens controleren helpt hier niets.
+  forbidden,
   notFound,
   tooLarge,
   server,
@@ -215,8 +223,11 @@ class WebdavService {
   }
 
   void _checkStatus(int status) {
-    if (status == 401 || status == 403) {
-      throw WebdavException(WebdavError.auth, 'Aanmelden mislukt ($status)');
+    if (status == 401) {
+      throw WebdavException(WebdavError.auth, 'Aanmelden mislukt (401)');
+    }
+    if (status == 403) {
+      throw WebdavException(WebdavError.forbidden, 'Geen toegang (403)');
     }
     if (status == 404) {
       throw WebdavException(WebdavError.notFound, 'Niet gevonden');
@@ -611,8 +622,14 @@ class WebdavService {
       );
       await response.drain<void>();
       // 201 aangemaakt, 405 bestaat al — beide goed. 401/403/5xx → fout.
-      if (response.statusCode == 401 || response.statusCode == 403) {
-        throw WebdavException(WebdavError.auth, 'Geen rechten om map te maken');
+      if (response.statusCode == 401) {
+        throw WebdavException(WebdavError.auth, 'Aanmelden mislukt (401)');
+      }
+      if (response.statusCode == 403) {
+        throw WebdavException(
+          WebdavError.forbidden,
+          'Geen rechten om map te maken',
+        );
       }
       if (response.statusCode >= 500) {
         throw WebdavException(WebdavError.server, 'Map maken mislukt');

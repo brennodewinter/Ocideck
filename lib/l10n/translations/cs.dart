@@ -1786,6 +1786,16 @@ const _dutchSourceCs = {
 const _dutchSourceAddCs = <String, String>{
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Pro jazyk této prezentace chybí názvy nemocí. Náboženství, politické přesvědčení a odborové pojmy se rozpoznávají a vzory s kontrolní číslicí (rodné číslo, IBAN, pas) fungují vždy — ale nepočítejte s tím, že se najde diagnóza.',
+  'niet getest': 'neotestováno',
+  'Werkte op': 'Fungovalo dne',
+  'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
+      'Jsi přihlášen, ale zde nemáš přístup. Heslo není problém — požádej správce o práva k této složce.',
+  'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':
+      'Tvůj token je platný, ale toto nesmí. Dej mu více práv, nebo počkej, pokud forge uplatňuje limit.',
+  'Het token is geldig, maar mag dit niet — geef het meer rechten op de repository.':
+      'Token je platný, ale toto nesmí — dej mu více práv k repozitáři.',
+  'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
+      'Přihlášen, ale bez přístupu — heslo není problém. Požádej o práva k této složce.',
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Licence lexikonů: na co je ještě třeba se zeptat',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':

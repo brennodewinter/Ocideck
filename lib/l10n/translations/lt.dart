@@ -1791,6 +1791,16 @@ const _dutchSourceLt = {
 const _dutchSourceAddLt = <String, String>{
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Šios pateikties kalbai trūksta ligų pavadinimų. Religija, politinės pažiūros ir profsąjungų terminai atpažįstami, o šablonai su kontroliniu skaitmeniu (asmens kodas, IBAN, pasas) veikia visada — bet nesitikėkite, kad bus rasta diagnozė.',
+  'niet getest': 'nepatikrinta',
+  'Werkte op': 'Veikė',
+  'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
+      'Esate prisijungę, bet čia neturite prieigos. Slaptažodis nėra problema — paprašykite administratoriaus teisių į šį aplanką.',
+  'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':
+      'Jūsų raktas galioja, bet tam neturi teisių. Suteikite jam daugiau teisių arba palaukite, jei forge taiko ribojimą.',
+  'Het token is geldig, maar mag dit niet — geef het meer rechten op de repository.':
+      'Raktas galioja, bet tam neturi teisių — suteikite jam daugiau teisių saugyklai.',
+  'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
+      'Prisijungta, bet prieigos nėra — slaptažodis nėra problema. Paprašykite teisių į šį aplanką.',
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Leksikonų licencijos: ko dar reikia paklausti',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':

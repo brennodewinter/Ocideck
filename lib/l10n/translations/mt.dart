@@ -1805,6 +1805,16 @@ const _dutchSourceMt = {
 const _dutchSourceAddMt = <String, String>{
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Għal-lingwa ta\' din il-preżentazzjoni jonqsu l-ismijiet tal-mardiet. Ir-reliġjon, l-opinjoni politika u t-termini tat-trejdjunjins jingħarfu, u l-mudelli b\'ċifra ta\' kontroll (ID, IBAN, passaport) dejjem jaħdmu — imma toqgħodx tistenna li tinstab dijanjosi.',
+  'niet getest': 'mhux ittestjat',
+  'Werkte op': 'Ħadem fi',
+  'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
+      'Inti llogjat, imma m\'għandekx aċċess hawn. Il-password mhijiex il-problema — itlob lill-amministratur drittijiet fuq din il-folder.',
+  'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':
+      'It-token tiegħek huwa validu, imma m\'huwiex permess jagħmel dan. Agħtih aktar drittijiet, jew stenna jekk il-forge qed japplika limitu.',
+  'Het token is geldig, maar mag dit niet — geef het meer rechten op de repository.':
+      'It-token huwa validu, imma m\'huwiex permess jagħmel dan — agħtih aktar drittijiet fuq ir-repożitorju.',
+  'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
+      'Illogjat, imma bla aċċess — il-password mhijiex il-problema. Itlob drittijiet fuq din il-folder.',
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Liċenzji tal-lessiku: x\'fadal x\'nistaqsu',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':

@@ -256,8 +256,9 @@ void main() {
     expect(find.text('Niet ingesteld'), findsNothing);
     // Twee keer: in het invulveld zelf en in de statusregel van de rij. Anders
     // dan bij WebDAV, waar de statusregel de host uit de URL afleidt, is de
-    // bucketnaam letterlijk wat je intypte.
-    expect(find.text('decks'), findsNWidgets(2));
+    // bucketnaam letterlijk wat je intypte. De statusregel draagt er sinds de
+    // derde stand een achtervoegsel bij, dus niet op exacte tekst matchen.
+    expect(find.textContaining('decks'), findsNWidgets(2));
   });
 
   testWidgets('een lokale map heeft niets uit te klappen', (tester) async {
@@ -290,7 +291,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('cloud.voorbeeld.nl'), findsOneWidget);
+    expect(find.textContaining('cloud.voorbeeld.nl'), findsWidgets);
   });
 
   testWidgets('een geplakte DAV-URL wordt opgemerkt en uit elkaar gehaald', (
@@ -382,6 +383,55 @@ void main() {
           .text,
       'https://cloud.voorbeeld.nl',
     );
+  });
+
+  testWidgets('een ingevulde maar ongeteste bron leest niet als in orde', (
+    tester,
+  ) async {
+    // De regel werd groen zodra de vélden gevuld waren — ook bij een server
+    // die nog nooit was aangeraakt. Dat beloofde iets wat niemand had
+    // gecontroleerd.
+    seedConnections([webdav('a', 'Klant A', 'a.voorbeeld.nl')]);
+    await openSettings(tester);
+
+    expect(find.textContaining('niet getest'), findsOneWidget);
+  });
+
+  testWidgets('een eerder geslaagde test blijft staan', (tester) async {
+    seedConnections([
+      {
+        ...webdav('a', 'Klant A', 'a.voorbeeld.nl'),
+        'verifiedAt': '2026-07-19T14:22:00.000',
+      },
+    ]);
+    await openSettings(tester);
+
+    expect(find.textContaining('niet getest'), findsNothing);
+  });
+
+  testWidgets('de server wijzigen laat de oude uitslag vervallen', (
+    tester,
+  ) async {
+    // Een geslaagde test ging over een andere server. Hem laten staan zou een
+    // groen vinkje opleveren voor iets dat nooit is geprobeerd.
+    seedConnections([
+      {
+        ...webdav('a', 'Klant A', 'a.voorbeeld.nl'),
+        'verifiedAt': '2026-07-19T14:22:00.000',
+      },
+    ]);
+    await openSettings(tester);
+    expect(find.textContaining('niet getest'), findsNothing);
+
+    await tester.tap(find.byIcon(Icons.expand_more));
+    await tester.pumpAndSettle();
+    await tester.enterText(
+      find.widgetWithText(TextField, 'Server-URL'),
+      'https://b.voorbeeld.nl',
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('niet getest'), findsOneWidget);
   });
 
   testWidgets('een verbinding verwijderen haalt hem uit de lijst', (

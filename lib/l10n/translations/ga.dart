@@ -1819,6 +1819,16 @@ const _dutchSourceGa = {
 const _dutchSourceAddGa = <String, String>{
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Tá ainmneacha galar in easnamh do theanga an deic seo. Aithnítear reiligiún, tuairim pholaitiúil agus téarmaí ceardchumainn, agus oibríonn patrúin le digit seiceála (PPS, IBAN, pas) i gcónaí — ach ná bí ag brath ar dhiagnóis a aimsiú.',
+  'niet getest': 'gan tástáil',
+  'Werkte op': 'D\'oibrigh sé ar',
+  'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
+      'Tá tú sínithe isteach, ach níl rochtain agat anseo. Ní hé do phasfhocal an fhadhb — iarr cearta ar an riarthóir don fhillteán seo.',
+  'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':
+      'Tá do chomhartha bailí, ach níl cead aige é seo a dhéanamh. Tabhair níos mó cearta dó, nó fan má tá teorainn á cur i bhfeidhm ag an forge.',
+  'Het token is geldig, maar mag dit niet — geef het meer rechten op de repository.':
+      'Tá an comhartha bailí, ach níl cead aige é seo a dhéanamh — tabhair níos mó cearta dó ar an stór.',
+  'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
+      'Sínithe isteach, ach gan rochtain — ní hé do phasfhocal an fhadhb. Iarr cearta don fhillteán seo.',
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Ceadúnais foclóra: a bhfuil fós le fiafraí',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
