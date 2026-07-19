@@ -16,10 +16,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 /// Discovery prompt: opening a deck that carries Informatieveiligheid slide
 /// types while the module is off must offer a one-time "enable the module"
-/// snackbar (PENTEST_MIAUW §6). The slides still render regardless — the prompt
+/// banner (PENTEST_MIAUW §6). The slides still render regardless — the prompt
 /// is pure discovery (MODUS-REGEL). It fires exactly once, at the OPEN, and
 /// never again on an edit (which builds a fresh Deck via copyWith but never
 /// touches the open path).
+///
+/// Beyond *when* it fires, the banner has to leave the user three ways out —
+/// look first, accept, decline — and it must not outlive the presentation it
+/// is talking about.
 void main() {
   const promptText =
       'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. '
@@ -149,11 +153,11 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Inschakelen'), findsOneWidget);
 
-    // Clear the open-time snackbar so any re-prompt would be visible on its own.
+    // Clear the open-time banner so any re-prompt would be visible on its own.
     final messenger = ScaffoldMessenger.of(
       tester.element(find.byType(AppShell)),
     );
-    messenger.clearSnackBars();
+    messenger.clearMaterialBanners();
     await tester.pumpAndSettle();
     expect(find.text('Inschakelen'), findsNothing);
 
@@ -165,5 +169,90 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Inschakelen'), findsNothing);
+  });
+
+  // ── The three ways out ──────────────────────────────────────────────────────
+
+  Finder closeIcon() => find.descendant(
+    of: find.byType(MaterialBanner),
+    matching: find.byIcon(Icons.close),
+  );
+
+  testWidgets('the banner offers looking, enabling and declining', (
+    tester,
+  ) async {
+    final (_, tabs) = await pumpShell(tester);
+    await tabs.openDeckFromBytes(findingDeckBytes(), 'rapport.md');
+    await tester.pumpAndSettle();
+
+    expect(find.text('Naar de slide'), findsOneWidget);
+    expect(find.text('Inschakelen'), findsOneWidget);
+    expect(closeIcon(), findsOneWidget);
+  });
+
+  testWidgets('"Naar de slide" jumps to the finding and keeps the offer up', (
+    tester,
+  ) async {
+    final (container, tabs) = await pumpShell(tester);
+    await tabs.openDeckFromBytes(findingDeckBytes(), 'rapport.md');
+    await tester.pumpAndSettle();
+    final tab = container.read(tabsProvider).current!;
+    expect(tab.editorNotifier.state.selectedIndex, 0);
+
+    await tester.tap(find.text('Naar de slide'));
+    await tester.pumpAndSettle();
+
+    expect(
+      tab.editorNotifier.state.selectedIndex,
+      1,
+      reason: 'slide 1 is the finding — the slide the message is about',
+    );
+    expect(
+      find.text(promptText),
+      findsOneWidget,
+      reason: 'you looked in order to decide, so the offer must still stand',
+    );
+  });
+
+  testWidgets('the ✕ declines without turning the module on', (tester) async {
+    final (container, tabs) = await pumpShell(tester);
+    await tabs.openDeckFromBytes(findingDeckBytes(), 'rapport.md');
+    await tester.pumpAndSettle();
+
+    await tester.tap(closeIcon());
+    await tester.pumpAndSettle();
+
+    expect(find.text(promptText), findsNothing);
+    expect(container.read(infoSafetyProvider).enabled, isFalse);
+  });
+
+  // ── Never outliving the presentation it is about ────────────────────────────
+
+  testWidgets('switching to another tab takes the banner away', (tester) async {
+    final (container, tabs) = await pumpShell(tester);
+    await tabs.openDeckFromBytes(findingDeckBytes(), 'rapport.md');
+    await tester.pumpAndSettle();
+    expect(find.text(promptText), findsOneWidget);
+
+    container.read(tabsProvider.notifier).newDeckInNewTab('Iets anders');
+    await tester.pumpAndSettle();
+
+    expect(
+      find.text(promptText),
+      findsNothing,
+      reason: 'the banner spoke about a presentation no longer in view',
+    );
+  });
+
+  testWidgets('closing the presentation takes the banner away', (tester) async {
+    final (container, tabs) = await pumpShell(tester);
+    await tabs.openDeckFromBytes(findingDeckBytes(), 'rapport.md');
+    await tester.pumpAndSettle();
+    expect(find.text(promptText), findsOneWidget);
+
+    container.read(tabsProvider.notifier).closeTab(0);
+    await tester.pumpAndSettle();
+
+    expect(find.text(promptText), findsNothing);
   });
 }
