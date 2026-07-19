@@ -1793,6 +1793,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'machineleesbare zone van een paspoort of ID':
+      'strefa odczytu maszynowego paszportu lub dowodu tożsamości',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Otwieraj i przechowuj prezentacje w zasobniku S3: AWS S3 lub usłudze zgodnej z S3, na przykład własnym MinIO. Tajny klucz dostępu jest przechowywany zaszyfrowany w pęku kluczy, a nie razem z pozostałymi ustawieniami.',
   'Openen vanuit S3': 'Otwórz z S3',

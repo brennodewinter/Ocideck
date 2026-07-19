@@ -1789,6 +1789,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'machineleesbare zone van een paspoort of ID':
+      'paso arba asmens tapatybės kortelės mašininio nuskaitymo zona',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Atverk ir laikyk pristatymus S3 saugykloje: AWS S3 arba su S3 suderinama paslauga, pavyzdžiui savas MinIO. Slaptas prieigos raktas laikomas užšifruotas raktinėje, o ne su kitais nustatymais.',
   'Openen vanuit S3': 'Atverti iš S3',

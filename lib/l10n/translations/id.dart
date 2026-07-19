@@ -1781,6 +1781,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'machineleesbare zone van een paspoort of ID':
+      'zona terbaca mesin pada paspor atau KTP',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Buka dan simpan presentasi di bucket S3: AWS S3, atau layanan yang kompatibel dengan S3 seperti MinIO sendiri. Kunci akses rahasia disimpan terenkripsi di gantungan kunci, bukan bersama pengaturan lain.',
   'Openen vanuit S3': 'Buka dari S3',

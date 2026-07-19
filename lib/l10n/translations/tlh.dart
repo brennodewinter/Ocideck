@@ -1756,6 +1756,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'machineleesbare zone van een paspoort of ID': 'jonwI\' laDlaHbogh pIqaD nav',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'S3 nagh baSDaq HaSta yIpoSmoH \'ej yIQIj: AWS S3, pagh S3 rurbogh MinIO. pegh ngaQHa\'moH So\'lu\'bogh ngaQHa\'moH nagh ngaSwI\'Daq QIjlu\', latlh DuHIvmeymey rurbe\'.',
   'Openen vanuit S3': 'S3 yIpoSmoH',

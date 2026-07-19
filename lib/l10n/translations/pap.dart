@@ -738,6 +738,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'machineleesbare zone van een paspoort of ID':
+      'zona lesibel pa mashin di un pasaporte òf ID',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Habri i warda presentashonnan den un bucket di S3: AWS S3, of un servisio kompatibel ku S3 manera bo mes MinIO. E yabi sekreto di akseso ta wardá enkriptá den e yabero, no huntu ku e otro konfigurashonnan.',
   'Openen vanuit S3': 'Habri for di S3',

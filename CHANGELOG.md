@@ -35,6 +35,16 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   conflictafhandeling als bij WebDAV. Een deck dat je uit een bucket opende,
   gaat bij opslaan vanzelf naar diezelfde bucket terug.
 
+- **Een gescand paspoort in een slide wordt herkend.** De twee of drie regels
+  vol hoofdletters en `<`-tekens onderaan een identiteitsbewijs — de
+  machineleesbare zone — zijn geen willekeurige tekst: er zitten vier
+  controlecijfers in, waarvan er één over de andere heen ligt. OciDeck rekent ze
+  na, en alleen als ze allemaal kloppen is er een melding. Daardoor kan die
+  melding meteen hard zijn zonder verder bewijs: er staat een documentnummer, een
+  nationaliteit, een geboortedatum en een vervaldatum in één blok, en dat is
+  precies de set waarmee identiteitsfraude begint. Paspoort, identiteitskaart en
+  het oudere kaartformaat worden alle drie herkend.
+
 - **De privacycontrole koppelt een bijzonder gegeven nu aan een persóón.** Een
   diagnose of een verdenking is pas een bijzonder persoonsgegeven als er iemand
   bij hoort — een slide *óver* de AVG noemt die woorden zonder er een te

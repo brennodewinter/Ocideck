@@ -1785,6 +1785,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'machineleesbare zone van een paspoort of ID':
+      'maschineläsbari Zone vun eme Pass oder Uswiis',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Mach Präsentatione i eme S3-Bucket uuf und bewahr sie det uf: AWS S3, oder en S3-kompatible Dienscht wie es eigets MinIO. De gheimi Zuegriffsschlüssel wird verschlüsslet im Schlüsselbund abgleit, nöd bi de andere Iistellige.',
   'Openen vanuit S3': 'Us S3 uufmache',

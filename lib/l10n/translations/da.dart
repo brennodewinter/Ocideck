@@ -1780,6 +1780,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'machineleesbare zone van een paspoort of ID':
+      'maskinlæsbar zone i et pas eller id-kort',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Åbn og opbevar præsentationer i en S3-bucket: AWS S3 eller en S3-kompatibel tjeneste som din egen MinIO. Den hemmelige adgangsnøgle gemmes krypteret i nøgleringen, ikke sammen med de øvrige indstillinger.',
   'Openen vanuit S3': 'Åbn fra S3',

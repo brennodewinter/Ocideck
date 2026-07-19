@@ -1803,6 +1803,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'machineleesbare zone van een paspoort of ID':
+      'żona li tinqara bil-magna ta\' passaport jew karta tal-identità',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Iftaħ u żomm preżentazzjonijiet f’barmil S3: AWS S3, jew servizz kompatibbli ma’ S3 bħal MinIO tiegħek. Iċ-ċavetta sigrieta tal-aċċess tinżamm kriptata fil-keychain, mhux mas-settings l-oħra.',
   'Openen vanuit S3': 'Iftaħ minn S3',

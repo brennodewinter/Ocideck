@@ -1817,6 +1817,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'machineleesbare zone van een paspoort of ID':
+      'crios inléite ag meaisín de phas nó de chárta aitheantais',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Oscail agus coinnigh láithreoireachtaí i mbuicéad S3: AWS S3, nó seirbhís atá comhoiriúnach le S3 ar nós do MinIO féin. Coinnítear an eochair rochtana rúnda criptithe sa slabhra eochracha, ní leis na socruithe eile.',
   'Openen vanuit S3': 'Oscail ó S3',

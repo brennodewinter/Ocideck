@@ -1781,6 +1781,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'machineleesbare zone van een paspoort of ID':
+      'passin tai henkilökortin koneluettava alue',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Avaa ja säilytä esityksiä S3-säilössä: AWS S3 tai S3-yhteensopiva palvelu, kuten oma MinIO. Salainen käyttöavain säilytetään salattuna avainnipussa, ei muiden asetusten seassa.',
   'Openen vanuit S3': 'Avaa S3:sta',

@@ -735,6 +735,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'machineleesbare zone van een paspoort of ID':
+      'zona de lectura mecánica de un pasaporte o documento de identidad',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Abre y guarda presentaciones en un bucket de S3: AWS S3, o un servicio compatible con S3 como tu propio MinIO. La clave de acceso secreta se guarda cifrada en el llavero, no con el resto de ajustes.',
   'Openen vanuit S3': 'Abrir desde S3',

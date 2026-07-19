@@ -25,6 +25,7 @@ accepteren, waarschuwen met een shield-badge, of redigeren op scherm en in expor
 | §3-D Adres, NL-postcode en gelabelde persoonsnaam (postcode + huisnummer escaleert via nabijheid) | **geleverd** |
 | §13.1 Matcher met woordgrenzen + `PrivacyTermRole` (aanwijzing versus gegeven) | **geleverd** |
 | §13.5 Beeldcontrole: herkenbare gezichten op afbeeldingen (YuNet, lokaal) | **geleverd** |
+| §3-B `doc.mrz`: machine-readable zone (TD1/TD2/TD3) | **geleverd** |
 | §13.2 Persoonskoppelingspoort (naam als koppeling, mededeling als bereik) | **geleverd** |
 | §13.2 Lexiconmodel als data (`role`/`match`/`weight`/`lang`) | open — fase 12 |
 | §13.3 Taaldekking zichtbaar, gebundelde lexicons | open — fase 13 |
@@ -118,6 +119,7 @@ groeit de regelset zonder de compile te breken.
 | `lib/services/privacy/privacy_scanner.dart` | Orkestratie én de inline-detectors: e-mail, telefoon, IBAN, BSN, EU-nummers, secrets, bijzondere categorieën, adres/postcode, naam, structureel — plus allowlist en co-occurrence-escalatie |
 | `lib/services/privacy/privacy_contact_rules.dart` | Adres (straat + huisnummer), NL-postcode, gelabelde persoonsnaam: patronen, straatachtervoegsels, placeholder-personen |
 | `lib/services/privacy/privacy_phone_rules.dart` | Telefoon: E.164, nationale vorm, contextwoorden, toegekende landnummers, gereserveerde reeksen |
+| `lib/services/privacy/privacy_document_rules.dart` | Reisdocumenten: de machine-readable zone (TD1/TD2/TD3) met de ICAO 9303-controlecijfers |
 | `lib/services/privacy/privacy_eu_rules.dart` | Europese landpakketten: BE/BG/DE/EE/ES/FI/FR/HR/IT/PL/PT/RO/SE + UK (NHS/NINO) |
 | `lib/services/privacy/privacy_checksums.dart`, `privacy_checksums_eu.dart` | 11-proef, mod-97, Luhn, ISO 7064, geboortedatum-validatie, enz. |
 | `lib/services/privacy/privacy_secret_rules.dart` | Leverancierstokens, PEM, JWT, connection strings, wachtwoorden |
@@ -223,7 +225,7 @@ nul. Waar géén checksum bestaat (US SSN, V-nummer), is een contextwoord verpli
 
 | Regel-id | Wat | Validatie / FP-guard | Zekerheid | Std. |
 | --- | --- | --- | --- | --- |
-| `doc.mrz` | Machine-readable zone van paspoort/ID (TD1/TD2/TD3) | Twee of drie regels van 30/36/44 tekens, `P<` + ISO-3166-landcode, plus de mod-7-3-1-controlecijfers over documentnummer, geboortedatum, vervaldatum en het samengestelde cijfer. **Bijna nul FP's** en het is meteen `error`: een MRZ in een slide is een gescande identiteitskaart. | zeker | ✓ |
+| `doc.mrz` | Machine-readable zone van paspoort/ID (TD1/TD2/TD3) | Twee of drie regels van 30/36/44 tekens, `P<` + ISO-3166-landcode, plus de mod-7-3-1-controlecijfers over documentnummer, geboortedatum, vervaldatum en het samengestelde cijfer. **Bijna nul FP's** en het is meteen `error`: een MRZ in een slide is een gescande identiteitskaart. **Geleverd** (`privacy_document_rules.dart`), getest tegen de ICAO 9303-specimens. | zeker | ✓ |
 | `doc.passport_nl` | Nederlands paspoort-/ID-nummer | 9 alfanumeriek, contextwoord | waarschijnlijk | ◐ |
 | `doc.driving_licence` | Rijbewijsnummer | landformaat + context | mogelijk | ◐ |
 | `doc.residence` | Verblijfsdocument / visumnummer | formaat + context | mogelijk | ◐ |

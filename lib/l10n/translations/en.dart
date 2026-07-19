@@ -920,6 +920,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'machineleesbare zone van een paspoort of ID':
+      'machine-readable zone of a passport or ID',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Open and store presentations in an S3 bucket: AWS S3, or an S3-compatible service such as your own MinIO. The secret access key is stored encrypted in the keychain, not with the other settings.',
   'Openen vanuit S3': 'Open from S3',

@@ -22,6 +22,7 @@ import 'privacy_allowlist.dart';
 import 'privacy_bulk_rules.dart';
 import 'privacy_checksums.dart';
 import 'privacy_contact_rules.dart';
+import 'privacy_document_rules.dart';
 import 'privacy_eu_rules.dart';
 import 'privacy_own_identity.dart';
 import 'privacy_phone_rules.dart';
@@ -227,6 +228,7 @@ class PrivacyScanner {
     _scanPhone(fragment, slideIndex, out);
     _scanIban(fragment, slideIndex, out);
     _scanBsn(fragment, slideIndex, out);
+    _scanMrz(fragment, slideIndex, out);
     _scanSecrets(fragment, slideIndex, out);
     _scanEuIdentifiers(fragment, slideIndex, out);
     _scanSpecialCategories(fragment, slideIndex, out);
@@ -731,6 +733,37 @@ class PrivacyScanner {
           ruleId: 'fin.iban',
           family: PrivacyFamily.financial,
           confidence: PrivacyConfidence.certain,
+        ),
+      );
+    }
+  }
+
+  // ── doc.mrz ───────────────────────────────────────────────────────────────
+
+  /// De machine-readable zone van een paspoort of identiteitskaart.
+  ///
+  /// Geen contextpoort, geen nabijheidseis, meteen `certain`: vier
+  /// controlecijfers waarvan er één over de andere heen ligt, laten gewone tekst
+  /// niet door. En de betekenis rechtvaardigt het — dit is geen los
+  /// persoonsgegeven maar een gescand identiteitsbewijs, met documentnummer,
+  /// nationaliteit, geboortedatum en vervaldatum in één blok.
+  void _scanMrz(_Fragment fragment, int slideIndex, List<PrivacyFinding> out) {
+    for (final zone in findMrzZones(fragment.text)) {
+      final value = fragment.text.substring(zone.start, zone.end);
+      if (ownIdentity.covers(value)) continue;
+      out.add(
+        PrivacyFinding(
+          ruleId: 'doc.mrz',
+          family: PrivacyFamily.identifier,
+          confidence: PrivacyConfidence.certain,
+          slideIndex: slideIndex,
+          field: fragment.field,
+          fragmentIndex: fragment.index,
+          start: zone.start,
+          end: zone.end,
+          // Alleen de eerste en laatste letter, net als elke andere waarde: een
+          // melding met de naam uit de MRZ erin verplaatst het probleem.
+          maskedSample: maskValue(value),
         ),
       );
     }
