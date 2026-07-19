@@ -41,11 +41,12 @@ final String kRedactionToken = kRedactionBlock * kRedactionBlockCount;
 
 /// De handmatige redactiemarkering in de bron: `[[tekst]]`.
 ///
-/// Detectie is per definitie best-effort — wat de scanner niet ziet, redigeert
-/// hij niet. Deze markering geeft de auteur het laatste woord, onafhankelijk van
-/// welke detectieregel wel of niet vuurt. Geen geneste blokhaken, zodat een
-/// gewone markdown-link (`[tekst](url)`) er niet in loopt.
-final RegExp _manualRedaction = RegExp(r'\[\[([^\[\]]*)\]\]');
+/// Het patroon zelf staat in `privacy_scanner.dart`, want die heeft het óók
+/// nodig: een bevinding binnen een markering wordt daar onderdrukt. Eén
+/// definitie, in de onderste laag — twee regexes die hetzelfde horen te
+/// betekenen lopen vroeg of laat uiteen, en dan redigeert de projectie iets
+/// waar de scanner nog over klaagt.
+final RegExp _manualRedaction = kManualRedaction;
 
 /// Een deck dat de privacyprojectie is gepasseerd.
 ///
