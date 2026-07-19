@@ -26,6 +26,13 @@ machine (desktop) or in your browser tab (web). This includes:
 - Autosave/recovery snapshots — written to a per-user application-support folder,
   kept for 7 days, then removed. They are not encrypted; they rely on your
   operating-system account protections, just like your other files.
+- **Staged media.** A deck you have not saved yet has no project folder to keep
+  its images in, so an image you insert is copied into a per-session folder under
+  your operating system's temporary directory. That is what keeps the picture
+  from breaking when you move or rename the original before saving — but it does
+  mean a photograph can sit in the temp directory of a deck you never saved.
+  Stale session folders are removed on startup after 7 days, on the same clock as
+  the snapshots above, and saving the deck moves the files to the project folder.
 - **Git working copies.** Connecting a git repository puts a real clone — full
   deck content and history — in a per-user application-support folder, plus a
   queue of commits that haven't been pushed yet. Unlike autosave snapshots these
