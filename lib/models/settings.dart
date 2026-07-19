@@ -1,5 +1,6 @@
 import 'privacy_disposition.dart';
 import 'privacy_finding.dart';
+import '../services/privacy/privacy_regions.dart';
 import 'ai_settings.dart';
 import 'chart.dart' show normalizeChartColor;
 import 'checklist_template.dart';
@@ -630,6 +631,16 @@ class AppSettings {
   /// werkt, zet ze met één vinkje aan.
   final Set<String> privacyDisabledRules;
 
+  /// De landpakketten die de privacycontrole meeneemt (OCIWACHT §5.7, §7).
+  ///
+  /// Standaard heel Europa — EU-27 plus EER, Zwitserland en het VK. Dat is
+  /// verdedigbaar juist omdát de vals-positieven-strategie op checksums leunt:
+  /// ruim twintig van de dertig Europese persoonsnummers zijn zelfvaliderend, en
+  /// die kosten dus vrijwel geen precisie als je ze allemaal aanzet. De
+  /// universele regels (IBAN, e-mail, geheimen, MRZ) staan hier los van en
+  /// draaien altijd.
+  final Set<String> privacyRegions;
+
   /// Hoe streng de export-gate is: niets zeggen, waarschuwen (standaard), of
   /// weigeren zolang er onafgehandelde zekere bevindingen zijn.
   ///
@@ -740,6 +751,7 @@ class AppSettings {
     this.privacyChecksEnabled = true,
     this.privacyImageFaceDetection = true,
     this.privacyDisabledRules = defaultDisabledPrivacyRules,
+    this.privacyRegions = defaultPrivacyRegions,
     this.privacyExportGate = PrivacyExportGate.warn,
     this.privacyOwnIdentity = '',
     this.uiTextScale = 1.0,
@@ -821,6 +833,7 @@ class AppSettings {
     bool? privacyChecksEnabled,
     bool? privacyImageFaceDetection,
     Set<String>? privacyDisabledRules,
+    Set<String>? privacyRegions,
     PrivacyExportGate? privacyExportGate,
     String? privacyOwnIdentity,
     double? uiTextScale,
@@ -883,6 +896,7 @@ class AppSettings {
       privacyImageFaceDetection:
           privacyImageFaceDetection ?? this.privacyImageFaceDetection,
       privacyDisabledRules: privacyDisabledRules ?? this.privacyDisabledRules,
+      privacyRegions: privacyRegions ?? this.privacyRegions,
       privacyExportGate: privacyExportGate ?? this.privacyExportGate,
       privacyOwnIdentity: privacyOwnIdentity ?? this.privacyOwnIdentity,
       uiTextScale: uiTextScale ?? this.uiTextScale,

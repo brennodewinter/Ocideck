@@ -1799,6 +1799,14 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
+      'Для мови цієї презентації немає списку ключових слів для особливих категорій персональних даних. Шаблони з контрольною цифрою (ІПН, IBAN, паспорт) працюють; слова на кшталт «діагноз» або «підозрюваний» не розпізнаються.',
+  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
+      'Список ключових слів для особливих категорій персональних даних дуже бідний для мови цієї презентації. Не розраховуйте, що слова на кшталт «діагноз» або «підозрюваний» буде знайдено.',
+  'Landpakketten voor identificatienummers':
+      'Пакети країн для ідентифікаційних номерів',
+  'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
+      'Номери на кшталт нідерландського BSN чи польського PESEL прив\'язані до країни. Уся Європа увімкнена, бо більшість таких номерів мають контрольну цифру: їх увімкнення майже не дає хибних сповіщень. IBAN, е-пошта, секрети та паспортні смуги від цього не залежать і перевіряються завжди.',
   'strafrechtelijk gegeven (verdachte)': 'дані про судимість (підозрюваний)',
   'strafrechtelijk gegeven (aangever of slachtoffer)':
       'дані про судимість (заявник або потерпілий)',

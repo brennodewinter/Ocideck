@@ -601,9 +601,55 @@ final List<PrivacyLexiconEntry> bundledPrivacyLexicon = [
 
 /// De talen waarvoor er überhaupt trefwoorden zijn.
 ///
-/// Fase 13 hangt de dekkingsmeter hieraan op. Nu al bruikbaar als eerlijke
-/// mededeling: staat de decktaal hier niet bij, dan heeft de
-/// trefwoorddetectie voor dit deck niets te zoeken.
+/// Staat de decktaal hier niet bij, dan heeft de trefwoorddetectie voor dat deck
+/// niets te zoeken — en dán moet het paneel dat zeggen. Zie
+/// [privacyLexiconCoverage].
 Set<String> get privacyLexiconLanguages => {
   for (final entry in bundledPrivacyLexicon) entry.lang,
 };
+
+/// Hoeveel termen er per taal zijn.
+Map<String, int> get privacyLexiconTermCounts {
+  final counts = <String, int>{};
+  for (final entry in bundledPrivacyLexicon) {
+    counts[entry.lang] = (counts[entry.lang] ?? 0) + 1;
+  }
+  return counts;
+}
+
+/// Vanaf hoeveel termen we een taal "gedekt" durven noemen.
+///
+/// Bewust laag. Het gaat er niet om of het lexicon goed is — dat is het voor
+/// geen enkele taal — maar of er íéts te zoeken valt. Onder deze grens is het
+/// verschil tussen "niets gevonden" en "niet gekeken" te klein om te melden.
+const int kMinLexiconTermsForCoverage = 15;
+
+/// Hoe goed het lexicon een taal dekt.
+enum PrivacyLexiconCoverage {
+  /// Genoeg termen om een uitspraak op te baseren.
+  covered,
+
+  /// Er zijn termen, maar te weinig om op te vertrouwen.
+  partial,
+
+  /// Geen enkele term in deze taal.
+  ///
+  /// Dit is het geval waarvoor de hele meter bestaat. `Deck.language` valt voor
+  /// bevindingssjablonen terug op Engels, en dat is daar juist goed — maar voor
+  /// een léxicon is het precies verkeerd: Poolse tekst scannen met Engelse
+  /// triggerwoorden geeft bijna nul recall, en niemand merkt het. Een groene
+  /// balk die dan "niets gevonden" zegt, liegt.
+  none,
+}
+
+/// De dekking van het trefwoordlexicon voor [languageCode].
+///
+/// Neemt alleen de taalcode, niet de regio: `nl-BE` en `nl` delen hun lexicon.
+PrivacyLexiconCoverage privacyLexiconCoverage(String languageCode) {
+  final base = languageCode.split(RegExp(r'[-_]')).first.toLowerCase();
+  final count = privacyLexiconTermCounts[base] ?? 0;
+  if (count == 0) return PrivacyLexiconCoverage.none;
+  return count >= kMinLexiconTermsForCoverage
+      ? PrivacyLexiconCoverage.covered
+      : PrivacyLexiconCoverage.partial;
+}

@@ -1772,6 +1772,14 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
+      'Selle esitluse keele jaoks pole eriliigiliste isikuandmete märksõnaloendit. Kontrollnumbriga mustrid (isikukood, IBAN, pass) töötavad; sõnu nagu "diagnoos" või "kahtlustatav" ei tuvastata.',
+  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
+      'Eriliigiliste isikuandmete märksõnaloend on selle esitluse keele jaoks väga õhuke. Ära looda, et leitakse sõnu nagu "diagnoos" või "kahtlustatav".',
+  'Landpakketten voor identificatienummers':
+      'Riikide paketid isikukoodide jaoks',
+  'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
+      'Numbrid nagu Hollandi BSN või Poola PESEL on riigipõhised. Kogu Euroopa on sisse lülitatud, sest enamikul neist numbritest on kontrollnumber: nende sisselülitamine ei maksa peaaegu ühtegi valehäiret. IBAN, e-post, saladused ja passiread on sellest sõltumatud ja kontrollitakse alati.',
   'strafrechtelijk gegeven (verdachte)':
       'karistusõiguslik andmed (kahtlustatav)',
   'strafrechtelijk gegeven (aangever of slachtoffer)':

@@ -1797,6 +1797,14 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
+      'Pro lingua huius fasciculi nullus est index verborum clavium pro singularibus generibus datorum personalium. Formae cum numero probationis (BSN, IBAN, diploma) valent; verba ut "diagnosis" vel "suspectus" non agnoscuntur.',
+  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
+      'Index verborum clavium pro singularibus generibus datorum personalium huius linguae tenuissimus est. Noli confidere verba ut "diagnosis" vel "suspectus" inveniri.',
+  'Landpakketten voor identificatienummers':
+      'Fasciculi nationales pro numeris identitatis',
+  'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
+      'Numeri ut BSN Batavicus vel PESEL Polonicus ad nationes pertinent. Tota Europa activa est quia plerique horum numerorum numerum probationis habent: eos accendere fere nullas falsas denuntiationes constat. IBAN, epistulae electronicae, arcana et lineae diplomatum ab his separantur et semper examinantur.',
   'strafrechtelijk gegeven (verdachte)': 'datum criminale (suspectus)',
   'strafrechtelijk gegeven (aangever of slachtoffer)':
       'datum criminale (delator vel victima)',

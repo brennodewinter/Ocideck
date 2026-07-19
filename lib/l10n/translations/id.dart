@@ -1781,6 +1781,14 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
+      'Tidak ada daftar kata kunci untuk kategori khusus data pribadi dalam bahasa dek ini. Pola dengan digit periksa (NIK, IBAN, paspor) tetap bekerja; kata seperti "diagnosis" atau "tersangka" tidak dikenali.',
+  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
+      'Daftar kata kunci untuk kategori khusus data pribadi sangat tipis untuk bahasa dek ini. Jangan mengandalkan kata seperti "diagnosis" atau "tersangka" akan ditemukan.',
+  'Landpakketten voor identificatienummers':
+      'Paket negara untuk nomor identifikasi',
+  'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
+      'Nomor seperti BSN Belanda atau PESEL Polandia bersifat khusus per negara. Seluruh Eropa aktif karena sebagian besar nomor itu memiliki digit periksa: mengaktifkannya hampir tidak menimbulkan peringatan palsu. IBAN, email, rahasia, dan strip paspor terpisah dari ini dan selalu diperiksa.',
   'strafrechtelijk gegeven (verdachte)': 'data pidana (tersangka)',
   'strafrechtelijk gegeven (aangever of slachtoffer)':
       'data pidana (pelapor atau korban)',

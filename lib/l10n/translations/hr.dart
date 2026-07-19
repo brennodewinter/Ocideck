@@ -1788,6 +1788,14 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
+      'Za jezik ove prezentacije ne postoji popis ključnih riječi za posebne kategorije osobnih podataka. Uzorci s kontrolnom znamenkom (OIB, IBAN, putovnica) rade; riječi poput "dijagnoza" ili "osumnjičenik" ne prepoznaju se.',
+  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
+      'Popis ključnih riječi za posebne kategorije osobnih podataka vrlo je oskudan za jezik ove prezentacije. Ne računajte na to da će riječi poput "dijagnoza" ili "osumnjičenik" biti pronađene.',
+  'Landpakketten voor identificatienummers':
+      'Paketi država za identifikacijske brojeve',
+  'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
+      'Brojevi poput nizozemskog BSN-a ili poljskog PESEL-a vezani su uz državu. Cijela Europa je uključena jer većina tih brojeva ima kontrolnu znamenku: njihovo uključivanje gotovo ne košta lažnih upozorenja. IBAN, e-pošta, tajne i putovnički redci od toga su neovisni i uvijek se provjeravaju.',
   'strafrechtelijk gegeven (verdachte)': 'kaznenopravni podatak (osumnjičenik)',
   'strafrechtelijk gegeven (aangever of slachtoffer)':
       'kaznenopravni podatak (prijavitelj ili žrtva)',

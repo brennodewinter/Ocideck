@@ -13,6 +13,7 @@ import '../../models/storage_connection.dart';
 import '../../models/slide_quality.dart';
 import '../../platform/platform_features.dart';
 import '../../models/reference_standard.dart';
+import '../../services/privacy/privacy_regions.dart';
 import '../../services/reference_standards.dart';
 import '../../services/ai_client_service.dart';
 import '../../services/ai_security_gate.dart';

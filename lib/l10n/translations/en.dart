@@ -920,6 +920,14 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
+      'There is no keyword list for special categories of personal data in this deck\'s language. Patterns with a check digit (national ID, IBAN, passport) still work; words like "diagnosis" or "suspect" are not recognised.',
+  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
+      'The keyword list for special categories of personal data is very thin for this deck\'s language. Do not count on words like "diagnosis" or "suspect" being found.',
+  'Landpakketten voor identificatienummers':
+      'Country packs for identification numbers',
+  'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
+      'Numbers like the Dutch BSN or the Polish PESEL are country-specific. All of Europe is on because most of those numbers carry a check digit: enabling them costs almost no false alerts. IBAN, email, secrets and passport strips are separate from this and are always checked.',
   'strafrechtelijk gegeven (verdachte)': 'criminal-law data (suspect)',
   'strafrechtelijk gegeven (aangever of slachtoffer)':
       'criminal-law data (complainant or victim)',

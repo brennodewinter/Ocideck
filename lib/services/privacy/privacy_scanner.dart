@@ -30,6 +30,7 @@ import 'privacy_eu_rules.dart';
 import 'privacy_lexicon_data.dart';
 import 'privacy_location_rules.dart';
 import 'privacy_own_identity.dart';
+import 'privacy_regions.dart';
 import 'privacy_phone_rules.dart';
 import 'privacy_special_rules.dart';
 import 'privacy_structural_rules.dart';
@@ -90,9 +91,18 @@ class PrivacyScanner {
   /// afzender.
   final OwnIdentity ownIdentity;
 
+  /// De landpakketten die aan staan (OCIWACHT §5.7, §7).
+  ///
+  /// Alleen regels met een landcode in hun id kijken hiernaar; de universele
+  /// laag — IBAN, e-mail, secrets, MRZ, digitale identificatoren — draait
+  /// altijd. Zie `privacy_regions.dart` voor waarom het standaardpakket heel
+  /// Europa is en niet alleen het thuisland.
+  final Set<String> regions;
+
   const PrivacyScanner({
     this.disabledRules = const {},
     this.ownIdentity = OwnIdentity.empty,
+    this.regions = defaultPrivacyRegions,
   });
 
   /// Scant het hele deck. Deckbrede velden (titel, auteur, trefwoorden) krijgen
@@ -143,13 +153,18 @@ class PrivacyScanner {
     ]);
   }
 
-  /// Uitgezette regels eruit — vóór de escalatie, zodat een uitgezette
-  /// identificator ook geen bijzonder gegeven meer omhoog trekt.
+  /// Uitgezette regels en uitgeschakelde landpakketten eruit.
+  ///
+  /// Vóór de escalatie, zodat een uitgezette identificator ook geen bijzonder
+  /// gegeven meer omhoog trekt. Dat geldt voor beide filters om dezelfde reden:
+  /// wie het Poolse pakket uitzet, wil geen PESEL-melding en wil er ook geen
+  /// diagnose door zien escaleren.
   List<PrivacyFinding> _enabled(List<PrivacyFinding> findings) {
-    if (disabledRules.isEmpty) return findings;
     return [
       for (final f in findings)
-        if (!disabledRules.contains(f.ruleId)) f,
+        if (!disabledRules.contains(f.ruleId) &&
+            privacyRuleInRegions(f.ruleId, regions))
+          f,
     ];
   }
 

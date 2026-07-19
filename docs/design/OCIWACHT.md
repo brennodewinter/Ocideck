@@ -33,7 +33,9 @@ accepteren, waarschuwen met een shield-badge, of redigeren op scherm en in expor
 | §13.2 Lexiconmodel als data (`role`/`match`/`weight`/`lang`) | **geleverd** |
 | §3-G `special.icd10` + `special.atc` (notatie met contextpoort) | **geleverd** |
 | §13.6 fase 14 Rolonderscheid verdachte/aangever/getuige (ConText, drieweg) | **geleverd** |
-| §13.3 Taaldekking zichtbaar, gebundelde lexicons | open — fase 13 |
+| §13.3 Taaldekking zichtbaar in het paneel | **geleverd** |
+| §5.7/§7 Regiopakketten werkend (instelling + poort) | **geleverd** |
+| §13.3 Gebundelde lexicons (EuroVoc, ORDO) | open — fase 13b |
 | §14 Onderzoeksdossier DLP-technieken (annex, geen ontwerp) | naslag |
 
 De genomen beslissingen staan in §11; die zijn niet meer open.
@@ -125,6 +127,7 @@ groeit de regelset zonder de compile te breken.
 | `lib/services/privacy/privacy_contact_rules.dart` | Adres (straat + huisnummer), NL-postcode, gelabelde persoonsnaam: patronen, straatachtervoegsels, placeholder-personen |
 | `lib/services/privacy/privacy_phone_rules.dart` | Telefoon: E.164, nationale vorm, contextwoorden, toegekende landnummers, gereserveerde reeksen |
 | `lib/models/privacy_lexicon.dart` | `PrivacyLexiconEntry`, `PrivacyTermMatch` (word/prefix/compound), `PrivacyLexiconRole`, `kMinCompoundLength` |
+| `lib/services/privacy/privacy_regions.dart` | Landpakketten: welke regio's aan staan, en welke regels daaraan hangen |
 | `lib/services/privacy/privacy_context_role.dart` | ConText: rolherkenning (verdachte/aangever/getuige) met terminatiewoorden en drieweg-uitkomst |
 | `lib/services/privacy/privacy_lexicon_data.dart` | Het gebundelde art. 9/10-lexicon: term, categorie, taal, matchmodus, gewicht, rol |
 | `lib/services/privacy/privacy_digital_rules.dart` | Digitale identificatoren: IPv4/IPv6, MAC, IMEI, ICCID, IMSI, social handles, device-ID's |
@@ -908,7 +911,7 @@ Nieuwe sectie in het tabblad "Veiligheid" (`settings_dialog_security.dart`), wan
 | `privacyImageFaceDetection` | bool — afbeeldingen nakijken op gezichten | **aan** (grijs zolang de hoofdschakelaar uit staat) |
 | `privacyFamilies` | set van 8 familieschakelaars | alle aan |
 | `privacyDisabledRules` | set van regel-id's | leeg |
-| `privacyRegions` | set van landpakketten | **heel Europa** (EU-27 + EER + CH + UK) |
+| `privacyRegions` | set van landpakketten | **heel Europa** (EU-27 + EER + CH + UK) — **geleverd** |
 | `privacyStrictSeverity` | bool — behandel `zeker` als fout i.p.v. waarschuwing | uit |
 | `privacyExportGate` | uit / waarschuwen / blokkeren | waarschuwen |
 | `privacyRedactionStyle` | blokken (`████`) / label (`[BSN]`) | blokken |

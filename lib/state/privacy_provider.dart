@@ -20,6 +20,7 @@ final privacyScannerProvider = Provider<PrivacyScanner>(
     ownIdentity: OwnIdentity.fromLines(
       ref.watch(settingsProvider.select((s) => s.privacyOwnIdentity)),
     ),
+    regions: ref.watch(settingsProvider.select((s) => s.privacyRegions)),
   ),
 );
 

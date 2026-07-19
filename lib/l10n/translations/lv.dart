@@ -1780,6 +1780,14 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
+      'Šīs prezentācijas valodai nav atslēgvārdu saraksta īpašām personas datu kategorijām. Raksti ar kontrolciparu (personas kods, IBAN, pase) darbojas; vārdi kā "diagnoze" vai "aizdomās turētais" netiek atpazīti.',
+  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
+      'Atslēgvārdu saraksts īpašām personas datu kategorijām šīs prezentācijas valodai ir ļoti trūcīgs. Nepaļaujieties, ka tiks atrasti vārdi kā "diagnoze" vai "aizdomās turētais".',
+  'Landpakketten voor identificatienummers':
+      'Valstu pakotnes identifikācijas numuriem',
+  'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
+      'Numuri kā Nīderlandes BSN vai Polijas PESEL ir saistīti ar valsti. Visa Eiropa ir ieslēgta, jo lielākajai daļai šo numuru ir kontrolcipars: to ieslēgšana gandrīz nemaksā viltus brīdinājumus. IBAN, e-pasts, noslēpumi un pases joslas no tā nav atkarīgi un vienmēr tiek pārbaudīti.',
   'strafrechtelijk gegeven (verdachte)':
       'krimināltiesību dati (aizdomās turētais)',
   'strafrechtelijk gegeven (aangever of slachtoffer)':

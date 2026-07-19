@@ -1789,6 +1789,14 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
+      'Šios pateikties kalbai nėra raktinių žodžių sąrašo ypatingų kategorijų asmens duomenims. Šablonai su kontroliniu skaitmeniu (asmens kodas, IBAN, pasas) veikia; žodžiai kaip „diagnozė“ ar „įtariamasis“ neatpažįstami.',
+  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
+      'Ypatingų kategorijų asmens duomenų raktinių žodžių sąrašas šios pateikties kalbai labai menkas. Nesitikėkite, kad bus rasti žodžiai kaip „diagnozė“ ar „įtariamasis“.',
+  'Landpakketten voor identificatienummers':
+      'Šalių paketai identifikaciniams numeriams',
+  'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
+      'Numeriai kaip Nyderlandų BSN ar Lenkijos PESEL yra susieti su šalimi. Visa Europa įjungta, nes dauguma tų numerių turi kontrolinį skaitmenį: jų įjungimas beveik nekainuoja klaidingų pranešimų. IBAN, el. paštas, paslaptys ir paso juostos nuo to nepriklauso ir visada tikrinami.',
   'strafrechtelijk gegeven (verdachte)':
       'baudžiamosios teisės duomenys (įtariamasis)',
   'strafrechtelijk gegeven (aangever of slachtoffer)':

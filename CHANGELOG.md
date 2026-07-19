@@ -35,6 +35,27 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   conflictafhandeling als bij WebDAV. Een deck dat je uit een bucket opende,
   gaat bij opslaan vanzelf naar diezelfde bucket terug.
 
+- **Het kwaliteitspaneel zegt nu wanneer het voor jouw taal niets te zoeken
+  heeft.** OciDeck herkent woorden als "diagnose" of "verdachte" in een handvol
+  talen; de interface draait er in dertig. Tot nu toe zag je dat verschil
+  nergens: de balk werd groen, de lijst met uitgevoerde controles zag er
+  compleet uit, en "niets gevonden" las als "er zit niets in". Terwijl er voor
+  die taal geen woordenlijst bestond.
+
+  Staat je presentatie in een taal zonder lijst, dan staat dat er nu bij — met
+  de nuance die erbij hoort: controles op een controlegetal (BSN, IBAN,
+  paspoortstrook) werken gewoon, want die zijn taalonafhankelijk. Alleen de
+  woordherkenning valt weg.
+
+- **Landpakketten zijn instelbaar geworden.** Nummers als het BSN of het PESEL
+  zijn landgebonden, en je kunt nu per land aangeven of OciDeck ze meeneemt.
+  Standaard staat heel Europa aan — EU-27 plus de EER, Zwitserland en het VK —
+  en dat is bewust de ruime keuze: de meeste van die nummers hebben een
+  controlegetal, dus ze aanzetten levert vrijwel geen valse meldingen op.
+
+  Wat je ook uitzet, de taalonafhankelijke laag blijft draaien: IBAN,
+  e-mailadressen, sleutels en paspoortstroken worden altijd nagekeken.
+
 - **Een aangeefster is geen verdachte, en de melding zegt dat nu ook.** Tot nu
   toe leverden "verdachte M. de Vries" en "aangeefster M. de Vries" een
   identieke melding op, terwijl dat juridisch en menselijk twee volstrekt

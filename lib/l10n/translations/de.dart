@@ -738,6 +738,14 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
+      'Für die Sprache dieser Präsentation gibt es keine Stichwortliste für besondere Kategorien personenbezogener Daten. Muster mit Prüfziffer (Steuer-ID, IBAN, Pass) funktionieren; Wörter wie "Diagnose" oder "Verdächtiger" werden nicht erkannt.',
+  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
+      'Die Stichwortliste für besondere Kategorien personenbezogener Daten ist für die Sprache dieser Präsentation sehr dünn. Verlassen Sie sich nicht darauf, dass Wörter wie "Diagnose" oder "Verdächtiger" gefunden werden.',
+  'Landpakketten voor identificatienummers':
+      'Länderpakete für Identifikationsnummern',
+  'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
+      'Nummern wie die niederländische BSN oder die polnische PESEL sind länderspezifisch. Ganz Europa ist aktiviert, weil die meisten dieser Nummern eine Prüfziffer haben: sie einzuschalten kostet fast keine Fehlmeldungen. IBAN, E-Mail, Geheimnisse und Passzeilen sind davon unabhängig und werden immer geprüft.',
   'strafrechtelijk gegeven (verdachte)':
       'strafrechtliche Angabe (Verdächtiger)',
   'strafrechtelijk gegeven (aangever of slachtoffer)':

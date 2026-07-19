@@ -114,7 +114,7 @@ void main() {
 
     test('een IBAN wijst niemand aan', () {
       final result = scanBullets([
-        'Rekening NL02ABNA0123456789 van de vereniging',
+        'Rekening NL18RABO0123459876 van de vereniging',
         'Het bestuur bespreekt het vakbondslidmaatschap van de sector',
       ]);
       expect(confidenceOf(result, 'special.union'), PrivacyConfidence.possible);

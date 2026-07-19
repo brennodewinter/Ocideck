@@ -1793,6 +1793,14 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
+      'Dla języka tej prezentacji nie ma listy słów kluczowych dla szczególnych kategorii danych osobowych. Wzorce z cyfrą kontrolną (PESEL, IBAN, paszport) działają; słowa takie jak „diagnoza” czy „podejrzany” nie są rozpoznawane.',
+  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
+      'Lista słów kluczowych dla szczególnych kategorii danych osobowych jest bardzo uboga dla języka tej prezentacji. Nie licz na to, że słowa takie jak „diagnoza” czy „podejrzany” zostaną znalezione.',
+  'Landpakketten voor identificatienummers':
+      'Pakiety krajowe dla numerów identyfikacyjnych',
+  'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
+      'Numery takie jak holenderski BSN czy polski PESEL są przypisane do kraju. Cała Europa jest włączona, bo większość tych numerów ma cyfrę kontrolną: ich włączenie prawie nie kosztuje fałszywych alarmów. IBAN, e-mail, sekrety i paski paszportowe są od tego niezależne i zawsze są sprawdzane.',
   'strafrechtelijk gegeven (verdachte)': 'dane karne (podejrzany)',
   'strafrechtelijk gegeven (aangever of slachtoffer)':
       'dane karne (zgłaszający lub ofiara)',

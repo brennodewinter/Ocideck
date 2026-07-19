@@ -1817,6 +1817,14 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
+      'Níl liosta eochairfhocal ann do chatagóirí speisialta sonraí pearsanta i dteanga an deic seo. Oibríonn patrúin le digit seiceála (PPS, IBAN, pas); ní aithnítear focail ar nós "diagnóis" nó "duine faoi amhras".',
+  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
+      'Tá an liosta eochairfhocal do chatagóirí speisialta sonraí pearsanta an-tanaí i dteanga an deic seo. Ná bí ag brath ar fhocail ar nós "diagnóis" nó "duine faoi amhras" a aimsiú.',
+  'Landpakketten voor identificatienummers':
+      'Pacáistí tíre d\'uimhreacha aitheantais',
+  'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
+      'Tá uimhreacha ar nós BSN na hÍsiltíre nó PESEL na Polainne sainiúil do thír. Tá an Eoraip ar fad ann mar go bhfuil digit seiceála ag formhór na n-uimhreacha sin: ní chosnaíonn iad a chur ar siúl beagnach aon fholáireamh bréagach. Tá IBAN, ríomhphost, rúin agus stiallacha pas neamhspleách air seo agus seiceáiltear i gcónaí iad.',
   'strafrechtelijk gegeven (verdachte)': 'sonraí coiriúla (duine faoi amhras)',
   'strafrechtelijk gegeven (aangever of slachtoffer)':
       'sonraí coiriúla (gearánach nó íospartach)',

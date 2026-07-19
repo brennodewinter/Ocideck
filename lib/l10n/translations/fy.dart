@@ -739,6 +739,14 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
+      'Foar de taal fan dit deck is der gjin trefwurdlist foar bysûndere persoansgegevens. Patroanen mei in kontrôlesifer (BSN, IBAN, paspoart) wurkje wol; wurden as "diagnoaze" of "fertochte" wurde net herkend.',
+  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
+      'De trefwurdlist foar bysûndere persoansgegevens is foar de taal fan dit deck hiel tin. Rekkenje der net op dat wurden as "diagnoaze" of "fertochte" fûn wurde.',
+  'Landpakketten voor identificatienummers':
+      'Lânpakketten foar identifikaasjenûmers',
+  'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
+      'Nûmers as it BSN of it PESEL binne lânbûn. Hiel Europa stiet oan omdat de measte fan dy nûmers in kontrôlesifer hawwe: dy oansette kostet hast gjin falske meldingen. IBAN, e-post, geheimen en paspoartstroken steane hjir los fan en wurde altyd neisjoen.',
   'strafrechtelijk gegeven (verdachte)': 'strafrjochtlik gegeven (fertochte)',
   'strafrechtelijk gegeven (aangever of slachtoffer)':
       'strafrjochtlik gegeven (oanjefte-dwaner of slachtoffer)',
