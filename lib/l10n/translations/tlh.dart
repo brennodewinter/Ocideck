@@ -1756,6 +1756,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'De git-verbinding van dit deck bestaat niet meer.':
+      'QIchvam git rar tu\'lu\'be\'qu\'.',
+  'Stel eerst een git-repository in bij Instellingen → Opslag.':
+      'wa\'DIch git qawHaq yIcher: DuHmey → waHtaHghach.',
   'Geen meldingen meer op deze slide.': 'yaHnIv vam Sovbe\'lu\'.',
   'Kwaliteitsproblemen geaccepteerd': '\'ul Qob lajlu\'',
   'Mogelijk persoonsgegevens': 'chaq nuv De\'',

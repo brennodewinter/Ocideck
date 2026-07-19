@@ -1781,6 +1781,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'De git-verbinding van dit deck bestaat niet meer.':
+      'Koneksi git untuk presentasi ini tidak ada lagi.',
+  'Stel eerst een git-repository in bij Instellingen → Opslag.':
+      'Siapkan dulu repositori git di Pengaturan → Penyimpanan.',
   'Geen meldingen meer op deze slide.': 'Tidak ada temuan lagi di slide ini.',
   'Kwaliteitsproblemen geaccepteerd': 'Masalah kualitas diterima',
   'Mogelijk persoonsgegevens': 'Mungkin data pribadi',

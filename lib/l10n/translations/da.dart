@@ -1780,6 +1780,10 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'De git-verbinding van dit deck bestaat niet meer.':
+      'Git-forbindelsen til denne præsentation findes ikke længere.',
+  'Stel eerst een git-repository in bij Instellingen → Opslag.':
+      'Opsæt først et git-arkiv under Indstillinger → Lagring.',
   'Geen meldingen meer op deze slide.':
       'Ingen meddelelser tilbage på dette dias.',
   'Kwaliteitsproblemen geaccepteerd': 'Kvalitetsproblemer accepteret',

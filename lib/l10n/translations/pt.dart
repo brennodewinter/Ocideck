@@ -1811,6 +1811,10 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'De git-verbinding van dit deck bestaat niet meer.':
+      'A ligação git desta apresentação já não existe.',
+  'Stel eerst een git-repository in bij Instellingen → Opslag.':
+      'Configure primeiro um repositório git em Definições → Armazenamento.',
   'Geen meldingen meer op deze slide.': 'Não há mais avisos neste diapositivo.',
   'Kwaliteitsproblemen geaccepteerd': 'Problemas de qualidade aceites',
   'Mogelijk persoonsgegevens': 'Possíveis dados pessoais',

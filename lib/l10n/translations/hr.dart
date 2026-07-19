@@ -1788,6 +1788,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'De git-verbinding van dit deck bestaat niet meer.':
+      'Git veza ove prezentacije više ne postoji.',
+  'Stel eerst een git-repository in bij Instellingen → Opslag.':
+      'Najprije postavite git repozitorij u Postavke → Pohrana.',
   'Geen meldingen meer op deze slide.': 'Na ovom slajdu više nema obavijesti.',
   'Kwaliteitsproblemen geaccepteerd': 'Problemi kvalitete prihvaćeni',
   'Mogelijk persoonsgegevens': 'Možda osobni podaci',

@@ -1797,6 +1797,10 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'De git-verbinding van dit deck bestaat niet meer.':
+      'Conexio git huius praesentationis non iam exstat.',
+  'Stel eerst een git-repository in bij Instellingen → Opslag.':
+      'Prius repositorium git in Optionibus → Repositorio constitue.',
   'Geen meldingen meer op deze slide.': 'Nulla monita in hac tabula supersunt.',
   'Kwaliteitsproblemen geaccepteerd': 'Vitia qualitatis accepta',
   'Mogelijk persoonsgegevens': 'Fortasse data personalia',

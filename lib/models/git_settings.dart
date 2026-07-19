@@ -314,6 +314,15 @@ class GitRepoLayout {
 class GitOrigin {
   final GitRepoConfig config;
 
+  /// De bestandsverbinding waar dit deck vandaan kwam. Hiermee gaat opslaan
+  /// terug naar dezelfde opdrachtgever zonder opnieuw te vragen, en blijft dat
+  /// kloppen als de gebruiker de verbinding hernoemt of een typefout in de URL
+  /// herstelt — [config] verandert dan wél mee.
+  ///
+  /// Leeg voor herkomst uit een versie van vóór de verbindingenlijst; dan valt
+  /// de app terug op het vergelijken van [config] (zie [matchesRepo]).
+  final String connectionId;
+
   /// Branch waarop deze tab werkt.
   final String branch;
 
@@ -328,6 +337,7 @@ class GitOrigin {
     required this.branch,
     required this.deckDir,
     required this.baseSha,
+    this.connectionId = '',
   });
 
   /// De deknaam, of null wanneer [deckDir] niet de layout van §6 volgt.
@@ -340,12 +350,14 @@ class GitOrigin {
     String? branch,
     String? deckDir,
     String? baseSha,
+    String? connectionId,
   }) {
     return GitOrigin(
       config: config ?? this.config,
       branch: branch ?? this.branch,
       deckDir: deckDir ?? this.deckDir,
       baseSha: baseSha ?? this.baseSha,
+      connectionId: connectionId ?? this.connectionId,
     );
   }
 }

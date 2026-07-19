@@ -72,7 +72,11 @@ Nextcloud*, *Private*) so you can tell them apart at a glance.
 
 When an action needs a server and you have more than one of that kind, OciDeck
 asks which. With exactly one it doesn't ask at all, and a deck you opened from a
-connection saves back to that same connection without asking either.
+connection saves back to that same connection without asking either — that goes
+for git as much as for WebDAV. Actions that belong to an open deck (its history,
+its versions, review, merge, tagging) never ask: they follow the repository the
+deck came from. If you deleted that connection, OciDeck says so rather than
+guessing at another one.
 
 Upgrading from an older version needs no work: your libraries, your WebDAV
 server and your git repository become connections in that order, so the ones

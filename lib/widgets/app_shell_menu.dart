@@ -10,14 +10,87 @@
 part of 'app_shell.dart';
 
 extension _MainLayoutMenu on _MainLayoutState {
-  List<PopupMenuEntry<String>> _moreMenuItems(AppLocalizations l10n) {
-    // De git-blokken hebben pas betekenis als er een repository is ingesteld.
-    // Zonder config kan geen van deze handelingen slagen, dus tonen we ze niet:
-    // een item dat altijd op dezelfde snackbar uitkomt is geen menu-item maar
-    // ruis (zelfde lijn als de informatieveiligheidsmodule: weglaten, niet grijs maken).
-    final hasGitRepo = ref.read(settingsProvider).gitRepo != null;
+  /// De git-blokken van het menu.
+  ///
+  /// Eigen methode omdat dit één samenhangend verhaal is: wat er te zien is
+  /// hangt van twee dingen tegelijk af — of er überhaupt een repository is
+  /// ingesteld, en of het geopende deck uit git komt. Die twee door de rest van
+  /// het menu heen vlechten leest slechter dan ze bij elkaar te zetten.
+  ///
+  /// De git-blokken hebben pas betekenis als er een repository is ingesteld.
+  /// Zonder verbinding kan geen van deze handelingen slagen, dus tonen we ze
+  /// niet: een item dat altijd op dezelfde snackbar uitkomt is geen menu-item
+  /// maar ruis (zelfde lijn als de informatieveiligheidsmodule: weglaten, niet
+  /// grijs maken).
+  ///
+  /// Bewust buiten de supportsNetworkDeckSources-poort: die staat op web uit
+  /// omdat de WebDAV-client dart:io-pinning nodig heeft. Git praat https+JSON
+  /// dat de browser-sandbox al inperkt, dus dit werkt daar wél (§4.4).
+  List<PopupMenuEntry<String>> _gitMenuItems(AppLocalizations l10n) {
+    final hasGitRepo = ref.read(gitConnectionsProvider).isNotEmpty;
+    if (!hasGitRepo) return const [];
     final gitOrigin = ref.read(tabsProvider).current?.gitOrigin;
+    // Echte historie bestaat alleen op het native plane (§8.1): alleen als er
+    // van dít deck een lokale clone is.
+    final hasLocalClone =
+        gitOrigin != null &&
+        ref
+                .read(nativeGitMirrorProvider(gitOrigin.connectionId))
+                .asData
+                ?.value !=
+            null;
 
+    return [
+      const PopupMenuDivider(),
+      _menuItem('open_git', Icons.hub_outlined, l10n.d('Openen uit git…')),
+      _menuItem(
+        'save_git',
+        Icons.cloud_upload_outlined,
+        l10n.d('Opslaan naar git…'),
+      ),
+      _menuItem('sync_git', Icons.sync, l10n.d('Nu synchroniseren')),
+      _menuItem(
+        'search_git',
+        Icons.manage_search,
+        l10n.d('Zoeken in alle decks…'),
+      ),
+      _menuItem(
+        'assets_git',
+        Icons.photo_library_outlined,
+        l10n.d('Afbeeldingen in de repository…'),
+      ),
+      if (hasLocalClone)
+        _menuItem('history_git', Icons.history, l10n.d('Git-geschiedenis…')),
+      // Versies (release-tags) werken op elk plane, ook op web: het is een
+      // forge-listing. Verschijnt zodra dit deck uit git is geopend.
+      if (gitOrigin != null)
+        _menuItem('versions_git', Icons.label_outline, l10n.d('Versies…')),
+      // Uitbrengen ter review + concept mergen kunnen pas als er een
+      // concept-ronde loopt: het tabblad staat dan op een werkbranch, niet op
+      // de standaardbranch (D3). De standaardbranch van de repo waar dít deck
+      // vandaan komt, niet die van de bovenste verbinding — met twee repo's
+      // zijn dat verschillende.
+      if (gitOrigin != null &&
+          gitOrigin.branch != gitOrigin.config.defaultBranch) ...[
+        _menuItem(
+          'review_git',
+          Icons.rate_review_outlined,
+          l10n.d('Uitbrengen ter review…'),
+        ),
+        _menuItem('merge_git', Icons.merge_outlined, l10n.d('Concept mergen…')),
+      ],
+      // Een versie vastleggen (release-tag op main) kan voor elk uit-git-
+      // geopend deck; bedoeld ná het mergen.
+      if (gitOrigin != null)
+        _menuItem(
+          'tag_git',
+          Icons.bookmark_add_outlined,
+          l10n.d('Versie vastleggen…'),
+        ),
+    ];
+  }
+
+  List<PopupMenuEntry<String>> _moreMenuItems(AppLocalizations l10n) {
     return [
       _menuItem(
         'command_palette',
@@ -48,65 +121,7 @@ extension _MainLayoutMenu on _MainLayoutState {
         l10n.t('importPackage'),
       ),
       _menuItem('import_url', Icons.link, l10n.t('importUrl')),
-      // ── Git ───────────────────────────────────────────────────────
-      // Bewust buiten de supportsNetworkDeckSources-poort: die staat op web uit
-      // omdat de WebDAV-client dart:io-pinning nodig heeft. Git praat https+JSON
-      // dat de browser-sandbox al inperkt, dus dit werkt daar wél (§4.4).
-      if (hasGitRepo) ...[
-        const PopupMenuDivider(),
-        _menuItem('open_git', Icons.hub_outlined, l10n.d('Openen uit git…')),
-        _menuItem(
-          'save_git',
-          Icons.cloud_upload_outlined,
-          l10n.d('Opslaan naar git…'),
-        ),
-        _menuItem('sync_git', Icons.sync, l10n.d('Nu synchroniseren')),
-        _menuItem(
-          'search_git',
-          Icons.manage_search,
-          l10n.d('Zoeken in alle decks…'),
-        ),
-        _menuItem(
-          'assets_git',
-          Icons.photo_library_outlined,
-          l10n.d('Afbeeldingen in de repository…'),
-        ),
-        // Echte historie bestaat alleen op het native plane (§8.1): het item
-        // verschijnt zodra dit deck uit git is geopend én er een lokale clone is.
-        if (gitOrigin != null &&
-            ref.read(nativeGitMirrorProvider).asData?.value != null)
-          _menuItem('history_git', Icons.history, l10n.d('Git-geschiedenis…')),
-        // Versies (release-tags) werken op elk plane, ook op web: het is een
-        // forge-listing. Verschijnt zodra dit deck uit git is geopend.
-        if (gitOrigin != null)
-          _menuItem('versions_git', Icons.label_outline, l10n.d('Versies…')),
-        // Uitbrengen ter review + concept mergen kunnen pas als er een
-        // concept-ronde loopt: het tabblad staat dan op een werkbranch, niet op
-        // de standaardbranch (D3).
-        if (gitOrigin != null &&
-            gitOrigin.branch !=
-                (ref.read(settingsProvider).gitRepo?.defaultBranch ??
-                    'main')) ...[
-          _menuItem(
-            'review_git',
-            Icons.rate_review_outlined,
-            l10n.d('Uitbrengen ter review…'),
-          ),
-          _menuItem(
-            'merge_git',
-            Icons.merge_outlined,
-            l10n.d('Concept mergen…'),
-          ),
-        ],
-        // Een versie vastleggen (release-tag op main) kan voor elk uit-git-
-        // geopend deck; bedoeld ná het mergen.
-        if (gitOrigin != null)
-          _menuItem(
-            'tag_git',
-            Icons.bookmark_add_outlined,
-            l10n.d('Versie vastleggen…'),
-          ),
-      ],
+      ..._gitMenuItems(l10n),
       // ── Nextcloud ─────────────────────────────────────────────────
       if (supportsNetworkDeckSources) ...[
         const PopupMenuDivider(),

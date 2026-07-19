@@ -1799,6 +1799,10 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'De git-verbinding van dit deck bestaat niet meer.':
+      'Conexiunea git a acestei prezentări nu mai există.',
+  'Stel eerst een git-repository in bij Instellingen → Opslag.':
+      'Configurează mai întâi un depozit git în Setări → Stocare.',
   'Geen meldingen meer op deze slide.':
       'Nu mai există notificări pe acest slide.',
   'Kwaliteitsproblemen geaccepteerd': 'Probleme de calitate acceptate',

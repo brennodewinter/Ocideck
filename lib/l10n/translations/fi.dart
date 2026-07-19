@@ -1781,6 +1781,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'De git-verbinding van dit deck bestaat niet meer.':
+      'Tämän esityksen git-yhteyttä ei enää ole.',
+  'Stel eerst een git-repository in bij Instellingen → Opslag.':
+      'Määritä ensin git-arkisto kohdassa Asetukset → Tallennus.',
   'Geen meldingen meer op deze slide.': 'Tällä dialla ei ole enää ilmoituksia.',
   'Kwaliteitsproblemen geaccepteerd': 'Laatuongelmat hyväksytty',
   'Mogelijk persoonsgegevens': 'Mahdollisesti henkilötietoja',

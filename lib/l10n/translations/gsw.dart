@@ -1785,6 +1785,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'De git-verbinding van dit deck bestaat niet meer.':
+      'D git-Verbindig vo dere Präsentation git\'s nüme.',
+  'Stel eerst een git-repository in bij Instellingen → Opslag.':
+      'Richt zerscht es git-Repository i unter Istellige → Spycher.',
   'Geen meldingen meer op deze slide.': 'Kei Mäldige meh uf dere Folie.',
   'Kwaliteitsproblemen geaccepteerd': 'Qualitätsprobläm akzeptiert',
   'Mogelijk persoonsgegevens': 'Villicht persöönlichi Date',
