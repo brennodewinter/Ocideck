@@ -33,7 +33,7 @@ class PinnedCveTransport implements CveTransport {
 
     final client = HttpClient()
       ..connectionTimeout = const Duration(seconds: 12)
-      ..connectionFactory = (u, _, _) => Socket.startConnect(pinned, u.port);
+      ..connectionFactory = (u, _, _) => NetGuard.connectPinned(pinned, u);
     try {
       final request = await client.getUrl(uri);
       request.followRedirects = false;
