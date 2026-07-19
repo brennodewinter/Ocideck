@@ -10,6 +10,18 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Added
+- **Negen Europese persoonsnummers erbij.** Oostenrijk, Zwitserland, Tsjechië en
+  Slowakije, Denemarken, Griekenland, Hongarije, Ierland, Noorwegen en Slovenië.
+  Op één na dragen ze allemaal hun eigen controlecijfer, dus ze herkennen zichzelf
+  en kosten nauwelijks valse meldingen.
+
+  Twee uitzonderingen, en allebei bewust. Het Deense CPR-nummer heeft sinds 2007
+  géén controlecijfer meer — daarop controleren zou echte nummers afwijzen — dus
+  dat wordt alleen gemeld als er ook een woord als "CPR" bij staat. Hetzelfde
+  geldt voor het Hongaarse TAJ-nummer: dat is negen cijfers met een controle die
+  één op de tien willekeurige getallen doorlaat, en zonder die eis ging het af op
+  gewone klantnummers.
+
 - **"Maar het is toch geanonimiseerd" wordt nu tegengesproken.** Staan
   geboortedatum, postcode en geslacht samen op één slide, dan wijzen die drie
   meestal één persoon aan — ook zonder naam erbij. Latanya Sweeney liet in 1997

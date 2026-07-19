@@ -313,3 +313,223 @@ bool isValidUkNino(String raw) {
   if (forbiddenPrefixes.contains(v.substring(0, 2))) return false;
   return true;
 }
+
+// ── Oostenrijk ───────────────────────────────────────────────────────────────
+
+/// Sozialversicherungsnummer: 10 cijfers, gewogen mod 11.
+///
+/// De eerste drie zijn een volgnummer, het vierde is het controlecijfer, en de
+/// laatste zes zijn de geboortedatum (`ddmmjj`). Het controlecijfer staat dus
+/// midden in het nummer en niet aan het eind — een detail dat je één keer fout
+/// doet en daarna nooit meer.
+bool isValidAtSvnr(String raw) {
+  final d = _digits(raw);
+  if (d.length != 10) return false;
+  // De laatste zes cijfers zijn `ddmmjj`, en die datum móét kloppen. Zonder die
+  // eis is dit alleen een mod-11 over tien cijfers, en komt één op de elf
+  // willekeurige getallen erdoorheen — te zwak om `zeker` op te baseren. De
+  // bestaande BSN-test ging er meteen op af met `7283982420`, waarvan de
+  // datumhelft dag 98 in maand 24 zou zijn.
+  if (!_plausibleDayMonth(
+    int.parse(d.substring(4, 6)),
+    int.parse(d.substring(6, 8)),
+  )) {
+    return false;
+  }
+  // Gewichten over de negen cijfers zónder het controlecijfer, in de volgorde
+  // waarin ze in het nummer staan.
+  const weights = [3, 7, 9, 0, 5, 8, 4, 2, 1, 6];
+  var sum = 0;
+  for (var i = 0; i < 10; i++) {
+    if (i == 3) continue; // de controlepositie telt niet mee
+    sum += (d.codeUnitAt(i) - 0x30) * weights[i];
+  }
+  final check = sum % 11;
+  if (check == 10) return false; // zo'n nummer wordt niet uitgegeven
+  return check == d.codeUnitAt(3) - 0x30;
+}
+
+// ── Zwitserland ──────────────────────────────────────────────────────────────
+
+/// AHV-Nummer: `756.xxxx.xxxx.xx`, met een EAN-13-controlecijfer.
+///
+/// Begint altijd met 756 — de ISO-landcode van Zwitserland — en dat prefix doet
+/// hier het meeste FP-werk: dertien willekeurige cijfers die óók met 756
+/// beginnen én de EAN-controle halen, zijn zeldzaam.
+bool isValidChAhv(String raw) {
+  final d = _digits(raw);
+  if (d.length != 13 || !d.startsWith('756')) return false;
+  var sum = 0;
+  for (var i = 0; i < 12; i++) {
+    // EAN-13: afwisselend gewicht 1 en 3, van links af.
+    sum += (d.codeUnitAt(i) - 0x30) * (i.isEven ? 1 : 3);
+  }
+  final check = (10 - (sum % 10)) % 10;
+  return check == d.codeUnitAt(12) - 0x30;
+}
+
+// ── Tsjechië en Slowakije ────────────────────────────────────────────────────
+
+/// Rodné číslo: geboortedatum plus volgnummer, sinds 1954 met een mod-11-controle.
+///
+/// Negen cijfers (vóór 1954) hebben géén controle en worden hier bewust
+/// afgewezen: zonder checksum is het tien cijfers met een datum erin, en dat is
+/// te weinig om `zeker` op te baseren.
+///
+/// De maand codeert het geslacht: +50 voor vrouwen, en sinds 2004 +20 wanneer
+/// alle nummers voor die dag op zijn.
+bool isValidCzSkRodneCislo(String raw) {
+  final d = _digits(raw);
+  if (d.length != 10) return false;
+
+  var month = int.parse(d.substring(2, 4));
+  if (month > 70) {
+    month -= 70;
+  } else if (month > 50) {
+    month -= 50;
+  } else if (month > 20) {
+    month -= 20;
+  }
+  final day = int.parse(d.substring(4, 6));
+  if (!_plausibleDayMonth(day, month)) return false;
+
+  final head = int.parse(d.substring(0, 9));
+  final check = d.codeUnitAt(9) - 0x30;
+  final rest = head % 11;
+  // De uitzondering uit de norm: rest 10 werd vroeger als 0 genoteerd.
+  return check == (rest == 10 ? 0 : rest);
+}
+
+// ── Denemarken ───────────────────────────────────────────────────────────────
+
+/// CPR-nummer: `ddmmjj-xxxx`.
+///
+/// **Bewust zonder checksum.** De mod-11-controle is in 2007 losgelaten omdat de
+/// nummers opraakten, dus een geldig CPR hoeft hem niet te halen. Erop
+/// controleren zou echte nummers afwijzen — precies de verkeerde fout. Wat
+/// overblijft is de datum, en die is te zwak om alleen op af te gaan; vandaar
+/// dat de regel een contextwoord eist en nooit hoger komt dan `waarschijnlijk`.
+bool isValidDkCpr(String raw) {
+  final d = _digits(raw);
+  if (d.length != 10) return false;
+  return _plausibleDayMonth(
+    int.parse(d.substring(0, 2)),
+    int.parse(d.substring(2, 4)),
+  );
+}
+
+// ── Griekenland ──────────────────────────────────────────────────────────────
+
+/// ΑΜΚΑ: 11 cijfers, Luhn, en de eerste zes zijn de geboortedatum.
+bool isValidGrAmka(String raw) {
+  final d = _digits(raw);
+  if (d.length != 11) return false;
+  if (!_plausibleDayMonth(
+    int.parse(d.substring(0, 2)),
+    int.parse(d.substring(2, 4)),
+  )) {
+    return false;
+  }
+  return _luhn(d);
+}
+
+/// De Luhn-controle over een cijferreeks.
+bool _luhn(String digits) {
+  var sum = 0;
+  var double = false;
+  for (var i = digits.length - 1; i >= 0; i--) {
+    var n = digits.codeUnitAt(i) - 0x30;
+    if (double) {
+      n *= 2;
+      if (n > 9) n -= 9;
+    }
+    sum += n;
+    double = !double;
+  }
+  return sum % 10 == 0;
+}
+
+// ── Hongarije ────────────────────────────────────────────────────────────────
+
+/// TAJ-szám: 9 cijfers, gewogen mod 10 met afwisselend 3 en 7.
+bool isValidHuTaj(String raw) {
+  final d = _digits(raw);
+  if (d.length != 9) return false;
+  var sum = 0;
+  for (var i = 0; i < 8; i++) {
+    sum += (d.codeUnitAt(i) - 0x30) * (i.isEven ? 3 : 7);
+  }
+  return sum % 10 == d.codeUnitAt(8) - 0x30;
+}
+
+// ── Ierland ──────────────────────────────────────────────────────────────────
+
+/// PPS Number: 7 cijfers, een controleletter, en soms een tweede letter.
+///
+/// De controleletter komt uit een mod-23-tabel. De optionele tweede letter (`W`
+/// of een spatie) stamt uit het oude systeem voor echtgenotes en telt bij de
+/// berekening als gewicht 0 — behalve `W`, dat expliciet wordt overgeslagen.
+bool isValidIePps(String raw) {
+  final s = raw.toUpperCase().replaceAll(RegExp(r'[^0-9A-Z]'), '');
+  if (s.length < 8 || s.length > 9) return false;
+  final digits = s.substring(0, 7);
+  if (!RegExp(r'^\d{7}$').hasMatch(digits)) return false;
+  final checkLetter = s[7];
+  const alphabet = 'WABCDEFGHIJKLMNOPQRSTUV';
+  if (!alphabet.contains(checkLetter)) return false;
+
+  var sum = 0;
+  for (var i = 0; i < 7; i++) {
+    sum += (digits.codeUnitAt(i) - 0x30) * (8 - i);
+  }
+  // De tweede letter, als die er is, telt mee met gewicht 9.
+  if (s.length == 9) {
+    final second = s[8];
+    if (second != 'W') sum += (second.codeUnitAt(0) - 0x40) * 9;
+  }
+  return alphabet[sum % 23] == checkLetter;
+}
+
+// ── Noorwegen ────────────────────────────────────────────────────────────────
+
+/// Fødselsnummer: 11 cijfers met twee mod-11-controlecijfers.
+bool isValidNoFodselsnummer(String raw) {
+  final d = _digits(raw);
+  if (d.length != 11) return false;
+  if (!_plausibleDayMonth(
+    int.parse(d.substring(0, 2)),
+    int.parse(d.substring(2, 4)),
+  )) {
+    return false;
+  }
+  const w1 = [3, 7, 6, 1, 8, 9, 4, 5, 2];
+  const w2 = [5, 4, 3, 2, 7, 6, 5, 4, 3, 2];
+  final k1 = 11 - (_weighted(d, w1) % 11);
+  if ((k1 == 11 ? 0 : k1) != d.codeUnitAt(9) - 0x30) return false;
+  if (k1 == 10) return false;
+  final k2 = 11 - (_weighted(d, w2) % 11);
+  if (k2 == 10) return false;
+  return (k2 == 11 ? 0 : k2) == d.codeUnitAt(10) - 0x30;
+}
+
+// ── Slovenië ─────────────────────────────────────────────────────────────────
+
+/// EMŠO: 13 cijfers, mod-11 over de eerste twaalf.
+///
+/// Dezelfde opzet als in de andere voormalig-Joegoslavische landen: `ddmmjjj`
+/// gevolgd door een regiocode, een volgnummer en het controlecijfer.
+bool isValidSiEmso(String raw) {
+  final d = _digits(raw);
+  if (d.length != 13) return false;
+  if (!_plausibleDayMonth(
+    int.parse(d.substring(0, 2)),
+    int.parse(d.substring(2, 4)),
+  )) {
+    return false;
+  }
+  const weights = [7, 6, 5, 4, 3, 2, 7, 6, 5, 4, 3, 2];
+  final m = 11 - (_weighted(d, weights) % 11);
+  final check = m == 11 ? 0 : m;
+  if (m == 10) return false;
+  return check == d.codeUnitAt(12) - 0x30;
+}

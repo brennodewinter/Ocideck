@@ -151,6 +151,87 @@ final List<EuIdentifierRule> euIdentifierRules = [
     contextWords: ['nino', 'national insurance', 'ni number'],
     confidence: PrivacyConfidence.likely,
   ),
+  // ── Nummers met een eigen checksum ────────────────────────────────────────
+  EuIdentifierRule(
+    id: 'at.svnr',
+    country: 'AT',
+    pattern: RegExp(r'(?<!\d)\d{10}(?!\d)'),
+    validate: isValidAtSvnr,
+  ),
+  EuIdentifierRule(
+    id: 'ch.ahv',
+    country: 'CH',
+    // Altijd `756`, meestal met punten. Dat prefix doet hier het meeste
+    // FP-werk: dertien willekeurige cijfers die óók met 756 beginnen én de
+    // EAN-controle halen zijn zeldzaam.
+    pattern: RegExp(r'(?<![\d.])756[. ]?\d{4}[. ]?\d{4}[. ]?\d{2}(?![\d.])'),
+    validate: isValidChAhv,
+  ),
+  EuIdentifierRule(
+    id: 'cz.rodne_cislo',
+    country: 'CZ',
+    // Ook met de schuine streep waarmee het meestal wordt geschreven.
+    // Slowakije deelt dit nummer — het stamt uit Tsjecho-Slowakije — en valt
+    // dus onder deze regel; een eigen `sk.`-id zou hetzelfde nummer dubbel
+    // melden.
+    pattern: RegExp(r'(?<!\d)\d{6}/?\d{4}(?!\d)'),
+    validate: isValidCzSkRodneCislo,
+  ),
+  EuIdentifierRule(
+    id: 'gr.amka',
+    country: 'GR',
+    pattern: RegExp(r'(?<!\d)\d{11}(?!\d)'),
+    validate: isValidGrAmka,
+  ),
+  EuIdentifierRule(
+    id: 'hu.taj',
+    country: 'HU',
+    pattern: RegExp(r'(?<!\d)\d{3}[ -]?\d{3}[ -]?\d{3}(?!\d)'),
+    validate: isValidHuTaj,
+    // Negen cijfers met alléén een mod-10, en geen datum erin: één op de tien
+    // willekeurige getallen komt erdoor. Dat is zwakker dan de 11-proef van het
+    // BSN, en die eist al een contextwoord.
+    //
+    // Zonder die eis is dit geen theoretisch risico maar een gemeten ramp: de
+    // vals-positievencorpus ging meteen af op `Klantnummer 847362910` en
+    // `Ordernummer 202512345`. Erger nog — omdat een identificator als
+    // persoonskoppeling telt, tilde elke valse treffer óók alle artikel
+    // 9-trefwoorden op diezelfde slide naar `zeker`. Eén zwakke regel, en de
+    // halve scanner gaat mee.
+    contextWords: ['taj', 'társadalombiztosítási', 'tb-szám', 'taj-szám'],
+    confidence: PrivacyConfidence.likely,
+  ),
+  EuIdentifierRule(
+    id: 'ie.pps',
+    country: 'IE',
+    pattern: RegExp(r'\b\d{7}[A-W]{1,2}\b'),
+    validate: isValidIePps,
+  ),
+  EuIdentifierRule(
+    id: 'no.fodselsnummer',
+    country: 'NO',
+    pattern: RegExp(r'(?<!\d)\d{6}[ ]?\d{5}(?!\d)'),
+    validate: isValidNoFodselsnummer,
+  ),
+  EuIdentifierRule(
+    id: 'si.emso',
+    country: 'SI',
+    pattern: RegExp(r'(?<!\d)\d{13}(?!\d)'),
+    validate: isValidSiEmso,
+  ),
+  // ── En het nummer zonder checksum ─────────────────────────────────────────
+  EuIdentifierRule(
+    id: 'dk.cpr',
+    country: 'DK',
+    pattern: RegExp(r'(?<!\d)\d{6}-?\d{4}(?!\d)'),
+    // De mod-11-controle is in 2007 losgelaten omdat de nummers opraakten, dus
+    // een geldig CPR hoeft hem niet te halen. Erop controleren zou echte
+    // nummers afwijzen — de verkeerde fout. Wat overblijft is de datum, en die
+    // is te zwak om alleen op af te gaan.
+    validate: isValidDkCpr,
+    contextWords: ['cpr', 'cpr-nr', 'personnummer', 'cprnummer'],
+    confidence: PrivacyConfidence.likely,
+  ),
 ];
 
 /// De landcodes waarvoor er regels zijn.

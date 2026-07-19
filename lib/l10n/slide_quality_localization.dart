@@ -512,6 +512,15 @@ String privacyRuleLabel(AppLocalizations l10n, String ruleId) {
 /// PESEL heet in elke taal een PESEL.
 const Map<String, String> _euNumberNames = {
   'be.rijksregister': 'rijksregisternummer',
+  'at.svnr': 'Sozialversicherungsnummer',
+  'ch.ahv': 'AHV-Nummer',
+  'cz.rodne_cislo': 'rodné číslo',
+  'dk.cpr': 'CPR-nummer',
+  'gr.amka': 'AMKA',
+  'hu.taj': 'TAJ-szám',
+  'ie.pps': 'PPS Number',
+  'no.fodselsnummer': 'fødselsnummer',
+  'si.emso': 'EMŠO',
   'de.steuer_id': 'Steuer-ID',
   'fr.nir': 'NIR',
   'es.dni': 'DNI/NIE',
