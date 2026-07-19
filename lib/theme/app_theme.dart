@@ -237,6 +237,21 @@ class AppTheme {
   static const accentOverlay = Color(0xCC2563EB);
   static const goldDarkOverlay = Color(0xCC8A6D3B);
 
+  // ── Badges op een slide-thumbnail ─────────────────────────────────────────
+  // Doorzichtig genoeg om de slide eronder te laten zien, dekkend genoeg om het
+  // icoon leesbaar te houden op elke achtergrond. Zie `slide_badge_tone.dart`
+  // voor wanneer welke geldt.
+  static const badgeErrorOverlay = Color(0xCCD32F2F);
+  static const badgeWarningOverlay = Color(0xCCB45309);
+
+  /// Gevonden, maar wij zijn er zelf niet zeker van.
+  static const badgeHintOverlay = Color(0xCC64748B);
+
+  /// Gevonden, en de auteur heeft gezegd dat het zo hoort. Duidelijk grijzer dan
+  /// [badgeHintOverlay], zodat "ik twijfel" en "jij hebt beslist" niet op elkaar
+  /// lijken.
+  static const badgeAcceptedOverlay = Color(0xB3475569);
+
   static Color parseHex(String hex, {Color fallback = Colors.white}) {
     final cleaned = hex.replaceFirst('#', '');
     final value = int.tryParse(

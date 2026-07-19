@@ -105,11 +105,7 @@ extension _MarkdownParseDirectives on MarkdownService {
         timelineAnimationMs = t.animationMs;
         timelineCurrentIndex = t.currentIndex;
       } else if (content.startsWith('ocideck_list_style:')) {
-        final name = content.substring(19).trim();
-        listStyle = ListStyle.values.firstWhere(
-          (style) => style.name == name,
-          orElse: () => ListStyle.bullets,
-        );
+        listStyle = _listStyleFrom(content.substring(19));
       } else if (content.startsWith('ocideck_checklist_progress:')) {
         showChecklistProgress = _flagAfter(
           content,
@@ -130,9 +126,8 @@ extension _MarkdownParseDirectives on MarkdownService {
             .substring('ocideck_title_text_color:'.length)
             .trim();
       } else if (content.startsWith('ocideck_bullet_marker:')) {
-        final name = content.substring('ocideck_bullet_marker:'.length).trim();
-        final match = BulletMarker.values.where((m) => m.name == name);
-        if (match.isNotEmpty) bulletMarkerOverride = match.first;
+        bulletMarkerOverride =
+            _bulletMarkerFrom(content.substring(22)) ?? bulletMarkerOverride;
       } else if (!content.startsWith('_')) {
         notesBuffer.write(notesBuffer.isEmpty ? content : '\n$content');
       }
@@ -201,5 +196,25 @@ extension _MarkdownParseDirectives on MarkdownService {
   bool _flagAfter(String content, String prefix, {bool defaultTrue = false}) {
     final value = content.substring(prefix.length).trim();
     return defaultTrue ? value != 'false' : value == 'true';
+  }
+
+  /// De lijststijl uit een `ocideck_list_style:`-directive.
+  ///
+  /// Een onbekende naam wordt een gewone opsomming: een deck uit een nieuwere
+  /// versie hoort leesbaar te blijven, niet leeg.
+  ListStyle _listStyleFrom(String raw) {
+    final name = raw.trim();
+    return ListStyle.values.firstWhere(
+      (style) => style.name == name,
+      orElse: () => ListStyle.bullets,
+    );
+  }
+
+  /// De bulletmarkering uit een `ocideck_bullet_marker:`-directive, of `null`
+  /// als de naam onbekend is — dan blijft de themastandaard staan.
+  BulletMarker? _bulletMarkerFrom(String raw) {
+    final name = raw.trim();
+    final match = BulletMarker.values.where((m) => m.name == name);
+    return match.isEmpty ? null : match.first;
   }
 }

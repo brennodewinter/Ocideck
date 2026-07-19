@@ -43,6 +43,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `rehearsal.dart` — `RehearsalRun`/`SlideTiming` for tracking presentation-practice durations per slide.
 - `scope_matrix_spec.dart` — `ScopeMatrixSpec`/`ScopeRow`/`ScopeObjectType`/`ScopeStatus` for the scope-matrix slide; each row carries a `CiaRating` (serialised as the `C`/`I`/`A` columns).
 - `privacy_disposition.dart` — `PrivacyDisposition` (warn/accept/shield/redact) and the slide-overrides-deck resolution.
+- `quality_disposition.dart` — `QualityDisposition` (warn/accept): the same idea for quality findings, per slide only. Two values and not four — a contrast problem has no recipient to warn and nothing to black out.
 - `privacy_finding.dart` — `PrivacyFinding`/`PrivacyScanResult`: what the privacy scanner found. Never stores the raw value — only a masked sample.
 - `used_tool.dart` — `UsedTool` + `toolsAppendixRows`: de hulpmiddelen die bij het onderzoek zijn gebruikt (MIAUW EIS 4.8.2 — beschrijving, versie, publieke referentie), met een tolerante `naam@versie | url | beschrijving`-vorm omdat het veld met de hand wordt getypt. Levert de bijlagetabel in eisvolgorde; de kopteksten komen van de aanroeper zodat ze in de taal van het *rapport* staan.
 - `reference_standard.dart` — `ReferenceStandard`/`StandardFreshness`/`UpstreamProbe`: één gebundelde referentiestandaard als data (versie, bron-URL, wat er precies gebundeld is, licentie, en hoe upstream te bevragen). `UpstreamProbe` kent vier strategieën en met opzet géén `manual`: CWE en CVSS stonden eerst als "niet te bevragen" tot bleek dat MITRE een REST-API heeft en FIRST per versie een schema op een vaste URL publiceert. "Onbekend" (bron onbereikbaar) mag nooit als "actueel" lezen.
@@ -179,7 +180,7 @@ deliberately manual).
 - `deck_provider_checklist.dart` — `DeckNotifierChecklist` extension: `generateScopeChecklists` (one checklist per scope object, feedback #8) and `clearAllChecklists`.
 - `deck_provider_markdown.dart` — `DeckNotifierMarkdown` extension: generate/apply markdown for the whole deck or a single slide (per-slide markdown view).
 - `deck_provider_miauw.dart` — `DeckNotifierMiauw` extension: set/remove MIAUW compliance waivers.
-- `deck_quality_provider.dart` — Computes accessibility/quality analysis for the loaded deck.
+- `deck_quality_provider.dart` — Computes accessibility/quality analysis for the loaded deck. `deckQualityRawProvider` keeps every finding (the badges and the popover need the accepted ones); `deckQualityProvider` drops the ones on an accepted slide (the panel and the export gate want the open work). Both run through named top-level functions so the per-tab override in `AppShell` cannot drift from the original.
 - `git_provider.dart` — `gitForgeProvider` (builds the adapter from the configured repo plus the token from the keychain) and `gitDeckListProvider` (the decks on a branch).
 - `editor_provider.dart` — `EditorState`/`EditorNotifier`: selected slide, editor mode, markdown buffer.
 - `tabs_provider_git_native.dart` — `TabsNotifierGitNative` extension: the native-git plane through the notifier — `openDeckFromGitNative` (read from the clone, tab `baseSha` = clone HEAD), `saveToGitNative` (resolve the round's work branch like the REST path → `commitDeck(workBranch, forkFrom)`; on a rejected push `_mergeNative` runs `mergeRemote` with a resolver that puts all three versions through the import gate and merges them with `mergeDeckVersions`), `syncGitNative`. Chosen over the REST path by `nativeGitMirrorProvider`.
@@ -411,7 +412,9 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 - `inline_markdown.dart` — Lightweight inline-markdown parser (bold/italic/code/links).
 - `mermaid_diagram.dart` — Renders Mermaid definitions to inline SVG in previews.
 - `slide_preview.dart` — Central preview library coordinating all slide-type renderers + shared helpers. `sharedSplitFitScale`/`splitRunMemberScale` compute the one font size a split run renders at; the quality analyzer calls the same functions, so a reported size is the size actually rendered.
-- `slide_thumbnail.dart` — Thumbnail with slide preview, metadata, and action buttons.
+- `slide_thumbnail.dart` — Thumbnail with slide preview, metadata, and action buttons. Carries the two finding badges (quality left, privacy right): click to read, double-click to accept or undo.
+- `slide_badge_tone.dart` — `SlideBadgeTone` plus the two threshold functions. Grey (`accepted`) is a state of its own, not `none`: a slide where you accepted something must not look like a slide where nothing was found.
+- `slide_badge_popover.dart` — The anchored list behind a badge, and `toggleSlideBadgeAcceptance`. Reads the raw results so a grey badge still opens a readable list; refuses to undo `redact`/`shield`, which would put redacted data back into an export.
 - `video_playhead_bus.dart` — Cross-widget channel syncing the video playhead across previews.
 
 ### `lib/widgets/slides/previews/` (each `part of slide_preview.dart`)

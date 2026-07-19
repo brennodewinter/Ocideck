@@ -45,17 +45,12 @@ extension SlideBadgeToneX on SlideBadgeTone {
       this == SlideBadgeTone.error;
 
   /// De achtergrondkleur van het badge-plaatje.
-  ///
-  /// Doorzichtig genoeg om de slide eronder te laten zien, dekkend genoeg om
-  /// het icoon leesbaar te houden op elke achtergrond.
   Color get background => switch (this) {
-    SlideBadgeTone.none => const Color(0x00000000),
-    SlideBadgeTone.hint => const Color(0xCC64748B),
-    SlideBadgeTone.warning => const Color(0xCCB45309),
-    SlideBadgeTone.error => const Color(0xCCD32F2F),
-    // Duidelijk grijzer dan de hint-toon, zodat "ik twijfel" en "jij hebt
-    // beslist" niet op elkaar lijken.
-    SlideBadgeTone.accepted => const Color(0xB3475569),
+    SlideBadgeTone.none => Colors.transparent,
+    SlideBadgeTone.hint => AppTheme.badgeHintOverlay,
+    SlideBadgeTone.warning => AppTheme.badgeWarningOverlay,
+    SlideBadgeTone.error => AppTheme.badgeErrorOverlay,
+    SlideBadgeTone.accepted => AppTheme.badgeAcceptedOverlay,
   };
 
   Color get foreground => switch (this) {

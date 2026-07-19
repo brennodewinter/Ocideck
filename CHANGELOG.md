@@ -8,6 +8,30 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Een melding zegt nu ook wáár ze zit.** De privacyscanner wist allang precies
+  waar een bevinding stond — veld, fragment, begin- en eindpositie — maar die
+  kennis sneuvelde op weg naar het kwaliteitspaneel. Wat je overhield was
+  "Slide 5 · Privacy — persoonsnaam (B…r)": genoeg om te weten dát er iets is, te
+  weinig om het te vinden. Het paneel zet het veld er nu bij ("Opsomming 3"), en
+  klikken op een melding selecteert het gemelde stuk tekst in het editorveld.
+  Springen naar een melding werkt daarbij ook in opsommingen, waar de meeste
+  tekst staat en dus de meeste bevindingen landen.
+- **Een aparte privacybadge op de thumbnail.** Privacy zat in de kwaliteitsbadge
+  gevouwen, dus hetzelfde oranje bolletje kon contrast betekenen, of
+  tekstdichtheid, of een BSN in de tekst. Wie een deck nakeek op
+  persoonsgegevens kon niet zien wélke slides daarover gingen. Privacy heeft nu
+  een eigen badge met het PrivacyKat-merkteken, ernaast in plaats van erin.
+- **Klik op een badge om te lezen wat er gevonden is**, en dubbelklik om te
+  beslissen: op een gekleurde badge accepteer je, op een grijze draai je die
+  acceptatie terug. Bij *leave out* en *accept + warn* doet dubbelklikken
+  bewust niets — dat zou zwart gelakte persoonsgegevens terugzetten in je export
+  zonder dat iemand erom vroeg.
+- **Kwaliteitsproblemen zijn per slide te accepteren.** Een titelbeeld dat met
+  opzet rustig contrasteert, een tabel die nu eenmaal veel rijen heeft: daar viel
+  niets over te zeggen, dus bleef de badge oranje en leerde je vooral dat badges
+  te negeren zijn. Accepteren maakt de badge grijs, houdt de meldingen leesbaar
+  en haalt ze uit de export-gate. Round-trippt als
+  `<!-- ocideck_quality: accept -->`.
 - **Elke WebDAV-server kan nu een bron zijn, niet alleen Nextcloud.** Wat als
   "Nextcloud" in de instellingen stond was altijd al gewone WebDAV: PROPFIND,
   GET, PUT, MKCOL. Eén ding was Nextcloud-eigen, het pad
@@ -23,6 +47,13 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   als Nextcloud, want dat waren ze.
 
 ### Changed
+- **Een geaccepteerde bevinding verdwijnt niet meer spoorloos.** Wie een
+  privacybevinding accepteerde, zag daarna nérgens meer dat er iets gevonden
+  wás: de melding ging uit het paneel én de badge van de thumbnail, en die slide
+  zag er daarna precies zo uit als een slide waarop niets staat. Accepteren was
+  daarmee hetzelfde geworden als verbergen. De badge blijft nu staan en wordt
+  grijs. Het paneel blijft wél stil — daar hoort een genomen beslissing niet
+  meer te zeuren.
 - **De opslagwijze heet WebDAV in plaats van Nextcloud** — in de lijst met
   opslagwijzen, in de menu-items (*Openen vanaf WebDAV*, *Opslaan naar WebDAV*)
   en in de foutmeldingen die naar het instellingenscherm verwijzen. Nextcloud
