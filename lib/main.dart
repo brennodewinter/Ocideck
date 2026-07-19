@@ -40,6 +40,9 @@ void main(List<String> args) {
     // Bepaal de stagingmap voor media vóór de eerste frame: de UI moet
     // synchroon kunnen zien of een afbeelding daar staat (zie AssetStaging).
     await AssetStaging.initialize();
+    // Oude sessiemappen opruimen mag de start niet ophouden — het is
+    // huishouding, geen voorwaarde om te kunnen werken.
+    unawaited(AssetStaging.pruneStale());
 
     await configureNativeWindow();
 

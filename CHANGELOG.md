@@ -22,6 +22,9 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   verplaatste je het bronbestand vóór de eerste opslag, dan was de verwijzing
   stuk. Zulke media gaan nu naar een tijdelijke stagingmap met dezelfde indeling
   als een echt project, waarna opslaan ze op hun definitieve plek zet.
+  Die tijdelijke map ruimt zichzelf op: bij het opstarten verdwijnen sessies
+  waar een week niets meer aan is gebeurd — dezelfde termijn als de
+  herstelbestanden, want een teruggehaald deck wijst erin.
 
   Naast het pad in de editor staat een badge die zegt wat er gebeurt als je de
   presentatie doorgeeft: *Nog niet opgeslagen* (gekopieerd en veilig, alleen nog
