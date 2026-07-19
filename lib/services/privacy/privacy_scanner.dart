@@ -73,6 +73,17 @@ const List<String> bsnContextWords = [
 
 final _reEmail = RegExp(r"[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}");
 
+/// De handmatige redactiemarkering in de bron: `[[tekst]]`.
+///
+/// Detectie is per definitie best-effort — wat de scanner niet ziet, redigeert
+/// hij niet. Deze markering geeft de auteur het laatste woord, onafhankelijk van
+/// welke detectieregel wel of niet vuurt. Geen geneste blokhaken, zodat een
+/// gewone markdown-link (`[tekst](url)`) er niet in loopt.
+///
+/// Staat hier en niet in `privacy_projection.dart`, omdat die de scanner al
+/// importeert en de omgekeerde richting een cyclus zou zijn.
+final RegExp kManualRedaction = RegExp(r'\[\[([^\[\]]*)\]\]');
+
 /// Een IBAN staat vaak met spaties in een tekst. We accepteren die en
 /// normaliseren pas in de validatie.
 final _reIban = RegExp(r'\b[A-Z]{2}\d{2}(?:[ -]?[A-Z0-9]){10,30}\b');
@@ -821,6 +832,22 @@ class PrivacyScanner {
     if (finding != null) out.add(finding);
   }
 
+  /// Valt [offset] binnen een handmatige `[[…]]`-markering in [text]?
+  ///
+  /// Op positie en niet op waarde. Staat er twee keer hetzelfde adres op een
+  /// slide en is er één gemarkeerd, dan hoort de ándere gewoon gemeld te worden
+  /// — een vergelijking op tekst zou ze allebei laten verdwijnen en dat is een
+  /// vals-negatieve die niemand ziet.
+  bool _insideManualRedaction(String text, int offset) {
+    // Snelle uitweg: zonder blokhaken is er niets te zoeken, en dat is verreweg
+    // het meest voorkomende geval.
+    if (!text.contains('[[')) return false;
+    for (final m in kManualRedaction.allMatches(text)) {
+      if (offset >= m.start && offset < m.end) return true;
+    }
+    return false;
+  }
+
   /// Bouwt een bevinding, of `null` wanneer de waarde bij de gebruiker zelf
   /// hoort.
   ///
@@ -844,6 +871,21 @@ class PrivacyScanner {
   }) {
     final subject = value ?? match.group(0)!;
     if (ownIdentity.covers(subject)) return null;
+
+    // Wat de auteur zelf met `[[…]]` heeft gemarkeerd, is al afgehandeld.
+    //
+    // De markering is de sterkste beslissing die er is: hij redigeert
+    // onvoorwaardelijk, ongeacht welke regel vuurt of welke stand de slide
+    // heeft. Er dan nog een waarschuwing over geven vraagt de auteur iets te
+    // doen aan iets wat hij net gedaan hééft — en dat is precies het soort
+    // melding waardoor mensen de hele controle uitzetten.
+    //
+    // Onderdrukken en niet afzwakken: een bevinding die tot `info` zakt blijft
+    // in het paneel staan en telt mee in de massaregels, en dan is de ruis
+    // alleen verplaatst.
+    if (_insideManualRedaction(fragment.text, spanStart ?? match.start)) {
+      return null;
+    }
     return PrivacyFinding(
       ruleId: ruleId,
       family: family,
