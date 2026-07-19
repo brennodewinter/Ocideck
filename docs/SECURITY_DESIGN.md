@@ -309,6 +309,18 @@ reaches the network; other schemes are refused. Verified in
 `test/git_network_guard_test.dart`, which also checks that `git` honours the pin
 rather than assuming it.
 
+A pinned certificate is translated the same way. Git has no notion of a
+certificate fingerprint — only a CA file — so `native_git_mirror_io.dart` fetches
+the certificate at the pinned address, compares the SHA-256 itself, and only then
+writes it out and points `http.sslCAInfo` at it. The decision stays on our side:
+git never sees anything that was not first checked against the recorded
+fingerprint. `http.sslVerify` is deliberately **not** disabled — that would drop
+chain *and* hostname validation and make the pin meaningless; with a CA file git
+keeps validating normally and this one certificate is simply a valid anchor.
+Because `badCertificateCallback` on the REST path only fires when normal
+validation fails, a pin means "trust this certificate *as well*", not "trust only
+this one" — the native path matches that.
+
 ## 11. Offline reference data (MIAUW pentest module)
 
 The opt-in "Informatieveiligheid" (pentest reporting) module keeps all reference
