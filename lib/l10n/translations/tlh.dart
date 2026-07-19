@@ -1756,6 +1756,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Bestand niet gevonden': 'mob tu\'be\'lu\'',
+  'Weg na herladen': 'nISlu\'pu\'DI\' chIlpu\'',
   'Nog niet opgeslagen': 'polbe\'lu\'',
   'Buiten de presentatie': 'cha\'nob HurDaq',
   'Van internet': 'internetvo\'',

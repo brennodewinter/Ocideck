@@ -1811,6 +1811,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Bestand niet gevonden': 'Ficheiro não encontrado',
+  'Weg na herladen': 'Perdido após recarregar',
   'Nog niet opgeslagen': 'Ainda não guardado',
   'Buiten de presentatie': 'Fora da apresentação',
   'Van internet': 'Da internet',

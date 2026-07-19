@@ -739,6 +739,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Bestand niet gevonden': 'Bestân net fûn',
+  'Weg na herladen': 'Fuort nei opnij laden',
   'Nog niet opgeslagen': 'Noch net bewarre',
   'Buiten de presentatie': 'Bûten de presintaasje',
   'Van internet': 'Fan it ynternet',

@@ -1793,6 +1793,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Bestand niet gevonden': 'Nie znaleziono pliku',
+  'Weg na herladen': 'Utracone po przeładowaniu',
   'Nog niet opgeslagen': 'Jeszcze nie zapisano',
   'Buiten de presentatie': 'Poza prezentacją',
   'Van internet': 'Z internetu',

@@ -1781,6 +1781,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Bestand niet gevonden': 'Tiedostoa ei löydy',
+  'Weg na herladen': 'Poissa uudelleenlatauksen jälkeen',
   'Nog niet opgeslagen': 'Ei vielä tallennettu',
   'Buiten de presentatie': 'Esityksen ulkopuolella',
   'Van internet': 'Internetistä',

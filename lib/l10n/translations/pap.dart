@@ -738,6 +738,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Bestand niet gevonden': 'Archivo no hañá',
+  'Weg na herladen': 'Pèrdí despues di karga di nobo',
   'Nog niet opgeslagen': 'Ainda no wardá',
   'Buiten de presentatie': 'Pafó di e presentashon',
   'Van internet': 'For di internet',

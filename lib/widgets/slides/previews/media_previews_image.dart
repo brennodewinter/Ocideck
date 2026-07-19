@@ -90,7 +90,9 @@ Widget _resolvedImage(
   bool trustedAsset = false,
   String? semanticLabel,
 }) {
-  if (imagePath.isEmpty) return _imagePlaceholder(context);
+  if (imagePath.isEmpty) {
+    return _imagePlaceholder(context, ImagePlaceholderReason.noImage);
+  }
 
   // Méégebundelde asset (ingebouwde stijlprofielen, bv. het LibreKAT-logo):
   // rendert op elk platform, ook op web waar geen bestandssysteem bestaat.
@@ -103,7 +105,8 @@ Widget _resolvedImage(
       height: double.infinity,
       gaplessPlayback: true,
       semanticLabel: semanticLabel,
-      errorBuilder: (context, error, stackTrace) => _imagePlaceholder(context),
+      errorBuilder: (context, error, stackTrace) =>
+          _imagePlaceholder(context, ImagePlaceholderReason.missing),
     );
   }
 
@@ -122,10 +125,13 @@ Widget _resolvedImage(
       height: double.infinity,
       gaplessPlayback: true,
       semanticLabel: semanticLabel,
-      errorBuilder: (context, error, stackTrace) => _imagePlaceholder(context),
+      errorBuilder: (context, error, stackTrace) =>
+          _imagePlaceholder(context, ImagePlaceholderReason.missing),
     );
   }
-  if (WebAssetStore.isMemPath(imagePath)) return _imagePlaceholder(context);
+  if (WebAssetStore.isMemPath(imagePath)) {
+    return _imagePlaceholder(context, ImagePlaceholderReason.memoryGone);
+  }
 
   // Online afbeelding: render live via NetworkImage (zelfde decode-cap als
   // bestanden), maar alleen als de remote-media-gate open staat én de URL door
@@ -142,7 +148,7 @@ Widget _resolvedImage(
       future: NetGuard.isAllowedMediaUrlResolved(imagePath),
       builder: (context, snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
-          return _imagePlaceholder(context);
+          return _imagePlaceholder(context, ImagePlaceholderReason.noImage);
         }
         if (snapshot.data != true) {
           return _remoteBlockedPlaceholder(context, imagePath);
@@ -156,7 +162,7 @@ Widget _resolvedImage(
           gaplessPlayback: true,
           semanticLabel: semanticLabel,
           errorBuilder: (context, error, stackTrace) =>
-              _imagePlaceholder(context),
+              _imagePlaceholder(context, ImagePlaceholderReason.missing),
         );
       },
     );
@@ -168,13 +174,22 @@ Widget _resolvedImage(
   final resolved = trustedAsset
       ? resolveTrustedAssetPath(imagePath, projectPath)
       : resolveSlideAssetPath(imagePath, projectPath);
-  if (resolved == null) return _imagePlaceholder(context);
+  if (resolved == null) {
+    // Op web bestaat er geen bestandssysteem: het bestand is er domweg niet.
+    // Op desktop kan dit alleen door de containment-grens komen.
+    return _imagePlaceholder(
+      context,
+      kIsWeb
+          ? ImagePlaceholderReason.missing
+          : ImagePlaceholderReason.outsideDeck,
+    );
+  }
   // Block a project-internal symlink that points outside the project (cached,
   // so the per-frame cost is O(1) after the first render of each image).
   if (!trustedAsset &&
       projectPath != null &&
       !isRenderPathContained(resolved, projectPath)) {
-    return _imagePlaceholder(context);
+    return _imagePlaceholder(context, ImagePlaceholderReason.outsideDeck);
   }
 
   return Image(
@@ -190,7 +205,8 @@ Widget _resolvedImage(
     // this the widget paints nothing for a frame on a source change, which
     // shows up as a black flash between slides — fatal when recording video.
     gaplessPlayback: true,
-    errorBuilder: (context, error, stackTrace) => _imagePlaceholder(context),
+    errorBuilder: (context, error, stackTrace) =>
+          _imagePlaceholder(context, ImagePlaceholderReason.missing),
   );
 }
 
@@ -285,7 +301,47 @@ Widget _mediaPlaceholder(IconData icon, String label) {
   );
 }
 
-Widget _imagePlaceholder(BuildContext context) {
+/// Waarom er geen afbeelding staat.
+///
+/// Deze vier gevallen zagen er tot nu toe identiek uit: hetzelfde grijze vlak
+/// met het woord "Afbeelding". Dat is precies verkeerd om — een leeg veld is
+/// werk dat nog moet gebeuren, een ontbrekend bestand is een presentatie die
+/// stuk is, en dat verschil moet je kunnen zien zonder de code te kennen.
+enum ImagePlaceholderReason {
+  /// Er is nog geen afbeelding gekozen.
+  noImage,
+
+  /// Er is een verwijzing, maar het bestand is er niet (meer).
+  missing,
+
+  /// Het pad wijst buiten de presentatiemap en wordt daarom niet geladen.
+  outsideDeck,
+
+  /// Webversie: de afbeelding stond alleen in het geheugen en de pagina is
+  /// herladen.
+  memoryGone,
+}
+
+Widget _imagePlaceholder(BuildContext context, ImagePlaceholderReason reason) {
+  final (icon, label) = switch (reason) {
+    ImagePlaceholderReason.noImage => (
+      Icons.image_outlined,
+      context.l10n.d('Afbeelding'),
+    ),
+    ImagePlaceholderReason.missing => (
+      Icons.broken_image_outlined,
+      context.l10n.d('Bestand niet gevonden'),
+    ),
+    ImagePlaceholderReason.outsideDeck => (
+      Icons.link_off,
+      context.l10n.d('Buiten de presentatie'),
+    ),
+    ImagePlaceholderReason.memoryGone => (
+      Icons.broken_image_outlined,
+      context.l10n.d('Weg na herladen'),
+    ),
+  };
+
   return ColoredBox(
     color: AppTheme.slate200,
     child: LayoutBuilder(
@@ -294,7 +350,7 @@ Widget _imagePlaceholder(BuildContext context) {
         if (shortestSide < 48) {
           return Center(
             child: Icon(
-              Icons.image_outlined,
+              icon,
               color: AppTheme.slate400,
               size: shortestSide * 0.65,
             ),
@@ -305,11 +361,12 @@ Widget _imagePlaceholder(BuildContext context) {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.image_outlined, color: AppTheme.slate400, size: 24),
+              Icon(icon, color: AppTheme.slate400, size: 24),
               const SizedBox(height: 4),
               Text(
-                context.l10n.d('Afbeelding'),
+                label,
                 style: TextStyle(color: AppTheme.slate400, fontSize: 10),
+                textAlign: TextAlign.center,
               ),
             ],
           ),

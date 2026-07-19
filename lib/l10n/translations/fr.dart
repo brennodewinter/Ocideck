@@ -738,6 +738,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Bestand niet gevonden': 'Fichier introuvable',
+  'Weg na herladen': 'Perdu après rechargement',
   'Nog niet opgeslagen': 'Pas encore enregistré',
   'Buiten de presentatie': 'Hors de la présentation',
   'Van internet': 'Depuis internet',

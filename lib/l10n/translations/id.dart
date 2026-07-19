@@ -1781,6 +1781,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Bestand niet gevonden': 'Berkas tidak ditemukan',
+  'Weg na herladen': 'Hilang setelah dimuat ulang',
   'Nog niet opgeslagen': 'Belum disimpan',
   'Buiten de presentatie': 'Di luar presentasi',
   'Van internet': 'Dari internet',

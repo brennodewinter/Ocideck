@@ -920,6 +920,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Bestand niet gevonden': 'File not found',
+  'Weg na herladen': 'Gone after reload',
   'Nog niet opgeslagen': 'Not yet saved',
   'Buiten de presentatie': 'Outside the presentation',
   'Van internet': 'From the internet',

@@ -1785,6 +1785,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Bestand niet gevonden': 'Datei nid gfunde',
+  'Weg na herladen': 'Nach em Neu-Lade wäg',
   'Nog niet opgeslagen': 'Nonig gspicheret',
   'Buiten de presentatie': 'Usserhalb vo de Präsentation',
   'Van internet': 'Us em Internet',

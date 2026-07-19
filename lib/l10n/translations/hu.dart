@@ -1785,6 +1785,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Bestand niet gevonden': 'A fájl nem található',
+  'Weg na herladen': 'Újratöltés után eltűnt',
   'Nog niet opgeslagen': 'Még nincs mentve',
   'Buiten de presentatie': 'A bemutatón kívül',
   'Van internet': 'Az internetről',

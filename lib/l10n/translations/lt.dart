@@ -1789,6 +1789,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Bestand niet gevonden': 'Failas nerastas',
+  'Weg na herladen': 'Dingo perkrovus',
   'Nog niet opgeslagen': 'Dar neįrašyta',
   'Buiten de presentatie': 'Už pristatymo ribų',
   'Van internet': 'Iš interneto',

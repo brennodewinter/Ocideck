@@ -1799,6 +1799,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Bestand niet gevonden': 'Fișierul nu a fost găsit',
+  'Weg na herladen': 'Pierdut după reîncărcare',
   'Nog niet opgeslagen': 'Încă nesalvat',
   'Buiten de presentatie': 'În afara prezentării',
   'Van internet': 'De pe internet',

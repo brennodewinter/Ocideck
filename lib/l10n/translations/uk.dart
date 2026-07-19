@@ -1799,6 +1799,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Bestand niet gevonden': 'Файл не знайдено',
+  'Weg na herladen': 'Зникло після перезавантаження',
   'Nog niet opgeslagen': 'Ще не збережено',
   'Buiten de presentatie': 'Поза презентацією',
   'Van internet': 'З інтернету',

@@ -1803,6 +1803,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Bestand niet gevonden': 'Il-fajl ma nstabx',
+  'Weg na herladen': 'Intilef wara r-rikarikament',
   'Nog niet opgeslagen': 'Għadu ma ġiex issejvjat',
   'Buiten de presentatie': 'Barra mill-preżentazzjoni',
   'Van internet': 'Mill-internet',

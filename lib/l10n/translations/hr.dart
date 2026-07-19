@@ -1788,6 +1788,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Bestand niet gevonden': 'Datoteka nije pronađena',
+  'Weg na herladen': 'Nestalo nakon ponovnog učitavanja',
   'Nog niet opgeslagen': 'Još nije spremljeno',
   'Buiten de presentatie': 'Izvan prezentacije',
   'Van internet': 'S interneta',

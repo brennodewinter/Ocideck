@@ -1817,6 +1817,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Bestand niet gevonden': 'Comhad gan aimsiú',
+  'Weg na herladen': 'Imithe tar éis athlódála',
   'Nog niet opgeslagen': 'Gan sábháil fós',
   'Buiten de presentatie': 'Lasmuigh den láithreoireacht',
   'Van internet': 'Ón idirlíon',

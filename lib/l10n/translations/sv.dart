@@ -1780,6 +1780,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Bestand niet gevonden': 'Filen hittades inte',
+  'Weg na herladen': 'Borta efter omladdning',
   'Nog niet opgeslagen': 'Inte sparat ännu',
   'Buiten de presentatie': 'Utanför presentationen',
   'Van internet': 'Från internet',

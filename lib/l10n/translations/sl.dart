@@ -1783,6 +1783,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Bestand niet gevonden': 'Datoteke ni mogoče najti',
+  'Weg na herladen': 'Izgubljeno po ponovnem nalaganju',
   'Nog niet opgeslagen': 'Še ni shranjeno',
   'Buiten de presentatie': 'Zunaj predstavitve',
   'Van internet': 'Iz interneta',

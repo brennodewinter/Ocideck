@@ -1780,6 +1780,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Bestand niet gevonden': 'Fails nav atrasts',
+  'Weg na herladen': 'Pazudis pēc pārlādēšanas',
   'Nog niet opgeslagen': 'Vēl nav saglabāts',
   'Buiten de presentatie': 'Ārpus prezentācijas',
   'Van internet': 'No interneta',

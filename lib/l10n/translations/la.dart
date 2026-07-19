@@ -1797,6 +1797,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Bestand niet gevonden': 'Fasciculus non inventus',
+  'Weg na herladen': 'Post paginam iteratam amissum',
   'Nog niet opgeslagen': 'Nondum servatum',
   'Buiten de presentatie': 'Extra praesentationem',
   'Van internet': 'Ex interrete',

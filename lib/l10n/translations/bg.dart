@@ -1804,6 +1804,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Bestand niet gevonden': 'Файлът не е намерен',
+  'Weg na herladen': 'Изчезна след презареждане',
   'Nog niet opgeslagen': 'Още не е запазено',
   'Buiten de presentatie': 'Извън презентацията',
   'Van internet': 'От интернет',

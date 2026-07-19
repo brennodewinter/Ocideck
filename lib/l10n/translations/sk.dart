@@ -1788,6 +1788,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Bestand niet gevonden': 'Súbor sa nenašiel',
+  'Weg na herladen': 'Po opätovnom načítaní preč',
   'Nog niet opgeslagen': 'Zatiaľ neuložené',
   'Buiten de presentatie': 'Mimo prezentácie',
   'Van internet': 'Z internetu',

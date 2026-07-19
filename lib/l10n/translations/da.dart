@@ -1780,6 +1780,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Bestand niet gevonden': 'Filen blev ikke fundet',
+  'Weg na herladen': 'Væk efter genindlæsning',
   'Nog niet opgeslagen': 'Endnu ikke gemt',
   'Buiten de presentatie': 'Uden for præsentationen',
   'Van internet': 'Fra internettet',

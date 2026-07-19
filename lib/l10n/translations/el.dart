@@ -1809,6 +1809,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Bestand niet gevonden': 'Το αρχείο δεν βρέθηκε',
+  'Weg na herladen': 'Χάθηκε μετά την επαναφόρτωση',
   'Nog niet opgeslagen': 'Δεν αποθηκεύτηκε ακόμη',
   'Buiten de presentatie': 'Εκτός της παρουσίασης',
   'Van internet': 'Από το διαδίκτυο',

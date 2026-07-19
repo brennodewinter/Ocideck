@@ -1784,6 +1784,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Bestand niet gevonden': 'Soubor nenalezen',
+  'Weg na herladen': 'Po znovunačtení pryč',
   'Nog niet opgeslagen': 'Zatím neuloženo',
   'Buiten de presentatie': 'Mimo prezentaci',
   'Van internet': 'Z internetu',

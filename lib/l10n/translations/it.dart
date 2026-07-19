@@ -734,6 +734,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Bestand niet gevonden': 'File non trovato',
+  'Weg na herladen': 'Perso dopo il ricaricamento',
   'Nog niet opgeslagen': 'Non ancora salvato',
   'Buiten de presentatie': 'Fuori dalla presentazione',
   'Van internet': 'Da internet',

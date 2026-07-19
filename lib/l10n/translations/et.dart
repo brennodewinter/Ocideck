@@ -1772,6 +1772,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Bestand niet gevonden': 'Faili ei leitud',
+  'Weg na herladen': 'Kadus pärast uuesti laadimist',
   'Nog niet opgeslagen': 'Veel salvestamata',
   'Buiten de presentatie': 'Väljaspool esitlust',
   'Van internet': 'Internetist',
