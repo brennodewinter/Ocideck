@@ -488,15 +488,9 @@ class _NativeGitMirror implements NativeGitMirror {
       await _run(['push', 'origin'], operands: ['HEAD:$branch']);
       return GitCommitResult(GitCommitOutcome.pushed, sha: sha);
     } on GitCliException catch (e) {
-      final lower = e.stderr.toLowerCase();
-      final rejected =
-          lower.contains('non-fast-forward') ||
-          lower.contains('fetch first') ||
-          lower.contains('stale info') ||
-          (lower.contains('rejected') && !lower.contains('resolve'));
       logWarning('NativeGitMirror: push mislukt', e);
       return GitCommitResult(
-        rejected
+        isPushRejection(e.stderr)
             ? GitCommitOutcome.committedConflict
             : GitCommitOutcome.committedOffline,
         sha: sha,

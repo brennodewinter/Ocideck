@@ -249,6 +249,35 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   gedrag waardoor mensen een privacycontrole uitzetten.
 
 ### Fixed
+- **Een afgewezen push werd op een niet-Engelse machine als "offline"
+  weggeschreven.** Wanneer iemand anders je voor is geweest, weigert git je
+  push. OciDeck herkende dat aan de Engelse tekst in zijn uitvoer
+  ("non-fast-forward", "fetch first") — maar git spreekt de taal van de schil,
+  en die werd ongewijzigd doorgegeven. Op een Nederlandse of Duitse machine
+  matchte er niets, werd de afwijzing als storing geclassificeerd, en verdween
+  het werk stil in de wachtrij in plaats van een conflictmelding te geven.
+
+  Het verschil is niet cosmetisch: bij een afwijzing hoor je te zien dát er een
+  conflict is, want anders werk je door op een basis die achterhaald is. `git`
+  draait nu met `LC_ALL=C` (en een lege `LANGUAGE`, want gettext laat die
+  vóórgaan), zodat hij altijd in het Engels antwoordt. De herkenning zelf is
+  een aparte functie geworden, zodat de gevallen te testen zijn zonder een
+  echte remote te hoeven laten weigeren.
+- **Eén weggevallen verbinding was meteen een mislukte actie.** Er zat nergens
+  een tweede poging in: één TCP-hik tijdens het ophalen van een mappenoverzicht
+  of het downloaden van een deck, en je kreeg een foutmelding.
+
+  Leesacties — bladeren, downloaden, de verbindingstest — proberen het nu één
+  keer opnieuw wanneer de verbinding wegviel, met een korte pauze ertussen. Eén
+  keer, want een tweede poging vangt de hik op waar het om gaat en alles daarna
+  is wachten op iets dat structureel stuk is.
+
+  Wat er nadrukkelijk *niet* onder valt: opslaan. Een mislukte upload opnieuw
+  sturen is niet hetzelfde als hem één keer sturen — de bewaking die controleert
+  of er intussen niemand anders heeft geschreven, hangt aan wat er op dát moment
+  op de server staat. Ook een time-out telt niet mee: die kostte je al de volle
+  wachttijd, en er nog een ronde bovenop doen maakt een trage server twee keer
+  zo traag. Een geweigerd wachtwoord evenmin — dat is een antwoord, geen storing.
 - **Een geplakte Nextcloud-DAV-URL wordt opgemerkt in plaats van half
   genegeerd.** Nextcloud toont in zijn eigen instellingenscherm de volledige
   DAV-URL — `https://cloud.example.nl/remote.php/dav/files/jan/Presentaties` —
