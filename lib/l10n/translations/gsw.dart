@@ -1790,6 +1790,17 @@ const _dutchSourceAddGsw = <String, String>{
       'D git-Verbindig vo dere Präsentation git\'s nüme.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Richt zerscht es git-Repository i unter Istellige → Spycher.',
+  'Deze afbeelding toont een herkenbaar gezicht.':
+      'Das Bild zeigt es erkennbars Gsicht.',
+  'Deze afbeelding toont {count} herkenbare gezichten.':
+      'Das Bild zeigt {count} erkennbari Gsichter.',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
+      'Es Bild, wo öpper erkennbar isch, isch es persöönlichs Datum — au ohni Name.',
+  'herkenbaar gezicht op een afbeelding': 'erkennbars Gsicht uf eme Bild',
+  'Afbeeldingen nakijken op herkenbare gezichten':
+      'Bilder uf erkennbari Gsichter prüefe',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.':
+      'Es Bild, wo öpper erkennbar isch, isch es persöönlichs Datum — au ohni Name. Das isch di ufwändigscht Prüefig: jedes Bild wird lokal brächnet. Es wird zellt, öb es Gsicht drufisch — nie wer, und es wird nüt gspeicheret.',
   'Geen meldingen meer op deze slide.': 'Kei Mäldige meh uf dere Folie.',
   'Kwaliteitsproblemen geaccepteerd': 'Qualitätsprobläm akzeptiert',
   'Mogelijk persoonsgegevens': 'Villicht persöönlichi Date',

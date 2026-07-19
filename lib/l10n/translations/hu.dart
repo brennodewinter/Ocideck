@@ -1790,6 +1790,17 @@ const _dutchSourceAddHu = <String, String>{
       'Ennek a bemutatónak a git-kapcsolata már nem létezik.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Előbb állíts be egy git-tárolót a Beállítások → Tárolás alatt.',
+  'Deze afbeelding toont een herkenbaar gezicht.':
+      'Ezen a képen felismerhető arc látható.',
+  'Deze afbeelding toont {count} herkenbare gezichten.':
+      'Ezen a képen {count} felismerhető arc látható.',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
+      'Az a kép, amelyen valaki felismerhető, személyes adat — név nélkül is.',
+  'herkenbaar gezicht op een afbeelding': 'felismerhető arc a képen',
+  'Afbeeldingen nakijken op herkenbare gezichten':
+      'Képek ellenőrzése felismerhető arcokra',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.':
+      'Az a kép, amelyen valaki felismerhető, személyes adat — név nélkül is. Ez a legterhesebb ellenőrzés: minden képet helyben dolgozunk fel. Csak azt számoljuk, van-e arc — soha nem azt, kié, és semmit nem tárolunk.',
   'Geen meldingen meer op deze slide.': 'Nincs több jelzés ezen a dián.',
   'Kwaliteitsproblemen geaccepteerd': 'Minőségi problémák elfogadva',
   'Mogelijk persoonsgegevens': 'Esetleg személyes adat',

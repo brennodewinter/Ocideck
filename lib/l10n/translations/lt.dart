@@ -1794,6 +1794,17 @@ const _dutchSourceAddLt = <String, String>{
       'Šio pristatymo git jungties nebėra.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Pirmiausia nustatykite git saugyklą skiltyje Nustatymai → Saugykla.',
+  'Deze afbeelding toont een herkenbaar gezicht.':
+      'Šiame vaizde matomas atpažįstamas veidas.',
+  'Deze afbeelding toont {count} herkenbare gezichten.':
+      'Šiame vaizde matomi atpažįstami veidai: {count}.',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
+      'Vaizdas, kuriame kas nors atpažįstamas, yra asmens duomenys net ir be vardo.',
+  'herkenbaar gezicht op een afbeelding': 'atpažįstamas veidas vaizde',
+  'Afbeeldingen nakijken op herkenbare gezichten':
+      'Tikrinti vaizdus dėl atpažįstamų veidų',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.':
+      'Vaizdas, kuriame kas nors atpažįstamas, yra asmens duomenys net ir be vardo. Tai sunkiausias patikrinimas: kiekvienas vaizdas apdorojamas vietoje. Skaičiuojama, ar yra veidas, — niekada kieno, ir niekas nesaugoma.',
   'Geen meldingen meer op deze slide.': 'Šioje skaidrėje pranešimų nebeliko.',
   'Kwaliteitsproblemen geaccepteerd': 'Kokybės problemos priimtos',
   'Mogelijk persoonsgegevens': 'Galimi asmens duomenys',

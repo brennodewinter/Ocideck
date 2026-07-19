@@ -1814,6 +1814,17 @@ const _dutchSourceAddEl = <String, String>{
       'Η σύνδεση git αυτής της παρουσίασης δεν υπάρχει πλέον.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Ρυθμίστε πρώτα ένα αποθετήριο git στις Ρυθμίσεις → Αποθήκευση.',
+  'Deze afbeelding toont een herkenbaar gezicht.':
+      'Αυτή η εικόνα δείχνει ένα αναγνωρίσιμο πρόσωπο.',
+  'Deze afbeelding toont {count} herkenbare gezichten.':
+      'Αυτή η εικόνα δείχνει {count} αναγνωρίσιμα πρόσωπα.',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
+      'Μια εικόνα στην οποία κάποιος είναι αναγνωρίσιμος αποτελεί προσωπικό δεδομένο, ακόμη και χωρίς όνομα.',
+  'herkenbaar gezicht op een afbeelding': 'αναγνωρίσιμο πρόσωπο σε εικόνα',
+  'Afbeeldingen nakijken op herkenbare gezichten':
+      'Έλεγχος εικόνων για αναγνωρίσιμα πρόσωπα',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.':
+      'Μια εικόνα στην οποία κάποιος είναι αναγνωρίσιμος αποτελεί προσωπικό δεδομένο, ακόμη και χωρίς όνομα. Αυτός είναι ο βαρύτερος έλεγχος: κάθε εικόνα επεξεργάζεται τοπικά. Μετράται αν υπάρχει πρόσωπο — ποτέ ποιανού, και δεν αποθηκεύεται τίποτα.',
   'Geen meldingen meer op deze slide.':
       'Δεν υπάρχουν άλλα ευρήματα σε αυτή τη διαφάνεια.',
   'Kwaliteitsproblemen geaccepteerd': 'Τα ζητήματα ποιότητας έγιναν αποδεκτά',

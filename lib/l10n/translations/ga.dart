@@ -1822,6 +1822,17 @@ const _dutchSourceAddGa = <String, String>{
       'Níl nasc git na láithreoireachta seo ann a thuilleadh.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Socraigh stóras git ar dtús faoi Socruithe → Stóráil.',
+  'Deze afbeelding toont een herkenbaar gezicht.':
+      'Taispeánann an íomhá seo aghaidh inaitheanta.',
+  'Deze afbeelding toont {count} herkenbare gezichten.':
+      'Taispeánann an íomhá seo {count} aghaidh inaitheanta.',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
+      'Is sonraí pearsanta é íomhá ina bhfuil duine inaitheanta, fiú gan ainm.',
+  'herkenbaar gezicht op een afbeelding': 'aghaidh inaitheanta in íomhá',
+  'Afbeeldingen nakijken op herkenbare gezichten':
+      'Seiceáil íomhánna le haghaidh aghaidheanna inaitheanta',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.':
+      'Is sonraí pearsanta é íomhá ina bhfuil duine inaitheanta, fiú gan ainm. Seo an tseiceáil is troime: próiseáiltear gach íomhá go háitiúil. Comhairtear an bhfuil aghaidh ann — ní hé cé hé riamh, agus ní stóráiltear aon rud.',
   'Geen meldingen meer op deze slide.':
       'Níl aon fholáireamh fágtha ar an sleamhnán seo.',
   'Kwaliteitsproblemen geaccepteerd': 'Fadhbanna cáilíochta glactha',

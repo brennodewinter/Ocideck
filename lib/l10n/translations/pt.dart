@@ -1816,6 +1816,17 @@ const _dutchSourceAddPt = <String, String>{
       'A ligação git desta apresentação já não existe.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Configure primeiro um repositório git em Definições → Armazenamento.',
+  'Deze afbeelding toont een herkenbaar gezicht.':
+      'Esta imagem mostra um rosto reconhecível.',
+  'Deze afbeelding toont {count} herkenbare gezichten.':
+      'Esta imagem mostra {count} rostos reconhecíveis.',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
+      'Uma imagem em que alguém é reconhecível é um dado pessoal, mesmo sem nome.',
+  'herkenbaar gezicht op een afbeelding': 'rosto reconhecível numa imagem',
+  'Afbeeldingen nakijken op herkenbare gezichten':
+      'Verificar imagens quanto a rostos reconhecíveis',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.':
+      'Uma imagem em que alguém é reconhecível é um dado pessoal, mesmo sem nome. Esta é a verificação mais pesada: cada imagem é processada localmente. Conta-se se há um rosto — nunca de quem é, e nada é guardado.',
   'Geen meldingen meer op deze slide.': 'Não há mais avisos neste diapositivo.',
   'Kwaliteitsproblemen geaccepteerd': 'Problemas de qualidade aceites',
   'Mogelijk persoonsgegevens': 'Possíveis dados pessoais',

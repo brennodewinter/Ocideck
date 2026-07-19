@@ -743,6 +743,17 @@ const _dutchSourceAddPap = {
       'E konekshon git di e presentashon akí no ta eksistí mas.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Konfigurá promé un repositorio git na Konfigurashon → Almasenahe.',
+  'Deze afbeelding toont een herkenbaar gezicht.':
+      'E imagen aki ta mustra un kara rekonosibel.',
+  'Deze afbeelding toont {count} herkenbare gezichten.':
+      'E imagen aki ta mustra {count} kara rekonosibel.',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
+      'Un imagen kaminda un hende ta rekonosibel ta un dato personal, asta sin nòmber.',
+  'herkenbaar gezicht op een afbeelding': 'kara rekonosibel den un imagen',
+  'Afbeeldingen nakijken op herkenbare gezichten':
+      'Chek imagennan pa kara rekonosibel',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.':
+      'Un imagen kaminda un hende ta rekonosibel ta un dato personal, asta sin nòmber. Esaki ta e chekeo di mas pisá: tur imagen ta wòrdu prosesá lokalmente. Ta konta si tin un kara — nunka ken e ta, i no ta warda nada.',
   'Geen meldingen meer op deze slide.': 'No tin mas avisonan riba e slide aki.',
   'Kwaliteitsproblemen geaccepteerd': 'Problemanan di kalidat aseptá',
   'Mogelijk persoonsgegevens': 'Posiblemente datonan personal',

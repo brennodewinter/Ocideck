@@ -187,6 +187,7 @@ void main() {
       SlideQualityIssueKind.bulletNestingDeep: {'level': '4'},
       SlideQualityIssueKind.bulletColumnImbalance: {'left': '8', 'right': '1'},
       SlideQualityIssueKind.questionNotAnswerable: {},
+      SlideQualityIssueKind.privacyImage: {'rule': 'image.face', 'sample': '2'},
       SlideQualityIssueKind.privacyIdentifier: {
         'rule': 'nl.bsn',
         'sample': 'j…l',

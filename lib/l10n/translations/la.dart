@@ -1802,6 +1802,17 @@ const _dutchSourceAddLa = <String, String>{
       'Conexio git huius praesentationis non iam exstat.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Prius repositorium git in Optionibus → Repositorio constitue.',
+  'Deze afbeelding toont een herkenbaar gezicht.':
+      'Haec imago vultum agnoscibilem ostendit.',
+  'Deze afbeelding toont {count} herkenbare gezichten.':
+      'Haec imago {count} vultus agnoscibiles ostendit.',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
+      'Imago in qua quis agnosci potest datum personale est, etiam sine nomine.',
+  'herkenbaar gezicht op een afbeelding': 'vultus agnoscibilis in imagine',
+  'Afbeeldingen nakijken op herkenbare gezichten':
+      'Imagines de vultibus agnoscibilibus inspicere',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.':
+      'Imago in qua quis agnosci potest datum personale est, etiam sine nomine. Haec inspectio gravissima est: omnis imago localiter tractatur. Numeratur num vultus adsit — numquam quis sit, nec quicquam servatur.',
   'Geen meldingen meer op deze slide.': 'Nulla monita in hac tabula supersunt.',
   'Kwaliteitsproblemen geaccepteerd': 'Vitia qualitatis accepta',
   'Mogelijk persoonsgegevens': 'Fortasse data personalia',

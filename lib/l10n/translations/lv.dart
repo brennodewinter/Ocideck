@@ -1785,6 +1785,17 @@ const _dutchSourceAddLv = <String, String>{
       'Šīs prezentācijas git savienojuma vairs nav.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Vispirms iestatiet git repozitoriju sadaļā Iestatījumi → Krātuve.',
+  'Deze afbeelding toont een herkenbaar gezicht.':
+      'Šajā attēlā redzama atpazīstama seja.',
+  'Deze afbeelding toont {count} herkenbare gezichten.':
+      'Šajā attēlā redzamas atpazīstamas sejas: {count}.',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
+      'Attēls, kurā kāds ir atpazīstams, ir personas dati arī bez vārda.',
+  'herkenbaar gezicht op een afbeelding': 'atpazīstama seja attēlā',
+  'Afbeeldingen nakijken op herkenbare gezichten':
+      'Pārbaudīt attēlus uz atpazīstamām sejām',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.':
+      'Attēls, kurā kāds ir atpazīstams, ir personas dati arī bez vārda. Šī ir vissmagākā pārbaude: katrs attēls tiek apstrādāts lokāli. Tiek skaitīts, vai ir seja, — nekad kura, un nekas netiek saglabāts.',
   'Geen meldingen meer op deze slide.': 'Šajā slaidā vairs nav ziņojumu.',
   'Kwaliteitsproblemen geaccepteerd': 'Kvalitātes problēmas pieņemtas',
   'Mogelijk persoonsgegevens': 'Iespējami personas dati',

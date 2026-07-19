@@ -2,7 +2,7 @@
 
 > **Generated file — do not edit by hand.** Produced by `dart run tool/generate_sbom.dart` (`make sbom`) from pubspec.lock, assets/web_export/MANIFEST.json, pubspec.yaml and .tool-versions. The machine-readable equivalents are [`ocideck.cdx.json`](ocideck.cdx.json) (CycloneDX 1.6) and [`ocideck.spdx.json`](ocideck.spdx.json) (SPDX 2.3); those carry the SHA-256 hashes and purls. See [`../docs/SBOM.md`](../docs/SBOM.md).
 
-This is **ocideck 0.2.0+1** (licence EUPL-1.2) and every third-party component it ships (197 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
+This is **ocideck 0.2.0+1** (licence EUPL-1.2) and every third-party component it ships (199 in total), direct and transitive — the inventory the EU Cyber Resilience Act (Reg. (EU) 2024/2847, Annex I Part II §1) requires.
 
 ## Licences
 
@@ -10,7 +10,7 @@ This is **ocideck 0.2.0+1** (licence EUPL-1.2) and every third-party component i
 | --- | ---: |
 | BSD-3-Clause | 127 |
 | MIT | 50 |
-| Apache-2.0 | 12 |
+| Apache-2.0 | 14 |
 | OFL-1.1 | 5 |
 | MPL-2.0 | 1 |
 | BSL-1.0 | 1 |
@@ -18,7 +18,7 @@ This is **ocideck 0.2.0+1** (licence EUPL-1.2) and every third-party component i
 
 ## Components
 
-### Dart / Flutter packages (182)
+### Dart / Flutter packages (184)
 
 | Component | Version | Licence | Source |
 | --- | --- | --- | --- |
@@ -43,6 +43,7 @@ This is **ocideck 0.2.0+1** (licence EUPL-1.2) and every third-party component i
 | csslib _(transitive)_ | 1.0.2 | BSD-3-Clause | `pkg:pub/csslib@1.0.2` |
 | cupertino_icons _(direct main)_ | 1.0.9 | MIT | `pkg:pub/cupertino_icons@1.0.9` |
 | dart_quill_delta _(transitive)_ | 10.8.3 | MIT | `pkg:pub/dart_quill_delta@10.8.3` |
+| dartcv4 _(transitive)_ | 1.1.8 | Apache-2.0 | `pkg:pub/dartcv4@1.1.8` |
 | dbus _(transitive)_ | 0.7.13 | MPL-2.0 | `pkg:pub/dbus@0.7.13` |
 | desktop_drop _(direct main)_ | 0.7.1 | Apache-2.0 | `pkg:pub/desktop_drop@0.7.1` |
 | diff_match_patch _(transitive)_ | 0.4.1 | Apache-2.0 | `pkg:pub/diff_match_patch@0.4.1` |
@@ -107,6 +108,7 @@ This is **ocideck 0.2.0+1** (licence EUPL-1.2) and every third-party component i
 | nested _(transitive)_ | 1.0.0 | MIT | `pkg:pub/nested@1.0.0` |
 | node_preamble _(transitive)_ | 2.0.2 | MIT | `pkg:pub/node_preamble@2.0.2` |
 | objective_c _(transitive)_ | 9.4.1 | BSD-3-Clause | `pkg:pub/objective_c@9.4.1` |
+| opencv_core _(direct main)_ | 1.4.5 | Apache-2.0 | `pkg:pub/opencv_core@1.4.5` |
 | package_config _(transitive)_ | 2.2.0 | BSD-3-Clause | `pkg:pub/package_config@2.2.0` |
 | package_info_plus _(transitive)_ | 9.0.1 | BSD-3-Clause | `pkg:pub/package_info_plus@9.0.1` |
 | package_info_plus_platform_interface _(transitive)_ | 3.2.1 | BSD-3-Clause | `pkg:pub/package_info_plus_platform_interface@3.2.1` |

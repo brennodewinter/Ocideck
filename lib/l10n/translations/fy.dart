@@ -744,6 +744,17 @@ const _dutchSourceAddFy = {
       'De git-ferbining fan dizze presintaasje bestiet net mear.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Stel earst in git-repository yn by Ynstellings → Opslach.',
+  'Deze afbeelding toont een herkenbaar gezicht.':
+      'Dizze ôfbylding lit in werkenber gesicht sjen.',
+  'Deze afbeelding toont {count} herkenbare gezichten.':
+      'Dizze ôfbylding lit {count} werkenbere gesichten sjen.',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
+      'In ôfbylding dêr\'t ien werkenber op stiet is in persoansgegeven, ek sûnder namme derby.',
+  'herkenbaar gezicht op een afbeelding': 'werkenber gesicht op in ôfbylding',
+  'Afbeeldingen nakijken op herkenbare gezichten':
+      'Ofbyldings neisjen op werkenbere gesichten',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.':
+      'In ôfbylding dêr\'t ien werkenber op stiet is in persoansgegeven, ek sûnder namme. Dit is de swierste kontrôle: elke ôfbylding wurdt lokaal trochrekkene. Der wurdt teld oft der in gesicht op stiet — nea wa\'t it is, en der wurdt neat bewarre.',
   'Geen meldingen meer op deze slide.': 'Gjin meldingen mear op dizze slide.',
   'Kwaliteitsproblemen geaccepteerd': 'Kwaliteitsproblemen akseptearre',
   'Mogelijk persoonsgegevens': 'Mooglik persoansgegevens',

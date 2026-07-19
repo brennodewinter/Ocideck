@@ -925,6 +925,17 @@ const _dutchSourceAddEn = {
       'The git connection for this deck no longer exists.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Set up a git repository first, under Settings → Storage.',
+  'Deze afbeelding toont een herkenbaar gezicht.':
+      'This image shows a recognisable face.',
+  'Deze afbeelding toont {count} herkenbare gezichten.':
+      'This image shows {count} recognisable faces.',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
+      'An image in which someone is recognisable is personal data, even with no name attached.',
+  'herkenbaar gezicht op een afbeelding': 'recognisable face in an image',
+  'Afbeeldingen nakijken op herkenbare gezichten':
+      'Check images for recognisable faces',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.':
+      'An image in which someone is recognisable is personal data, even with no name attached. This is the heaviest check: every image is processed locally. It counts whether a face is present — never who it is, and nothing is stored.',
   'Geen meldingen meer op deze slide.': 'No findings left on this slide.',
   'Kwaliteitsproblemen geaccepteerd': 'Quality issues accepted',
   'Mogelijk persoonsgegevens': 'Possibly personal data',

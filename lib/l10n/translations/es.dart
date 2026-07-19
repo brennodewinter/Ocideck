@@ -740,6 +740,17 @@ const _dutchSourceAddEs = {
       'La conexión git de esta presentación ya no existe.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Configura primero un repositorio git en Ajustes → Almacenamiento.',
+  'Deze afbeelding toont een herkenbaar gezicht.':
+      'Esta imagen muestra un rostro reconocible.',
+  'Deze afbeelding toont {count} herkenbare gezichten.':
+      'Esta imagen muestra {count} rostros reconocibles.',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
+      'Una imagen en la que alguien es reconocible es un dato personal, incluso sin nombre.',
+  'herkenbaar gezicht op een afbeelding': 'rostro reconocible en una imagen',
+  'Afbeeldingen nakijken op herkenbare gezichten':
+      'Revisar las imágenes en busca de rostros reconocibles',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.':
+      'Una imagen en la que alguien es reconocible es un dato personal, incluso sin nombre. Esta es la comprobación más pesada: cada imagen se procesa localmente. Se cuenta si hay un rostro, nunca de quién es, y no se guarda nada.',
   'Geen meldingen meer op deze slide.': 'No quedan avisos en esta diapositiva.',
   'Kwaliteitsproblemen geaccepteerd': 'Problemas de calidad aceptados',
   'Mogelijk persoonsgegevens': 'Posibles datos personales',

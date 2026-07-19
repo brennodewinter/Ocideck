@@ -33,6 +33,10 @@ void main() {
         'slideQualityAnalyzerProvider',
         // Idem: a stateless scanner; the deck is passed in at call sites.
         'privacyScannerProvider',
+        // Het gezichtsmodel: leest het deck niet, en het laden ervan kost meer
+        // dan de detectie zelf. Per tab overriden zou het model per tab opnieuw
+        // inlezen zonder dat er iets tab-specifieks aan is.
+        'imageFaceScannerProvider',
       };
 
       final appShell = File('lib/widgets/app_shell.dart').readAsStringSync();

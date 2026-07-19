@@ -1793,6 +1793,17 @@ const _dutchSourceAddSk = <String, String>{
       'Pripojenie git tejto prezentácie už neexistuje.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Najprv nastavte git repozitár v Nastavenia → Úložisko.',
+  'Deze afbeelding toont een herkenbaar gezicht.':
+      'Tento obrázok zobrazuje rozpoznateľnú tvár.',
+  'Deze afbeelding toont {count} herkenbare gezichten.':
+      'Tento obrázok zobrazuje rozpoznateľné tváre: {count}.',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
+      'Obrázok, na ktorom je niekto rozpoznateľný, je osobným údajom aj bez mena.',
+  'herkenbaar gezicht op een afbeelding': 'rozpoznateľná tvár na obrázku',
+  'Afbeeldingen nakijken op herkenbare gezichten':
+      'Kontrolovať obrázky na rozpoznateľné tváre',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.':
+      'Obrázok, na ktorom je niekto rozpoznateľný, je osobným údajom aj bez mena. Toto je najnáročnejšia kontrola: každý obrázok sa spracúva lokálne. Počíta sa, či je na ňom tvár — nikdy čia, a nič sa neukladá.',
   'Geen meldingen meer op deze slide.':
       'Na tejto snímke už nie sú žiadne hlásenia.',
   'Kwaliteitsproblemen geaccepteerd': 'Problémy s kvalitou prijaté',

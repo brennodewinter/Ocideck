@@ -1786,6 +1786,17 @@ const _dutchSourceAddFi = <String, String>{
       'Tämän esityksen git-yhteyttä ei enää ole.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Määritä ensin git-arkisto kohdassa Asetukset → Tallennus.',
+  'Deze afbeelding toont een herkenbaar gezicht.':
+      'Tässä kuvassa näkyy tunnistettavat kasvot.',
+  'Deze afbeelding toont {count} herkenbare gezichten.':
+      'Tässä kuvassa näkyy {count} tunnistettavaa kasvoa.',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
+      'Kuva, jossa joku on tunnistettavissa, on henkilötieto myös ilman nimeä.',
+  'herkenbaar gezicht op een afbeelding': 'tunnistettavat kasvot kuvassa',
+  'Afbeeldingen nakijken op herkenbare gezichten':
+      'Tarkista kuvista tunnistettavat kasvot',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.':
+      'Kuva, jossa joku on tunnistettavissa, on henkilötieto myös ilman nimeä. Tämä on raskain tarkistus: jokainen kuva käsitellään paikallisesti. Lasketaan, näkyykö kasvot — ei koskaan kenen, eikä mitään tallenneta.',
   'Geen meldingen meer op deze slide.': 'Tällä dialla ei ole enää ilmoituksia.',
   'Kwaliteitsproblemen geaccepteerd': 'Laatuongelmat hyväksytty',
   'Mogelijk persoonsgegevens': 'Mahdollisesti henkilötietoja',

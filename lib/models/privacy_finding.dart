@@ -32,6 +32,16 @@ enum PrivacyFamily {
 
   /// Lek via metadata, paden, URL's — de verstopplekken in markdown.
   structural,
+
+  /// Een persoon zichtbaar op een afbeelding.
+  ///
+  /// De enige familie die niet uit tekst komt, en daarom de enige die de
+  /// tekstscanner per definitie nooit kan vinden: die leest
+  /// `mem:11162735-…` en concludeert terecht dat daar geen BSN in staat.
+  ///
+  /// Géén art. 9-biometrie: wij stellen aanwezigheid vast, geen identiteit.
+  /// Zie de kop van `image_face_scan.dart`.
+  image,
 }
 
 /// Hoe zeker we zijn dat dit werkelijk een persoonsgegeven is.

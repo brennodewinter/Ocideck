@@ -142,6 +142,8 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       // Standaard AAN: een privacycontrole die je eerst moet aanzetten, helpt
       // precies de mensen niet die niet weten dat ze hem nodig hebben.
       privacyChecksEnabled: prefs.getBool('privacyChecksEnabled') ?? true,
+      privacyImageFaceDetection:
+          prefs.getBool('privacyImageFaceDetection') ?? true,
       // Nooit eerder opgeslagen → de standaard-uitgezette regels. Een lege lijst
       // die de gebruiker zelf heeft gemaakt, blijft leeg: dat is een keuze.
       privacyDisabledRules:
