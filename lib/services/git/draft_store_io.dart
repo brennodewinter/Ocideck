@@ -11,22 +11,64 @@ import 'draft_store.dart';
 /// De werkkopie op desktop: echte bestanden onder de app-support-map, in exact
 /// de repo-layout van §6 — want dat ís de repo, zodra Fase 3 er een clone van
 /// maakt.
-DraftStore createDraftStore() => FileDraftStore();
+DraftStore createDraftStore({String scope = ''}) =>
+    FileDraftStore(scope: scope);
 
 class FileDraftStore implements DraftStore {
-  FileDraftStore({Directory? baseDir})
-    : _resolveDir = baseDir != null ? (() async => baseDir) : _defaultDir;
+  /// [scope] is `GitRepoConfig.storageSlug`: de werkkopie van elke repo krijgt
+  /// een eigen submap. Zonder dat deelden twee repo's met een gelijknamig deck
+  /// dezelfde bestanden. Genegeerd wanneer [baseDir] wordt meegegeven — dan is
+  /// de map al gekozen (de native mirror doet dat, en die scoopt zelf al).
+  FileDraftStore({Directory? baseDir, String scope = ''})
+    : _scope = baseDir != null ? '' : scope,
+      _resolveDir = baseDir != null
+          ? (() async => baseDir)
+          : (() => _defaultDir(scope));
+
+  /// Leeg wanneer de map van buiten kwam: dan scoopt de aanroeper al.
+  final String _scope;
 
   final Future<Directory> Function() _resolveDir;
   Directory? _cached;
 
-  static Future<Directory> _defaultDir() async {
+  static Future<Directory> _defaultDir(String scope) async {
     final support = await getApplicationSupportDirectory();
-    return Directory(p.join(support.path, 'git_mirror'));
+    final root = p.join(support.path, 'git_mirror');
+    return Directory(scope.isEmpty ? root : p.join(root, scope));
   }
 
   @override
   bool get isDurable => true;
+
+  /// De oude, ongescopede werkkopie lag rechtstreeks in `git_mirror/`. Verhuis
+  /// wat daar los staat naar de submap van deze repo. Mappen die zelf een scope
+  /// zijn blijven staan — die horen al bij iemand.
+  ///
+  /// Alleen zinvol wanneer deze store zijn eigen map koos; kreeg hij er een
+  /// mee ([_scope] leeg), dan is er niets te verhuizen.
+  @override
+  Future<int> adoptLegacyEntries() async {
+    final scope = _scope;
+    if (scope.isEmpty) return 0;
+    final support = await getApplicationSupportDirectory();
+    final root = Directory(p.join(support.path, 'git_mirror'));
+    if (!await root.exists()) return 0;
+    final target = await _base();
+    var moved = 0;
+    await for (final entity in root.list(followLinks: false)) {
+      final name = p.basename(entity.path);
+      if (name == scope) continue; // de eigen submap
+      if (entity is! Directory) continue;
+      // Een deckmap heet `decks`; alles daarbuiten is een andere scope of iets
+      // wat wij niet hebben neergezet, en blijft met rust.
+      if (name != GitRepoLayout.decksRoot) continue;
+      final dest = Directory(p.join(target.path, name));
+      if (await dest.exists()) continue; // nieuwe werkkopie wint
+      await entity.rename(dest.path);
+      moved++;
+    }
+    return moved;
+  }
 
   Future<Directory> _base() async {
     final hit = _cached;

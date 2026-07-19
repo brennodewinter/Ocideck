@@ -29,7 +29,7 @@ Future<NativeGitMirror?> createNativeGitMirror({
           p.join(
             (await getApplicationSupportDirectory()).path,
             'git_clone',
-            _slug(config),
+            config.storageSlug,
           ),
         );
   return _NativeGitMirror(
@@ -38,13 +38,6 @@ Future<NativeGitMirror?> createNativeGitMirror({
     token: token,
     worktree: worktree,
   );
-}
-
-/// Een stabiele, veilige mapnaam per repo: host + owner + repo. Eén clone per
-/// repo (§6 — een repo is een vertrouwensgrens).
-String _slug(GitRepoConfig config) {
-  final raw = '${config.host}_${config.owner}_${config.repo}';
-  return raw.replaceAll(RegExp(r'[^A-Za-z0-9._-]+'), '-');
 }
 
 class _NativeGitMirror implements NativeGitMirror {
