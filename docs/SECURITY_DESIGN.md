@@ -298,6 +298,17 @@ block (still resolving and pinning), and only then is plain `http` accepted for
 that user-configured host (so a token isn't sent in the clear on a TLS-less
 internal box). Deck-supplied URLs never reach this relaxed path.
 
+**The native git path gets the same guarantees by a different mechanism.**
+`clone`/`fetch`/`push` run in a `git` subprocess, so there is no socket of ours
+to pin. Instead `native_git_mirror_io.dart` imposes the outcome: the approved
+address is bound to the hostname with `http.curloptResolve` (TLS still validates
+the name), redirects are refused with `http.followRedirects=false` — the token
+rides along as `http.extraHeader`, and headers follow redirects — and the same
+`https`-unless-trusted-internal rule applies. `file://` is exempt as it never
+reaches the network; other schemes are refused. Verified in
+`test/git_network_guard_test.dart`, which also checks that `git` honours the pin
+rather than assuming it.
+
 ## 11. Offline reference data (MIAUW pentest module)
 
 The opt-in "Informatieveiligheid" (pentest reporting) module keeps all reference

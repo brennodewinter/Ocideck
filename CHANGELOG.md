@@ -358,6 +358,29 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   die naar de eerste bytes op de lijn kijkt — een TLS-verbinding begint met een
   handshake-record, platte HTTP met de naam van de methode.
 
+- **De native git-weg ging buiten de adrescontrole om.** Elke uitgaande
+  verbinding in OciDeck wordt geresolved, gefilterd en op het goedgekeurde adres
+  vastgezet — behalve clone, fetch en push. Die draaien in een echt
+  `git`-subproces, en dat deed zijn eigen DNS, zijn eigen omleidingen en zijn
+  eigen verbinding. De server-URL ging er ongetoetst in, zonder adresfiltering
+  en zonder schemacontrole.
+
+  Wat het makkelijk maakte om te missen: wie in Instellingen de git-verbinding
+  testte, gebruikte de REST-weg, en die ís volledig gepind. De guard zien afgaan
+  bewees niets over clone/fetch/push.
+
+  NetGuard eromheen leggen kan niet — er is geen socket van ons om in te haken.
+  Nu krijgt git de uitkomst opgelegd: `http.curloptResolve` bindt de hostnaam aan
+  het goedgekeurde adres (TLS blijft tegen de náám valideren, dus een DNS-rebind
+  kan de bestemming niet meer verzetten), en `http.followRedirects=false` maakt
+  van elke omleiding een fout. Dat laatste weegt hier zwaarder dan elders: het
+  token reist als HTTP-header mee, en een header volgt een omleiding gewoon mee.
+  Verder dezelfde eis als bij WebDAV en S3: https, tenzij de server bewust als
+  vertrouwd intern is gemarkeerd.
+
+  De test toetst niet alleen dat OciDeck de juiste instellingen meegeeft, maar
+  ook dat `git` zich eraan houdt — anders is het een papieren maatregel.
+
 - **De privacyverklaring verzweeg S3 en git.** De toestemmingspoort somt op wat
   het apparaat verlaat, en die opsomming eindigt op een dubbele punt: *"Gegevens
   verlaten dit apparaat alleen als jij dat kiest:"*. Wie zo'n lijst leest, leest

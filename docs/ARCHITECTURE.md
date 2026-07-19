@@ -53,8 +53,8 @@ the hosting origin as telemetry:
 - **S3** (`services/s3/s3_service.dart`) — the endpoint the user configured. There
   is no AWS SDK and no default endpoint: SigV4 is signed by hand precisely so the
   request goes out over the guarded `HttpClient` rather than an SDK's own stack.
-- **Git** (`services/git/`) — the user's own forge, over two different transports;
-  see the gap noted below.
+- **Git** (`services/git/`) — the user's own forge, over two different transports
+  (REST, and a native `git` subprocess); see below for how each is guarded.
 - **CVE database** — an opt-in download.
 - **URL import / remote media** — a link the user pastes.
 
@@ -65,20 +65,31 @@ opt-in exception is a WebDAV, S3 or git host the user has ticked as a *trusted
 internal server* (`NetGuard.safeResolveTrusted`, `WebdavServer.trustedInternal`),
 which allows a private/LAN address over plain `http`.
 
-> **Known gap: the native git path does not go through NetGuard.** Git storage has
-> two transports. The REST forge path (`services/git/git_transport_io.dart`) is
-> fully guarded — resolve, pin, no redirects, plus a same-origin assertion. The
-> native path (`services/git/native_git_mirror_io.dart`) spawns a real `git`
-> subprocess for `clone`/`fetch`/`push`, and that subprocess does its own DNS,
-> its own redirect handling and its own connection: `NetGuard` is not in the
-> call chain, and `baseUrl` reaches it verbatim without a scheme check. The
-> subprocess is otherwise tightly sandboxed (allow-listed environment, no system
-> or global git config, hooks disabled, no terminal prompt, token via
-> `GIT_CONFIG_*`), but the address filtering that every other outbound path gets
-> is absent here. Anyone reading "every outbound request funnels through
-> `net_guard.dart`" should read it as: every outbound request *the app itself*
-> makes. Testing a git connection in Settings exercises the guarded REST path,
-> so the guard firing there does not prove it applies to clone/fetch/push.
+**The native git path is guarded differently, because it is not our socket.**
+Git storage has two transports. The REST forge path
+(`services/git/git_transport_io.dart`) is guarded the usual way — resolve, pin
+via `connectionFactory`, no redirects, plus a same-origin assertion. The native
+path (`services/git/native_git_mirror_io.dart`) spawns a real `git` subprocess
+for `clone`/`fetch`/`push`, so there is no `connectionFactory` to hook: git does
+its own DNS and opens its own connection.
+
+It is therefore guarded by *imposing the outcome* on git rather than by
+intercepting it (`_networkConfig`):
+
+- `http.curloptResolve` binds the hostname to the address `NetGuard` approved, so
+  a DNS rebind cannot move the destination. TLS still validates against the
+  hostname, so no certificate has to be issued to an IP.
+- `http.followRedirects=false` turns any redirect into an error instead of a
+  second, unvalidated host. That matters more here than elsewhere: the token
+  travels as `http.extraHeader`, and a header follows a redirect.
+- The same scheme rule as WebDAV and S3 — `https`, unless the server is
+  deliberately marked *trusted internal*. `file://` is exempt (it never reaches
+  the network); `ssh://` and `git://` are refused outright.
+
+`test/git_network_guard_test.dart` checks both halves: that the app passes this
+config, and that `git` actually honours it — offline, by pinning
+`example.invalid` (a name that by RFC 2606 never resolves) at a local server, so
+a connection that arrives at all can only have come from the pin.
 
 ## Module layout
 
