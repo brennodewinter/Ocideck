@@ -738,6 +738,16 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Servertype': 'Tipo di server',
+  'Nextcloud of ownCloud': 'Nextcloud òf ownCloud',
+  'Andere WebDAV-server': 'Otro server WebDAV',
+  'WebDAV-bron': 'Fuente WebDAV',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Habri i warda presentashonnan den un karpeta riba un server WebDAV. E kontrasenja ta wòrdu wardá sífrá den e yabero, no huntu ku e otro konfigurashonnan.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Habri i warda presentashonnan den un mapa riba un server WebDAV.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'E kaminda den e URL di server ta e rais WebDAV.',
   'Repareer slide': 'Drecha slide',
   'Voortzetting van vorige slide': 'Kontinuashon di e slide anterior',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

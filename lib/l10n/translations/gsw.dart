@@ -1785,6 +1785,16 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Servertype': 'Servertyp',
+  'Nextcloud of ownCloud': 'Nextcloud oder ownCloud',
+  'Andere WebDAV-server': 'En andere WebDAV-Server',
+  'WebDAV-bron': 'WebDAV-Quelle',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Öffne und speicher Präsentatione in eme Ordner uf eme WebDAV-Server. S Passwort wird verschlüsselet im Schlüsselbund gspeicheret, nöd bi de andere Iistellige.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Präsentatione in emene Ordner uf eme WebDAV-Server uufmache und spichere.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'De Pfad i de Server-URL isch d WebDAV-Wurzle.',
   'Repareer slide': 'Slide repariere',
   'Voortzetting van vorige slide': 'Fortsetzig vo dr vorige Folie',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

@@ -1789,6 +1789,16 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Servertype': 'Serverio tipas',
+  'Nextcloud of ownCloud': 'Nextcloud arba ownCloud',
+  'Andere WebDAV-server': 'Kitas WebDAV serveris',
+  'WebDAV-bron': 'WebDAV šaltinis',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Atverkite ir išsaugokite pristatymus WebDAV serverio aplanke. Slaptažodis saugomas šifruotas raktinėje, o ne kartu su kitais nustatymais.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Atverkite ir įrašykite pateiktis aplanke WebDAV serveryje.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'Kelias serverio URL adrese yra WebDAV šaknis.',
   'Repareer slide': 'Taisyti skaidrę',
   'Voortzetting van vorige slide': 'Ankstesnės skaidrės tęsinys',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

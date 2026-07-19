@@ -1756,6 +1756,16 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Servertype': 'De\'wI\' Segh',
+  'Nextcloud of ownCloud': 'Nextcloud ownCloud joq',
+  'Andere WebDAV-server': 'latlh WebDAV De\'wI\'',
+  'WebDAV-bron': 'WebDAV mung',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'WebDAV De\'wI\' ghomDaq cha\'navmey yIpoSmoH yIpol je. mu\'tlhegh polqutlu\' ghewmey velDaq, latlh DuHIvmeymeyDaq QIchbe\'.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'WebDAV De\'wI\'Daq ta\'mey yIpoSmoH \'ej yIpolmoH.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'De\'wI\' URLDaq He \'oH WebDAV mung\'e\'.',
   'Repareer slide': '\'echletHom yItI\'',
   'Voortzetting van vorige slide': '\'echletHom wa\'DIch chu\'Ha\'',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

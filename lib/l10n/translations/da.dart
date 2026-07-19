@@ -1780,6 +1780,16 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Servertype': 'Servertype',
+  'Nextcloud of ownCloud': 'Nextcloud eller ownCloud',
+  'Andere WebDAV-server': 'Anden WebDAV-server',
+  'WebDAV-bron': 'WebDAV-kilde',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Åbn og gem præsentationer i en mappe på en WebDAV-server. Adgangskoden gemmes krypteret i nøgleringen, ikke sammen med de øvrige indstillinger.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Åbn og gem præsentationer i en mappe på en WebDAV-server.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'Stien i server-URL\'en er WebDAV-roden.',
   'Repareer slide': 'Reparer slide',
   'Voortzetting van vorige slide': 'Fortsættelse af forrige dias',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

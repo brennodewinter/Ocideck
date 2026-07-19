@@ -1781,6 +1781,16 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Servertype': 'Jenis server',
+  'Nextcloud of ownCloud': 'Nextcloud atau ownCloud',
+  'Andere WebDAV-server': 'Server WebDAV lainnya',
+  'WebDAV-bron': 'Sumber WebDAV',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Buka dan simpan presentasi di folder pada server WebDAV. Kata sandi disimpan terenkripsi di keychain, tidak bersama pengaturan lainnya.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Buka dan simpan presentasi dalam folder di server WebDAV.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'Jalur pada URL server adalah akar WebDAV.',
   'Repareer slide': 'Perbaiki slide',
   'Voortzetting van vorige slide': 'Lanjutan dari slide sebelumnya',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

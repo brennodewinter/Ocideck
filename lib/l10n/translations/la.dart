@@ -1797,6 +1797,16 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Servertype': 'Genus servitoris',
+  'Nextcloud of ownCloud': 'Nextcloud vel ownCloud',
+  'Andere WebDAV-server': 'Alius servitor WebDAV',
+  'WebDAV-bron': 'Fons WebDAV',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Praesentationes in plica in servitore WebDAV aperi et serva. Tessera cifrata in claviculario servatur, non apud ceteras optiones.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Proscaenia in plica in servitore WebDAV aperi et serva.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'Semita in URL servitoris radix WebDAV est.',
   'Repareer slide': 'Schema reficere',
   'Voortzetting van vorige slide': 'Continuatio paginae praecedentis',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

@@ -1799,6 +1799,16 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Servertype': 'Tip de server',
+  'Nextcloud of ownCloud': 'Nextcloud sau ownCloud',
+  'Andere WebDAV-server': 'Alt server WebDAV',
+  'WebDAV-bron': 'Sursă WebDAV',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Deschide și salvează prezentări într-un folder de pe un server WebDAV. Parola este păstrată criptată în inelul de chei, nu împreună cu celelalte setări.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Deschideți și salvați prezentări într-un folder de pe un server WebDAV.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'Calea din URL-ul serverului este rădăcina WebDAV.',
   'Repareer slide': 'Repară slide-ul',
   'Voortzetting van vorige slide': 'Continuarea diapozitivului anterior',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

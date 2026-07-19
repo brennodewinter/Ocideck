@@ -1785,6 +1785,16 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Servertype': 'Kiszolgáló típusa',
+  'Nextcloud of ownCloud': 'Nextcloud vagy ownCloud',
+  'Andere WebDAV-server': 'Másik WebDAV-kiszolgáló',
+  'WebDAV-bron': 'WebDAV-forrás',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Nyiss meg és ments prezentációkat egy mappában egy WebDAV-kiszolgálón. A jelszó titkosítva a kulcstartóban tárolódik, nem a többi beállítás mellett.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Bemutatók megnyitása és mentése egy WebDAV-kiszolgáló mappájában.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'A kiszolgáló URL-jében szereplő útvonal a WebDAV gyökere.',
   'Repareer slide': 'Dia javítása',
   'Voortzetting van vorige slide': 'Az előző dia folytatása',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

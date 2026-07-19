@@ -1781,6 +1781,16 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Servertype': 'Palvelimen tyyppi',
+  'Nextcloud of ownCloud': 'Nextcloud tai ownCloud',
+  'Andere WebDAV-server': 'Muu WebDAV-palvelin',
+  'WebDAV-bron': 'WebDAV-lähde',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Avaa ja tallenna esityksiä WebDAV-palvelimen kansioon. Salasana tallennetaan salattuna avainnippuun, ei muiden asetusten yhteyteen.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Avaa ja tallenna esityksiä WebDAV-palvelimen kansioon.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'Palvelimen URL-osoitteen polku on WebDAV-juuri.',
   'Repareer slide': 'Korjaa dia',
   'Voortzetting van vorige slide': 'Edellisen dian jatko',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

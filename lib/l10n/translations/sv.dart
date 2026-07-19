@@ -1780,6 +1780,16 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Servertype': 'Servertyp',
+  'Nextcloud of ownCloud': 'Nextcloud eller ownCloud',
+  'Andere WebDAV-server': 'Annan WebDAV-server',
+  'WebDAV-bron': 'WebDAV-källa',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Öppna och spara presentationer i en mapp på en WebDAV-server. Lösenordet lagras krypterat i nyckelringen, inte tillsammans med de övriga inställningarna.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Öppna och spara presentationer i en mapp på en WebDAV-server.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'Sökvägen i server-URL:en är WebDAV-roten.',
   'Repareer slide': 'Åtgärda bild',
   'Voortzetting van vorige slide': 'Fortsättning på föregående bild',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

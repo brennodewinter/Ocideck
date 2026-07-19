@@ -1803,6 +1803,16 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Servertype': 'Tip ta\' server',
+  'Nextcloud of ownCloud': 'Nextcloud jew ownCloud',
+  'Andere WebDAV-server': 'Server WebDAV ieħor',
+  'WebDAV-bron': 'Sors WebDAV',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Iftaħ u ssalva preżentazzjonijiet f\'folder fuq server WebDAV. Il-password tinżamm kriptata fis-sensiela taċ-ċwievet, mhux flimkien mas-settings l-oħra.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Iftaħ u ssejvja preżentazzjonijiet f\'folder fuq server WebDAV.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'Il-mogħdija fl-URL tas-server hija l-għerq WebDAV.',
   'Repareer slide': 'Irranġa l-islajd',
   'Voortzetting van vorige slide': 'Kontinwazzjoni tas-slajd ta\' qabel',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

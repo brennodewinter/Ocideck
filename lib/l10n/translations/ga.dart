@@ -1817,6 +1817,16 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Servertype': 'Cineál freastalaí',
+  'Nextcloud of ownCloud': 'Nextcloud nó ownCloud',
+  'Andere WebDAV-server': 'Freastalaí WebDAV eile',
+  'WebDAV-bron': 'Foinse WebDAV',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Oscail agus sábháil láithreoireachtaí i bhfillteán ar fhreastalaí WebDAV. Stóráiltear an pasfhocal criptithe sa slabhra eochracha, ní in éineacht leis na socruithe eile.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Oscail agus sábháil láithreoireachtaí i bhfillteán ar fhreastalaí WebDAV.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'Is é an chonair in URL an fhreastalaí fréamh WebDAV.',
   'Repareer slide': 'Deisigh an sleamhnán',
   'Voortzetting van vorige slide': 'Leanúint den sleamhnán roimhe seo',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

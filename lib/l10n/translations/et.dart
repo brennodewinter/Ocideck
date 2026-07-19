@@ -1772,6 +1772,16 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Servertype': 'Serveri tüüp',
+  'Nextcloud of ownCloud': 'Nextcloud või ownCloud',
+  'Andere WebDAV-server': 'Muu WebDAV-server',
+  'WebDAV-bron': 'WebDAV-allikas',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Ava ja salvesta esitlused WebDAV-serveri kausta. Parool säilitatakse krüpteeritult võtmehoidlas, mitte muude seadete kõrval.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Avage ja salvestage esitlusi WebDAV-serveri kaustas.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'Serveri URL-i tee on WebDAV-i juur.',
   'Repareer slide': 'Paranda slaid',
   'Voortzetting van vorige slide': 'Eelmise slaidi jätk',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

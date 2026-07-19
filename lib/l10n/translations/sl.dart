@@ -1783,6 +1783,16 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Servertype': 'Vrsta strežnika',
+  'Nextcloud of ownCloud': 'Nextcloud ali ownCloud',
+  'Andere WebDAV-server': 'Drug strežnik WebDAV',
+  'WebDAV-bron': 'Vir WebDAV',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Odpirajte in shranjujte predstavitve v mapo na strežniku WebDAV. Geslo se shrani šifrirano v ključavnici, ne skupaj z ostalimi nastavitvami.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Odpirajte in shranjujte predstavitve v mapi na strežniku WebDAV.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'Pot v naslovu URL strežnika je koren WebDAV.',
   'Repareer slide': 'Popravi prosojnico',
   'Voortzetting van vorige slide': 'Nadaljevanje prejšnje prosojnice',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

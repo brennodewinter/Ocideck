@@ -1809,6 +1809,16 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Servertype': 'Τύπος διακομιστή',
+  'Nextcloud of ownCloud': 'Nextcloud ή ownCloud',
+  'Andere WebDAV-server': 'Άλλος διακομιστής WebDAV',
+  'WebDAV-bron': 'Πηγή WebDAV',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Ανοίξτε και αποθηκεύστε παρουσιάσεις σε έναν φάκελο σε διακομιστή WebDAV. Ο κωδικός αποθηκεύεται κρυπτογραφημένος στην κλειδοθήκη, όχι μαζί με τις υπόλοιπες ρυθμίσεις.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Ανοίξτε και αποθηκεύστε παρουσιάσεις σε έναν φάκελο σε διακομιστή WebDAV.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'Η διαδρομή στη διεύθυνση URL του διακομιστή είναι η ρίζα WebDAV.',
   'Repareer slide': 'Επιδιόρθωση διαφάνειας',
   'Voortzetting van vorige slide': 'Συνέχεια της προηγούμενης διαφάνειας',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
