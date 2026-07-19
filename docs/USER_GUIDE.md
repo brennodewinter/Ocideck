@@ -57,6 +57,9 @@ saved version stays retrievable, which a plain folder cannot give you.
   no token at all.
 - **Self-hosted on a private address**: tick **Trusted internal server**, the
   same safeguard as for Nextcloud.
+- The git entries below only appear in the `…` menu **once a repository is
+  configured**. Until then they are hidden rather than shown-but-failing, so the
+  menu never offers an action that cannot succeed.
 - **Open** via the `…` menu (*Open from git…*): pick a deck and it is fetched,
   checked by the same safety scan as any other deck, and opened. A repository is
   untrusted input — coming from your own forge does not make it trusted.

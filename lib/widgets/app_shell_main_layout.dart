@@ -415,8 +415,6 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
           switch (v) {
             case 'command_palette':
               _openCommandPalette();
-            case 'new_tab':
-              _newInTab();
             case 'open':
               _openWithSearch(context, ref);
             case 'open_git':
@@ -459,8 +457,6 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
               _openFullDeckPreview();
             case 'finalize':
               _finalizeAndSeal();
-            case 'properties':
-              _openProperties();
             case 'settings':
               SettingsDialog.show(context);
           }

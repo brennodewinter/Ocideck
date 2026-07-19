@@ -629,8 +629,9 @@ Future<void> _tagRelease(BuildContext context, WidgetRef ref) async {
 /// Bewust een expliciete handeling: de index leest élk deck en élke uitgebrachte
 /// versie, dus dat bouw je niet per toetsaanslag opnieuw.
 Future<void> _showAssetUsage(BuildContext context, WidgetRef ref) async {
-  final config = ref.read(settingsProvider).gitRepo;
-  if (config == null) return;
+  // Eerst de forge-poort, dán de config: andersom viel een niet-ingestelde
+  // repository stil terug zonder ook maar iets te melden, waardoor het menu-item
+  // in de beleving van de gebruiker gewoon niets deed.
   final forge = await ref.read(gitForgeProvider.future);
   if (!context.mounted) return;
   if (forge == null) {
@@ -645,6 +646,9 @@ Future<void> _showAssetUsage(BuildContext context, WidgetRef ref) async {
     );
     return;
   }
+
+  final config = ref.read(settingsProvider).gitRepo;
+  if (config == null) return;
 
   final messenger = ScaffoldMessenger.of(context);
   final AssetIndexSnapshot snapshot;
@@ -669,8 +673,8 @@ Future<void> _showAssetUsage(BuildContext context, WidgetRef ref) async {
 
 /// Zoek over alle decks in de repo en open de gekozen vindplaats.
 Future<void> _searchDecks(BuildContext context, WidgetRef ref) async {
-  final config = ref.read(settingsProvider).gitRepo;
-  if (config == null) return;
+  // Zie _showAssetUsage: de forge-poort moet vóór de config-check staan, anders
+  // is de melding onbereikbaar en lijkt het item kapot.
   final forge = await ref.read(gitForgeProvider.future);
   if (!context.mounted) return;
   if (forge == null) {
@@ -685,6 +689,9 @@ Future<void> _searchDecks(BuildContext context, WidgetRef ref) async {
     );
     return;
   }
+
+  final config = ref.read(settingsProvider).gitRepo;
+  if (config == null) return;
 
   final deckDir = await showDialog<String>(
     context: context,
