@@ -1,18 +1,32 @@
 import 'package:path/path.dart' as p;
 
-/// Configuratie van één WebDAV/Nextcloud-bron. Bewust géén wachtwoord: dat
-/// staat versleuteld in de keychain (zie `SecretStore`), gekeyd op
-/// [baseUrl] + [username]. Deze waarden mogen wél in het prefs-domein.
+/// Waar een server zijn WebDAV-bestanden onder ophangt. Het protocol is in
+/// beide gevallen gewone WebDAV (PROPFIND/GET/PUT/MKCOL); alleen het pad naar
+/// de wortel verschilt, en dát is het enige wat Nextcloud bijzonder maakt.
+enum WebdavServerKind {
+  /// Nextcloud en ownCloud: bestanden onder `/remote.php/dav/files/<user>`.
+  /// Het pad wordt afgeleid, de gebruiker vult alleen de server-origin in.
+  nextcloud,
+
+  /// Elke andere WebDAV-server. Er valt geen padschema te raden, dus geldt:
+  /// het pad dat in [WebdavServer.baseUrl] staat *is* de DAV-wortel.
+  generic,
+}
+
+/// Configuratie van één WebDAV-bron. Bewust géén wachtwoord: dat staat
+/// versleuteld in de keychain (zie `SecretStore`), gekeyd op [baseUrl] +
+/// [username]. Deze waarden mogen wél in het prefs-domein.
 ///
-/// Nextcloud exposeert de bestanden van een gebruiker onder
-/// `<baseUrl>/remote.php/dav/files/<username>/`. [rootPath] is een optionele
-/// submap daarbinnen waar de browser opent en waar decks landen.
+/// [rootPath] is een optionele submap binnen de DAV-wortel waar de browser
+/// opent en waar decks landen — los van [kind], want die bepaalt alleen waar
+/// de wortel zelf ligt.
 class WebdavServer {
   /// Server-origin zonder pad, bv. `https://cloud.example.com`. Trailing
   /// slashes worden bij het bouwen van URL's genegeerd.
   final String baseUrl;
 
-  /// Nextcloud-gebruikersnaam (ook gebruikt in het DAV-pad).
+  /// Gebruikersnaam voor de aanmelding; bij [WebdavServerKind.nextcloud] ook
+  /// onderdeel van het DAV-pad.
   final String username;
 
   /// Submap binnen de gebruikersbestanden, bv. `/Presentaties`. Leeg = wortel.
@@ -22,11 +36,17 @@ class WebdavServer {
   /// server is; pas dán mag een privé/LAN-host de SSRF-blokkade passeren.
   final bool trustedInternal;
 
+  /// Welk padschema de server aanhoudt. Standaard [WebdavServerKind.nextcloud]
+  /// omdat dat het enige was voordat andere servers ondersteund werden — zo
+  /// blijven bestaande, opgeslagen bronnen zonder migratie werken.
+  final WebdavServerKind kind;
+
   const WebdavServer({
     required this.baseUrl,
     required this.username,
     this.rootPath = '',
     this.trustedInternal = false,
+    this.kind = WebdavServerKind.nextcloud,
   });
 
   bool get isConfigured =>
@@ -46,10 +66,30 @@ class WebdavServer {
     );
   }
 
-  /// Pad-prefix tot aan de gebruikersbestanden:
-  /// `/remote.php/dav/files/<username>`.
-  String get davPrefix =>
-      '/remote.php/dav/files/${Uri.encodeComponent(username.trim())}';
+  /// Gedecodeerde pad-segmenten tot aan de DAV-wortel. Dit is de enige plek
+  /// waar het verschil tussen de servertypes leeft; zowel het bouwen van URL's
+  /// ([davPrefix]) als het terugvertalen van hrefs uit een PROPFIND-antwoord
+  /// leest hiervan af, zodat die twee niet uiteen kunnen lopen.
+  List<String> get davSegments => switch (kind) {
+    WebdavServerKind.nextcloud => [
+      'remote.php',
+      'dav',
+      'files',
+      username.trim(),
+    ],
+    // `pathSegments` decodeert percent-codering, precies wat de href-kant
+    // verwacht. Een URL zonder pad levert een lege lijst: DAV op de wortel.
+    WebdavServerKind.generic =>
+      (Uri.tryParse(baseUrl.trim())?.pathSegments ?? const <String>[])
+          .where((s) => s.isNotEmpty)
+          .toList(),
+  };
+
+  /// Pad-prefix tot aan de DAV-wortel, percent-gecodeerd en zonder trailing
+  /// slash — leeg wanneer de wortel de server-wortel zelf is.
+  String get davPrefix => davSegments.isEmpty
+      ? ''
+      : '/${davSegments.map(Uri.encodeComponent).join('/')}';
 
   /// Normaliseer een door de UI gegeven (mogelijk lege) submap tot een pad dat
   /// met `/` begint en geen trailing slash heeft. Geen `..` toegestaan.
@@ -89,12 +129,14 @@ class WebdavServer {
     String? username,
     String? rootPath,
     bool? trustedInternal,
+    WebdavServerKind? kind,
   }) {
     return WebdavServer(
       baseUrl: baseUrl ?? this.baseUrl,
       username: username ?? this.username,
       rootPath: rootPath ?? this.rootPath,
       trustedInternal: trustedInternal ?? this.trustedInternal,
+      kind: kind ?? this.kind,
     );
   }
 
@@ -103,6 +145,7 @@ class WebdavServer {
     'username': username,
     'rootPath': rootPath,
     'trustedInternal': trustedInternal,
+    'kind': kind.name,
   };
 
   factory WebdavServer.fromJson(Map<String, Object?> json) {
@@ -111,6 +154,13 @@ class WebdavServer {
       username: (json['username'] as String?) ?? '',
       rootPath: (json['rootPath'] as String?) ?? '',
       trustedInternal: (json['trustedInternal'] as bool?) ?? false,
+      // Ontbrekend veld = bron uit een versie van vóór de servertype-keuze;
+      // die was per definitie Nextcloud. Een onbekende waarde valt om
+      // dezelfde reden terug, in plaats van de bron onbruikbaar te maken.
+      kind: WebdavServerKind.values.firstWhere(
+        (k) => k.name == json['kind'],
+        orElse: () => WebdavServerKind.nextcloud,
+      ),
     );
   }
 }
