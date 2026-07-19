@@ -3,7 +3,9 @@
 All notable changes to OciDeck are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and the project aims to follow [Semantic Versioning](https://semver.org/).
+and the project aims to follow [Semantic Versioning](https://semver.org/) once it
+starts tagging releases. It has not yet: everything below is unreleased work on
+`main`.
 
 ## [Unreleased]
 
@@ -2420,15 +2422,18 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   just copy-to-clipboard, so a project-internal symlink pointing outside the
   project can't be rendered into an export.
 
-## [1.0.0]
+## Initial development
+
+This section was headed `[1.0.0]` and linked to a release tag that does not
+exist. Nothing has ever been tagged or released; the entry is kept because it
+records what the first working version could do, but it is not a version.
 
 ### Added
-- Initial release: structured, slide-by-slide editor for Marp presentations with
+- Initial feature set: structured, slide-by-slide editor for Marp presentations with
   typed slide templates, live preview, fullscreen presenter, deck-wide TLP
   marking, media handling, import, and export to Marp Markdown, PDF, PPTX, and
   self-contained HTML. Decks save as a self-contained project/package with copied
   assets. Localized in Dutch, English, Italian, German, French, Spanish, Frisian,
   and Papiamento.
 
-[Unreleased]: https://pawprint.vigilis.online/LibreKAT/Ocideck/compare/v1.0.0...HEAD
-[1.0.0]: https://pawprint.vigilis.online/LibreKAT/Ocideck/releases/tag/v1.0.0
+[Unreleased]: https://pawprint.vigilis.online/LibreKAT/Ocideck/commits/branch/main

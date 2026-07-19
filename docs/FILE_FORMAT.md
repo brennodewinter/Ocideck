@@ -34,7 +34,7 @@ my_presentation/
 │   └── revenue.json
 ├── logos/                          # copied logo from the style profile
 │   └── logo.png
-├── media/                          # video/audio (only in packages, see §7)
+├── media/                          # video/audio, created on save (see §7)
 └── themes/
     └── ocideck.css                 # generated theme CSS (see §5)
 ```
@@ -115,7 +115,7 @@ ocideck_style_profile: <base64url(JSON)>
 | `ocideck_target_seconds` | int | Target duration for the presenter countdown, in seconds. Written only when `> 0`. |
 | `ocideck_show_rehearsal_summary` | `false`/absent | Opt-out of the post-presentation timing summary. Default (shown) stays out of the file; only `false` is written. |
 | `ocideck_play_only` | `true`/absent | Play-only lock. When `true`, the deck opens locked: no editor, toolbar, menus, or export — only the first slide with a play button, presented full screen. Closing the deck restores normal editing. Default (unlocked) stays out of the file; only `true` is written. Removing this key unlocks the deck. |
-| `ocideck_style_profile` | base64url | Complete style profile as JSON (§3.2). |
+| `ocideck_style_profile` | base64url | Complete style profile as JSON (§3.2). **Read-only in practice** — never written to a `.md` or a package; see §3.2. |
 | `ocideck_miauw_waivers` | base64url | MIAUW compliance exclusions as JSON: EIS id → mandatory reason. Written only when non-empty; a corrupt value is ignored. Drives the compliance overview (PENTEST_MIAUW §9). |
 | `ocideck_miauw_confirmations` | base64url | The counterpart of the waivers: MIAUW confirmations as JSON. Same encoding and same "written only when non-empty, corrupt value ignored" rule. |
 | `ocideck_seal_tsr` | base64url | RFC 3161 trusted-timestamp token (`.tsr`) over `ocideck_seal_hash` (PENTEST_MIAUW §8-A2). Written only when present; excluded from the sealed content hash. Verified in-app on open. |
@@ -260,7 +260,19 @@ Two consequences worth knowing about:
 
 ### 3.2 `ocideck_style_profile` (Style Profile)
 
-The complete visual profile is serialized as JSON, UTF-8 encoded, and
+**A saved file never contains this key.** Styling is deliberately kept out of the
+`.md`: the file holds content, and the app applies the active style profile when
+it opens the deck. `generateDeck` only emits the key behind an
+`inlineStyleProfile` flag, and the single caller that passes it is the transient
+markdown streamed to the audience window, which has no other way to learn the
+styling. Both the project writer and the package writer call `generateDeck`
+without it.
+
+So this section describes a key you may need to **read** — in decks from older
+versions, or in that audience stream — but must not expect to find in anything
+you save. Styling travels as `themes/<theme>.css` and the app's own profile.
+
+When present, the complete visual profile is serialized as JSON, UTF-8 encoded, and
 **base64url** encoded on one line. Decode as base64url -> UTF-8 -> JSON. The JSON
 has these fields (with defaults):
 
@@ -812,7 +824,7 @@ losslessly. The heading is the title; the table has a fixed eight-column shape:
 | Object | Type | Standard | Status | Note | C | I | A |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | https://app.example | Web | WSTG | Tested | | H | M | L |
-| 10.0.0.0/24 | Infra | PTES | Anomaly | one host down | | | |
+| 10.0.0.0/24 | Infra | PTES | Deviation | one host down | | | |
 | firmware.bin | Firmware | FSTM |  | | | | |
 ```
 
@@ -910,8 +922,8 @@ Both comments are written on any slide with a non-empty finding id (empty = the
 slide is not part of a finding). The group carries **one id and one severity**
 (derived once from the header's CVSS vector) and moves, deletes and round-trips
 as a unit.
-- The **Status** column holds the MIAUW tri-state as a **stable English word** —
-  `Tested`, `Anomaly`, `Not testable`, or empty (not yet tested) — so the table
+- The **Status** column holds the MIAUW status as a **stable English word** —
+  one of `Tested`, `Anomaly`, `Not testable`, or empty (not yet tested) — so the table
   round-trips regardless of interface language; the editor and preview localise
   it for display. Columns are read **by position**, so a translated or reordered
   header never misroutes a value.
@@ -924,8 +936,11 @@ as a unit.
   none, §10.7), so the standard is **derived from the type** and rewritten on
   save — the type is the source of truth. Type and Status are stable English
   words; columns are read **by position**.
-- The **Status** column is the coverage tri-state: `Tested`, `Anomaly`,
-  `Unreachable`, or empty (not yet tested).
+- The **Status** column holds one of four values: `Tested`, `Deviation`,
+  `Unreachable`, or empty (not yet tested). Note that this is **not** the same
+  vocabulary as the checklist slide, which uses `Anomaly` and `Not testable`;
+  `ScopeStatus.fromToken` silently falls back to *not tested* for anything it
+  does not recognise, so a copied `Anomaly` loses the status without a warning.
 - The tested/total coverage (shown as a progress bar in the app) is **derived**
   from the rows and is not stored.
 

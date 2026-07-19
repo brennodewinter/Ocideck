@@ -37,7 +37,8 @@ service disruption while researching.
 
 ## Scope notes
 
-OciDeck is an offline desktop application. Areas of particular interest:
+OciDeck runs entirely on the machine in front of you — as a desktop app, or
+wholly inside a browser tab. Areas of particular interest:
 
 - Parsing of untrusted decks (`.md`), packages (`.ocideck`), style profiles
   (`.ocideckstyle`), sidecars (`.ink.json`, captions), and linked CSV data.
@@ -188,7 +189,7 @@ JSON** to `<app-support>/recovery/<uuid>.json`, so work survives a crash. This
 means deck content — including a **classified** deck — sits in plaintext on disk
 until the tab is saved or discarded. Mitigations: the directory is the
 per-user, OS-permissioned app-support path; snapshots are deleted on save and on
-"tab became clean"; and orphaned snapshots older than 30 days are pruned on
+"tab became clean"; and orphaned snapshots older than 7 days are pruned on
 startup (`RecoveryService.pruneOlderThan`) so a forgotten crash file can't linger
 indefinitely. Encrypting these snapshots at rest (keyed via the keychain) is a
 known residual improvement, not yet implemented.
@@ -221,5 +222,7 @@ OS-level process isolation. The `com.apple.security.cs.allow-jit` entitlement in
 
 ## Supported versions
 
-Security fixes target the latest released version and the default development
-branch. Older versions may not receive fixes.
+There is no released version yet — `git tag` is empty and the version sits at
+0.2.0. Fixes land on the default development branch, which is what everyone
+runs. Once releases are tagged, fixes will target the latest release plus that
+branch.

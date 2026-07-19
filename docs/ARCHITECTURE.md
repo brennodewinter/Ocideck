@@ -20,8 +20,10 @@ process the user is looking at**: the native app on desktop, and on web the
 browser tab, into which the whole Dart-compiled bundle is downloaded and then
 run. Deck content is never shipped to a server to be processed.
 
-There is **no telemetry, analytics, or tracking** of any kind. The only network
-dependency is `http` (see `pubspec.yaml`) — no Firebase/Sentry/GA/PostHog — and
+There is **no telemetry, analytics, or tracking** of any kind. The only HTTP
+client dependency is `http` (see `pubspec.yaml`) — no Firebase/Sentry/GA/PostHog.
+`video_player` and `webview_flutter` also reach the network, for remote media
+behind the Online-media gate. And
 `web/index.html` ships a strict CSP (`default-src 'self'`; `connect-src 'self'
 https:`) with no third-party scripts. The app never phones home. (The only
 `tracking` strings in `lib/` belong to the *privacy detector*, which flags
@@ -70,7 +72,7 @@ lib/
               # image_reference (.md rewrites), recovery, rasterizer,
               # marp_html, annotation_codec, rehearsal_controller,
               # webdav (Nextcloud source), secret_store (keychain)
-  state/      # Riverpod providers (13 top-level + parts/): deck, editor,
+  state/      # Riverpod providers (top-level + parts/): deck, editor,
               # settings, tabs, clipboard, webdav, git, consent, privacy,
               # info_safety, local_cve, deck_quality, …
   platform/   # conditional-import platform abstraction (io/web halves)
