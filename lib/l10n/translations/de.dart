@@ -738,6 +738,59 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Öffne und bewahre Präsentationen in einem S3-Bucket: AWS S3 oder ein S3-kompatibler Dienst wie ein eigenes MinIO. Der geheime Zugriffsschlüssel wird verschlüsselt im Schlüsselbund abgelegt, nicht bei den übrigen Einstellungen.',
+  'Openen vanuit S3': 'Aus S3 öffnen',
+  'Afbeelding kiezen in S3': 'Bild in S3 auswählen',
+  'Opslaan naar S3': 'In S3 speichern',
+  'Opgeslagen in S3:': 'In S3 gespeichert:',
+  'Hier staat niets': 'Hier ist nichts',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Inhalt konnte nicht geladen werden. Prüfe Verbindung und Einstellungen.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Endpunkt nicht erreichbar — prüfe deine Verbindung und den Endpunkt.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Anmeldung fehlgeschlagen. Prüfe Zugriffsschlüssel, geheimen Schlüssel und Region — eine falsche Region ergibt denselben Fehler wie ein falscher Schlüssel.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Der Endpunkt hat einen Fehler gemeldet. Versuche es später erneut.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Dieser Endpunkt kann nicht bedingt schreiben, dein Werk ist also nicht gegen das eines anderen geschützt. Speichere unter einem neuen Namen, wenn noch jemand an dieser Präsentation arbeitet.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Kein S3-Bucket eingerichtet. Richte einen unter Einstellungen → Speicher ein.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Richte zuerst einen S3-Bucket unter Einstellungen → Speicher ein.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'Der S3-Bucket ist nicht (richtig) eingerichtet — prüfe Endpunkt, Bucket und Schlüssel unter Einstellungen → Speicher.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Dieser Endpunkt ist nicht erlaubt. Markiere einen privaten/LAN-Endpunkt zuerst unter Einstellungen → Speicher als vertrauenswürdig.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Nicht im Bucket gefunden. Stimmt der Bucket-Name, dann probiere die andere Adressierung unter Einstellungen → Speicher.',
+  'S3-bucket': 'S3-Bucket',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'Ein S3-Bucket, zum Beispiel AWS S3 oder ein eigener MinIO-Server.',
+  'Endpoint': 'Endpunkt',
+  'Bucket': 'Bucket',
+  'Adressering': 'Adressierung',
+  'Bucket in de hostnaam (AWS S3)': 'Bucket im Hostnamen (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Bucket im Pfad (MinIO und andere)',
+  'Regio': 'Region',
+  'Access key ID': 'Zugriffsschlüssel-ID',
+  'Secret access key': 'Geheimer Zugriffsschlüssel',
+  'Prefix (optioneel)': 'Präfix (optional)',
+  'Vertrouwd intern endpoint': 'Vertrauenswürdiger interner Endpunkt',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Nötig, wenn der Endpunkt in einem privaten oder Heimnetzwerk (LAN) läuft, etwa ein eigenes MinIO. Erlaube nur Verbindungen zu Servern, denen du selbst vertraust.',
+  'Vul endpoint, bucket en access key ID in':
+      'Endpunkt, Bucket und Zugriffsschlüssel-ID ausfüllen',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Anmeldung fehlgeschlagen — prüfe Zugriffsschlüssel, geheimen Schlüssel und Region. Eine falsche Region ergibt denselben Fehler wie ein falscher Schlüssel.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Der Endpunkt liegt auf einer privaten Adresse. Setze das Häkchen bei "Vertrauenswürdiger interner Endpunkt", um die Verbindung zu erlauben.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Bucket nicht gefunden. Bei einem eigenen MinIO hilft oft die Wahl "Bucket im Pfad".',
+  'Ongeldig endpoint': 'Ungültiger Endpunkt',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Dieser Endpunkt unterstützt kein bedingtes Schreiben; gleichzeitiges Bearbeiten ist hier schlechter geschützt.',
   'Naar de slide': 'Zur Folie',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Die git-Verbindung dieser Präsentation gibt es nicht mehr.',

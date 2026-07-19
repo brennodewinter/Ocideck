@@ -1784,6 +1784,59 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Otevírej a uchovávej prezentace v úložišti S3: AWS S3 nebo služba kompatibilní s S3, třeba vlastní MinIO. Tajný přístupový klíč se ukládá zašifrovaný v klíčence, ne k ostatním nastavením.',
+  'Openen vanuit S3': 'Otevřít z S3',
+  'Afbeelding kiezen in S3': 'Vybrat obrázek v S3',
+  'Opslaan naar S3': 'Uložit do S3',
+  'Opgeslagen in S3:': 'Uloženo do S3:',
+  'Hier staat niets': 'Tady nic není',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Obsah se nepodařilo načíst. Zkontroluj připojení a nastavení.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Koncový bod není dostupný — zkontroluj připojení a koncový bod.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Přihlášení selhalo. Zkontroluj přístupový klíč, tajný klíč a oblast — špatná oblast dá stejnou chybu jako špatný klíč.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Koncový bod vrátil chybu. Zkus to později.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Tento koncový bod neumí podmíněný zápis, takže tvoje práce není chráněná před cizí. Ulož pod novým názvem, pokud na této prezentaci pracuje ještě někdo.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Není nastavené úložiště S3. Nastav ho v Nastavení → Úložiště.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Nejprve nastav úložiště S3 v Nastavení → Úložiště.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'Úložiště S3 není (správně) nastavené — zkontroluj koncový bod, úložiště a klíče v Nastavení → Úložiště.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Tento koncový bod není povolený. Nejprve označ privátní/LAN koncový bod jako důvěryhodný v Nastavení → Úložiště.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Nenalezeno v úložišti. Pokud je název správný, zkus jiné adresování v Nastavení → Úložiště.',
+  'S3-bucket': 'Úložiště S3',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'Úložiště S3, například AWS S3 nebo vlastní server MinIO.',
+  'Endpoint': 'Koncový bod',
+  'Bucket': 'Úložiště',
+  'Adressering': 'Adresování',
+  'Bucket in de hostnaam (AWS S3)': 'Úložiště v názvu hostitele (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Úložiště v cestě (MinIO a další)',
+  'Regio': 'Oblast',
+  'Access key ID': 'ID přístupového klíče',
+  'Secret access key': 'Tajný přístupový klíč',
+  'Prefix (optioneel)': 'Předpona (volitelné)',
+  'Vertrouwd intern endpoint': 'Důvěryhodný interní koncový bod',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Potřebné, když koncový bod běží v privátní nebo domácí síti (LAN), třeba vlastní MinIO. Povoluj připojení jen k serverům, kterým sám důvěřuješ.',
+  'Vul endpoint, bucket en access key ID in':
+      'Vyplň koncový bod, úložiště a ID přístupového klíče',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Přihlášení selhalo — zkontroluj přístupový klíč, tajný klíč a oblast. Špatná oblast dá stejnou chybu jako špatný klíč.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Koncový bod je na privátní adrese. Zaškrtni "Důvěryhodný interní koncový bod", aby bylo připojení povoleno.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Úložiště nenalezeno. U vlastního MinIO často pomůže zvolit "Úložiště v cestě".',
+  'Ongeldig endpoint': 'Neplatný koncový bod',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Tento koncový bod nepodporuje podmíněný zápis; současné úpravy jsou zde hůře chráněné.',
   'Naar de slide': 'Přejít na snímek',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Připojení git této prezentace už neexistuje.',

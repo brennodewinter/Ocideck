@@ -1785,6 +1785,59 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Mach Präsentatione i eme S3-Bucket uuf und bewahr sie det uf: AWS S3, oder en S3-kompatible Dienscht wie es eigets MinIO. De gheimi Zuegriffsschlüssel wird verschlüsslet im Schlüsselbund abgleit, nöd bi de andere Iistellige.',
+  'Openen vanuit S3': 'Us S3 uufmache',
+  'Afbeelding kiezen in S3': 'Bild i S3 uuswähle',
+  'Opslaan naar S3': 'I S3 spichere',
+  'Opgeslagen in S3:': 'I S3 gspicheret:',
+  'Hier staat niets': 'Da isch nüt',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Inhalt het nöd chöne glade werde. Prüef Verbindig und Iistellige.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Ändpunkt nöd erreichbar — prüef dini Verbindig und de Ändpunkt.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Aamäldig fehlgschlage. Prüef Zuegriffsschlüssel, gheime Schlüssel und Region — e falschi Region git dr glich Fähler wie en falsche Schlüssel.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'De Ändpunkt het en Fähler gmäldet. Probier s spöter nomol.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Dä Ändpunkt cha nöd bedingt schriibe, drum isch dini Arbet nöd vor dere vomene andere gschützt. Spicher under eme neue Name, wenn no öpper anders a dere Präsentation schaffet.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Kei S3-Bucket iigrichtet. Richt eine under Iistellige → Spiicher ii.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Richt zerscht en S3-Bucket ii under Iistellige → Spiicher.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'De S3-Bucket isch nöd (richtig) iigrichtet — prüef Ändpunkt, Bucket und Schlüssel under Iistellige → Spiicher.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Dä Ändpunkt isch nöd erlaubt. Markier en private/LAN-Ändpunkt zerscht under Iistellige → Spiicher als vertraut.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Nöd im Bucket gfunde. Stimmt de Name, denn probier di anderi Adressierig under Iistellige → Spiicher.',
+  'S3-bucket': 'S3-Bucket',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'En S3-Bucket, zum Bispil AWS S3 oder en eigene MinIO-Server.',
+  'Endpoint': 'Ändpunkt',
+  'Bucket': 'Bucket',
+  'Adressering': 'Adressierig',
+  'Bucket in de hostnaam (AWS S3)': 'Bucket im Hostname (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Bucket im Pfad (MinIO und anderi)',
+  'Regio': 'Region',
+  'Access key ID': 'Zuegriffsschlüssel-ID',
+  'Secret access key': 'Gheime Zuegriffsschlüssel',
+  'Prefix (optioneel)': 'Präfix (optional)',
+  'Vertrouwd intern endpoint': 'Vertraute intärne Ändpunkt',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Nötig, wenn de Ändpunkt uf eme private oder Heimnetzwärk (LAN) lauft, öppe es eigets MinIO. Erlaub nume Verbindige zu Server, wo du säber vertrousch.',
+  'Vul endpoint, bucket en access key ID in':
+      'Fülle Ändpunkt, Bucket und Zuegriffsschlüssel-ID us',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Aamäldig fehlgschlage — prüef Zuegriffsschlüssel, gheime Schlüssel und Region. E falschi Region git dr glich Fähler wie en falsche Schlüssel.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'De Ändpunkt isch uf ere private Adrässe. Setz s Häkli bi "Vertraute intärne Ändpunkt", damit d Verbindig erlaubt isch.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Bucket nöd gfunde. Bi eme eigete MinIO hilft oft d Uuswahl "Bucket im Pfad".',
+  'Ongeldig endpoint': 'Ungültige Ändpunkt',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Dä Ändpunkt unterstützt kes bedingts Schriibe; glichzitigs Bearbeite isch da schlächter gschützt.',
   'Naar de slide': 'Zur Folie',
   'De git-verbinding van dit deck bestaat niet meer.':
       'D git-Verbindig vo dere Präsentation git\'s nüme.',

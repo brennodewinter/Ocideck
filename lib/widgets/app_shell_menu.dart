@@ -122,7 +122,7 @@ extension _MainLayoutMenu on _MainLayoutState {
       ),
       _menuItem('import_url', Icons.link, l10n.t('importUrl')),
       ..._gitMenuItems(l10n),
-      // ── Nextcloud ─────────────────────────────────────────────────
+      // ── Netwerkbronnen ────────────────────────────────────────────
       if (supportsNetworkDeckSources) ...[
         const PopupMenuDivider(),
         _menuItem(
@@ -134,6 +134,16 @@ extension _MainLayoutMenu on _MainLayoutState {
           'save_nextcloud',
           Icons.cloud_upload_outlined,
           l10n.d('Opslaan naar WebDAV'),
+        ),
+        _menuItem(
+          'open_s3',
+          Icons.inventory_2_outlined,
+          l10n.d('Openen vanuit S3'),
+        ),
+        _menuItem(
+          'save_s3',
+          Icons.inventory_outlined,
+          l10n.d('Opslaan naar S3'),
         ),
       ],
       const PopupMenuDivider(),

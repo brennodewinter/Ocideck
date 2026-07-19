@@ -1783,6 +1783,59 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Odpiraj in hrani predstavitve v vedru S3: AWS S3 ali storitev, združljiva s S3, na primer lasten MinIO. Skrivni ključ za dostop se hrani šifriran v zbirki ključev, ne pri drugih nastavitvah.',
+  'Openen vanuit S3': 'Odpri iz S3',
+  'Afbeelding kiezen in S3': 'Izberi sliko v S3',
+  'Opslaan naar S3': 'Shrani v S3',
+  'Opgeslagen in S3:': 'Shranjeno v S3:',
+  'Hier staat niets': 'Tu ni ničesar',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Vsebine ni bilo mogoče naložiti. Preveri povezavo in nastavitve.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Končna točka ni dosegljiva — preveri povezavo in končno točko.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Prijava ni uspela. Preveri ključ za dostop, skrivni ključ in regijo — napačna regija da enako napako kot napačen ključ.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Končna točka je vrnila napako. Poskusi pozneje.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Ta končna točka ne zna pisati pogojno, zato tvoje delo ni zaščiteno pred tujim. Shrani pod novim imenom, če na tej predstavitvi dela še kdo.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Vedro S3 ni nastavljeno. Nastavi ga v Nastavitve → Shramba.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Najprej nastavi vedro S3 v Nastavitve → Shramba.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'Vedro S3 ni (pravilno) nastavljeno — preveri končno točko, vedro in ključe v Nastavitve → Shramba.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Ta končna točka ni dovoljena. Najprej označi zasebno/LAN končno točko kot zaupanja vredno v Nastavitve → Shramba.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'V vedru ni najdeno. Če je ime pravo, poskusi drugo naslavljanje v Nastavitve → Shramba.',
+  'S3-bucket': 'Vedro S3',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'Vedro S3, na primer AWS S3 ali lasten strežnik MinIO.',
+  'Endpoint': 'Končna točka',
+  'Bucket': 'Vedro',
+  'Adressering': 'Naslavljanje',
+  'Bucket in de hostnaam (AWS S3)': 'Vedro v imenu gostitelja (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Vedro v poti (MinIO in drugi)',
+  'Regio': 'Regija',
+  'Access key ID': 'ID ključa za dostop',
+  'Secret access key': 'Skrivni ključ za dostop',
+  'Prefix (optioneel)': 'Predpona (izbirno)',
+  'Vertrouwd intern endpoint': 'Zaupanja vredna notranja končna točka',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Potrebno, kadar končna točka teče v zasebnem ali domačem omrežju (LAN), na primer lasten MinIO. Dovoli povezave le do strežnikov, ki jim zaupaš.',
+  'Vul endpoint, bucket en access key ID in':
+      'Izpolni končno točko, vedro in ID ključa za dostop',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Prijava ni uspela — preveri ključ za dostop, skrivni ključ in regijo. Napačna regija da enako napako kot napačen ključ.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Končna točka je na zasebnem naslovu. Označi "Zaupanja vredna notranja končna točka", da dovoliš povezavo.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Vedra ni bilo mogoče najti. Pri lastnem MinIO pogosto pomaga izbrati "Vedro v poti".',
+  'Ongeldig endpoint': 'Neveljavna končna točka',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Ta končna točka ne podpira pogojnega pisanja; hkratno urejanje je tu slabše zaščiteno.',
   'Naar de slide': 'Na prosojnico',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Povezava git te predstavitve ne obstaja več.',

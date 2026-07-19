@@ -220,6 +220,32 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
     return _secrets.readWebdavPassword(baseUrl, username);
   }
 
+  /// Schrijf de S3 secret access key versleuteld naar de keychain (gekeyd op
+  /// endpoint + access key id). Een lege waarde wist de entry. Zelfde
+  /// foutafhandeling als [setWebdavPassword], en om dezelfde reden.
+  Future<bool> setS3SecretKey(
+    String endpoint,
+    String accessKeyId,
+    String secretKey,
+  ) async {
+    try {
+      if (secretKey.isEmpty) {
+        await _secrets.deleteS3SecretKey(endpoint, accessKeyId);
+      } else {
+        await _secrets.writeS3SecretKey(endpoint, accessKeyId, secretKey);
+      }
+      return true;
+    } catch (e) {
+      logWarning('SettingsNotifier.setS3SecretKey: keychain mislukt', e);
+      return false;
+    }
+  }
+
+  /// Lees de opgeslagen S3 secret access key uit de keychain, of `null`.
+  Future<String?> readS3SecretKey(String endpoint, String accessKeyId) {
+    return _secrets.readS3SecretKey(endpoint, accessKeyId);
+  }
+
   /// Bewaar de instellingen van de optionele AI-backend (zonder API-sleutel) in
   /// hetzelfde prefs-domein. Wist enkel deze key — nooit het hele domein (zie
   /// geheugen `ocideck-prefs-storage`).

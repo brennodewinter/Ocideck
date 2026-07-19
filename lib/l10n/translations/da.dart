@@ -1780,6 +1780,59 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Åbn og opbevar præsentationer i en S3-bucket: AWS S3 eller en S3-kompatibel tjeneste som din egen MinIO. Den hemmelige adgangsnøgle gemmes krypteret i nøgleringen, ikke sammen med de øvrige indstillinger.',
+  'Openen vanuit S3': 'Åbn fra S3',
+  'Afbeelding kiezen in S3': 'Vælg et billede i S3',
+  'Opslaan naar S3': 'Gem til S3',
+  'Opgeslagen in S3:': 'Gemt i S3:',
+  'Hier staat niets': 'Her er ingenting',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Indholdet kunne ikke indlæses. Kontrollér din forbindelse og dine indstillinger.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Slutpunktet kan ikke nås — kontrollér din forbindelse og slutpunktet.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Login mislykkedes. Kontrollér adgangsnøglen, den hemmelige nøgle og regionen — en forkert region giver samme fejl som en forkert nøgle.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Slutpunktet returnerede en fejl. Prøv igen senere.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Dette slutpunkt kan ikke skrive betinget, så dit arbejde er ikke beskyttet mod en andens. Gem under et nyt navn, hvis andre arbejder på denne præsentation.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Ingen S3-bucket konfigureret. Opsæt en under Indstillinger → Lagring.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Konfigurér først en S3-bucket under Indstillinger → Lagring.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'S3-bucketten er ikke (korrekt) konfigureret — kontrollér slutpunkt, bucket og nøgler under Indstillinger → Lagring.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Dette slutpunkt er ikke tilladt. Markér først et privat/LAN-slutpunkt som betroet under Indstillinger → Lagring.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Ikke fundet i bucketten. Hvis navnet er rigtigt, så prøv den anden adressering under Indstillinger → Lagring.',
+  'S3-bucket': 'S3-bucket',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'En S3-bucket, for eksempel AWS S3 eller din egen MinIO-server.',
+  'Endpoint': 'Slutpunkt',
+  'Bucket': 'Bucket',
+  'Adressering': 'Adressering',
+  'Bucket in de hostnaam (AWS S3)': 'Bucket i værtsnavnet (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Bucket i stien (MinIO og andre)',
+  'Regio': 'Region',
+  'Access key ID': 'Adgangsnøgle-id',
+  'Secret access key': 'Hemmelig adgangsnøgle',
+  'Prefix (optioneel)': 'Præfiks (valgfrit)',
+  'Vertrouwd intern endpoint': 'Betroet internt slutpunkt',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Nødvendigt, når slutpunktet kører på et privat- eller hjemmenetværk (LAN), som din egen MinIO. Tillad kun forbindelser til servere, du selv stoler på.',
+  'Vul endpoint, bucket en access key ID in':
+      'Udfyld slutpunkt, bucket og adgangsnøgle-id',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Login mislykkedes — kontrollér adgangsnøglen, den hemmelige nøgle og regionen. En forkert region giver samme fejl som en forkert nøgle.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Slutpunktet er på en privat adresse. Sæt flueben ved "Betroet internt slutpunkt" for at tillade forbindelsen.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Bucket ikke fundet. Med din egen MinIO hjælper det ofte at vælge "Bucket i stien".',
+  'Ongeldig endpoint': 'Ugyldigt slutpunkt',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Dette slutpunkt understøtter ikke betingede skrivninger; samtidig redigering er dårligere beskyttet her.',
   'Naar de slide': 'Gå til slide',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Git-forbindelsen til denne præsentation findes ikke længere.',

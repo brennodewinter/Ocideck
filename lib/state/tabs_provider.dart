@@ -30,6 +30,7 @@ import '../services/markdown_service.dart';
 import '../services/recovery_service.dart';
 import '../services/user_notes_codec.dart';
 import '../services/web_asset_store.dart';
+import '../services/s3/s3_service.dart';
 import '../services/webdav_service.dart';
 import '../platform/platform_features.dart';
 import '../utils/log.dart';
@@ -38,6 +39,7 @@ import 'editor_provider.dart';
 import 'settings_provider.dart';
 
 part 'tabs_provider_package.dart';
+part 'tabs_provider_s3.dart';
 part 'tabs_provider_git.dart';
 part 'tabs_provider_git_native.dart';
 
@@ -64,6 +66,10 @@ class TabInfo {
   /// gevuld en gelezen; schrijven komt in Fase 2.
   GitOrigin? gitOrigin;
 
+  /// Herkomst wanneer dit deck uit een S3-bucket komt. Los van [webdavOrigin]
+  /// omdat het om een andere bron gaat; een deck heeft er hooguit één.
+  S3Origin? s3Origin;
+
   TabInfo({
     required this.id,
     required this.recoveryId,
@@ -71,6 +77,7 @@ class TabInfo {
     required this.editorNotifier,
     this.webdavOrigin,
     this.gitOrigin,
+    this.s3Origin,
   });
 
   String get label {
@@ -789,14 +796,14 @@ class TabsNotifier extends StateNotifier<TabsState> {
   }
 
   /// Schrijf het deck van [tab] terug naar de WebDAV-bron op [targetPath]
-  /// (relatief aan de wortelmap). Bij [WebdavSaveFormat.ocideck] gaat er één
-  /// pakketbestand omhoog; bij [WebdavSaveFormat.flat] worden de pakket-leden
+  /// (relatief aan de wortelmap). Bij [DeckSaveFormat.ocideck] gaat er één
+  /// pakketbestand omhoog; bij [DeckSaveFormat.flat] worden de pakket-leden
   /// (`.md` + assetmappen) los geüpload in dezelfde map. Werkt de herkomst van
   /// het tabblad bij. Gooit [WebdavException] bij een netwerk-/auth-fout.
   Future<void> saveToWebdav(
     TabInfo tab,
     WebdavService service, {
-    required WebdavSaveFormat format,
+    required DeckSaveFormat format,
     required String targetPath,
     String connectionId = '',
     bool overwrite = false,
@@ -815,7 +822,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
         ? origin.etag
         : null;
     String? savedEtag;
-    if (format == WebdavSaveFormat.ocideck) {
+    if (format == DeckSaveFormat.ocideck) {
       final bytes = await _file.buildPackageBytes(deck);
       savedEtag = await service.upload(targetPath, bytes, ifMatch: guard);
     } else {

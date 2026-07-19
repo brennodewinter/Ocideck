@@ -50,21 +50,21 @@ Everything about *where your decks live* sits under *Settings → Storage*, as o
 list: **File connections**.
 
 A connection is a place your presentations come from and go to. Folders on this
-computer, WebDAV servers and git repositories all sit in that one list, mixed
-together — because the question you actually ask is "where does this client's
+computer, WebDAV servers, S3 buckets and git repositories all sit in that one
+list, mixed together — because the question you actually ask is "where does this client's
 work live?", not "which protocol is this?". Give each one a name (*Client A –
 Nextcloud*, *Private*) so you can tell them apart at a glance.
 
 - **Add** one with *Add connection* and pick the kind. A folder is done as soon
-  as you pick it; a WebDAV server or git repository opens its settings straight
-  away so you can fill them in.
+  as you pick it; a WebDAV server, S3 bucket or git repository opens its
+  settings straight away so you can fill them in.
 - **Order matters.** Drag connections with the handle on the left. The topmost
   usable connection *of each kind* is the default for that kind: it is the
   library that opening and saving start from, and the server the app reaches for
   when it doesn't ask. So promoting a connection is how you say "this client is
   what I'm working on now" — without deleting anything.
-- **Every row shows its status**: the folder name, the server host, or
-  `owner/repo`, in green once the connection is usable and grey while it is
+- **Every row shows its status**: the folder name, the server host, the bucket
+  name, or `owner/repo`, in green once the connection is usable and grey while it is
   still incomplete. A half-filled connection stays in the list; it just doesn't
   count as a usable source.
 - **Export folder** is where exports land. Leave it empty and they land next to
@@ -82,7 +82,42 @@ Upgrading from an older version needs no work: your libraries, your WebDAV
 server and your git repository become connections in that order, so the ones
 that were the default stay the default.
 
-The two network kinds are described in full below.
+The network kinds are described in full below.
+
+## S3 bucket
+
+You can keep decks in an S3 bucket: AWS S3, or any S3-compatible service —
+MinIO on your own server, Ceph, Wasabi, Scaleway, Hetzner.
+
+- **Set it up** on an S3 connection in *Settings → Storage*: the **endpoint**
+  (`https://s3.eu-central-1.amazonaws.com`, or your own
+  `https://minio.example.org`), the **bucket**, the **region**, and an **access
+  key ID** with its **secret access key**. The secret is stored encrypted in
+  your operating system's keychain, never in the settings file.
+- **Addressing** decides where the bucket name goes in the URL. AWS wants it in
+  the host name; most self-hosted endpoints want it in the path. If a bucket
+  that certainly exists comes back as "not found", this is almost always the
+  setting to change.
+- **Region** matters even when it looks like it shouldn't: a wrong region is
+  rejected with the same error as a wrong key. Services that have no regions of
+  their own accept `us-east-1`.
+- **Prefix** is optional and works like a folder: fill in `presentations` and
+  browsing starts there and decks land there.
+- **Trusted internal endpoint** is needed when the endpoint runs on a private or
+  home network, which is the normal case for your own MinIO. Without it the
+  SSRF protection refuses the connection.
+
+**Open and save** through *Open from S3* and *Save to S3* in the file menu. A
+deck you opened from a bucket saves back to that same bucket without asking,
+just as it does for WebDAV and git. You choose between one `.ocideck` package
+and a flat `.md` with its asset folders, exactly as for WebDAV.
+
+One difference from the other kinds is worth knowing. S3 is object storage, not
+a file system, and the guard against two people overwriting each other's work
+depends on the endpoint supporting *conditional writes*. AWS has done so since
+2024; other implementations vary. Where an endpoint doesn't, OciDeck says so
+instead of quietly overwriting — simultaneous editing is less well protected
+there than on WebDAV.
 
 ## Git repository
 

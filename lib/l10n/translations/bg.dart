@@ -1804,6 +1804,59 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Отваряйте и съхранявайте презентации в S3 контейнер: AWS S3 или съвместима с S3 услуга като собствен MinIO. Тайният ключ за достъп се пази шифрован в ключодържателя, а не при останалите настройки.',
+  'Openen vanuit S3': 'Отваряне от S3',
+  'Afbeelding kiezen in S3': 'Избор на изображение в S3',
+  'Opslaan naar S3': 'Запис в S3',
+  'Opgeslagen in S3:': 'Записано в S3:',
+  'Hier staat niets': 'Тук няма нищо',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Съдържанието не можа да се зареди. Провери връзката и настройките.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Крайната точка е недостъпна — провери връзката и крайната точка.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Влизането е неуспешно. Проверете ключа за достъп, тайния ключ и региона — грешен регион дава същата грешка като грешен ключ.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Крайната точка върна грешка. Опитайте по-късно.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Тази крайна точка не може да пише условно, така че работата ви не е защитена от чужда. Запишете под ново име, ако и някой друг работи по тази презентация.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Няма настроен S3 контейнер. Настройте го от Настройки → Съхранение.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Първо настройте S3 контейнер от Настройки → Съхранение.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'S3 контейнерът не е настроен правилно — проверете крайната точка, контейнера и ключовете от Настройки → Съхранение.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Тази крайна точка не е разрешена. Първо отбележете частна/LAN крайна точка като надеждна от Настройки → Съхранение.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Не е намерено в контейнера. Ако името е вярно, опитайте другото адресиране от Настройки → Съхранение.',
+  'S3-bucket': 'S3 контейнер',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'S3 контейнер, например AWS S3 или собствен сървър MinIO.',
+  'Endpoint': 'Крайна точка',
+  'Bucket': 'Контейнер',
+  'Adressering': 'Адресиране',
+  'Bucket in de hostnaam (AWS S3)': 'Контейнер в името на хоста (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Контейнер в пътя (MinIO и други)',
+  'Regio': 'Регион',
+  'Access key ID': 'Идентификатор на ключа за достъп',
+  'Secret access key': 'Таен ключ за достъп',
+  'Prefix (optioneel)': 'Префикс (по избор)',
+  'Vertrouwd intern endpoint': 'Надеждна вътрешна крайна точка',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Необходимо е, когато крайната точка работи в частна или домашна мрежа (LAN), например собствен MinIO. Разрешавай връзки само към сървъри, на които се доверяваш.',
+  'Vul endpoint, bucket en access key ID in':
+      'Попълни крайна точка, контейнер и идентификатор на ключа за достъп',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Влизането е неуспешно — провери ключа за достъп, тайния ключ и региона. Грешен регион дава същата грешка като грешен ключ.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Крайната точка е на частен адрес. Отметни "Надеждна вътрешна крайна точка", за да разрешиш връзката.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Контейнерът не е намерен. При собствен MinIO често помага да избереш "Контейнер в пътя".',
+  'Ongeldig endpoint': 'Невалидна крайна точка',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Тази крайна точка не поддържа условен запис; едновременното редактиране тук е по-слабо защитено.',
   'Naar de slide': 'Към слайда',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Git връзката на тази презентация вече не съществува.',

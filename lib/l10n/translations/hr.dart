@@ -1788,6 +1788,59 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Otvaraj i čuvaj prezentacije u S3 spremniku: AWS S3 ili usluga kompatibilna s S3 poput vlastitog MinIO-a. Tajni pristupni ključ čuva se šifriran u privjesku ključeva, a ne uz ostale postavke.',
+  'Openen vanuit S3': 'Otvori iz S3',
+  'Afbeelding kiezen in S3': 'Odaberi sliku u S3',
+  'Opslaan naar S3': 'Spremi u S3',
+  'Opgeslagen in S3:': 'Spremljeno u S3:',
+  'Hier staat niets': 'Ovdje nema ničega',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Sadržaj nije moguće učitati. Provjeri vezu i postavke.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Krajnja točka nije dostupna — provjeri vezu i krajnju točku.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Prijava nije uspjela. Provjeri pristupni ključ, tajni ključ i regiju — pogrešna regija daje istu pogrešku kao pogrešan ključ.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Krajnja točka vratila je pogrešku. Pokušaj kasnije.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Ova krajnja točka ne može uvjetno pisati, pa tvoj rad nije zaštićen od tuđeg. Spremi pod novim nazivom ako netko drugi radi na ovoj prezentaciji.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Nije postavljen S3 spremnik. Postavi ga u Postavke → Pohrana.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Prvo postavi S3 spremnik u Postavke → Pohrana.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'S3 spremnik nije (ispravno) postavljen — provjeri krajnju točku, spremnik i ključeve u Postavke → Pohrana.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Ova krajnja točka nije dopuštena. Prvo označi privatnu/LAN krajnju točku kao pouzdanu u Postavke → Pohrana.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Nije pronađeno u spremniku. Ako je naziv točan, isprobaj drugo adresiranje u Postavke → Pohrana.',
+  'S3-bucket': 'S3 spremnik',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'S3 spremnik, primjerice AWS S3 ili vlastiti MinIO poslužitelj.',
+  'Endpoint': 'Krajnja točka',
+  'Bucket': 'Spremnik',
+  'Adressering': 'Adresiranje',
+  'Bucket in de hostnaam (AWS S3)': 'Spremnik u nazivu poslužitelja (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Spremnik u putanji (MinIO i drugi)',
+  'Regio': 'Regija',
+  'Access key ID': 'ID pristupnog ključa',
+  'Secret access key': 'Tajni pristupni ključ',
+  'Prefix (optioneel)': 'Prefiks (neobavezno)',
+  'Vertrouwd intern endpoint': 'Pouzdana interna krajnja točka',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Potrebno kada krajnja točka radi na privatnoj ili kućnoj mreži (LAN), poput vlastitog MinIO-a. Dopusti veze samo prema poslužiteljima kojima vjeruješ.',
+  'Vul endpoint, bucket en access key ID in':
+      'Ispuni krajnju točku, spremnik i ID pristupnog ključa',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Prijava nije uspjela — provjeri pristupni ključ, tajni ključ i regiju. Pogrešna regija daje istu pogrešku kao pogrešan ključ.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Krajnja točka je na privatnoj adresi. Označi "Pouzdana interna krajnja točka" da dopustiš vezu.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Spremnik nije pronađen. Uz vlastiti MinIO često pomaže odabrati "Spremnik u putanji".',
+  'Ongeldig endpoint': 'Nevaljana krajnja točka',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Ova krajnja točka ne podržava uvjetno pisanje; istovremeno uređivanje ovdje je slabije zaštićeno.',
   'Naar de slide': 'Na slajd',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Git veza ove prezentacije više ne postoji.',

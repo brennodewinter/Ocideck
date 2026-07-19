@@ -1756,6 +1756,59 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'S3 nagh baSDaq HaSta yIpoSmoH \'ej yIQIj: AWS S3, pagh S3 rurbogh MinIO. pegh ngaQHa\'moH So\'lu\'bogh ngaQHa\'moH nagh ngaSwI\'Daq QIjlu\', latlh DuHIvmeymey rurbe\'.',
+  'Openen vanuit S3': 'S3 yIpoSmoH',
+  'Afbeelding kiezen in S3': 'S3 nagh beQ yIwIv',
+  'Opslaan naar S3': 'S3 yIQIj',
+  'Opgeslagen in S3:': 'S3 QIjlu\':',
+  'Hier staat niets': 'pagh tu\'lu\'',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'qawHaq laDlaHbe\'. rar \'ej DuHIvmeymey yInoH.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Dech SIchlaHbe\' — rar \'ej Dech yInoH.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Qapbe\'. ngaQHa\'moH, pegh ngaQHa\'moH, Sep je yInoH — Sep lughbe\'chugh, ngaQHa\'moH lughbe\'bogh rur Qagh.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Qagh ngeH Dech. tugh yInID.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'qonwI\' chotbe\' Dechvam, vaj Qu\'lIj QanlaHbe\'. latlh vumchugh, pong chu\' yIlo\'.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'S3 nagh baS tu\'lu\'be\'. DuHIvmeymey → waHtaHghach yIchenmoH.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'wa\'DIch DuHIvmeymey → waHtaHghach S3 nagh baS yIchenmoH.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'S3 nagh baS lughbe\' — Dech, nagh baS, ngaQHa\'moH je DuHIvmeymey → waHtaHghach yInoH.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Dechvam chaw\'be\'lu\'. DuHIvmeymey → waHtaHghach vItlhorghqutlu\' yIwIv.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'nagh baSDaq Sambe\'lu\'. pong lughchugh, DuHIvmeymey → waHtaHghach latlh Degh yInID.',
+  'S3-bucket': 'S3 nagh baS',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'S3 nagh baS, ghojmeH AWS S3 pagh MinIO De\'wI\'pIm.',
+  'Endpoint': 'Dech',
+  'Bucket': 'nagh baS',
+  'Adressering': 'Degh',
+  'Bucket in de hostnaam (AWS S3)': 'nagh baS \'oH pongDaq (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'nagh baS \'oH HeDaq (MinIO latlh je)',
+  'Regio': 'Sep',
+  'Access key ID': 'nuHmey ngaQHa\'moH ID',
+  'Secret access key': 'pegh ngaQHa\'moH',
+  'Prefix (optioneel)': 'wa\'DIch (DaH qaSbe\')',
+  'Vertrouwd intern endpoint': 'vItlhorghqutlu\' internal Dech',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'qaStaHvIS Dech pa\' Sep (LAN), MinIO rur. De\'wI\'mey vItlhorghqutlu\'bogh neH yIchaw\'.',
+  'Vul endpoint, bucket en access key ID in':
+      'Dech, nagh baS, ngaQHa\'moH ID je yIbuS',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Qapbe\' — ngaQHa\'moH, pegh ngaQHa\'moH, Sep je yInoH. Sep lughbe\'chugh, ngaQHa\'moH lughbe\'bogh rur Qagh.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'pa\' Dech Degh. "vItlhorghqutlu\' internal Dech" yIwIv \'ej rar yIchaw\'.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'nagh baS Sambe\'lu\'. MinIO Daghajchugh, "nagh baS \'oH HeDaq" yIwIv.',
+  'Ongeldig endpoint': 'Dech lughbe\'',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'qonwI\' chotbe\' Dechvam; wa\' poH chovnatlh QanmeH QaQbe\'.',
   'Naar de slide': '\'anghom yIlegh',
   'De git-verbinding van dit deck bestaat niet meer.':
       'QIchvam git rar tu\'lu\'be\'qu\'.',

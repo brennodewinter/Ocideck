@@ -1781,6 +1781,60 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Buka dan simpan presentasi di bucket S3: AWS S3, atau layanan yang kompatibel dengan S3 seperti MinIO sendiri. Kunci akses rahasia disimpan terenkripsi di gantungan kunci, bukan bersama pengaturan lain.',
+  'Openen vanuit S3': 'Buka dari S3',
+  'Afbeelding kiezen in S3': 'Pilih gambar di S3',
+  'Opslaan naar S3': 'Simpan ke S3',
+  'Opgeslagen in S3:': 'Disimpan ke S3:',
+  'Hier staat niets': 'Tidak ada apa-apa di sini',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Tidak dapat memuat isi. Periksa koneksi dan pengaturan Anda.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Titik akhir tidak dapat dijangkau — periksa koneksi dan titik akhirnya.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Masuk gagal. Periksa kunci akses, kunci rahasia, dan wilayah — wilayah yang salah memberi galat yang sama seperti kunci yang salah.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Titik akhir mengembalikan galat. Coba lagi nanti.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Titik akhir ini tidak bisa menulis bersyarat, jadi pekerjaanmu tidak terlindungi dari pekerjaan orang lain. Simpan dengan nama baru jika ada orang lain yang mengerjakan presentasi ini.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Belum ada bucket S3. Siapkan satu di Pengaturan → Penyimpanan.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Siapkan dulu bucket S3 di Pengaturan → Penyimpanan.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'Bucket S3 belum dikonfigurasi dengan benar — periksa titik akhir, bucket, dan kunci di Pengaturan → Penyimpanan.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Titik akhir ini tidak diizinkan. Tandai dulu titik akhir pribadi/LAN sebagai tepercaya di Pengaturan → Penyimpanan.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Tidak ditemukan di bucket. Jika nama bucket benar, coba pengalamatan lain di Pengaturan → Penyimpanan.',
+  'S3-bucket': 'Bucket S3',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'Bucket S3, misalnya AWS S3 atau server MinIO sendiri.',
+  'Endpoint': 'Titik akhir',
+  'Bucket': 'Bucket',
+  'Adressering': 'Pengalamatan',
+  'Bucket in de hostnaam (AWS S3)': 'Bucket dalam nama host (AWS S3)',
+  'Bucket in het pad (MinIO en andere)':
+      'Bucket dalam jalur (MinIO dan lainnya)',
+  'Regio': 'Wilayah',
+  'Access key ID': 'ID kunci akses',
+  'Secret access key': 'Kunci akses rahasia',
+  'Prefix (optioneel)': 'Awalan (opsional)',
+  'Vertrouwd intern endpoint': 'Titik akhir internal tepercaya',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Diperlukan bila titik akhir berjalan di jaringan pribadi atau rumah (LAN), seperti MinIO sendiri. Izinkan koneksi hanya ke server yang Anda percayai.',
+  'Vul endpoint, bucket en access key ID in':
+      'Isi titik akhir, bucket, dan ID kunci akses',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Masuk gagal — periksa kunci akses, kunci rahasia, dan wilayah. Wilayah yang salah memberi galat yang sama seperti kunci yang salah.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Titik akhir berada di alamat pribadi. Centang "Titik akhir internal tepercaya" untuk mengizinkan koneksi.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Bucket tidak ditemukan. Dengan MinIO sendiri sering membantu memilih "Bucket dalam jalur".',
+  'Ongeldig endpoint': 'Titik akhir tidak valid',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Titik akhir ini tidak mendukung penulisan bersyarat; penyuntingan bersamaan kurang terlindungi di sini.',
   'Naar de slide': 'Ke slide',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Koneksi git untuk presentasi ini tidak ada lagi.',

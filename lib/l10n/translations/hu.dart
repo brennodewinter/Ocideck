@@ -1785,6 +1785,60 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Nyiss meg és tárolj bemutatókat S3 tárolóban: AWS S3, vagy S3-kompatibilis szolgáltatás, például saját MinIO. A titkos hozzáférési kulcs titkosítva a kulcstartóban tárolódik, nem a többi beállítás mellett.',
+  'Openen vanuit S3': 'Megnyitás S3-ból',
+  'Afbeelding kiezen in S3': 'Kép választása S3-ban',
+  'Opslaan naar S3': 'Mentés S3-ba',
+  'Opgeslagen in S3:': 'Mentve S3-ba:',
+  'Hier staat niets': 'Itt nincs semmi',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'A tartalom nem tölthető be. Ellenőrizd a kapcsolatot és a beállításokat.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'A végpont nem érhető el — ellenőrizd a kapcsolatot és a végpontot.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'A bejelentkezés nem sikerült. Ellenőrizd a hozzáférési kulcsot, a titkos kulcsot és a régiót — a rossz régió ugyanazt a hibát adja, mint a rossz kulcs.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'A végpont hibát adott vissza. Próbáld később.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Ez a végpont nem tud feltételesen írni, így a munkád nincs védve másokétól. Ments új néven, ha valaki más is dolgozik ezen a bemutatón.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Nincs beállítva S3 tároló. Állíts be egyet a Beállítások → Tárolás alatt.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Előbb állíts be egy S3 tárolót a Beállítások → Tárolás alatt.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'Az S3 tároló nincs (jól) beállítva — ellenőrizd a végpontot, a tárolót és a kulcsokat a Beállítások → Tárolás alatt.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Ez a végpont nem engedélyezett. Előbb jelöld megbízhatónak a magán-/LAN-végpontot a Beállítások → Tárolás alatt.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Nem található a tárolóban. Ha a név helyes, próbáld a másik címzést a Beállítások → Tárolás alatt.',
+  'S3-bucket': 'S3 tároló',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'S3 tároló, például AWS S3 vagy saját MinIO-kiszolgáló.',
+  'Endpoint': 'Végpont',
+  'Bucket': 'Tároló',
+  'Adressering': 'Címzés',
+  'Bucket in de hostnaam (AWS S3)': 'Tároló a gépnévben (AWS S3)',
+  'Bucket in het pad (MinIO en andere)':
+      'Tároló az útvonalban (MinIO és mások)',
+  'Regio': 'Régió',
+  'Access key ID': 'Hozzáférési kulcs azonosítója',
+  'Secret access key': 'Titkos hozzáférési kulcs',
+  'Prefix (optioneel)': 'Előtag (nem kötelező)',
+  'Vertrouwd intern endpoint': 'Megbízható belső végpont',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Akkor kell, ha a végpont magán- vagy otthoni hálózaton (LAN) fut, például saját MinIO. Csak olyan kiszolgálókhoz engedj kapcsolatot, amelyekben megbízol.',
+  'Vul endpoint, bucket en access key ID in':
+      'Töltsd ki a végpontot, a tárolót és a hozzáférési kulcs azonosítóját',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'A bejelentkezés nem sikerült — ellenőrizd a hozzáférési kulcsot, a titkos kulcsot és a régiót. A rossz régió ugyanazt a hibát adja, mint a rossz kulcs.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'A végpont magáncímen van. Jelöld be a "Megbízható belső végpont" lehetőséget a kapcsolat engedélyezéséhez.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'A tároló nem található. Saját MinIO esetén gyakran segít a "Tároló az útvonalban" választása.',
+  'Ongeldig endpoint': 'Érvénytelen végpont',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Ez a végpont nem támogatja a feltételes írást; az egyidejű szerkesztés itt kevésbé védett.',
   'Naar de slide': 'Ugrás a diára',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Ennek a bemutatónak a git-kapcsolata már nem létezik.',

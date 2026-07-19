@@ -443,6 +443,10 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
               _openFromNextcloud(context, ref);
             case 'save_nextcloud':
               _saveToNextcloud(context, ref);
+            case 'open_s3':
+              _openFromS3(context, ref);
+            case 'save_s3':
+              _saveToS3(context, ref);
             case 'export_package':
               _exportPackage(context, ref);
             case 'import_package':

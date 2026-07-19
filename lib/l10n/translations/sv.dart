@@ -1780,6 +1780,59 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Öppna och förvara presentationer i en S3-hink: AWS S3 eller en S3-kompatibel tjänst som en egen MinIO. Den hemliga åtkomstnyckeln sparas krypterad i nyckelringen, inte tillsammans med övriga inställningar.',
+  'Openen vanuit S3': 'Öppna från S3',
+  'Afbeelding kiezen in S3': 'Välj en bild i S3',
+  'Opslaan naar S3': 'Spara till S3',
+  'Opgeslagen in S3:': 'Sparad i S3:',
+  'Hier staat niets': 'Här finns ingenting',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Det gick inte att läsa in innehållet. Kontrollera anslutning och inställningar.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Slutpunkten kan inte nås — kontrollera anslutningen och slutpunkten.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Inloggningen misslyckades. Kontrollera åtkomstnyckeln, den hemliga nyckeln och regionen — fel region ger samma fel som fel nyckel.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Slutpunkten returnerade ett fel. Försök igen senare.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Den här slutpunkten kan inte skriva villkorligt, så ditt arbete skyddas inte mot någon annans. Spara under ett nytt namn om någon annan arbetar med den här presentationen.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Ingen S3-hink konfigurerad. Ställ in en under Inställningar → Lagring.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Ställ först in en S3-hink under Inställningar → Lagring.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'S3-hinken är inte (rätt) konfigurerad — kontrollera slutpunkt, hink och nycklar under Inställningar → Lagring.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Den här slutpunkten är inte tillåten. Markera först en privat/LAN-slutpunkt som betrodd under Inställningar → Lagring.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Hittades inte i hinken. Om namnet stämmer, prova den andra adresseringen under Inställningar → Lagring.',
+  'S3-bucket': 'S3-hink',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'En S3-hink, till exempel AWS S3 eller en egen MinIO-server.',
+  'Endpoint': 'Slutpunkt',
+  'Bucket': 'Hink',
+  'Adressering': 'Adressering',
+  'Bucket in de hostnaam (AWS S3)': 'Hink i värdnamnet (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Hink i sökvägen (MinIO och andra)',
+  'Regio': 'Region',
+  'Access key ID': 'Åtkomstnyckel-ID',
+  'Secret access key': 'Hemlig åtkomstnyckel',
+  'Prefix (optioneel)': 'Prefix (valfritt)',
+  'Vertrouwd intern endpoint': 'Betrodd intern slutpunkt',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Behövs när slutpunkten körs på ett privat eller hemnätverk (LAN), som en egen MinIO. Tillåt bara anslutningar till servrar du själv litar på.',
+  'Vul endpoint, bucket en access key ID in':
+      'Fyll i slutpunkt, hink och åtkomstnyckel-ID',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Inloggningen misslyckades — kontrollera åtkomstnyckeln, den hemliga nyckeln och regionen. Fel region ger samma fel som fel nyckel.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Slutpunkten ligger på en privat adress. Kryssa i "Betrodd intern slutpunkt" för att tillåta anslutningen.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Hinken hittades inte. Med en egen MinIO hjälper det ofta att välja "Hink i sökvägen".',
+  'Ongeldig endpoint': 'Ogiltig slutpunkt',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Den här slutpunkten stöder inte villkorliga skrivningar; samtidig redigering är sämre skyddad här.',
   'Naar de slide': 'Gå till bilden',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Git-anslutningen för den här presentationen finns inte längre.',

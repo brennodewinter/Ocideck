@@ -738,6 +738,59 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Habri i warda presentashonnan den un bucket di S3: AWS S3, of un servisio kompatibel ku S3 manera bo mes MinIO. E yabi sekreto di akseso ta wardá enkriptá den e yabero, no huntu ku e otro konfigurashonnan.',
+  'Openen vanuit S3': 'Habri for di S3',
+  'Afbeelding kiezen in S3': 'Skohe un imágen den S3',
+  'Opslaan naar S3': 'Warda den S3',
+  'Opgeslagen in S3:': 'Wardá den S3:',
+  'Hier staat niets': 'Aki no tin nada',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'No por a karga e kontenido. Kontrolá bo konekshon i konfigurashon.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Punto final no ta alkansabel — kontrolá bo konekshon i e punto final.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Login a faya. Kontrolá e yabi di akseso, e yabi sekreto i e region — un region robes ta duna e mesun eror ku un yabi robes.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'E punto final a duna un eror. Purba atrobe despues.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'E punto final aki no por skirbi kondishonal, pues bo trabou no ta protehá kontra esun di otro. Warda bou di un nòmber nobo si tin otro hende ta traha riba e presentashon aki.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'No tin bucket di S3 konfigurá. Konfigurá un na Konfigurashon → Almasenamentu.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Promé konfigurá un bucket di S3 na Konfigurashon → Almasenamentu.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'E bucket di S3 no ta konfigurá (bon) — kontrolá e punto final, bucket i yabinan na Konfigurashon → Almasenamentu.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'E punto final aki no ta permití. Marka un punto final privá/LAN promé komo konfiabel na Konfigurashon → Almasenamentu.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'No a haña den e bucket. Si e nòmber ta bon, purba e otro direkshonamentu na Konfigurashon → Almasenamentu.',
+  'S3-bucket': 'Bucket di S3',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'Un bucket di S3, por ehèmpel AWS S3 of bo mes servidó MinIO.',
+  'Endpoint': 'Punto final',
+  'Bucket': 'Bucket',
+  'Adressering': 'Direkshonamentu',
+  'Bucket in de hostnaam (AWS S3)': 'Bucket den e nòmber di host (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Bucket den e kaminda (MinIO i otro)',
+  'Regio': 'Region',
+  'Access key ID': 'ID di yabi di akseso',
+  'Secret access key': 'Yabi sekreto di akseso',
+  'Prefix (optioneel)': 'Prefiho (opshonal)',
+  'Vertrouwd intern endpoint': 'Punto final interno konfiabel',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Nesesario ora e punto final ta kore riba un red privá of di kas (LAN), manera bo mes MinIO. Permití solamente konekshon ku servidónan ku bo ta konfia.',
+  'Vul endpoint, bucket en access key ID in':
+      'Yena e punto final, bucket i ID di yabi di akseso',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Login a faya — kontrolá e yabi di akseso, e yabi sekreto i e region. Un region robes ta duna e mesun eror ku un yabi robes.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'E punto final ta riba un adrès privá. Marka "Punto final interno konfiabel" pa permití konekshon.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'No a haña e bucket. Ku bo mes MinIO hopi biaha ta yuda skohe "Bucket den e kaminda".',
+  'Ongeldig endpoint': 'Punto final inválido',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'E punto final aki no ta soportá skirbimentu kondishonal; editá na mesun momento ta menos protehá akinan.',
   'Naar de slide': 'Bai na e slide',
   'De git-verbinding van dit deck bestaat niet meer.':
       'E konekshon git di e presentashon akí no ta eksistí mas.',

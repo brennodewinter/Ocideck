@@ -1772,6 +1772,59 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Ava ja hoia esitlusi S3 ämbris: AWS S3 või S3-ga ühilduv teenus, näiteks oma MinIO. Salajane juurdepääsuvõti hoitakse krüpteeritult võtmehoidjas, mitte koos teiste seadetega.',
+  'Openen vanuit S3': 'Ava S3-st',
+  'Afbeelding kiezen in S3': 'Vali pilt S3-s',
+  'Opslaan naar S3': 'Salvesta S3-sse',
+  'Opgeslagen in S3:': 'Salvestatud S3-sse:',
+  'Hier staat niets': 'Siin pole midagi',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Sisu ei õnnestunud laadida. Kontrolli ühendust ja seadeid.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Lõpp-punkt pole kättesaadav — kontrolli ühendust ja lõpp-punkti.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Sisselogimine ebaõnnestus. Kontrolli juurdepääsuvõtit, salajast võtit ja piirkonda — vale piirkond annab sama vea nagu vale võti.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Lõpp-punkt tagastas vea. Proovi hiljem uuesti.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'See lõpp-punkt ei oska tingimuslikult kirjutada, seega pole sinu töö teise töö eest kaitstud. Salvesta uue nimega, kui keegi teine samuti seda esitlust teeb.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'S3 ämbrit pole seadistatud. Seadista see kaudu Seaded → Salvestusruum.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Seadista esmalt S3 ämber kaudu Seaded → Salvestusruum.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'S3 ämber pole (õigesti) seadistatud — kontrolli lõpp-punkti, ämbrit ja võtmeid kaudu Seaded → Salvestusruum.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'See lõpp-punkt pole lubatud. Märgi era-/LAN-lõpp-punkt esmalt usaldusväärseks kaudu Seaded → Salvestusruum.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Ämbrist ei leitud. Kui nimi on õige, proovi teist aadressimist kaudu Seaded → Salvestusruum.',
+  'S3-bucket': 'S3 ämber',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'S3 ämber, näiteks AWS S3 või oma MinIO server.',
+  'Endpoint': 'Lõpp-punkt',
+  'Bucket': 'Ämber',
+  'Adressering': 'Aadressimine',
+  'Bucket in de hostnaam (AWS S3)': 'Ämber hostinimes (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Ämber teel (MinIO ja teised)',
+  'Regio': 'Piirkond',
+  'Access key ID': 'Juurdepääsuvõtme ID',
+  'Secret access key': 'Salajane juurdepääsuvõti',
+  'Prefix (optioneel)': 'Eesliide (valikuline)',
+  'Vertrouwd intern endpoint': 'Usaldusväärne sisemine lõpp-punkt',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Vajalik, kui lõpp-punkt töötab era- või koduvõrgus (LAN), näiteks oma MinIO. Luba ühendusi ainult serveritega, mida ise usaldad.',
+  'Vul endpoint, bucket en access key ID in':
+      'Täida lõpp-punkt, ämber ja juurdepääsuvõtme ID',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Sisselogimine ebaõnnestus — kontrolli juurdepääsuvõtit, salajast võtit ja piirkonda. Vale piirkond annab sama vea nagu vale võti.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Lõpp-punkt on privaataadressil. Märgi "Usaldusväärne sisemine lõpp-punkt", et ühendus lubada.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Ämbrit ei leitud. Oma MinIO puhul aitab sageli valida "Ämber teel".',
+  'Ongeldig endpoint': 'Vigane lõpp-punkt',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'See lõpp-punkt ei toeta tingimuslikku kirjutamist; samaaegne muutmine on siin halvemini kaitstud.',
   'Naar de slide': 'Slaidile',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Selle esitluse git-ühendust enam pole.',

@@ -1781,6 +1781,59 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Avaa ja säilytä esityksiä S3-säilössä: AWS S3 tai S3-yhteensopiva palvelu, kuten oma MinIO. Salainen käyttöavain säilytetään salattuna avainnipussa, ei muiden asetusten seassa.',
+  'Openen vanuit S3': 'Avaa S3:sta',
+  'Afbeelding kiezen in S3': 'Valitse kuva S3:sta',
+  'Opslaan naar S3': 'Tallenna S3:een',
+  'Opgeslagen in S3:': 'Tallennettu S3:een:',
+  'Hier staat niets': 'Täällä ei ole mitään',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Sisältöä ei voitu ladata. Tarkista yhteys ja asetukset.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Päätepistettä ei tavoiteta — tarkista yhteys ja päätepiste.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Kirjautuminen epäonnistui. Tarkista käyttöavain, salainen avain ja alue — väärä alue antaa saman virheen kuin väärä avain.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Päätepiste palautti virheen. Yritä myöhemmin uudelleen.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Tämä päätepiste ei osaa kirjoittaa ehdollisesti, joten työsi ei ole suojattu toisen työltä. Tallenna uudella nimellä, jos joku muukin työstää tätä esitystä.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'S3-säilöä ei ole määritetty. Määritä se kohdassa Asetukset → Tallennus.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Määritä ensin S3-säilö kohdassa Asetukset → Tallennus.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'S3-säilöä ei ole määritetty oikein — tarkista päätepiste, säilö ja avaimet kohdassa Asetukset → Tallennus.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Tätä päätepistettä ei sallita. Merkitse yksityinen/LAN-päätepiste ensin luotetuksi kohdassa Asetukset → Tallennus.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Ei löytynyt säilöstä. Jos nimi on oikein, kokeile toista osoitteistusta kohdassa Asetukset → Tallennus.',
+  'S3-bucket': 'S3-säilö',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'S3-säilö, esimerkiksi AWS S3 tai oma MinIO-palvelin.',
+  'Endpoint': 'Päätepiste',
+  'Bucket': 'Säilö',
+  'Adressering': 'Osoitteistus',
+  'Bucket in de hostnaam (AWS S3)': 'Säilö isäntänimessä (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Säilö polussa (MinIO ja muut)',
+  'Regio': 'Alue',
+  'Access key ID': 'Käyttöavaimen tunnus',
+  'Secret access key': 'Salainen käyttöavain',
+  'Prefix (optioneel)': 'Etuliite (valinnainen)',
+  'Vertrouwd intern endpoint': 'Luotettu sisäinen päätepiste',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Tarvitaan, kun päätepiste on yksityisessä tai kotiverkossa (LAN), kuten oma MinIO. Salli yhteydet vain palvelimiin, joihin itse luotat.',
+  'Vul endpoint, bucket en access key ID in':
+      'Täytä päätepiste, säilö ja käyttöavaimen tunnus',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Kirjautuminen epäonnistui — tarkista käyttöavain, salainen avain ja alue. Väärä alue antaa saman virheen kuin väärä avain.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Päätepiste on yksityisessä osoitteessa. Rastita "Luotettu sisäinen päätepiste" salliaksesi yhteyden.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Säilöä ei löytynyt. Oman MinIO:n kanssa auttaa usein valita "Säilö polussa".',
+  'Ongeldig endpoint': 'Virheellinen päätepiste',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Tämä päätepiste ei tue ehdollisia kirjoituksia; samanaikainen muokkaus on täällä heikommin suojattu.',
   'Naar de slide': 'Siirry diaan',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Tämän esityksen git-yhteyttä ei enää ole.',

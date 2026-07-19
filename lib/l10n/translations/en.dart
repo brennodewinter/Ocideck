@@ -920,6 +920,60 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Open and store presentations in an S3 bucket: AWS S3, or an S3-compatible service such as your own MinIO. The secret access key is stored encrypted in the keychain, not with the other settings.',
+  'Openen vanuit S3': 'Open from S3',
+  'Afbeelding kiezen in S3': 'Choose an image in S3',
+  'Opslaan naar S3': 'Save to S3',
+  'Opgeslagen in S3:': 'Saved to S3:',
+  'Hier staat niets': 'Nothing here',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Could not load the contents. Check your connection and settings.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Endpoint unreachable — check your connection and the endpoint.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Sign-in failed. Check the access key, the secret key and the region — a wrong region gives the same error as a wrong key.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'The endpoint returned an error. Try again later.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'This endpoint cannot write conditionally, so your work is not protected against someone else’s. Save under a new name if anyone else is working on this deck.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'No S3 bucket configured. Set one up in Settings → Storage.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'First set up an S3 bucket in Settings → Storage.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'The S3 bucket is not (properly) configured — check the endpoint, bucket and keys in Settings → Storage.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'This endpoint is not allowed. Mark a private/LAN endpoint as trusted in Settings → Storage first.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Not found in the bucket. If the bucket name is right, try the other addressing in Settings → Storage.',
+  'S3-bucket': 'S3 bucket',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'An S3 bucket, for example AWS S3 or your own MinIO server.',
+  'Endpoint': 'Endpoint',
+  'Bucket': 'Bucket',
+  'Adressering': 'Addressing',
+  'Bucket in de hostnaam (AWS S3)': 'Bucket in the host name (AWS S3)',
+  'Bucket in het pad (MinIO en andere)':
+      'Bucket in the path (MinIO and others)',
+  'Regio': 'Region',
+  'Access key ID': 'Access key ID',
+  'Secret access key': 'Secret access key',
+  'Prefix (optioneel)': 'Prefix (optional)',
+  'Vertrouwd intern endpoint': 'Trusted internal endpoint',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Needed when the endpoint runs on a private or home network (LAN), such as your own MinIO. Only allow connections to servers you trust yourself.',
+  'Vul endpoint, bucket en access key ID in':
+      'Fill in endpoint, bucket and access key ID',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Sign-in failed — check the access key, the secret key and the region. A wrong region gives the same error as a wrong key.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'The endpoint is on a private address. Tick "Trusted internal endpoint" to allow the connection.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Bucket not found. With your own MinIO it often helps to choose "Bucket in the path".',
+  'Ongeldig endpoint': 'Invalid endpoint',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'This endpoint does not support conditional writes; simultaneous editing is less well protected here.',
   'Naar de slide': 'Go to slide',
   'De git-verbinding van dit deck bestaat niet meer.':
       'The git connection for this deck no longer exists.',

@@ -74,6 +74,7 @@ class StorageConnectionPicker extends StatelessWidget {
   IconData _iconOf(StorageConnection connection) => switch (connection) {
     LocalConnection() => Icons.folder_outlined,
     WebdavConnection() => Icons.cloud_outlined,
+    S3Connection() => Icons.inventory_2_outlined,
     GitConnection() => Icons.account_tree_outlined,
   };
 }

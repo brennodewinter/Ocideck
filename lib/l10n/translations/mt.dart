@@ -1803,6 +1803,59 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Iftaħ u żomm preżentazzjonijiet f’barmil S3: AWS S3, jew servizz kompatibbli ma’ S3 bħal MinIO tiegħek. Iċ-ċavetta sigrieta tal-aċċess tinżamm kriptata fil-keychain, mhux mas-settings l-oħra.',
+  'Openen vanuit S3': 'Iftaħ minn S3',
+  'Afbeelding kiezen in S3': 'Agħżel stampa f’S3',
+  'Opslaan naar S3': 'Issejvja f’S3',
+  'Opgeslagen in S3:': 'Issejvjat f’S3:',
+  'Hier staat niets': 'M’hawn xejn hawn',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Ma setax jitgħabba l-kontenut. Iċċekkja l-konnessjoni u s-settings.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Il-punt tat-tmiem ma jistax jintlaħaq — iċċekkja l-konnessjoni u l-punt tat-tmiem.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Il-login falla. Iċċekkja ċ-ċavetta tal-aċċess, iċ-ċavetta sigrieta u r-reġjun — reġjun ħażin jagħti l-istess żball bħal ċavetta ħażina.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Il-punt tat-tmiem ta żball. Erġa’ pprova aktar tard.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Dan il-punt tat-tmiem ma jistax jikteb b’mod kondizzjonali, allura x-xogħol tiegħek mhux protett minn ta’ ħaddieħor. Issejvja b’isem ġdid jekk hemm ħaddieħor jaħdem fuq din il-preżentazzjoni.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'L-ebda barmil S3 issettjat. Issettja wieħed f’Settings → Ħażna.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'L-ewwel issettja barmil S3 f’Settings → Ħażna.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'Il-barmil S3 mhux issettjat (sew) — iċċekkja l-punt tat-tmiem, il-barmil u ċ-ċwievet f’Settings → Ħażna.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Dan il-punt tat-tmiem mhux permess. L-ewwel immarka punt tat-tmiem privat/LAN bħala fdat f’Settings → Ħażna.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Ma nstabx fil-barmil. Jekk l-isem huwa tajjeb, ipprova l-indirizzar l-ieħor f’Settings → Ħażna.',
+  'S3-bucket': 'Barmil S3',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'Barmil S3, per eżempju AWS S3 jew server MinIO tiegħek.',
+  'Endpoint': 'Punt tat-tmiem',
+  'Bucket': 'Barmil',
+  'Adressering': 'Indirizzar',
+  'Bucket in de hostnaam (AWS S3)': 'Barmil fl-isem tal-host (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Barmil fil-mogħdija (MinIO u oħrajn)',
+  'Regio': 'Reġjun',
+  'Access key ID': 'ID taċ-ċavetta tal-aċċess',
+  'Secret access key': 'Ċavetta sigrieta tal-aċċess',
+  'Prefix (optioneel)': 'Prefiss (mhux obbligatorju)',
+  'Vertrouwd intern endpoint': 'Punt tat-tmiem intern fdat',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Meħtieġ meta l-punt tat-tmiem jaħdem fuq netwerk privat jew tad-dar (LAN), bħal MinIO tiegħek. Ippermetti biss konnessjonijiet ma’ servers li tafda.',
+  'Vul endpoint, bucket en access key ID in':
+      'Imla l-punt tat-tmiem, il-barmil u l-ID taċ-ċavetta tal-aċċess',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Il-login falla — iċċekkja ċ-ċavetta tal-aċċess, iċ-ċavetta sigrieta u r-reġjun. Reġjun ħażin jagħti l-istess żball bħal ċavetta ħażina.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Il-punt tat-tmiem qiegħed fuq indirizz privat. Immarka "Punt tat-tmiem intern fdat" biex tippermetti l-konnessjoni.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Il-barmil ma nstabx. B’MinIO tiegħek spiss jgħin li tagħżel "Barmil fil-mogħdija".',
+  'Ongeldig endpoint': 'Punt tat-tmiem mhux validu',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Dan il-punt tat-tmiem ma jappoġġjax kitba kondizzjonali; l-editjar simultanju hawn huwa inqas protett.',
   'Naar de slide': 'Mur għall-islajd',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Il-konnessjoni git ta\' din il-preżentazzjoni ma għadhiex teżisti.',

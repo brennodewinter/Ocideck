@@ -1797,6 +1797,59 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Presentationes in situla S3 aperi et serva: AWS S3, vel officium S3-compatibile ut MinIO proprium. Clavis accessus secreta cifrata in claviculario servatur, non apud ceteras optiones.',
+  'Openen vanuit S3': 'Ex S3 aperire',
+  'Afbeelding kiezen in S3': 'Imaginem in S3 eligere',
+  'Opslaan naar S3': 'In S3 servare',
+  'Opgeslagen in S3:': 'In S3 servatum:',
+  'Hier staat niets': 'Hic nihil est',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Contenta onerari non potuerunt. Conexionem et optiones inspice.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Terminus inaccessibilis — conexionem et terminum inspice.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Aditus defecit. Clavem accessus, clavem secretam et regionem inspice — regio falsa eundem errorem dat quam clavis falsa.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Terminus errorem reddidit. Postea itera.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Hic terminus condicionaliter scribere non potest, ergo opus tuum ab alieno non tutum est. Sub novo nomine serva si alius in hac presentatione laborat.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Nulla situla S3 constituta. Unam apud Optiones → Repositorium constitue.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Primum situlam S3 constitue apud Optiones → Repositorium.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'Situla S3 non (recte) constituta est — terminum, situlam et claves apud Optiones → Repositorium inspice.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Hic terminus non permittitur. Terminum privatum/LAN primum ut fidum apud Optiones → Repositorium nota.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'In situla non inventum. Si nomen rectum est, alteram inscriptionem apud Optiones → Repositorium tempta.',
+  'S3-bucket': 'Situla S3',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'Situla S3, exempli gratia AWS S3 vel servator MinIO proprius.',
+  'Endpoint': 'Terminus',
+  'Bucket': 'Situla',
+  'Adressering': 'Inscriptio',
+  'Bucket in de hostnaam (AWS S3)': 'Situla in nomine hospitis (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Situla in semita (MinIO et alii)',
+  'Regio': 'Regio',
+  'Access key ID': 'Identitas clavis accessus',
+  'Secret access key': 'Clavis accessus secreta',
+  'Prefix (optioneel)': 'Praefixum (optionale)',
+  'Vertrouwd intern endpoint': 'Terminus internus fidus',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Necessarium cum terminus in rete privata vel domestica (LAN) currit, ut MinIO proprium. Solas conexiones ad servatores quibus ipse confidis permitte.',
+  'Vul endpoint, bucket en access key ID in':
+      'Terminum, situlam et identitatem clavis accessus imple',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Aditus defecit — clavem accessus, clavem secretam et regionem inspice. Regio falsa eundem errorem dat quam clavis falsa.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Terminus in inscriptione privata est. "Terminum internum fidum" nota ut conexio permittatur.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Situla non inventa. Cum MinIO proprio saepe iuvat "Situlam in semita" eligere.',
+  'Ongeldig endpoint': 'Terminus invalidus',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Hic terminus scripturam condicionalem non sustinet; editio simultanea hic minus tuta est.',
   'Naar de slide': 'Ad tabulam',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Conexio git huius praesentationis non iam exstat.',

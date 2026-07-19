@@ -7,6 +7,7 @@ import 'library_folder.dart';
 import 'recent_file.dart';
 import 'storage_connection.dart';
 import 'git_settings.dart';
+import 's3_settings.dart';
 import 'webdav_settings.dart';
 
 export 'ai_settings.dart';
@@ -14,6 +15,7 @@ export 'checklist_template.dart';
 export 'library_folder.dart';
 export 'recent_file.dart';
 export 'git_settings.dart';
+export 's3_settings.dart';
 export 'webdav_settings.dart';
 
 part 'parts/app_appearance_profile.dart';
@@ -688,6 +690,10 @@ class AppSettings {
   /// zonder keuze van de gebruiker één server nodig hebben lezen hier.
   WebdavServer? get webdavServer =>
       (primaryOf(StorageConnectionKind.webdav) as WebdavConnection?)?.server;
+
+  /// De standaard-S3-bucket, langs dezelfde regel als [webdavServer].
+  S3Bucket? get s3Bucket =>
+      (primaryOf(StorageConnectionKind.s3) as S3Connection?)?.bucket;
 
   /// De standaard-git-repository, langs dezelfde regel als [webdavServer].
   GitRepoConfig? get gitRepo =>

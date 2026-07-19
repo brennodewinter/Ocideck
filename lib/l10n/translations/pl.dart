@@ -1793,6 +1793,59 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Otwieraj i przechowuj prezentacje w zasobniku S3: AWS S3 lub usłudze zgodnej z S3, na przykład własnym MinIO. Tajny klucz dostępu jest przechowywany zaszyfrowany w pęku kluczy, a nie razem z pozostałymi ustawieniami.',
+  'Openen vanuit S3': 'Otwórz z S3',
+  'Afbeelding kiezen in S3': 'Wybierz obraz w S3',
+  'Opslaan naar S3': 'Zapisz w S3',
+  'Opgeslagen in S3:': 'Zapisano w S3:',
+  'Hier staat niets': 'Tu nic nie ma',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Nie udało się wczytać zawartości. Sprawdź połączenie i ustawienia.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Punkt końcowy nieosiągalny — sprawdź połączenie i punkt końcowy.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Logowanie nie powiodło się. Sprawdź klucz dostępu, klucz tajny i region — zły region daje ten sam błąd co zły klucz.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Punkt końcowy zwrócił błąd. Spróbuj później.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Ten punkt końcowy nie potrafi zapisywać warunkowo, więc twoja praca nie jest chroniona przed cudzą. Zapisz pod nową nazwą, jeśli ktoś jeszcze pracuje nad tą prezentacją.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Nie skonfigurowano zasobnika S3. Skonfiguruj go w Ustawienia → Przechowywanie.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Najpierw skonfiguruj zasobnik S3 w Ustawienia → Przechowywanie.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'Zasobnik S3 nie jest (dobrze) skonfigurowany — sprawdź punkt końcowy, zasobnik i klucze w Ustawienia → Przechowywanie.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Ten punkt końcowy jest niedozwolony. Najpierw oznacz prywatny punkt końcowy/LAN jako zaufany w Ustawienia → Przechowywanie.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Nie znaleziono w zasobniku. Jeśli nazwa jest poprawna, wypróbuj inne adresowanie w Ustawienia → Przechowywanie.',
+  'S3-bucket': 'Zasobnik S3',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'Zasobnik S3, na przykład AWS S3 lub własny serwer MinIO.',
+  'Endpoint': 'Punkt końcowy',
+  'Bucket': 'Zasobnik',
+  'Adressering': 'Adresowanie',
+  'Bucket in de hostnaam (AWS S3)': 'Zasobnik w nazwie hosta (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Zasobnik w ścieżce (MinIO i inne)',
+  'Regio': 'Region',
+  'Access key ID': 'Identyfikator klucza dostępu',
+  'Secret access key': 'Tajny klucz dostępu',
+  'Prefix (optioneel)': 'Prefiks (opcjonalnie)',
+  'Vertrouwd intern endpoint': 'Zaufany wewnętrzny punkt końcowy',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Potrzebne, gdy punkt końcowy działa w sieci prywatnej lub domowej (LAN), na przykład własne MinIO. Zezwalaj na połączenia tylko z serwerami, którym ufasz.',
+  'Vul endpoint, bucket en access key ID in':
+      'Wypełnij punkt końcowy, zasobnik i identyfikator klucza dostępu',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Logowanie nie powiodło się — sprawdź klucz dostępu, klucz tajny i region. Zły region daje ten sam błąd co zły klucz.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Punkt końcowy jest pod adresem prywatnym. Zaznacz "Zaufany wewnętrzny punkt końcowy", aby zezwolić na połączenie.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Nie znaleziono zasobnika. Przy własnym MinIO często pomaga wybór "Zasobnik w ścieżce".',
+  'Ongeldig endpoint': 'Nieprawidłowy punkt końcowy',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Ten punkt końcowy nie obsługuje zapisu warunkowego; jednoczesna edycja jest tu gorzej chroniona.',
   'Naar de slide': 'Przejdź do slajdu',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Połączenie git tej prezentacji już nie istnieje.',

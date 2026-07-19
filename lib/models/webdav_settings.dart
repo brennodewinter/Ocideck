@@ -165,8 +165,12 @@ class WebdavServer {
   }
 }
 
-/// Formaat waarin een deck naar de WebDAV-bron wordt teruggeschreven.
-enum WebdavSaveFormat {
+/// Formaat waarin een deck naar een netwerkbron wordt teruggeschreven.
+///
+/// Niet WebDAV-specifiek: S3 kent exact dezelfde twee vormen, en de keuze die
+/// de gebruiker maakt is dezelfde vraag. Eén enum in plaats van twee gelijke,
+/// zodat het opslaan-dialoog voor beide bronnen kan werken.
+enum DeckSaveFormat {
   /// Eén zelfstandig `.ocideck`-pakket (zip met assets).
   ocideck,
 

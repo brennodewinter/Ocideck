@@ -54,7 +54,8 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `timeline.dart` — `TimelineEvent` and `TimelineLayout`/`TimelineReveal` enums for animated timeline slides.
 - `video_source.dart` — `VideoSource` parser for local files, YouTube, Vimeo, and remote video URLs.
 - `parts/app_appearance_profile.dart` — `AppAppearanceProfile`: how the application itself looks, as opposed to `ThemeProfile`, which styles a slide and travels inside the deck. A `part` of `settings.dart` so callers need no second import.
-- `storage_connection.dart` — `StorageConnection` (sealed: `LocalConnection`/`WebdavConnection`/`GitConnection`) — the single notion of "a place decks live". One list, user-ordered, replacing the old split between a libraries list and one-of-each network source. Each carries a stable `id` so renaming a connection or fixing a typo in its URL never detaches an open deck from its origin; secrets stay in the keychain, keyed on server + user, so two connections to one account share one password.
+- `storage_connection.dart` — `StorageConnection` (sealed: `LocalConnection`/`WebdavConnection`/`S3Connection`/`GitConnection`) — the single notion of "a place decks live". One list, user-ordered, replacing the old split between a libraries list and one-of-each network source. Each carries a stable `id` so renaming a connection or fixing a typo in its URL never detaches an open deck from its origin; secrets stay in the keychain, keyed on server + user, so two connections to one account share one password.
+- `s3_settings.dart` — `S3Bucket` for S3 source configuration: endpoint, region, bucket, access key id, prefix and addressing style. The endpoint is a free field rather than a list of AWS regions because the self-hosted (MinIO) and European providers are the interesting case; `S3AddressingStyle` decides whether the bucket goes in the host name (AWS) or the path (most self-hosted endpoints). `uriForKey` encodes the path with the strict AWS rules instead of leaving it to `Uri` — S3 compares our signature against a canonical form derived from the path it received, so what goes over the wire must match what was signed byte for byte.
 - `webdav_settings.dart` — `WebdavServer`/`WebdavOrigin` (the origin carries the `etag` a save is checked against, plus the `connectionId` that sends a save back to the connection it came from) for WebDAV source configuration (Nextcloud, ownCloud, or any other server).
 
 ## `lib/services/` — business logic & IO
@@ -134,7 +135,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `rich_text_layout.dart` — Computes pagination and scaling for rich-text markdown bodies.
 - `scope_coverage.dart` — `deckScopeCoverageGaps`: flags in-scope objects with no test and no finding.
 - `finding_context_score.dart` — builds the deck's scope-object→CIA index and derives each finding's context (environmental) score / effective severity from it.
-- `secret_store.dart` — Manages secrets (WebDAV credentials, AI API key) in the OS keychain.
+- `secret_store.dart` — Manages secrets (WebDAV credentials, S3 secret access key, git token, AI API key) in the OS keychain.
 - `slide_layout_metrics.dart` — Layout constants/helpers for text sizing, fonts, and fit scaling; `bulletFitCounts` measures how many bullets fit at natural size (the input to the "Split slide" page capacity).
 - `bullet_pagination.dart` — Pure "Split slide" pagination (`chunkBullets`, `splitBulletsIntoPages`/`splitTwoColumnsIntoPages`): fills pages of a fixed size with the remainder last, never leaving a page under `kMinPageBullets`, and halves a list that already fits. Counts bullets and nothing else — measuring what physically fits used to collapse the page size and turn one slide into a stack.
 - `split_run.dart` — Pure split-run logic shared by the preview and the quality check: `splitRunRange` finds the maximal group of same-type bullet slides joined by `continuesSplit`, `splitRunDrag` reports which pages of such a run render needlessly small because one page is far fuller (threshold `kSplitRunDragRatio`), and `canContinueSplitFrom` answers whether offering the editor's continuation switch makes sense. No theme, no layout — so both callers agree on what a run is.
@@ -143,6 +144,8 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `text_measurement.dart` — `measureTextHeight`/`measureTextWidth` for rendered text dimensions.
 - `user_notes_codec.dart` — Serializes per-slide user notes with content fingerprints.
 - `web_asset_store.dart` — In-memory afbeeldingsopslag (`mem:`-paden) voor de webversie; per-pagina levensduur.
+- `s3/s3_sigv4.dart` — AWS Signature Version 4, written by hand rather than pulled from an SDK: an SDK brings its own HTTP stack and would connect around `NetGuard`, losing the socket pinning every other network source applies. Signing only, no network, so it is testable against fixed vectors (`test/s3_sigv4_test.dart`, cross-checked against botocore).
+- `s3/s3_service.dart` — Talks S3 (and S3-compatible endpoints) over a pinned, redirect-free `HttpClient` with SigV4. Lists with a delimiter so prefixes behave as folders. Conditional writes use `If-Match`, but not every S3-compatible endpoint supports them — AWS only since 2024 — so an endpoint that refuses the condition yields `S3Error.conditionalUnsupported` rather than silently overwriting.
 - `webdav_service.dart` — Talks WebDAV over a pinned, redirect-free `HttpClient`. Writes are guarded with `If-Match` so a file changed on the server surfaces as `WebdavConflictException` instead of a silent overwrite.
 
 ### `lib/services/git/` — Git-repository storage (design: `docs/design/GIT_STORAGE.md`)
@@ -346,8 +349,8 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
   reads only the selected section and writes it back, touching none of the
   settings, so it can be read without holding the rest of the state in mind.
   Storage is one tab and one list: `parts/settings_dialog_storage.dart` renders
-  the file connections as a single reorderable list — folders, WebDAV servers
-  and git repositories mixed — plus the export folder. Order is not decoration:
+  the file connections as a single reorderable list — folders, WebDAV servers,
+  S3 buckets and git repositories mixed — plus the export folder. Order is not decoration:
   the topmost usable connection of a kind is that kind's default
   (`AppSettings.primaryOf`), so dragging is how the user says which server is
   *the* server. Each row expands to that kind's own panel, which stayed where it
@@ -369,7 +372,8 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
   into view without any of the tab bodies knowing about search.
 - `slide_finder_dialog.dart` — Stay-open searcher for gathering slides from many presentations.
 - `slide_quality_details_dialog.dart` — Issues grouped by severity with counts and navigation.
-- `storage_connection_picker.dart` — Asks which file connection an action works with, for both WebDAV and git. Shows nothing at all when there is exactly one usable connection of that kind, so the single-server case keeps the flow it always had; the question only appears once it is a real question. Deck-bound actions never reach it — they follow the origin (see `AppSettings.gitConnectionFor`).
+- `storage_connection_picker.dart` — Asks which file connection an action works with, for WebDAV, S3 and git alike. Shows nothing at all when there is exactly one usable connection of that kind, so the single-server case keeps the flow it always had; the question only appears once it is a real question. Deck-bound actions never reach it — they follow the origin (see `AppSettings.gitConnectionFor`).
+- `s3_browser_dialog.dart` — Browses an S3 bucket to pick a deck or images, on the connection it is given rather than one it looks up itself. S3 has no folders; the common prefixes a delimited listing returns arrive as `S3Entry.isCollection`, so this screen needs to know nothing about prefixes.
 - `webdav_browser_dialog.dart` — Browses WebDAV folders to pick a deck or images, on the connection it is given rather than one it looks up itself.
 
 ### `lib/widgets/editors/` — per-slide-type editors

@@ -1799,6 +1799,60 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Deschide și păstrează prezentări într-un compartiment S3: AWS S3 sau un serviciu compatibil S3 precum un MinIO propriu. Cheia de acces secretă este păstrată criptată în inelul de chei, nu împreună cu celelalte setări.',
+  'Openen vanuit S3': 'Deschide din S3',
+  'Afbeelding kiezen in S3': 'Alege o imagine în S3',
+  'Opslaan naar S3': 'Salvează în S3',
+  'Opgeslagen in S3:': 'Salvat în S3:',
+  'Hier staat niets': 'Aici nu este nimic',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Conținutul nu a putut fi încărcat. Verifică conexiunea și setările.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Punctul final este inaccesibil — verifică conexiunea și punctul final.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Autentificarea a eșuat. Verifică cheia de acces, cheia secretă și regiunea — o regiune greșită dă aceeași eroare ca o cheie greșită.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Punctul final a returnat o eroare. Încearcă mai târziu.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Acest punct final nu poate scrie condiționat, așa că munca ta nu este protejată de a altcuiva. Salvează sub un nume nou dacă mai lucrează cineva la această prezentare.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Niciun compartiment S3 configurat. Configurează unul în Setări → Stocare.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Configurează mai întâi un compartiment S3 în Setări → Stocare.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'Compartimentul S3 nu este configurat (corect) — verifică punctul final, compartimentul și cheile în Setări → Stocare.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Acest punct final nu este permis. Marchează mai întâi un punct final privat/LAN ca fiind de încredere în Setări → Stocare.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Nu a fost găsit în compartiment. Dacă numele e corect, încearcă cealaltă adresare în Setări → Stocare.',
+  'S3-bucket': 'Compartiment S3',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'Un compartiment S3, de exemplu AWS S3 sau un server MinIO propriu.',
+  'Endpoint': 'Punct final',
+  'Bucket': 'Compartiment',
+  'Adressering': 'Adresare',
+  'Bucket in de hostnaam (AWS S3)': 'Compartiment în numele gazdei (AWS S3)',
+  'Bucket in het pad (MinIO en andere)':
+      'Compartiment în cale (MinIO și altele)',
+  'Regio': 'Regiune',
+  'Access key ID': 'ID-ul cheii de acces',
+  'Secret access key': 'Cheie de acces secretă',
+  'Prefix (optioneel)': 'Prefix (opțional)',
+  'Vertrouwd intern endpoint': 'Punct final intern de încredere',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Necesar când punctul final rulează într-o rețea privată sau de acasă (LAN), precum un MinIO propriu. Permite conexiuni doar către servere în care ai încredere.',
+  'Vul endpoint, bucket en access key ID in':
+      'Completează punctul final, compartimentul și ID-ul cheii de acces',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Autentificarea a eșuat — verifică cheia de acces, cheia secretă și regiunea. O regiune greșită dă aceeași eroare ca o cheie greșită.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Punctul final este la o adresă privată. Bifează "Punct final intern de încredere" pentru a permite conexiunea.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Compartimentul nu a fost găsit. Cu un MinIO propriu ajută adesea să alegi "Compartiment în cale".',
+  'Ongeldig endpoint': 'Punct final nevalid',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Acest punct final nu acceptă scrieri condiționate; editarea simultană este mai slab protejată aici.',
   'Naar de slide': 'La slide',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Conexiunea git a acestei prezentări nu mai există.',

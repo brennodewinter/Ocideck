@@ -1817,6 +1817,59 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Oscail agus coinnigh láithreoireachtaí i mbuicéad S3: AWS S3, nó seirbhís atá comhoiriúnach le S3 ar nós do MinIO féin. Coinnítear an eochair rochtana rúnda criptithe sa slabhra eochracha, ní leis na socruithe eile.',
+  'Openen vanuit S3': 'Oscail ó S3',
+  'Afbeelding kiezen in S3': 'Roghnaigh íomhá in S3',
+  'Opslaan naar S3': 'Sábháil chuig S3',
+  'Opgeslagen in S3:': 'Sábháilte chuig S3:',
+  'Hier staat niets': 'Níl aon rud anseo',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Níorbh fhéidir an t-ábhar a lódáil. Seiceáil do cheangal agus do shocruithe.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Ní féidir an críochphointe a bhaint amach — seiceáil do cheangal agus an críochphointe.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Theip ar an síniú isteach. Seiceáil an eochair rochtana, an eochair rúnda agus an réigiún — tugann réigiún mícheart an earráid chéanna le heochair mhícheart.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Thug an críochphointe earráid ar ais. Bain triail eile as ar ball.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Ní féidir leis an gcríochphointe seo scríobh go coinníollach, mar sin níl do chuid oibre cosanta ar obair duine eile. Sábháil faoi ainm nua má tá duine eile ag obair ar an láithreoireacht seo.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Níl buicéad S3 socraithe. Socraigh ceann i Socruithe → Stóráil.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Socraigh buicéad S3 ar dtús i Socruithe → Stóráil.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'Níl an buicéad S3 socraithe (i gceart) — seiceáil an críochphointe, an buicéad agus na heochracha i Socruithe → Stóráil.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Níl an críochphointe seo ceadaithe. Marcáil críochphointe príobháideach/LAN mar iontaofa i Socruithe → Stóráil ar dtús.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Gan aimsiú sa bhuicéad. Má tá an t-ainm ceart, bain triail as an seoladh eile i Socruithe → Stóráil.',
+  'S3-bucket': 'Buicéad S3',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'Buicéad S3, mar shampla AWS S3 nó do fhreastalaí MinIO féin.',
+  'Endpoint': 'Críochphointe',
+  'Bucket': 'Buicéad',
+  'Adressering': 'Seoladh',
+  'Bucket in de hostnaam (AWS S3)': 'Buicéad in ainm an óstaigh (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Buicéad sa chonair (MinIO agus eile)',
+  'Regio': 'Réigiún',
+  'Access key ID': 'Aitheantas na heochrach rochtana',
+  'Secret access key': 'Eochair rochtana rúnda',
+  'Prefix (optioneel)': 'Réimír (roghnach)',
+  'Vertrouwd intern endpoint': 'Críochphointe inmheánach iontaofa',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Riachtanach nuair a ritheann an críochphointe ar líonra príobháideach nó baile (LAN), ar nós do MinIO féin. Ná ceadaigh ceangail ach le freastalaithe a bhfuil muinín agat astu.',
+  'Vul endpoint, bucket en access key ID in':
+      'Líon isteach an críochphointe, an buicéad agus aitheantas na heochrach rochtana',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Theip ar an síniú isteach — seiceáil an eochair rochtana, an eochair rúnda agus an réigiún. Tugann réigiún mícheart an earráid chéanna le heochair mhícheart.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Tá an críochphointe ar sheoladh príobháideach. Tic "Críochphointe inmheánach iontaofa" chun an ceangal a cheadú.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Buicéad gan aimsiú. Le do MinIO féin is minic a chabhraíonn sé "Buicéad sa chonair" a roghnú.',
+  'Ongeldig endpoint': 'Críochphointe neamhbhailí',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Ní thacaíonn an críochphointe seo le scríobh coinníollach; tá eagarthóireacht chomhuaineach níos lú cosanta anseo.',
   'Naar de slide': 'Go dtí an sleamhnán',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Níl nasc git na láithreoireachta seo ann a thuilleadh.',

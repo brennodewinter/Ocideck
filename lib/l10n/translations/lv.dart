@@ -1780,6 +1780,59 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Atver un glabā prezentācijas S3 tvertnē: AWS S3 vai ar S3 saderīgs pakalpojums, piemēram, paša MinIO. Slepenā piekļuves atslēga tiek glabāta šifrēta atslēgu saišķī, nevis kopā ar pārējiem iestatījumiem.',
+  'Openen vanuit S3': 'Atvērt no S3',
+  'Afbeelding kiezen in S3': 'Izvēlēties attēlu S3',
+  'Opslaan naar S3': 'Saglabāt S3',
+  'Opgeslagen in S3:': 'Saglabāts S3:',
+  'Hier staat niets': 'Šeit nekā nav',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Saturu neizdevās ielādēt. Pārbaudi savienojumu un iestatījumus.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Galapunkts nav sasniedzams — pārbaudi savienojumu un galapunktu.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Pieteikšanās neizdevās. Pārbaudi piekļuves atslēgu, slepeno atslēgu un reģionu — nepareizs reģions dod tādu pašu kļūdu kā nepareiza atslēga.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Galapunkts atgrieza kļūdu. Mēģini vēlāk vēlreiz.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Šis galapunkts nevar rakstīt nosacīti, tāpēc tavs darbs nav aizsargāts no cita darba. Saglabā ar jaunu nosaukumu, ja pie šīs prezentācijas strādā vēl kāds.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Nav iestatīta S3 tvertne. Iestati to sadaļā Iestatījumi → Krātuve.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Vispirms iestati S3 tvertni sadaļā Iestatījumi → Krātuve.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'S3 tvertne nav (pareizi) iestatīta — pārbaudi galapunktu, tvertni un atslēgas sadaļā Iestatījumi → Krātuve.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Šis galapunkts nav atļauts. Vispirms atzīmē privātu/LAN galapunktu kā uzticamu sadaļā Iestatījumi → Krātuve.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Tvertnē nav atrasts. Ja nosaukums ir pareizs, izmēģini otru adresēšanu sadaļā Iestatījumi → Krātuve.',
+  'S3-bucket': 'S3 tvertne',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'S3 tvertne, piemēram, AWS S3 vai paša MinIO serveris.',
+  'Endpoint': 'Galapunkts',
+  'Bucket': 'Tvertne',
+  'Adressering': 'Adresēšana',
+  'Bucket in de hostnaam (AWS S3)': 'Tvertne resursdatora nosaukumā (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Tvertne ceļā (MinIO un citi)',
+  'Regio': 'Reģions',
+  'Access key ID': 'Piekļuves atslēgas ID',
+  'Secret access key': 'Slepenā piekļuves atslēga',
+  'Prefix (optioneel)': 'Prefikss (neobligāti)',
+  'Vertrouwd intern endpoint': 'Uzticams iekšējais galapunkts',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Nepieciešams, kad galapunkts darbojas privātā vai mājas tīklā (LAN), piemēram, paša MinIO. Atļauj savienojumus tikai ar serveriem, kuriem pats uzticies.',
+  'Vul endpoint, bucket en access key ID in':
+      'Aizpildi galapunktu, tvertni un piekļuves atslēgas ID',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Pieteikšanās neizdevās — pārbaudi piekļuves atslēgu, slepeno atslēgu un reģionu. Nepareizs reģions dod tādu pašu kļūdu kā nepareiza atslēga.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Galapunkts ir privātā adresē. Atzīmē "Uzticams iekšējais galapunkts", lai atļautu savienojumu.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Tvertne nav atrasta. Ar paša MinIO bieži palīdz izvēlēties "Tvertne ceļā".',
+  'Ongeldig endpoint': 'Nederīgs galapunkts',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Šis galapunkts neatbalsta nosacītu rakstīšanu; vienlaicīga rediģēšana šeit ir sliktāk aizsargāta.',
   'Naar de slide': 'Uz slaidu',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Šīs prezentācijas git savienojuma vairs nav.',

@@ -1799,6 +1799,59 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Відкривайте та зберігайте презентації в сегменті S3: AWS S3 або S3-сумісній службі на кшталт власного MinIO. Секретний ключ доступу зберігається зашифрованим у в’язці ключів, а не разом з іншими налаштуваннями.',
+  'Openen vanuit S3': 'Відкрити з S3',
+  'Afbeelding kiezen in S3': 'Вибрати зображення в S3',
+  'Opslaan naar S3': 'Зберегти в S3',
+  'Opgeslagen in S3:': 'Збережено в S3:',
+  'Hier staat niets': 'Тут нічого немає',
+  'Kon de inhoud niet laden. Controleer je verbinding en instellingen.':
+      'Не вдалося завантажити вміст. Перевірте з’єднання та налаштування.',
+  'Endpoint niet bereikbaar — controleer je verbinding en het endpoint.':
+      'Кінцева точка недоступна — перевірте з’єднання та кінцеву точку.',
+  'Aanmelden mislukt. Controleer de access key, de secret key en de regio — een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Не вдалося ввійти. Перевірте ключ доступу, секретний ключ і регіон — хибний регіон дає ту саму помилку, що й хибний ключ.',
+  'Het endpoint gaf een fout. Probeer het later opnieuw.':
+      'Кінцева точка повернула помилку. Спробуйте пізніше.',
+  'Dit endpoint kan niet voorwaardelijk schrijven, dus je werk is niet beschermd tegen dat van een ander. Sla op onder een nieuwe naam als er iemand anders aan dit deck werkt.':
+      'Ця кінцева точка не вміє записувати умовно, тому ваша робота не захищена від чужої. Збережіть під новою назвою, якщо над цією презентацією працює ще хтось.',
+  'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.':
+      'Сегмент S3 не налаштовано. Налаштуйте його в Налаштування → Сховище.',
+  'Stel eerst een S3-bucket in bij Instellingen → Opslag.':
+      'Спершу налаштуйте сегмент S3 у Налаштування → Сховище.',
+  'De S3-bucket is niet (goed) ingesteld — controleer endpoint, bucket en sleutels bij Instellingen → Opslag.':
+      'Сегмент S3 налаштовано неправильно — перевірте кінцеву точку, сегмент і ключі в Налаштування → Сховище.',
+  'Dit endpoint is niet toegestaan. Markeer een privé/LAN-endpoint eerst als vertrouwd bij Instellingen → Opslag.':
+      'Ця кінцева точка не дозволена. Спершу позначте приватну/LAN кінцеву точку як довірену в Налаштування → Сховище.',
+  'Niet gevonden in de bucket. Klopt de bucketnaam, probeer dan de andere adressering bij Instellingen → Opslag.':
+      'Не знайдено в сегменті. Якщо назва правильна, спробуйте іншу адресацію в Налаштування → Сховище.',
+  'S3-bucket': 'Сегмент S3',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'Сегмент S3, наприклад AWS S3 або власний сервер MinIO.',
+  'Endpoint': 'Кінцева точка',
+  'Bucket': 'Сегмент',
+  'Adressering': 'Адресація',
+  'Bucket in de hostnaam (AWS S3)': 'Сегмент в імені хоста (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Сегмент у шляху (MinIO та інші)',
+  'Regio': 'Регіон',
+  'Access key ID': 'Ідентифікатор ключа доступу',
+  'Secret access key': 'Секретний ключ доступу',
+  'Prefix (optioneel)': 'Префікс (необов’язково)',
+  'Vertrouwd intern endpoint': 'Довірена внутрішня кінцева точка',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Потрібно, коли кінцева точка працює в приватній або домашній мережі (LAN), наприклад власний MinIO. Дозволяйте з’єднання лише із серверами, яким довіряєте.',
+  'Vul endpoint, bucket en access key ID in':
+      'Заповніть кінцеву точку, сегмент та ідентифікатор ключа доступу',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Не вдалося ввійти — перевірте ключ доступу, секретний ключ і регіон. Хибний регіон дає ту саму помилку, що й хибний ключ.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Кінцева точка має приватну адресу. Позначте "Довірена внутрішня кінцева точка", щоб дозволити з’єднання.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Сегмент не знайдено. З власним MinIO часто допомагає вибрати "Сегмент у шляху".',
+  'Ongeldig endpoint': 'Недійсна кінцева точка',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Ця кінцева точка не підтримує умовний запис; одночасне редагування тут захищене гірше.',
   'Naar de slide': 'До слайда',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Git-з\'єднання цієї презентації більше не існує.',

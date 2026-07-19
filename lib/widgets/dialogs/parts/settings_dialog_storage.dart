@@ -7,14 +7,14 @@
 // mappen aanhouden, maar niet twee Nextclouds — en moest de vraag "waar staat
 // het werk van deze klant?" op twee plekken beantwoorden.
 //
-// Nu is er één lijst bestandsverbindingen. Lokale mappen, WebDAV-servers en
-// git-repositories staan er door elkaar, in de volgorde die de gebruiker zelf
-// sleept. Die volgorde is geen cosmetica: de bovenste bruikbare verbinding van
+// Nu is er één lijst bestandsverbindingen. Lokale mappen, WebDAV-servers,
+// S3-buckets en git-repositories staan er door elkaar, in de volgorde die de
+// gebruiker zelf sleept. Die volgorde is geen cosmetica: de bovenste bruikbare verbinding van
 // een soort is de standaard voor die soort (`AppSettings.primaryOf`), dus
 // slepen is hoe je zegt welke server "de" server is.
 //
-// Een vierde soort opslag is een waarde erbij in [StorageConnectionKind] plus
-// een tak in [_connectionPanel] — geen tweede lijst, geen tabblad.
+// Nog een soort opslag erbij is een waarde in [StorageConnectionKind] plus een
+// tak in [_connectionPanel] — geen tweede lijst, geen tabblad.
 part of '../settings_dialog.dart';
 
 /// Presentatie-eigenschappen per soort verbinding: het pictogram in de rij en
@@ -24,12 +24,14 @@ extension StorageConnectionKindUi on StorageConnectionKind {
   IconData get icon => switch (this) {
     StorageConnectionKind.local => Icons.folder_outlined,
     StorageConnectionKind.webdav => Icons.cloud_outlined,
+    StorageConnectionKind.s3 => Icons.inventory_2_outlined,
     StorageConnectionKind.git => Icons.account_tree_outlined,
   };
 
   String label(AppLocalizations l10n) => switch (this) {
     StorageConnectionKind.local => l10n.d('Map op deze computer'),
     StorageConnectionKind.webdav => l10n.d('WebDAV-server'),
+    StorageConnectionKind.s3 => l10n.d('S3-bucket'),
     StorageConnectionKind.git => l10n.d('Git-repository'),
   };
 
@@ -39,6 +41,9 @@ extension StorageConnectionKindUi on StorageConnectionKind {
     ),
     StorageConnectionKind.webdav => l10n.d(
       'Een map op een WebDAV-server, bijvoorbeeld Nextcloud.',
+    ),
+    StorageConnectionKind.s3 => l10n.d(
+      'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.',
     ),
     StorageConnectionKind.git => l10n.d(
       'Een git-repository; elke opgeslagen versie blijft bewaard.',
@@ -52,6 +57,7 @@ extension StorageConnectionKindUi on StorageConnectionKind {
   String? get sectionSource => switch (this) {
     StorageConnectionKind.local => null,
     StorageConnectionKind.webdav => 'WebDAV-bron',
+    StorageConnectionKind.s3 => 'S3-bucket',
     StorageConnectionKind.git => 'Git-repository',
   };
 }
@@ -241,6 +247,10 @@ extension _SettingsStorageTab on _SettingsDialogState {
           final WebdavForm form => _webdavPanel(form),
           _ => null,
         },
+        S3Connection() => switch (_s3Forms[connection.id]) {
+          final S3Form form => _s3Panel(form),
+          _ => null,
+        },
         GitConnection() => switch (_gitForms[connection.id]) {
           final GitForm form => _gitPanel(form),
           _ => null,
@@ -287,6 +297,10 @@ extension _SettingsStorageTab on _SettingsDialogState {
         final WebdavForm f => [f.url, f.user],
         _ => const <Listenable>[],
       },
+      S3Connection() => switch (_s3Forms[connection.id]) {
+        final S3Form f => [f.endpoint, f.bucket],
+        _ => const <Listenable>[],
+      },
       GitConnection() => switch (_gitForms[connection.id]) {
         final GitForm f => [f.url, f.owner, f.repo],
         _ => const <Listenable>[],
@@ -326,6 +340,24 @@ extension _SettingsStorageTab on _SettingsDialogState {
           );
         }
         return (text: host, configured: true, detail: null);
+      case S3Connection():
+        final form = _s3Forms[connection.id];
+        final bucketName = form?.bucket.text.trim() ?? '';
+        if (_hostOf(form?.endpoint.text ?? '') == null || bucketName.isEmpty) {
+          return (
+            text: l10n.d('Niet ingesteld'),
+            configured: false,
+            detail: null,
+          );
+        }
+        // De bucketnaam is wat de gebruiker herkent; het endpoint staat in de
+        // tooltip omdat twee buckets met dezelfde naam op verschillende
+        // diensten kunnen bestaan.
+        return (
+          text: bucketName,
+          configured: true,
+          detail: form?.endpoint.text.trim(),
+        );
       case GitConnection():
         final form = _gitForms[connection.id];
         final owner = form?.owner.text.trim() ?? '';
@@ -351,6 +383,7 @@ extension _SettingsStorageTab on _SettingsDialogState {
       if (supportsLocalProjectFolders) StorageConnectionKind.local,
       if (supportsNetworkDeckSources) ...[
         StorageConnectionKind.webdav,
+        StorageConnectionKind.s3,
         StorageConnectionKind.git,
       ],
     ];
