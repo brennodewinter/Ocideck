@@ -142,12 +142,15 @@ void main() {
       );
       final hits = result.certain
           .where((f) => f.ruleId != 'contact.email')
-          .map((f) => f.ruleId)
-          .toSet();
+          .toList();
       expect(
         hits,
         isEmpty,
-        reason: '${doc.path} laat de scanner afgaan op: ${hits.join(', ')}',
+        // Mét het gemaskeerde fragment erbij: zonder dat weet je wél welke
+        // regel afging, maar niet waaróp — en dan begint het zoeken pas.
+        reason:
+            '${doc.path} laat de scanner afgaan op: '
+            '${hits.map((f) => '${f.ruleId} (${f.maskedSample})').join(', ')}',
       );
     }
   });
