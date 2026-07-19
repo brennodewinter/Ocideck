@@ -201,4 +201,69 @@ extension PrivacyScannerDetectors on PrivacyScanner {
       }
     }
   }
+
+  // ── nl.plate en <land>.postcode ───────────────────────────────────────────
+
+  /// Kenteken en buitenlandse postcode — de twee regiogebonden contactregels.
+  ///
+  /// Hun regel-id's dragen de landcode vooraan (`nl.plate`, `de.postcode`),
+  /// zodat de regiopoort ze herkent zonder een tweede koppellijst. Zie
+  /// `privacy_plate_rules.dart` voor waarom beide een contextwoord eisen waar de
+  /// Nederlandse postcode dat niet hoeft.
+  void _scanPlateAndIntlPostcode(
+    _Fragment fragment,
+    int slideIndex,
+    List<PrivacyFinding> out,
+  ) {
+    for (final match in dutchPlatePattern.allMatches(fragment.text)) {
+      if (isForbiddenPlate(match.group(0)!)) continue;
+      // Verplicht, niet aanbevolen: `XX-99-99` is ook een artikelcode, en het
+      // patroon sluit op zichzelf bijna niets uit.
+      if (!_hasContextWord(fragment.text, match.start, plateContextWords)) {
+        continue;
+      }
+      _emit(
+        out,
+        _finding(
+          fragment,
+          slideIndex,
+          match,
+          ruleId: 'nl.plate',
+          family: PrivacyFamily.contact,
+          confidence: PrivacyConfidence.likely,
+        ),
+      );
+    }
+
+    for (final rule in intlPostcodeRules) {
+      // De regiopoort filtert achteraf op regel-id, maar hier al overslaan
+      // scheelt het scannen van zeven patronen die toch wegvallen.
+      if (!regions.contains(rule.region)) continue;
+      final needsContext = postcodeNeedsContext.contains(rule.region);
+      for (final match in rule.pattern.allMatches(fragment.text)) {
+        if (rule.validate != null && !rule.validate!(match.group(0)!)) continue;
+        if (needsContext &&
+            !_hasContextWord(
+              fragment.text,
+              match.start,
+              postcodeContextWords,
+            )) {
+          continue;
+        }
+        _emit(
+          out,
+          _finding(
+            fragment,
+            slideIndex,
+            match,
+            ruleId: rule.ruleId,
+            family: PrivacyFamily.contact,
+            // Een postcode alleen wijst een straat aan, geen persoon. Net als
+            // de Nederlandse blijft hij informatief tot er meer bij staat.
+            confidence: PrivacyConfidence.possible,
+          ),
+        );
+      }
+    }
+  }
 }

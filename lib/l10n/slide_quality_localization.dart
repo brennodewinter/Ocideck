@@ -433,6 +433,11 @@ String privacyRuleLabel(AppLocalizations l10n, String ruleId) {
     'contact.phone' => l10n.d('telefoonnummer'),
     'contact.address' => l10n.d('adres'),
     'contact.postcode_nl' => l10n.d('postcode'),
+    'nl.plate' => l10n.d('kenteken'),
+    // De buitenlandse postcodes dragen hun landcode in het regel-id (`de.postcode`)
+    // omdat de regiopoort daaraan hangt. Voor de gebruiker is dat één begrip: er
+    // staat een postcode. De landcode zit al in de melding via de tekst eromheen.
+    _ when ruleId.endsWith('.postcode') => l10n.d('postcode'),
     'contact.name' => l10n.d('persoonsnaam'),
     'contact.birthdate' => l10n.d('geboortedatum'),
     'contact.geo' => l10n.d('locatiecoördinaten'),

@@ -1785,6 +1785,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'kenteken': 'rendszám',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Ennek a bemutatónak a nyelvéhez nincs kulcsszólista a személyes adatok különleges kategóriáihoz. Az ellenőrző számjegyes minták (adóazonosító, IBAN, útlevél) működnek; az olyan szavak, mint „diagnózis” vagy „gyanúsított”, nem ismerhetők fel.',
   'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':

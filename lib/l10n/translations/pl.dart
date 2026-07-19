@@ -1793,6 +1793,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'kenteken': 'numer rejestracyjny',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Dla języka tej prezentacji nie ma listy słów kluczowych dla szczególnych kategorii danych osobowych. Wzorce z cyfrą kontrolną (PESEL, IBAN, paszport) działają; słowa takie jak „diagnoza” czy „podejrzany” nie są rozpoznawane.',
   'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':

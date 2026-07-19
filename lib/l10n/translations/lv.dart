@@ -1780,6 +1780,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'kenteken': 'transportlīdzekļa numurs',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Šīs prezentācijas valodai nav atslēgvārdu saraksta īpašām personas datu kategorijām. Raksti ar kontrolciparu (personas kods, IBAN, pase) darbojas; vārdi kā "diagnoze" vai "aizdomās turētais" netiek atpazīti.',
   'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':

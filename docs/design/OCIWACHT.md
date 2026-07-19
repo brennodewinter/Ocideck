@@ -28,7 +28,7 @@ accepteren, waarschuwen met een shield-badge, of redigeren op scherm en in expor
 | §3-B `doc.mrz`: machine-readable zone (TD1/TD2/TD3) | **geleverd** |
 | §3-E Digitale identificatoren (IP, MAC, IMEI, ICCID, IMSI, handle, device-ID) | **geleverd** |
 | §3-D `contact.birthdate` + `contact.geo` | **geleverd** |
-| §3-D `contact.plate` + `contact.postcode_intl` | open — wacht op de regiopakketten (fase 13) |
+| §3-D kenteken (`nl.plate`) + buitenlandse postcodes (`<land>.postcode`) | **geleverd** |
 | §13.2 Persoonskoppelingspoort (naam als koppeling, mededeling als bereik) | **geleverd** |
 | §13.2 Lexiconmodel als data (`role`/`match`/`weight`/`lang`) | **geleverd** |
 | §3-G `special.icd10` + `special.atc` (notatie met contextpoort) | **geleverd** |
@@ -127,6 +127,7 @@ groeit de regelset zonder de compile te breken.
 | `lib/services/privacy/privacy_contact_rules.dart` | Adres (straat + huisnummer), NL-postcode, gelabelde persoonsnaam: patronen, straatachtervoegsels, placeholder-personen |
 | `lib/services/privacy/privacy_phone_rules.dart` | Telefoon: E.164, nationale vorm, contextwoorden, toegekende landnummers, gereserveerde reeksen |
 | `lib/models/privacy_lexicon.dart` | `PrivacyLexiconEntry`, `PrivacyTermMatch` (word/prefix/compound), `PrivacyLexiconRole`, `kMinCompoundLength` |
+| `lib/services/privacy/privacy_plate_rules.dart` | Kenteken (sidecodes 1-14, verplicht contextwoord) en buitenlandse postcodes per land |
 | `lib/services/privacy/privacy_regions.dart` | Landpakketten: welke regio's aan staan, en welke regels daaraan hangen |
 | `lib/services/privacy/privacy_context_role.dart` | ConText: rolherkenning (verdachte/aangever/getuige) met terminatiewoorden en drieweg-uitkomst |
 | `lib/services/privacy/privacy_lexicon_data.dart` | Het gebundelde art. 9/10-lexicon: term, categorie, taal, matchmodus, gewicht, rol |

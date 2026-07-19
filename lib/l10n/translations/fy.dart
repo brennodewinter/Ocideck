@@ -739,6 +739,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'kenteken': 'kenteken',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Foar de taal fan dit deck is der gjin trefwurdlist foar bysûndere persoansgegevens. Patroanen mei in kontrôlesifer (BSN, IBAN, paspoart) wurkje wol; wurden as "diagnoaze" of "fertochte" wurde net herkend.',
   'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':

@@ -1809,6 +1809,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'kenteken': 'αριθμός κυκλοφορίας',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Για τη γλώσσα αυτής της παρουσίασης δεν υπάρχει λίστα λέξεων-κλειδιών για ειδικές κατηγορίες προσωπικών δεδομένων. Τα μοτίβα με ψηφίο ελέγχου (ΑΜΚΑ, IBAN, διαβατήριο) λειτουργούν· λέξεις όπως «διάγνωση» ή «ύποπτος» δεν αναγνωρίζονται.',
   'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':

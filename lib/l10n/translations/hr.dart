@@ -1788,6 +1788,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'kenteken': 'registarska oznaka',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Za jezik ove prezentacije ne postoji popis ključnih riječi za posebne kategorije osobnih podataka. Uzorci s kontrolnom znamenkom (OIB, IBAN, putovnica) rade; riječi poput "dijagnoza" ili "osumnjičenik" ne prepoznaju se.',
   'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':

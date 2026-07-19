@@ -1780,6 +1780,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'kenteken': 'registreringsnummer',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Det finns ingen nyckelordslista för särskilda kategorier av personuppgifter på det här däckets språk. Mönster med kontrollsiffra (personnummer, IBAN, pass) fungerar; ord som "diagnos" eller "misstänkt" känns inte igen.',
   'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':

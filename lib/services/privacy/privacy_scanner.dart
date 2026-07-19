@@ -32,6 +32,7 @@ import 'privacy_location_rules.dart';
 import 'privacy_own_identity.dart';
 import 'privacy_regions.dart';
 import 'privacy_phone_rules.dart';
+import 'privacy_plate_rules.dart';
 import 'privacy_special_rules.dart';
 import 'privacy_structural_rules.dart';
 import 'privacy_secret_rules.dart';
@@ -254,6 +255,7 @@ class PrivacyScanner {
     _scanDigital(fragment, slideIndex, out);
     _scanBirthdate(fragment, slideIndex, out);
     _scanGeo(fragment, slideIndex, out);
+    _scanPlateAndIntlPostcode(fragment, slideIndex, out);
     _scanSecrets(fragment, slideIndex, out);
     _scanEuIdentifiers(fragment, slideIndex, out);
     _scanSpecialCategories(fragment, slideIndex, out);

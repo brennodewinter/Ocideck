@@ -1789,6 +1789,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'kenteken': 'valstybinis numeris',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Šios pateikties kalbai nėra raktinių žodžių sąrašo ypatingų kategorijų asmens duomenims. Šablonai su kontroliniu skaitmeniu (asmens kodas, IBAN, pasas) veikia; žodžiai kaip „diagnozė“ ar „įtariamasis“ neatpažįstami.',
   'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':

@@ -734,6 +734,7 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'kenteken': 'targa del veicolo',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Per la lingua di questa presentazione non esiste un elenco di parole chiave per le categorie particolari di dati personali. I modelli con cifra di controllo (codice fiscale, IBAN, passaporto) funzionano; parole come "diagnosi" o "indagato" non vengono riconosciute.',
   'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':

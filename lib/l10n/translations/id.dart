@@ -1781,6 +1781,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'kenteken': 'nomor pelat kendaraan',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Tidak ada daftar kata kunci untuk kategori khusus data pribadi dalam bahasa dek ini. Pola dengan digit periksa (NIK, IBAN, paspor) tetap bekerja; kata seperti "diagnosis" atau "tersangka" tidak dikenali.',
   'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':

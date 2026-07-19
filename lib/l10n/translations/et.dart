@@ -1772,6 +1772,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'kenteken': 'registreerimisnumber',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Selle esitluse keele jaoks pole eriliigiliste isikuandmete märksõnaloendit. Kontrollnumbriga mustrid (isikukood, IBAN, pass) töötavad; sõnu nagu "diagnoos" või "kahtlustatav" ei tuvastata.',
   'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':

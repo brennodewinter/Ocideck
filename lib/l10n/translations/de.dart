@@ -738,6 +738,7 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'kenteken': 'Kfz-Kennzeichen',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Für die Sprache dieser Präsentation gibt es keine Stichwortliste für besondere Kategorien personenbezogener Daten. Muster mit Prüfziffer (Steuer-ID, IBAN, Pass) funktionieren; Wörter wie "Diagnose" oder "Verdächtiger" werden nicht erkannt.',
   'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':

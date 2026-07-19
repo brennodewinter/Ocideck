@@ -1756,6 +1756,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'kenteken': 'Duj mI\'',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'vam De\' Hol vIghaj be\' potlhqu\' nuv De\' mu\' tetlh. mI\' toblu\'ta\' (BSN, IBAN, nav) vumtaH; mu\'mey rur "rop ngu\'" ghap "pIch ghaj" luleghbe\'.',
   'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':

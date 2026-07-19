@@ -1811,6 +1811,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'kenteken': 'matrícula do veículo',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Não existe lista de palavras-chave para categorias especiais de dados pessoais no idioma desta apresentação. Os padrões com dígito de controlo (NIF, IBAN, passaporte) funcionam; palavras como "diagnóstico" ou "suspeito" não são reconhecidas.',
   'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':

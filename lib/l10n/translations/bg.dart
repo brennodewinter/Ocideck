@@ -1804,6 +1804,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'kenteken': 'регистрационен номер',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'За езика на тази презентация няма списък с ключови думи за специални категории лични данни. Шаблоните с контролна цифра (ЕГН, IBAN, паспорт) работят; думи като „диагноза“ или „заподозрян“ не се разпознават.',
   'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':

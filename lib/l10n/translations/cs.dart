@@ -1784,6 +1784,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'kenteken': 'registrační značka',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Pro jazyk této prezentace neexistuje seznam klíčových slov pro zvláštní kategorie osobních údajů. Vzory s kontrolní číslicí (rodné číslo, IBAN, pas) fungují; slova jako „diagnóza“ nebo „podezřelý“ rozpoznána nejsou.',
   'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':

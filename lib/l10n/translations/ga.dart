@@ -1817,6 +1817,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'kenteken': 'uimhir chláraithe feithicle',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Níl liosta eochairfhocal ann do chatagóirí speisialta sonraí pearsanta i dteanga an deic seo. Oibríonn patrúin le digit seiceála (PPS, IBAN, pas); ní aithnítear focail ar nós "diagnóis" nó "duine faoi amhras".',
   'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
