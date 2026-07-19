@@ -1804,6 +1804,10 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Iemand anders heeft dit bestand gewijzigd': 'Някой друг промени този файл',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'Версията на сървъра се промени, откакто отворихте тази презентация. Презаписването заличава работата на другия.',
+  'Overschrijven': 'Презапиши',
   'Openen vanaf WebDAV': 'Отваряне от WebDAV',
   'Opslaan naar WebDAV': 'Запазване в WebDAV',
   'Opgeslagen op WebDAV:': 'Запазено в WebDAV:',

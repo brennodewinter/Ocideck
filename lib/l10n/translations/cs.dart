@@ -1784,6 +1784,10 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Iemand anders heeft dit bestand gewijzigd': 'Tento soubor změnil někdo jiný',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'Verze na serveru se od otevření této prezentace změnila. Přepsání zahodí práci druhého člověka.',
+  'Overschrijven': 'Přepsat',
   'Openen vanaf WebDAV': 'Otevřít z WebDAV',
   'Opslaan naar WebDAV': 'Uložit na WebDAV',
   'Opgeslagen op WebDAV:': 'Uloženo na WebDAV:',

@@ -738,6 +738,11 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Iemand anders heeft dit bestand gewijzigd':
+      'Un otro hende a kambia e archivo aki',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'E vershon riba e server a kambia for di ora bo a habri e presentashon aki. Sobreskirbi ta pèrdè e trabou di e otro persona.',
+  'Overschrijven': 'Sobreskirbi',
   'Openen vanaf WebDAV': 'Habri for di WebDAV',
   'Opslaan naar WebDAV': 'Warda riba WebDAV',
   'Opgeslagen op WebDAV:': 'Wardá riba WebDAV:',

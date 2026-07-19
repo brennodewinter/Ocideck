@@ -1803,6 +1803,11 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Iemand anders heeft dit bestand gewijzigd':
+      'Xi ħadd ieħor biddel dan il-fajl',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'Il-verżjoni fuq is-server inbidlet minn meta ftaħt din il-preżentazzjoni. Jekk tikteb fuqha, taħli x-xogħol tal-persuna l-oħra.',
+  'Overschrijven': 'Ikteb fuqu',
   'Openen vanaf WebDAV': 'Iftaħ minn WebDAV',
   'Opslaan naar WebDAV': 'Issalva fuq WebDAV',
   'Opgeslagen op WebDAV:': 'Salvat fuq WebDAV:',

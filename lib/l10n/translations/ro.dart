@@ -1799,6 +1799,11 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Iemand anders heeft dit bestand gewijzigd':
+      'Altcineva a modificat acest fișier',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'Versiunea de pe server s-a schimbat de când ați deschis această prezentare. Suprascrierea anulează munca celuilalt.',
+  'Overschrijven': 'Suprascrie',
   'Openen vanaf WebDAV': 'Deschide din WebDAV',
   'Opslaan naar WebDAV': 'Salvează pe WebDAV',
   'Opgeslagen op WebDAV:': 'Salvat pe WebDAV:',

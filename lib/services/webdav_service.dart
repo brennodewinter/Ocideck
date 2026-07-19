@@ -23,12 +23,17 @@ class WebdavEntry {
   final int? size;
   final String? contentType;
 
+  /// De versieaanduiding die de server aan deze inhoud hangt, of `null` als
+  /// hij er geen geeft. Zie [WebdavFile.etag].
+  final String? etag;
+
   const WebdavEntry({
     required this.name,
     required this.relativePath,
     required this.isCollection,
     this.size,
     this.contentType,
+    this.etag,
   });
 
   String get lowerName => name.toLowerCase();
@@ -42,6 +47,21 @@ class WebdavEntry {
       lowerName.endsWith('.gif') ||
       lowerName.endsWith('.webp') ||
       lowerName.endsWith('.svg');
+}
+
+/// De inhoud van een gedownload bestand plus de versieaanduiding die de server
+/// eraan hing, zodat een latere PUT kan zeggen "alleen als het nog steeds deze
+/// versie is".
+class WebdavFile {
+  final Uint8List bytes;
+
+  /// De ETag zoals de server hem gaf, inclusief aanhalingstekens en een
+  /// eventuele `W/`-prefix — bewust ongewijzigd doorgegeven, want hij moet er
+  /// bij `If-Match` letterlijk zo weer uit. `null` wanneer de server er geen
+  /// stuurde; dan valt er niets te bewaken.
+  final String? etag;
+
+  const WebdavFile(this.bytes, this.etag);
 }
 
 /// Reden waarom een WebDAV-bewerking faalde — zodat de UI een begrijpelijke
@@ -62,6 +82,27 @@ class WebdavException implements Exception {
   WebdavException(this.kind, this.message);
   @override
   String toString() => 'WebdavException($kind): $message';
+}
+
+/// Het bestand op de server is veranderd sinds wij het ophaalden: de server
+/// weigerde onze `If-Match` (412).
+///
+/// Bewust een eigen type en geen [WebdavError]-soort — net als
+/// `GitConflictException`, en om dezelfde reden: dit is geen storing die je
+/// opnieuw probeert, maar een uitkomst waar de aanroeper een keuze over moet
+/// voorleggen. Als foutsoort zou hij bovendien opduiken in switches van
+/// bewerkingen waar hij niet kán ontstaan, zoals de verbindingstest.
+class WebdavConflictException implements Exception {
+  /// De versie waarop ons werk gebaseerd was, dus wat we de server vroegen te
+  /// bevestigen. Voor de melding en om te kunnen zien wat er misging.
+  final String expectedEtag;
+  final String message;
+  const WebdavConflictException({
+    required this.expectedEtag,
+    required this.message,
+  });
+  @override
+  String toString() => 'WebdavConflictException($expectedEtag): $message';
 }
 
 /// Spreekt WebDAV (Nextcloud) over `dart:io HttpClient` met basic-auth. Deelt de
@@ -160,6 +201,7 @@ class WebdavService {
       '<d:resourcetype/>'
       '<d:getcontentlength/>'
       '<d:getcontenttype/>'
+      '<d:getetag/>'
       '<d:displayname/>'
       '</d:prop>'
       '</d:propfind>';
@@ -253,6 +295,7 @@ class WebdavService {
       );
       int? size;
       String? contentType;
+      String? etag;
       for (final p in prop) {
         for (final child in p.childElements) {
           if (child.localName == 'getcontentlength') {
@@ -260,6 +303,9 @@ class WebdavService {
           } else if (child.localName == 'getcontenttype') {
             final v = child.innerText.trim();
             if (v.isNotEmpty) contentType = v;
+          } else if (child.localName == 'getetag') {
+            final v = child.innerText.trim();
+            if (v.isNotEmpty) etag = v;
           }
         }
       }
@@ -271,6 +317,7 @@ class WebdavService {
           isCollection: isCollection,
           size: size,
           contentType: contentType,
+          etag: etag,
         ),
       );
     }
@@ -308,7 +355,7 @@ class WebdavService {
 
   /// Download het bestand op [remotePath]. Streamt met een harde limiet en
   /// volgt geen redirects. Geeft de bytes, of gooit [WebdavException].
-  Future<Uint8List> download(
+  Future<WebdavFile> download(
     String remotePath, {
     int maxBytes = maxDownloadBytes,
   }) async {
@@ -339,7 +386,10 @@ class WebdavService {
           throw WebdavException(WebdavError.tooLarge, 'Bestand te groot');
         }
       }
-      return builder.takeBytes();
+      return WebdavFile(
+        builder.takeBytes(),
+        response.headers.value(HttpHeaders.etagHeader),
+      );
     } on WebdavException {
       rethrow;
     } on TimeoutException {
@@ -353,8 +403,28 @@ class WebdavService {
   }
 
   /// Upload [bytes] naar [remotePath]. Maakt ontbrekende bovenliggende mappen
-  /// aan met MKCOL en doet daarna een PUT.
-  Future<void> upload(String remotePath, List<int> bytes) async {
+  /// aan met MKCOL en doet daarna een PUT. Geeft de nieuwe ETag terug wanneer
+  /// de server er een meldt, zodat een volgende opslag daarop verder kan.
+  ///
+  /// [ifMatch] maakt de PUT voorwaardelijk: hij slaagt alleen als het bestand
+  /// daar nog die versie is, anders volgt [WebdavError.conflict]. Zonder
+  /// [ifMatch] wordt er onvoorwaardelijk geschreven — dat is juist voor een
+  /// bestand dat wij niet eerder ophaalden, en fout voor een bestand dat we
+  /// terugschrijven.
+  ///
+  /// [onlyIfAbsent] schrijft alleen wanneer er nog niets staat (`If-None-Match:
+  /// *`), voor het geval "nieuw bestand aanmaken op een pad dat de gebruiker
+  /// koos". De twee sluiten elkaar uit.
+  Future<String?> upload(
+    String remotePath,
+    List<int> bytes, {
+    String? ifMatch,
+    bool onlyIfAbsent = false,
+  }) async {
+    assert(
+      ifMatch == null || !onlyIfAbsent,
+      'If-Match en If-None-Match:* spreken elkaar tegen',
+    );
     final uri = server.uriFor(remotePath);
     if (uri == null) {
       throw WebdavException(WebdavError.config, 'Pad buiten de wortelmap');
@@ -364,11 +434,28 @@ class WebdavService {
       await _ensureParents(client, remotePath);
       final request = await _openRequest(client, 'PUT', uri);
       request.headers.contentType = ContentType('application', 'octet-stream');
+      if (ifMatch != null) {
+        request.headers.set(HttpHeaders.ifMatchHeader, ifMatch);
+      } else if (onlyIfAbsent) {
+        request.headers.set(HttpHeaders.ifNoneMatchHeader, '*');
+      }
       request.add(bytes);
       final response = await request.close().timeout(
         const Duration(seconds: 120),
       );
+      // Vóór _checkStatus: 412 betekent hier iets specifieks (onze voorwaarde
+      // klopte niet) en mag niet als algemene serverfout wegvallen. 428 stuurt
+      // een server die een voorwaarde eist; voor de gebruiker hetzelfde
+      // verhaal — eerst kijken wat er staat, niet blind overschrijven.
+      if (response.statusCode == 412 || response.statusCode == 428) {
+        await response.drain<void>();
+        throw WebdavConflictException(
+          expectedEtag: ifMatch ?? '*',
+          message: 'Bestand op de server gewijzigd (${response.statusCode})',
+        );
+      }
       _checkStatus(response.statusCode);
+      final newEtag = response.headers.value(HttpHeaders.etagHeader);
       await response.drain<void>();
       if (response.statusCode != 200 &&
           response.statusCode != 201 &&
@@ -378,7 +465,13 @@ class WebdavService {
           'Upload gaf status ${response.statusCode}',
         );
       }
+      // Niet elke server geeft een ETag terug op de PUT. Dan weten we de
+      // nieuwe versie niet en valt er bij de vólgende opslag niets te
+      // vergelijken; dat is zichtbaar als `null` en niet als een gok.
+      return newEtag;
     } on WebdavException {
+      rethrow;
+    } on WebdavConflictException {
       rethrow;
     } on TimeoutException {
       throw WebdavException(WebdavError.network, 'Time-out');

@@ -1780,6 +1780,10 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Iemand anders heeft dit bestand gewijzigd': 'En anden har ændret denne fil',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'Versionen på serveren er ændret, siden du åbnede denne præsentation. Overskrivning kasserer den andens arbejde.',
+  'Overschrijven': 'Overskriv',
   'Openen vanaf WebDAV': 'Åbn fra WebDAV',
   'Opslaan naar WebDAV': 'Gem til WebDAV',
   'Opgeslagen op WebDAV:': 'Gemt på WebDAV:',

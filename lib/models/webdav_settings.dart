@@ -184,10 +184,18 @@ class WebdavOrigin {
   /// Pad van het oorspronkelijk geopende bestand, relatief aan de wortelmap.
   final String remotePath;
 
+  /// De versie die op de server stond toen wij dit bestand ophaalden (of er
+  /// voor het laatst naartoe schreven). Hiermee kan een volgende opslag zeggen
+  /// "alleen als er sindsdien niets veranderd is". `null` wanneer de server
+  /// geen ETag gaf — dan valt er niets te bewaken en schrijven we zoals
+  /// voorheen onvoorwaardelijk.
+  final String? etag;
+
   const WebdavOrigin({
     required this.baseUrl,
     required this.username,
     required this.remotePath,
+    this.etag,
   });
 
   /// Map waarin het bestand staat (relatief aan de wortel), of leeg voor de

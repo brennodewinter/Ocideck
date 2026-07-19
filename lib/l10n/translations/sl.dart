@@ -1783,6 +1783,11 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Iemand anders heeft dit bestand gewijzigd':
+      'To datoteko je spremenil nekdo drug',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'Različica na strežniku se je spremenila, odkar ste odprli to predstavitev. Prepis zavrže delo druge osebe.',
+  'Overschrijven': 'Prepiši',
   'Openen vanaf WebDAV': 'Odpri iz WebDAV',
   'Opslaan naar WebDAV': 'Shrani na WebDAV',
   'Opgeslagen op WebDAV:': 'Shranjeno na WebDAV:',

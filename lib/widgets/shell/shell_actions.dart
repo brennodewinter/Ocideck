@@ -371,36 +371,100 @@ Future<void> _saveToNextcloud(BuildContext context, WidgetRef ref) async {
   final defaultBase = reuse
       ? origin.remotePath.replaceAll(RegExp(r'\.(ocideck|zip|md)$'), '')
       : _safeRemoteName(deck.title);
-  final choice = await _showWebdavSaveDialog(context, defaultBase: defaultBase);
+  var choice = await _showWebdavSaveDialog(context, defaultBase: defaultBase);
   if (choice == null || !context.mounted) return;
 
   final messenger = ScaffoldMessenger.of(context);
   final l10n = context.l10n;
-  final ext = choice.format == WebdavSaveFormat.ocideck ? '.ocideck' : '.md';
-  final targetPath = '${choice.base}$ext';
-  try {
-    await ref
-        .read(tabsProvider.notifier)
-        .saveToWebdav(
-          tab,
-          service,
-          format: choice.format,
-          targetPath: targetPath,
-        );
-    if (!context.mounted) return;
-    messenger.showSnackBar(
-      SnackBar(
-        content: Text('${l10n.d('Opgeslagen op WebDAV:')} /$targetPath'),
-      ),
-    );
-  } on WebdavException catch (e) {
-    logWarning('shell: WebDAV-opslaan mislukt', e);
-    showErrorSnackBar(
-      messenger,
-      l10n,
-      '${l10n.d('Opslaan mislukt:')} ${webdavErrorMessage(l10n, e)}',
-    );
+  // Blijft doorlopen zolang de gebruiker na een botsing een andere weg kiest:
+  // onder een nieuwe naam opslaan, of alsnog overschrijven.
+  var overwrite = false;
+  while (true) {
+    final ext = choice!.format == WebdavSaveFormat.ocideck ? '.ocideck' : '.md';
+    final targetPath = '${choice.base}$ext';
+    try {
+      await ref
+          .read(tabsProvider.notifier)
+          .saveToWebdav(
+            tab,
+            service,
+            format: choice.format,
+            targetPath: targetPath,
+            overwrite: overwrite,
+          );
+      if (!context.mounted) return;
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text('${l10n.d('Opgeslagen op WebDAV:')} /$targetPath'),
+        ),
+      );
+      return;
+    } on WebdavConflictException catch (e) {
+      logWarning('shell: WebDAV-opslaan botste met een nieuwere versie', e);
+      if (!context.mounted) return;
+      final resolution = await _showWebdavConflictDialog(context);
+      if (resolution == null || !context.mounted) return;
+      switch (resolution) {
+        case _WebdavConflict.overwrite:
+          overwrite = true;
+        case _WebdavConflict.saveAs:
+          final next = await _showWebdavSaveDialog(
+            context,
+            defaultBase: choice.base,
+          );
+          if (next == null || !context.mounted) return;
+          choice = next;
+          // Een ander doelpad wordt niet bewaakt (we haalden het nooit op),
+          // maar een ongewijzigd pad moet de guard hóuden.
+          overwrite = false;
+      }
+    } on WebdavException catch (e) {
+      logWarning('shell: WebDAV-opslaan mislukt', e);
+      showErrorSnackBar(
+        messenger,
+        l10n,
+        '${l10n.d('Opslaan mislukt:')} ${webdavErrorMessage(l10n, e)}',
+      );
+      return;
+    }
   }
+}
+
+/// Wat de gebruiker doet als het bestand op de server inmiddels van iemand
+/// anders is. Bewust geen samenvoegkeuze zoals bij git: die leunt erop dat de
+/// basisversie nog opvraagbaar is, en bij WebDAV is die weg zodra de ander
+/// heeft geüpload.
+enum _WebdavConflict { saveAs, overwrite }
+
+Future<_WebdavConflict?> _showWebdavConflictDialog(BuildContext context) {
+  final l10n = context.l10n;
+  return showDialog<_WebdavConflict>(
+    context: context,
+    builder: (ctx) => AlertDialog(
+      title: Text(l10n.d('Iemand anders heeft dit bestand gewijzigd')),
+      content: Text(
+        l10n.d(
+          'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.',
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(ctx),
+          child: Text(l10n.t('cancel')),
+        ),
+        TextButton(
+          onPressed: () => Navigator.pop(ctx, _WebdavConflict.overwrite),
+          child: Text(l10n.d('Overschrijven')),
+        ),
+        // Als voorkeursknop rechts: hij behoudt beide versies, en dat is wat
+        // je wilt aanraden aan iemand die dit scherm onverwacht krijgt.
+        FilledButton(
+          onPressed: () => Navigator.pop(ctx, _WebdavConflict.saveAs),
+          child: Text(l10n.d('Opslaan als')),
+        ),
+      ],
+    ),
+  );
 }
 
 void _webdavNotConfigured(BuildContext context) {

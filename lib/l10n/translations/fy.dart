@@ -739,6 +739,11 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Iemand anders heeft dit bestand gewijzigd':
+      'Immen oars hat dit bestân feroare',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'De ferzje op de server is feroare sûnt do dizze presintaasje iepenest. Oerskriuwe makket it wurk fan de oar ûngedien.',
+  'Overschrijven': 'Oerskriuwe',
   'Openen vanaf WebDAV': 'Iepenje fan WebDAV',
   'Opslaan naar WebDAV': 'Bewarje nei WebDAV',
   'Opgeslagen op WebDAV:': 'Bewarre op WebDAV:',

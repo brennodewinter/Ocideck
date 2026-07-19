@@ -1817,6 +1817,11 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Iemand anders heeft dit bestand gewijzigd':
+      'D\'athraigh duine eile an comhad seo',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'Tá an leagan ar an bhfreastalaí athraithe ó d\'oscail tú an láithreoireacht seo. Scriosann forscríobh obair an duine eile.',
+  'Overschrijven': 'Forscríobh',
   'Openen vanaf WebDAV': 'Oscail ó WebDAV',
   'Opslaan naar WebDAV': 'Sábháil chuig WebDAV',
   'Opgeslagen op WebDAV:': 'Sábháilte chuig WebDAV:',

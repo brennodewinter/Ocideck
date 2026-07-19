@@ -1756,6 +1756,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Iemand anders heeft dit bestand gewijzigd': 'latlh nuv De\' choHta\'',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'De\'wI\'Daq cha\'nav choHlu\'pu\', SoH poSmoHpu\'DI\'. DaSIchchugh, latlh Qu\' Qaw\'lu\'.',
+  'Overschrijven': 'yISIch',
   'Openen vanaf WebDAV': 'WebDAVvo\' poSmoH',
   'Opslaan naar WebDAV': 'WebDAVDaq pol',
   'Opgeslagen op WebDAV:': 'WebDAVDaq polpu\':',

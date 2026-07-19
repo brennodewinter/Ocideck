@@ -738,6 +738,11 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Iemand anders heeft dit bestand gewijzigd':
+      'Jemand anderes hat diese Datei geändert',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'Die Version auf dem Server hat sich geändert, seit du diese Präsentation geöffnet hast. Überschreiben verwirft die Arbeit der anderen Person.',
+  'Overschrijven': 'Überschreiben',
   'Openen vanaf WebDAV': 'Von WebDAV öffnen',
   'Opslaan naar WebDAV': 'Auf WebDAV speichern',
   'Opgeslagen op WebDAV:': 'Auf WebDAV gespeichert:',

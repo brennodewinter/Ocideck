@@ -1797,6 +1797,10 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Iemand anders heeft dit bestand gewijzigd': 'Alius hunc fasciculum mutavit',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'Versio in servitore mutata est ex quo hanc praesentationem aperuisti. Superscribere opus alterius delet.',
+  'Overschrijven': 'Superscribere',
   'Openen vanaf WebDAV': 'Ex WebDAV aperire',
   'Opslaan naar WebDAV': 'In WebDAV servare',
   'Opgeslagen op WebDAV:': 'In WebDAV servatum:',

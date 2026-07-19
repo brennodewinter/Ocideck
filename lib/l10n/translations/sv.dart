@@ -1780,6 +1780,11 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Iemand anders heeft dit bestand gewijzigd':
+      'Någon annan har ändrat den här filen',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'Versionen på servern har ändrats sedan du öppnade den här presentationen. Att skriva över kastar bort den andras arbete.',
+  'Overschrijven': 'Skriv över',
   'Openen vanaf WebDAV': 'Öppna från WebDAV',
   'Opslaan naar WebDAV': 'Spara till WebDAV',
   'Opgeslagen op WebDAV:': 'Sparad till WebDAV:',

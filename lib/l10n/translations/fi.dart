@@ -1781,6 +1781,11 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Iemand anders heeft dit bestand gewijzigd':
+      'Joku muu on muuttanut tätä tiedostoa',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'Palvelimella oleva versio on muuttunut sen jälkeen, kun avasit tämän esityksen. Korvaaminen hylkää toisen tekemän työn.',
+  'Overschrijven': 'Korvaa',
   'Openen vanaf WebDAV': 'Avaa WebDAVista',
   'Opslaan naar WebDAV': 'Tallenna WebDAViin',
   'Opgeslagen op WebDAV:': 'Tallennettu WebDAViin:',
