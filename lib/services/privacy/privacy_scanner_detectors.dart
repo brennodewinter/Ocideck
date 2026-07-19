@@ -481,4 +481,121 @@ extension PrivacyScannerDetectors on PrivacyScanner {
       );
     }
   }
+
+  // ── fin.us_routing ────────────────────────────────────────────────────────
+
+  /// Het Amerikaanse ABA routing number.
+  ///
+  /// Zit in de financiële familie en niet in het VS-landpakket, en dat is een
+  /// bewuste keuze: een Amerikaans rekeningnummer in een Nederlands deck hoort
+  /// niet stil te blijven omdat de auteur het VS-pakket uit had staan. Zo staat
+  /// `fin.iban` er ook in — die geldt voor negenentachtig landen tegelijk.
+  ///
+  /// De mod-10 draagt hier het bewijs, anders dan bij de rest van §15. Vandaar
+  /// de contextpoort: negen cijfers halen de controle één op de tien keer, en
+  /// een bankrekening zonder het woord erbij is meestal een ordernummer.
+  void _scanAbaRouting(
+    _Fragment fragment,
+    int slideIndex,
+    List<PrivacyFinding> out,
+  ) {
+    for (final match in _reAbaRouting.allMatches(fragment.text)) {
+      if (!isValidAbaRouting(match.group(0)!)) continue;
+      if (!_hasContextWord(fragment.text, match.start, _abaContextWords)) {
+        continue;
+      }
+      _emit(
+        out,
+        _finding(
+          fragment,
+          slideIndex,
+          match,
+          ruleId: 'fin.us_routing',
+          family: PrivacyFamily.financial,
+          confidence: PrivacyConfidence.likely,
+        ),
+      );
+    }
+  }
+
+  // ── contact.address: de twee ankers ───────────────────────────────────────
+
+  /// De twee adresankers die geen straatnamenlijst nodig hebben.
+  ///
+  /// Levert per anker één span over het hele adres, en schrijft die spans in
+  /// [spans] zodat [_scanAddress] weet wat er al gedekt is. Zie de kop van
+  /// `privacy_contact_rules.dart` voor waarom een adres in stukjes redigeren
+  /// geen adres redigeert.
+  void _scanAnchoredAddresses(
+    _Fragment fragment,
+    int slideIndex,
+    List<PrivacyFinding> out,
+    List<({int start, int end})> spans,
+  ) {
+    final text = fragment.text;
+
+    // Anker 1: de postcode staat er direct achter. Dat is in Nederland vrijwel
+    // uniek identificerend, dus dit is `certain` zonder verdere bevestiging.
+    for (final m in fullAddressPattern.allMatches(text)) {
+      final postcode = dutchPostcodePattern.firstMatch(m.group(0)!);
+      if (postcode == null || !isPlausibleDutchPostcode(postcode.group(0)!)) {
+        continue;
+      }
+      spans.add((start: m.start, end: m.end));
+      _emit(
+        out,
+        _finding(
+          fragment,
+          slideIndex,
+          m,
+          ruleId: 'contact.address',
+          family: PrivacyFamily.contact,
+          confidence: PrivacyConfidence.certain,
+        ),
+      );
+    }
+
+    // Anker 2: de auteur schrijft er zelf "adres" boven.
+    for (final m in addressLabelPattern.allMatches(text)) {
+      final label = m.group(1)!;
+      final raw = m.group(2)!;
+      final value = raw.trimRight();
+      if (value.isEmpty) continue;
+      // De waarde is gulzig tot het regeleinde, dus ze eindigt op `m.end`; het
+      // afgeknipte staartje wit schuift het einde naar links.
+      final end = m.end - (raw.length - value.length);
+      final start = end - value.length;
+      if (spans.any((s) => start >= s.start && end <= s.end)) continue;
+
+      // Een woonadres is per definitie van een persoon. Een kaal `Adres:` kan
+      // het kantoor zijn en blijft daarom een hint — tenzij er een huisnummer
+      // of postcode in staat, want dan wijst het een pand aan.
+      final specific =
+          isResidentialAddressLabel(label) ||
+          dutchPostcodePattern.hasMatch(value) ||
+          streetAddressPattern.hasMatch(value);
+      spans.add((start: start, end: end));
+      _emit(
+        out,
+        _finding(
+          fragment,
+          slideIndex,
+          m,
+          ruleId: 'contact.address',
+          family: PrivacyFamily.contact,
+          confidence: specific
+              ? PrivacyConfidence.certain
+              : PrivacyConfidence.possible,
+          spanStart: start,
+          spanEnd: end,
+          value: value,
+        ),
+      );
+    }
+  }
 }
+
+/// Negen kale cijfers; de mod-10 en de contextpoort doen het echte werk.
+final _reAbaRouting = RegExp(r'(?<!\d)\d{9}(?!\d)');
+
+const _abaContextWords = ['routing', 'aba', 'ach', 'wire', 'bank'];
