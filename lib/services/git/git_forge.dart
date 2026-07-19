@@ -60,7 +60,14 @@ enum GitForgeError {
   blockedHost,
 
   network,
+
+  /// De forge accepteerde het token niet (401).
   auth,
+
+  /// Het token is geldig, maar mag dit niet — te weinig scope, of een limiet
+  /// die de forge oplegt (403). Ander advies dan [auth]: een nieuw token
+  /// aanmaken helpt pas als je hem méér rechten geeft.
+  forbidden,
   notFound,
   tooLarge,
   server,

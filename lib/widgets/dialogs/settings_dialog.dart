@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math' as math;
 
 import 'package:file_picker/file_picker.dart';
@@ -226,6 +227,9 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     _connections = List.of(settings.connections);
     for (final connection in _connections) {
       _adoptConnectionForm(connection);
+      // De configuratie zoals hij bij het openen was. Wijzigt hij, dan slaat
+      // een eerdere geslaagde test nergens meer op en vervalt hij.
+      _configAtOpen[connection.id] = jsonEncode(connection.toJson()['config']);
     }
     _exportDirectory = settings.exportDirectory;
     // Reflect the profile the open presentation actually uses, falling back to
@@ -344,16 +348,33 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   /// De verbindingen zoals ze worden opgeslagen: de netwerkvelden uit hun
   /// formulier gelezen, namen getrimd, en een leeg gelaten naam vervangen door
   /// iets herkenbaars zodat elke rij een label houdt.
+  /// Per verbinding de configuratie zoals hij bij het openen was, als JSON.
+  /// Alleen om te kúnnen zien dát er iets veranderde — niet om terug te lezen.
+  final Map<String, String> _configAtOpen = {};
+
   List<StorageConnection> _normalizedConnections() => [
     for (final c in _connections) _normalizeConnection(c),
   ];
 
   StorageConnection _normalizeConnection(StorageConnection c) {
+    final verified = _verificationFor(c);
     final withValues = switch (c) {
       LocalConnection() => c,
-      WebdavConnection() => c.copyWith(server: _webdavForms[c.id]?.server),
-      S3Connection() => c.copyWith(bucket: _s3Forms[c.id]?.config),
-      GitConnection() => c.copyWith(repo: _gitForms[c.id]?.config),
+      WebdavConnection() => c.copyWith(
+        server: _webdavForms[c.id]?.server,
+        verifiedAt: verified,
+        clearVerified: verified == null,
+      ),
+      S3Connection() => c.copyWith(
+        bucket: _s3Forms[c.id]?.config,
+        verifiedAt: verified,
+        clearVerified: verified == null,
+      ),
+      GitConnection() => c.copyWith(
+        repo: _gitForms[c.id]?.config,
+        verifiedAt: verified,
+        clearVerified: verified == null,
+      ),
     };
     final name = withValues.name.trim();
     if (name.isNotEmpty) return withValues;
@@ -370,6 +391,42 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       GitConnection() => withValues.copyWith(name: fallback),
     };
   }
+
+  /// Wanneer deze verbinding voor het laatst antwoord gaf — na deze
+  /// bewerkronde.
+  ///
+  /// Drie gevallen, in deze volgorde:
+  ///  1. In dit venster geslaagd getest → nú. Dat is de verste waarneming.
+  ///  2. De configuratie is gewijzigd → `null`. Een eerdere test ging over een
+  ///     andere server; hem laten staan zou een groen vinkje opleveren voor
+  ///     iets dat nooit is geprobeerd.
+  ///  3. Verder ongewijzigd → wat er stond.
+  ///
+  /// Een *mislukte* test wist niets. Hij bewijst dat het nú niet gaat, niet dat
+  /// het vorige week niet ging — en die eerdere waarneming is nog steeds het
+  /// beste dat we hebben.
+  DateTime? _verificationFor(StorageConnection c) {
+    final testedOk = switch (c) {
+      WebdavConnection() => _webdavForms[c.id]?.testOk,
+      S3Connection() => _s3Forms[c.id]?.testOk,
+      GitConnection() => _gitForms[c.id]?.testOk,
+      LocalConnection() => null,
+    };
+    if (testedOk == true) return DateTime.now();
+    final before = _configAtOpen[c.id];
+    final now = jsonEncode(_configOf(c));
+    if (before != null && before != now) return null;
+    return c.verifiedAt;
+  }
+
+  /// De configuratie zoals hij nú in de formulieren staat, voor de
+  /// vergelijking in [_verificationFor].
+  Object? _configOf(StorageConnection c) => switch (c) {
+    WebdavConnection() => _webdavForms[c.id]?.server.toJson(),
+    S3Connection() => _s3Forms[c.id]?.config.toJson(),
+    GitConnection() => _gitForms[c.id]?.config.toJson(),
+    LocalConnection() => c.toJson()['config'],
+  };
 
   /// Kies een map en voeg 'm als nieuwe lokale verbinding toe. De naam start op
   /// de mapnaam en is daarna in de rij te wijzigen. Een al toegevoegd pad wordt

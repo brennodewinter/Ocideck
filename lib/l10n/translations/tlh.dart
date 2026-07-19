@@ -1758,6 +1758,16 @@ const _dutchSourceTlh = {
 const _dutchSourceAddTlh = <String, String>{
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'vam Hol rop pong tu\'lu\'be\'. lalDan, woQ qeS, ghom mu\' je luleghlu\', \'ej mI\' toblu\'ta\' (BSN, IBAN, nav) reH vumtaH — \'ach rop ngu\' tu\'lu\'meH Qob.',
+  'niet getest': 'wIvbe\'',
+  'Werkte op': 'Qapta\'',
+  'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
+      'bI\'elpu\', \'ach naDev bIjaHlaHbe\'. mu\'wIj Qagh ghobe\' — vam nagh DevwI\' ghob yItlhob.',
+  'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':
+      'token Dun, \'ach vam chaw\'be\'. ghob law\' yInob, ghap forge poH-Sech chugh yiloS.',
+  'Het token is geldig, maar mag dit niet — geef het meer rechten op de repository.':
+      'token Dun, \'ach vam chaw\'be\' — repository-Daq ghob law\' yInob.',
+  'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
+      'bI\'elpu\', \'ach bIjaHlaHbe\' — mu\'wIj Qagh ghobe\'. vam nagh ghob yItlhob.',
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'mu\' tetlh chaw\': nuq ghItlhnISlu\'',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':

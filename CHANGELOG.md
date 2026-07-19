@@ -85,6 +85,21 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   Geen netwerk breekt de release evenmin af, maar het zegt wél dát er niet
   gekeken is. Stilte mag hier niet als goedkeuring lezen.
 
+- **De statusregel zegt nu of een bron ooit heeft geántwoord, niet alleen of
+  hij is ingevuld.** Een verbinding werd groen zodra de velden gevuld waren —
+  ook bij een server die nog nooit was aangeraakt. Dat groene vinkje beloofde
+  iets wat niemand had gecontroleerd.
+
+  Er zijn nu drie standen in plaats van twee: *niet ingesteld* (grijs),
+  *ingesteld maar niet getest* (amber, en het staat er in woorden bij — kleur
+  alleen is geen boodschap), en *werkte* (groen, met datum en tijd in de
+  tooltip). Een geslaagde verbindingstest wordt bewaard, dus je ziet het ook
+  nog na het afsluiten van de app.
+
+  Wijzig je de server, dan vervalt die waarneming: ze ging over iets anders.
+  Een *mislukte* test wist juist niets — die bewijst dat het nú niet gaat, niet
+  dat het vorige week niet ging, en die eerdere waarneming is nog steeds het
+  beste dat we hebben.
 - **Een git-repository kun je testen vóórdat je hem gebruikt.** WebDAV en S3
   hadden allebei een knop *Verbinding testen*; bij git zei het paneel alleen of
   er ergens op de machine een `git` stond — wat niets zegt over de URL, de
@@ -270,6 +285,20 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   gedrag waardoor mensen een privacycontrole uitzetten.
 
 ### Fixed
+- **"Geen toegang" en "verkeerd wachtwoord" waren dezelfde melding.** Een 401
+  en een 403 leverden allebei *"Aanmelden mislukt — controleer gebruikersnaam
+  en wachtwoord"*. Bij een 403 is dat het enige advies dat zéker niet helpt: je
+  bent binnen, je mag alleen hier niet bij. Wie het opvolgt, gaat een wachtwoord
+  zitten controleren dat klopt.
+
+  De twee zijn nu gescheiden, voor WebDAV en voor de drie git-forges. Bij git
+  gaat het meestal om een token met te weinig scope, of een limiet die de forge
+  oplegt — ook daar helpt "controleer je token" niet, maar "geef het meer
+  rechten" wel.
+
+  **S3 blijft bewust ongesplitst.** Die geeft óók 403 bij een verkeerde
+  handtekening of een verkeerde regio, dus daar zou splitsen op de status juist
+  misleiden: de bestaande melding noemt alle drie de oorzaken, en dat klopt.
 - **Een afgewezen push werd op een niet-Engelse machine als "offline"
   weggeschreven.** Wanneer iemand anders je voor is geweest, weigert git je
   push. OciDeck herkende dat aan de Engelse tekst in zijn uitvoer

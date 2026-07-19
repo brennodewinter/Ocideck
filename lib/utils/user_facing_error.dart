@@ -91,6 +91,9 @@ String webdavErrorMessage(AppLocalizations l10n, WebdavException e) {
     WebdavError.auth => l10n.d(
       'Aanmelden mislukt. Controleer gebruikersnaam en wachtwoord; gebruik bij Nextcloud een app-wachtwoord, niet je accountwachtwoord.',
     ),
+    WebdavError.forbidden => l10n.d(
+      'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.',
+    ),
     WebdavError.notFound => l10n.d(
       'Bestand of map niet gevonden op de server.',
     ),
@@ -135,6 +138,9 @@ String gitForgeErrorMessage(AppLocalizations l10n, GitForgeException e) {
     // De forge geeft ook 404 wanneer het token de repo niet mag zien: hij
     // verraadt liever niet dát hij bestaat. De melding mag dat niet als
     // zekerheid presenteren.
+    GitForgeError.forbidden => l10n.d(
+      'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.',
+    ),
     GitForgeError.notFound => l10n.d(
       'Niet gevonden in de repository — of je token mag het niet zien.',
     ),

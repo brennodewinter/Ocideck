@@ -377,7 +377,9 @@ void main() {
 
     test('maps the statuses a forge actually returns', () async {
       await expectKind(401, GitForgeError.auth);
-      await expectKind(403, GitForgeError.auth);
+      // 403 apart: het token is geldig, maar mag dit niet — een nieuw token
+      // aanmaken helpt pas als je hem méér rechten geeft.
+      await expectKind(403, GitForgeError.forbidden);
       await expectKind(404, GitForgeError.notFound);
       await expectKind(409, GitForgeError.notFound);
       await expectKind(500, GitForgeError.server);

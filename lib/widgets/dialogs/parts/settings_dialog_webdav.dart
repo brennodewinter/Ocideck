@@ -338,6 +338,10 @@ extension _SettingsWebdav on _SettingsDialogState {
         return l10n.d(
           'De server stuurt door naar een ander adres. Vul dat adres hier in.',
         );
+      case WebdavError.forbidden:
+        return l10n.d(
+          'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.',
+        );
       case WebdavError.notFound:
         return l10n.d('Map niet gevonden op de server');
       case WebdavError.config:

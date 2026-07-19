@@ -741,6 +741,16 @@ const _dutchSourceFy = {
 const _dutchSourceAddFy = {
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Foar de taal fan dit deck ûntbrekke de sykte- en oandwaningsnammen. Religy, politike oertsjûging en fakbûnstermen wurde wol herkend, en kontrôlesifers (BSN, IBAN, paspoart) wurkje altyd — mar rekkenje der net op dat in diagnoaze fûn wurdt.',
+  'niet getest': 'net test',
+  'Werkte op': 'Wurke op',
+  'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
+      'Do bist oanmeld, mar hast hjir gjin tagong. Dyn wachtwurd is net it probleem — freegje de behearder om rjochten op dizze map.',
+  'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':
+      'Dyn token is jildich, mar mei dit net. Jou it mear rjochten, of wachtsje as de forge in limyt oplegt.',
+  'Het token is geldig, maar mag dit niet — geef het meer rechten op de repository.':
+      'It token is jildich, mar mei dit net — jou it mear rjochten op de repository.',
+  'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
+      'Oanmeld, mar gjin tagong — dyn wachtwurd is net it probleem. Freegje rjochten op dizze map.',
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Leksikonlisinsjes: wat noch neifrege wurde moat',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':

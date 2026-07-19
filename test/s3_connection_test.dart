@@ -204,4 +204,62 @@ void main() {
       );
     });
   });
+
+  group('verifiedAt', () {
+    // "Ingevuld" is niet hetzelfde als "werkt". De statusregel werd groen bij
+    // een server die nooit was aangeraakt; dit veld is het verschil.
+    test('round-trips through the connection list', () {
+      final when = DateTime.utc(2026, 7, 19, 14, 22);
+      final list = [
+        S3Connection(
+          id: 'a',
+          name: 'Klant A',
+          bucket: const S3Bucket(
+            endpoint: 'https://s3.example.com',
+            bucket: 'decks',
+            region: 'eu-central-1',
+            accessKeyId: 'AKIA1',
+          ),
+          verifiedAt: when,
+        ),
+      ];
+      final back = StorageConnection.decodeList(
+        StorageConnection.encodeList(list),
+      );
+      expect(back.single.verifiedAt, when);
+    });
+
+    test('a connection that was never tested has none', () {
+      final back = StorageConnection.decodeList(
+        StorageConnection.encodeList([
+          const LocalConnection(id: 'a', name: 'Privé', path: '/tmp/x'),
+        ]),
+      );
+      expect(back.single.verifiedAt, isNull);
+    });
+
+    test('an unreadable date means "never tested", not a lost connection', () {
+      // Eén kapot veld mag de verbinding niet onbruikbaar maken: de
+      // servergegevens zijn nog prima, alleen de waarneming is weg.
+      final back = StorageConnection.decodeList(
+        '[{"id":"a","name":"Klant A","kind":"local",'
+        '"verifiedAt":"gisteren","config":{"path":"/tmp/x"}}]',
+      );
+      expect(back, hasLength(1));
+      expect(back.single.verifiedAt, isNull);
+      expect(back.single.isConfigured, isTrue);
+    });
+
+    test('clearVerified wipes it, and a plain copyWith keeps it', () {
+      final when = DateTime.utc(2026, 7, 19);
+      final c = LocalConnection(
+        id: 'a',
+        name: 'Privé',
+        path: '/tmp/x',
+        verifiedAt: when,
+      );
+      expect(c.copyWith(name: 'Anders').verifiedAt, when);
+      expect(c.copyWith(clearVerified: true).verifiedAt, isNull);
+    });
+  });
 }
