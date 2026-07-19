@@ -31,6 +31,7 @@ accepteren, waarschuwen met een shield-badge, of redigeren op scherm en in expor
 | §3-D kenteken (`nl.plate`) + buitenlandse postcodes (`<land>.postcode`) | **geleverd** |
 | §3-C `fin.pan` + `fin.cvv` (Luhn + IIN-bereik, CVV alleen in gezelschap) | **geleverd** |
 | §3-I `struct.notes_leak` | **geleverd** |
+| §3-H `bulk.quasi_combo` (Sweeney: geboortedatum + postcode + geslacht) | **geleverd** |
 | §13.2 Persoonskoppelingspoort (naam als koppeling, mededeling als bereik) | **geleverd** |
 | §13.2 Lexiconmodel als data (`role`/`match`/`weight`/`lang`) | **geleverd** |
 | §3-G `special.icd10` + `special.atc` (notatie met contextpoort) | **geleverd** |
@@ -423,6 +424,27 @@ gegeven staat (naam, BSN, e-mail, geboortedatum), wordt het `warning`/`error` �
 | `bulk.repeat` | Dezelfde regel ≥ N keer op één slide | N standaard 3. Eén e-mailadres = `warning`; veertig e-mailadressen = `error` en de melding zegt "massa-persoonsgegevens" | zeker | ✓ |
 | `bulk.k_anonymity` | Kleine cellen in een tabel | Tabel met quasi-identificatoren (leeftijd/postcode/geslacht) en groepsgroottes < 5 → herleidbaar ondanks "geanonimiseerd" | mogelijk | ○ |
 | `bulk.quasi_combo` | Combinatie van quasi-identificatoren | Geboortedatum + postcode + geslacht op één slide → praktisch uniek identificerend (Sweeney). Dit is de klassieke "maar het is toch geanonimiseerd"-val | waarschijnlijk | ✓ |
+
+> **Gebouwd (2026-07-19).** Geen nieuwe detectie maar een combinatie van wat er
+> al lag — met één bouwsteen die ontbrak.
+>
+> **Geslacht heeft bewust géén eigen regel.** "Geslacht: M" wijst in zijn eentje
+> niemand aan, dus als losse melding zou het alleen ruis zijn. Het telt hier mee
+> als *veld* en niet als woord: een label met een waarde erachter, of een
+> tabelkolom met die kop. Een kale `man` of `vrouw` in lopende tekst telt niet,
+> en dat verschil is het verschil tussen bruikbaar en onbruikbaar — anders gaat
+> de regel af op elk verhaal waar iemand in voorkomt.
+>
+> **Elk signaal telt uit twee bronnen: een bevinding óf een tabelkop.** Dat
+> tweede is nodig omdat een geboortedatum in een tabelcel géén
+> `contact.birthdate` oplevert: die regel eist een contextwoord binnen veertig
+> tekens, en een cel bevat alleen de datum. De kop bóven de kolom is dan het
+> contextwoord, alleen staat hij een rij hoger. Zonder die tweede route zou de
+> regel juist het geval missen waarvoor hij bestaat — de geëxporteerde tabel waar
+> de namen uit zijn gehaald.
+>
+> Twee van de drie meldt niets, en dat is de helft van de waarde: een regel die
+> al bij twee afgaat, meldt elke adreslijst.
 
 ### I. Structurele lekken — de verstopplekken in markdown
 

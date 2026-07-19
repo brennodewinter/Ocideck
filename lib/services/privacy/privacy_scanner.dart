@@ -144,6 +144,17 @@ class PrivacyScanner {
         _enabled(bulkFindingsFor(deck.slides[i], i, enabled).toList()),
       );
       _emit(findings, _enabledOne(notesLeakFinding(i, enabled)));
+      _emit(
+        findings,
+        _enabledOne(
+          quasiComboFinding(
+            deck.slides[i],
+            i,
+            enabled,
+            _textsOf(fragments).values.join('\n'),
+          ),
+        ),
+      );
     }
     return PrivacyScanResult(findings);
   }
@@ -163,6 +174,14 @@ class PrivacyScanner {
       ...enabled,
       ..._enabled(bulkFindingsFor(slide, index, enabled).toList()),
       ?_enabledOne(notesLeakFinding(index, enabled)),
+      ?_enabledOne(
+        quasiComboFinding(
+          slide,
+          index,
+          enabled,
+          _textsOf(fragments).values.join('\n'),
+        ),
+      ),
     ]);
   }
 

@@ -1789,6 +1789,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
+      'gimimo data, pašto kodas ir lytis kartu — šie trys paprastai nurodo vieną asmenį, net be vardo',
   'creditcardnummer': 'kredito kortelės numeris',
   'beveiligingscode van een creditcard': 'kortelės saugos kodas (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

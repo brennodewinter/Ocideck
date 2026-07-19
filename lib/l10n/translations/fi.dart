@@ -1781,6 +1781,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
+      'syntymäaika, postinumero ja sukupuoli yhdessä — nämä kolme osoittavat yleensä yhden henkilön, myös ilman nimeä',
   'creditcardnummer': 'luottokortin numero',
   'beveiligingscode van een creditcard': 'kortin turvakoodi (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

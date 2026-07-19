@@ -1797,6 +1797,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
+      'dies natalis, numerus postalis et sexus simul — haec tria plerumque unam personam designant, etiam sine nomine',
   'creditcardnummer': 'numerus chartae creditoriae',
   'beveiligingscode van een creditcard': 'codex securitatis chartae',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

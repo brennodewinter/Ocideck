@@ -1772,6 +1772,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
+      'sünnikuupäev, sihtnumber ja sugu koos — need kolm osutavad tavaliselt ühele inimesele, ka ilma nimeta',
   'creditcardnummer': 'krediitkaardi number',
   'beveiligingscode van een creditcard': 'kaardi turvakood (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

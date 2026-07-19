@@ -1799,6 +1799,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
+      'data nașterii, codul poștal și sexul împreună — aceste trei indică de obicei o singură persoană, chiar și fără nume',
   'creditcardnummer': 'număr de card bancar',
   'beveiligingscode van een creditcard':
       'codul de securitate al cardului (CVV)',

@@ -1781,6 +1781,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
+      'tanggal lahir, kode pos, dan jenis kelamin bersama-sama — ketiganya biasanya menunjuk satu orang, bahkan tanpa nama',
   'creditcardnummer': 'nomor kartu kredit',
   'beveiligingscode van een creditcard': 'kode keamanan kartu (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

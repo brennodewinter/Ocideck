@@ -739,6 +739,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
+      'bertedatum, postkoade en geslacht tegearre — dy trije wize meastal ien persoan oan, ek sûnder namme',
   'creditcardnummer': 'kredytkaartnûmer',
   'beveiligingscode van een creditcard': 'befeiligingskoade fan in kredytkaart',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

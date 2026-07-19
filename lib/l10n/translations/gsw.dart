@@ -1785,6 +1785,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
+      'Geburtsdatum, Poschtleitzahl und Gschlächt zäme — die drü zeige meischtens uf ei Person, au ohni Name',
   'creditcardnummer': 'Kreditcharte-Nummere',
   'beveiligingscode van een creditcard': 'Charteprüefnummere (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

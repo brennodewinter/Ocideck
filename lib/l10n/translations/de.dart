@@ -738,6 +738,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
+      'Geburtsdatum, Postleitzahl und Geschlecht zusammen — diese drei bezeichnen meist eine einzige Person, auch ohne Namen',
   'creditcardnummer': 'Kreditkartennummer',
   'beveiligingscode van een creditcard': 'Kartenprüfnummer (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
