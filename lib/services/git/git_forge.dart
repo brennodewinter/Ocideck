@@ -80,6 +80,36 @@ class GitForgeException implements Exception {
   String toString() => 'GitForgeException($kind): $message';
 }
 
+/// Wat een verbindingstest over de repo te weten kwam.
+///
+/// Bewust méér dan "het werkte". WebDAV en S3 hebben genoeg aan een ja/nee —
+/// daar is één pad fout of goed. Bij git kan alles kloppen (server bereikbaar,
+/// token geldig, repo gevonden) en de eerste opslag alsnog stranden, omdat de
+/// branch anders heet of het token alleen mag lezen. Dat zijn precies de
+/// dingen die de forge nú al weet en die de gebruiker anders pas een
+/// bewerkronde later ontdekt.
+class RepoProbe {
+  /// De standaardbranch zoals de forge hem kent. Wij kennen geen invoerveld
+  /// hiervoor, dus dit is de enige manier waarop een repo met `master` in
+  /// plaats van `main` ooit kan werken.
+  final String defaultBranch;
+
+  /// De repo bestaat maar heeft nog geen enkele commit. Geen fout: de eerste
+  /// opslag maakt hem aan. Wel iets om te melden, want een lege repo geeft bij
+  /// bijna elke andere aanroep een 404 of 409 die er alarmerender uitziet.
+  final bool isEmpty;
+
+  /// Of het token mag schrijven. `null` wanneer de forge het niet meldt — dan
+  /// weten we het niet, en dat is iets anders dan "nee".
+  final bool? canPush;
+
+  const RepoProbe({
+    required this.defaultBranch,
+    this.isEmpty = false,
+    this.canPush,
+  });
+}
+
 /// Wat er van een geslaagde commit terugkomt.
 class CommitResult {
   /// De sha van de nieuwe commit — de nieuwe [GitOrigin.baseSha] van de tab.
@@ -163,6 +193,15 @@ class GitConflictException implements Exception {
 ///   vollopen;
 /// - falen met [GitForgeException], nooit met een ruwe transportfout.
 abstract class GitForge {
+  /// Haal de repo zelf op: bestaat hij, hoe heet zijn standaardbranch, is hij
+  /// leeg, en mag dit token schrijven.
+  ///
+  /// De goedkoopste aanroep die alle vier beantwoordt, en de enige die de
+  /// gebruiker kan doen vóórdat er werk in het spel is. Spiegelt
+  /// `WebdavService.probe` en `S3Service.probe`, die git tot nu toe miste —
+  /// waardoor elke instelfout pas bij de eerste opslag opdook.
+  Future<RepoProbe> probe();
+
   /// Som de tree onder [path] op voor [ref] (branch, tag of sha). Een lege
   /// [path] is de repo-wortel. Met [recursive] worden ook submappen meegenomen.
   Future<List<RepoEntry>> listTree(

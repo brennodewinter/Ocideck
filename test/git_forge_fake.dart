@@ -114,6 +114,15 @@ class FakeForge implements GitForge {
   }
 
   @override
+  Future<RepoProbe> probe() async => RepoProbe(
+    // De eerste branch is de standaard: de fake kent geen aparte instelling en
+    // een testrepo heeft er in de praktijk één.
+    defaultBranch: repo.branches.keys.firstOrNull ?? 'main',
+    isEmpty: repo.branches.isEmpty,
+    canPush: true,
+  );
+
+  @override
   Future<String> headSha(String branch) async {
     _requireRef(branch);
     final sha = repo.branches[branch.trim()];
@@ -322,7 +331,14 @@ class FakeGiteaTransport implements GitTransport {
   }) async {
     // Strip /api/v1/repos/<owner>/<repo>
     final segments = uri.pathSegments.skip(5).toList();
-    if (segments.isEmpty) return _notFound();
+    // The repo object itself — what `probe()` asks for.
+    if (segments.isEmpty) {
+      return _json({
+        'default_branch': repo.branches.keys.firstOrNull ?? 'main',
+        'empty': repo.branches.isEmpty,
+        'permissions': {'admin': false, 'push': true, 'pull': true},
+      });
+    }
 
     if (segments.first == 'branches') {
       if (segments.length == 1) {

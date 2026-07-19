@@ -159,6 +159,37 @@ class GitHubForge implements GitForge {
   }
 
   @override
+  Future<RepoProbe> probe() async {
+    final response = await _transport.get(
+      _apiUri(const []),
+      headers: _headers,
+      maxBytes: maxListingBytes,
+    );
+    _checkStatus(response.status);
+    final json = _decodeJson(response.bytes);
+    if (json is! Map) {
+      throw const GitForgeException(
+        GitForgeError.malformed,
+        'Onverwacht antwoord op de repo-gegevens',
+      );
+    }
+    final branch = json['default_branch'];
+    final permissions = json['permissions'];
+    return RepoProbe(
+      defaultBranch: branch is String && branch.trim().isNotEmpty
+          ? branch.trim()
+          : config.defaultBranch,
+      // GitHub meldt niet of een repo leeg is. `size == 0` wordt daar vaak
+      // voor gebruikt, maar dat is een gok — een repo met alleen kleine
+      // bestanden is óók 0 KB. Liever niets beweren dan iets onwaars: de
+      // standaardbranch klopt bij een lege repo evengoed.
+      canPush: permissions is Map && permissions['push'] is bool
+          ? permissions['push'] as bool
+          : null,
+    );
+  }
+
+  @override
   Future<String> headSha(String branch) async {
     _requireRef(branch);
     final response = await _transport.get(

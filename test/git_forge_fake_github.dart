@@ -66,7 +66,14 @@ class FakeGitHubTransport implements GitTransport {
     required int maxBytes,
   }) async {
     final s = _rest(uri);
-    if (s.isEmpty) return _notFound();
+    // The repo object itself — what `probe()` asks for. GitHub reports no
+    // emptiness flag, so the shape deliberately lacks one.
+    if (s.isEmpty) {
+      return _json({
+        'default_branch': repo.branches.keys.firstOrNull ?? 'main',
+        'permissions': {'admin': false, 'push': true, 'pull': true},
+      });
+    }
 
     // git/trees/<ref>?recursive=1
     if (s.length >= 3 && s[0] == 'git' && s[1] == 'trees') {
