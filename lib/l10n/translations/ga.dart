@@ -1817,6 +1817,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Organisatie': 'Eagraíocht',
   'Openen vanaf WebDAV': 'Oscail ó WebDAV',
   'Opslaan naar WebDAV': 'Sábháil chuig WebDAV',
   'Opgeslagen op WebDAV:': 'Sábháilte chuig WebDAV:',

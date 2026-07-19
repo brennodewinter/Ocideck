@@ -1772,6 +1772,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Organisatie': 'Organisatsioon',
   'Openen vanaf WebDAV': 'Ava WebDAV\'ist',
   'Opslaan naar WebDAV': 'Salvesta WebDAV\'i',
   'Opgeslagen op WebDAV:': 'Salvestatud WebDAV\'i:',

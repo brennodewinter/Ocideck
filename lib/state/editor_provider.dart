@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/legacy.dart';
 
+import '../models/slide_quality.dart';
+
 enum EditorMode { visual, markdown }
 
 /// Welke omvang de markdown-modus toont: de hele presentatie of alleen de
@@ -24,6 +26,15 @@ class EditorState {
   /// [EditorNotifier.selectWithQualityField]).
   final String? focusQualityField;
 
+  /// Welk stuk tekst binnen [focusQualityField] geselecteerd moet worden zodra
+  /// dat veld focus krijgt. Reist samen met [focusQualityField] en wordt in
+  /// hetzelfde gebaar gewist.
+  ///
+  /// Selecteren in plaats van een eigen markering: een `TextSelection` is de
+  /// accentuering die de gebruiker al kent, werkt in elk tekstveld zonder extra
+  /// schilderwerk, en laat zich meteen kopiëren of overtypen.
+  final SlideQualitySpan? focusQualitySpan;
+
   /// Monotonic counter; [MarkdownDeckEditor] listens to open the find bar.
   final int markdownFindRequestId;
 
@@ -38,6 +49,7 @@ class EditorState {
     this.markdownBuffer = '',
     this.parseError = false,
     this.focusQualityField,
+    this.focusQualitySpan,
     this.markdownFindRequestId = 0,
     this.markdownFindShowReplace = false,
   });
@@ -52,6 +64,7 @@ class EditorState {
     String? markdownBuffer,
     bool? parseError,
     String? focusQualityField,
+    SlideQualitySpan? focusQualitySpan,
     bool clearFocusQualityField = false,
     int? markdownFindRequestId,
     bool? markdownFindShowReplace,
@@ -66,6 +79,9 @@ class EditorState {
       focusQualityField: clearFocusQualityField
           ? null
           : (focusQualityField ?? this.focusQualityField),
+      focusQualitySpan: clearFocusQualityField
+          ? null
+          : (focusQualitySpan ?? this.focusQualitySpan),
       markdownFindRequestId:
           markdownFindRequestId ?? this.markdownFindRequestId,
       markdownFindShowReplace:
@@ -95,11 +111,19 @@ class EditorNotifier extends StateNotifier<EditorState> {
   }
 
   /// Jump to [index] and request focus on [field] in the slide editor (once).
-  void selectWithQualityField(int index, String? field) {
+  ///
+  /// Is [span] gezet, dan wordt dat stuk tekst ook geselecteerd zodra het veld
+  /// focus krijgt — zo ziet de auteur meteen wélk fragment de melding bedoelt.
+  void selectWithQualityField(
+    int index,
+    String? field, {
+    SlideQualitySpan? span,
+  }) {
     state = state.copyWith(
       selectedIndex: index,
       selection: {index},
       focusQualityField: field,
+      focusQualitySpan: span,
       parseError: false,
     );
   }

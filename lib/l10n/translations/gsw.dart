@@ -1785,6 +1785,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Organisatie': 'Organisation',
   'Openen vanaf WebDAV': 'Vo WebDAV öffne',
   'Opslaan naar WebDAV': 'Uf WebDAV speichere',
   'Opgeslagen op WebDAV:': 'Uf WebDAV gspeicheret:',

@@ -471,6 +471,14 @@ class _QualityIssueTile extends StatelessWidget {
     final location = issue.isDeckWide
         ? l10n.d('Thema (hele presentatie)')
         : '${l10n.d('Slide')} ${issue.slideIndex + 1}';
+    // Het veld erbij, als we het kennen. "Slide 5 · Privacy" zegt dát er iets
+    // is; "Slide 5 · Privacy · Opsomming 3" zegt waar je moet kijken.
+    final field = slideQualityFieldLabel(l10n, issue);
+    final heading = [
+      location,
+      slideQualityCategoryLabel(l10n, issue.category),
+      ?field,
+    ].join(' · ');
 
     return InkWell(
       onTap: onTap,
@@ -501,7 +509,7 @@ class _QualityIssueTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '$location · ${slideQualityCategoryLabel(l10n, issue.category)}',
+                    heading,
                     style: TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.w600,

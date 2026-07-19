@@ -1803,6 +1803,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Organisatie': 'Organizzazzjoni',
   'Openen vanaf WebDAV': 'Iftaħ minn WebDAV',
   'Opslaan naar WebDAV': 'Issalva fuq WebDAV',
   'Opgeslagen op WebDAV:': 'Salvat fuq WebDAV:',

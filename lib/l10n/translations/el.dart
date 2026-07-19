@@ -1809,6 +1809,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Organisatie': 'Οργανισμός',
   'Openen vanaf WebDAV': 'Άνοιγμα από το WebDAV',
   'Opslaan naar WebDAV': 'Αποθήκευση στο WebDAV',
   'Opgeslagen op WebDAV:': 'Αποθηκεύτηκε στο WebDAV:',

@@ -1785,6 +1785,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Organisatie': 'Szervezet',
   'Openen vanaf WebDAV': 'Megnyitás a WebDAVról',
   'Opslaan naar WebDAV': 'Mentés a WebDAVra',
   'Opgeslagen op WebDAV:': 'Mentve a WebDAVra:',

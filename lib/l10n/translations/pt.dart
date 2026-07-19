@@ -1811,6 +1811,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Organisatie': 'Organização',
   'Openen vanaf WebDAV': 'Abrir a partir do WebDAV',
   'Opslaan naar WebDAV': 'Guardar no WebDAV',
   'Opgeslagen op WebDAV:': 'Guardado no WebDAV:',

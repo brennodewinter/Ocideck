@@ -1793,6 +1793,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Organisatie': 'Organizacja',
   'Openen vanaf WebDAV': 'Otwórz z WebDAV',
   'Opslaan naar WebDAV': 'Zapisz do WebDAV',
   'Opgeslagen op WebDAV:': 'Zapisano do WebDAV:',

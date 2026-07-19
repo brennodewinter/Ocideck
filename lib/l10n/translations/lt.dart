@@ -1789,6 +1789,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Organisatie': 'Organizacija',
   'Openen vanaf WebDAV': 'Atverti iš WebDAV',
   'Opslaan naar WebDAV': 'Išsaugoti į WebDAV',
   'Opgeslagen op WebDAV:': 'Išsaugota į WebDAV:',

@@ -1781,6 +1781,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Organisatie': 'Organisasi',
   'Openen vanaf WebDAV': 'Buka dari WebDAV',
   'Opslaan naar WebDAV': 'Simpan ke WebDAV',
   'Opgeslagen op WebDAV:': 'Disimpan ke WebDAV:',

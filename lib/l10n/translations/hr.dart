@@ -1788,6 +1788,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Organisatie': 'Organizacija',
   'Openen vanaf WebDAV': 'Otvori s WebDAVa',
   'Opslaan naar WebDAV': 'Spremi na WebDAV',
   'Opgeslagen op WebDAV:': 'Spremljeno na WebDAV:',

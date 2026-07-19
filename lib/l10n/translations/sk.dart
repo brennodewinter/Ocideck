@@ -1788,6 +1788,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Organisatie': 'Organizácia',
   'Openen vanaf WebDAV': 'Otvoriť z WebDAVu',
   'Opslaan naar WebDAV': 'Uložiť na WebDAV',
   'Opgeslagen op WebDAV:': 'Uložené na WebDAV:',

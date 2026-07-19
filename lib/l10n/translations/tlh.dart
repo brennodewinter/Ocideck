@@ -1756,6 +1756,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Organisatie': 'ghom',
   'Openen vanaf WebDAV': 'WebDAVvo\' poSmoH',
   'Opslaan naar WebDAV': 'WebDAVDaq pol',
   'Opgeslagen op WebDAV:': 'WebDAVDaq polpu\':',

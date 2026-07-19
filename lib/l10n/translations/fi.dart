@@ -1781,6 +1781,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Organisatie': 'Organisaatio',
   'Openen vanaf WebDAV': 'Avaa WebDAVista',
   'Opslaan naar WebDAV': 'Tallenna WebDAViin',
   'Opgeslagen op WebDAV:': 'Tallennettu WebDAViin:',

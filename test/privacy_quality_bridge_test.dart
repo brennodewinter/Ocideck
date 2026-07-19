@@ -10,14 +10,18 @@ void main() {
     required PrivacyFamily family,
     required PrivacyConfidence confidence,
     int slideIndex = 0,
+    int fragmentIndex = 0,
+    int start = 0,
+    int end = 5,
   }) => PrivacyFinding(
     ruleId: ruleId,
     family: family,
     confidence: confidence,
     slideIndex: slideIndex,
     field: 'bullets',
-    start: 0,
-    end: 5,
+    fragmentIndex: fragmentIndex,
+    start: start,
+    end: end,
     maskedSample: 'j…l',
   );
 
@@ -73,6 +77,30 @@ void main() {
     // De volledige waarde staat er niet in — een privacycontrole die de gevonden
     // gegevens in haar eigen meldingen zet, heeft het probleem verplaatst.
     expect(issue.args.values.join(), isNot(contains('jansen')));
+  });
+
+  test('de positie reist mee naar de kwaliteitsmelding', () {
+    // Zonder dit weet de auteur wél dat er een naam op de slide staat, maar niet
+    // waar — en bij een slide vol tekst is dat het verschil tussen een melding
+    // en een zoekopdracht.
+    final issue = privacyIssuesFrom(
+      PrivacyScanResult([
+        finding(
+          ruleId: 'contact.name',
+          family: PrivacyFamily.contact,
+          confidence: PrivacyConfidence.possible,
+          fragmentIndex: 3,
+          start: 12,
+          end: 19,
+        ),
+      ]),
+    ).single;
+
+    expect(issue.span, isNotNull);
+    expect(issue.span!.fragmentIndex, 3);
+    expect(issue.span!.start, 12);
+    expect(issue.span!.end, 19);
+    expect(issue.span!.isEmpty, isFalse);
   });
 
   test('een deckbrede bevinding krijgt de deckbrede sentinel', () {

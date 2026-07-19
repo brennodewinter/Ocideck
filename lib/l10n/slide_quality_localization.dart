@@ -21,6 +21,54 @@ import '../services/slide_quality_analyzer.dart'
         kTwoColumnWordWarningCount;
 import '../utils/color_contrast.dart' show kWcagCriticalBodyText;
 
+/// Waar op de slide een melding zit, in leesbare vorm: `Opsomming 3`, `Notities`.
+///
+/// Dit is het antwoord op de vraag die een melding zonder plaatsaanduiding
+/// oproept: *waar dan?* Een privacybevinding weet dat allang — veldnaam en
+/// fragmentindex zitten in het model — maar tot nu toe kwam die kennis niet
+/// verder dan de scanner. Op een slide met veertig regels tekst is "persoonsnaam
+/// (B…r)" zonder plaats geen melding maar een zoekopdracht.
+///
+/// Geeft `null` voor een veld dat we niet kennen: liever geen aanduiding dan een
+/// verkeerde.
+String? slideQualityFieldLabel(AppLocalizations l10n, SlideQualityIssue issue) {
+  final field = issue.field;
+  if (field == null || field.isEmpty) return null;
+  final label = switch (field) {
+    'title' => l10n.d('Titel'),
+    'subtitle' => l10n.d('Ondertitel'),
+    'bullets' => l10n.d('Opsomming'),
+    'bullets2' => l10n.d('Tweede opsomming'),
+    'columnTitle1' => l10n.d('Kop kolom 1'),
+    'columnTitle2' => l10n.d('Kop kolom 2'),
+    'quote' => l10n.d('Citaat'),
+    'quoteAuthor' => l10n.d('Bron citaat'),
+    'imageCaption' => l10n.d('Bijschrift'),
+    'imageCaption2' => l10n.d('Tweede bijschrift'),
+    'imageAltText' || 'imageAltText2' => l10n.d('Alt-tekst'),
+    'customMarkdown' => l10n.d('Inhoud'),
+    'notes' => l10n.d('Notities'),
+    'tableRows' => l10n.d('Tabel'),
+    'imagePath' || 'imagePath2' => l10n.d('Afbeelding'),
+    'videoPath' => l10n.d('Video'),
+    'audioPath' => l10n.d('Audio'),
+    'deckTitle' => l10n.d('Titel'),
+    'author' => l10n.d('Auteur'),
+    'organization' => l10n.d('Organisatie'),
+    'description' => l10n.d('Beschrijving'),
+    'keywords' => l10n.d('Trefwoorden'),
+    _ => null,
+  };
+  if (label == null) return null;
+
+  // Een samengesteld veld krijgt het volgnummer erbij: `Opsomming 3` wijst aan,
+  // `Opsomming` laat nog steeds zoeken. Enkelvoudige velden hebben altijd
+  // fragment 0 en krijgen dus vanzelf niets.
+  final fragment = issue.span?.fragmentIndex ?? 0;
+  if (fragment == 0) return label;
+  return '$label ${fragment + 1}';
+}
+
 String formatSlideQualityCountSummary(
   AppLocalizations l10n,
   SlideQualityResult result,

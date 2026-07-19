@@ -1797,6 +1797,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Organisatie': 'Institutum',
   'Openen vanaf WebDAV': 'Ex WebDAV aperire',
   'Opslaan naar WebDAV': 'In WebDAV servare',
   'Opgeslagen op WebDAV:': 'In WebDAV servatum:',

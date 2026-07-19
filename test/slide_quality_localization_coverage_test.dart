@@ -417,4 +417,67 @@ void main() {
       );
     });
   });
+
+  group('slideQualityFieldLabel', () {
+    SlideQualityIssue withField(String? field, {SlideQualitySpan? span}) =>
+        SlideQualityIssue(
+          slideIndex: 0,
+          kind: SlideQualityIssueKind.privacyContact,
+          category: SlideQualityCategory.privacy,
+          severity: MarkdownValidationSeverity.warning,
+          field: field,
+          span: span,
+        );
+
+    test('vertaalt de veldnaam van de scanner naar een leesbaar label', () {
+      AppLocalizations.setActiveLanguageCode('nl');
+      expect(slideQualityFieldLabel(l10n, withField('notes')), 'Notities');
+      AppLocalizations.setActiveLanguageCode('en');
+      expect(slideQualityFieldLabel(l10n, withField('notes')), 'Notes');
+    });
+
+    test('zet het volgnummer erbij voor een samengesteld veld', () {
+      // `Opsomming` laat nog steeds zoeken; `Opsomming 4` wijst aan.
+      inBothLanguages(() {
+        expect(
+          slideQualityFieldLabel(
+            l10n,
+            withField(
+              'bullets',
+              span: const SlideQualitySpan(
+                start: 0,
+                end: 3,
+                fragmentIndex: 3,
+              ),
+            ),
+          ),
+          endsWith(' 4'),
+        );
+      });
+    });
+
+    test('een enkelvoudig veld krijgt geen volgnummer', () {
+      inBothLanguages(() {
+        final label = slideQualityFieldLabel(
+          l10n,
+          withField(
+            'title',
+            span: const SlideQualitySpan(start: 0, end: 3),
+          ),
+        );
+        expect(label, isNotNull);
+        expect(label, isNot(endsWith(' 1')));
+      });
+    });
+
+    test('een onbekend of ontbrekend veld geeft niets terug', () {
+      // Liever geen plaatsaanduiding dan een verkeerde: `textColor` is een
+      // themaveld en hoort niet in de veldenlijst van een slide.
+      inBothLanguages(() {
+        expect(slideQualityFieldLabel(l10n, withField(null)), isNull);
+        expect(slideQualityFieldLabel(l10n, withField('')), isNull);
+        expect(slideQualityFieldLabel(l10n, withField('textColor')), isNull);
+      });
+    });
+  });
 }

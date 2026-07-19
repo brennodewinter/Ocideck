@@ -1784,6 +1784,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Organisatie': 'Organizace',
   'Openen vanaf WebDAV': 'Otevřít z WebDAV',
   'Opslaan naar WebDAV': 'Uložit na WebDAV',
   'Opgeslagen op WebDAV:': 'Uloženo na WebDAV:',

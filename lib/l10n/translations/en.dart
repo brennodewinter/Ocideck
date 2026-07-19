@@ -920,6 +920,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Organisatie': 'Organisation',
   'Openen vanaf WebDAV': 'Open from WebDAV',
   'Opslaan naar WebDAV': 'Save to WebDAV',
   'Opgeslagen op WebDAV:': 'Saved to WebDAV:',

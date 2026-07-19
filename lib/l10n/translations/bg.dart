@@ -1804,6 +1804,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Organisatie': 'Организация',
   'Openen vanaf WebDAV': 'Отваряне от WebDAV',
   'Opslaan naar WebDAV': 'Запазване в WebDAV',
   'Opgeslagen op WebDAV:': 'Запазено в WebDAV:',

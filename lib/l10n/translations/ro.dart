@@ -1799,6 +1799,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Organisatie': 'Organizație',
   'Openen vanaf WebDAV': 'Deschide din WebDAV',
   'Opslaan naar WebDAV': 'Salvează pe WebDAV',
   'Opgeslagen op WebDAV:': 'Salvat pe WebDAV:',
