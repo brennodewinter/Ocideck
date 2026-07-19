@@ -1781,6 +1781,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'geboortedatum': 'tanggal lahir',
+  'locatiecoördinaten': 'koordinat lokasi',
   'MAC-adres van een apparaat': 'alamat MAC sebuah perangkat',
   'IMEI van een toestel': 'IMEI sebuah ponsel',
   'ICCID van een simkaart': 'ICCID sebuah kartu SIM',

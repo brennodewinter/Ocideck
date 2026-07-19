@@ -1788,6 +1788,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'geboortedatum': 'datum rođenja',
+  'locatiecoördinaten': 'koordinate lokacije',
   'MAC-adres van een apparaat': 'MAC adresa uređaja',
   'IMEI van een toestel': 'IMEI uređaja',
   'ICCID van een simkaart': 'ICCID SIM kartice',

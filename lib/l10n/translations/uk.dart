@@ -1799,6 +1799,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'geboortedatum': 'дата народження',
+  'locatiecoördinaten': 'координати місця',
   'MAC-adres van een apparaat': 'MAC-адреса пристрою',
   'IMEI van een toestel': 'IMEI телефона',
   'ICCID van een simkaart': 'ICCID SIM-картки',

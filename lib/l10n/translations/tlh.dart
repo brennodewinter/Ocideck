@@ -1756,6 +1756,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'geboortedatum': 'boghDIS',
+  'locatiecoördinaten': 'Daq wIv mI\'',
   'MAC-adres van een apparaat': 'jan MAC Sep',
   'IMEI van een toestel': 'ghogh jan IMEI',
   'ICCID van een simkaart': 'SIM nav ICCID',

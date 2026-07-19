@@ -1784,6 +1784,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'geboortedatum': 'datum narození',
+  'locatiecoördinaten': 'souřadnice místa',
   'MAC-adres van een apparaat': 'MAC adresa zařízení',
   'IMEI van een toestel': 'IMEI telefonu',
   'ICCID van een simkaart': 'ICCID SIM karty',

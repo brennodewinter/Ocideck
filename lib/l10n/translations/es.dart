@@ -735,6 +735,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'geboortedatum': 'fecha de nacimiento',
+  'locatiecoördinaten': 'coordenadas de ubicación',
   'MAC-adres van een apparaat': 'dirección MAC de un dispositivo',
   'IMEI van een toestel': 'IMEI de un teléfono',
   'ICCID van een simkaart': 'ICCID de una tarjeta SIM',

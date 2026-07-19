@@ -434,6 +434,8 @@ String privacyRuleLabel(AppLocalizations l10n, String ruleId) {
     'contact.address' => l10n.d('adres'),
     'contact.postcode_nl' => l10n.d('postcode'),
     'contact.name' => l10n.d('persoonsnaam'),
+    'contact.birthdate' => l10n.d('geboortedatum'),
+    'contact.geo' => l10n.d('locatiecoördinaten'),
     'doc.mrz' => l10n.d('machineleesbare zone van een paspoort of ID'),
     'digital.ipv4' || 'digital.ipv6' => l10n.d('IP-adres'),
     'digital.mac' => l10n.d('MAC-adres van een apparaat'),

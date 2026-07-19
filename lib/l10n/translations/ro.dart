@@ -1799,6 +1799,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'geboortedatum': 'data nașterii',
+  'locatiecoördinaten': 'coordonate de locație',
   'MAC-adres van een apparaat': 'adresa MAC a unui dispozitiv',
   'IMEI van een toestel': 'IMEI-ul unui telefon',
   'ICCID van een simkaart': 'ICCID-ul unei cartele SIM',

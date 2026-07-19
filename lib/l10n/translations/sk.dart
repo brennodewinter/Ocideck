@@ -1788,6 +1788,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'geboortedatum': 'dátum narodenia',
+  'locatiecoördinaten': 'súradnice miesta',
   'MAC-adres van een apparaat': 'MAC adresa zariadenia',
   'IMEI van een toestel': 'IMEI telefónu',
   'ICCID van een simkaart': 'ICCID SIM karty',

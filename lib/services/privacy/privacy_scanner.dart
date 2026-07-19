@@ -25,11 +25,14 @@ import 'privacy_contact_rules.dart';
 import 'privacy_digital_rules.dart';
 import 'privacy_document_rules.dart';
 import 'privacy_eu_rules.dart';
+import 'privacy_location_rules.dart';
 import 'privacy_own_identity.dart';
 import 'privacy_phone_rules.dart';
 import 'privacy_special_rules.dart';
 import 'privacy_structural_rules.dart';
 import 'privacy_secret_rules.dart';
+
+part 'privacy_scanner_detectors.dart';
 
 /// Eén tekstfragment van een slide, met de veldnaam waar het uit komt.
 typedef _Fragment = ({String field, int index, String text});
@@ -231,6 +234,8 @@ class PrivacyScanner {
     _scanBsn(fragment, slideIndex, out);
     _scanMrz(fragment, slideIndex, out);
     _scanDigital(fragment, slideIndex, out);
+    _scanBirthdate(fragment, slideIndex, out);
+    _scanGeo(fragment, slideIndex, out);
     _scanSecrets(fragment, slideIndex, out);
     _scanEuIdentifiers(fragment, slideIndex, out);
     _scanSpecialCategories(fragment, slideIndex, out);
@@ -737,71 +742,6 @@ class PrivacyScanner {
           confidence: PrivacyConfidence.certain,
         ),
       );
-    }
-  }
-
-  // ── digital.* ─────────────────────────────────────────────────────────────
-
-  /// IP-adressen, MAC's, IMEI's, handles en device-ID's.
-  ///
-  /// Het werk zit niet in de patronen maar in de poorten erachter: een
-  /// versienummer is vier getallen met punten, een git-hash is hex, en een kale
-  /// UUID is net zo goed een primaire sleutel. Zie `privacy_digital_rules.dart`.
-  ///
-  /// Een privé-adres uit RFC 1918 zakt naar `possible`. Het is interne
-  /// infrastructuur en geen persoonsgegeven — de melding hoort er te zijn (een
-  /// intern adresplan in een publieke slide blijft een lek) maar mag niemand
-  /// onderbreken.
-  void _scanDigital(
-    _Fragment fragment,
-    int slideIndex,
-    List<PrivacyFinding> out,
-  ) {
-    for (final rule in digitalRules) {
-      for (final match in rule.pattern.allMatches(fragment.text)) {
-        if (rule.validate != null && !rule.validate!(match, fragment.text)) {
-          continue;
-        }
-        final value = match.group(0)!;
-        _emit(
-          out,
-          _finding(
-            fragment,
-            slideIndex,
-            match,
-            ruleId: rule.id,
-            family: PrivacyFamily.digital,
-            confidence: rule.id == 'digital.ipv4' && isPrivateIpv4(value)
-                ? PrivacyConfidence.possible
-                : rule.confidence,
-          ),
-        );
-      }
-    }
-
-    // De regels zonder checksum. Zonder hun contextwoord vuren ze niet: vijftien
-    // cijfers zijn ook een transactienummer, en een UUID is ook een bestandsnaam.
-    for (final entry in contextualDigitalRules) {
-      for (final match in entry.rule.pattern.allMatches(fragment.text)) {
-        if (!_hasContextWord(fragment.text, match.start, entry.contextWords)) {
-          continue;
-        }
-        if (entry.rule.validate != null &&
-            !entry.rule.validate!(match, fragment.text)) {
-          continue;
-        }
-        _emit(
-          out,
-          _finding(
-            fragment,
-            slideIndex,
-            match,
-            ruleId: entry.rule.id,
-            family: PrivacyFamily.digital,
-            confidence: entry.rule.confidence,
-          ),
-        );
-      }
     }
   }
 

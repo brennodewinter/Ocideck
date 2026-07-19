@@ -1785,6 +1785,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'geboortedatum': 'Geburtsdatum',
+  'locatiecoördinaten': 'Standortkoordinate',
   'MAC-adres van een apparaat': 'MAC-Adrässe vun eme Grät',
   'IMEI van een toestel': 'IMEI vun eme Handy',
   'ICCID van een simkaart': 'ICCID vunere SIM-Charte',

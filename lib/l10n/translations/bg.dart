@@ -1804,6 +1804,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'geboortedatum': 'дата на раждане',
+  'locatiecoördinaten': 'координати на местоположение',
   'MAC-adres van een apparaat': 'MAC адрес на устройство',
   'IMEI van een toestel': 'IMEI на телефон',
   'ICCID van een simkaart': 'ICCID на SIM карта',

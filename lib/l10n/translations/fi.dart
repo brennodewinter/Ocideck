@@ -1781,6 +1781,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'geboortedatum': 'syntymäaika',
+  'locatiecoördinaten': 'sijaintikoordinaatit',
   'MAC-adres van een apparaat': 'laitteen MAC-osoite',
   'IMEI van een toestel': 'puhelimen IMEI',
   'ICCID van een simkaart': 'SIM-kortin ICCID',

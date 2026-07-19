@@ -1789,6 +1789,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'geboortedatum': 'gimimo data',
+  'locatiecoördinaten': 'vietos koordinatės',
   'MAC-adres van een apparaat': 'įrenginio MAC adresas',
   'IMEI van een toestel': 'telefono IMEI',
   'ICCID van een simkaart': 'SIM kortelės ICCID',

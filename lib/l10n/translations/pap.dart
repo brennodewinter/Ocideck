@@ -738,6 +738,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'geboortedatum': 'fecha di nasementu',
+  'locatiecoördinaten': 'koordenadanan di lugá',
   'MAC-adres van een apparaat': 'adres MAC di un aparato',
   'IMEI van een toestel': 'IMEI di un aparato',
   'ICCID van een simkaart': 'ICCID di un karchi SIM',

@@ -739,6 +739,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'geboortedatum': 'berteedatum',
+  'locatiecoördinaten': 'lokaasjekoördinaten',
   'MAC-adres van een apparaat': 'MAC-adres fan in apparaat',
   'IMEI van een toestel': 'IMEI fan in tastel',
   'ICCID van een simkaart': 'ICCID fan in simkaart',

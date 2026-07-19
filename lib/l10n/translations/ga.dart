@@ -1817,6 +1817,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'geboortedatum': 'dáta breithe',
+  'locatiecoördinaten': 'comhordanáidí suímh',
   'MAC-adres van een apparaat': 'seoladh MAC gléis',
   'IMEI van een toestel': 'IMEI fóin',
   'ICCID van een simkaart': 'ICCID cárta SIM',

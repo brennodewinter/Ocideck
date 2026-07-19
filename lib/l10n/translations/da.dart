@@ -1780,6 +1780,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'geboortedatum': 'fødselsdato',
+  'locatiecoördinaten': 'positionskoordinater',
   'MAC-adres van een apparaat': 'MAC-adresse på en enhed',
   'IMEI van een toestel': 'IMEI på en telefon',
   'ICCID van een simkaart': 'ICCID på et SIM-kort',

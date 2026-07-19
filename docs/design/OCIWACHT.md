@@ -27,6 +27,8 @@ accepteren, waarschuwen met een shield-badge, of redigeren op scherm en in expor
 | §13.5 Beeldcontrole: herkenbare gezichten op afbeeldingen (YuNet, lokaal) | **geleverd** |
 | §3-B `doc.mrz`: machine-readable zone (TD1/TD2/TD3) | **geleverd** |
 | §3-E Digitale identificatoren (IP, MAC, IMEI, ICCID, IMSI, handle, device-ID) | **geleverd** |
+| §3-D `contact.birthdate` + `contact.geo` | **geleverd** |
+| §3-D `contact.plate` + `contact.postcode_intl` | open — wacht op de regiopakketten (fase 13) |
 | §13.2 Persoonskoppelingspoort (naam als koppeling, mededeling als bereik) | **geleverd** |
 | §13.2 Lexiconmodel als data (`role`/`match`/`weight`/`lang`) | open — fase 12 |
 | §13.3 Taaldekking zichtbaar, gebundelde lexicons | open — fase 13 |
@@ -121,6 +123,8 @@ groeit de regelset zonder de compile te breken.
 | `lib/services/privacy/privacy_contact_rules.dart` | Adres (straat + huisnummer), NL-postcode, gelabelde persoonsnaam: patronen, straatachtervoegsels, placeholder-personen |
 | `lib/services/privacy/privacy_phone_rules.dart` | Telefoon: E.164, nationale vorm, contextwoorden, toegekende landnummers, gereserveerde reeksen |
 | `lib/services/privacy/privacy_digital_rules.dart` | Digitale identificatoren: IPv4/IPv6, MAC, IMEI, ICCID, IMSI, social handles, device-ID's |
+| `lib/services/privacy/privacy_location_rules.dart` | Geboortedatum en coördinaten: datumvormen, contextwoorden, lat/lon, `geo:`-URI, plus-code, what3words |
+| `lib/services/privacy/privacy_scanner_detectors.dart` | `part of` de scanner: de detectoren voor MRZ, digitaal, geboortedatum en geo — puur om het hoofdbestand onder de 1000-regelgrens te houden |
 | `lib/services/privacy/privacy_document_rules.dart` | Reisdocumenten: de machine-readable zone (TD1/TD2/TD3) met de ICAO 9303-controlecijfers |
 | `lib/services/privacy/privacy_eu_rules.dart` | Europese landpakketten: BE/BG/DE/EE/ES/FI/FR/HR/IT/PL/PT/RO/SE + UK (NHS/NINO) |
 | `lib/services/privacy/privacy_checksums.dart`, `privacy_checksums_eu.dart` | 11-proef, mod-97, Luhn, ISO 7064, geboortedatum-validatie, enz. |
@@ -268,6 +272,18 @@ nul. Waar géén checksum bestaat (US SSN, V-nummer), is een contextwoord verpli
 > van elkaar, dan escaleren beide naar `certain` — postcode plus huisnummer wijst
 > in Nederland één woonadres aan. Nog niet gebouwd: `contact.postcode_intl`,
 > `contact.birthdate`, `contact.geo`, `contact.plate`.
+>
+> **Bijgewerkt (2026-07-19):** `contact.birthdate` en `contact.geo` zijn er, met
+> tegengestelde poorten — en dat verschil is de kern van beide regels. De
+> geboortedatum **eist** een contextwoord, want een datum is de meest voorkomende
+> getalsvorm in een zakelijk deck (releases, deadlines, kwartalen) en zonder die
+> poort meldt de regel de agenda. Coördinaten eisen er juist géén: twee
+> kommagetallen met minstens vier decimalen binnen het bereik van de aardbol
+> komen in gewone tekst niet voor. Vier decimalen is bewust de ondergrens —
+> ongeveer elf meter; met minder wijst het paar een dorp aan in plaats van een
+> deur, en dan is het geen persoonsgegeven meer. `geo:`-URI en what3words zijn
+> `certain` (het formaat zégt dat het een plaats is), een plus-code blijft
+> `possible` omdat zijn beperkte alfabet met productcodes botst.
 >
 > **Bijgewerkt (2026-07-19, fase 11):** `contact.name` kent vier poorten, en géén
 > ervan kijkt naar de naam zelf — het blijft dus géén NER. Label en aanhef leveren

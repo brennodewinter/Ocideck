@@ -1785,6 +1785,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'geboortedatum': 'születési dátum',
+  'locatiecoördinaten': 'helymeghatározási koordináták',
   'MAC-adres van een apparaat': 'egy eszköz MAC-címe',
   'IMEI van een toestel': 'egy készülék IMEI-száma',
   'ICCID van een simkaart': 'egy SIM-kártya ICCID-je',

@@ -1772,6 +1772,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'geboortedatum': 'sünnikuupäev',
+  'locatiecoördinaten': 'asukoha koordinaadid',
   'MAC-adres van een apparaat': 'seadme MAC-aadress',
   'IMEI van een toestel': 'telefoni IMEI',
   'ICCID van een simkaart': 'SIM-kaardi ICCID',

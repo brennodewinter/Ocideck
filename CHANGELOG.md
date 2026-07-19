@@ -35,6 +35,20 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   conflictafhandeling als bij WebDAV. Een deck dat je uit een bucket opende,
   gaat bij opslaan vanzelf naar diezelfde bucket terug.
 
+- **Geboortedata en locatiecoördinaten worden herkend.** Twee controles met
+  precies tegengestelde regels, en dat is met opzet. Een geboortedatum wordt
+  alleen gemeld als er ook een woord als "geboren" of "geboortedatum" bij staat:
+  een datum is de meest voorkomende getalsvorm in een presentatie — releases,
+  deadlines, kwartaalcijfers — en zonder die eis meldt de controle vooral de
+  agenda. Coördinaten hebben zo'n woord juist niet nodig, want twee
+  kommagetallen met minstens vier decimalen komen in gewone tekst niet voor.
+
+  Die vier decimalen zijn een bewuste ondergrens: dat is ongeveer elf meter. Met
+  minder wijst een coördinaat een dorp aan in plaats van een voordeur, en dan is
+  het geen persoonsgegeven meer. `geo:`-links en what3words-adressen worden ook
+  herkend, en grafiekgegevens blijven buiten schot — een dataset ís nu eenmaal
+  een rij getallenparen.
+
 - **IP-adressen, MAC-adressen, IMEI's en socialemediaprofielen worden herkend.**
   De patronen zijn simpel; het werk zit in wat er níét op af mag gaan. Een
   versienummer is vier getallen met punten ertussen, een tijdstip is twee

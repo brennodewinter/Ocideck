@@ -1797,6 +1797,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'geboortedatum': 'dies natalis',
+  'locatiecoördinaten': 'coordinatae loci',
   'MAC-adres van een apparaat': 'inscriptio MAC instrumenti',
   'IMEI van een toestel': 'IMEI telephoni',
   'ICCID van een simkaart': 'ICCID chartae SIM',

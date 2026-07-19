@@ -1783,6 +1783,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'geboortedatum': 'datum rojstva',
+  'locatiecoördinaten': 'koordinate lokacije',
   'MAC-adres van een apparaat': 'naslov MAC naprave',
   'IMEI van een toestel': 'IMEI telefona',
   'ICCID van een simkaart': 'ICCID kartice SIM',

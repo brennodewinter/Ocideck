@@ -1803,6 +1803,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'geboortedatum': 'data tat-twelid',
+  'locatiecoördinaten': 'koordinati tal-post',
   'MAC-adres van een apparaat': 'indirizz MAC ta\' apparat',
   'IMEI van een toestel': 'IMEI ta\' telefon',
   'ICCID van een simkaart': 'ICCID ta\' karta SIM',

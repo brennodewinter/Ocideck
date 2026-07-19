@@ -1809,6 +1809,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'geboortedatum': 'ημερομηνία γέννησης',
+  'locatiecoördinaten': 'συντεταγμένες τοποθεσίας',
   'MAC-adres van een apparaat': 'διεύθυνση MAC μιας συσκευής',
   'IMEI van een toestel': 'IMEI μιας συσκευής',
   'ICCID van een simkaart': 'ICCID μιας κάρτας SIM',
