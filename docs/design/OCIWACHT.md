@@ -1298,11 +1298,11 @@ Maltees ontbreekt in XLM-R; Fries heeft 0,2 GiB tegenover Bulgaars 57,5 GiB.
 > geldt. Ook eruit: `anglicisme`, want dat betekent in het Nederlands een Engels
 > leenwoord en niet het anglicanisme.
 >
-> **Wat het niet vindt.** EuroVoc levert zelfstandignaamwoorden. "Betrokkene is
-> katholiek opgevoed" wordt gemist, want `katholiek` is geen woordvorm van
-> `katholicisme` en de bulk matcht op hele woorden. Dat is een eigenschap van een
-> thesaurus — die indexeert begrippen, geen woordvormen. Wie die vormen wil, zet
-> ze per taal in de vloer.
+> **Wat het niet vindt.** EuroVoc levert zelfstandignaamwoorden, en de bulk matcht
+> op hele woorden, dus `katholiek` volgt niet uit `katholicisme`. Dat is een
+> eigenschap van een thesaurus: die indexeert begrippen, geen woordvormen. Voor
+> het **Nederlands** is dat gat inmiddels gevuld in de vloer (zie hieronder); de
+> overige 26 talen wachten nog.
 >
 > De drie navraagbronnen (`LEXICON_LICENTIENAVRAAG.md`) blijven daarnaast open;
 > Homosaurus zou `special.sexlife` dekken, dat als enige categorie nog uitsluitend
@@ -1365,6 +1365,54 @@ leugen waartegen deze meter bestaat.
 Stand voor de 31 app-talen: **9 volledig** (nl/en/de/fr/es/it/pl/pt/cs), **15
 gedeeltelijk** (wel overtuigingen, geen ziektenamen), **7 zonder lexicon** (fy,
 gsw, id, la, pap, tlh, uk).
+
+**De vormen die geen enkele bron levert.** EuroVoc geeft zelfstandige
+naamwoorden op `-isme`: `katholicisme`, `socialisme`, `jodendom`. Zo schrijft
+niemand over een persoon. "Betrokkene is katholiek opgevoed" en "hij is moslim"
+werden daardoor volledig gemist — en dat zijn precies de formuleringen waarin een
+dossier iemands geloof of overtuiging vastlegt.
+
+Nagemeten over alle 27 EuroVoc-talen: **geen enkele draagt deze vormen**, ook
+niet als `altLabel`. Het gat is dus universeel. Voor het Nederlands is het gevuld
+(~45 termen in `privacy_lexicon_data.dart`); de rest wacht.
+
+Drie dingen die het Nederlandse werk opleverde en die elke taal zal tegenkomen:
+
+1. **Het selectieprincipe is "persoon of instelling?"** — hetzelfde als bij de
+   EuroVoc-concepten. `christen` gaat mee, `christelijk` niet: dat beschrijft in
+   Nederlands zakelijk taalgebruik overwegend een school, een omroep of een
+   feestdag. Om dezelfde reden ontbreken `kerkelijk` en `praktiserend`.
+2. **Voorvoegselmatching gaat uit van een stabiel woordbegin, en dat klopt niet
+   altijd.** `katholiek` dekt `katholieke`, maar `conservatief` dekt
+   `conservatieve` níét (de f wordt een v) en `liberaal` dekt `liberale` niet (de
+   aa verkort). Zulke stamwisselingen vragen een tweede ingang per woord, en ze
+   vallen alleen op als je ze test.
+3. **Er blijft een vals-positieve over, en die is bewust aanvaard.** "Een
+   conservatieve schatting" gaat af op `conservatiev`. Dat is te dragen omdat
+   `special.politics` standaard uit staat en de melding informatief blijft tot er
+   een persoon bij staat. Gaat die regel ooit standaard aan, dan moet die term
+   eruit — daar staat een test op.
+
+**Wat andere talen nodig hebben.** Het is dataweek per taal, geen codewerk: de
+matchmodi uit fase 12 (`word` / `prefix` / `compound`) dekken de mechaniek al.
+Wat per taalfamilie verschilt is hoevéél ingangen één begrip kost.
+
+| Familie | Talen in OciDeck | Wat het kost |
+| --- | --- | --- |
+| Germaans | de, da, sv, en, fy, gsw | Als het Nederlands: `prefix` op de stam werkt, let op stamwisselingen |
+| Romaans | fr, es, it, pt, ro, la | `prefix` op de stam dekt geslacht en getal (`católic-` → `católico/a/os/as`) |
+| Slavisch | pl, cs, sk, sl, hr, bg | Naamvallen én palatalisatie (`katolicki` → `katoliccy`); reken op meer ingangen per begrip |
+| Fins-Oegrisch | fi, et, hu | Agglutinerend mét stamwisseling; `compound` is ervoor bedoeld, maar de stam verandert mee |
+| Baltisch | lv, lt | Zware naamvalsverbuiging, vergelijkbaar met het Slavisch |
+| Overig | el, ga, mt, uk, id, pap, tlh | Per taal bekijken |
+
+Eén taal springt eruit en verdient een waarschuwing: **het Iers muteert het
+woordbegin** (`Caitliceach` → `gCaitliceach`). Voorvoegselmatching is daar
+principieel ontoereikend, en dat is geen kwestie van meer termen toevoegen.
+
+De werkwijze per taal is dezelfde als hier: een moedertaalspreker stelt ~40
+termen op langs het persoon-of-instelling-principe, en de
+vals-positievencorpustest is de poort.
 
 ### 13.4 Pijplijnvolgorde: goedkoop eerst, duur laatst
 

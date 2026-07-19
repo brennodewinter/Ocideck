@@ -10,6 +10,17 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Added
+- **"Betrokkene is katholiek opgevoed" wordt nu herkend.** De meertalige
+  begrippenlijst levert zelfstandige naamwoorden — *katholicisme*, *socialisme*,
+  *jodendom* — en zo schrijft niemand over een persoon. Voor het Nederlands zijn
+  de persoonsvormen er nu bij: *katholiek*, *moslim*, *gereformeerd*, *joods*,
+  *communist*, *liberaal*, en zo'n veertig meer.
+
+  De grens die daarbij is aangehouden: beschrijft een woord een **persoon** of
+  een **instelling**? *Christen* gaat mee, *christelijk* niet — dat gaat in
+  Nederlands zakelijk taalgebruik meestal over een school, een omroep of een
+  feestdag. Om dezelfde reden ontbreken *kerkelijk* en *praktiserend*.
+
 - **De taalmelding in het kwaliteitspaneel is preciezer geworden.** Hij keek per
   taal, en zei "gedekt" zodra er íéts voor die taal was. Daardoor kregen vijftien
   talen — Zweeds, Deens, Fins, Grieks, Hongaars en meer — een groene melding op
