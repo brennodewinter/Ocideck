@@ -768,6 +768,29 @@ So the decision about what you share, and the responsibility for it, stay with
 you. A tool that let you outsource that judgement would be more dangerous than no
 tool at all — you would stop looking.
 
+### Images: recognisable faces
+
+The check also looks at the **images** on your slides. An image in which someone
+is recognisable is personal data, even with no name attached — and the text
+scanner can never find that, because all it sees is `mem:11162735-…`.
+
+It runs on this device, and it detects **presence, never identity**: OciDeck keeps
+only the number of faces and throws the rest away. Nothing is stored and nothing is
+compared. That is what keeps this out of Article 9 biometrics — see PRIVACY.md.
+
+Read the wording carefully, because it is precise. It says **face**, not person.
+Someone photographed from behind, in profile, wearing sunglasses and looking down,
+or with their head outside the crop is missed. On a backlit group photo of eight
+people it found three, which is why the message says "at least three".
+
+And an image in a format the check cannot read — **HEIC**, the iPhone default —
+is reported as *not checked*, never as *nothing found*. A green result must never
+be mistaken for "there is nobody in this picture".
+
+This is the heaviest check OciDeck runs, so it has its own switch under
+*Settings → Security*, next to the main one. Turning it off leaves the text check
+running.
+
 Found something you want gone? Wrap it in double square brackets — see below.
 
 ## What to do with a finding

@@ -29,6 +29,35 @@ machine (desktop) or in your browser tab (web). This includes:
 
 There is **no analytics, tracking, or usage reporting of any kind.**
 
+### Face detection in slide images
+
+When the privacy check is on, OciDeck looks at the images on your slides to see
+whether a **recognisable face** appears in them — because an image in which
+someone is recognisable is personal data, even with no name attached, and the
+text scanner can never find that.
+
+This runs entirely on your device with a bundled 232 KB model (YuNet, MIT). No
+image, and no result, leaves your machine.
+
+**It detects presence, never identity.** The model reports a box, five landmarks
+and a score per face; OciDeck keeps only *the number* and discards the rest
+immediately. Nothing is stored, no template is computed, and nothing is compared
+against anything else. That distinction is deliberate and legal, not cosmetic:
+under EDPB Guidelines 3/2019 (§74–76) an image becomes Article 9 *biometric* data
+only when it is "specifically technically processed in order to contribute to the
+identification of an individual". A privacy tool that built face templates in
+order to warn you about face templates would create exactly the category of data
+Article 9 protects most strictly.
+
+It finds **faces, not people** — someone photographed from behind, in profile,
+wearing a mask, or with their head outside the crop is missed, and the message
+says "recognisable face" for that reason. Images in a format the check cannot
+read (HEIC, for instance) are reported as *not checked* rather than as *nothing
+found*.
+
+This is the most expensive check OciDeck runs, so it has its own switch under
+*Settings → Security*, separate from the main privacy switch.
+
 ## What leaves your device — and only when you ask
 
 OciDeck makes network requests only for actions you initiate. Each is gated

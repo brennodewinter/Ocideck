@@ -44,6 +44,27 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   vastloopt.
 
 ### Added
+- **De privacycontrole kijkt nu ook naar afbeeldingen.** Een foto waarop iemand
+  herkenbaar staat is een persoonsgegeven, ook zonder naam erbij — en de
+  tekstscanner kon dat per definitie nooit vinden: die leest `mem:11162735-…`.
+  Draait volledig op je eigen machine met een meegeleverd model van 232 KB.
+
+  **Aanwezigheid, nooit identiteit.** Het model levert per gezicht een kader,
+  vijf punten en een score; OciDeck houdt alléén het aantal over en gooit de rest
+  meteen weg. Er wordt niets opgeslagen, geen sjabloon berekend, niets vergeleken.
+  Dat onderscheid is de reden dat dit geen biometrische verwerking is (EDPB
+  Richtsnoeren 3/2019 §74-76) — een privacytool die gezichtssjablonen aanlegt om
+  je vóór gezichtssjablonen te waarschuwen, maakt precies het probleem waar hij
+  voor waarschuwt.
+
+  De melding zegt bewust *gezicht* en niet *persoon*: iemand van achteren, in
+  profiel, met zonnebril omlaag kijkend of met het hoofd buiten de uitsnede wordt
+  gemist. Op een groepsfoto van acht bij tegenlicht vond hij er drie, dus staat er
+  "minstens drie". En een afbeelding in een formaat dat niet te lezen is — HEIC,
+  de iPhone-standaard — meldt *niet gecontroleerd*, nooit *niets gevonden*.
+
+  Eigen schakelaar onder *Instellingen → Veiligheid*: dit is de zwaarste controle,
+  en hem uitzetten laat de tekstcontrole gewoon draaien.
 - **Een melding zegt nu ook wáár ze zit.** De privacyscanner wist allang precies
   waar een bevinding stond — veld, fragment, begin- en eindpositie — maar die
   kennis sneuvelde op weg naar het kwaliteitspaneel. Wat je overhield was
@@ -81,6 +102,25 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
   Bestaande bronnen blijven werken zonder dat je iets hoeft te doen; die lezen
   als Nextcloud, want dat waren ze.
+
+### Fixed
+- **`vog` vond de vogels.** De trefwoordmatcher was een kale substring-zoekopdracht
+  zonder woordgrenzen, waardoor "De vogels vliegen over het weiland" een
+  strafrechtelijk gegeven meldde en "medicatie-expertise" een gezondheidsgegeven.
+  Er zit nu een woordgrens omheen, met twee modi: korte termen (`hiv`, `ggz`,
+  `vog`) matchen alleen als héél woord, langere op woordbegin met een vrij
+  achtervoegsel — want de Nederlandse morfologie is suffigerend.
+
+  Datzelfde gebrek werkte ook de andere kant op: de lijst bevatte de verbogen vorm
+  `verdachte`, waardoor "wordt verdacht van diefstal" — de gebruikelijkste
+  formulering van precies het geval waar artikel 10 over gaat — volledig gemist
+  werd. De stam staat er nu.
+- **Een zwart blok dat niets verborg.** Op een slide met redactie werd "Jan had een
+  diagnose bij de huisarts" tot "Jan had een ████████ bij de huisarts": het
+  trefwoord ging weg, er werd niets gevoeligs verborgen, en "Jan" bleef staan. De
+  ontvanger concludeerde uit het blok dat daar iets stond. Een aanwijzing wordt nu
+  alleen weggelakt als het bereik is verbreed tot de hele mededeling — dan is het
+  gegeven niet het woord maar de uitspraak.
 
 ### Changed
 - **Een geaccepteerde bevinding verdwijnt niet meer spoorloos.** Wie een
