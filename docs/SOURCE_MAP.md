@@ -133,7 +133,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `privacy/privacy_bulk_rules.dart` — Bulk personal data: a table header that names the column ("Naam", "BSN"), or one rule firing too often on a slide. One finding on top of the individual ones, not instead of them.
 - `privacy/privacy_scanner.dart` — `PrivacyScanner`: reads a deck for privacy-sensitive data (email, phone, IBAN, BSN, EU numbers, address, postcode, name), with context gates where the checksum is too weak and proximity escalation where a postcode meets a house number.
 - `privacy/privacy_quality_bridge.dart` — Maps `PrivacyFinding` onto `SlideQualityIssue` so findings surface in the quality panel.
-- `privacy/privacy_projection.dart` — `AudienceDeck` + `PrivacyProjection`: the single boundary a source deck crosses to reach any receiving surface. Redacts `[[…]]` markers before rendering or export; the private constructor means no export path can hold the unredacted source.
+- `privacy/privacy_projection.dart` — `AudienceDeck` + `PrivacyProjection`: the single boundary a source deck crosses to reach any receiving surface. Redacts `[[…]]` markers before rendering or export; the private constructor means no export path can hold the unredacted source. Media redaction erases the paths *and* sets the projection-only `Slide.mediaRedacted`, because an empty path alone cannot tell the renderer whether a photo was removed or never chosen.
 - `quality_export_policy.dart` — Gates export by slide-quality issues with warnings.
 - `recovery_service.dart` — Auto-saves deck snapshots for crash/unsaved recovery.
 - `rehearsal_controller.dart` — Unit-testable controller tracking elapsed/remaining/per-slide rehearsal timing.
@@ -450,6 +450,8 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 - `cockpit_preview.dart` — Animated cockpit/gauge dashboard slides.
 - `code_preview.dart` — Syntax-highlighted code slides with fit.
 - `media_previews.dart` — Shared audio/video playback lifecycle (`_MediaPlaybackHost`) + remote-media SSRF gate.
+- `media_previews_image.dart` — Image rendering helpers, captions, and the placeholders. `ImagePlaceholderReason` keeps "no image chosen yet" visually distinct from "file missing", "outside the deck", "gone after reload", and `redacted` — the last one paints a fixed-black redaction block rather than the grey placeholder, and deliberately does not follow the slate palette (which inverts in dark mode).
+- `media_previews_video.dart` — Video/audio slide rendering: local playback, embeds, and the shared media placeholder.
 - `overlays.dart` — Logo overlay and TLP-marking badge renderers.
 - `question_preview.dart` — Question slides with answer reveal.
 - `table_preview.dart` — Table slides with a cell-edit scope.

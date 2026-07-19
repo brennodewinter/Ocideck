@@ -912,6 +912,35 @@ Blanking only the word would leave you with
 — the name is still there, the sick note is still there. Nothing was removed; a
 word was covered. So the whole statement goes.
 
+The same rule governs addresses, for the same reason. A home address is redacted
+from the street through to the town in one go, never in pieces — so you get
+
+> Home address: ████████
+
+and never a blanked postcode with the street and the town still legible on either
+side of it. A postcode on its own is a hint; a postcode with a house number
+points at one front door. So when a postcode follows a house number, the whole
+address is taken — and it is taken whether or not the street name ends in
+something the app recognises as a street. The label stays visible on purpose:
+you are meant to be able to see *that* an address was removed.
+
+(You will not find a complete specimen address anywhere in this manual. The test
+suite scans these documents with the scanner itself, and a real-looking address
+in a manual is not something a scanner can tell apart from a real one.)
+
+### A redacted photo looks redacted
+
+Pictures, video and audio cannot be inspected — the image check finds *faces*,
+and demonstrably misses some. So a slide set to *leave out* loses its media
+entirely rather than having a box drawn over part of it.
+
+What you get in its place is a black redaction block reading **Redacted**, in the
+same visual language as the `████` blocks in the text. Not the light-grey
+"Image" placeholder you see on a slide where you simply have not picked a picture
+yet — that would read as forgetfulness rather than as a decision, and the person
+receiving the deck would have no way to tell the two apart. Your own file keeps
+its picture; this only affects what is shown and exported.
+
 ### It is an aid, not a guarantee
 
 **The check does not guarantee that everything is found; it reduces the chance
