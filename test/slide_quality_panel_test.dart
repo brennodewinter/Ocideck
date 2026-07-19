@@ -199,4 +199,82 @@ void main() {
     expect(find.textContaining('fout(en)'), findsOneWidget);
     expect(find.textContaining('waarschuwing(en)'), findsOneWidget);
   });
+
+  // Een korte slide gevolgd door een overvolle voortzetting: de korte slide
+  // rendert microscopisch klein zonder dat er iets mis is met zijn eigen tekst.
+  Deck draggedDeck() => Deck(
+    title: 'Demo',
+    slides: [
+      Slide.create(SlideType.bullets).copyWith(
+        title: 'Wat maakt Ocideck bijzonder?',
+        bullets: const [
+          'Van scan naar verhaal',
+          'Evidence-first compliance',
+          'Levende rapportage',
+        ],
+      ),
+      Slide.create(SlideType.bullets).copyWith(
+        title: 'Dit is een hele volle slide',
+        continuesSplit: true,
+        bullets: List.generate(
+          40,
+          (i) =>
+              'Bullet $i met een flinke lap tekst erin, want dit is een alinea '
+              'die per ongeluk als bullet op de slide is beland en daar veel '
+              'te veel ruimte opeist om nog leesbaar te blijven voor een zaal.',
+        ),
+      ),
+    ],
+  );
+
+  testWidgets('de knop haalt de volle pagina uit de reeks', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 1400));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final notifier = _deckNotifier(draggedDeck());
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [deckProvider.overrideWith((ref) => notifier)],
+        child: const MaterialApp(
+          localizationsDelegates: [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            FlutterQuillLocalizations.delegate,
+          ],
+          home: Scaffold(body: SlideQualityPanel()),
+        ),
+      ),
+    );
+    await tester.pump();
+
+    // Het paneel opent ingeklapt; klap het uit om de meldingen te zien.
+    await tester.tap(find.textContaining('Slidekwaliteit'));
+    await tester.pump();
+
+    // De melding staat onder die van de volle slide zelf, dus scroll erheen.
+    final button = find.widgetWithText(
+      TextButton,
+      'Haal volle pagina uit de reeks',
+    );
+    await tester.scrollUntilVisible(button, 200);
+
+    // De melding legt uit dat de reeks het probleem is, niet deze slide.
+    expect(
+      find.textContaining('Niet de tekst op deze slide is het probleem'),
+      findsOneWidget,
+    );
+    expect(button, findsOneWidget);
+    await tester.tap(button);
+    await tester.pump();
+
+    // De vlag is weg, de tekst is niet aangeraakt, en de melding is verdwenen.
+    expect(notifier.state.deck!.slides[1].continuesSplit, isFalse);
+    expect(notifier.state.deck!.slides[1].bullets, hasLength(40));
+    expect(
+      find.textContaining('Niet de tekst op deze slide is het probleem'),
+      findsNothing,
+    );
+  });
 }

@@ -741,6 +741,11 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
+      'Dizze slide rendert op {klein} fan \'e ûntwerpgrutte ynstee fan {eigen}, om\'t er in splitste rige dielt mei de folle follere slide {pagina}.',
+  'Niet de tekst op deze slide is het probleem, maar de reeks.':
+      'Net de tekst op dizze slide is it probleem, mar de rige.',
+  'Haal volle pagina uit de reeks': 'Helje folle side út de rige',
   'Nog te verifiëren': 'Noch te ferifiearjen',
   'MASWE-zwakheid kiezen': 'MASWE-swakte kieze',
   'Zoek op naam, id of categorie': 'Sykje op namme, id of kategory',

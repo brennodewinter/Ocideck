@@ -1802,6 +1802,11 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
+      'Acest diapozitiv este afișat la {klein} din dimensiunea de proiectare în loc de {eigen}, deoarece împarte o serie divizată cu diapozitivul {pagina}, mult mai plin.',
+  'Niet de tekst op deze slide is het probleem, maar de reeks.':
+      'Problema nu este textul de pe acest diapozitiv, ci seria.',
+  'Haal volle pagina uit de reeks': 'Scoate pagina plină din serie',
   'Nog te verifiëren': 'Rămâne de verificat',
   'MASWE-zwakheid kiezen': 'Alege o slăbiciune MASWE',
   'Zoek op naam, id of categorie': 'Caută după nume, id sau categorie',

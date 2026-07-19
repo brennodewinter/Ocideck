@@ -1790,6 +1790,11 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
+      'Táto snímka sa zobrazuje na {klein} návrhovej veľkosti namiesto {eigen}, pretože zdieľa rozdelený rad s oveľa plnšou snímkou {pagina}.',
+  'Niet de tekst op deze slide is het probleem, maar de reeks.':
+      'Problémom nie je text na tejto snímke, ale rad.',
+  'Haal volle pagina uit de reeks': 'Odstrániť plnú stranu z radu',
   'Nog te verifiëren': 'Zostáva overiť',
   'MASWE-zwakheid kiezen': 'Vybrať slabinu MASWE',
   'Zoek op naam, id of categorie': 'Hľadať podľa názvu, id alebo kategórie',

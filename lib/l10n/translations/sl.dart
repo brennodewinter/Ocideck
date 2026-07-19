@@ -1785,6 +1785,11 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
+      'Ta prosojnica se izriše pri {klein} načrtovane velikosti namesto {eigen}, ker si deli razdeljeno zaporedje z veliko polnejšo prosojnico {pagina}.',
+  'Niet de tekst op deze slide is het probleem, maar de reeks.':
+      'Težava ni besedilo na tej prosojnici, temveč zaporedje.',
+  'Haal volle pagina uit de reeks': 'Odstrani polno stran iz zaporedja',
   'Nog te verifiëren': 'Še je treba preveriti',
   'MASWE-zwakheid kiezen': 'Izberi šibkost MASWE',
   'Zoek op naam, id of categorie': 'Iskanje po imenu, id-ju ali kategoriji',

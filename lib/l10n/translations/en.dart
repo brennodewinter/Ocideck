@@ -922,6 +922,11 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
+      'This slide renders at {klein} of its design size instead of {eigen}, because it shares a split run with the much fuller slide {pagina}.',
+  'Niet de tekst op deze slide is het probleem, maar de reeks.':
+      'The text on this slide is not the problem — the run is.',
+  'Haal volle pagina uit de reeks': 'Take the full page out of the run',
   'Nog te verifiëren': 'Still to verify',
   'MASWE-zwakheid kiezen': 'Choose a MASWE weakness',
   'Zoek op naam, id of categorie': 'Search by name, id or category',

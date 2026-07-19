@@ -1758,6 +1758,11 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
+      'nab\'a\' Sach {eigen} \'oHbe\'; {klein} neH \'oH. {pagina} \'echletHom buy\'qu\' tlhej rarlu\'pu\'mo\' qaS.',
+  'Niet de tekst op deze slide is het probleem, maar de reeks.':
+      '\'echletHomvam mu\'mey qay\'be\'; rar\'e\' qay\'.',
+  'Haal volle pagina uit de reeks': 'rarvo\' \'echletHom buy\' yITeq',
   'Nog te verifiëren': 'ngu\'nISlu\'bogh',
   'MASWE-zwakheid kiezen': 'MASWE puj wIv',
   'Zoek op naam, id of categorie': 'pong, id, Segh je Sam',

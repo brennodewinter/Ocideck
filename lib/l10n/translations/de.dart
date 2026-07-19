@@ -740,6 +740,11 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
+      'Diese Folie wird mit {klein} der Entwurfsgröße statt {eigen} dargestellt, weil sie eine geteilte Reihe mit der viel volleren Folie {pagina} teilt.',
+  'Niet de tekst op deze slide is het probleem, maar de reeks.':
+      'Nicht der Text auf dieser Folie ist das Problem, sondern die Reihe.',
+  'Haal volle pagina uit de reeks': 'Volle Seite aus der Reihe nehmen',
   'Nog te verifiëren': 'Noch zu verifizieren',
   'MASWE-zwakheid kiezen': 'MASWE-Schwachstelle wählen',
   'Zoek op naam, id of categorie': 'Nach Name, ID oder Kategorie suchen',

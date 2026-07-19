@@ -1782,6 +1782,11 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
+      'Šis slaids tiek attēlots {klein} apmērā no dizaina izmēra, nevis {eigen}, jo tas dala sadalītu virkni ar daudz pilnāko slaidu {pagina}.',
+  'Niet de tekst op deze slide is het probleem, maar de reeks.':
+      'Problēma nav teksts šajā slaidā, bet gan virkne.',
+  'Haal volle pagina uit de reeks': 'Izņemt pilno lapu no virknes',
   'Nog te verifiëren': 'Vēl jāpārbauda',
   'MASWE-zwakheid kiezen': 'Izvēlieties MASWE vājumu',
   'Zoek op naam, id of categorie': 'Meklēt pēc nosaukuma, id vai kategorijas',

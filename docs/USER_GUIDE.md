@@ -1111,7 +1111,7 @@ for (`lib/services/slide_quality_analyzer.dart`).
 | --- | --- | --- |
 | **Contrast** | error / warning | Style profile: body text, title, table text, table header, code colours, and accent colour against their backgrounds (WCAG 2.1 AA). Footer text at 70% opacity against the slide background when a footer is configured. Checklist marker colours against the slide background when the deck contains checklist slides. Section slides: title colour against the section background. |
 | **Alt text** | tip / warning | Charts: no title, series names, or linked data description. Images: no alt text, caption, title, or speaker notes describing the content. Video slides are **not** nudged for a description — a clip that speaks for itself needs no title. Missing image captions are not reported as quality issues. Missing image or video **files on disk** when the deck is saved in a project folder (path in the slide points to a file that is not there). An **online** source (`http(s)` URL, including YouTube/Vimeo) is never reported as a missing file. |
-| **Text density** | error / warning | Bullet slides (one column, two columns, bullets + image): auto-fit shrinks text below 70% of design size (warning) or 20% (error), or the slide has too many bullets/words, long prose-like bullets, multiple sentences in a bullet, deep nesting, or strongly imbalanced two-column content. Rich-text and free-Markdown list items use the same bullet readability checks. Tables: cell text at the minimum readable size. Source-code and free-Markdown slides: very long content. Title slides: long title + subtitle combined. Quote slides: long quote + author combined. |
+| **Text density** | error / warning | Bullet slides (one column, two columns, bullets + image): auto-fit shrinks text below 70% of design size (warning) or 20% (error), or the slide has too many bullets/words, long prose-like bullets, multiple sentences in a bullet, deep nesting, or strongly imbalanced two-column content. Also a slide that is *dragged down by its split run* (see below). Rich-text and free-Markdown list items use the same bullet readability checks. Tables: cell text at the minimum readable size. Source-code and free-Markdown slides: very long content. Title slides: long title + subtitle combined. Quote slides: long quote + author combined. |
 
 Theme-wide contrast issues are listed once for the whole deck; slide-specific
 issues name the slide number.
@@ -1135,6 +1135,30 @@ slide. **Explanation to notes** does the opposite: for a bullet shaped like
 when the explanation is at least a few words) it keeps just the label on the slide
 and moves the full original line to the speaker notes — the point survives where
 you can still say it, and one undo brings it back.
+
+#### A slide that is dragged down by its split run
+
+The pages of a split run share **one** font size — the size of the fullest page —
+so a list spread over several slides does not change size halfway through. That is
+the point of a split, but it has a failure mode: if one page in the run is far
+fuller than the rest, it pulls every other page down with it. A short slide with
+five bullets can end up rendering at 20% of design size while its own content
+would comfortably allow 85%, and the ordinary density check stays silent, because
+the text *on that slide* is fine.
+
+OciDeck reports this separately. The warning lands on the slide that renders too
+small, names the size it gets and the size it would have on its own, and points at
+the page responsible. The one-click fix **Take the full page out of the run**
+detaches that page: the run is cut before and after it, so the over-full page
+stands alone and every other page returns to its own size. Nothing moves and
+nothing is merged — only the continuation markers change, so a single undo puts it
+back.
+
+This most often happens when a page was marked as a continuation by hand in
+Markdown mode, or when one page of an existing split was later filled with pasted
+prose. The over-full page keeps its own density warning and its own fixes (**Split
+slide**, **Split sentences into bullets**, **Explanation to notes**) — detaching
+tells OciDeck the page is not part of the list; it does not make the page shorter.
 
 #### Settings
 

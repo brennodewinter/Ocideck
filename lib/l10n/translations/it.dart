@@ -736,6 +736,11 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
+      'Questa diapositiva viene resa al {klein} della dimensione di progetto anziché al {eigen}, perché condivide una sequenza divisa con la diapositiva {pagina}, molto più piena.',
+  'Niet de tekst op deze slide is het probleem, maar de reeks.':
+      'Il problema non è il testo di questa diapositiva, ma la sequenza.',
+  'Haal volle pagina uit de reeks': 'Togli la pagina piena dalla sequenza',
   'Nog te verifiëren': 'Ancora da verificare',
   'MASWE-zwakheid kiezen': 'Scegli una debolezza MASWE',
   'Zoek op naam, id of categorie': 'Cerca per nome, id o categoria',

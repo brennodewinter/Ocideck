@@ -1811,6 +1811,11 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
+      'Αυτή η διαφάνεια εμφανίζεται στο {klein} του μεγέθους σχεδίασης αντί για {eigen}, επειδή μοιράζεται μια χωρισμένη σειρά με την πολύ πιο γεμάτη διαφάνεια {pagina}.',
+  'Niet de tekst op deze slide is het probleem, maar de reeks.':
+      'Το πρόβλημα δεν είναι το κείμενο αυτής της διαφάνειας, αλλά η σειρά.',
+  'Haal volle pagina uit de reeks': 'Αφαίρεση γεμάτης σελίδας από τη σειρά',
   'Nog te verifiëren': 'Προς επαλήθευση',
   'MASWE-zwakheid kiezen': 'Επιλογή αδυναμίας MASWE',
   'Zoek op naam, id of categorie': 'Αναζήτηση με όνομα, id ή κατηγορία',

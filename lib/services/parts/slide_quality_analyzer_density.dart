@@ -459,4 +459,69 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
   }
 
   String _percent(double scale) => '${(scale * 100).round()}%';
+
+  /// De gedeelde tekstgrootte van een split-run is het minimum over de pagina's,
+  /// zodat een gesplitste lijst overal even groot staat. Dat is goed zolang de
+  /// pagina's bij elkaar horen — maar één overvolle pagina in de reeks trekt alle
+  /// andere mee omlaag, en dan meldt de dichtheidscheck niets: die kijkt naar de
+  /// eigen tekst van een slide, en die is prima. Precies de slide die te klein
+  /// rendert blijft dus stil. Deze pas vult dat gat.
+  void _checkSplitRuns(
+    List<Slide> slides,
+    ThemeProfile theme,
+    String font,
+    List<SlideQualityIssue> issues,
+  ) {
+    var i = 0;
+    while (i < slides.length) {
+      final (start, end) = splitRunRange(slides, i);
+      if (end <= start) {
+        i++;
+        continue;
+      }
+      final scales = [
+        for (var k = start; k <= end; k++)
+          _memoizedRunScale(slides[k], theme, font),
+      ];
+      final drag = splitRunDrag(scales, warningScale: kTextDensityWarningScale);
+      if (drag != null) {
+        final shared = scales[drag.offender];
+        final offenderIndex = start + drag.offender;
+        for (final d in drag.dragged) {
+          final index = start + d;
+          if (slides[index].skipped) continue;
+          issues.add(
+            SlideQualityIssue(
+              slideIndex: index,
+              kind: SlideQualityIssueKind.splitRunDragged,
+              category: SlideQualityCategory.textDensity,
+              severity: shared <= kTextDensityCriticalScale + 0.001
+                  ? MarkdownValidationSeverity.error
+                  : MarkdownValidationSeverity.warning,
+              args: {
+                'percent': _percent(shared),
+                'own': _percent(scales[d]),
+                // Menselijke slidenummers voor de melding, de index voor de fix.
+                'page': '${offenderIndex + 1}',
+                'offender': '$offenderIndex',
+              },
+            ),
+          );
+        }
+      }
+      i = end + 1;
+    }
+  }
+
+  double _memoizedRunScale(Slide slide, ThemeProfile theme, String font) {
+    final cached = _runScaleCache[slide];
+    if (cached != null &&
+        cached.font == font &&
+        identical(cached.theme, theme)) {
+      return cached.scale;
+    }
+    final scale = splitRunMemberScale(slide, theme, font);
+    _runScaleCache[slide] = _RunScaleMemo(font, theme, scale);
+    return scale;
+  }
 }

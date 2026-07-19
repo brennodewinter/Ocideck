@@ -1786,6 +1786,11 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
+      'Tento snímek se zobrazuje na {klein} návrhové velikosti místo {eigen}, protože sdílí rozdělenou řadu s mnohem plnějším snímkem {pagina}.',
+  'Niet de tekst op deze slide is het probleem, maar de reeks.':
+      'Problémem není text na tomto snímku, ale řada.',
+  'Haal volle pagina uit de reeks': 'Odebrat plnou stránku z řady',
   'Nog te verifiëren': 'Zbývá ověřit',
   'MASWE-zwakheid kiezen': 'Vybrat slabinu MASWE',
   'Zoek op naam, id of categorie': 'Hledat podle názvu, id nebo kategorie',

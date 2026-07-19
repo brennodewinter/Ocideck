@@ -234,6 +234,12 @@ String formatSlideQualityIssue(AppLocalizations l10n, SlideQualityIssue issue) {
     SlideQualityIssueKind.textDensityCritical =>
       '${l10n.d('Veel tekst op deze slide: het lettertype wordt sterk verkleind (')}'
           '${issue.args['percent']}${l10n.d('van de ontwerpgrootte). Overweeg de inhoud te splitsen.')}',
+    // Eén hele zin met plaatshouders in plaats van aan elkaar geplakte
+    // fragmenten: de woordvolgorde verschilt per taal, dus een vertaler moet de
+    // getallen kunnen verplaatsen.
+    SlideQualityIssueKind.splitRunDragged =>
+      '${l10n.d('Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.').replaceAll('{klein}', issue.args['percent'] ?? '').replaceAll('{eigen}', issue.args['own'] ?? '').replaceAll('{pagina}', issue.args['page'] ?? '')} '
+          '${l10n.d('Niet de tekst op deze slide is het probleem, maar de reeks.')}',
     SlideQualityIssueKind.tableDensityMinimum =>
       '${l10n.d('Grote tabel (')}${issue.args['rows']}${l10n.d(' rijen, ')}'
           '${issue.args['cols']}${l10n.d(' kolommen): celtekst staat op het minimumformaat.')}',

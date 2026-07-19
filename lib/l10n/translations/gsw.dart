@@ -1787,6 +1787,11 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
+      'Die Folie wird mit {klein} vo dr Entwurfsgrössi statt {eigen} aazeigt, wil si e gteilti Reihe mit dr viel vollere Folie {pagina} teilt.',
+  'Niet de tekst op deze slide is het probleem, maar de reeks.':
+      'Nid dr Text uf dere Folie isch s Problem, sondern d Reihe.',
+  'Haal volle pagina uit de reeks': 'Volli Site us dr Reihe neh',
   'Nog te verifiëren': 'No z verifiziere',
   'MASWE-zwakheid kiezen': 'MASWE-Schwachstell uswähle',
   'Zoek op naam, id of categorie': 'Nach Name, ID oder Kategorie sueche',

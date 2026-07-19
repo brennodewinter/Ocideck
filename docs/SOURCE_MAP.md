@@ -130,7 +130,8 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `secret_store.dart` — Manages secrets (WebDAV credentials, AI API key) in the OS keychain.
 - `slide_layout_metrics.dart` — Layout constants/helpers for text sizing, fonts, and fit scaling; `bulletFitCounts` measures how many bullets fit at natural size (the input to the "Split slide" page capacity).
 - `bullet_pagination.dart` — Pure "Split slide" pagination (`chunkBullets`, `splitBulletsIntoPages`/`splitTwoColumnsIntoPages`): fills pages of a fixed size with the remainder last, never leaving a page under `kMinPageBullets`, and halves a list that already fits. Counts bullets and nothing else — measuring what physically fits used to collapse the page size and turn one slide into a stack.
-- `slide_quality_analyzer.dart` — Checks deck slides for accessibility and readability issues.
+- `split_run.dart` — Pure split-run logic shared by the preview and the quality check: `splitRunRange` finds the maximal group of same-type bullet slides joined by `continuesSplit`, and `splitRunDrag` reports which pages of such a run render needlessly small because one page is far fuller (threshold `kSplitRunDragRatio`). No theme, no layout — so both callers agree on what a run is.
+- `slide_quality_analyzer.dart` — Checks deck slides for accessibility and readability issues. Note that the split-run check (`_checkSplitRuns`, in the density part) runs *outside* the per-slide memo: whether a slide renders small depends on its neighbours, and that cache is keyed on slide identity.
 - `slide_rasterizer.dart` — Renders on-screen slide previews to PNG for WYSIWYG PDF/PPTX export.
 - `text_measurement.dart` — `measureTextHeight`/`measureTextWidth` for rendered text dimensions.
 - `user_notes_codec.dart` — Serializes per-slide user notes with content fingerprints.
@@ -378,7 +379,7 @@ search (Phase 6) and asset deletion (§6.2, deliberately manual).
 - `image_zoom_dialog.dart` — Full-screen pan/zoom image viewer.
 - `inline_markdown.dart` — Lightweight inline-markdown parser (bold/italic/code/links).
 - `mermaid_diagram.dart` — Renders Mermaid definitions to inline SVG in previews.
-- `slide_preview.dart` — Central preview library coordinating all slide-type renderers + shared helpers.
+- `slide_preview.dart` — Central preview library coordinating all slide-type renderers + shared helpers. `sharedSplitFitScale`/`splitRunMemberScale` compute the one font size a split run renders at; the quality analyzer calls the same functions, so a reported size is the size actually rendered.
 - `slide_thumbnail.dart` — Thumbnail with slide preview, metadata, and action buttons.
 - `video_playhead_bus.dart` — Cross-widget channel syncing the video playhead across previews.
 

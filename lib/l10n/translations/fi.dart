@@ -1783,6 +1783,11 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
+      'Tämä dia näkyy {klein} suunnittelukoosta odotetun {eigen} sijaan, koska se jakaa jaetun sarjan paljon täydemmän dian {pagina} kanssa.',
+  'Niet de tekst op deze slide is het probleem, maar de reeks.':
+      'Ongelma ei ole tämän dian teksti vaan sarja.',
+  'Haal volle pagina uit de reeks': 'Poista täysi sivu sarjasta',
   'Nog te verifiëren': 'Vielä varmennettava',
   'MASWE-zwakheid kiezen': 'Valitse MASWE-heikkous',
   'Zoek op naam, id of categorie': 'Hae nimellä, tunnuksella tai luokalla',

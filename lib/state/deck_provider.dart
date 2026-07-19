@@ -417,6 +417,34 @@ class DeckNotifier extends StateNotifier<DeckState> {
     _mutate(deck.copyWith(slides: slides), bumpRevision: true);
   }
 
+  /// Haalt de slide op [index] uit de split-run waar hij in zit: de reeks wordt
+  /// er vóór én erna afgeknipt, zodat deze slide op zichzelf staat en de rest
+  /// van de reeks weer op eigen grootte rendert.
+  ///
+  /// De tegenhanger van [splitSlide]. Nodig omdat de gedeelde tekstgrootte van
+  /// een run het minimum is: één overvolle pagina drukt alle andere pagina's
+  /// naar diezelfde grootte. Alleen de vlaggen gaan om — geen tekst verplaatst,
+  /// niets samengevoegd, en dus met één stap ongedaan te maken.
+  void detachSplitPage(int index) {
+    final deck = state.deck;
+    if (deck == null || index < 0 || index >= deck.slides.length) return;
+    final slides = List<Slide>.from(deck.slides);
+    // Knip vóór deze slide: hij is geen voortzetting meer.
+    var changed = false;
+    if (slides[index].continuesSplit) {
+      slides[index] = slides[index].copyWith(continuesSplit: false);
+      changed = true;
+    }
+    // En erna: de volgende slide zet de reeks niet op deze voort.
+    final next = index + 1;
+    if (next < slides.length && slides[next].continuesSplit) {
+      slides[next] = slides[next].copyWith(continuesSplit: false);
+      changed = true;
+    }
+    if (!changed) return;
+    _mutate(deck.copyWith(slides: slides), bumpRevision: true);
+  }
+
   /// Verdeelt de bulletslide [slide] over pagina's van hooguit de leesbaarheids-
   /// drempel — acht bullets, twaalf voor een checklist, zeven per kolom — met de
   /// rest op een laatste, kortere pagina. `null` als splitsen niet kan. De eerste

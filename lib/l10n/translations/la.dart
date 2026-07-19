@@ -1799,6 +1799,11 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
+      'Haec pagina ad {klein} magnitudinis destinatae exhibetur pro {eigen}, quia seriem divisam cum pagina {pagina} multo pleniore communicat.',
+  'Niet de tekst op deze slide is het probleem, maar de reeks.':
+      'Non textus huius paginae impedimento est, sed series.',
+  'Haal volle pagina uit de reeks': 'Paginam plenam ex serie tolle',
   'Nog te verifiëren': 'Adhuc probanda',
   'MASWE-zwakheid kiezen': 'Infirmitatem MASWE eligere',
   'Zoek op naam, id of categorie': 'Quaerere nomine, id vel genere',

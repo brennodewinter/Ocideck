@@ -1782,6 +1782,11 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
+      'Dette dias vises med {klein} af designstørrelsen i stedet for {eigen}, fordi det deler en opdelt række med det langt fyldigere dias {pagina}.',
+  'Niet de tekst op deze slide is het probleem, maar de reeks.':
+      'Det er ikke teksten på dette dias, der er problemet, men rækken.',
+  'Haal volle pagina uit de reeks': 'Fjern fuld side fra rækken',
   'Nog te verifiëren': 'Skal stadig verificeres',
   'MASWE-zwakheid kiezen': 'Vælg en MASWE-svaghed',
   'Zoek op naam, id of categorie': 'Søg på navn, id eller kategori',

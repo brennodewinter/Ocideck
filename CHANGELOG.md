@@ -8,6 +8,23 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+- **Een slide die klein wordt gerenderd door zijn buren zegt dat nu zelf.** De
+  pagina's van een gesplitste reeks delen één lettergrootte — die van de volste
+  pagina — zodat een lijst over meerdere slides niet halverwege van formaat
+  verandert. Daar zit een valkuil in: staat er één pagina in de reeks die veel
+  voller is dan de rest, dan trekt die alle andere mee omlaag. Een korte slide
+  met vijf bullets kan zo op 20% van de ontwerpgrootte belanden terwijl zijn
+  eigen inhoud 85% toelaat, en de gewone dichtheidscontrole zweeg daarover: die
+  kijkt naar de tekst óp de slide, en die was prima.
+
+  De melding komt nu te staan bij de slide die te klein rendert, met beide
+  formaten erbij en een verwijzing naar de pagina die het veroorzaakt. De knop
+  **Haal volle pagina uit de reeks** knipt die pagina er aan beide kanten uit:
+  hij komt op zichzelf te staan en de rest van de reeks krijgt zijn eigen
+  grootte terug. Er wordt niets verplaatst en niets samengevoegd — alleen de
+  voortzettingsmarkeringen gaan om, dus één keer ongedaan maken zet het terug.
+  De volle pagina houdt zijn eigen meldingen en fixes; losmaken vertelt OciDeck
+  dat de pagina niet bij de lijst hoort, het maakt de pagina niet korter.
 - **Een bevinding kan nu ook een mobiele zwakheid aanwijzen (MASWE).** Naast het
   CWE-veld staat een MASWE-veld met een eigen zoeker over de gebundelde lijst.
   Beide mogen naast elkaar: een mobiele zwakheid verwijst zelf ook naar een CWE,

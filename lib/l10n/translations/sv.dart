@@ -1782,6 +1782,11 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
+      'Den här bilden visas i {klein} av designstorleken i stället för {eigen}, eftersom den delar en uppdelad serie med den mycket fylligare bilden {pagina}.',
+  'Niet de tekst op deze slide is het probleem, maar de reeks.':
+      'Det är inte texten på den här bilden som är problemet, utan serien.',
+  'Haal volle pagina uit de reeks': 'Ta bort full sida ur serien',
   'Nog te verifiëren': 'Återstår att verifiera',
   'MASWE-zwakheid kiezen': 'Välj en MASWE-svaghet',
   'Zoek op naam, id of categorie': 'Sök på namn, id eller kategori',

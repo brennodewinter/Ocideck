@@ -1774,6 +1774,11 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
+      'See slaid kuvatakse {klein} kavandatud suurusest {eigen} asemel, sest see jagab jaotatud jada palju täidetuma slaidiga {pagina}.',
+  'Niet de tekst op deze slide is het probleem, maar de reeks.':
+      'Probleem ei ole selle slaidi tekst, vaid jada.',
+  'Haal volle pagina uit de reeks': 'Eemalda täis lehekülg jadast',
   'Nog te verifiëren': 'Veel kinnitamata',
   'MASWE-zwakheid kiezen': 'Vali MASWE nõrkus',
   'Zoek op naam, id of categorie': 'Otsi nime, id või kategooria järgi',

@@ -1813,6 +1813,11 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
+      'Este diapositivo é apresentado a {klein} do tamanho de design em vez de {eigen}, porque partilha uma série dividida com o diapositivo {pagina}, muito mais cheio.',
+  'Niet de tekst op deze slide is het probleem, maar de reeks.':
+      'O problema não é o texto deste diapositivo, mas a série.',
+  'Haal volle pagina uit de reeks': 'Retirar página cheia da série',
   'Nog te verifiëren': 'Ainda por verificar',
   'MASWE-zwakheid kiezen': 'Escolher uma fraqueza MASWE',
   'Zoek op naam, id of categorie': 'Pesquisar por nome, id ou categoria',
