@@ -304,17 +304,55 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
     keywords: ['nextcloud', 'webdav', 'test', 'verbinding'],
   ),
 
-  // ── Tab 8 — Checklists ────────────────────────────────────────────────────
+  // ── Tab 8 — Git-repository ────────────────────────────────────────────────
   SettingsSearchEntry(
     tab: 8,
+    label: 'Soort forge',
+    section: 'Git-repository',
+    keywords: ['git', 'forge', 'forgejo', 'gitea', 'github', 'gitlab'],
+  ),
+  SettingsSearchEntry(
+    tab: 8,
+    label: 'Server-URL',
+    section: 'Git-repository',
+    keywords: ['git', 'server', 'url', 'repository'],
+  ),
+  SettingsSearchEntry(
+    tab: 8,
+    label: 'Eigenaar',
+    section: 'Git-repository',
+    keywords: ['git', 'eigenaar', 'owner', 'organisatie', 'gebruiker'],
+  ),
+  SettingsSearchEntry(
+    tab: 8,
+    label: 'Repository',
+    section: 'Git-repository',
+    keywords: ['git', 'repository', 'repo'],
+  ),
+  SettingsSearchEntry(
+    tab: 8,
+    label: 'Personal access token',
+    section: 'Git-repository',
+    keywords: ['git', 'token', 'pat', 'wachtwoord', 'toegang'],
+  ),
+  SettingsSearchEntry(
+    tab: 8,
+    label: 'Vertrouwde interne server',
+    section: 'Git-repository',
+    keywords: ['git', 'intern', 'vertrouwd', 'http', 'ssrf'],
+  ),
+
+  // ── Tab 9 — Checklists ────────────────────────────────────────────────────
+  SettingsSearchEntry(
+    tab: 9,
     label: 'Nieuw sjabloon',
     section: 'Eigen checklists',
     keywords: ['checklist', 'sjabloon', 'template'],
   ),
 
-  // ── Tab 9 — Uitbreidingen ─────────────────────────────────────────────────
+  // ── Tab 10 — Uitbreidingen ────────────────────────────────────────────────
   SettingsSearchEntry(
-    tab: 9,
+    tab: 10,
     label: 'Informatieveiligheid',
     section: 'Uitbreidingen',
     keywords: [
@@ -329,7 +367,7 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
     ],
   ),
   SettingsSearchEntry(
-    tab: 9,
+    tab: 10,
     label: 'Pakket importeren',
     section: 'Uitbreidingen',
     keywords: ['import', 'pakket', 'offline', 'gegevens'],
