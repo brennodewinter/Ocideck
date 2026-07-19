@@ -1351,10 +1351,11 @@ for yourself what the message is about, **Inschakelen (Enable)** turns the modul
 on, and the **✕** dismisses it. Looking does not close the banner; you looked in
 order to decide. The banner appears only when a deck you open actually contains
 security slide types and the module is off, once per open (never while you edit),
-and it disappears by itself as soon as you switch to another tab or close the
-presentation — it is a statement about *that* presentation, so it never lingers
-over a different one. The slides render either way; this is purely a way to
-discover the module.
+and it disappears by itself as soon as its claim stops holding: when you switch
+to another tab, close the presentation, or delete the last security slide. It is
+a statement about *that* presentation and *that* content, so it never lingers
+over something it no longer describes. The slides render either way; this is
+purely a way to discover the module.
 
 The module's reference data is **part of the app itself**, so enabling it works
 **offline and out of the box** — nothing is downloaded, there is no server, and

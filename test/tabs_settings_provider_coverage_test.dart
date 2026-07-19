@@ -318,16 +318,9 @@ void main() {
         );
         final prompt = container.read(securityModulePromptProvider);
         expect(prompt, isNotNull);
-        // De melding hangt aan het tabblad waarin dit deck landde en wijst de
-        // eerste Informatieveiligheid-slide aan; daarop leunen de "naar de
-        // slide"-knop en het opruimen bij een tabwissel.
-        final tab = container.read(tabsProvider).current!;
-        expect(prompt!.tabId, tab.id);
-        expect(
-          prompt.slideIndex,
-          tab.deckNotifier.currentState.deck!.firstSecuritySlideIndex,
-        );
-        expect(prompt.slideIndex, greaterThanOrEqualTo(0));
+        // De melding hangt aan het tabblad waarin dit deck landde; daarop leunt
+        // het opruimen zodra dat tabblad niet meer vóór staat.
+        expect(prompt!.tabId, container.read(tabsProvider).current!.id);
       },
     );
   });

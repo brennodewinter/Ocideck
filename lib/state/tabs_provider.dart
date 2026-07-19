@@ -511,14 +511,13 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// this layer stays decoupled from the module and just reports the fact. Same
   /// one-shot listen pattern as [importSecurityAlarmProvider].
   void _maybePromptSecurityModule(Deck deck) {
-    final slideIndex = deck.firstSecuritySlideIndex;
-    if (slideIndex < 0) return;
+    if (!deck.hasSecuritySlides) return;
     // Aangeroepen ná het plaatsen, dus `current` is het tabblad dat dit deck
     // net heeft gekregen — de melding kan zich er zo aan vastknopen.
     final tab = state.current;
     if (tab == null) return;
     _ref.read(securityModulePromptProvider.notifier).state =
-        SecurityModulePrompt(tabId: tab.id, slideIndex: slideIndex);
+        SecurityModulePrompt(tabId: tab.id);
   }
 
   /// Open een deck uit in-memory bytes — het open-pad voor web, waar de
@@ -925,17 +924,18 @@ class SecurityModulePrompt {
   /// tabblad: zodra de gebruiker wisselt of het deck sluit, gaat hij weg — een
   /// blijvende balk over een presentatie die niet meer in beeld is, is een
   /// leugen over wat er open staat.
+  ///
+  /// Dit is het enige dat het signaal draagt. Wélke slide de melding aanwijst
+  /// wordt niet hier vastgelegd maar bij elke klik opnieuw uit het levende deck
+  /// gelezen: de gebruiker mag intussen slides verwijderen of verplaatsen, en
+  /// een index van een paar seconden geleden wijst dan iets anders aan (of
+  /// niets meer). Zie `_showSecuritySlide` in de shell.
   final int tabId;
-
-  /// Index van de eerste Informatieveiligheid-slide, zodat de melding een
-  /// "naar de slide"-knop kan aanbieden en de gebruiker de bewering kan
-  /// controleren vóórdat hij de module aanzet.
-  final int slideIndex;
 
   /// A non-const constructor on purpose: each open must produce a *distinct*
   /// instance so a back-to-back second open still notifies listeners (two const
   /// instances would be identical and be swallowed as "no change").
-  SecurityModulePrompt({required this.tabId, required this.slideIndex});
+  SecurityModulePrompt({required this.tabId});
 }
 
 final securityModulePromptProvider = StateProvider<SecurityModulePrompt?>(

@@ -525,7 +525,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
             // Sluit de melding niet: je gaat kijken om te beslissen, dus het
             // aanbod moet er nog staan als je terugkomt.
             TextButton(
-              onPressed: () => _showSecuritySlide(prompt),
+              onPressed: _showSecuritySlide,
               child: Text(l10n.d('Naar de slide')),
             ),
             TextButton(
@@ -550,13 +550,19 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
   /// bewering van de melding kan controleren vóórdat hij de module aanzet.
   /// Alleen als het bijbehorende tabblad nog vóór staat — anders zou de sprong
   /// in een andere presentatie landen.
-  void _showSecuritySlide(SecurityModulePrompt prompt) {
+  ///
+  /// De index wordt hier opnieuw uit het deck gelezen en niet bij het openen
+  /// onthouden: tussen de melding en de klik kan de gebruiker slides hebben
+  /// verwijderd of verplaatst, en dan wijst een oude index de verkeerde slide
+  /// aan.
+  void _showSecuritySlide() {
     final tab = ref.read(tabsProvider).current;
-    if (tab == null || tab.id != prompt.tabId) return;
+    if (tab == null || tab.id != _securityPromptTabId) return;
     if (!tab.deckNotifier.mounted) return;
-    final slides = tab.deckNotifier.currentState.deck?.slides.length ?? 0;
-    if (prompt.slideIndex >= slides) return;
-    tab.editorNotifier.select(prompt.slideIndex);
+    final index =
+        tab.deckNotifier.currentState.deck?.firstSecuritySlideIndex ?? -1;
+    if (index < 0) return;
+    tab.editorNotifier.select(index);
   }
 
   void _hideSecurityBanner() {
@@ -565,19 +571,32 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
   }
 
-  /// Haal de melding weg zodra de presentatie waar hij over gaat niet meer
-  /// vóór staat: een andere tab gekozen, het tabblad gesloten, of het deck
-  /// dichtgeklapt. Zonder dit bleef hij over de volgende presentatie hangen en
-  /// beweerde daar iets over dat niet waar hoefde te zijn.
+  /// Haal de melding weg zodra ze niet meer waar is. Dat gebeurt op twee
+  /// manieren, en allebei laten ze een blijvende balk iets beweren dat niet
+  /// klopt:
+  ///
+  /// 1. De presentatie staat niet meer vóór — een andere tab gekozen, het
+  ///    tabblad gesloten, of het deck dichtgeklapt. De balk zou dan over de
+  ///    volgende presentatie hangen.
+  /// 2. De laatste Informatieveiligheid-slide is weggehaald. De balk zegt dat
+  ///    deze presentatie module-onderdelen bevat; verwijder je ze, dan is dat
+  ///    simpelweg niet meer zo, en biedt hij aan iets aan te zetten waar niets
+  ///    meer voor te bewerken valt.
+  ///
+  /// Dit draait op elke wijziging van [tabsProvider], en die volgt ook de
+  /// deck-stream — een verwijderde slide komt hier dus vanzelf langs.
   void _syncSecurityBannerWithTabs(TabsState tabs) {
     if (_securityPromptTabId == null) return;
     final current = tabs.current;
-    if (current != null &&
-        current.id == _securityPromptTabId &&
-        current.isOpen) {
+    if (current == null ||
+        current.id != _securityPromptTabId ||
+        !current.isOpen ||
+        !current.deckNotifier.mounted) {
+      _hideSecurityBanner();
       return;
     }
-    _hideSecurityBanner();
+    final deck = current.deckNotifier.currentState.deck;
+    if (deck == null || !deck.hasSecuritySlides) _hideSecurityBanner();
   }
 
   @override

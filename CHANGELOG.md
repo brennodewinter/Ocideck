@@ -21,8 +21,10 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   slide** springt naar de eerste slide waar het om gaat, zodat je zelf kunt
   nagaan of het klopt vóórdat je iets aanzet (kijken sluit de balk niet — je
   keek immers om te beslissen), **Inschakelen** zet de module aan, en het
-  **✕** stuurt hem weg. Wissel je van tabblad of sluit je de presentatie, dan
-  verdwijnt de balk uit zichzelf.
+  **✕** stuurt hem weg. De balk verdwijnt uit zichzelf zodra zijn bewering niet
+  meer klopt: je wisselt van tabblad, je sluit de presentatie, of je haalt de
+  laatste module-slide weg. Ook de sprong kijkt elke keer opnieuw waar die
+  slide zit, want je kunt er intussen slides voor hebben weggehaald.
 - **Twee mensen die hetzelfde deck op WebDAV opsloegen overschreven elkaar
   stil.** Het opslaan deed een kale PUT: wie als laatste opsloeg won, en de
   ander merkte pas weken later dat zijn werk weg was. De ontwerpdocumentatie
