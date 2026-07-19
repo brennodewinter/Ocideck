@@ -1819,6 +1819,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Losmaken': 'Dícheangail',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Taispeántar an sleamhnán seo ag {klein} den mhéid deartha in ionad {eigen}, mar go roinneann sé sraith roinnte leis an sleamhnán {pagina} atá i bhfad níos lánmhaire.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

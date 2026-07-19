@@ -1787,6 +1787,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Losmaken': 'Löse',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Die Folie wird mit {klein} vo dr Entwurfsgrössi statt {eigen} aazeigt, wil si e gteilti Reihe mit dr viel vollere Folie {pagina} teilt.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

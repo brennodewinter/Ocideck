@@ -736,6 +736,7 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Losmaken': 'Stacca',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Questa diapositiva viene resa al {klein} della dimensione di progetto anziché al {eigen}, perché condivide una sequenza divisa con la diapositiva {pagina}, molto più piena.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

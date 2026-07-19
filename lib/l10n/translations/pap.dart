@@ -740,6 +740,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Losmaken': 'Separá',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'E slide aki ta wordu mustrá na {klein} di e tamaño di diseño en bes di {eigen}, pasobra e ta kompartí un serie partí ku e slide {pagina} ku ta hopi mas yen.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

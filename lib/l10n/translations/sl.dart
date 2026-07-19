@@ -1785,6 +1785,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Losmaken': 'Odklopi',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Ta prosojnica se izriše pri {klein} načrtovane velikosti namesto {eigen}, ker si deli razdeljeno zaporedje z veliko polnejšo prosojnico {pagina}.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

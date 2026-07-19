@@ -922,6 +922,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Losmaken': 'Detach',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'This slide renders at {klein} of its design size instead of {eigen}, because it shares a split run with the much fuller slide {pagina}.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

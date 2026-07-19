@@ -1782,6 +1782,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Losmaken': 'Koppla loss',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Den här bilden visas i {klein} av designstorleken i stället för {eigen}, eftersom den delar en uppdelad serie med den mycket fylligare bilden {pagina}.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

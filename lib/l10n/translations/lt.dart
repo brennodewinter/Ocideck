@@ -1791,6 +1791,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Losmaken': 'Atskirti',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Ši skaidrė rodoma {klein} projektinio dydžio, o ne {eigen}, nes ji dalijasi padalyta seka su daug pilnesne skaidre {pagina}.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

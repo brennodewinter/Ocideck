@@ -1783,6 +1783,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Losmaken': 'Irrota',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Tämä dia näkyy {klein} suunnittelukoosta odotetun {eigen} sijaan, koska se jakaa jaetun sarjan paljon täydemmän dian {pagina} kanssa.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

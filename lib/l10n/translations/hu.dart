@@ -1787,6 +1787,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Losmaken': 'Leválasztás',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Ez a dia a tervezési méret {klein} részén jelenik meg {eigen} helyett, mert osztott sorozatot oszt meg a sokkal telítettebb {pagina}. diával.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

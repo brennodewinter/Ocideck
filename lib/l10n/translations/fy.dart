@@ -741,6 +741,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Losmaken': 'Losmeitsje',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Dizze slide rendert op {klein} fan \'e ûntwerpgrutte ynstee fan {eigen}, om\'t er in splitste rige dielt mei de folle follere slide {pagina}.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

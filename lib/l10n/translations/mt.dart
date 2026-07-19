@@ -1806,6 +1806,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Losmaken': 'Iddisstakka',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Din is-slajd tintwera f\'{klein} tad-daqs tad-disinn minflok {eigen}, għax taqsam sensiela maqsuma mas-slajd {pagina} li hija ferm aktar mimlija.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

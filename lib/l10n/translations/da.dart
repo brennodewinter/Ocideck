@@ -1782,6 +1782,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Losmaken': 'Frigør',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Dette dias vises med {klein} af designstørrelsen i stedet for {eigen}, fordi det deler en opdelt række med det langt fyldigere dias {pagina}.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

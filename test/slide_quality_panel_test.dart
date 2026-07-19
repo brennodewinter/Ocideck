@@ -277,4 +277,55 @@ void main() {
       findsNothing,
     );
   });
+
+  testWidgets('de losmaak-knop staat naast de Kwaliteit-chip', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(1600, 1000));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    SharedPreferences.setMockInitialValues({'app_consent_accepted': true});
+    AppLocalizations.setActiveLanguageCode('nl');
+
+    await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
+    await tester.pumpAndSettle();
+
+    final container = ProviderScope.containerOf(
+      tester.element(find.byType(AppShell)),
+    );
+    final notifier = container.read(tabsProvider).current!.deckNotifier;
+    notifier.loadDeck(draggedDeck());
+    await tester.pumpAndSettle();
+
+    // Slide 1 (de korte) is geselecteerd: de knop hoort er te staan, zonder dat
+    // het kwaliteitspaneel open hoeft.
+    expect(find.text('Kwaliteit'), findsOneWidget);
+    expect(find.text('Losmaken'), findsOneWidget);
+
+    await tester.tap(find.text('Losmaken'));
+    await tester.pumpAndSettle();
+
+    // De vlag is weg, de tekst onaangeroerd, en de knop verdwijnt weer.
+    expect(notifier.state.deck!.slides[1].continuesSplit, isFalse);
+    expect(notifier.state.deck!.slides[1].bullets, hasLength(40));
+    expect(find.text('Losmaken'), findsNothing);
+  });
+
+  testWidgets('geen losmaak-knop op een deck zonder meegetrokken slide', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1600, 1000));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    SharedPreferences.setMockInitialValues({'app_consent_accepted': true});
+    AppLocalizations.setActiveLanguageCode('nl');
+
+    await tester.pumpWidget(const ProviderScope(child: OciDeckApp()));
+    await tester.pumpAndSettle();
+
+    ProviderScope.containerOf(
+      tester.element(find.byType(AppShell)),
+    ).read(tabsProvider).current!.deckNotifier.loadDeck(overfullDeck());
+    await tester.pumpAndSettle();
+
+    // Wel degelijk een overvolle slide, maar geen reeks — dus geen knop.
+    expect(find.text('Kwaliteit'), findsOneWidget);
+    expect(find.text('Losmaken'), findsNothing);
+  });
 }

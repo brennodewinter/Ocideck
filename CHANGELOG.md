@@ -25,6 +25,12 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   voortzettingsmarkeringen gaan om, dus één keer ongedaan maken zet het terug.
   De volle pagina houdt zijn eigen meldingen en fixes; losmaken vertelt OciDeck
   dat de pagina niet bij de lijst hoort, het maakt de pagina niet korter.
+
+  Omdat dit de melding is die je juist niet gaat zoeken — de slide op je scherm
+  ziet er kapot uit terwijl er niets mis is met zijn eigen tekst — staat de knop
+  ook in de editor-kopregel, als **Losmaken** naast de Kwaliteit-chip. Hij
+  verschijnt alleen zolang de slide die je bewerkt wordt meegetrokken, en de
+  tooltip draagt de volledige uitleg. Alle andere fixes blijven in het paneel.
 - **Een bevinding kan nu ook een mobiele zwakheid aanwijzen (MASWE).** Naast het
   CWE-veld staat een MASWE-veld met een eigen zoeker over de gebundelde lijst.
   Beide mogen naast elkaar: een mobiele zwakheid verwijst zelf ook naar een CWE,

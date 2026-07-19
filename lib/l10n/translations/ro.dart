@@ -1802,6 +1802,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Losmaken': 'Detașează',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Acest diapozitiv este afișat la {klein} din dimensiunea de proiectare în loc de {eigen}, deoarece împarte o serie divizată cu diapozitivul {pagina}, mult mai plin.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

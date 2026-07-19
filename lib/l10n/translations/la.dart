@@ -1799,6 +1799,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Losmaken': 'Seiunge',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Haec pagina ad {klein} magnitudinis destinatae exhibetur pro {eigen}, quia seriem divisam cum pagina {pagina} multo pleniore communicat.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

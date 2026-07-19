@@ -32,7 +32,11 @@ class SlideQualityAction {
 /// hij niet bij de lijst hoort, het maakt hem niet korter.
 ///
 /// `null` wanneer deze melding er niet over gaat.
-SlideQualityAction? _detachSplitPageAction({
+///
+/// Publiek omdat dezelfde actie op twee plekken zit: in het kwaliteitspaneel
+/// naast de melding, en als knop naast de Kwaliteit-chip in de editor-kopregel
+/// (waar je hem nodig hebt zónder eerst het paneel open te klappen).
+SlideQualityAction? detachSplitPageAction({
   required AppLocalizations l10n,
   required WidgetRef ref,
   required SlideQualityIssue issue,
@@ -149,7 +153,7 @@ List<SlideQualityAction> buildSlideQualityActions({
     );
   }
 
-  final detach = _detachSplitPageAction(l10n: l10n, ref: ref, issue: issue);
+  final detach = detachSplitPageAction(l10n: l10n, ref: ref, issue: issue);
   if (detach != null) actions.add(detach);
 
   // Meerzinnige bullets: knip ze op zinsgrenzen in losse bullets.

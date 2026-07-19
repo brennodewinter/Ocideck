@@ -1154,6 +1154,13 @@ stands alone and every other page returns to its own size. Nothing moves and
 nothing is merged — only the continuation markers change, so a single undo puts it
 back.
 
+Because this is the one warning you would not think to go looking for — the slide
+on your screen looks broken while its own text is fine — the fix also sits in the
+editor header, as a **Detach** button next to the **Quality** chip. It appears
+only while the slide you are editing is being dragged down, and disappears once
+you press it; the tooltip carries the full explanation. Every other fix stays in
+the quality panel.
+
 This most often happens when a page was marked as a continuation by hand in
 Markdown mode, or when one page of an existing split was later filled with pasted
 prose. The over-full page keeps its own density warning and its own fixes (**Split

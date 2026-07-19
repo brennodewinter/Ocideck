@@ -1786,6 +1786,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Losmaken': 'Odpojit',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Tento snímek se zobrazuje na {klein} návrhové velikosti místo {eigen}, protože sdílí rozdělenou řadu s mnohem plnějším snímkem {pagina}.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

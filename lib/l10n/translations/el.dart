@@ -1811,6 +1811,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Losmaken': 'Αποσύνδεση',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Αυτή η διαφάνεια εμφανίζεται στο {klein} του μεγέθους σχεδίασης αντί για {eigen}, επειδή μοιράζεται μια χωρισμένη σειρά με την πολύ πιο γεμάτη διαφάνεια {pagina}.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

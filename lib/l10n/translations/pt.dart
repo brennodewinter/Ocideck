@@ -1813,6 +1813,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Losmaken': 'Separar',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Este diapositivo é apresentado a {klein} do tamanho de design em vez de {eigen}, porque partilha uma série dividida com o diapositivo {pagina}, muito mais cheio.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

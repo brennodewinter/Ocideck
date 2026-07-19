@@ -740,6 +740,7 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Losmaken': 'Détacher',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Cette diapositive s\'affiche à {klein} de sa taille de conception au lieu de {eigen}, car elle partage une série fractionnée avec la diapositive {pagina}, bien plus chargée.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

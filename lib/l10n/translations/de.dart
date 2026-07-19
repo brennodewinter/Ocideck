@@ -740,6 +740,7 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Losmaken': 'Lösen',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Diese Folie wird mit {klein} der Entwurfsgröße statt {eigen} dargestellt, weil sie eine geteilte Reihe mit der viel volleren Folie {pagina} teilt.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':
