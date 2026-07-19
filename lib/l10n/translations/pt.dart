@@ -1811,6 +1811,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Licenças dos léxicos: o que falta perguntar',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
       'O WebDAV não está (bem) configurado — verifica os dados do servidor em Definições → Armazenamento.',
   'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':

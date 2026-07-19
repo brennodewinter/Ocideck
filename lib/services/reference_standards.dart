@@ -82,6 +82,21 @@ const referenceStandards = <ReferenceStandard>[
     probeTarget: 'brennodewinter/Informatiebeveiligingsonderzoek',
   ),
   ReferenceStandard(
+    id: 'orphanet',
+    name: 'Orphanet',
+    bundledVersion: orphanetBundledVersion,
+    url: 'https://www.orphadata.com/data/xml/',
+    bundled:
+        'Aandoeningsnamen in negen talen als gezondheidslexicon voor de '
+        'privacycontrole (assets/privacy/health_lexicon.json).',
+    licence: 'CC-BY-4.0',
+    probe: UpstreamProbe.orphanetDate,
+    probeTarget: 'https://www.orphadata.com/data/xml/nl_product1.xml',
+    // Adviserend: dit is een detectielexicon, geen catalogus die de gebruiker
+    // leest. Zie ReferenceStandard.advisory en OCIWACHT §13.3.
+    advisory: true,
+  ),
+  ReferenceStandard(
     id: 'cvss',
     name: 'FIRST CVSS',
     bundledVersion: cvssBundledVersion,
@@ -103,6 +118,10 @@ const cweBundledVersion = '4.20';
 /// Het MIAUW-schema dat `miauw_eis_catalog.dart` weerspiegelt. De methodologie
 /// voert geen releasenummers, dus we noteren de datum van de overgenomen versie.
 const miauwBundledVersion = '2026-07-16';
+
+/// De Orphanet-uitgave die `assets/privacy/health_lexicon.json` weerspiegelt.
+/// Orphanet voert geen versienummers maar datumt elke uitgave.
+const orphanetBundledVersion = '2026-06-23';
 
 /// De CVSS-specificatie die `lib/services/cvss/` implementeert.
 const cvssBundledVersion = '4.0';

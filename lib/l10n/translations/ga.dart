@@ -1817,6 +1817,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Ceadúnais foclóra: a bhfuil fós le fiafraí',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
       'Níl WebDAV socraithe i gceart — seiceáil sonraí an fhreastalaí faoi Socruithe → Stóráil.',
   'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':

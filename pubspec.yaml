@@ -101,6 +101,9 @@ flutter:
     # Full MITRE CWE weakness list (offline), merged over the curated floor in
     # lib/services/cwe_catalog.dart. Regenerate with tool/build_cwe_catalog.dart.
     - assets/cwe/cwe_full.json
+    # Het gebundelde gezondheidslexicon (Orphanet, CC BY 4.0) — zie
+    # tool/build_privacy_lexicon.dart en docs/LICENSE_COMPLIANCE.md.
+    - assets/privacy/health_lexicon.json
     - assets/web_export/
     # Full EUPL 1.2 licence text, shown verbatim in the consent screen.
     - LICENSE.md
@@ -135,6 +138,7 @@ flutter:
     - docs/design/PENTEST_MIAUW.md
     - docs/design/AI_ASSIST.md
     - docs/design/AGENTIC_BUILD_PLAN.md
+    - docs/design/LEXICON_LICENTIENAVRAAG.md
     - docs/design/OCIWACHT.md
     - docs/design/PROCESS_IMPROVEMENT.md
   fonts:

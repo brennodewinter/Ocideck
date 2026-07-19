@@ -309,7 +309,15 @@ also declares them, but see the [CI note](#continuous-integration).)
   minuten compileruitvoer verdwijnt.
 - **Exit 2 (geen netwerk) breekt de release niet**, maar zegt wel dát er niet
   gekeken is. Stilte mag hier niet als goedkeuring lezen.
-- **Daarna:** `make refresh-catalogs` haalt de nieuwe versies op.
+- **Daarna:** `make refresh-catalogs` haalt de nieuwe versies op, en
+  `make refresh-lexicon` het gezondheidslexicon uit Orphanet.
+- **Twee soorten bron, twee soorten melding.** Een standaard die verouderd is,
+  laat de poort in `deps-check` vallen. Een bron met `advisory: true` in
+  `lib/services/reference_standards.dart` meldt zich wél maar blokkeert nooit —
+  dat is voor **detectielexicons**. Die brengen maandelijks uit, en bij een
+  lexicon *vuurt* elke term, dus een verversing kost een termdiff lezen en de
+  vals-positievencorpus opnieuw wegen. Een poort die daarop rood wordt, staat
+  binnen twee maanden permanent rood en gaat uit.
 
 ### `make check-web`
 - **Runs:** `make build-web` then `dart run tool/check_web_hardening.dart`.

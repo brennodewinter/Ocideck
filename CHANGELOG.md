@@ -10,6 +10,24 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Added
+- **De privacycontrole kent nu 62.490 aandoeningsnamen, in negen talen.** Tot nu
+  toe herkende OciDeck gezondheidsgegevens aan een handvol signaalwoorden —
+  "diagnose", "medicatie", "ziekteverzuim". Die wijzen ergens naar; ze zíjn het
+  gegeven niet. Nu worden ook de aandoeningen zelf herkend, uit de
+  nomenclatuur van Orphanet (CC BY 4.0): van "taaislijmziekte" tot "ziekte van
+  Alexander", in het Nederlands, Engels, Duits, Frans, Spaans, Italiaans, Pools,
+  Portugees en Tsjechisch.
+
+  Dat maakt vooral de **redactie** beter. Een signaalwoord weglakken laat de
+  mededeling staan; een aandoeningsnaam weglakken haalt het gegeven zelf weg.
+  En een aandoeningsnaam blijft op zichzelf een informatieve melding — "onze
+  afdeling behandelt cystinose" is een dienstbeschrijving, geen dossier. Pas met
+  een persoon erbij wordt het een waarschuwing.
+
+  Voor negen talen is dit meteen het verschil tussen "een paar signaalwoorden"
+  en een bruikbaar lexicon, en de taaldekkingsmelding in het kwaliteitspaneel
+  beweegt mee.
+
 - **Vóór een release-build zie je nu of er upstream iets nieuwers is.** OciDeck
   bundelt referentiedata — WSTG, MASTG, MASWE, CWE, MIAUW, CVSS — en die
   wandelt mee in elk artefact dat je uitbrengt. Er was al een controle die

@@ -738,6 +738,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Lisensia di leksikon: kiko mester puntra ainda',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
       'WebDAV no ta konfigurá (bon) — kontrolá e datos di servidor na Konfigurashon → Almasenamentu.',
   'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':

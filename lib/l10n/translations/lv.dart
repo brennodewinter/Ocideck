@@ -1780,6 +1780,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Leksikonu licences: kas vēl jānoskaidro',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
       'WebDAV nav (pareizi) iestatīts — pārbaudiet servera datus sadaļā Iestatījumi → Krātuve.',
   'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':

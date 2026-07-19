@@ -63,7 +63,20 @@ final _sourceFile = File('lib/services/reference_standards.dart');
 
 class _Standard {
   final String id, name, version, probe, target;
-  _Standard(this.id, this.name, this.version, this.probe, this.target);
+
+  /// Mag een nieuwere upstreamversie de poort laten falen? Zie
+  /// `ReferenceStandard.advisory`: detectielexicons melden zich wél maar
+  /// blokkeren niet, want die brengen maandelijks uit en een poort die altijd
+  /// rood staat wordt uitgezet.
+  final bool advisory;
+  _Standard(
+    this.id,
+    this.name,
+    this.version,
+    this.probe,
+    this.target, {
+    this.advisory = false,
+  });
 }
 
 void main(List<String> args) async {
@@ -84,6 +97,10 @@ void main(List<String> args) async {
 
   final rows = <List<String>>[];
   var outdated = 0;
+  // Adviserende bronnen tellen apart: ze worden gemeld maar laten de poort niet
+  // vallen. Zie ReferenceStandard.advisory voor waarom een detectielexicon daar
+  // hoort en een catalogus niet.
+  var outdatedAdvisory = 0;
   var unreachable = 0;
 
   final notes = <String>[];
@@ -97,8 +114,13 @@ void main(List<String> args) async {
     }
     if (result.note.isNotEmpty) notes.add(result.note);
     if (result.stale) {
-      outdated++;
-      rows.add([s.name, s.version, result.latest!, 'VEROUDERD']);
+      if (s.advisory) {
+        outdatedAdvisory++;
+        rows.add([s.name, s.version, result.latest!, 'nieuwer beschikbaar']);
+      } else {
+        outdated++;
+        rows.add([s.name, s.version, result.latest!, 'VEROUDERD']);
+      }
     } else {
       rows.add([s.name, s.version, result.latest!, 'actueel']);
     }
@@ -123,6 +145,16 @@ void main(List<String> args) async {
     // anders dan "er is niets nieuws", en dat verschil mag nooit verdwijnen.
     exit(2);
   }
+  // Adviserende bronnen melden zich altijd, in beide standen — alleen laten ze
+  // de poort niet vallen.
+  if (outdatedAdvisory > 0) {
+    stdout.writeln(
+      '\n$outdatedAdvisory adviserende bron(nen) hebben een nieuwere uitgave.\n'
+      'Dat is geen defect: bij een detectielexicon vuurt elke term, dus een '
+      'verversing vraagt om de termdiff lezen en de vals-positievencorpus '
+      'opnieuw wegen. Doe dat bewust, niet reflexmatig.',
+    );
+  }
   if (outdated > 0) {
     final where =
         'Werk de catalogus bij, pas de versie aan in '
@@ -142,7 +174,11 @@ void main(List<String> args) async {
     );
     exit(1);
   }
-  stdout.writeln('\nReference data OK.');
+  stdout.writeln(
+    outdatedAdvisory > 0
+        ? '\nReference data OK (op de adviserende meldingen na).'
+        : '\nReference data OK.',
+  );
 }
 
 /// Trekt de standaarden uit de Dart-bron. Bewust regel-voor-regel en niet met
@@ -178,6 +214,7 @@ List<_Standard> _parseStandards(String source) {
         version,
         RegExp(r'probe: UpstreamProbe\.(\w+)').firstMatch(b)?.group(1) ?? '',
         field('probeTarget'),
+        advisory: RegExp(r'advisory: true').hasMatch(b),
       ),
     );
   }
@@ -245,12 +282,42 @@ Future<_Result> _probe(_Standard s) async {
         latest,
         stale: latest != null && latest.compareTo(s.version) > 0,
       );
+    case 'orphanetDate':
+      final latest = await _probeOrphanetDate(s.target);
+      return _Result(
+        latest,
+        stale: latest != null && latest.compareTo(s.version) > 0,
+      );
     case 'cweApi':
       return _probeCweApi(s);
     case 'successorDocument':
       return _probeSuccessor(s);
     default:
       return _Result(null);
+  }
+}
+
+/// De uitgavedatum uit de kop van een Orphanet-productbestand.
+///
+/// Die bestanden zijn ruim 50 MB per taal, en de datum staat in de eerste regel.
+/// Vandaar een range-verzoek van twee kilobyte: de hele lijst binnenhalen om één
+/// datum te lezen zou de poort traag én duur maken, en dan wordt hij overgeslagen.
+Future<String?> _probeOrphanetDate(String url) async {
+  if (url.isEmpty) return null;
+  try {
+    final client = HttpClient();
+    final req = await client.getUrl(Uri.parse(url));
+    req.headers.set(HttpHeaders.rangeHeader, 'bytes=0-2047');
+    final res = await req.close();
+    final head = await res
+        .transform(const Utf8Decoder(allowMalformed: true))
+        .join();
+    client.close(force: true);
+    return RegExp(
+      r'<JDBOR date="(\d{4}-\d{2}-\d{2})',
+    ).firstMatch(head)?.group(1);
+  } catch (_) {
+    return null;
   }
 }
 

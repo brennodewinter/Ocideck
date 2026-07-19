@@ -1803,6 +1803,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Liċenzji tal-lessiku: x\'fadal x\'nistaqsu',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
       'WebDAV mhuwiex issettjat sew — iċċekkja d-dettalji tas-server taħt Settings → Ħażna.',
   'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':

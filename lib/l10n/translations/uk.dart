@@ -1799,6 +1799,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Ліцензії лексиконів: що ще треба з\'ясувати',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
       'WebDAV налаштовано неправильно — перевірте дані сервера в Налаштування → Сховище.',
   'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':

@@ -738,6 +738,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Licences des lexiques : ce qu\'il reste à demander',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
       'WebDAV n\'est pas (bien) configuré — vérifiez les données du serveur dans Paramètres → Stockage.',
   'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':

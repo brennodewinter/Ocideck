@@ -1785,6 +1785,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Lexikonlicencek: mit kell még megkérdezni',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
       'A WebDAV nincs (jól) beállítva — ellenőrizd a kiszolgáló adatait a Beállítások → Tárhely alatt.',
   'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':

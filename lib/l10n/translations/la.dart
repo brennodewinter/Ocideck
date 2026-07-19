@@ -1797,6 +1797,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Licentiae lexicorum: quae adhuc roganda sunt',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
       'WebDAV non recte constitutum est — data servitoris apud Optiones → Repositorium inspice.',
   'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':

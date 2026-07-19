@@ -1804,6 +1804,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Лицензи на лексикони: какво още трябва да се попита',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
       'WebDAV не е настроен правилно — проверете данните за сървъра в Настройки → Хранилище.',
   'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':

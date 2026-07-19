@@ -1784,6 +1784,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Licence lexikonů: na co je ještě třeba se zeptat',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
       'WebDAV není (správně) nastaven — zkontrolujte údaje serveru v Nastavení → Úložiště.',
   'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':

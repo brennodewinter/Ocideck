@@ -1809,6 +1809,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Άδειες λεξικών: τι μένει να ρωτηθεί',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
       'Το WebDAV δεν έχει ρυθμιστεί σωστά — ελέγξτε τα στοιχεία διακομιστή στις Ρυθμίσεις → Αποθήκευση.',
   'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':

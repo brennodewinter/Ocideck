@@ -1781,6 +1781,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Sanastojen lisenssit: mitä on vielä kysyttävä',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
       'WebDAV ei ole (oikein) määritetty — tarkista palvelintiedot kohdassa Asetukset → Tallennus.',
   'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':

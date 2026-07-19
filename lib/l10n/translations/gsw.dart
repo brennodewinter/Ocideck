@@ -1785,6 +1785,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Lexikonlizänze: was no z klääre isch',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
       'WebDAV isch nid (rächt) igrichtet — prüef d Serverdate under Istellige → Spycher.',
   'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':

@@ -1799,6 +1799,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Lexiconlicenties: wat er nog nagevraagd moet worden':
+      'Licențele lexicoanelor: ce mai trebuie întrebat',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
       'WebDAV nu este configurat corect — verifică datele serverului în Setări → Stocare.',
   'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':
