@@ -28,11 +28,35 @@
 //    nabijheidseis is niet cosmetisch: een handleiding die ergens een
 //    voorbeeldstraat noemt en tweehonderd regels verderop een voorbeeldpostcode,
 //    is geen adres — en zou zonder die eis onterecht afgaan.
+//
+// Punt 3 beschrijft inmiddels de *terugvalweg*, niet de hoofdweg. Staat de
+// postcode direct achter het huisnummer — de gewone schrijfwijze van een adres —
+// dan vangt [fullAddressPattern] het hele adres in één span, zonder de
+// straatnamenlijst nodig te hebben en zonder de wederzijdse escalatie. Die
+// wederzijdse escalatie bleek namelijk een stille faalstand te hebben: mist de
+// straat, dan blijft ook de postcode `possible` en valt het adres uit het
+// exportrapport. Zie [dutchStreetSuffixes] voor het geval dat dat aan het licht
+// bracht.
 
 /// Straatnaam-achtervoegsels. Een straatnaam is een woord dat op een van deze
 /// eindigt; het lijstje is Nederlands en bewust conservatief. De echte precisie
 /// komt niet van dit lijstje maar van de huisnummereis erachter: "Beleid" is geen
 /// adres, "Beleidsweg 12" wel.
+///
+/// **Dit lijstje is per definitie incompleet, en dat is een ontwerpfout die hier
+/// niet meer alleen op mag staan.** Aanleiding: `Weidemolen 12, 1234 AB
+/// Amsterdam` werd volledig gemist, want `-molen` stond er niet in. Dat is
+/// niet één ontbrekend woord — Nederlandse straatnamen hebben een staart die geen
+/// lijst ooit afdekt (`-veld`, `-hoeve`, `-akker`, `-horst`, `-donk`, `-es`, en de
+/// straatnamen die helemaal geen achtervoegsel hebben). Erger nog: doordat de
+/// straat niet matchte, bleef ook de postcode ernaast op `possible` steken — de
+/// escalatie is wederzijds — en viel het hele adres uit het exportrapport. Eén
+/// ontbrekend woord maakte er dus een stille lek van.
+///
+/// Daarom is dit lijstje sinds die vondst de *goedkoopste* van drie paden en niet
+/// langer het enige: zie [fullAddressPattern] (postcode als anker) en
+/// [addressLabelPattern] (het label als anker). Wie hier een achtervoegsel
+/// toevoegt lost één slide op; de andere twee paden lossen de categorie op.
 const List<String> dutchStreetSuffixes = [
   'straat',
   'laan',
@@ -51,6 +75,49 @@ const List<String> dutchStreetSuffixes = [
   'park',
   'baan',
   'dwarsstraat',
+  'molen',
+  'veld',
+  'hoeve',
+  'akker',
+  'horst',
+  'donk',
+  'kamp',
+  'bos',
+  'wal',
+  'gaarde',
+  'erf',
+  'hout',
+  'sluis',
+  'brink',
+  'beek',
+  'wetering',
+  'tuin',
+];
+
+/// Achtervoegsels die hier **bewust niet** in staan, met de reden erbij. Ze zijn
+/// alle vijf een echt Nederlands straatachtervoegsel, en toch zou elk ervan meer
+/// kapotmaken dan repareren — want een achtervoegsel plus een getal van hoogstens
+/// vier cijfers is ook de vorm van een doodgewoon zelfstandig naamwoord met een
+/// jaartal erachter:
+///
+///     ring    "Vergadering 12"    ← dit is geen theorie: deze brak een test
+///     markt   "Arbeidsmarkt 2025"
+///     dam     "Amsterdam 2025"    ← elke stad op -dam, in elke conferentietitel
+///     haven   "Luchthaven 2025"
+///     berg    "Heidelberg 2025"
+///
+/// Dat verlies is klein en bewust, want de straat mág hier gemist worden: zonder
+/// postcode in de buurt levert deze lijst toch niet meer dan een `possible` hint
+/// op. Staat er wél een postcode achter — het geval dat er werkelijk toe doet —
+/// dan vangt [fullAddressPattern] het adres zonder ook maar naar deze lijst te
+/// kijken. Wie hier een van deze vijf alsnog toevoegt: draai eerst
+/// `privacy_location_rules_test.dart` en het vals-positieven-corpus.
+const List<String> rejectedStreetSuffixes = [
+  'ring',
+  'markt',
+  'dam',
+  'haven',
+  'berg',
 ];
 
 /// Een straatnaam gevolgd door een huisnummer: `Kalverstraat 12`, `Beethovenln
@@ -100,6 +167,101 @@ bool postcodeBoundaryOk(String text, int start) {
 /// Amsterdam", krap genoeg dat twee losse voorbeelden in een lange tekst niet per
 /// ongeluk een adres vormen.
 const int kAddressLocationWindow = 40;
+
+// ── De twee ankers die geen woordenlijst nodig hebben ────────────────────────
+//
+// [dutchStreetSuffixes] herkent een straat aan zijn stáárt. Dat werkt alleen voor
+// straten die iemand ooit heeft opgeschreven. De twee regels hieronder herkennen
+// een adres aan zijn *structuur*, en die is wél eindig:
+//
+//   1. een postcode direct achter een woord-met-huisnummer — [fullAddressPattern];
+//   2. het woord "adres" als label ervoor — [addressLabelPattern].
+//
+// Beide zijn hoge-precisieankers, en dat is de reden dat ze mogen wat de losse
+// straatregel niet mag: in hun eentje `certain` opleveren. "Weidemolen 12, 1234
+// PW" is geen straatnaam-gok — de postcode staat erachter, en een postcode met
+// een huisnummer wijst in Nederland vrijwel één woonadres aan.
+
+/// Een compleet adres, herkend aan de postcode in plaats van aan de straatnaam.
+///
+/// `Weidemolen 12, 1234 AB Amsterdam` — één aaneengesloten treffer van
+/// straat tot en met woonplaats.
+///
+/// **Waarom de hele reeks één match is en niet drie losse.** Omdat een adres in
+/// stukjes redigeren geen adres redigeert. Zou dit drie bevindingen opleveren,
+/// dan blokt de projectie alleen de postcode en blijft `Woonadres: Weidemolen 12,
+/// ██████ Amsterdam` staan — straat, huisnummer en plaats intact, en dus
+/// nog steeds triviaal herleidbaar. Precies dat gebeurde er. Eén span dekt alles.
+///
+/// De straat is hier één tot drie woorden met een hoofdletter (`Burgemeester
+/// Vening Meineszlaan`), zónder eis aan het achtervoegsel — die eis doet de
+/// postcode. De woonplaats erachter is optioneel: `1234 AB` alleen is al genoeg
+/// om het adres te maken, maar staat de plaats erbij dan hoort die er ook onder.
+final RegExp fullAddressPattern = RegExp(
+  // Straatnaam: 1–3 woorden die met een hoofdletter beginnen.
+  r"\b[A-Z][a-zà-öø-ÿ.'\-]*(?:\s+[A-Z]?[a-zà-öø-ÿ.'\-]+){0,2}"
+  // Huisnummer met optionele toevoeging: `12`, `3a`, `184 bis`.
+  r'\s+\d{1,4}\s?[a-zA-Z]?'
+  // Scheiding, dan de postcode — dit is het anker.
+  r'[,\s]\s*[1-9]\d{3} ?[A-Z]{2}\b'
+  // Woonplaats, optioneel: `Amsterdam`, `Bergen op Zoom`.
+  r"(?:\s+[A-Z][a-zà-öø-ÿ'\-]*(?:\s+(?:aan|op|den|der|de|bij|het)?\s*[A-Z]?[a-zà-öø-ÿ'\-]+){0,3})?",
+);
+
+/// Labels die aankondigen dat wat volgt een adres is.
+///
+/// Het spiegelbeeld van [nameLabelPattern]: de auteur schrijft er zelf bij dat
+/// dit een adres is, en dat is sterker bewijs dan welk vormpatroon ook.
+/// `Woonadres:` is bovendien specifieker dan `Adres:` — een woonadres is per
+/// definitie van een persoon, waar een kaal `Adres:` ook het kantoor kan zijn.
+/// Dat verschil zit in [residentialAddressLabels] versus [genericAddressLabels].
+const List<String> residentialAddressLabels = [
+  'woonadres',
+  'huisadres',
+  'thuisadres',
+  'privéadres',
+  'priveadres',
+  'verblijfadres',
+  'home address',
+];
+
+/// Adreslabels die ook een organisatie kunnen aanduiden.
+const List<String> genericAddressLabels = [
+  'adres',
+  'postadres',
+  'bezoekadres',
+  'vestigingsadres',
+  'correspondentieadres',
+  'factuuradres',
+  'afleveradres',
+  'address',
+  'anschrift',
+  'adresse',
+];
+
+/// Een adres achter een expliciet label: `Woonadres: Weidemolen 12`.
+///
+/// De waarde loopt tot het einde van de regel, en dat is opzettelijk ruim: een
+/// adres is één samenhangend geheel en de helft ervan redigeren is zinloos (zie
+/// [fullAddressPattern]). De grens van 120 tekens is er tegen het geval waarin
+/// iemand `Adres:` schrijft en er een hele alinea achteraan zet.
+///
+/// Groep 1 is het label zelf (nodig voor [isResidentialAddressLabel]); groep 2
+/// is de waarde. Die waarde is gulzig en loopt dus tot het regeleinde, zodat ze
+/// exact op `match.end` eindigt en de scanner haar positie kan afleiden zonder
+/// groepsoffsets — dezelfde truc als bij [nameLabelPattern], die Dart nodig
+/// maakt omdat het de offsets van groepen niet los teruggeeft.
+final RegExp addressLabelPattern = RegExp(
+  '\\b(${[...residentialAddressLabels, ...genericAddressLabels].join('|')})'
+  r'\s*[:=]\s*'
+  r'([^\r\n]{1,120})',
+  multiLine: true,
+  caseSensitive: false,
+);
+
+/// Is dit adreslabel er een die per definitie over een persoon gaat?
+bool isResidentialAddressLabel(String label) =>
+    residentialAddressLabels.contains(label.toLowerCase().trim());
 
 // ── Namen ────────────────────────────────────────────────────────────────────
 

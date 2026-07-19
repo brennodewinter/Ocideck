@@ -325,11 +325,24 @@ class PrivacyScanner {
     List<PrivacyFinding> out,
   ) {
     final text = fragment.text;
-    final addresses = streetAddressPattern.allMatches(text).toList();
+
+    // De twee ankers eerst. Ze leveren allebei één span over het héle adres, en
+    // wat daarbinnen valt hoeft daarna niet nóg eens los gemeld te worden.
+    final anchored = <({int start, int end})>[];
+    _scanAnchoredAddresses(fragment, slideIndex, out, anchored);
+
+    bool insideAnchor(Match m) =>
+        anchored.any((a) => m.start >= a.start && m.end <= a.end);
+
+    final addresses = [
+      for (final m in streetAddressPattern.allMatches(text))
+        if (!insideAnchor(m)) m,
+    ];
     final postcodes = [
       for (final m in dutchPostcodePattern.allMatches(text))
         if (postcodeBoundaryOk(text, m.start) &&
-            isPlausibleDutchPostcode(m.group(0)!))
+            isPlausibleDutchPostcode(m.group(0)!) &&
+            !insideAnchor(m))
           m,
     ];
     if (addresses.isEmpty && postcodes.isEmpty) return;
@@ -363,6 +376,80 @@ class PrivacyScanner {
           confidence: confirmed
               ? PrivacyConfidence.certain
               : PrivacyConfidence.possible,
+        ),
+      );
+    }
+  }
+
+  /// De twee adresankers die geen straatnamenlijst nodig hebben.
+  ///
+  /// Levert per anker één span over het hele adres, en schrijft die spans in
+  /// [spans] zodat [_scanAddress] weet wat er al gedekt is. Zie de kop van
+  /// `privacy_contact_rules.dart` voor waarom een adres in stukjes redigeren
+  /// geen adres redigeert.
+  void _scanAnchoredAddresses(
+    _Fragment fragment,
+    int slideIndex,
+    List<PrivacyFinding> out,
+    List<({int start, int end})> spans,
+  ) {
+    final text = fragment.text;
+
+    // Anker 1: de postcode staat er direct achter. Dat is in Nederland vrijwel
+    // uniek identificerend, dus dit is `certain` zonder verdere bevestiging.
+    for (final m in fullAddressPattern.allMatches(text)) {
+      final postcode = dutchPostcodePattern.firstMatch(m.group(0)!);
+      if (postcode == null || !isPlausibleDutchPostcode(postcode.group(0)!)) {
+        continue;
+      }
+      spans.add((start: m.start, end: m.end));
+      _emit(
+        out,
+        _finding(
+          fragment,
+          slideIndex,
+          m,
+          ruleId: 'contact.address',
+          family: PrivacyFamily.contact,
+          confidence: PrivacyConfidence.certain,
+        ),
+      );
+    }
+
+    // Anker 2: de auteur schrijft er zelf "adres" boven.
+    for (final m in addressLabelPattern.allMatches(text)) {
+      final label = m.group(1)!;
+      final raw = m.group(2)!;
+      final value = raw.trimRight();
+      if (value.isEmpty) continue;
+      // De waarde is gulzig tot het regeleinde, dus ze eindigt op `m.end`; het
+      // afgeknipte staartje wit schuift het einde naar links.
+      final end = m.end - (raw.length - value.length);
+      final start = end - value.length;
+      if (spans.any((s) => start >= s.start && end <= s.end)) continue;
+
+      // Een woonadres is per definitie van een persoon. Een kaal `Adres:` kan
+      // het kantoor zijn en blijft daarom een hint — tenzij er een huisnummer
+      // of postcode in staat, want dan wijst het een pand aan.
+      final specific =
+          isResidentialAddressLabel(label) ||
+          dutchPostcodePattern.hasMatch(value) ||
+          streetAddressPattern.hasMatch(value);
+      spans.add((start: start, end: end));
+      _emit(
+        out,
+        _finding(
+          fragment,
+          slideIndex,
+          m,
+          ruleId: 'contact.address',
+          family: PrivacyFamily.contact,
+          confidence: specific
+              ? PrivacyConfidence.certain
+              : PrivacyConfidence.possible,
+          spanStart: start,
+          spanEnd: end,
+          value: value,
         ),
       );
     }
@@ -862,8 +949,16 @@ class PrivacyScanner {
     required String ruleId,
     required PrivacyFamily family,
     required PrivacyConfidence confidence,
+
+    /// Voor regels waarbij niet de héle match de waarde is. Een label als
+    /// `Woonadres:` hoort níet onder de blokjes: de ontvanger mag zien wát er
+    /// weg is, alleen niet wat het was. Standaard is de match zelf de waarde.
+    int? spanStart,
+    int? spanEnd,
+    String? value,
   }) {
-    if (ownIdentity.covers(match.group(0)!)) return null;
+    final subject = value ?? match.group(0)!;
+    if (ownIdentity.covers(subject)) return null;
     return PrivacyFinding(
       ruleId: ruleId,
       family: family,
@@ -871,11 +966,11 @@ class PrivacyScanner {
       slideIndex: slideIndex,
       field: fragment.field,
       fragmentIndex: fragment.index,
-      start: match.start,
-      end: match.end,
+      start: spanStart ?? match.start,
+      end: spanEnd ?? match.end,
       // Nooit de volledige waarde: een privacycontrole die de gevonden BSN's
       // in haar eigen meldingen zet, heeft het probleem verplaatst.
-      maskedSample: maskValue(match.group(0)!),
+      maskedSample: maskValue(subject),
     );
   }
 

@@ -3,6 +3,7 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/privacy_finding.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/privacy/privacy_contact_rules.dart';
 import 'package:ocideck/services/privacy/privacy_projection.dart';
 import 'package:ocideck/services/privacy/privacy_scanner.dart';
 
@@ -84,17 +85,116 @@ void main() {
   });
 
   group('postcode + huisnummer samen', () {
-    test('een straat dicht bij een postcode escaleert beide naar zeker', () {
-      final result = scanText('Kalverstraat 12, 1234 AB Amsterdam');
-      final address = result.findings.firstWhere(
+    test('een straat met een postcode erachter is één zeker adres', () {
+      // Let op de vorm: dit was ooit twéé bevindingen die elkaar naar `certain`
+      // duwden. Dat leverde twee losse blokjes op en liet de woonplaats staan.
+      // Sinds `fullAddressPattern` is het één span van straat tot en met plaats
+      // — zie `privacy_contact_rules.dart`: een adres in stukjes redigeren
+      // redigeert geen adres.
+      const text = 'Kalverstraat 12, 1234 AB Amsterdam';
+      final result = scanText(text);
+      final addresses = result.findings
+          .where((f) => f.ruleId == 'contact.address')
+          .toList();
+
+      expect(addresses, hasLength(1));
+      expect(addresses.single.confidence, PrivacyConfidence.certain);
+      expect(result.certain, isNotEmpty);
+
+      // De span dekt het hele adres, niet alleen de straat of alleen de postcode.
+      expect(
+        text.substring(addresses.single.start, addresses.single.end),
+        text,
+      );
+
+      // En de postcode wordt niet nóg eens los gemeld: hij valt al onder het
+      // adres, en een tweede melding over dezelfde tekens is ruis.
+      expect(
+        result.findings.where((f) => f.ruleId == 'contact.postcode_nl'),
+        isEmpty,
+      );
+    });
+
+    test('de afgewezen achtervoegsels blijven afgewezen', () {
+      // Een lijst met een reden erbij is pas een afspraak als iets hem bewaakt.
+      // Zonder deze test voegt de volgende lezer `markt` "even" toe en meldt de
+      // scanner voortaan de arbeidsmarkt als woonadres.
+      for (final suffix in rejectedStreetSuffixes) {
+        expect(
+          dutchStreetSuffixes,
+          isNot(contains(suffix)),
+          reason:
+              '"$suffix" is afgewezen — lees de reden in privacy_contact_rules',
+        );
+      }
+      // En de vorm die ze zou opleveren blijft stil.
+      expect(rulesIn('Vergadering 12 gaat niet door'), isEmpty);
+      expect(rulesIn('Arbeidsmarkt 2025 in cijfers'), isEmpty);
+      expect(rulesIn('Amsterdam 2025 was een recordjaar'), isEmpty);
+    });
+
+    test('een straat zonder bekend achtervoegsel wordt niet gemist', () {
+      // De melding die deze hele regel heeft opgeleverd. `Weidemolen` eindigt
+      // niet op een achtervoegsel dat in de lijst stond, waardoor er géén
+      // adresbevinding was, de postcode ernaast op `possible` bleef steken en
+      // het adres uit het exportrapport viel. Een stille lek, door één woord.
+      const text = 'Woonadres: Weidemolen 12, 1234 AB Amsterdam';
+      final result = scanText(text);
+      final address = result.findings.singleWhere(
         (f) => f.ruleId == 'contact.address',
       );
-      final postcode = result.findings.firstWhere(
-        (f) => f.ruleId == 'contact.postcode_nl',
-      );
+
       expect(address.confidence, PrivacyConfidence.certain);
-      expect(postcode.confidence, PrivacyConfidence.certain);
-      expect(result.certain, isNotEmpty);
+      // Het label blijft staan, de waarde gaat er integraal onder: de ontvanger
+      // mag zien dát hier een woonadres weg is.
+      expect(
+        text.substring(address.start, address.end),
+        'Weidemolen 12, 1234 AB Amsterdam',
+      );
+    });
+
+    test('het postcode-anker heeft de straatnamenlijst niet nodig', () {
+      // Geen van deze straten eindigt op een achtervoegsel uit de lijst. De
+      // postcode erachter is wat ze tot adres maakt.
+      for (final text in [
+        'Zonnedauw 8, 3435 RX Nieuwegein',
+        'De Savornin Lohmanplein 3, 2566 AB Den Haag',
+        'Kleine Berg 44a, 5611 JV Eindhoven',
+      ]) {
+        final result = scanText(text);
+        expect(
+          result.findings.where(
+            (f) =>
+                f.ruleId == 'contact.address' &&
+                f.confidence == PrivacyConfidence.certain,
+          ),
+          isNotEmpty,
+          reason: 'geen zeker adres gevonden in "$text"',
+        );
+      }
+    });
+
+    test('een adreslabel zonder woonplaats telt ook', () {
+      final result = scanText('Woonadres: Zonnedauw 8');
+      final address = result.findings.singleWhere(
+        (f) => f.ruleId == 'contact.address',
+      );
+      // "Woonadres" is per definitie van een persoon, dus dit hoeft geen
+      // postcode ter bevestiging.
+      expect(address.confidence, PrivacyConfidence.certain);
+    });
+
+    test('een kaal Adres-label zonder pandaanwijzing blijft een hint', () {
+      // Dit kan het kantoor zijn, en een scanner die daarop rood kleurt wordt
+      // uitgezet. Zie de vals-positieven-strategie in privacy_contact_rules.
+      final result = scanText('Adres: zie de contactpagina');
+      expect(
+        result.findings
+            .where((f) => f.ruleId == 'contact.address')
+            .every((f) => f.confidence == PrivacyConfidence.possible),
+        isTrue,
+      );
+      expect(result.certain, isEmpty);
     });
 
     test('een straat en een postcode ver uit elkaar escaleren niet', () {
@@ -216,6 +316,50 @@ void main() {
       expect(text.contains('1234 AB'), isFalse);
       expect(text.contains('Jansen'), isFalse);
       expect(audience.hasRedactions, isTrue);
+    });
+
+    test('ook de woonplaats gaat eronder, niet alleen de postcode', () {
+      // De slide uit de melding. Vóór het postcode-anker leverde dit
+      // `Woonadres: Weidemolen 12, ██████ Amsterdam` op — straat,
+      // huisnummer én plaats gewoon leesbaar. Een half geredigeerd adres is
+      // geen geredigeerd adres.
+      final deck = Deck(
+        title: 'Briefing',
+        privacy: PrivacyDisposition.redact,
+        slides: [
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(bullets: ['Woonadres: Weidemolen 12, 1234 AB Amsterdam']),
+        ],
+      );
+
+      final line = PrivacyProjection.forAudience(
+        deck,
+      ).slides.single.bullets.single;
+
+      expect(line.contains('Weidemolen'), isFalse);
+      expect(line.contains('12'), isFalse);
+      expect(line.contains('1234 AB'), isFalse);
+      expect(line.contains('Amsterdam'), isFalse);
+      // Het label blijft juist wél staan: de ontvanger mag zien dát hier een
+      // woonadres is weggehaald.
+      expect(line, startsWith('Woonadres:'));
+    });
+
+    test('een niet-geredigeerde slide meldt het adres wél als zeker', () {
+      // De stille kant van dezelfde bug: zonder adresbevinding bleef de
+      // postcode `possible`, en `possible` valt uit het exportrapport. De
+      // gebruiker kreeg dus nooit de vraag of dit weg moest.
+      final deck = Deck(
+        title: 'Briefing',
+        slides: [
+          Slide.create(
+            SlideType.bullets,
+          ).copyWith(bullets: ['Woonadres: Weidemolen 12, 1234 AB Amsterdam']),
+        ],
+      );
+
+      expect(PrivacyScanner().scan(deck).certain, isNotEmpty);
     });
   });
 }
