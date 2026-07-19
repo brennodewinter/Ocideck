@@ -7,6 +7,32 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+- **Opslag staat onder één kop in de instellingen.** De bibliotheken en de
+  exportmap stonden onder "Algemeen", Nextcloud had een eigen tabblad en git nóg
+  een — wie wilde weten waar zijn presentaties konden staan, moest dat op drie
+  plekken bij elkaar zoeken. Het staat nu onder *Instellingen → Opslag*, in de
+  volgorde waarin je het vraagt: eerst wáár je werk bewaard wordt (bibliotheken,
+  exportmap), daarna lángs welke weg het daar komt.
+
+  Die laatste is een lijst met een regel per opslagwijze — deze computer,
+  Nextcloud, git — met de stand van zaken ernaast, en je klapt er een open om
+  hem in te stellen. "Deze computer" staat er met opzet bij, ook al valt er
+  niets in te stellen: een lijst met alleen de netwerkwegen wekt de indruk dat
+  opslaan op je eigen schijf iets bijzonders is in plaats van het gewone geval.
+  Een opslagwijze die er later bij komt wordt een regel in die lijst, geen
+  tabblad erbij.
+
+### Fixed
+- **Zoeken in de instellingen sprong soms naar het verkeerde tabblad.** Zoeken
+  op "checklist" kwam uit bij Git-repository, en op "cwe" bij Checklists. De
+  tabbladen werden met een volgnummer aangewezen; toen het git-tabblad ertussen
+  werd geschoven is de zoekindex eronder niet mee hernummerd, en sindsdien wees
+  elke ingang daaronder één plek mis. Zo'n fout geeft geen melding — je landt
+  gewoon ergens anders — dus hij heeft er lang gezeten. De tabbladen worden nu
+  op naam aangewezen in plaats van op nummer, waarmee dit niet meer kán
+  ontstaan.
+
 ### Added
 - **Een slide die klein wordt gerenderd door zijn buren zegt dat nu zelf.** De
   pagina's van een gesplitste reeks delen één lettergrootte — die van de volste

@@ -44,12 +44,31 @@ don't matter), use `↑`/`↓` to move, `Enter` to run, and `Esc` to close. Acti
 that aren't available yet (for example export before you've saved) stay visible
 but greyed out. The palette is also in the `⋮` menu.
 
+## Storage
+
+Everything about *where your decks live* sits under *Settings → Storage*, in the
+order you'd ask about it: first where your work is kept, then how it gets there.
+
+- **Libraries** are the folders OciDeck searches. Give each one a name so you can
+  tell them apart — a private and a work library, say. All of them are searched
+  when you open a deck and in the image library.
+- **Export folder** is where exports land. Leave it empty and they land next to
+  the presentation file.
+- **Storage methods** lists the routes a deck can travel: **This computer**,
+  **Nextcloud** and **Git repository**. Each row shows its status at a glance —
+  configured, and for the network ones which server — and clicking one open
+  reveals its settings. "This computer" has nothing to configure; it is driven by
+  the libraries above, and it is listed so the local disk reads as the normal
+  case rather than an afterthought.
+
+The two network methods are described in full below.
+
 ## Git repository
 
 You can open decks from a git repository — your own Forgejo, for now. Every
 saved version stays retrievable, which a plain folder cannot give you.
 
-- **Set it up** in *Settings → Git repository*: the server URL
+- **Set it up** in *Settings → Storage → Git repository*: the server URL
   (`https://git.example.org`), the owner (user or organisation), the repository
   name, and a **personal access token**. Scope the token to just that repository
   where your forge supports it. It is stored encrypted in your operating
@@ -78,7 +97,8 @@ saved version stays retrievable, which a plain folder cannot give you.
   unless you close the app first (an unsaved in-memory image does not survive a
   restart, the same limit a plain saved deck already has). Your text is always
   safe.
-- **Which forge**: pick the **forge type** in *Settings → Git* — Forgejo/Gitea,
+- **Which forge**: pick the **forge type** in *Settings → Storage → Git
+  repository* — Forgejo/Gitea,
   GitHub, or GitLab — next to the server URL, owner and repository. Everything
   below works the same whichever you choose; only the token differs (a personal
   access token in all three, but each calls it something slightly different). On
@@ -117,7 +137,8 @@ saved version stays retrievable, which a plain folder cannot give you.
   the browser and on desktop with native `git`; on desktop it becomes a real
   merge commit, so `git log` shows the two lines of work coming together.
 - **Native git (desktop):** if you have `git` installed (2.19 or newer),
-  *Settings → Git* shows it, and OciDeck keeps a real clone of the repository.
+  *Settings → Storage → Git repository* shows it, and OciDeck keeps a real clone
+  of the repository.
   Then **each save is a genuine local commit** — durable and offline: edit away
   from a network, save as often as you like, and every commit is waiting to push
   when you reconnect (*Sync now*, or automatically on your next successful save).
@@ -172,7 +193,7 @@ Unlike Nextcloud, this also works in the browser version.
 
 You can use a folder on your Nextcloud as a source for decks and assets.
 
-- **Set it up** in *Settings → Nextcloud*: enter the server URL
+- **Set it up** in *Settings → Storage → Nextcloud*: enter the server URL
   (`https://cloud.example.com`), your username, an **app password** (create one
   in Nextcloud under *Settings → Security*, don't use your login password), and
   an optional subfolder. Use **Test connection** to check it before saving. The
