@@ -42,7 +42,10 @@ class _GitSearchDialogState extends State<_GitSearchDialog> {
       );
       if (mounted) setState(() => _result = result);
     } on GitForgeException catch (e) {
-      if (mounted) setState(() => _error = e.message);
+      logWarning('git-zoeken: forge-aanroep mislukt', e);
+      if (mounted) {
+        setState(() => _error = userFacingError(context.l10n, e));
+      }
     } finally {
       if (mounted) setState(() => _busy = false);
     }

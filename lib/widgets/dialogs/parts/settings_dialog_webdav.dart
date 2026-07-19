@@ -275,8 +275,11 @@ extension _SettingsWebdav on _SettingsDialogState {
         return l10n.d('Ongeldige server-URL');
       case WebdavError.tooLarge:
         return l10n.d('Het antwoord van de server was te groot');
-      case WebdavError.network:
       case WebdavError.server:
+        // Bereikbaar, maar de server zelf gaf een fout — iets anders dan
+        // "verbinding mislukt", en het vraagt om iets anders van de gebruiker.
+        return l10n.d('De server gaf een fout. Probeer het later opnieuw.');
+      case WebdavError.network:
         return l10n.d('Verbinding mislukt');
     }
   }

@@ -1804,6 +1804,26 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
+      'WebDAV не е настроен правилно — проверете данните за сървъра в Настройки → Хранилище.',
+  'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':
+      'Git хранилището не е настроено правилно — проверете сървър, собственик и хранилище в Настройки → Хранилище.',
+  'De servernaam van de forge bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Името на сървъра на форджа не съществува или не може да бъде намерено. Проверете URL адреса на сървъра за печатна грешка.',
+  'Deze forge heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Този фордж има частен или LAN адрес. Отбележете го като доверен вътрешен в Настройки → Хранилище.',
+  'De forge is niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Форджът е недостъпен — проверете връзката и URL адреса на сървъра.',
+  'Aanmelden bij de forge mislukt. Controleer je token: het heeft leesrechten op de repository nodig, en schrijfrechten om op te slaan.':
+      'Влизането във форджа е неуспешно. Проверете токена: нужни са му права за четене на хранилището и за писане, за да записва.',
+  'Niet gevonden in de repository — of je token mag het niet zien.':
+      'Не е намерено в хранилището — или токенът ви няма право да го вижда.',
+  'De forge gaf een fout. Probeer het later opnieuw.':
+      'Форджът върна грешка. Опитайте отново по-късно.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge bij Instellingen → Opslag?':
+      'Този адрес не отговаря като фордж. Правилен ли е видът фордж в Настройки → Хранилище?',
+  'Stel eerst een WebDAV-server in bij Instellingen → Opslag.':
+      'Първо настройте WebDAV сървър в Настройки → Хранилище.',
   'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
       'Нужно е, когато форджът работи в частна или домашна мрежа. Без този флаг проверката за сигурност отхвърля частен адрес.',
   'Vul server-URL, eigenaar en repository in':

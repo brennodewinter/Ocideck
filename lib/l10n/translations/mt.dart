@@ -1803,6 +1803,26 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
+      'WebDAV mhuwiex issettjat sew — iċċekkja d-dettalji tas-server taħt Settings → Ħażna.',
+  'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':
+      'Ir-repożitorju git mhuwiex issettjat sew — iċċekkja s-server, is-sid u r-repożitorju taħt Settings → Ħażna.',
+  'De servernaam van de forge bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'L-isem tas-server tal-forge ma jeżistix, jew ma jistax jinstab. Iċċekkja l-URL tas-server għal żball tal-ittajpjar.',
+  'Deze forge heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Dan il-forge għandu indirizz privat jew tal-LAN. Immarkah bħala intern fdat taħt Settings → Ħażna.',
+  'De forge is niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Il-forge ma jistax jintlaħaq — iċċekkja l-konnessjoni tiegħek u l-URL tas-server.',
+  'Aanmelden bij de forge mislukt. Controleer je token: het heeft leesrechten op de repository nodig, en schrijfrechten om op te slaan.':
+      'Il-login mal-forge falla. Iċċekkja t-token tiegħek: jeħtieġ aċċess għall-qari tar-repożitorju, u għall-kitba biex isalva.',
+  'Niet gevonden in de repository — of je token mag het niet zien.':
+      'Ma nstabx fir-repożitorju — jew it-token tiegħek ma jistax jarah.',
+  'De forge gaf een fout. Probeer het later opnieuw.':
+      'Il-forge rritorna żball. Erġa\' pprova aktar tard.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge bij Instellingen → Opslag?':
+      'Dan l-indirizz ma jweġibx bħal forge. It-tip ta\' forge taħt Settings → Ħażna huwa korrett?',
+  'Stel eerst een WebDAV-server in bij Instellingen → Opslag.':
+      'L-ewwel issettja server WebDAV taħt Settings → Ħażna.',
   'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
       'Meħtieġ meta l-forge taħdem fuq netwerk privat jew tad-dar. Mingħajr din il-bandiera l-kontroll tas-sigurtà jirrifjuta indirizz privat.',
   'Vul server-URL, eigenaar en repository in':

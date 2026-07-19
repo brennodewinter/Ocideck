@@ -1781,6 +1781,26 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
+      'WebDAV ei ole (oikein) määritetty — tarkista palvelintiedot kohdassa Asetukset → Tallennus.',
+  'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':
+      'Git-repositoriota ei ole (oikein) määritetty — tarkista palvelin, omistaja ja repositorio kohdassa Asetukset → Tallennus.',
+  'De servernaam van de forge bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Forgen palvelimen nimeä ei ole olemassa tai sitä ei voi hakea. Tarkista palvelimen URL-osoitteen kirjoitusasu.',
+  'Deze forge heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Tällä forgella on yksityinen tai LAN-osoite. Merkitse se luotetuksi sisäiseksi kohdassa Asetukset → Tallennus.',
+  'De forge is niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Forge ei ole tavoitettavissa — tarkista yhteytesi ja palvelimen URL-osoite.',
+  'Aanmelden bij de forge mislukt. Controleer je token: het heeft leesrechten op de repository nodig, en schrijfrechten om op te slaan.':
+      'Kirjautuminen forgeen epäonnistui. Tarkista tunnus: se tarvitsee lukuoikeuden repositorioon ja kirjoitusoikeuden tallentamiseen.',
+  'Niet gevonden in de repository — of je token mag het niet zien.':
+      'Ei löytynyt repositoriosta — tai tunnuksesi ei saa nähdä sitä.',
+  'De forge gaf een fout. Probeer het later opnieuw.':
+      'Forge palautti virheen. Yritä myöhemmin uudelleen.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge bij Instellingen → Opslag?':
+      'Tämä osoite ei vastaa forgen tavoin. Onko forge-tyyppi kohdassa Asetukset → Tallennus oikea?',
+  'Stel eerst een WebDAV-server in bij Instellingen → Opslag.':
+      'Määritä ensin WebDAV-palvelin kohdassa Asetukset → Tallennus.',
   'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
       'Tarvitaan, kun forge on yksityisessä tai kotiverkossa. Ilman tätä merkintää turvatarkistus hylkää yksityisen osoitteen.',
   'Vul server-URL, eigenaar en repository in':

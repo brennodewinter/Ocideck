@@ -739,6 +739,26 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
+      'WebDAV is net (goed) ynsteld — kontrolearje de servergegevens by Ynstellingen → Opslach.',
+  'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':
+      'De git-repository is net (goed) ynsteld — kontrolearje server, eigner en repository by Ynstellingen → Opslach.',
+  'De servernaam van de forge bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'De servernamme fan de forge bestiet net, of is net op te sykjen. Kontrolearje de server-URL op in typflater.',
+  'Deze forge heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Dizze forge hat in privee- of LAN-adres. Markearje him as fertroud yntern by Ynstellingen → Opslach.',
+  'De forge is niet bereikbaar — controleer je verbinding en de server-URL.':
+      'De forge is net berikber — kontrolearje dyn ferbining en de server-URL.',
+  'Aanmelden bij de forge mislukt. Controleer je token: het heeft leesrechten op de repository nodig, en schrijfrechten om op te slaan.':
+      'Oanmelden by de forge mislearre. Kontrolearje dyn token: it hat lêsrjochten op de repository nedich, en skriuwrjochten om te bewarjen.',
+  'Niet gevonden in de repository — of je token mag het niet zien.':
+      'Net fûn yn de repository — of dyn token mei it net sjen.',
+  'De forge gaf een fout. Probeer het later opnieuw.':
+      'De forge joech in flater. Besykje it letter nochris.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge bij Instellingen → Opslag?':
+      'Dit adres antwurdet net as in forge. Kloppet de soarte forge by Ynstellingen → Opslach?',
+  'Stel eerst een WebDAV-server in bij Instellingen → Opslag.':
+      'Stel earst in WebDAV-server yn by Ynstellingen → Opslach.',
   'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
       'Nedich as de forge op in privee- of thúsnetwurk draait. Sûnder dizze flagge wegeret de befeiliging in privee-adres.',
   'Vul server-URL, eigenaar en repository in':

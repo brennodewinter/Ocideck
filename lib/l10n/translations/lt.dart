@@ -1789,6 +1789,26 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
+      'WebDAV nėra (tinkamai) nustatytas — patikrinkite serverio duomenis skiltyje Nustatymai → Saugykla.',
+  'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':
+      'Git saugykla nėra (tinkamai) nustatyta — patikrinkite serverį, savininką ir saugyklą skiltyje Nustatymai → Saugykla.',
+  'De servernaam van de forge bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Forge serverio pavadinimo nėra arba jo nepavyksta rasti. Patikrinkite, ar serverio URL nėra rašybos klaidos.',
+  'Deze forge heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Šis forge turi privatų arba LAN adresą. Pažymėkite jį kaip patikimą vidinį skiltyje Nustatymai → Saugykla.',
+  'De forge is niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Forge nepasiekiamas — patikrinkite ryšį ir serverio URL.',
+  'Aanmelden bij de forge mislukt. Controleer je token: het heeft leesrechten op de repository nodig, en schrijfrechten om op te slaan.':
+      'Prisijungti prie forge nepavyko. Patikrinkite raktą: jam reikia skaitymo teisių saugyklai ir rašymo teisių įrašymui.',
+  'Niet gevonden in de repository — of je token mag het niet zien.':
+      'Nerasta saugykloje — arba jūsų raktui neleidžiama to matyti.',
+  'De forge gaf een fout. Probeer het later opnieuw.':
+      'Forge grąžino klaidą. Bandykite vėliau dar kartą.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge bij Instellingen → Opslag?':
+      'Šis adresas neatsako kaip forge. Ar forge tipas skiltyje Nustatymai → Saugykla teisingas?',
+  'Stel eerst een WebDAV-server in bij Instellingen → Opslag.':
+      'Pirmiausia nustatykite WebDAV serverį skiltyje Nustatymai → Saugykla.',
   'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
       'Reikalinga, kai forge veikia privačiame arba namų tinkle. Be šios žymos saugumo patikra atmeta privatų adresą.',
   'Vul server-URL, eigenaar en repository in':

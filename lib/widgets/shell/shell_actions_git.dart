@@ -150,8 +150,10 @@ Future<void> _saveToGit(BuildContext context, WidgetRef ref) async {
       await _flushGitQueue(context, ref, config, connection.id, silent: true);
     }
   } on GitForgeException catch (e) {
-    // De uitzondering draagt al een uitlegbare tekst voor de gebruiker.
-    messenger.showSnackBar(SnackBar(content: Text(e.message)));
+    // De ruwe tekst hoort in het log: dáár wil je "Onverwachte status 418"
+    // lezen. De gebruiker krijgt de vertaalde melding per foutsoort.
+    logWarning('shell_actions_git: opslaan mislukt', e);
+    messenger.showSnackBar(SnackBar(content: Text(userFacingError(l10n, e))));
   }
 }
 
@@ -331,7 +333,8 @@ Future<void> _showGitVersions(BuildContext context, WidgetRef ref) async {
       )).future,
     );
   } on GitForgeException catch (e) {
-    messenger.showSnackBar(SnackBar(content: Text(e.message)));
+    logWarning('shell_actions_git: forge-aanroep mislukt', e);
+    messenger.showSnackBar(SnackBar(content: Text(userFacingError(l10n, e))));
     return;
   }
   if (!context.mounted) return;
@@ -366,7 +369,8 @@ Future<void> _showGitVersions(BuildContext context, WidgetRef ref) async {
         );
     _reportOpenFailure(messenger, l10n, result);
   } on GitForgeException catch (e) {
-    messenger.showSnackBar(SnackBar(content: Text(e.message)));
+    logWarning('shell_actions_git: forge-aanroep mislukt', e);
+    messenger.showSnackBar(SnackBar(content: Text(userFacingError(l10n, e))));
   }
 }
 
@@ -431,7 +435,8 @@ Future<void> _compareVersions(
       ),
     );
   } on GitForgeException catch (e) {
-    messenger.showSnackBar(SnackBar(content: Text(e.message)));
+    logWarning('shell_actions_git: forge-aanroep mislukt', e);
+    messenger.showSnackBar(SnackBar(content: Text(userFacingError(l10n, e))));
   }
 }
 
@@ -650,6 +655,7 @@ Future<void> _showAssetUsage(BuildContext context, WidgetRef ref) async {
   final config = connection.repo;
 
   final messenger = ScaffoldMessenger.of(context);
+  final l10n = context.l10n;
   final AssetIndexSnapshot snapshot;
   try {
     // Mét de uitgebrachte versies: anders lijkt een afbeelding die alleen nog
@@ -659,7 +665,8 @@ Future<void> _showAssetUsage(BuildContext context, WidgetRef ref) async {
       branch: config.defaultBranch,
     ).build(includeReleases: true);
   } on GitForgeException catch (e) {
-    messenger.showSnackBar(SnackBar(content: Text(e.message)));
+    logWarning('shell_actions_git: forge-aanroep mislukt', e);
+    messenger.showSnackBar(SnackBar(content: Text(userFacingError(l10n, e))));
     return;
   }
   if (!context.mounted) return;

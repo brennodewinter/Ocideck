@@ -920,6 +920,26 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
+      'WebDAV is not set up correctly — check the server details under Settings → Storage.',
+  'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':
+      'The git repository is not set up correctly — check server, owner and repository under Settings → Storage.',
+  'De servernaam van de forge bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'The forge\'s server name does not exist, or cannot be looked up. Check the server URL for a typo.',
+  'Deze forge heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'This forge has a private or LAN address. Mark it as trusted internal under Settings → Storage.',
+  'De forge is niet bereikbaar — controleer je verbinding en de server-URL.':
+      'The forge is unreachable — check your connection and the server URL.',
+  'Aanmelden bij de forge mislukt. Controleer je token: het heeft leesrechten op de repository nodig, en schrijfrechten om op te slaan.':
+      'Sign-in to the forge failed. Check your token: it needs read access to the repository, and write access in order to save.',
+  'Niet gevonden in de repository — of je token mag het niet zien.':
+      'Not found in the repository — or your token may not see it.',
+  'De forge gaf een fout. Probeer het later opnieuw.':
+      'The forge returned an error. Try again later.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge bij Instellingen → Opslag?':
+      'This address does not answer like a forge. Is the forge type under Settings → Storage correct?',
+  'Stel eerst een WebDAV-server in bij Instellingen → Opslag.':
+      'Set up a WebDAV server first under Settings → Storage.',
   'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
       'Needed when the forge runs on a private or home network. Without this flag the security check refuses a private address.',
   'Vul server-URL, eigenaar en repository in':
