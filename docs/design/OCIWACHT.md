@@ -137,7 +137,7 @@ groeit de regelset zonder de compile te breken.
 | `lib/models/privacy_finding.dart` | `PrivacyFinding`, `PrivacyFamily`, `PrivacyConfidence`, `PrivacyScanResult`, `maskValue`, `defaultDisabledPrivacyRules` |
 | `lib/models/privacy_disposition.dart` | `PrivacyDisposition` + `effectivePrivacyDisposition` (deck- en slide-stand samen) |
 | `lib/services/privacy/privacy_scanner.dart` | Orkestratie én de inline-detectors: e-mail, telefoon, IBAN, BSN, EU-nummers, secrets, bijzondere categorieën, adres/postcode, naam, structureel — plus allowlist en co-occurrence-escalatie |
-| `lib/services/privacy/privacy_contact_rules.dart` | Adres (straat + huisnummer), NL-postcode, gelabelde persoonsnaam: patronen, straatachtervoegsels, placeholder-personen |
+| `lib/services/privacy/privacy_contact_rules.dart` | Adres (postcode-anker, adreslabel, straatachtervoegsels), NL-postcode, gelabelde persoonsnaam: patronen, afgewezen achtervoegsels, placeholder-personen |
 | `lib/services/privacy/privacy_phone_rules.dart` | Telefoon: E.164, nationale vorm, contextwoorden, toegekende landnummers, gereserveerde reeksen |
 | `lib/models/privacy_lexicon.dart` | `PrivacyLexiconEntry`, `PrivacyTermMatch` (word/prefix/compound), `PrivacyLexiconRole`, `kMinCompoundLength` |
 | `lib/services/privacy/privacy_plate_rules.dart` | Kenteken (sidecodes 1-14, verplicht contextwoord) en buitenlandse postcodes per land |
@@ -334,7 +334,7 @@ nul. Waar géén checksum bestaat (US SSN, V-nummer), is een contextwoord verpli
 | --- | --- | --- | --- | --- |
 | `contact.email` | E-mailadres | RFC-light + geldig TLD. Uitgesloten: `example.*`, `test`, `localhost`, `*.invalid`, `noreply@`/`no-reply@`, en alles op de eigen-identiteitslijst uit de instellingen (zie §5.4) | zeker | ✓ |
 | `contact.phone` | Telefoonnummer | **E.164** (`+CC…`): een tóégekend landnummer uit de ITU-lijst plus een geldige lengte (8–15 cijfers, minstens 4 na het landnummer) → **zeker**; dat is een structurele validatie, geen gok. **Nationaal** (`06-24681357`, `020 123 4567`): nul-trunkprefix, 9–13 cijfers, mét scheidingsteken → waarschijnlijk. **Kaal** (`0624681357`): alleen met een contextwoord (`tel`, `mobiel`, `phone`, …). **Uitgesloten:** datums (die halen de negen cijfers niet), ISBN's (`0-306-…` heeft geen cijfer achter de nul), bedragen/versienummers/tijdstippen (geen `+` en geen nul-trunk), en de gereserveerde "drama"-reeksen (US `555-01xx`, UK `07700 900xxx` / `020 7946 0xxx` / `01632 960xxx`, DE `+49 30 23125 xx`) | zeker / waarschijnlijk | ✓ |
-| `contact.address` | Straat + huisnummer | straatnaampatroon + huisnummer + (postcode óf plaatsnaam) | mogelijk | ◐ |
+| `contact.address` | Straat + huisnummer | drie paden: postcode direct achter het huisnummer (één span t/m woonplaats, `zeker`), een `Woonadres:`-label, of het straatachtervoegsel-patroon (`mogelijk`) | mogelijk→zeker | ◐ |
 | `contact.postcode_nl` | NL-postcode | `\d{4}\s?[A-Z]{2}`, met de verboden lettercombinaties SA/SD/SS eruit. **Postcode + huisnummer is in Nederland vrijwel uniek identificerend** → escaleert naar `warning` zodra beide op dezelfde slide staan | waarschijnlijk | ◐ |
 | `contact.postcode_intl` | Postcodes per land | DE/FR/BE/PL/UK/US/CA-formaten binnen het regiopakket | mogelijk | ◐ |
 | `contact.birthdate` | Geboortedatum | datum + contextwoord (`geboren`, `geb.`, `dob`, `geboortedatum`, `°`, `*`) óf een datum in een tabelkolom met kop "geboortedatum" | waarschijnlijk | ✓ |
@@ -348,6 +348,27 @@ nul. Waar géén checksum bestaat (US SSN, V-nummer), is een contextwoord verpli
 > van elkaar, dan escaleren beide naar `certain` — postcode plus huisnummer wijst
 > in Nederland één woonadres aan. Nog niet gebouwd: `contact.postcode_intl`,
 > `contact.birthdate`, `contact.geo`, `contact.plate`.
+>
+> **Bijgewerkt (2026-07-20):** die wederzijdse escalatie bleek een stille
+> faalstand te hebben. Een gemelde slide met de vorm
+> `Woonadres: <straat op -molen> <nr>, <postcode> <plaats>` werd volledig
+> gemist: `-molen` stond niet in de straatachtervoegsels, en zonder straattreffer
+> bleef óók de postcode op `possible` steken — waarmee het adres uit het
+> exportrapport viel en de gebruiker nooit de vraag kreeg. Een adres wordt
+> daarom niet langer alleen aan zijn stáárt herkend maar aan zijn structuur:
+> staat de postcode direct achter het huisnummer, dan levert dat één
+> `certain`-span van straat tot en met woonplaats, zónder de woordenlijst. Dat
+> het één span is, is wezenlijk — drie losse bevindingen lieten de straat en de
+> woonplaats naast één geblokte postcode staan, en een half geredigeerd adres is
+> geen geredigeerd adres. Daarnaast telt `Woonadres:` als label, zoals dat voor
+> namen al gold. De achtervoegsellijst is aangevuld maar behoudend: `ring`,
+> `markt`, `dam`, `haven` en `berg` zijn expliciet afgewezen omdat ze dezelfde
+> vorm hebben als een gewoon woord met een jaartal ("Amsterdam 2025").
+>
+> Merk op dat er in deze documentatie bewust geen volledig voorbeeldadres staat.
+> Het vals-positieven-corpus scant `docs/` met de scanner zelf, en een compleet
+> adres in een handleiding is voor die scanner niet van een echt adres te
+> onderscheiden — terecht.
 >
 > **Bijgewerkt (2026-07-19):** `contact.birthdate` en `contact.geo` zijn er, met
 > tegengestelde poorten — en dat verschil is de kern van beide regels. De
@@ -1583,10 +1604,19 @@ contrastnormalisatie (CLAHE, voor tegenlicht) leverden geen enkel extra gezicht
 op. Die complexiteit is niet toegevoegd.
 
 **Redactie haalt de héle mediaverwijzing weg, niet het gedetecteerde gezicht.**
-Op een slide die op `redact` staat verdwijnen afbeeldingen, video en audio; de
-bestaande placeholder toont een zichtbaar vak, zodat de ontvanger ziet dát er iets
-weg is. De bron houdt haar afbeelding — dit raakt alleen wat getoond en
-geëxporteerd wordt.
+Op een slide die op `redact` staat verdwijnen afbeeldingen, video en audio; er
+komt een zwart redactievlak met het woord "Geredigeerd" voor in de plaats. De
+bron houdt haar afbeelding — dit raakt alleen wat getoond en geëxporteerd wordt.
+
+Hier stond tot 20-07-2026 dat "de bestaande placeholder" dat werk al deed. Dat
+was niet zo, en het verschil is precies het soort stille fout waar deze module
+over gaat: het wissen van het pad leverde hetzelfde lichtgrijze vak met het
+woord "Afbeelding" op als een slide waar de auteur nog géén foto had gekozen.
+Uit een leeg pad valt "hier is iets weggehaald" niet af te leiden, dus reist
+`Slide.mediaRedacted` sindsdien mee door de projectie — een vlag die alleen in
+de projectie bestaat en niet wordt opgeslagen. Het vlak is bewust vaste inkt en
+volgt niet het slate-palet: dat keert om in donkere modus, en een redactievlak
+dat daar bijna wit wordt, is geen redactie.
 
 Alleen het gezicht zwart maken zou aantrekkelijker lijken, en is precies de val.
 De detector vindt *gezichten* en mist er aantoonbaar; hij leest geen HEIC, ziet

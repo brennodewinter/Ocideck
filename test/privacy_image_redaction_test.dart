@@ -108,6 +108,32 @@ void main() {
       expect(source.slides.single.videoPath, 'mem:opname');
     });
 
+    test('de projectie merkt de slide als geredigeerd', () {
+      // Het wissen van het pad is niet genoeg: uit een leeg pad kan de renderer
+      // niet afleiden óf er iets weg is. Zonder deze vlag toont een
+      // geredigeerde foto hetzelfde grijze "Afbeelding"-vak als een slide waar
+      // nog geen foto op staat. Zie `Slide.mediaRedacted`.
+      final audience = PrivacyProjection.forAudience(
+        deckWith(PrivacyDisposition.redact),
+      );
+      expect(audience.deck.slides.single.mediaRedacted, isTrue);
+    });
+
+    test('de vlag blijft uit de opgeslagen presentatie', () {
+      // De vlag bestaat alleen in de projectie. Belandde ze in het
+      // markdown-bestand, dan zou een deck zichzelf na één export als
+      // "geredigeerd" herinneren terwijl de bron ongemoeid is.
+      final source = deckWith(PrivacyDisposition.redact);
+      expect(source.slides.single.mediaRedacted, isFalse);
+
+      final audience = PrivacyProjection.forAudience(source);
+      final markdown = MarkdownService().generateDeck(
+        audience.deck,
+        forExport: true,
+      );
+      expect(markdown.toLowerCase(), isNot(contains('mediaredacted')));
+    });
+
     test('een slide zonder media verandert niet', () {
       final deck = Deck(
         title: 'T',

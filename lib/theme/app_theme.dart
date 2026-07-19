@@ -252,6 +252,21 @@ class AppTheme {
   /// lijken.
   static const badgeAcceptedOverlay = Color(0xB3475569);
 
+  // ── Weggeredigeerde media ─────────────────────────────────────────────────
+  // Deze twee volgen de themastand *niet*, en dat is de bedoeling. Ze spreken
+  // dezelfde taal als de `█`-blokken van de tekstredactie: een zwart vlak zegt
+  // "hier stond iets, en het is er bewust uit". Zou dat vlak in een licht thema
+  // lichtgrijs worden, dan leest het als een lege plek — precies de verwarring
+  // die de redactie moet wegnemen.
+
+  /// De inkt van het redactievlak. Niet volledig `0xFF000000`: absoluut zwart
+  /// leest op een donkere dia als een gat in het scherm.
+  static const redactionInk = Color(0xFF111111);
+
+  /// Het icoon en het bijschrift óp dat vlak. Licht genoeg om leesbaar te zijn,
+  /// gedempt genoeg om niet met echte inhoud te worden verward.
+  static const redactionMark = Color(0xFF9AA3AE);
+
   static Color parseHex(String hex, {Color fallback = Colors.white}) {
     final cleaned = hex.replaceFirst('#', '');
     final value = int.tryParse(

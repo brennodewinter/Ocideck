@@ -77,11 +77,6 @@ final _reEmail = RegExp(r"[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}");
 /// normaliseren pas in de validatie.
 final _reIban = RegExp(r'\b[A-Z]{2}\d{2}(?:[ -]?[A-Z0-9]){10,30}\b');
 
-/// Negen kale cijfers; de mod-10 en de contextpoort doen het echte werk.
-final _reAbaRouting = RegExp(r'(?<!\d)\d{9}(?!\d)');
-
-const _abaContextWords = ['routing', 'aba', 'ach', 'wire', 'bank'];
-
 /// Negen losstaande cijfers. Bewust ruim: de 11-proef en de contextpoort doen
 /// het filterwerk, niet de regex.
 final _reNineDigits = RegExp(r'(?<!\d)\d{9}(?!\d)');
@@ -325,11 +320,24 @@ class PrivacyScanner {
     List<PrivacyFinding> out,
   ) {
     final text = fragment.text;
-    final addresses = streetAddressPattern.allMatches(text).toList();
+
+    // De twee ankers eerst. Ze leveren allebei één span over het héle adres, en
+    // wat daarbinnen valt hoeft daarna niet nóg eens los gemeld te worden.
+    final anchored = <({int start, int end})>[];
+    _scanAnchoredAddresses(fragment, slideIndex, out, anchored);
+
+    bool insideAnchor(Match m) =>
+        anchored.any((a) => m.start >= a.start && m.end <= a.end);
+
+    final addresses = [
+      for (final m in streetAddressPattern.allMatches(text))
+        if (!insideAnchor(m)) m,
+    ];
     final postcodes = [
       for (final m in dutchPostcodePattern.allMatches(text))
         if (postcodeBoundaryOk(text, m.start) &&
-            isPlausibleDutchPostcode(m.group(0)!))
+            isPlausibleDutchPostcode(m.group(0)!) &&
+            !insideAnchor(m))
           m,
     ];
     if (addresses.isEmpty && postcodes.isEmpty) return;
@@ -730,42 +738,6 @@ class PrivacyScanner {
     }
   }
 
-  // ── fin.us_routing ────────────────────────────────────────────────────────
-
-  /// Het Amerikaanse ABA routing number.
-  ///
-  /// Zit in de financiële familie en niet in het VS-landpakket, en dat is een
-  /// bewuste keuze: een Amerikaans rekeningnummer in een Nederlands deck hoort
-  /// niet stil te blijven omdat de auteur het VS-pakket uit had staan. Zo staat
-  /// `fin.iban` er ook in — die geldt voor negenentachtig landen tegelijk.
-  ///
-  /// De mod-10 draagt hier het bewijs, anders dan bij de rest van §15. Vandaar
-  /// de contextpoort: negen cijfers halen de controle één op de tien keer, en
-  /// een bankrekening zonder het woord erbij is meestal een ordernummer.
-  void _scanAbaRouting(
-    _Fragment fragment,
-    int slideIndex,
-    List<PrivacyFinding> out,
-  ) {
-    for (final match in _reAbaRouting.allMatches(fragment.text)) {
-      if (!isValidAbaRouting(match.group(0)!)) continue;
-      if (!_hasContextWord(fragment.text, match.start, _abaContextWords)) {
-        continue;
-      }
-      _emit(
-        out,
-        _finding(
-          fragment,
-          slideIndex,
-          match,
-          ruleId: 'fin.us_routing',
-          family: PrivacyFamily.financial,
-          confidence: PrivacyConfidence.likely,
-        ),
-      );
-    }
-  }
-
   // ── doc.mrz ───────────────────────────────────────────────────────────────
 
   /// De machine-readable zone van een paspoort of identiteitskaart.
@@ -862,8 +834,16 @@ class PrivacyScanner {
     required String ruleId,
     required PrivacyFamily family,
     required PrivacyConfidence confidence,
+
+    /// Voor regels waarbij niet de héle match de waarde is. Een label als
+    /// `Woonadres:` hoort níet onder de blokjes: de ontvanger mag zien wát er
+    /// weg is, alleen niet wat het was. Standaard is de match zelf de waarde.
+    int? spanStart,
+    int? spanEnd,
+    String? value,
   }) {
-    if (ownIdentity.covers(match.group(0)!)) return null;
+    final subject = value ?? match.group(0)!;
+    if (ownIdentity.covers(subject)) return null;
     return PrivacyFinding(
       ruleId: ruleId,
       family: family,
@@ -871,11 +851,11 @@ class PrivacyScanner {
       slideIndex: slideIndex,
       field: fragment.field,
       fragmentIndex: fragment.index,
-      start: match.start,
-      end: match.end,
+      start: spanStart ?? match.start,
+      end: spanEnd ?? match.end,
       // Nooit de volledige waarde: een privacycontrole die de gevonden BSN's
       // in haar eigen meldingen zet, heeft het probleem verplaatst.
-      maskedSample: maskValue(match.group(0)!),
+      maskedSample: maskValue(subject),
     );
   }
 

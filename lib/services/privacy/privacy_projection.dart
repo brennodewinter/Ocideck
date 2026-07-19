@@ -319,9 +319,20 @@ class PrivacyProjection {
   ///
   /// Let op het verschil met de scanner, die mediapaden wél meldt maar niet
   /// redigeert: dáár gaat het om een gebruikersnaam ín het pad, en een pad met
-  /// blokjes erin is een kapotte verwijzing. Hier wíssen we de verwijzing, en dat
-  /// levert de bestaande placeholder op — een zichtbaar vak, zodat de ontvanger
-  /// ziet dát er iets weg is.
+  /// blokjes erin is een kapotte verwijzing. Hier wíssen we de verwijzing.
+  ///
+  /// ── Waarom er een vlag meereist ──
+  ///
+  /// Hier stond ooit dat het wissen "de bestaande placeholder oplevert — een
+  /// zichtbaar vak, zodat de ontvanger ziet dát er iets weg is". Dat klopte
+  /// niet. Die placeholder is hetzelfde grijze vak met het woord "Afbeelding"
+  /// dat een slide toont waar de auteur nog géén foto heeft gekozen, en op een
+  /// geredigeerde slide leest dat als vergeetachtigheid in plaats van als een
+  /// ingreep — terwijl de tekst ernaast wél zwarte blokken laat zien.
+  ///
+  /// Uit een leeg pad valt dat verschil niet af te leiden, dus zetten we
+  /// [Slide.mediaRedacted] en laat de renderer er een zwart vlak van maken. De
+  /// vlag wordt niet geserialiseerd; ze bestaat alleen in de projectie.
   ///
   /// De bron blijft ongemoeid: dit raakt alleen wat getoond en geëxporteerd
   /// wordt. Het bestand op schijf houdt zijn afbeelding.
@@ -343,6 +354,7 @@ class PrivacyProjection {
         imagePath2: '',
         videoPath: '',
         audioPath: '',
+        mediaRedacted: true,
       ),
       count: present,
     );

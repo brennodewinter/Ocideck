@@ -406,6 +406,40 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   gedrag waardoor mensen een privacycontrole uitzetten.
 
 ### Fixed
+- **Een woonadres kon volledig door de controle glippen, en het viel niet op.**
+  `Woonadres: Weidemolen 12, 1234 AB Amsterdam` werd niet gemeld. De
+  oorzaak was één ontbrekend woord: een straat werd herkend aan een lijstje
+  achtervoegsels, en `-molen` stond er niet in. Dat lijstje kán ook nooit af
+  zijn — Nederlandse straatnamen hebben een staart van `-veld`, `-hoeve`,
+  `-akker`, `-horst` die je niet uitput.
+
+  Kwalijker was wat erop volgde. Een postcode en een straat bevestigden elkáár,
+  dus zonder straattreffer bleef ook de postcode "mogelijk" — en meldingen van
+  dat niveau haalt het exportrapport niet. Er kwam dus geen waarschuwing: het
+  deck zag er schoon uit. En stond de slide wél op *weglaten*, dan bleef er
+  `Woonadres: ██████ Amsterdam` staan, met straat, huisnummer en
+  woonplaats gewoon leesbaar.
+
+  Een adres wordt nu herkend aan zijn vorm in plaats van aan zijn staart: staat
+  de postcode direct achter het huisnummer, dan is dat het adres — van straat
+  tot en met woonplaats, in één keer, zonder woordenlijst. Daarnaast telt
+  `Woonadres:` voortaan als label, net als `Naam:` dat al deed. Het label zelf
+  blijft staan: u hoort te kunnen zien dát er een adres weg is.
+
+- **Een geredigeerde foto was niet van een vergeten foto te onderscheiden.** Op
+  een slide die op *weglaten* stond verdween de afbeelding, maar wat ervoor in
+  de plaats kwam was het lichtgrijze vak met het woord "Afbeelding" — hetzelfde
+  vak als op een slide waar u nog gewoon geen foto had gekozen. Naast tekst met
+  zwarte blokken erin las dat als slordigheid in plaats van als een ingreep, en
+  de ontvanger kon het verschil niet zien.
+
+  Er komt nu een zwart redactievlak met het woord "Geredigeerd" voor in de
+  plaats, in dezelfde taal als de `████`-blokken in de tekst. Hetzelfde geldt
+  voor video en audio, die langs een andere placeholder liepen met precies
+  dezelfde fout. Het vlak blijft zwart in donkere modus — het volgde anders het
+  kleurenpalet van de editor, dat daar omkeert, en een bijna wit redactievlak is
+  geen redactie.
+
 - **Een vastgepind certificaat gold wel voor de verbindingstest, niet voor het
   klonen.** Wie op een eigen forge een zelfondertekend certificaat vertrouwde,
   kreeg een groen vinkje bij het testen en daarna een clone die afketste op
