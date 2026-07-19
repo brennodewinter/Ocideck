@@ -14,10 +14,12 @@ belangrijkste: "het leek te werken" is geen bewijs, en een groene testsuite op
 je eigen machine bewijst niets over een platform waar hij nooit heeft gedraaid.
 
 De volgorde is op wat er op het spel staat, niet op moeite. Let vooral op de
-punten waar een fout **stil** blijft — 1, 2 en 8. Daar krijg je geen melding en
-geen crash: de adapter antwoordt gewoon verkeerd, het native pad valt terug op
-REST, of een bestand landt in de verkeerde bibliotheek. Zulke fouten worden
-gevonden door een gebruiker die iets niet kan terugvinden, niet door een test.
+punten waar een fout **stil** blijft — 1, 2, 8 en 9. Daar krijg je geen melding
+en geen crash: de adapter antwoordt gewoon verkeerd, het native pad valt terug op
+REST, een bestand landt in de verkeerde bibliotheek, of een persoonsgegeven
+wordt niet herkend. Zulke fouten worden gevonden door een gebruiker die iets
+niet kan terugvinden — of, bij punt 9, door de ontvanger van het rapport. Dat is
+te laat.
 
 Afvinken doe je hier: zet een punt om naar "bewezen op «datum», «platform»", of
 schrap het. Laat geen half afgevinkte punten staan; dan wordt dit document
@@ -154,7 +156,76 @@ bibliotheek of de verkeerde opslagwijze schrijft. Fouten hier zijn zeldzaam maar
 duur: je merkt pas dat een export ergens anders landde als iemand hem niet kan
 vinden.
 
-## 9. PDF/A-conformiteit (open vraag, geen taak)
+## 9. Privacydetectie — grondig, en met echte tekst
+
+**Waarom dit een eigen punt is.** Dit is het enige onderdeel waar fout-positief
+en fout-negatief elkaar *versterken*. Een gemiste bevinding lekt persoonsgegevens
+in een rapport. Maar te veel valse meldingen leren de gebruiker om de
+waarschuwing weg te klikken — en dan lekt de volgende gemiste bevinding er ook
+doorheen. Een detectie die te streng is, wordt daardoor net zo onveilig als een
+die te soepel is.
+
+En het is het onderdeel waar een testsuite het minst waard is: de regels zijn
+getest tegen bedachte voorbeelden. Wat telt is echte tekst — een echt rapport,
+een echte klantnaam, een echte adressenlijst.
+
+### 9a. De redactieclaim, want die is hard te maken
+
+`privacy_projection.dart` doet een sterke belofte: redactie is **geen
+weergavevlag maar een waardetransformatie**. Er zou dus geen tekstlaag onder een
+zwart vlak zitten, niets leesbaars in de PPTX-zip, en niets in de
+schermlezer-boom. Dat is precies het soort claim dat je kunt falsifiëren.
+
+**Wat je draait.** Zet een slide op *redigeren*, exporteer naar PDF, PPTX en
+HTML, en zoek in de **ruwe bestanden** naar de oorspronkelijke tekens:
+
+```
+pdftotext export.pdf - | grep -i "<de geredigeerde waarde>"
+unzip -p export.pptx ppt/notesSlides/notesSlide1.xml | grep -i "<waarde>"
+grep -ri "<waarde>" export-html/
+```
+
+**Wat als bewijs telt.** Nul treffers in alle drie. Eén treffer betekent dat
+geredigeerde gegevens meegaan naar de ontvanger, en dat is de duurste fout die
+dit programma kan maken. Kijk ook naar documentmetadata en, bij PPTX, naar de
+sprekersnotities — die worden vaak vergeten.
+
+### 9b. De vier disposities
+
+*Waarschuwen* (niets op de slide), *accepteren* (melding weg), *afschermen*
+(badge voor de ontvanger) en *redigeren* (onleesbaar). Loop ze alle vier door,
+inclusief de per-slide-overschrijving van de deck-instelling.
+
+**Wat als bewijs telt.** Dat *afschermen* de badge ook echt in de export zet —
+niet alleen op het scherm — en dat *accepteren* de melding wegneemt zonder de
+detectie zelf uit te zetten.
+
+### 9c. Detectiekwaliteit op echte tekst
+
+Draai de controle over een echt afgerond rapport en over materiaal met veel
+cijfers dat géén persoonsgegevens is: versienummers, bedragen, IP-adressen,
+poortnummers, hashes, CVE- en CWE-nummers.
+
+**Wat als bewijs telt.** Twee tellingen die je opschrijft: hoeveel echte
+gegevens gemist, en hoeveel valse meldingen. Het BSN-elfproef vangt ongeveer één
+op de elf willekeurige negencijferige reeksen — reken erop dat dat in een
+technisch rapport gebeurt en beoordeel of dat draaglijk is.
+
+### 9d. Wat er bewust niet gedetecteerd wordt
+
+Controleer dat de *grenzen* worden gecommuniceerd in plaats van stil te blijven.
+Niet gedetecteerd, bij besluit: tekst in afbeeldingen (geen OCR), de inhoud van
+gelinkte bestanden, vrije tekst zonder trefwoord, en namen zonder context.
+Evenmin: politieke opvattingen, etnische afkomst en seksuele geaardheid — die
+wachten op een per-regel-schakelaar, omdat ze zonder die schakelaar een
+onverdedigbare hoeveelheid valse meldingen geven (zie
+`privacy_special_rules.dart`).
+
+**Wat als bewijs telt.** Dat een gebruiker die deze controle vertrouwt, ergens
+kan lezen wat hij *niet* dekt. Een privacycontrole die zwijgt over haar eigen
+blinde vlekken, wordt gelezen als een garantie.
+
+## 10. PDF/A-conformiteit (open vraag, geen taak)
 
 De huidige PDF-export versus echte PDF/A (ingesloten lettertypen + metadata).
 MIAUW EIS 1.1 raakt hieraan. Dit is nog geen werk maar een **beslissing**: hoe
@@ -184,5 +255,7 @@ Zodat deze lijst niet als een lijst met gaten leest:
 - [`GIT_STORAGE.md`](GIT_STORAGE.md) — het ontwerp achter punten 1 tot en met 5.
 - [`PENTEST_MIAUW.md`](PENTEST_MIAUW.md) — het ontwerp achter punt 6 en 9; de
   beslissingsgeschiedenis van die module staat daar, het openstaande werk hier.
+- [`OCIWACHT.md`](OCIWACHT.md) — het ontwerp achter punt 9, inclusief de
+  §3-J-lijst van wat er bewust niet wordt gedetecteerd.
 - [`CHECKS.md`](../CHECKS.md) — wat `make check` wél al bewijst, en waarom er
   geen CI-runner is (lokaal draaien ís hier de poort).
