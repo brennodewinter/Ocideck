@@ -82,8 +82,10 @@ front matter, giving tamper-evidence for finalised documents.
 private/metadata addresses, unwraps IPv4-in-IPv6, and resolves-then-pins to
 defeat DNS rebinding.
 
-**SecretStore** — OS-keychain storage for secrets (WebDAV password, AI API key,
-git token) via `flutter_secure_storage`.
+**SecretStore** — OS-keychain storage for secrets (WebDAV password, S3 secret
+access key, AI API key, git token) via `flutter_secure_storage`. The S3 access
+key *ID* is not a secret here — it stays in the prefs domain with the endpoint
+and bucket name.
 
 **trustedInternal** — an explicit per-connection opt-in that lets a user-chosen
 internal server bypass the private-range block (and use plain `http`). Never

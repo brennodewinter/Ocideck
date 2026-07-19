@@ -1828,6 +1828,7 @@ are not switched off somewhere — there is no setting to find.
 |---|---|
 | Local project folders and sidecar files | Absent. Opening and saving go through the browser, and your deck lives in the tab. |
 | WebDAV / Nextcloud as a deck source | Absent. |
+| An S3 bucket as a deck source | Absent. |
 | A git repository as a deck source | Absent — it needs the real `git` program. |
 | The second-screen presenter view | Absent — it needs a real second window. |
 | **Recovery after a crash** | Absent. Nothing is autosaved, so a browser crash loses unsaved work. |
