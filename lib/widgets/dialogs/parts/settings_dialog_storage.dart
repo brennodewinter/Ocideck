@@ -264,10 +264,7 @@ extension _SettingsStorageTab on _SettingsDialogState {
         // "Bibliotheken: 2" in plaats van "2 bibliotheken": hergebruikt de kop
         // die er al staat en ontloopt daarmee het meervoud, dat in dertig talen
         // dertig keer anders werkt.
-        return (
-          text: '${l10n.d('Bibliotheken')}: $count',
-          configured: true,
-        );
+        return (text: '${l10n.d('Bibliotheken')}: $count', configured: true);
       case StorageModality.nextcloud:
         final host = _hostOf(_webdavUrl.text);
         if (host == null || _webdavUser.text.trim().isEmpty) {
@@ -280,7 +277,10 @@ extension _SettingsStorageTab on _SettingsDialogState {
         if (_hostOf(_gitUrl.text) == null || owner.isEmpty || repo.isEmpty) {
           return (text: l10n.d('Niet ingesteld'), configured: false);
         }
-        return (text: '${l10n.d('Ingesteld')} · $owner/$repo', configured: true);
+        return (
+          text: '${l10n.d('Ingesteld')} · $owner/$repo',
+          configured: true,
+        );
     }
   }
 
