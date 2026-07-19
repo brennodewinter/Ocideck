@@ -1041,8 +1041,26 @@ is chosen on the extension.
 ```
 
 CSV shape: first row = series names (first cell = label column), every next row
-is `label, value1, value2, ...`. The CSV reader does not support quoted fields,
-so a label containing a comma is mis-read — which is why new files are JSON.
+is `label, value1, value2, ...`.
+
+**What the CSV reader accepts.** The separator is detected per file — `,`, `;`
+or tab — so a spreadsheet that exports semicolons (which every locale with a
+decimal comma does) loads without conversion. Fields follow RFC 4180: a value in
+double quotes may hold the separator, and `""` inside it is one literal quote,
+so `"Amsterdam, NL"` is a single label. A line break *inside* a quoted field is
+deliberately **not** supported: rows are split on newlines before fields are
+parsed, which keeps a stray quote from swallowing the rest of the file.
+
+How numbers are written is deduced from the file as a whole rather than per
+cell: `1.234,56` settles itself (the last mark is the decimal one), and a `10,5`
+elsewhere settles a bare `1,234` in the same file. Nothing is assumed from the
+reader's locale. A file that genuinely does not say — every comma followed by
+exactly three digits — is asked about on import rather than guessed. A cell that
+is no number at all (`12%`, `€ 1.000`) is charted as 0 and named after the
+import; an empty cell is a missing value and stays silent.
+
+New files are still written as JSON: it needs no such reading rules, and it
+round-trips a `double` exactly.
 
 **Values only.** The data file carries `x` and `series` and nothing else. Row
 and series colours, the title and the bounds stay in the `chart` block, because

@@ -48,6 +48,21 @@ const int rawColorBaseline = 0;
 /// string. Only tab, LF and CR may appear raw.
 const int controlByteBaseline = 0;
 
+/// Files allowed to compare a character against a double quote.
+///
+/// Three separate CSV field splitters existed side by side — in the chart
+/// model, the CWE build script and the clipboard parser — each written by
+/// someone who did not know of the others, and each with its own quoting
+/// behaviour. Nothing made that visible: the analyzer sees three healthy
+/// private functions. This list is what makes a fourth one loud.
+///
+/// `markdown_service.dart` is not a splitter; it unescapes a backslashed quote
+/// while parsing directives.
+const Set<String> _quoteScannerHomes = {
+  'lib/utils/csv.dart',
+  'lib/services/markdown_service.dart',
+};
+
 /// UI imports inside `lib/services/`. RATCHET: may shrink, never grow.
 ///
 /// A service is the headless core: usable without a widget tree, testable
@@ -210,12 +225,17 @@ void main() {
   final oversize = <String>[];
   final shrunk = <String>[];
   final controlByteHits = <String>[];
+  final quoteScanners = <String>[];
   final serviceUiImports = <String>[];
   final modelUiImports = <String>[];
 
   for (final file in _dartFiles(Directory('lib'))) {
     controlByteHits.addAll(_controlBytesIn(file));
     final path = file.path.replaceAll(r'\', '/');
+    if (!_quoteScannerHomes.contains(path) &&
+        file.readAsStringSync().contains("== '\"'")) {
+      quoteScanners.add(path);
+    }
     final isService = path.startsWith('lib/services/');
     final isModel = path.startsWith('lib/models/');
     final lines = file.readAsLinesSync();
@@ -328,6 +348,18 @@ void main() {
       'widget tree, and testable without pumping one. Keep the widget code in '
       'lib/widgets/, or lower the baseline if you removed one:\n'
       '    ${serviceUiImports.join('\n    ')}',
+    );
+  }
+
+  if (quoteScanners.isNotEmpty) {
+    failures.add(
+      'Hand-rolled double-quote scanning outside ${_quoteScannerHomes.join(' / ')}. '
+      'This project grew three separate CSV field splitters before anyone '
+      'noticed, each with its own quoting bugs, because nothing made the '
+      'duplicate visible. Use parseCsvRows/parseCsvLine from lib/utils/csv.dart, '
+      'or add the file here with a reason if it is genuinely doing something '
+      'else:\n'
+      '    ${quoteScanners.join('\n    ')}',
     );
   }
 

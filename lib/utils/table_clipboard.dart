@@ -5,7 +5,15 @@
 /// tab-separated text on the clipboard on macOS, Linux and Windows alike, so
 /// TSV is the primary format. CSV with a comma or semicolon (the Dutch/European
 /// list separator) and markdown tables are recognised as well.
+///
+/// The field scanning itself is [parseCsvRows] — the same code that reads a
+/// chart's data file. What stays here is the part that is genuinely about a
+/// *clipboard*: deciding whether the payload is a table at all, and which
+/// separator it uses. A file says what it is by its extension; a paste has to
+/// be recognised.
 library;
+
+import 'csv.dart';
 
 /// Parses [text] as a table, or returns null when it does not look tabular —
 /// in that case the paste should go into the single cell as usual.
@@ -22,7 +30,7 @@ List<List<String>>? parseClipboardTable(String text) {
   if (markdown != null) return markdown;
 
   if (normalized.contains('\t')) {
-    return _trim(_splitDelimited(normalized, '\t'));
+    return _trim(parseCsvRows(normalized, delimiter: '\t'));
   }
 
   // CSV variants: require at least two rows with a consistent column count of
@@ -31,7 +39,7 @@ List<List<String>>? parseClipboardTable(String text) {
   List<List<String>>? best;
   for (final delimiter in const [';', ',']) {
     if (!normalized.contains(delimiter)) continue;
-    final rows = _splitDelimited(normalized, delimiter);
+    final rows = parseCsvRows(normalized, delimiter: delimiter);
     while (rows.isNotEmpty && rows.last.every((c) => c.trim().isEmpty)) {
       rows.removeLast();
     }
@@ -63,46 +71,6 @@ List<List<String>>? _parseMarkdownTable(String text) {
   }
   if (rows.isEmpty || rows.first.length < 2) return null;
   return _trim(rows);
-}
-
-/// Splits [text] into rows/cells on newlines and [delimiter], honouring
-/// double-quoted fields ("" escapes a quote) so cells from spreadsheets may
-/// contain the delimiter or even line breaks.
-List<List<String>> _splitDelimited(String text, String delimiter) {
-  final rows = <List<String>>[];
-  var row = <String>[];
-  final cell = StringBuffer();
-  var quoted = false;
-  for (var i = 0; i < text.length; i++) {
-    final ch = text[i];
-    if (quoted) {
-      if (ch == '"') {
-        if (i + 1 < text.length && text[i + 1] == '"') {
-          cell.write('"');
-          i++;
-        } else {
-          quoted = false;
-        }
-      } else {
-        cell.write(ch);
-      }
-    } else if (ch == '"' && cell.isEmpty) {
-      quoted = true;
-    } else if (ch == delimiter) {
-      row.add(cell.toString());
-      cell.clear();
-    } else if (ch == '\n') {
-      row.add(cell.toString());
-      cell.clear();
-      rows.add(row);
-      row = <String>[];
-    } else {
-      cell.write(ch);
-    }
-  }
-  row.add(cell.toString());
-  rows.add(row);
-  return rows;
 }
 
 /// Drops empty trailing rows (from the trailing newline spreadsheets add) and
