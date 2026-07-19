@@ -1799,6 +1799,32 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'kenteken': 'număr de înmatriculare',
+  'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
+      'Pentru limba acestei prezentări nu există o listă de cuvinte-cheie pentru categorii speciale de date personale. Tiparele cu cifră de control (CNP, IBAN, pașaport) funcționează; cuvinte precum „diagnostic” sau „suspect” nu sunt recunoscute.',
+  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
+      'Lista de cuvinte-cheie pentru categorii speciale de date personale este foarte săracă pentru limba acestei prezentări. Nu vă bazați pe găsirea unor cuvinte precum „diagnostic” sau „suspect”.',
+  'Landpakketten voor identificatienummers':
+      'Pachete de țară pentru numere de identificare',
+  'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
+      'Numere precum BSN-ul olandez sau PESEL-ul polonez sunt specifice fiecărei țări. Toată Europa este activată deoarece majoritatea acelor numere au o cifră de control: activarea lor nu costă aproape nicio alertă falsă. IBAN, e-mail, secretele și benzile de pașaport sunt independente de aceasta și se verifică întotdeauna.',
+  'strafrechtelijk gegeven (verdachte)': 'date penale (suspect)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'date penale (reclamant sau victimă)',
+  'strafrechtelijk gegeven (getuige)': 'date penale (martor)',
+  'diagnosecode (ICD-10)': 'cod de diagnostic (CIM-10)',
+  'geneesmiddelcode (ATC)': 'cod de medicament (ATC)',
+  'geboortedatum': 'data nașterii',
+  'locatiecoördinaten': 'coordonate de locație',
+  'MAC-adres van een apparaat': 'adresa MAC a unui dispozitiv',
+  'IMEI van een toestel': 'IMEI-ul unui telefon',
+  'ICCID van een simkaart': 'ICCID-ul unei cartele SIM',
+  'IMSI van een abonnee': 'IMSI-ul unui abonat',
+  'sociale-mediaprofiel': 'profil de socializare',
+  'advertentie- of apparaat-ID': 'ID de publicitate sau de dispozitiv',
+  'IP-adres': 'adresă IP',
+  'machineleesbare zone van een paspoort of ID':
+      'zona citibilă automat a unui pașaport sau act de identitate',
   'Sla de presentatie op om een kopie te maken.':
       'Salvați prezentarea pentru a crea o copie.',
   ': ligt buiten de presentatie en gaat niet mee (':

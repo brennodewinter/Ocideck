@@ -51,6 +51,7 @@ extension _SettingsSecurity on _SettingsDialogState {
         ),
         _privacyImageFaceDetection(l10n),
         _disabledPrivacyRules(l10n),
+        _privacyRegions(l10n),
         const SizedBox(height: 10),
         _privacyExportGate(l10n),
         const SizedBox(height: 10),
@@ -204,6 +205,62 @@ extension _SettingsSecurity on _SettingsDialogState {
                 .read(settingsProvider.notifier)
                 .setPrivacyImageFaceDetection(value)
           : null,
+    );
+  }
+
+  /// De landpakketten (OCIWACHT §5.7).
+  ///
+  /// Alleen zichtbaar wanneer de privacycontrole draait: een lijst regio's onder
+  /// een uitgezette controle suggereert dat er iets te kiezen valt.
+  ///
+  /// De uitleg eronder is geen bijzaak. "Heel Europa" klinkt als de ruizige
+  /// keuze, en dat is het hier juist niet — de meeste Europese persoonsnummers
+  /// zijn zelfvaliderend, en een checksum kóst geen precisie maar wínt precisie.
+  /// Zonder die zin zet een voorzichtige gebruiker pakketten uit die hem niets
+  /// kosten, en mist hij gegevens die er wél toe doen.
+  Widget _privacyRegions(AppLocalizations l10n) {
+    if (!ref.watch(settingsProvider.select((s) => s.privacyChecksEnabled))) {
+      return const SizedBox.shrink();
+    }
+    final active = ref.watch(settingsProvider.select((s) => s.privacyRegions));
+    final sorted = allPrivacyRegions.toList()..sort();
+    return Padding(
+      padding: const EdgeInsets.only(top: 10, left: 2),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.d('Landpakketten voor identificatienummers'),
+            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+          ),
+          const SizedBox(height: 2),
+          Text(
+            l10n.d(
+              'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.',
+            ),
+            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+          ),
+          const SizedBox(height: 6),
+          Wrap(
+            spacing: 6,
+            runSpacing: 4,
+            children: [
+              for (final region in sorted)
+                FilterChip(
+                  label: Text(
+                    region.toUpperCase(),
+                    style: const TextStyle(fontSize: 11),
+                  ),
+                  visualDensity: VisualDensity.compact,
+                  selected: active.contains(region),
+                  onSelected: (value) => ref
+                      .read(settingsProvider.notifier)
+                      .setPrivacyRegionEnabled(region, value),
+                ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 

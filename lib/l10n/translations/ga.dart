@@ -1817,6 +1817,32 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'kenteken': 'uimhir chláraithe feithicle',
+  'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
+      'Níl liosta eochairfhocal ann do chatagóirí speisialta sonraí pearsanta i dteanga an deic seo. Oibríonn patrúin le digit seiceála (PPS, IBAN, pas); ní aithnítear focail ar nós "diagnóis" nó "duine faoi amhras".',
+  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
+      'Tá an liosta eochairfhocal do chatagóirí speisialta sonraí pearsanta an-tanaí i dteanga an deic seo. Ná bí ag brath ar fhocail ar nós "diagnóis" nó "duine faoi amhras" a aimsiú.',
+  'Landpakketten voor identificatienummers':
+      'Pacáistí tíre d\'uimhreacha aitheantais',
+  'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
+      'Tá uimhreacha ar nós BSN na hÍsiltíre nó PESEL na Polainne sainiúil do thír. Tá an Eoraip ar fad ann mar go bhfuil digit seiceála ag formhór na n-uimhreacha sin: ní chosnaíonn iad a chur ar siúl beagnach aon fholáireamh bréagach. Tá IBAN, ríomhphost, rúin agus stiallacha pas neamhspleách air seo agus seiceáiltear i gcónaí iad.',
+  'strafrechtelijk gegeven (verdachte)': 'sonraí coiriúla (duine faoi amhras)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'sonraí coiriúla (gearánach nó íospartach)',
+  'strafrechtelijk gegeven (getuige)': 'sonraí coiriúla (finné)',
+  'diagnosecode (ICD-10)': 'cód diagnóise (ICD-10)',
+  'geneesmiddelcode (ATC)': 'cód cógais (ATC)',
+  'geboortedatum': 'dáta breithe',
+  'locatiecoördinaten': 'comhordanáidí suímh',
+  'MAC-adres van een apparaat': 'seoladh MAC gléis',
+  'IMEI van een toestel': 'IMEI fóin',
+  'ICCID van een simkaart': 'ICCID cárta SIM',
+  'IMSI van een abonnee': 'IMSI síntiúsóra',
+  'sociale-mediaprofiel': 'próifíl mheán sóisialta',
+  'advertentie- of apparaat-ID': 'aitheantas fógraíochta nó gléis',
+  'IP-adres': 'seoladh IP',
+  'machineleesbare zone van een paspoort of ID':
+      'crios inléite ag meaisín de phas nó de chárta aitheantais',
   'Sla de presentatie op om een kopie te maken.':
       'Sábháil an láithreoireacht chun cóip a dhéanamh.',
   ': ligt buiten de presentatie en gaat niet mee (':

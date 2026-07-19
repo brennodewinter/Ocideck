@@ -142,11 +142,12 @@ jobs:
       # foutafhandeling viel en de scanner nul gezichten meldde. Groen om de
       # verkeerde reden is erger dan rood.
       #
-      # Alleen op macOS: één platform waar ze echt draaien volstaat om een
-      # regressie in de detector te vangen, en een Linux-build zou GTK-pakketten
-      # op de runner vragen voor dezelfde twee tests.
-      # Windows loopt via CMake in plaats van CocoaPods, dus een ander pad — maar
-      # dezelfde reden: zonder de bibliotheek slaan de detectietests zichzelf over.
+      # Op alle drie de leverplatforms, en dat is het punt van OCIWACHT §13.8:
+      # `opencv_core` declareert `ffiPlugin: true` voor linux/macos/windows en de
+      # voorwaardelijke import kiest overal de echte implementatie — maar alleen
+      # macOS was ooit aantoonbaar gedraaid. Linux gebeurt in de gate hierboven,
+      # Windows hieronder. Windows loopt via CMake in plaats van CocoaPods, dus
+      # een ander pad, maar dezelfde reden.
       - name: Build Windows (levert de OpenCV-bibliotheek aan de beeldtests)
         if: runner.os == 'Windows'
         shell: bash

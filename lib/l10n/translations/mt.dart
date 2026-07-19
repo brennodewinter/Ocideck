@@ -1803,6 +1803,32 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'kenteken': 'numru tar-reġistrazzjoni',
+  'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
+      'Għal-lingwa ta\' din il-preżentazzjoni ma hemmx lista ta\' kliem ewlieni għal kategoriji speċjali ta\' data personali. Mudelli b\'ċifra ta\' kontroll (ID, IBAN, passaport) jaħdmu; kliem bħal "dijanjosi" jew "suspettat" ma jingħarfux.',
+  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
+      'Il-lista ta\' kliem ewlieni għal kategoriji speċjali ta\' data personali hija rqiqa ħafna għal-lingwa ta\' din il-preżentazzjoni. Toqgħodx tistenna li kliem bħal "dijanjosi" jew "suspettat" jinstabu.',
+  'Landpakketten voor identificatienummers':
+      'Pakketti tal-pajjiżi għan-numri ta\' identifikazzjoni',
+  'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
+      'Numri bħall-BSN Olandiż jew il-PESEL Pollakk huma speċifiċi għall-pajjiż. L-Ewropa kollha hija mixgħula għax il-biċċa l-kbira minn dawk in-numri għandhom ċifra ta\' kontroll: li tixgħelhom kważi ma tiswiex twissijiet foloz. IBAN, email, sigrieti u strixxi tal-passaport huma indipendenti minn dan u dejjem jiġu ċċekkjati.',
+  'strafrechtelijk gegeven (verdachte)': 'data kriminali (suspettat)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'data kriminali (min jirrapporta jew vittma)',
+  'strafrechtelijk gegeven (getuige)': 'data kriminali (xhud)',
+  'diagnosecode (ICD-10)': 'kodiċi tad-dijanjosi (ICD-10)',
+  'geneesmiddelcode (ATC)': 'kodiċi tal-mediċina (ATC)',
+  'geboortedatum': 'data tat-twelid',
+  'locatiecoördinaten': 'koordinati tal-post',
+  'MAC-adres van een apparaat': 'indirizz MAC ta\' apparat',
+  'IMEI van een toestel': 'IMEI ta\' telefon',
+  'ICCID van een simkaart': 'ICCID ta\' karta SIM',
+  'IMSI van een abonnee': 'IMSI ta\' abbonat',
+  'sociale-mediaprofiel': 'profil tal-midja soċjali',
+  'advertentie- of apparaat-ID': 'ID tar-reklamar jew tal-apparat',
+  'IP-adres': 'indirizz IP',
+  'machineleesbare zone van een paspoort of ID':
+      'żona li tinqara bil-magna ta\' passaport jew karta tal-identità',
   'Sla de presentatie op om een kopie te maken.':
       'Issejvja l-preżentazzjoni biex issir kopja.',
   ': ligt buiten de presentatie en gaat niet mee (':

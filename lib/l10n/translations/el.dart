@@ -1809,6 +1809,32 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'kenteken': 'αριθμός κυκλοφορίας',
+  'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
+      'Για τη γλώσσα αυτής της παρουσίασης δεν υπάρχει λίστα λέξεων-κλειδιών για ειδικές κατηγορίες προσωπικών δεδομένων. Τα μοτίβα με ψηφίο ελέγχου (ΑΜΚΑ, IBAN, διαβατήριο) λειτουργούν· λέξεις όπως «διάγνωση» ή «ύποπτος» δεν αναγνωρίζονται.',
+  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
+      'Η λίστα λέξεων-κλειδιών για ειδικές κατηγορίες προσωπικών δεδομένων είναι πολύ φτωχή για τη γλώσσα αυτής της παρουσίασης. Μη βασίζεστε στο ότι θα βρεθούν λέξεις όπως «διάγνωση» ή «ύποπτος».',
+  'Landpakketten voor identificatienummers':
+      'Πακέτα χωρών για αριθμούς ταυτοποίησης',
+  'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
+      'Αριθμοί όπως το ολλανδικό BSN ή το πολωνικό PESEL είναι ανά χώρα. Όλη η Ευρώπη είναι ενεργή επειδή οι περισσότεροι από αυτούς τους αριθμούς έχουν ψηφίο ελέγχου: η ενεργοποίησή τους δεν κοστίζει σχεδόν καθόλου ψευδείς ειδοποιήσεις. IBAN, email, μυστικά και ζώνες διαβατηρίου είναι ανεξάρτητα και ελέγχονται πάντα.',
+  'strafrechtelijk gegeven (verdachte)': 'ποινικό δεδομένο (ύποπτος)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'ποινικό δεδομένο (μηνυτής ή θύμα)',
+  'strafrechtelijk gegeven (getuige)': 'ποινικό δεδομένο (μάρτυρας)',
+  'diagnosecode (ICD-10)': 'κωδικός διάγνωσης (ICD-10)',
+  'geneesmiddelcode (ATC)': 'κωδικός φαρμάκου (ATC)',
+  'geboortedatum': 'ημερομηνία γέννησης',
+  'locatiecoördinaten': 'συντεταγμένες τοποθεσίας',
+  'MAC-adres van een apparaat': 'διεύθυνση MAC μιας συσκευής',
+  'IMEI van een toestel': 'IMEI μιας συσκευής',
+  'ICCID van een simkaart': 'ICCID μιας κάρτας SIM',
+  'IMSI van een abonnee': 'IMSI ενός συνδρομητή',
+  'sociale-mediaprofiel': 'προφίλ σε μέσα κοινωνικής δικτύωσης',
+  'advertentie- of apparaat-ID': 'αναγνωριστικό διαφήμισης ή συσκευής',
+  'IP-adres': 'διεύθυνση IP',
+  'machineleesbare zone van een paspoort of ID':
+      'μηχανικά αναγνώσιμη ζώνη διαβατηρίου ή ταυτότητας',
   'Sla de presentatie op om een kopie te maken.':
       'Αποθηκεύστε την παρουσίαση για να δημιουργηθεί αντίγραφο.',
   ': ligt buiten de presentatie en gaat niet mee (':

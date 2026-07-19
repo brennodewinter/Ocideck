@@ -25,8 +25,17 @@ accepteren, waarschuwen met een shield-badge, of redigeren op scherm en in expor
 | §3-D Adres, NL-postcode en gelabelde persoonsnaam (postcode + huisnummer escaleert via nabijheid) | **geleverd** |
 | §13.1 Matcher met woordgrenzen + `PrivacyTermRole` (aanwijzing versus gegeven) | **geleverd** |
 | §13.5 Beeldcontrole: herkenbare gezichten op afbeeldingen (YuNet, lokaal) | **geleverd** |
-| §13.2 Persoonskoppelingspoort, lexiconmodel als data | open — fase 11/12 |
-| §13.3 Taaldekking zichtbaar, gebundelde lexicons | open — fase 13 |
+| §3-B `doc.mrz`: machine-readable zone (TD1/TD2/TD3) | **geleverd** |
+| §3-E Digitale identificatoren (IP, MAC, IMEI, ICCID, IMSI, handle, device-ID) | **geleverd** |
+| §3-D `contact.birthdate` + `contact.geo` | **geleverd** |
+| §3-D kenteken (`nl.plate`) + buitenlandse postcodes (`<land>.postcode`) | **geleverd** |
+| §13.2 Persoonskoppelingspoort (naam als koppeling, mededeling als bereik) | **geleverd** |
+| §13.2 Lexiconmodel als data (`role`/`match`/`weight`/`lang`) | **geleverd** |
+| §3-G `special.icd10` + `special.atc` (notatie met contextpoort) | **geleverd** |
+| §13.6 fase 14 Rolonderscheid verdachte/aangever/getuige (ConText, drieweg) | **geleverd** |
+| §13.3 Taaldekking zichtbaar in het paneel | **geleverd** |
+| §5.7/§7 Regiopakketten werkend (instelling + poort) | **geleverd** |
+| §13.3 Gebundelde lexicons (EuroVoc, ORDO) | open — fase 13b |
 | §14 Onderzoeksdossier DLP-technieken (annex, geen ontwerp) | naslag |
 
 De genomen beslissingen staan in §11; die zijn niet meer open.
@@ -117,6 +126,15 @@ groeit de regelset zonder de compile te breken.
 | `lib/services/privacy/privacy_scanner.dart` | Orkestratie én de inline-detectors: e-mail, telefoon, IBAN, BSN, EU-nummers, secrets, bijzondere categorieën, adres/postcode, naam, structureel — plus allowlist en co-occurrence-escalatie |
 | `lib/services/privacy/privacy_contact_rules.dart` | Adres (straat + huisnummer), NL-postcode, gelabelde persoonsnaam: patronen, straatachtervoegsels, placeholder-personen |
 | `lib/services/privacy/privacy_phone_rules.dart` | Telefoon: E.164, nationale vorm, contextwoorden, toegekende landnummers, gereserveerde reeksen |
+| `lib/models/privacy_lexicon.dart` | `PrivacyLexiconEntry`, `PrivacyTermMatch` (word/prefix/compound), `PrivacyLexiconRole`, `kMinCompoundLength` |
+| `lib/services/privacy/privacy_plate_rules.dart` | Kenteken (sidecodes 1-14, verplicht contextwoord) en buitenlandse postcodes per land |
+| `lib/services/privacy/privacy_regions.dart` | Landpakketten: welke regio's aan staan, en welke regels daaraan hangen |
+| `lib/services/privacy/privacy_context_role.dart` | ConText: rolherkenning (verdachte/aangever/getuige) met terminatiewoorden en drieweg-uitkomst |
+| `lib/services/privacy/privacy_lexicon_data.dart` | Het gebundelde art. 9/10-lexicon: term, categorie, taal, matchmodus, gewicht, rol |
+| `lib/services/privacy/privacy_digital_rules.dart` | Digitale identificatoren: IPv4/IPv6, MAC, IMEI, ICCID, IMSI, social handles, device-ID's |
+| `lib/services/privacy/privacy_location_rules.dart` | Geboortedatum en coördinaten: datumvormen, contextwoorden, lat/lon, `geo:`-URI, plus-code, what3words |
+| `lib/services/privacy/privacy_scanner_detectors.dart` | `part of` de scanner: de detectoren voor MRZ, digitaal, geboortedatum en geo — puur om het hoofdbestand onder de 1000-regelgrens te houden |
+| `lib/services/privacy/privacy_document_rules.dart` | Reisdocumenten: de machine-readable zone (TD1/TD2/TD3) met de ICAO 9303-controlecijfers |
 | `lib/services/privacy/privacy_eu_rules.dart` | Europese landpakketten: BE/BG/DE/EE/ES/FI/FR/HR/IT/PL/PT/RO/SE + UK (NHS/NINO) |
 | `lib/services/privacy/privacy_checksums.dart`, `privacy_checksums_eu.dart` | 11-proef, mod-97, Luhn, ISO 7064, geboortedatum-validatie, enz. |
 | `lib/services/privacy/privacy_secret_rules.dart` | Leverancierstokens, PEM, JWT, connection strings, wachtwoorden |
@@ -222,7 +240,7 @@ nul. Waar géén checksum bestaat (US SSN, V-nummer), is een contextwoord verpli
 
 | Regel-id | Wat | Validatie / FP-guard | Zekerheid | Std. |
 | --- | --- | --- | --- | --- |
-| `doc.mrz` | Machine-readable zone van paspoort/ID (TD1/TD2/TD3) | Twee of drie regels van 30/36/44 tekens, `P<` + ISO-3166-landcode, plus de mod-7-3-1-controlecijfers over documentnummer, geboortedatum, vervaldatum en het samengestelde cijfer. **Bijna nul FP's** en het is meteen `error`: een MRZ in een slide is een gescande identiteitskaart. | zeker | ✓ |
+| `doc.mrz` | Machine-readable zone van paspoort/ID (TD1/TD2/TD3) | Twee of drie regels van 30/36/44 tekens, `P<` + ISO-3166-landcode, plus de mod-7-3-1-controlecijfers over documentnummer, geboortedatum, vervaldatum en het samengestelde cijfer. **Bijna nul FP's** en het is meteen `error`: een MRZ in een slide is een gescande identiteitskaart. **Geleverd** (`privacy_document_rules.dart`), getest tegen de ICAO 9303-specimens. | zeker | ✓ |
 | `doc.passport_nl` | Nederlands paspoort-/ID-nummer | 9 alfanumeriek, contextwoord | waarschijnlijk | ◐ |
 | `doc.driving_licence` | Rijbewijsnummer | landformaat + context | mogelijk | ◐ |
 | `doc.residence` | Verblijfsdocument / visumnummer | formaat + context | mogelijk | ◐ |
@@ -261,11 +279,31 @@ nul. Waar géén checksum bestaat (US SSN, V-nummer), is een contextwoord verpli
 > `contact.postcode_nl` en de gelabelde `contact.name`. Adres en NL-postcode zijn
 > elk `possible`; staan een straat-met-huisnummer en een postcode binnen ±40 tekens
 > van elkaar, dan escaleren beide naar `certain` — postcode plus huisnummer wijst
-> in Nederland één woonadres aan. `contact.name` blijft `possible` en werkt alleen
-> met een aanhef of label — géén NER, dus een kále naam (bijvoorbeeld enkel een naam
-> als slidetitel) valt erbuiten; daarvoor is de handmatige `[[…]]`-markering. Nog
-> niet gebouwd: `contact.postcode_intl`, `contact.birthdate`, `contact.geo`,
-> `contact.plate`.
+> in Nederland één woonadres aan. Nog niet gebouwd: `contact.postcode_intl`,
+> `contact.birthdate`, `contact.geo`, `contact.plate`.
+>
+> **Bijgewerkt (2026-07-19):** `contact.birthdate` en `contact.geo` zijn er, met
+> tegengestelde poorten — en dat verschil is de kern van beide regels. De
+> geboortedatum **eist** een contextwoord, want een datum is de meest voorkomende
+> getalsvorm in een zakelijk deck (releases, deadlines, kwartalen) en zonder die
+> poort meldt de regel de agenda. Coördinaten eisen er juist géén: twee
+> kommagetallen met minstens vier decimalen binnen het bereik van de aardbol
+> komen in gewone tekst niet voor. Vier decimalen is bewust de ondergrens —
+> ongeveer elf meter; met minder wijst het paar een dorp aan in plaats van een
+> deur, en dan is het geen persoonsgegeven meer. `geo:`-URI en what3words zijn
+> `certain` (het formaat zégt dat het een plaats is), een plus-code blijft
+> `possible` omdat zijn beperkte alfabet met productcodes botst.
+>
+> **Bijgewerkt (2026-07-19, fase 11):** `contact.name` kent vier poorten, en géén
+> ervan kijkt naar de naam zelf — het blijft dus géén NER. Label en aanhef leveren
+> `likely` (de auteur schrijft er letterlijk bij dát het een persoon is; dat is een
+> structurele uitspraak). Nieuw zijn een **persoonspredicaat** — "wordt verdacht
+> van", "meldde zich ziek", een werkwoordsvorm die geen ander onderwerp dan een
+> mens kan hebben — dat óók `likely` geeft, en een **bevestigend e-mailadres**
+> ("Marieke de Vries" naast `m.devries@example.com`) dat `certain` geeft, want daar
+> bevestigen twee onafhankelijke structuren elkaar. De kále naam zonder één van
+> deze vier valt er nog steeds buiten; daarvoor is de handmatige
+> `[[…]]`-markering.
 
 ### E. Digitale identificatoren
 
@@ -279,6 +317,26 @@ nul. Waar géén checksum bestaat (US SSN, V-nummer), is een contextwoord verpli
 | `digital.imsi` | IMSI | 15 cijfers, geldige MCC/MNC | waarschijnlijk | ◐ |
 | `digital.handle` | Social handle / profiel-URL | `@naam` + LinkedIn/X/Facebook/Instagram/Mastodon/Telegram/Discord-profiel-URL's. `@` in een e-mail of een code-mention (`@override`, `@param`) uitgesloten | waarschijnlijk | ✓ |
 | `digital.deviceid` | Advertising-ID / device-ID | UUID **met** contextwoord (`idfa`, `gaid`, `device`, `advertising`). Een kale UUID is te generiek → geen melding | mogelijk | ✓ |
+
+> **Gebouwd (2026-07-19):** de hele familie, in `privacy_digital_rules.dart`.
+> Drie dingen die de bouw opleverde en die niet uit het ontwerp volgden:
+>
+> * **De korte IPv6-regex matcht MAC-adressen en tijdstippen.** "Twee tot zeven
+>   groepen hex met dubbele punten" dekt óók `00:00:00:00:00:00` en `01:02:03`.
+>   De discriminant is dat een echt IPv6-adres altijd óf een `::` bevat óf uit
+>   acht volle groepen bestaat; een MAC heeft er zes en een tijdstip drie, geen
+>   van beide met `::`. Daarom staat de volledige grammatica in de code en niet de
+>   korte versie.
+> * **Een Amex-nummer is niet van een IMEI te onderscheiden.** Beide zijn vijftien
+>   cijfers met een geldige Luhn. Amex is het enige kaartmerk met die lengte, dus
+>   het IIN-bereik `34`/`37` uitsluiten ruimt de hele botsing op. De corpustest
+>   vond dit meteen: het Amex-testnummer staat in §3-C van dit document.
+> * **GitHub hoort niet bij de profiel-URL's.** Een `github.com/…`-link is in een
+>   technisch deck vrijwel altijd een repository. Ook dat ving de corpustest, op
+>   onze eigen `PENTEST_MIAUW.md`. De profiel-URL is bovendien `likely` en niet
+>   `certain`: dát er een profiel staat is zeker, dat het een natuurlijk persoon
+>   is niet — organisaties hebben ook accounts. Daarmee telt hij ook niet mee als
+>   persoonskoppeling voor artikel 9, en dat is de juiste uitkomst.
 
 ### F. Credentials en secrets
 
@@ -854,7 +912,7 @@ Nieuwe sectie in het tabblad "Veiligheid" (`settings_dialog_security.dart`), wan
 | `privacyImageFaceDetection` | bool — afbeeldingen nakijken op gezichten | **aan** (grijs zolang de hoofdschakelaar uit staat) |
 | `privacyFamilies` | set van 8 familieschakelaars | alle aan |
 | `privacyDisabledRules` | set van regel-id's | leeg |
-| `privacyRegions` | set van landpakketten | **heel Europa** (EU-27 + EER + CH + UK) |
+| `privacyRegions` | set van landpakketten | **heel Europa** (EU-27 + EER + CH + UK) — **geleverd** |
 | `privacyStrictSeverity` | bool — behandel `zeker` als fout i.p.v. waarschuwing | uit |
 | `privacyExportGate` | uit / waarschuwen / blokkeren | waarschuwen |
 | `privacyRedactionStyle` | blokken (`████`) / label (`[BSN]`) | blokken |
@@ -1333,10 +1391,10 @@ is geruststellend, maar dit is geen benchmark.
 | --- | --- | --- |
 | **9** | Trefwoordbereik nooit redigeren (`PrivacyTermRole`) + matcher met woordgrens en minimumtermlengte | **geleverd.** Geen nieuwe data, geen nieuwe l10n. Verwijdert misleidend gedrag en de grofste FP's |
 | **10** | De beeldcontrole: YuNet, eigen provider, eigen schakelaar, `readable`-scheiding, multischaal | **geleverd.** Staat hier en niet later omdat de tekstscanner deze categorie principieel niet kan vinden |
-| **11** | Persoonskoppelingspoort vóór elke art. 9-melding | Vereist eerst betere naamdetectie: `contact.name` vuurt nu alleen achter een label, dus "Marieke de Vries" telt niet als koppeling |
-| **12** | `role` + `match` + `weight` als lexicondata in plaats van afgeleid; notatie-uitbreiding (ICD-10, ATC) | Maakt het lexicon vulbaar zonder code te raken — de voorwaarde voor 13 |
+| **11** | Persoonskoppelingspoort vóór elke art. 9-melding | **geleverd.** `contact.name` vuurt nu ook op een persoonspredicaat ("wordt verdacht van", "meldde zich ziek") en op een naam die een e-mailadres bevestigt; label en aanhef stegen van `possible` naar `likely`, want een aanhef is een structurele uitspraak en geen gok. Een naam koppelt bewust **niet** slidebreed maar tot het eind van zijn mededeling — zonder die grens tilde één naam bovenaan een vrij-markdownveld élk trefwoord eronder naar een harde melding, en dat ving de corpustest |
+| **12** | `role` + `match` + `weight` als lexicondata in plaats van afgeleid; notatie-uitbreiding (ICD-10, ATC) | **geleverd.** De matchmodus werd afgeleid uit de termlengte (grens: vier tekens), en dat brak twee kanten op: `arrest` is lang genoeg voor de voorvoegselregel maar moet een héél woord zijn (het is ook een uitspraak van de Hoge Raad), en `ziekteverzuim` moet juist middenin een samenstelling gevonden worden — wat de oude matcher helemaal niet kon. Het `weight` doet ook echt werk: staan er meerdere termen van dezelfde familie in één fragment, dan draagt de meest specifieke de melding, niet de eerste in de lijst. `role` komt nu per term uit het lexicon, want binnen één familie komen beide voor: "diagnose" wijst, "diabetes" ís |
 | **13** | Taaldekking zichtbaar + regiopakketten werkend + gebundelde lexicons (ORDO nl, EuroVoc) | Zonder de zichtbaarheid liegt een groene balk in 24 talen |
-| **14** | Rolonderscheid verdachte/aangever (ConText-mechaniek in Dart, drieweg met *onbekend* als default) | Laatste tien procent, en zinloos vóór 11: wat je niet detecteert kun je geen rol geven |
+| **14** | Rolonderscheid verdachte/aangever (ConText-mechaniek in Dart, drieweg met *onbekend* als default) | **geleverd.** Het bereik is de mededeling (§5.6) in plaats van een tekenvenster — dezelfde eenheid als de redactie — met terminatiewoorden (`maar`, `terwijl`) die een trigger afkappen. Twee rollen in één mededeling leveren `unknown` op: bij twijfel geen rol. Dat is geen bescheidenheid maar de meting: VACCINE haalt op subjectdetectie F1 48%, tegen 90% op de vraag wát iets is |
 
 ### 13.7 Wat hier bewust níét in zit
 

@@ -1781,6 +1781,31 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'kenteken': 'rekisterinumero',
+  'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
+      'Tämän esityksen kielelle ei ole avainsanaluetteloa erityisiin henkilötietoryhmiin. Tarkistusnumerolliset kuviot (hetu, IBAN, passi) toimivat; sanoja kuten "diagnoosi" tai "epäilty" ei tunnisteta.',
+  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
+      'Erityisten henkilötietoryhmien avainsanaluettelo on tämän esityksen kielelle hyvin ohut. Älä luota siihen, että sanat kuten "diagnoosi" tai "epäilty" löytyvät.',
+  'Landpakketten voor identificatienummers': 'Maapaketit tunnistenumeroille',
+  'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
+      'Numerot kuten alankomaalainen BSN tai puolalainen PESEL ovat maakohtaisia. Koko Eurooppa on päällä, koska useimmissa näistä numeroista on tarkistusnumero: niiden käyttöönotto ei juuri maksa vääriä hälytyksiä. IBAN, sähköposti, salaisuudet ja passirivit ovat tästä riippumattomia ja tarkistetaan aina.',
+  'strafrechtelijk gegeven (verdachte)': 'rikosoikeudellinen tieto (epäilty)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'rikosoikeudellinen tieto (ilmoittaja tai uhri)',
+  'strafrechtelijk gegeven (getuige)': 'rikosoikeudellinen tieto (todistaja)',
+  'diagnosecode (ICD-10)': 'diagnoosikoodi (ICD-10)',
+  'geneesmiddelcode (ATC)': 'lääkekoodi (ATC)',
+  'geboortedatum': 'syntymäaika',
+  'locatiecoördinaten': 'sijaintikoordinaatit',
+  'MAC-adres van een apparaat': 'laitteen MAC-osoite',
+  'IMEI van een toestel': 'puhelimen IMEI',
+  'ICCID van een simkaart': 'SIM-kortin ICCID',
+  'IMSI van een abonnee': 'tilaajan IMSI',
+  'sociale-mediaprofiel': 'sosiaalisen median profiili',
+  'advertentie- of apparaat-ID': 'mainos- tai laitetunnus',
+  'IP-adres': 'IP-osoite',
+  'machineleesbare zone van een paspoort of ID':
+      'passin tai henkilökortin koneluettava alue',
   'Sla de presentatie op om een kopie te maken.':
       'Tallenna esitys, niin siitä tehdään kopio.',
   ': ligt buiten de presentatie en gaat niet mee (':

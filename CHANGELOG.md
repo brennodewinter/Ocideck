@@ -67,6 +67,118 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   conflictafhandeling als bij WebDAV. Een deck dat je uit een bucket opende,
   gaat bij opslaan vanzelf naar diezelfde bucket terug.
 
+- **Het kwaliteitspaneel zegt nu wanneer het voor jouw taal niets te zoeken
+  heeft.** OciDeck herkent woorden als "diagnose" of "verdachte" in een handvol
+  talen; de interface draait er in dertig. Tot nu toe zag je dat verschil
+  nergens: de balk werd groen, de lijst met uitgevoerde controles zag er
+  compleet uit, en "niets gevonden" las als "er zit niets in". Terwijl er voor
+  die taal geen woordenlijst bestond.
+
+  Staat je presentatie in een taal zonder lijst, dan staat dat er nu bij — met
+  de nuance die erbij hoort: controles op een controlegetal (BSN, IBAN,
+  paspoortstrook) werken gewoon, want die zijn taalonafhankelijk. Alleen de
+  woordherkenning valt weg.
+
+- **Landpakketten zijn instelbaar geworden.** Nummers als het BSN of het PESEL
+  zijn landgebonden, en je kunt nu per land aangeven of OciDeck ze meeneemt.
+  Standaard staat heel Europa aan — EU-27 plus de EER, Zwitserland en het VK —
+  en dat is bewust de ruime keuze: de meeste van die nummers hebben een
+  controlegetal, dus ze aanzetten levert vrijwel geen valse meldingen op.
+
+  Wat je ook uitzet, de taalonafhankelijke laag blijft draaien: IBAN,
+  e-mailadressen, sleutels en paspoortstroken worden altijd nagekeken.
+
+- **Een aangeefster is geen verdachte, en de melding zegt dat nu ook.** Tot nu
+  toe leverden "verdachte M. de Vries" en "aangeefster M. de Vries" een
+  identieke melding op, terwijl dat juridisch en menselijk twee volstrekt
+  verschillende dingen zijn — en de tweede degene is voor wie een lek het hardst
+  aankomt. OciDeck herkent nu drie rollen: verdachte, aangever of slachtoffer,
+  en getuige.
+
+  De vierde mogelijkheid is de belangrijkste: **onbekend**, en dat is de
+  standaard. Staat er geen aanwijzing in de tekst, of staan er juist twee rollen
+  in dezelfde zin, dan zegt OciDeck niets over wie het betreft. Dat is met opzet
+  zo gebouwd: een keuze tussen alleen "verdachte" en "niet-verdachte" heeft geen
+  vakje voor onwetendheid, en dwingt daarmee precies de fout af die je hier niet
+  wilt maken.
+
+- **De trefwoordenlijst voor bijzondere persoonsgegevens weet nu wat voor woord
+  ze bevat.** Tot nu toe leidde OciDeck uit de lengte van een woord af hoe het
+  gezocht moest worden: kort betekende "alleen als heel woord", lang betekende
+  "ook met een uitgang eraan". Dat werkte verrassend ver, maar het brak allebei
+  de kanten op. "Arrest" is lang genoeg voor de soepele regel en moest juist een
+  heel woord zijn — het is namelijk ook een uitspraak van de Hoge Raad, en dat
+  woord staat in elke juridische presentatie. En "ziekteverzuim" hoort juist wél
+  gevonden te worden in "ziekteverzuimcijfers", wat helemaal niet kon.
+
+  Elk woord draagt nu zelf die informatie, plus een taal en een maat voor hoe
+  specifiek het is. Die laatste bepaalt welk woord de melding krijgt als er
+  meerdere in dezelfde zin staan: "de diagnose leidde tot ziekteverzuim" wijst
+  nu het tweede aan, want het eerste valt in elke projectvergadering.
+
+  Daarnaast worden diagnosecodes (ICD-10) en geneesmiddelcodes (ATC) herkend —
+  alleen met een woord als "hoofddiagnose" of "geneesmiddel" ernaast, want `A12`
+  is ook een tabelverwijzing en een zaalnummer.
+
+- **Geboortedata en locatiecoördinaten worden herkend.** Twee controles met
+  precies tegengestelde regels, en dat is met opzet. Een geboortedatum wordt
+  alleen gemeld als er ook een woord als "geboren" of "geboortedatum" bij staat:
+  een datum is de meest voorkomende getalsvorm in een presentatie — releases,
+  deadlines, kwartaalcijfers — en zonder die eis meldt de controle vooral de
+  agenda. Coördinaten hebben zo'n woord juist niet nodig, want twee
+  kommagetallen met minstens vier decimalen komen in gewone tekst niet voor.
+
+  Die vier decimalen zijn een bewuste ondergrens: dat is ongeveer elf meter. Met
+  minder wijst een coördinaat een dorp aan in plaats van een voordeur, en dan is
+  het geen persoonsgegeven meer. `geo:`-links en what3words-adressen worden ook
+  herkend, en grafiekgegevens blijven buiten schot — een dataset ís nu eenmaal
+  een rij getallenparen.
+
+- **IP-adressen, MAC-adressen, IMEI's en socialemediaprofielen worden herkend.**
+  De patronen zijn simpel; het werk zit in wat er níét op af mag gaan. Een
+  versienummer is vier getallen met punten ertussen, een tijdstip is twee
+  getallen met een dubbele punt, en een git-hash is hex — zonder poorten meldt
+  zo'n controle vooral zichzelf. Dus: de adresreeksen die de IETF expres voor
+  documentatie heeft gereserveerd tellen niet mee, een IMEI moet zijn Luhn
+  halen, en een kale UUID zwijgt tot er `IDFA` of `advertentie` naast staat.
+
+  Een adres uit de privéreeksen (`10.x`, `192.168.x`) meldt wel maar onderbreekt
+  niet: dat is interne infrastructuur en geen persoonsgegeven, al blijft een
+  intern adresplan in een publieke slide iets om te weten.
+
+- **Een gescand paspoort in een slide wordt herkend.** De twee of drie regels
+  vol hoofdletters en `<`-tekens onderaan een identiteitsbewijs — de
+  machineleesbare zone — zijn geen willekeurige tekst: er zitten vier
+  controlecijfers in, waarvan er één over de andere heen ligt. OciDeck rekent ze
+  na, en alleen als ze allemaal kloppen is er een melding. Daardoor kan die
+  melding meteen hard zijn zonder verder bewijs: er staat een documentnummer, een
+  nationaliteit, een geboortedatum en een vervaldatum in één blok, en dat is
+  precies de set waarmee identiteitsfraude begint. Paspoort, identiteitskaart en
+  het oudere kaartformaat worden alle drie herkend.
+
+- **De privacycontrole koppelt een bijzonder gegeven nu aan een persóón.** Een
+  diagnose of een verdenking is pas een bijzonder persoonsgegeven als er iemand
+  bij hoort — een slide *óver* de AVG noemt die woorden zonder er een te
+  bevatten. Tot nu toe telde alleen een BSN, een nationaal nummer of een
+  e-mailadres als die persoon, en dus gebeurde er bij de meest voorkomende
+  formulering van allemaal precies niets: "Marieke de Vries wordt verdacht van
+  diefstal" bleef een informatieve hint.
+
+  Namen worden daarom op drie nieuwe manieren herkend, en géén ervan kijkt naar
+  de naam zelf — het blijft dus geen naamherkenning die op woordenlijsten of een
+  taalmodel leunt, want een woord met een hoofdletter is ook gewoon het begin
+  van een zin. Wat telt is wat eromheen staat: een **persoonspredicaat** ("wordt
+  verdacht van", "meldde zich ziek") dat geen ander onderwerp dan een mens kan
+  hebben, een **e-mailadres dat de naam terugzegt** ("Marieke de Vries" naast
+  `m.devries@example.com`), en de al bestaande aanhef en labels, die zwaarder wegen
+  dan voorheen omdat "mevr." een uitspraak van de auteur is en geen gok.
+
+  Een naam koppelt bewust niet zo ver als een BSN. Een BSN geldt voor de hele
+  slide; een naam reikt tot het eind van de zin waarin hij staat. Zonder die
+  grens tilde één naam bovenaan een lang stuk vrije markdown élk trefwoord in de
+  duizend regels eronder naar een harde waarschuwing — en dat is precies het
+  gedrag waardoor mensen een privacycontrole uitzetten.
+
 ### Fixed
 - **Aankruislijsten in de documentatie waren geen aankruislijsten.** De lezer
   in de app kende het `- [ ]`-patroon niet en liet de haakjes gewoon staan, dus

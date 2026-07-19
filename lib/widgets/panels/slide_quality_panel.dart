@@ -7,6 +7,7 @@ import '../../l10n/slide_quality_localization.dart';
 import '../../l10n/slide_quality_navigation.dart';
 import '../../models/markdown_validation.dart';
 import '../../models/slide_quality.dart';
+import '../../services/privacy/privacy_lexicon_data.dart';
 import '../../state/deck_provider.dart';
 import '../../state/deck_quality_provider.dart';
 import '../../state/editor_provider.dart';
@@ -367,6 +368,14 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
     final privacyEnabled = ref.watch(
       settingsProvider.select((s) => s.privacyChecksEnabled),
     );
+    // De taaldekking van het trefwoordlexicon (OCIWACHT §13.3). Alleen relevant
+    // zolang de controle überhaupt draait — staat ze uit, dan is dát de melding.
+    final deckLanguage = ref.watch(
+      deckProvider.select((state) => state.deck?.language ?? ''),
+    );
+    final coverage = privacyEnabled && deckLanguage.isNotEmpty
+        ? privacyLexiconCoverage(deckLanguage)
+        : PrivacyLexiconCoverage.covered;
     return [
       Padding(
         padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
@@ -446,6 +455,39 @@ class _SlideQualityPanelState extends ConsumerState<SlideQualityPanel> {
                         l10n.d(
                           'Niet gecontroleerd: persoonsgegevens, bijzondere gegevens en geheimen. De privacycontrole staat uit bij Beveiliging.',
                         ),
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w600,
+                          color: AppTheme.warningFg,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            // Draait de controle wél, maar is er voor de taal van dit deck geen
+            // trefwoordenlijst, dan is de stilte over bijzondere gegevens net zo
+            // misleidend. `Deck.language` valt voor meldingsteksten terug op
+            // Engels — daar is dat goed — maar een lexicon dat terugvalt is
+            // erger dan geen lexicon: Poolse tekst scannen met Engelse
+            // triggerwoorden geeft bijna nul recall, en niemand merkt het.
+            if (coverage != PrivacyLexiconCoverage.covered)
+              Padding(
+                padding: const EdgeInsets.only(top: 6),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(Icons.translate, size: 12, color: AppTheme.warningFg),
+                    const SizedBox(width: 6),
+                    Expanded(
+                      child: Text(
+                        coverage == PrivacyLexiconCoverage.none
+                            ? l10n.d(
+                                'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.',
+                              )
+                            : l10n.d(
+                                'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.',
+                              ),
                         style: TextStyle(
                           fontSize: 10,
                           fontWeight: FontWeight.w600,

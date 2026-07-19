@@ -1785,6 +1785,32 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'kenteken': 'Autonummere',
+  'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
+      'Für d Sproch vo dere Presentation git s kei Stichwortlischte für bsunderi persönlichi Date. Muschter mit ere Prüefziffere (Steuer-ID, IBAN, Pass) laufe; Wörter wie "Diagnose" oder "Verdächtige" wärde nid erkennt.',
+  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
+      'D Stichwortlischte für bsunderi persönlichi Date isch für d Sproch vo dere Presentation sehr dünn. Verloss di nid druf, dass Wörter wie "Diagnose" oder "Verdächtige" gfunde wärde.',
+  'Landpakketten voor identificatienummers':
+      'Länderpaket für Identifikationsnummere',
+  'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
+      'Nummere wie s hollandische BSN oder s polnische PESEL sind länderspezifisch. Ganz Europa isch aa, wil di meischte vo dene Nummere e Prüefziffere hei: die aaschalte choschtet fascht kei Fehlmäldige. IBAN, E-Mail, Gheimnis und Passziile sind devo unabhängig und wärde immer prüeft.',
+  'strafrechtelijk gegeven (verdachte)': 'strafrächtlichi Aagab (Verdächtige)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'strafrächtlichi Aagab (Aazeigersteller oder Opfer)',
+  'strafrechtelijk gegeven (getuige)': 'strafrächtlichi Aagab (Züüge)',
+  'diagnosecode (ICD-10)': 'Diagnosecode (ICD-10)',
+  'geneesmiddelcode (ATC)': 'Medikamäntecode (ATC)',
+  'geboortedatum': 'Geburtsdatum',
+  'locatiecoördinaten': 'Standortkoordinate',
+  'MAC-adres van een apparaat': 'MAC-Adrässe vun eme Grät',
+  'IMEI van een toestel': 'IMEI vun eme Handy',
+  'ICCID van een simkaart': 'ICCID vunere SIM-Charte',
+  'IMSI van een abonnee': 'IMSI vun eme Aboneet',
+  'sociale-mediaprofiel': 'Social-Media-Profil',
+  'advertentie- of apparaat-ID': 'Wärbig- oder Grät-ID',
+  'IP-adres': 'IP-Adrässe',
+  'machineleesbare zone van een paspoort of ID':
+      'maschineläsbari Zone vun eme Pass oder Uswiis',
   'Sla de presentatie op om een kopie te maken.':
       'Spichered Sie d Präsentation, zum e Kopie z mache.',
   ': ligt buiten de presentatie en gaat niet mee (':

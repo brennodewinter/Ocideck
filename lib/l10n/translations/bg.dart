@@ -1804,6 +1804,32 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'kenteken': 'регистрационен номер',
+  'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
+      'За езика на тази презентация няма списък с ключови думи за специални категории лични данни. Шаблоните с контролна цифра (ЕГН, IBAN, паспорт) работят; думи като „диагноза“ или „заподозрян“ не се разпознават.',
+  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
+      'Списъкът с ключови думи за специални категории лични данни е много беден за езика на тази презентация. Не разчитайте, че думи като „диагноза“ или „заподозрян“ ще бъдат намерени.',
+  'Landpakketten voor identificatienummers':
+      'Пакети по държави за идентификационни номера',
+  'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
+      'Номера като нидерландския BSN или полския PESEL са специфични за държава. Цяла Европа е включена, защото повечето от тези номера имат контролна цифра: включването им почти не струва фалшиви сигнали. IBAN, имейл, тайни и паспортни ленти са независими от това и винаги се проверяват.',
+  'strafrechtelijk gegeven (verdachte)': 'наказателноправни данни (заподозрян)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'наказателноправни данни (жалбоподател или жертва)',
+  'strafrechtelijk gegeven (getuige)': 'наказателноправни данни (свидетел)',
+  'diagnosecode (ICD-10)': 'код на диагноза (МКБ-10)',
+  'geneesmiddelcode (ATC)': 'код на лекарство (ATC)',
+  'geboortedatum': 'дата на раждане',
+  'locatiecoördinaten': 'координати на местоположение',
+  'MAC-adres van een apparaat': 'MAC адрес на устройство',
+  'IMEI van een toestel': 'IMEI на телефон',
+  'ICCID van een simkaart': 'ICCID на SIM карта',
+  'IMSI van een abonnee': 'IMSI на абонат',
+  'sociale-mediaprofiel': 'профил в социална мрежа',
+  'advertentie- of apparaat-ID': 'рекламен идентификатор или ID на устройство',
+  'IP-adres': 'IP адрес',
+  'machineleesbare zone van een paspoort of ID':
+      'машинночетима зона на паспорт или лична карта',
   'Sla de presentatie op om een kopie te maken.':
       'Запазете презентацията, за да се направи копие.',
   ': ligt buiten de presentatie en gaat niet mee (':

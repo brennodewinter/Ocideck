@@ -1772,6 +1772,33 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'kenteken': 'registreerimisnumber',
+  'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
+      'Selle esitluse keele jaoks pole eriliigiliste isikuandmete märksõnaloendit. Kontrollnumbriga mustrid (isikukood, IBAN, pass) töötavad; sõnu nagu "diagnoos" või "kahtlustatav" ei tuvastata.',
+  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
+      'Eriliigiliste isikuandmete märksõnaloend on selle esitluse keele jaoks väga õhuke. Ära looda, et leitakse sõnu nagu "diagnoos" või "kahtlustatav".',
+  'Landpakketten voor identificatienummers':
+      'Riikide paketid isikukoodide jaoks',
+  'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
+      'Numbrid nagu Hollandi BSN või Poola PESEL on riigipõhised. Kogu Euroopa on sisse lülitatud, sest enamikul neist numbritest on kontrollnumber: nende sisselülitamine ei maksa peaaegu ühtegi valehäiret. IBAN, e-post, saladused ja passiread on sellest sõltumatud ja kontrollitakse alati.',
+  'strafrechtelijk gegeven (verdachte)':
+      'karistusõiguslik andmed (kahtlustatav)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'karistusõiguslik andmed (teataja või ohver)',
+  'strafrechtelijk gegeven (getuige)': 'karistusõiguslik andmed (tunnistaja)',
+  'diagnosecode (ICD-10)': 'diagnoosikood (RHK-10)',
+  'geneesmiddelcode (ATC)': 'ravimikood (ATC)',
+  'geboortedatum': 'sünnikuupäev',
+  'locatiecoördinaten': 'asukoha koordinaadid',
+  'MAC-adres van een apparaat': 'seadme MAC-aadress',
+  'IMEI van een toestel': 'telefoni IMEI',
+  'ICCID van een simkaart': 'SIM-kaardi ICCID',
+  'IMSI van een abonnee': 'abonendi IMSI',
+  'sociale-mediaprofiel': 'sotsiaalmeedia profiil',
+  'advertentie- of apparaat-ID': 'reklaami- või seadme-ID',
+  'IP-adres': 'IP-aadress',
+  'machineleesbare zone van een paspoort of ID':
+      'passi või isikutunnistuse masinloetav ala',
   'Sla de presentatie op om een kopie te maken.':
       'Salvestage esitlus, et sellest tehtaks koopia.',
   ': ligt buiten de presentatie en gaat niet mee (':

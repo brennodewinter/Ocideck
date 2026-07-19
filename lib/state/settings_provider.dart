@@ -8,6 +8,7 @@ import '../models/privacy_disposition.dart';
 import '../models/privacy_finding.dart';
 import '../models/settings.dart';
 import '../models/storage_connection.dart';
+import '../services/privacy/privacy_regions.dart';
 import '../services/secret_store.dart';
 import '../utils/log.dart';
 
@@ -149,6 +150,12 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       privacyDisabledRules:
           prefs.getStringList('privacyDisabledRules')?.toSet() ??
           defaultDisabledPrivacyRules,
+      // Nooit eerder opgeslagen → heel Europa. Een lege verzameling die de
+      // gebruiker zelf heeft gemaakt blijft leeg: dan draait alleen de
+      // universele laag, en dat is een geldige keuze.
+      privacyRegions:
+          prefs.getStringList('privacyRegions')?.toSet() ??
+          defaultPrivacyRegions,
       privacyExportGate: PrivacyExportGateX.fromKey(
         prefs.getString('privacyExportGate'),
       ),

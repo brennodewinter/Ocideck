@@ -738,6 +738,33 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'kenteken': 'Kfz-Kennzeichen',
+  'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
+      'Für die Sprache dieser Präsentation gibt es keine Stichwortliste für besondere Kategorien personenbezogener Daten. Muster mit Prüfziffer (Steuer-ID, IBAN, Pass) funktionieren; Wörter wie "Diagnose" oder "Verdächtiger" werden nicht erkannt.',
+  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
+      'Die Stichwortliste für besondere Kategorien personenbezogener Daten ist für die Sprache dieser Präsentation sehr dünn. Verlassen Sie sich nicht darauf, dass Wörter wie "Diagnose" oder "Verdächtiger" gefunden werden.',
+  'Landpakketten voor identificatienummers':
+      'Länderpakete für Identifikationsnummern',
+  'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
+      'Nummern wie die niederländische BSN oder die polnische PESEL sind länderspezifisch. Ganz Europa ist aktiviert, weil die meisten dieser Nummern eine Prüfziffer haben: sie einzuschalten kostet fast keine Fehlmeldungen. IBAN, E-Mail, Geheimnisse und Passzeilen sind davon unabhängig und werden immer geprüft.',
+  'strafrechtelijk gegeven (verdachte)':
+      'strafrechtliche Angabe (Verdächtiger)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'strafrechtliche Angabe (Anzeigenerstatter oder Opfer)',
+  'strafrechtelijk gegeven (getuige)': 'strafrechtliche Angabe (Zeuge)',
+  'diagnosecode (ICD-10)': 'Diagnosecode (ICD-10)',
+  'geneesmiddelcode (ATC)': 'Arzneimittelcode (ATC)',
+  'geboortedatum': 'Geburtsdatum',
+  'locatiecoördinaten': 'Standortkoordinaten',
+  'MAC-adres van een apparaat': 'MAC-Adresse eines Geräts',
+  'IMEI van een toestel': 'IMEI eines Mobiltelefons',
+  'ICCID van een simkaart': 'ICCID einer SIM-Karte',
+  'IMSI van een abonnee': 'IMSI eines Teilnehmers',
+  'sociale-mediaprofiel': 'Social-Media-Profil',
+  'advertentie- of apparaat-ID': 'Werbe- oder Geräte-ID',
+  'IP-adres': 'IP-Adresse',
+  'machineleesbare zone van een paspoort of ID':
+      'maschinenlesbare Zone eines Passes oder Ausweises',
   'Sla de presentatie op om een kopie te maken.':
       'Speichern Sie die Präsentation, um eine Kopie anzulegen.',
   ': ligt buiten de presentatie en gaat niet mee (':

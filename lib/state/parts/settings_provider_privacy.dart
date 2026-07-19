@@ -57,6 +57,26 @@ extension SettingsPrivacy on SettingsNotifier {
     );
   }
 
+  /// Zet één landpakket aan of uit (OCIWACHT §5.7).
+  ///
+  /// Los van [setPrivacyRuleEnabled]: een uitgezet pakket zegt "deze regio is
+  /// voor mij niet relevant", een uitgezette regel zegt "deze regel heeft het
+  /// mis over mijn inhoud". Het eerste is een scopekeuze, het tweede een oordeel
+  /// — en alleen het tweede hoort ook de redactie tegen te houden.
+  Future<void> setPrivacyRegionEnabled(String region, bool enabled) async {
+    final next = {...currentState.privacyRegions};
+    if (enabled) {
+      next.add(region);
+    } else {
+      next.remove(region);
+    }
+    currentState = currentState.copyWith(privacyRegions: next);
+    await _persist(
+      'setPrivacyRegionEnabled',
+      (prefs) => prefs.setStringList('privacyRegions', next.toList()),
+    );
+  }
+
   Future<void> setPrivacyRuleEnabled(String ruleId, bool enabled) async {
     final next = {...currentState.privacyDisabledRules};
     if (enabled) {

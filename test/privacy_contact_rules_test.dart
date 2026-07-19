@@ -125,11 +125,55 @@ void main() {
       expect(rulesIn('naam: Jan van der Berg'), contains('contact.name'));
     });
 
-    test('een naam blijft een hint, geen onderbreking', () {
+    test('een aanhef is een structurele uitspraak, geen gok', () {
+      // `likely` en niet `possible`: de auteur schrijft er met "dhr." letterlijk
+      // bij dat dit een persoon is. Nog steeds geen onderbreking — dat is aan
+      // `certain` voorbehouden — maar wél genoeg om als persoonskoppeling te
+      // tellen.
       final finding = findingFor('dhr. Jansen', 'contact.name');
       expect(finding, isNotNull);
-      expect(finding!.confidence, PrivacyConfidence.possible);
+      expect(finding!.confidence, PrivacyConfidence.likely);
       expect(finding.family, PrivacyFamily.contact);
+      expect(scanText('dhr. Jansen').certain, isEmpty);
+    });
+
+    test('een persoonspredicaat wijst een naam aan zonder label', () {
+      // De formulering waar artikel 10 over gaat draagt geen `naam:`-label.
+      expect(
+        rulesIn('Marieke de Vries wordt verdacht van diefstal'),
+        contains('contact.name'),
+      );
+      expect(
+        rulesIn('Sandra Bakker meldde zich ziek'),
+        contains('contact.name'),
+      );
+    });
+
+    test('een bevestigend e-mailadres maakt de naam zeker', () {
+      // Twee onafhankelijke structuren die elkaar bevestigen: het lokale deel
+      // zegt de naam terug. Dat is het sterkste bewijs dat deze familie kent.
+      final finding = findingFor(
+        'Neem contact op met Marieke de Vries, m.devries@acme.nl',
+        'contact.name',
+      );
+      expect(finding, isNotNull);
+      expect(finding!.confidence, PrivacyConfidence.certain);
+    });
+
+    test('een e-mailadres bevestigt alleen de naam die erin staat', () {
+      // Zonder deze eis zou élke naam op de slide door élk adres bevestigd
+      // worden, en dan is de poort geen poort meer.
+      expect(
+        findingFor('Peter Bakker, m.devries@acme.nl', 'contact.name'),
+        isNull,
+      );
+    });
+
+    test('een kale naam zonder structuur blijft buiten beeld', () {
+      // §5.5 blijft staan: geen NER, en dus geen melding op een woord met een
+      // hoofdletter alleen.
+      expect(rulesIn('Marieke de Vries was er ook'), isEmpty);
+      expect(rulesIn('Amsterdam Zuidoost groeit hard'), isEmpty);
     });
 
     test('een placeholder-persoon telt niet', () {

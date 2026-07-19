@@ -734,6 +734,32 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'kenteken': 'targa del veicolo',
+  'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
+      'Per la lingua di questa presentazione non esiste un elenco di parole chiave per le categorie particolari di dati personali. I modelli con cifra di controllo (codice fiscale, IBAN, passaporto) funzionano; parole come "diagnosi" o "indagato" non vengono riconosciute.',
+  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
+      'L\'elenco di parole chiave per le categorie particolari di dati personali è molto ridotto per la lingua di questa presentazione. Non contare sul fatto che parole come "diagnosi" o "indagato" vengano trovate.',
+  'Landpakketten voor identificatienummers':
+      'Pacchetti nazionali per i numeri identificativi',
+  'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
+      'Numeri come il BSN olandese o il PESEL polacco sono specifici per paese. Tutta l\'Europa è attiva perché la maggior parte di quei numeri ha una cifra di controllo: attivarli non costa quasi nessun falso allarme. IBAN, e-mail, segreti e strisce dei passaporti sono indipendenti e vengono sempre controllati.',
+  'strafrechtelijk gegeven (verdachte)': 'dato penale (indagato)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'dato penale (denunciante o vittima)',
+  'strafrechtelijk gegeven (getuige)': 'dato penale (testimone)',
+  'diagnosecode (ICD-10)': 'codice diagnostico (ICD-10)',
+  'geneesmiddelcode (ATC)': 'codice del farmaco (ATC)',
+  'geboortedatum': 'data di nascita',
+  'locatiecoördinaten': 'coordinate di posizione',
+  'MAC-adres van een apparaat': 'indirizzo MAC di un dispositivo',
+  'IMEI van een toestel': 'IMEI di un telefono',
+  'ICCID van een simkaart': 'ICCID di una scheda SIM',
+  'IMSI van een abonnee': 'IMSI di un abbonato',
+  'sociale-mediaprofiel': 'profilo sui social media',
+  'advertentie- of apparaat-ID': 'ID pubblicitario o del dispositivo',
+  'IP-adres': 'indirizzo IP',
+  'machineleesbare zone van een paspoort of ID':
+      'zona a lettura ottica di un passaporto o documento d\'identità',
   'Sla de presentatie op om een kopie te maken.':
       'Salva la presentazione per crearne una copia.',
   ': ligt buiten de presentatie en gaat niet mee (':

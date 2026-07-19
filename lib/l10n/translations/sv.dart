@@ -1780,6 +1780,32 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'kenteken': 'registreringsnummer',
+  'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
+      'Det finns ingen nyckelordslista för särskilda kategorier av personuppgifter på det här däckets språk. Mönster med kontrollsiffra (personnummer, IBAN, pass) fungerar; ord som "diagnos" eller "misstänkt" känns inte igen.',
+  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
+      'Nyckelordslistan för särskilda kategorier av personuppgifter är mycket tunn för det här däckets språk. Räkna inte med att ord som "diagnos" eller "misstänkt" hittas.',
+  'Landpakketten voor identificatienummers':
+      'Landspaket för identifikationsnummer',
+  'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
+      'Nummer som nederländska BSN eller polska PESEL är landsspecifika. Hela Europa är på eftersom de flesta av de numren har en kontrollsiffra: att slå på dem kostar nästan inga falska larm. IBAN, e-post, hemligheter och passrader är oberoende av detta och kontrolleras alltid.',
+  'strafrechtelijk gegeven (verdachte)': 'straffrättslig uppgift (misstänkt)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'straffrättslig uppgift (anmälare eller offer)',
+  'strafrechtelijk gegeven (getuige)': 'straffrättslig uppgift (vittne)',
+  'diagnosecode (ICD-10)': 'diagnoskod (ICD-10)',
+  'geneesmiddelcode (ATC)': 'läkemedelskod (ATC)',
+  'geboortedatum': 'födelsedatum',
+  'locatiecoördinaten': 'platskoordinater',
+  'MAC-adres van een apparaat': 'MAC-adress för en enhet',
+  'IMEI van een toestel': 'IMEI för en telefon',
+  'ICCID van een simkaart': 'ICCID för ett SIM-kort',
+  'IMSI van een abonnee': 'IMSI för en abonnent',
+  'sociale-mediaprofiel': 'profil i sociala medier',
+  'advertentie- of apparaat-ID': 'annons- eller enhets-id',
+  'IP-adres': 'IP-adress',
+  'machineleesbare zone van een paspoort of ID':
+      'maskinläsbar zon i ett pass eller id-kort',
   'Sla de presentatie op om een kopie te maken.':
       'Spara presentationen för att skapa en kopia.',
   ': ligt buiten de presentatie en gaat niet mee (':

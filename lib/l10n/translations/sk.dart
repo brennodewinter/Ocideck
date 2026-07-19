@@ -1788,6 +1788,32 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'kenteken': 'evidenčné číslo',
+  'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
+      'Pre jazyk tejto prezentácie neexistuje zoznam kľúčových slov pre osobitné kategórie osobných údajov. Vzory s kontrolnou číslicou (rodné číslo, IBAN, pas) fungujú; slová ako „diagnóza“ alebo „podozrivý“ sa nerozpoznajú.',
+  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
+      'Zoznam kľúčových slov pre osobitné kategórie osobných údajov je pre jazyk tejto prezentácie veľmi tenký. Nepočítajte s tým, že sa nájdu slová ako „diagnóza“ alebo „podozrivý“.',
+  'Landpakketten voor identificatienummers':
+      'Balíky krajín pre identifikačné čísla',
+  'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
+      'Čísla ako holandské BSN alebo poľské PESEL sú viazané na krajinu. Celá Európa je zapnutá, pretože väčšina týchto čísel má kontrolnú číslicu: ich zapnutie takmer nestojí žiadne falošné hlásenia. IBAN, e-mail, tajomstvá a pasové riadky sú na tom nezávislé a kontrolujú sa vždy.',
+  'strafrechtelijk gegeven (verdachte)': 'trestnoprávny údaj (podozrivý)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'trestnoprávny údaj (oznamovateľ alebo obeť)',
+  'strafrechtelijk gegeven (getuige)': 'trestnoprávny údaj (svedok)',
+  'diagnosecode (ICD-10)': 'kód diagnózy (MKCH-10)',
+  'geneesmiddelcode (ATC)': 'kód lieku (ATC)',
+  'geboortedatum': 'dátum narodenia',
+  'locatiecoördinaten': 'súradnice miesta',
+  'MAC-adres van een apparaat': 'MAC adresa zariadenia',
+  'IMEI van een toestel': 'IMEI telefónu',
+  'ICCID van een simkaart': 'ICCID SIM karty',
+  'IMSI van een abonnee': 'IMSI účastníka',
+  'sociale-mediaprofiel': 'profil na sociálnej sieti',
+  'advertentie- of apparaat-ID': 'reklamné ID alebo ID zariadenia',
+  'IP-adres': 'IP adresa',
+  'machineleesbare zone van een paspoort of ID':
+      'strojovo čitateľná zóna pasu alebo občianskeho preukazu',
   'Sla de presentatie op om een kopie te maken.':
       'Uložte prezentáciu, aby vznikla kópia.',
   ': ligt buiten de presentatie en gaat niet mee (':

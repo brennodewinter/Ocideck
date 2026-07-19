@@ -738,6 +738,32 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'kenteken': 'number di plachi',
+  'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
+      'Pa e idioma di e presentashon aki no tin un lista di palabra klave pa datonan personal spesial. Patronchi ku sifra di kontrol (BSN, IBAN, pasaporte) ta funshoná; palabranan manera "diagnóstiko" òf "sospechoso" no ta wòrdu rekonosí.',
+  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
+      'E lista di palabra klave pa datonan personal spesial ta masha limitá pa e idioma di e presentashon aki. No konta ku palabranan manera "diagnóstiko" òf "sospechoso" lo wòrdu hañá.',
+  'Landpakketten voor identificatienummers':
+      'Paketenan di país pa number di identifikashon',
+  'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
+      'Numbernan manera BSN òf PESEL ta spesífiko pa país. Henter Europa ta prendí pasobra mayoria di e numbernan ei tin un sifra di kontrol: prende nan kasi no ta kosta señalnan falsu. IBAN, e-mail, sekretonan i strep di pasaporte ta separá i semper ta wòrdu chekiá.',
+  'strafrechtelijk gegeven (verdachte)': 'dato penal (sospechoso)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'dato penal (denunsiante òf víktima)',
+  'strafrechtelijk gegeven (getuige)': 'dato penal (testigu)',
+  'diagnosecode (ICD-10)': 'kódigo di diagnóstiko (ICD-10)',
+  'geneesmiddelcode (ATC)': 'kódigo di medisina (ATC)',
+  'geboortedatum': 'fecha di nasementu',
+  'locatiecoördinaten': 'koordenadanan di lugá',
+  'MAC-adres van een apparaat': 'adres MAC di un aparato',
+  'IMEI van een toestel': 'IMEI di un aparato',
+  'ICCID van een simkaart': 'ICCID di un karchi SIM',
+  'IMSI van een abonnee': 'IMSI di un abonado',
+  'sociale-mediaprofiel': 'profil di medio sosial',
+  'advertentie- of apparaat-ID': 'ID di reklama òf di aparato',
+  'IP-adres': 'adres IP',
+  'machineleesbare zone van een paspoort of ID':
+      'zona lesibel pa mashin di un pasaporte òf ID',
   'Sla de presentatie op om een kopie te maken.':
       'Warda e presentashon pa traha un kopia.',
   ': ligt buiten de presentatie en gaat niet mee (':

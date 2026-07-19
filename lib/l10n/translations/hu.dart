@@ -1785,6 +1785,32 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'kenteken': 'rendszám',
+  'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
+      'Ennek a bemutatónak a nyelvéhez nincs kulcsszólista a személyes adatok különleges kategóriáihoz. Az ellenőrző számjegyes minták (adóazonosító, IBAN, útlevél) működnek; az olyan szavak, mint „diagnózis” vagy „gyanúsított”, nem ismerhetők fel.',
+  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
+      'A személyes adatok különleges kategóriáihoz tartozó kulcsszólista nagyon szegényes ennek a bemutatónak a nyelvéhez. Ne számítson arra, hogy az olyan szavakat, mint „diagnózis” vagy „gyanúsított”, megtalálja.',
+  'Landpakketten voor identificatienummers':
+      'Országcsomagok azonosító számokhoz',
+  'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
+      'Az olyan számok, mint a holland BSN vagy a lengyel PESEL, országhoz kötöttek. Egész Európa be van kapcsolva, mert e számok többsége ellenőrző számjegyet tartalmaz: bekapcsolásuk szinte semmilyen téves riasztásba nem kerül. Az IBAN, e-mail, titkok és útlevélsorok ettől függetlenek, és mindig ellenőrzésre kerülnek.',
+  'strafrechtelijk gegeven (verdachte)': 'büntetőjogi adat (gyanúsított)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'büntetőjogi adat (bejelentő vagy sértett)',
+  'strafrechtelijk gegeven (getuige)': 'büntetőjogi adat (tanú)',
+  'diagnosecode (ICD-10)': 'diagnóziskód (BNO-10)',
+  'geneesmiddelcode (ATC)': 'gyógyszerkód (ATC)',
+  'geboortedatum': 'születési dátum',
+  'locatiecoördinaten': 'helymeghatározási koordináták',
+  'MAC-adres van een apparaat': 'egy eszköz MAC-címe',
+  'IMEI van een toestel': 'egy készülék IMEI-száma',
+  'ICCID van een simkaart': 'egy SIM-kártya ICCID-je',
+  'IMSI van een abonnee': 'egy előfizető IMSI-je',
+  'sociale-mediaprofiel': 'közösségimédia-profil',
+  'advertentie- of apparaat-ID': 'hirdetési vagy eszközazonosító',
+  'IP-adres': 'IP-cím',
+  'machineleesbare zone van een paspoort of ID':
+      'útlevél vagy személyazonosító igazolvány géppel olvasható zónája',
   'Sla de presentatie op om een kopie te maken.':
       'Mentse a bemutatót, hogy másolat készüljön.',
   ': ligt buiten de presentatie en gaat niet mee (':

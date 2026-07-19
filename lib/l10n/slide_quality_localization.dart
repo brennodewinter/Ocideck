@@ -437,9 +437,34 @@ String privacyRuleLabel(AppLocalizations l10n, String ruleId) {
     'contact.phone' => l10n.d('telefoonnummer'),
     'contact.address' => l10n.d('adres'),
     'contact.postcode_nl' => l10n.d('postcode'),
+    'nl.plate' => l10n.d('kenteken'),
+    // De buitenlandse postcodes dragen hun landcode in het regel-id (`de.postcode`)
+    // omdat de regiopoort daaraan hangt. Voor de gebruiker is dat één begrip: er
+    // staat een postcode. De landcode zit al in de melding via de tekst eromheen.
+    _ when ruleId.endsWith('.postcode') => l10n.d('postcode'),
     'contact.name' => l10n.d('persoonsnaam'),
+    'contact.birthdate' => l10n.d('geboortedatum'),
+    'contact.geo' => l10n.d('locatiecoördinaten'),
+    'doc.mrz' => l10n.d('machineleesbare zone van een paspoort of ID'),
+    'digital.ipv4' || 'digital.ipv6' => l10n.d('IP-adres'),
+    'digital.mac' => l10n.d('MAC-adres van een apparaat'),
+    'digital.imei' => l10n.d('IMEI van een toestel'),
+    'digital.iccid' => l10n.d('ICCID van een simkaart'),
+    'digital.imsi' => l10n.d('IMSI van een abonnee'),
+    'digital.handle' => l10n.d('sociale-mediaprofiel'),
+    'digital.deviceid' => l10n.d('advertentie- of apparaat-ID'),
     'image.face' => l10n.d('herkenbaar gezicht op een afbeelding'),
     'special.health' => l10n.d('gezondheidsgegeven'),
+    // De rol reist mee in het regel-label, want dát is de plek waar de melding
+    // hem laat zien. "Strafrechtelijk gegeven" zegt niet wie er in beeld is, en
+    // juist dat verschil is het punt van fase 14: een aangeefster is geen
+    // verdachte. Zonder herkende rol blijft het bij de neutrale formulering —
+    // liever niets zeggen dan het verkeerde.
+    'special.criminal.suspect' => l10n.d('strafrechtelijk gegeven (verdachte)'),
+    'special.criminal.reporter' => l10n.d(
+      'strafrechtelijk gegeven (aangever of slachtoffer)',
+    ),
+    'special.criminal.witness' => l10n.d('strafrechtelijk gegeven (getuige)'),
     'special.criminal' => l10n.d('strafrechtelijk gegeven'),
     'special.religion' => l10n.d('religie of levensovertuiging'),
     'special.union' => l10n.d('vakbondslidmaatschap'),
@@ -448,6 +473,8 @@ String privacyRuleLabel(AppLocalizations l10n, String ruleId) {
     'special.ethnicity' => l10n.d('etnische afkomst'),
     'special.sexlife' => l10n.d('seksuele geaardheid'),
     'special.genetic' => l10n.d('genetisch gegeven'),
+    'special.icd10' => l10n.d('diagnosecode (ICD-10)'),
+    'special.atc' => l10n.d('geneesmiddelcode (ATC)'),
     'nl.parketnummer' => l10n.d('parketnummer'),
     'bulk.table_column' => l10n.d(
       'tabel met persoonsgegevens (rijen×kolommen)',

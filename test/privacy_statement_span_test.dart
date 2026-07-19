@@ -116,7 +116,13 @@ void main() {
 
     test('het gemaskeerde voorbeeld blijft het trefwoord', () {
       // De auteur moet kunnen zien wáárom er iets weggaat. "M…e" (de hele zin
-      // gemaskeerd) zegt niets; "d…e" wijst naar het woord dat vuurde.
+      // gemaskeerd) zegt niets; het woord dat vuurde wél.
+      //
+      // Sinds fase 12 is dat "diabetes" en niet "diagnose", en dat is de winst
+      // van het gewicht uit het lexicon: beide staan in deze zin, maar
+      // "diagnose" valt in elke projectvergadering terwijl "diabetes" geen
+      // tweede betekenis heeft. De melding wijst nu het gegeven aan in plaats
+      // van het woord dat ernaar verwijst.
       final result = scanner.scan(
         deckOf([
           'j.jansen@politie.nl',
@@ -127,7 +133,7 @@ void main() {
       final health = result.findings.singleWhere(
         (f) => f.ruleId == 'special.health',
       );
-      expect(health.maskedSample, 'd…e');
+      expect(health.maskedSample, 'd…s');
     });
   });
 

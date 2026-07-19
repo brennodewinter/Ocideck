@@ -65,10 +65,14 @@ void main() {
   group('scanner', () {
     test('de stam dekt de verbogen vormen', () {
       // "wordt verdacht van" is de gebruikelijkste formulering en werd volledig
-      // gemist zolang de lijst alleen `verdachte` bevatte.
-      expect(rulesFor('Marieke wordt verdacht van diefstal'), {
-        'special.criminal',
-      });
+      // gemist zolang de lijst alleen `verdachte` bevatte. Sinds de
+      // persoonskoppelingspoort levert dezelfde zin er een tweede bevinding bij:
+      // het predicaat wijst "Marieke" aan als persoon.
+      expect(
+        rulesFor('Marieke wordt verdacht van diefstal'),
+        containsAll(<String>['special.criminal', 'contact.name']),
+      );
+      // Zonder iemand om aan te wijzen blijft het bij het trefwoord alleen.
       expect(rulesFor('Alle verdachten zijn gehoord'), {'special.criminal'});
     });
 

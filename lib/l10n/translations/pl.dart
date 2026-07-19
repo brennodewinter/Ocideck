@@ -1793,6 +1793,32 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'kenteken': 'numer rejestracyjny',
+  'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
+      'Dla języka tej prezentacji nie ma listy słów kluczowych dla szczególnych kategorii danych osobowych. Wzorce z cyfrą kontrolną (PESEL, IBAN, paszport) działają; słowa takie jak „diagnoza” czy „podejrzany” nie są rozpoznawane.',
+  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
+      'Lista słów kluczowych dla szczególnych kategorii danych osobowych jest bardzo uboga dla języka tej prezentacji. Nie licz na to, że słowa takie jak „diagnoza” czy „podejrzany” zostaną znalezione.',
+  'Landpakketten voor identificatienummers':
+      'Pakiety krajowe dla numerów identyfikacyjnych',
+  'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
+      'Numery takie jak holenderski BSN czy polski PESEL są przypisane do kraju. Cała Europa jest włączona, bo większość tych numerów ma cyfrę kontrolną: ich włączenie prawie nie kosztuje fałszywych alarmów. IBAN, e-mail, sekrety i paski paszportowe są od tego niezależne i zawsze są sprawdzane.',
+  'strafrechtelijk gegeven (verdachte)': 'dane karne (podejrzany)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'dane karne (zgłaszający lub ofiara)',
+  'strafrechtelijk gegeven (getuige)': 'dane karne (świadek)',
+  'diagnosecode (ICD-10)': 'kod rozpoznania (ICD-10)',
+  'geneesmiddelcode (ATC)': 'kod leku (ATC)',
+  'geboortedatum': 'data urodzenia',
+  'locatiecoördinaten': 'współrzędne lokalizacji',
+  'MAC-adres van een apparaat': 'adres MAC urządzenia',
+  'IMEI van een toestel': 'IMEI telefonu',
+  'ICCID van een simkaart': 'ICCID karty SIM',
+  'IMSI van een abonnee': 'IMSI abonenta',
+  'sociale-mediaprofiel': 'profil w mediach społecznościowych',
+  'advertentie- of apparaat-ID': 'identyfikator reklamowy lub urządzenia',
+  'IP-adres': 'adres IP',
+  'machineleesbare zone van een paspoort of ID':
+      'strefa odczytu maszynowego paszportu lub dowodu tożsamości',
   'Sla de presentatie op om een kopie te maken.':
       'Zapisz prezentację, aby powstała kopia.',
   ': ligt buiten de presentatie en gaat niet mee (':

@@ -1756,6 +1756,30 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'kenteken': 'Duj mI\'',
+  'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
+      'vam De\' Hol vIghaj be\' potlhqu\' nuv De\' mu\' tetlh. mI\' toblu\'ta\' (BSN, IBAN, nav) vumtaH; mu\'mey rur "rop ngu\'" ghap "pIch ghaj" luleghbe\'.',
+  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
+      'potlhqu\' nuv De\' mu\' tetlh \'oH puS vam Hol. mu\'mey rur "rop ngu\'" ghap "pIch ghaj" tu\'lu\'meH Qob.',
+  'Landpakketten voor identificatienummers': 'Sep ngeH mI\' ngaq',
+  'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
+      'BSN PESEL je Sep chaw\'. Hoch Europa chu\' \'e\' pIm mI\' toblu\'ta\' ghaj: chu\'meH mIS puS. IBAN, QIn, pegh, nav tIq je pIm \'ej reH luleghlu\'.',
+  'strafrechtelijk gegeven (verdachte)': 'ghob De\' (pIch ghaj\'a\')',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'ghob De\' (ja\'wI\' ghap Suvwn)',
+  'strafrechtelijk gegeven (getuige)': 'ghob De\' (leghwI\')',
+  'diagnosecode (ICD-10)': 'rop ngu\' mI\' (ICD-10)',
+  'geneesmiddelcode (ATC)': 'Hergh mI\' (ATC)',
+  'geboortedatum': 'boghDIS',
+  'locatiecoördinaten': 'Daq wIv mI\'',
+  'MAC-adres van een apparaat': 'jan MAC Sep',
+  'IMEI van een toestel': 'ghogh jan IMEI',
+  'ICCID van een simkaart': 'SIM nav ICCID',
+  'IMSI van een abonnee': 'je\'wI\' IMSI',
+  'sociale-mediaprofiel': 'ghom De\' HaSta',
+  'advertentie- of apparaat-ID': 'ngoDHom ghap jan ID',
+  'IP-adres': 'IP Sep',
+  'machineleesbare zone van een paspoort of ID': 'jonwI\' laDlaHbogh pIqaD nav',
   'Sla de presentatie op om een kopie te maken.':
       'velqa\' chenmoHmeH cha\'nob yIpol.',
   ': ligt buiten de presentatie en gaat niet mee (':

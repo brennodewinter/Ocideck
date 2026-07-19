@@ -17,17 +17,27 @@
 
 import '../../models/deck.dart';
 import '../../models/privacy_finding.dart';
+import '../../models/privacy_lexicon.dart';
 import '../../models/slide.dart';
 import 'privacy_allowlist.dart';
 import 'privacy_bulk_rules.dart';
 import 'privacy_checksums.dart';
+import 'privacy_context_role.dart';
 import 'privacy_contact_rules.dart';
+import 'privacy_digital_rules.dart';
+import 'privacy_document_rules.dart';
 import 'privacy_eu_rules.dart';
+import 'privacy_lexicon_data.dart';
+import 'privacy_location_rules.dart';
 import 'privacy_own_identity.dart';
+import 'privacy_regions.dart';
 import 'privacy_phone_rules.dart';
+import 'privacy_plate_rules.dart';
 import 'privacy_special_rules.dart';
 import 'privacy_structural_rules.dart';
 import 'privacy_secret_rules.dart';
+
+part 'privacy_scanner_detectors.dart';
 
 /// Eén tekstfragment van een slide, met de veldnaam waar het uit komt.
 typedef _Fragment = ({String field, int index, String text});
@@ -82,9 +92,18 @@ class PrivacyScanner {
   /// afzender.
   final OwnIdentity ownIdentity;
 
+  /// De landpakketten die aan staan (OCIWACHT §5.7, §7).
+  ///
+  /// Alleen regels met een landcode in hun id kijken hiernaar; de universele
+  /// laag — IBAN, e-mail, secrets, MRZ, digitale identificatoren — draait
+  /// altijd. Zie `privacy_regions.dart` voor waarom het standaardpakket heel
+  /// Europa is en niet alleen het thuisland.
+  final Set<String> regions;
+
   const PrivacyScanner({
     this.disabledRules = const {},
     this.ownIdentity = OwnIdentity.empty,
+    this.regions = defaultPrivacyRegions,
   });
 
   /// Scant het hele deck. Deckbrede velden (titel, auteur, trefwoorden) krijgen
@@ -135,13 +154,18 @@ class PrivacyScanner {
     ]);
   }
 
-  /// Uitgezette regels eruit — vóór de escalatie, zodat een uitgezette
-  /// identificator ook geen bijzonder gegeven meer omhoog trekt.
+  /// Uitgezette regels en uitgeschakelde landpakketten eruit.
+  ///
+  /// Vóór de escalatie, zodat een uitgezette identificator ook geen bijzonder
+  /// gegeven meer omhoog trekt. Dat geldt voor beide filters om dezelfde reden:
+  /// wie het Poolse pakket uitzet, wil geen PESEL-melding en wil er ook geen
+  /// diagnose door zien escaleren.
   List<PrivacyFinding> _enabled(List<PrivacyFinding> findings) {
-    if (disabledRules.isEmpty) return findings;
     return [
       for (final f in findings)
-        if (!disabledRules.contains(f.ruleId)) f,
+        if (!disabledRules.contains(f.ruleId) &&
+            privacyRuleInRegions(f.ruleId, regions))
+          f,
     ];
   }
 
@@ -151,13 +175,20 @@ class PrivacyScanner {
   /// gebruiker onderbreekt — een slide *óver* de AVG noemt die woorden nu eenmaal,
   /// en een privacyles die alarm slaat is binnen een dag uitgezet.
   ///
-  /// Staat er op dezelfde slide óók een gegeven dat één persoon aanwijst (BSN,
-  /// nationaal nummer, e-mailadres), dan is het bijzondere gegeven herleidbaar tot
-  /// een persoon — en dát is precies wat artikel 9 beschermt. Dán pas gaat de
-  /// melding omhoog.
+  /// Staat er op dezelfde slide óók een gegeven dat één persoon aanwijst, dan is
+  /// het bijzondere gegeven herleidbaar tot een persoon — en dát is precies wat
+  /// artikel 9 beschermt. Dán pas gaat de melding omhoog.
   ///
-  /// En dan verbreedt ze ook het **bereik**, niet alleen de zekerheid.
+  /// De poort kent daarvoor twee koppelingsroutes, en ze reiken bewust niet even
+  /// ver:
   ///
+  ///   * een **identificator** (BSN, nationaal nummer, e-mailadres) koppelt
+  ///     slidebreed — een slide is klein genoeg dat "er staat hier iemand" opgaat;
+  ///   * een **naam** koppelt alleen binnen zijn eigen mededeling. Een naam is
+  ///     geen identificator maar een toeschrijving, en die reikt tot het einde van
+  ///     de zin. Zie [nameLinkReaches] voor wat er misging zonder die grens.
+  ///
+  /// En dan verbreedt de escalatie ook het **bereik**, niet alleen de zekerheid.
   /// Zodra het bijzondere gegeven herleidbaar is tot een persoon, is het gegeven
   /// de hele mededeling — zie [statementSpan]. Daarom heeft deze functie de
   /// fragmenttekst nodig: zonder die tekst weet ze niet waar de mededeling begint
@@ -166,14 +197,37 @@ class PrivacyScanner {
     List<PrivacyFinding> findings,
     Map<String, String> fragmentTexts,
   ) {
-    if (!findings.any(identifiesAPerson)) return findings;
+    if (!findings.any((f) => f.family == PrivacyFamily.specialCategory)) {
+      return findings;
+    }
+    final slideWideLink = findings.any(identifiesAPerson);
+    final names = [
+      for (final f in findings)
+        if (namesAPerson(f)) f,
+    ];
+    if (!slideWideLink && names.isEmpty) return findings;
+
     return [
       for (final f in findings)
         if (f.family == PrivacyFamily.specialCategory)
-          _escalate(f, fragmentTexts['${f.field}:${f.fragmentIndex}'] ?? '')
+          _escalateIfLinked(f, names, slideWideLink, fragmentTexts)
         else
           f,
     ];
+  }
+
+  PrivacyFinding _escalateIfLinked(
+    PrivacyFinding finding,
+    List<PrivacyFinding> names,
+    bool slideWideLink,
+    Map<String, String> fragmentTexts,
+  ) {
+    final text =
+        fragmentTexts['${finding.field}:${finding.fragmentIndex}'] ?? '';
+    final linked =
+        slideWideLink ||
+        names.any((name) => nameLinkReaches(name, finding, text));
+    return linked ? _escalate(finding, text) : finding;
   }
 
   PrivacyFinding _escalate(PrivacyFinding finding, String text) {
@@ -197,6 +251,11 @@ class PrivacyScanner {
     _scanPhone(fragment, slideIndex, out);
     _scanIban(fragment, slideIndex, out);
     _scanBsn(fragment, slideIndex, out);
+    _scanMrz(fragment, slideIndex, out);
+    _scanDigital(fragment, slideIndex, out);
+    _scanBirthdate(fragment, slideIndex, out);
+    _scanGeo(fragment, slideIndex, out);
+    _scanPlateAndIntlPostcode(fragment, slideIndex, out);
     _scanSecrets(fragment, slideIndex, out);
     _scanEuIdentifiers(fragment, slideIndex, out);
     _scanSpecialCategories(fragment, slideIndex, out);
@@ -273,37 +332,100 @@ class PrivacyScanner {
 
   // ── contact.name ──────────────────────────────────────────────────────────
 
-  /// Een persoonsnaam achter een aanhef of een label — nooit via NER.
+  /// Een persoonsnaam die de structuur aanwijst — nooit via NER.
   ///
-  /// Blijft bewust `possible`: een naam heeft geen checksum, en een woord met een
-  /// hoofdletter is ook het begin van een zin. De melding informeert dus, en
-  /// onderbreekt niet. Bij redactie gaat de naam er wél uit, net als elke andere
-  /// bevinding. De kale naam zonder label (een titel die enkel een naam is) valt
-  /// hier buiten — daarvoor is de handmatige `[[…]]`-markering.
+  /// Vier poorten, en geen ervan kijkt naar de naam zélf: een woord met een
+  /// hoofdletter blijft een woord met een hoofdletter. Wat telt is wat eromheen
+  /// staat.
+  ///
+  ///   * een **label** (`naam:`, `contactpersoon:`) of een **aanhef** (`dhr.`,
+  ///     `Dr.`) → `likely`. De auteur schrijft er letterlijk bij dat dit een
+  ///     persoon is; dat is een structurele uitspraak, geen gok;
+  ///   * een **persoonspredicaat** ("wordt verdacht van", "meldde zich ziek") →
+  ///     `likely`. Dit is de formulering waar artikel 10 over gaat en die geen
+  ///     label draagt;
+  ///   * een **bevestigend e-mailadres** ("Marieke de Vries" naast
+  ///     `m.devries@acme.nl`) → `certain`. Twee onafhankelijke structuren die
+  ///     elkaar bevestigen is het sterkste bewijs dat deze familie kent.
+  ///
+  /// `certain` blijft daarmee voorbehouden aan gevallen met een tweede,
+  /// onafhankelijke bevestiging — precies zoals een checksum dat elders doet.
+  /// De kale naam zonder één van deze structuren valt hier buiten; daarvoor is de
+  /// handmatige `[[…]]`-markering.
   void _scanName(_Fragment fragment, int slideIndex, List<PrivacyFinding> out) {
     final text = fragment.text;
+    final seen = <int>{};
+
+    void emitName(int start, int end, PrivacyConfidence confidence) {
+      final name = text.substring(start, end);
+      if (name.isEmpty) return;
+      if (isPlaceholderPerson(name)) return;
+      if (ownIdentity.covers(name)) return;
+      if (!seen.add(start)) return;
+      out.add(
+        PrivacyFinding(
+          ruleId: 'contact.name',
+          family: PrivacyFamily.contact,
+          confidence: confidence,
+          slideIndex: slideIndex,
+          field: fragment.field,
+          fragmentIndex: fragment.index,
+          start: start,
+          end: end,
+          maskedSample: maskValue(name),
+        ),
+      );
+    }
+
+    // De e-mailbevestiging eerst: die levert de hoogste zekerheid, en `seen`
+    // zorgt dat een label eromheen hem daarna niet terugzet naar `likely`.
+    _scanEmailConfirmedNames(text, emitName);
+
     for (final pattern in [nameLabelPattern, nameSalutationPattern]) {
       for (final match in pattern.allMatches(text)) {
         final name = match.group(1);
         if (name == null || name.isEmpty) continue;
-        if (isPlaceholderPerson(name)) continue;
-        if (ownIdentity.covers(name)) continue;
         // De naam staat aan het eind van de match; daaruit volgt zijn positie
         // zonder dat we een groepsoffset nodig hebben (die Dart niet los geeft).
-        final start = match.end - name.length;
-        out.add(
-          PrivacyFinding(
-            ruleId: 'contact.name',
-            family: PrivacyFamily.contact,
-            confidence: PrivacyConfidence.possible,
-            slideIndex: slideIndex,
-            field: fragment.field,
-            fragmentIndex: fragment.index,
-            start: start,
-            end: match.end,
-            maskedSample: maskValue(name),
-          ),
-        );
+        emitName(match.end - name.length, match.end, PrivacyConfidence.likely);
+      }
+    }
+
+    // Bij het predicaat staat de naam juist vooraan: `match.start`.
+    for (final match in namePredicatePattern.allMatches(text)) {
+      final name = match.group(1);
+      if (name == null || name.isEmpty) continue;
+      emitName(
+        match.start,
+        match.start + name.length,
+        PrivacyConfidence.likely,
+      );
+    }
+  }
+
+  /// Namen die door een e-mailadres in dezelfde tekst bevestigd worden.
+  ///
+  /// Dit is de enige plek waar het kandidaat-naampatroon losgelaten wordt op
+  /// vrije tekst, en dat mag alleen omdat er meteen een harde bevestiging
+  /// tegenover staat: het lokale deel van een adres in dezelfde tekst moet de
+  /// naam terugzeggen. Zonder dat adres komt er niets uit — het patroon matcht
+  /// namelijk ook het eerste woord van elke zin.
+  void _scanEmailConfirmedNames(
+    String text,
+    void Function(int start, int end, PrivacyConfidence confidence) emit,
+  ) {
+    if (!text.contains('@')) return;
+    final emails = [
+      for (final m in _reEmail.allMatches(text))
+        if (!isPlaceholderEmail(m.group(0)!)) m.group(0)!,
+    ];
+    if (emails.isEmpty) return;
+
+    for (final candidate in nameCandidatePattern.allMatches(text)) {
+      final name = candidate.group(0)!;
+      if (!name.contains(' ')) continue; // één token bevestigt niets
+      if (emails.any((email) => emailConfirmsName(email, name))) {
+        emit(candidate.start, candidate.end, PrivacyConfidence.certain);
       }
     }
   }
@@ -371,18 +493,48 @@ class PrivacyScanner {
   ) {
     final lower = fragment.text.toLowerCase();
 
-    for (final rule in specialCategoryRules) {
-      for (final word in rule.keywords) {
-        final at = findPrivacyTerm(lower, word);
-        if (at < 0) continue;
-        _emit(
-          out,
-          _keywordFinding(fragment, slideIndex, rule.id, at, word.length),
-        );
-        // Eén melding per familie per fragment: tien synoniemen in één zin
-        // leveren geen tien meldingen op.
-        break;
+    // Eén melding per familie per fragment: tien synoniemen in één zin leveren
+    // geen tien meldingen op. Wélke van die tien de melding draagt, is sinds
+    // fase 12 niet meer "de eerste in de lijst" maar de meest specifieke — het
+    // gewicht uit het lexicon. Dat is het verschil tussen een melding die
+    // "diagnose" aanwijst (een woord dat in elke projectvergadering valt) en één
+    // die "ziekteverzuim" aanwijst, in dezelfde zin.
+    final best = <String, ({PrivacyLexiconEntry entry, int at})>{};
+    for (final entry in bundledPrivacyLexicon) {
+      final at = findPrivacyTermIn(lower, entry.term, entry.effectiveMatch);
+      if (at < 0) continue;
+      final current = best[entry.category];
+      if (current == null || entry.weight > current.entry.weight) {
+        best[entry.category] = (entry: entry, at: at);
       }
+    }
+    for (final hit in best.values) {
+      _emit(
+        out,
+        _keywordFinding(
+          fragment,
+          slideIndex,
+          hit.entry.category,
+          hit.at,
+          hit.entry.term.length,
+          // De rol komt nu uit het lexicon in plaats van uit een aanname per
+          // familie. Binnen één familie komen namelijk beide voor: "diagnose"
+          // wijst naar het gegeven, "diabetes" ís het — en dat verschil bepaalt
+          // of redactie werkelijk iets weghaalt.
+          role: hit.entry.role == PrivacyLexiconRole.value
+              ? PrivacyTermRole.value
+              : PrivacyTermRole.indicator,
+          // Alleen bij artikel 10 heeft "wiens rol is dit" betekenis. Een
+          // diagnose kent geen verdachte.
+          personRole: hit.entry.category == 'special.criminal'
+              ? personRoleFor(
+                  fragment.text,
+                  hit.at,
+                  hit.at + hit.entry.term.length,
+                )
+              : PrivacyPersonRole.unknown,
+        ),
+      );
     }
 
     for (final genetic in geneticPatterns) {
@@ -396,6 +548,27 @@ class PrivacyScanner {
             ruleId: genetic.id,
             family: PrivacyFamily.specialCategory,
             confidence: PrivacyConfidence.possible,
+          ),
+        );
+      }
+    }
+
+    // ICD-10 en ATC. Contextwoord verplicht: `A12` is ook een tabelverwijzing,
+    // een zaalnummer en een vitamine.
+    for (final rule in medicalCodePatterns) {
+      for (final match in rule.pattern.allMatches(fragment.text)) {
+        if (!_hasContextWord(fragment.text, match.start, rule.contextWords)) {
+          continue;
+        }
+        _emit(
+          out,
+          _finding(
+            fragment,
+            slideIndex,
+            match,
+            ruleId: rule.id,
+            family: PrivacyFamily.specialCategory,
+            confidence: PrivacyConfidence.likely,
           ),
         );
       }
@@ -422,8 +595,10 @@ class PrivacyScanner {
     int slideIndex,
     String ruleId,
     int start,
-    int length,
-  ) => PrivacyFinding(
+    int length, {
+    PrivacyTermRole role = PrivacyTermRole.indicator,
+    PrivacyPersonRole personRole = PrivacyPersonRole.unknown,
+  }) => PrivacyFinding(
     ruleId: ruleId,
     family: PrivacyFamily.specialCategory,
     confidence: PrivacyConfidence.possible,
@@ -433,9 +608,12 @@ class PrivacyScanner {
     start: start,
     end: start + length,
     maskedSample: maskValue(fragment.text.substring(start, start + length)),
-    // Een trefwoord wijst naar het gegeven, het ís het niet. Zie
-    // [PrivacyTermRole] voor waarom dat verschil bij redactie telt.
-    role: PrivacyTermRole.indicator,
+    // Meestal wijst een trefwoord naar het gegeven en ís het het niet — zie
+    // [PrivacyTermRole] voor waarom dat verschil bij redactie telt. Maar niet
+    // altijd: "diabetes" en "strafblad" zíjn het gegeven. Het lexicon zegt
+    // welke van de twee, en de standaard blijft de voorzichtige.
+    role: role,
+    personRole: personRole,
   );
 
   // ── Europese identificatienummers ─────────────────────────────────────────
@@ -638,6 +816,37 @@ class PrivacyScanner {
           ruleId: 'fin.iban',
           family: PrivacyFamily.financial,
           confidence: PrivacyConfidence.certain,
+        ),
+      );
+    }
+  }
+
+  // ── doc.mrz ───────────────────────────────────────────────────────────────
+
+  /// De machine-readable zone van een paspoort of identiteitskaart.
+  ///
+  /// Geen contextpoort, geen nabijheidseis, meteen `certain`: vier
+  /// controlecijfers waarvan er één over de andere heen ligt, laten gewone tekst
+  /// niet door. En de betekenis rechtvaardigt het — dit is geen los
+  /// persoonsgegeven maar een gescand identiteitsbewijs, met documentnummer,
+  /// nationaliteit, geboortedatum en vervaldatum in één blok.
+  void _scanMrz(_Fragment fragment, int slideIndex, List<PrivacyFinding> out) {
+    for (final zone in findMrzZones(fragment.text)) {
+      final value = fragment.text.substring(zone.start, zone.end);
+      if (ownIdentity.covers(value)) continue;
+      out.add(
+        PrivacyFinding(
+          ruleId: 'doc.mrz',
+          family: PrivacyFamily.identifier,
+          confidence: PrivacyConfidence.certain,
+          slideIndex: slideIndex,
+          field: fragment.field,
+          fragmentIndex: fragment.index,
+          start: zone.start,
+          end: zone.end,
+          // Alleen de eerste en laatste letter, net als elke andere waarde: een
+          // melding met de naam uit de MRZ erin verplaatst het probleem.
+          maskedSample: maskValue(value),
         ),
       );
     }

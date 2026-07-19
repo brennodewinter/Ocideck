@@ -35,7 +35,12 @@ SlideQualityIssue _issueFrom(PrivacyFinding finding) {
       fragmentIndex: finding.fragmentIndex,
     ),
     args: {
-      'rule': finding.ruleId,
+      // Bij een strafrechtelijk gegeven draagt de regelsleutel de herkende rol
+      // mee, zodat de melding "aangever of slachtoffer" kan zeggen in plaats van
+      // het neutrale "strafrechtelijk gegeven". Zonder herkende rol blijft het
+      // bij de kale sleutel — liever niets zeggen dan het verkeerde, want een
+      // aangeefster een verdachte noemen is de duurste fout die hier te maken is.
+      'rule': _ruleKeyFor(finding),
       // Gemaskeerd, nooit de volledige waarde: deze melding komt in een paneel,
       // een tooltip en straks een exportsamenvatting terecht. Een privacycontrole
       // die de gevonden BSN's in haar eigen meldingen zet, heeft het probleem
@@ -43,6 +48,17 @@ SlideQualityIssue _issueFrom(PrivacyFinding finding) {
       'sample': finding.maskedSample,
     },
   );
+}
+
+/// De regelsleutel voor de melding, met de persoonsrol erin als die herkend is.
+String _ruleKeyFor(PrivacyFinding finding) {
+  final suffix = switch (finding.personRole) {
+    PrivacyPersonRole.suspect => '.suspect',
+    PrivacyPersonRole.reporter => '.reporter',
+    PrivacyPersonRole.witness => '.witness',
+    PrivacyPersonRole.unknown => '',
+  };
+  return '${finding.ruleId}$suffix';
 }
 
 SlideQualityIssueKind _kindFor(PrivacyFamily family) {

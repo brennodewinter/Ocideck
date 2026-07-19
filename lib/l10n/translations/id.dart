@@ -1781,6 +1781,32 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'kenteken': 'nomor pelat kendaraan',
+  'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
+      'Tidak ada daftar kata kunci untuk kategori khusus data pribadi dalam bahasa dek ini. Pola dengan digit periksa (NIK, IBAN, paspor) tetap bekerja; kata seperti "diagnosis" atau "tersangka" tidak dikenali.',
+  'De trefwoordenlijst voor bijzondere persoonsgegevens is voor de taal van dit deck erg dun. Reken er niet op dat woorden als "diagnose" of "verdachte" gevonden worden.':
+      'Daftar kata kunci untuk kategori khusus data pribadi sangat tipis untuk bahasa dek ini. Jangan mengandalkan kata seperti "diagnosis" atau "tersangka" akan ditemukan.',
+  'Landpakketten voor identificatienummers':
+      'Paket negara untuk nomor identifikasi',
+  'Nummers als het BSN of het PESEL zijn landgebonden. Heel Europa staat aan omdat de meeste van die nummers een controlegetal hebben: die aanzetten kost vrijwel geen valse meldingen. IBAN, e-mail, geheimen en paspoortstroken staan hier los van en worden altijd nagekeken.':
+      'Nomor seperti BSN Belanda atau PESEL Polandia bersifat khusus per negara. Seluruh Eropa aktif karena sebagian besar nomor itu memiliki digit periksa: mengaktifkannya hampir tidak menimbulkan peringatan palsu. IBAN, email, rahasia, dan strip paspor terpisah dari ini dan selalu diperiksa.',
+  'strafrechtelijk gegeven (verdachte)': 'data pidana (tersangka)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'data pidana (pelapor atau korban)',
+  'strafrechtelijk gegeven (getuige)': 'data pidana (saksi)',
+  'diagnosecode (ICD-10)': 'kode diagnosis (ICD-10)',
+  'geneesmiddelcode (ATC)': 'kode obat (ATC)',
+  'geboortedatum': 'tanggal lahir',
+  'locatiecoördinaten': 'koordinat lokasi',
+  'MAC-adres van een apparaat': 'alamat MAC sebuah perangkat',
+  'IMEI van een toestel': 'IMEI sebuah ponsel',
+  'ICCID van een simkaart': 'ICCID sebuah kartu SIM',
+  'IMSI van een abonnee': 'IMSI seorang pelanggan',
+  'sociale-mediaprofiel': 'profil media sosial',
+  'advertentie- of apparaat-ID': 'ID iklan atau perangkat',
+  'IP-adres': 'alamat IP',
+  'machineleesbare zone van een paspoort of ID':
+      'zona terbaca mesin pada paspor atau KTP',
   'Sla de presentatie op om een kopie te maken.':
       'Simpan presentasi untuk membuat salinan.',
   ': ligt buiten de presentatie en gaat niet mee (':
