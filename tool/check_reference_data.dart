@@ -31,6 +31,27 @@
 // Bij een verouderdmelding: werk de catalogus bij, zet de nieuwe versie in
 // lib/services/reference_standards.dart én in docs/LICENSE_COMPLIANCE.md, en
 // controleer of de licentievoorwaarden van de bron zijn veranderd.
+//
+// ── --advisory: dezelfde vraag, ander moment ────────────────────────────────
+//
+// Met `--advisory` rapporteert de controle hetzelfde maar eindigt ze altijd op
+// 0. Dat is geen verzachte variant van de poort; het is een andere vraag op een
+// ander moment.
+//
+// De poort in CI vraagt: *mag dit gemerged worden?* Daar is verouderd een
+// blokkade, want anders sluipt het erin.
+//
+// De adviserende vraagt: *weet ik wat ik ga inpakken?* Die hoort vóór een
+// release-build, en daar is falen juist verkeerd. Een nieuwe upstreamversie is
+// geen defect in wat je bouwt — het is iets wat je wilt wéten voordat je een
+// artefact met een jaar houdbaarheid de deur uit doet. Zou hij de build
+// afbreken, dan wordt hij binnen twee releases overgeslagen met een vlag, en
+// dan is de zichtbaarheid weg die het hele doel was.
+//
+// Dat onderscheid gaat er echt toe doen zodra er detectielexicons bij komen
+// (OCIWACHT §13.3). Die brengen maandelijks een nieuwe upstreamversie uit, en
+// "er zijn nieuwe termen" is daar geen fout maar een verversingsbeslissing —
+// inclusief het hercontroleren van de vals-positievencorpus.
 import 'dart:convert';
 import 'dart:io';
 
@@ -46,6 +67,7 @@ class _Standard {
 }
 
 void main(List<String> args) async {
+  final advisory = args.contains('--advisory');
   if (!_sourceFile.existsSync()) {
     stderr.writeln(
       'check_reference_data: ${_sourceFile.path} niet gevonden — '
@@ -97,14 +119,26 @@ void main(List<String> args) async {
       '\ncheck_reference_data: geen enkele bron bereikbaar — '
       'controle niet uitgevoerd (netwerk?).',
     );
+    // Ook adviserend blijft dit een 2: "ik heb niet kunnen kijken" is iets
+    // anders dan "er is niets nieuws", en dat verschil mag nooit verdwijnen.
     exit(2);
   }
   if (outdated > 0) {
+    final where =
+        'Werk de catalogus bij, pas de versie aan in '
+        '${_sourceFile.path} én docs/LICENSE_COMPLIANCE.md, en controleer of de '
+        'licentie van de bron is gewijzigd.';
+    if (advisory) {
+      stdout.writeln(
+        '\ncheck_reference_data: $outdated standaard(en) hebben een nieuwere '
+        'upstreamversie.\n$where\n'
+        'Adviserend: dit breekt de build niet. Weeg zelf of deze release met de '
+        'huidige bundel de deur uit mag.',
+      );
+      exit(0);
+    }
     stderr.writeln(
-      '\ncheck_reference_data: $outdated standaard(en) verouderd.\n'
-      'Werk de catalogus bij, pas de versie aan in '
-      '${_sourceFile.path} én docs/LICENSE_COMPLIANCE.md, en controleer of de '
-      'licentie van de bron is gewijzigd.',
+      '\ncheck_reference_data: $outdated standaard(en) verouderd.\n$where',
     );
     exit(1);
   }

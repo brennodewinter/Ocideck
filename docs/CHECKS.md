@@ -79,6 +79,7 @@ remote, the number you see locally is the number that gates the push.
 | [`make deps-check`](#make-deps-check) | Vendored export JS: integrity + CVEs | — | ✅ | ✅ |
 | [`make check-web`](#make-check-web) | Web bundle keeps its hardening | — | ✅ | ✅ |
 | [`make deps-outdated`](#make-deps-outdated-advisory) | Dependency freshness (advisory) | — | ✅ | — |
+| [`make catalogs-outdated`](#make-catalogs-outdated-advisory) | Bundled reference data vs upstream (advisory, pre-release) | — | — | — |
 | [`make trivy`](#make-trivy-advisory) | Dart-dep CVEs + committed secrets (advisory) | — | — | ✅ (advisory) |
 | [`make check-actions`](#make-check-actions-advisory) | Pinned CI Actions vs their latest release (advisory) | — | — | — |
 
@@ -291,6 +292,24 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Failure means:** a bundle drifted from the manifest (re-pin and refresh the
   manifest), or a pinned version now has a known vulnerability (upgrade it and
   refresh the manifest). This is the safe path to upgrade those bundles.
+
+### `make catalogs-outdated` (advisory)
+- **Runs:** `dart run tool/check_reference_data.dart --advisory`
+- **Covers:** dezelfde bronnen als de blokkerende variant in `make deps-check` —
+  WSTG, MASTG, MASWE, CWE, MIAUW en CVSS — maar dan zonder de build te breken.
+- **Waarom apart:** het zijn twee verschillende vragen op twee verschillende
+  momenten. De poort in `deps-check` vraagt *mag dit gemerged worden?*, en daar
+  is verouderd terecht een blokkade. Dit doel vraagt *weet ik wat ik ga
+  inpakken?*, en dat hoort vóór een release-build. Daar zou falen juist verkeerd
+  zijn: een nieuwe upstreamversie is geen defect in wat je bouwt, en een controle
+  die de release afbreekt wordt binnen twee releases weggevlagd — precies de
+  zichtbaarheid kwijt die het doel was.
+- **Draait vanzelf** als eerste stap van `scripts/build_release.sh`
+  (`make build-release`), vóór de builds, zodat de melding niet onder twintig
+  minuten compileruitvoer verdwijnt.
+- **Exit 2 (geen netwerk) breekt de release niet**, maar zegt wel dát er niet
+  gekeken is. Stilte mag hier niet als goedkeuring lezen.
+- **Daarna:** `make refresh-catalogs` haalt de nieuwe versies op.
 
 ### `make check-web`
 - **Runs:** `make build-web` then `dart run tool/check_web_hardening.dart`.
