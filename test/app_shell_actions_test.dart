@@ -210,6 +210,35 @@ void main() {
     expect(menuItemIcon(Icons.manage_search), findsOneWidget);
   });
 
+  // De hulpmiddelenbijlage is MIAUW-vastlegging (EIS 4.8.2). Zonder de
+  // informatieveiligheidsmodule is er nooit een ingevulde lijst, dus hoort het
+  // item niet in het menu van een gewone presentatie.
+  testWidgets('the tools appendix stays hidden while the module is off', (
+    tester,
+  ) async {
+    await pumpShell(tester);
+
+    await tester.tap(appBarIcon(Icons.more_vert));
+    await tester.pumpAndSettle();
+
+    expect(menuItemIcon(Icons.handyman_outlined), findsNothing);
+  });
+
+  testWidgets('the tools appendix appears once the module is on', (
+    tester,
+  ) async {
+    SharedPreferences.setMockInitialValues({
+      'app_consent_accepted': true,
+      'secModuleEnabled': true,
+    });
+    await pumpShell(tester);
+
+    await tester.tap(appBarIcon(Icons.more_vert));
+    await tester.pumpAndSettle();
+
+    expect(menuItemIcon(Icons.handyman_outlined), findsOneWidget);
+  });
+
   testWidgets('the overflow menu opens the full-deck preview', (tester) async {
     await pumpShell(tester);
 

@@ -135,12 +135,16 @@ extension _MainLayoutMenu on _MainLayoutState {
         l10n.t('fullDeckPreview'),
       ),
       // Hoort bij "invoegen in dit deck", niet bij git: het stond daar alleen
-      // omdat het er ooit tussen is geschoven.
-      _menuItem(
-        'tools_appendix',
-        Icons.handyman_outlined,
-        l10n.d('Bijlage hulpmiddelen invoegen…'),
-      ),
+      // omdat het er ooit tussen is geschoven. De bijlage is MIAUW-vastlegging
+      // (EIS 4.8.2), dus alleen met de informatieveiligheidsmodule aan — zonder
+      // die module is er ook nooit een ingevulde hulpmiddelenlijst en liep dit
+      // item altijd op de "niets in te voegen"-melding vast.
+      if (ref.read(secModuleRevealProvider))
+        _menuItem(
+          'tools_appendix',
+          Icons.handyman_outlined,
+          l10n.d('Bijlage hulpmiddelen invoegen…'),
+        ),
       const PopupMenuDivider(),
       // Documentintegriteit (§8 A1): afronden is bewust eenrichtingsverkeer, dus
       // het item verdwijnt zodra het deck verzegeld is.

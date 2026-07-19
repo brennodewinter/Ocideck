@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/deck.dart';
 import '../../l10n/app_localizations.dart';
+import '../../state/sec_module_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../models/used_tool.dart';
 import '../../services/reference_standards.dart';
@@ -331,13 +332,31 @@ class _PresentationInfoDialogState
           'Trefwoorden',
           'Komma-gescheiden, bijv. kwartaal, cijfers, 2026',
         ),
-        const SizedBox(height: 12),
-        _standardsField(),
-        const SizedBox(height: 12),
-        _toolsField(),
+        // Standaarden en hulpmiddelen zijn MIAUW-vastlegging (EIS 4.3.2/4.8.2).
+        // Bij een gewone presentatie zeggen ze niets, dus ze verschijnen pas met
+        // de informatieveiligheidsmodule aan — dezelfde lijn als de rest van de
+        // module: weglaten, niet grijs maken.
+        //
+        // Uitzondering: een deck dat de velden al gevuld heeft toont ze hoe dan
+        // ook. De waarden overleven een opslagronde sowieso (de controllers
+        // worden in initState gevuld en in _save weer uitgelezen), maar
+        // ingevulde gegevens onzichtbaar maken leest als dataverlies.
+        if (_showMiauwFields) ...[
+          const SizedBox(height: 12),
+          _standardsField(),
+          const SizedBox(height: 12),
+          _toolsField(),
+        ],
       ],
     );
   }
+
+  /// Of de MIAUW-vastleggingsvelden in beeld horen: module aan, of dit deck
+  /// draagt de gegevens al.
+  bool get _showMiauwFields =>
+      ref.watch(secModuleRevealProvider) ||
+      widget.deck.standardsUsed.isNotEmpty ||
+      widget.deck.toolsUsed.isNotEmpty;
 
   /// De standaarden waartegen is getoetst (MIAUW EIS 4.3.2).
   ///
