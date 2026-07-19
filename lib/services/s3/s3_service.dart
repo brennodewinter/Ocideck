@@ -196,7 +196,7 @@ class S3Service {
     return HttpClient()
       ..connectionTimeout = const Duration(seconds: 15)
       ..connectionFactory = (u, proxyHost, proxyPort) =>
-          Socket.startConnect(pinned, u.port);
+          NetGuard.connectPinned(pinned, u);
   }
 
   /// De `Host`-header zoals `HttpClient` hem zal versturen. Moet exact zo mee

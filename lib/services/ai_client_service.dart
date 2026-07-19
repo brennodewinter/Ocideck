@@ -64,7 +64,7 @@ class PinnedAiHttpTransport implements AiHttpTransport {
     final client = HttpClient()
       ..connectionTimeout = const Duration(seconds: 15)
       ..connectionFactory = (u, proxyHost, proxyPort) =>
-          Socket.startConnect(pinned, u.port);
+          NetGuard.connectPinned(pinned, u);
     try {
       final request = await client.openUrl(method, url);
       request.followRedirects = false; // a 3xx must not bypass the host check

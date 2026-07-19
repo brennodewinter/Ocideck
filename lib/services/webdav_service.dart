@@ -208,7 +208,7 @@ class WebdavService {
     return HttpClient()
       ..connectionTimeout = const Duration(seconds: 15)
       ..connectionFactory = (u, proxyHost, proxyPort) =>
-          Socket.startConnect(pinned, u.port);
+          NetGuard.connectPinned(pinned, u);
   }
 
   Future<HttpClientRequest> _openRequest(

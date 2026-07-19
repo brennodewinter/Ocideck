@@ -239,4 +239,44 @@ class NetGuard {
     });
     return future;
   }
+
+  /// Verbind naar het gecontroleerde [pinned] adres en zet er, wanneer [uri]
+  /// `https` is, zélf TLS overheen — gevalideerd tegen de hóstnaam uit [uri],
+  /// niet tegen het IP.
+  ///
+  /// Dit hoort bij het pinnen en niet ernaast, want het pinnen is precies wat
+  /// het nodig maakte. `HttpClient.connectionFactory` neemt letterlijk over wat
+  /// je teruggeeft: zet je hem, dan is de fabriek volledig verantwoordelijk
+  /// voor TLS. Het standaardpad van de SDK gebruikt `SecureSocket.startConnect`
+  /// met de `badCertificateCallback`; het fabriekspad doet dat niet.
+  ///
+  /// Een kale `Socket` teruggeven betekende dus: geen TLS. Een `https`-verzoek
+  /// ging als platte HTTP de lijn op, inclusief de `Authorization`-header, en
+  /// de server antwoordde met "the plain HTTP request was sent to HTTPS port".
+  /// De gegevens lekten én de verbinding werkte niet.
+  ///
+  /// Het pinnen zelf blijft overeind: we verbinden nog steeds naar het adres
+  /// dat [resolveConfigured] goedkeurde, dus een DNS-rebind kan de socket
+  /// hierna niet meer verzetten. Alleen de naamcontrole van TLS gaat over de
+  /// hostnaam — dat hóórt ook, anders zou elk certificaat op een IP moeten
+  /// staan.
+  ///
+  /// [onBadCertificate] is de enige plek waar een afgewezen certificaat alsnog
+  /// door mag. `null` betekent: geen enkele uitzondering.
+  static Future<ConnectionTask<Socket>> connectPinned(
+    InternetAddress pinned,
+    Uri uri, {
+    bool Function(X509Certificate)? onBadCertificate,
+  }) async {
+    final task = await Socket.startConnect(pinned, uri.port);
+    if (uri.scheme.toLowerCase() != 'https') return task;
+    final secured = task.socket.then(
+      (socket) => SecureSocket.secure(
+        socket,
+        host: uri.host,
+        onBadCertificate: onBadCertificate,
+      ),
+    );
+    return ConnectionTask.fromSocket(secured, task.cancel);
+  }
 }

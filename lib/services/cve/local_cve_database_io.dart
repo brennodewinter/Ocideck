@@ -94,7 +94,7 @@ class GithubBulkTransport implements CveBulkTransport {
     // Zet de socket vast op het gekeurde adres, zodat een DNS-rebind tussen de
     // controle en de verbinding ons niet alsnog naar binnen stuurt.
     client.connectionFactory = (u, proxyHost, proxyPort) =>
-        Socket.startConnect(pinned, u.port);
+        NetGuard.connectPinned(pinned, u);
 
     final request = await client.getUrl(url);
     request.headers.set(HttpHeaders.userAgentHeader, _userAgent);
