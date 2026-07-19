@@ -47,6 +47,53 @@ void main() {
       expect(find.text('•'), findsWidgets);
     });
 
+    testWidgets('renders a GFM task list as boxes, not literal brackets', (
+      tester,
+    ) async {
+      await pump(
+        tester,
+        const DocumentMarkdownView('- [ ] open item\n- [x] done item\n'),
+      );
+      // The marker is stripped from the text — it used to read "• [ ] open".
+      expect(find.textContaining('[ ]'), findsNothing);
+      expect(find.textContaining('[x]'), findsNothing);
+      expect(find.text('•'), findsNothing);
+      expect(find.textContaining('open item'), findsOneWidget);
+      expect(find.textContaining('done item'), findsOneWidget);
+      // One empty box and one ticked box.
+      expect(find.byIcon(Icons.check_box_outline_blank), findsOneWidget);
+      expect(find.byIcon(Icons.check_box_outlined), findsOneWidget);
+    });
+
+    testWidgets('a task item reports its tick state to screen readers', (
+      tester,
+    ) async {
+      await pump(
+        tester,
+        const DocumentMarkdownView('- [ ] open item\n- [x] done item\n'),
+      );
+      // Only the task rows carry a checked state; plain rows leave it null, so
+      // a screen reader does not announce ordinary bullets as checkboxes.
+      final states = tester
+          .widgetList<Semantics>(find.byType(Semantics))
+          .map((s) => s.properties.checked)
+          .whereType<bool>()
+          .toList();
+      expect(states, unorderedEquals([true, false]));
+    });
+
+    testWidgets('a plain bullet is not mistaken for a task item', (
+      tester,
+    ) async {
+      // A line that merely starts with a bracket is prose, not a checklist.
+      await pump(
+        tester,
+        const DocumentMarkdownView('- [link](https://example.org) matters\n'),
+      );
+      expect(find.byIcon(Icons.check_box_outline_blank), findsNothing);
+      expect(find.text('•'), findsOneWidget);
+    });
+
     testWidgets('renders a GFM table with header and cells', (tester) async {
       await pump(
         tester,

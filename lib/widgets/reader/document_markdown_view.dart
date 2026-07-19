@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import '../slides/inline_markdown.dart';
 
 /// Renders a full Markdown document as widgets — headings, paragraphs, bullet
-/// and numbered lists, block quotes, fenced code, horizontal rules and GFM pipe
-/// tables. Inline formatting (bold/italic/code/links) reuses the slide
-/// renderer's [InlineMarkdownText], which manages its own link recognisers.
+/// and numbered lists, GFM task lists, block quotes, fenced code, horizontal
+/// rules and GFM pipe tables. Inline formatting (bold/italic/code/links) reuses
+/// the slide renderer's [InlineMarkdownText], which manages its own link
+/// recognisers.
 ///
 /// This is a pragmatic reader, not a full CommonMark engine: it covers what the
 /// bundled documentation uses. Anything it doesn't recognise falls back to a
@@ -186,27 +187,53 @@ class DocumentMarkdownView extends StatelessWidget {
   }
 
   Widget _listRow(_Theme t, _ListLine it) {
-    final marker = it.ordered ? '${it.number}.' : '•';
-    return Padding(
+    final row = Padding(
       padding: EdgeInsets.only(left: 4 + it.depth * 20.0, bottom: 4),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            width: it.ordered ? 24 : 18,
-            child: Text(
-              marker,
-              style: t.body.copyWith(
-                fontWeight: it.ordered ? FontWeight.w600 : FontWeight.w400,
-                color: it.ordered ? t.body.color : t.marker,
-              ),
-            ),
-          ),
+          it.checked == null
+              ? _bulletMarker(t, it)
+              : _checkMarker(t, checked: it.checked!),
           Expanded(child: _inline(it.text, t.body, t)),
         ],
       ),
     );
+    if (it.checked == null) return row;
+    // Announce the box as a checkbox with its state, so a screen reader says
+    // "checked"/"unchecked" instead of reading out a decorative icon. Using the
+    // semantics flag rather than a label keeps this translated by the platform,
+    // which is the only way it stays right in all thirty languages.
+    return Semantics(checked: it.checked, child: row);
   }
+
+  Widget _bulletMarker(_Theme t, _ListLine it) => SizedBox(
+    width: it.ordered ? 24 : 18,
+    child: Text(
+      it.ordered ? '${it.number}.' : '•',
+      style: t.body.copyWith(
+        fontWeight: it.ordered ? FontWeight.w600 : FontWeight.w400,
+        color: it.ordered ? t.body.color : t.marker,
+      ),
+    ),
+  );
+
+  /// The box of a GFM task item. Read-only on purpose: this renders bundled
+  /// documentation shipped as an asset, so a tick here would have nowhere to be
+  /// written back to. It reports progress, it does not record it.
+  Widget _checkMarker(_Theme t, {required bool checked}) => SizedBox(
+    width: 24,
+    child: Padding(
+      // Nudge the box onto the text baseline; the glyph sits higher than the
+      // cap height of the line it labels.
+      padding: const EdgeInsets.only(top: 2),
+      child: Icon(
+        checked ? Icons.check_box_outlined : Icons.check_box_outline_blank,
+        size: 17,
+        color: checked ? t.marker : t.checkboxEmpty,
+      ),
+    ),
+  );
 
   Widget _blockQuote(_Theme t, String text) => Container(
     margin: const EdgeInsets.only(bottom: 12),
@@ -376,13 +403,26 @@ class DocumentMarkdownView extends StatelessWidget {
     final indent = m.group(1)!.length;
     final bullet = m.group(2)!;
     final ordered = bullet.endsWith('.');
+    var text = m.group(3)!;
+
+    // GFM task item: the content starts with `[ ]` or `[x]`. Strip the marker
+    // so it becomes a rendered box instead of literal brackets in the text.
+    // Without this the reader showed documentation checklists as "• [ ] item".
+    bool? checked;
+    final task = RegExp(r'^\[([ xX])\]\s+(.*)$').firstMatch(text);
+    if (task != null) {
+      checked = task.group(1)! != ' ';
+      text = task.group(2)!;
+    }
+
     return _ListLine(
-      text: m.group(3)!,
+      text: text,
       ordered: ordered,
       number: ordered
           ? int.tryParse(bullet.substring(0, bullet.length - 1)) ?? 1
           : 0,
       depth: indent ~/ 2,
+      checked: checked,
     );
   }
 
@@ -406,12 +446,18 @@ class _ListLine {
     required this.ordered,
     required this.number,
     required this.depth,
+    this.checked,
   });
 
   final String text;
   final bool ordered;
   final int number;
   final int depth;
+
+  /// Tick state of a GFM task item, or null when this is a plain list item.
+  /// Null and `false` mean different things here: "not a checklist at all"
+  /// versus "a box that is not ticked".
+  final bool? checked;
 }
 
 /// Resolved, theme-derived colours and the base text style, computed once so
@@ -425,6 +471,9 @@ class _Theme {
       ),
       heading = theme.colorScheme.onSurface,
       marker = theme.colorScheme.primary,
+      // Dimmer than the ticked box: an empty box is the absence of a fact, and
+      // should not pull the eye harder than the items that are done.
+      checkboxEmpty = theme.colorScheme.onSurfaceVariant,
       link = theme.colorScheme.primary,
       border = theme.colorScheme.outlineVariant,
       quoteBg = theme.colorScheme.surfaceContainerHighest.withValues(
@@ -441,6 +490,7 @@ class _Theme {
   final TextStyle body;
   final Color heading;
   final Color marker;
+  final Color checkboxEmpty;
   final Color link;
   final Color border;
   final Color quoteBg;
