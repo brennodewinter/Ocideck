@@ -592,12 +592,112 @@ final List<PrivacyLexiconEntry> _biometricTerms = [
   _e('biometric', 'special.biometric', 'en', weight: 4),
 ];
 
+/// Nederlandse persoons- en bijvoeglijke vormen (fase 13b, aanvulling).
+///
+/// EuroVoc levert uitsluitend zelfstandige naamwoorden op `-isme`:
+/// `katholicisme`, `socialisme`, `jodendom`. Dat is niet hoe mensen over
+/// personen schrijven. "Betrokkene is katholiek opgevoed" en "hij is moslim"
+/// werden daardoor volledig gemist, en dat zijn nu juist de formuleringen waarin
+/// een dossier iemands geloof of overtuiging vastlegt.
+///
+/// Nagemeten: **geen enkele van de 27 EuroVoc-talen** draagt deze vormen, ook
+/// niet als `altLabel`. Het gat is dus universeel en niet Nederlands; wat hier
+/// staat is de Nederlandse invulling ervan. Zie §13.3 voor wat de andere talen
+/// nodig hebben.
+///
+/// ── Het selectieprincipe ────────────────────────────────────────────────────
+///
+/// Hetzelfde als bij de EuroVoc-uitsluitingen: **beschrijft de term een persoon
+/// of een instelling?** `christen` beschrijft iemand en gaat mee; `christelijk`
+/// beschrijft in Nederlands zakelijk taalgebruik overwegend een school, een
+/// feestdag of een omroep, en gaat er niet in. Om dezelfde reden ontbreken
+/// `kerkelijk` (een gemeente) en `praktiserend` (dat alleen in combinatie iets
+/// betekent — "praktiserend jurist" evengoed als "praktiserend katholiek").
+///
+/// De meeste staan op `prefix`, want Nederlandse verbuiging is suffigerend:
+/// `katholiek` dekt `katholieke`, `moslim` dekt `moslims` en `moslima`.
+final List<PrivacyLexiconEntry> _dutchBeliefForms = [
+  // Religie — draait standaard aan, dus hier is de selectie het strengst.
+  _v('katholiek', 'special.religion'),
+  _v('rooms-katholiek', 'special.religion'),
+  _v('protestants', 'special.religion'),
+  _v('gereformeerd', 'special.religion'),
+  _v('hervormd', 'special.religion'),
+  _v('christen', 'special.religion'),
+  _v('moslim', 'special.religion'),
+  _v('islamitisch', 'special.religion'),
+  _v('soenniet', 'special.religion'),
+  _v('soennitisch', 'special.religion'),
+  _v('sjiiet', 'special.religion'),
+  _v('sjiitisch', 'special.religion'),
+  _v('joods', 'special.religion'),
+  _v('jodin', 'special.religion'),
+  _v('boeddhist', 'special.religion'),
+  _v('hindoe', 'special.religion'),
+  _v('atheïst', 'special.religion'),
+  _v('gelovig', 'special.religion'),
+  _v('ongelovig', 'special.religion'),
+  _v('bekeerling', 'special.religion'),
+  // `orthodox` als heel woord: de verbogen vorm `orthodoxe` wordt ook in
+  // "orthodoxe aanpak" gebruikt, en dat is geen geloofsovertuiging.
+  _v('orthodox', 'special.religion', match: PrivacyTermMatch.word),
+
+  // Politiek — staat standaard uit (zie defaultDisabledPrivacyRules), dus de
+  // lat mag lager. `liberaal` en `conservatief` zijn in gewone tekst
+  // dubbelzinnig, maar wie deze categorie aanzet wil juist die woorden.
+  _v('communist', 'special.politics'),
+  _v('socialist', 'special.politics'),
+  _v('sociaaldemocraat', 'special.politics'),
+  // Twee stammen per woord, en dat is geen slordigheid. Nederlandse verbuiging
+  // is grotendeels suffigerend — `katholiek` dekt `katholieke` — maar niet
+  // overal: bij `conservatief` wordt de f een v, bij `liberaal` verkort de aa.
+  // Voorvoegselmatching mist die vormen stilzwijgend, en juist de verbogen vorm
+  // is de gebruikelijke ("de liberale kandidaat", "een conservatieve stroming").
+  _v('liberaal', 'special.politics'),
+  _v('liberale', 'special.politics'),
+  _v('conservatief', 'special.politics'),
+  _v('conservatiev', 'special.politics'),
+  _v('nationalist', 'special.politics'),
+  _v('fascist', 'special.politics'),
+  _v('anarchist', 'special.politics'),
+  _v('populist', 'special.politics'),
+  _v('marxist', 'special.politics'),
+  _v('maoïst', 'special.politics'),
+  _v('royalist', 'special.politics'),
+  _v('rechts-extremist', 'special.politics'),
+  _v('links-extremist', 'special.politics'),
+
+  // Vakbond — alleen de vormen die een róól van een persoon benoemen.
+  _v('vakbondsbestuurder', 'special.union'),
+  _v('vakbondsvertegenwoordiger', 'special.union'),
+
+  // Etniciteit — staat standaard uit. Bewust kort: dit is de categorie met het
+  // hoogste vals-positievenrisico én de grootste schade bij een misser.
+  _v('Sinti', 'special.ethnicity', match: PrivacyTermMatch.word),
+  _v('woonwagenbewoner', 'special.ethnicity'),
+];
+
+/// Een Nederlandse persoonsvorm: het gegeven zélf, dus rol `value`.
+PrivacyLexiconEntry _v(
+  String term,
+  String category, {
+  PrivacyTermMatch match = PrivacyTermMatch.prefix,
+}) => PrivacyLexiconEntry(
+  term: term.toLowerCase(),
+  category: category,
+  lang: 'nl',
+  match: match,
+  weight: 4,
+  role: PrivacyLexiconRole.value,
+);
+
 /// Alle gebundelde entries, in één lijst.
 final List<PrivacyLexiconEntry> bundledPrivacyLexicon = [
   ..._healthTerms,
   ..._criminalTerms,
   ..._beliefTerms,
   ..._biometricTerms,
+  ..._dutchBeliefForms,
 ];
 
 /// De talen waarvoor er überhaupt trefwoorden zijn.
