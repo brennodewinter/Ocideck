@@ -301,15 +301,20 @@ bool isValidCaRamq(String raw) {
 
 /// OHIP (Ontario): tien cijfers, optioneel gevolgd door twee versieletters.
 ///
-/// **Eerlijk over de zekerheid.** §15.3 gaf hier een mod-10 op. Die is publiek
-/// niet hard te krijgen — de gangbare bewering is dat het tiende cijfer een
-/// Luhn-controle is, maar dat heb ik niet tegen een gezaghebbende bron kunnen
-/// leggen. De test hieronder toetst daarom dat de *implementatie* discrimineert
-/// (precies één controlecijfer past), niet dat Luhn het juiste algoritme ís.
+/// **Dit blijft bewust op `likely`, en dat is een besluit — geen losse eindje.**
+/// De gangbare bewering is dat het tiende cijfer een Luhn-controle is, maar er
+/// is geen gezaghebbende bron voor gevonden en die is er ook niet gekomen: bij
+/// navraag bleek hij niet te bestaan. Het blijft dus bij Luhn plus een
+/// contextpoort.
 ///
-/// Zolang dat open staat blijft de regel op `likely` met een contextpoort. Een
-/// verkeerd gekozen algoritme kan dan hooguit treffers missen, en nooit een
-/// valse `certain` opleveren — de fout die je wél wilt maken.
+/// Zoek er geen betere bron meer bij. Wat telt is de richting van de fout: met
+/// de contextpoort kan een verkeerd gekozen algoritme hooguit treffers *missen*,
+/// en nooit een valse `certain` opleveren. Dat is de fout die je wilt maken, en
+/// hem naar `certain` tillen zou die richting omdraaien op grond van een
+/// bewering die niemand kan staven.
+///
+/// De test toetst daarom dat de *implementatie* discrimineert — precies één
+/// controlecijfer past — en niet dat Luhn het juiste algoritme ís.
 bool isValidCaOhip(String raw) {
   final d = _digits(raw);
   if (d.length != 10) return false;

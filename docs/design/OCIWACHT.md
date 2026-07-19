@@ -2097,7 +2097,7 @@ lijst structureel mist:
 | `fin.us_routing` | ABA routing number | mod-10. Universele financiële familie, dus géén regiopoort | zeker |
 | `ca.sin` | Social Insurance Number | Luhn, niet beginnend met 0 of 8, **plus contextpoort** (zie §15.4). Testwaarde `046454286` uit | waarschijnlijk |
 | `ca.ramq` | RAMQ (Québec) | 4 letters + 8 cijfers, codeert geboortedatum en geslacht. Net als de Franse NIR daarmee bijna zelf al een bijzonder gegeven | zeker |
-| `ca.ohip` | OHIP (Ontario) | 10 cijfers + versieletters. De mod-10 is **niet** tegen een gezaghebbende bron te leggen — de bewering dat het tiende cijfer een Luhn is circuleert wel. Geïmplementeerd als Luhn, mét contextpoort, zodat een verkeerde keuze treffers mist in plaats van valse zekerheid geeft. Art. 9-gebied | waarschijnlijk |
+| `ca.ohip` | OHIP (Ontario) | 10 cijfers + versieletters. **Besluit (20-07-2026):** blijft `waarschijnlijk`. Er is geen gezaghebbende bron voor de mod-10 — de bewering dat het tiende cijfer een Luhn is circuleert wel, maar navraag leverde niets op. Geïmplementeerd als Luhn mét contextpoort, zodat een verkeerde keuze treffers mist in plaats van valse zekerheid geeft. Niet heropenen zonder bron. Art. 9-gebied | waarschijnlijk |
 | `ca.bn` | Business Number | 9 cijfers + programmacode, Luhn. Zelfde eenmanszaak-redenering als `us.ein` | mogelijk |
 
 Plus één uitbreiding die géén regel is maar lexicondata: de OMB- en
