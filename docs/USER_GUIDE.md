@@ -498,7 +498,7 @@ Two display options sit above the event list:
   onto it one after another when the slide appears; *Step by step* reveals one more event on each click while
   presenting (and stays in sync on the audience window); *No animation* shows
   everything at once. With *Draw in on open* selected, an **Animation speed**
-  slider sets how long the draw-in takes (from ~0.4 s up to ~6 s).
+  slider sets how long the draw-in takes (from ~0.4 s up to 30 s).
 
 The timeline picks up the active style profile (accent colour, fonts and slide
 background), so it matches the rest of the deck. Events are stored as an ordinary
@@ -551,7 +551,7 @@ were looking for something unusual.
 
 | | |
 | --- | --- |
-| **Download** | ~550 MB (the full daily archive) |
+| **Download** | ~500 MB (the full daily archive) |
 | **Disk, during the build** | ~1.5 GB temporarily (it is a zip inside a zip) |
 | **Disk, afterwards** | a few hundred MB (the index; the archives are deleted) |
 | **Time** | ten to thirty minutes, depending on your connection and machine |
@@ -666,7 +666,7 @@ most restrictive: none < CLEAR < GREEN < AMBER < AMBER+STRICT < RED.
 
 Classifying a deck is **optional** by default. An organisation can tighten that
 with the **classification enforcement** settings under *Settings → General →
-Accessibility* (see *Exporting* below).
+Classification enforcement* (see *Exporting* below).
 
 ### Visual marking (WYSIWYG)
 
@@ -684,7 +684,7 @@ level and that slide's own level. On top of that:
   when the logo sits bottom-right), so the footer text can step aside.
 - **Watermark** (optional, off by default) — a faint diagonal repeat of the TLP
   label and the deck's **organisation** field across the slide. Enable it under
-  *Settings → General → Accessibility → Classification watermark*.
+  *Settings → General → Classification enforcement → Classification watermark*.
 
 Slides with no classification show none of the above. Per-slide TLP that is
 stricter than the deck still contributes to the effective marking on slides that
@@ -991,14 +991,15 @@ nag. The clock bar shows four things:
   per slide across the whole run, even if you jump back and forth.
 - **Clock** — the wall-clock time.
 
-Set the target time up front under *Settings → General → Presentation*, or change
+Set the target time up front under *Presentation properties → Target time*, or change
 it live while presenting with **`K`** (type the minutes and seconds as `MMSS`,
 `Enter` to confirm, `0` to switch the countdown off). **`R`** resets the run —
 elapsed time and per-slide timings — while keeping the target.
 
-When you leave the presenter after a run of at least ten seconds, a **summary**
-shows the total time against the target and the time spent per slide, with a
-button to copy the times to the clipboard. This is **session-only**: nothing is
+When you leave the presenter, a **summary** shows the total time against the
+target and the time spent per slide, with a button to copy the times to the
+clipboard. It can be switched off per deck, for when you are presenting for real
+rather than rehearsing. This is **session-only**: nothing is
 written to disk or into the `.md` file.
 
 ### Two screens (beamer + laptop)
@@ -1388,7 +1389,8 @@ so the switch is the whole story.
 
 **What you actually have.** Once the module is on, the card lists **what is
 available locally, in counts** — how many CWE weaknesses, WSTG test cases, MIAUW
-requirements, CVSS score-table rows and finding templates the app can serve you,
+requirements, MASTG test cases, MASWE mobile weaknesses, CVSS score-table rows
+and finding templates the app can serve you,
 with the upstream standard each one follows. The counts are taken from the
 catalogues the app *actually* queries, so an empty list would show up as empty
 rather than hiding behind a reassuring tick.
@@ -1438,7 +1440,7 @@ else.
   finding an id first — evidence links to the finding by that id.
 - **Uitvoering testen conform standaard** (the checklist slide type; the file
   format keeps the `checklist` class) — a standard-driven test list with a MIAUW
-  tri-state per item
+  status per item, one of four
   (*Getoetst* / *Afwijking* / *Niet toetsbaar* / *Niet getoetst*) and an optional
   link to a finding id. **WSTG-testen laden (Load WSTG tests)** fills the list in
   one click with the complete **OWASP WSTG v4.2** checklist (97 tests across 12
@@ -1493,7 +1495,7 @@ Adding a **Bevinding** opens a step-by-step wizard instead of a blank slide:
    context score is derived from the scope object's rating, so re-rating the
    object re-scores every finding on it.
 3. **CWE & CVE** — a searchable **CWE picker** over the full, offline MITRE CWE
-   list (~940 weaknesses; the curated ones add a description/recommendation
+   list (~970 weaknesses; the curated ones add a description/recommendation
    snippet). Picking one sets the CWE and, only when they are still empty, fills
    the description and recommendation — a good starting point written without an
    LLM. The **Zoek CVE…** button looks a CVE up online by id pattern (e.g.
@@ -1543,7 +1545,7 @@ excluded. Waivers travel in the deck front matter.
 
 ### Report automation
 
-Three more command-palette actions remove mechanical bookkeeping:
+Four more command-palette actions remove mechanical bookkeeping:
 
 - **Bevindingen hernummeren** — renumbers every finding sequentially (`F-01`,
   `F-02`, … in deck order), rewriting each group's shared id and its heading
@@ -1704,7 +1706,7 @@ Implementation: `lib/services/markdown_validator.dart` (unit tests in
 
 ## Theming and language
 
-**Finding a setting.** There are around eighty settings across twelve tabs, so the
+**Finding a setting.** There are around sixty settings across twelve tabs, so the
 settings window has a **search box** in its header. Type a word and you get the
 matching settings, each with the tab and section it lives in; click one and the
 window jumps to that tab, scrolls the section into view and briefly highlights it.
@@ -1748,5 +1750,7 @@ find it.
   to every cockpit slide — in the editor, the presenter and all exports. Like the
   style profile, these colours are app settings and are not stored in the `.md`
   file.
-- The interface is available in Dutch, English, Italian, German, French, Spanish,
-  Frisian, and Papiamento.
+- The interface is available in 32 languages — among them Dutch, English,
+  German, French, Spanish, Italian, Portuguese, Polish, Ukrainian, Greek, the
+  Nordic and Baltic languages, Frisian and Papiamento. *Settings → General →
+  Language* has the full list.
