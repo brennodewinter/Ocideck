@@ -8,7 +8,7 @@ Built with Flutter for macOS, Windows, Linux, and **web**.
 
 > **What's in a name?** *OciDeck* is a small wink: **Oci** is borrowed from the *Ocicats* — the cats of [Brenno de Winter](https://nl.wikipedia.org/wiki/Brenno_de_Winter) — and **Deck** is short for a presentation deck. So: the cats' presentation tool.
 
-> **Runs on your device, not on a server.** OciDeck has no application backend and no telemetry — no analytics, no tracking, no "phoning home". On the web the whole app is downloaded into your browser tab and runs there; the server that hosts it sees only ordinary web-access logs (which files your browser fetched), never your decks, your edits, or what you do inside the app. The privacy scan runs on your device too. The only outbound calls are ones *you* start and point where you choose — opening a deck from a URL, a Nextcloud/WebDAV folder, the optional (off-by-default) AI helper — each guarded against reaching internal addresses. See [ARCHITECTURE.md](docs/ARCHITECTURE.md#runtime--network-model) for the details.
+> **Runs on your device, not on a server.** OciDeck has no application backend and no telemetry — no analytics, no tracking, no "phoning home". On the web the whole app is downloaded into your browser tab and runs there; the server that hosts it sees only ordinary web-access logs (which files your browser fetched), never your decks, your edits, or what you do inside the app. The privacy scan runs on your device too. The only outbound calls are ones *you* start and point where you choose — opening a deck from a URL, a Nextcloud/WebDAV folder, an S3 bucket, a git repository, the optional (off-by-default) AI helper. See [ARCHITECTURE.md](docs/ARCHITECTURE.md#runtime--network-model) for the details.
 
 ## Features
 
