@@ -1793,6 +1793,32 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'S3-bucket': 'Zasobnik S3',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'Zasobnik S3, na przykład AWS S3 lub własny serwer MinIO.',
+  'Endpoint': 'Punkt końcowy',
+  'Bucket': 'Zasobnik',
+  'Adressering': 'Adresowanie',
+  'Bucket in de hostnaam (AWS S3)': 'Zasobnik w nazwie hosta (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Zasobnik w ścieżce (MinIO i inne)',
+  'Regio': 'Region',
+  'Access key ID': 'Identyfikator klucza dostępu',
+  'Secret access key': 'Tajny klucz dostępu',
+  'Prefix (optioneel)': 'Prefiks (opcjonalnie)',
+  'Vertrouwd intern endpoint': 'Zaufany wewnętrzny punkt końcowy',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Potrzebne, gdy punkt końcowy działa w sieci prywatnej lub domowej (LAN), na przykład własne MinIO. Zezwalaj na połączenia tylko z serwerami, którym ufasz.',
+  'Vul endpoint, bucket en access key ID in':
+      'Wypełnij punkt końcowy, zasobnik i identyfikator klucza dostępu',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Logowanie nie powiodło się — sprawdź klucz dostępu, klucz tajny i region. Zły region daje ten sam błąd co zły klucz.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Punkt końcowy jest pod adresem prywatnym. Zaznacz "Zaufany wewnętrzny punkt końcowy", aby zezwolić na połączenie.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Nie znaleziono zasobnika. Przy własnym MinIO często pomaga wybór "Zasobnik w ścieżce".',
+  'Ongeldig endpoint': 'Nieprawidłowy punkt końcowy',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Ten punkt końcowy nie obsługuje zapisu warunkowego; jednoczesna edycja jest tu gorzej chroniona.',
   'Naar de slide': 'Przejdź do slajdu',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Połączenie git tej prezentacji już nie istnieje.',

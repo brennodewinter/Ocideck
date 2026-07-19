@@ -1788,6 +1788,32 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'S3-bucket': 'S3 spremnik',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'S3 spremnik, primjerice AWS S3 ili vlastiti MinIO poslužitelj.',
+  'Endpoint': 'Krajnja točka',
+  'Bucket': 'Spremnik',
+  'Adressering': 'Adresiranje',
+  'Bucket in de hostnaam (AWS S3)': 'Spremnik u nazivu poslužitelja (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Spremnik u putanji (MinIO i drugi)',
+  'Regio': 'Regija',
+  'Access key ID': 'ID pristupnog ključa',
+  'Secret access key': 'Tajni pristupni ključ',
+  'Prefix (optioneel)': 'Prefiks (neobavezno)',
+  'Vertrouwd intern endpoint': 'Pouzdana interna krajnja točka',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Potrebno kada krajnja točka radi na privatnoj ili kućnoj mreži (LAN), poput vlastitog MinIO-a. Dopusti veze samo prema poslužiteljima kojima vjeruješ.',
+  'Vul endpoint, bucket en access key ID in':
+      'Ispuni krajnju točku, spremnik i ID pristupnog ključa',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Prijava nije uspjela — provjeri pristupni ključ, tajni ključ i regiju. Pogrešna regija daje istu pogrešku kao pogrešan ključ.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Krajnja točka je na privatnoj adresi. Označi "Pouzdana interna krajnja točka" da dopustiš vezu.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Spremnik nije pronađen. Uz vlastiti MinIO često pomaže odabrati "Spremnik u putanji".',
+  'Ongeldig endpoint': 'Nevaljana krajnja točka',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Ova krajnja točka ne podržava uvjetno pisanje; istovremeno uređivanje ovdje je slabije zaštićeno.',
   'Naar de slide': 'Na slajd',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Git veza ove prezentacije više ne postoji.',

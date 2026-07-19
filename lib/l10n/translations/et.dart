@@ -1772,6 +1772,32 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'S3-bucket': 'S3 ämber',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'S3 ämber, näiteks AWS S3 või oma MinIO server.',
+  'Endpoint': 'Lõpp-punkt',
+  'Bucket': 'Ämber',
+  'Adressering': 'Aadressimine',
+  'Bucket in de hostnaam (AWS S3)': 'Ämber hostinimes (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Ämber teel (MinIO ja teised)',
+  'Regio': 'Piirkond',
+  'Access key ID': 'Juurdepääsuvõtme ID',
+  'Secret access key': 'Salajane juurdepääsuvõti',
+  'Prefix (optioneel)': 'Eesliide (valikuline)',
+  'Vertrouwd intern endpoint': 'Usaldusväärne sisemine lõpp-punkt',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Vajalik, kui lõpp-punkt töötab era- või koduvõrgus (LAN), näiteks oma MinIO. Luba ühendusi ainult serveritega, mida ise usaldad.',
+  'Vul endpoint, bucket en access key ID in':
+      'Täida lõpp-punkt, ämber ja juurdepääsuvõtme ID',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Sisselogimine ebaõnnestus — kontrolli juurdepääsuvõtit, salajast võtit ja piirkonda. Vale piirkond annab sama vea nagu vale võti.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Lõpp-punkt on privaataadressil. Märgi "Usaldusväärne sisemine lõpp-punkt", et ühendus lubada.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Ämbrit ei leitud. Oma MinIO puhul aitab sageli valida "Ämber teel".',
+  'Ongeldig endpoint': 'Vigane lõpp-punkt',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'See lõpp-punkt ei toeta tingimuslikku kirjutamist; samaaegne muutmine on siin halvemini kaitstud.',
   'Naar de slide': 'Slaidile',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Selle esitluse git-ühendust enam pole.',

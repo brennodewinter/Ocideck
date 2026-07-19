@@ -739,6 +739,32 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'S3-bucket': 'S3-bucket',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'In S3-bucket, bygelyks AWS S3 of in eigen MinIO-server.',
+  'Endpoint': 'Einpunt',
+  'Bucket': 'Bucket',
+  'Adressering': 'Adressearring',
+  'Bucket in de hostnaam (AWS S3)': 'Bucket yn de hostnamme (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Bucket yn it paad (MinIO en oaren)',
+  'Regio': 'Regio',
+  'Access key ID': 'Tagongskaai-ID',
+  'Secret access key': 'Geheime tagongskaai',
+  'Prefix (optioneel)': 'Foarheaksel (opsjoneel)',
+  'Vertrouwd intern endpoint': 'Fertroud yntern einpunt',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Nedich as it einpunt op in privee- of thúsnetwurk (LAN) draait, lykas in eigen MinIO. Lit allinnich ferbiningen ta nei servers dy’tsto sels fertrouwst.',
+  'Vul endpoint, bucket en access key ID in':
+      'Folje einpunt, bucket en tagongskaai-ID yn',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Oanmelden mislearre — kontrolearje de tagongskaai, de geheime kaai en de regio. In ferkearde regio jout deselde flater as in ferkearde kaai.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'It einpunt stiet op in privee-adres. Finkje "Fertroud yntern einpunt" oan om ferbining ta te stean.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Bucket net fûn. By in eigen MinIO helpt it faak om "Bucket yn it paad" te kiezen.',
+  'Ongeldig endpoint': 'Ûnjildich einpunt',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Dit einpunt stipet gjin betingst skriuwen; tagelyk bewurkjen is hjir minder beskerme.',
   'Naar de slide': 'Nei de slide',
   'De git-verbinding van dit deck bestaat niet meer.':
       'De git-ferbining fan dizze presintaasje bestiet net mear.',

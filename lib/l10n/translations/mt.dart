@@ -1803,6 +1803,32 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'S3-bucket': 'Barmil S3',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'Barmil S3, per eżempju AWS S3 jew server MinIO tiegħek.',
+  'Endpoint': 'Punt tat-tmiem',
+  'Bucket': 'Barmil',
+  'Adressering': 'Indirizzar',
+  'Bucket in de hostnaam (AWS S3)': 'Barmil fl-isem tal-host (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Barmil fil-mogħdija (MinIO u oħrajn)',
+  'Regio': 'Reġjun',
+  'Access key ID': 'ID taċ-ċavetta tal-aċċess',
+  'Secret access key': 'Ċavetta sigrieta tal-aċċess',
+  'Prefix (optioneel)': 'Prefiss (mhux obbligatorju)',
+  'Vertrouwd intern endpoint': 'Punt tat-tmiem intern fdat',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Meħtieġ meta l-punt tat-tmiem jaħdem fuq netwerk privat jew tad-dar (LAN), bħal MinIO tiegħek. Ippermetti biss konnessjonijiet ma’ servers li tafda.',
+  'Vul endpoint, bucket en access key ID in':
+      'Imla l-punt tat-tmiem, il-barmil u l-ID taċ-ċavetta tal-aċċess',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Il-login falla — iċċekkja ċ-ċavetta tal-aċċess, iċ-ċavetta sigrieta u r-reġjun. Reġjun ħażin jagħti l-istess żball bħal ċavetta ħażina.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Il-punt tat-tmiem qiegħed fuq indirizz privat. Immarka "Punt tat-tmiem intern fdat" biex tippermetti l-konnessjoni.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Il-barmil ma nstabx. B’MinIO tiegħek spiss jgħin li tagħżel "Barmil fil-mogħdija".',
+  'Ongeldig endpoint': 'Punt tat-tmiem mhux validu',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Dan il-punt tat-tmiem ma jappoġġjax kitba kondizzjonali; l-editjar simultanju hawn huwa inqas protett.',
   'Naar de slide': 'Mur għall-islajd',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Il-konnessjoni git ta\' din il-preżentazzjoni ma għadhiex teżisti.',

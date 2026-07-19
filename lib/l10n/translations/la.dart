@@ -1797,6 +1797,32 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'S3-bucket': 'Situla S3',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'Situla S3, exempli gratia AWS S3 vel servator MinIO proprius.',
+  'Endpoint': 'Terminus',
+  'Bucket': 'Situla',
+  'Adressering': 'Inscriptio',
+  'Bucket in de hostnaam (AWS S3)': 'Situla in nomine hospitis (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Situla in semita (MinIO et alii)',
+  'Regio': 'Regio',
+  'Access key ID': 'Identitas clavis accessus',
+  'Secret access key': 'Clavis accessus secreta',
+  'Prefix (optioneel)': 'Praefixum (optionale)',
+  'Vertrouwd intern endpoint': 'Terminus internus fidus',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Necessarium cum terminus in rete privata vel domestica (LAN) currit, ut MinIO proprium. Solas conexiones ad servatores quibus ipse confidis permitte.',
+  'Vul endpoint, bucket en access key ID in':
+      'Terminum, situlam et identitatem clavis accessus imple',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Aditus defecit — clavem accessus, clavem secretam et regionem inspice. Regio falsa eundem errorem dat quam clavis falsa.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Terminus in inscriptione privata est. "Terminum internum fidum" nota ut conexio permittatur.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Situla non inventa. Cum MinIO proprio saepe iuvat "Situlam in semita" eligere.',
+  'Ongeldig endpoint': 'Terminus invalidus',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Hic terminus scripturam condicionalem non sustinet; editio simultanea hic minus tuta est.',
   'Naar de slide': 'Ad tabulam',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Conexio git huius praesentationis non iam exstat.',

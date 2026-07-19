@@ -91,6 +91,49 @@ class SecretStore {
     }
   }
 
+  /// Keychain-sleutel voor de secret access key van een S3-bron, gekeyd op het
+  /// genormaliseerde endpoint plus de access key id. Twee buckets op hetzelfde
+  /// endpoint met dezelfde sleutel delen daardoor één entry, wat klopt: het ís
+  /// dezelfde sleutel.
+  static String s3SecretKeyKey(String endpoint, String accessKeyId) {
+    final normalized = endpoint.trim().replaceAll(RegExp(r'/+$'), '');
+    return 's3_secret::$normalized::${accessKeyId.trim()}';
+  }
+
+  Future<void> writeS3SecretKey(
+    String endpoint,
+    String accessKeyId,
+    String secretKey,
+  ) async {
+    try {
+      await _storage.write(
+        key: s3SecretKeyKey(endpoint, accessKeyId),
+        value: secretKey,
+      );
+    } catch (e) {
+      logError('SecretStore.writeS3SecretKey: keychain write failed', e);
+      rethrow;
+    }
+  }
+
+  Future<String?> readS3SecretKey(String endpoint, String accessKeyId) async {
+    try {
+      return await _storage.read(key: s3SecretKeyKey(endpoint, accessKeyId));
+    } catch (e) {
+      logError('SecretStore.readS3SecretKey: keychain read failed', e);
+      return null;
+    }
+  }
+
+  Future<void> deleteS3SecretKey(String endpoint, String accessKeyId) async {
+    try {
+      await _storage.delete(key: s3SecretKeyKey(endpoint, accessKeyId));
+    } catch (e) {
+      // Wissen mag nooit fataal zijn: log en ga door.
+      logWarning('SecretStore.deleteS3SecretKey: keychain delete failed', e);
+    }
+  }
+
   /// Keychain-sleutel voor het personal access token van een git-forge, gekeyd
   /// op genormaliseerde basis-URL + eigenaar. Eén token per repo-eigenaar, zodat
   /// een account op twee forges — of twee organisaties op één forge — naast

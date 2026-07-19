@@ -735,6 +735,32 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'S3-bucket': 'Bucket de S3',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'Un bucket de S3, por ejemplo AWS S3 o tu propio servidor MinIO.',
+  'Endpoint': 'Punto de conexión',
+  'Bucket': 'Bucket',
+  'Adressering': 'Direccionamiento',
+  'Bucket in de hostnaam (AWS S3)': 'Bucket en el nombre de host (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Bucket en la ruta (MinIO y otros)',
+  'Regio': 'Región',
+  'Access key ID': 'ID de clave de acceso',
+  'Secret access key': 'Clave de acceso secreta',
+  'Prefix (optioneel)': 'Prefijo (opcional)',
+  'Vertrouwd intern endpoint': 'Punto de conexión interno de confianza',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Necesario cuando el punto de conexión se ejecuta en una red privada o doméstica (LAN), como tu propio MinIO. Permite solo conexiones a servidores en los que confíes.',
+  'Vul endpoint, bucket en access key ID in':
+      'Rellena el punto de conexión, el bucket y el ID de clave de acceso',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Error de inicio de sesión — comprueba la clave de acceso, la clave secreta y la región. Una región incorrecta da el mismo error que una clave incorrecta.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'El punto de conexión está en una dirección privada. Marca "Punto de conexión interno de confianza" para permitir la conexión.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Bucket no encontrado. Con tu propio MinIO suele ayudar elegir "Bucket en la ruta".',
+  'Ongeldig endpoint': 'Punto de conexión no válido',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Este punto de conexión no admite escrituras condicionales; la edición simultánea está peor protegida aquí.',
   'Naar de slide': 'Ir a la diapositiva',
   'De git-verbinding van dit deck bestaat niet meer.':
       'La conexión git de esta presentación ya no existe.',

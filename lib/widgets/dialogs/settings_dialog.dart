@@ -19,6 +19,7 @@ import '../../services/ai_security_gate.dart';
 import '../../services/file_service.dart';
 import '../../services/recovery_service.dart';
 import '../../services/classification_enforcement_policy.dart';
+import '../../services/s3/s3_service.dart';
 import '../../services/webdav_service.dart';
 import '../../models/local_cve_status.dart';
 import '../../services/cve/local_cve_database.dart';
@@ -48,6 +49,7 @@ part 'parts/settings_dialog_sections.dart';
 part 'parts/settings_dialog_secret.dart';
 part 'parts/settings_dialog_webdav_form.dart';
 part 'parts/settings_dialog_git_form.dart';
+part 'parts/settings_dialog_s3_form.dart';
 part 'parts/settings_dialog_ai_form.dart';
 part 'parts/settings_dialog_chrome.dart';
 part 'parts/settings_dialog_general.dart';
@@ -58,6 +60,7 @@ part 'parts/settings_dialog_colors.dart';
 part 'parts/settings_dialog_profile.dart';
 part 'parts/settings_dialog_webdav.dart';
 part 'parts/settings_dialog_git.dart';
+part 'parts/settings_dialog_s3.dart';
 part 'parts/settings_dialog_privacy.dart';
 part 'parts/settings_dialog_security.dart';
 part 'parts/settings_dialog_ai.dart';
@@ -134,6 +137,9 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
 
   /// Idem voor git-verbindingen.
   final Map<String, GitForm> _gitForms = {};
+
+  /// Idem voor S3-verbindingen.
+  final Map<String, S3Form> _s3Forms = {};
 
   late String? _exportDirectory;
   late ThemeProfile _themeProfile;
@@ -268,6 +274,9 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     for (final form in _webdavForms.values) {
       form.dispose();
     }
+    for (final form in _s3Forms.values) {
+      form.dispose();
+    }
     _ai.dispose();
     super.dispose();
   }
@@ -309,6 +318,16 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           if (!mounted || pw == null) return;
           setState(() => form.password.adopt(pw));
         });
+      case S3Connection(:final bucket):
+        final form = _s3Forms.putIfAbsent(connection.id, S3Form.new);
+        form.adoptFrom(bucket);
+        if (!bucket.isConfigured) return;
+        notifier.readS3SecretKey(bucket.endpoint, bucket.accessKeyId).then((
+          key,
+        ) {
+          if (!mounted || key == null) return;
+          setState(() => form.secret.adopt(key));
+        });
       case GitConnection(:final repo):
         final form = _gitForms.putIfAbsent(connection.id, GitForm.new);
         form.adoptFrom(repo);
@@ -331,6 +350,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     final withValues = switch (c) {
       LocalConnection() => c,
       WebdavConnection() => c.copyWith(server: _webdavForms[c.id]?.server),
+      S3Connection() => c.copyWith(bucket: _s3Forms[c.id]?.config),
       GitConnection() => c.copyWith(repo: _gitForms[c.id]?.config),
     };
     final name = withValues.name.trim();
@@ -344,6 +364,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     return switch (withValues) {
       LocalConnection() => withValues.copyWith(name: fallback),
       WebdavConnection() => withValues.copyWith(name: fallback),
+      S3Connection() => withValues.copyWith(name: fallback),
       GitConnection() => withValues.copyWith(name: fallback),
     };
   }
@@ -380,6 +401,11 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
         id: id,
         name: '',
         server: const WebdavServer(baseUrl: '', username: ''),
+      ),
+      StorageConnectionKind.s3 => S3Connection(
+        id: id,
+        name: '',
+        bucket: const S3Bucket(endpoint: '', bucket: ''),
       ),
       StorageConnectionKind.git => GitConnection(
         id: id,
@@ -420,6 +446,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
           switch (c) {
             LocalConnection() => c.copyWith(name: name),
             WebdavConnection() => c.copyWith(name: name),
+            S3Connection() => c.copyWith(name: name),
             GitConnection() => c.copyWith(name: name),
           },
     ];
@@ -530,6 +557,9 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       form.saveSecret(notifier);
     }
     for (final form in _webdavForms.values) {
+      form.saveSecret(notifier);
+    }
+    for (final form in _s3Forms.values) {
       form.saveSecret(notifier);
     }
 

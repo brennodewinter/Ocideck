@@ -1784,6 +1784,32 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'S3-bucket': 'Úložiště S3',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'Úložiště S3, například AWS S3 nebo vlastní server MinIO.',
+  'Endpoint': 'Koncový bod',
+  'Bucket': 'Úložiště',
+  'Adressering': 'Adresování',
+  'Bucket in de hostnaam (AWS S3)': 'Úložiště v názvu hostitele (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Úložiště v cestě (MinIO a další)',
+  'Regio': 'Oblast',
+  'Access key ID': 'ID přístupového klíče',
+  'Secret access key': 'Tajný přístupový klíč',
+  'Prefix (optioneel)': 'Předpona (volitelné)',
+  'Vertrouwd intern endpoint': 'Důvěryhodný interní koncový bod',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Potřebné, když koncový bod běží v privátní nebo domácí síti (LAN), třeba vlastní MinIO. Povoluj připojení jen k serverům, kterým sám důvěřuješ.',
+  'Vul endpoint, bucket en access key ID in':
+      'Vyplň koncový bod, úložiště a ID přístupového klíče',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Přihlášení selhalo — zkontroluj přístupový klíč, tajný klíč a oblast. Špatná oblast dá stejnou chybu jako špatný klíč.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Koncový bod je na privátní adrese. Zaškrtni "Důvěryhodný interní koncový bod", aby bylo připojení povoleno.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Úložiště nenalezeno. U vlastního MinIO často pomůže zvolit "Úložiště v cestě".',
+  'Ongeldig endpoint': 'Neplatný koncový bod',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Tento koncový bod nepodporuje podmíněný zápis; současné úpravy jsou zde hůře chráněné.',
   'Naar de slide': 'Přejít na snímek',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Připojení git této prezentace už neexistuje.',

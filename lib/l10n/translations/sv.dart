@@ -1780,6 +1780,32 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'S3-bucket': 'S3-hink',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'En S3-hink, till exempel AWS S3 eller en egen MinIO-server.',
+  'Endpoint': 'Slutpunkt',
+  'Bucket': 'Hink',
+  'Adressering': 'Adressering',
+  'Bucket in de hostnaam (AWS S3)': 'Hink i värdnamnet (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Hink i sökvägen (MinIO och andra)',
+  'Regio': 'Region',
+  'Access key ID': 'Åtkomstnyckel-ID',
+  'Secret access key': 'Hemlig åtkomstnyckel',
+  'Prefix (optioneel)': 'Prefix (valfritt)',
+  'Vertrouwd intern endpoint': 'Betrodd intern slutpunkt',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Behövs när slutpunkten körs på ett privat eller hemnätverk (LAN), som en egen MinIO. Tillåt bara anslutningar till servrar du själv litar på.',
+  'Vul endpoint, bucket en access key ID in':
+      'Fyll i slutpunkt, hink och åtkomstnyckel-ID',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Inloggningen misslyckades — kontrollera åtkomstnyckeln, den hemliga nyckeln och regionen. Fel region ger samma fel som fel nyckel.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Slutpunkten ligger på en privat adress. Kryssa i "Betrodd intern slutpunkt" för att tillåta anslutningen.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Hinken hittades inte. Med en egen MinIO hjälper det ofta att välja "Hink i sökvägen".',
+  'Ongeldig endpoint': 'Ogiltig slutpunkt',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Den här slutpunkten stöder inte villkorliga skrivningar; samtidig redigering är sämre skyddad här.',
   'Naar de slide': 'Gå till bilden',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Git-anslutningen för den här presentationen finns inte längre.',

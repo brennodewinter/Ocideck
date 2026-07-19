@@ -1781,6 +1781,33 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'S3-bucket': 'Bucket S3',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'Bucket S3, misalnya AWS S3 atau server MinIO sendiri.',
+  'Endpoint': 'Titik akhir',
+  'Bucket': 'Bucket',
+  'Adressering': 'Pengalamatan',
+  'Bucket in de hostnaam (AWS S3)': 'Bucket dalam nama host (AWS S3)',
+  'Bucket in het pad (MinIO en andere)':
+      'Bucket dalam jalur (MinIO dan lainnya)',
+  'Regio': 'Wilayah',
+  'Access key ID': 'ID kunci akses',
+  'Secret access key': 'Kunci akses rahasia',
+  'Prefix (optioneel)': 'Awalan (opsional)',
+  'Vertrouwd intern endpoint': 'Titik akhir internal tepercaya',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Diperlukan bila titik akhir berjalan di jaringan pribadi atau rumah (LAN), seperti MinIO sendiri. Izinkan koneksi hanya ke server yang Anda percayai.',
+  'Vul endpoint, bucket en access key ID in':
+      'Isi titik akhir, bucket, dan ID kunci akses',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Masuk gagal — periksa kunci akses, kunci rahasia, dan wilayah. Wilayah yang salah memberi galat yang sama seperti kunci yang salah.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Titik akhir berada di alamat pribadi. Centang "Titik akhir internal tepercaya" untuk mengizinkan koneksi.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Bucket tidak ditemukan. Dengan MinIO sendiri sering membantu memilih "Bucket dalam jalur".',
+  'Ongeldig endpoint': 'Titik akhir tidak valid',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Titik akhir ini tidak mendukung penulisan bersyarat; penyuntingan bersamaan kurang terlindungi di sini.',
   'Naar de slide': 'Ke slide',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Koneksi git untuk presentasi ini tidak ada lagi.',

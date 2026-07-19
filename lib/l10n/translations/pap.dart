@@ -738,6 +738,32 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'S3-bucket': 'Bucket di S3',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'Un bucket di S3, por ehèmpel AWS S3 of bo mes servidó MinIO.',
+  'Endpoint': 'Punto final',
+  'Bucket': 'Bucket',
+  'Adressering': 'Direkshonamentu',
+  'Bucket in de hostnaam (AWS S3)': 'Bucket den e nòmber di host (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Bucket den e kaminda (MinIO i otro)',
+  'Regio': 'Region',
+  'Access key ID': 'ID di yabi di akseso',
+  'Secret access key': 'Yabi sekreto di akseso',
+  'Prefix (optioneel)': 'Prefiho (opshonal)',
+  'Vertrouwd intern endpoint': 'Punto final interno konfiabel',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Nesesario ora e punto final ta kore riba un red privá of di kas (LAN), manera bo mes MinIO. Permití solamente konekshon ku servidónan ku bo ta konfia.',
+  'Vul endpoint, bucket en access key ID in':
+      'Yena e punto final, bucket i ID di yabi di akseso',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Login a faya — kontrolá e yabi di akseso, e yabi sekreto i e region. Un region robes ta duna e mesun eror ku un yabi robes.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'E punto final ta riba un adrès privá. Marka "Punto final interno konfiabel" pa permití konekshon.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'No a haña e bucket. Ku bo mes MinIO hopi biaha ta yuda skohe "Bucket den e kaminda".',
+  'Ongeldig endpoint': 'Punto final inválido',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'E punto final aki no ta soportá skirbimentu kondishonal; editá na mesun momento ta menos protehá akinan.',
   'Naar de slide': 'Bai na e slide',
   'De git-verbinding van dit deck bestaat niet meer.':
       'E konekshon git di e presentashon akí no ta eksistí mas.',

@@ -734,6 +734,32 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'S3-bucket': 'Bucket S3',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'Un bucket S3, per esempio AWS S3 o un server MinIO tuo.',
+  'Endpoint': 'Endpoint',
+  'Bucket': 'Bucket',
+  'Adressering': 'Indirizzamento',
+  'Bucket in de hostnaam (AWS S3)': 'Bucket nel nome host (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Bucket nel percorso (MinIO e altri)',
+  'Regio': 'Regione',
+  'Access key ID': 'ID chiave di accesso',
+  'Secret access key': 'Chiave di accesso segreta',
+  'Prefix (optioneel)': 'Prefisso (facoltativo)',
+  'Vertrouwd intern endpoint': 'Endpoint interno attendibile',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Necessario quando l’endpoint gira su una rete privata o domestica (LAN), come un MinIO tuo. Consenti connessioni solo a server di cui ti fidi.',
+  'Vul endpoint, bucket en access key ID in':
+      'Compila endpoint, bucket e ID chiave di accesso',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Accesso non riuscito — controlla la chiave di accesso, la chiave segreta e la regione. Una regione sbagliata dà lo stesso errore di una chiave sbagliata.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'L’endpoint è su un indirizzo privato. Spunta "Endpoint interno attendibile" per consentire la connessione.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Bucket non trovato. Con un MinIO tuo spesso aiuta scegliere "Bucket nel percorso".',
+  'Ongeldig endpoint': 'Endpoint non valido',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Questo endpoint non supporta le scritture condizionali; la modifica simultanea è meno protetta qui.',
   'Naar de slide': 'Vai alla slide',
   'De git-verbinding van dit deck bestaat niet meer.':
       'La connessione git di questa presentazione non esiste più.',

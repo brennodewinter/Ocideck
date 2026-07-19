@@ -40,6 +40,10 @@ void main() {
     AppLocalizations.setActiveLanguageCode('en');
 
     const unchangedInEnglish = {
+      'Access key ID',
+      'Bucket',
+      'Endpoint',
+      'Secret access key',
       'WebDAV',
       'Repository',
       'Personal access token',
@@ -110,6 +114,10 @@ void main() {
 
   test('all literal Dutch source strings are translated in every language', () {
     const unchangedInAllLanguages = {
+      'Access key ID',
+      'Bucket',
+      'Endpoint',
+      'Secret access key',
       'WebDAV',
       'Repository',
       'Personal access token',

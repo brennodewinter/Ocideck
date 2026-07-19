@@ -1789,6 +1789,33 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'S3-bucket': 'S3 saugykla',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'S3 saugykla, pavyzdžiui AWS S3 arba savas MinIO serveris.',
+  'Endpoint': 'Galinis taškas',
+  'Bucket': 'Saugykla',
+  'Adressering': 'Adresavimas',
+  'Bucket in de hostnaam (AWS S3)':
+      'Saugykla pagrindinio kompiuterio varde (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Saugykla kelyje (MinIO ir kiti)',
+  'Regio': 'Regionas',
+  'Access key ID': 'Prieigos rakto ID',
+  'Secret access key': 'Slaptas prieigos raktas',
+  'Prefix (optioneel)': 'Priešdėlis (nebūtina)',
+  'Vertrouwd intern endpoint': 'Patikimas vidinis galinis taškas',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Reikia, kai galinis taškas veikia privačiame ar namų tinkle (LAN), pavyzdžiui savas MinIO. Leisk jungtis tik prie serverių, kuriais pats pasitiki.',
+  'Vul endpoint, bucket en access key ID in':
+      'Užpildyk galinį tašką, saugyklą ir prieigos rakto ID',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Prisijungti nepavyko — patikrink prieigos raktą, slaptą raktą ir regioną. Neteisingas regionas duoda tą pačią klaidą kaip neteisingas raktas.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Galinis taškas yra privačiu adresu. Pažymėk "Patikimas vidinis galinis taškas", kad leistum jungtis.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Saugykla nerasta. Su savu MinIO dažnai padeda pasirinkti "Saugykla kelyje".',
+  'Ongeldig endpoint': 'Netinkamas galinis taškas',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Šis galinis taškas nepalaiko sąlyginio rašymo; vienalaikis redagavimas čia apsaugotas prasčiau.',
   'Naar de slide': 'Į skaidrę',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Šio pristatymo git jungties nebėra.',

@@ -1780,6 +1780,32 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'S3-bucket': 'S3-bucket',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'En S3-bucket, for eksempel AWS S3 eller din egen MinIO-server.',
+  'Endpoint': 'Slutpunkt',
+  'Bucket': 'Bucket',
+  'Adressering': 'Adressering',
+  'Bucket in de hostnaam (AWS S3)': 'Bucket i værtsnavnet (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Bucket i stien (MinIO og andre)',
+  'Regio': 'Region',
+  'Access key ID': 'Adgangsnøgle-id',
+  'Secret access key': 'Hemmelig adgangsnøgle',
+  'Prefix (optioneel)': 'Præfiks (valgfrit)',
+  'Vertrouwd intern endpoint': 'Betroet internt slutpunkt',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Nødvendigt, når slutpunktet kører på et privat- eller hjemmenetværk (LAN), som din egen MinIO. Tillad kun forbindelser til servere, du selv stoler på.',
+  'Vul endpoint, bucket en access key ID in':
+      'Udfyld slutpunkt, bucket og adgangsnøgle-id',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Login mislykkedes — kontrollér adgangsnøglen, den hemmelige nøgle og regionen. En forkert region giver samme fejl som en forkert nøgle.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Slutpunktet er på en privat adresse. Sæt flueben ved "Betroet internt slutpunkt" for at tillade forbindelsen.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Bucket ikke fundet. Med din egen MinIO hjælper det ofte at vælge "Bucket i stien".',
+  'Ongeldig endpoint': 'Ugyldigt slutpunkt',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Dette slutpunkt understøtter ikke betingede skrivninger; samtidig redigering er dårligere beskyttet her.',
   'Naar de slide': 'Gå til slide',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Git-forbindelsen til denne præsentation findes ikke længere.',

@@ -1811,6 +1811,32 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'S3-bucket': 'Bucket S3',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'Um bucket S3, por exemplo AWS S3 ou um servidor MinIO próprio.',
+  'Endpoint': 'Ponto de extremidade',
+  'Bucket': 'Bucket',
+  'Adressering': 'Endereçamento',
+  'Bucket in de hostnaam (AWS S3)': 'Bucket no nome do anfitrião (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Bucket no caminho (MinIO e outros)',
+  'Regio': 'Região',
+  'Access key ID': 'ID da chave de acesso',
+  'Secret access key': 'Chave de acesso secreta',
+  'Prefix (optioneel)': 'Prefixo (opcional)',
+  'Vertrouwd intern endpoint': 'Ponto de extremidade interno fidedigno',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Necessário quando o ponto de extremidade corre numa rede privada ou doméstica (LAN), como um MinIO próprio. Permite apenas ligações a servidores em que confias.',
+  'Vul endpoint, bucket en access key ID in':
+      'Preenche o ponto de extremidade, o bucket e o ID da chave de acesso',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Falha ao iniciar sessão — verifica a chave de acesso, a chave secreta e a região. Uma região errada dá o mesmo erro que uma chave errada.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'O ponto de extremidade está num endereço privado. Assinala "Ponto de extremidade interno fidedigno" para permitir a ligação.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Bucket não encontrado. Com um MinIO próprio, escolher "Bucket no caminho" ajuda muitas vezes.',
+  'Ongeldig endpoint': 'Ponto de extremidade inválido',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Este ponto de extremidade não suporta escritas condicionais; a edição simultânea está menos protegida aqui.',
   'Naar de slide': 'Ir para o slide',
   'De git-verbinding van dit deck bestaat niet meer.':
       'A ligação git desta apresentação já não existe.',

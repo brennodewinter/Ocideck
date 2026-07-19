@@ -1781,6 +1781,32 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'S3-bucket': 'S3-säilö',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'S3-säilö, esimerkiksi AWS S3 tai oma MinIO-palvelin.',
+  'Endpoint': 'Päätepiste',
+  'Bucket': 'Säilö',
+  'Adressering': 'Osoitteistus',
+  'Bucket in de hostnaam (AWS S3)': 'Säilö isäntänimessä (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Säilö polussa (MinIO ja muut)',
+  'Regio': 'Alue',
+  'Access key ID': 'Käyttöavaimen tunnus',
+  'Secret access key': 'Salainen käyttöavain',
+  'Prefix (optioneel)': 'Etuliite (valinnainen)',
+  'Vertrouwd intern endpoint': 'Luotettu sisäinen päätepiste',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Tarvitaan, kun päätepiste on yksityisessä tai kotiverkossa (LAN), kuten oma MinIO. Salli yhteydet vain palvelimiin, joihin itse luotat.',
+  'Vul endpoint, bucket en access key ID in':
+      'Täytä päätepiste, säilö ja käyttöavaimen tunnus',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Kirjautuminen epäonnistui — tarkista käyttöavain, salainen avain ja alue. Väärä alue antaa saman virheen kuin väärä avain.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Päätepiste on yksityisessä osoitteessa. Rastita "Luotettu sisäinen päätepiste" salliaksesi yhteyden.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Säilöä ei löytynyt. Oman MinIO:n kanssa auttaa usein valita "Säilö polussa".',
+  'Ongeldig endpoint': 'Virheellinen päätepiste',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Tämä päätepiste ei tue ehdollisia kirjoituksia; samanaikainen muokkaus on täällä heikommin suojattu.',
   'Naar de slide': 'Siirry diaan',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Tämän esityksen git-yhteyttä ei enää ole.',

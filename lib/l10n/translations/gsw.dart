@@ -1785,6 +1785,32 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'S3-bucket': 'S3-Bucket',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'En S3-Bucket, zum Bispil AWS S3 oder en eigene MinIO-Server.',
+  'Endpoint': 'Ändpunkt',
+  'Bucket': 'Bucket',
+  'Adressering': 'Adressierig',
+  'Bucket in de hostnaam (AWS S3)': 'Bucket im Hostname (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Bucket im Pfad (MinIO und anderi)',
+  'Regio': 'Region',
+  'Access key ID': 'Zuegriffsschlüssel-ID',
+  'Secret access key': 'Gheime Zuegriffsschlüssel',
+  'Prefix (optioneel)': 'Präfix (optional)',
+  'Vertrouwd intern endpoint': 'Vertraute intärne Ändpunkt',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Nötig, wenn de Ändpunkt uf eme private oder Heimnetzwärk (LAN) lauft, öppe es eigets MinIO. Erlaub nume Verbindige zu Server, wo du säber vertrousch.',
+  'Vul endpoint, bucket en access key ID in':
+      'Fülle Ändpunkt, Bucket und Zuegriffsschlüssel-ID us',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Aamäldig fehlgschlage — prüef Zuegriffsschlüssel, gheime Schlüssel und Region. E falschi Region git dr glich Fähler wie en falsche Schlüssel.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'De Ändpunkt isch uf ere private Adrässe. Setz s Häkli bi "Vertraute intärne Ändpunkt", damit d Verbindig erlaubt isch.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Bucket nöd gfunde. Bi eme eigete MinIO hilft oft d Uuswahl "Bucket im Pfad".',
+  'Ongeldig endpoint': 'Ungültige Ändpunkt',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Dä Ändpunkt unterstützt kes bedingts Schriibe; glichzitigs Bearbeite isch da schlächter gschützt.',
   'Naar de slide': 'Zur Folie',
   'De git-verbinding van dit deck bestaat niet meer.':
       'D git-Verbindig vo dere Präsentation git\'s nüme.',

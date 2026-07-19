@@ -1799,6 +1799,33 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'S3-bucket': 'Compartiment S3',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'Un compartiment S3, de exemplu AWS S3 sau un server MinIO propriu.',
+  'Endpoint': 'Punct final',
+  'Bucket': 'Compartiment',
+  'Adressering': 'Adresare',
+  'Bucket in de hostnaam (AWS S3)': 'Compartiment în numele gazdei (AWS S3)',
+  'Bucket in het pad (MinIO en andere)':
+      'Compartiment în cale (MinIO și altele)',
+  'Regio': 'Regiune',
+  'Access key ID': 'ID-ul cheii de acces',
+  'Secret access key': 'Cheie de acces secretă',
+  'Prefix (optioneel)': 'Prefix (opțional)',
+  'Vertrouwd intern endpoint': 'Punct final intern de încredere',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Necesar când punctul final rulează într-o rețea privată sau de acasă (LAN), precum un MinIO propriu. Permite conexiuni doar către servere în care ai încredere.',
+  'Vul endpoint, bucket en access key ID in':
+      'Completează punctul final, compartimentul și ID-ul cheii de acces',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Autentificarea a eșuat — verifică cheia de acces, cheia secretă și regiunea. O regiune greșită dă aceeași eroare ca o cheie greșită.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Punctul final este la o adresă privată. Bifează "Punct final intern de încredere" pentru a permite conexiunea.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Compartimentul nu a fost găsit. Cu un MinIO propriu ajută adesea să alegi "Compartiment în cale".',
+  'Ongeldig endpoint': 'Punct final nevalid',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Acest punct final nu acceptă scrieri condiționate; editarea simultană este mai slab protejată aici.',
   'Naar de slide': 'La slide',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Conexiunea git a acestei prezentări nu mai există.',

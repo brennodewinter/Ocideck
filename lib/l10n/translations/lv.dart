@@ -1780,6 +1780,32 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'S3-bucket': 'S3 tvertne',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'S3 tvertne, piemēram, AWS S3 vai paša MinIO serveris.',
+  'Endpoint': 'Galapunkts',
+  'Bucket': 'Tvertne',
+  'Adressering': 'Adresēšana',
+  'Bucket in de hostnaam (AWS S3)': 'Tvertne resursdatora nosaukumā (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Tvertne ceļā (MinIO un citi)',
+  'Regio': 'Reģions',
+  'Access key ID': 'Piekļuves atslēgas ID',
+  'Secret access key': 'Slepenā piekļuves atslēga',
+  'Prefix (optioneel)': 'Prefikss (neobligāti)',
+  'Vertrouwd intern endpoint': 'Uzticams iekšējais galapunkts',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Nepieciešams, kad galapunkts darbojas privātā vai mājas tīklā (LAN), piemēram, paša MinIO. Atļauj savienojumus tikai ar serveriem, kuriem pats uzticies.',
+  'Vul endpoint, bucket en access key ID in':
+      'Aizpildi galapunktu, tvertni un piekļuves atslēgas ID',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Pieteikšanās neizdevās — pārbaudi piekļuves atslēgu, slepeno atslēgu un reģionu. Nepareizs reģions dod tādu pašu kļūdu kā nepareiza atslēga.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Galapunkts ir privātā adresē. Atzīmē "Uzticams iekšējais galapunkts", lai atļautu savienojumu.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Tvertne nav atrasta. Ar paša MinIO bieži palīdz izvēlēties "Tvertne ceļā".',
+  'Ongeldig endpoint': 'Nederīgs galapunkts',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Šis galapunkts neatbalsta nosacītu rakstīšanu; vienlaicīga rediģēšana šeit ir sliktāk aizsargāta.',
   'Naar de slide': 'Uz slaidu',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Šīs prezentācijas git savienojuma vairs nav.',

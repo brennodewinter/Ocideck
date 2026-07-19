@@ -738,6 +738,33 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'S3-bucket': 'Compartiment S3',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'Un compartiment S3, par exemple AWS S3 ou votre propre serveur MinIO.',
+  'Endpoint': 'Point de terminaison',
+  'Bucket': 'Compartiment',
+  'Adressering': 'Adressage',
+  'Bucket in de hostnaam (AWS S3)': 'Compartiment dans le nom d’hôte (AWS S3)',
+  'Bucket in het pad (MinIO en andere)':
+      'Compartiment dans le chemin (MinIO et autres)',
+  'Regio': 'Région',
+  'Access key ID': 'ID de clé d’accès',
+  'Secret access key': 'Clé d’accès secrète',
+  'Prefix (optioneel)': 'Préfixe (facultatif)',
+  'Vertrouwd intern endpoint': 'Point de terminaison interne de confiance',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Nécessaire lorsque le point de terminaison fonctionne sur un réseau privé ou domestique (LAN), comme votre propre MinIO. N’autorisez que les connexions vers des serveurs auxquels vous faites confiance.',
+  'Vul endpoint, bucket en access key ID in':
+      'Renseignez le point de terminaison, le compartiment et l’ID de clé d’accès',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Échec de la connexion — vérifiez la clé d’accès, la clé secrète et la région. Une région incorrecte donne la même erreur qu’une clé incorrecte.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Le point de terminaison est sur une adresse privée. Cochez "Point de terminaison interne de confiance" pour autoriser la connexion.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Compartiment introuvable. Avec votre propre MinIO, choisir "Compartiment dans le chemin" aide souvent.',
+  'Ongeldig endpoint': 'Point de terminaison non valide',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Ce point de terminaison ne prend pas en charge les écritures conditionnelles ; l’édition simultanée y est moins bien protégée.',
   'Naar de slide': 'Aller à la diapositive',
   'De git-verbinding van dit deck bestaat niet meer.':
       'La connexion git de cette présentation n\'existe plus.',

@@ -1817,6 +1817,32 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'S3-bucket': 'Buicéad S3',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'Buicéad S3, mar shampla AWS S3 nó do fhreastalaí MinIO féin.',
+  'Endpoint': 'Críochphointe',
+  'Bucket': 'Buicéad',
+  'Adressering': 'Seoladh',
+  'Bucket in de hostnaam (AWS S3)': 'Buicéad in ainm an óstaigh (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Buicéad sa chonair (MinIO agus eile)',
+  'Regio': 'Réigiún',
+  'Access key ID': 'Aitheantas na heochrach rochtana',
+  'Secret access key': 'Eochair rochtana rúnda',
+  'Prefix (optioneel)': 'Réimír (roghnach)',
+  'Vertrouwd intern endpoint': 'Críochphointe inmheánach iontaofa',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Riachtanach nuair a ritheann an críochphointe ar líonra príobháideach nó baile (LAN), ar nós do MinIO féin. Ná ceadaigh ceangail ach le freastalaithe a bhfuil muinín agat astu.',
+  'Vul endpoint, bucket en access key ID in':
+      'Líon isteach an críochphointe, an buicéad agus aitheantas na heochrach rochtana',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Theip ar an síniú isteach — seiceáil an eochair rochtana, an eochair rúnda agus an réigiún. Tugann réigiún mícheart an earráid chéanna le heochair mhícheart.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Tá an críochphointe ar sheoladh príobháideach. Tic "Críochphointe inmheánach iontaofa" chun an ceangal a cheadú.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Buicéad gan aimsiú. Le do MinIO féin is minic a chabhraíonn sé "Buicéad sa chonair" a roghnú.',
+  'Ongeldig endpoint': 'Críochphointe neamhbhailí',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Ní thacaíonn an críochphointe seo le scríobh coinníollach; tá eagarthóireacht chomhuaineach níos lú cosanta anseo.',
   'Naar de slide': 'Go dtí an sleamhnán',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Níl nasc git na láithreoireachta seo ann a thuilleadh.',

@@ -1756,6 +1756,32 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'S3-bucket': 'S3 nagh baS',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'S3 nagh baS, ghojmeH AWS S3 pagh MinIO De\'wI\'pIm.',
+  'Endpoint': 'Dech',
+  'Bucket': 'nagh baS',
+  'Adressering': 'Degh',
+  'Bucket in de hostnaam (AWS S3)': 'nagh baS \'oH pongDaq (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'nagh baS \'oH HeDaq (MinIO latlh je)',
+  'Regio': 'Sep',
+  'Access key ID': 'nuHmey ngaQHa\'moH ID',
+  'Secret access key': 'pegh ngaQHa\'moH',
+  'Prefix (optioneel)': 'wa\'DIch (DaH qaSbe\')',
+  'Vertrouwd intern endpoint': 'vItlhorghqutlu\' internal Dech',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'qaStaHvIS Dech pa\' Sep (LAN), MinIO rur. De\'wI\'mey vItlhorghqutlu\'bogh neH yIchaw\'.',
+  'Vul endpoint, bucket en access key ID in':
+      'Dech, nagh baS, ngaQHa\'moH ID je yIbuS',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Qapbe\' — ngaQHa\'moH, pegh ngaQHa\'moH, Sep je yInoH. Sep lughbe\'chugh, ngaQHa\'moH lughbe\'bogh rur Qagh.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'pa\' Dech Degh. "vItlhorghqutlu\' internal Dech" yIwIv \'ej rar yIchaw\'.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'nagh baS Sambe\'lu\'. MinIO Daghajchugh, "nagh baS \'oH HeDaq" yIwIv.',
+  'Ongeldig endpoint': 'Dech lughbe\'',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'qonwI\' chotbe\' Dechvam; wa\' poH chovnatlh QanmeH QaQbe\'.',
   'Naar de slide': '\'anghom yIlegh',
   'De git-verbinding van dit deck bestaat niet meer.':
       'QIchvam git rar tu\'lu\'be\'qu\'.',

@@ -920,6 +920,33 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'S3-bucket': 'S3 bucket',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'An S3 bucket, for example AWS S3 or your own MinIO server.',
+  'Endpoint': 'Endpoint',
+  'Bucket': 'Bucket',
+  'Adressering': 'Addressing',
+  'Bucket in de hostnaam (AWS S3)': 'Bucket in the host name (AWS S3)',
+  'Bucket in het pad (MinIO en andere)':
+      'Bucket in the path (MinIO and others)',
+  'Regio': 'Region',
+  'Access key ID': 'Access key ID',
+  'Secret access key': 'Secret access key',
+  'Prefix (optioneel)': 'Prefix (optional)',
+  'Vertrouwd intern endpoint': 'Trusted internal endpoint',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Needed when the endpoint runs on a private or home network (LAN), such as your own MinIO. Only allow connections to servers you trust yourself.',
+  'Vul endpoint, bucket en access key ID in':
+      'Fill in endpoint, bucket and access key ID',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Sign-in failed — check the access key, the secret key and the region. A wrong region gives the same error as a wrong key.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'The endpoint is on a private address. Tick "Trusted internal endpoint" to allow the connection.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Bucket not found. With your own MinIO it often helps to choose "Bucket in the path".',
+  'Ongeldig endpoint': 'Invalid endpoint',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'This endpoint does not support conditional writes; simultaneous editing is less well protected here.',
   'Naar de slide': 'Go to slide',
   'De git-verbinding van dit deck bestaat niet meer.':
       'The git connection for this deck no longer exists.',

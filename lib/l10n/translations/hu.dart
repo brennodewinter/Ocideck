@@ -1785,6 +1785,33 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'S3-bucket': 'S3 tároló',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'S3 tároló, például AWS S3 vagy saját MinIO-kiszolgáló.',
+  'Endpoint': 'Végpont',
+  'Bucket': 'Tároló',
+  'Adressering': 'Címzés',
+  'Bucket in de hostnaam (AWS S3)': 'Tároló a gépnévben (AWS S3)',
+  'Bucket in het pad (MinIO en andere)':
+      'Tároló az útvonalban (MinIO és mások)',
+  'Regio': 'Régió',
+  'Access key ID': 'Hozzáférési kulcs azonosítója',
+  'Secret access key': 'Titkos hozzáférési kulcs',
+  'Prefix (optioneel)': 'Előtag (nem kötelező)',
+  'Vertrouwd intern endpoint': 'Megbízható belső végpont',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Akkor kell, ha a végpont magán- vagy otthoni hálózaton (LAN) fut, például saját MinIO. Csak olyan kiszolgálókhoz engedj kapcsolatot, amelyekben megbízol.',
+  'Vul endpoint, bucket en access key ID in':
+      'Töltsd ki a végpontot, a tárolót és a hozzáférési kulcs azonosítóját',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'A bejelentkezés nem sikerült — ellenőrizd a hozzáférési kulcsot, a titkos kulcsot és a régiót. A rossz régió ugyanazt a hibát adja, mint a rossz kulcs.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'A végpont magáncímen van. Jelöld be a "Megbízható belső végpont" lehetőséget a kapcsolat engedélyezéséhez.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'A tároló nem található. Saját MinIO esetén gyakran segít a "Tároló az útvonalban" választása.',
+  'Ongeldig endpoint': 'Érvénytelen végpont',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Ez a végpont nem támogatja a feltételes írást; az egyidejű szerkesztés itt kevésbé védett.',
   'Naar de slide': 'Ugrás a diára',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Ennek a bemutatónak a git-kapcsolata már nem létezik.',

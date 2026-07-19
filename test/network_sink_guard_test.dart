@@ -77,6 +77,11 @@ void main() {
         // importFromUrl: safeResolve + pin (import-part van file_service).
         'lib/services/parts/file_service_import.dart',
         'lib/services/webdav_service.dart', // safeResolveTrusted + pin
+        // S3: safeResolveTrusted met de trustedInternal-opt-in van de bucket +
+        // socket-pin + geen redirects + caps. Gepind wordt op de host die we
+        // écht bellen — bij virtual-hosted adressering zit de bucketnaam
+        // daarin, dus die naam wordt geresolved, niet het kale endpoint.
+        'lib/services/s3/s3_service.dart',
         // AI backend: resolves per AiResolveStrategy (loopback-direct for local
         // IPC, safeResolveTrusted for self-hosted, safeResolve for cloud) + pin.
         'lib/services/ai_client_service.dart',

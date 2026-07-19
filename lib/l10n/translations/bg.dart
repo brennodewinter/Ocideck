@@ -1804,6 +1804,32 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'S3-bucket': 'S3 контейнер',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'S3 контейнер, например AWS S3 или собствен сървър MinIO.',
+  'Endpoint': 'Крайна точка',
+  'Bucket': 'Контейнер',
+  'Adressering': 'Адресиране',
+  'Bucket in de hostnaam (AWS S3)': 'Контейнер в името на хоста (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Контейнер в пътя (MinIO и други)',
+  'Regio': 'Регион',
+  'Access key ID': 'Идентификатор на ключа за достъп',
+  'Secret access key': 'Таен ключ за достъп',
+  'Prefix (optioneel)': 'Префикс (по избор)',
+  'Vertrouwd intern endpoint': 'Надеждна вътрешна крайна точка',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Необходимо е, когато крайната точка работи в частна или домашна мрежа (LAN), например собствен MinIO. Разрешавай връзки само към сървъри, на които се доверяваш.',
+  'Vul endpoint, bucket en access key ID in':
+      'Попълни крайна точка, контейнер и идентификатор на ключа за достъп',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Влизането е неуспешно — провери ключа за достъп, тайния ключ и региона. Грешен регион дава същата грешка като грешен ключ.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Крайната точка е на частен адрес. Отметни "Надеждна вътрешна крайна точка", за да разрешиш връзката.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Контейнерът не е намерен. При собствен MinIO често помага да избереш "Контейнер в пътя".',
+  'Ongeldig endpoint': 'Невалидна крайна точка',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Тази крайна точка не поддържа условен запис; едновременното редактиране тук е по-слабо защитено.',
   'Naar de slide': 'Към слайда',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Git връзката на тази презентация вече не съществува.',

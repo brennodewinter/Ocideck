@@ -1799,6 +1799,32 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'S3-bucket': 'Сегмент S3',
+  'Een S3-bucket, bijvoorbeeld AWS S3 of een eigen MinIO-server.':
+      'Сегмент S3, наприклад AWS S3 або власний сервер MinIO.',
+  'Endpoint': 'Кінцева точка',
+  'Bucket': 'Сегмент',
+  'Adressering': 'Адресація',
+  'Bucket in de hostnaam (AWS S3)': 'Сегмент в імені хоста (AWS S3)',
+  'Bucket in het pad (MinIO en andere)': 'Сегмент у шляху (MinIO та інші)',
+  'Regio': 'Регіон',
+  'Access key ID': 'Ідентифікатор ключа доступу',
+  'Secret access key': 'Секретний ключ доступу',
+  'Prefix (optioneel)': 'Префікс (необов’язково)',
+  'Vertrouwd intern endpoint': 'Довірена внутрішня кінцева точка',
+  'Nodig wanneer het endpoint op een privé- of thuisnetwerk (LAN) draait, zoals een eigen MinIO. Sta alleen verbindingen toe naar servers die je zelf vertrouwt.':
+      'Потрібно, коли кінцева точка працює в приватній або домашній мережі (LAN), наприклад власний MinIO. Дозволяйте з’єднання лише із серверами, яким довіряєте.',
+  'Vul endpoint, bucket en access key ID in':
+      'Заповніть кінцеву точку, сегмент та ідентифікатор ключа доступу',
+  'Aanmelden mislukt — controleer de access key, de secret key en de regio. Een verkeerde regio geeft dezelfde fout als een verkeerde sleutel.':
+      'Не вдалося ввійти — перевірте ключ доступу, секретний ключ і регіон. Хибний регіон дає ту саму помилку, що й хибний ключ.',
+  'Het endpoint staat op een privé-adres. Vink "Vertrouwd intern endpoint" aan om verbinding toe te staan.':
+      'Кінцева точка має приватну адресу. Позначте "Довірена внутрішня кінцева точка", щоб дозволити з’єднання.',
+  'Bucket niet gevonden. Bij een eigen MinIO helpt het vaak om "Bucket in het pad" te kiezen.':
+      'Сегмент не знайдено. З власним MinIO часто допомагає вибрати "Сегмент у шляху".',
+  'Ongeldig endpoint': 'Недійсна кінцева точка',
+  'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
+      'Ця кінцева точка не підтримує умовний запис; одночасне редагування тут захищене гірше.',
   'Naar de slide': 'До слайда',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Git-з\'єднання цієї презентації більше не існує.',

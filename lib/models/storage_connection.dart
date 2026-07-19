@@ -4,6 +4,7 @@ import 'package:uuid/uuid.dart';
 
 import '../utils/log.dart';
 import 'git_settings.dart';
+import 's3_settings.dart';
 import 'webdav_settings.dart';
 
 /// Eén bestandsverbinding: een benoemde plek waar presentaties vandaan komen en
@@ -105,6 +106,11 @@ sealed class StorageConnection {
         name: name,
         repo: GitRepoConfig.fromJson(config),
       ),
+      's3' => S3Connection(
+        id: id,
+        name: name,
+        bucket: S3Bucket.fromJson(config),
+      ),
       _ => null,
     };
   }
@@ -113,7 +119,7 @@ sealed class StorageConnection {
 /// De soorten verbinding. De volgorde hier bepaalt de volgorde in het
 /// "verbinding toevoegen"-menu, niet die in de lijst zelf — die kiest de
 /// gebruiker.
-enum StorageConnectionKind { local, webdav, git }
+enum StorageConnectionKind { local, webdav, s3, git }
 
 /// Een map op de schijf van deze computer. De opvolger van `LibraryFolder`:
 /// zelfde inhoud (naam + pad), maar nu als gelijkwaardige verbinding naast de
@@ -180,6 +186,43 @@ final class WebdavConnection extends StorageConnection {
     'name': name,
     'kind': 'webdav',
     'config': server.toJson(),
+  };
+}
+
+/// Een prefix in een S3-bucket (AWS S3, of een S3-compatible dienst zoals
+/// MinIO, Ceph, Wasabi of Scaleway).
+final class S3Connection extends StorageConnection {
+  final S3Bucket bucket;
+
+  const S3Connection({
+    required super.id,
+    required super.name,
+    required this.bucket,
+  });
+
+  @override
+  StorageConnectionKind get kind => StorageConnectionKind.s3;
+
+  @override
+  bool get isConfigured => bucket.isConfigured;
+
+  /// De bucketnaam, niet de endpoint-host: twee buckets op hetzelfde endpoint
+  /// zijn het gangbare geval, dezelfde bucket op twee endpoints niet.
+  @override
+  String get fallbackLabel => bucket.bucket;
+
+  S3Connection copyWith({String? name, S3Bucket? bucket}) => S3Connection(
+    id: id,
+    name: name ?? this.name,
+    bucket: bucket ?? this.bucket,
+  );
+
+  @override
+  Map<String, Object?> toJson() => {
+    'id': id,
+    'name': name,
+    'kind': 's3',
+    'config': bucket.toJson(),
   };
 }
 
