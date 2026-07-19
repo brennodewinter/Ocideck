@@ -294,8 +294,6 @@ const _dutchSourceFi = {
   'Uitbreidingen': 'Laajennukset',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Valinnaiset moduulit. Oletuksena pois; ne eivät lisää mitään perussovellukseen ennen kuin otat ne käyttöön.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Raportointidiat ja viitetiedot tietoturvaa varten: havainnot, tarkistuslistat, scope-matriisit ja hyväksyntä. Jäsennelty MIAUW:n mukaisesti ja laajasti käytettävissä pentesteihin, auditointeihin ja tietoturvatutkimukseen. Käyttöönotto hakee viitetiedot kerran; sen jälkeen moduuli toimii offline-tilassa.',
   'Gegevens opschonen': 'Siivoa tiedot',
   'Gegevens lokaal beschikbaar': 'Tiedot saatavilla paikallisesti',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':

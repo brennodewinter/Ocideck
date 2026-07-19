@@ -294,8 +294,6 @@ const _dutchSourceHu = {
   'Uitbreidingen': 'Bővítmények',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Választható modulok. Alapértelmezetten kikapcsolva; semmit sem adnak az alapalkalmazáshoz, amíg be nem kapcsolja őket.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Jelentésdiák és referenciaadatok az információbiztonsághoz: megállapítások, ellenőrzőlisták, hatókörmátrixok és aláírás. MIAUW szerint strukturálva és széles körben használható pentesztekhez, auditokhoz és biztonsági kutatáshoz. A bekapcsolás egyszer letölti a referenciaadatokat; ezután a modul offline működik.',
   'Gegevens opschonen': 'Adatok törlése',
   'Gegevens lokaal beschikbaar': 'Adatok helyben elérhetők',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':

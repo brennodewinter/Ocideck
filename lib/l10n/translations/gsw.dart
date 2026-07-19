@@ -294,8 +294,6 @@ const _dutchSourceGsw = {
   'Uitbreidingen': 'Erwyterige',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Optionali Modul. Standardmässig us; si tüend zur Basis-App nüt derzue, bis du si iischaltisch.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Bricht-Slides und Referänzdate für d\'Informationssicherheit: Befund, Checkliste, Scope-Matrize und Underzeichnig. Nach MIAUW strukturiert und breit iisetzbar für Pentest, Audits und Sicherheitsforschig. Bim Iischalte werde d\'Referänzdate eimol glade; dernah lauft s Modul offline.',
   'Gegevens opschonen': 'Date ufruume',
   'Gegevens lokaal beschikbaar': 'Date lokal verfüegbar',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':

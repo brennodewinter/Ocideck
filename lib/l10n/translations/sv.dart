@@ -293,8 +293,6 @@ const _dutchSourceSv = {
   'Uitbreidingen': 'Tillägg',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Valfria moduler. Av som standard; de lägger inte till något i basappen förrän du aktiverar dem.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Rapporteringsslides och referensdata för informationssäkerhet: fynd, checklistor, scope-matriser och godkännande. Strukturerad enligt MIAUW och brett användbar för pentester, revisioner och säkerhetsundersökningar. Aktivering hämtar referensdata en gång; sedan fungerar modulen offline.',
   'Gegevens opschonen': 'Rensa data',
   'Gegevens lokaal beschikbaar': 'Data tillgängliga lokalt',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':

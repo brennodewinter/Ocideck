@@ -293,8 +293,6 @@ const _dutchSourceId = {
   'Uitbreidingen': 'Ekstensi',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Modul opsional. Mati secara bawaan; tidak menambahkan apa pun ke aplikasi dasar sampai Anda mengaktifkannya.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Slide pelaporan dan data referensi untuk keamanan informasi: temuan, daftar periksa, matriks ruang lingkup, dan penandatanganan. Terstruktur menurut MIAUW dan dapat digunakan secara luas untuk pentest, audit, dan riset keamanan. Mengaktifkan akan mengambil data referensi sekali; setelah itu modul bekerja offline.',
   'Gegevens opschonen': 'Bersihkan data',
   'Gegevens lokaal beschikbaar': 'Data tersedia secara lokal',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':

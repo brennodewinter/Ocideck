@@ -294,8 +294,6 @@ const _dutchSourceFy = {
   'Uitbreidingen': 'Utwreidingen',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Opsjonele modules. Standert út; se foegje neat ta oan de basis-app oant jo se ynskeakelje.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Rapportaazjeslides en referinsjedata foar ynformaasjebefeiliging: befinings, checklists, scope-matriuzen en ûndertekening. Struktureare neffens MIAUW en breed ynsetber foar pentests, audits en befeiligingsûndersyk. By it ynskeakeljen wurde de referinsjegegevens ien kear ophelle; dêrnei wurket de module offline.',
   'Gegevens opschonen': 'Gegevens opromje',
   'Gegevens lokaal beschikbaar': 'Gegevens lokaal beskikber',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':

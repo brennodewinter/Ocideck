@@ -294,8 +294,6 @@ const _dutchSourceDa = {
   'Uitbreidingen': 'Udvidelser',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Valgfrie moduler. Slået fra som standard; de tilføjer intet til basisappen, før du aktiverer dem.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Rapporteringsslides og referencedata til informationssikkerhed: fund, tjeklister, scope-matricer og godkendelse. Struktureret efter MIAUW og bredt anvendelig til pentests, audits og sikkerhedsundersøgelser. Aktivering henter referencedataene én gang; derefter arbejder modulet offline.',
   'Gegevens opschonen': 'Ryd data',
   'Gegevens lokaal beschikbaar': 'Data tilgængelige lokalt',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':

@@ -297,8 +297,6 @@ const _dutchSourcePl = {
   'Uitbreidingen': 'Rozszerzenia',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Moduły opcjonalne. Domyślnie wyłączone; nie dodają niczego do podstawowej aplikacji, dopóki ich nie włączysz.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Slajdy raportowe i dane referencyjne dla bezpieczeństwa informacji: ustalenia, listy kontrolne, macierze zakresu i podpisanie. Uporządkowane według MIAUW i szeroko przydatne do pentestów, audytów oraz badań bezpieczeństwa. Włączenie jednorazowo pobiera dane referencyjne; potem moduł działa offline.',
   'Gegevens opschonen': 'Wyczyść dane',
   'Gegevens lokaal beschikbaar': 'Dane dostępne lokalnie',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':

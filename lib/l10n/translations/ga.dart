@@ -298,8 +298,6 @@ const _dutchSourceGa = {
   'Uitbreidingen': 'Breiseáin',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Modúil roghnacha. Múchta de réir réamhshocraithe; ní chuireann siad aon rud leis an mbunaip go dtí go gcumasaíonn tú iad.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Sleamhnáin tuairiscithe agus sonraí tagartha don slándáil faisnéise: fionnachtana, seicliostaí, maitrísí raon feidhme agus síniú. Struchtúrtha de réir MIAUW agus inúsáidte go forleathan le haghaidh pentestanna, iniúchtaí agus taighde slándála. Íoslódálann cumasú na sonraí tagartha uair amháin; oibríonn an modúl as líne ina dhiaidh sin.',
   'Gegevens opschonen': 'Glan na sonraí',
   'Gegevens lokaal beschikbaar': 'Sonraí ar fáil go háitiúil',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':

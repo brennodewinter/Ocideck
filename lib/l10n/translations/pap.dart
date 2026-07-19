@@ -295,8 +295,6 @@ const _dutchSourcePap = {
   'Uitbreidingen': 'Ekstenshonnan',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Módulonan opcional. Pa defekto apagá; nan no ta agregá nada na e app básiko te ora bo aktivá nan.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Slide di raportahe i datonan di referensia pa seguridat di informashon: hallazgonan, lista di kontrol, matris di scope i firma. Strukturá segun MIAUW i ampliamente uzabel pa pentest, audit i investigashon di seguridat. Aktivashon ta baha e datonan di referensia un biaha; despues e módulo ta funshoná offline.',
   'Gegevens opschonen': 'Limpia datonan',
   'Gegevens lokaal beschikbaar': 'Datonan disponibel lokalmente',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':

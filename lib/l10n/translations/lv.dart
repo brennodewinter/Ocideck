@@ -294,8 +294,6 @@ const _dutchSourceLv = {
   'Uitbreidingen': 'Paplašinājumi',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Neobligāti moduļi. Pēc noklusējuma izslēgti; tie neko nepievieno pamata lietotnei, kamēr tos neieslēdzat.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Ziņošanas slaidi un atsauces dati informācijas drošībai: atklājumi, kontrolsaraksti, tvēruma matricas un apstiprināšana. Strukturēts pēc MIAUW un plaši izmantojams pentestiem, auditiem un drošības pētījumiem. Ieslēgšana vienreiz lejupielādē atsauces datus; pēc tam modulis darbojas bezsaistē.',
   'Gegevens opschonen': 'Notīrīt datus',
   'Gegevens lokaal beschikbaar': 'Dati pieejami lokāli',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':

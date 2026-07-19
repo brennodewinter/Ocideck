@@ -295,8 +295,6 @@ const _dutchSourceBg = {
   'Uitbreidingen': 'Разширения',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Незадължителни модули. По подразбиране изключени; не добавят нищо към основното приложение, докато не ги включите.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Слайдове за докладване и референтни данни за информационната сигурност: констатации, контролни списъци, матрици на обхвата и подписване. Структурирано по MIAUW и широко приложимо за пентестове, одити и проучвания на сигурността. Включването изтегля референтните данни веднъж; след това модулът работи офлайн.',
   'Gegevens opschonen': 'Изчистване на данните',
   'Gegevens lokaal beschikbaar': 'Данните са налични локално',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':

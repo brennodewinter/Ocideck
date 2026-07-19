@@ -293,8 +293,6 @@ const _dutchSourceSl = {
   'Uitbreidingen': 'Razširitve',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Izbirni moduli. Privzeto izklopljeni; osnovni aplikaciji ne dodajo ničesar, dokler jih ne omogočite.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Poročilne prosojnice in referenčni podatki za informacijsko varnost: ugotovitve, kontrolni seznami, matrike obsega in podpis. Strukturirano po MIAUW in široko uporabno za penteste, revizije in varnostne raziskave. Omogočanje enkrat prenese referenčne podatke; nato modul deluje brez povezave.',
   'Gegevens opschonen': 'Počisti podatke',
   'Gegevens lokaal beschikbaar': 'Podatki na voljo lokalno',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':

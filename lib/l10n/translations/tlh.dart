@@ -287,8 +287,6 @@ const _dutchSourceTlh = {
   'Uitbreidingen': 'chelwI\'mey',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'ngoQmey DIch Hutlh. motlh chImmoH; DamaghmoHpa\' app basis vaS chelbe\'.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'ja\'ghach nav De\' Qan je Hub De\' vaD: Sampu\'bogh, tetlh, ghantoH Degh, ghItlh je. MIAUW tlha\' \'ej pentest, nojwI\', Hub QeD lo\'laH. DamaghmoHchugh De\' Qan wa\'logh Suq; ngoQ offline vumtaH.',
   'Gegevens opschonen': 'De\' Say\'moH',
   'Gegevens lokaal beschikbaar': 'De\' pa\' naDev',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':

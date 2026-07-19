@@ -296,8 +296,6 @@ const _dutchSourceRo = {
   'Uitbreidingen': 'Extensii',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Module opționale. Dezactivate implicit; nu adaugă nimic aplicației de bază până nu le activați.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Slide-uri de raportare și date de referință pentru securitatea informațiilor: constatări, liste de verificare, matrice de domeniu și semnare. Structurat conform MIAUW și utilizabil pe scară largă pentru pentesturi, audituri și cercetare de securitate. Activarea descarcă o dată datele de referință; apoi modulul funcționează offline.',
   'Gegevens opschonen': 'Curăță datele',
   'Gegevens lokaal beschikbaar': 'Date disponibile local',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':

@@ -293,8 +293,6 @@ const _dutchSourceEn = {
   'Uitbreidingen': 'Extensions',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Optional modules. Off by default; they add nothing to the base app until you enable them.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Reporting slides and reference data for information security: findings, checklists, scope matrices and sign-off. Structured per MIAUW and broadly usable for pentests, audits and security research. Enabling fetches the reference data once; the module then works offline.',
   'Gegevens opschonen': 'Clean up data',
   'Gegevens lokaal beschikbaar': 'Data available locally',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':

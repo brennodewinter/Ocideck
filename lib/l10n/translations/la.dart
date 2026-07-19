@@ -296,8 +296,6 @@ const _dutchSourceLa = {
   'Uitbreidingen': 'Extensiones',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Moduli optionales. Praedefinite exstincti; nihil applicationi basi addunt donec eos actives.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Tabellae relationis et data referentiae ad securitatem informationis: inventa, indices agendorum, matrices ambitus et subscriptio. Secundum MIAUW ordinata et late adhibenda ad pentest, recognitiones et investigationem securitatis. Activatio data referentiae semel accersit; deinde modulus sine rete operatur.',
   'Gegevens opschonen': 'Data purgare',
   'Gegevens lokaal beschikbaar': 'Data localiter praesto',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':

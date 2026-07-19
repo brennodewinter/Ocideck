@@ -292,8 +292,6 @@ const _dutchSourceEt = {
   'Uitbreidingen': 'Laiendused',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Valikulised moodulid. Vaikimisi väljas; nad ei lisa põhirakendusele midagi, kuni te need sisse lülitate.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Aruandlusslaidid ja võrdlusandmed infoturbe jaoks: leiud, kontroll-loendid, skoobimaatriksid ja allkirjastamine. Struktureeritud MIAUW järgi ja laialt kasutatav pentestideks, audititeks ja turvauuringuteks. Sisselülitamine laadib võrdlusandmed korra alla; seejärel töötab moodul võrguühenduseta.',
   'Gegevens opschonen': 'Puhasta andmed',
   'Gegevens lokaal beschikbaar': 'Andmed saadaval kohapeal',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':

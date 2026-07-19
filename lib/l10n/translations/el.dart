@@ -297,8 +297,6 @@ const _dutchSourceEl = {
   'Uitbreidingen': 'Επεκτάσεις',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Προαιρετικές μονάδες. Απενεργοποιημένες από προεπιλογή· δεν προσθέτουν τίποτα στη βασική εφαρμογή μέχρι να τις ενεργοποιήσετε.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Διαφάνειες αναφοράς και δεδομένα αναφοράς για την ασφάλεια πληροφοριών: ευρήματα, λίστες ελέγχου, μήτρες εμβέλειας και υπογραφή. Δομημένο κατά MIAUW και ευρέως αξιοποιήσιμο για pentests, ελέγχους και έρευνα ασφάλειας. Η ενεργοποίηση κατεβάζει μία φορά τα δεδομένα αναφοράς· έπειτα η μονάδα λειτουργεί εκτός σύνδεσης.',
   'Gegevens opschonen': 'Εκκαθάριση δεδομένων',
   'Gegevens lokaal beschikbaar': 'Δεδομένα διαθέσιμα τοπικά',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
