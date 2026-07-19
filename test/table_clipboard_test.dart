@@ -41,6 +41,23 @@ void main() {
       ]);
     });
 
+    test('a space before the opening quote no longer breaks the cell', () {
+      // The clipboard used to run its own splitter, which only opened a quoted
+      // field when the cell was still empty — so this split on the inner comma.
+      // Sharing the file reader's scan fixed that along the way.
+      expect(parseClipboardTable('Plaats, Aantal\n "Amsterdam, NL", 3'), [
+        ['Plaats', ' Aantal'],
+        ['Amsterdam, NL', ' 3'],
+      ]);
+    });
+
+    test('a quote inside a cell is still literal, not an opener', () {
+      expect(parseClipboardTable('maat\tlengte\n5" pijp\t2'), [
+        ['maat', 'lengte'],
+        ['5" pijp', '2'],
+      ]);
+    });
+
     test('parses comma and semicolon CSV with consistent columns', () {
       expect(parseClipboardTable('Naam,Score\nJan,8'), [
         ['Naam', 'Score'],

@@ -1,5 +1,13 @@
-// One implementation of CSV quoting, for the two readers that need it: chart
-// data typed or exported by a user, and the CWE catalogue MITRE publishes.
+// CSV quoting for the two readers of *files*: chart data typed or exported by a
+// user, and the CWE catalogue MITRE publishes.
+//
+// `table_clipboard.dart` scans through here too, for pasting a spreadsheet
+// selection. It used to carry its own copy that opened a quoted field only when
+// the cell was still empty, so ` "a, b"` split on the inner comma; sharing this
+// scan settled that difference in favour of the file behaviour.
+//
+// There were three of these before anyone noticed. `check_conventions.dart`
+// now fails the build on a fourth — see `_quoteScannerHomes` there.
 //
 // They read the same quoting rules but want a different shape, and the
 // difference is deliberate rather than accidental:
