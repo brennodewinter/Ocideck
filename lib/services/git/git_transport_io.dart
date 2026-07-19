@@ -179,7 +179,7 @@ class PinnedGitTransport implements GitTransport {
     final pinned = resolved.addresses!.first;
     final client = HttpClient()
       ..connectionTimeout = const Duration(seconds: 15)
-      ..connectionFactory = (u, _, _) => Socket.startConnect(pinned, u.port);
+      ..connectionFactory = (u, _, _) => NetGuard.connectPinned(pinned, u);
     _client = client;
     return client;
   }

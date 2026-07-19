@@ -301,6 +301,28 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   gedrag waardoor mensen een privacycontrole uitzetten.
 
 ### Fixed
+- **Verzoeken naar `https`-servers gingen onversleuteld over de lijn.** Om een
+  DNS-rebind onmogelijk te maken zet OciDeck de socket vast op het adres dat de
+  veiligheidscontrole heeft goedgekeurd. Dat gebeurt met een eigen
+  `connectionFactory` — en wie die zet, is in Dart volledig zelf
+  verantwoordelijk voor TLS. Het standaardpad van de SDK zet het versleutelen
+  op; het fabriekspad neemt letterlijk over wat je teruggeeft.
+
+  Er werd een kale socket teruggegeven. Gevolg: elk `https`-verzoek ging als
+  platte HTTP naar poort 443, inclusief de `Authorization`-header met je
+  WebDAV-wachtwoord of je git-token erin. De server antwoordde met *"the plain
+  HTTP request was sent to HTTPS port"*, dus de verbinding werkte ook niet —
+  maar de gegevens waren er dan al uit.
+
+  Dit raakte alles wat over het netwerk ging: WebDAV, S3, git, het ophalen van
+  een deck van een URL, de CVE-database en de AI-backend. Alle zeven plekken
+  lopen nu via één gedeelde functie die het TLS zelf opzet, gevalideerd tegen
+  de hostnaam terwijl de socket op het gekeurde adres vastgepind blijft.
+
+  Geen enkele test ving dit, en dat was geen toeval: ze praten allemaal
+  `http://127.0.0.1`, dus het TLS-pad werd nooit aangeraakt. Er is nu een test
+  die naar de eerste bytes op de lijn kijkt — een TLS-verbinding begint met een
+  handshake-record, platte HTTP met de naam van de methode.
 - **"Geen toegang" en "verkeerd wachtwoord" waren dezelfde melding.** Een 401
   en een 403 leverden allebei *"Aanmelden mislukt — controleer gebruikersnaam
   en wachtwoord"*. Bij een 403 is dat het enige advies dat zéker niet helpt: je

@@ -93,10 +93,28 @@ SSRF-pinned transports.
   can't slip past.
 - **DNS-rebind pinning (resolve-then-pin).** `safeResolve` rejects a host if any
   resolved address is internal and returns the validated addresses; callers pin
-  the socket to that address (`connectionFactory = Socket.startConnect(pinned,
-  …)`), so a DNS rebind between the check and the connect cannot redirect the
-  socket to an internal IP. Redirects are blocked (`followRedirects = false`) at
-  each call site so a 3xx can't bypass the host check.
+  the socket to that address via `NetGuard.connectPinned`, so a DNS rebind
+  between the check and the connect cannot redirect the socket to an internal
+  IP. Redirects are blocked (`followRedirects = false`) at each call site so a
+  3xx can't bypass the host check.
+
+  **Pinning and TLS must be set up together.** Setting
+  `HttpClient.connectionFactory` makes that factory solely responsible for TLS:
+  the SDK's default path calls `SecureSocket.startConnect` with the
+  `badCertificateCallback`, but the factory path takes whatever the factory
+  returns, verbatim. Returning a plain `Socket` for an `https` URI therefore
+  meant *no TLS at all* — requests went out as readable plaintext, including
+  the `Authorization` header, and the server answered "the plain HTTP request
+  was sent to HTTPS port". `connectPinned` connects to the pinned address and
+  then wraps it itself with `SecureSocket.secure(host: uri.host)`, so the
+  certificate is validated against the hostname while the socket stays pinned
+  to the vetted address. Any new caller must go through it rather than building
+  its own factory.
+
+  This is guarded by `test/tls_through_pinned_socket_test.dart`, which reads
+  the first bytes off the wire: TLS starts with a `0x16` handshake record,
+  plaintext HTTP starts with the method name. The service tests could not catch
+  it, because they all speak `http://127.0.0.1` with `trustedInternal`.
 - **Per-caller byte caps** (see the Performance guide) reject oversized responses
   both by `Content-Length` pre-check and by streaming cap.
 

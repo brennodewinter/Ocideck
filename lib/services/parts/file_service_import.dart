@@ -221,7 +221,7 @@ extension FileServiceImport on FileService {
         // check above and the actual connect can't point us at an internal IP.
         // TLS (for https) still validates against the original hostname.
         ..connectionFactory = (u, proxyHost, proxyPort) =>
-            Socket.startConnect(pinned, u.port);
+            NetGuard.connectPinned(pinned, u);
       try {
         final request = await client.getUrl(uri);
         // Don't auto-follow redirects: a 3xx could point at a private host and
