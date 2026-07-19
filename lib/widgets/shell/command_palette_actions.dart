@@ -58,7 +58,7 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
         enabled: deckNotifier.aiGeneratedAltTextCount > 0,
         onInvoke: () => clearAiAltTexts(),
       ),
-      ..._securityCommands(l10n, deck, deckNotifier),
+      ..._infoSafetyCommands(l10n, deck, deckNotifier),
       PaletteCommand(
         label: l10n.t('imageLibrary'),
         icon: Icons.photo_library_outlined,
@@ -124,7 +124,7 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
   /// matching how the security slide types are hidden from the add-slide picker
   /// and editor — the palette never offers a command the user can't run.
   /// Grouped here to keep [_openCommandPalette] under the method-length limit.
-  List<PaletteCommand> _securityCommands(
+  List<PaletteCommand> _infoSafetyCommands(
     AppLocalizations l10n,
     Deck deck,
     DeckNotifier deckNotifier,

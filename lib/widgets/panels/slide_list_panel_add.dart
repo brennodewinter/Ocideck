@@ -10,7 +10,7 @@ extension _SlideListPanelAddSlide on _SlideListPanelState {
   Future<void> _onAddSlide() async {
     final type = await AddSlideDialog.show(
       context,
-      revealSecurityModule: ref.read(infoSafetyRevealProvider),
+      revealInfoSafety: ref.read(infoSafetyRevealProvider),
     );
     if (type == null) return;
     final notifier = ref.read(deckProvider.notifier);

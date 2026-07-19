@@ -21,6 +21,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../utils/log.dart';
 
+/// Draagt met opzet nog de oude modulenaam. De identifiers in de code heten
+/// inmiddels allemaal `infoSafety…`, maar deze string staat op de schijf van
+/// iedereen die de module ooit heeft aangezet. Hem meehernoemen zou de
+/// schakelaar bij al die mensen stilzwijgend op uit zetten — een
+/// gedragswijziging vermomd als opruimen, en een die niemand meldt omdat het
+/// eruitziet alsof de module gewoon nooit aanstond. Wie hem tóch wil
+/// gelijktrekken, schrijft eerst een migratie die de oude sleutel leest.
 const _enabledKey = 'secModuleEnabled';
 
 /// Written by the provisioning pipeline this module used to carry. Removed on

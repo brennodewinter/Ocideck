@@ -14,7 +14,7 @@ class _EditorToolbar extends StatelessWidget {
 
   /// Of de informatieveiligheid-module onthuld is; gate de security-slidetypes
   /// in de kiezer net als 'Slide toevoegen' (zie [AddSlideDialog]).
-  final bool revealSecurityModule;
+  final bool revealInfoSafety;
 
   /// Extra items rechts in de kopregel (bijv. de hulp-toggle en de
   /// kwaliteits-samenvatting), zodat die op dezelfde regel als TYPE/STIJL staan.
@@ -28,7 +28,7 @@ class _EditorToolbar extends StatelessWidget {
     required this.onTypeChanged,
     required this.onProfileChanged,
     required this.onDefaultProfileRequested,
-    required this.revealSecurityModule,
+    required this.revealInfoSafety,
     this.trailing = const [],
   });
 
@@ -38,12 +38,9 @@ class _EditorToolbar extends StatelessWidget {
   /// je zo'n slide niet naar een ander security-type ombouwen.
   Future<void> _pickType(BuildContext context) async {
     final reveal =
-        revealSecurityModule ||
+        revealInfoSafety ||
         slide.type.category == SlideCategory.informatieveiligheid;
-    final picked = await AddSlideDialog.show(
-      context,
-      revealSecurityModule: reveal,
-    );
+    final picked = await AddSlideDialog.show(context, revealInfoSafety: reveal);
     if (picked != null && picked != slide.type) onTypeChanged(picked);
   }
 
@@ -157,7 +154,7 @@ class _EditorHeaderBar extends StatefulWidget {
   final ValueChanged<SlideType> onTypeChanged;
   final ValueChanged<ThemeProfile> onProfileChanged;
   final VoidCallback onDefaultProfileRequested;
-  final bool revealSecurityModule;
+  final bool revealInfoSafety;
 
   const _EditorHeaderBar({
     required this.slide,
@@ -167,7 +164,7 @@ class _EditorHeaderBar extends StatefulWidget {
     required this.onTypeChanged,
     required this.onProfileChanged,
     required this.onDefaultProfileRequested,
-    required this.revealSecurityModule,
+    required this.revealInfoSafety,
   });
 
   @override
@@ -191,7 +188,7 @@ class _EditorHeaderBarState extends State<_EditorHeaderBar> {
           onTypeChanged: widget.onTypeChanged,
           onProfileChanged: widget.onProfileChanged,
           onDefaultProfileRequested: widget.onDefaultProfileRequested,
-          revealSecurityModule: widget.revealSecurityModule,
+          revealInfoSafety: widget.revealInfoSafety,
           trailing: [
             const SizedBox(width: 8),
             SlideTypeHelpToggle(

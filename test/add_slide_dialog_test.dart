@@ -18,7 +18,7 @@ void main() {
               child: ElevatedButton(
                 onPressed: () async => picked = await AddSlideDialog.show(
                   context,
-                  revealSecurityModule: reveal,
+                  revealInfoSafety: reveal,
                 ),
                 child: const Text('open'),
               ),

@@ -307,7 +307,7 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 - `import_slides_dialog.dart` — Scans directories for presentations to import slides from.
 - `management_summary_dialog.dart` — Shows the derived management summary (severity counts, coverage, standards).
 - `miauw_compliance_panel.dart` — The MIAUW compliance overview panel with per-EIS status and waivers.
-- `new_deck_dialog.dart` — Creates a new presentation with a title; the searchable template picker + `templatePickerIcons`, hiding `requiresSecurityModule` templates (MIAUW) until the module is revealed.
+- `new_deck_dialog.dart` — Creates a new presentation with a title; the searchable template picker + `templatePickerIcons`, hiding `requiresInfoSafety` templates (MIAUW) until the module is revealed.
 - `open_presentation_dialog.dart` — Full-text searchable presentation picker with directory scanning.
 - `package_encrypt_dialog.dart` — Optional password protection when exporting a package: strength meter, generator, copy.
 - `package_password_dialog.dart` — Prompts for the password when opening an encrypted package (with wrong-password retry).
