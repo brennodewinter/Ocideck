@@ -1793,6 +1793,20 @@ const _dutchSourceAddCs = <String, String>{
   'Niet de tekst op deze slide is het probleem, maar de reeks.':
       'Problémem není text na tomto snímku, ale řada.',
   'Haal volle pagina uit de reeks': 'Odebrat plnou stránku z řady',
+  'Opslag': 'Úložiště',
+  'Opslagwijzen': 'Způsoby uložení',
+  'Deze computer': 'Tento počítač',
+  'Ingesteld': 'Nastaveno',
+  'Niet ingesteld': 'Nenastaveno',
+  'Nog geen bibliotheek ingesteld': 'Zatím není nastavena žádná knihovna',
+  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
+      'Cesty, kterými můžete otevírat a ukládat prezentace. Kliknutím způsob rozbalíte a nastavíte.',
+  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
+      'Prezentace ve výše uvedených složkách, na disku tohoto počítače.',
+  'Open en bewaar presentaties in een map op je Nextcloud.':
+      'Otevírejte a ukládejte prezentace ve složce na svém Nextcloudu.',
+  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Otevírejte prezentace z git repozitáře; každá uložená verze zůstává zachována.',
   'Nog te verifiëren': 'Zbývá ověřit',
   'MASWE-zwakheid kiezen': 'Vybrat slabinu MASWE',
   'Zoek op naam, id of categorie': 'Hledat podle názvu, id nebo kategorie',

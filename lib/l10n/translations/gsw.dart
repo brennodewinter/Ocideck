@@ -1794,6 +1794,20 @@ const _dutchSourceAddGsw = <String, String>{
   'Niet de tekst op deze slide is het probleem, maar de reeks.':
       'Nid dr Text uf dere Folie isch s Problem, sondern d Reihe.',
   'Haal volle pagina uit de reeks': 'Volli Site us dr Reihe neh',
+  'Opslag': 'Spiicher',
+  'Opslagwijzen': 'Spiicherarte',
+  'Deze computer': 'Dä Computer',
+  'Ingesteld': 'Iigrichtet',
+  'Niet ingesteld': 'Nöd iigrichtet',
+  'Nog geen bibliotheek ingesteld': 'No kei Bibliothek iigrichtet',
+  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
+      'D Wääg, wo Sie Präsentatione chönd uufmache und spichere. Klicked e Spiicherart uuf, zum sie iizrichte.',
+  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
+      'Präsentatione i de Ordner obedra, uf de Feschtplatte vo dem Computer.',
+  'Open en bewaar presentaties in een map op je Nextcloud.':
+      'Präsentatione in emene Ordner uf Ihrer Nextcloud uufmache und spichere.',
+  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Präsentatione us eme Git-Repository uufmache; jedi gspicherti Version blibt erhalte.',
   'Nog te verifiëren': 'No z verifiziere',
   'MASWE-zwakheid kiezen': 'MASWE-Schwachstell uswähle',
   'Zoek op naam, id of categorie': 'Nach Name, ID oder Kategorie sueche',

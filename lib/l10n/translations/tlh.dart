@@ -1765,6 +1765,20 @@ const _dutchSourceAddTlh = <String, String>{
   'Niet de tekst op deze slide is het probleem, maar de reeks.':
       '\'echletHomvam mu\'mey qay\'be\'; rar\'e\' qay\'.',
   'Haal volle pagina uit de reeks': 'rarvo\' \'echletHom buy\' yITeq',
+  'Opslag': 'waHtaHghach',
+  'Opslagwijzen': 'waHtaHghach mIwmey',
+  'Deze computer': 'De\'wI\'vam',
+  'Ingesteld': 'cherlu\'pu\'',
+  'Niet ingesteld': 'cherlu\'be\'pu\'',
+  'Nog geen bibliotheek ingesteld': 'qumwI\' pagh cherlu\'pu\'',
+  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
+      'Hutlhbe\'chugh vay\' \'ej ta\'mey poSmoH \'ej polmoH. mIw yIwIv \'ej yIcher.',
+  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
+      'Dat ta\'mey, De\'wI\'vam nagh Daq.',
+  'Open en bewaar presentaties in een map op je Nextcloud.':
+      'Nextcloud DaqDaq ta\'mey yIpoSmoH \'ej yIpolmoH.',
+  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
+      'git qach vo\' ta\'mey yIpoSmoH; Hoch pollu\'pu\'bogh Segh polqu\'lu\'.',
   'Nog te verifiëren': 'ngu\'nISlu\'bogh',
   'MASWE-zwakheid kiezen': 'MASWE puj wIv',
   'Zoek op naam, id of categorie': 'pong, id, Segh je Sam',

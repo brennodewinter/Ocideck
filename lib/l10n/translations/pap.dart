@@ -747,6 +747,20 @@ const _dutchSourceAddPap = {
   'Niet de tekst op deze slide is het probleem, maar de reeks.':
       'No ta e teksto riba e slide aki ta e problema, sino e serie.',
   'Haal volle pagina uit de reeks': 'Kita e página yen for di e serie',
+  'Opslag': 'Almasenamentu',
+  'Opslagwijzen': 'Manera di almasená',
+  'Deze computer': 'E computer aki',
+  'Ingesteld': 'Konfigurá',
+  'Niet ingesteld': 'No konfigurá',
+  'Nog geen bibliotheek ingesteld': 'Ainda no tin biblioteka konfigurá',
+  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
+      'E kamindanan pa habri i warda presentashonnan. Klek riba un manera pa konfigurá e.',
+  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
+      'Presentashonnan den e mapnan ariba, riba e disko di e computer aki.',
+  'Open en bewaar presentaties in een map op je Nextcloud.':
+      'Habri i warda presentashonnan den un mapa riba bo Nextcloud.',
+  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Habri presentashonnan for di un repositorio git; tur vershon wardá ta keda warda.',
   'Nog te verifiëren': 'Ainda pa verifiká',
   'MASWE-zwakheid kiezen': 'Skohe un debilidat MASWE',
   'Zoek op naam, id of categorie': 'Buska pa nòmber, id òf kategoria',

@@ -747,6 +747,21 @@ const _dutchSourceAddFr = {
   'Niet de tekst op deze slide is het probleem, maar de reeks.':
       'Ce n\'est pas le texte de cette diapositive qui pose problème, mais la série.',
   'Haal volle pagina uit de reeks': 'Retirer la page pleine de la série',
+  'Opslag': 'Stockage',
+  'Opslagwijzen': 'Modes de stockage',
+  'Deze computer': 'Cet ordinateur',
+  'Ingesteld': 'Configuré',
+  'Niet ingesteld': 'Non configuré',
+  'Nog geen bibliotheek ingesteld':
+      'Aucune bibliothèque configurée pour l’instant',
+  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
+      'Les voies par lesquelles vous pouvez ouvrir et enregistrer des présentations. Cliquez sur un mode pour le configurer.',
+  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
+      'Présentations dans les dossiers ci-dessus, sur le disque de cet ordinateur.',
+  'Open en bewaar presentaties in een map op je Nextcloud.':
+      'Ouvrez et enregistrez des présentations dans un dossier sur votre Nextcloud.',
+  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Ouvrez des présentations depuis un dépôt git ; chaque version enregistrée est conservée.',
   'Nog te verifiëren': 'Reste à vérifier',
   'MASWE-zwakheid kiezen': 'Choisir une faiblesse MASWE',
   'Zoek op naam, id of categorie': 'Rechercher par nom, id ou catégorie',

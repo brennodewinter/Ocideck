@@ -1790,6 +1790,20 @@ const _dutchSourceAddFi = <String, String>{
   'Niet de tekst op deze slide is het probleem, maar de reeks.':
       'Ongelma ei ole tämän dian teksti vaan sarja.',
   'Haal volle pagina uit de reeks': 'Poista täysi sivu sarjasta',
+  'Opslag': 'Tallennus',
+  'Opslagwijzen': 'Tallennustavat',
+  'Deze computer': 'Tämä tietokone',
+  'Ingesteld': 'Määritetty',
+  'Niet ingesteld': 'Ei määritetty',
+  'Nog geen bibliotheek ingesteld': 'Kirjastoa ei ole vielä määritetty',
+  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
+      'Reitit, joiden kautta voit avata ja tallentaa esityksiä. Napsauta tapa auki määrittääksesi sen.',
+  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
+      'Esitykset yllä olevissa kansioissa, tämän tietokoneen levyllä.',
+  'Open en bewaar presentaties in een map op je Nextcloud.':
+      'Avaa ja tallenna esityksiä Nextcloud-kansioosi.',
+  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Avaa esityksiä git-tietovarastosta; jokainen tallennettu versio säilyy.',
   'Nog te verifiëren': 'Vielä varmennettava',
   'MASWE-zwakheid kiezen': 'Valitse MASWE-heikkous',
   'Zoek op naam, id of categorie': 'Hae nimellä, tunnuksella tai luokalla',

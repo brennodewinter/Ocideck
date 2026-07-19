@@ -1789,6 +1789,20 @@ const _dutchSourceAddSv = <String, String>{
   'Niet de tekst op deze slide is het probleem, maar de reeks.':
       'Det är inte texten på den här bilden som är problemet, utan serien.',
   'Haal volle pagina uit de reeks': 'Ta bort full sida ur serien',
+  'Opslag': 'Lagring',
+  'Opslagwijzen': 'Lagringssätt',
+  'Deze computer': 'Den här datorn',
+  'Ingesteld': 'Konfigurerad',
+  'Niet ingesteld': 'Inte konfigurerad',
+  'Nog geen bibliotheek ingesteld': 'Inget bibliotek har konfigurerats ännu',
+  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
+      'De vägar du kan öppna och spara presentationer via. Klicka upp ett sätt för att konfigurera det.',
+  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
+      'Presentationer i mapparna ovan, på den här datorns disk.',
+  'Open en bewaar presentaties in een map op je Nextcloud.':
+      'Öppna och spara presentationer i en mapp på din Nextcloud.',
+  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Öppna presentationer från ett git-förråd; varje sparad version bevaras.',
   'Nog te verifiëren': 'Återstår att verifiera',
   'MASWE-zwakheid kiezen': 'Välj en MASWE-svaghet',
   'Zoek op naam, id of categorie': 'Sök på namn, id eller kategori',

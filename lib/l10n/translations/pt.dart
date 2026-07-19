@@ -1820,6 +1820,21 @@ const _dutchSourceAddPt = <String, String>{
   'Niet de tekst op deze slide is het probleem, maar de reeks.':
       'O problema não é o texto deste diapositivo, mas a série.',
   'Haal volle pagina uit de reeks': 'Retirar página cheia da série',
+  'Opslag': 'Armazenamento',
+  'Opslagwijzen': 'Modos de armazenamento',
+  'Deze computer': 'Este computador',
+  'Ingesteld': 'Configurado',
+  'Niet ingesteld': 'Não configurado',
+  'Nog geen bibliotheek ingesteld':
+      'Ainda não há nenhuma biblioteca configurada',
+  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
+      'As vias pelas quais pode abrir e guardar apresentações. Clique num modo para o configurar.',
+  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
+      'Apresentações nas pastas acima, no disco deste computador.',
+  'Open en bewaar presentaties in een map op je Nextcloud.':
+      'Abra e guarde apresentações numa pasta no seu Nextcloud.',
+  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Abra apresentações a partir de um repositório git; cada versão guardada é mantida.',
   'Nog te verifiëren': 'Ainda por verificar',
   'MASWE-zwakheid kiezen': 'Escolher uma fraqueza MASWE',
   'Zoek op naam, id of categorie': 'Pesquisar por nome, id ou categoria',

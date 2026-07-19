@@ -1802,6 +1802,21 @@ const _dutchSourceAddPl = <String, String>{
   'Niet de tekst op deze slide is het probleem, maar de reeks.':
       'Problemem nie jest tekst na tym slajdzie, lecz seria.',
   'Haal volle pagina uit de reeks': 'Usuń pełną stronę z serii',
+  'Opslag': 'Przechowywanie',
+  'Opslagwijzen': 'Sposoby przechowywania',
+  'Deze computer': 'Ten komputer',
+  'Ingesteld': 'Skonfigurowane',
+  'Niet ingesteld': 'Nieskonfigurowane',
+  'Nog geen bibliotheek ingesteld':
+      'Nie skonfigurowano jeszcze żadnej biblioteki',
+  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
+      'Drogi, którymi możesz otwierać i zapisywać prezentacje. Kliknij sposób, aby go skonfigurować.',
+  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
+      'Prezentacje w powyższych folderach, na dysku tego komputera.',
+  'Open en bewaar presentaties in een map op je Nextcloud.':
+      'Otwieraj i zapisuj prezentacje w folderze na swoim Nextcloud.',
+  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Otwieraj prezentacje z repozytorium git; każda zapisana wersja jest zachowywana.',
   'Nog te verifiëren': 'Do zweryfikowania',
   'MASWE-zwakheid kiezen': 'Wybierz słabość MASWE',
   'Zoek op naam, id of categorie': 'Szukaj po nazwie, id lub kategorii',

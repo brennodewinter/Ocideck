@@ -1789,6 +1789,21 @@ const _dutchSourceAddDa = <String, String>{
   'Niet de tekst op deze slide is het probleem, maar de reeks.':
       'Det er ikke teksten på dette dias, der er problemet, men rækken.',
   'Haal volle pagina uit de reeks': 'Fjern fuld side fra rækken',
+  'Opslag': 'Lagring',
+  'Opslagwijzen': 'Lagringsmåder',
+  'Deze computer': 'Denne computer',
+  'Ingesteld': 'Konfigureret',
+  'Niet ingesteld': 'Ikke konfigureret',
+  'Nog geen bibliotheek ingesteld':
+      'Der er endnu ikke oprettet noget bibliotek',
+  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
+      'De veje, du kan åbne og gemme præsentationer ad. Klik en måde op for at konfigurere den.',
+  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
+      'Præsentationer i mapperne ovenfor, på denne computers disk.',
+  'Open en bewaar presentaties in een map op je Nextcloud.':
+      'Åbn og gem præsentationer i en mappe på din Nextcloud.',
+  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Åbn præsentationer fra et git-lager; hver gemt version bevares.',
   'Nog te verifiëren': 'Skal stadig verificeres',
   'MASWE-zwakheid kiezen': 'Vælg en MASWE-svaghed',
   'Zoek op naam, id of categorie': 'Søg på navn, id eller kategori',

@@ -748,6 +748,20 @@ const _dutchSourceAddFy = {
   'Niet de tekst op deze slide is het probleem, maar de reeks.':
       'Net de tekst op dizze slide is it probleem, mar de rige.',
   'Haal volle pagina uit de reeks': 'Helje folle side út de rige',
+  'Opslag': 'Opslach',
+  'Opslagwijzen': 'Opslachwizen',
+  'Deze computer': 'Dizze kompjûter',
+  'Ingesteld': 'Ynsteld',
+  'Niet ingesteld': 'Net ynsteld',
+  'Nog geen bibliotheek ingesteld': 'Noch gjin biblioteek ynsteld',
+  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
+      'De wegen wêrlangs jo presintaasjes iepenje en bewarje kinne. Klik in wize iepen om him yn te stellen.',
+  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
+      'Presintaasjes yn de mappen hjirboppe, op de skiif fan dizze kompjûter.',
+  'Open en bewaar presentaties in een map op je Nextcloud.':
+      'Iepenje en bewarje presintaasjes yn in map op jo Nextcloud.',
+  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Iepenje presintaasjes út in git-repository; eltse bewarre ferzje bliuwt bewarre.',
   'Nog te verifiëren': 'Noch te ferifiearjen',
   'MASWE-zwakheid kiezen': 'MASWE-swakte kieze',
   'Zoek op naam, id of categorie': 'Sykje op namme, id of kategory',

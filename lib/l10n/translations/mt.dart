@@ -1812,6 +1812,21 @@ const _dutchSourceAddMt = <String, String>{
   'Niet de tekst op deze slide is het probleem, maar de reeks.':
       'Il-problema mhijiex it-test fuq din is-slajd, iżda s-sensiela.',
   'Haal volle pagina uit de reeks': 'Neħħi l-paġna mimlija mis-sensiela',
+  'Opslag': 'Ħażna',
+  'Opslagwijzen': 'Modi ta\' ħażna',
+  'Deze computer': 'Dan il-kompjuter',
+  'Ingesteld': 'Ikkonfigurat',
+  'Niet ingesteld': 'Mhux ikkonfigurat',
+  'Nog geen bibliotheek ingesteld':
+      'Għadha ma ġiet stabbilita l-ebda librerija',
+  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
+      'It-toroq li bihom tista\' tiftaħ u tissejvja preżentazzjonijiet. Ikklikkja modu biex tikkonfigurah.',
+  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
+      'Preżentazzjonijiet fil-folders ta\' hawn fuq, fuq id-diska ta\' dan il-kompjuter.',
+  'Open en bewaar presentaties in een map op je Nextcloud.':
+      'Iftaħ u ssejvja preżentazzjonijiet f\'folder fuq in-Nextcloud tiegħek.',
+  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Iftaħ preżentazzjonijiet minn repożitorju git; kull verżjoni ssejvjata tinżamm.',
   'Nog te verifiëren': 'Għad irid jiġi verifikat',
   'MASWE-zwakheid kiezen': 'Agħżel dgħufija MASWE',
   'Zoek op naam, id of categorie': 'Fittex bl-isem, l-id jew il-kategorija',

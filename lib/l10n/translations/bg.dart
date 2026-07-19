@@ -1814,6 +1814,20 @@ const _dutchSourceAddBg = <String, String>{
       'Проблемът не е текстът на този слайд, а поредицата.',
   'Haal volle pagina uit de reeks':
       'Премахване на пълната страница от поредицата',
+  'Opslag': 'Съхранение',
+  'Opslagwijzen': 'Начини на съхранение',
+  'Deze computer': 'Този компютър',
+  'Ingesteld': 'Настроено',
+  'Niet ingesteld': 'Не е настроено',
+  'Nog geen bibliotheek ingesteld': 'Все още няма настроена библиотека',
+  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
+      'Пътищата, по които можете да отваряте и запазвате презентации. Щракнете върху начин, за да го настроите.',
+  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
+      'Презентации в горните папки, на диска на този компютър.',
+  'Open en bewaar presentaties in een map op je Nextcloud.':
+      'Отваряйте и запазвайте презентации в папка на вашия Nextcloud.',
+  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Отваряйте презентации от git хранилище; всяка запазена версия се пази.',
   'Nog te verifiëren': 'Още за проверка',
   'MASWE-zwakheid kiezen': 'Избор на слабост MASWE',
   'Zoek op naam, id of categorie': 'Търсене по име, id или категория',

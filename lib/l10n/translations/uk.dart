@@ -1808,6 +1808,20 @@ const _dutchSourceAddUk = <String, String>{
   'Niet de tekst op deze slide is het probleem, maar de reeks.':
       'Проблема не в тексті на цьому слайді, а в серії.',
   'Haal volle pagina uit de reeks': 'Вилучити повну сторінку із серії',
+  'Opslag': 'Сховище',
+  'Opslagwijzen': 'Способи зберігання',
+  'Deze computer': 'Цей комп’ютер',
+  'Ingesteld': 'Налаштовано',
+  'Niet ingesteld': 'Не налаштовано',
+  'Nog geen bibliotheek ingesteld': 'Бібліотеку ще не налаштовано',
+  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
+      'Шляхи, якими можна відкривати та зберігати презентації. Натисніть спосіб, щоб налаштувати його.',
+  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
+      'Презентації в теках вище, на диску цього комп’ютера.',
+  'Open en bewaar presentaties in een map op je Nextcloud.':
+      'Відкривайте та зберігайте презентації в теці на вашому Nextcloud.',
+  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Відкривайте презентації з репозиторію git; кожна збережена версія зберігається.',
   'Nog te verifiëren': 'Ще перевірити',
   'MASWE-zwakheid kiezen': 'Вибрати слабкість MASWE',
   'Zoek op naam, id of categorie': 'Пошук за назвою, id або категорією',

@@ -1789,6 +1789,20 @@ const _dutchSourceAddLv = <String, String>{
   'Niet de tekst op deze slide is het probleem, maar de reeks.':
       'Problēma nav teksts šajā slaidā, bet gan virkne.',
   'Haal volle pagina uit de reeks': 'Izņemt pilno lapu no virknes',
+  'Opslag': 'Krātuve',
+  'Opslagwijzen': 'Glabāšanas veidi',
+  'Deze computer': 'Šis dators',
+  'Ingesteld': 'Konfigurēts',
+  'Niet ingesteld': 'Nav konfigurēts',
+  'Nog geen bibliotheek ingesteld': 'Neviena bibliotēka vēl nav izveidota',
+  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
+      'Ceļi, pa kuriem varat atvērt un saglabāt prezentācijas. Noklikšķiniet uz veida, lai to konfigurētu.',
+  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
+      'Prezentācijas iepriekš norādītajās mapēs, šī datora diskā.',
+  'Open en bewaar presentaties in een map op je Nextcloud.':
+      'Atveriet un saglabājiet prezentācijas mapē savā Nextcloud.',
+  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Atveriet prezentācijas no git krātuves; katra saglabātā versija tiek paturēta.',
   'Nog te verifiëren': 'Vēl jāpārbauda',
   'MASWE-zwakheid kiezen': 'Izvēlieties MASWE vājumu',
   'Zoek op naam, id of categorie': 'Meklēt pēc nosaukuma, id vai kategorijas',

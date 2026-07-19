@@ -1818,6 +1818,20 @@ const _dutchSourceAddEl = <String, String>{
   'Niet de tekst op deze slide is het probleem, maar de reeks.':
       'Το πρόβλημα δεν είναι το κείμενο αυτής της διαφάνειας, αλλά η σειρά.',
   'Haal volle pagina uit de reeks': 'Αφαίρεση γεμάτης σελίδας από τη σειρά',
+  'Opslag': 'Αποθήκευση',
+  'Opslagwijzen': 'Τρόποι αποθήκευσης',
+  'Deze computer': 'Αυτός ο υπολογιστής',
+  'Ingesteld': 'Ρυθμισμένο',
+  'Niet ingesteld': 'Δεν έχει ρυθμιστεί',
+  'Nog geen bibliotheek ingesteld': 'Δεν έχει ρυθμιστεί ακόμη βιβλιοθήκη',
+  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
+      'Οι διαδρομές μέσω των οποίων μπορείτε να ανοίγετε και να αποθηκεύετε παρουσιάσεις. Κάντε κλικ σε έναν τρόπο για να τον ρυθμίσετε.',
+  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
+      'Παρουσιάσεις στους παραπάνω φακέλους, στον δίσκο αυτού του υπολογιστή.',
+  'Open en bewaar presentaties in een map op je Nextcloud.':
+      'Ανοίξτε και αποθηκεύστε παρουσιάσεις σε έναν φάκελο στο Nextcloud σας.',
+  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Ανοίξτε παρουσιάσεις από ένα αποθετήριο git· κάθε αποθηκευμένη έκδοση διατηρείται.',
   'Nog te verifiëren': 'Προς επαλήθευση',
   'MASWE-zwakheid kiezen': 'Επιλογή αδυναμίας MASWE',
   'Zoek op naam, id of categorie': 'Αναζήτηση με όνομα, id ή κατηγορία',

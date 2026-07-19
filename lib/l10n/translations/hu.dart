@@ -1794,6 +1794,20 @@ const _dutchSourceAddHu = <String, String>{
   'Niet de tekst op deze slide is het probleem, maar de reeks.':
       'Nem a dián lévő szöveg a probléma, hanem a sorozat.',
   'Haal volle pagina uit de reeks': 'Teli oldal eltávolítása a sorozatból',
+  'Opslag': 'Tárolás',
+  'Opslagwijzen': 'Tárolási módok',
+  'Deze computer': 'Ez a számítógép',
+  'Ingesteld': 'Beállítva',
+  'Niet ingesteld': 'Nincs beállítva',
+  'Nog geen bibliotheek ingesteld': 'Még nincs beállítva könyvtár',
+  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
+      'Az útvonalak, amelyeken bemutatókat nyithat meg és menthet. Kattintson egy módra a beállításához.',
+  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
+      'Bemutatók a fenti mappákban, ennek a számítógépnek a lemezén.',
+  'Open en bewaar presentaties in een map op je Nextcloud.':
+      'Bemutatók megnyitása és mentése a Nextcloud egyik mappájában.',
+  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Bemutatók megnyitása git-tárolóból; minden mentett verzió megmarad.',
   'Nog te verifiëren': 'Még ellenőrizendő',
   'MASWE-zwakheid kiezen': 'MASWE-gyengeség kiválasztása',
   'Zoek op naam, id of categorie':

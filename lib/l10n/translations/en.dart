@@ -929,6 +929,20 @@ const _dutchSourceAddEn = {
   'Niet de tekst op deze slide is het probleem, maar de reeks.':
       'The text on this slide is not the problem — the run is.',
   'Haal volle pagina uit de reeks': 'Take the full page out of the run',
+  'Opslag': 'Storage',
+  'Opslagwijzen': 'Storage methods',
+  'Deze computer': 'This computer',
+  'Ingesteld': 'Configured',
+  'Niet ingesteld': 'Not configured',
+  'Nog geen bibliotheek ingesteld': 'No library set up yet',
+  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
+      'The routes by which you can open and save presentations. Click a method open to configure it.',
+  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
+      'Presentations in the folders above, on this computer’s disk.',
+  'Open en bewaar presentaties in een map op je Nextcloud.':
+      'Open and save presentations in a folder on your Nextcloud.',
+  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Open presentations from a git repository; every saved version is kept.',
   'Nog te verifiëren': 'Still to verify',
   'MASWE-zwakheid kiezen': 'Choose a MASWE weakness',
   'Zoek op naam, id of categorie': 'Search by name, id or category',
