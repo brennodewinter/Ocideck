@@ -2,11 +2,73 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/used_tool.dart';
+import 'package:ocideck/state/sec_module_provider.dart';
 import 'package:ocideck/widgets/dialogs/presentation_info_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
+
+  // De MIAUW-vastleggingsvelden (EIS 4.3.2/4.8.2) horen alleen bij een
+  // informatieveiligheidspresentatie. Bij een gewone presentatie zeggen ze
+  // niets, dus dan staan ze er niet.
+  Finder labelledField(String label) => find.byWidgetPredicate(
+    (w) => w is TextField && w.decoration?.labelText == label,
+  );
+
+  Future<void> pumpDialog(
+    WidgetTester tester, {
+    required bool reveal,
+    Deck deck = const Deck(title: 'Test'),
+  }) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [secModuleRevealProvider.overrideWithValue(reveal)],
+        child: MaterialApp(
+          home: Scaffold(body: PresentationInfoDialog(deck: deck)),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+  }
+
+  testWidgets('MIAUW-velden blijven weg als de module uitstaat', (
+    tester,
+  ) async {
+    await pumpDialog(tester, reveal: false);
+
+    expect(labelledField('Gebruikte standaarden'), findsNothing);
+    expect(labelledField('Gebruikte hulpmiddelen'), findsNothing);
+    // De gewone metadata staat er wél: dit bewijst geen leeg dialoog.
+    expect(labelledField('Titel'), findsOneWidget);
+  });
+
+  testWidgets('MIAUW-velden verschijnen met de module aan', (tester) async {
+    await pumpDialog(tester, reveal: true);
+
+    expect(labelledField('Gebruikte standaarden'), findsOneWidget);
+    expect(labelledField('Gebruikte hulpmiddelen'), findsOneWidget);
+  });
+
+  // Anders leest een deck dat de gegevens al draagt als dataverlies: de velden
+  // zijn dan onvindbaar terwijl de inhoud wel meegaat bij opslaan.
+  testWidgets('een deck met ingevulde gegevens toont ze ook zonder module', (
+    tester,
+  ) async {
+    await pumpDialog(
+      tester,
+      reveal: false,
+      deck: const Deck(
+        title: 'Test',
+        standardsUsed: ['OWASP WSTG@4.2'],
+        toolsUsed: [UsedTool(name: 'Burp Suite', version: '2026.4')],
+      ),
+    );
+
+    expect(labelledField('Gebruikte standaarden'), findsOneWidget);
+    expect(labelledField('Gebruikte hulpmiddelen'), findsOneWidget);
+  });
 
   testWidgets('double-clicking date fills in the current date', (tester) async {
     await tester.pumpWidget(

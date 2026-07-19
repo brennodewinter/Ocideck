@@ -1212,6 +1212,16 @@ anywhere, so the picker stays short for everyone who does not need them — but 
 report that already uses them always opens and renders correctly regardless (the
 file is the source of truth; the toggle only governs *authoring*).
 
+The same applies to the module's MIAUW record-keeping surfaces, so an ordinary
+presentation is not asked for pentest metadata it has no use for:
+
+- **Standards used** and **Tools used** (MIAUW EIS 4.3.2 / 4.8.2) in
+  *Presentation properties*. A deck that already carries either value keeps
+  showing both fields even with the module off — the data is never hidden from
+  the person who entered it.
+- **Insert tools appendix…** in the `…` menu, which turns *Tools used* into a
+  table slide.
+
 **Opening a security report while the module is off** surfaces a one-time
 prompt — a snackbar with an **Enable** action — so you can turn the module on
 right there instead of hunting through settings. It appears only when a deck you
