@@ -145,6 +145,61 @@ class GitLabForge implements GitForge {
     return response.bytes;
   }
 
+  /// Bij GitLab zegt een getal wat je mag: 30 is Developer, en dat is de
+  /// laagste rol die mag pushen. Rechten kunnen van het project óf van de
+  /// bovenliggende groep komen; de hoogste van de twee telt.
+  static const int _developerAccessLevel = 30;
+
+  static int? _accessLevel(Object? access) {
+    if (access is! Map) return null;
+    final level = access['access_level'];
+    return level is int ? level : null;
+  }
+
+  @override
+  Future<RepoProbe> probe() async {
+    final origin = config.origin;
+    if (origin == null) {
+      throw const GitForgeException(
+        GitForgeError.config,
+        'Ongeldige server-URL',
+      );
+    }
+    // Niet via [_apiUri]: die plakt er een schuine streep achter wanneer er
+    // geen segmenten zijn, en juist op het project zelf is dat een pad dat
+    // niet elke GitLab-opstelling accepteert.
+    final response = await _transport.get(
+      origin.replace(path: '/api/v4/projects/$_projectId'),
+      headers: _headers,
+      maxBytes: maxListingBytes,
+    );
+    _checkStatus(response.status);
+    final json = _decodeJson(response.bytes);
+    if (json is! Map) {
+      throw const GitForgeException(
+        GitForgeError.malformed,
+        'Onverwacht antwoord op de repo-gegevens',
+      );
+    }
+    final branch = json['default_branch'];
+    final permissions = json['permissions'];
+    int? level;
+    if (permissions is Map) {
+      final project = _accessLevel(permissions['project_access']);
+      final group = _accessLevel(permissions['group_access']);
+      if (project != null || group != null) {
+        level = (project ?? 0) > (group ?? 0) ? project : group;
+      }
+    }
+    return RepoProbe(
+      defaultBranch: branch is String && branch.trim().isNotEmpty
+          ? branch.trim()
+          : config.defaultBranch,
+      isEmpty: json['empty_repo'] == true,
+      canPush: level == null ? null : level >= _developerAccessLevel,
+    );
+  }
+
   @override
   Future<String> headSha(String branch) async {
     _requireRef(branch);
@@ -553,5 +608,6 @@ class GitLabForge implements GitForge {
     }
   }
 
+  @override
   void close() => _transport.close();
 }

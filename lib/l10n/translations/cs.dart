@@ -1786,6 +1786,22 @@ const _dutchSourceCs = {
 const _dutchSourceAddCs = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Licence lexikonů: na co je ještě třeba se zeptat',
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Potřebné, když forge běží v privátní nebo domácí síti. Bez tohoto příznaku bezpečnostní kontrola odmítne privátní adresu.',
+  'Vul server-URL, eigenaar en repository in':
+      'Vyplňte URL serveru, vlastníka a repozitář',
+  'de standaardbranch heet': 'výchozí větev se jmenuje',
+  'die wordt voortaan gebruikt': 'ta se bude nadále používat',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      'repozitář je ještě prázdný; první uložení jej naplní',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'pozor: tento token smí jen číst, uložení tedy selže',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      'Přihlášení selhalo — zkontrolujte token. Potřebuje právo číst repozitář a právo zapisovat, aby mohl ukládat.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'Repozitář nenalezen — nebo jej váš token nesmí vidět. Zkontrolujte vlastníka a název repozitáře.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'Tato adresa neodpovídá jako forge. Je zvolený druh forge správný?',
   'kenteken': 'registrační značka',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Pro jazyk této prezentace neexistuje seznam klíčových slov pro zvláštní kategorie osobních údajů. Vzory s kontrolní číslicí (rodné číslo, IBAN, pas) fungují; slova jako „diagnóza“ nebo „podezřelý“ rozpoznána nejsou.',

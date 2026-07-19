@@ -736,6 +736,22 @@ const _dutchSourceIt = {
 const _dutchSourceAddIt = {
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Licenze dei lessici: cosa resta da chiedere',
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Necessario quando la forge è su una rete privata o domestica. Senza questa opzione il controllo di sicurezza rifiuta un indirizzo privato.',
+  'Vul server-URL, eigenaar en repository in':
+      'Compila URL del server, proprietario e repository',
+  'de standaardbranch heet': 'il ramo predefinito si chiama',
+  'die wordt voortaan gebruikt': 'verrà usato d\'ora in poi',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      'il repository è ancora vuoto; il primo salvataggio lo riempirà',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'attenzione: questo token può solo leggere, quindi il salvataggio fallirà',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      'Accesso non riuscito — controlla il token. Serve accesso in lettura al repository e in scrittura per poter salvare.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'Repository non trovato — oppure il tuo token non può vederlo. Controlla proprietario e nome del repository.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'Questo indirizzo non risponde come una forge. Il tipo di forge scelto è corretto?',
   'kenteken': 'targa del veicolo',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Per la lingua di questa presentazione non esiste un elenco di parole chiave per le categorie particolari di dati personali. I modelli con cifra di controllo (codice fiscale, IBAN, passaporto) funzionano; parole come "diagnosi" o "indagato" non vengono riconosciute.',

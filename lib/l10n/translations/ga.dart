@@ -1819,6 +1819,22 @@ const _dutchSourceGa = {
 const _dutchSourceAddGa = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Ceadúnais foclóra: a bhfuil fós le fiafraí',
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Ag teastáil nuair a ritheann an forge ar líonra príobháideach nó baile. Gan an bhratach seo diúltaíonn an tseiceáil slándála seoladh príobháideach.',
+  'Vul server-URL, eigenaar en repository in':
+      'Líon isteach URL an fhreastalaí, an t-úinéir agus an stór',
+  'de standaardbranch heet': 'tugtar ar an mbrainse réamhshocraithe',
+  'die wordt voortaan gebruikt': 'úsáidfear é sin as seo amach',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      'tá an stór folamh fós; líonfaidh an chéad sábháil é',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'tabhair faoi deara: ní féidir leis an gcomhartha seo ach léamh, mar sin teipfidh ar an sábháil',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      'Theip ar an síniú isteach — seiceáil an comhartha. Teastaíonn rochtain léitheoireachta ar an stór uaidh, agus rochtain scríofa chun sábháil.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'Níor aimsíodh an stór — nó b\'fhéidir nach bhfuil cead ag do chomhartha é a fheiceáil. Seiceáil an t-úinéir agus ainm an stóir.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'Ní fhreagraíonn an seoladh seo mar forge. An bhfuil an cineál forge a roghnaigh tú ceart?',
   'kenteken': 'uimhir chláraithe feithicle',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Níl liosta eochairfhocal ann do chatagóirí speisialta sonraí pearsanta i dteanga an deic seo. Oibríonn patrúin le digit seiceála (PPS, IBAN, pas); ní aithnítear focail ar nós "diagnóis" nó "duine faoi amhras".',

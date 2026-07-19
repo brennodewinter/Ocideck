@@ -1801,6 +1801,22 @@ const _dutchSourceUk = {
 const _dutchSourceAddUk = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Ліцензії лексиконів: що ще треба з\'ясувати',
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Потрібно, коли форж працює у приватній або домашній мережі. Без цього прапорця перевірка безпеки відхиляє приватну адресу.',
+  'Vul server-URL, eigenaar en repository in':
+      'Заповніть URL сервера, власника та репозиторій',
+  'de standaardbranch heet': 'гілка за замовчуванням називається',
+  'die wordt voortaan gebruikt': 'відтепер використовуватиметься вона',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      'репозиторій ще порожній; перше збереження його заповнить',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'увага: цей токен може лише читати, тож збереження не вдасться',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      'Не вдалося ввійти — перевірте токен. Йому потрібен доступ на читання репозиторію та на запис, щоб зберігати.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'Репозиторій не знайдено — або ваш токен не має права його бачити. Перевірте власника та назву репозиторію.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'Ця адреса не відповідає як форж. Чи правильний тип форжа ви обрали?',
   'kenteken': 'номерний знак',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Для мови цієї презентації немає списку ключових слів для особливих категорій персональних даних. Шаблони з контрольною цифрою (ІПН, IBAN, паспорт) працюють; слова на кшталт «діагноз» або «підозрюваний» не розпізнаються.',

@@ -740,6 +740,22 @@ const _dutchSourceFr = {
 const _dutchSourceAddFr = {
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Licences des lexiques : ce qu\'il reste à demander',
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Nécessaire lorsque la forge est sur un réseau privé ou domestique. Sans cette option, le contrôle de sécurité refuse une adresse privée.',
+  'Vul server-URL, eigenaar en repository in':
+      'Renseignez l\'URL du serveur, le propriétaire et le dépôt',
+  'de standaardbranch heet': 'la branche par défaut s\'appelle',
+  'die wordt voortaan gebruikt': 'elle sera utilisée désormais',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      'le dépôt est encore vide ; le premier enregistrement le remplira',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'attention : ce jeton ne peut que lire, l\'enregistrement échouera donc',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      'Échec de la connexion — vérifiez le jeton. Il lui faut un accès en lecture au dépôt, et en écriture pour pouvoir enregistrer.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'Dépôt introuvable — ou votre jeton n\'a pas le droit de le voir. Vérifiez le propriétaire et le nom du dépôt.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'Cette adresse ne répond pas comme une forge. Le type de forge choisi est-il correct ?',
   'kenteken': 'plaque d\'immatriculation',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Il n\'existe pas de liste de mots-clés pour les catégories particulières de données personnelles dans la langue de cette présentation. Les motifs avec chiffre de contrôle (NIR, IBAN, passeport) fonctionnent ; des mots comme « diagnostic » ou « suspect » ne sont pas reconnus.',

@@ -1774,6 +1774,22 @@ const _dutchSourceEt = {
 const _dutchSourceAddEt = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Leksikonide litsentsid: mida on veel vaja küsida',
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Vajalik, kui forge töötab privaat- või koduvõrgus. Ilma selle liputa keeldub turvakontroll privaataadressist.',
+  'Vul server-URL, eigenaar en repository in':
+      'Täida serveri URL, omanik ja hoidla',
+  'de standaardbranch heet': 'vaikeharu nimi on',
+  'die wordt voortaan gebruikt': 'seda kasutatakse edaspidi',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      'hoidla on veel tühi; esimene salvestus täidab selle',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'märkus: see luba lubab ainult lugeda, seega salvestamine ebaõnnestub',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      'Sisselogimine ebaõnnestus — kontrolli luba. See vajab hoidla lugemisõigust ja salvestamiseks kirjutamisõigust.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'Hoidlat ei leitud — või sinu luba ei tohi seda näha. Kontrolli omanikku ja hoidla nime.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'See aadress ei vasta nagu forge. Kas valitud forge\'i tüüp on õige?',
   'kenteken': 'registreerimisnumber',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Selle esitluse keele jaoks pole eriliigiliste isikuandmete märksõnaloendit. Kontrollnumbriga mustrid (isikukood, IBAN, pass) töötavad; sõnu nagu "diagnoos" või "kahtlustatav" ei tuvastata.',

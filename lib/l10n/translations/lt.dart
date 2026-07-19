@@ -1791,6 +1791,22 @@ const _dutchSourceLt = {
 const _dutchSourceAddLt = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Leksikonų licencijos: ko dar reikia paklausti',
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Reikalinga, kai forge veikia privačiame arba namų tinkle. Be šios žymos saugumo patikra atmeta privatų adresą.',
+  'Vul server-URL, eigenaar en repository in':
+      'Užpildykite serverio URL, savininką ir saugyklą',
+  'de standaardbranch heet': 'numatytoji šaka vadinasi',
+  'die wordt voortaan gebruikt': 'nuo šiol bus naudojama ji',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      'saugykla dar tuščia; pirmas įrašymas ją užpildys',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'dėmesio: šis raktas gali tik skaityti, todėl įrašyti nepavyks',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      'Prisijungti nepavyko — patikrinkite raktą. Jam reikia skaitymo teisių saugyklai ir rašymo teisių, kad galėtų įrašyti.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'Saugykla nerasta — arba jūsų raktui neleidžiama jos matyti. Patikrinkite savininką ir saugyklos pavadinimą.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'Šis adresas neatsako kaip forge. Ar pasirinktas forge tipas teisingas?',
   'kenteken': 'valstybinis numeris',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Šios pateikties kalbai nėra raktinių žodžių sąrašo ypatingų kategorijų asmens duomenims. Šablonai su kontroliniu skaitmeniu (asmens kodas, IBAN, pasas) veikia; žodžiai kaip „diagnozė“ ar „įtariamasis“ neatpažįstami.',

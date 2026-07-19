@@ -740,6 +740,22 @@ const _dutchSourcePap = {
 const _dutchSourceAddPap = {
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Lisensia di leksikon: kiko mester puntra ainda',
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Nesesario ora e forge ta kore riba un red privá of di kas. Sin e bandera aki e kontrol di siguridat ta rechasá un adrès privá.',
+  'Vul server-URL, eigenaar en repository in':
+      'Yena URL di servidor, doño i repositorio',
+  'de standaardbranch heet': 'e branch prinsipal yama',
+  'die wordt voortaan gebruikt': 'esei lo wòrdu usá for di awor',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      'e repositorio ta bashí ainda; e promé warda lo yen\'é',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'atenshon: e token aki solamente por lesa, pues warda lo faya',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      'Login a faya — kontrolá e token. E tin mester di derecho di lesa e repositorio, i di skirbi pa por warda.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'Repositorio no hañá — of bo token no por mir\'é. Kontrolá doño i nòmber di repositorio.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'E adrès aki no ta kontestá manera un forge. E tipo di forge ku bo a skohe ta korekto?',
   'kenteken': 'number di plachi',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Pa e idioma di e presentashon aki no tin un lista di palabra klave pa datonan personal spesial. Patronchi ku sifra di kontrol (BSN, IBAN, pasaporte) ta funshoná; palabranan manera "diagnóstiko" òf "sospechoso" no ta wòrdu rekonosí.',

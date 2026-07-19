@@ -1795,6 +1795,22 @@ const _dutchSourcePl = {
 const _dutchSourceAddPl = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Licencje leksykonów: o co jeszcze trzeba zapytać',
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Potrzebne, gdy forge działa w sieci prywatnej lub domowej. Bez tej opcji kontrola bezpieczeństwa odrzuca adres prywatny.',
+  'Vul server-URL, eigenaar en repository in':
+      'Wypełnij adres URL serwera, właściciela i repozytorium',
+  'de standaardbranch heet': 'gałąź domyślna nazywa się',
+  'die wordt voortaan gebruikt': 'od teraz będzie używana ta',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      'repozytorium jest jeszcze puste; pierwszy zapis je wypełni',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'uwaga: ten token może tylko czytać, więc zapis się nie powiedzie',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      'Logowanie nie powiodło się — sprawdź token. Potrzebuje dostępu do odczytu repozytorium oraz do zapisu, aby móc zapisywać.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'Nie znaleziono repozytorium — albo twój token nie może go zobaczyć. Sprawdź właściciela i nazwę repozytorium.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'Ten adres nie odpowiada jak forge. Czy wybrany rodzaj forge jest właściwy?',
   'kenteken': 'numer rejestracyjny',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Dla języka tej prezentacji nie ma listy słów kluczowych dla szczególnych kategorii danych osobowych. Wzorce z cyfrą kontrolną (PESEL, IBAN, paszport) działają; słowa takie jak „diagnoza” czy „podejrzany” nie są rozpoznawane.',

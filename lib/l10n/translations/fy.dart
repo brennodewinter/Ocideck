@@ -741,6 +741,22 @@ const _dutchSourceFy = {
 const _dutchSourceAddFy = {
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Leksikonlisinsjes: wat noch neifrege wurde moat',
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Nedich as de forge op in privee- of thúsnetwurk draait. Sûnder dizze flagge wegeret de befeiliging in privee-adres.',
+  'Vul server-URL, eigenaar en repository in':
+      'Folje server-URL, eigner en repository yn',
+  'de standaardbranch heet': 'de standertbranch hjit',
+  'die wordt voortaan gebruikt': 'dy wurdt tenei brûkt',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      'de repository is noch leech; de earste opslach follet him',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'let op: dit token mei allinnich lêze, dus bewarjen sil mislearje',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      'Oanmelden mislearre — kontrolearje it token. It hat lêsrjochten op de repository nedich, en skriuwrjochten om bewarje te kinnen.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'Repository net fûn — of dyn token mei him net sjen. Kontrolearje eigner en repositorynamme.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'Dit adres antwurdet net as in forge. Kloppet de soarte forge dy\'tst keazen hast?',
   'kenteken': 'kenteken',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Foar de taal fan dit deck is der gjin trefwurdlist foar bysûndere persoansgegevens. Patroanen mei in kontrôlesifer (BSN, IBAN, paspoart) wurkje wol; wurden as "diagnoaze" of "fertochte" wurde net herkend.',

@@ -46,6 +46,21 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   Geen netwerk breekt de release evenmin af, maar het zegt wél dát er niet
   gekeken is. Stilte mag hier niet als goedkeuring lezen.
 
+- **Een git-repository kun je testen vóórdat je hem gebruikt.** WebDAV en S3
+  hadden allebei een knop *Verbinding testen*; bij git zei het paneel alleen of
+  er ergens op de machine een `git` stond — wat niets zegt over de URL, de
+  eigenaar, de repository of het token. Elke instelfout kwam pas bij de eerste
+  opslag boven, en juist git heeft de meeste manieren om het mis te hebben.
+
+  De test doet één aanroep en beantwoordt daarmee vier vragen tegelijk: bestaat
+  de repository, hoe heet zijn standaardbranch, is hij nog leeg, en mag dit
+  token schrijven. Dat laatste is een waarschuwing en geen fout — de verbinding
+  wérkt, maar opslaan zou later stranden, en dat hoor je liever nu.
+
+  De standaardbranch is geen bijvangst. Er is geen invoerveld voor, dus stond
+  hij altijd op `main`: een repository met `master` was via de instellingen
+  onbruikbaar en faalde met alleen ruwe uitvoer van een mislukte clone. De
+  forge weet zelf hoe zijn branch heet; de test vraagt het en neemt het over.
 - **Afbeeldingen en media gaan nu écht mee met de presentatie — en je ziet
   wanneer dat níet zo is.** Je kunt er niet van uitgaan dat de ontvanger
   dezelfde schijven, netwerkmappen of rechten heeft als jij. Een verwijzing naar

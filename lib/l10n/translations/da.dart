@@ -1782,6 +1782,22 @@ const _dutchSourceDa = {
 const _dutchSourceAddDa = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Leksikonlicenser: hvad der stadig skal spørges om',
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Nødvendigt, når forgen kører på et privat- eller hjemmenetværk. Uden dette flag afviser sikkerhedstjekket en privat adresse.',
+  'Vul server-URL, eigenaar en repository in':
+      'Udfyld server-URL, ejer og repository',
+  'de standaardbranch heet': 'standardgrenen hedder',
+  'die wordt voortaan gebruikt': 'den bruges fremover',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      'repositoryet er stadig tomt; den første gemning fylder det',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'bemærk: dette token må kun læse, så det vil mislykkes at gemme',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      'Login mislykkedes — tjek tokenet. Det skal have læseadgang til repositoryet og skriveadgang for at kunne gemme.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'Repository ikke fundet — eller dit token må ikke se det. Tjek ejer og repository-navn.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'Denne adresse svarer ikke som en forge. Er den valgte forge-type rigtig?',
   'kenteken': 'nummerplade',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Der findes ingen nøgleordsliste for særlige kategorier af personoplysninger på dette decks sprog. Mønstre med kontrolciffer (CPR, IBAN, pas) virker; ord som "diagnose" eller "mistænkt" genkendes ikke.',

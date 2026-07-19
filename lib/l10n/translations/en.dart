@@ -922,6 +922,22 @@ const _dutchSourceEn = {
 const _dutchSourceAddEn = {
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Lexicon licences: what still needs to be asked',
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Needed when the forge runs on a private or home network. Without this flag the security check refuses a private address.',
+  'Vul server-URL, eigenaar en repository in':
+      'Fill in server URL, owner and repository',
+  'de standaardbranch heet': 'the default branch is called',
+  'die wordt voortaan gebruikt': 'that one will be used from now on',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      'the repository is still empty; the first save will fill it',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'note: this token may only read, so saving will fail',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      'Sign-in failed — check the token. It needs read access to the repository, and write access in order to save.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'Repository not found — or your token may not see it. Check the owner and repository name.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'This address does not answer like a forge. Is the forge type you picked correct?',
   'kenteken': 'vehicle registration number',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'There is no keyword list for special categories of personal data in this deck\'s language. Patterns with a check digit (national ID, IBAN, passport) still work; words like "diagnosis" or "suspect" are not recognised.',

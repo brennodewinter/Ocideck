@@ -1783,6 +1783,22 @@ const _dutchSourceFi = {
 const _dutchSourceAddFi = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Sanastojen lisenssit: mitä on vielä kysyttävä',
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Tarvitaan, kun forge on yksityisessä tai kotiverkossa. Ilman tätä merkintää turvatarkistus hylkää yksityisen osoitteen.',
+  'Vul server-URL, eigenaar en repository in':
+      'Täytä palvelimen URL, omistaja ja repositorio',
+  'de standaardbranch heet': 'oletushaaran nimi on',
+  'die wordt voortaan gebruikt': 'sitä käytetään tästä lähtien',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      'repositorio on vielä tyhjä; ensimmäinen tallennus täyttää sen',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'huomio: tämä tunnus saa vain lukea, joten tallennus epäonnistuu',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      'Kirjautuminen epäonnistui — tarkista tunnus. Se tarvitsee lukuoikeuden repositorioon ja kirjoitusoikeuden tallentaakseen.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'Repositoriota ei löytynyt — tai tunnuksesi ei saa nähdä sitä. Tarkista omistaja ja repositorion nimi.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'Tämä osoite ei vastaa forgen tavoin. Onko valitsemasi forge-tyyppi oikea?',
   'kenteken': 'rekisterinumero',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Tämän esityksen kielelle ei ole avainsanaluetteloa erityisiin henkilötietoryhmiin. Tarkistusnumerolliset kuviot (hetu, IBAN, passi) toimivat; sanoja kuten "diagnoosi" tai "epäilty" ei tunnisteta.',

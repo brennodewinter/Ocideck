@@ -20,6 +20,7 @@ import '../../services/ai_security_gate.dart';
 import '../../services/file_service.dart';
 import '../../services/recovery_service.dart';
 import '../../services/classification_enforcement_policy.dart';
+import '../../services/git/git_forge.dart';
 import '../../services/s3/s3_service.dart';
 import '../../services/webdav_service.dart';
 import '../../models/local_cve_status.dart';

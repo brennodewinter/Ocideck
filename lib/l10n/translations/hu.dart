@@ -1787,6 +1787,22 @@ const _dutchSourceHu = {
 const _dutchSourceAddHu = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Lexikonlicencek: mit kell még megkérdezni',
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Szükséges, ha a forge magán- vagy otthoni hálózaton fut. E jelölés nélkül a biztonsági ellenőrzés elutasít egy magáncímet.',
+  'Vul server-URL, eigenaar en repository in':
+      'Töltsd ki a kiszolgáló URL-jét, a tulajdonost és a tárolót',
+  'de standaardbranch heet': 'az alapértelmezett ág neve',
+  'die wordt voortaan gebruikt': 'mostantól az lesz használva',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      'a tároló még üres; az első mentés tölti fel',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'figyelem: ez a token csak olvashat, így a mentés meg fog hiúsulni',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      'A bejelentkezés nem sikerült — ellenőrizd a tokent. Olvasási jog kell a tárolóhoz, és írási jog a mentéshez.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'A tároló nem található — vagy a tokened nem láthatja. Ellenőrizd a tulajdonost és a tároló nevét.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'Ez a cím nem úgy válaszol, mint egy forge. Helyes a kiválasztott forge-típus?',
   'kenteken': 'rendszám',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Ennek a bemutatónak a nyelvéhez nincs kulcsszólista a személyes adatok különleges kategóriáihoz. Az ellenőrző számjegyes minták (adóazonosító, IBAN, útlevél) működnek; az olyan szavak, mint „diagnózis” vagy „gyanúsított”, nem ismerhetők fel.',

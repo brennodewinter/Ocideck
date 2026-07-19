@@ -64,21 +64,24 @@ final gitForgeProvider = FutureProvider.family<GitForge?, String>((
           .readGitToken(config.baseUrl, config.owner) ??
       '';
 
-  switch (config.provider) {
-    case GitProvider.gitea:
-      final forge = GiteaForge(config: config, token: token);
-      ref.onDispose(forge.close);
-      return forge;
-    case GitProvider.github:
-      final forge = GitHubForge(config: config, token: token);
-      ref.onDispose(forge.close);
-      return forge;
-    case GitProvider.gitlab:
-      final forge = GitLabForge(config: config, token: token);
-      ref.onDispose(forge.close);
-      return forge;
-  }
+  final forge = createGitForge(config: config, token: token);
+  ref.onDispose(forge.close);
+  return forge;
 });
+
+/// Bouw de adapter die bij [config] hoort.
+///
+/// Losstaand van [gitForgeProvider] omdat de settings-dialoog een verbinding
+/// moet kunnen testen die nog niet is opgeslagen — er is dan geen
+/// connectionId om een provider op te draaien. De aanroeper sluit hem zelf.
+GitForge createGitForge({
+  required GitRepoConfig config,
+  required String token,
+}) => switch (config.provider) {
+  GitProvider.gitea => GiteaForge(config: config, token: token),
+  GitProvider.github => GitHubForge(config: config, token: token),
+  GitProvider.gitlab => GitLabForge(config: config, token: token),
+};
 
 /// De gehardde git-uitvoerder (§10.2). Eén per proces; op web een stub die
 /// [GitCli.isSupported] `false` meldt.

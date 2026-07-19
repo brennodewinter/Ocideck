@@ -1806,6 +1806,22 @@ const _dutchSourceBg = {
 const _dutchSourceAddBg = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Лицензи на лексикони: какво още трябва да се попита',
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Нужно е, когато форджът работи в частна или домашна мрежа. Без този флаг проверката за сигурност отхвърля частен адрес.',
+  'Vul server-URL, eigenaar en repository in':
+      'Попълнете URL на сървъра, собственик и хранилище',
+  'de standaardbranch heet': 'клонът по подразбиране се казва',
+  'die wordt voortaan gebruikt': 'оттук нататък ще се използва той',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      'хранилището все още е празно; първото запазване ще го запълни',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'внимание: този токен може само да чете, така че запазването ще се провали',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      'Влизането е неуспешно — проверете токена. Нужни са му права за четене на хранилището и за писане, за да може да записва.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'Хранилището не е намерено — или токенът ви няма право да го вижда. Проверете собственика и името на хранилището.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'Този адрес не отговаря като фордж. Правилен ли е избраният вид фордж?',
   'kenteken': 'регистрационен номер',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'За езика на тази презентация няма списък с ключови думи за специални категории лични данни. Шаблоните с контролна цифра (ЕГН, IBAN, паспорт) работят; думи като „диагноза“ или „заподозрян“ не се разпознават.',

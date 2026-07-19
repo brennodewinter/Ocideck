@@ -1785,6 +1785,22 @@ const _dutchSourceSl = {
 const _dutchSourceAddSl = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Licence leksikonov: kaj je treba še vprašati',
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Potrebno, kadar forge teče v zasebnem ali domačem omrežju. Brez te oznake varnostno preverjanje zavrne zasebni naslov.',
+  'Vul server-URL, eigenaar en repository in':
+      'Izpolni URL strežnika, lastnika in repozitorij',
+  'de standaardbranch heet': 'privzeta veja se imenuje',
+  'die wordt voortaan gebruikt': 'ta bo odslej v uporabi',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      'repozitorij je še prazen; prvo shranjevanje ga bo napolnilo',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'pozor: ta žeton lahko samo bere, zato shranjevanje ne bo uspelo',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      'Prijava ni uspela — preveri žeton. Potrebuje pravico branja repozitorija in pisanja, da lahko shranjuje.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'Repozitorija ni mogoče najti — ali pa ga tvoj žeton ne sme videti. Preveri lastnika in ime repozitorija.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'Ta naslov ne odgovarja kot forge. Je izbrana vrsta forgea pravilna?',
   'kenteken': 'registrska številka',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Za jezik te predstavitve ni seznama ključnih besed za posebne vrste osebnih podatkov. Vzorci s kontrolno številko (EMŠO, IBAN, potni list) delujejo; besede kot »diagnoza« ali »osumljenec« niso prepoznane.',

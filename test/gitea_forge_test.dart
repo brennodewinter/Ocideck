@@ -397,6 +397,85 @@ void main() {
     });
   });
 
+  group('GiteaForge.probe', () {
+    test('reports the default branch, emptiness and push rights', () async {
+      final transport = _FakeTransport(
+        (_) => _json({
+          'default_branch': 'master',
+          'empty': false,
+          'permissions': {'admin': false, 'push': true, 'pull': true},
+        }),
+      );
+      final probe = await _forge(transport).probe();
+      expect(probe.defaultBranch, 'master');
+      expect(probe.isEmpty, isFalse);
+      expect(probe.canPush, isTrue);
+      // De repo zelf, niet een subresource: dit is de goedkoopste aanroep die
+      // alle vier de vragen beantwoordt.
+      expect(transport.uris.single.path, '/api/v1/repos/librekat/decks');
+    });
+
+    test('a read-only token is reported as such', () async {
+      final transport = _FakeTransport(
+        (_) => _json({
+          'default_branch': 'main',
+          'permissions': {'push': false},
+        }),
+      );
+      expect((await _forge(transport).probe()).canPush, isFalse);
+    });
+
+    test('missing permissions mean unknown, not "no"', () async {
+      // "Wij weten het niet" en "je mag het niet" zijn verschillende
+      // antwoorden; alleen het tweede mag als waarschuwing langskomen.
+      final transport = _FakeTransport(
+        (_) => _json({'default_branch': 'main'}),
+      );
+      expect((await _forge(transport).probe()).canPush, isNull);
+    });
+
+    test('an empty repo keeps the configured branch as its answer', () async {
+      // Een lege Gitea-repo geeft geen default_branch mee; dan is onze eigen
+      // instelling het beste dat we hebben — niet een lege string.
+      final transport = _FakeTransport(
+        (_) => _json({'empty': true, 'default_branch': ''}),
+      );
+      final probe = await _forge(transport).probe();
+      expect(probe.isEmpty, isTrue);
+      expect(probe.defaultBranch, _config.defaultBranch);
+    });
+
+    test('a non-JSON answer is malformed, not a crash', () async {
+      final transport = _FakeTransport(
+        (_) => GitResponse(200, Uint8List.fromList(utf8.encode('<html>'))),
+      );
+      await expectLater(
+        _forge(transport).probe(),
+        throwsA(
+          isA<GitForgeException>().having(
+            (e) => e.kind,
+            'kind',
+            GitForgeError.malformed,
+          ),
+        ),
+      );
+    });
+
+    test('a 401 surfaces as an auth failure', () async {
+      final transport = _FakeTransport((_) => _json({}, 401));
+      await expectLater(
+        _forge(transport).probe(),
+        throwsA(
+          isA<GitForgeException>().having(
+            (e) => e.kind,
+            'kind',
+            GitForgeError.auth,
+          ),
+        ),
+      );
+    });
+  });
+
   test('close closes the transport', () {
     final transport = _FakeTransport((_) => GitResponse(200, Uint8List(0)));
     _forge(transport).close();

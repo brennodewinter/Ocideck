@@ -1801,6 +1801,22 @@ const _dutchSourceRo = {
 const _dutchSourceAddRo = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Licențele lexicoanelor: ce mai trebuie întrebat',
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Necesar când forge rulează într-o rețea privată sau de acasă. Fără această opțiune, verificarea de securitate refuză o adresă privată.',
+  'Vul server-URL, eigenaar en repository in':
+      'Completează adresa URL a serverului, proprietarul și depozitul',
+  'de standaardbranch heet': 'ramura implicită se numește',
+  'die wordt voortaan gebruikt': 'aceasta va fi folosită de acum înainte',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      'depozitul este încă gol; prima salvare îl va umple',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'atenție: acest token poate doar citi, așa că salvarea va eșua',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      'Autentificarea a eșuat — verifică tokenul. Are nevoie de drept de citire pe depozit și de scriere pentru a putea salva.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'Depozitul nu a fost găsit — sau tokenul tău nu are voie să îl vadă. Verifică proprietarul și numele depozitului.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'Această adresă nu răspunde ca o forge. Este corect tipul de forge ales?',
   'kenteken': 'număr de înmatriculare',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Pentru limba acestei prezentări nu există o listă de cuvinte-cheie pentru categorii speciale de date personale. Tiparele cu cifră de control (CNP, IBAN, pașaport) funcționează; cuvinte precum „diagnostic” sau „suspect” nu sunt recunoscute.',

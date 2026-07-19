@@ -42,7 +42,17 @@ class FakeGitLabTransport implements GitTransport {
   }) async {
     final s = _rest(uri);
     final q = uri.queryParameters;
-    if (s.isEmpty) return _notFound();
+    // The project object itself — what `probe()` asks for. GitLab states
+    // permissions as a numeric access level, not booleans; 30 is Developer.
+    if (s.isEmpty) {
+      return _json({
+        'default_branch': repo.branches.keys.firstOrNull ?? 'main',
+        'empty_repo': repo.branches.isEmpty,
+        'permissions': {
+          'project_access': {'access_level': 30},
+        },
+      });
+    }
 
     if (s.length == 2 && s[0] == 'repository' && s[1] == 'tree') {
       final path = q['path'] ?? '';
