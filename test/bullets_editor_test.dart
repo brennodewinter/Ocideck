@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_quill/flutter_quill.dart';
@@ -32,7 +33,7 @@ void main() {
       SlideType.bullets,
     ).copyWith(title: 'Titel', customMarkdown: 'Bestaande tekst');
 
-    await tester.pumpWidget(
+    await tester.pumpScoped(
       _testApp(
         BulletsEditor(slide: updated, onUpdate: (slide) => updated = slide),
       ),
@@ -53,7 +54,7 @@ void main() {
       SlideType.bullets,
     ).copyWith(bullets: ['Eerste punt'], customMarkdown: 'Vrije tekst');
 
-    await tester.pumpWidget(
+    await tester.pumpScoped(
       _testApp(
         BulletsEditor(slide: updated, onUpdate: (slide) => updated = slide),
       ),
@@ -73,7 +74,7 @@ void main() {
   testWidgets('checklist items can be marked as checked', (tester) async {
     var updated = Slide.create(SlideType.bullets).copyWith(bullets: ['Taak']);
 
-    await tester.pumpWidget(
+    await tester.pumpScoped(
       MaterialApp(
         home: Scaffold(
           body: BulletsEditor(
@@ -101,7 +102,7 @@ void main() {
       SlideType.bullets,
     ).copyWith(bullets: ['Enige bullet']);
 
-    await tester.pumpWidget(
+    await tester.pumpScoped(
       MaterialApp(
         home: Scaffold(
           body: BulletsEditor(
@@ -126,7 +127,7 @@ void main() {
       SlideType.bullets,
     ).copyWith(bullets: ['\t[x] Afgerond'], listStyle: ListStyle.checklist);
 
-    await tester.pumpWidget(
+    await tester.pumpScoped(
       MaterialApp(
         home: Scaffold(
           body: BulletsEditor(
@@ -156,7 +157,7 @@ void main() {
       bullets: ['[x] Klaar', '[ ] Open'],
       listStyle: ListStyle.checklist,
     );
-    await tester.pumpWidget(
+    await tester.pumpScoped(
       MaterialApp(
         home: Scaffold(
           body: SizedBox(
@@ -184,7 +185,7 @@ void main() {
     final slide = Slide.create(
       SlideType.bullets,
     ).copyWith(bullets: ['[x] Klaar'], listStyle: ListStyle.checklist);
-    await tester.pumpWidget(
+    await tester.pumpScoped(
       MaterialApp(
         home: Scaffold(
           body: SizedBox(
@@ -213,7 +214,7 @@ void main() {
       listStyle: ListStyle.checklist,
     );
 
-    await tester.pumpWidget(
+    await tester.pumpScoped(
       MaterialApp(
         home: Scaffold(
           body: BulletsEditor(
@@ -238,7 +239,7 @@ void main() {
       listStyle: ListStyle.checklist,
       showChecklistProgress: true,
     );
-    await tester.pumpWidget(
+    await tester.pumpScoped(
       MaterialApp(
         home: Scaffold(
           body: SizedBox(
@@ -280,7 +281,7 @@ void main() {
     final slide = Slide.create(
       SlideType.bullets,
     ).copyWith(bullets: ['[ ] Open'], listStyle: ListStyle.checklist);
-    await tester.pumpWidget(
+    await tester.pumpScoped(
       MaterialApp(
         home: Scaffold(
           body: SizedBox(
@@ -311,7 +312,7 @@ void main() {
       listStyle: ListStyle.richText,
       customMarkdown: 'Inhoud met **vet**',
     );
-    await tester.pumpWidget(
+    await tester.pumpScoped(
       MaterialApp(
         home: Scaffold(
           body: SizedBox(
@@ -343,7 +344,7 @@ void main() {
       customMarkdown:
           '${'Lange tekst '.padRight(120, 'a')} die over de volle breedte moet lopen.',
     );
-    await tester.pumpWidget(
+    await tester.pumpScoped(
       MaterialApp(
         home: Scaffold(
           body: SizedBox(
@@ -378,7 +379,7 @@ Paragraaf met **vet** en wat extra tekst zodat de layout echt iets te doen heeft
 - Tweede punt met meer woorden
 ''',
     );
-    await tester.pumpWidget(
+    await tester.pumpScoped(
       MaterialApp(
         home: Scaffold(
           body: SizedBox(
@@ -406,7 +407,7 @@ Paragraaf met **vet** en wat extra tekst zodat de layout echt iets te doen heeft
 - Tweede punt met meer woorden
 ''',
     );
-    await tester.pumpWidget(
+    await tester.pumpScoped(
       MaterialApp(
         home: Scaffold(
           body: SizedBox(
@@ -429,7 +430,7 @@ Paragraaf met **vet** en wat extra tekst zodat de layout echt iets te doen heeft
       listStyle: ListStyle.checklist,
       showChecklistProgress: true,
     );
-    await tester.pumpWidget(
+    await tester.pumpScoped(
       MaterialApp(
         home: Scaffold(
           body: SizedBox(
@@ -469,7 +470,7 @@ Paragraaf met **vet** en wat extra tekst zodat de layout echt iets te doen heeft
       SlideType.bullets,
     ).copyWith(bullets: ['Eerste punt']);
 
-    await tester.pumpWidget(
+    await tester.pumpScoped(
       _testApp(
         BulletsEditor(slide: updated, onUpdate: (slide) => updated = slide),
       ),
@@ -493,7 +494,7 @@ Paragraaf met **vet** en wat extra tekst zodat de layout echt iets te doen heeft
       SlideType.bullets,
     ).copyWith(bullets: ['Blok A', 'Punt']);
 
-    await tester.pumpWidget(
+    await tester.pumpScoped(
       _testApp(
         BulletsEditor(slide: updated, onUpdate: (slide) => updated = slide),
       ),
@@ -519,7 +520,7 @@ Paragraaf met **vet** en wat extra tekst zodat de layout echt iets te doen heeft
       SlideType.bullets,
     ).copyWith(bullets: [groupHeadingBullet('Kop'), 'Een', 'Twee']);
 
-    await tester.pumpWidget(
+    await tester.pumpScoped(
       _testApp(
         BulletsEditor(slide: updated, onUpdate: (slide) => updated = slide),
       ),
@@ -540,7 +541,7 @@ Paragraaf met **vet** en wat extra tekst zodat de layout echt iets te doen heeft
       SlideType.bullets,
     ).copyWith(bullets: [groupHeadingBullet('Kop')]);
 
-    await tester.pumpWidget(
+    await tester.pumpScoped(
       _testApp(
         BulletsEditor(slide: updated, onUpdate: (slide) => updated = slide),
       ),
@@ -565,7 +566,7 @@ Paragraaf met **vet** en wat extra tekst zodat de layout echt iets te doen heeft
       SlideType.bullets,
     ).copyWith(bullets: [groupHeadingBullet('Ochtend'), 'Inloop']);
 
-    await tester.pumpWidget(
+    await tester.pumpScoped(
       _testApp(
         BulletsEditor(slide: updated, onUpdate: (slide) => updated = slide),
       ),
@@ -577,4 +578,11 @@ Paragraaf met **vet** en wat extra tekst zodat de layout echt iets te doen heeft
     // An unchanged round-trip through the editor keeps the heading intact.
     expect(updated.bullets.first, groupHeadingBullet('Ochtend'));
   });
+}
+
+/// De editors lezen de editorstate (om naar een gemelde bullet te springen), en
+/// een Riverpod-consumer zonder scope gooit meteen. Elke pump krijgt er dus een.
+extension on WidgetTester {
+  Future<void> pumpScoped(Widget child) =>
+      pumpWidget(ProviderScope(child: child));
 }

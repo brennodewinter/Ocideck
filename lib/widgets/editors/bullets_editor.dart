@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
+import '../../models/slide_quality.dart';
+import '../../state/editor_provider.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/markdown_paste_cleanup.dart';
 import '../markdown_editor/markdown_editor.dart';
@@ -11,7 +14,7 @@ import 'list_style_selector.dart';
 import 'split_continuation_switch.dart';
 import '../../theme/app_theme.dart';
 
-class BulletsEditor extends StatefulWidget {
+class BulletsEditor extends ConsumerStatefulWidget {
   final Slide slide;
   final ValueChanged<Slide> onUpdate;
 
@@ -35,10 +38,10 @@ class BulletsEditor extends StatefulWidget {
   });
 
   @override
-  State<BulletsEditor> createState() => _BulletsEditorState();
+  ConsumerState<BulletsEditor> createState() => _BulletsEditorState();
 }
 
-class _BulletsEditorState extends State<BulletsEditor> {
+class _BulletsEditorState extends ConsumerState<BulletsEditor> {
   late final TextEditingController _title;
   late final TextEditingController _subtitle;
   late List<TextEditingController> _bullets;
@@ -72,6 +75,51 @@ class _BulletsEditorState extends State<BulletsEditor> {
     );
     _richText.addListener(_emit);
     _initBullets(widget.slide.bullets);
+    WidgetsBinding.instance.addPostFrameCallback((_) => _applyQualityFocus());
+  }
+
+  /// Springt naar het gemelde opsommingsitem en accentueert het fragment.
+  ///
+  /// Opsommingen zijn waar de meeste tekst staat, en dus waar de meeste
+  /// privacybevindingen landen. Zonder dit wees een melding wel naar de slide,
+  /// maar moest de auteur zelf de goede regel zoeken.
+  void _applyQualityFocus() {
+    if (!mounted) return;
+    final editor = ref.read(editorProvider);
+    if (editor.focusQualityField != 'bullets') return;
+    final index = editor.focusQualitySpan?.fragmentIndex ?? 0;
+    if (index < 0 || index >= _bullets.length) return;
+    _focusNodes[index].requestFocus();
+    applyQualitySpanSelection(
+      _bullets[index],
+      _spanInController(index, editor.focusQualitySpan),
+    );
+    ref.read(editorProvider.notifier).clearFocusQualityField();
+  }
+
+  /// Rekent een positie in de ruwe bullet om naar een positie in het tekstveld.
+  ///
+  /// De scanner leest `slide.bullets[i]` zoals het in de markdown staat — met
+  /// tabs voor het niveau en `- [ ] ` voor een checklist-item. Het tekstveld
+  /// toont die opmaak niet; het bevat alleen de kale tekst. Een positie uit de
+  /// scan één op één toepassen zou dus het verkeerde stuk accentueren, precies
+  /// zo veel te ver naar rechts als de opmaak lang is.
+  ///
+  /// Alles wat gestript wordt is een prefix, dus het verschil in lengte ís de
+  /// verschuiving — en `endsWith` controleert die aanname in plaats van haar aan
+  /// te nemen. Klopt ze niet, dan liever geen accentuering dan een verkeerde.
+  SlideQualitySpan? _spanInController(int index, SlideQualitySpan? span) {
+    if (span == null || index >= widget.slide.bullets.length) return null;
+    final raw = widget.slide.bullets[index];
+    final stripped = _bullets[index].text;
+    if (!raw.endsWith(stripped)) return null;
+    final shift = raw.length - stripped.length;
+    if (span.start - shift < 0) return null;
+    return SlideQualitySpan(
+      start: span.start - shift,
+      end: span.end - shift,
+      fragmentIndex: index,
+    );
   }
 
   void _initBullets(List<String> raw) {
@@ -289,15 +337,28 @@ class _BulletsEditorState extends State<BulletsEditor> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    // Klikken op een melding van de slide die al openstaat verandert alleen de
+    // editorstate — er komt geen nieuwe initState of didUpdateWidget langs.
+    // Zonder deze listener zou het springen alleen werken naar een ándere slide.
+    ref.listen(editorProvider.select((s) => s.focusQualityField), (_, next) {
+      if (next != 'bullets') return;
+      WidgetsBinding.instance.addPostFrameCallback((_) => _applyQualityFocus());
+    });
     return editorScrollList(
       nestedInScrollView: widget.nestedInScrollView,
       children: [
-        EditorField(label: 'Titel', controller: _title, hint: 'Slide titel'),
+        EditorField(
+          label: 'Titel',
+          controller: _title,
+          hint: 'Slide titel',
+          qualityField: 'title',
+        ),
         const SizedBox(height: 12),
         EditorField(
           label: l10n.d('Subkop (optioneel)'),
           controller: _subtitle,
           hint: l10n.d('Subkop'),
+          qualityField: 'subtitle',
         ),
         const SizedBox(height: 16),
         ListStyleSelector(

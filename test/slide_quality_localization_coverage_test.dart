@@ -444,11 +444,7 @@ void main() {
             l10n,
             withField(
               'bullets',
-              span: const SlideQualitySpan(
-                start: 0,
-                end: 3,
-                fragmentIndex: 3,
-              ),
+              span: const SlideQualitySpan(start: 0, end: 3, fragmentIndex: 3),
             ),
           ),
           endsWith(' 4'),
@@ -460,10 +456,7 @@ void main() {
       inBothLanguages(() {
         final label = slideQualityFieldLabel(
           l10n,
-          withField(
-            'title',
-            span: const SlideQualitySpan(start: 0, end: 3),
-          ),
+          withField('title', span: const SlideQualitySpan(start: 0, end: 3)),
         );
         expect(label, isNotNull);
         expect(label, isNot(endsWith(' 1')));
