@@ -8,6 +8,14 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Fixed
+- **Aankruislijsten in de documentatie waren geen aankruislijsten.** De lezer
+  in de app kende het `- [ ]`-patroon niet en liet de haakjes gewoon staan, dus
+  de checklist voor het uitrollen van de webversie las als "• [ ] Served over
+  HTTPS". Precies bij een lijst die je afvinkt terwijl je hem uitvoert, is dat
+  het verschil tussen een hulpmiddel en ruis. Er staan nu vakjes, aangevinkte
+  vakjes voor `- [x]`, en een schermlezer noemt ze bij naam. De vakjes zijn
+  bewust niet aanklikbaar: dit is meegeleverde documentatie, dus een vinkje zou
+  nergens naartoe kunnen worden weggeschreven.
 - **De melding over de Informatieveiligheidsmodule bleef hangen boven een
   presentatie waar ze niet over ging.** Open je een rapport met
   module-slidetypes terwijl de module uit staat, dan bood OciDeck aan hem aan
