@@ -5,9 +5,6 @@ import '../models/slide_quality.dart';
 import '../state/editor_provider.dart';
 import '../widgets/dialogs/settings_dialog.dart';
 
-/// Tab index of the presentation-style pane in [SettingsDialog].
-const int kSettingsColorsTabIndex = 2;
-
 /// Navigate from a quality issue to the relevant editor field or theme colour.
 void navigateToSlideQualityIssue({
   required BuildContext context,
@@ -17,7 +14,7 @@ void navigateToSlideQualityIssue({
   if (issue.isDeckWide) {
     SettingsDialog.show(
       context,
-      initialTab: kSettingsColorsTabIndex,
+      initialSection: SettingsSection.presentation,
       highlightThemeField: issue.field,
     );
     return;

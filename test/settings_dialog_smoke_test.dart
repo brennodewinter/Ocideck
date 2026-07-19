@@ -140,7 +140,10 @@ void main() {
           home: Scaffold(
             body: Builder(
               builder: (context) => ElevatedButton(
-                onPressed: () => SettingsDialog.show(context, initialTab: 5),
+                onPressed: () => SettingsDialog.show(
+                  context,
+                  initialSection: SettingsSection.security,
+                ),
                 child: const Text('open'),
               ),
             ),

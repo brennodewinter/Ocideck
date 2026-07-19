@@ -1798,6 +1798,21 @@ const _dutchSourceAddLt = <String, String>{
   'Niet de tekst op deze slide is het probleem, maar de reeks.':
       'Problema ne šios skaidrės tekstas, o seka.',
   'Haal volle pagina uit de reeks': 'Pašalinti pilną puslapį iš sekos',
+  'Opslag': 'Saugykla',
+  'Opslagwijzen': 'Saugojimo būdai',
+  'Deze computer': 'Šis kompiuteris',
+  'Ingesteld': 'Sukonfigūruota',
+  'Niet ingesteld': 'Nesukonfigūruota',
+  'Nog geen bibliotheek ingesteld':
+      'Kol kas nesukonfigūruota nė viena biblioteka',
+  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
+      'Keliai, kuriais galite atverti ir įrašyti pateiktis. Spustelėkite būdą, kad jį sukonfigūruotumėte.',
+  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
+      'Pateiktys aukščiau nurodytuose aplankuose, šio kompiuterio diske.',
+  'Open en bewaar presentaties in een map op je Nextcloud.':
+      'Atverkite ir įrašykite pateiktis aplanke savo Nextcloud.',
+  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Atverkite pateiktis iš git saugyklos; kiekviena įrašyta versija išsaugoma.',
   'Nog te verifiëren': 'Dar reikia patikrinti',
   'MASWE-zwakheid kiezen': 'Pasirinkite MASWE silpnybę',
   'Zoek op naam, id of categorie': 'Ieškoti pagal pavadinimą, id ar kategoriją',

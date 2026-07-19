@@ -1806,6 +1806,20 @@ const _dutchSourceAddLa = <String, String>{
   'Niet de tekst op deze slide is het probleem, maar de reeks.':
       'Non textus huius paginae impedimento est, sed series.',
   'Haal volle pagina uit de reeks': 'Paginam plenam ex serie tolle',
+  'Opslag': 'Repositorium',
+  'Opslagwijzen': 'Modi repositorii',
+  'Deze computer': 'Hic computatrum',
+  'Ingesteld': 'Constitutum',
+  'Niet ingesteld': 'Non constitutum',
+  'Nog geen bibliotheek ingesteld': 'Nulla bibliotheca adhuc constituta',
+  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
+      'Viae quibus proscaenia aperire et servare potes. Modum aperi ut eum constituas.',
+  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
+      'Proscaenia in plicis supra positis, in disco huius computatri.',
+  'Open en bewaar presentaties in een map op je Nextcloud.':
+      'Proscaenia in plica in Nextcloud tua aperi et serva.',
+  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Proscaenia ex repositorio git aperi; omnis versio servata manet.',
   'Nog te verifiëren': 'Adhuc probanda',
   'MASWE-zwakheid kiezen': 'Infirmitatem MASWE eligere',
   'Zoek op naam, id of categorie': 'Quaerere nomine, id vel genere',

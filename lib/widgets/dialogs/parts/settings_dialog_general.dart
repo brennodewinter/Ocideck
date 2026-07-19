@@ -58,67 +58,6 @@ extension _SettingsGeneralTab on _SettingsDialogState {
           ).hasGate,
           children: [_classificationEnforcementSection(l10n)],
         ),
-        // Standaard- en exportmap sturen het bestandssysteem aan. Op web
-        // bestaat dat niet (decks openen via bytes, export = browser-download),
-        // dus dan is de mapkeuze zinloos — verberg beide secties.
-        if (supportsLocalProjectFolders) ...[
-          const SizedBox(height: 16),
-          _sectionTitle(l10n.d('Bibliotheken')),
-          Text(
-            l10n.d(
-              'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.',
-            ),
-            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
-          ),
-          const SizedBox(height: 10),
-          if (_libraries.isEmpty)
-            _pathBox(
-              l10n.d('Nog geen bibliotheek — voeg een map toe.'),
-              muted: true,
-            )
-          else
-            for (var i = 0; i < _libraries.length; i++) _libraryRow(i),
-          const SizedBox(height: 10),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: ElevatedButton.icon(
-              onPressed: _addLibrary,
-              icon: const Icon(Icons.create_new_folder_outlined, size: 16),
-              label: Text(l10n.d('Map toevoegen')),
-            ),
-          ),
-          const SizedBox(height: 16),
-          _sectionTitle(l10n.t('exportFolderSetting')),
-          Row(
-            children: [
-              Expanded(
-                child: _pathBox(
-                  _exportDirectory ?? l10n.t('nextToPresentationFile'),
-                  muted: _exportDirectory == null,
-                ),
-              ),
-              const SizedBox(width: 8),
-              ElevatedButton.icon(
-                onPressed: _pickExportDirectory,
-                icon: const Icon(Icons.folder_open, size: 16),
-                label: Text(l10n.t('choose')),
-              ),
-              if (_exportDirectory != null)
-                IconButton(
-                  onPressed: () => _rebuild(() => _exportDirectory = null),
-                  icon: const Icon(Icons.clear, size: 18),
-                  tooltip: l10n.t('removeExportFolder'),
-                ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 6),
-            child: Text(
-              l10n.t('exportFolderHelp'),
-              style: TextStyle(fontSize: 11, color: AppTheme.slate400),
-            ),
-          ),
-        ],
       ],
     );
   }

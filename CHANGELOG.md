@@ -7,6 +7,34 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+- **Opslag staat onder één kop in de instellingen.** De bibliotheken en de
+  exportmap stonden onder "Algemeen", Nextcloud had een eigen tabblad en git nóg
+  een — wie wilde weten waar zijn presentaties konden staan, moest dat op drie
+  plekken bij elkaar zoeken. Het staat nu onder *Instellingen → Opslag*, in de
+  volgorde waarin je het vraagt: eerst wáár je werk bewaard wordt (bibliotheken,
+  exportmap), daarna lángs welke weg het daar komt.
+
+  Die laatste is een lijst met een regel per opslagwijze — deze computer,
+  Nextcloud, git — met de stand van zaken ernaast, en je klapt er een open om
+  hem in te stellen. "Deze computer" staat er met opzet bij, ook al valt er
+  niets in te stellen: een lijst met alleen de netwerkwegen wekt de indruk dat
+  opslaan op je eigen schijf iets bijzonders is in plaats van het gewone geval.
+  Een opslagwijze die er later bij komt wordt een regel in die lijst, geen
+  tabblad erbij.
+
+### Fixed
+- **De statusregel van een opslagwijze liep achter op het typen.** Hij bleef
+  "Niet ingesteld" melden terwijl de server er vlak boven al was ingevuld.
+  Dichtgeklapt is die regel het enige wat je van een opslagwijze ziet, dus als
+  hij tijdens het invullen niet klopt, klopt het onderdeel niet.
+- **Zoekresultaten kunnen niet meer naar het verkeerde tabblad springen.** De
+  verkeerde sprongen zelf waren al rechtgezet door de zoekindex te hernummeren;
+  wat hier verandert is dat de fout niet meer kán ontstaan. Een zoekingang wees
+  naar een volgnummer, en niets koppelde dat getal aan een tabblad — een tabblad
+  ertussen schuiven verschoof stilzwijgend de betekenis van elk nummer daarna.
+  Ingangen wijzen nu op naam, dus er is geen nummer meer dat kan verschuiven.
+
 ### Added
 - **Een slide die klein wordt gerenderd door zijn buren zegt dat nu zelf.** De
   pagina's van een gesplitste reeks delen één lettergrootte — die van de volste

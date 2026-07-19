@@ -1781,6 +1781,20 @@ const _dutchSourceAddEt = <String, String>{
   'Niet de tekst op deze slide is het probleem, maar de reeks.':
       'Probleem ei ole selle slaidi tekst, vaid jada.',
   'Haal volle pagina uit de reeks': 'Eemalda täis lehekülg jadast',
+  'Opslag': 'Salvestusruum',
+  'Opslagwijzen': 'Salvestusviisid',
+  'Deze computer': 'See arvuti',
+  'Ingesteld': 'Seadistatud',
+  'Niet ingesteld': 'Seadistamata',
+  'Nog geen bibliotheek ingesteld': 'Ühtegi teeki pole veel seadistatud',
+  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
+      'Teed, mille kaudu saate esitlusi avada ja salvestada. Klõpsake viisi, et see seadistada.',
+  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
+      'Esitlused ülalolevates kaustades, selle arvuti kettal.',
+  'Open en bewaar presentaties in een map op je Nextcloud.':
+      'Avage ja salvestage esitlusi oma Nextcloudi kaustas.',
+  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Avage esitlusi git-hoidlast; iga salvestatud versioon säilib.',
   'Nog te verifiëren': 'Veel kinnitamata',
   'MASWE-zwakheid kiezen': 'Vali MASWE nõrkus',
   'Zoek op naam, id of categorie': 'Otsi nime, id või kategooria järgi',

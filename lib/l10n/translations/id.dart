@@ -1790,6 +1790,20 @@ const _dutchSourceAddId = <String, String>{
   'Niet de tekst op deze slide is het probleem, maar de reeks.':
       'Bukan teks pada slide ini yang menjadi masalah, melainkan rangkaiannya.',
   'Haal volle pagina uit de reeks': 'Keluarkan halaman penuh dari rangkaian',
+  'Opslag': 'Penyimpanan',
+  'Opslagwijzen': 'Metode penyimpanan',
+  'Deze computer': 'Komputer ini',
+  'Ingesteld': 'Dikonfigurasi',
+  'Niet ingesteld': 'Belum dikonfigurasi',
+  'Nog geen bibliotheek ingesteld': 'Belum ada pustaka yang disiapkan',
+  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
+      'Jalur untuk membuka dan menyimpan presentasi. Klik salah satu metode untuk mengaturnya.',
+  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
+      'Presentasi dalam folder di atas, pada diska komputer ini.',
+  'Open en bewaar presentaties in een map op je Nextcloud.':
+      'Buka dan simpan presentasi dalam folder di Nextcloud Anda.',
+  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Buka presentasi dari repositori git; setiap versi yang disimpan tetap tersimpan.',
   'Nog te verifiëren': 'Masih harus diverifikasi',
   'MASWE-zwakheid kiezen': 'Pilih kelemahan MASWE',
   'Zoek op naam, id of categorie': 'Cari berdasarkan nama, id, atau kategori',

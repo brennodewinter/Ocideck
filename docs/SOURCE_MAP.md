@@ -316,9 +316,22 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 - `scope_coverage_dialog.dart` — Shows the scope-coverage gaps (in-scope objects with no test/finding).
 - `seal_timestamp_dialog.dart` — RFC 3161 timestamp workflow: export the `.tsq`, import/verify the `.tsr`.
 - `settings_dialog.dart` — Sidebar settings (theme colours, fonts, cockpit,
-  Licentie en Privacy, Beveiliging, Nextcloud, Checklists, and an "Over OciDeck"
+  Opslag, Licentie en Privacy, Beveiliging, Checklists, and an "Over OciDeck"
   screen); tab bodies live in `parts/settings_dialog_*.dart` (the Checklists tab
   managing user checklist templates is `parts/settings_dialog_checklists.dart`).
+  Which tabs exist, in what order, with which icon and label, is the
+  `SettingsSection` enum in `parts/settings_dialog_sections.dart` — one list, on
+  name. It replaced four index-aligned lists whose numbers silently drifted apart
+  (the git tab was once inserted at index 8 without renumbering the search index,
+  so "checklist" jumped to Git-repository). Nothing addresses a tab by number any
+  more.
+  Storage is one tab: `parts/settings_dialog_storage.dart` carries the libraries
+  and the export folder (moved out of Algemeen) plus `StorageModality` — a row
+  per route (disk, Nextcloud, git) with its status, expanding to that route's own
+  panel. The panels themselves stayed where they were,
+  `parts/settings_dialog_webdav.dart` and `parts/settings_dialog_git.dart`, now
+  built as `_webdavPanel()`/`_gitPanel()` instead of whole tabs. A fourth route
+  is a value in the enum plus a branch in `_modalityPanel`.
   Search over the settings lives in `parts/settings_dialog_search.dart`
   (`SettingsSearchEntry`, the search field, and the jump-and-flash), with the
   index of what is searchable in `parts/settings_dialog_search_index.dart`.

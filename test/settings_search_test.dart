@@ -95,60 +95,63 @@ void main() {
     expect(find.text('Herstelbestanden nu wissen'), findsOneWidget);
   });
 
-  // Het tabblad-nummer in de registry is een kale int: niets in de taal koppelt
-  // hem aan het tabblad waar de instelling écht staat. Toen Git-repository op
-  // index 8 werd ingevoegd schoven Checklists en Uitbreidingen een plek op, maar
-  // de registry niet — en dan springt "checklist sjabloon" de gebruiker naar
-  // Git-repository. De twee tests hieronder leggen die koppeling vast.
+  // De koppeling tussen een zoekingang en het tabblad waar de instelling staat.
+  //
+  // Dit stond ooit in een kale `int`, en niets in de taal koppelde dat getal aan
+  // het juiste tabblad: toen Git-repository op index 8 werd ingevoegd schoven
+  // Checklists en Uitbreidingen een plek op en de registry niet, waarna
+  // "checklist sjabloon" de gebruiker naar Git-repository stuurde. Sinds
+  // SettingsSection wijst een ingang op naam en kán die fout niet meer ontstaan.
+  //
+  // De tests hieronder blijven staan omdat ze iets anders bewaken dan de
+  // nummering: dat een ingang naar het tabblad wijst dat zijn sectiekop
+  // daadwerkelijk rendert. Een sectie die naar een ander tabblad verhuist is
+  // nog steeds stil fout — je landt gewoon ergens anders, zonder melding.
 
-  /// De gezaghebbende tabbladvolgorde: de `bodies`-lijst in settings_dialog.dart.
-  List<String> tabBuilders() {
+  /// De gezaghebbende koppeling tabblad → bouwer: de switch in
+  /// settings_dialog.dart die per SettingsSection zijn body kiest.
+  Map<String, String> sectionBuilders() {
     final src = File(
       'lib/widgets/dialogs/settings_dialog.dart',
     ).readAsStringSync();
-    final bodies = RegExp(
-      r'final bodies = <Widget>\[(.*?)\];',
-      dotAll: true,
-    ).firstMatch(src);
+    final matches = RegExp(
+      r'SettingsSection\.(\w+) => (_\w+)\(',
+    ).allMatches(src);
+    final out = <String, String>{
+      for (final m in matches) m.group(1)!: m.group(2)!,
+    };
     expect(
-      bodies,
-      isNotNull,
-      reason: 'de bodies-lijst is hernoemd of verplaatst',
+      out,
+      isNotEmpty,
+      reason: 'de switch over SettingsSection is hernoemd of verplaatst',
     );
-    return RegExp(
-      r'_tabBody\((_\w+)\(',
-    ).allMatches(bodies!.group(1)!).map((m) => m.group(1)!).toList();
+    return out;
   }
 
-  test('de tabbladvolgorde ligt vast, zodat invoegen niet stil doorschuift', () {
+  test('elk tabblad heeft precies één body, in de volgorde van de enum', () {
     expect(
-      tabBuilders(),
-      const [
-        '_generalTab',
-        '_appearanceTab',
-        '_presentationStyleTab',
-        '_cockpitTab',
-        '_privacyTab',
-        '_securityTab',
-        '_aiTab',
-        '_webdavTab',
-        '_gitTab',
-        '_checklistsTab',
-        '_modulesTab',
-        '_documentationTab',
-        '_aboutTab',
-      ],
+      sectionBuilders().keys.toList(),
+      SettingsSection.values.map((s) => s.name).toList(),
       reason:
-          'Tabblad toegevoegd, verwijderd of verplaatst? Werk dan óók de '
-          '`tab:`-indices in kSettingsSearchIndex bij (en dit lijstje), anders '
-          'springen zoekresultaten naar het verkeerde tabblad.',
+          'Tabblad toegevoegd, verwijderd of verplaatst? De switch in '
+          'settings_dialog.dart moet elke SettingsSection precies één keer '
+          'dekken, in de volgorde van de enum.',
     );
   });
 
   test('elke zoekterm wijst naar het tabblad dat zijn sectie rendert', () {
-    final builders = tabBuilders();
+    final builders = sectionBuilders();
 
-    // Elk tabblad is één `Widget _xxxTab(...)`; zijn body loopt tot de volgende
+    // De opslagwijzen renderen hun sectiekop in een eigen paneel in plaats van
+    // in de body van het tabblad, dus de scan hieronder vindt ze niet vanzelf.
+    // Ze horen wél bij Opslag: het paneel klapt binnen dat tabblad open.
+    const extraOwners = {'_webdavPanel': 'storage', '_gitPanel': 'storage'};
+    final ownerOf = <String, String>{
+      for (final e in builders.entries) e.value: e.key,
+      ...extraOwners,
+    };
+
+    // Elke bouwer is één `Widget _xxx(`; zijn body loopt tot de volgende
     // top-level Widget in hetzelfde bestand.
     final sources = Directory('lib/widgets/dialogs')
         .listSync(recursive: true)
@@ -157,7 +160,7 @@ void main() {
         .map((f) => f.readAsStringSync())
         .toList();
     final spans = <String, String>{};
-    for (final builder in builders) {
+    for (final builder in ownerOf.keys) {
       for (final src in sources) {
         final start = RegExp('\\n  Widget $builder\\(').firstMatch(src);
         if (start == null) continue;
@@ -171,16 +174,10 @@ void main() {
     final wrong = <String>[];
     var resolved = 0;
     for (final entry in kSettingsSearchIndex) {
-      expect(
-        entry.tab,
-        allOf(greaterThanOrEqualTo(0), lessThan(builders.length)),
-        reason:
-            'tab-index buiten bereik voor "${entry.label ?? entry.labelKey}"',
-      );
       final section = entry.section;
       if (section == null) continue;
       final escaped = section.replaceAll("'", r"\'");
-      final owners = builders
+      final owners = ownerOf.keys
           .where(
             (b) =>
                 (spans[b] ?? '').contains("_sectionTitle(l10n.d('$escaped')") ||
@@ -190,15 +187,15 @@ void main() {
                 ),
           )
           .toList();
-      // Secties die een hulpmethode buiten de tab-body rendert, zijn hier niet
-      // toe te wijzen; die slaan we over in plaats van vals alarm te slaan.
+      // Secties die een hulpmethode buiten de body rendert, zijn hier niet toe
+      // te wijzen; die slaan we over in plaats van vals alarm te slaan.
       if (owners.length != 1) continue;
       resolved++;
-      final expectedTab = builders.indexOf(owners.single);
-      if (entry.tab != expectedTab) {
+      final expected = ownerOf[owners.single];
+      if (entry.tab.name != expected) {
         wrong.add(
-          '"${entry.label ?? entry.labelKey}" (sectie "$section") heeft '
-          'tab: ${entry.tab} maar staat in ${owners.single} = tab $expectedTab',
+          '"${entry.label ?? entry.labelKey}" (sectie "$section") wijst naar '
+          '${entry.tab.name} maar staat in ${owners.single} = $expected',
         );
       }
     }

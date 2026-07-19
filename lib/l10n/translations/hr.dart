@@ -1797,6 +1797,20 @@ const _dutchSourceAddHr = <String, String>{
   'Niet de tekst op deze slide is het probleem, maar de reeks.':
       'Problem nije tekst na ovom slajdu, nego niz.',
   'Haal volle pagina uit de reeks': 'Ukloni punu stranicu iz niza',
+  'Opslag': 'Pohrana',
+  'Opslagwijzen': 'Načini pohrane',
+  'Deze computer': 'Ovo računalo',
+  'Ingesteld': 'Postavljeno',
+  'Niet ingesteld': 'Nije postavljeno',
+  'Nog geen bibliotheek ingesteld': 'Još nije postavljena nijedna knjižnica',
+  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
+      'Putovi kojima možete otvarati i spremati prezentacije. Kliknite način da ga postavite.',
+  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
+      'Prezentacije u gornjim mapama, na disku ovog računala.',
+  'Open en bewaar presentaties in een map op je Nextcloud.':
+      'Otvarajte i spremajte prezentacije u mapi na svojem Nextcloudu.',
+  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Otvarajte prezentacije iz git repozitorija; svaka spremljena verzija ostaje sačuvana.',
   'Nog te verifiëren': 'Još treba provjeriti',
   'MASWE-zwakheid kiezen': 'Odaberi MASWE slabost',
   'Zoek op naam, id of categorie': 'Pretraži po nazivu, id-u ili kategoriji',

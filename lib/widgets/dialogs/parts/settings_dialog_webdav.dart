@@ -28,7 +28,7 @@ extension _SettingsWebdav on _SettingsDialogState {
     );
   }
 
-  Widget _webdavTab() {
+  Widget _webdavPanel() {
     final l10n = context.l10n;
     final testMsg = _webdavTestMessage;
     return Column(

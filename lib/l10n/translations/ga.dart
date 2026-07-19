@@ -1826,6 +1826,20 @@ const _dutchSourceAddGa = <String, String>{
   'Niet de tekst op deze slide is het probleem, maar de reeks.':
       'Ní hé an téacs ar an sleamhnán seo an fhadhb, ach an tsraith.',
   'Haal volle pagina uit de reeks': 'Bain leathanach lán as an tsraith',
+  'Opslag': 'Stóráil',
+  'Opslagwijzen': 'Modhanna stórála',
+  'Deze computer': 'An ríomhaire seo',
+  'Ingesteld': 'Cumraithe',
+  'Niet ingesteld': 'Gan cumrú',
+  'Nog geen bibliotheek ingesteld': 'Níl leabharlann ar bith socraithe fós',
+  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
+      'Na bealaí ar féidir leat láithreoireachtaí a oscailt agus a shábháil. Cliceáil modh chun é a chumrú.',
+  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
+      'Láithreoireachtaí sna fillteáin thuas, ar dhiosca an ríomhaire seo.',
+  'Open en bewaar presentaties in een map op je Nextcloud.':
+      'Oscail agus sábháil láithreoireachtaí i bhfillteán ar do Nextcloud.',
+  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Oscail láithreoireachtaí ó stór git; coinnítear gach leagan sábháilte.',
   'Nog te verifiëren': 'Le fíorú fós',
   'MASWE-zwakheid kiezen': 'Roghnaigh laige MASWE',
   'Zoek op naam, id of categorie':

@@ -1808,6 +1808,20 @@ const _dutchSourceAddRo = <String, String>{
   'Niet de tekst op deze slide is het probleem, maar de reeks.':
       'Problema nu este textul de pe acest diapozitiv, ci seria.',
   'Haal volle pagina uit de reeks': 'Scoate pagina plină din serie',
+  'Opslag': 'Stocare',
+  'Opslagwijzen': 'Moduri de stocare',
+  'Deze computer': 'Acest computer',
+  'Ingesteld': 'Configurat',
+  'Niet ingesteld': 'Neconfigurat',
+  'Nog geen bibliotheek ingesteld': 'Nicio bibliotecă configurată încă',
+  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
+      'Căile prin care puteți deschide și salva prezentări. Faceți clic pe un mod pentru a-l configura.',
+  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
+      'Prezentări în folderele de mai sus, pe discul acestui computer.',
+  'Open en bewaar presentaties in een map op je Nextcloud.':
+      'Deschideți și salvați prezentări într-un folder de pe Nextcloud.',
+  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Deschideți prezentări dintr-un depozit git; fiecare versiune salvată este păstrată.',
   'Nog te verifiëren': 'Rămâne de verificat',
   'MASWE-zwakheid kiezen': 'Alege o slăbiciune MASWE',
   'Zoek op naam, id of categorie': 'Caută după nume, id sau categorie',

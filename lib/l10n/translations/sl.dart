@@ -1792,6 +1792,20 @@ const _dutchSourceAddSl = <String, String>{
   'Niet de tekst op deze slide is het probleem, maar de reeks.':
       'Težava ni besedilo na tej prosojnici, temveč zaporedje.',
   'Haal volle pagina uit de reeks': 'Odstrani polno stran iz zaporedja',
+  'Opslag': 'Shramba',
+  'Opslagwijzen': 'Načini shranjevanja',
+  'Deze computer': 'Ta računalnik',
+  'Ingesteld': 'Nastavljeno',
+  'Niet ingesteld': 'Ni nastavljeno',
+  'Nog geen bibliotheek ingesteld': 'Nobena knjižnica še ni nastavljena',
+  'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.':
+      'Poti, po katerih lahko odpirate in shranjujete predstavitve. Kliknite način, da ga nastavite.',
+  'Presentaties in de mappen hierboven, op de schijf van deze computer.':
+      'Predstavitve v zgornjih mapah, na disku tega računalnika.',
+  'Open en bewaar presentaties in een map op je Nextcloud.':
+      'Odpirajte in shranjujte predstavitve v mapi na svojem Nextcloudu.',
+  'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Odpirajte predstavitve iz repozitorija git; vsaka shranjena različica se ohrani.',
   'Nog te verifiëren': 'Še je treba preveriti',
   'MASWE-zwakheid kiezen': 'Izberi šibkost MASWE',
   'Zoek op naam, id of categorie': 'Iskanje po imenu, id-ju ali kategoriji',
