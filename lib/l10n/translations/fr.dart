@@ -743,6 +743,23 @@ const _dutchSourceAddFr = {
       'La connexion git de cette présentation n\'existe plus.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Configurez d\'abord un dépôt git dans Réglages → Stockage.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Cette image montre au moins un visage reconnaissable.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Cette image montre au moins {count} visages reconnaissables.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Cette image n\'a pas pu être vérifiée pour des visages. Le format n\'est pas pris en charge (HEIC par exemple). Cela ne veut pas dire qu\'il n\'y a personne : cela veut dire que personne n\'a regardé.',
+  'Deze afbeelding toont een herkenbaar gezicht.':
+      'Cette image montre un visage reconnaissable.',
+  'Deze afbeelding toont {count} herkenbare gezichten.':
+      'Cette image montre {count} visages reconnaissables.',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
+      'Une image sur laquelle quelqu\'un est reconnaissable est une donnée personnelle, même sans nom.',
+  'herkenbaar gezicht op een afbeelding': 'visage reconnaissable sur une image',
+  'Afbeeldingen nakijken op herkenbare gezichten':
+      'Vérifier les images pour des visages reconnaissables',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.':
+      'Une image sur laquelle quelqu\'un est reconnaissable est une donnée personnelle, même sans nom. C\'est la vérification la plus lourde : chaque image est traitée localement. On compte s\'il y a un visage — jamais de qui il s\'agit, et rien n\'est conservé.',
   'Geen meldingen meer op deze slide.':
       'Plus aucun signalement sur cette diapositive.',
   'Kwaliteitsproblemen geaccepteerd': 'Problèmes de qualité acceptés',

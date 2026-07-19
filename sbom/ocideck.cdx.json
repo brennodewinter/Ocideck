@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:ffab1d8e-0c22-5719-8763-1376ea0c1316",
+  "serialNumber": "urn:uuid:1223dc35-0581-5570-85fa-f1a12e07e131",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-07-17T23:39:39.626732Z",
+    "timestamp": "2026-07-19T14:45:45.854834Z",
     "tools": {
       "components": [
         {
@@ -799,6 +799,42 @@
         {
           "type": "distribution",
           "url": "https://pub.dev/packages/dart_quill_delta/versions/10.8.3"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/dartcv4@1.1.8",
+      "type": "library",
+      "name": "dartcv4",
+      "version": "1.1.8",
+      "purl": "pkg:pub/dartcv4@1.1.8",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "0e2e3473cbbbcca47a7da4153ee11a93faec19598809d4564a8fb35910b7fbce"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/dartcv4/versions/1.1.8"
         }
       ],
       "properties": [
@@ -3077,6 +3113,42 @@
         {
           "name": "cdx:pub:scope",
           "value": "transitive"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:pub/opencv_core@1.4.5",
+      "type": "library",
+      "name": "opencv_core",
+      "version": "1.4.5",
+      "purl": "pkg:pub/opencv_core@1.4.5",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b31c1977f297992d327f2bde8db77b0549a48be29ab92c0b18e705de9443c133"
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "distribution",
+          "url": "https://pub.dev/packages/opencv_core/versions/1.4.5"
+        }
+      ],
+      "properties": [
+        {
+          "name": "ocideck:group",
+          "value": "dart-package"
+        },
+        {
+          "name": "cdx:pub:scope",
+          "value": "direct main"
         }
       ]
     },
@@ -7082,6 +7154,7 @@
         "pkg:pub/image@4.9.1",
         "pkg:pub/markdown@7.3.1",
         "pkg:pub/markdown_quill@4.3.0",
+        "pkg:pub/opencv_core@1.4.5",
         "pkg:pub/pasteboard@0.5.0",
         "pkg:pub/path@1.9.1",
         "pkg:pub/path_provider@2.1.6",

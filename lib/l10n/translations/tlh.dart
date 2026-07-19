@@ -1761,6 +1761,23 @@ const _dutchSourceAddTlh = <String, String>{
       'QIchvam git rar tu\'lu\'be\'qu\'.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'wa\'DIch git qawHaq yIcher: DuHmey → waHtaHghach.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'qab ngu\'lu\'bogh wa\' puS \'oS nagh beq vam.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'qab ngu\'lu\'bogh {count} puS \'oS nagh beq vam.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'nagh beq vam qab ngu\'meH nujDaq Qapbe\'. rap Sovbe\'lu\'. nuv tu\'be\'lu\' \'e\' \'oSbe\'; bejbe\'lu\' \'e\' \'oS.',
+  'Deze afbeelding toont een herkenbaar gezicht.':
+      'qab ngu\'lu\'bogh \'oS nagh beq vam.',
+  'Deze afbeelding toont {count} herkenbare gezichten.':
+      'qab ngu\'lu\'bogh {count} \'oS nagh beq vam.',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
+      'nuv ngu\'lu\'meH nagh beq \'oH nuv De\'\'e\', pongHa\'taHvIS je.',
+  'herkenbaar gezicht op een afbeelding': 'nagh beq qab ngu\'lu\'bogh',
+  'Afbeeldingen nakijken op herkenbare gezichten':
+      'nagh beq qab ngu\'lu\'bogh yInej',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.':
+      'nuv ngu\'lu\'meH nagh beq \'oH nuv De\'\'e\', pongHa\'taHvIS je. QaDvam \'oH Qatlh law\' Hoch Qatlh puS. Hoch nagh beq DaH ngu\'lu\'. qab tu\'lu\'\'a\' toghlu\'; \'Iv \'oH toghbe\'lu\', vaj pagh polu\'.',
   'Geen meldingen meer op deze slide.': 'yaHnIv vam Sovbe\'lu\'.',
   'Kwaliteitsproblemen geaccepteerd': '\'ul Qob lajlu\'',
   'Mogelijk persoonsgegevens': 'chaq nuv De\'',

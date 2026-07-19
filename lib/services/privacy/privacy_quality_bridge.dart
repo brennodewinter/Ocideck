@@ -56,6 +56,7 @@ SlideQualityIssueKind _kindFor(PrivacyFamily family) {
       SlideQualityIssueKind.privacySpecialCategory,
     PrivacyFamily.bulk => SlideQualityIssueKind.privacyBulk,
     PrivacyFamily.structural => SlideQualityIssueKind.privacyStructural,
+    PrivacyFamily.image => SlideQualityIssueKind.privacyImage,
   };
 }
 

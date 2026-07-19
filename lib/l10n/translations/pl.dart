@@ -1798,6 +1798,23 @@ const _dutchSourceAddPl = <String, String>{
       'Połączenie git tej prezentacji już nie istnieje.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Najpierw skonfiguruj repozytorium git w Ustawienia → Pamięć.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Ten obraz przedstawia co najmniej jedną rozpoznawalną twarz.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Ten obraz przedstawia co najmniej tyle rozpoznawalnych twarzy: {count}.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Nie udało się sprawdzić tego obrazu pod kątem twarzy. Format nie jest obsługiwany (na przykład HEIC). To nie znaczy, że nikogo na nim nie ma — to znaczy, że nikt nie sprawdził.',
+  'Deze afbeelding toont een herkenbaar gezicht.':
+      'Ten obraz przedstawia rozpoznawalną twarz.',
+  'Deze afbeelding toont {count} herkenbare gezichten.':
+      'Ten obraz przedstawia rozpoznawalne twarze: {count}.',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
+      'Obraz, na którym ktoś jest rozpoznawalny, jest danymi osobowymi, nawet bez podania imienia.',
+  'herkenbaar gezicht op een afbeelding': 'rozpoznawalna twarz na obrazie',
+  'Afbeeldingen nakijken op herkenbare gezichten':
+      'Sprawdzaj obrazy pod kątem rozpoznawalnych twarzy',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.':
+      'Obraz, na którym ktoś jest rozpoznawalny, jest danymi osobowymi, nawet bez imienia. To najcięższa kontrola: każdy obraz jest przetwarzany lokalnie. Liczone jest, czy widoczna jest twarz — nigdy czyja, i nic nie jest zapisywane.',
   'Geen meldingen meer op deze slide.': 'Brak zgłoszeń na tym slajdzie.',
   'Kwaliteitsproblemen geaccepteerd': 'Zaakceptowano problemy z jakością',
   'Mogelijk persoonsgegevens': 'Możliwe dane osobowe',

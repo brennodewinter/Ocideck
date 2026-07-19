@@ -1804,6 +1804,23 @@ const _dutchSourceAddUk = <String, String>{
       'Git-з\'єднання цієї презентації більше не існує.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Спершу налаштуйте git-репозиторій у Налаштування → Сховище.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'На цьому зображенні видно щонайменше одне впізнаване обличчя.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'На цьому зображенні видно щонайменше стільки впізнаваних облич: {count}.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Це зображення не вдалося перевірити на обличчя. Формат не підтримується (наприклад, HEIC). Це не означає, що на ньому нікого немає, — це означає, що ніхто не дивився.',
+  'Deze afbeelding toont een herkenbaar gezicht.':
+      'На цьому зображенні видно впізнаване обличчя.',
+  'Deze afbeelding toont {count} herkenbare gezichten.':
+      'На цьому зображенні видно впізнаваних облич: {count}.',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
+      'Зображення, на якому когось можна впізнати, є персональними даними, навіть без імені.',
+  'herkenbaar gezicht op een afbeelding': 'впізнаване обличчя на зображенні',
+  'Afbeeldingen nakijken op herkenbare gezichten':
+      'Перевіряти зображення на впізнавані обличчя',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.':
+      'Зображення, на якому когось можна впізнати, є персональними даними, навіть без імені. Це найважча перевірка: кожне зображення обробляється локально. Рахується, чи є обличчя, — ніколи чиє, і нічого не зберігається.',
   'Geen meldingen meer op deze slide.':
       'На цьому слайді більше немає повідомлень.',
   'Kwaliteitsproblemen geaccepteerd': 'Проблеми якості прийнято',

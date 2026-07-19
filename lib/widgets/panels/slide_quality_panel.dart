@@ -11,6 +11,7 @@ import '../../state/deck_provider.dart';
 import '../../state/deck_quality_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../state/image_contrast_provider.dart';
+import '../../state/image_privacy_provider.dart';
 import '../../state/privacy_provider.dart';
 import '../../state/settings_provider.dart';
 import '../privacy_badge.dart' show privacyKatSvg;
@@ -30,7 +31,12 @@ SlideQualityResult combinedSlideQualityResult(WidgetRef ref) {
   final syncResult = ref.watch(deckQualityProvider);
   final imageIssues = ref.watch(imageContrastIssuesProvider).value ?? const [];
   final privacyIssues = ref.watch(privacyQualityIssuesProvider);
-  if (imageIssues.isEmpty && privacyIssues.isEmpty) return syncResult;
+  // De beeldcontrole is asynchroon en mag de rest niet ophouden: zolang ze
+  // draait toont het paneel gewoon de tekstbevindingen.
+  final imagePrivacy = ref.watch(imagePrivacyIssuesProvider).value ?? const [];
+  if (imageIssues.isEmpty && privacyIssues.isEmpty && imagePrivacy.isEmpty) {
+    return syncResult;
+  }
   // `deckQualityProvider` filtert de geaccepteerde slides al weg, maar de
   // asynchrone contrastcheck komt langs die filter heen binnen. Zonder deze
   // regel zou een slide waarvan de auteur de kwaliteit accepteert tóch blijven
@@ -42,6 +48,7 @@ SlideQualityResult combinedSlideQualityResult(WidgetRef ref) {
     for (final issue in imageIssues)
       if (deck == null || !isQualityAccepted(deck, issue.slideIndex)) issue,
     ...privacyIssues,
+    ...imagePrivacy,
   ]);
 }
 

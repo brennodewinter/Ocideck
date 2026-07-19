@@ -1808,6 +1808,23 @@ const _dutchSourceAddMt = <String, String>{
       'Il-konnessjoni git ta\' din il-preżentazzjoni ma għadhiex teżisti.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'L-ewwel issettja repożitorju git f\'Settings → Ħażna.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Din l-immaġni turi mill-inqas wiċċ rikonoxxibbli wieħed.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Din l-immaġni turi mill-inqas {count} uċuħ rikonoxxibbli.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Din l-immaġni ma setgħetx tiġi ċċekkjata għal uċuħ. Il-format mhuwiex appoġġjat (per eżempju HEIC). Dan ma jfissirx li m\'hemm ħadd fiha — ifisser li ħadd ma ħares.',
+  'Deze afbeelding toont een herkenbaar gezicht.':
+      'Din l-immaġni turi wiċċ rikonoxxibbli.',
+  'Deze afbeelding toont {count} herkenbare gezichten.':
+      'Din l-immaġni turi {count} uċuħ rikonoxxibbli.',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
+      'Immaġni li fiha xi ħadd huwa rikonoxxibbli hija data personali, anke mingħajr isem.',
+  'herkenbaar gezicht op een afbeelding': 'wiċċ rikonoxxibbli f\'immaġni',
+  'Afbeeldingen nakijken op herkenbare gezichten':
+      'Iċċekkja l-immaġni għal uċuħ rikonoxxibbli',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.':
+      'Immaġni li fiha xi ħadd huwa rikonoxxibbli hija data personali, anke mingħajr isem. Din hija l-aktar verifika tqila: kull immaġni tiġi pproċessata lokalment. Jingħadd jekk hemmx wiċċ — qatt ta\' min hu, u xejn ma jinħażen.',
   'Geen meldingen meer op deze slide.':
       'M\'hemmx aktar avviżi f\'din is-slajd.',
   'Kwaliteitsproblemen geaccepteerd': 'Problemi ta\' kwalità aċċettati',

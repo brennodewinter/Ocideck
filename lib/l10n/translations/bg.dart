@@ -1809,6 +1809,23 @@ const _dutchSourceAddBg = <String, String>{
       'Git връзката на тази презентация вече не съществува.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Първо настройте git хранилище в Настройки → Хранилище.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Това изображение показва поне едно разпознаваемо лице.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Това изображение показва поне толкова разпознаваеми лица: {count}.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Това изображение не можа да бъде проверено за лица. Форматът не се поддържа (например HEIC). Това не означава, че на него няма никого — означава, че не е проверявано.',
+  'Deze afbeelding toont een herkenbaar gezicht.':
+      'Това изображение показва разпознаваемо лице.',
+  'Deze afbeelding toont {count} herkenbare gezichten.':
+      'Това изображение показва разпознаваеми лица: {count}.',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
+      'Изображение, на което някой е разпознаваем, е лични данни дори без име.',
+  'herkenbaar gezicht op een afbeelding': 'разпознаваемо лице в изображение',
+  'Afbeeldingen nakijken op herkenbare gezichten':
+      'Проверка на изображенията за разпознаваеми лица',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.':
+      'Изображение, на което някой е разпознаваем, е лични данни дори без име. Това е най-тежката проверка: всяко изображение се обработва локално. Отчита се дали има лице — никога чие, и нищо не се съхранява.',
   'Geen meldingen meer op deze slide.': 'Няма повече съобщения на този слайд.',
   'Kwaliteitsproblemen geaccepteerd': 'Проблемите с качеството са приети',
   'Mogelijk persoonsgegevens': 'Възможно лични данни',

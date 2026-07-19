@@ -739,6 +739,23 @@ const _dutchSourceAddIt = {
       'La connessione git di questa presentazione non esiste più.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Configura prima un repository git in Impostazioni → Archiviazione.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Questa immagine mostra almeno un volto riconoscibile.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Questa immagine mostra almeno {count} volti riconoscibili.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Non è stato possibile controllare i volti in questa immagine. Il formato non è supportato (ad esempio HEIC). Non significa che non ci sia nessuno: significa che non è stato controllato.',
+  'Deze afbeelding toont een herkenbaar gezicht.':
+      'Questa immagine mostra un volto riconoscibile.',
+  'Deze afbeelding toont {count} herkenbare gezichten.':
+      'Questa immagine mostra {count} volti riconoscibili.',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
+      'Un\'immagine in cui qualcuno è riconoscibile è un dato personale, anche senza un nome.',
+  'herkenbaar gezicht op een afbeelding': 'volto riconoscibile in un\'immagine',
+  'Afbeeldingen nakijken op herkenbare gezichten':
+      'Controlla le immagini per volti riconoscibili',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.':
+      'Un\'immagine in cui qualcuno è riconoscibile è un dato personale, anche senza nome. È il controllo più pesante: ogni immagine viene elaborata localmente. Si conta se è presente un volto — mai di chi si tratta, e non viene memorizzato nulla.',
   'Geen meldingen meer op deze slide.':
       'Nessuna segnalazione rimasta su questa diapositiva.',
   'Kwaliteitsproblemen geaccepteerd': 'Problemi di qualità accettati',

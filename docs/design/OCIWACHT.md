@@ -23,6 +23,10 @@ accepteren, waarschuwen met een shield-badge, of redigeren op scherm en in expor
 | §4.0 Exportprofielen (volledig / geredigeerd) | **geleverd** |
 | §3-H Massa-persoonsgegevens (tabelkolommen, herhaalde treffers) | **geleverd** |
 | §3-D Adres, NL-postcode en gelabelde persoonsnaam (postcode + huisnummer escaleert via nabijheid) | **geleverd** |
+| §13.1 Matcher met woordgrenzen + `PrivacyTermRole` (aanwijzing versus gegeven) | **geleverd** |
+| §13.5 Beeldcontrole: herkenbare gezichten op afbeeldingen (YuNet, lokaal) | **geleverd** |
+| §13.2 Persoonskoppelingspoort, lexiconmodel als data | open — fase 11/12 |
+| §13.3 Taaldekking zichtbaar, gebundelde lexicons | open — fase 13 |
 
 De genomen beslissingen staan in §11; die zijn niet meer open.
 
@@ -846,6 +850,7 @@ Nieuwe sectie in het tabblad "Veiligheid" (`settings_dialog_security.dart`), wan
 | Instelling | Type | Standaard |
 | --- | --- | --- |
 | `privacyChecksEnabled` | bool (hoofdschakelaar) | **aan** |
+| `privacyImageFaceDetection` | bool — afbeeldingen nakijken op gezichten | **aan** (grijs zolang de hoofdschakelaar uit staat) |
 | `privacyFamilies` | set van 8 familieschakelaars | alle aan |
 | `privacyDisabledRules` | set van regel-id's | leeg |
 | `privacyRegions` | set van landpakketten | **heel Europa** (EU-27 + EER + CH + UK) |
@@ -1080,3 +1085,258 @@ De copy hierboven is met dat onderscheid geschreven.
 Alle nieuwe copy gaat door `l10n.d()` en moet dus in alle 30 niet-Nederlandse talen vertaald
 worden (`make add-l10n SPEC=…`). Dit is lopende tekst, geen acroniem: hier valt niets in de
 `unchanged`-lijst weg te schrijven.
+
+---
+
+## 13. Versteviging van de art. 9-detectie, meertaligheid en beeld
+
+Deze sectie komt voort uit een reeks metingen op de bestaande scanner. De cijfers
+hieronder zijn gedraaid tegen de echte code, niet geschat.
+
+### 13.1 Wat de meting liet zien
+
+| Invoer | Uitkomst vóór |
+| --- | --- |
+| `De vogels vliegen over het weiland` | ❌ `special.criminal` |
+| `Het arrest van de Hoge Raad uit 2019` | ❌ `special.criminal` |
+| `De diagnose van het probleem is helder` | ❌ `special.health` |
+| `Marieke de Vries wordt verdacht van diefstal` | ⚠️ niets |
+| `Hauptstraße 12, 10115 Berlin` | ⚠️ niets |
+| `Sig. Rossi` | ⚠️ niets |
+
+Drie oorzaken, in volgorde van ernst.
+
+**De matcher was een kale `indexOf`** — geen woordgrens, geen morfologie. Vandaar
+`vog` in `vogels`. Microsofts eigen richtlijn voor custom types zegt het
+omgekeerde: *"You should always use word unless you need to match parts of words
+or words in Asian languages."*
+
+**Het lexicon telde 122 termen over 8 families over 5 talen** — religie negen
+termen, seksleven zes. Eén à twee begrippen per taal. En het bevatte de verbogen
+vorm `verdachte`, waardoor "wordt verdacht van", de gebruikelijkste formulering
+van precies het geval waar artikel 10 over gaat, volledig gemist werd.
+
+**Redactie werkte op trefwoordniveau.** Op een `redact`-slide werd
+`Jan had een diagnose bij de huisarts` tot `Jan had een ████████ bij de huisarts`.
+Er wordt niets verborgen, "Jan" blijft staan, en de ontvanger concludeert uit het
+blok dat daar iets gevoeligs stond. Misleidender dan overbodig.
+
+### 13.2 Het model: twee assen die verschillend werk doen
+
+| | bepaalt |
+| --- | --- |
+| **persoonskoppeling** op de slide | óf het een persoonsgegeven is → melden ja/nee |
+| **term-rol** (indicator / waarde) | hoeveel je weglakt als je redigeert |
+
+Een lexicon-entry:
+
+```
+term        de string
+category    special.health | special.criminal | … | contact.*
+role        indicator | value
+lang        nl | en | …
+match       word | prefix | compound | notation
+weight      specificiteit (zeldzaam = hoog)
+source      bundled | user
+```
+
+**`role` lost de zinloze redactie op.** "Diagnose" wijst naar een gegeven, `F32.1`
+en een parketnummer zíjn het. Een aanwijzing gaat alleen mee als de escalator haar
+bereik heeft verbreed tot de hele mededeling. Dit is geen eigen vinding: de
+Autoriteit Persoonsgegevens hanteert exact dit onderscheid — *"Gegevens die
+hooguit een indicatie geven dat het om een gevoelig kenmerk zou kunnen gaan, zijn
+niet voldoende"* om van een rechtstreeks verband te spreken (onderzoek
+kinderopvangtoeslag, §3.3.1).
+
+**`match` lost de valse positieven op.** Voor Nederlands is `prefix` met
+woordbegin-grens de juiste standaard: de morfologie is vrijwel volledig
+suffigerend, dus `verdacht` dekt `verdachte`, `verdachten` en `verdachtmaking`.
+Voor DE/NL/SV/DA/FI is een `compound`-modus nodig — decompounding levert in het
+Duits gemeten +23% MAP op korte queries.
+
+**`weight` stuurt wat je bundelt.** `Syndroom van Epstein` heeft geen homoniem;
+`griep` heeft er tien. Zeldzame ziektenamen gedragen zich als codes. Dat is
+dezelfde reden waarom `special.genetic` met dbSNP/HGVS-notatie de enige
+art. 9-regel met lage FP-ratio is.
+
+**De persoonskoppelingspoort** heeft juridische dekking én een gemeten
+prijskaartje. [C-21/23 *Lindenapotheke*](https://eur-lex.europa.eu/legal-content/NL/TXT/?uri=CELEX:62023CJ0021)
+§84: het gegeven werd art. 9 doordat de bestelling *"a link between a medicinal
+product … and a natural person identified or identifiable by factors such as that
+person's name or the delivery address"* legde. Maar VACCINE (WWW 2019) meet dat
+patroondetectie op Enron-e-mail **F1 90,20%** haalt voor *attribuut*detectie ("is
+dit een telefoonnummer?") en **F1 48,35%** voor *subject*detectie ("van wíé is dit
+nummer?"). Reken op de helft, niet op negentig procent.
+
+### 13.3 Meertaligheid
+
+De interface draait in 30 talen, de detectie in één tot zes per regel. Adres en
+BSN-context: alleen NL. Art. 9: vijf talen.
+
+**Niemand lost dit systematisch op.** Microsoft stelt in eigen documentatie:
+*"You can't use localized strings to provide different localized versions of a
+keyword list or regular expression."* Hun 27 EU-rijbewijstypes delen één blok van
+126 Engelse termen met mediaan vier lokale woorden erbovenop, inclusief
+knip-en-plakfouten (het Nederlandse lijstje bevat `permis de conduire`). Google
+dekt 15 van 27 EU-landen en publiceert zijn contextwoorden niet. AWS Macie
+publiceert wél lokale lijsten maar heeft geen BSN, geen PESEL, geen personnummer.
+
+En ML is geen uitweg: zero-shot transfer verliest bij XLM-R gemiddeld 9,3 F1 op de
+makkelijke West-Europese talen; op XTREME's NER blijft de kloof ~19–24 punten. Wu
+& Dredze tonen dat mBERT onder een corpusdrempel ~6 punten achterblijft bij
+niet-neurale baselines — voor kleine talen zijn regels dus de bétere keuze.
+Papiaments zit in geen enkel meertalig model en in geen enkele NER-dataset;
+Maltees ontbreekt in XLM-R; Fries heeft 0,2 GiB tegenover Bulgaars 57,5 GiB.
+
+**Drie lagen:**
+
+1. **Taalonafhankelijk** draagt het meeste — IBAN mod-97 over 89 landen, Luhn,
+   e-mail, IP, secrets, genetische notatie, ICD-codes, nationale nummers met
+   checksum. Microsofts INSEE-definitie geeft de ijking: patroon + checksum alleen
+   = confidence 75; het trefwoord voegt 10 toe.
+2. **Lokale taal + Engels**, niet 30 talen. Dat is wat Microsoft feitelijk doet, en
+   het past bij gemengd taalgebruik in zakelijke decks.
+3. **Bulk waar het kan** — EuroVoc (24 EU-talen incl. MT en GA, SKOS) en IATE voor
+   religie/politiek/vakbond; ORDO in 9 talen voor gezondheid (CC BY 4.0, 16.378
+   Nederlandse labels); CLDR voor datums en naamvolgorde; OpenCage
+   `address-formatting` (MIT, 251 gebieden) voor de straat/huisnummer-volgorde.
+
+**De fallback is de kern.** `Deck.language` bestaat al en stuurt de
+bevindingssjablonen — maar daar valt een ontbrekende taal terug op Engels. Voor een
+lexicon is dat **precies verkeerd**: Poolse tekst scannen met Engelse triggerwoorden
+geeft bijna nul recall en niemand merkt het. Het paneel dat nu meldt dát de
+privacycontrole uitstaat, moet ook melden dat er voor deze taal geen lexicon is.
+
+**Niet bundelen:** SNOMED CT NL (gratis maar sublicentiehouders moeten
+geadministreerd en aan Nictiz overlegd — onverenigbaar met een publieke repo),
+ICD-11 (CC BY-**ND**), MeSH-vertalingen (UMLS categorie 3), ATC (NC +
+no-modification), LOINC (§4 geen afgeleide werken; §12 draagt vertaalwerk
+automatisch over aan Regenstrief).
+
+### 13.4 Pijplijnvolgorde: goedkoop eerst, duur laatst
+
+De controles verschillen orden van grootte in kosten, en de UI hangt aan de
+goedkoopste. De volgorde is daarom een ontwerpregel, geen implementatiedetail:
+
+1. **Synchroon, microseconden** — checksums, regexes, contextpoorten. Draait bij
+   elke toetsaanslag.
+2. **Synchroon, milliseconden** — de trefwoordlexicons en de escalator.
+3. **Asynchroon, tientallen tot honderden milliseconden** — de beeldcontrole:
+   decoderen plus een neuraal netwerk, per afbeelding. Eigen provider, serieel,
+   met een eigen schakelaar.
+
+Stap 3 mag stap 1 nooit ophouden. Het paneel toont de tekstbevindingen zodra ze er
+zijn en vult de beeldbevindingen bij zodra die binnen zijn.
+
+### 13.5 De beeldcontrole
+
+Een afbeelding waarop iemand herkenbaar staat, ís een persoonsgegeven — ook zonder
+naam erbij. De tekstscanner kan dat per definitie nooit vinden: die leest
+`mem:11162735-…`.
+
+**Geen biometrie, en dat met opzet.** De EDPB stelt (Richtsnoeren 3/2019 §74-76)
+dat beeld van een persoon pas een art. 9-gegeven wordt als het *"specifically
+technically processed in order to contribute to the identification of an
+individual"* wordt. Wij stellen aanwezigheid vast, nooit identiteit. Het model
+levert per gezicht een kader, vijf landmarks en een score; daarvan blijft **alleen
+het aantal** over. Er wordt geen sjabloon berekend, niets opgeslagen, niets
+vergeleken. In `image_face_scan_io.dart` staat een expliciete grensmarkering op de
+regel waar dat mis zou gaan.
+
+**Motor:** YuNet (OpenCV Zoo, MIT, 232 KB) via `opencv_core` (Apache-2.0). Kosten:
+27 MB `DartCvMacOS.framework` in de macOS-bundel, gemeten. Op het web bestaat FFI
+niet; daar degradeert de controle en zegt ze dat via `isSupported`.
+
+**Twee dingen die de meting op veertien echte foto's opleverde**, en die allebei
+het gedrag vertoonden waar deze controle tegen ontworpen is:
+
+*HEIC meldde nul.* OpenCV kent HEIC niet, `imdecode` geeft een lege matrix, en de
+code rapporteerde dat als "geen gezichten". iPhone-foto's zijn standaard HEIC.
+`ImageFaceScanResult` scheidt daarom `faces` van `readable`, en een onleesbare
+afbeelding levert een eigen informatieve melding op.
+
+*Eén vaste breedte verloor de meeste gezichten.* Per foto verschilt de béste
+breedte en geen enkele is overal goed:
+
+```
+foto            orig  1920  1280   640
+startbaan          0     0     1     0
+twee personen      3     3     1     0
+portret staand     0     -     -     1
+```
+
+Drie schalen met het maximum eroverheen vindt er zes van zeven. De zevende is een
+strandfoto waarop iemand omlaag kijkt met een zonnebril op — die hóórt een
+gezichtsdetector te missen.
+
+**De scoredrempel bleek de belangrijkste knop, en hij stond bijna op de klif.**
+Gemeten op zeven foto's plus elf mensloze app-assets:
+
+```
+drempel   gezichten   valse-positieven
+   0,95           0                  0
+   0,92           8                  0
+   0,90          11                  0
+   0,85          14                  0
+   0,80          14                  0
+   0,70          14                  0
+   0,60          15                  0
+   0,50          15                  2
+```
+
+Er stond eerst 0,92, "om zeker te zijn" — drie honderdsten van een detector die
+letterlijk niets meer vindt. Tussen 0,85 en 0,70 ligt een vlak gebied zonder
+enkele valse positief; 0,80 ligt daar in het midden, dus zo ver mogelijk van
+beide kliffen. Op die drempel gaat de groepsfoto van drie naar **acht van acht**
+en wordt zelfs de strandfoto gevonden.
+
+Ook gemeten en daarom *niet* gebouwd: extra tussenschalen (960, 480) en
+contrastnormalisatie (CLAHE, voor tegenlicht) leverden geen enkel extra gezicht
+op. Die complexiteit is niet toegevoegd.
+
+**Eerlijkheid in de melding.** De detector telt structureel onder en nooit over —
+hij vindt gezichten, dus iemand van achteren of met het hoofd buiten de uitsnede
+ontbreekt per definitie. De melding zegt daarom "minstens N", en spreekt van
+*gezicht* en niet van *persoon*.
+
+*Voorbehoud:* zeven foto's en elf negatieven is een kleine steekproef. Het plateau
+is geruststellend, maar dit is geen benchmark.
+
+### 13.6 Fasering
+
+| Fase | Inhoud | Waarom hier |
+| --- | --- | --- |
+| **9** | Trefwoordbereik nooit redigeren (`PrivacyTermRole`) + matcher met woordgrens en minimumtermlengte | **geleverd.** Geen nieuwe data, geen nieuwe l10n. Verwijdert misleidend gedrag en de grofste FP's |
+| **10** | De beeldcontrole: YuNet, eigen provider, eigen schakelaar, `readable`-scheiding, multischaal | **geleverd.** Staat hier en niet later omdat de tekstscanner deze categorie principieel niet kan vinden |
+| **11** | Persoonskoppelingspoort vóór elke art. 9-melding | Vereist eerst betere naamdetectie: `contact.name` vuurt nu alleen achter een label, dus "Marieke de Vries" telt niet als koppeling |
+| **12** | `role` + `match` + `weight` als lexicondata in plaats van afgeleid; notatie-uitbreiding (ICD-10, ATC) | Maakt het lexicon vulbaar zonder code te raken — de voorwaarde voor 13 |
+| **13** | Taaldekking zichtbaar + regiopakketten werkend + gebundelde lexicons (ORDO nl, EuroVoc) | Zonder de zichtbaarheid liegt een groene balk in 24 talen |
+| **14** | Rolonderscheid verdachte/aangever (ConText-mechaniek in Dart, drieweg met *onbekend* als default) | Laatste tien procent, en zinloos vóór 11: wat je niet detecteert kun je geen rol geven |
+
+### 13.7 Wat hier bewust níét in zit
+
+**Geen NER, geen taalmodel.** Er is geen Nederlandse dependency parser of SRL die
+offline in Dart draait. Alpino staat op Prolog uit 2013, Frog is GPLv3 (viraal),
+spaCy `nl_core_news_lg` is 568 MB Python. De enige route naar een gelérd model is
+een gekwantiseerde ONNX-classifier, en Nederlandse trainingsdata voor misdaadrollen
+bestaat niet.
+
+**Geen gehashte woordenlijst.** Overwogen om een diagnoselijst als bloomfilter mee
+te leveren zodat hij niet leesbaar in de repo staat. Dat werkt niet: de privacy van
+een bloomfilter is precies de min-entropie van de invoerverzameling, en een
+diagnoselijst is publiek, opsombaar en klein. Een aanvaller hasht elke
+kandidaatterm en toetst lidmaatschap — bij 1% FP herstelt hij 99% van de
+verzameling. Een keyed hash helpt niet in een desktop-app, want de sleutel zit in
+het binary. De lijst gaat dus gewoon leesbaar mee; het zijn ziektenamen uit een
+publieke ontologie en er valt niets te beschermen.
+
+**Geen exacte tellingen beloven.** Er bestaat geen onafhankelijke
+accuratessebenchmark voor DLP — Gartner schrapte de Magic Quadrant in 2018 en geen
+leverancier publiceert precisie of recall. Ter kalibratie: Presidio haalt op de
+Text Anonymization Benchmark **recall 0,46** op directe identificatoren, in het
+Engels, de taal waarvoor het gebouwd is. En TAB's menselijke annotatoren maskeerden
+gemiddeld 67,9% van de entiteiten met SD 8,3% en 4.299 unieke meningsverschillen:
+**er is geen grondwaarheid om naartoe te convergeren.** Dat plafonneert wat elke
+classifier kan halen, en het is de reden dat de belofte van dit product — *een
+hulpmiddel, geen garantie* — geen bescheidenheidsfiguur is maar de enige uitspraak
+die door de meting gedekt wordt.

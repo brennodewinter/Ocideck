@@ -21,6 +21,20 @@ extension SettingsPrivacy on SettingsNotifier {
     );
   }
 
+  /// Zet de beeldcontrole aan of uit.
+  ///
+  /// Los van de hoofdschakelaar, want dit is de duurste controle van allemaal:
+  /// elke afbeelding wordt gedecodeerd en door een neuraal netwerk gehaald. Wie
+  /// dat niet wil betalen, hoort daarvoor niet de tekstcontrole te hoeven
+  /// opgeven.
+  Future<void> setPrivacyImageFaceDetection(bool enabled) async {
+    currentState = currentState.copyWith(privacyImageFaceDetection: enabled);
+    await _persist(
+      'setPrivacyImageFaceDetection',
+      (prefs) => prefs.setBool('privacyImageFaceDetection', enabled),
+    );
+  }
+
   /// Zet één detectieregel aan of uit.
   ///
   /// De ontsnappingsklep uit de melding zelf ("deze regel nooit meer melden").

@@ -1822,6 +1822,23 @@ const _dutchSourceAddGa = <String, String>{
       'Níl nasc git na láithreoireachta seo ann a thuilleadh.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Socraigh stóras git ar dtús faoi Socruithe → Stóráil.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Taispeánann an íomhá seo aghaidh inaitheanta amháin ar a laghad.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Taispeánann an íomhá seo {count} aghaidh inaitheanta ar a laghad.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Níorbh fhéidir an íomhá seo a sheiceáil le haghaidh aghaidheanna. Ní thacaítear leis an bhformáid (HEIC mar shampla). Ní chiallaíonn sé sin nach bhfuil aon duine inti — ciallaíonn sé nár breathnaíodh.',
+  'Deze afbeelding toont een herkenbaar gezicht.':
+      'Taispeánann an íomhá seo aghaidh inaitheanta.',
+  'Deze afbeelding toont {count} herkenbare gezichten.':
+      'Taispeánann an íomhá seo {count} aghaidh inaitheanta.',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
+      'Is sonraí pearsanta é íomhá ina bhfuil duine inaitheanta, fiú gan ainm.',
+  'herkenbaar gezicht op een afbeelding': 'aghaidh inaitheanta in íomhá',
+  'Afbeeldingen nakijken op herkenbare gezichten':
+      'Seiceáil íomhánna le haghaidh aghaidheanna inaitheanta',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.':
+      'Is sonraí pearsanta é íomhá ina bhfuil duine inaitheanta, fiú gan ainm. Seo an tseiceáil is troime: próiseáiltear gach íomhá go háitiúil. Comhairtear an bhfuil aghaidh ann — ní hé cé hé riamh, agus ní stóráiltear aon rud.',
   'Geen meldingen meer op deze slide.':
       'Níl aon fholáireamh fágtha ar an sleamhnán seo.',
   'Kwaliteitsproblemen geaccepteerd': 'Fadhbanna cáilíochta glactha',

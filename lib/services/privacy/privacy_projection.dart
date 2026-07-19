@@ -216,6 +216,10 @@ class PrivacyProjection {
     if (!active) return const {};
     final map = <String, List<_Range>>{};
     for (final f in findings) {
+      // Een aanwijzing zonder mededeling eromheen slaan we over: zie
+      // [PrivacyFinding.isRedactable]. Een zwart blok op het woord "diagnose"
+      // verbergt niets en wekt de indruk dat er iets verborgen ís.
+      if (!f.isRedactable) continue;
       map.putIfAbsent('${f.field}:${f.fragmentIndex}', () => []).add((
         start: f.start,
         end: f.end,

@@ -605,6 +605,17 @@ class AppSettings {
   /// verbergt de meldingen niet alleen.
   final bool privacyChecksEnabled;
 
+  /// Of afbeeldingen worden nagekeken op herkenbare gezichten.
+  ///
+  /// Eigen schakelaar naast de hoofdschakelaar, want dit is verreweg de duurste
+  /// controle: elke afbeelding wordt gedecodeerd en door een neuraal netwerk
+  /// gehaald. Wie op een oude machine werkt of decks met tientallen foto's
+  /// heeft, mag dat kunnen uitzetten zonder de tekstcontrole te verliezen.
+  ///
+  /// Standaard aan: een afbeelding waarop iemand herkenbaar staat is een
+  /// persoonsgegeven, en dat is precies wat deze controle hoort te vinden.
+  final bool privacyImageFaceDetection;
+
   /// Detectieregels die de gebruiker heeft uitgezet.
   ///
   /// De ontsnappingsklep: wie één regel te luid vindt, kan chirurgisch ingrijpen
@@ -721,6 +732,7 @@ class AppSettings {
     this.requireClassificationOnExport = false,
     this.classificationWatermarkEnabled = false,
     this.privacyChecksEnabled = true,
+    this.privacyImageFaceDetection = true,
     this.privacyDisabledRules = defaultDisabledPrivacyRules,
     this.privacyExportGate = PrivacyExportGate.warn,
     this.privacyOwnIdentity = '',
@@ -801,6 +813,7 @@ class AppSettings {
     bool? requireClassificationOnExport,
     bool? classificationWatermarkEnabled,
     bool? privacyChecksEnabled,
+    bool? privacyImageFaceDetection,
     Set<String>? privacyDisabledRules,
     PrivacyExportGate? privacyExportGate,
     String? privacyOwnIdentity,
@@ -861,6 +874,8 @@ class AppSettings {
       classificationWatermarkEnabled:
           classificationWatermarkEnabled ?? this.classificationWatermarkEnabled,
       privacyChecksEnabled: privacyChecksEnabled ?? this.privacyChecksEnabled,
+      privacyImageFaceDetection:
+          privacyImageFaceDetection ?? this.privacyImageFaceDetection,
       privacyDisabledRules: privacyDisabledRules ?? this.privacyDisabledRules,
       privacyExportGate: privacyExportGate ?? this.privacyExportGate,
       privacyOwnIdentity: privacyOwnIdentity ?? this.privacyOwnIdentity,

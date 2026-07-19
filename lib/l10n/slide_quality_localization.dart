@@ -343,6 +343,10 @@ String formatSlideQualityIssue(AppLocalizations l10n, SlideQualityIssue issue) {
     SlideQualityIssueKind.privacySpecialCategory ||
     SlideQualityIssueKind.privacyBulk ||
     SlideQualityIssueKind.privacyStructural => _formatPrivacy(l10n, issue),
+    SlideQualityIssueKind.privacyImage => _formatImagePrivacy(l10n, issue),
+    SlideQualityIssueKind.privacyImageUnreadable => l10n.d(
+      'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.',
+    ),
   };
 }
 
@@ -392,6 +396,32 @@ String _privacySuffix(
   return fallback;
 }
 
+/// De tekst van een beeldbevinding.
+///
+/// Zegt bewust "gezicht" en niet "persoon". De detector vindt gezichten, en
+/// mist dus iemand van achteren, in profiel, of met het hoofd buiten de
+/// uitsnede. Een melding die "persoon" belooft, belooft meer dan er gekeken is.
+String _formatImagePrivacy(AppLocalizations l10n, SlideQualityIssue issue) {
+  final count = int.tryParse(issue.args['sample'] ?? '') ?? 1;
+  // Twee complete zinnen in plaats van losse woorden aan elkaar geplakt: de
+  // woordvolgorde van "toont N gezichten" verschilt per taal, en een vertaler
+  // die alleen `herkenbare gezichten` te zien krijgt kan er niets mee.
+  // "Minstens", omdat de detector structureel ondertelt en nooit overtelt: hij
+  // vindt gezichten, dus iemand van achteren of met het hoofd buiten de uitsnede
+  // ontbreekt per definitie. Voor de waarschuwing maakt het niets uit — één
+  // gezicht is al een persoonsgegeven — maar een exact klinkend getal zou meer
+  // beloven dan er gekeken is.
+  final lead = count == 1
+      ? l10n.d('Deze afbeelding toont minstens één herkenbaar gezicht.')
+      : _fillParams(
+          l10n.d(
+            'Deze afbeelding toont minstens {count} herkenbare gezichten.',
+          ),
+          {'count': count},
+        );
+  return '$lead ${l10n.d('Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.')}';
+}
+
 /// Het leesbare label van een detectieregel.
 ///
 /// Acroniemen blijven onvertaald; die zijn in elke taal hetzelfde.
@@ -404,6 +434,7 @@ String privacyRuleLabel(AppLocalizations l10n, String ruleId) {
     'contact.address' => l10n.d('adres'),
     'contact.postcode_nl' => l10n.d('postcode'),
     'contact.name' => l10n.d('persoonsnaam'),
+    'image.face' => l10n.d('herkenbaar gezicht op een afbeelding'),
     'special.health' => l10n.d('gezondheidsgegeven'),
     'special.criminal' => l10n.d('strafrechtelijk gegeven'),
     'special.religion' => l10n.d('religie of levensovertuiging'),

@@ -1777,6 +1777,23 @@ const _dutchSourceAddEt = <String, String>{
       'Selle esitluse git-ühendust enam pole.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Seadista kõigepealt git-hoidla jaotises Seaded → Salvestus.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Sellel pildil on vähemalt üks äratuntav nägu.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Sellel pildil on vähemalt {count} äratuntavat nägu.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Seda pilti ei saanud nägude suhtes kontrollida. Vorming ei ole toetatud (näiteks HEIC). See ei tähenda, et pildil poleks kedagi — see tähendab, et ei vaadatud.',
+  'Deze afbeelding toont een herkenbaar gezicht.':
+      'Sellel pildil on äratuntav nägu.',
+  'Deze afbeelding toont {count} herkenbare gezichten.':
+      'Sellel pildil on {count} äratuntavat nägu.',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
+      'Pilt, millel keegi on äratuntav, on isikuandmed ka ilma nimeta.',
+  'herkenbaar gezicht op een afbeelding': 'äratuntav nägu pildil',
+  'Afbeeldingen nakijken op herkenbare gezichten':
+      'Kontrolli pilte äratuntavate nägude suhtes',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.':
+      'Pilt, millel keegi on äratuntav, on isikuandmed ka ilma nimeta. See on kõige raskem kontroll: iga pilt töödeldakse kohapeal. Loendatakse, kas nägu on näha — mitte kunagi kelle oma, ja midagi ei salvestata.',
   'Geen meldingen meer op deze slide.': 'Sellel slaidil pole enam teateid.',
   'Kwaliteitsproblemen geaccepteerd': 'Kvaliteediprobleemid aktsepteeritud',
   'Mogelijk persoonsgegevens': 'Võimalikud isikuandmed',

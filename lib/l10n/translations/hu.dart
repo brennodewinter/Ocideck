@@ -1790,6 +1790,23 @@ const _dutchSourceAddHu = <String, String>{
       'Ennek a bemutatónak a git-kapcsolata már nem létezik.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Előbb állíts be egy git-tárolót a Beállítások → Tárolás alatt.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Ezen a képen legalább egy felismerhető arc látható.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Ezen a képen legalább {count} felismerhető arc látható.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Ezt a képet nem lehetett arcokra ellenőrizni. A formátum nem támogatott (például HEIC). Ez nem azt jelenti, hogy nincs rajta senki — azt jelenti, hogy nem néztük meg.',
+  'Deze afbeelding toont een herkenbaar gezicht.':
+      'Ezen a képen felismerhető arc látható.',
+  'Deze afbeelding toont {count} herkenbare gezichten.':
+      'Ezen a képen {count} felismerhető arc látható.',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
+      'Az a kép, amelyen valaki felismerhető, személyes adat — név nélkül is.',
+  'herkenbaar gezicht op een afbeelding': 'felismerhető arc a képen',
+  'Afbeeldingen nakijken op herkenbare gezichten':
+      'Képek ellenőrzése felismerhető arcokra',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.':
+      'Az a kép, amelyen valaki felismerhető, személyes adat — név nélkül is. Ez a legterhesebb ellenőrzés: minden képet helyben dolgozunk fel. Csak azt számoljuk, van-e arc — soha nem azt, kié, és semmit nem tárolunk.',
   'Geen meldingen meer op deze slide.': 'Nincs több jelzés ezen a dián.',
   'Kwaliteitsproblemen geaccepteerd': 'Minőségi problémák elfogadva',
   'Mogelijk persoonsgegevens': 'Esetleg személyes adat',

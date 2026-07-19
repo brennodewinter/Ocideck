@@ -49,6 +49,7 @@ extension _SettingsSecurity on _SettingsDialogState {
               .read(settingsProvider.notifier)
               .setPrivacyChecksEnabled(value),
         ),
+        _privacyImageFaceDetection(l10n),
         _disabledPrivacyRules(l10n),
         const SizedBox(height: 10),
         _privacyExportGate(l10n),
@@ -172,6 +173,40 @@ extension _SettingsSecurity on _SettingsDialogState {
   /// etniciteit en seksuele geaardheid. Niet omdat ze onbelangrijk zijn, maar
   /// omdat hun trefwoorden op gewone zakelijke slides te vaak voorkomen. Wie in
   /// die hoek werkt, zet ze hier met één tik aan.
+  /// De beeldcontrole-schakelaar.
+  ///
+  /// Uitgeklapt in een eigen methode omdat de toelichting lang is — en dat is
+  /// met opzet: dit is de enige controle die niet naar tekst maar naar mensen
+  /// kijkt, en de gebruiker hoort te lezen wat er wél en niet gebeurt voordat
+  /// hij hem aan laat staan.
+  ///
+  /// Grijs zolang de hoofdschakelaar uit staat: een deelcontrole van een
+  /// uitgezette controle aan kunnen zetten is een knop die liegt.
+  Widget _privacyImageFaceDetection(AppLocalizations l10n) {
+    return SwitchListTile(
+      contentPadding: EdgeInsets.zero,
+      title: Text(
+        l10n.d('Afbeeldingen nakijken op herkenbare gezichten'),
+        style: const TextStyle(fontSize: 13),
+      ),
+      subtitle: Text(
+        l10n.d(
+          'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.',
+        ),
+        style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+      ),
+      value: ref.watch(
+        settingsProvider.select((s) => s.privacyImageFaceDetection),
+      ),
+      onChanged:
+          ref.watch(settingsProvider.select((s) => s.privacyChecksEnabled))
+          ? (value) => ref
+                .read(settingsProvider.notifier)
+                .setPrivacyImageFaceDetection(value)
+          : null,
+    );
+  }
+
   Widget _disabledPrivacyRules(AppLocalizations l10n) {
     final disabled = ref.watch(
       settingsProvider.select((s) => s.privacyDisabledRules),

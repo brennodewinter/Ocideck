@@ -1788,6 +1788,23 @@ const _dutchSourceAddSl = <String, String>{
       'Povezava git te predstavitve ne obstaja več.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Najprej nastavite repozitorij git v Nastavitve → Shramba.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Ta slika prikazuje vsaj en prepoznaven obraz.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Ta slika prikazuje vsaj toliko prepoznavnih obrazov: {count}.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Te slike ni bilo mogoče preveriti za obraze. Format ni podprt (na primer HEIC). To ne pomeni, da na njej ni nikogar — pomeni, da ni bilo pregledano.',
+  'Deze afbeelding toont een herkenbaar gezicht.':
+      'Ta slika prikazuje prepoznaven obraz.',
+  'Deze afbeelding toont {count} herkenbare gezichten.':
+      'Ta slika prikazuje prepoznavne obraze: {count}.',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
+      'Slika, na kateri je nekdo prepoznaven, je osebni podatek, tudi brez imena.',
+  'herkenbaar gezicht op een afbeelding': 'prepoznaven obraz na sliki',
+  'Afbeeldingen nakijken op herkenbare gezichten':
+      'Preveri slike za prepoznavne obraze',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.':
+      'Slika, na kateri je nekdo prepoznaven, je osebni podatek, tudi brez imena. To je najtežje preverjanje: vsaka slika se obdela lokalno. Šteje se, ali je na njej obraz — nikoli čigav, in nič se ne shrani.',
   'Geen meldingen meer op deze slide.': 'Na tem diapozitivu ni več obvestil.',
   'Kwaliteitsproblemen geaccepteerd': 'Težave s kakovostjo sprejete',
   'Mogelijk persoonsgegevens': 'Morda osebni podatki',

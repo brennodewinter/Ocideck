@@ -1789,6 +1789,23 @@ const _dutchSourceAddCs = <String, String>{
       'Připojení git této prezentace už neexistuje.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Nejprve nastavte git repozitář v Nastavení → Úložiště.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Tento obrázek zobrazuje alespoň jednu rozpoznatelnou tvář.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Tento obrázek zobrazuje alespoň tolik rozpoznatelných tváří: {count}.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Tento obrázek nebylo možné zkontrolovat na tváře. Formát není podporován (například HEIC). Neznamená to, že na něm nikdo není — znamená to, že se nekontrolovalo.',
+  'Deze afbeelding toont een herkenbaar gezicht.':
+      'Tento obrázek zobrazuje rozpoznatelnou tvář.',
+  'Deze afbeelding toont {count} herkenbare gezichten.':
+      'Tento obrázek zobrazuje rozpoznatelné tváře: {count}.',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
+      'Obrázek, na kterém je někdo rozpoznatelný, je osobním údajem, i bez uvedení jména.',
+  'herkenbaar gezicht op een afbeelding': 'rozpoznatelná tvář na obrázku',
+  'Afbeeldingen nakijken op herkenbare gezichten':
+      'Kontrolovat obrázky na rozpoznatelné tváře',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.':
+      'Obrázek, na kterém je někdo rozpoznatelný, je osobním údajem, i bez jména. Toto je nejnáročnější kontrola: každý obrázek se zpracovává lokálně. Počítá se, zda je na něm tvář — nikdy čí, a nic se neukládá.',
   'Geen meldingen meer op deze slide.':
       'Na tomto snímku už nejsou žádná hlášení.',
   'Kwaliteitsproblemen geaccepteerd': 'Problémy s kvalitou přijaty',

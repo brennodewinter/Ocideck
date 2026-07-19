@@ -1804,6 +1804,23 @@ const _dutchSourceAddRo = <String, String>{
       'Conexiunea git a acestei prezentări nu mai există.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Configurează mai întâi un depozit git în Setări → Stocare.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Această imagine arată cel puțin un chip recognoscibil.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Această imagine arată cel puțin {count} chipuri recognoscibile.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Această imagine nu a putut fi verificată pentru chipuri. Formatul nu este acceptat (de exemplu HEIC). Asta nu înseamnă că nu este nimeni în ea — înseamnă că nu s-a verificat.',
+  'Deze afbeelding toont een herkenbaar gezicht.':
+      'Această imagine arată un chip recognoscibil.',
+  'Deze afbeelding toont {count} herkenbare gezichten.':
+      'Această imagine arată {count} chipuri recognoscibile.',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
+      'O imagine în care cineva este recognoscibil este o dată cu caracter personal, chiar și fără nume.',
+  'herkenbaar gezicht op een afbeelding': 'chip recognoscibil într-o imagine',
+  'Afbeeldingen nakijken op herkenbare gezichten':
+      'Verifică imaginile pentru chipuri recognoscibile',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.':
+      'O imagine în care cineva este recognoscibil este o dată cu caracter personal, chiar și fără nume. Aceasta este cea mai grea verificare: fiecare imagine este procesată local. Se numără dacă există un chip — niciodată al cui, și nu se stochează nimic.',
   'Geen meldingen meer op deze slide.':
       'Nu mai există notificări pe acest slide.',
   'Kwaliteitsproblemen geaccepteerd': 'Probleme de calitate acceptate',

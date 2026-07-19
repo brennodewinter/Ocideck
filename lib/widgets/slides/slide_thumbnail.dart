@@ -5,11 +5,13 @@ import '../../models/cvss_builder.dart';
 import '../../models/deck.dart';
 import '../../models/privacy_disposition.dart';
 import '../../models/quality_disposition.dart';
+import '../../models/slide_quality.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import '../../state/deck_provider.dart';
 import '../../state/deck_quality_provider.dart';
 import '../../state/editor_provider.dart';
+import '../../state/image_privacy_provider.dart';
 import '../../state/privacy_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../state/slide_clipboard_provider.dart';
@@ -202,11 +204,27 @@ class SlideThumbnail extends ConsumerWidget {
         ),
       ),
     );
-    final privacyTone = ref.watch(
+    final textPrivacyTone = ref.watch(
       privacyRawScanProvider.select(
         (scan) => privacyBadgeTone(scan.forSlide(index), accepted: privacyDone),
       ),
     );
+    // De beeldcontrole levert kwaliteitsmeldingen in plaats van
+    // PrivacyFindings, want ze draait asynchroon en buiten de tekstscanner om.
+    // Voor de badge maakt dat niet uit: een gezicht op een dia is net zo goed
+    // een persoonsgegeven als een BSN in de tekst, en de gebruiker hoort er één
+    // markering voor te zien.
+    final imagePrivacyTone = ref.watch(
+      imagePrivacyIssuesProvider.select(
+        (async) =>
+            (async.value ?? const <SlideQualityIssue>[]).any(
+              (i) => i.slideIndex == index,
+            )
+            ? (privacyDone ? SlideBadgeTone.accepted : SlideBadgeTone.warning)
+            : SlideBadgeTone.none,
+      ),
+    );
+    final privacyTone = worstBadgeTone(textPrivacyTone, imagePrivacyTone);
     final showWatermark = ref.watch(
       settingsProvider.select((s) => s.classificationWatermarkEnabled),
     );

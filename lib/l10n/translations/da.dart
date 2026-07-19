@@ -1785,6 +1785,23 @@ const _dutchSourceAddDa = <String, String>{
       'Git-forbindelsen til denne præsentation findes ikke længere.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
       'Opsæt først et git-arkiv under Indstillinger → Lagring.',
+  'Deze afbeelding toont minstens één herkenbaar gezicht.':
+      'Dette billede viser mindst ét genkendeligt ansigt.',
+  'Deze afbeelding toont minstens {count} herkenbare gezichten.':
+      'Dette billede viser mindst {count} genkendelige ansigter.',
+  'Deze afbeelding kon niet worden nagekeken op gezichten. Het formaat wordt niet ondersteund (HEIC bijvoorbeeld). Dat betekent niet dat er niemand op staat — er is niet gekeken.':
+      'Dette billede kunne ikke kontrolleres for ansigter. Formatet understøttes ikke (for eksempel HEIC). Det betyder ikke, at der ikke er nogen på det — det betyder, at der ikke er set efter.',
+  'Deze afbeelding toont een herkenbaar gezicht.':
+      'Dette billede viser et genkendeligt ansigt.',
+  'Deze afbeelding toont {count} herkenbare gezichten.':
+      'Dette billede viser {count} genkendelige ansigter.',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij.':
+      'Et billede, hvor nogen er genkendelig, er personoplysninger — også uden navn.',
+  'herkenbaar gezicht op een afbeelding': 'genkendeligt ansigt på et billede',
+  'Afbeeldingen nakijken op herkenbare gezichten':
+      'Kontrollér billeder for genkendelige ansigter',
+  'Een afbeelding waarop iemand herkenbaar staat is een persoonsgegeven, ook zonder naam erbij. Dit is de zwaarste controle: elke afbeelding wordt lokaal doorgerekend. Er wordt geteld of er een gezicht op staat — nooit wie het is, en er wordt niets opgeslagen.':
+      'Et billede, hvor nogen er genkendelig, er personoplysninger — også uden navn. Dette er den tungeste kontrol: hvert billede behandles lokalt. Der tælles, om der er et ansigt — aldrig hvem det er, og intet gemmes.',
   'Geen meldingen meer op deze slide.':
       'Ingen meddelelser tilbage på dette dias.',
   'Kwaliteitsproblemen geaccepteerd': 'Kvalitetsproblemer accepteret',
