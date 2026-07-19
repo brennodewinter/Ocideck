@@ -1756,6 +1756,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
+      'vam Hol rop pong tu\'lu\'be\'. lalDan, woQ qeS, ghom mu\' je luleghlu\', \'ej mI\' toblu\'ta\' (BSN, IBAN, nav) reH vumtaH — \'ach rop ngu\' tu\'lu\'meH Qob.',
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'mu\' tetlh chaw\': nuq ghItlhnISlu\'',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':

@@ -104,6 +104,9 @@ flutter:
     # Het gebundelde gezondheidslexicon (Orphanet, CC BY 4.0) — zie
     # tool/build_privacy_lexicon.dart en docs/LICENSE_COMPLIANCE.md.
     - assets/privacy/health_lexicon.json
+    # Overtuigingen (EuroVoc, EU-hergebruiksbeleid) — zie
+    # tool/build_eurovoc_lexicon.dart en docs/LICENSE_COMPLIANCE.md.
+    - assets/privacy/belief_lexicon.json
     - assets/web_export/
     # Full EUPL 1.2 licence text, shown verbatim in the consent screen.
     - LICENSE.md

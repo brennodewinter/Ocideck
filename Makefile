@@ -299,25 +299,36 @@ deps-check:
 # the catalogue's own const), update docs/LICENSE_COMPLIANCE.md, and re-run
 # `make deps-check` so the staleness gate agrees.
 refresh-lexicon:
-	@echo "== OciDeck: gezondheidslexicon opnieuw genereren (Orphanet) =="
-	@echo "Bron: https://www.orphadata.com/data/xml/ — CC BY 4.0."
-	@echo "Dit herschrijft assets/privacy/health_lexicon.json."
+	@echo "== OciDeck: gebundelde lexicons opnieuw genereren =="
+	@echo "Bronnen: Orphanet (CC BY 4.0) en EuroVoc (Besluit 2011/833/EU)."
+	@echo "Dit herschrijft assets/privacy/health_lexicon.json en belief_lexicon.json."
 	@echo ""
 	@echo "LEES DE TERMDIFF. Bij een lexicon vuurt elke term, dus een nieuwe"
 	@echo "        uitgave kan valse positieven binnenbrengen die een catalogus"
 	@echo "        nooit zou opleveren. Draai daarna 'make check' en let op"
-	@echo "        privacy_false_positive_corpus_test."
+	@echo "        privacy_false_positive_corpus_test — die laadt de bundels."
 	@set -e; \
 	tmp=$$(mktemp -d); \
+	echo "-- Orphanet"; \
 	for l in nl en de fr es it pl pt cs; do \
-	  echo "-- $$l"; \
 	  curl -sfL "https://www.orphadata.com/data/xml/$${l}_product1.xml" -o "$$tmp/$$l.xml"; \
 	done; \
 	dart run tool/build_privacy_lexicon.dart "$$tmp"; \
+	echo "-- EuroVoc"; \
+	curl -sfG "https://publications.europa.eu/webapi/rdf/sparql" \
+	  --data-urlencode "query=$$EUROVOC_QUERY" \
+	  --data-urlencode "format=application/sparql-results+json" \
+	  -o "$$tmp/eurovoc.json"; \
+	dart run tool/build_eurovoc_lexicon.dart "$$tmp/eurovoc.json"; \
 	rm -rf "$$tmp"
 	@echo ""
 	@echo "Werk orphanetBundledVersion bij in lib/services/reference_standards.dart"
 	@echo "als de datum is opgeschoven."
+
+# De subbomen onder godsdienst (3257), politieke ideologie (1282), vakbond
+# (3575) en etnische groep (1202). Zie tool/build_eurovoc_lexicon.dart voor
+# waarom het de hiërarchie is en geen trefwoordzoekopdracht.
+export EUROVOC_QUERY = PREFIX skos:<http://www.w3.org/2004/02/skos/core\#> SELECT ?anchor ?c ?lang ?label ?kind WHERE { VALUES ?anchor { <http://eurovoc.europa.eu/3257> <http://eurovoc.europa.eu/1282> <http://eurovoc.europa.eu/3575> <http://eurovoc.europa.eu/1202> } { ?c skos:broader+ ?anchor } UNION { BIND(?anchor AS ?c) } { ?c skos:prefLabel ?label BIND("pref" AS ?kind) } UNION { ?c skos:altLabel ?label BIND("alt" AS ?kind) } BIND(lang(?label) AS ?lang) }
 
 catalogs-outdated:
 	@echo "== OciDeck: is er upstream iets nieuws? (adviserend) =="

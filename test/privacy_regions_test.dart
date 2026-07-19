@@ -14,6 +14,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/privacy/privacy_bulk_lexicon.dart';
 import 'package:ocideck/services/privacy/privacy_lexicon_data.dart';
 import 'package:ocideck/services/privacy/privacy_regions.dart';
 import 'package:ocideck/services/privacy/privacy_scanner.dart';
@@ -91,7 +92,20 @@ void main() {
   });
 
   group('taaldekking', () {
-    test('een taal met genoeg termen heet gedekt', () {
+    test('zonder de gebundelde ziektenamen is geen taal volledig gedekt', () {
+      // `covered` betekent sinds fase 13b: er zijn gebundelde aandoeningsnamen
+      // voor deze taal. De handgeschreven vloer alleen is een handvol
+      // signaalwoorden, en die "gedekt" noemen was altijd al genereus.
+      expect(privacyLexiconCoverage('nl'), PrivacyLexiconCoverage.partial);
+      expect(privacyLexiconCoverage('en'), PrivacyLexiconCoverage.partial);
+    });
+
+    test('mét de gebundelde ziektenamen wél', () {
+      PrivacyBulkLexicon.instance.loadForTest({
+        'nl': ['taaislijmziekte'],
+        'en': ['cystic fibrosis'],
+      }, category: 'special.health');
+      addTearDown(PrivacyBulkLexicon.instance.resetForTest);
       expect(privacyLexiconCoverage('nl'), PrivacyLexiconCoverage.covered);
       expect(privacyLexiconCoverage('en'), PrivacyLexiconCoverage.covered);
     });
@@ -110,6 +124,10 @@ void main() {
 
     test('de regio in een taalcode telt niet mee', () {
       // `nl-BE` en `nl` delen hun lexicon.
+      PrivacyBulkLexicon.instance.loadForTest({
+        'nl': ['taaislijmziekte'],
+      }, category: 'special.health');
+      addTearDown(PrivacyBulkLexicon.instance.resetForTest);
       expect(privacyLexiconCoverage('nl-BE'), PrivacyLexiconCoverage.covered);
       expect(privacyLexiconCoverage('nl_NL'), PrivacyLexiconCoverage.covered);
     });

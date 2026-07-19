@@ -36,7 +36,7 @@ accepteren, waarschuwen met een shield-badge, of redigeren op scherm en in expor
 | §13.3 Taaldekking zichtbaar in het paneel | **geleverd** |
 | §5.7/§7 Regiopakketten werkend (instelling + poort) | **geleverd** |
 | §13.3 Gebundeld gezondheidslexicon (Orphanet, 62.490 namen, 9 talen) | **geleverd** |
-| §13.3 EuroVoc voor religie/politiek/vakbond | **vervallen** — gemeten en ongeschikt, zie §13.3 |
+| §13.3 EuroVoc voor religie/politiek/vakbond/etniciteit (27 talen) | **geleverd** |
 | §14 Onderzoeksdossier DLP-technieken (annex, geen ontwerp) | naslag |
 
 De genomen beslissingen staan in §11; die zijn niet meer open.
@@ -1273,20 +1273,40 @@ Maltees ontbreekt in XLM-R; Fries heeft 0,2 GiB tegenover Bulgaars 57,5 GiB.
 > artefact. **Dát is nu gebundeld**, gefilterd tot 62.490 namen in de band 10-45
 > tekens; zie `tool/build_privacy_lexicon.dart` voor waarom die band.
 >
-> **EuroVoc is afgevallen, en niet om licentieredenen.** Het is een thesaurus om
-> EU-*documenten* te indexeren, geen lexicon van persoonsgegeven-indicatoren. Wat
-> de Nederlandse concepten voor onze categorieën opleveren, letterlijk
-> opgevraagd: "Europees Vakbondsinstituut", "Politieke Commissie (73)", "Antwoord
-> op een advies van een nationaal parlement in het kader van de politieke
-> dialoog", "discriminatie op grond van godsdienst". Instellingsnamen en
-> beleidsbegrippen dus. Die zeggen niets over de vraag of er op een slide iemands
-> religie of vakbondslidmaatschap staat — en erger: "discriminatie op grond van
-> politieke opvatting" is precies de beleidsslide-formulering waar §3-G voor
-> waarschuwt. Bundelen zou de vals-positievenlast verhogen bij vrijwel geen
-> recallwinst, en dat is de verkeerde kant op voor uitgangspunt 3.
+> **EuroVoc: eerst afgewezen, daarna alsnog gebundeld — en de eerste afwijzing
+> was fout.** De afwijzing berustte op een *trefwoordzoekopdracht*: zoek
+> concepten met "vakbond" of "godsdienst" in het label. Dat leverde "Europees
+> Vakbondsinstituut", "Politieke Commissie (73)" en "discriminatie op grond van
+> godsdienst" op — instellingsnamen en beleidsbegrippen, waardeloos als
+> indicator. Conclusie: ongeschikt.
 >
-> Voor religie, politiek en vakbond blijft het dus bij de handgeschreven termen,
-> plus wat er uit de drie navraagbronnen komt (`LEXICON_LICENTIENAVRAAG.md`).
+> Die conclusie lag aan de vraag en niet aan de bron. Loop je de **hiërarchie**
+> af in plaats van de labels te doorzoeken — alles ónder *godsdienst*, *politieke
+> ideologie*, *vakbond* en *etnische groep* — dan komt er iets heel anders boven:
+> `islam`, `jodendom`, `katholicisme`, `protestantisme`, `boeddhisme`,
+> `atheïsme`, `communisme`, `fascisme`, `liberalisme`, `sociaal-democratie`. Dat
+> zijn wél kenmerken van een persoon, en het zijn *waarden* en geen aanwijzingen.
+>
+> En dan doet EuroVoc waar het goed in is: **27 talen**, waarvan 24 EU-officieel.
+> Religie en politiek hadden in de handgeschreven vloer termen in vijf talen.
+> Geen andere bron in dit project dicht dat gat in één keer.
+>
+> Ongeveer een derde van de subboom gaat wél *over* het onderwerp in plaats van
+> iemand te beschrijven — `kerk`, `theologie`, `heilige boeken`, `concilie`,
+> `Internationale`. Die vijftien concepten zijn uitgesloten op hun **concept-URI**
+> en niet op hun Nederlandse naam, zodat één uitsluiting meteen in alle 27 talen
+> geldt. Ook eruit: `anglicisme`, want dat betekent in het Nederlands een Engels
+> leenwoord en niet het anglicanisme.
+>
+> **Wat het niet vindt.** EuroVoc levert zelfstandignaamwoorden. "Betrokkene is
+> katholiek opgevoed" wordt gemist, want `katholiek` is geen woordvorm van
+> `katholicisme` en de bulk matcht op hele woorden. Dat is een eigenschap van een
+> thesaurus — die indexeert begrippen, geen woordvormen. Wie die vormen wil, zet
+> ze per taal in de vloer.
+>
+> De drie navraagbronnen (`LEXICON_LICENTIENAVRAAG.md`) blijven daarnaast open;
+> Homosaurus zou `special.sexlife` dekken, dat als enige categorie nog uitsluitend
+> op de vloer draait.
 
 **De fallback is de kern.** `Deck.language` bestaat al en stuurt de
 bevindingssjablonen — maar daar valt een ontbrekende taal terug op Engels. Voor een
@@ -1316,6 +1336,35 @@ zichtbaarheid kwijt die de poort moest opleveren. Ze horen in
 `make catalogs-outdated`: adviserend, en het draait vanzelf vóór een
 release-build. Dan weet je wat je inpakt zonder dat "er is iets nieuws" als
 defect wordt behandeld. Zie `docs/CHECKS.md`.
+
+**De Latijnse aanname klopt niet, en dat is gemeten.** De intuïtie is
+verleidelijk: ziektenamen zijn Grieks-Latijns, dus één lijst zou voor alle talen
+werken. Op de gebundelde 59.564 termen gemeten:
+
+| | |
+| --- | --- |
+| in precies één taal | 57.704 (97%) |
+| in twee of meer talen | 1.860 (3%) |
+| in alle negen | 8 (0%) — en dat zijn gensymbolen als `ccdc115-cdg`, geen ziektenamen |
+
+De wortel is gedeeld, de spelling niet: `sclerodermie` · `esclerodermia` ·
+`sclerodermia` · `sklerodermie`. Daar komt woordvolgorde bovenop ("Cystinose
+néphropathique infantile" tegen "Infantiele nefropathische cystinose"). Een ruwe
+normalisatie — accenten weg, klinkerstaarten weg — tilt het van 3% naar 6%, en
+dat is de moeite en het vals-positievenrisico niet waard op 60.000 medische
+termen.
+
+**Gevolg voor de dekkingsmeter.** Een taal die niet in de bundel zit, krijgt van
+die bundel vrijwel niets. `covered` betekent daarom sinds fase 13b: er zijn
+gebundelde *ziektenamen* voor deze taal, en niet "deze taal komt ergens in een
+asset voor". Zonder dat onderscheid zouden vijftien app-talen — Zweeds, Deens,
+Fins, Grieks, Hongaars en meer — gedekt heten op grond van uitsluitend
+EuroVoc-termen, terwijl er voor gezondheid geen enkele naam is. Dat is precies de
+leugen waartegen deze meter bestaat.
+
+Stand voor de 31 app-talen: **9 volledig** (nl/en/de/fr/es/it/pl/pt/cs), **15
+gedeeltelijk** (wel overtuigingen, geen ziektenamen), **7 zonder lexicon** (fy,
+gsw, id, la, pap, tlh, uk).
 
 ### 13.4 Pijplijnvolgorde: goedkoop eerst, duur laatst
 

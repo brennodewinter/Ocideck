@@ -22,7 +22,7 @@
 // SNOMED CT NL op afknapt.
 
 import '../../models/privacy_lexicon.dart';
-import 'privacy_health_lexicon.dart';
+import 'privacy_bulk_lexicon.dart';
 
 /// Korter schrijven wat anders zes regels per term kost.
 PrivacyLexiconEntry _e(
@@ -648,19 +648,28 @@ enum PrivacyLexiconCoverage {
 /// Neemt alleen de taalcode, niet de regio: `nl-BE` en `nl` delen hun lexicon.
 PrivacyLexiconCoverage privacyLexiconCoverage(String languageCode) {
   final base = languageCode.split(RegExp(r'[-_]')).first.toLowerCase();
-  // De gebundelde aandoeningsnamen tellen mee zodra ze geladen zijn. Ze dekken
-  // negen talen met duizenden termen per stuk, en dat is voor die talen het
-  // verschil tussen "een handvol signaalwoorden" en een bruikbaar lexicon.
+  final bulk = PrivacyBulkLexicon.instance;
+
+  // Gezondheid is de maatstaf, en dat is een keuze met een reden. Het is
+  // veruit de grootste categorie (62.490 termen tegen 1.536), het is de
+  // categorie waarin een dossierslide het vaakst iets te verbergen heeft, en
+  // het is de enige waarvan de dekking per taal echt verschilt.
   //
-  // Alleen als ze er werkelijk zijn: is het asset niet geladen, dan meldt de
-  // meter wat de vloer dekt. Anders zou hij dekking beloven die er op dat moment
-  // niet is — precies de leugen waartegen hij bestaat.
-  if (PrivacyHealthLexicon.instance.languages.contains(base)) {
+  // Zonder dat onderscheid zou vijftien talen "gedekt" heten op grond van
+  // uitsluitend EuroVoc-termen — Zweeds, Deens, Fins, Grieks, Hongaars en meer
+  // krijgen daar wel religies en ideologieën uit, maar geen enkele ziektenaam.
+  // "Gedekt" zeggen tegen een Zweeds dossier met een diagnose erin is precies
+  // de leugen waartegen deze meter bestaat.
+  if (bulk.languagesFor('special.health').contains(base)) {
     return PrivacyLexiconCoverage.covered;
   }
-  final count = privacyLexiconTermCounts[base] ?? 0;
-  if (count == 0) return PrivacyLexiconCoverage.none;
-  return count >= kMinLexiconTermsForCoverage
-      ? PrivacyLexiconCoverage.covered
-      : PrivacyLexiconCoverage.partial;
+
+  // Geen ziektenamen, maar wel iets: de handgeschreven vloer, of religies en
+  // ideologieën uit EuroVoc. Dat is gedeeltelijk — genoeg om niet te zwijgen,
+  // te weinig om op te vertrouwen.
+  final floor = privacyLexiconTermCounts[base] ?? 0;
+  if (floor > 0 || bulk.languages.contains(base)) {
+    return PrivacyLexiconCoverage.partial;
+  }
+  return PrivacyLexiconCoverage.none;
 }

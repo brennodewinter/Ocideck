@@ -1785,6 +1785,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
+      'Ennek a bemutatónak a nyelvéhez hiányoznak a betegségnevek. A vallás, a politikai vélemény és a szakszervezeti kifejezések felismerhetők, és az ellenőrző számjegyes minták (adóazonosító, IBAN, útlevél) mindig működnek — de ne számítson arra, hogy egy diagnózist megtalál.',
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Lexikonlicencek: mit kell még megkérdezni',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':

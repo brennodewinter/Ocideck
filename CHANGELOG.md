@@ -10,6 +10,34 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Added
+- **De taalmelding in het kwaliteitspaneel is preciezer geworden.** Hij keek per
+  taal, en zei "gedekt" zodra er íéts voor die taal was. Daardoor kregen vijftien
+  talen — Zweeds, Deens, Fins, Grieks, Hongaars en meer — een groene melding op
+  grond van alleen religie- en ideologietermen, terwijl er voor die talen geen
+  enkele ziektenaam is. Een Zweeds dossier met een diagnose erin zag er dus
+  gecontroleerd uit zonder dat te zijn.
+
+  De melding zegt nu wat er precies ontbreekt, en gaat uit van de ziektenamen —
+  veruit de grootste categorie.
+
+- **Religies, ideologieën en vakbondstermen worden nu in 27 talen herkend.** Voor
+  bijzondere persoonsgegevens over geloof, politieke overtuiging,
+  vakbondslidmaatschap en etnische afkomst kende OciDeck een handvol
+  Nederlandse, Engelse, Duitse, Franse en Spaanse woorden. Daar komen nu de
+  begrippen zelf bij, uit de meertalige EU-thesaurus EuroVoc: `katholicisme`,
+  `islam`, `jodendom`, `communisme`, `fascisme`, `sociaal-democratie` — in alle
+  EU-talen plus een paar daarbuiten.
+
+  Net als bij de aandoeningsnamen onderbreekt zo'n woord op zichzelf niets. "Onze
+  cursus behandelt islam en jodendom" is lesmateriaal; "Dhr. Bakker:
+  protestantisme" is een persoonsgegeven, en alleen het tweede geeft een
+  waarschuwing.
+
+  Vijftien begrippen die *over* het onderwerp gaan in plaats van over iemand —
+  kerk, theologie, heilige boeken, concilie — zijn er bewust uit gelaten. Die
+  uitsluiting werkt op het begrip en niet op het Nederlandse woord, dus ze geldt
+  meteen in alle 27 talen.
+
 - **De privacycontrole kent nu 62.490 aandoeningsnamen, in negen talen.** Tot nu
   toe herkende OciDeck gezondheidsgegevens aan een handvol signaalwoorden —
   "diagnose", "medicatie", "ziekteverzuim". Die wijzen ergens naar; ze zíjn het
