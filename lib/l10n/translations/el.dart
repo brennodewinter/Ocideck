@@ -1815,6 +1815,8 @@ const _dutchSourceAddEl = <String, String>{
   'Branch (optioneel)': 'Κλάδος (προαιρετικό)',
   'let op: de standaardbranch is': 'προσοχή: ο προεπιλεγμένος κλάδος είναι',
   'jij werkt op': 'εσύ εργάζεσαι στον',
+  'werkgeversnummer (EIN)': 'αριθμός εργοδότη (EIN)',
+  'laatste vier cijfers van een SSN': 'τα τέσσερα τελευταία ψηφία ενός SSN',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'ημερομηνία γέννησης, ταχυδρομικός κώδικας και φύλο μαζί — αυτά τα τρία συνήθως προσδιορίζουν ένα άτομο, ακόμη και χωρίς όνομα',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

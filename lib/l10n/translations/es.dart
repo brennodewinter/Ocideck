@@ -741,6 +741,8 @@ const _dutchSourceAddEs = {
   'Branch (optioneel)': 'Rama (opcional)',
   'let op: de standaardbranch is': 'atención: la rama predeterminada es',
   'jij werkt op': 'tú trabajas en',
+  'werkgeversnummer (EIN)': 'número de empleador (EIN)',
+  'laatste vier cijfers van een SSN': 'últimos cuatro dígitos de un SSN',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'fecha de nacimiento, código postal y sexo juntos: esos tres suelen señalar a una sola persona, incluso sin nombre',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

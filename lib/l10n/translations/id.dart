@@ -1787,6 +1787,8 @@ const _dutchSourceAddId = <String, String>{
   'Branch (optioneel)': 'Cabang (opsional)',
   'let op: de standaardbranch is': 'perhatian: cabang bawaan adalah',
   'jij werkt op': 'Anda bekerja di',
+  'werkgeversnummer (EIN)': 'nomor pemberi kerja (EIN)',
+  'laatste vier cijfers van een SSN': 'empat digit terakhir SSN',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'tanggal lahir, kode pos, dan jenis kelamin bersama-sama — ketiganya biasanya menunjuk satu orang, bahkan tanpa nama',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

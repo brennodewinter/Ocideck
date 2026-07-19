@@ -1791,6 +1791,8 @@ const _dutchSourceAddHu = <String, String>{
   'Branch (optioneel)': 'Ág (nem kötelező)',
   'let op: de standaardbranch is': 'figyelem: az alapértelmezett ág',
   'jij werkt op': 'te ezen dolgozol:',
+  'werkgeversnummer (EIN)': 'munkáltatói szám (EIN)',
+  'laatste vier cijfers van een SSN': 'egy SSN utolsó négy számjegye',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'születési dátum, irányítószám és nem együtt — ez a három rendszerint egyetlen személyre mutat, név nélkül is',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

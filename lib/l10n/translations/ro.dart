@@ -1805,6 +1805,8 @@ const _dutchSourceAddRo = <String, String>{
   'Branch (optioneel)': 'Ramură (opțional)',
   'let op: de standaardbranch is': 'atenție: ramura implicită este',
   'jij werkt op': 'tu lucrezi pe',
+  'werkgeversnummer (EIN)': 'număr de angajator (EIN)',
+  'laatste vier cijfers van een SSN': 'ultimele patru cifre ale unui SSN',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'data nașterii, codul poștal și sexul împreună — aceste trei indică de obicei o singură persoană, chiar și fără nume',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

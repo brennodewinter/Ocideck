@@ -433,6 +433,10 @@ String privacyRuleLabel(AppLocalizations l10n, String ruleId) {
   return switch (ruleId) {
     'nl.bsn' => l10n.d('burgerservicenummer (BSN)'),
     'fin.iban' => l10n.d('bankrekeningnummer (IBAN)'),
+    // Zelfde begrip voor de gebruiker als een IBAN: er staat een
+    // bankrekening op de slide. Het onderscheid tussen de twee notaties is
+    // een detail van de regel, niet van de melding.
+    'fin.us_routing' => l10n.d('bankrekeningnummer (IBAN)'),
     'fin.pan' => l10n.d('creditcardnummer'),
     'fin.cvv' => l10n.d('beveiligingscode van een creditcard'),
     'contact.email' => l10n.d('e-mailadres'),
@@ -496,8 +500,10 @@ String privacyRuleLabel(AppLocalizations l10n, String ruleId) {
     'struct.data_uri' => l10n.d(
       'ingesloten afbeelding — wij kunnen er niet in kijken',
     ),
-    _ when _euNumberNames.containsKey(ruleId) =>
-      '${l10n.d('nationaal identificatienummer')} (${_euNumberNames[ruleId]})',
+    'us.ein' => l10n.d('werkgeversnummer (EIN)'),
+    'us.ssn_last4' => l10n.d('laatste vier cijfers van een SSN'),
+    _ when _nationalNumberNames.containsKey(ruleId) =>
+      '${l10n.d('nationaal identificatienummer')} (${_nationalNumberNames[ruleId]})',
     'secret.private_key' => l10n.d('private sleutel'),
     'secret.jwt' => l10n.d('toegangstoken (JWT)'),
     'secret.connection_string' => l10n.d('databaseverbinding met wachtwoord'),
@@ -510,7 +516,9 @@ String privacyRuleLabel(AppLocalizations l10n, String ruleId) {
 
 /// De naam van een nationaal nummer. Eigennamen — die vertalen we niet: een
 /// PESEL heet in elke taal een PESEL.
-const Map<String, String> _euNumberNames = {
+const Map<String, String> _nationalNumberNames = {
+  'us.ssn': 'Social Security Number',
+  'us.itin': 'ITIN',
   'be.rijksregister': 'rijksregisternummer',
   'at.svnr': 'Sozialversicherungsnummer',
   'ch.ahv': 'AHV-Nummer',

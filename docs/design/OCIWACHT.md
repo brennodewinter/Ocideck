@@ -42,6 +42,9 @@ accepteren, waarschuwen met een shield-badge, of redigeren op scherm en in expor
 | §13.3 Gebundeld gezondheidslexicon (Orphanet, 62.490 namen, 9 talen) | **geleverd** |
 | §13.3 EuroVoc voor religie/politiek/vakbond/etniciteit (27 talen) | **geleverd** |
 | §14 Onderzoeksdossier DLP-technieken (annex, geen ontwerp) | naslag |
+| §15 Fase 8 wereldpakketten (VS, Canada, art. 9) | **ontworpen**; 8a geleverd |
+| §15.7 fase 8a `us.ssn`, `us.ssn_last4`, `us.itin`, `us.ein`, `fin.us_routing` | **geleverd** |
+| §15.8 Labeldekkingstest over de regeltabellen | **geleverd** |
 
 De genomen beslissingen staan in §11; die zijn niet meer open.
 
@@ -227,12 +230,12 @@ nul. Waar géén checksum bestaat (US SSN, V-nummer), is een contextwoord verpli
 | `uk.nhs` | NHS-nummer | mod-11 (gewichten 10…2), rest 10 = ongeldig | zeker | ◐ |
 | `us.ssn` | Social Security Number | géén checksum. Area ≠ 000/666/900-999, groep ≠ 00, serie ≠ 0000. **Contextwoord verplicht** (`ssn`, `social security`), anders veel te veel FP's op datums en ordernummers | waarschijnlijk | ◐ |
 | `us.ein` | Employer ID Number | formaat + geldige prefixen | mogelijk | ◐ |
-| `ca.sin` | Social Insurance Number | Luhn | zeker | ◐ |
+| `ca.sin` | Social Insurance Number | Luhn, niet beginnend met 0 of 8, **plus contextpoort** — Luhn over 9 cijfers laat 1 op 10 door en is dus nooit alleen genoeg (§15.4) | waarschijnlijk | ◐ |
 | `in.aadhaar` | Aadhaar | **Verhoeff**-checksum (niet Luhn!), begint niet met 0 of 1 | zeker | ◐ |
 | `in.pan` | PAN | formaat `AAAAA9999A` met geldige vierde letter | waarschijnlijk | ◐ |
 | `br.cpf` | CPF | twee mod-11-controles | zeker | ◐ |
 | `za.id` | ID Number | Luhn + geldige geboortedatum | zeker | ◐ |
-| `au.tfn` | Tax File Number | gewogen mod 11 | zeker | ◐ |
+| `au.tfn` | Tax File Number | gewogen mod 11 over 9 cijfers → contextpoort verplicht, zelfde reden als `ca.sin` (§15.4) | waarschijnlijk | ◐ |
 | `au.medicare` | Medicare-nummer | gewogen checksum | zeker | ◐ |
 | `cw.sedula` / `aw.persoonsnummer` | Curaçao / Aruba | formaat + contextwoord; geen gedocumenteerde checksum, dus bewust nooit `zeker` | mogelijk | ◐ |
 
@@ -2032,3 +2035,138 @@ Juridisch: HvJ C-184/20 (*OT*), C-252/21 (*Meta*), C-21/23 (*Lindenapotheke*),
 C-446/21 (*Schrems*); WP29 WP136 (het inhoud/doel/resultaat-criterium); EDPB
 Richtsnoeren 8/2020 §8.1.2 en 3/2019 §62-76; AP-onderzoeken kinderopvangtoeslag
 (z2018-22445) en FSV (z2020-04615).
+
+---
+
+## 15. Fase 8: de wereldpakketten, met de AVG als maatstaf
+
+### 15.1 Wat er nu werkelijk staat
+
+`worldPrivacyRegions` (`privacy_regions.dart`) bevat `us, ca, au, in, br, za, cw,
+aw`, en die chips zijn aan te vinken in de instellingen. Daarachter hangt vrijwel
+niets: de enige regels met zo'n prefix zijn `us.postcode` en `ca.postcode`, en die
+worden niet eens als literal gedeclareerd — ze rollen uit `IntlPostcodeRule.ruleId`.
+Er is geen `us.ssn`, geen `ca.sin`, geen `fin.us_routing`.
+
+Dat is het echte probleem, en het is erger dan een gat in de dekking. Wie vandaag
+het US-pakket aanvinkt krijgt een postcoderegel en **denkt** dat zijn deck
+gecontroleerd is. Een lege huls die belooft te beschermen is slechter dan een
+afwezige knop, want de afwezige knop liegt niet.
+
+### 15.2 De maatstaf: waarom dit geen vertaalde Amerikaanse PII-lijst wordt
+
+Het Amerikaanse recht is sectoraal — HIPAA voor zorg, GLBA voor financiën, FERPA
+voor onderwijs, CCPA/CPRA voor Californië — en werkt met een *opgesomde* lijst
+PII: SSN, rijbewijsnummer, rekeningnummer. De AVG werkt met een open norm: alle
+informatie over een geïdentificeerde of identificeerbare natuurlijke persoon
+(art. 4 lid 1). Wie de Amerikaanse opsomming overneemt, bouwt de verkeerde tool.
+
+Een regel komt er dus omdat hij onder de AVG een persoon aanwijst, niet omdat een
+Amerikaanse wet hem noemt. Dat levert drie verschillen op die een US-centrische
+lijst structureel mist:
+
+1. **Zorgidentificatoren horen bij art. 9, niet bij de administratie.** Een
+   Medicare Beneficiary Identifier of een NPI is in de VS een routineus
+   claimnummer dat vrolijk in spreadsheets rondgaat. Bij ons is het een gegeven
+   over gezondheid, met de ernst die daarbij hoort.
+2. **Amerikaanse HR-data is standaard art. 9-data.** Dit is de grootste blinde
+   vlek. EEO-1-rapportages, de OMB-rascategorieën ("African American", "Hispanic
+   or Latino", "Two or more races"), veteranenstatus — volstrekt normaal in
+   Amerikaanse decks, en onder de AVG rasgegevens. De bestaande
+   `special.ethnicity`-lexicons zijn Europees en vangen dit niet. Een
+   US-pakket zónder deze termen laat juist het ernstigste geval lopen.
+3. **Het rijbewijs is in de VS het de-facto identiteitsbewijs.** Het duikt op
+   waar in Europa niets zou staan.
+
+### 15.3 De regels
+
+| Regel-id | Wat | Validatie / FP-guard | Zekerheid |
+| --- | --- | --- | --- |
+| `us.ssn` | Social Security Number | Géén checksum. Area ≠ 000/666/900-999, groep ≠ 00, serie ≠ 0000. **Contextwoord verplicht** (`ssn`, `social security`). Nepwaarden uit: `078-05-1120` (de Woolworth-portefeuillekaart), `123-45-6789`, `219-09-9999` | waarschijnlijk |
+| `us.ssn_last4` | "Last 4 of SSN" | `XXX-XX-1234` of contextwoord `last four`/`last 4`. Puur Amerikaans idioom; onder de AVG nog steeds een pseudonieme identificator die met één ander gegeven de persoon aanwijst | mogelijk |
+| `us.itin` | Individual Taxpayer ID | `9xx-7x/8x-xxxx` + context. Identificeert niet-ingezetenen, en grenst daarmee aan verblijfsstatus | waarschijnlijk |
+| `us.npi` | National Provider Identifier | Luhn over het nummer met prefix `80840`. Wijst een zorgverlener aan | zeker |
+| `us.medicare_mbi` | Medicare Beneficiary Identifier | 11 posities met een vaste tekenklasse per positie, zonder S/L/O/I/B/Z. Art. 9-gebied | zeker |
+| `us.dea` | DEA-registratienummer | 2 letters + 7 cijfers met eigen checksum. Voorschrijver | zeker |
+| `us.ein` | Employer Identification Number | Formaat + geldige prefixen. Bedrijfsdata → `info`; bij een eenmanszaak hangt hij aan een persoon — precies de constructie die `nl.btw_id_legacy` al beschrijft | mogelijk |
+| `fin.us_routing` | ABA routing number | mod-10. Universele financiële familie, dus géén regiopoort | zeker |
+| `ca.sin` | Social Insurance Number | Luhn, niet beginnend met 0 of 8, **plus contextpoort** (zie §15.4). Testwaarde `046454286` uit | waarschijnlijk |
+| `ca.ramq` | RAMQ (Québec) | 4 letters + 8 cijfers, codeert geboortedatum en geslacht. Net als de Franse NIR daarmee bijna zelf al een bijzonder gegeven | zeker |
+| `ca.ohip` | OHIP (Ontario) | 10 cijfers + versieletters, mod-10. Art. 9-gebied | zeker |
+| `ca.bn` | Business Number | 9 cijfers + programmacode, Luhn. Zelfde eenmanszaak-redenering als `us.ein` | mogelijk |
+
+Plus één uitbreiding die géén regel is maar lexicondata: de OMB- en
+EEO-1-terminologie in `special.ethnicity`. Per bestede uur is dat waarschijnlijk
+de hoogste opbrengst van de hele fase.
+
+### 15.4 Correctie op §3-A: Luhn over negen cijfers is geen `zeker`
+
+§3-A geeft `ca.sin` als **zeker** op grond van Luhn alleen. Dat klopt niet, en de
+code weet het al beter: `privacy_checksums.dart` documenteert expliciet dat de
+11-proef bij `nl.bsn` ongeveer één op de elf willekeurige negencijferige getallen
+doorlaat, en daarom nooit in zijn eentje tot `zeker` mag leiden. Luhn over negen
+cijfers is één op de tien — hetzelfde probleem, andere naam.
+
+Wat een checksum sterk maakt is niet de checksum maar de **lengte**. Een codice
+fiscale van zestien tekens is praktisch onvervalsbaar; negen cijfers met een
+mod-10 zijn dat niet. Dezelfde correctie geldt voor `au.tfn` (9 cijfers, mod 11).
+`za.id` blijft wél `zeker`, want naast Luhn zit er een valide geboortedatum in;
+`in.aadhaar` (12 cijfers, Verhoeff) en `br.cpf` (dubbele mod-11) ook.
+
+Gevolg: `us.ssn`, `ca.sin` en `au.tfn` krijgen alle drie een contextpoort en komen
+niet boven `waarschijnlijk` uit.
+
+### 15.5 Wat we bewust niet bouwen
+
+`us.driver_licence` en `ca.driver_licence`. Vijftig respectievelijk dertien
+formaten, de meeste zonder checksum, een flink deel ervan simpelweg "acht
+cijfers". Dat is een vals-positieven-machine, en `privacy_allowlist.dart`
+waarschuwt in zijn eigen header waar dat op uitloopt: de gebruiker zet de hele
+functie uit. Hooguit later, met verplichte context en `mogelijk`.
+
+### 15.6 Standaard aan (besluit)
+
+De wereldpakketten met een checksum óf een contextpoort staan **standaard aan**,
+net als heel Europa. Dat is dezelfde redenering als in `privacy_regions.dart`: een
+checksum kóst geen precisie, hij wínt precisie, en een contextpoort ook. Het
+doorslaggevende argument is echter niet technisch maar juridisch — bescherming
+mag niet afhangen van de vraag of de auteur wist dat hij een vinkje moest
+aanzetten. Een deck met Amerikaanse persoonsgegevens hoort bij een standaard­
+installatie gecontroleerd te worden.
+
+Praktisch: `us` en `ca` verhuizen naar `defaultPrivacyRegions` zodra hun regels er
+zijn (fase 8c), niet eerder. Daarmee gaan `us.postcode` en `ca.postcode` mee aan;
+dat is akkoord, want `us` staat al in `postcodeNeedsContext` en de Canadese
+`A1A 1A1` is structureel onderscheidend genoeg.
+
+### 15.7 Fasering
+
+| Fase | Inhoud |
+| --- | --- |
+| **8a** | `privacy_checksums_world.dart` naast de bestaande `_eu`-variant (zelfde splitsing: gedeelde primitieven blijven in de basis), plus `us.ssn`, `us.ssn_last4`, `us.itin`, `us.ein`, `fin.us_routing`. Plus de labeldekkingstest uit §15.8 |
+| **8b** | Canada: `ca.sin`, `ca.ramq`, `ca.ohip`, `ca.bn` |
+| **8c** | Zorg en art. 9: `us.npi`, `us.medicare_mbi`, `us.dea`, de OMB/EEO-1-uitbreiding van het etniciteitslexicon, en het verplaatsen van `us`/`ca` naar `defaultPrivacyRegions` |
+| **8d** | Later: AU/IN/BR/ZA en de Cariben. Voor een Nederlandse organisatie horen `cw.sedula` en `aw.persoonsnummer` daarbij vóór Brazilië |
+
+### 15.8 De labeldekkingstest
+
+Er is geen centraal regelregister — dat is een bewuste keuze (§15.9) — en dus is
+er ook geen test die afdwingt dat elke geïmplementeerde regel-id een label heeft.
+`privacyRuleLabel` valt terug op `_ => ruleId`, waardoor een vergeten label
+stilzwijgend de rauwe id aan de gebruiker toont in plaats van een test rood te
+maken. Bij dertien nieuwe regels wordt dat gat pijnlijk.
+
+Fase 8a voegt daarom een test toe die over de bestaande regeltabellen loopt
+(`euIdentifierRules`, `secretRules`, `structuralRules`, `digitalRules`,
+`intlPostcodeRules`) en faalt zodra `privacyRuleLabel` voor een id op de fallback
+uitkomt. Dat dekt niet elke regel — de hardgecodeerde detectoren staan in geen
+tabel — maar het dekt precies de families waar deze fase in bijbouwt.
+
+### 15.9 Sequencing: dit raakt in-flight werk
+
+De EU-nummers­uitbreiding (`at.svnr`, `ch.ahv`, `cz.rodne_cislo`, `dk.cpr`,
+`gr.amka`, `hu.taj`, `ie.pps`, `no.fodselsnummer`, `si.emso`) zit in dezelfde drie
+bestanden als fase 8a: `privacy_eu_rules.dart`, `privacy_checksums_eu.dart` en
+`slide_quality_localization.dart`. Fase 8a begint pas nadat dat werk gemerged is.
+Anders botsen twee branches op dezelfde tabelankers, en dat is exact het
+l10n-conflictpatroon dat we al eerder hebben opgelost.

@@ -926,6 +926,8 @@ const _dutchSourceAddEn = {
   'Branch (optioneel)': 'Branch (optional)',
   'let op: de standaardbranch is': 'note: the default branch is',
   'jij werkt op': 'you are working on',
+  'werkgeversnummer (EIN)': 'employer number (EIN)',
+  'laatste vier cijfers van een SSN': 'last four digits of an SSN',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'date of birth, postcode and gender together — those three usually pinpoint one person, even without a name',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
