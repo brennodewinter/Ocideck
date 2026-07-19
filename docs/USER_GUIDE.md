@@ -132,6 +132,16 @@ saved version stays retrievable, which a plain folder cannot give you.
   no token at all.
 - **Self-hosted on a private address**: tick **Trusted internal server**, the
   same safeguard as for Nextcloud.
+- **Test the connection** before saving. One call answers four questions at
+  once, and each answer heads off a failure you would otherwise only meet at
+  your first save:
+  - whether the repository is reachable at all with this token;
+  - **what its default branch is called**. There is no field for this, so it
+    would otherwise stay `main` — a repository on `master` simply would not
+    work. The test adopts whatever the forge reports and says so.
+  - whether the repository is still empty (fine — your first save fills it);
+  - whether the token may write. A read-only token shows as a warning rather
+    than an error: the connection works, but saving would fail later.
 - The git entries below only appear in the `…` menu **once a repository is
   configured**. Until then they are hidden rather than shown-but-failing, so the
   menu never offers an action that cannot succeed.

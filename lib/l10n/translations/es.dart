@@ -735,6 +735,22 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Necesario cuando la forja está en una red privada o doméstica. Sin esta opción, la comprobación de seguridad rechaza una dirección privada.',
+  'Vul server-URL, eigenaar en repository in':
+      'Rellena la URL del servidor, el propietario y el repositorio',
+  'de standaardbranch heet': 'la rama predeterminada se llama',
+  'die wordt voortaan gebruikt': 'se usará a partir de ahora',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      'el repositorio aún está vacío; el primer guardado lo llenará',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'atención: este token solo puede leer, así que guardar fallará',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      'Error de inicio de sesión — comprueba el token. Necesita acceso de lectura al repositorio y de escritura para poder guardar.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'Repositorio no encontrado — o tu token no puede verlo. Comprueba el propietario y el nombre del repositorio.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'Esta dirección no responde como una forja. ¿Es correcto el tipo de forja elegido?',
   'kenteken': 'matrícula del vehículo',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'No hay una lista de palabras clave para categorías especiales de datos personales en el idioma de esta presentación. Los patrones con dígito de control (DNI, IBAN, pasaporte) sí funcionan; palabras como «diagnóstico» o «sospechoso» no se reconocen.',

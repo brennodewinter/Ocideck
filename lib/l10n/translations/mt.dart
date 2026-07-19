@@ -1803,6 +1803,22 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Meħtieġ meta l-forge taħdem fuq netwerk privat jew tad-dar. Mingħajr din il-bandiera l-kontroll tas-sigurtà jirrifjuta indirizz privat.',
+  'Vul server-URL, eigenaar en repository in':
+      'Imla l-URL tas-server, is-sid u r-repożitorju',
+  'de standaardbranch heet': 'il-fergħa awtomatika jisimha',
+  'die wordt voortaan gebruikt': 'dik se tintuża minn issa \'l quddiem',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      'ir-repożitorju għadu vojt; l-ewwel salvataġġ jimlieh',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'nota: dan it-token jista\' jaqra biss, għalhekk is-salvataġġ jfalli',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      'Il-login falla — iċċekkja t-token. Jeħtieġ aċċess għall-qari tar-repożitorju, u għall-kitba biex ikun jista\' jsalva.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'Ir-repożitorju ma nstabx — jew it-token tiegħek ma jistax jarah. Iċċekkja s-sid u l-isem tar-repożitorju.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'Dan l-indirizz ma jweġibx bħal forge. It-tip ta\' forge li għażilt huwa korrett?',
   'kenteken': 'numru tar-reġistrazzjoni',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Għal-lingwa ta\' din il-preżentazzjoni ma hemmx lista ta\' kliem ewlieni għal kategoriji speċjali ta\' data personali. Mudelli b\'ċifra ta\' kontroll (ID, IBAN, passaport) jaħdmu; kliem bħal "dijanjosi" jew "suspettat" ma jingħarfux.',

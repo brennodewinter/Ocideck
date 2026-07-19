@@ -1781,6 +1781,22 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Diperlukan ketika forge berjalan di jaringan privat atau rumah. Tanpa tanda ini, pemeriksaan keamanan menolak alamat privat.',
+  'Vul server-URL, eigenaar en repository in':
+      'Isi URL server, pemilik, dan repositori',
+  'de standaardbranch heet': 'cabang bawaan bernama',
+  'die wordt voortaan gebruikt': 'itu yang akan dipakai mulai sekarang',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      'repositori masih kosong; penyimpanan pertama akan mengisinya',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'perhatian: token ini hanya boleh membaca, jadi penyimpanan akan gagal',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      'Masuk gagal — periksa token. Ia butuh akses baca ke repositori, dan akses tulis agar bisa menyimpan.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'Repositori tidak ditemukan — atau token Anda tidak boleh melihatnya. Periksa pemilik dan nama repositori.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'Alamat ini tidak menjawab seperti sebuah forge. Apakah jenis forge yang Anda pilih benar?',
   'kenteken': 'nomor pelat kendaraan',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Tidak ada daftar kata kunci untuk kategori khusus data pribadi dalam bahasa dek ini. Pola dengan digit periksa (NIK, IBAN, paspor) tetap bekerja; kata seperti "diagnosis" atau "tersangka" tidak dikenali.',

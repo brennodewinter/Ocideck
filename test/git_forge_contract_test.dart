@@ -42,6 +42,26 @@ void runGitForgeContract(
       forge = build(repo);
     });
 
+    group('probe', () {
+      // De verbindingstest. Elke adapter leest dit uit een andere JSON-vorm —
+      // Gitea booleans, GitLab een toegangsniveau, GitHub geen leegte-vlag —
+      // en juist daarom hoort het in het contract en niet per adapter.
+      test('names the default branch', () async {
+        expect((await forge.probe()).defaultBranch, isNotEmpty);
+      });
+
+      test('a reachable repo with a branch is not reported empty', () async {
+        expect((await forge.probe()).isEmpty, isFalse);
+      });
+
+      test('push rights are a bool or an honest unknown', () async {
+        // Nooit `false` bij gebrek aan informatie: dat zou de gebruiker een
+        // rechtenprobleem aanpraten dat de forge niet heeft gemeld.
+        final canPush = (await forge.probe()).canPush;
+        expect(canPush, anyOf(isNull, isA<bool>()));
+      });
+    });
+
     group('headSha', () {
       test('returns the commit a branch points at', () async {
         expect(await forge.headSha('main'), 'commit-main');

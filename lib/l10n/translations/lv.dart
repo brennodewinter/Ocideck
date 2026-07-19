@@ -1780,6 +1780,22 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Nepieciešams, kad forge darbojas privātā vai mājas tīklā. Bez šī karodziņa drošības pārbaude noraida privātu adresi.',
+  'Vul server-URL, eigenaar en repository in':
+      'Aizpildiet servera URL, īpašnieku un repozitoriju',
+  'de standaardbranch heet': 'noklusējuma zars saucas',
+  'die wordt voortaan gebruikt': 'turpmāk tiks izmantots tas',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      'repozitorijs vēl ir tukšs; pirmā saglabāšana to aizpildīs',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'ievērojiet: šī pilnvara drīkst tikai lasīt, tāpēc saglabāšana neizdosies',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      'Pieteikšanās neizdevās — pārbaudiet pilnvaru. Tai nepieciešamas lasīšanas tiesības uz repozitoriju un rakstīšanas tiesības, lai varētu saglabāt.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'Repozitorijs nav atrasts — vai jūsu pilnvara to nedrīkst redzēt. Pārbaudiet īpašnieku un repozitorija nosaukumu.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'Šī adrese neatbild kā forge. Vai izvēlētais forge veids ir pareizs?',
   'kenteken': 'transportlīdzekļa numurs',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Šīs prezentācijas valodai nav atslēgvārdu saraksta īpašām personas datu kategorijām. Raksti ar kontrolciparu (personas kods, IBAN, pase) darbojas; vārdi kā "diagnoze" vai "aizdomās turētais" netiek atpazīti.',

@@ -51,6 +51,23 @@ void main() {
     'config': {'baseUrl': 'https://$host', 'username': 'brenno'},
   };
 
+  Map<String, Object?> git(
+    String id,
+    String name, {
+    String owner = '',
+    String repo = '',
+  }) => {
+    'id': id,
+    'name': name,
+    'kind': 'git',
+    'config': {
+      'baseUrl': 'https://git.voorbeeld.nl',
+      'owner': owner,
+      'repo': repo,
+      'provider': 'gitea',
+    },
+  };
+
   Future<void> openSettings(
     WidgetTester tester, {
     SettingsSection section = SettingsSection.storage,
@@ -161,6 +178,36 @@ void main() {
     // zien tot de gebruiker hem invult.
     await addConnection(tester, 'WebDAV-server');
     expect(webdavPanel, findsOneWidget);
+  });
+
+  testWidgets('het git-paneel biedt een verbindingstest', (tester) async {
+    // Git was de enige opslagsoort zonder testknop; elke instelfout kwam pas
+    // bij de eerste opslag boven.
+    seedConnections([git('g', 'Werk', owner: 'librekat', repo: 'decks')]);
+    await openSettings(tester);
+    await tester.tap(find.byIcon(Icons.expand_more));
+    await tester.pumpAndSettle();
+
+    expect(gitPanel, findsOneWidget);
+    expect(find.text('Verbinding testen'), findsOneWidget);
+  });
+
+  testWidgets('een halve git-configuratie test niet, maar zegt wat er '
+      'mist', (tester) async {
+    // Zonder eigenaar en repo valt er niets te bellen. Dat moet vóór het
+    // netwerk worden afgevangen: een time-out als antwoord op een leeg veld
+    // is een dure manier om "vul iets in" te zeggen.
+    seedConnections([git('g', 'Werk')]);
+    await openSettings(tester);
+    await tester.tap(find.byIcon(Icons.expand_more));
+    await tester.pumpAndSettle();
+
+    await tapVisible(tester, find.text('Verbinding testen'));
+
+    expect(
+      find.text('Vul server-URL, eigenaar en repository in'),
+      findsOneWidget,
+    );
   });
 
   testWidgets('er staat er hooguit één open', (tester) async {

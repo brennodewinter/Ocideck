@@ -1797,6 +1797,22 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Necessarium cum officina in rete privata vel domestica currit. Sine hoc signo custodia securitatis inscriptionem privatam respuit.',
+  'Vul server-URL, eigenaar en repository in':
+      'URL servitoris, dominum et promptuarium comple',
+  'de standaardbranch heet': 'ramus praedefinitus vocatur',
+  'die wordt voortaan gebruikt': 'is posthac adhibebitur',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      'promptuarium adhuc vacuum est; prima servatio id implebit',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'cave: hoc signum tantum legere potest, ergo servatio deficiet',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      'Aditus defecit — signum inspice. Ius legendi promptuarium requirit, et ius scribendi ut servare possis.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'Promptuarium non inventum — vel signum tuum id videre non licet. Dominum et nomen promptuarii inspice.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'Haec inscriptio non ut officina respondet. Rectumne est genus officinae quod elegisti?',
   'kenteken': 'numerus vehiculi',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Pro lingua huius fasciculi nullus est index verborum clavium pro singularibus generibus datorum personalium. Formae cum numero probationis (BSN, IBAN, diploma) valent; verba ut "diagnosis" vel "suspectus" non agnoscuntur.',

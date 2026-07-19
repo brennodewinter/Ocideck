@@ -21,6 +21,26 @@ class GitForm {
   /// verschillen te veel om aan de URL te raden.
   GitProvider provider = GitProvider.gitea;
 
+  /// De branch waarop gewerkt wordt. Er is bewust géén invoerveld voor: welke
+  /// branch de standaard is, weet de forge zelf beter dan de gebruiker. De
+  /// verbindingstest haalt hem op en zet hem hier neer — dat is de enige manier
+  /// waarop een repo met `master` in plaats van `main` ooit werkt.
+  String defaultBranch = const GitRepoConfig(
+    baseUrl: '',
+    owner: '',
+    repo: '',
+  ).defaultBranch;
+
+  /// Uitslag van de verbindingstest: `null` = nog niet getest.
+  bool? testOk;
+  String? testMessage;
+  bool testing = false;
+
+  /// De test slaagde, maar er is iets dat later pijn gaat doen — een token dat
+  /// alleen mag lezen. Geen fout (de verbinding wérkt), en toch niet groen:
+  /// een vinkje zou beloven dat opslaan straks lukt.
+  bool testWarning = false;
+
   /// De identiteit waaronder het token in de sleutelhanger staat.
   static String identityOf(String baseUrl, String owner) => '$baseUrl|$owner';
 
@@ -30,7 +50,16 @@ class GitForm {
     repo.text = git?.repo ?? '';
     trusted = git?.trustedInternal ?? false;
     provider = git?.provider ?? GitProvider.gitea;
+    if (git != null) defaultBranch = git.defaultBranch;
     token.rememberIdentity(identityOf(git?.baseUrl ?? '', git?.owner ?? ''));
+  }
+
+  /// Wis de uitslag. Aanroepen zodra iets verandert dat de test ongeldig maakt:
+  /// een oude groene vink bij een nieuwe server is erger dan geen vink.
+  void clearTestResult() {
+    testOk = null;
+    testMessage = null;
+    testWarning = false;
   }
 
   /// De repo zoals hij nu in de velden staat. Vult een ontbrekend schema aan:
@@ -45,6 +74,7 @@ class GitForm {
       repo: repo.text.trim(),
       trustedInternal: trusted,
       provider: provider,
+      defaultBranch: defaultBranch,
     );
   }
 

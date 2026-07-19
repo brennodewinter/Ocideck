@@ -1780,6 +1780,22 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Behövs när forgen körs på ett privat nätverk eller hemnätverk. Utan denna flagga avvisar säkerhetskontrollen en privat adress.',
+  'Vul server-URL, eigenaar en repository in':
+      'Fyll i server-URL, ägare och repository',
+  'de standaardbranch heet': 'standardgrenen heter',
+  'die wordt voortaan gebruikt': 'den används hädanefter',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      'repositoryt är fortfarande tomt; den första sparningen fyller det',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'obs: denna token får bara läsa, så det kommer inte att gå att spara',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      'Inloggningen misslyckades — kontrollera token. Den behöver läsbehörighet till repositoryt och skrivbehörighet för att kunna spara.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'Repositoryt hittades inte — eller så får din token inte se det. Kontrollera ägare och repository-namn.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'Den här adressen svarar inte som en forge. Stämmer den forge-typ du valt?',
   'kenteken': 'registreringsnummer',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Det finns ingen nyckelordslista för särskilda kategorier av personuppgifter på det här däckets språk. Mönster med kontrollsiffra (personnummer, IBAN, pass) fungerar; ord som "diagnos" eller "misstänkt" känns inte igen.',

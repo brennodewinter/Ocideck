@@ -110,6 +110,36 @@ class GiteaForge implements GitForge {
   }
 
   @override
+  Future<RepoProbe> probe() async {
+    final response = await _transport.get(
+      _apiUri(const []),
+      headers: _headers,
+      maxBytes: maxListingBytes,
+    );
+    _checkStatus(response.status);
+    final json = _decodeJson(response.bytes);
+    if (json is! Map) {
+      throw const GitForgeException(
+        GitForgeError.malformed,
+        'Onverwacht antwoord op de repo-gegevens',
+      );
+    }
+    final branch = json['default_branch'];
+    final permissions = json['permissions'];
+    return RepoProbe(
+      // Een lege repo heeft bij Gitea nog geen default_branch; dan is onze
+      // eigen instelling het beste antwoord dat we hebben.
+      defaultBranch: branch is String && branch.trim().isNotEmpty
+          ? branch.trim()
+          : config.defaultBranch,
+      isEmpty: json['empty'] == true,
+      canPush: permissions is Map && permissions['push'] is bool
+          ? permissions['push'] as bool
+          : null,
+    );
+  }
+
+  @override
   Future<String> headSha(String branch) async {
     _requireRef(branch);
     final response = await _transport.get(
@@ -645,5 +675,6 @@ class GiteaForge implements GitForge {
     }
   }
 
+  @override
   void close() => _transport.close();
 }

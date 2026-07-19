@@ -76,7 +76,12 @@ extension _SettingsGit on _SettingsDialogState {
         ),
         CheckboxListTile(
           value: form.trusted,
-          onChanged: (v) => _rebuild(() => form.trusted = v ?? false),
+          onChanged: (v) => _rebuild(() {
+            form.trusted = v ?? false;
+            // De vlag bepaalt of de host überhaupt gebeld mag worden, dus een
+            // eerdere uitslag zegt niets meer.
+            form.clearTestResult();
+          }),
           contentPadding: EdgeInsets.zero,
           controlAffinity: ListTileControlAffinity.leading,
           dense: true,
@@ -84,10 +89,157 @@ extension _SettingsGit on _SettingsDialogState {
             l10n.d('Vertrouwde interne server'),
             style: const TextStyle(fontSize: 13),
           ),
+          subtitle: Text(
+            l10n.d(
+              'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.',
+            ),
+            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+          ),
         ),
+        const SizedBox(height: 12),
+        _gitTestRow(l10n, form),
         _nativeGitStatus(l10n),
       ],
     );
+  }
+
+  /// De verbindingstest: de knop, de uitslag en wat de forge onderweg vertelde.
+  Widget _gitTestRow(AppLocalizations l10n, GitForm form) {
+    final message = form.testMessage;
+    final (Color color, IconData icon) = form.testWarning
+        ? (AppTheme.amber700, Icons.warning_amber_outlined)
+        : form.testOk == true
+        ? (AppTheme.teal, Icons.check_circle)
+        : (AppTheme.danger600, Icons.error_outline);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ElevatedButton.icon(
+          onPressed: form.testing ? null : () => _testGitConnection(form),
+          icon: form.testing
+              ? const SizedBox(
+                  width: 16,
+                  height: 16,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                )
+              : const Icon(Icons.wifi_tethering, size: 16),
+          label: Text(l10n.d('Verbinding testen')),
+        ),
+        if (form.testOk != null && message != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(icon, color: color, size: 18),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: Text(
+                    message,
+                    style: TextStyle(fontSize: 12, color: color),
+                  ),
+                ),
+              ],
+            ),
+          ),
+      ],
+    );
+  }
+
+  /// Test de repo achter de ingevulde velden.
+  ///
+  /// Anders dan bij WebDAV en S3 is "het werkte" hier niet het hele antwoord.
+  /// Alles kan kloppen en de eerste opslag alsnog stranden omdat de branch
+  /// anders heet of het token alleen mag lezen — dus melden we wat de forge
+  /// onderweg zei, en nemen we de standaardbranch meteen over.
+  Future<void> _testGitConnection(GitForm form) async {
+    final l10n = context.l10n;
+    final config = form.config;
+    if (!config.isConfigured) {
+      _rebuild(() {
+        form.testOk = false;
+        form.testWarning = false;
+        form.testMessage = l10n.d('Vul server-URL, eigenaar en repository in');
+      });
+      return;
+    }
+    _rebuild(() {
+      form.testing = true;
+      form.clearTestResult();
+    });
+    final forge = createGitForge(config: config, token: form.token.field.text);
+    RepoProbe? probe;
+    String? error;
+    try {
+      probe = await forge.probe();
+    } on GitForgeException catch (e) {
+      error = _gitErrorText(l10n, e);
+    } catch (e, st) {
+      logError('SettingsDialog: git-verbindingstest', e, st);
+      error = l10n.d('Verbinding mislukt');
+    } finally {
+      forge.close();
+    }
+    if (!mounted) return;
+    _rebuild(() {
+      form.testing = false;
+      form.testOk = error == null;
+      form.testWarning = probe?.canPush == false;
+      form.testMessage = error ?? _gitProbeSummary(l10n, form, probe!);
+    });
+  }
+
+  /// Vat samen wat de test opleverde, en neem de standaardbranch over.
+  String _gitProbeSummary(
+    AppLocalizations l10n,
+    GitForm form,
+    RepoProbe probe,
+  ) {
+    final parts = <String>[l10n.d('Verbinding gelukt')];
+    if (probe.defaultBranch != form.defaultBranch) {
+      // Overnemen, niet vragen: er is geen invoerveld voor, en de forge weet
+      // het beter dan wij. Wel zeggen dát het gebeurt.
+      form.defaultBranch = probe.defaultBranch;
+      parts.add(
+        '${l10n.d('de standaardbranch heet')} "${probe.defaultBranch}" — '
+        '${l10n.d('die wordt voortaan gebruikt')}',
+      );
+    }
+    if (probe.isEmpty) {
+      parts.add(l10n.d('de repository is nog leeg; de eerste opslag vult hem'));
+    }
+    if (probe.canPush == false) {
+      parts.add(
+        l10n.d('let op: dit token mag alleen lezen, dus opslaan zal mislukken'),
+      );
+    }
+    return '${parts.join(' — ')}.';
+  }
+
+  String _gitErrorText(AppLocalizations l10n, GitForgeException e) {
+    return switch (e.kind) {
+      GitForgeError.auth => l10n.d(
+        'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.',
+      ),
+      GitForgeError.notFound => l10n.d(
+        'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.',
+      ),
+      GitForgeError.unknownHost => l10n.d(
+        'De servernaam bestaat niet. Controleer de server-URL op een typefout.',
+      ),
+      GitForgeError.blockedHost => l10n.d(
+        'De server staat op een privé-adres. Vink "Vertrouwde interne server" aan om verbinding toe te staan.',
+      ),
+      GitForgeError.config => l10n.d('Ongeldige server-URL'),
+      GitForgeError.tooLarge => l10n.d(
+        'Het antwoord van de server was te groot',
+      ),
+      GitForgeError.malformed => l10n.d(
+        'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?',
+      ),
+      GitForgeError.network ||
+      GitForgeError.server => l10n.d('Verbinding mislukt'),
+    };
   }
 
   /// Meldt of er bruikbaar native `git` op deze machine staat. Het lezen van de

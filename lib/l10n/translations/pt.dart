@@ -1811,6 +1811,22 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
+      'Necessário quando a forge corre numa rede privada ou doméstica. Sem esta opção, a verificação de segurança recusa um endereço privado.',
+  'Vul server-URL, eigenaar en repository in':
+      'Preenche o URL do servidor, o proprietário e o repositório',
+  'de standaardbranch heet': 'o ramo predefinido chama-se',
+  'die wordt voortaan gebruikt': 'passará a ser usado esse',
+  'de repository is nog leeg; de eerste opslag vult hem':
+      'o repositório ainda está vazio; a primeira gravação irá preenchê-lo',
+  'let op: dit token mag alleen lezen, dus opslaan zal mislukken':
+      'atenção: este token só pode ler, por isso gravar irá falhar',
+  'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.':
+      'A autenticação falhou — verifica o token. Precisa de acesso de leitura ao repositório e de escrita para poder gravar.',
+  'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.':
+      'Repositório não encontrado — ou o teu token não o pode ver. Verifica o proprietário e o nome do repositório.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?':
+      'Este endereço não responde como uma forge. O tipo de forge que escolheste está correto?',
   'kenteken': 'matrícula do veículo',
   'Voor de taal van dit deck is er geen trefwoordenlijst voor bijzondere persoonsgegevens. Patronen met een controlegetal (BSN, IBAN, paspoort) werken wel; woorden als "diagnose" of "verdachte" worden niet herkend.':
       'Não existe lista de palavras-chave para categorias especiais de dados pessoais no idioma desta apresentação. Os padrões com dígito de controlo (NIF, IBAN, passaporte) funcionam; palavras como "diagnóstico" ou "suspeito" não são reconhecidas.',
