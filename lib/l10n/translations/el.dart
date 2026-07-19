@@ -1835,6 +1835,26 @@ const _dutchSourceAddEl = <String, String>{
   'IP-adres': 'διεύθυνση IP',
   'machineleesbare zone van een paspoort of ID':
       'μηχανικά αναγνώσιμη ζώνη διαβατηρίου ή ταυτότητας',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'Το όνομα του τελικού σημείου δεν υπάρχει ή δεν μπορεί να αναζητηθεί. Ελέγξτε το για τυπογραφικό λάθος.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'Το όνομα του τελικού σημείου δεν υπάρχει. Ελέγξτε το για τυπογραφικό λάθος.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Το όνομα του διακομιστή δεν υπάρχει ή δεν μπορεί να αναζητηθεί. Ελέγξτε το URL του διακομιστή για τυπογραφικό λάθος.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Αυτός ο διακομιστής έχει ιδιωτική διεύθυνση ή διεύθυνση LAN. Σημειώστε τον ως έμπιστο εσωτερικό στις Ρυθμίσεις → Αποθήκευση.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'Το πιστοποιητικό αυτού του διακομιστή δεν είναι έμπιστο. Ένα αυτο-υπογεγραμμένο πιστοποιητικό δεν λειτουργεί· χρησιμοποιήστε ένα από αναγνωρισμένο εκδότη.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Ο διακομιστής ανακατευθύνει σε άλλη διεύθυνση. Εισαγάγετε απευθείας αυτή τη διεύθυνση — δεν ακολουθούμε ανακατευθύνσεις, γιατί μπορούν να παρακάμψουν τον έλεγχο ασφαλείας.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'Το όνομα του διακομιστή δεν υπάρχει. Ελέγξτε το URL του διακομιστή για τυπογραφικό λάθος.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Το πιστοποιητικό του διακομιστή δεν είναι έμπιστο — αυτο-υπογεγραμμένο, ληγμένο ή εκδοθέν σε άλλο όνομα.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'Ο διακομιστής ανακατευθύνει σε άλλη διεύθυνση. Εισαγάγετε εδώ αυτή τη διεύθυνση.',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Η αποθήκευση στην κλειδοθήκη απέτυχε. Η σύνδεση θα ζητά τον κωδικό σου μέχρι να πετύχει.',
   'Sla de presentatie op om een kopie te maken.':
       'Αποθηκεύστε την παρουσίαση για να δημιουργηθεί αντίγραφο.',
   ': ligt buiten de presentatie en gaat niet mee (':

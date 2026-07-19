@@ -13,6 +13,11 @@ class _ThrowingSecretStore extends SecretStore {
   Future<void> writeWebdavPassword(String b, String u, String p) async {
     throw Exception('keychain unavailable');
   }
+
+  @override
+  Future<void> writeGitToken(String b, String o, String t) async {
+    throw Exception('keychain unavailable');
+  }
 }
 
 /// Een Nextcloud-bron; de host doet er voor het parsen niet toe, alleen het
@@ -309,6 +314,46 @@ void main() {
         );
       },
     );
+
+    // De `false` hierboven werd nergens afgewacht: de settings-dialoog sloot
+    // alsof er niets aan de hand was en de gebruiker zag het pas terug als een
+    // geweigerde verbinding. Het signaal is wat de shell er wél over laat zien.
+    test('a failing keychain write emits on the secret-error stream', () async {
+      final notifier = SettingsNotifier(secretStore: _ThrowingSecretStore());
+      final seen = <int>[];
+      final sub = notifier.secretErrors.listen(seen.add);
+
+      expect(
+        await notifier.setWebdavPassword('https://c.example.com', 'alice', 'p'),
+        isFalse,
+      );
+      expect(
+        await notifier.writeGitToken('https://git.example.com', 'acme', 'tok'),
+        isFalse,
+      );
+
+      // Een broadcast-stream levert asynchroon: zonder deze tik staat het
+      // laatste event nog in de wachtrij en meet je er één te weinig.
+      await Future<void>.delayed(Duration.zero);
+
+      // Oplopende volgnummers, zodat een tweede fout niet als "ongewijzigd"
+      // wordt samengevouwen door de StreamProvider.
+      expect(seen, [1, 2]);
+      await sub.cancel();
+    });
+
+    test('a successful keychain write stays silent', () async {
+      final notifier = SettingsNotifier();
+      final seen = <int>[];
+      final sub = notifier.secretErrors.listen(seen.add);
+      // Lege waarde: wist de entry, raakt de keychain-backend niet aan.
+      expect(
+        await notifier.setWebdavPassword('https://c.example.com', 'alice', ''),
+        isTrue,
+      );
+      expect(seen, isEmpty);
+      await sub.cancel();
+    });
   });
 
   group('WebdavService TLS enforcement', () {
@@ -380,6 +425,56 @@ void main() {
         allowPrivate: false,
       );
       expect(untrusted, isNotNull);
+    });
+  });
+
+  group('NetGuard.resolveConfigured names the reason', () {
+    test('a private literal is refused as blocked, not as unknown', () async {
+      final result = await NetGuard.resolveConfigured(
+        '192.168.1.10',
+        allowPrivate: false,
+      );
+      expect(result.isOk, isFalse);
+      expect(result.refusal, HostRefusal.blocked);
+    });
+
+    test('a name that cannot be resolved is unknownHost', () async {
+      // `.invalid` is bij RFC 2606 gereserveerd om nooit op te lossen, dus dit
+      // is dezelfde uitkomst met én zonder netwerk — geen flakiness.
+      final result = await NetGuard.resolveConfigured(
+        'geen-server.invalid',
+        allowPrivate: false,
+      );
+      expect(result.isOk, isFalse);
+      expect(result.refusal, HostRefusal.unknownHost);
+    });
+
+    test('the trusted flag does not turn a typo into a blocked host', () async {
+      // De kern van de klacht: wie de vink al aan had staan, kreeg tóch het
+      // advies om hem aan te zetten. Nu blijft de reden dezelfde.
+      final result = await NetGuard.resolveConfigured(
+        'geen-server.invalid',
+        allowPrivate: true,
+      );
+      expect(result.refusal, HostRefusal.unknownHost);
+    });
+
+    test('a public literal resolves and carries its address', () async {
+      final result = await NetGuard.resolveConfigured(
+        '93.184.216.34',
+        allowPrivate: false,
+      );
+      expect(result.isOk, isTrue);
+      expect(result.addresses!.single.address, '93.184.216.34');
+      expect(result.refusal, isNull);
+    });
+
+    test('a private literal is allowed when the user trusts it', () async {
+      final result = await NetGuard.resolveConfigured(
+        '10.0.0.5',
+        allowPrivate: true,
+      );
+      expect(result.isOk, isTrue);
     });
   });
 

@@ -1837,6 +1837,26 @@ const _dutchSourceAddPt = <String, String>{
   'IP-adres': 'endereço IP',
   'machineleesbare zone van een paspoort of ID':
       'zona de leitura ótica de um passaporte ou documento de identidade',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'O nome do ponto final não existe ou não pode ser consultado. Verifica se há uma gralha no ponto final.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'O nome do ponto final não existe. Verifica se há uma gralha no ponto final.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'O nome do servidor não existe ou não pode ser consultado. Verifica se há uma gralha no URL do servidor.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Este servidor tem um endereço privado ou de LAN. Marca-o como interno fidedigno em Definições → Armazenamento.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'O certificado deste servidor não é fidedigno. Um certificado autoassinado não funciona; usa um de uma entidade reconhecida.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'O servidor redireciona para outro endereço. Introduz esse endereço diretamente — não seguimos redirecionamentos, porque podem contornar a verificação de segurança.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'O nome do servidor não existe. Verifica se há uma gralha no URL do servidor.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'O certificado do servidor não é fidedigno — autoassinado, expirado ou emitido para outro nome.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'O servidor redireciona para outro endereço. Introduz esse endereço aqui.',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Falha ao guardar no porta-chaves. A ligação continuará a pedir a tua palavra-passe até conseguir.',
   'Sla de presentatie op om een kopie te maken.':
       'Guarde a apresentação para criar uma cópia.',
   ': ligt buiten de presentatie en gaat niet mee (':

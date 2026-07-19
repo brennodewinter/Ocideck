@@ -1843,6 +1843,26 @@ const _dutchSourceAddGa = <String, String>{
   'IP-adres': 'seoladh IP',
   'machineleesbare zone van een paspoort of ID':
       'crios inléite ag meaisín de phas nó de chárta aitheantais',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'Níl ainm an chríochphointe ann, nó ní féidir é a chuardach. Seiceáil an críochphointe le haghaidh botúin chlóscríofa.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'Níl ainm an chríochphointe ann. Seiceáil an críochphointe le haghaidh botúin chlóscríofa.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Níl ainm an fhreastalaí ann, nó ní féidir é a chuardach. Seiceáil URL an fhreastalaí le haghaidh botúin chlóscríofa.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Tá seoladh príobháideach nó LAN ag an bhfreastalaí seo. Marcáil é mar inmheánach iontaofa faoi Socruithe → Stóráil.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'Níl muinín as teastas an fhreastalaí seo. Ní oibreoidh teastas féinsínithe; úsáid ceann ó eisitheoir aitheanta.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Atreoraíonn an freastalaí chuig seoladh eile. Cuir an seoladh sin isteach go díreach — ní leanaimid atreoruithe, mar is féidir leo an tseiceáil slándála a sheachaint.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'Níl ainm an fhreastalaí ann. Seiceáil URL an fhreastalaí le haghaidh botúin chlóscríofa.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Níl muinín as teastas an fhreastalaí — féinsínithe, as feidhm, nó eisithe chuig ainm eile.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'Atreoraíonn an freastalaí chuig seoladh eile. Cuir an seoladh sin isteach anseo.',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Theip ar an sábháil sa eochairslabhra. Leanfaidh an nasc ag iarraidh do phasfhocail go dtí go n-éiríonn leis.',
   'Sla de presentatie op om een kopie te maken.':
       'Sábháil an láithreoireacht chun cóip a dhéanamh.',
   ': ligt buiten de presentatie en gaat niet mee (':

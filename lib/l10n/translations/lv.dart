@@ -1807,6 +1807,26 @@ const _dutchSourceAddLv = <String, String>{
   'IP-adres': 'IP adrese',
   'machineleesbare zone van een paspoort of ID':
       'pases vai personas apliecības mašīnlasāmā zona',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'Galapunkta nosaukums neeksistē vai nav atrodams. Pārbaudiet, vai galapunktā nav drukas kļūdas.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'Galapunkta nosaukums neeksistē. Pārbaudiet, vai galapunktā nav drukas kļūdas.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Servera nosaukums neeksistē vai nav atrodams. Pārbaudiet, vai servera URL nav drukas kļūdas.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Šim serverim ir privāta vai LAN adrese. Atzīmējiet to kā uzticamu iekšējo sadaļā Iestatījumi → Krātuve.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'Šī servera sertifikāts nav uzticams. Pašparakstīts sertifikāts nedarbosies; izmantojiet atzīta izdevēja sertifikātu.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Serveris novirza uz citu adresi. Ievadiet šo adresi tieši — mēs nesekojam novirzēm, jo tās var apiet drošības pārbaudi.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'Servera nosaukums neeksistē. Pārbaudiet, vai servera URL nav drukas kļūdas.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Servera sertifikāts nav uzticams — pašparakstīts, beidzies vai izdots citam nosaukumam.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'Serveris novirza uz citu adresi. Ievadiet šo adresi šeit.',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Neizdevās saglabāt atslēgu saišķī. Savienojums turpinās prasīt paroli, līdz tas izdosies.',
   'Sla de presentatie op om een kopie te maken.':
       'Saglabājiet prezentāciju, lai izveidotu kopiju.',
   ': ligt buiten de presentatie en gaat niet mee (':

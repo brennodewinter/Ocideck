@@ -1799,6 +1799,26 @@ const _dutchSourceAddEt = <String, String>{
   'IP-adres': 'IP-aadress',
   'machineleesbare zone van een paspoort of ID':
       'passi või isikutunnistuse masinloetav ala',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'Lõpp-punkti nime ei ole olemas või seda ei õnnestu leida. Kontrolli lõpp-punkti trükivea suhtes.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'Lõpp-punkti nime ei ole olemas. Kontrolli lõpp-punkti trükivea suhtes.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Serveri nime ei ole olemas või seda ei õnnestu leida. Kontrolli serveri URL-i trükivea suhtes.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Sellel serveril on privaat- või LAN-aadress. Märgi see usaldusväärseks sisemiseks jaotises Seaded → Salvestusruum.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'Selle serveri sertifikaati ei usaldata. Ise allkirjastatud sertifikaat ei tööta; kasuta tunnustatud väljaandja oma.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Server suunab teisele aadressile. Sisesta see aadress otse — ümbersuunamisi me ei järgi, sest need võivad turvakontrollist mööda minna.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'Serveri nime ei ole olemas. Kontrolli serveri URL-i trükivea suhtes.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Serveri sertifikaati ei usaldata — ise allkirjastatud, aegunud või välja antud teisele nimele.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'Server suunab teisele aadressile. Sisesta see aadress siia.',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Võtmehoidjasse salvestamine ebaõnnestus. Ühendus küsib parooli seni, kuni see õnnestub.',
   'Sla de presentatie op om een kopie te maken.':
       'Salvestage esitlus, et sellest tehtaks koopia.',
   ': ligt buiten de presentatie en gaat niet mee (':

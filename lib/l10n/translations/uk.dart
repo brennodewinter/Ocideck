@@ -1825,6 +1825,26 @@ const _dutchSourceAddUk = <String, String>{
   'IP-adres': 'IP-адреса',
   'machineleesbare zone van een paspoort of ID':
       'машинозчитувана зона паспорта або посвідчення особи',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'Ім\'я кінцевої точки не існує або його не вдається знайти. Перевірте кінцеву точку на друкарську помилку.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'Ім\'я кінцевої точки не існує. Перевірте кінцеву точку на друкарську помилку.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Ім\'я сервера не існує або його не вдається знайти. Перевірте URL сервера на друкарську помилку.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Цей сервер має приватну або LAN-адресу. Позначте його як довірений внутрішній у Налаштування → Сховище.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'Сертифікат цього сервера не є довіреним. Самопідписаний сертифікат не працює; використайте сертифікат визнаного видавця.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Сервер перенаправляє на іншу адресу. Введіть цю адресу напряму — ми не переходимо за перенаправленнями, бо вони можуть обійти перевірку безпеки.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'Ім\'я сервера не існує. Перевірте URL сервера на друкарську помилку.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Сертифікат сервера не є довіреним — самопідписаний, прострочений або виданий на інше ім\'я.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'Сервер перенаправляє на іншу адресу. Введіть цю адресу тут.',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Не вдалося зберегти у сховищі ключів. З\'єднання проситиме пароль, доки це не вдасться.',
   'Sla de presentatie op om een kopie te maken.':
       'Збережіть презентацію, щоб створити копію.',
   ': ligt buiten de presentatie en gaat niet mee (':

@@ -1806,6 +1806,26 @@ const _dutchSourceAddFi = <String, String>{
   'IP-adres': 'IP-osoite',
   'machineleesbare zone van een paspoort of ID':
       'passin tai henkilökortin koneluettava alue',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'Päätepisteen nimeä ei ole olemassa tai sitä ei voi hakea. Tarkista päätepisteen kirjoitusasu.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'Päätepisteen nimeä ei ole olemassa. Tarkista päätepisteen kirjoitusasu.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Palvelimen nimeä ei ole olemassa tai sitä ei voi hakea. Tarkista palvelimen URL-osoitteen kirjoitusasu.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Tällä palvelimella on yksityinen tai LAN-osoite. Merkitse se luotetuksi sisäiseksi kohdassa Asetukset → Tallennus.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'Tämän palvelimen varmennetta ei luoteta. Itse allekirjoitettu varmenne ei toimi; käytä tunnustetun myöntäjän varmennetta.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Palvelin ohjaa toiseen osoitteeseen. Syötä se osoite suoraan — emme seuraa uudelleenohjauksia, koska ne voivat ohittaa turvatarkistuksen.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'Palvelimen nimeä ei ole olemassa. Tarkista palvelimen URL-osoitteen kirjoitusasu.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Palvelimen varmennetta ei luoteta — itse allekirjoitettu, vanhentunut tai myönnetty toiselle nimelle.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'Palvelin ohjaa toiseen osoitteeseen. Syötä se osoite tähän.',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Avainnippuun tallentaminen epäonnistui. Yhteys kysyy salasanaasi, kunnes tallennus onnistuu.',
   'Sla de presentatie op om een kopie te maken.':
       'Tallenna esitys, niin siitä tehdään kopio.',
   ': ligt buiten de presentatie en gaat niet mee (':

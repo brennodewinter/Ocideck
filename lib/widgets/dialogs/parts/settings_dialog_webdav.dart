@@ -253,9 +253,21 @@ extension _SettingsWebdav on _SettingsDialogState {
         return l10n.d(
           'Aanmelden mislukt — controleer gebruikersnaam en wachtwoord. Tip: gebruik bij Nextcloud een app-wachtwoord (Instellingen → Beveiliging), niet je accountwachtwoord.',
         );
+      case WebdavError.unknownHost:
+        return l10n.d(
+          'De servernaam bestaat niet. Controleer de server-URL op een typefout.',
+        );
       case WebdavError.blockedHost:
         return l10n.d(
           'De server staat op een privé-adres. Vink "Vertrouwde interne server" aan om verbinding toe te staan.',
+        );
+      case WebdavError.tls:
+        return l10n.d(
+          'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.',
+        );
+      case WebdavError.redirect:
+        return l10n.d(
+          'De server stuurt door naar een ander adres. Vul dat adres hier in.',
         );
       case WebdavError.notFound:
         return l10n.d('Map niet gevonden op de server');

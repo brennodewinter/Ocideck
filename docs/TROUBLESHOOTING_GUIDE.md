@@ -95,7 +95,26 @@ This guide addresses frequently encountered problems, their causes, and step-by-
    - Ensure trusted internal server is set appropriately if using local addresses
    - Test connection before saving to verify configuration works  
 
-3. **Privacy Scan Issues**:
+3. **Reading a connection error**: the message names the cause, so treat the
+   three host-level failures as distinct — they need opposite fixes:
+   - *"The server name does not exist"* — a DNS problem, almost always a typo
+     in the URL. Ticking **Trusted internal server** does not help here and
+     weakens the check for nothing.
+   - *"This server has a private or LAN address"* — the address resolves fine
+     but points inside your network. This is the one where **Trusted internal
+     server** is the right answer.
+   - *"The server's certificate is not trusted"* — the server is reachable and
+     TLS failed: self-signed, expired, or issued to a different name.
+     Self-signed certificates are not supported; use one from a recognised
+     issuer. Note that a LAN server marked trusted may use plain `http`, which
+     avoids the certificate question altogether.
+
+   A fourth, *"The server redirects to a different address"*, means the server
+   answers but points elsewhere — typically an `http` URL the server upgrades
+   to `https`. Redirects are never followed (that would bypass the host check),
+   so enter the final address yourself.
+
+4. **Privacy Scan Issues**:
    - Review privacy disposition settings for the deck/individual slides  
    - Check that redaction markers are properly formatted (`[[...]]`)
    - A rule that keeps flagging something you accept can be switched off

@@ -133,17 +133,23 @@ class PinnedGitTransport implements GitTransport {
             : 'Alleen https-servers worden ondersteund.',
       );
     }
-    final addrs = await NetGuard.safeResolveTrusted(
+    final resolved = await NetGuard.resolveConfigured(
       config.host,
       allowPrivate: config.trustedInternal,
     );
-    if (addrs == null || addrs.isEmpty) {
-      throw const GitForgeException(
-        GitForgeError.blockedHost,
-        'Server-host geweigerd of onbereikbaar',
-      );
+    if (!resolved.isOk) {
+      throw switch (resolved.refusal!) {
+        HostRefusal.unknownHost => const GitForgeException(
+          GitForgeError.unknownHost,
+          'Servernaam niet gevonden',
+        ),
+        HostRefusal.blocked => const GitForgeException(
+          GitForgeError.blockedHost,
+          'Server-host geweigerd',
+        ),
+      };
     }
-    final pinned = addrs.first;
+    final pinned = resolved.addresses!.first;
     final client = HttpClient()
       ..connectionTimeout = const Duration(seconds: 15)
       ..connectionFactory = (u, _, _) => Socket.startConnect(pinned, u.port);

@@ -1817,6 +1817,26 @@ const _dutchSourceAddLt = <String, String>{
   'IP-adres': 'IP adresas',
   'machineleesbare zone van een paspoort of ID':
       'paso arba asmens tapatybės kortelės mašininio nuskaitymo zona',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'Galinio taško pavadinimo nėra arba jo nepavyksta rasti. Patikrinkite, ar jame nėra rašybos klaidos.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'Galinio taško pavadinimo nėra. Patikrinkite, ar jame nėra rašybos klaidos.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Serverio pavadinimo nėra arba jo nepavyksta rasti. Patikrinkite, ar serverio URL nėra rašybos klaidos.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Šis serveris turi privatų arba LAN adresą. Pažymėkite jį kaip patikimą vidinį skiltyje Nustatymai → Saugykla.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'Šio serverio sertifikatas nėra patikimas. Savarankiškai pasirašytas sertifikatas neveiks; naudokite pripažinto išdavėjo sertifikatą.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Serveris nukreipia į kitą adresą. Įveskite tą adresą tiesiogiai — peradresavimų nesekame, nes jie gali apeiti saugumo patikrą.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'Serverio pavadinimo nėra. Patikrinkite, ar serverio URL nėra rašybos klaidos.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Serverio sertifikatas nėra patikimas — savarankiškai pasirašytas, nebegaliojantis arba išduotas kitam vardui.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'Serveris nukreipia į kitą adresą. Įveskite tą adresą čia.',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Nepavyko įrašyti į raktinę. Ryšys ir toliau prašys slaptažodžio, kol pavyks.',
   'Sla de presentatie op om een kopie te maken.':
       'Įrašykite pristatymą, kad būtų sukurta kopija.',
   ': ligt buiten de presentatie en gaat niet mee (':

@@ -946,6 +946,26 @@ const _dutchSourceAddEn = {
   'IP-adres': 'IP address',
   'machineleesbare zone van een paspoort of ID':
       'machine-readable zone of a passport or ID',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'The endpoint name does not exist, or cannot be looked up. Check the endpoint for a typo.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'The endpoint name does not exist. Check the endpoint for a typo.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'The server name does not exist, or cannot be looked up. Check the server URL for a typo.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'This server has a private or LAN address. Mark it as trusted internal under Settings → Storage.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'This server\'s certificate is not trusted. A self-signed certificate will not work; use one from a recognised issuer.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'The server redirects to a different address. Enter that address directly — we do not follow redirects, because they can bypass the security check.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'The server name does not exist. Check the server URL for a typo.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'The server\'s certificate is not trusted — self-signed, expired, or issued to a different name.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'The server redirects to a different address. Enter that address here.',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Saving to the keychain failed. The connection will keep asking for your password until this succeeds.',
   'Sla de presentatie op om een kopie te maken.':
       'Save the presentation to make a copy.',
   ': ligt buiten de presentatie en gaat niet mee (':

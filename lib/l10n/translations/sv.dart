@@ -1806,6 +1806,26 @@ const _dutchSourceAddSv = <String, String>{
   'IP-adres': 'IP-adress',
   'machineleesbare zone van een paspoort of ID':
       'maskinläsbar zon i ett pass eller id-kort',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'Ändpunktsnamnet finns inte eller går inte att slå upp. Kontrollera ändpunkten för ett skrivfel.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'Ändpunktsnamnet finns inte. Kontrollera ändpunkten för ett skrivfel.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Servernamnet finns inte eller går inte att slå upp. Kontrollera server-URL:en för ett skrivfel.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Den här servern har en privat adress eller LAN-adress. Markera den som betrodd intern under Inställningar → Lagring.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'Serverns certifikat är inte betrott. Ett självsignerat certifikat fungerar inte; använd ett från en erkänd utfärdare.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Servern omdirigerar till en annan adress. Ange den adressen direkt — vi följer inte omdirigeringar, eftersom de kan kringgå säkerhetskontrollen.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'Servernamnet finns inte. Kontrollera server-URL:en för ett skrivfel.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Serverns certifikat är inte betrott — självsignerat, utgånget eller utfärdat till ett annat namn.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'Servern omdirigerar till en annan adress. Ange den adressen här.',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Det gick inte att spara i nyckelringen. Anslutningen fortsätter att fråga efter ditt lösenord tills det lyckas.',
   'Sla de presentatie op om een kopie te maken.':
       'Spara presentationen för att skapa en kopia.',
   ': ligt buiten de presentatie en gaat niet mee (':

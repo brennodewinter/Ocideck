@@ -765,6 +765,26 @@ const _dutchSourceAddDe = {
   'IP-adres': 'IP-Adresse',
   'machineleesbare zone van een paspoort of ID':
       'maschinenlesbare Zone eines Passes oder Ausweises',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'Der Endpunktname existiert nicht oder ist nicht auflösbar. Prüfe den Endpunkt auf einen Tippfehler.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'Der Endpunktname existiert nicht. Prüfe den Endpunkt auf einen Tippfehler.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Der Servername existiert nicht oder ist nicht auflösbar. Prüfe die Server-URL auf einen Tippfehler.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Dieser Server hat eine private oder LAN-Adresse. Markiere ihn unter Einstellungen → Speicher als vertrauenswürdig intern.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'Dem Zertifikat dieses Servers wird nicht vertraut. Ein selbstsigniertes Zertifikat funktioniert nicht; nutze eines von einem anerkannten Aussteller.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Der Server leitet auf eine andere Adresse um. Gib diese Adresse direkt ein — Weiterleitungen folgen wir nicht, weil sie die Sicherheitsprüfung umgehen können.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'Der Servername existiert nicht. Prüfe die Server-URL auf einen Tippfehler.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Dem Zertifikat des Servers wird nicht vertraut — selbstsigniert, abgelaufen oder auf einen anderen Namen ausgestellt.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'Der Server leitet auf eine andere Adresse um. Gib diese Adresse hier ein.',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Speichern im Schlüsselbund fehlgeschlagen. Die Verbindung fragt weiter nach deinem Passwort, bis es klappt.',
   'Sla de presentatie op om een kopie te maken.':
       'Speichern Sie die Präsentation, um eine Kopie anzulegen.',
   ': ligt buiten de presentatie en gaat niet mee (':

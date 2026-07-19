@@ -1819,6 +1819,26 @@ const _dutchSourceAddPl = <String, String>{
   'IP-adres': 'adres IP',
   'machineleesbare zone van een paspoort of ID':
       'strefa odczytu maszynowego paszportu lub dowodu tożsamości',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'Nazwa punktu końcowego nie istnieje lub nie można jej odnaleźć. Sprawdź, czy nie ma w niej literówki.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'Nazwa punktu końcowego nie istnieje. Sprawdź, czy nie ma w niej literówki.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Nazwa serwera nie istnieje lub nie można jej odnaleźć. Sprawdź, czy w adresie URL serwera nie ma literówki.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Ten serwer ma adres prywatny lub LAN. Oznacz go jako zaufany wewnętrzny w Ustawienia → Magazyn.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'Certyfikat tego serwera nie jest zaufany. Certyfikat samopodpisany nie zadziała; użyj certyfikatu uznanego wystawcy.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Serwer przekierowuje na inny adres. Wpisz ten adres bezpośrednio — nie podążamy za przekierowaniami, bo mogą ominąć kontrolę bezpieczeństwa.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'Nazwa serwera nie istnieje. Sprawdź, czy w adresie URL serwera nie ma literówki.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Certyfikat serwera nie jest zaufany — samopodpisany, wygasły lub wystawiony na inną nazwę.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'Serwer przekierowuje na inny adres. Wpisz ten adres tutaj.',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Zapis w pęku kluczy nie powiódł się. Połączenie będzie prosić o hasło, dopóki się nie uda.',
   'Sla de presentatie op om een kopie te maken.':
       'Zapisz prezentację, aby powstała kopia.',
   ': ligt buiten de presentatie en gaat niet mee (':

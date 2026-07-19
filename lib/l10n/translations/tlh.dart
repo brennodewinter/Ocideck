@@ -1780,6 +1780,26 @@ const _dutchSourceAddTlh = <String, String>{
   'advertentie- of apparaat-ID': 'ngoDHom ghap jan ID',
   'IP-adres': 'IP Sep',
   'machineleesbare zone van een paspoort of ID': 'jonwI\' laDlaHbogh pIqaD nav',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'endpoint pong tu\'lu\'be\', ghap nejlaHbe\'. endpoint yIlaD; qelI\'qam Do\'Ha\' yInej.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'endpoint pong tu\'lu\'be\'. endpoint yIlaD; qelI\'qam Do\'Ha\' yInej.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'pat pong tu\'lu\'be\', ghap nejlaHbe\'. pat URL yIlaD; qelI\'qam Do\'Ha\' yInej.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'pat vam ghajbogh privé ghap LAN inscription. Settings → Storage-Daq voqlu\'bogh qoDDaq yIper.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'pat vam teywI\' voqlu\'be\'. teywI\' qapbe\' \'e\' bIH; teywI\' Sovbogh nuvpu\' yIlo\'.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'pat latlh inscription-Daq ngeH. inscription yIchel — ngeHmeH mIw wItlha\'be\', \'ej Hung waw\' buSHa\'laH.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'pat pong tu\'lu\'be\'. pat URL yIlaD; qelI\'qam Do\'Ha\' yInej.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'pat teywI\' voqlu\'be\' — ngoq\'egh, tlhue\'pu\', ghap latlh pong.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'pat latlh inscription-Daq ngeH. inscription naDev yIchel.',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'nuqDaq ngaSwI\' polmeH Qapbe\'. bIQapchoHpa\' mu\'wI\' tlhob rar.',
   'Sla de presentatie op om een kopie te maken.':
       'velqa\' chenmoHmeH cha\'nob yIpol.',
   ': ligt buiten de presentatie en gaat niet mee (':

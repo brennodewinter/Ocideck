@@ -180,6 +180,39 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   gedrag waardoor mensen een privacycontrole uitzetten.
 
 ### Fixed
+- **Een mislukte verbinding zegt nu wát er mis is.** De servicelaag wist
+  meestal precies waarom iets faalde, en gooide die kennis één laag vóór de
+  gebruiker weg.
+
+  Het schadelijkste geval was een tikfout in de servernaam. De SSRF-beveiliging
+  gaf "geen adressen" terug voor twee heel verschillende oorzaken — een naam
+  die niet bestaat, en een naam die naar een intern adres wijst — waarna de app
+  van beide maakte: *"Markeer een privé/LAN-server eerst als vertrouwd."* Bij
+  een typefout hielp dat niet alleen niets, het zette de gebruiker aan een
+  veiligheidsvink om te zetten die het probleem niet was. Wie hem al aan had
+  staan, kreeg hetzelfde advies nog eens. De twee redenen zijn nu gescheiden,
+  in alle drie de opslagsoorten.
+
+  Daarnaast eindigde elke WebDAV-bewerking op één `catch` die alles tot
+  "Verbinding mislukt" platsloeg. Een afgewezen certificaat, een dichte poort
+  en een omleiding werden zo dezelfde zin, terwijl het verschil alleen in het
+  logboek stond — waar de gebruiker niet kijkt. Een zelfondertekend of verlopen
+  certificaat zegt dat nu, en een server die doorstuurt ook: die omleiding
+  volgen we bewust niet, maar dat is iets anders dan een storing.
+- **Een wachtwoord dat niet in de sleutelhanger paste, verdween zonder een
+  woord.** Lukte het wegschrijven van een WebDAV-wachtwoord, een S3-sleutel, een
+  git-token of een AI-API-sleutel niet — een vergrendelde keychain, een
+  geweigerde toegangsvraag — dan werd de fout op drie lagen ingeslikt: de
+  opslagklasse gooide netjes door, de provider ving hem af en gaf `false`
+  terug, en de settings-dialoog keek naar dat antwoord niet om. Het venster
+  sloot alsof alles goed was gegaan.
+
+  Je merkte het pas bij de eerste verbinding, en dan lijkt het een verkeerd
+  wachtwoord: je gaat je inloggegevens controleren die nooit zijn opgeslagen.
+  Zo'n mislukte schrijfactie meldt zich nu, met erbij wat er straks gebeurt
+  ("de verbinding blijft om je wachtwoord vragen"), zodat je het spoor volgt
+  dat ergens heen leidt. Los van de melding over een mislukte prefs-schrijf,
+  want de gevolgschade is een andere.
 - **Aankruislijsten in de documentatie waren geen aankruislijsten.** De lezer
   in de app kende het `- [ ]`-patroon niet en liet de haakjes gewoon staan, dus
   de checklist voor het uitrollen van de webversie las als "• [ ] Served over

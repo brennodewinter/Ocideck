@@ -369,14 +369,27 @@ void main() {
 
     test('an unexpected PUT status is a server error', () async {
       final fake = await _FakeWebdav.start((req) async {
-        // Not caught by _checkStatus (not 401/403/404/5xx), but not a success
-        // status either → the explicit "Upload gaf status" branch.
-        req.response.statusCode = 302;
+        // Not caught by _checkStatus (not 401/403/404/3xx/5xx), but not a
+        // success status either → the explicit "Upload gaf status" branch.
+        req.response.statusCode = 418;
       });
       addTearDown(fake.stop);
 
       final e = await _catch(() => svcFor(fake.port).upload('file.bin', [1]));
       expect((e as WebdavException).kind, WebdavError.server);
+    });
+
+    test('a redirect on PUT is named as one, not as a server error', () async {
+      // Volgen doen we niet (dat zou de host-controle omzeilen), maar "server
+      // gaf een fout" stuurde de gebruiker het verkeerde spoor op: meestal
+      // staat er gewoon een http-URL waar de server https van maakt.
+      final fake = await _FakeWebdav.start((req) async {
+        req.response.statusCode = 302;
+      });
+      addTearDown(fake.stop);
+
+      final e = await _catch(() => svcFor(fake.port).upload('file.bin', [1]));
+      expect((e as WebdavException).kind, WebdavError.redirect);
     });
 
     test('a path outside the root is refused before any request', () async {

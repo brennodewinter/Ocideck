@@ -764,6 +764,26 @@ const _dutchSourceAddFr = {
   'IP-adres': 'adresse IP',
   'machineleesbare zone van een paspoort of ID':
       'zone de lecture automatique d\'un passeport ou d\'une pièce d\'identité',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'Le nom du point de terminaison n\'existe pas ou ne peut pas être résolu. Vérifiez qu\'il ne contient pas de faute de frappe.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'Le nom du point de terminaison n\'existe pas. Vérifiez qu\'il ne contient pas de faute de frappe.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Le nom du serveur n\'existe pas ou ne peut pas être résolu. Vérifiez que l\'URL du serveur ne contient pas de faute de frappe.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Ce serveur a une adresse privée ou LAN. Marquez-le comme interne de confiance dans Paramètres → Stockage.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'Le certificat de ce serveur n\'est pas approuvé. Un certificat auto-signé ne fonctionne pas ; utilisez-en un d\'une autorité reconnue.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Le serveur redirige vers une autre adresse. Saisissez directement cette adresse : nous ne suivons pas les redirections, car elles peuvent contourner le contrôle de sécurité.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'Le nom du serveur n\'existe pas. Vérifiez que l\'URL du serveur ne contient pas de faute de frappe.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Le certificat du serveur n\'est pas approuvé : auto-signé, expiré ou établi à un autre nom.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'Le serveur redirige vers une autre adresse. Saisissez cette adresse ici.',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Échec de l\'enregistrement dans le trousseau. La connexion continuera à demander votre mot de passe jusqu\'à ce que cela réussisse.',
   'Sla de presentatie op om een kopie te maken.':
       'Enregistrez la présentation pour en faire une copie.',
   ': ligt buiten de presentatie en gaat niet mee (':

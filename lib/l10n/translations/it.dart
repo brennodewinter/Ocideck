@@ -760,6 +760,26 @@ const _dutchSourceAddIt = {
   'IP-adres': 'indirizzo IP',
   'machineleesbare zone van een paspoort of ID':
       'zona a lettura ottica di un passaporto o documento d\'identità',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'Il nome dell\'endpoint non esiste o non è consultabile. Controlla che l\'endpoint non contenga errori di battitura.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'Il nome dell\'endpoint non esiste. Controlla che l\'endpoint non contenga errori di battitura.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Il nome del server non esiste o non è consultabile. Controlla che l\'URL del server non contenga errori di battitura.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Questo server ha un indirizzo privato o LAN. Contrassegnalo come interno attendibile in Impostazioni → Archiviazione.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'Il certificato di questo server non è attendibile. Un certificato autofirmato non funziona; usane uno di un\'autorità riconosciuta.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Il server reindirizza a un altro indirizzo. Inserisci direttamente quell\'indirizzo: non seguiamo i reindirizzamenti, perché possono aggirare il controllo di sicurezza.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'Il nome del server non esiste. Controlla che l\'URL del server non contenga errori di battitura.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Il certificato del server non è attendibile: autofirmato, scaduto o intestato a un altro nome.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'Il server reindirizza a un altro indirizzo. Inserisci qui quell\'indirizzo.',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Salvataggio nel portachiavi non riuscito. La connessione continuerà a chiedere la password finché non riesce.',
   'Sla de presentatie op om een kopie te maken.':
       'Salva la presentazione per crearne una copia.',
   ': ligt buiten de presentatie en gaat niet mee (':

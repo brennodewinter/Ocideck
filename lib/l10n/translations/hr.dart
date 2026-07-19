@@ -1814,6 +1814,26 @@ const _dutchSourceAddHr = <String, String>{
   'IP-adres': 'IP adresa',
   'machineleesbare zone van een paspoort of ID':
       'strojno čitljiva zona putovnice ili osobne iskaznice',
+  'De endpoint-naam bestaat niet, of is niet op te zoeken. Controleer het endpoint op een typefout.':
+      'Naziv krajnje točke ne postoji ili se ne može pronaći. Provjerite ima li u njoj tipfelera.',
+  'De endpoint-naam bestaat niet. Controleer het endpoint op een typefout.':
+      'Naziv krajnje točke ne postoji. Provjerite ima li u njoj tipfelera.',
+  'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Naziv poslužitelja ne postoji ili se ne može pronaći. Provjerite ima li u URL-u poslužitelja tipfelera.',
+  'Deze server heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Ovaj poslužitelj ima privatnu ili LAN adresu. Označite ga kao pouzdan interni u Postavke → Pohrana.',
+  'Het certificaat van deze server wordt niet vertrouwd. Een zelfondertekend certificaat werkt niet; gebruik er een van een erkende uitgever.':
+      'Certifikat ovog poslužitelja nije pouzdan. Samopotpisani certifikat ne radi; upotrijebite certifikat priznatog izdavatelja.',
+  'De server stuurt door naar een ander adres. Vul dat adres rechtstreeks in — een omleiding volgen we niet, want die kan de veiligheidscontrole omzeilen.':
+      'Poslužitelj preusmjerava na drugu adresu. Unesite tu adresu izravno — preusmjeravanja ne slijedimo jer mogu zaobići sigurnosnu provjeru.',
+  'De servernaam bestaat niet. Controleer de server-URL op een typefout.':
+      'Naziv poslužitelja ne postoji. Provjerite ima li u URL-u poslužitelja tipfelera.',
+  'Het certificaat van de server wordt niet vertrouwd — zelfondertekend, verlopen, of op een andere naam gesteld.':
+      'Certifikat poslužitelja nije pouzdan — samopotpisan, istekao ili izdan na drugo ime.',
+  'De server stuurt door naar een ander adres. Vul dat adres hier in.':
+      'Poslužitelj preusmjerava na drugu adresu. Unesite tu adresu ovdje.',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Spremanje u lančić ključeva nije uspjelo. Veza će i dalje tražiti lozinku dok ne uspije.',
   'Sla de presentatie op om een kopie te maken.':
       'Spremite prezentaciju da biste napravili kopiju.',
   ': ligt buiten de presentatie en gaat niet mee (':
