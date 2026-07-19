@@ -1817,6 +1817,25 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Bestandsverbindingen': 'Naisc chomhad',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Na háiteanna ina gcoinníonn tú agus ina gcuardaíonn tú do chuid láithreoireachtaí — fillteáin ar an ríomhaire seo, freastalaithe WebDAV agus stórais git measctha. Tarraing iad san ord is mian leat: is é an ceann is airde de gach cineál an réamhshocrú.',
+  'Een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Stóras git; coinnítear gach leagan sábháilte.',
+  'Een map op de schijf van deze computer.':
+      'Fillteán ar dhiosca an ríomhaire seo.',
+  'Een map op een WebDAV-server, bijvoorbeeld Nextcloud.':
+      'Fillteán ar fhreastalaí WebDAV, mar shampla Nextcloud.',
+  'Instellingen tonen': 'Taispeáin socruithe',
+  'Instellingen verbergen': 'Folaigh socruithe',
+  'Map op deze computer': 'Fillteán ar an ríomhaire seo',
+  'Naam van deze verbinding': 'Ainm an naisc seo',
+  'Nog geen verbinding — voeg er hieronder een toe.':
+      'Gan nasc go fóill — cuir ceann leis thíos.',
+  'Sleep om de volgorde te wijzigen': 'Tarraing chun an t-ord a athrú',
+  'Verbinding toevoegen': 'Cuir nasc leis',
+  'Verbinding verwijderen': 'Bain nasc',
+  'WebDAV-server': 'Freastalaí WebDAV',
   'Iemand anders heeft dit bestand gewijzigd':
       'D\'athraigh duine eile an comhad seo',
   'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':

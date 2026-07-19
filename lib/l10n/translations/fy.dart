@@ -739,6 +739,25 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Bestandsverbindingen': 'Bestânsferbiningen',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'De plakken dêr\'tsto dyn presintaasjes bewarrest en trochsikest — mappen op dizze kompjûter, WebDAV-servers en git-repositories trochinoar. Sleep se yn de folchoarder dy\'tsto wolst: de boppeste fan in soarte jildt as standert.',
+  'Een git-repository; elke opgeslagen versie blijft bewaard.':
+      'In git-repository; eltse bewarre ferzje bliuwt behâlden.',
+  'Een map op de schijf van deze computer.':
+      'In map op de skiif fan dizze kompjûter.',
+  'Een map op een WebDAV-server, bijvoorbeeld Nextcloud.':
+      'In map op in WebDAV-server, bygelyks Nextcloud.',
+  'Instellingen tonen': 'Ynstellings sjen litte',
+  'Instellingen verbergen': 'Ynstellings ferbergje',
+  'Map op deze computer': 'Map op dizze kompjûter',
+  'Naam van deze verbinding': 'Namme fan dizze ferbining',
+  'Nog geen verbinding — voeg er hieronder een toe.':
+      'Noch gjin ferbining — foegje hjirûnder ien ta.',
+  'Sleep om de volgorde te wijzigen': 'Sleep om de folchoarder te feroarjen',
+  'Verbinding toevoegen': 'Ferbining tafoegje',
+  'Verbinding verwijderen': 'Ferbining fuortsmite',
+  'WebDAV-server': 'WebDAV-server',
   'Iemand anders heeft dit bestand gewijzigd':
       'Immen oars hat dit bestân feroare',
   'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':

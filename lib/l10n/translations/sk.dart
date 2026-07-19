@@ -1788,6 +1788,25 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Bestandsverbindingen': 'Pripojenia súborov',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Miesta, kde uchovávate a prehľadávate prezentácie — priečinky v tomto počítači, servery WebDAV a git repozitáre spolu. Pretiahnite ich do požadovaného poradia: najvyšší z každého druhu platí ako predvolený.',
+  'Een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Git repozitár; každá uložená verzia zostáva zachovaná.',
+  'Een map op de schijf van deze computer.':
+      'Priečinok na disku tohto počítača.',
+  'Een map op een WebDAV-server, bijvoorbeeld Nextcloud.':
+      'Priečinok na serveri WebDAV, napríklad Nextcloud.',
+  'Instellingen tonen': 'Zobraziť nastavenia',
+  'Instellingen verbergen': 'Skryť nastavenia',
+  'Map op deze computer': 'Priečinok v tomto počítači',
+  'Naam van deze verbinding': 'Názov tohto pripojenia',
+  'Nog geen verbinding — voeg er hieronder een toe.':
+      'Zatiaľ žiadne pripojenie — pridajte ho nižšie.',
+  'Sleep om de volgorde te wijzigen': 'Potiahnutím zmeníte poradie',
+  'Verbinding toevoegen': 'Pridať pripojenie',
+  'Verbinding verwijderen': 'Odstrániť pripojenie',
+  'WebDAV-server': 'Server WebDAV',
   'Iemand anders heeft dit bestand gewijzigd': 'Tento súbor zmenil niekto iný',
   'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
       'Verzia na serveri sa od otvorenia tejto prezentácie zmenila. Prepísanie zahodí prácu druhého človeka.',

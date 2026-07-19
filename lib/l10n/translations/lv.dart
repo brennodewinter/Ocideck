@@ -1780,6 +1780,24 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Bestandsverbindingen': 'Failu savienojumi',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Vietas, kur glabājat un meklējat prezentācijas — mapes šajā datorā, WebDAV serveri un git repozitoriji jauktā secībā. Velciet tos vēlamajā secībā: augšējais no katra veida ir noklusējums.',
+  'Een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Git repozitorijs; katra saglabātā versija tiek paturēta.',
+  'Een map op de schijf van deze computer.': 'Mape šī datora diskā.',
+  'Een map op een WebDAV-server, bijvoorbeeld Nextcloud.':
+      'Mape WebDAV serverī, piemēram, Nextcloud.',
+  'Instellingen tonen': 'Rādīt iestatījumus',
+  'Instellingen verbergen': 'Slēpt iestatījumus',
+  'Map op deze computer': 'Mape šajā datorā',
+  'Naam van deze verbinding': 'Šī savienojuma nosaukums',
+  'Nog geen verbinding — voeg er hieronder een toe.':
+      'Vēl nav savienojuma — pievienojiet to zemāk.',
+  'Sleep om de volgorde te wijzigen': 'Velciet, lai mainītu secību',
+  'Verbinding toevoegen': 'Pievienot savienojumu',
+  'Verbinding verwijderen': 'Noņemt savienojumu',
+  'WebDAV-server': 'WebDAV serveris',
   'Iemand anders heeft dit bestand gewijzigd': 'Kāds cits ir mainījis šo failu',
   'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
       'Versija serverī ir mainījusies kopš šīs prezentācijas atvēršanas. Pārrakstīšana atceļ otra cilvēka darbu.',

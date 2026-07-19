@@ -1804,6 +1804,24 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Bestandsverbindingen': 'Файлови връзки',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Местата, където съхранявате и търсите презентациите си — папки на този компютър, WebDAV сървъри и git хранилища заедно. Плъзнете ги в реда, който искате: най-горното от всеки вид важи като подразбирано.',
+  'Een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Git хранилище; всяка запазена версия се съхранява.',
+  'Een map op de schijf van deze computer.': 'Папка на диска на този компютър.',
+  'Een map op een WebDAV-server, bijvoorbeeld Nextcloud.':
+      'Папка на WebDAV сървър, например Nextcloud.',
+  'Instellingen tonen': 'Показване на настройките',
+  'Instellingen verbergen': 'Скриване на настройките',
+  'Map op deze computer': 'Папка на този компютър',
+  'Naam van deze verbinding': 'Име на тази връзка',
+  'Nog geen verbinding — voeg er hieronder een toe.':
+      'Все още няма връзка — добавете една по-долу.',
+  'Sleep om de volgorde te wijzigen': 'Плъзнете, за да промените реда',
+  'Verbinding toevoegen': 'Добавяне на връзка',
+  'Verbinding verwijderen': 'Премахване на връзката',
+  'WebDAV-server': 'WebDAV сървър',
   'Iemand anders heeft dit bestand gewijzigd': 'Някой друг промени този файл',
   'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
       'Версията на сървъра се промени, откакто отворихте тази презентация. Презаписването заличава работата на другия.',

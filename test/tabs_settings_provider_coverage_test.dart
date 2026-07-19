@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck_template.dart';
 import 'package:ocideck/models/settings.dart';
+import 'package:ocideck/models/storage_connection.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/recovery_service.dart';
 import 'package:ocideck/services/secret_store.dart';
@@ -363,7 +364,7 @@ void main() {
       );
     });
 
-    test('setWebdavServer stores, reloads and clears the config', () async {
+    test('a webdav connection stores, reloads and clears', () async {
       SharedPreferences.setMockInitialValues({});
       final n = await loaded();
       const server = WebdavServer(
@@ -371,7 +372,12 @@ void main() {
         username: 'alice',
         rootPath: '/Presentaties',
       );
-      await n.setWebdavServer(server);
+      final connection = WebdavConnection(
+        id: StorageConnection.newId(),
+        name: 'Klant A',
+        server: server,
+      );
+      await n.addConnection(connection);
       expect(n.state.webdavServer, isNotNull);
       expect(n.state.webdavServer!.username, 'alice');
 
@@ -380,7 +386,7 @@ void main() {
       expect(reloaded.state.webdavServer?.baseUrl, 'https://cloud.example.com');
       expect(reloaded.state.webdavServer?.rootPath, '/Presentaties');
 
-      await n.setWebdavServer(null);
+      await n.removeConnection(connection.id);
       expect(n.state.webdavServer, isNull);
     });
 

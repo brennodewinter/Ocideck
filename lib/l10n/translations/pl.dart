@@ -1793,6 +1793,24 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Bestandsverbindingen': 'Połączenia plików',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Miejsca, w których przechowujesz i przeszukujesz prezentacje — foldery na tym komputerze, serwery WebDAV i repozytoria git razem. Przeciągnij je w wybranej kolejności: najwyższy w danym rodzaju jest domyślny.',
+  'Een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Repozytorium git; każda zapisana wersja zostaje zachowana.',
+  'Een map op de schijf van deze computer.': 'Folder na dysku tego komputera.',
+  'Een map op een WebDAV-server, bijvoorbeeld Nextcloud.':
+      'Folder na serwerze WebDAV, na przykład Nextcloud.',
+  'Instellingen tonen': 'Pokaż ustawienia',
+  'Instellingen verbergen': 'Ukryj ustawienia',
+  'Map op deze computer': 'Folder na tym komputerze',
+  'Naam van deze verbinding': 'Nazwa tego połączenia',
+  'Nog geen verbinding — voeg er hieronder een toe.':
+      'Brak połączeń — dodaj jedno poniżej.',
+  'Sleep om de volgorde te wijzigen': 'Przeciągnij, aby zmienić kolejność',
+  'Verbinding toevoegen': 'Dodaj połączenie',
+  'Verbinding verwijderen': 'Usuń połączenie',
+  'WebDAV-server': 'Serwer WebDAV',
   'Iemand anders heeft dit bestand gewijzigd': 'Ktoś inny zmienił ten plik',
   'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
       'Wersja na serwerze zmieniła się od czasu otwarcia tej prezentacji. Nadpisanie usunie pracę drugiej osoby.',

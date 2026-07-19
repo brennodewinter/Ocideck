@@ -1785,6 +1785,25 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Bestandsverbindingen': 'Dateiverbindige',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'D Ort, wo du dini Präsentatione ufbewahrsch und duresuechsch — Ordner uf dem Computer, WebDAV-Server und git-Repositories durenand. Zieh si i d Reihefolg, wo du wotsch: s oberschte vo jeder Art gilt als Standard.',
+  'Een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Es git-Repository; jedi gspeicherti Version blibt erhalte.',
+  'Een map op de schijf van deze computer.':
+      'En Ordner uf de Platte vo dem Computer.',
+  'Een map op een WebDAV-server, bijvoorbeeld Nextcloud.':
+      'En Ordner uf eme WebDAV-Server, zum Bispil Nextcloud.',
+  'Instellingen tonen': 'Istellige zeige',
+  'Instellingen verbergen': 'Istellige verstecke',
+  'Map op deze computer': 'Ordner uf dem Computer',
+  'Naam van deze verbinding': 'Name vo dere Verbindig',
+  'Nog geen verbinding — voeg er hieronder een toe.':
+      'Nonig kei Verbindig — füeg unde eini zue.',
+  'Sleep om de volgorde te wijzigen': 'Zieh, zum d Reihefolg z ändere',
+  'Verbinding toevoegen': 'Verbindig zuefüege',
+  'Verbinding verwijderen': 'Verbindig entferne',
+  'WebDAV-server': 'WebDAV-Server',
   'Iemand anders heeft dit bestand gewijzigd':
       'Öpper anders hät die Datei gänderet',
   'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':

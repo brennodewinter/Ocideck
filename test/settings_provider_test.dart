@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart' show TlpLevel;
 import 'package:ocideck/models/settings.dart';
+import 'package:ocideck/models/storage_connection.dart';
 import 'package:ocideck/state/settings_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -482,11 +483,12 @@ void main() {
       await n.addLibrary('Privé kopie', '/home/prive');
       expect(n.state.libraries.length, 2);
 
-      await n.updateLibrary(1, name: 'Kantoor');
+      final werk = n.state.connections[1] as LocalConnection;
+      await n.updateConnection(werk.copyWith(name: 'Kantoor'));
       expect(n.state.libraries[1].name, 'Kantoor');
       expect(n.state.libraries[1].path, '/home/werk');
 
-      await n.removeLibrary(0);
+      await n.removeConnection(n.state.connections.first.id);
       expect(n.state.libraryPaths, ['/home/werk']);
 
       // Persistentie: een verse notifier op dezelfde prefs leest de lijst terug.

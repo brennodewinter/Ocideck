@@ -1799,6 +1799,24 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Bestandsverbindingen': 'Файлові з\'єднання',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Місця, де ви зберігаєте та шукаєте презентації — теки на цьому комп\'ютері, сервери WebDAV і git-репозиторії разом. Перетягніть їх у потрібному порядку: найвищий у кожному виді є типовим.',
+  'Een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Git-репозиторій; кожна збережена версія залишається.',
+  'Een map op de schijf van deze computer.': 'Тека на диску цього комп\'ютера.',
+  'Een map op een WebDAV-server, bijvoorbeeld Nextcloud.':
+      'Тека на сервері WebDAV, наприклад Nextcloud.',
+  'Instellingen tonen': 'Показати налаштування',
+  'Instellingen verbergen': 'Сховати налаштування',
+  'Map op deze computer': 'Тека на цьому комп\'ютері',
+  'Naam van deze verbinding': 'Назва цього з\'єднання',
+  'Nog geen verbinding — voeg er hieronder een toe.':
+      'Ще немає з\'єднань — додайте одне нижче.',
+  'Sleep om de volgorde te wijzigen': 'Перетягніть, щоб змінити порядок',
+  'Verbinding toevoegen': 'Додати з\'єднання',
+  'Verbinding verwijderen': 'Видалити з\'єднання',
+  'WebDAV-server': 'Сервер WebDAV',
   'Iemand anders heeft dit bestand gewijzigd': 'Хтось інший змінив цей файл',
   'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
       'Версія на сервері змінилася відтоді, як ви відкрили цю презентацію. Перезапис скасує роботу іншої людини.',

@@ -1789,6 +1789,24 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Bestandsverbindingen': 'Failų jungtys',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Vietos, kuriose laikote ir ieškote pristatymų — aplankai šiame kompiuteryje, WebDAV serveriai ir git saugyklos kartu. Vilkite jas norima tvarka: viršutinė kiekvienos rūšies laikoma numatytąja.',
+  'Een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Git saugykla; kiekviena įrašyta versija išsaugoma.',
+  'Een map op de schijf van deze computer.': 'Aplankas šio kompiuterio diske.',
+  'Een map op een WebDAV-server, bijvoorbeeld Nextcloud.':
+      'Aplankas WebDAV serveryje, pavyzdžiui, Nextcloud.',
+  'Instellingen tonen': 'Rodyti nustatymus',
+  'Instellingen verbergen': 'Slėpti nustatymus',
+  'Map op deze computer': 'Aplankas šiame kompiuteryje',
+  'Naam van deze verbinding': 'Šios jungties pavadinimas',
+  'Nog geen verbinding — voeg er hieronder een toe.':
+      'Kol kas nėra jungčių — pridėkite žemiau.',
+  'Sleep om de volgorde te wijzigen': 'Vilkite, kad pakeistumėte tvarką',
+  'Verbinding toevoegen': 'Pridėti jungtį',
+  'Verbinding verwijderen': 'Šalinti jungtį',
+  'WebDAV-server': 'WebDAV serveris',
   'Iemand anders heeft dit bestand gewijzigd': 'Kažkas kitas pakeitė šį failą',
   'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
       'Serveryje esanti versija pasikeitė nuo tada, kai atvėrėte šią pateiktį. Perrašymas panaikins kito žmogaus darbą.',
