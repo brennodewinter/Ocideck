@@ -23,7 +23,8 @@ Setting up a proper development environment is crucial for contributing to OciDe
 
 - **Flutter**: Version 3.44.6 (stable)
 - **Dart**: Version 3.12.2
-- **Git**: Version 2.19 or newer
+- **Git**: any recent version. (The *app's* git integration requires 2.19+, see
+  `kMinGitVersion`; that is a runtime requirement, not a build one.)
 - **Xcode Command Line Tools** (macOS only)  
 - **Visual Studio with C++ workload** (Windows only)
 - **Linux Build Dependencies**: GTK, clang, ninja, etc.
@@ -165,9 +166,9 @@ Create `.vscode/launch.json` for debugging:
 
 ### Development Build Variants
 
-The project supports different build variants:
-- **Development**: Debug builds with full logging
-- **Release**: Optimized builds for production use  
+These are Flutter's stock modes, not project-specific variants:
+- **Development**: Debug builds
+- **Release**: Optimized builds, what `make build-*` produces
 - **Profile**: Builds with performance profiling enabled
 
 ## Testing Setup
@@ -231,7 +232,7 @@ The build system uses:
 
 Recommended workflow patterns:
 1. **Feature branches**: Create from main for new features
-2. **Bug fixes**: Branch from latest stable release 
+2. **Bug fixes**: Branch from `main` — there is no released version to branch from
 3. **Documentation**: Separate branch if substantial changes needed
 
 ### Code Quality Standards
@@ -248,7 +249,7 @@ The development workflow enforces:
 1. **Commit Messages**: Follow conventional commit format
 2. **Branch Naming**: Use descriptive names per contributing guidelines
 3. **Pull Requests**: Include detailed descriptions and test plans
-4. **Code Reviews**: All changes require at least one review before merging
+4. **Code Reviews**: Aimed for on every change, but not enforced by the repository
 
 ## Troubleshooting Common Issues
 
@@ -294,19 +295,19 @@ The development workflow enforces:
 
 ### Custom Build Flags
 
-Some advanced scenarios may require custom configurations:
-- Debug logging flags  
-- Feature toggle settings
-- Performance measurement instrumentation
+There are none. OciDeck has no debug-logging flag, no feature-toggle system and
+no performance instrumentation to switch on — the build is what the Makefile
+targets produce.
 
-### Plugin Development
+### Vendored plugin forks
 
-For developing plugin extensions:
-1. Create separate package with appropriate pubspec structure
-2. Reference via path dependencies or published packages  
-3. Follow existing code patterns and architecture guidelines
+OciDeck has no plugin or extension mechanism — nothing loads third-party code at
+runtime. What `third_party/` contains is something else: forks of two Flutter
+plugins (`screen_retriever_macos`, `desktop_multi_window`) pinned through
+`dependency_overrides` in `pubspec.yaml`. Change one and you rebuild the app;
+there is no separate package to publish.
 
-## Community and Support Resources
+## Tooling and support
 
 ### Development Tools
 
@@ -320,4 +321,6 @@ Recommended tools for development:
 
 Refer to the contributing guidelines document for complete contribution workflow.
 
-This setup guide should enable you to fully develop and test OciDeck locally. If issues persist after following these steps, please consult the troubleshooting documentation or contact project maintainers.
+This setup guide should enable you to fully develop and test OciDeck locally. If
+issues persist, see [TROUBLESHOOTING_GUIDE.md](TROUBLESHOOTING_GUIDE.md) or open
+an issue in the Forgejo tracker — that is the only contact channel.

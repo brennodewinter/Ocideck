@@ -1811,6 +1811,24 @@ const _dutchSourceAddHu = <String, String>{
   'IP-adres': 'IP-cím',
   'machineleesbare zone van een paspoort of ID':
       'útlevél vagy személyazonosító igazolvány géppel olvasható zónája',
+  'Sla de presentatie op om een kopie te maken.':
+      'Mentse a bemutatót, hogy másolat készüljön.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': a bemutatón kívül van, és nem utazik vele (',
+  'Bestand niet gevonden': 'A fájl nem található',
+  'Weg na herladen': 'Újratöltés után eltűnt',
+  'Nog niet opgeslagen': 'Még nincs mentve',
+  'Buiten de presentatie': 'A bemutatón kívül',
+  'Van internet': 'Az internetről',
+  'Alleen in deze sessie': 'Csak ebben a munkamenetben',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'Ezt a fájlt már lemásoltuk, biztonságban van. A bemutató mappájában akkor kapja meg a helyét, amint ment.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'Ez a fájl a bemutató mappáján kívül van, és nem utazik vele. Aki megkapja Öntől a bemutatót, itt semmit sem lát. Mentsen, hogy másolat készüljön.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'Ez a fájl az interneten van, és nem tartozik a bemutatóhoz. Kapcsolat nélkül, vagy ha a forrás eltűnik, nincs többé.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'A webes változatban ez a fájl csak ennek a munkamenetnek a memóriájában marad. Az oldal újratöltése után nincs többé.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Nyiss meg és tárolj bemutatókat S3 tárolóban: AWS S3, vagy S3-kompatibilis szolgáltatás, például saját MinIO. A titkos hozzáférési kulcs titkosítva a kulcstartóban tárolódik, nem a többi beállítás mellett.',
   'Openen vanuit S3': 'Megnyitás S3-ból',

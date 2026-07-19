@@ -1837,6 +1837,24 @@ const _dutchSourceAddPt = <String, String>{
   'IP-adres': 'endereço IP',
   'machineleesbare zone van een paspoort of ID':
       'zona de leitura ótica de um passaporte ou documento de identidade',
+  'Sla de presentatie op om een kopie te maken.':
+      'Guarde a apresentação para criar uma cópia.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': está fora da apresentação e não segue com ela (',
+  'Bestand niet gevonden': 'Ficheiro não encontrado',
+  'Weg na herladen': 'Perdido após recarregar',
+  'Nog niet opgeslagen': 'Ainda não guardado',
+  'Buiten de presentatie': 'Fora da apresentação',
+  'Van internet': 'Da internet',
+  'Alleen in deze sessie': 'Apenas nesta sessão',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'Este ficheiro já foi copiado e está seguro. Ocupará o seu lugar na pasta da apresentação assim que guardar.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'Este ficheiro está fora da pasta da apresentação e não segue com ela. Quem receber a apresentação de si não verá nada aqui. Guarde para criar uma cópia.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'Este ficheiro está na internet e não faz parte da apresentação. Sem ligação, ou se a fonte desaparecer, deixa de existir.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'Na versão web este ficheiro fica apenas na memória desta sessão. Depois de recarregar a página, deixa de existir.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Abre e guarda apresentações num bucket S3: AWS S3, ou um serviço compatível com S3 como um MinIO próprio. A chave de acesso secreta é guardada cifrada no porta-chaves, não junto das restantes definições.',
   'Openen vanuit S3': 'Abrir a partir do S3',

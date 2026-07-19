@@ -3,11 +3,40 @@
 All notable changes to OciDeck are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and the project aims to follow [Semantic Versioning](https://semver.org/).
+and the project aims to follow [Semantic Versioning](https://semver.org/) once it
+starts tagging releases. It has not yet: everything below is unreleased work on
+`main`.
 
 ## [Unreleased]
 
 ### Added
+- **Afbeeldingen en media gaan nu écht mee met de presentatie — en je ziet
+  wanneer dat níet zo is.** Je kunt er niet van uitgaan dat de ontvanger
+  dezelfde schijven, netwerkmappen of rechten heeft als jij. Een verwijzing naar
+  een bestand elders werkt bij de maker prima en is bij de ontvanger een gat.
+
+  Slepen en de afbeeldingenbibliotheek zetten tot nu toe een absoluut pad in de
+  slide en vertrouwden erop dat de kopieerslag bij opslaan het wel zou
+  rechttrekken. Beide nemen het bestand nu meteen over. En een deck dat nog niet
+  is opgeslagen heeft geen eigen map, dus kopieerde er tot nu toe niets:
+  verplaatste je het bronbestand vóór de eerste opslag, dan was de verwijzing
+  stuk. Zulke media gaan nu naar een tijdelijke stagingmap met dezelfde indeling
+  als een echt project, waarna opslaan ze op hun definitieve plek zet.
+
+  Naast het pad in de editor staat een badge die zegt wat er gebeurt als je de
+  presentatie doorgeeft: *Nog niet opgeslagen* (gekopieerd en veilig, alleen nog
+  niet definitief), *Buiten de presentatie* (gaat niet mee), *Van internet*, of
+  *Alleen in deze sessie*. Het kwaliteitspaneel geeft hetzelfde deck-breed, zodat
+  je niet slide voor slide hoeft te controleren.
+
+  Verder: de placeholder zegt nu wát er mis is — *Bestand niet gevonden*,
+  *Buiten de presentatie*, *Weg na herladen* — in plaats van vier verschillende
+  situaties met hetzelfde grijze vlak af te doen; de controle op ontbrekende
+  media zweeg juist bij een niet-opgeslagen deck en doet dat niet meer; gesleepte
+  bestanden worden net als gekozen bestanden op magic bytes gecontroleerd; en
+  twee verschillende afbeeldingen die allebei `screenshot.png` heten worden niet
+  langer stilzwijgend één.
+
 - **S3 als opslagplek, naast lokale mappen, WebDAV en git.** Daarmee wordt zo
   ongeveer alles gedekt wat je in de praktijk tegenkomt: naast AWS S3 werkt
   elke S3-compatible dienst — een eigen MinIO, Ceph, Wasabi, Scaleway,
@@ -2532,15 +2561,18 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   just copy-to-clipboard, so a project-internal symlink pointing outside the
   project can't be rendered into an export.
 
-## [1.0.0]
+## Initial development
+
+This section was headed `[1.0.0]` and linked to a release tag that does not
+exist. Nothing has ever been tagged or released; the entry is kept because it
+records what the first working version could do, but it is not a version.
 
 ### Added
-- Initial release: structured, slide-by-slide editor for Marp presentations with
+- Initial feature set: structured, slide-by-slide editor for Marp presentations with
   typed slide templates, live preview, fullscreen presenter, deck-wide TLP
   marking, media handling, import, and export to Marp Markdown, PDF, PPTX, and
   self-contained HTML. Decks save as a self-contained project/package with copied
   assets. Localized in Dutch, English, Italian, German, French, Spanish, Frisian,
   and Papiamento.
 
-[Unreleased]: https://pawprint.vigilis.online/LibreKAT/Ocideck/compare/v1.0.0...HEAD
-[1.0.0]: https://pawprint.vigilis.online/LibreKAT/Ocideck/releases/tag/v1.0.0
+[Unreleased]: https://pawprint.vigilis.online/LibreKAT/Ocideck/commits/branch/main

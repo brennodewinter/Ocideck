@@ -177,7 +177,7 @@ class PrivacyProjection {
       final active = external || disposition == PrivacyDisposition.redact;
       final byFragment = _byFragment(scan.forSlide(i), active: active);
 
-      final projected = _projectSlide(slide, byFragment);
+      final projected = _projectSlide(slide, byFragment, active: active);
       count += projected.count;
       // De effectieve stand wordt op de geprojecteerde slide gezet. Zo reist het
       // shield mee mét de slide en kan geen renderoppervlak hem vergeten — een
@@ -241,8 +241,9 @@ class PrivacyProjection {
   /// oppervlak dat de gegevens niet kán zien, mag ze ook niet terugschrijven.
   static ({Slide slide, int count}) _projectSlide(
     Slide slide,
-    Map<String, List<_Range>> byFragment,
-  ) {
+    Map<String, List<_Range>> byFragment, {
+    required bool active,
+  }) {
     var count = 0;
 
     String field(String name, String text, [int index = 0]) {
@@ -285,9 +286,65 @@ class PrivacyProjection {
       ],
     );
 
+    final withMedia = _projectMedia(projected, active: active);
+    count += withMedia.count;
+
     return (
-      slide: count > 0 ? projected.copyWith(tableEditable: false) : projected,
+      slide: count > 0
+          ? withMedia.slide.copyWith(tableEditable: false)
+          : withMedia.slide,
       count: count,
+    );
+  }
+
+  /// Haalt afbeeldingen, video en audio weg op een slide die geredigeerd wordt.
+  ///
+  /// ── Waarom álle media, en niet alleen de gedetecteerde gezichten ──
+  ///
+  /// Omdat we niet in een afbeelding kunnen kijken. De beeldcontrole vindt
+  /// *gezichten*, en mist er aantoonbaar: iemand van achteren, in profiel, met
+  /// het hoofd buiten de uitsnede. Ze leest bovendien geen HEIC — de
+  /// iPhone-standaard — en ze leest helemaal geen tekst in beeld, dus een
+  /// gefotografeerd formulier met een BSN erop ziet ze niet. En de gebruiker mag
+  /// haar uitzetten.
+  ///
+  /// Alleen de gedetecteerde gezichten wegnemen zou dus een afbeelding opleveren
+  /// die eruitziet alsof ze is afgehandeld, met een gemist gezicht er nog op. Dat
+  /// is exact de fout die deze code elders al één keer heeft gemaakt: een zwart
+  /// blok dat niets verbergt en de ontvanger laat denken dat het goed zit.
+  ///
+  /// De afweging staat al in [statementSpan] en geldt hier onverkort: *te ruim
+  /// redigeren is hinderlijk, te krap redigeren is een lek*. Een logo dat op een
+  /// geredigeerde slide meesneuvelt is hinderlijk. Een gemist gezicht niet.
+  ///
+  /// Let op het verschil met de scanner, die mediapaden wél meldt maar niet
+  /// redigeert: dáár gaat het om een gebruikersnaam ín het pad, en een pad met
+  /// blokjes erin is een kapotte verwijzing. Hier wíssen we de verwijzing, en dat
+  /// levert de bestaande placeholder op — een zichtbaar vak, zodat de ontvanger
+  /// ziet dát er iets weg is.
+  ///
+  /// De bron blijft ongemoeid: dit raakt alleen wat getoond en geëxporteerd
+  /// wordt. Het bestand op schijf houdt zijn afbeelding.
+  static ({Slide slide, int count}) _projectMedia(
+    Slide slide, {
+    required bool active,
+  }) {
+    if (!active) return (slide: slide, count: 0);
+    final present = [
+      slide.imagePath,
+      slide.imagePath2,
+      slide.videoPath,
+      slide.audioPath,
+    ].where((p) => p.isNotEmpty).length;
+    if (present == 0) return (slide: slide, count: 0);
+    return (
+      slide: slide.copyWith(
+        imagePath: '',
+        imagePath2: '',
+        videoPath: '',
+        audioPath: '',
+      ),
+      count: present,
     );
   }
 

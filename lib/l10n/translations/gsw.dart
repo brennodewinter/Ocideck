@@ -1811,6 +1811,24 @@ const _dutchSourceAddGsw = <String, String>{
   'IP-adres': 'IP-Adrässe',
   'machineleesbare zone van een paspoort of ID':
       'maschineläsbari Zone vun eme Pass oder Uswiis',
+  'Sla de presentatie op om een kopie te maken.':
+      'Spichered Sie d Präsentation, zum e Kopie z mache.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': liit usserhalb vo de Präsentation und chunnt nid mit (',
+  'Bestand niet gevonden': 'Datei nid gfunde',
+  'Weg na herladen': 'Nach em Neu-Lade wäg',
+  'Nog niet opgeslagen': 'Nonig gspicheret',
+  'Buiten de presentatie': 'Usserhalb vo de Präsentation',
+  'Van internet': 'Us em Internet',
+  'Alleen in deze sessie': 'Nume i dere Sitzig',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'Die Datei isch scho kopiert und isch sicher. Si chunnt i de Präsentationsordner, sobald Sie spichered.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'Die Datei liit usserhalb vom Präsentationsordner und chunnt nid mit. Wer d Präsentation vo Ihne überchunnt, gseht da nüt. Spichered Sie, zum e Kopie z mache.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'Die Datei liit im Internet und ghört nid zur Präsentation. Ohni Verbindig, oder wenn d Quelle verschwindet, isch si furt.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'I de Web-Version bliibt die Datei nume im Spiicher vo dere Sitzig. Nach em Neu-Lade vo de Siite isch si furt.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Mach Präsentatione i eme S3-Bucket uuf und bewahr sie det uf: AWS S3, oder en S3-kompatible Dienscht wie es eigets MinIO. De gheimi Zuegriffsschlüssel wird verschlüsslet im Schlüsselbund abgleit, nöd bi de andere Iistellige.',
   'Openen vanuit S3': 'Us S3 uufmache',

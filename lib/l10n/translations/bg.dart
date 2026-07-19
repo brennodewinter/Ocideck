@@ -1830,6 +1830,24 @@ const _dutchSourceAddBg = <String, String>{
   'IP-adres': 'IP адрес',
   'machineleesbare zone van een paspoort of ID':
       'машинночетима зона на паспорт или лична карта',
+  'Sla de presentatie op om een kopie te maken.':
+      'Запазете презентацията, за да се направи копие.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': е извън презентацията и не пътува с нея (',
+  'Bestand niet gevonden': 'Файлът не е намерен',
+  'Weg na herladen': 'Изчезна след презареждане',
+  'Nog niet opgeslagen': 'Още не е запазено',
+  'Buiten de presentatie': 'Извън презентацията',
+  'Van internet': 'От интернет',
+  'Alleen in deze sessie': 'Само в тази сесия',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'Този файл вече е копиран и е на сигурно място. Ще получи мястото си в папката на презентацията веднага щом запазите.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'Този файл е извън папката на презентацията и не пътува с нея. Който получи презентацията от вас, няма да види нищо тук. Запазете, за да се направи копие.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'Този файл се намира в интернет и не принадлежи към презентацията. Без връзка или ако източникът изчезне, го няма.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'В уеб версията този файл остава само в паметта на тази сесия. След презареждане на страницата го няма.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Отваряйте и съхранявайте презентации в S3 контейнер: AWS S3 или съвместима с S3 услуга като собствен MinIO. Тайният ключ за достъп се пази шифрован в ключодържателя, а не при останалите настройки.',
   'Openen vanuit S3': 'Отваряне от S3',

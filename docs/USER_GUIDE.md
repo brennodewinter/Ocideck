@@ -630,6 +630,38 @@ The rail on the left lists every slide as a thumbnail.
   land where you are working. Bulk actions (delete, skip, copy to another deck)
   apply to the whole selection.
 
+## Images and media travel with the presentation
+
+You cannot assume that whoever receives your presentation has the same drives,
+network shares or permissions as you. So whenever you insert a picture, video or
+audio file — through the file picker, by pasting, by dragging it onto the app, or
+by choosing it from the image library — OciDeck **copies** it into the
+presentation's own folder instead of pointing at wherever it happened to live.
+
+If the presentation has not been saved yet there is no such folder, so the copy
+goes to a temporary staging area with the same layout; saving moves it to its
+final place. Either way the file is safe from the moment you insert it: moving or
+renaming the original afterwards no longer breaks the slide.
+
+Next to the file path in the editor a **badge** tells you what will happen when
+you pass the presentation on. It stays quiet for material that simply travels
+along, and speaks up otherwise:
+
+| Badge | What it means |
+| --- | --- |
+| **Not yet saved** | Copied and safe; it gets its place in the presentation folder as soon as you save. Nothing to fix. |
+| **Outside the presentation** | The file lies outside the presentation folder and will *not* travel with it. Save to make a copy. |
+| **From the internet** | The file lives online and is not part of the presentation. Without a connection, or if the source disappears, it is gone. |
+| **Only in this session** | Web version only: the file lives in browser memory and is gone after a page reload. |
+
+The badge shows the slide you are on. For a deck-wide view, the quality panel
+lists every asset that lies outside the presentation, alongside files that are
+missing altogether.
+
+When a slide cannot show its picture, the placeholder says why — *File not
+found*, *Outside the presentation*, *Gone after reload* — rather than leaving an
+anonymous grey box.
+
 ## Image library
 
 Image fields open a library that shows every image found in the deck's

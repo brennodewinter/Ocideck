@@ -1809,6 +1809,24 @@ const _dutchSourceAddSl = <String, String>{
   'IP-adres': 'naslov IP',
   'machineleesbare zone van een paspoort of ID':
       'strojno berljivo območje potnega lista ali osebne izkaznice',
+  'Sla de presentatie op om een kopie te maken.':
+      'Shranite predstavitev, da nastane kopija.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': je zunaj predstavitve in ne potuje z njo (',
+  'Bestand niet gevonden': 'Datoteke ni mogoče najti',
+  'Weg na herladen': 'Izgubljeno po ponovnem nalaganju',
+  'Nog niet opgeslagen': 'Še ni shranjeno',
+  'Buiten de presentatie': 'Zunaj predstavitve',
+  'Van internet': 'Iz interneta',
+  'Alleen in deze sessie': 'Samo v tej seji',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'Ta datoteka je že kopirana in je na varnem. Svoje mesto v mapi predstavitve dobi takoj, ko shranite.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'Ta datoteka je zunaj mape predstavitve in ne potuje z njo. Kdor dobi predstavitev od vas, tu ne bo videl ničesar. Shranite, da nastane kopija.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'Ta datoteka je na internetu in ne sodi k predstavitvi. Brez povezave ali če vir izgine, je ni več.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'V spletni različici ta datoteka ostane samo v pomnilniku te seje. Po ponovnem nalaganju strani je ni več.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Odpiraj in hrani predstavitve v vedru S3: AWS S3 ali storitev, združljiva s S3, na primer lasten MinIO. Skrivni ključ za dostop se hrani šifriran v zbirki ključev, ne pri drugih nastavitvah.',
   'Openen vanuit S3': 'Odpri iz S3',

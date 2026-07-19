@@ -1835,6 +1835,24 @@ const _dutchSourceAddEl = <String, String>{
   'IP-adres': 'διεύθυνση IP',
   'machineleesbare zone van een paspoort of ID':
       'μηχανικά αναγνώσιμη ζώνη διαβατηρίου ή ταυτότητας',
+  'Sla de presentatie op om een kopie te maken.':
+      'Αποθηκεύστε την παρουσίαση για να δημιουργηθεί αντίγραφο.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': βρίσκεται εκτός της παρουσίασης και δεν ταξιδεύει μαζί της (',
+  'Bestand niet gevonden': 'Το αρχείο δεν βρέθηκε',
+  'Weg na herladen': 'Χάθηκε μετά την επαναφόρτωση',
+  'Nog niet opgeslagen': 'Δεν αποθηκεύτηκε ακόμη',
+  'Buiten de presentatie': 'Εκτός της παρουσίασης',
+  'Van internet': 'Από το διαδίκτυο',
+  'Alleen in deze sessie': 'Μόνο σε αυτήν τη συνεδρία',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'Αυτό το αρχείο έχει ήδη αντιγραφεί και είναι ασφαλές. Θα πάρει τη θέση του στον φάκελο της παρουσίασης μόλις αποθηκεύσετε.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'Αυτό το αρχείο βρίσκεται εκτός του φακέλου της παρουσίασης και δεν ταξιδεύει μαζί της. Όποιος λάβει την παρουσίαση από εσάς δεν θα δει τίποτα εδώ. Αποθηκεύστε για να δημιουργηθεί αντίγραφο.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'Αυτό το αρχείο βρίσκεται στο διαδίκτυο και δεν ανήκει στην παρουσίαση. Χωρίς σύνδεση, ή αν χαθεί η πηγή, δεν υπάρχει πια.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'Στην έκδοση web αυτό το αρχείο μένει μόνο στη μνήμη αυτής της συνεδρίας. Μετά την επαναφόρτωση της σελίδας δεν υπάρχει πια.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Άνοιγε και φύλαγε παρουσιάσεις σε κάδο S3: AWS S3 ή υπηρεσία συμβατή με S3 όπως δικός σου MinIO. Το μυστικό κλειδί πρόσβασης φυλάσσεται κρυπτογραφημένο στο μπρελόκ, όχι μαζί με τις άλλες ρυθμίσεις.',
   'Openen vanuit S3': 'Άνοιγμα από S3',

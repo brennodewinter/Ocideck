@@ -970,9 +970,12 @@ class PrivacyScanner {
     // verraadt gewoon een naam, en dat pad reist mee in de markdown en dus in de
     // HTML-export.
     //
-    // Let op: `_projectSlide` in de projectie kent deze velden NIET, en dat is
-    // met opzet. Een geredigeerd pad is een kapotte afbeelding. We melden het,
-    // we redigeren het niet — de auteur hernoemt het bestand of verplaatst het.
+    // De projectie lakt hier geen tekens in weg — een pad met blokjes erin is
+    // een kapotte verwijzing, en de auteur hernoemt het bestand of verplaatst
+    // het. Maar op een slide die op `redact` staat verdwijnt de hele
+    // mediaverwijzing (zie `_projectMedia`), dus dáár komt het pad ook niet meer
+    // in de export terecht. Dat was eerder wél zo, en dan reisde een
+    // gedetecteerde `/Users/jan.jansen/…` gewoon mee.
     yield (field: 'imagePath', index: 0, text: slide.imagePath);
     yield (field: 'imagePath2', index: 0, text: slide.imagePath2);
     yield (field: 'videoPath', index: 0, text: slide.videoPath);

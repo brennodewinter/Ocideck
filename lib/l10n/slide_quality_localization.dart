@@ -332,6 +332,10 @@ String formatSlideQualityIssue(AppLocalizations l10n, SlideQualityIssue issue) {
     SlideQualityIssueKind.missingMediaFile =>
       '${label('label')}${l10n.d(': bestand niet gevonden (')}'
           '${issue.args['path'] ?? ''}).',
+    SlideQualityIssueKind.externalMediaFile =>
+      '${label('label')}${l10n.d(': ligt buiten de presentatie en gaat niet mee (')}'
+          '${issue.args['path'] ?? ''}). '
+          '${l10n.d('Sla de presentatie op om een kopie te maken.')}',
     SlideQualityIssueKind.questionNotAnswerable => l10n.d(
       'Vraag is niet speelbaar: geef minstens één goed én één fout antwoord op.',
     ),

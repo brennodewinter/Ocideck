@@ -765,6 +765,24 @@ const _dutchSourceAddDe = {
   'IP-adres': 'IP-Adresse',
   'machineleesbare zone van een paspoort of ID':
       'maschinenlesbare Zone eines Passes oder Ausweises',
+  'Sla de presentatie op om een kopie te maken.':
+      'Speichern Sie die Präsentation, um eine Kopie anzulegen.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': liegt außerhalb der Präsentation und wandert nicht mit (',
+  'Bestand niet gevonden': 'Datei nicht gefunden',
+  'Weg na herladen': 'Nach dem Neuladen weg',
+  'Nog niet opgeslagen': 'Noch nicht gespeichert',
+  'Buiten de presentatie': 'Außerhalb der Präsentation',
+  'Van internet': 'Aus dem Internet',
+  'Alleen in deze sessie': 'Nur in dieser Sitzung',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'Diese Datei wurde bereits kopiert und ist sicher. Sie erhält ihren Platz im Präsentationsordner, sobald Sie speichern.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'Diese Datei liegt außerhalb des Präsentationsordners und wandert nicht mit. Wer die Präsentation von Ihnen bekommt, sieht hier nichts. Speichern Sie, um eine Kopie anzulegen.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'Diese Datei liegt im Internet und gehört nicht zur Präsentation. Ohne Verbindung, oder wenn die Quelle verschwindet, ist sie weg.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'In der Web-Version bleibt diese Datei nur im Speicher dieser Sitzung. Nach dem Neuladen der Seite ist sie weg.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Öffne und bewahre Präsentationen in einem S3-Bucket: AWS S3 oder ein S3-kompatibler Dienst wie ein eigenes MinIO. Der geheime Zugriffsschlüssel wird verschlüsselt im Schlüsselbund abgelegt, nicht bei den übrigen Einstellungen.',
   'Openen vanuit S3': 'Aus S3 öffnen',

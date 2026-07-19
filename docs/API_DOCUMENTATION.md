@@ -63,8 +63,8 @@ String generateDeck(Deck deck, {
 Deck? parseDeck(String markdown, {String? filePath});
 ```
 
-Structural pre-flight validation is a separate class,
-`MarkdownValidator.validate(String markdown)` in
+Structural pre-flight validation is a separate class; `validate` is an instance
+method, `MarkdownValidationResult validate(String markdown)`, in
 `lib/services/markdown_validator.dart`, which returns a `MarkdownValidationResult`
 (`lib/models/markdown_validation.dart`).
 
@@ -104,8 +104,9 @@ Export-time gating (does this audience deck satisfy the export policy?) lives in
 `lib/models/privacy_disposition.dart`.
 
 ### Git Integration API
-`lib/services/git/git_forge.dart` — `GitForge` is the abstract forge adapter
-(REST implementation `GiteaForge`, covering Gitea/Forgejo and GitLab):
+`lib/services/git/git_forge.dart` — `GitForge` is the abstract forge adapter.
+There are three REST implementations: `GiteaForge` (Forgejo and Gitea),
+`GitlabForge` (gitlab.com and self-hosted) and `GithubForge`:
 
 ```dart
 Future<List<RepoEntry>> listTree(String ref, String path, {bool recursive});
@@ -140,8 +141,8 @@ StateNotifier<AppSettings>` handles application configuration:
 Future<void> saveThemeProfile(ThemeProfile profile, { /* … */ });
 
 // Classification is set through granular setters, not one policy object:
-void setRequireClassificationOnExport(bool value);
-void setClassificationWatermarkEnabled(bool value);
+Future<void> setRequireClassificationOnExport(bool enabled);
+Future<void> setClassificationWatermarkEnabled(bool enabled);
 ```
 
 The `ClassificationEnforcementPolicy` used at export time is **built** from the

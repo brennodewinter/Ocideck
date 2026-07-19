@@ -1806,6 +1806,24 @@ const _dutchSourceAddFi = <String, String>{
   'IP-adres': 'IP-osoite',
   'machineleesbare zone van een paspoort of ID':
       'passin tai henkilökortin koneluettava alue',
+  'Sla de presentatie op om een kopie te maken.':
+      'Tallenna esitys, niin siitä tehdään kopio.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': on esityksen ulkopuolella eikä kulje mukana (',
+  'Bestand niet gevonden': 'Tiedostoa ei löydy',
+  'Weg na herladen': 'Poissa uudelleenlatauksen jälkeen',
+  'Nog niet opgeslagen': 'Ei vielä tallennettu',
+  'Buiten de presentatie': 'Esityksen ulkopuolella',
+  'Van internet': 'Internetistä',
+  'Alleen in deze sessie': 'Vain tässä istunnossa',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'Tämä tiedosto on jo kopioitu ja on turvassa. Se saa paikkansa esityskansiossa heti kun tallennat.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'Tämä tiedosto on esityskansion ulkopuolella eikä kulje mukana. Se, joka saa esityksen sinulta, ei näe tässä mitään. Tallenna, niin siitä tehdään kopio.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'Tämä tiedosto on internetissä eikä kuulu esitykseen. Ilman yhteyttä, tai jos lähde katoaa, se on poissa.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'Verkkoversiossa tämä tiedosto säilyy vain tämän istunnon muistissa. Sivun uudelleenlatauksen jälkeen se on poissa.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Avaa ja säilytä esityksiä S3-säilössä: AWS S3 tai S3-yhteensopiva palvelu, kuten oma MinIO. Salainen käyttöavain säilytetään salattuna avainnipussa, ei muiden asetusten seassa.',
   'Openen vanuit S3': 'Avaa S3:sta',

@@ -764,6 +764,24 @@ const _dutchSourceAddPap = {
   'IP-adres': 'adres IP',
   'machineleesbare zone van een paspoort of ID':
       'zona lesibel pa mashin di un pasaporte òf ID',
+  'Sla de presentatie op om een kopie te maken.':
+      'Warda e presentashon pa traha un kopia.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': ta pafó di e presentashon i no ta bai huntu (',
+  'Bestand niet gevonden': 'Archivo no hañá',
+  'Weg na herladen': 'Pèrdí despues di karga di nobo',
+  'Nog niet opgeslagen': 'Ainda no wardá',
+  'Buiten de presentatie': 'Pafó di e presentashon',
+  'Van internet': 'For di internet',
+  'Alleen in deze sessie': 'Solamente den e seshon aki',
+  'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.':
+      'E archivo aki a wòrdu kopiá kaba i ta será. E ta haña su lugá den e karpeta di presentashon ora bo warda.',
+  'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.':
+      'E archivo aki ta pafó di e karpeta di presentashon i no ta bai huntu. Ken risibí e presentashon for di bo lo no mira nada akinan. Warda pa traha un kopia.',
+  'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.':
+      'E archivo aki ta riba internet i no ta parti di e presentashon. Sin konekshon, of si e fuente disparsé, e ta bai.',
+  'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.':
+      'Den e vershon web e archivo aki ta keda solamente den memoria di e seshon aki. Despues di karga e página di nobo, e ta bai.',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
       'Habri i warda presentashonnan den un bucket di S3: AWS S3, of un servisio kompatibel ku S3 manera bo mes MinIO. E yabi sekreto di akseso ta wardá enkriptá den e yabero, no huntu ku e otro konfigurashonnan.',
   'Openen vanuit S3': 'Habri for di S3',

@@ -4,7 +4,10 @@ This document describes the security design principles and the concrete
 mechanisms that enforce them. Where a mechanism is implemented, the source is
 cited so the claim can be checked against the code — the code is the source of
 truth. OciDeck is pre-release (currently 0.2.0); details may change, but the
-invariants below are enforced by tests and CI gates, not just documented.
+invariants below are enforced by the local `make check` / `make check-full`
+gate, not just documented. (The CI workflows are written but no runner executes
+them — the repository lives on a Forgejo instance without one, so the local gate
+is the real one.)
 
 ## Overview
 
@@ -42,12 +45,12 @@ The web build is designed to pull **zero third-party origins** at runtime.
 - **Self-hosted engine.** `make build-web` builds with
   `--no-web-resources-cdn --csp`, so CanvasKit is served from the same origin
   (never the gstatic CDN) and the bootstrap needs no inline/eval scripts
-  (`Makefile:362-367`).
+  (`Makefile:420-425`).
 - **Bundled fonts.** The UI font is bundled and registered as `Roboto`, so the
   engine never fetches fonts from `fonts.gstatic.com`.
 - **Hardening verifier.** `tool/check_web_hardening.dart` parses the *built*
   bundle and fails the build if any invariant regresses (CSP strictness,
-  self-hosted CanvasKit, bundled font). Wired via `make check-web` and CI.
+  self-hosted CanvasKit, bundled font). Wired via `make check-web`.
 
 ## 2. Supply-chain integrity
 
@@ -70,9 +73,10 @@ The web build is designed to pull **zero third-party origins** at runtime.
   any resolved package uses an unrecognised or non-open-source license.
 - **Pinned CI Actions.** Third-party CI Actions are pinned to exact versions
   (`.github/pinned-actions.json`); `tool/check_pinned_actions.dart` reports when
-  a pin falls behind upstream. CI runs least-privilege
-  (`permissions: contents: read`, `persist-credentials: false`) and enforces a
-  reproducible dependency set (`flutter pub get --enforce-lockfile`).
+  a pin falls behind upstream. The workflows declare least-privilege
+  (`permissions: contents: read`, `persist-credentials: false`) and a
+  reproducible dependency set (`flutter pub get --enforce-lockfile`) — declared,
+  not currently executed, since no runner is attached.
 
 ## 3. Network security (NetGuard + pinned transports)
 
@@ -169,7 +173,8 @@ model.
 - **Rule families.** Contact data (`email`, `phone`, `address`/`postcode`,
   `name`), financial (`iban`, checksum-validated), Dutch `bsn` (11-proof +
   context), secrets (vendor tokens, private keys, JWTs, plaintext passwords),
-  ~30 EU national identifiers, GDPR Art. 9 special-category keywords, and
+  national identifiers for 13 EU member states plus two UK ones (15 rules in
+  total), GDPR Art. 9 special-category keywords, and
   structural leaks (user paths, tokens-in-URLs, `mailto:`/`data:` URIs).
 - **Deliberately non-NER names.** Name detection only fires behind a
   salutation/label (`dhr.`/`mevr.`/`naam:`) and stays a *possible* finding — a

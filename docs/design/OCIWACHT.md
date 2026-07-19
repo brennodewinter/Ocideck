@@ -1353,6 +1353,30 @@ Ook gemeten en daarom *niet* gebouwd: extra tussenschalen (960, 480) en
 contrastnormalisatie (CLAHE, voor tegenlicht) leverden geen enkel extra gezicht
 op. Die complexiteit is niet toegevoegd.
 
+**Redactie haalt de héle mediaverwijzing weg, niet het gedetecteerde gezicht.**
+Op een slide die op `redact` staat verdwijnen afbeeldingen, video en audio; de
+bestaande placeholder toont een zichtbaar vak, zodat de ontvanger ziet dát er iets
+weg is. De bron houdt haar afbeelding — dit raakt alleen wat getoond en
+geëxporteerd wordt.
+
+Alleen het gezicht zwart maken zou aantrekkelijker lijken, en is precies de val.
+De detector vindt *gezichten* en mist er aantoonbaar; hij leest geen HEIC, ziet
+geen tekst in beeld (een gefotografeerd formulier met een BSN erop dus niet), en de
+gebruiker mag hem uitzetten. Het resultaat zou een afbeelding zijn die eruitziet
+alsof ze is afgehandeld, met een gemist gezicht er nog op — dezelfde fout als het
+zwarte blok op "diagnose" dat niets verborg. De afweging uit `statementSpan` geldt
+onverkort: *te ruim redigeren is hinderlijk, te krap redigeren is een lek*.
+
+Dat een logo op zo'n slide meesneuvelt is de hinderlijke kant, en bewust gekozen.
+
+Dit repareerde meteen een tweede lek van dezelfde soort. `struct.user_path`
+detecteert een gebruikersnaam in een mediapad, en het ontwerp meldde die wel maar
+redigeerde hem niet — met als reden dat een pad met blokjes erin een kapotte
+verwijzing is. Klopt, maar het gevolg was dat op een `redact`-slide
+`/Users/<voornaam.achternaam>/…` letterlijk in de geëxporteerde markdown belandde:
+gedetecteerd, gemeld, en vervolgens meegeleverd. Nu verdwijnt de verwijzing als
+geheel, dus het pad kán er niet meer in staan.
+
 **Eerlijkheid in de melding.** De detector telt structureel onder en nooit over —
 hij vindt gezichten, dus iemand van achteren of met het hoofd buiten de uitsnede
 ontbreekt per definitie. De melding zegt daarom "minstens N", en spreekt van
@@ -1441,58 +1465,78 @@ gepubliceerd. Vraag de Nictiz-servicedesk **expliciet** of herdistributie binnen
 open gelicentieerde applicatie is toegestaan — "kosteloos" is niet hetzelfde als
 "herdistribueerbaar", en dat onderscheid velt ook SNOMED CT NL (§13.3).
 
-#### Bundelgrootte: geconfigureerd, winst nog ongemeten
+#### Bundelgrootte: winst die nu blijft liggen
 
-`dartcv` kent module-selectie via hooks, en die staat nu in `pubspec.yaml`:
+**Eerst een correctie op wat hier eerder stond.** De voor de hand liggende
+configuratie is `include_modules`, en die doet **niets**. Lees `gen_cmake_vars.dart`
+in dartcv4:
+
+```dart
+final result = {
+  for (final e in defaultModuleSettings.keys)
+    e: exclude.contains(e) ? "OFF" : defaultModuleSettings[e]!,
+};
+```
+
+Alleen `exclude_modules` zet een module uit; `include_modules` dient uitsluitend om
+een module tégen uitsluiting te beschermen. Wie `include_modules: [core, imgproc,
+…]` opschrijft, krijgt een build die er geconfigureerd uitziet en niets uitsluit.
+
+De juiste vorm is dus omgekeerd — noem wat eruit mág:
 
 ```yaml
 hooks:
   user_defines:
     dartcv4:
-      include_modules: [core, imgproc, imgcodecs, objdetect, dnn]
+      exclude_modules:
+        [calib3d, contrib, features2d, flann, photo, stitching, video, videoio]
 ```
 
-Dat zijn precies de vijf modules die de beeldcontrole aanroept. Wat er zonder
-deze lijst meeging en nergens gebruikt wordt: `stitching`, `photo`, `video`,
-`videoio`, `features2d`, `calib3d`, `flann`, `contrib`.
+De standaardwaarden staan in `defaultModuleSettings`: alles hierboven staat AAN,
+`freetype` en `highgui` staan al UIT, en `core` is niet configureerbaar. De
+beeldcontrole gebruikt `core`, `imgproc` (resize), `imgcodecs` (decode), `objdetect`
+(`FaceDetectorYN`) en `dnn` (het model draait door de dnn-module). De acht
+hierboven zijn de rest.
 
-Twee dingen die golden en nog steeds gelden:
+**Het werkt alleen op Linux, Windows en Android.** Die drie lopen via
+`src/CMakeLists.txt`, dat `dart run dartcv4:gen_cmake_vars` aanroept. macOS en iOS
+krijgen een voorgebouwde CocoaPod (`DartCvMacOS` plus de `/dnn`-subspec) waar niets
+aan te snoeien valt — daar is 27 MB gemeten en dat blijft zo.
 
-* module-exclusie werkt **alleen op Android, Windows en Linux** — op macOS krijg
-  je hoe dan ook de volle build, en daar is 27 MB gemeten (opnieuw bevestigd na
-  deze wijziging: exact hetzelfde bestand, 28.499.624 bytes);
-* een uitgesloten module houdt zijn Dart-API maar gooit "symbol not found" bij
-  aanroep. Geen compilatiefout dus: het valt pas om bij de eerste echte aanroep.
+**Niet aangezet, en dat is opzet.** Dit is nooit gemeten: er was geen Linux- of
+Windows-machine beschikbaar. En een uitgesloten module houdt zijn Dart-API maar
+gooit "symbol not found" bij aanroep — precies het soort stille runtimefout dat deze
+codebase elders al twee keer heeft opgeleverd. Blind aanzetten zou die val zelf
+zetten.
 
-Dat tweede was de reden om dit nog niet te doen, en het is opgelost door de
-volgorde om te draaien: **eerst** CI op Linux en Windows de beeldtests laten
-draaien (zie hieronder), **daarna** pas de modulelijst. Die tests roepen alle
-vijf de modules aan, dus een verkeerde lijst valt nu om in CI in plaats van bij
-een gebruiker.
+Het experiment, in volgorde, op een Linux- of Windows-machine:
 
-**Wat nog niet gemeten is: de winst.** De bundelgrootte op Linux, Windows en
-Android vóór en ná staat nog open — daarvoor moet je op die platforms bouwen.
-Het risico is afgedekt, het voordeel is nog onbekend.
+1. `flutter build linux` zonder het blok, en meet `build/linux/*/*/bundle/lib/libdartcv.so`;
+2. voeg het blok toe, `flutter clean`, opnieuw bouwen, opnieuw meten;
+3. **verifieer dat de detector nog werkt** — bouwen is niet genoeg, want de fout
+   valt pas bij aanroep. Draai `flutter test test/image_face_scan_test.dart` met
+   `DARTCV_LIB_PATH` naar de nieuwe `.so`; de kattenfoto's moeten nul geven en
+   `isSupported` moet waar zijn;
+4. zakt er iets om, dan is de kortste weg één module tegelijk terugzetten —
+   `dnn` en `objdetect` hebben interne afhankelijkheden die niet gedocumenteerd zijn.
 
-#### De detectietests draaien nu op drie platforms
+#### De detectietests en de platformdekking
 
-**Was:** de Makefile vindt de OpenCV-bibliotheek zodra er een platformbuild in
-`build/` staat, en de CI bouwde alleen in de macOS-taak. Gevolg: een
-*runtime*fout in de native laag op Linux of Windows bleef groen. Een
-*compilatie*fout viel wél op, want de release-workflow bouwt beide — het gat zat
-precies daartussen: bouwt wel, werkt niet.
+De Makefile vindt de OpenCV-bibliotheek zelf zodra er een platformbuild in `build/`
+staat (zie CHECKS.md). De CI bouwt inmiddels op alle drie de desktopplatforms —
+Linux in de gate, macOS en Windows in de matrix — zodat de detectietests daar echt
+draaien in plaats van zichzelf over te slaan.
 
-**Nu:** de Linux-gate bouwt `flutter build linux --debug` vóór `make coverage`
-(de Makefile vindt de `.so` dan zelf), en de Windows-taak in de testmatrix bouwt
-en zet `DARTCV_LIB_PATH` expliciet, want `make` staat niet op die runner. Beide
-stappen falen hard als de bibliotheek niet op zijn plek staat, in plaats van
-stilletjes terug te vallen op overslaan — precies zoals de macOS-stap dat al deed.
+Wat daarmee nog niet is aangetoond: **alleen macOS is door een mens gedraaid gezien.**
+`opencv_core` declareert `ffiPlugin: true` voor android/ios/linux/macos/windows en de
+voorwaardelijke import kiest op elk native platform de echte implementatie, maar de
+Linux- en Windows-paden in de Makefile en de CI zijn op patroon geschreven en niet op
+een draaiende build geverifieerd. De eerste CI-run op die takken is dus tegelijk het
+bewijs — en faalt hard als een pad niet klopt, in plaats van stil terug te vallen op
+overslaan.
 
-Daarmee is `opencv_core`'s `ffiPlugin: true` voor linux/macos/windows voor het
-eerst op alle drie aantoonbaar gedraaid, in plaats van alleen op macOS.
-
-Android en iOS zijn nog steeds geen leverplatform: de release-workflow bouwt web,
-macOS, Windows en Linux. De mappen bestaan, het product niet.
+Android en iOS zijn geen leverplatform: de release-workflow bouwt web, macOS, Windows
+en Linux. De mappen bestaan, het product niet.
 
 ---
 
