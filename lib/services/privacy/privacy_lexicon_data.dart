@@ -22,7 +22,7 @@
 // SNOMED CT NL op afknapt.
 
 import '../../models/privacy_lexicon.dart';
-import 'privacy_health_lexicon.dart';
+import 'privacy_bulk_lexicon.dart';
 
 /// Korter schrijven wat anders zes regels per term kost.
 PrivacyLexiconEntry _e(
@@ -655,7 +655,7 @@ PrivacyLexiconCoverage privacyLexiconCoverage(String languageCode) {
   // Alleen als ze er werkelijk zijn: is het asset niet geladen, dan meldt de
   // meter wat de vloer dekt. Anders zou hij dekking beloven die er op dat moment
   // niet is — precies de leugen waartegen hij bestaat.
-  if (PrivacyHealthLexicon.instance.languages.contains(base)) {
+  if (PrivacyBulkLexicon.instance.languages.contains(base)) {
     return PrivacyLexiconCoverage.covered;
   }
   final count = privacyLexiconTermCounts[base] ?? 0;

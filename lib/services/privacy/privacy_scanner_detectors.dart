@@ -296,26 +296,29 @@ extension PrivacyScannerDetectors on PrivacyScanner {
         best[entry.category] = (entry: entry, at: at);
       }
     }
-    // De bulk uit Orphanet (§13.3). Draait naast de vloer en niet ervoor: de
-    // vloer levert de *aanwijzingen* ("diagnose"), de bulk de *waarden*
-    // (aandoeningsnamen). Gewicht 5, dus een aandoeningsnaam wint van een
-    // signaalwoord in hetzelfde fragment — de melding wijst dan het gegeven aan
-    // in plaats van het woord dat ernaar verwijst.
-    for (final hit in PrivacyHealthLexicon.instance.findIn(lower)) {
-      final current = best['special.health'];
-      if (current != null && current.entry.weight >= _kBulkHealthWeight) break;
-      best['special.health'] = (
+    // De gebundelde bronnen (§13.3). Draaien naast de vloer en niet ervoor: de
+    // vloer levert de *aanwijzingen* ("diagnose", "geloofsovertuiging"), de bulk
+    // de *waarden* — een aandoeningsnaam uit Orphanet, een religie of ideologie
+    // uit EuroVoc. Vandaar het hogere gewicht: staat er in hetzelfde fragment
+    // een signaalwoord én een waarde, dan wijst de melding de waarde aan.
+    //
+    // Per categorie de eerste treffer; de index geeft ze in tekstvolgorde.
+    for (final hit in PrivacyBulkLexicon.instance.findIn(lower)) {
+      final current = best[hit.category];
+      if (current != null && current.entry.weight >= _kBulkTermWeight) continue;
+      best[hit.category] = (
         entry: PrivacyLexiconEntry(
           term: lower.substring(hit.start, hit.end),
-          category: 'special.health',
+          category: hit.category,
+          // De bulk is meertalig en de term draagt zijn taal niet mee; `mul` is
+          // de ISO 639-2-code voor "meerdere talen".
           lang: 'mul',
           match: PrivacyTermMatch.word,
-          weight: _kBulkHealthWeight,
+          weight: _kBulkTermWeight,
           role: PrivacyLexiconRole.value,
         ),
         at: hit.start,
       );
-      break;
     }
 
     for (final hit in best.values) {

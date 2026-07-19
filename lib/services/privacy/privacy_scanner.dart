@@ -27,7 +27,7 @@ import 'privacy_contact_rules.dart';
 import 'privacy_digital_rules.dart';
 import 'privacy_document_rules.dart';
 import 'privacy_eu_rules.dart';
-import 'privacy_health_lexicon.dart';
+import 'privacy_bulk_lexicon.dart';
 import 'privacy_lexicon_data.dart';
 import 'privacy_location_rules.dart';
 import 'privacy_own_identity.dart';
@@ -49,11 +49,13 @@ typedef _Fragment = ({String field, int index, String text});
 /// genoeg dat een woord elders in de zin niet meetelt.
 const int kContextWindow = 40;
 
-/// Het gewicht waarmee een aandoeningsnaam uit de bulk meedoet.
+/// Het gewicht waarmee een term uit de gebundelde bronnen meedoet.
 ///
-/// Maximaal, want zo'n naam ís het gegeven waar een signaalwoord alleen naar
-/// wijst. Zie `privacy_health_lexicon.dart` voor de meting die dat rechtvaardigt.
-const int _kBulkHealthWeight = 5;
+/// Maximaal, want zo'n term ís het gegeven waar een signaalwoord alleen naar
+/// wijst: `taaislijmziekte` tegenover `diagnose`, `katholicisme` tegenover
+/// `geloofsovertuiging`. Zie `privacy_bulk_lexicon.dart` voor de metingen die
+/// dat rechtvaardigen.
+const int _kBulkTermWeight = 5;
 
 /// Contextwoorden die van een 11-proef-treffer een echte BSN-melding maken.
 /// Zonder een van deze blijft de treffer informatief — zie [_scanBsn].

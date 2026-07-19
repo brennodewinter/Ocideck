@@ -10,6 +10,24 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Added
+- **Religies, ideologieën en vakbondstermen worden nu in 27 talen herkend.** Voor
+  bijzondere persoonsgegevens over geloof, politieke overtuiging,
+  vakbondslidmaatschap en etnische afkomst kende OciDeck een handvol
+  Nederlandse, Engelse, Duitse, Franse en Spaanse woorden. Daar komen nu de
+  begrippen zelf bij, uit de meertalige EU-thesaurus EuroVoc: `katholicisme`,
+  `islam`, `jodendom`, `communisme`, `fascisme`, `sociaal-democratie` — in alle
+  EU-talen plus een paar daarbuiten.
+
+  Net als bij de aandoeningsnamen onderbreekt zo'n woord op zichzelf niets. "Onze
+  cursus behandelt islam en jodendom" is lesmateriaal; "Dhr. Bakker:
+  protestantisme" is een persoonsgegeven, en alleen het tweede geeft een
+  waarschuwing.
+
+  Vijftien begrippen die *over* het onderwerp gaan in plaats van over iemand —
+  kerk, theologie, heilige boeken, concilie — zijn er bewust uit gelaten. Die
+  uitsluiting werkt op het begrip en niet op het Nederlandse woord, dus ze geldt
+  meteen in alle 27 talen.
+
 - **De privacycontrole kent nu 62.490 aandoeningsnamen, in negen talen.** Tot nu
   toe herkende OciDeck gezondheidsgegevens aan een handvol signaalwoorden —
   "diagnose", "medicatie", "ziekteverzuim". Die wijzen ergens naar; ze zíjn het

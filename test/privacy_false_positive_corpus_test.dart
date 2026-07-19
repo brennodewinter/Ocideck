@@ -1,9 +1,11 @@
 import 'dart:io';
 
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/privacy_finding.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/privacy/privacy_bulk_lexicon.dart';
 import 'package:ocideck/services/privacy/privacy_scanner.dart';
 
 // De vals-positieven-regressietest.
@@ -17,6 +19,28 @@ import 'package:ocideck/services/privacy/privacy_scanner.dart';
 // bevinding op. Een informatieve melding mag; die onderbreekt niemand.
 void main() {
   const scanner = PrivacyScanner();
+
+  // De gebundelde lexicons meeladen, anders bewaakt deze test ze niet.
+  //
+  // Dat was precies wat er misging toen ze erbij kwamen: de scanner las de
+  // singleton, de tests vulden die nooit, en de vals-positievenmeting draaide
+  // dus op de vloer van tweehonderd handgeschreven termen terwijl er
+  // vierenzestigduizend gebundelde bij waren gekomen. De duurste soort groene
+  // test: één die precies het nieuwe deel niet aanraakt.
+  setUpAll(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    await PrivacyBulkLexicon.instance.ensureLoaded(bundle: _FileBundle());
+    // Hard falen als het laden niet lukte. `ensureLoaded` slikt fouten met opzet
+    // — de app moet doordraaien op de vloer — maar in déze test zou dat de
+    // meting stilletjes terugbrengen tot waar ze vóór het bundelen stond.
+    expect(
+      PrivacyBulkLexicon.instance.termCount,
+      greaterThan(50000),
+      reason:
+          'de gebundelde lexicons zijn niet geladen; de meting bewijst niets',
+    );
+  });
+  tearDownAll(PrivacyBulkLexicon.instance.resetForTest);
 
   PrivacyScanResult scanLines(List<String> lines) => scanner.scan(
     Deck(
@@ -150,4 +174,11 @@ void main() {
       isTrue,
     );
   });
+}
+
+/// Leest de assets van schijf in plaats van uit een Flutter-bundel.
+class _FileBundle extends CachingAssetBundle {
+  @override
+  Future<ByteData> load(String key) async =>
+      ByteData.view(File(key).readAsBytesSync().buffer);
 }

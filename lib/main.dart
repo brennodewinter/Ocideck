@@ -9,7 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'app.dart';
 import 'platform/launch_files.dart';
 import 'platform/native_window.dart';
-import 'services/privacy/privacy_health_lexicon.dart';
+import 'services/privacy/privacy_bulk_lexicon.dart';
 import 'services/asset_staging.dart';
 import 'utils/log.dart';
 import 'widgets/presentation/audience_window.dart';
@@ -53,8 +53,8 @@ void main(List<String> args) {
     // die klasse bugs.
     //
     // Faalt het laden, dan draait de scanner op de ingebakken vloer verder —
-    // zie PrivacyHealthLexicon.
-    await PrivacyHealthLexicon.instance.ensureLoaded();
+    // zie PrivacyBulkLexicon.
+    await PrivacyBulkLexicon.instance.ensureLoaded();
 
     await configureNativeWindow();
 

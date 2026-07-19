@@ -17,13 +17,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/privacy_finding.dart';
 import 'package:ocideck/models/slide.dart';
-import 'package:ocideck/services/privacy/privacy_health_lexicon.dart';
+import 'package:ocideck/services/privacy/privacy_bulk_lexicon.dart';
 import 'package:ocideck/services/privacy/privacy_lexicon_data.dart';
 import 'package:ocideck/services/privacy/privacy_scanner.dart';
 
 void main() {
   const scanner = PrivacyScanner();
-  final lexicon = PrivacyHealthLexicon.instance;
+  final lexicon = PrivacyBulkLexicon.instance;
 
   PrivacyScanResult scanText(String text) => scanner.scan(
     Deck(
@@ -33,6 +33,11 @@ void main() {
       ],
     ),
   );
+
+  PrivacyFinding? healthIn2(String text, String ruleId) {
+    final m = scanText(text).findings.where((f) => f.ruleId == ruleId);
+    return m.isEmpty ? null : m.first;
+  }
 
   PrivacyFinding? healthIn(String text) {
     final m = scanText(
@@ -148,6 +153,63 @@ void main() {
         'pl': ['Chorobasomething', 'Zespol Alexandera'],
       });
       expect(privacyLexiconCoverage('pl'), PrivacyLexiconCoverage.covered);
+    });
+  });
+
+  group('overtuigingen (EuroVoc)', () {
+    setUp(() {
+      lexicon.loadForTest({
+        'nl': ['katholicisme', 'protestantisme', 'nationaal-socialisme'],
+      }, category: 'special.religion');
+    });
+
+    test('een religie is het gegeven zelf, geen aanwijzing', () {
+      final f = healthIn2('Betrokkene: protestantisme', 'special.religion');
+      expect(f, isNotNull);
+      expect(f!.role, PrivacyTermRole.value);
+    });
+
+    test('zonder persoon onderbreekt het niets', () {
+      // "Onze cursus behandelt islam" is lesmateriaal, geen dossier.
+      final f = healthIn2(
+        'Onze cursus behandelt katholicisme',
+        'special.religion',
+      );
+      expect(f!.confidence, PrivacyConfidence.possible);
+    });
+
+    test('met een persoon erbij escaleert het', () {
+      final f = healthIn2('Dhr. Bakker: protestantisme', 'special.religion');
+      expect(f!.confidence, PrivacyConfidence.certain);
+    });
+  });
+
+  group('het overtuigingsasset zelf', () {
+    test('draagt zijn licentie en de uitgesloten concepten mee', () {
+      final map =
+          jsonDecode(
+                File('assets/privacy/belief_lexicon.json').readAsStringSync(),
+              )
+              as Map<String, dynamic>;
+      expect(map['licence'], contains('2011/833'));
+      expect(map['attribution'], contains('Europese Unie'));
+      // De uitsluitingen staan in het asset, niet alleen in de generator: wie
+      // het bestand in handen heeft, moet kunnen zien wat er bewust uit is.
+      final excluded = (map['excludedConcepts'] as Map).values.cast<String>();
+      expect(excluded, contains('kerk'));
+      expect(excluded, contains('theologie'));
+
+      final terms = (map['terms'] as Map).cast<String, dynamic>();
+      expect(
+        terms.keys,
+        containsAll(<String>[
+          'special.religion',
+          'special.politics',
+          'special.union',
+        ]),
+      );
+      // De reden dat deze bron erbij is: taaldekking.
+      expect((terms['special.religion'] as Map).length, greaterThan(20));
     });
   });
 
