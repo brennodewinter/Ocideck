@@ -31,7 +31,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `mastg_test.dart` — `MastgTest` voor de offline MASTG-catalogus (id/titel/platform/MASVS-categorie/MASWE-zwakheid).
 - `wstg_test.dart` — `WstgTest` for the offline WSTG catalog (id/title/category).
 - `deck.dart` — `Deck` with metadata, TLP classification, slides list, annotations, user notes, and MIAUW waivers.
-- `deck_template_security.dart` — The module-only **MIAUW-pentestrapport** deck template (`_buildMiauwReport`): scaffolds the full MIAUW report structure across the security slide types.
+- `deck_template_info_safety.dart` — The module-only **MIAUW-pentestrapport** deck template (`_buildMiauwReport`): scaffolds the full MIAUW report structure across the security slide types.
 - `document_signature.dart` — `DocumentSignature`, the reusable visual signature for sign-off and the document seal.
 - `eis_entry.dart` — `EisEntry`/`EisPart`/`EisDerivation`/`EisCheck` for the MIAUW compliance schema.
 - `finding_spec.dart` — `FindingSpec`: the structured content of a `finding` header slide (scope, CVSS, CWE, **MASWE**, CVE, retest status, sections). Van MASWE wordt alleen het *id* opgeslagen; titel en categorie (die in de URL zit) komen uit `MasweCatalog` bij het schrijven, zodat een bijgestelde titel niet in een oud rapport bevriest. Een onbekend id blijft staan zonder link — liever geen link dan een 404; `RetestStatus` (hertest outcome).
@@ -79,7 +79,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `wstg_catalog.dart` — The bundled offline OWASP WSTG v4.2 test catalog (`WstgCatalog`, 97 tests + pinned version) used to one-click-fill a `checklist` slide.
 - `finding_template_library.dart` — `FindingTemplateLibrary`: the bundled finding templates, resolved **per report language** (`Deck.language`, not the interface language — PENTEST_MIAUW §12.3), with a per-template fallback to English.
 - `finding_templates/<code>.dart` (+ `all.dart`) — the template sources, one file per language like `lib/l10n/translations/`: a template is content, not a `d(...)` string. Only the prose is translated; the `## …` anchors, `cwe:`, `severity:` and the CVSS tokens are fixed. Guard: `test/finding_template_languages_test.dart`.
-- `secmodule/sec_reference_inventory.dart` — `SecReferenceInventory` + `ReferenceCatalog`: counts what reference data is *actually* available locally (CWE, WSTG, MIAUW, the CVSS table, finding templates) for the Uitbreidingen tab, so "data available locally" is a number rather than a claim.
+- `info_safety/info_safety_reference_inventory.dart` — `InfoSafetyReferenceInventory` + `ReferenceCatalog`: counts what reference data is *actually* available locally (CWE, WSTG, MIAUW, the CVSS table, finding templates) for the Uitbreidingen tab, so "data available locally" is a number rather than a claim.
 - `checklist_templates.dart` — `ChecklistSource` + helpers that present WSTG and each user `ChecklistTemplate` uniformly to the checklist editor and the per-scope generator (feedback #9).
 - `description_service.dart` — Stores searchable image descriptions as JSON sidecars.
 - `document_integrity.dart` — Computes/verifies the SHA-512 deck seal and seals a finalised deck.

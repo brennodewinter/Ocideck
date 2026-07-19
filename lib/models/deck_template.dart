@@ -13,7 +13,7 @@ part 'deck_template_work_b.dart';
 part 'deck_template_sessions.dart';
 part 'deck_template_briefings.dart';
 part 'deck_template_conversations.dart';
-part 'deck_template_security.dart';
+part 'deck_template_info_safety.dart';
 
 /// A starting-point recipe for a new presentation: a title page plus a set of
 /// example slides the user overwrites with real content. Templates are pure

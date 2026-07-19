@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ocideck/services/secmodule/sec_reference_inventory.dart';
+import 'package:ocideck/services/info_safety/info_safety_reference_inventory.dart';
 
 /// Every bundled reference dataset must be recorded in `LICENSE_COMPLIANCE.md`
 /// with its terms — that document is what an auditor and the CRA are shown, and
@@ -16,7 +16,7 @@ import 'package:ocideck/services/secmodule/sec_reference_inventory.dart';
 /// 969-entry MITRE CWE asset out of the table.
 ///
 /// So the rule is mechanical now: a dataset the app offers is a dataset whose
-/// licence is written down. `SecReferenceInventory` is the app's own registry of
+/// licence is written down. `InfoSafetyReferenceInventory` is the app's own registry of
 /// what it can serve, so a new catalogue cannot appear in the UI without
 /// failing here first. It did its job again when MASTG and MASWE landed.
 void main() {
@@ -36,7 +36,7 @@ void main() {
   };
 
   test('every catalogue the app serves has its licence recorded', () {
-    final offered = SecReferenceInventory.snapshot()
+    final offered = InfoSafetyReferenceInventory.snapshot()
         .map((c) => c.name)
         .toList();
 

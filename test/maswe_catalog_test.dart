@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/mastg_catalog.dart';
 import 'package:ocideck/services/maswe_catalog.dart';
 import 'package:ocideck/services/reference_standards.dart';
-import 'package:ocideck/services/secmodule/sec_reference_inventory.dart';
+import 'package:ocideck/services/info_safety/info_safety_reference_inventory.dart';
 
 void main() {
   final catalog = MasweCatalog.instance;
@@ -87,7 +87,7 @@ void main() {
 
     test('MASTG en MASWE staan in de referentie-inventaris', () {
       // MASTG ontbrak hier na PR #328; met MASWE erbij is dat rechtgezet.
-      final names = SecReferenceInventory.snapshot().map((c) => c.name);
+      final names = InfoSafetyReferenceInventory.snapshot().map((c) => c.name);
       expect(names, contains('Testgevallen (MASTG)'));
       expect(names, contains('Mobiele zwakheden (MASWE)'));
     });

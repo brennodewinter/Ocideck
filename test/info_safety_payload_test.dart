@@ -20,7 +20,15 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   // Asset prefixes holding module reference data (as opposed to images, fonts,
   // themes or bundled docs, which are guarded elsewhere).
-  const dataPrefixes = ['assets/cwe/', 'assets/secmodule/'];
+  // `assets/secmodule/` staat er nog naast de nieuwe naam, en dat is geen
+  // vergeten opruimwerk: het is het pad waar het geschrapte modulepakket stond.
+  // Zou iemand het terugzetten, dan hoort deze test dat te zien — ook als hij
+  // de oude mapnaam gebruikt.
+  const dataPrefixes = [
+    'assets/cwe/',
+    'assets/secmodule/',
+    'assets/info_safety/',
+  ];
 
   /// Every reference-data asset the base build currently declares. Deliberately
   /// exact: an unlisted entry here means someone grew the payload for all users

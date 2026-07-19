@@ -21,7 +21,7 @@ import '../../services/classification_enforcement_policy.dart';
 import '../../services/webdav_service.dart';
 import '../../models/local_cve_status.dart';
 import '../../services/cve/local_cve_database.dart';
-import '../../services/secmodule/sec_reference_inventory.dart';
+import '../../services/info_safety/info_safety_reference_inventory.dart';
 import '../../state/local_cve_provider.dart';
 import '../../services/slide_quality_analyzer.dart';
 import '../../state/deck_provider.dart';
@@ -169,7 +169,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   /// vasthouden: de volledige CWE-lijst komt uit een asset, en een FutureBuilder
   /// die elke build opnieuw begint zou hem elke build opnieuw willen laden.
   late final Future<List<ReferenceCatalog>> _referenceInventory =
-      SecReferenceInventory.load();
+      InfoSafetyReferenceInventory.load();
 
   /// Het tabblad dat de zijbalk op dit moment toont.
   late SettingsSection _selectedTab;
