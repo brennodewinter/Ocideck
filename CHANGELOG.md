@@ -35,6 +35,29 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   conflictafhandeling als bij WebDAV. Een deck dat je uit een bucket opende,
   gaat bij opslaan vanzelf naar diezelfde bucket terug.
 
+- **De privacycontrole koppelt een bijzonder gegeven nu aan een persóón.** Een
+  diagnose of een verdenking is pas een bijzonder persoonsgegeven als er iemand
+  bij hoort — een slide *óver* de AVG noemt die woorden zonder er een te
+  bevatten. Tot nu toe telde alleen een BSN, een nationaal nummer of een
+  e-mailadres als die persoon, en dus gebeurde er bij de meest voorkomende
+  formulering van allemaal precies niets: "Marieke de Vries wordt verdacht van
+  diefstal" bleef een informatieve hint.
+
+  Namen worden daarom op drie nieuwe manieren herkend, en géén ervan kijkt naar
+  de naam zelf — het blijft dus geen naamherkenning die op woordenlijsten of een
+  taalmodel leunt, want een woord met een hoofdletter is ook gewoon het begin
+  van een zin. Wat telt is wat eromheen staat: een **persoonspredicaat** ("wordt
+  verdacht van", "meldde zich ziek") dat geen ander onderwerp dan een mens kan
+  hebben, een **e-mailadres dat de naam terugzegt** ("Marieke de Vries" naast
+  `m.devries@example.com`), en de al bestaande aanhef en labels, die zwaarder wegen
+  dan voorheen omdat "mevr." een uitspraak van de auteur is en geen gok.
+
+  Een naam koppelt bewust niet zo ver als een BSN. Een BSN geldt voor de hele
+  slide; een naam reikt tot het eind van de zin waarin hij staat. Zonder die
+  grens tilde één naam bovenaan een lang stuk vrije markdown élk trefwoord in de
+  duizend regels eronder naar een harde waarschuwing — en dat is precies het
+  gedrag waardoor mensen een privacycontrole uitzetten.
+
 ### Fixed
 - **Aankruislijsten in de documentatie waren geen aankruislijsten.** De lezer
   in de app kende het `- [ ]`-patroon niet en liet de haakjes gewoon staan, dus

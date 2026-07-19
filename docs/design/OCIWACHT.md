@@ -25,7 +25,8 @@ accepteren, waarschuwen met een shield-badge, of redigeren op scherm en in expor
 | §3-D Adres, NL-postcode en gelabelde persoonsnaam (postcode + huisnummer escaleert via nabijheid) | **geleverd** |
 | §13.1 Matcher met woordgrenzen + `PrivacyTermRole` (aanwijzing versus gegeven) | **geleverd** |
 | §13.5 Beeldcontrole: herkenbare gezichten op afbeeldingen (YuNet, lokaal) | **geleverd** |
-| §13.2 Persoonskoppelingspoort, lexiconmodel als data | open — fase 11/12 |
+| §13.2 Persoonskoppelingspoort (naam als koppeling, mededeling als bereik) | **geleverd** |
+| §13.2 Lexiconmodel als data (`role`/`match`/`weight`/`lang`) | open — fase 12 |
 | §13.3 Taaldekking zichtbaar, gebundelde lexicons | open — fase 13 |
 | §14 Onderzoeksdossier DLP-technieken (annex, geen ontwerp) | naslag |
 
@@ -261,11 +262,19 @@ nul. Waar géén checksum bestaat (US SSN, V-nummer), is een contextwoord verpli
 > `contact.postcode_nl` en de gelabelde `contact.name`. Adres en NL-postcode zijn
 > elk `possible`; staan een straat-met-huisnummer en een postcode binnen ±40 tekens
 > van elkaar, dan escaleren beide naar `certain` — postcode plus huisnummer wijst
-> in Nederland één woonadres aan. `contact.name` blijft `possible` en werkt alleen
-> met een aanhef of label — géén NER, dus een kále naam (bijvoorbeeld enkel een naam
-> als slidetitel) valt erbuiten; daarvoor is de handmatige `[[…]]`-markering. Nog
-> niet gebouwd: `contact.postcode_intl`, `contact.birthdate`, `contact.geo`,
-> `contact.plate`.
+> in Nederland één woonadres aan. Nog niet gebouwd: `contact.postcode_intl`,
+> `contact.birthdate`, `contact.geo`, `contact.plate`.
+>
+> **Bijgewerkt (2026-07-19, fase 11):** `contact.name` kent vier poorten, en géén
+> ervan kijkt naar de naam zelf — het blijft dus géén NER. Label en aanhef leveren
+> `likely` (de auteur schrijft er letterlijk bij dát het een persoon is; dat is een
+> structurele uitspraak). Nieuw zijn een **persoonspredicaat** — "wordt verdacht
+> van", "meldde zich ziek", een werkwoordsvorm die geen ander onderwerp dan een
+> mens kan hebben — dat óók `likely` geeft, en een **bevestigend e-mailadres**
+> ("Marieke de Vries" naast `m.devries@example.com`) dat `certain` geeft, want daar
+> bevestigen twee onafhankelijke structuren elkaar. De kále naam zonder één van
+> deze vier valt er nog steeds buiten; daarvoor is de handmatige
+> `[[…]]`-markering.
 
 ### E. Digitale identificatoren
 
@@ -1309,7 +1318,7 @@ is geruststellend, maar dit is geen benchmark.
 | --- | --- | --- |
 | **9** | Trefwoordbereik nooit redigeren (`PrivacyTermRole`) + matcher met woordgrens en minimumtermlengte | **geleverd.** Geen nieuwe data, geen nieuwe l10n. Verwijdert misleidend gedrag en de grofste FP's |
 | **10** | De beeldcontrole: YuNet, eigen provider, eigen schakelaar, `readable`-scheiding, multischaal | **geleverd.** Staat hier en niet later omdat de tekstscanner deze categorie principieel niet kan vinden |
-| **11** | Persoonskoppelingspoort vóór elke art. 9-melding | Vereist eerst betere naamdetectie: `contact.name` vuurt nu alleen achter een label, dus "Marieke de Vries" telt niet als koppeling |
+| **11** | Persoonskoppelingspoort vóór elke art. 9-melding | **geleverd.** `contact.name` vuurt nu ook op een persoonspredicaat ("wordt verdacht van", "meldde zich ziek") en op een naam die een e-mailadres bevestigt; label en aanhef stegen van `possible` naar `likely`, want een aanhef is een structurele uitspraak en geen gok. Een naam koppelt bewust **niet** slidebreed maar tot het eind van zijn mededeling — zonder die grens tilde één naam bovenaan een vrij-markdownveld élk trefwoord eronder naar een harde melding, en dat ving de corpustest |
 | **12** | `role` + `match` + `weight` als lexicondata in plaats van afgeleid; notatie-uitbreiding (ICD-10, ATC) | Maakt het lexicon vulbaar zonder code te raken — de voorwaarde voor 13 |
 | **13** | Taaldekking zichtbaar + regiopakketten werkend + gebundelde lexicons (ORDO nl, EuroVoc) | Zonder de zichtbaarheid liegt een groene balk in 24 talen |
 | **14** | Rolonderscheid verdachte/aangever (ConText-mechaniek in Dart, drieweg met *onbekend* als default) | Laatste tien procent, en zinloos vóór 11: wat je niet detecteert kun je geen rol geven |

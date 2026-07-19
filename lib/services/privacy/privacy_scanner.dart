@@ -151,13 +151,20 @@ class PrivacyScanner {
   /// gebruiker onderbreekt — een slide *óver* de AVG noemt die woorden nu eenmaal,
   /// en een privacyles die alarm slaat is binnen een dag uitgezet.
   ///
-  /// Staat er op dezelfde slide óók een gegeven dat één persoon aanwijst (BSN,
-  /// nationaal nummer, e-mailadres), dan is het bijzondere gegeven herleidbaar tot
-  /// een persoon — en dát is precies wat artikel 9 beschermt. Dán pas gaat de
-  /// melding omhoog.
+  /// Staat er op dezelfde slide óók een gegeven dat één persoon aanwijst, dan is
+  /// het bijzondere gegeven herleidbaar tot een persoon — en dát is precies wat
+  /// artikel 9 beschermt. Dán pas gaat de melding omhoog.
   ///
-  /// En dan verbreedt ze ook het **bereik**, niet alleen de zekerheid.
+  /// De poort kent daarvoor twee koppelingsroutes, en ze reiken bewust niet even
+  /// ver:
   ///
+  ///   * een **identificator** (BSN, nationaal nummer, e-mailadres) koppelt
+  ///     slidebreed — een slide is klein genoeg dat "er staat hier iemand" opgaat;
+  ///   * een **naam** koppelt alleen binnen zijn eigen mededeling. Een naam is
+  ///     geen identificator maar een toeschrijving, en die reikt tot het einde van
+  ///     de zin. Zie [nameLinkReaches] voor wat er misging zonder die grens.
+  ///
+  /// En dan verbreedt de escalatie ook het **bereik**, niet alleen de zekerheid.
   /// Zodra het bijzondere gegeven herleidbaar is tot een persoon, is het gegeven
   /// de hele mededeling — zie [statementSpan]. Daarom heeft deze functie de
   /// fragmenttekst nodig: zonder die tekst weet ze niet waar de mededeling begint
@@ -166,14 +173,37 @@ class PrivacyScanner {
     List<PrivacyFinding> findings,
     Map<String, String> fragmentTexts,
   ) {
-    if (!findings.any(identifiesAPerson)) return findings;
+    if (!findings.any((f) => f.family == PrivacyFamily.specialCategory)) {
+      return findings;
+    }
+    final slideWideLink = findings.any(identifiesAPerson);
+    final names = [
+      for (final f in findings)
+        if (namesAPerson(f)) f,
+    ];
+    if (!slideWideLink && names.isEmpty) return findings;
+
     return [
       for (final f in findings)
         if (f.family == PrivacyFamily.specialCategory)
-          _escalate(f, fragmentTexts['${f.field}:${f.fragmentIndex}'] ?? '')
+          _escalateIfLinked(f, names, slideWideLink, fragmentTexts)
         else
           f,
     ];
+  }
+
+  PrivacyFinding _escalateIfLinked(
+    PrivacyFinding finding,
+    List<PrivacyFinding> names,
+    bool slideWideLink,
+    Map<String, String> fragmentTexts,
+  ) {
+    final text =
+        fragmentTexts['${finding.field}:${finding.fragmentIndex}'] ?? '';
+    final linked =
+        slideWideLink ||
+        names.any((name) => nameLinkReaches(name, finding, text));
+    return linked ? _escalate(finding, text) : finding;
   }
 
   PrivacyFinding _escalate(PrivacyFinding finding, String text) {
@@ -273,37 +303,100 @@ class PrivacyScanner {
 
   // ── contact.name ──────────────────────────────────────────────────────────
 
-  /// Een persoonsnaam achter een aanhef of een label — nooit via NER.
+  /// Een persoonsnaam die de structuur aanwijst — nooit via NER.
   ///
-  /// Blijft bewust `possible`: een naam heeft geen checksum, en een woord met een
-  /// hoofdletter is ook het begin van een zin. De melding informeert dus, en
-  /// onderbreekt niet. Bij redactie gaat de naam er wél uit, net als elke andere
-  /// bevinding. De kale naam zonder label (een titel die enkel een naam is) valt
-  /// hier buiten — daarvoor is de handmatige `[[…]]`-markering.
+  /// Vier poorten, en geen ervan kijkt naar de naam zélf: een woord met een
+  /// hoofdletter blijft een woord met een hoofdletter. Wat telt is wat eromheen
+  /// staat.
+  ///
+  ///   * een **label** (`naam:`, `contactpersoon:`) of een **aanhef** (`dhr.`,
+  ///     `Dr.`) → `likely`. De auteur schrijft er letterlijk bij dat dit een
+  ///     persoon is; dat is een structurele uitspraak, geen gok;
+  ///   * een **persoonspredicaat** ("wordt verdacht van", "meldde zich ziek") →
+  ///     `likely`. Dit is de formulering waar artikel 10 over gaat en die geen
+  ///     label draagt;
+  ///   * een **bevestigend e-mailadres** ("Marieke de Vries" naast
+  ///     `m.devries@acme.nl`) → `certain`. Twee onafhankelijke structuren die
+  ///     elkaar bevestigen is het sterkste bewijs dat deze familie kent.
+  ///
+  /// `certain` blijft daarmee voorbehouden aan gevallen met een tweede,
+  /// onafhankelijke bevestiging — precies zoals een checksum dat elders doet.
+  /// De kale naam zonder één van deze structuren valt hier buiten; daarvoor is de
+  /// handmatige `[[…]]`-markering.
   void _scanName(_Fragment fragment, int slideIndex, List<PrivacyFinding> out) {
     final text = fragment.text;
+    final seen = <int>{};
+
+    void emitName(int start, int end, PrivacyConfidence confidence) {
+      final name = text.substring(start, end);
+      if (name.isEmpty) return;
+      if (isPlaceholderPerson(name)) return;
+      if (ownIdentity.covers(name)) return;
+      if (!seen.add(start)) return;
+      out.add(
+        PrivacyFinding(
+          ruleId: 'contact.name',
+          family: PrivacyFamily.contact,
+          confidence: confidence,
+          slideIndex: slideIndex,
+          field: fragment.field,
+          fragmentIndex: fragment.index,
+          start: start,
+          end: end,
+          maskedSample: maskValue(name),
+        ),
+      );
+    }
+
+    // De e-mailbevestiging eerst: die levert de hoogste zekerheid, en `seen`
+    // zorgt dat een label eromheen hem daarna niet terugzet naar `likely`.
+    _scanEmailConfirmedNames(text, emitName);
+
     for (final pattern in [nameLabelPattern, nameSalutationPattern]) {
       for (final match in pattern.allMatches(text)) {
         final name = match.group(1);
         if (name == null || name.isEmpty) continue;
-        if (isPlaceholderPerson(name)) continue;
-        if (ownIdentity.covers(name)) continue;
         // De naam staat aan het eind van de match; daaruit volgt zijn positie
         // zonder dat we een groepsoffset nodig hebben (die Dart niet los geeft).
-        final start = match.end - name.length;
-        out.add(
-          PrivacyFinding(
-            ruleId: 'contact.name',
-            family: PrivacyFamily.contact,
-            confidence: PrivacyConfidence.possible,
-            slideIndex: slideIndex,
-            field: fragment.field,
-            fragmentIndex: fragment.index,
-            start: start,
-            end: match.end,
-            maskedSample: maskValue(name),
-          ),
-        );
+        emitName(match.end - name.length, match.end, PrivacyConfidence.likely);
+      }
+    }
+
+    // Bij het predicaat staat de naam juist vooraan: `match.start`.
+    for (final match in namePredicatePattern.allMatches(text)) {
+      final name = match.group(1);
+      if (name == null || name.isEmpty) continue;
+      emitName(
+        match.start,
+        match.start + name.length,
+        PrivacyConfidence.likely,
+      );
+    }
+  }
+
+  /// Namen die door een e-mailadres in dezelfde tekst bevestigd worden.
+  ///
+  /// Dit is de enige plek waar het kandidaat-naampatroon losgelaten wordt op
+  /// vrije tekst, en dat mag alleen omdat er meteen een harde bevestiging
+  /// tegenover staat: het lokale deel van een adres in dezelfde tekst moet de
+  /// naam terugzeggen. Zonder dat adres komt er niets uit — het patroon matcht
+  /// namelijk ook het eerste woord van elke zin.
+  void _scanEmailConfirmedNames(
+    String text,
+    void Function(int start, int end, PrivacyConfidence confidence) emit,
+  ) {
+    if (!text.contains('@')) return;
+    final emails = [
+      for (final m in _reEmail.allMatches(text))
+        if (!isPlaceholderEmail(m.group(0)!)) m.group(0)!,
+    ];
+    if (emails.isEmpty) return;
+
+    for (final candidate in nameCandidatePattern.allMatches(text)) {
+      final name = candidate.group(0)!;
+      if (!name.contains(' ')) continue; // één token bevestigt niets
+      if (emails.any((email) => emailConfirmsName(email, name))) {
+        emit(candidate.start, candidate.end, PrivacyConfidence.certain);
       }
     }
   }

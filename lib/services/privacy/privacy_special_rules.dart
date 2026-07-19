@@ -321,8 +321,51 @@ bool _isSpace(int unit) => unit == 0x20 || unit == 0x09;
 ///
 /// Een BSN, een nationaal nummer, een e-mailadres: gegevens die één persoon
 /// aanwijzen. Een IBAN of een API-sleutel niet — die zeggen niets over wíé.
+///
+/// Deze koppeling geldt **slidebreed**: staat er ergens op de slide een BSN, dan
+/// is het bijzondere gegeven op die slide daaraan te koppelen. Een slide is
+/// klein genoeg dat dat opgaat.
 bool identifiesAPerson(PrivacyFinding finding) {
   if (finding.confidence != PrivacyConfidence.certain) return false;
   return finding.family == PrivacyFamily.identifier ||
       finding.ruleId == 'contact.email';
+}
+
+/// Wijst deze bevinding een persoon aan met een naam?
+///
+/// De tweede, zwakkere koppelingsroute, en de poort waar de artikel 10-detectie
+/// op wachtte. Zolang alleen [identifiesAPerson] telde, gebeurde er bij de meest
+/// voorkomende formulering — "Marieke de Vries wordt verdacht van diefstal" —
+/// precies niets: geen BSN op de slide, dus niemand om het gegeven aan te
+/// koppelen, dus bleef de melding informatief.
+///
+/// `possible` telt bewust níét mee: dat is de drempel waaronder een naam een gok
+/// is, en een gok mag geen andere melding omhoog trekken.
+bool namesAPerson(PrivacyFinding finding) =>
+    finding.ruleId == 'contact.name' &&
+    finding.confidence != PrivacyConfidence.possible;
+
+/// Reikt de naamkoppeling tot deze treffer?
+///
+/// **Een naam koppelt niet slidebreed, maar tot het einde van zijn mededeling** —
+/// en dat verschil is niet theoretisch. Een naam is geen identificator maar een
+/// toeschrijving, en een toeschrijving reikt zo ver als de zin waarin ze staat.
+/// Zonder die grens gebeurt er dit: een vrij-markdownveld met een handleiding
+/// erin noemt bovenaan iemands naam, en tilt daarmee élk trefwoord in de
+/// duizend regels eronder naar een harde melding. Dat is precies gebeurd, en de
+/// vals-positievencorpustest ving het.
+///
+/// De mededeling is dezelfde eenheid als bij redactie ([statementSpan]), en dat
+/// is geen toeval: wat samen één uitspraak vormt, koppelt samen, en wordt samen
+/// weggehaald.
+bool nameLinkReaches(
+  PrivacyFinding name,
+  PrivacyFinding target,
+  String fragmentText,
+) {
+  if (name.field != target.field) return false;
+  if (name.fragmentIndex != target.fragmentIndex) return false;
+  if (fragmentText.isEmpty) return false;
+  final span = statementSpan(fragmentText, target.start, target.end);
+  return name.start >= span.start && name.end <= span.end;
 }
