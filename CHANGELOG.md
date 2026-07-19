@@ -259,6 +259,20 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   gedrag waardoor mensen een privacycontrole uitzetten.
 
 ### Fixed
+- **"Geen toegang" en "verkeerd wachtwoord" waren dezelfde melding.** Een 401
+  en een 403 leverden allebei *"Aanmelden mislukt — controleer gebruikersnaam
+  en wachtwoord"*. Bij een 403 is dat het enige advies dat zéker niet helpt: je
+  bent binnen, je mag alleen hier niet bij. Wie het opvolgt, gaat een wachtwoord
+  zitten controleren dat klopt.
+
+  De twee zijn nu gescheiden, voor WebDAV en voor de drie git-forges. Bij git
+  gaat het meestal om een token met te weinig scope, of een limiet die de forge
+  oplegt — ook daar helpt "controleer je token" niet, maar "geef het meer
+  rechten" wel.
+
+  **S3 blijft bewust ongesplitst.** Die geeft óók 403 bij een verkeerde
+  handtekening of een verkeerde regio, dus daar zou splitsen op de status juist
+  misleiden: de bestaande melding noemt alle drie de oorzaken, en dat klopt.
 - **Een afgewezen push werd op een niet-Engelse machine als "offline"
   weggeschreven.** Wanneer iemand anders je voor is geweest, weigert git je
   push. OciDeck herkende dat aan de Engelse tekst in zijn uitvoer

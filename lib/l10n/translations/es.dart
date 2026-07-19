@@ -737,6 +737,14 @@ const _dutchSourceEs = {
 const _dutchSourceAddEs = {
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Faltan los nombres de enfermedades para el idioma de esta presentación. La religión, la opinión política y los términos sindicales sí se reconocen, y los patrones con dígito de control (DNI, IBAN, pasaporte) siempre funcionan, pero no cuentes con que se detecte un diagnóstico.',
+  'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
+      'Has iniciado sesión, pero no tienes acceso aquí. Tu contraseña no es el problema: pide al administrador permisos sobre esta carpeta.',
+  'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':
+      'Tu token es válido, pero no tiene permiso para esto. Dale más permisos, o espera si la forja aplica un límite.',
+  'Het token is geldig, maar mag dit niet — geef het meer rechten op de repository.':
+      'El token es válido, pero no tiene permiso para esto: dale más permisos sobre el repositorio.',
+  'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
+      'Sesión iniciada, pero sin acceso: tu contraseña no es el problema. Pide permisos sobre esta carpeta.',
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Licencias de los léxicos: lo que queda por preguntar',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':

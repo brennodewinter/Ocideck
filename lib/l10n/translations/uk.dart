@@ -1801,6 +1801,14 @@ const _dutchSourceUk = {
 const _dutchSourceAddUk = <String, String>{
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Для мови цієї презентації бракує назв хвороб. Релігію, політичні погляди та профспілкові терміни розпізнано, а шаблони з контрольною цифрою (ІПН, IBAN, паспорт) працюють завжди — але не розраховуйте на виявлення діагнозу.',
+  'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
+      'Ви увійшли, але не маєте тут доступу. Проблема не в паролі — попросіть адміністратора надати права на цю теку.',
+  'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':
+      'Ваш токен дійсний, але не має на це прав. Надайте йому більше прав або зачекайте, якщо форж застосовує обмеження.',
+  'Het token is geldig, maar mag dit niet — geef het meer rechten op de repository.':
+      'Токен дійсний, але не має на це прав — надайте йому більше прав на репозиторій.',
+  'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
+      'Ви увійшли, але доступу немає — проблема не в паролі. Попросіть права на цю теку.',
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Ліцензії лексиконів: що ще треба з\'ясувати',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':

@@ -620,11 +620,17 @@ class GitHubForge implements GitForge {
 
   void _checkStatus(int status) {
     if (status >= 200 && status < 300) return;
-    if (status == 401 || status == 403) {
+    if (status == 401) {
       throw GitForgeException(
         GitForgeError.auth,
         'Aanmelden bij GitHub mislukt ($status). Controleer je token en of het '
         'toegang heeft tot ${config.slug}.',
+      );
+    }
+    if (status == 403) {
+      throw const GitForgeException(
+        GitForgeError.forbidden,
+        'Token geldig, maar zonder rechten hiervoor (403).',
       );
     }
     if (status == 404) {

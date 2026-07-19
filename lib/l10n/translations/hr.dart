@@ -1790,6 +1790,14 @@ const _dutchSourceHr = {
 const _dutchSourceAddHr = <String, String>{
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Za jezik ove prezentacije nedostaju nazivi bolesti. Vjera, političko uvjerenje i sindikalni pojmovi se prepoznaju, a uzorci s kontrolnom znamenkom (OIB, IBAN, putovnica) uvijek rade — ali ne računajte na to da će dijagnoza biti pronađena.',
+  'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
+      'Prijavljeni ste, ali ovdje nemate pristup. Lozinka nije problem — zatražite od administratora prava na ovu mapu.',
+  'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':
+      'Vaš token je valjan, ali ovo ne smije. Dajte mu više prava ili pričekajte ako forge nameće ograničenje.',
+  'Het token is geldig, maar mag dit niet — geef het meer rechten op de repository.':
+      'Token je valjan, ali ovo ne smije — dajte mu više prava na repozitorij.',
+  'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
+      'Prijavljeni ste, ali bez pristupa — lozinka nije problem. Zatražite prava na ovu mapu.',
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Licencije leksikona: što još treba pitati',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':

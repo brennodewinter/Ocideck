@@ -221,6 +221,9 @@ extension _SettingsGit on _SettingsDialogState {
       GitForgeError.auth => l10n.d(
         'Aanmelden mislukt — controleer het token. Het heeft leesrechten op de repository nodig, en schrijfrechten om te kunnen opslaan.',
       ),
+      GitForgeError.forbidden => l10n.d(
+        'Het token is geldig, maar mag dit niet — geef het meer rechten op de repository.',
+      ),
       GitForgeError.notFound => l10n.d(
         'Repository niet gevonden — of je token mag hem niet zien. Controleer eigenaar en repositorynaam.',
       ),

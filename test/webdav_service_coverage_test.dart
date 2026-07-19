@@ -194,6 +194,18 @@ void main() {
       expect(n, 1);
     });
 
+    test('403 is told apart from 401', () async {
+      // Tegengesteld advies: bij 401 controleer je je wachtwoord, bij 403 is
+      // dat juist het enige wat níet helpt.
+      final fake = await _FakeWebdav.start((req) async {
+        req.response.statusCode = 403;
+      });
+      addTearDown(fake.stop);
+
+      final e = await _catch(() => svcFor(fake.port).probe());
+      expect((e as WebdavException).kind, WebdavError.forbidden);
+    });
+
     test('maps 401 to an auth error', () async {
       final fake = await _FakeWebdav.start((req) async {
         req.response.statusCode = 401;
@@ -401,9 +413,21 @@ void main() {
       expect(fake.requests.map((r) => r.method), ['MKCOL', 'PUT']);
     });
 
-    test('MKCOL 403 is an auth error', () async {
+    test('MKCOL 403 is a rights problem, not a login problem', () async {
+      // Je bent binnen; je mag hier alleen geen map maken. "Controleer je
+      // wachtwoord" zou de gebruiker het verkeerde spoor op sturen.
       final fake = await _FakeWebdav.start((req) async {
         req.response.statusCode = 403;
+      });
+      addTearDown(fake.stop);
+
+      final e = await _catch(() => svcFor(fake.port).upload('a/file.bin', [1]));
+      expect((e as WebdavException).kind, WebdavError.forbidden);
+    });
+
+    test('MKCOL 401 stays a login problem', () async {
+      final fake = await _FakeWebdav.start((req) async {
+        req.response.statusCode = 401;
       });
       addTearDown(fake.stop);
 

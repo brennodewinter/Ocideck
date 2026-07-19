@@ -1783,6 +1783,14 @@ const _dutchSourceFi = {
 const _dutchSourceAddFi = <String, String>{
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Tämän esityksen kielelle puuttuvat sairauksien nimet. Uskonto, poliittinen mielipide ja ammattiyhdistystermit tunnistetaan, ja tarkistusnumerolliset kuviot (hetu, IBAN, passi) toimivat aina — mutta älä luota siihen, että diagnoosi löytyy.',
+  'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
+      'Olet kirjautunut sisään, mutta sinulla ei ole tänne pääsyä. Salasana ei ole ongelma — pyydä ylläpitäjältä oikeuksia tähän kansioon.',
+  'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':
+      'Tunnuksesi on kelvollinen, mutta sillä ei ole tähän lupaa. Anna sille lisää oikeuksia tai odota, jos forge rajoittaa.',
+  'Het token is geldig, maar mag dit niet — geef het meer rechten op de repository.':
+      'Tunnus on kelvollinen, mutta sillä ei ole tähän lupaa — anna sille lisää oikeuksia repositorioon.',
+  'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
+      'Kirjautunut, mutta ei pääsyä — salasana ei ole ongelma. Pyydä oikeuksia tähän kansioon.',
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Sanastojen lisenssit: mitä on vielä kysyttävä',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':

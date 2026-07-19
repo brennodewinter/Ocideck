@@ -1782,6 +1782,14 @@ const _dutchSourceSv = {
 const _dutchSourceAddSv = <String, String>{
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Sjukdomsnamn saknas för det här däckets språk. Religion, politisk uppfattning och fackliga termer känns igen, och mönster med kontrollsiffra (personnummer, IBAN, pass) fungerar alltid — men räkna inte med att en diagnos hittas.',
+  'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
+      'Du är inloggad, men har ingen åtkomst här. Ditt lösenord är inte problemet — be administratören om rättigheter till den här mappen.',
+  'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':
+      'Din token är giltig, men får inte göra detta. Ge den fler rättigheter, eller vänta om forgen tillämpar en gräns.',
+  'Het token is geldig, maar mag dit niet — geef het meer rechten op de repository.':
+      'Token är giltig, men får inte göra detta — ge den fler rättigheter till repositoryt.',
+  'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
+      'Inloggad, men ingen åtkomst — ditt lösenord är inte problemet. Be om rättigheter till den här mappen.',
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Lexikonlicenser: vad som återstår att fråga',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':

@@ -1811,6 +1811,14 @@ const _dutchSourceEl = {
 const _dutchSourceAddEl = <String, String>{
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Για τη γλώσσα αυτής της παρουσίασης λείπουν τα ονόματα ασθενειών. Η θρησκεία, η πολιτική άποψη και οι συνδικαλιστικοί όροι αναγνωρίζονται, και τα μοτίβα με ψηφίο ελέγχου (ΑΜΚΑ, IBAN, διαβατήριο) λειτουργούν πάντα — αλλά μη βασίζεστε στον εντοπισμό διάγνωσης.',
+  'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
+      'Έχεις συνδεθεί, αλλά δεν έχεις πρόσβαση εδώ. Ο κωδικός σου δεν είναι το πρόβλημα — ζήτησε από τον διαχειριστή δικαιώματα σε αυτόν τον φάκελο.',
+  'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':
+      'Το διακριτικό σου είναι έγκυρο, αλλά δεν επιτρέπεται αυτό. Δώσε του περισσότερα δικαιώματα, ή περίμενε αν το forge επιβάλλει όριο.',
+  'Het token is geldig, maar mag dit niet — geef het meer rechten op de repository.':
+      'Το διακριτικό είναι έγκυρο, αλλά δεν επιτρέπεται αυτό — δώσε του περισσότερα δικαιώματα στο αποθετήριο.',
+  'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
+      'Συνδεδεμένος, αλλά χωρίς πρόσβαση — ο κωδικός σου δεν είναι το πρόβλημα. Ζήτησε δικαιώματα σε αυτόν τον φάκελο.',
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Άδειες λεξικών: τι μένει να ρωτηθεί',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':

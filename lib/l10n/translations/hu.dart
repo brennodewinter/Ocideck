@@ -1787,6 +1787,14 @@ const _dutchSourceHu = {
 const _dutchSourceAddHu = <String, String>{
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Ennek a bemutatónak a nyelvéhez hiányoznak a betegségnevek. A vallás, a politikai vélemény és a szakszervezeti kifejezések felismerhetők, és az ellenőrző számjegyes minták (adóazonosító, IBAN, útlevél) mindig működnek — de ne számítson arra, hogy egy diagnózist megtalál.',
+  'Je bent aangemeld, maar hebt hier geen toegang. Je wachtwoord is niet het probleem — vraag de beheerder om rechten op deze map.':
+      'Be vagy jelentkezve, de itt nincs hozzáférésed. Nem a jelszó a gond — kérj jogosultságot az adminisztrátortól ehhez a mappához.',
+  'Je token is geldig, maar mag dit niet. Geef het meer rechten, of wacht als de forge een limiet oplegt.':
+      'A tokened érvényes, de ehhez nincs joga. Adj neki több jogosultságot, vagy várj, ha a forge korlátot alkalmaz.',
+  'Het token is geldig, maar mag dit niet — geef het meer rechten op de repository.':
+      'A token érvényes, de ehhez nincs joga — adj neki több jogosultságot a tárolón.',
+  'Aangemeld, maar geen toegang — je wachtwoord is niet het probleem. Vraag rechten op deze map.':
+      'Bejelentkezve, de nincs hozzáférés — nem a jelszó a gond. Kérj jogosultságot ehhez a mappához.',
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Lexikonlicencek: mit kell még megkérdezni',
   'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
