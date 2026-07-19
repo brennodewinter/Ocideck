@@ -5,6 +5,7 @@ import 'package:ocideck/models/markdown_validation.dart';
 import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/redaction_manifest.dart';
 import 'package:ocideck/models/slide_quality.dart';
+import 'package:ocideck/models/storage_connection.dart';
 import 'package:ocideck/services/export_bundle.dart';
 import 'package:ocideck/services/export_service.dart';
 import 'package:ocideck/services/privacy/privacy_export_policy.dart';
@@ -100,5 +101,53 @@ void main() {
       ),
       findsOneWidget,
     );
+  });
+
+  // Elke opslagsoort die een deck naar een server stuurt, hoort in de opsomming
+  // "Wat je apparaat verlaat" te staan.
+  //
+  // Deze test bestaat omdat het mis ging en niemand het zag. S3 stond er nooit
+  // in en git al sinds het bestaat niet, terwijl beide decks uploaden. De
+  // opsomming eindigt op een dubbele punt en leest daarmee als volledig; een
+  // gebruiker tekende af op iets wat hij niet kreeg.
+  //
+  // Daarom hangt de test aan `StorageConnection` en niet aan een eigen lijstje:
+  // het is een sealed class, dus een vijfde variant is een compileerfout in de
+  // switch hieronder. Wie hem toevoegt, moet hier langs — en dus ook langs de
+  // verklaring. Een lijstje dat ik hier zelf zou onderhouden, zou precies zo
+  // stilletjes achterlopen als de tekst deed.
+  testWidgets('de privacyverklaring noemt elke opslagsoort die iets verstuurt', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: SingleChildScrollView(child: PrivacyStatementContent()),
+        ),
+      ),
+    );
+    await tester.pump();
+
+    for (final kind in StorageConnectionKind.values) {
+      // Een woord dat in de verklaring moet voorkomen, of null als deze soort
+      // het apparaat niet verlaat.
+      final needle = switch (kind) {
+        StorageConnectionKind.local => null,
+        StorageConnectionKind.webdav => 'Nextcloud/WebDAV',
+        StorageConnectionKind.s3 => 'S3-opslag',
+        StorageConnectionKind.git => 'Git-opslag',
+      };
+      if (needle == null) continue;
+
+      expect(
+        find.textContaining(needle),
+        findsWidgets,
+        reason:
+            'De privacyverklaring noemt $needle niet, terwijl opslagsoort '
+            '${kind.name} decks naar een server stuurt. Voeg een regel toe aan '
+            'PrivacyStatementContent (en vertaal hem met `make add-l10n`) '
+            'voordat deze opslagsoort meegaat in een release.',
+      );
+    }
   });
 }
