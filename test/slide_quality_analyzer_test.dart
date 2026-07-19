@@ -759,26 +759,29 @@ void main() {
       );
     });
 
-    test('stays quiet about a file that does exist without a project', () async {
-      final dir = await Directory.systemTemp.createTemp('ocideck-quality-');
-      addTearDown(() => dir.delete(recursive: true));
-      final file = File('${dir.path}/foto.png')..writeAsStringSync('x');
+    test(
+      'stays quiet about a file that does exist without a project',
+      () async {
+        final dir = await Directory.systemTemp.createTemp('ocideck-quality-');
+        addTearDown(() => dir.delete(recursive: true));
+        final file = File('${dir.path}/foto.png')..writeAsStringSync('x');
 
-      final deck = Deck(
-        title: 'Demo',
-        slides: [
-          Slide.create(SlideType.image).copyWith(imagePath: file.path),
-        ],
-      );
+        final deck = Deck(
+          title: 'Demo',
+          slides: [
+            Slide.create(SlideType.image).copyWith(imagePath: file.path),
+          ],
+        );
 
-      expect(
-        analyzer
-            .analyze(deck)
-            .issues
-            .any((i) => i.kind == SlideQualityIssueKind.missingMediaFile),
-        isFalse,
-      );
-    });
+        expect(
+          analyzer
+              .analyze(deck)
+              .issues
+              .any((i) => i.kind == SlideQualityIssueKind.missingMediaFile),
+          isFalse,
+        );
+      },
+    );
 
     test('flags an image that lies outside the presentation folder', () async {
       final dir = await Directory.systemTemp.createTemp('ocideck-quality-');
@@ -788,9 +791,7 @@ void main() {
         title: 'Demo',
         projectPath: dir.path,
         slides: [
-          Slide.create(
-            SlideType.image,
-          ).copyWith(imagePath: '/elders/foto.png'),
+          Slide.create(SlideType.image).copyWith(imagePath: '/elders/foto.png'),
         ],
       );
 
@@ -817,9 +818,7 @@ void main() {
         title: 'Demo',
         projectPath: dir.path,
         slides: [
-          Slide.create(
-            SlideType.image,
-          ).copyWith(imagePath: 'images/foto.png'),
+          Slide.create(SlideType.image).copyWith(imagePath: 'images/foto.png'),
         ],
       );
 

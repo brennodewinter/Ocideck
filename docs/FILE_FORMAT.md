@@ -42,6 +42,19 @@ my_presentation/
 > The `.md` filename is derived from the presentation title: non-alphanumeric
 > characters are removed and spaces become `_`.
 
+**Before the first save** there is no project folder yet, so an inserted image
+or video is copied to a per-session **staging folder** under the OS temp
+directory, laid out the same way (`images/`, `media/`). The bytes are therefore
+safe from the moment you insert them — moving or renaming the original no longer
+breaks the deck — and the ordinary save-time copy moves them into the project
+folder because the layout already matches. Until then the editor marks such an
+asset as *not yet saved*.
+
+When a copy would land on a name that is already taken, the existing file is
+reused only if its contents are byte-identical; otherwise the newcomer gets a
+numbered suffix (`screenshot_2.png`). Two different pictures that happen to
+share a filename therefore stay two pictures.
+
 The folders `images/`, `logos/`, `themes/` (and `node_modules/`, `build/`,
 `.git/`, `.dart_tool/`) are skipped when OciDeck scans a folder for
 presentations.

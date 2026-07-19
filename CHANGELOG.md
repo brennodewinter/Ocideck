@@ -10,6 +10,33 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Added
+- **Afbeeldingen en media gaan nu écht mee met de presentatie — en je ziet
+  wanneer dat níet zo is.** Je kunt er niet van uitgaan dat de ontvanger
+  dezelfde schijven, netwerkmappen of rechten heeft als jij. Een verwijzing naar
+  een bestand elders werkt bij de maker prima en is bij de ontvanger een gat.
+
+  Slepen en de afbeeldingenbibliotheek zetten tot nu toe een absoluut pad in de
+  slide en vertrouwden erop dat de kopieerslag bij opslaan het wel zou
+  rechttrekken. Beide nemen het bestand nu meteen over. En een deck dat nog niet
+  is opgeslagen heeft geen eigen map, dus kopieerde er tot nu toe niets:
+  verplaatste je het bronbestand vóór de eerste opslag, dan was de verwijzing
+  stuk. Zulke media gaan nu naar een tijdelijke wachtkamer met dezelfde indeling
+  als een echt project, waarna opslaan ze op hun definitieve plek zet.
+
+  Naast het pad in de editor staat een badge die zegt wat er gebeurt als je de
+  presentatie doorgeeft: *Nog niet opgeslagen* (gekopieerd en veilig, alleen nog
+  niet definitief), *Buiten de presentatie* (gaat niet mee), *Van internet*, of
+  *Alleen in deze sessie*. Het kwaliteitspaneel geeft hetzelfde deck-breed, zodat
+  je niet slide voor slide hoeft te controleren.
+
+  Verder: de placeholder zegt nu wát er mis is — *Bestand niet gevonden*,
+  *Buiten de presentatie*, *Weg na herladen* — in plaats van vier verschillende
+  situaties met hetzelfde grijze vlak af te doen; de controle op ontbrekende
+  media zweeg juist bij een niet-opgeslagen deck en doet dat niet meer; gesleepte
+  bestanden worden net als gekozen bestanden op magic bytes gecontroleerd; en
+  twee verschillende afbeeldingen die allebei `screenshot.png` heten worden niet
+  langer stilzwijgend één.
+
 - **S3 als opslagplek, naast lokale mappen, WebDAV en git.** Daarmee wordt zo
   ongeveer alles gedekt wat je in de praktijk tegenkomt: naast AWS S3 werkt
   elke S3-compatible dienst — een eigen MinIO, Ceph, Wasabi, Scaleway,

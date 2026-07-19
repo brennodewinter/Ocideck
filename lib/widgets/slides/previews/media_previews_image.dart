@@ -206,7 +206,7 @@ Widget _resolvedImage(
     // shows up as a black flash between slides — fatal when recording video.
     gaplessPlayback: true,
     errorBuilder: (context, error, stackTrace) =>
-          _imagePlaceholder(context, ImagePlaceholderReason.missing),
+        _imagePlaceholder(context, ImagePlaceholderReason.missing),
   );
 }
 

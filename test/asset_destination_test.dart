@@ -15,8 +15,8 @@ void main() {
     return file;
   }
 
-  Directory dest() => Directory(p.join(tmp.path, 'images'))
-    ..createSync(recursive: true);
+  Directory dest() =>
+      Directory(p.join(tmp.path, 'images'))..createSync(recursive: true);
 
   group('resolveAssetDestination', () {
     test('gebruikt de naam zelf als die nog vrij is', () async {
@@ -91,7 +91,10 @@ void main() {
   group('filesHaveSameContent', () {
     test('is waar voor identieke inhoud', () async {
       expect(
-        await filesHaveSameContent(write('a', 'x' * 200), write('b', 'x' * 200)),
+        await filesHaveSameContent(
+          write('a', 'x' * 200),
+          write('b', 'x' * 200),
+        ),
         isTrue,
       );
     });

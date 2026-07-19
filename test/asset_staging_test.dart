@@ -95,10 +95,7 @@ void main() {
       AssetStaging.overrideRootForTest(null);
 
       expect(
-        await AssetStaging.stage(
-          source('a.png', 'x').path,
-          subdir: 'images',
-        ),
+        await AssetStaging.stage(source('a.png', 'x').path, subdir: 'images'),
         isNull,
       );
     });

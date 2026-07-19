@@ -75,10 +75,7 @@ void main() {
     });
 
     test('een mem:-pad leeft alleen in deze sessie', () {
-      expect(
-        classifyAssetPath('mem:0123-abcd', null),
-        AssetOrigin.memory,
-      );
+      expect(classifyAssetPath('mem:0123-abcd', null), AssetOrigin.memory);
     });
   });
 

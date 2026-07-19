@@ -80,19 +80,21 @@ String assetOriginLabel(AppLocalizations l10n, AssetOrigin origin) =>
 
 /// De hele zin: wat er gebeurt, en wat de gebruiker eraan kan doen. Een badge
 /// die alleen een toestand noemt waarschuwt nergens voor.
-String assetOriginExplanation(AppLocalizations l10n, AssetOrigin origin) =>
-    switch (origin) {
-      AssetOrigin.staged => l10n.d(
-        'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.',
-      ),
-      AssetOrigin.external => l10n.d(
-        'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.',
-      ),
-      AssetOrigin.remote => l10n.d(
-        'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.',
-      ),
-      AssetOrigin.memory => l10n.d(
-        'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.',
-      ),
-      AssetOrigin.none || AssetOrigin.inDeck => '',
-    };
+String assetOriginExplanation(
+  AppLocalizations l10n,
+  AssetOrigin origin,
+) => switch (origin) {
+  AssetOrigin.staged => l10n.d(
+    'Dit bestand is al gekopieerd en staat veilig. Het krijgt zijn plek in de presentatiemap zodra u opslaat.',
+  ),
+  AssetOrigin.external => l10n.d(
+    'Dit bestand ligt buiten de presentatiemap en gaat niet mee. Wie de presentatie van u krijgt, ziet hier niets. Sla op om een kopie te maken.',
+  ),
+  AssetOrigin.remote => l10n.d(
+    'Dit bestand staat op internet en hoort niet bij de presentatie. Zonder verbinding, of als de bron verdwijnt, is het weg.',
+  ),
+  AssetOrigin.memory => l10n.d(
+    'In de webversie blijft dit bestand alleen in het geheugen van deze sessie. Na het herladen van de pagina is het weg.',
+  ),
+  AssetOrigin.none || AssetOrigin.inDeck => '',
+};
