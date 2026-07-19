@@ -376,4 +376,69 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
     section: 'Uitbreidingen',
     keywords: ['import', 'pakket', 'offline', 'gegevens'],
   ),
+
+  // ── Documentatie ──────────────────────────────────────────────────────────
+  // Dit tabblad heeft een eigen zoekveld over de documentinhoud, dus we
+  // spiegelen niet alle documenten: dit zijn ingangen die je naar het tabblad
+  // brengen. `section: null` omdat de reader met DocSection werkt in plaats van
+  // _sectionTitle — er is geen anker om naartoe te scrollen, en het tabblad
+  // openen is genoeg. Bewust géén licentie-ingang: wie "licentie" zoekt wil de
+  // echte toestemming onder Licentie en Privacy, niet de reader.
+  SettingsSearchEntry(
+    tab: SettingsSection.documentation,
+    label: 'Documentatie',
+    section: null,
+    keywords: [
+      'handleiding',
+      'help',
+      'uitleg',
+      'manual',
+      'hulp',
+      'gebruiksaanwijzing',
+    ],
+  ),
+  SettingsSearchEntry(
+    tab: SettingsSection.documentation,
+    label: 'Gebruikershandleiding',
+    section: null,
+    keywords: ['handleiding', 'manual', 'help', 'uitleg'],
+  ),
+  SettingsSearchEntry(
+    tab: SettingsSection.documentation,
+    label: 'Sneltoetsen',
+    section: null,
+    keywords: ['sneltoets', 'shortcut', 'toetsenbord', 'keyboard', 'toetsen'],
+  ),
+  SettingsSearchEntry(
+    tab: SettingsSection.documentation,
+    label: 'Begrippenlijst',
+    section: null,
+    keywords: ['begrip', 'term', 'woordenlijst', 'glossary', 'jargon'],
+  ),
+  SettingsSearchEntry(
+    tab: SettingsSection.documentation,
+    label: 'Bestandsformaat',
+    section: null,
+    keywords: ['markdown', 'marp', 'formaat', 'bestandsformaat', 'opslag'],
+  ),
+
+  // ── Over OciDeck ──────────────────────────────────────────────────────────
+  SettingsSearchEntry(
+    tab: SettingsSection.about,
+    label: 'Contact',
+    section: null,
+    keywords: ['contact', 'telefoon', 'e-mail', 'adres', 'support', 'bereiken'],
+  ),
+  SettingsSearchEntry(
+    tab: SettingsSection.about,
+    label: 'Uitgever: Stichting LibreKAT',
+    section: null,
+    keywords: ['uitgever', 'stichting', 'librekat', 'colofon', 'organisatie'],
+  ),
+  SettingsSearchEntry(
+    tab: SettingsSection.about,
+    label: 'IBAN',
+    section: null,
+    keywords: ['iban', 'bank', 'rekening', 'doneren', 'donatie', 'steunen'],
+  ),
 ];

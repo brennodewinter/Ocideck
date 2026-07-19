@@ -139,6 +139,84 @@ void main() {
     );
   });
 
+  // De test hierboven slaat sectieloze ingangen over: zonder sectiekop valt er
+  // niets te herleiden. Daardoor zouden juist Documentatie en Over OciDeck —
+  // die per se geen `_sectionTitle` gebruiken — ongedekt blijven.
+  test('sectieloze ingangen staan alleen op tabbladen zonder bruikbaar anker', () {
+    // Zonder `section` landt een treffer bovenaan het tabblad in plaats van bij
+    // de instelling zelf. Dat mag alleen waar er niets is om naartoe te scrollen:
+    //   ai            — op desktop geen sectiekoppen (alleen de web-variant
+    //                   toont er één, met de "niet beschikbaar"-melding);
+    //   documentation — werkt met DocSection in plaats van _sectionTitle;
+    //   about         — werkt met _aboutHeading.
+    // Komt hier een tabblad bij, vraag je dan af of de instelling niet gewoon
+    // een sectie verdient.
+    const allowed = {
+      SettingsSection.ai,
+      SettingsSection.documentation,
+      SettingsSection.about,
+    };
+
+    final sectionless = kSettingsSearchIndex
+        .where((e) => e.section == null && e.sectionKey == null)
+        .toList();
+    expect(
+      sectionless,
+      isNotEmpty,
+      reason: 'de sectieloze ingangen zijn verdwenen; dan mag deze test weg',
+    );
+
+    final misplaced = sectionless
+        .where((e) => !allowed.contains(e.tab))
+        .map(
+          (e) =>
+              '"${e.label ?? e.labelKey}" wijst zonder sectie naar '
+              '${e.tab.name}, en dát tabblad heeft wél ankers — geef de ingang '
+              'een `section`, anders landt de gebruiker bovenaan in plaats van '
+              'bij de instelling zelf',
+        )
+        .toList();
+    expect(misplaced, isEmpty, reason: misplaced.join('\n'));
+  });
+
+  testWidgets('een treffer zonder sectie opent het tabblad zelf', (
+    tester,
+  ) async {
+    await openSettings(tester);
+    await search(tester, 'sneltoets');
+
+    // Treffers herken je aan hun pijl. De labels zelf staan óók in de
+    // (mee-opgebouwde) tabbladen, dus scopen we strak op de resultatenlijst.
+    final hits = find.ancestor(
+      of: find.byIcon(Icons.arrow_forward),
+      matching: find.byType(ListTile),
+    );
+    expect(hits, findsOneWidget);
+
+    // Zonder sectie is het kruimelpad alleen het tabblad — geen '›'.
+    expect(
+      find.descendant(of: hits, matching: find.text('Documentatie')),
+      findsOneWidget,
+    );
+
+    await tester.tap(
+      find.descendant(of: hits, matching: find.text('Sneltoetsen')),
+    );
+    await tester.pumpAndSettle();
+
+    // De kop van het contentvlak toont het geselecteerde tabblad; die Text is
+    // aan zijn corpsgrootte te onderscheiden van het zijbalklabel.
+    expect(
+      find.byWidgetPredicate(
+        (w) => w is Text && w.data == 'Documentatie' && w.style?.fontSize == 18,
+      ),
+      findsOneWidget,
+    );
+    // En de resultatenlijst is opgeruimd — de sprong liep niet vast op het
+    // ontbrekende anker.
+    expect(hits, findsNothing);
+  });
+
   test('elke zoekterm wijst naar het tabblad dat zijn sectie rendert', () {
     final builders = sectionBuilders();
 
