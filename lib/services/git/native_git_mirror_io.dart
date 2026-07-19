@@ -160,14 +160,69 @@ class _NativeGitMirror implements NativeGitMirror {
       };
     }
     final port = base.hasPort ? base.port : (scheme == 'https' ? 443 : 80);
+    final pinned = resolved.addresses!.first;
     return [
       ..._config0,
       GitConfigOverride(
         'http.curloptResolve',
-        '${base.host}:$port:${resolved.addresses!.first.address}',
+        '${base.host}:$port:${pinned.address}',
       ),
       const GitConfigOverride('http.followRedirects', 'false'),
+      ...await _trustedCertConfig(pinned, base, port),
     ];
+  }
+
+  /// Laat git hetzelfde ene certificaat vertrouwen als de REST-weg.
+  ///
+  /// De REST-weg hangt een `badCertificateCallback` op die de vingerafdruk
+  /// vergelijkt. Git heeft zoiets niet — het kent alleen een CA-bestand
+  /// (`http.sslCAInfo`) of een publieke sleutel, en géén vingerafdruk van een
+  /// heel certificaat. Zonder dit stond de gebruiker met een werkende
+  /// verbindingstest en een falende clone: de REST-weg vertrouwde het
+  /// zelfondertekende certificaat, git wees het af.
+  ///
+  /// Daarom: het certificaat ópvragen bij het gepinde adres, de vingerafdruk
+  /// zelf controleren, en het pas dán als trust-anker aan git meegeven. De
+  /// controle blijft dus bij ons — `sslCAInfo` krijgt nooit iets te zien dat
+  /// wij niet eerst tegen de vastgelegde vingerafdruk hebben gehouden.
+  ///
+  /// Wat *niet* gebeurt: `http.sslVerify=false`. Dat zou de hele controle
+  /// uitzetten, inclusief de naamcontrole. Met een CA-bestand blijft git
+  /// gewoon valideren — alleen is dit certificaat nu een geldig anker.
+  ///
+  /// Levert niets op wanneer er geen vingerafdruk is vastgelegd, of wanneer
+  /// het certificaat het ook zonder redt: [NetGuard.peekCertificate] geeft dan
+  /// `null`, en dat is precies wat de REST-weg óók doet — een
+  /// `badCertificateCallback` wordt alleen geraadpleegd als de gewone
+  /// validatie faalt. De pin is "vertrouw dit certificaat *erbij*", niet
+  /// "vertrouw alléén dit certificaat".
+  Future<List<GitConfigOverride>> _trustedCertConfig(
+    InternetAddress pinned,
+    Uri base,
+    int port,
+  ) async {
+    final expected = _config.pinnedCertSha256.trim();
+    if (expected.isEmpty) return const [];
+
+    final probe = Uri(scheme: base.scheme, host: base.host, port: port);
+    final cert = await NetGuard.peekCertificate(pinned, probe);
+    if (cert == null) return const [];
+
+    final actual = NetGuard.certificateFingerprint(cert);
+    if (actual != expected.toLowerCase()) {
+      throw const GitForgeException(
+        GitForgeError.blockedHost,
+        'Het certificaat van de server wijkt af van de vastgelegde '
+        'vingerafdruk.',
+      );
+    }
+
+    // Naast de werkboom, niet erin: in de werkboom zou het als een onbekend
+    // bestand in `git status` opduiken en in een commit kunnen belanden.
+    final file = File('${_worktree.path}.pem');
+    await file.parent.create(recursive: true);
+    await writeStringAtomic(file, cert.pem);
+    return [GitConfigOverride('http.sslCAInfo', file.path)];
   }
 
   /// [network] hoort aan te staan voor alles wat de lijn op gaat — clone,
