@@ -1804,6 +1804,10 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'strafrechtelijk gegeven (verdachte)': 'наказателноправни данни (заподозрян)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'наказателноправни данни (жалбоподател или жертва)',
+  'strafrechtelijk gegeven (getuige)': 'наказателноправни данни (свидетел)',
   'diagnosecode (ICD-10)': 'код на диагноза (МКБ-10)',
   'geneesmiddelcode (ATC)': 'код на лекарство (ATC)',
   'geboortedatum': 'дата на раждане',

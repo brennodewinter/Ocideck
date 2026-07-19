@@ -1793,6 +1793,10 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'strafrechtelijk gegeven (verdachte)': 'dane karne (podejrzany)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'dane karne (zgłaszający lub ofiara)',
+  'strafrechtelijk gegeven (getuige)': 'dane karne (świadek)',
   'diagnosecode (ICD-10)': 'kod rozpoznania (ICD-10)',
   'geneesmiddelcode (ATC)': 'kod leku (ATC)',
   'geboortedatum': 'data urodzenia',

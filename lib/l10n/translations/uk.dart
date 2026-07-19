@@ -1799,6 +1799,10 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'strafrechtelijk gegeven (verdachte)': 'дані про судимість (підозрюваний)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'дані про судимість (заявник або потерпілий)',
+  'strafrechtelijk gegeven (getuige)': 'дані про судимість (свідок)',
   'diagnosecode (ICD-10)': 'код діагнозу (МКХ-10)',
   'geneesmiddelcode (ATC)': 'код лікарського засобу (ATC)',
   'geboortedatum': 'дата народження',

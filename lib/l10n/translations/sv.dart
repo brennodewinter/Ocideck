@@ -1780,6 +1780,10 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'strafrechtelijk gegeven (verdachte)': 'straffrättslig uppgift (misstänkt)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'straffrättslig uppgift (anmälare eller offer)',
+  'strafrechtelijk gegeven (getuige)': 'straffrättslig uppgift (vittne)',
   'diagnosecode (ICD-10)': 'diagnoskod (ICD-10)',
   'geneesmiddelcode (ATC)': 'läkemedelskod (ATC)',
   'geboortedatum': 'födelsedatum',

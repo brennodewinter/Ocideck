@@ -35,6 +35,20 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   conflictafhandeling als bij WebDAV. Een deck dat je uit een bucket opende,
   gaat bij opslaan vanzelf naar diezelfde bucket terug.
 
+- **Een aangeefster is geen verdachte, en de melding zegt dat nu ook.** Tot nu
+  toe leverden "verdachte M. de Vries" en "aangeefster M. de Vries" een
+  identieke melding op, terwijl dat juridisch en menselijk twee volstrekt
+  verschillende dingen zijn — en de tweede degene is voor wie een lek het hardst
+  aankomt. OciDeck herkent nu drie rollen: verdachte, aangever of slachtoffer,
+  en getuige.
+
+  De vierde mogelijkheid is de belangrijkste: **onbekend**, en dat is de
+  standaard. Staat er geen aanwijzing in de tekst, of staan er juist twee rollen
+  in dezelfde zin, dan zegt OciDeck niets over wie het betreft. Dat is met opzet
+  zo gebouwd: een keuze tussen alleen "verdachte" en "niet-verdachte" heeft geen
+  vakje voor onwetendheid, en dwingt daarmee precies de fout af die je hier niet
+  wilt maken.
+
 - **De trefwoordenlijst voor bijzondere persoonsgegevens weet nu wat voor woord
   ze bevat.** Tot nu toe leidde OciDeck uit de lengte van een woord af hoe het
   gezocht moest worden: kort betekende "alleen als heel woord", lang betekende

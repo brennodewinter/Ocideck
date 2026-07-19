@@ -1780,6 +1780,11 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'strafrechtelijk gegeven (verdachte)':
+      'krimināltiesību dati (aizdomās turētais)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'krimināltiesību dati (ziņotājs vai cietušais)',
+  'strafrechtelijk gegeven (getuige)': 'krimināltiesību dati (liecinieks)',
   'diagnosecode (ICD-10)': 'diagnozes kods (SSK-10)',
   'geneesmiddelcode (ATC)': 'zāļu kods (ATĶ)',
   'geboortedatum': 'dzimšanas datums',

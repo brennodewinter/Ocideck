@@ -739,6 +739,10 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'strafrechtelijk gegeven (verdachte)': 'strafrjochtlik gegeven (fertochte)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'strafrjochtlik gegeven (oanjefte-dwaner of slachtoffer)',
+  'strafrechtelijk gegeven (getuige)': 'strafrjochtlik gegeven (tsjûge)',
   'diagnosecode (ICD-10)': 'diagnoazekoade (ICD-10)',
   'geneesmiddelcode (ATC)': 'medisynkoade (ATC)',
   'geboortedatum': 'berteedatum',

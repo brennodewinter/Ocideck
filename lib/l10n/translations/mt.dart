@@ -1803,6 +1803,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'strafrechtelijk gegeven (verdachte)': 'data kriminali (suspettat)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'data kriminali (min jirrapporta jew vittma)',
+  'strafrechtelijk gegeven (getuige)': 'data kriminali (xhud)',
   'diagnosecode (ICD-10)': 'kodiċi tad-dijanjosi (ICD-10)',
   'geneesmiddelcode (ATC)': 'kodiċi tal-mediċina (ATC)',
   'geboortedatum': 'data tat-twelid',

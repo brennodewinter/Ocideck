@@ -920,6 +920,10 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'strafrechtelijk gegeven (verdachte)': 'criminal-law data (suspect)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'criminal-law data (complainant or victim)',
+  'strafrechtelijk gegeven (getuige)': 'criminal-law data (witness)',
   'diagnosecode (ICD-10)': 'diagnosis code (ICD-10)',
   'geneesmiddelcode (ATC)': 'medicine code (ATC)',
   'geboortedatum': 'date of birth',

@@ -738,6 +738,10 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'strafrechtelijk gegeven (verdachte)': 'donnée pénale (suspect)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'donnée pénale (plaignant ou victime)',
+  'strafrechtelijk gegeven (getuige)': 'donnée pénale (témoin)',
   'diagnosecode (ICD-10)': 'code de diagnostic (CIM-10)',
   'geneesmiddelcode (ATC)': 'code de médicament (ATC)',
   'geboortedatum': 'date de naissance',

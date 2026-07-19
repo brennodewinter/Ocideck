@@ -1785,6 +1785,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'strafrechtelijk gegeven (verdachte)': 'strafrächtlichi Aagab (Verdächtige)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'strafrächtlichi Aagab (Aazeigersteller oder Opfer)',
+  'strafrechtelijk gegeven (getuige)': 'strafrächtlichi Aagab (Züüge)',
   'diagnosecode (ICD-10)': 'Diagnosecode (ICD-10)',
   'geneesmiddelcode (ATC)': 'Medikamäntecode (ATC)',
   'geboortedatum': 'Geburtsdatum',

@@ -1781,6 +1781,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'strafrechtelijk gegeven (verdachte)': 'data pidana (tersangka)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'data pidana (pelapor atau korban)',
+  'strafrechtelijk gegeven (getuige)': 'data pidana (saksi)',
   'diagnosecode (ICD-10)': 'kode diagnosis (ICD-10)',
   'geneesmiddelcode (ATC)': 'kode obat (ATC)',
   'geboortedatum': 'tanggal lahir',

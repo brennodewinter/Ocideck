@@ -1797,6 +1797,10 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'strafrechtelijk gegeven (verdachte)': 'datum criminale (suspectus)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'datum criminale (delator vel victima)',
+  'strafrechtelijk gegeven (getuige)': 'datum criminale (testis)',
   'diagnosecode (ICD-10)': 'codex diagnosis (ICD-10)',
   'geneesmiddelcode (ATC)': 'codex medicamenti (ATC)',
   'geboortedatum': 'dies natalis',

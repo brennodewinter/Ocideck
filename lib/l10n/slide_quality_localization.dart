@@ -446,6 +446,16 @@ String privacyRuleLabel(AppLocalizations l10n, String ruleId) {
     'digital.deviceid' => l10n.d('advertentie- of apparaat-ID'),
     'image.face' => l10n.d('herkenbaar gezicht op een afbeelding'),
     'special.health' => l10n.d('gezondheidsgegeven'),
+    // De rol reist mee in het regel-label, want dát is de plek waar de melding
+    // hem laat zien. "Strafrechtelijk gegeven" zegt niet wie er in beeld is, en
+    // juist dat verschil is het punt van fase 14: een aangeefster is geen
+    // verdachte. Zonder herkende rol blijft het bij de neutrale formulering —
+    // liever niets zeggen dan het verkeerde.
+    'special.criminal.suspect' => l10n.d('strafrechtelijk gegeven (verdachte)'),
+    'special.criminal.reporter' => l10n.d(
+      'strafrechtelijk gegeven (aangever of slachtoffer)',
+    ),
+    'special.criminal.witness' => l10n.d('strafrechtelijk gegeven (getuige)'),
     'special.criminal' => l10n.d('strafrechtelijk gegeven'),
     'special.religion' => l10n.d('religie of levensovertuiging'),
     'special.union' => l10n.d('vakbondslidmaatschap'),

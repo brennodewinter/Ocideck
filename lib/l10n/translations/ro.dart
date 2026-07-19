@@ -1799,6 +1799,10 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'strafrechtelijk gegeven (verdachte)': 'date penale (suspect)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'date penale (reclamant sau victimă)',
+  'strafrechtelijk gegeven (getuige)': 'date penale (martor)',
   'diagnosecode (ICD-10)': 'cod de diagnostic (CIM-10)',
   'geneesmiddelcode (ATC)': 'cod de medicament (ATC)',
   'geboortedatum': 'data nașterii',

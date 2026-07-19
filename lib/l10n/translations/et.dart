@@ -1772,6 +1772,11 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'strafrechtelijk gegeven (verdachte)':
+      'karistusõiguslik andmed (kahtlustatav)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'karistusõiguslik andmed (teataja või ohver)',
+  'strafrechtelijk gegeven (getuige)': 'karistusõiguslik andmed (tunnistaja)',
   'diagnosecode (ICD-10)': 'diagnoosikood (RHK-10)',
   'geneesmiddelcode (ATC)': 'ravimikood (ATC)',
   'geboortedatum': 'sünnikuupäev',

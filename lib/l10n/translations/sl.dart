@@ -1783,6 +1783,10 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'strafrechtelijk gegeven (verdachte)': 'kazenskopravni podatek (osumljenec)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'kazenskopravni podatek (prijavitelj ali žrtev)',
+  'strafrechtelijk gegeven (getuige)': 'kazenskopravni podatek (priča)',
   'diagnosecode (ICD-10)': 'šifra diagnoze (MKB-10)',
   'geneesmiddelcode (ATC)': 'šifra zdravila (ATC)',
   'geboortedatum': 'datum rojstva',

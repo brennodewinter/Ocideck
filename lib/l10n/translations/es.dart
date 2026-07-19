@@ -735,6 +735,10 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'strafrechtelijk gegeven (verdachte)': 'dato penal (sospechoso)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'dato penal (denunciante o víctima)',
+  'strafrechtelijk gegeven (getuige)': 'dato penal (testigo)',
   'diagnosecode (ICD-10)': 'código de diagnóstico (CIE-10)',
   'geneesmiddelcode (ATC)': 'código de medicamento (ATC)',
   'geboortedatum': 'fecha de nacimiento',

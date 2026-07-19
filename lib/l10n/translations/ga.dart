@@ -1817,6 +1817,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'strafrechtelijk gegeven (verdachte)': 'sonraí coiriúla (duine faoi amhras)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'sonraí coiriúla (gearánach nó íospartach)',
+  'strafrechtelijk gegeven (getuige)': 'sonraí coiriúla (finné)',
   'diagnosecode (ICD-10)': 'cód diagnóise (ICD-10)',
   'geneesmiddelcode (ATC)': 'cód cógais (ATC)',
   'geboortedatum': 'dáta breithe',

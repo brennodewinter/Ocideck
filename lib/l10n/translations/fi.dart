@@ -1781,6 +1781,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'strafrechtelijk gegeven (verdachte)': 'rikosoikeudellinen tieto (epäilty)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'rikosoikeudellinen tieto (ilmoittaja tai uhri)',
+  'strafrechtelijk gegeven (getuige)': 'rikosoikeudellinen tieto (todistaja)',
   'diagnosecode (ICD-10)': 'diagnoosikoodi (ICD-10)',
   'geneesmiddelcode (ATC)': 'lääkekoodi (ATC)',
   'geboortedatum': 'syntymäaika',

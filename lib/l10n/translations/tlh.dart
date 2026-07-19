@@ -1756,6 +1756,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'strafrechtelijk gegeven (verdachte)': 'ghob De\' (pIch ghaj\'a\')',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'ghob De\' (ja\'wI\' ghap Suvwn)',
+  'strafrechtelijk gegeven (getuige)': 'ghob De\' (leghwI\')',
   'diagnosecode (ICD-10)': 'rop ngu\' mI\' (ICD-10)',
   'geneesmiddelcode (ATC)': 'Hergh mI\' (ATC)',
   'geboortedatum': 'boghDIS',

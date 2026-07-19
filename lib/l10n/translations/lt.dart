@@ -1789,6 +1789,12 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'strafrechtelijk gegeven (verdachte)':
+      'baudžiamosios teisės duomenys (įtariamasis)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'baudžiamosios teisės duomenys (pareiškėjas arba auka)',
+  'strafrechtelijk gegeven (getuige)':
+      'baudžiamosios teisės duomenys (liudytojas)',
   'diagnosecode (ICD-10)': 'diagnozės kodas (TLK-10)',
   'geneesmiddelcode (ATC)': 'vaisto kodas (ATC)',
   'geboortedatum': 'gimimo data',

@@ -88,6 +88,20 @@ enum PrivacyTermRole {
   value,
 }
 
+/// De rol die iemand in een strafrechtelijk gegeven speelt.
+///
+/// Bestaat omdat "verdachte M. de Vries" en "aangeefster M. de Vries" tot fase
+/// 14 een identieke melding opleverden, terwijl dat juridisch en menselijk twee
+/// volstrekt verschillende dingen zijn — en de tweede degene is voor wie een lek
+/// het hardst aankomt.
+///
+/// **[unknown] is de standaard, en dat is de hele opzet.** De verleiding is een
+/// tweeweg (verdachte of niet), maar dan is er geen vakje om in te vallen als je
+/// het niet weet, en dwingt het model de duurste fout af: een aangeefster een
+/// verdachte noemen. Ambiguïteit valt hier dus in terug, niet in de meest
+/// waarschijnlijke lezing.
+enum PrivacyPersonRole { unknown, suspect, reporter, witness }
+
 /// Eén treffer, op één plek in één slide.
 class PrivacyFinding {
   /// De regel die vuurde, bijvoorbeeld `nl.bsn` of `fin.iban`. Stabiel: de
@@ -123,6 +137,10 @@ class PrivacyFinding {
   /// hoeven zich als aanwijzing te melden.
   final PrivacyTermRole role;
 
+  /// Bij een strafrechtelijk gegeven: wiens rol het beschrijft. Standaard
+  /// [PrivacyPersonRole.unknown] — zie daar waarom dat geen tekortkoming is.
+  final PrivacyPersonRole personRole;
+
   const PrivacyFinding({
     required this.ruleId,
     required this.family,
@@ -134,6 +152,7 @@ class PrivacyFinding {
     required this.maskedSample,
     this.fragmentIndex = 0,
     this.role = PrivacyTermRole.value,
+    this.personRole = PrivacyPersonRole.unknown,
   });
 
   /// Of deze bevinding weggelakt hoort te worden als de slide op `redact` staat.
@@ -174,6 +193,7 @@ class PrivacyFinding {
         end: end,
         maskedSample: maskedSample,
         role: role,
+        personRole: personRole,
       );
 }
 

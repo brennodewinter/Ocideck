@@ -22,6 +22,7 @@ import '../../models/slide.dart';
 import 'privacy_allowlist.dart';
 import 'privacy_bulk_rules.dart';
 import 'privacy_checksums.dart';
+import 'privacy_context_role.dart';
 import 'privacy_contact_rules.dart';
 import 'privacy_digital_rules.dart';
 import 'privacy_document_rules.dart';
@@ -506,6 +507,15 @@ class PrivacyScanner {
           role: hit.entry.role == PrivacyLexiconRole.value
               ? PrivacyTermRole.value
               : PrivacyTermRole.indicator,
+          // Alleen bij artikel 10 heeft "wiens rol is dit" betekenis. Een
+          // diagnose kent geen verdachte.
+          personRole: hit.entry.category == 'special.criminal'
+              ? personRoleFor(
+                  fragment.text,
+                  hit.at,
+                  hit.at + hit.entry.term.length,
+                )
+              : PrivacyPersonRole.unknown,
         ),
       );
     }
@@ -570,6 +580,7 @@ class PrivacyScanner {
     int start,
     int length, {
     PrivacyTermRole role = PrivacyTermRole.indicator,
+    PrivacyPersonRole personRole = PrivacyPersonRole.unknown,
   }) => PrivacyFinding(
     ruleId: ruleId,
     family: PrivacyFamily.specialCategory,
@@ -585,6 +596,7 @@ class PrivacyScanner {
     // altijd: "diabetes" en "strafblad" zíjn het gegeven. Het lexicon zegt
     // welke van de twee, en de standaard blijft de voorzichtige.
     role: role,
+    personRole: personRole,
   );
 
   // ── Europese identificatienummers ─────────────────────────────────────────

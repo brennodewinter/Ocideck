@@ -1811,6 +1811,10 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'strafrechtelijk gegeven (verdachte)': 'dado penal (suspeito)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'dado penal (denunciante ou vítima)',
+  'strafrechtelijk gegeven (getuige)': 'dado penal (testemunha)',
   'diagnosecode (ICD-10)': 'código de diagnóstico (CID-10)',
   'geneesmiddelcode (ATC)': 'código de medicamento (ATC)',
   'geboortedatum': 'data de nascimento',

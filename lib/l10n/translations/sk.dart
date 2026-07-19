@@ -1788,6 +1788,10 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'strafrechtelijk gegeven (verdachte)': 'trestnoprávny údaj (podozrivý)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'trestnoprávny údaj (oznamovateľ alebo obeť)',
+  'strafrechtelijk gegeven (getuige)': 'trestnoprávny údaj (svedok)',
   'diagnosecode (ICD-10)': 'kód diagnózy (MKCH-10)',
   'geneesmiddelcode (ATC)': 'kód lieku (ATC)',
   'geboortedatum': 'dátum narodenia',

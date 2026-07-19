@@ -233,6 +233,11 @@ final List<PrivacyLexiconEntry> _criminalTerms = [
   _e('suspect', 'special.criminal', 'en', weight: 3),
   _e('verdächtige', 'special.criminal', 'de', weight: 4),
   _e('sospechoso', 'special.criminal', 'es', weight: 4),
+  // De stam en niet `veroordeling`, om precies de reden die §13.1 al voor
+  // `verdacht` optekende: de zelfstandignaamwoordsvorm mist de werkwoordsvorm,
+  // en "werd veroordeeld" is de gewonere formulering van de twee. Dezelfde fout,
+  // een regel lager — gevonden doordat de rolherkenningstest er niet op aansloeg.
+  _e('veroordeel', 'special.criminal', 'nl', weight: 5),
   _e('veroordeling', 'special.criminal', 'nl', weight: 5),
   _e('conviction', 'special.criminal', 'en', weight: 3),
   _e('verurteilung', 'special.criminal', 'de', weight: 5),

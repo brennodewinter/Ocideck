@@ -1785,6 +1785,10 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'strafrechtelijk gegeven (verdachte)': 'büntetőjogi adat (gyanúsított)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'büntetőjogi adat (bejelentő vagy sértett)',
+  'strafrechtelijk gegeven (getuige)': 'büntetőjogi adat (tanú)',
   'diagnosecode (ICD-10)': 'diagnóziskód (BNO-10)',
   'geneesmiddelcode (ATC)': 'gyógyszerkód (ATC)',
   'geboortedatum': 'születési dátum',

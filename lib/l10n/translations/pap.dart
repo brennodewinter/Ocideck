@@ -738,6 +738,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'strafrechtelijk gegeven (verdachte)': 'dato penal (sospechoso)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'dato penal (denunsiante òf víktima)',
+  'strafrechtelijk gegeven (getuige)': 'dato penal (testigu)',
   'diagnosecode (ICD-10)': 'kódigo di diagnóstiko (ICD-10)',
   'geneesmiddelcode (ATC)': 'kódigo di medisina (ATC)',
   'geboortedatum': 'fecha di nasementu',

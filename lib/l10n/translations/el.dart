@@ -1809,6 +1809,10 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'strafrechtelijk gegeven (verdachte)': 'ποινικό δεδομένο (ύποπτος)',
+  'strafrechtelijk gegeven (aangever of slachtoffer)':
+      'ποινικό δεδομένο (μηνυτής ή θύμα)',
+  'strafrechtelijk gegeven (getuige)': 'ποινικό δεδομένο (μάρτυρας)',
   'diagnosecode (ICD-10)': 'κωδικός διάγνωσης (ICD-10)',
   'geneesmiddelcode (ATC)': 'κωδικός φαρμάκου (ATC)',
   'geboortedatum': 'ημερομηνία γέννησης',
