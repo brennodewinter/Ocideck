@@ -1803,6 +1803,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
+      'data tat-twelid, kodiċi postali u sess flimkien — dawn it-tlieta ġeneralment jindikaw persuna waħda, anke mingħajr isem',
   'creditcardnummer': 'numru tal-karta tal-kreditu',
   'beveiligingscode van een creditcard': 'kodiċi tas-sigurtà tal-karta (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

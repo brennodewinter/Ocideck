@@ -1780,6 +1780,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
+      'fødselsdato, postnummer og køn tilsammen — de tre peger som regel på én person, også uden navn',
   'creditcardnummer': 'kreditkortnummer',
   'beveiligingscode van een creditcard': 'kortsikkerhedskode (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

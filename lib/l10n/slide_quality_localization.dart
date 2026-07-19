@@ -482,6 +482,9 @@ String privacyRuleLabel(AppLocalizations l10n, String ruleId) {
       'tabel met persoonsgegevens (rijen×kolommen)',
     ),
     'bulk.repeat' => l10n.d('massa-persoonsgegevens op één slide'),
+    'bulk.quasi_combo' => l10n.d(
+      'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam',
+    ),
     'struct.user_path' => l10n.d('gebruikerspad met een naam erin'),
     'struct.url_token' => l10n.d('toegangstoken in een link'),
     'struct.url_pii' => l10n.d('persoonsgegeven in een link'),

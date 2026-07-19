@@ -1799,6 +1799,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
+      'дата народження, поштовий індекс і стать разом — ці три зазвичай вказують на одну особу, навіть без імені',
   'creditcardnummer': 'номер кредитної картки',
   'beveiligingscode van een creditcard': 'код безпеки картки (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

@@ -1809,6 +1809,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
+      'ημερομηνία γέννησης, ταχυδρομικός κώδικας και φύλο μαζί — αυτά τα τρία συνήθως προσδιορίζουν ένα άτομο, ακόμη και χωρίς όνομα',
   'creditcardnummer': 'αριθμός πιστωτικής κάρτας',
   'beveiligingscode van een creditcard': 'κωδικός ασφαλείας κάρτας (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

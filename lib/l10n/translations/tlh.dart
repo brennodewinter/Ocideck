@@ -1756,6 +1756,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
+      'boghDIS, Sep mI\', ghaH je — wej vam wa\' nuv \'ang, pong Hutlh\'a\'',
   'creditcardnummer': 'HuchQeD mI\'',
   'beveiligingscode van een creditcard': 'HuchQeD Hurgh mI\'',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

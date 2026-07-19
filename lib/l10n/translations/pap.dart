@@ -738,6 +738,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
+      'fecha di nasementu, kódigo postal i sekso huntu — e tres ei generalmente ta indiká un solo persona, asta sin nòmber',
   'creditcardnummer': 'number di karchi di krédito',
   'beveiligingscode van een creditcard': 'kódigo di siguridat di karchi',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

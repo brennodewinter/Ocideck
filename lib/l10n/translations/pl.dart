@@ -1793,6 +1793,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
+      'data urodzenia, kod pocztowy i płeć razem — te trzy zwykle wskazują jedną osobę, nawet bez nazwiska',
   'creditcardnummer': 'numer karty kredytowej',
   'beveiligingscode van een creditcard': 'kod bezpieczeństwa karty (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':

@@ -10,6 +10,19 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Added
+- **"Maar het is toch geanonimiseerd" wordt nu tegengesproken.** Staan
+  geboortedatum, postcode en geslacht samen op één slide, dan wijzen die drie
+  meestal één persoon aan — ook zonder naam erbij. Latanya Sweeney liet in 1997
+  zien dat het voor 87% van de Amerikaanse bevolking opgaat.
+
+  Juist omdat geen van de drie op zichzelf een identificatienummer is,
+  overleven ze het schrappen van namen, en heet zo'n tabel daarna
+  "geanonimiseerd". OciDeck merkt nu op wanneer die drie samenvallen, of ze nu
+  in de tekst staan of als kolommen in een tabel.
+
+  Twee van de drie levert niets op. Anders zou elke adreslijst een waarschuwing
+  geven.
+
 - **Creditcardnummers worden herkend.** Een kaartnummer draagt twee
   onafhankelijke bewijzen in zich: een controlecijfer én een nummerreeks die
   zegt van welke kaartmaatschappij het is. Allebei moeten kloppen, want één op

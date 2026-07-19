@@ -734,6 +734,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
+      'data di nascita, CAP e sesso insieme: quei tre di solito individuano una sola persona, anche senza nome',
   'creditcardnummer': 'numero di carta di credito',
   'beveiligingscode van een creditcard':
       'codice di sicurezza della carta (CVV)',

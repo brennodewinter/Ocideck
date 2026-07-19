@@ -1817,6 +1817,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
+      'dáta breithe, cód poist agus inscne le chéile — is gnách go gcuireann an triúr sin duine amháin in iúl, fiú gan ainm',
   'creditcardnummer': 'uimhir chárta creidmheasa',
   'beveiligingscode van een creditcard': 'cód slándála cárta (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
