@@ -95,7 +95,11 @@ const List<SpecialCategoryRule> specialCategoryRules = [
     'ggz',
   ]),
   SpecialCategoryRule('special.criminal', [
-    'verdachte',
+    // De stam, niet de verbogen vorm: met voorvoegselmatching dekt `verdacht`
+    // ook `verdachte`, `verdachten` en `verdachtmaking`. Stond hier eerst als
+    // `verdachte`, en daardoor miste "wordt verdacht van diefstal" — de meest
+    // voorkomende formulering — volledig.
+    'verdacht',
     'suspect',
     'verdächtige',
     'sospechoso',
@@ -195,6 +199,53 @@ const List<SpecialCategoryRule> specialCategoryRules = [
     'biometrische',
   ]),
 ];
+
+/// Vanaf welke lengte een term als voorvoegsel mag matchen.
+///
+/// Onder deze grens zitten in de praktijk alleen acroniemen — `hiv`, `ggz`,
+/// `vog` — en juist die moeten als héél woord matchen. Anders vindt `vog` de
+/// vogels, en dat is geen hypothetisch voorbeeld: dat deed hij.
+const int kMinPrefixTermLength = 4;
+
+/// Of dit teken bij een woord hoort. Latijnse accenttekens tellen mee, zodat
+/// `patiënt` één woord is en niet drie.
+bool _isWordChar(int c) =>
+    (c >= 0x61 && c <= 0x7A) ||
+    (c >= 0x41 && c <= 0x5A) ||
+    (c >= 0x30 && c <= 0x39) ||
+    (c >= 0xC0 && c <= 0x24F);
+
+/// Zoekt [term] in [lowerText] op een woordgrens. Geeft -1 als hij er niet staat.
+///
+/// Dit verving een kale `indexOf`, en het verschil is groter dan het lijkt. Twee
+/// modi, met de termlengte als grens:
+///
+///   * **kort** (< [kMinPrefixTermLength]): alleen als héél woord, dus met een
+///     grens aan beide kanten. `vog` vindt `VOG`, niet `vogels`;
+///   * **lang**: op woordbegin, met een vrij achtervoegsel. Nederlandse
+///     morfologie is vrijwel volledig suffigerend, dus `verdacht` hoort
+///     `verdachte` en `verdachten` te vinden — en die miste de oude matcher,
+///     want de lijst bevat alleen de zelfstandige vorm.
+///
+/// Wat dit **niet** oplost: homoniemen. `arrest` is een strafrechtelijke term én
+/// een uitspraak van de Hoge Raad, en geen woordgrens ter wereld ziet het
+/// verschil. Daar is de persoonskoppelingspoort voor.
+int findPrivacyTerm(String lowerText, String term) {
+  if (term.isEmpty) return -1;
+  final wholeWordOnly = term.length < kMinPrefixTermLength;
+  var from = 0;
+  while (from <= lowerText.length - term.length) {
+    final at = lowerText.indexOf(term, from);
+    if (at < 0) return -1;
+    final startsWord = at == 0 || !_isWordChar(lowerText.codeUnitAt(at - 1));
+    final end = at + term.length;
+    final endsWord =
+        end >= lowerText.length || !_isWordChar(lowerText.codeUnitAt(end));
+    if (startsWord && (!wholeWordOnly || endsWord)) return at;
+    from = at + 1;
+  }
+  return -1;
+}
 
 /// Genetische gegevens herkennen we aan hun notatie, niet aan een trefwoord.
 ///

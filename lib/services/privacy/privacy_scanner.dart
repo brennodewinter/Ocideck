@@ -373,7 +373,7 @@ class PrivacyScanner {
 
     for (final rule in specialCategoryRules) {
       for (final word in rule.keywords) {
-        final at = lower.indexOf(word);
+        final at = findPrivacyTerm(lower, word);
         if (at < 0) continue;
         _emit(
           out,
@@ -433,6 +433,9 @@ class PrivacyScanner {
     start: start,
     end: start + length,
     maskedSample: maskValue(fragment.text.substring(start, start + length)),
+    // Een trefwoord wijst naar het gegeven, het ís het niet. Zie
+    // [PrivacyTermRole] voor waarom dat verschil bij redactie telt.
+    role: PrivacyTermRole.indicator,
   );
 
   // ── Europese identificatienummers ─────────────────────────────────────────

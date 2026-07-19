@@ -51,6 +51,33 @@ enum PrivacyConfidence {
   possible,
 }
 
+/// Of de gevonden tekst zélf het persoonsgegeven is, of alleen een aanwijzing
+/// dat er een in de buurt staat.
+///
+/// Dit onderscheid bepaalt wat er bij redactie weggaat, en het is de reden dat
+/// deze enum bestaat. "Diagnose" is geen gezondheidsgegeven — het is een woord
+/// dat zegt dat er over gezondheid gesproken wordt. Dat weglakken levert dit op:
+///
+///     Jan had een ████████ bij de huisarts
+///
+/// Er is niets verborgen, "Jan" staat er nog, en de ontvanger denkt ten onrechte
+/// dat daar iets gevoeligs stond. `F32.1`, `diabetes` of een parketnummer zijn
+/// wél het gegeven zelf; die horen wél weg.
+///
+/// De Autoriteit Persoonsgegevens hanteert precies dit onderscheid: *"Gegevens
+/// die hooguit een indicatie geven dat het om een gevoelig kenmerk zou kunnen
+/// gaan, zijn niet voldoende"* om van een rechtstreeks verband te spreken
+/// (onderzoek kinderopvangtoeslag, §3.3.1).
+enum PrivacyTermRole {
+  /// Een signaalwoord. Meldt wel, redigeert niet — tenzij de escalator het
+  /// bereik heeft verbreed tot de hele mededeling, want dán gaat het niet meer
+  /// om het woord maar om de uitspraak eromheen.
+  indicator,
+
+  /// De tekst is zelf het gegeven. Redigeren haalt werkelijk iets weg.
+  value,
+}
+
 /// Eén treffer, op één plek in één slide.
 class PrivacyFinding {
   /// De regel die vuurde, bijvoorbeeld `nl.bsn` of `fin.iban`. Stabiel: de
@@ -81,6 +108,11 @@ class PrivacyFinding {
   /// volledige waarde. Zie [maskValue].
   final String maskedSample;
 
+  /// Of deze tekst het gegeven ís of er alleen naar wijst. Standaard [value]:
+  /// een BSN, een IBAN, een e-mailadres is zichzelf, en alleen de trefwoordregels
+  /// hoeven zich als aanwijzing te melden.
+  final PrivacyTermRole role;
+
   const PrivacyFinding({
     required this.ruleId,
     required this.family,
@@ -91,7 +123,18 @@ class PrivacyFinding {
     required this.end,
     required this.maskedSample,
     this.fragmentIndex = 0,
+    this.role = PrivacyTermRole.value,
   });
+
+  /// Of deze bevinding weggelakt hoort te worden als de slide op `redact` staat.
+  ///
+  /// Een aanwijzing gaat alleen mee als de escalator haar bereik heeft verbreed
+  /// tot de hele mededeling — dan is het gegeven niet het woord maar de
+  /// uitspraak, en dán haalt redactie werkelijk iets weg. Een losse `diagnose`
+  /// zonder persoon eromheen blijft staan: er valt niets te verbergen, en een
+  /// zwart blok op die plek liegt tegen de ontvanger.
+  bool get isRedactable =>
+      role == PrivacyTermRole.value || confidence == PrivacyConfidence.certain;
 
   bool get isDeckWide => slideIndex == kDeckWidePrivacyIndex;
 
@@ -120,6 +163,7 @@ class PrivacyFinding {
         start: start,
         end: end,
         maskedSample: maskedSample,
+        role: role,
       );
 }
 
