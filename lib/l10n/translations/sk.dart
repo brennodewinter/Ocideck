@@ -1788,6 +1788,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Otváraj a uchovávaj prezentácie v úložisku S3: AWS S3 alebo služba kompatibilná s S3, napríklad vlastné MinIO. Tajný prístupový kľúč sa ukladá zašifrovaný v zväzku kľúčov, nie k ostatným nastaveniam.',
   'Openen vanuit S3': 'Otvoriť z S3',
   'Afbeelding kiezen in S3': 'Vybrať obrázok v S3',
   'Opslaan naar S3': 'Uložiť do S3',

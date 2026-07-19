@@ -14,6 +14,11 @@ extension _SettingsS3 on _SettingsDialogState {
       child: DropdownButtonFormField<S3AddressingStyle>(
         initialValue: form.addressingStyle,
         isDense: true,
+        // De twee keuzes dragen allebei hun dienstnaam mee ("(AWS S3)",
+        // "(MinIO en andere)") en zijn daarmee breder dan het paneel. Zonder
+        // dit loopt de rij eruit; hiermee krimpt het veld mee en valt hooguit
+        // de staart weg, terwijl de uitgeklapte lijst de volle tekst houdt.
+        isExpanded: true,
         style: const TextStyle(fontSize: 13),
         decoration: InputDecoration(
           isDense: true,
@@ -50,6 +55,19 @@ extension _SettingsS3 on _SettingsDialogState {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // Kop plus toelichting, net als bij de andere netwerkbronnen. De kop is
+        // ook het anker waar een zoektreffer naartoe springt — zie
+        // [StorageConnectionKindUi.sectionSource].
+        _sectionTitle(l10n.d('S3-bucket')),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 14),
+          child: Text(
+            l10n.d(
+              'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.',
+            ),
+            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+          ),
+        ),
         _webdavField(
           form.endpoint,
           l10n.d('Endpoint'),

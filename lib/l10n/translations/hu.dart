@@ -1785,6 +1785,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Nyiss meg és tárolj bemutatókat S3 tárolóban: AWS S3, vagy S3-kompatibilis szolgáltatás, például saját MinIO. A titkos hozzáférési kulcs titkosítva a kulcstartóban tárolódik, nem a többi beállítás mellett.',
   'Openen vanuit S3': 'Megnyitás S3-ból',
   'Afbeelding kiezen in S3': 'Kép választása S3-ban',
   'Opslaan naar S3': 'Mentés S3-ba',

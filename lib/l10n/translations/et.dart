@@ -1772,6 +1772,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Ava ja hoia esitlusi S3 ämbris: AWS S3 või S3-ga ühilduv teenus, näiteks oma MinIO. Salajane juurdepääsuvõti hoitakse krüpteeritult võtmehoidjas, mitte koos teiste seadetega.',
   'Openen vanuit S3': 'Ava S3-st',
   'Afbeelding kiezen in S3': 'Vali pilt S3-s',
   'Opslaan naar S3': 'Salvesta S3-sse',

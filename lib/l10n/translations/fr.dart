@@ -738,6 +738,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Ouvrez et conservez des présentations dans un compartiment S3 : AWS S3, ou un service compatible S3 comme votre propre MinIO. La clé d’accès secrète est conservée chiffrée dans le trousseau, pas avec les autres réglages.',
   'Openen vanuit S3': 'Ouvrir depuis S3',
   'Afbeelding kiezen in S3': 'Choisir une image dans S3',
   'Opslaan naar S3': 'Enregistrer sur S3',

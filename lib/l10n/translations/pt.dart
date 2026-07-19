@@ -1811,6 +1811,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Abre e guarda apresentações num bucket S3: AWS S3, ou um serviço compatível com S3 como um MinIO próprio. A chave de acesso secreta é guardada cifrada no porta-chaves, não junto das restantes definições.',
   'Openen vanuit S3': 'Abrir a partir do S3',
   'Afbeelding kiezen in S3': 'Escolher uma imagem no S3',
   'Opslaan naar S3': 'Guardar no S3',

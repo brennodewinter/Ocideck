@@ -1780,6 +1780,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Atver un glabā prezentācijas S3 tvertnē: AWS S3 vai ar S3 saderīgs pakalpojums, piemēram, paša MinIO. Slepenā piekļuves atslēga tiek glabāta šifrēta atslēgu saišķī, nevis kopā ar pārējiem iestatījumiem.',
   'Openen vanuit S3': 'Atvērt no S3',
   'Afbeelding kiezen in S3': 'Izvēlēties attēlu S3',
   'Opslaan naar S3': 'Saglabāt S3',

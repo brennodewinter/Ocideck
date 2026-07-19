@@ -27,6 +27,7 @@ void main() {
   // één soort verbinding hoort. De hoofdletters komen van _sectionTitle.
   final webdavPanel = find.text('WebDAV-bron'.toUpperCase());
   final gitPanel = find.text('Git-repository'.toUpperCase());
+  final s3Panel = find.text('S3-bucket'.toUpperCase());
 
   /// Zet verbindingen klaar in prefs, zoals ze na een eerdere sessie zouden
   /// staan.
@@ -173,6 +174,43 @@ void main() {
     await addConnection(tester, 'Git-repository');
     expect(gitPanel, findsOneWidget);
     expect(webdavPanel, findsNothing);
+  });
+
+  testWidgets('een S3-verbinding toevoegen klapt hem meteen open', (
+    tester,
+  ) async {
+    await openSettings(tester);
+    expect(s3Panel, findsNothing);
+
+    await addConnection(tester, 'S3-bucket');
+    expect(s3Panel, findsOneWidget);
+    // De adresseringskeuze hoort meteen zichtbaar te zijn: bij een eigen MinIO
+    // is dat de knop die het verschil maakt tussen werken en een 404.
+    expect(find.text('Adressering'), findsOneWidget);
+  });
+
+  testWidgets('de statusregel van een S3-bron toont de bucketnaam', (
+    tester,
+  ) async {
+    await openSettings(tester);
+    await addConnection(tester, 'S3-bucket');
+
+    expect(find.text('Niet ingesteld'), findsWidgets);
+
+    // Niet de endpoint-host: twee buckets op hetzelfde endpoint is het
+    // gangbare geval, dus de host onderscheidt de rijen juist niet.
+    await tester.enterText(
+      find.widgetWithText(TextField, 'Endpoint'),
+      'https://s3.eu-central-1.amazonaws.com',
+    );
+    await tester.enterText(find.widgetWithText(TextField, 'Bucket'), 'decks');
+    await tester.pumpAndSettle();
+
+    expect(find.text('Niet ingesteld'), findsNothing);
+    // Twee keer: in het invulveld zelf en in de statusregel van de rij. Anders
+    // dan bij WebDAV, waar de statusregel de host uit de URL afleidt, is de
+    // bucketnaam letterlijk wat je intypte.
+    expect(find.text('decks'), findsNWidgets(2));
   });
 
   testWidgets('een lokale map heeft niets uit te klappen', (tester) async {

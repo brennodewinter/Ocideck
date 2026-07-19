@@ -1789,6 +1789,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Atverk ir laikyk pristatymus S3 saugykloje: AWS S3 arba su S3 suderinama paslauga, pavyzdžiui savas MinIO. Slaptas prieigos raktas laikomas užšifruotas raktinėje, o ne su kitais nustatymais.',
   'Openen vanuit S3': 'Atverti iš S3',
   'Afbeelding kiezen in S3': 'Pasirinkti paveikslėlį S3',
   'Opslaan naar S3': 'Įrašyti į S3',

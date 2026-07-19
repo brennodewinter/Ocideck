@@ -1799,6 +1799,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Deschide și păstrează prezentări într-un compartiment S3: AWS S3 sau un serviciu compatibil S3 precum un MinIO propriu. Cheia de acces secretă este păstrată criptată în inelul de chei, nu împreună cu celelalte setări.',
   'Openen vanuit S3': 'Deschide din S3',
   'Afbeelding kiezen in S3': 'Alege o imagine în S3',
   'Opslaan naar S3': 'Salvează în S3',
