@@ -43,9 +43,30 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
   /// Stroom van persist-fouten voor de UI. Zie [settingsPersistErrorProvider].
   Stream<int> get persistErrors => _persistErrors.stream;
 
+  /// Broadcast: één event per mislukte keychain-schrijf. Bewust géén tak van
+  /// [_persistErrors]: een mislukte prefs-schrijf kost een instelling, maar een
+  /// mislukte keychain-schrijf kost een wáchtwoord — en die fout komt later
+  /// terug als "verbinding geweigerd", waar de gebruiker zijn wachtwoord gaat
+  /// zitten controleren dat nooit is opgeslagen. Dat is precies het spoor waar
+  /// hij niets te zoeken heeft, dus verdient het een eigen melding.
+  final StreamController<int> _secretErrors = StreamController<int>.broadcast();
+  int _secretErrorSeq = 0;
+
+  /// Stroom van keychain-fouten voor de UI. Zie [settingsSecretErrorProvider].
+  Stream<int> get secretErrors => _secretErrors.stream;
+
+  /// Meld dat een geheim niet kon worden weggeschreven. Log + signaal; de
+  /// aanroeper krijgt daarnaast `false` terug zodat ook een afwachtende
+  /// aanroeper (de settings-dialoog) het weet.
+  void _reportSecretFailure(String label, Object e) {
+    logWarning('SettingsNotifier.$label: keychain mislukt', e);
+    if (!_secretErrors.isClosed) _secretErrors.add(++_secretErrorSeq);
+  }
+
   @override
   void dispose() {
     _persistErrors.close();
+    _secretErrors.close();
     super.dispose();
   }
 
@@ -217,7 +238,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       }
       return true;
     } catch (e) {
-      logWarning('SettingsNotifier.setWebdavPassword: keychain mislukt', e);
+      _reportSecretFailure('setWebdavPassword', e);
       return false;
     }
   }
@@ -243,7 +264,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       }
       return true;
     } catch (e) {
-      logWarning('SettingsNotifier.setS3SecretKey: keychain mislukt', e);
+      _reportSecretFailure('setS3SecretKey', e);
       return false;
     }
   }
@@ -276,7 +297,7 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       }
       return true;
     } catch (e) {
-      logWarning('SettingsNotifier.setAiApiKey: keychain mislukt', e);
+      _reportSecretFailure('setAiApiKey', e);
       return false;
     }
   }
@@ -935,4 +956,12 @@ final settingsProvider = StateNotifierProvider<SettingsNotifier, AppSettings>(
 /// niet-blokkerend aan de gebruiker (de wijziging geldt wel voor deze sessie).
 final settingsPersistErrorProvider = StreamProvider<int>((ref) {
   return ref.watch(settingsProvider.notifier).persistErrors;
+});
+
+/// Zendt een oplopend volgnummer uit telkens als een geheim niet in de
+/// sleutelhanger kon worden weggeschreven. De app-shell luistert hierop en
+/// meldt het apart van [settingsPersistErrorProvider]: hier is de gevolgschade
+/// een verbinding die straks om een wachtwoord blijft vragen.
+final settingsSecretErrorProvider = StreamProvider<int>((ref) {
+  return ref.watch(settingsProvider.notifier).secretErrors;
 });

@@ -1814,6 +1814,8 @@ const _dutchSourceAddHr = <String, String>{
   'IP-adres': 'IP adresa',
   'machineleesbare zone van een paspoort of ID':
       'strojno čitljiva zona putovnice ili osobne iskaznice',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Spremanje u lančić ključeva nije uspjelo. Veza će i dalje tražiti lozinku dok ne uspije.',
   'Sla de presentatie op om een kopie te maken.':
       'Spremite prezentaciju da biste napravili kopiju.',
   ': ligt buiten de presentatie en gaat niet mee (':

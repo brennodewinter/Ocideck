@@ -7,18 +7,22 @@ part of '../settings_provider.dart';
 /// [readWebdavPassword]: de configuratie mag in prefs, het geheim nooit.
 extension SettingsNotifierGit on SettingsNotifier {
   /// Bewaar het personal access token in de keychain, gekeyd op de repo. Een
-  /// leeg token wist de entry: een publieke repo lezen mag zonder.
-  Future<void> writeGitToken(String baseUrl, String owner, String token) async {
+  /// leeg token wist de entry: een publieke repo lezen mag zonder. Geeft `true`
+  /// bij succes — spiegelt daarmee [setWebdavPassword] en [setS3SecretKey].
+  Future<bool> writeGitToken(String baseUrl, String owner, String token) async {
     try {
       if (token.isEmpty) {
         await _secrets.deleteGitToken(baseUrl, owner);
       } else {
         await _secrets.writeGitToken(baseUrl, owner, token);
       }
+      return true;
     } catch (e) {
       // Nooit laten ontsnappen als onafgevangen async-fout: een setter wordt
-      // vanuit een onChanged aangeroepen die niets afwacht.
-      logError('SettingsNotifier.writeGitToken: keychain write failed', e);
+      // vanuit een onChanged aangeroepen die niets afwacht. Wél melden — een
+      // stil verloren token kost de gebruiker later een zoektocht.
+      _reportSecretFailure('writeGitToken', e);
+      return false;
     }
   }
 

@@ -1807,6 +1807,8 @@ const _dutchSourceAddId = <String, String>{
   'IP-adres': 'alamat IP',
   'machineleesbare zone van een paspoort of ID':
       'zona terbaca mesin pada paspor atau KTP',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Gagal menyimpan ke gantungan kunci. Koneksi akan terus meminta kata sandi Anda sampai berhasil.',
   'Sla de presentatie op om een kopie te maken.':
       'Simpan presentasi untuk membuat salinan.',
   ': ligt buiten de presentatie en gaat niet mee (':

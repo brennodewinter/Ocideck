@@ -765,6 +765,8 @@ const _dutchSourceAddFy = {
   'IP-adres': 'IP-adres',
   'machineleesbare zone van een paspoort of ID':
       'masinelêsbere sône fan in paspoart of ID',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Bewarjen yn de kaaihinger is mislearre. De ferbining bliuwt om dyn wachtwurd freegjen oant it slagget.',
   'Sla de presentatie op om een kopie te maken.':
       'Bewarje de presintaasje om in kopy te meitsjen.',
   ': ligt buiten de presentatie en gaat niet mee (':

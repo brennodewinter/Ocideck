@@ -1817,6 +1817,8 @@ const _dutchSourceAddLt = <String, String>{
   'IP-adres': 'IP adresas',
   'machineleesbare zone van een paspoort of ID':
       'paso arba asmens tapatybės kortelės mašininio nuskaitymo zona',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Nepavyko įrašyti į raktinę. Ryšys ir toliau prašys slaptažodžio, kol pavyks.',
   'Sla de presentatie op om een kopie te maken.':
       'Įrašykite pristatymą, kad būtų sukurta kopija.',
   ': ligt buiten de presentatie en gaat niet mee (':

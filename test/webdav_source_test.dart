@@ -13,6 +13,11 @@ class _ThrowingSecretStore extends SecretStore {
   Future<void> writeWebdavPassword(String b, String u, String p) async {
     throw Exception('keychain unavailable');
   }
+
+  @override
+  Future<void> writeGitToken(String b, String o, String t) async {
+    throw Exception('keychain unavailable');
+  }
 }
 
 /// Een Nextcloud-bron; de host doet er voor het parsen niet toe, alleen het
@@ -309,6 +314,46 @@ void main() {
         );
       },
     );
+
+    // De `false` hierboven werd nergens afgewacht: de settings-dialoog sloot
+    // alsof er niets aan de hand was en de gebruiker zag het pas terug als een
+    // geweigerde verbinding. Het signaal is wat de shell er wél over laat zien.
+    test('a failing keychain write emits on the secret-error stream', () async {
+      final notifier = SettingsNotifier(secretStore: _ThrowingSecretStore());
+      final seen = <int>[];
+      final sub = notifier.secretErrors.listen(seen.add);
+
+      expect(
+        await notifier.setWebdavPassword('https://c.example.com', 'alice', 'p'),
+        isFalse,
+      );
+      expect(
+        await notifier.writeGitToken('https://git.example.com', 'acme', 'tok'),
+        isFalse,
+      );
+
+      // Een broadcast-stream levert asynchroon: zonder deze tik staat het
+      // laatste event nog in de wachtrij en meet je er één te weinig.
+      await Future<void>.delayed(Duration.zero);
+
+      // Oplopende volgnummers, zodat een tweede fout niet als "ongewijzigd"
+      // wordt samengevouwen door de StreamProvider.
+      expect(seen, [1, 2]);
+      await sub.cancel();
+    });
+
+    test('a successful keychain write stays silent', () async {
+      final notifier = SettingsNotifier();
+      final seen = <int>[];
+      final sub = notifier.secretErrors.listen(seen.add);
+      // Lege waarde: wist de entry, raakt de keychain-backend niet aan.
+      expect(
+        await notifier.setWebdavPassword('https://c.example.com', 'alice', ''),
+        isTrue,
+      );
+      expect(seen, isEmpty);
+      await sub.cancel();
+    });
   });
 
   group('WebdavService TLS enforcement', () {

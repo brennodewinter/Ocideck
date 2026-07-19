@@ -761,6 +761,8 @@ const _dutchSourceAddEs = {
   'IP-adres': 'dirección IP',
   'machineleesbare zone van een paspoort of ID':
       'zona de lectura mecánica de un pasaporte o documento de identidad',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'No se pudo guardar en el llavero. La conexión seguirá pidiendo tu contraseña hasta que se consiga.',
   'Sla de presentatie op om een kopie te maken.':
       'Guarde la presentación para crear una copia.',
   ': ligt buiten de presentatie en gaat niet mee (':

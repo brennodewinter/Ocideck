@@ -1811,6 +1811,8 @@ const _dutchSourceAddHu = <String, String>{
   'IP-adres': 'IP-cím',
   'machineleesbare zone van een paspoort of ID':
       'útlevél vagy személyazonosító igazolvány géppel olvasható zónája',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'A kulcstartóba mentés nem sikerült. A kapcsolat továbbra is kérni fogja a jelszavadat, amíg ez nem sikerül.',
   'Sla de presentatie op om een kopie te maken.':
       'Mentse a bemutatót, hogy másolat készüljön.',
   ': ligt buiten de presentatie en gaat niet mee (':

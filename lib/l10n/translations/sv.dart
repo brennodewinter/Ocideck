@@ -1806,6 +1806,8 @@ const _dutchSourceAddSv = <String, String>{
   'IP-adres': 'IP-adress',
   'machineleesbare zone van een paspoort of ID':
       'maskinläsbar zon i ett pass eller id-kort',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Det gick inte att spara i nyckelringen. Anslutningen fortsätter att fråga efter ditt lösenord tills det lyckas.',
   'Sla de presentatie op om een kopie te maken.':
       'Spara presentationen för att skapa en kopia.',
   ': ligt buiten de presentatie en gaat niet mee (':

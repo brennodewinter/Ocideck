@@ -1823,6 +1823,8 @@ const _dutchSourceAddLa = <String, String>{
   'IP-adres': 'inscriptio IP',
   'machineleesbare zone van een paspoort of ID':
       'zona machina legibilis diplomatis vel identitatis',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Servare in clavium anulo defecit. Nexus tuam tesseram petere perget donec succedat.',
   'Sla de presentatie op om een kopie te maken.':
       'Praesentationem serva ut exemplum fiat.',
   ': ligt buiten de presentatie en gaat niet mee (':

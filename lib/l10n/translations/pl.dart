@@ -1819,6 +1819,8 @@ const _dutchSourceAddPl = <String, String>{
   'IP-adres': 'adres IP',
   'machineleesbare zone van een paspoort of ID':
       'strefa odczytu maszynowego paszportu lub dowodu tożsamości',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Zapis w pęku kluczy nie powiódł się. Połączenie będzie prosić o hasło, dopóki się nie uda.',
   'Sla de presentatie op om een kopie te maken.':
       'Zapisz prezentację, aby powstała kopia.',
   ': ligt buiten de presentatie en gaat niet mee (':

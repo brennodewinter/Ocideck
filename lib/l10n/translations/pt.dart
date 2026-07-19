@@ -1837,6 +1837,8 @@ const _dutchSourceAddPt = <String, String>{
   'IP-adres': 'endereço IP',
   'machineleesbare zone van een paspoort of ID':
       'zona de leitura ótica de um passaporte ou documento de identidade',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Falha ao guardar no porta-chaves. A ligação continuará a pedir a tua palavra-passe até conseguir.',
   'Sla de presentatie op om een kopie te maken.':
       'Guarde a apresentação para criar uma cópia.',
   ': ligt buiten de presentatie en gaat niet mee (':

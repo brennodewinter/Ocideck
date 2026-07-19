@@ -1810,6 +1810,8 @@ const _dutchSourceAddCs = <String, String>{
   'IP-adres': 'IP adresa',
   'machineleesbare zone van een paspoort of ID':
       'strojově čitelná zóna pasu nebo průkazu totožnosti',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Uložení do klíčenky se nezdařilo. Připojení bude vyžadovat heslo, dokud se to nepodaří.',
   'Sla de presentatie op om een kopie te maken.':
       'Uložte prezentaci, aby vznikla kopie.',
   ': ligt buiten de presentatie en gaat niet mee (':

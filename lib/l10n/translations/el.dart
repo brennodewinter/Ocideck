@@ -1835,6 +1835,8 @@ const _dutchSourceAddEl = <String, String>{
   'IP-adres': 'διεύθυνση IP',
   'machineleesbare zone van een paspoort of ID':
       'μηχανικά αναγνώσιμη ζώνη διαβατηρίου ή ταυτότητας',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Η αποθήκευση στην κλειδοθήκη απέτυχε. Η σύνδεση θα ζητά τον κωδικό σου μέχρι να πετύχει.',
   'Sla de presentatie op om een kopie te maken.':
       'Αποθηκεύστε την παρουσίαση για να δημιουργηθεί αντίγραφο.',
   ': ligt buiten de presentatie en gaat niet mee (':

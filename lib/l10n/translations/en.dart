@@ -946,6 +946,8 @@ const _dutchSourceAddEn = {
   'IP-adres': 'IP address',
   'machineleesbare zone van een paspoort of ID':
       'machine-readable zone of a passport or ID',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Saving to the keychain failed. The connection will keep asking for your password until this succeeds.',
   'Sla de presentatie op om een kopie te maken.':
       'Save the presentation to make a copy.',
   ': ligt buiten de presentatie en gaat niet mee (':

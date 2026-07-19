@@ -1811,6 +1811,8 @@ const _dutchSourceAddGsw = <String, String>{
   'IP-adres': 'IP-Adrässe',
   'machineleesbare zone van een paspoort of ID':
       'maschineläsbari Zone vun eme Pass oder Uswiis',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Speichere im Schlüsselbund het nid klappet. D Verbindig fragt witer nach dim Passwort, bis es klappt.',
   'Sla de presentatie op om een kopie te maken.':
       'Spichered Sie d Präsentation, zum e Kopie z mache.',
   ': ligt buiten de presentatie en gaat niet mee (':

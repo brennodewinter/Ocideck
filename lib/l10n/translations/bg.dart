@@ -1830,6 +1830,8 @@ const _dutchSourceAddBg = <String, String>{
   'IP-adres': 'IP адрес',
   'machineleesbare zone van een paspoort of ID':
       'машинночетима зона на паспорт или лична карта',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Записът в ключодържателя е неуспешен. Връзката ще продължи да иска паролата ти, докато не успее.',
   'Sla de presentatie op om een kopie te maken.':
       'Запазете презентацията, за да се направи копие.',
   ': ligt buiten de presentatie en gaat niet mee (':

@@ -1780,6 +1780,8 @@ const _dutchSourceAddTlh = <String, String>{
   'advertentie- of apparaat-ID': 'ngoDHom ghap jan ID',
   'IP-adres': 'IP Sep',
   'machineleesbare zone van een paspoort of ID': 'jonwI\' laDlaHbogh pIqaD nav',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'nuqDaq ngaSwI\' polmeH Qapbe\'. bIQapchoHpa\' mu\'wI\' tlhob rar.',
   'Sla de presentatie op om een kopie te maken.':
       'velqa\' chenmoHmeH cha\'nob yIpol.',
   ': ligt buiten de presentatie en gaat niet mee (':

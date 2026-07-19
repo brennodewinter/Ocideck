@@ -1825,6 +1825,8 @@ const _dutchSourceAddUk = <String, String>{
   'IP-adres': 'IP-адреса',
   'machineleesbare zone van een paspoort of ID':
       'машинозчитувана зона паспорта або посвідчення особи',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Не вдалося зберегти у сховищі ключів. З\'єднання проситиме пароль, доки це не вдасться.',
   'Sla de presentatie op om een kopie te maken.':
       'Збережіть презентацію, щоб створити копію.',
   ': ligt buiten de presentatie en gaat niet mee (':

@@ -1806,6 +1806,8 @@ const _dutchSourceAddDa = <String, String>{
   'IP-adres': 'IP-adresse',
   'machineleesbare zone van een paspoort of ID':
       'maskinlæsbar zone i et pas eller id-kort',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Det mislykkedes at gemme i nøgleringen. Forbindelsen bliver ved med at bede om din adgangskode, indtil det lykkes.',
   'Sla de presentatie op om een kopie te maken.':
       'Gem præsentationen for at lave en kopi.',
   ': ligt buiten de presentatie en gaat niet mee (':

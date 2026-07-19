@@ -1825,6 +1825,8 @@ const _dutchSourceAddRo = <String, String>{
   'IP-adres': 'adresă IP',
   'machineleesbare zone van een paspoort of ID':
       'zona citibilă automat a unui pașaport sau act de identitate',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Salvarea în inelul de chei a eșuat. Conexiunea va continua să ceară parola până când reușește.',
   'Sla de presentatie op om een kopie te maken.':
       'Salvați prezentarea pentru a crea o copie.',
   ': ligt buiten de presentatie en gaat niet mee (':

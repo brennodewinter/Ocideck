@@ -180,6 +180,20 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   gedrag waardoor mensen een privacycontrole uitzetten.
 
 ### Fixed
+- **Een wachtwoord dat niet in de sleutelhanger paste, verdween zonder een
+  woord.** Lukte het wegschrijven van een WebDAV-wachtwoord, een S3-sleutel, een
+  git-token of een AI-API-sleutel niet — een vergrendelde keychain, een
+  geweigerde toegangsvraag — dan werd de fout op drie lagen ingeslikt: de
+  opslagklasse gooide netjes door, de provider ving hem af en gaf `false`
+  terug, en de settings-dialoog keek naar dat antwoord niet om. Het venster
+  sloot alsof alles goed was gegaan.
+
+  Je merkte het pas bij de eerste verbinding, en dan lijkt het een verkeerd
+  wachtwoord: je gaat je inloggegevens controleren die nooit zijn opgeslagen.
+  Zo'n mislukte schrijfactie meldt zich nu, met erbij wat er straks gebeurt
+  ("de verbinding blijft om je wachtwoord vragen"), zodat je het spoor volgt
+  dat ergens heen leidt. Los van de melding over een mislukte prefs-schrijf,
+  want de gevolgschade is een andere.
 - **Aankruislijsten in de documentatie waren geen aankruislijsten.** De lezer
   in de app kende het `- [ ]`-patroon niet en liet de haakjes gewoon staan, dus
   de checklist voor het uitrollen van de webversie las als "• [ ] Served over

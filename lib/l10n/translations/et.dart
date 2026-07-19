@@ -1799,6 +1799,8 @@ const _dutchSourceAddEt = <String, String>{
   'IP-adres': 'IP-aadress',
   'machineleesbare zone van een paspoort of ID':
       'passi või isikutunnistuse masinloetav ala',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Võtmehoidjasse salvestamine ebaõnnestus. Ühendus küsib parooli seni, kuni see õnnestub.',
   'Sla de presentatie op om een kopie te maken.':
       'Salvestage esitlus, et sellest tehtaks koopia.',
   ': ligt buiten de presentatie en gaat niet mee (':

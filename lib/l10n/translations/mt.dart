@@ -1829,6 +1829,8 @@ const _dutchSourceAddMt = <String, String>{
   'IP-adres': 'indirizz IP',
   'machineleesbare zone van een paspoort of ID':
       'żona li tinqara bil-magna ta\' passaport jew karta tal-identità',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Is-salvataġġ fiċ-ċurkett taċ-ċwievet falla. Il-konnessjoni tibqa\' titlob il-password tiegħek sakemm dan jirnexxi.',
   'Sla de presentatie op om een kopie te maken.':
       'Issejvja l-preżentazzjoni biex issir kopja.',
   ': ligt buiten de presentatie en gaat niet mee (':

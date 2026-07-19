@@ -662,6 +662,22 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
       );
     });
 
+    // Een geheim kon niet in de sleutelhanger worden bewaard. Apart van de
+    // melding hierboven, want hier komt de fout later terug vermomd als een
+    // afgewezen wachtwoord — zeg er daarom bij wat er straks gebeurt.
+    ref.listen(settingsSecretErrorProvider, (_, next) {
+      if (!next.hasValue) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            context.l10n.d(
+              'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.',
+            ),
+          ),
+        ),
+      );
+    });
+
     _listenSecurityModulePrompt(context);
 
     _listenChartDataWarning(context, ref);

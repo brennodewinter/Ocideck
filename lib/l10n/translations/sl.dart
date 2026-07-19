@@ -1809,6 +1809,8 @@ const _dutchSourceAddSl = <String, String>{
   'IP-adres': 'naslov IP',
   'machineleesbare zone van een paspoort of ID':
       'strojno berljivo območje potnega lista ali osebne izkaznice',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Shranjevanje v zbirko ključev ni uspelo. Povezava bo še naprej zahtevala geslo, dokler ne uspe.',
   'Sla de presentatie op om een kopie te maken.':
       'Shranite predstavitev, da nastane kopija.',
   ': ligt buiten de presentatie en gaat niet mee (':

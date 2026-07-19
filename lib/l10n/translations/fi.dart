@@ -1806,6 +1806,8 @@ const _dutchSourceAddFi = <String, String>{
   'IP-adres': 'IP-osoite',
   'machineleesbare zone van een paspoort of ID':
       'passin tai henkilökortin koneluettava alue',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Avainnippuun tallentaminen epäonnistui. Yhteys kysyy salasanaasi, kunnes tallennus onnistuu.',
   'Sla de presentatie op om een kopie te maken.':
       'Tallenna esitys, niin siitä tehdään kopio.',
   ': ligt buiten de presentatie en gaat niet mee (':

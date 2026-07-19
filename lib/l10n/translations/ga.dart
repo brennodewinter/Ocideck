@@ -1843,6 +1843,8 @@ const _dutchSourceAddGa = <String, String>{
   'IP-adres': 'seoladh IP',
   'machineleesbare zone van een paspoort of ID':
       'crios inléite ag meaisín de phas nó de chárta aitheantais',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Theip ar an sábháil sa eochairslabhra. Leanfaidh an nasc ag iarraidh do phasfhocail go dtí go n-éiríonn leis.',
   'Sla de presentatie op om een kopie te maken.':
       'Sábháil an láithreoireacht chun cóip a dhéanamh.',
   ': ligt buiten de presentatie en gaat niet mee (':

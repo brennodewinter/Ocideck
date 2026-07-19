@@ -764,6 +764,8 @@ const _dutchSourceAddPap = {
   'IP-adres': 'adres IP',
   'machineleesbare zone van een paspoort of ID':
       'zona lesibel pa mashin di un pasaporte òf ID',
+  'Opslaan in de sleutelhanger is mislukt. De verbinding blijft om je wachtwoord vragen tot dit lukt.':
+      'Warda den yabero a faya. E konekshon lo sigui pidi bo kontraseña te ora e logra.',
   'Sla de presentatie op om een kopie te maken.':
       'Warda e presentashon pa traha un kopia.',
   ': ligt buiten de presentatie en gaat niet mee (':
