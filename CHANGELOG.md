@@ -126,6 +126,18 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   Geen netwerk breekt de release evenmin af, maar het zegt wél dát er niet
   gekeken is. Stilte mag hier niet als goedkeuring lezen.
 
+- **Werk dat op verbinding wacht staat nu in de statusbalk.** Sla je op terwijl
+  de forge onbereikbaar is, dan blijft het op deze computer wachten tot er weer
+  verbinding is. Dat is precies wat je wil — maar je zag het alleen wanneer je
+  er zelf naar vroeg, en dan stond het er meestal al even.
+
+  Er staat nu een amberkleurige melding in de balk zolang er iets wacht, met
+  het aantal erbij, over al je git-verbindingen samen. Is er niets, dan zegt de
+  balk er niets over: een balk die altijd iets meldt, wordt niet meer gelezen.
+
+  De melding is bewust niet aanklikbaar. Legen doe je met *Wachtrij legen* in
+  het `…`-menu, dat kan vragen en melden; een badge die bij een tik een
+  netwerkactie start, doet meer dan hij belooft.
 - **De branch van een git-repository is nu in te vullen.** Er was geen veld
   voor, dus stond hij altijd op `main`. Een repo die op `master` staat was
   daardoor via de instellingen onbruikbaar, en bewust op een andere branch

@@ -739,6 +739,9 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'wacht op verbinding': 'wachtet op ferbining',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'Bewarre op dizze kompjûter, noch net yn de repository. Giet mei sadree\'t der wer ferbining is — of no, mei "Wachtrige leegje".',
   'Branch (optioneel)': 'Branch (opsjoneel)',
   'let op: de standaardbranch is': 'let op: de standertbranch is',
   'jij werkt op': 'do wurkest op',

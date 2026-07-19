@@ -1803,6 +1803,9 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'wacht op verbinding': 'jistenna konnessjoni',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'Issejvjat fuq dan il-kompjuter, għadu mhux fir-repożitorju. Jitlaq malli jkun hemm konnessjoni mill-ġdid — jew issa, b\'"Battal il-kju".',
   'Branch (optioneel)': 'Fergħa (mhux obbligatorju)',
   'let op: de standaardbranch is': 'nota: il-fergħa awtomatika hija',
   'jij werkt op': 'inti qed taħdem fuq',

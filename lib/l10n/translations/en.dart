@@ -920,6 +920,9 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'wacht op verbinding': 'waiting for a connection',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'Saved on this computer, not yet in the repository. It goes along as soon as there is a connection again — or now, with "Flush queue".',
   'Branch (optioneel)': 'Branch (optional)',
   'let op: de standaardbranch is': 'note: the default branch is',
   'jij werkt op': 'you are working on',

@@ -1809,6 +1809,9 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'wacht op verbinding': 'αναμονή σύνδεσης',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'Αποθηκευμένο σε αυτόν τον υπολογιστή, όχι ακόμη στο αποθετήριο. Θα σταλεί μόλις υπάρξει ξανά σύνδεση — ή τώρα, με «Άδειασμα ουράς».',
   'Branch (optioneel)': 'Κλάδος (προαιρετικό)',
   'let op: de standaardbranch is': 'προσοχή: ο προεπιλεγμένος κλάδος είναι',
   'jij werkt op': 'εσύ εργάζεσαι στον',

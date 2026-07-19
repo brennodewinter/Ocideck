@@ -1780,6 +1780,9 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'wacht op verbinding': 'gaida savienojumu',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'Saglabāts šajā datorā, vēl ne repozitorijā. Tiks nosūtīts, tiklīdz atkal būs savienojums — vai tagad, ar "Iztukšot rindu".',
   'Branch (optioneel)': 'Zars (neobligāti)',
   'let op: de standaardbranch is': 'ievērojiet: noklusējuma zars ir',
   'jij werkt op': 'tu strādā uz',

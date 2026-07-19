@@ -1784,6 +1784,9 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'wacht op verbinding': 'čeká na připojení',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'Uloženo v tomto počítači, ještě ne v repozitáři. Půjde s sebou, jakmile bude opět připojení — nebo teď, přes "Vyprázdnit frontu".',
   'Branch (optioneel)': 'Větev (nepovinné)',
   'let op: de standaardbranch is': 'pozor: výchozí větev je',
   'jij werkt op': 'ty pracuješ na',

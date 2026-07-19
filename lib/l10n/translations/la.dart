@@ -1797,6 +1797,9 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'wacht op verbinding': 'nexum exspectat',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'In hoc computatro servatum, nondum in promptuario. Ibit simulac nexus redierit — vel nunc, per "Ordinem vacuare".',
   'Branch (optioneel)': 'Ramus (optativus)',
   'let op: de standaardbranch is': 'cave: ramus praedefinitus est',
   'jij werkt op': 'tu in eo laboras',

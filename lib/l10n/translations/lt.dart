@@ -1789,6 +1789,9 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'wacht op verbinding': 'laukia ryšio',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'Įrašyta šiame kompiuteryje, dar ne saugykloje. Iškeliaus vos atsiradus ryšiui — arba dabar, pasirinkus „Išvalyti eilę“.',
   'Branch (optioneel)': 'Šaka (nebūtina)',
   'let op: de standaardbranch is': 'dėmesio: numatytoji šaka yra',
   'jij werkt op': 'jūs dirbate su',

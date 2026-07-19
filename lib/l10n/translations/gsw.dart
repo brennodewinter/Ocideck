@@ -1785,6 +1785,9 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'wacht op verbinding': 'wartet uf Verbindig',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'Uf däm Computer gspeicheret, no nid im Repository. Gaht mit, sobald wieder e Verbindig da isch — oder jetz, mit "Warteschlange leere".',
   'Branch (optioneel)': 'Branch (optional)',
   'let op: de standaardbranch is': 'Achtig: de Standardbranch isch',
   'jij werkt op': 'du schaffsch uf',

@@ -1799,6 +1799,9 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'wacht op verbinding': 'очікує з\'єднання',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'Збережено на цьому комп\'ютері, ще не в репозиторії. Потрапить туди, щойно з\'явиться з\'єднання — або зараз, через «Очистити чергу».',
   'Branch (optioneel)': 'Гілка (необов\'язково)',
   'let op: de standaardbranch is': 'увага: гілка за замовчуванням —',
   'jij werkt op': 'ви працюєте на',

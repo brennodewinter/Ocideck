@@ -1781,6 +1781,9 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'wacht op verbinding': 'menunggu koneksi',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'Disimpan di komputer ini, belum ada di repositori. Akan ikut begitu ada koneksi lagi — atau sekarang, dengan "Kosongkan antrean".',
   'Branch (optioneel)': 'Cabang (opsional)',
   'let op: de standaardbranch is': 'perhatian: cabang bawaan adalah',
   'jij werkt op': 'Anda bekerja di',

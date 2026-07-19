@@ -738,6 +738,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'wacht op verbinding': 'ta warda konekshon',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'Wardá riba e komputadó aki, ainda no den e repositorio. Lo bai ora tin konekshon atrobe — of awor, ku "Bashí e kua".',
   'Branch (optioneel)': 'Branch (opshonal)',
   'let op: de standaardbranch is': 'atenshon: e branch prinsipal ta',
   'jij werkt op': 'bo ta traha riba',

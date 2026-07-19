@@ -1804,6 +1804,9 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'wacht op verbinding': 'чака връзка',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'Запазено на този компютър, още не в хранилището. Ще замине веднага щом има връзка — или сега, с „Изпразване на опашката“.',
   'Branch (optioneel)': 'Клон (по избор)',
   'let op: de standaardbranch is': 'внимание: клонът по подразбиране е',
   'jij werkt op': 'вие работите на',

@@ -734,6 +734,9 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'wacht op verbinding': 'in attesa di connessione',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'Salvato su questo computer, non ancora nel repository. Partirà appena ci sarà di nuovo connessione — o subito, con "Svuota coda".',
   'Branch (optioneel)': 'Ramo (facoltativo)',
   'let op: de standaardbranch is': 'attenzione: il ramo predefinito è',
   'jij werkt op': 'tu stai lavorando su',

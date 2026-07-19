@@ -111,6 +111,7 @@ class _DeckStatusBar extends StatelessWidget {
                     const _StatusDivider(),
                     _RemoteOriginBadge(url: remoteOrigin!),
                   ],
+                  const _GitQueueBadge(),
                   const _StatusDivider(),
                   _StatusItem(
                     icon: Icons.slideshow_outlined,
@@ -320,6 +321,44 @@ class _ExportReadinessChip extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+/// Toont hoeveel decks er nog in een git-wachtrij staan, en verdwijnt zodra
+/// dat er geen zijn.
+///
+/// Werk dat offline is opgeslagen wácht — het is niet weg, maar het staat ook
+/// nog nergens waar een ander erbij kan. Tot nu toe zag je dat alleen als je
+/// er zelf naar vroeg, en dan stond het er meestal al even. Een balk die er de
+/// hele tijd bij staat is precies de plek om dat stil te melden.
+///
+/// Bewust niet klikbaar: legen gebeurt met de bestaande opdracht in het
+/// `…`-menu, die kan vragen en melden. Een badge die bij een tik een
+/// netwerkactie start, doet meer dan hij belooft.
+class _GitQueueBadge extends ConsumerWidget {
+  const _GitQueueBadge();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
+    // Een fout of een nog lopende telling is geen reden om iets te tonen: dan
+    // wéten we het niet, en "0" beweren zou erger zijn dan zwijgen.
+    final count = ref.watch(gitQueueCountProvider).asData?.value ?? 0;
+    if (count == 0) return const SizedBox.shrink();
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const _StatusDivider(),
+        _StatusItem(
+          icon: Icons.cloud_upload_outlined,
+          label: '$count ${l10n.d('wacht op verbinding')}',
+          tooltip: l10n.d(
+            'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".',
+          ),
+          color: AppTheme.amber700,
+        ),
+      ],
     );
   }
 }

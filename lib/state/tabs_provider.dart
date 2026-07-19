@@ -23,6 +23,7 @@ import '../services/git/deck_repo_serializer.dart';
 import '../services/git/git_forge.dart';
 import '../services/git/native_git_mirror_api.dart';
 import '../services/git/outbox.dart';
+import 'git_provider.dart';
 import '../services/git/sync_engine.dart';
 import '../services/image_service.dart';
 import '../services/markdown_safety.dart';

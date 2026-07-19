@@ -268,6 +268,9 @@ Future<void> _flushGitQueue(
   final outcomes = await ref
       .read(tabsProvider.notifier)
       .flushGit(engine, config);
+  // Ook bij een stille flush, en ook wanneer we hieronder vroegtijdig
+  // terugkeren: de teller moet kloppen, niet de melding volgen.
+  ref.invalidate(gitQueueCountProvider);
   if (!context.mounted) return;
 
   final settled = outcomes.where((o) => o.isSettled).length;

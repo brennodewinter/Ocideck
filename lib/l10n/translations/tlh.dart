@@ -1756,6 +1756,9 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'wacht op verbinding': 'rar loS',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'De\' vam jonwI\'Daq pollu\', repository-Daq not. rar chugh jaH — ghap DaH, "wachtrij yIchIm" lo\'taHvIS.',
   'Branch (optioneel)': 'branch (DaH DaHar\'a\')',
   'let op: de standaardbranch is': 'yIqIm: DevwI\' branch \'oH',
   'jij werkt op': 'SoH Damev',

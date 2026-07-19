@@ -1811,6 +1811,9 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'wacht op verbinding': 'à espera de ligação',
+  'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
+      'Guardado neste computador, ainda não no repositório. Segue assim que houver ligação de novo — ou agora, com "Esvaziar fila".',
   'Branch (optioneel)': 'Ramo (opcional)',
   'let op: de standaardbranch is': 'atenção: o ramo predefinido é',
   'jij werkt op': 'tu trabalhas em',
