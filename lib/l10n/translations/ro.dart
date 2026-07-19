@@ -1799,6 +1799,26 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
+      'WebDAV nu este configurat corect — verifică datele serverului în Setări → Stocare.',
+  'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':
+      'Depozitul git nu este configurat corect — verifică serverul, proprietarul și depozitul în Setări → Stocare.',
+  'De servernaam van de forge bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Numele serverului forge nu există sau nu poate fi căutat. Verifică dacă adresa URL a serverului conține o greșeală de tastare.',
+  'Deze forge heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Această forge are o adresă privată sau de LAN. Marcheaz-o ca internă de încredere în Setări → Stocare.',
+  'De forge is niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Forge este inaccesibil — verifică conexiunea și adresa URL a serverului.',
+  'Aanmelden bij de forge mislukt. Controleer je token: het heeft leesrechten op de repository nodig, en schrijfrechten om op te slaan.':
+      'Autentificarea la forge a eșuat. Verifică tokenul: are nevoie de drept de citire pe depozit și de scriere pentru salvare.',
+  'Niet gevonden in de repository — of je token mag het niet zien.':
+      'Nu a fost găsit în depozit — sau tokenul tău nu are voie să îl vadă.',
+  'De forge gaf een fout. Probeer het later opnieuw.':
+      'Forge a returnat o eroare. Încearcă din nou mai târziu.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge bij Instellingen → Opslag?':
+      'Această adresă nu răspunde ca o forge. Este corect tipul de forge din Setări → Stocare?',
+  'Stel eerst een WebDAV-server in bij Instellingen → Opslag.':
+      'Configurează mai întâi un server WebDAV în Setări → Stocare.',
   'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
       'Necesar când forge rulează într-o rețea privată sau de acasă. Fără această opțiune, verificarea de securitate refuză o adresă privată.',
   'Vul server-URL, eigenaar en repository in':

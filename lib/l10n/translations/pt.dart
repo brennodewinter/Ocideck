@@ -1811,6 +1811,26 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
+      'O WebDAV não está (bem) configurado — verifica os dados do servidor em Definições → Armazenamento.',
+  'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':
+      'O repositório git não está (bem) configurado — verifica servidor, proprietário e repositório em Definições → Armazenamento.',
+  'De servernaam van de forge bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'O nome do servidor da forge não existe ou não pode ser consultado. Verifica se há uma gralha no URL do servidor.',
+  'Deze forge heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Esta forge tem um endereço privado ou de LAN. Marca-a como interna fidedigna em Definições → Armazenamento.',
+  'De forge is niet bereikbaar — controleer je verbinding en de server-URL.':
+      'A forge está inacessível — verifica a tua ligação e o URL do servidor.',
+  'Aanmelden bij de forge mislukt. Controleer je token: het heeft leesrechten op de repository nodig, en schrijfrechten om op te slaan.':
+      'A autenticação na forge falhou. Verifica o teu token: precisa de acesso de leitura ao repositório e de escrita para gravar.',
+  'Niet gevonden in de repository — of je token mag het niet zien.':
+      'Não encontrado no repositório — ou o teu token não o pode ver.',
+  'De forge gaf een fout. Probeer het later opnieuw.':
+      'A forge devolveu um erro. Tenta novamente mais tarde.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge bij Instellingen → Opslag?':
+      'Este endereço não responde como uma forge. O tipo de forge em Definições → Armazenamento está correto?',
+  'Stel eerst een WebDAV-server in bij Instellingen → Opslag.':
+      'Configura primeiro um servidor WebDAV em Definições → Armazenamento.',
   'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
       'Necessário quando a forge corre numa rede privada ou doméstica. Sem esta opção, a verificação de segurança recusa um endereço privado.',
   'Vul server-URL, eigenaar en repository in':

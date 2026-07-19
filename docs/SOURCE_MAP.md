@@ -226,7 +226,8 @@ deliberately manual).
 - `lru_cache.dart` — Fixed-capacity LRU cache backed by `LinkedHashMap`.
 - `markdown_paste_cleanup.dart` — Cleans pasted website markdown and normalizes rich-text quirks.
 - `markdown_quill_codec.dart` — Round-trip conversion between markdown and Quill documents.
-- `net_guard.dart` — SSRF guards (host/address checks, `safeResolve`, media resolve gate) against DNS rebind.
+- `net_guard.dart` — SSRF guards (host/address checks, `safeResolve`, `resolveConfigured` — which names *why* a host was refused, so a typo is not blamed on the trusted-internal setting — and the media resolve gate) against DNS rebind.
+- `user_facing_error.dart` — Caught exception → short, actionable, translated message. One table per storage kind (`webdavErrorMessage`, `gitForgeErrorMessage`, `s3ErrorMessage`), each an exhaustive switch so a new error kind cannot be forgotten; tests assert no two kinds share a message. The raw service message stays for the log.
 - `page_scoped_notes.dart` — Per-page speaker/user-notes parsing and storage.
 - `password_generator.dart` — Cryptographically strong random passwords (`Random.secure`) for encrypted packages.
 - `password_strength.dart` — Entropy-based password-strength estimate (warn-only) for the encrypt dialog.

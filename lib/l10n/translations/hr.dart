@@ -1788,6 +1788,26 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
+      'WebDAV nije (dobro) postavljen — provjerite podatke poslužitelja u Postavke → Pohrana.',
+  'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':
+      'Git repozitorij nije (dobro) postavljen — provjerite poslužitelj, vlasnika i repozitorij u Postavke → Pohrana.',
+  'De servernaam van de forge bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Naziv poslužitelja forgea ne postoji ili se ne može pronaći. Provjerite ima li u URL-u poslužitelja tipfelera.',
+  'Deze forge heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Ovaj forge ima privatnu ili LAN adresu. Označite ga kao pouzdan interni u Postavke → Pohrana.',
+  'De forge is niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Forge nije dostupan — provjerite vezu i URL poslužitelja.',
+  'Aanmelden bij de forge mislukt. Controleer je token: het heeft leesrechten op de repository nodig, en schrijfrechten om op te slaan.':
+      'Prijava na forge nije uspjela. Provjerite token: treba mu pravo čitanja repozitorija i pisanja za spremanje.',
+  'Niet gevonden in de repository — of je token mag het niet zien.':
+      'Nije pronađeno u repozitoriju — ili ga vaš token ne smije vidjeti.',
+  'De forge gaf een fout. Probeer het later opnieuw.':
+      'Forge je vratio pogrešku. Pokušajte ponovno kasnije.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge bij Instellingen → Opslag?':
+      'Ova adresa ne odgovara kao forge. Je li vrsta forgea u Postavke → Pohrana točna?',
+  'Stel eerst een WebDAV-server in bij Instellingen → Opslag.':
+      'Najprije postavite WebDAV poslužitelj u Postavke → Pohrana.',
   'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
       'Potrebno kada forge radi na privatnoj ili kućnoj mreži. Bez ove oznake sigurnosna provjera odbija privatnu adresu.',
   'Vul server-URL, eigenaar en repository in':

@@ -249,8 +249,9 @@ extension _SettingsS3 on _SettingsDialogState {
         return l10n.d(
           'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.',
         );
-      case S3Error.network:
       case S3Error.server:
+        return l10n.d('Het endpoint gaf een fout. Probeer het later opnieuw.');
+      case S3Error.network:
         return l10n.d('Verbinding mislukt');
     }
   }

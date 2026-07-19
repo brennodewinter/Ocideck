@@ -3,6 +3,7 @@ import 'dart:io';
 
 import '../l10n/app_localizations.dart';
 import '../services/file_service.dart';
+import '../services/git/git_forge.dart';
 import '../services/s3/s3_service.dart';
 import '../services/webdav_service.dart';
 
@@ -12,6 +13,7 @@ import '../services/webdav_service.dart';
 String userFacingError(AppLocalizations l10n, Object error) {
   if (error is WebdavException) return webdavErrorMessage(l10n, error);
   if (error is S3Exception) return s3ErrorMessage(l10n, error);
+  if (error is GitForgeException) return gitForgeErrorMessage(l10n, error);
   if (error is FileSystemException) {
     final code = error.osError?.errorCode;
     // EPERM(1) / EACCES(13): geen rechten; ENOENT(2): weg; ENOSPC(28): vol.
@@ -69,7 +71,7 @@ String importFailureMessage(AppLocalizations l10n, ImportFailure failure) {
 String webdavErrorMessage(AppLocalizations l10n, WebdavException e) {
   return switch (e.kind) {
     WebdavError.config => l10n.d(
-      'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.',
+      'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.',
     ),
     WebdavError.unknownHost => l10n.d(
       'De servernaam bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.',
@@ -97,6 +99,53 @@ String webdavErrorMessage(AppLocalizations l10n, WebdavException e) {
     ),
     WebdavError.server => l10n.d(
       'De server gaf een fout. Probeer het later opnieuw.',
+    ),
+  };
+}
+
+/// Begrijpelijke melding per git-forge-foutsoort.
+///
+/// Kwam er niet eerder, en dat was te merken: `GitForgeException` viel door
+/// [userFacingError] heen naar "er ging onverwacht iets mis", en de schermen
+/// die hem wél apart afvingen toonden `e.message` rechtstreeks. Die tekst is
+/// door de servicelaag samengesteld en gaat nooit door `l10n.d()`, dus een
+/// Engelstalige gebruiker las Nederlands — en bij een onbekende status stond er
+/// letterlijk "Onverwachte status 418".
+///
+/// De ruwe [GitForgeException.message] blijft bestaan en hoort in het logboek:
+/// daar wil je juist die 418 zien. Dit is de laag ervoor. Zelfde afspraak als
+/// bij [webdavErrorMessage] en [s3ErrorMessage].
+String gitForgeErrorMessage(AppLocalizations l10n, GitForgeException e) {
+  return switch (e.kind) {
+    GitForgeError.config => l10n.d(
+      'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.',
+    ),
+    GitForgeError.unknownHost => l10n.d(
+      'De servernaam van de forge bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.',
+    ),
+    GitForgeError.blockedHost => l10n.d(
+      'Deze forge heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.',
+    ),
+    GitForgeError.network => l10n.d(
+      'De forge is niet bereikbaar — controleer je verbinding en de server-URL.',
+    ),
+    GitForgeError.auth => l10n.d(
+      'Aanmelden bij de forge mislukt. Controleer je token: het heeft leesrechten op de repository nodig, en schrijfrechten om op te slaan.',
+    ),
+    // De forge geeft ook 404 wanneer het token de repo niet mag zien: hij
+    // verraadt liever niet dát hij bestaat. De melding mag dat niet als
+    // zekerheid presenteren.
+    GitForgeError.notFound => l10n.d(
+      'Niet gevonden in de repository — of je token mag het niet zien.',
+    ),
+    GitForgeError.tooLarge => l10n.d(
+      'Het bestand is groter dan de toegestane limiet.',
+    ),
+    GitForgeError.server => l10n.d(
+      'De forge gaf een fout. Probeer het later opnieuw.',
+    ),
+    GitForgeError.malformed => l10n.d(
+      'Dit adres antwoordt niet als een forge. Klopt de soort forge bij Instellingen → Opslag?',
     ),
   };
 }

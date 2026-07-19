@@ -5,6 +5,7 @@ import '../../l10n/app_localizations.dart';
 import '../../services/s3/s3_service.dart';
 import '../../state/s3_provider.dart';
 import '../../theme/app_theme.dart';
+import '../../utils/user_facing_error.dart';
 
 /// Wat de bladeraar laat kiezen: een deck om te openen of een afbeelding om in
 /// te voegen. Bepaalt welke objecten klikbaar zijn.
@@ -218,7 +219,6 @@ class _S3BrowserDialogState extends ConsumerState<S3BrowserDialog> {
   }
 
   Widget _error(AppLocalizations l10n, Object error) {
-    final isConfig = error is S3Exception && error.kind == S3Error.config;
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(24),
@@ -228,13 +228,9 @@ class _S3BrowserDialogState extends ConsumerState<S3BrowserDialog> {
             Icon(Icons.cloud_off, size: 40, color: AppTheme.slate400),
             const SizedBox(height: 12),
             Text(
-              isConfig
-                  ? l10n.d(
-                      'Geen S3-bucket ingesteld. Stel er een in bij Instellingen → Opslag.',
-                    )
-                  : l10n.d(
-                      'Kon de inhoud niet laden. Controleer je verbinding en instellingen.',
-                    ),
+              // Alles behalve "niet ingesteld" werd hier platgeslagen tot één
+              // zin, terwijl de tabel het onderscheid al kon maken.
+              userFacingError(l10n, error),
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 13, color: AppTheme.slate500),
             ),

@@ -734,6 +734,26 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
+      'WebDAV non è configurato correttamente — controlla i dati del server in Impostazioni → Archiviazione.',
+  'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':
+      'Il repository git non è configurato correttamente — controlla server, proprietario e repository in Impostazioni → Archiviazione.',
+  'De servernaam van de forge bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Il nome del server della forge non esiste o non è consultabile. Controlla che l\'URL del server non contenga errori di battitura.',
+  'Deze forge heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Questa forge ha un indirizzo privato o LAN. Contrassegnala come interna attendibile in Impostazioni → Archiviazione.',
+  'De forge is niet bereikbaar — controleer je verbinding en de server-URL.':
+      'La forge non è raggiungibile — controlla la connessione e l\'URL del server.',
+  'Aanmelden bij de forge mislukt. Controleer je token: het heeft leesrechten op de repository nodig, en schrijfrechten om op te slaan.':
+      'Accesso alla forge non riuscito. Controlla il token: serve accesso in lettura al repository e in scrittura per salvare.',
+  'Niet gevonden in de repository — of je token mag het niet zien.':
+      'Non trovato nel repository — oppure il tuo token non può vederlo.',
+  'De forge gaf een fout. Probeer het later opnieuw.':
+      'La forge ha restituito un errore. Riprova più tardi.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge bij Instellingen → Opslag?':
+      'Questo indirizzo non risponde come una forge. Il tipo di forge in Impostazioni → Archiviazione è corretto?',
+  'Stel eerst een WebDAV-server in bij Instellingen → Opslag.':
+      'Configura prima un server WebDAV in Impostazioni → Archiviazione.',
   'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
       'Necessario quando la forge è su una rete privata o domestica. Senza questa opzione il controllo di sicurezza rifiuta un indirizzo privato.',
   'Vul server-URL, eigenaar en repository in':

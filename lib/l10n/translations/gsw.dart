@@ -1785,6 +1785,26 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
+      'WebDAV isch nid (rächt) igrichtet — prüef d Serverdate under Istellige → Spycher.',
+  'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':
+      'S git-Repository isch nid (rächt) igrichtet — prüef Server, Bsitzer und Repository under Istellige → Spycher.',
+  'De servernaam van de forge bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'De Servername vo de Forge git\'s nid, oder er lat sich nid uflöse. Lueg d Server-URL uf en Tippfähler ah.',
+  'Deze forge heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Die Forge het e privati oder LAN-Adrässe. Markier si under Istellige → Spycher als vertrouenswürdig intern.',
+  'De forge is niet bereikbaar — controleer je verbinding en de server-URL.':
+      'D Forge isch nid erreichbar — prüef dini Verbindig und d Server-URL.',
+  'Aanmelden bij de forge mislukt. Controleer je token: het heeft leesrechten op de repository nodig, en schrijfrechten om op te slaan.':
+      'S Ahmälde bi de Forge het nid klappet. Prüef dis Token: es bruucht Läsrächt uf s Repository und Schrybrächt zum Speichere.',
+  'Niet gevonden in de repository — of je token mag het niet zien.':
+      'Im Repository nid gfunde — oder dis Token darf\'s nid gseh.',
+  'De forge gaf een fout. Probeer het later opnieuw.':
+      'D Forge het en Fähler gmäldet. Probier\'s spöter nomol.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge bij Instellingen → Opslag?':
+      'Die Adrässe antwortet nid wie e Forge. Stimmt d Forge-Art under Istellige → Spycher?',
+  'Stel eerst een WebDAV-server in bij Instellingen → Opslag.':
+      'Richt zerscht en WebDAV-Server under Istellige → Spycher i.',
   'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
       'Bruucht\'s, wenn d Forge im private oder Heimnetz lauft. Ohni dä Haken wyst d Sicherheitsprüefig e privati Adrässe ab.',
   'Vul server-URL, eigenaar en repository in':

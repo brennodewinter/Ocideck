@@ -1772,6 +1772,26 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
+      'WebDAV ei ole (õigesti) seadistatud — kontrolli serveri andmeid jaotises Seaded → Salvestusruum.',
+  'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':
+      'Git-hoidla ei ole (õigesti) seadistatud — kontrolli serverit, omanikku ja hoidlat jaotises Seaded → Salvestusruum.',
+  'De servernaam van de forge bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Forge\'i serveri nime ei ole olemas või seda ei õnnestu leida. Kontrolli serveri URL-i trükivea suhtes.',
+  'Deze forge heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Sellel forge\'il on privaat- või LAN-aadress. Märgi see usaldusväärseks sisemiseks jaotises Seaded → Salvestusruum.',
+  'De forge is niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Forge ei ole kättesaadav — kontrolli ühendust ja serveri URL-i.',
+  'Aanmelden bij de forge mislukt. Controleer je token: het heeft leesrechten op de repository nodig, en schrijfrechten om op te slaan.':
+      'Forge\'i sisselogimine ebaõnnestus. Kontrolli luba: see vajab hoidla lugemisõigust ja salvestamiseks kirjutamisõigust.',
+  'Niet gevonden in de repository — of je token mag het niet zien.':
+      'Hoidlast ei leitud — või sinu luba ei tohi seda näha.',
+  'De forge gaf een fout. Probeer het later opnieuw.':
+      'Forge tagastas vea. Proovi hiljem uuesti.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge bij Instellingen → Opslag?':
+      'See aadress ei vasta nagu forge. Kas forge\'i tüüp jaotises Seaded → Salvestusruum on õige?',
+  'Stel eerst een WebDAV-server in bij Instellingen → Opslag.':
+      'Seadista kõigepealt WebDAV-server jaotises Seaded → Salvestusruum.',
   'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
       'Vajalik, kui forge töötab privaat- või koduvõrgus. Ilma selle liputa keeldub turvakontroll privaataadressist.',
   'Vul server-URL, eigenaar en repository in':
