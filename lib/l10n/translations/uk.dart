@@ -1801,6 +1801,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Nog te verifiëren': 'Ще перевірити',
   'MASWE-zwakheid kiezen': 'Вибрати слабкість MASWE',
   'Zoek op naam, id of categorie': 'Пошук за назвою, id або категорією',
   'Geen zwakheid gevonden': 'Слабкість не знайдено',

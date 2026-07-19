@@ -1783,6 +1783,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Nog te verifiëren': 'Vielä varmennettava',
   'MASWE-zwakheid kiezen': 'Valitse MASWE-heikkous',
   'Zoek op naam, id of categorie': 'Hae nimellä, tunnuksella tai luokalla',
   'Geen zwakheid gevonden': 'Heikkoutta ei löytynyt',

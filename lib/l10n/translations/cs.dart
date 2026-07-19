@@ -1786,6 +1786,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Nog te verifiëren': 'Zbývá ověřit',
   'MASWE-zwakheid kiezen': 'Vybrat slabinu MASWE',
   'Zoek op naam, id of categorie': 'Hledat podle názvu, id nebo kategorie',
   'Geen zwakheid gevonden': 'Nenalezena žádná slabina',

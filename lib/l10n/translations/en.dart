@@ -922,6 +922,7 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Nog te verifiëren': 'Still to verify',
   'MASWE-zwakheid kiezen': 'Choose a MASWE weakness',
   'Zoek op naam, id of categorie': 'Search by name, id or category',
   'Geen zwakheid gevonden': 'No weakness found',

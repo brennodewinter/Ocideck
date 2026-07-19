@@ -1796,6 +1796,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Nog te verifiëren': 'Do zweryfikowania',
   'MASWE-zwakheid kiezen': 'Wybierz słabość MASWE',
   'Zoek op naam, id of categorie': 'Szukaj po nazwie, id lub kategorii',
   'Geen zwakheid gevonden': 'Nie znaleziono słabości',

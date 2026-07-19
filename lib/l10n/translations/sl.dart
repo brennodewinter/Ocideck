@@ -1785,6 +1785,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Nog te verifiëren': 'Še je treba preveriti',
   'MASWE-zwakheid kiezen': 'Izberi šibkost MASWE',
   'Zoek op naam, id of categorie': 'Iskanje po imenu, id-ju ali kategoriji',
   'Geen zwakheid gevonden': 'Šibkosti ni bilo mogoče najti',

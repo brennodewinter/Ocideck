@@ -1787,6 +1787,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Nog te verifiëren': 'No z verifiziere',
   'MASWE-zwakheid kiezen': 'MASWE-Schwachstell uswähle',
   'Zoek op naam, id of categorie': 'Nach Name, ID oder Kategorie sueche',
   'Geen zwakheid gevonden': 'Kei Schwachstell gfunde',

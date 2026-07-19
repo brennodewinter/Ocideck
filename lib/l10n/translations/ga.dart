@@ -1819,6 +1819,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Nog te verifiëren': 'Le fíorú fós',
   'MASWE-zwakheid kiezen': 'Roghnaigh laige MASWE',
   'Zoek op naam, id of categorie':
       'Cuardaigh de réir ainm, aitheantóir nó catagóir',

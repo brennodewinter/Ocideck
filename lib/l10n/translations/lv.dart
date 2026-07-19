@@ -1782,6 +1782,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Nog te verifiëren': 'Vēl jāpārbauda',
   'MASWE-zwakheid kiezen': 'Izvēlieties MASWE vājumu',
   'Zoek op naam, id of categorie': 'Meklēt pēc nosaukuma, id vai kategorijas',
   'Geen zwakheid gevonden': 'Vājums nav atrasts',

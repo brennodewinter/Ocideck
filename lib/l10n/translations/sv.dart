@@ -1782,6 +1782,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Nog te verifiëren': 'Återstår att verifiera',
   'MASWE-zwakheid kiezen': 'Välj en MASWE-svaghet',
   'Zoek op naam, id of categorie': 'Sök på namn, id eller kategori',
   'Geen zwakheid gevonden': 'Ingen svaghet hittades',

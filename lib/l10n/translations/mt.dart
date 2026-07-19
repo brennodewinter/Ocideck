@@ -1806,6 +1806,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Nog te verifiëren': 'Għad irid jiġi verifikat',
   'MASWE-zwakheid kiezen': 'Agħżel dgħufija MASWE',
   'Zoek op naam, id of categorie': 'Fittex bl-isem, l-id jew il-kategorija',
   'Geen zwakheid gevonden': 'Ma nstabet l-ebda dgħufija',

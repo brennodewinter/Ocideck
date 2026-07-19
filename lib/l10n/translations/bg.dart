@@ -1806,6 +1806,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Nog te verifiëren': 'Още за проверка',
   'MASWE-zwakheid kiezen': 'Избор на слабост MASWE',
   'Zoek op naam, id of categorie': 'Търсене по име, id или категория',
   'Geen zwakheid gevonden': 'Не е намерена слабост',

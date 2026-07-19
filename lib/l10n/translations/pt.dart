@@ -1813,6 +1813,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Nog te verifiëren': 'Ainda por verificar',
   'MASWE-zwakheid kiezen': 'Escolher uma fraqueza MASWE',
   'Zoek op naam, id of categorie': 'Pesquisar por nome, id ou categoria',
   'Geen zwakheid gevonden': 'Nenhuma fraqueza encontrada',

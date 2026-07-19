@@ -1178,35 +1178,9 @@ discussion still resolve.
 
 ### What awaits a live test environment
 
-Everything below is built and passing its own tests, but has never met a real
-server or a second desktop platform. Collected here rather than left scattered
-across phase notes, because it is one shopping list for one session at the test
-rig — and because a debt nobody wrote down is a debt nobody pays.
-
-Ordered by how much is riding on it:
-
-1. **GitHub and GitLab against the real thing** (Phase 5). Both adapters were
-   written from documentation; only Forgejo ever answered for real. The fakes
-   model each forge's concurrency guard deliberately, so the *contract* is
-   exercised — but a wrong field name, a changed status code or an auth quirk
-   would pass every test here and fail on first contact. Run the whole loop on
-   each: open, save, concept branch, review PR, merge, tag, compare.
-2. **OQ-10 on Windows and Linux.** `flutter test test/git_cli_test.dart
-   test/native_git_mirror_test.dart` on each. The Windows allowlist entries are
-   reasoned, not observed; if one is missing, `probe()` fails and the app falls
-   back to REST — graceful, but silent, so nobody would report it.
-3. **A live Basic-auth handshake** against each forge. No offline test stands in
-   for it.
-4. **The save path against a real Forgejo.** It was rebuilt four times across
-   Phases 2–5 (offline queue, work branches, merge-on-conflict, the transport's
-   verb allowlist). Each step had tests; the whole thing end-to-end has not been
-   through a real server since it changed shape.
-5. **A genuine concurrent edit** — two people, one deck, overlapping saves —
-   rather than the constructed base/ours/theirs of the merge tests.
-
-Two things deliberately *not* on this list, so they are not mistaken for
-oversights: asset deletion (§6.2) and server-side search (§9.3). Both are
-unbuilt by choice, not unverified.
+Moved to [`VERIFICATION.md`](VERIFICATION.md), which collects the same debt for
+the MIAUW work as well. Keeping two lists was how it got scattered in the first
+place; items 1–5 there are this phase's.
 
 ---
 

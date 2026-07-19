@@ -127,6 +127,7 @@ flutter:
     - docs/MIGRATION_GUIDE.md
     - docs/design/COLLABORATION.md
     - docs/design/GIT_STORAGE.md
+    - docs/design/VERIFICATION.md
     - docs/design/PENTEST_MIAUW.md
     - docs/design/AI_ASSIST.md
     - docs/design/AGENTIC_BUILD_PLAN.md

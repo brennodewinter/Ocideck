@@ -1787,6 +1787,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Nog te verifiëren': 'Még ellenőrizendő',
   'MASWE-zwakheid kiezen': 'MASWE-gyengeség kiválasztása',
   'Zoek op naam, id of categorie':
       'Keresés név, azonosító vagy kategória szerint',

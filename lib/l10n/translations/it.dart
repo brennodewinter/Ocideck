@@ -736,6 +736,7 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Nog te verifiëren': 'Ancora da verificare',
   'MASWE-zwakheid kiezen': 'Scegli una debolezza MASWE',
   'Zoek op naam, id of categorie': 'Cerca per nome, id o categoria',
   'Geen zwakheid gevonden': 'Nessuna debolezza trovata',

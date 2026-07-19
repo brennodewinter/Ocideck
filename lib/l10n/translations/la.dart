@@ -1799,6 +1799,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Nog te verifiëren': 'Adhuc probanda',
   'MASWE-zwakheid kiezen': 'Infirmitatem MASWE eligere',
   'Zoek op naam, id of categorie': 'Quaerere nomine, id vel genere',
   'Geen zwakheid gevonden': 'Nulla infirmitas inventa',
