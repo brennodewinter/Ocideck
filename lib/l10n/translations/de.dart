@@ -738,6 +738,7 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Naar de slide': 'Zur Folie',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Die git-Verbindung dieser Präsentation gibt es nicht mehr.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':

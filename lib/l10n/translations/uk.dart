@@ -1799,6 +1799,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Naar de slide': 'До слайда',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Git-з\'єднання цієї презентації більше не існує.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':

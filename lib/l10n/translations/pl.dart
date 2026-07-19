@@ -1793,6 +1793,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Naar de slide': 'Przejdź do slajdu',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Połączenie git tej prezentacji już nie istnieje.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':

@@ -316,7 +316,18 @@ void main() {
           isTrue,
           reason: 'the finding slide round-trips as a security slide',
         );
-        expect(container.read(securityModulePromptProvider), isNotNull);
+        final prompt = container.read(securityModulePromptProvider);
+        expect(prompt, isNotNull);
+        // De melding hangt aan het tabblad waarin dit deck landde en wijst de
+        // eerste Informatieveiligheid-slide aan; daarop leunen de "naar de
+        // slide"-knop en het opruimen bij een tabwissel.
+        final tab = container.read(tabsProvider).current!;
+        expect(prompt!.tabId, tab.id);
+        expect(
+          prompt.slideIndex,
+          tab.deckNotifier.currentState.deck!.firstSecuritySlideIndex,
+        );
+        expect(prompt.slideIndex, greaterThanOrEqualTo(0));
       },
     );
   });

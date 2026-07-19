@@ -1785,6 +1785,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Naar de slide': 'Zur Folie',
   'De git-verbinding van dit deck bestaat niet meer.':
       'D git-Verbindig vo dere Präsentation git\'s nüme.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':

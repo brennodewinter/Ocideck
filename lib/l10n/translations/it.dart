@@ -734,6 +734,7 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Naar de slide': 'Vai alla slide',
   'De git-verbinding van dit deck bestaat niet meer.':
       'La connessione git di questa presentazione non esiste più.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':

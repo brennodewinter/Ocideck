@@ -136,6 +136,13 @@ class AppShell extends ConsumerStatefulWidget {
 class _AppShellState extends ConsumerState<AppShell> with WindowListener {
   late final OpenFileChannel _openFileChannel;
 
+  /// Het tabblad waar de zichtbare Informatieveiligheid-melding bij hoort, of
+  /// null als er geen staat. De melding is niet zomaar een mededeling maar een
+  /// uitspraak over déze presentatie, dus hij mag een tabwissel of het sluiten
+  /// van het deck niet overleven — dan gaat hij namelijk over iets anders dan
+  /// wat de gebruiker ziet. Zie [_syncSecurityBannerWithTabs].
+  int? _securityPromptTabId;
+
   @override
   void initState() {
     super.initState();
@@ -479,9 +486,106 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     });
   }
 
+  /// Een zojuist geopende presentatie bevat Informatieveiligheid-slidetypes
+  /// terwijl de module uit staat: bied aan de module aan te zetten (puur
+  /// discovery — de slides renderen sowieso gewoon, MODUS-REGEL). De state-laag
+  /// seint dit alleen bij het OPENEN; edits raken dit pad nooit, dus de melding
+  /// komt precies één keer per open. De module-stand toetsen we hier, op het
+  /// verse moment: nog aan het laden of al aan → niets tonen.
+  ///
+  /// Bewust een [MaterialBanner] en geen snackbar: de gebruiker heeft hier drie
+  /// antwoorden — eerst kijken, aanzetten, of wegklikken — en een snackbar
+  /// draagt er maar één. Hij verdwijnt ook niet vanzelf na een paar tellen,
+  /// want een aanbod dat wegtikt terwijl je nog aan het kijken bent is geen
+  /// aanbod. Wegblijven doet hij op precies twee manieren: de gebruiker kiest
+  /// iets, of de presentatie waar het over gaat verdwijnt uit beeld.
+  void _listenSecurityModulePrompt(BuildContext context) {
+    ref.listen<SecurityModulePrompt?>(securityModulePromptProvider, (
+      _,
+      prompt,
+    ) {
+      if (prompt == null) return;
+      ref.read(securityModulePromptProvider.notifier).state = null;
+      final sec = ref.read(infoSafetyProvider);
+      if (sec.loading || sec.enabled) return;
+      final l10n = context.l10n;
+      final messenger = ScaffoldMessenger.of(context);
+      // Een tweede open zet de vorige balk opzij in plaats van erachter in de
+      // rij: die ging over een presentatie die niet meer voorgrond is.
+      messenger.hideCurrentMaterialBanner();
+      _securityPromptTabId = prompt.tabId;
+      messenger.showMaterialBanner(
+        MaterialBanner(
+          content: Text(
+            l10n.d(
+              'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.',
+            ),
+          ),
+          actions: [
+            // Sluit de melding niet: je gaat kijken om te beslissen, dus het
+            // aanbod moet er nog staan als je terugkomt.
+            TextButton(
+              onPressed: () => _showSecuritySlide(prompt),
+              child: Text(l10n.d('Naar de slide')),
+            ),
+            TextButton(
+              onPressed: () {
+                _hideSecurityBanner();
+                ref.read(infoSafetyProvider.notifier).enable();
+              },
+              child: Text(l10n.d('Inschakelen')),
+            ),
+            IconButton(
+              tooltip: l10n.d('Sluiten'),
+              icon: const Icon(Icons.close),
+              onPressed: _hideSecurityBanner,
+            ),
+          ],
+        ),
+      );
+    });
+  }
+
+  /// Spring naar de eerste Informatieveiligheid-slide, zodat de gebruiker de
+  /// bewering van de melding kan controleren vóórdat hij de module aanzet.
+  /// Alleen als het bijbehorende tabblad nog vóór staat — anders zou de sprong
+  /// in een andere presentatie landen.
+  void _showSecuritySlide(SecurityModulePrompt prompt) {
+    final tab = ref.read(tabsProvider).current;
+    if (tab == null || tab.id != prompt.tabId) return;
+    if (!tab.deckNotifier.mounted) return;
+    final slides = tab.deckNotifier.currentState.deck?.slides.length ?? 0;
+    if (prompt.slideIndex >= slides) return;
+    tab.editorNotifier.select(prompt.slideIndex);
+  }
+
+  void _hideSecurityBanner() {
+    if (_securityPromptTabId == null) return;
+    _securityPromptTabId = null;
+    ScaffoldMessenger.of(context).hideCurrentMaterialBanner();
+  }
+
+  /// Haal de melding weg zodra de presentatie waar hij over gaat niet meer
+  /// vóór staat: een andere tab gekozen, het tabblad gesloten, of het deck
+  /// dichtgeklapt. Zonder dit bleef hij over de volgende presentatie hangen en
+  /// beweerde daar iets over dat niet waar hoefde te zijn.
+  void _syncSecurityBannerWithTabs(TabsState tabs) {
+    if (_securityPromptTabId == null) return;
+    final current = tabs.current;
+    if (current != null &&
+        current.id == _securityPromptTabId &&
+        current.isOpen) {
+      return;
+    }
+    _hideSecurityBanner();
+  }
+
   @override
   Widget build(BuildContext context) {
     final tabsState = ref.watch(tabsProvider);
+    ref.listen<TabsState>(tabsProvider, (_, next) {
+      _syncSecurityBannerWithTabs(next);
+    });
 
     // A blocked import (executable content) raises the alarm from the state
     // layer; show it here so it covers every entry point (open, recent,
@@ -504,36 +608,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
       );
     });
 
-    // Een zojuist geopende presentatie bevat Informatieveiligheid-slidetypes
-    // terwijl de module uit staat: bied eenmalig aan de module aan te zetten
-    // (puur discovery — de slides renderen sowieso gewoon, MODUS-REGEL). De
-    // state-laag seint dit alleen bij het OPENEN; edits raken dit pad nooit,
-    // dus de prompt komt precies één keer per open. De module-stand toetsen we
-    // hier, op het verse moment: nog aan het laden of al aan → niets tonen.
-    ref.listen<SecurityModulePrompt?>(securityModulePromptProvider, (
-      _,
-      prompt,
-    ) {
-      if (prompt == null) return;
-      ref.read(securityModulePromptProvider.notifier).state = null;
-      final sec = ref.read(infoSafetyProvider);
-      if (sec.loading || sec.enabled) return;
-      final l10n = context.l10n;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          duration: const Duration(seconds: 8),
-          content: Text(
-            l10n.d(
-              'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.',
-            ),
-          ),
-          action: SnackBarAction(
-            label: l10n.d('Inschakelen'),
-            onPressed: () => ref.read(infoSafetyProvider.notifier).enable(),
-          ),
-        ),
-      );
-    });
+    _listenSecurityModulePrompt(context);
 
     _listenChartDataWarning(context, ref);
 

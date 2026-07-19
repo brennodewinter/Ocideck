@@ -1809,6 +1809,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Naar de slide': 'Στη διαφάνεια',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Η σύνδεση git αυτής της παρουσίασης δεν υπάρχει πλέον.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':

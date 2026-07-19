@@ -1804,6 +1804,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Naar de slide': 'Към слайда',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Git връзката на тази презентация вече не съществува.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':

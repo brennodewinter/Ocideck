@@ -1788,6 +1788,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Naar de slide': 'Na slajd',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Git veza ove prezentacije više ne postoji.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':

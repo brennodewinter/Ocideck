@@ -1797,6 +1797,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Naar de slide': 'Ad tabulam',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Conexio git huius praesentationis non iam exstat.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':

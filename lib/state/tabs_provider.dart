@@ -511,9 +511,14 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// this layer stays decoupled from the module and just reports the fact. Same
   /// one-shot listen pattern as [importSecurityAlarmProvider].
   void _maybePromptSecurityModule(Deck deck) {
-    if (!deck.hasSecuritySlides) return;
+    final slideIndex = deck.firstSecuritySlideIndex;
+    if (slideIndex < 0) return;
+    // Aangeroepen ná het plaatsen, dus `current` is het tabblad dat dit deck
+    // net heeft gekregen — de melding kan zich er zo aan vastknopen.
+    final tab = state.current;
+    if (tab == null) return;
     _ref.read(securityModulePromptProvider.notifier).state =
-        SecurityModulePrompt();
+        SecurityModulePrompt(tabId: tab.id, slideIndex: slideIndex);
   }
 
   /// Open een deck uit in-memory bytes — het open-pad voor web, waar de
@@ -911,15 +916,26 @@ final duplicateCopyNoticeProvider = StateProvider<DuplicateCopyNotice?>(
 
 /// One-shot signal that a deck carrying Informatieveiligheid slide types was
 /// just opened (see [Deck.hasSecuritySlides]). The shell listens on this and —
-/// only when the module is off — offers a one-time "enable the module" snackbar
+/// only when the module is off — offers a one-time "enable the module" banner
 /// (pure discovery; the slides render regardless). Set once per open by
 /// [TabsNotifier._maybePromptSecurityModule], then reset to null once handled,
 /// mirroring [importSecurityAlarmProvider].
 class SecurityModulePrompt {
+  /// Het tabblad waarin het deck werd geopend. De melding hoort bij dít
+  /// tabblad: zodra de gebruiker wisselt of het deck sluit, gaat hij weg — een
+  /// blijvende balk over een presentatie die niet meer in beeld is, is een
+  /// leugen over wat er open staat.
+  final int tabId;
+
+  /// Index van de eerste Informatieveiligheid-slide, zodat de melding een
+  /// "naar de slide"-knop kan aanbieden en de gebruiker de bewering kan
+  /// controleren vóórdat hij de module aanzet.
+  final int slideIndex;
+
   /// A non-const constructor on purpose: each open must produce a *distinct*
   /// instance so a back-to-back second open still notifies listeners (two const
   /// instances would be identical and be swallowed as "no change").
-  SecurityModulePrompt();
+  SecurityModulePrompt({required this.tabId, required this.slideIndex});
 }
 
 final securityModulePromptProvider = StateProvider<SecurityModulePrompt?>(

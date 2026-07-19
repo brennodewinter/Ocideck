@@ -1756,6 +1756,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Naar de slide': '\'anghom yIlegh',
   'De git-verbinding van dit deck bestaat niet meer.':
       'QIchvam git rar tu\'lu\'be\'qu\'.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':

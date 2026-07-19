@@ -1784,6 +1784,7 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Naar de slide': 'Přejít na snímek',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Připojení git této prezentace už neexistuje.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':

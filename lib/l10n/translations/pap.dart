@@ -738,6 +738,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Naar de slide': 'Bai na e slide',
   'De git-verbinding van dit deck bestaat niet meer.':
       'E konekshon git di e presentashon akí no ta eksistí mas.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':

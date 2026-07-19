@@ -1785,6 +1785,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Naar de slide': 'Ugrás a diára',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Ennek a bemutatónak a git-kapcsolata már nem létezik.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':

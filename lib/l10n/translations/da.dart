@@ -1780,6 +1780,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Naar de slide': 'Gå til slide',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Git-forbindelsen til denne præsentation findes ikke længere.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':

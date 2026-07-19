@@ -8,6 +8,21 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Fixed
+- **De melding over de Informatieveiligheidsmodule bleef hangen boven een
+  presentatie waar ze niet over ging.** Open je een rapport met
+  module-slidetypes terwijl de module uit staat, dan bood OciDeck aan hem aan
+  te zetten. Die melding had alleen een *Inschakelen*-knop: nee zeggen kon
+  niet, en wachten tot hij vanzelf wegtikte evenmin als je nog aan het kijken
+  was. Erger: sloot je de presentatie of wisselde je van tabblad, dan bleef de
+  melding staan en beweerde iets over een presentatie die niet meer in beeld
+  was.
+
+  De melding is nu een balk bovenin met alle drie de antwoorden: **Naar de
+  slide** springt naar de eerste slide waar het om gaat, zodat je zelf kunt
+  nagaan of het klopt vóórdat je iets aanzet (kijken sluit de balk niet — je
+  keek immers om te beslissen), **Inschakelen** zet de module aan, en het
+  **✕** stuurt hem weg. Wissel je van tabblad of sluit je de presentatie, dan
+  verdwijnt de balk uit zichzelf.
 - **Twee mensen die hetzelfde deck op WebDAV opsloegen overschreven elkaar
   stil.** Het opslaan deed een kale PUT: wie als laatste opsloeg won, en de
   ander merkte pas weken later dat zijn werk weg was. De ontwerpdocumentatie
