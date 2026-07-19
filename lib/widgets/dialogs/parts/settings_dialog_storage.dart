@@ -1,56 +1,58 @@
 // Part of the settings_dialog library — see ../settings_dialog.dart.
 //
-// Opslag op één plek. Hiervóór lag het verspreid: de bibliotheken en de
-// exportmap stonden onder "Algemeen", Nextcloud had een eigen tabblad en git
-// ook. Wie wilde weten waar zijn presentaties konden staan, moest dat op drie
-// plaatsen bij elkaar zoeken — en elke nieuwe opslagwijze zou er een vierde
-// tabblad bij hebben gezet.
+// Opslag als één lijst. Hiervóór stonden hier twee lijsten met een verschillend
+// idioom: "Bibliotheken" (meerdere, benoemd, toevoegbaar) en daaronder
+// "Opslagwijzen" (precies drie regels, waarvan er twee elk één configuratie
+// konden dragen). Wie voor twee opdrachtgevers werkte kon lokaal wél twee
+// mappen aanhouden, maar niet twee Nextclouds — en moest de vraag "waar staat
+// het werk van deze klant?" op twee plekken beantwoorden.
 //
-// De ordening hier volgt de vraag die de gebruiker stelt, niet de techniek die
-// erachter zit. Eerst *waar* zijn werk staat (bibliotheken, exportmap), daarna
-// *langs welke weg* het daar komt (schijf, WebDAV, git). Die tweede lijst is
-// [StorageModality]: één regel per opslagwijze, uitklapbaar naar zijn eigen
-// instellingen. Een vierde wijze is een waarde erbij in die enum plus een tak
-// in [_modalityPanel] — geen tabblad, geen hernummering.
+// Nu is er één lijst bestandsverbindingen. Lokale mappen, WebDAV-servers en
+// git-repositories staan er door elkaar, in de volgorde die de gebruiker zelf
+// sleept. Die volgorde is geen cosmetica: de bovenste bruikbare verbinding van
+// een soort is de standaard voor die soort (`AppSettings.primaryOf`), dus
+// slepen is hoe je zegt welke server "de" server is.
+//
+// Een vierde soort opslag is een waarde erbij in [StorageConnectionKind] plus
+// een tak in [_connectionPanel] — geen tweede lijst, geen tabblad.
 part of '../settings_dialog.dart';
 
-/// Een manier waarop presentaties bij de gebruiker terechtkomen.
-///
-/// [disk] heeft geen eigen instellingen: die wordt bestuurd door de
-/// bibliotheken bovenaan hetzelfde tabblad. Hij staat er tóch in, omdat een
-/// lijst die alleen de netwerkbronnen toont de indruk wekt dat opslag op de
-/// eigen schijf iets aparts is in plaats van de standaard.
-enum StorageModality {
-  disk(Icons.folder_outlined),
-  webdav(Icons.cloud_outlined, sectionSource: 'WebDAV-bron'),
-  git(Icons.account_tree_outlined, sectionSource: 'Git-repository');
-
-  const StorageModality(this.icon, {this.sectionSource});
-
-  final IconData icon;
-
-  /// De Nederlandse bronstring van de sectiekop in het uitklappaneel — het
-  /// anker waar een zoektreffer naartoe springt. `null` als de wijze geen eigen
-  /// paneel heeft. Bewust de bronstring en niet de vertaalde tekst, zodat het
-  /// koppelen in elke taal hetzelfde werkt.
-  final String? sectionSource;
+/// Presentatie-eigenschappen per soort verbinding: het pictogram in de rij en
+/// de teksten in het "toevoegen"-menu. De configuratie zelf zit in het model
+/// ([StorageConnection]); dit is puur wat het scherm ervan laat zien.
+extension StorageConnectionKindUi on StorageConnectionKind {
+  IconData get icon => switch (this) {
+    StorageConnectionKind.local => Icons.folder_outlined,
+    StorageConnectionKind.webdav => Icons.cloud_outlined,
+    StorageConnectionKind.git => Icons.account_tree_outlined,
+  };
 
   String label(AppLocalizations l10n) => switch (this) {
-    StorageModality.disk => l10n.d('Deze computer'),
-    StorageModality.webdav => l10n.d('WebDAV'),
-    StorageModality.git => l10n.d('Git-repository'),
+    StorageConnectionKind.local => l10n.d('Map op deze computer'),
+    StorageConnectionKind.webdav => l10n.d('WebDAV-server'),
+    StorageConnectionKind.git => l10n.d('Git-repository'),
   };
 
   String summary(AppLocalizations l10n) => switch (this) {
-    StorageModality.disk => l10n.d(
-      'Presentaties in de mappen hierboven, op de schijf van deze computer.',
+    StorageConnectionKind.local => l10n.d(
+      'Een map op de schijf van deze computer.',
     ),
-    StorageModality.webdav => l10n.d(
-      'Open en bewaar presentaties in een map op een WebDAV-server.',
+    StorageConnectionKind.webdav => l10n.d(
+      'Een map op een WebDAV-server, bijvoorbeeld Nextcloud.',
     ),
-    StorageModality.git => l10n.d(
-      'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.',
+    StorageConnectionKind.git => l10n.d(
+      'Een git-repository; elke opgeslagen versie blijft bewaard.',
     ),
+  };
+
+  /// De Nederlandse bronstring van de sectiekop in het uitklappaneel — het
+  /// anker waar een zoektreffer naartoe springt. `null` als de soort geen eigen
+  /// paneel heeft. Bewust de bronstring en niet de vertaalde tekst, zodat het
+  /// koppelen in elke taal hetzelfde werkt.
+  String? get sectionSource => switch (this) {
+    StorageConnectionKind.local => null,
+    StorageConnectionKind.webdav => 'WebDAV-bron',
+    StorageConnectionKind.git => 'Git-repository',
   };
 }
 
@@ -60,43 +62,336 @@ extension _SettingsStorageTab on _SettingsDialogState {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Standaard- en exportmap sturen het bestandssysteem aan. Op web
-        // bestaat dat niet (decks openen via bytes, export = browser-download),
-        // dus dan is de mapkeuze zinloos — verberg beide secties.
+        ..._connectionsSection(l10n),
+        // De exportmap stuurt het bestandssysteem aan. Op web bestaat dat niet
+        // (export = browser-download), dus dan is de mapkeuze zinloos.
         if (supportsLocalProjectFolders) ...[
-          ..._librariesSection(l10n),
-          const SizedBox(height: 16),
-          ..._exportFolderSection(l10n),
           const SizedBox(height: 20),
+          ..._exportFolderSection(l10n),
         ],
-        ..._modalitiesSection(l10n),
       ],
     );
   }
 
-  List<Widget> _librariesSection(AppLocalizations l10n) => [
-    _sectionTitle(l10n.d('Bibliotheken')),
-    Text(
-      l10n.d(
-        'Mappen waarin je presentaties bewaart en doorzoekt. Geef ze een eigen naam om ze uit elkaar te houden. Alle bibliotheken worden doorzocht bij openen en in de afbeeldingenbibliotheek.',
+  /// De verbindingenlijst. Op web valt de lokale schijf weg en zijn er ook geen
+  /// netwerkbronnen; dan heeft de hele sectie geen inhoud.
+  List<Widget> _connectionsSection(AppLocalizations l10n) {
+    if (!supportsLocalProjectFolders && !supportsNetworkDeckSources) {
+      return const [];
+    }
+    return [
+      _sectionTitle(l10n.d('Bestandsverbindingen')),
+      Text(
+        l10n.d(
+          'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.',
+        ),
+        style: TextStyle(fontSize: 11, color: AppTheme.slate400),
       ),
-      style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+      const SizedBox(height: 10),
+      if (_connections.isEmpty)
+        _pathBox(
+          l10n.d('Nog geen verbinding — voeg er hieronder een toe.'),
+          muted: true,
+        )
+      else
+        _connectionList(l10n),
+      const SizedBox(height: 10),
+      _addConnectionButton(l10n),
+    ];
+  }
+
+  /// De sleepbare lijst zelf.
+  ///
+  /// `shrinkWrap` met een uitgeschakelde eigen scroll: het tabblad scrollt al,
+  /// en een lijst die zelf óók scrolt levert twee scrollgebieden in elkaar op —
+  /// met een muiswiel dat op de verkeerde reageert.
+  Widget _connectionList(AppLocalizations l10n) => ReorderableListView.builder(
+    shrinkWrap: true,
+    physics: const NeverScrollableScrollPhysics(),
+    buildDefaultDragHandles: false,
+    itemCount: _connections.length,
+    // onReorderItem en niet het oudere onReorder: die tweede geeft een newIndex
+    // die het gesleepte item nog op zijn oude plek meetelt, en die correctie
+    // hier herhalen is precies de fout die je één keer te vaak maakt.
+    onReorderItem: (oldIndex, newIndex) => _rebuild(
+      () => _connections.insert(newIndex, _connections.removeAt(oldIndex)),
     ),
-    const SizedBox(height: 10),
-    if (_libraries.isEmpty)
-      _pathBox(l10n.d('Nog geen bibliotheek — voeg een map toe.'), muted: true)
-    else
-      for (var i = 0; i < _libraries.length; i++) _libraryRow(i),
-    const SizedBox(height: 10),
-    Align(
+    itemBuilder: (context, index) =>
+        _connectionRow(_connections[index], index, l10n),
+  );
+
+  /// Eén regel: sleepgreep, pictogram, naam, de stand van zaken in één zin, een
+  /// knop om te verwijderen, en een uitklappaneel eronder.
+  Widget _connectionRow(
+    StorageConnection connection,
+    int index,
+    AppLocalizations l10n,
+  ) {
+    final expanded = _expandedConnectionId == connection.id;
+    final panel = _connectionPanel(connection);
+
+    return Padding(
+      key: ValueKey(connection.id),
+      padding: const EdgeInsets.only(bottom: 8),
+      // Material en niet Container: het paneel bevat SwitchListTiles, en die
+      // schilderen hun inkt op de dichtstbijzijnde Material-voorouder. Zit daar
+      // een gekleurde box tussen, dan verdwijnt de inkt erachter — Flutter
+      // struikelt er terecht over.
+      child: Material(
+        color: Colors.white,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: expanded ? AppTheme.blue400 : AppTheme.iceBlue,
+          ),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(6, 6, 8, 6),
+              child: Row(
+                children: [
+                  ReorderableDragStartListener(
+                    index: index,
+                    child: Tooltip(
+                      message: l10n.d('Sleep om de volgorde te wijzigen'),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        child: Icon(
+                          Icons.drag_indicator,
+                          size: 18,
+                          color: AppTheme.slate400,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Icon(
+                    connection.kind.icon,
+                    size: 19,
+                    color: AppTheme.slate500,
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(child: _connectionNameField(connection, l10n)),
+                  const SizedBox(width: 8),
+                  _connectionStatusLine(connection, l10n),
+                  IconButton(
+                    onPressed: () => _removeConnection(connection.id),
+                    icon: const Icon(Icons.delete_outline, size: 18),
+                    tooltip: l10n.d('Verbinding verwijderen'),
+                  ),
+                  // Zonder paneel valt er niets uit te klappen; dan blijft de
+                  // regel een mededeling in plaats van een knop.
+                  if (panel != null)
+                    IconButton(
+                      onPressed: () => _rebuild(
+                        () => _expandedConnectionId = expanded
+                            ? null
+                            : connection.id,
+                      ),
+                      icon: Icon(
+                        expanded ? Icons.expand_less : Icons.expand_more,
+                        size: 20,
+                      ),
+                      tooltip: expanded
+                          ? l10n.d('Instellingen verbergen')
+                          : l10n.d('Instellingen tonen'),
+                    ),
+                ],
+              ),
+            ),
+            if (expanded && panel != null)
+              Padding(
+                padding: const EdgeInsets.fromLTRB(12, 4, 12, 12),
+                child: panel,
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// De naam is direct in de rij te wijzigen: het is het enige veld dat elke
+  /// soort verbinding deelt, en het is precies wat je aanpast als je twee
+  /// klanten uit elkaar wilt houden.
+  Widget _connectionNameField(
+    StorageConnection connection,
+    AppLocalizations l10n,
+  ) => TextFormField(
+    key: ValueKey('name-${connection.id}'),
+    initialValue: connection.name,
+    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+    decoration: InputDecoration(
+      isDense: true,
+      border: InputBorder.none,
+      hintText: connection.fallbackLabel.isEmpty
+          ? l10n.d('Naam van deze verbinding')
+          : connection.fallbackLabel,
+      hintStyle: TextStyle(fontSize: 13, color: AppTheme.slate400),
+    ),
+    onChanged: (value) => _renameConnection(connection, value),
+  );
+
+  /// De instellingen van één verbinding. `null` betekent: niets in te stellen —
+  /// een lokale map is met het kiezen van de map al klaar.
+  Widget? _connectionPanel(StorageConnection connection) =>
+      switch (connection) {
+        LocalConnection() => null,
+        WebdavConnection() => switch (_webdavForms[connection.id]) {
+          final WebdavForm form => _webdavPanel(form),
+          _ => null,
+        },
+        GitConnection() => switch (_gitForms[connection.id]) {
+          final GitForm form => _gitPanel(form),
+          _ => null,
+        },
+      };
+
+  /// De statusregel achter de naam, die met het typen meebeweegt.
+  ///
+  /// De tekst wordt uit de invoervelden afgeleid, en die velden veranderen
+  /// zonder dat er iets herbouwt: een TextEditingController laat het venster met
+  /// rust. Zonder deze koppeling zou de regel "Niet ingesteld" blijven melden
+  /// terwijl je de server er net onder intypt — en juist die regel is de reden
+  /// dat de lijst dichtgeklapt bruikbaar is. Alleen de velden die de status
+  /// bepalen luisteren mee, en alleen dit regeltje herbouwt: het venster draagt
+  /// twaalf tabbladen, die wil je niet per aanslag opnieuw opbouwen.
+  Widget _connectionStatusLine(
+    StorageConnection connection,
+    AppLocalizations l10n,
+  ) {
+    Widget line(BuildContext _, Widget? _) {
+      final status = _connectionStatus(connection, l10n);
+      final text = Text(
+        status.text,
+        overflow: TextOverflow.ellipsis,
+        style: TextStyle(
+          fontSize: 11,
+          color: status.configured ? AppTheme.teal : AppTheme.slate400,
+        ),
+      );
+      return ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 220),
+        // Een lokale map toont haar mapnaam; het volledige pad zou de rij
+        // opeten terwijl juist het einde ervan onderscheidend is. De tooltip
+        // houdt het pad bereikbaar.
+        child: status.detail == null
+            ? text
+            : Tooltip(message: status.detail!, child: text),
+      );
+    }
+
+    final sources = switch (connection) {
+      LocalConnection() => const <Listenable>[],
+      WebdavConnection() => switch (_webdavForms[connection.id]) {
+        final WebdavForm f => [f.url, f.user],
+        _ => const <Listenable>[],
+      },
+      GitConnection() => switch (_gitForms[connection.id]) {
+        final GitForm f => [f.url, f.owner, f.repo],
+        _ => const <Listenable>[],
+      },
+    };
+    if (sources.isEmpty) return line(context, null);
+    return ListenableBuilder(
+      listenable: Listenable.merge(sources),
+      builder: line,
+    );
+  }
+
+  /// De stand van zaken in één zin, plus of de verbinding bruikbaar is — dat
+  /// tweede bepaalt of de regel groen leest of grijs.
+  ({String text, bool configured, String? detail}) _connectionStatus(
+    StorageConnection connection,
+    AppLocalizations l10n,
+  ) {
+    switch (connection) {
+      case LocalConnection(:final path):
+        if (path.trim().isEmpty) {
+          return (
+            text: l10n.d('Geen map gekozen'),
+            configured: false,
+            detail: null,
+          );
+        }
+        return (text: p.basename(path), configured: true, detail: path);
+      case WebdavConnection():
+        final form = _webdavForms[connection.id];
+        final host = _hostOf(form?.url.text ?? '');
+        if (host == null || (form?.user.text.trim().isEmpty ?? true)) {
+          return (
+            text: l10n.d('Niet ingesteld'),
+            configured: false,
+            detail: null,
+          );
+        }
+        return (text: host, configured: true, detail: null);
+      case GitConnection():
+        final form = _gitForms[connection.id];
+        final owner = form?.owner.text.trim() ?? '';
+        final repo = form?.repo.text.trim() ?? '';
+        if (_hostOf(form?.url.text ?? '') == null ||
+            owner.isEmpty ||
+            repo.isEmpty) {
+          return (
+            text: l10n.d('Niet ingesteld'),
+            configured: false,
+            detail: null,
+          );
+        }
+        return (text: '$owner/$repo', configured: true, detail: null);
+    }
+  }
+
+  /// De knop die een verbinding toevoegt. Eén knop met een menu in plaats van
+  /// drie knoppen: welke soorten er zijn is een detail dat pas telt op het
+  /// moment dat je er een kiest.
+  Widget _addConnectionButton(AppLocalizations l10n) {
+    final kinds = [
+      if (supportsLocalProjectFolders) StorageConnectionKind.local,
+      if (supportsNetworkDeckSources) ...[
+        StorageConnectionKind.webdav,
+        StorageConnectionKind.git,
+      ],
+    ];
+    if (kinds.isEmpty) return const SizedBox.shrink();
+
+    return Align(
       alignment: Alignment.centerLeft,
-      child: ElevatedButton.icon(
-        onPressed: _addLibrary,
-        icon: const Icon(Icons.create_new_folder_outlined, size: 16),
-        label: Text(l10n.d('Map toevoegen')),
+      child: PopupMenuButton<StorageConnectionKind>(
+        tooltip: '',
+        onSelected: (kind) => kind == StorageConnectionKind.local
+            ? _addLocalConnection()
+            : _addNetworkConnection(kind),
+        itemBuilder: (context) => [
+          for (final kind in kinds)
+            PopupMenuItem(
+              value: kind,
+              child: ListTile(
+                dense: true,
+                contentPadding: EdgeInsets.zero,
+                leading: Icon(kind.icon, size: 19),
+                title: Text(kind.label(l10n)),
+                subtitle: Text(
+                  kind.summary(l10n),
+                  style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+                ),
+              ),
+            ),
+        ],
+        child: AbsorbPointer(
+          child: ElevatedButton.icon(
+            // De knop opent zelf niets: de PopupMenuButton eromheen vangt de
+            // tik. AbsorbPointer houdt hem visueel ingeschakeld — een
+            // uitgegrijsde knop zou beloven dat er niets gebeurt.
+            onPressed: () {},
+            icon: const Icon(Icons.add, size: 16),
+            label: Text(l10n.d('Verbinding toevoegen')),
+          ),
+        ),
       ),
-    ),
-  ];
+    );
+  }
 
   List<Widget> _exportFolderSection(AppLocalizations l10n) => [
     _sectionTitle(l10n.t('exportFolderSetting')),
@@ -130,188 +425,6 @@ extension _SettingsStorageTab on _SettingsDialogState {
       ),
     ),
   ];
-
-  /// De opslagwijzen. Op web valt alles behalve de netwerkbronnen weg, en zijn
-  /// die er ook niet, dan heeft de hele sectie geen inhoud meer.
-  List<Widget> _modalitiesSection(AppLocalizations l10n) {
-    final modalities = [
-      if (supportsLocalProjectFolders) StorageModality.disk,
-      if (supportsNetworkDeckSources) ...[
-        StorageModality.webdav,
-        StorageModality.git,
-      ],
-    ];
-    if (modalities.isEmpty) return const [];
-
-    return [
-      _sectionTitle(l10n.d('Opslagwijzen')),
-      Text(
-        l10n.d(
-          'Langs welke wegen je presentaties kunt openen en bewaren. Klik een wijze open om hem in te stellen.',
-        ),
-        style: TextStyle(fontSize: 11, color: AppTheme.slate400),
-      ),
-      const SizedBox(height: 10),
-      for (final modality in modalities) _modalityRow(modality, l10n),
-    ];
-  }
-
-  /// Eén regel in de lijst: pictogram, naam, de stand van zaken in één zin, en
-  /// — als de wijze iets in te stellen heeft — een uitklappaneel eronder.
-  Widget _modalityRow(StorageModality modality, AppLocalizations l10n) {
-    final expanded = _expandedModality == modality;
-    final panel = _modalityPanel(modality);
-
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      // Material en niet Container: het paneel bevat SwitchListTiles, en die
-      // schilderen hun inkt op de dichtstbijzijnde Material-voorouder. Zit daar
-      // een gekleurde box tussen, dan verdwijnt de inkt erachter — Flutter
-      // struikelt er terecht over.
-      child: Material(
-        color: Colors.white,
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: expanded ? AppTheme.blue400 : AppTheme.iceBlue,
-          ),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Material(
-              color: Colors.transparent,
-              child: InkWell(
-                borderRadius: BorderRadius.circular(10),
-                // Zonder paneel valt er niets uit te klappen; de regel blijft
-                // dan een mededeling in plaats van een knop.
-                onTap: panel == null
-                    ? null
-                    : () => _rebuild(
-                        () => _expandedModality = expanded ? null : modality,
-                      ),
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(12, 11, 12, 11),
-                  child: Row(
-                    children: [
-                      Icon(modality.icon, size: 19, color: AppTheme.slate500),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              modality.label(l10n),
-                              style: const TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            const SizedBox(height: 2),
-                            _modalityStatusLine(modality, l10n),
-                          ],
-                        ),
-                      ),
-                      if (panel != null)
-                        Icon(
-                          expanded ? Icons.expand_less : Icons.expand_more,
-                          size: 20,
-                          color: AppTheme.slate400,
-                        ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            if (expanded && panel != null)
-              Padding(
-                padding: const EdgeInsets.fromLTRB(12, 4, 12, 12),
-                child: panel,
-              ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  /// De instellingen van één opslagwijze. `null` betekent: niets in te stellen.
-  Widget? _modalityPanel(StorageModality modality) => switch (modality) {
-    StorageModality.disk => null,
-    StorageModality.webdav => _webdavPanel(),
-    StorageModality.git => _gitPanel(),
-  };
-
-  /// De statusregel onder de naam, die met het typen meebeweegt.
-  ///
-  /// De tekst wordt uit de invoervelden afgeleid, en die velden veranderen
-  /// zonder dat er iets herbouwt: een TextEditingController laat het venster met
-  /// rust. Zonder deze koppeling zou de regel "Niet ingesteld" blijven melden
-  /// terwijl je de server er net boven intypt — en juist die regel is de reden
-  /// dat de lijst dichtgeklapt bruikbaar is. Alleen de velden die de status
-  /// bepalen luisteren mee, en alleen dit regeltje herbouwt: het venster draagt
-  /// twaalf tabbladen, die wil je niet per aanslag opnieuw opbouwen.
-  Widget _modalityStatusLine(StorageModality modality, AppLocalizations l10n) {
-    Widget line(BuildContext _, Widget? _) {
-      final status = _modalityStatus(modality, l10n);
-      return Text(
-        status.text,
-        style: TextStyle(
-          fontSize: 11,
-          color: status.configured ? AppTheme.teal : AppTheme.slate400,
-        ),
-      );
-    }
-
-    final sources = switch (modality) {
-      // De bibliotheken zijn geen invoervelden; die lopen al via _rebuild.
-      StorageModality.disk => const <Listenable>[],
-      StorageModality.webdav => [_webdav.url, _webdav.user],
-      StorageModality.git => [_git.url, _git.owner, _git.repo],
-    };
-    if (sources.isEmpty) return line(context, null);
-    return ListenableBuilder(
-      listenable: Listenable.merge(sources),
-      builder: line,
-    );
-  }
-
-  /// De stand van zaken in één zin, plus of de wijze bruikbaar is — dat tweede
-  /// bepaalt of de regel groen leest of grijs.
-  ({String text, bool configured}) _modalityStatus(
-    StorageModality modality,
-    AppLocalizations l10n,
-  ) {
-    switch (modality) {
-      case StorageModality.disk:
-        final count = _libraries.length;
-        if (count == 0) {
-          return (
-            text: l10n.d('Nog geen bibliotheek ingesteld'),
-            configured: false,
-          );
-        }
-        // "Bibliotheken: 2" in plaats van "2 bibliotheken": hergebruikt de kop
-        // die er al staat en ontloopt daarmee het meervoud, dat in dertig talen
-        // dertig keer anders werkt.
-        return (text: '${l10n.d('Bibliotheken')}: $count', configured: true);
-      case StorageModality.webdav:
-        final host = _hostOf(_webdav.url.text);
-        if (host == null || _webdav.user.text.trim().isEmpty) {
-          return (text: l10n.d('Niet ingesteld'), configured: false);
-        }
-        return (text: '${l10n.d('Ingesteld')} · $host', configured: true);
-      case StorageModality.git:
-        final owner = _git.owner.text.trim();
-        final repo = _git.repo.text.trim();
-        if (_hostOf(_git.url.text) == null || owner.isEmpty || repo.isEmpty) {
-          return (text: l10n.d('Niet ingesteld'), configured: false);
-        }
-        return (
-          text: '${l10n.d('Ingesteld')} · $owner/$repo',
-          configured: true,
-        );
-    }
-  }
 
   /// De hostnaam uit een ingetypte URL, of `null` als er nog niets bruikbaars
   /// staat. Vult een ontbrekend schema aan, want "cloud.voorbeeld.nl" zonder

@@ -9,6 +9,7 @@ import '../../models/deck.dart';
 import '../../models/markdown_validation.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
+import '../../models/storage_connection.dart';
 import '../../models/slide_quality.dart';
 import '../../platform/platform_features.dart';
 import '../../models/reference_standard.dart';
@@ -116,9 +117,24 @@ class SettingsDialog extends ConsumerStatefulWidget {
 }
 
 class _SettingsDialogState extends ConsumerState<SettingsDialog> {
-  /// Bewerkbare kopie van de bibliotheken; toegepast bij Opslaan (zoals de
-  /// export­map en het stijlprofiel), zodat Annuleren de wijzigingen verwerpt.
-  late List<LibraryFolder> _libraries;
+  /// Bewerkbare kopie van de bestandsverbindingen, in de volgorde die de
+  /// gebruiker sleept; toegepast bij Opslaan (zoals de exportmap en het
+  /// stijlprofiel), zodat Annuleren de wijzigingen verwerpt.
+  ///
+  /// Voor lokale mappen staat hier alles wat de verbinding is. Voor WebDAV en
+  /// git staat hier alleen de identiteit (id, naam) — de invulvelden leven in
+  /// [_webdavForms] en [_gitForms], omdat een TextEditingController niet in een
+  /// onveranderlijk model past.
+  late List<StorageConnection> _connections;
+
+  /// Eén invulformulier per WebDAV-verbinding, op verbindings-id. Lui
+  /// aangemaakt en pas bij [dispose] opgeruimd: een formulier weggooien zodra
+  /// het paneel dichtklapt zou de half ingetypte server kwijtmaken.
+  final Map<String, WebdavForm> _webdavForms = {};
+
+  /// Idem voor git-verbindingen.
+  final Map<String, GitForm> _gitForms = {};
+
   late String? _exportDirectory;
   late ThemeProfile _themeProfile;
   late AppAppearanceProfile _appearanceProfile;
@@ -139,13 +155,6 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   late TextEditingController _logoSize;
   late TextEditingController _footerText;
   late TextEditingController _closingSlideMarkdown;
-
-  /// De git-bron: velden, forgekeuze en token bij elkaar.
-  final GitForm _git = GitForm();
-
-  /// De Nextcloud-bron: velden, testuitslag en wachtwoord bij elkaar in één
-  /// object in plaats van dertien losse velden op deze klasse.
-  final WebdavForm _webdav = WebdavForm();
 
   /// De AI-backend (optioneel, standaard uit): velden, modus en API-sleutel.
   final AiForm _ai = AiForm();
@@ -174,10 +183,10 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   /// Het tabblad dat de zijbalk op dit moment toont.
   late SettingsSection _selectedTab;
 
-  /// De opslagwijze die op het tabblad Opslag is uitgeklapt, of `null` als ze
-  /// alle drie dicht staan. Er staat er hooguit één open: de panelen zijn lang
-  /// genoeg dat twee tegelijk de lijst onleesbaar maken.
-  StorageModality? _expandedModality;
+  /// De verbinding die op het tabblad Opslag is uitgeklapt, of `null` als alles
+  /// dicht staat. Er staat er hooguit één open: de panelen zijn lang genoeg dat
+  /// twee tegelijk de lijst onleesbaar maken.
+  String? _expandedConnectionId;
 
   /// De taal zoals die bij het openen actief was, plus of er is opgeslagen. De
   /// taalkeuze wisselt de interface meteen (dat is de bedoeling: je wilt zien
@@ -206,7 +215,10 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     super.initState();
     final settings = ref.read(settingsProvider);
     _initialLanguageCode = settings.languageCode;
-    _libraries = List.of(settings.libraries);
+    _connections = List.of(settings.connections);
+    for (final connection in _connections) {
+      _adoptConnectionForm(connection);
+    }
     _exportDirectory = settings.exportDirectory;
     // Reflect the profile the open presentation actually uses, falling back to
     // the globally selected profile when no deck is open.
@@ -231,33 +243,6 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     _closingSlideMarkdown = TextEditingController(
       text: _themeProfile.closingSlideMarkdown,
     );
-    final git = settings.gitRepo;
-    _git.adoptFrom(git);
-    if (git != null && git.isConfigured) {
-      // Zelfde reden als bij het WebDAV-wachtwoord: het token staat in de
-      // keychain, laad het in zodat de gebruiker ziet dát het er is.
-      ref
-          .read(settingsProvider.notifier)
-          .readGitToken(git.baseUrl, git.owner)
-          .then((token) {
-            if (!mounted || token == null) return;
-            setState(() => _git.token.adopt(token));
-          });
-    }
-    final webdav = settings.webdavServer;
-    _webdav.adoptFrom(webdav);
-    if (webdav != null && webdav.isConfigured) {
-      // Het wachtwoord staat in de keychain; laad het in zodat de gebruiker
-      // ziet dat het er is en het niet opnieuw hoeft te typen.
-      ref
-          .read(settingsProvider.notifier)
-          .readWebdavPassword(webdav.baseUrl, webdav.username)
-          .then((pw) {
-            if (mounted && pw != null) {
-              setState(() => _webdav.password.adopt(pw));
-            }
-          });
-    }
     _initAiFields(settings.aiSettings);
     _highlightedThemeField = widget.highlightThemeField;
     _selectedTab = widget.initialSection;
@@ -277,8 +262,12 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     _closingSlideMarkdown.dispose();
     _appearanceName.dispose();
     _cockpitName.dispose();
-    _git.dispose();
-    _webdav.dispose();
+    for (final form in _gitForms.values) {
+      form.dispose();
+    }
+    for (final form in _webdavForms.values) {
+      form.dispose();
+    }
     _ai.dispose();
     super.dispose();
   }
@@ -296,37 +285,152 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     ];
   }
 
-  /// Kies een map en voeg 'm als nieuwe bibliotheek toe. De naam start op de
-  /// mapnaam en is daarna in de rij te wijzigen. Een al toegevoegd pad wordt
-  /// overgeslagen.
-  Future<void> _addLibrary() async {
-    final result = await FilePicker.getDirectoryPath(
-      dialogTitle: context.l10n.d('Map kiezen'),
-      initialDirectory: _libraries.isEmpty ? null : _libraries.last.path,
-    );
-    if (!mounted || result == null) return;
-    if (_libraries.any((l) => l.path == result)) return;
-    setState(
-      () =>
-          _libraries.add(LibraryFolder(name: p.basename(result), path: result)),
-    );
-  }
-
-  /// De bibliotheken zoals ze worden opgeslagen: namen getrimd, en een leeg
-  /// gemaakte naam valt terug op de mapnaam zodat elke rij een label houdt.
-  List<LibraryFolder> _normalizedLibraries() => [
-    for (final lib in _libraries)
-      lib.copyWith(
-        name: lib.name.trim().isEmpty ? p.basename(lib.path) : lib.name.trim(),
-      ),
+  /// Alle lokale verbindingen, in lijstvolgorde — het startpunt voor de
+  /// mapkiezers hieronder.
+  List<LocalConnection> get _localConnections => [
+    for (final c in _connections)
+      if (c is LocalConnection) c,
   ];
 
+  /// Maak (of hergebruik) het invulformulier van een netwerkverbinding en vul
+  /// het met de opgeslagen waarden. Het geheim komt asynchroon uit de keychain
+  /// na, zodat de gebruiker ziet dát het er is en het niet opnieuw hoeft te
+  /// typen.
+  void _adoptConnectionForm(StorageConnection connection) {
+    final notifier = ref.read(settingsProvider.notifier);
+    switch (connection) {
+      case LocalConnection():
+        break;
+      case WebdavConnection(:final server):
+        final form = _webdavForms.putIfAbsent(connection.id, WebdavForm.new);
+        form.adoptFrom(server);
+        if (!server.isConfigured) return;
+        notifier.readWebdavPassword(server.baseUrl, server.username).then((pw) {
+          if (!mounted || pw == null) return;
+          setState(() => form.password.adopt(pw));
+        });
+      case GitConnection(:final repo):
+        final form = _gitForms.putIfAbsent(connection.id, GitForm.new);
+        form.adoptFrom(repo);
+        if (!repo.isConfigured) return;
+        notifier.readGitToken(repo.baseUrl, repo.owner).then((token) {
+          if (!mounted || token == null) return;
+          setState(() => form.token.adopt(token));
+        });
+    }
+  }
+
+  /// De verbindingen zoals ze worden opgeslagen: de netwerkvelden uit hun
+  /// formulier gelezen, namen getrimd, en een leeg gelaten naam vervangen door
+  /// iets herkenbaars zodat elke rij een label houdt.
+  List<StorageConnection> _normalizedConnections() => [
+    for (final c in _connections) _normalizeConnection(c),
+  ];
+
+  StorageConnection _normalizeConnection(StorageConnection c) {
+    final withValues = switch (c) {
+      LocalConnection() => c,
+      WebdavConnection() => c.copyWith(server: _webdavForms[c.id]?.server),
+      GitConnection() => c.copyWith(repo: _gitForms[c.id]?.config),
+    };
+    final name = withValues.name.trim();
+    if (name.isNotEmpty) return withValues;
+    // Zonder naam valt de rij terug op iets wat de gebruiker herkent: de
+    // mapnaam, de host of owner/repo.
+    final fallback = switch (withValues) {
+      LocalConnection(:final path) => path.isEmpty ? '' : p.basename(path),
+      final other => other.fallbackLabel,
+    };
+    return switch (withValues) {
+      LocalConnection() => withValues.copyWith(name: fallback),
+      WebdavConnection() => withValues.copyWith(name: fallback),
+      GitConnection() => withValues.copyWith(name: fallback),
+    };
+  }
+
+  /// Kies een map en voeg 'm als nieuwe lokale verbinding toe. De naam start op
+  /// de mapnaam en is daarna in de rij te wijzigen. Een al toegevoegd pad wordt
+  /// overgeslagen.
+  Future<void> _addLocalConnection() async {
+    final locals = _localConnections;
+    final result = await FilePicker.getDirectoryPath(
+      dialogTitle: context.l10n.d('Map kiezen'),
+      initialDirectory: locals.isEmpty ? null : locals.last.path,
+    );
+    if (!mounted || result == null) return;
+    if (locals.any((c) => c.path == result)) return;
+    setState(() {
+      _connections.add(
+        LocalConnection(
+          id: StorageConnection.newId(),
+          name: p.basename(result),
+          path: result,
+        ),
+      );
+    });
+  }
+
+  /// Voeg een lege netwerkverbinding toe en klap hem meteen open — er valt
+  /// niets te zien tot de gebruiker hem invult, dus dichtgeklapt toevoegen zou
+  /// als een mislukking lezen.
+  void _addNetworkConnection(StorageConnectionKind kind) {
+    final id = StorageConnection.newId();
+    final connection = switch (kind) {
+      StorageConnectionKind.webdav => WebdavConnection(
+        id: id,
+        name: '',
+        server: const WebdavServer(baseUrl: '', username: ''),
+      ),
+      StorageConnectionKind.git => GitConnection(
+        id: id,
+        name: '',
+        repo: const GitRepoConfig(baseUrl: '', owner: '', repo: ''),
+      ),
+      StorageConnectionKind.local => throw ArgumentError(
+        'lokale verbindingen lopen via _addLocalConnection',
+      ),
+    };
+    _adoptConnectionForm(connection);
+    setState(() {
+      _connections.add(connection);
+      _expandedConnectionId = id;
+    });
+  }
+
+  /// Verwijder een verbinding uit de bewerkkopie. Het formulier blijft staan:
+  /// pas bij Opslaan telt de lijst, en tot dan mag Annuleren alles terugdraaien.
+  void _removeConnection(String id) {
+    setState(() {
+      _connections.removeWhere((c) => c.id == id);
+      if (_expandedConnectionId == id) _expandedConnectionId = null;
+    });
+  }
+
+  /// Hernoem een verbinding in de bewerkkopie.
+  ///
+  /// Bewust zonder setState: dit hangt aan de `onChanged` van het naamveld, en
+  /// een rebuild tijdens het typen zet de cursor terug naar het begin. Er is
+  /// ook niets te herbouwen — het veld toont zijn eigen invoer al.
+  void _renameConnection(StorageConnection connection, String name) {
+    _connections = [
+      for (final c in _connections)
+        if (c.id != connection.id)
+          c
+        else
+          switch (c) {
+            LocalConnection() => c.copyWith(name: name),
+            WebdavConnection() => c.copyWith(name: name),
+            GitConnection() => c.copyWith(name: name),
+          },
+    ];
+  }
+
   Future<void> _pickExportDirectory() async {
+    final locals = _localConnections;
     final result = await FilePicker.getDirectoryPath(
       dialogTitle: context.l10n.d('Map voor exports'),
       initialDirectory:
-          _exportDirectory ??
-          (_libraries.isEmpty ? null : _libraries.first.path),
+          _exportDirectory ?? (locals.isEmpty ? null : locals.first.path),
     );
     if (!mounted) return;
     if (result != null) setState(() => _exportDirectory = result);
@@ -385,7 +489,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
     _saved = true;
     final notifier = ref.read(settingsProvider.notifier);
     final profile = _editedProfile();
-    notifier.setLibraries(_normalizedLibraries());
+    notifier.setConnections(_normalizedConnections());
     notifier.setExportDirectory(_exportDirectory);
     notifier.saveThemeProfile(profile, previousName: _originalName);
     if (_appearanceProfile.isBuiltIn) {
@@ -419,8 +523,15 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
       ref.read(tabsProvider).current?.deckNotifier.updateThemeProfile(profile);
     }
 
-    _git.save(notifier);
-    _webdav.save(notifier);
+    // De configuraties zijn hierboven als één lijst weggeschreven; hier blijven
+    // alleen de geheimen over, die per verbinding hun eigen keychain-entry
+    // hebben.
+    for (final form in _gitForms.values) {
+      form.saveSecret(notifier);
+    }
+    for (final form in _webdavForms.values) {
+      form.saveSecret(notifier);
+    }
 
     _ai.save(notifier);
 

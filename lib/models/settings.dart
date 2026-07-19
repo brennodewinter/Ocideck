@@ -5,6 +5,7 @@ import 'chart.dart' show normalizeChartColor;
 import 'checklist_template.dart';
 import 'library_folder.dart';
 import 'recent_file.dart';
+import 'storage_connection.dart';
 import 'git_settings.dart';
 import 'webdav_settings.dart';
 
@@ -645,12 +646,52 @@ class CockpitColorScheme {
 class AppSettings {
   final String languageCode;
 
-  /// Benoemde opslaglocaties ("bibliotheken") waarmee de gebruiker onderscheid
-  /// maakt tussen bijv. privé en werk. Dient als startpunt voor openen/opslaan
-  /// en als zoekwortel voor de presentatie- en afbeeldingenbibliotheek.
-  /// Vervangt de vroegere enkele `homeDirectory`-instelling; de eerste
-  /// bibliotheek geldt als standaardmap (zie [homeDirectory]).
-  final List<LibraryFolder> libraries;
+  /// Alle bestandsverbindingen, in de volgorde die de gebruiker zelf sleept.
+  ///
+  /// Dit is de enige bron van waarheid over waar presentaties vandaan komen.
+  /// Lokale mappen, WebDAV-servers en git-repositories staan hier door elkaar,
+  /// zodat je per opdrachtgever kunt inrichten in plaats van per techniek.
+  ///
+  /// De volgorde is betekenisvol: de bovenste bruikbare verbinding van een
+  /// soort is de standaard voor die soort (zie [primaryOf]). Herordenen is dus
+  /// hoe je kiest welke server "de" server is, zonder iets te hoeven wissen.
+  final List<StorageConnection> connections;
+
+  /// De bovenste bruikbare verbinding van een soort, of `null` als er geen is.
+  /// Half ingevulde verbindingen worden overgeslagen: die staan in de lijst
+  /// omdat de gebruiker er nog aan werkt, niet omdat ze dienst kunnen doen.
+  StorageConnection? primaryOf(StorageConnectionKind kind) {
+    for (final c in connections) {
+      if (c.kind == kind && c.isConfigured) return c;
+    }
+    return null;
+  }
+
+  /// Alle bruikbare verbindingen van één soort, in gebruikersvolgorde — de
+  /// lijst die een keuzedialoog toont.
+  List<T> connectionsOf<T extends StorageConnection>() => [
+    for (final c in connections)
+      if (c is T && c.isConfigured) c,
+  ];
+
+  /// Zoek een verbinding op id; `null` als hij is verwijderd. Herkomstgegevens
+  /// van een geopend deck wijzen via id, dus dit is de plek waar "de bron van
+  /// dit deck bestaat niet meer" zichtbaar wordt.
+  StorageConnection? connectionById(String? id) {
+    if (id == null || id.isEmpty) return null;
+    for (final c in connections) {
+      if (c.id == id) return c;
+    }
+    return null;
+  }
+
+  /// De lokale mappen als bibliotheken — de vorm die de zoek- en
+  /// openen-schermen al verwachten. Afgeleid, niet opgeslagen.
+  List<LibraryFolder> get libraries => [
+    for (final c in connections)
+      if (c is LocalConnection && c.isConfigured)
+        LibraryFolder(name: c.name, path: c.path),
+  ];
 
   /// De standaard-startmap: het pad van de eerste bibliotheek, of null wanneer
   /// er geen is. Compat-toegang voor de vele plekken die één "thuismap"
@@ -783,13 +824,15 @@ class AppSettings {
   /// gebruiken. Leeg = de standaard ([defaultCveApiBaseUrl]).
   final String cveApiBaseUrl;
 
-  /// Geconfigureerde WebDAV/Nextcloud-bron, of `null` wanneer geen server is
-  /// ingesteld. Bevat nooit het wachtwoord (dat staat in de keychain).
-  final WebdavServer? webdavServer;
+  /// De standaard-WebDAV-bron: de bovenste bruikbare WebDAV-verbinding, of
+  /// `null` wanneer er geen is. Afgeleid uit [connections] — de plekken die
+  /// zonder keuze van de gebruiker één server nodig hebben lezen hier.
+  WebdavServer? get webdavServer =>
+      (primaryOf(StorageConnectionKind.webdav) as WebdavConnection?)?.server;
 
-  /// Geconfigureerde git-repository als deck-bron, of `null` wanneer er geen is
-  /// ingesteld. Bevat nooit het token (dat staat in de keychain).
-  final GitRepoConfig? gitRepo;
+  /// De standaard-git-repository, langs dezelfde regel als [webdavServer].
+  GitRepoConfig? get gitRepo =>
+      (primaryOf(StorageConnectionKind.git) as GitConnection?)?.repo;
 
   /// Instellingen voor de optionele AI-assistentie. Standaard uit; bevat nooit
   /// een API-sleutel (die staat in de keychain).
@@ -797,7 +840,7 @@ class AppSettings {
 
   const AppSettings({
     this.languageCode = 'nl',
-    this.libraries = const [],
+    this.connections = const [],
     this.customChecklists = const [],
     this.exportDirectory,
     this.themeProfiles = ThemeProfile.builtIns,
@@ -824,8 +867,6 @@ class AppSettings {
     this.allowRemoteMedia = false,
     this.allowCveLookup = false,
     this.cveApiBaseUrl = defaultCveApiBaseUrl,
-    this.webdavServer,
-    this.gitRepo,
     this.aiSettings = const AiSettings(),
   });
 
@@ -878,7 +919,7 @@ class AppSettings {
 
   AppSettings copyWith({
     String? languageCode,
-    List<LibraryFolder>? libraries,
+    List<StorageConnection>? connections,
     List<ChecklistTemplate>? customChecklists,
     String? exportDirectory,
     ThemeProfile? themeProfile,
@@ -906,19 +947,15 @@ class AppSettings {
     bool? allowRemoteMedia,
     bool? allowCveLookup,
     String? cveApiBaseUrl,
-    WebdavServer? webdavServer,
-    GitRepoConfig? gitRepo,
     AiSettings? aiSettings,
     bool clearExportDirectory = false,
     bool clearMaxReleaseExportTlp = false,
     bool clearMinRequiredExportTlp = false,
-    bool clearWebdavServer = false,
-    bool clearGitRepo = false,
   }) {
     final nextProfiles = themeProfiles ?? this.themeProfiles;
     return AppSettings(
       languageCode: languageCode ?? this.languageCode,
-      libraries: libraries ?? this.libraries,
+      connections: connections ?? this.connections,
       customChecklists: customChecklists ?? this.customChecklists,
       exportDirectory: clearExportDirectory
           ? null
@@ -972,10 +1009,6 @@ class AppSettings {
       allowRemoteMedia: allowRemoteMedia ?? this.allowRemoteMedia,
       allowCveLookup: allowCveLookup ?? this.allowCveLookup,
       cveApiBaseUrl: cveApiBaseUrl ?? this.cveApiBaseUrl,
-      webdavServer: clearWebdavServer
-          ? null
-          : (webdavServer ?? this.webdavServer),
-      gitRepo: clearGitRepo ? null : (gitRepo ?? this.gitRepo),
       aiSettings: aiSettings ?? this.aiSettings,
     );
   }

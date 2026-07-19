@@ -136,11 +136,8 @@ final class LocalConnection extends StorageConnection {
   @override
   String get fallbackLabel => path;
 
-  LocalConnection copyWith({String? name, String? path}) => LocalConnection(
-    id: id,
-    name: name ?? this.name,
-    path: path ?? this.path,
-  );
+  LocalConnection copyWith({String? name, String? path}) =>
+      LocalConnection(id: id, name: name ?? this.name, path: path ?? this.path);
 
   @override
   Map<String, Object?> toJson() => {
@@ -205,11 +202,8 @@ final class GitConnection extends StorageConnection {
   @override
   String get fallbackLabel => repo.slug;
 
-  GitConnection copyWith({String? name, GitRepoConfig? repo}) => GitConnection(
-    id: id,
-    name: name ?? this.name,
-    repo: repo ?? this.repo,
-  );
+  GitConnection copyWith({String? name, GitRepoConfig? repo}) =>
+      GitConnection(id: id, name: name ?? this.name, repo: repo ?? this.repo);
 
   @override
   Map<String, Object?> toJson() => {
