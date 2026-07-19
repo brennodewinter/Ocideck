@@ -161,17 +161,20 @@ extension _SettingsStorageTab on _SettingsDialogState {
   Widget _modalityRow(StorageModality modality, AppLocalizations l10n) {
     final expanded = _expandedModality == modality;
     final panel = _modalityPanel(modality);
-    final status = _modalityStatus(modality, l10n);
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(
+      // Material en niet Container: het paneel bevat SwitchListTiles, en die
+      // schilderen hun inkt op de dichtstbijzijnde Material-voorouder. Zit daar
+      // een gekleurde box tussen, dan verdwijnt de inkt erachter — Flutter
+      // struikelt er terecht over.
+      child: Material(
+        color: Colors.white,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
             color: expanded ? AppTheme.blue400 : AppTheme.iceBlue,
           ),
           borderRadius: BorderRadius.circular(10),
-          color: Colors.white,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -205,15 +208,7 @@ extension _SettingsStorageTab on _SettingsDialogState {
                               ),
                             ),
                             const SizedBox(height: 2),
-                            Text(
-                              status.text,
-                              style: TextStyle(
-                                fontSize: 11,
-                                color: status.configured
-                                    ? AppTheme.teal
-                                    : AppTheme.slate400,
-                              ),
-                            ),
+                            _modalityStatusLine(modality, l10n),
                           ],
                         ),
                       ),
@@ -245,6 +240,40 @@ extension _SettingsStorageTab on _SettingsDialogState {
     StorageModality.nextcloud => _webdavPanel(),
     StorageModality.git => _gitPanel(),
   };
+
+  /// De statusregel onder de naam, die met het typen meebeweegt.
+  ///
+  /// De tekst wordt uit de invoervelden afgeleid, en die velden veranderen
+  /// zonder dat er iets herbouwt: een TextEditingController laat het venster met
+  /// rust. Zonder deze koppeling zou de regel "Niet ingesteld" blijven melden
+  /// terwijl je de server er net boven intypt — en juist die regel is de reden
+  /// dat de lijst dichtgeklapt bruikbaar is. Alleen de velden die de status
+  /// bepalen luisteren mee, en alleen dit regeltje herbouwt: het venster draagt
+  /// twaalf tabbladen, die wil je niet per aanslag opnieuw opbouwen.
+  Widget _modalityStatusLine(StorageModality modality, AppLocalizations l10n) {
+    Widget line(BuildContext _, Widget? _) {
+      final status = _modalityStatus(modality, l10n);
+      return Text(
+        status.text,
+        style: TextStyle(
+          fontSize: 11,
+          color: status.configured ? AppTheme.teal : AppTheme.slate400,
+        ),
+      );
+    }
+
+    final sources = switch (modality) {
+      // De bibliotheken zijn geen invoervelden; die lopen al via _rebuild.
+      StorageModality.disk => const <Listenable>[],
+      StorageModality.nextcloud => [_webdavUrl, _webdavUser],
+      StorageModality.git => [_gitUrl, _gitOwner, _gitRepo],
+    };
+    if (sources.isEmpty) return line(context, null);
+    return ListenableBuilder(
+      listenable: Listenable.merge(sources),
+      builder: line,
+    );
+  }
 
   /// De stand van zaken in één zin, plus of de wijze bruikbaar is — dat tweede
   /// bepaalt of de regel groen leest of grijs.
