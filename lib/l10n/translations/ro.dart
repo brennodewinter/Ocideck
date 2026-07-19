@@ -1799,6 +1799,13 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'MAC-adres van een apparaat': 'adresa MAC a unui dispozitiv',
+  'IMEI van een toestel': 'IMEI-ul unui telefon',
+  'ICCID van een simkaart': 'ICCID-ul unei cartele SIM',
+  'IMSI van een abonnee': 'IMSI-ul unui abonat',
+  'sociale-mediaprofiel': 'profil de socializare',
+  'advertentie- of apparaat-ID': 'ID de publicitate sau de dispozitiv',
+  'IP-adres': 'adresă IP',
   'machineleesbare zone van een paspoort of ID':
       'zona citibilă automat a unui pașaport sau act de identitate',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':

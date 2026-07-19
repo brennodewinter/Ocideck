@@ -35,6 +35,18 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   conflictafhandeling als bij WebDAV. Een deck dat je uit een bucket opende,
   gaat bij opslaan vanzelf naar diezelfde bucket terug.
 
+- **IP-adressen, MAC-adressen, IMEI's en socialemediaprofielen worden herkend.**
+  De patronen zijn simpel; het werk zit in wat er níét op af mag gaan. Een
+  versienummer is vier getallen met punten ertussen, een tijdstip is twee
+  getallen met een dubbele punt, en een git-hash is hex — zonder poorten meldt
+  zo'n controle vooral zichzelf. Dus: de adresreeksen die de IETF expres voor
+  documentatie heeft gereserveerd tellen niet mee, een IMEI moet zijn Luhn
+  halen, en een kale UUID zwijgt tot er `IDFA` of `advertentie` naast staat.
+
+  Een adres uit de privéreeksen (`10.x`, `192.168.x`) meldt wel maar onderbreekt
+  niet: dat is interne infrastructuur en geen persoonsgegeven, al blijft een
+  intern adresplan in een publieke slide iets om te weten.
+
 - **Een gescand paspoort in een slide wordt herkend.** De twee of drie regels
   vol hoofdletters en `<`-tekens onderaan een identiteitsbewijs — de
   machineleesbare zone — zijn geen willekeurige tekst: er zitten vier

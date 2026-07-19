@@ -1772,6 +1772,13 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'MAC-adres van een apparaat': 'seadme MAC-aadress',
+  'IMEI van een toestel': 'telefoni IMEI',
+  'ICCID van een simkaart': 'SIM-kaardi ICCID',
+  'IMSI van een abonnee': 'abonendi IMSI',
+  'sociale-mediaprofiel': 'sotsiaalmeedia profiil',
+  'advertentie- of apparaat-ID': 'reklaami- või seadme-ID',
+  'IP-adres': 'IP-aadress',
   'machineleesbare zone van een paspoort of ID':
       'passi või isikutunnistuse masinloetav ala',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':

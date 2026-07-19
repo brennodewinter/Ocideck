@@ -26,6 +26,7 @@ accepteren, waarschuwen met een shield-badge, of redigeren op scherm en in expor
 | §13.1 Matcher met woordgrenzen + `PrivacyTermRole` (aanwijzing versus gegeven) | **geleverd** |
 | §13.5 Beeldcontrole: herkenbare gezichten op afbeeldingen (YuNet, lokaal) | **geleverd** |
 | §3-B `doc.mrz`: machine-readable zone (TD1/TD2/TD3) | **geleverd** |
+| §3-E Digitale identificatoren (IP, MAC, IMEI, ICCID, IMSI, handle, device-ID) | **geleverd** |
 | §13.2 Persoonskoppelingspoort (naam als koppeling, mededeling als bereik) | **geleverd** |
 | §13.2 Lexiconmodel als data (`role`/`match`/`weight`/`lang`) | open — fase 12 |
 | §13.3 Taaldekking zichtbaar, gebundelde lexicons | open — fase 13 |
@@ -119,6 +120,7 @@ groeit de regelset zonder de compile te breken.
 | `lib/services/privacy/privacy_scanner.dart` | Orkestratie én de inline-detectors: e-mail, telefoon, IBAN, BSN, EU-nummers, secrets, bijzondere categorieën, adres/postcode, naam, structureel — plus allowlist en co-occurrence-escalatie |
 | `lib/services/privacy/privacy_contact_rules.dart` | Adres (straat + huisnummer), NL-postcode, gelabelde persoonsnaam: patronen, straatachtervoegsels, placeholder-personen |
 | `lib/services/privacy/privacy_phone_rules.dart` | Telefoon: E.164, nationale vorm, contextwoorden, toegekende landnummers, gereserveerde reeksen |
+| `lib/services/privacy/privacy_digital_rules.dart` | Digitale identificatoren: IPv4/IPv6, MAC, IMEI, ICCID, IMSI, social handles, device-ID's |
 | `lib/services/privacy/privacy_document_rules.dart` | Reisdocumenten: de machine-readable zone (TD1/TD2/TD3) met de ICAO 9303-controlecijfers |
 | `lib/services/privacy/privacy_eu_rules.dart` | Europese landpakketten: BE/BG/DE/EE/ES/FI/FR/HR/IT/PL/PT/RO/SE + UK (NHS/NINO) |
 | `lib/services/privacy/privacy_checksums.dart`, `privacy_checksums_eu.dart` | 11-proef, mod-97, Luhn, ISO 7064, geboortedatum-validatie, enz. |
@@ -290,6 +292,26 @@ nul. Waar géén checksum bestaat (US SSN, V-nummer), is een contextwoord verpli
 | `digital.imsi` | IMSI | 15 cijfers, geldige MCC/MNC | waarschijnlijk | ◐ |
 | `digital.handle` | Social handle / profiel-URL | `@naam` + LinkedIn/X/Facebook/Instagram/Mastodon/Telegram/Discord-profiel-URL's. `@` in een e-mail of een code-mention (`@override`, `@param`) uitgesloten | waarschijnlijk | ✓ |
 | `digital.deviceid` | Advertising-ID / device-ID | UUID **met** contextwoord (`idfa`, `gaid`, `device`, `advertising`). Een kale UUID is te generiek → geen melding | mogelijk | ✓ |
+
+> **Gebouwd (2026-07-19):** de hele familie, in `privacy_digital_rules.dart`.
+> Drie dingen die de bouw opleverde en die niet uit het ontwerp volgden:
+>
+> * **De korte IPv6-regex matcht MAC-adressen en tijdstippen.** "Twee tot zeven
+>   groepen hex met dubbele punten" dekt óók `00:00:00:00:00:00` en `01:02:03`.
+>   De discriminant is dat een echt IPv6-adres altijd óf een `::` bevat óf uit
+>   acht volle groepen bestaat; een MAC heeft er zes en een tijdstip drie, geen
+>   van beide met `::`. Daarom staat de volledige grammatica in de code en niet de
+>   korte versie.
+> * **Een Amex-nummer is niet van een IMEI te onderscheiden.** Beide zijn vijftien
+>   cijfers met een geldige Luhn. Amex is het enige kaartmerk met die lengte, dus
+>   het IIN-bereik `34`/`37` uitsluiten ruimt de hele botsing op. De corpustest
+>   vond dit meteen: het Amex-testnummer staat in §3-C van dit document.
+> * **GitHub hoort niet bij de profiel-URL's.** Een `github.com/…`-link is in een
+>   technisch deck vrijwel altijd een repository. Ook dat ving de corpustest, op
+>   onze eigen `PENTEST_MIAUW.md`. De profiel-URL is bovendien `likely` en niet
+>   `certain`: dát er een profiel staat is zeker, dat het een natuurlijk persoon
+>   is niet — organisaties hebben ook accounts. Daarmee telt hij ook niet mee als
+>   persoonskoppeling voor artikel 9, en dat is de juiste uitkomst.
 
 ### F. Credentials en secrets
 

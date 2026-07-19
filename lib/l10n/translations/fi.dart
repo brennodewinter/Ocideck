@@ -1781,6 +1781,13 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'MAC-adres van een apparaat': 'laitteen MAC-osoite',
+  'IMEI van een toestel': 'puhelimen IMEI',
+  'ICCID van een simkaart': 'SIM-kortin ICCID',
+  'IMSI van een abonnee': 'tilaajan IMSI',
+  'sociale-mediaprofiel': 'sosiaalisen median profiili',
+  'advertentie- of apparaat-ID': 'mainos- tai laitetunnus',
+  'IP-adres': 'IP-osoite',
   'machineleesbare zone van een paspoort of ID':
       'passin tai henkilökortin koneluettava alue',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':

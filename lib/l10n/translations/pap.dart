@@ -738,6 +738,13 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'MAC-adres van een apparaat': 'adres MAC di un aparato',
+  'IMEI van een toestel': 'IMEI di un aparato',
+  'ICCID van een simkaart': 'ICCID di un karchi SIM',
+  'IMSI van een abonnee': 'IMSI di un abonado',
+  'sociale-mediaprofiel': 'profil di medio sosial',
+  'advertentie- of apparaat-ID': 'ID di reklama òf di aparato',
+  'IP-adres': 'adres IP',
   'machineleesbare zone van een paspoort of ID':
       'zona lesibel pa mashin di un pasaporte òf ID',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':

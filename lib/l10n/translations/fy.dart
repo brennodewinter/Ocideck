@@ -739,6 +739,13 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'MAC-adres van een apparaat': 'MAC-adres fan in apparaat',
+  'IMEI van een toestel': 'IMEI fan in tastel',
+  'ICCID van een simkaart': 'ICCID fan in simkaart',
+  'IMSI van een abonnee': 'IMSI fan in abonnee',
+  'sociale-mediaprofiel': 'sosjale-mediaprofyl',
+  'advertentie- of apparaat-ID': 'advertinsje- of apparaat-ID',
+  'IP-adres': 'IP-adres',
   'machineleesbare zone van een paspoort of ID':
       'masinelêsbere sône fan in paspoart of ID',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':

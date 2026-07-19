@@ -1817,6 +1817,13 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'MAC-adres van een apparaat': 'seoladh MAC gléis',
+  'IMEI van een toestel': 'IMEI fóin',
+  'ICCID van een simkaart': 'ICCID cárta SIM',
+  'IMSI van een abonnee': 'IMSI síntiúsóra',
+  'sociale-mediaprofiel': 'próifíl mheán sóisialta',
+  'advertentie- of apparaat-ID': 'aitheantas fógraíochta nó gléis',
+  'IP-adres': 'seoladh IP',
   'machineleesbare zone van een paspoort of ID':
       'crios inléite ag meaisín de phas nó de chárta aitheantais',
   'Open en bewaar presentaties in een S3-bucket: AWS S3, of een S3-compatible dienst zoals een eigen MinIO. De secret access key wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
