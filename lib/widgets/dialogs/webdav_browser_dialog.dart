@@ -5,6 +5,7 @@ import '../../l10n/app_localizations.dart';
 import '../../services/webdav_service.dart';
 import '../../state/webdav_provider.dart';
 import '../../theme/app_theme.dart';
+import '../../utils/user_facing_error.dart';
 
 /// Wat de browser laat kiezen: een deck om te openen of een afbeelding om in te
 /// voegen. Bepaalt welke bestanden klikbaar zijn.
@@ -217,8 +218,6 @@ class _WebdavBrowserDialogState extends ConsumerState<WebdavBrowserDialog> {
   }
 
   Widget _error(AppLocalizations l10n, Object error) {
-    final isConfig =
-        error is WebdavException && error.kind == WebdavError.config;
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(24),
@@ -228,13 +227,11 @@ class _WebdavBrowserDialogState extends ConsumerState<WebdavBrowserDialog> {
             Icon(Icons.cloud_off, size: 40, color: AppTheme.slate400),
             const SizedBox(height: 12),
             Text(
-              isConfig
-                  ? l10n.d(
-                      'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.',
-                    )
-                  : l10n.d(
-                      'Kon de map niet laden. Controleer je verbinding en instellingen.',
-                    ),
+              // Was: alleen "niet ingesteld" apart, al het andere platgeslagen
+              // tot "Kon de map niet laden. Controleer je verbinding en
+              // instellingen." — terwijl de tabel hiernaast kon zeggen dát het
+              // wachtwoord fout was, of dat de servernaam niet bestaat.
+              userFacingError(l10n, error),
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 13, color: AppTheme.slate500),
             ),

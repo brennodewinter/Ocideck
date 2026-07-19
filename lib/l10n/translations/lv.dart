@@ -1782,6 +1782,26 @@ const _dutchSourceLv = {
 const _dutchSourceAddLv = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Leksikonu licences: kas vēl jānoskaidro',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
+      'WebDAV nav (pareizi) iestatīts — pārbaudiet servera datus sadaļā Iestatījumi → Krātuve.',
+  'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':
+      'Git repozitorijs nav (pareizi) iestatīts — pārbaudiet serveri, īpašnieku un repozitoriju sadaļā Iestatījumi → Krātuve.',
+  'De servernaam van de forge bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Forge servera nosaukums neeksistē vai nav atrodams. Pārbaudiet, vai servera URL nav drukas kļūdas.',
+  'Deze forge heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Šim forge ir privāta vai LAN adrese. Atzīmējiet to kā uzticamu iekšējo sadaļā Iestatījumi → Krātuve.',
+  'De forge is niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Forge nav sasniedzams — pārbaudiet savienojumu un servera URL.',
+  'Aanmelden bij de forge mislukt. Controleer je token: het heeft leesrechten op de repository nodig, en schrijfrechten om op te slaan.':
+      'Pieteikšanās forge neizdevās. Pārbaudiet pilnvaru: tai nepieciešamas lasīšanas tiesības uz repozitoriju un rakstīšanas tiesības saglabāšanai.',
+  'Niet gevonden in de repository — of je token mag het niet zien.':
+      'Nav atrasts repozitorijā — vai jūsu pilnvara to nedrīkst redzēt.',
+  'De forge gaf een fout. Probeer het later opnieuw.':
+      'Forge atgrieza kļūdu. Mēģiniet vēlāk vēlreiz.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge bij Instellingen → Opslag?':
+      'Šī adrese neatbild kā forge. Vai forge veids sadaļā Iestatījumi → Krātuve ir pareizs?',
+  'Stel eerst een WebDAV-server in bij Instellingen → Opslag.':
+      'Vispirms iestatiet WebDAV serveri sadaļā Iestatījumi → Krātuve.',
   'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
       'Nepieciešams, kad forge darbojas privātā vai mājas tīklā. Bez šī karodziņa drošības pārbaude noraida privātu adresi.',
   'Vul server-URL, eigenaar en repository in':

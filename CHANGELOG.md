@@ -231,6 +231,30 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   gedrag waardoor mensen een privacycontrole uitzetten.
 
 ### Fixed
+- **Git-fouten kwamen onvertaald en onafgemaakt op je scherm.** WebDAV en S3
+  hadden allebei een tabel die een foutsoort omzet in een uitlegbare,
+  vertaalde melding. Git had er geen. `GitForgeException` viel door de
+  centrale vertaling heen naar *"er ging onverwacht iets mis"*, en de schermen
+  die hem wél apart afvingen toonden de servicetekst rechtstreeks — Nederlands
+  voor iedereen, ongeacht taalkeuze, en bij een onbekende status letterlijk
+  *"Onverwachte status 418"*.
+
+  Git heeft nu zijn eigen tabel, met bij een 404 de nuance die de forge
+  afdwingt: die geeft óók 404 wanneer je token de repo niet mag zien, dus de
+  melding zegt "of je token mag het niet zien" in plaats van te beweren dat er
+  niets is. De ruwe tekst blijft bestaan en gaat naar het logboek — daar wil je
+  die 418 juist wél lezen.
+
+  Ook rechtgezet: de drie bladervensters (WebDAV, S3, git) sloegen alles
+  behalve "niet ingesteld" plat tot één zin — *"Kon de map niet laden.
+  Controleer je verbinding en instellingen."* — terwijl de tabel ernaast al kon
+  zeggen dát het wachtwoord fout was of dat de servernaam niet bestaat. Alle
+  drie gebruiken nu diezelfde tabel. En "verbinding mislukt" en "de server gaf
+  een fout" zijn uit elkaar gehaald: bereikbaar-maar-stuk vraagt iets anders
+  van je dan onbereikbaar.
+
+  Ten slotte wezen vier meldingen nog naar *Instellingen → WebDAV*, een
+  tabblad dat sinds de verbindingenlijst niet meer bestaat.
 - **Een mislukte verbinding zegt nu wát er mis is.** De servicelaag wist
   meestal precies waarom iets faalde, en gooide die kennis één laag vóór de
   gebruiker weg.

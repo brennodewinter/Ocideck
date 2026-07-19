@@ -1758,6 +1758,26 @@ const _dutchSourceTlh = {
 const _dutchSourceAddTlh = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'mu\' tetlh chaw\': nuq ghItlhnISlu\'',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
+      'WebDAV lugh cherlu\'be\' — Settings → Storage-Daq pat De\' yIlaD.',
+  'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':
+      'git repository lugh cherlu\'be\' — Settings → Storage-Daq pat, ghajwI\', repository je yIlaD.',
+  'De servernaam van de forge bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'forge pat pong tu\'lu\'be\', ghap nejlaHbe\'. pat URL yIlaD; qelI\'qam Do\'Ha\' yInej.',
+  'Deze forge heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'forge vam ghajbogh privé ghap LAN inscription. Settings → Storage-Daq voqlu\'bogh qoDDaq yIper.',
+  'De forge is niet bereikbaar — controleer je verbinding en de server-URL.':
+      'forge SIchlaHbe\' — rar pat URL je yIlaD.',
+  'Aanmelden bij de forge mislukt. Controleer je token: het heeft leesrechten op de repository nodig, en schrijfrechten om op te slaan.':
+      'forge-Daq \'el Qapbe\'. token yIlaD: repository laDmeH ghob poQ, \'ej polmeH ghItlh ghob poQ.',
+  'Niet gevonden in de repository — of je token mag het niet zien.':
+      'repository-Daq tu\'lu\'be\' — ghap token legh net chaw\'be\'.',
+  'De forge gaf een fout. Probeer het later opnieuw.':
+      'forge Qagh cha\'. tugh yInID.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge bij Instellingen → Opslag?':
+      'inscription vam forge rur pagh. Settings → Storage-Daq forge Segh lugh\'a\'?',
+  'Stel eerst een WebDAV-server in bij Instellingen → Opslag.':
+      'Settings → Storage-Daq WebDAV pat yIcher.',
   'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
       'privé ghap juH Sammey forge vangDI\' poQlu\'. vam degh Hutlhchugh, Hung waw\' privé inscription lajQo\'.',
   'Vul server-URL, eigenaar en repository in':

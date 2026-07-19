@@ -1795,6 +1795,26 @@ const _dutchSourcePl = {
 const _dutchSourceAddPl = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Licencje leksykonów: o co jeszcze trzeba zapytać',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
+      'WebDAV nie jest (dobrze) skonfigurowany — sprawdź dane serwera w Ustawienia → Magazyn.',
+  'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':
+      'Repozytorium git nie jest (dobrze) skonfigurowane — sprawdź serwer, właściciela i repozytorium w Ustawienia → Magazyn.',
+  'De servernaam van de forge bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Nazwa serwera forge nie istnieje lub nie można jej odnaleźć. Sprawdź, czy w adresie URL serwera nie ma literówki.',
+  'Deze forge heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Ten forge ma adres prywatny lub LAN. Oznacz go jako zaufany wewnętrzny w Ustawienia → Magazyn.',
+  'De forge is niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Forge jest nieosiągalny — sprawdź połączenie i adres URL serwera.',
+  'Aanmelden bij de forge mislukt. Controleer je token: het heeft leesrechten op de repository nodig, en schrijfrechten om op te slaan.':
+      'Logowanie do forge nie powiodło się. Sprawdź token: potrzebuje dostępu do odczytu repozytorium i do zapisu, aby zapisywać.',
+  'Niet gevonden in de repository — of je token mag het niet zien.':
+      'Nie znaleziono w repozytorium — albo twój token nie może tego zobaczyć.',
+  'De forge gaf een fout. Probeer het later opnieuw.':
+      'Forge zwrócił błąd. Spróbuj ponownie później.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge bij Instellingen → Opslag?':
+      'Ten adres nie odpowiada jak forge. Czy rodzaj forge w Ustawienia → Magazyn jest właściwy?',
+  'Stel eerst een WebDAV-server in bij Instellingen → Opslag.':
+      'Najpierw skonfiguruj serwer WebDAV w Ustawienia → Magazyn.',
   'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
       'Potrzebne, gdy forge działa w sieci prywatnej lub domowej. Bez tej opcji kontrola bezpieczeństwa odrzuca adres prywatny.',
   'Vul server-URL, eigenaar en repository in':

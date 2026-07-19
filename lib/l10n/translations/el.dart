@@ -1811,6 +1811,26 @@ const _dutchSourceEl = {
 const _dutchSourceAddEl = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Άδειες λεξικών: τι μένει να ρωτηθεί',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
+      'Το WebDAV δεν έχει ρυθμιστεί σωστά — ελέγξτε τα στοιχεία διακομιστή στις Ρυθμίσεις → Αποθήκευση.',
+  'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':
+      'Το αποθετήριο git δεν έχει ρυθμιστεί σωστά — ελέγξτε διακομιστή, κάτοχο και αποθετήριο στις Ρυθμίσεις → Αποθήκευση.',
+  'De servernaam van de forge bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Το όνομα διακομιστή του forge δεν υπάρχει ή δεν μπορεί να αναζητηθεί. Ελέγξτε το URL του διακομιστή για τυπογραφικό λάθος.',
+  'Deze forge heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Αυτό το forge έχει ιδιωτική διεύθυνση ή διεύθυνση LAN. Σημειώστε το ως έμπιστο εσωτερικό στις Ρυθμίσεις → Αποθήκευση.',
+  'De forge is niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Το forge δεν είναι προσβάσιμο — ελέγξτε τη σύνδεσή σας και το URL του διακομιστή.',
+  'Aanmelden bij de forge mislukt. Controleer je token: het heeft leesrechten op de repository nodig, en schrijfrechten om op te slaan.':
+      'Η σύνδεση στο forge απέτυχε. Έλεγξε το διακριτικό: χρειάζεται δικαίωμα ανάγνωσης στο αποθετήριο και εγγραφής για αποθήκευση.',
+  'Niet gevonden in de repository — of je token mag het niet zien.':
+      'Δεν βρέθηκε στο αποθετήριο — ή το διακριτικό σου δεν επιτρέπεται να το δει.',
+  'De forge gaf een fout. Probeer het later opnieuw.':
+      'Το forge επέστρεψε σφάλμα. Δοκιμάστε ξανά αργότερα.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge bij Instellingen → Opslag?':
+      'Αυτή η διεύθυνση δεν απαντά σαν forge. Είναι σωστό το είδος forge στις Ρυθμίσεις → Αποθήκευση;',
+  'Stel eerst een WebDAV-server in bij Instellingen → Opslag.':
+      'Ρυθμίστε πρώτα έναν διακομιστή WebDAV στις Ρυθμίσεις → Αποθήκευση.',
   'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
       'Χρειάζεται όταν το forge τρέχει σε ιδιωτικό ή οικιακό δίκτυο. Χωρίς αυτή τη σήμανση ο έλεγχος ασφαλείας απορρίπτει ιδιωτική διεύθυνση.',
   'Vul server-URL, eigenaar en repository in':

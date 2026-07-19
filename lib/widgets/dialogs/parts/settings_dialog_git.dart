@@ -237,8 +237,12 @@ extension _SettingsGit on _SettingsDialogState {
       GitForgeError.malformed => l10n.d(
         'Dit adres antwoordt niet als een forge. Klopt de soort forge die je hebt gekozen?',
       ),
-      GitForgeError.network ||
-      GitForgeError.server => l10n.d('Verbinding mislukt'),
+      // Bereikbaar, maar de forge zelf gaf een fout — iets anders dan
+      // "verbinding mislukt", en het vraagt om iets anders van de gebruiker.
+      GitForgeError.server => l10n.d(
+        'De forge gaf een fout. Probeer het later opnieuw.',
+      ),
+      GitForgeError.network => l10n.d('Verbinding mislukt'),
     };
   }
 

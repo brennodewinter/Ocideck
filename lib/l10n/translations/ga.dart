@@ -1819,6 +1819,26 @@ const _dutchSourceGa = {
 const _dutchSourceAddGa = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Ceadúnais foclóra: a bhfuil fós le fiafraí',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
+      'Níl WebDAV socraithe i gceart — seiceáil sonraí an fhreastalaí faoi Socruithe → Stóráil.',
+  'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':
+      'Níl an stór git socraithe i gceart — seiceáil freastalaí, úinéir agus stór faoi Socruithe → Stóráil.',
+  'De servernaam van de forge bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Níl ainm fhreastalaí an forge ann, nó ní féidir é a chuardach. Seiceáil URL an fhreastalaí le haghaidh botúin chlóscríofa.',
+  'Deze forge heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Tá seoladh príobháideach nó LAN ag an forge seo. Marcáil é mar inmheánach iontaofa faoi Socruithe → Stóráil.',
+  'De forge is niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Níl teacht ar an forge — seiceáil do nasc agus URL an fhreastalaí.',
+  'Aanmelden bij de forge mislukt. Controleer je token: het heeft leesrechten op de repository nodig, en schrijfrechten om op te slaan.':
+      'Theip ar an síniú isteach chuig an forge. Seiceáil do chomhartha: teastaíonn rochtain léitheoireachta ar an stór uaidh, agus rochtain scríofa chun sábháil.',
+  'Niet gevonden in de repository — of je token mag het niet zien.':
+      'Níor aimsíodh sa stór é — nó b\'fhéidir nach bhfuil cead ag do chomhartha é a fheiceáil.',
+  'De forge gaf een fout. Probeer het later opnieuw.':
+      'Sheol an forge earráid ar ais. Bain triail eile as níos déanaí.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge bij Instellingen → Opslag?':
+      'Ní fhreagraíonn an seoladh seo mar forge. An bhfuil an cineál forge faoi Socruithe → Stóráil ceart?',
+  'Stel eerst een WebDAV-server in bij Instellingen → Opslag.':
+      'Socraigh freastalaí WebDAV ar dtús faoi Socruithe → Stóráil.',
   'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
       'Ag teastáil nuair a ritheann an forge ar líonra príobháideach nó baile. Gan an bhratach seo diúltaíonn an tseiceáil slándála seoladh príobháideach.',
   'Vul server-URL, eigenaar en repository in':

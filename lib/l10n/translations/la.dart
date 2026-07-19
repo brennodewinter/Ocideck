@@ -1799,6 +1799,26 @@ const _dutchSourceLa = {
 const _dutchSourceAddLa = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Licentiae lexicorum: quae adhuc roganda sunt',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
+      'WebDAV non recte constitutum est — data servitoris apud Optiones → Repositorium inspice.',
+  'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':
+      'Promptuarium git non recte constitutum est — servitorem, dominum et promptuarium apud Optiones → Repositorium inspice.',
+  'De servernaam van de forge bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Nomen servitoris officinae non exstat, vel inveniri non potest. URL servitoris de mendo typographico inspice.',
+  'Deze forge heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Haec officina inscriptionem privatam vel LAN habet. Eam ut internam fidam nota apud Optiones → Repositorium.',
+  'De forge is niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Officina adiri non potest — nexum tuum et URL servitoris inspice.',
+  'Aanmelden bij de forge mislukt. Controleer je token: het heeft leesrechten op de repository nodig, en schrijfrechten om op te slaan.':
+      'Aditus ad officinam defecit. Signum tuum inspice: ius legendi promptuarium requirit, et ius scribendi ut servet.',
+  'Niet gevonden in de repository — of je token mag het niet zien.':
+      'In promptuario non inventum — vel signum tuum id videre non licet.',
+  'De forge gaf een fout. Probeer het later opnieuw.':
+      'Officina errorem reddidit. Postea itera.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge bij Instellingen → Opslag?':
+      'Haec inscriptio non ut officina respondet. Rectumne est genus officinae apud Optiones → Repositorium?',
+  'Stel eerst een WebDAV-server in bij Instellingen → Opslag.':
+      'Servitorem WebDAV primum apud Optiones → Repositorium constitue.',
   'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
       'Necessarium cum officina in rete privata vel domestica currit. Sine hoc signo custodia securitatis inscriptionem privatam respuit.',
   'Vul server-URL, eigenaar en repository in':

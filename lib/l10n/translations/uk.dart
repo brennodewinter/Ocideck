@@ -1801,6 +1801,26 @@ const _dutchSourceUk = {
 const _dutchSourceAddUk = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Ліцензії лексиконів: що ще треба з\'ясувати',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
+      'WebDAV налаштовано неправильно — перевірте дані сервера в Налаштування → Сховище.',
+  'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':
+      'Репозиторій git налаштовано неправильно — перевірте сервер, власника та репозиторій у Налаштування → Сховище.',
+  'De servernaam van de forge bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Ім\'я сервера форжа не існує або його не вдається знайти. Перевірте URL сервера на друкарську помилку.',
+  'Deze forge heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Цей форж має приватну або LAN-адресу. Позначте його як довірений внутрішній у Налаштування → Сховище.',
+  'De forge is niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Форж недоступний — перевірте з\'єднання та URL сервера.',
+  'Aanmelden bij de forge mislukt. Controleer je token: het heeft leesrechten op de repository nodig, en schrijfrechten om op te slaan.':
+      'Не вдалося ввійти до форжа. Перевірте токен: йому потрібен доступ на читання репозиторію та на запис для збереження.',
+  'Niet gevonden in de repository — of je token mag het niet zien.':
+      'Не знайдено в репозиторії — або ваш токен не має права це бачити.',
+  'De forge gaf een fout. Probeer het later opnieuw.':
+      'Форж повернув помилку. Спробуйте пізніше.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge bij Instellingen → Opslag?':
+      'Ця адреса не відповідає як форж. Чи правильний тип форжа в Налаштування → Сховище?',
+  'Stel eerst een WebDAV-server in bij Instellingen → Opslag.':
+      'Спершу налаштуйте сервер WebDAV у Налаштування → Сховище.',
   'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
       'Потрібно, коли форж працює у приватній або домашній мережі. Без цього прапорця перевірка безпеки відхиляє приватну адресу.',
   'Vul server-URL, eigenaar en repository in':

@@ -1782,6 +1782,26 @@ const _dutchSourceDa = {
 const _dutchSourceAddDa = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Leksikonlicenser: hvad der stadig skal spørges om',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
+      'WebDAV er ikke sat rigtigt op — tjek serveroplysningerne under Indstillinger → Lagring.',
+  'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':
+      'Git-repositoryet er ikke sat rigtigt op — tjek server, ejer og repository under Indstillinger → Lagring.',
+  'De servernaam van de forge bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Forgens servernavn findes ikke eller kan ikke slås op. Tjek server-URL\'en for en tastefejl.',
+  'Deze forge heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Denne forge har en privat- eller LAN-adresse. Marker den som betroet intern under Indstillinger → Lagring.',
+  'De forge is niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Forgen kan ikke nås — tjek din forbindelse og server-URL\'en.',
+  'Aanmelden bij de forge mislukt. Controleer je token: het heeft leesrechten op de repository nodig, en schrijfrechten om op te slaan.':
+      'Login til forgen mislykkedes. Tjek dit token: det skal have læseadgang til repositoryet og skriveadgang for at kunne gemme.',
+  'Niet gevonden in de repository — of je token mag het niet zien.':
+      'Ikke fundet i repositoryet — eller dit token må ikke se det.',
+  'De forge gaf een fout. Probeer het later opnieuw.':
+      'Forgen returnerede en fejl. Prøv igen senere.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge bij Instellingen → Opslag?':
+      'Denne adresse svarer ikke som en forge. Er forge-typen under Indstillinger → Lagring rigtig?',
+  'Stel eerst een WebDAV-server in bij Instellingen → Opslag.':
+      'Opsæt først en WebDAV-server under Indstillinger → Lagring.',
   'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
       'Nødvendigt, når forgen kører på et privat- eller hjemmenetværk. Uden dette flag afviser sikkerhedstjekket en privat adresse.',
   'Vul server-URL, eigenaar en repository in':

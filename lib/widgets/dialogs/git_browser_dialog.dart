@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/app_localizations.dart';
-import '../../services/git/git_forge.dart';
 import '../../state/git_provider.dart';
 import '../../theme/app_theme.dart';
+import '../../utils/user_facing_error.dart';
 
 /// Kiest een deck uit de geconfigureerde git-repository en geeft de deckmap
 /// terug (`decks/<naam>`), of `null` bij annuleren. Het ophalen/openen zelf doet
@@ -93,12 +93,11 @@ class GitBrowserDialog extends ConsumerWidget {
     return decks.when(
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (e, _) => _message(
-        // Een GitForgeException draagt al een nette, uitlegbare tekst. Alles
-        // anders komt niet uit deze provider en is dus een bug — dan liever een
-        // onschuldige, algemene raad dan een ruwe fout op het scherm.
-        e is GitForgeException
-            ? e.message
-            : l10n.d('Controleer de internetverbinding en probeer opnieuw.'),
+        // De ruwe forge-tekst was Nederlands en onvertaald, en bij een
+        // onbekende status letterlijk "Onverwachte status 418". Alles wat niet
+        // uit deze provider komt is een bug — dan liever algemene raad dan een
+        // ruwe fout op het scherm; userFacingError doet precies dat.
+        userFacingError(l10n, e),
         icon: Icons.error_outline,
       ),
       data: (map) {

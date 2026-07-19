@@ -5,6 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/services/file_service.dart';
+import 'package:ocideck/services/git/git_forge.dart';
+import 'package:ocideck/services/s3/s3_service.dart';
 import 'package:ocideck/services/webdav_service.dart';
 import 'package:ocideck/utils/user_facing_error.dart';
 
@@ -131,6 +133,100 @@ void main() {
         WebdavException(WebdavError.auth, 'x'),
       );
       expect(msg, contains('app-wachtwoord'));
+    });
+  });
+
+  group('gitForgeErrorMessage', () {
+    test('every git error kind maps to a non-empty message', () {
+      for (final kind in GitForgeError.values) {
+        expect(
+          gitForgeErrorMessage(l10n, GitForgeException(kind, 'x')),
+          isNotEmpty,
+          reason: '$kind should explain itself',
+        );
+      }
+    });
+
+    test('no two error kinds share a message', () {
+      final byMessage = <String, List<GitForgeError>>{};
+      for (final kind in GitForgeError.values) {
+        final msg = gitForgeErrorMessage(l10n, GitForgeException(kind, 'x'));
+        byMessage.putIfAbsent(msg, () => []).add(kind);
+      }
+      final shared = byMessage.values.where((k) => k.length > 1).toList();
+      expect(shared, isEmpty, reason: 'delen dezelfde melding: $shared');
+    });
+
+    test('a 404 does not promise the repository is absent', () {
+      // Een forge geeft ook 404 wanneer het token de repo niet mag zien. De
+      // melding mag dat niet als zekerheid presenteren — de gebruiker zou
+      // anders naar een repo gaan zoeken die er gewoon is.
+      final msg = gitForgeErrorMessage(
+        l10n,
+        const GitForgeException(GitForgeError.notFound, 'x'),
+      );
+      expect(msg, contains('token'));
+    });
+  });
+
+  group('s3ErrorMessage', () {
+    test('every S3 error kind maps to a non-empty message', () {
+      for (final kind in S3Error.values) {
+        expect(
+          s3ErrorMessage(l10n, S3Exception(kind, 'x')),
+          isNotEmpty,
+          reason: '$kind should explain itself',
+        );
+      }
+    });
+
+    test('no two error kinds share a message', () {
+      final byMessage = <String, List<S3Error>>{};
+      for (final kind in S3Error.values) {
+        final msg = s3ErrorMessage(l10n, S3Exception(kind, 'x'));
+        byMessage.putIfAbsent(msg, () => []).add(kind);
+      }
+      final shared = byMessage.values.where((k) => k.length > 1).toList();
+      expect(shared, isEmpty, reason: 'delen dezelfde melding: $shared');
+    });
+  });
+
+  group('userFacingError routes every storage exception', () {
+    // De aanleiding: GitForgeException stond niet in de dispatch en viel door
+    // naar "er ging onverwacht iets mis" — terwijl er een tabel voor bestond.
+    // Deze test valt om zodra er een vierde opslagsoort bij komt die vergeten
+    // wordt aan te sluiten.
+    final generiek = l10n.d(
+      'Er ging onverwacht iets mis. Kijk in het logboek voor details.',
+    );
+
+    test('a WebDAV, S3 or git exception never falls through to the generic '
+        'message', () {
+      final gevallen = <Object>[
+        WebdavException(WebdavError.auth, 'x'),
+        S3Exception(S3Error.auth, 'x'),
+        const GitForgeException(GitForgeError.auth, 'x'),
+      ];
+      for (final e in gevallen) {
+        expect(
+          userFacingError(l10n, e),
+          isNot(generiek),
+          reason: '$e hoort een eigen melding te hebben',
+        );
+      }
+    });
+
+    test('the raw service message never reaches the user', () {
+      // De ruwe tekst is Nederlands, onvertaald en soms letterlijk
+      // "Onverwachte status 418". Die hoort in het logboek, niet op het scherm.
+      const ruw = 'Onverwachte status 418';
+      expect(
+        userFacingError(
+          l10n,
+          const GitForgeException(GitForgeError.server, ruw),
+        ),
+        isNot(contains('418')),
+      );
     });
   });
 }

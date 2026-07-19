@@ -1787,6 +1787,26 @@ const _dutchSourceHu = {
 const _dutchSourceAddHu = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Lexikonlicencek: mit kell még megkérdezni',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
+      'A WebDAV nincs (jól) beállítva — ellenőrizd a kiszolgáló adatait a Beállítások → Tárhely alatt.',
+  'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':
+      'A git tároló nincs (jól) beállítva — ellenőrizd a kiszolgálót, a tulajdonost és a tárolót a Beállítások → Tárhely alatt.',
+  'De servernaam van de forge bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'A forge kiszolgálójának neve nem létezik, vagy nem kereshető ki. Ellenőrizd, nincs-e elgépelés a kiszolgáló URL-jében.',
+  'Deze forge heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Ennek a forge-nak privát vagy LAN-címe van. Jelöld megbízható belsőként a Beállítások → Tárhely alatt.',
+  'De forge is niet bereikbaar — controleer je verbinding en de server-URL.':
+      'A forge nem érhető el — ellenőrizd a kapcsolatot és a kiszolgáló URL-jét.',
+  'Aanmelden bij de forge mislukt. Controleer je token: het heeft leesrechten op de repository nodig, en schrijfrechten om op te slaan.':
+      'A forge-ba való bejelentkezés nem sikerült. Ellenőrizd a tokent: olvasási jog kell a tárolóhoz, és írási jog a mentéshez.',
+  'Niet gevonden in de repository — of je token mag het niet zien.':
+      'Nem található a tárolóban — vagy a tokened nem láthatja.',
+  'De forge gaf een fout. Probeer het later opnieuw.':
+      'A forge hibát adott vissza. Próbáld újra később.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge bij Instellingen → Opslag?':
+      'Ez a cím nem úgy válaszol, mint egy forge. Helyes a forge-típus a Beállítások → Tárhely alatt?',
+  'Stel eerst een WebDAV-server in bij Instellingen → Opslag.':
+      'Először állíts be egy WebDAV-kiszolgálót a Beállítások → Tárhely alatt.',
   'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
       'Szükséges, ha a forge magán- vagy otthoni hálózaton fut. E jelölés nélkül a biztonsági ellenőrzés elutasít egy magáncímet.',
   'Vul server-URL, eigenaar en repository in':

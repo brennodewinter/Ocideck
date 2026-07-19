@@ -1785,6 +1785,26 @@ const _dutchSourceSl = {
 const _dutchSourceAddSl = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Licence leksikonov: kaj je treba še vprašati',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
+      'WebDAV ni (pravilno) nastavljen — preveri podatke strežnika v Nastavitve → Shramba.',
+  'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':
+      'Repozitorij git ni (pravilno) nastavljen — preveri strežnik, lastnika in repozitorij v Nastavitve → Shramba.',
+  'De servernaam van de forge bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Ime strežnika forgea ne obstaja ali ga ni mogoče poiskati. Preveri, ali je v URL-ju strežnika tipkarska napaka.',
+  'Deze forge heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Ta forge ima zasebni ali LAN naslov. Označi ga kot zaupanja vrednega internega v Nastavitve → Shramba.',
+  'De forge is niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Forge ni dosegljiv — preveri povezavo in URL strežnika.',
+  'Aanmelden bij de forge mislukt. Controleer je token: het heeft leesrechten op de repository nodig, en schrijfrechten om op te slaan.':
+      'Prijava v forge ni uspela. Preveri žeton: potrebuje pravico branja repozitorija in pisanja za shranjevanje.',
+  'Niet gevonden in de repository — of je token mag het niet zien.':
+      'Ni najdeno v repozitoriju — ali pa tvoj žeton tega ne sme videti.',
+  'De forge gaf een fout. Probeer het later opnieuw.':
+      'Forge je vrnil napako. Poskusi znova pozneje.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge bij Instellingen → Opslag?':
+      'Ta naslov ne odgovarja kot forge. Je vrsta forgea v Nastavitve → Shramba pravilna?',
+  'Stel eerst een WebDAV-server in bij Instellingen → Opslag.':
+      'Najprej nastavi strežnik WebDAV v Nastavitve → Shramba.',
   'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
       'Potrebno, kadar forge teče v zasebnem ali domačem omrežju. Brez te oznake varnostno preverjanje zavrne zasebni naslov.',
   'Vul server-URL, eigenaar en repository in':

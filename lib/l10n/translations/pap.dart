@@ -740,6 +740,26 @@ const _dutchSourcePap = {
 const _dutchSourceAddPap = {
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Lisensia di leksikon: kiko mester puntra ainda',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
+      'WebDAV no ta konfigurá (bon) — kontrolá e datos di servidor na Konfigurashon → Almasenamentu.',
+  'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':
+      'E repositorio git no ta konfigurá (bon) — kontrolá servidor, doño i repositorio na Konfigurashon → Almasenamentu.',
+  'De servernaam van de forge bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'E nòmber di servidor di e forge no ta eksistí, of no por wòrdu buskí. Kontrolá e URL di servidor pa un eror di tipeo.',
+  'Deze forge heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'E forge aki tin un adrès privá of di LAN. Marké e komo konfiá interno na Konfigurashon → Almasenamentu.',
+  'De forge is niet bereikbaar — controleer je verbinding en de server-URL.':
+      'E forge no ta alkansabel — kontrolá bo konekshon i e URL di servidor.',
+  'Aanmelden bij de forge mislukt. Controleer je token: het heeft leesrechten op de repository nodig, en schrijfrechten om op te slaan.':
+      'Login na e forge a faya. Kontrolá bo token: e tin mester di derecho di lesa e repositorio, i di skirbi pa warda.',
+  'Niet gevonden in de repository — of je token mag het niet zien.':
+      'No hañá den e repositorio — of bo token no por mir\'é.',
+  'De forge gaf een fout. Probeer het later opnieuw.':
+      'E forge a duna un eror. Purba atrobe despues.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge bij Instellingen → Opslag?':
+      'E adrès aki no ta kontestá manera un forge. E tipo di forge na Konfigurashon → Almasenamentu ta korekto?',
+  'Stel eerst een WebDAV-server in bij Instellingen → Opslag.':
+      'Konfigurá promé un servidor WebDAV na Konfigurashon → Almasenamentu.',
   'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
       'Nesesario ora e forge ta kore riba un red privá of di kas. Sin e bandera aki e kontrol di siguridat ta rechasá un adrès privá.',
   'Vul server-URL, eigenaar en repository in':

@@ -1786,6 +1786,26 @@ const _dutchSourceCs = {
 const _dutchSourceAddCs = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Licence lexikonů: na co je ještě třeba se zeptat',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
+      'WebDAV není (správně) nastaven — zkontrolujte údaje serveru v Nastavení → Úložiště.',
+  'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':
+      'Git repozitář není (správně) nastaven — zkontrolujte server, vlastníka a repozitář v Nastavení → Úložiště.',
+  'De servernaam van de forge bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Název serveru forge neexistuje nebo jej nelze vyhledat. Zkontrolujte, zda v URL serveru není překlep.',
+  'Deze forge heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Tento forge má privátní nebo LAN adresu. Označte jej jako důvěryhodný interní v Nastavení → Úložiště.',
+  'De forge is niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Forge není dostupný — zkontrolujte připojení a URL serveru.',
+  'Aanmelden bij de forge mislukt. Controleer je token: het heeft leesrechten op de repository nodig, en schrijfrechten om op te slaan.':
+      'Přihlášení k forge selhalo. Zkontrolujte token: potřebuje právo číst repozitář a právo zapisovat pro ukládání.',
+  'Niet gevonden in de repository — of je token mag het niet zien.':
+      'Nenalezeno v repozitáři — nebo to váš token nesmí vidět.',
+  'De forge gaf een fout. Probeer het later opnieuw.':
+      'Forge vrátil chybu. Zkuste to později znovu.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge bij Instellingen → Opslag?':
+      'Tato adresa neodpovídá jako forge. Je druh forge v Nastavení → Úložiště správný?',
+  'Stel eerst een WebDAV-server in bij Instellingen → Opslag.':
+      'Nejprve nastavte WebDAV server v Nastavení → Úložiště.',
   'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
       'Potřebné, když forge běží v privátní nebo domácí síti. Bez tohoto příznaku bezpečnostní kontrola odmítne privátní adresu.',
   'Vul server-URL, eigenaar en repository in':

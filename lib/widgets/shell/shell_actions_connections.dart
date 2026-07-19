@@ -61,7 +61,7 @@ void _webdavNotConfigured(BuildContext context) {
     SnackBar(
       content: Text(
         context.l10n.d(
-          'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.',
+          'Stel eerst een WebDAV-server in bij Instellingen → Opslag.',
         ),
       ),
     ),

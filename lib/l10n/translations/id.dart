@@ -1783,6 +1783,26 @@ const _dutchSourceId = {
 const _dutchSourceAddId = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Lisensi leksikon: apa yang masih perlu ditanyakan',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
+      'WebDAV belum diatur dengan benar — periksa data server di Pengaturan → Penyimpanan.',
+  'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':
+      'Repositori git belum diatur dengan benar — periksa server, pemilik, dan repositori di Pengaturan → Penyimpanan.',
+  'De servernaam van de forge bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Nama server forge tidak ada, atau tidak dapat dicari. Periksa URL server dari salah ketik.',
+  'Deze forge heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Forge ini memiliki alamat privat atau LAN. Tandai sebagai internal tepercaya di Pengaturan → Penyimpanan.',
+  'De forge is niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Forge tidak dapat dijangkau — periksa koneksi Anda dan URL server.',
+  'Aanmelden bij de forge mislukt. Controleer je token: het heeft leesrechten op de repository nodig, en schrijfrechten om op te slaan.':
+      'Masuk ke forge gagal. Periksa token Anda: ia butuh akses baca ke repositori, dan akses tulis untuk menyimpan.',
+  'Niet gevonden in de repository — of je token mag het niet zien.':
+      'Tidak ditemukan di repositori — atau token Anda tidak boleh melihatnya.',
+  'De forge gaf een fout. Probeer het later opnieuw.':
+      'Forge mengembalikan kesalahan. Coba lagi nanti.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge bij Instellingen → Opslag?':
+      'Alamat ini tidak menjawab seperti sebuah forge. Apakah jenis forge di Pengaturan → Penyimpanan benar?',
+  'Stel eerst een WebDAV-server in bij Instellingen → Opslag.':
+      'Atur dulu server WebDAV di Pengaturan → Penyimpanan.',
   'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
       'Diperlukan ketika forge berjalan di jaringan privat atau rumah. Tanpa tanda ini, pemeriksaan keamanan menolak alamat privat.',
   'Vul server-URL, eigenaar en repository in':

@@ -1782,6 +1782,26 @@ const _dutchSourceSv = {
 const _dutchSourceAddSv = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Lexikonlicenser: vad som återstår att fråga',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
+      'WebDAV är inte (rätt) konfigurerat — kontrollera serveruppgifterna under Inställningar → Lagring.',
+  'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':
+      'Git-repositoryt är inte (rätt) konfigurerat — kontrollera server, ägare och repository under Inställningar → Lagring.',
+  'De servernaam van de forge bestaat niet, of is niet op te zoeken. Controleer de server-URL op een typefout.':
+      'Forgens servernamn finns inte eller går inte att slå upp. Kontrollera server-URL:en för ett skrivfel.',
+  'Deze forge heeft een privé- of LAN-adres. Markeer hem als vertrouwd intern bij Instellingen → Opslag.':
+      'Den här forgen har en privat adress eller LAN-adress. Markera den som betrodd intern under Inställningar → Lagring.',
+  'De forge is niet bereikbaar — controleer je verbinding en de server-URL.':
+      'Forgen går inte att nå — kontrollera din anslutning och server-URL:en.',
+  'Aanmelden bij de forge mislukt. Controleer je token: het heeft leesrechten op de repository nodig, en schrijfrechten om op te slaan.':
+      'Inloggningen till forgen misslyckades. Kontrollera din token: den behöver läsbehörighet till repositoryt och skrivbehörighet för att spara.',
+  'Niet gevonden in de repository — of je token mag het niet zien.':
+      'Hittades inte i repositoryt — eller så får din token inte se det.',
+  'De forge gaf een fout. Probeer het later opnieuw.':
+      'Forgen returnerade ett fel. Försök igen senare.',
+  'Dit adres antwoordt niet als een forge. Klopt de soort forge bij Instellingen → Opslag?':
+      'Den här adressen svarar inte som en forge. Stämmer forge-typen under Inställningar → Lagring?',
+  'Stel eerst een WebDAV-server in bij Instellingen → Opslag.':
+      'Konfigurera först en WebDAV-server under Inställningar → Lagring.',
   'Nodig wanneer de forge op een privé- of thuisnetwerk draait. Zonder deze vlag weigert de beveiliging een privé-adres.':
       'Behövs när forgen körs på ett privat nätverk eller hemnätverk. Utan denna flagga avvisar säkerhetskontrollen en privat adress.',
   'Vul server-URL, eigenaar en repository in':
