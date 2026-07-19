@@ -297,8 +297,6 @@ const _dutchSourceEl = {
   'Uitbreidingen': 'Επεκτάσεις',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Προαιρετικές μονάδες. Απενεργοποιημένες από προεπιλογή· δεν προσθέτουν τίποτα στη βασική εφαρμογή μέχρι να τις ενεργοποιήσετε.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Διαφάνειες αναφοράς και δεδομένα αναφοράς για την ασφάλεια πληροφοριών: ευρήματα, λίστες ελέγχου, μήτρες εμβέλειας και υπογραφή. Δομημένο κατά MIAUW και ευρέως αξιοποιήσιμο για pentests, ελέγχους και έρευνα ασφάλειας. Η ενεργοποίηση κατεβάζει μία φορά τα δεδομένα αναφοράς· έπειτα η μονάδα λειτουργεί εκτός σύνδεσης.',
   'Gegevens opschonen': 'Εκκαθάριση δεδομένων',
   'Gegevens lokaal beschikbaar': 'Δεδομένα διαθέσιμα τοπικά',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
@@ -1588,8 +1586,8 @@ const _dutchSourceEl = {
   'Projectstart / kick-off': 'Έναρξη έργου / kick-off',
   'Voorbespreking communicatie': 'Προκαταρκτική συζήτηση επικοινωνίας',
   'Projecttijdlijn': 'Χρονοδιάγραμμα έργου',
-  'Informatiebeveiliging: RASCI / TVB': 'Ασφάλεια πληροφοριών: RASCI / TVB',
-  'Security-takenplan': 'Σχέδιο εργασιών ασφάλειας',
+  'Informatieveiligheid: RASCI / TVB': 'Ασφάλεια πληροφοριών: RASCI / TVB',
+  'Takenplan informatieveiligheid': 'Σχέδιο εργασιών ασφάλειας',
   'Certificering voortgang': 'Πρόοδος πιστοποίησης',
   'Training / workshop': 'Εκπαίδευση / workshop',
   'Rapportage': 'Αναφορά',
@@ -2011,7 +2009,7 @@ const _dutchSourceAddEl = <String, String>{
       'Δεν υπάρχουν παρουσιάσεις σε αυτό το αποθετήριο.',
   'Rapportagetaal': 'Γλώσσα αναφοράς',
   'Niet vastgelegd': 'Δεν έχει καταγραφεί',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Διαφάνειες αναφοράς και δεδομένα αναφοράς για την ασφάλεια πληροφοριών: ευρήματα, λίστες ελέγχου, μήτρες εμβέλειας και υπογραφή. Δομημένο κατά MIAUW και ευρέως αξιοποιήσιμο για pentests, ελέγχους και έρευνα ασφάλειας. Τα δεδομένα αναφοράς βρίσκονται μέσα στην ίδια την εφαρμογή, οπότε η μονάδα λειτουργεί αμέσως και πλήρως εκτός σύνδεσης.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Προαιρετικές μονάδες. Απενεργοποιημένες από προεπιλογή· παραμένουν κρυφές μέχρι να τις ενεργοποιήσετε.',

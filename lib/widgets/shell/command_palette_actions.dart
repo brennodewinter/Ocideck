@@ -129,7 +129,7 @@ extension _MainLayoutCommandPalette on _MainLayoutState {
     Deck deck,
     DeckNotifier deckNotifier,
   ) {
-    if (!ref.read(secModuleRevealProvider)) return const [];
+    if (!ref.read(infoSafetyRevealProvider)) return const [];
     return [
       PaletteCommand(
         label: l10n.d('MIAUW-compliance'),

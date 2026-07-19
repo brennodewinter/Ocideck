@@ -58,7 +58,7 @@ import '../state/deck_quality_provider.dart';
 import '../state/image_contrast_provider.dart';
 import '../state/privacy_provider.dart';
 import '../state/provider_warmup.dart';
-import '../state/sec_module_provider.dart';
+import '../state/info_safety_provider.dart';
 import '../state/editor_provider.dart';
 import '../state/settings_provider.dart';
 import '../state/tabs_provider.dart';
@@ -142,7 +142,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     // very first security-deck open would read the still-loading module and skip
     // the discovery prompt (which only ever appears when the module is known
     // off). See the [securityModulePromptProvider] listener in [build].
-    ref.read(secModuleProvider);
+    ref.read(infoSafetyProvider);
     _openFileChannel = OpenFileChannel(_onFilesDropped);
     // De TabsNotifier kent geen BuildContext; de shell levert de dialoog die
     // om het wachtwoord van een versleuteld pakket vraagt (met retry-melding).
@@ -516,7 +516,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     ) {
       if (prompt == null) return;
       ref.read(securityModulePromptProvider.notifier).state = null;
-      final sec = ref.read(secModuleProvider);
+      final sec = ref.read(infoSafetyProvider);
       if (sec.loading || sec.enabled) return;
       final l10n = context.l10n;
       ScaffoldMessenger.of(context).showSnackBar(
@@ -529,7 +529,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
           ),
           action: SnackBarAction(
             label: l10n.d('Inschakelen'),
-            onPressed: () => ref.read(secModuleProvider.notifier).enable(),
+            onPressed: () => ref.read(infoSafetyProvider.notifier).enable(),
           ),
         ),
       );

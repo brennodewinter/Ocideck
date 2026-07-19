@@ -29,7 +29,7 @@ import '../../state/git_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';
 import '../../state/consent_provider.dart';
-import '../../state/sec_module_provider.dart';
+import '../../state/info_safety_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/error_snackbar.dart';
 import '../../utils/log.dart';

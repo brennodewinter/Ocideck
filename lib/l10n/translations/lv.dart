@@ -294,8 +294,6 @@ const _dutchSourceLv = {
   'Uitbreidingen': 'Paplašinājumi',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Neobligāti moduļi. Pēc noklusējuma izslēgti; tie neko nepievieno pamata lietotnei, kamēr tos neieslēdzat.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Ziņošanas slaidi un atsauces dati informācijas drošībai: atklājumi, kontrolsaraksti, tvēruma matricas un apstiprināšana. Strukturēts pēc MIAUW un plaši izmantojams pentestiem, auditiem un drošības pētījumiem. Ieslēgšana vienreiz lejupielādē atsauces datus; pēc tam modulis darbojas bezsaistē.',
   'Gegevens opschonen': 'Notīrīt datus',
   'Gegevens lokaal beschikbaar': 'Dati pieejami lokāli',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
@@ -1566,8 +1564,8 @@ const _dutchSourceLv = {
   'Projectstart / kick-off': 'Projekta sākums / kick-off',
   'Voorbespreking communicatie': 'Komunikācijas priekšapspriede',
   'Projecttijdlijn': 'Projekta laika grafiks',
-  'Informatiebeveiliging: RASCI / TVB': 'Informācijas drošība: RASCI / TVB',
-  'Security-takenplan': 'Drošības uzdevumu plāns',
+  'Informatieveiligheid: RASCI / TVB': 'Informācijas drošība: RASCI / TVB',
+  'Takenplan informatieveiligheid': 'Drošības uzdevumu plāns',
   'Certificering voortgang': 'Sertifikācijas progress',
   'Training / workshop': 'Apmācība / darbseminārs',
   'Rapportage': 'Pārskats',
@@ -1979,7 +1977,7 @@ const _dutchSourceAddLv = <String, String>{
       'Šajā repozitorijā nav prezentāciju.',
   'Rapportagetaal': 'Ziņojuma valoda',
   'Niet vastgelegd': 'Nav reģistrēts',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Ziņošanas slaidi un atsauces dati informācijas drošībai: atklājumi, kontrolsaraksti, tvēruma matricas un apstiprināšana. Strukturēts pēc MIAUW un plaši izmantojams pentestiem, auditiem un drošības pētījumiem. Atsauces dati atrodas pašā lietotnē, tāpēc modulis darbojas uzreiz un pilnībā bezsaistē.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Neobligāti moduļi. Pēc noklusējuma izslēgti; tie paliek paslēpti, līdz tos ieslēdzat.',

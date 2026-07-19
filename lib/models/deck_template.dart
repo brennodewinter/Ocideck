@@ -40,7 +40,7 @@ class DeckTemplate {
 
   /// True for templates that only make sense with the "Informatieveiligheid"
   /// module on (they scaffold module-only slide types like `finding` /
-  /// `scopeMatrix`). The picker hides them until `secModuleRevealProvider` is
+  /// `scopeMatrix`). The picker hides them until `infoSafetyRevealProvider` is
   /// true, so the flat catalogue stays uncluttered for everyone else.
   final bool requiresSecurityModule;
 
@@ -128,14 +128,14 @@ final List<DeckTemplate> deckTemplates = [
   ),
   DeckTemplate(
     id: 'rasci',
-    title: 'Informatiebeveiliging: RASCI / TVB',
+    title: 'Informatieveiligheid: RASCI / TVB',
     description: 'Rollen, RASCI-matrix en taakafspraken vastleggen.',
     icon: 'rasci',
     buildSlides: _buildRasci,
   ),
   DeckTemplate(
     id: 'securityTasks',
-    title: 'Security-takenplan',
+    title: 'Takenplan informatieveiligheid',
     description: 'Taken, prioriteiten, eigenaren en bewijsstukken.',
     icon: 'securityTasks',
     buildSlides: _buildSecurityTasks,

@@ -294,8 +294,6 @@ const _dutchSourceFy = {
   'Uitbreidingen': 'Utwreidingen',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Opsjonele modules. Standert út; se foegje neat ta oan de basis-app oant jo se ynskeakelje.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Rapportaazjeslides en referinsjedata foar ynformaasjebefeiliging: befinings, checklists, scope-matriuzen en ûndertekening. Struktureare neffens MIAUW en breed ynsetber foar pentests, audits en befeiligingsûndersyk. By it ynskeakeljen wurde de referinsjegegevens ien kear ophelle; dêrnei wurket de module offline.',
   'Gegevens opschonen': 'Gegevens opromje',
   'Gegevens lokaal beschikbaar': 'Gegevens lokaal beskikber',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
@@ -936,7 +934,7 @@ const _dutchSourceAddFy = {
       'Gjin presintaasjes yn dizze repository.',
   'Rapportagetaal': 'Rapportaazjetaal',
   'Niet vastgelegd': 'Net fêstlein',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Rapportaazjeslides en referinsjedata foar ynformaasjebefeiliging: befinings, checklists, scope-matriuzen en ûndertekening. Struktureare neffens MIAUW en breed ynsetber foar pentests, audits en befeiligingsûndersyk. De referinsjegegevens sitte yn de app sels, dus de module wurket fuortendaliks en folslein offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Opsjonele modules. Standert út; se bliuwe ferburgen oant jo se ynskeakelje.',
@@ -2141,8 +2139,8 @@ const _dutchSourceAddFy = {
   'Projectstart / kick-off': 'Projektstart / kick-off',
   'Voorbespreking communicatie': 'Foaroerlis kommunikaasje',
   'Projecttijdlijn': 'Projekttiidline',
-  'Informatiebeveiliging: RASCI / TVB': 'Ynformaasjefeiligens: RASCI / TVB',
-  'Security-takenplan': 'Security-takenplan',
+  'Informatieveiligheid: RASCI / TVB': 'Ynformaasjefeiligens: RASCI / TVB',
+  'Takenplan informatieveiligheid': 'Takenplan informatieveiligheid',
   'Certificering voortgang': 'Sertifisearring fuortgong',
   'Training / workshop': 'Training / workshop',
   'Rapportage': 'Rapportaazje',

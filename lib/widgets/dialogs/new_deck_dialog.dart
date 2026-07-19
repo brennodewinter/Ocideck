@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/deck_template.dart';
 import '../../models/settings.dart';
-import '../../state/sec_module_provider.dart';
+import '../../state/info_safety_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../theme/app_theme.dart';
 
@@ -137,7 +137,7 @@ class _NewDeckDialogState extends ConsumerState<NewDeckDialog> {
     final query = _searchCtrl.text.trim().toLowerCase();
     // Module-only templates (MIAUW) stay hidden until Informatieveiligheid is
     // provisioned, so the catalogue is unchanged for everyone else.
-    final revealed = ref.watch(secModuleRevealProvider);
+    final revealed = ref.watch(infoSafetyRevealProvider);
     bool visible(DeckTemplate t) => revealed || !t.requiresSecurityModule;
     bool matches(DeckTemplate t) => [
       l10n.d(t.title),

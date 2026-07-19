@@ -293,8 +293,6 @@ const _dutchSourceLt = {
   'Uitbreidingen': 'Plėtiniai',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Neprivalomi moduliai. Numatytai išjungti; jie nieko neprideda prie pagrindinės programos, kol jų neįjungiate.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Ataskaitų skaidrės ir nuorodų duomenys informacijos saugumui: išvados, kontroliniai sąrašai, aprėpties matricos ir patvirtinimas. Struktūruota pagal MIAUW ir plačiai pritaikoma pentestams, auditams ir saugumo tyrimams. Įjungus vieną kartą atsisiunčiami nuorodų duomenys; vėliau modulis veikia neprisijungus.',
   'Gegevens opschonen': 'Išvalyti duomenis',
   'Gegevens lokaal beschikbaar': 'Duomenys pasiekiami vietoje',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
@@ -331,7 +329,7 @@ const _dutchSourceLt = {
   'Zoek een slidetype': 'Ieškoti skaidrės tipo',
   'Alfabetisch sorteren': 'Rūšiuoti abėcėlės tvarka',
   'Algemeen': 'Bendra',
-  'Informatieveiligheid': 'Informacijos saugumas',
+  'Informatieveiligheid': 'Informacijos sauga',
   'Alle': 'Visi',
   'Pentestrapportage (ontwerp)': 'Įsiskverbimo testo ataskaita (projektas)',
   'AI-assistentie (ontwerp)': 'DI pagalba (projektas)',
@@ -1573,8 +1571,8 @@ const _dutchSourceLt = {
   'Projectstart / kick-off': 'Projekto pradžia / kick-off',
   'Voorbespreking communicatie': 'Išankstinis komunikacijos aptarimas',
   'Projecttijdlijn': 'Projekto laiko juosta',
-  'Informatiebeveiliging: RASCI / TVB': 'Informacijos sauga: RASCI / TVB',
-  'Security-takenplan': 'Saugumo užduočių planas',
+  'Informatieveiligheid: RASCI / TVB': 'Informacijos sauga: RASCI / TVB',
+  'Takenplan informatieveiligheid': 'Saugumo užduočių planas',
   'Certificering voortgang': 'Sertifikavimo pažanga',
   'Training / workshop': 'Mokymai / dirbtuvės',
   'Rapportage': 'Ataskaita',
@@ -1988,7 +1986,7 @@ const _dutchSourceAddLt = <String, String>{
   'Geen presentaties in deze repository.': 'Šioje saugykloje pristatymų nėra.',
   'Rapportagetaal': 'Ataskaitos kalba',
   'Niet vastgelegd': 'Neužfiksuota',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Ataskaitų skaidrės ir nuorodų duomenys informacijos saugumui: išvados, kontroliniai sąrašai, aprėpties matricos ir patvirtinimas. Struktūruota pagal MIAUW ir plačiai pritaikoma pentestams, auditams ir saugumo tyrimams. Nuorodų duomenys yra pačioje programoje, todėl modulis veikia iš karto ir visiškai neprisijungus.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Neprivalomi moduliai. Numatytai išjungti; jie lieka paslėpti, kol jų neįjungiate.',

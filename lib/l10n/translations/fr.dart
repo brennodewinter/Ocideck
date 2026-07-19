@@ -299,8 +299,6 @@ const _dutchSourceFr = {
   'Uitbreidingen': 'Extensions',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Modules optionnels. Désactivés par défaut ; ils n\'ajoutent rien à l\'application de base jusqu\'à leur activation.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Diapositives de rapport et données de référence pour la sécurité de l\'information : constatations, listes de contrôle, matrices de périmètre et signature. Structuré selon MIAUW et largement utilisable pour les pentests, les audits et la recherche en sécurité. L\'activation télécharge les données de référence une fois ; le module fonctionne ensuite hors ligne.',
   'Gegevens opschonen': 'Nettoyer les données',
   'Gegevens lokaal beschikbaar': 'Données disponibles localement',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
@@ -337,7 +335,7 @@ const _dutchSourceFr = {
   'Zoek een slidetype': 'Rechercher un type de diapositive',
   'Alfabetisch sorteren': 'Trier par ordre alphabétique',
   'Algemeen': 'Général',
-  'Informatieveiligheid': 'Sécurité de l\'information',
+  'Informatieveiligheid': 'Sûreté de l\'information',
   'Alle': 'Tout',
   'Pentestrapportage (ontwerp)': 'Rapport de pentest (conception)',
   'AI-assistentie (ontwerp)': 'Assistance IA (conception)',
@@ -938,7 +936,7 @@ const _dutchSourceAddFr = {
   'Geen presentaties in deze repository.': 'Aucune présentation dans ce dépôt.',
   'Rapportagetaal': 'Langue du rapport',
   'Niet vastgelegd': 'Non consigné',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Diapositives de rapport et données de référence pour la sécurité de l\'information : constatations, listes de contrôle, matrices de périmètre et signature. Structuré selon MIAUW et largement utilisable pour les pentests, les audits et la recherche en sécurité. Les données de référence se trouvent dans l\'application elle-même, le module fonctionne donc immédiatement et entièrement hors ligne.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Modules optionnels. Désactivés par défaut ; ils restent masqués jusqu\'à leur activation.',
@@ -2179,9 +2177,9 @@ const _dutchSourceAddFr = {
   'Projectstart / kick-off': 'Lancement de projet / kick-off',
   'Voorbespreking communicatie': 'Pré-briefing communication',
   'Projecttijdlijn': 'Chronologie du projet',
-  'Informatiebeveiliging: RASCI / TVB':
+  'Informatieveiligheid: RASCI / TVB':
       'Sécurité de l\'information : RASCI / responsabilités',
-  'Security-takenplan': 'Plan des tâches de sécurité',
+  'Takenplan informatieveiligheid': 'Plan des tâches de sécurité',
   'Certificering voortgang': 'Avancement de la certification',
   'Training / workshop': 'Formation / atelier',
   'Rapportage': 'Rapport',

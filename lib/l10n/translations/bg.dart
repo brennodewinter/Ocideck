@@ -295,8 +295,6 @@ const _dutchSourceBg = {
   'Uitbreidingen': 'Разширения',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Незадължителни модули. По подразбиране изключени; не добавят нищо към основното приложение, докато не ги включите.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Слайдове за докладване и референтни данни за информационната сигурност: констатации, контролни списъци, матрици на обхвата и подписване. Структурирано по MIAUW и широко приложимо за пентестове, одити и проучвания на сигурността. Включването изтегля референтните данни веднъж; след това модулът работи офлайн.',
   'Gegevens opschonen': 'Изчистване на данните',
   'Gegevens lokaal beschikbaar': 'Данните са налични локално',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
@@ -333,7 +331,7 @@ const _dutchSourceBg = {
   'Zoek een slidetype': 'Търсене на тип слайд',
   'Alfabetisch sorteren': 'Азбучно сортиране',
   'Algemeen': 'Общи',
-  'Informatieveiligheid': 'Информационна сигурност',
+  'Informatieveiligheid': 'Информационна безопасност',
   'Alle': 'Всички',
   'Pentestrapportage (ontwerp)': 'Доклад от пентест (проект)',
   'AI-assistentie (ontwerp)': 'AI помощ (проект)',
@@ -1584,8 +1582,8 @@ const _dutchSourceBg = {
   'Projectstart / kick-off': 'Старт на проекта / kick-off',
   'Voorbespreking communicatie': 'Предварително обсъждане на комуникацията',
   'Projecttijdlijn': 'Времева линия на проекта',
-  'Informatiebeveiliging: RASCI / TVB': 'Информационна сигурност: RASCI / TVB',
-  'Security-takenplan': 'План на задачите по сигурността',
+  'Informatieveiligheid: RASCI / TVB': 'Информационна сигурност: RASCI / TVB',
+  'Takenplan informatieveiligheid': 'План на задачите по сигурността',
   'Certificering voortgang': 'Напредък по сертификацията',
   'Training / workshop': 'Обучение / уъркшоп',
   'Rapportage': 'Отчет',
@@ -2004,7 +2002,7 @@ const _dutchSourceAddBg = <String, String>{
   'Geen presentaties in deze repository.': 'В това хранилище няма презентации.',
   'Rapportagetaal': 'Език на доклада',
   'Niet vastgelegd': 'Не е записано',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Слайдове за докладване и референтни данни за информационната сигурност: констатации, контролни списъци, матрици на обхвата и подписване. Структурирано по MIAUW и широко приложимо за пентестове, одити и проучвания на сигурността. Референтните данни са в самото приложение, затова модулът работи веднага и напълно офлайн.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Незадължителни модули. По подразбиране изключени; остават скрити, докато не ги включите.',

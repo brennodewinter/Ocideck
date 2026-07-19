@@ -9,7 +9,7 @@ import '../../models/slide.dart';
 import '../../platform/platform_features.dart';
 import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
-import '../../state/sec_module_provider.dart';
+import '../../state/info_safety_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';
 import '../../services/classification_enforcement_policy.dart';

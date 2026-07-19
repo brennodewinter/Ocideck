@@ -292,8 +292,6 @@ const _dutchSourceEt = {
   'Uitbreidingen': 'Laiendused',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Valikulised moodulid. Vaikimisi väljas; nad ei lisa põhirakendusele midagi, kuni te need sisse lülitate.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Aruandlusslaidid ja võrdlusandmed infoturbe jaoks: leiud, kontroll-loendid, skoobimaatriksid ja allkirjastamine. Struktureeritud MIAUW järgi ja laialt kasutatav pentestideks, audititeks ja turvauuringuteks. Sisselülitamine laadib võrdlusandmed korra alla; seejärel töötab moodul võrguühenduseta.',
   'Gegevens opschonen': 'Puhasta andmed',
   'Gegevens lokaal beschikbaar': 'Andmed saadaval kohapeal',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
@@ -1560,8 +1558,8 @@ const _dutchSourceEt = {
   'Projectstart / kick-off': 'Projekti algus / kick-off',
   'Voorbespreking communicatie': 'Kommunikatsiooni eelarutelu',
   'Projecttijdlijn': 'Projekti ajajoon',
-  'Informatiebeveiliging: RASCI / TVB': 'Infoturve: RASCI / TVB',
-  'Security-takenplan': 'Turbeülesannete plaan',
+  'Informatieveiligheid: RASCI / TVB': 'Infoturve: RASCI / TVB',
+  'Takenplan informatieveiligheid': 'Turbeülesannete plaan',
   'Certificering voortgang': 'Sertifitseerimise edenemine',
   'Training / workshop': 'Koolitus / töötuba',
   'Rapportage': 'Aruanne',
@@ -1968,7 +1966,7 @@ const _dutchSourceAddEt = <String, String>{
   'Geen presentaties in deze repository.': 'Selles hoidlas pole esitlusi.',
   'Rapportagetaal': 'Aruande keel',
   'Niet vastgelegd': 'Pole märgitud',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Aruandlusslaidid ja võrdlusandmed infoturbe jaoks: leiud, kontroll-loendid, skoobimaatriksid ja allkirjastamine. Struktureeritud MIAUW järgi ja laialt kasutatav pentestideks, audititeks ja turvauuringuteks. Võrdlusandmed on rakenduses endas, seega töötab moodul kohe ja täielikult võrguühenduseta.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Valikulised moodulid. Vaikimisi väljas; need jäävad peidetuks, kuni te need sisse lülitate.',

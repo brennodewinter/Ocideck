@@ -295,8 +295,6 @@ const _dutchSourceHr = {
   'Uitbreidingen': 'Proširenja',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Neobavezni moduli. Prema zadanim postavkama isključeni; ne dodaju ništa osnovnoj aplikaciji dok ih ne omogućite.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Slajdovi izvješća i referentni podaci za informacijsku sigurnost: nalazi, kontrolni popisi, matrice opsega i potpisivanje. Strukturirano prema MIAUW-u i široko primjenjivo za pentestove, revizije i sigurnosna istraživanja. Omogućavanje jednom preuzima referentne podatke; nakon toga modul radi izvan mreže.',
   'Gegevens opschonen': 'Očisti podatke',
   'Gegevens lokaal beschikbaar': 'Podaci dostupni lokalno',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
@@ -1573,8 +1571,8 @@ const _dutchSourceHr = {
   'Projectstart / kick-off': 'Početak projekta / kick-off',
   'Voorbespreking communicatie': 'Pripremni sastanak o komunikaciji',
   'Projecttijdlijn': 'Vremenska crta projekta',
-  'Informatiebeveiliging: RASCI / TVB': 'Informacijska sigurnost: RASCI / TVB',
-  'Security-takenplan': 'Plan sigurnosnih zadataka',
+  'Informatieveiligheid: RASCI / TVB': 'Informacijska sigurnost: RASCI / TVB',
+  'Takenplan informatieveiligheid': 'Plan sigurnosnih zadataka',
   'Certificering voortgang': 'Napredak certifikacije',
   'Training / workshop': 'Trening / radionica',
   'Rapportage': 'Izvještaj',
@@ -1985,7 +1983,7 @@ const _dutchSourceAddHr = <String, String>{
       'Nema prezentacija u ovom repozitoriju.',
   'Rapportagetaal': 'Jezik izvješća',
   'Niet vastgelegd': 'Nije zabilježeno',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Slajdovi izvješća i referentni podaci za informacijsku sigurnost: nalazi, kontrolni popisi, matrice opsega i potpisivanje. Strukturirano prema MIAUW-u i široko primjenjivo za pentestove, revizije i sigurnosna istraživanja. Referentni podaci nalaze se u samoj aplikaciji, pa modul radi odmah i potpuno izvan mreže.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Neobavezni moduli. Prema zadanim postavkama isključeni; ostaju skriveni dok ih ne omogućite.',

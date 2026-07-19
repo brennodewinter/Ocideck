@@ -293,8 +293,6 @@ const _dutchSourceEn = {
   'Uitbreidingen': 'Extensions',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Optional modules. Off by default; they add nothing to the base app until you enable them.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Reporting slides and reference data for information security: findings, checklists, scope matrices and sign-off. Structured per MIAUW and broadly usable for pentests, audits and security research. Enabling fetches the reference data once; the module then works offline.',
   'Gegevens opschonen': 'Clean up data',
   'Gegevens lokaal beschikbaar': 'Data available locally',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
@@ -330,7 +328,7 @@ const _dutchSourceEn = {
   'Zoek een slidetype': 'Search for a slide type',
   'Alfabetisch sorteren': 'Sort alphabetically',
   'Algemeen': 'General',
-  'Informatieveiligheid': 'Information security',
+  'Informatieveiligheid': 'Information safety',
   'Alle': 'All',
   'Pentestrapportage (ontwerp)': 'Pentest report (design)',
   'AI-assistentie (ontwerp)': 'AI assistance (design)',
@@ -1117,8 +1115,8 @@ const _dutchSourceAddEn = {
       'No presentations in this repository.',
   'Rapportagetaal': 'Report language',
   'Niet vastgelegd': 'Not recorded',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
-      'Reporting slides and reference data for information security: findings, checklists, scope matrices and sign-off. Structured per MIAUW and broadly usable for pentests, audits and security research. The reference data sits inside the app itself, so the module works right away and fully offline.',
+  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+      'Reporting slides and reference data for information safety: findings, checklists, scope matrices and sign-off. Structured per MIAUW and broadly usable for pentests, audits and safety research. The reference data sits inside the app itself, so the module works right away and fully offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Optional modules. Off by default; they stay hidden until you enable them.',
   'Procesverbetering (ontwerp)': 'Process improvement (design)',
@@ -1153,7 +1151,7 @@ const _dutchSourceAddEn = {
   'postcode': 'postal code',
   'persoonsnaam': 'person\'s name',
   'Deze presentatie bevat onderdelen van de Informatieveiligheidsmodule. Zet de module aan om ze te bewerken.':
-      'This presentation contains parts of the Information security module. Turn the module on to edit them.',
+      'This presentation contains parts of the Information safety module. Turn the module on to edit them.',
   'Inschakelen': 'Enable',
   'Bevestigen': 'Confirm',
   'Onderbouwing van de bevestiging': 'Basis for the confirmation',
@@ -2156,9 +2154,9 @@ const _dutchSourceAddEn = {
   'Projectstart / kick-off': 'Project start / kick-off',
   'Voorbespreking communicatie': 'Communications pre-brief',
   'Projecttijdlijn': 'Project timeline',
-  'Informatiebeveiliging: RASCI / TVB':
-      'Information security: RASCI / responsibilities',
-  'Security-takenplan': 'Security task plan',
+  'Informatieveiligheid: RASCI / TVB':
+      'Information safety: RASCI / responsibilities',
+  'Takenplan informatieveiligheid': 'Information safety task plan',
   'Certificering voortgang': 'Certification progress',
   'Training / workshop': 'Training / workshop',
   'Rapportage': 'Report',

@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/state/deck_provider.dart';
-import 'package:ocideck/state/sec_module_provider.dart';
+import 'package:ocideck/state/info_safety_provider.dart';
 import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/widgets/dialogs/add_slide_dialog.dart';
 import 'package:ocideck/widgets/panels/editor_panel.dart';
@@ -25,7 +25,7 @@ void main() {
     SlideType initialType = SlideType.title,
   }) async {
     final container = ProviderContainer(
-      overrides: [secModuleRevealProvider.overrideWithValue(reveal)],
+      overrides: [infoSafetyRevealProvider.overrideWithValue(reveal)],
     );
     addTearDown(container.dispose);
     final notifier = container.read(deckProvider.notifier);

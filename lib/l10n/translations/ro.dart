@@ -296,8 +296,6 @@ const _dutchSourceRo = {
   'Uitbreidingen': 'Extensii',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Module opționale. Dezactivate implicit; nu adaugă nimic aplicației de bază până nu le activați.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Slide-uri de raportare și date de referință pentru securitatea informațiilor: constatări, liste de verificare, matrice de domeniu și semnare. Structurat conform MIAUW și utilizabil pe scară largă pentru pentesturi, audituri și cercetare de securitate. Activarea descarcă o dată datele de referință; apoi modulul funcționează offline.',
   'Gegevens opschonen': 'Curăță datele',
   'Gegevens lokaal beschikbaar': 'Date disponibile local',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
@@ -333,7 +331,7 @@ const _dutchSourceRo = {
   'Zoek een slidetype': 'Căutați un tip de slide',
   'Alfabetisch sorteren': 'Sortează alfabetic',
   'Algemeen': 'General',
-  'Informatieveiligheid': 'Securitatea informației',
+  'Informatieveiligheid': 'Siguranța informației',
   'Alle': 'Toate',
   'Pentestrapportage (ontwerp)': 'Raport de pentest (proiectare)',
   'AI-assistentie (ontwerp)': 'Asistență AI (proiectare)',
@@ -1578,9 +1576,8 @@ const _dutchSourceRo = {
   'Projectstart / kick-off': 'Start de proiect / kick-off',
   'Voorbespreking communicatie': 'Discuție preliminară de comunicare',
   'Projecttijdlijn': 'Cronologia proiectului',
-  'Informatiebeveiliging: RASCI / TVB':
-      'Securitatea informațiilor: RASCI / TVB',
-  'Security-takenplan': 'Plan de sarcini de securitate',
+  'Informatieveiligheid: RASCI / TVB': 'Securitatea informațiilor: RASCI / TVB',
+  'Takenplan informatieveiligheid': 'Plan de sarcini de securitate',
   'Certificering voortgang': 'Progresul certificării',
   'Training / workshop': 'Instruire / workshop',
   'Rapportage': 'Raportare',
@@ -2000,7 +1997,7 @@ const _dutchSourceAddRo = <String, String>{
   'Geen presentaties in deze repository.': 'Nicio prezentare în acest depozit.',
   'Rapportagetaal': 'Limba raportului',
   'Niet vastgelegd': 'Neînregistrat',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Slide-uri de raportare și date de referință pentru securitatea informațiilor: constatări, liste de verificare, matrice de domeniu și semnare. Structurat conform MIAUW și utilizabil pe scară largă pentru pentesturi, audituri și cercetare de securitate. Datele de referință se află în aplicația însăși, așa că modulul funcționează imediat și complet offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Module opționale. Dezactivate implicit; rămân ascunse până nu le activați.',

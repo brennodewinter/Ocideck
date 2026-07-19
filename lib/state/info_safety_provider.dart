@@ -7,11 +7,11 @@
 // Informatieveiligheid picker tab, MIAUW templates and the
 // finding/checklist/scope-matrix/sign-off slide types — at once, offline, and
 // without needing the outbound-traffic consent. Consumers gate on
-// [secModuleRevealProvider].
+// [infoSafetyRevealProvider].
 //
 // This is NOT a reusable module framework, despite the enable → reveal shape:
 // the preference key and the reveal check are hardcoded to this one module, and
-// [secModuleRevealProvider] is a single global that its consumers name directly.
+// [infoSafetyRevealProvider] is a single global that its consumers name directly.
 // A second module needs a real registry (module id, parameterised keys,
 // per-module reveal) — build that when one actually arrives, rather than
 // budgeting to "reuse" this.
@@ -27,40 +27,41 @@ const _enabledKey = 'secModuleEnabled';
 /// load so an upgraded install does not keep an orphan key around forever.
 const _legacyVersionKey = 'secModulePackVersion';
 
-final secModuleProvider = NotifierProvider<SecModuleNotifier, SecModuleState>(
-  SecModuleNotifier.new,
-);
+final infoSafetyProvider =
+    NotifierProvider<InfoSafetyNotifier, InfoSafetyState>(
+      InfoSafetyNotifier.new,
+    );
 
 /// The gating provider the module's features watch.
-final secModuleRevealProvider = Provider<bool>((ref) {
-  return ref.watch(secModuleProvider).revealed;
+final infoSafetyRevealProvider = Provider<bool>((ref) {
+  return ref.watch(infoSafetyProvider).revealed;
 });
 
-class SecModuleState {
+class InfoSafetyState {
   final bool enabled;
 
   /// Prefs still loading on first build.
   final bool loading;
 
-  const SecModuleState({this.enabled = false, this.loading = true});
+  const InfoSafetyState({this.enabled = false, this.loading = true});
 
   /// Reveal = the module is on. There is no second condition: the data it needs
   /// ships with the app, so there is no fetch to wait for and no cache to miss.
   bool get revealed => enabled;
 
-  SecModuleState copyWith({bool? enabled, bool? loading}) {
-    return SecModuleState(
+  InfoSafetyState copyWith({bool? enabled, bool? loading}) {
+    return InfoSafetyState(
       enabled: enabled ?? this.enabled,
       loading: loading ?? this.loading,
     );
   }
 }
 
-class SecModuleNotifier extends Notifier<SecModuleState> {
+class InfoSafetyNotifier extends Notifier<InfoSafetyState> {
   @override
-  SecModuleState build() {
+  InfoSafetyState build() {
     _initialize();
-    return const SecModuleState();
+    return const InfoSafetyState();
   }
 
   Future<void> _initialize() async {
@@ -74,7 +75,7 @@ class SecModuleNotifier extends Notifier<SecModuleState> {
         await prefs.remove(_legacyVersionKey);
       }
     } catch (e) {
-      debugPrint('SecModuleNotifier: kon moduletoestand niet laden: $e');
+      debugPrint('InfoSafetyNotifier: kon moduletoestand niet laden: $e');
       state = state.copyWith(loading: false);
     }
   }
@@ -94,7 +95,7 @@ class SecModuleNotifier extends Notifier<SecModuleState> {
       await prefs.setBool(_enabledKey, value);
     } catch (e, s) {
       // State already updated for this session; only persistence is lost.
-      logError('SecModuleNotifier: prefs-schrijf mislukt', e, s);
+      logError('InfoSafetyNotifier: prefs-schrijf mislukt', e, s);
     }
   }
 }

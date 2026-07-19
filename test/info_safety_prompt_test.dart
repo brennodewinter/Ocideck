@@ -9,7 +9,7 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/markdown_service.dart';
-import 'package:ocideck/state/sec_module_provider.dart';
+import 'package:ocideck/state/info_safety_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/app_shell.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -78,7 +78,7 @@ void main() {
     );
     // Sanity: the module is genuinely off (not merely still loading), so a
     // fired prompt is a real "module off" prompt, not a loading artefact.
-    final sec = container.read(secModuleProvider);
+    final sec = container.read(infoSafetyProvider);
     expect(sec.loading, isFalse);
     expect(sec.enabled, isFalse);
     return (container, container.read(tabsProvider.notifier));
@@ -118,7 +118,7 @@ void main() {
     await tester.tap(find.text('Inschakelen'));
     await tester.pumpAndSettle();
 
-    expect(container.read(secModuleProvider).enabled, isTrue);
+    expect(container.read(infoSafetyProvider).enabled, isTrue);
   });
 
   testWidgets('a security deck opened while the module is on shows no prompt', (
@@ -126,9 +126,9 @@ void main() {
   ) async {
     final (container, tabs) = await pumpShell(tester);
     // Turn the module on before opening — the discovery is already done.
-    await container.read(secModuleProvider.notifier).enable();
+    await container.read(infoSafetyProvider.notifier).enable();
     await tester.pumpAndSettle();
-    expect(container.read(secModuleProvider).enabled, isTrue);
+    expect(container.read(infoSafetyProvider).enabled, isTrue);
 
     final result = await tabs.openDeckFromBytes(
       findingDeckBytes(),

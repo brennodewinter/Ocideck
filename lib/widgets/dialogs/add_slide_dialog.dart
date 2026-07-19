@@ -14,7 +14,7 @@ class _PickerTab {
 class AddSlideDialog extends StatefulWidget {
   /// Whether the Informatieveiligheid module is revealed (enabled + a matching
   /// pack provisioned). Gates the security slide types and their picker tab, so
-  /// they stay hidden until the module is on (see `secModuleRevealProvider`,
+  /// they stay hidden until the module is on (see `infoSafetyRevealProvider`,
   /// PENTEST_MIAUW §6). Off by default; the caller passes the provider's value.
   final bool revealSecurityModule;
 

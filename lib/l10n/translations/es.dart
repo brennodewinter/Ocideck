@@ -300,8 +300,6 @@ const _dutchSourceEs = {
   'Uitbreidingen': 'Extensiones',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Módulos opcionales. Desactivados por defecto; no añaden nada a la aplicación base hasta que los activa.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Diapositivas de informe y datos de referencia para la seguridad de la información: hallazgos, listas de verificación, matrices de alcance y firma. Estructurado según MIAUW y ampliamente utilizable para pentests, auditorías e investigación de seguridad. Al activarlo se descargan los datos de referencia una vez; luego el módulo funciona sin conexión.',
   'Gegevens opschonen': 'Limpiar datos',
   'Gegevens lokaal beschikbaar': 'Datos disponibles localmente',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
@@ -934,7 +932,7 @@ const _dutchSourceAddEs = {
       'No hay presentaciones en este repositorio.',
   'Rapportagetaal': 'Idioma del informe',
   'Niet vastgelegd': 'No registrado',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Diapositivas de informe y datos de referencia para la seguridad de la información: hallazgos, listas de verificación, matrices de alcance y firma. Estructurado según MIAUW y ampliamente utilizable para pentests, auditorías e investigación de seguridad. Los datos de referencia están en la propia aplicación, por lo que el módulo funciona de inmediato y totalmente sin conexión.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Módulos opcionales. Desactivados por defecto; permanecen ocultos hasta que los activa.',
@@ -2162,9 +2160,9 @@ const _dutchSourceAddEs = {
   'Projectstart / kick-off': 'Inicio de proyecto / kick-off',
   'Voorbespreking communicatie': 'Preparación de la comunicación',
   'Projecttijdlijn': 'Cronograma del proyecto',
-  'Informatiebeveiliging: RASCI / TVB':
+  'Informatieveiligheid: RASCI / TVB':
       'Seguridad de la información: RASCI / responsabilidades',
-  'Security-takenplan': 'Plan de tareas de seguridad',
+  'Takenplan informatieveiligheid': 'Plan de tareas de seguridad',
   'Certificering voortgang': 'Avance de la certificación',
   'Training / workshop': 'Formación / taller',
   'Rapportage': 'Informe',

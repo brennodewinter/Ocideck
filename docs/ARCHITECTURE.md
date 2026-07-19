@@ -328,7 +328,7 @@ documented in the diff) and re-test the dual-screen presenter.
 ## Information-security module (optional, off by default)
 
 The MIAUW pentest-reporting module (design: `docs/design/PENTEST_MIAUW.md`) is
-gated behind `state/sec_module_provider.dart`: `secModuleRevealProvider` stays
+gated behind `state/info_safety_provider.dart`: `infoSafetyRevealProvider` stays
 false until the user enables it in Settings, so its UI (a dedicated slide-picker
 tab, command-palette actions, the report template) is hidden otherwise. It rides
 the existing rails rather than adding a parallel stack:

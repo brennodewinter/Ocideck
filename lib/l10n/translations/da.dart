@@ -294,8 +294,6 @@ const _dutchSourceDa = {
   'Uitbreidingen': 'Udvidelser',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'Valgfrie moduler. Slået fra som standard; de tilføjer intet til basisappen, før du aktiverer dem.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'Rapporteringsslides og referencedata til informationssikkerhed: fund, tjeklister, scope-matricer og godkendelse. Struktureret efter MIAUW og bredt anvendelig til pentests, audits og sikkerhedsundersøgelser. Aktivering henter referencedataene én gang; derefter arbejder modulet offline.',
   'Gegevens opschonen': 'Ryd data',
   'Gegevens lokaal beschikbaar': 'Data tilgængelige lokalt',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
@@ -1565,8 +1563,8 @@ const _dutchSourceDa = {
   'Projectstart / kick-off': 'Projektstart / kick-off',
   'Voorbespreking communicatie': 'Formøde om kommunikation',
   'Projecttijdlijn': 'Projekttidslinje',
-  'Informatiebeveiliging: RASCI / TVB': 'Informationssikkerhed: RASCI / TVB',
-  'Security-takenplan': 'Plan for sikkerhedsopgaver',
+  'Informatieveiligheid: RASCI / TVB': 'Informationssikkerhed: RASCI / TVB',
+  'Takenplan informatieveiligheid': 'Plan for sikkerhedsopgaver',
   'Certificering voortgang': 'Certificeringsfremdrift',
   'Training / workshop': 'Træning / workshop',
   'Rapportage': 'Rapportering',
@@ -1975,7 +1973,7 @@ const _dutchSourceAddDa = <String, String>{
       'Ingen præsentationer i dette repository.',
   'Rapportagetaal': 'Rapportsprog',
   'Niet vastgelegd': 'Ikke angivet',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'Rapporteringsslides og referencedata til informationssikkerhed: fund, tjeklister, scope-matricer og godkendelse. Struktureret efter MIAUW og bredt anvendelig til pentests, audits og sikkerhedsundersøgelser. Referencedataene ligger i selve appen, så modulet virker med det samme og helt offline.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'Valgfrie moduler. Slået fra som standard; de forbliver skjulte, indtil du aktiverer dem.',

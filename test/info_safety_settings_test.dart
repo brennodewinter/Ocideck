@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
-import 'package:ocideck/state/sec_module_provider.dart';
+import 'package:ocideck/state/info_safety_provider.dart';
 import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -46,7 +46,7 @@ Future<void> _showDialog(WidgetTester tester, {required bool enabled}) async {
       tester.element(find.text('open')),
       listen: false,
     );
-    await container.read(secModuleProvider.notifier).enable();
+    await container.read(infoSafetyProvider.notifier).enable();
     await tester.pumpAndSettle();
   }
 }

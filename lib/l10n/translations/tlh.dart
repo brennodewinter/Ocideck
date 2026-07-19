@@ -287,8 +287,6 @@ const _dutchSourceTlh = {
   'Uitbreidingen': 'chelwI\'mey',
   'Optionele modules. Standaard uit; ze voegen niets toe aan de basis-app tot u ze inschakelt.':
       'ngoQmey DIch Hutlh. motlh chImmoH; DamaghmoHpa\' app basis vaS chelbe\'.',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. Inschakelen haalt de referentiegegevens eenmalig op; daarna werkt de module offline.':
-      'ja\'ghach nav De\' Qan je Hub De\' vaD: Sampu\'bogh, tetlh, ghantoH Degh, ghItlh je. MIAUW tlha\' \'ej pentest, nojwI\', Hub QeD lo\'laH. DamaghmoHchugh De\' Qan wa\'logh Suq; ngoQ offline vumtaH.',
   'Gegevens opschonen': 'De\' Say\'moH',
   'Gegevens lokaal beschikbaar': 'De\' pa\' naDev',
   'Geef eerst toestemming voor uitgaand verkeer bij Licentie en Privacy.':
@@ -1546,8 +1544,8 @@ const _dutchSourceTlh = {
   'Projectstart / kick-off': 'Qu\' tagh',
   'Voorbespreking communicatie': 'QIn qepHom',
   'Projecttijdlijn': 'Qu\' poH He',
-  'Informatiebeveiliging: RASCI / TVB': 'De\' Hung: RASCI / TVB',
-  'Security-takenplan': 'Hung Qu\'mey nab',
+  'Informatieveiligheid: RASCI / TVB': 'De\' Hung: RASCI / TVB',
+  'Takenplan informatieveiligheid': 'Hung Qu\'mey nab',
   'Certificering voortgang': 'chaw\' Duv',
   'Training / workshop': 'qeq / qepHom',
   'Rapportage': 'ja\'ghach',
@@ -1949,7 +1947,7 @@ const _dutchSourceAddTlh = <String, String>{
       'qawHaqvamDaq HaSta\' poQwI\' tu\'lu\'be\'.',
   'Rapportagetaal': 'ja\'ghach Hol',
   'Niet vastgelegd': 'qonlu\'be\'',
-  'Rapportageslides en referentiedata voor informatiebeveiliging: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en beveiligingsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
+  'Rapportageslides en referentiedata voor informatieveiligheid: bevindingen, checklists, scope-matrices en ondertekening. Gestructureerd volgens MIAUW en breed inzetbaar voor pentests, audits en veiligheidsonderzoek. De referentiegegevens zitten in de app zelf, dus de module werkt meteen en volledig offline.':
       'ja\'ghach nav De\' Qan je Hub De\' vaD: Sampu\'bogh, tetlh, ghantoH Degh, ghItlh je. MIAUW tlha\' \'ej pentest, nojwI\', Hub QeD lo\'laH. app qojDaq De\' Qan tu\'lu\', vaj SIbI\' \'ej offline vumtaH ngoQ.',
   'Optionele modules. Standaard uit; ze blijven verborgen tot u ze inschakelt.':
       'ngoQmey DIch Hutlh. motlh chImmoH; DamaghmoHpa\' So\'lu\'taH.',
