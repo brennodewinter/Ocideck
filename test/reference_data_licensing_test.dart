@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ocideck/services/secmodule/sec_reference_inventory.dart';
+import 'package:ocideck/services/info_safety/info_safety_reference_inventory.dart';
 
 /// Every bundled reference dataset must be recorded in `LICENSE_COMPLIANCE.md`
 /// with its terms — that document is what an auditor and the CRA are shown, and

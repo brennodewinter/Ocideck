@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ocideck/services/secmodule/sec_reference_inventory.dart';
+import 'package:ocideck/services/info_safety/info_safety_reference_inventory.dart';
 
 /// "Gegevens lokaal beschikbaar" zei niet wélke, en niet hoeveel. De inventaris
 /// telt wat de app daadwerkelijk bedient — niet wat een pakket bewéért te

@@ -401,7 +401,7 @@ zetten.
 | `restricted` / TLP:AMBER | Bredere kring binnen de organisatie | Persoonsgegevens geredigeerd; de bevindingen zelf blijven leesbaar en verifieerbaar |
 | `public` / TLP:CLEAR | Publieke samenvatting, brede verspreiding | Alles boven het plafond weg; onredigeerbare slides (bewijs-screenshots) vallen wég in plaats van te doen alsof |
 
-Voor een gewoon deck dat niets met de secmodule te maken heeft, blijft dit simpel: twee
+Voor een gewoon deck dat niets met de informatieveiligheidsmodule te maken heeft, blijft dit simpel: twee
 profielen, "volledig" en "geredigeerd", en de auteur merkt niets van de onderliggende ladder.
 
 ### 4.1 De standen per slide

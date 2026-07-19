@@ -14,7 +14,7 @@ extension _MainLayoutMenu on _MainLayoutState {
     // De git-blokken hebben pas betekenis als er een repository is ingesteld.
     // Zonder config kan geen van deze handelingen slagen, dus tonen we ze niet:
     // een item dat altijd op dezelfde snackbar uitkomt is geen menu-item maar
-    // ruis (zelfde lijn als de secmodule: weglaten, niet grijs maken).
+    // ruis (zelfde lijn als de informatieveiligheidsmodule: weglaten, niet grijs maken).
     final hasGitRepo = ref.read(settingsProvider).gitRepo != null;
     final gitOrigin = ref.read(tabsProvider).current?.gitOrigin;
 

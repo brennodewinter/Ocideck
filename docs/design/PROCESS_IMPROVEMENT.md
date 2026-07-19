@@ -564,7 +564,7 @@ claim outruns the implementation.
 
 What **is** genuinely reusable:
 - `SecModuleProvisioner` / `SecPackTransport` / `SecPackStore`
-  (`lib/services/secmodule/`) — cleanly injected, pure Dart, version/hash/mirrors
+  (`lib/services/info_safety/`) — cleanly injected, pure Dart, version/hash/mirrors
   are constructor params. Instantiable for a second pack today.
 - `sec_pack_codec.dart` — fully domain-agnostic.
 - The picker's tab bar is **derived** from categories present
