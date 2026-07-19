@@ -1,0 +1,23 @@
+# Samenvoegregels die git niet zelf kan raden.
+#
+# ── De vertaalbestanden ──────────────────────────────────────────────────────
+#
+# Elke taal heeft één additions-overlay (`_dutchSourceAdd<Lang>`) waar nieuwe
+# strings bovenaan worden ingevoegd door `make add-l10n`. Twee branches die
+# allebei een string toevoegen, voegen dus allebei op dezelfde regel in — en
+# botsen op precies dat anker, in alle eenendertig bestanden tegelijk. Dat is
+# geen inhoudelijk conflict maar een boekhoudkundig conflict: beide toevoegingen
+# horen erin, ze staan alleen toevallig op dezelfde plek.
+#
+# `merge=union` laat git in dat geval beide kanten behouden in plaats van
+# markers achter te laten. Dat scheelt bij elke parallelle branch een handmatige
+# ronde langs dertig bestanden.
+#
+# Wat het níét oplost, en waar je op moet letten: voegen twee branches dezelfde
+# Nederlandse bronstring toe, dan houdt union ze allebei en krijg je een dubbele
+# sleutel. Dat compileert gewoon — Dart klaagt niet over een herhaalde key in een
+# map-literal, hij neemt de laatste. `make l10n-check` heeft daar een aparte
+# guard voor, dus dráái die na een merge die deze bestanden raakte. Dat is de
+# prijs voor het niet met de hand hoeven oplossen van dertig identieke
+# conflicten, en die prijs is de moeite waard zolang de guard bestaat.
+lib/l10n/translations/*.dart merge=union
