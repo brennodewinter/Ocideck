@@ -255,4 +255,51 @@ void main() {
 
     expect(find.text(promptText), findsNothing);
   });
+
+  testWidgets('deleting the last security slide takes the banner away', (
+    tester,
+  ) async {
+    final (container, tabs) = await pumpShell(tester);
+    await tabs.openDeckFromBytes(findingDeckBytes(), 'rapport.md');
+    await tester.pumpAndSettle();
+    expect(find.text(promptText), findsOneWidget);
+
+    // Slide 1 is de enige finding. Weg ermee: de bewering van de balk — "deze
+    // presentatie bevat module-onderdelen" — is daarmee onwaar geworden.
+    final tab = container.read(tabsProvider).current!;
+    tab.deckNotifier.removeSlide(1);
+    await tester.pumpAndSettle();
+
+    expect(
+      tab.deckNotifier.currentState.deck!.hasSecuritySlides,
+      isFalse,
+      reason: 'sanity: the finding really is gone',
+    );
+    expect(find.text(promptText), findsNothing);
+  });
+
+  testWidgets('"Naar de slide" follows the finding when slides move', (
+    tester,
+  ) async {
+    final (container, tabs) = await pumpShell(tester);
+    await tabs.openDeckFromBytes(findingDeckBytes(), 'rapport.md');
+    await tester.pumpAndSettle();
+    final tab = container.read(tabsProvider).current!;
+
+    // Haal de titelslide weg: de finding schuift van index 1 naar 0. Een bij
+    // het openen onthouden index zou nu de verkeerde slide aanwijzen.
+    tab.deckNotifier.removeSlide(0);
+    await tester.pumpAndSettle();
+    expect(tab.deckNotifier.currentState.deck!.firstSecuritySlideIndex, 0);
+    expect(
+      find.text(promptText),
+      findsOneWidget,
+      reason: 'the finding is still there, so the offer still stands',
+    );
+
+    await tester.tap(find.text('Naar de slide'));
+    await tester.pumpAndSettle();
+
+    expect(tab.editorNotifier.state.selectedIndex, 0);
+  });
 }
