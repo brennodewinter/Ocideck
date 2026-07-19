@@ -37,7 +37,7 @@ void main(List<String> args) {
       pendingLaunchFiles.addAll(args.where(looksLikeDeckLaunchArg));
     }
 
-    // Bepaal de wachtkamer voor media vóór de eerste frame: de UI moet
+    // Bepaal de stagingmap voor media vóór de eerste frame: de UI moet
     // synchroon kunnen zien of een afbeelding daar staat (zie AssetStaging).
     await AssetStaging.initialize();
 

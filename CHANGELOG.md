@@ -20,7 +20,7 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   rechttrekken. Beide nemen het bestand nu meteen over. En een deck dat nog niet
   is opgeslagen heeft geen eigen map, dus kopieerde er tot nu toe niets:
   verplaatste je het bronbestand vóór de eerste opslag, dan was de verwijzing
-  stuk. Zulke media gaan nu naar een tijdelijke wachtkamer met dezelfde indeling
+  stuk. Zulke media gaan nu naar een tijdelijke stagingmap met dezelfde indeling
   als een echt project, waarna opslaan ze op hun definitieve plek zet.
 
   Naast het pad in de editor staat een badge die zegt wat er gebeurt als je de

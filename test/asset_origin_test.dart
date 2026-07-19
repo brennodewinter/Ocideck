@@ -47,19 +47,19 @@ void main() {
       expect(classifyAssetPath('/elders/foto.png', null), AssetOrigin.external);
     });
 
-    test('een pad in de wachtkamer is gestaged', () async {
+    test('een pad in de stagingmap is gestaged', () async {
       final src = File(p.join(tmp.path, 'foto.png'))..writeAsStringSync('x');
       final staged = await AssetStaging.stage(src.path, subdir: 'images');
 
       expect(classifyAssetPath(staged!, null), AssetOrigin.staged);
     });
 
-    test('de wachtkamer wint van de externe uitkomst', () async {
+    test('de stagingmap wint van de externe uitkomst', () async {
       final src = File(p.join(tmp.path, 'foto.png'))..writeAsStringSync('x');
       final staged = await AssetStaging.stage(src.path, subdir: 'images');
 
       // Het deck is intussen ergens anders opgeslagen; de nog niet verhuisde
-      // kopie blijft "in de wachtkamer" en wordt niet als extern gemeld.
+      // kopie blijft "in de stagingmap" en wordt niet als extern gemeld.
       expect(classifyAssetPath(staged!, '/deck'), AssetOrigin.staged);
     });
 

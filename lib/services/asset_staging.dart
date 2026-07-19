@@ -9,7 +9,8 @@ import '../utils/asset_destination.dart';
 import '../utils/atomic_file.dart';
 import '../utils/log.dart';
 
-/// De wachtkamer voor media van een deck dat nog geen eigen map op schijf heeft.
+/// De stagingmap: waar media landt van een deck dat nog geen eigen map op
+/// schijf heeft.
 ///
 /// Een niet-opgeslagen deck heeft geen `projectPath`, en dat betekende tot nu
 /// toe: de slide houdt het pad van het bronbestand vast en er wordt niets
@@ -24,7 +25,7 @@ import '../utils/log.dart';
 /// `copyMediaToProject`) hem vanzelf naar zijn definitieve plek — de layout is
 /// immers al dezelfde.
 ///
-/// De wachtkamer leeft onder de tijdelijke map van het OS en wordt niet zelf
+/// De stagingmap leeft onder de tijdelijke map van het OS en wordt niet zelf
 /// opgeruimd; dat volgt de lijn van de geplakte-afbeeldingencache die hieraan
 /// voorafging.
 class AssetStaging {
@@ -56,24 +57,24 @@ class AssetStaging {
   /// De wortelmap, of null zolang die niet bepaald kon worden.
   static String? get rootPath => _rootPath;
 
-  /// True als [path] in de wachtkamer staat: gekopieerd en veilig, maar nog
+  /// True als [path] in de stagingmap staat: gekopieerd en veilig, maar nog
   /// niet bij een opgeslagen deck ondergebracht.
   ///
   /// De toets kijkt naar de wortelmap en niet naar de sessiemap, zodat een deck
   /// dat na een herstart wordt teruggehaald zijn eerder gestagede afbeeldingen
-  /// nog steeds als "in de wachtkamer" herkent in plaats van als extern.
+  /// nog steeds als "in de stagingmap" herkent in plaats van als extern.
   static bool isStagedPath(String path) {
     final root = _rootPath;
     if (root == null || path.isEmpty || !p.isAbsolute(path)) return false;
     return p.isWithin(root, p.normalize(path));
   }
 
-  /// Kopieer [sourcePath] naar `<wachtkamer>/<subdir>/` en geef het absolute pad
+  /// Kopieer [sourcePath] naar `<stagingmap>/<subdir>/` en geef het absolute pad
   /// van de kopie terug.
   ///
-  /// Null bij een onleesbare bron of als er geen wachtkamer beschikbaar is; de
+  /// Null bij een onleesbare bron of als er geen stagingmap beschikbaar is; de
   /// aanroeper valt dan terug op het bronpad, wat het gedrag is van vóór deze
-  /// wachtkamer.
+  /// stagingmap.
   static Future<String?> stage(
     String sourcePath, {
     required String subdir,
@@ -98,7 +99,7 @@ class AssetStaging {
     }
   }
 
-  /// Schrijf [bytes] als [filename] in `<wachtkamer>/<subdir>/`. Voor materiaal
+  /// Schrijf [bytes] als [filename] in `<stagingmap>/<subdir>/`. Voor materiaal
   /// dat geen bronbestand heeft — een geplakte afbeelding bestaat alleen op het
   /// klembord.
   static Future<String?> stageBytes(
@@ -140,9 +141,9 @@ class AssetStaging {
     return dir;
   }
 
-  /// Zet de wachtkamer op een map naar keuze en vergeet de huidige sessie.
-  /// Tests hebben geen path_provider op de VM, en willen bovendien per test een
-  /// schone map.
+  /// Wijs de stagingmap elders aan en vergeet de huidige sessie. Tests hebben
+  /// geen path_provider op de VM, en willen bovendien per test schoon
+  /// beginnen.
   @visibleForTesting
   static void overrideRootForTest(String? root) {
     _rootPath = root;

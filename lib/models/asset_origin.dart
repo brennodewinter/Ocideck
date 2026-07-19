@@ -17,7 +17,7 @@ enum AssetOrigin {
   /// In de presentatiemap: verhuist mee, niets aan de hand.
   inDeck,
 
-  /// Gekopieerd naar de wachtkamer omdat het deck nog niet is opgeslagen. De
+  /// Gekopieerd naar de stagingmap omdat het deck nog niet is opgeslagen. De
   /// bytes zijn veilig; hun definitieve plek krijgen ze bij de eerste opslag.
   staged,
 

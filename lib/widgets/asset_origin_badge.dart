@@ -56,9 +56,9 @@ class AssetOriginBadge extends StatelessWidget {
     );
   }
 
-  /// Icoon en kleur per herkomst. De wachtkamer is blauw: er is niets mis, het
-  /// is alleen nog niet af. De rest is amber — daar moet de gebruiker iets
-  /// voor doen wil de presentatie elders werken.
+  /// Icoon en kleur per herkomst. Wat in de stagingmap staat is blauw: er is
+  /// niets mis, het is alleen nog niet af. De rest is amber — daar moet de
+  /// gebruiker iets voor doen wil de presentatie elders werken.
   (IconData, Color) _appearance(AssetOrigin origin) => switch (origin) {
     AssetOrigin.staged => (Icons.schedule_outlined, AppTheme.blue500),
     AssetOrigin.external => (Icons.link_off, AppTheme.amber600),
