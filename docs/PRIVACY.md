@@ -58,6 +58,19 @@ found*.
 This is the most expensive check OciDeck runs, so it has its own switch under
 *Settings → Security*, separate from the main privacy switch.
 
+**It does not run in the browser.** The detector is a native library reached over
+FFI, and that does not exist on the web platform, so the web build checks text
+only. This is a difference you have to know about rather than one you can notice:
+the same deck that warns a desktop user about a face on slide 4 raises no image
+warning at all in a browser.
+
+OciDeck does not paper over it. The check reports that it is unsupported rather
+than returning zero faces, and the panel listing which checks ran omits the image
+check instead of showing it as passed — "we found nothing" and "nobody looked"
+must never read the same. But the consequence is real: if your material contains
+photographs of people, do that check on a desktop build. See
+[HOSTING.md](HOSTING.md) §5 for the full list of what the web build leaves out.
+
 ## What leaves your device — and only when you ask
 
 OciDeck makes network requests only for actions you initiate. Each is gated
