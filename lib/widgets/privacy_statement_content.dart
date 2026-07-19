@@ -95,45 +95,7 @@ class PrivacyStatementContent extends StatelessWidget {
           Icons.cloud_upload_outlined,
           l10n.d('Wat je apparaat verlaat'),
         ),
-        _card(
-          theme,
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                l10n.d(
-                  'OciDeck verzamelt geen statistieken en stuurt uit zichzelf niets naar buiten. Standaard blijft alles op dit apparaat. Gegevens verlaten dit apparaat alleen als jij dat kiest:\n\n•  Nextcloud/WebDAV: verbind je met een server, dan worden je inlognaam en wachtwoord bewaard (het wachtwoord veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die server verstuurd.\n•  Openen via URL: OciDeck haalt het bestand op van het adres dat je invoert.\n•  Online media (staat standaard uit): indien ingeschakeld laadt OciDeck afbeeldingen en video\'s van de adressen in je dia\'s.\n•  Externe links (zoals de online licentie) openen in je browser.',
-                ),
-                style: _bodyStyle,
-              ),
-              // S3 en git staan hier als eigen regel, niet in de opsomming
-              // hierboven. Die opsomming is één string in dertig talen; elke
-              // opslagsoort erbij zou hem opnieuw de deur uit sturen — en
-              // precies daarom is git er jaren buiten gebleven. Eén bullet per
-              // backend maakt de volgende additief. Dát hij er moet zijn,
-              // bewaakt privacy_promise_test tegen StorageConnection.
-              Text(
-                l10n.d(
-                  '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.',
-                ),
-                style: _bodyStyle,
-              ),
-              Text(
-                l10n.d(
-                  '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.',
-                ),
-                style: _bodyStyle,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                l10n.d(
-                  'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Wat je hebt geredigeerd, gaat er eerst uit. Een lokaal AI-model op dit apparaat verstuurt niets.',
-                ),
-                style: _bodyStyle,
-              ),
-            ],
-          ),
-        ),
+        _card(theme, _egressCard(l10n)),
         const SizedBox(height: 16),
 
         // ── 4. The privacy check ─────────────────────────────────────────────
@@ -225,6 +187,45 @@ class PrivacyStatementContent extends StatelessWidget {
       borderRadius: BorderRadius.circular(8),
     ),
     child: child,
+  );
+
+  /// Wat het apparaat verlaat, en waardoor.
+  ///
+  /// De opslagsoorten staan hier als losse regels naast de opsomming, niet
+  /// erin. Die opsomming is één string in dertig talen; er een backend bij
+  /// zetten betekent hem dertig keer opnieuw laten vertalen, en precies die
+  /// drempel is waarom S3 er nooit in kwam en git er jaren buiten bleef. Eén
+  /// korte regel per opslagsoort maakt de volgende additief. Dát er een regel
+  /// moet zijn, bewaakt `privacy_promise_test` tegen `StorageConnectionKind`.
+  Widget _egressCard(AppLocalizations l10n) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        l10n.d(
+          'OciDeck verzamelt geen statistieken en stuurt uit zichzelf niets naar buiten. Standaard blijft alles op dit apparaat. Gegevens verlaten dit apparaat alleen als jij dat kiest:\n\n•  Nextcloud/WebDAV: verbind je met een server, dan worden je inlognaam en wachtwoord bewaard (het wachtwoord veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die server verstuurd.\n•  Openen via URL: OciDeck haalt het bestand op van het adres dat je invoert.\n•  Online media (staat standaard uit): indien ingeschakeld laadt OciDeck afbeeldingen en video\'s van de adressen in je dia\'s.\n•  Externe links (zoals de online licentie) openen in je browser.',
+        ),
+        style: _bodyStyle,
+      ),
+      Text(
+        l10n.d(
+          '•  S3-opslag: verbind je met een bucket, dan worden het endpoint, de bucketnaam en je toegangssleutel bewaard (de geheime sleutel veilig in de sleutelbos van je systeem) en worden de presentaties die je opent of opslaat naar die opslagdienst verstuurd.',
+        ),
+        style: _bodyStyle,
+      ),
+      Text(
+        l10n.d(
+          '•  Git-opslag: verbind je met een repository, dan wordt je toegangstoken bewaard (veilig in de sleutelbos van je systeem) en worden de presentaties die je opslaat als commits naar die server verstuurd. Een werkkopie van de repository blijft onversleuteld op dit apparaat staan.',
+        ),
+        style: _bodyStyle,
+      ),
+      const SizedBox(height: 8),
+      Text(
+        l10n.d(
+          'AI-assistentie (staat standaard uit): kies je een zelf-gehoste of cloud-backend, dan worden de teksten of afbeeldingen die je laat verwerken naar dat adres gestuurd. Wat je hebt geredigeerd, gaat er eerst uit. Een lokaal AI-model op dit apparaat verstuurt niets.',
+        ),
+        style: _bodyStyle,
+      ),
+    ],
   );
 
   Widget _heading(ThemeData theme, IconData icon, String text) => Padding(

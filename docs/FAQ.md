@@ -226,6 +226,27 @@ the most common one, but any WebDAV server works:
 4. Save back with "Save to WebDAV"
 5. Supports both flat format (.md + assets) or package formats
 
+### How does S3 storage work?
+
+S3 lets you keep decks in a bucket — AWS S3, or any S3-compatible service such
+as MinIO or a European provider:
+
+1. Add an S3 connection in Settings → Storage
+2. Fill in the endpoint, bucket, region, access key ID and secret access key.
+   The endpoint is a free text field rather than a list of AWS regions, because
+   self-hosted and non-AWS endpoints are the interesting case
+3. Pick the addressing style: bucket in the host name (AWS) or in the path (most
+   self-hosted endpoints)
+4. Open and save through "Open from S3" and "Save to S3"
+
+Your secret access key goes to the OS keychain; the endpoint, bucket and access
+key ID are ordinary settings. A MinIO box on your own LAN needs the *trusted
+internal server* tick, since private addresses are blocked by default.
+
+One difference is worth knowing: S3 is object storage, not a filesystem, so it
+has no real folders. A prefix behaves like one, and listing uses a delimiter so
+prefixes show up as if they were folders.
+
 ## Future Features and Roadmap
 
 ### What's planned for future development?
