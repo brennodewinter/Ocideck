@@ -739,6 +739,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Medicare-nummer — een zorggegeven': 'Medicare-nûmer — in soarchgegeven',
+  'bedrijfsnummer': 'bedriuwsnûmer',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
       'soarchfersekeringsnûmer (RAMQ) — in soarchgegeven',
   'zorgverzekeringsnummer (OHIP) — een zorggegeven':

@@ -1811,6 +1811,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Medicare-nummer — een zorggegeven': 'número Medicare — dado de saúde',
+  'bedrijfsnummer': 'número de sociedade',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
       'número de seguro de saúde (RAMQ) — dado de saúde',
   'zorgverzekeringsnummer (OHIP) — een zorggegeven':

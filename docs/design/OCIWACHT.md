@@ -47,6 +47,8 @@ accepteren, waarschuwen met een shield-badge, of redigeren op scherm en in expor
 | §15.7 fase 8b `ca.sin`, `ca.ramq`, `ca.ohip`, `ca.bn` | **geleverd** |
 | §15.7 fase 8c `us.npi`, `us.medicare_mbi`, `us.dea` | **geleverd** |
 | §15.6 `us` en `ca` standaard aan | **geleverd** |
+| §15.7 fase 8d AU/IN/BR/ZA + Curaçao en Aruba | **geleverd** |
+| §15.6 alle wereldpakketten standaard aan | **geleverd** |
 | §15.8 Labeldekkingstest over de regeltabellen | **geleverd** |
 
 De genomen beslissingen staan in §11; die zijn niet meer open.
@@ -2163,7 +2165,7 @@ dat is akkoord, want `us` staat al in `postcodeNeedsContext` en de Canadese
 | **8a** | `privacy_checksums_world.dart` naast de bestaande `_eu`-variant (zelfde splitsing: gedeelde primitieven blijven in de basis), plus `us.ssn`, `us.ssn_last4`, `us.itin`, `us.ein`, `fin.us_routing`. Plus de labeldekkingstest uit §15.8 |
 | **8b** | Canada: `ca.sin`, `ca.ramq`, `ca.ohip`, `ca.bn` |
 | **8c** | Zorg en art. 9: ~~`us.npi`, `us.medicare_mbi`, `us.dea`~~ (geleverd), nog open: de OMB/EEO-1-uitbreiding van het etniciteitslexicon en het verplaatsen van `us`/`ca` naar `defaultPrivacyRegions` |
-| **8d** | Later: AU/IN/BR/ZA en de Cariben. Voor een Nederlandse organisatie horen `cw.sedula` en `aw.persoonsnummer` daarbij vóór Brazilië |
+| **8d** | **Geleverd.** `au.tfn`/`au.medicare`/`au.abn`, `in.aadhaar`/`in.pan`, `za.id`, `cw.sedula`/`aw.persoonsnummer`, `br.cpf`/`br.cnpj`. Alle regio's staan sindsdien standaard aan |
 
 ### 15.8 De labeldekkingstest
 

@@ -65,13 +65,17 @@ void main() {
       expect(defaultPrivacyRegions, contains('ca'));
     });
 
-    test('de landen zonder regels staan nog uit', () {
-      // Zodra 8d er is hoort dit met de hand herzien te worden, niet
-      // automatisch: cw en aw hebben geen gedocumenteerde checksum.
-      for (final code in ['au', 'in', 'br', 'za', 'cw', 'aw']) {
-        expect(defaultPrivacyRegions, isNot(contains(code)), reason: code);
-        expect(worldPrivacyRegions, contains(code), reason: code);
+    test('sinds 8d draait de hele wereld standaard mee', () {
+      // Per land met de hand getoetst: draagt élke regel een checksum of een
+      // contextpoort? Bij cw en aw alleen het tweede, en dat is genoeg — zonder
+      // het woord ernaast zwijgen ze volledig.
+      for (final code in ['us', 'ca', 'au', 'in', 'br', 'za', 'cw', 'aw']) {
+        expect(defaultPrivacyRegions, contains(code), reason: code);
       }
+      // De twee verzamelingen dekken elkaar nu, en dat hoort zo te blijven
+      // zolang elk land regels heeft. Komt er een land bij zónder regels, dan
+      // faalt deze test en is dat de plek om de afweging opnieuw te maken.
+      expect(allPrivacyRegions, equals(defaultPrivacyRegions));
     });
 
     test('een uitgezet pakket meldt zijn nummers niet meer', () {

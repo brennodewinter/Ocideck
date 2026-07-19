@@ -1772,6 +1772,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Medicare-nummer — een zorggegeven': 'Medicare number — terviseandmed',
+  'bedrijfsnummer': 'äriühingu number',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
       'ravikindlustuse number (RAMQ) — terviseandmed',
   'zorgverzekeringsnummer (OHIP) — een zorggegeven':

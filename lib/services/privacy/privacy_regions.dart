@@ -69,29 +69,47 @@ const Set<String> _europeanNonEu = {'no', 'is', 'li', 'ch', 'uk'};
 /// Dat de Amerikaanse nummers géén checksum hebben pleit hier vóór en niet
 /// tegen: juist omdat ze alleen op een contextpoort steunen, vuren ze zelden
 /// spontaan. `us.ssn` zonder het woord "SSN" ernaast doet niets.
-const Set<String> _defaultNonEuropean = {'us', 'ca'};
+/// De niet-Europese landpakketten (§15). Sinds fase 8d compleet.
+///
+/// Deze staan alle acht standaard aan, en de toets daarvoor is per land met de
+/// hand gedaan in plaats van collectief: draagt élke regel van dat land óf een
+/// checksum óf een contextpoort? Bij `cw` en `aw` is dat alleen het tweede —
+/// voor de sedula en het Arubaanse persoonsnummer bestaat geen gedocumenteerde
+/// checksum — maar een contextpoort is genoeg, want zonder het woord ernaast
+/// zwijgen ze volledig.
+const Set<String> worldPrivacyRegions = {
+  'us',
+  'ca',
+  'au',
+  'in',
+  'br',
+  'za',
+  'cw',
+  'aw',
+};
 
-/// Het standaardpakket: heel Europa (OCIWACHT §7, besluit 4), plus de
-/// niet-Europese landen waarvan de regels af zijn (§15.6).
+/// Het standaardpakket: heel Europa (OCIWACHT §7, besluit 4) plus de rest van
+/// de wereld (§15.6).
+///
+/// Dat "plus" is een besluit met een reden die niet technisch is. De techniek
+/// zegt alleen dat het kan: checksums en contextpoorten kosten geen precisie.
+/// Waaróm het moet, zegt de AVG — bescherming mag niet afhangen van de vraag of
+/// de auteur wist dat hij een vinkje moest aanzetten. Wie een deck met
+/// Braziliaanse of Zuid-Afrikaanse persoonsgegevens opent, heeft die controle
+/// het hardst nodig als hij er het minst aan denkt.
 const Set<String> defaultPrivacyRegions = {
   ..._euMemberStates,
   ..._europeanNonEu,
-  ..._defaultNonEuropean,
-};
-
-/// De rest van de wereld waarvoor er regels bestaan of komen (§3-A, fase 8d).
-///
-/// Deze staan nog uit omdat de regels er nog niet zijn. Zodra ze er zijn hoort
-/// dezelfde afweging als bij [_defaultNonEuropean] gemaakt te worden, en niet
-/// automatisch: `cw.sedula` en `aw.persoonsnummer` hebben geen gedocumenteerde
-/// checksum, dus die leunen volledig op hun contextpoort.
-const Set<String> worldPrivacyRegions = {'au', 'in', 'br', 'za', 'cw', 'aw'};
-
-/// Alle regio's die als pakket aan te zetten zijn.
-const Set<String> allPrivacyRegions = {
-  ...defaultPrivacyRegions,
   ...worldPrivacyRegions,
 };
+
+/// Alle regio's die als pakket aan te zetten zijn.
+///
+/// Sinds 8d dekt het standaardpakket ze allemaal, dus dit is nu hetzelfde. De
+/// naam blijft omdat de betekenis verschilt: [defaultPrivacyRegions] is wat er
+/// áán staat, dit is wat er te kiezen valt. Die twee kunnen weer uiteenlopen
+/// zodra er een land bijkomt waarvan de regels nog niet af zijn.
+const Set<String> allPrivacyRegions = defaultPrivacyRegions;
 
 /// De landcode waaraan [ruleId] hangt, of `null` als de regel altijd draait.
 ///

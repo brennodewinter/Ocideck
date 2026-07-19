@@ -920,6 +920,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Medicare-nummer — een zorggegeven': 'Medicare number — health data',
+  'bedrijfsnummer': 'company number',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
       'health insurance number (RAMQ) — health data',
   'zorgverzekeringsnummer (OHIP) — een zorggegeven':

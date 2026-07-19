@@ -1780,6 +1780,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Medicare-nummer — een zorggegeven': 'Medicare-nummer — en helbredsoplysning',
+  'bedrijfsnummer': 'selskabsnummer',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
       'sygeforsikringsnummer (RAMQ) — en helbredsoplysning',
   'zorgverzekeringsnummer (OHIP) — een zorggegeven':

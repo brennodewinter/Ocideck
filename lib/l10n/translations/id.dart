@@ -1781,6 +1781,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Medicare-nummer — een zorggegeven': 'nomor Medicare — data kesehatan',
+  'bedrijfsnummer': 'nomor perusahaan',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
       'nomor asuransi kesehatan (RAMQ) — data kesehatan',
   'zorgverzekeringsnummer (OHIP) — een zorggegeven':

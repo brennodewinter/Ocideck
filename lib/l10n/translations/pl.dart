@@ -1793,6 +1793,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Medicare-nummer — een zorggegeven': 'numer Medicare — dane o zdrowiu',
+  'bedrijfsnummer': 'numer spółki',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
       'numer ubezpieczenia zdrowotnego (RAMQ) — dane o zdrowiu',
   'zorgverzekeringsnummer (OHIP) — een zorggegeven':

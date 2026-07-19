@@ -1809,6 +1809,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Medicare-nummer — een zorggegeven': 'αριθμός Medicare — δεδομένο υγείας',
+  'bedrijfsnummer': 'αριθμός εταιρείας',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
       'αριθμός ασφάλισης υγείας (RAMQ) — δεδομένο υγείας',
   'zorgverzekeringsnummer (OHIP) — een zorggegeven':
