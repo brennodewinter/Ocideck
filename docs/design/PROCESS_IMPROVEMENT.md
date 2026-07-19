@@ -579,7 +579,7 @@ What is **hardcoded to one module** and must be generalised first:
 | `AddSlideDialog` (`:19`) | `bool revealInfoSafety` | `Set<ModuleId> revealed` |
 | `SlideCategory` (`slide.dart:49`) | closed 2-value enum | + `procesverbetering` |
 | `DeckTemplate.requiresInfoSafety` (`deck_template.dart:45`) | `bool` | `ModuleId? requiresModule` |
-| `_securityCommands` (`command_palette_actions.dart:127`) | hand-spliced at `:61` | contribution list keyed by module |
+| `_infoSafetyCommands` (`command_palette_actions.dart:127`) | hand-spliced at `:61` | contribution list keyed by module |
 | `settings_dialog_modules.dart:23` | one hardcoded card | list of module descriptors |
 | prefs keys | 2 module-specific constants | namespaced per module |
 
