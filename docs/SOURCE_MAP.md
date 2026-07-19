@@ -325,6 +325,10 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
   (the git tab was once inserted at index 8 without renumbering the search index,
   so "checklist" jumped to Git-repository). Nothing addresses a tab by number any
   more.
+  The dialog's own shell — sidebar, nav items, branded footer, content header,
+  footer bar — is `parts/settings_dialog_chrome.dart`. It is the one block that
+  reads only the selected section and writes it back, touching none of the
+  settings, so it can be read without holding the rest of the state in mind.
   Storage is one tab: `parts/settings_dialog_storage.dart` carries the libraries
   and the export folder (moved out of Algemeen) plus `StorageModality` — a row
   per route (disk, Nextcloud, git) with its status, expanding to that route's own
