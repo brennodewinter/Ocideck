@@ -1789,6 +1789,9 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Branch (optioneel)': 'Šaka (nebūtina)',
+  'let op: de standaardbranch is': 'dėmesio: numatytoji šaka yra',
+  'jij werkt op': 'jūs dirbate su',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'gimimo data, pašto kodas ir lytis kartu — šie trys paprastai nurodo vieną asmenį, net be vardo',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

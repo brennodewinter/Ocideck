@@ -1784,6 +1784,9 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Branch (optioneel)': 'Větev (nepovinné)',
+  'let op: de standaardbranch is': 'pozor: výchozí větev je',
+  'jij werkt op': 'ty pracuješ na',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'datum narození, PSČ a pohlaví dohromady — tyto tři obvykle označují jednu osobu, i bez jména',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

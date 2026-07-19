@@ -1780,6 +1780,9 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Branch (optioneel)': 'Gren (valfritt)',
+  'let op: de standaardbranch is': 'obs: standardgrenen är',
+  'jij werkt op': 'du arbetar på',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'födelsedatum, postnummer och kön tillsammans — de tre pekar oftast ut en enda person, även utan namn',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

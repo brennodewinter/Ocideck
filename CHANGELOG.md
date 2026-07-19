@@ -126,6 +126,16 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   Geen netwerk breekt de release evenmin af, maar het zegt wél dát er niet
   gekeken is. Stilte mag hier niet als goedkeuring lezen.
 
+- **De branch van een git-repository is nu in te vullen.** Er was geen veld
+  voor, dus stond hij altijd op `main`. Een repo die op `master` staat was
+  daardoor via de instellingen onbruikbaar, en bewust op een andere branch
+  werken kon niet.
+
+  Het veld mag leeg blijven: dan neemt de verbindingstest over wat de forge
+  als standaard opgeeft, zoals hij al deed. Vul je zelf iets in dat afwijkt,
+  dan zégt de test dat wel — *"let op: de standaardbranch is main, jij werkt op
+  ontwikkel"* — maar hij overschrijft je keuze niet. Wie een andere branch
+  intypt, bedoelt dat.
 - **Een zelfondertekend certificaat kun je nu vertrouwen — precies dat ene.**
   Een zelf gehoste server op je eigen netwerk heeft vaak geen certificaat van
   een erkende uitgever. Dat is juist de groep waarvoor "vertrouwde interne

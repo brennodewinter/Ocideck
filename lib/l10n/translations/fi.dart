@@ -1781,6 +1781,9 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Branch (optioneel)': 'Haara (valinnainen)',
+  'let op: de standaardbranch is': 'huomio: oletushaara on',
+  'jij werkt op': 'sinä työskentelet haarassa',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'syntymäaika, postinumero ja sukupuoli yhdessä — nämä kolme osoittavat yleensä yhden henkilön, myös ilman nimeä',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

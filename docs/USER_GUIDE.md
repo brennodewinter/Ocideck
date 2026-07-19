@@ -139,6 +139,10 @@ saved version stays retrievable, which a plain folder cannot give you.
   the server clears it, because the earlier result was about something else; a
   *failed* test clears nothing, since it only proves the connection is down
   now.
+- **Branch**: leave it empty and the connection test adopts whatever the forge
+  reports as its default — that is the common case, and the only way a repo on
+  `master` works without you having to know. Fill something in and the test
+  will point out a mismatch but leave your choice alone.
 - **Test the connection** before saving. One call answers four questions at
   once, and each answer heads off a failure you would otherwise only meet at
   your first save:

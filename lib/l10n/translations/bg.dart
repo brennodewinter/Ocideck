@@ -1804,6 +1804,9 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Branch (optioneel)': 'Клон (по избор)',
+  'let op: de standaardbranch is': 'внимание: клонът по подразбиране е',
+  'jij werkt op': 'вие работите на',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'дата на раждане, пощенски код и пол заедно — тези три обикновено сочат един човек, дори без име',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

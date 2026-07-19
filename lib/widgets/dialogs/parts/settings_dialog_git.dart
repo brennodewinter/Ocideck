@@ -69,6 +69,12 @@ extension _SettingsGit on _SettingsDialogState {
           icon: Icons.folder_outlined,
         ),
         _webdavField(
+          form.branch,
+          l10n.d('Branch (optioneel)'),
+          hint: 'main',
+          icon: Icons.account_tree_outlined,
+        ),
+        _webdavField(
           form.token.field,
           l10n.d('Personal access token'),
           obscure: true,
@@ -226,13 +232,22 @@ extension _SettingsGit on _SettingsDialogState {
     RepoProbe probe,
   ) {
     final parts = <String>[l10n.d('Verbinding gelukt')];
-    if (probe.defaultBranch != form.defaultBranch) {
-      // Overnemen, niet vragen: er is geen invoerveld voor, en de forge weet
-      // het beter dan wij. Wel zeggen dát het gebeurt.
-      form.defaultBranch = probe.defaultBranch;
+    final chosen = form.branch.text.trim();
+    if (chosen.isEmpty) {
+      // Nog niets ingevuld: neem over wat de forge zegt. Dit is het gangbare
+      // geval, en het is de enige manier waarop een repo op `master` werkt
+      // zonder dat de gebruiker dat hoeft te weten.
+      form.branch.text = probe.defaultBranch;
       parts.add(
         '${l10n.d('de standaardbranch heet')} "${probe.defaultBranch}" — '
         '${l10n.d('die wordt voortaan gebruikt')}',
+      );
+    } else if (chosen != probe.defaultBranch) {
+      // Wél iets ingevuld en het wijkt af: melden, niet overschrijven. Wie een
+      // andere branch intypt, bedoelt dat — dat is het hele punt van het veld.
+      parts.add(
+        '${l10n.d('let op: de standaardbranch is')} "${probe.defaultBranch}", '
+        '${l10n.d('jij werkt op')} "$chosen"',
       );
     }
     if (probe.isEmpty) {

@@ -1772,6 +1772,9 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Branch (optioneel)': 'Haru (valikuline)',
+  'let op: de standaardbranch is': 'märkus: vaikeharu on',
+  'jij werkt op': 'sina töötad harul',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'sünnikuupäev, sihtnumber ja sugu koos — need kolm osutavad tavaliselt ühele inimesele, ka ilma nimeta',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

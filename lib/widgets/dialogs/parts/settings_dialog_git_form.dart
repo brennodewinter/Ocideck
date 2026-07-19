@@ -21,15 +21,9 @@ class GitForm {
   /// verschillen te veel om aan de URL te raden.
   GitProvider provider = GitProvider.gitea;
 
-  /// De branch waarop gewerkt wordt. Er is bewust géén invoerveld voor: welke
-  /// branch de standaard is, weet de forge zelf beter dan de gebruiker. De
-  /// verbindingstest haalt hem op en zet hem hier neer — dat is de enige manier
-  /// waarop een repo met `master` in plaats van `main` ooit werkt.
-  String defaultBranch = const GitRepoConfig(
-    baseUrl: '',
-    owner: '',
-    repo: '',
-  ).defaultBranch;
+  /// De branch waarop gewerkt wordt. Leeg betekent: neem wat de forge als
+  /// standaard opgeeft — daar is de verbindingstest voor.
+  final TextEditingController branch = TextEditingController();
 
   /// De vingerafdruk van het certificaat dat de gebruiker heeft vertrouwd, of
   /// leeg. Geen invoerveld: die vult zich alleen via de bevestigingsdialoog.
@@ -58,7 +52,7 @@ class GitForm {
     repo.text = git?.repo ?? '';
     trusted = git?.trustedInternal ?? false;
     provider = git?.provider ?? GitProvider.gitea;
-    if (git != null) defaultBranch = git.defaultBranch;
+    branch.text = git?.defaultBranch ?? '';
     pinnedCertSha256 = git?.pinnedCertSha256 ?? '';
     token.rememberIdentity(identityOf(git?.baseUrl ?? '', git?.owner ?? ''));
   }
@@ -84,7 +78,11 @@ class GitForm {
       repo: repo.text.trim(),
       trustedInternal: trusted,
       provider: provider,
-      defaultBranch: defaultBranch,
+      // Leeg laten zou een repo op de wortel zetten; de forge-standaard is
+      // het beste antwoord dat we zonder test hebben.
+      defaultBranch: branch.text.trim().isEmpty
+          ? const GitRepoConfig(baseUrl: '', owner: '', repo: '').defaultBranch
+          : branch.text.trim(),
       pinnedCertSha256: pinnedCertSha256,
     );
   }
@@ -100,6 +98,7 @@ class GitForm {
   }
 
   void dispose() {
+    branch.dispose();
     url.dispose();
     owner.dispose();
     repo.dispose();

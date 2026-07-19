@@ -1756,6 +1756,9 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Branch (optioneel)': 'branch (DaH DaHar\'a\')',
+  'let op: de standaardbranch is': 'yIqIm: DevwI\' branch \'oH',
+  'jij werkt op': 'SoH Damev',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'boghDIS, Sep mI\', ghaH je — wej vam wa\' nuv \'ang, pong Hutlh\'a\'',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

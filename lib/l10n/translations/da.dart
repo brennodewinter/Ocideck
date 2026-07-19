@@ -1780,6 +1780,9 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Branch (optioneel)': 'Gren (valgfrit)',
+  'let op: de standaardbranch is': 'bemærk: standardgrenen er',
+  'jij werkt op': 'du arbejder på',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'fødselsdato, postnummer og køn tilsammen — de tre peger som regel på én person, også uden navn',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

@@ -1783,6 +1783,9 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Branch (optioneel)': 'Veja (neobvezno)',
+  'let op: de standaardbranch is': 'pozor: privzeta veja je',
+  'jij werkt op': 'ti delaš na',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'datum rojstva, poštna številka in spol skupaj — ti trije običajno kažejo na eno osebo, tudi brez imena',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

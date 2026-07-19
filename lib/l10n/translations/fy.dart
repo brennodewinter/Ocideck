@@ -739,6 +739,9 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Branch (optioneel)': 'Branch (opsjoneel)',
+  'let op: de standaardbranch is': 'let op: de standertbranch is',
+  'jij werkt op': 'do wurkest op',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'bertedatum, postkoade en geslacht tegearre — dy trije wize meastal ien persoan oan, ek sûnder namme',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

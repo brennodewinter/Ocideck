@@ -738,6 +738,9 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Branch (optioneel)': 'Branch (optional)',
+  'let op: de standaardbranch is': 'Achtung: der Standardbranch ist',
+  'jij werkt op': 'du arbeitest auf',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'Geburtsdatum, Postleitzahl und Geschlecht zusammen — diese drei bezeichnen meist eine einzige Person, auch ohne Namen',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

@@ -1793,6 +1793,9 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Branch (optioneel)': 'Gałąź (opcjonalnie)',
+  'let op: de standaardbranch is': 'uwaga: gałąź domyślna to',
+  'jij werkt op': 'ty pracujesz na',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'data urodzenia, kod pocztowy i płeć razem — te trzy zwykle wskazują jedną osobę, nawet bez nazwiska',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

@@ -1780,6 +1780,9 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Branch (optioneel)': 'Zars (neobligāti)',
+  'let op: de standaardbranch is': 'ievērojiet: noklusējuma zars ir',
+  'jij werkt op': 'tu strādā uz',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'dzimšanas datums, pasta indekss un dzimums kopā — šie trīs parasti norāda uz vienu personu, arī bez vārda',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
