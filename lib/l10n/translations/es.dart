@@ -737,6 +737,7 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Nog te verifiëren': 'Pendiente de verificar',
   'MASWE-zwakheid kiezen': 'Elegir una debilidad MASWE',
   'Zoek op naam, id of categorie': 'Buscar por nombre, id o categoría',
   'Geen zwakheid gevonden': 'No se encontró ninguna debilidad',

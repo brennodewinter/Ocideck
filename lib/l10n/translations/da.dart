@@ -1782,6 +1782,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Nog te verifiëren': 'Skal stadig verificeres',
   'MASWE-zwakheid kiezen': 'Vælg en MASWE-svaghed',
   'Zoek op naam, id of categorie': 'Søg på navn, id eller kategori',
   'Geen zwakheid gevonden': 'Ingen svaghed fundet',

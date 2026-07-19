@@ -177,6 +177,11 @@ extension _SettingsDocs on _SettingsDialogState {
         assetBase: 'docs/design/GIT_STORAGE.md',
       ),
       DocEntry(
+        icon: Icons.fact_check_outlined,
+        title: l10n.d('Nog te verifiëren'),
+        assetBase: 'docs/design/VERIFICATION.md',
+      ),
+      DocEntry(
         icon: Icons.shield_outlined,
         title: l10n.d('Pentestrapportage (ontwerp)'),
         assetBase: 'docs/design/PENTEST_MIAUW.md',

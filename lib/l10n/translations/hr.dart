@@ -1790,6 +1790,7 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Nog te verifiëren': 'Još treba provjeriti',
   'MASWE-zwakheid kiezen': 'Odaberi MASWE slabost',
   'Zoek op naam, id of categorie': 'Pretraži po nazivu, id-u ili kategoriji',
   'Geen zwakheid gevonden': 'Nije pronađena slabost',

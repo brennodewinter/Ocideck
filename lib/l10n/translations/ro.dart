@@ -1802,6 +1802,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Nog te verifiëren': 'Rămâne de verificat',
   'MASWE-zwakheid kiezen': 'Alege o slăbiciune MASWE',
   'Zoek op naam, id of categorie': 'Caută după nume, id sau categorie',
   'Geen zwakheid gevonden': 'Nu s-a găsit nicio slăbiciune',

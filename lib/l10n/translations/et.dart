@@ -1774,6 +1774,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Nog te verifiëren': 'Veel kinnitamata',
   'MASWE-zwakheid kiezen': 'Vali MASWE nõrkus',
   'Zoek op naam, id of categorie': 'Otsi nime, id või kategooria järgi',
   'Geen zwakheid gevonden': 'Nõrkust ei leitud',

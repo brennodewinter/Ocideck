@@ -1783,6 +1783,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Nog te verifiëren': 'Masih harus diverifikasi',
   'MASWE-zwakheid kiezen': 'Pilih kelemahan MASWE',
   'Zoek op naam, id of categorie': 'Cari berdasarkan nama, id, atau kategori',
   'Geen zwakheid gevonden': 'Tidak ada kelemahan ditemukan',

@@ -741,6 +741,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Nog te verifiëren': 'Noch te ferifiearjen',
   'MASWE-zwakheid kiezen': 'MASWE-swakte kieze',
   'Zoek op naam, id of categorie': 'Sykje op namme, id of kategory',
   'Geen zwakheid gevonden': 'Gjin swakte fûn',

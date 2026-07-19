@@ -740,6 +740,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Nog te verifiëren': 'Ainda pa verifiká',
   'MASWE-zwakheid kiezen': 'Skohe un debilidat MASWE',
   'Zoek op naam, id of categorie': 'Buska pa nòmber, id òf kategoria',
   'Geen zwakheid gevonden': 'No a hañá ningun debilidat',

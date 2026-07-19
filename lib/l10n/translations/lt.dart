@@ -1791,6 +1791,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Nog te verifiëren': 'Dar reikia patikrinti',
   'MASWE-zwakheid kiezen': 'Pasirinkite MASWE silpnybę',
   'Zoek op naam, id of categorie': 'Ieškoti pagal pavadinimą, id ar kategoriją',
   'Geen zwakheid gevonden': 'Silpnybių nerasta',

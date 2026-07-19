@@ -740,6 +740,7 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Nog te verifiëren': 'Reste à vérifier',
   'MASWE-zwakheid kiezen': 'Choisir une faiblesse MASWE',
   'Zoek op naam, id of categorie': 'Rechercher par nom, id ou catégorie',
   'Geen zwakheid gevonden': 'Aucune faiblesse trouvée',

@@ -1790,6 +1790,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Nog te verifiëren': 'Zostáva overiť',
   'MASWE-zwakheid kiezen': 'Vybrať slabinu MASWE',
   'Zoek op naam, id of categorie': 'Hľadať podľa názvu, id alebo kategórie',
   'Geen zwakheid gevonden': 'Nenašla sa žiadna slabina',

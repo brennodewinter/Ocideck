@@ -1758,6 +1758,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Nog te verifiëren': 'ngu\'nISlu\'bogh',
   'MASWE-zwakheid kiezen': 'MASWE puj wIv',
   'Zoek op naam, id of categorie': 'pong, id, Segh je Sam',
   'Geen zwakheid gevonden': 'puj tu\'lu\'be\'',

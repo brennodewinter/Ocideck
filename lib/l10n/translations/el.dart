@@ -1811,6 +1811,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Nog te verifiëren': 'Προς επαλήθευση',
   'MASWE-zwakheid kiezen': 'Επιλογή αδυναμίας MASWE',
   'Zoek op naam, id of categorie': 'Αναζήτηση με όνομα, id ή κατηγορία',
   'Geen zwakheid gevonden': 'Δεν βρέθηκε αδυναμία',
