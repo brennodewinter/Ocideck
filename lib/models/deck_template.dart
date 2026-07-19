@@ -42,7 +42,7 @@ class DeckTemplate {
   /// module on (they scaffold module-only slide types like `finding` /
   /// `scopeMatrix`). The picker hides them until `infoSafetyRevealProvider` is
   /// true, so the flat catalogue stays uncluttered for everyone else.
-  final bool requiresSecurityModule;
+  final bool requiresInfoSafety;
 
   const DeckTemplate({
     required this.id,
@@ -50,7 +50,7 @@ class DeckTemplate {
     required this.description,
     required this.icon,
     required this.buildSlides,
-    this.requiresSecurityModule = false,
+    this.requiresInfoSafety = false,
   });
 }
 
@@ -446,7 +446,7 @@ final List<DeckTemplate> deckTemplates = [
         'managementsamenvatting, bevindingen, checklists en ondertekening.',
     icon: 'miauwReport',
     buildSlides: _buildMiauwReport,
-    requiresSecurityModule: true,
+    requiresInfoSafety: true,
   ),
 ];
 

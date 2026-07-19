@@ -9,7 +9,7 @@ part of 'deck_template.dart';
 // chapters. The document-management, version and distribution chapters (4.1.x)
 // are rendered from the deck front matter, so they are not scaffolded as slides.
 // The template only appears when the Informatieveiligheid module is on
-// (DeckTemplate.requiresSecurityModule), so these types are always available.
+// (DeckTemplate.requiresInfoSafety), so these types are always available.
 
 // A structured module slide keyed only by its title; the type's own default
 // (from Slide.create) seeds the table/spec the editor then fills.

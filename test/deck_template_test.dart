@@ -434,7 +434,7 @@ void main() {
 
     test('is registered as a module-only template', () {
       final template = deckTemplateById('miauwReport')!;
-      expect(template.requiresSecurityModule, isTrue);
+      expect(template.requiresInfoSafety, isTrue);
       expect(template.title, 'MIAUW-pentestrapport');
       expect(slides().first.type, SlideType.title);
     });

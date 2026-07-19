@@ -44,7 +44,7 @@ void main() {
     'the MIAUW template requires the module (so it is hidden by default)',
     () {
       final miauw = deckTemplates.firstWhere((t) => t.id == 'miauwReport');
-      expect(miauw.requiresSecurityModule, isTrue);
+      expect(miauw.requiresInfoSafety, isTrue);
     },
   );
 }

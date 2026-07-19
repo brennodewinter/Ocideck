@@ -140,7 +140,7 @@ void main() {
     // (MIAUW) blijven verborgen tot Informatieveiligheid aanstaat en horen dus
     // niet in deze standaardcatalogus.
     for (final template in sortTemplatesForDisplay(
-      deckTemplates.where((t) => !t.requiresSecurityModule),
+      deckTemplates.where((t) => !t.requiresInfoSafety),
       (t) => t.title,
     )) {
       await tester.scrollUntilVisible(

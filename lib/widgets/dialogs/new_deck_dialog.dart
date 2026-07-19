@@ -138,7 +138,7 @@ class _NewDeckDialogState extends ConsumerState<NewDeckDialog> {
     // Module-only templates (MIAUW) stay hidden until Informatieveiligheid is
     // provisioned, so the catalogue is unchanged for everyone else.
     final revealed = ref.watch(infoSafetyRevealProvider);
-    bool visible(DeckTemplate t) => revealed || !t.requiresSecurityModule;
+    bool visible(DeckTemplate t) => revealed || !t.requiresInfoSafety;
     bool matches(DeckTemplate t) => [
       l10n.d(t.title),
       l10n.d(t.description),
