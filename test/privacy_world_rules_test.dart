@@ -75,12 +75,14 @@ void main() {
       expect(rulesIn('SSN: 665-99-9418'), contains('us.ssn'));
     });
 
-    test('staat uit zolang het VS-pakket niet gekozen is', () {
-      // Fase 8a levert de regels; het verplaatsen van `us` naar de
-      // standaardregio's hoort bij 8c, wanneer de hele Amerikaanse set er is.
+    test('draait mee bij een standaardinstallatie', () {
+      // §15.6: `us` staat sinds de hele Amerikaanse set af in
+      // defaultPrivacyRegions. Zonder dit zou al het werk aan 8a en 8c
+      // onzichtbaar blijven voor wie de chip niet kent — en dat is precies de
+      // gebruiker die de controle het hardst nodig heeft.
       expect(
         rulesIn('SSN: 665-99-9418', regions: defaultPrivacyRegions),
-        isNot(contains('us.ssn')),
+        contains('us.ssn'),
       );
     });
   });

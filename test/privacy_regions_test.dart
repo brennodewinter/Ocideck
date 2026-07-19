@@ -52,13 +52,26 @@ void main() {
   });
 
   group('het pakket bepaalt wat er draait', () {
-    test('standaard staat heel Europa aan', () {
+    test('standaard staat heel Europa aan, plus de VS en Canada', () {
       expect(defaultPrivacyRegions, contains('nl'));
       expect(defaultPrivacyRegions, contains('pl'));
       expect(defaultPrivacyRegions, contains('uk'));
       expect(defaultPrivacyRegions, contains('ch'));
-      // De rest van de wereld staat er niet standaard in.
-      expect(defaultPrivacyRegions, isNot(contains('us')));
+      // §15.6: bescherming mag niet afhangen van de vraag of de auteur wist dat
+      // hij een vinkje moest aanzetten. Elke Amerikaanse en Canadese regel
+      // draagt een checksum of een contextpoort, dus het aanzetten kost geen
+      // precisie.
+      expect(defaultPrivacyRegions, contains('us'));
+      expect(defaultPrivacyRegions, contains('ca'));
+    });
+
+    test('de landen zonder regels staan nog uit', () {
+      // Zodra 8d er is hoort dit met de hand herzien te worden, niet
+      // automatisch: cw en aw hebben geen gedocumenteerde checksum.
+      for (final code in ['au', 'in', 'br', 'za', 'cw', 'aw']) {
+        expect(defaultPrivacyRegions, isNot(contains(code)), reason: code);
+        expect(worldPrivacyRegions, contains(code), reason: code);
+      }
     });
 
     test('een uitgezet pakket meldt zijn nummers niet meer', () {

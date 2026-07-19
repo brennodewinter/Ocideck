@@ -65,12 +65,13 @@ void main() {
       expect(rulesIn('SIN $geldig'), contains('ca.sin'));
     });
 
-    test('staat uit zolang het pakket niet gekozen is', () {
+    test('draait mee bij een standaardinstallatie', () {
+      // Zie §15.6 en de toelichting bij us.ssn: `ca` staat standaard aan.
       final geldig =
           '12345678${passendeCijfers('12345678', isValidCaSin).single}';
       expect(
         rulesIn('SIN $geldig', regions: defaultPrivacyRegions),
-        isNot(contains('ca.sin')),
+        contains('ca.sin'),
       );
     });
   });
