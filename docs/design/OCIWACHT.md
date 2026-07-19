@@ -32,6 +32,7 @@ accepteren, waarschuwen met een shield-badge, of redigeren op scherm en in expor
 | §3-C `fin.pan` + `fin.cvv` (Luhn + IIN-bereik, CVV alleen in gezelschap) | **geleverd** |
 | §3-I `struct.notes_leak` | **geleverd** |
 | §3-H `bulk.quasi_combo` (Sweeney: geboortedatum + postcode + geslacht) | **geleverd** |
+| §3-A Tweede lichting Europese nummers (AT/CH/CZ+SK/DK/GR/HU/IE/NO/SI) | **geleverd** |
 | §13.2 Persoonskoppelingspoort (naam als koppeling, mededeling als bereik) | **geleverd** |
 | §13.2 Lexiconmodel als data (`role`/`match`/`weight`/`lang`) | **geleverd** |
 | §3-G `special.icd10` + `special.atc` (notatie met contextpoort) | **geleverd** |
@@ -234,6 +235,38 @@ nul. Waar géén checksum bestaat (US SSN, V-nummer), is een contextwoord verpli
 | `au.tfn` | Tax File Number | gewogen mod 11 | zeker | ◐ |
 | `au.medicare` | Medicare-nummer | gewogen checksum | zeker | ◐ |
 | `cw.sedula` / `aw.persoonsnummer` | Curaçao / Aruba | formaat + contextwoord; geen gedocumenteerde checksum, dus bewust nooit `zeker` | mogelijk | ◐ |
+
+> **Gebouwd (2026-07-19), en één les over "vrijwel geen precisie".** §7
+> verdedigt "heel Europa standaard aan" met het argument dat ruim twintig van de
+> dertig nummers zelfvalidereend zijn en dus *vrijwel geen precisie kosten*. Dat
+> klopt — maar niet voor elk nummer even hard, en het verschil is groter dan de
+> zin suggereert.
+>
+> Twee van de elf nieuwe regels haalden de vals-positievencorpus meteen onderuit:
+>
+> * **`hu.taj`** is negen cijfers met alléén een mod-10 en zonder datum erin. Eén
+>   op de tien willekeurige getallen komt erdoor — zwakker dan de 11-proef van
+>   het BSN, die al een contextwoord eist. De corpus ging af op `Klantnummer
+>   847362910` en `Ordernummer 202512345`. Nu contextwoord verplicht, en nooit
+>   hoger dan `waarschijnlijk`.
+> * **`at.svnr`** leek sterk (mod-11), maar de eerste implementatie controleerde
+>   de datum in de laatste zes cijfers niet. Daarmee was het óók een 1-op-11, en
+>   de bestaande BSN-test ging er meteen op af met `7283982420` — waarvan de
+>   datumhelft dag 98 in maand 24 zou zijn. Mét datumcontrole is het ongeveer
+>   1-op-300.
+>
+> Het patroon achter beide: **een checksum is pas sterk in combinatie met een
+> tweede, onafhankelijke eis.** Een datum in het nummer, een vast prefix (`756`
+> bij de AHV), een tweede controlecijfer (Noorwegen), of anders een contextwoord.
+> Een kale mod-10 of mod-11 over een reeks zonder structuur is dat niet.
+>
+> En de schade blijft niet lokaal. Een identificator telt als persoonskoppeling,
+> dus elke valse treffer tilde óók alle artikel 9-trefwoorden op diezelfde slide
+> naar `zeker`. Eén zwakke regel, en de halve scanner gaat mee.
+>
+> `sk.rodne_cislo` heeft geen eigen regel: Slowakije deelt het nummer met
+> Tsjechië — het stamt uit Tsjecho-Slowakije — en een tweede id zou hetzelfde
+> nummer dubbel melden.
 
 > **Ontwerpnotitie.** De regiopakketten worden standaard geactiveerd op basis van de
 > app-taal, plus altijd het pakket van de gebruiker zelf. Een Nederlandse gebruiker draait
