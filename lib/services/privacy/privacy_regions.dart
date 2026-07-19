@@ -56,23 +56,36 @@ const Set<String> _euMemberStates = {
 /// EER-landen buiten de EU, plus Zwitserland en het Verenigd Koninkrijk.
 const Set<String> _europeanNonEu = {'no', 'is', 'li', 'ch', 'uk'};
 
-/// Het standaardpakket: heel Europa (OCIWACHT §7, besluit 4).
+/// Landen buiten Europa waarvan de regels tóch standaard meedraaien.
+///
+/// De redenering hierboven geldt hier onverkort, en §15.6 maakt hem expliciet:
+/// elke Amerikaanse en Canadese regel draagt óf een checksum óf een
+/// contextpoort, en geen van beide kost precisie. Wat de doorslag geeft is
+/// echter niet techniek maar de AVG. Bescherming mag niet afhangen van de vraag
+/// of de auteur wist dat hij een vinkje moest aanzetten — een deck met
+/// Amerikaanse persoonsgegevens hoort bij een standaardinstallatie
+/// gecontroleerd te worden.
+///
+/// Dat de Amerikaanse nummers géén checksum hebben pleit hier vóór en niet
+/// tegen: juist omdat ze alleen op een contextpoort steunen, vuren ze zelden
+/// spontaan. `us.ssn` zonder het woord "SSN" ernaast doet niets.
+const Set<String> _defaultNonEuropean = {'us', 'ca'};
+
+/// Het standaardpakket: heel Europa (OCIWACHT §7, besluit 4), plus de
+/// niet-Europese landen waarvan de regels af zijn (§15.6).
 const Set<String> defaultPrivacyRegions = {
   ..._euMemberStates,
   ..._europeanNonEu,
+  ..._defaultNonEuropean,
 };
 
-/// De rest van de wereld waarvoor er regels bestaan of komen (§3-A, fase 8).
-const Set<String> worldPrivacyRegions = {
-  'us',
-  'ca',
-  'au',
-  'in',
-  'br',
-  'za',
-  'cw',
-  'aw',
-};
+/// De rest van de wereld waarvoor er regels bestaan of komen (§3-A, fase 8d).
+///
+/// Deze staan nog uit omdat de regels er nog niet zijn. Zodra ze er zijn hoort
+/// dezelfde afweging als bij [_defaultNonEuropean] gemaakt te worden, en niet
+/// automatisch: `cw.sedula` en `aw.persoonsnummer` hebben geen gedocumenteerde
+/// checksum, dus die leunen volledig op hun contextpoort.
+const Set<String> worldPrivacyRegions = {'au', 'in', 'br', 'za', 'cw', 'aw'};
 
 /// Alle regio's die als pakket aan te zetten zijn.
 const Set<String> allPrivacyRegions = {

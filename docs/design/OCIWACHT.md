@@ -46,6 +46,7 @@ accepteren, waarschuwen met een shield-badge, of redigeren op scherm en in expor
 | §15.7 fase 8a `us.ssn`, `us.ssn_last4`, `us.itin`, `us.ein`, `fin.us_routing` | **geleverd** |
 | §15.7 fase 8b `ca.sin`, `ca.ramq`, `ca.ohip`, `ca.bn` | **geleverd** |
 | §15.7 fase 8c `us.npi`, `us.medicare_mbi`, `us.dea` | **geleverd** |
+| §15.6 `us` en `ca` standaard aan | **geleverd** |
 | §15.8 Labeldekkingstest over de regeltabellen | **geleverd** |
 
 De genomen beslissingen staan in §11; die zijn niet meer open.
