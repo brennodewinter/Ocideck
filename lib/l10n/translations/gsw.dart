@@ -1787,6 +1787,9 @@ const _dutchSourceGsw = {
 const _dutchSourceAddGsw = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Lexikonlizänze: was no z klääre isch',
+  'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
+      'Das gseht uus wie e vollständigi DAV-URL. Bi Nextcloud leitet OciDeck dä Pfad sälber ab — da ghört nur de Server ane.',
+  'Overnemen': 'Übernäh',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
       'WebDAV isch nid (rächt) igrichtet — prüef d Serverdate under Istellige → Spycher.',
   'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':

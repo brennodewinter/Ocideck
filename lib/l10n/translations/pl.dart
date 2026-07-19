@@ -1795,6 +1795,9 @@ const _dutchSourcePl = {
 const _dutchSourceAddPl = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Licencje leksykonów: o co jeszcze trzeba zapytać',
+  'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
+      'To wygląda na pełny adres URL DAV. Przy Nextcloud OciDeck sam wyprowadza tę ścieżkę — tutaj należy podać tylko serwer.',
+  'Overnemen': 'Zastosuj',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
       'WebDAV nie jest (dobrze) skonfigurowany — sprawdź dane serwera w Ustawienia → Magazyn.',
   'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':

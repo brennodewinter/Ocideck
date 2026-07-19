@@ -1774,6 +1774,9 @@ const _dutchSourceEt = {
 const _dutchSourceAddEt = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Leksikonide litsentsid: mida on veel vaja küsida',
+  'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
+      'See näeb välja nagu täielik DAV-URL. Nextcloudi puhul tuletab OciDeck selle tee ise — siia kuulub ainult server.',
+  'Overnemen': 'Rakenda',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
       'WebDAV ei ole (õigesti) seadistatud — kontrolli serveri andmeid jaotises Seaded → Salvestusruum.',
   'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':

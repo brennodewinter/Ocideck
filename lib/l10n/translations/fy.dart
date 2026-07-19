@@ -741,6 +741,9 @@ const _dutchSourceFy = {
 const _dutchSourceAddFy = {
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Leksikonlisinsjes: wat noch neifrege wurde moat',
+  'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
+      'Dit liket in folsleine DAV-URL. By Nextcloud liedt OciDeck dat paad sels ôf — hjir heart allinnich de server.',
+  'Overnemen': 'Oernimme',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
       'WebDAV is net (goed) ynsteld — kontrolearje de servergegevens by Ynstellingen → Opslach.',
   'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':

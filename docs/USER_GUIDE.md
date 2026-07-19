@@ -269,6 +269,14 @@ Nextcloud is the most common one, but any WebDAV server works.
   - **Other WebDAV server** — there is no path to guess, so the path you put in
     the server URL *is* the WebDAV root
     (`https://dav.example.com/dav/files`).
+- **Pasting the URL Nextcloud shows you** is fine. Nextcloud displays the full
+  DAV URL (`https://cloud.example.com/remote.php/dav/files/jan/Presentaties`)
+  in its own settings screen, and that is what most people paste here. On the
+  *Nextcloud* server type the path would otherwise be discarded silently —
+  including a subfolder you meant to keep. OciDeck now spots the shape and
+  offers to split it up: server, username and subfolder each into their own
+  field. It is a button, not an automatic rewrite, and fields you already
+  filled in yourself are left alone.
 - **Fill in the rest**: your username, your password, and an optional subfolder.
   On Nextcloud, use an **app password** (create one under *Settings → Security*)
   rather than your login password. Use **Test connection** to check it before

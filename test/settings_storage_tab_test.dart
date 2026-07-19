@@ -293,6 +293,97 @@ void main() {
     expect(find.text('cloud.voorbeeld.nl'), findsOneWidget);
   });
 
+  testWidgets('een geplakte DAV-URL wordt opgemerkt en uit elkaar gehaald', (
+    tester,
+  ) async {
+    // Nextcloud toont deze URL in zijn eigen scherm, dus mensen plakken hem
+    // hier. Het pad verdween daarna stil — inclusief de submap die ze er
+    // bewust in hadden staan.
+    await openSettings(tester);
+    await addConnection(tester, 'WebDAV-server');
+
+    await tester.enterText(
+      find.widgetWithText(TextField, 'Server-URL'),
+      'https://cloud.voorbeeld.nl/remote.php/dav/files/jan/Presentaties',
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Overnemen'), findsOneWidget);
+    await tapVisible(tester, find.text('Overnemen'));
+
+    final url = tester.widget<TextField>(
+      find.widgetWithText(TextField, 'Server-URL'),
+    );
+    expect(url.controller!.text, 'https://cloud.voorbeeld.nl');
+    expect(
+      tester
+          .widget<TextField>(find.widgetWithText(TextField, 'Gebruikersnaam'))
+          .controller!
+          .text,
+      'jan',
+    );
+    expect(
+      tester
+          .widget<TextField>(
+            find.widgetWithText(TextField, 'Submap (optioneel)'),
+          )
+          .controller!
+          .text,
+      '/Presentaties',
+    );
+    // De hint hoort te verdwijnen zodra er niets meer te corrigeren valt.
+    expect(find.text('Overnemen'), findsNothing);
+  });
+
+  testWidgets('een gewone server-URL levert geen hint op', (tester) async {
+    await openSettings(tester);
+    await addConnection(tester, 'WebDAV-server');
+
+    await tester.enterText(
+      find.widgetWithText(TextField, 'Server-URL'),
+      'https://cloud.voorbeeld.nl',
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Overnemen'), findsNothing);
+  });
+
+  testWidgets('overnemen overschrijft niet wat je zelf hebt ingetypt', (
+    tester,
+  ) async {
+    // De geplakte URL is jonger dan de velden eronder, maar niet
+    // gezaghebbender: wie zelf een gebruikersnaam koos, houdt hem.
+    await openSettings(tester);
+    await addConnection(tester, 'WebDAV-server');
+
+    await tester.enterText(
+      find.widgetWithText(TextField, 'Gebruikersnaam'),
+      'brenno',
+    );
+    await tester.enterText(
+      find.widgetWithText(TextField, 'Server-URL'),
+      'https://cloud.voorbeeld.nl/remote.php/dav/files/jan/Presentaties',
+    );
+    await tester.pumpAndSettle();
+    await tapVisible(tester, find.text('Overnemen'));
+
+    expect(
+      tester
+          .widget<TextField>(find.widgetWithText(TextField, 'Gebruikersnaam'))
+          .controller!
+          .text,
+      'brenno',
+    );
+    // De URL wordt wél altijd opgeschoond — daar staat de knop voor.
+    expect(
+      tester
+          .widget<TextField>(find.widgetWithText(TextField, 'Server-URL'))
+          .controller!
+          .text,
+      'https://cloud.voorbeeld.nl',
+    );
+  });
+
   testWidgets('een verbinding verwijderen haalt hem uit de lijst', (
     tester,
   ) async {

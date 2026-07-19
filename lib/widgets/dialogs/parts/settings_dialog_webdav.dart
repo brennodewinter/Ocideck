@@ -103,6 +103,7 @@ extension _SettingsWebdav on _SettingsDialogState {
               style: TextStyle(fontSize: 11, color: AppTheme.slate400),
             ),
           ),
+        if (isNextcloud) _pastedDavUrlHint(l10n, form),
         _webdavField(
           form.user,
           l10n.d('Gebruikersnaam'),
@@ -209,6 +210,74 @@ extension _SettingsWebdav on _SettingsDialogState {
         ),
       ],
     );
+  }
+
+  /// Merkt op wanneer er een volledige Nextcloud-DAV-URL in het serverveld
+  /// staat, en biedt aan hem uit elkaar te halen.
+  ///
+  /// Nextcloud toont die URL in zijn eigen instellingenscherm, dus mensen
+  /// plakken hem hier. Dat wérkte meestal — [WebdavServer.origin] gooit het pad
+  /// weg en het pad wordt tóch afgeleid — maar een submap die erin stond ging
+  /// stil verloren, en het veld bleef iets tonen dat niet is wat de app
+  /// gebruikt. Liever opmerken dan stilzwijgend negeren.
+  ///
+  /// Bewust met een knop en niet automatisch: dit herschrijft wat de gebruiker
+  /// zojuist plakte, en dat hoort zijn keuze te blijven.
+  Widget _pastedDavUrlHint(AppLocalizations l10n, WebdavForm form) {
+    return ListenableBuilder(
+      listenable: form.url,
+      builder: (context, _) {
+        final parsed = WebdavServer.readPastedDavUrl(form.url.text);
+        // Niets te melden zodra het veld alleen nog de origin bevat — zo
+        // verdwijnt de hint vanzelf nadat je hem hebt gevolgd.
+        if (parsed == null || form.url.text.trim() == parsed.baseUrl) {
+          return const SizedBox.shrink();
+        }
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 12),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(Icons.lightbulb_outline, size: 16, color: AppTheme.amber700),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Text(
+                  l10n.d(
+                    'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.',
+                  ),
+                  style: TextStyle(fontSize: 11, color: AppTheme.amber700),
+                ),
+              ),
+              const SizedBox(width: 8),
+              TextButton(
+                onPressed: () => _applyPastedDavUrl(form, parsed),
+                child: Text(l10n.d('Overnemen')),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  /// Zet de onderdelen uit de geplakte URL in de juiste velden.
+  ///
+  /// Vult alleen wat leeg is: had de gebruiker de gebruikersnaam of submap al
+  /// ingetypt, dan wint wat hij zelf koos. De server-URL wordt wél altijd
+  /// opgeschoond — dat is de hele reden dat deze knop er staat.
+  void _applyPastedDavUrl(WebdavForm form, PastedDavUrl parsed) {
+    _rebuild(() {
+      form.url.text = parsed.baseUrl;
+      if (parsed.username.isNotEmpty && form.user.text.trim().isEmpty) {
+        form.user.text = parsed.username;
+      }
+      if (parsed.rootPath.isNotEmpty && form.root.text.trim().isEmpty) {
+        form.root.text = parsed.rootPath;
+      }
+      // De server verandert hiermee, dus een eerdere uitslag zegt niets meer.
+      form.testOk = null;
+      form.testMessage = null;
+    });
   }
 
   Future<void> _testWebdavConnection(WebdavForm form) async {

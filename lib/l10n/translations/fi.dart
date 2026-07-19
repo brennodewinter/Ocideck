@@ -1783,6 +1783,9 @@ const _dutchSourceFi = {
 const _dutchSourceAddFi = <String, String>{
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Sanastojen lisenssit: mitä on vielä kysyttävä',
+  'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
+      'Tämä näyttää täydeltä DAV-osoitteelta. Nextcloudissa OciDeck päättelee polun itse — tähän kuuluu vain palvelin.',
+  'Overnemen': 'Käytä',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
       'WebDAV ei ole (oikein) määritetty — tarkista palvelintiedot kohdassa Asetukset → Tallennus.',
   'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':

@@ -922,6 +922,9 @@ const _dutchSourceEn = {
 const _dutchSourceAddEn = {
   'Lexiconlicenties: wat er nog nagevraagd moet worden':
       'Lexicon licences: what still needs to be asked',
+  'Dit lijkt een volledige DAV-URL. Bij Nextcloud leidt OciDeck dat pad zelf af — hier hoort alleen de server te staan.':
+      'This looks like a full DAV URL. For Nextcloud, OciDeck derives that path itself — only the server belongs here.',
+  'Overnemen': 'Apply',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → Opslag.':
       'WebDAV is not set up correctly — check the server details under Settings → Storage.',
   'De git-repository is niet (goed) ingesteld — controleer server, eigenaar en repository bij Instellingen → Opslag.':
