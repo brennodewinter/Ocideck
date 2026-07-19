@@ -7,6 +7,29 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+- **S3 als opslagplek, naast lokale mappen, WebDAV en git.** Daarmee wordt zo
+  ongeveer alles gedekt wat je in de praktijk tegenkomt: naast AWS S3 werkt
+  elke S3-compatible dienst — een eigen MinIO, Ceph, Wasabi, Scaleway,
+  Hetzner. Het endpoint is een vrij invulveld en geen lijstje AWS-regio's,
+  juist omdat zelf hosten en Europese aanbieders het interessante geval zijn.
+
+  Een S3-bucket is gewoon een verbinding in dezelfde lijst als de rest: geef
+  hem een naam, sleep hem waar je hem hebben wilt, en de bovenste bruikbare is
+  de standaard. Instellen gaat met endpoint, bucket, regio en een access key;
+  de secret access key gaat versleuteld de sleutelhanger van je
+  besturingssysteem in en niet het instellingenbestand.
+
+  Twee dingen die eigen zijn aan S3 en die OciDeck daarom expliciet maakt. De
+  **adressering** bepaalt of de bucketnaam vóór de host of in het pad komt —
+  AWS wil het eerste, de meeste zelf gehoste endpoints het tweede; komt een
+  bucket die zeker bestaat terug als "niet gevonden", dan is dit vrijwel altijd
+  de knop. En S3 is objectopslag, geen bestandssysteem: de bescherming tegen
+  twee mensen die elkaars werk overschrijven leunt op *voorwaardelijk
+  schrijven*, wat AWS pas sinds 2024 kan en andere implementaties wisselend.
+  Waar een endpoint het niet kan, zegt OciDeck dat — in plaats van stilletjes
+  te overschrijven.
+
 ### Fixed
 - **De melding over de Informatieveiligheidsmodule bleef hangen boven een
   presentatie waar ze niet over ging.** Open je een rapport met
