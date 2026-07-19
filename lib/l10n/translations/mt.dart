@@ -1803,6 +1803,14 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
+      'numru tal-assigurazzjoni tas-saħħa (RAMQ) — dejta dwar is-saħħa',
+  'zorgverzekeringsnummer (OHIP) — een zorggegeven':
+      'numru tal-assigurazzjoni tas-saħħa (OHIP) — dejta dwar is-saħħa',
+  'bedrijfsnummer (BN)': 'numru tan-negozju (BN)',
+  'zorgverlenersnummer (NPI)': 'numru tal-fornitur tal-kura tas-saħħa (NPI)',
+  'Medicare-nummer (MBI) — een zorggegeven':
+      'numru Medicare (MBI) — dejta dwar is-saħħa',
   'wacht op verbinding': 'jistenna konnessjoni',
   'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
       'Issejvjat fuq dan il-kompjuter, għadu mhux fir-repożitorju. Jitlaq malli jkun hemm konnessjoni mill-ġdid — jew issa, b\'"Battal il-kju".',

@@ -1797,6 +1797,14 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
+      'numerus assecurationis sanitatis (RAMQ) — datum salutis',
+  'zorgverzekeringsnummer (OHIP) — een zorggegeven':
+      'numerus assecurationis sanitatis (OHIP) — datum salutis',
+  'bedrijfsnummer (BN)': 'numerus negotii (BN)',
+  'zorgverlenersnummer (NPI)': 'numerus curatoris valetudinis (NPI)',
+  'Medicare-nummer (MBI) — een zorggegeven':
+      'numerus Medicare (MBI) — datum valetudinis',
   'wacht op verbinding': 'nexum exspectat',
   'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
       'In hoc computatro servatum, nondum in promptuario. Ibit simulac nexus redierit — vel nunc, per "Ordinem vacuare".',

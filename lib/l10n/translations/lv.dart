@@ -1780,6 +1780,14 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
+      'veselības apdrošināšanas numurs (RAMQ) — veselības dati',
+  'zorgverzekeringsnummer (OHIP) — een zorggegeven':
+      'veselības apdrošināšanas numurs (OHIP) — veselības dati',
+  'bedrijfsnummer (BN)': 'uzņēmuma numurs (BN)',
+  'zorgverlenersnummer (NPI)': 'veselības aprūpes sniedzēja numurs (NPI)',
+  'Medicare-nummer (MBI) — een zorggegeven':
+      'Medicare numurs (MBI) — veselības dati',
   'wacht op verbinding': 'gaida savienojumu',
   'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
       'Saglabāts šajā datorā, vēl ne repozitorijā. Tiks nosūtīts, tiklīdz atkal būs savienojums — vai tagad, ar "Iztukšot rindu".',

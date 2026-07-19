@@ -739,6 +739,14 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
+      'soarchfersekeringsnûmer (RAMQ) — in soarchgegeven',
+  'zorgverzekeringsnummer (OHIP) — een zorggegeven':
+      'soarchfersekeringsnûmer (OHIP) — in soarchgegeven',
+  'bedrijfsnummer (BN)': 'bedriuwsnûmer (BN)',
+  'zorgverlenersnummer (NPI)': 'soarchferlienersnûmer (NPI)',
+  'Medicare-nummer (MBI) — een zorggegeven':
+      'Medicare-nûmer (MBI) — in soarchgegeven',
   'wacht op verbinding': 'wachtet op ferbining',
   'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
       'Bewarre op dizze kompjûter, noch net yn de repository. Giet mei sadree\'t der wer ferbining is — of no, mei "Wachtrige leegje".',

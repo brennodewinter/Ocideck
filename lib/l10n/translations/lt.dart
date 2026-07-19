@@ -1789,6 +1789,14 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
+      'sveikatos draudimo numeris (RAMQ) — sveikatos duomenys',
+  'zorgverzekeringsnummer (OHIP) — een zorggegeven':
+      'sveikatos draudimo numeris (OHIP) — sveikatos duomenys',
+  'bedrijfsnummer (BN)': 'įmonės numeris (BN)',
+  'zorgverlenersnummer (NPI)': 'sveikatos priežiūros teikėjo numeris (NPI)',
+  'Medicare-nummer (MBI) — een zorggegeven':
+      'Medicare numeris (MBI) — sveikatos duomuo',
   'wacht op verbinding': 'laukia ryšio',
   'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
       'Įrašyta šiame kompiuteryje, dar ne saugykloje. Iškeliaus vos atsiradus ryšiui — arba dabar, pasirinkus „Išvalyti eilę“.',

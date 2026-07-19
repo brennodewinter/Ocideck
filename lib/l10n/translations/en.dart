@@ -920,6 +920,14 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
+      'health insurance number (RAMQ) — health data',
+  'zorgverzekeringsnummer (OHIP) — een zorggegeven':
+      'health insurance number (OHIP) — health data',
+  'bedrijfsnummer (BN)': 'business number (BN)',
+  'zorgverlenersnummer (NPI)': 'healthcare provider number (NPI)',
+  'Medicare-nummer (MBI) — een zorggegeven':
+      'Medicare number (MBI) — health data',
   'wacht op verbinding': 'waiting for a connection',
   'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
       'Saved on this computer, not yet in the repository. It goes along as soon as there is a connection again — or now, with "Flush queue".',

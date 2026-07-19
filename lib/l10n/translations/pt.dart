@@ -1811,6 +1811,14 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
+      'número de seguro de saúde (RAMQ) — dado de saúde',
+  'zorgverzekeringsnummer (OHIP) — een zorggegeven':
+      'número de seguro de saúde (OHIP) — dado de saúde',
+  'bedrijfsnummer (BN)': 'número de empresa (BN)',
+  'zorgverlenersnummer (NPI)': 'número de prestador de cuidados de saúde (NPI)',
+  'Medicare-nummer (MBI) — een zorggegeven':
+      'número Medicare (MBI) — um dado de saúde',
   'wacht op verbinding': 'à espera de ligação',
   'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
       'Guardado neste computador, ainda não no repositório. Segue assim que houver ligação de novo — ou agora, com "Esvaziar fila".',

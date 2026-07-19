@@ -1785,6 +1785,14 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
+      'Chrankeversicherigsnummere (RAMQ) — es Gsundheitsdate',
+  'zorgverzekeringsnummer (OHIP) — een zorggegeven':
+      'Chrankeversicherigsnummere (OHIP) — es Gsundheitsdate',
+  'bedrijfsnummer (BN)': 'Firmenummere (BN)',
+  'zorgverlenersnummer (NPI)': 'Lyschtigserbringer-Nummere (NPI)',
+  'Medicare-nummer (MBI) — een zorggegeven':
+      'Medicare-Nummere (MBI) — es Gsundheitsdatum',
   'wacht op verbinding': 'wartet uf Verbindig',
   'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
       'Uf däm Computer gspeicheret, no nid im Repository. Gaht mit, sobald wieder e Verbindig da isch — oder jetz, mit "Warteschlange leere".',

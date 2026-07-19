@@ -1793,6 +1793,14 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
+      'numer ubezpieczenia zdrowotnego (RAMQ) — dane o zdrowiu',
+  'zorgverzekeringsnummer (OHIP) — een zorggegeven':
+      'numer ubezpieczenia zdrowotnego (OHIP) — dane o zdrowiu',
+  'bedrijfsnummer (BN)': 'numer przedsiębiorstwa (BN)',
+  'zorgverlenersnummer (NPI)': 'numer świadczeniodawcy (NPI)',
+  'Medicare-nummer (MBI) — een zorggegeven':
+      'numer Medicare (MBI) — dana o zdrowiu',
   'wacht op verbinding': 'czeka na połączenie',
   'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
       'Zapisane na tym komputerze, jeszcze nie w repozytorium. Trafi tam, gdy tylko wróci połączenie — albo teraz, przez "Opróżnij kolejkę".',

@@ -42,8 +42,10 @@ accepteren, waarschuwen met een shield-badge, of redigeren op scherm en in expor
 | §13.3 Gebundeld gezondheidslexicon (Orphanet, 62.490 namen, 9 talen) | **geleverd** |
 | §13.3 EuroVoc voor religie/politiek/vakbond/etniciteit (27 talen) | **geleverd** |
 | §14 Onderzoeksdossier DLP-technieken (annex, geen ontwerp) | naslag |
-| §15 Fase 8 wereldpakketten (VS, Canada, art. 9) | **ontworpen**; 8a geleverd |
+| §15 Fase 8 wereldpakketten (VS, Canada, art. 9) | **ontworpen**; 8a geleverd, 8c deels (de drie zorgnummers) |
 | §15.7 fase 8a `us.ssn`, `us.ssn_last4`, `us.itin`, `us.ein`, `fin.us_routing` | **geleverd** |
+| §15.7 fase 8b `ca.sin`, `ca.ramq`, `ca.ohip`, `ca.bn` | **geleverd** |
+| §15.7 fase 8c `us.npi`, `us.medicare_mbi`, `us.dea` | **geleverd** |
 | §15.8 Labeldekkingstest over de regeltabellen | **geleverd** |
 
 De genomen beslissingen staan in §11; die zijn niet meer open.
@@ -2085,14 +2087,14 @@ lijst structureel mist:
 | `us.ssn` | Social Security Number | Géén checksum. Area ≠ 000/666/900-999, groep ≠ 00, serie ≠ 0000. **Contextwoord verplicht** (`ssn`, `social security`). Nepwaarden uit: `078-05-1120` (de Woolworth-portefeuillekaart), `123-45-6789`, `219-09-9999` | waarschijnlijk |
 | `us.ssn_last4` | "Last 4 of SSN" | `XXX-XX-1234` of contextwoord `last four`/`last 4`. Puur Amerikaans idioom; onder de AVG nog steeds een pseudonieme identificator die met één ander gegeven de persoon aanwijst | mogelijk |
 | `us.itin` | Individual Taxpayer ID | `9xx-7x/8x-xxxx` + context. Identificeert niet-ingezetenen, en grenst daarmee aan verblijfsstatus | waarschijnlijk |
-| `us.npi` | National Provider Identifier | Luhn over het nummer met prefix `80840`. Wijst een zorgverlener aan | zeker |
-| `us.medicare_mbi` | Medicare Beneficiary Identifier | 11 posities met een vaste tekenklasse per positie, zonder S/L/O/I/B/Z. Art. 9-gebied | zeker |
-| `us.dea` | DEA-registratienummer | 2 letters + 7 cijfers met eigen checksum. Voorschrijver | zeker |
+| `us.npi` | National Provider Identifier | Luhn over het nummer met prefix `80840`, plus voorloop 1 of 2. **Contextpoort**, want Luhn over tien cijfers laat één op de tien door — zie §15.4 | waarschijnlijk |
+| `us.medicare_mbi` | Medicare Beneficiary Identifier | 11 posities met een vaste tekenklasse per positie, zonder S/L/O/I/B/Z. Géén checksum, dus **contextpoort**. Art. 9-gebied | waarschijnlijk |
+| `us.dea` | DEA-registratienummer | 2 letters + 7 cijfers, mod-10 over zes cijfers → **contextpoort** (§15.4). De tweede letter is de beginletter van de achternaam. Voorschrijver | waarschijnlijk |
 | `us.ein` | Employer Identification Number | Formaat + geldige prefixen. Bedrijfsdata → `info`; bij een eenmanszaak hangt hij aan een persoon — precies de constructie die `nl.btw_id_legacy` al beschrijft | mogelijk |
 | `fin.us_routing` | ABA routing number | mod-10. Universele financiële familie, dus géén regiopoort | zeker |
 | `ca.sin` | Social Insurance Number | Luhn, niet beginnend met 0 of 8, **plus contextpoort** (zie §15.4). Testwaarde `046454286` uit | waarschijnlijk |
 | `ca.ramq` | RAMQ (Québec) | 4 letters + 8 cijfers, codeert geboortedatum en geslacht. Net als de Franse NIR daarmee bijna zelf al een bijzonder gegeven | zeker |
-| `ca.ohip` | OHIP (Ontario) | 10 cijfers + versieletters, mod-10. Art. 9-gebied | zeker |
+| `ca.ohip` | OHIP (Ontario) | 10 cijfers + versieletters. De mod-10 is **niet** tegen een gezaghebbende bron te leggen — de bewering dat het tiende cijfer een Luhn is circuleert wel. Geïmplementeerd als Luhn, mét contextpoort, zodat een verkeerde keuze treffers mist in plaats van valse zekerheid geeft. Art. 9-gebied | waarschijnlijk |
 | `ca.bn` | Business Number | 9 cijfers + programmacode, Luhn. Zelfde eenmanszaak-redenering als `us.ein` | mogelijk |
 
 Plus één uitbreiding die géén regel is maar lexicondata: de OMB- en
@@ -2115,6 +2117,20 @@ mod-10 zijn dat niet. Dezelfde correctie geldt voor `au.tfn` (9 cijfers, mod 11)
 
 Gevolg: `us.ssn`, `ca.sin` en `au.tfn` krijgen alle drie een contextpoort en komen
 niet boven `waarschijnlijk` uit.
+
+**Nagekomen bij het bouwen van 8c: dit geldt ook voor de drie zorgnummers.** De
+tabel in §15.3 zette `us.npi`, `us.medicare_mbi` en `us.dea` op `zeker`, en dat
+was dezelfde denkfout een tabel verderop. Het NPI is Luhn over tien cijfers en
+het DEA-nummer een mod-10 over zes — allebei één op de tien. Het MBI heeft
+helemaal geen checksum; daar draagt alleen de vorm, en elf posities met zes
+uitgesloten letters is streng genoeg om indruk te maken maar niet streng genoeg
+om alleen op af te gaan: een artikelnummer dat dezelfde afwisseling volgt, komt
+erdoor.
+
+Dat ze zorgnummers zijn maakt het strenger, niet losser. Een vals positief zet
+hier een artikel 9-etiket op iemands slide, en dat is een duurdere vergissing dan
+een gemiste ordercode. Alle drie dus met contextpoort, alle drie op
+`waarschijnlijk` — de tabel in §15.3 is daarop bijgewerkt.
 
 ### 15.5 Wat we bewust niet bouwen
 
@@ -2145,7 +2161,7 @@ dat is akkoord, want `us` staat al in `postcodeNeedsContext` en de Canadese
 | --- | --- |
 | **8a** | `privacy_checksums_world.dart` naast de bestaande `_eu`-variant (zelfde splitsing: gedeelde primitieven blijven in de basis), plus `us.ssn`, `us.ssn_last4`, `us.itin`, `us.ein`, `fin.us_routing`. Plus de labeldekkingstest uit §15.8 |
 | **8b** | Canada: `ca.sin`, `ca.ramq`, `ca.ohip`, `ca.bn` |
-| **8c** | Zorg en art. 9: `us.npi`, `us.medicare_mbi`, `us.dea`, de OMB/EEO-1-uitbreiding van het etniciteitslexicon, en het verplaatsen van `us`/`ca` naar `defaultPrivacyRegions` |
+| **8c** | Zorg en art. 9: ~~`us.npi`, `us.medicare_mbi`, `us.dea`~~ (geleverd), nog open: de OMB/EEO-1-uitbreiding van het etniciteitslexicon en het verplaatsen van `us`/`ca` naar `defaultPrivacyRegions` |
 | **8d** | Later: AU/IN/BR/ZA en de Cariben. Voor een Nederlandse organisatie horen `cw.sedula` en `aw.persoonsnummer` daarbij vóór Brazilië |
 
 ### 15.8 De labeldekkingstest

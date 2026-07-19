@@ -1780,6 +1780,14 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
+      'sjukförsäkringsnummer (RAMQ) — en hälsouppgift',
+  'zorgverzekeringsnummer (OHIP) — een zorggegeven':
+      'sjukförsäkringsnummer (OHIP) — en hälsouppgift',
+  'bedrijfsnummer (BN)': 'företagsnummer (BN)',
+  'zorgverlenersnummer (NPI)': 'vårdgivarnummer (NPI)',
+  'Medicare-nummer (MBI) — een zorggegeven':
+      'Medicare-nummer (MBI) — en hälsouppgift',
   'wacht op verbinding': 'väntar på anslutning',
   'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
       'Sparat på den här datorn, ännu inte i repositoryt. Det följer med så snart det finns anslutning igen — eller nu, med "Töm kö".',

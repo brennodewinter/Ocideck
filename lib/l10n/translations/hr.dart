@@ -1788,6 +1788,14 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
+      'broj zdravstvenog osiguranja (RAMQ) — zdravstveni podatak',
+  'zorgverzekeringsnummer (OHIP) — een zorggegeven':
+      'broj zdravstvenog osiguranja (OHIP) — zdravstveni podatak',
+  'bedrijfsnummer (BN)': 'broj poduzeća (BN)',
+  'zorgverlenersnummer (NPI)': 'broj pružatelja zdravstvene skrbi (NPI)',
+  'Medicare-nummer (MBI) — een zorggegeven':
+      'Medicare broj (MBI) — zdravstveni podatak',
   'wacht op verbinding': 'čeka vezu',
   'Opgeslagen op deze computer, nog niet in de repository. Gaat mee zodra er weer verbinding is — of nu, met "Wachtrij legen".':
       'Spremljeno na ovom računalu, još nije u repozitoriju. Ide čim ponovno bude veze — ili sada, s "Isprazni red".',
