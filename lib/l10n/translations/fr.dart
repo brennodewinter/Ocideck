@@ -738,6 +738,10 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Sla de presentatie op om een kopie te maken.':
+      'Enregistrez la présentation pour en faire une copie.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': se trouve hors de la présentation et ne l\'accompagne pas (',
   'Bestand niet gevonden': 'Fichier introuvable',
   'Weg na herladen': 'Perdu après rechargement',
   'Nog niet opgeslagen': 'Pas encore enregistré',

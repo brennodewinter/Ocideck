@@ -124,7 +124,8 @@ List<SlideQualityAction> buildSlideQualityActions({
 
   // Ontbrekende alt-tekst of beschrijving: spring naar het juiste veld.
   if (issue.category == SlideQualityCategory.altText &&
-      issue.kind != SlideQualityIssueKind.missingMediaFile) {
+      issue.kind != SlideQualityIssueKind.missingMediaFile &&
+      issue.kind != SlideQualityIssueKind.externalMediaFile) {
     actions.add(
       SlideQualityAction(
         label: issue.kind == SlideQualityIssueKind.missingAltCaption

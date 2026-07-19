@@ -1772,6 +1772,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Sla de presentatie op om een kopie te maken.':
+      'Salvestage esitlus, et sellest tehtaks koopia.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': asub väljaspool esitlust ega tule kaasa (',
   'Bestand niet gevonden': 'Faili ei leitud',
   'Weg na herladen': 'Kadus pärast uuesti laadimist',
   'Nog niet opgeslagen': 'Veel salvestamata',

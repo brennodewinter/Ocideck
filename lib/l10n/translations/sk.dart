@@ -1788,6 +1788,10 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Sla de presentatie op om een kopie te maken.':
+      'Uložte prezentáciu, aby vznikla kópia.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': leží mimo prezentácie a neputuje s ňou (',
   'Bestand niet gevonden': 'Súbor sa nenašiel',
   'Weg na herladen': 'Po opätovnom načítaní preč',
   'Nog niet opgeslagen': 'Zatiaľ neuložené',

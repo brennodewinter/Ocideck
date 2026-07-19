@@ -1785,6 +1785,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Sla de presentatie op om een kopie te maken.':
+      'Spichered Sie d Präsentation, zum e Kopie z mache.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': liit usserhalb vo de Präsentation und chunnt nid mit (',
   'Bestand niet gevonden': 'Datei nid gfunde',
   'Weg na herladen': 'Nach em Neu-Lade wäg',
   'Nog niet opgeslagen': 'Nonig gspicheret',

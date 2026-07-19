@@ -1797,6 +1797,10 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Sla de presentatie op om een kopie te maken.':
+      'Praesentationem serva ut exemplum fiat.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': extra praesentationem iacet neque cum ea proficiscitur (',
   'Bestand niet gevonden': 'Fasciculus non inventus',
   'Weg na herladen': 'Post paginam iteratam amissum',
   'Nog niet opgeslagen': 'Nondum servatum',

@@ -1804,6 +1804,10 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Sla de presentatie op om een kopie te maken.':
+      'Запазете презентацията, за да се направи копие.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': е извън презентацията и не пътува с нея (',
   'Bestand niet gevonden': 'Файлът не е намерен',
   'Weg na herladen': 'Изчезна след презареждане',
   'Nog niet opgeslagen': 'Още не е запазено',

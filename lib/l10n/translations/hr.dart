@@ -1788,6 +1788,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Sla de presentatie op om een kopie te maken.':
+      'Spremite prezentaciju da biste napravili kopiju.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': nalazi se izvan prezentacije i ne putuje s njom (',
   'Bestand niet gevonden': 'Datoteka nije pronađena',
   'Weg na herladen': 'Nestalo nakon ponovnog učitavanja',
   'Nog niet opgeslagen': 'Još nije spremljeno',

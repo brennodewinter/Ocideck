@@ -1784,6 +1784,10 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Sla de presentatie op om een kopie te maken.':
+      'Uložte prezentaci, aby vznikla kopie.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': leží mimo prezentaci a neputuje s ní (',
   'Bestand niet gevonden': 'Soubor nenalezen',
   'Weg na herladen': 'Po znovunačtení pryč',
   'Nog niet opgeslagen': 'Zatím neuloženo',

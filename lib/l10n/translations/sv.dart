@@ -1780,6 +1780,10 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Sla de presentatie op om een kopie te maken.':
+      'Spara presentationen för att skapa en kopia.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': ligger utanför presentationen och följer inte med (',
   'Bestand niet gevonden': 'Filen hittades inte',
   'Weg na herladen': 'Borta efter omladdning',
   'Nog niet opgeslagen': 'Inte sparat ännu',

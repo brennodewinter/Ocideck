@@ -1781,6 +1781,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Sla de presentatie op om een kopie te maken.':
+      'Simpan presentasi untuk membuat salinan.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': berada di luar presentasi dan tidak ikut serta (',
   'Bestand niet gevonden': 'Berkas tidak ditemukan',
   'Weg na herladen': 'Hilang setelah dimuat ulang',
   'Nog niet opgeslagen': 'Belum disimpan',

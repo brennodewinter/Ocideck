@@ -1756,6 +1756,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Sla de presentatie op om een kopie te maken.':
+      'velqa\' chenmoHmeH cha\'nob yIpol.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': cha\'nob HurDaq \'ej tlheDbe\' (',
   'Bestand niet gevonden': 'mob tu\'be\'lu\'',
   'Weg na herladen': 'nISlu\'pu\'DI\' chIlpu\'',
   'Nog niet opgeslagen': 'polbe\'lu\'',

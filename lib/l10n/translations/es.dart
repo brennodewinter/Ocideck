@@ -735,6 +735,10 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Sla de presentatie op om een kopie te maken.':
+      'Guarde la presentación para crear una copia.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': está fuera de la presentación y no viaja con ella (',
   'Bestand niet gevonden': 'Archivo no encontrado',
   'Weg na herladen': 'Perdido tras recargar',
   'Nog niet opgeslagen': 'Aún no guardado',

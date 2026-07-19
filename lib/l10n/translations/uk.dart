@@ -1799,6 +1799,10 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Sla de presentatie op om een kopie te maken.':
+      'Збережіть презентацію, щоб створити копію.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': лежить поза презентацією і не мандрує разом із нею (',
   'Bestand niet gevonden': 'Файл не знайдено',
   'Weg na herladen': 'Зникло після перезавантаження',
   'Nog niet opgeslagen': 'Ще не збережено',

@@ -738,6 +738,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Sla de presentatie op om een kopie te maken.':
+      'Warda e presentashon pa traha un kopia.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': ta pafó di e presentashon i no ta bai huntu (',
   'Bestand niet gevonden': 'Archivo no hañá',
   'Weg na herladen': 'Pèrdí despues di karga di nobo',
   'Nog niet opgeslagen': 'Ainda no wardá',

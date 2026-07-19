@@ -1781,6 +1781,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Sla de presentatie op om een kopie te maken.':
+      'Tallenna esitys, niin siitä tehdään kopio.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': on esityksen ulkopuolella eikä kulje mukana (',
   'Bestand niet gevonden': 'Tiedostoa ei löydy',
   'Weg na herladen': 'Poissa uudelleenlatauksen jälkeen',
   'Nog niet opgeslagen': 'Ei vielä tallennettu',

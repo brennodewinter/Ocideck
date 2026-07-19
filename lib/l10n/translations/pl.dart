@@ -1793,6 +1793,10 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Sla de presentatie op om een kopie te maken.':
+      'Zapisz prezentację, aby powstała kopia.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': znajduje się poza prezentacją i nie wędruje z nią (',
   'Bestand niet gevonden': 'Nie znaleziono pliku',
   'Weg na herladen': 'Utracone po przeładowaniu',
   'Nog niet opgeslagen': 'Jeszcze nie zapisano',

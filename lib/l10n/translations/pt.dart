@@ -1811,6 +1811,10 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Sla de presentatie op om een kopie te maken.':
+      'Guarde a apresentação para criar uma cópia.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': está fora da apresentação e não segue com ela (',
   'Bestand niet gevonden': 'Ficheiro não encontrado',
   'Weg na herladen': 'Perdido após recarregar',
   'Nog niet opgeslagen': 'Ainda não guardado',

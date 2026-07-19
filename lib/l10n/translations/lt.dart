@@ -1789,6 +1789,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Sla de presentatie op om een kopie te maken.':
+      'Įrašykite pristatymą, kad būtų sukurta kopija.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': yra už pristatymo ribų ir kartu nekeliauja (',
   'Bestand niet gevonden': 'Failas nerastas',
   'Weg na herladen': 'Dingo perkrovus',
   'Nog niet opgeslagen': 'Dar neįrašyta',

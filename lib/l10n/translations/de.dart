@@ -738,6 +738,10 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Sla de presentatie op om een kopie te maken.':
+      'Speichern Sie die Präsentation, um eine Kopie anzulegen.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': liegt außerhalb der Präsentation und wandert nicht mit (',
   'Bestand niet gevonden': 'Datei nicht gefunden',
   'Weg na herladen': 'Nach dem Neuladen weg',
   'Nog niet opgeslagen': 'Noch nicht gespeichert',

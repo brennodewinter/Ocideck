@@ -1817,6 +1817,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Sla de presentatie op om een kopie te maken.':
+      'Sábháil an láithreoireacht chun cóip a dhéanamh.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': tá sé lasmuigh den láithreoireacht agus ní rachaidh sé léi (',
   'Bestand niet gevonden': 'Comhad gan aimsiú',
   'Weg na herladen': 'Imithe tar éis athlódála',
   'Nog niet opgeslagen': 'Gan sábháil fós',

@@ -1809,6 +1809,10 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Sla de presentatie op om een kopie te maken.':
+      'Αποθηκεύστε την παρουσίαση για να δημιουργηθεί αντίγραφο.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': βρίσκεται εκτός της παρουσίασης και δεν ταξιδεύει μαζί της (',
   'Bestand niet gevonden': 'Το αρχείο δεν βρέθηκε',
   'Weg na herladen': 'Χάθηκε μετά την επαναφόρτωση',
   'Nog niet opgeslagen': 'Δεν αποθηκεύτηκε ακόμη',

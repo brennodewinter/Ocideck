@@ -1799,6 +1799,10 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Sla de presentatie op om een kopie te maken.':
+      'Salvați prezentarea pentru a crea o copie.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': se află în afara prezentării și nu călătorește cu ea (',
   'Bestand niet gevonden': 'Fișierul nu a fost găsit',
   'Weg na herladen': 'Pierdut după reîncărcare',
   'Nog niet opgeslagen': 'Încă nesalvat',

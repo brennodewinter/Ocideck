@@ -1783,6 +1783,10 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Sla de presentatie op om een kopie te maken.':
+      'Shranite predstavitev, da nastane kopija.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': je zunaj predstavitve in ne potuje z njo (',
   'Bestand niet gevonden': 'Datoteke ni mogoče najti',
   'Weg na herladen': 'Izgubljeno po ponovnem nalaganju',
   'Nog niet opgeslagen': 'Še ni shranjeno',

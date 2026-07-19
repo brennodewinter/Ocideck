@@ -16,6 +16,7 @@ enum SlideQualityIssueKind {
   chartMissingDescription,
   mediaMissingDescription,
   missingMediaFile,
+  externalMediaFile,
   textDensityWarning,
   textDensityCritical,
   splitRunDragged,

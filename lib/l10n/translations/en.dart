@@ -920,6 +920,10 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Sla de presentatie op om een kopie te maken.':
+      'Save the presentation to make a copy.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': lies outside the presentation and will not travel with it (',
   'Bestand niet gevonden': 'File not found',
   'Weg na herladen': 'Gone after reload',
   'Nog niet opgeslagen': 'Not yet saved',

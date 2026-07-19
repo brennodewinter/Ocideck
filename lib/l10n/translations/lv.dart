@@ -1780,6 +1780,10 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Sla de presentatie op om een kopie te maken.':
+      'Saglabājiet prezentāciju, lai izveidotu kopiju.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': atrodas ārpus prezentācijas un līdzi neceļo (',
   'Bestand niet gevonden': 'Fails nav atrasts',
   'Weg na herladen': 'Pazudis pēc pārlādēšanas',
   'Nog niet opgeslagen': 'Vēl nav saglabāts',

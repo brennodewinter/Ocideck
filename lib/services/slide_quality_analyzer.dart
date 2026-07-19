@@ -3,6 +3,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
 
+import '../models/asset_origin.dart';
 import '../models/chart.dart';
 import '../models/deck.dart';
 import '../models/markdown_validation.dart';
@@ -513,19 +514,39 @@ class SlideQualityAnalyzer {
       // projectmap ("<project>/https:/youtu.be/…"), vindt daar niets, en meldt
       // een YouTube/Vimeo/mp4-link als "bestand niet gevonden".
       if (VideoSource.looksLikeUrl(path)) return;
-      final resolved = _resolveAssetPath(path, projectPath);
-      if (resolved == null || File(resolved).existsSync()) return;
 
-      issues.add(
-        SlideQualityIssue(
-          slideIndex: index,
-          kind: SlideQualityIssueKind.missingMediaFile,
-          category: SlideQualityCategory.altText,
-          severity: MarkdownValidationSeverity.warning,
-          field: field,
-          args: {'label': label, 'path': path},
-        ),
+      SlideQualityIssue issue(SlideQualityIssueKind kind) => SlideQualityIssue(
+        slideIndex: index,
+        kind: kind,
+        category: SlideQualityCategory.altText,
+        severity: MarkdownValidationSeverity.warning,
+        field: field,
+        args: {'label': label, 'path': path},
       );
+
+      final origin = classifyAssetPath(path, projectPath);
+      final hasProject = projectPath != null && projectPath.trim().isNotEmpty;
+
+      // Deck van schijf, pad daarbuiten: containment verbiedt ons hier op de
+      // schijf te kijken, en dat hoeft ook niet. Dát het buiten de presentatie
+      // ligt is op zichzelf het probleem — bestaat het toevallig wel, dan nog
+      // ziet de ontvanger niets.
+      if (origin == AssetOrigin.external && hasProject) {
+        issues.add(issue(SlideQualityIssueKind.externalMediaFile));
+        return;
+      }
+
+      final resolved = _resolveAssetPath(path, projectPath);
+      if (resolved == null) return;
+      if (!File(resolved).existsSync()) {
+        // Ontbreken gaat vóór "ligt buiten de presentatie": opslaan maakt geen
+        // kopie van een bestand dat er niet meer is.
+        issues.add(issue(SlideQualityIssueKind.missingMediaFile));
+        return;
+      }
+      if (origin == AssetOrigin.external) {
+        issues.add(issue(SlideQualityIssueKind.externalMediaFile));
+      }
     }
 
     switch (slide.type) {

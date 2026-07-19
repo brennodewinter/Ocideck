@@ -1780,6 +1780,10 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Sla de presentatie op om een kopie te maken.':
+      'Gem præsentationen for at lave en kopi.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': ligger uden for præsentationen og følger ikke med (',
   'Bestand niet gevonden': 'Filen blev ikke fundet',
   'Weg na herladen': 'Væk efter genindlæsning',
   'Nog niet opgeslagen': 'Endnu ikke gemt',

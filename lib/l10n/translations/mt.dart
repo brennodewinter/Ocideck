@@ -1803,6 +1803,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Sla de presentatie op om een kopie te maken.':
+      'Issejvja l-preżentazzjoni biex issir kopja.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': jinsab barra mill-preżentazzjoni u ma jivvjaġġax magħha (',
   'Bestand niet gevonden': 'Il-fajl ma nstabx',
   'Weg na herladen': 'Intilef wara r-rikarikament',
   'Nog niet opgeslagen': 'Għadu ma ġiex issejvjat',

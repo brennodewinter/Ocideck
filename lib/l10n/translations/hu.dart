@@ -1785,6 +1785,10 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Sla de presentatie op om een kopie te maken.':
+      'Mentse a bemutatót, hogy másolat készüljön.',
+  ': ligt buiten de presentatie en gaat niet mee (':
+      ': a bemutatón kívül van, és nem utazik vele (',
   'Bestand niet gevonden': 'A fájl nem található',
   'Weg na herladen': 'Újratöltés után eltűnt',
   'Nog niet opgeslagen': 'Még nincs mentve',
