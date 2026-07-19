@@ -1792,6 +1792,11 @@ const _dutchSourceAddHu = <String, String>{
       'Keresés név, azonosító vagy kategória szerint',
   'Geen zwakheid gevonden': 'Nincs találat gyengeségre',
   'uitleg nog niet geschreven': 'a magyarázat még nem készült el',
+  'Getalnotatie herkennen': 'Számformátum felismerése',
+  'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
+      'Ebben a fájlban olyan számok vannak, amelyek vesszője kétféleképpen olvasható:',
+  'Duizendtalscheiding': 'Ezreselválasztó',
+  'Decimaalteken': 'Tizedesjel',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'A diagram adatai nem olvashatók; ezek a diagramok üresen maradnak:',
   'Bijlage hulpmiddelen invoegen…': 'Eszközök melléklet beszúrása…',

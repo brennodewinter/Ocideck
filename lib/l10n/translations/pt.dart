@@ -1817,6 +1817,11 @@ const _dutchSourceAddPt = <String, String>{
   'Zoek op naam, id of categorie': 'Pesquisar por nome, id ou categoria',
   'Geen zwakheid gevonden': 'Nenhuma fraqueza encontrada',
   'uitleg nog niet geschreven': 'explicação ainda não escrita',
+  'Getalnotatie herkennen': 'Reconhecer o formato dos números',
+  'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
+      'Este ficheiro contém números cuja vírgula pode ser lida de duas formas:',
+  'Duizendtalscheiding': 'Separador de milhares',
+  'Decimaalteken': 'Separador decimal',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Não foi possível ler os dados do gráfico; esses gráficos ficam vazios:',
   'Bijlage hulpmiddelen invoegen…': 'Inserir anexo de ferramentas…',

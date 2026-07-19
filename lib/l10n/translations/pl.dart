@@ -1800,6 +1800,11 @@ const _dutchSourceAddPl = <String, String>{
   'Zoek op naam, id of categorie': 'Szukaj po nazwie, id lub kategorii',
   'Geen zwakheid gevonden': 'Nie znaleziono słabości',
   'uitleg nog niet geschreven': 'opis jeszcze nienapisany',
+  'Getalnotatie herkennen': 'Rozpoznaj format liczb',
+  'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
+      'Ten plik zawiera liczby, w których przecinek można odczytać na dwa sposoby:',
+  'Duizendtalscheiding': 'Separator tysięcy',
+  'Decimaalteken': 'Znak dziesiętny',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Nie można odczytać danych wykresu; te wykresy pozostaną puste:',
   'Bijlage hulpmiddelen invoegen…': 'Wstaw załącznik z narzędziami…',

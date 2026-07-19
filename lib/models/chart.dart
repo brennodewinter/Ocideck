@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math' as math;
 
 import '../utils/csv.dart';
+import '../utils/number_convention.dart';
 import '../utils/log.dart';
 
 /// Directory (relative to the deck) where linked chart CSVs are kept, so the
@@ -489,27 +490,6 @@ String _detectDelimiter(String headerLine) {
   return best;
 }
 
-/// Read one cell as a number, or return null if it cannot be read.
-///
-/// When the separator is *not* a comma, a comma cannot be separating fields, so
-/// it can only be a decimal mark: `10,5` is 10.5. That inference is only sound
-/// because the delimiter is known, which is why it lives here and not in a
-/// general number parser.
-///
-/// Anything still ambiguous is deliberately refused rather than guessed. A bare
-/// `1,234` may be 1234 or 1.234 depending on where the file was written, and a
-/// value carrying both marks (`1.234,56`) needs a thousands-separator rule this
-/// does not have. Refusing puts them in front of the user instead of inventing
-/// a plausible number.
-double? _parseCsvNumber(String raw, String delimiter) {
-  final direct = double.tryParse(raw);
-  if (direct != null) return direct;
-  if (delimiter != ',' && raw.contains(',') && !raw.contains('.')) {
-    return double.tryParse(raw.replaceAll(',', '.'));
-  }
-  return null;
-}
-
 /// Parse CSV text into (x labels, series). The first row is a header whose
 /// first cell is ignored (the label column) and whose remaining cells are the
 /// series names; each later row is `label, v1, v2, …`.
@@ -530,30 +510,76 @@ double? _parseCsvNumber(String raw, String delimiter) {
 /// 0 looks exactly like a real measurement of zero, which is the more damaging
 /// of the two failures. An empty cell is not reported: a short row means "no
 /// value here", which is a statement, not a mistake.
-(List<String>, List<ChartSeries>, {List<String> unreadable}) parseCsv(
-  String csv,
-) {
+///
+/// How the numbers are written is worked out from the whole file rather than
+/// per cell (see [scanDecimalConvention]), because that is what makes `1,234`
+/// answerable: on its own it is 1234 or 1.234, but beside a `10,5` it is
+/// settled. What the file does not settle is never guessed — those values come
+/// back in [ambiguous], drawn as 0 until a caller supplies [convention]. The
+/// chart editor asks the user; a caller that cannot ask leaves them at 0 and
+/// says so.
+///
+/// With a separator other than a comma, a comma that nothing else settles is
+/// taken as a decimal mark rather than asked about: it cannot be separating
+/// fields there, and a file written that way is European in every other
+/// respect too.
+(
+  List<String>,
+  List<ChartSeries>, {
+  List<String> unreadable,
+  List<String> ambiguous,
+})
+parseCsv(String csv, {DecimalConvention? convention}) {
   final lines = csv
       .replaceAll('\r\n', '\n')
       .split('\n')
       .where((l) => l.trim().isNotEmpty)
       .toList();
-  if (lines.isEmpty) return (const [], const [], unreadable: const []);
+  if (lines.isEmpty) {
+    return (const [], const [], unreadable: const [], ambiguous: const []);
+  }
 
   final delimiter = _detectDelimiter(lines.first);
   final header = parseCsvLine(lines.first, delimiter: delimiter);
   final seriesNames = header.length > 1 ? header.sublist(1) : <String>[];
+  final rows = [
+    for (final line in lines.skip(1)) parseCsvLine(line, delimiter: delimiter),
+  ];
+
+  // Every value cell, so the convention is settled by the file and not by
+  // whichever row happens to come first.
+  final scan = scanDecimalConvention([
+    for (final row in rows)
+      for (var i = 1; i < row.length; i++) row[i],
+  ]);
+  final effective =
+      convention ??
+      scan.decided ??
+      (delimiter == ',' ? DecimalConvention.dot : DecimalConvention.comma);
+  final ambiguous =
+      convention == null && scan.decided == null && delimiter == ','
+      ? scan.undecided
+      : const <String>[];
+
   final x = <String>[];
   final seriesData = [for (final _ in seriesNames) <double>[]];
   final unreadable = <String>[];
 
-  for (final line in lines.skip(1)) {
-    final row = parseCsvLine(line, delimiter: delimiter);
+  for (final row in rows) {
     if (row.isEmpty) continue;
     x.add(row.first);
     for (var i = 0; i < seriesNames.length; i++) {
       final raw = (i + 1) < row.length ? row[i + 1] : '';
-      final value = raw.isEmpty ? 0.0 : _parseCsvNumber(raw, delimiter);
+      if (raw.isEmpty) {
+        seriesData[i].add(0);
+        continue;
+      }
+      if (ambiguous.contains(raw)) {
+        // Answerable, but not by us. Reported through [ambiguous] instead.
+        seriesData[i].add(0);
+        continue;
+      }
+      final value = parseNumberUnder(raw, effective);
       if (value == null) unreadable.add(raw);
       seriesData[i].add(value ?? 0);
     }
@@ -566,5 +592,6 @@ double? _parseCsvNumber(String raw, String delimiter) {
         ChartSeries(name: seriesNames[i], data: seriesData[i]),
     ],
     unreadable: unreadable,
+    ambiguous: ambiguous,
   );
 }

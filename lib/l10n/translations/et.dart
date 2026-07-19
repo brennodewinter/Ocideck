@@ -1778,6 +1778,11 @@ const _dutchSourceAddEt = <String, String>{
   'Zoek op naam, id of categorie': 'Otsi nime, id või kategooria järgi',
   'Geen zwakheid gevonden': 'Nõrkust ei leitud',
   'uitleg nog niet geschreven': 'juhis pole veel kirjutatud',
+  'Getalnotatie herkennen': 'Tuvasta arvude vorming',
+  'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
+      'See fail sisaldab arve, mille koma saab lugeda kahel viisil:',
+  'Duizendtalscheiding': 'Tuhandete eraldaja',
+  'Decimaalteken': 'Kümnendmärk',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Diagrammi andmeid ei õnnestunud lugeda; need diagrammid jäävad tühjaks:',
   'Bijlage hulpmiddelen invoegen…': 'Lisa tööriistade lisa…',

@@ -741,6 +741,11 @@ const _dutchSourceAddEs = {
   'Zoek op naam, id of categorie': 'Buscar por nombre, id o categoría',
   'Geen zwakheid gevonden': 'No se encontró ninguna debilidad',
   'uitleg nog niet geschreven': 'explicación aún no redactada',
+  'Getalnotatie herkennen': 'Reconocer el formato numérico',
+  'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
+      'Este archivo contiene números cuya coma se puede leer de dos maneras:',
+  'Duizendtalscheiding': 'Separador de miles',
+  'Decimaalteken': 'Separador decimal',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'No se pudieron leer los datos del gráfico; esos gráficos quedan vacíos:',
   'Bijlage hulpmiddelen invoegen…': 'Insertar anexo de herramientas…',

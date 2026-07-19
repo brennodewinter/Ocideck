@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/chart.dart';
 import '../../utils/error_snackbar.dart';
+import '../../utils/number_convention.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
 import 'advanced_section.dart';
@@ -287,7 +288,15 @@ class _ChartEditorState extends State<ChartEditor> {
     // naar een bestand naast de presentatie. Hier stond een dialoog "in de
     // slide of als CSV-bestand?"; die vroeg om een beslissing waarvan het ene
     // antwoord inmiddels niet meer waar te maken is.
-    final parsed = parseCsv(text);
+    var parsed = parseCsv(text);
+    // Values the file itself cannot settle: ask, rather than pick one and hope.
+    // Backing out of the question cancels the import — importing anyway would
+    // mean charting a reading the user declined to give.
+    if (parsed.ambiguous.isNotEmpty) {
+      final convention = await askDecimalConvention(context, parsed.ambiguous);
+      if (convention == null || !mounted) return;
+      parsed = parseCsv(text, convention: convention);
+    }
     setState(() {
       // Een import vervangt de cijfers, niet de bestemming: een grafiek die al
       // aan een bestand hangt blijft daaraan hangen en krijgt de nieuwe data

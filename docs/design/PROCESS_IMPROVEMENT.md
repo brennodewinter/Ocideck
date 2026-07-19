@@ -334,10 +334,10 @@ the numbers.** No database — a folder of CSVs and a Markdown file.
 > pre-cursor fix (§18.8) — so a `"Amsterdam, NL"` from Excel survives. It also
 > detects the separator per file, so a `;`-delimited Dutch export loads, and in
 > that case reads `10,5` as a decimal. What it still refuses is a genuinely
-> ambiguous number: a bare `1,234` in a comma-separated file is 1234 or 1.234
-> depending on origin. Those cells chart as 0 but are returned in `unreadable`
-> and surfaced, so LSS inherits a *visible* gap rather than a silent one. The
-> locale decision is still LSS's to make — see §17.
+> ambiguous number, and it no longer decides that alone: the convention is
+> deduced from every value in the file (`1.234,56` settles itself; a `10,5`
+> nearby settles `1,234`), and a file that truly cannot say is asked about at
+> import. LSS inherits no open number-locale decision — see §17.
 
 ### 3.6 Deck-level metadata (front matter)
 
@@ -870,7 +870,7 @@ what §7's scene model is for.
 | **Scope creep** — the artefact list never closes | high | Engines × templates: a new artefact is data, not code (§2) |
 | **SVG/painter divergence** | high — precedent: `_maxY` duplicated verbatim | Shared scene model, injected measurer, scene-level goldens (§7) |
 | **File-size ratchet** | medium — biggest files at 97% of cap, baseline empty | `part`/`part of` split from day one; budget it (§14) |
-| ~~**`parseCsv` is naïve** — no quoted fields~~ | ~~medium~~ — **retired** ahead of this module (§18.8): RFC 4180 quoting, per-file separator detection (`,` `;` tab), and a comma read as a decimal mark when the separator is not a comma | Remaining, and LSS's own call: a bare `1,234` in a comma-separated file stays ambiguous (1234 or 1.234). It charts as 0 — but `parseCsv` returns those cells in `unreadable` and the import names them, so the gap is visible rather than silent |
+| ~~**`parseCsv` is naïve** — no quoted fields~~ | ~~medium~~ — **retired in full** ahead of this module (§18.8): RFC 4180 quoting, per-file separator detection (`,` `;` tab), and number conventions deduced from evidence across the whole file (`utils/number_convention.dart`) | Nothing outstanding for LSS to decide. `1.234,56` and `10,5` read correctly; a file that genuinely cannot say (only three-digit comma groups) is asked about at import rather than guessed. Locale is deliberately *not* used as a tiebreak — a colleague's export does not follow the reader's region |
 | **Cpk on non-normal data** | medium — methodological malpractice | Normality verdict is mandatory alongside every capability figure (§4) |
 | **Standards/trademark** | medium | §19 — no bundled normative text, no conformance claims, naming reviewed |
 | **VSM painter complexity** | medium | Last of the engines (Phase 6), after the scene model has proven itself twice |
@@ -1080,10 +1080,11 @@ is warranted. Tracked as §20.2.
    is a pre-existing bug affecting charts today?~~ **Decided: a separate
    pre-cursor PR**, done, in two rounds. It hit chart users today and nothing
    about the fix needed this module, so it did not wait for a phase that is not
-   built. The second round added separator detection and made unreadable cells
-   visible; what is left is only the genuinely ambiguous `1,234` in a
-   comma-separated file, which is a data question LSS should answer rather than
-   a CSV-splitting one.
+   built. Three rounds in the end: quoting, then separator detection plus
+   surfacing what could not be read, then number conventions. The last one
+   turned out not to be the LSS data question it was filed as — most of it is
+   deducible from the file, and the small remainder is a question for whoever
+   has the file open, not for this module. Nothing here is left waiting on LSS.
 
 ---
 

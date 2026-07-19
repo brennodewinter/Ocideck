@@ -1810,6 +1810,11 @@ const _dutchSourceAddMt = <String, String>{
   'Zoek op naam, id of categorie': 'Fittex bl-isem, l-id jew il-kategorija',
   'Geen zwakheid gevonden': 'Ma nstabet l-ebda dgħufija',
   'uitleg nog niet geschreven': 'l-ispjegazzjoni għadha ma nkitbitx',
+  'Getalnotatie herkennen': 'Agħraf il-format tan-numri',
+  'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
+      'Dan il-fajl fih numri li l-virgola tagħhom tista\' tinqara b\'żewġ modi:',
+  'Duizendtalscheiding': 'Separatur tal-eluf',
+  'Decimaalteken': 'Marka deċimali',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Id-data tal-graff ma setgħetx tinqara; dawk il-graffs jibqgħu vojta:',
   'Bijlage hulpmiddelen invoegen…': 'Daħħal l-anness tal-għodod…',

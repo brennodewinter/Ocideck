@@ -4,6 +4,7 @@ import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/utils/number_convention.dart';
 import 'package:ocideck/widgets/editors/chart_editor.dart';
 
 Widget _host(
@@ -288,6 +289,59 @@ void main() {
     await tester.tap(find.text('Ontkoppelen').last);
     await tester.pumpAndSettle();
     expect(ChartSpec.parse(updated.customMarkdown).source, isNull);
+  });
+
+  group('askDecimalConvention', () {
+    Future<DecimalConvention?> show(WidgetTester tester) async {
+      DecimalConvention? picked;
+      var returned = false;
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Builder(
+              builder: (context) => TextButton(
+                onPressed: () async {
+                  picked = await askDecimalConvention(context, [
+                    '1,234',
+                    '2,500',
+                  ]);
+                  returned = true;
+                },
+                child: const Text('open'),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.tap(find.text('open'));
+      await tester.pumpAndSettle();
+      return returned ? picked : null;
+    }
+
+    testWidgets('shows both readings of the actual values', (tester) async {
+      await show(tester);
+      // The question is answerable because it is asked about this file's own
+      // numbers, not about the words "decimal separator".
+      expect(find.text('1,234 · 2,500'), findsOneWidget);
+      expect(find.text('1234 · 2500'), findsOneWidget);
+      expect(find.text('1.234 · 2.5'), findsOneWidget);
+    });
+
+    testWidgets('picking thousands returns the dot convention', (tester) async {
+      await show(tester);
+      await tester.tap(find.byKey(const ValueKey('csv-convention-thousands')));
+      await tester.pumpAndSettle();
+      expect(find.byType(AlertDialog), findsNothing);
+    });
+
+    testWidgets('backing out returns nothing, so the import stops', (
+      tester,
+    ) async {
+      await show(tester);
+      await tester.tap(find.text('Annuleren'));
+      await tester.pumpAndSettle();
+      expect(find.byType(AlertDialog), findsNothing);
+    });
   });
 
   group('csvUnreadableMessage', () {

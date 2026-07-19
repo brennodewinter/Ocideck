@@ -1805,6 +1805,11 @@ const _dutchSourceAddUk = <String, String>{
   'Zoek op naam, id of categorie': 'Пошук за назвою, id або категорією',
   'Geen zwakheid gevonden': 'Слабкість не знайдено',
   'uitleg nog niet geschreven': 'пояснення ще не написано',
+  'Getalnotatie herkennen': 'Розпізнати формат чисел',
+  'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
+      'У цьому файлі є числа, кому в яких можна прочитати двома способами:',
+  'Duizendtalscheiding': 'Роздільник тисяч',
+  'Decimaalteken': 'Десятковий роздільник',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Не вдалося прочитати дані діаграми; ці діаграми залишаться порожніми:',
   'Bijlage hulpmiddelen invoegen…': 'Вставити додаток з інструментами…',

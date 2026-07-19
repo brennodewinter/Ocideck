@@ -744,6 +744,11 @@ const _dutchSourceAddDe = {
   'Zoek op naam, id of categorie': 'Nach Name, ID oder Kategorie suchen',
   'Geen zwakheid gevonden': 'Keine Schwachstelle gefunden',
   'uitleg nog niet geschreven': 'Erläuterung noch nicht geschrieben',
+  'Getalnotatie herkennen': 'Zahlenformat erkennen',
+  'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
+      'Diese Datei enthält Zahlen, deren Komma sich auf zwei Arten lesen lässt:',
+  'Duizendtalscheiding': 'Tausendertrennzeichen',
+  'Decimaalteken': 'Dezimaltrennzeichen',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Diagrammdaten konnten nicht gelesen werden; diese Diagramme bleiben leer:',
   'Bijlage hulpmiddelen invoegen…': 'Anhang Hilfsmittel einfügen…',

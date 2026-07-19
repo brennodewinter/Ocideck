@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/chart.dart';
+import 'package:ocideck/utils/number_convention.dart';
 
 void main() {
   test('chart palette starts with the EU flag colors', () {
@@ -8,7 +9,7 @@ void main() {
 
   group('parseCsv', () {
     test('reads header series names and labelled rows', () {
-      final (x, series, unreadable: _) = parseCsv(
+      final (x, series, unreadable: _, ambiguous: _) = parseCsv(
         '\n, 2025, 2026\nQ1, 10, 12\nQ2, 14, 9\n',
       );
       expect(x, ['Q1', 'Q2']);
@@ -38,7 +39,7 @@ void main() {
     });
 
     test('a quoted field may contain a comma', () {
-      final (x, series, unreadable: _) = parseCsv(
+      final (x, series, unreadable: _, ambiguous: _) = parseCsv(
         ',Omzet\n"Amsterdam, NL",10\n"Parijs, FR",12',
       );
       expect(x, ['Amsterdam, NL', 'Parijs, FR']);
@@ -48,7 +49,9 @@ void main() {
     test('a quoted numeric field parses as one value', () {
       // Excel exports decimals wrapped in quotes; before the quote-aware split
       // this became two cells and shifted the whole row.
-      final (x, series, unreadable: _) = parseCsv(',A,B\nQ1,"1.234",7');
+      final (x, series, unreadable: _, ambiguous: _) = parseCsv(
+        ',A,B\nQ1,"1.234",7',
+      );
       expect(x, ['Q1']);
       expect(series.map((s) => s.name), ['A', 'B']);
       expect(series[0].data, [1.234]);
@@ -56,7 +59,7 @@ void main() {
     });
 
     test('a doubled "" inside a quoted field is one literal quote', () {
-      final (x, series, unreadable: _) = parseCsv(
+      final (x, series, unreadable: _, ambiguous: _) = parseCsv(
         ',A\n"say ""hi""",1\n"""quoted""",2',
       );
       expect(x, ['say "hi"', '"quoted"']);
@@ -64,23 +67,29 @@ void main() {
     });
 
     test('quoted fields work in the header row too', () {
-      final (x, series, unreadable: _) = parseCsv(',"Omzet, netto"\nQ1,10');
+      final (x, series, unreadable: _, ambiguous: _) = parseCsv(
+        ',"Omzet, netto"\nQ1,10',
+      );
       expect(series.single.name, 'Omzet, netto');
       expect(x, ['Q1']);
     });
 
     test('space before an opening quote still reads as one field', () {
-      final (x, _, unreadable: _) = parseCsv(',A\n "Amsterdam, NL" ,10');
+      final (x, _, unreadable: _, ambiguous: _) = parseCsv(
+        ',A\n "Amsterdam, NL" ,10',
+      );
       expect(x, ['Amsterdam, NL']);
     });
 
     test('a quoted field keeps its inner whitespace verbatim', () {
-      final (x, _, unreadable: _) = parseCsv(',A\n" spatie ",1');
+      final (x, _, unreadable: _, ambiguous: _) = parseCsv(',A\n" spatie ",1');
       expect(x, [' spatie ']);
     });
 
     test('an unterminated quote runs to the end of the line', () {
-      final (x, series, unreadable: _) = parseCsv(',A\n"Amsterdam, NL,10');
+      final (x, series, unreadable: _, ambiguous: _) = parseCsv(
+        ',A\n"Amsterdam, NL,10',
+      );
       expect(x, ['Amsterdam, NL,10']);
       expect(series.single.data, [0]);
     });
@@ -88,7 +97,7 @@ void main() {
     test('regression: unquoted CSV parses exactly as before', () {
       // Byte-for-byte the pre-fix behaviour: trimming, blank-line skipping,
       // empty leading header cell, short rows padded with 0.
-      final (x, series, unreadable: _) = parseCsv(
+      final (x, series, unreadable: _, ambiguous: _) = parseCsv(
         '\n, 2025, 2026\nQ1, 10, 12\n\nQ2, 14, 9\nQ3, 3\n',
       );
       expect(x, ['Q1', 'Q2', 'Q3']);
@@ -135,18 +144,66 @@ void main() {
       expect(result.$2.single.data, [10]);
     });
 
-    test('an ambiguous 1,234 is refused and reported, never guessed', () {
-      // Could be 1234 or 1.234 depending on where the file was written. It
-      // draws as 0, but the user is told rather than shown a made-up number.
+    test('an unaccompanied 1,234 is handed back as a question', () {
+      // Could be 1234 or 1.234 and nothing in this file says which. It draws
+      // as 0 and comes back in `ambiguous` — not as a wrong number, and not
+      // lumped in with values that are simply unreadable.
       final result = parseCsv(',A\nQ1,"1,234"');
       expect(result.$2.single.data, [0]);
-      expect(result.unreadable, ['1,234']);
+      expect(result.ambiguous, ['1,234']);
+      expect(result.unreadable, isEmpty);
     });
 
-    test('a value carrying both marks is refused and reported', () {
+    test('answering the question resolves it either way', () {
+      const csv = ',A\nQ1,"1,234"';
+      expect(parseCsv(csv, convention: DecimalConvention.dot).$2.single.data, [
+        1234,
+      ]);
+      expect(
+        parseCsv(csv, convention: DecimalConvention.comma).$2.single.data,
+        [1.234],
+      );
+      expect(
+        parseCsv(csv, convention: DecimalConvention.dot).ambiguous,
+        isEmpty,
+      );
+    });
+
+    test('a neighbour that settles the convention answers it for free', () {
+      // No question needed: 10,5 can only be a decimal comma, so 1,234 in the
+      // same file is 1.234 too.
+      final decimal = parseCsv(',A,B\nQ1,"1,234","10,5"');
+      expect(decimal.ambiguous, isEmpty);
+      expect(decimal.$2[0].data, [1.234]);
+      expect(decimal.$2[1].data, [10.5]);
+
+      // And the other way: 10.5 fixes the dot as decimal, so 1,234 groups.
+      final grouped = parseCsv(',A,B\nQ1,"1,234","10.5"');
+      expect(grouped.ambiguous, isEmpty);
+      expect(grouped.$2[0].data, [1234]);
+      expect(grouped.$2[1].data, [10.5]);
+    });
+
+    test('a value carrying both marks needs no question at all', () {
+      // 1.234,56 settles itself: the last mark is the decimal one.
       final result = parseCsv('Label;Omzet\nQ1;"1.234,56"');
-      expect(result.$2.single.data, [0]);
-      expect(result.unreadable, ['1.234,56']);
+      expect(result.$2.single.data, [1234.56]);
+      expect(result.unreadable, isEmpty);
+      expect(result.ambiguous, isEmpty);
+    });
+
+    test('a whole file of three-digit groups is what actually gets asked', () {
+      final result = parseCsv(',Omzet\nQ1,"1,234"\nQ2,"2,500"\nQ3,"12,000"');
+      expect(result.ambiguous, ['1,234', '2,500', '12,000']);
+      expect(result.$2.single.data, [0, 0, 0]);
+    });
+
+    test('the app reading back its own CSV asks nothing', () {
+      // chartDataAsCsv writes a dot decimal mark, so 1.234 must stay 1.234
+      // without a prompt or every round-trip would interrogate the user.
+      final result = parseCsv(',A\nQ1,1.234\nQ2,2.5');
+      expect(result.ambiguous, isEmpty);
+      expect(result.$2.single.data, [1.234, 2.5]);
     });
 
     test('currency and percent signs are refused and reported', () {

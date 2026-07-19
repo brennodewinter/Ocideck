@@ -1794,6 +1794,11 @@ const _dutchSourceAddSk = <String, String>{
   'Zoek op naam, id of categorie': 'Hľadať podľa názvu, id alebo kategórie',
   'Geen zwakheid gevonden': 'Nenašla sa žiadna slabina',
   'uitleg nog niet geschreven': 'vysvetlenie zatiaľ nenapísané',
+  'Getalnotatie herkennen': 'Rozpoznať formát čísel',
+  'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
+      'Tento súbor obsahuje čísla, ktorých čiarku možno čítať dvoma spôsobmi:',
+  'Duizendtalscheiding': 'Oddeľovač tisícov',
+  'Decimaalteken': 'Desatinná čiarka',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Údaje grafu sa nepodarilo načítať; tieto grafy zostanú prázdne:',
   'Bijlage hulpmiddelen invoegen…': 'Vložiť prílohu s nástrojmi…',

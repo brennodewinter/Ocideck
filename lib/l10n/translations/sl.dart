@@ -1789,6 +1789,11 @@ const _dutchSourceAddSl = <String, String>{
   'Zoek op naam, id of categorie': 'Iskanje po imenu, id-ju ali kategoriji',
   'Geen zwakheid gevonden': 'Šibkosti ni bilo mogoče najti',
   'uitleg nog niet geschreven': 'razlaga še ni napisana',
+  'Getalnotatie herkennen': 'Prepoznaj obliko števil',
+  'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
+      'Ta datoteka vsebuje števila, katerih vejico je mogoče brati na dva načina:',
+  'Duizendtalscheiding': 'Ločilo tisočic',
+  'Decimaalteken': 'Decimalno ločilo',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Podatkov grafikona ni bilo mogoče prebrati; ti grafikoni ostanejo prazni:',
   'Bijlage hulpmiddelen invoegen…': 'Vstavi prilogo z orodji…',

@@ -1795,6 +1795,11 @@ const _dutchSourceAddLt = <String, String>{
   'Zoek op naam, id of categorie': 'Ieškoti pagal pavadinimą, id ar kategoriją',
   'Geen zwakheid gevonden': 'Silpnybių nerasta',
   'uitleg nog niet geschreven': 'paaiškinimas dar neparašytas',
+  'Getalnotatie herkennen': 'Atpažinti skaičių formatą',
+  'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
+      'Šiame faile yra skaičių, kurių kablelį galima skaityti dviem būdais:',
+  'Duizendtalscheiding': 'Tūkstančių skirtukas',
+  'Decimaalteken': 'Dešimtainis skirtukas',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Nepavyko nuskaityti diagramos duomenų; šios diagramos liks tuščios:',
   'Bijlage hulpmiddelen invoegen…': 'Įterpti įrankių priedą…',

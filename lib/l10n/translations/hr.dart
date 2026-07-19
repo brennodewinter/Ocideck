@@ -1794,6 +1794,11 @@ const _dutchSourceAddHr = <String, String>{
   'Zoek op naam, id of categorie': 'Pretraži po nazivu, id-u ili kategoriji',
   'Geen zwakheid gevonden': 'Nije pronađena slabost',
   'uitleg nog niet geschreven': 'objašnjenje još nije napisano',
+  'Getalnotatie herkennen': 'Prepoznaj format brojeva',
+  'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
+      'Ova datoteka sadrži brojeve čiji se zarez može čitati na dva načina:',
+  'Duizendtalscheiding': 'Razdjelnik tisućica',
+  'Decimaalteken': 'Decimalni znak',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Podaci grafikona nisu se mogli pročitati; ti grafikoni ostaju prazni:',
   'Bijlage hulpmiddelen invoegen…': 'Umetni prilog s alatima…',

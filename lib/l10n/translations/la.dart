@@ -1803,6 +1803,11 @@ const _dutchSourceAddLa = <String, String>{
   'Zoek op naam, id of categorie': 'Quaerere nomine, id vel genere',
   'Geen zwakheid gevonden': 'Nulla infirmitas inventa',
   'uitleg nog niet geschreven': 'explicatio nondum scripta',
+  'Getalnotatie herkennen': 'Formam numerorum agnoscere',
+  'In dit bestand staan getallen waarvan de komma op twee manieren te lezen is:':
+      'Hic liber numeros continet quorum comma duobus modis legi potest:',
+  'Duizendtalscheiding': 'Separatio milium',
+  'Decimaalteken': 'Signum decimale',
   'Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:':
       'Data diagrammatis legi non potuerunt; illa diagrammata vacua manent:',
   'Bijlage hulpmiddelen invoegen…': 'Appendicem instrumentorum inserere…',

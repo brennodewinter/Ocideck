@@ -446,6 +446,18 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   glance from a contrast or text-density one.
 
 ### Fixed
+- **`1,234` from a spreadsheet is now read correctly instead of dropped.**
+  Whether that is one thousand two hundred thirty-four or one-point-two-three-
+  four depends on where the file was written, and one cell cannot say. A file
+  usually can: a `10,5` elsewhere in it proves the comma is a decimal mark, a
+  `10.5` proves it groups thousands, and `1.234,56` settles itself because the
+  last mark is always the decimal one. That evidence is now gathered across
+  every value before any of them is read — and nothing is inferred from your
+  language or region, because a file from a colleague abroad does not follow
+  either. When the file truly does not say (every comma followed by exactly
+  three digits) the import **asks**, showing what your own numbers become under
+  each reading; closing that question cancels the import rather than choosing
+  for you.
 - **A Dutch Excel export finally charts as itself.** A spreadsheet whose decimal
   mark is a comma writes CSV with **semicolons**, and OciDeck read the whole line
   as one cell: labels like `Q1;10` and no series at all. The separator (comma,
