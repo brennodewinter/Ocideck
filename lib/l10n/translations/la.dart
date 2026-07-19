@@ -1797,6 +1797,10 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Kwaliteitsproblemen geaccepteerd': 'Vitia qualitatis accepta',
+  'Mogelijk persoonsgegevens': 'Fortasse data personalia',
+  'Persoonsgegevens geaccepteerd': 'Data personalia accepta',
+  'Persoonsgegevens gevonden': 'Data personalia inventa',
   'Organisatie': 'Institutum',
   'Openen vanaf WebDAV': 'Ex WebDAV aperire',
   'Opslaan naar WebDAV': 'In WebDAV servare',

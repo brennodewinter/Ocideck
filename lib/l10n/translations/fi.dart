@@ -1781,6 +1781,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Kwaliteitsproblemen geaccepteerd': 'Laatuongelmat hyväksytty',
+  'Mogelijk persoonsgegevens': 'Mahdollisesti henkilötietoja',
+  'Persoonsgegevens geaccepteerd': 'Henkilötiedot hyväksytty',
+  'Persoonsgegevens gevonden': 'Henkilötietoja löytyi',
   'Organisatie': 'Organisaatio',
   'Openen vanaf WebDAV': 'Avaa WebDAVista',
   'Opslaan naar WebDAV': 'Tallenna WebDAViin',

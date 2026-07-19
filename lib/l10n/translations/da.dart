@@ -1780,6 +1780,10 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Kwaliteitsproblemen geaccepteerd': 'Kvalitetsproblemer accepteret',
+  'Mogelijk persoonsgegevens': 'Muligvis personoplysninger',
+  'Persoonsgegevens geaccepteerd': 'Personoplysninger accepteret',
+  'Persoonsgegevens gevonden': 'Personoplysninger fundet',
   'Organisatie': 'Organisation',
   'Openen vanaf WebDAV': 'Åbn fra WebDAV',
   'Opslaan naar WebDAV': 'Gem til WebDAV',

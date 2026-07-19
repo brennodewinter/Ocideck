@@ -920,6 +920,10 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Kwaliteitsproblemen geaccepteerd': 'Quality issues accepted',
+  'Mogelijk persoonsgegevens': 'Possibly personal data',
+  'Persoonsgegevens geaccepteerd': 'Personal data accepted',
+  'Persoonsgegevens gevonden': 'Personal data found',
   'Organisatie': 'Organisation',
   'Openen vanaf WebDAV': 'Open from WebDAV',
   'Opslaan naar WebDAV': 'Save to WebDAV',

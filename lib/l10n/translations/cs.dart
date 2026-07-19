@@ -1784,6 +1784,10 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Kwaliteitsproblemen geaccepteerd': 'Problémy s kvalitou přijaty',
+  'Mogelijk persoonsgegevens': 'Možná osobní údaje',
+  'Persoonsgegevens geaccepteerd': 'Osobní údaje přijaty',
+  'Persoonsgegevens gevonden': 'Nalezeny osobní údaje',
   'Organisatie': 'Organizace',
   'Openen vanaf WebDAV': 'Otevřít z WebDAV',
   'Opslaan naar WebDAV': 'Uložit na WebDAV',

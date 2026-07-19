@@ -1785,6 +1785,10 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Kwaliteitsproblemen geaccepteerd': 'Minőségi problémák elfogadva',
+  'Mogelijk persoonsgegevens': 'Esetleg személyes adat',
+  'Persoonsgegevens geaccepteerd': 'Személyes adat elfogadva',
+  'Persoonsgegevens gevonden': 'Személyes adat található',
   'Organisatie': 'Szervezet',
   'Openen vanaf WebDAV': 'Megnyitás a WebDAVról',
   'Opslaan naar WebDAV': 'Mentés a WebDAVra',

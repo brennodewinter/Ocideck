@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/l10n/slide_quality_localization.dart';
+import 'package:ocideck/models/privacy_disposition.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/state/privacy_provider.dart';
@@ -102,7 +103,13 @@ void main() {
 
       // Vóór deze fix keek de badge alleen naar deckQualityProvider en bleef een
       // slide waarvan het énige probleem een IBAN is, ongemarkeerd.
-      expect(find.byTooltip('Kwaliteitsproblemen'), findsOneWidget);
+      //
+      // De markering zégt sindsdien ook waar ze over gaat. Zolang privacy in de
+      // kwaliteitsbadge gevouwen zat, kon hetzelfde oranje bolletje contrast,
+      // tekstdichtheid óf een IBAN betekenen — en dan weet je van geen enkele
+      // slide waar je naar kijkt.
+      expect(find.byTooltip('Persoonsgegevens gevonden'), findsOneWidget);
+      expect(find.byTooltip('Kwaliteitsproblemen'), findsNothing);
     });
 
     testWidgets('een schone slide krijgt geen badge', (tester) async {
@@ -123,6 +130,38 @@ void main() {
         find.byTooltip('Kwaliteitsproblemen (inclusief ernstige)'),
         findsNothing,
       );
+      expect(find.byTooltip('Persoonsgegevens gevonden'), findsNothing);
+    });
+
+    testWidgets('een geaccepteerde slide houdt een grijze badge', (
+      tester,
+    ) async {
+      // Dit is de klacht waar deze badge uit voortkomt. Wie een bevinding
+      // accepteerde, zag daarna nérgens meer dat er iets gevonden wás: de
+      // melding verdween uit het paneel én de badge van de thumbnail, en de
+      // slide zag er daarna precies zo uit als een slide waarop niets staat.
+      //
+      // Accepteren mag niet hetzelfde worden als verbergen. De badge blijft dus
+      // staan en wordt grijs — hij zegt "hier is iets, en jij weet ervan".
+      final container = ProviderContainer();
+      addTearDown(container.dispose);
+      final notifier = container.read(deckProvider.notifier);
+      notifier.newDeck('Test');
+      final slide = container.read(deckProvider).deck!.slides.single;
+      notifier.updateSlide(
+        0,
+        slide.copyWith(bullets: [_iban], privacy: PrivacyDisposition.accept),
+      );
+
+      // Het paneel is stil — daar hoort een afgehandelde beslissing niet meer
+      // te zeuren.
+      expect(container.read(privacyQualityIssuesProvider), isEmpty);
+
+      await pumpRail(tester, container);
+
+      // Maar de slide is niet stilletjes schoon geworden.
+      expect(find.byTooltip('Persoonsgegevens geaccepteerd'), findsOneWidget);
+      expect(find.byTooltip('Persoonsgegevens gevonden'), findsNothing);
     });
   });
 }

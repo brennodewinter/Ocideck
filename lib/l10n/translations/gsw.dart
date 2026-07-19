@@ -1785,6 +1785,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Kwaliteitsproblemen geaccepteerd': 'Qualitätsprobläm akzeptiert',
+  'Mogelijk persoonsgegevens': 'Villicht persöönlichi Date',
+  'Persoonsgegevens geaccepteerd': 'Persöönlichi Date akzeptiert',
+  'Persoonsgegevens gevonden': 'Persöönlichi Date gfunde',
   'Organisatie': 'Organisation',
   'Openen vanaf WebDAV': 'Vo WebDAV öffne',
   'Opslaan naar WebDAV': 'Uf WebDAV speichere',

@@ -1783,6 +1783,10 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Kwaliteitsproblemen geaccepteerd': 'Težave s kakovostjo sprejete',
+  'Mogelijk persoonsgegevens': 'Morda osebni podatki',
+  'Persoonsgegevens geaccepteerd': 'Osebni podatki sprejeti',
+  'Persoonsgegevens gevonden': 'Najdeni osebni podatki',
   'Organisatie': 'Organizacija',
   'Openen vanaf WebDAV': 'Odpri iz WebDAV',
   'Opslaan naar WebDAV': 'Shrani na WebDAV',

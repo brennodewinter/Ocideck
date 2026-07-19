@@ -1780,6 +1780,10 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Kwaliteitsproblemen geaccepteerd': 'Kvalitetsproblem accepterade',
+  'Mogelijk persoonsgegevens': 'Möjligen personuppgifter',
+  'Persoonsgegevens geaccepteerd': 'Personuppgifter accepterade',
+  'Persoonsgegevens gevonden': 'Personuppgifter hittades',
   'Organisatie': 'Organisation',
   'Openen vanaf WebDAV': 'Öppna från WebDAV',
   'Opslaan naar WebDAV': 'Spara till WebDAV',

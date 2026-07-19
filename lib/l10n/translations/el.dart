@@ -1809,6 +1809,10 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Kwaliteitsproblemen geaccepteerd': 'Τα ζητήματα ποιότητας έγιναν αποδεκτά',
+  'Mogelijk persoonsgegevens': 'Πιθανώς προσωπικά δεδομένα',
+  'Persoonsgegevens geaccepteerd': 'Τα προσωπικά δεδομένα έγιναν αποδεκτά',
+  'Persoonsgegevens gevonden': 'Βρέθηκαν προσωπικά δεδομένα',
   'Organisatie': 'Οργανισμός',
   'Openen vanaf WebDAV': 'Άνοιγμα από το WebDAV',
   'Opslaan naar WebDAV': 'Αποθήκευση στο WebDAV',

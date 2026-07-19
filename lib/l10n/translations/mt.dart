@@ -1803,6 +1803,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Kwaliteitsproblemen geaccepteerd': 'Problemi ta\' kwalità aċċettati',
+  'Mogelijk persoonsgegevens': 'Possibbilment data personali',
+  'Persoonsgegevens geaccepteerd': 'Data personali aċċettata',
+  'Persoonsgegevens gevonden': 'Instabet data personali',
   'Organisatie': 'Organizzazzjoni',
   'Openen vanaf WebDAV': 'Iftaħ minn WebDAV',
   'Opslaan naar WebDAV': 'Issalva fuq WebDAV',

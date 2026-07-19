@@ -1799,6 +1799,10 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Kwaliteitsproblemen geaccepteerd': 'Проблеми якості прийнято',
+  'Mogelijk persoonsgegevens': 'Можливо, персональні дані',
+  'Persoonsgegevens geaccepteerd': 'Персональні дані прийнято',
+  'Persoonsgegevens gevonden': 'Знайдено персональні дані',
   'Organisatie': 'Організація',
   'Openen vanaf WebDAV': 'Відкрити з WebDAV',
   'Opslaan naar WebDAV': 'Зберегти на WebDAV',

@@ -738,6 +738,10 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Kwaliteitsproblemen geaccepteerd': 'Qualitätsprobleme akzeptiert',
+  'Mogelijk persoonsgegevens': 'Möglicherweise personenbezogene Daten',
+  'Persoonsgegevens geaccepteerd': 'Personenbezogene Daten akzeptiert',
+  'Persoonsgegevens gevonden': 'Personenbezogene Daten gefunden',
   'Openen vanaf WebDAV': 'Von WebDAV öffnen',
   'Opslaan naar WebDAV': 'Auf WebDAV speichern',
   'Opgeslagen op WebDAV:': 'Auf WebDAV gespeichert:',

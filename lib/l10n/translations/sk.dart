@@ -1788,6 +1788,10 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Kwaliteitsproblemen geaccepteerd': 'Problémy s kvalitou prijaté',
+  'Mogelijk persoonsgegevens': 'Možné osobné údaje',
+  'Persoonsgegevens geaccepteerd': 'Osobné údaje prijaté',
+  'Persoonsgegevens gevonden': 'Nájdené osobné údaje',
   'Organisatie': 'Organizácia',
   'Openen vanaf WebDAV': 'Otvoriť z WebDAVu',
   'Opslaan naar WebDAV': 'Uložiť na WebDAV',

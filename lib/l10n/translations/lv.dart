@@ -1780,6 +1780,10 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Kwaliteitsproblemen geaccepteerd': 'Kvalitātes problēmas pieņemtas',
+  'Mogelijk persoonsgegevens': 'Iespējami personas dati',
+  'Persoonsgegevens geaccepteerd': 'Personas dati pieņemti',
+  'Persoonsgegevens gevonden': 'Atrasti personas dati',
   'Organisatie': 'Organizācija',
   'Openen vanaf WebDAV': 'Atvērt no WebDAV',
   'Opslaan naar WebDAV': 'Saglabāt WebDAV',

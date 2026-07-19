@@ -1804,6 +1804,10 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Kwaliteitsproblemen geaccepteerd': 'Проблемите с качеството са приети',
+  'Mogelijk persoonsgegevens': 'Възможно лични данни',
+  'Persoonsgegevens geaccepteerd': 'Личните данни са приети',
+  'Persoonsgegevens gevonden': 'Намерени са лични данни',
   'Organisatie': 'Организация',
   'Openen vanaf WebDAV': 'Отваряне от WebDAV',
   'Opslaan naar WebDAV': 'Запазване в WebDAV',

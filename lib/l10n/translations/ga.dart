@@ -1817,6 +1817,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Kwaliteitsproblemen geaccepteerd': 'Fadhbanna cáilíochta glactha',
+  'Mogelijk persoonsgegevens': 'Sonraí pearsanta b\'fhéidir',
+  'Persoonsgegevens geaccepteerd': 'Sonraí pearsanta glactha',
+  'Persoonsgegevens gevonden': 'Aimsíodh sonraí pearsanta',
   'Organisatie': 'Eagraíocht',
   'Openen vanaf WebDAV': 'Oscail ó WebDAV',
   'Opslaan naar WebDAV': 'Sábháil chuig WebDAV',

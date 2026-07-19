@@ -1789,6 +1789,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Kwaliteitsproblemen geaccepteerd': 'Kokybės problemos priimtos',
+  'Mogelijk persoonsgegevens': 'Galimi asmens duomenys',
+  'Persoonsgegevens geaccepteerd': 'Asmens duomenys priimti',
+  'Persoonsgegevens gevonden': 'Rasta asmens duomenų',
   'Organisatie': 'Organizacija',
   'Openen vanaf WebDAV': 'Atverti iš WebDAV',
   'Opslaan naar WebDAV': 'Išsaugoti į WebDAV',

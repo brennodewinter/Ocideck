@@ -1756,6 +1756,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Kwaliteitsproblemen geaccepteerd': '\'ul Qob lajlu\'',
+  'Mogelijk persoonsgegevens': 'chaq nuv De\'',
+  'Persoonsgegevens geaccepteerd': 'nuv De\' lajlu\'',
+  'Persoonsgegevens gevonden': 'nuv De\' tu\'lu\'',
   'Organisatie': 'ghom',
   'Openen vanaf WebDAV': 'WebDAVvo\' poSmoH',
   'Opslaan naar WebDAV': 'WebDAVDaq pol',

@@ -1772,6 +1772,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Kwaliteitsproblemen geaccepteerd': 'Kvaliteediprobleemid aktsepteeritud',
+  'Mogelijk persoonsgegevens': 'Võimalikud isikuandmed',
+  'Persoonsgegevens geaccepteerd': 'Isikuandmed aktsepteeritud',
+  'Persoonsgegevens gevonden': 'Leiti isikuandmeid',
   'Organisatie': 'Organisatsioon',
   'Openen vanaf WebDAV': 'Ava WebDAV\'ist',
   'Opslaan naar WebDAV': 'Salvesta WebDAV\'i',

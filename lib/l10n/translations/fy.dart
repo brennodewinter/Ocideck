@@ -739,6 +739,10 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Kwaliteitsproblemen geaccepteerd': 'Kwaliteitsproblemen akseptearre',
+  'Mogelijk persoonsgegevens': 'Mooglik persoansgegevens',
+  'Persoonsgegevens geaccepteerd': 'Persoansgegevens akseptearre',
+  'Persoonsgegevens gevonden': 'Persoansgegevens fûn',
   'Openen vanaf WebDAV': 'Iepenje fan WebDAV',
   'Opslaan naar WebDAV': 'Bewarje nei WebDAV',
   'Opgeslagen op WebDAV:': 'Bewarre op WebDAV:',

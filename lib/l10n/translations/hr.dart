@@ -1788,6 +1788,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Kwaliteitsproblemen geaccepteerd': 'Problemi kvalitete prihvaćeni',
+  'Mogelijk persoonsgegevens': 'Možda osobni podaci',
+  'Persoonsgegevens geaccepteerd': 'Osobni podaci prihvaćeni',
+  'Persoonsgegevens gevonden': 'Pronađeni osobni podaci',
   'Organisatie': 'Organizacija',
   'Openen vanaf WebDAV': 'Otvori s WebDAVa',
   'Opslaan naar WebDAV': 'Spremi na WebDAV',

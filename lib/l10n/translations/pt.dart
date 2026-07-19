@@ -1811,6 +1811,10 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Kwaliteitsproblemen geaccepteerd': 'Problemas de qualidade aceites',
+  'Mogelijk persoonsgegevens': 'Possíveis dados pessoais',
+  'Persoonsgegevens geaccepteerd': 'Dados pessoais aceites',
+  'Persoonsgegevens gevonden': 'Dados pessoais encontrados',
   'Organisatie': 'Organização',
   'Openen vanaf WebDAV': 'Abrir a partir do WebDAV',
   'Opslaan naar WebDAV': 'Guardar no WebDAV',

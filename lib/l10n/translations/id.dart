@@ -1781,6 +1781,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Kwaliteitsproblemen geaccepteerd': 'Masalah kualitas diterima',
+  'Mogelijk persoonsgegevens': 'Mungkin data pribadi',
+  'Persoonsgegevens geaccepteerd': 'Data pribadi diterima',
+  'Persoonsgegevens gevonden': 'Data pribadi ditemukan',
   'Organisatie': 'Organisasi',
   'Openen vanaf WebDAV': 'Buka dari WebDAV',
   'Opslaan naar WebDAV': 'Simpan ke WebDAV',

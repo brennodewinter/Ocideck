@@ -1799,6 +1799,10 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Kwaliteitsproblemen geaccepteerd': 'Probleme de calitate acceptate',
+  'Mogelijk persoonsgegevens': 'Posibile date cu caracter personal',
+  'Persoonsgegevens geaccepteerd': 'Date cu caracter personal acceptate',
+  'Persoonsgegevens gevonden': 'Date cu caracter personal găsite',
   'Organisatie': 'Organizație',
   'Openen vanaf WebDAV': 'Deschide din WebDAV',
   'Opslaan naar WebDAV': 'Salvează pe WebDAV',

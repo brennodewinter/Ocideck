@@ -738,6 +738,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Kwaliteitsproblemen geaccepteerd': 'Problemanan di kalidat aseptá',
+  'Mogelijk persoonsgegevens': 'Posiblemente datonan personal',
+  'Persoonsgegevens geaccepteerd': 'Datonan personal aseptá',
+  'Persoonsgegevens gevonden': 'Datonan personal hañá',
   'Openen vanaf WebDAV': 'Habri for di WebDAV',
   'Opslaan naar WebDAV': 'Warda riba WebDAV',
   'Opgeslagen op WebDAV:': 'Wardá riba WebDAV:',
