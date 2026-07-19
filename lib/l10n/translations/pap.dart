@@ -738,6 +738,11 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Geen meldingen meer op deze slide.': 'No tin mas avisonan riba e slide aki.',
+  'Kwaliteitsproblemen geaccepteerd': 'Problemanan di kalidat aseptá',
+  'Mogelijk persoonsgegevens': 'Posiblemente datonan personal',
+  'Persoonsgegevens geaccepteerd': 'Datonan personal aseptá',
+  'Persoonsgegevens gevonden': 'Datonan personal hañá',
   'Welke verbinding?': 'Kua konekshon?',
   'Bestandsverbindingen': 'Konekshonnan di archivo',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':

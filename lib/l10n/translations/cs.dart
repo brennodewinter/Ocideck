@@ -1784,6 +1784,13 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Geen meldingen meer op deze slide.':
+      'Na tomto snímku už nejsou žádná hlášení.',
+  'Kwaliteitsproblemen geaccepteerd': 'Problémy s kvalitou přijaty',
+  'Mogelijk persoonsgegevens': 'Možná osobní údaje',
+  'Persoonsgegevens geaccepteerd': 'Osobní údaje přijaty',
+  'Persoonsgegevens gevonden': 'Nalezeny osobní údaje',
+  'Organisatie': 'Organizace',
   'Welke verbinding?': 'Které připojení?',
   'Bestandsverbindingen': 'Připojení souborů',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':

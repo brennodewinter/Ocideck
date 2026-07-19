@@ -1783,6 +1783,12 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Geen meldingen meer op deze slide.': 'Na tem diapozitivu ni več obvestil.',
+  'Kwaliteitsproblemen geaccepteerd': 'Težave s kakovostjo sprejete',
+  'Mogelijk persoonsgegevens': 'Morda osebni podatki',
+  'Persoonsgegevens geaccepteerd': 'Osebni podatki sprejeti',
+  'Persoonsgegevens gevonden': 'Najdeni osebni podatki',
+  'Organisatie': 'Organizacija',
   'Welke verbinding?': 'Katera povezava?',
   'Bestandsverbindingen': 'Datotečne povezave',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':

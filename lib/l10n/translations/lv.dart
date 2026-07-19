@@ -1780,6 +1780,12 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Geen meldingen meer op deze slide.': 'Šajā slaidā vairs nav ziņojumu.',
+  'Kwaliteitsproblemen geaccepteerd': 'Kvalitātes problēmas pieņemtas',
+  'Mogelijk persoonsgegevens': 'Iespējami personas dati',
+  'Persoonsgegevens geaccepteerd': 'Personas dati pieņemti',
+  'Persoonsgegevens gevonden': 'Atrasti personas dati',
+  'Organisatie': 'Organizācija',
   'Welke verbinding?': 'Kurš savienojums?',
   'Bestandsverbindingen': 'Failu savienojumi',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':

@@ -1809,6 +1809,13 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Geen meldingen meer op deze slide.':
+      'Δεν υπάρχουν άλλα ευρήματα σε αυτή τη διαφάνεια.',
+  'Kwaliteitsproblemen geaccepteerd': 'Τα ζητήματα ποιότητας έγιναν αποδεκτά',
+  'Mogelijk persoonsgegevens': 'Πιθανώς προσωπικά δεδομένα',
+  'Persoonsgegevens geaccepteerd': 'Τα προσωπικά δεδομένα έγιναν αποδεκτά',
+  'Persoonsgegevens gevonden': 'Βρέθηκαν προσωπικά δεδομένα',
+  'Organisatie': 'Οργανισμός',
   'Welke verbinding?': 'Ποια σύνδεση;',
   'Bestandsverbindingen': 'Συνδέσεις αρχείων',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':

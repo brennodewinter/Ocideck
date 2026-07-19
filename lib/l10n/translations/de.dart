@@ -738,6 +738,12 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Geen meldingen meer op deze slide.':
+      'Keine Meldungen mehr auf dieser Folie.',
+  'Kwaliteitsproblemen geaccepteerd': 'Qualitätsprobleme akzeptiert',
+  'Mogelijk persoonsgegevens': 'Möglicherweise personenbezogene Daten',
+  'Persoonsgegevens geaccepteerd': 'Personenbezogene Daten akzeptiert',
+  'Persoonsgegevens gevonden': 'Personenbezogene Daten gefunden',
   'Welke verbinding?': 'Welche Verbindung?',
   'Bestandsverbindingen': 'Dateiverbindungen',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':

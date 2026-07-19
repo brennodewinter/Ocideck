@@ -1797,6 +1797,12 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Geen meldingen meer op deze slide.': 'Nulla monita in hac tabula supersunt.',
+  'Kwaliteitsproblemen geaccepteerd': 'Vitia qualitatis accepta',
+  'Mogelijk persoonsgegevens': 'Fortasse data personalia',
+  'Persoonsgegevens geaccepteerd': 'Data personalia accepta',
+  'Persoonsgegevens gevonden': 'Data personalia inventa',
+  'Organisatie': 'Institutum',
   'Welke verbinding?': 'Quae conexio?',
   'Bestandsverbindingen': 'Conexiones fasciculorum',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':

@@ -3,6 +3,7 @@ import 'checklist_spec.dart';
 import 'cockpit.dart';
 import 'deck.dart';
 import 'privacy_disposition.dart';
+import 'quality_disposition.dart';
 import 'finding_spec.dart';
 import 'findings_summary_spec.dart';
 import 'question.dart';
@@ -331,6 +332,15 @@ class Slide {
   /// Wat er met privacybevindingen op déze slide gebeurt. `null` = erf de stand
   /// van het deck. Round-trips als `<!-- ocideck_privacy: … -->`.
   final PrivacyDisposition? privacy;
+
+  /// Wat er met de kwaliteitsmeldingen van déze slide gebeurt. Round-trips als
+  /// `<!-- ocideck_quality: … -->`.
+  ///
+  /// Anders dan [privacy] niet nullable: er is geen deckbrede kwaliteitsstand om
+  /// van te erven. Een kwaliteitsoordeel gaat over déze slide — een deck dat in
+  /// één keer alle contrastfouten accepteert is geen keuze maar een uitschakelaar,
+  /// en daar is de instelling voor.
+  final QualityDisposition quality;
   final List<List<String>> tableRows; // first row is the header
 
   /// Table slides only: whether the table may be edited live during a
@@ -429,6 +439,7 @@ class Slide {
     this.skipped = false,
     this.tlp = TlpLevel.none,
     this.privacy,
+    this.quality = QualityDisposition.warn,
     this.tableRows = const [],
     this.tableEditable = false,
     this.timelineLayout = TimelineLayout.auto,
@@ -531,6 +542,7 @@ class Slide {
       skipped: src.skipped,
       tlp: src.tlp,
       privacy: src.privacy,
+      quality: src.quality,
       tableRows: src.tableRows.map((r) => List<String>.from(r)).toList(),
       tableEditable: src.tableEditable,
       timelineLayout: src.timelineLayout,
@@ -590,6 +602,7 @@ class Slide {
     TlpLevel? tlp,
     PrivacyDisposition? privacy,
     bool clearPrivacy = false,
+    QualityDisposition? quality,
     List<List<String>>? tableRows,
     bool? tableEditable,
     TimelineLayout? timelineLayout,
@@ -652,6 +665,7 @@ class Slide {
       skipped: skipped ?? this.skipped,
       tlp: tlp ?? this.tlp,
       privacy: clearPrivacy ? null : (privacy ?? this.privacy),
+      quality: quality ?? this.quality,
       tableRows: tableRows ?? this.tableRows,
       tableEditable: tableEditable ?? this.tableEditable,
       timelineLayout: timelineLayout ?? this.timelineLayout,

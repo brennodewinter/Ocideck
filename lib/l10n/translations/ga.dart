@@ -1817,6 +1817,13 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Geen meldingen meer op deze slide.':
+      'Níl aon fholáireamh fágtha ar an sleamhnán seo.',
+  'Kwaliteitsproblemen geaccepteerd': 'Fadhbanna cáilíochta glactha',
+  'Mogelijk persoonsgegevens': 'Sonraí pearsanta b\'fhéidir',
+  'Persoonsgegevens geaccepteerd': 'Sonraí pearsanta glactha',
+  'Persoonsgegevens gevonden': 'Aimsíodh sonraí pearsanta',
+  'Organisatie': 'Eagraíocht',
   'Welke verbinding?': 'Cén nasc?',
   'Bestandsverbindingen': 'Naisc chomhad',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':

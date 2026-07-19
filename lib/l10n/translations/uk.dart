@@ -1799,6 +1799,13 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Geen meldingen meer op deze slide.':
+      'На цьому слайді більше немає повідомлень.',
+  'Kwaliteitsproblemen geaccepteerd': 'Проблеми якості прийнято',
+  'Mogelijk persoonsgegevens': 'Можливо, персональні дані',
+  'Persoonsgegevens geaccepteerd': 'Персональні дані прийнято',
+  'Persoonsgegevens gevonden': 'Знайдено персональні дані',
+  'Organisatie': 'Організація',
   'Welke verbinding?': 'Яке з\'єднання?',
   'Bestandsverbindingen': 'Файлові з\'єднання',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':

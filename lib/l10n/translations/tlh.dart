@@ -1756,6 +1756,12 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Geen meldingen meer op deze slide.': 'yaHnIv vam Sovbe\'lu\'.',
+  'Kwaliteitsproblemen geaccepteerd': '\'ul Qob lajlu\'',
+  'Mogelijk persoonsgegevens': 'chaq nuv De\'',
+  'Persoonsgegevens geaccepteerd': 'nuv De\' lajlu\'',
+  'Persoonsgegevens gevonden': 'nuv De\' tu\'lu\'',
+  'Organisatie': 'ghom',
   'Welke verbinding?': 'nuq rar?',
   'Bestandsverbindingen': 'De\' rarmey',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':

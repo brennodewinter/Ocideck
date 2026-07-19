@@ -1803,6 +1803,13 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Geen meldingen meer op deze slide.':
+      'M\'hemmx aktar avviżi f\'din is-slajd.',
+  'Kwaliteitsproblemen geaccepteerd': 'Problemi ta\' kwalità aċċettati',
+  'Mogelijk persoonsgegevens': 'Possibbilment data personali',
+  'Persoonsgegevens geaccepteerd': 'Data personali aċċettata',
+  'Persoonsgegevens gevonden': 'Instabet data personali',
+  'Organisatie': 'Organizzazzjoni',
   'Welke verbinding?': 'Liema konnessjoni?',
   'Bestandsverbindingen': 'Konnessjonijiet tal-fajls',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':

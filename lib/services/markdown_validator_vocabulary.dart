@@ -120,4 +120,7 @@ const _supportedCommentDirectives = {
   // Per-slide privacy disposition (OCIWACHT §4.2): accept / shield /
   // redact. Zonder deze regel meldt de checker een onbekende directive.
   'ocideck_privacy',
+  // Per-slide kwaliteitsdispositie: accept. De tegenhanger van
+  // `ocideck_privacy` voor contrast-, dichtheids- en alt-tekstmeldingen.
+  'ocideck_quality',
 };

@@ -1781,6 +1781,12 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Geen meldingen meer op deze slide.': 'Tällä dialla ei ole enää ilmoituksia.',
+  'Kwaliteitsproblemen geaccepteerd': 'Laatuongelmat hyväksytty',
+  'Mogelijk persoonsgegevens': 'Mahdollisesti henkilötietoja',
+  'Persoonsgegevens geaccepteerd': 'Henkilötiedot hyväksytty',
+  'Persoonsgegevens gevonden': 'Henkilötietoja löytyi',
+  'Organisatie': 'Organisaatio',
   'Welke verbinding?': 'Mikä yhteys?',
   'Bestandsverbindingen': 'Tiedostoyhteydet',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':

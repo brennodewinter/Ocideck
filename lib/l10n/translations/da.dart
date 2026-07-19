@@ -1780,6 +1780,13 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Geen meldingen meer op deze slide.':
+      'Ingen meddelelser tilbage på dette dias.',
+  'Kwaliteitsproblemen geaccepteerd': 'Kvalitetsproblemer accepteret',
+  'Mogelijk persoonsgegevens': 'Muligvis personoplysninger',
+  'Persoonsgegevens geaccepteerd': 'Personoplysninger accepteret',
+  'Persoonsgegevens gevonden': 'Personoplysninger fundet',
+  'Organisatie': 'Organisation',
   'Welke verbinding?': 'Hvilken forbindelse?',
   'Bestandsverbindingen': 'Filforbindelser',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':

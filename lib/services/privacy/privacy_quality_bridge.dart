@@ -25,6 +25,15 @@ SlideQualityIssue _issueFrom(PrivacyFinding finding) {
     category: SlideQualityCategory.privacy,
     severity: _severityFor(finding.confidence),
     field: finding.field,
+    // De positie reist mee. Zonder haar weet de auteur wél dat er een naam op
+    // slide 5 staat, maar niet wáár — en bij een slide vol tekst is dat het
+    // verschil tussen een bruikbare melding en een raadsel. De gevonden waarde
+    // blijft buiten beeld; alleen de coördinaten gaan mee.
+    span: SlideQualitySpan(
+      start: finding.start,
+      end: finding.end,
+      fragmentIndex: finding.fragmentIndex,
+    ),
     args: {
       'rule': finding.ruleId,
       // Gemaskeerd, nooit de volledige waarde: deze melding komt in een paneel,

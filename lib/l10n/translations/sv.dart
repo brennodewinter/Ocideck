@@ -1780,6 +1780,13 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Geen meldingen meer op deze slide.':
+      'Inga meddelanden kvar på den här bilden.',
+  'Kwaliteitsproblemen geaccepteerd': 'Kvalitetsproblem accepterade',
+  'Mogelijk persoonsgegevens': 'Möjligen personuppgifter',
+  'Persoonsgegevens geaccepteerd': 'Personuppgifter accepterade',
+  'Persoonsgegevens gevonden': 'Personuppgifter hittades',
+  'Organisatie': 'Organisation',
   'Welke verbinding?': 'Vilken anslutning?',
   'Bestandsverbindingen': 'Filanslutningar',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':

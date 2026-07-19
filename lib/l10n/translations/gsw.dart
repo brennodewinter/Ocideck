@@ -1785,6 +1785,12 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Geen meldingen meer op deze slide.': 'Kei Mäldige meh uf dere Folie.',
+  'Kwaliteitsproblemen geaccepteerd': 'Qualitätsprobläm akzeptiert',
+  'Mogelijk persoonsgegevens': 'Villicht persöönlichi Date',
+  'Persoonsgegevens geaccepteerd': 'Persöönlichi Date akzeptiert',
+  'Persoonsgegevens gevonden': 'Persöönlichi Date gfunde',
+  'Organisatie': 'Organisation',
   'Welke verbinding?': 'Weli Verbindig?',
   'Bestandsverbindingen': 'Dateiverbindige',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':

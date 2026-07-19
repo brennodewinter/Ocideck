@@ -1799,6 +1799,13 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Geen meldingen meer op deze slide.':
+      'Nu mai există notificări pe acest slide.',
+  'Kwaliteitsproblemen geaccepteerd': 'Probleme de calitate acceptate',
+  'Mogelijk persoonsgegevens': 'Posibile date cu caracter personal',
+  'Persoonsgegevens geaccepteerd': 'Date cu caracter personal acceptate',
+  'Persoonsgegevens gevonden': 'Date cu caracter personal găsite',
+  'Organisatie': 'Organizație',
   'Welke verbinding?': 'Care conexiune?',
   'Bestandsverbindingen': 'Conexiuni de fișiere',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':

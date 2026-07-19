@@ -1804,6 +1804,12 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Geen meldingen meer op deze slide.': 'Няма повече съобщения на този слайд.',
+  'Kwaliteitsproblemen geaccepteerd': 'Проблемите с качеството са приети',
+  'Mogelijk persoonsgegevens': 'Възможно лични данни',
+  'Persoonsgegevens geaccepteerd': 'Личните данни са приети',
+  'Persoonsgegevens gevonden': 'Намерени са лични данни',
+  'Organisatie': 'Организация',
   'Welke verbinding?': 'Коя връзка?',
   'Bestandsverbindingen': 'Файлови връзки',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':

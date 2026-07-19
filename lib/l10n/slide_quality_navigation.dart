@@ -21,5 +21,5 @@ void navigateToSlideQualityIssue({
   }
   ref
       .read(editorProvider.notifier)
-      .selectWithQualityField(issue.slideIndex, issue.field);
+      .selectWithQualityField(issue.slideIndex, issue.field, span: issue.span);
 }

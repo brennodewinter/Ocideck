@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../models/cvss_builder.dart';
-import '../../models/markdown_validation.dart';
 import '../../models/deck.dart';
+import '../../models/privacy_disposition.dart';
+import '../../models/quality_disposition.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
+import '../../state/deck_provider.dart';
 import '../../state/deck_quality_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../state/privacy_provider.dart';
@@ -12,7 +15,92 @@ import '../../state/settings_provider.dart';
 import '../../state/slide_clipboard_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../l10n/app_localizations.dart';
+import '../privacy_badge.dart' show privacyKatSvg;
+import 'slide_badge_popover.dart';
+import 'slide_badge_tone.dart';
 import 'slide_preview.dart';
+
+String _qualityBadgeTooltip(AppLocalizations l10n, SlideBadgeTone tone) =>
+    switch (tone) {
+      SlideBadgeTone.error => l10n.d(
+        'Kwaliteitsproblemen (inclusief ernstige)',
+      ),
+      SlideBadgeTone.accepted => l10n.d('Kwaliteitsproblemen geaccepteerd'),
+      _ => l10n.d('Kwaliteitsproblemen'),
+    };
+
+String _privacyBadgeTooltip(AppLocalizations l10n, SlideBadgeTone tone) =>
+    switch (tone) {
+      SlideBadgeTone.hint => l10n.d('Mogelijk persoonsgegevens'),
+      SlideBadgeTone.accepted => l10n.d('Persoonsgegevens geaccepteerd'),
+      _ => l10n.d('Persoonsgegevens gevonden'),
+    };
+
+/// Het badge-plaatje zelf: een gekleurd blokje met een icoon, dat antwoord geeft.
+///
+/// Twee gebaren, en het onderscheid ertussen is de hele afspraak:
+///
+///   * **enkele klik** opent het lijstje meldingen. Dat is de veilige actie, en
+///     dus de makkelijkste;
+///   * **dubbelklik** beslist. Op een gekleurde badge accepteer je wat er staat,
+///     op een grijze draai je die acceptatie terug.
+///
+/// Dat dubbelklikken twee kanten op werkt is geen symmetrie om de symmetrie: een
+/// beslissing die je niet met hetzelfde gebaar kunt terugnemen, durf je niet te
+/// nemen.
+class _SlideBadge extends ConsumerStatefulWidget {
+  final SlideBadgeTone tone;
+  final String message;
+  final int slideIndex;
+  final SlideBadgeFamily family;
+  final Widget child;
+
+  const _SlideBadge({
+    required this.tone,
+    required this.message,
+    required this.slideIndex,
+    required this.family,
+    required this.child,
+  });
+
+  @override
+  ConsumerState<_SlideBadge> createState() => _SlideBadgeState();
+}
+
+class _SlideBadgeState extends ConsumerState<_SlideBadge> {
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      button: true,
+      label: widget.message,
+      child: GestureDetector(
+        // Vangt de tik af vóór de kaart eronder: klikken op de badge hoort de
+        // meldingen te openen, niet alleen de slide te selecteren.
+        behavior: HitTestBehavior.opaque,
+        onTap: () => showSlideBadgeFindings(
+          context: context,
+          ref: ref,
+          slideIndex: widget.slideIndex,
+          family: widget.family,
+          tone: widget.tone,
+        ),
+        onDoubleTap: () =>
+            toggleSlideBadgeAcceptance(ref, widget.slideIndex, widget.family),
+        child: Tooltip(
+          message: widget.message,
+          child: Container(
+            padding: const EdgeInsets.all(3),
+            decoration: BoxDecoration(
+              color: widget.tone.background,
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: widget.child,
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 class SlideThumbnail extends ConsumerWidget {
   final Slide slide;
@@ -82,27 +170,41 @@ class SlideThumbnail extends ConsumerWidget {
         (s) => (s.selection.contains(index), s.selectedIndex == index),
       ),
     );
-    // Selects op booleans i.p.v. het hele kwaliteitsresultaat: anders rebuildt
-    // élke thumbnail bij elke wijziging waar dan ook in het deck.
-    //
-    // Privacybevindingen tellen mee. Ze zijn kwaliteitsmeldingen als alle andere
-    // (zie privacy_quality_bridge.dart), en een slide waarvan het énige probleem
-    // een BSN in de tekst is, hoort niet ongemerkt langs te kunnen glippen omdat
-    // de badge alleen naar contrast en alt-teksten keek.
-    final hasQualityErrors = ref.watch(
-      deckQualityProvider.select(
-        (r) => r
-            .forSlide(index)
-            .any((i) => i.severity == MarkdownValidationSeverity.error),
+    // De privacystand van déze slide: die van de slide zelf, of anders die van
+    // het deck. Alleen de uitkomst wordt bekeken, zodat een wijziging elders in
+    // het deck deze thumbnail niet opnieuw bouwt.
+    final privacyDone = ref.watch(
+      deckProvider.select(
+        (state) => effectivePrivacyDisposition(
+          deck: state.deck?.privacy ?? PrivacyDisposition.warn,
+          slide: slide.privacy,
+        ).isResolved,
       ),
     );
-    final hasPrivacyWarnings = ref.watch(
-      privacyQualityIssuesProvider.select(
-        (issues) => issues.any(
-          (i) =>
-              i.slideIndex == index &&
-              i.severity == MarkdownValidationSeverity.warning,
+    // Selects op kleine waarden i.p.v. het hele kwaliteitsresultaat: anders
+    // rebuildt élke thumbnail bij elke wijziging waar dan ook in het deck.
+    //
+    // Twee badges, geen één. Privacy zat hier in de kwaliteitsbadge gevouwen, en
+    // dat maakte het oranje bolletje onleesbaar: het kon contrast betekenen, of
+    // tekstdichtheid, of een BSN in de tekst. Wie een deck nakeek op
+    // persoonsgegevens kon niet zien wélke slides daarover gingen — en wie een
+    // contrastwaarschuwing zag, kon denken dat er persoonsgegevens stonden.
+    //
+    // Allebei lezen ze de RUWE uitslag. Een afgehandelde slide verdween
+    // voorheen spoorloos uit het beeld, en dan ziet een slide waarvan de auteur
+    // de bevindingen bewust accepteerde er precies zo uit als een slide waarop
+    // niets gevonden is. Grijs vertelt het verschil.
+    final qualityTone = ref.watch(
+      deckQualityRawProvider.select(
+        (r) => qualityBadgeTone(
+          r.forSlide(index),
+          accepted: slide.quality.isResolved,
         ),
+      ),
+    );
+    final privacyTone = ref.watch(
+      privacyRawScanProvider.select(
+        (scan) => privacyBadgeTone(scan.forSlide(index), accepted: privacyDone),
       ),
     );
     final showWatermark = ref.watch(
@@ -119,16 +221,6 @@ class SlideThumbnail extends ConsumerWidget {
         slide.bullets.length >= 2 || slide.bullets2.length >= 2,
       _ => false,
     };
-    final hasQualityWarnings =
-        ref.watch(
-          deckQualityProvider.select(
-            (r) => r
-                .forSlide(index)
-                .any((i) => i.severity == MarkdownValidationSeverity.warning),
-          ),
-        ) ||
-        hasPrivacyWarnings;
-    final hasActionableQualityIssues = hasQualityErrors || hasQualityWarnings;
     final borderColor = isSelected
         ? AppTheme.accent
         : skipped
@@ -146,7 +238,11 @@ class SlideThumbnail extends ConsumerWidget {
         '${title.isNotEmpty ? title : l10n.d(slide.type.label)}'
         '${skipped ? ' (${l10n.d('Overgeslagen')})' : ''}'
         '${hasUserNotes ? ' (${l10n.d('Gebruikersnotities')})' : ''}'
-        '${hasActionableQualityIssues ? ' (${l10n.d('Kwaliteitsprobleem')})' : ''}';
+        // Twee badges, dus twee mededelingen. Ze samenvatten als één
+        // "Kwaliteitsprobleem" zou een schermlezergebruiker precies de vraag
+        // laten staan die de badges nu net beantwoorden: wélk soort probleem.
+        '${qualityTone.isVisible ? ' (${_qualityBadgeTooltip(l10n, qualityTone)})' : ''}'
+        '${privacyTone.isVisible ? ' (${_privacyBadgeTooltip(l10n, privacyTone)})' : ''}';
 
     return Semantics(
       button: true,
@@ -170,8 +266,8 @@ class SlideThumbnail extends ConsumerWidget {
                 l10n,
                 skipped: skipped,
                 showWatermark: showWatermark,
-                hasActionableQualityIssues: hasActionableQualityIssues,
-                hasQualityErrors: hasQualityErrors,
+                qualityTone: qualityTone,
+                privacyTone: privacyTone,
               ),
               // Footer: slide number, type label, action buttons
               _footer(
@@ -193,8 +289,8 @@ class SlideThumbnail extends ConsumerWidget {
     AppLocalizations l10n, {
     required bool skipped,
     required bool showWatermark,
-    required bool hasActionableQualityIssues,
-    required bool hasQualityErrors,
+    required SlideBadgeTone qualityTone,
+    required SlideBadgeTone privacyTone,
   }) {
     return ExcludeSemantics(
       child: ClipRRect(
@@ -286,32 +382,47 @@ class SlideThumbnail extends ConsumerWidget {
                     ),
                   ),
                 ),
-              // Waarschuwingen én fouten. Dit stond op `hasQualityWarnings`, en
-              // een slide met alléén een fout (een contrastfout zonder verdere
-              // waarschuwing) kreeg dus juist géén badge — de ernstigste slide
-              // van het deck was de enige zonder markering.
-              if (hasActionableQualityIssues)
+              // Rechtsboven de twee badges naast elkaar, kwaliteit eerst.
+              // Naast elkaar en niet gestapeld: de thumbnail is klein, en twee
+              // markeringen boven elkaar in dezelfde hoek lezen als één brede.
+              if (qualityTone.isVisible || privacyTone.isVisible)
                 Positioned(
                   top: 4,
                   right: 4,
-                  child: Tooltip(
-                    message: hasQualityErrors
-                        ? l10n.d('Kwaliteitsproblemen (inclusief ernstige)')
-                        : l10n.d('Kwaliteitsproblemen'),
-                    child: Container(
-                      padding: const EdgeInsets.all(3),
-                      decoration: BoxDecoration(
-                        color: Color(
-                          hasQualityErrors ? 0xCCD32F2F : 0xCCB45309,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (qualityTone.isVisible)
+                        _SlideBadge(
+                          tone: qualityTone,
+                          message: _qualityBadgeTooltip(l10n, qualityTone),
+                          slideIndex: index,
+                          family: SlideBadgeFamily.quality,
+                          child: Icon(
+                            Icons.accessibility_new_outlined,
+                            size: 10,
+                            color: qualityTone.foreground,
+                          ),
                         ),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: Icon(
-                        Icons.accessibility_new_outlined,
-                        size: 10,
-                        color: Colors.white,
-                      ),
-                    ),
+                      if (qualityTone.isVisible && privacyTone.isVisible)
+                        const SizedBox(width: 3),
+                      if (privacyTone.isVisible)
+                        _SlideBadge(
+                          tone: privacyTone,
+                          message: _privacyBadgeTooltip(l10n, privacyTone),
+                          slideIndex: index,
+                          family: SlideBadgeFamily.privacy,
+                          child: SvgPicture.string(
+                            privacyKatSvg,
+                            width: 10,
+                            height: 10,
+                            colorFilter: ColorFilter.mode(
+                              privacyTone.foreground,
+                              BlendMode.srcIn,
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
                 ),
             ],

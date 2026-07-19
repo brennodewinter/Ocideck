@@ -1781,6 +1781,12 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Geen meldingen meer op deze slide.': 'Tidak ada temuan lagi di slide ini.',
+  'Kwaliteitsproblemen geaccepteerd': 'Masalah kualitas diterima',
+  'Mogelijk persoonsgegevens': 'Mungkin data pribadi',
+  'Persoonsgegevens geaccepteerd': 'Data pribadi diterima',
+  'Persoonsgegevens gevonden': 'Data pribadi ditemukan',
+  'Organisatie': 'Organisasi',
   'Welke verbinding?': 'Koneksi yang mana?',
   'Bestandsverbindingen': 'Koneksi berkas',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':

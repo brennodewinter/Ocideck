@@ -1793,6 +1793,12 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Geen meldingen meer op deze slide.': 'Brak zgłoszeń na tym slajdzie.',
+  'Kwaliteitsproblemen geaccepteerd': 'Zaakceptowano problemy z jakością',
+  'Mogelijk persoonsgegevens': 'Możliwe dane osobowe',
+  'Persoonsgegevens geaccepteerd': 'Zaakceptowano dane osobowe',
+  'Persoonsgegevens gevonden': 'Znaleziono dane osobowe',
+  'Organisatie': 'Organizacja',
   'Welke verbinding?': 'Które połączenie?',
   'Bestandsverbindingen': 'Połączenia plików',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':

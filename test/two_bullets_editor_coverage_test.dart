@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -24,7 +25,7 @@ void main() {
     var updated = Slide.create(
       SlideType.twoBullets,
     ).copyWith(bullets: const ['a'], bullets2: const ['b']);
-    await tester.pumpWidget(
+    await tester.pumpScoped(
       _host(TwoBulletsEditor(slide: updated, onUpdate: (s) => updated = s)),
     );
 
@@ -42,7 +43,7 @@ void main() {
     var updated = Slide.create(
       SlideType.twoBullets,
     ).copyWith(bullets: const ['a'], bullets2: const ['b']);
-    await tester.pumpWidget(
+    await tester.pumpScoped(
       _host(TwoBulletsEditor(slide: updated, onUpdate: (s) => updated = s)),
     );
 
@@ -62,7 +63,7 @@ void main() {
     var updated = Slide.create(
       SlideType.twoBullets,
     ).copyWith(bullets: const ['a', 'b'], bullets2: const ['c']);
-    await tester.pumpWidget(
+    await tester.pumpScoped(
       _host(TwoBulletsEditor(slide: updated, onUpdate: (s) => updated = s)),
     );
 
@@ -90,7 +91,7 @@ void main() {
     var updated = Slide.create(
       SlideType.twoBullets,
     ).copyWith(bullets: const ['a', 'b'], bullets2: const ['c']);
-    await tester.pumpWidget(
+    await tester.pumpScoped(
       _host(TwoBulletsEditor(slide: updated, onUpdate: (s) => updated = s)),
     );
 
@@ -101,4 +102,11 @@ void main() {
     expect(updated.bullets, const ['a']);
     expect(updated.bullets2, const ['c']);
   });
+}
+
+/// De editors lezen de editorstate (om naar een gemelde bullet te springen), en
+/// een Riverpod-consumer zonder scope gooit meteen. Elke pump krijgt er dus een.
+extension on WidgetTester {
+  Future<void> pumpScoped(Widget child) =>
+      pumpWidget(ProviderScope(child: child));
 }

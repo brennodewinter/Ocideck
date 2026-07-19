@@ -1788,6 +1788,12 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Geen meldingen meer op deze slide.': 'Na ovom slajdu više nema obavijesti.',
+  'Kwaliteitsproblemen geaccepteerd': 'Problemi kvalitete prihvaćeni',
+  'Mogelijk persoonsgegevens': 'Možda osobni podaci',
+  'Persoonsgegevens geaccepteerd': 'Osobni podaci prihvaćeni',
+  'Persoonsgegevens gevonden': 'Pronađeni osobni podaci',
+  'Organisatie': 'Organizacija',
   'Welke verbinding?': 'Koja veza?',
   'Bestandsverbindingen': 'Veze datoteka',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':

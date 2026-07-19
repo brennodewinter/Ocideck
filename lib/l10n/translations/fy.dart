@@ -739,6 +739,11 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Geen meldingen meer op deze slide.': 'Gjin meldingen mear op dizze slide.',
+  'Kwaliteitsproblemen geaccepteerd': 'Kwaliteitsproblemen akseptearre',
+  'Mogelijk persoonsgegevens': 'Mooglik persoansgegevens',
+  'Persoonsgegevens geaccepteerd': 'Persoansgegevens akseptearre',
+  'Persoonsgegevens gevonden': 'Persoansgegevens fûn',
   'Welke verbinding?': 'Hokker ferbining?',
   'Bestandsverbindingen': 'Bestânsferbiningen',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':

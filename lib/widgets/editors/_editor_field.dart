@@ -10,6 +10,7 @@ import '../../state/tabs_provider.dart';
 import 'alt_text_field.dart';
 import '../../l10n/slide_quality_localization.dart';
 import '../../models/markdown_validation.dart';
+import '../../models/slide_quality.dart';
 import '../../state/deck_quality_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../l10n/app_localizations.dart';
@@ -18,6 +19,29 @@ import '../dialogs/image_carousel_picker.dart';
 import '../../theme/app_theme.dart';
 
 /// Shared layout helpers for slide editors.
+
+/// Accentueert het gemelde fragment door het te selecteren.
+///
+/// Waarom een selectie en geen eigen markering: dit is de accentuering die de
+/// gebruiker al kent uit elk tekstveld, en het gevonden stuk is meteen te
+/// kopiëren of over te typen. Bovendien scrollt het veld er vanzelf heen.
+///
+/// De grens-controle is geen formaliteit. Tussen de scan en dit moment kan de
+/// tekst zijn veranderd — de auteur typt door terwijl het paneel openstaat — en
+/// een bereik dat buiten de tekst valt gooit een `TextSelection` eruit. Dan
+/// liever geen accentuering dan een crash.
+void applyQualitySpanSelection(
+  TextEditingController controller,
+  SlideQualitySpan? span,
+) {
+  if (span == null || span.isEmpty) return;
+  final length = controller.text.length;
+  if (span.start >= length) return;
+  controller.selection = TextSelection(
+    baseOffset: span.start,
+    extentOffset: span.end.clamp(span.start, length),
+  );
+}
 
 /// Beheert de tekstcontrollers van een slide-editor: [newController] maakt er
 /// één met beginwaarde en emit-listener, en dispose ruimt ze allemaal op —
@@ -131,9 +155,10 @@ class _EditorFieldState extends ConsumerState<EditorField> {
     if (!mounted) return;
     final field = widget.qualityField;
     if (field == null) return;
-    final target = ref.read(editorProvider).focusQualityField;
-    if (target != field) return;
+    final editor = ref.read(editorProvider);
+    if (editor.focusQualityField != field) return;
     _focusNode.requestFocus();
+    applyQualitySpanSelection(widget.controller, editor.focusQualitySpan);
     Scrollable.ensureVisible(
       context,
       alignment: 0.25,
@@ -651,9 +676,10 @@ class _CaptionFieldState extends ConsumerState<_CaptionField> {
 
   void _applyQualityFocus() {
     if (!mounted) return;
-    final target = ref.read(editorProvider).focusQualityField;
-    if (target != widget.captionField) return;
+    final editor = ref.read(editorProvider);
+    if (editor.focusQualityField != widget.captionField) return;
     _focusNode.requestFocus();
+    applyQualitySpanSelection(_ctrl, editor.focusQualitySpan);
     Scrollable.ensureVisible(
       context,
       alignment: 0.25,

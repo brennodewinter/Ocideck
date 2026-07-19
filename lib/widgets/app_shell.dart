@@ -445,11 +445,8 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     overrides: [
       deckProvider.overrideWith((ref) => tab.deckNotifier),
       editorProvider.overrideWith((ref) => tab.editorNotifier),
-      deckQualityProvider.overrideWith((ref) {
-        final deck = ref.watch(deckProvider.select((state) => state.deck));
-        if (deck == null) return const SlideQualityResult([]);
-        return ref.watch(slideQualityAnalyzerProvider).analyze(deck);
-      }),
+      deckQualityRawProvider.overrideWith(computeDeckQualityRaw),
+      deckQualityProvider.overrideWith(computeDeckQuality),
       imageContrastIssuesProvider.overrideWith(computeImageContrastIssues),
       privacyRawScanProvider.overrideWith(computePrivacyRawScan),
       privacyScanProvider.overrideWith(computePrivacyScan),

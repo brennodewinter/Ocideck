@@ -1137,10 +1137,75 @@ issue to jump to that slide and focus the relevant editor field; click a **theme
 (entire presentation)** issue to open *Settings → Presentation style → Colours* with the matching
 colour field scrolled into view and highlighted.
 
-Issues also appear as badges on slide thumbnails (amber for warnings, red when
-errors are included, including a slide whose only issue is a **privacy finding**),
-as a blue badge when a slide has **user notes**, and as inline hints on relevant
-editor fields (for example image captions).
+Issues also appear as badges on slide thumbnails, as a blue badge when a slide
+has **user notes**, and as inline hints on relevant editor fields (for example
+image captions).
+
+### The two thumbnail badges
+
+A thumbnail carries up to **two** badges, top right. The left one is quality
+(the accessibility mark); the right one is privacy (the PrivacyKat shield).
+
+They used to be one. That made the badge unreadable: the same amber dot could
+mean contrast, or text density, or a citizen service number in the text. Someone
+checking a deck for personal data could not see which slides were about that —
+and someone looking at a contrast warning could think it was about personal data.
+
+| Colour | Quality | Privacy |
+| --- | --- | --- |
+| **Red** | An error is included | — |
+| **Amber** | Warnings | A finding we are reasonably sure about |
+| **Slate** | — | A finding we are *not* sure about |
+| **Grey** | You accepted these findings | You accepted these findings |
+| *(none)* | Only tips, or nothing found | Nothing found |
+
+The asymmetry in the slate row is deliberate. A quality tip is advice about
+craft — "this bullet holds two sentences" — and a badge on every slide with a tip
+makes the whole rail loud without telling anyone anything. An uncertain privacy
+finding is a *possible personal datum*. Those are not the same stakes, so they do
+not get the same threshold.
+
+**Grey means found-and-decided, not clean.** Before, accepting a finding made the
+slide go silent everywhere: the notice left the panel *and* the badge left the
+thumbnail, and afterwards that slide looked exactly like a slide with nothing on
+it. Accepting had become the same as hiding. The badge now stays and turns grey —
+it says *there is something here, and you know about it*. The panel does go quiet,
+which is right: a decision already made should not keep nagging.
+
+### Reading and answering a badge
+
+**Click** a badge to see what is behind it: the findings on that slide, each with
+the rule, the field it sits in and a masked fragment — *"bank account number
+(N…6), Bullets 3"* rather than a coloured dot. The list reads the raw results, so
+a grey badge opens a full list too. A grey badge you cannot read would be as
+uninformative as no badge at all.
+
+Clicking a finding in the **quality panel** goes one step further: it jumps to the
+slide, focuses the field and *selects the reported text*, so you see exactly which
+characters the finding is about.
+
+**Double-click** decides. On a coloured badge you accept what is there; on a grey
+one you take that acceptance back. It works both ways on purpose — a decision you
+cannot undo with the same gesture is one you do not dare to make.
+
+Two exceptions, both deliberate: double-clicking does nothing on a slide set to
+*leave out of display and export* or *accept + warn*. Those settings do something
+to the data itself or to the recipient, and undoing them with a double-click would
+put redacted personal data back into your export without anyone asking for it.
+That choice belongs in **Slide settings**, where you can see what you are picking.
+
+### Accepting quality findings
+
+Quality findings can be accepted per slide, the same way privacy findings can. A
+title image that deliberately contrasts softly, a table that genuinely has that
+many rows — until now there was nothing to say about those. The notice stayed, the
+badge stayed amber, and the only thing you learned was that badges can be ignored.
+
+Accepting turns the badge grey, keeps the findings readable, and takes them out of
+the export gate. It is stored per slide as `<!-- ocideck_quality: accept -->`; see
+FILE_FORMAT.md §3.1c. There is no deck-wide equivalent — a deck that accepts every
+contrast error at once is not a judgement, it is a switch, and that switch already
+lives under *Settings*.
 
 When the green bar shows no issues, expand it to see **which checks ran** —
 contrast, alt text, media files, text density, and (when it is switched on) the

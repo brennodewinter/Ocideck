@@ -48,6 +48,33 @@ enum SlideQualityIssueKind {
   privacyStructural,
 }
 
+/// Waar binnen een veld een melding precies zit.
+///
+/// Bestaat omdat een melding die alleen zegt *dát* er iets is de auteur laat
+/// zoeken. De privacyscanner weet de exacte positie al — zonder deze klasse
+/// sneuvelde die kennis in de vertaalslag naar het kwaliteitspaneel, en dan
+/// staat er "persoonsnaam j…l" bij een slide met veertig regels tekst.
+///
+/// De tekst zelf zit hier bewust níét in: dat zou de gevonden waarde alsnog
+/// buiten de scanner tillen. Zie de kop van `privacy_finding.dart`.
+class SlideQualitySpan {
+  /// Welk stuk van een samengesteld veld: de zoveelste bullet, de zoveelste
+  /// tabelcel. 0 voor een enkelvoudig veld.
+  final int fragmentIndex;
+
+  /// Positie binnen dat tekstfragment.
+  final int start;
+  final int end;
+
+  const SlideQualitySpan({
+    required this.start,
+    required this.end,
+    this.fragmentIndex = 0,
+  });
+
+  bool get isEmpty => end <= start;
+}
+
 class SlideQualityIssue {
   final int slideIndex;
   final SlideQualityIssueKind kind;
@@ -56,6 +83,11 @@ class SlideQualityIssue {
 
   /// Optional hint for UI focus, e.g. `imageCaption` or `textColor`.
   final String? field;
+
+  /// Waar in [field] de melding zit, als we dat weten. Alleen de privacyscanner
+  /// levert dit vandaag; de contrast- en dichtheidschecks gaan over een veld als
+  /// geheel en laten het leeg.
+  final SlideQualitySpan? span;
 
   /// Structured parameters for localized formatting ([formatSlideQualityIssue]).
   final Map<String, String> args;
@@ -66,6 +98,7 @@ class SlideQualityIssue {
     required this.category,
     required this.severity,
     this.field,
+    this.span,
     this.args = const {},
   });
 
