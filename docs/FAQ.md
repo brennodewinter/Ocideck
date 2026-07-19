@@ -245,18 +245,19 @@ While OciDeck is primarily designed as a desktop application, the team continues
 
 ### How can I contribute to OciDeck development?  
 Community contributions are welcome through:
-- Bug reports via the project's issue tracker (Forgejo)
-- Feature requests in discussion forums  
+- Bug reports and feature requests via the project's issue tracker (Forgejo)
 - Code contributions following project guidelines
 - Documentation improvements 
 - Testing new features in development builds
 
+There is no discussion forum, mailing list or chat channel — the issue tracker
+is the only channel.
+
 ### Where can I find more information?
-Additional resources include:
-- Official documentation site (this repository)
-- Community forum and user discussions  
-- Source code on public repositories
-- Release notes for latest versions
+The documentation in this repository is all of it: the `docs/` directory and the
+source code itself. There is no separate documentation site, no community forum,
+and no release notes — nothing has been tagged as a release yet. Corrected
+2026-07-19.
 
 ### How does OciDeck fit into professional information management?
 OciDeck is designed to support professional information management by:
