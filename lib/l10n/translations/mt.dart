@@ -1803,10 +1803,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Repareer slide': 'Irranġa l-islajd',
   'Voortzetting van vorige slide': 'Kontinwazzjoni tas-slajd ta\' qabel',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
       'Din is-slajd tagħmel parti mil-lista tas-slajd ta\' qabel u għalhekk taqsam daqs wieħed tat-tipa: dak tal-paġna l-aktar mimlija.',
-  'Losmaken': 'Iddisstakka',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Din is-slajd tintwera f\'{klein} tad-daqs tad-disinn minflok {eigen}, għax taqsam sensiela maqsuma mas-slajd {pagina} li hija ferm aktar mimlija.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

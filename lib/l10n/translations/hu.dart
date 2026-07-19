@@ -1785,10 +1785,10 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Repareer slide': 'Dia javítása',
   'Voortzetting van vorige slide': 'Az előző dia folytatása',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
       'Ez a dia az előző dia listájához tartozik, ezért közös betűméretet használ: a legteltebb oldalét.',
-  'Losmaken': 'Leválasztás',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Ez a dia a tervezési méret {klein} részén jelenik meg {eigen} helyett, mert osztott sorozatot oszt meg a sokkal telítettebb {pagina}. diával.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

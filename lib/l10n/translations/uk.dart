@@ -1799,10 +1799,10 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Repareer slide': 'Виправити слайд',
   'Voortzetting van vorige slide': 'Продовження попереднього слайда',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
       'Цей слайд належить до списку попереднього слайда й тому має спільний розмір шрифту — розмір найповнішої сторінки.',
-  'Losmaken': 'Від\'єднати',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Цей слайд відображається на {klein} проєктного розміру замість {eigen}, оскільки він у спільній розділеній серії зі значно повнішим слайдом {pagina}.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

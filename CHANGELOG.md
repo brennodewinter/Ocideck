@@ -56,7 +56,7 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
   Omdat dit de melding is die je juist niet gaat zoeken — de slide op je scherm
   ziet er kapot uit terwijl er niets mis is met zijn eigen tekst — staat de knop
-  ook in de editor-kopregel, als **Losmaken** naast de Kwaliteit-chip. Hij
+  ook in de editor-kopregel, als **Repareer slide** naast de Kwaliteit-chip. Hij
   verschijnt alleen zolang de slide die je bewerkt wordt meegetrokken, en de
   tooltip draagt de volledige uitleg. Alle andere fixes blijven in het paneel.
 - **De voortzettingsvlag is nu een gewone instelling in de editor.**

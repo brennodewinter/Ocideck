@@ -1780,10 +1780,10 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Repareer slide': 'Labot slaidu',
   'Voortzetting van vorige slide': 'Iepriekšējā slaida turpinājums',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
       'Šis slaids pieder iepriekšējā slaida sarakstam un tāpēc izmanto vienu burtu izmēru — pilnākās lapas izmēru.',
-  'Losmaken': 'Atdalīt',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Šis slaids tiek attēlots {klein} apmērā no dizaina izmēra, nevis {eigen}, jo tas dala sadalītu virkni ar daudz pilnāko slaidu {pagina}.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

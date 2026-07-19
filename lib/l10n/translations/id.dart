@@ -1781,10 +1781,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Repareer slide': 'Perbaiki slide',
   'Voortzetting van vorige slide': 'Lanjutan dari slide sebelumnya',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
       'Slide ini termasuk daftar slide sebelumnya dan karena itu berbagi satu ukuran huruf: ukuran halaman yang paling penuh.',
-  'Losmaken': 'Lepaskan',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Slide ini ditampilkan pada {klein} dari ukuran rancangan, bukan {eigen}, karena berbagi rangkaian terpisah dengan slide {pagina} yang jauh lebih penuh.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':

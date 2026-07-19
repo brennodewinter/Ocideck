@@ -738,10 +738,10 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Repareer slide': 'Réparer la diapositive',
   'Voortzetting van vorige slide': 'Suite de la diapositive précédente',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
       'Cette diapositive fait partie de la liste de la diapositive précédente et partage donc une taille de police : celle de la page la plus chargée.',
-  'Losmaken': 'Détacher',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
       'Cette diapositive s\'affiche à {klein} de sa taille de conception au lieu de {eigen}, car elle partage une série fractionnée avec la diapositive {pagina}, bien plus chargée.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':
