@@ -87,7 +87,7 @@ void main() {
 
     test('MASTG en MASWE staan in de referentie-inventaris', () {
       // MASTG ontbrak hier na PR #328; met MASWE erbij is dat rechtgezet.
-      final names = SecReferenceInventory.snapshot().map((c) => c.name);
+      final names = InfoSafetyReferenceInventory.snapshot().map((c) => c.name);
       expect(names, contains('Testgevallen (MASTG)'));
       expect(names, contains('Mobiele zwakheden (MASWE)'));
     });

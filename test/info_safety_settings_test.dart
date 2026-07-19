@@ -16,7 +16,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 ///
 /// What is worth pinning is the claim the card now makes to the user: the data
 /// is here, it stays here, and *this much* of it is here. The counts come from
-/// the real catalogs (SecReferenceInventory), so a card that renders them is a
+/// the real catalogs (InfoSafetyReferenceInventory), so a card that renders them is a
 /// card telling the truth.
 ///
 /// The card lives in the settings dialog's modules tab, an offstage child of an

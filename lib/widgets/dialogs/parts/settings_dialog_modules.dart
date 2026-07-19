@@ -107,7 +107,7 @@ extension _SettingsModules on _SettingsDialogState {
         // Tot de volledige CWE-lijst geladen is telt de snapshot de curated
         // bodem. Dat is een eerlijk tussengetal, geen leugen — en het staat er
         // maar een oogwenk.
-        snap.data ?? SecReferenceInventory.snapshot(),
+        snap.data ?? InfoSafetyReferenceInventory.snapshot(),
       ),
     );
   }

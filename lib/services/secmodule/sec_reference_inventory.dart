@@ -36,8 +36,8 @@ class ReferenceCatalog {
 /// de catalogi die de app daadwerkelijk bedient — niet wat een pakket bewéért
 /// te bevatten. Zo staat er nooit een geruststellend vinkje bij een lijst die
 /// in werkelijkheid leeg is.
-class SecReferenceInventory {
-  const SecReferenceInventory._();
+class InfoSafetyReferenceInventory {
+  const InfoSafetyReferenceInventory._();
 
   /// Telt alle catalogi. Laadt eerst de volledige CWE-lijst uit de asset, want
   /// zonder die stap zou hij de curated bodem tellen en een veel te laag getal

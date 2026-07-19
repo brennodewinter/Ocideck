@@ -79,7 +79,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `wstg_catalog.dart` — The bundled offline OWASP WSTG v4.2 test catalog (`WstgCatalog`, 97 tests + pinned version) used to one-click-fill a `checklist` slide.
 - `finding_template_library.dart` — `FindingTemplateLibrary`: the bundled finding templates, resolved **per report language** (`Deck.language`, not the interface language — PENTEST_MIAUW §12.3), with a per-template fallback to English.
 - `finding_templates/<code>.dart` (+ `all.dart`) — the template sources, one file per language like `lib/l10n/translations/`: a template is content, not a `d(...)` string. Only the prose is translated; the `## …` anchors, `cwe:`, `severity:` and the CVSS tokens are fixed. Guard: `test/finding_template_languages_test.dart`.
-- `secmodule/sec_reference_inventory.dart` — `SecReferenceInventory` + `ReferenceCatalog`: counts what reference data is *actually* available locally (CWE, WSTG, MIAUW, the CVSS table, finding templates) for the Uitbreidingen tab, so "data available locally" is a number rather than a claim.
+- `secmodule/sec_reference_inventory.dart` — `InfoSafetyReferenceInventory` + `ReferenceCatalog`: counts what reference data is *actually* available locally (CWE, WSTG, MIAUW, the CVSS table, finding templates) for the Uitbreidingen tab, so "data available locally" is a number rather than a claim.
 - `checklist_templates.dart` — `ChecklistSource` + helpers that present WSTG and each user `ChecklistTemplate` uniformly to the checklist editor and the per-scope generator (feedback #9).
 - `description_service.dart` — Stores searchable image descriptions as JSON sidecars.
 - `document_integrity.dart` — Computes/verifies the SHA-512 deck seal and seals a finalised deck.

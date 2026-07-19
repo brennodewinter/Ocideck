@@ -169,7 +169,7 @@ class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   /// vasthouden: de volledige CWE-lijst komt uit een asset, en een FutureBuilder
   /// die elke build opnieuw begint zou hem elke build opnieuw willen laden.
   late final Future<List<ReferenceCatalog>> _referenceInventory =
-      SecReferenceInventory.load();
+      InfoSafetyReferenceInventory.load();
 
   /// Het tabblad dat de zijbalk op dit moment toont.
   late SettingsSection _selectedTab;

@@ -8,7 +8,9 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   test('the snapshot names every reference catalog', () {
-    final names = SecReferenceInventory.snapshot().map((c) => c.name).toList();
+    final names = InfoSafetyReferenceInventory.snapshot()
+        .map((c) => c.name)
+        .toList();
 
     expect(names, contains('Zwakheden (CWE)'));
     expect(names, contains('Testgevallen (WSTG)'));
@@ -18,7 +20,7 @@ void main() {
   });
 
   test('every catalog reports a real, non-zero count and a source', () {
-    for (final c in SecReferenceInventory.snapshot()) {
+    for (final c in InfoSafetyReferenceInventory.snapshot()) {
       expect(
         c.count,
         greaterThan(0),
@@ -31,11 +33,11 @@ void main() {
   test(
     'load() merges the full CWE asset, so the count beats the floor',
     () async {
-      final floor = SecReferenceInventory.snapshot()
+      final floor = InfoSafetyReferenceInventory.snapshot()
           .firstWhere((c) => c.name == 'Zwakheden (CWE)')
           .count;
 
-      final loaded = (await SecReferenceInventory.load())
+      final loaded = (await InfoSafetyReferenceInventory.load())
           .firstWhere((c) => c.name == 'Zwakheden (CWE)')
           .count;
 
