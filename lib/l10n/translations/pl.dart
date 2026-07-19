@@ -1793,6 +1793,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'diagnosecode (ICD-10)': 'kod rozpoznania (ICD-10)',
+  'geneesmiddelcode (ATC)': 'kod leku (ATC)',
   'geboortedatum': 'data urodzenia',
   'locatiecoördinaten': 'współrzędne lokalizacji',
   'MAC-adres van een apparaat': 'adres MAC urządzenia',

@@ -1803,6 +1803,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'diagnosecode (ICD-10)': 'kodiċi tad-dijanjosi (ICD-10)',
+  'geneesmiddelcode (ATC)': 'kodiċi tal-mediċina (ATC)',
   'geboortedatum': 'data tat-twelid',
   'locatiecoördinaten': 'koordinati tal-post',
   'MAC-adres van een apparaat': 'indirizz MAC ta\' apparat',

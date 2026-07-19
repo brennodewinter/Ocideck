@@ -17,6 +17,7 @@
 
 import '../../models/deck.dart';
 import '../../models/privacy_finding.dart';
+import '../../models/privacy_lexicon.dart';
 import '../../models/slide.dart';
 import 'privacy_allowlist.dart';
 import 'privacy_bulk_rules.dart';
@@ -25,6 +26,7 @@ import 'privacy_contact_rules.dart';
 import 'privacy_digital_rules.dart';
 import 'privacy_document_rules.dart';
 import 'privacy_eu_rules.dart';
+import 'privacy_lexicon_data.dart';
 import 'privacy_location_rules.dart';
 import 'privacy_own_identity.dart';
 import 'privacy_phone_rules.dart';
@@ -473,18 +475,39 @@ class PrivacyScanner {
   ) {
     final lower = fragment.text.toLowerCase();
 
-    for (final rule in specialCategoryRules) {
-      for (final word in rule.keywords) {
-        final at = findPrivacyTerm(lower, word);
-        if (at < 0) continue;
-        _emit(
-          out,
-          _keywordFinding(fragment, slideIndex, rule.id, at, word.length),
-        );
-        // Eén melding per familie per fragment: tien synoniemen in één zin
-        // leveren geen tien meldingen op.
-        break;
+    // Eén melding per familie per fragment: tien synoniemen in één zin leveren
+    // geen tien meldingen op. Wélke van die tien de melding draagt, is sinds
+    // fase 12 niet meer "de eerste in de lijst" maar de meest specifieke — het
+    // gewicht uit het lexicon. Dat is het verschil tussen een melding die
+    // "diagnose" aanwijst (een woord dat in elke projectvergadering valt) en één
+    // die "ziekteverzuim" aanwijst, in dezelfde zin.
+    final best = <String, ({PrivacyLexiconEntry entry, int at})>{};
+    for (final entry in bundledPrivacyLexicon) {
+      final at = findPrivacyTermIn(lower, entry.term, entry.effectiveMatch);
+      if (at < 0) continue;
+      final current = best[entry.category];
+      if (current == null || entry.weight > current.entry.weight) {
+        best[entry.category] = (entry: entry, at: at);
       }
+    }
+    for (final hit in best.values) {
+      _emit(
+        out,
+        _keywordFinding(
+          fragment,
+          slideIndex,
+          hit.entry.category,
+          hit.at,
+          hit.entry.term.length,
+          // De rol komt nu uit het lexicon in plaats van uit een aanname per
+          // familie. Binnen één familie komen namelijk beide voor: "diagnose"
+          // wijst naar het gegeven, "diabetes" ís het — en dat verschil bepaalt
+          // of redactie werkelijk iets weghaalt.
+          role: hit.entry.role == PrivacyLexiconRole.value
+              ? PrivacyTermRole.value
+              : PrivacyTermRole.indicator,
+        ),
+      );
     }
 
     for (final genetic in geneticPatterns) {
@@ -498,6 +521,27 @@ class PrivacyScanner {
             ruleId: genetic.id,
             family: PrivacyFamily.specialCategory,
             confidence: PrivacyConfidence.possible,
+          ),
+        );
+      }
+    }
+
+    // ICD-10 en ATC. Contextwoord verplicht: `A12` is ook een tabelverwijzing,
+    // een zaalnummer en een vitamine.
+    for (final rule in medicalCodePatterns) {
+      for (final match in rule.pattern.allMatches(fragment.text)) {
+        if (!_hasContextWord(fragment.text, match.start, rule.contextWords)) {
+          continue;
+        }
+        _emit(
+          out,
+          _finding(
+            fragment,
+            slideIndex,
+            match,
+            ruleId: rule.id,
+            family: PrivacyFamily.specialCategory,
+            confidence: PrivacyConfidence.likely,
           ),
         );
       }
@@ -524,8 +568,9 @@ class PrivacyScanner {
     int slideIndex,
     String ruleId,
     int start,
-    int length,
-  ) => PrivacyFinding(
+    int length, {
+    PrivacyTermRole role = PrivacyTermRole.indicator,
+  }) => PrivacyFinding(
     ruleId: ruleId,
     family: PrivacyFamily.specialCategory,
     confidence: PrivacyConfidence.possible,
@@ -535,9 +580,11 @@ class PrivacyScanner {
     start: start,
     end: start + length,
     maskedSample: maskValue(fragment.text.substring(start, start + length)),
-    // Een trefwoord wijst naar het gegeven, het ís het niet. Zie
-    // [PrivacyTermRole] voor waarom dat verschil bij redactie telt.
-    role: PrivacyTermRole.indicator,
+    // Meestal wijst een trefwoord naar het gegeven en ís het het niet — zie
+    // [PrivacyTermRole] voor waarom dat verschil bij redactie telt. Maar niet
+    // altijd: "diabetes" en "strafblad" zíjn het gegeven. Het lexicon zegt
+    // welke van de twee, en de standaard blijft de voorzichtige.
+    role: role,
   );
 
   // ── Europese identificatienummers ─────────────────────────────────────────

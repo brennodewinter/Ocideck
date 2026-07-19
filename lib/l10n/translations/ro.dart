@@ -1799,6 +1799,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'diagnosecode (ICD-10)': 'cod de diagnostic (CIM-10)',
+  'geneesmiddelcode (ATC)': 'cod de medicament (ATC)',
   'geboortedatum': 'data nașterii',
   'locatiecoördinaten': 'coordonate de locație',
   'MAC-adres van een apparaat': 'adresa MAC a unui dispozitiv',

@@ -738,6 +738,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'diagnosecode (ICD-10)': 'Diagnosecode (ICD-10)',
+  'geneesmiddelcode (ATC)': 'Arzneimittelcode (ATC)',
   'geboortedatum': 'Geburtsdatum',
   'locatiecoördinaten': 'Standortkoordinaten',
   'MAC-adres van een apparaat': 'MAC-Adresse eines Geräts',

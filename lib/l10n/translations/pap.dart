@@ -738,6 +738,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'diagnosecode (ICD-10)': 'kódigo di diagnóstiko (ICD-10)',
+  'geneesmiddelcode (ATC)': 'kódigo di medisina (ATC)',
   'geboortedatum': 'fecha di nasementu',
   'locatiecoördinaten': 'koordenadanan di lugá',
   'MAC-adres van een apparaat': 'adres MAC di un aparato',

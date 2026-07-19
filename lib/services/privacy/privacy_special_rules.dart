@@ -23,182 +23,16 @@
 // Zonder die koppeling is trefwoorddetectie ruis. Mét die koppeling vangt ze
 // precies het geval waar het om gaat.
 //
-// ── Wat we bewust NIET meeleveren ────────────────────────────────────────────
+// ── Waar de trefwoorden staan ───────────────────────────────────────────────
 //
-// Politieke opvattingen, etnische afkomst en seksuele geaardheid staan in het
-// ontwerp (§3-G) als "standaard uit". Ze zitten hier nog niet in, en dat is een
-// keuze: een slide over diversiteitsbeleid gaat *over* etniciteit zonder etnische
-// gegevens te bevatten, en zonder een per-regel-uitschakelaar in de instellingen
-// (fase 7) is die FP-ratio niet te verdedigen. Beter geen regel dan een regel die
-// de hele controle ongeloofwaardig maakt.
+// Niet meer hier. Sinds fase 12 leven ze in `privacy_lexicon_data.dart`, waar
+// elke term zelf zegt hoe hij gezocht wil worden, in welke taal hij staat en hoe
+// specifiek hij is. Dit bestand houdt over wat géén woordenlijst is: de matcher,
+// de notatieregels (genetisch, ICD-10, ATC, parketnummer), het bereik van een
+// mededeling, en de persoonskoppelingspoort.
 
 import '../../models/privacy_finding.dart';
-
-/// Eén trefwoordfamilie uit artikel 9 of 10.
-class SpecialCategoryRule {
-  final String id;
-
-  /// De trefwoorden, meertalig. Data, geen UI — deze woorden worden nooit
-  /// getoond, alleen gematcht, dus ze gaan niet door de l10n heen.
-  final List<String> keywords;
-
-  const SpecialCategoryRule(this.id, this.keywords);
-}
-
-/// De trefwoordfamilies.
-///
-/// NL/EN/DE/FR/ES. De lijst is bewust uit te breiden zonder code te raken: een
-/// taal toevoegen is woorden toevoegen.
-const List<SpecialCategoryRule> specialCategoryRules = [
-  SpecialCategoryRule('special.health', [
-    'diagnose',
-    'diagnosis',
-    'diagnostic',
-    'diagnóstico',
-    'medicatie',
-    'medication',
-    'medikation',
-    'médicament',
-    'medicación',
-    'ziekteverzuim',
-    'sick leave',
-    'krankmeldung',
-    'arrêt maladie',
-    'zwangerschap',
-    'pregnancy',
-    'schwangerschaft',
-    'grossesse',
-    'embarazo',
-    'psychiatrisch',
-    'psychiatric',
-    'psychiatrische',
-    'verslaving',
-    'addiction',
-    'sucht',
-    'adicción',
-    'ziektebeeld',
-    'medisch dossier',
-    'medical record',
-    'patientendossier',
-    'arbeidsongeschikt',
-    'burn-out',
-    'burnout',
-    'depressie',
-    'depression',
-    'depresión',
-    'kanker',
-    'cancer',
-    'krebs',
-    'cáncer',
-    'hiv',
-    'diabetes',
-    'ggz',
-  ]),
-  SpecialCategoryRule('special.criminal', [
-    // De stam, niet de verbogen vorm: met voorvoegselmatching dekt `verdacht`
-    // ook `verdachte`, `verdachten` en `verdachtmaking`. Stond hier eerst als
-    // `verdachte`, en daardoor miste "wordt verdacht van diefstal" — de meest
-    // voorkomende formulering — volledig.
-    'verdacht',
-    'suspect',
-    'verdächtige',
-    'sospechoso',
-    'veroordeling',
-    'conviction',
-    'verurteilung',
-    'condamnation',
-    'condena',
-    'strafblad',
-    'criminal record',
-    'vorstrafe',
-    'casier judiciaire',
-    'proces-verbaal',
-    'aanhouding',
-    'arrest',
-    'festnahme',
-    'detención',
-    'tenlastelegging',
-    'strafrechtelijk',
-    'misdrijf',
-    'delict',
-    'gedetineerde',
-    'reclassering',
-    'vog',
-  ]),
-  SpecialCategoryRule('special.religion', [
-    'geloofsovertuiging',
-    'levensovertuiging',
-    'religieuze overtuiging',
-    'religious belief',
-    'religionszugehörigkeit',
-    'confession religieuse',
-    'kerkgenootschap',
-    'moskeebezoek',
-    'geloofsgemeenschap',
-  ]),
-  SpecialCategoryRule('special.union', [
-    'vakbond',
-    'vakbondslid',
-    'trade union',
-    'gewerkschaft',
-    'syndicat',
-    'sindicato',
-    'union membership',
-    'lid van de fnv',
-    'lid van het cnv',
-  ]),
-  // ── Standaard uit (zie defaultDisabledPrivacyRules) ───────────────────────
-  //
-  // Deze drie zijn niet minder belangrijk — het zijn juist de zwaarste
-  // categorieën — maar hun trefwoorden komen in gewone zakelijke taal veel te
-  // vaak voor. Ze staan er wél, en zijn met één vinkje aan te zetten.
-  SpecialCategoryRule('special.politics', [
-    'politieke voorkeur',
-    'politieke overtuiging',
-    'stemde op',
-    'lid van de partij',
-    'political opinion',
-    'politische meinung',
-    'opinion politique',
-    'opinión política',
-  ]),
-  SpecialCategoryRule('special.ethnicity', [
-    'etnische afkomst',
-    'etnische achtergrond',
-    'raciale afkomst',
-    'ethnic origin',
-    'racial origin',
-    'ethnische herkunft',
-    'origine ethnique',
-    'origen étnico',
-  ]),
-  SpecialCategoryRule('special.sexlife', [
-    'seksuele geaardheid',
-    'seksuele voorkeur',
-    'sexual orientation',
-    'sexuelle orientierung',
-    'orientation sexuelle',
-    'orientación sexual',
-  ]),
-
-  SpecialCategoryRule('special.biometric', [
-    'vingerafdruk',
-    'fingerprint',
-    'fingerabdruck',
-    'empreinte digitale',
-    'huella dactilar',
-    'irisscan',
-    'iris scan',
-    'gezichtsherkenning',
-    'facial recognition',
-    'gesichtserkennung',
-    'stemprofiel',
-    'voiceprint',
-    'biometrisch',
-    'biometric',
-    'biometrische',
-  ]),
-];
+import '../../models/privacy_lexicon.dart';
 
 /// Vanaf welke lengte een term als voorvoegsel mag matchen.
 ///
@@ -232,16 +66,42 @@ bool _isWordChar(int c) =>
 /// verschil. Daar is de persoonskoppelingspoort voor.
 int findPrivacyTerm(String lowerText, String term) {
   if (term.isEmpty) return -1;
-  final wholeWordOnly = term.length < kMinPrefixTermLength;
+  return findPrivacyTermIn(
+    lowerText,
+    term,
+    term.length < kMinPrefixTermLength
+        ? PrivacyTermMatch.word
+        : PrivacyTermMatch.prefix,
+  );
+}
+
+/// Zoekt [term] in [lowerText] met een expliciet opgegeven modus.
+///
+/// Sinds fase 12 komt die modus uit het lexicon in plaats van uit de termlengte,
+/// en dat scheelt in beide richtingen. `arrest` is zes letters — lang genoeg om
+/// onder de oude regel als voorvoegsel te matchen — maar moet als héél woord
+/// gezocht worden, want het is ook een uitspraak van de Hoge Raad. Omgekeerd
+/// hoort `ziekteverzuim` juist middenin een samenstelling gevonden te worden
+/// (`ziekteverzuimcijfers`), en dat kon de oude matcher helemaal niet.
+int findPrivacyTermIn(String lowerText, String term, PrivacyTermMatch match) {
+  if (term.isEmpty) return -1;
   var from = 0;
   while (from <= lowerText.length - term.length) {
     final at = lowerText.indexOf(term, from);
     if (at < 0) return -1;
-    final startsWord = at == 0 || !_isWordChar(lowerText.codeUnitAt(at - 1));
     final end = at + term.length;
+    final startsWord = at == 0 || !_isWordChar(lowerText.codeUnitAt(at - 1));
     final endsWord =
         end >= lowerText.length || !_isWordChar(lowerText.codeUnitAt(end));
-    if (startsWord && (!wholeWordOnly || endsWord)) return at;
+
+    final ok = switch (match) {
+      PrivacyTermMatch.word => startsWord && endsWord,
+      PrivacyTermMatch.prefix => startsWord,
+      // Een samenstellingsdeel mag overal zitten. De veiligheid komt hier niet
+      // van een woordgrens maar van de termlengte — zie [kMinCompoundLength].
+      PrivacyTermMatch.compound => true,
+    };
+    if (ok) return at;
     from = at + 1;
   }
   return -1;
@@ -268,6 +128,50 @@ final List<({String id, RegExp pattern})> geneticPatterns = [
   (
     id: 'special.genetic',
     pattern: RegExp(r'\bp\.[A-Z][a-z]{2}\d+(?:[A-Z][a-z]{2}|\*|fs|=)\b'),
+  ),
+];
+
+/// Medische codestelsels: ICD-10-diagnosecodes en ATC-geneesmiddelcodes.
+///
+/// Deze twee zijn het tegenovergestelde van de trefwoorden: ze zíjn het gegeven
+/// (rol `value`), niet een aanwijzing ernaar. `F32.1` is een diagnose, punt.
+///
+/// **En ze zijn allebei zwaar FP-gevoelig**, wat de reden is dat ze pas nu komen
+/// en niet in de eerste ronde. `A12` is een ICD-10-code én een tabelverwijzing én
+/// een zaalnummer én een vitamine. `J01CA04` is amoxicilline én een
+/// artikelnummer. Zonder contextwoord binnen [kContextWindow] tekens vuren ze
+/// daarom niet — precies zoals het BSN dat niet doet, en om precies dezelfde
+/// reden.
+final List<({String id, RegExp pattern, List<String> contextWords})>
+medicalCodePatterns = [
+  (
+    id: 'special.icd10',
+    // Letter (niet U, die is voor noodgevallen gereserveerd) + twee cijfers,
+    // optioneel een punt en één of twee cijfers.
+    pattern: RegExp(r'\b[A-TV-Z]\d{2}(?:\.\d{1,2})?\b'),
+    contextWords: [
+      'icd',
+      'icd-10',
+      'diagnose',
+      'hoofddiagnose',
+      'nevendiagnose',
+      'diagnosis',
+      'diagnosecode',
+    ],
+  ),
+  (
+    id: 'special.atc',
+    // Anatomische hoofdgroep + twee cijfers + twee letters + twee cijfers.
+    pattern: RegExp(r'\b[A-V]\d{2}[A-Z]{2}\d{2}\b'),
+    contextWords: [
+      'atc',
+      'geneesmiddel',
+      'medicijn',
+      'medicatie',
+      'medication',
+      'preparaat',
+      'voorschrift',
+    ],
   ),
 ];
 

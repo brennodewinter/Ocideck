@@ -1785,6 +1785,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'diagnosecode (ICD-10)': 'Diagnosecode (ICD-10)',
+  'geneesmiddelcode (ATC)': 'Medikamäntecode (ATC)',
   'geboortedatum': 'Geburtsdatum',
   'locatiecoördinaten': 'Standortkoordinate',
   'MAC-adres van een apparaat': 'MAC-Adrässe vun eme Grät',

@@ -35,6 +35,24 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   conflictafhandeling als bij WebDAV. Een deck dat je uit een bucket opende,
   gaat bij opslaan vanzelf naar diezelfde bucket terug.
 
+- **De trefwoordenlijst voor bijzondere persoonsgegevens weet nu wat voor woord
+  ze bevat.** Tot nu toe leidde OciDeck uit de lengte van een woord af hoe het
+  gezocht moest worden: kort betekende "alleen als heel woord", lang betekende
+  "ook met een uitgang eraan". Dat werkte verrassend ver, maar het brak allebei
+  de kanten op. "Arrest" is lang genoeg voor de soepele regel en moest juist een
+  heel woord zijn — het is namelijk ook een uitspraak van de Hoge Raad, en dat
+  woord staat in elke juridische presentatie. En "ziekteverzuim" hoort juist wél
+  gevonden te worden in "ziekteverzuimcijfers", wat helemaal niet kon.
+
+  Elk woord draagt nu zelf die informatie, plus een taal en een maat voor hoe
+  specifiek het is. Die laatste bepaalt welk woord de melding krijgt als er
+  meerdere in dezelfde zin staan: "de diagnose leidde tot ziekteverzuim" wijst
+  nu het tweede aan, want het eerste valt in elke projectvergadering.
+
+  Daarnaast worden diagnosecodes (ICD-10) en geneesmiddelcodes (ATC) herkend —
+  alleen met een woord als "hoofddiagnose" of "geneesmiddel" ernaast, want `A12`
+  is ook een tabelverwijzing en een zaalnummer.
+
 - **Geboortedata en locatiecoördinaten worden herkend.** Twee controles met
   precies tegengestelde regels, en dat is met opzet. Een geboortedatum wordt
   alleen gemeld als er ook een woord als "geboren" of "geboortedatum" bij staat:

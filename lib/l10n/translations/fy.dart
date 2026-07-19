@@ -739,6 +739,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'diagnosecode (ICD-10)': 'diagnoazekoade (ICD-10)',
+  'geneesmiddelcode (ATC)': 'medisynkoade (ATC)',
   'geboortedatum': 'berteedatum',
   'locatiecoördinaten': 'lokaasjekoördinaten',
   'MAC-adres van een apparaat': 'MAC-adres fan in apparaat',

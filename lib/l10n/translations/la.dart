@@ -1797,6 +1797,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'diagnosecode (ICD-10)': 'codex diagnosis (ICD-10)',
+  'geneesmiddelcode (ATC)': 'codex medicamenti (ATC)',
   'geboortedatum': 'dies natalis',
   'locatiecoördinaten': 'coordinatae loci',
   'MAC-adres van een apparaat': 'inscriptio MAC instrumenti',

@@ -454,6 +454,8 @@ String privacyRuleLabel(AppLocalizations l10n, String ruleId) {
     'special.ethnicity' => l10n.d('etnische afkomst'),
     'special.sexlife' => l10n.d('seksuele geaardheid'),
     'special.genetic' => l10n.d('genetisch gegeven'),
+    'special.icd10' => l10n.d('diagnosecode (ICD-10)'),
+    'special.atc' => l10n.d('geneesmiddelcode (ATC)'),
     'nl.parketnummer' => l10n.d('parketnummer'),
     'bulk.table_column' => l10n.d(
       'tabel met persoonsgegevens (rijen×kolommen)',

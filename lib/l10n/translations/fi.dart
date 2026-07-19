@@ -1781,6 +1781,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'diagnosecode (ICD-10)': 'diagnoosikoodi (ICD-10)',
+  'geneesmiddelcode (ATC)': 'lääkekoodi (ATC)',
   'geboortedatum': 'syntymäaika',
   'locatiecoördinaten': 'sijaintikoordinaatit',
   'MAC-adres van een apparaat': 'laitteen MAC-osoite',

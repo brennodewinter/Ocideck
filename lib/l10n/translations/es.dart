@@ -735,6 +735,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'diagnosecode (ICD-10)': 'código de diagnóstico (CIE-10)',
+  'geneesmiddelcode (ATC)': 'código de medicamento (ATC)',
   'geboortedatum': 'fecha de nacimiento',
   'locatiecoördinaten': 'coordenadas de ubicación',
   'MAC-adres van een apparaat': 'dirección MAC de un dispositivo',

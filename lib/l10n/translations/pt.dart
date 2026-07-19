@@ -1811,6 +1811,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'diagnosecode (ICD-10)': 'código de diagnóstico (CID-10)',
+  'geneesmiddelcode (ATC)': 'código de medicamento (ATC)',
   'geboortedatum': 'data de nascimento',
   'locatiecoördinaten': 'coordenadas de localização',
   'MAC-adres van een apparaat': 'endereço MAC de um dispositivo',

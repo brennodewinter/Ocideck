@@ -1780,6 +1780,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'diagnosecode (ICD-10)': 'diagnosekode (ICD-10)',
+  'geneesmiddelcode (ATC)': 'lægemiddelkode (ATC)',
   'geboortedatum': 'fødselsdato',
   'locatiecoördinaten': 'positionskoordinater',
   'MAC-adres van een apparaat': 'MAC-adresse på en enhed',

@@ -1809,6 +1809,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'diagnosecode (ICD-10)': 'κωδικός διάγνωσης (ICD-10)',
+  'geneesmiddelcode (ATC)': 'κωδικός φαρμάκου (ATC)',
   'geboortedatum': 'ημερομηνία γέννησης',
   'locatiecoördinaten': 'συντεταγμένες τοποθεσίας',
   'MAC-adres van een apparaat': 'διεύθυνση MAC μιας συσκευής',

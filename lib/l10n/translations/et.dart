@@ -1772,6 +1772,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'diagnosecode (ICD-10)': 'diagnoosikood (RHK-10)',
+  'geneesmiddelcode (ATC)': 'ravimikood (ATC)',
   'geboortedatum': 'sünnikuupäev',
   'locatiecoördinaten': 'asukoha koordinaadid',
   'MAC-adres van een apparaat': 'seadme MAC-aadress',

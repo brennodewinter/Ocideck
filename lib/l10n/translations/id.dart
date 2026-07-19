@@ -1781,6 +1781,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'diagnosecode (ICD-10)': 'kode diagnosis (ICD-10)',
+  'geneesmiddelcode (ATC)': 'kode obat (ATC)',
   'geboortedatum': 'tanggal lahir',
   'locatiecoördinaten': 'koordinat lokasi',
   'MAC-adres van een apparaat': 'alamat MAC sebuah perangkat',

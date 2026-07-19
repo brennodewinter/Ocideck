@@ -1785,6 +1785,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'diagnosecode (ICD-10)': 'diagnóziskód (BNO-10)',
+  'geneesmiddelcode (ATC)': 'gyógyszerkód (ATC)',
   'geboortedatum': 'születési dátum',
   'locatiecoördinaten': 'helymeghatározási koordináták',
   'MAC-adres van een apparaat': 'egy eszköz MAC-címe',

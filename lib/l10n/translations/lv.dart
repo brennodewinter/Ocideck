@@ -1780,6 +1780,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'diagnosecode (ICD-10)': 'diagnozes kods (SSK-10)',
+  'geneesmiddelcode (ATC)': 'zāļu kods (ATĶ)',
   'geboortedatum': 'dzimšanas datums',
   'locatiecoördinaten': 'atrašanās vietas koordinātas',
   'MAC-adres van een apparaat': 'ierīces MAC adrese',

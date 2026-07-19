@@ -1784,6 +1784,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'diagnosecode (ICD-10)': 'kód diagnózy (MKN-10)',
+  'geneesmiddelcode (ATC)': 'kód léčiva (ATC)',
   'geboortedatum': 'datum narození',
   'locatiecoördinaten': 'souřadnice místa',
   'MAC-adres van een apparaat': 'MAC adresa zařízení',

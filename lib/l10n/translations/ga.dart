@@ -1817,6 +1817,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'diagnosecode (ICD-10)': 'cód diagnóise (ICD-10)',
+  'geneesmiddelcode (ATC)': 'cód cógais (ATC)',
   'geboortedatum': 'dáta breithe',
   'locatiecoördinaten': 'comhordanáidí suímh',
   'MAC-adres van een apparaat': 'seoladh MAC gléis',

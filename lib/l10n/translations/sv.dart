@@ -1780,6 +1780,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'diagnosecode (ICD-10)': 'diagnoskod (ICD-10)',
+  'geneesmiddelcode (ATC)': 'läkemedelskod (ATC)',
   'geboortedatum': 'födelsedatum',
   'locatiecoördinaten': 'platskoordinater',
   'MAC-adres van een apparaat': 'MAC-adress för en enhet',

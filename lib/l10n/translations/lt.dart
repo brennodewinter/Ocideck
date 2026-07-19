@@ -1789,6 +1789,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'diagnosecode (ICD-10)': 'diagnozės kodas (TLK-10)',
+  'geneesmiddelcode (ATC)': 'vaisto kodas (ATC)',
   'geboortedatum': 'gimimo data',
   'locatiecoördinaten': 'vietos koordinatės',
   'MAC-adres van een apparaat': 'įrenginio MAC adresas',

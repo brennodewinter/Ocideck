@@ -1783,6 +1783,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'diagnosecode (ICD-10)': 'šifra diagnoze (MKB-10)',
+  'geneesmiddelcode (ATC)': 'šifra zdravila (ATC)',
   'geboortedatum': 'datum rojstva',
   'locatiecoördinaten': 'koordinate lokacije',
   'MAC-adres van een apparaat': 'naslov MAC naprave',

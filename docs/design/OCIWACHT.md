@@ -30,7 +30,8 @@ accepteren, waarschuwen met een shield-badge, of redigeren op scherm en in expor
 | §3-D `contact.birthdate` + `contact.geo` | **geleverd** |
 | §3-D `contact.plate` + `contact.postcode_intl` | open — wacht op de regiopakketten (fase 13) |
 | §13.2 Persoonskoppelingspoort (naam als koppeling, mededeling als bereik) | **geleverd** |
-| §13.2 Lexiconmodel als data (`role`/`match`/`weight`/`lang`) | open — fase 12 |
+| §13.2 Lexiconmodel als data (`role`/`match`/`weight`/`lang`) | **geleverd** |
+| §3-G `special.icd10` + `special.atc` (notatie met contextpoort) | **geleverd** |
 | §13.3 Taaldekking zichtbaar, gebundelde lexicons | open — fase 13 |
 | §14 Onderzoeksdossier DLP-technieken (annex, geen ontwerp) | naslag |
 
@@ -122,6 +123,8 @@ groeit de regelset zonder de compile te breken.
 | `lib/services/privacy/privacy_scanner.dart` | Orkestratie én de inline-detectors: e-mail, telefoon, IBAN, BSN, EU-nummers, secrets, bijzondere categorieën, adres/postcode, naam, structureel — plus allowlist en co-occurrence-escalatie |
 | `lib/services/privacy/privacy_contact_rules.dart` | Adres (straat + huisnummer), NL-postcode, gelabelde persoonsnaam: patronen, straatachtervoegsels, placeholder-personen |
 | `lib/services/privacy/privacy_phone_rules.dart` | Telefoon: E.164, nationale vorm, contextwoorden, toegekende landnummers, gereserveerde reeksen |
+| `lib/models/privacy_lexicon.dart` | `PrivacyLexiconEntry`, `PrivacyTermMatch` (word/prefix/compound), `PrivacyLexiconRole`, `kMinCompoundLength` |
+| `lib/services/privacy/privacy_lexicon_data.dart` | Het gebundelde art. 9/10-lexicon: term, categorie, taal, matchmodus, gewicht, rol |
 | `lib/services/privacy/privacy_digital_rules.dart` | Digitale identificatoren: IPv4/IPv6, MAC, IMEI, ICCID, IMSI, social handles, device-ID's |
 | `lib/services/privacy/privacy_location_rules.dart` | Geboortedatum en coördinaten: datumvormen, contextwoorden, lat/lon, `geo:`-URI, plus-code, what3words |
 | `lib/services/privacy/privacy_scanner_detectors.dart` | `part of` de scanner: de detectoren voor MRZ, digitaal, geboortedatum en geo — puur om het hoofdbestand onder de 1000-regelgrens te houden |
@@ -1359,7 +1362,7 @@ is geruststellend, maar dit is geen benchmark.
 | **9** | Trefwoordbereik nooit redigeren (`PrivacyTermRole`) + matcher met woordgrens en minimumtermlengte | **geleverd.** Geen nieuwe data, geen nieuwe l10n. Verwijdert misleidend gedrag en de grofste FP's |
 | **10** | De beeldcontrole: YuNet, eigen provider, eigen schakelaar, `readable`-scheiding, multischaal | **geleverd.** Staat hier en niet later omdat de tekstscanner deze categorie principieel niet kan vinden |
 | **11** | Persoonskoppelingspoort vóór elke art. 9-melding | **geleverd.** `contact.name` vuurt nu ook op een persoonspredicaat ("wordt verdacht van", "meldde zich ziek") en op een naam die een e-mailadres bevestigt; label en aanhef stegen van `possible` naar `likely`, want een aanhef is een structurele uitspraak en geen gok. Een naam koppelt bewust **niet** slidebreed maar tot het eind van zijn mededeling — zonder die grens tilde één naam bovenaan een vrij-markdownveld élk trefwoord eronder naar een harde melding, en dat ving de corpustest |
-| **12** | `role` + `match` + `weight` als lexicondata in plaats van afgeleid; notatie-uitbreiding (ICD-10, ATC) | Maakt het lexicon vulbaar zonder code te raken — de voorwaarde voor 13 |
+| **12** | `role` + `match` + `weight` als lexicondata in plaats van afgeleid; notatie-uitbreiding (ICD-10, ATC) | **geleverd.** De matchmodus werd afgeleid uit de termlengte (grens: vier tekens), en dat brak twee kanten op: `arrest` is lang genoeg voor de voorvoegselregel maar moet een héél woord zijn (het is ook een uitspraak van de Hoge Raad), en `ziekteverzuim` moet juist middenin een samenstelling gevonden worden — wat de oude matcher helemaal niet kon. Het `weight` doet ook echt werk: staan er meerdere termen van dezelfde familie in één fragment, dan draagt de meest specifieke de melding, niet de eerste in de lijst. `role` komt nu per term uit het lexicon, want binnen één familie komen beide voor: "diagnose" wijst, "diabetes" ís |
 | **13** | Taaldekking zichtbaar + regiopakketten werkend + gebundelde lexicons (ORDO nl, EuroVoc) | Zonder de zichtbaarheid liegt een groene balk in 24 talen |
 | **14** | Rolonderscheid verdachte/aangever (ConText-mechaniek in Dart, drieweg met *onbekend* als default) | Laatste tien procent, en zinloos vóór 11: wat je niet detecteert kun je geen rol geven |
 

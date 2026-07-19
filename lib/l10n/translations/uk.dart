@@ -1799,6 +1799,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'diagnosecode (ICD-10)': 'код діагнозу (МКХ-10)',
+  'geneesmiddelcode (ATC)': 'код лікарського засобу (ATC)',
   'geboortedatum': 'дата народження',
   'locatiecoördinaten': 'координати місця',
   'MAC-adres van een apparaat': 'MAC-адреса пристрою',

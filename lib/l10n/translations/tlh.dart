@@ -1756,6 +1756,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'diagnosecode (ICD-10)': 'rop ngu\' mI\' (ICD-10)',
+  'geneesmiddelcode (ATC)': 'Hergh mI\' (ATC)',
   'geboortedatum': 'boghDIS',
   'locatiecoördinaten': 'Daq wIv mI\'',
   'MAC-adres van een apparaat': 'jan MAC Sep',

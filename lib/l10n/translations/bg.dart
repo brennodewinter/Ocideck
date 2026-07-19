@@ -1804,6 +1804,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'diagnosecode (ICD-10)': 'код на диагноза (МКБ-10)',
+  'geneesmiddelcode (ATC)': 'код на лекарство (ATC)',
   'geboortedatum': 'дата на раждане',
   'locatiecoördinaten': 'координати на местоположение',
   'MAC-adres van een apparaat': 'MAC адрес на устройство',
