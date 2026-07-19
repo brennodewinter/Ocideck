@@ -173,6 +173,43 @@ void main() {
     expect(find.byType(FinalizeSealDialog), findsOneWidget);
   });
 
+  // Zonder ingestelde repository kan geen enkele git-handeling slagen. Ze horen
+  // dan niet in het menu te staan: een item dat altijd op dezelfde "stel eerst
+  // een repository in"-melding uitkomt leest als een kapotte functie.
+  testWidgets('git items stay out of the overflow menu without a repo', (
+    tester,
+  ) async {
+    await pumpShell(tester);
+
+    await tester.tap(appBarIcon(Icons.more_vert));
+    await tester.pumpAndSettle();
+
+    expect(menuItemIcon(Icons.hub_outlined), findsNothing);
+    expect(menuItemIcon(Icons.sync), findsNothing);
+    expect(menuItemIcon(Icons.manage_search), findsNothing);
+    expect(menuItemIcon(Icons.photo_library_outlined), findsNothing);
+    // De niet-git-items staan er wél, zodat dit geen leeg menu bewijst.
+    expect(menuItemIcon(Icons.find_replace), findsOneWidget);
+  });
+
+  testWidgets('git items appear once a repo is configured', (tester) async {
+    SharedPreferences.setMockInitialValues({
+      'app_consent_accepted': true,
+      'gitRepo':
+          '{"baseUrl":"https://git.example.org","owner":"acme",'
+          '"repo":"decks","provider":"forgejo","defaultBranch":"main",'
+          '"trustedInternal":true}',
+    });
+    await pumpShell(tester);
+
+    await tester.tap(appBarIcon(Icons.more_vert));
+    await tester.pumpAndSettle();
+
+    expect(menuItemIcon(Icons.hub_outlined), findsOneWidget);
+    expect(menuItemIcon(Icons.sync), findsOneWidget);
+    expect(menuItemIcon(Icons.manage_search), findsOneWidget);
+  });
+
   testWidgets('the overflow menu opens the full-deck preview', (tester) async {
     await pumpShell(tester);
 
