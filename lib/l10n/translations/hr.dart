@@ -1788,6 +1788,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Medicare-nummer — een zorggegeven': 'Medicare broj — zdravstveni podatak',
+  'bedrijfsnummer': 'broj tvrtke',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
       'broj zdravstvenog osiguranja (RAMQ) — zdravstveni podatak',
   'zorgverzekeringsnummer (OHIP) — een zorggegeven':

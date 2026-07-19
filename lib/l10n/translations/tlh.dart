@@ -1756,6 +1756,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Medicare-nummer — een zorggegeven': 'Medicare mI’ — pIvlob De’',
+  'bedrijfsnummer': 'yaHmey mI’',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
       'pIvlob QeD mI\' (RAMQ) — pIvlob De\'',
   'zorgverzekeringsnummer (OHIP) — een zorggegeven':

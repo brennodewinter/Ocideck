@@ -507,6 +507,8 @@ String privacyRuleLabel(AppLocalizations l10n, String ruleId) {
     'ca.ramq' => l10n.d('zorgverzekeringsnummer (RAMQ) — een zorggegeven'),
     'ca.ohip' => l10n.d('zorgverzekeringsnummer (OHIP) — een zorggegeven'),
     'ca.bn' => l10n.d('bedrijfsnummer (BN)'),
+    'au.medicare' => l10n.d('Medicare-nummer — een zorggegeven'),
+    'au.abn' || 'br.cnpj' => l10n.d('bedrijfsnummer'),
     _ when _nationalNumberNames.containsKey(ruleId) =>
       '${l10n.d('nationaal identificatienummer')} (${_nationalNumberNames[ruleId]})',
     'secret.private_key' => l10n.d('private sleutel'),
@@ -524,6 +526,13 @@ String privacyRuleLabel(AppLocalizations l10n, String ruleId) {
 const Map<String, String> _nationalNumberNames = {
   'us.ssn': 'Social Security Number',
   'ca.sin': 'Social Insurance Number',
+  'au.tfn': 'Tax File Number',
+  'in.aadhaar': 'Aadhaar',
+  'in.pan': 'PAN',
+  'za.id': 'ID Number',
+  'cw.sedula': 'sedula',
+  'aw.persoonsnummer': 'persoonsnummer',
+  'br.cpf': 'CPF',
   'us.itin': 'ITIN',
   'us.dea': 'DEA-nummer',
   'be.rijksregister': 'rijksregisternummer',

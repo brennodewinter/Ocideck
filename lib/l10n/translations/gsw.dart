@@ -1785,6 +1785,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Medicare-nummer — een zorggegeven': 'Medicare-Nummere — es Gsundheitsdate',
+  'bedrijfsnummer': 'Firmenummere',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
       'Chrankeversicherigsnummere (RAMQ) — es Gsundheitsdate',
   'zorgverzekeringsnummer (OHIP) — een zorggegeven':

@@ -1799,6 +1799,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Medicare-nummer — een zorggegeven': 'номер Medicare — дані про здоров’я',
+  'bedrijfsnummer': 'номер компанії',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
       'номер медичного страхування (RAMQ) — дані про здоров\'я',
   'zorgverzekeringsnummer (OHIP) — een zorggegeven':

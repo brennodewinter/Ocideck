@@ -1817,6 +1817,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Medicare-nummer — een zorggegeven': 'uimhir Medicare — sonra sláinte',
+  'bedrijfsnummer': 'uimhir chuideachta',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
       'uimhir árachais sláinte (RAMQ) — sonra sláinte',
   'zorgverzekeringsnummer (OHIP) — een zorggegeven':

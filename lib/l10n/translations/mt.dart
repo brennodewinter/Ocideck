@@ -1803,6 +1803,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Medicare-nummer — een zorggegeven': 'numru Medicare — dejta dwar is-saħħa',
+  'bedrijfsnummer': 'numru tal-kumpanija',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
       'numru tal-assigurazzjoni tas-saħħa (RAMQ) — dejta dwar is-saħħa',
   'zorgverzekeringsnummer (OHIP) — een zorggegeven':

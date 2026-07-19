@@ -1780,6 +1780,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Medicare-nummer — een zorggegeven': 'Medicare-nummer — en hälsouppgift',
+  'bedrijfsnummer': 'företagsnummer',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
       'sjukförsäkringsnummer (RAMQ) — en hälsouppgift',
   'zorgverzekeringsnummer (OHIP) — een zorggegeven':

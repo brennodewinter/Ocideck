@@ -738,6 +738,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Medicare-nummer — een zorggegeven': 'Medicare-Nummer — Gesundheitsdatum',
+  'bedrijfsnummer': 'Unternehmensnummer',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
       'Krankenversicherungsnummer (RAMQ) — Gesundheitsdatum',
   'zorgverzekeringsnummer (OHIP) — een zorggegeven':

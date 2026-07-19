@@ -1804,6 +1804,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Medicare-nummer — een zorggegeven': 'номер Medicare — здравни данни',
+  'bedrijfsnummer': 'номер на дружество',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
       'номер на здравна осигуровка (RAMQ) — здравни данни',
   'zorgverzekeringsnummer (OHIP) — een zorggegeven':

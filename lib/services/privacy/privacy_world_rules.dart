@@ -173,4 +173,94 @@ final List<NationalIdentifierRule> worldIdentifierRules = [
     contextWords: ['business number', 'bn', 'numéro d\'entreprise'],
     confidence: PrivacyConfidence.possible,
   ),
+  // ── Australië ─────────────────────────────────────────────────────────────
+  NationalIdentifierRule(
+    id: 'au.tfn',
+    country: 'AU',
+    pattern: RegExp(r'(?<!\d)\d{3}[- ]?\d{3}[- ]?\d{3}(?!\d)'),
+    validate: isValidAuTfn,
+    // §15.4: negen cijfers met een mod-11 is te zwak om alleen op af te gaan.
+    contextWords: ['tfn', 'tax file'],
+    confidence: PrivacyConfidence.likely,
+  ),
+  NationalIdentifierRule(
+    id: 'au.medicare',
+    country: 'AU',
+    pattern: RegExp(r'(?<!\d)[2-6]\d{3}[- ]?\d{5}[- ]?\d(?!\d)'),
+    validate: isValidAuMedicare,
+    contextWords: ['medicare', 'health', 'gezondheid'],
+    confidence: PrivacyConfidence.likely,
+  ),
+  NationalIdentifierRule(
+    id: 'au.abn',
+    country: 'AU',
+    pattern: RegExp(r'(?<!\d)\d{2}[- ]?\d{3}[- ]?\d{3}[- ]?\d{3}(?!\d)'),
+    validate: isValidAuAbn,
+    contextWords: ['abn', 'business number'],
+    confidence: PrivacyConfidence.possible,
+  ),
+
+  // ── India ─────────────────────────────────────────────────────────────────
+  NationalIdentifierRule(
+    id: 'in.aadhaar',
+    country: 'IN',
+    pattern: RegExp(r'(?<!\d)[2-9]\d{3}[- ]?\d{4}[- ]?\d{4}(?!\d)'),
+    validate: isValidInAadhaar,
+    // Twaalf cijfers plus Verhoeff draagt op eigen kracht: Verhoeff vangt álle
+    // enkelvoudige fouten en álle verwisselingen van buren, waar Luhn er een
+    // deel doorlaat. Geen contextpoort nodig.
+  ),
+  NationalIdentifierRule(
+    id: 'in.pan',
+    country: 'IN',
+    pattern: RegExp(r'(?<![A-Za-z0-9])[A-Za-z]{5}\d{4}[A-Za-z](?![A-Za-z0-9])'),
+    validate: isValidInPan,
+    contextWords: ['pan', 'permanent account'],
+    confidence: PrivacyConfidence.likely,
+  ),
+
+  // ── Zuid-Afrika ───────────────────────────────────────────────────────────
+  NationalIdentifierRule(
+    id: 'za.id',
+    country: 'ZA',
+    pattern: RegExp(r'(?<!\d)\d{6}[- ]?\d{4}[- ]?\d{3}(?!\d)'),
+    validate: isValidZaId,
+    // Luhn plus een geldige geboortedatum over dertien cijfers: sterk genoeg
+    // voor `certain`, anders dan de losse Luhn-nummers uit §15.4.
+  ),
+
+  // ── Curaçao en Aruba ──────────────────────────────────────────────────────
+  NationalIdentifierRule(
+    id: 'cw.sedula',
+    country: 'CW',
+    pattern: RegExp(r'(?<!\d)\d{10}(?!\d)'),
+    validate: isValidCwSedula,
+    contextWords: ['sedula', 'sédula', 'identiteitskaart', 'id-kaart'],
+    confidence: PrivacyConfidence.possible,
+  ),
+  NationalIdentifierRule(
+    id: 'aw.persoonsnummer',
+    country: 'AW',
+    pattern: RegExp(r'(?<!\d)\d{8,10}(?!\d)'),
+    validate: isValidAwPersoonsnummer,
+    contextWords: ['persoonsnummer', 'persoonsnr', 'cedula'],
+    confidence: PrivacyConfidence.possible,
+  ),
+
+  // ── Brazilië ──────────────────────────────────────────────────────────────
+  NationalIdentifierRule(
+    id: 'br.cpf',
+    country: 'BR',
+    pattern: RegExp(r'(?<!\d)\d{3}\.?\d{3}\.?\d{3}-?\d{2}(?!\d)'),
+    validate: isValidBrCpf,
+    // Twee onafhankelijke mod-11-controles over elf cijfers: dat is een andere
+    // orde dan één controle, en draagt `certain`.
+  ),
+  NationalIdentifierRule(
+    id: 'br.cnpj',
+    country: 'BR',
+    pattern: RegExp(r'(?<!\d)\d{2}\.?\d{3}\.?\d{3}/?\d{4}-?\d{2}(?!\d)'),
+    validate: isValidBrCnpj,
+    confidence: PrivacyConfidence.possible,
+  ),
 ];

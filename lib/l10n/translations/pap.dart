@@ -738,6 +738,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Medicare-nummer — een zorggegeven': 'number di Medicare — un dato di salú',
+  'bedrijfsnummer': 'number di kompania',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
       'number di seguro di salú (RAMQ) — un dato di salú',
   'zorgverzekeringsnummer (OHIP) — een zorggegeven':

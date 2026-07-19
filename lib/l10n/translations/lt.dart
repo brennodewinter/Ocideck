@@ -1789,6 +1789,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Medicare-nummer — een zorggegeven': 'Medicare numeris — sveikatos duomenys',
+  'bedrijfsnummer': 'bendrovės numeris',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
       'sveikatos draudimo numeris (RAMQ) — sveikatos duomenys',
   'zorgverzekeringsnummer (OHIP) — een zorggegeven':

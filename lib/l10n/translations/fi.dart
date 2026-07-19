@@ -1781,6 +1781,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Medicare-nummer — een zorggegeven': 'Medicare-numero — terveystieto',
+  'bedrijfsnummer': 'yritysnumero',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
       'sairausvakuutusnumero (RAMQ) — terveystieto',
   'zorgverzekeringsnummer (OHIP) — een zorggegeven':

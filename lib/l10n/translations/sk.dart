@@ -1788,6 +1788,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Medicare-nummer — een zorggegeven': 'číslo Medicare — údaj o zdraví',
+  'bedrijfsnummer': 'číslo spoločnosti',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
       'číslo zdravotného poistenia (RAMQ) — údaj o zdraví',
   'zorgverzekeringsnummer (OHIP) — een zorggegeven':

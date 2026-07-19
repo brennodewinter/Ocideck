@@ -1785,6 +1785,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Medicare-nummer — een zorggegeven': 'Medicare-szám — egészségügyi adat',
+  'bedrijfsnummer': 'cégszám',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
       'egészségbiztosítási szám (RAMQ) — egészségügyi adat',
   'zorgverzekeringsnummer (OHIP) — een zorggegeven':

@@ -317,3 +317,239 @@ bool isValidCaOhip(String raw) {
 
   return passesLuhn(d);
 }
+
+/// Een dag-maandcombinatie die kan bestaan.
+///
+/// Bewust zonder jaar en dus zonder schrikkeljaarcontrole: het jaartal in deze
+/// nummers is tweecijferig en dus dubbelzinnig, en 29 februari afwijzen zou
+/// echte nummers raken. De verkeerde fout.
+bool _plausibleDayMonth(int dag, int maand) =>
+    maand >= 1 && maand <= 12 && dag >= 1 && dag <= 31;
+
+// ── Australië ────────────────────────────────────────────────────────────────
+
+/// Tax File Number: negen cijfers, gewogen mod 11.
+///
+/// Let op de zekerheid, om dezelfde reden als bij `ca.sin` (§15.4): negen
+/// cijfers met een mod-11 laten ongeveer één op de elf willekeurige getallen
+/// door. Dat is de orde van de 11-proef bij het BSN, en dus te zwak om alleen op
+/// af te gaan. De regel draagt een contextpoort en blijft op `likely`.
+bool isValidAuTfn(String raw) {
+  final d = _digits(raw);
+  if (d.length != 9) return false;
+  const weights = [1, 4, 3, 7, 5, 8, 6, 9, 10];
+  var sum = 0;
+  for (var i = 0; i < 9; i++) {
+    sum += (d.codeUnitAt(i) - 0x30) * weights[i];
+  }
+  return sum % 11 == 0;
+}
+
+/// Medicare-nummer: tien cijfers, gewogen mod 10.
+///
+/// Het eerste cijfer ligt tussen 2 en 6 — kaarten beginnen niet met 0, 1 of 7-9.
+/// Dat prefix doet echt werk naast de checksum, want het snijdt de helft van de
+/// ruimte weg die de mod-10 alleen niet raakt.
+///
+/// Dit is een zorgidentificator, en daarmee artikel 9-gebied: onder Australisch
+/// recht een administratienummer, onder de AVG een gegeven over gezondheid.
+/// Dezelfde lens als bij `us.medicare_mbi`.
+bool isValidAuMedicare(String raw) {
+  final d = _digits(raw);
+  if (d.length < 10 || d.length > 11) return false;
+  final eerste = d.codeUnitAt(0) - 0x30;
+  if (eerste < 2 || eerste > 6) return false;
+
+  const weights = [1, 3, 7, 9, 1, 3, 7, 9];
+  var sum = 0;
+  for (var i = 0; i < 8; i++) {
+    sum += (d.codeUnitAt(i) - 0x30) * weights[i];
+  }
+  return sum % 10 == d.codeUnitAt(8) - 0x30;
+}
+
+/// Australian Business Number: elf cijfers, mod 89.
+///
+/// De berekening trekt eerst 1 af van het eerste cijfer — een detail dat je één
+/// keer overslaat en daarna nooit meer. Bedrijfsdata, dus `info` als vertrekpunt;
+/// bij een eenmanszaak wijst hij een persoon aan, net als `us.ein` en `ca.bn`.
+bool isValidAuAbn(String raw) {
+  final d = _digits(raw);
+  if (d.length != 11) return false;
+  const weights = [10, 1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+  var sum = 0;
+  for (var i = 0; i < 11; i++) {
+    final n = (d.codeUnitAt(i) - 0x30) - (i == 0 ? 1 : 0);
+    if (n < 0) return false;
+    sum += n * weights[i];
+  }
+  return sum % 89 == 0;
+}
+
+// ── India ────────────────────────────────────────────────────────────────────
+
+/// De Verhoeff-tabellen: vermenigvuldiging, permutatie en inverse.
+///
+/// Verhoeff is géén Luhn, en dat verschil doet er hier toe. Luhn mist een
+/// omwisseling van twee gelijke cijfers en een deel van de naburige
+/// verwisselingen; Verhoeff vangt álle enkelvoudige fouten en álle omwisselingen
+/// van buren. Voor een nummer dat een miljard mensen identificeert is dat het
+/// verschil tussen een controle en een formaliteit.
+const _verhoeffD = [
+  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+  [1, 2, 3, 4, 0, 6, 7, 8, 9, 5],
+  [2, 3, 4, 0, 1, 7, 8, 9, 5, 6],
+  [3, 4, 0, 1, 2, 8, 9, 5, 6, 7],
+  [4, 0, 1, 2, 3, 9, 5, 6, 7, 8],
+  [5, 9, 8, 7, 6, 0, 4, 3, 2, 1],
+  [6, 5, 9, 8, 7, 1, 0, 4, 3, 2],
+  [7, 6, 5, 9, 8, 2, 1, 0, 4, 3],
+  [8, 7, 6, 5, 9, 3, 2, 1, 0, 4],
+  [9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
+];
+
+const _verhoeffP = [
+  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+  [1, 5, 7, 6, 2, 8, 3, 0, 9, 4],
+  [5, 8, 0, 3, 7, 9, 6, 1, 4, 2],
+  [8, 9, 1, 6, 0, 4, 3, 5, 2, 7],
+  [9, 4, 5, 3, 1, 2, 6, 8, 7, 0],
+  [4, 2, 8, 6, 5, 7, 3, 9, 0, 1],
+  [2, 7, 9, 3, 8, 0, 6, 4, 1, 5],
+  [7, 0, 4, 6, 9, 1, 3, 2, 5, 8],
+];
+
+/// De Verhoeff-controle over een cijferreeks.
+bool passesVerhoeff(String digits) {
+  var c = 0;
+  for (var i = 0; i < digits.length; i++) {
+    final code = digits.codeUnitAt(digits.length - 1 - i);
+    if (code < 0x30 || code > 0x39) return false;
+    c = _verhoeffD[c][_verhoeffP[i % 8][code - 0x30]];
+  }
+  return c == 0;
+}
+
+/// Aadhaar: twaalf cijfers met een Verhoeff-controle.
+///
+/// Begint nooit met 0 of 1 — die reeksen zijn gereserveerd. Twaalf cijfers plus
+/// Verhoeff is sterk genoeg om op eigen kracht te dragen; dit is, anders dan het
+/// meeste in §15, geen contextafhankelijke regel.
+bool isValidInAadhaar(String raw) {
+  final d = _digits(raw);
+  if (d.length != 12) return false;
+  if (d[0] == '0' || d[0] == '1') return false;
+  return passesVerhoeff(d);
+}
+
+/// De vierde letter van een PAN codeert het soort houder.
+///
+/// `P` is een natuurlijk persoon. De rest is een bedrijf, een trust, een
+/// vennootschap — geen persoonsgegeven, en dus geen reden om te melden. Dat
+/// onderscheid zit in het nummer zelf, wat zeldzaam is en hier gratis precisie
+/// oplevert.
+const Set<String> _panPersonTypes = {'P'};
+
+/// Permanent Account Number: `AAAAA9999A`.
+///
+/// Geen checksum. Wat het formaat wél kan is het soort houder eruit lezen: de
+/// vierde letter. Alleen `P` (individual) wijst een persoon aan; `C`, `H`, `F`,
+/// `A`, `T`, `B`, `L`, `J`, `G` zijn rechtsvormen. Een PAN van een bedrijf is
+/// geen persoonsgegeven, en die filteren we hier weg in plaats van de gebruiker
+/// ermee lastig te vallen.
+bool isValidInPan(String raw) {
+  final s = raw.toUpperCase().replaceAll(RegExp(r'[^0-9A-Z]'), '');
+  if (!RegExp(r'^[A-Z]{5}\d{4}[A-Z]$').hasMatch(s)) return false;
+  return _panPersonTypes.contains(s[3]);
+}
+
+// ── Zuid-Afrika ──────────────────────────────────────────────────────────────
+
+/// ID Number: dertien cijfers, Luhn, met de geboortedatum vooraan.
+///
+/// Sterker dan een kale Luhn over dertien cijfers, want de eerste zes moeten een
+/// bestaande datum vormen. Die twee eisen samen dragen wél `certain`.
+///
+/// Het nummer codeert behalve geboortedatum ook geslacht (cijfer 7-10) en
+/// burgerschap. Historisch stond er ook een raceclassificatie in; die is in 1994
+/// vervallen, maar oude documenten dragen hem nog — reden te meer om een treffer
+/// hier serieus te nemen.
+bool isValidZaId(String raw) {
+  final d = _digits(raw);
+  if (d.length != 13) return false;
+  if (!_plausibleDayMonth(
+    int.parse(d.substring(4, 6)),
+    int.parse(d.substring(2, 4)),
+  )) {
+    return false;
+  }
+  return passesLuhn(d);
+}
+
+// ── Curaçao en Aruba ─────────────────────────────────────────────────────────
+//
+// Voor een Nederlandse organisatie zijn dit de relevantste nummers van deze
+// lichting — relevanter dan Brazilië — omdat het Koninkrijk één rechtsruimte is
+// en decks tussen Willemstad, Oranjestad en Den Haag heen en weer reizen.
+//
+// Er is voor geen van beide een openbaar gedocumenteerde checksum. Ze komen dus
+// nooit boven `possible` uit en leunen volledig op hun contextpoort. Dat is een
+// erkende beperking: liever een zwakke regel die zwijgt zonder context, dan geen
+// regel en een blinde vlek in het eigen Koninkrijk.
+
+/// Sedula (Curaçao): tien cijfers, met de geboortedatum vooraan.
+bool isValidCwSedula(String raw) {
+  final d = _digits(raw);
+  if (d.length != 10) return false;
+  return _plausibleDayMonth(
+    int.parse(d.substring(4, 6)),
+    int.parse(d.substring(2, 4)),
+  );
+}
+
+/// Persoonsnummer (Aruba): acht tot tien cijfers, zonder gedocumenteerde
+/// structuur. Alleen lengte; de contextpoort doet al het werk.
+bool isValidAwPersoonsnummer(String raw) {
+  final d = _digits(raw);
+  return d.length >= 8 && d.length <= 10;
+}
+
+// ── Brazilië ─────────────────────────────────────────────────────────────────
+
+/// De mod-11-controle die zowel CPF als CNPJ gebruiken.
+int _mod11Rest(String digits, List<int> weights) {
+  var sum = 0;
+  for (var i = 0; i < weights.length; i++) {
+    sum += (digits.codeUnitAt(i) - 0x30) * weights[i];
+  }
+  final r = sum % 11;
+  return r < 2 ? 0 : 11 - r;
+}
+
+/// CPF: elf cijfers met twee mod-11-controles.
+///
+/// De reeksen met elf gelijke cijfers (`111.111.111-11`) halen beide controles
+/// en zijn toch ongeldig — een klassieke valkuil die elke naïeve implementatie
+/// binnenlaat.
+bool isValidBrCpf(String raw) {
+  final d = _digits(raw);
+  if (d.length != 11) return false;
+  if (RegExp(r'^(\d)\1{10}$').hasMatch(d)) return false;
+
+  final een = _mod11Rest(d, [10, 9, 8, 7, 6, 5, 4, 3, 2]);
+  if (een != d.codeUnitAt(9) - 0x30) return false;
+  final twee = _mod11Rest(d, [11, 10, 9, 8, 7, 6, 5, 4, 3, 2]);
+  return twee == d.codeUnitAt(10) - 0x30;
+}
+
+/// CNPJ: veertien cijfers, twee mod-11-controles. Bedrijfsdata.
+bool isValidBrCnpj(String raw) {
+  final d = _digits(raw);
+  if (d.length != 14) return false;
+  if (RegExp(r'^(\d)\1{13}$').hasMatch(d)) return false;
+
+  final een = _mod11Rest(d, [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]);
+  if (een != d.codeUnitAt(12) - 0x30) return false;
+  final twee = _mod11Rest(d, [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]);
+  return twee == d.codeUnitAt(13) - 0x30;
+}

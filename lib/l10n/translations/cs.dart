@@ -1784,6 +1784,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Medicare-nummer — een zorggegeven': 'číslo Medicare — údaj o zdraví',
+  'bedrijfsnummer': 'číslo společnosti',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
       'číslo zdravotního pojištění (RAMQ) — údaj o zdraví',
   'zorgverzekeringsnummer (OHIP) — een zorggegeven':
