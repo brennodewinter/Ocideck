@@ -5,21 +5,6 @@
 part of '../settings_dialog.dart';
 
 extension _SettingsGit on _SettingsDialogState {
-  /// De repo zoals hij nu in de velden staat. Vult een ontbrekend schema aan:
-  /// "git.example.org" zonder `https://` is de meest gemaakte invoerfout, en
-  /// stranden op een onparseerbare URL is een slechter antwoord dan aanvullen.
-  GitRepoConfig _gitRepoFromFields() {
-    var url = _gitUrl.text.trim();
-    if (url.isNotEmpty && !url.contains('://')) url = 'https://$url';
-    return GitRepoConfig(
-      baseUrl: url,
-      owner: _gitOwner.text.trim(),
-      repo: _gitRepo.text.trim(),
-      trustedInternal: _gitTrusted,
-      provider: _gitProvider,
-    );
-  }
-
   Widget _gitPanel() {
     final l10n = context.l10n;
     return Column(
@@ -40,7 +25,7 @@ extension _SettingsGit on _SettingsDialogState {
         Padding(
           padding: const EdgeInsets.only(bottom: 12),
           child: DropdownButtonFormField<GitProvider>(
-            initialValue: _gitProvider,
+            initialValue: _git.provider,
             decoration: InputDecoration(
               labelText: l10n.d('Soort forge'),
               prefixIcon: const Icon(Icons.hub_outlined, size: 18),
@@ -62,36 +47,36 @@ extension _SettingsGit on _SettingsDialogState {
               ),
             ],
             onChanged: (v) =>
-                _rebuild(() => _gitProvider = v ?? GitProvider.gitea),
+                _rebuild(() => _git.provider = v ?? GitProvider.gitea),
           ),
         ),
         _webdavField(
-          _gitUrl,
+          _git.url,
           l10n.d('Server-URL'),
           hint: 'https://git.example.org',
           icon: Icons.dns_outlined,
         ),
         _webdavField(
-          _gitOwner,
+          _git.owner,
           l10n.d('Eigenaar'),
           hint: 'librekat',
           icon: Icons.person_outline,
         ),
         _webdavField(
-          _gitRepo,
+          _git.repo,
           l10n.d('Repository'),
           hint: 'decks',
           icon: Icons.folder_outlined,
         ),
         _webdavField(
-          _gitToken,
+          _git.token.field,
           l10n.d('Personal access token'),
           obscure: true,
           icon: Icons.key_outlined,
         ),
         CheckboxListTile(
-          value: _gitTrusted,
-          onChanged: (v) => _rebuild(() => _gitTrusted = v ?? false),
+          value: _git.trusted,
+          onChanged: (v) => _rebuild(() => _git.trusted = v ?? false),
           contentPadding: EdgeInsets.zero,
           controlAffinity: ListTileControlAffinity.leading,
           dense: true,

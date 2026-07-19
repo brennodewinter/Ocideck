@@ -30,7 +30,7 @@ extension _SettingsWebdav on _SettingsDialogState {
 
   Widget _webdavPanel() {
     final l10n = context.l10n;
-    final testMsg = _webdavTestMessage;
+    final testMsg = _webdav.testMessage;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -45,25 +45,25 @@ extension _SettingsWebdav on _SettingsDialogState {
           ),
         ),
         _webdavField(
-          _webdavUrl,
+          _webdav.url,
           l10n.d('Server-URL'),
           hint: 'https://cloud.voorbeeld.nl',
           icon: Icons.link,
         ),
         _webdavField(
-          _webdavUser,
+          _webdav.user,
           l10n.d('Gebruikersnaam'),
           icon: Icons.person_outline,
         ),
         _webdavField(
-          _webdavPassword,
+          _webdav.password.field,
           l10n.d('App-wachtwoord'),
           hint: l10n.d('Maak hiervoor een app-wachtwoord aan in Nextcloud'),
           obscure: true,
           icon: Icons.key_outlined,
         ),
         _webdavField(
-          _webdavRoot,
+          _webdav.root,
           l10n.d('Submap (optioneel)'),
           hint: '/Presentaties',
           icon: Icons.folder_outlined,
@@ -80,19 +80,19 @@ extension _SettingsWebdav on _SettingsDialogState {
             ),
             style: TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
-          value: _webdavTrusted,
+          value: _webdav.trusted,
           onChanged: (value) => _rebuild(() {
-            _webdavTrusted = value;
-            _webdavTestOk = null;
-            _webdavTestMessage = null;
+            _webdav.trusted = value;
+            _webdav.testOk = null;
+            _webdav.testMessage = null;
           }),
         ),
         const SizedBox(height: 12),
         Row(
           children: [
             ElevatedButton.icon(
-              onPressed: _webdavTesting ? null : _testWebdavConnection,
-              icon: _webdavTesting
+              onPressed: _webdav.testing ? null : _testWebdavConnection,
+              icon: _webdav.testing
                   ? const SizedBox(
                       width: 16,
                       height: 16,
@@ -102,7 +102,7 @@ extension _SettingsWebdav on _SettingsDialogState {
               label: Text(l10n.d('Verbinding testen')),
             ),
             const SizedBox(width: 12),
-            if (_webdavTestOk == true)
+            if (_webdav.testOk == true)
               Row(
                 children: [
                   const Icon(
@@ -119,7 +119,7 @@ extension _SettingsWebdav on _SettingsDialogState {
               ),
           ],
         ),
-        if (_webdavTestOk == false && testMsg != null)
+        if (_webdav.testOk == false && testMsg != null)
           Padding(
             padding: const EdgeInsets.only(top: 10),
             child: Row(
@@ -154,22 +154,22 @@ extension _SettingsWebdav on _SettingsDialogState {
 
   Future<void> _testWebdavConnection() async {
     final l10n = context.l10n;
-    final server = _webdavServerFromFields();
+    final server = _webdav.server;
     if (!server.isConfigured) {
       _rebuild(() {
-        _webdavTestOk = false;
-        _webdavTestMessage = l10n.d('Vul server-URL en gebruikersnaam in');
+        _webdav.testOk = false;
+        _webdav.testMessage = l10n.d('Vul server-URL en gebruikersnaam in');
       });
       return;
     }
     _rebuild(() {
-      _webdavTesting = true;
-      _webdavTestOk = null;
-      _webdavTestMessage = null;
+      _webdav.testing = true;
+      _webdav.testOk = null;
+      _webdav.testMessage = null;
     });
     final service = WebdavService(
       server: server,
-      password: _webdavPassword.text,
+      password: _webdav.password.field.text,
     );
     String? error;
     try {
@@ -182,9 +182,9 @@ extension _SettingsWebdav on _SettingsDialogState {
     }
     if (!mounted) return;
     _rebuild(() {
-      _webdavTesting = false;
-      _webdavTestOk = error == null;
-      _webdavTestMessage = error;
+      _webdav.testing = false;
+      _webdav.testOk = error == null;
+      _webdav.testMessage = error;
     });
   }
 

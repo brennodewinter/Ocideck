@@ -325,6 +325,16 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
   (the git tab was once inserted at index 8 without renumbering the search index,
   so "checklist" jumped to Git-repository). Nothing addresses a tab by number any
   more.
+  The three network sources own their editing state instead of scattering it
+  over the dialog: `parts/settings_dialog_webdav_form.dart`,
+  `..._git_form.dart` and `..._ai_form.dart` each hold their controllers, their
+  init and their save. Deliberately no shared base class — they differ for real
+  (git has a forge/owner/repo, Nextcloud a subfolder, AI a mode) and forcing one
+  type yields a base class with holes. Only the part that was literally
+  identical is shared: `parts/settings_dialog_secret.dart` (`KeychainSecret`),
+  which answers "must this secret be written?" — the two silent failures being a
+  save that lands before the async keychain read (blanks the secret) and an
+  identity change that leaves it under the old key.
   The dialog's own shell — sidebar, nav items, branded footer, content header,
   footer bar — is `parts/settings_dialog_chrome.dart`. It is the one block that
   reads only the selected section and writes it back, touching none of the
