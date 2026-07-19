@@ -317,6 +317,33 @@ class ImageService {
     }
   }
 
+  /// Neem een bestand op dat de gebruiker al heeft aangewezen — gesleept op de
+  /// app, of gekozen uit de afbeeldingenbibliotheek — in plaats van er alleen
+  /// naar te verwijzen.
+  ///
+  /// Zonder deze stap zou de presentatie afhangen van een bestand op een plek
+  /// die alleen deze gebruiker heeft; wie het deck doorstuurt, stuurt een gat
+  /// mee. Geeft de verwijzing terug die de slide moet vasthouden:
+  /// projectrelatief bij een opgeslagen deck, anders een pad in de wachtkamer.
+  ///
+  /// Lukt het kopiëren niet, dan komt het bronpad terug in plaats van null: een
+  /// zichtbare afbeelding met een waarschuwingsbadge is bruikbaarder dan een
+  /// slide die stil leeg blijft, en de badge vertelt de gebruiker precies wat
+  /// er nog buiten de presentatie ligt.
+  Future<String> importIntoDeck(
+    String sourcePath, {
+    String? projectPath,
+    String subdir = 'images',
+  }) async =>
+      await _importIntoProject(sourcePath, projectPath, subdir: subdir) ??
+      sourcePath;
+
+  /// Of [path] binnen de importlimiet valt en werkelijk een rasterafbeelding
+  /// is. De extensie zegt niets — een hernoemd script heet net zo makkelijk
+  /// `.png`.
+  Future<bool> isAcceptableImageFile(String path) =>
+      _isAcceptableImageFile(path);
+
   Future<String?> _importIntoProject(
     String sourcePath,
     String? projectPath, {

@@ -425,7 +425,13 @@ class ImagePickerBar extends ConsumerWidget {
           ?tab.deckNotifier.currentState.filePath,
       ],
     );
-    if (result != null) onPicked(result.path, result.caption);
+    if (result == null) return;
+    // De bibliotheek doorzoekt ook mappen buiten de presentatie; zo'n keuze
+    // moet mee het deck in, anders stuurt de gebruiker straks een gat door.
+    final adopted = await ref
+        .read(imageServiceProvider)
+        .importIntoDeck(result.path, projectPath: captionBasePath);
+    onPicked(adopted, result.caption);
   }
 
   /// Wijs in alle open decks elke slideverwijzing naar [fromAbsolute] om naar

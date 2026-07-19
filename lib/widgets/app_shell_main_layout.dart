@@ -575,6 +575,11 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       ],
     );
     if (result == null) return;
+    // De bibliotheek doorzoekt ook mappen buiten de presentatie; zo'n keuze
+    // moet mee het deck in, anders stuurt de gebruiker straks een gat door.
+    final pickedPath = await ref
+        .read(imageServiceProvider)
+        .importIntoDeck(result.path, projectPath: deck.projectPath);
 
     final updated = switch (slide.type) {
       SlideType.title ||
@@ -582,12 +587,12 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       SlideType.quote ||
       SlideType.question ||
       SlideType.bulletsImage => slide.copyWith(
-        imagePath: result.path,
+        imagePath: pickedPath,
         imageCaption: result.caption,
       ),
       SlideType.twoImages => slide.copyWith(
-        imagePath: slide.imagePath.isEmpty ? result.path : slide.imagePath,
-        imagePath2: slide.imagePath.isEmpty ? slide.imagePath2 : result.path,
+        imagePath: slide.imagePath.isEmpty ? pickedPath : slide.imagePath,
+        imagePath2: slide.imagePath.isEmpty ? slide.imagePath2 : pickedPath,
         imageCaption: slide.imagePath.isEmpty
             ? result.caption
             : slide.imageCaption,
@@ -597,7 +602,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       ),
       SlideType.bullets => slide.copyWith(
         type: SlideType.bulletsImage,
-        imagePath: result.path,
+        imagePath: pickedPath,
         imageCaption: result.caption,
         imageSize: slide.imageSize > 0 ? slide.imageSize : 40,
       ),
