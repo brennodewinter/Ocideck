@@ -220,6 +220,11 @@ Nextcloud is the most common one, but any WebDAV server works.
   **flat `.md` plus its asset folders** (`images/`, `themes/`, …) mirrored into
   the same folder. A deck opened from WebDAV remembers where it came from, so
   saving suggests the original location.
+- **If someone else got there first**: saving back to the file you opened only
+  goes through if that file hasn't changed on the server since. If it has, you
+  get a choice — *Save as* (keep both versions) or *Overwrite* (discard theirs).
+  Nothing is overwritten silently. Servers that don't report a version (an
+  `ETag`) can't be checked; there you keep the old behaviour of a plain write.
 
 ## Slide types
 

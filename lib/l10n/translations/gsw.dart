@@ -1785,6 +1785,11 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Iemand anders heeft dit bestand gewijzigd':
+      'Öpper anders hät die Datei gänderet',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'D Version uf em Server hät sich gänderet, sit du die Präsentation ufgmacht häsch. Überschriibe macht d Arbet vom andere zunicht.',
+  'Overschrijven': 'Überschriibe',
   'Openen vanaf WebDAV': 'Vo WebDAV öffne',
   'Opslaan naar WebDAV': 'Uf WebDAV speichere',
   'Opgeslagen op WebDAV:': 'Uf WebDAV gspeicheret:',

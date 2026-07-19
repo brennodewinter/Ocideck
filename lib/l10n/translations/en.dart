@@ -920,6 +920,10 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Iemand anders heeft dit bestand gewijzigd': 'Someone else changed this file',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'The version on the server has changed since you opened this deck. Overwriting discards the other person\'s work.',
+  'Overschrijven': 'Overwrite',
   'Openen vanaf WebDAV': 'Open from WebDAV',
   'Opslaan naar WebDAV': 'Save to WebDAV',
   'Opgeslagen op WebDAV:': 'Saved to WebDAV:',

@@ -51,7 +51,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `slide_quality.dart` — `SlideQualityResult`/`SlideQualityIssue` for accessibility/contrast/density/privacy audits.
 - `timeline.dart` — `TimelineEvent` and `TimelineLayout`/`TimelineReveal` enums for animated timeline slides.
 - `video_source.dart` — `VideoSource` parser for local files, YouTube, Vimeo, and remote video URLs.
-- `webdav_settings.dart` — `WebdavServer`/`WebdavOrigin` for WebDAV source configuration (Nextcloud, ownCloud, or any other server).
+- `webdav_settings.dart` — `WebdavServer`/`WebdavOrigin` (the origin carries the `etag` a save is checked against) for WebDAV source configuration (Nextcloud, ownCloud, or any other server).
 
 ## `lib/services/` — business logic & IO
 
@@ -139,7 +139,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `text_measurement.dart` — `measureTextHeight`/`measureTextWidth` for rendered text dimensions.
 - `user_notes_codec.dart` — Serializes per-slide user notes with content fingerprints.
 - `web_asset_store.dart` — In-memory afbeeldingsopslag (`mem:`-paden) voor de webversie; per-pagina levensduur.
-- `webdav_service.dart` — Talks WebDAV over a pinned, redirect-free `HttpClient`.
+- `webdav_service.dart` — Talks WebDAV over a pinned, redirect-free `HttpClient`. Writes are guarded with `If-Match` so a file changed on the server surfaces as `WebdavConflictException` instead of a silent overwrite.
 
 ### `lib/services/git/` — Git-repository storage (design: `docs/design/GIT_STORAGE.md`)
 

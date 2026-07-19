@@ -1772,6 +1772,11 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Iemand anders heeft dit bestand gewijzigd':
+      'Keegi teine on seda faili muutnud',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'Serveris olev versioon on muutunud pärast selle esitluse avamist. Ülekirjutamine hävitab teise inimese töö.',
+  'Overschrijven': 'Kirjuta üle',
   'Openen vanaf WebDAV': 'Ava WebDAV\'ist',
   'Opslaan naar WebDAV': 'Salvesta WebDAV\'i',
   'Opgeslagen op WebDAV:': 'Salvestatud WebDAV\'i:',

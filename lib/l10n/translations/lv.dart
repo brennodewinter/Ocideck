@@ -1780,6 +1780,10 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Iemand anders heeft dit bestand gewijzigd': 'Kāds cits ir mainījis šo failu',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'Versija serverī ir mainījusies kopš šīs prezentācijas atvēršanas. Pārrakstīšana atceļ otra cilvēka darbu.',
+  'Overschrijven': 'Pārrakstīt',
   'Openen vanaf WebDAV': 'Atvērt no WebDAV',
   'Opslaan naar WebDAV': 'Saglabāt WebDAV',
   'Opgeslagen op WebDAV:': 'Saglabāts WebDAV:',

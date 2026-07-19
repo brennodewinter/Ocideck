@@ -1785,6 +1785,11 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Iemand anders heeft dit bestand gewijzigd':
+      'Valaki más módosította ezt a fájlt',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'A kiszolgálón lévő változat megváltozott, amióta megnyitottad ezt a bemutatót. A felülírás eldobja a másik munkáját.',
+  'Overschrijven': 'Felülírás',
   'Openen vanaf WebDAV': 'Megnyitás a WebDAVról',
   'Opslaan naar WebDAV': 'Mentés a WebDAVra',
   'Opgeslagen op WebDAV:': 'Mentve a WebDAVra:',

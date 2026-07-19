@@ -22,6 +22,8 @@ class _Req {
     required this.depth,
     required this.authorization,
     required this.body,
+    this.ifMatch,
+    this.ifNoneMatch,
   });
 
   final String method;
@@ -29,6 +31,11 @@ class _Req {
   final String? depth;
   final String? authorization;
   final Uint8List body;
+
+  /// De voorwaarden waaronder de client wilde schrijven — het bewijs dat de
+  /// concurrency-guard daadwerkelijk over de lijn ging.
+  final String? ifMatch;
+  final String? ifNoneMatch;
 }
 
 /// A throwaway WebDAV server on loopback. Because [WebdavService] pins its
@@ -63,6 +70,8 @@ class _FakeWebdav {
             depth: req.headers.value('depth'),
             authorization: req.headers.value(HttpHeaders.authorizationHeader),
             body: builder.takeBytes(),
+            ifMatch: req.headers.value(HttpHeaders.ifMatchHeader),
+            ifNoneMatch: req.headers.value(HttpHeaders.ifNoneMatchHeader),
           ),
         );
         await fake._responder(req);
@@ -82,14 +91,21 @@ class _FakeWebdav {
 const _multistatusOpen = '<?xml version="1.0"?><d:multistatus xmlns:d="DAV:">';
 const _multistatusClose = '</d:multistatus>';
 
-String _resp(String href, {bool collection = false, int? size, String? type}) {
+String _resp(
+  String href, {
+  bool collection = false,
+  int? size,
+  String? type,
+  String? etag,
+}) {
   final rt = collection ? '<d:collection/>' : '';
   final len = size == null
       ? ''
       : '<d:getcontentlength>$size</d:getcontentlength>';
   final ct = type == null ? '' : '<d:getcontenttype>$type</d:getcontenttype>';
+  final et = etag == null ? '' : '<d:getetag>$etag</d:getetag>';
   return '<d:response><d:href>$href</d:href><d:propstat><d:prop>'
-      '<d:resourcetype>$rt</d:resourcetype>$len$ct'
+      '<d:resourcetype>$rt</d:resourcetype>$len$ct$et'
       '</d:prop><d:status>HTTP/1.1 200 OK</d:status></d:propstat></d:response>';
 }
 
@@ -229,8 +245,8 @@ void main() {
       });
       addTearDown(fake.stop);
 
-      final bytes = await svcFor(fake.port).download('deck.ocideck');
-      expect(bytes, payload);
+      final file = await svcFor(fake.port).download('deck.ocideck');
+      expect(file.bytes, payload);
       expect(fake.requests.single.method, 'GET');
       expect(fake.requests.single.path, endsWith('/deck.ocideck'));
     });
@@ -429,7 +445,7 @@ void main() {
       final entries = await svc.list('');
       expect(entries.map((e) => e.name), ['deck.md']);
 
-      final bytes = await svc.download('deck.md');
+      final bytes = (await svc.download('deck.md')).bytes;
       expect(utf8.decode(bytes), 'hallo');
       expect(fake.requests.last.path, '/dav/bestanden/deck.md');
 
@@ -438,6 +454,89 @@ void main() {
       expect(tail.map((r) => r.method), ['MKCOL', 'PUT']);
       expect(tail.first.path, '/dav/bestanden/sub/');
       expect(tail.last.path, '/dav/bestanden/sub/nieuw.md');
+    });
+  });
+
+  // De guard tegen elkaar stil overschrijven: de ETag komt binnen bij het
+  // ophalen en moet er bij het terugschrijven als voorwaarde weer uit.
+  group('ETag concurrency guard', () {
+    test('download carries the ETag the server sent', () async {
+      final fake = await _FakeWebdav.start((req) async {
+        req.response.statusCode = 200;
+        req.response.headers.set(HttpHeaders.etagHeader, '"v1"');
+        req.response.write('hoi');
+      });
+      addTearDown(fake.stop);
+
+      final file = await svcFor(fake.port).download('deck.md');
+      expect(file.etag, '"v1"');
+    });
+
+    test('a listing carries the ETag per entry', () {
+      final entries = WebdavService.parseMultistatus(
+        '$_multistatusOpen'
+        '${_resp('/remote.php/dav/files/alice/deck.md', size: 3, etag: '"v7"')}'
+        '$_multistatusClose',
+        server: _srv('alice', ''),
+      );
+      expect(entries.single.etag, '"v7"');
+    });
+
+    test('upload sends If-Match and returns the new ETag', () async {
+      final fake = await _FakeWebdav.start((req) async {
+        req.response.statusCode = 204;
+        req.response.headers.set(HttpHeaders.etagHeader, '"v2"');
+      });
+      addTearDown(fake.stop);
+
+      final newEtag = await svcFor(
+        fake.port,
+      ).upload('deck.md', [1], ifMatch: '"v1"');
+      expect(fake.requests.single.ifMatch, '"v1"');
+      expect(newEtag, '"v2"');
+    });
+
+    test('a 412 is a conflict, not a generic failure', () async {
+      final fake = await _FakeWebdav.start((req) async {
+        req.response.statusCode = 412;
+      });
+      addTearDown(fake.stop);
+
+      // Het onderscheid is de hele bedoeling: een conflict vraagt om een keuze
+      // van de gebruiker, een WebdavException om opnieuw proberen.
+      await expectLater(
+        svcFor(fake.port).upload('deck.md', [1], ifMatch: '"oud"'),
+        throwsA(
+          isA<WebdavConflictException>().having(
+            (e) => e.expectedEtag,
+            'expectedEtag',
+            '"oud"',
+          ),
+        ),
+      );
+    });
+
+    test('without an ETag the PUT stays unconditional', () async {
+      final fake = await _FakeWebdav.start((req) async {
+        req.response.statusCode = 201;
+      });
+      addTearDown(fake.stop);
+
+      // Een server die geen ETags geeft mag niet stilvallen; hij verliest
+      // alleen de bescherming, precies zoals het vóór deze guard was.
+      await svcFor(fake.port).upload('deck.md', [1]);
+      expect(fake.requests.single.ifMatch, isNull);
+      expect(fake.requests.single.ifNoneMatch, isNull);
+    });
+
+    test('onlyIfAbsent asks the server to refuse an existing file', () async {
+      final fake = await _FakeWebdav.start((req) async {
+        req.response.statusCode = 201;
+      });
+      addTearDown(fake.stop);
+
+      await svcFor(fake.port).upload('nieuw.md', [1], onlyIfAbsent: true);
+      expect(fake.requests.single.ifNoneMatch, '*');
     });
   });
 

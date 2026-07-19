@@ -1789,6 +1789,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Iemand anders heeft dit bestand gewijzigd': 'Kažkas kitas pakeitė šį failą',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'Serveryje esanti versija pasikeitė nuo tada, kai atvėrėte šią pateiktį. Perrašymas panaikins kito žmogaus darbą.',
+  'Overschrijven': 'Perrašyti',
   'Openen vanaf WebDAV': 'Atverti iš WebDAV',
   'Opslaan naar WebDAV': 'Išsaugoti į WebDAV',
   'Opgeslagen op WebDAV:': 'Išsaugota į WebDAV:',

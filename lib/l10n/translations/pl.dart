@@ -1793,6 +1793,10 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Iemand anders heeft dit bestand gewijzigd': 'Ktoś inny zmienił ten plik',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'Wersja na serwerze zmieniła się od czasu otwarcia tej prezentacji. Nadpisanie usunie pracę drugiej osoby.',
+  'Overschrijven': 'Nadpisz',
   'Openen vanaf WebDAV': 'Otwórz z WebDAV',
   'Opslaan naar WebDAV': 'Zapisz do WebDAV',
   'Opgeslagen op WebDAV:': 'Zapisano do WebDAV:',

@@ -7,6 +7,25 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Fixed
+- **Twee mensen die hetzelfde deck op WebDAV opsloegen overschreven elkaar
+  stil.** Het opslaan deed een kale PUT: wie als laatste opsloeg won, en de
+  ander merkte pas weken later dat zijn werk weg was. De ontwerpdocumentatie
+  verwees al naar een "WebDAV atomic-write guard" als bestaand precedent —
+  die bestond niet.
+
+  Bij het ophalen onthoudt OciDeck nu de versieaanduiding (`ETag`) die de
+  server aan het bestand hangt, en stuurt die bij het terugschrijven mee als
+  voorwaarde. Is het bestand daar inmiddels veranderd, dan weigert de server
+  en krijg je de keuze: *Opslaan als* om beide versies te houden, of
+  *Overschrijven* om die van de ander te laten vallen. Alleen terugschrijven
+  naar precies het bestand dat je opende wordt zo bewaakt; voor een doelpad
+  dat je zelf koos valt er niets te vergelijken.
+
+  Servers die geen `ETag` geven kunnen niet gecontroleerd worden. Daar blijft
+  het gedrag zoals het was — zonder bescherming, maar ook zonder dat opslaan
+  vastloopt.
+
 ### Added
 - **Elke WebDAV-server kan nu een bron zijn, niet alleen Nextcloud.** Wat als
   "Nextcloud" in de instellingen stond was altijd al gewone WebDAV: PROPFIND,

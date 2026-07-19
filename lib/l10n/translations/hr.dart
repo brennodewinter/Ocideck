@@ -1788,6 +1788,11 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Iemand anders heeft dit bestand gewijzigd':
+      'Netko drugi je promijenio ovu datoteku',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'Verzija na poslužitelju promijenila se otkad ste otvorili ovu prezentaciju. Prepisivanje poništava tuđi rad.',
+  'Overschrijven': 'Prepiši',
   'Openen vanaf WebDAV': 'Otvori s WebDAVa',
   'Opslaan naar WebDAV': 'Spremi na WebDAV',
   'Opgeslagen op WebDAV:': 'Spremljeno na WebDAV:',

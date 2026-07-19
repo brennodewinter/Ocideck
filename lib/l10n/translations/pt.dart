@@ -1811,6 +1811,11 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Iemand anders heeft dit bestand gewijzigd':
+      'Outra pessoa alterou este ficheiro',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'A versão no servidor mudou desde que abriu esta apresentação. Substituir descarta o trabalho da outra pessoa.',
+  'Overschrijven': 'Substituir',
   'Openen vanaf WebDAV': 'Abrir a partir do WebDAV',
   'Opslaan naar WebDAV': 'Guardar no WebDAV',
   'Opgeslagen op WebDAV:': 'Guardado no WebDAV:',

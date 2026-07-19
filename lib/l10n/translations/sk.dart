@@ -1788,6 +1788,10 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Iemand anders heeft dit bestand gewijzigd': 'Tento súbor zmenil niekto iný',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'Verzia na serveri sa od otvorenia tejto prezentácie zmenila. Prepísanie zahodí prácu druhého človeka.',
+  'Overschrijven': 'Prepísať',
   'Openen vanaf WebDAV': 'Otvoriť z WebDAVu',
   'Opslaan naar WebDAV': 'Uložiť na WebDAV',
   'Opgeslagen op WebDAV:': 'Uložené na WebDAV:',

@@ -1809,6 +1809,11 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Iemand anders heeft dit bestand gewijzigd':
+      'Κάποιος άλλος άλλαξε αυτό το αρχείο',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'Η έκδοση στον διακομιστή άλλαξε από τότε που ανοίξατε αυτή την παρουσίαση. Η αντικατάσταση αναιρεί τη δουλειά του άλλου.',
+  'Overschrijven': 'Αντικατάσταση',
   'Openen vanaf WebDAV': 'Άνοιγμα από το WebDAV',
   'Opslaan naar WebDAV': 'Αποθήκευση στο WebDAV',
   'Opgeslagen op WebDAV:': 'Αποθηκεύτηκε στο WebDAV:',

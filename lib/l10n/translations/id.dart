@@ -1781,6 +1781,11 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Iemand anders heeft dit bestand gewijzigd':
+      'Orang lain telah mengubah berkas ini',
+  'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
+      'Versi di server telah berubah sejak Anda membuka presentasi ini. Menimpa akan menghapus pekerjaan orang lain.',
+  'Overschrijven': 'Timpa',
   'Openen vanaf WebDAV': 'Buka dari WebDAV',
   'Opslaan naar WebDAV': 'Simpan ke WebDAV',
   'Opgeslagen op WebDAV:': 'Disimpan ke WebDAV:',

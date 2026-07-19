@@ -127,7 +127,8 @@ every building block exists:
 | Network deck source | WebDAV/Nextcloud client | `lib/services/webdav_service.dart` |
 | SSRF hardening + trusted-server opt-in | `NetGuard.safeResolveTrusted(host, allowPrivate:)` | `lib/utils/net_guard.dart` |
 | Secret in OS keychain | WebDAV password store | `lib/services/secret_store.dart` |
-| Per-tab remote origin | `WebdavOrigin {baseUrl, username, remotePath}` | `lib/models/webdav_settings.dart` |
+| Per-tab remote origin | `WebdavOrigin {baseUrl, username, remotePath, etag}` | `lib/models/webdav_settings.dart` |
+| Lost-update guard on write | `If-Match` on PUT -> `WebdavConflictException` | `lib/services/webdav_service.dart` |
 | Deck → `{path: bytes}` map | `buildPackageMembers(deck)` | `lib/services/parts/file_service_package.dart` |
 | Content hashing of images | md5 worker in isolate | `lib/services/image_dedup_service.dart` |
 | Import safety gate (fail-closed) | `scanForUnsafeMarkdown` / `MarkdownSafetyScanner` | `lib/services/parts/file_service_import.dart`, `lib/services/markdown_safety.dart` |
