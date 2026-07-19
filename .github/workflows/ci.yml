@@ -114,6 +114,30 @@ jobs:
       - name: Install dependencies
         run: flutter pub get --enforce-lockfile
 
+      # De beeldcontrole (herkenbare gezichten op dia-afbeeldingen) draait op
+      # OpenCV via FFI. Die native bibliotheek zit in de app-bundel, niet in een
+      # kale `flutter test` op de Dart-VM — dus zonder deze stap slaan de
+      # detectietests zichzelf over en bewaken ze niets.
+      #
+      # Dat is geen theoretisch risico: tijdens de bouw stonden die tests één
+      # keer groen terwijl de bibliotheek niet laadde, elke aanroep in de
+      # foutafhandeling viel en de scanner nul gezichten meldde. Groen om de
+      # verkeerde reden is erger dan rood.
+      #
+      # Alleen op macOS: één platform waar ze echt draaien volstaat om een
+      # regressie in de detector te vangen, en een Linux-build zou GTK-pakketten
+      # op de runner vragen voor dezelfde twee tests.
+      - name: Build macOS (levert de OpenCV-bibliotheek aan de beeldtests)
+        if: runner.os == 'macOS'
+        run: |
+          flutter build macos --debug
+          LIB="$PWD/build/macos/Build/Products/Debug/DartCvMacOS/DartCvMacOS.framework/Versions/A/DartCvMacOS"
+          # Hard falen in plaats van stilletjes terugvallen op overslaan: als een
+          # nieuwe opencv_core dit pad verlegt, moet dat hier opvallen en niet
+          # pas als iemand zich afvraagt waarom de detectietests nooit draaien.
+          test -f "$LIB" || { echo "::error::OpenCV-bibliotheek niet op $LIB — pad gewijzigd?"; exit 1; }
+          echo "DARTCV_LIB_PATH=$LIB" >> "$GITHUB_ENV"
+
       - name: Test
         run: flutter test --test-randomize-ordering-seed random --exclude-tags golden
 
