@@ -193,6 +193,32 @@ Note that `redact` is honoured **regardless of the "warn about possible personal
 data" setting**. That setting governs warnings, not redaction: otherwise silencing
 the messages would silently stop the redaction too.
 
+### 3.1c Quality disposition — `<!-- ocideck_quality: … -->`
+
+What happens to the quality findings on a slide. Two stable values: `warn` (the
+default, never written) and `accept`.
+
+```markdown
+# Cover image
+
+<!-- ocideck_quality: accept -->
+```
+
+`accept` says *this is how the slide is meant to be*: a title image that
+deliberately contrasts softly, a table that genuinely has that many rows. The
+findings do not disappear — the thumbnail badge turns grey and the export gate
+stops counting them, but they stay readable. Accepting must not become a way of
+hiding.
+
+**Slide-level only; there is no deck-wide counterpart.** Unlike `privacy:`, a
+deck that accepts every contrast error in one go is not a judgement about the
+content but a switch, and that switch already exists under *Settings → General*.
+A quality verdict is about *this* slide.
+
+An unrecognised value falls back to `warn`, not to `accept`. A deck written by a
+newer OciDeck must never cause an older one to silently suppress findings it does
+not understand; at worst the author makes the choice again.
+
 ### 3.1a Redaction markers — `[[…]]`
 
 Text between double square brackets is **redacted**: replaced by a fixed run of

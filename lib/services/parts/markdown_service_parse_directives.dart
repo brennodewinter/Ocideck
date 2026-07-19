@@ -18,6 +18,7 @@ extension _MarkdownParseDirectives on MarkdownService {
     bool skipped,
     TlpLevel tlp,
     PrivacyDisposition? privacy,
+    QualityDisposition quality,
     List<String> bullets,
     List<String> bullets2,
     ListStyle listStyle,
@@ -49,6 +50,7 @@ extension _MarkdownParseDirectives on MarkdownService {
     bool skipped = false;
     TlpLevel slideTlp = TlpLevel.none;
     PrivacyDisposition? slidePrivacy;
+    var slideQuality = QualityDisposition.warn;
     final bullets = <String>[];
     var bullets2 = <String>[];
     var listStyle = ListStyle.bullets;
@@ -79,6 +81,8 @@ extension _MarkdownParseDirectives on MarkdownService {
         slideTlp = TlpLevelX.fromKey(content.substring(4));
       } else if (content.startsWith('ocideck_privacy:')) {
         slidePrivacy = PrivacyDispositionX.fromKey(content.substring(16));
+      } else if (content.startsWith('ocideck_quality:')) {
+        slideQuality = QualityDispositionX.fromKey(content.substring(16));
       } else if (content.startsWith('_style:')) {
         final w = _reImageWidthStyle.firstMatch(content);
         if (w != null) styleImageWidth = int.tryParse(w.group(1)!) ?? 0;
@@ -144,6 +148,7 @@ extension _MarkdownParseDirectives on MarkdownService {
       skipped: skipped,
       tlp: slideTlp,
       privacy: slidePrivacy,
+      quality: slideQuality,
       bullets: bullets,
       bullets2: bullets2,
       listStyle: listStyle,

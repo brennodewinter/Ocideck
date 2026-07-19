@@ -5,6 +5,7 @@ import '../models/chart.dart';
 import '../models/cockpit.dart';
 import '../models/deck.dart';
 import '../models/privacy_disposition.dart';
+import '../models/quality_disposition.dart';
 import '../models/document_signature.dart';
 import '../models/finding_spec.dart';
 import '../models/question.dart';
@@ -338,6 +339,10 @@ class MarkdownService {
     if (privacy != null) {
       buf.writeln();
       buf.writeln('<!-- ocideck_privacy: ${privacy.key} -->');
+    }
+    if (slide.quality.isResolved) {
+      buf.writeln();
+      buf.writeln('<!-- ocideck_quality: ${slide.quality.key} -->');
     }
   }
 

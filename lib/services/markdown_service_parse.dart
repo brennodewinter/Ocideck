@@ -434,6 +434,7 @@ extension _MarkdownParse on MarkdownService {
       return structured.copyWith(
         aiAssistedFields: link.aiAssistedFields,
         privacy: d.privacy,
+        quality: d.quality,
       );
     }
 
@@ -531,6 +532,7 @@ extension _MarkdownParse on MarkdownService {
       skipped: d.skipped,
       tlp: d.tlp,
       privacy: d.privacy,
+      quality: d.quality,
       tableRows: _tableBackedTypes.contains(type) ? tableRows : const [],
       tableEditable:
           type == SlideType.table && classTokens.contains('table-editable'),

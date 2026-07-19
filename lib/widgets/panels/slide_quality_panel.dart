@@ -7,6 +7,7 @@ import '../../l10n/slide_quality_localization.dart';
 import '../../l10n/slide_quality_navigation.dart';
 import '../../models/markdown_validation.dart';
 import '../../models/slide_quality.dart';
+import '../../state/deck_provider.dart';
 import '../../state/deck_quality_provider.dart';
 import '../../state/editor_provider.dart';
 import '../../state/image_contrast_provider.dart';
@@ -30,9 +31,16 @@ SlideQualityResult combinedSlideQualityResult(WidgetRef ref) {
   final imageIssues = ref.watch(imageContrastIssuesProvider).value ?? const [];
   final privacyIssues = ref.watch(privacyQualityIssuesProvider);
   if (imageIssues.isEmpty && privacyIssues.isEmpty) return syncResult;
+  // `deckQualityProvider` filtert de geaccepteerde slides al weg, maar de
+  // asynchrone contrastcheck komt langs die filter heen binnen. Zonder deze
+  // regel zou een slide waarvan de auteur de kwaliteit accepteert tóch blijven
+  // melden — precies één check lang, en dat is het soort gat waar het
+  // vertrouwen in de hele acceptatie op stukloopt.
+  final deck = ref.watch(deckProvider.select((state) => state.deck));
   return SlideQualityResult([
     ...syncResult.issues,
-    ...imageIssues,
+    for (final issue in imageIssues)
+      if (deck == null || !isQualityAccepted(deck, issue.slideIndex)) issue,
     ...privacyIssues,
   ]);
 }
