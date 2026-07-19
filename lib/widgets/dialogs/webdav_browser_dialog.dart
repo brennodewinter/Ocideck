@@ -16,15 +16,26 @@ enum WebdavBrowseMode { deck, image }
 class WebdavBrowserDialog extends ConsumerStatefulWidget {
   final WebdavBrowseMode mode;
 
-  const WebdavBrowserDialog({super.key, required this.mode});
+  /// Op welke verbinding gebladerd wordt. Meegegeven en niet zelf uit de
+  /// instellingen gelezen: de aanroeper heeft de gebruiker al laten kiezen, en
+  /// die keuze mag hier niet stilletjes een andere worden.
+  final String connectionId;
+
+  const WebdavBrowserDialog({
+    super.key,
+    required this.mode,
+    required this.connectionId,
+  });
 
   static Future<WebdavEntry?> show(
     BuildContext context, {
+    required String connectionId,
     WebdavBrowseMode mode = WebdavBrowseMode.deck,
   }) {
     return showDialog<WebdavEntry>(
       context: context,
-      builder: (_) => WebdavBrowserDialog(mode: mode),
+      builder: (_) =>
+          WebdavBrowserDialog(mode: mode, connectionId: connectionId),
     );
   }
 
@@ -36,6 +47,10 @@ class WebdavBrowserDialog extends ConsumerStatefulWidget {
 class _WebdavBrowserDialogState extends ConsumerState<WebdavBrowserDialog> {
   /// Pad relatief aan de wortelmap; leeg = wortel.
   String _path = '';
+
+  /// De cachesleutel voor een pad op déze verbinding.
+  WebdavListingKey _key(String remotePath) =>
+      (connectionId: widget.connectionId, remotePath: remotePath);
 
   void _navigateTo(String relativePath) {
     setState(() => _path = relativePath);
@@ -56,7 +71,7 @@ class _WebdavBrowserDialogState extends ConsumerState<WebdavBrowserDialog> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final listing = ref.watch(webdavListingProvider(_path));
+    final listing = ref.watch(webdavListingProvider(_key(_path)));
     final title = widget.mode == WebdavBrowseMode.image
         ? l10n.d('Afbeelding kiezen op WebDAV')
         : l10n.d('Openen vanaf WebDAV');
@@ -134,7 +149,7 @@ class _WebdavBrowserDialogState extends ConsumerState<WebdavBrowserDialog> {
             visualDensity: VisualDensity.compact,
           ),
           IconButton(
-            onPressed: () => ref.invalidate(webdavListingProvider(_path)),
+            onPressed: () => ref.invalidate(webdavListingProvider(_key(_path))),
             icon: const Icon(Icons.refresh, size: 18),
             tooltip: l10n.d('Vernieuwen'),
             visualDensity: VisualDensity.compact,
@@ -225,7 +240,8 @@ class _WebdavBrowserDialogState extends ConsumerState<WebdavBrowserDialog> {
             ),
             const SizedBox(height: 14),
             OutlinedButton.icon(
-              onPressed: () => ref.invalidate(webdavListingProvider(_path)),
+              onPressed: () =>
+                  ref.invalidate(webdavListingProvider(_key(_path))),
               icon: const Icon(Icons.refresh, size: 16),
               label: Text(l10n.d('Opnieuw proberen')),
             ),

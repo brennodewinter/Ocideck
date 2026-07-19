@@ -1809,6 +1809,26 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Welke verbinding?': 'Ποια σύνδεση;',
+  'Bestandsverbindingen': 'Συνδέσεις αρχείων',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Τα μέρη όπου φυλάσσετε και αναζητάτε τις παρουσιάσεις σας — φάκελοι σε αυτόν τον υπολογιστή, διακομιστές WebDAV και αποθετήρια git μαζί. Σύρετέ τα στη σειρά που θέλετε: το πρώτο κάθε είδους ισχύει ως προεπιλογή.',
+  'Een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Ένα αποθετήριο git· κάθε αποθηκευμένη έκδοση διατηρείται.',
+  'Een map op de schijf van deze computer.':
+      'Ένας φάκελος στον δίσκο αυτού του υπολογιστή.',
+  'Een map op een WebDAV-server, bijvoorbeeld Nextcloud.':
+      'Ένας φάκελος σε διακομιστή WebDAV, για παράδειγμα Nextcloud.',
+  'Instellingen tonen': 'Εμφάνιση ρυθμίσεων',
+  'Instellingen verbergen': 'Απόκρυψη ρυθμίσεων',
+  'Map op deze computer': 'Φάκελος σε αυτόν τον υπολογιστή',
+  'Naam van deze verbinding': 'Όνομα αυτής της σύνδεσης',
+  'Nog geen verbinding — voeg er hieronder een toe.':
+      'Καμία σύνδεση ακόμη — προσθέστε μία παρακάτω.',
+  'Sleep om de volgorde te wijzigen': 'Σύρετε για να αλλάξετε τη σειρά',
+  'Verbinding toevoegen': 'Προσθήκη σύνδεσης',
+  'Verbinding verwijderen': 'Κατάργηση σύνδεσης',
+  'WebDAV-server': 'Διακομιστής WebDAV',
   'Iemand anders heeft dit bestand gewijzigd':
       'Κάποιος άλλος άλλαξε αυτό το αρχείο',
   'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':

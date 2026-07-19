@@ -30,12 +30,12 @@ extension _SettingsWebdav on _SettingsDialogState {
 
   /// De servertype-keuze. Alleen het padschema hangt eraan — het protocol
   /// eronder is in beide gevallen gewone WebDAV.
-  Widget _webdavKindField() {
+  Widget _webdavKindField(WebdavForm form) {
     final l10n = context.l10n;
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: DropdownButtonFormField<WebdavServerKind>(
-        initialValue: _webdav.kind,
+        initialValue: form.kind,
         isDense: true,
         style: const TextStyle(fontSize: 13),
         decoration: InputDecoration(
@@ -56,21 +56,21 @@ extension _SettingsWebdav on _SettingsDialogState {
         onChanged: (value) {
           if (value == null) return;
           _rebuild(() {
-            _webdav.kind = value;
+            form.kind = value;
             // De URL betekent per type iets anders (origin versus DAV-wortel),
             // dus een eerdere uitslag zegt niets meer over deze instelling.
-            _webdav.testOk = null;
-            _webdav.testMessage = null;
+            form.testOk = null;
+            form.testMessage = null;
           });
         },
       ),
     );
   }
 
-  Widget _webdavPanel() {
+  Widget _webdavPanel(WebdavForm form) {
     final l10n = context.l10n;
-    final testMsg = _webdav.testMessage;
-    final isNextcloud = _webdav.kind == WebdavServerKind.nextcloud;
+    final testMsg = form.testMessage;
+    final isNextcloud = form.kind == WebdavServerKind.nextcloud;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -84,9 +84,9 @@ extension _SettingsWebdav on _SettingsDialogState {
             style: TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
         ),
-        _webdavKindField(),
+        _webdavKindField(form),
         _webdavField(
-          _webdav.url,
+          form.url,
           l10n.d('Server-URL'),
           // Bij Nextcloud is het pad afgeleid en telt alleen de host; bij een
           // andere server valt er niets te raden en ís het pad de DAV-wortel.
@@ -104,12 +104,12 @@ extension _SettingsWebdav on _SettingsDialogState {
             ),
           ),
         _webdavField(
-          _webdav.user,
+          form.user,
           l10n.d('Gebruikersnaam'),
           icon: Icons.person_outline,
         ),
         _webdavField(
-          _webdav.password.field,
+          form.password.field,
           // Het app-wachtwoord is een Nextcloud-voorziening; bij een andere
           // server zou die tip de gebruiker naar een niet-bestaand scherm sturen.
           isNextcloud ? l10n.d('App-wachtwoord') : l10n.d('Wachtwoord'),
@@ -120,7 +120,7 @@ extension _SettingsWebdav on _SettingsDialogState {
           icon: Icons.key_outlined,
         ),
         _webdavField(
-          _webdav.root,
+          form.root,
           l10n.d('Submap (optioneel)'),
           hint: '/Presentaties',
           icon: Icons.folder_outlined,
@@ -137,19 +137,21 @@ extension _SettingsWebdav on _SettingsDialogState {
             ),
             style: TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
-          value: _webdav.trusted,
+          value: form.trusted,
           onChanged: (value) => _rebuild(() {
-            _webdav.trusted = value;
-            _webdav.testOk = null;
-            _webdav.testMessage = null;
+            form.trusted = value;
+            form.testOk = null;
+            form.testMessage = null;
           }),
         ),
         const SizedBox(height: 12),
         Row(
           children: [
             ElevatedButton.icon(
-              onPressed: _webdav.testing ? null : _testWebdavConnection,
-              icon: _webdav.testing
+              onPressed: form.testing
+                  ? null
+                  : () => _testWebdavConnection(form),
+              icon: form.testing
                   ? const SizedBox(
                       width: 16,
                       height: 16,
@@ -159,7 +161,7 @@ extension _SettingsWebdav on _SettingsDialogState {
               label: Text(l10n.d('Verbinding testen')),
             ),
             const SizedBox(width: 12),
-            if (_webdav.testOk == true)
+            if (form.testOk == true)
               Row(
                 children: [
                   const Icon(
@@ -176,7 +178,7 @@ extension _SettingsWebdav on _SettingsDialogState {
               ),
           ],
         ),
-        if (_webdav.testOk == false && testMsg != null)
+        if (form.testOk == false && testMsg != null)
           Padding(
             padding: const EdgeInsets.only(top: 10),
             child: Row(
@@ -209,24 +211,24 @@ extension _SettingsWebdav on _SettingsDialogState {
     );
   }
 
-  Future<void> _testWebdavConnection() async {
+  Future<void> _testWebdavConnection(WebdavForm form) async {
     final l10n = context.l10n;
-    final server = _webdav.server;
+    final server = form.server;
     if (!server.isConfigured) {
       _rebuild(() {
-        _webdav.testOk = false;
-        _webdav.testMessage = l10n.d('Vul server-URL en gebruikersnaam in');
+        form.testOk = false;
+        form.testMessage = l10n.d('Vul server-URL en gebruikersnaam in');
       });
       return;
     }
     _rebuild(() {
-      _webdav.testing = true;
-      _webdav.testOk = null;
-      _webdav.testMessage = null;
+      form.testing = true;
+      form.testOk = null;
+      form.testMessage = null;
     });
     final service = WebdavService(
       server: server,
-      password: _webdav.password.field.text,
+      password: form.password.field.text,
     );
     String? error;
     try {
@@ -239,9 +241,9 @@ extension _SettingsWebdav on _SettingsDialogState {
     }
     if (!mounted) return;
     _rebuild(() {
-      _webdav.testing = false;
-      _webdav.testOk = error == null;
-      _webdav.testMessage = error;
+      form.testing = false;
+      form.testOk = error == null;
+      form.testMessage = error;
     });
   }
 

@@ -734,6 +734,26 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Welke verbinding?': 'Quale connessione?',
+  'Bestandsverbindingen': 'Connessioni file',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'I luoghi in cui conservi e cerchi le tue presentazioni: cartelle su questo computer, server WebDAV e repository git insieme. Trascinali nell\'ordine che preferisci: il primo di ogni tipo vale come predefinito.',
+  'Een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Un repository git; ogni versione salvata viene conservata.',
+  'Een map op de schijf van deze computer.':
+      'Una cartella sul disco di questo computer.',
+  'Een map op een WebDAV-server, bijvoorbeeld Nextcloud.':
+      'Una cartella su un server WebDAV, ad esempio Nextcloud.',
+  'Instellingen tonen': 'Mostra impostazioni',
+  'Instellingen verbergen': 'Nascondi impostazioni',
+  'Map op deze computer': 'Cartella su questo computer',
+  'Naam van deze verbinding': 'Nome di questa connessione',
+  'Nog geen verbinding — voeg er hieronder een toe.':
+      'Nessuna connessione — aggiungine una qui sotto.',
+  'Sleep om de volgorde te wijzigen': 'Trascina per cambiare l\'ordine',
+  'Verbinding toevoegen': 'Aggiungi connessione',
+  'Verbinding verwijderen': 'Rimuovi connessione',
+  'WebDAV-server': 'Server WebDAV',
   'Iemand anders heeft dit bestand gewijzigd':
       'Qualcun altro ha modificato questo file',
   'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':

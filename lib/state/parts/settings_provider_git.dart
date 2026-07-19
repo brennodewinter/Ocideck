@@ -6,21 +6,6 @@ part of '../settings_provider.dart';
 /// De git-repository als deck-bron. Spiegelt bewust [setWebdavServer] en
 /// [readWebdavPassword]: de configuratie mag in prefs, het geheim nooit.
 extension SettingsNotifierGit on SettingsNotifier {
-  /// Bewaar (of wis) de repo-configuratie. Het token gaat hier expliciet niét
-  /// in mee — zie [writeGitToken] (D2, §10.1).
-  Future<void> setGitRepo(GitRepoConfig? config) async {
-    currentState = config == null
-        ? currentState.copyWith(clearGitRepo: true)
-        : currentState.copyWith(gitRepo: config);
-    await _persist('setGitRepo', (prefs) async {
-      if (config == null) {
-        await prefs.remove('gitRepo');
-      } else {
-        await prefs.setString('gitRepo', jsonEncode(config.toJson()));
-      }
-    });
-  }
-
   /// Bewaar het personal access token in de keychain, gekeyd op de repo. Een
   /// leeg token wist de entry: een publieke repo lezen mag zonder.
   Future<void> writeGitToken(String baseUrl, String owner, String token) async {

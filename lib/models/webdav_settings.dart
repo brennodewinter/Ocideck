@@ -178,6 +178,13 @@ enum WebdavSaveFormat {
 /// Nextcloud" weet waar (en op welke server) terug te schrijven. [baseUrl] en
 /// [username] dienen om een serverwissel te detecteren.
 class WebdavOrigin {
+  /// De verbinding waar dit deck vandaan kwam. Hiermee gaat "Opslaan naar
+  /// WebDAV" terug naar dezelfde klant zonder opnieuw te vragen — en blijft dat
+  /// kloppen als de gebruiker de verbinding hernoemt of de server-URL
+  /// corrigeert. Leeg voor herkomst uit een versie van vóór de
+  /// verbindingenlijst; dan valt de app terug op [baseUrl] + [username].
+  final String connectionId;
+
   final String baseUrl;
   final String username;
 
@@ -195,6 +202,7 @@ class WebdavOrigin {
     required this.baseUrl,
     required this.username,
     required this.remotePath,
+    this.connectionId = '',
     this.etag,
   });
 

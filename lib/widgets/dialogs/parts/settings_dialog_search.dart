@@ -210,13 +210,18 @@ extension _SettingsSearch on _SettingsDialogState {
     _rebuild(() {
       _selectedTab = entry.tab;
       _highlightedSection = section.isEmpty ? null : section;
-      // Een treffer in een opslagwijze klapt die wijze open. Zonder dit staat
-      // het anker niet in de boom en scrollt de sprong nergens naartoe — de
-      // gebruiker belandt op het tabblad en mag zelf gaan zoeken.
+      // Een treffer in een verbindingssoort klapt de bovenste verbinding van
+      // die soort open. Zonder dit staat het anker niet in de boom en scrollt
+      // de sprong nergens naartoe — de gebruiker belandt op het tabblad en mag
+      // zelf gaan zoeken. De bovenste, want dat is ook de verbinding die de app
+      // als standaard gebruikt.
       if (entry.tab == SettingsSection.storage) {
-        _expandedModality = StorageModality.values
-            .where((m) => m.sectionSource == entry.section)
+        final kind = StorageConnectionKind.values
+            .where((k) => k.sectionSource == entry.section)
             .firstOrNull;
+        _expandedConnectionId = kind == null
+            ? null
+            : _connections.where((c) => c.kind == kind).firstOrNull?.id;
       }
     });
     if (section.isEmpty) return; // hangt onder geen kop: tabblad is genoeg

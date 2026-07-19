@@ -1797,6 +1797,25 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Welke verbinding?': 'Quae conexio?',
+  'Bestandsverbindingen': 'Conexiones fasciculorum',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Loci ubi praesentationes tuas servas et quaeris — plicae in hoc computatro, servitia WebDAV et repositoria git permixta. Trahe ea in ordinem quem vis: summum cuiusque generis pro norma valet.',
+  'Een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Repositorium git; omnis versio servata manet.',
+  'Een map op de schijf van deze computer.': 'Plica in disco huius computatri.',
+  'Een map op een WebDAV-server, bijvoorbeeld Nextcloud.':
+      'Plica in servitio WebDAV, exempli gratia Nextcloud.',
+  'Instellingen tonen': 'Optiones monstrare',
+  'Instellingen verbergen': 'Optiones celare',
+  'Map op deze computer': 'Plica in hoc computatro',
+  'Naam van deze verbinding': 'Nomen huius conexionis',
+  'Nog geen verbinding — voeg er hieronder een toe.':
+      'Nulla adhuc conexio — infra unam adde.',
+  'Sleep om de volgorde te wijzigen': 'Trahe ut ordinem mutes',
+  'Verbinding toevoegen': 'Conexionem addere',
+  'Verbinding verwijderen': 'Conexionem removere',
+  'WebDAV-server': 'Servitium WebDAV',
   'Iemand anders heeft dit bestand gewijzigd': 'Alius hunc fasciculum mutavit',
   'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':
       'Versio in servitore mutata est ex quo hanc praesentationem aperuisti. Superscribere opus alterius delet.',

@@ -1783,6 +1783,25 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Welke verbinding?': 'Katera povezava?',
+  'Bestandsverbindingen': 'Datotečne povezave',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Mesta, kjer hranite in iščete predstavitve — mape v tem računalniku, strežniki WebDAV in repozitoriji git vperemeš. Povlecite jih v želeni vrstni red: najvišji vsake vrste velja kot privzeti.',
+  'Een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Repozitorij git; vsaka shranjena različica se ohrani.',
+  'Een map op de schijf van deze computer.': 'Mapa na disku tega računalnika.',
+  'Een map op een WebDAV-server, bijvoorbeeld Nextcloud.':
+      'Mapa na strežniku WebDAV, na primer Nextcloud.',
+  'Instellingen tonen': 'Pokaži nastavitve',
+  'Instellingen verbergen': 'Skrij nastavitve',
+  'Map op deze computer': 'Mapa v tem računalniku',
+  'Naam van deze verbinding': 'Ime te povezave',
+  'Nog geen verbinding — voeg er hieronder een toe.':
+      'Še ni povezave — dodajte jo spodaj.',
+  'Sleep om de volgorde te wijzigen': 'Povlecite za spremembo vrstnega reda',
+  'Verbinding toevoegen': 'Dodaj povezavo',
+  'Verbinding verwijderen': 'Odstrani povezavo',
+  'WebDAV-server': 'Strežnik WebDAV',
   'Iemand anders heeft dit bestand gewijzigd':
       'To datoteko je spremenil nekdo drug',
   'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':

@@ -738,6 +738,26 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Welke verbinding?': 'Quelle connexion ?',
+  'Bestandsverbindingen': 'Connexions de fichiers',
+  'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
+      'Les endroits où vous conservez et recherchez vos présentations — dossiers sur cet ordinateur, serveurs WebDAV et dépôts git mêlés. Faites-les glisser dans l\'ordre voulu : le premier de chaque type sert de valeur par défaut.',
+  'Een git-repository; elke opgeslagen versie blijft bewaard.':
+      'Un dépôt git ; chaque version enregistrée est conservée.',
+  'Een map op de schijf van deze computer.':
+      'Un dossier sur le disque de cet ordinateur.',
+  'Een map op een WebDAV-server, bijvoorbeeld Nextcloud.':
+      'Un dossier sur un serveur WebDAV, par exemple Nextcloud.',
+  'Instellingen tonen': 'Afficher les réglages',
+  'Instellingen verbergen': 'Masquer les réglages',
+  'Map op deze computer': 'Dossier sur cet ordinateur',
+  'Naam van deze verbinding': 'Nom de cette connexion',
+  'Nog geen verbinding — voeg er hieronder een toe.':
+      'Aucune connexion pour l\'instant — ajoutez-en une ci-dessous.',
+  'Sleep om de volgorde te wijzigen': 'Faites glisser pour changer l\'ordre',
+  'Verbinding toevoegen': 'Ajouter une connexion',
+  'Verbinding verwijderen': 'Supprimer la connexion',
+  'WebDAV-server': 'Serveur WebDAV',
   'Iemand anders heeft dit bestand gewijzigd':
       'Quelqu\'un d\'autre a modifié ce fichier',
   'Sinds je dit deck opende is de versie op de server veranderd. Overschrijven maakt het werk van de ander ongedaan.':

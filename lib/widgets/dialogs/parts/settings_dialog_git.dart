@@ -5,7 +5,7 @@
 part of '../settings_dialog.dart';
 
 extension _SettingsGit on _SettingsDialogState {
-  Widget _gitPanel() {
+  Widget _gitPanel(GitForm form) {
     final l10n = context.l10n;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,7 +25,7 @@ extension _SettingsGit on _SettingsDialogState {
         Padding(
           padding: const EdgeInsets.only(bottom: 12),
           child: DropdownButtonFormField<GitProvider>(
-            initialValue: _git.provider,
+            initialValue: form.provider,
             decoration: InputDecoration(
               labelText: l10n.d('Soort forge'),
               prefixIcon: const Icon(Icons.hub_outlined, size: 18),
@@ -47,36 +47,36 @@ extension _SettingsGit on _SettingsDialogState {
               ),
             ],
             onChanged: (v) =>
-                _rebuild(() => _git.provider = v ?? GitProvider.gitea),
+                _rebuild(() => form.provider = v ?? GitProvider.gitea),
           ),
         ),
         _webdavField(
-          _git.url,
+          form.url,
           l10n.d('Server-URL'),
           hint: 'https://git.example.org',
           icon: Icons.dns_outlined,
         ),
         _webdavField(
-          _git.owner,
+          form.owner,
           l10n.d('Eigenaar'),
           hint: 'librekat',
           icon: Icons.person_outline,
         ),
         _webdavField(
-          _git.repo,
+          form.repo,
           l10n.d('Repository'),
           hint: 'decks',
           icon: Icons.folder_outlined,
         ),
         _webdavField(
-          _git.token.field,
+          form.token.field,
           l10n.d('Personal access token'),
           obscure: true,
           icon: Icons.key_outlined,
         ),
         CheckboxListTile(
-          value: _git.trusted,
-          onChanged: (v) => _rebuild(() => _git.trusted = v ?? false),
+          value: form.trusted,
+          onChanged: (v) => _rebuild(() => form.trusted = v ?? false),
           contentPadding: EdgeInsets.zero,
           controlAffinity: ListTileControlAffinity.leading,
           dense: true,

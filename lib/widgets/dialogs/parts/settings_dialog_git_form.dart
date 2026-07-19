@@ -48,15 +48,11 @@ class GitForm {
     );
   }
 
-  /// Config bij de instellingen, token in de sleutelhanger — dat tweede alleen
-  /// wanneer het écht nodig is (D2, §10.1).
-  void save(SettingsNotifier notifier) {
+  /// Token in de sleutelhanger, en alleen wanneer het écht nodig is (D2,
+  /// §10.1). De configuratie zelf loopt via de verbindingenlijst.
+  void saveSecret(SettingsNotifier notifier) {
     final current = config;
-    if (!current.isConfigured) {
-      notifier.setGitRepo(null);
-      return;
-    }
-    notifier.setGitRepo(current);
+    if (!current.isConfigured) return;
     if (token.shouldWrite(identityOf(current.baseUrl, current.owner))) {
       notifier.writeGitToken(current.baseUrl, current.owner, token.field.text);
     }
