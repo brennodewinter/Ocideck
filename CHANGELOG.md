@@ -10,6 +10,43 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Added
+- **De privacycontrole kijkt nu ook buiten Europa.** Naast de EU, de EER,
+  Zwitserland en het VK kent OciDeck nu de persoonsnummers van de Verenigde
+  Staten, Canada, Australië, India, Brazilië, Zuid-Afrika, Curaçao en Aruba. Ze
+  staan allemaal standaard aan.
+
+  Dat laatste is een keuze en geen gemak. Een landpakket aanzetten kost bijna
+  geen ruis, want elke regel draagt óf een controlecijfer óf de eis dat er een
+  woord als "SSN" of "sedula" bij staat — een Braziliaans CPF heeft zelfs twee
+  onafhankelijke controles. Maar de reden dat ze áán moeten staan is een andere:
+  bescherming hoort niet af te hangen van de vraag of je wist dat er een vinkje
+  was. Wie een deck met Amerikaanse of Zuid-Afrikaanse persoonsgegevens opent,
+  heeft de controle het hardst nodig op het moment dat hij er het minst aan
+  denkt. Per land uitzetten kan nog steeds, onder *Instellingen → Beveiliging*.
+
+- **De maatstaf blijft de AVG, ook bij landen die het zelf anders regelen.** Het
+  Amerikaanse recht werkt met een opsomming van wat als persoonsgegeven telt; de
+  AVG met een open norm. Dat verschil verandert wat er gemeld wordt:
+
+  Een Medicare-nummer of het nummer van een zorgverlener is daar routineuze
+  administratie. Hier is het een gegeven over gezondheid, met het gewicht dat
+  daarbij hoort. "Last 4 of SSN" geldt in Amerikaanse praktijk als voldoende
+  afgeschermd — maar vier cijfers naast een naam of een geboortedatum wijzen nog
+  altijd één persoon aan, dus `XXX-XX-1234` wordt gemeld. En een Amerikaans
+  ITIN identificeert iemand die belasting betaalt zonder recht op een
+  SSN, wat raakt aan verblijfsstatus.
+
+  Het werkt ook de andere kant op. Een Indiase PAN codeert in zijn vierde letter
+  wat voor houder het is, en maar één waarde daarvan betekent een natuurlijk
+  persoon. Het PAN van een bedrijf wordt dus helemaal niet gemeld. Gelijk hebben
+  over wat een persoonsgegeven is, snijdt twee kanten op.
+
+- **Voor Curaçao en Aruba is er geen controlecijfer, en dat staat er ook zo bij.**
+  De sedula en het Arubaanse persoonsnummer hebben geen openbaar gedocumenteerde
+  controle. Ze worden daarom alleen gemeld als er een woord als "sedula" of
+  "persoonsnummer" bij staat, en nooit met de hoogste zekerheid. Liever een
+  voorzichtige regel die zwijgt zonder context dan een blinde vlek binnen het
+  eigen Koninkrijk.
 - **Negen Europese persoonsnummers erbij.** Oostenrijk, Zwitserland, Tsjechië en
   Slowakije, Denemarken, Griekenland, Hongarije, Ierland, Noorwegen en Slovenië.
   Op één na dragen ze allemaal hun eigen controlecijfer, dus ze herkennen zichzelf
