@@ -60,6 +60,24 @@ jobs:
       - name: Dead code (make check-dead-code)
         run: make check-dead-code
 
+      # De beeldcontrole draait op OpenCV via FFI, en die bibliotheek ontstaat
+      # pas bij een platformbuild — zonder deze stap slaan de detectietests
+      # zichzelf over en bewaken ze niets. De Makefile vindt de `.so` daarna
+      # zelf in `build/` en zet DARTCV_LIB_PATH.
+      - name: Linux-buildafhankelijkheden
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build libgtk-3-dev clang cmake pkg-config
+
+      - name: Build Linux (levert de OpenCV-bibliotheek aan de beeldtests)
+        run: |
+          flutter build linux --debug
+          # Hard falen in plaats van stilletjes terugvallen op overslaan: als een
+          # nieuwe opencv_core dit pad verlegt, moet dat hier opvallen.
+          LIB=$(ls build/linux/*/*/bundle/lib/libdartcv.so 2>/dev/null | head -1)
+          test -n "$LIB" || { echo "::error::libdartcv.so niet gevonden onder build/linux — pad gewijzigd?"; exit 1; }
+          echo "Gevonden: $LIB ($(du -h "$LIB" | cut -f1))"
+
       # Runs the full suite with coverage and enforces a line-coverage floor.
       - name: Test + coverage (make coverage)
         run: make coverage
@@ -127,6 +145,17 @@ jobs:
       # Alleen op macOS: één platform waar ze echt draaien volstaat om een
       # regressie in de detector te vangen, en een Linux-build zou GTK-pakketten
       # op de runner vragen voor dezelfde twee tests.
+      # Windows loopt via CMake in plaats van CocoaPods, dus een ander pad — maar
+      # dezelfde reden: zonder de bibliotheek slaan de detectietests zichzelf over.
+      - name: Build Windows (levert de OpenCV-bibliotheek aan de beeldtests)
+        if: runner.os == 'Windows'
+        shell: bash
+        run: |
+          flutter build windows --debug
+          LIB=$(ls build/windows/*/runner/*/dartcv.dll 2>/dev/null | head -1)
+          test -n "$LIB" || { echo "::error::dartcv.dll niet gevonden onder build/windows — pad gewijzigd?"; exit 1; }
+          echo "DARTCV_LIB_PATH=$(pwd)/$LIB" >> "$GITHUB_ENV"
+
       - name: Build macOS (levert de OpenCV-bibliotheek aan de beeldtests)
         if: runner.os == 'macOS'
         run: |

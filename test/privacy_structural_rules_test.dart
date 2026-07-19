@@ -71,9 +71,20 @@ void main() {
       expect(result.findings.single.field, 'imagePath');
     });
 
-    test('maar een pad wordt NIET geredigeerd — dat breekt de afbeelding', () {
-      // Melden en redigeren zijn hier bewust verschillend. Een geredigeerd pad is
-      // een kapotte afbeelding; de auteur hernoemt het bestand of verplaatst het.
+    test('op een geredigeerde slide verdwijnt het pad met de afbeelding', () {
+      // Hier stond eerst het omgekeerde: het pad bleef staan, met als reden dat
+      // een geredigeerd pad een kapotte afbeelding oplevert en de auteur het
+      // bestand maar moest hernoemen.
+      //
+      // Die redenering klopt voor `warn` — melden, niet ingrijpen. Maar op een
+      // slide die de auteur op `redact` heeft gezet was het gevolg dat
+      // `/Users/jan.jansen/…` letterlijk in de geëxporteerde markdown belandde:
+      // gedetecteerd, gemeld, en vervolgens gewoon meegeleverd. Gemeten, niet
+      // vermoed.
+      //
+      // Nu verdwijnt op zo'n slide de hele mediaverwijzing (zie `_projectMedia`),
+      // dus het pad kán er niet meer in staan. Karakters weglakken ín een pad
+      // gebeurt nog steeds niet — dát zou een kapotte verwijzing opleveren.
       final deck = Deck(
         title: 'D',
         slides: [
@@ -81,6 +92,22 @@ void main() {
             imagePath: '/Users/jan.jansen/Desktop/scherm.png',
             privacy: PrivacyDisposition.redact,
           ),
+        ],
+      );
+      final out = PrivacyProjection.forAudience(deck);
+      expect(out.slides.single.imagePath, isEmpty);
+    });
+
+    test('zonder redactie blijft het pad ongemoeid', () {
+      // De oorspronkelijke redenering geldt onverkort zolang de auteur niets
+      // heeft gevraagd: we melden de naam in het pad, we breken de afbeelding
+      // niet.
+      final deck = Deck(
+        title: 'D',
+        slides: [
+          Slide.create(
+            SlideType.image,
+          ).copyWith(imagePath: '/Users/jan.jansen/Desktop/scherm.png'),
         ],
       );
       final out = PrivacyProjection.forAudience(deck);
