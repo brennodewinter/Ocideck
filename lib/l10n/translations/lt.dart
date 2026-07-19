@@ -1795,6 +1795,19 @@ const _dutchSourceAddLt = <String, String>{
   'beveiligingscode van een creditcard': 'kortelės saugos kodas (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
       'duomenys pranešėjo pastabose — skaidrėje nematomi, bet patenka į eksportą',
+  'Certificaat vertrouwen?': 'Pasitikėti šiuo sertifikatu?',
+  'Het certificaat van deze server is niet ondertekend door een erkende uitgever. Dat is gewoon bij een zelf gehoste server, maar het is ook hoe een afgeluisterde verbinding eruitziet.':
+      'Šio serverio sertifikato nepasirašė pripažintas išdavėjas. Savarankiškai talpinamam serveriui tai normalu, bet lygiai taip atrodo ir perimtas ryšys.',
+  'Vergelijk de vingerafdruk hieronder met wat je server zelf toont. Komen ze overeen, dan praat je met de juiste machine.':
+      'Palyginkite žemiau esantį kontrolinį kodą su tuo, kurį rodo jūsų serveris. Jei sutampa, kalbatės su tinkama mašina.',
+  'Uitgegeven aan': 'Išduota',
+  'Uitgegeven door': 'Išdavė',
+  'Geldig tot': 'Galioja iki',
+  'Vingerafdruk (SHA-256)': 'Kontrolinis kodas (SHA-256)',
+  'Alleen dit ene certificaat wordt vertrouwd. Vervangt de server het later, dan vraagt OciDeck het opnieuw.':
+      'Pasitikima tik šiuo vienu sertifikatu. Jei serveris jį vėliau pakeis, OciDeck paklaus dar kartą.',
+  'Vertrouwen': 'Pasitikėti',
+  'Certificaat bekijken': 'Peržiūrėti sertifikatą',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Šios pateikties kalbai trūksta ligų pavadinimų. Religija, politinės pažiūros ir profsąjungų terminai atpažįstami, o šablonai su kontroliniu skaitmeniu (asmens kodas, IBAN, pasas) veikia visada — bet nesitikėkite, kad bus rasta diagnozė.',
   'niet getest': 'nepatikrinta',

@@ -1805,6 +1805,19 @@ const _dutchSourceAddUk = <String, String>{
   'beveiligingscode van een creditcard': 'код безпеки картки (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
       'дані в нотатках доповідача — невидимі на слайді, але потрапляють в експорт',
+  'Certificaat vertrouwen?': 'Довіряти цьому сертифікату?',
+  'Het certificaat van deze server is niet ondertekend door een erkende uitgever. Dat is gewoon bij een zelf gehoste server, maar het is ook hoe een afgeluisterde verbinding eruitziet.':
+      'Сертифікат цього сервера не підписаний визнаним видавцем. Для власного сервера це нормально, але так само виглядає й перехоплене з\'єднання.',
+  'Vergelijk de vingerafdruk hieronder met wat je server zelf toont. Komen ze overeen, dan praat je met de juiste machine.':
+      'Порівняйте відбиток нижче з тим, що показує ваш сервер. Якщо вони збігаються, ви спілкуєтеся з правильною машиною.',
+  'Uitgegeven aan': 'Видано для',
+  'Uitgegeven door': 'Ким видано',
+  'Geldig tot': 'Дійсний до',
+  'Vingerafdruk (SHA-256)': 'Відбиток (SHA-256)',
+  'Alleen dit ene certificaat wordt vertrouwd. Vervangt de server het later, dan vraagt OciDeck het opnieuw.':
+      'Довіра стосується лише цього сертифіката. Якщо сервер його згодом замінить, OciDeck запитає знову.',
+  'Vertrouwen': 'Довіряти',
+  'Certificaat bekijken': 'Переглянути сертифікат',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Для мови цієї презентації бракує назв хвороб. Релігію, політичні погляди та профспілкові терміни розпізнано, а шаблони з контрольною цифрою (ІПН, IBAN, паспорт) працюють завжди — але не розраховуйте на виявлення діагнозу.',
   'niet getest': 'не перевірено',

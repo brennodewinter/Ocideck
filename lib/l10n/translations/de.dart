@@ -744,6 +744,19 @@ const _dutchSourceAddDe = {
   'beveiligingscode van een creditcard': 'Kartenprüfnummer (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
       'Daten in den Sprechernotizen — auf der Folie unsichtbar, aber im Export enthalten',
+  'Certificaat vertrouwen?': 'Diesem Zertifikat vertrauen?',
+  'Het certificaat van deze server is niet ondertekend door een erkende uitgever. Dat is gewoon bij een zelf gehoste server, maar het is ook hoe een afgeluisterde verbinding eruitziet.':
+      'Das Zertifikat dieses Servers ist nicht von einem anerkannten Aussteller signiert. Bei einem selbst gehosteten Server ist das normal — so sieht aber auch eine abgehörte Verbindung aus.',
+  'Vergelijk de vingerafdruk hieronder met wat je server zelf toont. Komen ze overeen, dan praat je met de juiste machine.':
+      'Vergleiche den Fingerabdruck unten mit dem, was dein Server selbst anzeigt. Stimmen sie überein, sprichst du mit der richtigen Maschine.',
+  'Uitgegeven aan': 'Ausgestellt für',
+  'Uitgegeven door': 'Ausgestellt von',
+  'Geldig tot': 'Gültig bis',
+  'Vingerafdruk (SHA-256)': 'Fingerabdruck (SHA-256)',
+  'Alleen dit ene certificaat wordt vertrouwd. Vervangt de server het later, dan vraagt OciDeck het opnieuw.':
+      'Nur genau diesem Zertifikat wird vertraut. Ersetzt der Server es später, fragt OciDeck erneut.',
+  'Vertrouwen': 'Vertrauen',
+  'Certificaat bekijken': 'Zertifikat ansehen',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Für die Sprache dieser Präsentation fehlen die Krankheitsbezeichnungen. Religion, politische Meinung und Gewerkschaftsbegriffe werden erkannt, und Prüfziffernmuster (Steuer-ID, IBAN, Pass) funktionieren immer — aber verlassen Sie sich nicht darauf, dass eine Diagnose gefunden wird.',
   'niet getest': 'nicht getestet',

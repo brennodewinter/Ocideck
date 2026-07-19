@@ -48,6 +48,14 @@ class S3Bucket {
   /// bij WebDAV, want een MinIO op het eigen netwerk is het normale geval.
   final bool trustedInternal;
 
+  /// SHA-256 van het certificaat dat de gebruiker uitdrukkelijk heeft
+  /// vertrouwd, of leeg wanneer alleen de normale keten van erkende uitgevers
+  /// telt. Zie [NetGuard.pinnedCertCheck].
+  ///
+  /// Bewust een vingerafdruk en geen vlag als "accepteer zelfondertekend": dat
+  /// laatste zou élk certificaat toelaten, ook dat van een aanvaller.
+  final String pinnedCertSha256;
+
   const S3Bucket({
     required this.endpoint,
     required this.bucket,
@@ -56,6 +64,7 @@ class S3Bucket {
     this.rootPath = '',
     this.addressingStyle = S3AddressingStyle.virtualHosted,
     this.trustedInternal = false,
+    this.pinnedCertSha256 = '',
   });
 
   bool get isConfigured =>
@@ -171,6 +180,7 @@ class S3Bucket {
     String? rootPath,
     S3AddressingStyle? addressingStyle,
     bool? trustedInternal,
+    String? pinnedCertSha256,
   }) => S3Bucket(
     endpoint: endpoint ?? this.endpoint,
     region: region ?? this.region,
@@ -179,6 +189,7 @@ class S3Bucket {
     rootPath: rootPath ?? this.rootPath,
     addressingStyle: addressingStyle ?? this.addressingStyle,
     trustedInternal: trustedInternal ?? this.trustedInternal,
+    pinnedCertSha256: pinnedCertSha256 ?? this.pinnedCertSha256,
   );
 
   Map<String, Object?> toJson() => {
@@ -189,6 +200,7 @@ class S3Bucket {
     'rootPath': rootPath,
     'addressingStyle': addressingStyle.name,
     'trustedInternal': trustedInternal,
+    if (pinnedCertSha256.isNotEmpty) 'pinnedCertSha256': pinnedCertSha256,
   };
 
   factory S3Bucket.fromJson(Map<String, Object?> json) => S3Bucket(
@@ -204,6 +216,7 @@ class S3Bucket {
       orElse: () => S3AddressingStyle.virtualHosted,
     ),
     trustedInternal: (json['trustedInternal'] as bool?) ?? false,
+    pinnedCertSha256: (json['pinnedCertSha256'] as String?) ?? '',
   );
 
   @override

@@ -145,64 +145,7 @@ extension _SettingsWebdav on _SettingsDialogState {
             form.testMessage = null;
           }),
         ),
-        const SizedBox(height: 12),
-        Row(
-          children: [
-            ElevatedButton.icon(
-              onPressed: form.testing
-                  ? null
-                  : () => _testWebdavConnection(form),
-              icon: form.testing
-                  ? const SizedBox(
-                      width: 16,
-                      height: 16,
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    )
-                  : const Icon(Icons.wifi_tethering, size: 16),
-              label: Text(l10n.d('Verbinding testen')),
-            ),
-            const SizedBox(width: 12),
-            if (form.testOk == true)
-              Row(
-                children: [
-                  const Icon(
-                    Icons.check_circle,
-                    color: AppTheme.teal,
-                    size: 18,
-                  ),
-                  const SizedBox(width: 6),
-                  Text(
-                    l10n.d('Verbinding gelukt'),
-                    style: const TextStyle(fontSize: 12, color: AppTheme.teal),
-                  ),
-                ],
-              ),
-          ],
-        ),
-        if (form.testOk == false && testMsg != null)
-          Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Icon(
-                  Icons.error_outline,
-                  color: AppTheme.danger600,
-                  size: 18,
-                ),
-                const SizedBox(width: 6),
-                Expanded(
-                  child: Text(
-                    testMsg,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: AppTheme.danger600,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+        _webdavTestSection(l10n, form, testMsg),
         const SizedBox(height: 8),
         Text(
           l10n.d('Wijzigingen worden bewaard wanneer je op Opslaan klikt.'),
@@ -280,6 +223,90 @@ extension _SettingsWebdav on _SettingsDialogState {
     });
   }
 
+  /// De verbindingstest: de knop, de uitslag, en — als het op het certificaat
+  /// strandde — de weg om dat te bekijken.
+  Widget _webdavTestSection(
+    AppLocalizations l10n,
+    WebdavForm form,
+    String? testMsg,
+  ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 12),
+        Row(
+          children: [
+            ElevatedButton.icon(
+              onPressed: form.testing
+                  ? null
+                  : () => _testWebdavConnection(form),
+              icon: form.testing
+                  ? const SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  : const Icon(Icons.wifi_tethering, size: 16),
+              label: Text(l10n.d('Verbinding testen')),
+            ),
+            const SizedBox(width: 12),
+            if (form.testOk == true)
+              Row(
+                children: [
+                  const Icon(
+                    Icons.check_circle,
+                    color: AppTheme.teal,
+                    size: 18,
+                  ),
+                  const SizedBox(width: 6),
+                  Text(
+                    l10n.d('Verbinding gelukt'),
+                    style: const TextStyle(fontSize: 12, color: AppTheme.teal),
+                  ),
+                ],
+              ),
+          ],
+        ),
+        if (form.testCertRejected)
+          Padding(
+            padding: const EdgeInsets.only(top: 6),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton.icon(
+                onPressed: () => _trustCertificate(form),
+                icon: const Icon(Icons.verified_user_outlined, size: 16),
+                label: Text(l10n.d('Certificaat bekijken')),
+              ),
+            ),
+          ),
+        if (form.testOk == false && testMsg != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Icon(
+                  Icons.error_outline,
+                  color: AppTheme.danger600,
+                  size: 18,
+                ),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: Text(
+                    testMsg,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: AppTheme.danger600,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+      ],
+    );
+  }
+
   Future<void> _testWebdavConnection(WebdavForm form) async {
     final l10n = context.l10n;
     final server = form.server;
@@ -300,10 +327,12 @@ extension _SettingsWebdav on _SettingsDialogState {
       password: form.password.field.text,
     );
     String? error;
+    var certRejected = false;
     try {
       await service.probe();
     } on WebdavException catch (e) {
       error = _webdavErrorText(l10n, e.kind);
+      certRejected = e.kind == WebdavError.tls;
     } catch (e, st) {
       logError('SettingsDialog: WebDAV-verbindingstest', e, st);
       error = l10n.d('Verbinding mislukt');
@@ -313,7 +342,45 @@ extension _SettingsWebdav on _SettingsDialogState {
       form.testing = false;
       form.testOk = error == null;
       form.testMessage = error;
+      form.testCertRejected = certRejected;
     });
+  }
+
+  /// Haal het certificaat op, laat het zien en pin het als de gebruiker het
+  /// vertrouwt.
+  ///
+  /// Bewust een aparte handeling na een mislukte test, en geen automatische
+  /// vraag: vertrouwen is een besluit, en een dialoog die ongevraagd opduikt
+  /// midden in het invullen wordt weggeklikt in plaats van gelezen.
+  Future<void> _trustCertificate(WebdavForm form) async {
+    final server = form.server;
+    final origin = server.origin;
+    if (origin == null) return;
+    final resolved = await NetGuard.resolveConfigured(
+      server.host,
+      allowPrivate: server.trustedInternal,
+    );
+    if (!resolved.isOk || !mounted) return;
+    final cert = await NetGuard.peekCertificate(
+      resolved.addresses!.first,
+      origin,
+    );
+    if (cert == null || !mounted) return;
+    final fingerprint = await CertificateTrustDialog.show(
+      context,
+      certificate: cert,
+      host: server.host,
+    );
+    if (fingerprint == null || !mounted) return;
+    _rebuild(() {
+      form.pinnedCertSha256 = fingerprint;
+      form.testCertRejected = false;
+      form.testOk = null;
+      form.testMessage = null;
+    });
+    // Meteen opnieuw proberen: de gebruiker wil weten of het hiermee lukt,
+    // niet nóg een knop indrukken.
+    await _testWebdavConnection(form);
   }
 
   String _webdavErrorText(AppLocalizations l10n, WebdavError kind) {

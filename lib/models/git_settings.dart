@@ -37,6 +37,14 @@ class GitRepoConfig {
   /// server is; pas dán mag een privé/LAN-host de SSRF-blokkade passeren.
   final bool trustedInternal;
 
+  /// SHA-256 van het certificaat dat de gebruiker uitdrukkelijk heeft
+  /// vertrouwd, of leeg wanneer alleen de normale keten van erkende uitgevers
+  /// telt. Zie [NetGuard.pinnedCertCheck].
+  ///
+  /// Bewust een vingerafdruk en geen vlag als "accepteer zelfondertekend": dat
+  /// laatste zou élk certificaat toelaten, ook dat van een aanvaller.
+  final String pinnedCertSha256;
+
   const GitRepoConfig({
     required this.baseUrl,
     required this.owner,
@@ -44,6 +52,7 @@ class GitRepoConfig {
     this.provider = GitProvider.gitea,
     this.defaultBranch = 'main',
     this.trustedInternal = false,
+    this.pinnedCertSha256 = '',
   });
 
   bool get isConfigured =>
@@ -92,6 +101,7 @@ class GitRepoConfig {
     GitProvider? provider,
     String? defaultBranch,
     bool? trustedInternal,
+    String? pinnedCertSha256,
   }) {
     return GitRepoConfig(
       baseUrl: baseUrl ?? this.baseUrl,
@@ -100,6 +110,7 @@ class GitRepoConfig {
       provider: provider ?? this.provider,
       defaultBranch: defaultBranch ?? this.defaultBranch,
       trustedInternal: trustedInternal ?? this.trustedInternal,
+      pinnedCertSha256: pinnedCertSha256 ?? this.pinnedCertSha256,
     );
   }
 
@@ -110,6 +121,7 @@ class GitRepoConfig {
     'provider': provider.name,
     'defaultBranch': defaultBranch,
     'trustedInternal': trustedInternal,
+    if (pinnedCertSha256.isNotEmpty) 'pinnedCertSha256': pinnedCertSha256,
   };
 
   factory GitRepoConfig.fromJson(Map<String, Object?> json) {
@@ -130,6 +142,7 @@ class GitRepoConfig {
           ? (json['defaultBranch'] as String).trim()
           : 'main',
       trustedInternal: (json['trustedInternal'] as bool?) ?? false,
+      pinnedCertSha256: (json['pinnedCertSha256'] as String?) ?? '',
     );
   }
 
@@ -141,7 +154,8 @@ class GitRepoConfig {
       other.repo.trim() == repo.trim() &&
       other.provider == provider &&
       other.defaultBranch == defaultBranch &&
-      other.trustedInternal == trustedInternal;
+      other.trustedInternal == trustedInternal &&
+      other.pinnedCertSha256 == pinnedCertSha256;
 
   @override
   int get hashCode => Object.hash(
@@ -151,6 +165,7 @@ class GitRepoConfig {
     provider,
     defaultBranch,
     trustedInternal,
+    pinnedCertSha256,
   );
 }
 

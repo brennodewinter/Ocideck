@@ -741,6 +741,19 @@ const _dutchSourceAddIt = {
       'codice di sicurezza della carta (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
       'dati nelle note del relatore — invisibili sulla diapositiva, ma esportati',
+  'Certificaat vertrouwen?': 'Considerare attendibile questo certificato?',
+  'Het certificaat van deze server is niet ondertekend door een erkende uitgever. Dat is gewoon bij een zelf gehoste server, maar het is ook hoe een afgeluisterde verbinding eruitziet.':
+      'Il certificato di questo server non è firmato da un\'autorità riconosciuta. È normale per un server self-hosted, ma è anche l\'aspetto di una connessione intercettata.',
+  'Vergelijk de vingerafdruk hieronder met wat je server zelf toont. Komen ze overeen, dan praat je met de juiste machine.':
+      'Confronta l\'impronta qui sotto con quella mostrata dal tuo server. Se coincidono, stai parlando con la macchina giusta.',
+  'Uitgegeven aan': 'Rilasciato a',
+  'Uitgegeven door': 'Rilasciato da',
+  'Geldig tot': 'Valido fino al',
+  'Vingerafdruk (SHA-256)': 'Impronta (SHA-256)',
+  'Alleen dit ene certificaat wordt vertrouwd. Vervangt de server het later, dan vraagt OciDeck het opnieuw.':
+      'Viene considerato attendibile solo questo certificato. Se il server lo sostituirà, OciDeck lo chiederà di nuovo.',
+  'Vertrouwen': 'Considera attendibile',
+  'Certificaat bekijken': 'Visualizza certificato',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Per la lingua di questa presentazione mancano i nomi di malattie e patologie. Religione, opinione politica e termini sindacali vengono riconosciuti, e i controlli con cifra di controllo (codice fiscale, IBAN, passaporto) funzionano sempre — ma non contare sul rilevamento di una diagnosi.',
   'niet getest': 'non testata',

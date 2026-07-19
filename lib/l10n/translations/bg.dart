@@ -1810,6 +1810,19 @@ const _dutchSourceAddBg = <String, String>{
   'beveiligingscode van een creditcard': 'код за сигурност на картата (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
       'данни в бележките на докладчика — невидими на слайда, но влизат в експорта',
+  'Certificaat vertrouwen?': 'Доверяване на този сертификат?',
+  'Het certificaat van deze server is niet ondertekend door een erkende uitgever. Dat is gewoon bij een zelf gehoste server, maar het is ook hoe een afgeluisterde verbinding eruitziet.':
+      'Сертификатът на този сървър не е подписан от признат издател. Това е нормално за собствен сървър, но така изглежда и прихваната връзка.',
+  'Vergelijk de vingerafdruk hieronder met wat je server zelf toont. Komen ze overeen, dan praat je met de juiste machine.':
+      'Сравнете отпечатъка по-долу с този, който показва самият ви сървър. Ако съвпадат, говорите с правилната машина.',
+  'Uitgegeven aan': 'Издаден на',
+  'Uitgegeven door': 'Издаден от',
+  'Geldig tot': 'Валиден до',
+  'Vingerafdruk (SHA-256)': 'Отпечатък (SHA-256)',
+  'Alleen dit ene certificaat wordt vertrouwd. Vervangt de server het later, dan vraagt OciDeck het opnieuw.':
+      'Доверява се само на този сертификат. Ако сървърът го смени по-късно, OciDeck ще попита отново.',
+  'Vertrouwen': 'Доверяване',
+  'Certificaat bekijken': 'Преглед на сертификата',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'За езика на тази презентация липсват имената на заболявания. Религия, политически убеждения и синдикални термини се разпознават, а шаблоните с контролна цифра (ЕГН, IBAN, паспорт) работят винаги — но не разчитайте да бъде открита диагноза.',
   'niet getest': 'не е тествано',

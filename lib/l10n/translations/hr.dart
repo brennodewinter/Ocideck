@@ -1794,6 +1794,19 @@ const _dutchSourceAddHr = <String, String>{
   'beveiligingscode van een creditcard': 'sigurnosni kod kartice (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
       'podaci u bilješkama izlagača — nevidljivi na slajdu, ali su u izvozu',
+  'Certificaat vertrouwen?': 'Vjerovati ovom certifikatu?',
+  'Het certificaat van deze server is niet ondertekend door een erkende uitgever. Dat is gewoon bij een zelf gehoste server, maar het is ook hoe een afgeluisterde verbinding eruitziet.':
+      'Certifikat ovog poslužitelja nije potpisan od priznatog izdavatelja. To je uobičajeno kod samostalno hostanog poslužitelja, ali tako izgleda i presretnuta veza.',
+  'Vergelijk de vingerafdruk hieronder met wat je server zelf toont. Komen ze overeen, dan praat je met de juiste machine.':
+      'Usporedite otisak ispod s onim što prikazuje vaš poslužitelj. Ako se podudaraju, razgovarate s pravim strojem.',
+  'Uitgegeven aan': 'Izdano za',
+  'Uitgegeven door': 'Izdao',
+  'Geldig tot': 'Vrijedi do',
+  'Vingerafdruk (SHA-256)': 'Otisak (SHA-256)',
+  'Alleen dit ene certificaat wordt vertrouwd. Vervangt de server het later, dan vraagt OciDeck het opnieuw.':
+      'Pouzdanim se smatra samo ovaj certifikat. Ako ga poslužitelj kasnije zamijeni, OciDeck će pitati ponovno.',
+  'Vertrouwen': 'Vjeruj',
+  'Certificaat bekijken': 'Prikaži certifikat',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Za jezik ove prezentacije nedostaju nazivi bolesti. Vjera, političko uvjerenje i sindikalni pojmovi se prepoznaju, a uzorci s kontrolnom znamenkom (OIB, IBAN, putovnica) uvijek rade — ali ne računajte na to da će dijagnoza biti pronađena.',
   'niet getest': 'nije testirano',

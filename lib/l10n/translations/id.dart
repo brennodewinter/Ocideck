@@ -1787,6 +1787,19 @@ const _dutchSourceAddId = <String, String>{
   'beveiligingscode van een creditcard': 'kode keamanan kartu (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
       'data di catatan pembicara — tak terlihat di slide, tetapi ikut diekspor',
+  'Certificaat vertrouwen?': 'Percayai sertifikat ini?',
+  'Het certificaat van deze server is niet ondertekend door een erkende uitgever. Dat is gewoon bij een zelf gehoste server, maar het is ook hoe een afgeluisterde verbinding eruitziet.':
+      'Sertifikat server ini tidak ditandatangani oleh penerbit yang diakui. Itu wajar untuk server yang di-host sendiri, tetapi begitu pula tampilan koneksi yang disadap.',
+  'Vergelijk de vingerafdruk hieronder met wat je server zelf toont. Komen ze overeen, dan praat je met de juiste machine.':
+      'Bandingkan sidik jari di bawah dengan yang ditampilkan server Anda sendiri. Jika cocok, Anda berbicara dengan mesin yang benar.',
+  'Uitgegeven aan': 'Diterbitkan untuk',
+  'Uitgegeven door': 'Diterbitkan oleh',
+  'Geldig tot': 'Berlaku hingga',
+  'Vingerafdruk (SHA-256)': 'Sidik jari (SHA-256)',
+  'Alleen dit ene certificaat wordt vertrouwd. Vervangt de server het later, dan vraagt OciDeck het opnieuw.':
+      'Hanya sertifikat ini yang dipercaya. Jika server menggantinya nanti, OciDeck akan bertanya lagi.',
+  'Vertrouwen': 'Percayai',
+  'Certificaat bekijken': 'Lihat sertifikat',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Nama penyakit tidak tersedia untuk bahasa dek ini. Agama, pandangan politik, dan istilah serikat pekerja dikenali, dan pola dengan digit periksa (NIK, IBAN, paspor) selalu bekerja — tetapi jangan mengandalkan diagnosis ditemukan.',
   'niet getest': 'belum diuji',

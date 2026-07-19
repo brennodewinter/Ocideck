@@ -1799,6 +1799,19 @@ const _dutchSourceAddPl = <String, String>{
   'beveiligingscode van een creditcard': 'kod bezpieczeństwa karty (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
       'dane w notatkach prelegenta — niewidoczne na slajdzie, ale eksportowane',
+  'Certificaat vertrouwen?': 'Zaufać temu certyfikatowi?',
+  'Het certificaat van deze server is niet ondertekend door een erkende uitgever. Dat is gewoon bij een zelf gehoste server, maar het is ook hoe een afgeluisterde verbinding eruitziet.':
+      'Certyfikat tego serwera nie jest podpisany przez uznanego wystawcę. To normalne dla serwera własnego, ale tak samo wygląda przechwycone połączenie.',
+  'Vergelijk de vingerafdruk hieronder met wat je server zelf toont. Komen ze overeen, dan praat je met de juiste machine.':
+      'Porównaj odcisk poniżej z tym, co pokazuje twój serwer. Jeśli są zgodne, rozmawiasz z właściwą maszyną.',
+  'Uitgegeven aan': 'Wystawiony dla',
+  'Uitgegeven door': 'Wystawiony przez',
+  'Geldig tot': 'Ważny do',
+  'Vingerafdruk (SHA-256)': 'Odcisk (SHA-256)',
+  'Alleen dit ene certificaat wordt vertrouwd. Vervangt de server het later, dan vraagt OciDeck het opnieuw.':
+      'Zaufanie dotyczy tylko tego jednego certyfikatu. Jeśli serwer go później wymieni, OciDeck zapyta ponownie.',
+  'Vertrouwen': 'Zaufaj',
+  'Certificaat bekijken': 'Pokaż certyfikat',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Dla języka tej prezentacji brakuje nazw chorób. Religia, poglądy polityczne i terminy związkowe są rozpoznawane, a wzorce z cyfrą kontrolną (PESEL, IBAN, paszport) działają zawsze — ale nie licz na wykrycie diagnozy.',
   'niet getest': 'nieprzetestowane',

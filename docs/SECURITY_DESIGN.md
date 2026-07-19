@@ -115,6 +115,40 @@ SSRF-pinned transports.
   the first bytes off the wire: TLS starts with a `0x16` handshake record,
   plaintext HTTP starts with the method name. The service tests could not catch
   it, because they all speak `http://127.0.0.1` with `trustedInternal`.
+- **Self-signed certificates: pinned, never blanket-accepted.** A self-hosted
+  server on your own network often has no certificate from a recognised issuer
+  — that is the very population `trustedInternal` exists for. Refusing them
+  outright shuts that population out; accepting anything self-signed would
+  throw the protection away, because a man-in-the-middle's certificate is
+  self-signed too.
+
+  So the exception is per-certificate: `pinnedCertSha256` on the connection's
+  config holds the SHA-256 of the DER form, and `NetGuard.pinnedCertCheck`
+  accepts that one certificate and nothing else. An empty pin yields a `null`
+  callback, which means *no exception at all* — the normal issuer chain
+  applies.
+
+  The comparison is on the fingerprint alone, not on name, issuer or validity:
+  an attacker chooses all three freely. Only the matching private key can
+  produce a matching fingerprint.
+
+  The user confirms it in `CertificateTrustDialog`, which shows the fingerprint
+  in full and says what to compare it against — the whole point is that the
+  user checks it against what their own server reports. Nothing is confirmed
+  automatically, and the dialog only appears when the user asks for it after a
+  failed connection test.
+
+  When the server later presents a different certificate, the pin no longer
+  matches and the connection fails until the user confirms the new one. That is
+  deliberate: a renewal and an attacker are indistinguishable from here, so the
+  decision belongs to the person who knows the server.
+
+  `test/cert_pinning_test.dart` runs against a real TLS server with a real
+  self-signed certificate (generated per run with `openssl`; it is not in the
+  repo, and the suite reports itself skipped when `openssl` is absent). It
+  asserts that an unpinned self-signed server is refused, that the matching pin
+  goes through, that a *different* pin does not, and that a pinned connection
+  still validates the hostname.
 - **Per-caller byte caps** (see the Performance guide) reject oversized responses
   both by `Content-Length` pre-check and by streaming cap.
 

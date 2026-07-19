@@ -1787,6 +1787,19 @@ const _dutchSourceAddFi = <String, String>{
   'beveiligingscode van een creditcard': 'kortin turvakoodi (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
       'tietoja puhujan muistiinpanoissa — näkymättömiä dialla, mutta mukana viennissä',
+  'Certificaat vertrouwen?': 'Luotetaanko tähän varmenteeseen?',
+  'Het certificaat van deze server is niet ondertekend door een erkende uitgever. Dat is gewoon bij een zelf gehoste server, maar het is ook hoe een afgeluisterde verbinding eruitziet.':
+      'Tämän palvelimen varmennetta ei ole allekirjoittanut tunnustettu myöntäjä. Se on tavallista itse ylläpidetyllä palvelimella, mutta myös salakuunneltu yhteys näyttää tältä.',
+  'Vergelijk de vingerafdruk hieronder met wat je server zelf toont. Komen ze overeen, dan praat je met de juiste machine.':
+      'Vertaa alla olevaa sormenjälkeä siihen, minkä palvelimesi itse näyttää. Jos ne täsmäävät, puhut oikean koneen kanssa.',
+  'Uitgegeven aan': 'Myönnetty',
+  'Uitgegeven door': 'Myöntäjä',
+  'Geldig tot': 'Voimassa',
+  'Vingerafdruk (SHA-256)': 'Sormenjälki (SHA-256)',
+  'Alleen dit ene certificaat wordt vertrouwd. Vervangt de server het later, dan vraagt OciDeck het opnieuw.':
+      'Vain tähän yhteen varmenteeseen luotetaan. Jos palvelin vaihtaa sen myöhemmin, OciDeck kysyy uudelleen.',
+  'Vertrouwen': 'Luota',
+  'Certificaat bekijken': 'Näytä varmenne',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Tämän esityksen kielelle puuttuvat sairauksien nimet. Uskonto, poliittinen mielipide ja ammattiyhdistystermit tunnistetaan, ja tarkistusnumerolliset kuviot (hetu, IBAN, passi) toimivat aina — mutta älä luota siihen, että diagnoosi löytyy.',
   'niet getest': 'ei testattu',

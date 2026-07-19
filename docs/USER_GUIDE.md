@@ -292,6 +292,16 @@ Nextcloud is the most common one, but any WebDAV server works.
 - **Self-hosted / home server**: if the server runs on a private or LAN
   address, tick **Trusted internal server** — otherwise the connection is
   refused (the same safeguard that stops a deck from reaching internal hosts).
+- **A self-signed certificate** is common on a self-hosted server. If the
+  connection test fails on the certificate, use **View certificate**: OciDeck
+  shows you who issued it, until when it is valid, and its SHA-256 fingerprint.
+  Compare that fingerprint with what your own server reports — if they match,
+  you are talking to the right machine — and then choose **Trust**.
+
+  Only that one certificate is trusted, not "anything self-signed": an
+  eavesdropper's certificate is self-signed too. When the server replaces its
+  certificate later, OciDeck asks again, because from the app's side a renewal
+  and an attacker look identical.
 - **Open** via the welcome screen (*Open from WebDAV*) or the `…` menu:
   browse the folder and pick an `.ocideck` package or a Marp `.md`. The file is
   downloaded, checked by the same safety scan as any other deck, and opened in a

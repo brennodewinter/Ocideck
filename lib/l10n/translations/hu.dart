@@ -1791,6 +1791,19 @@ const _dutchSourceAddHu = <String, String>{
   'beveiligingscode van een creditcard': 'kártya biztonsági kódja (CVV)',
   'gegevens in de sprekersnotities — onzichtbaar op de slide, wél in de export':
       'adatok az előadói jegyzetekben — a dián nem látszanak, az exportban igen',
+  'Certificaat vertrouwen?': 'Megbízol ebben a tanúsítványban?',
+  'Het certificaat van deze server is niet ondertekend door een erkende uitgever. Dat is gewoon bij een zelf gehoste server, maar het is ook hoe een afgeluisterde verbinding eruitziet.':
+      'Ennek a kiszolgálónak a tanúsítványát nem elismert kibocsátó írta alá. Saját üzemeltetésű kiszolgálónál ez normális, de egy lehallgatott kapcsolat is így néz ki.',
+  'Vergelijk de vingerafdruk hieronder met wat je server zelf toont. Komen ze overeen, dan praat je met de juiste machine.':
+      'Hasonlítsd össze az alábbi ujjlenyomatot azzal, amit a kiszolgálód mutat. Ha egyeznek, a megfelelő géppel beszélsz.',
+  'Uitgegeven aan': 'Kiállítva neki',
+  'Uitgegeven door': 'Kibocsátó',
+  'Geldig tot': 'Érvényes eddig',
+  'Vingerafdruk (SHA-256)': 'Ujjlenyomat (SHA-256)',
+  'Alleen dit ene certificaat wordt vertrouwd. Vervangt de server het later, dan vraagt OciDeck het opnieuw.':
+      'Csak ez az egy tanúsítvány megbízható. Ha a kiszolgáló később lecseréli, az OciDeck újra rákérdez.',
+  'Vertrouwen': 'Megbízom',
+  'Certificaat bekijken': 'Tanúsítvány megtekintése',
   'Voor de taal van dit deck ontbreken de ziekte- en aandoeningsnamen. Religie, politieke overtuiging en vakbondstermen worden wel herkend, en controlegetallen (BSN, IBAN, paspoort) werken altijd — maar reken er niet op dat een diagnose gevonden wordt.':
       'Ennek a bemutatónak a nyelvéhez hiányoznak a betegségnevek. A vallás, a politikai vélemény és a szakszervezeti kifejezések felismerhetők, és az ellenőrző számjegyes minták (adóazonosító, IBAN, útlevél) mindig működnek — de ne számítson arra, hogy egy diagnózist megtalál.',
   'niet getest': 'nincs tesztelve',
