@@ -95,10 +95,49 @@ so the app's `connect-src 'self'` covers it.
 
 ## 5. Web build limitations to communicate
 
-- No native filesystem access — open/save go through the browser; large decks
-  live in tab memory.
-- More memory-constrained than desktop; very large media can destabilise a tab.
-- Cloud AI is **blocked on web** by design (see [SECURITY_DESIGN.md](SECURITY_DESIGN.md) §7).
+The web build is not the desktop app in a browser. A browser has no filesystem,
+no subprocesses and no FFI, so a set of features is absent there — not disabled
+by a setting the user can find, but simply not present. Tell your users before
+they go looking.
+
+The single source of truth for the first block is
+`lib/platform/platform_features.dart`; the rest are `kIsWeb` branches in the
+services named below.
+
+| Feature | Web | Why |
+|---|---|---|
+| Local project folders, sidecar files | ✗ | No filesystem. Open/save go through the browser; decks live in tab memory. |
+| WebDAV / Nextcloud as a deck source | ✗ | The client is `dart:io` with its own SSRF pinning, and from a browser it would need CORS agreed with the server admin. |
+| Git as a deck source | ✗ | Needs a native `git` subprocess. |
+| Second-screen presenter view | ✗ | Needs native windowing. |
+| Crash recovery / autosave snapshots | ✗ | No app-support directory, so every snapshot call is a silent no-op. **Nothing is recovered after a browser crash.** |
+| Face detection in slide images | ✗ | The detector is a native library over FFI. See below — this one has a privacy consequence. |
+| Local CVE database (offline lookup) | ✗ | Needs a multi-gigabyte on-disk index. The online CVE lookup still works. |
+| Image caption sidecars | ✗ | Sidecars are files next to the image; there are none. |
+| "Missing media" slide-quality check | ✗ | It resolves paths on disk. |
+| Cloud AI | ✗ | Blocked by design, not by platform — see [SECURITY_DESIGN.md](SECURITY_DESIGN.md) §7. |
+| URL import of decks | ✓ | Works on web through the fetch-proxy, under the same security gate as desktop (§4). |
+| Export (PDF, PPTX, HTML), sealing, encrypted packages | ✓ | Delivered as browser downloads. |
+
+Also: the web build is more memory-constrained than desktop, and very large
+media can destabilise a tab.
+
+### The one to say out loud: face detection
+
+The privacy check has two halves — it scans text, and it looks at images for
+recognisable faces. On web **only the text half runs**.
+
+This matters more than a missing feature normally would, because the failure is
+silent in the worst possible direction: a deck that a desktop user would be
+warned about ("at least 2 recognisable faces on slide 4") produces no image
+warning at all in a browser. The app itself is honest about this — the panel
+listing which checks ran leaves the image check out rather than reporting zero
+findings, precisely so "we found nothing" is never confused with "nobody
+looked". Make sure the people using your deployment know which of the two they
+are seeing.
+
+If your users handle decks containing photographs of people, this is a reason
+to give them the desktop build.
 
 ## 6. Compliance artefact
 
@@ -114,3 +153,5 @@ the CRA inventory that matches the exact build you shipped. See [SBOM.md](SBOM.m
 - [ ] `Referrer-Policy`, `X-Content-Type-Options` headers set
 - [ ] fetch-proxy deployed on the same origin **only if** web URL import is needed
 - [ ] `/sbom/` reachable
+- [ ] Users told what the web build cannot do (§5) — the missing image privacy
+      check in particular, if they present photographs of people

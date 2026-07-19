@@ -791,6 +791,14 @@ This is the heaviest check OciDeck runs, so it has its own switch under
 *Settings → Security*, next to the main one. Turning it off leaves the text check
 running.
 
+**In a browser this check does not run at all.** It needs a native library that
+the web platform does not have, so the web version of OciDeck checks text only.
+The switch is not the reason and turning it on changes nothing there. Rather than
+quietly reporting zero faces, the app leaves the image check out of the list of
+checks it performed — but you have to look at that list to see it. If you work
+with photographs of people, use a desktop build for this. See "What the browser
+version cannot do" below.
+
 Found something you want gone? Wrap it in double square brackets — see below.
 
 ## What to do with a finding
@@ -1703,6 +1711,42 @@ Issues are reported with a **line number**, a **severity**, and a short message.
 
 Implementation: `lib/services/markdown_validator.dart` (unit tests in
 `test/markdown_validator_test.dart`).
+
+## What the browser version cannot do
+
+OciDeck also runs entirely inside a browser tab, with no server behind it. That
+version is not the desktop app on a web page: a browser has no filesystem, no
+subprocesses and no native libraries, so some things are simply not there. They
+are not switched off somewhere — there is no setting to find.
+
+| What | In the browser |
+|---|---|
+| Local project folders and sidecar files | Absent. Opening and saving go through the browser, and your deck lives in the tab. |
+| WebDAV / Nextcloud as a deck source | Absent. |
+| A git repository as a deck source | Absent — it needs the real `git` program. |
+| The second-screen presenter view | Absent — it needs a real second window. |
+| **Recovery after a crash** | Absent. Nothing is autosaved, so a browser crash loses unsaved work. |
+| **The image half of the privacy check** | Absent. See below. |
+| The offline CVE database | Absent; looking CVEs up online still works. |
+| Image caption sidecars | Absent — they are files beside the image. |
+| The "missing media" warning | Absent — it looks on disk. |
+| Cloud AI | Blocked on purpose, not by the browser. |
+| Importing a deck from a URL | **Works**, through the same security gate as on desktop. |
+| Exporting, sealing, encrypted packages | **Works**, delivered as downloads. |
+
+**The privacy check is the one to be careful with.** It has two halves — it reads
+your text, and it looks at your images for recognisable faces. In a browser only
+the text half runs. The same deck that warns a desktop user about a face on slide
+4 gives no image warning at all in a browser.
+
+OciDeck will not pretend otherwise: the list of checks that ran leaves the image
+check out rather than showing it as passed, because "we found nothing" and
+"nobody looked" must never look the same. But you have to read that list to
+notice. If your slides contain photographs of people, check them on a desktop
+build.
+
+Everything else — all slide types, the editor, TLP, redaction, exports, theming
+— works the same in both.
 
 ## Theming and language
 
