@@ -740,6 +740,8 @@ const _dutchSourceAddIt = {
   'Branch (optioneel)': 'Ramo (facoltativo)',
   'let op: de standaardbranch is': 'attenzione: il ramo predefinito è',
   'jij werkt op': 'tu stai lavorando su',
+  'werkgeversnummer (EIN)': 'numero di datore di lavoro (EIN)',
+  'laatste vier cijfers van een SSN': 'ultime quattro cifre di un SSN',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'data di nascita, CAP e sesso insieme: quei tre di solito individuano una sola persona, anche senza nome',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

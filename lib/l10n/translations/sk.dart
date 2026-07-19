@@ -1794,6 +1794,8 @@ const _dutchSourceAddSk = <String, String>{
   'Branch (optioneel)': 'Vetva (voliteľné)',
   'let op: de standaardbranch is': 'pozor: predvolená vetva je',
   'jij werkt op': 'ty pracuješ na',
+  'werkgeversnummer (EIN)': 'číslo zamestnávateľa (EIN)',
+  'laatste vier cijfers van een SSN': 'posledné štyri číslice SSN',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'dátum narodenia, PSČ a pohlavie spolu — tieto tri zvyčajne označujú jednu osobu, aj bez mena',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

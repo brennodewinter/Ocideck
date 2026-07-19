@@ -744,6 +744,8 @@ const _dutchSourceAddPap = {
   'Branch (optioneel)': 'Branch (opshonal)',
   'let op: de standaardbranch is': 'atenshon: e branch prinsipal ta',
   'jij werkt op': 'bo ta traha riba',
+  'werkgeversnummer (EIN)': 'number di dunadó di trabou (EIN)',
+  'laatste vier cijfers van een SSN': 'último kuater sifra di un SSN',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'fecha di nasementu, kódigo postal i sekso huntu — e tres ei generalmente ta indiká un solo persona, asta sin nòmber',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

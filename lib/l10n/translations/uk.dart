@@ -1805,6 +1805,8 @@ const _dutchSourceAddUk = <String, String>{
   'Branch (optioneel)': 'Гілка (необов\'язково)',
   'let op: de standaardbranch is': 'увага: гілка за замовчуванням —',
   'jij werkt op': 'ви працюєте на',
+  'werkgeversnummer (EIN)': 'номер роботодавця (EIN)',
+  'laatste vier cijfers van een SSN': 'останні чотири цифри SSN',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'дата народження, поштовий індекс і стать разом — ці три зазвичай вказують на одну особу, навіть без імені',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

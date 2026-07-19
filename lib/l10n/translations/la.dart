@@ -1803,6 +1803,8 @@ const _dutchSourceAddLa = <String, String>{
   'Branch (optioneel)': 'Ramus (optativus)',
   'let op: de standaardbranch is': 'cave: ramus praedefinitus est',
   'jij werkt op': 'tu in eo laboras',
+  'werkgeversnummer (EIN)': 'numerus conductoris (EIN)',
+  'laatste vier cijfers van een SSN': 'quattuor ultimae notae SSN',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'dies natalis, numerus postalis et sexus simul — haec tria plerumque unam personam designant, etiam sine nomine',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

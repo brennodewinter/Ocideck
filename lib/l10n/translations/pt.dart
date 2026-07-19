@@ -1817,6 +1817,8 @@ const _dutchSourceAddPt = <String, String>{
   'Branch (optioneel)': 'Ramo (opcional)',
   'let op: de standaardbranch is': 'atenção: o ramo predefinido é',
   'jij werkt op': 'tu trabalhas em',
+  'werkgeversnummer (EIN)': 'número de empregador (EIN)',
+  'laatste vier cijfers van een SSN': 'últimos quatro dígitos de um SSN',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'data de nascimento, código postal e sexo em conjunto — esses três costumam identificar uma só pessoa, mesmo sem nome',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

@@ -1809,6 +1809,8 @@ const _dutchSourceAddMt = <String, String>{
   'Branch (optioneel)': 'Fergħa (mhux obbligatorju)',
   'let op: de standaardbranch is': 'nota: il-fergħa awtomatika hija',
   'jij werkt op': 'inti qed taħdem fuq',
+  'werkgeversnummer (EIN)': 'numru ta\' min iħaddem (EIN)',
+  'laatste vier cijfers van een SSN': 'l-aħħar erba\' ċifri ta\' SSN',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'data tat-twelid, kodiċi postali u sess flimkien — dawn it-tlieta ġeneralment jindikaw persuna waħda, anke mingħajr isem',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

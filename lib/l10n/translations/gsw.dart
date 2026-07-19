@@ -1791,6 +1791,8 @@ const _dutchSourceAddGsw = <String, String>{
   'Branch (optioneel)': 'Branch (optional)',
   'let op: de standaardbranch is': 'Achtig: de Standardbranch isch',
   'jij werkt op': 'du schaffsch uf',
+  'werkgeversnummer (EIN)': 'Arbetgäbernummere (EIN)',
+  'laatste vier cijfers van een SSN': 'letschti vier Ziffere vonere SSN',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'Geburtsdatum, Poschtleitzahl und Gschlächt zäme — die drü zeige meischtens uf ei Person, au ohni Name',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':

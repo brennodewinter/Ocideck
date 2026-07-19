@@ -1824,6 +1824,8 @@ const _dutchSourceAddGa = <String, String>{
   'let op: de standaardbranch is':
       'tabhair faoi deara: is é an brainse réamhshocraithe',
   'jij werkt op': 'tá tú ag obair ar',
+  'werkgeversnummer (EIN)': 'uimhir fostóra (EIN)',
+  'laatste vier cijfers van een SSN': 'ceithre dhigit dheireanacha SSN',
   'geboortedatum, postcode en geslacht samen — die drie wijzen meestal één persoon aan, ook zonder naam':
       'dáta breithe, cód poist agus inscne le chéile — is gnách go gcuireann an triúr sin duine amháin in iúl, fiú gan ainm',
   'Het certificaat van deze server wordt niet vertrouwd. Bij een zelf gehoste server kun je het bekijken en vertrouwen bij Instellingen → Opslag.':
