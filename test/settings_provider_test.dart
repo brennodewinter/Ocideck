@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart' show TlpLevel;
 import 'package:ocideck/models/settings.dart';
@@ -507,6 +509,133 @@ void main() {
       expect(n.state.libraries.length, 1);
       expect(n.state.libraries.single.path, '/legacy/decks');
       expect(n.state.homeDirectory, '/legacy/decks');
+    });
+
+    test('de oude drie sleutels worden één verbindingenlijst', () async {
+      // Wie de app al gebruikte had bibliotheken, hooguit één WebDAV-bron en
+      // hooguit één git-repo, elk onder een eigen prefs-sleutel. Die drie
+      // moeten samen één lijst worden zonder dat er iets verschuift: de
+      // bibliotheken eerst en in hun eigen volgorde, want `libraries.first` was
+      // de thuismap en is nu de bovenste lokale verbinding.
+      SharedPreferences.setMockInitialValues({
+        'libraries': jsonEncode([
+          {'name': 'Privé', 'path': '/home/prive'},
+          {'name': 'Werk', 'path': '/home/werk'},
+        ]),
+        'webdavServer': jsonEncode({
+          'baseUrl': 'https://cloud.voorbeeld.nl',
+          'username': 'brenno',
+        }),
+        'gitRepo': jsonEncode({
+          'baseUrl': 'https://git.voorbeeld.nl',
+          'owner': 'librekat',
+          'repo': 'decks',
+        }),
+      });
+      final n = SettingsNotifier();
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+
+      expect(n.state.connections.map((c) => c.kind).toList(), [
+        StorageConnectionKind.local,
+        StorageConnectionKind.local,
+        StorageConnectionKind.webdav,
+        StorageConnectionKind.git,
+      ]);
+      // De afgeleide getters wijzen naar precies wat er vóór de migratie stond,
+      // zodat de open- en opslaanflows niets merken.
+      expect(n.state.homeDirectory, '/home/prive');
+      expect(n.state.webdavServer?.username, 'brenno');
+      expect(n.state.gitRepo?.slug, 'librekat/decks');
+      // Elke verbinding krijgt een eigen, niet-lege id.
+      final ids = n.state.connections.map((c) => c.id).toSet();
+      expect(ids, hasLength(4));
+      expect(ids.any((id) => id.isEmpty), isFalse);
+    });
+
+    test('een leeggemaakte lijst blijft leeg na herstart', () async {
+      // Zonder deze regel zou de migratie opnieuw aanslaan zodra de gebruiker
+      // alles verwijdert, en kwam zijn opruiming elke start terug.
+      SharedPreferences.setMockInitialValues({
+        'libraries': jsonEncode([
+          {'name': 'Privé', 'path': '/home/prive'},
+        ]),
+      });
+      final n = SettingsNotifier();
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+      expect(n.state.connections, hasLength(1));
+
+      await n.setConnections(const []);
+      final reloaded = SettingsNotifier();
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+      expect(reloaded.state.connections, isEmpty);
+      expect(reloaded.state.libraries, isEmpty);
+    });
+
+    test(
+      'de bovenste bruikbare verbinding van een soort is de standaard',
+      () async {
+        final n = await _loadedNotifier();
+        const eersteServer = WebdavServer(
+          baseUrl: 'https://a.voorbeeld.nl',
+          username: 'brenno',
+        );
+        const tweedeServer = WebdavServer(
+          baseUrl: 'https://b.voorbeeld.nl',
+          username: 'brenno',
+        );
+        // Een half ingevulde verbinding telt niet mee: die staat in de lijst
+        // omdat de gebruiker er nog aan werkt, niet omdat hij dienst kan doen.
+        const halveServer = WebdavServer(baseUrl: '', username: '');
+
+        await n.setConnections([
+          WebdavConnection(id: 'half', name: 'In aanbouw', server: halveServer),
+          WebdavConnection(id: 'a', name: 'Klant A', server: eersteServer),
+          WebdavConnection(id: 'b', name: 'Klant B', server: tweedeServer),
+        ]);
+        expect(n.state.webdavServer?.baseUrl, 'https://a.voorbeeld.nl');
+
+        // Herordenen is hoe de gebruiker een andere server tot standaard maakt —
+        // zonder configuratie weg te gooien.
+        await n.reorderConnections(2, 0);
+        expect(n.state.webdavServer?.baseUrl, 'https://b.voorbeeld.nl');
+        expect(n.state.connections.map((c) => c.id).toList(), [
+          'b',
+          'half',
+          'a',
+        ]);
+      },
+    );
+
+    test('herordenen buiten bereik laat de lijst met rust', () async {
+      final n = await _loadedNotifier();
+      await n.setConnections(const [
+        LocalConnection(id: 'a', name: 'A', path: '/a'),
+        LocalConnection(id: 'b', name: 'B', path: '/b'),
+      ]);
+      await n.reorderConnections(5, 0);
+      await n.reorderConnections(0, 9);
+      await n.reorderConnections(1, 1);
+      expect(n.state.connections.map((c) => c.id).toList(), ['a', 'b']);
+    });
+
+    test('een onleesbare verbinding sloopt de rest niet', () async {
+      // Eén kapotte regel mag niet elke andere bron onbereikbaar maken.
+      SharedPreferences.setMockInitialValues({
+        'storageConnections': jsonEncode([
+          {'id': '', 'kind': 'local', 'config': {}}, // geen id
+          {'id': 'x', 'kind': 'zeppelin', 'config': {}}, // onbekende soort
+          {
+            'id': 'ok',
+            'name': 'Werk',
+            'kind': 'local',
+            'config': {'path': '/home/werk'},
+          },
+        ]),
+      });
+      final n = SettingsNotifier();
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+      expect(n.state.connections.map((c) => c.id).toList(), ['ok']);
+      expect(n.state.libraryPaths, ['/home/werk']);
     });
 
     test('export directory set and clear', () async {
