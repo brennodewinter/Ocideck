@@ -70,9 +70,9 @@ lib/
               # image_reference (.md rewrites), recovery, rasterizer,
               # marp_html, annotation_codec, rehearsal_controller,
               # webdav (Nextcloud source), secret_store (keychain)
-  state/      # Riverpod providers (21 top-level + parts/): deck, editor,
+  state/      # Riverpod providers (13 top-level + parts/): deck, editor,
               # settings, tabs, clipboard, webdav, git, consent, privacy,
-              # sec_module, local_cve, deck_quality, …
+              # info_safety, local_cve, deck_quality, …
   platform/   # conditional-import platform abstraction (io/web halves)
   widgets/    # app shell, panels, dialogs, per-type editors, slides, presenter
   l10n/       # AppLocalizations + translations/<lang>.dart (31 languages)
