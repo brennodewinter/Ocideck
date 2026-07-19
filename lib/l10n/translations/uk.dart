@@ -1799,6 +1799,28 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Openen vanaf WebDAV': 'Відкрити з WebDAV',
+  'Opslaan naar WebDAV': 'Зберегти на WebDAV',
+  'Opgeslagen op WebDAV:': 'Збережено на WebDAV:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Спершу налаштуйте сервер WebDAV у Налаштування → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Вибрати зображення на WebDAV',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Сервер WebDAV не налаштовано. Налаштуйте його в Налаштування → WebDAV.',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV не налаштовано (правильно) — перевірте дані сервера в Налаштування → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Цей сервер не дозволено. Спочатку позначте приватний/LAN-сервер як довірений у Налаштування → WebDAV.',
+  'Servertype': 'Тип сервера',
+  'Nextcloud of ownCloud': 'Nextcloud або ownCloud',
+  'Andere WebDAV-server': 'Інший сервер WebDAV',
+  'WebDAV-bron': 'Джерело WebDAV',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Відкривайте та зберігайте презентації в теці на сервері WebDAV. Пароль зберігається зашифрованим у сховищі ключів, а не разом з іншими налаштуваннями.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Відкривайте та зберігайте презентації в теці на сервері WebDAV.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'Шлях в URL сервера — це корінь WebDAV.',
   'Repareer slide': 'Виправити слайд',
   'Voortzetting van vorige slide': 'Продовження попереднього слайда',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

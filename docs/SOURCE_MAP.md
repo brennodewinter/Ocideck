@@ -51,7 +51,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `slide_quality.dart` — `SlideQualityResult`/`SlideQualityIssue` for accessibility/contrast/density/privacy audits.
 - `timeline.dart` — `TimelineEvent` and `TimelineLayout`/`TimelineReveal` enums for animated timeline slides.
 - `video_source.dart` — `VideoSource` parser for local files, YouTube, Vimeo, and remote video URLs.
-- `webdav_settings.dart` — `WebdavServer`/`WebdavOrigin` for Nextcloud/WebDAV integration configuration.
+- `webdav_settings.dart` — `WebdavServer`/`WebdavOrigin` for WebDAV source configuration (Nextcloud, ownCloud, or any other server).
 
 ## `lib/services/` — business logic & IO
 
@@ -139,7 +139,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `text_measurement.dart` — `measureTextHeight`/`measureTextWidth` for rendered text dimensions.
 - `user_notes_codec.dart` — Serializes per-slide user notes with content fingerprints.
 - `web_asset_store.dart` — In-memory afbeeldingsopslag (`mem:`-paden) voor de webversie; per-pagina levensduur.
-- `webdav_service.dart` — Talks WebDAV (Nextcloud) over a pinned, redirect-free `HttpClient`.
+- `webdav_service.dart` — Talks WebDAV over a pinned, redirect-free `HttpClient`.
 
 ### `lib/services/git/` — Git-repository storage (design: `docs/design/GIT_STORAGE.md`)
 
@@ -269,7 +269,7 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 
 - `ai_actions.dart` — `_MainLayoutAiActions`: the bulk "wipe AI alt-texts" safety action.
 - `command_palette_actions.dart` — `_MainLayoutCommandPalette`: builds and shows the Ctrl/Cmd+K command list (incl. the security-module actions).
-- `shell_actions.dart` — File-IO helpers for deck import/export and Nextcloud integration, plus shared `presentDeck`/`requestCloseTab` helpers.
+- `shell_actions.dart` — File-IO helpers for deck import/export and the WebDAV source, plus shared `presentDeck`/`requestCloseTab` helpers.
 - `shell_actions_git.dart` — The `…`-menu handlers for the git plane: open/save, sync, flush the outbox, history, versions, compare, resolve a merge conflict, open for review, merge the concept, tag a release, and the pool overview. Each one gates and reports; the dialogs themselves live next door.
 - `shell_actions_git_dialogs.dart` — The git dialogs: browse, history, the version list and its compare picker, the version diff, the merge-conflict chooser, save, review, merge and tag.
 - `shell_actions_git_search.dart` — `_GitSearchDialog`: the cross-deck search UI. A button rather than search-as-you-type, since each round reads N files over REST. Picking a hit returns its deck dir to `_searchDecks`, which opens it through the ordinary `_openFromGit` path.
@@ -329,7 +329,7 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
   over the dialog: `parts/settings_dialog_webdav_form.dart`,
   `..._git_form.dart` and `..._ai_form.dart` each hold their controllers, their
   init and their save. Deliberately no shared base class — they differ for real
-  (git has a forge/owner/repo, Nextcloud a subfolder, AI a mode) and forcing one
+  (git has a forge/owner/repo, WebDAV a subfolder, AI a mode) and forcing one
   type yields a base class with holes. Only the part that was literally
   identical is shared: `parts/settings_dialog_secret.dart` (`KeychainSecret`),
   which answers "must this secret be written?" — the two silent failures being a
@@ -341,7 +341,7 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
   settings, so it can be read without holding the rest of the state in mind.
   Storage is one tab: `parts/settings_dialog_storage.dart` carries the libraries
   and the export folder (moved out of Algemeen) plus `StorageModality` — a row
-  per route (disk, Nextcloud, git) with its status, expanding to that route's own
+  per route (disk, WebDAV, git) with its status, expanding to that route's own
   panel. The panels themselves stayed where they were,
   `parts/settings_dialog_webdav.dart` and `parts/settings_dialog_git.dart`, now
   built as `_webdavPanel()`/`_gitPanel()` instead of whole tabs. A fourth route
@@ -358,7 +358,7 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
   into view without any of the tab bodies knowing about search.
 - `slide_finder_dialog.dart` — Stay-open searcher for gathering slides from many presentations.
 - `slide_quality_details_dialog.dart` — Issues grouped by severity with counts and navigation.
-- `webdav_browser_dialog.dart` — Browses WebDAV/Nextcloud folders to pick a deck or images.
+- `webdav_browser_dialog.dart` — Browses WebDAV folders to pick a deck or images.
 
 ### `lib/widgets/editors/` — per-slide-type editors
 

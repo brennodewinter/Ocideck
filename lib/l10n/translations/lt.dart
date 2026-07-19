@@ -1789,6 +1789,28 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Openen vanaf WebDAV': 'Atverti iš WebDAV',
+  'Opslaan naar WebDAV': 'Išsaugoti į WebDAV',
+  'Opgeslagen op WebDAV:': 'Išsaugota į WebDAV:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Pirmiausia nustatykite WebDAV serverį per Nustatymai → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Pasirinkti paveikslėlį WebDAV',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Nenustatytas WebDAV serveris. Nustatykite jį per Nustatymai → WebDAV.',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV nesukonfigūruotas (teisingai) — patikrinkite serverio duomenis skiltyje Nustatymai → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Šis serveris neleidžiamas. Pirmiausia pažymėkite privatų/LAN serverį kaip patikimą skiltyje Nustatymai → WebDAV.',
+  'Servertype': 'Serverio tipas',
+  'Nextcloud of ownCloud': 'Nextcloud arba ownCloud',
+  'Andere WebDAV-server': 'Kitas WebDAV serveris',
+  'WebDAV-bron': 'WebDAV šaltinis',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Atverkite ir išsaugokite pristatymus WebDAV serverio aplanke. Slaptažodis saugomas šifruotas raktinėje, o ne kartu su kitais nustatymais.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Atverkite ir įrašykite pateiktis aplanke WebDAV serveryje.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'Kelias serverio URL adrese yra WebDAV šaknis.',
   'Repareer slide': 'Taisyti skaidrę',
   'Voortzetting van vorige slide': 'Ankstesnės skaidrės tęsinys',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

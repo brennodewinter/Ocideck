@@ -7,7 +7,26 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+- **Elke WebDAV-server kan nu een bron zijn, niet alleen Nextcloud.** Wat als
+  "Nextcloud" in de instellingen stond was altijd al gewone WebDAV: PROPFIND,
+  GET, PUT, MKCOL. Eén ding was Nextcloud-eigen, het pad
+  `/remote.php/dav/files/<gebruiker>`, en dat sloot alle andere servers uit.
+
+  Bij *Instellingen → Opslag → WebDAV* kies je nu het servertype. Bij
+  **Nextcloud of ownCloud** verandert er niets: je vult de server-URL in en het
+  pad wordt afgeleid. Bij **Andere WebDAV-server** valt er niets te raden, dus
+  ís het pad dat je in de server-URL zet de WebDAV-wortel. De app-wachtwoordtip
+  verdwijnt dan, want die voorziening bestaat alleen bij Nextcloud.
+
+  Bestaande bronnen blijven werken zonder dat je iets hoeft te doen; die lezen
+  als Nextcloud, want dat waren ze.
+
 ### Changed
+- **De opslagwijze heet WebDAV in plaats van Nextcloud** — in de lijst met
+  opslagwijzen, in de menu-items (*Openen vanaf WebDAV*, *Opslaan naar WebDAV*)
+  en in de foutmeldingen die naar het instellingenscherm verwijzen. Nextcloud
+  was de naam van één server voor iets dat het protocol beschrijft.
 - **Opslag staat onder één kop in de instellingen.** De bibliotheken en de
   exportmap stonden onder "Algemeen", Nextcloud had een eigen tabblad en git nóg
   een — wie wilde weten waar zijn presentaties konden staan, moest dat op drie
@@ -16,7 +35,7 @@ and the project aims to follow [Semantic Versioning](https://semver.org/).
   exportmap), daarna lángs welke weg het daar komt.
 
   Die laatste is een lijst met een regel per opslagwijze — deze computer,
-  Nextcloud, git — met de stand van zaken ernaast, en je klapt er een open om
+  WebDAV, git — met de stand van zaken ernaast, en je klapt er een open om
   hem in te stellen. "Deze computer" staat er met opzet bij, ook al valt er
   niets in te stellen: een lijst met alleen de netwerkwegen wekt de indruk dat
   opslaan op je eigen schijf iets bijzonders is in plaats van het gewone geval.

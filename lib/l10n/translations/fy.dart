@@ -739,6 +739,28 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Openen vanaf WebDAV': 'Iepenje fan WebDAV',
+  'Opslaan naar WebDAV': 'Bewarje nei WebDAV',
+  'Opgeslagen op WebDAV:': 'Bewarre op WebDAV:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Stel earst in WebDAV-server yn by Ynstellings → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Ofbylding kieze op WebDAV',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Gjin WebDAV-server ynsteld. Stel der ien yn by Ynstellings → WebDAV.',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV is net (goed) ynsteld — kontrolearje de servergegevens by Ynstellingen → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Dizze server is net tastien. Markearje in privee/LAN-server earst as fertroud by Ynstellingen → WebDAV.',
+  'Servertype': 'Servertype',
+  'Nextcloud of ownCloud': 'Nextcloud of ownCloud',
+  'Andere WebDAV-server': 'Oare WebDAV-server',
+  'WebDAV-bron': 'WebDAV-boarne',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Iepenje en bewarje presintaasjes yn in map op in WebDAV-server. It wachtwurd wurdt fersifere yn de kaaibosk bewarre, net by de oare ynstellings.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Iepenje en bewarje presintaasjes yn in map op in WebDAV-server.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'It paad yn de server-URL is de WebDAV-woartel.',
   'Repareer slide': 'Slide reparearje',
   'Voortzetting van vorige slide': 'Ferfolch fan de foarige slide',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

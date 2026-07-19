@@ -1772,6 +1772,28 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Openen vanaf WebDAV': 'Ava WebDAV\'ist',
+  'Opslaan naar WebDAV': 'Salvesta WebDAV\'i',
+  'Opgeslagen op WebDAV:': 'Salvestatud WebDAV\'i:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Seadista esmalt WebDAV-server kaudu Seaded → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Vali pilt WebDAV\'ist',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Ühtegi WebDAV-serverit pole seadistatud. Seadista see kaudu Seaded → WebDAV.',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV pole (õigesti) seadistatud — kontrolli serveri andmeid jaotises Seaded → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'See server pole lubatud. Märgi privaatne/LAN-server esmalt usaldusväärseks jaotises Seaded → WebDAV.',
+  'Servertype': 'Serveri tüüp',
+  'Nextcloud of ownCloud': 'Nextcloud või ownCloud',
+  'Andere WebDAV-server': 'Muu WebDAV-server',
+  'WebDAV-bron': 'WebDAV-allikas',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Ava ja salvesta esitlused WebDAV-serveri kausta. Parool säilitatakse krüpteeritult võtmehoidlas, mitte muude seadete kõrval.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Avage ja salvestage esitlusi WebDAV-serveri kaustas.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'Serveri URL-i tee on WebDAV-i juur.',
   'Repareer slide': 'Paranda slaid',
   'Voortzetting van vorige slide': 'Eelmise slaidi jätk',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

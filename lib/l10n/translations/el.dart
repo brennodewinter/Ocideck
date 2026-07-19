@@ -1809,6 +1809,28 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Openen vanaf WebDAV': 'Άνοιγμα από το WebDAV',
+  'Opslaan naar WebDAV': 'Αποθήκευση στο WebDAV',
+  'Opgeslagen op WebDAV:': 'Αποθηκεύτηκε στο WebDAV:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Ρυθμίστε πρώτα έναν διακομιστή WebDAV στις Ρυθμίσεις → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Επιλογή εικόνας στο WebDAV',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Δεν έχει ρυθμιστεί διακομιστής WebDAV. Ρυθμίστε έναν στις Ρυθμίσεις → WebDAV.',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'Το WebDAV δεν έχει ρυθμιστεί (σωστά) — ελέγξτε τα στοιχεία διακομιστή στις Ρυθμίσεις → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Αυτός ο διακομιστής δεν επιτρέπεται. Επισημάνετε πρώτα έναν ιδιωτικό/LAN διακομιστή ως αξιόπιστο στις Ρυθμίσεις → WebDAV.',
+  'Servertype': 'Τύπος διακομιστή',
+  'Nextcloud of ownCloud': 'Nextcloud ή ownCloud',
+  'Andere WebDAV-server': 'Άλλος διακομιστής WebDAV',
+  'WebDAV-bron': 'Πηγή WebDAV',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Ανοίξτε και αποθηκεύστε παρουσιάσεις σε έναν φάκελο σε διακομιστή WebDAV. Ο κωδικός αποθηκεύεται κρυπτογραφημένος στην κλειδοθήκη, όχι μαζί με τις υπόλοιπες ρυθμίσεις.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Ανοίξτε και αποθηκεύστε παρουσιάσεις σε έναν φάκελο σε διακομιστή WebDAV.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'Η διαδρομή στη διεύθυνση URL του διακομιστή είναι η ρίζα WebDAV.',
   'Repareer slide': 'Επιδιόρθωση διαφάνειας',
   'Voortzetting van vorige slide': 'Συνέχεια της προηγούμενης διαφάνειας',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

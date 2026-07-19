@@ -920,6 +920,28 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Openen vanaf WebDAV': 'Open from WebDAV',
+  'Opslaan naar WebDAV': 'Save to WebDAV',
+  'Opgeslagen op WebDAV:': 'Saved to WebDAV:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'First set up a WebDAV server in Settings → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Choose image on WebDAV',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'No WebDAV server configured. Set one up in Settings → WebDAV.',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV is not set up (correctly) — check the server details under Settings → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'This server is not allowed. Mark a private/LAN server as trusted first under Settings → WebDAV.',
+  'Servertype': 'Server type',
+  'Nextcloud of ownCloud': 'Nextcloud or ownCloud',
+  'Andere WebDAV-server': 'Other WebDAV server',
+  'WebDAV-bron': 'WebDAV source',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Open and save presentations in a folder on a WebDAV server. The password is stored encrypted in the keychain, not alongside the other settings.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Open and save presentations in a folder on a WebDAV server.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'The path in the server URL is the WebDAV root.',
   'Repareer slide': 'Fix slide',
   'Voortzetting van vorige slide': 'Continuation of the previous slide',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

@@ -1799,6 +1799,28 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Openen vanaf WebDAV': 'Deschide din WebDAV',
+  'Opslaan naar WebDAV': 'Salvează pe WebDAV',
+  'Opgeslagen op WebDAV:': 'Salvat pe WebDAV:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Configurează mai întâi un server WebDAV în Setări → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Alege imaginea pe WebDAV',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Niciun server WebDAV configurat. Configurează unul în Setări → WebDAV.',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV nu este configurat (corect) — verificați datele serverului la Setări → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Acest server nu este permis. Marcați mai întâi un server privat/LAN ca de încredere la Setări → WebDAV.',
+  'Servertype': 'Tip de server',
+  'Nextcloud of ownCloud': 'Nextcloud sau ownCloud',
+  'Andere WebDAV-server': 'Alt server WebDAV',
+  'WebDAV-bron': 'Sursă WebDAV',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Deschide și salvează prezentări într-un folder de pe un server WebDAV. Parola este păstrată criptată în inelul de chei, nu împreună cu celelalte setări.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Deschideți și salvați prezentări într-un folder de pe un server WebDAV.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'Calea din URL-ul serverului este rădăcina WebDAV.',
   'Repareer slide': 'Repară slide-ul',
   'Voortzetting van vorige slide': 'Continuarea diapozitivului anterior',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

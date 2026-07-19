@@ -1788,6 +1788,28 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Openen vanaf WebDAV': 'Otvori s WebDAVa',
+  'Opslaan naar WebDAV': 'Spremi na WebDAV',
+  'Opgeslagen op WebDAV:': 'Spremljeno na WebDAV:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Prvo postavite WebDAV poslužitelj u Postavke → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Odaberi sliku na WebDAVu',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Nijedan WebDAV poslužitelj nije postavljen. Postavite ga u Postavke → WebDAV.',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV nije (ispravno) postavljen — provjerite podatke poslužitelja u Postavke → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Ovaj poslužitelj nije dopušten. Prvo označite privatni/LAN poslužitelj kao pouzdan u Postavke → WebDAV.',
+  'Servertype': 'Vrsta poslužitelja',
+  'Nextcloud of ownCloud': 'Nextcloud ili ownCloud',
+  'Andere WebDAV-server': 'Drugi WebDAV poslužitelj',
+  'WebDAV-bron': 'WebDAV izvor',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Otvarajte i spremajte prezentacije u mapi na WebDAV poslužitelju. Lozinka se pohranjuje šifrirana u lancu ključeva, ne uz ostale postavke.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Otvarajte i spremajte prezentacije u mapi na WebDAV poslužitelju.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'Putanja u URL-u poslužitelja je WebDAV korijen.',
   'Repareer slide': 'Popravi slajd',
   'Voortzetting van vorige slide': 'Nastavak prethodnog slajda',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

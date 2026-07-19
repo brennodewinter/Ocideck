@@ -1785,6 +1785,28 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Openen vanaf WebDAV': 'Vo WebDAV öffne',
+  'Opslaan naar WebDAV': 'Uf WebDAV speichere',
+  'Opgeslagen op WebDAV:': 'Uf WebDAV gspeicheret:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Richt zerscht en WebDAV-Server ii under Iistellige → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Bild uf WebDAV uswähle',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Kei WebDAV-Server iigrichtet. Richt eine ii under Iistellige → WebDAV.',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV isch nit (richtig) iigrichtet — lueg d Serverdate under Iistellige → WebDAV aa.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Dä Server isch nit erlaubt. Markier en private/LAN-Server zerscht als vertraut under Iistellige → WebDAV.',
+  'Servertype': 'Servertyp',
+  'Nextcloud of ownCloud': 'Nextcloud oder ownCloud',
+  'Andere WebDAV-server': 'En andere WebDAV-Server',
+  'WebDAV-bron': 'WebDAV-Quelle',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Öffne und speicher Präsentatione in eme Ordner uf eme WebDAV-Server. S Passwort wird verschlüsselet im Schlüsselbund gspeicheret, nöd bi de andere Iistellige.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Präsentatione in emene Ordner uf eme WebDAV-Server uufmache und spichere.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'De Pfad i de Server-URL isch d WebDAV-Wurzle.',
   'Repareer slide': 'Slide repariere',
   'Voortzetting van vorige slide': 'Fortsetzig vo dr vorige Folie',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

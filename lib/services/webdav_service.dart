@@ -198,11 +198,7 @@ class WebdavService {
           throw WebdavException(WebdavError.tooLarge, 'Listing te groot');
         }
       }
-      return parseMultistatus(
-        utf8.decode(builder.takeBytes()),
-        username: server.username.trim(),
-        rootPath: server.rootPath,
-      );
+      return parseMultistatus(utf8.decode(builder.takeBytes()), server: server);
     } on WebdavException {
       rethrow;
     } on TimeoutException {
@@ -220,8 +216,7 @@ class WebdavService {
   /// is. De map zelf en alles buiten de wortel worden weggefilterd.
   static List<WebdavEntry> parseMultistatus(
     String xmlBody, {
-    required String username,
-    required String rootPath,
+    required WebdavServer server,
   }) {
     final XmlDocument doc;
     try {
@@ -230,7 +225,7 @@ class WebdavService {
       logError('WebdavService: ongeldige PROPFIND-XML', e);
       throw WebdavException(WebdavError.server, 'Ongeldig antwoord');
     }
-    final base = _davBaseSegments(username, rootPath);
+    final base = _davBaseSegments(server);
     final entries = <WebdavEntry>[];
     final responses = doc.descendantElements.where(
       (e) => e.localName == 'response',
@@ -286,12 +281,12 @@ class WebdavService {
     return entries;
   }
 
-  /// Decoded pad-segmenten tot en met de geconfigureerde wortel:
-  /// `[remote.php, dav, files, <user>, ...rootSegments]`.
-  static List<String> _davBaseSegments(String username, String rootPath) {
-    final root = WebdavServer.normalizeRoot(rootPath);
+  /// Gedecodeerde pad-segmenten tot en met de geconfigureerde submap: de
+  /// DAV-wortel van de server plus [WebdavServer.rootPath].
+  static List<String> _davBaseSegments(WebdavServer server) {
+    final root = WebdavServer.normalizeRoot(server.rootPath);
     final rootSegs = root.split('/').where((s) => s.isNotEmpty);
-    return ['remote.php', 'dav', 'files', username.trim(), ...rootSegs];
+    return [...server.davSegments, ...rootSegs];
   }
 
   /// Zet een (mogelijk percent-gecodeerde, mogelijk absolute) href om naar een

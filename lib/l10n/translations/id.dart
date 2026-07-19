@@ -1781,6 +1781,28 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Openen vanaf WebDAV': 'Buka dari WebDAV',
+  'Opslaan naar WebDAV': 'Simpan ke WebDAV',
+  'Opgeslagen op WebDAV:': 'Disimpan ke WebDAV:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Siapkan dulu server WebDAV di Pengaturan → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Pilih gambar di WebDAV',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Tidak ada server WebDAV yang dikonfigurasi. Siapkan satu di Pengaturan → WebDAV.',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV belum diatur (dengan benar) — periksa detail server di Pengaturan → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Server ini tidak diizinkan. Tandai server privat/LAN sebagai tepercaya dulu di Pengaturan → WebDAV.',
+  'Servertype': 'Jenis server',
+  'Nextcloud of ownCloud': 'Nextcloud atau ownCloud',
+  'Andere WebDAV-server': 'Server WebDAV lainnya',
+  'WebDAV-bron': 'Sumber WebDAV',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Buka dan simpan presentasi di folder pada server WebDAV. Kata sandi disimpan terenkripsi di keychain, tidak bersama pengaturan lainnya.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Buka dan simpan presentasi dalam folder di server WebDAV.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'Jalur pada URL server adalah akar WebDAV.',
   'Repareer slide': 'Perbaiki slide',
   'Voortzetting van vorige slide': 'Lanjutan dari slide sebelumnya',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

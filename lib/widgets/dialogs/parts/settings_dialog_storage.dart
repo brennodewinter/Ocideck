@@ -8,7 +8,7 @@
 //
 // De ordening hier volgt de vraag die de gebruiker stelt, niet de techniek die
 // erachter zit. Eerst *waar* zijn werk staat (bibliotheken, exportmap), daarna
-// *langs welke weg* het daar komt (schijf, Nextcloud, git). Die tweede lijst is
+// *langs welke weg* het daar komt (schijf, WebDAV, git). Die tweede lijst is
 // [StorageModality]: één regel per opslagwijze, uitklapbaar naar zijn eigen
 // instellingen. Een vierde wijze is een waarde erbij in die enum plus een tak
 // in [_modalityPanel] — geen tabblad, geen hernummering.
@@ -22,7 +22,7 @@ part of '../settings_dialog.dart';
 /// eigen schijf iets aparts is in plaats van de standaard.
 enum StorageModality {
   disk(Icons.folder_outlined),
-  nextcloud(Icons.cloud_outlined, sectionSource: 'Nextcloud-bron (WebDAV)'),
+  webdav(Icons.cloud_outlined, sectionSource: 'WebDAV-bron'),
   git(Icons.account_tree_outlined, sectionSource: 'Git-repository');
 
   const StorageModality(this.icon, {this.sectionSource});
@@ -37,7 +37,7 @@ enum StorageModality {
 
   String label(AppLocalizations l10n) => switch (this) {
     StorageModality.disk => l10n.d('Deze computer'),
-    StorageModality.nextcloud => l10n.d('Nextcloud'),
+    StorageModality.webdav => l10n.d('WebDAV'),
     StorageModality.git => l10n.d('Git-repository'),
   };
 
@@ -45,8 +45,8 @@ enum StorageModality {
     StorageModality.disk => l10n.d(
       'Presentaties in de mappen hierboven, op de schijf van deze computer.',
     ),
-    StorageModality.nextcloud => l10n.d(
-      'Open en bewaar presentaties in een map op je Nextcloud.',
+    StorageModality.webdav => l10n.d(
+      'Open en bewaar presentaties in een map op een WebDAV-server.',
     ),
     StorageModality.git => l10n.d(
       'Open presentaties uit een git-repository; elke opgeslagen versie blijft bewaard.',
@@ -137,7 +137,7 @@ extension _SettingsStorageTab on _SettingsDialogState {
     final modalities = [
       if (supportsLocalProjectFolders) StorageModality.disk,
       if (supportsNetworkDeckSources) ...[
-        StorageModality.nextcloud,
+        StorageModality.webdav,
         StorageModality.git,
       ],
     ];
@@ -237,7 +237,7 @@ extension _SettingsStorageTab on _SettingsDialogState {
   /// De instellingen van één opslagwijze. `null` betekent: niets in te stellen.
   Widget? _modalityPanel(StorageModality modality) => switch (modality) {
     StorageModality.disk => null,
-    StorageModality.nextcloud => _webdavPanel(),
+    StorageModality.webdav => _webdavPanel(),
     StorageModality.git => _gitPanel(),
   };
 
@@ -265,7 +265,7 @@ extension _SettingsStorageTab on _SettingsDialogState {
     final sources = switch (modality) {
       // De bibliotheken zijn geen invoervelden; die lopen al via _rebuild.
       StorageModality.disk => const <Listenable>[],
-      StorageModality.nextcloud => [_webdav.url, _webdav.user],
+      StorageModality.webdav => [_webdav.url, _webdav.user],
       StorageModality.git => [_git.url, _git.owner, _git.repo],
     };
     if (sources.isEmpty) return line(context, null);
@@ -294,7 +294,7 @@ extension _SettingsStorageTab on _SettingsDialogState {
         // die er al staat en ontloopt daarmee het meervoud, dat in dertig talen
         // dertig keer anders werkt.
         return (text: '${l10n.d('Bibliotheken')}: $count', configured: true);
-      case StorageModality.nextcloud:
+      case StorageModality.webdav:
         final host = _hostOf(_webdav.url.text);
         if (host == null || _webdav.user.text.trim().isEmpty) {
           return (text: l10n.d('Niet ingesteld'), configured: false);

@@ -1803,6 +1803,28 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Openen vanaf WebDAV': 'Iftaħ minn WebDAV',
+  'Opslaan naar WebDAV': 'Issalva fuq WebDAV',
+  'Opgeslagen op WebDAV:': 'Salvat fuq WebDAV:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'L-ewwel issettja server WebDAV f\'Settings → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Agħżel immaġni fuq WebDAV',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'L-ebda server WebDAV issettjat. Issettja wieħed f\'Settings → WebDAV.',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV mhux issettjat (sew) — iċċekkja d-dettalji tas-server taħt Settings → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Dan is-server mhux permess. L-ewwel immarka server privat/LAN bħala fdat taħt Settings → WebDAV.',
+  'Servertype': 'Tip ta\' server',
+  'Nextcloud of ownCloud': 'Nextcloud jew ownCloud',
+  'Andere WebDAV-server': 'Server WebDAV ieħor',
+  'WebDAV-bron': 'Sors WebDAV',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Iftaħ u ssalva preżentazzjonijiet f\'folder fuq server WebDAV. Il-password tinżamm kriptata fis-sensiela taċ-ċwievet, mhux flimkien mas-settings l-oħra.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Iftaħ u ssejvja preżentazzjonijiet f\'folder fuq server WebDAV.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'Il-mogħdija fl-URL tas-server hija l-għerq WebDAV.',
   'Repareer slide': 'Irranġa l-islajd',
   'Voortzetting van vorige slide': 'Kontinwazzjoni tas-slajd ta\' qabel',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

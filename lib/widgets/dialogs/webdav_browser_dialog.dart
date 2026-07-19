@@ -58,8 +58,8 @@ class _WebdavBrowserDialogState extends ConsumerState<WebdavBrowserDialog> {
     final l10n = context.l10n;
     final listing = ref.watch(webdavListingProvider(_path));
     final title = widget.mode == WebdavBrowseMode.image
-        ? l10n.d('Afbeelding kiezen op Nextcloud')
-        : l10n.d('Openen vanaf Nextcloud');
+        ? l10n.d('Afbeelding kiezen op WebDAV')
+        : l10n.d('Openen vanaf WebDAV');
 
     return Dialog(
       clipBehavior: Clip.antiAlias,
@@ -215,7 +215,7 @@ class _WebdavBrowserDialogState extends ConsumerState<WebdavBrowserDialog> {
             Text(
               isConfig
                   ? l10n.d(
-                      'Geen Nextcloud-server ingesteld. Stel er een in bij Instellingen → Nextcloud.',
+                      'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.',
                     )
                   : l10n.d(
                       'Kon de map niet laden. Controleer je verbinding en instellingen.',

@@ -6,6 +6,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/webdav_settings.dart';
 import 'package:ocideck/services/webdav_service.dart';
 
+/// Een Nextcloud-bron; de host doet er voor het parsen niet toe, alleen het
+/// padschema dat eruit volgt.
+WebdavServer _srv(String username, String rootPath) => WebdavServer(
+  baseUrl: 'https://cloud.example.com',
+  username: username,
+  rootPath: rootPath,
+);
+
 /// One captured inbound request on the fake server.
 class _Req {
   _Req({
@@ -377,6 +385,62 @@ void main() {
     });
   });
 
+  // Bewijst dat een niet-Nextcloud-server echt bediend wordt: dezelfde vier
+  // methoden, maar tegen de DAV-wortel uit de server-URL in plaats van een
+  // afgeleid /remote.php-pad. Loopt end-to-end over een echte socket.
+  group('generic server end-to-end', () {
+    WebdavService genericSvc(int port) => WebdavService(
+      server: WebdavServer(
+        baseUrl: 'http://127.0.0.1:$port/dav/bestanden',
+        username: 'alice',
+        trustedInternal: true,
+        kind: WebdavServerKind.generic,
+      ),
+      password: 'secret',
+    );
+
+    test('probe, list, download and upload all target the DAV root', () async {
+      final fake = await _FakeWebdav.start((req) async {
+        if (req.method == 'PROPFIND') {
+          req.response.statusCode = 207;
+          req.response.write(
+            '$_multistatusOpen'
+            '${_resp('/dav/bestanden/')}'
+            '${_resp('/dav/bestanden/deck.md', size: 5)}'
+            '$_multistatusClose',
+          );
+        } else if (req.method == 'GET') {
+          req.response.statusCode = 200;
+          req.response.write('hallo');
+        } else {
+          req.response.statusCode = 201;
+        }
+      });
+      addTearDown(fake.stop);
+
+      final svc = genericSvc(fake.port);
+
+      await svc.probe();
+      expect(fake.requests.single.path, '/dav/bestanden/');
+      // Geen spoor van het Nextcloud-schema in wat er over de lijn ging.
+      expect(fake.requests.single.path, isNot(contains('remote.php')));
+      expect(fake.requests.single.authorization, expectedAuth);
+
+      final entries = await svc.list('');
+      expect(entries.map((e) => e.name), ['deck.md']);
+
+      final bytes = await svc.download('deck.md');
+      expect(utf8.decode(bytes), 'hallo');
+      expect(fake.requests.last.path, '/dav/bestanden/deck.md');
+
+      await svc.upload('sub/nieuw.md', utf8.encode('x'));
+      final tail = fake.requests.sublist(fake.requests.length - 2);
+      expect(tail.map((r) => r.method), ['MKCOL', 'PUT']);
+      expect(tail.first.path, '/dav/bestanden/sub/');
+      expect(tail.last.path, '/dav/bestanden/sub/nieuw.md');
+    });
+  });
+
   group('parseMultistatus extra coverage', () {
     test('captures a content type and ignores the root href', () {
       final xml =
@@ -390,8 +454,7 @@ void main() {
           _multistatusClose;
       final entries = WebdavService.parseMultistatus(
         xml,
-        username: 'alice',
-        rootPath: '',
+        server: _srv('alice', ''),
       );
       expect(entries.single.name, 'pic.png');
       expect(entries.single.contentType, 'image/png');
@@ -406,8 +469,7 @@ void main() {
       buf.write(_multistatusClose);
       final entries = WebdavService.parseMultistatus(
         buf.toString(),
-        username: 'alice',
-        rootPath: '',
+        server: _srv('alice', ''),
       );
       expect(entries.length, WebdavService.maxListingEntries);
     });

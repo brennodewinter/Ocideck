@@ -1780,6 +1780,28 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Openen vanaf WebDAV': 'Öppna från WebDAV',
+  'Opslaan naar WebDAV': 'Spara till WebDAV',
+  'Opgeslagen op WebDAV:': 'Sparad till WebDAV:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Ställ först in en WebDAV-server under Inställningar → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Välj bild på WebDAV',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Ingen WebDAV-server inställd. Ställ in en under Inställningar → WebDAV.',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV är inte (korrekt) inställt — kontrollera serveruppgifterna under Inställningar → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Den här servern är inte tillåten. Markera först en privat/LAN-server som betrodd under Inställningar → WebDAV.',
+  'Servertype': 'Servertyp',
+  'Nextcloud of ownCloud': 'Nextcloud eller ownCloud',
+  'Andere WebDAV-server': 'Annan WebDAV-server',
+  'WebDAV-bron': 'WebDAV-källa',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Öppna och spara presentationer i en mapp på en WebDAV-server. Lösenordet lagras krypterat i nyckelringen, inte tillsammans med de övriga inställningarna.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Öppna och spara presentationer i en mapp på en WebDAV-server.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'Sökvägen i server-URL:en är WebDAV-roten.',
   'Repareer slide': 'Åtgärda bild',
   'Voortzetting van vorige slide': 'Fortsättning på föregående bild',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

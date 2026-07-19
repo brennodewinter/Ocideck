@@ -1788,6 +1788,28 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Openen vanaf WebDAV': 'Otvoriť z WebDAVu',
+  'Opslaan naar WebDAV': 'Uložiť na WebDAV',
+  'Opgeslagen op WebDAV:': 'Uložené na WebDAV:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Najprv nastavte server WebDAV v Nastavenia → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Vybrať obrázok na WebDAVe',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Nie je nastavený žiadny server WebDAV. Nastavte ho v Nastavenia → WebDAV.',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV nie je (správne) nastavený — skontrolujte údaje servera v Nastavenia → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Tento server nie je povolený. Najprv označte privátny/LAN server ako dôveryhodný v Nastavenia → WebDAV.',
+  'Servertype': 'Typ servera',
+  'Nextcloud of ownCloud': 'Nextcloud alebo ownCloud',
+  'Andere WebDAV-server': 'Iný server WebDAV',
+  'WebDAV-bron': 'Zdroj WebDAV',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Otvárajte a ukladajte prezentácie v priečinku na serveri WebDAV. Heslo sa uchováva šifrované v kľúčenke, nie spolu s ostatnými nastaveniami.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Otvárajte a ukladajte prezentácie v priečinku na serveri WebDAV.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'Cesta v URL servera je koreň WebDAV.',
   'Repareer slide': 'Opraviť snímku',
   'Voortzetting van vorige slide': 'Pokračovanie predchádzajúcej snímky',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

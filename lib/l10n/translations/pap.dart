@@ -738,6 +738,28 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Openen vanaf WebDAV': 'Habri for di WebDAV',
+  'Opslaan naar WebDAV': 'Warda riba WebDAV',
+  'Opgeslagen op WebDAV:': 'Wardá riba WebDAV:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Promé konfigurá un servidó WebDAV na Konfigurashon → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Skohe imagen riba WebDAV',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'No tin servidó WebDAV konfigurá. Konfigurá un na Konfigurashon → WebDAV.',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV no ta konfigurá (bon) — kontrolá e datonan di server na Konfigurashon → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'E server aki no ta permití. Marka un server privá/LAN promé komo konfiabel na Konfigurashon → WebDAV.',
+  'Servertype': 'Tipo di server',
+  'Nextcloud of ownCloud': 'Nextcloud òf ownCloud',
+  'Andere WebDAV-server': 'Otro server WebDAV',
+  'WebDAV-bron': 'Fuente WebDAV',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Habri i warda presentashonnan den un karpeta riba un server WebDAV. E kontrasenja ta wòrdu wardá sífrá den e yabero, no huntu ku e otro konfigurashonnan.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Habri i warda presentashonnan den un mapa riba un server WebDAV.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'E kaminda den e URL di server ta e rais WebDAV.',
   'Repareer slide': 'Drecha slide',
   'Voortzetting van vorige slide': 'Kontinuashon di e slide anterior',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

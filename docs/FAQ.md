@@ -215,13 +215,16 @@ OciDeck supports Git repository storage:
 - Supports both public and private repositories  
 - Provides version history access
 
-### What are the Nextcloud/WebDAV settings for?
+### What are the WebDAV settings for?
 
-Nextcloud integration allows storing presentations directly on your own server:
-1. Configure server URL, credentials, and optional subfolder in Settings
-2. Open decks from Nextcloud via the "Open from Nextcloud" option  
-3. Save back to Nextcloud with "Save to Nextcloud"
-4. Supports both flat format (.md + assets) or package formats
+WebDAV lets you store presentations directly on your own server. Nextcloud is
+the most common one, but any WebDAV server works:
+1. Pick the server type — *Nextcloud or ownCloud* (the DAV path is derived) or
+   *Other WebDAV server* (the path in the server URL is the WebDAV root)
+2. Configure server URL, credentials, and optional subfolder in Settings
+3. Open decks via the "Open from WebDAV" option
+4. Save back with "Save to WebDAV"
+5. Supports both flat format (.md + assets) or package formats
 
 ## Future Features and Roadmap
 

@@ -1781,6 +1781,28 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Openen vanaf WebDAV': 'Avaa WebDAVista',
+  'Opslaan naar WebDAV': 'Tallenna WebDAViin',
+  'Opgeslagen op WebDAV:': 'Tallennettu WebDAViin:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Määritä ensin WebDAV-palvelin kohdassa Asetukset → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Valitse kuva WebDAVista',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'WebDAV-palvelinta ei ole määritetty. Määritä se kohdassa Asetukset → WebDAV.',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAVia ei ole määritetty (oikein) — tarkista palvelimen tiedot kohdasta Asetukset → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Tämä palvelin ei ole sallittu. Merkitse yksityinen/LAN-palvelin ensin luotetuksi kohdassa Asetukset → WebDAV.',
+  'Servertype': 'Palvelimen tyyppi',
+  'Nextcloud of ownCloud': 'Nextcloud tai ownCloud',
+  'Andere WebDAV-server': 'Muu WebDAV-palvelin',
+  'WebDAV-bron': 'WebDAV-lähde',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Avaa ja tallenna esityksiä WebDAV-palvelimen kansioon. Salasana tallennetaan salattuna avainnippuun, ei muiden asetusten yhteyteen.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Avaa ja tallenna esityksiä WebDAV-palvelimen kansioon.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'Palvelimen URL-osoitteen polku on WebDAV-juuri.',
   'Repareer slide': 'Korjaa dia',
   'Voortzetting van vorige slide': 'Edellisen dian jatko',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

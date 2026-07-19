@@ -1811,6 +1811,28 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Openen vanaf WebDAV': 'Abrir a partir do WebDAV',
+  'Opslaan naar WebDAV': 'Guardar no WebDAV',
+  'Opgeslagen op WebDAV:': 'Guardado no WebDAV:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Configure primeiro um servidor WebDAV em Definições → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Escolher imagem no WebDAV',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Nenhum servidor WebDAV configurado. Configure um em Definições → WebDAV.',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'O WebDAV não está (bem) configurado — verifique os dados do servidor em Definições → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Este servidor não é permitido. Marque primeiro um servidor privado/LAN como fiável em Definições → WebDAV.',
+  'Servertype': 'Tipo de servidor',
+  'Nextcloud of ownCloud': 'Nextcloud ou ownCloud',
+  'Andere WebDAV-server': 'Outro servidor WebDAV',
+  'WebDAV-bron': 'Fonte WebDAV',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Abra e guarde apresentações numa pasta num servidor WebDAV. A palavra-passe é guardada encriptada no porta-chaves, não junto das restantes definições.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Abra e guarde apresentações numa pasta num servidor WebDAV.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'O caminho no URL do servidor é a raiz WebDAV.',
   'Repareer slide': 'Corrigir diapositivo',
   'Voortzetting van vorige slide': 'Continuação do diapositivo anterior',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

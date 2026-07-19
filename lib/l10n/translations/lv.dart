@@ -1780,6 +1780,28 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Openen vanaf WebDAV': 'Atvērt no WebDAV',
+  'Opslaan naar WebDAV': 'Saglabāt WebDAV',
+  'Opgeslagen op WebDAV:': 'Saglabāts WebDAV:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Vispirms iestatiet WebDAV serveri sadaļā Iestatījumi → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Izvēlēties attēlu WebDAV',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Nav iestatīts WebDAV serveris. Iestatiet to sadaļā Iestatījumi → WebDAV.',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV nav (pareizi) iestatīts — pārbaudiet servera datus sadaļā Iestatījumi → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Šis serveris nav atļauts. Vispirms atzīmējiet privātu/LAN serveri kā uzticamu sadaļā Iestatījumi → WebDAV.',
+  'Servertype': 'Servera veids',
+  'Nextcloud of ownCloud': 'Nextcloud vai ownCloud',
+  'Andere WebDAV-server': 'Cits WebDAV serveris',
+  'WebDAV-bron': 'WebDAV avots',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Atveriet un saglabājiet prezentācijas mapē WebDAV serverī. Parole tiek saglabāta šifrēta atslēgu saišķī, nevis kopā ar pārējiem iestatījumiem.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Atveriet un saglabājiet prezentācijas mapē WebDAV serverī.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'Ceļš servera URL ir WebDAV sakne.',
   'Repareer slide': 'Labot slaidu',
   'Voortzetting van vorige slide': 'Iepriekšējā slaida turpinājums',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

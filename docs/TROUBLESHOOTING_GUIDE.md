@@ -79,7 +79,7 @@ This guide addresses frequently encountered problems, their causes, and step-by-
 
 **Symptoms**:
 - URL import fails due to CORS restrictions
-- WebDAV/Nextcloud connection issues
+- WebDAV connection issues
 - Privacy scan flags false positives  
 
 **Solutions**:
@@ -88,7 +88,11 @@ This guide addresses frequently encountered problems, their causes, and step-by-
    - Check network connectivity and firewall settings
 
 2. **WebDAV Configuration**:
-   - Verify Nextcloud credentials are correct in Settings
+   - Verify credentials are correct in Settings
+   - Check the server type: on *Nextcloud or ownCloud* the DAV path is derived
+     from the host, so a path in the server URL is ignored; on *Other WebDAV
+     server* that path is the WebDAV root and a missing one is a common cause
+     of "folder not found"
    - Ensure trusted internal server is set appropriately if using local addresses
    - Test connection before saving to verify configuration works  
 

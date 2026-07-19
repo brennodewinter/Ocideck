@@ -1804,6 +1804,28 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Openen vanaf WebDAV': 'Отваряне от WebDAV',
+  'Opslaan naar WebDAV': 'Запазване в WebDAV',
+  'Opgeslagen op WebDAV:': 'Запазено в WebDAV:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Първо настройте WebDAV сървър от Настройки → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Избор на изображение в WebDAV',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Няма зададен WebDAV сървър. Настройте го от Настройки → WebDAV.',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV не е настроен (правилно) — проверете данните за сървъра в Настройки → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Този сървър не е разрешен. Първо отбележете частен/LAN сървър като доверен в Настройки → WebDAV.',
+  'Servertype': 'Тип сървър',
+  'Nextcloud of ownCloud': 'Nextcloud или ownCloud',
+  'Andere WebDAV-server': 'Друг WebDAV сървър',
+  'WebDAV-bron': 'WebDAV източник',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Отваряйте и запазвайте презентации в папка на WebDAV сървър. Паролата се съхранява криптирана в ключодържателя, а не заедно с останалите настройки.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Отваряйте и запазвайте презентации в папка на WebDAV сървър.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'Пътят в URL адреса на сървъра е коренът на WebDAV.',
   'Repareer slide': 'Поправи слайда',
   'Voortzetting van vorige slide': 'Продължение на предишния слайд',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

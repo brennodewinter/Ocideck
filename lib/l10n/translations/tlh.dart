@@ -1756,6 +1756,28 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Openen vanaf WebDAV': 'WebDAVvo\' poSmoH',
+  'Opslaan naar WebDAV': 'WebDAVDaq pol',
+  'Opgeslagen op WebDAV:': 'WebDAVDaq polpu\':',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'wa\'DIch DuHIvmeymey → WebDAV WebDAV-Server yIchenmoH.',
+  'Afbeelding kiezen op WebDAV': 'WebDAVDaq mIllogh yIwIv',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'WebDAV-Server DuHIvmoHbe\'lu\'. DuHIvmeymey → WebDAV yIchenmoH.',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV lIjchoHbe\'lu\' — Settings → WebDAV Daq jabwI\' De\' yI\'ol.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'jabwI\'vam chaw\'be\'lu\'. Settings → WebDAV Daq jabwI\' pegh/LAN voqmoH \'e\' yIper.',
+  'Servertype': 'De\'wI\' Segh',
+  'Nextcloud of ownCloud': 'Nextcloud ownCloud joq',
+  'Andere WebDAV-server': 'latlh WebDAV De\'wI\'',
+  'WebDAV-bron': 'WebDAV mung',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'WebDAV De\'wI\' ghomDaq cha\'navmey yIpoSmoH yIpol je. mu\'tlhegh polqutlu\' ghewmey velDaq, latlh DuHIvmeymeyDaq QIchbe\'.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'WebDAV De\'wI\'Daq ta\'mey yIpoSmoH \'ej yIpolmoH.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'De\'wI\' URLDaq He \'oH WebDAV mung\'e\'.',
   'Repareer slide': '\'echletHom yItI\'',
   'Voortzetting van vorige slide': '\'echletHom wa\'DIch chu\'Ha\'',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

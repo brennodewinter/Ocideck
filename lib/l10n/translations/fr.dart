@@ -738,6 +738,28 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Openen vanaf WebDAV': 'Ouvrir depuis WebDAV',
+  'Opslaan naar WebDAV': 'Enregistrer sur WebDAV',
+  'Opgeslagen op WebDAV:': 'Enregistré sur WebDAV :',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Configurez d’abord un serveur WebDAV dans Réglages → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Choisir une image sur WebDAV',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Aucun serveur WebDAV configuré. Configurez-en un dans Réglages → WebDAV.',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV n\'est pas (bien) configuré — vérifiez les paramètres du serveur dans Réglages → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Ce serveur n\'est pas autorisé. Marquez d\'abord un serveur privé/LAN comme fiable dans Réglages → WebDAV.',
+  'Servertype': 'Type de serveur',
+  'Nextcloud of ownCloud': 'Nextcloud ou ownCloud',
+  'Andere WebDAV-server': 'Autre serveur WebDAV',
+  'WebDAV-bron': 'Source WebDAV',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Ouvrez et enregistrez des présentations dans un dossier sur un serveur WebDAV. Le mot de passe est stocké chiffré dans le trousseau, pas avec les autres réglages.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Ouvrez et enregistrez des présentations dans un dossier sur un serveur WebDAV.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'Le chemin dans l\'URL du serveur est la racine WebDAV.',
   'Repareer slide': 'Réparer la diapositive',
   'Voortzetting van vorige slide': 'Suite de la diapositive précédente',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

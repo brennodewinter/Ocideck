@@ -17,7 +17,7 @@ void main() {
 
   // De sectiekop binnen een uitgeklapt paneel — het enige opschrift dat maar bij
   // één opslagwijze hoort. De hoofdletters komen van _sectionTitle.
-  final nextcloudPanel = find.text('Nextcloud-bron (WebDAV)'.toUpperCase());
+  final webdavPanel = find.text('WebDAV-bron'.toUpperCase());
   final gitPanel = find.text('Git-repository'.toUpperCase());
 
   Future<void> openSettings(
@@ -79,7 +79,7 @@ void main() {
     expect(find.text('Bibliotheken'.toUpperCase()), findsOneWidget);
     expect(find.text('Opslagwijzen'.toUpperCase()), findsOneWidget);
     expect(find.text('Deze computer'), findsOneWidget);
-    expect(find.text('Nextcloud'), findsOneWidget);
+    expect(find.text('WebDAV'), findsOneWidget);
     expect(find.text('Git-repository'), findsOneWidget);
   });
 
@@ -88,26 +88,26 @@ void main() {
 
     // De sectiekop van het paneel, niet "Server-URL": dat veldopschrift staat
     // in het git-paneel net zo goed en zegt dus niets over wélk paneel openligt.
-    expect(nextcloudPanel, findsNothing);
+    expect(webdavPanel, findsNothing);
 
-    await tapRow(tester, 'Nextcloud');
-    expect(nextcloudPanel, findsOneWidget);
+    await tapRow(tester, 'WebDAV');
+    expect(webdavPanel, findsOneWidget);
 
-    await tapRow(tester, 'Nextcloud');
-    expect(nextcloudPanel, findsNothing);
+    await tapRow(tester, 'WebDAV');
+    expect(webdavPanel, findsNothing);
   });
 
   testWidgets('er staat er hooguit één open', (tester) async {
     await openSettings(tester);
 
-    await tapRow(tester, 'Nextcloud');
-    expect(nextcloudPanel, findsOneWidget);
+    await tapRow(tester, 'WebDAV');
+    expect(webdavPanel, findsOneWidget);
 
-    // Git openen sluit Nextcloud: twee panelen tegelijk maken de lijst
+    // Git openen sluit WebDAV: twee panelen tegelijk maken de lijst
     // onleesbaar, dus dat mag niet kunnen.
     await tapRow(tester, 'Git-repository');
     expect(gitPanel, findsOneWidget);
-    expect(nextcloudPanel, findsNothing);
+    expect(webdavPanel, findsNothing);
   });
 
   testWidgets('"Deze computer" heeft niets uit te klappen', (tester) async {
@@ -116,13 +116,13 @@ void main() {
     // Die regel is een mededeling, geen knop: de schijf wordt bestuurd door de
     // bibliotheken erboven. Tikken mag, maar hoort niets te openen.
     await tapRow(tester, 'Deze computer');
-    expect(nextcloudPanel, findsNothing);
+    expect(webdavPanel, findsNothing);
     expect(gitPanel, findsNothing);
   });
 
   testWidgets('de statusregel beweegt mee met wat je intypt', (tester) async {
     await openSettings(tester);
-    await tapRow(tester, 'Nextcloud');
+    await tapRow(tester, 'WebDAV');
 
     expect(find.text('Niet ingesteld'), findsWidgets);
 
@@ -169,6 +169,6 @@ void main() {
     await tester.pumpAndSettle();
     await followHit(tester, 'Verbinding testen');
 
-    expect(nextcloudPanel, findsOneWidget);
+    expect(webdavPanel, findsOneWidget);
   });
 }

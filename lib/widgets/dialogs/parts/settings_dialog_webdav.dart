@@ -28,28 +28,81 @@ extension _SettingsWebdav on _SettingsDialogState {
     );
   }
 
+  /// De servertype-keuze. Alleen het padschema hangt eraan — het protocol
+  /// eronder is in beide gevallen gewone WebDAV.
+  Widget _webdavKindField() {
+    final l10n = context.l10n;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: DropdownButtonFormField<WebdavServerKind>(
+        initialValue: _webdav.kind,
+        isDense: true,
+        style: const TextStyle(fontSize: 13),
+        decoration: InputDecoration(
+          isDense: true,
+          labelText: l10n.d('Servertype'),
+          prefixIcon: const Icon(Icons.dns_outlined, size: 18),
+        ),
+        items: [
+          DropdownMenuItem(
+            value: WebdavServerKind.nextcloud,
+            child: Text(l10n.d('Nextcloud of ownCloud')),
+          ),
+          DropdownMenuItem(
+            value: WebdavServerKind.generic,
+            child: Text(l10n.d('Andere WebDAV-server')),
+          ),
+        ],
+        onChanged: (value) {
+          if (value == null) return;
+          _rebuild(() {
+            _webdav.kind = value;
+            // De URL betekent per type iets anders (origin versus DAV-wortel),
+            // dus een eerdere uitslag zegt niets meer over deze instelling.
+            _webdav.testOk = null;
+            _webdav.testMessage = null;
+          });
+        },
+      ),
+    );
+  }
+
   Widget _webdavPanel() {
     final l10n = context.l10n;
     final testMsg = _webdav.testMessage;
+    final isNextcloud = _webdav.kind == WebdavServerKind.nextcloud;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _sectionTitle(l10n.d('Nextcloud-bron (WebDAV)')),
+        _sectionTitle(l10n.d('WebDAV-bron')),
         Padding(
           padding: const EdgeInsets.only(bottom: 14),
           child: Text(
             l10n.d(
-              'Open en bewaar presentaties in een map op je Nextcloud. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.',
+              'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.',
             ),
             style: TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
         ),
+        _webdavKindField(),
         _webdavField(
           _webdav.url,
           l10n.d('Server-URL'),
-          hint: 'https://cloud.voorbeeld.nl',
+          // Bij Nextcloud is het pad afgeleid en telt alleen de host; bij een
+          // andere server valt er niets te raden en ís het pad de DAV-wortel.
+          hint: isNextcloud
+              ? 'https://cloud.voorbeeld.nl'
+              : 'https://dav.voorbeeld.nl/dav/bestanden',
           icon: Icons.link,
         ),
+        if (!isNextcloud)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: Text(
+              l10n.d('Het pad in de server-URL is de WebDAV-wortel.'),
+              style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+            ),
+          ),
         _webdavField(
           _webdav.user,
           l10n.d('Gebruikersnaam'),
@@ -57,8 +110,12 @@ extension _SettingsWebdav on _SettingsDialogState {
         ),
         _webdavField(
           _webdav.password.field,
-          l10n.d('App-wachtwoord'),
-          hint: l10n.d('Maak hiervoor een app-wachtwoord aan in Nextcloud'),
+          // Het app-wachtwoord is een Nextcloud-voorziening; bij een andere
+          // server zou die tip de gebruiker naar een niet-bestaand scherm sturen.
+          isNextcloud ? l10n.d('App-wachtwoord') : l10n.d('Wachtwoord'),
+          hint: isNextcloud
+              ? l10n.d('Maak hiervoor een app-wachtwoord aan in Nextcloud')
+              : null,
           obscure: true,
           icon: Icons.key_outlined,
         ),

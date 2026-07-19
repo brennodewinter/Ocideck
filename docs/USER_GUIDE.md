@@ -187,29 +187,38 @@ saved version stays retrievable, which a plain folder cannot give you.
   deck in it, so use one repository per client, engagement or classification
   level — the forge's permissions are what separate them, not OciDeck.
 
-Unlike Nextcloud, this also works in the browser version.
+Unlike WebDAV, this also works in the browser version.
 
-## Nextcloud (WebDAV)
+## WebDAV
 
-You can use a folder on your Nextcloud as a source for decks and assets.
+You can use a folder on a WebDAV server as a source for decks and assets.
+Nextcloud is the most common one, but any WebDAV server works.
 
-- **Set it up** in *Settings → Storage → Nextcloud*: enter the server URL
-  (`https://cloud.example.com`), your username, an **app password** (create one
-  in Nextcloud under *Settings → Security*, don't use your login password), and
-  an optional subfolder. Use **Test connection** to check it before saving. The
-  app password is stored encrypted in your operating system's keychain, not in
-  the plain settings file.
-- **Self-hosted / home server**: if your Nextcloud runs on a private or LAN
+- **Pick the server type** in *Settings → Storage → WebDAV*. This is the only
+  thing that differs between servers — the protocol underneath is plain WebDAV
+  either way:
+  - **Nextcloud or ownCloud** — enter just the server URL
+    (`https://cloud.example.com`). The DAV path
+    (`/remote.php/dav/files/<username>`) is derived for you.
+  - **Other WebDAV server** — there is no path to guess, so the path you put in
+    the server URL *is* the WebDAV root
+    (`https://dav.example.com/dav/files`).
+- **Fill in the rest**: your username, your password, and an optional subfolder.
+  On Nextcloud, use an **app password** (create one under *Settings → Security*)
+  rather than your login password. Use **Test connection** to check it before
+  saving. The password is stored encrypted in your operating system's keychain,
+  not in the plain settings file.
+- **Self-hosted / home server**: if the server runs on a private or LAN
   address, tick **Trusted internal server** — otherwise the connection is
   refused (the same safeguard that stops a deck from reaching internal hosts).
-- **Open** via the welcome screen (*Open from Nextcloud*) or the `…` menu:
+- **Open** via the welcome screen (*Open from WebDAV*) or the `…` menu:
   browse the folder and pick an `.ocideck` package or a Marp `.md`. The file is
   downloaded, checked by the same safety scan as any other deck, and opened in a
   tab.
-- **Save back** with *Save to Nextcloud* (`…` menu). Choose a target path and a
+- **Save back** with *Save to WebDAV* (`…` menu). Choose a target path and a
   format: a single **`.ocideck` package** (one file, assets included) or a
   **flat `.md` plus its asset folders** (`images/`, `themes/`, …) mirrored into
-  the same folder. A deck opened from Nextcloud remembers where it came from, so
+  the same folder. A deck opened from WebDAV remembers where it came from, so
   saving suggests the original location.
 
 ## Slide types

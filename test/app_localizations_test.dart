@@ -40,6 +40,7 @@ void main() {
     AppLocalizations.setActiveLanguageCode('en');
 
     const unchangedInEnglish = {
+      'WebDAV',
       'Repository',
       'Personal access token',
       'ID',
@@ -109,6 +110,7 @@ void main() {
 
   test('all literal Dutch source strings are translated in every language', () {
     const unchangedInAllLanguages = {
+      'WebDAV',
       'Repository',
       'Personal access token',
       'ID',

@@ -113,12 +113,12 @@ extension _MainLayoutMenu on _MainLayoutState {
         _menuItem(
           'open_nextcloud',
           Icons.cloud_download_outlined,
-          l10n.d('Openen vanaf Nextcloud'),
+          l10n.d('Openen vanaf WebDAV'),
         ),
         _menuItem(
           'save_nextcloud',
           Icons.cloud_upload_outlined,
-          l10n.d('Opslaan naar Nextcloud'),
+          l10n.d('Opslaan naar WebDAV'),
         ),
       ],
       const PopupMenuDivider(),

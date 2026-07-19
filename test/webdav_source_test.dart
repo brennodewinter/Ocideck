@@ -15,6 +15,14 @@ class _ThrowingSecretStore extends SecretStore {
   }
 }
 
+/// Een Nextcloud-bron; de host doet er voor het parsen niet toe, alleen het
+/// padschema dat eruit volgt.
+WebdavServer _srv(String username, String rootPath) => WebdavServer(
+  baseUrl: 'https://cloud.example.com',
+  username: username,
+  rootPath: rootPath,
+);
+
 void main() {
   group('WebdavServer.uriFor containment', () {
     const server = WebdavServer(
@@ -70,6 +78,100 @@ void main() {
     });
   });
 
+  // Het enige dat een niet-Nextcloud-server anders maakt is waar de DAV-wortel
+  // ligt. Alles daaromheen — containment, codering, submap — moet identiek
+  // blijven werken, dus dat wordt hier expliciet nagelopen.
+  group('WebdavServerKind.generic', () {
+    const server = WebdavServer(
+      baseUrl: 'https://dav.example.com/dav/bestanden',
+      username: 'alice',
+      rootPath: '/Presentaties',
+      kind: WebdavServerKind.generic,
+    );
+
+    test('the path in the base url is the DAV root', () {
+      expect(
+        server.uriFor('deck.ocideck').toString(),
+        'https://dav.example.com/dav/bestanden/Presentaties/deck.ocideck',
+      );
+    });
+
+    test('the username stays out of the path', () {
+      expect(server.uriFor('x.md')!.path, isNot(contains('alice')));
+      expect(server.uriFor('x.md')!.path, isNot(contains('remote.php')));
+    });
+
+    test('a base url without a path serves DAV from the server root', () {
+      const root = WebdavServer(
+        baseUrl: 'https://dav.example.com',
+        username: 'alice',
+        kind: WebdavServerKind.generic,
+      );
+      expect(root.davPrefix, '');
+      expect(root.uriFor('x.md').toString(), 'https://dav.example.com/x.md');
+    });
+
+    test('containment is enforced exactly as for Nextcloud', () {
+      expect(server.uriFor('../secret.md'), isNull);
+      expect(server.uriFor('sub/../../escape.md'), isNull);
+      expect(server.uriFor('a/b/../c.md'), isNotNull);
+    });
+
+    test('a percent-encoded base path is decoded once, not twice', () {
+      const encoded = WebdavServer(
+        baseUrl: 'https://dav.example.com/sub%20map',
+        username: 'alice',
+        kind: WebdavServerKind.generic,
+      );
+      expect(encoded.davSegments, ['sub map']);
+      expect(encoded.uriFor('x.md')!.path, '/sub%20map/x.md');
+    });
+
+    test('hrefs are resolved against that same root', () {
+      final xml =
+          '<?xml version="1.0"?><d:multistatus xmlns:d="DAV:">'
+          '<d:response><d:href>/dav/bestanden/Presentaties/</d:href></d:response>'
+          '<d:response><d:href>/dav/bestanden/Presentaties/deck.md</d:href></d:response>'
+          '<d:response><d:href>/dav/elders/geheim.md</d:href></d:response>'
+          '</d:multistatus>';
+      final entries = WebdavService.parseMultistatus(xml, server: server);
+      expect(entries.map((e) => e.name), ['deck.md']);
+    });
+  });
+
+  group('WebdavServer JSON', () {
+    test('the server kind survives a round trip', () {
+      const server = WebdavServer(
+        baseUrl: 'https://dav.example.com/dav',
+        username: 'alice',
+        kind: WebdavServerKind.generic,
+      );
+      final back = WebdavServer.fromJson(server.toJson());
+      expect(back.kind, WebdavServerKind.generic);
+      expect(back.davPrefix, '/dav');
+    });
+
+    test('a source stored before the kind existed reads as Nextcloud', () {
+      final back = WebdavServer.fromJson({
+        'baseUrl': 'https://cloud.example.com',
+        'username': 'alice',
+        'rootPath': '',
+        'trustedInternal': false,
+      });
+      expect(back.kind, WebdavServerKind.nextcloud);
+      expect(back.davPrefix, '/remote.php/dav/files/alice');
+    });
+
+    test('an unknown kind falls back instead of breaking the source', () {
+      final back = WebdavServer.fromJson({
+        'baseUrl': 'https://cloud.example.com',
+        'username': 'alice',
+        'kind': 'sharepoint',
+      });
+      expect(back.kind, WebdavServerKind.nextcloud);
+    });
+  });
+
   group('WebdavServer.normalizeRoot', () {
     test('adds a leading slash and strips trailing slash', () {
       expect(WebdavServer.normalizeRoot('Presentaties/'), '/Presentaties');
@@ -113,8 +215,7 @@ void main() {
         );
         final entries = WebdavService.parseMultistatus(
           xml,
-          username: 'alice',
-          rootPath: '/Presentaties',
+          server: _srv('alice', '/Presentaties'),
         );
         expect(entries.length, 2);
         // Directories sort first.
@@ -132,8 +233,7 @@ void main() {
       final xml = body(response('/remote.php/dav/files/alice/caf%C3%A9.md'));
       final entries = WebdavService.parseMultistatus(
         xml,
-        username: 'alice',
-        rootPath: '',
+        server: _srv('alice', ''),
       );
       expect(entries.single.name, 'café.md');
       expect(entries.single.isMarkdown, isTrue);
@@ -146,8 +246,7 @@ void main() {
       );
       final entries = WebdavService.parseMultistatus(
         xml,
-        username: 'alice',
-        rootPath: '/Presentaties',
+        server: _srv('alice', '/Presentaties'),
       );
       expect(entries.map((e) => e.name), ['keep.md']);
     });
@@ -160,8 +259,7 @@ void main() {
       );
       final entries = WebdavService.parseMultistatus(
         xml,
-        username: 'alice',
-        rootPath: '/Presentaties',
+        server: _srv('alice', '/Presentaties'),
       );
       expect(entries.map((e) => e.name), ['ok.md']);
     });
@@ -170,8 +268,7 @@ void main() {
       expect(
         () => WebdavService.parseMultistatus(
           '<not-closed',
-          username: 'a',
-          rootPath: '',
+          server: _srv('a', ''),
         ),
         throwsA(isA<WebdavException>()),
       );

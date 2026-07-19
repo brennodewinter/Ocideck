@@ -285,26 +285,32 @@ const kSettingsSearchIndex = <SettingsSearchEntry>[
   // ── Opslag ────────────────────────────────────────────────────────────────
   SettingsSearchEntry(
     tab: SettingsSection.storage,
+    label: 'Servertype',
+    section: 'WebDAV-bron',
+    keywords: ['nextcloud', 'owncloud', 'webdav', 'servertype', 'soort'],
+  ),
+  SettingsSearchEntry(
+    tab: SettingsSection.storage,
     label: 'Server-URL',
-    section: 'Nextcloud-bron (WebDAV)',
-    keywords: ['nextcloud', 'webdav', 'server', 'cloud', 'url'],
+    section: 'WebDAV-bron',
+    keywords: ['nextcloud', 'owncloud', 'webdav', 'server', 'cloud', 'url'],
   ),
   SettingsSearchEntry(
     tab: SettingsSection.storage,
     label: 'Gebruikersnaam',
-    section: 'Nextcloud-bron (WebDAV)',
+    section: 'WebDAV-bron',
     keywords: ['nextcloud', 'webdav', 'gebruiker', 'account'],
   ),
   SettingsSearchEntry(
     tab: SettingsSection.storage,
     label: 'App-wachtwoord',
-    section: 'Nextcloud-bron (WebDAV)',
+    section: 'WebDAV-bron',
     keywords: ['nextcloud', 'webdav', 'wachtwoord', 'password'],
   ),
   SettingsSearchEntry(
     tab: SettingsSection.storage,
     label: 'Verbinding testen',
-    section: 'Nextcloud-bron (WebDAV)',
+    section: 'WebDAV-bron',
     keywords: ['nextcloud', 'webdav', 'test', 'verbinding'],
   ),
 

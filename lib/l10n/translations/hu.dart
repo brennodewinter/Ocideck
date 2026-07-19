@@ -1785,6 +1785,28 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Openen vanaf WebDAV': 'Megnyitás a WebDAVról',
+  'Opslaan naar WebDAV': 'Mentés a WebDAVra',
+  'Opgeslagen op WebDAV:': 'Mentve a WebDAVra:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Előbb állíts be egy WebDAV-szervert a Beállítások → WebDAV alatt.',
+  'Afbeelding kiezen op WebDAV': 'Kép választása a WebDAVon',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Nincs beállítva WebDAV-szerver. Állíts be egyet a Beállítások → WebDAV alatt.',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'A WebDAV nincs (jól) beállítva — ellenőrizd a szerveradatokat a Beállítások → WebDAV alatt.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Ez a szerver nem engedélyezett. Először jelöld megbízhatónak a privát/LAN szervert a Beállítások → WebDAV alatt.',
+  'Servertype': 'Kiszolgáló típusa',
+  'Nextcloud of ownCloud': 'Nextcloud vagy ownCloud',
+  'Andere WebDAV-server': 'Másik WebDAV-kiszolgáló',
+  'WebDAV-bron': 'WebDAV-forrás',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Nyiss meg és ments prezentációkat egy mappában egy WebDAV-kiszolgálón. A jelszó titkosítva a kulcstartóban tárolódik, nem a többi beállítás mellett.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Bemutatók megnyitása és mentése egy WebDAV-kiszolgáló mappájában.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'A kiszolgáló URL-jében szereplő útvonal a WebDAV gyökere.',
   'Repareer slide': 'Dia javítása',
   'Voortzetting van vorige slide': 'Az előző dia folytatása',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

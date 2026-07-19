@@ -1797,6 +1797,28 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Openen vanaf WebDAV': 'Ex WebDAV aperire',
+  'Opslaan naar WebDAV': 'In WebDAV servare',
+  'Opgeslagen op WebDAV:': 'In WebDAV servatum:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Primum servatorem WebDAV constitue apud Optiones → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Imaginem in WebDAV eligere',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Nullus servator WebDAV constitutus. Constitue unum apud Optiones → WebDAV.',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV non (recte) constitutum est — indicia moderatri in Optionibus → WebDAV proba.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Hic moderatrus non permittitur. Moderatrum privatum/LAN primum ut fidum in Optionibus → WebDAV designa.',
+  'Servertype': 'Genus servitoris',
+  'Nextcloud of ownCloud': 'Nextcloud vel ownCloud',
+  'Andere WebDAV-server': 'Alius servitor WebDAV',
+  'WebDAV-bron': 'Fons WebDAV',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Praesentationes in plica in servitore WebDAV aperi et serva. Tessera cifrata in claviculario servatur, non apud ceteras optiones.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Proscaenia in plica in servitore WebDAV aperi et serva.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'Semita in URL servitoris radix WebDAV est.',
   'Repareer slide': 'Schema reficere',
   'Voortzetting van vorige slide': 'Continuatio paginae praecedentis',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':

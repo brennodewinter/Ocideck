@@ -738,6 +738,28 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Openen vanaf WebDAV': 'Von WebDAV öffnen',
+  'Opslaan naar WebDAV': 'Auf WebDAV speichern',
+  'Opgeslagen op WebDAV:': 'Auf WebDAV gespeichert:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Richte zuerst einen WebDAV-Server unter Einstellungen → WebDAV ein.',
+  'Afbeelding kiezen op WebDAV': 'Bild auf WebDAV auswählen',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Kein WebDAV-Server eingerichtet. Richte einen unter Einstellungen → WebDAV ein.',
+  'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
+      'WebDAV ist nicht (richtig) eingerichtet — prüfe die Serverdaten unter Einstellungen → WebDAV.',
+  'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':
+      'Dieser Server ist nicht erlaubt. Markiere einen privaten/LAN-Server zuerst als vertrauenswürdig unter Einstellungen → WebDAV.',
+  'Servertype': 'Servertyp',
+  'Nextcloud of ownCloud': 'Nextcloud oder ownCloud',
+  'Andere WebDAV-server': 'Anderer WebDAV-Server',
+  'WebDAV-bron': 'WebDAV-Quelle',
+  'Open en bewaar presentaties in een map op een WebDAV-server. Het wachtwoord wordt versleuteld in de sleutelhanger bewaard, niet bij de overige instellingen.':
+      'Öffne und speichere Präsentationen in einem Ordner auf einem WebDAV-Server. Das Passwort wird verschlüsselt im Schlüsselbund gespeichert, nicht bei den übrigen Einstellungen.',
+  'Open en bewaar presentaties in een map op een WebDAV-server.':
+      'Präsentationen in einem Ordner auf einem WebDAV-Server öffnen und speichern.',
+  'Het pad in de server-URL is de WebDAV-wortel.':
+      'Der Pfad in der Server-URL ist die WebDAV-Wurzel.',
   'Repareer slide': 'Folie reparieren',
   'Voortzetting van vorige slide': 'Fortsetzung der vorherigen Folie',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
