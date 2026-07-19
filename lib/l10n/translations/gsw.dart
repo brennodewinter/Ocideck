@@ -1785,6 +1785,14 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Openen vanaf WebDAV': 'Vo WebDAV öffne',
+  'Opslaan naar WebDAV': 'Uf WebDAV speichere',
+  'Opgeslagen op WebDAV:': 'Uf WebDAV gspeicheret:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Richt zerscht en WebDAV-Server ii under Iistellige → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Bild uf WebDAV uswähle',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Kei WebDAV-Server iigrichtet. Richt eine ii under Iistellige → WebDAV.',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
       'WebDAV isch nit (richtig) iigrichtet — lueg d Serverdate under Iistellige → WebDAV aa.',
   'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':

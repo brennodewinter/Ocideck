@@ -1797,6 +1797,14 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Openen vanaf WebDAV': 'Ex WebDAV aperire',
+  'Opslaan naar WebDAV': 'In WebDAV servare',
+  'Opgeslagen op WebDAV:': 'In WebDAV servatum:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Primum servatorem WebDAV constitue apud Optiones → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Imaginem in WebDAV eligere',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Nullus servator WebDAV constitutus. Constitue unum apud Optiones → WebDAV.',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
       'WebDAV non (recte) constitutum est — indicia moderatri in Optionibus → WebDAV proba.',
   'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':

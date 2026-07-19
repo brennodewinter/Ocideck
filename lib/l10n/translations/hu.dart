@@ -1785,6 +1785,14 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Openen vanaf WebDAV': 'Megnyitás a WebDAVról',
+  'Opslaan naar WebDAV': 'Mentés a WebDAVra',
+  'Opgeslagen op WebDAV:': 'Mentve a WebDAVra:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Előbb állíts be egy WebDAV-szervert a Beállítások → WebDAV alatt.',
+  'Afbeelding kiezen op WebDAV': 'Kép választása a WebDAVon',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Nincs beállítva WebDAV-szerver. Állíts be egyet a Beállítások → WebDAV alatt.',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
       'A WebDAV nincs (jól) beállítva — ellenőrizd a szerveradatokat a Beállítások → WebDAV alatt.',
   'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':

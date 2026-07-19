@@ -738,6 +738,14 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Openen vanaf WebDAV': 'Von WebDAV öffnen',
+  'Opslaan naar WebDAV': 'Auf WebDAV speichern',
+  'Opgeslagen op WebDAV:': 'Auf WebDAV gespeichert:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Richte zuerst einen WebDAV-Server unter Einstellungen → WebDAV ein.',
+  'Afbeelding kiezen op WebDAV': 'Bild auf WebDAV auswählen',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Kein WebDAV-Server eingerichtet. Richte einen unter Einstellungen → WebDAV ein.',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
       'WebDAV ist nicht (richtig) eingerichtet — prüfe die Serverdaten unter Einstellungen → WebDAV.',
   'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':

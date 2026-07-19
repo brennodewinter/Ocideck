@@ -1799,6 +1799,14 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Openen vanaf WebDAV': 'Deschide din WebDAV',
+  'Opslaan naar WebDAV': 'Salvează pe WebDAV',
+  'Opgeslagen op WebDAV:': 'Salvat pe WebDAV:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Configurează mai întâi un server WebDAV în Setări → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Alege imaginea pe WebDAV',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Niciun server WebDAV configurat. Configurează unul în Setări → WebDAV.',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
       'WebDAV nu este configurat (corect) — verificați datele serverului la Setări → WebDAV.',
   'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':

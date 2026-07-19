@@ -1789,6 +1789,14 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Openen vanaf WebDAV': 'Atverti iš WebDAV',
+  'Opslaan naar WebDAV': 'Išsaugoti į WebDAV',
+  'Opgeslagen op WebDAV:': 'Išsaugota į WebDAV:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Pirmiausia nustatykite WebDAV serverį per Nustatymai → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Pasirinkti paveikslėlį WebDAV',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Nenustatytas WebDAV serveris. Nustatykite jį per Nustatymai → WebDAV.',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
       'WebDAV nesukonfigūruotas (teisingai) — patikrinkite serverio duomenis skiltyje Nustatymai → WebDAV.',
   'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':

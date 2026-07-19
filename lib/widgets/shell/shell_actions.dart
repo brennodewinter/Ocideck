@@ -390,7 +390,7 @@ Future<void> _saveToNextcloud(BuildContext context, WidgetRef ref) async {
     if (!context.mounted) return;
     messenger.showSnackBar(
       SnackBar(
-        content: Text('${l10n.d('Opgeslagen op Nextcloud:')} /$targetPath'),
+        content: Text('${l10n.d('Opgeslagen op WebDAV:')} /$targetPath'),
       ),
     );
   } on WebdavException catch (e) {
@@ -408,7 +408,7 @@ void _webdavNotConfigured(BuildContext context) {
     SnackBar(
       content: Text(
         context.l10n.d(
-          'Stel eerst een Nextcloud-server in bij Instellingen → Nextcloud.',
+          'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.',
         ),
       ),
     ),
@@ -462,7 +462,7 @@ class _WebdavSaveDialogState extends State<_WebdavSaveDialog> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return AlertDialog(
-      title: Text(l10n.d('Opslaan naar Nextcloud')),
+      title: Text(l10n.d('Opslaan naar WebDAV')),
       content: SizedBox(
         width: 460,
         child: Column(

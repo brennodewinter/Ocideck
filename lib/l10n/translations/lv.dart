@@ -1780,6 +1780,14 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Openen vanaf WebDAV': 'Atvērt no WebDAV',
+  'Opslaan naar WebDAV': 'Saglabāt WebDAV',
+  'Opgeslagen op WebDAV:': 'Saglabāts WebDAV:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Vispirms iestatiet WebDAV serveri sadaļā Iestatījumi → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Izvēlēties attēlu WebDAV',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Nav iestatīts WebDAV serveris. Iestatiet to sadaļā Iestatījumi → WebDAV.',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
       'WebDAV nav (pareizi) iestatīts — pārbaudiet servera datus sadaļā Iestatījumi → WebDAV.',
   'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':

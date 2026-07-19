@@ -1803,6 +1803,14 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Openen vanaf WebDAV': 'Iftaħ minn WebDAV',
+  'Opslaan naar WebDAV': 'Issalva fuq WebDAV',
+  'Opgeslagen op WebDAV:': 'Salvat fuq WebDAV:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'L-ewwel issettja server WebDAV f\'Settings → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Agħżel immaġni fuq WebDAV',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'L-ebda server WebDAV issettjat. Issettja wieħed f\'Settings → WebDAV.',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
       'WebDAV mhux issettjat (sew) — iċċekkja d-dettalji tas-server taħt Settings → WebDAV.',
   'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':

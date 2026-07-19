@@ -1788,6 +1788,14 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Openen vanaf WebDAV': 'Otvori s WebDAVa',
+  'Opslaan naar WebDAV': 'Spremi na WebDAV',
+  'Opgeslagen op WebDAV:': 'Spremljeno na WebDAV:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Prvo postavite WebDAV poslužitelj u Postavke → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Odaberi sliku na WebDAVu',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Nijedan WebDAV poslužitelj nije postavljen. Postavite ga u Postavke → WebDAV.',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
       'WebDAV nije (ispravno) postavljen — provjerite podatke poslužitelja u Postavke → WebDAV.',
   'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':

@@ -1781,6 +1781,14 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Openen vanaf WebDAV': 'Buka dari WebDAV',
+  'Opslaan naar WebDAV': 'Simpan ke WebDAV',
+  'Opgeslagen op WebDAV:': 'Disimpan ke WebDAV:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Siapkan dulu server WebDAV di Pengaturan → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Pilih gambar di WebDAV',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Tidak ada server WebDAV yang dikonfigurasi. Siapkan satu di Pengaturan → WebDAV.',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
       'WebDAV belum diatur (dengan benar) — periksa detail server di Pengaturan → WebDAV.',
   'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':

@@ -1817,6 +1817,14 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Openen vanaf WebDAV': 'Oscail ó WebDAV',
+  'Opslaan naar WebDAV': 'Sábháil chuig WebDAV',
+  'Opgeslagen op WebDAV:': 'Sábháilte chuig WebDAV:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Socraigh freastalaí WebDAV ar dtús i Socruithe → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Roghnaigh íomhá ar WebDAV',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Níl aon fhreastalaí WebDAV socraithe. Socraigh ceann i Socruithe → WebDAV.',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
       'Níl WebDAV socraithe (i gceart) — seiceáil sonraí an fhreastalaí faoi Socruithe → WebDAV.',
   'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':

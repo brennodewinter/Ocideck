@@ -1809,6 +1809,14 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Openen vanaf WebDAV': 'Άνοιγμα από το WebDAV',
+  'Opslaan naar WebDAV': 'Αποθήκευση στο WebDAV',
+  'Opgeslagen op WebDAV:': 'Αποθηκεύτηκε στο WebDAV:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Ρυθμίστε πρώτα έναν διακομιστή WebDAV στις Ρυθμίσεις → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Επιλογή εικόνας στο WebDAV',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Δεν έχει ρυθμιστεί διακομιστής WebDAV. Ρυθμίστε έναν στις Ρυθμίσεις → WebDAV.',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
       'Το WebDAV δεν έχει ρυθμιστεί (σωστά) — ελέγξτε τα στοιχεία διακομιστή στις Ρυθμίσεις → WebDAV.',
   'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':

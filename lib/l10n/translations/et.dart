@@ -1772,6 +1772,14 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Openen vanaf WebDAV': 'Ava WebDAV\'ist',
+  'Opslaan naar WebDAV': 'Salvesta WebDAV\'i',
+  'Opgeslagen op WebDAV:': 'Salvestatud WebDAV\'i:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Seadista esmalt WebDAV-server kaudu Seaded → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Vali pilt WebDAV\'ist',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Ühtegi WebDAV-serverit pole seadistatud. Seadista see kaudu Seaded → WebDAV.',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
       'WebDAV pole (õigesti) seadistatud — kontrolli serveri andmeid jaotises Seaded → WebDAV.',
   'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':

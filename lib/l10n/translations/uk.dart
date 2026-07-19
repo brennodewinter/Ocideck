@@ -1799,6 +1799,14 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Openen vanaf WebDAV': 'Відкрити з WebDAV',
+  'Opslaan naar WebDAV': 'Зберегти на WebDAV',
+  'Opgeslagen op WebDAV:': 'Збережено на WebDAV:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Спершу налаштуйте сервер WebDAV у Налаштування → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Вибрати зображення на WebDAV',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Сервер WebDAV не налаштовано. Налаштуйте його в Налаштування → WebDAV.',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
       'WebDAV не налаштовано (правильно) — перевірте дані сервера в Налаштування → WebDAV.',
   'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':

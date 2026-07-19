@@ -738,6 +738,14 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Openen vanaf WebDAV': 'Habri for di WebDAV',
+  'Opslaan naar WebDAV': 'Warda riba WebDAV',
+  'Opgeslagen op WebDAV:': 'Wardá riba WebDAV:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Promé konfigurá un servidó WebDAV na Konfigurashon → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Skohe imagen riba WebDAV',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'No tin servidó WebDAV konfigurá. Konfigurá un na Konfigurashon → WebDAV.',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
       'WebDAV no ta konfigurá (bon) — kontrolá e datonan di server na Konfigurashon → WebDAV.',
   'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':

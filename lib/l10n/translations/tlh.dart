@@ -1756,6 +1756,14 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Openen vanaf WebDAV': 'WebDAVvo\' poSmoH',
+  'Opslaan naar WebDAV': 'WebDAVDaq pol',
+  'Opgeslagen op WebDAV:': 'WebDAVDaq polpu\':',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'wa\'DIch DuHIvmeymey → WebDAV WebDAV-Server yIchenmoH.',
+  'Afbeelding kiezen op WebDAV': 'WebDAVDaq mIllogh yIwIv',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'WebDAV-Server DuHIvmoHbe\'lu\'. DuHIvmeymey → WebDAV yIchenmoH.',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
       'WebDAV lIjchoHbe\'lu\' — Settings → WebDAV Daq jabwI\' De\' yI\'ol.',
   'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':

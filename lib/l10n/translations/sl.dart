@@ -1783,6 +1783,14 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Openen vanaf WebDAV': 'Odpri iz WebDAV',
+  'Opslaan naar WebDAV': 'Shrani na WebDAV',
+  'Opgeslagen op WebDAV:': 'Shranjeno na WebDAV:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Najprej nastavite strežnik WebDAV v Nastavitve → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Izberi sliko na WebDAV',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Ni nastavljenega strežnika WebDAV. Nastavite ga v Nastavitve → WebDAV.',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
       'WebDAV ni (pravilno) nastavljen — preverite podatke strežnika v Nastavitve → WebDAV.',
   'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':

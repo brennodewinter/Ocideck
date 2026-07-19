@@ -1780,6 +1780,14 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Openen vanaf WebDAV': 'Åbn fra WebDAV',
+  'Opslaan naar WebDAV': 'Gem til WebDAV',
+  'Opgeslagen op WebDAV:': 'Gemt på WebDAV:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Konfigurér først en WebDAV-server under Indstillinger → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Vælg billede på WebDAV',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Ingen WebDAV-server konfigureret. Konfigurér en under Indstillinger → WebDAV.',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
       'WebDAV er ikke sat (korrekt) op — tjek serveroplysningerne under Indstillinger → WebDAV.',
   'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':

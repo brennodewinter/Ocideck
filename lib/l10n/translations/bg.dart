@@ -1804,6 +1804,14 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Openen vanaf WebDAV': 'Отваряне от WebDAV',
+  'Opslaan naar WebDAV': 'Запазване в WebDAV',
+  'Opgeslagen op WebDAV:': 'Запазено в WebDAV:',
+  'Stel eerst een WebDAV-server in bij Instellingen → WebDAV.':
+      'Първо настройте WebDAV сървър от Настройки → WebDAV.',
+  'Afbeelding kiezen op WebDAV': 'Избор на изображение в WebDAV',
+  'Geen WebDAV-server ingesteld. Stel er een in bij Instellingen → WebDAV.':
+      'Няма зададен WebDAV сървър. Настройте го от Настройки → WebDAV.',
   'WebDAV is niet (goed) ingesteld — controleer de servergegevens bij Instellingen → WebDAV.':
       'WebDAV не е настроен (правилно) — проверете данните за сървъра в Настройки → WebDAV.',
   'Deze server is niet toegestaan. Markeer een privé/LAN-server eerst als vertrouwd bij Instellingen → WebDAV.':

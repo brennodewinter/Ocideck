@@ -102,7 +102,7 @@ class _WelcomeScreen extends ConsumerWidget {
                             child: OutlinedButton.icon(
                               onPressed: () => _openFromNextcloud(context, ref),
                               icon: const Icon(Icons.cloud_outlined, size: 18),
-                              label: Text(l10n.d('Openen vanaf Nextcloud')),
+                              label: Text(l10n.d('Openen vanaf WebDAV')),
                             ),
                           ),
                         ],
