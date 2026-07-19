@@ -1797,6 +1797,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Welke verbinding?': 'Quae conexio?',
   'Bestandsverbindingen': 'Conexiones fasciculorum',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
       'Loci ubi praesentationes tuas servas et quaeris — plicae in hoc computatro, servitia WebDAV et repositoria git permixta. Trahe ea in ordinem quem vis: summum cuiusque generis pro norma valet.',

@@ -1756,6 +1756,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Welke verbinding?': 'nuq rar?',
   'Bestandsverbindingen': 'De\' rarmey',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
       'Daqmey, nuqDaq QIchmey Dapol \'ej DanejlaH — De\'wI\'vamDaq Daqmey, WebDAV lIwmey, git qawHaqmey je. mIr DaneHbogh yIchenmoH: Hoch Segh joqDaq ratlhbogh \'oH De\' motlh\'e\'.',

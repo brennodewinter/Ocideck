@@ -1799,6 +1799,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Welke verbinding?': 'Care conexiune?',
   'Bestandsverbindingen': 'Conexiuni de fișiere',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
       'Locurile unde îți păstrezi și cauți prezentările — dosare pe acest computer, servere WebDAV și depozite git amestecate. Trage-le în ordinea dorită: primul din fiecare tip este cel implicit.',

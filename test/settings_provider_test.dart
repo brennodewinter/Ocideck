@@ -622,8 +622,12 @@ void main() {
       // Eén kapotte regel mag niet elke andere bron onbereikbaar maken.
       SharedPreferences.setMockInitialValues({
         'storageConnections': jsonEncode([
-          {'id': '', 'kind': 'local', 'config': {}}, // geen id
-          {'id': 'x', 'kind': 'zeppelin', 'config': {}}, // onbekende soort
+          {'id': '', 'kind': 'local', 'config': <String, Object?>{}}, // geen id
+          {
+            'id': 'x',
+            'kind': 'zeppelin',
+            'config': <String, Object?>{},
+          }, // onbekende soort
           {
             'id': 'ok',
             'name': 'Werk',

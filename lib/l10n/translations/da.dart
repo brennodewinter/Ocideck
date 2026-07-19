@@ -1780,6 +1780,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Welke verbinding?': 'Hvilken forbindelse?',
   'Bestandsverbindingen': 'Filforbindelser',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
       'De steder, hvor du gemmer og søger i dine præsentationer — mapper på denne computer, WebDAV-servere og git-arkiver mellem hinanden. Træk dem i den rækkefølge, du vil have: den øverste af hver slags gælder som standard.',

@@ -1781,6 +1781,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Welke verbinding?': 'Mikä yhteys?',
   'Bestandsverbindingen': 'Tiedostoyhteydet',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
       'Paikat, joissa säilytät ja haet esityksiäsi — kansiot tässä tietokoneessa, WebDAV-palvelimet ja git-arkistot sekaisin. Vedä ne haluamaasi järjestykseen: kunkin lajin ylin on oletus.',

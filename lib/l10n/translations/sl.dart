@@ -1783,6 +1783,7 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Welke verbinding?': 'Katera povezava?',
   'Bestandsverbindingen': 'Datotečne povezave',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
       'Mesta, kjer hranite in iščete predstavitve — mape v tem računalniku, strežniki WebDAV in repozitoriji git vperemeš. Povlecite jih v želeni vrstni red: najvišji vsake vrste velja kot privzeti.',

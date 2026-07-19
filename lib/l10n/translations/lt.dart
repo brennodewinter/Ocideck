@@ -1789,6 +1789,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Welke verbinding?': 'Kuri jungtis?',
   'Bestandsverbindingen': 'Failų jungtys',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
       'Vietos, kuriose laikote ir ieškote pristatymų — aplankai šiame kompiuteryje, WebDAV serveriai ir git saugyklos kartu. Vilkite jas norima tvarka: viršutinė kiekvienos rūšies laikoma numatytąja.',

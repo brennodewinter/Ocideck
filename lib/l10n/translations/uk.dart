@@ -1799,6 +1799,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Welke verbinding?': 'Яке з\'єднання?',
   'Bestandsverbindingen': 'Файлові з\'єднання',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
       'Місця, де ви зберігаєте та шукаєте презентації — теки на цьому комп\'ютері, сервери WebDAV і git-репозиторії разом. Перетягніть їх у потрібному порядку: найвищий у кожному виді є типовим.',

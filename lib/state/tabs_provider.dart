@@ -736,6 +736,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
   Future<OpenResult> openFromWebdav(
     WebdavService service,
     WebdavEntry entry, {
+    String connectionId = '',
     String? homeDir,
   }) async {
     final dest = await _importDestDir(homeDir);
@@ -767,6 +768,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     if (result != OpenResult.opened) return result;
     // De zojuist geopende deck zit in het huidige tabblad (zie openFileByPath).
     state.current?.webdavOrigin = WebdavOrigin(
+      connectionId: connectionId,
       baseUrl: service.server.baseUrl,
       username: service.server.username,
       remotePath: entry.relativePath,
@@ -792,6 +794,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     WebdavService service, {
     required WebdavSaveFormat format,
     required String targetPath,
+    String connectionId = '',
     bool overwrite = false,
   }) async {
     final deck = tab.deckNotifier.currentState.deck;
@@ -834,6 +837,11 @@ class TabsNotifier extends StateNotifier<TabsState> {
       }
     }
     tab.webdavOrigin = WebdavOrigin(
+      // Een leeg id bij opslaan zou de herkomst van een geopend deck wissen;
+      // val dan terug op wat er al stond.
+      connectionId: connectionId.isEmpty
+          ? (tab.webdavOrigin?.connectionId ?? '')
+          : connectionId,
       baseUrl: service.server.baseUrl,
       username: service.server.username,
       remotePath: targetPath,

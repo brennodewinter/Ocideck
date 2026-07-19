@@ -1781,6 +1781,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Welke verbinding?': 'Koneksi yang mana?',
   'Bestandsverbindingen': 'Koneksi berkas',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
       'Tempat Anda menyimpan dan mencari presentasi — folder di komputer ini, server WebDAV, dan repositori git bercampur. Seret ke urutan yang Anda inginkan: yang teratas dari setiap jenis menjadi bawaan.',

@@ -1817,6 +1817,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Welke verbinding?': 'Cén nasc?',
   'Bestandsverbindingen': 'Naisc chomhad',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
       'Na háiteanna ina gcoinníonn tú agus ina gcuardaíonn tú do chuid láithreoireachtaí — fillteáin ar an ríomhaire seo, freastalaithe WebDAV agus stórais git measctha. Tarraing iad san ord is mian leat: is é an ceann is airde de gach cineál an réamhshocrú.',

@@ -739,6 +739,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Welke verbinding?': 'Hokker ferbining?',
   'Bestandsverbindingen': 'Bestânsferbiningen',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
       'De plakken dêr\'tsto dyn presintaasjes bewarrest en trochsikest — mappen op dizze kompjûter, WebDAV-servers en git-repositories trochinoar. Sleep se yn de folchoarder dy\'tsto wolst: de boppeste fan in soarte jildt as standert.',

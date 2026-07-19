@@ -1772,6 +1772,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Welke verbinding?': 'Milline ühendus?',
   'Bestandsverbindingen': 'Failiühendused',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
       'Kohad, kus hoiad ja otsid oma esitlusi — kaustad selles arvutis, WebDAV-serverid ja git-hoidlad läbisegi. Lohista need soovitud järjekorda: iga liigi ülemine kehtib vaikimisi.',

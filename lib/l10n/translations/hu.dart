@@ -1785,6 +1785,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Welke verbinding?': 'Melyik kapcsolat?',
   'Bestandsverbindingen': 'Fájlkapcsolatok',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
       'A helyek, ahol a bemutatóidat tárolod és keresed — mappák ezen a számítógépen, WebDAV-kiszolgálók és git-tárolók vegyesen. Húzd őket a kívánt sorrendbe: fajtánként a legfelső számít alapértelmezettnek.',

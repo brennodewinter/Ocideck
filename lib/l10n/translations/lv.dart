@@ -1780,6 +1780,7 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Welke verbinding?': 'Kurš savienojums?',
   'Bestandsverbindingen': 'Failu savienojumi',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
       'Vietas, kur glabājat un meklējat prezentācijas — mapes šajā datorā, WebDAV serveri un git repozitoriji jauktā secībā. Velciet tos vēlamajā secībā: augšējais no katra veida ir noklusējums.',

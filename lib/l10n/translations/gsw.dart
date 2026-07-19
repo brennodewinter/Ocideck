@@ -1785,6 +1785,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Welke verbinding?': 'Weli Verbindig?',
   'Bestandsverbindingen': 'Dateiverbindige',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
       'D Ort, wo du dini Präsentatione ufbewahrsch und duresuechsch — Ordner uf dem Computer, WebDAV-Server und git-Repositories durenand. Zieh si i d Reihefolg, wo du wotsch: s oberschte vo jeder Art gilt als Standard.',

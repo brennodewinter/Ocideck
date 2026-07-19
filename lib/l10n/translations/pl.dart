@@ -1793,6 +1793,7 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Welke verbinding?': 'Które połączenie?',
   'Bestandsverbindingen': 'Połączenia plików',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
       'Miejsca, w których przechowujesz i przeszukujesz prezentacje — foldery na tym komputerze, serwery WebDAV i repozytoria git razem. Przeciągnij je w wybranej kolejności: najwyższy w danym rodzaju jest domyślny.',

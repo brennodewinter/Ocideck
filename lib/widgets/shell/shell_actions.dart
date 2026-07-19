@@ -322,13 +322,18 @@ Future<void> _openFromGit(
 /// Blader door de Nextcloud/WebDAV-bron, download het gekozen deck, haal het
 /// door de security-gate en open het in een tab. Toont waar nodig een melding.
 Future<void> _openFromNextcloud(BuildContext context, WidgetRef ref) async {
-  final service = await ref.read(webdavServiceProvider.future);
+  final connection = await _pickWebdavConnection(context, ref);
+  if (connection == null || !context.mounted) return;
+  final service = await ref.read(webdavServiceProvider(connection.id).future);
   if (!context.mounted) return;
   if (service == null) {
     _webdavNotConfigured(context);
     return;
   }
-  final entry = await WebdavBrowserDialog.show(context);
+  final entry = await WebdavBrowserDialog.show(
+    context,
+    connectionId: connection.id,
+  );
   if (entry == null || !context.mounted) return;
   final messenger = ScaffoldMessenger.of(context);
   final l10n = context.l10n;
@@ -338,6 +343,7 @@ Future<void> _openFromNextcloud(BuildContext context, WidgetRef ref) async {
         .openFromWebdav(
           service,
           entry,
+          connectionId: connection.id,
           homeDir: ref.read(settingsProvider).homeDirectory,
         );
     _reportOpenFailure(messenger, l10n, result);
@@ -358,7 +364,18 @@ Future<void> _saveToNextcloud(BuildContext context, WidgetRef ref) async {
   final tab = ref.read(tabsProvider).current;
   final deck = tab?.deckNotifier.currentState.deck;
   if (tab == null || deck == null) return;
-  final service = await ref.read(webdavServiceProvider.future);
+  // Kwam dit deck van een WebDAV-verbinding die nog bestaat, dan gaat het
+  // daarnaartoe terug zonder te vragen. Opnieuw laten kiezen zou de gebruiker
+  // elke keer de kans geven het bij de verkeerde klant te laten belanden.
+  final origin = tab.webdavOrigin;
+  final settings = ref.read(settingsProvider);
+  final known = settings.connectionById(origin?.connectionId);
+  final connection = known is WebdavConnection && known.isConfigured
+      ? known
+      : await _pickWebdavConnection(context, ref);
+  if (connection == null || !context.mounted) return;
+
+  final service = await ref.read(webdavServiceProvider(connection.id).future);
   if (!context.mounted) return;
   if (service == null) {
     _webdavNotConfigured(context);
@@ -366,7 +383,6 @@ Future<void> _saveToNextcloud(BuildContext context, WidgetRef ref) async {
   }
   // Standaardpad: hergebruik de herkomst als die van dezelfde server komt,
   // anders een nette bestandsnaam uit de deck-titel in de wortelmap.
-  final origin = tab.webdavOrigin;
   final reuse = origin != null && origin.matchesServer(service.server);
   final defaultBase = reuse
       ? origin.remotePath.replaceAll(RegExp(r'\.(ocideck|zip|md)$'), '')
@@ -388,6 +404,7 @@ Future<void> _saveToNextcloud(BuildContext context, WidgetRef ref) async {
           .saveToWebdav(
             tab,
             service,
+            connectionId: connection.id,
             format: choice.format,
             targetPath: targetPath,
             overwrite: overwrite,
@@ -465,6 +482,21 @@ Future<_WebdavConflict?> _showWebdavConflictDialog(BuildContext context) {
       ],
     ),
   );
+}
+
+/// Laat de gebruiker een WebDAV-verbinding kiezen. Bij één verbinding gebeurt
+/// dat zonder dialoog; bij geen enkele volgt de melding dat er niets staat
+/// ingesteld.
+Future<WebdavConnection?> _pickWebdavConnection(
+  BuildContext context,
+  WidgetRef ref,
+) async {
+  final connections = ref.read(webdavConnectionsProvider);
+  if (connections.isEmpty) {
+    _webdavNotConfigured(context);
+    return null;
+  }
+  return StorageConnectionPicker.show(context, connections);
 }
 
 void _webdavNotConfigured(BuildContext context) {

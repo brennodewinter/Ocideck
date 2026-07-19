@@ -738,6 +738,7 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Welke verbinding?': 'Quelle connexion ?',
   'Bestandsverbindingen': 'Connexions de fichiers',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
       'Les endroits où vous conservez et recherchez vos présentations — dossiers sur cet ordinateur, serveurs WebDAV et dépôts git mêlés. Faites-les glisser dans l\'ordre voulu : le premier de chaque type sert de valeur par défaut.',

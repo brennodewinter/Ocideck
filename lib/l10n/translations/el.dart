@@ -1809,6 +1809,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Welke verbinding?': 'Ποια σύνδεση;',
   'Bestandsverbindingen': 'Συνδέσεις αρχείων',
   'De plekken waar je presentaties bewaart en doorzoekt — mappen op deze computer, WebDAV-servers en git-repositories door elkaar. Sleep ze in de volgorde die jij wilt: de bovenste van een soort geldt als standaard.':
       'Τα μέρη όπου φυλάσσετε και αναζητάτε τις παρουσιάσεις σας — φάκελοι σε αυτόν τον υπολογιστή, διακομιστές WebDAV και αποθετήρια git μαζί. Σύρετέ τα στη σειρά που θέλετε: το πρώτο κάθε είδους ισχύει ως προεπιλογή.',
