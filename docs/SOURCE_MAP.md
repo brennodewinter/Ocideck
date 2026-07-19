@@ -31,7 +31,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `mastg_test.dart` — `MastgTest` voor de offline MASTG-catalogus (id/titel/platform/MASVS-categorie/MASWE-zwakheid).
 - `wstg_test.dart` — `WstgTest` for the offline WSTG catalog (id/title/category).
 - `deck.dart` — `Deck` with metadata, TLP classification, slides list, annotations, user notes, and MIAUW waivers.
-- `deck_template_security.dart` — The module-only **MIAUW-pentestrapport** deck template (`_buildMiauwReport`): scaffolds the full MIAUW report structure across the security slide types.
+- `deck_template_info_safety.dart` — The module-only **MIAUW-pentestrapport** deck template (`_buildMiauwReport`): scaffolds the full MIAUW report structure across the security slide types.
 - `document_signature.dart` — `DocumentSignature`, the reusable visual signature for sign-off and the document seal.
 - `eis_entry.dart` — `EisEntry`/`EisPart`/`EisDerivation`/`EisCheck` for the MIAUW compliance schema.
 - `finding_spec.dart` — `FindingSpec`: the structured content of a `finding` header slide (scope, CVSS, CWE, **MASWE**, CVE, retest status, sections). Van MASWE wordt alleen het *id* opgeslagen; titel en categorie (die in de URL zit) komen uit `MasweCatalog` bij het schrijven, zodat een bijgestelde titel niet in een oud rapport bevriest. Een onbekend id blijft staan zonder link — liever geen link dan een 404; `RetestStatus` (hertest outcome).
