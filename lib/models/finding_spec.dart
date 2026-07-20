@@ -158,12 +158,25 @@ class FindingSpec {
   static final _reHeading = RegExp(r'^#\s+(.*)$');
   static final _reField = RegExp(r'^\*\*([^*]+):\*\*\s*(.*)$');
   static final _reSection = RegExp(r'^##\s+(.*)$');
-  static final _reBacktick = RegExp(r'`([^`]*)`');
+
+  /// Een code-span met een willekeurig lange rij backticks als scheiding, zodat
+  /// een waarde die er zelf één bevat niet halverwege afkapt. `\1` eist dezelfde
+  /// rij aan het eind — dezelfde regel die CommonMark voor fences hanteert.
+  static final _reBacktick = RegExp(r'(`+)(.*?)\1');
   static final _reCwe = RegExp(r'CWE-(\d+)');
+
+  /// Een regel in een sectietekst die als markdown-kop leest — zie
+  /// [FindingSpec.escapeSectionBody].
+  static final _reBodyHeading = RegExp(r'^(\s*)#{1,6}\s');
+  static final _reEscapedBodyHeading = RegExp(r'^(\s*)\\#{1,6}\s');
   static final _reMaswe = RegExp(r'MASWE-\d+');
-  static final _reCweName = RegExp(r'—\s*([^\]]+?)\s*\]');
+  static final _reCweName = RegExp(r'—\s*(.*?)\s*\]\(');
   static final _reCve = RegExp(r'CVE-\d{4}-\d+');
-  static final _reVector = RegExp(r'CVSS:4\.0/[A-Za-z0-9:/]+');
+
+  /// Elke CVSS-versie, niet alleen 4.0. De schrijfkant zet een onbekend vector
+  /// gewoon terug in de tekst, dus een strenge lezer wiste bij het herladen wat
+  /// er wél stond — een uit een ander rapport overgenomen 3.1-vector verdween.
+  static final _reVector = RegExp(r'CVSS:\d+\.\d+/[A-Za-z0-9:/]+');
 
   /// The English section anchors, mapped so [parse] can route each `## …` block
   /// to the right field. These are the exact strings [toMarkdown] emits.
@@ -236,14 +249,17 @@ class FindingSpec {
       final value = field.group(2)!.trim();
       switch (key) {
         case 'scope object':
-          scopeObject = _reBacktick.firstMatch(value)?.group(1) ?? value;
+          scopeObject =
+              _reBacktick.firstMatch(value)?.group(2)?.trim() ?? value;
         case 'cvss 4.0':
           cvssVector = _reVector.firstMatch(value)?.group(0) ?? '';
         case 'maswe':
           maswe = _reMaswe.firstMatch(value)?.group(0) ?? '';
         case 'cwe':
           cweId = int.tryParse(_reCwe.firstMatch(value)?.group(1) ?? '');
-          cweName = _reCweName.firstMatch(value)?.group(1)?.trim() ?? '';
+          cweName = (_reCweName.firstMatch(value)?.group(1)?.trim() ?? '')
+              .replaceAll(r'\]', ']')
+              .replaceAll(r'\\', r'\');
         case 'cve':
           // A CVE id appears twice per link (once in the `[label]`, once in the
           // `(url)`); keep the first occurrence of each in author order.
@@ -257,13 +273,16 @@ class FindingSpec {
           final statusText = (dash >= 0 ? value.substring(0, dash) : value)
               .trim();
           retest = RetestStatus.fromToken(statusText);
-          if (dash >= 0) retestNote = value.substring(dash + 1).trim();
+          if (dash >= 0) {
+            retestNote = _decodeInline(value.substring(dash + 1).trim());
+          }
         case 'test':
-          testId = _reBacktick.firstMatch(value)?.group(1) ?? value;
+          testId = _reBacktick.firstMatch(value)?.group(2)?.trim() ?? value;
       }
     }
 
-    String body(String title) => (sections[title]?.toString() ?? '').trim();
+    String body(String title) =>
+        _unescapeSectionBody((sections[title]?.toString() ?? '').trim());
     return FindingSpec(
       heading: heading,
       scopeObject: scopeObject,
@@ -294,7 +313,7 @@ class FindingSpec {
     }
     final metaLines = <String>[];
     if (scopeObject.isNotEmpty) {
-      metaLines.add('**Scope object:** `$scopeObject`');
+      metaLines.add('**Scope object:** ${_codeSpan(scopeObject)}');
     }
     if (cvssVector.isNotEmpty) metaLines.add('**CVSS 4.0:** ${_cvssText()}');
     if (cweId != null) metaLines.add('**CWE:** ${_cweLink()}');
@@ -303,11 +322,12 @@ class FindingSpec {
       final links = cveIds.map((c) => '[$c](${cveUrl(c)})').join(', ');
       metaLines.add('**CVE:** $links');
     }
-    if (testId.isNotEmpty) metaLines.add('**Test:** `$testId`');
+    if (testId.isNotEmpty) metaLines.add('**Test:** ${_codeSpan(testId)}');
     if (retest.isRetested) {
       final note = retestNote.trim();
       metaLines.add(
-        '**Retest:** ${retest.token}${note.isEmpty ? '' : ' — $note'}',
+        '**Retest:** ${retest.token}'
+        '${note.isEmpty ? '' : ' — ${_encodeInline(note)}'}',
       );
     }
     if (metaLines.isNotEmpty) {
@@ -331,8 +351,55 @@ class FindingSpec {
   }
 
   String _cweLink() {
-    final label = cweName.isEmpty ? 'CWE-$cweId' : 'CWE-$cweId — $cweName';
+    // Blokhaken in de naam ontsnappen: een onbewerkte `]` sloot het label van de
+    // link voortijdig, waarna de naam bij het herladen was afgekapt.
+    final safe = cweName.replaceAll(r'\', r'\\').replaceAll(']', r'\]');
+    final label = cweName.isEmpty ? 'CWE-$cweId' : 'CWE-$cweId — $safe';
     return '[$label]($cweUrl)';
+  }
+
+  /// [value] als code-span, met een scheiding die langer is dan de langste rij
+  /// backticks erin. Zonder dat kapte een waarde met een backtick zichzelf af.
+  static String _codeSpan(String value) {
+    var longest = 0;
+    var run = 0;
+    for (var i = 0; i < value.length; i++) {
+      if (value[i] == '`') {
+        run++;
+        if (run > longest) longest = run;
+      } else {
+        run = 0;
+      }
+    }
+    final fence = '`' * (longest + 1);
+    final pad = value.startsWith('`') || value.endsWith('`') ? ' ' : '';
+    return '$fence$pad$value$pad$fence';
+  }
+
+  /// Regeleindes in een veldwaarde die op één regel moet passen. Spiegelt de
+  /// tabelcel-codec: `<br>` staat voor een regeleinde, een getypte `<br>` wordt
+  /// eerst ontsnapt zodat de twee te onderscheiden blijven.
+  static String _encodeInline(String value) => value
+      .replaceAll('<br>', r'\<br>')
+      .replaceAll('\r\n', '\n')
+      .replaceAll('\n', '<br>');
+
+  static String _decodeInline(String value) {
+    final out = StringBuffer();
+    for (var i = 0; i < value.length; i++) {
+      if (value.startsWith(r'\<br>', i)) {
+        out.write('<br>');
+        i += 4;
+        continue;
+      }
+      if (value.startsWith('<br>', i)) {
+        out.write('\n');
+        i += 3;
+        continue;
+      }
+      out.write(value[i]);
+    }
+    return out.toString();
   }
 
   /// De MASWE-regel. Zonder bekende categorie geen link, maar wél het id: de
@@ -348,10 +415,40 @@ class FindingSpec {
     buf.writeln('## $title');
     if (text.trim().isNotEmpty) {
       buf.writeln();
-      buf.writeln(text.trim());
+      buf.writeln(escapeSectionBody(text.trim()));
     }
     buf.writeln();
   }
+
+  /// Een regel in een sectietekst die zélf als kop leest, krijgt een backslash.
+  ///
+  /// De vier secties staan onder een `## <anker>` en de parser routeert op elke
+  /// `^## `-regel. Een auteur die in de beschrijving een kopregel typt — de
+  /// velden zijn meerregelig, dus dat kan gewoon — knipte zijn eigen tekst
+  /// daarmee af: alles eronder sprong naar het veld waarvan hij toevallig de
+  /// naam had geschreven, en vermengde zich met wat daar al stond.
+  ///
+  /// `\##` is de CommonMark-ontsnapping: het rendert als letterlijke tekst en
+  /// leest bij het inlezen niet meer als anker.
+  static String escapeSectionBody(String text) => text
+      .split('\n')
+      .map((line) {
+        final m = _reBodyHeading.firstMatch(line);
+        if (m == null) return line;
+        final indent = m.group(1)!;
+        return '$indent\\${line.substring(indent.length)}';
+      })
+      .join('\n');
+
+  static String _unescapeSectionBody(String text) => text
+      .split('\n')
+      .map((line) {
+        final m = _reEscapedBodyHeading.firstMatch(line);
+        return m == null
+            ? line
+            : '${m.group(1)}${line.substring(m.group(1)!.length + 1)}';
+      })
+      .join('\n');
 
   FindingSpec copyWith({
     String? heading,
@@ -360,6 +457,7 @@ class FindingSpec {
     int? cweId,
     bool clearCwe = false,
     String? cweName,
+    String? masweId,
     List<String>? cveIds,
     String? description,
     String? confirmation,
@@ -375,6 +473,11 @@ class FindingSpec {
       cvssVector: cvssVector ?? this.cvssVector,
       cweId: clearCwe ? null : (cweId ?? this.cweId),
       cweName: cweName ?? this.cweName,
+      // Stond hier niet, en werd ook niet doorgegeven: elke copyWith wiste het
+      // MASWE-nummer. Het hernummeren van bevindingen roept dit aan en schrijft
+      // het resultaat terug naar de `.md`, dus één keer hernummeren haalde de
+      // `**MASWE:**`-regel definitief uit het rapport.
+      masweId: masweId ?? this.masweId,
       cveIds: cveIds ?? this.cveIds,
       description: description ?? this.description,
       confirmation: confirmation ?? this.confirmation,

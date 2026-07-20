@@ -175,4 +175,123 @@ void main() {
     // And the serialisation itself is stable.
     expect(twice.toMarkdown(), once.toMarkdown());
   });
+
+  group('inhoud die stilzwijgend verdween', () {
+    FindingSpec rt(FindingSpec x) => FindingSpec.parse(x.toMarkdown());
+
+    test('copyWith houdt het MASWE-nummer vast', () {
+      // Het hernummeren van bevindingen roept copyWith aan en schrijft het
+      // resultaat terug naar de `.md`, dus dit wiste de regel definitief.
+      const spec = FindingSpec(heading: 'F-01 Iets', masweId: 'MASWE-0005');
+      expect(spec.copyWith(heading: 'F-02 Iets').masweId, 'MASWE-0005');
+      expect(rt(spec.copyWith(heading: 'F-02 Iets')).masweId, 'MASWE-0005');
+    });
+
+    test(
+      'een kopregel in de beschrijving verspringt niet naar een ander veld',
+      () {
+        const spec = FindingSpec(
+          heading: 'H',
+          description: 'Stap 1\n## Possible impact\nnep',
+          impact: 'ECHT',
+        );
+        final out = rt(spec);
+        expect(out.description, spec.description);
+        expect(out.impact, 'ECHT', reason: 'niet vermengd met de beschrijving');
+      },
+    );
+
+    test('een backtick in scope of test kapt de waarde niet af', () {
+      final out = rt(
+        const FindingSpec(
+          heading: 'H',
+          scopeObject: 'https://a/`b`/c',
+          testId: 'A`B',
+        ),
+      );
+      expect(out.scopeObject, 'https://a/`b`/c');
+      expect(out.testId, 'A`B');
+    });
+
+    test('een CVSS-vector van een andere versie blijft staan', () {
+      // De schrijfkant zette hem gewoon terug in de tekst; alleen de lezer was
+      // streng, dus een overgenomen 3.1-vector verdween bij het herladen.
+      final out = rt(
+        const FindingSpec(heading: 'H', cvssVector: 'CVSS:3.1/AV:N/AC:L'),
+      );
+      expect(out.cvssVector, 'CVSS:3.1/AV:N/AC:L');
+    });
+
+    test('een 4.0-vector wordt nog steeds gescoord', () {
+      const v =
+          'CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:H/SC:N/SI:N/SA:N';
+      final out = rt(const FindingSpec(heading: 'H', cvssVector: v));
+      expect(out.cvssVector, v);
+      expect(out.cvss, isNotNull, reason: 'scoren mag niet stukgaan');
+    });
+
+    test('een blokhaak in de CWE-naam kapt hem niet af', () {
+      final out = rt(
+        const FindingSpec(heading: 'H', cweId: 79, cweName: 'Foo [bar] baz'),
+      );
+      expect(out.cweId, 79);
+      expect(out.cweName, 'Foo [bar] baz');
+    });
+
+    test('een meerregelige hertest-notitie overleeft', () {
+      final out = rt(
+        const FindingSpec(
+          heading: 'H',
+          retest: RetestStatus.resolved,
+          retestNote: 'r1\nr2',
+        ),
+      );
+      expect(out.retestNote, 'r1\nr2');
+      expect(out.retest, RetestStatus.resolved);
+    });
+
+    test('een letterlijke <br> in de notitie blijft letterlijk', () {
+      final out = rt(
+        const FindingSpec(
+          heading: 'H',
+          retest: RetestStatus.resolved,
+          retestNote: 'letterlijk <br> hier',
+        ),
+      );
+      expect(out.retestNote, 'letterlijk <br> hier');
+    });
+
+    test('een volle bevinding round-trippt veldsgewijs', () {
+      const full = FindingSpec(
+        heading: 'F-01 Iets',
+        scopeObject: 'https://a/`b`',
+        cvssVector: 'CVSS:3.1/AV:N/AC:L',
+        cweId: 79,
+        cweName: 'Foo [bar] baz',
+        masweId: 'MASWE-0005',
+        cveIds: ['CVE-2021-44228'],
+        description: 'D',
+        confirmation: 'C',
+        impact: 'I',
+        recommendation: 'R',
+        retest: RetestStatus.resolved,
+        retestNote: 'gepatcht',
+        testId: 'T`1',
+      );
+      final out = rt(full);
+      expect(out.heading, full.heading);
+      expect(out.scopeObject, full.scopeObject);
+      expect(out.cvssVector, full.cvssVector);
+      expect(out.cweId, full.cweId);
+      expect(out.cweName, full.cweName);
+      expect(out.masweId, full.masweId);
+      expect(out.cveIds, full.cveIds);
+      expect(out.testId, full.testId);
+      expect(out.retest, full.retest);
+      expect(out.retestNote, full.retestNote);
+      expect(out.description, full.description);
+      // En stabiel: nog een rondje verandert niets meer.
+      expect(rt(out).toMarkdown(), out.toMarkdown());
+    });
+  });
 }
