@@ -244,6 +244,15 @@ class PrivacyProjection {
   ///
   /// Tabellen hebben daar een veld van de auteur voor dat we uitzetten; voor de
   /// checklist bestaat dat niet, vandaar de aparte vlag.
+  /// De staplengte van de vlakke celindex: de bréédste rij, niet de rij zelf.
+  ///
+  /// Moet exact hetzelfde zijn als in `privacy_scanner.dart`, anders redigeert de
+  /// projectie een andere cel dan de scanner vond. Met `row.length` per rij was
+  /// de afbeelding geen bijectie bij een tabel met ongelijke rijen, en botsten
+  /// twee cellen op één sleutel.
+  static int _stride(Slide slide) =>
+      slide.tableRows.fold<int>(0, (m, r) => r.length > m ? r.length : m);
+
   static ({Slide slide, int count}) _projectSlide(
     Slide slide,
     Map<String, List<_Range>> byFragment, {
@@ -282,11 +291,7 @@ class PrivacyProjection {
         for (var r = 0; r < slide.tableRows.length; r++)
           [
             for (var c = 0; c < slide.tableRows[r].length; c++)
-              field(
-                'tableRows',
-                slide.tableRows[r][c],
-                r * slide.tableRows[r].length + c,
-              ),
+              field('tableRows', slide.tableRows[r][c], r * _stride(slide) + c),
           ],
       ],
     );

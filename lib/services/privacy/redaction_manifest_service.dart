@@ -137,16 +137,22 @@ class RedactionManifestService {
   String? _at(List<String> list, int index) =>
       index >= 0 && index < list.length ? list[index] : null;
 
+  /// De cel achter een vlakke index, met dezelfde staplengte als de scanner en
+  /// de projectie: de bréédste rij. Zocht dit met `row.length` per rij, dan wees
+  /// een index bij een tabel met ongelijke rijen naar een andere cel dan waar de
+  /// bevinding vandaan kwam — en dan viel de redactie stil uit het manifest,
+  /// omdat de teruggerekende tekst niet meer klopte.
   String? _tableCell(Slide slide, int flatIndex) {
-    for (var r = 0; r < slide.tableRows.length; r++) {
-      final row = slide.tableRows[r];
-      if (row.isEmpty) continue;
-      final start = r * row.length;
-      if (flatIndex >= start && flatIndex < start + row.length) {
-        return row[flatIndex - start];
-      }
-    }
-    return null;
+    final stride = slide.tableRows.fold<int>(
+      0,
+      (m, r) => r.length > m ? r.length : m,
+    );
+    if (stride == 0) return null;
+    final r = flatIndex ~/ stride;
+    final c = flatIndex % stride;
+    if (r >= slide.tableRows.length) return null;
+    final row = slide.tableRows[r];
+    return c < row.length ? row[c] : null;
   }
 
   /// Het commitment: SHA-256 over salt en waarde.

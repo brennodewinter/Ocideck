@@ -84,26 +84,49 @@ class Asn1Node {
 /// Parse the single top-level DER value in [data]. Constructed nodes are parsed
 /// recursively; primitive nodes keep their raw [Asn1Node.content]. Returns null
 /// when [data] is not well-formed DER.
+/// Hoeveel niveaus diep een DER-boom mag zijn.
+///
+/// Een RFC 3161-token heeft er een handvol. De grens staat er niet voor die,
+/// maar voor een token dat expres duizenden niveaus diep is: `_readNode` daalt
+/// recursief af, en dan loopt de Dart-stack over met een [StackOverflowError].
+/// Dat is een `Error`, geen `Exception`, dus de `on RangeError` hieronder ving
+/// hem niet — en de aanroeper evenmin. Het token zit in de front matter van het
+/// deck en wordt gelezen tijdens het bouwen van het zegelvenster, dus een deck
+/// dat iemand je stuurt liet de app elke keer opnieuw omvallen.
+const int _maxDerDepth = 64;
+
 Asn1Node? parseDer(Uint8List data) {
   try {
-    final (node, _) = _readNode(data, 0);
+    final (node, _) = _readNode(data, 0, 0);
     return node;
   } on RangeError {
     // Truncated/malformed DER indexes past the end — not valid, return null.
     return null;
+  } on FormatException {
+    // Te diep genest of een onbepaalde lengte: geen geldige DER.
+    return null;
   }
 }
 
-(Asn1Node, int) _readNode(Uint8List data, int offset) {
+(Asn1Node, int) _readNode(Uint8List data, int offset, int depth) {
+  if (depth > _maxDerDepth) {
+    throw const FormatException('DER-nesting te diep');
+  }
   var i = offset;
   final tag = data[i++];
   var len = data[i++];
   if (len & 0x80 != 0) {
     final n = len & 0x7f;
+    // `0x80` is de onbepaalde lengte uit BER. In DER bestaat die niet, en hij
+    // werd hier als lengte nul gelezen: de inhoud van zo'n knoop viel dan
+    // stilzwijgend buiten de boom en werd op het niveau erboven opnieuw
+    // uitgelegd. In een verificatiepad hoort dat een weigering te zijn.
+    if (n == 0) throw const FormatException('DER kent geen onbepaalde lengte');
     len = 0;
     for (var k = 0; k < n; k++) {
       len = (len << 8) | data[i++];
     }
+    if (len < 0) throw const FormatException('DER-lengte loopt over');
   }
   final content = Uint8List.sublistView(data, i, i + len);
   final end = i + len;
@@ -111,7 +134,7 @@ Asn1Node? parseDer(Uint8List data) {
   if (tag & 0x20 != 0) {
     var c = i;
     while (c < end) {
-      final (child, next) = _readNode(data, c);
+      final (child, next) = _readNode(data, c, depth + 1);
       children.add(child);
       c = next;
     }

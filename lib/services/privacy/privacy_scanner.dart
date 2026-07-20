@@ -42,9 +42,18 @@ import 'privacy_world_rules.dart';
 import 'privacy_secret_rules.dart';
 
 part 'privacy_scanner_detectors.dart';
+part 'privacy_scanner_fragments.dart';
 
 /// Eén tekstfragment van een slide, met de veldnaam waar het uit komt.
-typedef _Fragment = ({String field, int index, String text});
+/// Eén doorzoekbaar tekstveld.
+///
+/// [context] is tekst die niet zélf gescand wordt maar wel meetelt als
+/// omgeving voor de contextpoort: bij een tabelcel de kop van zijn kolom. Een
+/// contextwoord staat daar namelijk vaak — een kolom "BSN" met de nummers
+/// eronder is de gebruikelijkste manier om ze in een deck te zetten — en de
+/// poort keek alleen binnen het fragment zelf, dus die kolomkop kon per
+/// definitie nooit meetellen.
+typedef _Fragment = ({String field, int index, String text, String context});
 
 /// Hoe ver een contextwoord vóór een treffer mag staan om nog te tellen.
 ///
@@ -549,7 +558,12 @@ class PrivacyScanner {
         // waarvan de checksum te zwak is om alleen op af te gaan — tien cijfers
         // met een Luhn is óók een klantnummer.
         if (rule.contextWords.isNotEmpty &&
-            !_hasContextWord(fragment.text, match.start, rule.contextWords)) {
+            !_hasContextWord(
+              fragment.text,
+              match.start,
+              rule.contextWords,
+              context: fragment.context,
+            )) {
           continue;
         }
 
@@ -590,7 +604,12 @@ class PrivacyScanner {
         // voor `secret.entropy`: die gaat op willekeur af in plaats van op een
         // prefix, en willekeur is overal.
         if (rule.contextWords.isNotEmpty &&
-            !_hasContextWord(fragment.text, match.start, rule.contextWords)) {
+            !_hasContextWord(
+              fragment.text,
+              match.start,
+              rule.contextWords,
+              context: fragment.context,
+            )) {
           continue;
         }
 
@@ -808,6 +827,7 @@ class PrivacyScanner {
         fragment.text,
         match.start,
         bsnContextWords,
+        context: fragment.context,
       );
       _emit(
         out,
@@ -826,10 +846,21 @@ class PrivacyScanner {
   }
 
   /// Staat een van [words] binnen [kContextWindow] tekens vóór de treffer?
-  bool _hasContextWord(String text, int matchStart, List<String> words) {
+  bool _hasContextWord(
+    String text,
+    int matchStart,
+    List<String> words, {
+    String context = '',
+  }) {
     final from = (matchStart - kContextWindow).clamp(0, text.length);
     final window = text.substring(from, matchStart).toLowerCase();
-    return words.any(window.contains);
+    if (words.any(window.contains)) return true;
+    // De omgeving van het fragment — bij een tabelcel de kop van zijn kolom.
+    // Die staat per definitie buiten het venster hierboven, want het is een
+    // ander fragment.
+    if (context.isEmpty) return false;
+    final around = context.toLowerCase();
+    return words.any(around.contains);
   }
 
   /// Voegt een bevinding toe, tenzij hij is onderdrukt (`null`).
@@ -904,68 +935,5 @@ class PrivacyScanner {
       // in haar eigen meldingen zet, heeft het probleem verplaatst.
       maskedSample: maskValue(subject),
     );
-  }
-
-  // ── Welke velden gescand worden ───────────────────────────────────────────
-
-  /// De deckvelden die in de documentmetadata belanden (en dus meereizen in
-  /// PDF-properties en PPTX-docProps, leesbaar, ook al staat er op geen enkele
-  /// slide iets van te zien).
-  Iterable<_Fragment> _deckFragments(Deck deck) sync* {
-    yield (field: 'deckTitle', index: 0, text: deck.title);
-    yield (field: 'author', index: 0, text: deck.author);
-    yield (field: 'organization', index: 0, text: deck.organization);
-    yield (field: 'description', index: 0, text: deck.description);
-    yield (field: 'keywords', index: 0, text: deck.keywords);
-  }
-
-  /// Elk tekstdragend veld van een slide.
-  ///
-  /// `notes` staat er nadrukkelijk bij: sprekersnotities zijn onzichtbaar in de
-  /// preview, maar gaan als platte tekst mee in de PPTX-notitiepagina's. Het is
-  /// in de praktijk het vuilste veld van allemaal.
-  Iterable<_Fragment> _slideFragments(Slide slide) sync* {
-    yield (field: 'title', index: 0, text: slide.title);
-    yield (field: 'subtitle', index: 0, text: slide.subtitle);
-    yield (field: 'columnTitle1', index: 0, text: slide.columnTitle1);
-    yield (field: 'columnTitle2', index: 0, text: slide.columnTitle2);
-    yield (field: 'imageCaption', index: 0, text: slide.imageCaption);
-    yield (field: 'imageCaption2', index: 0, text: slide.imageCaption2);
-    yield (field: 'imageAltText', index: 0, text: slide.imageAltText);
-    yield (field: 'imageAltText2', index: 0, text: slide.imageAltText2);
-    yield (field: 'quote', index: 0, text: slide.quote);
-    yield (field: 'quoteAuthor', index: 0, text: slide.quoteAuthor);
-    yield (field: 'customMarkdown', index: 0, text: slide.customMarkdown);
-    yield (field: 'notes', index: 0, text: slide.notes);
-
-    // De mediapaden. Een `/Users/jan.jansen/…` in een afbeeldingsverwijzing
-    // verraadt gewoon een naam, en dat pad reist mee in de markdown en dus in de
-    // HTML-export.
-    //
-    // De projectie lakt hier geen tekens in weg — een pad met blokjes erin is
-    // een kapotte verwijzing, en de auteur hernoemt het bestand of verplaatst
-    // het. Maar op een slide die op `redact` staat verdwijnt de hele
-    // mediaverwijzing (zie `_projectMedia`), dus dáár komt het pad ook niet meer
-    // in de export terecht. Dat was eerder wél zo, en dan reisde een
-    // gedetecteerde `/Users/jan.jansen/…` gewoon mee.
-    yield (field: 'imagePath', index: 0, text: slide.imagePath);
-    yield (field: 'imagePath2', index: 0, text: slide.imagePath2);
-    yield (field: 'videoPath', index: 0, text: slide.videoPath);
-    yield (field: 'audioPath', index: 0, text: slide.audioPath);
-
-    for (var i = 0; i < slide.bullets.length; i++) {
-      yield (field: 'bullets', index: i, text: slide.bullets[i]);
-    }
-    for (var i = 0; i < slide.bullets2.length; i++) {
-      yield (field: 'bullets2', index: i, text: slide.bullets2[i]);
-    }
-    // Tabelcellen krijgen een doorlopende index (rij * kolommen + kolom), zodat
-    // één int volstaat om de cel terug te vinden.
-    for (var r = 0; r < slide.tableRows.length; r++) {
-      final row = slide.tableRows[r];
-      for (var c = 0; c < row.length; c++) {
-        yield (field: 'tableRows', index: r * row.length + c, text: row[c]);
-      }
-    }
   }
 }
