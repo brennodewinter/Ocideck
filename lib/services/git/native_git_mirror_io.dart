@@ -427,7 +427,12 @@ class _NativeGitMirror implements NativeGitMirror {
       await _writeAll(resolved.files);
       await _run(['add', '-A']);
       await _commit(message);
-    } on GitCliException catch (e) {
+      // Breed: dit blok verwijdert, schrijft én commit. Een mislukte schrijf
+      // of verwijdering gooit een FileSystemException, geen GitCliException —
+      // die viel eerst langs de recovery en liet de merge half toegepast met
+      // een openstaande MERGE_HEAD achter. Elke fout hier hoort tot dezelfde
+      // afbreken-en-teruggeven-afhandeling.
+    } on Exception catch (e) {
       logWarning('mergeRemote: samengevoegde commit mislukt', e);
       try {
         await _run(['merge', '--abort']);

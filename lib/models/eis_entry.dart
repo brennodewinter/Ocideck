@@ -59,23 +59,20 @@ enum EisCheck {
   /// Every finding names its scope object (4.7.1).
   everyFindingHasScope,
 
-  /// Every finding carries a CVSS 4.0 score + vector (3.2 / 4.7.2).
+  /// Every finding carries a CVSS 4.0 score + vector (3.2 / 4.7.2 + 4.7.3).
   everyFindingHasCvss,
 
-  /// Every finding has a description (4.7.3).
+  /// Every finding has a description (4.7.4).
   everyFindingHasDescription,
 
-  /// Every finding has confirmation / reproduction steps (4.7.4).
+  /// Every finding has confirmation / reproduction steps (4.7.5).
   everyFindingHasConfirmation,
 
-  /// Every finding states its possible impact (4.7.5).
+  /// Every finding states its possible impact (4.7.6).
   everyFindingHasImpact,
 
-  /// Every finding has a recommendation (4.7.6).
+  /// Every finding has a recommendation (4.7.7).
   everyFindingHasRecommendation,
-
-  /// Every finding links a CWE weakness (4.7.6).
-  everyFindingHasCwe,
 }
 
 /// One MIAUW requirement (EIS) from the bundled schema (PENTEST_MIAUW §1/§9).

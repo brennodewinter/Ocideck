@@ -109,7 +109,18 @@ Deck renumberFindings(Deck deck) {
       if (h.index < i) above = h.newId;
     }
     final newId = above ?? anywhere;
-    if (newId == null) continue;
+    if (newId == null) {
+      // Wees: geen enkele kop draagt (nog) deze id — de kop is verwijderd. De
+      // dia hield dan zijn oude `F-NN`-titelprefix, die in het opgeleverde deck
+      // naar een bevinding wijst die er niet meer is. Haal de dode verwijzing
+      // weg en laat de dia los van elke groep.
+      if (!_reFindingPrefix.hasMatch(s.title) && s.findingId.isEmpty) continue;
+      slides[i] = s.copyWith(
+        findingId: '',
+        title: s.title.replaceFirst(_reFindingPrefix, '').trim(),
+      );
+      continue;
+    }
     final title = _reFindingPrefix.hasMatch(s.title)
         ? applyFindingPrefix(s.title, newId)
         : s.title;

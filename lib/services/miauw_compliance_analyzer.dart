@@ -120,10 +120,6 @@ class MiauwComplianceAnalyzer {
         findings,
         (f) => f.recommendation.trim().isNotEmpty,
       ),
-      EisCheck.everyFindingHasCwe => _everyFinding(
-        findings,
-        (f) => f.cweId != null,
-      ),
     };
   }
 }
