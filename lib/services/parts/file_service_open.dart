@@ -53,7 +53,11 @@ extension _FileServiceOpen on FileService {
   /// Load the external CSV of any chart slide that links one, inlining the data
   /// into the in-memory spec so the renderer has it. The markdown on disk keeps
   /// only the `source` reference (data is stripped again on save).
-  Future<Deck> _hydrateCharts(Deck deck, List<String> warnings) async {
+  Future<Deck> _hydrateCharts(
+    Deck deck,
+    List<String> warnings, {
+    required String deckPath,
+  }) async {
     if (deck.projectPath == null) return deck;
     var changed = false;
     final slides = <Slide>[];
@@ -100,8 +104,10 @@ extension _FileServiceOpen on FileService {
         }
         // Remember what the file held, so the save path can tell "the user
         // edited this chart" apart from "nobody touched it" — see
-        // [_writeChartData].
-        _chartDataAtOpen[abs] = filled.dataToJson();
+        // [_writeChartData]. Onder dit deck, niet op één hoop: zie
+        // [_chartDataAtOpen].
+        (_chartDataAtOpen[FileService._deckChartKey(deckPath)] ??= {})[abs] =
+            filled.dataToJson();
         slides.add(s.copyWith(customMarkdown: filled.toBlock()));
         changed = true;
       } catch (e) {
@@ -178,18 +184,29 @@ extension _FileServiceOpen on FileService {
   /// Remove data files this deck left behind — a chart slide that was deleted,
   /// or one that forked onto a new file.
   ///
-  /// Deliberately narrow: only files this service itself read or wrote for this
-  /// deck ([_chartDataAtOpen]) are eligible. An unrelated file someone dropped
-  /// in `data/` is none of our business, and `.csv` files are never removed at
-  /// all — those were supplied by the user, not generated here.
-  Future<void> _pruneChartData(Deck deck, String dir) async {
+  /// Deliberately narrow: only files this service itself read or wrote **for
+  /// this deck** ([_chartDataAtOpen], onder de sleutel van dit deck) are
+  /// eligible. An unrelated file someone dropped in `data/` is none of our
+  /// business, and `.csv` files are never removed at all — those were supplied
+  /// by the user, not generated here.
+  ///
+  /// De sleutel doet het echte werk: twee decks kunnen dezelfde map delen, dus
+  /// "ligt in [dir]" zegt niets over van wie een bestand is. Zonder die scheiding
+  /// wist het opslaan van het ene deck het databestand van het andere.
+  Future<void> _pruneChartData(
+    Deck deck,
+    String dir, {
+    required String deckPath,
+  }) async {
+    final baselines = _chartDataAtOpen[FileService._deckChartKey(deckPath)];
+    if (baselines == null) return;
     final referenced = <String>{
       for (final s in deck.slides)
         if (s.type == SlideType.chart)
           if (ChartSpec.parse(s.customMarkdown).source case final src?)
             resolveProjectRelative(dir, src) ?? '',
     };
-    final ours = _chartDataAtOpen.keys
+    final ours = baselines.keys
         .where(
           (abs) => p.isWithin(dir, abs) && abs.toLowerCase().endsWith('.json'),
         )
@@ -202,7 +219,7 @@ extension _FileServiceOpen on FileService {
       } catch (e) {
         logWarning('FileService._pruneChartData: stale data file kept', e);
       }
-      _chartDataAtOpen.remove(abs);
+      baselines.remove(abs);
     }
   }
 
@@ -217,8 +234,14 @@ extension _FileServiceOpen on FileService {
   ///
   /// When both sides changed, the app wins — it holds what the user last saw
   /// and edited — but the clash is reported rather than swallowed.
-  Future<List<String>> _writeChartData(Deck deck, String dir) async {
+  Future<List<String>> _writeChartData(
+    Deck deck,
+    String dir, {
+    required String deckPath,
+  }) async {
     final warnings = <String>[];
+    final baselines = _chartDataAtOpen[FileService._deckChartKey(deckPath)] ??=
+        {};
     for (final s in deck.slides) {
       if (s.type != SlideType.chart) continue;
       final spec = ChartSpec.parse(s.customMarkdown);
@@ -229,7 +252,7 @@ extension _FileServiceOpen on FileService {
         warnings.add(source); // buiten de projectmap; nooit schrijven
         continue;
       }
-      final baseline = _chartDataAtOpen[abs];
+      final baseline = baselines[abs];
       final current = spec.dataToJson();
       if (baseline == current) continue; // ongewijzigd: bestand niet aanraken
       final file = File(abs);
@@ -242,7 +265,7 @@ extension _FileServiceOpen on FileService {
         }
         await file.parent.create(recursive: true);
         await writeStringAtomic(file, _chartDataFor(spec, path: abs));
-        _chartDataAtOpen[abs] = current;
+        baselines[abs] = current;
       } catch (e) {
         logWarning('FileService._writeChartData: chart data not writable', e);
         warnings.add(source);
