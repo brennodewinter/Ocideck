@@ -648,6 +648,36 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   een strafzaak gaat. Een markering verbergt een waarde, geen onderwerp.
 
 ### Fixed
+- **Vier dingen die de ontvanger van een export te zien kreeg — of juist niet.**
+
+  *Een uitgezet script in commentaar maakte de hele HTML-export blanco.* De
+  beveiliging tegen uitbraak uit het markdown-blok keek alleen naar `</script`,
+  maar dat is niet de enige uitgang: een `<!--` zet de HTML-lezer in een andere
+  stand, en een `<script` daarna in nóg een, waar een echte `</script>` het blok
+  niet meer sluit. Alles daarna werd scripttekst — inclusief het stukje dat de
+  dia's zichtbaar maakt. De ontvanger opende een lege witte pagina, zonder
+  foutmelding. En de invoer is doodgewoon: een codedia die kwetsbare paginabron
+  citeert, precies wat een pentestrapport doet.
+
+  *Het `.ocideck`-pakket ging om de classificatiepoort heen.* Bij een
+  vrijgaveplafond gaf "Exporteer naar PDF" een nette weigering en "Exporteer
+  pakket" gewoon een bestand — terwijl een pakket de meest complete uitvoer is
+  die de app kent. Erger nog, en zónder dat er een instelling voor nodig was: het
+  pakket hield achtergehouden dia's niet achter. Een dia op *overslaan*, of met
+  een strengere eigen classificatie dan het deck, is onzichtbaar in de presenter,
+  op het zaalscherm en in de PDF — en ging mee in het pakket dat naar de klant
+  gaat.
+
+  *Negatieve waarden tekenden niet.* Een verliesreeks of een afwijking ten
+  opzichte van een nulmeting kwam uit op een lege grafiek met een y-as van 0 tot
+  1, terwijl de gegevens van −5 tot −8 liepen. Aannemelijk ogende onzin, wat
+  erger is dan een zichtbaar lege grafiek.
+
+  *Een quizdia zette de antwoordsleutel in het document.* Zonder eigen weergave
+  viel het vraagblok terug op de codeweergave, en stond de hele specificatie
+  leesbaar op de dia — inclusief welk antwoord het goede is. Wie een quizdeck als
+  voorbereiding rondstuurde, deelde de antwoorden mee.
+
 - **De staart van de bugjacht: ruim twintig bevindingen ineens.** Wat overbleef
   na de eerdere rondes — geen samenhangend cluster meer, maar wel stuk voor stuk
   een pad waarlangs iets stils misging.
