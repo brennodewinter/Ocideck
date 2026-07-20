@@ -1793,6 +1793,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Media verwijderd om privacyredenen':
+      'Multimedia usunięte ze względów prywatności',
   'Afbeeldingen door AI laten taggen?': 'Pozwolić SI otagować te obrazy?',
   'afbeeldingen gaan naar': 'obrazów zostanie wysłanych do',
   'een model op dit apparaat': 'model na tym urządzeniu',

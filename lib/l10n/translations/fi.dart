@@ -1781,6 +1781,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Media verwijderd om privacyredenen': 'Media poistettu yksityisyyden vuoksi',
   'Afbeeldingen door AI laten taggen?':
       'Annetaanko tekoälyn merkitä nämä kuvat?',
   'afbeeldingen gaan naar': 'kuvaa lähetetään kohteeseen',

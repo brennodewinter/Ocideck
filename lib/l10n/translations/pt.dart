@@ -1811,6 +1811,8 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Media verwijderd om privacyredenen':
+      'Multimédia removida por motivos de privacidade',
   'Afbeeldingen door AI laten taggen?': 'Deixar a IA etiquetar estas imagens?',
   'afbeeldingen gaan naar': 'imagens serão enviadas para',
   'een model op dit apparaat': 'um modelo neste dispositivo',

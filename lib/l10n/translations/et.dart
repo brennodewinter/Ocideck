@@ -1772,6 +1772,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Media verwijderd om privacyredenen':
+      'Meedia eemaldatud privaatsuse kaalutlustel',
   'Afbeeldingen door AI laten taggen?':
       'Kas lasta tehisintellektil need pildid sildistada?',
   'afbeeldingen gaan naar': 'pilti saadetakse aadressile',

@@ -1804,6 +1804,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Media verwijderd om privacyredenen':
+      'Медията е премахната по съображения за поверителност',
   'Afbeeldingen door AI laten taggen?': 'Да маркира ли ИИ тези изображения?',
   'afbeeldingen gaan naar': 'изображения ще бъдат изпратени до',
   'een model op dit apparaat': 'модел на това устройство',

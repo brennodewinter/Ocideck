@@ -110,7 +110,9 @@ class MarpHtmlService {
       final renderedBlocks = renderCockpitBlocks(
         renderSignOffBlock(
           renderTimelineBlocks(
-            renderQuestionBlocks(renderChartBlocks(slide, theme: theme)),
+            renderMediaRedacted(
+              renderQuestionBlocks(renderChartBlocks(slide, theme: theme)),
+            ),
           ),
           signature,
           sealedAt: signature['ocideck_seal_at'] ?? '',
@@ -412,6 +414,29 @@ class MarpHtmlService {
     return out.toString();
   }
 
+  // ── Media-redactie → HTML ─────────────────────────────────────────────────
+
+  static final RegExp _mediaRedactedMarker = RegExp(
+    r'<!--\s*ocideck_media_redacted\s*-->',
+  );
+
+  /// Vervangt de media-redactiemarkering door een zichtbaar zwart vlak.
+  ///
+  /// De privacyprojectie haalt beeld, video en audio van een slide af en zet
+  /// [Slide.mediaRedacted]. De widget-exports tekenen daar een zwart vlak; de
+  /// HTML-export werkt op de markdown en liet alleen een lege plek staan,
+  /// terwijl de tekst ernaast wél zwarte blokken toonde. Nu ziet de ontvanger
+  /// dát er beeld is weggehaald, net als in het rapport dat de auteur zag.
+  static String renderMediaRedacted(String slideMarkdown) {
+    if (!_mediaRedactedMarker.hasMatch(slideMarkdown)) return slideMarkdown;
+    const l10n = AppLocalizations(Locale('nl'));
+    final box =
+        '\n<div class="media-redacted" role="img" '
+        'aria-label="${_htmlAttr(l10n.d('Media verwijderd om privacyredenen'))}">'
+        '${_htmlText(l10n.d('Media verwijderd om privacyredenen'))}</div>\n';
+    return slideMarkdown.replaceAll(_mediaRedactedMarker, box);
+  }
+
   // ── Ondertekening → HTML ──────────────────────────────────────────────────
 
   static final RegExp _signOffClass = RegExp(
@@ -639,6 +664,7 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
 .slide .signoff-none{font-style:italic;color:#64748b;font-size:22px}
 .slide .signoff-meta{font-size:20px;color:#475569;margin:.1em 0}
 .slide .signoff-seal{font-size:18px;color:#64748b;letter-spacing:.03em;margin-top:.7em}
+.slide .media-redacted{display:flex;align-items:center;justify-content:center;min-height:200px;margin:.6em 0;background:#000;color:#fff;font-size:20px;letter-spacing:.05em;border-radius:4px;text-align:center;padding:24px}
 .tlp-export-banner{position:fixed;top:0;left:0;right:0;background:#000;color:#ffc000;text-align:center;font:700 14px/2.4 monospace;z-index:9999;letter-spacing:.06em}
 @media print{body{background:#fff}.slide{margin:0;box-shadow:none;border-radius:0;page-break-after:always;width:100%;min-height:100vh}}
 ''';

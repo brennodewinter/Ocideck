@@ -1788,6 +1788,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Media verwijderd om privacyredenen':
+      'Medijski sadržaj uklonjen radi privatnosti',
   'Afbeeldingen door AI laten taggen?': 'Neka UI označi ove slike?',
   'afbeeldingen gaan naar': 'slika bit će poslano na',
   'een model op dit apparaat': 'model na ovom uređaju',

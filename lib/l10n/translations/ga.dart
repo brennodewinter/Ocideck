@@ -1817,6 +1817,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Media verwijderd om privacyredenen':
+      'Baineadh na meáin as ar chúiseanna príobháideachais',
   'Afbeeldingen door AI laten taggen?':
       'Lig don IS na híomhánna seo a chlibeáil?',
   'afbeeldingen gaan naar': 'íomhá le seoladh chuig',

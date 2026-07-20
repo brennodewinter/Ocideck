@@ -1788,6 +1788,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Media verwijderd om privacyredenen':
+      'Médiá odstránené z dôvodu ochrany súkromia',
   'Afbeeldingen door AI laten taggen?': 'Nechať AI označiť tieto obrázky?',
   'afbeeldingen gaan naar': 'obrázkov bude odoslaných na',
   'een model op dit apparaat': 'model v tomto zariadení',

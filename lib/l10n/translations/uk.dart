@@ -1799,6 +1799,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Media verwijderd om privacyredenen':
+      'Медіа вилучено з міркувань конфіденційності',
   'Afbeeldingen door AI laten taggen?': 'Дозволити ШІ позначити ці зображення?',
   'afbeeldingen gaan naar': 'зображень буде надіслано до',
   'een model op dit apparaat': 'модель на цьому пристрої',

@@ -1780,6 +1780,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Media verwijderd om privacyredenen':
+      'Medier fjernet af hensyn til privatlivet',
   'Afbeeldingen door AI laten taggen?': 'Lad AI tagge disse billeder?',
   'afbeeldingen gaan naar': 'billeder sendes til',
   'een model op dit apparaat': 'en model på denne enhed',

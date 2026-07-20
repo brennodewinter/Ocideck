@@ -738,6 +738,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Media verwijderd om privacyredenen':
+      'Media kitá kitá pa motibu di privacidat',
   'Afbeeldingen door AI laten taggen?': 'Laga IA taga e imágennan aki?',
   'afbeeldingen gaan naar': 'imágen ta bai na',
   'een model op dit apparaat': 'un modelo riba e aparato aki',

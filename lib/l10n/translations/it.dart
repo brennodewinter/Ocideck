@@ -734,6 +734,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Media verwijderd om privacyredenen':
+      'Contenuti multimediali rimossi per motivi di privacy',
   'Afbeeldingen door AI laten taggen?':
       'Far etichettare queste immagini all\'IA?',
   'afbeeldingen gaan naar': 'immagini saranno inviate a',
