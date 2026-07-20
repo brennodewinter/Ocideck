@@ -1283,7 +1283,11 @@ When exporting a package you may protect it with a password. Encryption is
 - **Detection on open.** OciDeck inspects the zip header (no password needed) to
   see whether the package is encrypted, then prompts for the password and
   retries on a wrong one. The central directory (file **names** and structure)
-  is *not* encrypted — only file **contents** are.
+  is *not* encrypted — only file **contents** are. Worth knowing when the names
+  themselves are telling: image filenames come along as they were, and a chart's
+  data file is named after the chart's **title** (§6.4), so `Omzet_2025.json` is
+  readable from an encrypted package without the password. Retitle a chart
+  before exporting if its title is the sensitive part.
 - **Key derivation.** WinZip AES derives the key with **PBKDF2-HMAC-SHA1, 1000
   iterations**. This iteration count is fixed by the WinZip AES spec and is low
   by modern standards, so a short/guessable password is the weak link. The
@@ -1346,6 +1350,12 @@ In the editor, the code icon in the toolbar switches to **Markdown mode**: the
 entire presentation is shown as one Marp Markdown document (the same structure as
 on disk). **Apply** parses the text back into typed slides; **Cancel** returns
 without applying changes.
+
+One deliberate difference from the file on disk: a chart with a linked data file
+(§6.4) is shown here with its `x` and `series` **inline**, so the numbers can be
+read and edited in place instead of pointing at a file the text editor cannot
+open. The `source` stays in the block, and applying the text writes the values
+back to the data file on the next save.
 
 ### Find and Replace
 
