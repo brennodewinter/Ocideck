@@ -217,10 +217,19 @@ double? parseScorecardNumber(String raw) {
 /// Write a figure back to a table cell: whole numbers without a decimal tail,
 /// everything else as-is. Always a dot, so the file stays machine-readable
 /// regardless of the author's locale.
-String formatScorecardNumber(double value) =>
-    value == value.roundToDouble() && value.abs() < 1e15
-    ? value.toInt().toString()
-    : value.toString();
+///
+/// Binary floating point is rounded away first. A delta is a *subtraction of
+/// two typed figures*, and 3.5 − 4.2 is not −0.7 in IEEE 754 but
+/// −0.7000000000000002 — which is what the slide would otherwise print, in a
+/// report, to a management audience. Twelve significant digits is far more than
+/// any figure on a scorecard carries, so this removes the artefact without
+/// touching a number anybody actually entered.
+String formatScorecardNumber(double value) {
+  final clean = double.parse(value.toStringAsPrecision(12));
+  return clean == clean.roundToDouble() && clean.abs() < 1e15
+      ? clean.toInt().toString()
+      : clean.toString();
+}
 
 /// A change written for display: always signed, so a rise still reads as a rise
 /// when the slide is printed in greyscale and the colour is gone.

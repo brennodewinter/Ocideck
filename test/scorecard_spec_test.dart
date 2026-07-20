@@ -222,6 +222,32 @@ void main() {
       expect(formatScorecardNumber(62.5), '62.5');
       expect(formatScorecardNumber(-3), '-3');
     });
+
+    test('binary floating-point noise never reaches the slide', () {
+      // 3.5 - 4.2 is not -0.7 in IEEE 754. Before this, a risk level that
+      // dropped from 4.2 to 3.5 printed "-0.7000000000000002" on a management
+      // slide.
+      expect(formatScorecardNumber(3.5 - 4.2), '-0.7');
+      expect(formatScorecardNumber(0.1 + 0.2), '0.3');
+      expect(formatScorecardNumber(1.1 * 3), '3.3');
+    });
+
+    test('a figure somebody actually typed survives intact', () {
+      // The cleanup must not round away real precision.
+      expect(formatScorecardNumber(1234567.891), '1234567.891');
+      expect(formatScorecardNumber(0.125), '0.125');
+      expect(formatScorecardNumber(-62.75), '-62.75');
+    });
+  });
+
+  test('a fractional delta reads as the reader would write it', () {
+    const entry = ScorecardEntry(
+      label: 'Risiconiveau',
+      value: 3.5,
+      previous: 4.2,
+      polarity: ScorecardPolarity.lowerBetter,
+    );
+    expect(formatScorecardDelta(entry.delta!), '-0.7');
   });
 
   test('every polarity has a Dutch source label', () {
