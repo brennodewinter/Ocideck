@@ -1799,6 +1799,32 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Ontdekkingen': 'Відкриття',
+  'Wat is gevonden': 'Що знайдено',
+  'Soort': 'Вид',
+  'Dagen onopgemerkt': 'Днів непоміченим',
+  'Ontdekking toevoegen': 'Додати відкриття',
+  'Ontdekking verwijderen': 'Видалити відкриття',
+  'Kop van de slide': 'Заголовок слайда',
+  'dagen onopgemerkt': 'днів непоміченим',
+  'Nog geen blootstelling ingevuld — de slide toont dan geen kop, alleen de lijst.':
+      'Тривалість викриття ще не вказано — слайд не покаже заголовок, лише список.',
+  'Zes ontdekkingen is het maximum; wie er meer noemt maakt een bijlage in plaats van een slide.':
+      'Шість відкриттів — максимум; хто називає більше, робить додаток, а не слайд.',
+  'Laat de dagen leeg als de eerste blootstelling onbekend is; de slide zegt dan "onbekend" in plaats van nul. Een lege eigenaar leest als "geen eigenaar" en valt rood op.':
+      'Залиште дні порожніми, якщо перше викриття невідоме; слайд тоді напише "невідомо" замість нуля. Порожній відповідальний читається як "без відповідального" і виділяється червоним.',
+  'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
+      'Що знайшло сканування і про що ніхто не знав. Для кожного відкриття, як довго воно було доступним непоміченим і хто за нього відповідає тепер; найдовше викриття — заголовок.',
+  'dag': 'день',
+  'dagen': 'днів',
+  'maand': 'місяць',
+  'maanden': 'місяців',
+  'eigenaar': 'відповідальний',
+  'langst onopgemerkt bereikbaar': 'найдовше доступне непоміченим',
+  'onbekend': 'невідомо',
+  'onopgemerkt': 'непоміченим',
+  'ontdekking': 'відкриття',
+  'ontdekkingen': 'відкриттів',
   'Norm en prestatie': 'Ціль і результат',
   'Norm per rij (optioneel)': 'Ціль на рядок (необов\'язково)',
   'Bandgrenzen (optioneel)': 'Межі смуг (необов\'язково)',

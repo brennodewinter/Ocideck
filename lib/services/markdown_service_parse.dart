@@ -33,6 +33,7 @@ const _tableBackedTypes = {
   SlideType.table,
   SlideType.scorecard,
   SlideType.assets,
+  SlideType.discoveries,
   SlideType.checklist,
   SlideType.scopeMatrix,
   SlideType.findingsSummary,
@@ -911,6 +912,7 @@ extension _MarkdownParse on MarkdownService {
     // simpelweg als `table` te lezen — geen dataconversie nodig.
     if (tokens.contains('actions')) return SlideType.table;
     if (tokens.contains('assets')) return SlideType.assets;
+    if (tokens.contains('discoveries')) return SlideType.discoveries;
     // Informatieveiligheid-module (PENTEST_MIAUW §4). Elk type draagt een eigen
     // `_class`-token; de body round-trip't als vrije Markdown (zie de
     // customMarkdown-toewijzing hieronder). Exacte tokens, dus geen conflict

@@ -1756,6 +1756,32 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Ontdekkingen': 'tu\'bogh Doch',
+  'Wat is gevonden': 'nuq tu\'lu\'',
+  'Soort': 'Segh',
+  'Dagen onopgemerkt': 'jaj legh\'be\'',
+  'Ontdekking toevoegen': 'tu\'bogh Doch chel',
+  'Ontdekking verwijderen': 'tu\'bogh Doch teq',
+  'Kop van de slide': 'HuchQeD nab',
+  'dagen onopgemerkt': 'jaj legh\'be\'',
+  'Nog geen blootstelling ingevuld — de slide toont dan geen kop, alleen de lijst.':
+      'not\'a\' poH ngoDHom Sovbe\'lu\' — vaj nab tu\'lu\'be\', tetlh neH tu\'lu\'.',
+  'Zes ontdekkingen is het maximum; wie er meer noemt maakt een bijlage in plaats van een slide.':
+      'tu\'bogh Doch jav \'oH \'ar\'a\'; law\' pong\'lu\'chugh, vaj mISHa\' chenmoHlu\', HuchQeD chenmoHbe\'lu\'.',
+  'Laat de dagen leeg als de eerste blootstelling onbekend is; de slide zegt dan "onbekend" in plaats van nul. Een lege eigenaar leest als "geen eigenaar" en valt rood op.':
+      'poH Sovbe\'lu\'chugh, jaj yaHmoH; vaj "Sovbe\'" jatlh HuchQeD, pagh jatlhbe\'. pIn ngoDHom chImchugh, "pIn Hutlh" laDlu\' \'ej Doq\'a\'.',
+  'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
+      'nuq tu\' HoHwI\'; vaj Sovbe\'lu\'pu\'. tu\'bogh Doch Hoch: nuqDaq legh\'be\'lu\' \'ej \'Iv pIn DaH; poH tIq law\' nab.',
+  'dag': 'jaj',
+  'dagen': 'jaj',
+  'maand': 'jar',
+  'maanden': 'jar',
+  'eigenaar': 'pIn',
+  'langst onopgemerkt bereikbaar': 'poH tIq law\' legh\'be\'',
+  'onbekend': 'Sovbe\'',
+  'onopgemerkt': 'legh\'be\'',
+  'ontdekking': 'tu\'bogh Doch',
+  'ontdekkingen': 'tu\'bogh Doch',
   'Norm en prestatie': 'ngoq je qav',
   'Norm per rij (optioneel)': 'mIw ngoq (DaH neH)',
   'Bandgrenzen (optioneel)': '\'ay\' veHmey (DaH neH)',

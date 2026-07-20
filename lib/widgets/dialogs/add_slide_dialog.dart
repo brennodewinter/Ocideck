@@ -55,6 +55,7 @@ class AddSlideDialog extends StatefulWidget {
     // Informatieveiligheid-module — grouped last; shown under their own picker
     // tab (P0-PICK) once the category carries types.
     SlideType.assets,
+    SlideType.discoveries,
     SlideType.finding,
     SlideType.findingsSummary,
     SlideType.checklist,
@@ -608,6 +609,8 @@ class SlideTypePreviewPainter extends CustomPainter {
         _paintScorecardWireframe(canvas);
       case SlideType.assets:
         _paintAssetsWireframe(canvas);
+      case SlideType.discoveries:
+        _paintDiscoveriesWireframe(canvas);
       case SlideType.finding:
       case SlideType.findingsSummary:
       case SlideType.checklist:
@@ -633,6 +636,23 @@ class SlideTypePreviewPainter extends CustomPainter {
   /// Heading plus four proportional bars of differing length, each with a
   /// filled head standing for the at-risk share. Split out of [paint] for the
   /// length ratchet, like the other reporting wireframes.
+  /// Heading, then a named find per row with its exposure bar and an ownership
+  /// marker on the right. Longest first, because that is the order the slide
+  /// itself argues in — and what tells this wireframe apart from the assets one,
+  /// whose bars carry a nested at-risk head instead.
+  void _paintDiscoveriesWireframe(Canvas canvas) {
+    _bar(canvas, 14, 12, 72, 9, _ink);
+    const widths = [96.0, 62.0, 38.0, 20.0];
+    for (var i = 0; i < widths.length; i++) {
+      final y = 32.0 + i * 13;
+      _bar(canvas, 14, y, 34, 6, _ink, radius: 2);
+      _bar(canvas, 54, y, widths[i], 7, _accent, radius: 2);
+      // Ownership: the first two finds have somebody's name against them, the
+      // rest do not — the governance half of the slide.
+      _bar(canvas, 156, y, 7, 7, i < 2 ? _soft : _accent, radius: 2);
+    }
+  }
+
   void _paintAssetsWireframe(Canvas canvas) {
     _bar(canvas, 14, 12, 72, 9, _ink);
     const widths = [118.0, 76.0, 44.0, 22.0];

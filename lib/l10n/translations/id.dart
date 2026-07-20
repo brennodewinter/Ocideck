@@ -1781,6 +1781,32 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Ontdekkingen': 'Temuan',
+  'Wat is gevonden': 'Apa yang ditemukan',
+  'Soort': 'Jenis',
+  'Dagen onopgemerkt': 'Hari tak terdeteksi',
+  'Ontdekking toevoegen': 'Tambah temuan',
+  'Ontdekking verwijderen': 'Hapus temuan',
+  'Kop van de slide': 'Judul utama slide',
+  'dagen onopgemerkt': 'hari tak terdeteksi',
+  'Nog geen blootstelling ingevuld — de slide toont dan geen kop, alleen de lijst.':
+      'Belum ada paparan yang diisi — slide tidak menampilkan judul utama, hanya daftarnya.',
+  'Zes ontdekkingen is het maximum; wie er meer noemt maakt een bijlage in plaats van een slide.':
+      'Enam temuan adalah maksimum; menyebut lebih banyak menghasilkan lampiran, bukan slide.',
+  'Laat de dagen leeg als de eerste blootstelling onbekend is; de slide zegt dan "onbekend" in plaats van nul. Een lege eigenaar leest als "geen eigenaar" en valt rood op.':
+      'Biarkan hari kosong jika paparan pertama tidak diketahui; slide akan menulis "tidak diketahui" alih-alih nol. Penanggung jawab kosong terbaca sebagai "tanpa penanggung jawab" dan menonjol merah.',
+  'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
+      'Apa yang ditemukan pemindaian yang tak seorang pun tahu dimiliki. Per temuan, berapa lama ia dapat dijangkau tanpa terdeteksi dan siapa penanggung jawabnya kini; paparan terpanjang menjadi judul utama.',
+  'dag': 'hari',
+  'dagen': 'hari',
+  'maand': 'bulan',
+  'maanden': 'bulan',
+  'eigenaar': 'penanggung jawab',
+  'langst onopgemerkt bereikbaar': 'terlama dapat dijangkau tanpa terdeteksi',
+  'onbekend': 'tidak diketahui',
+  'onopgemerkt': 'tak terdeteksi',
+  'ontdekking': 'temuan',
+  'ontdekkingen': 'temuan',
   'Norm en prestatie': 'Target dan hasil',
   'Norm per rij (optioneel)': 'Target per baris (opsional)',
   'Bandgrenzen (optioneel)': 'Ambang pita (opsional)',

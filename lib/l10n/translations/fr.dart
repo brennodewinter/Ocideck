@@ -738,6 +738,32 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Ontdekkingen': 'Découvertes',
+  'Wat is gevonden': 'Ce qui a été trouvé',
+  'Soort': 'Type',
+  'Dagen onopgemerkt': 'Jours inaperçu',
+  'Ontdekking toevoegen': 'Ajouter une découverte',
+  'Ontdekking verwijderen': 'Supprimer la découverte',
+  'Kop van de slide': 'Accroche de la diapositive',
+  'dagen onopgemerkt': 'jours inaperçu',
+  'Nog geen blootstelling ingevuld — de slide toont dan geen kop, alleen de lijst.':
+      'Aucune durée d\'exposition saisie — la diapositive n\'affiche alors pas d\'accroche, seulement la liste.',
+  'Zes ontdekkingen is het maximum; wie er meer noemt maakt een bijlage in plaats van een slide.':
+      'Six découvertes est le maximum ; en citer davantage produit une annexe et non une diapositive.',
+  'Laat de dagen leeg als de eerste blootstelling onbekend is; de slide zegt dan "onbekend" in plaats van nul. Een lege eigenaar leest als "geen eigenaar" en valt rood op.':
+      'Laissez les jours vides si la première exposition est inconnue ; la diapositive indique alors "inconnu" au lieu de zéro. Un responsable vide se lit "sans responsable" et ressort en rouge.',
+  'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
+      'Ce que le scan a trouvé et dont personne ne connaissait l\'existence. Par découverte, sa durée d\'accessibilité inaperçue et son responsable actuel ; l\'exposition la plus longue fait l\'accroche.',
+  'dag': 'jour',
+  'dagen': 'jours',
+  'maand': 'mois',
+  'maanden': 'mois',
+  'eigenaar': 'responsable',
+  'langst onopgemerkt bereikbaar': 'le plus longtemps accessible inaperçu',
+  'onbekend': 'inconnu',
+  'onopgemerkt': 'inaperçu',
+  'ontdekking': 'découverte',
+  'ontdekkingen': 'découvertes',
   'Norm en prestatie': 'Objectif et réalisé',
   'Norm per rij (optioneel)': 'Objectif par ligne (facultatif)',
   'Bandgrenzen (optioneel)': 'Seuils des plages (facultatif)',

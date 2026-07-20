@@ -4,6 +4,7 @@ import '../../models/slide.dart';
 import '../../services/cvss/cvss4.dart';
 import '../../services/image_service.dart';
 import 'asset_overview_editor.dart';
+import 'discoveries_editor.dart';
 import 'bullets_editor.dart';
 import 'bullets_image_editor.dart';
 import 'chart_editor.dart';
@@ -218,6 +219,12 @@ final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
         nestedInScrollView: c.nestedInScrollView,
       ),
       SlideType.assets: (c) => AssetOverviewEditor(
+        key: c._key,
+        slide: c.slide,
+        onUpdate: c.onUpdate,
+        nestedInScrollView: c.nestedInScrollView,
+      ),
+      SlideType.discoveries: (c) => DiscoveriesEditor(
         key: c._key,
         slide: c.slide,
         onUpdate: c.onUpdate,

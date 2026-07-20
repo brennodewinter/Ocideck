@@ -1804,6 +1804,32 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Ontdekkingen': 'Открития',
+  'Wat is gevonden': 'Какво е намерено',
+  'Soort': 'Вид',
+  'Dagen onopgemerkt': 'Дни незабелязано',
+  'Ontdekking toevoegen': 'Добавяне на откритие',
+  'Ontdekking verwijderen': 'Премахване на откритие',
+  'Kop van de slide': 'Заглавие на слайда',
+  'dagen onopgemerkt': 'дни незабелязано',
+  'Nog geen blootstelling ingevuld — de slide toont dan geen kop, alleen de lijst.':
+      'Все още не е попълнена експозиция — слайдът тогава не показва заглавие, а само списъка.',
+  'Zes ontdekkingen is het maximum; wie er meer noemt maakt een bijlage in plaats van een slide.':
+      'Шест открития е максимумът; който изброи повече, прави приложение вместо слайд.',
+  'Laat de dagen leeg als de eerste blootstelling onbekend is; de slide zegt dan "onbekend" in plaats van nul. Een lege eigenaar leest als "geen eigenaar" en valt rood op.':
+      'Оставете дните празни, ако първата експозиция е неизвестна; слайдът тогава казва "неизвестно" вместо нула. Празен отговорник се чете като "без отговорник" и изпъква в червено.',
+  'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
+      'Какво откри сканирането, за което никой не знаеше. За всяко откритие колко дълго е било достъпно незабелязано и кой отговаря за него сега; най-дългата експозиция е заглавието.',
+  'dag': 'ден',
+  'dagen': 'дни',
+  'maand': 'месец',
+  'maanden': 'месеца',
+  'eigenaar': 'отговорник',
+  'langst onopgemerkt bereikbaar': 'най-дълго достъпно незабелязано',
+  'onbekend': 'неизвестно',
+  'onopgemerkt': 'незабелязано',
+  'ontdekking': 'откритие',
+  'ontdekkingen': 'открития',
   'Norm en prestatie': 'Цел и резултат',
   'Norm per rij (optioneel)': 'Цел на ред (по избор)',
   'Bandgrenzen (optioneel)': 'Граници на зоните (по избор)',

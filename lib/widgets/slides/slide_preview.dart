@@ -28,6 +28,7 @@ import '../../models/findings_summary_spec.dart';
 import '../../models/question.dart';
 import '../../models/scope_matrix_spec.dart';
 import '../../models/asset_overview_spec.dart';
+import '../../models/discoveries_spec.dart';
 import '../../models/scorecard_spec.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
@@ -81,6 +82,7 @@ part 'previews/question_preview.dart';
 part 'previews/timeline_preview.dart';
 part 'previews/scorecard_preview.dart';
 part 'previews/asset_overview_preview.dart';
+part 'previews/discoveries_preview.dart';
 part 'previews/checklist_preview.dart';
 part 'previews/scaffold_previews.dart';
 part 'previews/finding_preview.dart';
@@ -719,6 +721,7 @@ class SlidePreviewWidget extends StatelessWidget {
         );
       case SlideType.scorecard:
       case SlideType.assets:
+      case SlideType.discoveries:
         return _reportingPreview(slide.type, w);
       case SlideType.checklist:
       case SlideType.finding:
@@ -729,10 +732,10 @@ class SlidePreviewWidget extends StatelessWidget {
     }
   }
 
-  /// Previews for the recurring-report layouts (`scorecard`, `assets`). Split
-  /// out of [_buildContent] for the length ratchet, the same reason
-  /// [_securityPreview] exists — and so a further reporting type costs the
-  /// dispatch switch nothing.
+  /// Previews for the recurring-report layouts (`scorecard`, `assets`,
+  /// `discoveries`). Split out of [_buildContent] for the length ratchet, the
+  /// same reason [_securityPreview] exists — and so a further reporting type
+  /// costs the dispatch switch nothing.
   Widget _reportingPreview(SlideType type, double w) => switch (type) {
     SlideType.scorecard => _ScorecardPreview(
       slide: slide,
@@ -746,7 +749,13 @@ class SlidePreviewWidget extends StatelessWidget {
       font: fontFamily,
       profile: themeProfile,
     ),
-    // Only ever called for the two above; the default keeps the switch total.
+    SlideType.discoveries => _DiscoveriesPreview(
+      slide: slide,
+      w: w,
+      font: fontFamily,
+      profile: themeProfile,
+    ),
+    // Only ever called for the three above; the default keeps the switch total.
     _ => const SizedBox.shrink(),
   };
 

@@ -735,6 +735,32 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Ontdekkingen': 'Hallazgos',
+  'Wat is gevonden': 'Qué se encontró',
+  'Soort': 'Tipo',
+  'Dagen onopgemerkt': 'Días inadvertido',
+  'Ontdekking toevoegen': 'Añadir hallazgo',
+  'Ontdekking verwijderen': 'Eliminar hallazgo',
+  'Kop van de slide': 'Titular de la diapositiva',
+  'dagen onopgemerkt': 'días inadvertido',
+  'Nog geen blootstelling ingevuld — de slide toont dan geen kop, alleen de lijst.':
+      'Aún no se ha indicado ninguna exposición: la diapositiva no muestra titular, solo la lista.',
+  'Zes ontdekkingen is het maximum; wie er meer noemt maakt een bijlage in plaats van een slide.':
+      'Seis hallazgos es el máximo; quien nombra más hace un anexo en lugar de una diapositiva.',
+  'Laat de dagen leeg als de eerste blootstelling onbekend is; de slide zegt dan "onbekend" in plaats van nul. Een lege eigenaar leest als "geen eigenaar" en valt rood op.':
+      'Deje los días en blanco si la primera exposición es desconocida; la diapositiva dirá "desconocido" en lugar de cero. Un responsable vacío se lee como "sin responsable" y destaca en rojo.',
+  'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
+      'Lo que el escaneo encontró y que nadie sabía que tenía. Por hallazgo, cuánto tiempo estuvo accesible sin advertirse y quién es responsable ahora; la exposición más larga es el titular.',
+  'dag': 'día',
+  'dagen': 'días',
+  'maand': 'mes',
+  'maanden': 'meses',
+  'eigenaar': 'responsable',
+  'langst onopgemerkt bereikbaar': 'más tiempo accesible sin advertirse',
+  'onbekend': 'desconocido',
+  'onopgemerkt': 'inadvertido',
+  'ontdekking': 'hallazgo',
+  'ontdekkingen': 'hallazgos',
   'Norm en prestatie': 'Objetivo y resultado',
   'Norm per rij (optioneel)': 'Objetivo por fila (opcional)',
   'Bandgrenzen (optioneel)': 'Umbrales de banda (opcional)',

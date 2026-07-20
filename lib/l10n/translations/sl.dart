@@ -1783,6 +1783,32 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Ontdekkingen': 'Odkritja',
+  'Wat is gevonden': 'Kaj je bilo najdeno',
+  'Soort': 'Vrsta',
+  'Dagen onopgemerkt': 'Dni neopaženo',
+  'Ontdekking toevoegen': 'Dodaj odkritje',
+  'Ontdekking verwijderen': 'Odstrani odkritje',
+  'Kop van de slide': 'Naslov prosojnice',
+  'dagen onopgemerkt': 'dni neopaženo',
+  'Nog geen blootstelling ingevuld — de slide toont dan geen kop, alleen de lijst.':
+      'Izpostavljenost še ni vnesena — prosojnica takrat ne prikaže naslova, samo seznam.',
+  'Zes ontdekkingen is het maximum; wie er meer noemt maakt een bijlage in plaats van een slide.':
+      'Šest odkritij je največ; kdor jih navede več, naredi prilogo namesto prosojnice.',
+  'Laat de dagen leeg als de eerste blootstelling onbekend is; de slide zegt dan "onbekend" in plaats van nul. Een lege eigenaar leest als "geen eigenaar" en valt rood op.':
+      'Pustite dneve prazne, če je prva izpostavljenost neznana; prosojnica takrat pove "neznano" namesto nič. Prazen nosilec se bere kot "brez nosilca" in izstopa rdeče.',
+  'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
+      'Kar je pregled našel in za kar nihče ni vedel. Po odkritju, kako dolgo je bilo dosegljivo neopaženo in kdo je zdaj nosilec; najdaljša izpostavljenost je naslov.',
+  'dag': 'dan',
+  'dagen': 'dni',
+  'maand': 'mesec',
+  'maanden': 'mesecev',
+  'eigenaar': 'nosilec',
+  'langst onopgemerkt bereikbaar': 'najdlje dosegljivo neopaženo',
+  'onbekend': 'neznano',
+  'onopgemerkt': 'neopaženo',
+  'ontdekking': 'odkritje',
+  'ontdekkingen': 'odkritja',
   'Norm en prestatie': 'Cilj in dosežek',
   'Norm per rij (optioneel)': 'Cilj na vrstico (izbirno)',
   'Bandgrenzen (optioneel)': 'Meje pasov (izbirno)',

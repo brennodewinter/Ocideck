@@ -1817,6 +1817,33 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Ontdekkingen': 'Fionnachtana',
+  'Wat is gevonden': 'Cad a fuarthas',
+  'Soort': 'Cineál',
+  'Dagen onopgemerkt': 'Laethanta gan tabhairt faoi deara',
+  'Ontdekking toevoegen': 'Cuir fionnachtain leis',
+  'Ontdekking verwijderen': 'Bain fionnachtain',
+  'Kop van de slide': 'Ceannlíne an tsleamhnáin',
+  'dagen onopgemerkt': 'lá gan tabhairt faoi deara',
+  'Nog geen blootstelling ingevuld — de slide toont dan geen kop, alleen de lijst.':
+      'Níl aon nochtadh líonta isteach fós — ní thaispeánann an sleamhnán ceannlíne ansin, an liosta amháin.',
+  'Zes ontdekkingen is het maximum; wie er meer noemt maakt een bijlage in plaats van een slide.':
+      'Sé fionnachtain an t-uasmhéid; má ainmnítear níos mó is aguisín é seachas sleamhnán.',
+  'Laat de dagen leeg als de eerste blootstelling onbekend is; de slide zegt dan "onbekend" in plaats van nul. Een lege eigenaar leest als "geen eigenaar" en valt rood op.':
+      'Fág na laethanta folamh mura eol an chéad nochtadh; deir an sleamhnán "anaithnid" ansin in ionad nialais. Léitear úinéir folamh mar "gan úinéir" agus seasann sé amach i ndearg.',
+  'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
+      'A bhfuair an scanadh nach raibh a fhios ag aon duine a bheith acu. In aghaidh na fionnachtana, cé chomh fada is a bhí sé insroichte gan tabhairt faoi deara agus cé leis é anois; is é an nochtadh is faide an cheannlíne.',
+  'dag': 'lá',
+  'dagen': 'lá',
+  'maand': 'mí',
+  'maanden': 'mí',
+  'eigenaar': 'úinéir',
+  'langst onopgemerkt bereikbaar':
+      'insroichte gan tabhairt faoi deara is faide',
+  'onbekend': 'anaithnid',
+  'onopgemerkt': 'gan tabhairt faoi deara',
+  'ontdekking': 'fionnachtain',
+  'ontdekkingen': 'fionnachtana',
   'Norm en prestatie': 'Sprioc agus toradh',
   'Norm per rij (optioneel)': 'Sprioc in aghaidh na líne (roghnach)',
   'Bandgrenzen (optioneel)': 'Tairseacha banda (roghnach)',

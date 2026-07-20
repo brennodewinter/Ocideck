@@ -738,6 +738,32 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Ontdekkingen': 'Entdeckungen',
+  'Wat is gevonden': 'Was gefunden wurde',
+  'Soort': 'Art',
+  'Dagen onopgemerkt': 'Tage unbemerkt',
+  'Ontdekking toevoegen': 'Entdeckung hinzufügen',
+  'Ontdekking verwijderen': 'Entdeckung entfernen',
+  'Kop van de slide': 'Schlagzeile der Folie',
+  'dagen onopgemerkt': 'Tage unbemerkt',
+  'Nog geen blootstelling ingevuld — de slide toont dan geen kop, alleen de lijst.':
+      'Noch keine Expositionsdauer eingetragen — die Folie zeigt dann keine Schlagzeile, nur die Liste.',
+  'Zes ontdekkingen is het maximum; wie er meer noemt maakt een bijlage in plaats van een slide.':
+      'Sechs Entdeckungen sind das Maximum; wer mehr nennt, macht einen Anhang statt einer Folie.',
+  'Laat de dagen leeg als de eerste blootstelling onbekend is; de slide zegt dan "onbekend" in plaats van nul. Een lege eigenaar leest als "geen eigenaar" en valt rood op.':
+      'Lassen Sie die Tage leer, wenn die erste Exposition unbekannt ist; die Folie sagt dann "unbekannt" statt null. Ein leerer Verantwortlicher liest sich als "ohne Verantwortlichen" und fällt rot auf.',
+  'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
+      'Was der Scan gefunden hat und von dem niemand wusste. Pro Entdeckung, wie lange sie unbemerkt erreichbar war und wer sie jetzt verantwortet; die längste Exposition ist die Schlagzeile.',
+  'dag': 'Tag',
+  'dagen': 'Tage',
+  'maand': 'Monat',
+  'maanden': 'Monate',
+  'eigenaar': 'Verantwortlicher',
+  'langst onopgemerkt bereikbaar': 'am längsten unbemerkt erreichbar',
+  'onbekend': 'unbekannt',
+  'onopgemerkt': 'unbemerkt',
+  'ontdekking': 'Entdeckung',
+  'ontdekkingen': 'Entdeckungen',
   'Norm en prestatie': 'Soll und Ist',
   'Norm per rij (optioneel)': 'Soll je Zeile (optional)',
   'Bandgrenzen (optioneel)': 'Bandgrenzen (optional)',

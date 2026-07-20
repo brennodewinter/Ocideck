@@ -1785,6 +1785,32 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Ontdekkingen': 'Felfedezések',
+  'Wat is gevonden': 'Mit találtunk',
+  'Soort': 'Fajta',
+  'Dagen onopgemerkt': 'Nap észrevétlenül',
+  'Ontdekking toevoegen': 'Felfedezés hozzáadása',
+  'Ontdekking verwijderen': 'Felfedezés eltávolítása',
+  'Kop van de slide': 'A dia főcíme',
+  'dagen onopgemerkt': 'nap észrevétlenül',
+  'Nog geen blootstelling ingevuld — de slide toont dan geen kop, alleen de lijst.':
+      'Még nincs kitöltve kitettség — a dia ekkor nem mutat főcímet, csak a listát.',
+  'Zes ontdekkingen is het maximum; wie er meer noemt maakt een bijlage in plaats van een slide.':
+      'Hat felfedezés a maximum; aki többet sorol fel, mellékletet készít dia helyett.',
+  'Laat de dagen leeg als de eerste blootstelling onbekend is; de slide zegt dan "onbekend" in plaats van nul. Een lege eigenaar leest als "geen eigenaar" en valt rood op.':
+      'Hagyja üresen a napokat, ha az első kitettség ismeretlen; a dia ekkor "ismeretlen" felirattal jelenik meg nulla helyett. Az üres felelős úgy olvasható, hogy "nincs felelős", és pirosan tűnik ki.',
+  'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
+      'Amit a vizsgálat talált, és amiről senki sem tudott. Felfedezésenként, meddig volt észrevétlenül elérhető, és ki a felelőse most; a leghosszabb kitettség a főcím.',
+  'dag': 'nap',
+  'dagen': 'nap',
+  'maand': 'hónap',
+  'maanden': 'hónap',
+  'eigenaar': 'felelős',
+  'langst onopgemerkt bereikbaar': 'leghosszabb ideig észrevétlenül elérhető',
+  'onbekend': 'ismeretlen',
+  'onopgemerkt': 'észrevétlenül',
+  'ontdekking': 'felfedezés',
+  'ontdekkingen': 'felfedezés',
   'Norm en prestatie': 'Cél és teljesítés',
   'Norm per rij (optioneel)': 'Cél soronként (opcionális)',
   'Bandgrenzen (optioneel)': 'Sávhatárok (opcionális)',

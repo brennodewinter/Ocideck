@@ -425,6 +425,7 @@ class SlideQualityAnalyzer {
       case SlideType.timeline:
       case SlideType.scorecard:
       case SlideType.assets:
+      case SlideType.discoveries:
       case SlideType.finding:
       case SlideType.findingsSummary:
       case SlideType.checklist:
@@ -596,6 +597,7 @@ class SlideQualityAnalyzer {
       case SlideType.timeline:
       case SlideType.scorecard:
       case SlideType.assets:
+      case SlideType.discoveries:
       case SlideType.finding:
       case SlideType.findingsSummary:
       case SlideType.checklist:

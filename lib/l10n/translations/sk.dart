@@ -1788,6 +1788,32 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Ontdekkingen': 'Objavy',
+  'Wat is gevonden': 'Čo sa našlo',
+  'Soort': 'Druh',
+  'Dagen onopgemerkt': 'Dní nepovšimnuté',
+  'Ontdekking toevoegen': 'Pridať objav',
+  'Ontdekking verwijderen': 'Odstrániť objav',
+  'Kop van de slide': 'Titulok snímky',
+  'dagen onopgemerkt': 'dní nepovšimnuté',
+  'Nog geen blootstelling ingevuld — de slide toont dan geen kop, alleen de lijst.':
+      'Doba vystavenia zatiaľ nie je vyplnená — snímka potom nezobrazí titulok, len zoznam.',
+  'Zes ontdekkingen is het maximum; wie er meer noemt maakt een bijlage in plaats van een slide.':
+      'Šesť objavov je maximum; kto ich uvedie viac, robí prílohu namiesto snímky.',
+  'Laat de dagen leeg als de eerste blootstelling onbekend is; de slide zegt dan "onbekend" in plaats van nul. Een lege eigenaar leest als "geen eigenaar" en valt rood op.':
+      'Nechajte dni prázdne, ak je prvé vystavenie neznáme; snímka potom uvedie "neznáme" namiesto nuly. Prázdny vlastník sa číta ako "bez vlastníka" a vyniká červeno.',
+  'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
+      'Čo sken našiel a o čom nikto nevedel. Pri každom objave, ako dlho bol dostupný nepovšimnutý a kto je teraz vlastníkom; najdlhšie vystavenie je titulok.',
+  'dag': 'deň',
+  'dagen': 'dní',
+  'maand': 'mesiac',
+  'maanden': 'mesiacov',
+  'eigenaar': 'vlastník',
+  'langst onopgemerkt bereikbaar': 'najdlhšie dostupné nepovšimnuté',
+  'onbekend': 'neznáme',
+  'onopgemerkt': 'nepovšimnuté',
+  'ontdekking': 'objav',
+  'ontdekkingen': 'objavov',
   'Norm en prestatie': 'Cieľ a skutočnosť',
   'Norm per rij (optioneel)': 'Cieľ na riadok (voliteľné)',
   'Bandgrenzen (optioneel)': 'Hranice pásiem (voliteľné)',
