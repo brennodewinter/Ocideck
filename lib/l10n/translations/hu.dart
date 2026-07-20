@@ -1785,6 +1785,7 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Bekijk de foto op ware grootte': 'A fénykép megtekintése teljes méretben',
   'Azure-sleutel of SAS-token': 'Azure-kulcs vagy SAS-token',
   'wachtwoordhash': 'jelszó-lenyomat',
   'TOTP-seed (tweede factor)': 'TOTP-mag (második faktor)',

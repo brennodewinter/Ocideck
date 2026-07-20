@@ -739,6 +739,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Bekijk de foto op ware grootte': 'Besjoch de foto op ware grutte',
   'Azure-sleutel of SAS-token': 'Azure-kaai of SAS-token',
   'wachtwoordhash': 'wachtwurdhash',
   'TOTP-seed (tweede factor)': 'TOTP-sied (twadde faktor)',

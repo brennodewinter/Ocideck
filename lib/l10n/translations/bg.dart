@@ -1804,6 +1804,7 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Bekijk de foto op ware grootte': 'Вижте снимката в пълен размер',
   'Azure-sleutel of SAS-token': 'Azure ключ или SAS токен',
   'wachtwoordhash': 'хеш на парола',
   'TOTP-seed (tweede factor)': 'TOTP семе (втори фактор)',

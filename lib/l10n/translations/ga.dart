@@ -1817,6 +1817,7 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Bekijk de foto op ware grootte': 'Féach ar an ngrianghraf ar lánmhéid',
   'Azure-sleutel of SAS-token': 'eochair Azure nó comhartha SAS',
   'wachtwoordhash': 'hais pasfhocail',
   'TOTP-seed (tweede factor)': 'síol TOTP (an dara fachtóir)',

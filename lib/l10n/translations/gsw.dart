@@ -1785,6 +1785,7 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Bekijk de foto op ware grootte': 'S Foti i voller Grössi aaluege',
   'Azure-sleutel of SAS-token': 'Azure-Schlüssel oder SAS-Token',
   'wachtwoordhash': 'Passwort-Hash',
   'TOTP-seed (tweede factor)': 'TOTP-Seed (zwöite Faktor)',

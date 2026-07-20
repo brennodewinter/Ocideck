@@ -366,12 +366,7 @@ extension _SettingsAbout on _SettingsDialogState {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Image.asset(
-              cat.asset,
-              width: 116,
-              fit: BoxFit.cover,
-              filterQuality: FilterQuality.high,
-            ),
+            _catPhoto(cat),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(
@@ -397,6 +392,35 @@ extension _SettingsAbout on _SettingsDialogState {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  /// The card's photo, clickable: a 116px sliver cropped to the card height
+  /// shows little of the cat, so a tap opens the picture full-size in the same
+  /// zoom viewer the question slides use.
+  Widget _catPhoto(_CatMascot cat) {
+    final label = context.l10n.d('Bekijk de foto op ware grootte');
+    return Tooltip(
+      message: label,
+      child: SizedBox(
+        width: 116,
+        child: Semantics(
+          button: true,
+          label: '${cat.name} — $label',
+          child: InkWell(
+            onTap: () => showImageProviderZoomDialog(
+              context,
+              image: AssetImage(cat.asset),
+              caption: cat.name,
+            ),
+            child: Image.asset(
+              cat.asset,
+              fit: BoxFit.cover,
+              filterQuality: FilterQuality.high,
+            ),
+          ),
         ),
       ),
     );

@@ -1809,6 +1809,7 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Bekijk de foto op ware grootte': 'Δείτε τη φωτογραφία σε πλήρες μέγεθος',
   'Azure-sleutel of SAS-token': 'κλειδί Azure ή διακριτικό SAS',
   'wachtwoordhash': 'σύνοψη κωδικού πρόσβασης',
   'TOTP-seed (tweede factor)': 'σπόρος TOTP (δεύτερος παράγοντας)',

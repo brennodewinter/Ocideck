@@ -1780,6 +1780,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Bekijk de foto op ware grootte': 'Visa fotot i full storlek',
   'Azure-sleutel of SAS-token': 'Azure-nyckel eller SAS-token',
   'wachtwoordhash': 'lösenordshash',
   'TOTP-seed (tweede factor)': 'TOTP-frö (andra faktorn)',

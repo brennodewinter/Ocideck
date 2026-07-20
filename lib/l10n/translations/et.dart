@@ -1772,6 +1772,7 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Bekijk de foto op ware grootte': 'Vaata fotot täissuuruses',
   'Azure-sleutel of SAS-token': 'Azure\'i võti või SAS-luba',
   'wachtwoordhash': 'parooli räsi',
   'TOTP-seed (tweede factor)': 'TOTP seeme (teine tegur)',

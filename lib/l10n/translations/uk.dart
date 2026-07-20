@@ -1799,6 +1799,7 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Bekijk de foto op ware grootte': 'Переглянути фото в повному розмірі',
   'Azure-sleutel of SAS-token': 'ключ Azure або токен SAS',
   'wachtwoordhash': 'хеш пароля',
   'TOTP-seed (tweede factor)': 'початкове значення TOTP (другий фактор)',

@@ -738,6 +738,7 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Bekijk de foto op ware grootte': 'Wak e potrèt na su tamaño kompletu',
   'Azure-sleutel of SAS-token': 'yabi di Azure of token SAS',
   'wachtwoordhash': 'hash di kontraseña',
   'TOTP-seed (tweede factor)': 'simia TOTP (di dos faktor)',

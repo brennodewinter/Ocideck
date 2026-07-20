@@ -1756,6 +1756,7 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Bekijk de foto op ware grootte': 'tlhegh nagh HaSta\'e\' tIn\'a\' bejlu\'',
   'Azure-sleutel of SAS-token': 'Azure ngaSwI\' ghap SAS nagh',
   'wachtwoordhash': 'peQ mI\'',
   'TOTP-seed (tweede factor)': 'TOTP tIr (cha\'DIch)',
