@@ -1781,6 +1781,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
+      'Kaikkea ei voitu palauttaa. Se mitä ei voitu lukea, on säilytetty.',
   'Bekijk de foto op ware grootte': 'Katso kuva täydessä koossa',
   'Azure-sleutel of SAS-token': 'Azure-avain tai SAS-tunniste',
   'wachtwoordhash': 'salasanan tiiviste',

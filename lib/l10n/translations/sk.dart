@@ -1788,6 +1788,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
+      'Nepodarilo sa obnoviť všetko. Čo sa nedalo prečítať, zostalo zachované.',
   'Bekijk de foto op ware grootte': 'Zobraziť fotografiu v plnej veľkosti',
   'Azure-sleutel of SAS-token': 'kľúč Azure alebo token SAS',
   'wachtwoordhash': 'odtlačok hesla',

@@ -1781,6 +1781,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
+      'Tidak semuanya dapat dipulihkan. Yang tidak terbaca tetap disimpan.',
   'Bekijk de foto op ware grootte': 'Lihat foto dalam ukuran penuh',
   'Azure-sleutel of SAS-token': 'kunci Azure atau token SAS',
   'wachtwoordhash': 'hash kata sandi',

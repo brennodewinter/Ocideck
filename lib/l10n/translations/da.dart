@@ -1780,6 +1780,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
+      'Ikke alt kunne gendannes. Det, der ikke kunne læses, er bevaret.',
   'Bekijk de foto op ware grootte': 'Se billedet i fuld størrelse',
   'Azure-sleutel of SAS-token': 'Azure-nøgle eller SAS-token',
   'wachtwoordhash': 'adgangskodehash',

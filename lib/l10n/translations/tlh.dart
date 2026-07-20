@@ -1756,6 +1756,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
+      'Hoch chu\'moHlaHbe\'. QIjbe\'bogh De\' polta\'.',
   'Bekijk de foto op ware grootte': 'tlhegh nagh HaSta\'e\' tIn\'a\' bejlu\'',
   'Azure-sleutel of SAS-token': 'Azure ngaSwI\' ghap SAS nagh',
   'wachtwoordhash': 'peQ mI\'',

@@ -1809,6 +1809,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
+      'Δεν ήταν δυνατή η επαναφορά όλων. Ό,τι δεν ήταν αναγνώσιμο διατηρήθηκε.',
   'Bekijk de foto op ware grootte': 'Δείτε τη φωτογραφία σε πλήρες μέγεθος',
   'Azure-sleutel of SAS-token': 'κλειδί Azure ή διακριτικό SAS',
   'wachtwoordhash': 'σύνοψη κωδικού πρόσβασης',

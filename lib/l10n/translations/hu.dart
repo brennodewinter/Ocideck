@@ -1785,6 +1785,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
+      'Nem sikerült mindent helyreállítani. Ami olvashatatlan volt, megmaradt.',
   'Bekijk de foto op ware grootte': 'A fénykép megtekintése teljes méretben',
   'Azure-sleutel of SAS-token': 'Azure-kulcs vagy SAS-token',
   'wachtwoordhash': 'jelszó-lenyomat',

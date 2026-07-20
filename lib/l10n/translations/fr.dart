@@ -738,6 +738,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
+      'Tout n\'a pas pu être restauré. Ce qui était illisible a été conservé.',
   'Bekijk de foto op ware grootte': 'Voir la photo en taille réelle',
   'Azure-sleutel of SAS-token': 'clé Azure ou jeton SAS',
   'wachtwoordhash': 'empreinte de mot de passe',

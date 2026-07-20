@@ -738,6 +738,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
+      'Nicht alles konnte wiederhergestellt werden. Was unlesbar war, wurde aufbewahrt.',
   'Bekijk de foto op ware grootte': 'Foto in voller Größe ansehen',
   'Azure-sleutel of SAS-token': 'Azure-Schlüssel oder SAS-Token',
   'wachtwoordhash': 'Passwort-Hash',

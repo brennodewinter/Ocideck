@@ -4,6 +4,8 @@ import 'dart:typed_data';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/models/deck_template.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/storage_connection.dart';
@@ -74,6 +76,13 @@ theme: ocideck
 
 Uint8List _bytes(String s) => Uint8List.fromList(utf8.encode(s));
 
+/// Een parser die omvalt — zoals `parseDeck` in de praktijk kan doen, en waarom
+/// hij zijn eigen fouten afvangt.
+class _FailingMarkdown extends MarkdownService {
+  @override
+  Deck? parseDeck(String markdown, {String? filePath}) => null;
+}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -82,14 +91,18 @@ void main() {
   // ── TabsNotifier ────────────────────────────────────────────────────────────
 
   group('TabsNotifier', () {
-    (ProviderContainer, TabsNotifier) build() {
+    (ProviderContainer, TabsNotifier) build({
+      RecoveryService? recovery,
+      MarkdownService? md,
+    }) {
       final container = ProviderContainer(
         overrides: [
           // No real recovery folder in tests (path_provider is unavailable on
           // the VM); a temp base dir keeps the notifier from reaching the disk.
           recoveryServiceProvider.overrideWithValue(
-            RecoveryService(baseDir: Directory.systemTemp),
+            recovery ?? RecoveryService(baseDir: Directory.systemTemp),
           ),
+          if (md != null) markdownServiceProvider.overrideWithValue(md),
         ],
       );
       addTearDown(container.dispose);
@@ -228,6 +241,58 @@ void main() {
         expect(state.current!.isDirty, isTrue);
       },
     );
+
+    test('een onleesbare momentopname wordt niet weggegooid', () async {
+      // `parseDeck` vangt zijn eigen fouten af juist omdát hij struikelt, en een
+      // crash ín de parser is een waarschijnlijke reden dat dit bestand er
+      // überhaupt ligt. Eerst wissen en dan pas kijken of het lukte, betekende
+      // dat één klik op "Herstellen" het enige exemplaar opruimde.
+      final dir = Directory.systemTemp.createTempSync('ocideck_restore_test');
+      addTearDown(() {
+        if (dir.existsSync()) dir.deleteSync(recursive: true);
+      });
+      final recovery = RecoveryService(baseDir: dir);
+      final kapot = RecoverySnapshot(
+        id: 'stuk',
+        savedAt: DateTime.now(),
+        filePath: null,
+        label: 'Stuk',
+        markdown: _validDeck,
+      );
+      await recovery.save(kapot);
+
+      // De parser struikelt: precies het geval waarvoor `parseDeck` zijn eigen
+      // fouten afvangt, en een van de waarschijnlijkere redenen dat er
+      // überhaupt een herstelbestand ligt.
+      final (_, tabs) = build(recovery: recovery, md: _FailingMarkdown());
+      final unreadable = tabs.restoreRecovered([kapot]);
+
+      expect(unreadable, 1);
+      expect(
+        (await recovery.loadAll()).map((s) => s.id),
+        contains('stuk'),
+        reason: 'het enige exemplaar mag niet gewist zijn',
+      );
+    });
+
+    test('een hersteld tabblad neemt de sleutel van de momentopname over', () {
+      // Anders staat er tot de volgende autosave-tik niets op schijf — en juist
+      // in die seconden crasht een app die zojuist dezelfde inhoud opende.
+      final (container, tabs) = build();
+      tabs.restoreRecovered([
+        RecoverySnapshot(
+          id: 'snap-hergebruik',
+          savedAt: DateTime.now(),
+          filePath: null,
+          label: 'Hersteld',
+          markdown: _validDeck,
+        ),
+      ]);
+      expect(
+        container.read(tabsProvider).current!.recoveryId,
+        'snap-hergebruik',
+      );
+    });
 
     test(
       'restoreRecovered appends when the current tab already has a deck',
