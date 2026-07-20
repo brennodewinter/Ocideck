@@ -739,6 +739,9 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Norm en prestatie': 'Noarm en prestaasje',
+  'Norm per rij (optioneel)': 'Noarm de rigel (opsjoneel)',
+  'Bandgrenzen (optioneel)': 'Bângrinzen (opsjoneel)',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Net alles koe hersteld wurde. Wat ûnlêsber wie, is bewarre bleaun.',
   'Verdieping': 'Ferdjipping',

@@ -738,6 +738,9 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Norm en prestatie': 'Soll und Ist',
+  'Norm per rij (optioneel)': 'Soll je Zeile (optional)',
+  'Bandgrenzen (optioneel)': 'Bandgrenzen (optional)',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Nicht alles konnte wiederhergestellt werden. Was unlesbar war, wurde aufbewahrt.',
   'Verdieping': 'Vertiefung',

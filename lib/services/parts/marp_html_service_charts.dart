@@ -68,6 +68,8 @@ String _chartSvg(ChartSpec spec, ThemeProfile? theme) {
       _horizontalBarSvg(b, spec, plotTop, theme);
     case ChartType.horizontalStackedBar:
       _horizontalStackedBarSvg(b, spec, plotTop, theme);
+    case ChartType.bullet:
+      _bulletSvg(b, spec, plotTop, theme);
     case ChartType.combo:
       _comboSvg(b, spec, plotTop, theme);
     case ChartType.waterfall:

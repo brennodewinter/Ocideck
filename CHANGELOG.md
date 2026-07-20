@@ -10,6 +10,27 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Added
+- **Een nieuw grafiektype: norm en prestatie.** Per rij een meetbalk voor de
+  werkelijke waarde, grijze achtergrondbanden voor de schaal waartegen u
+  oordeelt, en een streepje waar de afgesproken norm ligt. Bedoeld voor het
+  SLA-verhaal: "kritiek verhelpen binnen veertien dagen — gehaald in 38% van de
+  gevallen".
+
+  Het punt is dat de norm als *norm* getekend wordt, een streepje op de meetlat,
+  en niet als tweede staaf ernaast. Dat is het verschil tussen twee getallen
+  naast elkaar en de vraag of het gehaald is.
+
+  Dit is het enige grafiektype waarvoor het datamodel moest meegroeien: een
+  streefwaarde hoort bij een x-positie en niet bij een reeks, dus hij kan niet
+  in een `ChartSeries` wonen. Vandaar de twee nieuwe velden `targets` en
+  `bands`, die alleen voor dit type worden weggeschreven — anders blijft er een
+  streefwaarde in een taartdiagram hangen na een typewissel.
+
+  Zonder streefwaarden zakt de grafiek netjes terug tot een gewone horizontale
+  staaf, dus een half ingevulde grafiek toont nog steeds iets zinnigs.
+
+
+### Added
 - **Eén bron, een managementversie en een techniekversie.** Markeer een slide als
   **verdieping** en hij gaat mee in de volledige export maar valt weg in de
   beknopte. De exportdialoog vraagt voortaan *met verdieping* of *beknopt*, en de

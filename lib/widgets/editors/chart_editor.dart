@@ -72,6 +72,8 @@ class ChartEditor extends StatefulWidget {
 
 class _ChartEditorState extends State<ChartEditor> {
   late final TextEditingController _title;
+  late final TextEditingController _targets;
+  late final TextEditingController _bands;
   late final TextEditingController _minBound;
   late final TextEditingController _maxBound;
   late ChartType _type;
@@ -104,8 +106,12 @@ class _ChartEditorState extends State<ChartEditor> {
     _animationOverrideMs = spec.animationDurationMs;
     _title = TextEditingController(text: spec.title);
     _title.addListener(_emit);
+    _targets = TextEditingController(text: _fmtList(spec.targets));
+    _bands = TextEditingController(text: _fmtList(spec.bands));
     _minBound = TextEditingController(text: _fmtBound(spec.minBound));
     _maxBound = TextEditingController(text: _fmtBound(spec.maxBound));
+    _targets.addListener(_emit);
+    _bands.addListener(_emit);
     _minBound.addListener(_emit);
     _maxBound.addListener(_emit);
     _loadFromSpec(spec);
@@ -122,8 +128,16 @@ class _ChartEditorState extends State<ChartEditor> {
       _type != ChartType.horizontalStackedBar &&
       _type != ChartType.heatmap;
 
+  bool get _isBullet => _type == ChartType.bullet;
+
   static String _fmtBound(double? v) => v == null ? '' : _fmt(v);
 
+  /// Een lijst getallen als leesbare, met komma's gescheiden tekst.
+  static String _fmtList(List<double> values) => values.map(_fmt).join(', ');
+
+  /// Leest een met komma's gescheiden lijst. Wat geen getal is, valt weg in
+  /// plaats van de hele lijst te bederven — tikken gaat nu eenmaal teken voor
+  /// teken, en halverwege "9" typen mag de vorige rij niet wissen.
   static double? _parseBound(String raw) {
     final text = raw.trim().replaceAll(',', '.');
     return text.isEmpty ? null : double.tryParse(text);
@@ -161,6 +175,8 @@ class _ChartEditorState extends State<ChartEditor> {
   @override
   void dispose() {
     _title.dispose();
+    _targets.dispose();
+    _bands.dispose();
     _minBound.dispose();
     _maxBound.dispose();
     super.dispose();
@@ -190,6 +206,8 @@ class _ChartEditorState extends State<ChartEditor> {
       x: List<String>.from(_xLabels),
       rowColors: List<String?>.from(_rowColors),
       series: series,
+      targets: _isBullet ? parseChartNumberList(_targets.text) : const [],
+      bands: _isBullet ? parseChartNumberList(_bands.text) : const [],
       minBound: _supportsBounds ? _parseBound(_minBound.text) : null,
       maxBound: _supportsBounds ? _parseBound(_maxBound.text) : null,
       animateOnEnter: _animateOnEnter,
@@ -446,6 +464,7 @@ class _ChartEditorState extends State<ChartEditor> {
                   _minBound.text.isNotEmpty ||
                   _maxBound.text.isNotEmpty,
               children: [
+                if (_isBullet) _bulletControls(l10n),
                 if (_supportsBounds) _boundControls(l10n),
                 _animationControls(l10n),
               ],
@@ -478,6 +497,37 @@ class _ChartEditorState extends State<ChartEditor> {
   }
 
   /// Min/max-grenzen (of schaalgrenzen bij radar) naast elkaar.
+  /// Streefwaarden en bandgrenzen voor het type "norm en prestatie".
+  ///
+  /// Twee tekstvelden met komma's, geen tweede raster: het zijn hooguit een
+  /// handvol getallen, en een raster ernaast zou de editor zwaarder maken dan
+  /// de grafiek zelf.
+  Widget _bulletControls(AppLocalizations l10n) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 12),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: _boundField(
+              key: const ValueKey('chart-targets'),
+              controller: _targets,
+              label: l10n.d('Norm per rij (optioneel)'),
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: _boundField(
+              key: const ValueKey('chart-bands'),
+              controller: _bands,
+              label: l10n.d('Bandgrenzen (optioneel)'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _boundControls(AppLocalizations l10n) {
     return Padding(
       padding: const EdgeInsets.only(top: 12),

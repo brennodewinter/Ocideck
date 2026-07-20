@@ -1781,6 +1781,9 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Norm en prestatie': 'Target dan hasil',
+  'Norm per rij (optioneel)': 'Target per baris (opsional)',
+  'Bandgrenzen (optioneel)': 'Ambang pita (opsional)',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Tidak semuanya dapat dipulihkan. Yang tidak terbaca tetap disimpan.',
   'Verdieping': 'Pendalaman',

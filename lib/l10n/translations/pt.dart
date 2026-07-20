@@ -1811,6 +1811,9 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Norm en prestatie': 'Meta e resultado',
+  'Norm per rij (optioneel)': 'Meta por linha (opcional)',
+  'Bandgrenzen (optioneel)': 'Limites das faixas (opcional)',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Não foi possível restaurar tudo. O que estava ilegível foi mantido.',
   'Verdieping': 'Aprofundamento',

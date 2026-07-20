@@ -355,7 +355,7 @@ Add a slide and pick a type: **title**, **section** divider, **bullets**, **two
 bullet columns**, **bullets + image**, **two images**, **large image**, **video**,
 **quote**, **table**, **source code**, **chart** (bar, horizontal
 bar, stacked bar, horizontal stacked bar, combo, line, area, pie, donut,
-spider/radar, scatter, waterfall, or heatmap/risk matrix), **cockpit** (a
+spider/radar, scatter, waterfall, heatmap/risk matrix, or target-and-actual), **cockpit** (a
 dashboard of aviation-style instrument gauges),
 **question** (an interactive quiz slide), **timeline** (an animated timeline of
 dated events), **scorecard** (a few headline figures, each beside the figure from

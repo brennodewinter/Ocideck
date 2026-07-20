@@ -1799,6 +1799,9 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Norm en prestatie': 'Țintă și realizat',
+  'Norm per rij (optioneel)': 'Țintă pe rând (opțional)',
+  'Bandgrenzen (optioneel)': 'Praguri de bandă (opțional)',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Nu a putut fi restaurat totul. Ce nu a putut fi citit a fost păstrat.',
   'Verdieping': 'Aprofundare',

@@ -1817,6 +1817,9 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Norm en prestatie': 'Sprioc agus toradh',
+  'Norm per rij (optioneel)': 'Sprioc in aghaidh na líne (roghnach)',
+  'Bandgrenzen (optioneel)': 'Tairseacha banda (roghnach)',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Níorbh fhéidir gach rud a athchóiriú. Coinníodh a raibh doléite.',
   'Verdieping': 'Doimhniú',

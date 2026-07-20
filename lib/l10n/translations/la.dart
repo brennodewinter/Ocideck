@@ -1797,6 +1797,9 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Norm en prestatie': 'Norma et effectus',
+  'Norm per rij (optioneel)': 'Norma per versum (optio)',
+  'Bandgrenzen (optioneel)': 'Fines zonarum (optio)',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Non omnia restitui potuerunt. Quae legi non poterant servata sunt.',
   'Verdieping': 'Altitudo',

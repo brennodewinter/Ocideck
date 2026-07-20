@@ -1785,6 +1785,9 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Norm en prestatie': 'Soll und Ist',
+  'Norm per rij (optioneel)': 'Soll pro Zile (optional)',
+  'Bandgrenzen (optioneel)': 'Bandgränze (optional)',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Nid alles het chönne wiederhergstellt wärde. Was unläserlich gsi isch, isch ufbewahrt worde.',
   'Verdieping': 'Vertiefig',

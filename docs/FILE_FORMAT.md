@@ -682,6 +682,13 @@ Fields:
   - `pie`, `donut` — proportional; the labels are the segments. `donut` prints
     the series total in the centre hole. Both show at most the first two series.
   - `radar` — spider chart; needs at least three labels (axes).
+  - `bullet` — target-and-actual: one row per label with grey background bands
+    for the scale you judge against, a thin measure bar for the actual value,
+    and a tick where the agreed target sits. Reads the **first** series only.
+    The point is that the target is drawn *as a target* — a mark on the ruler —
+    rather than as a second bar; for an SLA story that is the difference between
+    "two numbers" and "met or not met". Without `targets` it degrades to a plain
+    horizontal bar, so a half-filled chart still says something.
   - `heatmap` — a grid: each series is a **row**, each label a **column**, the
     cell colour a ramp over the data range. Label the axes likelihood and
     impact and it reads as a risk matrix. Unlike every other type, a heatmap
@@ -694,12 +701,24 @@ Fields:
 - `series` — named series with `data` (aligned with `x`) and optionally a
   `color` (hex). `pie`/`donut` show at most the first two series; `waterfall`
   uses only the first; `heatmap` treats each series as a row.
+- `targets` — **`bullet` only**: the agreed norm per label, parallel to `x`.
+  A target belongs to an x position rather than to a series, which is why it is
+  its own list and not a `ChartSeries` — the one thing this chart type needed
+  the model widened for. A shorter list simply leaves the later rows without a
+  marker; not every row has an agreed norm.
+- `bands` — **`bullet` only**: qualitative thresholds shared by every row, drawn
+  as background bands. `[60, 80]` reads as poor below 60, satisfactory 60–80,
+  good above. Shared rather than per row on purpose: bands express the scale you
+  judge against, and a scale that changes per row is not a scale.
+  Both are written to the block **only** for `bullet`, so switching a chart to
+  another type does not leave a stray target behind.
 - `rowColors` — optional color per label (used by `pie`/`donut`/`radar`).
 - `minBound` / `maxBound` — optional; only for the cartesian types and `radar`.
   On `bar`/`stackedBar`/`line`/`area`/`scatter`/`combo`/`waterfall` they are
   horizontal **reference lines**; for `radar` they set the **scale**
-  (inner/outer ring) with even spacing. Ignored for `pie`, `donut`,
-  `horizontalBar`, `horizontalStackedBar`, and `heatmap`.
+  (inner/outer ring) with even spacing; for `bullet` `maxBound` pins the axis
+  (e.g. to 100 for a percentage) instead of letting it follow the data. Ignored
+  for `pie`, `donut`, `horizontalBar`, `horizontalStackedBar`, and `heatmap`.
 - `animateOnEnter` — whether the chart draws itself in (values growing from the
   baseline) when the slide comes up in presentation mode. Defaults to `true` and
   is only written to the block when turned **off**, so a clean chart stays clean.

@@ -920,6 +920,9 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Norm en prestatie': 'Target and actual',
+  'Norm per rij (optioneel)': 'Target per row (optional)',
+  'Bandgrenzen (optioneel)': 'Band thresholds (optional)',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Not everything could be restored. What could not be read has been kept.',
   'Verdieping': 'Depth',
