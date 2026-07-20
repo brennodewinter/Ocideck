@@ -1809,6 +1809,24 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Scorecard': 'Κάρτα δεικτών',
+  'Cijfer toevoegen': 'Προσθήκη δείκτη',
+  'Cijfer verwijderen': 'Αφαίρεση δείκτη',
+  'Richting': 'Κατεύθυνση',
+  'ongewijzigd': 'αμετάβλητο',
+  'Lager is beter': 'Χαμηλότερο είναι καλύτερο',
+  'Hoger is beter': 'Υψηλότερο είναι καλύτερο',
+  'Neutraal': 'Ουδέτερο',
+  'Nu': 'Τώρα',
+  'Vorige rapportage': 'Προηγούμενη αναφορά',
+  'Een scorecard toont hoogstens vijf cijfers; meer leest niet meer als een oordeel.':
+      'Μια κάρτα δεικτών δείχνει το πολύ πέντε μεγέθη· περισσότερα δεν διαβάζονται πια ως κρίση.',
+  'Laat de vorige rapportage leeg als er nog geen meting was; de slide toont dan geen verandering.':
+      'Αφήστε την προηγούμενη αναφορά κενή αν δεν υπήρχε ακόμη μέτρηση· η διαφάνεια δεν θα δείξει μεταβολή.',
+  'Bepaalt of een stijging groen of rood kleurt. De pijl volgt altijd de cijfers.':
+      'Καθορίζει αν μια άνοδος χρωματίζεται πράσινη ή κόκκινη. Το βέλος ακολουθεί πάντα τους αριθμούς.',
+  'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
+      'Λίγα βασικά μεγέθη με το μέγεθος της προηγούμενης αναφοράς δίπλα, ώστε την ιστορία να τη λέει η μεταβολή. Δηλώστε για καθένα αν η άνοδος είναι καλό ή κακό νέο.',
   'Medicare-nummer — een zorggegeven': 'αριθμός Medicare — δεδομένο υγείας',
   'bedrijfsnummer': 'αριθμός εταιρείας',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

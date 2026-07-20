@@ -1785,6 +1785,24 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Scorecard': 'Scorecard',
+  'Cijfer toevoegen': 'Chennzahl hinzuefüege',
+  'Cijfer verwijderen': 'Chennzahl entferne',
+  'Richting': 'Richtig',
+  'ongewijzigd': 'unveränderet',
+  'Lager is beter': 'Tüüfer isch besser',
+  'Hoger is beter': 'Höcher isch besser',
+  'Neutraal': 'Neutral',
+  'Nu': 'Jetzt',
+  'Vorige rapportage': 'Vorige Bricht',
+  'Een scorecard toont hoogstens vijf cijfers; meer leest niet meer als een oordeel.':
+      'E Scorecard zeigt höchstens föif Chennzahle; meh liest sich nüme wie nes Urteil.',
+  'Laat de vorige rapportage leeg als er nog geen meting was; de slide toont dan geen verandering.':
+      'Lönd de vorig Bricht leer, wenn\'s no kei Mässig gäh het; d Folie zeigt denn kei Veränderig.',
+  'Bepaalt of een stijging groen of rood kleurt. De pijl volgt altijd de cijfers.':
+      'Bestimmt, öb en Aastieg grüen oder rot isch. De Pfiil folgt immer de Zahle.',
+  'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
+      'E paar Chennzahle mit de Zahl vom vorige Bricht dernäbe, damit d Veränderig d Gschicht verzellt. Gib pro Zahl aa, öb en Aastieg gueti oder schlächti Nochricht isch.',
   'Medicare-nummer — een zorggegeven': 'Medicare-Nummere — es Gsundheitsdate',
   'bedrijfsnummer': 'Firmenummere',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

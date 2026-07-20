@@ -1789,6 +1789,24 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Scorecard': 'Rodiklių kortelė',
+  'Cijfer toevoegen': 'Pridėti rodiklį',
+  'Cijfer verwijderen': 'Pašalinti rodiklį',
+  'Richting': 'Kryptis',
+  'ongewijzigd': 'nepakito',
+  'Lager is beter': 'Mažiau yra geriau',
+  'Hoger is beter': 'Daugiau yra geriau',
+  'Neutraal': 'Neutralus',
+  'Nu': 'Dabar',
+  'Vorige rapportage': 'Ankstesnė ataskaita',
+  'Een scorecard toont hoogstens vijf cijfers; meer leest niet meer als een oordeel.':
+      'Rodiklių kortelė rodo daugiausiai penkis skaičius; daugiau nebeskaitoma kaip vertinimas.',
+  'Laat de vorige rapportage leeg als er nog geen meting was; de slide toont dan geen verandering.':
+      'Palikite ankstesnę ataskaitą tuščią, jei matavimo dar nebuvo; skaidrė tada nerodys pokyčio.',
+  'Bepaalt of een stijging groen of rood kleurt. De pijl volgt altijd de cijfers.':
+      'Nustato, ar padidėjimas žalias, ar raudonas. Rodyklė visada seka skaičius.',
+  'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
+      'Keli pagrindiniai rodikliai su ankstesnės ataskaitos skaičiumi šalia, kad istoriją pasakotų pokytis. Kiekvienam nurodykite, ar padidėjimas yra gera, ar bloga žinia.',
   'Medicare-nummer — een zorggegeven': 'Medicare numeris — sveikatos duomenys',
   'bedrijfsnummer': 'bendrovės numeris',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

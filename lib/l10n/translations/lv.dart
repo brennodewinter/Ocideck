@@ -1780,6 +1780,24 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Scorecard': 'Rādītāju karte',
+  'Cijfer toevoegen': 'Pievienot rādītāju',
+  'Cijfer verwijderen': 'Noņemt rādītāju',
+  'Richting': 'Virziens',
+  'ongewijzigd': 'nemainīgs',
+  'Lager is beter': 'Zemāks ir labāks',
+  'Hoger is beter': 'Augstāks ir labāks',
+  'Neutraal': 'Neitrāls',
+  'Nu': 'Tagad',
+  'Vorige rapportage': 'Iepriekšējais pārskats',
+  'Een scorecard toont hoogstens vijf cijfers; meer leest niet meer als een oordeel.':
+      'Rādītāju karte rāda ne vairāk kā piecus skaitļus; vairāk vairs nelasās kā vērtējums.',
+  'Laat de vorige rapportage leeg als er nog geen meting was; de slide toont dan geen verandering.':
+      'Atstājiet iepriekšējo pārskatu tukšu, ja mērījuma vēl nebija; slaids tad nerāda izmaiņas.',
+  'Bepaalt of een stijging groen of rood kleurt. De pijl volgt altijd de cijfers.':
+      'Nosaka, vai pieaugums ir zaļš vai sarkans. Bultiņa vienmēr seko skaitļiem.',
+  'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
+      'Daži galvenie rādītāji ar iepriekšējā pārskata skaitli blakus, lai stāstu izstāsta pārmaiņa. Katram norādiet, vai pieaugums ir laba vai slikta ziņa.',
   'Medicare-nummer — een zorggegeven': 'Medicare numurs — veselības dati',
   'bedrijfsnummer': 'uzņēmuma numurs',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

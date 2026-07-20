@@ -739,6 +739,24 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Scorecard': 'Skoarkaart',
+  'Cijfer toevoegen': 'Sifer tafoegje',
+  'Cijfer verwijderen': 'Sifer fuortsmite',
+  'Richting': 'Rjochting',
+  'ongewijzigd': 'ûnferoare',
+  'Lager is beter': 'Leger is better',
+  'Hoger is beter': 'Heger is better',
+  'Neutraal': 'Neutraal',
+  'Nu': 'No',
+  'Vorige rapportage': 'Foarige rapportaazje',
+  'Een scorecard toont hoogstens vijf cijfers; meer leest niet meer als een oordeel.':
+      'In skoarkaart lit op syn heechst fiif sifers sjen; mear lêst net mear as in oardiel.',
+  'Laat de vorige rapportage leeg als er nog geen meting was; de slide toont dan geen verandering.':
+      'Lit de foarige rapportaazje leech as der noch gjin mjitting wie; de slide lit dan gjin feroaring sjen.',
+  'Bepaalt of een stijging groen of rood kleurt. De pijl volgt altijd de cijfers.':
+      'Bepaalt oft in stiging grien of read kleuret. De pylk folget altyd de sifers.',
+  'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
+      'In pear kearnsifers mei it sifer fan de foarige rapportaazje dernjonken, sadat de feroaring it ferhaal fertelt. Jou per sifer oan oft stigen goed of min nijs is.',
   'Medicare-nummer — een zorggegeven': 'Medicare-nûmer — in soarchgegeven',
   'bedrijfsnummer': 'bedriuwsnûmer',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

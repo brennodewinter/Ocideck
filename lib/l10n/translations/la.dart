@@ -1797,6 +1797,24 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Scorecard': 'Tabula numerorum',
+  'Cijfer toevoegen': 'Numerum addere',
+  'Cijfer verwijderen': 'Numerum removere',
+  'Richting': 'Directio',
+  'ongewijzigd': 'immutatum',
+  'Lager is beter': 'Minus melius est',
+  'Hoger is beter': 'Plus melius est',
+  'Neutraal': 'Neutrum',
+  'Nu': 'Nunc',
+  'Vorige rapportage': 'Relatio prior',
+  'Een scorecard toont hoogstens vijf cijfers; meer leest niet meer als een oordeel.':
+      'Tabula numerorum ad summum quinque numeros ostendit; plures iam non ut iudicium leguntur.',
+  'Laat de vorige rapportage leeg als er nog geen meting was; de slide toont dan geen verandering.':
+      'Relationem priorem vacuam relinque si mensura nondum fuit; tabula tum nullam mutationem ostendet.',
+  'Bepaalt of een stijging groen of rood kleurt. De pijl volgt altijd de cijfers.':
+      'Statuit utrum incrementum viride an rubrum sit. Sagitta semper numeros sequitur.',
+  'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
+      'Pauci numeri praecipui cum numero relationis prioris iuxta positi, ut mutatio narret. Pro quoque indica utrum incrementum bonum an malum nuntium sit.',
   'Medicare-nummer — een zorggegeven': 'numerus Medicare — datum salutis',
   'bedrijfsnummer': 'numerus societatis',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

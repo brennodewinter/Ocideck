@@ -1788,6 +1788,24 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Scorecard': 'Bodovna kartica',
+  'Cijfer toevoegen': 'Dodaj pokazatelj',
+  'Cijfer verwijderen': 'Ukloni pokazatelj',
+  'Richting': 'Smjer',
+  'ongewijzigd': 'nepromijenjeno',
+  'Lager is beter': 'Niže je bolje',
+  'Hoger is beter': 'Više je bolje',
+  'Neutraal': 'Neutralno',
+  'Nu': 'Sada',
+  'Vorige rapportage': 'Prethodno izvješće',
+  'Een scorecard toont hoogstens vijf cijfers; meer leest niet meer als een oordeel.':
+      'Bodovna kartica prikazuje najviše pet pokazatelja; više se više ne čita kao ocjena.',
+  'Laat de vorige rapportage leeg als er nog geen meting was; de slide toont dan geen verandering.':
+      'Ostavite prethodno izvješće prazno ako mjerenja još nije bilo; slajd tada ne prikazuje promjenu.',
+  'Bepaalt of een stijging groen of rood kleurt. De pijl volgt altijd de cijfers.':
+      'Određuje hoće li porast biti zelen ili crven. Strelica uvijek prati brojke.',
+  'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
+      'Nekoliko ključnih pokazatelja s brojkom iz prethodnog izvješća uz njih, tako da priču ispriča promjena. Za svaki navedite je li porast dobra ili loša vijest.',
   'Medicare-nummer — een zorggegeven': 'Medicare broj — zdravstveni podatak',
   'bedrijfsnummer': 'broj tvrtke',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

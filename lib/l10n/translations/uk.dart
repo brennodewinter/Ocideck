@@ -1799,6 +1799,24 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Scorecard': 'Оцінна картка',
+  'Cijfer toevoegen': 'Додати показник',
+  'Cijfer verwijderen': 'Видалити показник',
+  'Richting': 'Напрям',
+  'ongewijzigd': 'без змін',
+  'Lager is beter': 'Менше — краще',
+  'Hoger is beter': 'Більше — краще',
+  'Neutraal': 'Нейтрально',
+  'Nu': 'Зараз',
+  'Vorige rapportage': 'Попередній звіт',
+  'Een scorecard toont hoogstens vijf cijfers; meer leest niet meer als een oordeel.':
+      'Оцінна картка показує щонайбільше п\'ять показників; більше вже не читається як висновок.',
+  'Laat de vorige rapportage leeg als er nog geen meting was; de slide toont dan geen verandering.':
+      'Залиште попередній звіт порожнім, якщо вимірювання ще не було; слайд тоді не покаже зміни.',
+  'Bepaalt of een stijging groen of rood kleurt. De pijl volgt altijd de cijfers.':
+      'Визначає, чи буде зростання зеленим або червоним. Стрілка завжди слідує за числами.',
+  'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
+      'Кілька ключових показників із числом попереднього звіту поруч, щоб історію розповідала саме зміна. Для кожного вкажіть, чи зростання — це добра чи погана новина.',
   'Medicare-nummer — een zorggegeven': 'номер Medicare — дані про здоров’я',
   'bedrijfsnummer': 'номер компанії',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

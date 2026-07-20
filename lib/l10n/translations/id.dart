@@ -1781,6 +1781,24 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Scorecard': 'Kartu skor',
+  'Cijfer toevoegen': 'Tambah angka',
+  'Cijfer verwijderen': 'Hapus angka',
+  'Richting': 'Arah',
+  'ongewijzigd': 'tidak berubah',
+  'Lager is beter': 'Lebih rendah lebih baik',
+  'Hoger is beter': 'Lebih tinggi lebih baik',
+  'Neutraal': 'Netral',
+  'Nu': 'Sekarang',
+  'Vorige rapportage': 'Laporan sebelumnya',
+  'Een scorecard toont hoogstens vijf cijfers; meer leest niet meer als een oordeel.':
+      'Kartu skor menampilkan paling banyak lima angka; lebih dari itu tidak lagi terbaca sebagai penilaian.',
+  'Laat de vorige rapportage leeg als er nog geen meting was; de slide toont dan geen verandering.':
+      'Biarkan laporan sebelumnya kosong jika belum ada pengukuran; slide tidak akan menampilkan perubahan.',
+  'Bepaalt of een stijging groen of rood kleurt. De pijl volgt altijd de cijfers.':
+      'Menentukan apakah kenaikan berwarna hijau atau merah. Panah selalu mengikuti angka.',
+  'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
+      'Beberapa angka utama dengan angka laporan sebelumnya di sampingnya, sehingga perubahannya yang bercerita. Tentukan untuk setiap angka apakah kenaikan adalah kabar baik atau buruk.',
   'Medicare-nummer — een zorggegeven': 'nomor Medicare — data kesehatan',
   'bedrijfsnummer': 'nomor perusahaan',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

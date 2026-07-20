@@ -738,6 +738,24 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Scorecard': 'Fiche de résultats',
+  'Cijfer toevoegen': 'Ajouter un indicateur',
+  'Cijfer verwijderen': 'Supprimer l\'indicateur',
+  'Richting': 'Sens',
+  'ongewijzigd': 'inchangé',
+  'Lager is beter': 'Plus bas, c\'est mieux',
+  'Hoger is beter': 'Plus haut, c\'est mieux',
+  'Neutraal': 'Neutre',
+  'Nu': 'Maintenant',
+  'Vorige rapportage': 'Rapport précédent',
+  'Een scorecard toont hoogstens vijf cijfers; meer leest niet meer als een oordeel.':
+      'Une fiche de résultats affiche au maximum cinq indicateurs ; au-delà, ce n\'est plus un jugement.',
+  'Laat de vorige rapportage leeg als er nog geen meting was; de slide toont dan geen verandering.':
+      'Laissez le rapport précédent vide s\'il n\'y avait pas encore de mesure ; la diapositive n\'affichera aucun changement.',
+  'Bepaalt of een stijging groen of rood kleurt. De pijl volgt altijd de cijfers.':
+      'Détermine si une hausse s\'affiche en vert ou en rouge. La flèche suit toujours les chiffres.',
+  'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
+      'Quelques indicateurs clés accompagnés du chiffre du rapport précédent, afin que l\'évolution raconte l\'histoire. Indiquez pour chacun si une hausse est une bonne ou une mauvaise nouvelle.',
   'Medicare-nummer — een zorggegeven': 'numéro Medicare — donnée de santé',
   'bedrijfsnummer': 'numéro de société',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
