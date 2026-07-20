@@ -91,19 +91,22 @@ class LocalCveIndex {
     if (!temp.existsSync()) {
       throw StateError('geen index geschreven om te bevestigen');
     }
-    if (indexFile.existsSync()) indexFile.deleteSync();
-    temp.renameSync(indexFile.path);
-
+    // Eerst de meta van de nieuwe index klaarzetten, dan pas de index zelf
+    // omzetten. Andersom — en zo stond het hier — was er een moment waarop de
+    // nieuwe index er lag met de méta van de oude ernaast: de instellingen
+    // toonden dan de vorige releasetag en bouwdatum boven een andere index. Wie
+    // daarop afgaat om te beoordelen of een recente CVE erin kan zitten, kijkt
+    // naar het verkeerde antwoord. De lengte kan pas ná het hernoemen worden
+    // vastgesteld, dus die komt van het tijdelijke bestand.
     final stats = LocalCveStats(
       release: release,
       builtOn: builtOn,
       records: records,
-      bytes: indexFile.lengthSync(),
+      bytes: temp.lengthSync(),
     );
-    // Atomisch, want een half geschreven meta laat een complete index als kapot
-    // lezen. Het metabestand is wél de beschrijving van de index, maar niet het
-    // bewijs dát hij er is — dat controleert [stats] tegen het bestand zelf.
     await writeStringAtomic(metaFile, jsonEncode(stats.toJson()));
+    if (indexFile.existsSync()) indexFile.deleteSync();
+    temp.renameSync(indexFile.path);
     return stats;
   }
 

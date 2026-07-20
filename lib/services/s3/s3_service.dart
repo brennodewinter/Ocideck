@@ -555,12 +555,22 @@ class S3Service {
     }
   }
 
+  /// Hoe lang er tussen twee brokken van een antwoord mag zitten.
+  ///
+  /// De `.timeout(...)` bij het versturen hangt aan `request.close()`, en die
+  /// is klaar zodra de *kop* er is. Het lichaam werd daarna zonder enige
+  /// deadline uitgelezen: een endpoint dat met 200 OK antwoordt, één byte
+  /// stuurt en vervolgens zwijgt zonder de verbinding te sluiten, liet de
+  /// toekomst nooit voltooien. Dan draait de spinner eeuwig, wordt de socket
+  /// nooit opgeruimd en is er geen weg terug binnen de app.
+  static const _chunkTimeout = Duration(seconds: 60);
+
   Future<Uint8List> _readCappedBytes(
     HttpClientResponse response,
     int max,
   ) async {
     final builder = BytesBuilder(copy: false);
-    await for (final chunk in response) {
+    await for (final chunk in response.timeout(_chunkTimeout)) {
       builder.add(chunk);
       if (builder.length > max) {
         throw S3Exception(S3Error.tooLarge, 'Bestand te groot');

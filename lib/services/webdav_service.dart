@@ -145,6 +145,11 @@ class WebdavConflictException implements Exception {
 /// alleen een privé/LAN-adres zijn wanneer de gebruiker hem als vertrouwd
 /// heeft gemarkeerd ([WebdavServer.trustedInternal]).
 class WebdavService {
+  /// Hoe lang er tussen twee brokken van een antwoord mag zitten. De timeout
+  /// bij het versturen dekt alleen de kop; zonder deze deadline hing een
+  /// antwoord dat halverwege stilvalt voor altijd. Zie [S3Service].
+  static const _chunkTimeout = Duration(seconds: 60);
+
   WebdavService({required this.server, required this.password});
 
   final WebdavServer server;
@@ -353,7 +358,7 @@ class WebdavService {
         );
       }
       final builder = BytesBuilder(copy: false);
-      await for (final chunk in response) {
+      await for (final chunk in response.timeout(_chunkTimeout)) {
         builder.add(chunk);
         if (builder.length > maxListingBytes) {
           throw WebdavException(WebdavError.tooLarge, 'Listing te groot');
@@ -506,7 +511,7 @@ class WebdavService {
         throw WebdavException(WebdavError.tooLarge, 'Bestand te groot');
       }
       final builder = BytesBuilder(copy: false);
-      await for (final chunk in response) {
+      await for (final chunk in response.timeout(_chunkTimeout)) {
         builder.add(chunk);
         if (builder.length > maxBytes) {
           throw WebdavException(WebdavError.tooLarge, 'Bestand te groot');
