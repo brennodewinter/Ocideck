@@ -17,6 +17,9 @@ import '../../utils/log.dart';
 /// honderden megabytes. Zoeken scant daarom het bestand en ontleedt alléén de
 /// regels die de zoekterm bevatten — de scan is een substring-test op ruwe
 /// tekst, geen JSON-parse per record.
+/// De vorm van een volledige CVE-id, zoals de gebruiker hem intikt.
+final _reCveId = RegExp(r'^cve-\d{4}-\d+$');
+
 class LocalCveIndex {
   /// De map waarin index + meta staan (onder app-support).
   final Directory directory;
@@ -134,6 +137,8 @@ class LocalCveIndex {
 
     final hits = <LocalCveRecord>[];
     final exact = <LocalCveRecord>[];
+    // Alleen een volledige id kan een exacte treffer opleveren.
+    final wantsExact = _reCveId.hasMatch(q);
 
     final lines = indexFile
         .openRead()
@@ -153,7 +158,18 @@ class LocalCveIndex {
       } else if (hits.length < limit) {
         hits.add(record);
       }
-      if (exact.isNotEmpty && hits.length >= limit) break;
+      // Stoppen zodra er genoeg is.
+      //
+      // De oude voorwaarde eiste óók een exacte treffer, en die krijg je alleen
+      // bij het intikken van een volledige CVE-id. Bij elke trefwoordzoektocht
+      // bleef `exact` dus leeg en werd de hele index van honderden megabytes
+      // uitgelezen — en regel voor regel in kleine letters omgezet — lang nadat
+      // de gevraagde resultaten al binnen waren.
+      //
+      // Ziet de zoekterm eruit als een id, dan loopt hij wél door tot die
+      // gevonden is: een exacte treffer hoort bovenaan en kan verderop nog
+      // komen. Anders is vol ook klaar.
+      if (hits.length >= limit && (!wantsExact || exact.isNotEmpty)) break;
     }
 
     return [...exact, ...hits].take(limit).toList();

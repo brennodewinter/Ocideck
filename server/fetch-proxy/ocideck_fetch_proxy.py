@@ -16,6 +16,9 @@ regels hieronder spiegelen NetGuard (lib/utils/net_guard.dart) van de app:
     DNS-rebind tussen check en connect nergens heen kan (TLS valideert
     tegen de oorspronkelijke hostnaam via SNI);
   * redirects worden niet gevolgd (een 3xx kan naar binnen wijzen);
+  * alleen bekende poorten (80/443/8080/8443) — zonder die grens is dit een
+    poortscanner op andermans naam;
+  * hooguit acht verzoeken tegelijk, want de leestimeout is per brok;
   * de respons is begrensd (standaard 512 MiB) en wordt gestreamd
     doorgegeven als application/octet-stream — de app zelf blijft de
     enige die de inhoud valideert (magic bytes, veiligheidsscan, parse).
@@ -28,9 +31,12 @@ Omgevingsvariabelen: OCIDECK_PROXY_BIND (127.0.0.1), OCIDECK_PROXY_PORT
 (8123), OCIDECK_PROXY_MAX_BYTES (536870912), OCIDECK_PROXY_ALLOWED_ORIGINS
 (komma-lijst; indien gezet moet Origin of Referer ermee beginnen).
 
-Standaard faalt de proxy gesloten: zonder allowlist bedient hij alleen de
-same-origin fetch van de app (Sec-Fetch-Site), zodat een niet-geconfigureerde
-deployment géén open fetch-relay is. Zet OCIDECK_PROXY_ALLOW_ANY=1 om de proxy
+Standaard bedient de proxy alleen de same-origin fetch van de app
+(Sec-Fetch-Site). Let op wat die controle wél doet: geen enkele *pagina* kan die
+header zetten, dus cross-site gebruik vanuit een browser is uitgesloten. Een
+niet-browser (curl) zet hem wél, dus reken er niet op dat een open deployment
+onbereikbaar is voor derden — zie de opmerking bij `_origin_allowed`. Wat de
+schade begrenst zijn de regels hierboven, en die gelden altijd. Zet OCIDECK_PROXY_ALLOW_ANY=1 om de proxy
 bewust als open (SSRF-begrensde, alleen publieke hosts) fetcher te draaien.
 """
 
@@ -40,6 +46,7 @@ import os
 import socket
 import ssl
 import sys
+import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs, quote, urlparse
 
@@ -56,6 +63,21 @@ ALLOWED_ORIGINS = [
 # aanvrager. Zet OCIDECK_PROXY_ALLOW_ANY=1 om dat bewust los te laten en de
 # proxy als open (public-only) fetcher te draaien.
 ALLOW_ANY = os.environ.get("OCIDECK_PROXY_ALLOW_ANY", "").strip() in ("1", "true", "yes")
+# Poorten die een deck-URL redelijkerwijs gebruikt. Zonder deze lijst kon de
+# proxy elke poort op elke publieke host benaderen: geen SSRF (intern blijft
+# geweigerd) maar wél een poortscanner en een anonimiseringsrelais op andermans
+# naam. Zet OCIDECK_PROXY_ALLOWED_PORTS om dit te verruimen.
+ALLOWED_PORTS = {
+    int(p)
+    for p in os.environ.get("OCIDECK_PROXY_ALLOWED_PORTS", "80,443,8080,8443")
+    .split(",")
+    if p.strip().isdigit()
+}
+# Hoeveel verzoeken er tegelijk onderweg mogen zijn. ThreadingHTTPServer maakt
+# per verzoek een thread en de leestimeout is per brok, niet per verzoek: zonder
+# plafond houdt een handvol trage bronnen het proces bezet.
+MAX_INFLIGHT = int(os.environ.get("OCIDECK_PROXY_MAX_INFLIGHT", "8"))
+_inflight = threading.BoundedSemaphore(MAX_INFLIGHT)
 CONNECT_TIMEOUT = 15
 READ_TIMEOUT = 60
 CHUNK = 64 * 1024
@@ -151,6 +173,22 @@ class Handler(BaseHTTPRequestHandler):
     def _origin_allowed(self) -> bool:
         if ALLOW_ANY:
             return True  # operator heeft de open (public-only) modus gekozen
+        # LET OP — wat deze poort wél en niet is.
+        #
+        # `Sec-Fetch-Site` kan een *pagina* niet zetten: het staat op de
+        # verboden-header-lijst, dus geen enkele cross-site pagina komt hier
+        # binnen. Maar een verzoek hoeft niet uit een browser te komen. Een
+        # `curl -H "Sec-Fetch-Site: same-origin"` passeert deze controle
+        # moeiteloos, en dat maakt een verder ongeconfigureerde deployment
+        # alsnog een open (public-only) fetch-relais — precies wat de
+        # moduletekst hierboven belooft dat hij niet is.
+        #
+        # Dat is met een header niet te repareren: er bestaat geen kenmerk dat
+        # een echte browser aantoont. Wat de schade begrenst staat elders en
+        # geldt altijd: alleen publieke hosts (SSRF), alleen bekende poorten,
+        # geen redirects, een byteplafond en een plafond op gelijktijdige
+        # verzoeken. Wie meer wil, zet OCIDECK_PROXY_ALLOWED_ORIGINS én zet er
+        # authenticatie voor — de reverse proxy is daar de plek voor.
         # `Sec-Fetch-Site: same-origin` sturen browsers bij elk verzoek
         # automatisch mee en is niet door (cross-site) pagina's te zetten:
         # het bewijst dat het verzoek van de app-pagina zelf komt — óók
@@ -176,6 +214,14 @@ class Handler(BaseHTTPRequestHandler):
         return False
 
     def do_GET(self):  # noqa: N802 (http.server-conventie)
+        if not _inflight.acquire(blocking=False):
+            return self._refuse(503, "te veel gelijktijdige verzoeken")
+        try:
+            self._do_get()
+        finally:
+            _inflight.release()
+
+    def _do_get(self):
         query = parse_qs(urlparse(self.path).query)
         target = (query.get("url") or [""])[0].strip()
         if not self._origin_allowed():
@@ -193,6 +239,8 @@ class Handler(BaseHTTPRequestHandler):
         if parsed.scheme not in ("http", "https") or not parsed.hostname:
             return self._refuse(400, "alleen http(s)-URL's")
         port = parsed.port or (443 if parsed.scheme == "https" else 80)
+        if port not in ALLOWED_PORTS:
+            return self._refuse(403, "deze poort is niet toegestaan")
         pinned = resolve_pinned(parsed.hostname, port)
         if pinned is None:
             return self._refuse(403, "host niet toegestaan")
