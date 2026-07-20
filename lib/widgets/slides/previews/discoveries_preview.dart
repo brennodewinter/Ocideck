@@ -117,14 +117,17 @@ class _DiscoveriesPreview extends StatelessWidget {
     );
   }
 
+  /// Column headings. "onopgemerkt" sits over the **figure**, not over the bar:
+  /// the bar and the figure are the same quantity, and a heading parked at the
+  /// far left of a wide bar leaves the number column looking unlabelled.
   Widget _headerRow(AppLocalizations l10n, Color text) => Padding(
     padding: EdgeInsets.only(bottom: w * 0.012),
     child: Row(
       children: [
         SizedBox(width: _nameWidth + _gap),
-        Expanded(child: _head(l10n.d('onopgemerkt'), text, w, TextAlign.left)),
+        const Expanded(child: SizedBox.shrink()),
         SizedBox(width: _gap),
-        _head('', text, _daysWidth, TextAlign.right),
+        _head(l10n.d('onopgemerkt'), text, _daysWidth, TextAlign.right),
         SizedBox(width: _gap),
         _head(l10n.d('eigenaar'), text, _ownerWidth, TextAlign.left),
       ],
