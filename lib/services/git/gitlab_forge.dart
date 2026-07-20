@@ -26,7 +26,7 @@ import 'git_transport_factory.dart';
 ///   dan weigert hij.
 /// - **Een pull request heet een merge request**, en wordt niet op zijn nummer
 ///   maar op zijn `iid` (per project oplopend) aangesproken.
-class GitLabForge implements GitForge {
+class GitLabForge implements GitForge, CodeSearchCapable {
   GitLabForge({
     required this.config,
     required this.token,
@@ -72,6 +72,52 @@ class GitLabForge implements GitForge {
           '/api/v4/projects/$_projectId/${segments.map(Uri.encodeComponent).join('/')}',
       queryParameters: query,
     );
+  }
+
+  @override
+  Future<Set<String>?> searchDeckCodeDirs(
+    String needle, {
+    required String branch,
+    required String defaultBranch,
+  }) async {
+    final term = needle.trim();
+    if (term.isEmpty) return null;
+    // Project-scope blobs-zoeken: `ref` mag elke branch zijn (anders dan GitHub),
+    // dus [defaultBranch] hoeft hier niet mee. Beschikbaar alleen wanneer de
+    // instantie Advanced/Exact Search aan heeft; staat dat uit, dan komt er een
+    // leeg antwoord terug — dat vangen we hieronder af.
+    final GitResponse response;
+    try {
+      response = await _transport.get(
+        _apiUri(
+          ['search'],
+          query: {
+            'scope': 'blobs',
+            'search': term,
+            'ref': branch,
+            'per_page': '100',
+          },
+        ),
+        headers: _headers,
+        maxBytes: maxListingBytes,
+      );
+    } on GitForgeException {
+      return null;
+    }
+    if (response.status != 200) return null;
+    final json = _decodeJson(response.bytes);
+    if (json is! List) return null;
+    final dirs = <String>{};
+    for (final raw in json) {
+      if (raw is! Map) continue;
+      final path = raw['path'];
+      if (path is! String) continue;
+      final dir = GitRepoLayout.deckDirOfDeckFile(path);
+      if (dir != null) dirs.add(dir);
+    }
+    // Leeg is dubbelzinnig — geen treffers, óf blobs-zoeken staat niet aan op
+    // deze instantie. Val dan terug op de volledige scan.
+    return dirs.isEmpty ? null : dirs;
   }
 
   // ── Lezen ───────────────────────────────────────────────────────────────────
