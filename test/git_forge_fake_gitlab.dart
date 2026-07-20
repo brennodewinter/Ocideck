@@ -116,6 +116,20 @@ class FakeGitLabTransport implements GitTransport {
       ]);
     }
 
+    // search?scope=blobs&search=<term>&ref=<branch> — project-scope blob search.
+    // Like the GitHub fake, this returns every file whose content contains the
+    // term (the adapter filters down to decks/<name>/deck.md itself). An
+    // unsupported scope answers empty, as a basic-search instance would.
+    if (s.length == 1 && s[0] == 'search') {
+      if (q['scope'] != 'blobs') return _json([]);
+      final lower = (q['search'] ?? '').toLowerCase();
+      return _json([
+        for (final e in repo.files.entries)
+          if (utf8.decode(e.value).toLowerCase().contains(lower))
+            {'path': e.key, 'basename': e.key.split('/').last.split('.').first},
+      ]);
+    }
+
     return _notFound();
   }
 
