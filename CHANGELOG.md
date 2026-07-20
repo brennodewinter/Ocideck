@@ -59,6 +59,14 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 
 
 ### Fixed
+- **De webversie ruimt afbeeldingen op die nergens meer worden gebruikt.** Elke
+  gekozen of geplakte afbeelding, video en audio leefde in het geheugen en bleef
+  daar staan — ook nadat de dia was verwijderd of vervangen — zodat het geheugen
+  van een tabblad onbegrensd groeide. Na het verwijderen van dia's en na het
+  opslaan veegt de app nu de media weg die geen enkel open tabblad, geen
+  ongedaan-/opnieuw-stap en het diaklembord meer aanhaalt. De sweep is bewust
+  breed: alles wat nog terug kan komen, blijft. Op schijf (desktop) speelt dit
+  niet.
 - **Web-opslag waarschuwt voordat een kaal `.md` je afbeeldingen laat vallen.**
   Op web is opslaan een `.md`-download; afbeeldingen, video en audio die je in
   het tabblad koos, leven alleen in het geheugen en reizen niet mee in een los

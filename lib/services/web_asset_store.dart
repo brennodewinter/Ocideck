@@ -34,6 +34,27 @@ class WebAssetStore {
     return path;
   }
 
+  /// Of de store leeg is. Op desktop is hij dat altijd (afbeeldingen gaan naar
+  /// schijf), dus een sweep kan er goedkoop op afhaken.
+  static bool get isEmpty => _bytes.isEmpty;
+
+  /// Houd alleen de assets in [live] aan; gooi de rest weg. Retourneert hoeveel
+  /// er zijn opgeruimd.
+  ///
+  /// Dit is de enige plek waar een asset wordt vergeten zonder dat de pagina
+  /// herlaadt, dus [live] moet écht compleet zijn: elke `mem:`-verwijzing die
+  /// nog terug kan komen — in een open tabblad, in de ongedaan-/opnieuw-stapel,
+  /// of op het diaklembord. De aanroeper ([TabsNotifier.sweepWebAssets]) stelt
+  /// die verzameling samen; hier vertrouwen we erop dat hij volledig is.
+  static int retain(Set<String> live) {
+    final dood = _bytes.keys.where((k) => !live.contains(k)).toList();
+    for (final k in dood) {
+      _bytes.remove(k);
+      _names.remove(k);
+    }
+    return dood.length;
+  }
+
   /// De bytes achter een `mem:`-pad, of null (geen mem-pad / niet aanwezig,
   /// bv. na een herlaad van de pagina).
   static Uint8List? bytesFor(String path) => _bytes[path];

@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import '../models/annotation.dart';
+import '../models/asset_origin.dart';
 import '../models/checklist_spec.dart';
 import '../models/deck.dart';
 import '../models/deck_template.dart';
@@ -176,6 +177,27 @@ class DeckNotifier extends StateNotifier<DeckState> {
   bool get canUndo => _undoStack.isNotEmpty;
   bool get canRedo => _redoStack.isNotEmpty;
 
+  /// Aangeroepen wanneer een `mem:`-asset (webversie) niet meer nodig hóéft te
+  /// zijn: na het verwijderen van dia's en na het opslaan. [TabsNotifier] hangt
+  /// hier de sweep aan — die is de enige die alle tabbladen én het klembord
+  /// overziet, dus deze notifier weet zelf niet welke assets weg mogen; hij
+  /// meldt alleen dát het moment daar is.
+  void Function()? onSweepWebAssets;
+
+  /// Elk `mem:`-pad dat dit tabblad nog terug kan halen: de huidige dia's plus
+  /// alles in de ongedaan-/opnieuw-stapel. Een verwijderde dia leeft in de
+  /// ongedaan-stapel voort, dus zijn afbeelding mag pas weg als die stap dat ook
+  /// is. Het logo van elk van die deck-versies telt mee.
+  void collectLiveMemoryAssetPaths(Set<String> into) {
+    for (final deck in [
+      if (state.deck != null) state.deck!,
+      ..._undoStack,
+      ..._redoStack,
+    ]) {
+      into.addAll(deckMemoryAssetPaths(deck));
+    }
+  }
+
   void _clearHistory() {
     _undoStack.clear();
     _redoStack.clear();
@@ -266,6 +288,9 @@ class DeckNotifier extends StateNotifier<DeckState> {
       return false;
     }
     state = state.copyWith(isDirty: false, downloadName: name);
+    // Opslaan is een natuurlijk opschoonmoment: een afbeelding die is vervangen
+    // laat zijn oude mem:-bytes achter zonder dat er een dia is verwijderd.
+    onSweepWebAssets?.call();
     return true;
   }
 

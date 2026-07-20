@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/legacy.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
+import '../models/asset_origin.dart';
 import '../models/chart.dart';
 import '../models/deck.dart';
 import '../models/deck_template.dart';
@@ -39,6 +40,7 @@ import '../utils/log.dart';
 import 'deck_provider.dart';
 import 'editor_provider.dart';
 import 'settings_provider.dart';
+import 'slide_clipboard_provider.dart';
 
 part 'tabs_provider_tab_info.dart';
 part 'tabs_provider_package.dart';
@@ -113,6 +115,28 @@ class TabsNotifier extends StateNotifier<TabsState> {
     if (mounted) state = state.copyWith(tabs: List.from(state.tabs));
   }
 
+  /// Ruimt de `mem:`-assets op die nergens meer worden gebruikt (webversie).
+  ///
+  /// Dit is de enige plek die het volledige plaatje heeft: elk open tabblad met
+  /// zijn ongedaan-/opnieuw-stapel, plus de ene dia op het klembord. Alles wat
+  /// dáárin nog een `mem:`-pad aanhaalt, blijft; de rest gaat weg. Onvolledig
+  /// zou het beeld op een andere dia of een ongedaan-stap wegvagen, dus de
+  /// verzameling wordt hier bewust breed opgebouwd.
+  ///
+  /// Op desktop is de store leeg (afbeeldingen staan op schijf), dus dan haakt
+  /// hij meteen af.
+  void sweepWebAssets() {
+    if (WebAssetStore.isEmpty) return;
+    final live = <String>{};
+    for (final tab in state.tabs) {
+      if (!tab.deckNotifier.mounted) continue;
+      tab.deckNotifier.collectLiveMemoryAssetPaths(live);
+    }
+    final clipboard = _ref.read(slideClipboardProvider);
+    if (clipboard != null) addSlideMemoryAssetPaths(clipboard, live);
+    WebAssetStore.retain(live);
+  }
+
   /// UI-callback die het wachtwoord van een versleuteld pakket ophaalt.
   /// Geregistreerd door de shell (die een [BuildContext] heeft); zonder
   /// registratie kan er niet om een wachtwoord worden gevraagd en falen
@@ -170,6 +194,11 @@ class TabsNotifier extends StateNotifier<TabsState> {
     final id = _nextId++;
     final key = recoveryId ?? _uuid.v4();
     final deckNotifier = DeckNotifier(_md, _file);
+    // De webversie houdt gekozen afbeeldingen in het geheugen (mem:-paden). Als
+    // dit tabblad dia's verwijdert of opslaat, ruimt de sweep de assets op die
+    // nergens meer — in geen enkel tabblad, ongedaan-stapel of klembord —
+    // gebruikt worden. Op desktop is de store leeg, dus dit is er een no-op.
+    deckNotifier.onSweepWebAssets = sweepWebAssets;
     final tab = TabInfo(
       id: id,
       recoveryId: key,

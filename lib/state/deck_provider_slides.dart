@@ -34,6 +34,7 @@ extension DeckNotifierSlides on DeckNotifier {
     }
     final slides = List<Slide>.from(deck.slides)..removeAt(index);
     _mutate(deck.copyWith(slides: slides));
+    onSweepWebAssets?.call();
   }
 
   /// Verwijder meerdere slides tegelijk (bulk-actie). Houdt altijd minstens één
@@ -47,6 +48,7 @@ extension DeckNotifierSlides on DeckNotifier {
     ];
     if (keep.isEmpty || keep.length == deck.slides.length) return;
     _mutate(deck.copyWith(slides: keep));
+    onSweepWebAssets?.call();
   }
 
   /// Zet de "overslaan"-status van meerdere slides ineens (bulk-actie).

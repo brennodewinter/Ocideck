@@ -1,12 +1,15 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/recovery_service.dart';
+import 'package:ocideck/services/web_asset_store.dart';
 import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/state/image_contrast_provider.dart';
+import 'package:ocideck/state/slide_clipboard_provider.dart';
 import 'package:ocideck/state/tabs_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -140,6 +143,107 @@ void main() {
     test('label falls back to "Nieuw" for an untitled empty tab', () {
       final container = _container();
       expect(container.read(tabsProvider).current!.label, 'Nieuw');
+    });
+  });
+
+  // ── mem:-assets opruimen (webversie) ─────────────────────────────────────────
+
+  group('TabsNotifier.sweepWebAssets', () {
+    tearDown(WebAssetStore.clear);
+
+    String putMem() =>
+        WebAssetStore.put(Uint8List.fromList([1, 2, 3]), name: 'x.png');
+    Slide imageSlide(String memPath) =>
+        Slide.create(SlideType.image).copyWith(imagePath: memPath);
+    DeckNotifier deckOf(ProviderContainer c) =>
+        c.read(tabsProvider).current!.deckNotifier;
+
+    test('een ongebruikte asset wordt opgeruimd, een gebruikte blijft', () {
+      final container = _container();
+      final used = putMem();
+      final orphan = putMem();
+      deckOf(container).loadDeck(Deck(title: 'D', slides: [imageSlide(used)]));
+
+      container.read(tabsProvider.notifier).sweepWebAssets();
+
+      expect(WebAssetStore.bytesFor(used), isNotNull);
+      expect(
+        WebAssetStore.bytesFor(orphan),
+        isNull,
+        reason: 'nergens gebruikt',
+      );
+    });
+
+    test('een verwijderde dia houdt zijn afbeelding zolang undo kan', () {
+      final container = _container();
+      final a = putMem();
+      final b = putMem();
+      final deck = deckOf(container);
+      deck.loadDeck(Deck(title: 'D', slides: [imageSlide(a), imageSlide(b)]));
+
+      // removeSlide vuurt de sweep zelf af.
+      deck.removeSlide(1);
+
+      expect(
+        WebAssetStore.bytesFor(b),
+        isNotNull,
+        reason: 'b zit nog in de ongedaan-stapel; undo kan de dia terughalen',
+      );
+      // En na undo staat b weer op een echte dia.
+      deck.undo();
+      expect(deck.currentState.deck!.slides, hasLength(2));
+    });
+
+    test('een asset die alleen in de opnieuw-stapel zit, blijft', () {
+      final container = _container();
+      final b = putMem();
+      final deck = deckOf(container);
+      deck.loadDeck(Deck(title: 'D', slides: [Slide.create(SlideType.title)]));
+      deck.updateSlide(0, imageSlide(b)); // b in huidige, kaal in undo
+      deck.undo(); // huidige weer kaal, b nu alleen in de opnieuw-stapel
+
+      container.read(tabsProvider.notifier).sweepWebAssets();
+
+      expect(
+        WebAssetStore.bytesFor(b),
+        isNotNull,
+        reason: 'redo kan de afbeelding terugzetten',
+      );
+      deck.redo();
+      expect(deck.currentState.deck!.slides.single.imagePath, b);
+    });
+
+    test('een asset van een ánder tabblad wordt niet weggeveegd', () {
+      final container = _container();
+      final tabs = container.read(tabsProvider.notifier);
+      final a = putMem();
+      final b = putMem();
+
+      deckOf(container).loadDeck(Deck(title: 'A', slides: [imageSlide(a)]));
+      tabs.newDeckInNewTab('B');
+      deckOf(container).loadDeck(Deck(title: 'B', slides: [imageSlide(b)]));
+
+      tabs.sweepWebAssets();
+
+      expect(WebAssetStore.bytesFor(a), isNotNull, reason: 'tab A gebruikt a');
+      expect(WebAssetStore.bytesFor(b), isNotNull, reason: 'tab B gebruikt b');
+    });
+
+    test('een asset op het klembord wordt niet weggeveegd', () {
+      final container = _container();
+      final c = putMem();
+      deckOf(
+        container,
+      ).loadDeck(Deck(title: 'D', slides: [Slide.create(SlideType.title)]));
+      container.read(slideClipboardProvider.notifier).state = imageSlide(c);
+
+      container.read(tabsProvider.notifier).sweepWebAssets();
+
+      expect(
+        WebAssetStore.bytesFor(c),
+        isNotNull,
+        reason: 'de dia op het klembord kan nog worden geplakt',
+      );
     });
   });
 
