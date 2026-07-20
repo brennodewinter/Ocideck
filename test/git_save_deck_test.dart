@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
@@ -41,6 +42,31 @@ class _FlakyForge extends FakeForge {
         'Netwerkfout: geen verbinding',
       );
     }
+    return super.commitFiles(
+      branch: branch,
+      message: message,
+      upserts: upserts,
+      deletes: deletes,
+      baseSha: baseSha,
+    );
+  }
+}
+
+/// Een forge die zijn commit ophoudt tot [gate] klaarstaat — het net dat traag
+/// is, terwijl de gebruiker doorklikt naar een ander tabblad.
+class _BlockingForge extends FakeForge {
+  _BlockingForge(super.repo, this.gate);
+  final Completer<void> gate;
+
+  @override
+  Future<CommitResult> commitFiles({
+    required String branch,
+    required String message,
+    required Map<String, Uint8List> upserts,
+    required List<String> deletes,
+    required String baseSha,
+  }) async {
+    await gate.future;
     return super.commitFiles(
       branch: branch,
       message: message,
@@ -545,6 +571,59 @@ theme: ocideck
           ),
         ),
       );
+    });
+  });
+
+  group('tabwissel tijdens het opslaan', () {
+    test('de commit landt bij het eigen tabblad, niet bij het nieuwe', () async {
+      final (container, tabs) = build();
+      final gate = Completer<void>();
+      final repo = repoWith('# oud');
+      final forge = _BlockingForge(repo, gate);
+      final when = DateTime(2026, 7, 18);
+
+      const validDeck = '''
+---
+marp: true
+theme: ocideck
+---
+
+# Kwartaalcijfers
+''';
+      repo.files['$deckDir/deck.md'] = bytes(validDeck);
+      await tabs.openDeckFromGit(
+        forge,
+        config: config,
+        deckDir: deckDir,
+        branch: 'main',
+      );
+      final owner = container.read(tabsProvider).current!;
+
+      final saving = tabs.saveToGit(
+        forge,
+        config: config,
+        deckDir: deckDir,
+        branch: 'main',
+        message: 'opslag',
+        now: when,
+      );
+      // De gebruiker klikt door naar een nieuw, leeg tabblad terwijl de commit
+      // nog op de lijn staat.
+      tabs.newEmptyTab();
+      final other = container.read(tabsProvider).current!;
+      expect(identical(owner, other), isFalse);
+
+      gate.complete();
+      final result = await saving;
+
+      expect(result.status, GitSaveStatus.committed);
+      expect(
+        other.gitOrigin,
+        isNull,
+        reason: 'het lege tabblad mag geen herkomst erven van een ander deck',
+      );
+      expect(owner.gitOrigin?.deckDir, deckDir);
+      expect(owner.gitOrigin?.baseSha, result.sha);
     });
   });
 }

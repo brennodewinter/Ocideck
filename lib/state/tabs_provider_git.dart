@@ -328,13 +328,21 @@ extension TabsNotifierGit on TabsNotifier {
         'Pad is geen deckmap volgens de repo-layout',
       );
     }
-    final deck = currentState.current?.deckNotifier.currentState.deck;
+    // Zet het tabblad vást vóór het eerste wachtpunt. Een commit gaat over het
+    // netwerk en duurt; wisselt de gebruiker ondertussen van tabblad, dan zou
+    // `currentState.current` daarna een ánder deck aanwijzen en landde de nieuwe
+    // [GitOrigin] — of een samengevoegd deck — bij het verkeerde tabblad. Dat
+    // tabblad committeert bij de volgende opslag zijn eigen inhoud over de
+    // deckmap van dit deck heen. [saveToWebdav] en [saveToS3] krijgen hun
+    // tabblad niet voor niets als parameter mee.
+    final tab = currentState.current;
+    final deck = tab?.deckNotifier.currentState.deck;
     if (deck == null) {
       return const GitSaveResult(status: GitSaveStatus.failed);
     }
 
     // Welke branch dit wordt, en of we ervan aftakken: zie [_workBranchFor].
-    final origin = currentState.current?.gitOrigin;
+    final origin = tab?.gitOrigin;
     final round = _workBranchFor(
       origin: origin,
       config: config,
@@ -386,7 +394,7 @@ extension TabsNotifierGit on TabsNotifier {
         deletes: const [],
         baseSha: baseSha,
       );
-      currentState.current?.gitOrigin = GitOrigin(
+      tab?.gitOrigin = GitOrigin(
         config: config,
         branch: workBranch,
         deckDir: deckDir,
@@ -406,6 +414,7 @@ extension TabsNotifierGit on TabsNotifier {
       // werk is nooit weg.
       return _mergeOnConflict(
         forge,
+        tab: tab,
         config: config,
         deckDir: deckDir,
         branch: workBranch,
@@ -459,6 +468,10 @@ extension TabsNotifierGit on TabsNotifier {
   /// gebruiker kan kiezen en daarna gewoon opnieuw opslaat.
   Future<GitSaveResult> _mergeOnConflict(
     GitForge forge, {
+    /// Het tabblad waar dit deck in staat, vastgezet vóór het eerste wachtpunt.
+    /// Zie [saveToGit]: de merge doet drie netwerkrondes, en het resultaat moet
+    /// bij dít deck landen, niet bij wat er dan toevallig vooraan staat.
+    required TabInfo? tab,
     required GitRepoConfig config,
     required String deckDir,
     required String branch,
@@ -505,7 +518,6 @@ extension TabsNotifierGit on TabsNotifier {
       }
 
       // Het samengevoegde deck ín het tabblad, met hún kop als nieuwe basis.
-      final tab = currentState.current;
       tab?.deckNotifier.loadDeck(merge.merged);
       tab?.gitOrigin = GitOrigin(
         config: config,
@@ -550,7 +562,7 @@ extension TabsNotifierGit on TabsNotifier {
       if (!mounted) {
         return GitSaveResult(status: GitSaveStatus.failed, warnings: warnings);
       }
-      currentState.current?.gitOrigin = GitOrigin(
+      tab?.gitOrigin = GitOrigin(
         config: config,
         branch: branch,
         deckDir: deckDir,
