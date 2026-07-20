@@ -1,6 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as p;
+import '../../models/library_folder.dart';
 import '../../models/slide.dart';
 import '../../services/file_service.dart';
 import '../../services/slide_dedup_service.dart';
@@ -24,12 +25,18 @@ class _Hit {
       source.deck.title.isEmpty ? source.fileName : source.deck.title;
 }
 
-/// "Slide finder": search across every presentation in a directory and add
-/// matching, fully-rendered slides to the current presentation. The dialog
-/// stays open so several slides can be gathered in one session.
+/// "Slide finder": search across every presentation in the configured
+/// libraries (and the open deck's own folder) and add matching, fully-rendered
+/// slides to the current presentation. Every root is walked deeply and results
+/// are merged, so slides from *all* designated sources are searched — not only
+/// the folder the current deck happens to live in. The dialog stays open so
+/// several slides can be gathered in one session.
 class SlideFinderDialog extends StatefulWidget {
   final FileService fileService;
-  final String? initialDirectory;
+
+  /// The roots to scan (libraries plus the open deck's folder). Empty shows an
+  /// inviting empty state. Overlapping roots are de-duplicated per file.
+  final List<LibraryFolder> roots;
   final String? excludePath;
 
   /// Called with a slide (image paths already resolved to absolute) that the
@@ -39,7 +46,7 @@ class SlideFinderDialog extends StatefulWidget {
   const SlideFinderDialog({
     super.key,
     required this.fileService,
-    required this.initialDirectory,
+    required this.roots,
     required this.onAdd,
     this.excludePath,
   });
@@ -47,7 +54,7 @@ class SlideFinderDialog extends StatefulWidget {
   static Future<void> show(
     BuildContext context, {
     required FileService fileService,
-    required String? initialDirectory,
+    required List<LibraryFolder> roots,
     required void Function(Slide slide) onAdd,
     String? excludePath,
   }) {
@@ -55,7 +62,7 @@ class SlideFinderDialog extends StatefulWidget {
       context: context,
       builder: (_) => SlideFinderDialog(
         fileService: fileService,
-        initialDirectory: initialDirectory,
+        roots: roots,
         onAdd: onAdd,
         excludePath: excludePath,
       ),
@@ -71,7 +78,9 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
 
   final _dedup = SlideDedupService();
 
-  String? _directory;
+  /// De te doorzoeken wortels. Start op alle aangewezen bronnen; de mapkeuze-
+  /// knop kan tijdelijk naar één specifieke map versmallen.
+  late List<LibraryFolder> _roots;
   bool _loading = false;
   List<ScannedPresentation> _presentations = const [];
   String _query = '';
@@ -84,21 +93,31 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
   @override
   void initState() {
     super.initState();
-    _directory = widget.initialDirectory;
-    if (_directory != null) _scan();
+    _roots = List.of(widget.roots);
+    if (_roots.isNotEmpty) _scan();
   }
 
+  /// De eerste wortel als startmap voor de native mapkiezer.
+  String? get _firstRootPath => _roots.isEmpty ? null : _roots.first.path;
+
   Future<void> _scan() async {
-    final dir = _directory;
-    if (dir == null) return;
+    if (_roots.isEmpty) return;
     setState(() => _loading = true);
-    final results = await widget.fileService.scanPresentations(
-      dir,
-      excludePath: widget.excludePath,
-    );
+    final all = <ScannedPresentation>[];
+    final seen = <String>{};
+    for (final root in _roots) {
+      final results = await widget.fileService.scanPresentations(
+        root.path,
+        excludePath: widget.excludePath,
+      );
+      for (final r in results) {
+        // Overlappende bronmappen: elk bestand hooguit één keer.
+        if (seen.add(p.normalize(r.path))) all.add(r);
+      }
+    }
     if (!mounted) return;
     setState(() {
-      _presentations = results;
+      _presentations = all;
       _loading = false;
     });
   }
@@ -106,13 +125,24 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
   Future<void> _pickDirectory() async {
     final result = await FilePicker.getDirectoryPath(
       dialogTitle: context.l10n.d('Map met presentaties kiezen'),
-      initialDirectory: _directory,
+      initialDirectory: _firstRootPath,
     );
     if (!mounted) return;
     if (result != null) {
-      setState(() => _directory = result);
+      setState(
+        () => _roots = [LibraryFolder(name: p.basename(result), path: result)],
+      );
       await _scan();
     }
+  }
+
+  /// Label van de mapkeuze-knop: bij meerdere wortels "Alle bibliotheken", bij
+  /// één de bibliotheeknaam (of mapnaam), en anders de uitnodiging om te kiezen.
+  String _rootsButtonLabel(AppLocalizations l10n) {
+    if (_roots.isEmpty) return l10n.d('Map kiezen');
+    if (_roots.length > 1) return l10n.d('Alle bibliotheken');
+    final only = _roots.first;
+    return only.name.trim().isEmpty ? p.basename(only.path) : only.name;
   }
 
   String _slideText(Slide slide) {
@@ -265,14 +295,14 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
         ),
         const SizedBox(width: 8),
         Tooltip(
-          message: _directory ?? l10n.d('Geen map gekozen'),
+          message: _roots.isEmpty
+              ? l10n.d('Geen bibliotheek')
+              : _roots.map((r) => r.path).join('\n'),
           child: OutlinedButton.icon(
             onPressed: _pickDirectory,
             icon: const Icon(Icons.folder_open_outlined, size: 16),
             label: Text(
-              _directory == null
-                  ? l10n.d('Map kiezen')
-                  : p.basename(_directory!),
+              _rootsButtonLabel(l10n),
               overflow: TextOverflow.ellipsis,
             ),
           ),
@@ -286,10 +316,12 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
     if (_loading) {
       return const Center(child: CircularProgressIndicator());
     }
-    if (_directory == null) {
+    if (_roots.isEmpty) {
       return _empty(
         Icons.folder_off_outlined,
-        l10n.d('Kies een map met presentaties om te beginnen.'),
+        l10n.d(
+          'Nog geen bibliotheek. Voeg er een toe bij Instellingen, of kies hierboven een map om te doorzoeken.',
+        ),
       );
     }
     if (_query.trim().isEmpty) {

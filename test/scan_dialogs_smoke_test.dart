@@ -129,7 +129,7 @@ void main() {
         (BuildContext context) => SlideFinderDialog.show(
           context,
           fileService: service,
-          initialDirectory: dir.path,
+          roots: [LibraryFolder(name: 'Test', path: dir.path)],
           onAdd: (Slide _) {},
         ),
       ),
