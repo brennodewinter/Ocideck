@@ -745,7 +745,17 @@ extension TabsNotifierGit on TabsNotifier {
           utf8.encode(entry.value),
         ),
     };
-    await mirror.writeDeck(deckDir, deckFiles);
+    try {
+      await mirror.writeDeck(deckDir, deckFiles);
+    } on DraftStoreUnsupported catch (e) {
+      // De webwerkkopie kan dit deck niet bergen (te groot of niet-tekst). De
+      // uitzondering is géén GitForgeException, dus zonder deze vangst liep hij
+      // ongevangen door: geen melding, en niets in de wachtrij, terwijl de
+      // desktop netjes "gaat mee zodra er weer verbinding is" toont. De
+      // uitzondering draagt al een gebruikersgerichte tekst; die tonen we.
+      logWarning('_queueGitSave: webwerkkopie weigert het deck', e);
+      return GitSaveResult(status: GitSaveStatus.failed, message: e.message);
+    }
     await outbox.enqueue(
       PendingCommit(
         deckDir: deckDir,

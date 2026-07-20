@@ -113,7 +113,7 @@ services named below.
 | Second-screen presenter view | ✗ | Needs native windowing. |
 | Crash recovery / autosave snapshots | ✗ | No app-support directory, so every snapshot call is a silent no-op. **Nothing is recovered after a browser crash.** |
 | Face detection in slide images | ✗ | The detector is a native library over FFI. See below — this one has a privacy consequence. |
-| Local CVE database (offline lookup) | ✗ | Needs a multi-gigabyte on-disk index. The online CVE lookup still works. |
+| Local CVE database (offline lookup) | ✗ | Needs a multi-gigabyte on-disk index. The online CVE lookup is also desktop-only — it runs through an SSRF-pinned `dart:io` request the browser can't make; the in-app button says so. |
 | Image caption sidecars | ✗ | Sidecars are files next to the image; there are none. |
 | "Missing media" slide-quality check | ✗ | It resolves paths on disk. |
 | Cloud AI | ✗ | Blocked by design, not by platform — see [SECURITY_DESIGN.md](SECURITY_DESIGN.md) §7. |

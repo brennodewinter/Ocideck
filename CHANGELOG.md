@@ -59,6 +59,23 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 
 
 ### Fixed
+- **Web/io-verschillen die stil de verkeerde kant op vielen, rechtgezet.** Een
+  gerichte vergelijking van de platformvarianten leverde vijf punten op:
+  - De gezichtencontrole beloofde op web dat "elke afbeelding lokaal wordt
+    doorgerekend" terwijl de webvariant een no-op is. De schakelaar staat op web
+    nu uit en uitgeschakeld, met de reden erbij.
+  - Online CVE-opzoeken is desktop-only; de documentatie beweerde ten onrechte
+    dat het op web bleef werken (HOSTING.md/USER_GUIDE.md rechtgezet).
+  - Een offline git-opslag van een te groot of niet-tekstueel deck gooide op web
+    een uitzondering die niemand ving: geen melding, niets in de wachtrij. Die
+    wordt nu een nette "Opslaan mislukt: … gebruik de desktopversie".
+  - De byte-cap op git-antwoorden werd op web pas ná het inlezen van het hele
+    lichaam gecontroleerd; nu eerst een Content-Length-poort en een lopende cap,
+    net als op desktop (met een eerlijke kanttekening over browserbuffering in
+    SECURITY_DESIGN).
+  - Een beschadigde web-werkkopie werd als "deck verworpen" gelezen en liet de
+    wachtende commit stil vallen als "niets te synchroniseren"; corruptie wordt
+    nu apart gemeld en als echte fout behandeld.
 - **De webversie ruimt afbeeldingen op die nergens meer worden gebruikt.** Elke
   gekozen of geplakte afbeelding, video en audio leefde in het geheugen en bleef
   daar staan — ook nadat de dia was verwijderd of vervangen — zodat het geheugen

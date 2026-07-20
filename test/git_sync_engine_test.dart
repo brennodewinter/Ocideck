@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/services/git/deck_mirror.dart';
+import 'package:ocideck/services/git/draft_store.dart';
 import 'package:ocideck/services/git/draft_store_io.dart';
 import 'package:ocideck/services/git/git_forge.dart';
 import 'package:ocideck/services/git/outbox.dart';
@@ -13,6 +14,26 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'git_forge_fake.dart';
 
 Uint8List _b(String s) => Uint8List.fromList(utf8.encode(s));
+
+/// Een werkkopie waarvan het lezen op corruptie stuit (zoals een beschadigde
+/// opslagsleutel op web). [hasDeck] is waar, dus er staat werk klaar.
+class _CorruptMirror implements DeckMirror {
+  @override
+  Future<Map<String, Uint8List>> readDeck(String deckDir) async =>
+      throw DraftStoreCorrupt(deckDir, 'kapotte sleutel');
+  @override
+  Future<void> writeDeck(String deckDir, Map<String, Uint8List> files) async {}
+  @override
+  Future<bool> hasDeck(String deckDir) async => true;
+  @override
+  Future<void> discardDeck(String deckDir) async {}
+  @override
+  Future<List<String>> deckDirs() async => const [];
+  @override
+  bool get hasRealHistory => false;
+  @override
+  bool get isDurable => true;
+}
 
 /// A forge that is simply not there — the aeroplane.
 class _OfflineForge extends FakeForge {
@@ -204,6 +225,36 @@ void main() {
   });
 
   group('SyncEngine.flush', () {
+    test(
+      'een beschadigde werkkopie wordt een fout, geen stille "niets te doen"',
+      () async {
+        // De web-werkkopie meldt corruptie met DraftStoreCorrupt. Zonder aparte
+        // afhandeling las de sync-motor dat als een leeg (verworpen) deck: hij
+        // haalde de commit stil weg en meldde nothingToCommit — offline werk stil
+        // zoek. Nu is het een echte fout.
+        await outbox.enqueue(
+          const PendingCommit(
+            deckDir: 'decks/kwartaalcijfers',
+            branch: 'main',
+            message: 'Update',
+            baseSha: 'commit-main',
+          ),
+        );
+        final engine = SyncEngine(
+          forge: FakeForge(repo),
+          mirror: _CorruptMirror(),
+          outbox: outbox,
+        );
+
+        final outcome = await engine.flushDeck('decks/kwartaalcijfers');
+
+        expect(outcome.status, SyncStatus.failed);
+        expect(outcome.message, isNotNull);
+        // De onherstelbare commit valt uit de wachtrij — maar zichtbaar, niet stil.
+        expect(await outbox.forDeck('decks/kwartaalcijfers'), isNull);
+      },
+    );
+
     test('commits the mirror and clears the queue', () async {
       await save('# Mijn werk');
       final outcome = await engineWith(

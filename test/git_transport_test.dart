@@ -142,7 +142,9 @@ void main() {
       },
     );
 
-    test('enforces the byte cap', () async {
+    test('enforces the byte cap via the Content-Length pre-check', () async {
+      // http.Response.bytes zet een Content-Length; die overschrijdt de cap al
+      // vóór het lezen, net als op io.
       final client = MockClient(
         (req) async => http.Response.bytes(Uint8List(4096), 200),
       );
@@ -157,6 +159,52 @@ void main() {
           ),
         ),
       );
+    });
+
+    test(
+      'enforces the byte cap while streaming when no Content-Length',
+      () async {
+        // Zonder Content-Length valt de voorpoort weg en moet de lopende cap
+        // midden in de stroom afbreken. Vier brokken van 512 = 2048 > 1024.
+        final client = MockClient.streaming((req, body) async {
+          final chunks = Stream<List<int>>.fromIterable([
+            Uint8List(512),
+            Uint8List(512),
+            Uint8List(512),
+            Uint8List(512),
+          ]);
+          return http.StreamedResponse(chunks, 200);
+        });
+        final transport = BrowserGitTransport(_config, client: client);
+        await expectLater(
+          transport.get(_api('blob'), headers: const {}, maxBytes: 1024),
+          throwsA(
+            isA<GitForgeException>().having(
+              (e) => e.kind,
+              'kind',
+              GitForgeError.tooLarge,
+            ),
+          ),
+        );
+      },
+    );
+
+    test('a chunked response under the cap comes back whole', () async {
+      final client = MockClient.streaming((req, body) async {
+        final chunks = Stream<List<int>>.fromIterable([
+          [1, 2, 3],
+          [4, 5, 6],
+        ]);
+        return http.StreamedResponse(chunks, 200);
+      });
+      final transport = BrowserGitTransport(_config, client: client);
+      final response = await transport.get(
+        _api('blob'),
+        headers: const {},
+        maxBytes: 1024,
+      );
+      expect(response.status, 200);
+      expect(response.bytes, [1, 2, 3, 4, 5, 6]);
     });
 
     test('refuses http unless the server is trusted-internal', () async {

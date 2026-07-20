@@ -11,6 +11,7 @@ import 'package:ocideck/models/git_settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/git/asset_pool.dart';
 import 'package:ocideck/services/git/deck_mirror.dart';
+import 'package:ocideck/services/git/draft_store.dart';
 import 'package:ocideck/services/git/draft_store_web.dart';
 import 'package:ocideck/services/git/git_forge.dart';
 import 'package:ocideck/services/git/outbox.dart';
@@ -21,6 +22,30 @@ import 'package:ocideck/state/tabs_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'git_forge_fake.dart';
+
+/// Een werkkopie die het deck weigert, zoals de webwerkkopie doet bij een te
+/// groot of niet-tekstueel deck ([DraftStoreUnsupported]).
+class _RejectingMirror implements DeckMirror {
+  const _RejectingMirror(this.reason);
+  final String reason;
+
+  @override
+  Future<void> writeDeck(String deckDir, Map<String, Uint8List> files) async =>
+      throw DraftStoreUnsupported(reason);
+
+  @override
+  Future<Map<String, Uint8List>> readDeck(String deckDir) async => {};
+  @override
+  Future<bool> hasDeck(String deckDir) async => false;
+  @override
+  Future<void> discardDeck(String deckDir) async {}
+  @override
+  Future<List<String>> deckDirs() async => const [];
+  @override
+  bool get hasRealHistory => false;
+  @override
+  bool get isDurable => true;
+}
 
 /// Een forge die je op scherp kunt zetten: online tot [online] op false gaat,
 /// waarna een commit een netwerkfout gooit — het vliegtuig, tijdens het opslaan.
@@ -464,6 +489,47 @@ theme: ocideck
       // De forge is niet aangeraakt: de branchkop staat er nog zoals hij stond.
       expect(repo.branches['main'], 'commit-main');
     });
+
+    test(
+      'een werkkopie die het deck weigert wordt een nette fout, geen crash',
+      () async {
+        // Web: een te groot of niet-tekstueel deck laat de werkkopie
+        // DraftStoreUnsupported gooien. Dat is geen GitForgeException, dus zonder
+        // vangst liep hij ongevangen door — geen melding, niets in de wachtrij.
+        final (container, tabs) = build();
+        final repo = FakeRepo(
+          branches: {'main': 'commit-main'},
+          files: {'$deckDir/deck.md': bytes('# start')},
+        );
+        final forge = _FlakyForge(repo);
+        const reason = 'Deze presentatie is te groot voor de webversie.';
+        const mirror = _RejectingMirror(reason);
+        final outbox = Outbox();
+
+        seedDeck(
+          container,
+          deckWith([
+            Slide.create(SlideType.bullets).copyWith(title: 'Te groot'),
+          ]),
+        );
+
+        forge.online = false;
+        final result = await tabs.saveToGit(
+          forge,
+          config: config,
+          deckDir: deckDir,
+          branch: 'main',
+          message: 'offline',
+          mirror: mirror,
+          outbox: outbox,
+        );
+
+        expect(result.status, GitSaveStatus.failed);
+        expect(result.message, reason);
+        // Niets in de wachtrij: de schrijf mislukte vóór het inrijen.
+        expect(await outbox.forDeck(deckDir), isNull);
+      },
+    );
 
     test('bij verbinding loopt de wachtrij leeg en landt het werk', () async {
       final (container, tabs) = build();

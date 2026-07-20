@@ -1780,6 +1780,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
+      'Den här kontrollen körs inte i webbversionen: ansiktsigenkänning kräver ett systembibliotek som webbläsaren saknar. Använd skrivbordsversionen för att kontrollera ansikten i bilder.',
   'Media blijft niet bewaard in een los .md-bestand':
       'Media bevaras inte i en vanlig .md-fil',
   'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':

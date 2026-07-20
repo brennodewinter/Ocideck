@@ -1785,6 +1785,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
+      'Ez az ellenőrzés nem fut a webes verzióban: az arcfelismeréshez egy rendszerkönyvtár kell, amely a böngészőből hiányzik. A képek arcokra való ellenőrzéséhez használd az asztali verziót.',
   'Media blijft niet bewaard in een los .md-bestand':
       'A médiatartalom nem marad meg egy egyszerű .md fájlban',
   'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':

@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:http/http.dart' as http;
 
@@ -132,24 +134,16 @@ class BrowserGitTransport implements GitTransport {
 
   /// Eén http-verzoek met het gevraagde werkwoord. De browser-client kent ze
   /// allemaal; dit vertaalt alleen de naam naar de juiste aanroep.
-  Future<http.Response> _issue(
+  http.Request _request(
     String method,
     Uri uri,
     Map<String, String>? headers,
     List<int>? body,
   ) {
-    switch (method) {
-      case 'POST':
-        return _client.post(uri, headers: headers, body: body);
-      case 'PUT':
-        return _client.put(uri, headers: headers, body: body);
-      case 'PATCH':
-        return _client.patch(uri, headers: headers, body: body);
-      case 'DELETE':
-        return _client.delete(uri, headers: headers, body: body);
-      default:
-        return _client.get(uri, headers: headers);
-    }
+    final request = http.Request(method, uri);
+    if (headers != null) request.headers.addAll(headers);
+    if (body != null) request.bodyBytes = Uint8List.fromList(body);
+    return request;
   }
 
   /// Een verzoek mét token gaat **nooit** door het fetch-hulppunt. Dat punt
@@ -173,15 +167,36 @@ class BrowserGitTransport implements GitTransport {
   }) async {
     try {
       final h = headers.isEmpty ? null : headers;
-      final response = await _issue(method, uri, h, body).timeout(timeout);
-      final bytes = response.bodyBytes;
-      if (bytes.length > maxBytes) {
-        throw const GitForgeException(
+      // Streamen in plaats van `.get`/`.post`, zodat de cap net als op io in
+      // twee stappen bijt: eerst een Content-Length die het plafond al meldt
+      // weigeren vóór het lezen, dan een lopende cap die midden in de stroom
+      // afbreekt. Kanttekening voor web: de standaard browserclient (XHR)
+      // buffert het antwoord al ín de browser voordat deze stroom iets levert,
+      // dus daar is de cap in de praktijk pas ná die buffer effectief — een
+      // liegende forge kan zo nog geheugen kosten. De Content-Length-poort
+      // vangt het eerlijke geval, en zodra de client wél echt streamt (fetch)
+      // breekt de lopende cap ook op web af. Zie SECURITY_DESIGN §"web".
+      final streamed = await _client
+          .send(_request(method, uri, h, body))
+          .timeout(timeout);
+      final declared = streamed.contentLength;
+      if (declared != null && declared > maxBytes) {
+        throw GitForgeException(
           GitForgeError.tooLarge,
-          'Antwoord te groot',
+          'Antwoord te groot ($declared bytes)',
         );
       }
-      return GitResponse(response.statusCode, bytes);
+      final builder = BytesBuilder(copy: false);
+      await for (final chunk in streamed.stream) {
+        builder.add(chunk);
+        if (builder.length > maxBytes) {
+          throw const GitForgeException(
+            GitForgeError.tooLarge,
+            'Antwoord te groot',
+          );
+        }
+      }
+      return GitResponse(streamed.statusCode, builder.takeBytes());
     } on GitForgeException {
       rethrow;
     } catch (e) {

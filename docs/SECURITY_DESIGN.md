@@ -154,7 +154,16 @@ SSRF-pinned transports.
   goes through, that a *different* pin does not, and that a pinned connection
   still validates the hostname.
 - **Per-caller byte caps** (see the Performance guide) reject oversized responses
-  both by `Content-Length` pre-check and by streaming cap.
+  both by `Content-Length` pre-check and by streaming cap. On desktop both stages
+  bite: an oversized `Content-Length` is refused before reading, and the stream is
+  aborted mid-download. On **web** the same two-stage check runs, but the default
+  browser HTTP client (XHR) buffers the response body *inside the browser* before
+  the Dart stream yields anything — so there the `Content-Length` pre-check is the
+  effective guard for an honest server, and the streaming cap only bites once the
+  client genuinely streams (the Fetch API). A forge that lies about (or omits) its
+  `Content-Length` can therefore still make a browser tab buffer an oversized body
+  before the cap fires; the cap prevents OciDeck from *retaining* it, not the
+  browser from *receiving* it.
 
 ## 4. Asset-path containment
 

@@ -738,6 +738,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
+      'Cette vérification ne s\'exécute pas dans la version web : la détection de visages nécessite une bibliothèque système absente du navigateur. Utilisez la version bureau pour vérifier les visages sur les images.',
   'Media blijft niet bewaard in een los .md-bestand':
       'Les médias ne sont pas conservés dans un simple fichier .md',
   'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':

@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/git_settings.dart';
+import 'package:ocideck/services/git/draft_store.dart';
 import 'package:ocideck/services/git/draft_store_web.dart';
 import 'package:ocideck/services/git/outbox.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -120,6 +121,25 @@ void main() {
   });
 
   group('PrefsDraftStore', () {
+    test('een beschadigde werkkopie meldt corruptie, geen leeg deck', () async {
+      // Een leeg deck betekent "verworpen" en laat de sync-motor de commit
+      // vallen. Een onleesbare (beschadigde) sleutel mag daar niet op lijken —
+      // die gooit DraftStoreCorrupt, zodat het als een échte fout telt.
+      SharedPreferences.setMockInitialValues({
+        'git_draft::decks/alpha': 'geen json',
+      });
+      final store = PrefsDraftStore();
+      await expectLater(
+        store.readDeck('decks/alpha'),
+        throwsA(isA<DraftStoreCorrupt>()),
+      );
+    });
+
+    test('een afwezige werkkopie is gewoon leeg, geen fout', () async {
+      final store = PrefsDraftStore();
+      expect(await store.readDeck('decks/bestaat-niet'), isEmpty);
+    });
+
     test('twee repo\'s met hetzelfde deck delen geen bestanden', () async {
       final a = PrefsDraftStore(scope: klantA.storageSlug);
       final b = PrefsDraftStore(scope: klantB.storageSlug);
