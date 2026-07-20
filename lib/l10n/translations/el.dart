@@ -1811,6 +1811,12 @@ const _dutchSourceEl = {
 const _dutchSourceAddEl = <String, String>{
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Δεν ήταν δυνατή η επαναφορά όλων. Ό,τι δεν ήταν αναγνώσιμο διατηρήθηκε.',
+  'Verdieping': 'Εμβάθυνση',
+  'Hoeveel detail?': 'Πόση λεπτομέρεια;',
+  'Met verdieping': 'Με εμβάθυνση',
+  'Beknopt': 'Συνοπτικό',
+  'Het detail achter het verhaal. Deze slide gaat mee in de volledige export en valt weg in de beknopte — los van wie hem mag zien.':
+      'Η λεπτομέρεια πίσω από την ιστορία. Αυτή η διαφάνεια ταξιδεύει με την πλήρη εξαγωγή και λείπει από τη συνοπτική — ανεξάρτητα από το ποιος μπορεί να τη δει.',
   'Bekijk de foto op ware grootte': 'Δείτε τη φωτογραφία σε πλήρες μέγεθος',
   'Azure-sleutel of SAS-token': 'κλειδί Azure ή διακριτικό SAS',
   'wachtwoordhash': 'σύνοψη κωδικού πρόσβασης',

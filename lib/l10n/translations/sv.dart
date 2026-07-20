@@ -1782,6 +1782,12 @@ const _dutchSourceSv = {
 const _dutchSourceAddSv = <String, String>{
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Allt kunde inte återställas. Det som inte gick att läsa har sparats.',
+  'Verdieping': 'Fördjupning',
+  'Hoeveel detail?': 'Hur mycket detalj?',
+  'Met verdieping': 'Med fördjupning',
+  'Beknopt': 'Kortfattat',
+  'Het detail achter het verhaal. Deze slide gaat mee in de volledige export en valt weg in de beknopte — los van wie hem mag zien.':
+      'Detaljen bakom berättelsen. Den här bilden följer med i den fullständiga exporten och faller bort ur den kortfattade — oberoende av vem som får se den.',
   'Bekijk de foto op ware grootte': 'Visa fotot i full storlek',
   'Azure-sleutel of SAS-token': 'Azure-nyckel eller SAS-token',
   'wachtwoordhash': 'lösenordshash',

@@ -28,11 +28,17 @@ class ExportDialog extends StatefulWidget {
   /// kiest — en het dialoog de bron níét mag hebben (dat is de projectiegrens).
   /// De functie sluit in de shell om de bron heen; het dialoog kan er alleen
   /// `AudienceDeck`s uit halen.
-  final ExportBundle Function(PrivacyExportProfile) bundleFor;
+  final ExportBundle Function(PrivacyExportProfile, {bool includeDetail})
+  bundleFor;
 
   /// Of dit deck überhaupt privacybevindingen heeft. Zo niet, dan heeft de keuze
   /// tussen "volledig" en "geredigeerd" geen betekenis en tonen we hem niet.
   final bool hasPrivacyFindings;
+
+  /// Of er een diepgangkeuze te maken valt: het deck heeft zowel
+  /// verdiepingsslides als gewone. Zo niet, dan levert "beknopt" hetzelfde
+  /// bestand of een leeg deck, en tonen we de keuze niet.
+  final bool hasDepthChoice;
 
   final CockpitColorScheme cockpitColorScheme;
   final ExportService exportService;
@@ -63,6 +69,7 @@ class ExportDialog extends StatefulWidget {
     required this.deckPath,
     required this.bundleFor,
     this.hasPrivacyFindings = false,
+    this.hasDepthChoice = false,
     this.cockpitColorScheme = CockpitColorScheme.standard,
     required this.exportService,
     this.enforcementPolicy = const ClassificationEnforcementPolicy(),
@@ -77,8 +84,10 @@ class ExportDialog extends StatefulWidget {
   static Future<void> show(
     BuildContext context, {
     required String deckPath,
-    required ExportBundle Function(PrivacyExportProfile) bundleFor,
+    required ExportBundle Function(PrivacyExportProfile, {bool includeDetail})
+    bundleFor,
     bool hasPrivacyFindings = false,
+    bool hasDepthChoice = false,
     CockpitColorScheme cockpitColorScheme = CockpitColorScheme.standard,
     required ExportService exportService,
     ClassificationEnforcementPolicy enforcementPolicy =
@@ -97,6 +106,7 @@ class ExportDialog extends StatefulWidget {
         deckPath: deckPath,
         bundleFor: bundleFor,
         hasPrivacyFindings: hasPrivacyFindings,
+        hasDepthChoice: hasDepthChoice,
         cockpitColorScheme: cockpitColorScheme,
         exportService: exportService,
         enforcementPolicy: enforcementPolicy,
@@ -137,13 +147,31 @@ class _ExportDialogState extends State<ExportDialog> {
   /// De bundel van het gekozen profiel. Eén keer per keuze gebouwd — het manifest
   /// bevat willekeurige salts, dus hem elke build opnieuw maken zou andere
   /// commitments opleveren dan er straks worden weggeschreven.
-  late ExportBundle _bundle = widget.bundleFor(_profile);
+  /// Of de verdiepingsslides meegaan. Standaard ja: dan is de uitvoer precies
+  /// wat hij zonder deze keuze ook zou zijn geweest.
+  bool _includeDetail = true;
+
+  late ExportBundle _bundle = widget.bundleFor(
+    _profile,
+    includeDetail: _includeDetail,
+  );
+
+  void _rebuild() =>
+      _bundle = widget.bundleFor(_profile, includeDetail: _includeDetail);
 
   void _selectProfile(PrivacyExportProfile profile) {
     if (profile == _profile) return;
     setState(() {
       _profile = profile;
-      _bundle = widget.bundleFor(profile);
+      _rebuild();
+    });
+  }
+
+  void _selectDepth(bool includeDetail) {
+    if (includeDetail == _includeDetail) return;
+    setState(() {
+      _includeDetail = includeDetail;
+      _rebuild();
     });
   }
 
@@ -364,6 +392,7 @@ class _ExportDialogState extends State<ExportDialog> {
       metadata: ExportDocumentMetadata.fromDeck(_bundle.audience.deck),
       redactionManifest: _bundle.manifest,
       privacyProfile: _profile,
+      includeDetail: _includeDetail,
       privacySummary: _bundle.privacySummary,
       privacyPolicy: widget.privacyPolicy,
       privacyAcknowledged: true,
@@ -399,6 +428,49 @@ class _ExportDialogState extends State<ExportDialog> {
       default:
         return l10n.t('renderingSlides');
     }
+  }
+
+  /// Hoeveel detail wil deze lezer?
+  ///
+  /// De derde as naast classificatie en redactie, en bewust een eigen keuze:
+  /// TLP zegt wíé het mag zien, redactie wélke gegevens eruit mogen, en dit
+  /// hoevéél detail erbij hoort. Een slide kan prima openbaar zijn en tóch meer
+  /// zijn dan waarvoor een managementpubliek kwam.
+  ///
+  /// Net als het profiel landt de keuze in de bestandsnaam (`…-beknopt.pdf`),
+  /// om dezelfde reden: een verwisseling moet je kunnen zien.
+  Widget _depthSelector(AppLocalizations l10n) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.d('Hoeveel detail?'),
+            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+          ),
+          const SizedBox(height: 6),
+          SegmentedButton<bool>(
+            segments: [
+              ButtonSegment(
+                value: true,
+                label: Text(l10n.d('Met verdieping')),
+                icon: const Icon(Icons.unfold_more, size: 15),
+              ),
+              ButtonSegment(
+                value: false,
+                label: Text(l10n.d('Beknopt')),
+                icon: const Icon(Icons.unfold_less, size: 15),
+              ),
+            ],
+            selected: {_includeDetail},
+            showSelectedIcon: false,
+            style: const ButtonStyle(visualDensity: VisualDensity.compact),
+            onSelectionChanged: (s) => _selectDepth(s.first),
+          ),
+        ],
+      ),
+    );
   }
 
   /// Voor wie is deze export?
@@ -677,6 +749,7 @@ class _ExportDialogState extends State<ExportDialog> {
         ),
         const SizedBox(height: 8),
         if (widget.hasPrivacyFindings) _profileSelector(l10n),
+        if (widget.hasDepthChoice) _depthSelector(l10n),
         // De formaatknoppen zijn de hoofdactie; de beeldkwaliteit is een
         // verfijning en staat daarom achter een inklapbare kop (open zodra
         // er gecomprimeerd wordt, zodat de keuze zichtbaar blijft).

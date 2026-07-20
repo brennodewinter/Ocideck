@@ -803,11 +803,22 @@ Future<void> _replaceImageUsages(
   }
 }
 
-List<Slide> _slidesForPresentationOrExport(Deck deck) {
-  // Drop skipped slides and slides whose TLP classification is stricter than
-  // the level chosen for this presentation/export.
+List<Slide> _slidesForPresentationOrExport(
+  Deck deck, {
+  bool includeDetail = true,
+}) {
+  // Welke slides het publiek bereiken staat in één predicaat; zie
+  // [slideReachesAudience]. Presenteren neemt de verdieping altijd mee — de
+  // beknopte versie is een exportkeuze, niet iets wat je halverwege een
+  // presentatie wilt ontdekken.
   final slides = deck.slides
-      .where((s) => !s.skipped && slideVisibleAtTlp(s, deck.tlp))
+      .where(
+        (s) => slideReachesAudience(
+          s,
+          presentationTlp: deck.tlp,
+          includeDetail: includeDetail,
+        ),
+      )
       .toList();
   final closingMarkdown = deck.themeProfile.closingSlideMarkdown.trim();
   if (deck.themeProfile.closingSlideEnabled && closingMarkdown.isNotEmpty) {
@@ -916,8 +927,11 @@ void presentDeck(
   // zichtbare slide vertalen.
   final visible = <int>[
     for (var i = 0; i < deck.slides.length; i++)
-      if (!deck.slides[i].skipped &&
-          slideVisibleAtTlp(deck.slides[i], deck.tlp))
+      if (slideReachesAudience(
+        deck.slides[i],
+        presentationTlp: deck.tlp,
+        includeDetail: true,
+      ))
         i,
   ];
   final slides = _slidesForPresentationOrExport(deck);

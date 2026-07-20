@@ -678,15 +678,6 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       logWarning('export: async image-contrast pass failed', e);
     }
     if (!mounted) return;
-    // Render-time pagination: an overflowing finding is exported as several
-    // full-size slides instead of one shrunken one. The deck itself is
-    // unchanged — this only affects what the export enumerates.
-    final renderSlides = expandFindingsForRender(slides);
-
-    // De projectiegrens. Vanaf hier raakt geen enkel exportpad de bron nog aan:
-    // de rasterizer, de markdown voor de HTML-export, de PPTX-notities en de
-    // documentmetadata worden allemaal uit dit ene object afgeleid.
-    final source = deck.copyWith(slides: renderSlides);
     final privacySettings = ref.read(settingsProvider);
     final disabledRules = privacySettings.privacyDisabledRules;
     final ownIdentity = OwnIdentity.fromLines(
@@ -697,7 +688,24 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     // De fabriek. Het exportdialoog kiest het doelgroepprofiel, maar mág de bron
     // niet hebben — dat is de projectiegrens. Deze closure sluit hier om de bron
     // heen en levert per profiel alleen AudienceDecks op.
-    ExportBundle bundleFor(PrivacyExportProfile profile) {
+    ExportBundle bundleFor(
+      PrivacyExportProfile profile, {
+      bool includeDetail = true,
+    }) {
+      // De beknopte versie laat de verdiepingsslides weg. Filteren gebeurt vóór
+      // de paginering: een overlopende bevinding die in drie slides uiteenvalt
+      // erft zijn verdiepingsvlag, en die drie horen samen te blijven.
+      final chosen = includeDetail
+          ? slides
+          : slides.where((s) => !s.isDetail).toList();
+
+      // Render-time pagination: an overflowing finding is exported as several
+      // full-size slides instead of one shrunken one. The deck itself is
+      // unchanged — this only affects what the export enumerates.
+      // De projectiegrens. Vanaf hier raakt geen enkel exportpad de bron nog
+      // aan: de rasterizer, de markdown voor de HTML-export, de PPTX-notities
+      // en de documentmetadata worden allemaal uit dit ene object afgeleid.
+      final source = deck.copyWith(slides: expandFindingsForRender(chosen));
       final audience = PrivacyProjection.forAudience(
         source,
         disabledRules: disabledRules,
@@ -736,6 +744,12 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       PrivacyExportProfile.full,
     ).privacySummary.isEmpty;
 
+    // De diepgangkeuze verschijnt alleen als er iets te kiezen valt: minstens
+    // één verdiepingsslide én minstens één gewone, zodat de beknopte versie
+    // nooit een leeg deck oplevert. Zelfde patroon als [hasPrivacyFindings].
+    final hasDepthChoice =
+        slides.any((s) => s.isDetail) && slides.any((s) => !s.isDetail);
+
     await ExportDialog.show(
       context,
       // Op web heeft een deck geen bestandspad; de deck-titel bepaalt dan de
@@ -743,6 +757,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       deckPath: deckState.filePath ?? '${_safeRemoteName(deck.title)}.md',
       bundleFor: bundleFor,
       hasPrivacyFindings: hasPrivacyFindings,
+      hasDepthChoice: hasDepthChoice,
       cockpitColorScheme: ref.read(settingsProvider).cockpitColorScheme,
       exportService: widget.exportService,
       enforcementPolicy: ClassificationEnforcementPolicy.fromAppSettings(

@@ -737,6 +737,12 @@ const _dutchSourceEs = {
 const _dutchSourceAddEs = {
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'No se pudo restaurar todo. Lo que no se pudo leer se ha conservado.',
+  'Verdieping': 'Profundización',
+  'Hoeveel detail?': '¿Cuánto detalle?',
+  'Met verdieping': 'Con profundización',
+  'Beknopt': 'Resumido',
+  'Het detail achter het verhaal. Deze slide gaat mee in de volledige export en valt weg in de beknopte — los van wie hem mag zien.':
+      'El detalle detrás de la historia. Esta diapositiva viaja con la exportación completa y desaparece de la resumida, con independencia de quién pueda verla.',
   'Bekijk de foto op ware grootte': 'Ver la foto a tamaño completo',
   'Azure-sleutel of SAS-token': 'clave de Azure o token SAS',
   'wachtwoordhash': 'hash de contraseña',

@@ -9,6 +9,31 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 
 ## [Unreleased]
 
+### Added
+- **Eén bron, een managementversie en een techniekversie.** Markeer een slide als
+  **verdieping** en hij gaat mee in de volledige export maar valt weg in de
+  beknopte. De exportdialoog vraagt voortaan *met verdieping* of *beknopt*, en de
+  keuze landt in de bestandsnaam (`…-beknopt.pdf`) — om dezelfde reden als bij
+  het redactieprofiel: de verkeerde versie versturen moet je kunnen zíen, niet
+  hoeven onthouden.
+
+  Dit is nadrukkelijk een dérde as, naast classificatie en redactie. TLP vraagt
+  wie het mag zien, redactie welke gegevens eruit mogen, verdieping hoeveel
+  detail deze lezer wil. Een slide kan prima openbaar zijn en tóch meer dan
+  waarvoor een managementpubliek kwam. Zou verdieping in TLP zijn gevouwen, dan
+  moest u uw bijlage als vertrouwelijk classificeren om hem uit de korte versie
+  te houden — een onwaarheid waar later iemand op afgaat.
+
+  De keuze verschijnt alleen als er iets te kiezen valt: het deck moet zowel
+  verdiepingsslides als gewone hebben. Presenteren blijft ongemoeid en toont
+  altijd alles; halverwege een voordracht ontdekken dat er slides ontbreken is
+  geen verbetering.
+
+  Onderwater is het samengestelde oordeel "bereikt deze slide het publiek" nu één
+  functie. Het stond tweemaal uitgeschreven — in de slidelijst en in de
+  indexvertaling van de startselectie — en dat is precies hoe een vierde poort er
+  straks op één van beide plekken niet in belandt.
+
 ### Changed
 - **Het sjabloon *Rapportage* begint nu met de nieuwe rapportagetypes.** Het
   KPI-dashboard was een cockpit met wijzerplaten; dat is nu een **scorecard**,

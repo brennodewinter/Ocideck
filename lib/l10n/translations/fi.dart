@@ -1783,6 +1783,12 @@ const _dutchSourceFi = {
 const _dutchSourceAddFi = <String, String>{
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Kaikkea ei voitu palauttaa. Se mitä ei voitu lukea, on säilytetty.',
+  'Verdieping': 'Syvennys',
+  'Hoeveel detail?': 'Kuinka paljon yksityiskohtia?',
+  'Met verdieping': 'Syvennyksen kanssa',
+  'Beknopt': 'Tiivis',
+  'Het detail achter het verhaal. Deze slide gaat mee in de volledige export en valt weg in de beknopte — los van wie hem mag zien.':
+      'Tarinan takana oleva yksityiskohta. Tämä dia kulkee täyden viennin mukana ja putoaa tiiviistä pois — riippumatta siitä, kuka sen saa nähdä.',
   'Bekijk de foto op ware grootte': 'Katso kuva täydessä koossa',
   'Azure-sleutel of SAS-token': 'Azure-avain tai SAS-tunniste',
   'wachtwoordhash': 'salasanan tiiviste',

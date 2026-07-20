@@ -1799,6 +1799,12 @@ const _dutchSourceLa = {
 const _dutchSourceAddLa = <String, String>{
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Non omnia restitui potuerunt. Quae legi non poterant servata sunt.',
+  'Verdieping': 'Altitudo',
+  'Hoeveel detail?': 'Quantum singulorum?',
+  'Met verdieping': 'Cum altitudine',
+  'Beknopt': 'Breve',
+  'Het detail achter het verhaal. Deze slide gaat mee in de volledige export en valt weg in de beknopte — los van wie hem mag zien.':
+      'Singula post narrationem. Haec tabula cum plena editione it et in brevi deest — seorsum ab eo quis eam videre possit.',
   'Bekijk de foto op ware grootte': 'Imaginem plena magnitudine inspice',
   'Azure-sleutel of SAS-token': 'clavis Azure vel tessera SAS',
   'wachtwoordhash': 'nota tesserae',

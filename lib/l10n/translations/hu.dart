@@ -1787,6 +1787,12 @@ const _dutchSourceHu = {
 const _dutchSourceAddHu = <String, String>{
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Nem sikerült mindent helyreállítani. Ami olvashatatlan volt, megmaradt.',
+  'Verdieping': 'Elmélyítés',
+  'Hoeveel detail?': 'Mennyi részlet?',
+  'Met verdieping': 'Elmélyítéssel',
+  'Beknopt': 'Tömör',
+  'Het detail achter het verhaal. Deze slide gaat mee in de volledige export en valt weg in de beknopte — los van wie hem mag zien.':
+      'A történet mögötti részlet. Ez a dia a teljes exporttal megy, és a tömörből kimarad — függetlenül attól, ki láthatja.',
   'Bekijk de foto op ware grootte': 'A fénykép megtekintése teljes méretben',
   'Azure-sleutel of SAS-token': 'Azure-kulcs vagy SAS-token',
   'wachtwoordhash': 'jelszó-lenyomat',

@@ -740,6 +740,12 @@ const _dutchSourceFr = {
 const _dutchSourceAddFr = {
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Tout n\'a pas pu être restauré. Ce qui était illisible a été conservé.',
+  'Verdieping': 'Approfondissement',
+  'Hoeveel detail?': 'Quel niveau de détail ?',
+  'Met verdieping': 'Avec approfondissement',
+  'Beknopt': 'Condensé',
+  'Het detail achter het verhaal. Deze slide gaat mee in de volledige export en valt weg in de beknopte — los van wie hem mag zien.':
+      'Le détail derrière l\'histoire. Cette diapositive accompagne l\'export complet et disparaît de la version condensée, indépendamment de qui peut la voir.',
   'Bekijk de foto op ware grootte': 'Voir la photo en taille réelle',
   'Azure-sleutel of SAS-token': 'clé Azure ou jeton SAS',
   'wachtwoordhash': 'empreinte de mot de passe',

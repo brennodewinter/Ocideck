@@ -1790,6 +1790,12 @@ const _dutchSourceHr = {
 const _dutchSourceAddHr = <String, String>{
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Nije se moglo sve obnoviti. Ono što se nije moglo pročitati sačuvano je.',
+  'Verdieping': 'Produbljivanje',
+  'Hoeveel detail?': 'Koliko detalja?',
+  'Met verdieping': 'S produbljivanjem',
+  'Beknopt': 'Sažeto',
+  'Het detail achter het verhaal. Deze slide gaat mee in de volledige export en valt weg in de beknopte — los van wie hem mag zien.':
+      'Detalj iza priče. Ovaj slajd putuje s potpunim izvozom i ispada iz sažetog — neovisno o tome tko ga smije vidjeti.',
   'Bekijk de foto op ware grootte': 'Pogledaj fotografiju u punoj veličini',
   'Azure-sleutel of SAS-token': 'Azure ključ ili SAS token',
   'wachtwoordhash': 'sažetak lozinke',

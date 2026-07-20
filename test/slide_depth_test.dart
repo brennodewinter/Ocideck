@@ -121,4 +121,48 @@ void main() {
       );
     });
   });
+
+  group('de beknopte versie', () {
+    Deck deckWith(List<Slide> slides) => Deck(title: 'Demo', slides: slides);
+
+    test('laat de verdiepingsslides weg en houdt de rest', () {
+      final deck = deckWith([
+        Slide.create(SlideType.bullets).copyWith(title: 'Verhaal'),
+        Slide.create(
+          SlideType.bullets,
+        ).copyWith(title: 'Detail', isDetail: true),
+        Slide.create(SlideType.bullets).copyWith(title: 'Slot'),
+      ]);
+      final brief = deck.slides
+          .where(
+            (s) => slideReachesAudience(
+              s,
+              presentationTlp: deck.tlp,
+              includeDetail: false,
+            ),
+          )
+          .map((s) => s.title)
+          .toList();
+      expect(brief, ['Verhaal', 'Slot']);
+    });
+
+    test('de volledige versie houdt alles', () {
+      final deck = deckWith([
+        Slide.create(SlideType.bullets).copyWith(title: 'Verhaal'),
+        Slide.create(
+          SlideType.bullets,
+        ).copyWith(title: 'Detail', isDetail: true),
+      ]);
+      final full = deck.slides
+          .where(
+            (s) => slideReachesAudience(
+              s,
+              presentationTlp: deck.tlp,
+              includeDetail: true,
+            ),
+          )
+          .length;
+      expect(full, 2);
+    });
+  });
 }

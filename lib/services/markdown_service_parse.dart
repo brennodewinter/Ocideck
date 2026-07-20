@@ -409,6 +409,42 @@ extension _MarkdownParse on MarkdownService {
     return parts.sublist(0, parts.length - 1).join(sep);
   }
 
+  /// De slidetypes met een eigen gestructureerde body (chart, cockpit, finding,
+  /// …), of null wanneer dit blok er geen is. Uitgetild uit [_parseBlock] om die
+  /// binnen de lengte-ratchet te houden — en omdat het één samenhangend geval is.
+  Slide? _structuredSlideOrNull(
+    _BlockDirectives d,
+    ({
+      String findingId,
+      FindingRole findingRole,
+      List<String> aiAssistedFields,
+      String checklistScope,
+      String block,
+    })
+    link,
+  ) {
+    final structured = _tryStructuredSlide(
+      cssClass: d.cssClass,
+      remaining: d.remaining,
+      notes: d.notes,
+      advanceDuration: d.advanceDuration,
+      skipped: d.skipped,
+      isDetail: d.isDetail,
+      tlp: d.tlp,
+      styleImageWidth: d.styleImageWidth,
+      findingId: link.findingId,
+      findingRole: link.findingRole,
+    );
+    if (structured == null) return null;
+    // De dispositie hangt aan de slide, niet aan het slidetype. Hier zetten in
+    // plaats van door elke fenced-parser rijgen: één plek, geen gaten.
+    return structured.copyWith(
+      aiAssistedFields: link.aiAssistedFields,
+      privacy: d.privacy,
+      quality: d.quality,
+    );
+  }
+
   Slide? _parseBlock(String block) {
     if (block.isEmpty) return null;
 
@@ -423,27 +459,8 @@ extension _MarkdownParse on MarkdownService {
     // Fenced (code/chart/cockpit/question) and finding-header slides carry
     // structured bodies the generic line parser below would mangle; they are
     // parsed up front from their class token.
-    final structured = _tryStructuredSlide(
-      cssClass: d.cssClass,
-      remaining: d.remaining,
-      notes: d.notes,
-      advanceDuration: d.advanceDuration,
-      skipped: d.skipped,
-      isDetail: d.isDetail,
-      tlp: d.tlp,
-      styleImageWidth: d.styleImageWidth,
-      findingId: link.findingId,
-      findingRole: link.findingRole,
-    );
-    if (structured != null) {
-      // De dispositie hangt aan de slide, niet aan het slidetype. Hier zetten
-      // in plaats van door elke fenced-parser rijgen: één plek, geen gaten.
-      return structured.copyWith(
-        aiAssistedFields: link.aiAssistedFields,
-        privacy: d.privacy,
-        quality: d.quality,
-      );
-    }
+    final structured = _structuredSlideOrNull(d, link);
+    if (structured != null) return structured;
 
     // bullets may already hold the decoded two-column data; the line parser
     // appends to the same list, so pass it through by reference.

@@ -531,6 +531,21 @@ class _SlideSettingsBody extends StatelessWidget {
       groups.sublist(i, (i + columns).clamp(0, groups.length)),
   ];
 
+  /// De verdiepingsschakelaar. Geldt voor elke slide, ongeacht type of
+  /// stijlprofiel — vandaar dat hij buiten de voorwaardelijke rijen valt.
+  Widget _depthRow(AppLocalizations l10n) => _SettingRow(
+    icon: Icons.unfold_more,
+    label: l10n.d('Verdieping'),
+    help: l10n.d(
+      'Het detail achter het verhaal. Deze slide gaat mee in de volledige export en valt weg in de beknopte — los van wie hem mag zien.',
+    ),
+    control: _SettingSwitch(
+      value: slide.isDetail,
+      semanticLabel: l10n.d('Verdieping'),
+      onChanged: (v) => onUpdate(slide.copyWith(isDetail: v)),
+    ),
+  );
+
   List<Widget> _groups(BuildContext context) {
     final l10n = context.l10n;
     final profile = deck.themeProfile;
@@ -543,48 +558,48 @@ class _SlideSettingsBody extends StatelessWidget {
       //
       // Alleen tonen wat er te kiezen valt: zonder logo in het stijlprofiel is
       // "logo tonen" een dode schakelaar, en een dode schakelaar is erger dan
-      // een ontbrekende. Valt de hele groep weg, dan valt ook de kaart weg —
-      // een lege kaart zou een gat in de rij slaan.
-      if (hasLogo || hasFooter || slide.type == SlideType.table)
-        _SettingsGroup(
-          label: l10n.d('Op deze slide'),
-          children: [
-            if (hasLogo)
-              _SettingRow(
-                icon: Icons.branding_watermark_outlined,
-                label: l10n.d('Logo tonen'),
-                control: _SettingSwitch(
-                  value: slide.showLogo,
-                  semanticLabel: l10n.d('Logo tonen'),
-                  onChanged: (v) => onUpdate(slide.copyWith(showLogo: v)),
-                ),
+      // een ontbrekende. De groep zelf staat er altijd, want verdieping geldt
+      // voor élke slide — dat is geen eigenschap van het stijlprofiel of van
+      // het slidetype.
+      _SettingsGroup(
+        label: l10n.d('Op deze slide'),
+        children: [
+          if (hasLogo)
+            _SettingRow(
+              icon: Icons.branding_watermark_outlined,
+              label: l10n.d('Logo tonen'),
+              control: _SettingSwitch(
+                value: slide.showLogo,
+                semanticLabel: l10n.d('Logo tonen'),
+                onChanged: (v) => onUpdate(slide.copyWith(showLogo: v)),
               ),
-            if (hasFooter)
-              _SettingRow(
-                icon: Icons.short_text_outlined,
-                label: l10n.d('Footer tonen'),
-                control: _SettingSwitch(
-                  value: slide.showFooter,
-                  semanticLabel: l10n.d('Footer tonen'),
-                  onChanged: (v) => onUpdate(slide.copyWith(showFooter: v)),
-                ),
+            ),
+          if (hasFooter)
+            _SettingRow(
+              icon: Icons.short_text_outlined,
+              label: l10n.d('Footer tonen'),
+              control: _SettingSwitch(
+                value: slide.showFooter,
+                semanticLabel: l10n.d('Footer tonen'),
+                onChanged: (v) => onUpdate(slide.copyWith(showFooter: v)),
               ),
-            if (slide.type == SlideType.table)
-              _SettingRow(
-                icon: Icons.event_busy_outlined,
-                label: l10n.d('Verlopen datums markeren'),
-                help: l10n.d(
-                  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.',
-                ),
-                control: _SettingSwitch(
-                  value: slide.tableMarkOverdue,
-                  semanticLabel: l10n.d('Verlopen datums markeren'),
-                  onChanged: (v) =>
-                      onUpdate(slide.copyWith(tableMarkOverdue: v)),
-                ),
+            ),
+          _depthRow(l10n),
+          if (slide.type == SlideType.table)
+            _SettingRow(
+              icon: Icons.event_busy_outlined,
+              label: l10n.d('Verlopen datums markeren'),
+              help: l10n.d(
+                'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.',
               ),
-          ],
-        ),
+              control: _SettingSwitch(
+                value: slide.tableMarkOverdue,
+                semanticLabel: l10n.d('Verlopen datums markeren'),
+                onChanged: (v) => onUpdate(slide.copyWith(tableMarkOverdue: v)),
+              ),
+            ),
+        ],
+      ),
 
       // ── Tijdens presenteren ─────────────────────────────────────────────
       _SettingsGroup(

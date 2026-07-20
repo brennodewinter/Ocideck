@@ -1786,6 +1786,12 @@ const _dutchSourceCs = {
 const _dutchSourceAddCs = <String, String>{
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Nepodařilo se obnovit vše. Co nešlo přečíst, zůstalo zachováno.',
+  'Verdieping': 'Prohloubení',
+  'Hoeveel detail?': 'Kolik detailů?',
+  'Met verdieping': 'S prohloubením',
+  'Beknopt': 'Stručné',
+  'Het detail achter het verhaal. Deze slide gaat mee in de volledige export en valt weg in de beknopte — los van wie hem mag zien.':
+      'Detail za příběhem. Tento snímek jede s úplným exportem a ze stručného vypadává — nezávisle na tom, kdo ho smí vidět.',
   'Bekijk de foto op ware grootte': 'Zobrazit fotografii v plné velikosti',
   'Azure-sleutel of SAS-token': 'klíč Azure nebo token SAS',
   'wachtwoordhash': 'otisk hesla',

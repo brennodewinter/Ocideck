@@ -14,7 +14,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 /// Zelfs een test komt alleen via de projectiegrens aan een AudienceDeck — de
 /// constructor is private. Dat is precies de bedoeling.
-ExportBundle _emptyBundle(PrivacyExportProfile profile) => ExportBundle(
+ExportBundle _emptyBundle(
+  PrivacyExportProfile profile, {
+  bool includeDetail = true,
+}) => ExportBundle(
   audience: PrivacyProjection.forAudience(
     const Deck(title: 'Test'),
     profile: profile,

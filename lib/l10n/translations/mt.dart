@@ -1805,6 +1805,12 @@ const _dutchSourceMt = {
 const _dutchSourceAddMt = <String, String>{
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Mhux kollox seta\' jiġi rkuprat. Dak li ma setax jinqara nżamm.',
+  'Verdieping': 'Approfondiment',
+  'Hoeveel detail?': 'Kemm dettall?',
+  'Met verdieping': 'Bl-approfondiment',
+  'Beknopt': 'Konċiż',
+  'Het detail achter het verhaal. Deze slide gaat mee in de volledige export en valt weg in de beknopte — los van wie hem mag zien.':
+      'Id-dettall wara l-istorja. Din is-slide tivvjaġġa mal-esportazzjoni sħiħa u taqa\' barra minn dik konċiża — indipendentement minn min jista\' jarah.',
   'Bekijk de foto op ware grootte': 'Ara r-ritratt fid-daqs sħiħ',
   'Azure-sleutel of SAS-token': 'ċavetta Azure jew token SAS',
   'wachtwoordhash': 'hash tal-password',

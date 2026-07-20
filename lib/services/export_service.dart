@@ -134,6 +134,11 @@ class ExportService {
     PrivacyExportPolicy privacyPolicy = const PrivacyExportPolicy(),
     bool privacyAcknowledged = false,
     PrivacyExportProfile privacyProfile = PrivacyExportProfile.full,
+
+    /// Of de verdiepingsslides in deze uitvoer zitten. Alleen de beknopte
+    /// versie krijgt een achtervoegsel: de volledige uitvoer heet zoals hij
+    /// altijd al heette.
+    bool includeDetail = true,
   }) async {
     // Classificatie-gate. Dit is het enige chokepoint waar elk formaat
     // (PDF/PPTX/HTML) doorheen moet, dus de handhaving zit hier en niet in de
@@ -187,7 +192,8 @@ class ExportService {
     final prefix = '${natoDtg(DateTime.now())} ';
     final fileName =
         '$prefix${p.basenameWithoutExtension(deckPath)}'
-        '${privacyProfile.fileSuffix}$compactSuffix${format.extension}';
+        '${privacyProfile.fileSuffix}${includeDetail ? '' : '-beknopt'}'
+        '$compactSuffix${format.extension}';
     final outputPath = p.join(dir, fileName);
     try {
       final Uint8List bytes;

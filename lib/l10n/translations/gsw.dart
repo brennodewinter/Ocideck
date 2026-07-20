@@ -1787,6 +1787,12 @@ const _dutchSourceGsw = {
 const _dutchSourceAddGsw = <String, String>{
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Nid alles het chönne wiederhergstellt wärde. Was unläserlich gsi isch, isch ufbewahrt worde.',
+  'Verdieping': 'Vertiefig',
+  'Hoeveel detail?': 'Wieviel Detail?',
+  'Met verdieping': 'Mit Vertiefig',
+  'Beknopt': 'Churz',
+  'Het detail achter het verhaal. Deze slide gaat mee in de volledige export en valt weg in de beknopte — los van wie hem mag zien.':
+      'S Detail hinter de Gschicht. Die Folie chunnt im volle Export mit und fallt im churze wäg — unabhängig dervo, wer sie gseh dörf.',
   'Bekijk de foto op ware grootte': 'S Foti i voller Grössi aaluege',
   'Azure-sleutel of SAS-token': 'Azure-Schlüssel oder SAS-Token',
   'wachtwoordhash': 'Passwort-Hash',

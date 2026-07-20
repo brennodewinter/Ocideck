@@ -1782,6 +1782,12 @@ const _dutchSourceLv = {
 const _dutchSourceAddLv = <String, String>{
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Ne visu izdevās atjaunot. Tas, ko nevarēja izlasīt, ir saglabāts.',
+  'Verdieping': 'Padziļinājums',
+  'Hoeveel detail?': 'Cik daudz detaļu?',
+  'Met verdieping': 'Ar padziļinājumu',
+  'Beknopt': 'Īss',
+  'Het detail achter het verhaal. Deze slide gaat mee in de volledige export en valt weg in de beknopte — los van wie hem mag zien.':
+      'Detaļa aiz stāsta. Šis slaids ceļo ar pilno eksportu un izkrīt no īsā — neatkarīgi no tā, kas to drīkst redzēt.',
   'Bekijk de foto op ware grootte': 'Skatīt fotoattēlu pilnā izmērā',
   'Azure-sleutel of SAS-token': 'Azure atslēga vai SAS pilnvara',
   'wachtwoordhash': 'paroles jaucējkods',

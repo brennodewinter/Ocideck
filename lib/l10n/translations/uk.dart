@@ -1801,6 +1801,12 @@ const _dutchSourceUk = {
 const _dutchSourceAddUk = <String, String>{
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Не все вдалося відновити. Те, що не вдалося прочитати, збережено.',
+  'Verdieping': 'Поглиблення',
+  'Hoeveel detail?': 'Скільки деталей?',
+  'Met verdieping': 'З поглибленням',
+  'Beknopt': 'Стисло',
+  'Het detail achter het verhaal. Deze slide gaat mee in de volledige export en valt weg in de beknopte — los van wie hem mag zien.':
+      'Деталь за історією. Цей слайд іде з повним експортом і зникає зі стислого — незалежно від того, хто його може бачити.',
   'Bekijk de foto op ware grootte': 'Переглянути фото в повному розмірі',
   'Azure-sleutel of SAS-token': 'ключ Azure або токен SAS',
   'wachtwoordhash': 'хеш пароля',

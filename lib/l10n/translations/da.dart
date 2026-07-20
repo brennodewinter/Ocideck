@@ -1782,6 +1782,12 @@ const _dutchSourceDa = {
 const _dutchSourceAddDa = <String, String>{
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Ikke alt kunne gendannes. Det, der ikke kunne læses, er bevaret.',
+  'Verdieping': 'Uddybning',
+  'Hoeveel detail?': 'Hvor mange detaljer?',
+  'Met verdieping': 'Med uddybning',
+  'Beknopt': 'Kortfattet',
+  'Het detail achter het verhaal. Deze slide gaat mee in de volledige export en valt weg in de beknopte — los van wie hem mag zien.':
+      'Detaljen bag historien. Dette dias følger med den fulde eksport og falder ud af den kortfattede — uafhængigt af hvem der må se det.',
   'Bekijk de foto op ware grootte': 'Se billedet i fuld størrelse',
   'Azure-sleutel of SAS-token': 'Azure-nøgle eller SAS-token',
   'wachtwoordhash': 'adgangskodehash',

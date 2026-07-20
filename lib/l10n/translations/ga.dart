@@ -1819,6 +1819,12 @@ const _dutchSourceGa = {
 const _dutchSourceAddGa = <String, String>{
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Níorbh fhéidir gach rud a athchóiriú. Coinníodh a raibh doléite.',
+  'Verdieping': 'Doimhniú',
+  'Hoeveel detail?': 'Cé mhéad sonraí?',
+  'Met verdieping': 'Le doimhniú',
+  'Beknopt': 'Achomair',
+  'Het detail achter het verhaal. Deze slide gaat mee in de volledige export en valt weg in de beknopte — los van wie hem mag zien.':
+      'An sonra taobh thiar den scéal. Téann an sleamhnán seo leis an easpórtáil iomlán agus titeann sé as an gceann achomair — beag beann ar cé a fhéadfaidh é a fheiceáil.',
   'Bekijk de foto op ware grootte': 'Féach ar an ngrianghraf ar lánmhéid',
   'Azure-sleutel of SAS-token': 'eochair Azure nó comhartha SAS',
   'wachtwoordhash': 'hais pasfhocail',

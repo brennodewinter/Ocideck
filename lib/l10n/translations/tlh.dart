@@ -1758,6 +1758,12 @@ const _dutchSourceTlh = {
 const _dutchSourceAddTlh = <String, String>{
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Hoch chu\'moHlaHbe\'. QIjbe\'bogh De\' polta\'.',
+  'Verdieping': '\'ay\' Hurgh',
+  'Hoeveel detail?': '\'ar De\'?',
+  'Met verdieping': '\'ay\' Hurgh tlhej',
+  'Beknopt': 'ngaj',
+  'Het detail achter het verhaal. Deze slide gaat mee in de volledige export en valt weg in de beknopte — los van wie hem mag zien.':
+      'lut \'ay\' Hurgh. naDev ngeH naQ tlhej nav; ngaj ngeHDaq Qaw\'lu\'. legh \'e\' chaw\'bogh nuv qelbe\'.',
   'Bekijk de foto op ware grootte': 'tlhegh nagh HaSta\'e\' tIn\'a\' bejlu\'',
   'Azure-sleutel of SAS-token': 'Azure ngaSwI\' ghap SAS nagh',
   'wachtwoordhash': 'peQ mI\'',
