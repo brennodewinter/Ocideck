@@ -1095,14 +1095,23 @@ A chart slide (§5) can keep its data inline in the `chart` block, or point via
 `"source": "data/<name>.json"` to a data file in a separate **`data/`** folder
 next to the deck. That folder keeps all linked data files together, separate
 from `images/`/`media/`. When opening, the file is read and attached to the
-chart in memory; the `.md` keeps only the `source` reference, so the markdown
-stays about the *shape* of the chart while the file holds the values.
+chart in memory; the `.md` keeps the `source` reference and the styling, so the
+markdown stays about the *shape* of the chart while the file holds the values.
+
+The `data/` prefix is a convention for files OciDeck creates, not a rule it
+enforces: any project-relative path is read and written, and the reader is
+chosen purely on the extension — `.json` is parsed as JSON, everything else as
+CSV. A `source` that points outside the project folder is refused rather than
+followed (§1); it is never read and never written, and the reference is left in
+the deck untouched.
 
 The file is copied along during save/`Save as...` and included in packages
 (§7). A package is written from the deck **in memory**, not by copying the file
 from disk, so an export made before saving carries the numbers you see on
-screen rather than the older ones still in the file. An HTML/PDF export has no
-folder to resolve a reference against, so it inlines the data instead.
+screen rather than the older ones still in the file. Anywhere there is no
+folder to resolve a reference against, the data is inlined instead: HTML/PDF
+export, the browser's "download as `.md`", the presenter/beamer hand-off, and
+the HTML preview.
 
 **Two forms.** New data files are written as **JSON**; **CSV** is still read,
 and a deck that already links a `.csv` keeps getting CSV on save — silently
@@ -1113,10 +1122,22 @@ is chosen on the extension.
 {
   "x": ["Jan", "Feb", "Mrt"],
   "series": [
-    { "name": "Omzet", "data": [120, 138, 95] }
+    { "name": "Omzet", "data": [120.0, 138.0, 95.0] }
   ]
 }
 ```
+
+Values are read as `double` and written back as such, so a whole number comes
+out of the app as `120.0` even when it was typed as `120`. A hand-written
+`120` reads back identically; the form only matters if something outside
+compares the file byte for byte.
+
+That the *extension* survives a rewrite does not mean the file comes back
+byte-for-byte in its original dialect. A CSV that OciDeck rewrites is written
+with a `,` separator and a dot decimal, whatever it used before — so a
+semicolon-and-comma file from a Dutch spreadsheet stays a `.csv`, but its
+dialect flips on the first save that changes a value. If something outside
+reads that file with a fixed separator, link it as JSON instead.
 
 CSV shape: first row = series names (first cell = label column), every next row
 is `label, value1, value2, ...`.
@@ -1133,9 +1154,18 @@ How numbers are written is deduced from the file as a whole rather than per
 cell: `1.234,56` settles itself (the last mark is the decimal one), and a `10,5`
 elsewhere settles a bare `1,234` in the same file. Nothing is assumed from the
 reader's locale. A file that genuinely does not say — every comma followed by
-exactly three digits — is asked about on import rather than guessed. A cell that
-is no number at all (`12%`, `€ 1.000`) is charted as 0 and named after the
-import; an empty cell is a missing value and stays silent.
+exactly three digits — is asked about when the file is **imported** in the chart
+editor. On deck open there is no one to ask, so the same file is read with the
+fallback convention and no question: a `,`-separated file is read dot-decimal,
+a `;`- or tab-separated one comma-decimal, on the reasoning that a file that
+uses `;` to separate had a reason to. Ambiguity is therefore only ever raised
+on import, never on open.
+
+A cell that is no number at all (`12%`, `€ 1.000`) is charted as 0 and named
+after the import. An empty cell is also charted as 0 — it is simply not
+reported as unreadable, because blank is a normal thing for a spreadsheet to
+contain. There is no separate "missing value": a gap in a series and a zero in
+a series are the same thing to the chart.
 
 New files are still written as JSON: it needs no such reading rules, and it
 round-trips a `double` exactly.
