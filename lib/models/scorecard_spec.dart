@@ -40,15 +40,19 @@ const double _epsilon = 1e-9;
 /// One figure on a scorecard: what it is, what it is now, and what it was.
 class ScorecardEntry {
   const ScorecardEntry({
-    required this.label,
-    required this.value,
+    this.label = '',
+    this.value,
     this.previous,
     this.unit = '',
     this.polarity = ScorecardPolarity.neutral,
   });
 
   final String label;
-  final double value;
+
+  /// The figure now, or null while the author is still filling the row in. A
+  /// row being typed genuinely has no number yet, and inventing a zero for it
+  /// would put a figure on the slide that nobody chose.
+  final double? value;
 
   /// The same figure in the previous report, or null when there is none — a
   /// first report, or a figure newly added to the set.
@@ -62,10 +66,17 @@ class ScorecardEntry {
   final String unit;
   final ScorecardPolarity polarity;
 
+  /// Nothing at all in this row — the shape the editor hands out for a figure
+  /// the author has not started on. Dropped on both read and write, so an
+  /// untouched row never reaches the slide and the round-trip stays a fixed
+  /// point.
+  bool get isBlank => label.trim().isEmpty && value == null && previous == null;
+
   /// The change since the previous report, or null when there is nothing to
   /// compare against. Callers must render *no* delta in that case — a "+0"
   /// claims the figure held steady when in fact it was never measured before.
-  double? get delta => previous == null ? null : value - previous!;
+  double? get delta =>
+      value == null || previous == null ? null : value! - previous!;
 
   /// Which way the figure moved, or null when there is no previous figure.
   ScorecardDirection? get direction {
@@ -133,32 +144,26 @@ class ScorecardSpec {
   /// header (skipped when it looks like one).
   ///
   /// Tolerant in the same way as the other table-backed specs, so a hand-edited
-  /// or machine-generated table degrades instead of throwing: a row without a
-  /// label or without a readable value is dropped (a tile with no figure has
-  /// nothing to say), an unreadable *previous* simply leaves the delta off, and
-  /// an unrecognised polarity falls back to neutral — showing the change but
-  /// withholding the colour, which is the safe half of the guess.
+  /// or machine-generated table degrades instead of throwing: an entirely blank
+  /// row is dropped, an unreadable figure leaves that half empty rather than
+  /// costing the whole row, and an unrecognised polarity falls back to neutral —
+  /// showing the change but withholding the colour, which is the safe half of
+  /// the guess.
   factory ScorecardSpec.fromSlide(String title, List<List<String>> tableRows) {
     final entries = <ScorecardEntry>[];
     for (var i = 0; i < tableRows.length; i++) {
       final cells = tableRows[i];
       if (cells.isEmpty) continue;
       if (i == 0 && _looksLikeHeader(cells)) continue;
-      final label = cells.first.trim();
-      if (label.isEmpty) continue;
-      final value = parseScorecardNumber(cells.length > 1 ? cells[1] : '');
-      if (value == null) continue;
-      entries.add(
-        ScorecardEntry(
-          label: label,
-          value: value,
-          previous: parseScorecardNumber(cells.length > 2 ? cells[2] : ''),
-          unit: cells.length > 3 ? cells[3].trim() : '',
-          polarity: scorecardPolarityFromToken(
-            cells.length > 4 ? cells[4] : '',
-          ),
-        ),
+      final entry = ScorecardEntry(
+        label: cells.first.trim(),
+        value: parseScorecardNumber(cells.length > 1 ? cells[1] : ''),
+        previous: parseScorecardNumber(cells.length > 2 ? cells[2] : ''),
+        unit: cells.length > 3 ? cells[3].trim() : '',
+        polarity: scorecardPolarityFromToken(cells.length > 4 ? cells[4] : ''),
       );
+      if (entry.isBlank) continue;
+      entries.add(entry);
     }
     return ScorecardSpec(
       title: title,
@@ -170,14 +175,15 @@ class ScorecardSpec {
       cells.first.trim().toLowerCase() == header.first.toLowerCase();
 
   /// Build the table rows (header + one row per figure) for [Slide.tableRows].
-  /// An absent previous value is written as an empty cell rather than a zero,
-  /// keeping "not measured before" distinct from "was nought".
+  /// An absent figure is written as an empty cell rather than a zero, keeping
+  /// "not measured" distinct from "was nought". Blank rows are skipped here as
+  /// well as on read, so writing and reading agree.
   List<List<String>> toTableRows() => [
     header,
-    for (final e in entries.take(scorecardMaxEntries))
+    for (final e in entries.where((e) => !e.isBlank).take(scorecardMaxEntries))
       [
         e.label,
-        formatScorecardNumber(e.value),
+        e.value == null ? '' : formatScorecardNumber(e.value!),
         e.previous == null ? '' : formatScorecardNumber(e.previous!),
         e.unit,
         e.polarity.token,
@@ -215,6 +221,13 @@ String formatScorecardNumber(double value) =>
     value == value.roundToDouble() && value.abs() < 1e15
     ? value.toInt().toString()
     : value.toString();
+
+/// A change written for display: always signed, so a rise still reads as a rise
+/// when the slide is printed in greyscale and the colour is gone.
+String formatScorecardDelta(double delta) {
+  final magnitude = formatScorecardNumber(delta.abs());
+  return delta < 0 ? '-$magnitude' : '+$magnitude';
+}
 
 /// Read a polarity token, falling back to [ScorecardPolarity.neutral].
 ScorecardPolarity scorecardPolarityFromToken(String raw) {

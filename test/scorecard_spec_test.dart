@@ -83,11 +83,7 @@ void main() {
       const spec = ScorecardSpec(
         title: 'Sinds de vorige rapportage',
         entries: [
-          ScorecardEntry(
-            label: 'Assets in beeld',
-            value: 412,
-            previous: 375,
-          ),
+          ScorecardEntry(label: 'Assets in beeld', value: 412, previous: 375),
           ScorecardEntry(
             label: 'Gemiddeld openstaand',
             value: 62.5,
@@ -133,14 +129,31 @@ void main() {
       expect(spec.entries.single.label, 'Open');
     });
 
-    test('rows without a label or a readable figure are dropped', () {
+    test('an entirely blank row is dropped, a half-filled one survives', () {
       final spec = _parse([
         ScorecardSpec.header,
+        ['', '', '', '', ''],
+        ['Nog geen getal', 'nvt', '', '', ''],
         ['', '96', '', '', ''],
-        ['Geen getal', 'nvt', '', '', ''],
         ['Open', '96', '', '', ''],
       ]);
-      expect(spec.entries.map((e) => e.label), ['Open']);
+      expect(spec.entries.map((e) => e.label), ['Nog geen getal', '', 'Open']);
+      // A row being typed keeps its place; it just has nothing to show yet.
+      expect(spec.entries.first.value, isNull);
+      expect(spec.entries.first.delta, isNull);
+    });
+
+    test('a blank row never reaches the table on write either', () {
+      const spec = ScorecardSpec(
+        entries: [
+          ScorecardEntry(label: 'Open', value: 96),
+          ScorecardEntry(),
+        ],
+      );
+      // Header plus the one real figure — writing and reading agree, so the
+      // round-trip stays a fixed point even with a half-edited row in hand.
+      expect(spec.toTableRows().length, 2);
+      expect(_parse(spec.toTableRows()).entries.length, 1);
     });
 
     test('an unreadable previous only costs the delta, not the row', () {

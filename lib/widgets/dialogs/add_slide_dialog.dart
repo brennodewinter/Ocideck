@@ -47,6 +47,7 @@ class AddSlideDialog extends StatefulWidget {
     SlideType.table,
     SlideType.chart,
     SlideType.cockpit,
+    SlideType.scorecard,
     SlideType.timeline,
     SlideType.question,
     SlideType.code,
@@ -510,6 +511,16 @@ class SlideTypePreviewPainter extends CustomPainter {
         for (var r = 0; r < 4; r++) {
           final y = 30.0 + r * 13;
           _bar(canvas, 14, y, 132, 10, r == 0 ? _accent : _soft, radius: 3);
+        }
+      case SlideType.scorecard:
+        // Heading plus three tiles, each a label, the figure, and the small
+        // change line underneath that carries the news.
+        _bar(canvas, 14, 12, 72, 9, _ink);
+        for (var i = 0; i < 3; i++) {
+          final x = 14.0 + i * 47;
+          _bar(canvas, x, 32, 26, 5, _soft, radius: 2);
+          _bar(canvas, x, 43, 38, 14, _ink, radius: 3);
+          _bar(canvas, x, 63, 18, 6, _accent, radius: 2);
         }
       case SlideType.finding:
       case SlideType.findingsSummary:
