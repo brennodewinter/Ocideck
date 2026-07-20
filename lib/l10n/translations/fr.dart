@@ -738,6 +738,10 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Afbeeldingen door AI laten taggen?': 'Laisser l\'IA étiqueter ces images ?',
+  'afbeeldingen gaan naar': 'images seront envoyées à',
+  'een model op dit apparaat': 'un modèle sur cet appareil',
+  'Doorgaan': 'Continuer',
   'Ontdekkingen': 'Découvertes',
   'Wat is gevonden': 'Ce qui a été trouvé',
   'Soort': 'Type',

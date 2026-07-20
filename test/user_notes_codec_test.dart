@@ -78,5 +78,39 @@ void main() {
       final back = UserNotesCodec.decode(json, slides);
       expect(back['${slide.id}#p1'], 'Pagina 2 notitie');
     });
+
+    test('houdt meerdere paginanotities van dezelfde dia bij elkaar', () {
+      // Eén rijke-tekstdia die over drie pagina's loopt levert drie notities
+      // met hetzelfde `index`. Toen de claim alleen op de dia-index stond,
+      // stootte de tweede notitie af naar de zoeklus en verdween hij.
+      final slide = Slide.create(SlideType.bullets).copyWith(title: 'Lang');
+      final slides = [slide];
+      final notes = {
+        slide.id: 'pagina 1',
+        '${slide.id}#p1': 'pagina 2',
+        '${slide.id}#p2': 'pagina 3',
+      };
+      final back = UserNotesCodec.decode(
+        UserNotesCodec.encode(slides, notes)!,
+        slides,
+      );
+      expect(back, notes);
+    });
+
+    test('legt paginanotities niet op een naamgenoot elders in het dek', () {
+      // Twee dia's met identieke inhoud hebben dezelfde vingerafdruk. De
+      // tweede paginanotitie van dia 1 mag niet op dia 2 belanden.
+      final a = Slide.create(SlideType.bullets).copyWith(title: 'Zelfde');
+      final b = Slide.create(SlideType.bullets).copyWith(title: 'Zelfde');
+      final slides = [a, b];
+      final json = UserNotesCodec.encode(slides, {
+        a.id: 'A pagina 1',
+        '${a.id}#p1': 'A pagina 2',
+      })!;
+      final back = UserNotesCodec.decode(json, slides);
+      expect(back[a.id], 'A pagina 1');
+      expect(back['${a.id}#p1'], 'A pagina 2');
+      expect(back.keys.where((k) => k.startsWith(b.id)), isEmpty);
+    });
   });
 }

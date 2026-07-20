@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:image/image.dart' as img;
 
+import '../utils/image_limits.dart' show kMaxImageDecodeDimension;
 import 'ai_client_service.dart';
 import 'ai_request.dart';
 
@@ -22,8 +23,22 @@ const int kVisionMaxEdge = 1568;
 /// bytes when decoding fails, so the caller still sends something valid. Pure and
 /// synchronous, so it runs inside [compute] off the UI isolate.
 Uint8List resizeImageForVision(Uint8List bytes) {
+  // Niet decoderen wat te groot is om te decoderen. `kMaxImageDecodeDimension`
+  // bewaakt de Flutter-decode, maar dit is de `image`-pakketvariant en die viel
+  // buiten die poort: een egaal gekleurde PNG van 30000×30000 is een paar KB op
+  // schijf en gigabytes uitgepakt — in een `compute`-isolaat, wat het proces
+  // net zo goed omlegt.
+  final size = img.findDecoderForData(bytes)?.startDecode(bytes);
+  if (size != null &&
+      (size.width > kMaxImageDecodeDimension ||
+          size.height > kMaxImageDecodeDimension)) {
+    return Uint8List(0);
+  }
   final decoded = img.decodeImage(bytes);
-  if (decoded == null) return bytes;
+  // Niet-decodeerbare bytes zijn geen "iets geldigs": ze zouden als
+  // `data:image/jpeg` naar een derde partij gaan onder een onjuist type, en
+  // zonder enige begrenzing op de omvang. Liever niets sturen.
+  if (decoded == null) return Uint8List(0);
   final longest = decoded.width >= decoded.height
       ? decoded.width
       : decoded.height;
@@ -160,6 +175,10 @@ class ImageAltAiService {
     required String languageName,
   }) async {
     final jpeg = await compute(resizeImageForVision, imageBytes);
+    // Leeg betekent: te groot of niet te decoderen. Dan gaat er niets naar
+    // buiten — een lege of onbegrepen afbeelding levert toch geen beschrijving
+    // op, en versturen wat je zelf niet kon lezen is de verkeerde kant op.
+    if (jpeg.isEmpty) return '';
     final request = buildAltTextRequest(
       model: _client.settings.model,
       imageDataUri: jpegDataUri(jpeg),
@@ -176,6 +195,10 @@ class ImageAltAiService {
     required String languageName,
   }) async {
     final jpeg = await compute(resizeImageForVision, imageBytes);
+    // Leeg betekent: te groot of niet te decoderen. Dan gaat er niets naar
+    // buiten — een lege of onbegrepen afbeelding levert toch geen beschrijving
+    // op, en versturen wat je zelf niet kon lezen is de verkeerde kant op.
+    if (jpeg.isEmpty) return '';
     final request = buildTagsRequest(
       model: _client.settings.model,
       imageDataUri: jpegDataUri(jpeg),

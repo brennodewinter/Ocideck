@@ -61,8 +61,15 @@ class MiauwComplianceAnalyzer {
   /// The parsed structured header of every `finding` slide (the group headers;
   /// detail/evidence slides carry no [FindingSpec]).
   List<FindingSpec> _findingSpecs(Deck deck) => [
+    // Alleen de koppen. Elke andere consument filtert hier al op
+    // ([deckFindingList], de ernstlijst, het gatenoverzicht, de paginabouwer);
+    // deze niet, terwijl een `finding`-dia met rol `detail` prima
+    // round-trippt — het is een markdown-eerst gereedschap. Zo'n dia levert een
+    // lege spec, en dan meldde het nalevingspaneel de eisen 4.7.x als *open*
+    // terwijl de bevindingenlijst één complete bevinding zag.
     for (final slide in deck.slides)
-      if (slide.type == SlideType.finding)
+      if (slide.type == SlideType.finding &&
+          slide.findingRole == FindingRole.header)
         FindingSpec.parse(slide.customMarkdown),
   ];
 
@@ -112,10 +119,6 @@ class MiauwComplianceAnalyzer {
       EisCheck.everyFindingHasRecommendation => _everyFinding(
         findings,
         (f) => f.recommendation.trim().isNotEmpty,
-      ),
-      EisCheck.everyFindingHasCwe => _everyFinding(
-        findings,
-        (f) => f.cweId != null,
       ),
     };
   }

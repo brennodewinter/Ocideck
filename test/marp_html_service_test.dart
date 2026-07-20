@@ -523,4 +523,70 @@ void main() {}
       },
     );
   });
+
+  test(
+    'een tijdlijndia wordt een tijdlijn, geen opsomming met dubbele punten',
+    () {
+      // De dubbele dubbele punt is de interne scheiding tussen datum, kop en
+      // toelichting. Die stond letterlijk in het opgeleverde document.
+      const slide =
+          '<!-- _class: timeline -->\n\n# Verloop\n\n'
+          '- 2024-01 :: Start :: kickoff met de klant\n'
+          '- 2024-06 :: Rapport\n';
+      final html = MarpHtmlService.renderTimelineBlocks(slide);
+
+      expect(html, isNot(contains('::')));
+      expect(html, contains('<ol class="timeline">'));
+      expect(html, contains('2024-01'));
+      expect(html, contains('kickoff met de klant'));
+      expect(html, contains('# Verloop'), reason: 'de kop blijft markdown');
+    },
+  );
+
+  test('een gewone opsomming blijft een gewone opsomming', () {
+    const slide = '# Punten\n\n- eerste\n- tweede\n';
+    expect(MarpHtmlService.renderTimelineBlocks(slide), slide);
+  });
+
+  test('de akkoordpagina draagt de verklaring, niet alleen een kop', () {
+    // De ondertekening staat op dekniveau; de dia bewaart alleen een kop. De
+    // export liet daardoor precies de pagina leeg waar de verklaring hoort.
+    const deck =
+        '---\nmarp: true\n'
+        'ocideck_sig_name: "J. Tester"\n'
+        'ocideck_sig_role: "Pentester"\n'
+        'ocideck_sig_statement: "Naar waarheid opgesteld."\n'
+        'ocideck_sig_typed: "J. Tester"\n'
+        'ocideck_seal_at: "2026-07-20 10:00"\n'
+        '---\n\n<!-- _class: sign-off -->\n\n# Akkoord\n';
+    final fields = MarpHtmlService.signatureFields(deck);
+    final html = MarpHtmlService.renderSignOffBlock(
+      MarpHtmlService.marpSlides(deck).first,
+      fields,
+      sealedAt: fields['ocideck_seal_at'] ?? '',
+    );
+
+    expect(html, contains('Naar waarheid opgesteld.'));
+    expect(html, contains('J. Tester'));
+    expect(html, contains('Pentester'));
+    expect(html, contains('2026-07-20 10:00'));
+    expect(html, contains('# Akkoord'), reason: 'de kop blijft staan');
+  });
+
+  test('een onondertekende akkoordpagina zegt dat met zoveel woorden', () {
+    const slide = '<!-- _class: sign-off -->\n\n# Akkoord\n';
+    final html = MarpHtmlService.renderSignOffBlock(slide, const {});
+    expect(html, contains('Nog niet ondertekend'));
+    expect(html, contains('Nog niet verzegeld'));
+  });
+
+  test('andere dia\'s krijgen geen ondertekeningsblok', () {
+    const slide = '# Gewoon\n\n- punt\n';
+    expect(
+      MarpHtmlService.renderSignOffBlock(slide, const {
+        'ocideck_sig_name': 'J. Tester',
+      }),
+      slide,
+    );
+  });
 }

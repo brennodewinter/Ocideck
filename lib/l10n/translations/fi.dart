@@ -1781,6 +1781,11 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Afbeeldingen door AI laten taggen?':
+      'Annetaanko tekoälyn merkitä nämä kuvat?',
+  'afbeeldingen gaan naar': 'kuvaa lähetetään kohteeseen',
+  'een model op dit apparaat': 'malli tässä laitteessa',
+  'Doorgaan': 'Jatka',
   'Ontdekkingen': 'Löydöt',
   'Wat is gevonden': 'Mitä löytyi',
   'Soort': 'Laji',

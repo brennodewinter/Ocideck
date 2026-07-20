@@ -738,6 +738,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Afbeeldingen door AI laten taggen?': 'Laga IA taga e imágennan aki?',
+  'afbeeldingen gaan naar': 'imágen ta bai na',
+  'een model op dit apparaat': 'un modelo riba e aparato aki',
+  'Doorgaan': 'Sigui',
   'Ontdekkingen': 'Deskubrimentunan',
   'Wat is gevonden': 'Kiko a wòrdu hañá',
   'Soort': 'Tipo',

@@ -1,14 +1,17 @@
 import 'dart:convert';
 import 'dart:math' as math;
 import 'dart:typed_data';
+import 'dart:ui' show Locale;
 
 import 'package:flutter/services.dart' show rootBundle;
 
+import '../l10n/app_localizations.dart';
 import '../models/chart.dart';
 import '../models/cockpit.dart';
 import '../models/question.dart';
 import '../models/deck.dart';
 import '../models/settings.dart';
+import '../models/timeline.dart';
 import '../utils/log.dart';
 import 'export_metadata.dart';
 
@@ -101,10 +104,17 @@ class MarpHtmlService {
       List<int>.generate(16, (_) => rng.nextInt(256)),
     );
 
+    final signature = signatureFields(deckMarkdown);
     final sections = StringBuffer();
     for (final slide in marpSlides(deckMarkdown)) {
       final renderedBlocks = renderCockpitBlocks(
-        renderQuestionBlocks(renderChartBlocks(slide, theme: theme)),
+        renderSignOffBlock(
+          renderTimelineBlocks(
+            renderQuestionBlocks(renderChartBlocks(slide, theme: theme)),
+          ),
+          signature,
+          sealedAt: signature['ocideck_seal_at'] ?? '',
+        ),
         theme: theme,
         scheme: cockpitColorScheme,
       );
@@ -346,6 +356,151 @@ class MarpHtmlService {
     });
   }
 
+  // ── Tijdlijn → HTML ───────────────────────────────────────────────────────
+
+  static final RegExp _timelineClass = RegExp(
+    r'<!--\s*_class:\s*timeline\s*-->',
+  );
+  static final RegExp _bulletLine = RegExp(r'^[\t ]*-[\t ]+(.*)$');
+
+  /// Zet de opgeslagen tijdlijnpunten om in een echte tijdlijn.
+  ///
+  /// Een tijdlijndia bewaart zijn punten als `marker :: titel :: toelichting`.
+  /// In de app tekent de preview daar een tijdlijn van; de HTML-export liet de
+  /// opsomming staan zoals hij op schijf stond, dus in het document dat de
+  /// lezer krijgt stond letterlijk "2024-01 :: Start". De dubbele dubbele punt
+  /// is een interne scheiding en hoort niet in een opgeleverd rapport.
+  static String renderTimelineBlocks(String slideMarkdown) {
+    if (!_timelineClass.hasMatch(slideMarkdown)) return slideMarkdown;
+    final lines = slideMarkdown.split('\n');
+    final out = StringBuffer();
+    var events = <TimelineEvent>[];
+
+    void flush() {
+      if (events.isEmpty) return;
+      out.writeln('<ol class="timeline">');
+      for (final e in events) {
+        out.write('<li>');
+        if (e.marker.trim().isNotEmpty) {
+          out.write('<span class="tl-marker">${_htmlText(e.marker)}</span>');
+        }
+        if (e.title.trim().isNotEmpty) {
+          out.write('<span class="tl-title">${_htmlText(e.title)}</span>');
+        }
+        if (e.description.trim().isNotEmpty) {
+          out.write('<span class="tl-desc">${_htmlText(e.description)}</span>');
+        }
+        out.writeln('</li>');
+      }
+      out.writeln('</ol>');
+      events = <TimelineEvent>[];
+    }
+
+    for (final line in lines) {
+      final m = _bulletLine.firstMatch(line);
+      if (m != null) {
+        final event = TimelineEvent.fromBullet(m.group(1)!);
+        if (!event.isEmpty) {
+          events.add(event);
+          continue;
+        }
+      }
+      flush();
+      out.writeln(line);
+    }
+    flush();
+    return out.toString();
+  }
+
+  // ── Ondertekening → HTML ──────────────────────────────────────────────────
+
+  static final RegExp _signOffClass = RegExp(
+    r'<!--\s*_class:\s*sign-off\s*-->',
+  );
+
+  /// Leest de `ocideck_sig_*`- en `ocideck_seal_at`-regels uit de voorpagina
+  /// van [deckMarkdown].
+  ///
+  /// De ondertekening staat op dekniveau, niet op de dia — zie
+  /// `_writeSignOffSlide`. De export krijgt alleen de markdown mee, dus wordt
+  /// hij hier teruggelezen uit de front matter.
+  static Map<String, String> signatureFields(String deckMarkdown) {
+    final text = deckMarkdown.replaceAll('\r\n', '\n');
+    if (!text.startsWith('---\n')) return const {};
+    final close = text.indexOf('\n---', 4);
+    if (close == -1) return const {};
+    final fields = <String, String>{};
+    for (final line in text.substring(4, close).split('\n')) {
+      if (!line.startsWith('ocideck_sig_') &&
+          !line.startsWith('ocideck_seal_at')) {
+        continue;
+      }
+      final colon = line.indexOf(':');
+      if (colon == -1) continue;
+      var value = line.substring(colon + 1).trim();
+      if (value.length >= 2 &&
+          ((value.startsWith('"') && value.endsWith('"')) ||
+              (value.startsWith("'") && value.endsWith("'")))) {
+        value = value.substring(1, value.length - 1);
+      }
+      if (value.isNotEmpty) fields[line.substring(0, colon).trim()] = value;
+    }
+    return fields;
+  }
+
+  /// Zet de ondertekeningsverklaring op de sign-off-dia.
+  ///
+  /// De dia zelf bewaart alleen een kop; de verklaring, de rapporteur en de
+  /// zegelstatus staan op dekniveau. In de app tekent de preview ze erbij, maar
+  /// de HTML-export deed dat niet — dus in het document dat de klant krijgt was
+  /// de akkoordpagina een kop met wit eronder, precies de pagina waar de
+  /// verklaring hoort te staan.
+  static String renderSignOffBlock(
+    String slideMarkdown,
+    Map<String, String> signature, {
+    String sealedAt = '',
+  }) {
+    if (!_signOffClass.hasMatch(slideMarkdown)) return slideMarkdown;
+    const l10n = AppLocalizations(Locale('nl'));
+    String field(String key) => signature[key]?.trim() ?? '';
+
+    // Dezelfde opbouw als de preview: verklaring, ondertekening, naam · rol ·
+    // certificering, datum, zegel. Zo leest de akkoordpagina in de export
+    // hetzelfde als de pagina die de auteur in de app heeft goedgekeurd.
+    final b = StringBuffer('\n<div class="signoff">');
+    final statement = field('ocideck_sig_statement');
+    if (statement.isNotEmpty) {
+      b.write('<p class="signoff-statement">${_htmlText(statement)}</p>');
+    }
+    final mark = field('ocideck_sig_typed').isNotEmpty
+        ? field('ocideck_sig_typed')
+        : field('ocideck_sig_name');
+    if (mark.isNotEmpty) {
+      b.write('<p class="signoff-mark">${_htmlText(mark)}</p>');
+    } else if (statement.isEmpty) {
+      b.write(
+        '<p class="signoff-none">${_htmlText(l10n.d('Nog niet ondertekend'))}</p>',
+      );
+    }
+    final meta = [
+      for (final key in const [
+        'ocideck_sig_name',
+        'ocideck_sig_role',
+        'ocideck_sig_cert',
+        'ocideck_sig_date',
+      ])
+        if (field(key).isNotEmpty) field(key),
+    ];
+    if (meta.isNotEmpty) {
+      b.write('<p class="signoff-meta">${_htmlText(meta.join(' · '))}</p>');
+    }
+    b.write(
+      '<p class="signoff-seal">${_htmlText(sealedAt.trim().isNotEmpty ? '${l10n.d('Verzegeld op')} ${sealedAt.trim()}' : l10n.d('Nog niet verzegeld'))}</p>',
+    );
+    b.write('</div>\n');
+    return '$slideMarkdown\n$b';
+  }
+
   /// Tekst als HTML-inhoud: alleen de drie tekens die de parser van gedachten
   /// doen veranderen. Niet [_htmlAttr] — dat is voor attribuutwaarden.
   static String _htmlText(String s) => s
@@ -472,6 +627,18 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
 .slide img{max-width:100%}
 .slide blockquote{border-left:4px solid #ccc;margin:.5em 0;padding-left:16px;color:#555}
 .slide table{border-collapse:collapse;width:100%}.slide th,.slide td{border:1px solid #ccc;padding:6px 12px;font-size:20px}
+.slide ol.timeline{list-style:none;margin:.6em 0;padding:0 0 0 24px;border-left:3px solid #ccc}
+.slide ol.timeline li{position:relative;margin:0 0 .9em;padding-left:16px}
+.slide ol.timeline li::before{content:"";position:absolute;left:-31px;top:.45em;width:11px;height:11px;border-radius:50%;background:#003399}
+.slide .tl-marker{display:block;font-size:18px;font-weight:700;color:#003399;letter-spacing:.04em}
+.slide .tl-title{display:block;font-size:26px;font-weight:600;line-height:1.3}
+.slide .tl-desc{display:block;font-size:20px;color:#555;line-height:1.35}
+.slide .signoff{margin-top:.8em;max-width:900px}
+.slide .signoff-statement{font-style:italic;color:#334155;font-size:22px}
+.slide .signoff-mark{font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:40px;color:#0f2a5c;margin:.35em 0 .1em}
+.slide .signoff-none{font-style:italic;color:#64748b;font-size:22px}
+.slide .signoff-meta{font-size:20px;color:#475569;margin:.1em 0}
+.slide .signoff-seal{font-size:18px;color:#64748b;letter-spacing:.03em;margin-top:.7em}
 .tlp-export-banner{position:fixed;top:0;left:0;right:0;background:#000;color:#ffc000;text-align:center;font:700 14px/2.4 monospace;z-index:9999;letter-spacing:.06em}
 @media print{body{background:#fff}.slide{margin:0;box-shadow:none;border-radius:0;page-break-after:always;width:100%;min-height:100vh}}
 ''';

@@ -1811,6 +1811,10 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Afbeeldingen door AI laten taggen?': 'Deixar a IA etiquetar estas imagens?',
+  'afbeeldingen gaan naar': 'imagens serão enviadas para',
+  'een model op dit apparaat': 'um modelo neste dispositivo',
+  'Doorgaan': 'Continuar',
   'Ontdekkingen': 'Descobertas',
   'Wat is gevonden': 'O que foi encontrado',
   'Soort': 'Tipo',

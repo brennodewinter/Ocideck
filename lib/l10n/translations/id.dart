@@ -1781,6 +1781,11 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Afbeeldingen door AI laten taggen?':
+      'Biarkan AI menandai gambar-gambar ini?',
+  'afbeeldingen gaan naar': 'gambar akan dikirim ke',
+  'een model op dit apparaat': 'model di perangkat ini',
+  'Doorgaan': 'Lanjutkan',
   'Ontdekkingen': 'Temuan',
   'Wat is gevonden': 'Apa yang ditemukan',
   'Soort': 'Jenis',

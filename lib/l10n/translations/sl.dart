@@ -1783,6 +1783,10 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Afbeeldingen door AI laten taggen?': 'Naj UI označi te slike?',
+  'afbeeldingen gaan naar': 'slik bo poslanih na',
+  'een model op dit apparaat': 'model v tej napravi',
+  'Doorgaan': 'Nadaljuj',
   'Ontdekkingen': 'Odkritja',
   'Wat is gevonden': 'Kaj je bilo najdeno',
   'Soort': 'Vrsta',

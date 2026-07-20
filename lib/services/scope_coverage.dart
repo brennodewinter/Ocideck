@@ -35,17 +35,32 @@ List<ScopeGap> deckScopeCoverageGaps(Deck deck) {
         normalizeScopeObject(FindingSpec.parse(s.customMarkdown).scopeObject),
   }..remove('');
 
-  final gaps = <ScopeGap>[];
-  final seen = <String>{};
+  // Per object het óngunstigste oordeel, niet het eerste.
+  //
+  // De ontdubbeling sloeg toe vóórdat er naar de status werd gekeken, dus won de
+  // eerste rij. Stond hetzelfde object op een planningsmatrix als getest en op
+  // de uitvoeringsmatrix als niet-getest, dan verdween het gat — en andersom
+  // verscheen het weer zodra je de twee dia's van volgorde wisselde. Hetzelfde
+  // deck, twee antwoorden.
+  final worst = <String, ScopeGap>{};
+  final covered = <String>{};
   for (final slide in deck.slides) {
     if (slide.type != SlideType.scopeMatrix) continue;
     final spec = ScopeMatrixSpec.fromSlide(slide.title, slide.tableRows);
     for (final row in spec.rows) {
       final key = normalizeScopeObject(row.object);
-      if (key.isEmpty || !seen.add(key)) continue;
-      final covered = row.status.isTested || findingObjects.contains(key);
-      if (!covered) gaps.add(ScopeGap(object: row.object, type: row.type));
+      if (key.isEmpty) continue;
+      if (row.status.isTested || findingObjects.contains(key)) {
+        covered.add(key);
+      } else {
+        worst.putIfAbsent(
+          key,
+          () => ScopeGap(object: row.object, type: row.type),
+        );
+      }
     }
   }
-  return gaps;
+  // Eén niet-getoetste vermelding is genoeg om het een gat te noemen, ook als
+  // een andere matrix hetzelfde object wél afvinkt.
+  return [for (final e in worst.entries) e.value];
 }

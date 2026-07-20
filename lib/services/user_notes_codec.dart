@@ -50,7 +50,13 @@ class UserNotesCodec {
       final fileVersion =
           (data is Map ? data['version'] as num? : null)?.toInt() ?? 1;
       final raw = (data is Map ? data['slides'] : null) as List? ?? const [];
-      final used = <int>{};
+      // Op (dia, pagina), niet op dia alleen: een rijke-tekstdia die over
+      // meerdere pagina's loopt levert meerdere notities met hetzelfde
+      // `index`. Op dia alleen geclaimd stootte de tweede notitie af naar de
+      // zoeklus, en die zette hem op een andere dia met dezelfde
+      // vingerafdruk — of nergens.
+      final used = <String>{};
+      String claim(int slideIndex, int page) => '$slideIndex#$page';
       for (final e in raw) {
         final entry = Map<String, dynamic>.from(e as Map);
         final fp = entry['fp'] as String?;
@@ -64,12 +70,12 @@ class UserNotesCodec {
         int target = -1;
         if (index >= 0 &&
             index < slides.length &&
-            !used.contains(index) &&
+            !used.contains(claim(index, page)) &&
             AnnotationCodec.fingerprint(slides[index]) == fp) {
           target = index;
         } else {
           for (var i = 0; i < slides.length; i++) {
-            if (!used.contains(i) &&
+            if (!used.contains(claim(i, page)) &&
                 AnnotationCodec.fingerprint(slides[i]) == fp) {
               target = i;
               break;
@@ -77,7 +83,7 @@ class UserNotesCodec {
           }
         }
         if (target < 0) continue;
-        used.add(target);
+        used.add(claim(target, page));
         final slideId = slides[target].id;
         final key = page > 0
             ? userNoteStorageKey(slideId, page, multiPage: true)

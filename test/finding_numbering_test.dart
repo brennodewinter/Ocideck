@@ -31,6 +31,34 @@ void main() {
   });
 
   group('renumberFindings', () {
+    test('een wees-detaildia verliest zijn dode F-NN-verwijzing', () {
+      // De kop is weg (verwijderd), de detaildia bleef achter. Die hield zijn
+      // oude "F-07 · ..."-titel, wijzend naar een bevinding die niet meer in
+      // het deck staat. Na hernummeren mag die dode verwijzing er niet meer zijn.
+      final wees = Slide.create(SlideType.finding).copyWith(
+        title: 'F-07 · Losgeraakt detail',
+        findingId: 'F-07',
+        findingRole: FindingRole.detail,
+      );
+      final echt = buildFindingGroup(
+        spec: const FindingSpec(heading: 'XSS', cvssVector: _cvss),
+        findingId: 'Z-2',
+        addDetail: true,
+      );
+      final out = renumberFindings(_deck([wees, ...echt]));
+
+      final orphan = out.slides.firstWhere(
+        (s) => s.title.contains('Losgeraakt detail'),
+      );
+      expect(orphan.findingId, isEmpty);
+      expect(orphan.title, 'Losgeraakt detail');
+      expect(
+        out.slides.any((s) => s.title.startsWith('F-07')),
+        isFalse,
+        reason: 'geen enkele dia draagt nog het dode nummer',
+      );
+    });
+
     test('numbers groups sequentially and rewrites id + heading + members', () {
       final groupA = buildFindingGroup(
         spec: const FindingSpec(

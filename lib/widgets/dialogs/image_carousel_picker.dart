@@ -1,4 +1,5 @@
 import '../../utils/image_limits.dart' show boundedFileImage;
+import '../../models/ai_settings.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

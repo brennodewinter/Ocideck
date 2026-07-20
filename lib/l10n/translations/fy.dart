@@ -739,6 +739,10 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Afbeeldingen door AI laten taggen?': 'Litte jo AI dizze ôfbyldings tagje?',
+  'afbeeldingen gaan naar': 'ôfbyldings gean nei',
+  'een model op dit apparaat': 'in model op dit apparaat',
+  'Doorgaan': 'Trochgean',
   'Ontdekkingen': 'Untdekkingen',
   'Wat is gevonden': 'Wat fûn is',
   'Soort': 'Soarte',

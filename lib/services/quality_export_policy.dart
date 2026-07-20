@@ -64,15 +64,20 @@ class QualityExportPolicy {
     SlideQualityResult result, {
     bool acknowledged = false,
   }) {
-    if (!enabled || !result.hasActionableIssues) {
-      return const QualityExportDecision.allow();
-    }
+    // De harde blokkade staat vóór [enabled]. Het zijn twee losse schakelaars
+    // in de instellingen, en de bovenste gaat alleen over het bevestigingsvenster
+    // ("vraag bevestiging"). Toen de blokkade daaronder hing, zette het
+    // wegklikken van die vraag ook de blokkade uit — terwijl de tekst eronder
+    // belooft dat export niet mogelijk is zolang er fouten staan.
     if (blockOnErrors && result.errorCount > 0) {
       return QualityExportDecision.needsAcknowledgement(
         errorCount: result.errorCount,
         warningCount: result.warningCount,
         canAcknowledge: false,
       );
+    }
+    if (!enabled || !result.hasActionableIssues) {
+      return const QualityExportDecision.allow();
     }
     if (acknowledged) {
       return const QualityExportDecision.allow();

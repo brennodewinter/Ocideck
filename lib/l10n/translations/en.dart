@@ -920,6 +920,10 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Afbeeldingen door AI laten taggen?': 'Let AI tag these images?',
+  'afbeeldingen gaan naar': 'images will be sent to',
+  'een model op dit apparaat': 'a model on this device',
+  'Doorgaan': 'Continue',
   'Ontdekkingen': 'Discoveries',
   'Wat is gevonden': 'What was found',
   'Soort': 'Kind',

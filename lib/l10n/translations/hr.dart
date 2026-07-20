@@ -1788,6 +1788,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Afbeeldingen door AI laten taggen?': 'Neka UI označi ove slike?',
+  'afbeeldingen gaan naar': 'slika bit će poslano na',
+  'een model op dit apparaat': 'model na ovom uređaju',
+  'Doorgaan': 'Nastavi',
   'Ontdekkingen': 'Otkrića',
   'Wat is gevonden': 'Što je pronađeno',
   'Soort': 'Vrsta',

@@ -1789,6 +1789,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Afbeeldingen door AI laten taggen?': 'Leisti DI pažymėti šiuos vaizdus?',
+  'afbeeldingen gaan naar': 'vaizdai bus išsiųsti į',
+  'een model op dit apparaat': 'modelis šiame įrenginyje',
+  'Doorgaan': 'Tęsti',
   'Ontdekkingen': 'Atradimai',
   'Wat is gevonden': 'Kas rasta',
   'Soort': 'Rūšis',

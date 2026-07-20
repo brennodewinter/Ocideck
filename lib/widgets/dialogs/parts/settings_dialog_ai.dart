@@ -9,6 +9,28 @@ extension _SettingsAi on _SettingsDialogState {
   /// API-sleutel asynchroon uit de keychain (zelfde patroon als WebDAV).
   void _initAiFields(AiSettings ai) {
     _ai.adoptFrom(ai);
+    // Verandert de bestemming, dan vervalt de bevestiging én de sleutel.
+    //
+    // `cloudConfirmed` is een kale bool die aan niets vastzat, terwijl het
+    // doc-commentaar spreekt van een bevestiging "die de bestemming benoemt".
+    // Wie provider A bevestigde en later alleen de URL naar B wijzigde, stuurde
+    // bij het eerstvolgende voorstel tekst naar een bestemming die hij nooit
+    // heeft goedgekeurd. En het sleutelveld hield intussen de sleutel van A
+    // vast, dus die ging als `Authorization` mee naar B — óók al bij een
+    // verbindingstest, en bij opslaan werd hij in de keychain naar B gekopieerd.
+    final confirmedFor = ai.baseUrl.trim();
+    _ai.baseUrl.addListener(() {
+      final changed = _ai.baseUrl.text.trim() != confirmedFor;
+      if (!changed || (!_ai.cloudConfirmed && _ai.apiKey.field.text.isEmpty)) {
+        return;
+      }
+      _rebuild(() {
+        _ai.cloudConfirmed = false;
+        _ai.apiKey.field.clear();
+        _ai.testOk = null;
+        _ai.testMessage = null;
+      });
+    });
     if (ai.baseUrl.trim().isEmpty) return;
     ref.read(settingsProvider.notifier).readAiApiKey(ai.baseUrl).then((key) {
       if (mounted && key != null) _rebuild(() => _ai.apiKey.adopt(key));

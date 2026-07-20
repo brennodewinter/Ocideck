@@ -1804,6 +1804,10 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Afbeeldingen door AI laten taggen?': 'Да маркира ли ИИ тези изображения?',
+  'afbeeldingen gaan naar': 'изображения ще бъдат изпратени до',
+  'een model op dit apparaat': 'модел на това устройство',
+  'Doorgaan': 'Продължи',
   'Ontdekkingen': 'Открития',
   'Wat is gevonden': 'Какво е намерено',
   'Soort': 'Вид',

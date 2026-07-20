@@ -1780,6 +1780,10 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Afbeeldingen door AI laten taggen?': 'Ļaut MI marķēt šos attēlus?',
+  'afbeeldingen gaan naar': 'attēli tiks nosūtīti uz',
+  'een model op dit apparaat': 'modelis šajā ierīcē',
+  'Doorgaan': 'Turpināt',
   'Ontdekkingen': 'Atklājumi',
   'Wat is gevonden': 'Kas atrasts',
   'Soort': 'Veids',

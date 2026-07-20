@@ -2,6 +2,22 @@
 // Split out for navigability; all imports live in the main library file.
 part of '../slide_preview.dart';
 
+/// Het afgevinkte percentage, waarbij 100 échte volledigheid betekent.
+///
+/// `round()` maakte van 199/200 (99,5%) een keurige "Afgevinkt 100% · Niet
+/// afgevinkt 0%", en de nul-guard in de opbouw liet het open segment dan
+/// helemáál weg — niets op de dia wees er nog op dat er iets openstond. In een
+/// opgeleverd rapport is dat een onterechte volledigheidsclaim.
+///
+/// Dus naar beneden afronden zolang er iets openstaat, en spiegelbeeldig: 0 pas
+/// als er werkelijk niets is afgevinkt.
+int _checkedPercent(int checked, int total) {
+  if (total == 0) return 0;
+  if (checked == total) return 100;
+  if (checked == 0) return 0;
+  return ((checked / total) * 100).floor().clamp(1, 99);
+}
+
 class _ChecklistProgress extends StatelessWidget {
   final List<String> bullets;
   final double w;
@@ -26,7 +42,7 @@ class _ChecklistProgress extends StatelessWidget {
         .toList();
     final checked = items.where(checklistItemChecked).length;
     final total = items.length;
-    final checkedPercent = total == 0 ? 0 : ((checked / total) * 100).round();
+    final checkedPercent = _checkedPercent(checked, total);
     final openPercent = total == 0 ? 0 : 100 - checkedPercent;
     final textColor = _hexColor(profile.textColor);
     final checkedColor = _hexColor(profile.checklistCheckedColor);

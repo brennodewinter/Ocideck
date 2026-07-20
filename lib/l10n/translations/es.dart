@@ -735,6 +735,11 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Afbeeldingen door AI laten taggen?':
+      '¿Dejar que la IA etiquete estas imágenes?',
+  'afbeeldingen gaan naar': 'imágenes se enviarán a',
+  'een model op dit apparaat': 'un modelo en este dispositivo',
+  'Doorgaan': 'Continuar',
   'Ontdekkingen': 'Hallazgos',
   'Wat is gevonden': 'Qué se encontró',
   'Soort': 'Tipo',

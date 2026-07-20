@@ -1756,6 +1756,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Afbeeldingen door AI laten taggen?': 'nagh HaSta pong\'a\' AI?',
+  'afbeeldingen gaan naar': 'HaSta lupoQ',
+  'een model op dit apparaat': 'jan vam model',
+  'Doorgaan': 'taH',
   'Ontdekkingen': 'tu\'bogh Doch',
   'Wat is gevonden': 'nuq tu\'lu\'',
   'Soort': 'Segh',
