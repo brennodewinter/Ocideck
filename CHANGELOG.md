@@ -55,6 +55,10 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   waar het bij hoort. Corrigeren doet hij het niet: dat zou de fout verbergen in
   wat het getal produceerde, en juist zulke fouten hoort een rapportage te laten
   zien.
+
+  Het type hoort bij de uitbreiding **Informatieveiligheid** en wordt alleen
+  aangeboden als die aan staat — een aanvalsoppervlak is MIAUW-materiaal, geen
+  algemeen presentatiemiddel. Een deck dat er al een draagt, toont hem altijd.
 - **Een nieuw slidetype: acties en besluiten.** Tot acht regels met wat er moet
   gebeuren, wie het doet, wanneer het af moet, en — het veld waar het type om
   bestaat — wat u van de zaal vraagt: ter informatie, besluit gevraagd, of
@@ -524,6 +528,14 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   een strafzaak gaat. Een markering verbergt een waarde, geen onderwerp.
 
 ### Fixed
+- **Afronden & verzegelen stond in het menu met de module uit.** Verzegelen is
+  documentintegriteit uit de uitbreiding Informatieveiligheid, maar het menu-item
+  keek alleen of het deck al verzegeld was. Het stond daarmee pal naast zijn
+  buurman "Bijlage hulpmiddelen invoegen", die de module-check wél had, en het
+  RFC3161-tijdstempel dat ná het verzegelen komt zat er ook al achter. Wie de
+  uitbreiding uit had staan, kon dus wel verzegelen maar het zegel daarna niet
+  van een tijdstempel voorzien: het spoor was halverwege afgesloten.
+
 - **Vier keer stond het middel er al, en was het op één plek niet aangesloten.**
   Uit de bugjacht kwam dit als het karakteristieke patroon van de codebase naar
   voren: niet een ontbrekend idee, maar een geschreven en getoetst mechanisme dat

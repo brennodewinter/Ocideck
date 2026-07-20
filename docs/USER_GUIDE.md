@@ -340,17 +340,17 @@ dashboard of aviation-style instrument gauges),
 **question** (an interactive quiz slide), **timeline** (an animated timeline of
 dated events), **scorecard** (a few headline figures, each beside the figure from
 the previous report), **actions** (what has to happen, who does it and what is
-being asked of the room), **asset overview** (the attack surface by kind of
-object), and
+being asked of the room), and
 **free Markdown**. Each card in the chooser shows a miniature
 wireframe of the layout, and the dialog works entirely with the keyboard
 (`Tab`/`Enter` to choose, `Esc` to cancel). Each type has a dedicated editor on
 the left and a live preview on the right. You can change an existing slide's type
 at any time from the **TYPE** control in the editor header: it opens the same
 chooser, so adding and re-typing a slide always offer exactly the same set of
-types. (Both pickers are category-filtered: the five Informatieveiligheid types —
-finding, findings-summary, checklist, scope matrix and sign-off — appear only once
-the security module is enabled; see the pentest-reporting section below.)
+types. (Both pickers are category-filtered: the six Informatieveiligheid types —
+asset overview, finding, findings-summary, checklist, scope matrix and sign-off —
+appear only once the security module is enabled; see the pentest-reporting
+section below.)
 
 Not sure what a slide type is for? Click the small **"What can I do here?"**
 button at the top of the editor for a one-line hint about the selected type (for
@@ -631,6 +631,10 @@ the `.md` file and a script that already produces your numbers can write the
 table directly. See [FILE_FORMAT.md](FILE_FORMAT.md) §5 for the columns.
 
 ### Asset overview slides
+
+An asset-overview slide belongs to the [information security
+module](#information-security-module-pentest-reports) and is offered only while
+that module is on; an existing deck that uses one always renders it regardless.
 
 An asset-overview slide shows your **attack surface** — the objects reachable
 from outside — broken into up to eight **kinds**: web applications, mail servers,
@@ -1884,6 +1888,11 @@ presentation is not asked for pentest metadata it has no use for:
   the person who entered it.
 - **Insert tools appendix…** in the `…` menu, which turns *Tools used* into a
   table slide.
+- **Afronden & verzegelen** in the `…` menu. Sealing is a document-integrity
+  function of this module — it sits behind the same toggle as the RFC3161
+  timestamp that follows it, so the sealing trail is never half-reachable with
+  the module off. A deck that already carries a sign-off slide still offers the
+  button on that slide's own editor.
 
 **Opening a security report while the module is off** surfaces a one-time
 prompt — a banner at the top of the window — so you can turn the module on right

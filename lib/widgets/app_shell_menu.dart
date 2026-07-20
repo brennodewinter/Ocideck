@@ -172,8 +172,12 @@ extension _MainLayoutMenu on _MainLayoutState {
         ),
       const PopupMenuDivider(),
       // Documentintegriteit (§8 A1): afronden is bewust eenrichtingsverkeer, dus
-      // het item verdwijnt zodra het deck verzegeld is.
-      if (ref.read(deckProvider).deck?.finalized != true)
+      // het item verdwijnt zodra het deck verzegeld is. Verzegelen is een
+      // informatieveiligheidsfunctie — het hoort achter dezelfde module-gate als
+      // het RFC3161-tijdstempel dat er in het commandopalet op volgt, anders is
+      // het halve verzegelspoor bereikbaar met de module uit.
+      if (ref.read(infoSafetyRevealProvider) &&
+          ref.read(deckProvider).deck?.finalized != true)
         _menuItem(
           'finalize',
           Icons.verified_user_outlined,

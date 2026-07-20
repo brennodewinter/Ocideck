@@ -195,13 +195,14 @@ const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
     label: 'Acties en besluiten',
     marpClass: 'actions',
   ),
-  SlideType.assets: SlideTypeMeta(
-    label: 'Aanvalsoppervlak',
-    marpClass: 'assets',
-  ),
   // Informatieveiligheid-module — categorie [SlideCategory.informatieveiligheid],
   // waardoor de kiezer automatisch een tabblad toont (P0-PICK). marpClass-tokens
   // volgen PENTEST_MIAUW §4.
+  SlideType.assets: SlideTypeMeta(
+    label: 'Aanvalsoppervlak',
+    marpClass: 'assets',
+    category: SlideCategory.informatieveiligheid,
+  ),
   SlideType.finding: SlideTypeMeta(
     label: 'Bevinding',
     marpClass: 'finding',

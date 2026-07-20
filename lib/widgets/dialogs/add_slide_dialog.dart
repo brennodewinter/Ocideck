@@ -49,13 +49,13 @@ class AddSlideDialog extends StatefulWidget {
     SlideType.cockpit,
     SlideType.scorecard,
     SlideType.actions,
-    SlideType.assets,
     SlideType.timeline,
     SlideType.question,
     SlideType.code,
     SlideType.freeMarkdown,
     // Informatieveiligheid-module — grouped last; shown under their own picker
     // tab (P0-PICK) once the category carries types.
+    SlideType.assets,
     SlideType.finding,
     SlideType.findingsSummary,
     SlideType.checklist,
