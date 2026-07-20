@@ -518,10 +518,18 @@ String chartDataAsCsv(ChartSpec spec) {
   return buf.toString();
 }
 
-/// A cell as CSV: quoted when it contains a comma, a quote or edge whitespace,
-/// with `"` doubled — the form [parseCsv] reads back verbatim.
+/// A cell as CSV: quoted when it contains a separator, a quote or edge
+/// whitespace, with `"` doubled — the form [parseCsv] reads back verbatim.
+///
+/// Ook `;` en tab krijgen aanhalingstekens. Dat helpt de lezer die op de komma
+/// splitst; de tweede helft van dezelfde bevinding zit in [_detectDelimiter],
+/// dat de rijen op gelijke kolomaantallen toetst.
 String _csvValue(String raw) =>
-    raw.contains(',') || raw.contains('"') || raw.trim() != raw
+    raw.contains(',') ||
+        raw.contains(';') ||
+        raw.contains('\t') ||
+        raw.contains('"') ||
+        raw.trim() != raw
     ? '"${raw.replaceAll('"', '""')}"'
     : raw;
 
@@ -551,14 +559,31 @@ String _csvValue(String raw) =>
 /// the header into the most cells. A Dutch Excel writes `;` whenever the system
 /// decimal mark is a comma, so assuming `,` silently produced a chart with no
 /// series at all. Ties fall back to `,`, which is what the format nominally is.
-String _detectDelimiter(String headerLine) {
+String _detectDelimiter(List<String> lines) {
+  ({int columns, bool consistent}) probe(String d) {
+    final counts = [
+      for (final line in lines) parseCsvLine(line, delimiter: d).length,
+    ];
+    return (
+      columns: counts.first,
+      // Een tabel heeft in elke rij evenveel kolommen. Splitst een kandidaat de
+      // kopregel netjes maar de datarijen niet, dan is hij het niet.
+      consistent: counts.every((c) => c == counts.first),
+    );
+  }
+
   var best = ',';
-  var bestCount = parseCsvLine(headerLine).length;
+  var bestProbe = probe(',');
   for (final candidate in const [';', '\t']) {
-    final count = parseCsvLine(headerLine, delimiter: candidate).length;
-    if (count > bestCount) {
+    final p = probe(candidate);
+    // Een kandidaat wint alleen als hij méér kolommen oplevert én de rijen
+    // gelijk houdt. Zonder die tweede eis stemde één reeksnaam met puntkomma's
+    // erin de komma weg: de kopregel viel dan in vijf stukken, de datarijen in
+    // één, en het hele bestand werd verkeerd gelezen — lege reeksen, en
+    // x-labels als `Jan,1.0`.
+    if (p.consistent && p.columns > bestProbe.columns) {
       best = candidate;
-      bestCount = count;
+      bestProbe = p;
     }
   }
   return best;
@@ -613,7 +638,7 @@ parseCsv(String csv, {DecimalConvention? convention}) {
     return (const [], const [], unreadable: const [], ambiguous: const []);
   }
 
-  final delimiter = _detectDelimiter(lines.first);
+  final delimiter = _detectDelimiter(lines);
   final header = parseCsvLine(lines.first, delimiter: delimiter);
   final seriesNames = header.length > 1 ? header.sublist(1) : <String>[];
   final rows = [

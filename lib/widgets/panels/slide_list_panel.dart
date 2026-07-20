@@ -835,12 +835,13 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
                   return;
                 }
                 final idx = ref.read(editorProvider).selectedIndex;
-                notifier.addSlide(SlideType.image, afterIndex: idx);
-                notifier.updateSlide(
-                  idx + 1,
+                // Eén stap, niet toevoegen-en-dan-vullen: dat waren twee
+                // ongedaan-maak-stappen, dus één keer Cmd+Z liet een lege dia
+                // achter in plaats van de plakactie terug te draaien.
+                final at = notifier.insertSlides([
                   Slide.create(SlideType.image).copyWith(imagePath: path),
-                );
-                editorNotifier.select(idx + 1);
+                ], afterIndex: idx);
+                if (at >= 0) editorNotifier.select(at);
               },
               icon: const Icon(Icons.image_outlined, size: 14),
               label: Text(l10n.d('Afbeelding plakken')),
@@ -912,11 +913,11 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
               child: OutlinedButton.icon(
                 onPressed: () {
                   final idx = ref.read(editorProvider).selectedIndex;
-                  notifier.addSlide(clipboard.type, afterIndex: idx);
-                  // Replace the newly created blank slide with the copied one
-                  final newIdx = idx + 1;
-                  notifier.updateSlide(newIdx, Slide.duplicate(clipboard));
-                  editorNotifier.select(newIdx);
+                  // Eén ongedaan-maak-stap; zie "Afbeelding plakken" hierboven.
+                  final at = notifier.insertSlides([
+                    clipboard,
+                  ], afterIndex: idx);
+                  if (at >= 0) editorNotifier.select(at);
                 },
                 icon: const Icon(Icons.content_paste, size: 14),
                 label: Text(l10n.d('Slide plakken')),

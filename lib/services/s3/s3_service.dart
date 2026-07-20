@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -554,12 +555,22 @@ class S3Service {
     }
   }
 
+  /// Hoe lang er tussen twee brokken van een antwoord mag zitten.
+  ///
+  /// De `.timeout(...)` bij het versturen hangt aan `request.close()`, en die
+  /// is klaar zodra de *kop* er is. Het lichaam werd daarna zonder enige
+  /// deadline uitgelezen: een endpoint dat met 200 OK antwoordt, één byte
+  /// stuurt en vervolgens zwijgt zonder de verbinding te sluiten, liet de
+  /// toekomst nooit voltooien. Dan draait de spinner eeuwig, wordt de socket
+  /// nooit opgeruimd en is er geen weg terug binnen de app.
+  static const _chunkTimeout = Duration(seconds: 60);
+
   Future<Uint8List> _readCappedBytes(
     HttpClientResponse response,
     int max,
   ) async {
     final builder = BytesBuilder(copy: false);
-    await for (final chunk in response) {
+    await for (final chunk in response.timeout(_chunkTimeout)) {
       builder.add(chunk);
       if (builder.length > max) {
         throw S3Exception(S3Error.tooLarge, 'Bestand te groot');
@@ -570,7 +581,13 @@ class S3Service {
 
   Future<String> _readCapped(HttpClientResponse response, int max) async {
     final bytes = await _readCappedBytes(response, max);
-    return String.fromCharCodes(bytes);
+    // ListObjectsV2 antwoordt in UTF-8. `String.fromCharCodes` leest elke byte
+    // als één teken, dus `café.md` werd `cafÃ©.md`: zichtbaar in de bladerlijst,
+    // maar bij het openen opnieuw gecodeerd tot `%C3%83%C2%A9` en dus een 404 op
+    // een bestand dat er gewoon staat. De WebDAV-kant deed dit al goed.
+    // `allowMalformed`, want een kapot antwoord mag geen uitzondering worden op
+    // een pad dat alleen een lijst wil tonen.
+    return utf8.decode(bytes, allowMalformed: true);
   }
 
   /// Ontleedt een ListObjectsV2-antwoord.

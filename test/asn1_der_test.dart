@@ -68,4 +68,46 @@ void main() {
       expect(parseDer(Uint8List.fromList([0x30, 0x05, 0x01])), isNull);
     });
   });
+
+  group('vijandige invoer', () {
+    Uint8List nested(int depth) {
+      List<int> cur = [0x05, 0x00];
+      for (var d = 0; d < depth; d++) {
+        final n = cur.length;
+        final List<int> len;
+        if (n < 0x80) {
+          len = [n];
+        } else if (n < 0x100) {
+          len = [0x81, n];
+        } else if (n < 0x10000) {
+          len = [0x82, (n >> 8) & 0xff, n & 0xff];
+        } else {
+          len = [0x83, (n >> 16) & 0xff, (n >> 8) & 0xff, n & 0xff];
+        }
+        cur = [0x30, ...len, ...cur];
+      }
+      return Uint8List.fromList(cur);
+    }
+
+    test('diep geneste DER geeft null in plaats van een stack overflow', () {
+      // Het token staat in de front matter van het deck en wordt gelezen bij het
+      // bouwen van het zegelvenster, dus dit liet de app omvallen op een bestand
+      // dat iemand je stuurt. StackOverflowError is een Error, geen Exception:
+      // de `on RangeError` ving hem niet en de aanroeper evenmin.
+      expect(parseDer(nested(200)), isNull);
+    });
+
+    test('een normale nesting blijft gewoon werken', () {
+      final node = parseDer(nested(8));
+      expect(node, isNotNull);
+      expect(node!.descendantsAndSelf.length, 9);
+    });
+
+    test('een onbepaalde lengte (BER) wordt geweigerd', () {
+      // `30 80` is in DER ongeldig. Het werd als lengte nul gelezen, waarna de
+      // inhoud buiten de boom viel en een niveau hoger opnieuw werd uitgelegd —
+      // in een verificatiepad precies het soort verschil dat je niet wilt.
+      expect(parseDer(Uint8List.fromList([0x30, 0x80, 0x05, 0x00])), isNull);
+    });
+  });
 }

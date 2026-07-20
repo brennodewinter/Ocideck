@@ -146,11 +146,12 @@ class RecoveryService {
       final dir = await _dir();
       final now = DateTime.now();
       for (final entry in dir.listSync()) {
-        // `.json.tmp` = restant van een atomaire write die een crash niet
-        // haalde; net zo goed plaintext-residu, dus dezelfde houdbaarheid.
+        // Een `.tmp` is het restant van een atomaire write die een crash niet
+        // haalde; net zo goed plaintext-residu, dus dezelfde houdbaarheid. De
+        // naam draagt sinds kort een teller (`.json.3.tmp`), dus matchen op het
+        // achtervoegsel alleen.
         if (entry is! File ||
-            !(entry.path.endsWith('.json') ||
-                entry.path.endsWith('.json.tmp'))) {
+            !(entry.path.endsWith('.json') || entry.path.endsWith('.tmp'))) {
           continue;
         }
         try {
@@ -221,8 +222,7 @@ class RecoveryService {
       final dir = await _dir();
       for (final entry in dir.listSync()) {
         if (entry is File &&
-            (entry.path.endsWith('.json') ||
-                entry.path.endsWith('.json.tmp'))) {
+            (entry.path.endsWith('.json') || entry.path.endsWith('.tmp'))) {
           try {
             await entry.delete();
           } catch (e) {

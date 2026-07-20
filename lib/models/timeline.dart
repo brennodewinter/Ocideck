@@ -78,7 +78,7 @@ class TimelineEvent {
   /// a single segment is treated as the title.
   factory TimelineEvent.fromBullet(String raw) {
     final text = raw.replaceFirst(RegExp(r'^[\t ]+'), '').trim();
-    final parts = text.split(timelineFieldSeparator);
+    final parts = _splitEscaped(text);
     if (parts.length == 1) {
       return TimelineEvent(title: parts[0].trim());
     }
@@ -95,13 +95,55 @@ class TimelineEvent {
   /// Serialize back to the canonical bullet form, dropping trailing empty
   /// fields so simple events stay simple in the `.md`.
   String toBullet() {
+    // Alleen de laatste twee velden mogen de scheiding bevatten: `description`
+    // is de staart en krijgt alles wat erna komt. `marker` en `title` moeten
+    // ontsnappen, anders schuift elk veld een plek op bij het inlezen — een
+    // titel "Fase A :: B" werd marker "Fase A" met titel "B".
+    final m = _escape(marker);
+    final t = _escape(title);
     if (description.trim().isNotEmpty) {
-      return '$marker$timelineFieldSeparator$title$timelineFieldSeparator$description';
+      return '$m$timelineFieldSeparator$t$timelineFieldSeparator$description';
     }
     if (marker.trim().isNotEmpty) {
-      return '$marker$timelineFieldSeparator$title';
+      return '$m$timelineFieldSeparator$t';
     }
-    return title;
+    return t;
+  }
+
+  /// De scheiding onschadelijk maken in een veld dat hem niet mag dragen.
+  static String _escape(String v) =>
+      v.replaceAll(r'\', r'\\').replaceAll(timelineFieldSeparator, r'\::\');
+
+  static String _unescape(String v) =>
+      v.replaceAll(r'\::\', timelineFieldSeparator).replaceAll(r'\\', r'\');
+
+  /// Splitst op een níét-ontsnapte scheiding, en haalt daarna de ontsnapping weg.
+  static List<String> _splitEscaped(String text) {
+    final out = <String>[];
+    final buf = StringBuffer();
+    var i = 0;
+    while (i < text.length) {
+      if (text.startsWith(r'\\', i)) {
+        buf.write(r'\\');
+        i += 2;
+        continue;
+      }
+      if (text.startsWith(r'\::\', i)) {
+        buf.write(r'\::\');
+        i += 4;
+        continue;
+      }
+      if (text.startsWith(timelineFieldSeparator, i)) {
+        out.add(_unescape(buf.toString()));
+        buf.clear();
+        i += timelineFieldSeparator.length;
+        continue;
+      }
+      buf.write(text[i]);
+      i++;
+    }
+    out.add(_unescape(buf.toString()));
+    return out;
   }
 
   TimelineEvent copyWith({

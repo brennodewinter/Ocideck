@@ -68,6 +68,13 @@ class IoLocalCveDatabase implements LocalCveDatabase {
 /// vastgezet — óók de tweede en derde hop. Alleen https, en hoogstens vijf
 /// sprongen.
 class GithubBulkTransport implements CveBulkTransport {
+  /// Hoe lang er tussen twee brokken mag zitten. Dit pad had als enige helemaal
+  /// géén deadline — en juist hier is dat kwalijk: het afbreken van een ingest
+  /// werkt door een vlag te pollen ín de byteslus, dus een antwoord dat
+  /// halverwege stilvalt maakte de Afbreken-knop onbruikbaar en liet de
+  /// download-status voorgoed op "bezig" staan.
+  static const _chunkTimeout = Duration(seconds: 60);
+
   const GithubBulkTransport();
 
   static const _userAgent = 'OciDeck';
@@ -133,7 +140,10 @@ class GithubBulkTransport implements CveBulkTransport {
       if (response.statusCode != 200) {
         throw HttpException('HTTP ${response.statusCode}', uri: url);
       }
-      return await response.transform(utf8.decoder).join();
+      return await response
+          .timeout(_chunkTimeout)
+          .transform(utf8.decoder)
+          .join();
     } on SocketException catch (e) {
       throw CveIngestException(CveIngestFailure.networkFailed, e.message);
     } finally {
@@ -164,7 +174,7 @@ class GithubBulkTransport implements CveBulkTransport {
       var received = 0;
       sink = destination.openWrite();
 
-      await for (final chunk in response) {
+      await for (final chunk in response.timeout(_chunkTimeout)) {
         if (isCancelled()) {
           throw const CveIngestException(CveIngestFailure.cancelled);
         }

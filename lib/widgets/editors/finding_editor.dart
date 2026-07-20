@@ -1,3 +1,4 @@
+import '../../utils/image_limits.dart' show boundedFileImage;
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -536,8 +537,8 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
       if (resolved != null) {
         return ClipRRect(
           borderRadius: BorderRadius.circular(4),
-          child: Image.file(
-            File(resolved),
+          child: Image(
+            image: boundedFileImage(File(resolved), 176),
             fit: BoxFit.cover,
             // Bewijsmateriaal is vaak een schermafdruk van enkele duizenden
             // pixels breed, terwijl deze duim 44 logische pixels meet. Zonder
@@ -545,7 +546,6 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
             // rapport met tientallen bewijsstukken loopt dat hard op. 176 is
             // vier keer de weergavebreedte en dus ruim boven elke realistische
             // pixelverhouding, zodat er niets zichtbaar verslechtert.
-            cacheWidth: 176,
             errorBuilder: (_, _, _) => _evidenceIcon(isVideo),
           ),
         );

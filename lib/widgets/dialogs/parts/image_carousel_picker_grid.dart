@@ -86,10 +86,9 @@ extension _CarouselGrid on _ImageCarouselPickerState {
               fit: StackFit.expand,
               children: [
                 // Thumbnail
-                Image.file(
-                  File(path),
+                Image(
+                  image: boundedFileImage(File(path), 360),
                   fit: BoxFit.cover,
-                  cacheWidth: 360,
                   errorBuilder: (context, error, stackTrace) => Container(
                     color: ImagePickerPalette.surface1,
                     child: const Icon(
@@ -327,10 +326,9 @@ extension _CarouselGrid on _ImageCarouselPickerState {
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    Image.file(
-                      File(path),
+                    Image(
+                      image: boundedFileImage(File(path), 1000),
                       fit: BoxFit.cover,
-                      cacheWidth: 1000,
                       errorBuilder: (context, error, stackTrace) => Container(
                         color: ImagePickerPalette.surface1,
                         child: const Icon(

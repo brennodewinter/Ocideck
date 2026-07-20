@@ -91,6 +91,25 @@ class CappedImage extends ImageProvider<CappedImage> {
   String toString() => 'CappedImage($cacheKey, scale: $scale)';
 }
 
+/// Een miniatuur-provider die op béide assen begrensd is.
+///
+/// `Image.file(cacheWidth: n)` begrenst alleen de breedte: de hoogte wordt
+/// `n × H/W` en is dus onbegrensd. Een geldige PNG van 512 × 400000 — een paar
+/// KB op schijf — decodeerde in de afbeeldingkiezer tot honderden megabytes, en
+/// die kiezer loopt de projectmap automatisch af, dus je hoefde het bestand niet
+/// eens aan te klikken.
+///
+/// Béide meegeven aan `cacheWidth`/`cacheHeight` is niet de oplossing: dat
+/// gebruikt [ResizeImagePolicy.exact] en trekt de afbeelding scheef. Vandaar
+/// `fit`, dat binnen het vierkant past met behoud van verhouding.
+ImageProvider boundedFileImage(File file, int maxEdge) => ResizeImage(
+  FileImage(file),
+  width: maxEdge,
+  height: maxEdge,
+  policy: ResizeImagePolicy.fit,
+  allowUpscaling: false,
+);
+
 /// A capped-decode provider for a deck-supplied image **file**. Decodes at
 /// native resolution within [kMaxImageDecodeDimension] (so an animated GIF keeps
 /// animating) and only scales huge images down. Keyed by path like [FileImage].

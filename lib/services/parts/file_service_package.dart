@@ -110,6 +110,9 @@ extension FileServicePackage on FileService {
   Future<Archive> _buildPackageArchive(Deck deck) async {
     final archive = Archive();
     final added = <String>{};
+    // Bronpad → archiefpad, zodat hetzelfde bestand één keer wordt opgenomen en
+    // twéé verschillende bestanden met dezelfde naam allebei meegaan.
+    final byAbsolutePath = <String, String>{};
     // Stabiel lidpad per mem:-asset, zodat imagePath en imagePath2 die
     // dezelfde afbeelding delen ook hetzelfde pakket-lid krijgen.
     final memRels = <String, String>{};
@@ -163,12 +166,13 @@ extension FileServicePackage on FileService {
       }
       final file = File(abs);
       if (!await file.exists()) return null;
-      final rel = p.posix.join(subdir, p.basename(abs));
-      if (!added.contains(rel)) {
-        final bytes = await file.readAsBytes();
-        archive.add(ArchiveFile(rel, bytes.length, bytes));
-        added.add(rel);
-      }
+      final existing = byAbsolutePath[abs];
+      if (existing != null) return existing;
+      final rel = _freeArchivePath(added, subdir, abs);
+      final bytes = await file.readAsBytes();
+      archive.add(ArchiveFile(rel, bytes.length, bytes));
+      added.add(rel);
+      byAbsolutePath[abs] = rel;
       return rel;
     }
 
@@ -253,6 +257,26 @@ extension FileServicePackage on FileService {
 
   /// Voeg een méégebundelde asset (asset:-pad, bv. het logo van een ingebouwd
   /// profiel) vanuit de rootBundle toe aan het pakket-archief.
+  /// Een nog vrije plek in het archief voor [abs], onder [subdir].
+  ///
+  /// Twee bestanden met dezelfde naam uit verschillende mappen — een
+  /// `screenshot.png` van het bureaublad en één uit Downloads — kregen dezelfde
+  /// plek. De tweede werd dan niet geschreven maar kreeg wél dat pad terug, dus
+  /// beide dia's wezen naar de inhoud van de eerste: het bewijs van de ene dia
+  /// stond onder de andere, en van het origineel zat niets in het pakket. De
+  /// `mem:`-tak hiernaast telde al door; deze niet.
+  static String _freeArchivePath(Set<String> added, String subdir, String abs) {
+    final base = p.basenameWithoutExtension(abs);
+    final ext = p.extension(abs);
+    var rel = p.posix.join(subdir, '$base$ext');
+    var i = 2;
+    while (added.contains(rel)) {
+      rel = p.posix.join(subdir, '$base ($i)$ext');
+      i++;
+    }
+    return rel;
+  }
+
   Future<String?> _addBundledAssetTo(
     Archive archive,
     Set<String> added,

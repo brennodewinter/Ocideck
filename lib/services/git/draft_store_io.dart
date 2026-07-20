@@ -1,3 +1,4 @@
+import '../../utils/log.dart';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -105,11 +106,39 @@ class FileDraftStore implements DraftStore {
     // Vervang de map in z'n geheel: een lid dat in deze versie niet meer bestaat
     // hoort ook niet meer op schijf te staan, anders zou een verwijderde slide
     // z'n asset laten rondslingeren.
-    await discardDeck(deckDir);
+    //
+    // Eerst schrijven, dan pas opruimen. Andersom — en zo stond het hier — is er
+    // een moment waarop de oude werkkopie al weg is en de nieuwe nog niet
+    // bestaat. Een crash of een volle schijf in dat gat kostte het wachtende
+    // offline werk: de wachtrij verwees dan naar een lege map, en het legen
+    // daarvan leest dat als "deck verworpen" en meldt succes.
     for (final entry in targets.entries) {
       final file = File(entry.key);
       await file.parent.create(recursive: true);
       await writeBytesAtomic(file, entry.value);
+    }
+    await _removeStrayMembers(deckDir, targets.keys.toSet());
+  }
+
+  /// Ruimt op wat er nog in de deckmap ligt maar niet in [keep] staat.
+  ///
+  /// De tegenhanger van het "vervang de map in z'n geheel"-gedrag, maar dan
+  /// zonder het gat: de nieuwe versie staat er al voordat hier iets verdwijnt.
+  Future<void> _removeStrayMembers(String deckDir, Set<String> keep) async {
+    final abs = await _absolute(deckDir);
+    if (abs == null) return;
+    final dir = Directory(abs);
+    if (!dir.existsSync()) return;
+    for (final entry in dir.listSync(recursive: true)) {
+      if (entry is! File) continue;
+      if (keep.contains(entry.path)) continue;
+      // Een tijdelijk bestand van een schrijfbeurt die nog loopt, laten staan.
+      if (entry.path.endsWith('.tmp')) continue;
+      try {
+        entry.deleteSync();
+      } catch (e) {
+        logWarning('DraftStore: restant niet verwijderd', e);
+      }
     }
   }
 

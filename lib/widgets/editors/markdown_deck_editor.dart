@@ -81,9 +81,21 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
     // Bij het wisselen van omvang (hele presentatie ↔ slide) of van de actieve
     // slide levert het paneel verse [initialContent]. De widget blijft bestaan
     // (zodat de toggle animeert), dus laden we de nieuwe inhoud hier in en
-    // ruimen we validatie/zoekstaat op. Eigen tikwerk verandert alleen
-    // [_ctrl.text], niet [initialContent], dus dat blijft ongemoeid.
+    // ruimen we validatie/zoekstaat op.
+    //
+    // Maar niet over ongetoepast tikwerk heen. Deze editor is een wachtruimte:
+    // niets bereikt het deck vóór "Toepassen". Het paneel bérekent
+    // [initialContent] echter opnieuw bij elke opbouw, dus élke wijziging elders
+    // — een dia toevoegen, dupliceren, overslaan, één klik in de lijst ernaast —
+    // leverde verse inhoud op en gooide het getypte werk weg. Zonder
+    // waarschuwing, en ongedaan maken kwam er niet bij, want het had het deck
+    // nooit bereikt.
+    //
+    // Staat er iets ongetoepasts, dan wint dat. De inhoud loopt dan achter op
+    // het deck, maar dat is precies wat een wachtruimte hoort te doen: bij
+    // "Toepassen" schrijft hij toch het geheel.
     if (widget.initialContent != oldWidget.initialContent) {
+      if (_ctrl.text != oldWidget.initialContent) return;
       _ctrl.text = widget.initialContent;
       setState(() {
         _validation = null;

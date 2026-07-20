@@ -348,6 +348,73 @@ extension TabsNotifierGit on TabsNotifier {
     );
   }
 
+  /// De bestanden die deze opslag naar de repo schrijft.
+  ///
+  /// Gaat het netwerk op: `AssetPool.existing` vraagt de forge welke blobs er al
+  /// staan. Dat is de reden dat de aanroeper hem in een `try` zet — stond deze
+  /// stap erbuiten, dan vloog een netwerkfout langs de afhandeling heen en kwam
+  /// het werk nooit in de wachtrij, precies het geval waarvoor die bestaat. En
+  /// dat trof élk uit git geopend deck, want [_withRepoAssets] zet bij het
+  /// openen alle verwijzingen om naar `mem:`, dus de pool wordt altijd geraadpleegd.
+  ///
+  /// Een uit git geopend deck houdt zijn afbeeldingen als `mem:` op élk platform;
+  /// [ImageService.readSlideImageBytes] leest `mem:` alleen op web. Dus `mem:`
+  /// eerst zelf, en pas daarna het bestandspad-pad. De pool leest van [branch]:
+  /// de werkbranch takt daarvan af en deelt dus zijn boom, en daarmee de blobs.
+  Future<RepoDeckFiles> _repoFilesFor(
+    Deck deck,
+    GitForge forge, {
+    required String branch,
+    required String deckDir,
+  }) {
+    final image = ImageService();
+    return buildDeckRepoFiles(
+      deck,
+      md: _md,
+      pool: AssetPool(forge: forge, branch: branch),
+      deckDir: deckDir,
+      resolveBytes: (path) async => WebAssetStore.isMemPath(path)
+          ? WebAssetStore.bytesFor(path)
+          : image.readSlideImageBytes(path, projectPath: deck.projectPath),
+    );
+  }
+
+  /// Parkeert het werk in de wachtrij wanneer [e] een netwerkfout is en er een
+  /// wachtrij ís; anders null, en dan hoort de aanroeper de fout te laten staan.
+  ///
+  /// Verbinding kwijt is uitstel, geen mislukking (§8.5). Auth- en vormfouten
+  /// zijn dat wél: opnieuw proberen lost die niet op.
+  Future<GitSaveResult?> _queueIfOffline(
+    GitForgeException e,
+    DeckMirror? mirror,
+    Outbox? outbox,
+    ({
+      Deck deck,
+      String deckDir,
+      String branch,
+      String message,
+      String baseSha,
+      String? forkFrom,
+    })
+    queue, {
+    List<String> warnings = const [],
+  }) {
+    if (e.kind != GitForgeError.network || mirror == null || outbox == null) {
+      return Future.value(null);
+    }
+    return _queueGitSave(
+      mirror,
+      outbox,
+      deck: queue.deck,
+      deckDir: queue.deckDir,
+      branch: queue.branch,
+      message: queue.message,
+      baseSha: queue.baseSha,
+      forkFrom: queue.forkFrom,
+      warnings: warnings,
+    );
+  }
+
   Future<GitSaveResult> saveToGit(
     GitForge forge, {
     required GitRepoConfig config,
@@ -371,13 +438,7 @@ extension TabsNotifierGit on TabsNotifier {
         'Pad is geen deckmap volgens de repo-layout',
       );
     }
-    // Zet het tabblad vást vóór het eerste wachtpunt. Een commit gaat over het
-    // netwerk en duurt; wisselt de gebruiker ondertussen van tabblad, dan zou
-    // `currentState.current` daarna een ánder deck aanwijzen en landde de nieuwe
-    // [GitOrigin] — of een samengevoegd deck — bij het verkeerde tabblad. Dat
-    // tabblad committeert bij de volgende opslag zijn eigen inhoud over de
-    // deckmap van dit deck heen. [saveToWebdav] en [saveToS3] krijgen hun
-    // tabblad niet voor niets als parameter mee.
+    // Vóór het eerste wachtpunt vastzetten — zie [_mergeOnConflict] voor waarom.
     final tab = currentState.current;
     final deck = tab?.deckNotifier.currentState.deck;
     if (deck == null) {
@@ -403,16 +464,29 @@ extension TabsNotifierGit on TabsNotifier {
     // alleen op web. Dus mem: eerst zelf, en pas daarna het bestandspad-pad. De
     // pool leest van [branch]: de werkbranch takt daarvan af en deelt dus zijn
     // boom, dus dezelfde blobs.
-    final image = ImageService();
-    final files = await buildDeckRepoFiles(
-      deck,
-      md: _md,
-      pool: AssetPool(forge: forge, branch: branch),
+    // Wat het parkeren nodig heeft; het pad komt tweemaal langs.
+    final queue = (
+      deck: deck,
       deckDir: deckDir,
-      resolveBytes: (path) async => WebAssetStore.isMemPath(path)
-          ? WebAssetStore.bytesFor(path)
-          : image.readSlideImageBytes(path, projectPath: deck.projectPath),
+      branch: workBranch,
+      message: message,
+      baseSha: round.baseSha,
+      forkFrom: forkFrom,
     );
+    final RepoDeckFiles files;
+    try {
+      files = await _repoFilesFor(
+        deck,
+        forge,
+        branch: branch,
+        deckDir: deckDir,
+      );
+    } on GitForgeException catch (e) {
+      // Het bouwen gaat zélf het netwerk op; zie [_repoFilesFor].
+      final queued = await _queueIfOffline(e, mirror, outbox, queue);
+      if (queued != null) return queued;
+      rethrow;
+    }
 
     try {
       final resolved = await _roundBaseSha(
@@ -474,19 +548,14 @@ extension TabsNotifierGit on TabsNotifier {
       // een wachtrij is (§8.5). De werkbranch bestaat dan misschien nog niet —
       // [forkFrom] reist mee zodat het flushen hem alsnog aanmaakt (D3). Auth- of
       // vormfouten blijven een echte mislukking; opnieuw proberen lost ze niet op.
-      if (e.kind == GitForgeError.network && mirror != null && outbox != null) {
-        return _queueGitSave(
-          mirror,
-          outbox,
-          deck: deck,
-          deckDir: deckDir,
-          branch: workBranch,
-          message: message,
-          baseSha: round.baseSha,
-          forkFrom: forkFrom,
-          warnings: files.warnings,
-        );
-      }
+      final queued = await _queueIfOffline(
+        e,
+        mirror,
+        outbox,
+        queue,
+        warnings: files.warnings,
+      );
+      if (queued != null) return queued;
       logWarning('saveToGit: $deckDir niet opgeslagen', e);
       return GitSaveResult(
         status: GitSaveStatus.failed,
@@ -514,8 +583,14 @@ extension TabsNotifierGit on TabsNotifier {
     GitForge forge, {
 
     /// Het tabblad waar dit deck in staat, vastgezet vóór het eerste wachtpunt.
-    /// Zie [saveToGit]: de merge doet drie netwerkrondes, en het resultaat moet
-    /// bij dít deck landen, niet bij wat er dan toevallig vooraan staat.
+    ///
+    /// Een commit gaat over het netwerk en duurt; wisselt de gebruiker
+    /// ondertussen van tabblad, dan wijst `currentState.current` daarna een
+    /// ánder deck aan en landt de nieuwe [GitOrigin] — of, hier, een
+    /// samengevoegd deck — bij het verkeerde tabblad. Dat tabblad committeert
+    /// bij de volgende opslag zijn eigen inhoud over de deckmap van dit deck
+    /// heen. [saveToWebdav] en [saveToS3] krijgen hun tabblad niet voor niets
+    /// als parameter mee; het git-pad was de uitzondering.
     required TabInfo? tab,
     required GitRepoConfig config,
     required String deckDir,

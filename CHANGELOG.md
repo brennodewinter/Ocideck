@@ -620,6 +620,50 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   een strafzaak gaat. Een markering verbergt een waarde, geen onderwerp.
 
 ### Fixed
+- **De staart van de bugjacht: ruim twintig bevindingen ineens.** Wat overbleef
+  na de eerdere rondes — geen samenhangend cluster meer, maar wel stuk voor stuk
+  een pad waarlangs iets stils misging.
+
+  *Privacy en veiligheid.* Een tijdstempeltoken van duizenden niveaus diep liet
+  de app omvallen bij het openen van een deck dat iemand je stuurt. Vier velden
+  werden nooit gescand — `version`, `date`, de standaarden- en
+  gereedschapslijst, het scope-object en, het kwalijkst, de MIAUW-motiveringen,
+  die base64-gecodeerd meereizen en dus voor elk vangnet onzichtbaar zijn. Wat
+  niet gescand wordt, wordt ook niet geredigeerd. Een kolomkop telde niet mee als
+  context, waardoor een kolom "BSN" met nummers eronder slechts een aanwijzing
+  opleverde. En bij een tabel met ongelijke rijen botsten celindexen, zodat een
+  redactie op de verkeerde cel landde.
+
+  *Werk dat verdween.* Een beschadigde bijschrift-sidecar nam alle andere
+  bijschriften in die map mee. De inhoud van een dia kon via een foutmelding in
+  de log belanden. Een opslag zonder verbinding kwam niet in de wachtrij. De
+  offline werkkopie werd gewist vóór de nieuwe was geschreven. Twee gelijktijdige
+  schrijvers deelden één tijdelijk bestand. De markdown-editor gooide getypt werk
+  weg zodra je elders in het deck iets veranderde. En bij platte opslag gingen de
+  afbeeldingen vóór het bestand dat de conflictbewaking draagt.
+
+  *Verkeerd gelezen, verkeerd geschreven.* S3-lijsten werden als Latin-1 gelezen,
+  zodat `café.md` onvindbaar werd. De tijdlijn-scheiding ontsnapte niet. Een
+  reeksnaam met puntkomma's stemde het CSV-scheidingsteken weg. Twee bestanden
+  met dezelfde naam werden één bestand in een pakket. Een miniatuur was maar op
+  één as begrensd.
+
+  *Hangen, blokkeren, wachten.* Een antwoord dat halverwege stilvalt hing voor
+  altijd — de timeouts dekten alleen de kop. Het uitpakken van het CVE-archief
+  blokkeerde het scherm en maakte Afbreken onbruikbaar. Zoeken las de hele index
+  uit, ook als er allang genoeg gevonden was. En de rijke tekst mat het hele
+  document opnieuw bij elke aanslag: 26 ms → 0,002 ms.
+
+  *En de rest.* De prullenbak liet sidecars achter, een volle schijf kon een
+  geredigeerd rapport zonder manifest achterlaten, plakken was twee
+  ongedaan-maak-stappen, en Ctrl/Cmd+F deed in de gewone editor niets terwijl de
+  sneltoets de toets wél opat.
+
+  Het fetch-hulppunt kreeg een poortgrens en een plafond op gelijktijdige
+  verzoeken. De moduletekst beloofde dat een niet-geconfigureerde deployment geen
+  open relais is; dat klopt niet — `Sec-Fetch-Site` houdt browsers tegen, geen
+  `curl` — en die belofte is nu bijgesteld in plaats van andersom.
+
 - **Zeven velden konden uit een opgeleverd bevindingsrapport verdwijnen.** Alle
   zeven zonder melding, en de meeste pas zichtbaar bij de klant.
 

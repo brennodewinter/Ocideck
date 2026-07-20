@@ -807,7 +807,17 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
 
   // ── Annotatielaag ─────────────────────────────────────────────────────────
 
+  /// Of het afsluiten al loopt. Zonder deze vlag kon `_exit` twee keer starten:
+  /// hij wacht op de oefensamenvatting én op het herstellen van het venster (op
+  /// macOS een animatie van een halve seconde), en al die tijd blijft de route
+  /// gemonteerd — dus `mounted` is nog waar. Twee keer `Navigator.pop` haalt ook
+  /// het scherm eronder weg. Bereikbaar vanaf zes plekken, waarvan de
+  /// makkelijkste gewoon doorklikken voorbij de laatste dia is.
+  bool _exiting = false;
+
   Future<void> _exit() async {
+    if (_exiting) return;
+    _exiting = true;
     _advanceTimer?.cancel();
     await _maybeShowRehearsalSummary();
     final aw = widget.audience;
