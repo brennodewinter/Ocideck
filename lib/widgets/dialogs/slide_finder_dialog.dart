@@ -4,8 +4,10 @@ import 'package:path/path.dart' as p;
 import '../../models/library_folder.dart';
 import '../../models/slide.dart';
 import '../../services/file_service.dart';
+import '../../services/presentation_search/presentation_source.dart';
 import '../../services/slide_dedup_service.dart';
 import '../../theme/app_theme.dart';
+import '../../utils/log.dart';
 import '../../l10n/app_localizations.dart';
 import '../slides/slide_preview.dart';
 import 'slide_diff_dialog.dart';
@@ -37,6 +39,11 @@ class SlideFinderDialog extends StatefulWidget {
   /// The roots to scan (libraries plus the open deck's folder). Empty shows an
   /// inviting empty state. Overlapping roots are de-duplicated per file.
   final List<LibraryFolder> roots;
+
+  /// Remote bronnen (git, WebDAV, S3) die naast de lokale mappen worden
+  /// doorzocht. Elke bron scant op de achtergrond bij het openen; treffers
+  /// verschijnen zodra ze binnen zijn.
+  final List<PresentationSource> remoteSources;
   final String? excludePath;
 
   /// Called with a slide (image paths already resolved to absolute) that the
@@ -48,6 +55,7 @@ class SlideFinderDialog extends StatefulWidget {
     required this.fileService,
     required this.roots,
     required this.onAdd,
+    this.remoteSources = const [],
     this.excludePath,
   });
 
@@ -56,6 +64,7 @@ class SlideFinderDialog extends StatefulWidget {
     required FileService fileService,
     required List<LibraryFolder> roots,
     required void Function(Slide slide) onAdd,
+    List<PresentationSource> remoteSources = const [],
     String? excludePath,
   }) {
     return showDialog<void>(
@@ -64,6 +73,7 @@ class SlideFinderDialog extends StatefulWidget {
         fileService: fileService,
         roots: roots,
         onAdd: onAdd,
+        remoteSources: remoteSources,
         excludePath: excludePath,
       ),
     );
@@ -78,11 +88,22 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
 
   final _dedup = SlideDedupService();
 
-  /// De te doorzoeken wortels. Start op alle aangewezen bronnen; de mapkeuze-
-  /// knop kan tijdelijk naar één specifieke map versmallen.
+  /// De te doorzoeken lokale wortels. Start op alle aangewezen bibliotheken; de
+  /// mapkeuze-knop kan tijdelijk naar één specifieke map versmallen.
   late List<LibraryFolder> _roots;
-  bool _loading = false;
-  List<ScannedPresentation> _presentations = const [];
+  bool _localLoading = false;
+
+  /// Lokale treffers (herladen bij een mapkeuze) en remote treffers (druppelen
+  /// binnen per bron). Apart gehouden zodat een nieuwe lokale scan de remote
+  /// resultaten niet weggooit.
+  List<ScannedPresentation> _local = const [];
+  List<ScannedPresentation> _remote = const [];
+
+  /// Labels van remote bronnen die nog scannen, en die faalden — voor de
+  /// voortgangs- en foutmelding boven het raster.
+  final Set<String> _remotePending = {};
+  final Set<String> _remoteFailed = {};
+
   String _query = '';
   int _addedCount = 0;
 
@@ -94,15 +115,25 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
   void initState() {
     super.initState();
     _roots = List.of(widget.roots);
-    if (_roots.isNotEmpty) _scan();
+    _scanLocal();
+    _remotePending.addAll(widget.remoteSources.map((s) => s.label));
+    for (final source in widget.remoteSources) {
+      _scanRemote(source);
+    }
   }
 
   /// De eerste wortel als startmap voor de native mapkiezer.
   String? get _firstRootPath => _roots.isEmpty ? null : _roots.first.path;
 
-  Future<void> _scan() async {
-    if (_roots.isEmpty) return;
-    setState(() => _loading = true);
+  /// Alle presentaties, lokaal plus remote, in scan-volgorde.
+  List<ScannedPresentation> get _all => [..._local, ..._remote];
+
+  Future<void> _scanLocal() async {
+    if (_roots.isEmpty) {
+      setState(() => _local = const []);
+      return;
+    }
+    setState(() => _localLoading = true);
     final all = <ScannedPresentation>[];
     final seen = <String>{};
     for (final root in _roots) {
@@ -117,9 +148,38 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
     }
     if (!mounted) return;
     setState(() {
-      _presentations = all;
-      _loading = false;
+      _local = all;
+      _localLoading = false;
     });
+  }
+
+  /// Scan één remote bron op de achtergrond; de treffers verschijnen zodra ze
+  /// er zijn. Een fout blijft bij deze bron — hij verhuist van "bezig" naar
+  /// "mislukt" — zonder de andere bronnen of het lokale zoeken te blokkeren.
+  Future<void> _scanRemote(PresentationSource source) async {
+    try {
+      final results = await source.scan();
+      if (!mounted) return;
+      final seen = _remote.map((e) => e.path).toSet();
+      final fresh = [
+        for (final r in results)
+          if (seen.add(r.path)) r,
+      ];
+      setState(() {
+        _remote = [..._remote, ...fresh];
+        _remotePending.remove(source.label);
+      });
+    } catch (e) {
+      logWarning(
+        'SlideFinder: bron kon niet worden doorzocht (${source.label})',
+        e,
+      );
+      if (!mounted) return;
+      setState(() {
+        _remotePending.remove(source.label);
+        _remoteFailed.add(source.label);
+      });
+    }
   }
 
   Future<void> _pickDirectory() async {
@@ -132,7 +192,7 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
       setState(
         () => _roots = [LibraryFolder(name: p.basename(result), path: result)],
       );
-      await _scan();
+      await _scanLocal();
     }
   }
 
@@ -177,7 +237,7 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
     if (q.isEmpty) return const [];
     final terms = q.split(RegExp(r'\s+')).where((t) => t.isNotEmpty).toList();
     final matches = <_Hit>[];
-    for (final pres in _presentations) {
+    for (final pres in _all) {
       for (var i = 0; i < pres.deck.slides.length; i++) {
         final text = _slideText(pres.deck.slides[i]);
         if (terms.every(text.contains)) {
@@ -313,10 +373,13 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
 
   Widget _body(SlideDedupResult<_Hit> result) {
     final l10n = context.l10n;
-    if (_loading) {
+    final scanning = _localLoading || _remotePending.isNotEmpty;
+    // Alleen een vol scherm-spinner zolang er nog niets te tonen is; zodra er
+    // treffers zijn scant de rest op de achtergrond verder (voortgangsregel).
+    if (scanning && _all.isEmpty) {
       return const Center(child: CircularProgressIndicator());
     }
-    if (_roots.isEmpty) {
+    if (_roots.isEmpty && widget.remoteSources.isEmpty) {
       return _empty(
         Icons.folder_off_outlined,
         l10n.d(
@@ -332,6 +395,13 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
     }
     final groups = result.groups;
     if (groups.isEmpty) {
+      // Nog niet alles doorzocht: "niets gevonden" zou misleiden.
+      if (scanning) {
+        return _empty(
+          Icons.travel_explore_outlined,
+          l10n.d('Bronnen doorzoeken…'),
+        );
+      }
       return _empty(
         Icons.search_off_outlined,
         '${l10n.d('Geen slides gevonden voor')} "${_query.trim()}".',
@@ -344,9 +414,41 @@ class _SlideFinderDialogState extends State<SlideFinderDialog> {
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: 8, left: 2),
-          child: Text(
-            _resultSummary(l10n, groups.length, hidden, result.truncated),
-            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+          child: Row(
+            children: [
+              Flexible(
+                child: Text(
+                  _resultSummary(l10n, groups.length, hidden, result.truncated),
+                  style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              if (scanning) ...[
+                const SizedBox(width: 10),
+                const SizedBox(
+                  width: 11,
+                  height: 11,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                ),
+                const SizedBox(width: 6),
+                Text(
+                  l10n.d('Bronnen doorzoeken…'),
+                  style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+                ),
+              ],
+              if (_remoteFailed.isNotEmpty) ...[
+                const SizedBox(width: 10),
+                Tooltip(
+                  message:
+                      '${l10n.d('Niet doorzocht')}:\n${_remoteFailed.join('\n')}',
+                  child: Icon(
+                    Icons.error_outline,
+                    size: 14,
+                    color: AppTheme.amber700,
+                  ),
+                ),
+              ],
+            ],
           ),
         ),
         Expanded(

@@ -1804,6 +1804,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Bronnen doorzoeken…': 'Търсене в източниците…',
+  'Niet doorzocht': 'Не е претърсено',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Тази проверка не се изпълнява в уеб версията: разпознаването на лица изисква системна библиотека, която браузърът няма. Използвайте настолната версия, за да проверите изображенията за лица.',
   'Media blijft niet bewaard in een los .md-bestand':

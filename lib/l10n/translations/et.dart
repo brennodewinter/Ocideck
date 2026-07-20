@@ -1772,6 +1772,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Bronnen doorzoeken…': 'Otsitakse allikatest…',
+  'Niet doorzocht': 'Ei otsitud',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'See kontroll veebiversioonis ei tööta: näotuvastus vajab süsteemiteeki, mida brauseris pole. Piltide näotuvastuseks kasuta lauaarvuti versiooni.',
   'Media blijft niet bewaard in een los .md-bestand':

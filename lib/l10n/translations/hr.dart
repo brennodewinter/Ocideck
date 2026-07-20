@@ -1788,6 +1788,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Bronnen doorzoeken…': 'Pretraživanje izvora…',
+  'Niet doorzocht': 'Nije pretraženo',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Ova se provjera ne izvodi u web verziji: prepoznavanje lica zahtijeva sistemsku biblioteku koju preglednik nema. Upotrijebite verziju za računalo da provjerite lica na slikama.',
   'Media blijft niet bewaard in een los .md-bestand':

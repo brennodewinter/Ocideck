@@ -201,45 +201,7 @@ extension TabsNotifierGit on TabsNotifier {
     Deck deck,
     AssetPool pool, {
     required String sourceName,
-  }) async {
-    final memFor = <String, String>{};
-    Future<String?> memPath(String reference) async {
-      if (!GitRepoLayout.isRepoAsset(reference)) return null;
-      final cached = memFor[reference];
-      if (cached != null) return cached;
-      try {
-        final bytes = await pool.resolve(reference);
-        // Een forge is onvertrouwd (P5): een blob onder een .png-naam hoeft geen
-        // afbeelding te zijn. Dezelfde controle als bij de pakket-import.
-        if (bytes.isEmpty ||
-            bytes.length > ImageService.maxImageBytes ||
-            !ImageService.looksLikeImage(bytes)) {
-          return null;
-        }
-        final path = GitRepoLayout.assetPathOf(reference);
-        final mem = WebAssetStore.put(
-          bytes,
-          name: path == null ? 'asset' : p.posix.basename(path),
-        );
-        memFor[reference] = mem;
-        return mem;
-      } on GitForgeException catch (e) {
-        logWarning('openDeckFromGit: asset onbereikbaar ($sourceName)', e);
-        return null;
-      }
-    }
-
-    final slides = <Slide>[];
-    for (final slide in deck.slides) {
-      slides.add(
-        slide.copyWith(
-          imagePath: await memPath(slide.imagePath) ?? slide.imagePath,
-          imagePath2: await memPath(slide.imagePath2) ?? slide.imagePath2,
-        ),
-      );
-    }
-    return memFor.isEmpty ? deck : deck.copyWith(slides: slides);
-  }
+  }) => resolveRepoAssetsToMem(deck, pool, sourceName: sourceName);
 
   /// Schrijf het deck van het huidige tabblad terug naar [deckDir] op [branch]
   /// als één commit (§9.1). Publiceert net zo goed een nieuw deck: dan is er nog

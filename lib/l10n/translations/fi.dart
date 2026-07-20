@@ -1781,6 +1781,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Bronnen doorzoeken…': 'Haetaan lähteistä…',
+  'Niet doorzocht': 'Ei haettu',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Tämä tarkistus ei toimi verkkoversiossa: kasvojen tunnistus vaatii järjestelmäkirjaston, jota selaimessa ei ole. Tarkista kuvien kasvot työpöytäversiolla.',
   'Media blijft niet bewaard in een los .md-bestand':

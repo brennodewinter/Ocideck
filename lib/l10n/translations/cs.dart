@@ -1784,6 +1784,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Bronnen doorzoeken…': 'Prohledávání zdrojů…',
+  'Niet doorzocht': 'Neprohledáno',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Tato kontrola v webové verzi neběží: rozpoznávání obličejů vyžaduje systémovou knihovnu, kterou prohlížeč nemá. Ke kontrole obličejů v obrázcích použijte desktopovou verzi.',
   'Media blijft niet bewaard in een los .md-bestand':

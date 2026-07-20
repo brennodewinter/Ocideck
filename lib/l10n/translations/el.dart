@@ -1809,6 +1809,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Bronnen doorzoeken…': 'Αναζήτηση στις πηγές…',
+  'Niet doorzocht': 'Δεν αναζητήθηκε',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Αυτός ο έλεγχος δεν εκτελείται στην έκδοση web: η ανίχνευση προσώπων χρειάζεται μια βιβλιοθήκη συστήματος που δεν έχει το πρόγραμμα περιήγησης. Χρησιμοποιήστε την έκδοση για υπολογιστή για να ελέγξετε πρόσωπα στις εικόνες.',
   'Media blijft niet bewaard in een los .md-bestand':

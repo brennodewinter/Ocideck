@@ -1793,6 +1793,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Bronnen doorzoeken…': 'Przeszukiwanie źródeł…',
+  'Niet doorzocht': 'Nie przeszukano',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Ta kontrola nie działa w wersji internetowej: wykrywanie twarzy wymaga biblioteki systemowej, której przeglądarka nie ma. Użyj wersji desktopowej, aby sprawdzić twarze na obrazach.',
   'Media blijft niet bewaard in een los .md-bestand':

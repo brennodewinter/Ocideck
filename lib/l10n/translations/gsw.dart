@@ -1785,6 +1785,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Bronnen doorzoeken…': 'Quelle wärde durchsuecht…',
+  'Niet doorzocht': 'Nöd durchsuecht',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Die Prüefig lauft i de Web-Version nöd: Gsichtserkennig bruucht e Systembibliothek, wo de Browser nöd het. Nimm d Desktop-Version, zum Bilder uf Gsichter z prüefe.',
   'Media blijft niet bewaard in een los .md-bestand':

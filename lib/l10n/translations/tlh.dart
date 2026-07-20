@@ -1756,6 +1756,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Bronnen doorzoeken…': 'De\' nejlI\'…',
+  'Niet doorzocht': 'nejbe\'',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'web version-Daq nptlh vam waH: qab nojwI\' pol system library \'e\' poQ, \'ach browser vam Hutlh. nagh Daq qab noj \'e\' DaneHchugh, desktop version yIlo\'.',
   'Media blijft niet bewaard in een los .md-bestand':

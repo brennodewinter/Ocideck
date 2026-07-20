@@ -920,6 +920,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Bronnen doorzoeken…': 'Searching sources…',
+  'Niet doorzocht': 'Not searched',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'This check does not run in the web version: face detection needs a system library the browser lacks. Use the desktop version to check images for faces.',
   'Media blijft niet bewaard in een los .md-bestand':

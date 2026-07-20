@@ -1789,6 +1789,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Bronnen doorzoeken…': 'Ieškoma šaltiniuose…',
+  'Niet doorzocht': 'Neieškota',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Ši patikra neveikia žiniatinklio versijoje: veidų aptikimui reikia sistemos bibliotekos, kurios naršyklė neturi. Naudokite darbalaukio versiją, kad patikrintumėte veidus paveikslėliuose.',
   'Media blijft niet bewaard in een los .md-bestand':

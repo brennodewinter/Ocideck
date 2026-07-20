@@ -1797,6 +1797,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Bronnen doorzoeken…': 'Fontes perscrutans…',
+  'Niet doorzocht': 'Non perscrutatum',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Haec inspectio in versione interretiali non decurrit: agnitio vultuum bibliothecam systematis requirit quam navigatrum non habet. Versione mensali utere ad vultus in imaginibus inspiciendos.',
   'Media blijft niet bewaard in een los .md-bestand':

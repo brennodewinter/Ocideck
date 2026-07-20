@@ -1780,6 +1780,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Bronnen doorzoeken…': 'Meklē avotos…',
+  'Niet doorzocht': 'Nav meklēts',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Šī pārbaude nedarbojas tīmekļa versijā: sejas atpazīšanai nepieciešama sistēmas bibliotēka, kuras pārlūkprogrammā nav. Izmantojiet darbvirsmas versiju, lai pārbaudītu sejas attēlos.',
   'Media blijft niet bewaard in een los .md-bestand':

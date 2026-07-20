@@ -1780,6 +1780,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Bronnen doorzoeken…': 'Søger i kilder…',
+  'Niet doorzocht': 'Ikke søgt',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Denne kontrol kører ikke i webversionen: ansigtsgenkendelse kræver et systembibliotek, som browseren ikke har. Brug desktopversionen til at tjekke billeder for ansigter.',
   'Media blijft niet bewaard in een los .md-bestand':
