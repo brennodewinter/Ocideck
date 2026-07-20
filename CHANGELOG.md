@@ -524,6 +524,37 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   een strafzaak gaat. Een markering verbergt een waarde, geen onderwerp.
 
 ### Fixed
+- **Een vinkje tijdens het presenteren overschreef de bron met zwarte blokken.**
+  De presenter draait op het geprojecteerde deck — de zwartgelakte afleiding die
+  de zaal ziet. Eén checklistpunt aanvinken schreef de héle geprojecteerde slide
+  terug naar het echte deck: titel, notities en de overige punten reisden in hun
+  geredigeerde vorm mee. Na opslaan was de oorspronkelijke tekst weg.
+
+  De regel stond al in de code — *een oppervlak dat de gegevens niet kán zien,
+  mag ze ook niet terugschrijven* — en werd voor tabellen ook afgedwongen, met
+  test en al. De checklist was er alleen nooit op aangesloten. Nu gaat het
+  aanvinken uit zodra er op die slide iets is weggelakt, en weigert de presenter
+  het alsnog als het bericht van het zaalvenster komt.
+
+- **Wat je tijdens het opslaan typte, verdween.** Opslaan nam een momentopname,
+  schreef die weg — bij een deck met afbeeldingen al gauw seconden — en zette
+  daarna die oude opname terug. Alles wat er ondertussen bij kwam, was op dat
+  moment weg. Het slot tegen dubbel opslaan hielp niet: de concurrent is hier
+  niet een tweede save maar het toetsenbord.
+
+  Erger was de vlag erachter. Het deck werd schoon gemeld, waarmee ook de
+  herstelkopie werd opgeruimd — het getypte werk stond dus niet in het geheugen,
+  niet op schijf en niet in de recovery, en undo kon er evenmin bij. Nu blijft
+  nieuwer werk staan en blijft het vuil, zodat de volgende opslag het meepakt.
+
+- **Een handtekening kon het geheugen opmaken bij het openen van een deck.** De
+  getekende handtekening reist mee in de front matter en ging als enige
+  deck-afbeelding buiten de decodeercap om. Een egaal gekleurde PNG van
+  30000×30000 is een paar KB op schijf en ~3,6 GB uitgepakt: een deck dat iemand
+  je stuurt, was daarmee genoeg. De opmaak (`height: 44`) hielp niet — die
+  begrenst de layout, niet de decode. Alle vier de plekken lopen nu langs
+  dezelfde poort als elke andere afbeelding.
+
 - **Een woonadres kon volledig door de controle glippen, en het viel niet op.**
   `Woonadres: Weidemolen 12, 1234 AB Amsterdam` werd niet gemeld. De
   oorzaak was één ontbrekend woord: een straat werd herkend aan een lijstje
