@@ -1799,6 +1799,13 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'oud btw-nummer (bevat een BSN)': 'cod TVA vechi (conține un număr personal)',
+  'vreemdelingennummer (V-nummer)': 'număr de străin (număr V)',
+  'administratienummer (A-nummer)': 'număr administrativ (număr A)',
+  'BIG-nummer van een zorgverlener':
+      'numărul de înregistrare al unui cadru medical (BIG)',
+  'AGB-code': 'cod de furnizor de servicii medicale (AGB)',
+  'proces-verbaalnummer': 'număr de proces-verbal',
   'Scorecard': 'Fișă de indicatori',
   'Cijfer toevoegen': 'Adaugă indicator',
   'Cijfer verwijderen': 'Elimină indicatorul',

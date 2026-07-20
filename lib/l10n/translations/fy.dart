@@ -739,6 +739,13 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'oud btw-nummer (bevat een BSN)':
+      'âld btw-nûmer (befettet in boargerservicenûmer)',
+  'vreemdelingennummer (V-nummer)': 'frjemdlingenûmer (V-nûmer)',
+  'administratienummer (A-nummer)': 'administraasjenûmer (A-nûmer)',
+  'BIG-nummer van een zorgverlener': 'BIG-nûmer fan in soarchferliener',
+  'AGB-code': 'AGB-koade',
+  'proces-verbaalnummer': 'proses-ferbaalnûmer',
   'Scorecard': 'Skoarkaart',
   'Cijfer toevoegen': 'Sifer tafoegje',
   'Cijfer verwijderen': 'Sifer fuortsmite',

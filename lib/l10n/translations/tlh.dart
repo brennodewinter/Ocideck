@@ -1756,6 +1756,12 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'oud btw-nummer (bevat een BSN)': 'De\' HuchQeD tIQ (nuv mI\' ngaSbogh)',
+  'vreemdelingennummer (V-nummer)': 'nov mI\' (V mI\')',
+  'administratienummer (A-nummer)': 'vaS mI\' (A mI\')',
+  'BIG-nummer van een zorgverlener': 'Qel mI\' (BIG)',
+  'AGB-code': 'Qel ghom mI\' (AGB)',
+  'proces-verbaalnummer': 'HuchwI\' De\' mI\'',
   'Scorecard': 'mI\'mey nav',
   'Cijfer toevoegen': 'mI\' chel',
   'Cijfer verwijderen': 'mI\' teq',

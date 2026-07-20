@@ -1780,6 +1780,13 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'oud btw-nummer (bevat een BSN)': 'vecs PVN numurs (satur personas kodu)',
+  'vreemdelingennummer (V-nummer)': 'ārzemnieka numurs (V numurs)',
+  'administratienummer (A-nummer)': 'administratīvais numurs (A numurs)',
+  'BIG-nummer van een zorgverlener':
+      'veselības aprūpes speciālista reģistrācijas numurs (BIG)',
+  'AGB-code': 'veselības aprūpes pakalpojumu sniedzēja kods (AGB)',
+  'proces-verbaalnummer': 'policijas protokola numurs',
   'Scorecard': 'Rādītāju karte',
   'Cijfer toevoegen': 'Pievienot rādītāju',
   'Cijfer verwijderen': 'Noņemt rādītāju',

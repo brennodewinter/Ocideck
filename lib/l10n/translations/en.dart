@@ -920,6 +920,13 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'oud btw-nummer (bevat een BSN)': 'old VAT number (contains a national ID)',
+  'vreemdelingennummer (V-nummer)': 'foreign national number (V-number)',
+  'administratienummer (A-nummer)': 'administration number (A-number)',
+  'BIG-nummer van een zorgverlener':
+      'healthcare professional registration number (BIG)',
+  'AGB-code': 'healthcare provider code (AGB)',
+  'proces-verbaalnummer': 'police report number',
   'Scorecard': 'Scorecard',
   'Cijfer toevoegen': 'Add figure',
   'Cijfer verwijderen': 'Remove figure',

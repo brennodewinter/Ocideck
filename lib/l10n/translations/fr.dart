@@ -738,6 +738,14 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'oud btw-nummer (bevat een BSN)':
+      'ancien numéro de TVA (contient un numéro national)',
+  'vreemdelingennummer (V-nummer)': 'numéro d\'étranger (numéro V)',
+  'administratienummer (A-nummer)': 'numéro d\'administration (numéro A)',
+  'BIG-nummer van een zorgverlener':
+      'numéro d\'enregistrement d\'un professionnel de santé (BIG)',
+  'AGB-code': 'code de prestataire de soins (AGB)',
+  'proces-verbaalnummer': 'numéro de procès-verbal',
   'Scorecard': 'Fiche de résultats',
   'Cijfer toevoegen': 'Ajouter un indicateur',
   'Cijfer verwijderen': 'Supprimer l\'indicateur',

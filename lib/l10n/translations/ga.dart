@@ -1817,6 +1817,12 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'oud btw-nummer (bevat een BSN)': 'sean-uimhir CBL (uimhir phearsanta inti)',
+  'vreemdelingennummer (V-nummer)': 'uimhir eachtrannaigh (uimhir V)',
+  'administratienummer (A-nummer)': 'uimhir riaracháin (uimhir A)',
+  'BIG-nummer van een zorgverlener': 'uimhir chláraithe gairmí sláinte (BIG)',
+  'AGB-code': 'cód soláthraí cúraim sláinte (AGB)',
+  'proces-verbaalnummer': 'uimhir thuairisce póilíní',
   'Scorecard': 'Cárta scóir',
   'Cijfer toevoegen': 'Cuir figiúr leis',
   'Cijfer verwijderen': 'Bain an figiúr',

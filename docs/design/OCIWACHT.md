@@ -202,9 +202,9 @@ nul. Waar géén checksum bestaat (US SSN, V-nummer), is een contextwoord verpli
 | Regel-id | Wat | Validatie / FP-guard | Zekerheid | Std. |
 | --- | --- | --- | --- | --- |
 | `nl.bsn` | Burgerservicenummer | 11-proef (gewichten 9-8-7-6-5-4-3-2, laatste ×−1, som mod 11 = 0). **Kritiek:** ~9% van willekeurige 9-cijferige getallen slaagt hiervoor. Dus óók vereist: contextwoord binnen 40 tekens (`bsn`, `burgerservice`, `sofinummer`, `sofi`) **of** een veldpositie (label vóór een dubbele punt, eigen tabelkolom). Zonder context: `mogelijk`, alleen info. Testreeks `999999xxx` uitgesloten. | zeker | ✓ |
-| `nl.btw_id_legacy` | Oud btw-identificatienummer van een eenmanszaak | `NL\d{9}B\d{2}` waarvan de 9 cijfers de 11-proef doorstaan → dit **is** het BSN van de ondernemer. Escaleert naar `error`. | zeker | ✓ |
+| `nl.btw_id_legacy` | Oud btw-identificatienummer van een eenmanszaak | `NL\d{9}B\d{2}` waarvan de 9 cijfers de 11-proef doorstaan → dit **is** het BSN van de ondernemer | zeker | ✓ |
 | `nl.vnummer` | Vreemdelingennummer | 10 cijfers beginnend met 2, contextwoord verplicht (`v-nummer`, `vreemdeling`) | waarschijnlijk | ◐ |
-| `nl.anummer` | A-nummer (BRP) | 10 cijfers, 11-proef-variant | waarschijnlijk | ◐ |
+| `nl.anummer` | A-nummer (BRP) | 10 cijfers + contextwoord verplicht; **geen** checksum — zie de notitie hieronder | waarschijnlijk | ◐ |
 | `nl.big` | BIG-nummer (zorgverlener) | 11 cijfers, contextwoord `big` | waarschijnlijk | ◐ |
 | `nl.agb` | AGB-code | 8 cijfers, contextwoord `agb` | mogelijk | ◐ |
 | `be.rijksregister` | Rijksregisternummer | mod-97 over de eerste 9 cijfers (met `2`-prefix voor geboorten ≥ 2000); bevat geboortedatum en geslacht | zeker | ◐ |
@@ -243,6 +243,39 @@ nul. Waar géén checksum bestaat (US SSN, V-nummer), is een contextwoord verpli
 | `au.tfn` | Tax File Number | gewogen mod 11 over 9 cijfers → contextpoort verplicht, zelfde reden als `ca.sin` (§15.4) | waarschijnlijk | ◐ |
 | `au.medicare` | Medicare-nummer | gewogen checksum | zeker | ◐ |
 | `cw.sedula` / `aw.persoonsnummer` | Curaçao / Aruba | formaat + contextwoord; geen gedocumenteerde checksum, dus bewust nooit `zeker` | mogelijk | ◐ |
+
+> **Gebouwd (2026-07-20): de zes Nederlandse nummers naast het BSN.** Twee
+> regels in de tabel hierboven klopten niet, en allebei op een manier die pas bij
+> het bouwen zichtbaar werd.
+>
+> **Het A-nummer heeft geen checksum die wij mogen aannemen.** De tabel schreef
+> "11-proef-variant" voor. Geen publieke RvIG-bron koppelt een controlegetal aan
+> het A-nummer; wat wél gedocumenteerd staat is de 11-proef over tien cijfers
+> voor *bankrekeningnummers*, en dat is een ander nummer. Die alsnog toepassen
+> zou een gok zijn geweest, en de fout valt hier de verkeerde kant op: een te
+> strenge controle wijst échte A-nummers af. Voor een privacyscanner is een
+> gemist persoonsnummer duurder dan een melding te veel — precies de afweging
+> die `dk.cpr` al maakt, waar de mod-11 in 2007 is losgelaten. Dus tien cijfers
+> plus een verplicht contextwoord, en `waarschijnlijk` als plafond.
+>
+> **"Escaleert naar `error`" bij `nl.btw_id_legacy` is geschrapt.** Dat sprak
+> §11.3 tegen, die `zeker` bewust op waarschuwing houdt. Sinds
+> `privacyStrictSeverity` bestaat, is dat ook waar die escalatie thuishoort: de
+> gebruiker zet hem aan voor álle zekere bevindingen, in plaats van dat één regel
+> zichzelf tot fout verklaart.
+>
+> Vijf van de zes hebben dus een contextpoort, en alleen het btw-nummer mag
+> zonder — daar draagt de 11-proef over de negen ingesloten cijfers het bewijs,
+> en die scheidt meteen het oude nummer (dat het BSN ís) van het nummer dat
+> eenmanszaken sinds 2020 krijgen. Dat de andere vijf kale cijferreeksen zijn van
+> acht, tien of elf posities is geen detail: `Ordernummer 20250131` heeft de vorm
+> van een AGB-code, en zonder poort zou elk zakelijk deck vollopen. Een test legt
+> vast dat alleen `nl.btw_id_legacy` contextloos mag vuren, zodat niemand die
+> poort later weghaalt "omdat de regel te weinig vindt".
+>
+> `nl.pv_nummer` landt in de familie `identifier` en niet in `criminal`, omdat de
+> lus in `privacy_scanner.dart` elke nationale regel op `identifier` zet. Wie dat
+> wil veranderen, begint daar.
 
 > **Gebouwd (2026-07-19), en één les over "vrijwel geen precisie".** §7
 > verdedigt "heel Europa standaard aan" met het argument dat ruim twintig van de

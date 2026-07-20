@@ -1799,6 +1799,14 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'oud btw-nummer (bevat een BSN)':
+      'старий номер ПДВ (містить особистий номер)',
+  'vreemdelingennummer (V-nummer)': 'номер іноземця (V-номер)',
+  'administratienummer (A-nummer)': 'адміністративний номер (A-номер)',
+  'BIG-nummer van een zorgverlener':
+      'реєстраційний номер медичного працівника (BIG)',
+  'AGB-code': 'код надавача медичних послуг (AGB)',
+  'proces-verbaalnummer': 'номер поліцейського протоколу',
   'Scorecard': 'Оцінна картка',
   'Cijfer toevoegen': 'Додати показник',
   'Cijfer verwijderen': 'Видалити показник',

@@ -1783,6 +1783,14 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'oud btw-nummer (bevat een BSN)':
+      'stara davčna številka (vsebuje osebno številko)',
+  'vreemdelingennummer (V-nummer)': 'številka tujca (V-številka)',
+  'administratienummer (A-nummer)': 'upravna številka (A-številka)',
+  'BIG-nummer van een zorgverlener':
+      'registrska številka zdravstvenega delavca (BIG)',
+  'AGB-code': 'koda izvajalca zdravstvenih storitev (AGB)',
+  'proces-verbaalnummer': 'številka policijskega zapisnika',
   'Scorecard': 'Kartica kazalnikov',
   'Cijfer toevoegen': 'Dodaj kazalnik',
   'Cijfer verwijderen': 'Odstrani kazalnik',

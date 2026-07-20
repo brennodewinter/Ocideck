@@ -1780,6 +1780,14 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'oud btw-nummer (bevat een BSN)':
+      'gammalt momsnummer (innehåller personnummer)',
+  'vreemdelingennummer (V-nummer)': 'utlänningsnummer (V-nummer)',
+  'administratienummer (A-nummer)': 'administrationsnummer (A-nummer)',
+  'BIG-nummer van een zorgverlener':
+      'registreringsnummer för vårdpersonal (BIG)',
+  'AGB-code': 'kod för vårdgivare (AGB)',
+  'proces-verbaalnummer': 'diarienummer för polisanmälan',
   'Scorecard': 'Nyckeltalskort',
   'Cijfer toevoegen': 'Lägg till nyckeltal',
   'Cijfer verwijderen': 'Ta bort nyckeltal',

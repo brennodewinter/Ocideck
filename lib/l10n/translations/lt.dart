@@ -1789,6 +1789,13 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'oud btw-nummer (bevat een BSN)': 'senas PVM numeris (jame yra asmens kodas)',
+  'vreemdelingennummer (V-nummer)': 'užsieniečio numeris (V numeris)',
+  'administratienummer (A-nummer)': 'administracinis numeris (A numeris)',
+  'BIG-nummer van een zorgverlener':
+      'sveikatos priežiūros specialisto registracijos numeris (BIG)',
+  'AGB-code': 'sveikatos priežiūros paslaugų teikėjo kodas (AGB)',
+  'proces-verbaalnummer': 'policijos protokolo numeris',
   'Scorecard': 'Rodiklių kortelė',
   'Cijfer toevoegen': 'Pridėti rodiklį',
   'Cijfer verwijderen': 'Pašalinti rodiklį',

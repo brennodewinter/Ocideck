@@ -1804,6 +1804,13 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'oud btw-nummer (bevat een BSN)': 'стар ДДС номер (съдържа личен номер)',
+  'vreemdelingennummer (V-nummer)': 'номер на чужденец (V-номер)',
+  'administratienummer (A-nummer)': 'административен номер (A-номер)',
+  'BIG-nummer van een zorgverlener':
+      'регистрационен номер на медицински специалист (BIG)',
+  'AGB-code': 'код на доставчик на здравни услуги (AGB)',
+  'proces-verbaalnummer': 'номер на полицейски протокол',
   'Scorecard': 'Карта с показатели',
   'Cijfer toevoegen': 'Добавяне на показател',
   'Cijfer verwijderen': 'Премахване на показател',

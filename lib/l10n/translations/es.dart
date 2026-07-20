@@ -735,6 +735,14 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'oud btw-nummer (bevat een BSN)':
+      'número de IVA antiguo (contiene un número nacional)',
+  'vreemdelingennummer (V-nummer)': 'número de extranjero (número V)',
+  'administratienummer (A-nummer)': 'número de administración (número A)',
+  'BIG-nummer van een zorgverlener':
+      'número de registro de un profesional sanitario (BIG)',
+  'AGB-code': 'código de proveedor sanitario (AGB)',
+  'proces-verbaalnummer': 'número de atestado policial',
   'Scorecard': 'Cuadro de resultados',
   'Cijfer toevoegen': 'Añadir cifra',
   'Cijfer verwijderen': 'Eliminar cifra',

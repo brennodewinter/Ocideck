@@ -533,3 +533,21 @@ bool isValidSiEmso(String raw) {
   if (m == 10) return false;
   return check == d.codeUnitAt(12) - 0x30;
 }
+
+/// Het oude Nederlandse btw-identificatienummer van een eenmanszaak.
+///
+/// Vorm `NL` + negen cijfers + `B` + twee cijfers. Tot 2020 wáren die negen
+/// cijfers het BSN van de ondernemer — daarom staat dit nummer hier en niet bij
+/// de fiscale nummers: wie het publiceert, publiceert een BSN.
+///
+/// Sinds 1 januari 2020 krijgen eenmanszaken een omzetbelastingnummer dat níét
+/// van het BSN is afgeleid. Die nieuwe nummers halen de 11-proef zelden, en dat
+/// is precies de bedoeling van deze controle: hij scheidt het oude, gevaarlijke
+/// nummer van het nieuwe, onschuldige. Zonder de 11-proef zou elk btw-nummer op
+/// een factuurslide een melding opleveren.
+bool isValidNlBtwIdLegacy(String raw) {
+  final normalized = raw.toUpperCase().replaceAll(RegExp(r'[ .]'), '');
+  final m = RegExp(r'^NL(\d{9})B\d{2}$').firstMatch(normalized);
+  if (m == null) return false;
+  return passesElevenProof(m.group(1)!);
+}

@@ -1781,6 +1781,12 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'oud btw-nummer (bevat een BSN)': 'nomor PPN lama (memuat nomor identitas)',
+  'vreemdelingennummer (V-nummer)': 'nomor orang asing (nomor V)',
+  'administratienummer (A-nummer)': 'nomor administrasi (nomor A)',
+  'BIG-nummer van een zorgverlener': 'nomor registrasi tenaga kesehatan (BIG)',
+  'AGB-code': 'kode penyedia layanan kesehatan (AGB)',
+  'proces-verbaalnummer': 'nomor laporan polisi',
   'Scorecard': 'Kartu skor',
   'Cijfer toevoegen': 'Tambah angka',
   'Cijfer verwijderen': 'Hapus angka',

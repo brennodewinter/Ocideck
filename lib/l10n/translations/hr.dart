@@ -1788,6 +1788,13 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'oud btw-nummer (bevat een BSN)': 'stari PDV broj (sadrži osobni broj)',
+  'vreemdelingennummer (V-nummer)': 'broj stranca (V-broj)',
+  'administratienummer (A-nummer)': 'administrativni broj (A-broj)',
+  'BIG-nummer van een zorgverlener':
+      'registarski broj zdravstvenog djelatnika (BIG)',
+  'AGB-code': 'šifra pružatelja zdravstvene skrbi (AGB)',
+  'proces-verbaalnummer': 'broj policijskog zapisnika',
   'Scorecard': 'Bodovna kartica',
   'Cijfer toevoegen': 'Dodaj pokazatelj',
   'Cijfer verwijderen': 'Ukloni pokazatelj',

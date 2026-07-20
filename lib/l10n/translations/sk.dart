@@ -1788,6 +1788,12 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'oud btw-nummer (bevat een BSN)': 'staré IČ DPH (obsahuje rodné číslo)',
+  'vreemdelingennummer (V-nummer)': 'číslo cudzinca (V-číslo)',
+  'administratienummer (A-nummer)': 'administratívne číslo (A-číslo)',
+  'BIG-nummer van een zorgverlener': 'registračné číslo zdravotníka (BIG)',
+  'AGB-code': 'kód poskytovateľa starostlivosti (AGB)',
+  'proces-verbaalnummer': 'číslo policajného protokolu',
   'Scorecard': 'Karta ukazovateľov',
   'Cijfer toevoegen': 'Pridať ukazovateľ',
   'Cijfer verwijderen': 'Odstrániť ukazovateľ',

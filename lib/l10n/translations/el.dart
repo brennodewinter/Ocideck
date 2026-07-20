@@ -1809,6 +1809,13 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'oud btw-nummer (bevat een BSN)': 'παλιός ΑΦΜ (περιέχει προσωπικό αριθμό)',
+  'vreemdelingennummer (V-nummer)': 'αριθμός αλλοδαπού (αριθμός V)',
+  'administratienummer (A-nummer)': 'διοικητικός αριθμός (αριθμός A)',
+  'BIG-nummer van een zorgverlener':
+      'αριθμός μητρώου επαγγελματία υγείας (BIG)',
+  'AGB-code': 'κωδικός παρόχου υγείας (AGB)',
+  'proces-verbaalnummer': 'αριθμός αστυνομικής έκθεσης',
   'Scorecard': 'Κάρτα δεικτών',
   'Cijfer toevoegen': 'Προσθήκη δείκτη',
   'Cijfer verwijderen': 'Αφαίρεση δείκτη',

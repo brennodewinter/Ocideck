@@ -1781,6 +1781,14 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'oud btw-nummer (bevat een BSN)':
+      'vanha alv-numero (sisältää henkilötunnuksen)',
+  'vreemdelingennummer (V-nummer)': 'ulkomaalaisnumero (V-numero)',
+  'administratienummer (A-nummer)': 'hallintonumero (A-numero)',
+  'BIG-nummer van een zorgverlener':
+      'terveydenhuollon ammattilaisen rekisterinumero (BIG)',
+  'AGB-code': 'terveydenhuollon palveluntuottajan koodi (AGB)',
+  'proces-verbaalnummer': 'poliisin tutkintailmoituksen numero',
   'Scorecard': 'Tunnuslukukortti',
   'Cijfer toevoegen': 'Lisää tunnusluku',
   'Cijfer verwijderen': 'Poista tunnusluku',
