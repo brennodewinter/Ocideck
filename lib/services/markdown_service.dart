@@ -446,6 +446,7 @@ class MarkdownService {
       // wat voor een gegenereerde rapportage de hele route is.
       case SlideType.scorecard:
       case SlideType.actions:
+      case SlideType.assets:
         _writeTableSlide(buf, slide);
       // Informatieveiligheid: `checklist` (§3.2), `scopeMatrix` (§4.4) en
       // `findingsSummary` (§4.3.4) serialiseren als een gewone Markdown-tabel.

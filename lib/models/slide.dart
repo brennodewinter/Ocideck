@@ -1,5 +1,6 @@
 import 'package:uuid/uuid.dart';
 import 'actions_spec.dart';
+import 'asset_overview_spec.dart';
 import 'checklist_spec.dart';
 import 'cockpit.dart';
 import 'deck.dart';
@@ -34,6 +35,7 @@ enum SlideType {
   timeline,
   scorecard,
   actions,
+  assets,
   // Informatieveiligheid-module (pentestrapportage, PENTEST_MIAUW §4). Elk type
   // heeft een eigen gestructureerde editor, preview en serialiser; inhoud én
   // type round-trippen verliesvrij onder hun eigen `_class`-token. `signOff`
@@ -192,6 +194,10 @@ const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
   SlideType.actions: SlideTypeMeta(
     label: 'Acties en besluiten',
     marpClass: 'actions',
+  ),
+  SlideType.assets: SlideTypeMeta(
+    label: 'Aanvalsoppervlak',
+    marpClass: 'assets',
   ),
   // Informatieveiligheid-module — categorie [SlideCategory.informatieveiligheid],
   // waardoor de kiezer automatisch een tabblad toont (P0-PICK). marpClass-tokens
@@ -522,6 +528,8 @@ class Slide {
           : type == SlideType.actions
           // Alleen de vaste kop; lege regels deelt de editor zelf uit.
           ? const ActionsSpec().toTableRows()
+          : type == SlideType.assets
+          ? const AssetOverviewSpec().toTableRows()
           : const [],
       customMarkdown: type == SlideType.cockpit
           ? CockpitSpec.pentestPreset().toBlock()
