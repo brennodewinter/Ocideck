@@ -95,6 +95,11 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   `EisCheck.everyFindingHasCwe` was een wees zonder EIS in de catalogus en liep
   nooit; en een wees-detaildia (kop verwijderd) hield een titelprefix die naar
   een verdwenen bevinding wees.
+- **Een geredigeerde export op web laat zijn redactiemanifest niet meer vallen.**
+  Op de desktop landen de commitments en de verificatiesleutels naast de export;
+  op web werd alleen het rapport gedownload en verdween het manifest, waarna geen
+  enkele redactie meer na te trekken was. De browser-download levert nu dezelfde
+  bestanden mee.
 
 ### Added
 - **Eén bron, een managementversie en een techniekversie.** Markeer een slide als

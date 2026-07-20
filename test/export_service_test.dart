@@ -8,6 +8,7 @@ import 'package:image/image.dart' as img;
 import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/markdown_validation.dart';
 import 'package:ocideck/models/slide_quality.dart';
+import 'package:ocideck/models/redaction_manifest.dart';
 import 'package:ocideck/services/classification_enforcement_policy.dart';
 import 'package:ocideck/services/export_service.dart';
 import 'package:ocideck/services/export_metadata.dart';
@@ -183,6 +184,40 @@ void main() {
     expect(r.success, isTrue, reason: r.error);
     final bytes = await File(r.outputPath!).readAsBytes();
     expect(String.fromCharCodes(bytes.take(4)), '%PDF');
+  });
+
+  test('een geredigeerde export legt zijn manifest ernaast neer', () async {
+    // Zonder manifest kan een ontvanger geen enkele redactie natrekken. Beide
+    // bestanden horen te verschijnen: de commitments (reizen mee) en de
+    // verificatiesleutels (houdt de auteur).
+    const manifest = RedactionManifest(
+      derivedFrom: 'seal-abc',
+      entries: [
+        RedactionEntry(
+          id: 'a3f1',
+          commitment: 'deadbeef',
+          rule: 'nl.bsn',
+          slideIndex: 0,
+          field: 'body',
+          salt: 'peper',
+        ),
+      ],
+    );
+    final r = await service.export(deckPath(), ExportFormat.pdf, [
+      _png(),
+    ], redactionManifest: manifest);
+    expect(r.success, isTrue, reason: r.error);
+
+    final base = p.basenameWithoutExtension(r.outputPath!);
+    final commitments = File(p.join(tmp.path, '$base-redacties.json'));
+    final keys = File(
+      p.join(tmp.path, '$base-redacties-verificatiesleutels.json'),
+    );
+    expect(await commitments.exists(), isTrue);
+    expect(await keys.exists(), isTrue);
+    // De commitments-versie draagt de salt niet; de sleutelversie wel.
+    expect(await commitments.readAsString(), isNot(contains('peper')));
+    expect(await keys.readAsString(), contains('peper'));
   });
 
   test('PDF embeds OciDeck as Creator and Producer', () async {

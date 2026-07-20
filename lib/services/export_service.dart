@@ -231,6 +231,13 @@ class ExportService {
         // Web: geen bestandssysteem — file_picker maakt van de bytes een
         // browser-download (Blob + anker). De bestandsnaam is het resultaat.
         await FilePicker.saveFile(fileName: fileName, bytes: bytes);
+        // Het redactiemanifest hoort ook op web mee. Zonder dit kreeg de auteur
+        // wél het geredigeerde rapport gedownload maar niet de commitments (die
+        // met het rapport meereizen) of de verificatiesleutels (die de auteur
+        // houdt) — dan is geen enkele redactie meer na te trekken.
+        for (final f in _redactionManifestFiles(fileName, redactionManifest)) {
+          await FilePicker.saveFile(fileName: f.name, bytes: f.bytes);
+        }
         return ExportResult.ok(fileName);
       }
       await Directory(dir).create(recursive: true);
@@ -287,18 +294,36 @@ class ExportService {
     String outputPath,
     RedactionManifest manifest,
   ) async {
-    if (manifest.isEmpty) return;
-    final base = p.withoutExtension(outputPath);
-    await writeStringAtomic(
-      File('$base-redacties.json'),
-      manifest.withoutSalts.toPrettyJson(),
-    );
-    if (manifest.carriesSalts) {
-      await writeStringAtomic(
-        File('$base-redacties-verificatiesleutels.json'),
-        manifest.toPrettyJson(),
+    for (final f in _redactionManifestFiles(outputPath, manifest)) {
+      await writeBytesAtomic(
+        File(p.join(p.dirname(outputPath), f.name)),
+        f.bytes,
       );
     }
+  }
+
+  /// De manifestbestanden voor een geredigeerde export, als (naam, bytes). Eén
+  /// bron voor beide uitgangen: het schijfpad ([_writeRedactionManifest]) en de
+  /// browser-download op web. [reference] is het exportpad of de bestandsnaam;
+  /// alleen de basisnaam (zonder extensie) wordt gebruikt.
+  static List<({String name, Uint8List bytes})> _redactionManifestFiles(
+    String reference,
+    RedactionManifest manifest,
+  ) {
+    if (manifest.isEmpty) return const [];
+    final base = p.basenameWithoutExtension(reference);
+    Uint8List enc(String s) => Uint8List.fromList(utf8.encode(s));
+    return [
+      (
+        name: '$base-redacties.json',
+        bytes: enc(manifest.withoutSalts.toPrettyJson()),
+      ),
+      if (manifest.carriesSalts)
+        (
+          name: '$base-redacties-verificatiesleutels.json',
+          bytes: enc(manifest.toPrettyJson()),
+        ),
+    ];
   }
 
   static Future<Uint8List> _buildPdf(
