@@ -203,19 +203,24 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
       const SingleActivator(LogicalKeyboardKey.keyS, meta: true): _saveDeck,
       // Ongedaan maken / opnieuw. Vuren alleen wanneer de focus niet in een
       // tekstveld zit (dat handelt z'n eigen undo af), dus geen conflict.
-      const SingleActivator(LogicalKeyboardKey.keyZ, control: true):
-          deckNotifier.undo,
-      const SingleActivator(LogicalKeyboardKey.keyZ, meta: true):
-          deckNotifier.undo,
+      const SingleActivator(LogicalKeyboardKey.keyZ, control: true): () =>
+          _undo(deckNotifier),
+      const SingleActivator(LogicalKeyboardKey.keyZ, meta: true): () =>
+          _undo(deckNotifier),
       const SingleActivator(
         LogicalKeyboardKey.keyZ,
         control: true,
         shift: true,
-      ): deckNotifier.redo,
-      const SingleActivator(LogicalKeyboardKey.keyZ, meta: true, shift: true):
-          deckNotifier.redo,
-      const SingleActivator(LogicalKeyboardKey.keyY, control: true):
-          deckNotifier.redo,
+      ): () =>
+          _redo(deckNotifier),
+      const SingleActivator(
+        LogicalKeyboardKey.keyZ,
+        meta: true,
+        shift: true,
+      ): () =>
+          _redo(deckNotifier),
+      const SingleActivator(LogicalKeyboardKey.keyY, control: true): () =>
+          _redo(deckNotifier),
       const SingleActivator(LogicalKeyboardKey.keyF, control: true): _openFind,
       const SingleActivator(LogicalKeyboardKey.keyF, meta: true): _openFind,
       const SingleActivator(LogicalKeyboardKey.keyH, control: true):
@@ -363,14 +368,14 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
         message: l10n.t('undo'),
         child: IconButton(
           icon: const Icon(Icons.undo, size: 18),
-          onPressed: deckState.canUndo ? deckNotifier.undo : null,
+          onPressed: deckState.canUndo ? () => _undo(deckNotifier) : null,
         ),
       ),
       Tooltip(
         message: l10n.t('redo'),
         child: IconButton(
           icon: const Icon(Icons.redo, size: 18),
-          onPressed: deckState.canRedo ? deckNotifier.redo : null,
+          onPressed: deckState.canRedo ? () => _redo(deckNotifier) : null,
         ),
       ),
       const _ActionsDivider(),
@@ -473,6 +478,28 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
 
   /// De items van het "⋮"-overloopmenu. Losgetrokken uit [_appBarActions] om
   /// die methode binnen de lengtegrens te houden.
+  /// Ongedaan maken, mét de selectie erachteraan.
+  ///
+  /// Het deck krimpt bij ongedaan maken, maar de selectie in het editorpaneel
+  /// bleef staan waar hij stond. De panelen klemmen dat voor de wéérgave, dus
+  /// het viel niet op — tot een actie de rauwe index gebruikte en er een slide
+  /// op de verkeerde plek belandde. [EditorNotifier.clampIndex] bestond
+  /// hiervoor en werd nergens aangeroepen; dit is die plek.
+  void _undo(DeckNotifier deckNotifier) {
+    deckNotifier.undo();
+    _clampSelection(deckNotifier);
+  }
+
+  void _redo(DeckNotifier deckNotifier) {
+    deckNotifier.redo();
+    _clampSelection(deckNotifier);
+  }
+
+  void _clampSelection(DeckNotifier deckNotifier) {
+    final count = deckNotifier.currentState.deck?.slides.length ?? 0;
+    ref.read(editorProvider.notifier).clampIndex(count - 1);
+  }
+
   Future<void> _saveDeck() async {
     await saveDeckWithDestination(
       context,

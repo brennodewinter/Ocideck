@@ -85,6 +85,41 @@ void main() {
     expect(types, [SlideType.title, SlideType.image, SlideType.bullets]);
   });
 
+  test('addSlide met een verouderde index klemt in plaats van te crashen', () {
+    // De index komt van de selectie in het editorpaneel, en die loopt achter na
+    // ongedaan maken: het deck is korter, de selectie staat nog op de oude plek.
+    // `insert` voorbij het einde gooide dan een RangeError en de knop deed niets.
+    final n = _notifier()..newDeck('D');
+    n.addSlide(SlideType.bullets);
+    n.addSlide(SlideType.bullets); // 3 slides
+    n.undo(); // terug naar 2, selectie wijst nog naar 2
+    expect(n.state.deck!.slides, hasLength(2));
+
+    n.addSlide(SlideType.image, afterIndex: 2);
+
+    expect(n.state.deck!.slides, hasLength(3));
+    expect(n.state.deck!.slides.last.type, SlideType.image);
+  });
+
+  test('addSlide met een negatieve index klemt naar voren', () {
+    final n = _notifier()..newDeck('D');
+    n.addSlide(SlideType.image, afterIndex: -5);
+    expect(n.state.deck!.slides.first.type, SlideType.image);
+  });
+
+  test('reorderSlides met indices buiten bereik doet niets kwaads', () {
+    final n = _notifier()..newDeck('D');
+    n.addSlide(SlideType.bullets);
+    final before = n.state.deck!.slides.map((s) => s.type).toList();
+
+    n.reorderSlides(9, 0); // bron bestaat niet: niets te verplaatsen
+    expect(n.state.deck!.slides.map((s) => s.type).toList(), before);
+
+    n.reorderSlides(0, 9); // doel voorbij het einde: klemt naar achteren
+    expect(n.state.deck!.slides, hasLength(2));
+    expect(n.state.deck!.slides.last.type, before.first);
+  });
+
   test('removeSlide removes a slide but never the last one', () {
     final n = _notifier()..newDeck('D');
     n.addSlide(SlideType.bullets);
