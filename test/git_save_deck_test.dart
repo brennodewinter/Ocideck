@@ -118,6 +118,22 @@ void main() {
     return (container, container.read(tabsProvider.notifier));
   }
 
+  /// Voeg een slide toe aan het deck dat nú in het tabblad staat, zodat de
+  /// bewerking een echte afstammeling is van wat er geopend werd (gedeelde
+  /// slide-ids) — precies zoals een gebruiker het zou doen.
+  void addSlideTitled(ProviderContainer container, String title) {
+    final notifier = container.read(tabsProvider).current!.deckNotifier;
+    final deck = notifier.currentState.deck!;
+    notifier.loadDeck(
+      deck.copyWith(
+        slides: [
+          ...deck.slides,
+          Slide.create(SlideType.title).copyWith(title: title),
+        ],
+      ),
+    );
+  }
+
   void seedDeck(ProviderContainer container, Deck deck) {
     container.read(tabsProvider).current!.deckNotifier.loadDeck(deck);
   }
@@ -624,6 +640,82 @@ theme: ocideck
       );
       expect(owner.gitOrigin?.deckDir, deckDir);
       expect(owner.gitOrigin?.baseSha, result.sha);
+    });
+  });
+
+  group('een tweede ronde op dezelfde dag', () {
+    test('overschrijft de kop van de werkbranch niet stilletjes', () async {
+      final (container, tabs) = build();
+      final repo = repoWith('# oud');
+      final forge = FakeForge(repo);
+      final when = DateTime(2026, 7, 18);
+      const workBranch = 'decks/kwartaalcijfers/2026-07-18';
+
+      const validDeck = '''
+---
+marp: true
+theme: ocideck
+---
+
+# Kwartaalcijfers
+''';
+      repo.files['$deckDir/deck.md'] = bytes(validDeck);
+
+      // Ochtend: openen vanaf main, bewerken, opslaan. De werkbranch ontstaat.
+      await tabs.openDeckFromGit(
+        forge,
+        config: config,
+        deckDir: deckDir,
+        branch: 'main',
+      );
+      addSlideTitled(container, 'Ochtend');
+      final morning = await tabs.saveToGit(
+        forge,
+        config: config,
+        deckDir: deckDir,
+        branch: 'main',
+        message: 'ochtend',
+        now: when,
+      );
+      expect(morning.status, GitSaveStatus.committed);
+      expect(repo.branches[workBranch], isNotNull);
+
+      // Middag: opnieuw vanaf main openen — het tabblad kent de ochtendcommit
+      // niet. De werkbranch van vandaag bestaat al en staat verderop.
+      await tabs.openDeckFromGit(
+        forge,
+        config: config,
+        deckDir: deckDir,
+        branch: 'main',
+      );
+      addSlideTitled(container, 'Middag');
+      final afternoon = await tabs.saveToGit(
+        forge,
+        config: config,
+        deckDir: deckDir,
+        branch: 'main',
+        message: 'middag',
+        now: when,
+      );
+
+      // Zonder de guard was dit een schone fast-forward geweest en was de
+      // ochtend van de kop verdwenen. Nu botst het en volgt de merge.
+      expect(
+        afternoon.status,
+        isNot(GitSaveStatus.committed),
+        reason: 'de ochtendcommit mag niet stil worden overschreven',
+      );
+      // ...en het is ook geen kale weigering. De gelezen basis maakt de
+      // driewegs-merge mogelijk, dus beide kanten overleven: de ochtend blijft
+      // op de branch staan en de middag komt erbij.
+      expect(afternoon.status, GitSaveStatus.merged);
+      // ...en het is ook geen kale weigering. De gelezen basis maakt de
+      // driewegs-merge mogelijk, dus beide kanten overleven: wat de ochtend
+      // toevoegde blijft staan en de middag komt erbij.
+      expect(afternoon.status, GitSaveStatus.merged);
+      final tip = utf8.decode(repo.files['$deckDir/deck.md']!);
+      expect(tip, contains('Ochtend'));
+      expect(tip, contains('Middag'));
     });
   });
 }

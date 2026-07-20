@@ -192,6 +192,7 @@ extension TabsNotifierGitNative on TabsNotifier {
   /// [mergeDeckVersions], en het resultaat terug als bestandenset.
   Future<GitSaveResult?> _mergeNative(
     NativeGitMirror mirror, {
+
     /// Het tabblad waar dit deck in staat, vastgezet vóór het eerste wachtpunt.
     required TabInfo? tab,
     required GitRepoConfig config,
