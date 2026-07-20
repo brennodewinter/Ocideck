@@ -1,7 +1,7 @@
 /// The most groups an asset-overview slide shows. A management overview names
 /// the handful of categories the estate actually breaks into; a scan that finds
 /// four hundred objects still has six or eight kinds of them. Applied on both
-/// read and write, like [actionsMaxItems].
+/// read and write.
 const int assetOverviewMaxGroups = 8;
 
 /// One row of an attack-surface overview: a *kind* of exposed object and the
@@ -94,7 +94,7 @@ class AssetGroup {
 /// surface is, how much of it needs work, and what nobody owns.
 ///
 /// A typed *view* over the slide's title + a small Markdown table, exactly like
-/// [ActionsSpec] / [ScorecardSpec]: it round-trips losslessly as plain Markdown
+/// [ScorecardSpec]: it round-trips losslessly as plain Markdown
 /// and renders identically in a headless export isolate.
 class AssetOverviewSpec {
   const AssetOverviewSpec({this.title = '', this.groups = const []});

@@ -1,5 +1,4 @@
 import 'package:uuid/uuid.dart';
-import 'actions_spec.dart';
 import 'asset_overview_spec.dart';
 import 'checklist_spec.dart';
 import 'cockpit.dart';
@@ -34,7 +33,6 @@ enum SlideType {
   question,
   timeline,
   scorecard,
-  actions,
   assets,
   // Informatieveiligheid-module (pentestrapportage, PENTEST_MIAUW §4). Elk type
   // heeft een eigen gestructureerde editor, preview en serialiser; inhoud én
@@ -190,10 +188,6 @@ const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
   SlideType.scorecard: SlideTypeMeta(
     label: 'Scorecard',
     marpClass: 'scorecard',
-  ),
-  SlideType.actions: SlideTypeMeta(
-    label: 'Acties en besluiten',
-    marpClass: 'actions',
   ),
   // Informatieveiligheid-module — categorie [SlideCategory.informatieveiligheid],
   // waardoor de kiezer automatisch een tabblad toont (P0-PICK). marpClass-tokens
@@ -540,9 +534,6 @@ class Slide {
           // Alleen de vaste kop. Lege cijferregels horen niet op schijf — de
           // editor deelt ze zelf uit zolang er nog niets is ingevuld.
           ? const ScorecardSpec().toTableRows()
-          : type == SlideType.actions
-          // Alleen de vaste kop; lege regels deelt de editor zelf uit.
-          ? const ActionsSpec().toTableRows()
           : type == SlideType.assets
           ? const AssetOverviewSpec().toTableRows()
           : const [],

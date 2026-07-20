@@ -27,7 +27,6 @@ import '../../models/finding_spec.dart';
 import '../../models/findings_summary_spec.dart';
 import '../../models/question.dart';
 import '../../models/scope_matrix_spec.dart';
-import '../../models/actions_spec.dart';
 import '../../models/asset_overview_spec.dart';
 import '../../models/scorecard_spec.dart';
 import '../../models/settings.dart';
@@ -79,7 +78,6 @@ part 'previews/cockpit_preview.dart';
 part 'previews/question_preview.dart';
 part 'previews/timeline_preview.dart';
 part 'previews/scorecard_preview.dart';
-part 'previews/actions_preview.dart';
 part 'previews/asset_overview_preview.dart';
 part 'previews/checklist_preview.dart';
 part 'previews/scaffold_previews.dart';
@@ -718,7 +716,6 @@ class SlidePreviewWidget extends StatelessWidget {
           revealedCount: timelineRevealedCount,
         );
       case SlideType.scorecard:
-      case SlideType.actions:
       case SlideType.assets:
         return _reportingPreview(slide.type, w);
       case SlideType.checklist:
@@ -730,18 +727,12 @@ class SlidePreviewWidget extends StatelessWidget {
     }
   }
 
-  /// Previews for the recurring-report layouts (`scorecard`, `actions`). Split
+  /// Previews for the recurring-report layouts (`scorecard`, `assets`). Split
   /// out of [_buildContent] for the length ratchet, the same reason
   /// [_securityPreview] exists — and so a further reporting type costs the
   /// dispatch switch nothing.
   Widget _reportingPreview(SlideType type, double w) => switch (type) {
     SlideType.scorecard => _ScorecardPreview(
-      slide: slide,
-      w: w,
-      font: fontFamily,
-      profile: themeProfile,
-    ),
-    SlideType.actions => _ActionsPreview(
       slide: slide,
       w: w,
       font: fontFamily,

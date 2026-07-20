@@ -443,7 +443,6 @@ class MarkdownService {
         _writeQuestionSlide(buf, slide);
       // Zie [_writeTableSlide] voor waarom deze zes hetzelfde wegschrijven.
       case SlideType.scorecard:
-      case SlideType.actions:
       case SlideType.assets:
       case SlideType.checklist:
       case SlideType.scopeMatrix:

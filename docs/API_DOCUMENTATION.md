@@ -34,7 +34,7 @@ only meaningful for the slide types that use it.
 
 `SlideType` (24 values): `title, section, bullets, twoBullets, bulletsImage,
 twoImages, image, video, quote, table, freeMarkdown, code, chart, cockpit,
-question, timeline, scorecard, actions, assets, finding, findingsSummary,
+question, timeline, scorecard, assets, finding, findingsSummary,
 checklist, scopeMatrix, signOff`.
 The last five are the informatieveiligheid (pentest-reporting) layouts. Note the
 Marp `_class` token stored in Markdown can differ from the enum name (e.g. the
