@@ -118,11 +118,12 @@ class PrefsDraftStore implements DraftStore {
           entry.key: Uint8List.fromList(utf8.encode(entry.value! as String)),
       };
     } catch (e) {
-      // Een onleesbaar concept is geen reden om te gooien: de aanroeper ziet een
-      // leeg deck en haalt het opnieuw uit de repo. Wel loggen — dit hoort niet
-      // te kunnen.
+      // Een onleesbaar concept mag niet als een leeg (verworpen) deck lezen:
+      // dan haalt de sync-motor de wachtende commit stil weg en meldt "niets te
+      // synchroniseren", terwijl er juist offline werk verloren dreigt te gaan.
+      // Meld corruptie apart, zodat de aanroeper er een échte fout van maakt.
       logError('PrefsDraftStore: concept onleesbaar ($deckDir)', e);
-      return {};
+      throw DraftStoreCorrupt(deckDir, e);
     }
   }
 

@@ -33,3 +33,17 @@ class DraftStoreUnsupported implements Exception {
   @override
   String toString() => 'DraftStoreUnsupported: $message';
 }
+
+/// Gegooid wanneer een werkkopie er wél is maar niet te lezen valt (bv. een
+/// beschadigde opslagsleutel). Bewust ánders dan een afwezige werkkopie: dat
+/// laatste betekent "deck verworpen" en is een geldige reden om de wachtende
+/// commit te laten vallen, corruptie niet — die mag niet stilzwijgend als
+/// "niets te synchroniseren" wegvallen.
+class DraftStoreCorrupt implements Exception {
+  final String deckDir;
+  final Object cause;
+  const DraftStoreCorrupt(this.deckDir, this.cause);
+
+  @override
+  String toString() => 'DraftStoreCorrupt($deckDir): $cause';
+}

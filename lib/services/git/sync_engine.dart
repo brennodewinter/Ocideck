@@ -4,6 +4,7 @@ import 'package:path/path.dart' as p;
 
 import '../../utils/log.dart';
 import 'deck_mirror.dart';
+import 'draft_store.dart';
 import 'git_forge.dart';
 import 'outbox.dart';
 
@@ -112,7 +113,24 @@ class SyncEngine {
     PendingCommit commit,
     DeckFilePreparer? prepare,
   ) async {
-    final stored = await mirror.readDeck(commit.deckDir);
+    final Map<String, Uint8List> stored;
+    try {
+      stored = await mirror.readDeck(commit.deckDir);
+    } on DraftStoreCorrupt catch (e) {
+      // Beschadigde werkkopie: níét als "verworpen" behandelen. De commit valt
+      // uit de wachtrij (de bytes zijn onherstelbaar), maar het wordt als een
+      // échte fout gemeld in plaats van als het geruststellende "niets te
+      // synchroniseren" — anders raakt offline werk stil zoek.
+      logWarning('SyncEngine._flush: werkkopie beschadigd', e);
+      await outbox.remove(commit.deckDir);
+      return SyncOutcome(
+        deckDir: commit.deckDir,
+        status: SyncStatus.failed,
+        message:
+            'Een gewijzigd deck kon niet uit de wachtrij worden gelezen en is '
+            'overgeslagen.',
+      );
+    }
     if (stored.isEmpty) {
       // Geen werkkopie meer (deck verworpen): de intentie is zinloos geworden.
       await outbox.remove(commit.deckDir);
