@@ -72,6 +72,26 @@ void main() {
       );
     });
 
+    test('the style it will be drawn in is the style it measures', () {
+      // The bug this guards, and it survived a green test suite once: the
+      // measurement used a bare TextStyle while the card drew the theme's
+      // font. A wider font than the one measured still breaks mid-word.
+      // letterSpacing widens the text in any font, so this holds everywhere.
+      // Measured at the width where the plain style *just* fits, so the two
+      // answers cannot both be pinned at the floor.
+      const label = 'Aanvalsoppervlak';
+      final justFits = _widthNeeded(label);
+      expect(_fittedAt(label, justFits), FittedTypeLabel.baseFontSize);
+
+      final wide = FittedTypeLabel.fittedFontSize(
+        label,
+        justFits,
+        TextDirection.ltr,
+        base: const TextStyle(letterSpacing: 20),
+      );
+      expect(wide, lessThan(FittedTypeLabel.baseFontSize));
+    });
+
     test('every registered type label fits its card', () {
       // Guards the whole set at once, so a future type with a long name is
       // caught here rather than on someone's screen.

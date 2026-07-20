@@ -386,35 +386,43 @@ class FittedTypeLabel extends StatelessWidget {
   static TextStyle _styleAt(double fontSize) =>
       TextStyle(fontSize: fontSize, height: 1.15);
 
-  /// The width the longest single word needs at [fontSize]. Measured rather
-  /// than estimated, because the answer depends on the font the profile
-  /// happens to be using.
+  /// The width the longest single word needs, measured in [base] at
+  /// [fontSize].
+  ///
+  /// [base] must be the style the label is actually **rendered** in — the
+  /// inherited [DefaultTextStyle] merged with the size. Measuring a bare
+  /// `TextStyle` measures the framework's default font while the card draws the
+  /// theme's, which is wider: the measurement then reports that the word fits
+  /// and the eye reports otherwise.
   static double _longestWordWidth(
     String label,
     double fontSize,
     TextDirection direction,
+    TextStyle base,
   ) {
     final longest = label
         .split(RegExp(r'\s+'))
         .fold<String>('', (a, b) => b.length > a.length ? b : a);
     final painter = TextPainter(
-      text: TextSpan(text: longest, style: _styleAt(fontSize)),
+      text: TextSpan(text: longest, style: base.merge(_styleAt(fontSize))),
       textDirection: direction,
     )..layout();
     return painter.width;
   }
 
   /// The largest size at or below [baseFontSize] whose longest word fits
-  /// [maxWidth]. Exposed for the test that guards the step-down.
+  /// [maxWidth] when rendered in [base]. Exposed for the test that guards the
+  /// step-down.
   @visibleForTesting
   static double fittedFontSize(
     String label,
     double maxWidth,
-    TextDirection direction,
-  ) {
+    TextDirection direction, {
+    TextStyle base = const TextStyle(),
+  }) {
     var size = baseFontSize;
     while (size > minFontSize &&
-        _longestWordWidth(label, size, direction) > maxWidth) {
+        _longestWordWidth(label, size, direction, base) > maxWidth) {
       size -= 0.5;
     }
     return size;
@@ -423,13 +431,23 @@ class FittedTypeLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final direction = Directionality.of(context);
+    // The style the Text will inherit. Measure against this, or the card
+    // measures one font and draws another.
+    final inherited = DefaultTextStyle.of(context).style;
     return LayoutBuilder(
       builder: (context, constraints) => Text(
         label,
         textAlign: TextAlign.center,
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
-        style: _styleAt(fittedFontSize(label, constraints.maxWidth, direction)),
+        style: _styleAt(
+          fittedFontSize(
+            label,
+            constraints.maxWidth,
+            direction,
+            base: inherited,
+          ),
+        ),
       ),
     );
   }
