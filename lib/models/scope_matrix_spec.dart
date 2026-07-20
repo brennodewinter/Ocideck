@@ -54,7 +54,16 @@ enum ScopeStatus {
   }
 
   /// Whether this counts toward the "tested" coverage tally.
-  bool get isTested => this != notTested;
+  ///
+  /// [unreachable] telt níét mee. "Onbereikbaar" betekent dat de tester er niet
+  /// bij kón — een object waar niemand bij kwam heeft geen testresultaat, en het
+  /// meetellen leverde in het auditdossier de regel "Scope-objecten getoetst:
+  /// 3/3" op terwijl er één van de drie was getest. Juist het gatenoverzicht,
+  /// dat moet laten zien of alles wat in scope zat ook echt is getoetst, hield
+  /// er dan niets aan over.
+  ///
+  /// [deviation] telt wél mee: daar is getest, alleen anders dan afgesproken.
+  bool get isTested => this == tested || this == deviation;
 
   /// Dutch source label for the UI; localise with `l10n.d(status.dutchLabel)`.
   String get dutchLabel => switch (this) {

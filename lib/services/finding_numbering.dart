@@ -57,7 +57,19 @@ List<FindingListEntry> deckFindingList(Deck deck) => [
 /// Returns [deck] unchanged when it has no findings.
 Deck renumberFindings(Deck deck) {
   final slides = List<Slide>.from(deck.slides);
-  final idRemap = <String, String>{}; // old non-empty id → new id
+  // Koppen op vólgorde, niet op sleutel.
+  //
+  // Dit was een `Map<oudId, nieuwId>`, en twee koppen met dezelfde oude id
+  // overschreven elkaars ingang — waarna élke detaildia met die id naar de
+  // láátste groep werd verlegd. Dat is geen randgeval: "dia dupliceren" kopieert
+  // `findingId` en `findingRole` letterlijk mee, dus dupliceren-en-hernummeren
+  // liet de eerste bevinding zonder detaildia's achter en hing ze allemaal onder
+  // de tweede. In het opgeleverde deck staat dan een dia "F-02 · A detail"
+  // pal onder bevinding F-01.
+  //
+  // Een detaildia hoort bij de dichtstbijzijnde kop erbóven met dezelfde oude
+  // id; dat is ondubbelzinnig, ook als die id twee keer voorkomt.
+  final headers = <({int index, String oldId, String newId})>[];
   var n = 0;
 
   for (var i = 0; i < slides.length; i++) {
@@ -67,7 +79,9 @@ Deck renumberFindings(Deck deck) {
     }
     n++;
     final newId = 'F-${n.toString().padLeft(2, '0')}';
-    if (s.findingId.isNotEmpty) idRemap[s.findingId] = newId;
+    if (s.findingId.isNotEmpty) {
+      headers.add((index: i, oldId: s.findingId, newId: newId));
+    }
     final spec = FindingSpec.parse(s.customMarkdown);
     final newHeading = applyFindingPrefix(spec.heading, newId);
     slides[i] = s.copyWith(
@@ -81,7 +95,20 @@ Deck renumberFindings(Deck deck) {
   for (var i = 0; i < slides.length; i++) {
     final s = slides[i];
     if (s.findingRole == FindingRole.header) continue;
-    final newId = idRemap[s.findingId];
+    if (s.findingId.isEmpty) continue;
+    // De dichtstbijzijnde kop erbóven met dezelfde oude id. Staat die er niet
+    // (een detaildia vóór zijn kop), dan de eerste met die id — zodat de
+    // gebruikelijke volgorde-onafhankelijkheid blijft gelden.
+    // De laatste kop vóór deze dia wint; staat er geen enkele boven, dan de
+    // eerste met deze id (een detaildia vóór zijn kop).
+    String? above;
+    String? anywhere;
+    for (final h in headers) {
+      if (h.oldId != s.findingId) continue;
+      anywhere ??= h.newId;
+      if (h.index < i) above = h.newId;
+    }
+    final newId = above ?? anywhere;
     if (newId == null) continue;
     final title = _reFindingPrefix.hasMatch(s.title)
         ? applyFindingPrefix(s.title, newId)

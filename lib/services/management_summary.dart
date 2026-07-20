@@ -3,6 +3,7 @@ import '../models/deck.dart';
 import '../models/findings_summary_spec.dart';
 import '../models/scope_matrix_spec.dart';
 import '../models/slide.dart';
+import 'scope_coverage.dart' show normalizeScopeObject;
 
 /// Management-summary derivation (PENTEST_MIAUW §10.3 / 4.3.2 / 4.3.5): the
 /// management overview **regenerates from the deck**, so it is consistent by
@@ -78,14 +79,28 @@ ManagementSummary deckManagementSummary(Deck deck) {
     deckFindingSeverities(deck.slides),
     resolved: resolved,
   );
-  var objects = 0;
-  var tested = 0;
+  // Per object tellen, niet per rij.
+  //
+  // De ruwe rijaantallen werden opgeteld over alle scopematrices, dus een object
+  // dat op twee dia's staat — een planningsmatrix en een uitvoeringsmatrix is een
+  // gewone opzet — telde dubbel. Het gatenoverzicht ontdubbelt wél, dus twee
+  // weergaven van hetzelfde deck noemden een ander totaal: "3 / 5 getest" naast
+  // een lijst die van vier objecten uitging.
+  //
+  // Getest wint van niet-getest: is hetzelfde object érgens afgevinkt, dan telt
+  // het één keer als getest.
+  final statuses = <String, bool>{};
   for (final slide in deck.slides) {
     if (slide.type != SlideType.scopeMatrix) continue;
     final spec = ScopeMatrixSpec.fromSlide(slide.title, slide.tableRows);
-    objects += spec.total;
-    tested += spec.testedCount;
+    for (final row in spec.rows) {
+      final key = normalizeScopeObject(row.object);
+      if (key.isEmpty) continue;
+      statuses[key] = (statuses[key] ?? false) || row.status.isTested;
+    }
   }
+  final objects = statuses.length;
+  final tested = statuses.values.where((t) => t).length;
   return ManagementSummary(
     severities: severities,
     standards: deckStandardsUsed(deck),
