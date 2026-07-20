@@ -1,3 +1,4 @@
+import '../utils/lru_cache.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
 import '../utils/markdown_paste_cleanup.dart';
@@ -293,7 +294,52 @@ RichTextLayoutPlan planRichTextLayout({
   );
 }
 
+/// Gemeten plannen, op de dia en de geometrie waarvoor ze gemaakt zijn.
+///
+/// `planRichTextLayout` meet het hele document telkens opnieuw: de
+/// pas-schaal bisecteert, het inpakken meet een groeiende reeks blokken, en de
+/// verticale pas-schaal meet elk blok van elke pagina per iteratie. Alles komt
+/// uit op een verse `TextPainter`. Gemeten liep dat op tot ~5.700 metingen en
+/// ~114 ms voor één opbouw van een dia met vijfentwintig alinea's — en de
+/// preview bouwt op bij elke aanslag, twee keer zelfs (paginatelling en inhoud
+/// vragen hetzelfde plan op een andere referentiebreedte).
+///
+/// De vier andere previews gebruikten `memoizedRenderLayout` al; de rijke tekst
+/// was de duurste van de vijf en als enige niet aangesloten. Sleutel op de dia
+/// (onveranderlijk, dus identiteit is een geldige wijzigingsstempel) plus alles
+/// wat de uitkomst verder bepaalt.
+final LruCache<
+  (Slide, ThemeProfile, String, double, double, double, bool),
+  RichTextLayoutPlan
+>
+_richTextPlanCache = LruCache(256);
+
 RichTextLayoutPlan planRichTextForSlide({
+  required Slide slide,
+  required ThemeProfile profile,
+  required double w,
+  required double availW,
+  required double availH,
+  required String font,
+  bool splitWithImage = false,
+}) {
+  final key = (slide, profile, font, w, availW, availH, splitWithImage);
+  final cached = _richTextPlanCache[key];
+  if (cached != null) return cached;
+  final plan = _planRichTextForSlide(
+    slide: slide,
+    profile: profile,
+    w: w,
+    availW: availW,
+    availH: availH,
+    font: font,
+    splitWithImage: splitWithImage,
+  );
+  _richTextPlanCache[key] = plan;
+  return plan;
+}
+
+RichTextLayoutPlan _planRichTextForSlide({
   required Slide slide,
   required ThemeProfile profile,
   required double w,
