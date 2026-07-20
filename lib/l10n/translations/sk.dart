@@ -1790,6 +1790,12 @@ const _dutchSourceSk = {
 const _dutchSourceAddSk = <String, String>{
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Nepodarilo sa obnoviť všetko. Čo sa nedalo prečítať, zostalo zachované.',
+  'Verdieping': 'Prehĺbenie',
+  'Hoeveel detail?': 'Koľko detailov?',
+  'Met verdieping': 'S prehĺbením',
+  'Beknopt': 'Stručné',
+  'Het detail achter het verhaal. Deze slide gaat mee in de volledige export en valt weg in de beknopte — los van wie hem mag zien.':
+      'Detail za príbehom. Táto snímka ide s úplným exportom a zo stručného vypadáva — nezávisle od toho, kto ju smie vidieť.',
   'Bekijk de foto op ware grootte': 'Zobraziť fotografiu v plnej veľkosti',
   'Azure-sleutel of SAS-token': 'kľúč Azure alebo token SAS',
   'wachtwoordhash': 'odtlačok hesla',

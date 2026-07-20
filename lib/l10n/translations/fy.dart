@@ -741,6 +741,12 @@ const _dutchSourceFy = {
 const _dutchSourceAddFy = {
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Net alles koe hersteld wurde. Wat ûnlêsber wie, is bewarre bleaun.',
+  'Verdieping': 'Ferdjipping',
+  'Hoeveel detail?': 'Hoefolle detail?',
+  'Met verdieping': 'Mei ferdjipping',
+  'Beknopt': 'Beknopt',
+  'Het detail achter het verhaal. Deze slide gaat mee in de volledige export en valt weg in de beknopte — los van wie hem mag zien.':
+      'It detail achter it ferhaal. Dizze slide giet mei yn de folsleine eksport en falt wei yn de beknopte — los fan wa\'t him sjen mei.',
   'Bekijk de foto op ware grootte': 'Besjoch de foto op ware grutte',
   'Azure-sleutel of SAS-token': 'Azure-kaai of SAS-token',
   'wachtwoordhash': 'wachtwurdhash',

@@ -12,6 +12,7 @@ typedef _BlockDirectives = ({
   String notes,
   double advanceDuration,
   bool skipped,
+  bool isDetail,
   TlpLevel tlp,
   PrivacyDisposition? privacy,
   QualityDisposition quality,
@@ -82,6 +83,7 @@ extension _MarkdownParseDirectives on MarkdownService {
     final notesBuffer = StringBuffer();
     double advanceDuration = 0;
     bool skipped = false;
+    bool isDetail = false;
     TlpLevel slideTlp = TlpLevel.none;
     PrivacyDisposition? slidePrivacy;
     var slideQuality = QualityDisposition.warn;
@@ -115,6 +117,8 @@ extension _MarkdownParseDirectives on MarkdownService {
         advanceDuration = (d.isFinite && d > 0) ? d.clamp(0, 86400) : 0;
       } else if (content == 'skip') {
         skipped = true;
+      } else if (content == 'ocideck_detail') {
+        isDetail = true;
       } else if (content.startsWith('tlp:')) {
         slideTlp = TlpLevelX.fromKey(content.substring(4));
       } else if (content.startsWith('ocideck_privacy:')) {
@@ -183,6 +187,7 @@ extension _MarkdownParseDirectives on MarkdownService {
       notes: notes,
       advanceDuration: advanceDuration,
       skipped: skipped,
+      isDetail: isDetail,
       tlp: slideTlp,
       privacy: slidePrivacy,
       quality: slideQuality,

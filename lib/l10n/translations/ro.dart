@@ -1801,6 +1801,12 @@ const _dutchSourceRo = {
 const _dutchSourceAddRo = <String, String>{
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Nu a putut fi restaurat totul. Ce nu a putut fi citit a fost păstrat.',
+  'Verdieping': 'Aprofundare',
+  'Hoeveel detail?': 'Cât de detaliat?',
+  'Met verdieping': 'Cu aprofundare',
+  'Beknopt': 'Concis',
+  'Het detail achter het verhaal. Deze slide gaat mee in de volledige export en valt weg in de beknopte — los van wie hem mag zien.':
+      'Detaliul din spatele poveștii. Acest slide merge cu exportul complet și dispare din cel concis — indiferent de cine îl poate vedea.',
   'Bekijk de foto op ware grootte': 'Vezi fotografia la dimensiune completă',
   'Azure-sleutel of SAS-token': 'cheie Azure sau token SAS',
   'wachtwoordhash': 'amprentă de parolă',

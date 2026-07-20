@@ -1791,6 +1791,12 @@ const _dutchSourceLt = {
 const _dutchSourceAddLt = <String, String>{
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Ne viską pavyko atkurti. Tai, ko nepavyko perskaityti, išsaugota.',
+  'Verdieping': 'Gilinimas',
+  'Hoeveel detail?': 'Kiek detalių?',
+  'Met verdieping': 'Su gilinimu',
+  'Beknopt': 'Glaustas',
+  'Het detail achter het verhaal. Deze slide gaat mee in de volledige export en valt weg in de beknopte — los van wie hem mag zien.':
+      'Detalė už istorijos. Ši skaidrė keliauja su pilnu eksportu ir iškrenta iš glausto — nepriklausomai nuo to, kas gali ją matyti.',
   'Bekijk de foto op ware grootte': 'Peržiūrėti nuotrauką visu dydžiu',
   'Azure-sleutel of SAS-token': 'Azure raktas arba SAS prieigos raktas',
   'wachtwoordhash': 'slaptažodžio maiša',

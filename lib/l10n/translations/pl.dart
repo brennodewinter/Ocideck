@@ -1795,6 +1795,12 @@ const _dutchSourcePl = {
 const _dutchSourceAddPl = <String, String>{
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Nie wszystko udało się przywrócić. To, czego nie dało się odczytać, zostało zachowane.',
+  'Verdieping': 'Pogłębienie',
+  'Hoeveel detail?': 'Ile szczegółów?',
+  'Met verdieping': 'Z pogłębieniem',
+  'Beknopt': 'Skrócony',
+  'Het detail achter het verhaal. Deze slide gaat mee in de volledige export en valt weg in de beknopte — los van wie hem mag zien.':
+      'Szczegół za opowieścią. Ten slajd jedzie z pełnym eksportem i wypada ze skróconego — niezależnie od tego, kto może go zobaczyć.',
   'Bekijk de foto op ware grootte': 'Zobacz zdjęcie w pełnym rozmiarze',
   'Azure-sleutel of SAS-token': 'klucz Azure lub token SAS',
   'wachtwoordhash': 'skrót hasła',

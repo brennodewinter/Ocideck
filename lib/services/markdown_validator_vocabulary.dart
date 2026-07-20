@@ -93,6 +93,7 @@ const _supportedCommentDirectives = {
   'tlp',
   'advance',
   'skip',
+  'ocideck_detail',
   'ocideck_list_style',
   'ocideck_checklist_progress',
   // Checklist<->scope-koppeling; `_parseFindingLink` licht deze.

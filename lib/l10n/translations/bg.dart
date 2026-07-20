@@ -1806,6 +1806,12 @@ const _dutchSourceBg = {
 const _dutchSourceAddBg = <String, String>{
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Не всичко можа да бъде възстановено. Нечетимото е запазено.',
+  'Verdieping': 'Задълбочаване',
+  'Hoeveel detail?': 'Колко подробности?',
+  'Met verdieping': 'Със задълбочаване',
+  'Beknopt': 'Кратко',
+  'Het detail achter het verhaal. Deze slide gaat mee in de volledige export en valt weg in de beknopte — los van wie hem mag zien.':
+      'Детайлът зад историята. Този слайд пътува с пълния експорт и отпада от краткия — независимо от това кой може да го види.',
   'Bekijk de foto op ware grootte': 'Вижте снимката в пълен размер',
   'Azure-sleutel of SAS-token': 'Azure ключ или SAS токен',
   'wachtwoordhash': 'хеш на парола',

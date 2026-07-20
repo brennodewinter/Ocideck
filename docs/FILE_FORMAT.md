@@ -1401,6 +1401,7 @@ for presenter notes):
 | `<!-- ocideck_finding_id: F-03 -->` · `<!-- ocideck_finding_role: header\|detail\|evidence -->` | Finding-group link: ties a header card to its detail/evidence slides (§5). Written on any slide with a non-empty finding id. |
 | `<!-- ocideck_ai_assisted: field1, field2 -->` | The slide's fields whose text was drafted by AI and not yet human-reviewed. While any slide carries this marker the deck **cannot be finalised/sealed** (the EIS 1.6 attestation must cover human-verified text). Written only when non-empty; AI drafting sets it and clears it on review. |
 | `<!-- advance: N.N -->` | Auto-advance after N.N seconds (0 = off). |
+| `<!-- ocideck_detail -->` | Verdiepingsslide: valt weg in de beknopte export, blijft in de volledige. Alleen geschreven als de vlag aanstaat. |
 | `<!-- skip -->` | Skip slide during both presenting and export. |
 | `<!-- tlp: <key> -->` | Per-slide TLP level (see §3.1). The slide is held back if the presentation TLP is lower. Written only when not `none`. |
 | `<!-- ... (free text) ... -->` | **Presenter notes** (any other comment that does not start with `_`). |

@@ -372,6 +372,21 @@ class Slide {
   /// this. [TlpLevel.none] = no per-slide restriction (always shown).
   final TlpLevel tlp;
 
+  /// Marks this slide as **depth**: the detail behind the story rather than the
+  /// story. It is left out when the deck is exported as the condensed version,
+  /// and kept in the full one.
+  ///
+  /// A third, independent axis next to [skipped] and [tlp], and deliberately so:
+  /// TLP asks *who may see this*, redaction asks *which data may leave*, and
+  /// this asks *how much detail this reader wants*. A slide can be perfectly
+  /// shareable and still be more than a management audience came for. Folding
+  /// any two of those into one field would mean a slide could not be, say,
+  /// public and deep at once.
+  ///
+  /// Round-trips as `<!-- ocideck_detail -->`, written only when true, so a deck
+  /// that never uses it is byte-identical to before.
+  final bool isDetail;
+
   /// Wat er met privacybevindingen op déze slide gebeurt. `null` = erf de stand
   /// van het deck. Round-trips als `<!-- ocideck_privacy: … -->`.
   final PrivacyDisposition? privacy;
@@ -496,6 +511,7 @@ class Slide {
     this.tableRows = const [],
     this.tableEditable = false,
     this.tableMarkOverdue = false,
+    this.isDetail = false,
     this.timelineLayout = TimelineLayout.auto,
     this.timelineReveal = TimelineReveal.onEnter,
     this.timelineAnimationMs,
@@ -606,6 +622,7 @@ class Slide {
       tableRows: src.tableRows.map((r) => List<String>.from(r)).toList(),
       tableEditable: src.tableEditable,
       tableMarkOverdue: src.tableMarkOverdue,
+      isDetail: src.isDetail,
       timelineLayout: src.timelineLayout,
       timelineReveal: src.timelineReveal,
       timelineAnimationMs: src.timelineAnimationMs,
@@ -669,6 +686,7 @@ class Slide {
     List<List<String>>? tableRows,
     bool? tableEditable,
     bool? tableMarkOverdue,
+    bool? isDetail,
     TimelineLayout? timelineLayout,
     TimelineReveal? timelineReveal,
     int? timelineAnimationMs,
@@ -735,6 +753,7 @@ class Slide {
       tableRows: tableRows ?? this.tableRows,
       tableEditable: tableEditable ?? this.tableEditable,
       tableMarkOverdue: tableMarkOverdue ?? this.tableMarkOverdue,
+      isDetail: isDetail ?? this.isDetail,
       timelineLayout: timelineLayout ?? this.timelineLayout,
       timelineReveal: timelineReveal ?? this.timelineReveal,
       timelineAnimationMs: clearTimelineAnimation

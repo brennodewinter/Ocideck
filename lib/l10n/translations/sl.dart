@@ -1785,6 +1785,12 @@ const _dutchSourceSl = {
 const _dutchSourceAddSl = <String, String>{
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Ni bilo mogoče obnoviti vsega. Kar ni bilo berljivo, je ohranjeno.',
+  'Verdieping': 'Poglobitev',
+  'Hoeveel detail?': 'Koliko podrobnosti?',
+  'Met verdieping': 'S poglobitvijo',
+  'Beknopt': 'Jedrnato',
+  'Het detail achter het verhaal. Deze slide gaat mee in de volledige export en valt weg in de beknopte — los van wie hem mag zien.':
+      'Podrobnost za zgodbo. Ta prosojnica potuje s polnim izvozom in izpade iz jedrnatega — ne glede na to, kdo jo sme videti.',
   'Bekijk de foto op ware grootte': 'Oglejte si fotografijo v polni velikosti',
   'Azure-sleutel of SAS-token': 'ključ Azure ali žeton SAS',
   'wachtwoordhash': 'zgoščena vrednost gesla',

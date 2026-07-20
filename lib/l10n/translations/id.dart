@@ -1783,6 +1783,12 @@ const _dutchSourceId = {
 const _dutchSourceAddId = <String, String>{
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Tidak semuanya dapat dipulihkan. Yang tidak terbaca tetap disimpan.',
+  'Verdieping': 'Pendalaman',
+  'Hoeveel detail?': 'Seberapa rinci?',
+  'Met verdieping': 'Dengan pendalaman',
+  'Beknopt': 'Ringkas',
+  'Het detail achter het verhaal. Deze slide gaat mee in de volledige export en valt weg in de beknopte — los van wie hem mag zien.':
+      'Detail di balik cerita. Slide ini ikut dalam ekspor lengkap dan hilang dari yang ringkas — terlepas dari siapa yang boleh melihatnya.',
   'Bekijk de foto op ware grootte': 'Lihat foto dalam ukuran penuh',
   'Azure-sleutel of SAS-token': 'kunci Azure atau token SAS',
   'wachtwoordhash': 'hash kata sandi',

@@ -330,6 +330,21 @@ class MarkdownService {
   /// De dispositie wordt alleen geschreven als de slide er een heeft; `null`
   /// betekent "erf de stand van het deck", en dat schrijven zou elke bestaande
   /// .md bij het eerste opslaan dikker maken zonder dat er iets veranderd is.
+  /// De markeringen die bepalen of een slide het publiek bereikt: overslaan en
+  /// verdieping. Beide alleen geschreven wanneer ze aanstaan, zodat een deck dat
+  /// ze niet gebruikt byte-identiek blijft. (TLP schrijft
+  /// [_writeSlideClassification].)
+  void _writeAudienceMarkers(StringBuffer buf, Slide slide) {
+    if (slide.skipped) {
+      buf.writeln();
+      buf.writeln('<!-- skip -->');
+    }
+    if (slide.isDetail) {
+      buf.writeln();
+      buf.writeln('<!-- ocideck_detail -->');
+    }
+  }
+
   void _writeSlideClassification(StringBuffer buf, Slide slide) {
     if (slide.tlp != TlpLevel.none) {
       buf.writeln();
@@ -473,12 +488,7 @@ class MarkdownService {
       );
     }
 
-    // Slides marked to be skipped during presenting/exporting. Persisted so the
-    // skip state survives save/load round-trips.
-    if (slide.skipped) {
-      buf.writeln();
-      buf.writeln('<!-- skip -->');
-    }
+    _writeAudienceMarkers(buf, slide);
 
     _writeSlideClassification(buf, slide);
 

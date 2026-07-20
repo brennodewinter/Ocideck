@@ -1774,6 +1774,12 @@ const _dutchSourceEt = {
 const _dutchSourceAddEt = <String, String>{
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Kõike ei õnnestunud taastada. See, mida ei saanud lugeda, on alles.',
+  'Verdieping': 'Süvendus',
+  'Hoeveel detail?': 'Kui palju üksikasju?',
+  'Met verdieping': 'Süvendusega',
+  'Beknopt': 'Lühike',
+  'Het detail achter het verhaal. Deze slide gaat mee in de volledige export en valt weg in de beknopte — los van wie hem mag zien.':
+      'Loo taga olev üksikasi. See slaid liigub täisekspordiga kaasa ja jääb lühikesest välja — sõltumata sellest, kes seda näha tohib.',
   'Bekijk de foto op ware grootte': 'Vaata fotot täissuuruses',
   'Azure-sleutel of SAS-token': 'Azure\'i võti või SAS-luba',
   'wachtwoordhash': 'parooli räsi',

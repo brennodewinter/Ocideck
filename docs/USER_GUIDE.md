@@ -1376,6 +1376,35 @@ If you use the optional AI assistance, everything the scanner finds is stripped
 before the text leaves your device — **even on a slide you marked as accepted**.
 Deciding that a room may see a name is not deciding that a language model may.
 
+## Depth — a management version and a technical one
+
+Mark a slide as **Depth** in *Per-slide options* and it travels with the full
+export but drops out of the condensed one. The export dialog then offers **With
+depth** / **Condensed**, and the choice lands in the filename (`…-beknopt.pdf`)
+for the same reason the redaction profile does: sending the wrong version is a
+mistake you should be able to *see*, not have to remember.
+
+This is a **third, independent axis**, and that is the point:
+
+| Axis | The question it answers |
+| --- | --- |
+| TLP | *Who* may see this slide? |
+| Redaction | *Which data* may leave the building? |
+| Depth | *How much detail* did this reader come for? |
+
+A slide can be perfectly public and still be more than a management audience
+wants. Folding depth into TLP would make that slide impossible to express — you
+would have to classify your appendix as confidential to keep it out of the short
+version, which is a lie that later bites whoever relies on the classification.
+
+The choice appears only when the deck actually has both kinds of slide;
+otherwise "condensed" would produce the same file, or an empty one.
+
+**Presenting is unaffected** — it always shows everything. The condensed version
+is a property of what you hand over, and discovering halfway through a talk that
+your deck is missing slides is not an improvement. If you want to present the
+short version, export it and present that.
+
 ## Two versions from one source
 
 When a deck holds findings, the export dialog asks **who this export is for**:
