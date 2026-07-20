@@ -309,13 +309,14 @@ extension _MarkdownSerialize on MarkdownService {
       buf.writeln('# ${slide.title}');
       buf.writeln();
     }
-    buf.writeln('```${slide.codeLanguage.trim()}');
+    final fence = fenceFor(slide.customMarkdown);
+    buf.writeln('$fence${slide.codeLanguage.trim()}');
     buf.write(slide.customMarkdown);
     if (slide.customMarkdown.isNotEmpty &&
         !slide.customMarkdown.endsWith('\n')) {
       buf.writeln();
     }
-    buf.writeln('```');
+    buf.writeln(fence);
   }
 
   void _writeChartSlide(StringBuffer buf, Slide slide, bool inlineChartData) {

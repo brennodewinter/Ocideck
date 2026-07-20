@@ -521,6 +521,7 @@ class MarkdownService {
     final blocks = <String>[];
     final current = <String>[];
     String? fenceChar; // '`' or '~' while inside a fence, else null.
+    var fenceLen = 0; // de lengte van de openende rij, zie [isBareFence].
     for (final line in lines) {
       final trimmed = line.trimLeft();
       if (fenceChar == null) {
@@ -531,16 +532,32 @@ class MarkdownService {
         }
         if (trimmed.startsWith('```')) {
           fenceChar = '`';
+          fenceLen = _leadingRun(trimmed, '`');
         } else if (trimmed.startsWith('~~~')) {
           fenceChar = '~';
+          fenceLen = _leadingRun(trimmed, '~');
         }
-      } else if (isBareFence(trimmed, fenceChar)) {
+      } else if (isBareFence(trimmed, fenceChar) &&
+          trimmed.length >= fenceLen) {
+        // Alleen een rij die minstens even lang is sluit het blok. Een kortere
+        // rij binnenin is inhoud — precies waarvoor CommonMark langere fences
+        // heeft — en mag de slide dus niet in tweeën scheuren.
         fenceChar = null;
+        fenceLen = 0;
       }
       current.add(line);
     }
     blocks.add(current.join('\n'));
     return blocks;
+  }
+
+  /// Hoeveel [char]s [trimmed] achter elkaar begint.
+  static int _leadingRun(String trimmed, String char) {
+    var n = 0;
+    while (n < trimmed.length && trimmed[n] == char) {
+      n++;
+    }
+    return n;
   }
 
   /// True when [trimmed] is a bare fence line: three or more of [fenceChar] and

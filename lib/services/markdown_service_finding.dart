@@ -107,7 +107,7 @@ extension _MarkdownFindingParse on MarkdownService {
   }) {
     final tokens = cssClass.split(_reWhitespace);
     if (!tokens.contains('finding')) return null;
-    final body = normalizeRichTextMarkdown(
+    final body = normalizeRichTextMarkdownForStorage(
       unescapeDeckMarkdownDashLines(remaining),
     );
     final effectiveClass = tokens

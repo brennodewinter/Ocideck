@@ -4,6 +4,7 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/utils/csv.dart';
 import 'package:ocideck/utils/deck_markdown_dashes.dart';
+import 'package:ocideck/utils/markdown_paste_cleanup.dart';
 import 'package:ocideck/utils/table_clipboard.dart';
 
 /// Inhoud die bij het opslaan en weer inlezen stilzwijgend verdween.
@@ -182,6 +183,119 @@ void main() {
           ['1', '2'],
         ],
       );
+    });
+  });
+
+  group('codefence', () {
+    test('een ``` in een codevoorbeeld kapt de code niet af', () {
+      final out = roundTrip(
+        slideOf(
+          SlideType.code,
+        ).copyWith(codeLanguage: 'md', customMarkdown: 'a\n```\nx\n```\nb'),
+      );
+      expect(out.customMarkdown, 'a\n```\nx\n```\nb');
+      expect(out.codeLanguage, 'md');
+    });
+
+    test('en scheurt de slide ook niet in tweeën', () {
+      final deck = md.parseDeck(
+        md.generateDeck(
+          Deck(
+            title: 'T',
+            slides: [
+              slideOf(
+                SlideType.code,
+              ).copyWith(codeLanguage: 'md', customMarkdown: 'a\n```\n---\nb'),
+            ],
+          ),
+        ),
+      )!;
+      expect(deck.slides.length, 1);
+      expect(deck.slides.first.customMarkdown, 'a\n```\n---\nb');
+    });
+
+    test('code zonder backticks houdt de gewone fence van drie', () {
+      final text = md.generateDeck(
+        Deck(
+          title: 'T',
+          slides: [
+            slideOf(
+              SlideType.code,
+            ).copyWith(codeLanguage: 'dart', customMarkdown: 'final x = 1;'),
+          ],
+        ),
+      );
+      expect(text, contains('```dart'));
+      expect(text, isNot(contains('````')));
+    });
+  });
+
+  group('notities en opmerkingen', () {
+    test('een opmerking van de auteur blijft in de tekst staan', () {
+      final out = roundTrip(
+        slideOf(
+          SlideType.freeMarkdown,
+        ).copyWith(customMarkdown: 'tekst\n<!-- interne opmerking -->\nmeer'),
+      );
+      expect(out.customMarkdown, contains('<!-- interne opmerking -->'));
+      expect(out.notes, isEmpty, reason: 'het zijn geen sprekersnotities');
+    });
+
+    test('een notitie die als een richtlijn leest, overleeft', () {
+      // Deze vier werden opgegeten door de richtlijnenketen.
+      for (final note in [
+        'skip',
+        'tlp: rood',
+        'advance: nu',
+        '_cursief_ punt',
+      ]) {
+        final out = roundTrip(
+          slideOf(SlideType.bullets).copyWith(bullets: ['x'], notes: note),
+        );
+        expect(out.notes, note, reason: 'notitie "$note" ging verloren');
+        expect(
+          out.skipped,
+          isFalse,
+          reason: 'en werd als richtlijn uitgevoerd',
+        );
+      }
+    });
+
+    test('de echte richtlijn werkt nog wél, naast een notitie', () {
+      final out = roundTrip(
+        slideOf(
+          SlideType.bullets,
+        ).copyWith(bullets: ['x'], skipped: true, notes: 'let op'),
+      );
+      expect(out.skipped, isTrue);
+      expect(out.notes, 'let op');
+    });
+
+    test('meerregelige notities blijven meerregelig', () {
+      final out = roundTrip(
+        slideOf(
+          SlideType.bullets,
+        ).copyWith(bullets: ['x'], notes: 'regel een\nregel twee'),
+      );
+      expect(out.notes, 'regel een\nregel twee');
+    });
+  });
+
+  group('ontsnappingen', () {
+    test('blijven in de opslag staan en veranderen niet van betekenis', () {
+      const src = r'Prijs 100\% en \*niet cursief\* en \- geen lijst';
+      final out = roundTrip(
+        slideOf(SlideType.freeMarkdown).copyWith(customMarkdown: src),
+      );
+      expect(out.customMarkdown, src);
+
+      // Tweemaal opslaan verandert er nog steeds niets aan.
+      final twice = roundTrip(out);
+      expect(twice.customMarkdown, src);
+    });
+
+    test('maar op het scherm zie je ze niet', () {
+      expect(normalizeRichTextMarkdown(r'\- geen lijst'), '- geen lijst');
     });
   });
 }

@@ -377,12 +377,12 @@ extension _MarkdownParse on MarkdownService {
     List<String> richTextLines,
   ) {
     if (type == SlideType.freeMarkdown || type.usesScaffoldMarkdownBody) {
-      return normalizeRichTextMarkdown(
+      return normalizeRichTextMarkdownForStorage(
         unescapeDeckMarkdownDashLines(remaining),
       );
     }
     if (listStyle == ListStyle.richText) {
-      return normalizeRichTextMarkdown(
+      return normalizeRichTextMarkdownForStorage(
         unescapeDeckMarkdownDashLines(richTextLines.join('\n').trim()),
       );
     }
