@@ -4,37 +4,71 @@
 // zonder gedragswijziging; alle imports leven in het hoofdbestand.
 part of '../markdown_service.dart';
 
+/// Wat [_MarkdownParseDirectives._parseBlockDirectives] uit één slideblok
+/// haalt: de body zonder richtlijnen, plus elke richtlijn die erin stond.
+typedef _BlockDirectives = ({
+  String cssClass,
+  String remaining,
+  String notes,
+  double advanceDuration,
+  bool skipped,
+  TlpLevel tlp,
+  PrivacyDisposition? privacy,
+  QualityDisposition quality,
+  List<String> bullets,
+  List<String> bullets2,
+  ListStyle listStyle,
+  int? timelineAnimationMs,
+  int? timelineCurrentIndex,
+  bool showChecklistProgress,
+  bool continueNumbering,
+  bool continuesSplit,
+  bool titleImageOverlay,
+  String titleTextColorOverride,
+  BulletMarker? bulletMarkerOverride,
+  String columnTitle1,
+  String columnTitle2,
+  int styleImageWidth,
+});
+
+/// Neemt [content] op in het notitieblok en haalt het uit de body.
+///
+/// Sprekersnotities schrijft de serialiser altijd over meerdere regels (`<!--`,
+/// de tekst, `-->`); élke richtlijn past op één regel. Dat verschil is het enige
+/// waaraan notities te herkennen zijn, en zonder die toets ging het twee kanten
+/// op mis: een door de auteur getypte opmerking in de tekst verdween uit de body
+/// en dook op ín de notities, en een notitie die toevallig met `skip` of `tlp:`
+/// begon werd als richtlijn opgegeten. Beide zonder melding.
+///
+/// Een `_`-voorvoegsel blijft een Marp-richtlijn en gaat er nog steeds uit; wat
+/// verder op één regel staat en niet herkend wordt, is van de auteur en blijft
+/// staan waar het staat.
+/// Of een onbekend commentaar van één regel als sprekersnotitie telt.
+///
+/// Alleen wanneer er verder niets meer volgt op de slide ([tail] is leeg op
+/// eventuele andere commentaren na). In een handgeschreven `.md` is een
+/// commentaarregel onderaan de gangbare afspraak voor een notitie, en die blijft
+/// zo werken.
+///
+/// Staat het commentaar middenín de tekst, dan is het een opmerking van de
+/// auteur en hoort het te blijven staan waar het staat. Vroeger werd het uit de
+/// body gehaald en bij de notities gezet: inhoud die van plek verspringt zonder
+/// dat iemand erom vroeg, en op de plek zelf niet meer terug te vinden.
+bool _isTailNote(String tail) =>
+    tail.replaceAll(_reHtmlComment, '').trim().isEmpty;
+
+String _takeNote(StringBuffer notes, String content) {
+  notes.write(notes.isEmpty ? content : '\n$content');
+  return '';
+}
+
 extension _MarkdownParseDirectives on MarkdownService {
   /// Parse the leading `<!-- _class -->` marker and every other `<!-- ... -->`
   /// directive comment (advance/skip/tlp/_style/two-bullets/timeline/list-style/
   /// checklist/title-image/title-colour/bullet-marker), accumulating presenter
   /// notes from any non-directive comment. Returns the stripped body plus all
   /// the decoded directive values.
-  ({
-    String cssClass,
-    String remaining,
-    String notes,
-    double advanceDuration,
-    bool skipped,
-    TlpLevel tlp,
-    PrivacyDisposition? privacy,
-    QualityDisposition quality,
-    List<String> bullets,
-    List<String> bullets2,
-    ListStyle listStyle,
-    int? timelineAnimationMs,
-    int? timelineCurrentIndex,
-    bool showChecklistProgress,
-    bool continueNumbering,
-    bool continuesSplit,
-    bool titleImageOverlay,
-    String titleTextColorOverride,
-    BulletMarker? bulletMarkerOverride,
-    String columnTitle1,
-    String columnTitle2,
-    int styleImageWidth,
-  })
-  _parseBlockDirectives(String block) {
+  _BlockDirectives _parseBlockDirectives(String block) {
     String cssClass = '';
     String remaining = block;
 
@@ -67,8 +101,12 @@ extension _MarkdownParseDirectives on MarkdownService {
     // bulletsImage slides store their panel width in `<!-- _style:
     // --image-width: N%; -->`; capture it before the comment is stripped.
     int styleImageWidth = 0;
-    remaining = remaining.replaceAllMapped(_reHtmlComment, (m) {
-      final content = m.group(1)!.trim();
+    final source = remaining;
+    remaining = source.replaceAllMapped(_reHtmlComment, (m) {
+      final raw = m.group(1)!;
+      final content = raw.trim();
+      // Meerregelig is altijd een notitieblok — richtlijnen passen op één regel.
+      if (raw.contains('\n')) return _takeNote(notesBuffer, content);
       if (content.startsWith('advance:')) {
         // Clamp fail-closed: double.tryParse accepts Infinity/NaN/overflow
         // literals, and `(Infinity * 1000).round()` throws in the auto-advance
@@ -129,7 +167,11 @@ extension _MarkdownParseDirectives on MarkdownService {
         bulletMarkerOverride =
             _bulletMarkerFrom(content.substring(22)) ?? bulletMarkerOverride;
       } else if (!content.startsWith('_')) {
-        notesBuffer.write(notesBuffer.isEmpty ? content : '\n$content');
+        // Geen richtlijn die wij kennen: notitie of opmerking? Zie [_isTailNote].
+        if (_isTailNote(source.substring(m.end))) {
+          return _takeNote(notesBuffer, content);
+        }
+        return m.group(0)!;
       }
       return '';
     }).trim();

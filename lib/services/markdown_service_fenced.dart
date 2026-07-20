@@ -5,7 +5,30 @@ part of 'markdown_service.dart';
 
 // Hoisted hot-path regexes (zie markdown_service_parse.dart): deze draaien in
 // de per-regel lus van elke fenced-blok-parser.
-final _reFenceInfo = RegExp(r'^\s*```(.*)$');
+/// Een fence-regel: de rij backticks (drie of meer) plus de info-string erachter.
+///
+/// De léngte doet ertoe. CommonMark laat een fence van vier of meer toe juist
+/// zodat er een kortere rij ín kan staan, en een sluitende fence moet minstens
+/// even lang zijn als de openende. Zonder die lengte sloot een ``` in een
+/// codevoorbeeld het blok voortijdig en verdween de rest van de code.
+final _reFenceInfo = RegExp(r'^\s*(`{3,})(.*)$');
+
+/// De fence waarmee [body] veilig omsloten kan worden: altijd langer dan de
+/// langste rij backticks die erin voorkomt, en minstens drie.
+String fenceFor(String body) {
+  var longest = 0;
+  var run = 0;
+  for (var i = 0; i < body.length; i++) {
+    if (body[i] == '`') {
+      run++;
+      if (run > longest) longest = run;
+    } else {
+      run = 0;
+    }
+  }
+  return '`' * (longest >= 3 ? longest + 1 : 3);
+}
+
 final _reImageMdAllowEmpty = RegExp(r'!\[[^\]]*\]\(([^)]*)\)');
 final _reHtmlTag = RegExp(r'<[^>]+>');
 
@@ -33,19 +56,28 @@ class _FencedScan {
 /// audio herkend. Velden die een slidetype niet gebruikt, negeert de parser.
 _FencedScan _scanFencedBlock(String remaining) {
   final scan = _FencedScan();
-  var inFence = false;
+  // 0 = buiten een fence; anders de lengte van de openende rij backticks.
+  var fenceLen = 0;
   for (final line in remaining.split('\n')) {
     final fence = _reFenceInfo.firstMatch(line);
     if (fence != null) {
-      if (!inFence) {
-        inFence = true;
-        scan.fenceInfo = fence.group(1)!.trim();
-      } else {
-        inFence = false;
+      final ticks = fence.group(1)!.length;
+      final info = fence.group(2)!.trim();
+      if (fenceLen == 0) {
+        fenceLen = ticks;
+        scan.fenceInfo = info;
+        continue;
       }
+      // Sluiten kan alleen met een kále rij die minstens even lang is. Een
+      // kortere rij, of één met een info-string, is gewoon inhoud.
+      if (info.isEmpty && ticks >= fenceLen) {
+        fenceLen = 0;
+        continue;
+      }
+      scan.content.add(line);
       continue;
     }
-    if (inFence) {
+    if (fenceLen > 0) {
       scan.content.add(line);
       continue;
     }

@@ -240,7 +240,16 @@ extension _MarkdownSerialize on MarkdownService {
       _writeImageCaption(buf, slide.imageCaption);
       buf.writeln();
     }
-    if (slide.quote.isNotEmpty) buf.writeln('> ${slide.quote}');
+    if (slide.quote.isNotEmpty) {
+      // Elke regel zijn eigen `>`. De editor laat vijf regels toe, dus een
+      // meerregelig citaat is gewoon te typen; zonder prefix per regel las de
+      // parser alleen de eerste terug en verdween de rest bij het opslaan.
+      // Een lege regel binnen het citaat wordt een kale `>`, want een regel met
+      // alleen `> ` verliest zijn spatie bij het trimmen.
+      for (final line in slide.quote.split('\n')) {
+        buf.writeln(line.isEmpty ? '>' : '> $line');
+      }
+    }
     if (slide.quoteAuthor.isNotEmpty) {
       buf.writeln();
       buf.writeln('— ${slide.quoteAuthor}');
@@ -300,13 +309,14 @@ extension _MarkdownSerialize on MarkdownService {
       buf.writeln('# ${slide.title}');
       buf.writeln();
     }
-    buf.writeln('```${slide.codeLanguage.trim()}');
+    final fence = fenceFor(slide.customMarkdown);
+    buf.writeln('$fence${slide.codeLanguage.trim()}');
     buf.write(slide.customMarkdown);
     if (slide.customMarkdown.isNotEmpty &&
         !slide.customMarkdown.endsWith('\n')) {
       buf.writeln();
     }
-    buf.writeln('```');
+    buf.writeln(fence);
   }
 
   void _writeChartSlide(StringBuffer buf, Slide slide, bool inlineChartData) {

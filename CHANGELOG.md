@@ -575,6 +575,32 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   een rapport dat er al een droeg bood het verzegelen alsnog aan. De
   handtekeningvelden blijven wél bewerkbaar — die gegevens horen bij het deck,
   niet bij de schakelaar.
+- **Tien soorten inhoud verdwenen bij opslaan en weer inlezen.** Het bestand ís
+  het document, dus alles wat je kunt typen hoort er na een rondje nog te staan.
+  Geen van deze gevallen gaf een melding — je zag het pas als je ging kijken, en
+  meestal pas veel later.
+
+  - *Een ``` in een codevoorbeeld kapte de code af,* en met een `---` erachter
+    scheurde de slide bovendien in tweeën. De fence is nu altijd langer dan wat
+    erin staat, zoals CommonMark voorschrijft.
+  - *Een opmerking van de auteur verdween uit de tekst en dook op in de
+    sprekersnotities;* een notitie die begon met `skip` of `tlp:` werd andersom
+    als richtlijn opgegeten, inclusief het overslaan van de slide.
+  - *Backslash-ontsnappingen werden bij het inlezen weggehaald,* waarna `\- geen
+    lijst` na één keer opslaan een échte opsommingsstreep was.
+  - *Een meerregelig citaat werd afgekapt tot de eerste regel.*
+  - *Een tabelrij met alleen streepjes* — de gebruikelijke invulling voor "niet
+    van toepassing" — *werd als scheidingsrij weggegooid,* met de andere kolommen
+    erbij.
+  - *Een door de auteur getypte `<div>`-regel verdween* uit een vrije-tekstslide,
+    met inhoud en al.
+  - *Een zero-width space van de auteur werd overal weggehaald,* terwijl de
+    ontsnapping hem alleen tussen streepjes zet. Geplakte web- en CJK-tekst zit
+    er vol mee.
+  - *Een afsluitende komma in CSV liet zijn lege veld vallen,* waardoor het
+    plakken van een spreadsheet met een lege laatste cel in zijn geheel werd
+    afgekeurd — en *het plakken van een markdown-tabel negeerde de `\|`* die de
+    app zelf schrijft.
 
 - **Vier keer stond het middel er al, en was het op één plek niet aangesloten.**
   Uit de bugjacht kwam dit als het karakteristieke patroon van de codebase naar

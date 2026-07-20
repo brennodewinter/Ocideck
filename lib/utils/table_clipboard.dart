@@ -51,6 +51,20 @@ List<List<String>>? parseClipboardTable(String text) {
   return best;
 }
 
+/// Een pijp die niet ontsnapt is — de scheiding tussen twee cellen.
+final _reUnescapedPipe = RegExp(r'(?<!\\)\|');
+
+/// Haalt de ontsnapping uit een geplakte markdown-cel.
+///
+/// Spiegelt `_unescapeCell` in `markdown_service.dart`, dat de schrijfkant doet.
+/// Bewust een kopie van drie regels en geen gedeelde helper: die zit in de
+/// private kant van de markdown-library, en die opentrekken voor het plakpad
+/// levert meer koppeling op dan het bespaart.
+String _unescapeClipboardCell(String s) => s
+    .replaceAll(r'\|', '|')
+    .replaceAll(r'\<br>', '<br>')
+    .replaceAll(r'\\', r'\');
+
 /// Markdown table: every non-empty line framed by pipes. The `|---|---|`
 /// separator row is dropped.
 List<List<String>>? _parseMarkdownTable(String text) {
@@ -64,7 +78,13 @@ List<List<String>>? _parseMarkdownTable(String text) {
   for (final line in lines) {
     var body = line.substring(1);
     if (body.endsWith('|')) body = body.substring(0, body.length - 1);
-    final cells = body.split('|').map((c) => c.trim()).toList();
+    // Splitsen op een níét-ontsnapte pijp, en daarna de ontsnapping weghalen.
+    // OciDeck schrijft een cel met een pijp erin als `a\|b`; een kale split
+    // scheurde die cel in tweeën en gaf de rij een kolom te veel.
+    final cells = body
+        .split(_reUnescapedPipe)
+        .map((c) => _unescapeClipboardCell(c.trim()))
+        .toList();
     // Alignment/separator row (|---|:--:|) carries no data.
     if (cells.every((c) => RegExp(r'^:?-{2,}:?$').hasMatch(c))) continue;
     rows.add(cells);
