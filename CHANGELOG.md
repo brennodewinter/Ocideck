@@ -547,6 +547,25 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   een strafzaak gaat. Een markering verbergt een waarde, geen onderwerp.
 
 ### Fixed
+- **Het herstelbestand overleefde het herstellen niet.** Drie dingen aan het
+  terugzetten van niet-opgeslagen werk deden het tegenovergestelde van wat
+  herstel hoort te doen.
+
+  Het wissen ging vóór het controleren: eerst het bestand weg, dan pas kijken of
+  het deck gelezen kon worden. Lukte dat niet — en een crash ín de parser is een
+  waarschijnlijke reden dát er een herstelbestand ligt — dan was het enige
+  exemplaar net opgeruimd, en kwam je terug bij een leeg tabblad zonder melding.
+  Nu blijft het staan, en zegt de app het ook.
+
+  Daarna zat er een gat van 25 seconden: het herstelde tabblad kreeg een verse
+  sleutel, dus zijn eigen herstelbestand ontstond pas bij de volgende autosave.
+  Juist in die seconden loopt een app vast die zojuist opnieuw dezelfde inhoud
+  opende. Het tabblad neemt nu de bestaande sleutel over.
+
+  En met twee vensters open wiste een nette afsluiting van het ene de
+  crashbescherming van het andere — de herstelmap is gedeeld en werd in zijn
+  geheel leeggeveegd. Afsluiten ruimt nu alleen de eigen tabbladen op.
+
 - **Opslaan ging niet terug naar waar de presentatie vandaan kwam.** Wie een
   deck van WebDAV, S3 of git opende en daarna gewoon op opslaan drukte (of
   Ctrl/Cmd+S), zag het als lokaal bestand landen. De server hield de oude
