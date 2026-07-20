@@ -24,6 +24,60 @@ class _BrokenDeckForge extends FakeForge {
   }
 }
 
+/// Counts what the search actually reads, so a test can prove a shortlist saves
+/// reads: it should list no tree and read only the shortlisted decks.
+class _CountingForge extends FakeForge {
+  _CountingForge(super.repo);
+
+  final readPaths = <String>[];
+  int listTreeCalls = 0;
+
+  @override
+  Future<Uint8List> readBlob(String ref, String path) {
+    readPaths.add(path);
+    return super.readBlob(ref, path);
+  }
+
+  @override
+  Future<List<RepoEntry>> listTree(
+    String ref,
+    String path, {
+    bool recursive = false,
+  }) {
+    listTreeCalls++;
+    return super.listTree(ref, path, recursive: recursive);
+  }
+}
+
+/// A shortlister that hands back a fixed answer (or `null` to decline), and
+/// counts how often it was consulted.
+class _FakeShortlister implements DeckShortlister {
+  _FakeShortlister(this.result);
+
+  final DeckShortlist? result;
+  int calls = 0;
+
+  @override
+  Future<DeckShortlist?> shortlist(
+    String needle, {
+    required bool caseSensitive,
+    required String branch,
+  }) async {
+    calls++;
+    return result;
+  }
+}
+
+/// A shortlister that breaks — the search must survive it, not crash.
+class _ThrowingShortlister implements DeckShortlister {
+  @override
+  Future<DeckShortlist?> shortlist(
+    String needle, {
+    required bool caseSensitive,
+    required String branch,
+  }) async => throw StateError('kapotte versneller');
+}
+
 void main() {
   const jaarplan = '''
 ---
@@ -198,6 +252,110 @@ De dekking staat op 79 procent.
         isFalse,
         reason: 'precies vol is niet hetzelfde als afgekapt',
       );
+    });
+  });
+
+  group('DeckSearch met een versneller', () {
+    test('leest alleen de decks op de shortlist, niet elk deck', () async {
+      final forge = _CountingForge(repo());
+      final searcher = DeckSearch(
+        forge: forge,
+        branch: 'main',
+        shortlister: _FakeShortlister(
+          const DeckShortlist({'decks/kwartaalcijfers'}),
+        ),
+      );
+
+      final result = await searcher.search('dekking');
+
+      // 'dekking' staat in beide decks, maar de shortlist wees er één aan: alleen
+      // die is gelezen, en de treffer komt daarvandaan.
+      expect(result.hits.map((h) => h.deck).toSet(), {'kwartaalcijfers'});
+      expect(forge.readPaths, ['decks/kwartaalcijfers/deck.md']);
+      // De volledige-scan-lijsting is overgeslagen: dat is de besparing.
+      expect(forge.listTreeCalls, 0);
+      expect(result.coverage, DeckSearchCoverage.exhaustive);
+    });
+
+    test('een pad dat geen geldige deckmap is, wordt genegeerd', () async {
+      final forge = _CountingForge(repo());
+      final searcher = DeckSearch(
+        forge: forge,
+        branch: 'main',
+        shortlister: _FakeShortlister(
+          const DeckShortlist({'decks/kwartaalcijfers', 'assets'}),
+        ),
+      );
+
+      await searcher.search('dekking');
+      expect(forge.readPaths, ['decks/kwartaalcijfers/deck.md']);
+    });
+
+    test('de dekkingsvlag van de versneller komt door', () async {
+      final searcher = DeckSearch(
+        forge: FakeForge(repo()),
+        branch: 'main',
+        shortlister: _FakeShortlister(
+          const DeckShortlist({
+            'decks/kwartaalcijfers',
+          }, coverage: DeckSearchCoverage.bestEffort),
+        ),
+      );
+
+      final result = await searcher.search('dekking');
+      expect(result.coverage, DeckSearchCoverage.bestEffort);
+      expect(result.hits, isNotEmpty);
+    });
+
+    test('een null-shortlist valt terug op de volledige scan', () async {
+      final forge = _CountingForge(repo());
+      final shortlister = _FakeShortlister(null);
+      final searcher = DeckSearch(
+        forge: forge,
+        branch: 'main',
+        shortlister: shortlister,
+      );
+
+      final result = await searcher.search('dekking');
+
+      expect(shortlister.calls, 1);
+      // Terugval: alle decks gezien, de lijsting is wél gedaan.
+      expect(result.hits.map((h) => h.deck).toSet(), {
+        'jaarplan',
+        'kwartaalcijfers',
+      });
+      expect(forge.listTreeCalls, greaterThan(0));
+      expect(result.coverage, DeckSearchCoverage.exhaustive);
+    });
+
+    test('een kapotte versneller breekt de zoekopdracht niet', () async {
+      final searcher = DeckSearch(
+        forge: FakeForge(repo()),
+        branch: 'main',
+        shortlister: _ThrowingShortlister(),
+      );
+
+      final result = await searcher.search('dekking');
+      // Gewoon de volledige scan, alsof er geen versneller was.
+      expect(result.hits.map((h) => h.deck).toSet(), {
+        'jaarplan',
+        'kwartaalcijfers',
+      });
+      expect(result.coverage, DeckSearchCoverage.exhaustive);
+    });
+
+    test('een lege term raadpleegt de versneller niet', () async {
+      final shortlister = _FakeShortlister(
+        const DeckShortlist({'decks/kwartaalcijfers'}),
+      );
+      final searcher = DeckSearch(
+        forge: FakeForge(repo()),
+        branch: 'main',
+        shortlister: shortlister,
+      );
+
+      expect((await searcher.search('   ')).hits, isEmpty);
+      expect(shortlister.calls, 0);
     });
   });
 }
