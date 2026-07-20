@@ -1825,6 +1825,10 @@ const _dutchSourceAddPt = <String, String>{
       'número de registo de um profissional de saúde (BIG)',
   'AGB-code': 'código de prestador de cuidados (AGB)',
   'proces-verbaalnummer': 'número de auto de notícia',
+  'Openen uit…': 'Abrir a partir de…',
+  'Opslaan naar…': 'Guardar em…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Configure primeiro uma ligação em Definições → Armazenamento.',
   'Beginnen met:': 'Começar com:',
   'Verlopen datums markeren': 'Assinalar datas vencidas',
   'Datums gemarkeerd': 'Datas assinaladas',
@@ -2381,7 +2385,6 @@ const _dutchSourceAddPt = <String, String>{
   'Commitboodschap': 'Mensagem de commit',
   'Wat is er veranderd?': 'O que mudou?',
   'Opslaan naar git': 'Guardar no git',
-  'Opslaan naar git…': 'Guardar no git…',
   'Opgeslagen in git:': 'Guardado no git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'O branch mudou; recarrega o deck e guarda de novo.',
@@ -2396,7 +2399,6 @@ const _dutchSourceAddPt = <String, String>{
   'Eigenaar': 'Proprietário',
   'Repository': 'Repositório',
   'Personal access token': 'Token de acesso pessoal',
-  'Openen uit git…': 'Abrir do Git…',
   'Presentatie openen uit git': 'Abrir uma apresentação do Git',
   'Geen presentaties in deze repository.':
       'Nenhuma apresentação neste repositório.',

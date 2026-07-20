@@ -55,6 +55,21 @@ list, mixed together — because the question you actually ask is "where does th
 work live?", not "which protocol is this?". Give each one a name (*Client A –
 Nextcloud*, *Private*) so you can tell them apart at a glance.
 
+The `…` menu follows the same idea: **one** *Open from…* and **one** *Save to…*,
+not a pair per protocol. Both start with the same question — which connection —
+and that question is skipped entirely when you have only one, so a single-server
+setup never sees a picker.
+
+**Saving goes back to where the deck came from.** Open a deck from a WebDAV
+server and the ordinary save button (or `Ctrl/Cmd+S`) writes it back to that
+server, at the same path, in the same format. The same holds for S3 and git. You
+never have to remember which of several save commands matches where you opened
+it — getting that wrong would leave the edited version on your laptop while the
+server kept the old one, and you would have no way of noticing.
+
+*Save to…* is the exception: it puts the deck somewhere **else**, on purpose.
+Use it to move or copy a deck between connections.
+
 - **Add** one with *Add connection* and pick the kind. A folder is done as soon
   as you pick it; a WebDAV server, S3 bucket or git repository opens its
   settings straight away so you can fill them in.
@@ -107,10 +122,11 @@ MinIO on your own server, Ceph, Wasabi, Scaleway, Hetzner.
   home network, which is the normal case for your own MinIO. Without it the
   SSRF protection refuses the connection.
 
-**Open and save** through *Open from S3* and *Save to S3* in the file menu. A
-deck you opened from a bucket saves back to that same bucket without asking,
-just as it does for WebDAV and git. You choose between one `.ocideck` package
-and a flat `.md` with its asset folders, exactly as for WebDAV.
+**Open and save** through *Open from…* and *Save to…* in the file menu — the
+same two entries used for every kind of storage. A deck you opened from a bucket
+saves back to that same bucket without asking, just as it does for WebDAV and
+git. You choose between one `.ocideck` package and a flat `.md` with its asset
+folders, exactly as for WebDAV.
 
 One difference from the other kinds is worth knowing. S3 is object storage, not
 a file system, and the guard against two people overwriting each other's work
@@ -161,10 +177,12 @@ saved version stays retrievable, which a plain folder cannot give you.
   keeps the deck on this computer until there is a connection again; the bar is
   what tells you it is still there. It stays quiet when nothing is waiting, and
   it is not clickable — use *Flush queue* in the `…` menu to send it now.
-- **Open** via the `…` menu (*Open from git…*): pick a deck and it is fetched,
-  checked by the same safety scan as any other deck, and opened. A repository is
-  untrusted input — coming from your own forge does not make it trusted.
-- **Save** via the `…` menu (*Save to git…*): the deck is written back as one
+- **Open** via the `…` menu (*Open from…*, then pick the repository): the deck
+  is fetched, checked by the same safety scan as any other deck, and opened. A
+  repository is untrusted input — coming from your own forge does not make it
+  trusted.
+- **Save** with the ordinary save button, or *Save to…* to publish somewhere
+  else: the deck is written back as one
   commit — the markdown and its images, which go into the shared pool exactly as
   opening reads them. A deck you opened from git offers its own name and updates
   in place; a new deck is published by choosing a name (it becomes
@@ -314,11 +332,13 @@ Nextcloud is the most common one, but any WebDAV server works.
 
   The same applies to a self-hosted S3 endpoint and a self-hosted forge: each
   connection carries its own pinned certificate.
-- **Open** via the welcome screen (*Open from WebDAV*) or the `…` menu:
-  browse the folder and pick an `.ocideck` package or a Marp `.md`. The file is
-  downloaded, checked by the same safety scan as any other deck, and opened in a
-  tab.
-- **Save back** with *Save to WebDAV* (`…` menu). Choose a target path and a
+- **Open** via the welcome screen or the `…` menu (*Open from…*, then pick the
+  server): browse the folder and pick an `.ocideck` package or a Marp `.md`. The
+  file is downloaded, checked by the same safety scan as any other deck, and
+  opened in a tab.
+- **Save back** with the ordinary save button — a deck from WebDAV goes back to
+  WebDAV. Use *Save to…* (`…` menu) to put it somewhere else. Choose a target
+  path and a
   format: a single **`.ocideck` package** (one file, assets included) or a
   **flat `.md` plus its asset folders** (`images/`, `themes/`, …) mirrored into
   the same folder. A deck opened from WebDAV remembers where it came from, so

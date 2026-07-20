@@ -1794,6 +1794,10 @@ const _dutchSourceAddFi = <String, String>{
       'terveydenhuollon ammattilaisen rekisterinumero (BIG)',
   'AGB-code': 'terveydenhuollon palveluntuottajan koodi (AGB)',
   'proces-verbaalnummer': 'poliisin tutkintailmoituksen numero',
+  'Openen uit…': 'Avaa sijainnista…',
+  'Opslaan naar…': 'Tallenna sijaintiin…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Määritä ensin yhteys kohdassa Asetukset → Tallennustila.',
   'Beginnen met:': 'Aloita tästä:',
   'Verlopen datums markeren': 'Merkitse menneet päivämäärät',
   'Datums gemarkeerd': 'Päivämäärät merkitty',
@@ -2347,7 +2351,6 @@ const _dutchSourceAddFi = <String, String>{
   'Commitboodschap': 'Commit-viesti',
   'Wat is er veranderd?': 'Mikä muuttui?',
   'Opslaan naar git': 'Tallenna gitiin',
-  'Opslaan naar git…': 'Tallenna gitiin…',
   'Opgeslagen in git:': 'Tallennettu gitiin:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Haara siirtyi; lataa setti uudelleen ja tallenna uudestaan.',
@@ -2362,7 +2365,6 @@ const _dutchSourceAddFi = <String, String>{
   'Eigenaar': 'Omistaja',
   'Repository': 'Tietovarasto',
   'Personal access token': 'Henkilökohtainen käyttöoikeustunnus',
-  'Openen uit git…': 'Avaa Gitistä…',
   'Presentatie openen uit git': 'Avaa esitys Gitistä',
   'Geen presentaties in deze repository.':
       'Tässä tietovarastossa ei ole esityksiä.',

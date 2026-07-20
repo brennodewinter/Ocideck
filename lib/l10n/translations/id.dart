@@ -1792,6 +1792,10 @@ const _dutchSourceAddId = <String, String>{
   'BIG-nummer van een zorgverlener': 'nomor registrasi tenaga kesehatan (BIG)',
   'AGB-code': 'kode penyedia layanan kesehatan (AGB)',
   'proces-verbaalnummer': 'nomor laporan polisi',
+  'Openen uit…': 'Buka dari…',
+  'Opslaan naar…': 'Simpan ke…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Siapkan koneksi terlebih dahulu di Pengaturan → Penyimpanan.',
   'Beginnen met:': 'Mulai dengan:',
   'Verlopen datums markeren': 'Tandai tanggal yang lewat',
   'Datums gemarkeerd': 'Tanggal ditandai',
@@ -2347,7 +2351,6 @@ const _dutchSourceAddId = <String, String>{
   'Commitboodschap': 'Pesan commit',
   'Wat is er veranderd?': 'Apa yang berubah?',
   'Opslaan naar git': 'Simpan ke git',
-  'Opslaan naar git…': 'Simpan ke git…',
   'Opgeslagen in git:': 'Disimpan ke git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Branch telah berpindah; muat ulang dek dan simpan lagi.',
@@ -2362,7 +2365,6 @@ const _dutchSourceAddId = <String, String>{
   'Eigenaar': 'Pemilik',
   'Repository': 'Repositori',
   'Personal access token': 'Token akses pribadi',
-  'Openen uit git…': 'Buka dari Git…',
   'Presentatie openen uit git': 'Buka presentasi dari Git',
   'Geen presentaties in deze repository.':
       'Tidak ada presentasi di repositori ini.',

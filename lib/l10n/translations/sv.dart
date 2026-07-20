@@ -1793,6 +1793,10 @@ const _dutchSourceAddSv = <String, String>{
       'registreringsnummer för vårdpersonal (BIG)',
   'AGB-code': 'kod för vårdgivare (AGB)',
   'proces-verbaalnummer': 'diarienummer för polisanmälan',
+  'Openen uit…': 'Öppna från…',
+  'Opslaan naar…': 'Spara till…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Ställ först in en anslutning under Inställningar → Lagring.',
   'Beginnen met:': 'Börja med:',
   'Verlopen datums markeren': 'Markera passerade datum',
   'Datums gemarkeerd': 'Datum markerade',
@@ -2347,7 +2351,6 @@ const _dutchSourceAddSv = <String, String>{
   'Commitboodschap': 'Commit-meddelande',
   'Wat is er veranderd?': 'Vad har ändrats?',
   'Opslaan naar git': 'Spara till git',
-  'Opslaan naar git…': 'Spara till git…',
   'Opgeslagen in git:': 'Sparat till git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Grenen har flyttats; ladda om decket och spara igen.',
@@ -2362,7 +2365,6 @@ const _dutchSourceAddSv = <String, String>{
   'Eigenaar': 'Ägare',
   'Repository': 'Repository',
   'Personal access token': 'Personlig åtkomsttoken',
-  'Openen uit git…': 'Öppna från Git…',
   'Presentatie openen uit git': 'Öppna en presentation från Git',
   'Geen presentaties in deze repository.':
       'Inga presentationer i detta repository.',

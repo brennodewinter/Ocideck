@@ -1784,6 +1784,10 @@ const _dutchSourceAddEt = <String, String>{
   'BIG-nummer van een zorgverlener': 'tervishoiutöötaja registrinumber (BIG)',
   'AGB-code': 'tervishoiuteenuse osutaja kood (AGB)',
   'proces-verbaalnummer': 'politsei protokolli number',
+  'Openen uit…': 'Ava asukohast…',
+  'Opslaan naar…': 'Salvesta asukohta…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Seadista esmalt ühendus jaotises Seaded → Salvestusruum.',
   'Beginnen met:': 'Alusta sellega:',
   'Verlopen datums markeren': 'Märgi möödunud kuupäevad',
   'Datums gemarkeerd': 'Kuupäevad märgitud',
@@ -2338,7 +2342,6 @@ const _dutchSourceAddEt = <String, String>{
   'Commitboodschap': 'Commiti sõnum',
   'Wat is er veranderd?': 'Mis muutus?',
   'Opslaan naar git': 'Salvesta gitti',
-  'Opslaan naar git…': 'Salvesta gitti…',
   'Opgeslagen in git:': 'Salvestatud gitti:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Haru on liikunud; laadi deck uuesti ja salvesta uuesti.',
@@ -2353,7 +2356,6 @@ const _dutchSourceAddEt = <String, String>{
   'Eigenaar': 'Omanik',
   'Repository': 'Hoidla',
   'Personal access token': 'Isiklik juurdepääsuluba',
-  'Openen uit git…': 'Ava Gitist…',
   'Presentatie openen uit git': 'Ava esitlus Gitist',
   'Geen presentaties in deze repository.': 'Selles hoidlas pole esitlusi.',
   'Rapportagetaal': 'Aruande keel',

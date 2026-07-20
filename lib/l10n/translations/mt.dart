@@ -1815,6 +1815,10 @@ const _dutchSourceAddMt = <String, String>{
       'numru ta\' reġistrazzjoni ta\' professjonist tas-saħħa (BIG)',
   'AGB-code': 'kodiċi ta\' fornitur tal-kura tas-saħħa (AGB)',
   'proces-verbaalnummer': 'numru tar-rapport tal-pulizija',
+  'Openen uit…': 'Iftaħ minn…',
+  'Opslaan naar…': 'Issejvja fi…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'L-ewwel issettja konnessjoni f\'Issettjar → Ħażna.',
   'Beginnen met:': 'Ibda b:',
   'Verlopen datums markeren': 'Immarka d-dati skaduti',
   'Datums gemarkeerd': 'Dati mmarkati',
@@ -2373,7 +2377,6 @@ const _dutchSourceAddMt = <String, String>{
   'Commitboodschap': 'Messaġġ ta\' commit',
   'Wat is er veranderd?': 'X\'inbidel?',
   'Opslaan naar git': 'Ħażen f\'git',
-  'Opslaan naar git…': 'Ħażen f\'git…',
   'Opgeslagen in git:': 'Maħżun f\'git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Il-branch iċċaqlaq; erġa\' għabbi d-deck u ħażen mill-ġdid.',
@@ -2388,7 +2391,6 @@ const _dutchSourceAddMt = <String, String>{
   'Eigenaar': 'Sid',
   'Repository': 'Repożitorju',
   'Personal access token': 'Token ta\' aċċess personali',
-  'Openen uit git…': 'Iftaħ minn Git…',
   'Presentatie openen uit git': 'Iftaħ preżentazzjoni minn Git',
   'Geen presentaties in deze repository.':
       'L-ebda preżentazzjoni f\'dan ir-repożitorju.',

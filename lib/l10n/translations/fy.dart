@@ -751,6 +751,10 @@ const _dutchSourceAddFy = {
   'BIG-nummer van een zorgverlener': 'BIG-nûmer fan in soarchferliener',
   'AGB-code': 'AGB-koade',
   'proces-verbaalnummer': 'proses-ferbaalnûmer',
+  'Openen uit…': 'Iepenje út…',
+  'Opslaan naar…': 'Bewarje nei…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Stel earst in ferbining yn by Ynstellings → Opslach.',
   'Beginnen met:': 'Begjinne mei:',
   'Verlopen datums markeren': 'Ferrûne datums markearje',
   'Datums gemarkeerd': 'Datums markearre',
@@ -1304,7 +1308,6 @@ const _dutchSourceAddFy = {
   'Commitboodschap': 'Commit-boadskip',
   'Wat is er veranderd?': 'Wat is der feroare?',
   'Opslaan naar git': 'Bewarje nei git',
-  'Opslaan naar git…': 'Bewarje nei git…',
   'Opgeslagen in git:': 'Bewarre nei git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'De branch is ferpleatst; laad it deck opnij en bewarje wer.',
@@ -1319,7 +1322,6 @@ const _dutchSourceAddFy = {
   'Eigenaar': 'Eigener',
   'Repository': 'Repository',
   'Personal access token': 'Persoanlik tagongstoken',
-  'Openen uit git…': 'Iepenje út git…',
   'Presentatie openen uit git': 'Presintaasje iepenje út git',
   'Geen presentaties in deze repository.':
       'Gjin presintaasjes yn dizze repository.',

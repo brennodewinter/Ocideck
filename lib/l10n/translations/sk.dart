@@ -1799,6 +1799,10 @@ const _dutchSourceAddSk = <String, String>{
   'BIG-nummer van een zorgverlener': 'registračné číslo zdravotníka (BIG)',
   'AGB-code': 'kód poskytovateľa starostlivosti (AGB)',
   'proces-verbaalnummer': 'číslo policajného protokolu',
+  'Openen uit…': 'Otvoriť z…',
+  'Opslaan naar…': 'Uložiť do…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Najprv nastavte pripojenie v Nastavenia → Úložisko.',
   'Beginnen met:': 'Začať s:',
   'Verlopen datums markeren': 'Označiť uplynulé dátumy',
   'Datums gemarkeerd': 'Dátumy označené',
@@ -2354,7 +2358,6 @@ const _dutchSourceAddSk = <String, String>{
   'Commitboodschap': 'Správa commitu',
   'Wat is er veranderd?': 'Čo sa zmenilo?',
   'Opslaan naar git': 'Uložiť do gitu',
-  'Opslaan naar git…': 'Uložiť do gitu…',
   'Opgeslagen in git:': 'Uložené do gitu:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Vetva sa posunula; znovu načítaj sadu a ulož znova.',
@@ -2369,7 +2372,6 @@ const _dutchSourceAddSk = <String, String>{
   'Eigenaar': 'Vlastník',
   'Repository': 'Repozitár',
   'Personal access token': 'Osobný prístupový token',
-  'Openen uit git…': 'Otvoriť z Gitu…',
   'Presentatie openen uit git': 'Otvoriť prezentáciu z Gitu',
   'Geen presentaties in deze repository.':
       'V tomto repozitári nie sú žiadne prezentácie.',

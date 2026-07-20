@@ -1801,6 +1801,10 @@ const _dutchSourceAddLt = <String, String>{
       'sveikatos priežiūros specialisto registracijos numeris (BIG)',
   'AGB-code': 'sveikatos priežiūros paslaugų teikėjo kodas (AGB)',
   'proces-verbaalnummer': 'policijos protokolo numeris',
+  'Openen uit…': 'Atverti iš…',
+  'Opslaan naar…': 'Įrašyti į…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Pirmiausia nustatykite ryšį skiltyje Nustatymai → Saugykla.',
   'Beginnen met:': 'Pradėti nuo:',
   'Verlopen datums markeren': 'Žymėti pasibaigusias datas',
   'Datums gemarkeerd': 'Datos pažymėtos',
@@ -2360,7 +2364,6 @@ const _dutchSourceAddLt = <String, String>{
   'Commitboodschap': 'Commit pranešimas',
   'Wat is er veranderd?': 'Kas pasikeitė?',
   'Opslaan naar git': 'Įrašyti į git',
-  'Opslaan naar git…': 'Įrašyti į git…',
   'Opgeslagen in git:': 'Įrašyta į git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Šaka pasislinko; iš naujo įkelkite rinkinį ir įrašykite dar kartą.',
@@ -2375,7 +2378,6 @@ const _dutchSourceAddLt = <String, String>{
   'Eigenaar': 'Savininkas',
   'Repository': 'Saugykla',
   'Personal access token': 'Asmeninis prieigos raktas',
-  'Openen uit git…': 'Atverti iš Git…',
   'Presentatie openen uit git': 'Atverti pristatymą iš Git',
   'Geen presentaties in deze repository.': 'Šioje saugykloje pristatymų nėra.',
   'Rapportagetaal': 'Ataskaitos kalba',

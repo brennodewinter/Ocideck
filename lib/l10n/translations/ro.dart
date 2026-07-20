@@ -1811,6 +1811,10 @@ const _dutchSourceAddRo = <String, String>{
       'numărul de înregistrare al unui cadru medical (BIG)',
   'AGB-code': 'cod de furnizor de servicii medicale (AGB)',
   'proces-verbaalnummer': 'număr de proces-verbal',
+  'Openen uit…': 'Deschide din…',
+  'Opslaan naar…': 'Salvează în…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Configurați mai întâi o conexiune în Setări → Stocare.',
   'Beginnen met:': 'Începeți cu:',
   'Verlopen datums markeren': 'Marchează datele expirate',
   'Datums gemarkeerd': 'Date marcate',
@@ -2373,7 +2377,6 @@ const _dutchSourceAddRo = <String, String>{
   'Commitboodschap': 'Mesaj de commit',
   'Wat is er veranderd?': 'Ce s-a schimbat?',
   'Opslaan naar git': 'Salvează în git',
-  'Opslaan naar git…': 'Salvează în git…',
   'Opgeslagen in git:': 'Salvat în git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Ramura s-a mutat; reîncarcă deck-ul și salvează din nou.',
@@ -2388,7 +2391,6 @@ const _dutchSourceAddRo = <String, String>{
   'Eigenaar': 'Proprietar',
   'Repository': 'Depozit',
   'Personal access token': 'Jeton de acces personal',
-  'Openen uit git…': 'Deschide din Git…',
   'Presentatie openen uit git': 'Deschide o prezentare din Git',
   'Geen presentaties in deze repository.': 'Nicio prezentare în acest depozit.',
   'Rapportagetaal': 'Limba raportului',

@@ -1796,6 +1796,10 @@ const _dutchSourceAddSl = <String, String>{
       'registrska številka zdravstvenega delavca (BIG)',
   'AGB-code': 'koda izvajalca zdravstvenih storitev (AGB)',
   'proces-verbaalnummer': 'številka policijskega zapisnika',
+  'Openen uit…': 'Odpri iz…',
+  'Opslaan naar…': 'Shrani v…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Najprej nastavite povezavo v Nastavitve → Shramba.',
   'Beginnen met:': 'Začnite z:',
   'Verlopen datums markeren': 'Označi pretekle datume',
   'Datums gemarkeerd': 'Datumi označeni',
@@ -2350,7 +2354,6 @@ const _dutchSourceAddSl = <String, String>{
   'Commitboodschap': 'Sporočilo commita',
   'Wat is er veranderd?': 'Kaj se je spremenilo?',
   'Opslaan naar git': 'Shrani v git',
-  'Opslaan naar git…': 'Shrani v git…',
   'Opgeslagen in git:': 'Shranjeno v git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Veja se je premaknila; znova naloži komplet in shrani znova.',
@@ -2365,7 +2368,6 @@ const _dutchSourceAddSl = <String, String>{
   'Eigenaar': 'Lastnik',
   'Repository': 'Repozitorij',
   'Personal access token': 'Osebni dostopni žeton',
-  'Openen uit git…': 'Odpri iz Gita…',
   'Presentatie openen uit git': 'Odpri predstavitev iz Gita',
   'Geen presentaties in deze repository.':
       'V tem repozitoriju ni predstavitev.',

@@ -1809,6 +1809,10 @@ const _dutchSourceAddLa = <String, String>{
   'BIG-nummer van een zorgverlener': 'numerus curatoris valetudinis (BIG)',
   'AGB-code': 'codex curatoris valetudinis (AGB)',
   'proces-verbaalnummer': 'numerus actorum vigilum',
+  'Openen uit…': 'Aperire ex…',
+  'Opslaan naar…': 'Servare in…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Nexum primum in Optionibus → Repositorio institue.',
   'Beginnen met:': 'Incipe cum:',
   'Verlopen datums markeren': 'Dies elapsos notare',
   'Datums gemarkeerd': 'Dies notati',
@@ -2361,7 +2365,6 @@ const _dutchSourceAddLa = <String, String>{
   'Commitboodschap': 'Nuntius commissionis',
   'Wat is er veranderd?': 'Quid mutatum est?',
   'Opslaan naar git': 'In git servare',
-  'Opslaan naar git…': 'In git servare…',
   'Opgeslagen in git:': 'In git servatum:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Ramus motus est; fasciculum recarga et iterum serva.',
@@ -2376,7 +2379,6 @@ const _dutchSourceAddLa = <String, String>{
   'Eigenaar': 'Dominus',
   'Repository': 'Repositorium',
   'Personal access token': 'Signum accessus personale',
-  'Openen uit git…': 'Ex Git aperire…',
   'Presentatie openen uit git': 'Presentationem ex Git aperire',
   'Geen presentaties in deze repository.':
       'Nullae presentationes in hoc repositorio.',

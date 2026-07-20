@@ -1797,6 +1797,10 @@ const _dutchSourceAddHu = <String, String>{
       'egészségügyi dolgozó nyilvántartási száma (BIG)',
   'AGB-code': 'egészségügyi szolgáltató kódja (AGB)',
   'proces-verbaalnummer': 'rendőrségi jegyzőkönyv száma',
+  'Openen uit…': 'Megnyitás innen…',
+  'Opslaan naar…': 'Mentés ide…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Először állítson be egy kapcsolatot a Beállítások → Tárhely alatt.',
   'Beginnen met:': 'Kezdés ezzel:',
   'Verlopen datums markeren': 'Lejárt dátumok jelölése',
   'Datums gemarkeerd': 'Dátumok jelölve',
@@ -2354,7 +2358,6 @@ const _dutchSourceAddHu = <String, String>{
   'Commitboodschap': 'Commit üzenet',
   'Wat is er veranderd?': 'Mi változott?',
   'Opslaan naar git': 'Mentés gitbe',
-  'Opslaan naar git…': 'Mentés gitbe…',
   'Opgeslagen in git:': 'Mentve gitbe:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Az ág elmozdult; töltsd újra a csomagot, és ments újra.',
@@ -2369,7 +2372,6 @@ const _dutchSourceAddHu = <String, String>{
   'Eigenaar': 'Tulajdonos',
   'Repository': 'Tároló',
   'Personal access token': 'Személyes hozzáférési token',
-  'Openen uit git…': 'Megnyitás Gitből…',
   'Presentatie openen uit git': 'Bemutató megnyitása Gitből',
   'Geen presentaties in deze repository.':
       'Nincsenek bemutatók ebben a tárolóban.',

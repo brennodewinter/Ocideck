@@ -318,10 +318,14 @@ Future<void> _openFromGit(
 
 /// Blader door de Nextcloud/WebDAV-bron, download het gekozen deck, haal het
 /// door de security-gate en open het in een tab. Toont waar nodig een melding.
-Future<void> _openFromNextcloud(BuildContext context, WidgetRef ref) async {
-  final connection = await _pickWebdavConnection(context, ref);
-  if (connection == null || !context.mounted) return;
-  final service = await ref.read(webdavServiceProvider(connection.id).future);
+Future<void> _openFromNextcloud(
+  BuildContext context,
+  WidgetRef ref, {
+  WebdavConnection? connection,
+}) async {
+  final chosen = connection ?? await _pickWebdavConnection(context, ref);
+  if (chosen == null || !context.mounted) return;
+  final service = await ref.read(webdavServiceProvider(chosen.id).future);
   if (!context.mounted) return;
   if (service == null) {
     _webdavNotConfigured(context);
@@ -329,7 +333,7 @@ Future<void> _openFromNextcloud(BuildContext context, WidgetRef ref) async {
   }
   final entry = await WebdavBrowserDialog.show(
     context,
-    connectionId: connection.id,
+    connectionId: chosen.id,
   );
   if (entry == null || !context.mounted) return;
   final messenger = ScaffoldMessenger.of(context);
@@ -340,7 +344,7 @@ Future<void> _openFromNextcloud(BuildContext context, WidgetRef ref) async {
         .openFromWebdav(
           service,
           entry,
-          connectionId: connection.id,
+          connectionId: chosen.id,
           homeDir: ref.read(settingsProvider).homeDirectory,
         );
     _reportOpenFailure(messenger, l10n, result);
@@ -357,26 +361,44 @@ Future<void> _openFromNextcloud(BuildContext context, WidgetRef ref) async {
 
 /// Schrijf het deck van het huidige tabblad terug naar Nextcloud. Vraagt het
 /// formaat (pakket of platte bestanden) en het doelpad, en uploadt dan.
-Future<void> _saveToNextcloud(BuildContext context, WidgetRef ref) async {
+/// Slaat het actieve deck op naar WebDAV. Geeft terug of er daadwerkelijk is
+/// opgeslagen.
+///
+/// Met [silent] slaat dit de naam- en formaatvraag over wanneer het deck van
+/// deze server kwam: dan gaat het terug naar exact hetzelfde pad, in hetzelfde
+/// formaat. Dat is wat de gewone opslaanknop doet — die hoort niet elke keer
+/// opnieuw te vragen waar iets heen moet dat al ergens vandaan komt. Een
+/// botsing met een nieuwere versie vraagt nog steeds, want dat is een keuze die
+/// alleen de gebruiker kan maken.
+Future<bool> _saveToNextcloud(
+  BuildContext context,
+  WidgetRef ref, {
+  bool silent = false,
+  WebdavConnection? connectionOverride,
+}) async {
   final tab = ref.read(tabsProvider).current;
   final deck = tab?.deckNotifier.currentState.deck;
-  if (tab == null || deck == null) return;
+  if (tab == null || deck == null) return false;
   // Kwam dit deck van een WebDAV-verbinding die nog bestaat, dan gaat het
   // daarnaartoe terug zonder te vragen. Opnieuw laten kiezen zou de gebruiker
   // elke keer de kans geven het bij de verkeerde klant te laten belanden.
   final origin = tab.webdavOrigin;
   final settings = ref.read(settingsProvider);
   final known = settings.connectionById(origin?.connectionId);
-  final connection = known is WebdavConnection && known.isConfigured
-      ? known
-      : await _pickWebdavConnection(context, ref);
-  if (connection == null || !context.mounted) return;
+  // Een expliciet gekozen doel wint van de herkomst: dat is precies wat
+  // "Opslaan naar…" betekent.
+  final connection =
+      connectionOverride ??
+      (known is WebdavConnection && known.isConfigured
+          ? known
+          : await _pickWebdavConnection(context, ref));
+  if (connection == null || !context.mounted) return false;
 
   final service = await ref.read(webdavServiceProvider(connection.id).future);
-  if (!context.mounted) return;
+  if (!context.mounted) return false;
   if (service == null) {
     _webdavNotConfigured(context);
-    return;
+    return false;
   }
   // Standaardpad: hergebruik de herkomst als die van dezelfde server komt,
   // anders een nette bestandsnaam uit de deck-titel in de wortelmap.
@@ -384,12 +406,14 @@ Future<void> _saveToNextcloud(BuildContext context, WidgetRef ref) async {
   final defaultBase = reuse
       ? origin.remotePath.replaceAll(RegExp(r'\.(ocideck|zip|md)$'), '')
       : _safeRemoteName(deck.title);
-  var choice = await _showRemoteSaveDialog(
-    context,
-    defaultBase: defaultBase,
-    title: context.l10n.d('Opslaan naar WebDAV'),
-  );
-  if (choice == null || !context.mounted) return;
+  var choice = silent && reuse
+      ? (format: _formatOfRemotePath(origin.remotePath), base: defaultBase)
+      : await _showRemoteSaveDialog(
+          context,
+          defaultBase: defaultBase,
+          title: context.l10n.d('Opslaan naar WebDAV'),
+        );
+  if (choice == null || !context.mounted) return false;
 
   final messenger = ScaffoldMessenger.of(context);
   final l10n = context.l10n;
@@ -410,18 +434,19 @@ Future<void> _saveToNextcloud(BuildContext context, WidgetRef ref) async {
             targetPath: targetPath,
             overwrite: overwrite,
           );
-      if (!context.mounted) return;
+      // Het opslaan is geslaagd; alleen de melding kan niet meer getoond worden.
+      if (!context.mounted) return true;
       messenger.showSnackBar(
         SnackBar(
           content: Text('${l10n.d('Opgeslagen op WebDAV:')} /$targetPath'),
         ),
       );
-      return;
+      return true;
     } on WebdavConflictException catch (e) {
       logWarning('shell: WebDAV-opslaan botste met een nieuwere versie', e);
-      if (!context.mounted) return;
+      if (!context.mounted) return false;
       final resolution = await _showRemoteConflictDialog(context);
-      if (resolution == null || !context.mounted) return;
+      if (resolution == null || !context.mounted) return false;
       switch (resolution) {
         case _RemoteConflict.overwrite:
           overwrite = true;
@@ -431,7 +456,7 @@ Future<void> _saveToNextcloud(BuildContext context, WidgetRef ref) async {
             defaultBase: choice.base,
             title: l10n.d('Opslaan naar WebDAV'),
           );
-          if (next == null || !context.mounted) return;
+          if (next == null || !context.mounted) return false;
           choice = next;
           // Een ander doelpad wordt niet bewaakt (we haalden het nooit op),
           // maar een ongewijzigd pad moet de guard hóuden.
@@ -444,10 +469,17 @@ Future<void> _saveToNextcloud(BuildContext context, WidgetRef ref) async {
         l10n,
         '${l10n.d('Opslaan mislukt:')} ${webdavErrorMessage(l10n, e)}',
       );
-      return;
+      return false;
     }
   }
 }
+
+/// Het opslagformaat dat bij [remotePath] hoort. Een deck dat als pakket op de
+/// server stond, gaat als pakket terug; een platte spiegel blijft plat.
+DeckSaveFormat _formatOfRemotePath(String remotePath) =>
+    remotePath.toLowerCase().endsWith('.ocideck')
+    ? DeckSaveFormat.ocideck
+    : DeckSaveFormat.flat;
 
 /// Wat de gebruiker doet als het bestand op de server inmiddels van iemand
 /// anders is. Bewust geen samenvoegkeuze zoals bij git: die leunt erop dat de
@@ -825,31 +857,6 @@ Future<_CloseChoice> _confirmSaveBeforeCloseDialog(
         },
       ) ??
       _CloseChoice.cancel;
-}
-
-/// Sla [deckNotifier] op. Voor een nieuw deck (nog geen bestandspad) toont dit
-/// eerst een bestemmingsdialoog — kies een bibliotheek en zie waar de
-/// presentatie, afbeeldingen en media landen — en opent daarna het
-/// systeem-opslaanvenster in de gekozen map. Bestaande decks slaan direct op.
-/// Op web (geen schrijfbaar bestandssysteem) is opslaan een download; dan geen
-/// dialoog. Geeft terug of er daadwerkelijk is opgeslagen.
-Future<bool> saveDeckWithDestination(
-  BuildContext context,
-  WidgetRef ref,
-  DeckNotifier deckNotifier,
-) async {
-  final settings = ref.read(settingsProvider);
-  final isNewDeck = deckNotifier.currentState.filePath == null;
-  if (!isNewDeck || !supportsLocalProjectFolders) {
-    return deckNotifier.save(initialDirectory: settings.homeDirectory);
-  }
-  final choice = await SaveDestinationDialog.show(
-    context,
-    libraries: settings.libraries,
-    deckTitle: deckNotifier.currentState.deck?.title ?? '',
-  );
-  if (choice == null || !context.mounted) return false;
-  return deckNotifier.save(initialDirectory: choice.directory);
 }
 
 /// Sluit het tabblad op [index], met de "niet-opgeslagen wijzigingen"-check.

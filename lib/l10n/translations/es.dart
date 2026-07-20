@@ -748,6 +748,10 @@ const _dutchSourceAddEs = {
       'número de registro de un profesional sanitario (BIG)',
   'AGB-code': 'código de proveedor sanitario (AGB)',
   'proces-verbaalnummer': 'número de atestado policial',
+  'Openen uit…': 'Abrir desde…',
+  'Opslaan naar…': 'Guardar en…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Configure primero una conexión en Ajustes → Almacenamiento.',
   'Beginnen met:': 'Empezar con:',
   'Verlopen datums markeren': 'Marcar fechas vencidas',
   'Datums gemarkeerd': 'Fechas marcadas',
@@ -1306,7 +1310,6 @@ const _dutchSourceAddEs = {
   'Commitboodschap': 'Mensaje de commit',
   'Wat is er veranderd?': '¿Qué ha cambiado?',
   'Opslaan naar git': 'Guardar en git',
-  'Opslaan naar git…': 'Guardar en git…',
   'Opgeslagen in git:': 'Guardado en git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'La rama se ha movido; recarga el deck y guarda de nuevo.',
@@ -1321,7 +1324,6 @@ const _dutchSourceAddEs = {
   'Eigenaar': 'Propietario',
   'Repository': 'Repositorio',
   'Personal access token': 'Token de acceso personal',
-  'Openen uit git…': 'Abrir desde Git…',
   'Presentatie openen uit git': 'Abrir una presentación desde Git',
   'Geen presentaties in deze repository.':
       'No hay presentaciones en este repositorio.',

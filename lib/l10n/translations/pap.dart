@@ -751,6 +751,10 @@ const _dutchSourceAddPap = {
       'number di registrashon di un profeshonal di salú (BIG)',
   'AGB-code': 'kódigo di proveedor di kuido (AGB)',
   'proces-verbaalnummer': 'number di rapòrt di polis',
+  'Openen uit…': 'Habri for di…',
+  'Opslaan naar…': 'Warda na…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Konfigurá promé un konekshon na Konfigurashon → Almasenamentu.',
   'Beginnen met:': 'Kuminsá ku:',
   'Verlopen datums markeren': 'Marka fechanan vensí',
   'Datums gemarkeerd': 'Fechanan marká',
@@ -1305,7 +1309,6 @@ const _dutchSourceAddPap = {
   'Commitboodschap': 'Mensahe di commit',
   'Wat is er veranderd?': 'Kiko a kambia?',
   'Opslaan naar git': 'Warda na git',
-  'Opslaan naar git…': 'Warda na git…',
   'Opgeslagen in git:': 'Wardá na git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'E branch a move; recarga e deck i warda atrobe.',
@@ -1320,7 +1323,6 @@ const _dutchSourceAddPap = {
   'Eigenaar': 'Doño',
   'Repository': 'Repositorio',
   'Personal access token': 'Token di akseso personal',
-  'Openen uit git…': 'Habri for di Git…',
   'Presentatie openen uit git': 'Habri un presentashon for di Git',
   'Geen presentaties in deze repository.':
       'No tin presentashon den e repositorio aki.',

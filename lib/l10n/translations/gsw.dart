@@ -1799,6 +1799,10 @@ const _dutchSourceAddGsw = <String, String>{
       'Registriernummere vomene Pflegepersonal (BIG)',
   'AGB-code': 'Leischtigserbringer-Code (AGB)',
   'proces-verbaalnummer': 'Aktezeiche vonere Aazeig',
+  'Openen uit…': 'Uftue us…',
+  'Opslaan naar…': 'Speichere uf…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Richte Sie zerscht e Verbindig i under Istellige → Speicher.',
   'Beginnen met:': 'Aafange mit:',
   'Verlopen datums markeren': 'Abglaufeni Date markiere',
   'Datums gemarkeerd': 'Date markiert',
@@ -2354,7 +2358,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Commitboodschap': 'Commit-Nachricht',
   'Wat is er veranderd?': 'Was het sich gänderet?',
   'Opslaan naar git': 'In git spichere',
-  'Opslaan naar git…': 'In git spichere…',
   'Opgeslagen in git:': 'In git gspicheret:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'De Branch isch verschobe; lad s Deck neu und spicher nomol.',
@@ -2369,7 +2372,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Eigenaar': 'Bsitzer',
   'Repository': 'Repository',
   'Personal access token': 'Persönlichs Zuegriffstoken',
-  'Openen uit git…': 'Us Git ufmache…',
   'Presentatie openen uit git': 'Presentation us Git ufmache',
   'Geen presentaties in deze repository.':
       'Kei Presentatione i dem Repository.',

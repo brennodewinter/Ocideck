@@ -1821,6 +1821,10 @@ const _dutchSourceAddEl = <String, String>{
       'αριθμός μητρώου επαγγελματία υγείας (BIG)',
   'AGB-code': 'κωδικός παρόχου υγείας (AGB)',
   'proces-verbaalnummer': 'αριθμός αστυνομικής έκθεσης',
+  'Openen uit…': 'Άνοιγμα από…',
+  'Opslaan naar…': 'Αποθήκευση σε…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Ρυθμίστε πρώτα μια σύνδεση στις Ρυθμίσεις → Αποθήκευση.',
   'Beginnen met:': 'Ξεκινήστε με:',
   'Verlopen datums markeren': 'Επισήμανση ληγμένων ημερομηνιών',
   'Datums gemarkeerd': 'Ημερομηνίες επισημασμένες',
@@ -2383,7 +2387,6 @@ const _dutchSourceAddEl = <String, String>{
   'Commitboodschap': 'Μήνυμα commit',
   'Wat is er veranderd?': 'Τι άλλαξε;',
   'Opslaan naar git': 'Αποθήκευση σε git',
-  'Opslaan naar git…': 'Αποθήκευση σε git…',
   'Opgeslagen in git:': 'Αποθηκεύτηκε σε git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Ο κλάδος μετακινήθηκε· φόρτωσε ξανά το deck και αποθήκευσε πάλι.',
@@ -2398,7 +2401,6 @@ const _dutchSourceAddEl = <String, String>{
   'Eigenaar': 'Κάτοχος',
   'Repository': 'Αποθετήριο',
   'Personal access token': 'Προσωπικό διακριτικό πρόσβασης',
-  'Openen uit git…': 'Άνοιγμα από Git…',
   'Presentatie openen uit git': 'Άνοιγμα παρουσίασης από Git',
   'Geen presentaties in deze repository.':
       'Δεν υπάρχουν παρουσιάσεις σε αυτό το αποθετήριο.',

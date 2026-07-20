@@ -1828,6 +1828,10 @@ const _dutchSourceAddGa = <String, String>{
   'BIG-nummer van een zorgverlener': 'uimhir chláraithe gairmí sláinte (BIG)',
   'AGB-code': 'cód soláthraí cúraim sláinte (AGB)',
   'proces-verbaalnummer': 'uimhir thuairisce póilíní',
+  'Openen uit…': 'Oscail ó…',
+  'Opslaan naar…': 'Sábháil chuig…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Socraigh ceangal ar dtús faoi Socruithe → Stóráil.',
   'Beginnen met:': 'Tosaigh le:',
   'Verlopen datums markeren': 'Marcáil dátaí atá thart',
   'Datums gemarkeerd': 'Dátaí marcáilte',
@@ -2388,7 +2392,6 @@ const _dutchSourceAddGa = <String, String>{
   'Commitboodschap': 'Teachtaireacht commit',
   'Wat is er veranderd?': 'Cad a athraíodh?',
   'Opslaan naar git': 'Sábháil chuig git',
-  'Opslaan naar git…': 'Sábháil chuig git…',
   'Opgeslagen in git:': 'Sábháilte chuig git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Bhog an bhrainse; athluchtaigh an deic agus sábháil arís.',
@@ -2403,7 +2406,6 @@ const _dutchSourceAddGa = <String, String>{
   'Eigenaar': 'Úinéir',
   'Repository': 'Stór',
   'Personal access token': 'Ceadchomhartha rochtana pearsanta',
-  'Openen uit git…': 'Oscail ó Git…',
   'Presentatie openen uit git': 'Oscail láithreoireacht ó Git',
   'Geen presentaties in deze repository.':
       'Níl aon láithreoireacht sa stór seo.',

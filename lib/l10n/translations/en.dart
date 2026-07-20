@@ -932,6 +932,10 @@ const _dutchSourceAddEn = {
       'healthcare professional registration number (BIG)',
   'AGB-code': 'healthcare provider code (AGB)',
   'proces-verbaalnummer': 'police report number',
+  'Openen uit…': 'Open from…',
+  'Opslaan naar…': 'Save to…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Set up a connection first, under Settings → Storage.',
   'Beginnen met:': 'Start with:',
   'Verlopen datums markeren': 'Mark expired dates',
   'Datums gemarkeerd': 'Dates marked',
@@ -1486,7 +1490,6 @@ const _dutchSourceAddEn = {
   'Commitboodschap': 'Commit message',
   'Wat is er veranderd?': 'What changed?',
   'Opslaan naar git': 'Save to git',
-  'Opslaan naar git…': 'Save to git…',
   'Opgeslagen in git:': 'Saved to git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'The branch has moved; reload the deck and save again.',
@@ -1501,7 +1504,6 @@ const _dutchSourceAddEn = {
   'Eigenaar': 'Owner',
   'Repository': 'Repository',
   'Personal access token': 'Personal access token',
-  'Openen uit git…': 'Open from git…',
   'Presentatie openen uit git': 'Open a presentation from git',
   'Geen presentaties in deze repository.':
       'No presentations in this repository.',

@@ -1800,6 +1800,10 @@ const _dutchSourceAddHr = <String, String>{
       'registarski broj zdravstvenog djelatnika (BIG)',
   'AGB-code': 'šifra pružatelja zdravstvene skrbi (AGB)',
   'proces-verbaalnummer': 'broj policijskog zapisnika',
+  'Openen uit…': 'Otvori iz…',
+  'Opslaan naar…': 'Spremi u…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Najprije postavite vezu u Postavke → Pohrana.',
   'Beginnen met:': 'Počnite s:',
   'Verlopen datums markeren': 'Označi istekle datume',
   'Datums gemarkeerd': 'Datumi označeni',
@@ -2353,7 +2357,6 @@ const _dutchSourceAddHr = <String, String>{
   'Commitboodschap': 'Poruka commita',
   'Wat is er veranderd?': 'Što se promijenilo?',
   'Opslaan naar git': 'Spremi u git',
-  'Opslaan naar git…': 'Spremi u git…',
   'Opgeslagen in git:': 'Spremljeno u git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Grana je pomaknuta; ponovno učitaj komplet i spremi opet.',
@@ -2368,7 +2371,6 @@ const _dutchSourceAddHr = <String, String>{
   'Eigenaar': 'Vlasnik',
   'Repository': 'Repozitorij',
   'Personal access token': 'Osobni pristupni token',
-  'Openen uit git…': 'Otvori iz Gita…',
   'Presentatie openen uit git': 'Otvori prezentaciju iz Gita',
   'Geen presentaties in deze repository.':
       'Nema prezentacija u ovom repozitoriju.',

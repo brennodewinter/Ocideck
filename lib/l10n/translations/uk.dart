@@ -1812,6 +1812,10 @@ const _dutchSourceAddUk = <String, String>{
       'реєстраційний номер медичного працівника (BIG)',
   'AGB-code': 'код надавача медичних послуг (AGB)',
   'proces-verbaalnummer': 'номер поліцейського протоколу',
+  'Openen uit…': 'Відкрити з…',
+  'Opslaan naar…': 'Зберегти до…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Спершу налаштуйте з\'єднання в Налаштування → Сховище.',
   'Beginnen met:': 'Почати з:',
   'Verlopen datums markeren': 'Позначати прострочені дати',
   'Datums gemarkeerd': 'Дати позначено',
@@ -2367,7 +2371,6 @@ const _dutchSourceAddUk = <String, String>{
   'Commitboodschap': 'Повідомлення коміту',
   'Wat is er veranderd?': 'Що змінилося?',
   'Opslaan naar git': 'Зберегти в git',
-  'Opslaan naar git…': 'Зберегти в git…',
   'Opgeslagen in git:': 'Збережено в git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Гілку переміщено; перезавантажте колоду й збережіть знову.',
@@ -2382,7 +2385,6 @@ const _dutchSourceAddUk = <String, String>{
   'Eigenaar': 'Власник',
   'Repository': 'Репозиторій',
   'Personal access token': 'Особистий токен доступу',
-  'Openen uit git…': 'Відкрити з Git…',
   'Presentatie openen uit git': 'Відкрити презентацію з Git',
   'Geen presentaties in deze repository.':
       'У цьому репозиторії немає презентацій.',

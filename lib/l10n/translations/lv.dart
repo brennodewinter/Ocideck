@@ -1792,6 +1792,10 @@ const _dutchSourceAddLv = <String, String>{
       'veselības aprūpes speciālista reģistrācijas numurs (BIG)',
   'AGB-code': 'veselības aprūpes pakalpojumu sniedzēja kods (AGB)',
   'proces-verbaalnummer': 'policijas protokola numurs',
+  'Openen uit…': 'Atvērt no…',
+  'Opslaan naar…': 'Saglabāt uz…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Vispirms iestatiet savienojumu sadaļā Iestatījumi → Krātuve.',
   'Beginnen met:': 'Sākt ar:',
   'Verlopen datums markeren': 'Atzīmēt nokavētos datumus',
   'Datums gemarkeerd': 'Datumi atzīmēti',
@@ -2347,7 +2351,6 @@ const _dutchSourceAddLv = <String, String>{
   'Commitboodschap': 'Commit ziņojums',
   'Wat is er veranderd?': 'Kas mainījās?',
   'Opslaan naar git': 'Saglabāt git',
-  'Opslaan naar git…': 'Saglabāt git…',
   'Opgeslagen in git:': 'Saglabāts git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Zars ir pārvietots; pārlādē klāju un saglabā vēlreiz.',
@@ -2362,7 +2365,6 @@ const _dutchSourceAddLv = <String, String>{
   'Eigenaar': 'Īpašnieks',
   'Repository': 'Repozitorijs',
   'Personal access token': 'Personīgā piekļuves pilnvara',
-  'Openen uit git…': 'Atvērt no Git…',
   'Presentatie openen uit git': 'Atvērt prezentāciju no Git',
   'Geen presentaties in deze repository.':
       'Šajā repozitorijā nav prezentāciju.',

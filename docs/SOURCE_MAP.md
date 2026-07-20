@@ -301,7 +301,7 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 
 - `ai_actions.dart` — `_MainLayoutAiActions`: the bulk "wipe AI alt-texts" safety action.
 - `command_palette_actions.dart` — `_MainLayoutCommandPalette`: builds and shows the Ctrl/Cmd+K command list (incl. the security-module actions).
-- `shell_actions.dart` — File-IO helpers for deck import/export and the WebDAV source, plus shared `presentDeck`/`requestCloseTab` helpers.
+- `shell_actions.dart` — File-IO helpers for deck import/export and the WebDAV source, plus shared `presentDeck`/`requestCloseTab` helpers. Draagt ook de twee gedeelde ingangen `_openFromConnection`/`_saveToConnection` (één "Openen uit…" en één "Opslaan naar…" voor alle opslagsoorten) en `_saveToOrigin`, waarmee de gewone opslaanknop teruggaat naar de plek waar het deck vandaan kwam in plaats van lokaal te landen.
 - `shell_actions_git.dart` — The `…`-menu handlers for the git plane: open/save, sync, flush the outbox, history, versions, compare, resolve a merge conflict, open for review, merge the concept, tag a release, and the pool overview. Each one gates and reports; the dialogs themselves live next door.
 - `shell_actions_git_dialogs.dart` — The git dialogs: browse, history, the version list and its compare picker, the version diff, the merge-conflict chooser, save, review, merge and tag.
 - `shell_actions_git_search.dart` — `_GitSearchDialog`: the cross-deck search UI. A button rather than search-as-you-type, since each round reads N files over REST. Picking a hit returns its deck dir to `_searchDecks`, which opens it through the ordinary `_openFromGit` path.

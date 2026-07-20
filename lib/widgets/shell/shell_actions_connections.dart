@@ -67,3 +67,158 @@ void _webdavNotConfigured(BuildContext context) {
     ),
   );
 }
+
+/// Sla [deckNotifier] op. Voor een nieuw deck (nog geen bestandspad) toont dit
+/// eerst een bestemmingsdialoog — kies een bibliotheek en zie waar de
+/// presentatie, afbeeldingen en media landen — en opent daarna het
+/// systeem-opslaanvenster in de gekozen map. Bestaande decks slaan direct op.
+/// Op web (geen schrijfbaar bestandssysteem) is opslaan een download; dan geen
+/// dialoog. Geeft terug of er daadwerkelijk is opgeslagen.
+Future<bool> saveDeckWithDestination(
+  BuildContext context,
+  WidgetRef ref,
+  DeckNotifier deckNotifier,
+) async {
+  // Waar het vandaan komt, gaat het naartoe terug. Een deck dat van WebDAV, S3
+  // of git is geopend, hoort met de gewone opslaanknop niet ineens als lokaal
+  // bestand te landen: dan staat de bewerkte versie op de laptop en blijft de
+  // server met de oude zitten, terwijl de gebruiker denkt dat hij heeft
+  // opgeslagen. Naar een ándere plek schrijven is een aparte handeling
+  // ("Opslaan naar…"), geen bijwerking van opslaan.
+  final origin = ref.read(tabsProvider).current?.origin;
+  if (origin != null) return _saveToOrigin(context, ref, origin);
+
+  final settings = ref.read(settingsProvider);
+  final isNewDeck = deckNotifier.currentState.filePath == null;
+  if (!isNewDeck || !supportsLocalProjectFolders) {
+    return deckNotifier.save(initialDirectory: settings.homeDirectory);
+  }
+  final choice = await SaveDestinationDialog.show(
+    context,
+    libraries: settings.libraries,
+    deckTitle: deckNotifier.currentState.deck?.title ?? '',
+  );
+  if (choice == null || !context.mounted) return false;
+  return deckNotifier.save(initialDirectory: choice.directory);
+}
+
+/// Slaat op naar de opslag waar het deck vandaan kwam. Geeft terug of dat
+/// gelukt is.
+///
+/// WebDAV en S3 gaan stil terug naar hetzelfde pad; git vraagt wél, omdat een
+/// commit een boodschap nodig heeft en op een werkbranch landt. Verdwijnt de
+/// verbinding (verwijderd of niet meer geconfigureerd), dan valt het
+/// betreffende pad zelf terug op de keuzedialoog — daar hoort die vraag, niet
+/// hier.
+Future<bool> _saveToOrigin(
+  BuildContext context,
+  WidgetRef ref,
+  StorageOrigin origin,
+) async {
+  switch (origin) {
+    case WebdavOrigin():
+      return _saveToNextcloud(context, ref, silent: true);
+    case S3Origin():
+      return _saveToS3(context, ref, silent: true);
+    case GitOrigin():
+      await _saveToGit(context, ref);
+      return true;
+  }
+  // StorageOrigin is geen sealed type (de implementaties wonen bij hun eigen
+  // instellingen), dus een onbekende soort valt terug op "niet afgehandeld" en
+  // de lokale weg neemt het over.
+  // ignore: dead_code
+  return false;
+}
+
+/// De verbindingen waaruit "Openen uit…" en "Opslaan naar…" laten kiezen:
+/// alles wat is ingesteld, behalve de lokale mappen — die hebben hun eigen
+/// "Openen…" via het systeemvenster.
+///
+/// WebDAV en S3 vallen weg waar het platform ze niet draagt (op web leunt de
+/// WebDAV-client op dart:io-pinning); git blijft, want dat is https+JSON dat de
+/// browser-sandbox al inperkt (§4.4).
+List<StorageConnection> _remoteConnections(WidgetRef ref) {
+  return ref
+      .read(settingsProvider)
+      .connections
+      .where(
+        (c) =>
+            c.isConfigured &&
+            switch (c) {
+              LocalConnection() => false,
+              GitConnection() => true,
+              WebdavConnection() ||
+              S3Connection() => supportsNetworkDeckSources,
+            },
+      )
+      .toList();
+}
+
+/// Openen uit een verbinding, welke soort dan ook.
+///
+/// Eén ingang in plaats van drie. De vraag die de gebruiker heeft is "waar
+/// staat mijn presentatie", niet "welk protocol gebruikt de plek waar mijn
+/// presentatie staat" — en met één verbinding stelt de kiezer de vraag
+/// helemaal niet, dus wie één server heeft merkt er niets van.
+Future<void> _openFromConnection(BuildContext context, WidgetRef ref) async {
+  final connections = _remoteConnections(ref);
+  if (connections.isEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          context.l10n.d(
+            'Stel eerst een verbinding in bij Instellingen → Opslag.',
+          ),
+        ),
+      ),
+    );
+    return;
+  }
+  final chosen = await StorageConnectionPicker.show(context, connections);
+  if (chosen == null || !context.mounted) return;
+  switch (chosen) {
+    case WebdavConnection():
+      await _openFromNextcloud(context, ref, connection: chosen);
+    case S3Connection():
+      await _openFromS3(context, ref, connection: chosen);
+    case GitConnection():
+      await _openFromGit(context, ref, connection: chosen);
+    case LocalConnection():
+      break; // Gefilterd in [_remoteConnections].
+  }
+}
+
+/// Opslaan naar een verbinding naar keuze — het deck ergens ánders neerzetten
+/// dan waar het vandaan kwam.
+///
+/// Dit is de uitzondering, niet de regel: de gewone opslaanknop volgt de
+/// herkomst (zie [saveDeckWithDestination]). Deze ingang bestaat voor het geval
+/// dat je het bewust wilt verplaatsen of kopiëren.
+Future<void> _saveToConnection(BuildContext context, WidgetRef ref) async {
+  final connections = _remoteConnections(ref);
+  if (connections.isEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          context.l10n.d(
+            'Stel eerst een verbinding in bij Instellingen → Opslag.',
+          ),
+        ),
+      ),
+    );
+    return;
+  }
+  final chosen = await StorageConnectionPicker.show(context, connections);
+  if (chosen == null || !context.mounted) return;
+  switch (chosen) {
+    case WebdavConnection():
+      await _saveToNextcloud(context, ref, connectionOverride: chosen);
+    case S3Connection():
+      await _saveToS3(context, ref, connectionOverride: chosen);
+    case GitConnection():
+      await _saveToGit(context, ref, connectionOverride: chosen);
+    case LocalConnection():
+      break; // Gefilterd in [_remoteConnections].
+  }
+}

@@ -529,6 +529,35 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   een strafzaak gaat. Een markering verbergt een waarde, geen onderwerp.
 
 ### Fixed
+- **Opslaan ging niet terug naar waar de presentatie vandaan kwam.** Wie een
+  deck van WebDAV, S3 of git opende en daarna gewoon op opslaan drukte (of
+  Ctrl/Cmd+S), zag het als lokaal bestand landen. De server hield de oude
+  versie, de laptop kreeg de nieuwe, en niets meldde dat de twee uit elkaar
+  liepen — het is precies het soort fout dat je pas ontdekt als iemand anders
+  de verouderde versie opent.
+
+  Terugschrijven naar de bron kon wel, maar alleen via een apart menu-item per
+  soort opslag. Dat betekende dat de gebruiker moest onthouden welk van de
+  opslaanknoppen bij zijn bron hoorde, terwijl het antwoord al vastlag: waar
+  het vandaan komt, gaat het naartoe terug. Nu volgt opslaan de herkomst,
+  zonder te vragen, naar hetzelfde pad in hetzelfde formaat.
+
+- **Zes menu-items voor openen en opslaan zijn er twee geworden.** In plaats
+  van "Openen vanaf WebDAV", "Openen vanuit S3", "Openen uit git" en drie
+  bijbehorende opslaanvarianten staat er nu één **Openen uit…** en één
+  **Opslaan naar…**. Beide beginnen met dezelfde vraag — welke verbinding — en
+  die vraag wordt overgeslagen als er maar één is, dus wie één server heeft
+  merkt van de hele keuze niets.
+
+  De vraag die iemand heeft is "waar staat mijn presentatie", niet "welk
+  protocol draait op de plek waar mijn presentatie staat". Het welkomscherm
+  bood om dezelfde reden alleen WebDAV aan; wie met S3 of git werkte kon daar
+  nergens heen. Nu is het daar dezelfde ingang.
+
+  "Opslaan naar…" blijft bestaan als de uitzondering: het deck bewust ergens
+  ánders neerzetten. Wat git écht toevoegt — synchroniseren, geschiedenis,
+  versies, uitbrengen ter review — staat nog gewoon in zijn eigen blok.
+
 - **"Gebundelde standaarden" heet nu "Standaarden en methodieken".** De sectie
   bij Over OciDeck somt naast standaarden ook MIAUW op, en dat is een methodiek.
   Een rapportage die vermeldt waartegen is getoetst, hoort het onderscheid niet

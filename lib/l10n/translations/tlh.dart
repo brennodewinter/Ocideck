@@ -1767,6 +1767,10 @@ const _dutchSourceAddTlh = <String, String>{
   'BIG-nummer van een zorgverlener': 'Qel mI\' (BIG)',
   'AGB-code': 'Qel ghom mI\' (AGB)',
   'proces-verbaalnummer': 'HuchwI\' De\' mI\'',
+  'Openen uit…': 'poSmoH vo\'…',
+  'Opslaan naar…': 'polmeH…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'wa\'DIch rar\'egh yIchenmoH: Do\'Ha\'ghach → nISwI\'.',
   'Beginnen met:': 'vam Do\'',
   'Verlopen datums markeren': 'jajmey vI\'ang',
   'Datums gemarkeerd': 'jajmey \'angbogh',
@@ -2313,7 +2317,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Commitboodschap': 'commit QIn',
   'Wat is er veranderd?': 'nuq choHlu\'pu\'?',
   'Opslaan naar git': 'git-Daq Qaw\'',
-  'Opslaan naar git…': 'git-Daq Qaw\'…',
   'Opgeslagen in git:': 'git-Daq Qaw\'ta\':',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'branch vIHpu\'; deck yISamqa\' \'ej yIQaw\'qa\'.',
@@ -2328,7 +2331,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Eigenaar': 'ghaj wI\'',
   'Repository': 'qawHaq',
   'Personal access token': 'pagh QulHom',
-  'Openen uit git…': 'Gitvo\' poSmoH…',
   'Presentatie openen uit git': 'Gitvo\' HaSta\' poQwI\' poSmoH',
   'Geen presentaties in deze repository.':
       'qawHaqvamDaq HaSta\' poQwI\' tu\'lu\'be\'.',

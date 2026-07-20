@@ -1805,6 +1805,10 @@ const _dutchSourceAddPl = <String, String>{
       'numer rejestracyjny pracownika ochrony zdrowia (BIG)',
   'AGB-code': 'kod świadczeniodawcy (AGB)',
   'proces-verbaalnummer': 'numer protokołu policyjnego',
+  'Openen uit…': 'Otwórz z…',
+  'Opslaan naar…': 'Zapisz do…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Skonfiguruj najpierw połączenie w Ustawienia → Magazyn.',
   'Beginnen met:': 'Zacznij od:',
   'Verlopen datums markeren': 'Oznacz przeterminowane daty',
   'Datums gemarkeerd': 'Daty oznaczone',
@@ -2359,7 +2363,6 @@ const _dutchSourceAddPl = <String, String>{
   'Commitboodschap': 'Komunikat commita',
   'Wat is er veranderd?': 'Co się zmieniło?',
   'Opslaan naar git': 'Zapisz do gita',
-  'Opslaan naar git…': 'Zapisz do gita…',
   'Opgeslagen in git:': 'Zapisano do gita:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Gałąź się przesunęła; przeładuj zestaw i zapisz ponownie.',
@@ -2374,7 +2377,6 @@ const _dutchSourceAddPl = <String, String>{
   'Eigenaar': 'Właściciel',
   'Repository': 'Repozytorium',
   'Personal access token': 'Osobisty token dostępu',
-  'Openen uit git…': 'Otwórz z Git…',
   'Presentatie openen uit git': 'Otwórz prezentację z Git',
   'Geen presentaties in deze repository.':
       'Brak prezentacji w tym repozytorium.',

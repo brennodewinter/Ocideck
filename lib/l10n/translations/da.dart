@@ -1793,6 +1793,10 @@ const _dutchSourceAddDa = <String, String>{
       'registreringsnummer for sundhedspersonale (BIG)',
   'AGB-code': 'kode for sundhedsudbyder (AGB)',
   'proces-verbaalnummer': 'journalnummer på politianmeldelse',
+  'Openen uit…': 'Åbn fra…',
+  'Opslaan naar…': 'Gem til…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Opsæt først en forbindelse under Indstillinger → Lager.',
   'Beginnen met:': 'Start med:',
   'Verlopen datums markeren': 'Markér udløbne datoer',
   'Datums gemarkeerd': 'Datoer markeret',
@@ -2346,7 +2350,6 @@ const _dutchSourceAddDa = <String, String>{
   'Commitboodschap': 'Commit-besked',
   'Wat is er veranderd?': 'Hvad er ændret?',
   'Opslaan naar git': 'Gem til git',
-  'Opslaan naar git…': 'Gem til git…',
   'Opgeslagen in git:': 'Gemt til git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Grenen er flyttet; genindlæs decket og gem igen.',
@@ -2361,7 +2364,6 @@ const _dutchSourceAddDa = <String, String>{
   'Eigenaar': 'Ejer',
   'Repository': 'Repository',
   'Personal access token': 'Personligt adgangstoken',
-  'Openen uit git…': 'Åbn fra Git…',
   'Presentatie openen uit git': 'Åbn en præsentation fra Git',
   'Geen presentaties in deze repository.':
       'Ingen præsentationer i dette repository.',

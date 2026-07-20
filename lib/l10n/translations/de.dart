@@ -751,6 +751,10 @@ const _dutchSourceAddDe = {
   'BIG-nummer van een zorgverlener': 'Registriernummer einer Pflegekraft (BIG)',
   'AGB-code': 'Leistungserbringer-Code (AGB)',
   'proces-verbaalnummer': 'Aktenzeichen einer Anzeige',
+  'Openen uit…': 'Öffnen aus…',
+  'Opslaan naar…': 'Speichern nach…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Richten Sie zuerst eine Verbindung unter Einstellungen → Speicher ein.',
   'Beginnen met:': 'Beginnen mit:',
   'Verlopen datums markeren': 'Abgelaufene Daten markieren',
   'Datums gemarkeerd': 'Daten markiert',
@@ -1310,7 +1314,6 @@ const _dutchSourceAddDe = {
   'Commitboodschap': 'Commit-Nachricht',
   'Wat is er veranderd?': 'Was hat sich geändert?',
   'Opslaan naar git': 'In git speichern',
-  'Opslaan naar git…': 'In git speichern…',
   'Opgeslagen in git:': 'In git gespeichert:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Der Branch wurde verschoben; lade das Deck neu und speichere erneut.',
@@ -1325,7 +1328,6 @@ const _dutchSourceAddDe = {
   'Eigenaar': 'Eigentümer',
   'Repository': 'Repository',
   'Personal access token': 'Persönliches Zugriffstoken',
-  'Openen uit git…': 'Aus Git öffnen…',
   'Presentatie openen uit git': 'Präsentation aus Git öffnen',
   'Geen presentaties in deze repository.':
       'Keine Präsentationen in diesem Repository.',

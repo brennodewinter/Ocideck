@@ -1816,6 +1816,10 @@ const _dutchSourceAddBg = <String, String>{
       'регистрационен номер на медицински специалист (BIG)',
   'AGB-code': 'код на доставчик на здравни услуги (AGB)',
   'proces-verbaalnummer': 'номер на полицейски протокол',
+  'Openen uit…': 'Отваряне от…',
+  'Opslaan naar…': 'Запазване в…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Първо настройте връзка в Настройки → Хранилище.',
   'Beginnen met:': 'Започнете с:',
   'Verlopen datums markeren': 'Отбелязване на изтекли дати',
   'Datums gemarkeerd': 'Датите са отбелязани',
@@ -2373,7 +2377,6 @@ const _dutchSourceAddBg = <String, String>{
   'Commitboodschap': 'Съобщение за commit',
   'Wat is er veranderd?': 'Какво се промени?',
   'Opslaan naar git': 'Запазване в git',
-  'Opslaan naar git…': 'Запазване в git…',
   'Opgeslagen in git:': 'Запазено в git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Клонът е преместен; презаредете тестето и запазете отново.',
@@ -2388,7 +2391,6 @@ const _dutchSourceAddBg = <String, String>{
   'Eigenaar': 'Собственик',
   'Repository': 'Хранилище',
   'Personal access token': 'Личен токен за достъп',
-  'Openen uit git…': 'Отваряне от Git…',
   'Presentatie openen uit git': 'Отваряне на презентация от Git',
   'Geen presentaties in deze repository.': 'В това хранилище няма презентации.',
   'Rapportagetaal': 'Език на доклада',
