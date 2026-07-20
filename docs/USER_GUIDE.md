@@ -268,8 +268,10 @@ saved version stays retrievable, which a plain folder cannot give you.
   that deck opens. Two things it will tell you rather than hide: if a deck could
   not be read it is named as skipped (the hits you do see are still real), and
   if there were more hits than fit it says so instead of quietly cutting the
-  list. Searching reads every deck in the repository, so it runs when you press
-  *Zoeken* — not while you type.
+  list. On desktop, when the repository is cloned locally, it uses `git grep` to
+  read only the decks that actually contain the term — much faster than reading
+  every one. Everywhere else (including in the browser) it falls back to scanning
+  every deck, which is why it runs when you press *Zoeken* — not while you type.
 - **Which decks use an image — *Afbeeldingen in de repository…*.** Images are
   stored once and shared by every deck that uses them, so before you touch one it
   helps to know who else depends on it. This overview lists every image in the
