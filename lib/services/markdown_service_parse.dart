@@ -429,6 +429,7 @@ extension _MarkdownParse on MarkdownService {
       notes: d.notes,
       advanceDuration: d.advanceDuration,
       skipped: d.skipped,
+      isDetail: d.isDetail,
       tlp: d.tlp,
       styleImageWidth: d.styleImageWidth,
       findingId: link.findingId,
@@ -536,6 +537,7 @@ extension _MarkdownParse on MarkdownService {
       showLogo: showLogo,
       showFooter: showFooter,
       skipped: d.skipped,
+      isDetail: d.isDetail,
       tlp: d.tlp,
       privacy: d.privacy,
       quality: d.quality,
@@ -570,6 +572,7 @@ extension _MarkdownParse on MarkdownService {
     required String notes,
     required double advanceDuration,
     required bool skipped,
+    required bool isDetail,
     required TlpLevel tlp,
     required int styleImageWidth,
     required String findingId,
@@ -583,6 +586,7 @@ extension _MarkdownParse on MarkdownService {
         notes: notes,
         advanceDuration: advanceDuration,
         skipped: skipped,
+        isDetail: isDetail,
         tlp: tlp,
       );
     }
@@ -593,6 +597,7 @@ extension _MarkdownParse on MarkdownService {
         notes: notes,
         advanceDuration: advanceDuration,
         skipped: skipped,
+        isDetail: isDetail,
         tlp: tlp,
       );
     }
@@ -603,6 +608,7 @@ extension _MarkdownParse on MarkdownService {
         notes: notes,
         advanceDuration: advanceDuration,
         skipped: skipped,
+        isDetail: isDetail,
         tlp: tlp,
       );
     }
@@ -613,6 +619,7 @@ extension _MarkdownParse on MarkdownService {
         notes: notes,
         advanceDuration: advanceDuration,
         skipped: skipped,
+        isDetail: isDetail,
         tlp: tlp,
         imageSize: styleImageWidth,
       );
@@ -623,6 +630,7 @@ extension _MarkdownParse on MarkdownService {
       notes: notes,
       advanceDuration: advanceDuration,
       skipped: skipped,
+      isDetail: isDetail,
       tlp: tlp,
       findingId: findingId,
       findingRole: findingRole,

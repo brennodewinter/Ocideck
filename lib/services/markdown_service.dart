@@ -480,6 +480,14 @@ class MarkdownService {
       buf.writeln('<!-- skip -->');
     }
 
+    // Verdiepingsslide: alleen in de volledige versie. Uitsluitend geschreven
+    // wanneer de vlag aanstaat, zodat een deck dat dit nooit gebruikt
+    // byte-identiek blijft aan voorheen.
+    if (slide.isDetail) {
+      buf.writeln();
+      buf.writeln('<!-- ocideck_detail -->');
+    }
+
     _writeSlideClassification(buf, slide);
 
     if (slide.notes.isNotEmpty) {

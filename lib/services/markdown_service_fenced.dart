@@ -132,6 +132,7 @@ extension _MarkdownFenced on MarkdownService {
     required String notes,
     required double advanceDuration,
     required bool skipped,
+    required bool isDetail,
     TlpLevel tlp = TlpLevel.none,
   }) {
     final scan = _scanFencedBlock(remaining);
@@ -150,6 +151,7 @@ extension _MarkdownFenced on MarkdownService {
       showLogo: flags.showLogo,
       showFooter: flags.showFooter,
       skipped: skipped,
+      isDetail: isDetail,
       tlp: tlp,
     );
   }
@@ -162,6 +164,7 @@ extension _MarkdownFenced on MarkdownService {
     required String notes,
     required double advanceDuration,
     required bool skipped,
+    required bool isDetail,
     TlpLevel tlp = TlpLevel.none,
   }) {
     final scan = _scanFencedBlock(remaining);
@@ -178,6 +181,7 @@ extension _MarkdownFenced on MarkdownService {
       showLogo: flags.showLogo,
       showFooter: flags.showFooter,
       skipped: skipped,
+      isDetail: isDetail,
       tlp: tlp,
     );
   }
@@ -190,6 +194,7 @@ extension _MarkdownFenced on MarkdownService {
     required String notes,
     required double advanceDuration,
     required bool skipped,
+    required bool isDetail,
     TlpLevel tlp = TlpLevel.none,
   }) {
     final scan = _scanFencedBlock(remaining);
@@ -207,6 +212,7 @@ extension _MarkdownFenced on MarkdownService {
       showLogo: flags.showLogo,
       showFooter: flags.showFooter,
       skipped: skipped,
+      isDetail: isDetail,
       tlp: tlp,
     );
   }
@@ -220,6 +226,7 @@ extension _MarkdownFenced on MarkdownService {
     required String notes,
     required double advanceDuration,
     required bool skipped,
+    required bool isDetail,
     TlpLevel tlp = TlpLevel.none,
     int imageSize = 0,
   }) {
@@ -241,6 +248,7 @@ extension _MarkdownFenced on MarkdownService {
       showLogo: flags.showLogo,
       showFooter: flags.showFooter,
       skipped: skipped,
+      isDetail: isDetail,
       tlp: tlp,
     );
   }

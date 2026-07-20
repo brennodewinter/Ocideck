@@ -17,6 +17,28 @@ enum TlpLevel { none, clear, green, amber, amberStrict, red }
 bool slideVisibleAtTlp(Slide slide, TlpLevel presentationTlp) =>
     slide.tlp.index <= presentationTlp.index;
 
+/// Of [slide] het publiek bereikt bij presenteren of exporteren.
+///
+/// Drie onafhankelijke poorten, en een slide moet ze alle drie passeren: de
+/// auteur sloeg hem over, zijn TLP-classificatie is strenger dan het niveau
+/// waarop dit deck gedeeld wordt, of het is een verdiepingsslide terwijl de
+/// beknopte versie wordt gemaakt. De assen staan bewust los van elkaar — TLP
+/// vraagt *wie dit mag zien*, redactie vraagt *welke gegevens eruit mogen*, en
+/// verdieping vraagt *hoeveel detail deze lezer wil*.
+///
+/// Dit is de énige plek waar die drie samenkomen. Ze stonden eerder tweemaal
+/// uitgeschreven — in de slidelijst én in de indexvertaling van de
+/// startselectie — en dat is precies hoe een vierde poort er straks op één van
+/// beide plekken niet in belandt.
+bool slideReachesAudience(
+  Slide slide, {
+  required TlpLevel presentationTlp,
+  required bool includeDetail,
+}) =>
+    !slide.skipped &&
+    slideVisibleAtTlp(slide, presentationTlp) &&
+    (includeDetail || !slide.isDetail);
+
 /// Strengste classificatie voor markering op een slide: het hoogste van het
 /// deck-niveau en het per-slide niveau.
 TlpLevel effectiveTlp({
