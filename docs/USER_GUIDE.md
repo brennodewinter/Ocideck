@@ -631,6 +631,16 @@ Two display options sit above the event list:
   everything at once. With *Draw in on open* selected, an **Animation speed**
   slider sets how long the draw-in takes (from ~0.4 s up to 30 s).
 
+Cards size themselves to what you wrote: the renderer measures your actual text
+and picks the largest type size at which every marker, title and description
+still fits whole, wrapping a long title onto a second line and a description onto
+up to three. There is no length limit on the fields, but a card can only grow so
+far — at the upper end (ten or more events, each with a long title *and* a long
+description) something has to give, and the text is shortened with an ellipsis.
+If you see a `…` on a timeline, split the events across two slides or shorten the
+titles; the descriptions have far more room than the titles, which share their
+line with the marker badge.
+
 The timeline picks up the active style profile (accent colour, fonts and slide
 background), so it matches the rest of the deck. Events are stored as an ordinary
 Markdown list, so the slide stays readable and Marp-compatible in the `.md` file.
