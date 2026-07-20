@@ -1175,6 +1175,51 @@ written, so:
 A test in the suite exports a deck with a known value and searches for it in
 every one of those places. If it ever shows up, the build fails.
 
+### A marked value stops being reported
+
+Marking is the strongest decision the feature has: it leaves the value out
+unconditionally, whatever rule fired and whatever state the slide is in. So the
+check stops warning about what you marked. Wrap an address, a citizen service
+number, an IBAN, a coordinate pair or an IP address in brackets and the finding
+for that value disappears from the quality panel — asking you to act on something
+you have just done is exactly the kind of notice that makes people switch the
+whole check off.
+
+It goes quiet **per spot, not per value**. If the same address appears twice on a
+slide and you mark one of them, the other is still reported:
+
+```markdown
+From [[marieke@acme.nl]] to jan@acme.nl.
+```
+
+That second address still shows up, which is the point. Matching on text instead
+would let one pair of brackets silence every occurrence, and a value you forgot
+to mark would vanish from the panel without anyone noticing — the kind of miss
+that leaves nothing behind to see.
+
+Half a marker is not a marker: `[[value` or `value]]` is scanned as ordinary
+text, so a typo in the markup cannot quietly hide something. An ordinary Markdown
+link `[text](url)` has single brackets and is unaffected.
+
+### What stays reported: what the slide is *about*
+
+Marking hides a value. It does not change what the slide is about, and the
+article 9 and 10 warnings are about exactly that. Take the example above:
+
+```markdown
+The suspect, [[Jan de Vries]], was arrested at [[Kalverstraat 12]].
+```
+
+The name and the address are gone from the panel. The slide is still reported as
+containing criminal-law context — because `suspect` and `arrested` are what
+trigger that warning, and they are still there in plain sight. That is the right
+outcome: the sentence remains a sentence about a criminal case, and bracketing
+the words that say so would only hide the topic from you, not from the reader.
+
+So a slide that is fully marked up can still carry an article 9 or 10 notice.
+Read it as "this slide is about a sensitive subject", not as "you missed
+something".
+
 ### Your file keeps the original
 
 Redaction applies to what you *share*, never to what you *store*. The Markdown on
@@ -1195,6 +1240,10 @@ cannot see the data may not write it back either.
 Redaction only removes what you mark. It does not read your images: a screenshot
 with a name in it stays a screenshot with a name in it. And a `~~strikethrough~~`
 is not a redaction — it is styling, and the text travels with the file.
+
+Nor does marking make a slide "clean". It silences the finding for the value you
+marked, and nothing more: the subject-matter warnings stay, and a value you did
+not mark is still found and still reported.
 
 ## Presenting
 
