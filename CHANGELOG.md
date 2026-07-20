@@ -524,6 +524,32 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   een strafzaak gaat. Een markering verbergt een waarde, geen onderwerp.
 
 ### Fixed
+- **Een tweede ronde op dezelfde dag overschreef de eerste.** De werkbranch
+  draagt alleen een datum, dus elke opslag van hetzelfde deck op dezelfde dag
+  komt op dezelfde branch uit. Bij een verse ronde vroeg het opslaan de forge
+  waar die branch nú stond en committeerde daar bovenop — waarmee de basis per
+  definitie de kop was en de concurrency-guard nooit kón vuren.
+
+  Eén gebruiker was al genoeg: 's ochtends openen vanaf main en opslaan, 's
+  middags opnieuw vanaf main openen en opslaan, en de ochtend was van de kop
+  verdwenen, met *"Opgeslagen in git"* in beeld. Met twee mensen kwam er nog bij
+  dat het legen van de wachtrij de verwijderlijst uit de remote boom berekent:
+  een bestand dat de ander had toegevoegd werd dan actief weggehaald.
+
+  De basis is nu de commit waar het deck daadwerkelijk tegenaan gelezen is. Staat
+  de branch verderop, dan botst het en voegt de driewegs-merge beide kanten
+  samen. Alleen bij een écht verse branch is de kop de basis — die takken we op
+  dat moment zelf af.
+
+- **Een tabwissel tijdens het opslaan verlegde de git-herkomst.** Een commit gaat
+  over het netwerk en duurt. Klikte je ondertussen naar een ander tabblad, dan
+  kreeg dát tabblad de herkomst van het deck dat aan het opslaan was — en
+  committeerde bij de volgende opslag zijn eigen inhoud over de deckmap van het
+  eerste deck heen. Bij samenvoegen was het erger: het samengevoegde deck landde
+  in het verkeerde tabblad, met diens ongedaan-maken-geschiedenis gewist en de
+  herstelkopie opgeruimd. Het tabblad ligt nu vast vóór de eerste netwerkronde,
+  zoals bij WebDAV en S3 al het geval was.
+
 - **De beeldcontrole meldde een gezicht dat er niet was, en je kon er niets mee.**
   Een gegenereerde tekening van dieren in pak — een uil frontaal, een kikker met
   bril — leverde de melding "herkenbaar gezicht" op. Terecht van de detector
