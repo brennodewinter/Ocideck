@@ -435,6 +435,22 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   duizend regels eronder naar een harde waarschuwing — en dat is precies het
   gedrag waardoor mensen een privacycontrole uitzetten.
 
+- **Wat de auteur zelf markeert, levert geen melding meer op.** Een waarde tussen
+  `[[…]]` wordt onvoorwaardelijk geredigeerd, dus er nog over waarschuwen vraagt
+  om iets te doen aan iets wat net gedaan ís — precies het soort melding waardoor
+  mensen de hele controle uitzetten. Het viel op in de handleiding, waar het
+  voorbeeld `arrested at [[Kalverstraat 12]]` zichzelf liet aanmelden.
+
+  De onderdrukking werkt op **positie** en niet op waarde: staat hetzelfde adres
+  twee keer op een slide en is er één gemarkeerd, dan wordt de andere gewoon
+  gemeld. Een vergelijking op tekst zou ze allebei laten verdwijnen, en dat is een
+  vals-negatieve die niemand ziet.
+
+  Wat blijft staan, is de melding over het ónderwerp: de artikel 9- en
+  10-treffers komen niet uit de waarde maar uit de woorden eromheen, dus een
+  volledig gemarkeerde zin over een verdachte meldt nog steeds dat de slide over
+  een strafzaak gaat. Een markering verbergt een waarde, geen onderwerp.
+
 ### Fixed
 - **Een woonadres kon volledig door de controle glippen, en het viel niet op.**
   `Woonadres: Weidemolen 12, 1234 AB Amsterdam` werd niet gemeld. De

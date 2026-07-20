@@ -925,6 +925,26 @@ is het weg. De detector adviseert, de auteur beslist, de projectie voert uit.
 (Dit vergt een nieuwe inline-markering in `inline_markdown.dart` en in de markdown-round-trip
 — het is de enige plek waar we de inline-parser wél aanraken.)
 
+**En de markering zwijgt ook de melding.** Wat de auteur zelf heeft gemarkeerd, is al
+afgehandeld; er dan nog over waarschuwen vraagt hem iets te doen aan iets wat hij net gedáán
+heeft, en dat is precies het soort melding waardoor mensen de hele controle uitzetten. De
+onderdrukking zit in `_finding`, naast die van de eigen identiteit — één plek, zodat elke regel
+die een waarde uit de tekst haalt haar gratis erft.
+
+Twee keuzes die de tests vastleggen. Ze werkt op **positie** en niet op waarde: staat hetzelfde
+adres twee keer op een slide en is er één gemarkeerd, dan hoort de andere gewoon gemeld te
+worden — een vergelijking op tekst zou ze allebei laten verdwijnen, en dat is een vals-negatieve
+die niemand ziet. En het is **onderdrukken en niet afzwakken**: een bevinding die tot `info`
+zakt blijft in het paneel staan en telt mee in de massaregels, waarmee de ruis alleen verplaatst
+zou zijn.
+
+De asymmetrie die daaruit volgt, is bewust maar niet vanzelfsprekend: de artikel 9/10-treffers
+lopen via `_keywordFinding` en niet via `_finding`, en zwijgen dus **niet**. Dat is de juiste
+uitkomst — een markering verbergt een wáárde, niet het onderwerp van de slide — maar het
+betekent wel dat het voorbeeld hierboven, volledig gemarkeerd, nog steeds `special.criminal`
+meldt: "verdachte" en "aangehouden" staan er onveranderd. Wie die melding leest als "je hebt
+iets gemist", leest hem verkeerd; hij zegt dat deze slide over een strafzaak gaat.
+
 ### 6.5 De invariant en zijn test
 
 > **De geredigeerde waarde komt in geen enkel ontvangend artefact voor — in geen enkele vorm.**
