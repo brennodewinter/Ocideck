@@ -635,7 +635,7 @@ void main() => print('hi');
 
 **Chart** (`chart`) — a fenced ```chart``` block with the chart specification as
 **JSON**. The data may sit inline, or in a data file in `data/` that `source`
-points at (see §6.4). When saving, inline data is omitted as soon as a `source`
+points at (see §6.4). When saving, the values move out as soon as a `source`
 exists; when opening, that file is read back in. Styling — colours, title,
 bounds — always stays in the block, never in the data file.
 ````markdown
@@ -648,6 +648,8 @@ bounds — always stays in the block, never in the data file.
   "rowColors": ["#003399", "#FFCC00"],  // optional; color per label (pie/donut/radar)
   "minBound": 0,            // optional; cartesian/radar only
   "maxBound": 20,           // optional; cartesian/radar only
+  "animateOnEnter": false,  // optional; only written when false
+  "animationDurationMs": 600,  // optional; omitted = inherit the theme
   "series": [ { "name": "2025", "data": [10, 14], "color": "#2563EB" } ]
 }
 ```
@@ -671,8 +673,12 @@ Fields:
     the series total in the centre hole. Both show at most the first two series.
   - `radar` — spider chart; needs at least three labels (axes).
   - `heatmap` — a grid: each series is a **row**, each label a **column**, the
-    cell colour a light→accent ramp over the data range. Label the axes
-    likelihood and impact and it reads as a risk matrix.
+    cell colour a ramp over the data range. Label the axes likelihood and
+    impact and it reads as a risk matrix. Unlike every other type, a heatmap
+    is *not* tinted with the deck's accent: it uses a fixed, theme-independent
+    heat ramp (pale→red on a light slide, dark→bright on a dark one), so a
+    heatmap reads as magnitude rather than as the theme. `rowColors` and the
+    per-series `color` are therefore ignored for this type.
 - `x` — labels; for `pie`/`donut`/`radar` these are the segments/axes (radar
   requires at least three); for `heatmap` they are the columns.
 - `series` — named series with `data` (aligned with `x`) and optionally a
@@ -684,8 +690,16 @@ Fields:
   horizontal **reference lines**; for `radar` they set the **scale**
   (inner/outer ring) with even spacing. Ignored for `pie`, `donut`,
   `horizontalBar`, `horizontalStackedBar`, and `heatmap`.
-- `source` — optional path to a data file in `data/` holding `x` and `series`
-  (§6.4). When present, those two are omitted from the block on save.
+- `animateOnEnter` — whether the chart draws itself in (values growing from the
+  baseline) when the slide comes up in presentation mode. Defaults to `true` and
+  is only written to the block when turned **off**, so a clean chart stays clean.
+- `animationDurationMs` — per-slide override of that draw-in duration. Omitted
+  means inherit the theme's `animationDurationMs`; it is only written when set.
+- `source` — optional path to a data file holding `x` and `series` (§6.4). When
+  present, the values are omitted from the block on save. `x` disappears
+  entirely; `series` disappears too *unless* a series carries a `color`, in
+  which case the block keeps a stripped `series` array of names and colours
+  (no `data`) — the colours are styling and have nowhere else to live.
 
 **Question** (`question`) — a fenced ```question``` block with the quiz
 specification as **JSON**, optionally preceded by a `# title`, an `![](image)`
