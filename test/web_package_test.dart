@@ -219,6 +219,51 @@ void main() {
       expect(spec.source, 'data/omzet.csv');
     });
 
+    // Nieuwe databestanden zijn JSON (_freeChartDataSource munt altijd .json),
+    // dus dit is het pad dat een hedendaags deck aflegt. De CSV-broer hierboven
+    // dekte het niet: die las per ongeluk elk lid als CSV.
+    test('gekoppelde grafiekdata reist ook als JSON mee', () async {
+      final container = _container();
+      final md = container.read(markdownServiceProvider);
+      final deck = Deck(
+        title: 'Cijferdeck',
+        slides: [
+          Slide.create(SlideType.chart).copyWith(
+            customMarkdown: const ChartSpec(
+              type: ChartType.line,
+              title: 'Omzet',
+              source: 'data/omzet.json',
+              x: ['Q1', 'Q2'],
+              series: [
+                ChartSeries(name: '2025', data: [10, 14]),
+              ],
+            ).toBlock(),
+          ),
+        ],
+      );
+      final zip = _zipOf({
+        'Cijferdeck.md': utf8.encode(md.generateDeck(deck)),
+        'data/omzet.json': utf8.encode(
+          '{"x":["Q1","Q2"],"series":[{"name":"2025","data":[10,14]}]}',
+        ),
+      });
+      final tabs = container.read(tabsProvider.notifier);
+      final result = await tabs.openDeckFromBytes(zip, 'Cijferdeck.ocideck');
+      expect(result, OpenResult.opened);
+      final opened = container
+          .read(tabsProvider)
+          .current!
+          .deckNotifier
+          .currentState
+          .deck!;
+      final slide = opened.slides.firstWhere((s) => s.type == SlideType.chart);
+      final spec = ChartSpec.parse(slide.customMarkdown);
+      expect(spec.hasInlineData, isTrue);
+      expect(spec.x, ['Q1', 'Q2']);
+      expect(spec.series.single.data, [10, 14]);
+      expect(spec.source, 'data/omzet.json');
+    });
+
     test('grafiekdata buiten het pakket wordt niet gevolgd', () async {
       final container = _container();
       final md = container.read(markdownServiceProvider);
@@ -255,6 +300,41 @@ void main() {
             .customMarkdown,
       );
       expect(spec.hasInlineData, isFalse);
+    });
+
+    // Een lege plot is niet te onderscheiden van een grafiek waar nog niets in
+    // staat, dus het bytes-pad hoort te melden wat het niet kon invullen.
+    test('een niet-ingevulde grafiek levert een melding op', () async {
+      final container = _container();
+      final md = container.read(markdownServiceProvider);
+      final deck = Deck(
+        title: 'Cijfertraversal',
+        slides: [
+          Slide.create(SlideType.chart).copyWith(
+            customMarkdown: const ChartSpec(
+              type: ChartType.line,
+              title: 'Omzet',
+              source: 'data/omzet.json',
+              x: ['Q1'],
+              series: [
+                ChartSeries(name: '2025', data: [10]),
+              ],
+            ).toBlock(),
+          ),
+        ],
+      );
+      // Het pakket draagt de verwijzing, maar niet het databestand.
+      final zip = _zipOf({
+        'Cijfertraversal.md': utf8.encode(md.generateDeck(deck)),
+      });
+      final tabs = container.read(tabsProvider.notifier);
+      expect(
+        await tabs.openDeckFromBytes(zip, 'Cijfertraversal.ocideck'),
+        OpenResult.opened,
+      );
+      expect(container.read(chartDataWarningProvider)?.sources, [
+        'data/omzet.json',
+      ]);
     });
   });
 }
