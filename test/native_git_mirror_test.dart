@@ -7,6 +7,7 @@ import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/git_settings.dart';
+import 'package:ocideck/services/git/deck_search.dart';
 import 'package:ocideck/services/git/git_cli_io.dart';
 import 'package:ocideck/services/git/native_git_mirror_api.dart';
 import 'package:ocideck/services/git/native_git_mirror_io.dart';
@@ -315,6 +316,113 @@ void main() {
         File('$verify/$deckDir/deck.md').readAsStringSync(),
         contains('Offline gemaakt'),
       );
+    });
+
+    // ── git grep als zoekversneller (§9.3) ──────────────────────────────────
+    group('grepDeckDirs', () {
+      test('vindt de deckmap waarvan de deck.md de term bevat', () async {
+        await mirror.prepareForOpen();
+        final dirs = await mirror.grepDeckDirs(
+          'Kwartaalcijfers',
+          caseSensitive: false,
+          branch: 'main',
+        );
+        expect(dirs, [deckDir]);
+      });
+
+      test('niets gevonden geeft een lege lijst, geen fout', () async {
+        await mirror.prepareForOpen();
+        final dirs = await mirror.grepDeckDirs(
+          'bestaatnietinditdeck',
+          caseSensitive: false,
+          branch: 'main',
+        );
+        // Exitcode 1 van git grep is "niets gevonden" — een leeg, exhaustief
+        // antwoord, niet een terugval naar null.
+        expect(dirs, <String>[]);
+      });
+
+      test('is hoofdlettergevoelig op verzoek', () async {
+        await mirror.prepareForOpen();
+        // De inhoud is '# Kwartaalcijfers' (hoofdletter K).
+        expect(
+          await mirror.grepDeckDirs(
+            'kwartaalcijfers',
+            caseSensitive: true,
+            branch: 'main',
+          ),
+          <String>[],
+        );
+        expect(
+          await mirror.grepDeckDirs(
+            'kwartaalcijfers',
+            caseSensitive: false,
+            branch: 'main',
+          ),
+          [deckDir],
+        );
+      });
+
+      test('een term met een leidend streepje versnelt niet', () async {
+        await mirror.prepareForOpen();
+        // De gehardde runner weigert een operand met een streepje; grep valt dan
+        // terug (null) in plaats van te proberen.
+        expect(
+          await mirror.grepDeckDirs('-x', caseSensitive: false, branch: 'main'),
+          isNull,
+        );
+      });
+
+      test('een andere branch dan de uitgecheckte versnelt niet', () async {
+        await mirror.prepareForOpen();
+        expect(
+          await mirror.grepDeckDirs(
+            'Kwartaalcijfers',
+            caseSensitive: false,
+            branch: 'ergens-anders',
+          ),
+          isNull,
+        );
+      });
+
+      test('zonder clone versnelt het niet', () async {
+        // Een verse mirror, nooit geopend: er is niets om te doorzoeken, dus null
+        // en de aanroeper valt terug op de volledige scan.
+        final fresh = (await createNativeGitMirror(
+          git: NativeGitCli(),
+          config: config,
+          token: '',
+          baseDir: '${temp.path}/nogrep',
+        ))!;
+        expect(
+          await fresh.grepDeckDirs('x', caseSensitive: false, branch: 'main'),
+          isNull,
+        );
+      });
+
+      test('NativeGrepShortlister verpakt de treffers exhaustief', () async {
+        await mirror.prepareForOpen();
+        final shortlister = NativeGrepShortlister(mirror);
+
+        final hit = await shortlister.shortlist(
+          'Kwartaalcijfers',
+          caseSensitive: false,
+          branch: 'main',
+        );
+        expect(hit, isNotNull);
+        expect(hit!.deckDirs, {deckDir});
+        expect(hit.coverage, DeckSearchCoverage.exhaustive);
+
+        // Kan de mirror niet versnellen, dan geeft de shortlister null door.
+        expect(
+          await shortlister.shortlist(
+            '-x',
+            caseSensitive: false,
+            branch: 'main',
+          ),
+          isNull,
+        );
+      });
     });
   });
 }

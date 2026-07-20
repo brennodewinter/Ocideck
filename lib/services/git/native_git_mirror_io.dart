@@ -263,13 +263,19 @@ class _NativeGitMirror implements NativeGitMirror {
   @override
   Future<void> prepareForOpen() async {
     await _ensureClone();
-    // Best-effort: offline openen mag, dan werken we met wat er lokaal is.
+    await _refreshCurrentBranch();
+  }
+
+  /// Haal de branch bij en fast-forward hem. Best-effort: offline openen mag, dan
+  /// werken we met wat er lokaal is.
+  ///
+  /// Alleen fast-forward: staat de branch verder, dan halen we die op; hebben we
+  /// zelf nog niet-gepushte commits (divergentie), dan faalt dit en houden we ons
+  /// eigen werk. Zo werken we met de nieuwste versie zonder ooit iets weg te
+  /// gooien.
+  Future<void> _refreshCurrentBranch() async {
     try {
       await _run(['fetch', 'origin'], operands: [_branch], network: true);
-      // Alleen fast-forward: staat de branch verder, dan halen we die op; hebben
-      // we zelf nog niet-gepushte commits (divergentie), dan faalt dit en houden
-      // we ons eigen werk. Zo openen we de nieuwste versie zonder ooit iets weg
-      // te gooien.
       await _run(['merge', '--ff-only'], operands: ['origin/$_branch']);
     } on GitCliException catch (e) {
       logWarning('NativeGitMirror: fetch/ff mislukt (offline of divergent)', e);
@@ -597,6 +603,60 @@ class _NativeGitMirror implements NativeGitMirror {
       );
     }
     return out;
+  }
+
+  @override
+  Future<List<String>?> grepDeckDirs(
+    String needle, {
+    required bool caseSensitive,
+    required String branch,
+  }) async {
+    final term = needle.trim();
+    // Leeg, of een leidend streepje dat de gehardde runner als operand weigert:
+    // niet te versnellen, dus terugvallen op de volledige scan.
+    if (term.isEmpty || term.startsWith('-')) return null;
+    // We doorzoeken de werkboom van de uitgecheckte branch. Alleen zinnig als dat
+    // ook de gevraagde branch is; staat de clone ergens anders (een werkbranch,
+    // of er is nog geen clone), val dan terug in plaats van de verkeerde branch
+    // te doorzoeken.
+    if (branch != _branch || !_cloned) return null;
+    await _refreshCurrentBranch();
+    if (await _currentBranch() != _branch) return null;
+
+    final GitResult res;
+    try {
+      // `-I` slaat binaire bestanden over (de assets), `-l` geeft alleen de
+      // padnamen, `-F` matcht de term als letterlijke tekst — nooit als regex
+      // uit gebruikersinvoer. De term en het `decks`-pad gaan als operand achter
+      // `--end-of-options`: git leest de eerste als patroon, de tweede als
+      // pathspec, en niets ervan kan als vlag worden gelezen (§10.2).
+      res = await _run(
+        ['grep', '-I', '-l', '-F', if (!caseSensitive) '-i'],
+        operands: [term, GitRepoLayout.decksRoot],
+      );
+    } on GitCliException catch (e) {
+      // Exitcode 1 = niets gevonden: een leeg, exhaustief antwoord — geen fout.
+      if (e.exitCode == 1) return const [];
+      // Elke andere fout: terugvallen op de volledige scan, niet onderrapporteren.
+      logWarning('NativeGitMirror: git grep faalde', e);
+      return null;
+    }
+
+    final dirs = <String>{};
+    for (final line in const LineSplitter().convert(res.stdout)) {
+      final dir = _deckDirOfDeckFile(line.trim());
+      if (dir != null) dirs.add(dir);
+    }
+    return dirs.toList()..sort();
+  }
+
+  /// `decks/<naam>/deck.md` → `decks/<naam>`, of null wanneer het pad geen
+  /// `deck.md` in een geldige deckmap is (een asset, of een los bestand).
+  static String? _deckDirOfDeckFile(String repoPath) {
+    const suffix = '/deck.md';
+    if (!repoPath.endsWith(suffix)) return null;
+    final dir = repoPath.substring(0, repoPath.length - suffix.length);
+    return GitRepoLayout.deckNameOf(dir) == null ? null : dir;
   }
 
   Future<Set<String>> _unpushedShas() async {
