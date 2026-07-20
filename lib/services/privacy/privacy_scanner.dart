@@ -131,45 +131,27 @@ class PrivacyScanner {
 
   /// Scant het hele deck. Deckbrede velden (titel, auteur, trefwoorden) krijgen
   /// [kDeckWidePrivacyIndex].
-  PrivacyScanResult scan(Deck deck) {
-    final findings = <PrivacyFinding>[];
+  /// Scant het hele deck: eerst de deckbrede velden, dan de dia's op volgorde.
+  ///
+  /// Bewust samengesteld uit [scanDeckFields] en [scanSlide] in plaats van één
+  /// lange lus, zodat de gememoiseerde weg (`privacy_scan_memo.dart`) uit
+  /// diezélfde delen kan worden opgebouwd. Twee losse implementaties zouden na
+  /// de eerste nieuwe regel uit elkaar lopen, en dan zou de snelle weg stilletjes
+  /// iets anders melden dan de trage.
+  PrivacyScanResult scan(Deck deck) => PrivacyScanResult([
+    ...scanDeckFields(deck).findings,
+    for (var i = 0; i < deck.slides.length; i++)
+      ...scanSlide(deck.slides[i], i).findings,
+  ]);
 
-    final deckFindings = <PrivacyFinding>[];
+  /// De deckbrede velden (titel, auteur, trefwoorden) — alles wat niet aan één
+  /// dia hangt en dus [kDeckWidePrivacyIndex] draagt.
+  PrivacyScanResult scanDeckFields(Deck deck) {
+    final findings = <PrivacyFinding>[];
     for (final fragment in _deckFragments(deck)) {
-      _scanFragment(fragment, kDeckWidePrivacyIndex, deckFindings);
+      _scanFragment(fragment, kDeckWidePrivacyIndex, findings);
     }
-    findings.addAll(_enabled(deckFindings));
-    for (var i = 0; i < deck.slides.length; i++) {
-      final slideFindings = <PrivacyFinding>[];
-      final fragments = _slideFragments(deck.slides[i]).toList();
-      for (final fragment in fragments) {
-        _scanFragment(fragment, i, slideFindings);
-      }
-      final enabled = _escalateSpecialCategories(
-        _enabled(slideFindings),
-        _textsOf(fragments),
-      );
-      findings.addAll(enabled);
-      // De massa-bevinding komt bovenóp de losse: veertig e-mailadressen zijn
-      // veertig bevindingen én één ledenlijst, en die tweede is de melding waar
-      // het om gaat.
-      findings.addAll(
-        _enabled(bulkFindingsFor(deck.slides[i], i, enabled).toList()),
-      );
-      _emit(findings, _enabledOne(notesLeakFinding(i, enabled)));
-      _emit(
-        findings,
-        _enabledOne(
-          quasiComboFinding(
-            deck.slides[i],
-            i,
-            enabled,
-            _textsOf(fragments).values.join('\n'),
-          ),
-        ),
-      );
-    }
-    return PrivacyScanResult(findings);
+    return PrivacyScanResult(_enabled(findings));
   }
 
   /// Scant één slide los — voor de per-slide memoisatie in de provider.
