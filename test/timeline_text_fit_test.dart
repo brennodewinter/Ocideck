@@ -40,8 +40,9 @@ const _realistic = [
 
 Future<void> _loadFont() async {
   final data = File('assets/fonts/Inter-Variable.ttf').readAsBytesSync();
-  await (FontLoader('Inter')..addFont(Future.value(ByteData.view(data.buffer))))
-      .load();
+  await (FontLoader(
+    'Inter',
+  )..addFont(Future.value(ByteData.view(data.buffer)))).load();
 }
 
 /// Alle tekst op de dia die met een ellipsis is ingekort.

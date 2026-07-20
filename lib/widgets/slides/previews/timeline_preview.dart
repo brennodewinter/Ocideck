@@ -427,11 +427,7 @@ double _badgeMaxWidth(double inner, bool hasTitle) =>
           font,
         );
         if (!m.clipped && m.height <= room) {
-          return (
-            scale: scale,
-            descLines: descLines,
-            titleLines: titleLines,
-          );
+          return (scale: scale, descLines: descLines, titleLines: titleLines);
         }
       }
     }
@@ -895,10 +891,11 @@ class _TimelineCard extends StatelessWidget {
               event.description.trim(),
               maxLines: descLines,
               overflow: TextOverflow.ellipsis,
-              style: _descStyle(w, scale, font).copyWith(
-                color: muted,
-                decoration: TextDecoration.none,
-              ),
+              style: _descStyle(
+                w,
+                scale,
+                font,
+              ).copyWith(color: muted, decoration: TextDecoration.none),
             ),
           ],
         ],
@@ -919,10 +916,11 @@ class _TimelineCard extends StatelessWidget {
       event.marker.trim(),
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
-      style: _badgeStyle(w, scale, font).copyWith(
-        color: onAccent,
-        decoration: TextDecoration.none,
-      ),
+      style: _badgeStyle(
+        w,
+        scale,
+        font,
+      ).copyWith(color: onAccent, decoration: TextDecoration.none),
     ),
   );
 
@@ -932,10 +930,11 @@ class _TimelineCard extends StatelessWidget {
     event.title.trim(),
     maxLines: maxLines,
     overflow: TextOverflow.ellipsis,
-    style: _titleStyle(w, scale, font).copyWith(
-      color: textColor,
-      decoration: TextDecoration.none,
-    ),
+    style: _titleStyle(
+      w,
+      scale,
+      font,
+    ).copyWith(color: textColor, decoration: TextDecoration.none),
   );
 }
 
