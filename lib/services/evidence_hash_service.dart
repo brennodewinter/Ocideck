@@ -23,6 +23,23 @@ EvidenceHashes computeEvidenceHashes(Uint8List bytes) => EvidenceHashes(
   sha256: sha256.convert(bytes).toString(),
 );
 
+/// Eén cel van de bijlage-tabel, zo dat de tabel heel blijft.
+///
+/// De bestandsnaam komt uit het deck en een deck is een bestand dat iemand je
+/// stuurt: een `|` erin trekt de tabel uit elkaar en een regeleinde maakt er een
+/// nieuwe rij van. Uitgerekend in een integriteitsbijlage is dat kwalijk — een
+/// scheefgetrokken tabel koppelt de verkeerde hash aan het verkeerde bestand.
+///
+/// Bewust géén hergebruik van de cel-codec uit `markdown_service.dart`: die
+/// heeft een tegenhanger die weer inleest, en schrijft daarvoor sentinels als
+/// `\<br>`. Deze tabel is eenrichtingsverkeer — hij wordt gelezen, niet
+/// teruggeparsed — dus die sentinels zouden hier gewoon zichtbare rommel zijn.
+/// De backslash gaat als eerste, anders ontsnapt een getypte `\|` alsnog.
+String _evidenceCell(String value) => value
+    .replaceAll('\\', r'\\')
+    .replaceAll('|', r'\|')
+    .replaceAll(RegExp(r'[\r\n]+'), ' ');
+
 /// Render a Markdown table of the evidence hashes (file · SHA1 · SHA-256) for a
 /// MIAUW appendix (4.8 / 4.11). Preserves the insertion order of [hashes]; an
 /// empty map yields an empty string (no table).
@@ -33,7 +50,8 @@ String evidenceHashTable(Map<String, EvidenceHashes> hashes) {
     ..writeln('| --- | --- | --- |');
   for (final entry in hashes.entries) {
     buf.writeln(
-      '| ${entry.key} | ${entry.value.sha1} | ${entry.value.sha256} |',
+      '| ${_evidenceCell(entry.key)} | ${entry.value.sha1} | '
+      '${entry.value.sha256} |',
     );
   }
   return buf.toString().trimRight();

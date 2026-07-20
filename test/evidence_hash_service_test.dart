@@ -38,5 +38,37 @@ void main() {
       expect(table, contains('| a.png | aa | bb |'));
       expect(table.indexOf('a.png'), lessThan(table.indexOf('b.png')));
     });
+
+    test('een pipe in de bestandsnaam trekt de tabel niet uit elkaar', () {
+      // Het pad komt uit het deck, en een deck krijg je toegestuurd. Zonder
+      // ontsnapping schuift de hash een kolom op en hoort hij bij het verkeerde
+      // bestand — in een integriteitsbijlage precies de verkeerde fout.
+      final table = evidenceHashTable({
+        r'images/rapport|v2.png': const EvidenceHashes(
+          sha1: 'aa',
+          sha256: 'bb',
+        ),
+      });
+      final row = table.split('\n').last;
+      expect(row, r'| images/rapport\|v2.png | aa | bb |');
+      // Vier delimiters: de rand links, de rand rechts, en twee scheidingen.
+      expect(RegExp(r'(?<!\\)\|').allMatches(row).length, 4);
+    });
+
+    test('een regeleinde maakt geen extra rij', () {
+      final table = evidenceHashTable({
+        'a\nb.png': const EvidenceHashes(sha1: 'aa', sha256: 'bb'),
+      });
+      expect(table.split('\n').length, 3, reason: 'kop, streep, één rij');
+      expect(table, contains('| a b.png | aa | bb |'));
+    });
+
+    test('een backslash voor een pipe ontsnapt niet alsnog', () {
+      final table = evidenceHashTable({
+        r'a\|b.png': const EvidenceHashes(sha1: 'aa', sha256: 'bb'),
+      });
+      final row = table.split('\n').last;
+      expect(RegExp(r'(?<!\\)\|').allMatches(row).length, 4);
+    });
   });
 }

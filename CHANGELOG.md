@@ -524,6 +524,34 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   een strafzaak gaat. Een markering verbergt een waarde, geen onderwerp.
 
 ### Fixed
+- **Vier keer stond het middel er al, en was het op één plek niet aangesloten.**
+  Uit de bugjacht kwam dit als het karakteristieke patroon van de codebase naar
+  voren: niet een ontbrekend idee, maar een geschreven en getoetst mechanisme dat
+  één oppervlak niet bereikte.
+
+  - *De offline CVE-database meldde "lokaal beschikbaar" op grond van een
+    metabestand van een paar honderd byte.* De index zelf — honderden megabytes,
+    en dus precies wat een opruimtool weghaalt — werd nergens gecontroleerd. Elke
+    opzoeking kwam dan leeg terug, en omdat er bewust niet wordt teruggevallen op
+    de online keten las dat als "deze CVE is niet van toepassing". De controle
+    kijkt nu naar het bestand zelf, inclusief de lengte die al werd vastgelegd
+    maar nooit gelezen.
+  - *Na ongedaan maken kon een dia toevoegen omvallen.* De selectie bleef staan
+    waar hij stond terwijl het deck korter werd; `addSlide` rekende daarmee door
+    en gooide een RangeError, waarna de knop niets deed. Ook via plakken en het
+    slepen van een afbeelding. Het klemmen zat al in de buurmethoden, en
+    `clampIndex` — geschreven om de selectie bij te trekken — werd nergens
+    aangeroepen.
+  - *Een bestandsnaam met een `|` trok de bijlage met bewijshashes uit elkaar,*
+    waardoor een hash bij het verkeerde bestand kwam te staan.
+
+- **De privacycontrole scande bij elke aanslag het hele deck.** `scanSlide` was
+  geschreven voor per-dia-onthouden en werd niet gebruikt, dus een deck van 500
+  dia's kostte bij elke toets een volledige scan. Nu wordt per dia onthouden:
+  gemeten 137 ms → 0,5 ms na één aanslag. De sleutel draagt de scanner, de dia én
+  de positie, zodat een gewijzigde instelling of een verschoven dia nooit een
+  verouderde bevinding kan opleveren.
+
 - **Een tweede ronde op dezelfde dag overschreef de eerste.** De werkbranch
   draagt alleen een datum, dus elke opslag van hetzelfde deck op dezelfde dag
   komt op dezelfde branch uit. Bij een verse ronde vroeg het opslaan de forge
