@@ -288,17 +288,21 @@ class DeckNotifier extends StateNotifier<DeckState> {
     // re-read is scanned like any other open. Our own decks are clean data and
     // pass; only a tampered file on disk would be refused — which is correct.
     final reopened = await _file.openDeck(path);
+    // Dezelfde race als in [_saveToPath], nu over twee wachtpunten: nieuwer
+    // getypt werk blijft staan en blijft vuil.
+    final edited = !identical(state.deck, deck);
+    final settled = edited ? state.deck : (reopened ?? deck);
     if (reopened == null) {
       logWarning('DeckNotifier.saveAs: saved file could not be re-read', path);
       state = state.copyWith(
-        deck: deck,
+        deck: settled,
         filePath: path,
-        isDirty: false,
+        isDirty: edited,
         error:
             'Opgeslagen, maar het bestand kon niet opnieuw worden gelezen:\n$path',
       );
     } else {
-      state = state.copyWith(deck: reopened, filePath: path, isDirty: false);
+      state = state.copyWith(deck: settled, filePath: path, isDirty: edited);
     }
     return true;
   }
@@ -315,6 +319,10 @@ class DeckNotifier extends StateNotifier<DeckState> {
       state = state.copyWith(error: 'Opslaan mislukt:\n$path\n$e');
       return false;
     }
+    // Doorgetypt tijdens het schrijven? Dan is [state.deck] nieuwer dan wat er
+    // zojuist op schijf belandde. Terugzetten gooit dat werk stil weg, en
+    // "schoon" melden wist ook de herstelkopie — het bestaat dan nergens meer.
+    if (!identical(state.deck, deck)) return true;
     state = state.copyWith(deck: savedDeck, isDirty: false);
     return true;
   }

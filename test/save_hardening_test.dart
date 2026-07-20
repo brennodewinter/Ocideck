@@ -135,4 +135,47 @@ void main() {
       expect(await service.openDeck(file.path), isNull);
     });
   });
+
+  group('editing while a save is in flight', () {
+    test(
+      'typing during the write is not rolled back, and stays dirty',
+      () async {
+        final gate = Completer<void>();
+        final md = MarkdownService();
+        final n = DeckNotifier(md, _BlockingFileService(gate, md));
+        n.loadDeck(_deck(), filePath: '/tmp/race.md');
+
+        final saving = n.save();
+        // The user keeps working while the project write is on the wire.
+        n.addSlide(SlideType.bullets);
+        n.addSlide(SlideType.bullets);
+        gate.complete();
+        final ok = await saving;
+
+        expect(ok, isTrue);
+        expect(
+          n.state.deck!.slides.length,
+          3,
+          reason: 'the in-flight save must not roll the deck back',
+        );
+        expect(
+          n.state.isDirty,
+          isTrue,
+          reason: 'the newer edits are not on disk, so the deck is still dirty',
+        );
+      },
+    );
+
+    test('an untouched deck still lands clean', () async {
+      final gate = Completer<void>()..complete();
+      final md = MarkdownService();
+      final n = DeckNotifier(md, _BlockingFileService(gate, md));
+      n.loadDeck(_deck(), filePath: '/tmp/quiet.md');
+      n.addSlide(SlideType.bullets);
+
+      expect(await n.save(), isTrue);
+      expect(n.state.isDirty, isFalse);
+      expect(n.state.deck!.slides.length, 2);
+    });
+  });
 }
