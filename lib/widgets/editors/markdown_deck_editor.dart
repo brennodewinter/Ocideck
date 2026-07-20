@@ -11,6 +11,10 @@ import '../../utils/text_search.dart';
 import 'markdown_find_bar.dart';
 import '../../theme/app_theme.dart';
 
+// De kantlijn en de gekleurde bevindingsbanden. Een part omdat ze op de private
+// regelhoogte van de editor-state leunen — zie het bestand zelf.
+part 'markdown_deck_editor_gutter.dart';
+
 class MarkdownDeckEditor extends ConsumerStatefulWidget {
   final String initialContent;
   final bool Function(String) onApply;
@@ -440,6 +444,19 @@ class _MarkdownDeckEditorState extends ConsumerState<MarkdownDeckEditor> {
             ),
           ),
           const Spacer(),
+          // Zoeken zat er al — op Ctrl/Cmd+F, en via het menu en de
+          // opdrachtenbalk — maar nergens zichtbaar in de markdown-weergave
+          // zelf. Zonder knop weet niemand dat het kan: "in markdown kan ik niet
+          // zoeken" was de klacht, terwijl de balk er wél was. Een icoonknop en
+          // geen tekstknop, want de kopregel is smal: het vergrootglas is een
+          // vertrouwd zoek-signaal en de tooltip vertelt de rest.
+          IconButton(
+            onPressed: () => _openFind(showReplace: false),
+            icon: const Icon(Icons.search, size: 16),
+            tooltip: l10n.d('Zoeken'),
+            visualDensity: VisualDensity.compact,
+            color: AppTheme.warningFg,
+          ),
           TextButton.icon(
             onPressed: _runValidation,
             icon: const Icon(Icons.rule, size: 16),
@@ -799,198 +816,6 @@ class _IssueTile extends StatelessWidget {
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-/// Paints a full-width coloured band (plus a stronger left accent bar) behind
-/// every line that carries a validation issue, so findings are visible in the
-/// code itself — red for errors, amber for warnings — not only in the gutter.
-/// It scrolls in lock-step with the text via [scrollController].
-class _IssueHighlightLayer extends StatelessWidget {
-  final ScrollController scrollController;
-  final Map<int, MarkdownValidationSeverity> issueLines;
-  final double topPadding;
-
-  const _IssueHighlightLayer({
-    required this.scrollController,
-    required this.issueLines,
-    required this.topPadding,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    if (issueLines.isEmpty) return const SizedBox.shrink();
-    return IgnorePointer(
-      child: ClipRect(
-        child: AnimatedBuilder(
-          animation: scrollController,
-          builder: (context, _) {
-            final offset = scrollController.hasClients
-                ? scrollController.offset
-                : 0.0;
-            return CustomPaint(
-              painter: _IssueHighlightPainter(
-                issueLines: issueLines,
-                lineHeight: _MarkdownDeckEditorState._lineHeight,
-                topPadding: topPadding,
-                scrollOffset: offset,
-              ),
-            );
-          },
-        ),
-      ),
-    );
-  }
-}
-
-class _IssueHighlightPainter extends CustomPainter {
-  final Map<int, MarkdownValidationSeverity> issueLines;
-  final double lineHeight;
-  final double topPadding;
-  final double scrollOffset;
-
-  _IssueHighlightPainter({
-    required this.issueLines,
-    required this.lineHeight,
-    required this.topPadding,
-    required this.scrollOffset,
-  });
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    for (final entry in issueLines.entries) {
-      final (band, accent) = switch (entry.value) {
-        MarkdownValidationSeverity.error => (
-          AppTheme.dangerBgSoft,
-          Colors.red.shade700,
-        ),
-        MarkdownValidationSeverity.warning => (
-          AppTheme.warningBgSoft,
-          AppTheme.warningFg,
-        ),
-        MarkdownValidationSeverity.informational => (
-          AppTheme.slate200,
-          AppTheme.slate400,
-        ),
-      };
-      final top = topPadding + (entry.key - 1) * lineHeight - scrollOffset;
-      if (top + lineHeight < 0 || top > size.height) continue;
-      canvas.drawRect(
-        Rect.fromLTWH(0, top, size.width, lineHeight),
-        Paint()..color = band,
-      );
-      canvas.drawRect(
-        Rect.fromLTWH(0, top, 3, lineHeight),
-        Paint()..color = accent,
-      );
-    }
-  }
-
-  @override
-  bool shouldRepaint(_IssueHighlightPainter old) =>
-      old.scrollOffset != scrollOffset ||
-      old.topPadding != topPadding ||
-      old.lineHeight != lineHeight ||
-      !mapEquals(old.issueLines, issueLines);
-}
-
-class _LineNumberGutter extends StatelessWidget {
-  final ScrollController scrollController;
-  final int lineCount;
-  final Map<int, MarkdownValidationSeverity> issueLines;
-  final ValueChanged<int> onLineTap;
-
-  const _LineNumberGutter({
-    required this.scrollController,
-    required this.lineCount,
-    required this.issueLines,
-    required this.onLineTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ColoredBox(
-      color: AppTheme.iceBlue2,
-      child: SizedBox(
-        width: 44,
-        child: ClipRect(
-          child: AnimatedBuilder(
-            animation: scrollController,
-            builder: (context, child) {
-              final offset = scrollController.hasClients
-                  ? scrollController.offset
-                  : 0.0;
-              return Transform.translate(
-                offset: Offset(0, 16 - offset),
-                child: child,
-              );
-            },
-            child: OverflowBox(
-              alignment: Alignment.topCenter,
-              maxWidth: 44,
-              minWidth: 44,
-              maxHeight: double.infinity,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  for (var index = 0; index < lineCount; index++)
-                    _LineNumberCell(
-                      line: index + 1,
-                      severity: issueLines[index + 1],
-                      onTap: onLineTap,
-                    ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _LineNumberCell extends StatelessWidget {
-  final int line;
-  final MarkdownValidationSeverity? severity;
-  final ValueChanged<int> onTap;
-
-  const _LineNumberCell({
-    required this.line,
-    required this.severity,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final bg = switch (severity) {
-      MarkdownValidationSeverity.error => AppTheme.dangerBgSoft,
-      MarkdownValidationSeverity.warning => AppTheme.warningBgSoft,
-      MarkdownValidationSeverity.informational => AppTheme.slate200,
-      null => Colors.transparent,
-    };
-    return GestureDetector(
-      onTap: () => onTap(line),
-      child: Container(
-        height: _MarkdownDeckEditorState._lineHeight,
-        color: bg,
-        alignment: Alignment.centerRight,
-        padding: const EdgeInsets.only(right: 8),
-        child: Text(
-          '$line',
-          style: TextStyle(
-            fontFamily: 'monospace',
-            fontSize: 11,
-            height: 1.5,
-            color: severity == MarkdownValidationSeverity.error
-                ? Colors.red.shade700
-                : severity == MarkdownValidationSeverity.warning
-                ? AppTheme.warningFg
-                : AppTheme.slate400,
-          ),
         ),
       ),
     );
