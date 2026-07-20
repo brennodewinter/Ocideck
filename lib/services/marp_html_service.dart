@@ -6,6 +6,7 @@ import 'package:flutter/services.dart' show rootBundle;
 
 import '../models/chart.dart';
 import '../models/cockpit.dart';
+import '../models/question.dart';
 import '../models/deck.dart';
 import '../models/settings.dart';
 import '../utils/log.dart';
@@ -13,6 +14,7 @@ import 'export_metadata.dart';
 
 part 'parts/marp_html_service_cockpit.dart';
 part 'parts/marp_html_service_charts.dart';
+part 'parts/marp_html_service_charts_radial.dart';
 part 'parts/marp_html_service_charts_bullet.dart';
 
 /// Builds a single, self-contained HTML file from a deck's Marp Markdown.
@@ -102,7 +104,7 @@ class MarpHtmlService {
     final sections = StringBuffer();
     for (final slide in marpSlides(deckMarkdown)) {
       final renderedBlocks = renderCockpitBlocks(
-        renderChartBlocks(slide, theme: theme),
+        renderQuestionBlocks(renderChartBlocks(slide, theme: theme)),
         theme: theme,
         scheme: cockpitColorScheme,
       );
@@ -300,6 +302,56 @@ class MarpHtmlService {
       return '\n<div class="chart">${_chartSvg(spec, theme)}</div>\n';
     });
   }
+
+  // ── Question → HTML ───────────────────────────────────────────────────────
+
+  static final RegExp _questionFence = RegExp(
+    r'```question[ \t]*\n([\s\S]*?)\n```',
+    multiLine: true,
+  );
+
+  /// Vervangt een ```question-blok door de vraag met zijn antwoordopties.
+  ///
+  /// Zonder deze stap viel het blok terug op de gewone codeweergave van marked,
+  /// en stond de hele specificatie leesbaar op de dia — inclusief
+  /// `"correct": true`, in de volgorde waarin de antwoorden zijn ingevoerd. Wie
+  /// een quizdeck als HTML rondstuurde, deelde de antwoordsleutel mee. In de app
+  /// ziet de auteur een nette vraagkaart, dus er was niets aan te merken.
+  ///
+  /// De export is een leesbaar document, geen quiz: er valt niets te klikken en
+  /// niets af te tellen. Daarom de vraag en de opties, en het goede antwoord
+  /// juist niet — dat is de enige informatie die hier niet thuishoort.
+  static String renderQuestionBlocks(String slideMarkdown) {
+    return slideMarkdown.replaceAllMapped(_questionFence, (m) {
+      final spec = QuestionSpec.parse(m.group(1)!);
+      final b = StringBuffer('\n<div class="question">');
+      if (spec.prompt.trim().isNotEmpty) {
+        b.write('<p class="question-prompt">${_htmlText(spec.prompt)}</p>');
+      }
+      final options = spec.kind == QuestionKind.trueFalse
+          ? const ['Waar', 'Niet waar']
+          : [
+              for (final a in spec.answers)
+                if (a.text.trim().isNotEmpty) a.text,
+            ];
+      if (options.isNotEmpty) {
+        b.write('<ul class="question-options">');
+        for (final o in options) {
+          b.write('<li>${_htmlText(o)}</li>');
+        }
+        b.write('</ul>');
+      }
+      b.write('</div>\n');
+      return b.toString();
+    });
+  }
+
+  /// Tekst als HTML-inhoud: alleen de drie tekens die de parser van gedachten
+  /// doen veranderen. Niet [_htmlAttr] — dat is voor attribuutwaarden.
+  static String _htmlText(String s) => s
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;');
 
   // ── Cockpit → inline SVG ──────────────────────────────────────────────────
 
