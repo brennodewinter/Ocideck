@@ -348,9 +348,23 @@ void main() {
       expect(await PrefsDraftStore(prefs: prefs).deckDirs(), ['decks/echt']);
     });
 
-    test('an unreadable draft reads as empty rather than throwing', () async {
+    test('an unreadable draft reports corruption, not an empty deck', () async {
+      // Een leeg deck betekent "verworpen" en laat de sync-motor de wachtende
+      // commit vallen. Een beschadigde sleutel mag daar niet op lijken: die
+      // gooit DraftStoreCorrupt, zodat corruptie een échte fout wordt in plaats
+      // van stil verloren offline werk.
       await prefs.setString('git_draft::decks/a', 'geen json');
-      expect(await PrefsDraftStore(prefs: prefs).readDeck('decks/a'), isEmpty);
+      await expectLater(
+        PrefsDraftStore(prefs: prefs).readDeck('decks/a'),
+        throwsA(isA<DraftStoreCorrupt>()),
+      );
+    });
+
+    test('an absent draft still reads as empty', () async {
+      expect(
+        await PrefsDraftStore(prefs: prefs).readDeck('decks/weg'),
+        isEmpty,
+      );
     });
   });
 }
