@@ -435,12 +435,43 @@ class ImageService {
     String sourcePath,
     Directory imagesDir,
   ) async {
+    if (WebAssetStore.isMemPath(sourcePath)) {
+      return _materializeMemImage(sourcePath, imagesDir);
+    }
     if (sourcePath.isEmpty ||
         sourcePath.startsWith('images/') ||
         !p.isAbsolute(sourcePath)) {
       return null;
     }
     return _copyInto(sourcePath, imagesDir, 'images');
+  }
+
+  /// Schrijf een in-geheugen `mem:`-afbeelding als echt bestand in de
+  /// projectmap `images/` en geef de projectrelatieve verwijzing terug. Slides
+  /// uit een remote deck (git/WebDAV/S3) dragen hun beeld als `mem:`-pad; zonder
+  /// deze stap slaat een gewone opslag die bytes nergens op en breekt de
+  /// afbeelding na herladen (zie [WebAssetStore]).
+  ///
+  /// Null (het pad blijft ongemoeid) als de bytes weg zijn — bijvoorbeeld na een
+  /// paginaherlaad op web, waar de store leeg is.
+  Future<String?> _materializeMemImage(
+    String memPath,
+    Directory imagesDir,
+  ) async {
+    final bytes = WebAssetStore.bytesFor(memPath);
+    if (bytes == null) return null;
+    final rawName = WebAssetStore.nameFor(memPath) ?? 'afbeelding.png';
+    // Namen uit de store dragen doorgaans een extensie (git-assets heten
+    // `<sha256>.<ext>`); ontbreekt die, dan is `.png` een veilige terugval.
+    final filename = p.extension(rawName).isEmpty ? '$rawName.png' : rawName;
+    final dest = await resolveAssetDestinationForBytes(
+      imagesDir,
+      filename,
+      bytes,
+    );
+    if (dest == null) return null;
+    if (!dest.alreadyPresent) await writeBytesAtomic(dest.file, bytes);
+    return 'images/${p.basename(dest.file.path)}';
   }
 
   /// Kopieer [sourcePath] naar [destDir] en geef de projectrelatieve

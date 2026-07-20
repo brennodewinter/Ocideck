@@ -49,6 +49,47 @@ Future<AssetDestination?> resolveAssetDestination(
   return null;
 }
 
+/// Zoals [resolveAssetDestination], maar voor materiaal dat alleen als [bytes]
+/// bestaat en geen bronbestand heeft — bijvoorbeeld een in-geheugen
+/// `mem:`-afbeelding uit een remote deck. Een naambotsing met identieke inhoud
+/// hergebruikt het bestaande bestand; verschilt de inhoud, dan wijkt de kopie
+/// uit naar een oplopend achtervoegsel, net als de bestandsvariant.
+Future<AssetDestination?> resolveAssetDestinationForBytes(
+  Directory destDir,
+  String filename,
+  List<int> bytes,
+) async {
+  final ext = p.extension(filename);
+  final stem = p.basenameWithoutExtension(filename);
+  for (var n = 1; n <= _maxNameAttempts; n++) {
+    final name = n == 1 ? filename : '${stem}_$n$ext';
+    final candidate = File(p.join(destDir.path, name));
+    if (!await candidate.exists()) {
+      return AssetDestination(candidate, alreadyPresent: false);
+    }
+    if (await _fileHasBytes(candidate, bytes)) {
+      return AssetDestination(candidate, alreadyPresent: true);
+    }
+  }
+  return null;
+}
+
+/// Vergelijk de inhoud van [file] met [bytes]. Een leesfout telt als "niet
+/// gelijk" — dan volgt een nieuwe naam, wat erger is dan nodig maar nooit de
+/// verkeerde afbeelding oplevert (zie [filesHaveSameContent]).
+Future<bool> _fileHasBytes(File file, List<int> bytes) async {
+  try {
+    if (await file.length() != bytes.length) return false;
+    final actual = await file.readAsBytes();
+    for (var i = 0; i < actual.length; i++) {
+      if (actual[i] != bytes[i]) return false;
+    }
+    return true;
+  } on FileSystemException {
+    return false;
+  }
+}
+
 /// Vergelijk twee bestanden byte voor byte, met een vroege uitstap.
 ///
 /// De lengtevergelijking vooraf vangt het gros af; pas bij gelijke lengte wordt
