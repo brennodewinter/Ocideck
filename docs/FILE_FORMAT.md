@@ -1182,33 +1182,64 @@ images use. A pool path is the hash of its contents, so every changed cell would
 produce a new file and orphan the old one — no diff to read. On a fixed path, a
 change reads as what it is.
 
+That fixed path is where the git route's involvement ends. A commit only ever
+*writes* data files; it does not delete the orphans a local save would clean up,
+and it does not compare against a baseline first, so the housekeeping described
+above is specific to saving a project folder on disk. OciDeck's own three-way
+merge and version comparison do not look inside `data/*` either: a data file is
+carried along as a file, and a conflicting edit to one is settled by git's own
+line-based merge on the raw JSON rather than by anything chart-aware.
+
 **Automatic.** A chart that still carries its data inline is moved to a data
 file **on save**, and the block is left with the reference. Decks written before
 data files existed therefore convert on their next save, with nothing for the
 user to do. The conversion runs on save and never on open — opening must not
 rewrite a deck that was only looked at.
 
-The file is named after the chart title (`data/Omzet_2025.json`, `grafiek.json`
-when untitled), with a numeric suffix when that name is taken. Once assigned, a
+The file is named after the chart title, slugged down to letters, digits,
+spaces and hyphens with the rest collapsed to `_` (`Omzet 2025` →
+`data/Omzet_2025.json`), or `grafiek.json` when the chart has no title. A name
+already taken — by another chart in the deck or by a file already on disk —
+gets a numeric suffix: `Omzet_2025-2.json`, `-3`, and so on. Once assigned, a
 `source` never changes again, even if the title does: renaming on every title
 edit would churn the file and its history for no gain. A chart with no data yet
 gets no file. Copying a chart slide copies its `source` too, so on the next save
 the copy is given a file of its own rather than overwriting its twin's.
 
-On save, data files this deck itself wrote that nothing references any more —
-from a deleted chart, say — are removed. Only files OciDeck read or wrote for
-this deck are eligible; anything else in `data/`, and every `.csv`, is left
-alone.
+Writing a **package** (§7) is the one exception to "a `source` never changes".
+Package members are re-slugged into `data/` and collide under a different
+scheme (`Omzet_2025 (2).json`), and the slide's `source` in the packaged `.md`
+is rewritten to match. A deck that is exported and imported again can therefore
+come back with different data filenames than it left with. The values ride
+along unchanged; only the paths move.
+
+On save, data files that nothing references any more — from a deleted chart,
+say — are removed. Eligibility is deliberately narrow: only a `.json` that this
+running session itself read or wrote, and only inside the deck's own folder.
+Anything else in `data/`, and every `.csv`, is left alone. A file OciDeck has
+never touched is never deleted, so a folder shared with other tooling survives
+a save.
 
 **Editing.** Both directions work. The grid in the app edits a linked chart just
 like an inline one and writes the file back on save; the file can equally be
 edited outside the app. To keep those from fighting, a save only rewrites a data
 file whose values actually changed in the app: an untouched chart leaves its
 file completely alone, so an edit made elsewhere while the deck was open
-survives. If both changed, the app wins and the clash is reported.
+survives. If both changed, the app wins; the clash is recorded in the log, but
+is not currently surfaced in the interface on the save path the way a problem
+found while *opening* is.
+
+Two shapes fall outside that comparison. A chart that arrives with inline data
+*and* a `source` is not hydrated from the file — the block already has values —
+so there is nothing to compare against and its file is overwritten on save. And
+a chart whose rows are all deleted stops counting as having data at all, so its
+file is left as it was rather than emptied; the old numbers come back on the
+next open. Clear a chart by deleting the slide, not by clearing the grid.
 
 A missing or unparseable data file leaves the chart's data empty rather than
-failing the open, and never causes the reference to be dropped.
+failing the open, and never causes the reference to be dropped. A missing file
+is reported to the user; a file that is present but malformed leaves the chart
+untouched without a warning.
 
 ---
 
