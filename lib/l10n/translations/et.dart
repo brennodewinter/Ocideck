@@ -1790,6 +1790,9 @@ const _dutchSourceAddEt = <String, String>{
       'Määrab, kas tõus on roheline või punane. Nool järgib alati arve.',
   'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
       'Mõni põhinäitaja koos eelmise aruande arvuga kõrval, nii et lugu räägib muutus. Märkige iga arvu puhul, kas tõus on hea või halb uudis.',
+  'Zekere vondsten als fout behandelen': 'Käsitle kindlaid leide vigadena',
+  'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.':
+      'Tavaliselt on kindel leid — isikukood, IBAN, e-posti aadress — hoiatus, mille võib eirata. Sees muudab selle veaks ja siis võib eksport selle peal peatuda, kui ka see säte on sees. Mõeldud keskkondadele, kus sellised andmed tõesti läbi ei tohi pääseda. Ebakindlad leiud jäävad hoiatuseks.',
   'Medicare-nummer — een zorggegeven': 'Medicare number — terviseandmed',
   'bedrijfsnummer': 'äriühingu number',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

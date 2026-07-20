@@ -307,9 +307,15 @@ nul. Waar géén checksum bestaat (US SSN, V-nummer), is een contextwoord verpli
 > `zeker` bewust op *waarschuwing*, omdat een fout `qualityBlockExportOnErrors`
 > bij bestaande gebruikers onbedoeld scherp zou zetten. De combinatie is daarom
 > zichtbaar in de melding en niet in de ernst; de strengere variant hoort bij
-> `privacyStrictSeverity` (§7), en die instelling bestaat nog niet. Het
-> vervaldatumpatroon is om dezelfde reden niet gebouwd: een patroon dat niets
-> verandert is dode code.
+> `privacyStrictSeverity` (§7). Het vervaldatumpatroon is om dezelfde reden niet
+> gebouwd: een patroon dat niets verandert is dode code.
+>
+> **Bijgewerkt (2026-07-20): `privacyStrictSeverity` bestaat nu.** Dat verandert
+> niets aan de afweging hierboven — de instelling tilt élke `zeker`-bevinding
+> naar `error`, niet alleen een PAN met een CVV ernaast. Wie de combinatie apart
+> wil laten opvallen, heeft daar nog steeds geen knop voor, en dat blijft
+> bewust: de melding noemt de combinatie al, en een tweede ernstniveau voor één
+> regelpaar is meer machinerie dan het verschil waard is.
 >
 > De IIN-controle doet echt werk naast de Luhn. Eén op de tien willekeurige
 > reeksen haalt de Luhn, dus zonder het bereik zou elk ordernummer van zestien
@@ -1030,7 +1036,7 @@ Nieuwe sectie in het tabblad "Veiligheid" (`settings_dialog_security.dart`), wan
 | `privacyFamilies` | set van 8 familieschakelaars | alle aan |
 | `privacyDisabledRules` | set van regel-id's | leeg |
 | `privacyRegions` | set van landpakketten | **heel Europa** (EU-27 + EER + CH + UK) — **geleverd** |
-| `privacyStrictSeverity` | bool — behandel `zeker` als fout i.p.v. waarschuwing | uit |
+| `privacyStrictSeverity` | bool — behandel `zeker` als fout i.p.v. waarschuwing | uit — **geleverd** |
 | `privacyExportGate` | uit / waarschuwen / blokkeren | waarschuwen |
 | `privacyRedactionStyle` | blokken (`████`) / label (`[BSN]`) | blokken |
 | `privacyOwnIdentity` | vrije lijst: naam, e-mail, telefoon, domein | leeg |

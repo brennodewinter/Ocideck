@@ -619,6 +619,21 @@ class AppSettings {
   /// persoonsgegeven, en dat is precies wat deze controle hoort te vinden.
   final bool privacyImageFaceDetection;
 
+  /// Behandel een `zeker`-bevinding als fout in plaats van waarschuwing.
+  ///
+  /// Standaard **uit**, en dat is geen slapheid maar een keuze over wie de
+  /// rekening krijgt. Een fout activeert `qualityBlockExportOnErrors`, en wie
+  /// die instelling ooit aanzette voor contrastfouten zou ineens geen deck met
+  /// een e-mailadres meer kunnen exporteren — een instelling die iets anders
+  /// gaat betekenen zonder dat iemand eraan draaide.
+  ///
+  /// Aan is bedoeld voor gereguleerde omgevingen waar een `zeker`-bevinding
+  /// werkelijk een blokkade hoort te zijn. Alleen `zeker` schuift mee:
+  /// `waarschijnlijk` blijft een waarschuwing en `mogelijk` blijft informatief.
+  /// Dat is met opzet — juist de contextloze treffers landen op `mogelijk`, en
+  /// die mogen ook in de strenge stand niemand tegenhouden.
+  final bool privacyStrictSeverity;
+
   /// Detectieregels die de gebruiker heeft uitgezet.
   ///
   /// De ontsnappingsklep: wie één regel te luid vindt, kan chirurgisch ingrijpen
@@ -750,6 +765,7 @@ class AppSettings {
     this.classificationWatermarkEnabled = false,
     this.privacyChecksEnabled = true,
     this.privacyImageFaceDetection = true,
+    this.privacyStrictSeverity = false,
     this.privacyDisabledRules = defaultDisabledPrivacyRules,
     this.privacyRegions = defaultPrivacyRegions,
     this.privacyExportGate = PrivacyExportGate.warn,
@@ -832,6 +848,7 @@ class AppSettings {
     bool? classificationWatermarkEnabled,
     bool? privacyChecksEnabled,
     bool? privacyImageFaceDetection,
+    bool? privacyStrictSeverity,
     Set<String>? privacyDisabledRules,
     Set<String>? privacyRegions,
     PrivacyExportGate? privacyExportGate,
@@ -895,6 +912,8 @@ class AppSettings {
       privacyChecksEnabled: privacyChecksEnabled ?? this.privacyChecksEnabled,
       privacyImageFaceDetection:
           privacyImageFaceDetection ?? this.privacyImageFaceDetection,
+      privacyStrictSeverity:
+          privacyStrictSeverity ?? this.privacyStrictSeverity,
       privacyDisabledRules: privacyDisabledRules ?? this.privacyDisabledRules,
       privacyRegions: privacyRegions ?? this.privacyRegions,
       privacyExportGate: privacyExportGate ?? this.privacyExportGate,

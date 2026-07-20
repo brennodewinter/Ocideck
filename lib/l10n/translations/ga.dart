@@ -1835,6 +1835,10 @@ const _dutchSourceAddGa = <String, String>{
       'Cinneann sé an mbeidh ardú glas nó dearg. Leanann an tsaighead na figiúirí i gcónaí.',
   'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
       'Cúpla príomhfhigiúr le figiúr na tuairisce roimhe seo lena dtaobh, ionas gurb é an t-athrú a insíonn an scéal. Luaigh do gach ceann acu an dea-scéal nó drochscéal é ardú.',
+  'Zekere vondsten als fout behandelen':
+      'Caith le fionnachtana cinnte mar earráidí',
+  'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.':
+      'De ghnáth is rabhadh é fionnachtain chinnte — uimhir aitheantais, IBAN, seoladh ríomhphoist — ar féidir leat neamhaird a dhéanamh air. Déanann sé earráid de nuair atá sé ann, agus ansin is féidir leis an easpórtáil bac a chur air má tá an socrú sin agat ar siúl freisin. Ceaptha do thimpeallachtaí nach mór do shonraí den sórt sin gan dul tríd i ndáiríre. Fanann fionnachtana neamhchinnte ina rabhadh.',
   'Medicare-nummer — een zorggegeven': 'uimhir Medicare — sonra sláinte',
   'bedrijfsnummer': 'uimhir chuideachta',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

@@ -1807,6 +1807,9 @@ const _dutchSourceAddLt = <String, String>{
       'Nustato, ar padidėjimas žalias, ar raudonas. Rodyklė visada seka skaičius.',
   'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
       'Keli pagrindiniai rodikliai su ankstesnės ataskaitos skaičiumi šalia, kad istoriją pasakotų pokytis. Kiekvienam nurodykite, ar padidėjimas yra gera, ar bloga žinia.',
+  'Zekere vondsten als fout behandelen': 'Tikrus radinius laikyti klaidomis',
+  'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.':
+      'Paprastai tikras radinys — asmens kodas, IBAN, el. pašto adresas — yra įspėjimas, kurį galima ignoruoti. Įjungus jis tampa klaida, ir tada eksportas gali dėl jo sustoti, jei ta nuostata taip pat įjungta. Skirta aplinkoms, kuriose tokie duomenys tikrai negali praeiti. Netikri radiniai lieka įspėjimu.',
   'Medicare-nummer — een zorggegeven': 'Medicare numeris — sveikatos duomenys',
   'bedrijfsnummer': 'bendrovės numeris',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

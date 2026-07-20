@@ -35,6 +35,20 @@ extension SettingsPrivacy on SettingsNotifier {
     );
   }
 
+  /// Laat een `zeker`-bevinding als fout tellen in plaats van als waarschuwing.
+  ///
+  /// De gevolgen reiken verder dan een kleurtje in het paneel: een fout activeert
+  /// `qualityBlockExportOnErrors`, dus deze schakelaar kan een export tegenhouden
+  /// die gisteren nog doorging. Daarom staat hij standaard uit en hoort er in de
+  /// UI bij te staan wat hij aanricht.
+  Future<void> setPrivacyStrictSeverity(bool enabled) async {
+    currentState = currentState.copyWith(privacyStrictSeverity: enabled);
+    await _persist(
+      'setPrivacyStrictSeverity',
+      (prefs) => prefs.setBool('privacyStrictSeverity', enabled),
+    );
+  }
+
   /// Zet één detectieregel aan of uit.
   ///
   /// De ontsnappingsklep uit de melding zelf ("deze regel nooit meer melden").

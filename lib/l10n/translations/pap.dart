@@ -756,6 +756,9 @@ const _dutchSourceAddPap = {
       'Ta determiná si un subida ta bèrdè òf kòrá. E flecha semper ta sigui e sifranan.',
   'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
       'Un par di sifra klave ku e sifra di e rapòrt anterior banda, pa e kambio konta e historia. Indiká pa kada un si subi ta bon òf malu notisia.',
+  'Zekere vondsten als fout behandelen': 'Trata hayasgonan sigur komo eror',
+  'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.':
+      'Normalmente un hayasgo sigur — un number di identidat, un IBAN, un adres di e-mail — ta un advertensia ku bo por ignorá. Sendé e ta bira un eror, i e ora ei e eksportashon por keda blokiá pa dje si bo tin e konfigurashon ei sendé tambe. Pensá pa ambientenan kaminda tal datonan realmente no mag pasa. Hayasgonan insigur ta keda un advertensia.',
   'Medicare-nummer — een zorggegeven': 'number di Medicare — un dato di salú',
   'bedrijfsnummer': 'number di kompania',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

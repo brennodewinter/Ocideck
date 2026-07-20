@@ -1817,6 +1817,10 @@ const _dutchSourceAddRo = <String, String>{
       'Stabilește dacă o creștere este verde sau roșie. Săgeata urmează întotdeauna cifrele.',
   'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
       'Câteva cifre-cheie cu cifra din raportul anterior alături, astfel încât schimbarea să spună povestea. Indicați pentru fiecare dacă o creștere este o veste bună sau rea.',
+  'Zekere vondsten als fout behandelen':
+      'Tratează rezultatele certe drept erori',
+  'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.':
+      'În mod normal, un rezultat cert — un CNP, un IBAN, o adresă de e-mail — este un avertisment pe care îl puteți ignora. Activat, devine o eroare, iar exportul se poate bloca din cauza lui dacă aveți activată și acea setare. Destinat mediilor în care astfel de date chiar nu au voie să treacă. Rezultatele incerte rămân un avertisment.',
   'Medicare-nummer — een zorggegeven': 'număr Medicare — dată de sănătate',
   'bedrijfsnummer': 'număr de societate',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

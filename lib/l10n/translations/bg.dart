@@ -1822,6 +1822,10 @@ const _dutchSourceAddBg = <String, String>{
       'Определя дали покачването е зелено или червено. Стрелката винаги следва числата.',
   'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
       'Няколко ключови числа с числото от предишния отчет до тях, така че историята да я разказва промяната. За всяко посочете дали покачването е добра или лоша новина.',
+  'Zekere vondsten als fout behandelen':
+      'Третиране на сигурните находки като грешки',
+  'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.':
+      'Обикновено сигурна находка — ЕГН, IBAN, имейл адрес — е предупреждение, което можете да пренебрегнете. Включено я превръща в грешка и тогава износът може да блокира заради нея, ако и онази настройка е включена. Предназначено за среди, в които такива данни наистина не бива да преминават. Несигурните находки остават предупреждение.',
   'Medicare-nummer — een zorggegeven': 'номер Medicare — здравни данни',
   'bedrijfsnummer': 'номер на дружество',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

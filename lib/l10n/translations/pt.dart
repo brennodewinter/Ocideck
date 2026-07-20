@@ -1829,6 +1829,9 @@ const _dutchSourceAddPt = <String, String>{
       'Determina se uma subida fica verde ou vermelha. A seta segue sempre os números.',
   'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
       'Alguns números-chave com o número do relatório anterior ao lado, para que seja a variação a contar a história. Indique em cada um se uma subida é boa ou má notícia.',
+  'Zekere vondsten als fout behandelen': 'Tratar as deteções certas como erros',
+  'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.':
+      'Normalmente uma deteção certa — um número de identificação, um IBAN, um endereço de e-mail — é um aviso que pode ignorar. Ligado torna-a um erro, e a exportação pode então bloquear se também tiver essa definição ativa. Destinado a ambientes onde esses dados realmente não podem passar. As deteções incertas continuam a ser um aviso.',
   'Medicare-nummer — een zorggegeven': 'número Medicare — dado de saúde',
   'bedrijfsnummer': 'número de sociedade',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

@@ -1798,6 +1798,9 @@ const _dutchSourceAddSv = <String, String>{
       'Avgör om en ökning färgas grön eller röd. Pilen följer alltid siffrorna.',
   'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
       'Några nyckeltal med talet från föregående rapport bredvid, så att förändringen berättar historien. Ange för varje tal om en ökning är goda eller dåliga nyheter.',
+  'Zekere vondsten als fout behandelen': 'Behandla säkra fynd som fel',
+  'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.':
+      'Normalt är ett säkert fynd — ett personnummer, ett IBAN, en e-postadress — en varning som du kan ignorera. På gör det till ett fel, och då kan exporten blockeras av det om du även har den inställningen på. Avsett för miljöer där sådana uppgifter verkligen inte får slippa igenom. Osäkra fynd förblir en varning.',
   'Medicare-nummer — een zorggegeven': 'Medicare-nummer — en hälsouppgift',
   'bedrijfsnummer': 'företagsnummer',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

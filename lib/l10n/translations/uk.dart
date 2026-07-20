@@ -1817,6 +1817,9 @@ const _dutchSourceAddUk = <String, String>{
       'Визначає, чи буде зростання зеленим або червоним. Стрілка завжди слідує за числами.',
   'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
       'Кілька ключових показників із числом попереднього звіту поруч, щоб історію розповідала саме зміна. Для кожного вкажіть, чи зростання — це добра чи погана новина.',
+  'Zekere vondsten als fout behandelen': 'Вважати певні знахідки помилками',
+  'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.':
+      'Зазвичай певна знахідка — ідентифікаційний номер, IBAN, адреса електронної пошти — це попередження, яке можна проігнорувати. Увімкнено перетворює її на помилку, і тоді експорт може на ній заблокуватися, якщо те налаштування теж увімкнене. Призначено для середовищ, де такі дані справді не повинні проходити. Непевні знахідки залишаються попередженням.',
   'Medicare-nummer — een zorggegeven': 'номер Medicare — дані про здоров’я',
   'bedrijfsnummer': 'номер компанії',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

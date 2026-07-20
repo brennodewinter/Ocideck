@@ -1803,6 +1803,9 @@ const _dutchSourceAddGsw = <String, String>{
       'Bestimmt, öb en Aastieg grüen oder rot isch. De Pfiil folgt immer de Zahle.',
   'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
       'E paar Chennzahle mit de Zahl vom vorige Bricht dernäbe, damit d Veränderig d Gschicht verzellt. Gib pro Zahl aa, öb en Aastieg gueti oder schlächti Nochricht isch.',
+  'Zekere vondsten als fout behandelen': 'Sicheri Fünd als Fähler behandle',
+  'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.':
+      'Normalerwiis isch en sicherè Fund — e Sozialversicherigsnummere, en IBAN, e E-Mail-Adrässe — e Warnig, wo mer cha ignoriere. Iigschalte macht drus en Fähler, und denn cha de Export dra blockiere, wenn die Iistellig au aa isch. Gmeint für Umgäbige, wo settigi Date würkli nöd düre söttet. Unsicheri Fünd bliibet e Warnig.',
   'Medicare-nummer — een zorggegeven': 'Medicare-Nummere — es Gsundheitsdate',
   'bedrijfsnummer': 'Firmenummere',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

@@ -1801,6 +1801,10 @@ const _dutchSourceAddSl = <String, String>{
       'Določa, ali je porast zelen ali rdeč. Puščica vedno sledi številkam.',
   'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
       'Nekaj ključnih številk s številko prejšnjega poročila ob strani, da zgodbo pove sprememba. Pri vsaki navedite, ali je porast dobra ali slaba novica.',
+  'Zekere vondsten als fout behandelen':
+      'Zanesljive najdbe obravnavaj kot napake',
+  'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.':
+      'Običajno je zanesljiva najdba — matična številka, IBAN, e-poštni naslov — opozorilo, ki ga lahko prezrete. Vklopljeno iz nje naredi napako, izvoz pa se lahko na njej ustavi, če imate vklopljeno tudi tisto nastavitev. Namenjeno okoljem, kjer taki podatki res ne smejo skozi. Nezanesljive najdbe ostanejo opozorilo.',
   'Medicare-nummer — een zorggegeven':
       'številka Medicare — zdravstveni podatek',
   'bedrijfsnummer': 'številka družbe',

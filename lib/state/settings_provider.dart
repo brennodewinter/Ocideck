@@ -166,6 +166,9 @@ class SettingsNotifier extends StateNotifier<AppSettings> {
       privacyChecksEnabled: prefs.getBool('privacyChecksEnabled') ?? true,
       privacyImageFaceDetection:
           prefs.getBool('privacyImageFaceDetection') ?? true,
+      // Standaard uit: aanzetten verandert wat `qualityBlockExportOnErrors`
+      // betekent, en dat mag niet gebeuren zonder dat iemand ernaar greep.
+      privacyStrictSeverity: prefs.getBool('privacyStrictSeverity') ?? false,
       // Nooit eerder opgeslagen → de standaard-uitgezette regels. Een lege lijst
       // die de gebruiker zelf heeft gemaakt, blijft leeg: dat is een keuze.
       privacyDisabledRules:

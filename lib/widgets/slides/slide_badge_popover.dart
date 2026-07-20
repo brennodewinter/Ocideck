@@ -23,6 +23,7 @@ import '../../services/privacy/privacy_quality_bridge.dart';
 import '../../state/deck_provider.dart';
 import '../../state/deck_quality_provider.dart';
 import '../../state/privacy_provider.dart';
+import '../../state/settings_provider.dart';
 import '../../theme/app_theme.dart';
 import 'slide_badge_tone.dart';
 
@@ -202,6 +203,9 @@ List<SlideQualityIssue> slideBadgeIssues(
       PrivacyScanResult(
         ref.read(privacyRawScanProvider).forSlide(slideIndex).toList(),
       ),
+      // Ook hier, anders toont de popover een waarschuwing waar het paneel een
+      // fout meldt — over dezelfde bevinding.
+      strictSeverity: ref.read(settingsProvider).privacyStrictSeverity,
     );
   }
   return ref

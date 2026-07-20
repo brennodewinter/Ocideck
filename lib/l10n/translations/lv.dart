@@ -1798,6 +1798,9 @@ const _dutchSourceAddLv = <String, String>{
       'Nosaka, vai pieaugums ir zaļš vai sarkans. Bultiņa vienmēr seko skaitļiem.',
   'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
       'Daži galvenie rādītāji ar iepriekšējā pārskata skaitli blakus, lai stāstu izstāsta pārmaiņa. Katram norādiet, vai pieaugums ir laba vai slikta ziņa.',
+  'Zekere vondsten als fout behandelen': 'Uzskatīt drošus atradumus par kļūdām',
+  'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.':
+      'Parasti drošs atradums — personas kods, IBAN, e-pasta adrese — ir brīdinājums, ko var ignorēt. Ieslēgts padara to par kļūdu, un tad eksports var uz tā apstāties, ja arī tas iestatījums ir ieslēgts. Paredzēts videi, kurā šādi dati tiešām nedrīkst izkļūt cauri. Nedroši atradumi paliek brīdinājums.',
   'Medicare-nummer — een zorggegeven': 'Medicare numurs — veselības dati',
   'bedrijfsnummer': 'uzņēmuma numurs',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

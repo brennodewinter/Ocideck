@@ -1774,6 +1774,9 @@ const _dutchSourceAddTlh = <String, String>{
       'chelchugh mI\', SuD ghap Doq \'e\' wIv. reH mI\'mey tlha\' naQ.',
   'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
       'mI\'mey potlh puS, retlh wa\'DIch mI\'; vaj choH ja\' lut. mI\' Hoch, chelchugh QaQ ghap qab \'e\' yIper.',
+  'Zekere vondsten als fout behandelen': 'Qagh rur De\' Sovbogh',
+  'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.':
+      'motlh De\' Sovbogh — nuv mI\', IBAN, QIn Duj — \'oH ghuHmoHwI\' \'ej DabuSHa\'laH. chu\'lu\'DI\' Qagh moj, \'ej vaj ngeHmeH mIw botlaH, chu\'lu\'chugh je latlh chu\'wI\'. Daq luSam\'egh De\'vam narghbe\'nISbogh. Sovbe\'lu\'bogh De\' ghuHmoHwI\' rur.',
   'Medicare-nummer — een zorggegeven': 'Medicare mI’ — pIvlob De’',
   'bedrijfsnummer': 'yaHmey mI’',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

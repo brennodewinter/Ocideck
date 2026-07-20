@@ -752,6 +752,10 @@ const _dutchSourceAddIt = {
       'Determina se un aumento è verde o rosso. La freccia segue sempre i dati.',
   'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
       'Alcuni dati chiave affiancati dal dato della rilevazione precedente, così è la variazione a raccontare la storia. Indica per ciascuno se un aumento è una buona o una cattiva notizia.',
+  'Zekere vondsten als fout behandelen':
+      'Trattare i risultati certi come errori',
+  'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.':
+      'Normalmente un risultato certo — un codice fiscale, un IBAN, un indirizzo e-mail — è un avviso che si può ignorare. Attivo lo trasforma in un errore, e allora l\'esportazione può bloccarsi se anche quell\'impostazione è attiva. Pensato per ambienti in cui tali dati non devono davvero passare. I risultati incerti restano un avviso.',
   'Medicare-nummer — een zorggegeven': 'numero Medicare — dato sanitario',
   'bedrijfsnummer': 'numero di società',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

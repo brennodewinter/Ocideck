@@ -114,5 +114,10 @@ bool _isResolved(Deck deck, PrivacyFinding finding) {
 }
 
 List<SlideQualityIssue> computePrivacyQualityIssues(Ref ref) {
-  return privacyIssuesFrom(ref.watch(privacyScanProvider));
+  return privacyIssuesFrom(
+    ref.watch(privacyScanProvider),
+    strictSeverity: ref.watch(
+      settingsProvider.select((s) => s.privacyStrictSeverity),
+    ),
+  );
 }

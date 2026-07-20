@@ -1806,6 +1806,9 @@ const _dutchSourceAddHr = <String, String>{
       'Određuje hoće li porast biti zelen ili crven. Strelica uvijek prati brojke.',
   'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
       'Nekoliko ključnih pokazatelja s brojkom iz prethodnog izvješća uz njih, tako da priču ispriča promjena. Za svaki navedite je li porast dobra ili loša vijest.',
+  'Zekere vondsten als fout behandelen': 'Sigurne nalaze tretiraj kao pogreške',
+  'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.':
+      'Obično je siguran nalaz — OIB, IBAN, adresa e-pošte — upozorenje koje možete zanemariti. Uključeno ga pretvara u pogrešku, a izvoz se tada na njemu može zaustaviti ako je i ta postavka uključena. Namijenjeno okruženjima u kojima takvi podaci uistinu ne smiju proći. Nesigurni nalazi ostaju upozorenje.',
   'Medicare-nummer — een zorggegeven': 'Medicare broj — zdravstveni podatak',
   'bedrijfsnummer': 'broj tvrtke',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

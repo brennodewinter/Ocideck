@@ -1803,6 +1803,9 @@ const _dutchSourceAddHu = <String, String>{
       'Meghatározza, hogy egy növekedés zöld vagy piros színű. A nyíl mindig a számokat követi.',
   'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
       'Néhány kulcsszám az előző jelentés számával mellette, hogy a történetet a változás mondja el. Adja meg számonként, hogy a növekedés jó vagy rossz hír.',
+  'Zekere vondsten als fout behandelen': 'Biztos találatok kezelése hibaként',
+  'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.':
+      'Általában egy biztos találat — egy TAJ-szám, egy IBAN, egy e-mail-cím — figyelmeztetés, amelyet figyelmen kívül hagyhat. Bekapcsolva hibává válik, és akkor az exportálás elakadhat rajta, ha az a beállítás is be van kapcsolva. Olyan környezetekhez készült, ahol az ilyen adatok valóban nem juthatnak ki. A bizonytalan találatok figyelmeztetés maradnak.',
   'Medicare-nummer — een zorggegeven': 'Medicare-szám — egészségügyi adat',
   'bedrijfsnummer': 'cégszám',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
