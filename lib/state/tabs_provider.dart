@@ -274,9 +274,18 @@ class TabsNotifier extends StateNotifier<TabsState> {
       initialDirectory: initialDirectory,
     );
     if (path == null) return;
-    final deck = await _file.openDeck(path);
+    // Detailed, niet de dunne wrapper: die gooit de grafiekdata-waarschuwingen
+    // weg, en dan opent een deck met een ontbrekend databestand hier met stille
+    // lege plots — precies wat [chartDataWarningProvider] hoort te melden.
+    final outcome = await _file.openDeckDetailed(path);
+    final deck = outcome.deck;
     if (deck == null) return;
     if (!mounted) return; // notifier disposed during the await
+    if (outcome.warnings.isNotEmpty) {
+      _ref.read(chartDataWarningProvider.notifier).state = ChartDataWarning(
+        outcome.warnings,
+      );
+    }
 
     final current = state.current;
     if (current != null && !current.isOpen) {
@@ -479,6 +488,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     final deck = gated.deck;
     if (deck == null) return gated.failure;
     if (!mounted) return OpenResult.unreadable;
+    _warnUnfilledChartData(deck);
     _placeDeckInTab(deck, remoteOrigin: remoteOrigin);
     return OpenResult.opened;
   }
@@ -532,6 +542,9 @@ class TabsNotifier extends StateNotifier<TabsState> {
     deck = _attachPackageChartData(deck, entries, mdEntry.name);
     deck = _attachPackageSidecars(deck, entries, mdEntry.name);
     if (!mounted) return OpenResult.unreadable;
+    // Ná het aanhaken: wat het pakket wél meebracht is nu ingevuld, dus wat
+    // hier nog leeg is, ontbrak echt.
+    _warnUnfilledChartData(deck);
     _placeDeckInTab(deck, remoteOrigin: remoteOrigin);
     return OpenResult.opened;
   }

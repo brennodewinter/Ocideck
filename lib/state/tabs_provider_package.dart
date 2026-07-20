@@ -11,6 +11,10 @@ part of 'tabs_provider.dart';
 /// grafiekdata wordt inline in de spec gezet, en de sidecars worden als losse
 /// lagen op het deck teruggelegd. Wat ze delen is de insluiting: een
 /// verwijzing die met `../` buiten de pakketwortel wijst wordt niet gevolgd.
+///
+/// Hier woont ook [_warnUnfilledChartData], dat beide bytes-paden (los `.md` en
+/// pakket) delen: het hoort bij dezelfde vraag — wat kon er zonder projectmap
+/// niet worden ingevuld.
 extension _TabsPackageAssets on TabsNotifier {
   /// Zet de afbeeldings-leden van een pakket in de [WebAssetStore] en
   /// herschrijf de slidepaden die ernaar verwijzen naar hun mem:-pad.
@@ -98,7 +102,12 @@ extension _TabsPackageAssets on TabsNotifier {
       try {
         slides.add(
           s.copyWith(
-            customMarkdown: spec.withCsv(utf8.decode(bytes)).toBlock(),
+            // Op de extensie, net als elk ander laadpad ([ChartSpec.withData]):
+            // nieuwe databestanden zijn JSON, en die als CSV lezen levert een
+            // lege plot zonder één melding.
+            customMarkdown: spec
+                .withData(utf8.decode(bytes), path: resolved)
+                .toBlock(),
           ),
         );
         changed = true;
@@ -108,6 +117,28 @@ extension _TabsPackageAssets on TabsNotifier {
       }
     }
     return changed ? deck.copyWith(slides: slides) : deck;
+  }
+
+  /// Meld de grafieken die met een `source` binnenkomen maar zonder cijfers.
+  ///
+  /// Van beide bytes-paden (los `.md` én pakket), want geen van beide heeft een
+  /// projectmap: een `data/…`-verwijzing valt hier niet op te lossen, dus een
+  /// deck dat op schijf is opgeslagen — waar de cijfers juist naar `data/`
+  /// verhuizen — tekent hier lege plots. Dat is een grens van het pad, geen
+  /// fout; zwijgen erover is er wel een, want een lege plot is niet te
+  /// onderscheiden van een grafiek waar nog niets in staat. Zelfde melding als
+  /// de schijfvariant in [FileService.openDeckDetailed].
+  void _warnUnfilledChartData(Deck deck) {
+    final sources = [
+      for (final s in deck.slides)
+        if (s.type == SlideType.chart)
+          if (ChartSpec.parse(s.customMarkdown) case final spec)
+            if (spec.source != null && !spec.hasInlineData) spec.source!,
+    ];
+    if (sources.isEmpty || !mounted) return;
+    _ref.read(chartDataWarningProvider.notifier).state = ChartDataWarning(
+      sources,
+    );
   }
 
   /// Herstel de sidecar-lagen (ink-annotaties en sprekersnotities) uit de

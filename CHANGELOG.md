@@ -711,6 +711,24 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   begrenst de layout, niet de decode. Alle vier de plekken lopen nu langs
   dezelfde poort als elke andere afbeelding.
 
+- **Een deck uit een pakket opende met lege grafieken.** Sinds grafiekdata naar
+  een los bestand verhuisde, munt OciDeck voor nieuwe databestanden altijd
+  `.json`. Het uitpakken van een `.ocideck` las elk databestand echter als CSV.
+  Op JSON levert dat geen fout maar onzin — de eerste regel `{` werd de
+  kopregel, dus geen enkele reeks — en het resultaat was een grafiek zonder
+  cijfers. De enige test die dit pad dekte gebruikte een `.csv` en bleef daarom
+  groen. Het uitpakken kiest de lezer nu op de extensie, zoals elk ander
+  laadpad.
+
+- **Een grafiek zonder cijfers bleef stil.** Een lege plot is niet te
+  onderscheiden van een grafiek waar nog niets in staat, dus wie een deck opende
+  waarvan het databestand ontbrak, zag alleen een lege slide. Twee paden meldden
+  het niet: het bestandskiezer-pad gooide de waarschuwing weg, en het bytes-pad
+  (web, drag-drop, URL-import) kende er geen. Dat laatste pad heeft geen
+  projectmap en kán een `data/…`-verwijzing dus niet oplossen — een grens van
+  het pad, geen fout, maar wel iets om te zeggen in plaats van te verzwijgen.
+  Beide melden nu welke verwijzing niet ingevuld kon worden.
+
 - **Een woonadres kon volledig door de controle glippen, en het viel niet op.**
   `Woonadres: Weidemolen 12, 1234 AB Amsterdam` werd niet gemeld. De
   oorzaak was één ontbrekend woord: een straat werd herkend aan een lijstje
