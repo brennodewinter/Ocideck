@@ -93,6 +93,35 @@ void main() {
       expect(out.subtitle, 'De inleiding');
     });
 
+    test('section slide keeps its background image and its knobs', () {
+      // De tussentitel draagt nu dezelfde achtergrondafbeelding als de titeldia;
+      // zonder deze round-trip verdween het beeld stilletjes bij het eerste
+      // opslaan — precies wat het serialiseren vroeger deed.
+      final out = _roundTrip(
+        Slide.create(SlideType.section).copyWith(
+          title: 'Deel twee',
+          subtitle: 'De verdieping',
+          imagePath: 'images/sectie.png',
+          imageSize: 0,
+          titleImageOverlay: false,
+          imageFocalX: 0.3,
+          imageFocalY: 0.7,
+          imageCaption: 'Bron: archief',
+          titleTextColorOverride: '#FFFFFF',
+        ),
+      );
+      expect(out.type, SlideType.section);
+      expect(out.title, 'Deel twee');
+      expect(out.subtitle, 'De verdieping');
+      expect(out.imagePath, 'images/sectie.png');
+      expect(out.imageSize, 0);
+      expect(out.titleImageOverlay, isFalse);
+      expect(out.imageFocalX, closeTo(0.3, 1e-9));
+      expect(out.imageFocalY, closeTo(0.7, 1e-9));
+      expect(out.imageCaption, 'Bron: archief');
+      expect(out.titleTextColorOverride, '#FFFFFF');
+    });
+
     test('bullets slide keeps title and nested bullets', () {
       final out = _roundTrip(
         Slide.create(SlideType.bullets).copyWith(
