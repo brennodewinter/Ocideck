@@ -10,6 +10,18 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Added
+- **Een achtergrondafbeelding op de tussentitel, net als op de titeldia.** Een
+  tussentitel kon alleen een effen kleur dragen terwijl de titeldia allang een
+  schermvullend beeld kon hebben — een gat, geen keuze. De tussentitel krijgt nu
+  dezelfde bediening (kiezen, "vult hele slide", zoom, bijsnijden, grijze waas,
+  tekstkleur) en rendert het beeld in dezelfde drie modi, maar houdt zijn eigen
+  gecentreerde uiterlijk. Presentatie, export en Marp-HTML volgen vanzelf; de
+  titel-over-beeld-contrastcontrole geldt nu ook hier, met de sectie-eigen
+  achtergrondkleur als waas.
+- **Een zichtbare zoekknop in de markdown-weergave.** Zoeken kon er al (Ctrl/Cmd+F,
+  het menu, de opdrachtenbalk), maar niets in de weergave zelf verried dat — dus
+  "in markdown kan ik niet zoeken". Er staat nu een vergrootglas in de kopregel
+  dat dezelfde zoekbalk opent.
 - **Een ontdekkingendia: wat we niet wisten te hebben.** Het aanvalsoppervlak
   *telt* wat nieuw is; deze dia *noemt* het. De handvol objecten die de scan
   vond en die in geen enkele inventaris stonden — schaduw-IT, een vergeten
@@ -59,6 +71,17 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 
 
 ### Fixed
+- **Een badge die iets meldt, en een popover die het ook laat zien.** Op een dia
+  met alléén een gezichtstreffer of een titel-over-beeld-contrastprobleem kleurde
+  de badge wel, maar zei de popover "geen meldingen meer op deze slide" en toonde
+  het overzicht een probleem dat bij het aanklikken verdween. De badge en de
+  popover lezen nu dezelfde ruwe uitslagen als het overzicht — voor gezichten én
+  voor contrast — zodat ze elkaar niet meer tegenspreken. Een geaccepteerde
+  beeldtreffer wordt daarbij grijs in plaats van spoorloos te verdwijnen.
+- **"Deze regel nooit meer melden" doet nu ook iets bij gezichten.** De knop
+  schreef `image.face` keurig weg bij de uitgezette regels, maar de beeldcontrole
+  las die lijst nooit — dus er gebeurde niets. Nu eert ze de uitgezette regels,
+  omkeerbaar via Instellingen → Beveiliging.
 - **Web/io-verschillen die stil de verkeerde kant op vielen, rechtgezet.** Een
   gerichte vergelijking van de platformvarianten leverde vijf punten op:
   - De gezichtencontrole beloofde op web dat "elke afbeelding lokaal wordt
