@@ -943,6 +943,125 @@ fourth letter, and only one of those values means a natural person — so a
 company's PAN is not reported at all. Being right about what is personal data
 cuts both ways.
 
+### Beyond identification numbers
+
+The country packs cover national identification numbers. Several other families
+run regardless of which countries you have enabled, because the thing they
+recognise has no nationality.
+
+**Payment cards.** A card number is caught on three tests at once: it must be
+13 to 19 digits, it must match a real scheme's issuer range *at that scheme's
+exact length* (Visa, Mastercard, Amex, Discover, JCB, UnionPay, Maestro), and it
+must pass the Luhn check. Luhn alone is far too weak — roughly one in ten random
+digit runs passes it — and a number that passes Luhn while belonging to no scheme
+at all is not a card number but a coincidence. The schemes' official test numbers
+are ignored, like every other known example value.
+
+A security code is only reported when a valid card number stands in the same
+piece of text. Three digits after the word "cvv" mean nothing on their own; three
+digits after "cvv" *next to a card number* are a usable payment instruction, and
+that is when you hear about it.
+
+**Travel documents.** The machine-readable zone at the bottom of a passport or ID
+card is recognised in all three ICAO layouts — two lines of 44, two of 36, three
+of 30. Every check digit has to be right, including the composite one that runs
+over the others, and no context word is needed: four interlocking check digits do
+not let ordinary text through. The flip side is that one wrong digit means no
+match at all. A hand-copied or OCR'd zone with a typo goes unnoticed, which is the
+trade that was chosen on purpose — better a missed scan than a scanner that
+shouts "passport!" at every table of capital letters.
+
+**Digital traces.** IP addresses (v4 and v6), MAC addresses, IMEI and SIM numbers,
+advertising identifiers and social profiles.
+
+The ranges that exist precisely so documentation can use them are skipped —
+`192.0.2.x`, `2001:db8::`, loopback, broadcast, multicast, link-local. A scanner
+that flags `192.0.2.1` is flagging the examples in its own manual. Version numbers
+are skipped too: `v1.2.3.4` and `versie 10.0.19041.1` look exactly like addresses
+and turn up far more often in a technical deck than real ones do.
+
+A private address (`10.x`, `192.168.x`, and the carrier-grade range) is reported
+as a hint rather than a warning. It is internal infrastructure, not a person — but
+an internal address plan on a public slide is still a leak, so it is not silently
+dropped either.
+
+Two collisions are worth knowing about, because they explain apparent gaps. An
+IMEI is fifteen digits with a valid Luhn; so is an American Express card number,
+and Amex is the only fifteen-digit scheme. Numbers starting `34` or `37` are
+therefore left to the card rule, which means a real IMEI in that range is not
+reported as one. And a SIM subscriber number has no checksum at all, so it needs
+a context word ("imsi", "sim", "abonnee", "subscriber") nearby before it counts.
+
+An advertising identifier is a UUID, and a bare UUID is just as likely to be a
+session key, a filename or a database row. It is only reported when "idfa",
+"gaid", "advertising" or a device-id label stands next to it.
+
+For social profiles, links to LinkedIn, X, Facebook, Instagram, Telegram and
+Mastodon count, and so does a bare `@handle`. **GitHub deliberately does not.** A
+`github.com/…` link in a technical deck is nearly always a repository rather than
+a person — the false-positive corpus proved it immediately by flagging this
+project's own documentation. Code annotations such as `@Override` and `@param`
+are excluded for the same reason. A profile is reported as *likely* and not
+*certain*, because that a profile exists is certain but that it belongs to a
+natural person is not — organisations have accounts too, and that also means a
+profile URL does not on its own make a slide an article 9 case.
+
+**Vehicle registrations.** Dutch plates, in the hyphenated sidecodes, and only
+with a context word in front: "kenteken", "nummerbord", "voertuig", "auto" —
+also in English, German, French, Spanish and Italian, since a deck may be
+written in any of them. The context word is mandatory rather than merely helpful,
+because `XX-99-99` is equally an article code, a version marker or a room number;
+the pattern on its own excludes almost nothing. Combinations the RDW never issues
+(letter groups that read as words) are dropped. Two of the newest sidecodes are
+not covered yet.
+
+**Coordinates.** A decimal pair counts when it carries at least four decimals on
+both sides. That is the whole gate, and it is enough: four decimals is about
+eleven metres, and nobody writes a revenue figure or a measurement that way.
+Fewer decimals points at a village rather than a front door, and then it is no
+longer personal data. `geo:` URIs, plus-codes and what3words addresses
+(three dot-separated words behind a triple slash) are recognised as well; a
+plus-code stays a hint, because its alphabet can collide with a product code. Exactly `0,0` is ignored — that is
+"no location known" in nearly every system. Coordinates in chart data are not
+scanned, because chart values live in their own field and do not have to be
+guessed out of prose.
+
+**Dates of birth.** These need a context word within the words just before them —
+"geboortedatum", "born", "date of birth", "dob" and their equivalents in the
+other guide languages. A date is the most common number form in a business deck:
+releases, deadlines, quarters, meetings. A check that reported every date would
+mostly be reporting the calendar. Both `31-12-1980` and `12 maart 1980` are
+understood; the year must be four digits and fall between 1900 and 2035, which
+keeps historical lists and typing errors out.
+
+### Who a criminal-law finding is about
+
+When the check reports criminal-law data, it tries to say *whose* role it is
+reading: **suspect**, **reporter or victim**, or **witness**. Naming someone as a
+suspect and naming them as the person who reported the offence used to produce an
+identical notice, while legally and humanly those are two completely different
+things — and the second is the person a leak hurts most.
+
+Three things keep this honest. It only applies to criminal-law findings, because
+only there does the question mean anything: a diagnosis has no suspect. The role
+is read from the statement the value sits in, cut short at "but", "however",
+"although" and their equivalents, so *"the suspect stated that the complainant
+was lying"* does not smear one role across the whole sentence. And when triggers
+for more than one role appear in the same statement, the answer is **no role at
+all** — *"the suspect and the complainant knew each other"* names two, so it
+names neither.
+
+That last choice is the important one. The tempting design is a two-way split,
+suspect or not, and it is exactly wrong: if you have to guess, the expensive
+mistake is not "I don't know" but "I called a complainant a suspect", and a
+two-way split forces that mistake because there is no third box to land in.
+Measurements of this kind of role detection put it around half the accuracy of
+recognising the data itself, which is not a basis for being confident about
+someone's part in a criminal case.
+
+The role changes the wording of the notice and nothing else — same severity, same
+redaction, same export gate.
+
 ### A special-category datum is a statement, not a word
 
 When health, criminal, religious or union data is traceable to a person on the
@@ -1175,6 +1294,46 @@ written, so:
 A test in the suite exports a deck with a known value and searches for it in
 every one of those places. If it ever shows up, the build fails.
 
+### A marked value stops being reported
+
+Marking is the strongest decision the feature has: it leaves the value out
+unconditionally, whatever rule fired and whatever state the slide is in. So the
+check stops warning about what you marked. Wrap an address, a citizen service
+number, an IBAN, a coordinate pair or an IP address in brackets and the finding
+for that value disappears from the quality panel — asking you to act on something
+you have just done is exactly the kind of notice that makes people switch the
+whole check off.
+
+It goes quiet **per spot, not per value**. If the same email address appears twice
+on a slide and you bracket only the first, the second is still reported — and
+that is the point. Matching on text instead
+would let one pair of brackets silence every occurrence, and a value you forgot
+to mark would vanish from the panel without anyone noticing — the kind of miss
+that leaves nothing behind to see.
+
+Half a marker is not a marker: `[[value` or `value]]` is scanned as ordinary
+text, so a typo in the markup cannot quietly hide something. An ordinary Markdown
+link `[text](url)` has single brackets and is unaffected.
+
+### What stays reported: what the slide is *about*
+
+Marking hides a value. It does not change what the slide is about, and the
+article 9 and 10 warnings are about exactly that. Take the example above:
+
+```markdown
+The suspect, [[Jan de Vries]], was arrested at [[Kalverstraat 12]].
+```
+
+The name and the address are gone from the panel. The slide is still reported as
+containing criminal-law context — because `suspect` and `arrested` are what
+trigger that warning, and they are still there in plain sight. That is the right
+outcome: the sentence remains a sentence about a criminal case, and bracketing
+the words that say so would only hide the topic from you, not from the reader.
+
+So a slide that is fully marked up can still carry an article 9 or 10 notice.
+Read it as "this slide is about a sensitive subject", not as "you missed
+something".
+
 ### Your file keeps the original
 
 Redaction applies to what you *share*, never to what you *store*. The Markdown on
@@ -1195,6 +1354,10 @@ cannot see the data may not write it back either.
 Redaction only removes what you mark. It does not read your images: a screenshot
 with a name in it stays a screenshot with a name in it. And a `~~strikethrough~~`
 is not a redaction — it is styling, and the text travels with the file.
+
+Nor does marking make a slide "clean". It silences the finding for the value you
+marked, and nothing more: the subject-matter warnings stay, and a value you did
+not mark is still found and still reported.
 
 ## Presenting
 
