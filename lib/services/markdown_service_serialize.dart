@@ -247,6 +247,17 @@ extension _MarkdownSerialize on MarkdownService {
     }
   }
 
+  /// Writes an optional heading plus [Slide.tableRows] as a plain Markdown
+  /// table — the shared form of every table-backed slide type.
+  ///
+  /// The reporting types (`scorecard`, `actions`, `assets`) use it because a
+  /// table is what a generator can write and a human can read without the app;
+  /// for a report produced from a scan that is the whole route in. The
+  /// informatieveiligheid types (`checklist` §3.2, `scopeMatrix` §4.4,
+  /// `findingsSummary` §4.3.4) use it so their content stays reviewable in the
+  /// `.md` file. `signOff` (§1.6/§8) carries no slide content of its own beyond
+  /// an optional heading — its attestation is deck-level (`ocideck_sig_*`) — and
+  /// `finding` (P1-FIND) is the one type still on the free-Markdown scaffold.
   void _writeTableSlide(StringBuffer buf, Slide slide) {
     if (slide.title.isNotEmpty) {
       buf.writeln('# ${slide.title}');

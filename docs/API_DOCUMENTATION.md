@@ -32,10 +32,10 @@ providers.
 `tlp`, per-slide style overrides such as `titleTextColorOverride`, …). A field is
 only meaningful for the slide types that use it.
 
-`SlideType` (23 values): `title, section, bullets, twoBullets, bulletsImage,
+`SlideType` (24 values): `title, section, bullets, twoBullets, bulletsImage,
 twoImages, image, video, quote, table, freeMarkdown, code, chart, cockpit,
-question, timeline, scorecard, actions, finding, findingsSummary, checklist,
-scopeMatrix, signOff`.
+question, timeline, scorecard, actions, assets, finding, findingsSummary,
+checklist, scopeMatrix, signOff`.
 The last five are the informatieveiligheid (pentest-reporting) layouts. Note the
 Marp `_class` token stored in Markdown can differ from the enum name (e.g. the
 `split` class maps to `SlideType.bulletsImage`).

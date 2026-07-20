@@ -1796,6 +1796,25 @@ const _dutchSourceAddHu = <String, String>{
       'egészségügyi dolgozó nyilvántartási száma (BIG)',
   'AGB-code': 'egészségügyi szolgáltató kódja (AGB)',
   'proces-verbaalnummer': 'rendőrségi jegyzőkönyv száma',
+  'Aanvalsoppervlak': 'Támadási felület',
+  'Soort toevoegen': 'Típus hozzáadása',
+  'Soort verwijderen': 'Típus eltávolítása',
+  'Soort object': 'Objektumtípus',
+  'Gevonden': 'Talált',
+  'Kost werk': 'Munkát igényel',
+  'werk': 'munka',
+  'nieuw': 'új',
+  'Geen eigenaar': 'Nincs felelős',
+  'geen eigenaar': 'nincs felelős',
+  'objecten in beeld': 'objektum látókörben',
+  'Een overzicht draagt hoogstens acht soorten; meer is een inventarislijst en geen overzicht.':
+      'Egy áttekintés legfeljebb nyolc típust bír el; ennél több leltárlista, nem áttekintés.',
+  'Een deelgetal is groter dan het totaal van zijn soort. De slide toont het zoals ingevuld — controleer de bron.':
+      'Egy részszám meghaladja a saját típusának összegét. A dia a megadott módon mutatja — ellenőrizze a forrást.',
+  'De drie laatste zijn deelverzamelingen van het gevonden aantal; OciDeck telt niets zelf, de cijfers komen uit uw scan.':
+      'Az utolsó három a talált szám részhalmaza; az OciDeck maga semmit sem számol, a számok az Ön vizsgálatából jönnek.',
+  'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
+      'A támadási felület objektumtípusonként: hány van, hány igényel munkát, mi az új és mi az, ami senkié. Ez utóbbi rendszerint a beszélgetés tárgya.',
   'Acties en besluiten': 'Intézkedések és döntések',
   'Actie toevoegen': 'Intézkedés hozzáadása',
   'Actie verwijderen': 'Intézkedés eltávolítása',

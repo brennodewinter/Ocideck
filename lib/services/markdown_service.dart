@@ -441,18 +441,10 @@ class MarkdownService {
         _writeTimelineSlide(buf, slide);
       case SlideType.question:
         _writeQuestionSlide(buf, slide);
-      // `scorecard` bewaart zijn cijfers als gewone Markdown-tabel, net als de
-      // tabelgedragen types hieronder: leesbaar en buiten de app te bewerken,
-      // wat voor een gegenereerde rapportage de hele route is.
+      // Zie [_writeTableSlide] voor waarom deze zes hetzelfde wegschrijven.
       case SlideType.scorecard:
       case SlideType.actions:
       case SlideType.assets:
-        _writeTableSlide(buf, slide);
-      // Informatieveiligheid: `checklist` (§3.2), `scopeMatrix` (§4.4) en
-      // `findingsSummary` (§4.3.4) serialiseren als een gewone Markdown-tabel.
-      // `signOff` (§1.6/§8) heeft geen eigen dia-inhoud behalve een optionele kop
-      // — de attestatie is deck-breed (`ocideck_sig_*`). Alleen `finding`
-      // (P1-FIND) deelt nog de vrije-Markdown-scaffold-body.
       case SlideType.checklist:
       case SlideType.scopeMatrix:
       case SlideType.findingsSummary:

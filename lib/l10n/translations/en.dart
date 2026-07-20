@@ -931,6 +931,25 @@ const _dutchSourceAddEn = {
       'healthcare professional registration number (BIG)',
   'AGB-code': 'healthcare provider code (AGB)',
   'proces-verbaalnummer': 'police report number',
+  'Aanvalsoppervlak': 'Attack surface',
+  'Soort toevoegen': 'Add kind',
+  'Soort verwijderen': 'Remove kind',
+  'Soort object': 'Kind of object',
+  'Gevonden': 'Found',
+  'Kost werk': 'Needs work',
+  'werk': 'work',
+  'nieuw': 'new',
+  'Geen eigenaar': 'No owner',
+  'geen eigenaar': 'no owner',
+  'objecten in beeld': 'objects in view',
+  'Een overzicht draagt hoogstens acht soorten; meer is een inventarislijst en geen overzicht.':
+      'An overview carries at most eight kinds; more is an inventory list, not an overview.',
+  'Een deelgetal is groter dan het totaal van zijn soort. De slide toont het zoals ingevuld — controleer de bron.':
+      'A subtotal exceeds the total of its kind. The slide shows it as entered — check the source.',
+  'De drie laatste zijn deelverzamelingen van het gevonden aantal; OciDeck telt niets zelf, de cijfers komen uit uw scan.':
+      'The last three are subsets of the number found; OciDeck counts nothing itself — the figures come from your scan.',
+  'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
+      'The attack surface by kind of object: how many there are, how many need work, what is new and what nobody owns. That last one is usually the conversation.',
   'Acties en besluiten': 'Actions and decisions',
   'Actie toevoegen': 'Add action',
   'Actie verwijderen': 'Remove action',

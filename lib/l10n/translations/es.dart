@@ -747,6 +747,25 @@ const _dutchSourceAddEs = {
       'número de registro de un profesional sanitario (BIG)',
   'AGB-code': 'código de proveedor sanitario (AGB)',
   'proces-verbaalnummer': 'número de atestado policial',
+  'Aanvalsoppervlak': 'Superficie de ataque',
+  'Soort toevoegen': 'Añadir tipo',
+  'Soort verwijderen': 'Eliminar tipo',
+  'Soort object': 'Tipo de objeto',
+  'Gevonden': 'Encontrados',
+  'Kost werk': 'Requiere trabajo',
+  'werk': 'trabajo',
+  'nieuw': 'nuevos',
+  'Geen eigenaar': 'Sin responsable',
+  'geen eigenaar': 'sin responsable',
+  'objecten in beeld': 'objetos a la vista',
+  'Een overzicht draagt hoogstens acht soorten; meer is een inventarislijst en geen overzicht.':
+      'Un resumen lleva como máximo ocho tipos; más es una lista de inventario, no un resumen.',
+  'Een deelgetal is groter dan het totaal van zijn soort. De slide toont het zoals ingevuld — controleer de bron.':
+      'Una subcifra supera el total de su tipo. La diapositiva la muestra tal cual: comprueba la fuente.',
+  'De drie laatste zijn deelverzamelingen van het gevonden aantal; OciDeck telt niets zelf, de cijfers komen uit uw scan.':
+      'Los tres últimos son subconjuntos del número encontrado; OciDeck no cuenta nada por sí mismo, las cifras vienen de tu escaneo.',
+  'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
+      'La superficie de ataque por tipo de objeto: cuántos hay, cuántos requieren trabajo, qué es nuevo y qué no tiene dueño. Esto último suele ser la conversación.',
   'Acties en besluiten': 'Acciones y decisiones',
   'Actie toevoegen': 'Añadir acción',
   'Actie verwijderen': 'Eliminar acción',

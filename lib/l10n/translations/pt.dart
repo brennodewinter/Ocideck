@@ -1824,6 +1824,25 @@ const _dutchSourceAddPt = <String, String>{
       'número de registo de um profissional de saúde (BIG)',
   'AGB-code': 'código de prestador de cuidados (AGB)',
   'proces-verbaalnummer': 'número de auto de notícia',
+  'Aanvalsoppervlak': 'Superfície de ataque',
+  'Soort toevoegen': 'Adicionar tipo',
+  'Soort verwijderen': 'Remover tipo',
+  'Soort object': 'Tipo de objeto',
+  'Gevonden': 'Encontrados',
+  'Kost werk': 'Requer trabalho',
+  'werk': 'trabalho',
+  'nieuw': 'novos',
+  'Geen eigenaar': 'Sem responsável',
+  'geen eigenaar': 'sem responsável',
+  'objecten in beeld': 'objetos à vista',
+  'Een overzicht draagt hoogstens acht soorten; meer is een inventarislijst en geen overzicht.':
+      'Uma visão geral leva no máximo oito tipos; mais do que isso é uma lista de inventário, não uma visão geral.',
+  'Een deelgetal is groter dan het totaal van zijn soort. De slide toont het zoals ingevuld — controleer de bron.':
+      'Um subtotal excede o total do seu tipo. O slide mostra-o tal como introduzido — verifique a fonte.',
+  'De drie laatste zijn deelverzamelingen van het gevonden aantal; OciDeck telt niets zelf, de cijfers komen uit uw scan.':
+      'Os três últimos são subconjuntos do número encontrado; o OciDeck não conta nada por si, os números vêm da sua análise.',
+  'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
+      'A superfície de ataque por tipo de objeto: quantos há, quantos requerem trabalho, o que é novo e o que ninguém possui. Este último é normalmente a conversa.',
   'Acties en besluiten': 'Ações e decisões',
   'Actie toevoegen': 'Adicionar ação',
   'Actie verwijderen': 'Remover ação',

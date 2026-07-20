@@ -1827,6 +1827,25 @@ const _dutchSourceAddGa = <String, String>{
   'BIG-nummer van een zorgverlener': 'uimhir chláraithe gairmí sláinte (BIG)',
   'AGB-code': 'cód soláthraí cúraim sláinte (AGB)',
   'proces-verbaalnummer': 'uimhir thuairisce póilíní',
+  'Aanvalsoppervlak': 'Dromchla ionsaithe',
+  'Soort toevoegen': 'Cuir cineál leis',
+  'Soort verwijderen': 'Bain an cineál',
+  'Soort object': 'Cineál ruda',
+  'Gevonden': 'Aimsithe',
+  'Kost werk': 'Obair de dhíth',
+  'werk': 'obair',
+  'nieuw': 'nua',
+  'Geen eigenaar': 'Gan úinéir',
+  'geen eigenaar': 'gan úinéir',
+  'objecten in beeld': 'rud i radharc',
+  'Een overzicht draagt hoogstens acht soorten; meer is een inventarislijst en geen overzicht.':
+      'Iompraíonn forbhreathnú ocht gcineál ar a mhéad; níos mó ná sin, is liosta fardail é seachas forbhreathnú.',
+  'Een deelgetal is groter dan het totaal van zijn soort. De slide toont het zoals ingevuld — controleer de bron.':
+      'Sáraíonn fo-iomlán iomlán a chineáil. Taispeánann an sleamhnán é mar a iontráladh é — seiceáil an fhoinse.',
+  'De drie laatste zijn deelverzamelingen van het gevonden aantal; OciDeck telt niets zelf, de cijfers komen uit uw scan.':
+      'Is fo-thacair den líon a aimsíodh iad an trí cinn deireanacha; ní chomhaireann OciDeck rud ar bith é féin, tagann na figiúirí ó do scanadh.',
+  'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
+      'An dromchla ionsaithe de réir cineál ruda: cé mhéad atá ann, cé mhéad a bhfuil obair de dhíth orthu, cad atá nua agus cad nach le duine ar bith é. Is é an ceann deireanach sin an comhrá de ghnáth.',
   'Acties en besluiten': 'Gníomhartha agus cinntí',
   'Actie toevoegen': 'Cuir gníomh leis',
   'Actie verwijderen': 'Bain an gníomh',

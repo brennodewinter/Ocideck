@@ -1800,6 +1800,25 @@ const _dutchSourceAddLt = <String, String>{
       'sveikatos priežiūros specialisto registracijos numeris (BIG)',
   'AGB-code': 'sveikatos priežiūros paslaugų teikėjo kodas (AGB)',
   'proces-verbaalnummer': 'policijos protokolo numeris',
+  'Aanvalsoppervlak': 'Atakos paviršius',
+  'Soort toevoegen': 'Pridėti rūšį',
+  'Soort verwijderen': 'Pašalinti rūšį',
+  'Soort object': 'Objekto rūšis',
+  'Gevonden': 'Rasta',
+  'Kost werk': 'Reikia darbo',
+  'werk': 'darbo',
+  'nieuw': 'nauji',
+  'Geen eigenaar': 'Be atsakingo',
+  'geen eigenaar': 'be atsakingo',
+  'objecten in beeld': 'objektų matomų',
+  'Een overzicht draagt hoogstens acht soorten; meer is een inventarislijst en geen overzicht.':
+      'Apžvalga talpina daugiausiai aštuonias rūšis; daugiau yra inventoriaus sąrašas, o ne apžvalga.',
+  'Een deelgetal is groter dan het totaal van zijn soort. De slide toont het zoals ingevuld — controleer de bron.':
+      'Dalinis skaičius viršija savo rūšies bendrą skaičių. Skaidrė rodo jį taip, kaip įvesta — patikrinkite šaltinį.',
+  'De drie laatste zijn deelverzamelingen van het gevonden aantal; OciDeck telt niets zelf, de cijfers komen uit uw scan.':
+      'Paskutiniai trys yra rasto skaičiaus poaibiai; OciDeck pats nieko neskaičiuoja, skaičiai ateina iš jūsų nuskaitymo.',
+  'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
+      'Atakos paviršius pagal objekto rūšį: kiek jų yra, kiek reikia darbo, kas nauja ir kas niekam nepriklauso. Pastarasis dalykas paprastai ir yra pokalbis.',
   'Acties en besluiten': 'Veiksmai ir sprendimai',
   'Actie toevoegen': 'Pridėti veiksmą',
   'Actie verwijderen': 'Pašalinti veiksmą',

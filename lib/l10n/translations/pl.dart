@@ -1804,6 +1804,25 @@ const _dutchSourceAddPl = <String, String>{
       'numer rejestracyjny pracownika ochrony zdrowia (BIG)',
   'AGB-code': 'kod świadczeniodawcy (AGB)',
   'proces-verbaalnummer': 'numer protokołu policyjnego',
+  'Aanvalsoppervlak': 'Powierzchnia ataku',
+  'Soort toevoegen': 'Dodaj rodzaj',
+  'Soort verwijderen': 'Usuń rodzaj',
+  'Soort object': 'Rodzaj obiektu',
+  'Gevonden': 'Znalezione',
+  'Kost werk': 'Wymaga pracy',
+  'werk': 'praca',
+  'nieuw': 'nowe',
+  'Geen eigenaar': 'Bez właściciela',
+  'geen eigenaar': 'bez właściciela',
+  'objecten in beeld': 'obiektów w polu widzenia',
+  'Een overzicht draagt hoogstens acht soorten; meer is een inventarislijst en geen overzicht.':
+      'Zestawienie mieści najwyżej osiem rodzajów; więcej to lista inwentarzowa, a nie zestawienie.',
+  'Een deelgetal is groter dan het totaal van zijn soort. De slide toont het zoals ingevuld — controleer de bron.':
+      'Liczba cząstkowa przewyższa sumę swojego rodzaju. Slajd pokazuje ją tak, jak wpisano — sprawdź źródło.',
+  'De drie laatste zijn deelverzamelingen van het gevonden aantal; OciDeck telt niets zelf, de cijfers komen uit uw scan.':
+      'Trzy ostatnie to podzbiory znalezionej liczby; OciDeck sam niczego nie liczy, dane pochodzą z twojego skanu.',
+  'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
+      'Powierzchnia ataku według rodzaju obiektu: ile ich jest, ile wymaga pracy, co jest nowe i czego nikt nie posiada. To ostatnie zwykle jest rozmową.',
   'Acties en besluiten': 'Działania i decyzje',
   'Actie toevoegen': 'Dodaj działanie',
   'Actie verwijderen': 'Usuń działanie',

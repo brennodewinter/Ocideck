@@ -1808,6 +1808,25 @@ const _dutchSourceAddLa = <String, String>{
   'BIG-nummer van een zorgverlener': 'numerus curatoris valetudinis (BIG)',
   'AGB-code': 'codex curatoris valetudinis (AGB)',
   'proces-verbaalnummer': 'numerus actorum vigilum',
+  'Aanvalsoppervlak': 'Area impetus',
+  'Soort toevoegen': 'Genus addere',
+  'Soort verwijderen': 'Genus removere',
+  'Soort object': 'Genus rei',
+  'Gevonden': 'Inventa',
+  'Kost werk': 'Opus poscit',
+  'werk': 'opus',
+  'nieuw': 'nova',
+  'Geen eigenaar': 'Sine curatore',
+  'geen eigenaar': 'sine curatore',
+  'objecten in beeld': 'res in conspectu',
+  'Een overzicht draagt hoogstens acht soorten; meer is een inventarislijst en geen overzicht.':
+      'Conspectus ad summum octo genera fert; plura index rerum sunt, non conspectus.',
+  'Een deelgetal is groter dan het totaal van zijn soort. De slide toont het zoals ingevuld — controleer de bron.':
+      'Numerus partis totum generis sui superat. Tabula eum ut inscriptum ostendit — fontem inspice.',
+  'De drie laatste zijn deelverzamelingen van het gevonden aantal; OciDeck telt niets zelf, de cijfers komen uit uw scan.':
+      'Tria postrema partes sunt numeri inventi; OciDeck nihil ipse numerat, numeri ex perscrutatione tua veniunt.',
+  'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
+      'Area impetus per genus rei: quot sint, quot opus poscant, quid novum sit et quid nemo possideat. Illud postremum plerumque sermo est.',
   'Acties en besluiten': 'Acta et decreta',
   'Actie toevoegen': 'Actum addere',
   'Actie verwijderen': 'Actum removere',

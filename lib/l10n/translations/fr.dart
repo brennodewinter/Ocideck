@@ -750,6 +750,25 @@ const _dutchSourceAddFr = {
       'numéro d\'enregistrement d\'un professionnel de santé (BIG)',
   'AGB-code': 'code de prestataire de soins (AGB)',
   'proces-verbaalnummer': 'numéro de procès-verbal',
+  'Aanvalsoppervlak': 'Surface d\'attaque',
+  'Soort toevoegen': 'Ajouter un type',
+  'Soort verwijderen': 'Supprimer le type',
+  'Soort object': 'Type d\'objet',
+  'Gevonden': 'Trouvés',
+  'Kost werk': 'À traiter',
+  'werk': 'à traiter',
+  'nieuw': 'nouveaux',
+  'Geen eigenaar': 'Sans responsable',
+  'geen eigenaar': 'sans responsable',
+  'objecten in beeld': 'objets recensés',
+  'Een overzicht draagt hoogstens acht soorten; meer is een inventarislijst en geen overzicht.':
+      'Un aperçu porte au maximum huit types ; au-delà, c\'est une liste d\'inventaire et non un aperçu.',
+  'Een deelgetal is groter dan het totaal van zijn soort. De slide toont het zoals ingevuld — controleer de bron.':
+      'Un sous-total dépasse le total de son type. La diapositive l\'affiche tel quel — vérifiez la source.',
+  'De drie laatste zijn deelverzamelingen van het gevonden aantal; OciDeck telt niets zelf, de cijfers komen uit uw scan.':
+      'Les trois derniers sont des sous-ensembles du nombre trouvé ; OciDeck ne compte rien lui-même, les chiffres viennent de votre analyse.',
+  'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
+      'La surface d\'attaque par type d\'objet : combien il y en a, combien demandent du travail, ce qui est nouveau et ce que personne ne possède. C\'est ce dernier point qui fait la discussion.',
   'Acties en besluiten': 'Actions et décisions',
   'Actie toevoegen': 'Ajouter une action',
   'Actie verwijderen': 'Supprimer l\'action',

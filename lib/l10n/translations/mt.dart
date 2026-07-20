@@ -1814,6 +1814,25 @@ const _dutchSourceAddMt = <String, String>{
       'numru ta\' reġistrazzjoni ta\' professjonist tas-saħħa (BIG)',
   'AGB-code': 'kodiċi ta\' fornitur tal-kura tas-saħħa (AGB)',
   'proces-verbaalnummer': 'numru tar-rapport tal-pulizija',
+  'Aanvalsoppervlak': 'Wiċċ tal-attakk',
+  'Soort toevoegen': 'Żid tip',
+  'Soort verwijderen': 'Neħħi t-tip',
+  'Soort object': 'Tip ta\' oġġett',
+  'Gevonden': 'Misjuba',
+  'Kost werk': 'Jeħtieġ xogħol',
+  'werk': 'xogħol',
+  'nieuw': 'ġodda',
+  'Geen eigenaar': 'Bla responsabbli',
+  'geen eigenaar': 'bla responsabbli',
+  'objecten in beeld': 'oġġetti fil-vista',
+  'Een overzicht draagt hoogstens acht soorten; meer is een inventarislijst en geen overzicht.':
+      'Ħarsa ġenerali ġġorr mhux aktar minn tmien tipi; aktar hija lista ta\' inventarju u mhux ħarsa ġenerali.',
+  'Een deelgetal is groter dan het totaal van zijn soort. De slide toont het zoals ingevuld — controleer de bron.':
+      'Sub-total jaqbeż it-total tat-tip tiegħu. Is-slide turih kif iddaħħal — iċċekkja s-sors.',
+  'De drie laatste zijn deelverzamelingen van het gevonden aantal; OciDeck telt niets zelf, de cijfers komen uit uw scan.':
+      'L-aħħar tlieta huma sottoinsiemi tan-numru misjub; OciDeck ma jgħodd xejn waħdu, iċ-ċifri ġejjin mill-iskan tiegħek.',
+  'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
+      'Il-wiċċ tal-attakk skont it-tip ta\' oġġett: kemm hemm, kemm jeħtieġu xogħol, x\'inhu ġdid u x\'ma huwiex ta\' ħadd. Din tal-aħħar ġeneralment tkun il-konversazzjoni.',
   'Acties en besluiten': 'Azzjonijiet u deċiżjonijiet',
   'Actie toevoegen': 'Żid azzjoni',
   'Actie verwijderen': 'Neħħi l-azzjoni',

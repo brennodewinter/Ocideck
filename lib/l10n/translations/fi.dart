@@ -1793,6 +1793,25 @@ const _dutchSourceAddFi = <String, String>{
       'terveydenhuollon ammattilaisen rekisterinumero (BIG)',
   'AGB-code': 'terveydenhuollon palveluntuottajan koodi (AGB)',
   'proces-verbaalnummer': 'poliisin tutkintailmoituksen numero',
+  'Aanvalsoppervlak': 'Hyökkäyspinta',
+  'Soort toevoegen': 'Lisää tyyppi',
+  'Soort verwijderen': 'Poista tyyppi',
+  'Soort object': 'Kohteen tyyppi',
+  'Gevonden': 'Löydetty',
+  'Kost werk': 'Vaatii työtä',
+  'werk': 'työtä',
+  'nieuw': 'uudet',
+  'Geen eigenaar': 'Ei vastuuhenkilöä',
+  'geen eigenaar': 'ei vastuuhenkilöä',
+  'objecten in beeld': 'kohdetta näkyvissä',
+  'Een overzicht draagt hoogstens acht soorten; meer is een inventarislijst en geen overzicht.':
+      'Yleiskatsaus kantaa enintään kahdeksan tyyppiä; useampi on inventaarioluettelo eikä katsaus.',
+  'Een deelgetal is groter dan het totaal van zijn soort. De slide toont het zoals ingevuld — controleer de bron.':
+      'Osaluku ylittää tyyppinsä kokonaismäärän. Dia näyttää sen syötetyssä muodossa — tarkista lähde.',
+  'De drie laatste zijn deelverzamelingen van het gevonden aantal; OciDeck telt niets zelf, de cijfers komen uit uw scan.':
+      'Kolme viimeistä ovat löydetyn määrän osajoukkoja; OciDeck ei laske mitään itse, luvut tulevat skannauksestasi.',
+  'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
+      'Hyökkäyspinta kohdetyypeittäin: montako niitä on, montako vaatii työtä, mikä on uutta ja mitä kukaan ei omista. Viimeksi mainittu on yleensä se keskustelu.',
   'Acties en besluiten': 'Toimet ja päätökset',
   'Actie toevoegen': 'Lisää toimi',
   'Actie verwijderen': 'Poista toimi',

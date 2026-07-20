@@ -1783,6 +1783,25 @@ const _dutchSourceAddEt = <String, String>{
   'BIG-nummer van een zorgverlener': 'tervishoiutöötaja registrinumber (BIG)',
   'AGB-code': 'tervishoiuteenuse osutaja kood (AGB)',
   'proces-verbaalnummer': 'politsei protokolli number',
+  'Aanvalsoppervlak': 'Ründepind',
+  'Soort toevoegen': 'Lisa liik',
+  'Soort verwijderen': 'Eemalda liik',
+  'Soort object': 'Objekti liik',
+  'Gevonden': 'Leitud',
+  'Kost werk': 'Vajab tööd',
+  'werk': 'tööd',
+  'nieuw': 'uued',
+  'Geen eigenaar': 'Vastutajata',
+  'geen eigenaar': 'vastutajata',
+  'objecten in beeld': 'objekti vaateväljas',
+  'Een overzicht draagt hoogstens acht soorten; meer is een inventarislijst en geen overzicht.':
+      'Ülevaade kannab kõige rohkem kaheksat liiki; rohkem on inventarinimekiri, mitte ülevaade.',
+  'Een deelgetal is groter dan het totaal van zijn soort. De slide toont het zoals ingevuld — controleer de bron.':
+      'Osaarv ületab oma liigi kogusumma. Slaid näitab seda sisestatud kujul — kontrollige allikat.',
+  'De drie laatste zijn deelverzamelingen van het gevonden aantal; OciDeck telt niets zelf, de cijfers komen uit uw scan.':
+      'Viimased kolm on leitud arvu alamhulgad; OciDeck ise midagi ei loe, arvud tulevad teie skannist.',
+  'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
+      'Ründepind objektiliigi kaupa: kui palju neid on, kui palju vajab tööd, mis on uus ja mis ei kuulu kellelegi. Viimane on tavaliselt see vestlus.',
   'Acties en besluiten': 'Tegevused ja otsused',
   'Actie toevoegen': 'Lisa tegevus',
   'Actie verwijderen': 'Eemalda tegevus',

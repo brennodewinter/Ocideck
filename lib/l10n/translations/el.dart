@@ -1820,6 +1820,25 @@ const _dutchSourceAddEl = <String, String>{
       'αριθμός μητρώου επαγγελματία υγείας (BIG)',
   'AGB-code': 'κωδικός παρόχου υγείας (AGB)',
   'proces-verbaalnummer': 'αριθμός αστυνομικής έκθεσης',
+  'Aanvalsoppervlak': 'Επιφάνεια επίθεσης',
+  'Soort toevoegen': 'Προσθήκη είδους',
+  'Soort verwijderen': 'Αφαίρεση είδους',
+  'Soort object': 'Είδος αντικειμένου',
+  'Gevonden': 'Βρέθηκαν',
+  'Kost werk': 'Θέλει δουλειά',
+  'werk': 'δουλειά',
+  'nieuw': 'νέα',
+  'Geen eigenaar': 'Χωρίς υπεύθυνο',
+  'geen eigenaar': 'χωρίς υπεύθυνο',
+  'objecten in beeld': 'αντικείμενα σε προβολή',
+  'Een overzicht draagt hoogstens acht soorten; meer is een inventarislijst en geen overzicht.':
+      'Μια επισκόπηση σηκώνει το πολύ οκτώ είδη· περισσότερα είναι κατάλογος απογραφής, όχι επισκόπηση.',
+  'Een deelgetal is groter dan het totaal van zijn soort. De slide toont het zoals ingevuld — controleer de bron.':
+      'Ένα μερικό σύνολο ξεπερνά το σύνολο του είδους του. Η διαφάνεια το δείχνει όπως δόθηκε — ελέγξτε την πηγή.',
+  'De drie laatste zijn deelverzamelingen van het gevonden aantal; OciDeck telt niets zelf, de cijfers komen uit uw scan.':
+      'Τα τρία τελευταία είναι υποσύνολα του αριθμού που βρέθηκε· το OciDeck δεν μετρά τίποτα μόνο του, τα νούμερα έρχονται από τη σάρωσή σας.',
+  'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
+      'Η επιφάνεια επίθεσης ανά είδος αντικειμένου: πόσα υπάρχουν, πόσα θέλουν δουλειά, τι είναι νέο και τι δεν ανήκει σε κανέναν. Το τελευταίο είναι συνήθως η συζήτηση.',
   'Acties en besluiten': 'Ενέργειες και αποφάσεις',
   'Actie toevoegen': 'Προσθήκη ενέργειας',
   'Actie verwijderen': 'Αφαίρεση ενέργειας',
