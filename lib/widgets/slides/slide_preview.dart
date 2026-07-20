@@ -56,6 +56,7 @@ import '../../utils/lru_cache.dart';
 import '../../utils/net_guard.dart';
 import '../../utils/markdown_paste_cleanup.dart';
 import '../../utils/project_path.dart';
+import '../../utils/title_contrast.dart' show kTitleOverlayAlpha;
 import '../document_signature_view.dart' show decodeEmbeddedSignatureImage;
 import '../privacy_badge.dart' show privacyKatSvg;
 import 'inline_markdown.dart';
@@ -598,6 +599,7 @@ class SlidePreviewWidget extends StatelessWidget {
         return _SectionPreview(
           slide: slide,
           w: w,
+          projectPath: projectPath,
           font: fontFamily,
           profile: themeProfile,
         );

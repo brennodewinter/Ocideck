@@ -23,6 +23,7 @@ import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/privacy/image_face_scan.dart';
 import 'package:ocideck/state/deck_provider.dart';
 import 'package:ocideck/state/image_privacy_provider.dart';
+import 'package:ocideck/state/settings_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class _AlwaysOneFace implements ImageFaceScanner {
@@ -144,5 +145,46 @@ void main() {
 
     final issues = await container.read(imagePrivacyIssuesProvider.future);
     expect(issues, hasLength(1));
+  });
+
+  // De ruwe scan is de tegenhanger: die houdt de bevinding op een afgehandelde
+  // dia juist vást, zodat de badge grijs kan worden in plaats van te verdwijnen.
+  // Verdween ze ook uit de ruwe uitslag, dan haalde één dubbelklik (accepteren)
+  // elke aanwijzing weg dat er ooit iets gevonden was.
+  test('de ruwe scan houdt een afgehandelde dia vast', () async {
+    for (final d in [
+      PrivacyDisposition.accept,
+      PrivacyDisposition.shield,
+      PrivacyDisposition.redact,
+    ]) {
+      final container = _container(
+        Deck(
+          slides: [_imageSlide(privacy: d)],
+          title: 'proef',
+        ),
+      );
+      addTearDown(container.dispose);
+
+      final raw = await container.read(imagePrivacyRawIssuesProvider.future);
+      expect(raw, hasLength(1), reason: d.key);
+    }
+  });
+
+  // "Deze regel nooit meer melden" schrijft image.face in de uitgezette regels.
+  // Zonder dat de beeldcontrole die lijst eert, deed die knop niets — de klacht.
+  test('image.face in disabledRules leegt de ruwe beeldscan', () async {
+    SharedPreferences.setMockInitialValues({
+      'privacyDisabledRules': ['image.face'],
+    });
+    final container = _container(Deck(slides: [_imageSlide()], title: 'proef'));
+    addTearDown(container.dispose);
+    // De settings laden asynchroon. Trek die load op gang en laat hem settelen
+    // vóórdat de beeldprovider voor het eerst leest: zou de provider halverwege
+    // de load rekenen, dan maakt de settling hem ongeldig terwijl hij nog laadt.
+    container.read(settingsProvider);
+    await Future<void>.delayed(const Duration(milliseconds: 50));
+
+    final raw = await container.read(imagePrivacyRawIssuesProvider.future);
+    expect(raw, isEmpty);
   });
 }

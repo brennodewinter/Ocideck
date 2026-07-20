@@ -515,6 +515,7 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
       deckQualityProvider.overrideWith(computeDeckQuality),
       imageContrastIssuesProvider.overrideWith(computeImageContrastIssues),
       privacyRawScanProvider.overrideWith(computePrivacyRawScan),
+      imagePrivacyRawIssuesProvider.overrideWith(computeImagePrivacyRawIssues),
       imagePrivacyIssuesProvider.overrideWith(computeImagePrivacyIssues),
       privacyScanProvider.overrideWith(computePrivacyScan),
       privacyQualityIssuesProvider.overrideWith(computePrivacyQualityIssues),

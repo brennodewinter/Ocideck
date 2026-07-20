@@ -572,6 +572,7 @@ class SlideQualityAnalyzer {
           label: 'Tweede afbeelding',
         );
       case SlideType.title:
+      case SlideType.section:
       case SlideType.quote:
         missingFile(
           path: slide.imagePath,
@@ -588,7 +589,6 @@ class SlideQualityAnalyzer {
         );
       case SlideType.bullets:
       case SlideType.twoBullets:
-      case SlideType.section:
       case SlideType.table:
       case SlideType.freeMarkdown:
       case SlideType.code:

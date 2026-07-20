@@ -118,4 +118,33 @@ void main() {
       '#111827',
     );
   });
+
+  test(
+    'a tussentitel washes with its own background colour, not the title\'s',
+    () {
+      // Twee wassen die tegengesteld werken: de titelwas is wit (zinloos om een
+      // fel beeld te temperen), de sectiewas is zwart (dempt juist goed). Boven
+      // hetzelfde felle beeld met witte tekst en de waas aan faalt de titeldia
+      // dus, maar slaagt de tussentitel — precies omdat de contrastcontrole nu
+      // haar eigen achtergrondkleur pakt.
+      const split = ThemeProfile(
+        titleTextColor: '#FFFFFF',
+        titleBackgroundColor: '#FFFFFF',
+        sectionBackgroundColor: '#000000',
+      );
+      const bright = Color(0xFFF2F2F2);
+      final titleEval = evaluateTitleContrast(
+        avgImage: bright,
+        theme: split,
+        slide: Slide.create(SlideType.title).copyWith(title: 'Kop'),
+      );
+      final sectionEval = evaluateTitleContrast(
+        avgImage: bright,
+        theme: split,
+        slide: Slide.create(SlideType.section).copyWith(title: 'Kop'),
+      );
+      expect(titleEval.passes, isFalse);
+      expect(sectionEval.passes, isTrue);
+    },
+  );
 }

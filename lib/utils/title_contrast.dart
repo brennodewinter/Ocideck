@@ -57,9 +57,20 @@ Color _effectiveTextColor(ThemeProfile theme, Slide slide) {
   return parseHexColor(hex) ?? Colors.white;
 }
 
-Color _background(Color avgImage, ThemeProfile theme, bool overlay) {
+Color _background(
+  Color avgImage,
+  ThemeProfile theme,
+  Slide slide,
+  bool overlay,
+) {
   if (!overlay) return avgImage;
-  final wash = parseHexColor(theme.titleBackgroundColor) ?? AppTheme.navy;
+  // De waas neemt de kleur van de dia zelf: de titeldia wast met haar
+  // titelachtergrond, de tussentitel met de hare. Anders zou het contrastoordeel
+  // rekenen met een kleur die niet op het scherm staat.
+  final washHex = slide.type == SlideType.section
+      ? theme.sectionBackgroundColor
+      : theme.titleBackgroundColor;
+  final wash = parseHexColor(washHex) ?? AppTheme.navy;
   return Color.alphaBlend(wash.withValues(alpha: kTitleOverlayAlpha), avgImage);
 }
 
@@ -108,7 +119,7 @@ TitleContrastEval evaluateTitleContrast({
 
   double ratioFor(Color textColor, bool overlay) => _bindingRatio(
     textColor,
-    _background(avgImage, theme, overlay),
+    _background(avgImage, theme, slide, overlay),
     hasTitle: hasTitle,
     hasSubtitle: hasSubtitle,
   );

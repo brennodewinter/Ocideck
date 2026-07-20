@@ -100,6 +100,8 @@ final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
         key: c._key,
         slide: c.slide,
         onUpdate: c.onUpdate,
+        searchPaths: c.searchPaths,
+        captionBasePath: c.captionBasePath,
         nestedInScrollView: c.nestedInScrollView,
       ),
       SlideType.bullets: (c) => BulletsEditor(

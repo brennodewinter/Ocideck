@@ -22,6 +22,8 @@ import '../../models/slide_quality.dart';
 import '../../services/privacy/privacy_quality_bridge.dart';
 import '../../state/deck_provider.dart';
 import '../../state/deck_quality_provider.dart';
+import '../../state/image_contrast_provider.dart';
+import '../../state/image_privacy_provider.dart';
 import '../../state/privacy_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../theme/app_theme.dart';
@@ -199,7 +201,7 @@ List<SlideQualityIssue> slideBadgeIssues(
   if (family == SlideBadgeFamily.privacy) {
     // Ook de onzekere treffers: die krijgen een eigen badge, dus horen ze ook
     // in het lijstje eronder te staan.
-    return privacyIssuesFrom(
+    final text = privacyIssuesFrom(
       PrivacyScanResult(
         ref.read(privacyRawScanProvider).forSlide(slideIndex).toList(),
       ),
@@ -207,12 +209,35 @@ List<SlideQualityIssue> slideBadgeIssues(
       // fout meldt — over dezelfde bevinding.
       strictSeverity: ref.read(settingsProvider).privacyStrictSeverity,
     );
+    // En de beeldtreffers, uit dezelfde ruwe uitslag die de badge kleurt. De
+    // badge combineert tekst én beeld; las de popover alleen de tekstscan, dan
+    // was hij van een dia met alléén een gezichtstreffer leeg — "geen meldingen
+    // meer op deze slide" — terwijl de badge er wél stond. Die tegenstrijdigheid
+    // maakt de melding ongeloofwaardig, en was precies de klacht.
+    final image =
+        (ref.read(imagePrivacyRawIssuesProvider).value ??
+                const <SlideQualityIssue>[])
+            .where((i) => i.slideIndex == slideIndex)
+            .toList();
+    return [...text, ...image];
   }
-  return ref
+  final sync = ref
       .read(deckQualityRawProvider)
       .forSlide(slideIndex)
-      .where((i) => i.severity != MarkdownValidationSeverity.informational)
-      .toList();
+      .where((i) => i.severity != MarkdownValidationSeverity.informational);
+  // Ook de titel-over-beeld-contrastmeldingen, uit dezelfde asynchrone provider
+  // die de badge kleurt. Zonder deze regel was de popover van een dia met alléén
+  // een contrastprobleem leeg, terwijl het overzicht het wél toont en de badge
+  // er wél staat — dezelfde tegenstrijdigheid als bij de gezichtstreffers.
+  final contrast =
+      (ref.read(imageContrastIssuesProvider).value ??
+              const <SlideQualityIssue>[])
+          .where(
+            (i) =>
+                i.slideIndex == slideIndex &&
+                i.severity != MarkdownValidationSeverity.informational,
+          );
+  return [...sync, ...contrast];
 }
 
 /// Zet de acceptatie van deze slide aan of uit.

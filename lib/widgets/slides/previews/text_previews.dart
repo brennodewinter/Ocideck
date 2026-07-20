@@ -199,71 +199,153 @@ class _TitlePreview extends StatelessWidget {
 class _SectionPreview extends StatelessWidget {
   final Slide slide;
   final double w;
+  final String? projectPath;
   final String font;
   final ThemeProfile profile;
 
   const _SectionPreview({
     required this.slide,
     required this.w,
+    this.projectPath,
     required this.font,
     required this.profile,
   });
 
+  Color get _titleColor => _hexColor(
+    slide.titleTextColorOverride.isNotEmpty
+        ? slide.titleTextColorOverride
+        : profile.titleTextColor,
+  );
+
+  /// De gecentreerde tussenkop met eventuele ondertitel — de eigenheid van de
+  /// tussentitel, of ze nu op een effen kleur staat of over een afbeelding. De
+  /// tekstkleur volgt dezelfde override als bij de titeldia, zodat een lichte
+  /// kop op een donkere foto kan (en andersom).
+  Widget _contentColumn(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (slide.title.isNotEmpty)
+          _md(
+            context,
+            slide.title,
+            _applyFont(
+              font,
+              TextStyle(
+                color: _titleColor,
+                fontSize: w * 0.05,
+                fontWeight: FontWeight.bold,
+                height: 1.2,
+              ),
+            ),
+            linkColor: _hexColor(profile.accentColor),
+          ),
+        if (slide.subtitle.isNotEmpty) ...[
+          SizedBox(height: w * 0.015),
+          _md(
+            context,
+            slide.subtitle,
+            _applyFont(
+              font,
+              TextStyle(
+                color: _titleColor.withValues(alpha: 0.72),
+                fontSize: w * 0.025,
+              ),
+            ),
+            linkColor: _hexColor(profile.accentColor),
+          ),
+        ],
+      ],
+    );
+  }
+
+  /// De kop gecentreerd in het hele vlak — schaalt omlaag, snijdt nooit af.
+  Widget _centred(BuildContext context, double pad) => FittedBox(
+    fit: BoxFit.scaleDown,
+    alignment: Alignment.center,
+    child: SizedBox(
+      width: w,
+      child: Padding(
+        padding: EdgeInsets.all(pad),
+        child: _contentColumn(context),
+      ),
+    ),
+  );
+
   @override
   Widget build(BuildContext context) {
     final pad = w * 0.08;
-    return Container(
-      color: _hexColor(profile.sectionBackgroundColor),
-      child: SizedBox.expand(
-        child: FittedBox(
-          fit: BoxFit.scaleDown,
-          alignment: Alignment.center,
-          child: SizedBox(
-            width: w,
-            child: Padding(
-              padding: EdgeInsets.all(pad),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
+    final sectionBg = _hexColor(profile.sectionBackgroundColor);
+    final hasBg = slide.imagePath.isNotEmpty;
+
+    // Geen afbeelding: de vertrouwde effen tussentitel.
+    if (!hasBg) {
+      return Container(
+        color: sectionBg,
+        child: SizedBox.expand(child: _centred(context, pad)),
+      );
+    }
+
+    // "Afbeelding vult hele slide" uit (imageSize != 0): beeld in de bovenzone,
+    // de kop in een band eronder — precies zoals de titeldia, zodat de tekst
+    // nooit over de foto valt.
+    if (slide.imageSize != 0) {
+      return Container(
+        color: sectionBg,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              child: Stack(
+                fit: StackFit.expand,
                 children: [
-                  if (slide.title.isNotEmpty)
-                    _md(
-                      context,
-                      slide.title,
-                      _applyFont(
-                        font,
-                        TextStyle(
-                          color: _hexColor(profile.titleTextColor),
-                          fontSize: w * 0.05,
-                          fontWeight: FontWeight.bold,
-                          height: 1.2,
-                        ),
-                      ),
-                      linkColor: _hexColor(profile.accentColor),
+                  _zoomedImage(
+                    context,
+                    slide.imagePath,
+                    projectPath,
+                    slide.imageSize,
+                    bgColor: sectionBg,
+                    alignment: focalAlignment(
+                      slide.imageFocalX,
+                      slide.imageFocalY,
                     ),
-                  if (slide.subtitle.isNotEmpty) ...[
-                    SizedBox(height: w * 0.015),
-                    _md(
-                      context,
-                      slide.subtitle,
-                      _applyFont(
-                        font,
-                        TextStyle(
-                          color: _hexColor(
-                            profile.titleTextColor,
-                          ).withValues(alpha: 0.72),
-                          fontSize: w * 0.025,
-                        ),
-                      ),
-                      linkColor: _hexColor(profile.accentColor),
-                    ),
-                  ],
+                  ),
+                  _captionOverlay(context, slide.imageCaption, w),
                 ],
               ),
             ),
-          ),
+            Container(
+              width: double.infinity,
+              color: sectionBg,
+              padding: EdgeInsets.fromLTRB(pad, pad * 0.7, pad, pad * 0.7),
+              child: _contentColumn(context),
+            ),
+          ],
         ),
-      ),
+      );
+    }
+
+    // Schermvullend beeld: de kop gecentreerd over een egale waas. Vlak en niet
+    // richtinggevoelig zoals de titeldia's scrim, want tussentiteltekst staat in
+    // het midden — en een egale waas op [kTitleOverlayAlpha] is precies wat de
+    // contrastcontrole aanneemt, zodat haar oordeel klopt met wat er staat.
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        _zoomedImage(
+          context,
+          slide.imagePath,
+          projectPath,
+          slide.imageSize,
+          bgColor: sectionBg,
+          alignment: focalAlignment(slide.imageFocalX, slide.imageFocalY),
+        ),
+        if (slide.titleImageOverlay)
+          ColoredBox(color: sectionBg.withValues(alpha: kTitleOverlayAlpha)),
+        _centred(context, pad),
+        _captionOverlay(context, slide.imageCaption, w),
+      ],
     );
   }
 }

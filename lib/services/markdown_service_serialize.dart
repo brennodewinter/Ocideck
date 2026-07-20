@@ -50,23 +50,28 @@ extension _MarkdownSerialize on MarkdownService {
     }
   }
 
-  void _writeTitleSlide(StringBuffer buf, Slide slide) {
-    // Background image before headings so Marp treats it as a bg directive
-    if (slide.imagePath.isNotEmpty) {
-      final bgOptions = [
-        'bg',
-        if (slide.imageSize > 0) '${slide.imageSize}%',
-        if (slide.titleImageOverlay) 'opacity:.45',
-      ].join(' ');
-      buf.writeln('![$bgOptions](${slide.imagePath})');
-      if (!slide.titleImageOverlay) {
-        buf.writeln('<!-- ocideck_title_image_overlay: false -->');
-      }
-      _writeImageFocus(buf, slide);
-      _writeImageAlt(buf, slide);
-      _writeImageCaption(buf, slide.imageCaption);
-      buf.writeln();
+  /// The optional full-slide background image, emitted before the headings so
+  /// Marp reads it as a `bg` directive. Shared by the title and section dia's —
+  /// a tussentitel is a heading slide too, and carries the same fields.
+  void _writeSlideBackground(StringBuffer buf, Slide slide) {
+    if (slide.imagePath.isEmpty) return;
+    final bgOptions = [
+      'bg',
+      if (slide.imageSize > 0) '${slide.imageSize}%',
+      if (slide.titleImageOverlay) 'opacity:.45',
+    ].join(' ');
+    buf.writeln('![$bgOptions](${slide.imagePath})');
+    if (!slide.titleImageOverlay) {
+      buf.writeln('<!-- ocideck_title_image_overlay: false -->');
     }
+    _writeImageFocus(buf, slide);
+    _writeImageAlt(buf, slide);
+    _writeImageCaption(buf, slide.imageCaption);
+    buf.writeln();
+  }
+
+  void _writeTitleSlide(StringBuffer buf, Slide slide) {
+    _writeSlideBackground(buf, slide);
     if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
     if (slide.subtitle.isNotEmpty) buf.writeln('## ${slide.subtitle}');
     if (slide.titleTextColorOverride.isNotEmpty) {
@@ -77,7 +82,13 @@ extension _MarkdownSerialize on MarkdownService {
   }
 
   void _writeSectionSlide(StringBuffer buf, Slide slide) {
+    _writeSlideBackground(buf, slide);
     if (slide.title.isNotEmpty) buf.writeln('# ${slide.title}');
+    if (slide.titleTextColorOverride.isNotEmpty) {
+      buf.writeln(
+        '<!-- ocideck_title_text_color: ${slide.titleTextColorOverride} -->',
+      );
+    }
     if (slide.subtitle.isNotEmpty) {
       buf.writeln();
       buf.writeln(slide.subtitle);
