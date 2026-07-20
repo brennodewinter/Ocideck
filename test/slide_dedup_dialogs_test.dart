@@ -116,7 +116,7 @@ void main() {
   void showFinder(BuildContext context) => SlideFinderDialog.show(
     context,
     fileService: _fileService(dir.path),
-    initialDirectory: dir.path,
+    roots: [LibraryFolder(name: 'Test', path: dir.path)],
     onAdd: (Slide _) {},
   );
 
@@ -158,6 +158,40 @@ void main() {
     // The bullets differ (In scope vs Out of scope), so the list names them.
     expect(find.text('Opsomming'), findsOneWidget);
     expect(find.textContaining('Out of scope'), findsWidgets);
+  });
+
+  testWidgets('Slide zoeken doorzoekt álle aangewezen bronmappen', (
+    tester,
+  ) async {
+    // Een tweede bronmap, los van de map van het "huidige" deck, met een slide
+    // die alleen dáár een unieke term draagt.
+    final other = Directory.systemTemp.createTempSync('dedup_other_');
+    addTearDown(() {
+      if (other.existsSync()) other.deleteSync(recursive: true);
+    });
+    File('${other.path}/deck_c.md').writeAsStringSync(
+      '---\nmarp: true\ntheme: ocideck\ntitle: Deck C\n---\n\n'
+      '# Sleutelbeheer\n\n- Uniek in de andere bron\n',
+    );
+
+    await _openAndSearch(
+      tester,
+      show: (context) => SlideFinderDialog.show(
+        context,
+        fileService: _fileService(dir.path),
+        roots: [
+          LibraryFolder(name: 'Deck', path: dir.path),
+          LibraryFolder(name: 'Andere bron', path: other.path),
+        ],
+        onAdd: (Slide _) {},
+      ),
+      query: 'Sleutelbeheer',
+    );
+
+    // De slide staat níet in de map van het huidige deck (dir) maar in de
+    // tweede bronmap; hij hoort nu tóch tussen de resultaten te staan.
+    expect(find.textContaining('unieke slide'), findsOneWidget);
+    expect(find.textContaining('Deck C'), findsWidgets);
   });
 
   testWidgets('Slides importeren ontdubbelt identieke slides over decks heen', (

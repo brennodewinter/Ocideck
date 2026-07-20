@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:path/path.dart' as p;
 import '../../models/deck.dart';
+import '../../models/library_folder.dart';
 import '../../models/slide.dart';
 import '../../platform/platform_features.dart';
 import '../../state/deck_provider.dart';
@@ -356,6 +358,28 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     }
   }
 
+  /// De zoekwortels voor 'Slide zoeken': álle geconfigureerde bibliotheken plus
+  /// de eigen map van het open deck (mocht die buiten elke bibliotheek liggen).
+  /// Zo doorzoekt de zoekactie elke aangewezen bron, niet alleen de map waarin
+  /// het huidige deck toevallig staat.
+  List<LibraryFolder> _slideSearchRoots(
+    String? deckDir,
+    List<LibraryFolder> libraries,
+  ) {
+    final roots = <LibraryFolder>[...libraries];
+    if (deckDir != null && deckDir.isNotEmpty) {
+      final norm = p.normalize(deckDir);
+      final covered = libraries.any((l) => p.normalize(l.path) == norm);
+      if (!covered) {
+        roots.insert(
+          0,
+          LibraryFolder(name: p.basename(deckDir), path: deckDir),
+        );
+      }
+    }
+    return roots;
+  }
+
   Future<void> _findSlides(
     BuildContext context,
     WidgetRef ref,
@@ -363,12 +387,12 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
   ) async {
     final settings = ref.read(settingsProvider);
     final deck = deckState.deck;
-    final initialDir = deck?.projectPath ?? settings.homeDirectory;
+    final roots = _slideSearchRoots(deck?.projectPath, settings.libraries);
 
     await SlideFinderDialog.show(
       context,
       fileService: ref.read(fileServiceProvider),
-      initialDirectory: initialDir,
+      roots: roots,
       excludePath: deckState.filePath,
       onAdd: (slide) {
         // Voeg in ná de huidige slide (niet achteraan). Doordat we de nieuwe
