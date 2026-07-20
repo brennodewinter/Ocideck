@@ -1799,6 +1799,24 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Scorecard': 'Fișă de indicatori',
+  'Cijfer toevoegen': 'Adaugă indicator',
+  'Cijfer verwijderen': 'Elimină indicatorul',
+  'Richting': 'Direcție',
+  'ongewijzigd': 'neschimbat',
+  'Lager is beter': 'Mai puțin este mai bine',
+  'Hoger is beter': 'Mai mult este mai bine',
+  'Neutraal': 'Neutru',
+  'Nu': 'Acum',
+  'Vorige rapportage': 'Raportul anterior',
+  'Een scorecard toont hoogstens vijf cijfers; meer leest niet meer als een oordeel.':
+      'O fișă de indicatori arată cel mult cinci cifre; mai multe nu se mai citesc ca o judecată.',
+  'Laat de vorige rapportage leeg als er nog geen meting was; de slide toont dan geen verandering.':
+      'Lăsați raportul anterior gol dacă nu a existat încă o măsurătoare; slide-ul nu va arăta nicio modificare.',
+  'Bepaalt of een stijging groen of rood kleurt. De pijl volgt altijd de cijfers.':
+      'Stabilește dacă o creștere este verde sau roșie. Săgeata urmează întotdeauna cifrele.',
+  'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
+      'Câteva cifre-cheie cu cifra din raportul anterior alături, astfel încât schimbarea să spună povestea. Indicați pentru fiecare dacă o creștere este o veste bună sau rea.',
   'Medicare-nummer — een zorggegeven': 'număr Medicare — dată de sănătate',
   'bedrijfsnummer': 'număr de societate',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

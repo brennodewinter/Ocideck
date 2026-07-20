@@ -8,6 +8,7 @@ import 'finding_spec.dart';
 import 'findings_summary_spec.dart';
 import 'question.dart';
 import 'scope_matrix_spec.dart';
+import 'scorecard_spec.dart';
 import 'settings.dart';
 import 'timeline.dart';
 
@@ -30,6 +31,7 @@ enum SlideType {
   cockpit,
   question,
   timeline,
+  scorecard,
   // Informatieveiligheid-module (pentestrapportage, PENTEST_MIAUW §4). Elk type
   // heeft een eigen gestructureerde editor, preview en serialiser; inhoud én
   // type round-trippen verliesvrij onder hun eigen `_class`-token. `signOff`
@@ -181,6 +183,10 @@ const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
   SlideType.cockpit: SlideTypeMeta(label: 'Cockpit', marpClass: 'cockpit'),
   SlideType.question: SlideTypeMeta(label: 'Vraag', marpClass: 'question'),
   SlideType.timeline: SlideTypeMeta(label: 'Tijdlijn', marpClass: 'timeline'),
+  SlideType.scorecard: SlideTypeMeta(
+    label: 'Scorecard',
+    marpClass: 'scorecard',
+  ),
   // Informatieveiligheid-module — categorie [SlideCategory.informatieveiligheid],
   // waardoor de kiezer automatisch een tabblad toont (P0-PICK). marpClass-tokens
   // volgen PENTEST_MIAUW §4.
@@ -503,6 +509,10 @@ class Slide {
           // Start met de vaste kop + één nulrij per ernstband; de editor vult ze
           // (of vernieuwt ze uit het deck).
           ? const FindingsSummarySpec().toTableRows()
+          : type == SlideType.scorecard
+          // Alleen de vaste kop. Lege cijferregels horen niet op schijf — de
+          // editor deelt ze zelf uit zolang er nog niets is ingevuld.
+          ? const ScorecardSpec().toTableRows()
           : const [],
       customMarkdown: type == SlideType.cockpit
           ? CockpitSpec.pentestPreset().toBlock()

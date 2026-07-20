@@ -1811,6 +1811,24 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Scorecard': 'Painel de indicadores',
+  'Cijfer toevoegen': 'Adicionar indicador',
+  'Cijfer verwijderen': 'Remover indicador',
+  'Richting': 'Direção',
+  'ongewijzigd': 'sem alteração',
+  'Lager is beter': 'Menor é melhor',
+  'Hoger is beter': 'Maior é melhor',
+  'Neutraal': 'Neutro',
+  'Nu': 'Agora',
+  'Vorige rapportage': 'Relatório anterior',
+  'Een scorecard toont hoogstens vijf cijfers; meer leest niet meer als een oordeel.':
+      'Um painel de indicadores mostra no máximo cinco números; mais do que isso deixa de se ler como um juízo.',
+  'Laat de vorige rapportage leeg als er nog geen meting was; de slide toont dan geen verandering.':
+      'Deixe o relatório anterior vazio se ainda não havia medição; o slide não mostrará qualquer alteração.',
+  'Bepaalt of een stijging groen of rood kleurt. De pijl volgt altijd de cijfers.':
+      'Determina se uma subida fica verde ou vermelha. A seta segue sempre os números.',
+  'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
+      'Alguns números-chave com o número do relatório anterior ao lado, para que seja a variação a contar a história. Indique em cada um se uma subida é boa ou má notícia.',
   'Medicare-nummer — een zorggegeven': 'número Medicare — dado de saúde',
   'bedrijfsnummer': 'número de sociedade',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

@@ -920,6 +920,24 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Scorecard': 'Scorecard',
+  'Cijfer toevoegen': 'Add figure',
+  'Cijfer verwijderen': 'Remove figure',
+  'Richting': 'Direction',
+  'ongewijzigd': 'unchanged',
+  'Lager is beter': 'Lower is better',
+  'Hoger is beter': 'Higher is better',
+  'Neutraal': 'Neutral',
+  'Nu': 'Now',
+  'Vorige rapportage': 'Previous report',
+  'Een scorecard toont hoogstens vijf cijfers; meer leest niet meer als een oordeel.':
+      'A scorecard shows at most five figures; more stops reading as a verdict.',
+  'Laat de vorige rapportage leeg als er nog geen meting was; de slide toont dan geen verandering.':
+      'Leave the previous report empty when there was no earlier measurement; the slide then shows no change.',
+  'Bepaalt of een stijging groen of rood kleurt. De pijl volgt altijd de cijfers.':
+      'Decides whether a rise is coloured green or red. The arrow always follows the figures.',
+  'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
+      'A few headline figures with the previous report\'s figure beside them, so the change tells the story. Say for each whether a rise is good or bad news.',
   'Medicare-nummer — een zorggegeven': 'Medicare number — health data',
   'bedrijfsnummer': 'company number',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

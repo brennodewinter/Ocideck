@@ -16,6 +16,7 @@ import 'image_slide_editor.dart';
 import 'question_editor.dart';
 import 'quote_editor.dart';
 import 'scope_matrix_editor.dart';
+import 'scorecard_editor.dart';
 import 'section_editor.dart';
 import 'signoff_editor.dart';
 import 'table_editor.dart';
@@ -207,6 +208,12 @@ final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
         slide: c.slide,
         onUpdate: c.onUpdate,
         themeAnimationDurationMs: c.themeAnimationDurationMs,
+        nestedInScrollView: c.nestedInScrollView,
+      ),
+      SlideType.scorecard: (c) => ScorecardEditor(
+        key: c._key,
+        slide: c.slide,
+        onUpdate: c.onUpdate,
         nestedInScrollView: c.nestedInScrollView,
       ),
       // Informatieveiligheid: all five types now have structured editors

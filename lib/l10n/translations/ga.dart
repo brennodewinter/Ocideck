@@ -1817,6 +1817,24 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Scorecard': 'Cárta scóir',
+  'Cijfer toevoegen': 'Cuir figiúr leis',
+  'Cijfer verwijderen': 'Bain an figiúr',
+  'Richting': 'Treo',
+  'ongewijzigd': 'gan athrú',
+  'Lager is beter': 'Is fearr níos ísle',
+  'Hoger is beter': 'Is fearr níos airde',
+  'Neutraal': 'Neodrach',
+  'Nu': 'Anois',
+  'Vorige rapportage': 'An tuairisc roimhe seo',
+  'Een scorecard toont hoogstens vijf cijfers; meer leest niet meer als een oordeel.':
+      'Taispeánann cárta scóir cúig fhigiúr ar a mhéad; níos mó ná sin, ní léitear é mar bhreithiúnas.',
+  'Laat de vorige rapportage leeg als er nog geen meting was; de slide toont dan geen verandering.':
+      'Fág an tuairisc roimhe seo folamh mura raibh tomhas ann fós; ní thaispeánfaidh an sleamhnán athrú ansin.',
+  'Bepaalt of een stijging groen of rood kleurt. De pijl volgt altijd de cijfers.':
+      'Cinneann sé an mbeidh ardú glas nó dearg. Leanann an tsaighead na figiúirí i gcónaí.',
+  'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
+      'Cúpla príomhfhigiúr le figiúr na tuairisce roimhe seo lena dtaobh, ionas gurb é an t-athrú a insíonn an scéal. Luaigh do gach ceann acu an dea-scéal nó drochscéal é ardú.',
   'Medicare-nummer — een zorggegeven': 'uimhir Medicare — sonra sláinte',
   'bedrijfsnummer': 'uimhir chuideachta',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

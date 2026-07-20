@@ -1756,6 +1756,24 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Scorecard': 'mI\'mey nav',
+  'Cijfer toevoegen': 'mI\' chel',
+  'Cijfer verwijderen': 'mI\' teq',
+  'Richting': 'He',
+  'ongewijzigd': 'choHbe\'',
+  'Lager is beter': 'puS \'e\' QaQ',
+  'Hoger is beter': 'law\' \'e\' QaQ',
+  'Neutraal': 'QaQbe\' qabbe\'',
+  'Nu': 'DaH',
+  'Vorige rapportage': 'wa\'DIch ja\'chuq',
+  'Een scorecard toont hoogstens vijf cijfers; meer leest niet meer als een oordeel.':
+      'vagh mI\' neH \'ang nav; law\'qu\'chugh, qech \'oHbe\'.',
+  'Laat de vorige rapportage leeg als er nog geen meting was; de slide toont dan geen verandering.':
+      'juHHom wa\'DIch juSbe\'chugh, chIm yIchaw\'; vaj choH \'angbe\' nav.',
+  'Bepaalt of een stijging groen of rood kleurt. De pijl volgt altijd de cijfers.':
+      'chelchugh mI\', SuD ghap Doq \'e\' wIv. reH mI\'mey tlha\' naQ.',
+  'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
+      'mI\'mey potlh puS, retlh wa\'DIch mI\'; vaj choH ja\' lut. mI\' Hoch, chelchugh QaQ ghap qab \'e\' yIper.',
   'Medicare-nummer — een zorggegeven': 'Medicare mI’ — pIvlob De’',
   'bedrijfsnummer': 'yaHmey mI’',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

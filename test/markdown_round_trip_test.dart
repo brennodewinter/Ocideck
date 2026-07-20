@@ -5,6 +5,7 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/document_signature.dart';
 import 'package:ocideck/models/finding_spec.dart';
 import 'package:ocideck/models/question.dart';
+import 'package:ocideck/models/scorecard_spec.dart';
 import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/timeline.dart';
@@ -1766,6 +1767,72 @@ void main() {
         expect(out.signature?.name, 'Jan Jansen');
       },
     );
+  });
+
+  group('scorecard slide round-trip', () {
+    Slide scorecard(List<ScorecardEntry> entries, {String title = 'Stand'}) {
+      final spec = ScorecardSpec(title: title, entries: entries);
+      return Slide.create(
+        SlideType.scorecard,
+      ).copyWith(title: spec.title, tableRows: spec.toTableRows());
+    }
+
+    test('the class token is written and read back', () {
+      final service = MarkdownService();
+      final markdown = service.generateDeck(
+        Deck(
+          title: 'Demo',
+          slides: [
+            scorecard(const [
+              ScorecardEntry(label: 'Open', value: 96, previous: 120),
+            ]),
+          ],
+        ),
+      );
+      expect(markdown, contains('<!-- _class: scorecard -->'));
+      // Storage is a plain Markdown table, so a generator can write one and a
+      // human can read it without the app.
+      expect(markdown, contains('| Label | Value | Previous | Unit |'));
+    });
+
+    test('every field survives the trip', () {
+      final out = _roundTrip(
+        scorecard(const [
+          ScorecardEntry(
+            label: 'Gemiddeld openstaand',
+            value: 62.5,
+            previous: 73,
+            unit: 'dagen',
+            polarity: ScorecardPolarity.lowerBetter,
+          ),
+        ]),
+      );
+      expect(out.type, SlideType.scorecard);
+      expect(out.title, 'Stand');
+
+      final spec = ScorecardSpec.fromSlide(out.title, out.tableRows);
+      final entry = spec.entries.single;
+      expect(entry.label, 'Gemiddeld openstaand');
+      expect(entry.value, 62.5);
+      expect(entry.previous, 73);
+      expect(entry.unit, 'dagen');
+      expect(entry.polarity, ScorecardPolarity.lowerBetter);
+      expect(entry.sentiment, ScorecardSentiment.good);
+    });
+
+    test('an absent previous figure stays absent across the trip', () {
+      final out = _roundTrip(
+        scorecard(const [ScorecardEntry(label: 'Open', value: 96)]),
+      );
+      final entry = ScorecardSpec.fromSlide(
+        out.title,
+        out.tableRows,
+      ).entries.single;
+      // Still no delta on the far side — the gap must survive, or a first
+      // report would start claiming a trend after one save.
+      expect(entry.previous, isNull);
+      expect(entry.delta, isNull);
+    });
   });
 
   group('AI-assist marker round-trip (AI_ASSIST §16.3)', () {

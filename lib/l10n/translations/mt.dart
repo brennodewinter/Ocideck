@@ -1803,6 +1803,24 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Scorecard': 'Karta tal-punteġġ',
+  'Cijfer toevoegen': 'Żid ċifra',
+  'Cijfer verwijderen': 'Neħħi ċ-ċifra',
+  'Richting': 'Direzzjoni',
+  'ongewijzigd': 'ma nbidilx',
+  'Lager is beter': 'Inqas huwa aħjar',
+  'Hoger is beter': 'Aktar huwa aħjar',
+  'Neutraal': 'Newtrali',
+  'Nu': 'Issa',
+  'Vorige rapportage': 'Rapport preċedenti',
+  'Een scorecard toont hoogstens vijf cijfers; meer leest niet meer als een oordeel.':
+      'Karta tal-punteġġ turi mhux aktar minn ħames ċifri; aktar ma tinqarax bħala ġudizzju.',
+  'Laat de vorige rapportage leeg als er nog geen meting was; de slide toont dan geen verandering.':
+      'Ħalli r-rapport preċedenti vojt jekk kien għad m\'hemmx kejl; is-slide mbagħad ma turix bidla.',
+  'Bepaalt of een stijging groen of rood kleurt. De pijl volgt altijd de cijfers.':
+      'Jiddetermina jekk żieda tkunx ħadra jew ħamra. Il-vleġġa dejjem issegwi ċ-ċifri.',
+  'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
+      'Ftit ċifri ewlenin biċ-ċifra tar-rapport preċedenti ħdejhom, biex il-bidla tirrakkonta l-istorja. Indika għal kull waħda jekk żieda hijiex aħbar tajba jew ħażina.',
   'Medicare-nummer — een zorggegeven': 'numru Medicare — dejta dwar is-saħħa',
   'bedrijfsnummer': 'numru tal-kumpanija',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

@@ -1780,6 +1780,24 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Scorecard': 'Nøgletalskort',
+  'Cijfer toevoegen': 'Tilføj nøgletal',
+  'Cijfer verwijderen': 'Fjern nøgletal',
+  'Richting': 'Retning',
+  'ongewijzigd': 'uændret',
+  'Lager is beter': 'Lavere er bedre',
+  'Hoger is beter': 'Højere er bedre',
+  'Neutraal': 'Neutral',
+  'Nu': 'Nu',
+  'Vorige rapportage': 'Forrige rapport',
+  'Een scorecard toont hoogstens vijf cijfers; meer leest niet meer als een oordeel.':
+      'Et nøgletalskort viser højst fem tal; flere læses ikke længere som en vurdering.',
+  'Laat de vorige rapportage leeg als er nog geen meting was; de slide toont dan geen verandering.':
+      'Lad den forrige rapport stå tom, hvis der endnu ikke var en måling; sliden viser så ingen ændring.',
+  'Bepaalt of een stijging groen of rood kleurt. De pijl volgt altijd de cijfers.':
+      'Afgør, om en stigning farves grøn eller rød. Pilen følger altid tallene.',
+  'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
+      'Nogle få nøgletal med tallet fra den forrige rapport ved siden af, så forandringen fortæller historien. Angiv for hvert tal, om en stigning er en god eller dårlig nyhed.',
   'Medicare-nummer — een zorggegeven': 'Medicare-nummer — en helbredsoplysning',
   'bedrijfsnummer': 'selskabsnummer',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

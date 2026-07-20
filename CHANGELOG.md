@@ -10,6 +10,36 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Added
+- **Een nieuw slidetype: de scorecard.** Tot vijf kerncijfers, elk met het cijfer
+  van de vorige rapportage ernaast. Bedoeld voor een rapportage die elke maand of
+  elk kwartaal terugkomt: het getal zelf is context, de verandering is het
+  nieuws.
+
+  Het type bewaart de vórige waarde, niet het verschil. Dan klopt het verschil
+  altijd met de twee getallen die er staan, kan de slide ook tonen wat het was,
+  en is er niets dat met de hand is ingetikt en door niets wordt gecontroleerd.
+  Is er nog geen eerdere meting, dan blijft die kolom leeg en toont de slide
+  géén verandering — nadrukkelijk geen "+0", want dat zou beweren dat het cijfer
+  gelijk bleef terwijl het nooit eerder is gemeten.
+
+  Per cijfer geef je de richting op: *lager is beter*, *hoger is beter* of
+  *neutraal*. Die keuze bepaalt alleen de kléúr van een verandering; de pijl
+  volgt altijd de cijfers. OciDeck kan namelijk niet weten of stijgen goed
+  nieuws is — meer assets in beeld is vooruitgang als je aan het inventariseren
+  bent en een probleem als je aan het opruimen bent. Een daling blijft dus een
+  pijl omlaag, of hij nu groen of rood kleurt.
+
+  De verandering staat er ook met teken bij (`+37`, `-24`), zodat de richting een
+  zwart-witafdruk overleeft. De scorecard volgt verder het stijlprofiel van het
+  deck; groen en rood zijn de bewuste uitzondering, omdat die betekenis dragen in
+  plaats van opmaak — dezelfde redenering als waarom de heatmap zijn eigen
+  kleurramp houdt.
+
+  De cijfers staan als gewone Markdown-tabel in het bestand, dus een script dat
+  je cijfers al produceert kan de tabel rechtstreeks schrijven. Het type staat
+  bij de algemene slidetypes en niet achter de informatieveiligheidsmodule: een
+  paar kerncijfers met hun vorige stand is net zo bruikbaar voor een
+  projectrapportage of een stuurgroepupdate.
 - **De privacycontrole kijkt nu ook buiten Europa.** Naast de EU, de EER,
   Zwitserland en het VK kent OciDeck nu de persoonsnummers van de Verenigde
   Staten, Canada, Australië, India, Brazilië, Zuid-Afrika, Curaçao en Aruba. Ze

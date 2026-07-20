@@ -26,11 +26,12 @@ final _reHtmlComment = RegExp(r'<!--([\s\S]*?)-->', multiLine: true);
 final _reImageWidthStyle = RegExp(r'--image-width:\s*(\d+)%');
 
 /// Slide types whose body is stored as a Markdown table, so the parser keeps the
-/// decoded rows in [Slide.tableRows]: the `table` type plus the security types
-/// that serialise as a table (`checklist` P1-CHK, `scopeMatrix` P1-SCOPE,
-/// `findingsSummary` P1-SUM).
+/// decoded rows in [Slide.tableRows]: the `table` and `scorecard` types plus the
+/// security types that serialise as a table (`checklist` P1-CHK, `scopeMatrix`
+/// P1-SCOPE, `findingsSummary` P1-SUM).
 const _tableBackedTypes = {
   SlideType.table,
+  SlideType.scorecard,
   SlideType.checklist,
   SlideType.scopeMatrix,
   SlideType.findingsSummary,
@@ -864,6 +865,7 @@ extension _MarkdownParse on MarkdownService {
     if (tokens.contains('quote')) return SlideType.quote;
     if (tokens.contains('video')) return SlideType.video;
     if (tokens.contains('table')) return SlideType.table;
+    if (tokens.contains('scorecard')) return SlideType.scorecard;
     // Informatieveiligheid-module (PENTEST_MIAUW §4). Elk type draagt een eigen
     // `_class`-token; de body round-trip't als vrije Markdown (zie de
     // customMarkdown-toewijzing hieronder). Exacte tokens, dus geen conflict

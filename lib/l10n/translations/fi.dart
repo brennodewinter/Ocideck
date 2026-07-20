@@ -1781,6 +1781,24 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Scorecard': 'Tunnuslukukortti',
+  'Cijfer toevoegen': 'Lisää tunnusluku',
+  'Cijfer verwijderen': 'Poista tunnusluku',
+  'Richting': 'Suunta',
+  'ongewijzigd': 'ennallaan',
+  'Lager is beter': 'Pienempi on parempi',
+  'Hoger is beter': 'Suurempi on parempi',
+  'Neutraal': 'Neutraali',
+  'Nu': 'Nyt',
+  'Vorige rapportage': 'Edellinen raportti',
+  'Een scorecard toont hoogstens vijf cijfers; meer leest niet meer als een oordeel.':
+      'Tunnuslukukortti näyttää enintään viisi lukua; useampaa ei enää lueta arviona.',
+  'Laat de vorige rapportage leeg als er nog geen meting was; de slide toont dan geen verandering.':
+      'Jätä edellinen raportti tyhjäksi, jos mittausta ei vielä ollut; dia ei silloin näytä muutosta.',
+  'Bepaalt of een stijging groen of rood kleurt. De pijl volgt altijd de cijfers.':
+      'Määrittää, väritetäänkö nousu vihreäksi vai punaiseksi. Nuoli seuraa aina lukuja.',
+  'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
+      'Muutama tunnusluku edellisen raportin luvun kanssa vierekkäin, jotta muutos kertoo tarinan. Kerro kustakin, onko nousu hyvä vai huono uutinen.',
   'Medicare-nummer — een zorggegeven': 'Medicare-numero — terveystieto',
   'bedrijfsnummer': 'yritysnumero',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
