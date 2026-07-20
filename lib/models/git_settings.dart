@@ -255,6 +255,17 @@ class GitRepoLayout {
     return isValidDeckName(parts[1]) ? parts[1] : null;
   }
 
+  /// De deckmap uit een `decks/<naam>/deck.md`-pad, of null wanneer het pad geen
+  /// `deck.md` in een geldige deckmap is (een asset, een genest of los bestand).
+  /// Zo maken de zoekversnellers — `git grep` en de server-codezoekopdracht —
+  /// van een gevonden bestandspad een deckmap die de zoeker kan openen.
+  static String? deckDirOfDeckFile(String repoPath) {
+    const file = '/deck.md';
+    if (!repoPath.endsWith(file)) return null;
+    final dir = repoPath.substring(0, repoPath.length - file.length);
+    return deckNameOf(dir) == null ? null : dir;
+  }
+
   /// Naam van een release-tag: `decks/<naam>/v1.0` (D9). De slash-vorm groepeert
   /// leesbaar in forge-UI's en maakt tag-protection (`decks/*/v*`) natuurlijk —
   /// wat telt, want een release-tag is gated (P8). Git's D/F-conflict bijt hier

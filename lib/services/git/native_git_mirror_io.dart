@@ -644,19 +644,10 @@ class _NativeGitMirror implements NativeGitMirror {
 
     final dirs = <String>{};
     for (final line in const LineSplitter().convert(res.stdout)) {
-      final dir = _deckDirOfDeckFile(line.trim());
+      final dir = GitRepoLayout.deckDirOfDeckFile(line.trim());
       if (dir != null) dirs.add(dir);
     }
     return dirs.toList()..sort();
-  }
-
-  /// `decks/<naam>/deck.md` → `decks/<naam>`, of null wanneer het pad geen
-  /// `deck.md` in een geldige deckmap is (een asset, of een los bestand).
-  static String? _deckDirOfDeckFile(String repoPath) {
-    const suffix = '/deck.md';
-    if (!repoPath.endsWith(suffix)) return null;
-    final dir = repoPath.substring(0, repoPath.length - suffix.length);
-    return GitRepoLayout.deckNameOf(dir) == null ? null : dir;
   }
 
   Future<Set<String>> _unpushedShas() async {
