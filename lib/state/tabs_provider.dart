@@ -12,6 +12,7 @@ import '../models/deck.dart';
 import '../models/deck_template.dart';
 import '../models/settings.dart';
 import '../models/slide.dart';
+import '../models/storage_origin.dart';
 import '../services/annotation_codec.dart';
 import '../services/classification_enforcement_policy.dart';
 import '../services/duplicate_service.dart';
@@ -57,29 +58,58 @@ class TabInfo {
   final DeckNotifier deckNotifier;
   final EditorNotifier editorNotifier;
 
-  /// Gezet wanneer dit tabblad uit een WebDAV/Nextcloud-bron is geopend, zodat
-  /// "Opslaan naar Nextcloud" terug weet te schrijven. Muteerbaar: wordt na het
-  /// openen ingevuld en bij elke `state`-kopie hergebruikt.
-  WebdavOrigin? webdavOrigin;
+  /// Waar het deck in dit tabblad vandaan kwam, of `null` voor een nieuw of
+  /// puur lokaal deck. Muteerbaar: wordt na het openen ingevuld en bij elke
+  /// `state`-kopie hergebruikt.
+  ///
+  /// Eén veld, geen drie. Vroeger droeg een tabblad een `webdavOrigin`, een
+  /// `s3Origin` en een `gitOrigin` naast elkaar met een opmerking erbij dat een
+  /// deck er hooguit één zou hebben — maar niets handhaafde dat, dus een deck
+  /// dat van WebDAV kwam en naar S3 werd weggeschreven droeg er twee. Sinds
+  /// opslaan de herkomst volgt, moet die vraag één antwoord hebben.
+  StorageOrigin? origin;
 
-  /// Gezet wanneer dit tabblad uit een git-repository is geopend. Draagt naast
-  /// de repo ook de `baseSha` waartegen dit werk is geschreven — dát is wat
-  /// versiebeheer toevoegt boven [webdavOrigin]. In Fase 0 wordt hij alleen
-  /// gevuld en gelezen; schrijven komt in Fase 2.
-  GitOrigin? gitOrigin;
+  /// De herkomst als die van WebDAV komt, anders `null`. De backends werken met
+  /// hun eigen type; deze accessors houden dat leesbaar zonder het ene veld op
+  /// te geven. Iets toekennen vervangt een herkomst van een andere soort — dat
+  /// is precies de bedoeling: het deck komt nu daarvandaan.
+  WebdavOrigin? get webdavOrigin {
+    final o = origin;
+    return o is WebdavOrigin ? o : null;
+  }
 
-  /// Herkomst wanneer dit deck uit een S3-bucket komt. Los van [webdavOrigin]
-  /// omdat het om een andere bron gaat; een deck heeft er hooguit één.
-  S3Origin? s3Origin;
+  set webdavOrigin(WebdavOrigin? value) {
+    if (value != null || origin is WebdavOrigin) origin = value;
+  }
+
+  /// De herkomst als die uit een git-repository komt, anders `null`. Draagt
+  /// naast de repo ook de `baseSha` waartegen dit werk is geschreven — dát is
+  /// wat versiebeheer toevoegt boven de andere twee.
+  GitOrigin? get gitOrigin {
+    final o = origin;
+    return o is GitOrigin ? o : null;
+  }
+
+  set gitOrigin(GitOrigin? value) {
+    if (value != null || origin is GitOrigin) origin = value;
+  }
+
+  /// De herkomst als die uit een S3-bucket komt, anders `null`.
+  S3Origin? get s3Origin {
+    final o = origin;
+    return o is S3Origin ? o : null;
+  }
+
+  set s3Origin(S3Origin? value) {
+    if (value != null || origin is S3Origin) origin = value;
+  }
 
   TabInfo({
     required this.id,
     required this.recoveryId,
     required this.deckNotifier,
     required this.editorNotifier,
-    this.webdavOrigin,
-    this.gitOrigin,
-    this.s3Origin,
+    this.origin,
   });
 
   String get label {
