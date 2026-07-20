@@ -7,6 +7,11 @@ part of 'tabs_provider.dart';
 /// Spiegelt bewust `openFromWebdav`/`saveToWebdav`: een bucket is voor een deck
 /// niet iets anders dan een map op een server, en waar het gedrag hetzelfde
 /// hoort te zijn, is de code dat ook.
+/// Het markdownbestand ín de wortel van het pakket — het deck zelf, en het enige
+/// lid dat de conflictbewaking draagt.
+bool _isRootMd(MapEntry<String, List<int>> entry) =>
+    entry.key.toLowerCase().endsWith('.md') && !entry.key.contains('/');
+
 extension TabsNotifierS3 on TabsNotifier {
   /// Download het gekozen object, haal het door de security-gate en open het in
   /// een tab.
@@ -101,11 +106,22 @@ extension TabsNotifierS3 on TabsNotifier {
       final members = await _file.buildPackageMembers(deck);
       final dir = p.posix.dirname(targetPath);
       final mdBase = p.posix.basename(targetPath);
-      for (final entry in members.entries) {
+      // Het markdownbestand eerst, en pas daarna de assets.
+      //
+      // Alleen de `.md` draagt de conflictbewaking; de assets gingen er
+      // ongewapend overheen. In de oorspronkelijke volgorde stonden ze bovendien
+      // vóóraan, dus bij een botsing waren andermans afbeeldingen al vervangen
+      // tegen de tijd dat de `.md` met 412 werd geweigerd — en de melding
+      // ("opslaan onder een andere naam?") wekte de indruk dat er niets was
+      // aangeraakt. Andersom botst het vóórdat er iets aan de assets is gedaan.
+      final ordered = [
+        ...members.entries.where(_isRootMd),
+        ...members.entries.where((e) => !_isRootMd(e)),
+      ];
+      for (final entry in ordered) {
         // Het pakket-markdownbestand heet naar de deck-titel; geef het in de
         // bucket de naam die de gebruiker koos. Assets houden hun submap.
-        final isRootMd =
-            entry.key.toLowerCase().endsWith('.md') && !entry.key.contains('/');
+        final isRootMd = _isRootMd(entry);
         final remote = isRootMd
             ? p.posix.join(dir, mdBase)
             : p.posix.join(dir, entry.key);

@@ -782,11 +782,15 @@ class TabsNotifier extends StateNotifier<TabsState> {
       final members = await _file.buildPackageMembers(deck);
       final dir = p.posix.dirname(targetPath);
       final mdBase = p.posix.basename(targetPath);
-      for (final entry in members.entries) {
+      // Het markdownbestand eerst; zie [saveToS3] voor waarom die volgorde telt.
+      final ordered = [
+        ...members.entries.where(_isRootMd),
+        ...members.entries.where((e) => !_isRootMd(e)),
+      ];
+      for (final entry in ordered) {
         // Het pakket-markdownbestand heet naar de deck-titel; geef het op de
         // server de naam die de gebruiker koos. Assets behouden hun submap.
-        final isRootMd =
-            entry.key.toLowerCase().endsWith('.md') && !entry.key.contains('/');
+        final isRootMd = _isRootMd(entry);
         final remote = isRootMd
             ? p.posix.join(dir, mdBase)
             : p.posix.join(dir, entry.key);
