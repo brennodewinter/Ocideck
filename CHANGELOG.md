@@ -31,6 +31,15 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   keer openen — valt het zoeken stil terug op de volledige scan, die overal
   werkt. De treffers zelf, en de eerlijke meldingen over onleesbare of afgekapte
   resultaten, blijven ongewijzigd.
+- **Server-side zoeken bij GitHub en GitLab.** Is er geen lokale clone (op web,
+  of vóór de eerste keer openen), dan vraagt het zoeken nu eerst aan de forge
+  zélf welke decks de term bevatten — GitHub via `/search/code`, GitLab via de
+  blobs-zoekopdracht — en leest alleen die. Dat scheelt opnieuw de N lezingen.
+  Deze weg is geïndexeerd en dus **best-effort**: een net gewijzigd deck kan door
+  indexeringsvertraging nog ontbreken, en het zoekscherm zegt dat er dan bij.
+  GitHub doorzoekt alleen de standaardbranch; GitLab vereist dat de instantie
+  Advanced/Exact Search aan heeft. Kan de forge het niet — of Gitea/Forgejo, dat
+  er geen REST-endpoint voor heeft — dan valt het terug op de volledige scan.
 
 - **Een ontdekkingendia: wat we niet wisten te hebben.** Het aanvalsoppervlak
   *telt* wat nieuw is; deze dia *noemt* het. De handvol objecten die de scan
