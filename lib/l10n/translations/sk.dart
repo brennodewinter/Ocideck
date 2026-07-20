@@ -1791,6 +1791,11 @@ const _dutchSourceAddSk = <String, String>{
   'Norm en prestatie': 'Cieľ a skutočnosť',
   'Norm per rij (optioneel)': 'Cieľ na riadok (voliteľné)',
   'Bandgrenzen (optioneel)': 'Hranice pásiem (voliteľné)',
+  'Open bevindingen': 'Otvorené zistenia',
+  'dagen': 'dni',
+  'was': 'bolo',
+  'Cijfers': 'Čísla',
+  'Cijfer': 'Číslo',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Nepodarilo sa obnoviť všetko. Čo sa nedalo prečítať, zostalo zachované.',
   'Verdieping': 'Prehĺbenie',

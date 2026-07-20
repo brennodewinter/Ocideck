@@ -1806,6 +1806,11 @@ const _dutchSourceAddMt = <String, String>{
   'Norm en prestatie': 'Mira u riżultat',
   'Norm per rij (optioneel)': 'Mira għal kull ringiela (mhux obbligatorju)',
   'Bandgrenzen (optioneel)': 'Limiti tal-faxxi (mhux obbligatorju)',
+  'Open bevindingen': 'Sejbiet miftuħa',
+  'dagen': 'jiem',
+  'was': 'kien',
+  'Cijfers': 'Ċifri',
+  'Cijfer': 'Ċifra',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Mhux kollox seta\' jiġi rkuprat. Dak li ma setax jinqara nżamm.',
   'Verdieping': 'Approfondiment',

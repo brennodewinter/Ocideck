@@ -738,6 +738,11 @@ const _dutchSourceAddEs = {
   'Norm en prestatie': 'Objetivo y resultado',
   'Norm per rij (optioneel)': 'Objetivo por fila (opcional)',
   'Bandgrenzen (optioneel)': 'Umbrales de banda (opcional)',
+  'Open bevindingen': 'Hallazgos abiertos',
+  'dagen': 'días',
+  'was': 'era',
+  'Cijfers': 'Cifras',
+  'Cijfer': 'Cifra',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'No se pudo restaurar todo. Lo que no se pudo leer se ha conservado.',
   'Verdieping': 'Profundización',

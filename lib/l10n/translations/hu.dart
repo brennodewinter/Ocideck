@@ -1788,6 +1788,11 @@ const _dutchSourceAddHu = <String, String>{
   'Norm en prestatie': 'Cél és teljesítés',
   'Norm per rij (optioneel)': 'Cél soronként (opcionális)',
   'Bandgrenzen (optioneel)': 'Sávhatárok (opcionális)',
+  'Open bevindingen': 'Nyitott megállapítások',
+  'dagen': 'nap',
+  'was': 'volt',
+  'Cijfers': 'Számok',
+  'Cijfer': 'Szám',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Nem sikerült mindent helyreállítani. Ami olvashatatlan volt, megmaradt.',
   'Verdieping': 'Elmélyítés',

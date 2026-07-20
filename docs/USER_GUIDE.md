@@ -652,15 +652,32 @@ Where the change has no colour to carry, it is still **signed** (`+37`, `-24`),
 so the direction survives a greyscale print. An unchanged figure says
 "unchanged" rather than showing a zero.
 
+Each figure gets its own card, and **how many figures there are decides the
+layout**: one figure fills the slide as a single hero number, two or three sit
+side by side, four form a 2×2 block and five sit three above two. The type is
+sized from the card each figure actually gets, so a scorecard with one or two
+numbers is read from the back of the room without you setting anything.
+
+Below the change, the card also names what the figure replaced ("was 375"). On a
+crowded five-figure slide that line is dropped in favour of a bigger number — the
+change above it already says what moved.
+
 Keep labels to a few words. A label wraps onto a second line and is cut there,
-and a long figure with a unit beside it shrinks to fit its column — the layout
+and a long figure with a unit beside it shrinks to fit its card — the layout
 gives way before it pushes anything off the slide, but a sentence where a label
 belongs will still read badly.
 
-The scorecard follows the deck's style profile for background, text and fonts.
-Green and red are the deliberate exception: they mean something rather than
+The scorecard follows the deck's style profile for background, text and fonts;
+the card tint and the rule along the top of each card are the profile's **accent
+colour**, so the slide picks up the house style instead of introducing a second
+one. Green and red are the deliberate exception: they mean something rather than
 decorate, so they stay recognisable whatever the house palette is — the same
 reasoning as the heatmap's own colour ramp.
+
+In the editor a figure is one compact card of two rows, with the change shown as
+a coloured chip in its header exactly as the slide will draw it — so the effect
+of the direction setting is visible while you type. Reorder the figures by
+dragging the handle on the left, the same as bullets, timeline events and slides.
 
 Figures are stored as an ordinary Markdown table, so the slide stays readable in
 the `.md` file and a script that already produces your numbers can write the

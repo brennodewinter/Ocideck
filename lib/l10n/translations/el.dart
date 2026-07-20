@@ -1812,6 +1812,11 @@ const _dutchSourceAddEl = <String, String>{
   'Norm en prestatie': 'Στόχος και επίδοση',
   'Norm per rij (optioneel)': 'Στόχος ανά γραμμή (προαιρετικό)',
   'Bandgrenzen (optioneel)': 'Όρια ζωνών (προαιρετικό)',
+  'Open bevindingen': 'Ανοιχτά ευρήματα',
+  'dagen': 'ημέρες',
+  'was': 'ήταν',
+  'Cijfers': 'Αριθμοί',
+  'Cijfer': 'Αριθμός',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Δεν ήταν δυνατή η επαναφορά όλων. Ό,τι δεν ήταν αναγνώσιμο διατηρήθηκε.',
   'Verdieping': 'Εμβάθυνση',

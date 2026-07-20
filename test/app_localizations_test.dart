@@ -90,6 +90,9 @@ void main() {
       'Type',
       'Contrast',
       ':1).',
+      // The scorecard's "was 375" line. Dutch and English happen to spell it
+      // the same; it is genuinely translated everywhere else.
+      'was',
     };
     final expression = RegExp(r'''\.d\(\s*('(?:\\.|[^'])*'|"(?:\\.|[^"])*")''');
     final files = Directory('lib')

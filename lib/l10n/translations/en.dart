@@ -923,6 +923,11 @@ const _dutchSourceAddEn = {
   'Norm en prestatie': 'Target and actual',
   'Norm per rij (optioneel)': 'Target per row (optional)',
   'Bandgrenzen (optioneel)': 'Band thresholds (optional)',
+  'Open bevindingen': 'Open findings',
+  'dagen': 'days',
+  'was': 'was',
+  'Cijfers': 'Figures',
+  'Cijfer': 'Figure',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Not everything could be restored. What could not be read has been kept.',
   'Verdieping': 'Depth',

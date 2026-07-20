@@ -1786,6 +1786,11 @@ const _dutchSourceAddSl = <String, String>{
   'Norm en prestatie': 'Cilj in dosežek',
   'Norm per rij (optioneel)': 'Cilj na vrstico (izbirno)',
   'Bandgrenzen (optioneel)': 'Meje pasov (izbirno)',
+  'Open bevindingen': 'Odprte ugotovitve',
+  'dagen': 'dni',
+  'was': 'bilo',
+  'Cijfers': 'Številke',
+  'Cijfer': 'Številka',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Ni bilo mogoče obnoviti vsega. Kar ni bilo berljivo, je ohranjeno.',
   'Verdieping': 'Poglobitev',

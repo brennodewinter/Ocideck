@@ -742,6 +742,11 @@ const _dutchSourceAddFy = {
   'Norm en prestatie': 'Noarm en prestaasje',
   'Norm per rij (optioneel)': 'Noarm de rigel (opsjoneel)',
   'Bandgrenzen (optioneel)': 'Bângrinzen (opsjoneel)',
+  'Open bevindingen': 'Iepen befinings',
+  'dagen': 'dagen',
+  'was': 'wie',
+  'Cijfers': 'Sifers',
+  'Cijfer': 'Sifer',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Net alles koe hersteld wurde. Wat ûnlêsber wie, is bewarre bleaun.',
   'Verdieping': 'Ferdjipping',

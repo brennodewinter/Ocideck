@@ -1759,6 +1759,11 @@ const _dutchSourceAddTlh = <String, String>{
   'Norm en prestatie': 'ngoq je qav',
   'Norm per rij (optioneel)': 'mIw ngoq (DaH neH)',
   'Bandgrenzen (optioneel)': '\'ay\' veHmey (DaH neH)',
+  'Open bevindingen': 'poSmoHlu\'bogh De\'',
+  'dagen': 'jajmey',
+  'was': 'qaSpu\'',
+  'Cijfers': 'mI\'mey',
+  'Cijfer': 'mI\'',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Hoch chu\'moHlaHbe\'. QIjbe\'bogh De\' polta\'.',
   'Verdieping': '\'ay\' Hurgh',

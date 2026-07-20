@@ -1791,6 +1791,11 @@ const _dutchSourceAddHr = <String, String>{
   'Norm en prestatie': 'Cilj i ostvarenje',
   'Norm per rij (optioneel)': 'Cilj po retku (neobavezno)',
   'Bandgrenzen (optioneel)': 'Granice pojaseva (neobavezno)',
+  'Open bevindingen': 'Otvoreni nalazi',
+  'dagen': 'dana',
+  'was': 'bilo',
+  'Cijfers': 'Brojke',
+  'Cijfer': 'Brojka',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Nije se moglo sve obnoviti. Ono što se nije moglo pročitati sačuvano je.',
   'Verdieping': 'Produbljivanje',

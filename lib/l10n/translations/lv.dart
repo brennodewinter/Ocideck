@@ -1783,6 +1783,11 @@ const _dutchSourceAddLv = <String, String>{
   'Norm en prestatie': 'Mērķis un izpilde',
   'Norm per rij (optioneel)': 'Mērķis rindai (pēc izvēles)',
   'Bandgrenzen (optioneel)': 'Joslu robežas (pēc izvēles)',
+  'Open bevindingen': 'Atvērtie konstatējumi',
+  'dagen': 'dienas',
+  'was': 'bija',
+  'Cijfers': 'Skaitļi',
+  'Cijfer': 'Skaitlis',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Ne visu izdevās atjaunot. Tas, ko nevarēja izlasīt, ir saglabāts.',
   'Verdieping': 'Padziļinājums',
