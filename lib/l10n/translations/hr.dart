@@ -1788,6 +1788,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
+      'Nije se moglo sve obnoviti. Ono što se nije moglo pročitati sačuvano je.',
   'Bekijk de foto op ware grootte': 'Pogledaj fotografiju u punoj veličini',
   'Azure-sleutel of SAS-token': 'Azure ključ ili SAS token',
   'wachtwoordhash': 'sažetak lozinke',

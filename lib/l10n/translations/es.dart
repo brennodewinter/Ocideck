@@ -735,6 +735,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
+      'No se pudo restaurar todo. Lo que no se pudo leer se ha conservado.',
   'Bekijk de foto op ware grootte': 'Ver la foto a tamaño completo',
   'Azure-sleutel of SAS-token': 'clave de Azure o token SAS',
   'wachtwoordhash': 'hash de contraseña',

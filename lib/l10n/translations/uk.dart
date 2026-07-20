@@ -1799,6 +1799,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
+      'Не все вдалося відновити. Те, що не вдалося прочитати, збережено.',
   'Bekijk de foto op ware grootte': 'Переглянути фото в повному розмірі',
   'Azure-sleutel of SAS-token': 'ключ Azure або токен SAS',
   'wachtwoordhash': 'хеш пароля',

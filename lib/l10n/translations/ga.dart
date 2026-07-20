@@ -1817,6 +1817,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
+      'Níorbh fhéidir gach rud a athchóiriú. Coinníodh a raibh doléite.',
   'Bekijk de foto op ware grootte': 'Féach ar an ngrianghraf ar lánmhéid',
   'Azure-sleutel of SAS-token': 'eochair Azure nó comhartha SAS',
   'wachtwoordhash': 'hais pasfhocail',

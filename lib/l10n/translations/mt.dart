@@ -1803,6 +1803,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
+      'Mhux kollox seta\' jiġi rkuprat. Dak li ma setax jinqara nżamm.',
   'Bekijk de foto op ware grootte': 'Ara r-ritratt fid-daqs sħiħ',
   'Azure-sleutel of SAS-token': 'ċavetta Azure jew token SAS',
   'wachtwoordhash': 'hash tal-password',

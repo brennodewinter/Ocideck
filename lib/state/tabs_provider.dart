@@ -164,13 +164,15 @@ class TabsNotifier extends StateNotifier<TabsState> {
     _lastAutosavedDeck.remove(tab.id);
   }
 
-  TabInfo _createTab() {
+  /// [recoveryId] hergebruikt de sleutel van een bestaande herstelkopie (zie
+  /// [restoreRecovered]); zonder krijgt het tabblad een verse.
+  TabInfo _createTab({String? recoveryId}) {
     final id = _nextId++;
-    final recoveryId = _uuid.v4();
+    final key = recoveryId ?? _uuid.v4();
     final deckNotifier = DeckNotifier(_md, _file);
     final tab = TabInfo(
       id: id,
-      recoveryId: recoveryId,
+      recoveryId: key,
       deckNotifier: deckNotifier,
       editorNotifier: EditorNotifier(),
     );
@@ -179,7 +181,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
       // Zodra een tabblad is opgeslagen (schoon), het herstelbestand wissen.
       // Schrijven gebeurt gebufferd door de periodieke autosave-tick.
       if (!(st.isOpen && st.isDirty)) {
-        _recovery.discard(recoveryId);
+        _recovery.discard(key);
       }
       state = state.copyWith(tabs: List.from(state.tabs));
     });
@@ -214,24 +216,40 @@ class TabsNotifier extends StateNotifier<TabsState> {
 
   /// Open elke teruggehaalde snapshot als (gewijzigd) tabblad en ruim de oude
   /// herstelbestanden op. Aangeroepen vanuit het herstel-dialoog bij opstart.
-  void restoreRecovered(List<RecoverySnapshot> snapshots) {
+  /// Zet de herstelde momentopnames terug in tabbladen. Geeft terug hoeveel er
+  /// níét gelezen konden worden; die blijven op schijf staan.
+  int restoreRecovered(List<RecoverySnapshot> snapshots) {
     final restored = <TabInfo>[];
+    var unreadable = 0;
     for (final snap in snapshots) {
       var deck = _md.parseDeck(snap.markdown, filePath: snap.filePath);
-      _recovery.discard(snap.id); // oude sleutel; tab krijgt een nieuwe
-      if (deck == null) continue;
+      if (deck == null) {
+        // Niet weggooien. `parseDeck` vangt zijn eigen fouten af juist omdát hij
+        // in de praktijk struikelt, en een crash ín de parser is een van de
+        // waarschijnlijkere redenen dat deze momentopname er überhaupt ligt.
+        // Eerst wissen en dan pas kijken of het lukte, betekende dat één klik op
+        // "Herstellen" het enige exemplaar van andermans avond opruimde.
+        unreadable++;
+        logWarning('restoreRecovered: momentopname onleesbaar', snap.filePath);
+        continue;
+      }
       if (snap.userNotes != null && snap.userNotes!.isNotEmpty) {
         final notes = UserNotesCodec.decode(snap.userNotes!, deck.slides);
         if (notes.isNotEmpty) {
           deck = deck.copyWith(userNotes: notes);
         }
       }
-      final tab = _createTab();
+      // Hergebruik de sleutel van de momentopname. Het bestand dat er al ligt ís
+      // daarmee meteen de herstelkopie van dit tabblad, in plaats van dat het
+      // wordt weggegooid en de nieuwe pas bij de volgende autosave-tik ontstaat.
+      // Dat gat duurde tot [_autosaveInterval] — en juist in die seconden crasht
+      // een app die zojuist opnieuw dezelfde inhoud heeft geopend.
+      final tab = _createTab(recoveryId: snap.id);
       tab.deckNotifier.loadDeck(deck, filePath: snap.filePath);
       tab.deckNotifier.markDirty(); // herstelde inhoud is nog niet opgeslagen
       restored.add(tab);
     }
-    if (restored.isEmpty) return;
+    if (restored.isEmpty) return unreadable;
 
     // Een ongebruikt leeg begin-tabblad vervangen, anders toevoegen.
     final replaceEmpty = state.tabs.length == 1 && !state.tabs.first.isOpen;
@@ -242,6 +260,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
       final tabs = [...state.tabs, ...restored];
       state = state.copyWith(tabs: tabs, selectedIndex: state.tabs.length);
     }
+    return unreadable;
   }
 
   void newEmptyTab() {

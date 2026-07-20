@@ -1772,6 +1772,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
+      'Kõike ei õnnestunud taastada. See, mida ei saanud lugeda, on alles.',
   'Bekijk de foto op ware grootte': 'Vaata fotot täissuuruses',
   'Azure-sleutel of SAS-token': 'Azure\'i võti või SAS-luba',
   'wachtwoordhash': 'parooli räsi',

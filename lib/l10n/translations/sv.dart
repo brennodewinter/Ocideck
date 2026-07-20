@@ -1780,6 +1780,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
+      'Allt kunde inte återställas. Det som inte gick att läsa har sparats.',
   'Bekijk de foto op ware grootte': 'Visa fotot i full storlek',
   'Azure-sleutel of SAS-token': 'Azure-nyckel eller SAS-token',
   'wachtwoordhash': 'lösenordshash',

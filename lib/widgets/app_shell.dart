@@ -268,9 +268,26 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     );
 
     if (restore == true) {
-      ref.read(tabsProvider.notifier).restoreRecovered(snapshots);
+      final unreadable = ref
+          .read(tabsProvider.notifier)
+          .restoreRecovered(snapshots);
+      // Zwijgen bij een mislukking is hier het ergst denkbare: de gebruiker
+      // klikt "Herstellen", ziet een leeg tabblad, en concludeert dat het werk
+      // weg is. Het staat er nog — dat hoort hij te horen.
+      if (unreadable > 0 && mounted) {
+        final l10n = context.l10n;
+        showErrorSnackBar(
+          ScaffoldMessenger.of(context),
+          l10n,
+          l10n.d(
+            'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.',
+          ),
+        );
+      }
     } else {
-      await recovery.clearAll();
+      // Alleen wat zojuist is getoond en geweigerd — niet de map leegvegen, waar
+      // ook de herstelbestanden van een tweede venster in kunnen liggen.
+      await recovery.discardEach(snapshots.map((s) => s.id));
     }
   }
 
@@ -310,7 +327,10 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
 
   /// Nette afsluiting: herstelbestanden opruimen (alles is opgeslagen) en sluiten.
   Future<void> _destroy() async {
-    await ref.read(recoveryServiceProvider).clearAll();
+    // Alleen de tabbladen van dít venster. Zie [RecoveryService.discardEach].
+    await ref
+        .read(recoveryServiceProvider)
+        .discardEach(ref.read(tabsProvider).tabs.map((t) => t.recoveryId));
     await windowManager.destroy();
   }
 

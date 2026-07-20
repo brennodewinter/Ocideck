@@ -1804,6 +1804,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
+      'Не всичко можа да бъде възстановено. Нечетимото е запазено.',
   'Bekijk de foto op ware grootte': 'Вижте снимката в пълен размер',
   'Azure-sleutel of SAS-token': 'Azure ключ или SAS токен',
   'wachtwoordhash': 'хеш на парола',

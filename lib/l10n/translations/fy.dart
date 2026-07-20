@@ -739,6 +739,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
+      'Net alles koe hersteld wurde. Wat ûnlêsber wie, is bewarre bleaun.',
   'Bekijk de foto op ware grootte': 'Besjoch de foto op ware grutte',
   'Azure-sleutel of SAS-token': 'Azure-kaai of SAS-token',
   'wachtwoordhash': 'wachtwurdhash',

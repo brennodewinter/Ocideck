@@ -738,6 +738,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
+      'No tur por a wòrdu restorá. Loke no por a wòrdu lesá a keda warda.',
   'Bekijk de foto op ware grootte': 'Wak e potrèt na su tamaño kompletu',
   'Azure-sleutel of SAS-token': 'yabi di Azure of token SAS',
   'wachtwoordhash': 'hash di kontraseña',

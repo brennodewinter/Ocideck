@@ -1789,6 +1789,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
+      'Ne viską pavyko atkurti. Tai, ko nepavyko perskaityti, išsaugota.',
   'Bekijk de foto op ware grootte': 'Peržiūrėti nuotrauką visu dydžiu',
   'Azure-sleutel of SAS-token': 'Azure raktas arba SAS prieigos raktas',
   'wachtwoordhash': 'slaptažodžio maiša',

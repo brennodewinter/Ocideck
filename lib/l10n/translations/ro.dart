@@ -1799,6 +1799,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
+      'Nu a putut fi restaurat totul. Ce nu a putut fi citit a fost păstrat.',
   'Bekijk de foto op ware grootte': 'Vezi fotografia la dimensiune completă',
   'Azure-sleutel of SAS-token': 'cheie Azure sau token SAS',
   'wachtwoordhash': 'amprentă de parolă',

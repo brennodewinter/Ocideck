@@ -1785,6 +1785,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
+      'Nid alles het chönne wiederhergstellt wärde. Was unläserlich gsi isch, isch ufbewahrt worde.',
   'Bekijk de foto op ware grootte': 'S Foti i voller Grössi aaluege',
   'Azure-sleutel of SAS-token': 'Azure-Schlüssel oder SAS-Token',
   'wachtwoordhash': 'Passwort-Hash',

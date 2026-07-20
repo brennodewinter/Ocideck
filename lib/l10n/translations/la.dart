@@ -1797,6 +1797,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
+      'Non omnia restitui potuerunt. Quae legi non poterant servata sunt.',
   'Bekijk de foto op ware grootte': 'Imaginem plena magnitudine inspice',
   'Azure-sleutel of SAS-token': 'clavis Azure vel tessera SAS',
   'wachtwoordhash': 'nota tesserae',

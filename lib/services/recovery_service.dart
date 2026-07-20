@@ -197,6 +197,24 @@ class RecoveryService {
     }
   }
 
+  /// Wis precies deze herstelbestanden, op sleutel.
+  ///
+  /// De aanroeper wéét welke van hem zijn — de tabbladen van dit venster, of de
+  /// momentopnames die zojuist in de herstelvraag zijn getoond — en zegt dat
+  /// hier. Dat is het verschil met [clearAll], dat de hele map leegde: draaide
+  /// er een tweede venster, dan gooide een nette afsluiting van het ene de
+  /// crashbescherming van het andere weg. Zonder melding, en pas merkbaar
+  /// wanneer dat andere venster daarna alsnog vastliep.
+  Future<void> discardEach(Iterable<String> ids) async {
+    if (_unavailable) return;
+    for (final id in ids) {
+      await discard(id);
+    }
+  }
+
+  /// Wis élk herstelbestand in de map, van welk venster ook. Alleen voor de
+  /// uitdrukkelijke opruimknop in Instellingen → Privacy; een venster dat
+  /// afsluit hoort [discardEach] te gebruiken.
   Future<void> clearAll() async {
     if (_unavailable) return;
     try {
