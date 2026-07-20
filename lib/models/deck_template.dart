@@ -2,6 +2,7 @@ import 'chart.dart';
 import 'cockpit.dart';
 import 'finding_spec.dart';
 import 'question.dart';
+import 'scorecard_spec.dart';
 import 'slide.dart';
 import 'timeline.dart';
 
@@ -538,6 +539,15 @@ Slide _chart(String title, ChartSpec spec) => Slide.create(
 Slide _cockpit(String title, CockpitSpec spec) => Slide.create(
   SlideType.cockpit,
 ).copyWith(title: title, customMarkdown: spec.toBlock());
+
+/// A scorecard slide. Unlike the chart/cockpit helpers this writes
+/// `tableRows`, because the reporting types store their figures as a plain
+/// Markdown table.
+Slide _scorecard(String title, List<ScorecardEntry> entries) =>
+    Slide.create(SlideType.scorecard).copyWith(
+      title: title,
+      tableRows: ScorecardSpec(entries: entries).toTableRows(),
+    );
 
 Slide _question(String title, QuestionSpec spec) => Slide.create(
   SlideType.question,

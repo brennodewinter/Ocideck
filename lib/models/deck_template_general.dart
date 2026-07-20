@@ -480,43 +480,39 @@ List<Slide> _buildReport(String deckTitle) => [
     'Grootste risico of afwijking: …',
     'Gevraagde actie: …',
   ]),
-  _cockpit(
-    'KPI-overzicht',
-    const CockpitSpec(
-      meters: [
-        CockpitMeterSpec(
-          type: CockpitMeterType.voltmeter,
-          label: 'Doelrealisatie',
-          unit: '%',
-          greenFrom: 75,
-          greenTo: 100,
-          redFrom: 50,
-          value: 72,
-        ),
-        CockpitMeterSpec(
-          type: CockpitMeterType.thermometer,
-          label: 'Risiconiveau',
-          unit: '/10',
-          min: 0,
-          max: 10,
-          greenFrom: 0,
-          greenTo: 3,
-          redFrom: 7,
-          value: 3.5,
-        ),
-        CockpitMeterSpec(
-          type: CockpitMeterType.climbDescent,
-          label: 'Trend t.o.v. vorige periode',
-          unit: '',
-          min: -10,
-          max: 10,
-          neutralFrom: -2,
-          neutralTo: 2,
-          value: 4,
-        ),
-      ],
+  // Kerncijfers mét de stand van de vorige rapportage ernaast. Een rapportage
+  // die terugkomt leidt met wat er veranderde; het getal zelf is context. De
+  // voorbeelden tonen bewust alle drie de uitkomsten — vooruit, achteruit en
+  // ongewijzigd — zodat zichtbaar is wat de richtingkeuze doet.
+  _scorecard('Kerncijfers', const [
+    ScorecardEntry(
+      label: 'Doelrealisatie',
+      value: 72,
+      previous: 65,
+      unit: '%',
+      polarity: ScorecardPolarity.higherBetter,
     ),
-  ),
+    ScorecardEntry(
+      label: 'Openstaande punten',
+      value: 18,
+      previous: 12,
+      polarity: ScorecardPolarity.lowerBetter,
+    ),
+    ScorecardEntry(
+      label: 'Risiconiveau',
+      value: 3.5,
+      previous: 4.2,
+      unit: '/10',
+      polarity: ScorecardPolarity.lowerBetter,
+    ),
+    ScorecardEntry(
+      label: 'Doorlooptijd',
+      value: 21,
+      previous: 21,
+      unit: 'dagen',
+      polarity: ScorecardPolarity.lowerBetter,
+    ),
+  ]),
   _chart(
     'Trendgrafiek',
     const ChartSpec(
@@ -538,10 +534,16 @@ List<Slide> _buildReport(String deckTitle) => [
     'Risico voor de komende periode: …',
     'Beheersmaatregel: …',
   ]),
-  _checklist('Acties komende periode', [
-    'Actie 1: … (eigenaar, datum)',
-    'Actie 2: … (eigenaar, datum)',
-    'Actie 3: … (eigenaar, datum)',
+  // Eigenaar en deadline staan in eigen kolommen in plaats van tussen haakjes
+  // in de tekst. Dezelfde kolommen als de actielijst-preset van de tabeleditor,
+  // zodat sjabloon en preset dezelfde taal spreken. De deadlines blijven leeg:
+  // een sjabloon met ingebakken datums veroudert, en een lege deadline is
+  // meestal precies wat er in de vergadering moet worden afgesproken.
+  _table('Acties en besluiten', const [
+    ['Actie', 'Eigenaar', 'Deadline', 'Status'],
+    ['Waarover we een besluit vragen: …', '…', '', 'Open'],
+    ['Wat loopt en bij wie: …', '…', '', 'Loopt'],
+    ['Wat vastloopt en aandacht nodig heeft: …', '…', '', 'Open'],
   ]),
 ];
 

@@ -9,6 +9,24 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 
 ## [Unreleased]
 
+### Changed
+- **Het sjabloon *Rapportage* begint nu met de nieuwe rapportagetypes.** Het
+  KPI-dashboard was een cockpit met wijzerplaten; dat is nu een **scorecard**,
+  omdat een rapportage die elke maand terugkomt hoort te leiden met wat er
+  veranderde en niet met wat het getal toevallig is. De vier voorbeeldcijfers
+  tonen bewust alle uitkomsten — vooruit, achteruit en ongewijzigd — zodat
+  meteen zichtbaar is wat de richtingkeuze per cijfer doet.
+
+  De actielijst was een checklist met "… (eigenaar, datum)" tussen haakjes in de
+  tekst. Dat is nu een gewone **tabel** met de kolommen Actie, Eigenaar,
+  Deadline en Status — dezelfde kolommen die de actielijst-preset van de
+  tabeleditor neerzet, zodat een deck dat uit het sjabloon komt en een deck dat
+  uit de preset komt hetzelfde lezen.
+
+  De deadlines blijven leeg: een sjabloon met ingebakken datums veroudert, en
+  een lege deadline is bovendien meestal precies wat er in de vergadering moet
+  worden afgesproken.
+
 ### Added
 - **De tabel markeert verlopen datums, en begint waar u wilt beginnen.** Twee
   eigenschappen die het opgeheven slidetype 'Acties en besluiten' had, maar nu

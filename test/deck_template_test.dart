@@ -4,6 +4,7 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/deck_template.dart';
 import 'package:ocideck/models/finding_spec.dart';
 import 'package:ocideck/models/question.dart';
+import 'package:ocideck/models/scorecard_spec.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/timeline.dart';
 import 'package:ocideck/services/markdown_service.dart';
@@ -179,10 +180,65 @@ void main() {
       expect(types, contains(SlideType.freeMarkdown));
     });
 
-    test('report has a KPI cockpit and a trend chart', () {
-      final types = typesOf('report');
-      expect(types, contains(SlideType.cockpit));
-      expect(types, contains(SlideType.chart));
+    test(
+      'report leads with figures-against-last-time, then trend, then asks',
+      () {
+        final types = typesOf('report');
+        // A recurring report leads with what changed, so the KPI slide is a
+        // scorecard (figure + the figure it replaces) rather than a cockpit.
+        expect(types, contains(SlideType.scorecard));
+        expect(types, contains(SlideType.chart));
+        // Owner and deadline are columns now, not text in brackets on a bullet.
+        // A plain table, not a type of its own: the columns were the whole of
+        // what a separate type added.
+        expect(types, contains(SlideType.table));
+      },
+    );
+
+    test('report scorecard shows a rise, a fall and an unchanged figure', () {
+      final slide = deckTemplateById(
+        'report',
+      )!.buildSlides('T').firstWhere((s) => s.type == SlideType.scorecard);
+      final entries = ScorecardSpec.fromSlide(
+        slide.title,
+        slide.tableRows,
+      ).entries;
+      // The starting point teaches the type: all three outcomes are visible, so
+      // an author sees what the direction setting actually does.
+      expect(
+        entries.map((e) => e.direction),
+        containsAll([
+          ScorecardDirection.up,
+          ScorecardDirection.down,
+          ScorecardDirection.flat,
+        ]),
+      );
+      // And both verdicts, so the colouring is not a mystery either.
+      expect(
+        entries.map((e) => e.sentiment),
+        containsAll([ScorecardSentiment.good, ScorecardSentiment.bad]),
+      );
+    });
+
+    test('report action table matches the editor preset columns', () {
+      final slide = deckTemplateById(
+        'report',
+      )!.buildSlides('T').firstWhere((s) => s.type == SlideType.table);
+      // The same columns the table editor's action-list preset lays down, so a
+      // deck started from the template and one started from the preset read
+      // alike.
+      expect(slide.tableRows.first, [
+        'Actie',
+        'Eigenaar',
+        'Deadline',
+        'Status',
+      ]);
+      expect(slide.tableRows.length, greaterThan(1));
+      // Deadlines are left for the meeting to settle; a template with baked-in
+      // dates ages.
+      for (final row in slide.tableRows.skip(1)) {
+        expect(row[2], isEmpty);
+      }
     });
 
     test('research story has a findings timeline and evidence markdown', () {
