@@ -2351,7 +2351,7 @@ are not switched off somewhere — there is no setting to find.
 | The second-screen presenter view | Absent — it needs a real second window. |
 | **Recovery after a crash** | Absent. Nothing is autosaved, so a browser crash loses unsaved work. |
 | **The image half of the privacy check** | Absent. See below. |
-| The offline CVE database | Absent; looking CVEs up online still works. |
+| The offline CVE database | Absent — and so is the online lookup, which is desktop-only (SSRF-safe subprocess). The **Zoek CVE…** button reports "niet beschikbaar in de webversie". |
 | Image caption sidecars | Absent — they are files beside the image. |
 | The "missing media" warning | Absent — it looks on disk. |
 | Cloud AI | Blocked on purpose, not by the browser. |
