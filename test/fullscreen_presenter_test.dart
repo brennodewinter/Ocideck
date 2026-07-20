@@ -33,6 +33,43 @@ Widget _host(
   );
 }
 
+/// The presenter pushed over a launcher screen, so its exit (a `Navigator.pop`)
+/// is observable: "open" being back on screen means the presentation closed.
+Widget _presenterOverLauncher({bool showRehearsalSummary = false}) =>
+    MaterialApp(
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        FlutterQuillLocalizations.delegate,
+      ],
+      home: Scaffold(
+        body: Builder(
+          builder: (context) => TextButton(
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => FullscreenPresenter(
+                  slides: [
+                    Slide.create(
+                      SlideType.bullets,
+                    ).copyWith(title: 'Eerste', bullets: ['a']),
+                    Slide.create(
+                      SlideType.bullets,
+                    ).copyWith(title: 'Tweede', bullets: ['b']),
+                  ],
+                  projectPath: null,
+                  themeProfile: const ThemeProfile(),
+                  initialIndex: 0,
+                  showRehearsalSummary: showRehearsalSummary,
+                ),
+              ),
+            ),
+            child: const Text('open'),
+          ),
+        ),
+      ),
+    );
+
 Future<void> sendControlKey(WidgetTester tester, LogicalKeyboardKey key) async {
   await tester.sendKeyDownEvent(LogicalKeyboardKey.controlLeft);
   await tester.sendKeyDownEvent(key);
@@ -614,6 +651,72 @@ void main() {
     expect(find.text('Eerste'), findsOneWidget);
 
     await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('Escape closes the presentation when nothing is open', (
+    tester,
+  ) async {
+    // The layered Escape (help, grid, user notes, table, tool, typed number,
+    // blank) was covered layer by layer, but never the bottom of the stack:
+    // nothing open, so Escape leaves the presentation. That gap is why a report
+    // of "Escape does not exit" could not be checked against a test.
+    const windowManager = MethodChannel('window_manager');
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+      windowManager,
+      (call) async => null,
+    );
+    addTearDown(
+      () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        windowManager,
+        null,
+      ),
+    );
+
+    await tester.pumpWidget(_presenterOverLauncher());
+    await tester.tap(find.text('open'));
+    await tester.pumpAndSettle();
+    expect(find.text('Eerste'), findsOneWidget);
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.escape);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Eerste'), findsNothing);
+    expect(find.text('open'), findsOneWidget);
+  });
+
+  testWidgets('with the rehearsal summary on, Escape shows it before leaving', (
+    tester,
+  ) async {
+    // The summary is on by default, so this — not a straight exit — is what
+    // most authors meet when they press Escape: the run appears, and closing it
+    // ends the presentation. Worth pinning down, because "Escape did nothing"
+    // is exactly how a summary that failed to appear would look.
+    const windowManager = MethodChannel('window_manager');
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+      windowManager,
+      (call) async => null,
+    );
+    addTearDown(
+      () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        windowManager,
+        null,
+      ),
+    );
+
+    await tester.pumpWidget(_presenterOverLauncher(showRehearsalSummary: true));
+    await tester.tap(find.text('open'));
+    await tester.pumpAndSettle();
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.escape);
+    await tester.pumpAndSettle();
+
+    // Still presenting, with the run on top of it.
+    expect(find.text('Oefenrun'), findsOneWidget);
+    expect(find.text('open'), findsNothing);
+
+    await tester.tap(find.text('Sluiten'));
+    await tester.pumpAndSettle();
+    expect(find.text('open'), findsOneWidget);
   });
 
   testWidgets('Ctrl/Cmd + W closes the presentation', (tester) async {
