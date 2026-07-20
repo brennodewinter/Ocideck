@@ -1772,6 +1772,11 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Afbeeldingen door AI laten taggen?':
+      'Kas lasta tehisintellektil need pildid sildistada?',
+  'afbeeldingen gaan naar': 'pilti saadetakse aadressile',
+  'een model op dit apparaat': 'mudel selles seadmes',
+  'Doorgaan': 'Jätka',
   'Ontdekkingen': 'Leiud',
   'Wat is gevonden': 'Mis leiti',
   'Soort': 'Liik',

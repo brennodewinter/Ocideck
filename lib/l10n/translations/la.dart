@@ -1797,6 +1797,10 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Afbeeldingen door AI laten taggen?': 'Sinasne AI has imagines notare?',
+  'afbeeldingen gaan naar': 'imagines mittentur ad',
+  'een model op dit apparaat': 'exemplar in hoc instrumento',
+  'Doorgaan': 'Perge',
   'Ontdekkingen': 'Inventa',
   'Wat is gevonden': 'Quid inventum sit',
   'Soort': 'Genus',

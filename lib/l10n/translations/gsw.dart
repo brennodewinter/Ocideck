@@ -1785,6 +1785,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Afbeeldingen door AI laten taggen?': 'Söll d\'KI die Bilder tagge?',
+  'afbeeldingen gaan naar': 'Bilder gönd a',
+  'een model op dit apparaat': 'es Modäll uf däm Grät',
+  'Doorgaan': 'Wytermache',
   'Ontdekkingen': 'Entdeckige',
   'Wat is gevonden': 'Was gfunde worde isch',
   'Soort': 'Art',

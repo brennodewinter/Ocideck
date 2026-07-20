@@ -48,19 +48,33 @@ extension _MarkdownFindingParse on MarkdownService {
     var findingRole = FindingRole.header;
     var aiAssistedFields = const <String>[];
     var checklistScope = '';
+    // Eerste vondst wint. De serialiser schrijft deze richtlijnen bovenáán het
+    // blok, dus een gelijknamig commentaar verderop komt niet van ons — het
+    // staat in de tékst van de dia. Zonder deze grendel overschreef zo'n regel
+    // de echte waarde, en dat is niet theoretisch: een AI-concept eindigend op
+    // `<!-- ocideck_ai_assisted: -->` wiste daarmee zijn eigen
+    // beoordelingsmarkering, waarna het rapport verzegeld en ondertekend kon
+    // worden mét ongecontroleerde AI-tekst erin. Precies wat die markering moet
+    // voorkomen. Hetzelfde gold voor de groepskoppeling en het scope-object.
+    final seen = <String>{};
+    bool first(String key) => seen.add(key);
+
     final cleaned = block.replaceAllMapped(_reHtmlComment, (m) {
       final content = m.group(1)!.trim();
       if (content.startsWith('ocideck_finding_id:')) {
+        if (!first('ocideck_finding_id:')) return '';
         findingId = content.substring('ocideck_finding_id:'.length).trim();
         return '';
       }
       if (content.startsWith('ocideck_checklist_scope:')) {
+        if (!first('ocideck_checklist_scope:')) return '';
         checklistScope = content
             .substring('ocideck_checklist_scope:'.length)
             .trim();
         return '';
       }
       if (content.startsWith('ocideck_finding_role:')) {
+        if (!first('ocideck_finding_role:')) return '';
         final name = content.substring('ocideck_finding_role:'.length).trim();
         findingRole = FindingRole.values.firstWhere(
           (role) => role.name == name,
@@ -69,6 +83,7 @@ extension _MarkdownFindingParse on MarkdownService {
         return '';
       }
       if (content.startsWith('ocideck_ai_assisted:')) {
+        if (!first('ocideck_ai_assisted:')) return '';
         aiAssistedFields = content
             .substring('ocideck_ai_assisted:'.length)
             .split(',')

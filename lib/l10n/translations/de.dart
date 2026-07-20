@@ -738,6 +738,10 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Afbeeldingen door AI laten taggen?': 'Bilder von der KI taggen lassen?',
+  'afbeeldingen gaan naar': 'Bilder gehen an',
+  'een model op dit apparaat': 'ein Modell auf diesem Gerät',
+  'Doorgaan': 'Fortfahren',
   'Ontdekkingen': 'Entdeckungen',
   'Wat is gevonden': 'Was gefunden wurde',
   'Soort': 'Art',

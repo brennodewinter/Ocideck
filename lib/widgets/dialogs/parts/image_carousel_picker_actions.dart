@@ -191,7 +191,36 @@ extension _CarouselActions on _ImageCarouselPickerState {
       );
       return;
     }
+    // Eerst vragen, en zeggen hoevéél en waarheen. Dit was een kale
+    // icoonknop: één klik stuurde élke ongetagde afbeelding uit de bibliotheek
+    // — schermafdrukken van beheerpanelen, klantsystemen, gezichten — serieel
+    // naar een derde partij. De knop ernaast, die alleen lokale tekst wíst,
+    // vraagt wél om bevestiging.
     final settings = ref.read(settingsProvider).aiSettings;
+    final destination = settings.mode == AiBackendMode.cloud
+        ? settings.baseUrl
+        : l10n.d('een model op dit apparaat');
+    final go = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(ctx.l10n.d('Afbeeldingen door AI laten taggen?')),
+        content: Text(
+          '${untagged.length} ${ctx.l10n.d('afbeeldingen gaan naar')} '
+          '$destination.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: Text(ctx.l10n.d('Annuleren')),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: Text(ctx.l10n.d('Doorgaan')),
+          ),
+        ],
+      ),
+    );
+    if (go != true || !mounted) return;
     final tagger = ImageAltAiService(
       AiClientService(
         settings: settings,

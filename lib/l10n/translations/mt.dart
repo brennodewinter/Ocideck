@@ -1803,6 +1803,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Afbeeldingen door AI laten taggen?': 'Tħalli l-IA tittaggja dawn l-istampi?',
+  'afbeeldingen gaan naar': 'stampi jintbagħtu lil',
+  'een model op dit apparaat': 'mudell fuq dan l-apparat',
+  'Doorgaan': 'Kompli',
   'Ontdekkingen': 'Skoperti',
   'Wat is gevonden': 'X\'instab',
   'Soort': 'Tip',

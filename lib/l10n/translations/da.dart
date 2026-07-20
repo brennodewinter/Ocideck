@@ -1780,6 +1780,10 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Afbeeldingen door AI laten taggen?': 'Lad AI tagge disse billeder?',
+  'afbeeldingen gaan naar': 'billeder sendes til',
+  'een model op dit apparaat': 'en model på denne enhed',
+  'Doorgaan': 'Fortsæt',
   'Ontdekkingen': 'Fund',
   'Wat is gevonden': 'Hvad der blev fundet',
   'Soort': 'Type',

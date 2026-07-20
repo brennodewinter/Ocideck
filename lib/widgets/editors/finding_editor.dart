@@ -1,4 +1,8 @@
 import '../../utils/image_limits.dart' show boundedFileImage;
+import '../../models/deck.dart';
+import '../../services/privacy/privacy_own_identity.dart';
+import '../../services/privacy/privacy_projection.dart';
+import '../../state/settings_provider.dart';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -165,19 +169,63 @@ class _FindingEditorState extends ConsumerState<FindingEditor>
   }
 
   /// The pentester's own facts, the only grounding the AI drafting gets (§16.3).
+  ///
+  /// De vrije tekst gaat eerst door [PrivacyProjection.forExternalProcessing].
+  /// Die projectie is precies hiervoor geschreven — het doc-commentaar noemt
+  /// AI-backends bij name — maar had geen enkele aanroeper, terwijl
+  /// `privacy_projection.dart` zichzelf "de énige grens" noemt en zijn
+  /// constructor privaat maakt zodat geen exportpad de ongeredigeerde bron in
+  /// handen krijgt. Uitgerekend het ene pad dat een derde partij bereikt ging
+  /// eromheen: een `[[Jan de Vries, BSN …]]` die op elk scherm en in elke export
+  /// wordt weggelakt, ging woordelijk de leiding op.
+  ///
+  /// Die projectie is bewust strénger dan de zaalprojectie: dat de auteur
+  /// besluit dat een zaal de namen mag zien, is geen toestemming om ze naar een
+  /// extern model te sturen.
+  ///
+  /// De identificatoren (CVSS, CWE, CVE) blijven ongemoeid — dat zijn geen
+  /// persoonsgegevens, en het model heeft ze nodig om te aarden.
   FindingAiContext _aiContext() {
-    final cweText = _cwe.text.trim();
-    return FindingAiContext(
-      heading: _heading.text,
-      scopeObject: _scope.text,
-      cvssVector: _cvss.text,
-      cwe: cweText,
-      cveIds: [for (final m in _reCve.allMatches(_cve.text)) m.group(0)!],
-      description: _description.text,
-      confirmation: _confirmation.text,
-      impact: _impact.text,
-      recommendation: _recommendation.text,
+    final safe = _redactedForExternal(
+      FindingSpec(
+        heading: _heading.text,
+        scopeObject: _scope.text,
+        description: _description.text,
+        confirmation: _confirmation.text,
+        impact: _impact.text,
+        recommendation: _recommendation.text,
+      ),
     );
+    return FindingAiContext(
+      heading: safe.heading,
+      scopeObject: safe.scopeObject,
+      cvssVector: _cvss.text,
+      cwe: _cwe.text.trim(),
+      cveIds: [for (final m in _reCve.allMatches(_cve.text)) m.group(0)!],
+      description: safe.description,
+      confirmation: safe.confirmation,
+      impact: safe.impact,
+      recommendation: safe.recommendation,
+    );
+  }
+
+  /// [spec] met alles eruit wat de scanner vindt, via dezelfde projectie die
+  /// elke andere uitgang gebruikt — geen tweede redactielogica ernaast.
+  FindingSpec _redactedForExternal(FindingSpec spec) {
+    final settings = ref.read(settingsProvider);
+    final projected = PrivacyProjection.forExternalProcessing(
+      Deck(
+        title: '',
+        slides: [
+          Slide.create(
+            SlideType.finding,
+          ).copyWith(customMarkdown: spec.toMarkdown()),
+        ],
+      ),
+      disabledRules: settings.privacyDisabledRules,
+      ownIdentity: OwnIdentity.fromLines(settings.privacyOwnIdentity),
+    );
+    return FindingSpec.parse(projected.deck.slides.first.customMarkdown);
   }
 
   /// Insert an AI draft into [controller] and mark [field] as an unreviewed AI

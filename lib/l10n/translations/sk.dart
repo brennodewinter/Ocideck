@@ -1788,6 +1788,10 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Afbeeldingen door AI laten taggen?': 'Nechať AI označiť tieto obrázky?',
+  'afbeeldingen gaan naar': 'obrázkov bude odoslaných na',
+  'een model op dit apparaat': 'model v tomto zariadení',
+  'Doorgaan': 'Pokračovať',
   'Ontdekkingen': 'Objavy',
   'Wat is gevonden': 'Čo sa našlo',
   'Soort': 'Druh',

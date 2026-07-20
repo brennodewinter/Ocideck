@@ -1793,6 +1793,10 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Afbeeldingen door AI laten taggen?': 'Pozwolić SI otagować te obrazy?',
+  'afbeeldingen gaan naar': 'obrazów zostanie wysłanych do',
+  'een model op dit apparaat': 'model na tym urządzeniu',
+  'Doorgaan': 'Kontynuuj',
   'Ontdekkingen': 'Odkrycia',
   'Wat is gevonden': 'Co znaleziono',
   'Soort': 'Rodzaj',

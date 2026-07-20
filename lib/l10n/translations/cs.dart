@@ -1784,6 +1784,10 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Afbeeldingen door AI laten taggen?': 'Nechat AI označit tyto obrázky?',
+  'afbeeldingen gaan naar': 'obrázků bude odesláno na',
+  'een model op dit apparaat': 'model v tomto zařízení',
+  'Doorgaan': 'Pokračovat',
   'Ontdekkingen': 'Objevy',
   'Wat is gevonden': 'Co bylo nalezeno',
   'Soort': 'Druh',

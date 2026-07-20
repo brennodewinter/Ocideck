@@ -1780,6 +1780,10 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Afbeeldingen door AI laten taggen?': 'Låt AI tagga dessa bilder?',
+  'afbeeldingen gaan naar': 'bilder skickas till',
+  'een model op dit apparaat': 'en modell på den här enheten',
+  'Doorgaan': 'Fortsätt',
   'Ontdekkingen': 'Fynd',
   'Wat is gevonden': 'Vad som hittades',
   'Soort': 'Typ',

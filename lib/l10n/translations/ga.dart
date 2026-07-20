@@ -1817,6 +1817,11 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Afbeeldingen door AI laten taggen?':
+      'Lig don IS na híomhánna seo a chlibeáil?',
+  'afbeeldingen gaan naar': 'íomhá le seoladh chuig',
+  'een model op dit apparaat': 'múnla ar an ngléas seo',
+  'Doorgaan': 'Lean ar aghaidh',
   'Ontdekkingen': 'Fionnachtana',
   'Wat is gevonden': 'Cad a fuarthas',
   'Soort': 'Cineál',

@@ -1809,6 +1809,11 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Afbeeldingen door AI laten taggen?':
+      'Να προσθέσει η ΤΝ ετικέτες σε αυτές τις εικόνες;',
+  'afbeeldingen gaan naar': 'εικόνες θα σταλούν σε',
+  'een model op dit apparaat': 'ένα μοντέλο σε αυτή τη συσκευή',
+  'Doorgaan': 'Συνέχεια',
   'Ontdekkingen': 'Ανακαλύψεις',
   'Wat is gevonden': 'Τι βρέθηκε',
   'Soort': 'Είδος',

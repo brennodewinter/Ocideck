@@ -1799,6 +1799,11 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Afbeeldingen door AI laten taggen?':
+      'Lăsați IA să eticheteze aceste imagini?',
+  'afbeeldingen gaan naar': 'imagini vor fi trimise către',
+  'een model op dit apparaat': 'un model pe acest dispozitiv',
+  'Doorgaan': 'Continuă',
   'Ontdekkingen': 'Descoperiri',
   'Wat is gevonden': 'Ce s-a găsit',
   'Soort': 'Tip',
