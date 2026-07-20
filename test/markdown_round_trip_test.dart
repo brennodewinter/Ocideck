@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/actions_spec.dart';
+import 'package:ocideck/models/asset_overview_spec.dart';
 import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/cockpit.dart';
 import 'package:ocideck/models/deck.dart';
@@ -1899,6 +1900,60 @@ void main() {
       expect(item.status, ActionStatus.open);
       expect(item.isOverdue(DateTime(2026, 7, 20)), isTrue);
       expect(item.isOverdue(DateTime(2019, 1, 1)), isFalse);
+    });
+  });
+
+  group('assets slide round-trip', () {
+    Slide assets(List<AssetGroup> groups) {
+      const title = 'Ons aanvalsoppervlak';
+      final spec = AssetOverviewSpec(title: title, groups: groups);
+      return Slide.create(
+        SlideType.assets,
+      ).copyWith(title: title, tableRows: spec.toTableRows());
+    }
+
+    test('the class token is written and read back', () {
+      final service = MarkdownService();
+      final markdown = service.generateDeck(
+        Deck(
+          title: 'Demo',
+          slides: [
+            assets(const [
+              AssetGroup(name: 'Webapplicaties', total: 182, atRisk: 12),
+            ]),
+          ],
+        ),
+      );
+      expect(markdown, contains('<!-- _class: assets -->'));
+      expect(markdown, contains('| Group | Total | AtRisk | New | Unowned |'));
+    });
+
+    test('every count survives the trip', () {
+      final out = _roundTrip(
+        assets(const [
+          AssetGroup(
+            name: 'Webapplicaties',
+            total: 182,
+            atRisk: 12,
+            newlyFound: 7,
+            unowned: 3,
+          ),
+          AssetGroup(name: 'VPN-endpoints', total: 3, atRisk: 2),
+        ]),
+      );
+      expect(out.type, SlideType.assets);
+
+      final spec = AssetOverviewSpec.fromSlide(out.title, out.tableRows);
+      expect(spec.groups.length, 2);
+      final web = spec.groups.first;
+      expect(web.name, 'Webapplicaties');
+      expect(web.total, 182);
+      expect(web.atRisk, 12);
+      expect(web.newlyFound, 7);
+      expect(web.unowned, 3);
+      // Totals are derived on the far side too, never carried in the file.
+      expect(spec.totalAssets, 185);
+      expect(spec.totalAtRisk, 14);
     });
   });
 

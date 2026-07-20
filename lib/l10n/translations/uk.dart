@@ -1812,6 +1812,25 @@ const _dutchSourceAddUk = <String, String>{
       'реєстраційний номер медичного працівника (BIG)',
   'AGB-code': 'код надавача медичних послуг (AGB)',
   'proces-verbaalnummer': 'номер поліцейського протоколу',
+  'Aanvalsoppervlak': 'Поверхня атаки',
+  'Soort toevoegen': 'Додати вид',
+  'Soort verwijderen': 'Видалити вид',
+  'Soort object': 'Вид об\'єкта',
+  'Gevonden': 'Знайдено',
+  'Kost werk': 'Потребує роботи',
+  'werk': 'робота',
+  'nieuw': 'нові',
+  'Geen eigenaar': 'Без відповідального',
+  'geen eigenaar': 'без відповідального',
+  'objecten in beeld': 'об\'єктів у полі зору',
+  'Een overzicht draagt hoogstens acht soorten; meer is een inventarislijst en geen overzicht.':
+      'Огляд вміщує щонайбільше вісім видів; більше — це інвентарний список, а не огляд.',
+  'Een deelgetal is groter dan het totaal van zijn soort. De slide toont het zoals ingevuld — controleer de bron.':
+      'Часткове число перевищує підсумок свого виду. Слайд показує його як введено — перевірте джерело.',
+  'De drie laatste zijn deelverzamelingen van het gevonden aantal; OciDeck telt niets zelf, de cijfers komen uit uw scan.':
+      'Три останні — підмножини знайденої кількості; OciDeck сам нічого не рахує, числа походять із вашого сканування.',
+  'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
+      'Поверхня атаки за видом об\'єкта: скільки їх, скільки потребують роботи, що нове і що нікому не належить. Останнє зазвичай і є розмовою.',
   'Acties en besluiten': 'Дії та рішення',
   'Actie toevoegen': 'Додати дію',
   'Actie verwijderen': 'Видалити дію',

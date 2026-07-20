@@ -21,6 +21,7 @@ const _knownClassTokens = {
   'timeline',
   'scorecard',
   'actions',
+  'assets',
   'finding',
   'findings-summary',
   'checklist',

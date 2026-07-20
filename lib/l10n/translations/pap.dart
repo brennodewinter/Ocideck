@@ -751,6 +751,25 @@ const _dutchSourceAddPap = {
       'number di registrashon di un profeshonal di salú (BIG)',
   'AGB-code': 'kódigo di proveedor di kuido (AGB)',
   'proces-verbaalnummer': 'number di rapòrt di polis',
+  'Aanvalsoppervlak': 'Superfisie di atake',
+  'Soort toevoegen': 'Agregá tipo',
+  'Soort verwijderen': 'Kita tipo',
+  'Soort object': 'Tipo di opheto',
+  'Gevonden': 'Hañá',
+  'Kost werk': 'Ta rekerí trabou',
+  'werk': 'trabou',
+  'nieuw': 'nobo',
+  'Geen eigenaar': 'Sin doño',
+  'geen eigenaar': 'sin doño',
+  'objecten in beeld': 'opheto na bista',
+  'Een overzicht draagt hoogstens acht soorten; meer is een inventarislijst en geen overzicht.':
+      'Un resumen ta karga maksimo ocho tipo; mas ta un lista di inventario i no un resumen.',
+  'Een deelgetal is groter dan het totaal van zijn soort. De slide toont het zoals ingevuld — controleer de bron.':
+      'Un sifra parsial ta mas grandi ku e total di su tipo. E slide ta mustr\'é manera bo a yena — kontrolá e fuente.',
+  'De drie laatste zijn deelverzamelingen van het gevonden aantal; OciDeck telt niets zelf, de cijfers komen uit uw scan.':
+      'E último tres ta subkonhunto di e kantidat hañá; OciDeck no ta konta nada mes, e sifranan ta bini for di bo skan.',
+  'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
+      'E superfisie di atake pa tipo di opheto: kuantu tin, kuantu ta rekerí trabou, kiko ta nobo i kiko no tin doño. Esun último ta generalmente e kombersashon.',
   'Acties en besluiten': 'Akshon i desishon',
   'Actie toevoegen': 'Agregá akshon',
   'Actie verwijderen': 'Kita akshon',

@@ -130,8 +130,15 @@ void main() {
     await tester.tap(find.byTooltip('Alfabetisch sorteren'));
     await tester.pumpAndSettle();
 
-    // Alphabetically by Dutch label, "Acties en besluiten" comes first.
-    expect(visibleTypes(tester).first, SlideType.actions);
+    // Assert the *ordering*, not which label happens to win it. Naming the
+    // winner meant this test broke every time a type was added whose label
+    // sorted early — which says nothing about whether sorting works.
+    final labels = [
+      for (final type in visibleTypes(tester)) slideTypeMeta[type]!.label,
+    ];
+    final sorted = [...labels]
+      ..sort((a, b) => a.toLowerCase().compareTo(b.toLowerCase()));
+    expect(labels, sorted);
   });
 
   testWidgets('type cards are labelled buttons (WCAG name/role)', (

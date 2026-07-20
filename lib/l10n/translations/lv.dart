@@ -1792,6 +1792,25 @@ const _dutchSourceAddLv = <String, String>{
       'veselības aprūpes speciālista reģistrācijas numurs (BIG)',
   'AGB-code': 'veselības aprūpes pakalpojumu sniedzēja kods (AGB)',
   'proces-verbaalnummer': 'policijas protokola numurs',
+  'Aanvalsoppervlak': 'Uzbrukuma virsma',
+  'Soort toevoegen': 'Pievienot veidu',
+  'Soort verwijderen': 'Noņemt veidu',
+  'Soort object': 'Objekta veids',
+  'Gevonden': 'Atrasti',
+  'Kost werk': 'Prasa darbu',
+  'werk': 'darbs',
+  'nieuw': 'jauni',
+  'Geen eigenaar': 'Bez atbildīgā',
+  'geen eigenaar': 'bez atbildīgā',
+  'objecten in beeld': 'objekti redzeslokā',
+  'Een overzicht draagt hoogstens acht soorten; meer is een inventarislijst en geen overzicht.':
+      'Pārskats nes ne vairāk kā astoņus veidus; vairāk ir inventāra saraksts, nevis pārskats.',
+  'Een deelgetal is groter dan het totaal van zijn soort. De slide toont het zoals ingevuld — controleer de bron.':
+      'Daļskaitlis pārsniedz sava veida kopsummu. Slaids to rāda, kā ievadīts — pārbaudiet avotu.',
+  'De drie laatste zijn deelverzamelingen van het gevonden aantal; OciDeck telt niets zelf, de cijfers komen uit uw scan.':
+      'Pēdējie trīs ir atrastā skaita apakškopas; OciDeck pats neko neskaita, skaitļi nāk no jūsu skenēšanas.',
+  'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
+      'Uzbrukuma virsma pēc objekta veida: cik to ir, cik prasa darbu, kas ir jauns un kas nevienam nepieder. Pēdējais parasti ir tā saruna.',
   'Acties en besluiten': 'Darbības un lēmumi',
   'Actie toevoegen': 'Pievienot darbību',
   'Actie verwijderen': 'Noņemt darbību',

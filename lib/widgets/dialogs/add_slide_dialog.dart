@@ -49,6 +49,7 @@ class AddSlideDialog extends StatefulWidget {
     SlideType.cockpit,
     SlideType.scorecard,
     SlideType.actions,
+    SlideType.assets,
     SlideType.timeline,
     SlideType.question,
     SlideType.code,
@@ -517,6 +518,8 @@ class SlideTypePreviewPainter extends CustomPainter {
         _paintScorecardWireframe(canvas);
       case SlideType.actions:
         _paintActionsWireframe(canvas);
+      case SlideType.assets:
+        _paintAssetsWireframe(canvas);
       case SlideType.finding:
       case SlideType.findingsSummary:
       case SlideType.checklist:
@@ -550,6 +553,21 @@ class SlideTypePreviewPainter extends CustomPainter {
       _bar(canvas, 14, y, 5, 8, i < 2 ? _accent : _soft, radius: 2);
       _bar(canvas, 24, y + 1, i.isEven ? 74 : 60, 6, _ink, radius: 2);
       _bar(canvas, 108, y + 1, 38, 6, _soft, radius: 2);
+    }
+  }
+
+  /// Heading plus four proportional bars of differing length, each with a
+  /// filled head standing for the at-risk share. Split out of [paint] for the
+  /// length ratchet, like the other reporting wireframes.
+  void _paintAssetsWireframe(Canvas canvas) {
+    _bar(canvas, 14, 12, 72, 9, _ink);
+    const widths = [118.0, 76.0, 44.0, 22.0];
+    for (var i = 0; i < widths.length; i++) {
+      final y = 32.0 + i * 13;
+      _bar(canvas, 14, y, 26, 6, _soft, radius: 2);
+      _bar(canvas, 46, y, widths[i], 7, _fill, radius: 2);
+      // The at-risk head: always a slice, never the whole bar.
+      _bar(canvas, 46, y, widths[i] * 0.28, 7, _accent, radius: 2);
     }
   }
 

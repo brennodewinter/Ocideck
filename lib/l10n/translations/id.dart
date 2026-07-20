@@ -1792,6 +1792,25 @@ const _dutchSourceAddId = <String, String>{
   'BIG-nummer van een zorgverlener': 'nomor registrasi tenaga kesehatan (BIG)',
   'AGB-code': 'kode penyedia layanan kesehatan (AGB)',
   'proces-verbaalnummer': 'nomor laporan polisi',
+  'Aanvalsoppervlak': 'Permukaan serangan',
+  'Soort toevoegen': 'Tambah jenis',
+  'Soort verwijderen': 'Hapus jenis',
+  'Soort object': 'Jenis objek',
+  'Gevonden': 'Ditemukan',
+  'Kost werk': 'Perlu dikerjakan',
+  'werk': 'kerja',
+  'nieuw': 'baru',
+  'Geen eigenaar': 'Tanpa penanggung jawab',
+  'geen eigenaar': 'tanpa penanggung jawab',
+  'objecten in beeld': 'objek dalam pandangan',
+  'Een overzicht draagt hoogstens acht soorten; meer is een inventarislijst en geen overzicht.':
+      'Ikhtisar memuat paling banyak delapan jenis; lebih dari itu adalah daftar inventaris, bukan ikhtisar.',
+  'Een deelgetal is groter dan het totaal van zijn soort. De slide toont het zoals ingevuld — controleer de bron.':
+      'Sebuah subjumlah melebihi total jenisnya. Slide menampilkannya apa adanya — periksa sumbernya.',
+  'De drie laatste zijn deelverzamelingen van het gevonden aantal; OciDeck telt niets zelf, de cijfers komen uit uw scan.':
+      'Tiga yang terakhir adalah bagian dari jumlah yang ditemukan; OciDeck tidak menghitung apa pun sendiri, angkanya berasal dari pemindaian Anda.',
+  'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
+      'Permukaan serangan per jenis objek: berapa banyak, berapa yang perlu dikerjakan, apa yang baru dan apa yang tidak dimiliki siapa pun. Yang terakhir biasanya jadi percakapannya.',
   'Acties en besluiten': 'Tindakan dan keputusan',
   'Actie toevoegen': 'Tambah tindakan',
   'Actie verwijderen': 'Hapus tindakan',

@@ -1767,6 +1767,25 @@ const _dutchSourceAddTlh = <String, String>{
   'BIG-nummer van een zorgverlener': 'Qel mI\' (BIG)',
   'AGB-code': 'Qel ghom mI\' (AGB)',
   'proces-verbaalnummer': 'HuchwI\' De\' mI\'',
+  'Aanvalsoppervlak': 'HIv \'ay\'',
+  'Soort toevoegen': 'Segh chel',
+  'Soort verwijderen': 'Segh teq',
+  'Soort object': 'Doch Segh',
+  'Gevonden': 'tu\'lu\'bogh',
+  'Kost werk': 'vum poQ',
+  'werk': 'vum',
+  'nieuw': 'chu\'',
+  'Geen eigenaar': 'pIn Hutlh',
+  'geen eigenaar': 'pIn Hutlh',
+  'objecten in beeld': 'Dochmey legh',
+  'Een overzicht draagt hoogstens acht soorten; meer is een inventarislijst en geen overzicht.':
+      'chorgh Segh neH qeng nav; law\'qu\'chugh, tetlh \'oH, nav\'e\' \'oHbe\'.',
+  'Een deelgetal is groter dan het totaal van zijn soort. De slide toont het zoals ingevuld — controleer de bron.':
+      'Segh HochHom law\' \'ay\' mI\'. qechDaj \'ang nav; Daq yInuD.',
+  'De drie laatste zijn deelverzamelingen van het gevonden aantal; OciDeck telt niets zelf, de cijfers komen uit uw scan.':
+      'wej Qav: tu\'lu\'bogh mI\' \'ay\'mey chaH. toghbe\' OciDeck; nuDmeylIjvo\' chaj mI\'mey.',
+  'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
+      'Doch Segh, HIv \'ay\': \'ar tu\'lu\', \'ar vum poQ, nuq chu\', nuq pIn Hutlh. Qav: ghojmeH ja\'chuq.',
   'Acties en besluiten': 'vangmeH chutmey',
   'Actie toevoegen': 'vang chel',
   'Actie verwijderen': 'vang teq',

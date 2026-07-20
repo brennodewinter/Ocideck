@@ -30,6 +30,31 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   van een waarschuwing, waarmee de export erop kan blokkeren. Standaard uit,
   omdat aanzetten verandert wat een bestaande instelling betekent. Alleen zekere
   bevindingen schuiven mee.
+- **Een nieuw slidetype: het aanvalsoppervlak.** Tot acht soorten extern
+  bereikbare objecten — webapplicaties, mailservers, VPN-endpoints, API's — met
+  per soort hoeveel er zijn, hoeveel er werk kosten, hoeveel nieuw zijn en
+  hoeveel er geen eigenaar hebben.
+
+  Een regel is een *soort*, geen los object. Dat is de hele keuze: een scan
+  levert honderden hosts en een managementslide draagt er acht. Wie ze allemaal
+  opsomt, maakt een bijlage. De vraag die deze slide beantwoordt is hoe groot
+  het oppervlak is, hoeveel ervan werk kost, en wat niemand bezit.
+
+  Die laatste kolom is de bestuurlijke. Een object zonder eigenaar is geen
+  technisch probleem maar een governance-probleem: er is niemand die het
+  oplost, en vaak wist niemand dat het bestond.
+
+  Elke soort krijgt een balk met het werk-aandeel ingevuld. Alle balken delen
+  één schaal, gezet door de grootste soort op de slide, zodat een categorie van
+  drie niet even breed tekent als een van driehonderd. De totaalregel onderaan
+  wordt uit de rijen opgeteld en nooit ingetypt, zodat hij ze niet kan
+  tegenspreken.
+
+  OciDeck scant zelf niets; de cijfers komen uit uw eigen tool. De editor telt
+  mee terwijl u typt en waarschuwt als een deelgetal groter is dan het totaal
+  waar het bij hoort. Corrigeren doet hij het niet: dat zou de fout verbergen in
+  wat het getal produceerde, en juist zulke fouten hoort een rapportage te laten
+  zien.
 - **Een nieuw slidetype: acties en besluiten.** Tot acht regels met wat er moet
   gebeuren, wie het doet, wanneer het af moet, en — het veld waar het type om
   bestaat — wat u van de zaal vraagt: ter informatie, besluit gevraagd, of

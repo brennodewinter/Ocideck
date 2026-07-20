@@ -1793,6 +1793,25 @@ const _dutchSourceAddSv = <String, String>{
       'registreringsnummer för vårdpersonal (BIG)',
   'AGB-code': 'kod för vårdgivare (AGB)',
   'proces-verbaalnummer': 'diarienummer för polisanmälan',
+  'Aanvalsoppervlak': 'Attackyta',
+  'Soort toevoegen': 'Lägg till typ',
+  'Soort verwijderen': 'Ta bort typ',
+  'Soort object': 'Objekttyp',
+  'Gevonden': 'Hittade',
+  'Kost werk': 'Kräver arbete',
+  'werk': 'arbete',
+  'nieuw': 'nya',
+  'Geen eigenaar': 'Utan ansvarig',
+  'geen eigenaar': 'utan ansvarig',
+  'objecten in beeld': 'objekt i sikte',
+  'Een overzicht draagt hoogstens acht soorten; meer is een inventarislijst en geen overzicht.':
+      'En översikt bär högst åtta typer; fler är en inventarielista och ingen översikt.',
+  'Een deelgetal is groter dan het totaal van zijn soort. De slide toont het zoals ingevuld — controleer de bron.':
+      'En delsumma överstiger totalen för sin typ. Bilden visar den som angiven — kontrollera källan.',
+  'De drie laatste zijn deelverzamelingen van het gevonden aantal; OciDeck telt niets zelf, de cijfers komen uit uw scan.':
+      'De tre sista är delmängder av det funna antalet; OciDeck räknar inget själv, siffrorna kommer från din skanning.',
+  'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
+      'Attackytan per objekttyp: hur många det finns, hur många som kräver arbete, vad som är nytt och vad ingen äger. Det sista är oftast samtalet.',
   'Acties en besluiten': 'Åtgärder och beslut',
   'Actie toevoegen': 'Lägg till åtgärd',
   'Actie verwijderen': 'Ta bort åtgärd',

@@ -1816,6 +1816,25 @@ const _dutchSourceAddBg = <String, String>{
       'регистрационен номер на медицински специалист (BIG)',
   'AGB-code': 'код на доставчик на здравни услуги (AGB)',
   'proces-verbaalnummer': 'номер на полицейски протокол',
+  'Aanvalsoppervlak': 'Атакуема повърхност',
+  'Soort toevoegen': 'Добавяне на вид',
+  'Soort verwijderen': 'Премахване на вид',
+  'Soort object': 'Вид обект',
+  'Gevonden': 'Намерени',
+  'Kost werk': 'Изисква работа',
+  'werk': 'работа',
+  'nieuw': 'нови',
+  'Geen eigenaar': 'Без отговорник',
+  'geen eigenaar': 'без отговорник',
+  'objecten in beeld': 'обекта в обхват',
+  'Een overzicht draagt hoogstens acht soorten; meer is een inventarislijst en geen overzicht.':
+      'Прегледът носи най-много осем вида; повече е инвентарен списък, а не преглед.',
+  'Een deelgetal is groter dan het totaal van zijn soort. De slide toont het zoals ingevuld — controleer de bron.':
+      'Частично число надвишава общия сбор на своя вид. Слайдът го показва както е въведено — проверете източника.',
+  'De drie laatste zijn deelverzamelingen van het gevonden aantal; OciDeck telt niets zelf, de cijfers komen uit uw scan.':
+      'Последните три са подмножества на намерения брой; OciDeck не брои нищо сам, числата идват от вашето сканиране.',
+  'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
+      'Атакуемата повърхност по вид обект: колко са, колко изискват работа, какво е ново и какво никой не притежава. Последното обикновено е разговорът.',
   'Acties en besluiten': 'Действия и решения',
   'Actie toevoegen': 'Добавяне на действие',
   'Actie verwijderen': 'Премахване на действие',

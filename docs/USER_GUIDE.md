@@ -340,7 +340,8 @@ dashboard of aviation-style instrument gauges),
 **question** (an interactive quiz slide), **timeline** (an animated timeline of
 dated events), **scorecard** (a few headline figures, each beside the figure from
 the previous report), **actions** (what has to happen, who does it and what is
-being asked of the room), and
+being asked of the room), **asset overview** (the attack surface by kind of
+object), and
 **free Markdown**. Each card in the chooser shows a miniature
 wireframe of the layout, and the dialog works entirely with the keyboard
 (`Tab`/`Enter` to choose, `Esc` to cancel). Each type has a dedicated editor on
@@ -628,6 +629,40 @@ reasoning as the heatmap's own colour ramp.
 Figures are stored as an ordinary Markdown table, so the slide stays readable in
 the `.md` file and a script that already produces your numbers can write the
 table directly. See [FILE_FORMAT.md](FILE_FORMAT.md) §5 for the columns.
+
+### Asset overview slides
+
+An asset-overview slide shows your **attack surface** — the objects reachable
+from outside — broken into up to eight **kinds**: web applications, mail servers,
+VPN endpoints, APIs, certificates, whatever your estate consists of.
+
+A row is a kind, not a single object. That is the point: a scan hands you
+hundreds of hosts, and a slide that lists them is an appendix nobody reads. Per
+kind you give four figures:
+
+- **Found** — how many there are;
+- **Needs work** — how many carry an open finding;
+- **New** — how many were seen for the first time in this scan;
+- **No owner** — how many have nobody's name against them.
+
+The last one tends to be the one the meeting is actually about. An object with no
+owner is not a technical problem but a governance one: there is nobody to fix it,
+and often nobody who knew it existed.
+
+Each kind is drawn as a bar with the "needs work" share filled in. All bars share
+**one scale**, set by the largest kind on the slide, so a category of three does
+not draw as wide as a category of three hundred. The totals line at the bottom is
+summed from the rows, never typed in, so it cannot contradict them.
+
+OciDeck does not scan anything — the figures come from whatever tool produced the
+report. The editor adds them up as you type, so a mistyped figure shows up there
+rather than on the projector, and it warns when a subset is larger than the total
+it belongs to. It does **not** correct that for you: quietly fixing a number
+would hide the fault in whatever generated it, and that is exactly the kind of
+error a report should surface.
+
+Storage is an ordinary Markdown table, so the tool that has your numbers can
+write the slide directly — see [FILE_FORMAT.md](FILE_FORMAT.md) §5.
 
 ### Actions and decisions slides
 

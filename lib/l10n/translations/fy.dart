@@ -751,6 +751,25 @@ const _dutchSourceAddFy = {
   'BIG-nummer van een zorgverlener': 'BIG-nûmer fan in soarchferliener',
   'AGB-code': 'AGB-koade',
   'proces-verbaalnummer': 'proses-ferbaalnûmer',
+  'Aanvalsoppervlak': 'Oanfalsflak',
+  'Soort toevoegen': 'Soarte tafoegje',
+  'Soort verwijderen': 'Soarte fuortsmite',
+  'Soort object': 'Soarte objekt',
+  'Gevonden': 'Fûn',
+  'Kost werk': 'Kostet wurk',
+  'werk': 'wurk',
+  'nieuw': 'nij',
+  'Geen eigenaar': 'Gjin eigner',
+  'geen eigenaar': 'gjin eigner',
+  'objecten in beeld': 'objekten yn byld',
+  'Een overzicht draagt hoogstens acht soorten; meer is een inventarislijst en geen overzicht.':
+      'In oersjoch draacht op syn heechst acht soarten; mear is in ynventarislist en gjin oersjoch.',
+  'Een deelgetal is groter dan het totaal van zijn soort. De slide toont het zoals ingevuld — controleer de bron.':
+      'In dielgetal is grutter as it totaal fan syn soarte. De slide lit it sjen sa\'t it ynfolle is — kontrolearje de boarne.',
+  'De drie laatste zijn deelverzamelingen van het gevonden aantal; OciDeck telt niets zelf, de cijfers komen uit uw scan.':
+      'De lêste trije binne dielferzamelingen fan it fûne oantal; OciDeck telt sels neat, de sifers komme út jo scan.',
+  'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
+      'It oanfalsflak per soarte objekt: hoefolle der binne, hoefolle wurk kostje, wat nij is en wat nimmen besit. Dat lêste is meastal it petear.',
   'Acties en besluiten': 'Aksjes en beslissings',
   'Actie toevoegen': 'Aksje tafoegje',
   'Actie verwijderen': 'Aksje fuortsmite',

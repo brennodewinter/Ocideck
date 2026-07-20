@@ -1799,6 +1799,25 @@ const _dutchSourceAddSk = <String, String>{
   'BIG-nummer van een zorgverlener': 'registračné číslo zdravotníka (BIG)',
   'AGB-code': 'kód poskytovateľa starostlivosti (AGB)',
   'proces-verbaalnummer': 'číslo policajného protokolu',
+  'Aanvalsoppervlak': 'Útočná plocha',
+  'Soort toevoegen': 'Pridať druh',
+  'Soort verwijderen': 'Odstrániť druh',
+  'Soort object': 'Druh objektu',
+  'Gevonden': 'Nájdené',
+  'Kost werk': 'Vyžaduje prácu',
+  'werk': 'práca',
+  'nieuw': 'nové',
+  'Geen eigenaar': 'Bez vlastníka',
+  'geen eigenaar': 'bez vlastníka',
+  'objecten in beeld': 'objektov v hľadáčiku',
+  'Een overzicht draagt hoogstens acht soorten; meer is een inventarislijst en geen overzicht.':
+      'Prehľad unesie najviac osem druhov; viac je inventárny zoznam, nie prehľad.',
+  'Een deelgetal is groter dan het totaal van zijn soort. De slide toont het zoals ingevuld — controleer de bron.':
+      'Čiastkové číslo prevyšuje celkový počet svojho druhu. Snímka ho zobrazuje tak, ako bolo zadané — skontrolujte zdroj.',
+  'De drie laatste zijn deelverzamelingen van het gevonden aantal; OciDeck telt niets zelf, de cijfers komen uit uw scan.':
+      'Posledné tri sú podmnožiny nájdeného počtu; OciDeck sám nič nepočíta, čísla pochádzajú z vášho skenu.',
+  'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
+      'Útočná plocha podľa druhu objektu: koľko ich je, koľko vyžaduje prácu, čo je nové a čo nikto nevlastní. To posledné býva ten rozhovor.',
   'Acties en besluiten': 'Akcie a rozhodnutia',
   'Actie toevoegen': 'Pridať akciu',
   'Actie verwijderen': 'Odstrániť akciu',

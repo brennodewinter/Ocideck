@@ -751,6 +751,25 @@ const _dutchSourceAddDe = {
   'BIG-nummer van een zorgverlener': 'Registriernummer einer Pflegekraft (BIG)',
   'AGB-code': 'Leistungserbringer-Code (AGB)',
   'proces-verbaalnummer': 'Aktenzeichen einer Anzeige',
+  'Aanvalsoppervlak': 'Angriffsfläche',
+  'Soort toevoegen': 'Art hinzufügen',
+  'Soort verwijderen': 'Art entfernen',
+  'Soort object': 'Objektart',
+  'Gevonden': 'Gefunden',
+  'Kost werk': 'Braucht Arbeit',
+  'werk': 'Arbeit',
+  'nieuw': 'neu',
+  'Geen eigenaar': 'Ohne Verantwortlichen',
+  'geen eigenaar': 'ohne Verantwortlichen',
+  'objecten in beeld': 'Objekte im Blick',
+  'Een overzicht draagt hoogstens acht soorten; meer is een inventarislijst en geen overzicht.':
+      'Eine Übersicht trägt höchstens acht Arten; mehr ist eine Inventarliste und keine Übersicht.',
+  'Een deelgetal is groter dan het totaal van zijn soort. De slide toont het zoals ingevuld — controleer de bron.':
+      'Eine Teilzahl übersteigt die Gesamtzahl ihrer Art. Die Folie zeigt sie wie eingegeben — prüfen Sie die Quelle.',
+  'De drie laatste zijn deelverzamelingen van het gevonden aantal; OciDeck telt niets zelf, de cijfers komen uit uw scan.':
+      'Die letzten drei sind Teilmengen der gefundenen Anzahl; OciDeck zählt nichts selbst, die Zahlen stammen aus Ihrem Scan.',
+  'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
+      'Die Angriffsfläche nach Objektart: wie viele es gibt, wie viele Arbeit machen, was neu ist und was niemandem gehört. Letzteres ist meist das Gespräch.',
   'Acties en besluiten': 'Aktionen und Entscheidungen',
   'Actie toevoegen': 'Aktion hinzufügen',
   'Actie verwijderen': 'Aktion entfernen',

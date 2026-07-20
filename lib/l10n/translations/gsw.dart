@@ -1799,6 +1799,25 @@ const _dutchSourceAddGsw = <String, String>{
       'Registriernummere vomene Pflegepersonal (BIG)',
   'AGB-code': 'Leischtigserbringer-Code (AGB)',
   'proces-verbaalnummer': 'Aktezeiche vonere Aazeig',
+  'Aanvalsoppervlak': 'Aagriffsflächi',
+  'Soort toevoegen': 'Art hinzuefüege',
+  'Soort verwijderen': 'Art entferne',
+  'Soort object': 'Objektart',
+  'Gevonden': 'Gfunde',
+  'Kost werk': 'Bruucht Arbet',
+  'werk': 'Arbet',
+  'nieuw': 'neu',
+  'Geen eigenaar': 'Ohni Verantwortliche',
+  'geen eigenaar': 'ohni Verantwortliche',
+  'objecten in beeld': 'Objekt im Blick',
+  'Een overzicht draagt hoogstens acht soorten; meer is een inventarislijst en geen overzicht.':
+      'E Übersicht treit höchstens acht Arte; meh isch e Inventarlischte und kei Übersicht.',
+  'Een deelgetal is groter dan het totaal van zijn soort. De slide toont het zoals ingevuld — controleer de bron.':
+      'E Teilzahl isch grösser als s Total vo ihrer Art. D Folie zeigt sie wie iigäh — prüef d Quelle.',
+  'De drie laatste zijn deelverzamelingen van het gevonden aantal; OciDeck telt niets zelf, de cijfers komen uit uw scan.':
+      'Die letschte drü sind Teilmängene vo de gfundene Aazahl; OciDeck zellt sälber nüt, d Zahle chömed us Ihrem Scan.',
+  'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
+      'D Aagriffsflächi nach Objektart: wieviel s git, wieviel Arbet mached, was neu isch und was niemertem ghört. S Letschte isch meischtens s Gspröch.',
   'Acties en besluiten': 'Aktione und Entscheidige',
   'Actie toevoegen': 'Aktion hinzuefüege',
   'Actie verwijderen': 'Aktion entferne',

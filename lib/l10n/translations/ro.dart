@@ -1811,6 +1811,25 @@ const _dutchSourceAddRo = <String, String>{
       'numărul de înregistrare al unui cadru medical (BIG)',
   'AGB-code': 'cod de furnizor de servicii medicale (AGB)',
   'proces-verbaalnummer': 'număr de proces-verbal',
+  'Aanvalsoppervlak': 'Suprafață de atac',
+  'Soort toevoegen': 'Adaugă tip',
+  'Soort verwijderen': 'Elimină tipul',
+  'Soort object': 'Tip de obiect',
+  'Gevonden': 'Găsite',
+  'Kost werk': 'Necesită lucru',
+  'werk': 'de lucru',
+  'nieuw': 'noi',
+  'Geen eigenaar': 'Fără responsabil',
+  'geen eigenaar': 'fără responsabil',
+  'objecten in beeld': 'obiecte în vizor',
+  'Een overzicht draagt hoogstens acht soorten; meer is een inventarislijst en geen overzicht.':
+      'O privire de ansamblu poartă cel mult opt tipuri; mai multe înseamnă o listă de inventar, nu o privire de ansamblu.',
+  'Een deelgetal is groter dan het totaal van zijn soort. De slide toont het zoals ingevuld — controleer de bron.':
+      'Un subtotal depășește totalul tipului său. Slide-ul îl arată așa cum a fost introdus — verificați sursa.',
+  'De drie laatste zijn deelverzamelingen van het gevonden aantal; OciDeck telt niets zelf, de cijfers komen uit uw scan.':
+      'Ultimele trei sunt submulțimi ale numărului găsit; OciDeck nu numără nimic singur, cifrele vin din scanarea dumneavoastră.',
+  'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
+      'Suprafața de atac pe tip de obiect: câte sunt, câte necesită lucru, ce este nou și ce nu aparține nimănui. Ultimul aspect este de obicei discuția.',
   'Acties en besluiten': 'Acțiuni și decizii',
   'Actie toevoegen': 'Adaugă acțiune',
   'Actie verwijderen': 'Elimină acțiunea',

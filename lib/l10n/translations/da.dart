@@ -1793,6 +1793,25 @@ const _dutchSourceAddDa = <String, String>{
       'registreringsnummer for sundhedspersonale (BIG)',
   'AGB-code': 'kode for sundhedsudbyder (AGB)',
   'proces-verbaalnummer': 'journalnummer på politianmeldelse',
+  'Aanvalsoppervlak': 'Angrebsflade',
+  'Soort toevoegen': 'Tilføj type',
+  'Soort verwijderen': 'Fjern type',
+  'Soort object': 'Objekttype',
+  'Gevonden': 'Fundet',
+  'Kost werk': 'Kræver arbejde',
+  'werk': 'arbejde',
+  'nieuw': 'nye',
+  'Geen eigenaar': 'Uden ansvarlig',
+  'geen eigenaar': 'uden ansvarlig',
+  'objecten in beeld': 'objekter i sigte',
+  'Een overzicht draagt hoogstens acht soorten; meer is een inventarislijst en geen overzicht.':
+      'Et overblik bærer højst otte typer; flere er en inventarliste og ikke et overblik.',
+  'Een deelgetal is groter dan het totaal van zijn soort. De slide toont het zoals ingevuld — controleer de bron.':
+      'Et deltal overstiger totalen for sin type. Sliden viser det som indtastet — kontrollér kilden.',
+  'De drie laatste zijn deelverzamelingen van het gevonden aantal; OciDeck telt niets zelf, de cijfers komen uit uw scan.':
+      'De sidste tre er delmængder af det fundne antal; OciDeck tæller intet selv, tallene kommer fra din scanning.',
+  'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
+      'Angrebsfladen pr. objekttype: hvor mange der er, hvor mange der kræver arbejde, hvad der er nyt, og hvad ingen ejer. Det sidste er som regel samtalen.',
   'Acties en besluiten': 'Handlinger og beslutninger',
   'Actie toevoegen': 'Tilføj handling',
   'Actie verwijderen': 'Fjern handling',

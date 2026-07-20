@@ -417,6 +417,7 @@ The first class determines (together with the content) the **slide type**:
 | Timeline | `timeline` | — |
 | Scorecard | `scorecard` | — |
 | Actions | `actions` | — |
+| Asset overview | `assets` | — |
 | Finding | `finding` | — |
 | Findings summary | `findings-summary` | — |
 | Checklist | `checklist` | — |
@@ -831,6 +832,38 @@ heading is the title:
   as the decimal mark when unambiguous (one comma, no dot); thousands separators
   are refused rather than guessed at. A row that is entirely blank is dropped at
   both ends, so writing and reading agree.
+
+**Asset overview** (`assets`) — the attack surface broken into the kinds of
+object it consists of. Stored as a normal Markdown table, like `scorecard`:
+
+```markdown
+<!-- _class: assets -->
+# Ons aanvalsoppervlak
+| Group | Total | AtRisk | New | Unowned |
+| --- | --- | --- | --- | --- |
+| Webapplicaties | 182 | 12 | 7 | 3 |
+| Mailservers | 24 | 1 | 0 | 0 |
+| VPN-endpoints | 3 | 2 | 0 | 0 |
+```
+
+- A row is a **kind** of exposed object, not one object. A scan returns hundreds
+  and a management slide carries eight lines; listing individual hosts turns the
+  slide into an appendix. The per-object detail belongs in the tool that produced
+  it.
+- **`Total`** is how many were found; **`AtRisk`**, **`New`** and **`Unowned`**
+  are subsets of it — carrying an open finding, first seen in this scan, and
+  having nobody's name against them. That last one is a governance figure rather
+  than a technical one: an object without an owner has nobody to fix it.
+- Deck-wide totals are **derived, never stored**, so they cannot disagree with
+  the rows above them. Same rule as the findings summary's total.
+- A count that exceeds its group's total is **shown as given**; only the drawn
+  bar is clamped so it cannot overrun its row. Silently correcting it would hide
+  the fault in whatever produced the number. The editor flags it.
+- Counts are whole numbers; a negative or unreadable value reads as zero. At most
+  **eight** rows are kept, on both read and write, and an entirely blank row is
+  dropped at both ends.
+- Note that "asset" here means an exposed object. Elsewhere in the format (the
+  `.ocideck` package, `data/`, image paths) "asset" means a media file.
 
 **Actions** (`actions`) — what has to happen, who carries it, by when, and what
 is being asked of the room. Stored as a normal Markdown table, like `scorecard`:
@@ -1472,7 +1505,7 @@ not model is not reported.
 | **Comment** | warning | Comment without `_class:`, `_style:`, `ocideck_...`, `skip`, `tlp:`, or `advance:`. |
 | **Code blocks** | error | Odd number of ` ``` ` lines (not closed). |
 | **`_class`** | error | Malformed `<!-- _class: ... -->`. |
-| **`_class`** | warning | Unknown token in `_class` (known: `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `scorecard`, `actions`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `logo-safe`, `no-logo`, `no-footer`, `table-editable`). |
+| **`_class`** | warning | Unknown token in `_class` (known: `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `scorecard`, `actions`, `assets`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `logo-safe`, `no-logo`, `no-footer`, `table-editable`). |
 | **Slide metadata** | error | Unknown `<!-- tlp: ... -->`, non-numeric `<!-- advance: ... -->`, or invalid `<!-- ocideck_list_style: ... -->` (`bullets`, `numbered`, `checklist`, `richText`). |
 | **Two columns** | error | Invalid base64/JSON in `ocideck_two_bullets_*` comments. |
 | **Images** | error | `![...](...` without closing `)`. |

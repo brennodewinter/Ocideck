@@ -1796,6 +1796,25 @@ const _dutchSourceAddSl = <String, String>{
       'registrska številka zdravstvenega delavca (BIG)',
   'AGB-code': 'koda izvajalca zdravstvenih storitev (AGB)',
   'proces-verbaalnummer': 'številka policijskega zapisnika',
+  'Aanvalsoppervlak': 'Napadalna površina',
+  'Soort toevoegen': 'Dodaj vrsto',
+  'Soort verwijderen': 'Odstrani vrsto',
+  'Soort object': 'Vrsta predmeta',
+  'Gevonden': 'Najdeno',
+  'Kost werk': 'Zahteva delo',
+  'werk': 'delo',
+  'nieuw': 'novo',
+  'Geen eigenaar': 'Brez nosilca',
+  'geen eigenaar': 'brez nosilca',
+  'objecten in beeld': 'predmetov v vidnem polju',
+  'Een overzicht draagt hoogstens acht soorten; meer is een inventarislijst en geen overzicht.':
+      'Pregled nosi največ osem vrst; več je popis inventarja in ne pregled.',
+  'Een deelgetal is groter dan het totaal van zijn soort. De slide toont het zoals ingevuld — controleer de bron.':
+      'Delna številka presega skupno število svoje vrste. Prosojnica jo prikaže, kot je vnesena — preverite vir.',
+  'De drie laatste zijn deelverzamelingen van het gevonden aantal; OciDeck telt niets zelf, de cijfers komen uit uw scan.':
+      'Zadnji trije so podmnožice najdenega števila; OciDeck sam ničesar ne šteje, številke prihajajo iz vašega pregleda.',
+  'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.':
+      'Napadalna površina po vrsti predmeta: koliko jih je, koliko zahteva delo, kaj je novo in kaj ni nikogaršnje. Zadnje je običajno tisti pogovor.',
   'Acties en besluiten': 'Ukrepi in odločitve',
   'Actie toevoegen': 'Dodaj ukrep',
   'Actie verwijderen': 'Odstrani ukrep',
