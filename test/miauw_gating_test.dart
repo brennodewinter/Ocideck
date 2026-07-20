@@ -22,6 +22,9 @@ void main() {
       // Aanvalsoppervlak hoort hier: het is MIAUW-materiaal, geen algemeen
       // presentatiemiddel, en miste alleen zijn categorie.
       SlideType.assets,
+      // Ontdekkingen hoort bij het aanvalsoppervlak: dezelfde scan, dezelfde
+      // lezer, en even min een algemeen presentatiemiddel.
+      SlideType.discoveries,
       SlideType.finding,
       SlideType.findingsSummary,
       SlideType.checklist,

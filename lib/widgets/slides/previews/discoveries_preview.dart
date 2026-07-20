@@ -173,15 +173,25 @@ class _DiscoveriesPreview extends StatelessWidget {
   /// The exposure bar. An unknown exposure draws no bar at all rather than a
   /// zero-length one: "we do not know" and "found immediately" are different
   /// statements and the slide must not turn the first into the second.
-  Widget _bar(DiscoveriesSpec spec, Discovery discovery) {
+  /// [index] only names the bar for the widget test that checks the shared
+  /// scale — the one claim of this layout that cannot be read off the text.
+  Widget _bar(DiscoveriesSpec spec, Discovery discovery, int index) {
     final barHeight = w * 0.016;
     return LayoutBuilder(
-      builder: (context, constraints) => Container(
-        width: constraints.maxWidth * spec.barFraction(discovery),
-        height: barHeight,
-        decoration: BoxDecoration(
-          color: _hexColor(profile.accentColor),
-          borderRadius: BorderRadius.circular(barHeight / 2),
+      // The Align matters: this sits in an [Expanded], which hands its child a
+      // *tight* width. Without a loose parent the Container would be stretched
+      // to the full row and every bar would draw the same length whatever the
+      // exposure — the picture silently contradicting the figures beside it.
+      builder: (context, constraints) => Align(
+        alignment: Alignment.centerLeft,
+        child: Container(
+          key: ValueKey('discoveries-bar-$index'),
+          width: constraints.maxWidth * spec.barFraction(discovery),
+          height: barHeight,
+          decoration: BoxDecoration(
+            color: _hexColor(profile.accentColor),
+            borderRadius: BorderRadius.circular(barHeight / 2),
+          ),
         ),
       ),
     );
@@ -233,6 +243,7 @@ class _DiscoveriesPreview extends StatelessWidget {
   Widget _discoveryRow(
     DiscoveriesSpec spec,
     Discovery discovery,
+    int index,
     AppLocalizations l10n,
     Color text,
   ) => Padding(
@@ -242,7 +253,7 @@ class _DiscoveriesPreview extends StatelessWidget {
       children: [
         _nameCell(discovery, text),
         SizedBox(width: _gap),
-        Expanded(child: _bar(spec, discovery)),
+        Expanded(child: _bar(spec, discovery, index)),
         SizedBox(width: _gap),
         _daysCell(discovery, l10n, text),
         SizedBox(width: _gap),
@@ -335,8 +346,8 @@ class _DiscoveriesPreview extends StatelessWidget {
                   if (discoveries.isNotEmpty) ...[
                     _headline(spec, l10n, text),
                     _headerRow(l10n, text),
-                    for (final discovery in discoveries)
-                      _discoveryRow(spec, discovery, l10n, text),
+                    for (var i = 0; i < discoveries.length; i++)
+                      _discoveryRow(spec, discoveries[i], i, l10n, text),
                     _totalsRow(spec, l10n, text),
                   ],
                 ],
