@@ -198,22 +198,17 @@ void main() {
     await tester.pump();
 
     final specs = variants!.map((s) => ChartSpec.parse(s.customMarkdown));
-    // The dialog lists every other type in enum order; moving item 0 down one
-    // swaps the first two (stackedBar/line).
-    expect(specs.map((s) => s.type), [
-      ChartType.line,
-      ChartType.stackedBar,
-      ChartType.pie,
-      ChartType.radar,
-      ChartType.scatter,
-      ChartType.area,
-      ChartType.donut,
-      ChartType.horizontalBar,
-      ChartType.combo,
-      ChartType.waterfall,
-      ChartType.heatmap,
-      ChartType.horizontalStackedBar,
-    ]);
+    // Het dialoog biedt elk ánder type in enum-volgorde. Die volgorde afleiden
+    // in plaats van uitschrijven: de opsomming brak bij elk nieuw grafiektype,
+    // wat niets zegt over of het verplaatsen werkt — en dát is wat hier wordt
+    // getoetst.
+    final expected = [
+      for (final type in ChartType.values)
+        if (type != ChartType.bar) type,
+    ];
+    // Item 0 één omlaag verwisselt de eerste twee.
+    final swapped = [expected[1], expected[0], ...expected.skip(2)];
+    expect(specs.map((s) => s.type), swapped);
     expect(specs.first.x, ['A', 'B']);
     expect(specs.first.series.single.data, [10, 20]);
     expect(specs.first.series.single.color, '#003399');

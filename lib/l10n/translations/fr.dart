@@ -738,6 +738,9 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Norm en prestatie': 'Objectif et réalisé',
+  'Norm per rij (optioneel)': 'Objectif par ligne (facultatif)',
+  'Bandgrenzen (optioneel)': 'Seuils des plages (facultatif)',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Tout n\'a pas pu être restauré. Ce qui était illisible a été conservé.',
   'Verdieping': 'Approfondissement',

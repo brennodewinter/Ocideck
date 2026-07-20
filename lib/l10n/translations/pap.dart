@@ -738,6 +738,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Norm en prestatie': 'Meta i resultado',
+  'Norm per rij (optioneel)': 'Meta pa liña (opshonal)',
+  'Bandgrenzen (optioneel)': 'Límite di banda (opshonal)',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'No tur por a wòrdu restorá. Loke no por a wòrdu lesá a keda warda.',
   'Verdieping': 'Profundisashon',

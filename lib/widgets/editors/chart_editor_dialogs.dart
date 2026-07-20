@@ -34,6 +34,7 @@ class _ChartVariantsDialogState extends State<_ChartVariantsDialog> {
       ChartType.waterfall => l10n.d('Waterval'),
       ChartType.heatmap => l10n.d('Heatmap'),
       ChartType.horizontalStackedBar => l10n.d('Horizontale gestapelde staaf'),
+      ChartType.bullet => l10n.d('Norm en prestatie'),
     };
   }
 
@@ -93,6 +94,7 @@ class _ChartVariantsDialogState extends State<_ChartVariantsDialog> {
                             ChartType.donut => Icons.donut_large,
                             ChartType.radar => Icons.radar,
                             ChartType.scatter => Icons.scatter_plot,
+                            ChartType.bullet => Icons.speed_outlined,
                             ChartType.horizontalBar =>
                               Icons.align_horizontal_left,
                             ChartType.combo => Icons.insights,

@@ -1772,6 +1772,9 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Norm en prestatie': 'Eesmärk ja tulemus',
+  'Norm per rij (optioneel)': 'Eesmärk rea kohta (valikuline)',
+  'Bandgrenzen (optioneel)': 'Vööndite piirid (valikuline)',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Kõike ei õnnestunud taastada. See, mida ei saanud lugeda, on alles.',
   'Verdieping': 'Süvendus',

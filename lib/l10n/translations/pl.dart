@@ -1793,6 +1793,9 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Norm en prestatie': 'Cel i wynik',
+  'Norm per rij (optioneel)': 'Cel na wiersz (opcjonalnie)',
+  'Bandgrenzen (optioneel)': 'Progi pasm (opcjonalnie)',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Nie wszystko udało się przywrócić. To, czego nie dało się odczytać, zostało zachowane.',
   'Verdieping': 'Pogłębienie',

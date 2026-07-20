@@ -1780,6 +1780,9 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Norm en prestatie': 'Mål og resultat',
+  'Norm per rij (optioneel)': 'Mål pr. række (valgfrit)',
+  'Bandgrenzen (optioneel)': 'Båndgrænser (valgfrit)',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Ikke alt kunne gendannes. Det, der ikke kunne læses, er bevaret.',
   'Verdieping': 'Uddybning',

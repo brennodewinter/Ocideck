@@ -1781,6 +1781,9 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Norm en prestatie': 'Tavoite ja toteuma',
+  'Norm per rij (optioneel)': 'Tavoite riviä kohden (valinnainen)',
+  'Bandgrenzen (optioneel)': 'Vyöhykerajat (valinnainen)',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Kaikkea ei voitu palauttaa. Se mitä ei voitu lukea, on säilytetty.',
   'Verdieping': 'Syvennys',

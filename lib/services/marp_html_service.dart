@@ -13,6 +13,7 @@ import 'export_metadata.dart';
 
 part 'parts/marp_html_service_cockpit.dart';
 part 'parts/marp_html_service_charts.dart';
+part 'parts/marp_html_service_charts_bullet.dart';
 
 /// Builds a single, self-contained HTML file from a deck's Marp Markdown.
 ///

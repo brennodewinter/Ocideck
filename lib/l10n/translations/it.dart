@@ -734,6 +734,9 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Norm en prestatie': 'Obiettivo e risultato',
+  'Norm per rij (optioneel)': 'Obiettivo per riga (facoltativo)',
+  'Bandgrenzen (optioneel)': 'Soglie delle fasce (facoltativo)',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Non è stato possibile ripristinare tutto. Ciò che era illeggibile è stato conservato.',
   'Verdieping': 'Approfondimento',

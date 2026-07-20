@@ -48,6 +48,7 @@ enum ChartType {
   waterfall,
   heatmap,
   horizontalStackedBar,
+  bullet,
 }
 
 ChartType _chartTypeFromName(String? name) => ChartType.values.firstWhere(
@@ -195,6 +196,17 @@ double _relativeLuminance(String hex) {
 /// What never moves to the data file is styling — per-row and per-series
 /// colours stay in the block. That is what lets the data file be replaced
 /// wholesale without the chart losing its look.
+/// Leest een met komma's, puntkomma's of regeleinden gescheiden lijst getallen
+/// — de invoervorm voor de streefwaarden en bandgrenzen van een bullet-grafiek.
+///
+/// Wat geen getal is valt weg in plaats van de hele lijst te bederven. De
+/// editor emit bij elke toetsaanslag, dus halverwege "90, 8" typen mag de rij
+/// die er al stond niet wissen.
+List<double> parseChartNumberList(String raw) => [
+  for (final part in raw.split(RegExp(r'[,;\n]')))
+    ?double.tryParse(part.trim()),
+];
+
 class ChartSpec {
   final ChartType type;
   final String title;
@@ -208,6 +220,23 @@ class ChartSpec {
   /// and line charts (ignored for pie); either may be left null.
   final double? minBound;
   final double? maxBound;
+
+  /// Per-label target values for a [ChartType.bullet]: the agreed norm each
+  /// measure is judged against, drawn as a tick across the bar.
+  ///
+  /// A target belongs to an **x position**, not to a series — which is exactly
+  /// why it cannot live in [ChartSeries], and why the bullet chart is the one
+  /// type that needed the data model widened. Parallel to [x]; a shorter list
+  /// simply leaves the later rows without a marker, which is a legitimate state
+  /// (not every row has an agreed norm).
+  final List<double> targets;
+
+  /// Qualitative range thresholds shared by every row, drawn as background
+  /// bands: `[60, 80]` reads as poor below 60, satisfactory 60–80, good above.
+  ///
+  /// Shared rather than per-row on purpose. Bands express the scale you judge
+  /// against, and a scale that changes per row is not a scale.
+  final List<double> bands;
 
   /// Whether the chart draws itself in (values grow from the baseline) when the
   /// slide is shown in presentation mode.
@@ -226,11 +255,38 @@ class ChartSpec {
     this.series = const [],
     this.minBound,
     this.maxBound,
+    this.targets = const [],
+    this.bands = const [],
     this.animateOnEnter = true,
     this.animationDurationMs,
   });
 
   bool get hasInlineData => x.isNotEmpty && series.isNotEmpty;
+
+  /// De waarde waar de as van een [ChartType.bullet] tot loopt: [maxBound] als
+  /// de auteur hem heeft vastgezet, anders net voorbij het grootste dat moet
+  /// passen — een meting, een streefwaarde of de bovenste band.
+  ///
+  /// Nooit nul, zodat een grafiek van louter nullen nog steeds tekent in plaats
+  /// van door een deling door nul te vallen.
+  double get bulletAxisMax {
+    final pinned = maxBound;
+    if (pinned != null && pinned > 0) return pinned;
+    var m = 0.0;
+    for (final s in series) {
+      for (final v in s.data) {
+        if (v > m) m = v;
+      }
+    }
+    for (final value in [...targets, ...bands]) {
+      if (value > m) m = value;
+    }
+    return m <= 0 ? 1 : m * 1.05;
+  }
+
+  /// De streefwaarde bij label [i], of null wanneer die rij er geen heeft. Niet
+  /// elke rij hoeft een afgesproken norm te hebben.
+  double? targetAt(int i) => i >= 0 && i < targets.length ? targets[i] : null;
 
   /// Whether the optional [minBound]/[maxBound] apply. On the cartesian charts
   /// they are horizontal threshold lines; on radar they fix the scale
@@ -266,6 +322,8 @@ class ChartSpec {
     List<String>? x,
     List<String?>? rowColors,
     List<ChartSeries>? series,
+    List<double>? targets,
+    List<double>? bands,
     double? minBound,
     bool clearMinBound = false,
     double? maxBound,
@@ -280,6 +338,8 @@ class ChartSpec {
     x: x ?? this.x,
     rowColors: rowColors ?? this.rowColors,
     series: series ?? this.series,
+    targets: targets ?? this.targets,
+    bands: bands ?? this.bands,
     minBound: clearMinBound ? null : (minBound ?? this.minBound),
     maxBound: clearMaxBound ? null : (maxBound ?? this.maxBound),
     animateOnEnter: animateOnEnter ?? this.animateOnEnter,
@@ -300,6 +360,14 @@ class ChartSpec {
         title: (data['title'] ?? '').toString(),
         source: (src == null || src.isEmpty) ? null : src,
         minBound: (data['minBound'] as num?)?.toDouble(),
+        targets: [
+          for (final v in (data['targets'] as List? ?? const []))
+            if (v is num) v.toDouble(),
+        ],
+        bands: [
+          for (final v in (data['bands'] as List? ?? const []))
+            if (v is num) v.toDouble(),
+        ],
         maxBound: (data['maxBound'] as num?)?.toDouble(),
         animateOnEnter: data['animateOnEnter'] != false,
         animationDurationMs: (data['animationDurationMs'] as num?)?.round(),
@@ -332,6 +400,12 @@ class ChartSpec {
     }
     // Animation: defaults (on, inherit theme duration) stay out of the block so
     // a clean chart stays clean and follows the theme.
+    // Alleen voor het type dat ze tekent: een streefwaarde in een taartdiagram
+    // is geen gegeven maar rommel die bij de volgende typewissel blijft hangen.
+    if (type == ChartType.bullet) {
+      if (targets.isNotEmpty) map['targets'] = targets;
+      if (bands.isNotEmpty) map['bands'] = bands;
+    }
     if (!animateOnEnter) map['animateOnEnter'] = false;
     if (animationDurationMs != null) {
       map['animationDurationMs'] = animationDurationMs;
