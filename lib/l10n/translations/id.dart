@@ -1792,6 +1792,11 @@ const _dutchSourceAddId = <String, String>{
   'BIG-nummer van een zorgverlener': 'nomor registrasi tenaga kesehatan (BIG)',
   'AGB-code': 'kode penyedia layanan kesehatan (AGB)',
   'proces-verbaalnummer': 'nomor laporan polisi',
+  'Beginnen met:': 'Mulai dengan:',
+  'Verlopen datums markeren': 'Tandai tanggal yang lewat',
+  'Datums gemarkeerd': 'Tanggal ditandai',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Mewarnai merah sel yang memuat tanggal sebelum hari ini. OciDeck mengacu pada hari Anda mempresentasikan, sehingga dek yang kembali berbulan-bulan kemudian menandai dirinya sendiri. Hanya tttt-bb-hh yang dihitung sebagai tanggal. Nonaktif secara bawaan.',
   'Standaarden en methodieken': 'Standar dan metodologi',
   'Aanvalsoppervlak': 'Permukaan serangan',
   'Soort toevoegen': 'Tambah jenis',

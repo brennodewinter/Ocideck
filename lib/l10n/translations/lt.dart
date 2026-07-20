@@ -1801,6 +1801,11 @@ const _dutchSourceAddLt = <String, String>{
       'sveikatos priežiūros specialisto registracijos numeris (BIG)',
   'AGB-code': 'sveikatos priežiūros paslaugų teikėjo kodas (AGB)',
   'proces-verbaalnummer': 'policijos protokolo numeris',
+  'Beginnen met:': 'Pradėti nuo:',
+  'Verlopen datums markeren': 'Žymėti pasibaigusias datas',
+  'Datums gemarkeerd': 'Datos pažymėtos',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Nuspalvina raudonai langelį su data iki šiandienos. OciDeck remiasi pristatymo diena, todėl po mėnesių sugrįžusi skaidrių rinkinys pasižymi pats. Data laikoma tik mmmm-mm-dd. Pagal numatytuosius nustatymus išjungta.',
   'Standaarden en methodieken': 'Standartai ir metodikos',
   'Aanvalsoppervlak': 'Atakos paviršius',
   'Soort toevoegen': 'Pridėti rūšį',

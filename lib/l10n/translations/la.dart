@@ -1809,6 +1809,11 @@ const _dutchSourceAddLa = <String, String>{
   'BIG-nummer van een zorgverlener': 'numerus curatoris valetudinis (BIG)',
   'AGB-code': 'codex curatoris valetudinis (AGB)',
   'proces-verbaalnummer': 'numerus actorum vigilum',
+  'Beginnen met:': 'Incipe cum:',
+  'Verlopen datums markeren': 'Dies elapsos notare',
+  'Datums gemarkeerd': 'Dies notati',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Cellam diem ante hodiernum ferentem rubro colorat. OciDeck diem quo praesentas spectat, itaque fasciculus post menses rediens se ipsum notat. Sola forma aaaa-mm-dd pro die habetur. Ex more exstinctum.',
   'Standaarden en methodieken': 'Normae et methodologiae',
   'Aanvalsoppervlak': 'Area impetus',
   'Soort toevoegen': 'Genus addere',

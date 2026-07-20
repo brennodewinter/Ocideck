@@ -1800,6 +1800,11 @@ const _dutchSourceAddHr = <String, String>{
       'registarski broj zdravstvenog djelatnika (BIG)',
   'AGB-code': 'šifra pružatelja zdravstvene skrbi (AGB)',
   'proces-verbaalnummer': 'broj policijskog zapisnika',
+  'Beginnen met:': 'Počnite s:',
+  'Verlopen datums markeren': 'Označi istekle datume',
+  'Datums gemarkeerd': 'Datumi označeni',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Boji crveno ćeliju s datumom prije današnjeg. OciDeck se ravna prema danu kada izlažete, pa se prezentacija koja se vrati mjesecima kasnije označi sama. Kao datum vrijedi samo gggg-mm-dd. Prema zadanome isključeno.',
   'Standaarden en methodieken': 'Norme i metodologije',
   'Aanvalsoppervlak': 'Napadna površina',
   'Soort toevoegen': 'Dodaj vrstu',

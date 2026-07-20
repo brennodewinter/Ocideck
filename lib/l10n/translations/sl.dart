@@ -1796,6 +1796,11 @@ const _dutchSourceAddSl = <String, String>{
       'registrska številka zdravstvenega delavca (BIG)',
   'AGB-code': 'koda izvajalca zdravstvenih storitev (AGB)',
   'proces-verbaalnummer': 'številka policijskega zapisnika',
+  'Beginnen met:': 'Začnite z:',
+  'Verlopen datums markeren': 'Označi pretekle datume',
+  'Datums gemarkeerd': 'Datumi označeni',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Celico z datumom pred današnjim obarva rdeče. OciDeck se ravna po dnevu, ko predstavljate, zato se predstavitev, ki se vrne čez mesece, označi sama. Kot datum šteje le llll-mm-dd. Privzeto izklopljeno.',
   'Standaarden en methodieken': 'Standardi in metodologije',
   'Aanvalsoppervlak': 'Napadalna površina',
   'Soort toevoegen': 'Dodaj vrsto',

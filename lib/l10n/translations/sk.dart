@@ -1799,6 +1799,11 @@ const _dutchSourceAddSk = <String, String>{
   'BIG-nummer van een zorgverlener': 'registračné číslo zdravotníka (BIG)',
   'AGB-code': 'kód poskytovateľa starostlivosti (AGB)',
   'proces-verbaalnummer': 'číslo policajného protokolu',
+  'Beginnen met:': 'Začať s:',
+  'Verlopen datums markeren': 'Označiť uplynulé dátumy',
+  'Datums gemarkeerd': 'Dátumy označené',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Zafarbí načerveno bunku s dátumom pred dneškom. OciDeck sa riadi dňom, keď prezentujete, takže sada snímok vracajúca sa po mesiacoch sa označí sama. Za dátum sa počíta iba rrrr-mm-dd. Predvolene vypnuté.',
   'Standaarden en methodieken': 'Normy a metodiky',
   'Aanvalsoppervlak': 'Útočná plocha',
   'Soort toevoegen': 'Pridať druh',

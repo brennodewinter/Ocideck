@@ -1793,6 +1793,11 @@ const _dutchSourceAddSv = <String, String>{
       'registreringsnummer för vårdpersonal (BIG)',
   'AGB-code': 'kod för vårdgivare (AGB)',
   'proces-verbaalnummer': 'diarienummer för polisanmälan',
+  'Beginnen met:': 'Börja med:',
+  'Verlopen datums markeren': 'Markera passerade datum',
+  'Datums gemarkeerd': 'Datum markerade',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Färgar en cell med ett datum före i dag rött. OciDeck utgår från dagen du presenterar, så en presentation som återkommer månader senare markerar sig själv. Endast åååå-mm-dd räknas som datum. Av som standard.',
   'Standaarden en methodieken': 'Standarder och metoder',
   'Aanvalsoppervlak': 'Attackyta',
   'Soort toevoegen': 'Lägg till typ',

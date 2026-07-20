@@ -1821,6 +1821,11 @@ const _dutchSourceAddEl = <String, String>{
       'αριθμός μητρώου επαγγελματία υγείας (BIG)',
   'AGB-code': 'κωδικός παρόχου υγείας (AGB)',
   'proces-verbaalnummer': 'αριθμός αστυνομικής έκθεσης',
+  'Beginnen met:': 'Ξεκινήστε με:',
+  'Verlopen datums markeren': 'Επισήμανση ληγμένων ημερομηνιών',
+  'Datums gemarkeerd': 'Ημερομηνίες επισημασμένες',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Χρωματίζει κόκκινο ένα κελί με ημερομηνία πριν από σήμερα. Το OciDeck λαμβάνει υπόψη την ημέρα που παρουσιάζετε, οπότε μια παρουσίαση που επανέρχεται μήνες αργότερα επισημαίνεται μόνη της. Μόνο το εεεε-μμ-ηη μετρά ως ημερομηνία. Απενεργοποιημένο εξ ορισμού.',
   'Standaarden en methodieken': 'Πρότυπα και μεθοδολογίες',
   'Aanvalsoppervlak': 'Επιφάνεια επίθεσης',
   'Soort toevoegen': 'Προσθήκη είδους',

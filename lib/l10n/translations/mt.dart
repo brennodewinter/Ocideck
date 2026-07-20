@@ -1815,6 +1815,11 @@ const _dutchSourceAddMt = <String, String>{
       'numru ta\' reġistrazzjoni ta\' professjonist tas-saħħa (BIG)',
   'AGB-code': 'kodiċi ta\' fornitur tal-kura tas-saħħa (AGB)',
   'proces-verbaalnummer': 'numru tar-rapport tal-pulizija',
+  'Beginnen met:': 'Ibda b:',
+  'Verlopen datums markeren': 'Immarka d-dati skaduti',
+  'Datums gemarkeerd': 'Dati mmarkati',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Jiżbogħ ċella b\'data qabel illum bl-aħmar. OciDeck imur skont il-jum li fih tippreżenta, għalhekk sett ta\' slajds li jerġa\' lura xhur wara jimmarka lilu nnifsu. Bħala data tgħodd biss ssss-xx-jj. Mitfi awtomatikament.',
   'Standaarden en methodieken': 'Standards u metodoloġiji',
   'Aanvalsoppervlak': 'Wiċċ tal-attakk',
   'Soort toevoegen': 'Żid tip',

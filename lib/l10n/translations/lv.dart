@@ -1792,6 +1792,11 @@ const _dutchSourceAddLv = <String, String>{
       'veselības aprūpes speciālista reģistrācijas numurs (BIG)',
   'AGB-code': 'veselības aprūpes pakalpojumu sniedzēja kods (AGB)',
   'proces-verbaalnummer': 'policijas protokola numurs',
+  'Beginnen met:': 'Sākt ar:',
+  'Verlopen datums markeren': 'Atzīmēt nokavētos datumus',
+  'Datums gemarkeerd': 'Datumi atzīmēti',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Iekrāso sarkanu šūnu ar datumu pirms šodienas. OciDeck vadās pēc dienas, kad prezentējat, tāpēc prezentācija, kas atgriežas pēc mēnešiem, atzīmē sevi pati. Par datumu tiek uzskatīts tikai gggg-mm-dd. Pēc noklusējuma izslēgts.',
   'Standaarden en methodieken': 'Standarti un metodoloģijas',
   'Aanvalsoppervlak': 'Uzbrukuma virsma',
   'Soort toevoegen': 'Pievienot veidu',

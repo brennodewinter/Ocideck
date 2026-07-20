@@ -751,6 +751,11 @@ const _dutchSourceAddFy = {
   'BIG-nummer van een zorgverlener': 'BIG-nûmer fan in soarchferliener',
   'AGB-code': 'AGB-koade',
   'proces-verbaalnummer': 'proses-ferbaalnûmer',
+  'Beginnen met:': 'Begjinne mei:',
+  'Verlopen datums markeren': 'Ferrûne datums markearje',
+  'Datums gemarkeerd': 'Datums markearre',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Kleuret in sel mei in datum fan foar hjoed read. OciDeck sjocht nei de dei dat jo presintearje, dus in deck dat moannen letter weromkomt markearret himsels. Allinne jjjj-mm-dd jildt as datum. Standert út.',
   'Standaarden en methodieken': 'Standerts en metoadyken',
   'Aanvalsoppervlak': 'Oanfalsflak',
   'Soort toevoegen': 'Soarte tafoegje',

@@ -41,6 +41,7 @@ void main() {
 
     const unchangedInEnglish = {
       'Server',
+      'Deadline',
       'Access key ID',
       'Bucket',
       'Endpoint',

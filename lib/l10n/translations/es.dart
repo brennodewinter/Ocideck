@@ -748,6 +748,11 @@ const _dutchSourceAddEs = {
       'número de registro de un profesional sanitario (BIG)',
   'AGB-code': 'código de proveedor sanitario (AGB)',
   'proces-verbaalnummer': 'número de atestado policial',
+  'Beginnen met:': 'Empezar con:',
+  'Verlopen datums markeren': 'Marcar fechas vencidas',
+  'Datums gemarkeerd': 'Fechas marcadas',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Colorea en rojo una celda con una fecha anterior a hoy. OciDeck se guía por el día en que usted presenta, de modo que una presentación que vuelve meses después se marca sola. Solo aaaa-mm-dd cuenta como fecha. Desactivado por defecto.',
   'Standaarden en methodieken': 'Normas y metodologías',
   'Aanvalsoppervlak': 'Superficie de ataque',
   'Soort toevoegen': 'Añadir tipo',

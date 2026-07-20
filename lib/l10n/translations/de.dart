@@ -751,6 +751,11 @@ const _dutchSourceAddDe = {
   'BIG-nummer van een zorgverlener': 'Registriernummer einer Pflegekraft (BIG)',
   'AGB-code': 'Leistungserbringer-Code (AGB)',
   'proces-verbaalnummer': 'Aktenzeichen einer Anzeige',
+  'Beginnen met:': 'Beginnen mit:',
+  'Verlopen datums markeren': 'Abgelaufene Daten markieren',
+  'Datums gemarkeerd': 'Daten markiert',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Färbt eine Zelle mit einem Datum vor heute rot. OciDeck richtet sich nach dem Tag der Präsentation, sodass ein Foliensatz, der Monate später wiederkommt, sich selbst markiert. Nur jjjj-mm-tt gilt als Datum. Standardmäßig aus.',
   'Standaarden en methodieken': 'Standards und Methodiken',
   'Aanvalsoppervlak': 'Angriffsfläche',
   'Soort toevoegen': 'Art hinzufügen',

@@ -1825,6 +1825,11 @@ const _dutchSourceAddPt = <String, String>{
       'número de registo de um profissional de saúde (BIG)',
   'AGB-code': 'código de prestador de cuidados (AGB)',
   'proces-verbaalnummer': 'número de auto de notícia',
+  'Beginnen met:': 'Começar com:',
+  'Verlopen datums markeren': 'Assinalar datas vencidas',
+  'Datums gemarkeerd': 'Datas assinaladas',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Colore de vermelho uma célula com uma data anterior a hoje. O OciDeck orienta-se pelo dia em que apresenta, pelo que uma apresentação que volta meses depois assinala-se sozinha. Só aaaa-mm-dd conta como data. Desativado por predefinição.',
   'Standaarden en methodieken': 'Normas e metodologias',
   'Aanvalsoppervlak': 'Superfície de ataque',
   'Soort toevoegen': 'Adicionar tipo',

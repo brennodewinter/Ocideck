@@ -1811,6 +1811,11 @@ const _dutchSourceAddRo = <String, String>{
       'numărul de înregistrare al unui cadru medical (BIG)',
   'AGB-code': 'cod de furnizor de servicii medicale (AGB)',
   'proces-verbaalnummer': 'număr de proces-verbal',
+  'Beginnen met:': 'Începeți cu:',
+  'Verlopen datums markeren': 'Marchează datele expirate',
+  'Datums gemarkeerd': 'Date marcate',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Colorează în roșu o celulă cu o dată anterioară zilei de azi. OciDeck se ghidează după ziua în care prezentați, așa că o prezentare care revine după luni de zile se marchează singură. Doar aaaa-ll-zz contează ca dată. Dezactivat implicit.',
   'Standaarden en methodieken': 'Standarde și metodologii',
   'Aanvalsoppervlak': 'Suprafață de atac',
   'Soort toevoegen': 'Adaugă tip',

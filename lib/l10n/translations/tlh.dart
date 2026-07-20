@@ -1767,6 +1767,11 @@ const _dutchSourceAddTlh = <String, String>{
   'BIG-nummer van een zorgverlener': 'Qel mI\' (BIG)',
   'AGB-code': 'Qel ghom mI\' (AGB)',
   'proces-verbaalnummer': 'HuchwI\' De\' mI\'',
+  'Beginnen met:': 'vam Do\'',
+  'Verlopen datums markeren': 'jajmey vI\'ang',
+  'Datums gemarkeerd': 'jajmey \'angbogh',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'jaj vorgh qaSpu\'bogh jaj ngaSbogh yav Doq. jIH\'a\' \'ang OciDeck jaj cha\'lu\'bogh, vaj chorgh Hogh ret cha\'qa\'bogh nav \'ang\'egh. jaj \'oH neH jjjj-mm-dd\'e\'. motlh chu\'Ha\'.',
   'Standaarden en methodieken': 'chutmey mIwmey je',
   'Aanvalsoppervlak': 'HIv \'ay\'',
   'Soort toevoegen': 'Segh chel',

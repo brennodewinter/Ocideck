@@ -1836,6 +1836,41 @@ void main() {
     });
   });
 
+  group('the table date-marking flag round-trips', () {
+    test('the token is written, read back, and absent by default', () {
+      final rows = const [
+        ['Actie', 'Deadline'],
+        ['Al lang open', '2020-01-01'],
+      ];
+      final service = MarkdownService();
+      final markdown = service.generateDeck(
+        Deck(
+          title: 'Demo',
+          slides: [
+            Slide.create(SlideType.table).copyWith(
+              title: 'Wat we vragen',
+              tableRows: rows,
+              tableMarkOverdue: true,
+            ),
+          ],
+        ),
+      );
+      expect(markdown, contains('table-overdue'));
+
+      final out = service.parseDeck(markdown)!.slides.single;
+      expect(out.type, SlideType.table);
+      expect(out.tableMarkOverdue, isTrue);
+      expect(out.tableRows, rows);
+
+      // Zonder het token blijft het uit, dus een bestaande tabel verandert niet
+      // van uiterlijk zodra deze eigenschap bestaat.
+      final plain = _roundTrip(
+        Slide.create(SlideType.table).copyWith(tableRows: rows),
+      );
+      expect(plain.tableMarkOverdue, isFalse);
+    });
+  });
+
   group('an old actions slide migrates to a plain table', () {
     // Het 'actions'-type is opgeheven. Het schreef zijn rijen al weg als gewone
     // Markdown-tabel onder een eigen class-token, dus een bestaand bestand hoeft

@@ -10,6 +10,34 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Added
+- **De tabel markeert verlopen datums, en begint waar u wilt beginnen.** Twee
+  eigenschappen die het opgeheven slidetype 'Acties en besluiten' had, maar nu
+  van het tabeltype zelf zijn — dus mét plakken uit een spreadsheet, kolommen
+  bijzetten, en bewerken tijdens het presenteren.
+
+  Zet **Verlopen datums markeren** aan en een cel met een datum van vóór
+  vandaag kleurt rood. OciDeck kijkt daarvoor naar de dag waarop u presenteert,
+  niet naar een opgeslagen vlag: een deck dat drie maanden later terugkomt,
+  markeert zijn eigen verlopen deadlines in plaats van te blijven beweren dat
+  alles op schema ligt. Er is dan ook geen status "te laat" die u zelf zet —
+  wat u typt bevriest op de dag dat u het typte.
+
+  De markering staat standaard uit. Een tabel met historische datums zou anders
+  volledig rood kleuren, en een waarschuwing die overal staat waarschuwt
+  nergens voor.
+
+  Alleen jjjj-mm-dd telt als datum. `05-08-2026` is twee verschillende dagen
+  afhankelijk van wie het typte, en een deadline is een slechte plek om te
+  gokken; een cel die niet strikt ISO is, wordt simpelweg niet gemarkeerd.
+  Bestaande-maar-onmogelijke datums vallen ook af: 31 februari rolt in Dart
+  stilzwijgend door naar maart, en die stilte is hier niet gewenst.
+
+  Zolang de tabel nog leeg is, biedt de editor daarnaast een **preset** aan die
+  in één klik de kolommen van een actielijst neerzet — Actie, Eigenaar,
+  Deadline, Status — en de datummarkering aanzet. De knop verdwijnt zodra er
+  iets in de tabel staat, zodat hij nooit overschrijft wat u al had getypt.
+
+
 - **De laatste vier geheimen.** Azure-sleutels en SAS-tokens, wachtwoordhashes
   (bcrypt, argon2, sha512-crypt, NTLM-dumps), TOTP-seeds uit een `otpauth://`-URI,
   en een vangnet voor hoog-entropische strings. Dat laatste is de eerste

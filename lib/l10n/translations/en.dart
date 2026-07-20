@@ -932,6 +932,11 @@ const _dutchSourceAddEn = {
       'healthcare professional registration number (BIG)',
   'AGB-code': 'healthcare provider code (AGB)',
   'proces-verbaalnummer': 'police report number',
+  'Beginnen met:': 'Start with:',
+  'Verlopen datums markeren': 'Mark expired dates',
+  'Datums gemarkeerd': 'Dates marked',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Colours a cell holding a date before today red. OciDeck goes by the day you present, so a deck that comes back months later marks itself. Only yyyy-mm-dd counts as a date. Off by default.',
   'Standaarden en methodieken': 'Standards and methodologies',
   'Aanvalsoppervlak': 'Attack surface',
   'Soort toevoegen': 'Add kind',

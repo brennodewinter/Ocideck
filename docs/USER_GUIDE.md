@@ -425,6 +425,23 @@ semicolon-separated), or a markdown table fills the grid from that cell onward,
 adding rows and columns as needed. Ordinary text — even a sentence with a comma
 in it — still pastes into just the one cell.
 
+While the table is still empty the editor offers a **preset**: one click lays
+down the columns of an action list (Action, Owner, Deadline, Status) and switches
+on the date marking below. The button disappears as soon as the table carries
+anything, so it can never overwrite what you typed. This replaces the separate
+*Actions and decisions* slide type, which gave you those columns at the cost of
+everything else a table can do.
+
+Tick **Mark expired dates** in *Per-slide options* to colour any cell holding a
+date before today red. OciDeck works this out against the day you present, so a
+deck that comes back three months later marks its own lapsed deadlines instead
+of going on claiming everything is on schedule — there is no "overdue" you can
+type, because a flag you type freezes at whatever was true the day you wrote it.
+Only **yyyy-mm-dd** counts as a date; `05-08-2026` is two different days
+depending on who wrote it, and a deadline is a bad place to be wrong by three
+months. The setting is off by default, since a table of historical dates would
+otherwise turn entirely red, and a warning that is everywhere warns of nothing.
+
 By default a table can only be changed in the builder. To also let it be edited
 live during a presentation, tick **Table editable while presenting** in
 *Per-slide options* (shown only on table slides). See

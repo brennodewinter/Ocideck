@@ -392,6 +392,14 @@ class Slide {
   /// and therefore keep the safe default (not editable).
   final bool tableEditable;
 
+  /// Table slides only: whether a cell holding an ISO date in the past is
+  /// marked as expired. Off by default — a table of historical dates would
+  /// otherwise turn entirely red, which says nothing. Derived at render time
+  /// against the day the deck is shown, never stored per cell: a flag you type
+  /// freezes at whatever was true the day you wrote it, so a deck presented two
+  /// months later would go on claiming everything is on schedule.
+  final bool tableMarkOverdue;
+
   /// Timeline slides only: how the events are arranged and animated. The events
   /// themselves are stored in [bullets] as `marker :: title :: description`
   /// strings; the layout/reveal options round-trip as `_class` tokens and the
@@ -487,6 +495,7 @@ class Slide {
     this.quality = QualityDisposition.warn,
     this.tableRows = const [],
     this.tableEditable = false,
+    this.tableMarkOverdue = false,
     this.timelineLayout = TimelineLayout.auto,
     this.timelineReveal = TimelineReveal.onEnter,
     this.timelineAnimationMs,
@@ -596,6 +605,7 @@ class Slide {
       quality: src.quality,
       tableRows: src.tableRows.map((r) => List<String>.from(r)).toList(),
       tableEditable: src.tableEditable,
+      tableMarkOverdue: src.tableMarkOverdue,
       timelineLayout: src.timelineLayout,
       timelineReveal: src.timelineReveal,
       timelineAnimationMs: src.timelineAnimationMs,
@@ -658,6 +668,7 @@ class Slide {
     QualityDisposition? quality,
     List<List<String>>? tableRows,
     bool? tableEditable,
+    bool? tableMarkOverdue,
     TimelineLayout? timelineLayout,
     TimelineReveal? timelineReveal,
     int? timelineAnimationMs,
@@ -723,6 +734,7 @@ class Slide {
       quality: quality ?? this.quality,
       tableRows: tableRows ?? this.tableRows,
       tableEditable: tableEditable ?? this.tableEditable,
+      tableMarkOverdue: tableMarkOverdue ?? this.tableMarkOverdue,
       timelineLayout: timelineLayout ?? this.timelineLayout,
       timelineReveal: timelineReveal ?? this.timelineReveal,
       timelineAnimationMs: clearTimelineAnimation

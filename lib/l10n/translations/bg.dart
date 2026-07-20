@@ -1816,6 +1816,11 @@ const _dutchSourceAddBg = <String, String>{
       'регистрационен номер на медицински специалист (BIG)',
   'AGB-code': 'код на доставчик на здравни услуги (AGB)',
   'proces-verbaalnummer': 'номер на полицейски протокол',
+  'Beginnen met:': 'Започнете с:',
+  'Verlopen datums markeren': 'Отбелязване на изтекли дати',
+  'Datums gemarkeerd': 'Датите са отбелязани',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Оцветява в червено клетка с дата преди днес. OciDeck се ръководи от деня, в който представяте, така че презентация, връщаща се месеци по-късно, се отбелязва сама. За дата се брои само гггг-мм-дд. По подразбиране изключено.',
   'Standaarden en methodieken': 'Стандарти и методологии',
   'Aanvalsoppervlak': 'Атакуема повърхност',
   'Soort toevoegen': 'Добавяне на вид',

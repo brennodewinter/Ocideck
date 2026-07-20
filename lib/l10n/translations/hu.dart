@@ -1797,6 +1797,11 @@ const _dutchSourceAddHu = <String, String>{
       'egészségügyi dolgozó nyilvántartási száma (BIG)',
   'AGB-code': 'egészségügyi szolgáltató kódja (AGB)',
   'proces-verbaalnummer': 'rendőrségi jegyzőkönyv száma',
+  'Beginnen met:': 'Kezdés ezzel:',
+  'Verlopen datums markeren': 'Lejárt dátumok jelölése',
+  'Datums gemarkeerd': 'Dátumok jelölve',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Pirosra színez egy cellát, amelyben a mainál korábbi dátum áll. Az OciDeck a bemutatás napjához igazodik, így a hónapokkal később visszatérő diasor önmagát jelöli meg. Dátumnak csak az éééé-hh-nn számít. Alapértelmezés szerint kikapcsolva.',
   'Standaarden en methodieken': 'Szabványok és módszertanok',
   'Aanvalsoppervlak': 'Támadási felület',
   'Soort toevoegen': 'Típus hozzáadása',

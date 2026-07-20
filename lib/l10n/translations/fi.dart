@@ -1794,6 +1794,11 @@ const _dutchSourceAddFi = <String, String>{
       'terveydenhuollon ammattilaisen rekisterinumero (BIG)',
   'AGB-code': 'terveydenhuollon palveluntuottajan koodi (AGB)',
   'proces-verbaalnummer': 'poliisin tutkintailmoituksen numero',
+  'Beginnen met:': 'Aloita tästä:',
+  'Verlopen datums markeren': 'Merkitse menneet päivämäärät',
+  'Datums gemarkeerd': 'Päivämäärät merkitty',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Värjää punaiseksi solun, jossa on tätä päivää aiempi päivämäärä. OciDeck katsoo esityspäivää, joten kuukausia myöhemmin palaava esitys merkitsee itsensä. Päivämääräksi kelpaa vain vvvv-kk-pp. Oletuksena pois käytöstä.',
   'Standaarden en methodieken': 'Standardit ja menetelmät',
   'Aanvalsoppervlak': 'Hyökkäyspinta',
   'Soort toevoegen': 'Lisää tyyppi',

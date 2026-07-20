@@ -1805,6 +1805,11 @@ const _dutchSourceAddPl = <String, String>{
       'numer rejestracyjny pracownika ochrony zdrowia (BIG)',
   'AGB-code': 'kod świadczeniodawcy (AGB)',
   'proces-verbaalnummer': 'numer protokołu policyjnego',
+  'Beginnen met:': 'Zacznij od:',
+  'Verlopen datums markeren': 'Oznacz przeterminowane daty',
+  'Datums gemarkeerd': 'Daty oznaczone',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Koloruje na czerwono komórkę z datą wcześniejszą niż dzisiaj. OciDeck kieruje się dniem prezentacji, więc talia wracająca po miesiącach oznacza się sama. Za datę uznawany jest wyłącznie format rrrr-mm-dd. Domyślnie wyłączone.',
   'Standaarden en methodieken': 'Normy i metodyki',
   'Aanvalsoppervlak': 'Powierzchnia ataku',
   'Soort toevoegen': 'Dodaj rodzaj',

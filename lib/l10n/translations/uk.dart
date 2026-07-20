@@ -1812,6 +1812,11 @@ const _dutchSourceAddUk = <String, String>{
       'реєстраційний номер медичного працівника (BIG)',
   'AGB-code': 'код надавача медичних послуг (AGB)',
   'proces-verbaalnummer': 'номер поліцейського протоколу',
+  'Beginnen met:': 'Почати з:',
+  'Verlopen datums markeren': 'Позначати прострочені дати',
+  'Datums gemarkeerd': 'Дати позначено',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Фарбує в червоне комірку з датою до сьогодні. OciDeck зважає на день, коли ви презентуєте, тож набір слайдів, що повертається за місяці, позначає себе сам. Датою вважається лише рррр-мм-дд. Типово вимкнено.',
   'Standaarden en methodieken': 'Стандарти та методології',
   'Aanvalsoppervlak': 'Поверхня атаки',
   'Soort toevoegen': 'Додати вид',

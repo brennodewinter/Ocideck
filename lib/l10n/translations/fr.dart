@@ -751,6 +751,11 @@ const _dutchSourceAddFr = {
       'numéro d\'enregistrement d\'un professionnel de santé (BIG)',
   'AGB-code': 'code de prestataire de soins (AGB)',
   'proces-verbaalnummer': 'numéro de procès-verbal',
+  'Beginnen met:': 'Commencer par :',
+  'Verlopen datums markeren': 'Signaler les dates dépassées',
+  'Datums gemarkeerd': 'Dates signalées',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Colore en rouge une cellule contenant une date antérieure à aujourd\'hui. OciDeck se fonde sur le jour de la présentation : un diaporama repris des mois plus tard se signale tout seul. Seul le format aaaa-mm-jj est reconnu. Désactivé par défaut.',
   'Standaarden en methodieken': 'Normes et méthodologies',
   'Aanvalsoppervlak': 'Surface d\'attaque',
   'Soort toevoegen': 'Ajouter un type',

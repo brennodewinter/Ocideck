@@ -1799,6 +1799,11 @@ const _dutchSourceAddGsw = <String, String>{
       'Registriernummere vomene Pflegepersonal (BIG)',
   'AGB-code': 'Leischtigserbringer-Code (AGB)',
   'proces-verbaalnummer': 'Aktezeiche vonere Aazeig',
+  'Beginnen met:': 'Aafange mit:',
+  'Verlopen datums markeren': 'Abglaufeni Date markiere',
+  'Datums gemarkeerd': 'Date markiert',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Färbt e Zäle mit eme Datum vor hüt rot. OciDeck richtet sich nach em Tag, wo Sie präsentiere, drum markiert sich e Foliesatz, wo Mönet spöter widercho isch, sälber. Nume jjjj-mm-tt gilt as Datum. Standardmässig us.',
   'Standaarden en methodieken': 'Standards und Methodike',
   'Aanvalsoppervlak': 'Aagriffsflächi',
   'Soort toevoegen': 'Art hinzuefüege',

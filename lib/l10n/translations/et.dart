@@ -1784,6 +1784,11 @@ const _dutchSourceAddEt = <String, String>{
   'BIG-nummer van een zorgverlener': 'tervishoiutöötaja registrinumber (BIG)',
   'AGB-code': 'tervishoiuteenuse osutaja kood (AGB)',
   'proces-verbaalnummer': 'politsei protokolli number',
+  'Beginnen met:': 'Alusta sellega:',
+  'Verlopen datums markeren': 'Märgi möödunud kuupäevad',
+  'Datums gemarkeerd': 'Kuupäevad märgitud',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Värvib punaseks lahtri, mille kuupäev on tänasest varasem. OciDeck lähtub päevast, mil esitlete, nii et kuid hiljem naasev slaidikomplekt märgib end ise. Kuupäevaks loeb ainult aaaa-kk-pp. Vaikimisi väljas.',
   'Standaarden en methodieken': 'Standardid ja metoodikad',
   'Aanvalsoppervlak': 'Ründepind',
   'Soort toevoegen': 'Lisa liik',

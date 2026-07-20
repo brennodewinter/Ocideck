@@ -751,6 +751,11 @@ const _dutchSourceAddPap = {
       'number di registrashon di un profeshonal di salú (BIG)',
   'AGB-code': 'kódigo di proveedor di kuido (AGB)',
   'proces-verbaalnummer': 'number di rapòrt di polis',
+  'Beginnen met:': 'Kuminsá ku:',
+  'Verlopen datums markeren': 'Marka fechanan vensí',
+  'Datums gemarkeerd': 'Fechanan marká',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Ta pinta un selda ku un fecha promé ku awe kòrá. OciDeck ta wak e dia ku bo ta presentá, pues un deck ku ta bolbe luna despues ta marká su mes. Solamente aaaa-mm-dd ta konta komo fecha. Pará defout.',
   'Standaarden en methodieken': 'Standarnan i metodologianan',
   'Aanvalsoppervlak': 'Superfisie di atake',
   'Soort toevoegen': 'Agregá tipo',

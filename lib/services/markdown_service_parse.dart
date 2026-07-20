@@ -538,6 +538,8 @@ extension _MarkdownParse on MarkdownService {
       tableRows: _tableBackedTypes.contains(type) ? tableRows : const [],
       tableEditable:
           type == SlideType.table && classTokens.contains('table-editable'),
+      tableMarkOverdue:
+          type == SlideType.table && classTokens.contains('table-overdue'),
       timelineLayout: type == SlideType.timeline
           ? timelineLayoutFromTokens(classTokens)
           : TimelineLayout.auto,

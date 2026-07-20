@@ -1793,6 +1793,11 @@ const _dutchSourceAddDa = <String, String>{
       'registreringsnummer for sundhedspersonale (BIG)',
   'AGB-code': 'kode for sundhedsudbyder (AGB)',
   'proces-verbaalnummer': 'journalnummer på politianmeldelse',
+  'Beginnen met:': 'Start med:',
+  'Verlopen datums markeren': 'Markér udløbne datoer',
+  'Datums gemarkeerd': 'Datoer markeret',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Farver en celle med en dato før i dag rød. OciDeck går efter den dag, du præsenterer, så et deck, der vender tilbage måneder senere, markerer sig selv. Kun åååå-mm-dd tæller som dato. Slået fra som standard.',
   'Standaarden en methodieken': 'Standarder og metoder',
   'Aanvalsoppervlak': 'Angrebsflade',
   'Soort toevoegen': 'Tilføj type',

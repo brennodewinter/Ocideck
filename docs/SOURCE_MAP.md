@@ -249,6 +249,7 @@ deliberately manual).
 - `password_strength.dart` — Entropy-based password-strength estimate (warn-only) for the encrypt dialog.
 - `project_path.dart` — Path resolution with project containment and symlink checking.
 - `sanitize_svg.dart` — Strips dangerous elements/attributes from Mermaid SVG output.
+- `table_dates.dart` — `parseIsoDateCell`/`isPastDateCell`: recognises a table cell that is a bare ISO date and whether it has passed. Strict `yyyy-mm-dd` only, and it rejects dates that do not exist (`DateTime` silently rolls 31 February into March). Drives the `table-overdue` marking, which is derived against the day the deck is shown rather than stored.
 - `table_clipboard.dart` — Recognises whether clipboard content is a table and which separator it uses (the part that is genuinely about a paste); the field scanning is `csv.dart`. Parses tabular clipboard content (TSV, CSV, markdown tables).
 - `text_search.dart` — Case-insensitive text search/replace with match tracking.
 - `title_contrast.dart` — Evaluates title contrast and recommends WCAG fixes.

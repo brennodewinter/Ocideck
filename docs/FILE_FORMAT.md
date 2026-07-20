@@ -622,6 +622,14 @@ Inside cells, `|` is written as `\|` and line endings as `<br>`:
 Add the `table-editable` behavior class (see §4) to let the table be edited live
 while presenting; without it the table is read-only during a presentation.
 
+Add `table-overdue` (see §4) to mark expired dates: a body cell whose entire
+content is an ISO `yyyy-mm-dd` date earlier than the day the deck is shown
+renders red and bold. Nothing on disk records *that* a cell is late — only the
+date is stored, and lateness is judged at render time, so a deck presented months
+later marks itself. Only the strict ISO form is recognised; a cell that is not a
+bare date is never marked. Absent by default, so an existing table never changes
+appearance.
+
 **Free Markdown** (no class) — content is written verbatim.
 
 **Source code** (`code`) — an optional heading plus a fenced code block; the info
@@ -1477,7 +1485,7 @@ not model is not reported.
 | **Comment** | warning | Comment without `_class:`, `_style:`, `ocideck_...`, `skip`, `tlp:`, or `advance:`. |
 | **Code blocks** | error | Odd number of ` ``` ` lines (not closed). |
 | **`_class`** | error | Malformed `<!-- _class: ... -->`. |
-| **`_class`** | warning | Unknown token in `_class` (known: `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `scorecard`, `actions` (read-only, migrates to `table`), `assets`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `logo-safe`, `no-logo`, `no-footer`, `table-editable`). |
+| **`_class`** | warning | Unknown token in `_class` (known: `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `scorecard`, `actions` (read-only, migrates to `table`), `assets`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `logo-safe`, `no-logo`, `no-footer`, `table-editable`, `table-overdue`). |
 | **Slide metadata** | error | Unknown `<!-- tlp: ... -->`, non-numeric `<!-- advance: ... -->`, or invalid `<!-- ocideck_list_style: ... -->` (`bullets`, `numbered`, `checklist`, `richText`). |
 | **Two columns** | error | Invalid base64/JSON in `ocideck_two_bullets_*` comments. |
 | **Images** | error | `![...](...` without closing `)`. |

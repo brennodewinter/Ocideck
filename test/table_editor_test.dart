@@ -63,4 +63,56 @@ void main() {
       ['', ''],
     ]);
   });
+
+  // Wat 'Acties en besluiten' als apart slidetype bood, zit nu hier: de
+  // kolommen om mee te beginnen, in een tabel die verder alles kan wat een
+  // tabel kan.
+  testWidgets('the preset fills the header row and turns on date marking', (
+    tester,
+  ) async {
+    var updated = Slide.create(SlideType.table);
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: TableEditor(slide: updated, onUpdate: (s) => updated = s),
+        ),
+      ),
+    );
+
+    expect(find.text('Acties en besluiten'), findsOneWidget);
+    await tester.tap(find.text('Acties en besluiten'));
+    await tester.pump();
+
+    expect(updated.tableRows.first, [
+      'Actie',
+      'Eigenaar',
+      'Deadline',
+      'Status',
+    ]);
+    // De preset is pas compleet als verlopen deadlines ook opvallen; anders
+    // levert hij kolomkoppen en laat hij het nut liggen.
+    expect(updated.tableMarkOverdue, isTrue);
+    // De lege regel eronder groeit mee naar vier kolommen.
+    expect(updated.tableRows[1], ['', '', '', '']);
+  });
+
+  testWidgets('the preset disappears once the table carries content', (
+    tester,
+  ) async {
+    var updated = Slide.create(SlideType.table);
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: TableEditor(slide: updated, onUpdate: (s) => updated = s),
+        ),
+      ),
+    );
+
+    expect(find.text('Acties en besluiten'), findsOneWidget);
+    // Veld 0 is de titel; de eerste tabelcel is het volgende tekstveld.
+    await tester.enterText(find.byType(TextField).at(1), 'Eigen kop');
+    await tester.pump();
+    // Een preset die ingetypte koppen zou overschrijven, hoort er niet te staan.
+    expect(find.text('Acties en besluiten'), findsNothing);
+  });
 }

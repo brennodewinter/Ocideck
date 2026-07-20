@@ -1828,6 +1828,11 @@ const _dutchSourceAddGa = <String, String>{
   'BIG-nummer van een zorgverlener': 'uimhir chláraithe gairmí sláinte (BIG)',
   'AGB-code': 'cód soláthraí cúraim sláinte (AGB)',
   'proces-verbaalnummer': 'uimhir thuairisce póilíní',
+  'Beginnen met:': 'Tosaigh le:',
+  'Verlopen datums markeren': 'Marcáil dátaí atá thart',
+  'Datums gemarkeerd': 'Dátaí marcáilte',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Dathaíonn sé cill a bhfuil dáta roimh an lá inniu inti dearg. Téann OciDeck de réir an lae a chuireann tú i láthair, mar sin déanann sleamhnáin a fhilleann míonna ina dhiaidh sin iad féin a mharcáil. Ní chomhairtear mar dháta ach bbbb-mm-ll. Múchta de réir réamhshocraithe.',
   'Standaarden en methodieken': 'Caighdeáin agus modheolaíochtaí',
   'Aanvalsoppervlak': 'Dromchla ionsaithe',
   'Soort toevoegen': 'Cuir cineál leis',
