@@ -243,6 +243,26 @@ void main() {
     expect(find.text('was 73 dagen'), findsOneWidget);
   });
 
+  testWidgets('a symbol unit is not set off by a space', (tester) async {
+    // "was 4.2 /10" reads as a typo in a report; a word unit does take its
+    // space. The first character decides.
+    await tester.pumpWidget(
+      _host(
+        _scorecard(const [
+          ScorecardEntry(
+            label: 'Risiconiveau',
+            value: 3.5,
+            previous: 4.2,
+            unit: '/10',
+          ),
+        ]),
+      ),
+    );
+    await tester.pump();
+
+    expect(find.text('was 4.2/10'), findsOneWidget);
+  });
+
   testWidgets('without a previous figure there is nothing to have been', (
     tester,
   ) async {
@@ -277,6 +297,53 @@ void main() {
     expect(tops[0], tops[1]);
     expect(tops[2], tops[3]);
     expect(tops[2], greaterThan(tops[0]));
+  });
+
+  testWidgets('the cards fit at slide-rail size too', (tester) async {
+    // The slide rail draws the same preview a few hundred pixels wide. The
+    // card's border is a fixed hairline there but a tenth of the height budget,
+    // so a layout that fits at slide size overflowed by a pixel in the rail —
+    // stripes across the thumbnail of a deck on its way to a client. Sizes that
+    // a real rail uses, smallest first.
+    for (final width in <double>[180, 230, 320, 480]) {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Center(
+              child: SizedBox(
+                width: width,
+                height: width * 9 / 16,
+                child: SlidePreviewWidget(
+                  slide: _scorecard(const [
+                    ScorecardEntry(
+                      label: 'Doelrealisatie',
+                      value: 72,
+                      previous: 65,
+                      unit: '%',
+                    ),
+                    ScorecardEntry(
+                      label: 'Openstaande punten',
+                      value: 18,
+                      previous: 12,
+                      unit: 'dagen',
+                    ),
+                    ScorecardEntry(label: 'Risiconiveau', value: 3.5),
+                    ScorecardEntry(label: 'Doorlooptijd', value: 21),
+                  ], title: 'Kerncijfers'),
+                  themeProfile: const ThemeProfile(),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+      expect(
+        tester.takeException(),
+        isNull,
+        reason: 'a scorecard overflowed its card at ${width}px wide',
+      );
+    }
   });
 
   testWidgets('an empty scorecard renders without a figure', (tester) async {
