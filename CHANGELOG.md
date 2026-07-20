@@ -10,6 +10,34 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Added
+- **Een ontdekkingendia: wat we niet wisten te hebben.** Het aanvalsoppervlak
+  *telt* wat nieuw is; deze dia *noemt* het. De handvol objecten die de scan
+  vond en die in geen enkele inventaris stonden — schaduw-IT, een vergeten
+  acceptatieomgeving, een certificaat van een team dat allang gereorganiseerd is.
+
+  Per ontdekking: wat het is, wat voor soort object, hoeveel dagen het
+  onopgemerkt bereikbaar was, en wie het nu bezit. Dat derde veld is waarom de
+  dia bestaat. "We vonden twaalf nieuwe dingen" is een scanresultaat en leest als
+  huishouding; "één stond veertien maanden open" is de zin die blijft hangen.
+  Dus begint de dia met de langste blootstelling en niet met het aantal, en zegt
+  hij die boven de zestig dagen in maanden — 420 zegt niemand iets, veertien
+  maanden meteen.
+
+  De balken staan op één gedeelde schaal, gezet door de langste. Laat de dagen
+  leeg als u het niet weet: een eerste scan heeft geen historie om tegen te
+  meten, en dan zegt de dia "onbekend" in plaats van een balk van nul te tekenen
+  die zou beweren dat u er meteen bij was. Een lege eigenaar leest als "geen
+  eigenaar" en valt rood op — blootstelling en eigenaarschap zijn twee feiten en
+  krijgen twee eigen tekens, zodat ze allebei een zwart-witafdruk overleven.
+
+  Zes ontdekkingen is het maximum. Wie er meer noemt maakt een bijlage.
+
+  Waarom dit geen tabel is: een tabel kan dezelfde vier kolommen dragen, maar kan
+  niet zeggen wélke regel het probleem is. De kop en de gedeelde schaal worden
+  afgeleid en nooit opgeslagen, dus ze kunnen de regels eronder niet tegenspreken.
+  Opslag blijft een gewone Markdown-tabel, dus wat uw scan produceert kan de dia
+  rechtstreeks schrijven.
+
 - **Een nieuw grafiektype: norm en prestatie.** Per rij een meetbalk voor de
   werkelijke waarde, grijze achtergrondbanden voor de schaal waartegen u
   oordeelt, en een streepje waar de afgesproken norm ligt. Bedoeld voor het

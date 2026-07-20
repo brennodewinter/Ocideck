@@ -417,6 +417,7 @@ The first class determines (together with the content) the **slide type**:
 | Timeline | `timeline` | — |
 | Scorecard | `scorecard` | — |
 | Asset overview | `assets` | — |
+| Discoveries | `discoveries` | — |
 | Finding | `finding` | — |
 | Findings summary | `findings-summary` | — |
 | Checklist | `checklist` | — |
@@ -890,6 +891,43 @@ object it consists of. Stored as a normal Markdown table, like `scorecard`:
   dropped at both ends.
 - Note that "asset" here means an exposed object. Elsewhere in the format (the
   `.ocideck` package, `data/`, image paths) "asset" means a media file.
+
+**Discoveries** (`discoveries`) — the named objects a scan turned up that were
+not in any inventory beforehand. Stored as a normal Markdown table, like
+`assets` and `scorecard`:
+
+```markdown
+<!-- _class: discoveries -->
+# Wat we niet wisten te hebben
+| Discovery | Kind | DaysUnnoticed | Owner |
+| --- | --- | --- | --- |
+| betaalportaal-acc.example.nl | Webapplicatie | 412 | Team Betalen |
+| oud-intranet.example.nl | Webapplicatie | 280 |  |
+| mail-relay-03.example.nl | Mailserver | 190 | Infrastructuur |
+```
+
+- Deliberately narrower than "new asset". The asset overview already counts what
+  is new per category; this is the **named list** of the ones nobody knew about
+  — shadow IT, a forgotten acceptance environment, a certificate issued by a team
+  that has since been reorganised away.
+- **`DaysUnnoticed`** is how long the object was reachable before anyone noticed.
+  Written as an **empty cell** when it is not known — distinct from a zero, which
+  would claim the object was found the day it appeared. An unknown exposure draws
+  no bar and the row reads "onbekend"; that is the common case for a first scan,
+  which has no history to measure against. A negative or unreadable figure reads
+  as unknown for the same reason.
+- **`Owner`** is who owns it now that it is known. An empty cell means nobody
+  does, and the slide says so in red — the governance problem, and the reason a
+  discovery can still be a discovery next quarter.
+- The **longest exposure** is the headline the slide leads with, and the scale
+  every bar is drawn to. Both are **derived, never stored**: a stored headline is
+  a second number that can disagree with the rows under it, and per-row bar
+  scaling would draw three days the width of four hundred.
+- The slide is not simply a `table` because of that derivation. A table can hold
+  the same four columns; it cannot say which row is the problem.
+- At most **six** rows are kept, on both read and write — more names make an
+  appendix rather than a slide, and the generator picks the ones worth naming.
+  An entirely blank row is dropped at both ends, so writing and reading agree.
 
 **Actions** (`actions`) — **retired.** This was a `table` with a fixed header
 row and a typed editor over it; the rows always lived on disk as an ordinary
@@ -1505,7 +1543,7 @@ not model is not reported.
 | **Comment** | warning | Comment without `_class:`, `_style:`, `ocideck_...`, `skip`, `tlp:`, or `advance:`. |
 | **Code blocks** | error | Odd number of ` ``` ` lines (not closed). |
 | **`_class`** | error | Malformed `<!-- _class: ... -->`. |
-| **`_class`** | warning | Unknown token in `_class` (known: `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `scorecard`, `actions` (read-only, migrates to `table`), `assets`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `logo-safe`, `no-logo`, `no-footer`, `table-editable`, `table-overdue`). |
+| **`_class`** | warning | Unknown token in `_class` (known: `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `scorecard`, `actions` (read-only, migrates to `table`), `assets`, `discoveries`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `logo-safe`, `no-logo`, `no-footer`, `table-editable`, `table-overdue`). |
 | **Slide metadata** | error | Unknown `<!-- tlp: ... -->`, non-numeric `<!-- advance: ... -->`, or invalid `<!-- ocideck_list_style: ... -->` (`bullets`, `numbered`, `checklist`, `richText`). |
 | **Two columns** | error | Invalid base64/JSON in `ocideck_two_bullets_*` comments. |
 | **Images** | error | `![...](...` without closing `)`. |

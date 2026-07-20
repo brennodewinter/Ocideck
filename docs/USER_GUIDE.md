@@ -366,10 +366,10 @@ wireframe of the layout, and the dialog works entirely with the keyboard
 the left and a live preview on the right. You can change an existing slide's type
 at any time from the **TYPE** control in the editor header: it opens the same
 chooser, so adding and re-typing a slide always offer exactly the same set of
-types. (Both pickers are category-filtered: the six Informatieveiligheid types —
-asset overview, finding, findings-summary, checklist, scope matrix and sign-off —
-appear only once the security module is enabled; see the pentest-reporting
-section below.)
+types. (Both pickers are category-filtered: the seven Informatieveiligheid types
+— asset overview, discoveries, finding, findings-summary, checklist, scope matrix
+and sign-off — appear only once the security module is enabled; see the
+pentest-reporting section below.)
 
 Not sure what a slide type is for? Click the small **"What can I do here?"**
 button at the top of the editor for a one-line hint about the selected type (for
@@ -720,6 +720,47 @@ error a report should surface.
 
 Storage is an ordinary Markdown table, so the tool that has your numbers can
 write the slide directly — see [FILE_FORMAT.md](FILE_FORMAT.md) §5.
+
+### Discovery slides
+
+A discoveries slide belongs to the [information security
+module](#information-security-module-pentest-reports) and is offered only while
+that module is on; an existing deck that uses one always renders it regardless.
+
+Where the asset overview *counts* what is new, a discoveries slide **names** it:
+the handful of objects the scan turned up that were not in any inventory
+beforehand. Shadow IT, a forgotten acceptance environment, a certificate issued
+by a team that has since been reorganised away.
+
+Per discovery you give four things:
+
+- **What was found** — the hostname or service, as the reader will recognise it;
+- **Kind** — web application, mail server, certificate;
+- **Days unnoticed** — how long it was reachable before anyone noticed;
+- **Owner** — who owns it now that it is known.
+
+The days are what the slide exists for. "We found twelve new things" is a scan
+result and reads as housekeeping; "one of them had been open for fourteen months"
+is the sentence the room remembers. So the slide **leads with the longest
+exposure**, not with the count, and restates it in months once it passes two —
+420 days means nothing at a glance, fourteen months lands immediately.
+
+Each discovery is drawn as a bar of its exposure, all on **one scale** set by the
+longest, so three days does not draw as wide as four hundred. Leave the days
+empty when you do not know: a first scan has no history to measure against, and
+the slide says "onbekend" rather than drawing a zero-length bar that would claim
+you caught it immediately.
+
+An empty owner reads as **"geen eigenaar"** and stands out in red. Exposure and
+ownership are two separate facts and get two separate marks, so both survive a
+greyscale print.
+
+At most six discoveries fit on one slide. That is deliberate: name more and you
+have written an appendix. Let whatever produced the report pick the six worth
+naming — longest unnoticed, or unowned.
+
+Storage is an ordinary Markdown table, exactly like the asset overview — see
+[FILE_FORMAT.md](FILE_FORMAT.md) §5.
 
 ### Actions and decisions
 
