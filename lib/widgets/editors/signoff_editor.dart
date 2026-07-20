@@ -6,6 +6,7 @@ import '../../models/document_signature.dart';
 import '../../models/slide.dart';
 import '../../state/deck_provider.dart';
 import '../../theme/app_theme.dart';
+import '../../utils/image_limits.dart' show cappedMemoryImage;
 import '../dialogs/finalize_seal_dialog.dart';
 import '../document_signature_view.dart';
 import '../signature_draw_dialog.dart';
@@ -127,7 +128,7 @@ class _SignOffEditorState extends ConsumerState<SignOffEditor>
             border: Border.all(color: AppTheme.slate300),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Image.memory(bytes, fit: BoxFit.contain),
+          child: Image(image: cappedMemoryImage(bytes), fit: BoxFit.contain),
         ),
         const SizedBox(height: 8),
         Row(
