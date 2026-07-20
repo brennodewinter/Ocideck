@@ -1373,9 +1373,9 @@ Maltees ontbreekt in XLM-R; Fries heeft 0,2 GiB tegenover Bulgaars 57,5 GiB.
 2. **Lokale taal + Engels**, niet 30 talen. Dat is wat Microsoft feitelijk doet, en
    het past bij gemengd taalgebruik in zakelijke decks.
 3. **Bulk waar het kan** — zie de correctie hieronder: van de bronnen die hier
-   stonden is er één gebundeld en één afgevallen. CLDR voor datums en
-   naamvolgorde en OpenCage `address-formatting` (MIT, 251 gebieden) voor de
-   straat/huisnummer-volgorde staan nog open.
+   stonden is er één gebundeld en één afgevallen. CLDR en OpenCage
+   `address-formatting` stonden hier als "nog open"; zie de tweede notitie
+   hieronder, want dat is bij nameten iets anders gebleken.
 
 > **Gecorrigeerd bij de bouw (2026-07-19).** Twee claims in de regel hierboven
 > hielden geen stand toen ze werden nagemeten.
@@ -1423,6 +1423,42 @@ Maltees ontbreekt in XLM-R; Fries heeft 0,2 GiB tegenover Bulgaars 57,5 GiB.
 > De drie navraagbronnen (`LEXICON_LICENTIENAVRAAG.md`) blijven daarnaast open;
 > Homosaurus zou `special.sexlife` dekken, dat als enige categorie nog uitsluitend
 > op de vloer draait.
+
+> **Nagemeten (2026-07-20): CLDR en OpenCage vallen allebei af, om verschillende
+> redenen.** Ze stonden hierboven als "nog open". Dat suggereert werk dat wacht,
+> en dat is bij geen van beide zo.
+>
+> **CLDR heeft hier niets toe te voegen.** De twee genoemde toepassingen zijn
+> datumnotatie en naamvolgorde, en allebei doen er niet toe voor een *detector*.
+> Bij datums staat de reden al in `privacy_location_rules.dart`: `03/04/1980` is
+> dubbelzinnig tussen de Europese en de Amerikaanse lezing, maar béide lezingen
+> leveren een geldige datum op, dus de melding verandert er niet door. Bij namen
+> is `contact.name` verankerd aan een label (`Naam:`, `Betrokkene:`) — dat label
+> zegt dat er een naam volgt, ongeacht of de voornaam of de achternaam vooropgaat.
+> CLDR lost een weergaveprobleem op, en wij hebben een herkenningsprobleem.
+>
+> **OpenCage klopt feitelijk, maar de behoefte is weggevallen.** De drie claims
+> zijn nagetrokken en houden stand: MIT-licentie, 251 gebieden (100% met regels
+> én tests), en de sjablonen encoderen de volgorde inderdaad per land — `NL` geeft
+> `{{{road}}} {{{house_number}}}`, `FR`, `GB` en `US` geven `{{{house_number}}}
+> {{{road}}}`.
+>
+> Alleen: die volgorde was nodig zolang de straat het anker was. Sinds de
+> herbouw van §6 is de **postcode** het anker (`fullAddressPattern`), en dat is
+> precies wat de volgorde overbodig maakt. Wie een gevalideerde postcode als
+> vast punt heeft, kan de straat en het huisnummer in *beide* volgordes
+> accepteren zonder noemenswaardig verlies aan precisie: de scherpte zit in de
+> postcode, niet in de vraag welk deel links staat. Een regel die beide kanten
+> op leest kost één alternatie in een patroon; een gebundelde bron van 251
+> gebieden kost een generator, een licentiepoort, een verouderingspoort en een
+> plek in het bronnenregister.
+>
+> Wat hiervan overeind blijft is een gat dat níét over data gaat: `contact.address`
+> is nog volledig Nederlands. `fullAddressPattern` heeft de Nederlandse postcode
+> ingebakken, de achtervoegsels zijn Nederlands en de labels ook. Er is geen
+> `<land>.address`, alleen `<land>.postcode`. Dát is het werk dat openstaat — en
+> als het ooit gebeurt, is de conclusie hierboven de reden om er geen bron bij te
+> halen.
 
 **De fallback is de kern.** `Deck.language` bestaat al en stuurt de
 bevindingssjablonen — maar daar valt een ontbrekende taal terug op Engels. Voor een
@@ -1989,10 +2025,14 @@ synoniemen — de enige bron met eersteklas NL-editie), DOID (CC0), MONDO (CC BY
 4.0), Wikidata (CC0), EuroVoc (24 EU-talen incl. MT en GA), IATE, HGNC (CC0), CBS
 Standaardclassificatie Misdrijven (75 categorieën, CC BY 4.0), **RvIG BRP Tabel 32**
 (217 rijen in de *adjectivische* vorm — `Marokkaanse`, `Syrische` — precies wat je
-in lopende tekst tegenkomt), Wetboek van Strafrecht XML (CC0), OpenCage
-`address-formatting` (MIT, 251 gebieden, encodeert de straat/huisnummer-vólgorde
-die per land verschilt), CLDR (datums, naamvolgorde), RxNorm *Current Prescribable*
-alleen.
+in lopende tekst tegenkomt), Wetboek van Strafrecht XML (CC0), RxNorm *Current
+Prescribable* alleen.
+
+**Mag wel, maar hoeft niet:** OpenCage `address-formatting` (MIT, 251 gebieden,
+encodeert de straat/huisnummer-vólgorde per land — nagetrokken en juist) en CLDR
+(datums, naamvolgorde). Allebei licentietechnisch bundelbaar, allebei overbodig
+geworden: de postcode als anker maakt de volgorde onnodig, en een detector heeft
+geen weergaveregels nodig. De meting staat bij §13.6.
 
 **Bundelen kan niet:** SNOMED CT NL (gratis, maar sublicentiehouders moeten
 geadministreerd en op verzoek aan Nictiz overlegd), ICD-11 (CC BY-**ND**: verbatim
