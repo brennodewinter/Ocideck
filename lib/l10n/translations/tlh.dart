@@ -1756,6 +1756,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Media blijft niet bewaard in een los .md-bestand':
+      'So\'wI\' meq .md nagh Daq polbe\'lu\'',
+  'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':
+      'DaH Hoch mej DuHmey: nagh, HaSta je QoQ \'e\' DawIvpu\' naDev, memory Daq neH yIn. .md nagh Daq polbe\'lu\' — reH poSlu\'chugh natlhbe\'. .ocideck ngaSwI\' Daq lIngmeH so\'wI\' meq yItlhap.',
   'Media verwijderd om privacyredenen': 'So\'wI\' meq luteqta\' media',
   'Afbeeldingen door AI laten taggen?': 'nagh HaSta pong\'a\' AI?',
   'afbeeldingen gaan naar': 'HaSta lupoQ',

@@ -738,6 +738,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Media blijft niet bewaard in een los .md-bestand':
+      'Media no ta keda warda den un simpel archivo .md',
+  'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':
+      'Imagen, video i audio ku bo a skohe den e tab aki ta biba solamente den memoria. Un simpel archivo .md no ta warda nan — nan ta perdí ora bo habri e atrobe. Eksportá komo un paket .ocideck pa hiba e media ku bo.',
   'Media verwijderd om privacyredenen':
       'Media kitá kitá pa motibu di privacidat',
   'Afbeeldingen door AI laten taggen?': 'Laga IA taga e imágennan aki?',

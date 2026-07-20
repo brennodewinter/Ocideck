@@ -1797,6 +1797,10 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Media blijft niet bewaard in een los .md-bestand':
+      'Media in simplici .md tabella non servantur',
+  'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':
+      'Imagines, pellicula et sonus quos in hac tabella elegisti in memoria tantum vivunt. Simplex tabella .md eos non servat — reserata absunt. Exporta ut fasciculum .ocideck ut media tecum feras.',
   'Media verwijderd om privacyredenen': 'Media propter privatam causam remota',
   'Afbeeldingen door AI laten taggen?': 'Sinasne AI has imagines notare?',
   'afbeeldingen gaan naar': 'imagines mittentur ad',

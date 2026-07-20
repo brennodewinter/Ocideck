@@ -1781,6 +1781,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Media blijft niet bewaard in een los .md-bestand':
+      'Mediaa ei säilytetä pelkässä .md-tiedostossa',
+  'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':
+      'Tässä välilehdessä valitsemasi kuvat, video ja ääni ovat vain muistissa. Pelkkä .md-tiedosto ei säilytä niitä — ne katoavat, kun avaat sen uudelleen. Vie .ocideck-pakettina, jotta saat median mukaasi.',
   'Media verwijderd om privacyredenen': 'Media poistettu yksityisyyden vuoksi',
   'Afbeeldingen door AI laten taggen?':
       'Annetaanko tekoälyn merkitä nämä kuvat?',

@@ -1799,6 +1799,10 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Media blijft niet bewaard in een los .md-bestand':
+      'Conținutul media nu este păstrat într-un fișier .md simplu',
+  'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':
+      'Imaginile, videoclipurile și sunetele alese în această filă există doar în memorie. Un fișier .md simplu nu le păstrează — vor dispărea la redeschidere. Exportă ca pachet .ocideck pentru a lua conținutul media cu tine.',
   'Media verwijderd om privacyredenen':
       'Conținut media eliminat din motive de confidențialitate',
   'Afbeeldingen door AI laten taggen?':

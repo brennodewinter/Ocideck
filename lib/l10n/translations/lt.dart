@@ -1789,6 +1789,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Media blijft niet bewaard in een los .md-bestand':
+      'Medija neišsaugoma paprastame .md faile',
+  'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':
+      'Šiame skirtuke pasirinkti vaizdai, vaizdo ir garso įrašai egzistuoja tik atmintyje. Paprastas .md failas jų neišsaugo — atvėrus iš naujo jų nebebus. Eksportuokite kaip .ocideck paketą, kad pasiimtumėte mediją su savimi.',
   'Media verwijderd om privacyredenen':
       'Medija pašalinta dėl privatumo priežasčių',
   'Afbeeldingen door AI laten taggen?': 'Leisti DI pažymėti šiuos vaizdus?',

@@ -2,6 +2,7 @@ import 'package:path/path.dart' as p;
 
 import '../services/asset_staging.dart';
 import '../services/web_asset_store.dart';
+import 'deck.dart';
 
 /// Waar de media van een slide vandaan komt, gezien vanuit de vraag die er
 /// werkelijk toe doet: verhuist dit mee als de presentatie naar iemand anders
@@ -74,3 +75,23 @@ bool assetOriginNeedsAttention(AssetOrigin origin) => switch (origin) {
   AssetOrigin.remote ||
   AssetOrigin.memory => true,
 };
+
+/// Of [deck] beeld, video, audio of een logo draagt dat alleen in het geheugen
+/// van deze browsersessie leeft ([AssetOrigin.memory], `mem:`-paden).
+///
+/// Dat is de vraag vóór een kale `.md`-opslag op web: zulke media reizen niet
+/// mee in een los tekstbestand en zijn na herladen weg. Puur lexicaal, geen
+/// schijftoegang — dezelfde regel als [classifyAssetPath].
+bool deckCarriesMemoryAssets(Deck deck) {
+  bool mem(String path) => WebAssetStore.isMemPath(path.trim());
+  if (mem(deck.themeProfile.logoPath ?? '')) return true;
+  for (final s in deck.slides) {
+    if (mem(s.imagePath) ||
+        mem(s.imagePath2) ||
+        mem(s.videoPath) ||
+        mem(s.audioPath)) {
+      return true;
+    }
+  }
+  return false;
+}

@@ -1781,6 +1781,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Media blijft niet bewaard in een los .md-bestand':
+      'Media tidak tersimpan dalam berkas .md biasa',
+  'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':
+      'Gambar, video, dan audio yang kamu pilih di tab ini hanya ada di memori. Berkas .md biasa tidak menyimpannya — semuanya hilang saat dibuka kembali. Ekspor sebagai paket .ocideck untuk membawa medianya.',
   'Media verwijderd om privacyredenen': 'Media dihapus karena alasan privasi',
   'Afbeeldingen door AI laten taggen?':
       'Biarkan AI menandai gambar-gambar ini?',
