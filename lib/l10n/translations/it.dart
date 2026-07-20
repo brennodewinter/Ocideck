@@ -734,6 +734,7 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Bekijk de foto op ware grootte': 'Guarda la foto a grandezza naturale',
   'Azure-sleutel of SAS-token': 'chiave Azure o token SAS',
   'wachtwoordhash': 'hash della password',
   'TOTP-seed (tweede factor)': 'seme TOTP (secondo fattore)',

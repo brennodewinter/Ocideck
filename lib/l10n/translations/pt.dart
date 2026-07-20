@@ -1811,6 +1811,7 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Bekijk de foto op ware grootte': 'Ver a fotografia em tamanho real',
   'Azure-sleutel of SAS-token': 'chave Azure ou token SAS',
   'wachtwoordhash': 'hash de palavra-passe',
   'TOTP-seed (tweede factor)': 'semente TOTP (segundo fator)',

@@ -1789,6 +1789,7 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Bekijk de foto op ware grootte': 'Peržiūrėti nuotrauką visu dydžiu',
   'Azure-sleutel of SAS-token': 'Azure raktas arba SAS prieigos raktas',
   'wachtwoordhash': 'slaptažodžio maiša',
   'TOTP-seed (tweede factor)': 'TOTP sėkla (antrasis veiksnys)',

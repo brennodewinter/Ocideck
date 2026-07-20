@@ -1781,6 +1781,7 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Bekijk de foto op ware grootte': 'Katso kuva täydessä koossa',
   'Azure-sleutel of SAS-token': 'Azure-avain tai SAS-tunniste',
   'wachtwoordhash': 'salasanan tiiviste',
   'TOTP-seed (tweede factor)': 'TOTP-siemen (toinen tekijä)',

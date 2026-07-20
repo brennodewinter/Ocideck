@@ -1803,6 +1803,7 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Bekijk de foto op ware grootte': 'Ara r-ritratt fid-daqs sħiħ',
   'Azure-sleutel of SAS-token': 'ċavetta Azure jew token SAS',
   'wachtwoordhash': 'hash tal-password',
   'TOTP-seed (tweede factor)': 'żerriegħa TOTP (it-tieni fattur)',

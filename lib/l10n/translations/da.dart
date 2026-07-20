@@ -1780,6 +1780,7 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Bekijk de foto op ware grootte': 'Se billedet i fuld størrelse',
   'Azure-sleutel of SAS-token': 'Azure-nøgle eller SAS-token',
   'wachtwoordhash': 'adgangskodehash',
   'TOTP-seed (tweede factor)': 'TOTP-frø (anden faktor)',

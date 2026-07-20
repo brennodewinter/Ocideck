@@ -49,6 +49,7 @@ import '../language_flag.dart';
 import '../privacy_badge.dart';
 import '../privacy_statement_content.dart';
 import '../reader/documentation_search_tab.dart';
+import '../slides/image_zoom_dialog.dart';
 
 part 'parts/settings_dialog_sections.dart';
 part 'parts/settings_dialog_secret.dart';

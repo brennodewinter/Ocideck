@@ -1781,6 +1781,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Bekijk de foto op ware grootte': 'Lihat foto dalam ukuran penuh',
   'Azure-sleutel of SAS-token': 'kunci Azure atau token SAS',
   'wachtwoordhash': 'hash kata sandi',
   'TOTP-seed (tweede factor)': 'benih TOTP (faktor kedua)',

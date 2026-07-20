@@ -1799,6 +1799,7 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Bekijk de foto op ware grootte': 'Vezi fotografia la dimensiune completă',
   'Azure-sleutel of SAS-token': 'cheie Azure sau token SAS',
   'wachtwoordhash': 'amprentă de parolă',
   'TOTP-seed (tweede factor)': 'sămânță TOTP (al doilea factor)',

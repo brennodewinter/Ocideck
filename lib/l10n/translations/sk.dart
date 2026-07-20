@@ -1788,6 +1788,7 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Bekijk de foto op ware grootte': 'Zobraziť fotografiu v plnej veľkosti',
   'Azure-sleutel of SAS-token': 'kľúč Azure alebo token SAS',
   'wachtwoordhash': 'odtlačok hesla',
   'TOTP-seed (tweede factor)': 'seed TOTP (druhý faktor)',
