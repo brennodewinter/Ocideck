@@ -69,7 +69,36 @@ const int kFaceScanMaxBytes = 24 * 1024 * 1024;
 /// contrastnormalisatie (CLAHE, voor tegenlicht) leverden geen enkel extra
 /// gezicht op. Die complexiteit is dus niet toegevoegd.
 ///
-/// Voorbehoud: zeven foto's en elf negatieven is een kleine steekproef. Het
+/// **Waar de klif werkelijk ligt (gemeten 20-07-2026).** Bovenstaande tabel zegt
+/// hoevéél er gevonden wordt, niet mét welke score. Dat is later los gemeten, op
+/// een echt deck van twaalf afbeeldingen:
+///
+///     wat                                   score       telt bij 0,85?
+///     achtergrondgezicht in een café          0,869      ja
+///     idem, tweede persoon                    0,884      ja
+///     gezicht op een dia-afbeelding           0,926      ja
+///     antropomorfe dierenkoppen (3×)      0,801-0,832    nee
+///     echte kattenfoto's (3×)                  —         nee, niets gevonden
+///
+/// Twee dingen volgen hieruit. Ten eerste zit de klif bij 0,90 en niet bij 0,85:
+/// daarboven verdwijnen die twee achtergrondgezichten, en dat verklaart de sprong
+/// van 14 naar 11 in de tabel hierboven. Ten tweede is de verleiding om naar 0,85
+/// te gaan reëel — dat gat tussen 0,832 en 0,869 is echt — maar de marge boven een
+/// écht gezicht krimpt daarmee van 0,069 naar 0,019, en juist de gezichten die er
+/// het meest toe doen (klein, onscherp, op de achtergrond, iemand die niet wist
+/// dat hij op de foto stond) zijn de gezichten die daar het dichtst tegenaan
+/// zitten. Daarom staat hij nog steeds op 0,80.
+///
+/// **Wat een echte kat níét is.** De negatieven hierboven zijn foto's van katten,
+/// en die geven een schone nul. Een getekende of gegenereerde dierenkop mét
+/// mensenlichaam is een heel ander geval: frontaal, gelijkmatig belicht, met naar
+/// voren gerichte ogen — een uilengezicht is letterlijk een schijf met twee ogen
+/// en een snavel ertussen. Die vallen hier net boven de drempel. Dat is geen
+/// modelfout die je met een getal wegneemt; daarvoor is de dispositie op de dia
+/// de uitweg, zie `_imagesOf` in `image_privacy_provider.dart`.
+///
+/// Voorbehoud: zeven foto's en elf negatieven is een kleine steekproef, en de
+/// meting hierboven voegt er twaalf afbeeldingen uit één deck aan toe. Het
 /// plateau is geruststellend, maar dit is geen benchmark.
 const double kFaceScanScoreThreshold = 0.80;
 

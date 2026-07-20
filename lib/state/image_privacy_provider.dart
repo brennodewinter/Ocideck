@@ -13,9 +13,10 @@
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../models/deck.dart';
 import '../models/markdown_validation.dart';
+import '../models/privacy_disposition.dart';
 import '../models/privacy_finding.dart';
-import '../models/slide.dart';
 import '../models/slide_quality.dart';
 import '../services/privacy/image_face_scan.dart';
 import 'deck_provider.dart';
@@ -60,7 +61,7 @@ Future<List<SlideQualityIssue>> computeImagePrivacyIssues(Ref ref) async {
   // zodat een lege uitslag niet als "niets gevonden" leest.
   if (!scanner.isSupported) return const [];
 
-  final images = _imagesOf(deck.slides);
+  final images = _imagesOf(deck);
   if (images.isEmpty) return const [];
 
   final service = ref.read(imageServiceProvider);
@@ -91,13 +92,36 @@ Future<List<SlideQualityIssue>> computeImagePrivacyIssues(Ref ref) async {
 
 typedef _SlideImage = ({int slideIndex, String field, String path});
 
-/// Elke afbeelding die werkelijk getoond wordt. Overgeslagen slides tellen niet
-/// mee — die worden ook niet geëxporteerd.
-List<_SlideImage> _imagesOf(List<Slide> slides) {
+/// Elke afbeelding die werkelijk getoond wordt en waarover nog een beslissing
+/// openstaat. Overgeslagen slides tellen niet mee — die worden ook niet
+/// geëxporteerd.
+///
+/// Een dia waarvan de auteur de privacyvraag al heeft afgehandeld (accept,
+/// shield of redact) wordt niet meer gescand. Dat is dezelfde regel als in
+/// `privacy_provider.dart`, en om dezelfde reden: blijven melden over een
+/// beslissing die al genomen is, leert de gebruiker precies één ding, namelijk
+/// dat hij deze meldingen kan negeren.
+///
+/// Dit weegt hier zwaarder dan bij de tekstscan, want de detector kán het
+/// mis hebben op een manier die de auteur niet kan weerleggen. Een
+/// antropomorfe dierenkop — een uil frontaal, een kikker met bril — heeft de
+/// geometrie waar YuNet op zit en scoort net boven de drempel; zie de meting
+/// bij `kFaceScanScoreThreshold`. Zonder deze uitweg blijft zo'n dia
+/// waarschuwen zonder dat er iets aan te doen valt.
+///
+/// Let op: dit onderdrukt de MELDING, niet de redactie.
+List<_SlideImage> _imagesOf(Deck deck) {
+  final slides = deck.slides;
   final out = <_SlideImage>[];
   for (var i = 0; i < slides.length; i++) {
     final slide = slides[i];
     if (slide.skipped) continue;
+    if (effectivePrivacyDisposition(
+      deck: deck.privacy,
+      slide: slide.privacy,
+    ).isResolved) {
+      continue;
+    }
     if (slide.imagePath.isNotEmpty) {
       out.add((slideIndex: i, field: 'imagePath', path: slide.imagePath));
     }

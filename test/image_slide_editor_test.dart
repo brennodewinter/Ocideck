@@ -102,4 +102,31 @@ void main() {
     await tester.pump();
     expect(updated.imageSize, 100);
   });
+
+  // Het pad staat er om overgenomen te worden — uit een privacybevinding komt
+  // een bestandsnaam als `images/pasted_1781245807752.png`, en die overtypen
+  // gaat mis. De placeholder blijft er bewust buiten: daar valt niets te
+  // kopiëren, en een selecteerbare uitnodiging tot niets is misleidend.
+  testWidgets('the image path is selectable, the placeholder is not', (
+    tester,
+  ) async {
+    var slide = Slide.create(SlideType.image);
+    await tester.pumpWidget(
+      _host(slide, _FakeImageService(), (updated) => slide = updated),
+    );
+    await tester.pump();
+    expect(find.byType(SelectionArea), findsNothing);
+
+    slide = slide.copyWith(imagePath: 'images/pasted_1781245807752.png');
+    await tester.pumpWidget(
+      _host(slide, _FakeImageService(), (updated) => slide = updated),
+    );
+    await tester.pump();
+
+    final selectable = find.ancestor(
+      of: find.text('images/pasted_1781245807752.png'),
+      matching: find.byType(SelectionArea),
+    );
+    expect(selectable, findsOneWidget);
+  });
 }
