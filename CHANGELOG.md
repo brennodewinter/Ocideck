@@ -524,6 +524,30 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   een strafzaak gaat. Een markering verbergt een waarde, geen onderwerp.
 
 ### Fixed
+- **De beeldcontrole meldde een gezicht dat er niet was, en je kon er niets mee.**
+  Een gegenereerde tekening van dieren in pak — een uil frontaal, een kikker met
+  bril — leverde de melding "herkenbaar gezicht" op. Terecht van de detector
+  gezien: een uilenkop ís een schijf met twee ogen en een snavel ertussen, en dat
+  is precies de vorm waar YuNet op zit. Maar er stond geen mens op, en de melding
+  was nergens weg te zetten: de dispositie op de dia — Accepteren, Accepteren +
+  waarschuwen, Weglaten — werd door de beeldcontrole als enige controle niet
+  gelezen. Dat is nu wel zo, met dezelfde regel die de tekstscan al hanteerde.
+  Een beoordeelde dia zwijgt.
+
+  De gevoeligheid is met opzet níét aangepast. De drempel meten leek een
+  makkelijkere uitweg — de dierenkoppen halen 0,801 tot 0,832 en zouden bij 0,85
+  verdwijnen — maar op een echte kroegfoto uit hetzelfde deck scoren twee mensen
+  op de achtergrond 0,869 en 0,884. Juist die gezichten, klein en onscherp en van
+  iemand die niet wist dat hij op de foto stond, wil je niet missen om een
+  tekening kwijt te raken. De meting staat nu bij `kFaceScanScoreThreshold`, zodat
+  de volgende drempeldiscussie niet weer bij nul begint.
+
+- **Het pad van een afbeelding was niet te selecteren.** De bestandsnaam onder de
+  beeldkiezer stond er om overgenomen te worden — uit een privacybevinding komt
+  een naam als `images/pasted_1781245807752.png` — maar je kon hem alleen
+  overtypen, en daar sluipt een typefout in. Het pad is nu selecteerbaar in alle
+  zeven beeldeditors. De placeholder blijft dat niet: daar valt niets te kopiëren.
+
 - **Een vinkje tijdens het presenteren overschreef de bron met zwarte blokken.**
   De presenter draait op het geprojecteerde deck — de zwartgelakte afleiding die
   de zaal ziet. Eén checklistpunt aanvinken schreef de héle geprojecteerde slide
