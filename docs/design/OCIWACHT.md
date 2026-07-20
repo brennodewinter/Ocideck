@@ -338,18 +338,24 @@ nul. Waar géén checksum bestaat (US SSN, V-nummer), is een contextwoord verpli
 | `contact.phone` | Telefoonnummer | **E.164** (`+CC…`): een tóégekend landnummer uit de ITU-lijst plus een geldige lengte (8–15 cijfers, minstens 4 na het landnummer) → **zeker**; dat is een structurele validatie, geen gok. **Nationaal** (`06-24681357`, `020 123 4567`): nul-trunkprefix, 9–13 cijfers, mét scheidingsteken → waarschijnlijk. **Kaal** (`0624681357`): alleen met een contextwoord (`tel`, `mobiel`, `phone`, …). **Uitgesloten:** datums (die halen de negen cijfers niet), ISBN's (`0-306-…` heeft geen cijfer achter de nul), bedragen/versienummers/tijdstippen (geen `+` en geen nul-trunk), en de gereserveerde "drama"-reeksen (US `555-01xx`, UK `07700 900xxx` / `020 7946 0xxx` / `01632 960xxx`, DE `+49 30 23125 xx`) | zeker / waarschijnlijk | ✓ |
 | `contact.address` | Straat + huisnummer | drie paden: postcode direct achter het huisnummer (één span t/m woonplaats, `zeker`), een `Woonadres:`-label, of het straatachtervoegsel-patroon (`mogelijk`) | mogelijk→zeker | ◐ |
 | `contact.postcode_nl` | NL-postcode | `\d{4}\s?[A-Z]{2}`, met de verboden lettercombinaties SA/SD/SS eruit. **Postcode + huisnummer is in Nederland vrijwel uniek identificerend** → escaleert naar `warning` zodra beide op dezelfde slide staan | waarschijnlijk | ◐ |
-| `contact.postcode_intl` | Postcodes per land | DE/FR/BE/PL/UK/US/CA-formaten binnen het regiopakket | mogelijk | ◐ |
+| `<land>.postcode` | Postcodes per land | DE/FR/BE/PL/UK/US/CA-formaten binnen het regiopakket. Het id draagt de landcode (`de.postcode`), want daaraan hangt de regiopoort | mogelijk | ◐ |
 | `contact.birthdate` | Geboortedatum | datum + contextwoord (`geboren`, `geb.`, `dob`, `geboortedatum`, `°`, `*`) óf een datum in een tabelkolom met kop "geboortedatum" | waarschijnlijk | ✓ |
 | `contact.name` | Persoonsnaam | Zie §5.5 — bewust géén NER. Alleen: aanhef (`dhr.`, `mevr.`, `Herr`, `Sra.`, `Dr.`), naamlabel (`naam:`, `contactpersoon:`, `auteur:`), of een tabelkolom met een naamkop. Placeholder-personen uitgesloten (`Jan Jansen`, `John Doe`, `Max Mustermann`, `Mario Rossi`, `Jean Dupont`, …) | mogelijk | ✓ |
 | `contact.geo` | Coördinaten | lat/lon-paar in plausibel bereik, `geo:`-URI, plus-code, what3words. Uitgesloten wanneer het een grafiek-as of een chart-dataset is | waarschijnlijk | ✓ |
-| `contact.plate` | Kenteken | NL-sidecodes met de juiste letteruitsluitingen; overige landen binnen het regiopakket. Contextwoord aanbevolen (`kenteken`, `nummerbord`) omdat `XX-99-99` ook een artikelcode kan zijn | mogelijk | ◐ |
+| `nl.plate` | Kenteken | NL-sidecodes met de juiste letteruitsluitingen; overige landen binnen het regiopakket. Contextwoord aanbevolen (`kenteken`, `nummerbord`) omdat `XX-99-99` ook een artikelcode kan zijn | mogelijk | ◐ |
 
 > **Gebouwd (2026-07-15):** `contact.email`, `contact.phone`, `contact.address`,
 > `contact.postcode_nl` en de gelabelde `contact.name`. Adres en NL-postcode zijn
 > elk `possible`; staan een straat-met-huisnummer en een postcode binnen ±40 tekens
 > van elkaar, dan escaleren beide naar `certain` — postcode plus huisnummer wijst
-> in Nederland één woonadres aan. Nog niet gebouwd: `contact.postcode_intl`,
-> `contact.birthdate`, `contact.geo`, `contact.plate`.
+> in Nederland één woonadres aan.
+>
+> **Aangevuld (2026-07-19):** `contact.birthdate`, `contact.geo`, `nl.plate` en
+> de buitenlandse postcodes staan er sindsdien ook. De laatste twee kregen een
+> landcode als prefix in plaats van de namen `contact.plate` en
+> `contact.postcode_intl` die hier eerder stonden: `privacyRuleRegion` leidt het
+> land uit de eerste twee letters af, dus zonder die prefix zou de regel overal
+> draaien in plaats van binnen het regiopakket.
 >
 > **Bijgewerkt (2026-07-20):** die wederzijdse escalatie bleek een stille
 > faalstand te hebben. Een gemelde slide met de vorm
@@ -442,7 +448,7 @@ De goedkoopste, hoogst renderende familie: prefix-gebonden tokens hebben vrijwel
 | `secret.slack` | Slack-token / webhook | `xox[baprs]-`, `hooks.slack.com/services/…` | zeker | ✓ |
 | `secret.stripe` | Stripe-sleutel | `sk_live_`, `rk_live_` (test-sleutels `sk_test_` → alleen `info`) | zeker | ✓ |
 | `secret.llm` | LLM-API-sleutels | `sk-ant-` (Anthropic), `sk-` (OpenAI), `hf_` (Hugging Face) | zeker | ✓ |
-| `secret.other_vendor` | Overige leveranciers | Twilio (`AC…`/`SK…`), SendGrid (`SG.`), Mailgun (`key-`), npm (`npm_`), PyPI (`pypi-`), Docker Hub, Datadog, Cloudflare | zeker | ✓ |
+| `secret.sendgrid` / `secret.npm` / `secret.huggingface` | Overige leveranciers | Bij de bouw gesplitst in aparte regels in plaats van één verzamelregel `secret.other_vendor`: de melding noemt dan de leverancier, en dat scheelt zoeken. Gebouwd: SendGrid (`SG.`), npm (`npm_`), Hugging Face (`hf_`). Nog niet: Twilio (`AC…`/`SK…`), Mailgun (`key-`), PyPI (`pypi-`), Docker Hub, Datadog, Cloudflare | zeker | ✓ |
 | `secret.jwt` | JSON Web Token | `eyJ…` waarvan de header base64url-decodeert naar geldige JSON met een `alg`-veld. Bijna nul FP's. **Bonus:** decodeer óók de payload en scan die op PII (`sub`, `email`, `name`) — een JWT is een PII-container | zeker | ✓ |
 | `secret.private_key` | Private key | `-----BEGIN (RSA\|EC\|DSA\|OPENSSH\|PGP) PRIVATE KEY-----`, PuTTY `.ppk`, PKCS#12 | zeker | ✓ |
 | `secret.connection_string` | Connection string met wachtwoord | `postgres://user:pass@`, `mysql://`, `mongodb+srv://`, `redis://`, `amqp://`, plus HTTP basic-auth in een URL | zeker | ✓ |
@@ -462,7 +468,7 @@ gegeven staat (naam, BSN, e-mail, geboortedatum), wordt het `warning`/`error` �
 
 | Regel-id | Wat | Validatie / FP-guard | Zekerheid | Std. |
 | --- | --- | --- | --- | --- |
-| `special.health_keyword` | Gezondheid | Meertalig lexicon: diagnose, medicatie, ziekteverzuim, zwangerschap, GGZ, psychiatrisch, verslaving, therapie, opname | mogelijk | ✓ |
+| `special.health` | Gezondheid | Meertalig lexicon: diagnose, medicatie, ziekteverzuim, zwangerschap, GGZ, psychiatrisch, verslaving, therapie, opname | mogelijk | ✓ |
 | `special.icd10` | ICD-10-code | `[A-TV-Z]\d{2}(\.\d{1,2})?` — **zeer** FP-gevoelig (matcht `A12` in een tabelverwijzing). Contextwoord (`icd`, `diagnose`, `hoofddiagnose`) verplicht | waarschijnlijk | ◐ |
 | `special.atc` | ATC-geneesmiddelcode | `[A-V]\d{2}[A-Z]{2}\d{2}` + context | waarschijnlijk | ◐ |
 | `special.genetic` | Genetische gegevens | `rs\d{4,}` (dbSNP-identificatoren), HGVS-notatie (`c.123A>G`, `p.Val600Glu`) — laag FP-risico en onmiskenbaar genetisch | waarschijnlijk | ✓ |
@@ -2208,7 +2214,7 @@ dat is akkoord, want `us` staat al in `postcodeNeedsContext` en de Canadese
 | --- | --- |
 | **8a** | `privacy_checksums_world.dart` naast de bestaande `_eu`-variant (zelfde splitsing: gedeelde primitieven blijven in de basis), plus `us.ssn`, `us.ssn_last4`, `us.itin`, `us.ein`, `fin.us_routing`. Plus de labeldekkingstest uit §15.8 |
 | **8b** | Canada: `ca.sin`, `ca.ramq`, `ca.ohip`, `ca.bn` |
-| **8c** | Zorg en art. 9: ~~`us.npi`, `us.medicare_mbi`, `us.dea`~~ (geleverd), nog open: de OMB/EEO-1-uitbreiding van het etniciteitslexicon en het verplaatsen van `us`/`ca` naar `defaultPrivacyRegions` |
+| **8c** | Zorg en art. 9: ~~`us.npi`, `us.medicare_mbi`, `us.dea`~~ (geleverd). Het verplaatsen van `us`/`ca` naar `defaultPrivacyRegions` is in 8d gebeurd, voor alle regio's tegelijk. Nog open: de OMB/EEO-1-uitbreiding van het etniciteitslexicon |
 | **8d** | **Geleverd.** `au.tfn`/`au.medicare`/`au.abn`, `in.aadhaar`/`in.pan`, `za.id`, `cw.sedula`/`aw.persoonsnummer`, `br.cpf`/`br.cnpj`. Alle regio's staan sindsdien standaard aan |
 
 ### 15.8 De labeldekkingstest
