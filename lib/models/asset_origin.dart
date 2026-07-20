@@ -3,6 +3,7 @@ import 'package:path/path.dart' as p;
 import '../services/asset_staging.dart';
 import '../services/web_asset_store.dart';
 import 'deck.dart';
+import 'slide.dart';
 
 /// Waar de media van een slide vandaan komt, gezien vanuit de vraag die er
 /// werkelijk toe doet: verhuist dit mee als de presentatie naar iemand anders
@@ -94,4 +95,30 @@ bool deckCarriesMemoryAssets(Deck deck) {
     }
   }
   return false;
+}
+
+/// Voegt elk `mem:`-pad van [slide] toe aan [into] (beeld, tweede beeld, video,
+/// audio). Losse functie zodat zowel een dia op het klembord als een dia in een
+/// deck met dezelfde regel wordt afgetast.
+void addSlideMemoryAssetPaths(Slide slide, Set<String> into) {
+  for (final path in [
+    slide.imagePath,
+    slide.imagePath2,
+    slide.videoPath,
+    slide.audioPath,
+  ]) {
+    if (WebAssetStore.isMemPath(path.trim())) into.add(path.trim());
+  }
+}
+
+/// Alle `mem:`-paden die [deck] aanhaalt (dia-media plus het logo). De sweep
+/// gebruikt dit per open deck; zie [WebAssetStore.retain].
+Set<String> deckMemoryAssetPaths(Deck deck) {
+  final paths = <String>{};
+  final logo = (deck.themeProfile.logoPath ?? '').trim();
+  if (WebAssetStore.isMemPath(logo)) paths.add(logo);
+  for (final slide in deck.slides) {
+    addSlideMemoryAssetPaths(slide, paths);
+  }
+  return paths;
 }

@@ -40,6 +40,33 @@ void main() {
     expect(WebAssetStore.bytesFor('images/foto.png'), isNull);
   });
 
+  test('isEmpty volgt de inhoud', () {
+    expect(WebAssetStore.isEmpty, isTrue);
+    WebAssetStore.put(Uint8List.fromList([1]), name: 'a.png');
+    expect(WebAssetStore.isEmpty, isFalse);
+    WebAssetStore.clear();
+    expect(WebAssetStore.isEmpty, isTrue);
+  });
+
+  test('retain houdt de opgegeven paden en gooit de rest weg', () {
+    final keep = WebAssetStore.put(Uint8List.fromList([1]), name: 'keep.png');
+    final drop = WebAssetStore.put(Uint8List.fromList([2]), name: 'drop.png');
+
+    final removed = WebAssetStore.retain({keep});
+
+    expect(removed, 1);
+    expect(WebAssetStore.bytesFor(keep), isNotNull);
+    expect(WebAssetStore.bytesFor(drop), isNull);
+    expect(WebAssetStore.nameFor(drop), isNull, reason: 'ook de naam is weg');
+  });
+
+  test('retain met een lege verzameling maakt de store leeg', () {
+    WebAssetStore.put(Uint8List.fromList([1]), name: 'a.png');
+    WebAssetStore.put(Uint8List.fromList([2]), name: 'b.png');
+    expect(WebAssetStore.retain(<String>{}), 2);
+    expect(WebAssetStore.isEmpty, isTrue);
+  });
+
   testWidgets('een slide met mem:-pad rendert uit de store', (tester) async {
     await tester.runAsync(() async {
       final bytes = await _redPngBytes();
