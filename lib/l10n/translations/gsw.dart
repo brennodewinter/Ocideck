@@ -1785,6 +1785,11 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Azure-sleutel of SAS-token': 'Azure-Schlüssel oder SAS-Token',
+  'wachtwoordhash': 'Passwort-Hash',
+  'TOTP-seed (tweede factor)': 'TOTP-Seed (zwöite Faktor)',
+  'mogelijk een sleutel of wachtwoord':
+      'villicht en Schlüssel oder es Passwort',
   'oud btw-nummer (bevat een BSN)':
       'alti MWST-Nummere (mit ere Persoonenummere drin)',
   'vreemdelingennummer (V-nummer)': 'Uusländernummere (V-Nummere)',

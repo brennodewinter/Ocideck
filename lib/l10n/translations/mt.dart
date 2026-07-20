@@ -1803,6 +1803,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Azure-sleutel of SAS-token': 'ċavetta Azure jew token SAS',
+  'wachtwoordhash': 'hash tal-password',
+  'TOTP-seed (tweede factor)': 'żerriegħa TOTP (it-tieni fattur)',
+  'mogelijk een sleutel of wachtwoord': 'possibbilment ċavetta jew password',
   'oud btw-nummer (bevat een BSN)': 'numru tal-VAT antik (fih numru personali)',
   'vreemdelingennummer (V-nummer)': 'numru ta\' barrani (numru V)',
   'administratienummer (A-nummer)': 'numru amministrattiv (numru A)',

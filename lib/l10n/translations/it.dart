@@ -734,6 +734,10 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Azure-sleutel of SAS-token': 'chiave Azure o token SAS',
+  'wachtwoordhash': 'hash della password',
+  'TOTP-seed (tweede factor)': 'seme TOTP (secondo fattore)',
+  'mogelijk een sleutel of wachtwoord': 'forse una chiave o una password',
   'oud btw-nummer (bevat een BSN)':
       'vecchia partita IVA (contiene un codice personale)',
   'vreemdelingennummer (V-nummer)': 'numero per stranieri (numero V)',

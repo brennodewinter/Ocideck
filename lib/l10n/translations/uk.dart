@@ -1799,6 +1799,10 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Azure-sleutel of SAS-token': 'ключ Azure або токен SAS',
+  'wachtwoordhash': 'хеш пароля',
+  'TOTP-seed (tweede factor)': 'початкове значення TOTP (другий фактор)',
+  'mogelijk een sleutel of wachtwoord': 'можливо, ключ або пароль',
   'oud btw-nummer (bevat een BSN)':
       'старий номер ПДВ (містить особистий номер)',
   'vreemdelingennummer (V-nummer)': 'номер іноземця (V-номер)',

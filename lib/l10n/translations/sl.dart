@@ -1783,6 +1783,10 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Azure-sleutel of SAS-token': 'ključ Azure ali žeton SAS',
+  'wachtwoordhash': 'zgoščena vrednost gesla',
+  'TOTP-seed (tweede factor)': 'seme TOTP (drugi dejavnik)',
+  'mogelijk een sleutel of wachtwoord': 'morda ključ ali geslo',
   'oud btw-nummer (bevat een BSN)':
       'stara davčna številka (vsebuje osebno številko)',
   'vreemdelingennummer (V-nummer)': 'številka tujca (V-številka)',

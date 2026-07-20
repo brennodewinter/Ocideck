@@ -1784,6 +1784,10 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Azure-sleutel of SAS-token': 'klíč Azure nebo token SAS',
+  'wachtwoordhash': 'otisk hesla',
+  'TOTP-seed (tweede factor)': 'seed TOTP (druhý faktor)',
+  'mogelijk een sleutel of wachtwoord': 'možná klíč nebo heslo',
   'oud btw-nummer (bevat een BSN)': 'staré DIČ (obsahuje rodné číslo)',
   'vreemdelingennummer (V-nummer)': 'číslo cizince (V-číslo)',
   'administratienummer (A-nummer)': 'administrativní číslo (A-číslo)',

@@ -739,6 +739,10 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Azure-sleutel of SAS-token': 'Azure-kaai of SAS-token',
+  'wachtwoordhash': 'wachtwurdhash',
+  'TOTP-seed (tweede factor)': 'TOTP-sied (twadde faktor)',
+  'mogelijk een sleutel of wachtwoord': 'mooglik in kaai of wachtwurd',
   'oud btw-nummer (bevat een BSN)':
       'âld btw-nûmer (befettet in boargerservicenûmer)',
   'vreemdelingennummer (V-nummer)': 'frjemdlingenûmer (V-nûmer)',

@@ -1817,6 +1817,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Azure-sleutel of SAS-token': 'eochair Azure nó comhartha SAS',
+  'wachtwoordhash': 'hais pasfhocail',
+  'TOTP-seed (tweede factor)': 'síol TOTP (an dara fachtóir)',
+  'mogelijk een sleutel of wachtwoord': 'b\'fhéidir eochair nó pasfhocal',
   'oud btw-nummer (bevat een BSN)': 'sean-uimhir CBL (uimhir phearsanta inti)',
   'vreemdelingennummer (V-nummer)': 'uimhir eachtrannaigh (uimhir V)',
   'administratienummer (A-nummer)': 'uimhir riaracháin (uimhir A)',

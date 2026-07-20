@@ -1799,6 +1799,10 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Azure-sleutel of SAS-token': 'cheie Azure sau token SAS',
+  'wachtwoordhash': 'amprentă de parolă',
+  'TOTP-seed (tweede factor)': 'sămânță TOTP (al doilea factor)',
+  'mogelijk een sleutel of wachtwoord': 'posibil o cheie sau o parolă',
   'oud btw-nummer (bevat een BSN)': 'cod TVA vechi (conține un număr personal)',
   'vreemdelingennummer (V-nummer)': 'număr de străin (număr V)',
   'administratienummer (A-nummer)': 'număr administrativ (număr A)',

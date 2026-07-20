@@ -1811,6 +1811,11 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Azure-sleutel of SAS-token': 'chave Azure ou token SAS',
+  'wachtwoordhash': 'hash de palavra-passe',
+  'TOTP-seed (tweede factor)': 'semente TOTP (segundo fator)',
+  'mogelijk een sleutel of wachtwoord':
+      'possivelmente uma chave ou palavra-passe',
   'oud btw-nummer (bevat een BSN)':
       'número de IVA antigo (contém um número nacional)',
   'vreemdelingennummer (V-nummer)': 'número de estrangeiro (número V)',

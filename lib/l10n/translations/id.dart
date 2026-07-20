@@ -1781,6 +1781,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Azure-sleutel of SAS-token': 'kunci Azure atau token SAS',
+  'wachtwoordhash': 'hash kata sandi',
+  'TOTP-seed (tweede factor)': 'benih TOTP (faktor kedua)',
+  'mogelijk een sleutel of wachtwoord': 'mungkin kunci atau kata sandi',
   'oud btw-nummer (bevat een BSN)': 'nomor PPN lama (memuat nomor identitas)',
   'vreemdelingennummer (V-nummer)': 'nomor orang asing (nomor V)',
   'administratienummer (A-nummer)': 'nomor administrasi (nomor A)',

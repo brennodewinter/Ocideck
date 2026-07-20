@@ -932,6 +932,23 @@ public source from RvIG documents one, and guessing would make the check reject
 real A-numbers. For a privacy check a missed personal number costs more than one
 warning too many.
 
+### Keys, tokens and password hashes
+
+Most secrets are recognised by their shape: an AWS key starts with `AKIA`, a
+GitLab token with `glpat-`, a private key with `-----BEGIN`. Those prefixes occur
+nowhere else, so they need no further evidence. The check also reads Azure
+connection strings and SAS tokens, password hashes (bcrypt, argon2, sha512-crypt,
+and NTLM in the form a dump produces), and the TOTP seed behind a two-factor QR
+code — that last one matters because whoever has the seed generates the same
+codes you do.
+
+One rule works differently. **Possibly a key or password** has no prefix to go
+on; it measures randomness. Because randomness is everywhere in a technical deck,
+it only reports when a word like "key", "token" or "password" stands nearby, and
+it never rises above an informational hint. Commit hashes, UUIDs and checksums
+are excluded outright — they are random too, and reporting them would teach you
+to ignore the whole family.
+
 ### Making certain findings block the export
 
 By default even a *certain* finding — a BSN, an IBAN, an email address — is a

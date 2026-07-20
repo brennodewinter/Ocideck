@@ -1797,6 +1797,10 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Azure-sleutel of SAS-token': 'clavis Azure vel tessera SAS',
+  'wachtwoordhash': 'nota tesserae',
+  'TOTP-seed (tweede factor)': 'semen TOTP (factor alter)',
+  'mogelijk een sleutel of wachtwoord': 'fortasse clavis vel tessera',
   'oud btw-nummer (bevat een BSN)':
       'numerus vectigalis antiquus (numerum civilem continens)',
   'vreemdelingennummer (V-nummer)': 'numerus peregrini (numerus V)',

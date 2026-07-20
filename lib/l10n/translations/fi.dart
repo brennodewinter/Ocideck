@@ -1781,6 +1781,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Azure-sleutel of SAS-token': 'Azure-avain tai SAS-tunniste',
+  'wachtwoordhash': 'salasanan tiiviste',
+  'TOTP-seed (tweede factor)': 'TOTP-siemen (toinen tekijä)',
+  'mogelijk een sleutel of wachtwoord': 'mahdollisesti avain tai salasana',
   'oud btw-nummer (bevat een BSN)':
       'vanha alv-numero (sisältää henkilötunnuksen)',
   'vreemdelingennummer (V-nummer)': 'ulkomaalaisnumero (V-numero)',

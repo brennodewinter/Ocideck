@@ -497,6 +497,39 @@ De goedkoopste, hoogst renderende familie: prefix-gebonden tokens hebben vrijwel
 | `secret.totp` | TOTP-seed / herstelcodes | `otpauth://`, `secret=` in een otpauth-URI, blokjes herstelcodes | zeker | ✓ |
 | `secret.entropy` | Generieke hoog-entropie-string | Shannon-entropie ≥ 4.0, lengte ≥ 20, gemengde casing + cijfers, én een secret-achtig contextwoord in de buurt. Uitgesloten: hashes van bekende lengtes (git-SHA's), base64-afbeeldingen, UUID's, checksums. Bewust **alleen `info`** — dit is het vangnet, geen scherprechter | mogelijk | ✓ |
 
+> **Gebouwd (2026-07-20): de laatste vier geheimen.** `secret.azure`,
+> `secret.hash`, `secret.totp` en `secret.entropy`. De eerste drie waren saai in
+> de goede zin — hun vorm komt nergens anders voor. De vierde vroeg om twee
+> nieuwe velden op `SecretRule`, want tot nu toe was elke regel `zeker` en
+> contextloos.
+>
+> **`secret.entropy` is de eerste geheimregel met een contextpoort.** Alle
+> andere herkennen een geheim aan zijn *prefix* — `AKIA`, `glpat-`,
+> `-----BEGIN` — en die prefix is het bewijs. Deze regel heeft geen prefix; hij
+> gaat op willekeur af, en willekeur staat overal in een technisch deck. Het
+> contextwoord doet hier dus het werk dat elders de prefix doet, en daarom kreeg
+> `SecretRule` een `contextWords` en een `confidence` (allebei met een
+> standaardwaarde die het bestaande gedrag ongemoeid laat).
+>
+> Daar hoort een tweede maatregel bij: een geheim dat al door zijn eigen regel is
+> gevonden, wordt niet nóg eens als "hoge entropie" gemeld. Een AWS-sleutel haalt
+> de entropiedrempel moeiteloos, en twee meldingen over dezelfde tekens maken de
+> lijst langer zonder de boodschap sterker te maken.
+>
+> **Twee afwijkingen van de tabel hierboven, allebei strenger dan er stond.**
+>
+> `secret.hash` meldt NTLM alleen in de dumpvorm
+> (`gebruiker:500:<lm>:<nt>:::`) en niet kaal. Kale 32 hex is namelijk vaker een
+> MD5-checksum onder een release-tabel dan een wachtwoordhash, en die vorm
+> melden zou de regel meteen ongeloofwaardig maken. De `$id$`-vorm van crypt(3)
+> — bcrypt, argon2, sha512-crypt — draagt zichzelf wél.
+>
+> De uitsluiting van base64-afbeeldingen is grover uitgevallen dan "herken een
+> data-URI": alles langer dan 200 tekens valt af. Dat dekt de afbeeldingen, maar
+> ook echte lange sleutels. Bewust, want de regex kan midden ín een blob landen
+> en dan is de kop niet te zien; een gemiste lange sleutel is hier acceptabel
+> omdat dit het vangnet is en niet de scherprechter.
+
 ### G. Bijzondere categorieën (AVG art. 9 en 10)
 
 Hier zit de grootste FP-val: een slide *over* de AVG noemt "gezondheidsgegevens" zonder er

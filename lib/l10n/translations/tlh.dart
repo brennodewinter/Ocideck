@@ -1756,6 +1756,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Azure-sleutel of SAS-token': 'Azure ngaSwI\' ghap SAS nagh',
+  'wachtwoordhash': 'peQ mI\'',
+  'TOTP-seed (tweede factor)': 'TOTP tIr (cha\'DIch)',
+  'mogelijk een sleutel of wachtwoord': 'chaq ngaSwI\' ghap peQ',
   'oud btw-nummer (bevat een BSN)': 'De\' HuchQeD tIQ (nuv mI\' ngaSbogh)',
   'vreemdelingennummer (V-nummer)': 'nov mI\' (V mI\')',
   'administratienummer (A-nummer)': 'vaS mI\' (A mI\')',

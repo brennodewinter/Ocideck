@@ -1772,6 +1772,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Azure-sleutel of SAS-token': 'Azure\'i võti või SAS-luba',
+  'wachtwoordhash': 'parooli räsi',
+  'TOTP-seed (tweede factor)': 'TOTP seeme (teine tegur)',
+  'mogelijk een sleutel of wachtwoord': 'võimalik, et võti või parool',
   'oud btw-nummer (bevat een BSN)':
       'vana käibemaksukohustuslase number (sisaldab isikukoodi)',
   'vreemdelingennummer (V-nummer)': 'välismaalase number (V-number)',

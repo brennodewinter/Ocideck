@@ -1788,6 +1788,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Azure-sleutel of SAS-token': 'Azure ključ ili SAS token',
+  'wachtwoordhash': 'sažetak lozinke',
+  'TOTP-seed (tweede factor)': 'TOTP sjeme (drugi faktor)',
+  'mogelijk een sleutel of wachtwoord': 'možda ključ ili lozinka',
   'oud btw-nummer (bevat een BSN)': 'stari PDV broj (sadrži osobni broj)',
   'vreemdelingennummer (V-nummer)': 'broj stranca (V-broj)',
   'administratienummer (A-nummer)': 'administrativni broj (A-broj)',

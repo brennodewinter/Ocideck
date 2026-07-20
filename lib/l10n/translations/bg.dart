@@ -1804,6 +1804,10 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Azure-sleutel of SAS-token': 'Azure ключ или SAS токен',
+  'wachtwoordhash': 'хеш на парола',
+  'TOTP-seed (tweede factor)': 'TOTP семе (втори фактор)',
+  'mogelijk een sleutel of wachtwoord': 'възможно ключ или парола',
   'oud btw-nummer (bevat een BSN)': 'стар ДДС номер (съдържа личен номер)',
   'vreemdelingennummer (V-nummer)': 'номер на чужденец (V-номер)',
   'administratienummer (A-nummer)': 'административен номер (A-номер)',

@@ -920,6 +920,10 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Azure-sleutel of SAS-token': 'Azure key or SAS token',
+  'wachtwoordhash': 'password hash',
+  'TOTP-seed (tweede factor)': 'TOTP seed (second factor)',
+  'mogelijk een sleutel of wachtwoord': 'possibly a key or password',
   'oud btw-nummer (bevat een BSN)': 'old VAT number (contains a national ID)',
   'vreemdelingennummer (V-nummer)': 'foreign national number (V-number)',
   'administratienummer (A-nummer)': 'administration number (A-number)',
