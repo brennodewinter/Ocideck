@@ -570,6 +570,12 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   uitbreiding uit had staan, kon dus wel verzegelen maar het zegel daarna niet
   van een tijdstempel voorzien: het spoor was halverwege afgesloten.
 
+  Dezelfde knop op de ondertekeningsdia is meegegaan. Die was de laatste weg
+  eromheen: een dia van een moduletype blijft renderen met de module uit, dus
+  een rapport dat er al een droeg bood het verzegelen alsnog aan. De
+  handtekeningvelden blijven wél bewerkbaar — die gegevens horen bij het deck,
+  niet bij de schakelaar.
+
 - **Vier keer stond het middel er al, en was het op één plek niet aangesloten.**
   Uit de bugjacht kwam dit als het karakteristieke patroon van de codebase naar
   voren: niet een ontbrekend idee, maar een geschreven en getoetst mechanisme dat

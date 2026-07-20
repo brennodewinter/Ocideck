@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/state/deck_provider.dart';
+import 'package:ocideck/state/info_safety_provider.dart';
 import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/widgets/editors/_editor_field.dart';
 import 'package:ocideck/widgets/editors/signoff_editor.dart';
@@ -22,7 +23,12 @@ void main() {
     void Function(Slide)? onUpdate,
     bool sealed = false,
   }) async {
-    final container = ProviderContainer();
+    // De ondertekeningsdia hoort bij de informatieveiligheidsmodule, en de
+    // verzegelknop erop zit achter dezelfde schakelaar. Deze harnas doet alsof
+    // de module aan staat — de staat waarin je een rapport ondertekent.
+    final container = ProviderContainer(
+      overrides: [infoSafetyRevealProvider.overrideWithValue(true)],
+    );
     addTearDown(container.dispose);
     final notifier = container.read(deckProvider.notifier);
     notifier.newDeck('Rapport');

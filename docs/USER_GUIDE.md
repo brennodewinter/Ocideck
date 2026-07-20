@@ -1904,11 +1904,12 @@ presentation is not asked for pentest metadata it has no use for:
   the person who entered it.
 - **Insert tools appendix…** in the `…` menu, which turns *Tools used* into a
   table slide.
-- **Afronden & verzegelen** in the `…` menu. Sealing is a document-integrity
-  function of this module — it sits behind the same toggle as the RFC3161
-  timestamp that follows it, so the sealing trail is never half-reachable with
-  the module off. A deck that already carries a sign-off slide still offers the
-  button on that slide's own editor.
+- **Afronden & verzegelen**, both in the `…` menu and on a sign-off slide's own
+  editor. Sealing is a document-integrity function of this module — it sits
+  behind the same toggle as the RFC3161 timestamp that follows it, so the
+  sealing trail is never half-reachable with the module off. The sign-off
+  slide's signature fields stay editable regardless: that data belongs to the
+  deck, not to the toggle.
 
 **Opening a security report while the module is off** surfaces a one-time
 prompt — a banner at the top of the window — so you can turn the module on right
