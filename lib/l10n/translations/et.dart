@@ -1776,6 +1776,8 @@ const _dutchSourceAddEt = <String, String>{
   'Niet doorzocht': 'Ei otsitud',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'See kontroll veebiversioonis ei tööta: näotuvastus vajab süsteemiteeki, mida brauseris pole. Piltide näotuvastuseks kasuta lauaarvuti versiooni.',
+  'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':
+      'Kiire serveripoolne otsing — indekseerimise viivituse tõttu võib äsja muudetud pakk puududa.',
   'Media blijft niet bewaard in een los .md-bestand':
       'Meediat ei säilitata tavalises .md-failis',
   'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':

@@ -96,6 +96,47 @@ abstract interface class DeckShortlister {
   });
 }
 
+/// Versnelt [DeckSearch] met de server-side codezoekopdracht van een forge die
+/// dat kan (GitHub, GitLab). Geïndexeerd, dus de dekking is
+/// [DeckSearchCoverage.bestEffort]. Geeft `null` door zodra de forge het niet
+/// kan — geen [CodeSearchCapable], of de forge zelf gaf null terug — zodat de
+/// volledige scan het overneemt.
+class ServerCodeSearchShortlister implements DeckShortlister {
+  ServerCodeSearchShortlister(this.forge);
+
+  /// De forge. Versnelt alleen als hij ook [CodeSearchCapable] is.
+  final GitForge forge;
+
+  @override
+  Future<DeckShortlist?> shortlist(
+    String needle, {
+    required bool caseSensitive,
+    required String branch,
+  }) async {
+    if (forge is! CodeSearchCapable) return null;
+    // `CodeSearchCapable` is geen subtype van `GitForge`, dus geen promotie:
+    // expliciet casten na de guard.
+    final search = forge as CodeSearchCapable;
+    // De standaardbranch is nodig omdat GitHub alléén díé indexeert. Eén goedkope
+    // probe, verwaarloosbaar naast N lezingen; faalt hij, dan geen versnelling.
+    // caseSensitive hoeft niet mee: een hoofdletterongevoelige serverzoekopdracht
+    // geeft een superset, en _searchDeck filtert daarna exact — nooit een gemis.
+    final String defaultBranch;
+    try {
+      defaultBranch = (await forge.probe()).defaultBranch;
+    } on GitForgeException {
+      return null;
+    }
+    final dirs = await search.searchDeckCodeDirs(
+      needle,
+      branch: branch,
+      defaultBranch: defaultBranch,
+    );
+    if (dirs == null) return null;
+    return DeckShortlist(dirs, coverage: DeckSearchCoverage.bestEffort);
+  }
+}
+
 /// Zoeken over álle decks in de repo, niet alleen het geopende (§9.3).
 ///
 /// Dit is de tekst-tegenhanger van `AssetIndex`: dezelfde ene ronde over de repo,

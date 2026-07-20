@@ -924,6 +924,8 @@ const _dutchSourceAddEn = {
   'Niet doorzocht': 'Not searched',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'This check does not run in the web version: face detection needs a system library the browser lacks. Use the desktop version to check images for faces.',
+  'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':
+      'Quick server-side search — indexing lag may leave out a deck that just changed.',
   'Media blijft niet bewaard in een los .md-bestand':
       'Media is not kept in a plain .md file',
   'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':

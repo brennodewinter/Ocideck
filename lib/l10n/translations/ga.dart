@@ -1821,6 +1821,8 @@ const _dutchSourceAddGa = <String, String>{
   'Niet doorzocht': 'Gan chuardach',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Ní ritheann an tseiceáil seo sa leagan gréasáin: teastaíonn leabharlann córais ón mbrath aghaidhe nach bhfuil ag an mbrabhsálaí. Bain úsáid as an leagan deisce chun aghaidheanna in íomhánna a sheiceáil.',
+  'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':
+      'Cuardach tapa ar an bhfreastalaí — mar gheall ar mhoill innéacsúcháin, d\'fhéadfadh deic a athraíodh le déanaí a bheith ar iarraidh.',
   'Media blijft niet bewaard in een los .md-bestand':
       'Ní choimeádtar na meáin i ngnáthchomhad .md',
   'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':

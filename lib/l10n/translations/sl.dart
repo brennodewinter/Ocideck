@@ -1787,6 +1787,8 @@ const _dutchSourceAddSl = <String, String>{
   'Niet doorzocht': 'Ni preiskano',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'To preverjanje se v spletni različici ne izvaja: zaznavanje obrazov potrebuje sistemsko knjižnico, ki je brskalnik nima. Za preverjanje obrazov na slikah uporabite namizno različico.',
+  'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':
+      'Hitro iskanje na strežniku — zaradi zakasnitve indeksiranja lahko pravkar spremenjen komplet manjka.',
   'Media blijft niet bewaard in een los .md-bestand':
       'Predstavnostna vsebina se ne ohrani v navadni datoteki .md',
   'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':

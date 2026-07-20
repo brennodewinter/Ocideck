@@ -1760,6 +1760,8 @@ const _dutchSourceAddTlh = <String, String>{
   'Niet doorzocht': 'nejbe\'',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'web version-Daq nptlh vam waH: qab nojwI\' pol system library \'e\' poQ, \'ach browser vam Hutlh. nagh Daq qab noj \'e\' DaneHchugh, desktop version yIlo\'.',
+  'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':
+      'nom Sam server — indexing poH nI\'mo\', DaH choHlu\'pu\'bogh deck ngaghbe\'chugh.',
   'Media blijft niet bewaard in een los .md-bestand':
       'So\'wI\' meq .md nagh Daq polbe\'lu\'',
   'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':

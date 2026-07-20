@@ -738,6 +738,8 @@ const _dutchSourceAddIt = {
   'Niet doorzocht': 'Non cercato',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Questo controllo non viene eseguito nella versione web: il rilevamento dei volti richiede una libreria di sistema che il browser non ha. Usa la versione desktop per controllare i volti nelle immagini.',
+  'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':
+      'Ricerca veloce lato server — per il ritardo di indicizzazione una presentazione appena modificata potrebbe mancare.',
   'Media blijft niet bewaard in een los .md-bestand':
       'I contenuti multimediali non vengono conservati in un file .md semplice',
   'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':

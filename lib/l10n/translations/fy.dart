@@ -743,6 +743,8 @@ const _dutchSourceAddFy = {
   'Niet doorzocht': 'Net trochsocht',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Dizze kontrôle draait net yn de webferzje: gesichtsherkenning fereasket in systeembibleteek dy\'t de browser net hat. Brûk de desktopferzje om ôfbyldings op gesichten nei te sjen.',
+  'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':
+      'Rappe sykopdracht op de tsjinner — troch yndeksearringsfertraging kin in krekt wizige deck ûntbrekke.',
   'Media blijft niet bewaard in een los .md-bestand':
       'Media bliuwt net bewarre yn in keal .md-bestân',
   'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':

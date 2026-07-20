@@ -1813,6 +1813,8 @@ const _dutchSourceAddEl = <String, String>{
   'Niet doorzocht': 'Δεν αναζητήθηκε',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Αυτός ο έλεγχος δεν εκτελείται στην έκδοση web: η ανίχνευση προσώπων χρειάζεται μια βιβλιοθήκη συστήματος που δεν έχει το πρόγραμμα περιήγησης. Χρησιμοποιήστε την έκδοση για υπολογιστή για να ελέγξετε πρόσωπα στις εικόνες.',
+  'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':
+      'Γρήγορη αναζήτηση στον διακομιστή — λόγω καθυστέρησης ευρετηρίασης, μια πρόσφατα τροποποιημένη παρουσίαση μπορεί να λείπει.',
   'Media blijft niet bewaard in een los .md-bestand':
       'Τα πολυμέσα δεν διατηρούνται σε ένα απλό αρχείο .md',
   'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':

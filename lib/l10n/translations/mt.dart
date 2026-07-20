@@ -1807,6 +1807,8 @@ const _dutchSourceAddMt = <String, String>{
   'Niet doorzocht': 'Mhux imfittex',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Din il-verifika ma taħdimx fil-verżjoni tal-web: is-sejbien tal-uċuħ jeħtieġ librerija tas-sistema li l-browser m\'għandux. Uża l-verżjoni tad-desktop biex tiċċekkja l-uċuħ fl-istampi.',
+  'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':
+      'Tfittxija mgħaġġla fis-server — minħabba dewmien fl-indiċjar, deck li għadu kif inbidel jista\' jonqos.',
   'Media blijft niet bewaard in een los .md-bestand':
       'Il-media ma tinżammx f\'fajl .md sempliċi',
   'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':

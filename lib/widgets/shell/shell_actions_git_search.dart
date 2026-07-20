@@ -192,16 +192,22 @@ class _GitSearchDialogState extends State<_GitSearchDialog> {
   }
 
   /// Zeg het wanneer het antwoord korter is dan de waarheid. Elke getoonde
-  /// treffer klopt, maar "meer is er niet" mag hier niet gesuggereerd worden.
+  /// treffer klopt, maar "meer is er niet" mag hier niet gesuggereerd worden —
+  /// of het nu door afkapping, een onleesbaar deck, of een geïndexeerde
+  /// serverzoekopdracht komt die achter kan lopen.
   Widget _incompleteNote(AppLocalizations l10n, DeckSearchResult result) {
-    if (result.isComplete) return const SizedBox.shrink();
     final parts = <String>[
+      if (result.coverage == DeckSearchCoverage.bestEffort)
+        l10n.d(
+          'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.',
+        ),
       if (result.truncated)
         l10n.d('Er zijn meer treffers dan hier passen; verfijn de zoekterm.'),
       if (result.unreadableDecks.isNotEmpty)
         '${l10n.d('Niet doorzocht, want onleesbaar:')} '
             '${result.unreadableDecks.join(', ')}.',
     ];
+    if (parts.isEmpty) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(top: 8),
       child: Text(
