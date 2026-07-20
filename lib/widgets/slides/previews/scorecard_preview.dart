@@ -56,6 +56,11 @@ class _ScorecardPreview extends StatelessWidget {
       children: [
         Text(
           entry.label,
+          // A label is a few words, not a sentence: let it wrap onto a second
+          // line and cut it there, rather than pushing the figure out of its
+          // tile.
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
           style: _applyFont(
             font,
             TextStyle(
@@ -66,62 +71,72 @@ class _ScorecardPreview extends StatelessWidget {
           ),
         ),
         SizedBox(height: w * 0.008),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.baseline,
-          textBaseline: TextBaseline.alphabetic,
-          children: [
-            Text(
-              entry.value == null ? '—' : formatScorecardNumber(entry.value!),
-              style: _applyFont(
-                font,
-                TextStyle(
-                  fontSize: w * 0.055,
-                  fontWeight: FontWeight.w700,
-                  color: text,
-                  height: 1.05,
-                ),
-              ),
-            ),
-            if (entry.unit.isNotEmpty) ...[
-              SizedBox(width: w * 0.006),
+        // A long figure with a unit beside it can outgrow a fifth of the
+        // slide; shrink it to fit instead of overflowing the tile.
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          alignment: Alignment.centerLeft,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.baseline,
+            textBaseline: TextBaseline.alphabetic,
+            children: [
               Text(
-                entry.unit,
+                entry.value == null ? '—' : formatScorecardNumber(entry.value!),
                 style: _applyFont(
                   font,
                   TextStyle(
-                    fontSize: w * 0.022,
-                    color: text.withValues(alpha: 0.7),
+                    fontSize: w * 0.055,
+                    fontWeight: FontWeight.w700,
+                    color: text,
+                    height: 1.05,
                   ),
                 ),
               ),
+              if (entry.unit.isNotEmpty) ...[
+                SizedBox(width: w * 0.006),
+                Text(
+                  entry.unit,
+                  style: _applyFont(
+                    font,
+                    TextStyle(
+                      fontSize: w * 0.022,
+                      color: text.withValues(alpha: 0.7),
+                    ),
+                  ),
+                ),
+              ],
             ],
-          ],
+          ),
         ),
         if (direction != null && delta != null) ...[
           SizedBox(height: w * 0.008),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                _directionIcon(direction),
-                size: w * 0.024,
-                color: changeColor,
-              ),
-              SizedBox(width: w * 0.004),
-              Text(
-                direction == ScorecardDirection.flat
-                    ? l10n.d('ongewijzigd')
-                    : formatScorecardDelta(delta),
-                style: _applyFont(
-                  font,
-                  TextStyle(
-                    fontSize: w * 0.022,
-                    fontWeight: FontWeight.w600,
-                    color: changeColor,
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.centerLeft,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  _directionIcon(direction),
+                  size: w * 0.024,
+                  color: changeColor,
+                ),
+                SizedBox(width: w * 0.004),
+                Text(
+                  direction == ScorecardDirection.flat
+                      ? l10n.d('ongewijzigd')
+                      : formatScorecardDelta(delta),
+                  style: _applyFont(
+                    font,
+                    TextStyle(
+                      fontSize: w * 0.022,
+                      fontWeight: FontWeight.w600,
+                      color: changeColor,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ],

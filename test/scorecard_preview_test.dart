@@ -154,6 +154,44 @@ void main() {
     expect(find.text('+0'), findsNothing);
   });
 
+  testWidgets('five figures with long labels still fit their tiles', (
+    tester,
+  ) async {
+    // Five is the documented maximum, so five must fit — including labels of
+    // real length and a unit beside the figure. Caught by rendering the slide
+    // and finding Flutter's overflow stripes across it.
+    await tester.pumpWidget(
+      _host(
+        _scorecard(const [
+          ScorecardEntry(label: 'Assets in beeld', value: 412, previous: 375),
+          ScorecardEntry(
+            label: 'Open bevindingen',
+            value: 96,
+            previous: 120,
+            polarity: ScorecardPolarity.lowerBetter,
+          ),
+          ScorecardEntry(
+            label: 'Waarvan kritiek',
+            value: 8,
+            previous: 5,
+            polarity: ScorecardPolarity.lowerBetter,
+          ),
+          ScorecardEntry(
+            label: 'Gemiddeld openstaand',
+            value: 62,
+            previous: 73,
+            unit: 'dagen',
+            polarity: ScorecardPolarity.lowerBetter,
+          ),
+          ScorecardEntry(label: 'Nieuw deze maand', value: 18),
+        ]),
+      ),
+    );
+    await tester.pump();
+
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('an empty scorecard renders without a figure', (tester) async {
     await tester.pumpWidget(_host(_scorecard(const [])));
     await tester.pump();

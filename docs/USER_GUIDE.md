@@ -614,6 +614,11 @@ Where the change has no colour to carry, it is still **signed** (`+37`, `-24`),
 so the direction survives a greyscale print. An unchanged figure says
 "unchanged" rather than showing a zero.
 
+Keep labels to a few words. A label wraps onto a second line and is cut there,
+and a long figure with a unit beside it shrinks to fit its column — the layout
+gives way before it pushes anything off the slide, but a sentence where a label
+belongs will still read badly.
+
 The scorecard follows the deck's style profile for background, text and fonts.
 Green and red are the deliberate exception: they mean something rather than
 decorate, so they stay recognisable whatever the house palette is — the same
