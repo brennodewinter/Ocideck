@@ -757,6 +757,9 @@ const _dutchSourceAddFy = {
       'Bepaalt oft in stiging grien of read kleuret. De pylk folget altyd de sifers.',
   'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
       'In pear kearnsifers mei it sifer fan de foarige rapportaazje dernjonken, sadat de feroaring it ferhaal fertelt. Jou per sifer oan oft stigen goed of min nijs is.',
+  'Zekere vondsten als fout behandelen': 'Wisse fynsten as flater behannelje',
+  'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.':
+      'Gewoanwei is in wisse fynst — in boargerservicenûmer, in IBAN, in e-mailadres — in warskôging dy\'tst negearje kinst. Oan makket der in flater fan, en dan kin de eksport dêrop blokkearje ast dy ynstelling ek oan hast. Bedoeld foar omjouwings dêr\'t sokke gegevens der echt net trochhinne meie. Ûnwisse fynsten bliuwe in warskôging.',
   'Medicare-nummer — een zorggegeven': 'Medicare-nûmer — in soarchgegeven',
   'bedrijfsnummer': 'bedriuwsnûmer',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

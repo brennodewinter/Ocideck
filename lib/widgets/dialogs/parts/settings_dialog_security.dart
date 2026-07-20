@@ -50,6 +50,7 @@ extension _SettingsSecurity on _SettingsDialogState {
               .setPrivacyChecksEnabled(value),
         ),
         _privacyImageFaceDetection(l10n),
+        _privacyStrictSeverity(l10n),
         _disabledPrivacyRules(l10n),
         _privacyRegions(l10n),
         const SizedBox(height: 10),
@@ -204,6 +205,34 @@ extension _SettingsSecurity on _SettingsDialogState {
           ? (value) => ref
                 .read(settingsProvider.notifier)
                 .setPrivacyImageFaceDetection(value)
+          : null,
+    );
+  }
+
+  /// De strenge stand (OCIWACHT §7).
+  ///
+  /// De ondertitel noemt het gevolg en niet de instelling. "Behandel zeker als
+  /// fout" zegt een gebruiker niets; "een export kan geblokkeerd worden" wel, en
+  /// dát is wat er verandert. Wie de blokkade juist wíl, herkent zich er ook in.
+  Widget _privacyStrictSeverity(AppLocalizations l10n) {
+    return SwitchListTile(
+      contentPadding: EdgeInsets.zero,
+      title: Text(
+        l10n.d('Zekere vondsten als fout behandelen'),
+        style: const TextStyle(fontSize: 13),
+      ),
+      subtitle: Text(
+        l10n.d(
+          'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.',
+        ),
+        style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+      ),
+      value: ref.watch(settingsProvider.select((s) => s.privacyStrictSeverity)),
+      onChanged:
+          ref.watch(settingsProvider.select((s) => s.privacyChecksEnabled))
+          ? (value) => ref
+                .read(settingsProvider.notifier)
+                .setPrivacyStrictSeverity(value)
           : null,
     );
   }

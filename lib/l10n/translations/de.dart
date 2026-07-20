@@ -756,6 +756,9 @@ const _dutchSourceAddDe = {
       'Legt fest, ob ein Anstieg grün oder rot erscheint. Der Pfeil folgt immer den Zahlen.',
   'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
       'Einige Kennzahlen mit der Zahl des vorigen Berichts daneben, sodass die Veränderung die Geschichte erzählt. Geben Sie je Zahl an, ob ein Anstieg gute oder schlechte Nachricht ist.',
+  'Zekere vondsten als fout behandelen': 'Sichere Funde als Fehler behandeln',
+  'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.':
+      'Normalerweise ist ein sicherer Fund — eine Sozialversicherungsnummer, eine IBAN, eine E-Mail-Adresse — eine Warnung, die Sie ignorieren können. Eingeschaltet wird daraus ein Fehler, und dann kann der Export daran blockieren, sofern Sie jene Einstellung ebenfalls aktiviert haben. Gedacht für Umgebungen, in denen solche Daten wirklich nicht durchkommen dürfen. Unsichere Funde bleiben eine Warnung.',
   'Medicare-nummer — een zorggegeven': 'Medicare-Nummer — Gesundheitsdatum',
   'bedrijfsnummer': 'Unternehmensnummer',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

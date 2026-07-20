@@ -1815,6 +1815,9 @@ const _dutchSourceAddLa = <String, String>{
       'Statuit utrum incrementum viride an rubrum sit. Sagitta semper numeros sequitur.',
   'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
       'Pauci numeri praecipui cum numero relationis prioris iuxta positi, ut mutatio narret. Pro quoque indica utrum incrementum bonum an malum nuntium sit.',
+  'Zekere vondsten als fout behandelen': 'Inventa certa ut errores tractare',
+  'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.':
+      'Plerumque inventum certum — numerus civilis, IBAN, inscriptio electronica — monitum est quod neglegere potes. Accensum errorem ex eo facit, et tunc exportatio in eo obstare potest si etiam illam optionem accensam habes. Destinatum locis ubi talia data vere transire non licet. Inventa incerta monitum manent.',
   'Medicare-nummer — een zorggegeven': 'numerus Medicare — datum salutis',
   'bedrijfsnummer': 'numerus societatis',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

@@ -1827,6 +1827,10 @@ const _dutchSourceAddEl = <String, String>{
       'Καθορίζει αν μια άνοδος χρωματίζεται πράσινη ή κόκκινη. Το βέλος ακολουθεί πάντα τους αριθμούς.',
   'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
       'Λίγα βασικά μεγέθη με το μέγεθος της προηγούμενης αναφοράς δίπλα, ώστε την ιστορία να τη λέει η μεταβολή. Δηλώστε για καθένα αν η άνοδος είναι καλό ή κακό νέο.',
+  'Zekere vondsten als fout behandelen':
+      'Αντιμετώπιση βέβαιων ευρημάτων ως σφαλμάτων',
+  'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.':
+      'Κανονικά ένα βέβαιο εύρημα — ένας ΑΜΚΑ, ένα IBAN, μια διεύθυνση email — είναι μια προειδοποίηση που μπορείτε να αγνοήσετε. Ενεργό το μετατρέπει σε σφάλμα, και τότε η εξαγωγή μπορεί να μπλοκάρει σε αυτό αν έχετε ενεργή και εκείνη τη ρύθμιση. Προορίζεται για περιβάλλοντα όπου τέτοια δεδομένα πραγματικά δεν πρέπει να περάσουν. Τα αβέβαια ευρήματα παραμένουν προειδοποίηση.',
   'Medicare-nummer — een zorggegeven': 'αριθμός Medicare — δεδομένο υγείας',
   'bedrijfsnummer': 'αριθμός εταιρείας',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

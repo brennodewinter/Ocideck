@@ -756,6 +756,10 @@ const _dutchSourceAddFr = {
       'Détermine si une hausse s\'affiche en vert ou en rouge. La flèche suit toujours les chiffres.',
   'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
       'Quelques indicateurs clés accompagnés du chiffre du rapport précédent, afin que l\'évolution raconte l\'histoire. Indiquez pour chacun si une hausse est une bonne ou une mauvaise nouvelle.',
+  'Zekere vondsten als fout behandelen':
+      'Traiter les détections certaines comme des erreurs',
+  'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.':
+      'Normalement, une détection certaine — un numéro national, un IBAN, une adresse e-mail — est un avertissement que vous pouvez ignorer. Activé, cela devient une erreur, et l\'export peut alors être bloqué si vous avez également activé ce réglage. Prévu pour les environnements où de telles données ne doivent vraiment pas passer. Les détections incertaines restent un avertissement.',
   'Medicare-nummer — een zorggegeven': 'numéro Medicare — donnée de santé',
   'bedrijfsnummer': 'numéro de société',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

@@ -1806,6 +1806,9 @@ const _dutchSourceAddSk = <String, String>{
       'Určuje, či je nárast zelený alebo červený. Šípka vždy nasleduje čísla.',
   'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
       'Niekoľko kľúčových čísel s číslom z predchádzajúcej správy vedľa, aby príbeh rozprávala zmena. Pri každom uveďte, či je nárast dobrá alebo zlá správa.',
+  'Zekere vondsten als fout behandelen': 'Považovať isté zistenia za chyby',
+  'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.':
+      'Zvyčajne je isté zistenie — rodné číslo, IBAN, e-mailová adresa — varovanie, ktoré možno ignorovať. Zapnuté z neho urobí chybu a export sa na nej môže zastaviť, ak máte aj toto nastavenie zapnuté. Určené pre prostredia, kde také údaje naozaj nesmú prejsť. Neisté zistenia zostávajú varovaním.',
   'Medicare-nummer — een zorggegeven': 'číslo Medicare — údaj o zdraví',
   'bedrijfsnummer': 'číslo spoločnosti',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

@@ -753,6 +753,10 @@ const _dutchSourceAddEs = {
       'Determina si una subida se colorea de verde o de rojo. La flecha siempre sigue las cifras.',
   'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
       'Unas pocas cifras clave junto a la cifra del informe anterior, para que el cambio cuente la historia. Indica en cada una si subir es una buena o una mala noticia.',
+  'Zekere vondsten als fout behandelen':
+      'Tratar los hallazgos seguros como errores',
+  'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.':
+      'Normalmente un hallazgo seguro — un número de identidad, un IBAN, una dirección de correo — es un aviso que puede ignorar. Activado se convierte en un error, y entonces la exportación puede bloquearse si también tiene activada esa opción. Pensado para entornos donde esos datos realmente no deben salir. Los hallazgos inciertos siguen siendo un aviso.',
   'Medicare-nummer — een zorggegeven': 'número de Medicare — dato de salud',
   'bedrijfsnummer': 'número de sociedad',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

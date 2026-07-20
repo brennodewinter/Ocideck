@@ -1799,6 +1799,10 @@ const _dutchSourceAddId = <String, String>{
       'Menentukan apakah kenaikan berwarna hijau atau merah. Panah selalu mengikuti angka.',
   'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
       'Beberapa angka utama dengan angka laporan sebelumnya di sampingnya, sehingga perubahannya yang bercerita. Tentukan untuk setiap angka apakah kenaikan adalah kabar baik atau buruk.',
+  'Zekere vondsten als fout behandelen':
+      'Perlakukan temuan pasti sebagai kesalahan',
+  'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.':
+      'Biasanya temuan pasti — nomor identitas, IBAN, alamat surel — adalah peringatan yang dapat Anda abaikan. Menyalakannya menjadikannya kesalahan, dan ekspor dapat terhalang karenanya jika pengaturan itu juga aktif. Ditujukan untuk lingkungan di mana data semacam itu benar-benar tidak boleh lolos. Temuan yang tidak pasti tetap menjadi peringatan.',
   'Medicare-nummer — een zorggegeven': 'nomor Medicare — data kesehatan',
   'bedrijfsnummer': 'nomor perusahaan',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

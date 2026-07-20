@@ -1811,6 +1811,9 @@ const _dutchSourceAddPl = <String, String>{
       'Decyduje, czy wzrost jest zielony czy czerwony. Strzałka zawsze podąża za liczbami.',
   'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
       'Kilka kluczowych wskaźników z liczbą z poprzedniego raportu obok, tak aby to zmiana opowiadała historię. Wskaż dla każdego, czy wzrost to dobra czy zła wiadomość.',
+  'Zekere vondsten als fout behandelen': 'Traktuj pewne znaleziska jako błędy',
+  'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.':
+      'Zwykle pewne znalezisko — numer PESEL, IBAN, adres e-mail — to ostrzeżenie, które można zignorować. Włączenie zmienia je w błąd, a wtedy eksport może się na nim zablokować, jeśli to ustawienie także jest włączone. Przeznaczone dla środowisk, w których takie dane naprawdę nie mogą przejść. Niepewne znaleziska pozostają ostrzeżeniem.',
   'Medicare-nummer — een zorggegeven': 'numer Medicare — dane o zdrowiu',
   'bedrijfsnummer': 'numer spółki',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

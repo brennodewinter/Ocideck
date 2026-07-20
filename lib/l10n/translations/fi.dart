@@ -1799,6 +1799,9 @@ const _dutchSourceAddFi = <String, String>{
       'Määrittää, väritetäänkö nousu vihreäksi vai punaiseksi. Nuoli seuraa aina lukuja.',
   'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
       'Muutama tunnusluku edellisen raportin luvun kanssa vierekkäin, jotta muutos kertoo tarinan. Kerro kustakin, onko nousu hyvä vai huono uutinen.',
+  'Zekere vondsten als fout behandelen': 'Käsittele varmat löydökset virheinä',
+  'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.':
+      'Yleensä varma löydös — henkilötunnus, IBAN, sähköpostiosoite — on varoitus, jonka voi ohittaa. Päällä siitä tulee virhe, ja silloin vienti voi pysähtyä siihen, jos myös tuo asetus on päällä. Tarkoitettu ympäristöihin, joissa tällaiset tiedot eivät todella saa päästä läpi. Epävarmat löydökset pysyvät varoituksena.',
   'Medicare-nummer — een zorggegeven': 'Medicare-numero — terveystieto',
   'bedrijfsnummer': 'yritysnumero',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

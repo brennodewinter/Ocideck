@@ -938,6 +938,9 @@ const _dutchSourceAddEn = {
       'Decides whether a rise is coloured green or red. The arrow always follows the figures.',
   'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
       'A few headline figures with the previous report\'s figure beside them, so the change tells the story. Say for each whether a rise is good or bad news.',
+  'Zekere vondsten als fout behandelen': 'Treat certain findings as errors',
+  'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.':
+      'Normally a certain finding — a national ID number, an IBAN, an email address — is a warning you can ignore. On makes it an error, and then the export can block on it if you have that setting enabled too. Meant for environments where such data really must not get through. Uncertain findings stay a warning.',
   'Medicare-nummer — een zorggegeven': 'Medicare number — health data',
   'bedrijfsnummer': 'company number',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

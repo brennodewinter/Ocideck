@@ -14,16 +14,31 @@ import '../../models/privacy_finding.dart';
 import '../../models/slide_quality.dart';
 
 /// Vertaalt een scanresultaat naar kwaliteitsmeldingen.
-List<SlideQualityIssue> privacyIssuesFrom(PrivacyScanResult scan) {
-  return [for (final finding in scan.findings) _issueFrom(finding)];
+///
+/// [strictSeverity] volgt de gelijknamige instelling: aan tilt het een
+/// `zeker`-bevinding van waarschuwing naar fout. De vlag is een parameter en
+/// geen provider-lookup, zodat deze laag zonder Riverpod te testen blijft — de
+/// aanroepers in `privacy_provider.dart` en `slide_badge_popover.dart` lezen de
+/// instelling en geven haar door.
+List<SlideQualityIssue> privacyIssuesFrom(
+  PrivacyScanResult scan, {
+  bool strictSeverity = false,
+}) {
+  return [
+    for (final finding in scan.findings)
+      _issueFrom(finding, strictSeverity: strictSeverity),
+  ];
 }
 
-SlideQualityIssue _issueFrom(PrivacyFinding finding) {
+SlideQualityIssue _issueFrom(
+  PrivacyFinding finding, {
+  required bool strictSeverity,
+}) {
   return SlideQualityIssue(
     slideIndex: finding.isDeckWide ? kDeckWideSlideIndex : finding.slideIndex,
     kind: _kindFor(finding.family),
     category: SlideQualityCategory.privacy,
-    severity: _severityFor(finding.confidence),
+    severity: _severityFor(finding.confidence, strictSeverity),
     field: finding.field,
     // De positie reist mee. Zonder haar weet de auteur wél dat er een naam op
     // slide 5 staat, maar niet wáár — en bij een slide vol tekst is dat het
@@ -86,9 +101,22 @@ SlideQualityIssueKind _kindFor(PrivacyFamily family) {
 ///
 /// `possible` blijft informatief. Dat is waar de contextloze BSN-treffers landen,
 /// en die mogen niemand onderbreken — zie `privacy_scanner.dart`.
-MarkdownValidationSeverity _severityFor(PrivacyConfidence confidence) {
+///
+/// Die eigen instelling is er inmiddels: [strict] is `privacyStrictSeverity`.
+/// Aan verschuift **alleen** `certain`. `likely` blijft een waarschuwing, want
+/// daar zit per definitie een restkans op een vals positief, en een blokkade op
+/// een vals positief kost de gebruiker een export die hij niet kan afdwingen.
+/// `possible` blijft informatief, om de reden hierboven — ook in de strenge
+/// stand hoort de contextloze treffer niemand tegen te houden.
+MarkdownValidationSeverity _severityFor(
+  PrivacyConfidence confidence,
+  bool strict,
+) {
   return switch (confidence) {
-    PrivacyConfidence.certain => MarkdownValidationSeverity.warning,
+    PrivacyConfidence.certain =>
+      strict
+          ? MarkdownValidationSeverity.error
+          : MarkdownValidationSeverity.warning,
     PrivacyConfidence.likely => MarkdownValidationSeverity.warning,
     PrivacyConfidence.possible => MarkdownValidationSeverity.informational,
   };

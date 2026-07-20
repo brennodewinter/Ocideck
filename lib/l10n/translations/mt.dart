@@ -1821,6 +1821,10 @@ const _dutchSourceAddMt = <String, String>{
       'Jiddetermina jekk żieda tkunx ħadra jew ħamra. Il-vleġġa dejjem issegwi ċ-ċifri.',
   'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
       'Ftit ċifri ewlenin biċ-ċifra tar-rapport preċedenti ħdejhom, biex il-bidla tirrakkonta l-istorja. Indika għal kull waħda jekk żieda hijiex aħbar tajba jew ħażina.',
+  'Zekere vondsten als fout behandelen':
+      'Ittratta s-sejbiet ċerti bħala żbalji',
+  'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.':
+      'Normalment sejba ċerta — numru tal-identità, IBAN, indirizz elettroniku — hija twissija li tista\' tinjora. Mixgħul jagħmilha żball, u mbagħad l-esportazzjoni tista\' timblokka fuqha jekk għandek ukoll dik is-setting mixgħula. Maħsub għal ambjenti fejn tali data tassew ma tistax tgħaddi. Is-sejbiet inċerti jibqgħu twissija.',
   'Medicare-nummer — een zorggegeven': 'numru Medicare — dejta dwar is-saħħa',
   'bedrijfsnummer': 'numru tal-kumpanija',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

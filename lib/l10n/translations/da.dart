@@ -1798,6 +1798,9 @@ const _dutchSourceAddDa = <String, String>{
       'Afgør, om en stigning farves grøn eller rød. Pilen følger altid tallene.',
   'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
       'Nogle få nøgletal med tallet fra den forrige rapport ved siden af, så forandringen fortæller historien. Angiv for hvert tal, om en stigning er en god eller dårlig nyhed.',
+  'Zekere vondsten als fout behandelen': 'Behandl sikre fund som fejl',
+  'Normaal is een zekere vondst — een BSN, een IBAN, een e-mailadres — een waarschuwing die je kunt negeren. Aan maakt er een fout van, en dan kan de export erop blokkeren als je die instelling ook aan hebt staan. Bedoeld voor omgevingen waar zulke gegevens er echt niet doorheen mogen. Onzekere vondsten blijven een waarschuwing.':
+      'Normalt er et sikkert fund — et CPR-nummer, et IBAN, en e-mailadresse — en advarsel, du kan ignorere. Slået til gør det til en fejl, og så kan eksporten blokere på det, hvis du også har den indstilling slået til. Beregnet til miljøer, hvor sådanne data virkelig ikke må slippe igennem. Usikre fund forbliver en advarsel.',
   'Medicare-nummer — een zorggegeven': 'Medicare-nummer — en helbredsoplysning',
   'bedrijfsnummer': 'selskabsnummer',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':
