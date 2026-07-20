@@ -305,6 +305,37 @@ void main() {
     expect(updated?.bullets, ['[x] Open']);
   });
 
+  testWidgets('a redacted checklist slide cannot be toggled', (tester) async {
+    // De presenter draait op het geprojecteerde deck en schrijft een vinkje als
+    // HELE slide terug. Op een geredigeerde slide zou dat de bron met zwarte
+    // blokken overschrijven, dus het aanvinken is daar uitgeschakeld.
+    var fired = false;
+    final slide = Slide.create(SlideType.bullets).copyWith(
+      bullets: ['[ ] Open'],
+      listStyle: ListStyle.checklist,
+      contentRedacted: true,
+    );
+    await tester.pumpScoped(
+      MaterialApp(
+        home: Scaffold(
+          body: SizedBox(
+            width: 800,
+            height: 450,
+            child: SlidePreviewWidget(
+              slide: slide,
+              presentationMode: true,
+              onChecklistItemToggle: (_, _) => fired = true,
+            ),
+          ),
+        ),
+      ),
+    );
+
+    final toggle = find.byKey(const ValueKey('checklist-preview-toggle-0-0'));
+    if (toggle.evaluate().isNotEmpty) await tester.tap(toggle);
+    expect(fired, isFalse);
+  });
+
   testWidgets('rich text bullets slide renders title and body', (tester) async {
     final slide = Slide.create(SlideType.bullets).copyWith(
       title: 'Kop',

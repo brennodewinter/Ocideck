@@ -335,6 +335,19 @@ class Slide {
   ///
   /// Dat verschil kán niet uit het lege pad worden afgeleid, dus reist het mee.
   final bool mediaRedacted;
+
+  /// Of er tekst op deze slide is weggelakt door de projectie.
+  ///
+  /// Net als [mediaRedacted] reist dit alleen mee in een geprojecteerd deck; het
+  /// staat nooit in het bestand. Het bestaat om de terugschrijfgrens te bewaken:
+  /// een oppervlak dat de gegevens niet kán zien, mag ze ook niet terugschrijven
+  /// (zie `privacy_projection.dart`). De presenter schrijft een aangevinkt
+  /// checklistpunt als *hele slide* terug naar het deck, dus zonder deze vlag
+  /// zou één vinkje de bron met zwarte blokken overschrijven.
+  ///
+  /// [tableEditable] doet hetzelfde voor tabellen, maar dat is een veld van de
+  /// auteur dat de projectie uitzet; voor de checklist bestaat zo'n veld niet.
+  final bool contentRedacted;
   final String quote;
   final String quoteAuthor;
   final String customMarkdown;
@@ -459,6 +472,7 @@ class Slide {
     this.audioPath = '',
     this.audioAutoplay = false,
     this.mediaRedacted = false,
+    this.contentRedacted = false,
     this.quote = '',
     this.quoteAuthor = '',
     this.customMarkdown = '',
@@ -630,6 +644,7 @@ class Slide {
     String? audioPath,
     bool? audioAutoplay,
     bool? mediaRedacted,
+    bool? contentRedacted,
     String? quote,
     String? quoteAuthor,
     String? customMarkdown,
@@ -692,6 +707,7 @@ class Slide {
       videoEndMs: videoEndMs ?? this.videoEndMs,
       audioPath: audioPath ?? this.audioPath,
       mediaRedacted: mediaRedacted ?? this.mediaRedacted,
+      contentRedacted: contentRedacted ?? this.contentRedacted,
       audioAutoplay: audioAutoplay ?? this.audioAutoplay,
       quote: quote ?? this.quote,
       quoteAuthor: quoteAuthor ?? this.quoteAuthor,
