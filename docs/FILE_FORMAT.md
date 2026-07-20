@@ -635,7 +635,7 @@ void main() => print('hi');
 
 **Chart** (`chart`) — a fenced ```chart``` block with the chart specification as
 **JSON**. The data may sit inline, or in a data file in `data/` that `source`
-points at (see §6.4). When saving, inline data is omitted as soon as a `source`
+points at (see §6.4). When saving, the values move out as soon as a `source`
 exists; when opening, that file is read back in. Styling — colours, title,
 bounds — always stays in the block, never in the data file.
 ````markdown
@@ -648,6 +648,8 @@ bounds — always stays in the block, never in the data file.
   "rowColors": ["#003399", "#FFCC00"],  // optional; color per label (pie/donut/radar)
   "minBound": 0,            // optional; cartesian/radar only
   "maxBound": 20,           // optional; cartesian/radar only
+  "animateOnEnter": false,  // optional; only written when false
+  "animationDurationMs": 600,  // optional; omitted = inherit the theme
   "series": [ { "name": "2025", "data": [10, 14], "color": "#2563EB" } ]
 }
 ```
@@ -671,8 +673,12 @@ Fields:
     the series total in the centre hole. Both show at most the first two series.
   - `radar` — spider chart; needs at least three labels (axes).
   - `heatmap` — a grid: each series is a **row**, each label a **column**, the
-    cell colour a light→accent ramp over the data range. Label the axes
-    likelihood and impact and it reads as a risk matrix.
+    cell colour a ramp over the data range. Label the axes likelihood and
+    impact and it reads as a risk matrix. Unlike every other type, a heatmap
+    is *not* tinted with the deck's accent: it uses a fixed, theme-independent
+    heat ramp (pale→red on a light slide, dark→bright on a dark one), so a
+    heatmap reads as magnitude rather than as the theme. `rowColors` and the
+    per-series `color` are therefore ignored for this type.
 - `x` — labels; for `pie`/`donut`/`radar` these are the segments/axes (radar
   requires at least three); for `heatmap` they are the columns.
 - `series` — named series with `data` (aligned with `x`) and optionally a
@@ -684,8 +690,16 @@ Fields:
   horizontal **reference lines**; for `radar` they set the **scale**
   (inner/outer ring) with even spacing. Ignored for `pie`, `donut`,
   `horizontalBar`, `horizontalStackedBar`, and `heatmap`.
-- `source` — optional path to a data file in `data/` holding `x` and `series`
-  (§6.4). When present, those two are omitted from the block on save.
+- `animateOnEnter` — whether the chart draws itself in (values growing from the
+  baseline) when the slide comes up in presentation mode. Defaults to `true` and
+  is only written to the block when turned **off**, so a clean chart stays clean.
+- `animationDurationMs` — per-slide override of that draw-in duration. Omitted
+  means inherit the theme's `animationDurationMs`; it is only written when set.
+- `source` — optional path to a data file holding `x` and `series` (§6.4). When
+  present, the values are omitted from the block on save. `x` disappears
+  entirely; `series` disappears too *unless* a series carries a `color`, in
+  which case the block keeps a stripped `series` array of names and colours
+  (no `data`) — the colours are styling and have nowhere else to live.
 
 **Question** (`question`) — a fenced ```question``` block with the quiz
 specification as **JSON**, optionally preceded by a `# title`, an `![](image)`
@@ -1081,14 +1095,23 @@ A chart slide (§5) can keep its data inline in the `chart` block, or point via
 `"source": "data/<name>.json"` to a data file in a separate **`data/`** folder
 next to the deck. That folder keeps all linked data files together, separate
 from `images/`/`media/`. When opening, the file is read and attached to the
-chart in memory; the `.md` keeps only the `source` reference, so the markdown
-stays about the *shape* of the chart while the file holds the values.
+chart in memory; the `.md` keeps the `source` reference and the styling, so the
+markdown stays about the *shape* of the chart while the file holds the values.
+
+The `data/` prefix is a convention for files OciDeck creates, not a rule it
+enforces: any project-relative path is read and written, and the reader is
+chosen purely on the extension — `.json` is parsed as JSON, everything else as
+CSV. A `source` that points outside the project folder is refused rather than
+followed (§1); it is never read and never written, and the reference is left in
+the deck untouched.
 
 The file is copied along during save/`Save as...` and included in packages
 (§7). A package is written from the deck **in memory**, not by copying the file
 from disk, so an export made before saving carries the numbers you see on
-screen rather than the older ones still in the file. An HTML/PDF export has no
-folder to resolve a reference against, so it inlines the data instead.
+screen rather than the older ones still in the file. Anywhere there is no
+folder to resolve a reference against, the data is inlined instead: HTML/PDF
+export, the browser's "download as `.md`", the presenter/beamer hand-off, and
+the HTML preview.
 
 **Two forms.** New data files are written as **JSON**; **CSV** is still read,
 and a deck that already links a `.csv` keeps getting CSV on save — silently
@@ -1099,10 +1122,22 @@ is chosen on the extension.
 {
   "x": ["Jan", "Feb", "Mrt"],
   "series": [
-    { "name": "Omzet", "data": [120, 138, 95] }
+    { "name": "Omzet", "data": [120.0, 138.0, 95.0] }
   ]
 }
 ```
+
+Values are read as `double` and written back as such, so a whole number comes
+out of the app as `120.0` even when it was typed as `120`. A hand-written
+`120` reads back identically; the form only matters if something outside
+compares the file byte for byte.
+
+That the *extension* survives a rewrite does not mean the file comes back
+byte-for-byte in its original dialect. A CSV that OciDeck rewrites is written
+with a `,` separator and a dot decimal, whatever it used before — so a
+semicolon-and-comma file from a Dutch spreadsheet stays a `.csv`, but its
+dialect flips on the first save that changes a value. If something outside
+reads that file with a fixed separator, link it as JSON instead.
 
 CSV shape: first row = series names (first cell = label column), every next row
 is `label, value1, value2, ...`.
@@ -1119,9 +1154,18 @@ How numbers are written is deduced from the file as a whole rather than per
 cell: `1.234,56` settles itself (the last mark is the decimal one), and a `10,5`
 elsewhere settles a bare `1,234` in the same file. Nothing is assumed from the
 reader's locale. A file that genuinely does not say — every comma followed by
-exactly three digits — is asked about on import rather than guessed. A cell that
-is no number at all (`12%`, `€ 1.000`) is charted as 0 and named after the
-import; an empty cell is a missing value and stays silent.
+exactly three digits — is asked about when the file is **imported** in the chart
+editor. On deck open there is no one to ask, so the same file is read with the
+fallback convention and no question: a `,`-separated file is read dot-decimal,
+a `;`- or tab-separated one comma-decimal, on the reasoning that a file that
+uses `;` to separate had a reason to. Ambiguity is therefore only ever raised
+on import, never on open.
+
+A cell that is no number at all (`12%`, `€ 1.000`) is charted as 0 and named
+after the import. An empty cell is also charted as 0 — it is simply not
+reported as unreadable, because blank is a normal thing for a spreadsheet to
+contain. There is no separate "missing value": a gap in a series and a zero in
+a series are the same thing to the chart.
 
 New files are still written as JSON: it needs no such reading rules, and it
 round-trips a `double` exactly.
@@ -1138,33 +1182,64 @@ images use. A pool path is the hash of its contents, so every changed cell would
 produce a new file and orphan the old one — no diff to read. On a fixed path, a
 change reads as what it is.
 
+That fixed path is where the git route's involvement ends. A commit only ever
+*writes* data files; it does not delete the orphans a local save would clean up,
+and it does not compare against a baseline first, so the housekeeping described
+above is specific to saving a project folder on disk. OciDeck's own three-way
+merge and version comparison do not look inside `data/*` either: a data file is
+carried along as a file, and a conflicting edit to one is settled by git's own
+line-based merge on the raw JSON rather than by anything chart-aware.
+
 **Automatic.** A chart that still carries its data inline is moved to a data
 file **on save**, and the block is left with the reference. Decks written before
 data files existed therefore convert on their next save, with nothing for the
 user to do. The conversion runs on save and never on open — opening must not
 rewrite a deck that was only looked at.
 
-The file is named after the chart title (`data/Omzet_2025.json`, `grafiek.json`
-when untitled), with a numeric suffix when that name is taken. Once assigned, a
+The file is named after the chart title, slugged down to letters, digits,
+spaces and hyphens with the rest collapsed to `_` (`Omzet 2025` →
+`data/Omzet_2025.json`), or `grafiek.json` when the chart has no title. A name
+already taken — by another chart in the deck or by a file already on disk —
+gets a numeric suffix: `Omzet_2025-2.json`, `-3`, and so on. Once assigned, a
 `source` never changes again, even if the title does: renaming on every title
 edit would churn the file and its history for no gain. A chart with no data yet
 gets no file. Copying a chart slide copies its `source` too, so on the next save
 the copy is given a file of its own rather than overwriting its twin's.
 
-On save, data files this deck itself wrote that nothing references any more —
-from a deleted chart, say — are removed. Only files OciDeck read or wrote for
-this deck are eligible; anything else in `data/`, and every `.csv`, is left
-alone.
+Writing a **package** (§7) is the one exception to "a `source` never changes".
+Package members are re-slugged into `data/` and collide under a different
+scheme (`Omzet_2025 (2).json`), and the slide's `source` in the packaged `.md`
+is rewritten to match. A deck that is exported and imported again can therefore
+come back with different data filenames than it left with. The values ride
+along unchanged; only the paths move.
+
+On save, data files that nothing references any more — from a deleted chart,
+say — are removed. Eligibility is deliberately narrow: only a `.json` that this
+running session itself read or wrote, and only inside the deck's own folder.
+Anything else in `data/`, and every `.csv`, is left alone. A file OciDeck has
+never touched is never deleted, so a folder shared with other tooling survives
+a save.
 
 **Editing.** Both directions work. The grid in the app edits a linked chart just
 like an inline one and writes the file back on save; the file can equally be
 edited outside the app. To keep those from fighting, a save only rewrites a data
 file whose values actually changed in the app: an untouched chart leaves its
 file completely alone, so an edit made elsewhere while the deck was open
-survives. If both changed, the app wins and the clash is reported.
+survives. If both changed, the app wins; the clash is recorded in the log, but
+is not currently surfaced in the interface on the save path the way a problem
+found while *opening* is.
+
+Two shapes fall outside that comparison. A chart that arrives with inline data
+*and* a `source` is not hydrated from the file — the block already has values —
+so there is nothing to compare against and its file is overwritten on save. And
+a chart whose rows are all deleted stops counting as having data at all, so its
+file is left as it was rather than emptied; the old numbers come back on the
+next open. Clear a chart by deleting the slide, not by clearing the grid.
 
 A missing or unparseable data file leaves the chart's data empty rather than
-failing the open, and never causes the reference to be dropped.
+failing the open, and never causes the reference to be dropped. A missing file
+is reported to the user; a file that is present but malformed leaves the chart
+untouched without a warning.
 
 ---
 
@@ -1208,7 +1283,11 @@ When exporting a package you may protect it with a password. Encryption is
 - **Detection on open.** OciDeck inspects the zip header (no password needed) to
   see whether the package is encrypted, then prompts for the password and
   retries on a wrong one. The central directory (file **names** and structure)
-  is *not* encrypted — only file **contents** are.
+  is *not* encrypted — only file **contents** are. Worth knowing when the names
+  themselves are telling: image filenames come along as they were, and a chart's
+  data file is named after the chart's **title** (§6.4), so `Omzet_2025.json` is
+  readable from an encrypted package without the password. Retitle a chart
+  before exporting if its title is the sensitive part.
 - **Key derivation.** WinZip AES derives the key with **PBKDF2-HMAC-SHA1, 1000
   iterations**. This iteration count is fixed by the WinZip AES spec and is low
   by modern standards, so a short/guessable password is the weak link. The
@@ -1271,6 +1350,12 @@ In the editor, the code icon in the toolbar switches to **Markdown mode**: the
 entire presentation is shown as one Marp Markdown document (the same structure as
 on disk). **Apply** parses the text back into typed slides; **Cancel** returns
 without applying changes.
+
+One deliberate difference from the file on disk: a chart with a linked data file
+(§6.4) is shown here with its `x` and `series` **inline**, so the numbers can be
+read and edited in place instead of pointing at a file the text editor cannot
+open. The `source` stays in the block, and applying the text writes the values
+back to the data file on the next save.
 
 ### Find and Replace
 
