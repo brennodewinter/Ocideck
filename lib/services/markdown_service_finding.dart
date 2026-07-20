@@ -14,7 +14,12 @@ extension _MarkdownFindingParse on MarkdownService {
     final rows = <List<String>>[];
     for (final line in tableLines) {
       final cells = _splitTableRow(line);
-      if (cells.isNotEmpty &&
+      // Alleen de regel direct ná de kop is de scheidingsrij. Verderop is een
+      // streepje gewoon inhoud — in een bevindingen- of scopetabel de
+      // gebruikelijke invulling voor "niet van toepassing" — en zo'n rij werd
+      // hier in zijn geheel weggegooid, inclusief de andere kolommen.
+      if (rows.length == 1 &&
+          cells.isNotEmpty &&
           cells.every((c) => _reSeparatorCell.hasMatch(c.trim()))) {
         continue;
       }

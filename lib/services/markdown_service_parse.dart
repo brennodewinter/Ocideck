@@ -59,6 +59,10 @@ class _BodyParse {
   String audioPath = '';
   bool audioAutoplay = false;
   String quote = '';
+
+  /// Of er al een `>`-regel is gezien. Zonder dit is een citaat dat met een lege
+  /// regel begint niet te onderscheiden van "nog geen citaat".
+  bool quoteStarted = false;
   String quoteAuthor = '';
   final tableLines = <String>[];
   final richTextLines = <String>[];
@@ -739,8 +743,12 @@ extension _MarkdownParse on MarkdownService {
       final audio = _parseAudioAttrs(t);
       b.audioPath = audio.$1;
       b.audioAutoplay = audio.$2;
-    } else if (t.startsWith('<div') || t == '</div>') {
-      // Split-slide structural markup; not part of the rich-text body.
+    } else if (isSplit && (t.startsWith('<div') || t == '</div>')) {
+      // De stellage van een split-slide (`<div class="split-text">` en zijn
+      // sluiting) hoort niet bij de tekst. Alleen op een split-slide: de
+      // serialiser schrijft deze markup nergens anders, en zonder die
+      // voorwaarde verdween een door de auteur getypte `<div>`-regel — met zijn
+      // inhoud en al — uit een gewone vrije-tekstslide.
     } else {
       b.richTextLines.add(line);
     }
@@ -788,8 +796,11 @@ extension _MarkdownParse on MarkdownService {
       } else if (_reNumberedMark.hasMatch(marker)) {
         b.listStyle = ListStyle.numbered;
       }
-    } else if (t.startsWith('> ')) {
-      b.quote = t.substring(2);
+    } else if (t == '>' || t.startsWith('> ')) {
+      // Aanvullen, niet overschrijven: een citaat mag meerdere regels beslaan.
+      final line = t == '>' ? '' : t.substring(2);
+      b.quote = b.quoteStarted ? '${b.quote}\n$line' : line;
+      b.quoteStarted = true;
     } else if (t.startsWith('— ')) {
       b.quoteAuthor = t.substring(2);
     } else if (_reBgImage.hasMatch(t)) {

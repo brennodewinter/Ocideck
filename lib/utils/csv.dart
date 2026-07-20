@@ -91,12 +91,19 @@ List<List<String>> parseCsvRows(
     started = true;
 
     if (i >= source.length) break;
-    if (source[i] == '\n') {
+    final atLineBreak = source[i] == '\n';
+    if (atLineBreak) {
       rows.add(row);
       row = <String>[];
       started = false;
     }
     i++; // the delimiter or the line break
+    // Een scheidingsteken als láátste teken hoort een leeg veld achter te laten:
+    // `a,` is twee velden, niet één. Zonder dit liep de lus af vóór dat veld werd
+    // uitgegeven, en dan telde die rij één kolom te weinig — waarop
+    // `parseClipboardTable` de hele plakactie afkeurde omdat de rijen ongelijk
+    // waren.
+    if (!atLineBreak && i >= source.length) row.add('');
   }
 
   if (started) rows.add(row);
