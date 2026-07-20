@@ -19,9 +19,20 @@ import 'dart:io';
 
 import 'log.dart';
 
+/// Teller die elke schrijfbeurt binnen dit proces een eigen tijdelijk bestand
+/// geeft. Zie [writeBytesAtomic].
+int _tempCounter = 0;
+
 /// Atomically write [bytes] to [target] via a sibling temp file + rename.
+///
+/// De tijdelijke naam is per schrijfbeurt uniek. Met een vaste `<doel>.tmp`
+/// deelden twee gelijktijdige schrijvers naar hetzelfde doel één bestand: hun
+/// bytes liepen door elkaar, de eerste `rename` verplaatste die mengeling naar
+/// het doel, en de tweede faalde met ENOENT — een "opslaan mislukt" op een
+/// opslag waar niets mis mee was. Dat kon al met twee decks in dezelfde
+/// projectmap, die allebei hun thema-CSS wegschrijven.
 Future<void> writeBytesAtomic(File target, List<int> bytes) async {
-  final tmp = File('${target.path}.tmp');
+  final tmp = File('${target.path}.${_tempCounter++}.tmp');
   try {
     await tmp.writeAsBytes(bytes, flush: true);
     try {

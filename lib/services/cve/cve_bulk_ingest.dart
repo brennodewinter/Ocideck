@@ -104,6 +104,14 @@ class CveBulkIngest {
       _throwIfCancelled(isCancelled);
 
       onProgress(const CveIngestProgress(phase: CveIngestPhase.extracting));
+      // Even teruggeven aan de gebeurtenislus vóór het uitpakken begint. Zonder
+      // dit tekende Flutter de zojuist gezette fase nooit: het uitpakken is
+      // synchroon, duurt op een groot archief minuten, en start in dezelfde
+      // microtask. Het scherm bleef dan hangen op "Binnenhalen… 500 / 500 MB" en
+      // de Afbreken-knop reageerde niet, want die klik stond achter dezelfde
+      // geblokkeerde lus. De indexeerlus verderop geeft al wél lucht.
+      await Future<void>.delayed(Duration.zero);
+      _throwIfCancelled(isCancelled);
       _extractInnerZip(outer, inner);
       _throwIfCancelled(isCancelled);
 
@@ -121,16 +129,24 @@ class CveBulkIngest {
         records: records,
       );
     } on CveIngestException {
-      index.discardPartial();
       rethrow;
     } on FileSystemException catch (e) {
-      index.discardPartial();
       throw CveIngestException(CveIngestFailure.diskFull, e.message);
     } finally {
       // De twee archieven samen zijn ruim een gigabyte. Ze mogen niet blijven
       // liggen, ook niet als het misging.
       if (outer.existsSync()) outer.deleteSync();
       if (inner.existsSync()) inner.deleteSync();
+      // En de half geschreven index evenmin. Dit stond in de twee `catch`-takken
+      // hierboven, dus een fout van een ánder type — `ArchiveException` uit een
+      // beschadigde zip is de voor de hand liggende — liet honderden megabytes
+      // `.jsonl.tmp` achter. De melding zei intussen dat een half binnengehaalde
+      // lijst was weggegooid, en de knop om op te ruimen is verborgen zolang er
+      // geen geldige index is: geen enkele weg terug binnen de app.
+      //
+      // `commit` heeft het tijdelijke bestand op dat moment al hernoemd, dus bij
+      // een geslaagde bouw valt hier niets meer op te ruimen.
+      index.discardPartial();
     }
   }
 
