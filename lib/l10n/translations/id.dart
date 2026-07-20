@@ -1781,6 +1781,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
+      'Pemeriksaan ini tidak berjalan di versi web: deteksi wajah memerlukan pustaka sistem yang tidak dimiliki peramban. Gunakan versi desktop untuk memeriksa wajah pada gambar.',
   'Media blijft niet bewaard in een los .md-bestand':
       'Media tidak tersimpan dalam berkas .md biasa',
   'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':

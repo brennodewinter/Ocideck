@@ -1797,6 +1797,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
+      'Haec inspectio in versione interretiali non decurrit: agnitio vultuum bibliothecam systematis requirit quam navigatrum non habet. Versione mensali utere ad vultus in imaginibus inspiciendos.',
   'Media blijft niet bewaard in een los .md-bestand':
       'Media in simplici .md tabella non servantur',
   'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':

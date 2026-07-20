@@ -1799,6 +1799,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
+      'Această verificare nu rulează în versiunea web: detectarea fețelor necesită o bibliotecă de sistem pe care browserul nu o are. Folosește versiunea desktop pentru a verifica fețele din imagini.',
   'Media blijft niet bewaard in een los .md-bestand':
       'Conținutul media nu este păstrat într-un fișier .md simplu',
   'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':

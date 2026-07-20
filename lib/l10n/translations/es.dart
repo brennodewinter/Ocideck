@@ -735,6 +735,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
+      'Esta comprobación no se ejecuta en la versión web: la detección de rostros necesita una biblioteca del sistema que el navegador no tiene. Usa la versión de escritorio para revisar rostros en las imágenes.',
   'Media blijft niet bewaard in een los .md-bestand':
       'Los medios no se conservan en un archivo .md simple',
   'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':

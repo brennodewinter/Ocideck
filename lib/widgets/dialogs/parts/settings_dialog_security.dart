@@ -184,7 +184,31 @@ extension _SettingsSecurity on _SettingsDialogState {
   ///
   /// Grijs zolang de hoofdschakelaar uit staat: een deelcontrole van een
   /// uitgezette controle aan kunnen zetten is een knop die liegt.
+  ///
+  /// Op web draait de controle helemaal niet — gezichtsherkenning is een
+  /// systeembibliotheek via FFI, die de browser niet heeft. De schakelaar staat
+  /// daar uit en uitgeschakeld, met de reden erbij: een aangevinkte schakelaar
+  /// die belooft dat "elke afbeelding lokaal wordt doorgerekend" terwijl er
+  /// niets gebeurt, is precies de knop die liegt — en juist bij een
+  /// privacycontrole mag dat niet.
   Widget _privacyImageFaceDetection(AppLocalizations l10n) {
+    if (isWebPlatform) {
+      return SwitchListTile(
+        contentPadding: EdgeInsets.zero,
+        title: Text(
+          l10n.d('Afbeeldingen nakijken op herkenbare gezichten'),
+          style: const TextStyle(fontSize: 13),
+        ),
+        subtitle: Text(
+          l10n.d(
+            'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.',
+          ),
+          style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+        ),
+        value: false,
+        onChanged: null,
+      );
+    }
     return SwitchListTile(
       contentPadding: EdgeInsets.zero,
       title: Text(
