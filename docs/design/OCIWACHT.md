@@ -266,7 +266,9 @@ nul. Waar géén checksum bestaat (US SSN, V-nummer), is een contextwoord verpli
 > Het patroon achter beide: **een checksum is pas sterk in combinatie met een
 > tweede, onafhankelijke eis.** Een datum in het nummer, een vast prefix (`756`
 > bij de AHV), een tweede controlecijfer (Noorwegen), of anders een contextwoord.
-> Een kale mod-10 of mod-11 over een reeks zonder structuur is dat niet.
+> Een kale mod-10 of mod-11 over een reeks zonder structuur is dat niet. Dezelfde
+> toets is daarna over de wereldnummers gehaald; wat dat daar omgooide — `ca.sin`,
+> `au.tfn`, `us.ssn` en de drie zorgnummers — staat in §15.4.
 >
 > En de schade blijft niet lokaal. Een identificator telt als persoonskoppeling,
 > dus elke valse treffer tilde óók alle artikel 9-trefwoorden op diezelfde slide
@@ -2134,19 +2136,31 @@ Plus één uitbreiding die géén regel is maar lexicondata: de OMB- en
 EEO-1-terminologie in `special.ethnicity`. Per bestede uur is dat waarschijnlijk
 de hoogste opbrengst van de hele fase.
 
-### 15.4 Correctie op §3-A: Luhn over negen cijfers is geen `zeker`
+### 15.4 Luhn over negen cijfers is geen `zeker`
 
-§3-A geeft `ca.sin` als **zeker** op grond van Luhn alleen. Dat klopt niet, en de
-code weet het al beter: `privacy_checksums.dart` documenteert expliciet dat de
-11-proef bij `nl.bsn` ongeveer één op de elf willekeurige negencijferige getallen
-doorlaat, en daarom nooit in zijn eentje tot `zeker` mag leiden. Luhn over negen
-cijfers is één op de tien — hetzelfde probleem, andere naam.
+§3-A gaf `ca.sin` als **zeker** op grond van Luhn alleen — de tabel daar is
+inmiddels bijgewerkt, deze paragraaf legt uit waarom. De code wist het al beter:
+`privacy_checksums.dart` documenteert expliciet dat de 11-proef bij `nl.bsn`
+ongeveer één op de elf willekeurige negencijferige getallen doorlaat, en daarom
+nooit in zijn eentje tot `zeker` mag leiden. Luhn over negen cijfers is één op de
+tien — hetzelfde probleem, andere naam.
 
-Wat een checksum sterk maakt is niet de checksum maar de **lengte**. Een codice
-fiscale van zestien tekens is praktisch onvervalsbaar; negen cijfers met een
-mod-10 zijn dat niet. Dezelfde correctie geldt voor `au.tfn` (9 cijfers, mod 11).
-`za.id` blijft wél `zeker`, want naast Luhn zit er een valide geboortedatum in;
-`in.aadhaar` (12 cijfers, Verhoeff) en `br.cpf` (dubbele mod-11) ook.
+De regel erachter staat in §3-A, daar afgeleid uit `hu.taj` en `at.svnr`: **een
+checksum is pas sterk in combinatie met een tweede, onafhankelijke eis.** Precies
+dat verklaart de uitzonderingen hier. `za.id` blijft wél `zeker`, want naast Luhn
+zit er een valide geboortedatum in; `in.aadhaar` (12 cijfers, Verhoeff) en
+`br.cpf` (dubbele mod-11) dragen hun tweede eis in het nummer zelf. `au.tfn` (9
+cijfers, mod 11) heeft er geen, en krijgt dus dezelfde correctie als `ca.sin`.
+
+Lengte telt mee, maar anders dan je zou verwachten: ze verandert de kans van de
+checksum niet. Luhn laat één op de tien door, of het nu over negen cijfers gaat
+of over zestien. Wat lengte wél doet is het aantal **kandidaten** verkleinen —
+lange gestructureerde reeksen komen nauwelijks voor in gewone tekst, korte
+cijferreeksen overal. Een codice fiscale is daarom niet sterk omdat hij lang is,
+maar omdat hij zestien posities met een vaste vorm én een gecodeerde
+geboortedatum combineert. Lengte alleen redt een zwakke controle niet, en het
+duidelijkste bewijs staat hieronder: het MBI is elf tekens en haalt het alsnog
+niet.
 
 Gevolg: `us.ssn`, `ca.sin` en `au.tfn` krijgen alle drie een contextpoort en komen
 niet boven `waarschijnlijk` uit.
