@@ -524,6 +524,14 @@ class ImagePickerBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final captions = ref.read(captionServiceProvider);
+    final pathText = Text(
+      imagePath.isEmpty ? l10n.d(label) : imagePath,
+      style: TextStyle(
+        fontSize: 12,
+        color: imagePath.isEmpty ? AppTheme.slate500 : AppTheme.slate700,
+      ),
+      overflow: TextOverflow.ellipsis,
+    );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -537,17 +545,16 @@ class ImagePickerBar extends ConsumerWidget {
           ),
           child: Row(
             children: [
+              // Het pad is te selecteren, de placeholder niet: een bestandsnaam
+              // uit een bevinding overtypen is precies het werk waar een
+              // typefout in sluipt, en "geen afbeelding gekozen" valt niets aan
+              // te kopiëren. SelectionArea en niet SelectableText, want die
+              // laatste kent geen `overflow` — en het pad moet met een ellips
+              // blijven afbreken in plaats van de knoppenrij weg te duwen.
               Expanded(
-                child: Text(
-                  imagePath.isEmpty ? l10n.d(label) : imagePath,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: imagePath.isEmpty
-                        ? AppTheme.slate500
-                        : AppTheme.slate700,
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                ),
+                child: imagePath.isEmpty
+                    ? pathText
+                    : SelectionArea(child: pathText),
               ),
               // Het ruwe pad hiernaast is alleen te duiden door wie paden
               // leest; de badge zegt wat het betekent voor de ontvanger.
