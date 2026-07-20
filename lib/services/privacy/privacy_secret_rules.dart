@@ -15,6 +15,9 @@
 //     geen alarm geven.
 
 import 'dart:convert';
+import 'dart:math';
+
+import '../../models/privacy_finding.dart';
 
 /// Eén detectieregel voor een geheim.
 class SecretRule {
@@ -24,7 +27,25 @@ class SecretRule {
   /// Extra controle bovenop de regex. Null = het formaat is bewijs genoeg.
   final bool Function(String match)? validate;
 
-  const SecretRule(this.id, this.pattern, {this.validate});
+  /// Woorden die in de buurt moeten staan. Leeg = de vorm draagt het bewijs.
+  ///
+  /// Vrijwel elk geheim hier heeft een prefix die nergens anders voorkomt
+  /// (`AKIA`, `glpat-`, `-----BEGIN`), en die heeft geen context nodig. De
+  /// uitzondering is `secret.entropy`, dat op vorm-lóze willekeur afgaat en
+  /// zonder poort elke base64-blob zou melden.
+  final List<String> contextWords;
+
+  /// Hoe zeker de treffer is. Vrijwel altijd `certain`: een AWS-sleutel is een
+  /// AWS-sleutel. `secret.entropy` is de uitzondering en blijft `possible`.
+  final PrivacyConfidence confidence;
+
+  const SecretRule(
+    this.id,
+    this.pattern, {
+    this.validate,
+    this.contextWords = const [],
+    this.confidence = PrivacyConfidence.certain,
+  });
 }
 
 /// Waarden die eruitzien als een geheim maar er geen zijn.
@@ -109,6 +130,82 @@ bool isDecodableJwt(String token) {
   }
 }
 
+/// De Shannon-entropie van een string, in bits per teken.
+///
+/// Een maat voor hoe onvoorspelbaar de tekens zijn. `aaaaaaaa` levert 0 op,
+/// twintig verschillende tekens ruim vier. Willekeurig gegenereerde sleutels
+/// zitten hoog; woorden, zinnen en versienummers laag, omdat letters zich daarin
+/// herhalen.
+double shannonEntropy(String value) {
+  if (value.isEmpty) return 0;
+  final counts = <int, int>{};
+  for (final unit in value.codeUnits) {
+    counts[unit] = (counts[unit] ?? 0) + 1;
+  }
+  var entropy = 0.0;
+  for (final count in counts.values) {
+    final p = count / value.length;
+    entropy -= p * (log(p) / ln2);
+  }
+  return entropy;
+}
+
+/// Strings die hoog scoren op entropie maar geen geheim zijn.
+///
+/// Dit is de lijst die `secret.entropy` bruikbaar maakt in plaats van
+/// ondraaglijk. Een git-SHA, een UUID en een base64-afbeelding halen de
+/// entropiedrempel moeiteloos, en ze staan alle drie in gewone technische
+/// slides. Zonder deze uitsluitingen zou de regel vooral commit-hashes melden.
+bool isHighEntropyButHarmless(String value) {
+  final v = value.trim();
+
+  // Alleen hex: git-SHA's (7/8/40/64), MD5 (32), checksums, UUID's zonder
+  // streepjes. Een echt geheim beperkt zich zelden tot zestien tekens.
+  if (RegExp(r'^[0-9a-fA-F]+$').hasMatch(v)) return true;
+
+  // UUID mét streepjes.
+  if (RegExp(
+    r'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-'
+    r'[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$',
+  ).hasMatch(v)) {
+    return true;
+  }
+
+  // Een base64-afbeelding of ander data-URI-blok. De regex hieronder kan er
+  // middenin landen, dus dit vangt de staart en niet de kop — vandaar de
+  // aparte controle op de omringende tekst in de scanner.
+  if (v.length > 200) return true;
+
+  return false;
+}
+
+/// Contextwoorden waaraan `secret.entropy` zijn bestaansrecht ontleent.
+///
+/// Meertalig, want de scanner draait in 31 talen en een codeslide is zelden
+/// consequent. Data, geen UI: deze woorden worden nooit getoond.
+const List<String> entropyContextWords = [
+  'secret',
+  'token',
+  'key',
+  'sleutel',
+  'password',
+  'passwd',
+  'wachtwoord',
+  'credential',
+  'apikey',
+  'api_key',
+  'api-key',
+  'auth',
+  'bearer',
+  'geheim',
+  'schlüssel',
+  'passwort',
+  'clé',
+  'mot de passe',
+  'contraseña',
+  'clave',
+];
+
 /// De regeltabel. Data, geen code — zo blijft de scanner kort en is een regel
 /// toevoegen één regel.
 final List<SecretRule> secretRules = [
@@ -154,7 +251,86 @@ final List<SecretRule> secretRules = [
     ),
     validate: connectionStringHasRealPassword,
   ),
+  // Azure kent twee vormen die allebei volledige toegang geven. De
+  // connection string draagt de sleutel zelf; het SAS-token draagt een
+  // handtekening die net zo goed werkt, en staat vaak kaal in een URL op een
+  // architectuurslide.
+  SecretRule(
+    'secret.azure',
+    RegExp(
+      r'(?:DefaultEndpointsProtocol=[^\s;]+;[^\s]*AccountKey=[A-Za-z0-9+/=]{20,}'
+      r'|\bsv=\d{4}-\d{2}-\d{2}[^\s]*&sig=[A-Za-z0-9%+/=]{20,})',
+      caseSensitive: false,
+    ),
+  ),
+
+  // ── Wachtwoordhashes ──────────────────────────────────────────────────────
+  //
+  // Een hash is geen wachtwoord, en juist daarom melden mensen hem niet. Maar
+  // een bcrypt- of NTLM-hash op een slide is een uitnodiging om te kraken, en
+  // bij `/etc/shadow`-regels staat de gebruikersnaam er gratis bij. De
+  // `$id$`-vorm is een standaard (crypt(3)) en komt nergens anders voor.
+  SecretRule(
+    'secret.hash',
+    RegExp(
+      r'\$(?:2[aby]|argon2(?:id|i|d)|6|5|1|y)\$[^\s:]{8,}'
+      // NTLM/LM: 32 hex, maar alleen in de `gebruiker:id:lm:nt:::`-vorm van een
+      // dump. Kaal is 32 hex een MD5 van iets onschuldigs, en dat mag niet
+      // afgaan — zie `isHighEntropyButHarmless`.
+      r'|\b[^\s:]+:\d+:[0-9a-fA-F]{32}:[0-9a-fA-F]{32}:::',
+    ),
+  ),
+
+  // ── Tweede factor ─────────────────────────────────────────────────────────
+  //
+  // De TOTP-seed is het gedeelde geheim achter elke authenticator-app: wie hem
+  // heeft, genereert dezelfde codes als de eigenaar en de tweede factor is weg.
+  // Hij lekt bijna altijd via de QR-code — en de `otpauth://`-URI erachter komt
+  // in screenshots en onboardingslides terecht.
+  SecretRule(
+    'secret.totp',
+    RegExp(
+      r'otpauth://[a-z]+/[^\s]*[?&]secret=[A-Z2-7]{16,}',
+      caseSensitive: false,
+    ),
+  ),
+
+  // ── Het vangnet ───────────────────────────────────────────────────────────
+  //
+  // Alles hierboven herkent een geheim aan zijn vórm. Deze regel bestaat voor de
+  // geheimen zonder vorm: de interne token, de sleutel van een leverancier die
+  // hier niet staat, het gegenereerde wachtwoord.
+  //
+  // Daarom is dit de enige regel met een contextpoort én de enige die niet boven
+  // `possible` uitkomt. Willekeur is geen bewijs — een minified bundel, een
+  // base64-blob en een commit-hash zijn ook willekeurig. Het contextwoord doet
+  // hier het werk dat elders de prefix doet, en `possible` zorgt dat een misser
+  // niemand onderbreekt en niets escaleert.
+  SecretRule(
+    'secret.entropy',
+    RegExp(r'[A-Za-z0-9+/=_\-]{20,}'),
+    validate: isPlausibleHighEntropySecret,
+    contextWords: entropyContextWords,
+    confidence: PrivacyConfidence.possible,
+  ),
 ];
+
+/// Ziet dit eruit als willekeur, en niet als iets onschuldigs dat toevallig
+/// willekeurig oogt?
+///
+/// Drie eisen tegelijk, want elk afzonderlijk laat te veel door. Alleen entropie
+/// meldt commit-hashes; alleen gemengde casing meldt elke CamelCase-klassenaam;
+/// alleen lengte meldt elke URL.
+bool isPlausibleHighEntropySecret(String value) {
+  if (value.length < 20) return false;
+  if (isHighEntropyButHarmless(value)) return false;
+  if (shannonEntropy(value) < 4.0) return false;
+
+  final hasLower = RegExp(r'[a-z]').hasMatch(value);
+  final hasUpper = RegExp(r'[A-Z]').hasMatch(value);
+  final hasDigit = RegExp(r'\d').hasMatch(value);
+  return hasLower && hasUpper && hasDigit;
+}
 
 /// Het wachtwoorddeel van een connection string, niet de hele URL, door de
 /// placeholder-poort halen.

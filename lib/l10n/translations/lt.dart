@@ -1789,6 +1789,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Azure-sleutel of SAS-token': 'Azure raktas arba SAS prieigos raktas',
+  'wachtwoordhash': 'slaptažodžio maiša',
+  'TOTP-seed (tweede factor)': 'TOTP sėkla (antrasis veiksnys)',
+  'mogelijk een sleutel of wachtwoord': 'galbūt raktas arba slaptažodis',
   'oud btw-nummer (bevat een BSN)': 'senas PVM numeris (jame yra asmens kodas)',
   'vreemdelingennummer (V-nummer)': 'užsieniečio numeris (V numeris)',
   'administratienummer (A-nummer)': 'administracinis numeris (A numeris)',

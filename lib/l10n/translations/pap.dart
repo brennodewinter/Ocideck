@@ -738,6 +738,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Azure-sleutel of SAS-token': 'yabi di Azure of token SAS',
+  'wachtwoordhash': 'hash di kontraseña',
+  'TOTP-seed (tweede factor)': 'simia TOTP (di dos faktor)',
+  'mogelijk een sleutel of wachtwoord': 'podisé un yabi of kontraseña',
   'oud btw-nummer (bevat een BSN)':
       'number di BTW bieu (ta kontené un number personal)',
   'vreemdelingennummer (V-nummer)': 'number di stranhero (number V)',

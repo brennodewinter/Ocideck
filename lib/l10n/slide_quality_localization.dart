@@ -519,6 +519,10 @@ String privacyRuleLabel(AppLocalizations l10n, String ruleId) {
       '${l10n.d('nationaal identificatienummer')} (${_nationalNumberNames[ruleId]})',
     'secret.private_key' => l10n.d('private sleutel'),
     'secret.jwt' => l10n.d('toegangstoken (JWT)'),
+    'secret.azure' => l10n.d('Azure-sleutel of SAS-token'),
+    'secret.hash' => l10n.d('wachtwoordhash'),
+    'secret.totp' => l10n.d('TOTP-seed (tweede factor)'),
+    'secret.entropy' => l10n.d('mogelijk een sleutel of wachtwoord'),
     'secret.connection_string' => l10n.d('databaseverbinding met wachtwoord'),
     'secret.password_plain' => l10n.d('wachtwoord in klare tekst'),
     _ when ruleId.startsWith('secret.') =>

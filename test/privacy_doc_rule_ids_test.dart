@@ -45,8 +45,7 @@ const Set<String> geplandeRegels = {
   'fin.bic', 'fin.nl_bankrekening', 'fin.sepa_mandate', 'fin.salary',
   'fin.crypto_btc', 'fin.crypto_eth', 'fin.crypto_xmr',
 
-  // Geheimen: de leveranciersregels staan er, deze vijf nog niet.
-  'secret.azure', 'secret.hash', 'secret.totp', 'secret.entropy',
+  // Geheimen: alleen de `.env`-achtige toekenning ontbreekt nog.
   'secret.env_assignment',
 
   // Structureel: `struct.mailto`, `struct.url_*`, `struct.user_path` en

@@ -603,6 +603,29 @@ class PrivacyScanner {
         final value = match.group(0)!;
         if (isPlaceholderSecret(value)) continue;
         if (rule.validate != null && !rule.validate!(value)) continue;
+
+        // Vraagt de regel om context, dan is die verplicht. Dat geldt alleen
+        // voor `secret.entropy`: die gaat op willekeur af in plaats van op een
+        // prefix, en willekeur is overal.
+        if (rule.contextWords.isNotEmpty &&
+            !_hasContextWord(fragment.text, match.start, rule.contextWords)) {
+          continue;
+        }
+
+        // Een geheim dat al met zijn eigen regel is gevonden, niet nóg eens als
+        // "hoge entropie" melden. Twee meldingen over dezelfde tekens maken de
+        // lijst langer en de boodschap niet sterker.
+        if (rule.confidence == PrivacyConfidence.possible &&
+            out.any(
+              (f) =>
+                  f.family == PrivacyFamily.secret &&
+                  f.fragmentIndex == fragment.index &&
+                  f.start <= match.start &&
+                  f.end >= match.end,
+            )) {
+          continue;
+        }
+
         _emit(
           out,
           _finding(
@@ -611,7 +634,7 @@ class PrivacyScanner {
             match,
             ruleId: rule.id,
             family: PrivacyFamily.secret,
-            confidence: PrivacyConfidence.certain,
+            confidence: rule.confidence,
           ),
         );
       }

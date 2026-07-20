@@ -1785,6 +1785,10 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Azure-sleutel of SAS-token': 'Azure-kulcs vagy SAS-token',
+  'wachtwoordhash': 'jelszó-lenyomat',
+  'TOTP-seed (tweede factor)': 'TOTP-mag (második faktor)',
+  'mogelijk een sleutel of wachtwoord': 'esetleg kulcs vagy jelszó',
   'oud btw-nummer (bevat een BSN)': 'régi adószám (személyi számot tartalmaz)',
   'vreemdelingennummer (V-nummer)': 'külföldi azonosító szám (V-szám)',
   'administratienummer (A-nummer)': 'nyilvántartási szám (A-szám)',

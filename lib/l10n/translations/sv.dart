@@ -1780,6 +1780,10 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Azure-sleutel of SAS-token': 'Azure-nyckel eller SAS-token',
+  'wachtwoordhash': 'lösenordshash',
+  'TOTP-seed (tweede factor)': 'TOTP-frö (andra faktorn)',
+  'mogelijk een sleutel of wachtwoord': 'möjligen en nyckel eller ett lösenord',
   'oud btw-nummer (bevat een BSN)':
       'gammalt momsnummer (innehåller personnummer)',
   'vreemdelingennummer (V-nummer)': 'utlänningsnummer (V-nummer)',

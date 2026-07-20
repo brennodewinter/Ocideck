@@ -1809,6 +1809,10 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Azure-sleutel of SAS-token': 'κλειδί Azure ή διακριτικό SAS',
+  'wachtwoordhash': 'σύνοψη κωδικού πρόσβασης',
+  'TOTP-seed (tweede factor)': 'σπόρος TOTP (δεύτερος παράγοντας)',
+  'mogelijk een sleutel of wachtwoord': 'πιθανώς κλειδί ή κωδικός πρόσβασης',
   'oud btw-nummer (bevat een BSN)': 'παλιός ΑΦΜ (περιέχει προσωπικό αριθμό)',
   'vreemdelingennummer (V-nummer)': 'αριθμός αλλοδαπού (αριθμός V)',
   'administratienummer (A-nummer)': 'διοικητικός αριθμός (αριθμός A)',

@@ -10,6 +10,12 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Added
+- **De laatste vier geheimen.** Azure-sleutels en SAS-tokens, wachtwoordhashes
+  (bcrypt, argon2, sha512-crypt, NTLM-dumps), TOTP-seeds uit een `otpauth://`-URI,
+  en een vangnet voor hoog-entropische strings. Dat laatste is de eerste
+  geheimregel met een contextpoort: hij herkent geen prefix maar willekeur, en
+  willekeur staat overal in een technisch deck. Commit-hashes, UUID's en
+  checksums zijn expliciet uitgesloten, en de melding blijft `mogelijk`.
 - **Zes Nederlandse nummers naast het BSN.** Het oude btw-nummer van een
   eenmanszaak, het V-nummer, het A-nummer, het BIG-nummer, de AGB-code en het
   proces-verbaalnummer. Alleen het btw-nummer mag contextloos vuren: `NL` + negen

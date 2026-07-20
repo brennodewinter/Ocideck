@@ -1793,6 +1793,10 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Azure-sleutel of SAS-token': 'klucz Azure lub token SAS',
+  'wachtwoordhash': 'skrót hasła',
+  'TOTP-seed (tweede factor)': 'ziarno TOTP (drugi składnik)',
+  'mogelijk een sleutel of wachtwoord': 'możliwe, że klucz lub hasło',
   'oud btw-nummer (bevat een BSN)': 'stary numer VAT (zawiera numer osobowy)',
   'vreemdelingennummer (V-nummer)': 'numer cudzoziemca (numer V)',
   'administratienummer (A-nummer)': 'numer administracyjny (numer A)',
