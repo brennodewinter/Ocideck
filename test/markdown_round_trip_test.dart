@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/actions_spec.dart';
 import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/cockpit.dart';
 import 'package:ocideck/models/deck.dart';
@@ -1832,6 +1833,72 @@ void main() {
       // report would start claiming a trend after one save.
       expect(entry.previous, isNull);
       expect(entry.delta, isNull);
+    });
+  });
+
+  group('actions slide round-trip', () {
+    Slide actions(List<ActionItem> items, {String title = 'Wat we vragen'}) {
+      final spec = ActionsSpec(title: title, items: items);
+      return Slide.create(
+        SlideType.actions,
+      ).copyWith(title: spec.title, tableRows: spec.toTableRows());
+    }
+
+    test('the class token is written and read back', () {
+      final service = MarkdownService();
+      final markdown = service.generateDeck(
+        Deck(
+          title: 'Demo',
+          slides: [
+            actions([
+              ActionItem(action: 'Iets doen', due: DateTime(2026, 8, 1)),
+            ]),
+          ],
+        ),
+      );
+      expect(markdown, contains('<!-- _class: actions -->'));
+      expect(markdown, contains('| Action | Owner | Due | Status |'));
+      // ISO on disk, whatever the interface language.
+      expect(markdown, contains('2026-08-01'));
+    });
+
+    test('every field survives the trip', () {
+      final out = _roundTrip(
+        actions([
+          ActionItem(
+            action: 'acc-oud uit de lucht halen',
+            owner: 'Team Platform',
+            due: DateTime(2026, 8, 15),
+            since: DateTime(2026, 5, 12),
+            status: ActionStatus.inProgress,
+            kind: ActionKind.escalation,
+          ),
+        ]),
+      );
+      expect(out.type, SlideType.actions);
+      expect(out.title, 'Wat we vragen');
+
+      final item = ActionsSpec.fromSlide(out.title, out.tableRows).items.single;
+      expect(item.action, 'acc-oud uit de lucht halen');
+      expect(item.owner, 'Team Platform');
+      expect(item.due, DateTime(2026, 8, 15));
+      expect(item.since, DateTime(2026, 5, 12));
+      expect(item.status, ActionStatus.inProgress);
+      expect(item.kind, ActionKind.escalation);
+    });
+
+    test('lateness is not carried in the file, only the date is', () {
+      final out = _roundTrip(
+        actions([
+          ActionItem(action: 'Al lang open', due: DateTime(2020, 1, 1)),
+        ]),
+      );
+      final item = ActionsSpec.fromSlide(out.title, out.tableRows).items.single;
+      // Nothing on disk says "overdue"; it is judged against the day the deck
+      // is shown, which is the whole point.
+      expect(item.status, ActionStatus.open);
+      expect(item.isOverdue(DateTime(2026, 7, 20)), isTrue);
+      expect(item.isOverdue(DateTime(2019, 1, 1)), isFalse);
     });
   });
 

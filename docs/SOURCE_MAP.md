@@ -42,6 +42,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `question.dart` — `QuestionSpec`/`QuestionView` for interactive quiz slides (multiple-choice/true-false/multiple-correct/ordering).
 - `rehearsal.dart` — `RehearsalRun`/`SlideTiming` for tracking presentation-practice durations per slide.
 - `scope_matrix_spec.dart` — `ScopeMatrixSpec`/`ScopeRow`/`ScopeObjectType`/`ScopeStatus` for the scope-matrix slide; each row carries a `CiaRating` (serialised as the `C`/`I`/`A` columns).
+- `actions_spec.dart` — `ActionsSpec`/`ActionItem` for the actions slide: what, who, by when, and what is being asked. "Overdue" is derived from the deadline against the day the deck is shown, never stored.
 - `scorecard_spec.dart` — `ScorecardSpec`/`ScorecardEntry` for the scorecard slide: a figure plus the figure it replaces, with the delta, direction and sentiment all derived. Polarity is stored because the deck cannot know whether a rise is good news.
 - `privacy_disposition.dart` — `PrivacyDisposition` (warn/accept/shield/redact) and the slide-overrides-deck resolution.
 - `quality_disposition.dart` — `QualityDisposition` (warn/accept): the same idea for quality findings, per slide only. Two values and not four — a contrast problem has no recipient to warn and nothing to black out.
@@ -419,6 +420,7 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 - `question_editor.dart` — Edits a question slide (answers, options).
 - `quote_editor.dart` — Edits a quote slide (text, author, background image).
 - `scope_matrix_editor.dart` — Edits a scope-matrix slide (objects × type/standard × coverage status).
+- `actions_editor.dart` — Edits an actions slide (up to eight lines: action, owner, deadline, on-the-list-since, what is asked, status).
 - `scorecard_editor.dart` — Edits a scorecard slide (up to five figures: label, now, previous report, unit, direction).
 - `section_editor.dart` — Edits a section-divider slide (title, subtitle).
 - `signoff_editor.dart` — Edits the sign-off slide (truthfulness statement, signature, certification, seal).
@@ -469,6 +471,7 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 - `table_preview.dart` — Table slides with a cell-edit scope.
 - `text_previews.dart` — Title and text-based slides.
 - `timeline_preview.dart` — Animated timeline renderer with event cards.
+- `actions_preview.dart` — Action rows with a kind marker, owner and deadline; a passed deadline is flagged against the current date, like the footer's `{date}`.
 - `scorecard_preview.dart` — Scorecard tiles: label, figure, and the signed change beneath it. Follows the style profile, except for the green/red sentiment tokens, which carry meaning rather than styling.
 
 ### `lib/widgets/presentation/` — presenter & dual-screen

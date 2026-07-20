@@ -339,7 +339,8 @@ spider/radar, scatter, waterfall, or heatmap/risk matrix), **cockpit** (a
 dashboard of aviation-style instrument gauges),
 **question** (an interactive quiz slide), **timeline** (an animated timeline of
 dated events), **scorecard** (a few headline figures, each beside the figure from
-the previous report), and
+the previous report), **actions** (what has to happen, who does it and what is
+being asked of the room), and
 **free Markdown**. Each card in the chooser shows a miniature
 wireframe of the layout, and the dialog works entirely with the keyboard
 (`Tab`/`Enter` to choose, `Esc` to cancel). Each type has a dedicated editor on
@@ -627,6 +628,41 @@ reasoning as the heatmap's own colour ramp.
 Figures are stored as an ordinary Markdown table, so the slide stays readable in
 the `.md` file and a script that already produces your numbers can write the
 table directly. See [FILE_FORMAT.md](FILE_FORMAT.md) §5 for the columns.
+
+### Actions and decisions slides
+
+An actions slide carries up to **eight lines**: what has to happen, who carries
+it, by when, and — the field that makes the slide worth having — **what you are
+asking**. Each line is *for information*, a *decision required*, or an
+*escalation*.
+
+That column is the point. A decision buried among status updates does not get
+taken, so only a decision or escalation is labelled on the rendered slide. The
+informational lines stay unlabelled on purpose: the eye should go to the ones
+that need something from the room.
+
+Two more fields earn their place in a report that comes back every month:
+
+- **Deadline** — and OciDeck works out for itself whether it has passed. There
+  is no "overdue" you can set, because a flag you type freezes at whatever was
+  true the day you wrote it. A deck shown two months later marks its own expired
+  deadlines in red. An action marked *Done* is never flagged late, however late
+  it was — the slide reports where things stand, not how they got there.
+- **On the list since** — when the action was first raised. This is what turns a
+  recurring report from a fresh list into a record: an item carried across three
+  reports is a different conversation from one raised last week.
+
+A finished action stays on the slide, struck through. That it is done is part of
+the news; it just stops competing for attention.
+
+Dates are typed as **yyyy-mm-dd**. Other spellings are refused rather than
+guessed at — `05-08-2026` is two different days depending on who wrote it, and a
+deadline is a bad place to be wrong by three months. Leave a deadline empty and
+the slide says "no date", which is usually the thing to settle in the meeting.
+
+Lines keep the order you put them in; the slide never re-sorts behind your back.
+Storage is an ordinary Markdown table, so a script can write one — see
+[FILE_FORMAT.md](FILE_FORMAT.md) §5 for the columns.
 
 ### Video slides
 

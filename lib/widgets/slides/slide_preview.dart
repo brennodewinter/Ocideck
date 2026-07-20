@@ -710,19 +710,8 @@ class SlidePreviewWidget extends StatelessWidget {
           revealedCount: timelineRevealedCount,
         );
       case SlideType.scorecard:
-        return _ScorecardPreview(
-          slide: slide,
-          w: w,
-          font: fontFamily,
-          profile: themeProfile,
-        );
       case SlideType.actions:
-        return _ActionsPreview(
-          slide: slide,
-          w: w,
-          font: fontFamily,
-          profile: themeProfile,
-        );
+        return _reportingPreview(slide.type, w);
       case SlideType.checklist:
       case SlideType.finding:
       case SlideType.findingsSummary:
@@ -731,6 +720,27 @@ class SlidePreviewWidget extends StatelessWidget {
         return _securityPreview(w);
     }
   }
+
+  /// Previews for the recurring-report layouts (`scorecard`, `actions`). Split
+  /// out of [_buildContent] for the length ratchet, the same reason
+  /// [_securityPreview] exists — and so a further reporting type costs the
+  /// dispatch switch nothing.
+  Widget _reportingPreview(SlideType type, double w) => switch (type) {
+    SlideType.scorecard => _ScorecardPreview(
+      slide: slide,
+      w: w,
+      font: fontFamily,
+      profile: themeProfile,
+    ),
+    SlideType.actions => _ActionsPreview(
+      slide: slide,
+      w: w,
+      font: fontFamily,
+      profile: themeProfile,
+    ),
+    // Only ever called for the two above; the default keeps the switch total.
+    _ => const SizedBox.shrink(),
+  };
 
   /// Preview for the Informatieveiligheid slide types: all five (`finding`
   /// P1-FIND, `checklist` P1-CHK, `scopeMatrix` P1-SCOPE, `findingsSummary`
