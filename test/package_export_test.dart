@@ -1,4 +1,7 @@
+import 'dart:convert';
 import 'dart:io';
+
+import 'package:archive/archive.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/deck.dart';
@@ -224,4 +227,57 @@ void main() {
     expect(p.dirname(third!), isNot(p.dirname(first))); // aparte mappen
     expect(await File(first).readAsString(), '---\nmarp: true\n---\n# Bewerkt');
   });
+
+  group('achtergehouden dia\'s', () {
+    test(
+      'een overgeslagen of strenger geclassificeerde dia zit niet in het pakket',
+      () async {
+        // Een pakket is de meest complete uitvoer die de app kent. Dit pad
+        // serialiseerde `deck.slides` rechtstreeks, dus een dia die in de
+        // presenter, op het zaalscherm én in de PDF wordt achtergehouden ging hier
+        // gewoon mee — zonder dat er ook maar een instelling voor nodig was.
+        final deck = Deck(
+          title: 'Rapport',
+          tlp: TlpLevel.none,
+          slides: [
+            Slide.create(
+              SlideType.bullets,
+            ).copyWith(title: 'PUBLIEK', bullets: ['zichtbaar']),
+            Slide.create(SlideType.bullets).copyWith(
+              title: 'ROOD-INTERN',
+              bullets: ['klantnaam'],
+              tlp: TlpLevel.red,
+            ),
+            Slide.create(SlideType.bullets).copyWith(
+              title: 'OVERGESLAGEN',
+              bullets: ['concept'],
+              skipped: true,
+            ),
+          ],
+        );
+        final zipPath = p.join(tmp.path, 'pakket.ocideck');
+        await file.exportPackage(deck, zipPath);
+        final markdown = await _markdownFromPackage(zipPath);
+
+        expect(markdown, contains('PUBLIEK'));
+        expect(
+          markdown,
+          isNot(contains('ROOD-INTERN')),
+          reason: 'strenger dan het deck: wordt overal elders achtergehouden',
+        );
+        expect(
+          markdown,
+          isNot(contains('OVERGESLAGEN')),
+          reason: 'de auteur zette hem op overslaan',
+        );
+      },
+    );
+  });
+}
+
+/// De markdown uit een pakket, zonder aannames over de bestandsnaam.
+Future<String> _markdownFromPackage(String zipPath) async {
+  final archive = ZipDecoder().decodeBytes(File(zipPath).readAsBytesSync());
+  final md = archive.files.firstWhere((f) => f.name.endsWith('.md'));
+  return utf8.decode(md.content as List<int>);
 }

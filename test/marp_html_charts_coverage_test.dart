@@ -750,4 +750,97 @@ void main() {
       expect(html, contains('>10</text>'));
     });
   });
+
+  group('negatieve waarden', () {
+    // De app-preview heeft een `_minY` en geeft die aan fl_chart mee; de
+    // SVG-export had alleen een `_maxY` die bij 0 begint. Een verliesreeks kwam
+    // daardoor uit op `height="-1610"` — ongeldige SVG, dus de browser liet de
+    // staaf weg — onder een y-as van 0 tot 1. Erger dan een lege grafiek, want
+    // het ziet er aannemelijk uit.
+    String render(String json) =>
+        MarpHtmlService.renderChartBlocks('```chart\n$json\n```');
+
+    List<String> axisLabels(String svg) => RegExp(
+      r'fill="#64748b">([^<]+)<',
+    ).allMatches(svg).map((m) => m.group(1)!).toList();
+
+    test('een negatieve staafreeks levert geldige, zichtbare staven', () {
+      final svg = render(
+        '{"type":"bar","x":["Q1","Q2","Q3"],'
+        '"series":[{"name":"Winst","data":[-5,-3,-8]}]}',
+      );
+      expect(
+        RegExp(r'height="-[\d.]+"').hasMatch(svg),
+        isFalse,
+        reason: 'een negatieve hoogte is ongeldige SVG',
+      );
+      expect(RegExp(r'<rect ').allMatches(svg).length, greaterThanOrEqualTo(3));
+      // En de as loopt mee naar beneden in plaats van 0..1 te verzinnen.
+      expect(axisLabels(svg).first, startsWith('-'));
+    });
+
+    test('een lijn met gemengde waarden blijft binnen het tekenvlak', () {
+      final svg = render(
+        '{"type":"line","x":["a","b","c"],'
+        '"series":[{"name":"S","data":[10,-10,5]}]}',
+      );
+      final pts = RegExp(r'points="([^"]+)"').firstMatch(svg)!.group(1)!;
+      for (final pair in pts.split(' ')) {
+        final y = double.parse(pair.split(',')[1]);
+        expect(y, lessThanOrEqualTo(382.0), reason: 'onder de plotbodem');
+        expect(y, greaterThanOrEqualTo(0.0));
+      }
+    });
+
+    test('een reeks zonder negatieve waarden verandert niet', () {
+      final svg = render(
+        '{"type":"bar","x":["a","b"],"series":[{"name":"S","data":[4,8]}]}',
+      );
+      expect(axisLabels(svg).first, '0');
+    });
+  });
+
+  group('vraagdia', () {
+    test('de export toont de vraag maar niet het goede antwoord', () {
+      // Zonder renderer viel het blok terug op de codeweergave van marked, en
+      // stond de hele specificatie leesbaar op de dia — inclusief
+      // `"correct": true`, in invoervolgorde. Wie een quizdeck als HTML
+      // rondstuurde, deelde de antwoordsleutel mee.
+      final out = MarpHtmlService.renderQuestionBlocks(
+        '```question\n'
+        '{"kind":"multipleChoice","prompt":"Wat is de juiste keuze?",'
+        '"answers":[{"text":"Het juiste antwoord","correct":true},'
+        '{"text":"Een fout antwoord","correct":false}]}\n'
+        '```',
+      );
+      expect(out, contains('Wat is de juiste keuze?'));
+      expect(out, contains('Het juiste antwoord'));
+      expect(out, contains('Een fout antwoord'));
+      expect(out, isNot(contains('correct')));
+      expect(out, isNot(contains('```')));
+    });
+
+    test('een waar/niet-waar-vraag toont beide opties, niet de uitkomst', () {
+      final out = MarpHtmlService.renderQuestionBlocks(
+        '```question\n'
+        '{"kind":"trueFalse","prompt":"Is dit waar?","statementIsTrue":true}\n'
+        '```',
+      );
+      expect(out, contains('Is dit waar?'));
+      expect(out, contains('Waar'));
+      expect(out, contains('Niet waar'));
+      expect(out, isNot(contains('statementIsTrue')));
+    });
+
+    test('tekst in een optie wordt als HTML ontsnapt', () {
+      final out = MarpHtmlService.renderQuestionBlocks(
+        '```question\n'
+        '{"kind":"multipleChoice","prompt":"<b>vet</b>",'
+        '"answers":[{"text":"a & b","correct":true}]}\n'
+        '```',
+      );
+      expect(out, contains('&lt;b&gt;vet&lt;/b&gt;'));
+      expect(out, contains('a &amp; b'));
+    });
+  });
 }
