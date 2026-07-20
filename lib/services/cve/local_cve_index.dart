@@ -4,6 +4,7 @@ import 'dart:io';
 import '../../models/local_cve_record.dart';
 import '../../models/local_cve_status.dart';
 import '../../utils/atomic_file.dart';
+import '../../utils/log.dart';
 
 /// De lokale CVE-index op schijf: een JSONL-bestand plus een klein metabestand.
 ///
@@ -28,12 +29,42 @@ class LocalCveIndex {
   Future<bool> get exists async =>
       indexFile.existsSync() && metaFile.existsSync();
 
+  /// De cijfers van de index die er ligt, of null wanneer er geen bruikbare
+  /// index is. Dít is wat "lokaal beschikbaar" betekent.
+  ///
+  /// Het metabestand alleen is daarvoor geen bewijs. Het is een paar honderd
+  /// byte naast een index van honderden megabytes, en juist die grote is wat
+  /// een opruimtool weghaalt of een volle schijf afkapt. Bleef de meta dan
+  /// staan, dan meldde de app "lokaal beschikbaar — opzoeken gebeurt offline"
+  /// terwijl [search] leeg terugkwam. Het opzoekpad valt bewust níét terug op
+  /// de online keten, dus las de gebruiker "geen treffers" — in een hulpmiddel
+  /// voor beveiligingsbevindingen niet te onderscheiden van "niet van
+  /// toepassing". Dat is de gevaarlijkste stille fout die dit onderdeel kan
+  /// maken, en daarom telt hier alleen de index zelf.
+  ///
+  /// De lengte doet mee omdat [LocalCveStats.bytes] bij het bevestigen wordt
+  /// vastgelegd en verder nergens werd gelezen: een afgekapte index misleidt
+  /// net zo goed als een ontbrekende. Bij twijfel liever opnieuw bouwen dan
+  /// stilzwijgend half zoeken.
   Future<LocalCveStats?> stats() async {
     if (!metaFile.existsSync()) return null;
     try {
       final json = jsonDecode(await metaFile.readAsString());
       if (json is! Map<String, dynamic>) return null;
-      return LocalCveStats.fromJson(json);
+      final parsed = LocalCveStats.fromJson(json);
+      if (!indexFile.existsSync()) {
+        logWarning('LocalCveIndex.stats: meta zonder index', indexFile.path);
+        return null;
+      }
+      final onDisk = indexFile.lengthSync();
+      if (onDisk != parsed.bytes) {
+        logWarning(
+          'LocalCveIndex.stats: index is $onDisk bytes, meta zegt '
+          '${parsed.bytes} — als onbruikbaar behandeld',
+        );
+        return null;
+      }
+      return parsed;
     } on FormatException {
       return null;
     }
@@ -69,8 +100,9 @@ class LocalCveIndex {
       records: records,
       bytes: indexFile.lengthSync(),
     );
-    // Atomisch: het metabestand is wat "er ligt een bruikbare index" betekent.
-    // Een half geschreven meta zou een complete index als kapot laten lezen.
+    // Atomisch, want een half geschreven meta laat een complete index als kapot
+    // lezen. Het metabestand is wél de beschrijving van de index, maar niet het
+    // bewijs dát hij er is — dat controleert [stats] tegen het bestand zelf.
     await writeStringAtomic(metaFile, jsonEncode(stats.toJson()));
     return stats;
   }
