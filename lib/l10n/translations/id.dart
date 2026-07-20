@@ -1792,6 +1792,7 @@ const _dutchSourceAddId = <String, String>{
   'BIG-nummer van een zorgverlener': 'nomor registrasi tenaga kesehatan (BIG)',
   'AGB-code': 'kode penyedia layanan kesehatan (AGB)',
   'proces-verbaalnummer': 'nomor laporan polisi',
+  'Standaarden en methodieken': 'Standar dan metodologi',
   'Aanvalsoppervlak': 'Permukaan serangan',
   'Soort toevoegen': 'Tambah jenis',
   'Soort verwijderen': 'Hapus jenis',
@@ -2208,7 +2209,6 @@ const _dutchSourceAddId = <String, String>{
       'Standar yang diuji kini punya versi lebih baru:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Itu belum tentu salah — pengujian dilakukan saat versi itu berlaku. Laporan mencatat apa yang benar-benar dipakai.',
-  'Gebundelde standaarden': 'Standar bawaan',
   'geen versienummer': 'tanpa nomor versi',
   'Bron': 'Sumber',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':

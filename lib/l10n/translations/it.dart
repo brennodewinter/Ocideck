@@ -747,6 +747,7 @@ const _dutchSourceAddIt = {
       'numero di registrazione di un operatore sanitario (BIG)',
   'AGB-code': 'codice di erogatore sanitario (AGB)',
   'proces-verbaalnummer': 'numero di verbale',
+  'Standaarden en methodieken': 'Standard e metodologie',
   'Aanvalsoppervlak': 'Superficie di attacco',
   'Soort toevoegen': 'Aggiungi tipo',
   'Soort verwijderen': 'Rimuovi tipo',
@@ -1163,7 +1164,6 @@ const _dutchSourceAddIt = {
       'Uno standard usato per questo test ha ora una versione più recente:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Non è necessariamente un errore: il test è stato svolto quando valeva quella versione. Il report registra ciò che è stato realmente usato.',
-  'Gebundelde standaarden': 'Standard inclusi',
   'geen versienummer': 'nessun numero di versione',
   'Bron': 'Fonte',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':

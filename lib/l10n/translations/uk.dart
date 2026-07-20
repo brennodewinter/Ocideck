@@ -1812,6 +1812,7 @@ const _dutchSourceAddUk = <String, String>{
       'реєстраційний номер медичного працівника (BIG)',
   'AGB-code': 'код надавача медичних послуг (AGB)',
   'proces-verbaalnummer': 'номер поліцейського протоколу',
+  'Standaarden en methodieken': 'Стандарти та методології',
   'Aanvalsoppervlak': 'Поверхня атаки',
   'Soort toevoegen': 'Додати вид',
   'Soort verwijderen': 'Видалити вид',
@@ -2225,7 +2226,6 @@ const _dutchSourceAddUk = <String, String>{
       'Стандарт, щодо якого проводилася перевірка, має новішу версію:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Це не обов\'язково помилка — перевірку проводили, коли діяла та версія. Звіт фіксує те, що справді використовувалося.',
-  'Gebundelde standaarden': 'Вбудовані стандарти',
   'geen versienummer': 'без номера версії',
   'Bron': 'Джерело',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':

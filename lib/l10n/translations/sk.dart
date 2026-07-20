@@ -1799,6 +1799,7 @@ const _dutchSourceAddSk = <String, String>{
   'BIG-nummer van een zorgverlener': 'registračné číslo zdravotníka (BIG)',
   'AGB-code': 'kód poskytovateľa starostlivosti (AGB)',
   'proces-verbaalnummer': 'číslo policajného protokolu',
+  'Standaarden en methodieken': 'Normy a metodiky',
   'Aanvalsoppervlak': 'Útočná plocha',
   'Soort toevoegen': 'Pridať druh',
   'Soort verwijderen': 'Odstrániť druh',
@@ -2214,7 +2215,6 @@ const _dutchSourceAddSk = <String, String>{
       'Štandard, voči ktorému sa testovalo, má teraz novšiu verziu:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Nemusí to byť chyba — test prebehol v čase, keď platila tá verzia. Správa zaznamenáva, čo sa skutočne použilo.',
-  'Gebundelde standaarden': 'Pribalené štandardy',
   'geen versienummer': 'bez čísla verzie',
   'Bron': 'Zdroj',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':

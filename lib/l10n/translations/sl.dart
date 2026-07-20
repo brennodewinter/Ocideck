@@ -1796,6 +1796,7 @@ const _dutchSourceAddSl = <String, String>{
       'registrska številka zdravstvenega delavca (BIG)',
   'AGB-code': 'koda izvajalca zdravstvenih storitev (AGB)',
   'proces-verbaalnummer': 'številka policijskega zapisnika',
+  'Standaarden en methodieken': 'Standardi in metodologije',
   'Aanvalsoppervlak': 'Napadalna površina',
   'Soort toevoegen': 'Dodaj vrsto',
   'Soort verwijderen': 'Odstrani vrsto',
@@ -2211,7 +2212,6 @@ const _dutchSourceAddSl = <String, String>{
       'Standard, proti kateremu se je preverjalo, ima zdaj novejšo različico:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'To ni nujno napaka — preverjanje je bilo opravljeno, ko je veljala ta različica. Poročilo beleži, kaj je bilo dejansko uporabljeno.',
-  'Gebundelde standaarden': 'Priloženi standardi',
   'geen versienummer': 'brez številke različice',
   'Bron': 'Vir',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':

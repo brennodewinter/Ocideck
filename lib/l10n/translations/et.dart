@@ -1784,6 +1784,7 @@ const _dutchSourceAddEt = <String, String>{
   'BIG-nummer van een zorgverlener': 'tervishoiutöötaja registrinumber (BIG)',
   'AGB-code': 'tervishoiuteenuse osutaja kood (AGB)',
   'proces-verbaalnummer': 'politsei protokolli number',
+  'Standaarden en methodieken': 'Standardid ja metoodikad',
   'Aanvalsoppervlak': 'Ründepind',
   'Soort toevoegen': 'Lisa liik',
   'Soort verwijderen': 'Eemalda liik',
@@ -2198,7 +2199,6 @@ const _dutchSourceAddEt = <String, String>{
       'Standardil, mille vastu testiti, on nüüd uuem versioon:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'See ei pruugi olla viga — kontroll tehti ajal, mil see versioon kehtis. Aruanne talletab, mida tegelikult kasutati.',
-  'Gebundelde standaarden': 'Kaasasolevad standardid',
   'geen versienummer': 'versiooninumbrita',
   'Bron': 'Allikas',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':

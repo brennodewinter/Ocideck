@@ -1825,6 +1825,7 @@ const _dutchSourceAddPt = <String, String>{
       'número de registo de um profissional de saúde (BIG)',
   'AGB-code': 'código de prestador de cuidados (AGB)',
   'proces-verbaalnummer': 'número de auto de notícia',
+  'Standaarden en methodieken': 'Normas e metodologias',
   'Aanvalsoppervlak': 'Superfície de ataque',
   'Soort toevoegen': 'Adicionar tipo',
   'Soort verwijderen': 'Remover tipo',
@@ -2240,7 +2241,6 @@ const _dutchSourceAddPt = <String, String>{
       'Uma norma contra a qual se testou tem agora uma versão mais recente:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Não tem de estar errado — o teste foi feito quando essa versão vigorava. O relatório regista o que foi realmente usado.',
-  'Gebundelde standaarden': 'Normas incluídas',
   'geen versienummer': 'sem número de versão',
   'Bron': 'Fonte',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':

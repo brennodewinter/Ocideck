@@ -1797,6 +1797,7 @@ const _dutchSourceAddHu = <String, String>{
       'egészségügyi dolgozó nyilvántartási száma (BIG)',
   'AGB-code': 'egészségügyi szolgáltató kódja (AGB)',
   'proces-verbaalnummer': 'rendőrségi jegyzőkönyv száma',
+  'Standaarden en methodieken': 'Szabványok és módszertanok',
   'Aanvalsoppervlak': 'Támadási felület',
   'Soort toevoegen': 'Típus hozzáadása',
   'Soort verwijderen': 'Típus eltávolítása',
@@ -2213,7 +2214,6 @@ const _dutchSourceAddHu = <String, String>{
       'Egy vizsgálati alapként használt szabványnak már újabb verziója van:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Ez nem feltétlenül hiba — a vizsgálat akkor készült, amikor az a verzió volt érvényben. A jelentés azt rögzíti, amit ténylegesen használtak.',
-  'Gebundelde standaarden': 'Mellékelt szabványok',
   'geen versienummer': 'nincs verziószám',
   'Bron': 'Forrás',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':

@@ -1805,6 +1805,7 @@ const _dutchSourceAddPl = <String, String>{
       'numer rejestracyjny pracownika ochrony zdrowia (BIG)',
   'AGB-code': 'kod świadczeniodawcy (AGB)',
   'proces-verbaalnummer': 'numer protokołu policyjnego',
+  'Standaarden en methodieken': 'Normy i metodyki',
   'Aanvalsoppervlak': 'Powierzchnia ataku',
   'Soort toevoegen': 'Dodaj rodzaj',
   'Soort verwijderen': 'Usuń rodzaj',
@@ -2218,7 +2219,6 @@ const _dutchSourceAddPl = <String, String>{
       'Standard, względem którego testowano, ma już nowszą wersję:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'To nie musi być błąd — badanie przeprowadzono, gdy obowiązywała tamta wersja. Raport zapisuje to, czego faktycznie użyto.',
-  'Gebundelde standaarden': 'Dołączone standardy',
   'geen versienummer': 'brak numeru wersji',
   'Bron': 'Źródło',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':

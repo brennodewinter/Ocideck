@@ -748,6 +748,7 @@ const _dutchSourceAddEs = {
       'número de registro de un profesional sanitario (BIG)',
   'AGB-code': 'código de proveedor sanitario (AGB)',
   'proces-verbaalnummer': 'número de atestado policial',
+  'Standaarden en methodieken': 'Normas y metodologías',
   'Aanvalsoppervlak': 'Superficie de ataque',
   'Soort toevoegen': 'Añadir tipo',
   'Soort verwijderen': 'Eliminar tipo',
@@ -1164,7 +1165,6 @@ const _dutchSourceAddEs = {
       'Un estándar contra el que se probó tiene ahora una versión más reciente:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'No tiene por qué ser un error: la prueba se hizo cuando regía esa versión. El informe registra lo que realmente se usó.',
-  'Gebundelde standaarden': 'Estándares incluidos',
   'geen versienummer': 'sin número de versión',
   'Bron': 'Fuente',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':

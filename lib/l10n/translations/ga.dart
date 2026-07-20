@@ -1828,6 +1828,7 @@ const _dutchSourceAddGa = <String, String>{
   'BIG-nummer van een zorgverlener': 'uimhir chláraithe gairmí sláinte (BIG)',
   'AGB-code': 'cód soláthraí cúraim sláinte (AGB)',
   'proces-verbaalnummer': 'uimhir thuairisce póilíní',
+  'Standaarden en methodieken': 'Caighdeáin agus modheolaíochtaí',
   'Aanvalsoppervlak': 'Dromchla ionsaithe',
   'Soort toevoegen': 'Cuir cineál leis',
   'Soort verwijderen': 'Bain an cineál',
@@ -2246,7 +2247,6 @@ const _dutchSourceAddGa = <String, String>{
       'Tá leagan níos nuaí anois ag caighdeán a úsáideadh don tástáil:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Ní gá gur botún é sin — rinneadh an tástáil nuair a bhí an leagan sin i bhfeidhm. Taifeadann an tuairisc a úsáideadh i ndáiríre.',
-  'Gebundelde standaarden': 'Caighdeáin chuimsithe',
   'geen versienummer': 'gan uimhir leagain',
   'Bron': 'Foinse',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':

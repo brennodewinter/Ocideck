@@ -1800,6 +1800,7 @@ const _dutchSourceAddHr = <String, String>{
       'registarski broj zdravstvenog djelatnika (BIG)',
   'AGB-code': 'šifra pružatelja zdravstvene skrbi (AGB)',
   'proces-verbaalnummer': 'broj policijskog zapisnika',
+  'Standaarden en methodieken': 'Norme i metodologije',
   'Aanvalsoppervlak': 'Napadna površina',
   'Soort toevoegen': 'Dodaj vrstu',
   'Soort verwijderen': 'Ukloni vrstu',
@@ -2213,7 +2214,6 @@ const _dutchSourceAddHr = <String, String>{
       'Standard prema kojem se testiralo sada ima noviju verziju:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'To ne mora biti pogrešno — ispitivanje je provedeno dok je vrijedila ta verzija. Izvještaj bilježi što je stvarno korišteno.',
-  'Gebundelde standaarden': 'Uključeni standardi',
   'geen versienummer': 'bez broja verzije',
   'Bron': 'Izvor',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':

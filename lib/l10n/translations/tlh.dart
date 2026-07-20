@@ -1767,6 +1767,7 @@ const _dutchSourceAddTlh = <String, String>{
   'BIG-nummer van een zorgverlener': 'Qel mI\' (BIG)',
   'AGB-code': 'Qel ghom mI\' (AGB)',
   'proces-verbaalnummer': 'HuchwI\' De\' mI\'',
+  'Standaarden en methodieken': 'chutmey mIwmey je',
   'Aanvalsoppervlak': 'HIv \'ay\'',
   'Soort toevoegen': 'Segh chel',
   'Soort verwijderen': 'Segh teq',
@@ -2177,7 +2178,6 @@ const _dutchSourceAddTlh = <String, String>{
       'tetlh chu\' tu\'lu\':',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'qab \'oHbe\'; mI\' vIleghpu\'DI\' qaStaHvIS. lo\'lu\'pu\'bogh qon.',
-  'Gebundelde standaarden': 'tetlh chuv',
   'geen versienummer': 'mI\' Hutlh',
   'Bron': 'Daq',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':

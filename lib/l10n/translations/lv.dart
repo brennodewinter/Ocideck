@@ -1792,6 +1792,7 @@ const _dutchSourceAddLv = <String, String>{
       'veselības aprūpes speciālista reģistrācijas numurs (BIG)',
   'AGB-code': 'veselības aprūpes pakalpojumu sniedzēja kods (AGB)',
   'proces-verbaalnummer': 'policijas protokola numurs',
+  'Standaarden en methodieken': 'Standarti un metodoloģijas',
   'Aanvalsoppervlak': 'Uzbrukuma virsma',
   'Soort toevoegen': 'Pievienot veidu',
   'Soort verwijderen': 'Noņemt veidu',
@@ -2205,7 +2206,6 @@ const _dutchSourceAddLv = <String, String>{
       'Standartam, pret kuru tika testēts, tagad ir jaunāka versija:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Tā nav obligāti kļūda — pārbaude notika, kad bija spēkā tā versija. Ziņojums fiksē, kas patiešām tika izmantots.',
-  'Gebundelde standaarden': 'Iekļautie standarti',
   'geen versienummer': 'bez versijas numura',
   'Bron': 'Avots',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':

@@ -1794,6 +1794,7 @@ const _dutchSourceAddFi = <String, String>{
       'terveydenhuollon ammattilaisen rekisterinumero (BIG)',
   'AGB-code': 'terveydenhuollon palveluntuottajan koodi (AGB)',
   'proces-verbaalnummer': 'poliisin tutkintailmoituksen numero',
+  'Standaarden en methodieken': 'Standardit ja menetelmät',
   'Aanvalsoppervlak': 'Hyökkäyspinta',
   'Soort toevoegen': 'Lisää tyyppi',
   'Soort verwijderen': 'Poista tyyppi',
@@ -2207,7 +2208,6 @@ const _dutchSourceAddFi = <String, String>{
       'Standardista, jota vasten testattiin, on nyt uudempi versio:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Se ei välttämättä ole virhe — testaus tehtiin, kun kyseinen versio oli voimassa. Raportti kirjaa, mitä todella käytettiin.',
-  'Gebundelde standaarden': 'Mukana toimitetut standardit',
   'geen versienummer': 'ei versionumeroa',
   'Bron': 'Lähde',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':

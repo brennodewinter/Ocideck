@@ -1793,6 +1793,7 @@ const _dutchSourceAddDa = <String, String>{
       'registreringsnummer for sundhedspersonale (BIG)',
   'AGB-code': 'kode for sundhedsudbyder (AGB)',
   'proces-verbaalnummer': 'journalnummer på politianmeldelse',
+  'Standaarden en methodieken': 'Standarder og metoder',
   'Aanvalsoppervlak': 'Angrebsflade',
   'Soort toevoegen': 'Tilføj type',
   'Soort verwijderen': 'Fjern type',
@@ -2208,7 +2209,6 @@ const _dutchSourceAddDa = <String, String>{
       'En standard, der er testet mod, har nu en nyere version:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Det behøver ikke være forkert — testen blev udført, da den version gjaldt. Rapporten registrerer, hvad der faktisk blev brugt.',
-  'Gebundelde standaarden': 'Medfølgende standarder',
   'geen versienummer': 'intet versionsnummer',
   'Bron': 'Kilde',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':

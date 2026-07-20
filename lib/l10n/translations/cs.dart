@@ -1795,6 +1795,7 @@ const _dutchSourceAddCs = <String, String>{
   'BIG-nummer van een zorgverlener': 'registrační číslo zdravotníka (BIG)',
   'AGB-code': 'kód poskytovatele péče (AGB)',
   'proces-verbaalnummer': 'číslo policejního protokolu',
+  'Standaarden en methodieken': 'Normy a metodiky',
   'Aanvalsoppervlak': 'Útočná plocha',
   'Soort toevoegen': 'Přidat druh',
   'Soort verwijderen': 'Odebrat druh',
@@ -2208,7 +2209,6 @@ const _dutchSourceAddCs = <String, String>{
       'Standard, vůči kterému se testovalo, má nyní novější verzi:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Nemusí to být chyba — test proběhl v době, kdy platila ta verze. Zpráva zaznamenává, co se skutečně použilo.',
-  'Gebundelde standaarden': 'Přibalené standardy',
   'geen versienummer': 'bez čísla verze',
   'Bron': 'Zdroj',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':

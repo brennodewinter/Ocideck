@@ -1799,6 +1799,7 @@ const _dutchSourceAddGsw = <String, String>{
       'Registriernummere vomene Pflegepersonal (BIG)',
   'AGB-code': 'Leischtigserbringer-Code (AGB)',
   'proces-verbaalnummer': 'Aktezeiche vonere Aazeig',
+  'Standaarden en methodieken': 'Standards und Methodike',
   'Aanvalsoppervlak': 'Aagriffsflächi',
   'Soort toevoegen': 'Art hinzuefüege',
   'Soort verwijderen': 'Art entferne',
@@ -2213,7 +2214,6 @@ const _dutchSourceAddGsw = <String, String>{
       'Vome prüefte Standard git s jetz e nöieri Version:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Das mues nid falsch sy — d Prüefig isch gmacht worde, wo die Version golte het. De Bricht haltet fescht, was würkli bruucht worde isch.',
-  'Gebundelde standaarden': 'Mitglieferti Standards',
   'geen versienummer': 'kei Versionsnummere',
   'Bron': 'Quelle',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':

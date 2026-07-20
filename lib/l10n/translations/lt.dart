@@ -1801,6 +1801,7 @@ const _dutchSourceAddLt = <String, String>{
       'sveikatos priežiūros specialisto registracijos numeris (BIG)',
   'AGB-code': 'sveikatos priežiūros paslaugų teikėjo kodas (AGB)',
   'proces-verbaalnummer': 'policijos protokolo numeris',
+  'Standaarden en methodieken': 'Standartai ir metodikos',
   'Aanvalsoppervlak': 'Atakos paviršius',
   'Soort toevoegen': 'Pridėti rūšį',
   'Soort verwijderen': 'Pašalinti rūšį',
@@ -2217,7 +2218,6 @@ const _dutchSourceAddLt = <String, String>{
       'Standartas, su kuriuo lyginta, dabar turi naujesnę versiją:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Tai nebūtinai klaida — tyrimas atliktas galiojant tai versijai. Ataskaita fiksuoja, kas iš tikrųjų buvo naudota.',
-  'Gebundelde standaarden': 'Pridėti standartai',
   'geen versienummer': 'be versijos numerio',
   'Bron': 'Šaltinis',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':

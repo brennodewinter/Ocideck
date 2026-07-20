@@ -751,6 +751,7 @@ const _dutchSourceAddPap = {
       'number di registrashon di un profeshonal di salú (BIG)',
   'AGB-code': 'kódigo di proveedor di kuido (AGB)',
   'proces-verbaalnummer': 'number di rapòrt di polis',
+  'Standaarden en methodieken': 'Standarnan i metodologianan',
   'Aanvalsoppervlak': 'Superfisie di atake',
   'Soort toevoegen': 'Agregá tipo',
   'Soort verwijderen': 'Kita tipo',
@@ -1164,7 +1165,6 @@ const _dutchSourceAddPap = {
       'Un standar ku a wòrdu usá tin awor un vershon mas nobo:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Esei no tin ku ta robes — e investigashon a tuma lugá ora e vershon ei tabata bálido. E rapòrt ta registrá loke realmente a wòrdu usá.',
-  'Gebundelde standaarden': 'Standarnan inkluí',
   'geen versienummer': 'sin number di vershon',
   'Bron': 'Fuente',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':

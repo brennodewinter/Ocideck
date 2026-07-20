@@ -1793,6 +1793,7 @@ const _dutchSourceAddSv = <String, String>{
       'registreringsnummer för vårdpersonal (BIG)',
   'AGB-code': 'kod för vårdgivare (AGB)',
   'proces-verbaalnummer': 'diarienummer för polisanmälan',
+  'Standaarden en methodieken': 'Standarder och metoder',
   'Aanvalsoppervlak': 'Attackyta',
   'Soort toevoegen': 'Lägg till typ',
   'Soort verwijderen': 'Ta bort typ',
@@ -2207,7 +2208,6 @@ const _dutchSourceAddSv = <String, String>{
       'En standard som testats mot har nu en nyare version:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Det behöver inte vara fel — testet gjordes när den versionen gällde. Rapporten registrerar vad som faktiskt användes.',
-  'Gebundelde standaarden': 'Medföljande standarder',
   'geen versienummer': 'inget versionsnummer',
   'Bron': 'Källa',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':

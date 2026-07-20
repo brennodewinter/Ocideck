@@ -1811,6 +1811,7 @@ const _dutchSourceAddRo = <String, String>{
       'numărul de înregistrare al unui cadru medical (BIG)',
   'AGB-code': 'cod de furnizor de servicii medicale (AGB)',
   'proces-verbaalnummer': 'număr de proces-verbal',
+  'Standaarden en methodieken': 'Standarde și metodologii',
   'Aanvalsoppervlak': 'Suprafață de atac',
   'Soort toevoegen': 'Adaugă tip',
   'Soort verwijderen': 'Elimină tipul',
@@ -2230,7 +2231,6 @@ const _dutchSourceAddRo = <String, String>{
       'Un standard față de care s-a testat are acum o versiune mai nouă:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Nu este neapărat o greșeală — testarea s-a făcut când acea versiune era în vigoare. Raportul consemnează ce s-a folosit efectiv.',
-  'Gebundelde standaarden': 'Standarde incluse',
   'geen versienummer': 'fără număr de versiune',
   'Bron': 'Sursă',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':

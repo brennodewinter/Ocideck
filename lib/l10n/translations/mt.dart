@@ -1815,6 +1815,7 @@ const _dutchSourceAddMt = <String, String>{
       'numru ta\' reġistrazzjoni ta\' professjonist tas-saħħa (BIG)',
   'AGB-code': 'kodiċi ta\' fornitur tal-kura tas-saħħa (AGB)',
   'proces-verbaalnummer': 'numru tar-rapport tal-pulizija',
+  'Standaarden en methodieken': 'Standards u metodoloġiji',
   'Aanvalsoppervlak': 'Wiċċ tal-attakk',
   'Soort toevoegen': 'Żid tip',
   'Soort verwijderen': 'Neħħi t-tip',
@@ -2232,7 +2233,6 @@ const _dutchSourceAddMt = <String, String>{
       'Standard li kontrih sar it-test issa għandu verżjoni aktar ġdida:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Dan mhux bilfors żball — it-test sar meta kienet tapplika dik il-verżjoni. Ir-rapport jirreġistra dak li ntuża tabilħaqq.',
-  'Gebundelde standaarden': 'Standards inklużi',
   'geen versienummer': 'l-ebda numru ta\' verżjoni',
   'Bron': 'Sors',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':

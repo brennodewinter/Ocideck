@@ -1821,6 +1821,7 @@ const _dutchSourceAddEl = <String, String>{
       'αριθμός μητρώου επαγγελματία υγείας (BIG)',
   'AGB-code': 'κωδικός παρόχου υγείας (AGB)',
   'proces-verbaalnummer': 'αριθμός αστυνομικής έκθεσης',
+  'Standaarden en methodieken': 'Πρότυπα και μεθοδολογίες',
   'Aanvalsoppervlak': 'Επιφάνεια επίθεσης',
   'Soort toevoegen': 'Προσθήκη είδους',
   'Soort verwijderen': 'Αφαίρεση είδους',
@@ -2238,7 +2239,6 @@ const _dutchSourceAddEl = <String, String>{
       'Ένα πρότυπο βάσει του οποίου ελέγχθηκε έχει πλέον νεότερη έκδοση:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Δεν είναι κατ\' ανάγκη λάθος — ο έλεγχος έγινε όταν ίσχυε εκείνη η έκδοση. Η αναφορά καταγράφει τι χρησιμοποιήθηκε πράγματι.',
-  'Gebundelde standaarden': 'Ενσωματωμένα πρότυπα',
   'geen versienummer': 'χωρίς αριθμό έκδοσης',
   'Bron': 'Πηγή',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':

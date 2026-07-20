@@ -528,6 +528,10 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   een strafzaak gaat. Een markering verbergt een waarde, geen onderwerp.
 
 ### Fixed
+- **"Gebundelde standaarden" heet nu "Standaarden en methodieken".** De sectie
+  bij Over OciDeck somt naast standaarden ook MIAUW op, en dat is een methodiek.
+  Een rapportage die vermeldt waartegen is getoetst, hoort het onderscheid niet
+  te laten vervagen in de kop erboven.
 - **Afronden & verzegelen stond in het menu met de module uit.** Verzegelen is
   documentintegriteit uit de uitbreiding Informatieveiligheid, maar het menu-item
   keek alleen of het deck al verzegeld was. Het stond daarmee pal naast zijn

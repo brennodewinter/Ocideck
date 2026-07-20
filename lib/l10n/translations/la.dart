@@ -1809,6 +1809,7 @@ const _dutchSourceAddLa = <String, String>{
   'BIG-nummer van een zorgverlener': 'numerus curatoris valetudinis (BIG)',
   'AGB-code': 'codex curatoris valetudinis (AGB)',
   'proces-verbaalnummer': 'numerus actorum vigilum',
+  'Standaarden en methodieken': 'Normae et methodologiae',
   'Aanvalsoppervlak': 'Area impetus',
   'Soort toevoegen': 'Genus addere',
   'Soort verwijderen': 'Genus removere',
@@ -2221,7 +2222,6 @@ const _dutchSourceAddLa = <String, String>{
       'Normae qua probatum est nunc versio recentior exstat:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Id non necesse est erratum esse: probatio facta est cum ea versio valeret. Relatio consignat quid re vera adhibitum sit.',
-  'Gebundelde standaarden': 'Normae inclusae',
   'geen versienummer': 'sine numero versionis',
   'Bron': 'Fons',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':

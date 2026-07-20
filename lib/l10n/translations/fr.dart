@@ -751,6 +751,7 @@ const _dutchSourceAddFr = {
       'numéro d\'enregistrement d\'un professionnel de santé (BIG)',
   'AGB-code': 'code de prestataire de soins (AGB)',
   'proces-verbaalnummer': 'numéro de procès-verbal',
+  'Standaarden en methodieken': 'Normes et méthodologies',
   'Aanvalsoppervlak': 'Surface d\'attaque',
   'Soort toevoegen': 'Ajouter un type',
   'Soort verwijderen': 'Supprimer le type',
@@ -1168,7 +1169,6 @@ const _dutchSourceAddFr = {
       'Une norme utilisée pour ce test a désormais une version plus récente :',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Ce n\'est pas nécessairement une erreur : le test a été mené quand cette version s\'appliquait. Le rapport consigne ce qui a réellement servi.',
-  'Gebundelde standaarden': 'Normes intégrées',
   'geen versienummer': 'pas de numéro de version',
   'Bron': 'Source',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':

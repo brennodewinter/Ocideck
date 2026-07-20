@@ -932,6 +932,7 @@ const _dutchSourceAddEn = {
       'healthcare professional registration number (BIG)',
   'AGB-code': 'healthcare provider code (AGB)',
   'proces-verbaalnummer': 'police report number',
+  'Standaarden en methodieken': 'Standards and methodologies',
   'Aanvalsoppervlak': 'Attack surface',
   'Soort toevoegen': 'Add kind',
   'Soort verwijderen': 'Remove kind',
@@ -1346,7 +1347,6 @@ const _dutchSourceAddEn = {
       'A standard this report was tested against now has a newer version:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'That need not be wrong — the test was carried out while that version applied. The report records what was actually used.',
-  'Gebundelde standaarden': 'Bundled standards',
   'geen versienummer': 'no version number',
   'Bron': 'Source',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':

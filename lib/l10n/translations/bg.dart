@@ -1816,6 +1816,7 @@ const _dutchSourceAddBg = <String, String>{
       'регистрационен номер на медицински специалист (BIG)',
   'AGB-code': 'код на доставчик на здравни услуги (AGB)',
   'proces-verbaalnummer': 'номер на полицейски протокол',
+  'Standaarden en methodieken': 'Стандарти и методологии',
   'Aanvalsoppervlak': 'Атакуема повърхност',
   'Soort toevoegen': 'Добавяне на вид',
   'Soort verwijderen': 'Премахване на вид',
@@ -2231,7 +2232,6 @@ const _dutchSourceAddBg = <String, String>{
       'Стандарт, спрямо който е тествано, вече има по-нова версия:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Това не е непременно грешка — проверката е извършена, когато е важала тази версия. Докладът записва какво наистина е използвано.',
-  'Gebundelde standaarden': 'Вградени стандарти',
   'geen versienummer': 'без номер на версия',
   'Bron': 'Източник',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
