@@ -56,6 +56,33 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   straks op één van beide plekken niet in belandt.
 
 ### Changed
+- **De scorecard is een dashboard geworden, en de invoer ervan een strak
+  formulier.** De slide zette de cijfers in een dunne strook bovenaan, ongeacht
+  hoeveel het er waren: één cijfer kreeg net zoveel beeld als vijf, en dat is
+  precies verkeerd om. Voortaan bepaalt het *aantal* de indeling — één cijfer
+  vult de slide als één groot getal, twee of drie staan naast elkaar, vier vormen
+  een blok van 2×2 en vijf staan drie boven twee. De lettergrootte volgt uit de
+  kaart die een cijfer daadwerkelijk krijgt en niet uit een vaste breuk van de
+  slide, dus de veelvoorkomende gevallen zijn niet langer klein gemaakt voor het
+  drukste geval.
+
+  Elk cijfer staat nu op een eigen kaart, met de accentkleur van het stijlprofiel
+  als tint en als streep langs de bovenrand, de verandering als gekleurde pil, en
+  eronder wat het cijfer verving ("was 375") — een gegeven dat wél werd
+  opgeslagen maar nooit werd getoond. Op een volle vijf-cijferslide vervalt die
+  regel ten gunste van een groter getal; de pil erboven zegt dan al wat er
+  veranderde. Groen en rood blijven vastliggen: die betekenen iets in plaats van
+  dat ze versieren.
+
+  In de editor is een cijfer teruggebracht tot één compacte kaart van twee
+  regels. De twee toelichtingen die onder élk cijfer herhaald werden staan nu één
+  keer onder de kop en op het richtingveld zelf — bij vijf cijfers was die
+  herhaling het grootste deel van het paneel. De kaartkop toont de verandering
+  als gekleurde chip zoals de slide hem tekent, zodat het effect van de
+  richtingkeuze zichtbaar is tijdens het typen. Sorteren gaat met een sleepgreep,
+  net als bij opsommingen, tijdlijnen, slides en opslaglocaties; de twee
+  pijlknopjes per cijfer zijn daarmee verdwenen.
+
 - **Het sjabloon *Rapportage* begint nu met de nieuwe rapportagetypes.** Het
   KPI-dashboard was een cockpit met wijzerplaten; dat is nu een **scorecard**,
   omdat een rapportage die elke maand terugkomt hoort te leiden met wat er
