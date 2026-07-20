@@ -1792,6 +1792,11 @@ const _dutchSourceAddLt = <String, String>{
   'Norm en prestatie': 'Tikslas ir rezultatas',
   'Norm per rij (optioneel)': 'Tikslas eilutei (nebūtina)',
   'Bandgrenzen (optioneel)': 'Juostų ribos (nebūtina)',
+  'Open bevindingen': 'Atviri radiniai',
+  'dagen': 'dienos',
+  'was': 'buvo',
+  'Cijfers': 'Skaičiai',
+  'Cijfer': 'Skaičius',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Ne viską pavyko atkurti. Tai, ko nepavyko perskaityti, išsaugota.',
   'Verdieping': 'Gilinimas',

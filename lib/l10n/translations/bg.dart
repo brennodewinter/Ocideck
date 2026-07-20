@@ -1807,6 +1807,11 @@ const _dutchSourceAddBg = <String, String>{
   'Norm en prestatie': 'Цел и резултат',
   'Norm per rij (optioneel)': 'Цел на ред (по избор)',
   'Bandgrenzen (optioneel)': 'Граници на зоните (по избор)',
+  'Open bevindingen': 'Открити констатации',
+  'dagen': 'дни',
+  'was': 'беше',
+  'Cijfers': 'Показатели',
+  'Cijfer': 'Показател',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Не всичко можа да бъде възстановено. Нечетимото е запазено.',
   'Verdieping': 'Задълбочаване',

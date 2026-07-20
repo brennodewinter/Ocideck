@@ -1788,6 +1788,11 @@ const _dutchSourceAddGsw = <String, String>{
   'Norm en prestatie': 'Soll und Ist',
   'Norm per rij (optioneel)': 'Soll pro Zile (optional)',
   'Bandgrenzen (optioneel)': 'Bandgränze (optional)',
+  'Open bevindingen': 'Offni Feststellige',
+  'dagen': 'Täg',
+  'was': 'war',
+  'Cijfers': 'Chennzahle',
+  'Cijfer': 'Chennzahl',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Nid alles het chönne wiederhergstellt wärde. Was unläserlich gsi isch, isch ufbewahrt worde.',
   'Verdieping': 'Vertiefig',

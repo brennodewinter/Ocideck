@@ -424,7 +424,7 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 - `scope_matrix_editor.dart` — Edits a scope-matrix slide (objects × type/standard × coverage status).
 - `asset_overview_editor.dart` — Edits an asset-overview slide (up to eight kinds, four counts each), summing as you type and flagging a subtotal larger than its total.
 - `actions_editor.dart` — Edits an actions slide (up to eight lines: action, owner, deadline, on-the-list-since, what is asked, status).
-- `scorecard_editor.dart` — Edits a scorecard slide (up to five figures: label, now, previous report, unit, direction).
+- `scorecard_editor.dart` — Edits a scorecard slide (up to five figures: label, now, previous report, unit, direction). One figure is one compact two-row card carrying a live change chip; ordering is a drag handle, like every other reorderable list in the app.
 - `section_editor.dart` — Edits a section-divider slide (title, subtitle).
 - `signoff_editor.dart` — Edits the sign-off slide (truthfulness statement, signature, certification, seal).
 - `slide_type_help.dart` — Collapsible "what can I do here?" hint per slide type (and the TLP hint); exhaustive switch guarantees every type has one.
@@ -476,7 +476,7 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 - `timeline_preview.dart` — Animated timeline renderer with event cards.
 - `asset_overview_preview.dart` — Per-kind bars on one shared scale with the at-risk share filled, four aligned count columns and a derived totals row.
 - `actions_preview.dart` — Action rows with a kind marker, owner and deadline; a passed deadline is flagged against the current date, like the footer's `{date}`.
-- `scorecard_preview.dart` — Scorecard tiles: label, figure, and the signed change beneath it. Follows the style profile, except for the green/red sentiment tokens, which carry meaning rather than styling.
+- `scorecard_preview.dart` — Scorecard cards: label, figure, the signed change as a tinted pill and the figure it replaced. The number of figures decides the grid (one becomes a hero, four a 2×2, five three-above-two) and the card each figure gets decides its type size — `_CardMetrics` measures the label and hands the figure whatever is left. Card tint and rule follow the profile's accent; the green/red sentiment tokens stay fixed, because they carry meaning rather than styling.
 
 ### `lib/widgets/presentation/` — presenter & dual-screen
 

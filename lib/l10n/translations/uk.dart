@@ -1802,6 +1802,11 @@ const _dutchSourceAddUk = <String, String>{
   'Norm en prestatie': 'Ціль і результат',
   'Norm per rij (optioneel)': 'Ціль на рядок (необов\'язково)',
   'Bandgrenzen (optioneel)': 'Межі смуг (необов\'язково)',
+  'Open bevindingen': 'Відкриті висновки',
+  'dagen': 'днів',
+  'was': 'було',
+  'Cijfers': 'Показники',
+  'Cijfer': 'Показник',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Не все вдалося відновити. Те, що не вдалося прочитати, збережено.',
   'Verdieping': 'Поглиблення',

@@ -1783,6 +1783,11 @@ const _dutchSourceAddSv = <String, String>{
   'Norm en prestatie': 'Mål och utfall',
   'Norm per rij (optioneel)': 'Mål per rad (valfritt)',
   'Bandgrenzen (optioneel)': 'Bandgränser (valfritt)',
+  'Open bevindingen': 'Öppna fynd',
+  'dagen': 'dagar',
+  'was': 'var',
+  'Cijfers': 'Nyckeltal',
+  'Cijfer': 'Nyckeltal',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Allt kunde inte återställas. Det som inte gick att läsa har sparats.',
   'Verdieping': 'Fördjupning',

@@ -141,7 +141,15 @@ void main() {
     );
     await tester.pumpWidget(_host(slide: slide, onUpdate: (s) => emitted = s));
 
-    await tester.tap(find.byIcon(Icons.arrow_upward).last);
+    // Ordering is a drag handle, like every other reorderable list in the app.
+    expect(find.byIcon(Icons.drag_indicator), findsNWidgets(2));
+
+    // The patched ReorderableListView pre-adjusts newIndex, so moving row 1 to
+    // index 0 lands it in front.
+    final list = tester.widget<ReorderableListView>(
+      find.byType(ReorderableListView),
+    );
+    list.onReorderItem!(1, 0);
     await tester.pump();
 
     final spec = _specOf(emitted!);

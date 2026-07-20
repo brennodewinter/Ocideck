@@ -32,6 +32,10 @@ Slide _scorecard(List<ScorecardEntry> entries, {String title = 'Stand'}) {
 Color? _arrowColor(WidgetTester tester, IconData icon) =>
     tester.widget<Icon>(find.byIcon(icon)).color;
 
+/// The rendered size of a figure, to compare one layout against another.
+double _fontSizeOf(WidgetTester tester, String text) =>
+    tester.widget<Text>(find.text(text)).style!.fontSize!;
+
 void main() {
   testWidgets('renders the title, each figure and its unit', (tester) async {
     await tester.pumpWidget(
@@ -190,6 +194,89 @@ void main() {
     await tester.pump();
 
     expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('one figure is drawn far larger than one of five', (
+    tester,
+  ) async {
+    // The point of the layout: a scorecard with a single figure is a different
+    // slide from one with five, and gets the whole slide to say so. Measured on
+    // the same figure so only the layout differs.
+    await tester.pumpWidget(
+      _host(_scorecard(const [ScorecardEntry(label: 'Open', value: 96)])),
+    );
+    await tester.pump();
+    final hero = _fontSizeOf(tester, '96');
+
+    await tester.pumpWidget(
+      _host(
+        _scorecard(const [
+          ScorecardEntry(label: 'Assets', value: 412),
+          ScorecardEntry(label: 'Open', value: 96),
+          ScorecardEntry(label: 'Kritiek', value: 8),
+          ScorecardEntry(label: 'Openstaand', value: 62),
+          ScorecardEntry(label: 'Nieuw', value: 18),
+        ]),
+      ),
+    );
+    await tester.pump();
+
+    expect(hero, greaterThan(_fontSizeOf(tester, '96') * 2));
+  });
+
+  testWidgets('the card names the figure it replaced', (tester) async {
+    await tester.pumpWidget(
+      _host(
+        _scorecard(const [
+          ScorecardEntry(
+            label: 'Gemiddeld openstaand',
+            value: 62,
+            previous: 73,
+            unit: 'dagen',
+          ),
+        ]),
+      ),
+    );
+    await tester.pump();
+
+    // The unit rides along: "was 73" would read as a different quantity.
+    expect(find.text('was 73 dagen'), findsOneWidget);
+  });
+
+  testWidgets('without a previous figure there is nothing to have been', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      _host(_scorecard(const [ScorecardEntry(label: 'Open', value: 96)])),
+    );
+    await tester.pump();
+
+    expect(find.textContaining('was'), findsNothing);
+  });
+
+  testWidgets('four figures are laid out two by two', (tester) async {
+    // Four in a single row would be four thin strips; the 2×2 block is what
+    // keeps the figures big. Asserted on the geometry, since that is the whole
+    // claim: two cards share the top edge, the other two sit below them.
+    await tester.pumpWidget(
+      _host(
+        _scorecard(const [
+          ScorecardEntry(label: 'Assets', value: 412),
+          ScorecardEntry(label: 'Open', value: 96),
+          ScorecardEntry(label: 'Kritiek', value: 8),
+          ScorecardEntry(label: 'Nieuw', value: 18),
+        ]),
+      ),
+    );
+    await tester.pump();
+
+    final tops = [
+      for (final label in ['Assets', 'Open', 'Kritiek', 'Nieuw'])
+        tester.getTopLeft(find.text(label)).dy,
+    ];
+    expect(tops[0], tops[1]);
+    expect(tops[2], tops[3]);
+    expect(tops[2], greaterThan(tops[0]));
   });
 
   testWidgets('an empty scorecard renders without a figure', (tester) async {

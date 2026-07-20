@@ -1787,6 +1787,11 @@ const _dutchSourceAddCs = <String, String>{
   'Norm en prestatie': 'Cíl a skutečnost',
   'Norm per rij (optioneel)': 'Cíl na řádek (volitelné)',
   'Bandgrenzen (optioneel)': 'Hranice pásem (volitelné)',
+  'Open bevindingen': 'Otevřená zjištění',
+  'dagen': 'dny',
+  'was': 'bylo',
+  'Cijfers': 'Čísla',
+  'Cijfer': 'Číslo',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Nepodařilo se obnovit vše. Co nešlo přečíst, zůstalo zachováno.',
   'Verdieping': 'Prohloubení',

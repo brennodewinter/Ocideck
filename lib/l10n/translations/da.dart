@@ -1783,6 +1783,11 @@ const _dutchSourceAddDa = <String, String>{
   'Norm en prestatie': 'Mål og resultat',
   'Norm per rij (optioneel)': 'Mål pr. række (valgfrit)',
   'Bandgrenzen (optioneel)': 'Båndgrænser (valgfrit)',
+  'Open bevindingen': 'Åbne fund',
+  'dagen': 'dage',
+  'was': 'var',
+  'Cijfers': 'Nøgletal',
+  'Cijfer': 'Nøgletal',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Ikke alt kunne gendannes. Det, der ikke kunne læses, er bevaret.',
   'Verdieping': 'Uddybning',

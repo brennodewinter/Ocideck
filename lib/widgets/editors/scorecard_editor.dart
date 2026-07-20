@@ -14,6 +14,12 @@ import '_editor_field.dart';
 /// The previous figure is typed in, not computed: a deck holds one report, so
 /// the app has nothing to compare against. That also means the figure can come
 /// straight from a generator that already knows both numbers.
+///
+/// One figure is one compact card of two rows, and the two explanations that
+/// used to be repeated under every card now sit once under the section heading
+/// and on the polarity field itself — with five figures on screen the repetition
+/// was most of the panel. Ordering is a drag handle, as everywhere else in the
+/// app that has a reorderable list (bullets, timeline, slides, connections).
 class ScorecardEditor extends StatefulWidget {
   final Slide slide;
   final ValueChanged<Slide> onUpdate;
@@ -117,8 +123,9 @@ class _ScorecardEditorState extends State<ScorecardEditor> {
     _emit();
   }
 
-  void _moveEntry(int from, int to) {
-    if (to < 0 || to >= _entries.length) return;
+  /// Both indexes count in the final list — [ReorderableListView.onReorderItem]
+  /// hands them over pre-adjusted, so no off-by-one correction here.
+  void _reorder(int from, int to) {
     setState(() => _entries.insert(to, _entries.removeAt(from)));
     _emit();
   }
@@ -141,10 +148,51 @@ class _ScorecardEditorState extends State<ScorecardEditor> {
           hint: 'Sinds de vorige rapportage',
         ),
         const SizedBox(height: 16),
-        for (var i = 0; i < _entries.length; i++) ...[
-          _entryCard(context, i),
-          const SizedBox(height: 12),
-        ],
+        // Heading with the running count, like the cockpit's meter list: the
+        // ceiling is a design limit, so say how much room is left before the
+        // author runs into it.
+        Row(
+          children: [
+            const Icon(Icons.insights_outlined, size: 16, color: AppTheme.teal),
+            const SizedBox(width: 6),
+            Expanded(
+              child: Text(
+                l10n.d('Cijfers'),
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w700,
+                  color: AppTheme.navy,
+                ),
+              ),
+            ),
+            Text(
+              '${_entries.length}/$scorecardMaxEntries',
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: AppTheme.slate500,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 4),
+        Text(
+          l10n.d(
+            'Laat de vorige rapportage leeg als er nog geen meting was; de slide toont dan geen verandering.',
+          ),
+          style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+        ),
+        const SizedBox(height: 8),
+        ReorderableListView(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          buildDefaultDragHandles: false,
+          onReorderItem: _reorder,
+          children: [
+            for (var i = 0; i < _entries.length; i++) _entryCard(context, i),
+          ],
+        ),
+        const SizedBox(height: 4),
         Align(
           alignment: Alignment.centerLeft,
           child: Tooltip(
@@ -169,131 +217,239 @@ class _ScorecardEditorState extends State<ScorecardEditor> {
   Widget _entryCard(BuildContext context, int index) {
     final l10n = context.l10n;
     final entry = _entries[index];
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        border: Border.all(color: AppTheme.slate300),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Expanded(
-                child: EditorField(
-                  label: 'Label',
-                  controller: entry.label,
-                  hint: 'Open bevindingen',
+    return Padding(
+      key: ValueKey(entry),
+      padding: const EdgeInsets.symmetric(vertical: 5),
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(8, 6, 8, 10),
+        decoration: BoxDecoration(
+          border: Border.all(color: AppTheme.slate300),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                ReorderableDragStartListener(
+                  index: index,
+                  child: Icon(
+                    Icons.drag_indicator,
+                    size: 16,
+                    color: AppTheme.slate300,
+                  ),
                 ),
-              ),
-              IconButton(
-                tooltip: l10n.d('Omhoog'),
-                onPressed: index > 0
-                    ? () => _moveEntry(index, index - 1)
-                    : null,
-                icon: const Icon(Icons.arrow_upward, size: 18),
-                color: AppTheme.slate500,
-                visualDensity: VisualDensity.compact,
-              ),
-              IconButton(
-                tooltip: l10n.d('Omlaag'),
-                onPressed: index < _entries.length - 1
-                    ? () => _moveEntry(index, index + 1)
-                    : null,
-                icon: const Icon(Icons.arrow_downward, size: 18),
-                color: AppTheme.slate500,
-                visualDensity: VisualDensity.compact,
-              ),
-              IconButton(
-                tooltip: l10n.d('Cijfer verwijderen'),
-                onPressed: _entries.length > 1
-                    ? () => _removeEntry(index)
-                    : null,
-                icon: const Icon(Icons.delete_outline, size: 18),
-                color: AppTheme.slate500,
-                visualDensity: VisualDensity.compact,
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Expanded(
-                child: EditorField(
-                  label: 'Nu',
-                  controller: entry.value,
-                  hint: '96',
+                const SizedBox(width: 6),
+                Text(
+                  '${l10n.d('Cijfer')} ${index + 1}',
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                    color: AppTheme.navy,
+                  ),
                 ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: EditorField(
-                  label: 'Vorige rapportage',
-                  controller: entry.previous,
-                  hint: '120',
+                const Spacer(),
+                // The change as the slide will show it, next to the numbers
+                // that produce it: the polarity choice is abstract until you
+                // see it come out green or red.
+                _changeChip(entry),
+                IconButton(
+                  tooltip: l10n.d('Cijfer verwijderen'),
+                  onPressed: _entries.length > 1
+                      ? () => _removeEntry(index)
+                      : null,
+                  icon: const Icon(Icons.delete_outline, size: 18),
+                  color: AppTheme.slate500,
+                  visualDensity: VisualDensity.compact,
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(minWidth: 32),
                 ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: EditorField(
-                  label: 'Eenheid',
-                  controller: entry.unit,
-                  hint: 'dagen',
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 4),
-          Text(
-            l10n.d(
-              'Laat de vorige rapportage leeg als er nog geen meting was; de slide toont dan geen verandering.',
+              ],
             ),
-            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
-          ),
-          const SizedBox(height: 10),
-          _polarityDropdown(context, index),
-          const SizedBox(height: 4),
-          Text(
-            l10n.d(
-              'Bepaalt of een stijging groen of rood kleurt. De pijl volgt altijd de cijfers.',
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: _field(
+                    controller: entry.label,
+                    label: l10n.d('Label'),
+                    hint: l10n.d('Open bevindingen'),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: _field(
+                    controller: entry.unit,
+                    label: l10n.d('Eenheid'),
+                    hint: l10n.d('dagen'),
+                  ),
+                ),
+              ],
             ),
-            style: TextStyle(fontSize: 11, color: AppTheme.slate400),
-          ),
-        ],
+            const SizedBox(height: 8),
+            // The two figures and the direction fit one row in a normally sized
+            // editor panel; in a narrow one the direction drops to its own row
+            // rather than squeezing "Vorige rapportage" into an unreadable
+            // sliver. The panel is user-resizable, so this is a real case.
+            LayoutBuilder(
+              builder: (context, constraints) {
+                final numbers = [
+                  Expanded(
+                    flex: 2,
+                    child: _field(
+                      controller: entry.value,
+                      label: l10n.d('Nu'),
+                      hint: '96',
+                      numeric: true,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    flex: 3,
+                    child: _field(
+                      controller: entry.previous,
+                      label: l10n.d('Vorige rapportage'),
+                      hint: '120',
+                      numeric: true,
+                    ),
+                  ),
+                ];
+                if (constraints.maxWidth < 380) {
+                  return Column(
+                    children: [
+                      Row(children: numbers),
+                      const SizedBox(height: 8),
+                      _polarityDropdown(context, index),
+                    ],
+                  );
+                }
+                return Row(
+                  children: [
+                    ...numbers,
+                    const SizedBox(width: 8),
+                    Expanded(flex: 3, child: _polarityDropdown(context, index)),
+                  ],
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
 
+  /// A dense bordered field: the label lives inside the border instead of above
+  /// it, which is what buys the compact two-row card (same shape as the cockpit
+  /// meter fields).
+  Widget _field({
+    required TextEditingController controller,
+    required String label,
+    required String hint,
+    bool numeric = false,
+  }) => TextField(
+    controller: controller,
+    keyboardType: numeric
+        ? const TextInputType.numberWithOptions(decimal: true, signed: true)
+        : null,
+    style: const TextStyle(fontSize: 13),
+    decoration: InputDecoration(
+      labelText: label,
+      hintText: hint,
+      isDense: true,
+      floatingLabelBehavior: FloatingLabelBehavior.always,
+      border: const OutlineInputBorder(),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+    ),
+  );
+
   Widget _polarityDropdown(BuildContext context, int index) {
     final l10n = context.l10n;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          l10n.d('Richting'),
-          style: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w600,
-            color: AppTheme.slate500,
+    return Tooltip(
+      message: l10n.d(
+        'Bepaalt of een stijging groen of rood kleurt. De pijl volgt altijd de cijfers.',
+      ),
+      child: DropdownButtonFormField<ScorecardPolarity>(
+        initialValue: _entries[index].polarity,
+        isDense: true,
+        isExpanded: true,
+        style: const TextStyle(fontSize: 13, color: AppTheme.navy),
+        decoration: InputDecoration(
+          labelText: l10n.d('Richting'),
+          isDense: true,
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          border: const OutlineInputBorder(),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 10,
+            vertical: 12,
           ),
         ),
-        const SizedBox(height: 5),
-        DropdownButtonFormField<ScorecardPolarity>(
-          initialValue: _entries[index].polarity,
-          isDense: true,
-          items: [
-            for (final polarity in ScorecardPolarity.values)
-              DropdownMenuItem(
-                value: polarity,
-                child: Text(l10n.d(scorecardPolarityDutchLabel(polarity))),
+        items: [
+          for (final polarity in ScorecardPolarity.values)
+            DropdownMenuItem(
+              value: polarity,
+              child: Text(
+                l10n.d(scorecardPolarityDutchLabel(polarity)),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
-          ],
-          onChanged: (v) => _setPolarity(index, v ?? ScorecardPolarity.neutral),
-        ),
-      ],
+            ),
+        ],
+        onChanged: (v) => _setPolarity(index, v ?? ScorecardPolarity.neutral),
+      ),
+    );
+  }
+
+  /// The change this row will put on the slide, in the colour it will have
+  /// there. Nothing at all while there is no previous figure to compare
+  /// against — the slide shows nothing then either.
+  ///
+  /// Rebuilt straight off the two number fields, so it tracks typing without
+  /// rebuilding the whole panel on every keystroke. A polarity change already
+  /// goes through `setState`.
+  Widget _changeChip(_EntryControllers controllers) => ListenableBuilder(
+    listenable: Listenable.merge([controllers.value, controllers.previous]),
+    builder: (context, _) => _changeChipFor(controllers.toEntry()),
+  );
+
+  Widget _changeChipFor(ScorecardEntry entry) {
+    final direction = entry.direction;
+    final delta = entry.delta;
+    if (direction == null || delta == null) return const SizedBox.shrink();
+    final color = switch (entry.sentiment) {
+      ScorecardSentiment.good => AppTheme.success700,
+      ScorecardSentiment.bad => AppTheme.danger700,
+      ScorecardSentiment.neutral => AppTheme.slate500,
+    };
+    final icon = switch (direction) {
+      ScorecardDirection.up => Icons.arrow_upward_rounded,
+      ScorecardDirection.down => Icons.arrow_downward_rounded,
+      ScorecardDirection.flat => Icons.remove_rounded,
+    };
+    return Container(
+      margin: const EdgeInsets.only(right: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 13, color: color),
+          const SizedBox(width: 3),
+          Text(
+            direction == ScorecardDirection.flat
+                ? context.l10n.d('ongewijzigd')
+                : formatScorecardDelta(delta),
+            style: TextStyle(
+              fontSize: 11,
+              fontWeight: FontWeight.w700,
+              color: color,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

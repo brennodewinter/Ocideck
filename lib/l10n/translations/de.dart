@@ -741,6 +741,11 @@ const _dutchSourceAddDe = {
   'Norm en prestatie': 'Soll und Ist',
   'Norm per rij (optioneel)': 'Soll je Zeile (optional)',
   'Bandgrenzen (optioneel)': 'Bandgrenzen (optional)',
+  'Open bevindingen': 'Offene Feststellungen',
+  'dagen': 'Tage',
+  'was': 'war',
+  'Cijfers': 'Kennzahlen',
+  'Cijfer': 'Kennzahl',
   'Niet alles kon worden hersteld. Wat onleesbaar was, is bewaard gebleven.':
       'Nicht alles konnte wiederhergestellt werden. Was unlesbar war, wurde aufbewahrt.',
   'Verdieping': 'Vertiefung',
