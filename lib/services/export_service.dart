@@ -236,8 +236,14 @@ class ExportService {
       await Directory(dir).create(recursive: true);
       // Atomair: exporteren over een bestaand bestand mag dat bij een crash
       // niet half-geschreven achterlaten.
-      await writeBytesAtomic(File(outputPath), bytes);
+      // Het manifest eerst. Het is klein en het exportbestand is de grote
+      // schrijfbeurt, dus loopt de schijf vol, dan gebeurt dat op de tweede —
+      // en dan is er geen export om een manifest bij te missen. Andersom bleef
+      // er een compleet geredigeerd rapport liggen zónder manifest, terwijl de
+      // gebruiker las dat de export was mislukt: hij weet dan niet dat het
+      // bestand er staat, en de ontvanger kan geen enkele redactie natrekken.
       await _writeRedactionManifest(outputPath, redactionManifest);
+      await writeBytesAtomic(File(outputPath), bytes);
       return ExportResult.ok(outputPath);
     } catch (e) {
       // Technische details naar het log; de gebruiker krijgt een korte,

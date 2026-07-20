@@ -65,10 +65,17 @@ class TrashService {
     if (trashDir == null) return false;
     try {
       await Directory(trashDir).create(recursive: true);
+      // Doorgaan na een mislukking, niet meteen terugkeren. `trashTargetsFor`
+      // zet de `.md` vooraan en de sidecars (inkt, notities) erachter; brak het
+      // hier af, dan lag het deck in de prullenbak terwijl zijn sidecars in de
+      // oude map achterbleven — verweesd én onzichtbaar, want er verwijst geen
+      // `.md` meer naar. De uitkomst blijft `false`, dus de aanroeper meldt nog
+      // steeds dat het niet volledig is gelukt.
+      var allMoved = true;
       for (final target in trashTargetsFor(mdPath)) {
-        if (!await _moveOne(target, trashDir)) return false;
+        if (!await _moveOne(target, trashDir)) allMoved = false;
       }
-      return true;
+      return allMoved;
     } catch (e, s) {
       logError('TrashService.moveToTrash: $mdPath', e, s);
       return false;
