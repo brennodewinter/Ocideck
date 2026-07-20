@@ -22,6 +22,25 @@ void main() {
       expect(policy.evaluate(result).allowed, isTrue);
     });
 
+    test('de harde blokkade blijft staan als de bevestigingsvraag uit staat', () {
+      // Twee losse schakelaars: de bovenste vraagt om bevestiging, de onderste
+      // blokkeert. Wie de vraag wegzet omdat hij niet wil worden lastiggevallen,
+      // mag daarmee niet ongemerkt de blokkade opheffen.
+      const policy = QualityExportPolicy(enabled: false, blockOnErrors: true);
+      const result = SlideQualityResult([
+        SlideQualityIssue(
+          slideIndex: 0,
+          kind: SlideQualityIssueKind.textDensityCritical,
+          category: SlideQualityCategory.textDensity,
+          severity: MarkdownValidationSeverity.error,
+        ),
+      ]);
+
+      final decision = policy.evaluate(result, acknowledged: true);
+      expect(decision.allowed, isFalse);
+      expect(decision.hardBlocked, isTrue);
+    });
+
     test('allows export when there are no issues', () {
       const policy = QualityExportPolicy();
       expect(policy.evaluate(const SlideQualityResult([])).allowed, isTrue);

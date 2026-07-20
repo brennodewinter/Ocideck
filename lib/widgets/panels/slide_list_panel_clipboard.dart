@@ -17,14 +17,21 @@ extension _SlideClipboardExport on _SlideListPanelState {
   /// render van (mogelijk geclassificeerde) slide-inhoud af op het systeem-
   /// klembord. Zonder deze check zou het vrijgaveplafond omzeild kunnen worden.
   /// Retourneert true als de actie door mag; toont anders de weigerreden.
+  ///
+  /// Getoetst wordt de strengste van dek en dia. Op `deck.tlp` alleen glipte
+  /// een TLP:RED-dia in een TLP:GREEN-dek zo naar het klembord: de dia die
+  /// juist de strengste markering droeg was de dia die vertrok.
   bool _classificationAllowsEgress(
     Deck deck,
+    Slide slide,
     ScaffoldMessengerState messenger,
   ) {
     final policy = ClassificationEnforcementPolicy.fromAppSettings(
       ref.read(settingsProvider),
     );
-    final decision = policy.evaluate(deck.tlp);
+    final decision = policy.evaluate(
+      effectiveTlp(deckTlp: deck.tlp, slideTlp: slide.tlp),
+    );
     if (!decision.allowed) {
       messenger.showSnackBar(SnackBar(content: Text(decision.reason!)));
       return false;
@@ -36,7 +43,7 @@ extension _SlideClipboardExport on _SlideListPanelState {
     final deck = ref.read(deckProvider).deck;
     if (deck == null) return;
     final messenger = ScaffoldMessenger.of(context);
-    if (!_classificationAllowsEgress(deck, messenger)) return;
+    if (!_classificationAllowsEgress(deck, slide, messenger)) return;
     messenger.showSnackBar(
       SnackBar(
         content: Text(context.l10n.d('Slide renderen…')),

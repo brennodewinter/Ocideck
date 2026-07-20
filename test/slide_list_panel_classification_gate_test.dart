@@ -58,4 +58,49 @@ void main() {
       expect(find.text('Slide renderen…'), findsNothing);
     },
   );
+
+  testWidgets('copy-as-image weegt ook de markering van de dia zelf', (
+    tester,
+  ) async {
+    // Het dek staat op GREEN, deze ene dia op RED. Op `deck.tlp` alleen keek
+    // de poort langs de dia die juist de strengste markering droeg.
+    SharedPreferences.setMockInitialValues({});
+    final container = ProviderContainer();
+    addTearDown(container.dispose);
+
+    final deckNotifier = container.read(deckProvider.notifier);
+    deckNotifier.newDeck('Test');
+    deckNotifier.addSlide(SlideType.bullets);
+    deckNotifier.updateInfo(tlp: TlpLevel.green);
+    deckNotifier.updateSlide(
+      0,
+      container.read(deckProvider).deck!.slides[0].copyWith(tlp: TlpLevel.red),
+    );
+    container.read(editorProvider.notifier).select(0);
+
+    await container
+        .read(settingsProvider.notifier)
+        .setMaxReleaseExportTlp('amber');
+
+    await tester.pumpWidget(
+      UncontrolledProviderScope(
+        container: container,
+        child: MaterialApp(
+          theme: AppTheme.light,
+          home: const Scaffold(
+            body: SizedBox(width: 320, height: 600, child: SlideListPanel()),
+          ),
+        ),
+      ),
+    );
+    await tester.pump();
+
+    await tester.tap(find.byIcon(Icons.more_vert).first);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Kopieer als afbeelding'));
+    await tester.pump();
+
+    expect(find.textContaining('vrijgaveniveau'), findsOneWidget);
+    expect(find.text('Slide renderen…'), findsNothing);
+  });
 }
