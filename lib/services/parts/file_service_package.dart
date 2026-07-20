@@ -176,8 +176,9 @@ extension FileServicePackage on FileService {
       return rel;
     }
 
+    final reaching = _packSlides(deck);
     final slides = [
-      for (final s in deck.slides)
+      for (final s in reaching)
         s.copyWith(
           imagePath: await addAsset(s.imagePath, 'images') ?? s.imagePath,
           imagePath2: await addAsset(s.imagePath2, 'images') ?? s.imagePath2,
@@ -265,6 +266,27 @@ extension FileServicePackage on FileService {
   /// beide dia's wezen naar de inhoud van de eerste: het bewijs van de ene dia
   /// stond onder de andere, en van het origineel zat niets in het pakket. De
   /// `mem:`-tak hiernaast telde al door; deze niet.
+  /// De dia's die in een pakket horen te belanden.
+  ///
+  /// Dit pad serialiseerde `deck.slides` rechtstreeks, en een pakket is de meest
+  /// complete uitvoer die de app kent: de volledige markdown plus élke asset.
+  /// Een dia die de auteur op *overslaan* zette, of waarvan de eigen TLP
+  /// strenger is dan die van het deck, is onzichtbaar in de presenter, op het
+  /// zaalscherm én in de PDF — en ging hier gewoon mee. Daar was geen
+  /// instelling voor nodig: dit gebeurde bij een standaardinstallatie.
+  ///
+  /// Dezelfde regel als overal elders ([slideReachesAudience]), zodat er niet
+  /// opnieuw een tweede exemplaar van het predicaat ontstaat.
+  static List<Slide> _packSlides(Deck deck) => [
+    for (final s in deck.slides)
+      if (slideReachesAudience(
+        s,
+        presentationTlp: deck.tlp,
+        includeDetail: true,
+      ))
+        s,
+  ];
+
   static String _freeArchivePath(Set<String> added, String subdir, String abs) {
     final base = p.basenameWithoutExtension(abs);
     final ext = p.extension(abs);
