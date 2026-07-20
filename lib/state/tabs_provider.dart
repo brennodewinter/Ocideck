@@ -43,6 +43,7 @@ part 'tabs_provider_package.dart';
 part 'tabs_provider_s3.dart';
 part 'tabs_provider_git.dart';
 part 'tabs_provider_git_native.dart';
+part 'tabs_provider_git_review.dart';
 
 const _uuid = Uuid();
 

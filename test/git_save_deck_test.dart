@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
@@ -51,6 +52,31 @@ class _FlakyForge extends FakeForge {
   }
 }
 
+/// Een forge die zijn commit ophoudt tot [gate] klaarstaat — het net dat traag
+/// is, terwijl de gebruiker doorklikt naar een ander tabblad.
+class _BlockingForge extends FakeForge {
+  _BlockingForge(super.repo, this.gate);
+  final Completer<void> gate;
+
+  @override
+  Future<CommitResult> commitFiles({
+    required String branch,
+    required String message,
+    required Map<String, Uint8List> upserts,
+    required List<String> deletes,
+    required String baseSha,
+  }) async {
+    await gate.future;
+    return super.commitFiles(
+      branch: branch,
+      message: message,
+      upserts: upserts,
+      deletes: deletes,
+      baseSha: baseSha,
+    );
+  }
+}
+
 // Het git-opslaanpad (§9.1): het deck van het tabblad wordt één commit. Deze
 // suite legt vast dat het commit landt, dat het tabblad daarna de nieuwe commit
 // als baseSha draagt, dat een nieuw deck zonder herkomst ook publiceert, en dat
@@ -90,6 +116,22 @@ void main() {
     );
     addTearDown(container.dispose);
     return (container, container.read(tabsProvider.notifier));
+  }
+
+  /// Voeg een slide toe aan het deck dat nú in het tabblad staat, zodat de
+  /// bewerking een echte afstammeling is van wat er geopend werd (gedeelde
+  /// slide-ids) — precies zoals een gebruiker het zou doen.
+  void addSlideTitled(ProviderContainer container, String title) {
+    final notifier = container.read(tabsProvider).current!.deckNotifier;
+    final deck = notifier.currentState.deck!;
+    notifier.loadDeck(
+      deck.copyWith(
+        slides: [
+          ...deck.slides,
+          Slide.create(SlideType.title).copyWith(title: title),
+        ],
+      ),
+    );
   }
 
   void seedDeck(ProviderContainer container, Deck deck) {
@@ -545,6 +587,135 @@ theme: ocideck
           ),
         ),
       );
+    });
+  });
+
+  group('tabwissel tijdens het opslaan', () {
+    test('de commit landt bij het eigen tabblad, niet bij het nieuwe', () async {
+      final (container, tabs) = build();
+      final gate = Completer<void>();
+      final repo = repoWith('# oud');
+      final forge = _BlockingForge(repo, gate);
+      final when = DateTime(2026, 7, 18);
+
+      const validDeck = '''
+---
+marp: true
+theme: ocideck
+---
+
+# Kwartaalcijfers
+''';
+      repo.files['$deckDir/deck.md'] = bytes(validDeck);
+      await tabs.openDeckFromGit(
+        forge,
+        config: config,
+        deckDir: deckDir,
+        branch: 'main',
+      );
+      final owner = container.read(tabsProvider).current!;
+
+      final saving = tabs.saveToGit(
+        forge,
+        config: config,
+        deckDir: deckDir,
+        branch: 'main',
+        message: 'opslag',
+        now: when,
+      );
+      // De gebruiker klikt door naar een nieuw, leeg tabblad terwijl de commit
+      // nog op de lijn staat.
+      tabs.newEmptyTab();
+      final other = container.read(tabsProvider).current!;
+      expect(identical(owner, other), isFalse);
+
+      gate.complete();
+      final result = await saving;
+
+      expect(result.status, GitSaveStatus.committed);
+      expect(
+        other.gitOrigin,
+        isNull,
+        reason: 'het lege tabblad mag geen herkomst erven van een ander deck',
+      );
+      expect(owner.gitOrigin?.deckDir, deckDir);
+      expect(owner.gitOrigin?.baseSha, result.sha);
+    });
+  });
+
+  group('een tweede ronde op dezelfde dag', () {
+    test('overschrijft de kop van de werkbranch niet stilletjes', () async {
+      final (container, tabs) = build();
+      final repo = repoWith('# oud');
+      final forge = FakeForge(repo);
+      final when = DateTime(2026, 7, 18);
+      const workBranch = 'decks/kwartaalcijfers/2026-07-18';
+
+      const validDeck = '''
+---
+marp: true
+theme: ocideck
+---
+
+# Kwartaalcijfers
+''';
+      repo.files['$deckDir/deck.md'] = bytes(validDeck);
+
+      // Ochtend: openen vanaf main, bewerken, opslaan. De werkbranch ontstaat.
+      await tabs.openDeckFromGit(
+        forge,
+        config: config,
+        deckDir: deckDir,
+        branch: 'main',
+      );
+      addSlideTitled(container, 'Ochtend');
+      final morning = await tabs.saveToGit(
+        forge,
+        config: config,
+        deckDir: deckDir,
+        branch: 'main',
+        message: 'ochtend',
+        now: when,
+      );
+      expect(morning.status, GitSaveStatus.committed);
+      expect(repo.branches[workBranch], isNotNull);
+
+      // Middag: opnieuw vanaf main openen — het tabblad kent de ochtendcommit
+      // niet. De werkbranch van vandaag bestaat al en staat verderop.
+      await tabs.openDeckFromGit(
+        forge,
+        config: config,
+        deckDir: deckDir,
+        branch: 'main',
+      );
+      addSlideTitled(container, 'Middag');
+      final afternoon = await tabs.saveToGit(
+        forge,
+        config: config,
+        deckDir: deckDir,
+        branch: 'main',
+        message: 'middag',
+        now: when,
+      );
+
+      // Zonder de guard was dit een schone fast-forward geweest en was de
+      // ochtend van de kop verdwenen. Nu botst het en volgt de merge.
+      expect(
+        afternoon.status,
+        isNot(GitSaveStatus.committed),
+        reason: 'de ochtendcommit mag niet stil worden overschreven',
+      );
+      // ...en het is ook geen kale weigering. De gelezen basis maakt de
+      // driewegs-merge mogelijk, dus beide kanten overleven: de ochtend blijft
+      // op de branch staan en de middag komt erbij.
+      expect(afternoon.status, GitSaveStatus.merged);
+      // ...en het is ook geen kale weigering. De gelezen basis maakt de
+      // driewegs-merge mogelijk, dus beide kanten overleven: wat de ochtend
+      // toevoegde blijft staan en de middag komt erbij.
+      expect(afternoon.status, GitSaveStatus.merged);
+      final tip = utf8.decode(repo.files['$deckDir/deck.md']!);
+      expect(tip, contains('Ochtend'));
+      expect(tip, contains('Middag'));
     });
   });
 }

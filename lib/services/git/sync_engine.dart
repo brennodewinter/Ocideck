@@ -137,12 +137,18 @@ class SyncEngine {
       if (commit.forkFrom != null) {
         final branches = await forge.listBranches();
         final match = branches.where((b) => b.name == commit.branch);
-        baseSha = match.isNotEmpty
-            ? match.first.sha
-            : (await forge.createBranch(
-                commit.branch,
-                fromRef: commit.forkFrom!,
-              )).sha;
+        if (match.isEmpty) {
+          baseSha = (await forge.createBranch(
+            commit.branch,
+            fromRef: commit.forkFrom!,
+          )).sha;
+        } else if (baseSha.isEmpty) {
+          // Bestaat de branch al, dan nemen we zijn kop alléén over als deze
+          // commit zelf geen basis draagt. Anders zou de guard altijd
+          // fast-forwarden en schreven we weg wat er inmiddels op de branch
+          // staat — precies het werk dat de wachtrij hoort te beschermen.
+          baseSha = match.first.sha;
+        }
       }
 
       // Idempotentie en verwijderingen kijken alléén naar de deckmap, niet naar

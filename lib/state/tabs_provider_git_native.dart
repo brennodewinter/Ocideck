@@ -100,7 +100,11 @@ extension TabsNotifierGitNative on TabsNotifier {
         'Pad is geen deckmap volgens de repo-layout',
       );
     }
-    final deck = currentState.current?.deckNotifier.currentState.deck;
+    // Tabblad vastzetten vóór het eerste wachtpunt — zie [saveToGit] in
+    // tabs_provider_git.dart: een tabwissel tijdens commit/push mag het
+    // resultaat niet bij een ander deck laten landen.
+    final tab = currentState.current;
+    final deck = tab?.deckNotifier.currentState.deck;
     if (deck == null) {
       return const GitSaveResult(status: GitSaveStatus.failed);
     }
@@ -108,7 +112,7 @@ extension TabsNotifierGitNative on TabsNotifier {
     // D3: dezelfde werkbranch-logica als het REST-pad. Al midden in een ronde op
     // een werkbranch? Blijf daar; anders start (of hervat) de ronde van vandaag
     // op `decks/<naam>/<datum>`. De clone checkt hem uit en commit erop.
-    final origin = currentState.current?.gitOrigin;
+    final origin = tab?.gitOrigin;
     final String workBranch;
     if (origin != null &&
         origin.matchesRepo(config) &&
@@ -154,6 +158,7 @@ extension TabsNotifierGitNative on TabsNotifier {
     if (result.outcome == GitCommitOutcome.committedConflict) {
       final merged = await _mergeNative(
         mirror,
+        tab: tab,
         config: config,
         deckDir: deckDir,
         branch: workBranch,
@@ -165,7 +170,7 @@ extension TabsNotifierGitNative on TabsNotifier {
 
     // De lokale HEAD is de nieuwe basis waarop de volgende opslag voortbouwt.
     if (result.sha != null) {
-      currentState.current?.gitOrigin = GitOrigin(
+      tab?.gitOrigin = GitOrigin(
         config: config,
         branch: workBranch,
         deckDir: deckDir,
@@ -187,6 +192,9 @@ extension TabsNotifierGitNative on TabsNotifier {
   /// [mergeDeckVersions], en het resultaat terug als bestandenset.
   Future<GitSaveResult?> _mergeNative(
     NativeGitMirror mirror, {
+
+    /// Het tabblad waar dit deck in staat, vastgezet vóór het eerste wachtpunt.
+    required TabInfo? tab,
     required GitRepoConfig config,
     required String deckDir,
     required String branch,
@@ -249,7 +257,6 @@ extension TabsNotifierGitNative on TabsNotifier {
     if (!mounted) return const GitSaveResult(status: GitSaveStatus.failed);
 
     // Het samengevoegde deck in het tabblad, met de nieuwe lokale kop als basis.
-    final tab = currentState.current;
     tab?.deckNotifier.loadDeck(mergedDeck!);
     if (outcome.sha != null) {
       tab?.gitOrigin = GitOrigin(
