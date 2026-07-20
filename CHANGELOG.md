@@ -547,6 +547,26 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   een strafzaak gaat. Een markering verbergt een waarde, geen onderwerp.
 
 ### Fixed
+- **Zeven velden konden uit een opgeleverd bevindingsrapport verdwijnen.** Alle
+  zeven zonder melding, en de meeste pas zichtbaar bij de klant.
+
+  Het ernstigst: `copyWith` gaf het **MASWE-nummer** niet door — het enige veld
+  van de veertien dat ontbrak. Het automatisch hernummeren van bevindingen
+  gebruikt dat en schrijft het resultaat terug naar het bestand, dus één keer
+  hernummeren haalde de regel definitief uit het rapport. De paginabouwer liet
+  daarnaast **MASWE, testverwijzing en hertest-uitkomst** volledig vallen, ook op
+  de eerste pagina: een bevinding die lang genoeg was om over twee dia's te
+  lopen, verloor ze uit elke weergave. Een verdwenen hertest-uitkomst is het
+  verschil tussen "opgelost" en niets.
+
+  De overige vier zijn ontsnappingsgaten. Een **kopregel in de beschrijving**
+  knipte de tekst af en liet de rest overlopen in het veld waarvan hij toevallig
+  de naam droeg. Een **backtick** in de scope of de testverwijzing kapte de
+  waarde af, net als een **blokhaak** in de CWE-naam en een **regeleinde** in de
+  hertest-notitie. En een **CVSS-vector van een andere versie dan 4.0** stond wel
+  in het bestand maar werd bij het herladen gewist — de schrijfkant bewaarde hem,
+  alleen de lezer was streng.
+
 - **Het herstelbestand overleefde het herstellen niet.** Drie dingen aan het
   terugzetten van niet-opgeslagen werk deden het tegenovergestelde van wat
   herstel hoort te doen.

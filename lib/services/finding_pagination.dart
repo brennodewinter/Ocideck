@@ -68,6 +68,16 @@ FindingSpec _page(
     cvssVector: isFirst ? spec.cvssVector : '',
     cweId: isFirst ? spec.cweId : null,
     cweName: isFirst ? spec.cweName : '',
+    // Deze vier ontbraken hier volledig — óók op pagina één. Een bevinding die
+    // lang genoeg is om te paginëren verloor daarmee zijn MASWE-nummer, zijn
+    // testverwijzing en de hertest-uitkomst uit élke weergave. Dat laatste is in
+    // een opgeleverd rapport het verschil tussen "opgelost" en niets.
+    // Net als de andere identiteitsvelden horen ze bij de eerste pagina: het is
+    // de kop van de bevinding, niet iets dat per pagina herhaald hoort te worden.
+    masweId: isFirst ? spec.masweId : '',
+    retest: isFirst ? spec.retest : RetestStatus.notRetested,
+    retestNote: isFirst ? spec.retestNote : '',
+    testId: isFirst ? spec.testId : '',
     cveIds: isFirst ? spec.cveIds : const [],
     description: sec(_Section.description, spec.description),
     confirmation: sec(_Section.confirmation, spec.confirmation),

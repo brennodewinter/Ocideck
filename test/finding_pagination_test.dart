@@ -104,4 +104,34 @@ void main() {
       expect(expanded, hasLength(1));
     });
   });
+
+  group('identiteitsvelden op de eerste pagina', () {
+    test('MASWE, hertest en testverwijzing gaan niet verloren', () {
+      // Deze vier ontbraken volledig in de paginabouwer — óók op pagina één.
+      // Een bevinding die lang genoeg was om te paginëren verloor ze daarmee uit
+      // élke weergave, en een verdwenen hertest-uitkomst is in een opgeleverd
+      // rapport het verschil tussen "opgelost" en niets.
+      final spec = bigFinding().copyWith(
+        masweId: 'MASWE-0005',
+        testId: 'T-42',
+        retest: RetestStatus.resolved,
+        retestNote: 'gepatcht in 2026.3',
+      );
+      final pages = paginateFinding(spec);
+      expect(pages.length, greaterThan(1), reason: 'anders test dit niets');
+
+      expect(pages.first.masweId, 'MASWE-0005');
+      expect(pages.first.testId, 'T-42');
+      expect(pages.first.retest, RetestStatus.resolved);
+      expect(pages.first.retestNote, 'gepatcht in 2026.3');
+
+      // Vervolgpagina's dragen ze niet — net als scope, CVSS en CWE horen ze
+      // bij de kop van de bevinding, niet bij elke pagina.
+      for (final page in pages.skip(1)) {
+        expect(page.masweId, isEmpty);
+        expect(page.testId, isEmpty);
+        expect(page.retest, RetestStatus.notRetested);
+      }
+    });
+  });
 }
