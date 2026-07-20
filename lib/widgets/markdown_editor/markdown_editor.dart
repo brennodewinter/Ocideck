@@ -129,6 +129,15 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
   bool _syncingMarkdown = false;
   String _markdownSnapshot = '';
 
+  /// Of de gebruiker in de visuele stand echt iets heeft gewijzigd.
+  ///
+  /// De heen-en-terugweg door de rijke-tekstlaag is niet verliesvrij: een
+  /// markdowntabel komt er als losse woorden uit en `\*` verliest zijn
+  /// backslash. Zonder deze vlag schreef alleen al het aanzetten en weer
+  /// uitzetten van de visuele stand die schade terug in de tekst. Wie niets
+  /// wijzigt, houdt nu letterlijk wat er stond.
+  bool _visualEdited = false;
+
   NotesEditorMode get _effectiveMode => widget.mode ?? _mode;
 
   FocusNode get _focusNode => widget.focusNode ?? _ownedFocusNode!;
@@ -181,6 +190,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
       selection: const TextSelection.collapsed(offset: 0),
     );
     _markdownSnapshot = widget.controller.text;
+    _visualEdited = false;
     _quillController!.addListener(_onQuillChanged);
   }
 
@@ -205,10 +215,12 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     quill.document = MarkdownQuillCodec.documentFromMarkdown(
       normalizeRichTextMarkdown(_markdownSnapshot),
     );
+    _visualEdited = false;
     _syncingMarkdown = false;
   }
 
   void _flushQuillToController(QuillController quill) {
+    if (!_visualEdited) return;
     final markdown = MarkdownQuillCodec.markdownFromDocument(quill.document);
     if (markdown == widget.controller.text) {
       _markdownSnapshot = markdown;
@@ -239,6 +251,7 @@ class _MarkdownNotesEditorState extends State<MarkdownNotesEditor> {
     if (quill == null) return;
     final markdown = MarkdownQuillCodec.markdownFromDocument(quill.document);
     if (markdown == _markdownSnapshot) return;
+    _visualEdited = true;
     _syncingMarkdown = true;
     _markdownSnapshot = markdown;
     widget.controller.value = _valueWithClampedSelection(markdown);
