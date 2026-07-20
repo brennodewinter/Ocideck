@@ -10,6 +10,20 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Added
+- **Zes Nederlandse nummers naast het BSN.** Het oude btw-nummer van een
+  eenmanszaak, het V-nummer, het A-nummer, het BIG-nummer, de AGB-code en het
+  proces-verbaalnummer. Alleen het btw-nummer mag contextloos vuren: `NL` + negen
+  cijfers + `B` + twee cijfers is een vorm die nergens anders voorkomt, en halen
+  die negen cijfers de elfproef, dan *zijn* ze het BSN van de ondernemer. De
+  andere vijf zijn kale cijferreeksen en eisen een contextwoord, want
+  `Ordernummer 20250131` heeft de vorm van een AGB-code. Het A-nummer krijgt
+  bewust geen checksum: die wordt vaak geclaimd maar nergens publiek
+  gedocumenteerd, en gokken zou echte A-nummers afwijzen.
+- **Een strenge stand voor de privacycontrole.** `privacyStrictSeverity` onder
+  *Instellingen → Beveiliging* maakt van elke zekere bevinding een fout in plaats
+  van een waarschuwing, waarmee de export erop kan blokkeren. Standaard uit,
+  omdat aanzetten verandert wat een bestaande instelling betekent. Alleen zekere
+  bevindingen schuiven mee.
 - **Een nieuw slidetype: de scorecard.** Tot vijf kerncijfers, elk met het cijfer
   van de vorige rapportage ernaast. Bedoeld voor een rapportage die elke maand of
   elk kwartaal terugkomt: het getal zelf is context, de verandering is het

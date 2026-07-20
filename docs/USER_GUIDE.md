@@ -917,6 +917,34 @@ think of it.
 You can still switch individual countries off under *Settings → Security* if a
 pack turns out to be noisy for your work.
 
+For the Netherlands the check goes beyond the BSN: the old VAT number of a sole
+trader, the foreign national number (V-number), the BRP administration number
+(A-number), a care professional's BIG number, the AGB code and a police report
+number. Only the first of those stands on its own. `NL` + nine digits + `B` +
+two digits is a shape that occurs nowhere else, and when those nine digits pass
+the elevenproof they *are* the owner's BSN — which is exactly what makes the old
+number worth flagging and the post-2020 replacement harmless. The other five are
+bare runs of eight, ten or eleven digits, so they need a context word for the
+same reason the BSN does: `Order number 20250131` has the shape of an AGB code.
+
+The A-number deliberately has no checksum. One is often claimed for it, but no
+public source from RvIG documents one, and guessing would make the check reject
+real A-numbers. For a privacy check a missed personal number costs more than one
+warning too many.
+
+### Making certain findings block the export
+
+By default even a *certain* finding — a BSN, an IBAN, an email address — is a
+warning you can read and move past. Under *Settings → Security* you can switch on
+**Treat certain findings as errors**. Combined with the setting that blocks
+export on errors, that turns the privacy check into a real gate.
+
+It is off by default on purpose. Turning it on changes what an existing setting
+means, and nobody should discover that their export suddenly stops because they
+updated the app. Only *certain* findings move; likely and possible ones stay
+where they are, because blocking on a false positive costs you an export you
+cannot force through.
+
 ### Why the yardstick is the GDPR, not the local law
 
 For countries outside Europe, OciDeck deliberately does not follow the local
