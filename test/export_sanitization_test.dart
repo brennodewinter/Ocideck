@@ -71,4 +71,65 @@ Normal text.
       expect(html, contains(r'<\/script>'));
     },
   );
+
+  group('script data escaped state', () {
+    // `</script` is niet de enige uitgang uit een script-element. Een `<!--`
+    // zet de HTML-tokenizer in *script data escaped*, een daaropvolgende
+    // `<script` in *double escaped* — en dáár sluit een echte `</script>` het
+    // element niet meer. Alles erna, inclusief het renderscript dat de
+    // markdown-houders zichtbaar maakt, werd scripttekst: de export opende als
+    // een lege witte pagina. Een codedia die kwetsbare paginabron citeert
+    // bevat routineus precies deze twee.
+    const trigger = '''# Titel
+
+```html
+<!-- oude tracker, uitgezet
+<script src="t.js"></script>
+```
+''';
+
+    List<String> holdersOf(String html) => RegExp(
+      r'<script type="text/markdown">([\s\S]*?)</script>',
+    ).allMatches(html).map((m) => m.group(1)!).toList();
+
+    test('geen ongemaskeerde uitgang in de markdown-lading', () async {
+      final html = await service.build(trigger, fallbackTitle: 'Test');
+      final holders = holdersOf(html);
+      expect(holders, isNotEmpty);
+      for (final h in holders) {
+        expect(h, isNot(contains('<!--')), reason: 'opent escaped state');
+        expect(
+          h,
+          isNot(matches(RegExp('</script', caseSensitive: false))),
+          reason: 'sluit het element voortijdig',
+        );
+      }
+    });
+
+    test('het renderscript overleeft de dia', () async {
+      final html = await service.build(trigger, fallbackTitle: 'Test');
+      expect(html, contains("querySelectorAll('section.slide')"));
+    });
+
+    test('de ontsnapping wordt in de browser teruggedraaid', () async {
+      // Zonder terugdraai zou een `<!-- _class: … -->` als zichtbare tekst met
+      // backslash in het document belanden — en dat gold al voor `</script`,
+      // dat werd ontsnapt maar nooit hersteld.
+      final html = await service.build(trigger, fallbackTitle: 'Test');
+      expect(html, contains(r"split('<\\/').join('</')"));
+      expect(html, contains(r"split('<\\!--').join('<!--')"));
+    });
+
+    test('echte JavaScript wordt niet met <\\!-- gesloopt', () async {
+      // In JavaScript is `<!--` een geldige legacy-regelcommentaar en `<\!--`
+      // een syntaxfout; de gebundelde bibliotheken mogen die stap niet krijgen.
+      final withComment = MarpHtmlService(
+        loadAsset: (asset) async => 'var a = 1; <!-- legacy\nvar b = 2;',
+        loadBytes: (asset) async => Uint8List(0),
+      );
+      final html = await withComment.build('# T', fallbackTitle: 'Test');
+      expect(html, contains('<!-- legacy'));
+      expect(html, isNot(contains(r'<\!-- legacy')));
+    });
+  });
 }

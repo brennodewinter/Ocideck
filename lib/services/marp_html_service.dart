@@ -111,12 +111,12 @@ class MarpHtmlService {
       sections
         ..write('<section class="slide$markerClass"$titleColorStyle>')
         ..write('<script type="text/markdown">')
-        ..write(_guard(renderedBlocks))
+        ..write(_guardMarkdown(renderedBlocks))
         ..write('</script></section>');
     }
 
     String inline(String code) =>
-        '<script nonce="$nonce">${_guard(code)}</script>';
+        '<script nonce="$nonce">${_guardScript(code)}</script>';
 
     final meta = metadata ?? const ExportDocumentMetadata();
     final title = _htmlAttr(meta.displayTitle(fallbackTitle));
@@ -255,7 +255,34 @@ class MarpHtmlService {
     caseSensitive: false,
   );
 
-  static String _guard(String s) =>
+  /// Maakt [s] veilig als inhoud van een `<script type="text/markdown">`.
+  ///
+  /// `</script` is niet de enige uitgang. De HTML-tokenizer kent binnen een
+  /// script-element ook *script data escaped*: een `<!--` zet hem in die stand,
+  /// en een daaropvolgende `<script` in *double escaped* — en dáár sluit een
+  /// echte `</script>` het element níét meer, hij zet alleen één stand terug.
+  /// Alles erna wordt scripttekst: de rest van de dia's, én het renderscript dat
+  /// de markdown-houders pas zichtbaar maakt. De export opende dan als een lege
+  /// witte pagina, zonder enige foutmelding.
+  ///
+  /// Dat is geen exotische invoer. Een codedia die kwetsbare paginabron citeert
+  /// — precies wat een pentestrapport doet — bevat routineus een uitgezette
+  /// `<script>` in commentaar. In de app, de presenter en de PDF klopte die dia.
+  ///
+  /// Het renderscript draait de ontsnapping terug vóórdat marked de tekst ziet
+  /// (zie [_renderScript]). Zonder die terugdraai zou een `<!-- _class: … -->`
+  /// als zichtbare tekst mét backslash in het document belanden — en dat was al
+  /// het geval voor `</script`, dat werd ontsnapt maar nooit hersteld.
+  static String _guardMarkdown(String s) =>
+      _guardScript(s).replaceAll('<!--', r'<\!--');
+
+  /// Neutraliseert `</script` in échte JavaScript.
+  ///
+  /// Hier bewust géén `<!--`-behandeling: in JavaScript is `<!--` een geldige
+  /// (legacy) regelcommentaar en `<\!--` een syntaxfout, dus die ontsnapping
+  /// zou de gebundelde bibliotheken slopen. Nodig is het ook niet — deze code is
+  /// vendored en vast, geen inhoud uit een deck.
+  static String _guardScript(String s) =>
       s.replaceAllMapped(_scriptClose, (m) => '<\\/${m.group(1)}');
 
   // ── Charts → inline SVG ────────────────────────────────────────────────────
@@ -447,6 +474,10 @@ body{background:#1e1e1e;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Ar
   document.querySelectorAll('section.slide').forEach(function(sec){
     var holder=sec.querySelector('script[type="text/markdown"]');
     var src=holder?holder.textContent:'';
+    // De ontsnapping uit _guardMarkdown terugdraaien: die bestaat alleen om de
+    // HTML-tokenizer binnen dit script-element te houden, niet om de markdown
+    // te veranderen.
+    src=src.split('<\\/').join('</').split('<\\!--').join('<!--');
     var div=document.createElement('div');div.className='content';
     var html=window.marked?marked.parse(src):src;
     // Sanitise rendered Markdown before it touches the DOM: a deck must not be
