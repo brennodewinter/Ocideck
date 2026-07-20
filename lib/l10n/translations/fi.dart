@@ -1798,7 +1798,6 @@ const _dutchSourceAddFi = <String, String>{
   'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
       'Mitä skannaus löysi, mitä kukaan ei tiennyt omistavansa. Löydöittäin, kuinka kauan se oli tavoitettavissa huomaamatta ja kuka siitä nyt vastaa; pisin altistus on otsikko.',
   'dag': 'päivä',
-  'dagen': 'päivää',
   'maand': 'kuukausi',
   'maanden': 'kuukautta',
   'eigenaar': 'vastuuhenkilö',

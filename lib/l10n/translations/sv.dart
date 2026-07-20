@@ -1797,7 +1797,6 @@ const _dutchSourceAddSv = <String, String>{
   'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
       'Vad skanningen hittade som ingen visste att de hade. Per fynd, hur länge det var nåbart obemärkt och vem som ansvarar nu; den längsta exponeringen är rubriken.',
   'dag': 'dag',
-  'dagen': 'dagar',
   'maand': 'månad',
   'maanden': 'månader',
   'eigenaar': 'ansvarig',

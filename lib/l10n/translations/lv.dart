@@ -1797,7 +1797,6 @@ const _dutchSourceAddLv = <String, String>{
   'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
       'Ko skenēšana atrada un par ko neviens nezināja. Katram atklājumam, cik ilgi tas bija sasniedzams nepamanīts un kas par to atbild tagad; garākā ekspozīcija ir virsraksts.',
   'dag': 'diena',
-  'dagen': 'dienas',
   'maand': 'mēnesis',
   'maanden': 'mēneši',
   'eigenaar': 'atbildīgais',

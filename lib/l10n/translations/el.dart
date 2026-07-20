@@ -1826,7 +1826,6 @@ const _dutchSourceAddEl = <String, String>{
   'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
       'Τι βρήκε η σάρωση που κανείς δεν ήξερε ότι είχε. Ανά ανακάλυψη, πόσο καιρό ήταν προσβάσιμη απαρατήρητη και ποιος είναι τώρα υπεύθυνος· η μεγαλύτερη έκθεση είναι η επικεφαλίδα.',
   'dag': 'ημέρα',
-  'dagen': 'ημέρες',
   'maand': 'μήνας',
   'maanden': 'μήνες',
   'eigenaar': 'υπεύθυνος',

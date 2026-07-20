@@ -1797,7 +1797,6 @@ const _dutchSourceAddDa = <String, String>{
   'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
       'Hvad scanningen fandt, som ingen vidste de havde. Pr. fund, hvor længe det var tilgængeligt ubemærket, og hvem der er ansvarlig nu; den længste eksponering er overskriften.',
   'dag': 'dag',
-  'dagen': 'dage',
   'maand': 'måned',
   'maanden': 'måneder',
   'eigenaar': 'ansvarlig',

@@ -1828,7 +1828,6 @@ const _dutchSourceAddPt = <String, String>{
   'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
       'O que a análise encontrou e que ninguém sabia ter. Por descoberta, quanto tempo esteve acessível despercebida e quem é responsável agora; a exposição mais longa é a manchete.',
   'dag': 'dia',
-  'dagen': 'dias',
   'maand': 'mês',
   'maanden': 'meses',
   'eigenaar': 'responsável',

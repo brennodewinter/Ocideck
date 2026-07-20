@@ -1800,7 +1800,6 @@ const _dutchSourceAddSl = <String, String>{
   'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
       'Kar je pregled našel in za kar nihče ni vedel. Po odkritju, kako dolgo je bilo dosegljivo neopaženo in kdo je zdaj nosilec; najdaljša izpostavljenost je naslov.',
   'dag': 'dan',
-  'dagen': 'dni',
   'maand': 'mesec',
   'maanden': 'mesecev',
   'eigenaar': 'nosilec',

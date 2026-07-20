@@ -1802,7 +1802,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
       'Was de Scan gfunde het und wo niemert devo gwüsst het. Pro Entdeckig, wie lang si unbemerkt erreichbar gsi isch und wer si jetz verantwortet; di längscht Exposition isch d Schlagziile.',
   'dag': 'Tag',
-  'dagen': 'Täg',
   'maand': 'Monet',
   'maanden': 'Monet',
   'eigenaar': 'Verantwortliche',

@@ -1810,7 +1810,6 @@ const _dutchSourceAddPl = <String, String>{
   'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
       'Co skan znalazł, a o czym nikt nie wiedział. Dla każdego odkrycia, jak długo było osiągalne niezauważone i kto jest teraz właścicielem; najdłuższa ekspozycja jest nagłówkiem.',
   'dag': 'dzień',
-  'dagen': 'dni',
   'maand': 'miesiąc',
   'maanden': 'miesięcy',
   'eigenaar': 'właściciel',

@@ -1798,7 +1798,6 @@ const _dutchSourceAddId = <String, String>{
   'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
       'Apa yang ditemukan pemindaian yang tak seorang pun tahu dimiliki. Per temuan, berapa lama ia dapat dijangkau tanpa terdeteksi dan siapa penanggung jawabnya kini; paparan terpanjang menjadi judul utama.',
   'dag': 'hari',
-  'dagen': 'hari',
   'maand': 'bulan',
   'maanden': 'bulan',
   'eigenaar': 'penanggung jawab',

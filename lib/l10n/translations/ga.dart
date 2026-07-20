@@ -1834,7 +1834,6 @@ const _dutchSourceAddGa = <String, String>{
   'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
       'A bhfuair an scanadh nach raibh a fhios ag aon duine a bheith acu. In aghaidh na fionnachtana, cé chomh fada is a bhí sé insroichte gan tabhairt faoi deara agus cé leis é anois; is é an nochtadh is faide an cheannlíne.',
   'dag': 'lá',
-  'dagen': 'lá',
   'maand': 'mí',
   'maanden': 'mí',
   'eigenaar': 'úinéir',

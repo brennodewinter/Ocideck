@@ -1789,7 +1789,6 @@ const _dutchSourceAddEt = <String, String>{
   'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
       'Mida skannimine leidis, millest keegi ei teadnud. Iga leiu kohta, kui kaua see oli märkamatult kättesaadav ja kes selle eest nüüd vastutab; pikim kokkupuude on pealkiri.',
   'dag': 'päev',
-  'dagen': 'päeva',
   'maand': 'kuu',
   'maanden': 'kuud',
   'eigenaar': 'vastutaja',

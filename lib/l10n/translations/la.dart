@@ -1814,7 +1814,6 @@ const _dutchSourceAddLa = <String, String>{
   'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
       'Quod scrutatio invenit quod nemo se habere sciebat. Per inventum quam diu inobservatum pervium fuerit et quis nunc curet; longissima expositio titulus est.',
   'dag': 'dies',
-  'dagen': 'dies',
   'maand': 'mensis',
   'maanden': 'menses',
   'eigenaar': 'curator',

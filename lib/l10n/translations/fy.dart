@@ -756,7 +756,6 @@ const _dutchSourceAddFy = {
   'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
       'Wat de scan fûn dat gjinien wist te hawwen. Per ûntdekking hoe lang dy ûngemurken berikber wie en wa\'t him no hat; de langste bleatstelling is de kop.',
   'dag': 'dei',
-  'dagen': 'dagen',
   'maand': 'moanne',
   'maanden': 'moannen',
   'eigenaar': 'eigner',

@@ -1820,7 +1820,6 @@ const _dutchSourceAddMt = <String, String>{
   'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
       'Dak li sabet l-iskennjar li ħadd ma kien jaf li għandu. Għal kull skoperta, kemm damet tintlaħaq mingħajr ma ġiet innutata u min hu responsabbli issa; l-itwal espożizzjoni hija t-titlu.',
   'dag': 'jum',
-  'dagen': 'jiem',
   'maand': 'xahar',
   'maanden': 'xhur',
   'eigenaar': 'responsabbli',

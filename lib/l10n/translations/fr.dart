@@ -755,7 +755,6 @@ const _dutchSourceAddFr = {
   'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
       'Ce que le scan a trouvé et dont personne ne connaissait l\'existence. Par découverte, sa durée d\'accessibilité inaperçue et son responsable actuel ; l\'exposition la plus longue fait l\'accroche.',
   'dag': 'jour',
-  'dagen': 'jours',
   'maand': 'mois',
   'maanden': 'mois',
   'eigenaar': 'responsable',

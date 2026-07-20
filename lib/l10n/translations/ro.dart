@@ -1816,7 +1816,6 @@ const _dutchSourceAddRo = <String, String>{
   'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
       'Ce a găsit scanarea și despre care nimeni nu știa. Pentru fiecare descoperire, cât timp a fost accesibilă neobservată și cine răspunde acum de ea; cea mai lungă expunere este titlul.',
   'dag': 'zi',
-  'dagen': 'zile',
   'maand': 'lună',
   'maanden': 'luni',
   'eigenaar': 'responsabil',

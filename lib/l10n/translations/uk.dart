@@ -1816,7 +1816,6 @@ const _dutchSourceAddUk = <String, String>{
   'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
       'Що знайшло сканування і про що ніхто не знав. Для кожного відкриття, як довго воно було доступним непоміченим і хто за нього відповідає тепер; найдовше викриття — заголовок.',
   'dag': 'день',
-  'dagen': 'днів',
   'maand': 'місяць',
   'maanden': 'місяців',
   'eigenaar': 'відповідальний',

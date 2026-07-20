@@ -1802,7 +1802,6 @@ const _dutchSourceAddHu = <String, String>{
   'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
       'Amit a vizsgálat talált, és amiről senki sem tudott. Felfedezésenként, meddig volt észrevétlenül elérhető, és ki a felelőse most; a leghosszabb kitettség a főcím.',
   'dag': 'nap',
-  'dagen': 'nap',
   'maand': 'hónap',
   'maanden': 'hónap',
   'eigenaar': 'felelős',

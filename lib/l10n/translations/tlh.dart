@@ -1773,7 +1773,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
       'nuq tu\' HoHwI\'; vaj Sovbe\'lu\'pu\'. tu\'bogh Doch Hoch: nuqDaq legh\'be\'lu\' \'ej \'Iv pIn DaH; poH tIq law\' nab.',
   'dag': 'jaj',
-  'dagen': 'jaj',
   'maand': 'jar',
   'maanden': 'jar',
   'eigenaar': 'pIn',

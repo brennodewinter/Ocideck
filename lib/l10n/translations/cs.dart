@@ -1801,7 +1801,6 @@ const _dutchSourceAddCs = <String, String>{
   'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
       'Co sken našel a o čem nikdo nevěděl. U každého objevu, jak dlouho byl dostupný nepovšimnut a kdo je nyní vlastníkem; nejdelší vystavení je titulek.',
   'dag': 'den',
-  'dagen': 'dní',
   'maand': 'měsíc',
   'maanden': 'měsíců',
   'eigenaar': 'vlastník',

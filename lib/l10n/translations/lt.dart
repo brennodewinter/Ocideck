@@ -1806,7 +1806,6 @@ const _dutchSourceAddLt = <String, String>{
   'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
       'Ką nuskaitymas rado, apie ką niekas nežinojo. Kiekvienam atradimui, kiek ilgai jis buvo pasiekiamas nepastebėtas ir kas dabar už jį atsakingas; ilgiausia ekspozicija yra antraštė.',
   'dag': 'diena',
-  'dagen': 'dienų',
   'maand': 'mėnuo',
   'maanden': 'mėnesių',
   'eigenaar': 'atsakingas',

@@ -937,7 +937,6 @@ const _dutchSourceAddEn = {
   'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
       'What the scan found that nobody knew they had. Per discovery, how long it was reachable unnoticed and who owns it now; the longest exposure is the headline.',
   'dag': 'day',
-  'dagen': 'days',
   'maand': 'month',
   'maanden': 'months',
   'eigenaar': 'owner',

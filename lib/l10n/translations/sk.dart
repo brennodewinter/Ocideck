@@ -1805,7 +1805,6 @@ const _dutchSourceAddSk = <String, String>{
   'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
       'Čo sken našiel a o čom nikto nevedel. Pri každom objave, ako dlho bol dostupný nepovšimnutý a kto je teraz vlastníkom; najdlhšie vystavenie je titulok.',
   'dag': 'deň',
-  'dagen': 'dní',
   'maand': 'mesiac',
   'maanden': 'mesiacov',
   'eigenaar': 'vlastník',

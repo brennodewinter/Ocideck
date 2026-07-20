@@ -755,7 +755,6 @@ const _dutchSourceAddPap = {
   'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
       'Loke e skan a hañá ku ningun hende tabata sa ku e tabatin. Pa kada deskubrimentu kuantu tempu e tabata alkansabel sin ser notá i ken ta su doño awor; e eksposishon mas largu ta e kabes.',
   'dag': 'dia',
-  'dagen': 'dianan',
   'maand': 'luna',
   'maanden': 'lunanan',
   'eigenaar': 'doño',

@@ -1821,7 +1821,6 @@ const _dutchSourceAddBg = <String, String>{
   'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
       'Какво откри сканирането, за което никой не знаеше. За всяко откритие колко дълго е било достъпно незабелязано и кой отговаря за него сега; най-дългата експозиция е заглавието.',
   'dag': 'ден',
-  'dagen': 'дни',
   'maand': 'месец',
   'maanden': 'месеца',
   'eigenaar': 'отговорник',

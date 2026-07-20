@@ -1805,7 +1805,6 @@ const _dutchSourceAddHr = <String, String>{
   'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
       'Što je skeniranje pronašlo, a nitko nije znao da ima. Po otkriću, koliko je dugo bilo dostupno neopaženo i tko je sada vlasnik; najduža izloženost je naslov.',
   'dag': 'dan',
-  'dagen': 'dana',
   'maand': 'mjesec',
   'maanden': 'mjeseci',
   'eigenaar': 'vlasnik',
