@@ -137,8 +137,14 @@ The optional AI assistant does nothing until you enable it under
   confirmation), and is **blocked entirely on the web build**.
 
 If a request isn't clearly permitted by your settings, it is refused before any
-network call is made. Requests send only the specific item you asked about (for
-example, one image for alt-text), not your whole deck.
+network call is made. A request never sends your whole deck — only what the task
+needs: one image for alt-text, or the single finding you are editing (all of its
+fields, as grounding context) when the finding assistant drafts a field. And that
+text context does not leave as you typed it: it is first run through the same
+privacy projection every other outbound path uses, so anything the scanner flags
+as personal data is redacted before it is sent. The technical identifiers a
+finding needs to make sense — its CVSS vector, CWE and CVE ids — are not personal
+data and are left intact.
 
 ## Controls for sharing safely
 
