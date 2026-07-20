@@ -19,6 +19,7 @@ const _knownClassTokens = {
   'cockpit',
   'question',
   'timeline',
+  'scorecard',
   'finding',
   'findings-summary',
   'checklist',

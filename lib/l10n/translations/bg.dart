@@ -1804,6 +1804,24 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Scorecard': 'Карта с показатели',
+  'Cijfer toevoegen': 'Добавяне на показател',
+  'Cijfer verwijderen': 'Премахване на показател',
+  'Richting': 'Посока',
+  'ongewijzigd': 'без промяна',
+  'Lager is beter': 'По-ниско е по-добре',
+  'Hoger is beter': 'По-високо е по-добре',
+  'Neutraal': 'Неутрално',
+  'Nu': 'Сега',
+  'Vorige rapportage': 'Предишен отчет',
+  'Een scorecard toont hoogstens vijf cijfers; meer leest niet meer als een oordeel.':
+      'Картата с показатели показва най-много пет числа; повече вече не се чете като оценка.',
+  'Laat de vorige rapportage leeg als er nog geen meting was; de slide toont dan geen verandering.':
+      'Оставете предишния отчет празен, ако още не е имало измерване; слайдът тогава не показва промяна.',
+  'Bepaalt of een stijging groen of rood kleurt. De pijl volgt altijd de cijfers.':
+      'Определя дали покачването е зелено или червено. Стрелката винаги следва числата.',
+  'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
+      'Няколко ключови числа с числото от предишния отчет до тях, така че историята да я разказва промяната. За всяко посочете дали покачването е добра или лоша новина.',
   'Medicare-nummer — een zorggegeven': 'номер Medicare — здравни данни',
   'bedrijfsnummer': 'номер на дружество',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

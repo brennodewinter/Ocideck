@@ -1772,6 +1772,24 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Scorecard': 'Näitajate kaart',
+  'Cijfer toevoegen': 'Lisa näitaja',
+  'Cijfer verwijderen': 'Eemalda näitaja',
+  'Richting': 'Suund',
+  'ongewijzigd': 'muutumatu',
+  'Lager is beter': 'Madalam on parem',
+  'Hoger is beter': 'Kõrgem on parem',
+  'Neutraal': 'Neutraalne',
+  'Nu': 'Praegu',
+  'Vorige rapportage': 'Eelmine aruanne',
+  'Een scorecard toont hoogstens vijf cijfers; meer leest niet meer als een oordeel.':
+      'Näitajate kaart näitab kõige rohkem viit arvu; rohkem ei loe enam kui hinnang.',
+  'Laat de vorige rapportage leeg als er nog geen meting was; de slide toont dan geen verandering.':
+      'Jätke eelmine aruanne tühjaks, kui mõõtmist veel ei olnud; slaid ei näita siis muutust.',
+  'Bepaalt of een stijging groen of rood kleurt. De pijl volgt altijd de cijfers.':
+      'Määrab, kas tõus on roheline või punane. Nool järgib alati arve.',
+  'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
+      'Mõni põhinäitaja koos eelmise aruande arvuga kõrval, nii et lugu räägib muutus. Märkige iga arvu puhul, kas tõus on hea või halb uudis.',
   'Medicare-nummer — een zorggegeven': 'Medicare number — terviseandmed',
   'bedrijfsnummer': 'äriühingu number',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

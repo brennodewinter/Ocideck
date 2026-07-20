@@ -1788,6 +1788,24 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Scorecard': 'Karta ukazovateľov',
+  'Cijfer toevoegen': 'Pridať ukazovateľ',
+  'Cijfer verwijderen': 'Odstrániť ukazovateľ',
+  'Richting': 'Smer',
+  'ongewijzigd': 'bez zmeny',
+  'Lager is beter': 'Nižšie je lepšie',
+  'Hoger is beter': 'Vyššie je lepšie',
+  'Neutraal': 'Neutrálne',
+  'Nu': 'Teraz',
+  'Vorige rapportage': 'Predchádzajúca správa',
+  'Een scorecard toont hoogstens vijf cijfers; meer leest niet meer als een oordeel.':
+      'Karta ukazovateľov zobrazuje najviac päť čísel; viac sa už nečíta ako hodnotenie.',
+  'Laat de vorige rapportage leeg als er nog geen meting was; de slide toont dan geen verandering.':
+      'Nechajte predchádzajúcu správu prázdnu, ak meranie ešte nebolo; snímka potom nezobrazí zmenu.',
+  'Bepaalt of een stijging groen of rood kleurt. De pijl volgt altijd de cijfers.':
+      'Určuje, či je nárast zelený alebo červený. Šípka vždy nasleduje čísla.',
+  'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
+      'Niekoľko kľúčových čísel s číslom z predchádzajúcej správy vedľa, aby príbeh rozprávala zmena. Pri každom uveďte, či je nárast dobrá alebo zlá správa.',
   'Medicare-nummer — een zorggegeven': 'číslo Medicare — údaj o zdraví',
   'bedrijfsnummer': 'číslo spoločnosti',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

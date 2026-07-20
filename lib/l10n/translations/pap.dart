@@ -738,6 +738,24 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Scorecard': 'Karchi di resultado',
+  'Cijfer toevoegen': 'Agregá sifra',
+  'Cijfer verwijderen': 'Kita sifra',
+  'Richting': 'Direkshon',
+  'ongewijzigd': 'sin kambio',
+  'Lager is beter': 'Mas abou ta mihó',
+  'Hoger is beter': 'Mas haltu ta mihó',
+  'Neutraal': 'Neutral',
+  'Nu': 'Awor',
+  'Vorige rapportage': 'Rapòrt anterior',
+  'Een scorecard toont hoogstens vijf cijfers; meer leest niet meer als een oordeel.':
+      'Un karchi di resultado ta mustra maksimo sinku sifra; mas no ta lesa mas komo un huisio.',
+  'Laat de vorige rapportage leeg als er nog geen meting was; de slide toont dan geen verandering.':
+      'Laga e rapòrt anterior bashí si no tabatin midishon ainda; e slide lo no mustra kambio.',
+  'Bepaalt of een stijging groen of rood kleurt. De pijl volgt altijd de cijfers.':
+      'Ta determiná si un subida ta bèrdè òf kòrá. E flecha semper ta sigui e sifranan.',
+  'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
+      'Un par di sifra klave ku e sifra di e rapòrt anterior banda, pa e kambio konta e historia. Indiká pa kada un si subi ta bon òf malu notisia.',
   'Medicare-nummer — een zorggegeven': 'number di Medicare — un dato di salú',
   'bedrijfsnummer': 'number di kompania',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

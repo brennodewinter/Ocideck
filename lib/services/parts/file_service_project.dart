@@ -40,8 +40,12 @@ extension _FileServiceProject on FileService {
     // before the markdown is generated — so the .md that follows keeps only
     // the reference. This is what makes the conversion invisible.
     updatedDeck = await _externalizeCharts(updatedDeck, dir);
-    final chartWarnings = await _writeChartData(updatedDeck, dir);
-    await _pruneChartData(updatedDeck, dir);
+    final chartWarnings = await _writeChartData(
+      updatedDeck,
+      dir,
+      deckPath: filePath,
+    );
+    await _pruneChartData(updatedDeck, dir, deckPath: filePath);
     // TODO(chart-data): via de meldkanaal van openDeckDetailed aan de gebruiker
     // tonen; tot dat kanaal bestaat is loggen beter dan weggooien.
     if (chartWarnings.isNotEmpty) {

@@ -1783,6 +1783,24 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Scorecard': 'Kartica kazalnikov',
+  'Cijfer toevoegen': 'Dodaj kazalnik',
+  'Cijfer verwijderen': 'Odstrani kazalnik',
+  'Richting': 'Smer',
+  'ongewijzigd': 'nespremenjeno',
+  'Lager is beter': 'Nižje je bolje',
+  'Hoger is beter': 'Višje je bolje',
+  'Neutraal': 'Nevtralno',
+  'Nu': 'Zdaj',
+  'Vorige rapportage': 'Prejšnje poročilo',
+  'Een scorecard toont hoogstens vijf cijfers; meer leest niet meer als een oordeel.':
+      'Kartica kazalnikov prikaže največ pet številk; več se ne bere več kot sodba.',
+  'Laat de vorige rapportage leeg als er nog geen meting was; de slide toont dan geen verandering.':
+      'Pustite prejšnje poročilo prazno, če meritve še ni bilo; prosojnica takrat ne pokaže spremembe.',
+  'Bepaalt of een stijging groen of rood kleurt. De pijl volgt altijd de cijfers.':
+      'Določa, ali je porast zelen ali rdeč. Puščica vedno sledi številkam.',
+  'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
+      'Nekaj ključnih številk s številko prejšnjega poročila ob strani, da zgodbo pove sprememba. Pri vsaki navedite, ali je porast dobra ali slaba novica.',
   'Medicare-nummer — een zorggegeven':
       'številka Medicare — zdravstveni podatek',
   'bedrijfsnummer': 'številka družbe',

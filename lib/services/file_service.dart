@@ -203,14 +203,27 @@ class FileService {
   final List<String> Function() _libraryPaths;
   final CaptionService _captions = CaptionService();
 
-  /// Absoluut pad van een grafiekdatabestand → de data zoals die erin stond
-  /// toen hij werd gelezen ([_hydrateCharts]), canoniek als [ChartSpec.dataToJson].
+  /// Deck (zijn eigen `.md`, via [_deckChartKey]) → { absoluut pad van een
+  /// grafiekdatabestand → de data zoals die erin stond toen hij werd gelezen
+  /// ([_hydrateCharts]), canoniek als [ChartSpec.dataToJson] }.
   ///
   /// De ijklijn waartegen [_writeChartData] bepaalt of de gebruiker de grafiek
   /// heeft bewerkt. Zonder die ijklijn zou elk opslaan het bestand overschrijven
   /// en dus elke bewerking van buiten de app — het spreadsheet-werkpad — stil
   /// ongedaan maken.
-  final Map<String, String> _chartDataAtOpen = {};
+  ///
+  /// De buitenste laag is er omdat [FileService] één instantie is voor de hele
+  /// app ([fileServiceProvider]) terwijl er meerdere decks tegelijk openstaan.
+  /// Eén platte map maakte "de bestanden van dit deck" niet te onderscheiden
+  /// van "de bestanden van elk deck dat deze sessie heeft geopend", en
+  /// [_pruneChartData] wist dan het databestand van het ene deck bij het
+  /// opslaan van het andere. Twee decks in dezelfde map is genoeg om dat te
+  /// laten gebeuren, dus de sleutel is het deckpad en niet de projectmap.
+  final Map<String, Map<String, String>> _chartDataAtOpen = {};
+
+  /// De sleutel waaronder een deck zijn ijklijnen bewaart: zijn eigen `.md`,
+  /// genormaliseerd zodat twee schrijfwijzen van hetzelfde pad samenvallen.
+  static String _deckChartKey(String deckPath) => p.canonicalize(deckPath);
 
   FileService(
     this._md,
@@ -645,6 +658,7 @@ class FileService {
     var hydrated = await _hydrateCharts(
       await _hydrateImageCaptions(deck),
       chartWarnings,
+      deckPath: filePath,
     );
     // Re-attach separate sidecar layers when reading from disk.
     if (content == null) {

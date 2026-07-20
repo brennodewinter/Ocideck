@@ -1785,6 +1785,24 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Scorecard': 'Mutatókártya',
+  'Cijfer toevoegen': 'Mutató hozzáadása',
+  'Cijfer verwijderen': 'Mutató eltávolítása',
+  'Richting': 'Irány',
+  'ongewijzigd': 'változatlan',
+  'Lager is beter': 'Az alacsonyabb a jobb',
+  'Hoger is beter': 'A magasabb a jobb',
+  'Neutraal': 'Semleges',
+  'Nu': 'Most',
+  'Vorige rapportage': 'Előző jelentés',
+  'Een scorecard toont hoogstens vijf cijfers; meer leest niet meer als een oordeel.':
+      'Egy mutatókártya legfeljebb öt számot mutat; ennél több már nem olvasható ítéletként.',
+  'Laat de vorige rapportage leeg als er nog geen meting was; de slide toont dan geen verandering.':
+      'Hagyja üresen az előző jelentést, ha még nem volt mérés; a dia ekkor nem mutat változást.',
+  'Bepaalt of een stijging groen of rood kleurt. De pijl volgt altijd de cijfers.':
+      'Meghatározza, hogy egy növekedés zöld vagy piros színű. A nyíl mindig a számokat követi.',
+  'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
+      'Néhány kulcsszám az előző jelentés számával mellette, hogy a történetet a változás mondja el. Adja meg számonként, hogy a növekedés jó vagy rossz hír.',
   'Medicare-nummer — een zorggegeven': 'Medicare-szám — egészségügyi adat',
   'bedrijfsnummer': 'cégszám',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

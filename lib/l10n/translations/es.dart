@@ -735,6 +735,24 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Scorecard': 'Cuadro de resultados',
+  'Cijfer toevoegen': 'Añadir cifra',
+  'Cijfer verwijderen': 'Eliminar cifra',
+  'Richting': 'Dirección',
+  'ongewijzigd': 'sin cambios',
+  'Lager is beter': 'Menos es mejor',
+  'Hoger is beter': 'Más es mejor',
+  'Neutraal': 'Neutral',
+  'Nu': 'Ahora',
+  'Vorige rapportage': 'Informe anterior',
+  'Een scorecard toont hoogstens vijf cijfers; meer leest niet meer als een oordeel.':
+      'Un cuadro de resultados muestra como máximo cinco cifras; más ya no se lee como un juicio.',
+  'Laat de vorige rapportage leeg als er nog geen meting was; de slide toont dan geen verandering.':
+      'Deja vacío el informe anterior si aún no había medición; la diapositiva no mostrará ningún cambio.',
+  'Bepaalt of een stijging groen of rood kleurt. De pijl volgt altijd de cijfers.':
+      'Determina si una subida se colorea de verde o de rojo. La flecha siempre sigue las cifras.',
+  'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.':
+      'Unas pocas cifras clave junto a la cifra del informe anterior, para que el cambio cuente la historia. Indica en cada una si subir es una buena o una mala noticia.',
   'Medicare-nummer — een zorggegeven': 'número de Medicare — dato de salud',
   'bedrijfsnummer': 'número de sociedad',
   'zorgverzekeringsnummer (RAMQ) — een zorggegeven':

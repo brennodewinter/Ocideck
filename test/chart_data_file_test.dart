@@ -445,4 +445,41 @@ void main() {
     );
     expect((await serviceOf().openDeckDetailed(deckPath())).warnings, isEmpty);
   });
+
+  // De tegenhanger van 'deleting the chart cleans up its data file': opruimen
+  // moet wél gebeuren, maar alleen binnen het deck dat opslaat. Eén
+  // FileService bedient de hele app (fileServiceProvider), dus dit draait
+  // bewust op één instantie — dat delen is nu juist waar het misging.
+  test('opslaan raakt het databestand van een ander deck niet', () async {
+    final service = serviceOf();
+    final deckA = p.join(temp.path, 'a.md');
+    final deckB = p.join(temp.path, 'b.md');
+
+    await service.saveDeck(
+      deckWith(chartSlide('data/a-omzet.json', [120, 138])),
+      deckA,
+    );
+    await service.saveDeck(
+      deckWith(chartSlide('data/b-omzet.json', [7, 8])),
+      deckB,
+    );
+
+    // Beide decks staan open, zoals in twee tabbladen.
+    await service.openDeck(deckA);
+    final openedB = await service.openDeck(deckB);
+
+    // B opslaan mag niets van A aanraken: A's bestand ligt in dezelfde map,
+    // eindigt op .json, en is deze sessie gelezen — alleen de deck-sleutel
+    // houdt ze uit elkaar.
+    await service.saveDeck(openedB!, deckB);
+
+    expect(
+      File(p.join(temp.path, 'data', 'a-omzet.json')).existsSync(),
+      isTrue,
+    );
+    expect(specOf((await serviceOf().openDeck(deckA))!).series.single.data, [
+      120,
+      138,
+    ]);
+  });
 }

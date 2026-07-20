@@ -415,6 +415,7 @@ The first class determines (together with the content) the **slide type**:
 | Cockpit | `cockpit` | — |
 | Question | `question` | — |
 | Timeline | `timeline` | — |
+| Scorecard | `scorecard` | — |
 | Finding | `finding` | — |
 | Findings summary | `findings-summary` | — |
 | Checklist | `checklist` | — |
@@ -796,6 +797,39 @@ here" shows.
 
 > The reveal step (how many events are currently shown in step mode) is
 > **session-only** and never written to the file.
+
+**Scorecard** (`scorecard`) — a handful of headline figures, each with the figure
+from the previous report beside it, so a recurring report leads with what
+changed. Stored as a normal Markdown table (like `checklist` / `scope-matrix`) so
+it round-trips losslessly and a generator can write one without the app. The
+heading is the title:
+
+```markdown
+<!-- _class: scorecard -->
+# Sinds de vorige rapportage
+| Label | Value | Previous | Unit | Polarity |
+| --- | --- | --- | --- | --- |
+| Assets in beeld | 412 | 375 |  | neutral |
+| Open bevindingen | 96 | 120 |  | lower-better |
+| Gemiddeld openstaand | 62 | 73 | dagen | lower-better |
+```
+
+- **`Value` / `Previous`** are the figure now and the figure it replaces. The
+  *previous value* is stored rather than a computed delta, so the difference
+  always agrees with the two numbers and the file stays verifiable. `Previous` is
+  written as an **empty cell** when there is no earlier measurement — distinct
+  from a zero — and the slide then shows no change at all, rather than claiming a
+  figure held steady when it was never measured before.
+- **`Polarity`** is one of the stable English tokens `lower-better`,
+  `higher-better` or `neutral` (an unrecognised value reads as `neutral`). It
+  decides only the **colour** of a change; the direction of the arrow always
+  follows the numbers. The deck cannot derive this — more assets in view is good
+  news when you are inventorying and bad news when you are decommissioning.
+- **`Unit`** is optional free text shown beside the figure.
+- At most **five** rows are kept, on both read and write. Numbers accept a comma
+  as the decimal mark when unambiguous (one comma, no dot); thousands separators
+  are refused rather than guessed at. A row that is entirely blank is dropped at
+  both ends, so writing and reading agree.
 
 **Finding** (`finding`) — a pentest finding's **header card**, stored as plain,
 human-readable Markdown so it reads like a report page rather than a machine
@@ -1214,11 +1248,12 @@ come back with different data filenames than it left with. The values ride
 along unchanged; only the paths move.
 
 On save, data files that nothing references any more — from a deleted chart,
-say — are removed. Eligibility is deliberately narrow: only a `.json` that this
-running session itself read or wrote, and only inside the deck's own folder.
+say — are removed. Eligibility is deliberately narrow: only a `.json` that
+**this deck** read or wrote in this session, and only inside its own folder.
 Anything else in `data/`, and every `.csv`, is left alone. A file OciDeck has
 never touched is never deleted, so a folder shared with other tooling survives
-a save.
+a save — and so does the data file of another deck that happens to live in the
+same folder, which is why the bookkeeping is per deck rather than per folder.
 
 **Editing.** Both directions work. The grid in the app edits a linked chart just
 like an inline one and writes the file back on save; the file can equally be
@@ -1403,7 +1438,7 @@ not model is not reported.
 | **Comment** | warning | Comment without `_class:`, `_style:`, `ocideck_...`, `skip`, `tlp:`, or `advance:`. |
 | **Code blocks** | error | Odd number of ` ``` ` lines (not closed). |
 | **`_class`** | error | Malformed `<!-- _class: ... -->`. |
-| **`_class`** | warning | Unknown token in `_class` (known: `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `logo-safe`, `no-logo`, `no-footer`, `table-editable`). |
+| **`_class`** | warning | Unknown token in `_class` (known: `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `scorecard`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `logo-safe`, `no-logo`, `no-footer`, `table-editable`). |
 | **Slide metadata** | error | Unknown `<!-- tlp: ... -->`, non-numeric `<!-- advance: ... -->`, or invalid `<!-- ocideck_list_style: ... -->` (`bullets`, `numbered`, `checklist`, `richText`). |
 | **Two columns** | error | Invalid base64/JSON in `ocideck_two_bullets_*` comments. |
 | **Images** | error | `![...](...` without closing `)`. |
