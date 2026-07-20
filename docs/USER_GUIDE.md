@@ -338,7 +338,8 @@ bar, stacked bar, horizontal stacked bar, combo, line, area, pie, donut,
 spider/radar, scatter, waterfall, or heatmap/risk matrix), **cockpit** (a
 dashboard of aviation-style instrument gauges),
 **question** (an interactive quiz slide), **timeline** (an animated timeline of
-dated events), and
+dated events), **scorecard** (a few headline figures, each beside the figure from
+the previous report), and
 **free Markdown**. Each card in the chooser shows a miniature
 wireframe of the layout, and the dialog works entirely with the keyboard
 (`Tab`/`Enter` to choose, `Esc` to cancel). Each type has a dedicated editor on
@@ -585,6 +586,42 @@ Two display options sit above the event list:
 The timeline picks up the active style profile (accent colour, fonts and slide
 background), so it matches the rest of the deck. Events are stored as an ordinary
 Markdown list, so the slide stays readable and Marp-compatible in the `.md` file.
+
+### Scorecard slides
+
+A scorecard shows up to **five headline figures**, each with the figure from the
+previous report beside it. It is built for a report you send every month or
+quarter: the number itself is context, and the *change* is the news.
+
+Per figure you fill in:
+
+- a **label** — what it is, in plain words;
+- **Now** — the figure in this report;
+- **Previous report** — the same figure last time. Leave it **empty** when there
+  was no earlier measurement. The slide then shows the number with no change
+  beside it, instead of claiming it held steady;
+- an optional **unit** ("days", "%"), shown next to the figure;
+- a **direction**: *Lower is better*, *Higher is better*, or *Neutral*.
+
+That last one is the one worth pausing on. OciDeck cannot know whether a rise is
+good news — more assets in view is progress when you are inventorying and a
+problem when you are decommissioning. So direction sets only the **colour** of a
+change; the arrow itself always follows the numbers. A fall stays a downward
+arrow whether it is coloured green or red. Choose *Neutral* and the change is
+still shown, just without a verdict attached.
+
+Where the change has no colour to carry, it is still **signed** (`+37`, `-24`),
+so the direction survives a greyscale print. An unchanged figure says
+"unchanged" rather than showing a zero.
+
+The scorecard follows the deck's style profile for background, text and fonts.
+Green and red are the deliberate exception: they mean something rather than
+decorate, so they stay recognisable whatever the house palette is — the same
+reasoning as the heatmap's own colour ramp.
+
+Figures are stored as an ordinary Markdown table, so the slide stays readable in
+the `.md` file and a script that already produces your numbers can write the
+table directly. See [FILE_FORMAT.md](FILE_FORMAT.md) §5 for the columns.
 
 ### Video slides
 

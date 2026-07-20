@@ -513,21 +513,26 @@ class SlideTypePreviewPainter extends CustomPainter {
           _bar(canvas, 14, y, 132, 10, r == 0 ? _accent : _soft, radius: 3);
         }
       case SlideType.scorecard:
-        // Heading plus three tiles, each a label, the figure, and the small
-        // change line underneath that carries the news.
-        _bar(canvas, 14, 12, 72, 9, _ink);
-        for (var i = 0; i < 3; i++) {
-          final x = 14.0 + i * 47;
-          _bar(canvas, x, 32, 26, 5, _soft, radius: 2);
-          _bar(canvas, x, 43, 38, 14, _ink, radius: 3);
-          _bar(canvas, x, 63, 18, 6, _accent, radius: 2);
-        }
+        _paintScorecardWireframe(canvas);
       case SlideType.finding:
       case SlideType.findingsSummary:
       case SlideType.checklist:
       case SlideType.scopeMatrix:
       case SlideType.signOff:
         _paintSecurityWireframe(canvas, type);
+    }
+  }
+
+  /// Heading plus three tiles, each a label, the figure, and the small change
+  /// line underneath that carries the news. Split out of [paint] for the same
+  /// reason as [_paintSecurityWireframe]: the length ratchet.
+  void _paintScorecardWireframe(Canvas canvas) {
+    _bar(canvas, 14, 12, 72, 9, _ink);
+    for (var i = 0; i < 3; i++) {
+      final x = 14.0 + i * 47;
+      _bar(canvas, x, 32, 26, 5, _soft, radius: 2);
+      _bar(canvas, x, 43, 38, 14, _ink, radius: 3);
+      _bar(canvas, x, 63, 18, 6, _accent, radius: 2);
     }
   }
 
