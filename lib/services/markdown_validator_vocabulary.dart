@@ -20,6 +20,7 @@ const _knownClassTokens = {
   'question',
   'timeline',
   'scorecard',
+  'actions',
   'finding',
   'findings-summary',
   'checklist',

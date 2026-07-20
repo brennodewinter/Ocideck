@@ -416,6 +416,7 @@ The first class determines (together with the content) the **slide type**:
 | Question | `question` | — |
 | Timeline | `timeline` | — |
 | Scorecard | `scorecard` | — |
+| Actions | `actions` | — |
 | Finding | `finding` | — |
 | Findings summary | `findings-summary` | — |
 | Checklist | `checklist` | — |
@@ -830,6 +831,39 @@ heading is the title:
   as the decimal mark when unambiguous (one comma, no dot); thousands separators
   are refused rather than guessed at. A row that is entirely blank is dropped at
   both ends, so writing and reading agree.
+
+**Actions** (`actions`) — what has to happen, who carries it, by when, and what
+is being asked of the room. Stored as a normal Markdown table, like `scorecard`:
+
+```markdown
+<!-- _class: actions -->
+# Wat we vragen
+| Action | Owner | Due | Status | Kind | Since |
+| --- | --- | --- | --- | --- | --- |
+| acc-oud.example uit de lucht halen | Team Platform | 2026-08-15 | open | decision | 2026-05-12 |
+| Certificaatvernieuwing automatiseren | Infra | 2026-09-01 | in-progress | info | 2026-06-14 |
+| Eigenaar aanwijzen voor 12 wees-assets |  |  | open | escalation | 2026-04-10 |
+```
+
+- **`Kind`** is one of the stable English tokens `info`, `decision` or
+  `escalation` (an unrecognised value reads as `info`). It is the column the
+  slide is for: a decision buried among status updates does not get taken. Only
+  a decision or escalation is labelled when rendered — an "info" chip on every
+  other row would spend ink saying nothing is required.
+- **`Status`** is `open`, `in-progress` or `done` (unrecognised reads as
+  `open`). Note there is **no `overdue` value**: lateness is derived from `Due`
+  against the day the deck is shown, so a deck presented two months later stops
+  claiming everything is on schedule. A `done` action is never late, however
+  late it was.
+- **`Due`** and **`Since`** are ISO `yyyy-mm-dd`, or an empty cell. `Since` is
+  when the action was first put on the list — what makes an item carried across
+  three reports visible as such.
+- Only the ISO date form is read. `05-08-2026` is two different days depending
+  on who typed it, and a deadline is a poor place to guess; an unreadable cell
+  leaves the date empty rather than inventing one.
+- At most **eight** rows are kept, on both read and write. Rows are **not**
+  re-ordered by kind — the author's order is the slide's order. A row that is
+  entirely blank is dropped at both ends, so writing and reading agree.
 
 **Finding** (`finding`) — a pentest finding's **header card**, stored as plain,
 human-readable Markdown so it reads like a report page rather than a machine
@@ -1438,7 +1472,7 @@ not model is not reported.
 | **Comment** | warning | Comment without `_class:`, `_style:`, `ocideck_...`, `skip`, `tlp:`, or `advance:`. |
 | **Code blocks** | error | Odd number of ` ``` ` lines (not closed). |
 | **`_class`** | error | Malformed `<!-- _class: ... -->`. |
-| **`_class`** | warning | Unknown token in `_class` (known: `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `scorecard`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `logo-safe`, `no-logo`, `no-footer`, `table-editable`). |
+| **`_class`** | warning | Unknown token in `_class` (known: `title`, `section`, `two-bullets`, `split`, `quote`, `video`, `table`, `code`, `chart`, `scorecard`, `actions`, `finding`, `findings-summary`, `checklist`, `scope-matrix`, `sign-off`, `logo-safe`, `no-logo`, `no-footer`, `table-editable`). |
 | **Slide metadata** | error | Unknown `<!-- tlp: ... -->`, non-numeric `<!-- advance: ... -->`, or invalid `<!-- ocideck_list_style: ... -->` (`bullets`, `numbered`, `checklist`, `richText`). |
 | **Two columns** | error | Invalid base64/JSON in `ocideck_two_bullets_*` comments. |
 | **Images** | error | `![...](...` without closing `)`. |

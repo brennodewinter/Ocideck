@@ -130,8 +130,8 @@ void main() {
     await tester.tap(find.byTooltip('Alfabetisch sorteren'));
     await tester.pumpAndSettle();
 
-    // Alphabetically by Dutch label, "Alleen Bullets" comes first.
-    expect(visibleTypes(tester).first, SlideType.bullets);
+    // Alphabetically by Dutch label, "Acties en besluiten" comes first.
+    expect(visibleTypes(tester).first, SlideType.actions);
   });
 
   testWidgets('type cards are labelled buttons (WCAG name/role)', (

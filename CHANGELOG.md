@@ -30,6 +30,33 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   van een waarschuwing, waarmee de export erop kan blokkeren. Standaard uit,
   omdat aanzetten verandert wat een bestaande instelling betekent. Alleen zekere
   bevindingen schuiven mee.
+- **Een nieuw slidetype: acties en besluiten.** Tot acht regels met wat er moet
+  gebeuren, wie het doet, wanneer het af moet, en — het veld waar het type om
+  bestaat — wat u van de zaal vraagt: ter informatie, besluit gevraagd, of
+  escalatie.
+
+  Alleen een besluit of escalatie krijgt een label op de slide. De
+  informatieregels blijven bewust onbenoemd: een besluit dat tussen de
+  mededelingen staat, wordt geen besluit genomen, en het oog hoort naar de
+  regels te gaan die iets nodig hebben.
+
+  "Te laat" bestaat niet als status die u zelf zet. OciDeck leidt het af uit de
+  deadline tegen de dag waarop het deck getoond wordt, dus een presentatie die
+  twee maanden later opnieuw langskomt, markeert haar eigen verlopen deadlines
+  in plaats van te blijven beweren dat alles op schema ligt. Een afgeronde actie
+  wordt nooit als te laat gemarkeerd, hoe laat ze ook was — de slide meldt de
+  stand, niet de geschiedenis. Ze blijft wel staan, doorgestreept: dát ze af is,
+  is het nieuws.
+
+  Er is ook een veld **op de lijst sinds**. Dat maakt van een terugkerende
+  rapportage een dossier in plaats van een frisse lijst: een punt dat drie
+  rapportages meegaat, is een ander gesprek dan een punt van vorige week.
+
+  Datums typt u als jjjj-mm-dd. Een andere schrijfwijze wordt geweigerd en niet
+  geraden: 05-08-2026 is twee verschillende dagen afhankelijk van wie het
+  opschreef, en bij een deadline is er drie maanden naast zitten geen kleinigheid.
+
+  De volgorde die u kiest blijft staan; de slide sorteert nooit achter uw rug om.
 - **Een nieuw slidetype: de scorecard.** Tot vijf kerncijfers, elk met het cijfer
   van de vorige rapportage ernaast. Bedoeld voor een rapportage die elke maand of
   elk kwartaal terugkomt: het getal zelf is context, de verandering is het
