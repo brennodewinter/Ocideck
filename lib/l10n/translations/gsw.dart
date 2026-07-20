@@ -1785,6 +1785,14 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'oud btw-nummer (bevat een BSN)':
+      'alti MWST-Nummere (mit ere Persoonenummere drin)',
+  'vreemdelingennummer (V-nummer)': 'Uusländernummere (V-Nummere)',
+  'administratienummer (A-nummer)': 'Verwaltigsnummere (A-Nummere)',
+  'BIG-nummer van een zorgverlener':
+      'Registriernummere vomene Pflegepersonal (BIG)',
+  'AGB-code': 'Leischtigserbringer-Code (AGB)',
+  'proces-verbaalnummer': 'Aktezeiche vonere Aazeig',
   'Scorecard': 'Scorecard',
   'Cijfer toevoegen': 'Chennzahl hinzuefüege',
   'Cijfer verwijderen': 'Chennzahl entferne',

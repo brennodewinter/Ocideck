@@ -1780,6 +1780,14 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'oud btw-nummer (bevat een BSN)':
+      'gammelt momsnummer (indeholder personnummer)',
+  'vreemdelingennummer (V-nummer)': 'udlændingenummer (V-nummer)',
+  'administratienummer (A-nummer)': 'administrationsnummer (A-nummer)',
+  'BIG-nummer van een zorgverlener':
+      'registreringsnummer for sundhedspersonale (BIG)',
+  'AGB-code': 'kode for sundhedsudbyder (AGB)',
+  'proces-verbaalnummer': 'journalnummer på politianmeldelse',
   'Scorecard': 'Nøgletalskort',
   'Cijfer toevoegen': 'Tilføj nøgletal',
   'Cijfer verwijderen': 'Fjern nøgletal',

@@ -204,6 +204,112 @@ final List<NationalIdentifierRule> euIdentifierRules = [
     contextWords: ['cpr', 'cpr-nr', 'personnummer', 'cprnummer'],
     confidence: PrivacyConfidence.likely,
   ),
+  // ── Nederland ─────────────────────────────────────────────────────────────
+  //
+  // Het BSN zelf zit niet hier maar als eigen detector in `privacy_scanner.dart`,
+  // omdat het twee zekerheden kent (met en zonder contextwoord). Deze zes zijn
+  // de nummers eromheen: één met een echte checksum, vijf zonder.
+  //
+  // Dat verschil is het hele verhaal. Alleen `nl.btw_id_legacy` mag zonder
+  // contextwoord vuren, want daar draagt de 11-proef het bewijs. De andere vijf
+  // zijn kale cijferreeksen — acht, tien of elf cijfers — en die staan met
+  // duizenden tegelijk in elk zakelijk deck. Zonder contextpoort zou elk
+  // ordernummer een treffer zijn, en dan zet de gebruiker de controle uit.
+  NationalIdentifierRule(
+    id: 'nl.btw_id_legacy',
+    country: 'NL',
+    pattern: RegExp(r'\bNL\d{9}B\d{2}\b', caseSensitive: false),
+    // De 11-proef doet hier écht werk: hij scheidt het oude nummer (dat het BSN
+    // ís) van het nieuwe (dat niets zegt). Geen contextwoord nodig — de vorm
+    // `NL…B..` komt nergens anders voor.
+    validate: isValidNlBtwIdLegacy,
+    confidence: PrivacyConfidence.certain,
+  ),
+  NationalIdentifierRule(
+    id: 'nl.vnummer',
+    country: 'NL',
+    // Tien cijfers beginnend met een 2. Er is geen gepubliceerde checksum, dus
+    // de vorm draagt niets: `2024123456` is net zo goed een ordernummer.
+    pattern: RegExp(r'(?<!\d)2\d{9}(?!\d)'),
+    contextWords: [
+      'v-nummer',
+      'vnummer',
+      'v nummer',
+      'vreemdeling',
+      'vreemdelingennummer',
+      'ind',
+    ],
+    confidence: PrivacyConfidence.likely,
+  ),
+  NationalIdentifierRule(
+    id: 'nl.anummer',
+    country: 'NL',
+    pattern: RegExp(r'(?<!\d)\d{10}(?!\d)'),
+    // **Bewust geen checksum.** De catalogus schreef "11-proef-variant" voor,
+    // maar geen publieke bron van RvIG koppelt een controlegetal aan het
+    // A-nummer; wat wél gedocumenteerd is, is de 11-proef over tien cijfers voor
+    // *bankrekeningnummers*. Die hier toepassen zou een gok zijn, en de fout
+    // valt de verkeerde kant op: een te strenge controle wijst échte A-nummers
+    // af, en een gemist persoonsnummer is duurder dan een melding te veel.
+    // Zelfde afweging als bij `dk.cpr` hierboven.
+    //
+    // Wat overblijft is tien kale cijfers, dus de contextpoort draagt alles.
+    contextWords: ['a-nummer', 'anummer', 'a nummer', 'administratienummer'],
+    confidence: PrivacyConfidence.likely,
+  ),
+  NationalIdentifierRule(
+    id: 'nl.big',
+    country: 'NL',
+    pattern: RegExp(r'(?<!\d)\d{11}(?!\d)'),
+    contextWords: ['big-nummer', 'bignummer', 'big nummer', 'big-register'],
+    // Een BIG-nummer identificeert een zorgverlener in zijn beroepsrol. Dat is
+    // een persoonsgegeven, maar geen bijzonder persoonsgegeven: het register is
+    // openbaar en juist bedoeld om geraadpleegd te worden. Vandaar `likely` en
+    // niet hoger, ook mét contextwoord.
+    confidence: PrivacyConfidence.likely,
+  ),
+  NationalIdentifierRule(
+    id: 'nl.agb',
+    country: 'NL',
+    pattern: RegExp(r'(?<!\d)\d{8}(?!\d)'),
+    contextWords: ['agb', 'agb-code', 'agbcode', 'vektis'],
+    // Acht cijfers is de kortste reeks in dit hele bestand, en dus de ruizigste:
+    // elk artikelnummer, elke datum zonder scheidingstekens (`20250131`) heeft
+    // deze vorm. Een AGB-code hoort bovendien vaak bij een práktijk en niet bij
+    // een persoon. Daarom `possible` — zichtbaar in het paneel, maar het
+    // onderbreekt niemand en het escaleert niets.
+    confidence: PrivacyConfidence.possible,
+  ),
+  NationalIdentifierRule(
+    id: 'nl.pv_nummer',
+    country: 'NL',
+    // Er is geen landelijk formaat: elk korps schrijft het anders, en BVH-,
+    // mutatie- en PV-nummers lopen door elkaar. Wat ze delen is een reeks van
+    // acht tot twintig cijfers, eventueel met streepjes, en een letterprefix dat
+    // er soms voor staat (`PL1300-…`). Dit patroon accepteert allebei.
+    pattern: RegExp(
+      r'\b(?:[A-Z]{2}\d{4}[- ])?\d{4,12}(?:-\d{1,8}){0,2}\b',
+      caseSensitive: false,
+    ),
+    contextWords: [
+      'proces-verbaal',
+      'procesverbaal',
+      'pv-nummer',
+      'pvnummer',
+      'bvh',
+      'mutatienummer',
+      'dossiernummer politie',
+    ],
+    // Een PV-nummer verwijst naar een strafrechtelijk dossier, en dat is zwaar.
+    // Maar het patroon is zó ruim dat de contextpoort al het werk doet, en een
+    // los nummer met "dossier" ernaast kan van alles zijn. Vandaar `possible`.
+    //
+    // Let op: dit landt in de familie `identifier`, niet in `criminal` — de lus
+    // in `privacy_scanner.dart` zet elke nationale regel op `identifier`. Wie
+    // dit ooit onder de strafrechtelijke familie wil hangen, moet daar beginnen
+    // en niet hier.
+    confidence: PrivacyConfidence.possible,
+  ),
 ];
 
 /// De landcodes waarvoor er regels zijn.

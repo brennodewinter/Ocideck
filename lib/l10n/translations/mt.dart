@@ -1803,6 +1803,13 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'oud btw-nummer (bevat een BSN)': 'numru tal-VAT antik (fih numru personali)',
+  'vreemdelingennummer (V-nummer)': 'numru ta\' barrani (numru V)',
+  'administratienummer (A-nummer)': 'numru amministrattiv (numru A)',
+  'BIG-nummer van een zorgverlener':
+      'numru ta\' reġistrazzjoni ta\' professjonist tas-saħħa (BIG)',
+  'AGB-code': 'kodiċi ta\' fornitur tal-kura tas-saħħa (AGB)',
+  'proces-verbaalnummer': 'numru tar-rapport tal-pulizija',
   'Scorecard': 'Karta tal-punteġġ',
   'Cijfer toevoegen': 'Żid ċifra',
   'Cijfer verwijderen': 'Neħħi ċ-ċifra',

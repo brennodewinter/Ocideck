@@ -432,6 +432,12 @@ String _formatImagePrivacy(AppLocalizations l10n, SlideQualityIssue issue) {
 String privacyRuleLabel(AppLocalizations l10n, String ruleId) {
   return switch (ruleId) {
     'nl.bsn' => l10n.d('burgerservicenummer (BSN)'),
+    'nl.btw_id_legacy' => l10n.d('oud btw-nummer (bevat een BSN)'),
+    'nl.vnummer' => l10n.d('vreemdelingennummer (V-nummer)'),
+    'nl.anummer' => l10n.d('administratienummer (A-nummer)'),
+    'nl.big' => l10n.d('BIG-nummer van een zorgverlener'),
+    'nl.agb' => l10n.d('AGB-code'),
+    'nl.pv_nummer' => l10n.d('proces-verbaalnummer'),
     'fin.iban' => l10n.d('bankrekeningnummer (IBAN)'),
     // Zelfde begrip voor de gebruiker als een IBAN: er staat een
     // bankrekening op de slide. Het onderscheid tussen de twee notaties is

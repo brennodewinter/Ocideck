@@ -34,10 +34,6 @@ import 'package:ocideck/services/privacy/privacy_world_rules.dart';
 /// rood: dat is het moment om hem eruit te halen, en het is precies het moment
 /// waarop je het anders zou vergeten.
 const Set<String> geplandeRegels = {
-  // Nederlandse nummers uit §3-A die nog niet aan de beurt zijn geweest.
-  'nl.big', 'nl.vnummer', 'nl.anummer', 'nl.agb', 'nl.btw_id_legacy',
-  'nl.pv_nummer',
-
   // EU-landen waarvoor nog geen pakket is gebouwd, plus twee losse nummers in
   // landen die al wél een pakket hebben.
   'cy.id', 'lt.ak', 'lu.matricule', 'lv.pk', 'mt.id', 'de.svnr', 'es.nie',

@@ -738,6 +738,13 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'oud btw-nummer (bevat een BSN)':
+      'alte USt-IdNr. (enthält eine Personennummer)',
+  'vreemdelingennummer (V-nummer)': 'Ausländernummer (V-Nummer)',
+  'administratienummer (A-nummer)': 'Verwaltungsnummer (A-Nummer)',
+  'BIG-nummer van een zorgverlener': 'Registriernummer einer Pflegekraft (BIG)',
+  'AGB-code': 'Leistungserbringer-Code (AGB)',
+  'proces-verbaalnummer': 'Aktenzeichen einer Anzeige',
   'Scorecard': 'Scorecard',
   'Cijfer toevoegen': 'Kennzahl hinzufügen',
   'Cijfer verwijderen': 'Kennzahl entfernen',

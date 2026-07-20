@@ -1772,6 +1772,13 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'oud btw-nummer (bevat een BSN)':
+      'vana käibemaksukohustuslase number (sisaldab isikukoodi)',
+  'vreemdelingennummer (V-nummer)': 'välismaalase number (V-number)',
+  'administratienummer (A-nummer)': 'haldusnumber (A-number)',
+  'BIG-nummer van een zorgverlener': 'tervishoiutöötaja registrinumber (BIG)',
+  'AGB-code': 'tervishoiuteenuse osutaja kood (AGB)',
+  'proces-verbaalnummer': 'politsei protokolli number',
   'Scorecard': 'Näitajate kaart',
   'Cijfer toevoegen': 'Lisa näitaja',
   'Cijfer verwijderen': 'Eemalda näitaja',

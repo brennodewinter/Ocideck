@@ -1797,6 +1797,13 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'oud btw-nummer (bevat een BSN)':
+      'numerus vectigalis antiquus (numerum civilem continens)',
+  'vreemdelingennummer (V-nummer)': 'numerus peregrini (numerus V)',
+  'administratienummer (A-nummer)': 'numerus administrationis (numerus A)',
+  'BIG-nummer van een zorgverlener': 'numerus curatoris valetudinis (BIG)',
+  'AGB-code': 'codex curatoris valetudinis (AGB)',
+  'proces-verbaalnummer': 'numerus actorum vigilum',
   'Scorecard': 'Tabula numerorum',
   'Cijfer toevoegen': 'Numerum addere',
   'Cijfer verwijderen': 'Numerum removere',

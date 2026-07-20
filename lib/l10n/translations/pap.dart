@@ -738,6 +738,14 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'oud btw-nummer (bevat een BSN)':
+      'number di BTW bieu (ta kontené un number personal)',
+  'vreemdelingennummer (V-nummer)': 'number di stranhero (number V)',
+  'administratienummer (A-nummer)': 'number di administrashon (number A)',
+  'BIG-nummer van een zorgverlener':
+      'number di registrashon di un profeshonal di salú (BIG)',
+  'AGB-code': 'kódigo di proveedor di kuido (AGB)',
+  'proces-verbaalnummer': 'number di rapòrt di polis',
   'Scorecard': 'Karchi di resultado',
   'Cijfer toevoegen': 'Agregá sifra',
   'Cijfer verwijderen': 'Kita sifra',

@@ -1811,6 +1811,14 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'oud btw-nummer (bevat een BSN)':
+      'número de IVA antigo (contém um número nacional)',
+  'vreemdelingennummer (V-nummer)': 'número de estrangeiro (número V)',
+  'administratienummer (A-nummer)': 'número de administração (número A)',
+  'BIG-nummer van een zorgverlener':
+      'número de registo de um profissional de saúde (BIG)',
+  'AGB-code': 'código de prestador de cuidados (AGB)',
+  'proces-verbaalnummer': 'número de auto de notícia',
   'Scorecard': 'Painel de indicadores',
   'Cijfer toevoegen': 'Adicionar indicador',
   'Cijfer verwijderen': 'Remover indicador',

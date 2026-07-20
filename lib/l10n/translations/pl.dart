@@ -1793,6 +1793,13 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'oud btw-nummer (bevat een BSN)': 'stary numer VAT (zawiera numer osobowy)',
+  'vreemdelingennummer (V-nummer)': 'numer cudzoziemca (numer V)',
+  'administratienummer (A-nummer)': 'numer administracyjny (numer A)',
+  'BIG-nummer van een zorgverlener':
+      'numer rejestracyjny pracownika ochrony zdrowia (BIG)',
+  'AGB-code': 'kod świadczeniodawcy (AGB)',
+  'proces-verbaalnummer': 'numer protokołu policyjnego',
   'Scorecard': 'Karta wyników',
   'Cijfer toevoegen': 'Dodaj wskaźnik',
   'Cijfer verwijderen': 'Usuń wskaźnik',

@@ -1785,6 +1785,13 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'oud btw-nummer (bevat een BSN)': 'régi adószám (személyi számot tartalmaz)',
+  'vreemdelingennummer (V-nummer)': 'külföldi azonosító szám (V-szám)',
+  'administratienummer (A-nummer)': 'nyilvántartási szám (A-szám)',
+  'BIG-nummer van een zorgverlener':
+      'egészségügyi dolgozó nyilvántartási száma (BIG)',
+  'AGB-code': 'egészségügyi szolgáltató kódja (AGB)',
+  'proces-verbaalnummer': 'rendőrségi jegyzőkönyv száma',
   'Scorecard': 'Mutatókártya',
   'Cijfer toevoegen': 'Mutató hozzáadása',
   'Cijfer verwijderen': 'Mutató eltávolítása',

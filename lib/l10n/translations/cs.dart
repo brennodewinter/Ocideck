@@ -1784,6 +1784,12 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'oud btw-nummer (bevat een BSN)': 'staré DIČ (obsahuje rodné číslo)',
+  'vreemdelingennummer (V-nummer)': 'číslo cizince (V-číslo)',
+  'administratienummer (A-nummer)': 'administrativní číslo (A-číslo)',
+  'BIG-nummer van een zorgverlener': 'registrační číslo zdravotníka (BIG)',
+  'AGB-code': 'kód poskytovatele péče (AGB)',
+  'proces-verbaalnummer': 'číslo policejního protokolu',
   'Scorecard': 'Karta ukazatelů',
   'Cijfer toevoegen': 'Přidat ukazatel',
   'Cijfer verwijderen': 'Odebrat ukazatel',
