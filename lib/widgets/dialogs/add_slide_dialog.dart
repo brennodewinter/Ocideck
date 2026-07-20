@@ -348,15 +348,88 @@ class _TypeCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 6),
-              Text(
-                label,
-                textAlign: TextAlign.center,
-                maxLines: 2,
-                style: const TextStyle(fontSize: 11, height: 1.15),
-              ),
+              FittedTypeLabel(label: label),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+/// A type card's label, stepped down just far enough that its longest word fits
+/// the card.
+///
+/// Type names are one or a few words, and Dutch and German turn them into long
+/// compounds — "Aanvalsoppervlak", "Angriffsfläche", "Bevindingenoverzicht".
+/// Left alone, Flutter breaks such a word wherever it runs out of room
+/// ("Aanvalsopperv / lak"), which reads as a typo rather than as a line break.
+/// Shortening the Dutch label would not help: the translations are longer still
+/// (*Superficie di attacco*, *Атакуема повърхност*), so the card has to give
+/// instead of the word.
+///
+/// Wrapping at spaces is untouched — a two-word label still breaks in two. Only
+/// when a *single* word is wider than the card does the whole label step down,
+/// in half-point stages, to a floor of 8pt. Below that the text would stop being
+/// readable, so a pathological label is ellipsised instead.
+@visibleForTesting
+class FittedTypeLabel extends StatelessWidget {
+  final String label;
+
+  /// The size a label uses when it fits, and the size every card shows in
+  /// practice — the step-down is the exception, not the rule.
+  static const baseFontSize = 11.0;
+  static const minFontSize = 8.0;
+
+  const FittedTypeLabel({super.key, required this.label});
+
+  static TextStyle _styleAt(double fontSize) =>
+      TextStyle(fontSize: fontSize, height: 1.15);
+
+  /// The width the longest single word needs at [fontSize]. Measured rather
+  /// than estimated, because the answer depends on the font the profile
+  /// happens to be using.
+  static double _longestWordWidth(
+    String label,
+    double fontSize,
+    TextDirection direction,
+  ) {
+    final longest = label
+        .split(RegExp(r'\s+'))
+        .fold<String>('', (a, b) => b.length > a.length ? b : a);
+    final painter = TextPainter(
+      text: TextSpan(text: longest, style: _styleAt(fontSize)),
+      textDirection: direction,
+    )..layout();
+    return painter.width;
+  }
+
+  /// The largest size at or below [baseFontSize] whose longest word fits
+  /// [maxWidth]. Exposed for the test that guards the step-down.
+  @visibleForTesting
+  static double fittedFontSize(
+    String label,
+    double maxWidth,
+    TextDirection direction,
+  ) {
+    var size = baseFontSize;
+    while (size > minFontSize &&
+        _longestWordWidth(label, size, direction) > maxWidth) {
+      size -= 0.5;
+    }
+    return size;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final direction = Directionality.of(context);
+    return LayoutBuilder(
+      builder: (context, constraints) => Text(
+        label,
+        textAlign: TextAlign.center,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+        style: _styleAt(fittedFontSize(label, constraints.maxWidth, direction)),
       ),
     );
   }
