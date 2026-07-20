@@ -1780,6 +1780,10 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Media blijft niet bewaard in een los .md-bestand':
+      'Medier bevares ikke i en almindelig .md-fil',
+  'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':
+      'Billeder, video og lyd, du valgte i denne fane, findes kun i hukommelsen. En almindelig .md-fil bevarer dem ikke — de er væk, når du åbner den igen. Eksportér som en .ocideck-pakke for at tage medierne med.',
   'Media verwijderd om privacyredenen':
       'Medier fjernet af hensyn til privatlivet',
   'Afbeeldingen door AI laten taggen?': 'Lad AI tagge disse billeder?',

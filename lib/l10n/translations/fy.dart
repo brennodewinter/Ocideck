@@ -739,6 +739,10 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Media blijft niet bewaard in een los .md-bestand':
+      'Media bliuwt net bewarre yn in keal .md-bestân',
+  'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':
+      'Ôfbyldings, fideo en audio dy\'tsto yn dit ljepblêd keazen hast, libje allinne yn it ûnthâld. In keal .md-bestân bewarret se net — by it opnij iepenjen binne se fuort. Eksportearje as .ocideck-pakket om de media mei te nimmen.',
   'Media verwijderd om privacyredenen': 'Media fuorthelle om privacyredenen',
   'Afbeeldingen door AI laten taggen?': 'Litte jo AI dizze ôfbyldings tagje?',
   'afbeeldingen gaan naar': 'ôfbyldings gean nei',

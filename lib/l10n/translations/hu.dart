@@ -1785,6 +1785,10 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Media blijft niet bewaard in een los .md-bestand':
+      'A médiatartalom nem marad meg egy egyszerű .md fájlban',
+  'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':
+      'Az ezen a lapon kiválasztott képek, videó és hang csak a memóriában léteznek. Egy egyszerű .md fájl nem őrzi meg őket — újranyitáskor eltűnnek. Exportáld .ocideck csomagként, hogy magaddal vidd a médiát.',
   'Media verwijderd om privacyredenen':
       'A médiatartalom eltávolítva adatvédelmi okokból',
   'Afbeeldingen door AI laten taggen?': 'Címkézze az MI ezeket a képeket?',

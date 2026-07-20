@@ -1817,6 +1817,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Media blijft niet bewaard in een los .md-bestand':
+      'Ní choimeádtar na meáin i ngnáthchomhad .md',
+  'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':
+      'Ní mhaireann na híomhánna, an físeán agus an fhuaim a roghnaigh tú sa chluaisín seo ach sa chuimhne. Ní choimeádann gnáthchomhad .md iad — bíonn siad imithe nuair a osclaíonn tú arís é. Easpórtáil mar phacáiste .ocideck chun na meáin a thabhairt leat.',
   'Media verwijderd om privacyredenen':
       'Baineadh na meáin as ar chúiseanna príobháideachais',
   'Afbeeldingen door AI laten taggen?':

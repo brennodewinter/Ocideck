@@ -738,6 +738,10 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Media blijft niet bewaard in een los .md-bestand':
+      'Medien bleiben in einer reinen .md-Datei nicht erhalten',
+  'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':
+      'Bilder, Video und Audio, die du in diesem Tab gewählt hast, liegen nur im Arbeitsspeicher. Eine reine .md-Datei bewahrt sie nicht — beim erneuten Öffnen sind sie weg. Exportiere als .ocideck-Paket, um die Medien mitzunehmen.',
   'Media verwijderd om privacyredenen':
       'Medien aus Datenschutzgründen entfernt',
   'Afbeeldingen door AI laten taggen?': 'Bilder von der KI taggen lassen?',

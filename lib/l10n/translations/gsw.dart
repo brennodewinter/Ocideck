@@ -1785,6 +1785,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Media blijft niet bewaard in een los .md-bestand':
+      'Medie bliibe in ere blosse .md-Datei nöd erhalte',
+  'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':
+      'Bilder, Video und Audio, wo du i dem Tab gwählt hesch, läbe nume im Arbetsspeicher. E blossi .md-Datei behaltet sie nöd — bim neu Uufmache sind sie ewäg. Exportier als .ocideck-Paket, zum d Medie mitnäh.',
   'Media verwijderd om privacyredenen': 'Medie us Dateschutzgründ entfernt',
   'Afbeeldingen door AI laten taggen?': 'Söll d\'KI die Bilder tagge?',
   'afbeeldingen gaan naar': 'Bilder gönd a',

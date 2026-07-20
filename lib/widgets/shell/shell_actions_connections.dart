@@ -88,6 +88,20 @@ Future<bool> saveDeckWithDestination(
   final origin = ref.read(tabsProvider).current?.origin;
   if (origin != null) return _saveToOrigin(context, ref, origin);
 
+  // Web: opslaan is een kale .md-download. Afbeeldingen, video en audio die de
+  // gebruiker in dit tabblad koos, leven alleen in het geheugen (mem:-paden) en
+  // reizen niet mee in een los .md — bij heropenen zijn ze weg. Op schijf
+  // (desktop) kopieert de opslag ze naar een images/-map, dus daar speelt dit
+  // niet. Waarschuw, maar blokkeer niet: de gebruiker mag bewust een tekstueel
+  // .md willen, en het pakket (.ocideck) is de weg om het beeld mee te nemen.
+  if (!supportsLocalProjectFolders) {
+    final deck = deckNotifier.currentState.deck;
+    if (deck != null && deckCarriesMemoryAssets(deck)) {
+      final proceed = await _confirmWebAssetLoss(context);
+      if (proceed != true || !context.mounted) return false;
+    }
+  }
+
   final settings = ref.read(settingsProvider);
   final isNewDeck = deckNotifier.currentState.filePath == null;
   if (!isNewDeck || !supportsLocalProjectFolders) {
@@ -100,6 +114,38 @@ Future<bool> saveDeckWithDestination(
   );
   if (choice == null || !context.mounted) return false;
   return deckNotifier.save(initialDirectory: choice.directory);
+}
+
+/// Waarschuwt dat een kale .md-download de geheugenmedia niet bewaart, en vraagt
+/// of de gebruiker toch wil doorgaan. Geen blokkade — het pakket is de uitweg,
+/// maar de keuze blijft aan de gebruiker.
+Future<bool?> _confirmWebAssetLoss(BuildContext context) {
+  return showDialog<bool>(
+    context: context,
+    builder: (ctx) => AlertDialog(
+      title: Text(
+        ctx.l10n.d('Media blijft niet bewaard in een los .md-bestand'),
+      ),
+      content: Text(
+        // Eén stringliteral: de l10n-extractie leest naast-elkaar-geplaatste
+        // literals als losse sleutels, en dan matcht de vertaling niet.
+        // ignore: lines_longer_than_80_chars
+        ctx.l10n.d(
+          'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.',
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(ctx, false),
+          child: Text(ctx.l10n.d('Annuleren')),
+        ),
+        ElevatedButton(
+          onPressed: () => Navigator.pop(ctx, true),
+          child: Text(ctx.l10n.d('Doorgaan')),
+        ),
+      ],
+    ),
+  );
 }
 
 /// Slaat op naar de opslag waar het deck vandaan kwam. Geeft terug of dat

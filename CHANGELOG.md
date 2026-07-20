@@ -59,6 +59,13 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 
 
 ### Fixed
+- **Web-opslag waarschuwt voordat een kaal `.md` je afbeeldingen laat vallen.**
+  Op web is opslaan een `.md`-download; afbeeldingen, video en audio die je in
+  het tabblad koos, leven alleen in het geheugen en reizen niet mee in een los
+  tekstbestand — bij heropenen waren ze weg, terwijl de opslag succes meldde. Er
+  verschijnt nu een waarschuwing met de raad om als `.ocideck`-pakket te
+  exporteren; de keuze blijft aan de gebruiker (geen blokkade). Op schijf speelt
+  dit niet — daar kopieert de opslag de media naar een `images/`-map.
 - **Geredigeerde media laat een zichtbaar spoor na in de HTML-export.** De
   privacyprojectie haalt beeld, video en audio van een slide af; de
   PDF/PPTX-export tekende daar een zwart vlak, maar de HTML-export liet alleen

@@ -1784,6 +1784,10 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Media blijft niet bewaard in een los .md-bestand':
+      'Média se v prostém souboru .md nezachovají',
+  'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':
+      'Obrázky, video a zvuk, které jste v této kartě vybrali, existují jen v paměti. Prostý soubor .md je neuchová — po opětovném otevření budou pryč. Exportujte jako balíček .ocideck, abyste si média vzali s sebou.',
   'Media verwijderd om privacyredenen':
       'Média odstraněna z důvodu ochrany soukromí',
   'Afbeeldingen door AI laten taggen?': 'Nechat AI označit tyto obrázky?',

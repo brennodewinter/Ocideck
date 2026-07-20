@@ -1788,6 +1788,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Media blijft niet bewaard in een los .md-bestand':
+      'Medijski sadržaj ne čuva se u običnoj .md datoteci',
+  'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':
+      'Slike, videozapisi i zvuk koje ste odabrali na ovoj kartici postoje samo u memoriji. Obična .md datoteka ih ne čuva — nestat će kad je ponovno otvorite. Izvezite kao .ocideck paket da ponesete medijski sadržaj sa sobom.',
   'Media verwijderd om privacyredenen':
       'Medijski sadržaj uklonjen radi privatnosti',
   'Afbeeldingen door AI laten taggen?': 'Neka UI označi ove slike?',

@@ -1,7 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'dart:typed_data';
+
 import 'package:ocideck/models/asset_origin.dart';
+import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/settings.dart';
+import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/services/web_asset_store.dart';
 import 'package:ocideck/services/asset_staging.dart';
 import 'package:path/path.dart' as p;
 
@@ -90,6 +96,51 @@ void main() {
       expect(assetOriginNeedsAttention(AssetOrigin.external), isTrue);
       expect(assetOriginNeedsAttention(AssetOrigin.remote), isTrue);
       expect(assetOriginNeedsAttention(AssetOrigin.memory), isTrue);
+    });
+  });
+
+  group('deckCarriesMemoryAssets', () {
+    tearDown(WebAssetStore.clear);
+
+    Deck deckWith(Slide slide, {ThemeProfile? theme}) => Deck(
+      title: 'D',
+      slides: [slide],
+      themeProfile: theme ?? const ThemeProfile(),
+    );
+
+    test('een deck met alleen padverwijzingen draagt niets vluchtigs', () {
+      final deck = deckWith(
+        Slide.create(SlideType.image).copyWith(imagePath: 'images/foto.png'),
+      );
+      expect(deckCarriesMemoryAssets(deck), isFalse);
+    });
+
+    test('een mem:-afbeelding maakt het deck vluchtig', () {
+      final mem = WebAssetStore.put(Uint8List(4), name: 'foto.png');
+      final deck = deckWith(
+        Slide.create(SlideType.image).copyWith(imagePath: mem),
+      );
+      expect(deckCarriesMemoryAssets(deck), isTrue);
+    });
+
+    test('ook video, audio en de tweede afbeelding tellen mee', () {
+      final mem = WebAssetStore.put(Uint8List(4), name: 'clip.mp4');
+      for (final slide in [
+        Slide.create(SlideType.image).copyWith(imagePath2: mem),
+        Slide.create(SlideType.video).copyWith(videoPath: mem),
+        Slide.create(SlideType.bullets).copyWith(audioPath: mem),
+      ]) {
+        expect(deckCarriesMemoryAssets(deckWith(slide)), isTrue);
+      }
+    });
+
+    test('een mem:-logo maakt het deck ook vluchtig', () {
+      final mem = WebAssetStore.put(Uint8List(4), name: 'logo.png');
+      final deck = deckWith(
+        Slide.create(SlideType.title),
+        theme: const ThemeProfile().copyWith(logoPath: mem),
+      );
+      expect(deckCarriesMemoryAssets(deck), isTrue);
     });
   });
 }

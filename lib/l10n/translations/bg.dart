@@ -1804,6 +1804,10 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Media blijft niet bewaard in een los .md-bestand':
+      'Медията не се запазва в обикновен .md файл',
+  'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':
+      'Изображенията, видеото и звукът, които избрахте в този раздел, съществуват само в паметта. Обикновен .md файл не ги запазва — изчезват при повторно отваряне. Експортирайте като пакет .ocideck, за да вземете медията със себе си.',
   'Media verwijderd om privacyredenen':
       'Медията е премахната по съображения за поверителност',
   'Afbeeldingen door AI laten taggen?': 'Да маркира ли ИИ тези изображения?',

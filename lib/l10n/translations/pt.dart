@@ -1811,6 +1811,10 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Media blijft niet bewaard in een los .md-bestand':
+      'A multimédia não é mantida num ficheiro .md simples',
+  'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':
+      'As imagens, o vídeo e o áudio que escolheu neste separador existem apenas na memória. Um ficheiro .md simples não os mantém — desaparecem ao reabrir. Exporte como pacote .ocideck para levar a multimédia consigo.',
   'Media verwijderd om privacyredenen':
       'Multimédia removida por motivos de privacidade',
   'Afbeeldingen door AI laten taggen?': 'Deixar a IA etiquetar estas imagens?',

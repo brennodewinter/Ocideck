@@ -1809,6 +1809,10 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Media blijft niet bewaard in een los .md-bestand':
+      'Τα πολυμέσα δεν διατηρούνται σε ένα απλό αρχείο .md',
+  'Afbeeldingen, video en audio die je in dit tabblad koos, leven alleen in het geheugen. Een los .md-bestand bewaart ze niet — bij heropenen zijn ze weg. Exporteer als .ocideck-pakket om het beeld mee te nemen.':
+      'Οι εικόνες, το βίντεο και ο ήχος που επιλέξατε σε αυτήν την καρτέλα υπάρχουν μόνο στη μνήμη. Ένα απλό αρχείο .md δεν τα διατηρεί — θα χαθούν όταν το ανοίξετε ξανά. Εξαγάγετε ως πακέτο .ocideck για να πάρετε μαζί σας τα πολυμέσα.',
   'Media verwijderd om privacyredenen':
       'Τα πολυμέσα αφαιρέθηκαν για λόγους απορρήτου',
   'Afbeeldingen door AI laten taggen?':
