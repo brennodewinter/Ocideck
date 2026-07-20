@@ -240,6 +240,7 @@ class _TlLayout {
   final double scale;
   final bool showDesc;
   final int descLines;
+  final int titleLines;
   final double nodeRadius;
 
   const _TlLayout(
@@ -247,6 +248,7 @@ class _TlLayout {
     this.scale,
     this.showDesc,
     this.descLines,
+    this.titleLines,
     this.nodeRadius,
   );
 }
@@ -266,42 +268,197 @@ Color _readableOn(Color bg, Color preferred) {
   return rel(bg) > 0.5 ? AppTheme.forestDark : Colors.white;
 }
 
-/// Picks a font [scale] and description line count that fill [room] px of
-/// vertical space per card without overflowing into the next row. Short content
-/// grows the text (up to 1.25×) to use the space; long content shrinks it and
-/// shows more lines (up to 3) so nothing is needlessly truncated.
-({double scale, int descLines}) _fitCards(
+/// Lays out [text] in [maxWidth] and reports both the height it takes and
+/// whether it had to be cut off at [maxLines]. This is the same measurement the
+/// rest of the deck uses (see `slide_layout_metrics.dart`) rather than an
+/// estimate from the character count, which cannot know the actual glyph widths
+/// of the profile font and so mis-sizes exactly the cards that are tightest.
+({double height, double width, bool clipped}) _measureText(
+  String text,
+  TextStyle style,
+  double maxWidth,
+  int maxLines,
+) {
+  final tp = TextPainter(
+    text: TextSpan(text: text, style: style),
+    maxLines: maxLines,
+    textDirection: TextDirection.ltr,
+  )..layout(maxWidth: math.max(1.0, maxWidth));
+  final result = (
+    height: tp.height,
+    width: tp.width,
+    clipped: tp.didExceedMaxLines,
+  );
+  tp.dispose();
+  return result;
+}
+
+/// Typography of a card at a given [scale] — kept next to [_TimelineCard] so the
+/// measurement below and the widget that renders it cannot drift apart.
+TextStyle _badgeStyle(double w, double scale, String font) => TextStyle(
+  fontSize: w * 0.0135 * scale,
+  fontFamily: font,
+  fontWeight: FontWeight.w700,
+  height: 1.0,
+);
+
+TextStyle _titleStyle(double w, double scale, String font) => TextStyle(
+  fontSize: w * 0.0168 * scale,
+  fontFamily: font,
+  fontWeight: FontWeight.w700,
+  height: 1.15,
+);
+
+TextStyle _descStyle(double w, double scale, String font) => TextStyle(
+  fontSize: w * 0.0135 * scale,
+  fontFamily: font,
+  fontWeight: FontWeight.w400,
+  height: 1.25,
+);
+
+/// How wide the marker badge may become. It is laid out at its natural width —
+/// the title takes whatever is left — but never past this bound, so a freakishly
+/// long marker ellipsises instead of pushing the title out of the card.
+double _badgeMaxWidth(double inner, bool hasTitle) =>
+    hasTitle ? inner * 0.6 : inner;
+
+/// Height of the tallest card at this scale and line budget, plus whether any
+/// text had to be truncated to reach it.
+({double height, bool clipped}) _measureCards(
+  List<TimelineEvent> events,
+  double cardW,
+  double w,
+  double scale,
+  bool showDesc,
+  int titleLines,
+  int descLines,
+  String font,
+) {
+  final hPad = w * 0.012;
+  final vPad = w * 0.009 * scale;
+  final badgeHPad = w * 0.008;
+  final badgeVPad = w * 0.0028 * scale;
+  final badgeGap = w * 0.01;
+  final descGap = w * 0.006 * scale;
+  final inner = cardW - 2 * hPad;
+
+  var tallest = 0.0;
+  var clipped = false;
+  for (final e in events) {
+    final marker = e.marker.trim();
+    final title = e.title.trim();
+    final desc = e.description.trim();
+
+    var rowH = 0.0;
+    var titleRoom = inner;
+    if (marker.isNotEmpty) {
+      final m = _measureText(
+        marker,
+        _badgeStyle(w, scale, font),
+        _badgeMaxWidth(inner, title.isNotEmpty),
+        1,
+      );
+      clipped = clipped || m.clipped;
+      rowH = m.height + 2 * badgeVPad;
+      titleRoom = inner - (m.width + 2 * badgeHPad) - badgeGap;
+    }
+    if (title.isNotEmpty) {
+      final t = _measureText(
+        title,
+        _titleStyle(w, scale, font),
+        titleRoom,
+        titleLines,
+      );
+      clipped = clipped || t.clipped;
+      rowH = math.max(rowH, t.height);
+    }
+
+    var h = 2 * vPad + rowH;
+    if (showDesc && desc.isNotEmpty) {
+      final d = _measureText(
+        desc,
+        _descStyle(w, scale, font),
+        inner,
+        descLines,
+      );
+      clipped = clipped || d.clipped;
+      h += descGap + d.height;
+    }
+    tallest = math.max(tallest, h);
+  }
+  return (height: tallest, clipped: clipped);
+}
+
+/// Picks the font [scale] and the title/description line budget for the cards.
+///
+/// The card has a fixed width and a fixed vertical slot ([room], the pitch to
+/// the next card), so the only free variables are the type size and how many
+/// lines each field may wrap to. This walks the scale down from its natural size
+/// and returns the *first* combination in which every card fits its slot **and**
+/// no text is truncated — text staying whole is what we optimise for, since a
+/// half-sentence on a timeline destroys the message it exists to carry.
+///
+/// If no combination shows everything (genuinely too much text for the slide),
+/// it falls back to the largest budget that still fits the slot. Overflowing the
+/// slot is never an option: cards would collide with the row above.
+({double scale, int descLines, int titleLines}) _fitCards(
   List<TimelineEvent> events,
   double cardW,
   double room,
   double w,
   bool showDesc,
+  String font,
 ) {
-  // Estimate how many lines the longest description wraps to in this card width,
-  // so the scale accounts for the tallest card the content will produce.
-  var lines = 1;
-  if (showDesc) {
-    final innerW = cardW - 2 * (w * 0.012);
-    final charsPerLine = math.max(8.0, innerW / (w * 0.0072));
-    for (final e in events) {
-      final d = e.description.trim();
-      if (d.isEmpty) continue;
-      final needed = (d.length / charsPerLine).ceil().clamp(1, 3);
-      if (needed > lines) lines = needed;
+  const scaleSteps = [1.0, 0.94, 0.88, 0.82, 0.76, 0.70, 0.66, 0.62];
+  const maxTitleLines = 2;
+  const maxDescLines = 3;
+
+  for (final scale in scaleSteps) {
+    for (var titleLines = 1; titleLines <= maxTitleLines; titleLines++) {
+      for (var descLines = 1; descLines <= maxDescLines; descLines++) {
+        final m = _measureCards(
+          events,
+          cardW,
+          w,
+          scale,
+          showDesc,
+          titleLines,
+          descLines,
+          font,
+        );
+        if (!m.clipped && m.height <= room) {
+          return (
+            scale: scale,
+            descLines: descLines,
+            titleLines: titleLines,
+          );
+        }
+      }
     }
   }
-  // Reduce the line count if even that won't fit, so the description is shown
-  // (shorter) rather than dropped when the room is a little tight.
-  const base = 0.046; // marker+title row + paddings (one line), at scale 1
-  const lineH = 0.0175;
-  while (lines > 1 && base + lines * lineH > (room / w) * 0.92) {
-    lines--;
+
+  // Nothing fits whole. Degrade predictably: smallest type, and the most lines
+  // that still stay inside the slot.
+  const scale = 0.62;
+  var best = (scale: scale, descLines: 1, titleLines: 1);
+  for (var titleLines = 1; titleLines <= maxTitleLines; titleLines++) {
+    for (var descLines = 1; descLines <= maxDescLines; descLines++) {
+      final m = _measureCards(
+        events,
+        cardW,
+        w,
+        scale,
+        showDesc,
+        titleLines,
+        descLines,
+        font,
+      );
+      if (m.height <= room) {
+        best = (scale: scale, descLines: descLines, titleLines: titleLines);
+      }
+    }
   }
-  // The title is never enlarged (it's bold already); the scale only shrinks the
-  // card to fit, never grows it past its natural size — leaving room is fine.
-  final contentH1 = w * (base + (showDesc ? lines : 0) * lineH);
-  final scale = (room * 0.9 / contentH1).clamp(0.62, 1.0).toDouble();
-  return (scale: scale, descLines: lines);
+  return best;
 }
 
 /// Lays out the spine, nodes and cards for the available area, then stacks the
@@ -386,6 +543,7 @@ class _TimelineCanvas extends StatelessWidget {
                 layout.scale,
                 layout.showDesc,
                 layout.descLines,
+                layout.titleLines,
               ),
           ],
         );
@@ -400,6 +558,7 @@ class _TimelineCanvas extends StatelessWidget {
     double scale,
     bool showDesc,
     int descLines,
+    int titleLines,
   ) {
     return Positioned(
       left: node.cardLeft,
@@ -424,6 +583,8 @@ class _TimelineCanvas extends StatelessWidget {
                 showDescription:
                     showDesc && events[i].description.trim().isNotEmpty,
                 descLines: descLines,
+                titleLines: titleLines,
+                cardWidth: node.cardWidth,
                 accent: accent,
                 onAccent: onAccent,
                 textColor: textColor,
@@ -511,13 +672,19 @@ class _TimelineCanvas extends StatelessWidget {
     // `span - cardW >= cardW/2 - startX`, with a little extra breathing room.
     final sameFloorSpan = 2 * floors * spacing;
     final edgeSafeW = (sameFloorSpan + startX) / 1.7;
+    // The ceiling used to sit at 0.30·aw, which on a six-event timeline left the
+    // cards far narrower than the rail could actually afford — the neighbouring
+    // card on the same floor is `sameFloorSpan` away, and the 0.8 factor already
+    // guarantees the gap. Raising it lets sentence-length descriptions wrap in
+    // two comfortable lines instead of being cut off; `edgeSafeW` still protects
+    // the inward-clamped first and last card.
     final cardW = (sameFloorSpan * 0.8)
-        .clamp(aw * 0.18, aw * 0.30)
+        .clamp(aw * 0.18, aw * 0.42)
         .toDouble()
         .clamp(0.0, edgeSafeW)
         .toDouble();
     final showDesc = pitch > w * 0.052;
-    final fit = _fitCards(events, cardW, pitch, w, showDesc);
+    final fit = _fitCards(events, cardW, pitch, w, showDesc, font);
     final scale = fit.scale;
     final descLines = fit.descLines;
     // Node size scales with the slide width (not the pixel size of this view),
@@ -549,7 +716,14 @@ class _TimelineCanvas extends StatelessWidget {
           );
         }(),
     ];
-    return _TlLayout(nodes, scale, showDesc, descLines, nodeRadius);
+    return _TlLayout(
+      nodes,
+      scale,
+      showDesc,
+      descLines,
+      fit.titleLines,
+      nodeRadius,
+    );
   }
 
   /// Vertical spine with cards alternating left/right. Used for very long
@@ -586,14 +760,21 @@ class _TimelineCanvas extends StatelessWidget {
     final showDesc = vSlot.isFinite ? vSlot > w * 0.052 : true;
     // A centred card can use the whole slot (half above + half below its node).
     final room = vSlot.isFinite ? vSlot : w * 0.30;
-    final fit = _fitCards(events, cardW, room, w, showDesc);
+    final fit = _fitCards(events, cardW, room, w, showDesc, font);
     final scale = fit.scale;
     final descLines = fit.descLines;
     // Width-relative node size (matches preview ↔ presentation), capped so dense
     // spines keep the dots from touching.
     var nodeRadius = math.max(2.5, w * 0.0095);
     if (vSlot.isFinite) nodeRadius = math.min(nodeRadius, vSlot * 0.34);
-    return _TlLayout(nodes, scale, showDesc, descLines, nodeRadius);
+    return _TlLayout(
+      nodes,
+      scale,
+      showDesc,
+      descLines,
+      fit.titleLines,
+      nodeRadius,
+    );
   }
 }
 
@@ -612,6 +793,8 @@ class _TimelineCard extends StatelessWidget {
   final double scale;
   final bool showDescription;
   final int descLines;
+  final int titleLines;
+  final double cardWidth;
   final Color accent;
   final Color onAccent;
   final Color textColor;
@@ -627,6 +810,8 @@ class _TimelineCard extends StatelessWidget {
     required this.scale,
     required this.showDescription,
     required this.descLines,
+    required this.titleLines,
+    required this.cardWidth,
     required this.accent,
     required this.onAccent,
     required this.textColor,
@@ -639,9 +824,9 @@ class _TimelineCard extends StatelessWidget {
     final hasMarker = event.marker.trim().isNotEmpty;
     final hasTitle = event.title.trim().isNotEmpty;
     final badge = hasMarker ? _badge() : null;
-    // Titles are short headlines → one line; the description carries the detail
-    // and gets as many lines (1–3) as the card's room allows.
-    final title = hasTitle ? _title(maxLines: 1) : null;
+    // Both fields get the line budget the fit search proved they can have: a
+    // headline that needs two lines gets two rather than losing half its words.
+    final title = hasTitle ? _title(maxLines: titleLines) : null;
 
     return Container(
       padding: EdgeInsets.symmetric(
@@ -684,8 +869,24 @@ class _TimelineCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              if (badge != null) ...[badge, SizedBox(width: w * 0.01)],
-              if (title != null) Flexible(child: title),
+              // Bounded rather than flexible: two Flexible children would split
+              // the row evenly and starve the title of the space the badge does
+              // not need. This keeps the badge at its natural width (capped, so
+              // it can never overflow) and hands the remainder to the title —
+              // exactly what the fit measurement assumes.
+              if (badge != null) ...[
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: _badgeMaxWidth(
+                      cardWidth - 2 * (w * 0.012),
+                      hasTitle,
+                    ),
+                  ),
+                  child: badge,
+                ),
+                SizedBox(width: w * 0.01),
+              ],
+              if (title != null) Expanded(child: title),
             ],
           ),
           if (showDescription) ...[
@@ -694,13 +895,9 @@ class _TimelineCard extends StatelessWidget {
               event.description.trim(),
               maxLines: descLines,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(
+              style: _descStyle(w, scale, font).copyWith(
                 color: muted,
-                fontSize: w * 0.0135 * scale,
-                fontFamily: font,
-                fontWeight: FontWeight.w400,
                 decoration: TextDecoration.none,
-                height: 1.25,
               ),
             ),
           ],
@@ -722,13 +919,9 @@ class _TimelineCard extends StatelessWidget {
       event.marker.trim(),
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
-      style: TextStyle(
+      style: _badgeStyle(w, scale, font).copyWith(
         color: onAccent,
-        fontSize: w * 0.0135 * scale,
-        fontFamily: font,
-        fontWeight: FontWeight.w700,
         decoration: TextDecoration.none,
-        height: 1.0,
       ),
     ),
   );
@@ -739,13 +932,9 @@ class _TimelineCard extends StatelessWidget {
     event.title.trim(),
     maxLines: maxLines,
     overflow: TextOverflow.ellipsis,
-    style: TextStyle(
+    style: _titleStyle(w, scale, font).copyWith(
       color: textColor,
-      fontSize: w * 0.0168 * scale,
-      fontFamily: font,
-      fontWeight: FontWeight.w700,
       decoration: TextDecoration.none,
-      height: 1.15,
     ),
   );
 }
