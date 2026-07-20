@@ -1248,11 +1248,12 @@ come back with different data filenames than it left with. The values ride
 along unchanged; only the paths move.
 
 On save, data files that nothing references any more — from a deleted chart,
-say — are removed. Eligibility is deliberately narrow: only a `.json` that this
-running session itself read or wrote, and only inside the deck's own folder.
+say — are removed. Eligibility is deliberately narrow: only a `.json` that
+**this deck** read or wrote in this session, and only inside its own folder.
 Anything else in `data/`, and every `.csv`, is left alone. A file OciDeck has
 never touched is never deleted, so a folder shared with other tooling survives
-a save.
+a save — and so does the data file of another deck that happens to live in the
+same folder, which is why the bookkeeping is per deck rather than per folder.
 
 **Editing.** Both directions work. The grid in the app edits a linked chart just
 like an inline one and writes the file back on save; the file can equally be
