@@ -132,8 +132,8 @@ class _SignOffPreview extends StatelessWidget {
         SizedBox(height: w * 0.03),
         // A drawn signature takes precedence over the typed name/mark.
         if (image != null)
-          Image.memory(
-            image,
+          Image(
+            image: cappedMemoryImage(image),
             height: w * 0.09,
             fit: BoxFit.contain,
             alignment: Alignment.centerLeft,

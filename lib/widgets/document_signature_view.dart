@@ -4,14 +4,15 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 
 import '../models/document_signature.dart';
+import '../utils/image_limits.dart' show cappedMemoryImage;
 import '../utils/log.dart' show logError;
 
 /// A tiny memo of decoded signature images keyed by the exact `data:` URI. The
 /// key point is instance stability: every caller for the same URI gets the SAME
-/// [Uint8List], so `MemoryImage(bytes)` compares equal across the export
-/// precache and the preview's `Image.memory` — a cache hit that lets the drawn
-/// signature paint on the first frame the rasteriser captures. Bounded, so a
-/// re-draw (a different URI) never grows it without limit.
+/// [Uint8List], so `cappedMemoryImage(bytes)` compares equal across the export
+/// precache and the preview — a cache hit that lets the drawn signature paint on
+/// the first frame the rasteriser captures. Bounded, so a re-draw (a different
+/// URI) never grows it without limit.
 final Map<String, Uint8List?> _sigImageCache = {};
 
 /// Decode an embedded `data:...;base64,...` signature image to raw bytes, or
@@ -118,8 +119,8 @@ class DocumentSignatureView extends StatelessWidget {
   Widget _signatureMark(ThemeData theme, double scale) {
     final image = decodeEmbeddedSignatureImage(signature.imagePath);
     if (image != null) {
-      return Image.memory(
-        image,
+      return Image(
+        image: cappedMemoryImage(image),
         height: 44 * scale,
         fit: BoxFit.contain,
         alignment: Alignment.centerLeft,

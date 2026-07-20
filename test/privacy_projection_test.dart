@@ -180,6 +180,38 @@ void main() {
       final out = PrivacyProjection.forAudience(deck).slides.single;
 
       expect(out.tableEditable, isFalse);
+      expect(out.contentRedacted, isTrue);
+    });
+
+    test('een geredigeerde slide verliest live checklist-aanvinken', () {
+      // Zelfde grens als bij de tabel: het aanvinken schrijft de HELE slide
+      // terug. Zonder deze vlag overschreef één vinkje de titel, de notities en
+      // de overige punten van de bron met zwarte blokken.
+      final slide = Slide.create(SlideType.bullets).copyWith(
+        listStyle: ListStyle.checklist,
+        title: 'Afronding bij [[Acme]]',
+        notes: 'Bel [[Jan]]',
+        bullets: ['[ ] Contact met [[jan@acme.nl]]', '[ ] Onschuldig punt'],
+      );
+      final deck = Deck(title: 'D', slides: [slide]);
+
+      final out = PrivacyProjection.forAudience(deck).slides.single;
+
+      expect(out.contentRedacted, isTrue);
+      // De bron zelf blijft ongemoeid — de projectie is een afleiding.
+      expect(deck.slides.single.title, 'Afronding bij [[Acme]]');
+    });
+
+    test('een slide zonder redacties houdt aanvinken', () {
+      final slide = Slide.create(SlideType.bullets).copyWith(
+        listStyle: ListStyle.checklist,
+        bullets: ['[ ] Gewoon een punt'],
+      );
+      final deck = Deck(title: 'D', slides: [slide]);
+
+      final out = PrivacyProjection.forAudience(deck).slides.single;
+
+      expect(out.contentRedacted, isFalse);
     });
 
     test('een slide zonder redacties houdt live tabelbewerking', () {

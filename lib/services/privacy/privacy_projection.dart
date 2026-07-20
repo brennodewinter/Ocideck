@@ -234,12 +234,16 @@ class PrivacyProjection {
   /// Sprekersnotities staan er nadrukkelijk bij: die zijn onzichtbaar in de
   /// preview, maar gaan als platte tekst mee in de PPTX-notitiepagina's.
   ///
-  /// Een slide waarin iets is geredigeerd, verliest [Slide.tableEditable]. Dat
-  /// is geen bijkomstigheid maar de kern van de grens: de presenter schrijft een
-  /// live tabelbewerking als *hele slide* terug naar het deck
-  /// (`presenter_table.dart`). Zou de presenter een geprojecteerde slide mogen
+  /// Een slide waarin iets is geredigeerd, verliest [Slide.tableEditable] en
+  /// krijgt [Slide.contentRedacted]. Dat is geen bijkomstigheid maar de kern van
+  /// de grens: de presenter schrijft een live tabelbewerking én een aangevinkt
+  /// checklistpunt als *hele slide* terug naar het deck (`presenter_table.dart`,
+  /// `presenter_content.dart`). Zou de presenter een geprojecteerde slide mogen
   /// terugschrijven, dan overschreef één bewerking de bron met blokken. Een
   /// oppervlak dat de gegevens niet kán zien, mag ze ook niet terugschrijven.
+  ///
+  /// Tabellen hebben daar een veld van de auteur voor dat we uitzetten; voor de
+  /// checklist bestaat dat niet, vandaar de aparte vlag.
   static ({Slide slide, int count}) _projectSlide(
     Slide slide,
     Map<String, List<_Range>> byFragment, {
@@ -292,7 +296,10 @@ class PrivacyProjection {
 
     return (
       slide: count > 0
-          ? withMedia.slide.copyWith(tableEditable: false)
+          ? withMedia.slide.copyWith(
+              tableEditable: false,
+              contentRedacted: true,
+            )
           : withMedia.slide,
       count: count,
     );

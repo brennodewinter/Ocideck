@@ -104,6 +104,10 @@ extension _PresenterContent on _FullscreenPresenterState {
   }) {
     if (slideIndex < 0 || slideIndex >= widget.slides.length) return;
     final slide = widget.slides[slideIndex];
+    // Vangnet achter de uitgeschakelde affordance: ook een bericht van het
+    // zaalvenster mag een geredigeerde slide niet terugschrijven, want dan
+    // landen de zwarte blokken in de bron. Zie [Slide.contentRedacted].
+    if (slide.contentRedacted) return;
     final source = column == 1 ? slide.bullets2 : slide.bullets;
     if (itemIndex < 0 || itemIndex >= source.length) return;
     final updatedItems = List<String>.from(source);

@@ -141,7 +141,11 @@ class SlideRasterizer {
           ? null
           : decodeEmbeddedSignatureImage(signature.imagePath);
       if (sigBytes != null) {
-        await precacheImage(MemoryImage(sigBytes), context, onError: (_, _) {});
+        await precacheImage(
+          cappedMemoryImage(sigBytes),
+          context,
+          onError: (_, _) {},
+        );
         if (!context.mounted) return results;
       }
 

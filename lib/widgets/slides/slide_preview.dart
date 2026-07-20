@@ -437,7 +437,13 @@ class SlidePreviewWidget extends StatelessWidget {
         onCellSelected: onTableCellSelected,
         onCellChanged: onTableCellChanged,
         child: _ChecklistInteractionHost(
-          enabled: presentationMode && onChecklistItemToggle != null,
+          // Op een geredigeerde slide is aanvinken uitgeschakeld: de presenter
+          // schrijft de hele (zwartgelakte) slide terug. Zie
+          // [Slide.contentRedacted].
+          enabled:
+              presentationMode &&
+              onChecklistItemToggle != null &&
+              !slide.contentRedacted,
           onToggle: onChecklistItemToggle,
           child: Directionality(
             textDirection: TextDirection.ltr,
