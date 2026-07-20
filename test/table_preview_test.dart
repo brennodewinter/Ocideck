@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/slide.dart';
+import 'package:ocideck/theme/app_theme.dart';
 import 'package:ocideck/widgets/slides/slide_preview.dart';
 
-Widget _host(List<List<String>> rows) {
+Widget _host(List<List<String>> rows, {bool markOverdue = false}) {
   return MaterialApp(
     home: Scaffold(
       body: Center(
@@ -11,12 +12,28 @@ Widget _host(List<List<String>> rows) {
           width: 800,
           height: 450,
           child: SlidePreviewWidget(
-            slide: Slide.create(SlideType.table).copyWith(tableRows: rows),
+            slide: Slide.create(
+              SlideType.table,
+            ).copyWith(tableRows: rows, tableMarkOverdue: markOverdue),
           ),
         ),
       ),
     ),
   );
+}
+
+/// De kleuren waarin [text] ergens in de opgebouwde tekstspans getekend wordt.
+Set<Color?> _coloursOf(WidgetTester tester, String text) {
+  final found = <Color?>{};
+  for (final rich in tester.widgetList<RichText>(find.byType(RichText))) {
+    rich.text.visitChildren((span) {
+      if (span is TextSpan && (span.text ?? '').contains(text)) {
+        found.add(span.style?.color);
+      }
+      return true;
+    });
+  }
+  return found;
 }
 
 void main() {
@@ -42,5 +59,46 @@ void main() {
     expect(flex(1), greaterThan(flex(0)));
     expect(flex(1), greaterThan(flex(2)));
     expect(tester.takeException(), isNull);
+  });
+
+  // Een tabel met historische datums zou anders volledig rood kleuren, en een
+  // waarschuwing die overal staat waarschuwt nergens voor. Daarom uit tenzij
+  // de auteur hem aanzet.
+  testWidgets('an expired date is only marked when the slide opts in', (
+    tester,
+  ) async {
+    final rows = <List<String>>[
+      const ['Actie', 'Deadline'],
+      const ['Al lang open', '2020-01-01'],
+    ];
+
+    await tester.pumpWidget(_host(rows));
+    await tester.pump();
+    expect(
+      _coloursOf(tester, '2020-01-01'),
+      isNot(contains(AppTheme.danger700)),
+    );
+
+    await tester.pumpWidget(_host(rows, markOverdue: true));
+    await tester.pump();
+    expect(_coloursOf(tester, '2020-01-01'), contains(AppTheme.danger700));
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('a future date and a non-date stay unmarked when opted in', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      _host(<List<String>>[
+        const ['Actie', 'Deadline', 'Status'],
+        const ['Nog even', '2999-01-01', 'open'],
+      ], markOverdue: true),
+    );
+    await tester.pump();
+    expect(
+      _coloursOf(tester, '2999-01-01'),
+      isNot(contains(AppTheme.danger700)),
+    );
+    expect(_coloursOf(tester, 'open'), isNot(contains(AppTheme.danger700)));
   });
 }

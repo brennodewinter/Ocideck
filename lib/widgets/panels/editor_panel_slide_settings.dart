@@ -339,6 +339,14 @@ List<Widget> slideSettingBadges(AppLocalizations l10n, Slide slide) {
       _SettingBadge(icon: Icons.edit_outlined, label: l10n.d('Bewerkbaar')),
     );
   }
+  if (slide.tableMarkOverdue) {
+    badges.add(
+      _SettingBadge(
+        icon: Icons.event_busy_outlined,
+        label: l10n.d('Datums gemarkeerd'),
+      ),
+    );
+  }
   return badges;
 }
 
@@ -537,7 +545,7 @@ class _SlideSettingsBody extends StatelessWidget {
       // "logo tonen" een dode schakelaar, en een dode schakelaar is erger dan
       // een ontbrekende. Valt de hele groep weg, dan valt ook de kaart weg —
       // een lege kaart zou een gat in de rij slaan.
-      if (hasLogo || hasFooter)
+      if (hasLogo || hasFooter || slide.type == SlideType.table)
         _SettingsGroup(
           label: l10n.d('Op deze slide'),
           children: [
@@ -559,6 +567,20 @@ class _SlideSettingsBody extends StatelessWidget {
                   value: slide.showFooter,
                   semanticLabel: l10n.d('Footer tonen'),
                   onChanged: (v) => onUpdate(slide.copyWith(showFooter: v)),
+                ),
+              ),
+            if (slide.type == SlideType.table)
+              _SettingRow(
+                icon: Icons.event_busy_outlined,
+                label: l10n.d('Verlopen datums markeren'),
+                help: l10n.d(
+                  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.',
+                ),
+                control: _SettingSwitch(
+                  value: slide.tableMarkOverdue,
+                  semanticLabel: l10n.d('Verlopen datums markeren'),
+                  onChanged: (v) =>
+                      onUpdate(slide.copyWith(tableMarkOverdue: v)),
                 ),
               ),
           ],

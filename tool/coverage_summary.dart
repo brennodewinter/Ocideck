@@ -29,6 +29,12 @@ import 'dart:io';
 ///
 /// A file that is merely *untested* does not belong here: write the test.
 const Set<String> uncoveredBaseline = {
+  // NO EXECUTABLE LINES: `StorageOrigin` is een abstract interface met twee
+  // getters en verder niets — het contract dat WebdavOrigin, S3Origin en
+  // GitOrigin delen. De implementaties worden wél getest
+  // (tab_storage_origin_test.dart), maar lcov schrijft geen record voor een
+  // bestand zonder uitvoerbare regels.
+  'lib/models/storage_origin.dart',
   // NO EXECUTABLE LINES: the generated MASTG index — two `part` files holding
   // nothing but a const list of 186 MastgTest literals. They are exercised
   // (mastg_catalog_test.dart reads every entry) but lcov emits no record for a

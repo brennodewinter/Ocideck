@@ -1784,6 +1784,16 @@ const _dutchSourceAddEt = <String, String>{
   'BIG-nummer van een zorgverlener': 'tervishoiutöötaja registrinumber (BIG)',
   'AGB-code': 'tervishoiuteenuse osutaja kood (AGB)',
   'proces-verbaalnummer': 'politsei protokolli number',
+  'Openen uit…': 'Ava asukohast…',
+  'Opslaan naar…': 'Salvesta asukohta…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Seadista esmalt ühendus jaotises Seaded → Salvestusruum.',
+  'Beginnen met:': 'Alusta sellega:',
+  'Verlopen datums markeren': 'Märgi möödunud kuupäevad',
+  'Datums gemarkeerd': 'Kuupäevad märgitud',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Värvib punaseks lahtri, mille kuupäev on tänasest varasem. OciDeck lähtub päevast, mil esitlete, nii et kuid hiljem naasev slaidikomplekt märgib end ise. Kuupäevaks loeb ainult aaaa-kk-pp. Vaikimisi väljas.',
+  'Standaarden en methodieken': 'Standardid ja metoodikad',
   'Aanvalsoppervlak': 'Ründepind',
   'Soort toevoegen': 'Lisa liik',
   'Soort verwijderen': 'Eemalda liik',
@@ -2198,7 +2208,6 @@ const _dutchSourceAddEt = <String, String>{
       'Standardil, mille vastu testiti, on nüüd uuem versioon:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'See ei pruugi olla viga — kontroll tehti ajal, mil see versioon kehtis. Aruanne talletab, mida tegelikult kasutati.',
-  'Gebundelde standaarden': 'Kaasasolevad standardid',
   'geen versienummer': 'versiooninumbrita',
   'Bron': 'Allikas',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
@@ -2333,7 +2342,6 @@ const _dutchSourceAddEt = <String, String>{
   'Commitboodschap': 'Commiti sõnum',
   'Wat is er veranderd?': 'Mis muutus?',
   'Opslaan naar git': 'Salvesta gitti',
-  'Opslaan naar git…': 'Salvesta gitti…',
   'Opgeslagen in git:': 'Salvestatud gitti:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Haru on liikunud; laadi deck uuesti ja salvesta uuesti.',
@@ -2348,7 +2356,6 @@ const _dutchSourceAddEt = <String, String>{
   'Eigenaar': 'Omanik',
   'Repository': 'Hoidla',
   'Personal access token': 'Isiklik juurdepääsuluba',
-  'Openen uit git…': 'Ava Gitist…',
   'Presentatie openen uit git': 'Ava esitlus Gitist',
   'Geen presentaties in deze repository.': 'Selles hoidlas pole esitlusi.',
   'Rapportagetaal': 'Aruande keel',

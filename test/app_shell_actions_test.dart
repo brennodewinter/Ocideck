@@ -162,15 +162,35 @@ void main() {
     expect(find.byType(FindReplaceDialog), findsOneWidget);
   });
 
-  testWidgets('the overflow menu offers finalise & seal', (tester) async {
+  // Verzegelen is documentintegriteit uit de informatieveiligheidsmodule: het
+  // hoort achter dezelfde schakelaar als het RFC3161-tijdstempel dat erop volgt.
+  testWidgets(
+    'the overflow menu offers finalise & seal once the module is on',
+    (tester) async {
+      SharedPreferences.setMockInitialValues({
+        'app_consent_accepted': true,
+        'secModuleEnabled': true,
+      });
+      await pumpShell(tester);
+
+      await tester.tap(appBarIcon(Icons.more_vert));
+      await tester.pumpAndSettle();
+      await tester.tap(menuItemIcon(Icons.verified_user_outlined));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(FinalizeSealDialog), findsOneWidget);
+    },
+  );
+
+  testWidgets('finalise & seal stays hidden while the module is off', (
+    tester,
+  ) async {
     await pumpShell(tester);
 
     await tester.tap(appBarIcon(Icons.more_vert));
     await tester.pumpAndSettle();
-    await tester.tap(menuItemIcon(Icons.verified_user_outlined));
-    await tester.pumpAndSettle();
 
-    expect(find.byType(FinalizeSealDialog), findsOneWidget);
+    expect(menuItemIcon(Icons.verified_user_outlined), findsNothing);
   });
 
   // Zonder ingestelde repository kan geen enkele git-handeling slagen. Ze horen
@@ -184,7 +204,10 @@ void main() {
     await tester.tap(appBarIcon(Icons.more_vert));
     await tester.pumpAndSettle();
 
-    expect(menuItemIcon(Icons.hub_outlined), findsNothing);
+    // Zonder énige verbinding blijven ook de gedeelde openen/opslaan-ingangen
+    // weg: ze zouden altijd op dezelfde "stel eerst iets in"-melding uitkomen.
+    expect(menuItemIcon(Icons.cloud_download_outlined), findsNothing);
+    expect(menuItemIcon(Icons.cloud_upload_outlined), findsNothing);
     expect(menuItemIcon(Icons.sync), findsNothing);
     expect(menuItemIcon(Icons.manage_search), findsNothing);
     expect(menuItemIcon(Icons.photo_library_outlined), findsNothing);
@@ -205,7 +228,10 @@ void main() {
     await tester.tap(appBarIcon(Icons.more_vert));
     await tester.pumpAndSettle();
 
-    expect(menuItemIcon(Icons.hub_outlined), findsOneWidget);
+    // Openen en opslaan lopen via de gedeelde ingangen, samen met WebDAV en S3.
+    expect(menuItemIcon(Icons.cloud_download_outlined), findsOneWidget);
+    expect(menuItemIcon(Icons.cloud_upload_outlined), findsOneWidget);
+    // Wat git écht toevoegt, staat nog in zijn eigen blok.
     expect(menuItemIcon(Icons.sync), findsOneWidget);
     expect(menuItemIcon(Icons.manage_search), findsOneWidget);
   });

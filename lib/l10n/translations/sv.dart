@@ -1793,6 +1793,16 @@ const _dutchSourceAddSv = <String, String>{
       'registreringsnummer för vårdpersonal (BIG)',
   'AGB-code': 'kod för vårdgivare (AGB)',
   'proces-verbaalnummer': 'diarienummer för polisanmälan',
+  'Openen uit…': 'Öppna från…',
+  'Opslaan naar…': 'Spara till…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Ställ först in en anslutning under Inställningar → Lagring.',
+  'Beginnen met:': 'Börja med:',
+  'Verlopen datums markeren': 'Markera passerade datum',
+  'Datums gemarkeerd': 'Datum markerade',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Färgar en cell med ett datum före i dag rött. OciDeck utgår från dagen du presenterar, så en presentation som återkommer månader senare markerar sig själv. Endast åååå-mm-dd räknas som datum. Av som standard.',
+  'Standaarden en methodieken': 'Standarder och metoder',
   'Aanvalsoppervlak': 'Attackyta',
   'Soort toevoegen': 'Lägg till typ',
   'Soort verwijderen': 'Ta bort typ',
@@ -2207,7 +2217,6 @@ const _dutchSourceAddSv = <String, String>{
       'En standard som testats mot har nu en nyare version:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Det behöver inte vara fel — testet gjordes när den versionen gällde. Rapporten registrerar vad som faktiskt användes.',
-  'Gebundelde standaarden': 'Medföljande standarder',
   'geen versienummer': 'inget versionsnummer',
   'Bron': 'Källa',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
@@ -2342,7 +2351,6 @@ const _dutchSourceAddSv = <String, String>{
   'Commitboodschap': 'Commit-meddelande',
   'Wat is er veranderd?': 'Vad har ändrats?',
   'Opslaan naar git': 'Spara till git',
-  'Opslaan naar git…': 'Spara till git…',
   'Opgeslagen in git:': 'Sparat till git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Grenen har flyttats; ladda om decket och spara igen.',
@@ -2357,7 +2365,6 @@ const _dutchSourceAddSv = <String, String>{
   'Eigenaar': 'Ägare',
   'Repository': 'Repository',
   'Personal access token': 'Personlig åtkomsttoken',
-  'Openen uit git…': 'Öppna från Git…',
   'Presentatie openen uit git': 'Öppna en presentation från Git',
   'Geen presentaties in deze repository.':
       'Inga presentationer i detta repository.',

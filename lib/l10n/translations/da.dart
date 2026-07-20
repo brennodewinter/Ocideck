@@ -1793,6 +1793,16 @@ const _dutchSourceAddDa = <String, String>{
       'registreringsnummer for sundhedspersonale (BIG)',
   'AGB-code': 'kode for sundhedsudbyder (AGB)',
   'proces-verbaalnummer': 'journalnummer på politianmeldelse',
+  'Openen uit…': 'Åbn fra…',
+  'Opslaan naar…': 'Gem til…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Opsæt først en forbindelse under Indstillinger → Lager.',
+  'Beginnen met:': 'Start med:',
+  'Verlopen datums markeren': 'Markér udløbne datoer',
+  'Datums gemarkeerd': 'Datoer markeret',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Farver en celle med en dato før i dag rød. OciDeck går efter den dag, du præsenterer, så et deck, der vender tilbage måneder senere, markerer sig selv. Kun åååå-mm-dd tæller som dato. Slået fra som standard.',
+  'Standaarden en methodieken': 'Standarder og metoder',
   'Aanvalsoppervlak': 'Angrebsflade',
   'Soort toevoegen': 'Tilføj type',
   'Soort verwijderen': 'Fjern type',
@@ -2208,7 +2218,6 @@ const _dutchSourceAddDa = <String, String>{
       'En standard, der er testet mod, har nu en nyere version:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Det behøver ikke være forkert — testen blev udført, da den version gjaldt. Rapporten registrerer, hvad der faktisk blev brugt.',
-  'Gebundelde standaarden': 'Medfølgende standarder',
   'geen versienummer': 'intet versionsnummer',
   'Bron': 'Kilde',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
@@ -2341,7 +2350,6 @@ const _dutchSourceAddDa = <String, String>{
   'Commitboodschap': 'Commit-besked',
   'Wat is er veranderd?': 'Hvad er ændret?',
   'Opslaan naar git': 'Gem til git',
-  'Opslaan naar git…': 'Gem til git…',
   'Opgeslagen in git:': 'Gemt til git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Grenen er flyttet; genindlæs decket og gem igen.',
@@ -2356,7 +2364,6 @@ const _dutchSourceAddDa = <String, String>{
   'Eigenaar': 'Ejer',
   'Repository': 'Repository',
   'Personal access token': 'Personligt adgangstoken',
-  'Openen uit git…': 'Åbn fra Git…',
   'Presentatie openen uit git': 'Åbn en præsentation fra Git',
   'Geen presentaties in deze repository.':
       'Ingen præsentationer i dette repository.',

@@ -1,4 +1,5 @@
 import 'package:path/path.dart' as p;
+import 'storage_origin.dart';
 
 /// Waar een server zijn WebDAV-bestanden onder ophangt. Het protocol is in
 /// beide gevallen gewone WebDAV (PROPFIND/GET/PUT/MKCOL); alleen het pad naar
@@ -276,12 +277,13 @@ enum DeckSaveFormat {
 /// Herkomst van een tab die uit een WebDAV-bron is geopend, zodat "Opslaan naar
 /// Nextcloud" weet waar (en op welke server) terug te schrijven. [baseUrl] en
 /// [username] dienen om een serverwissel te detecteren.
-class WebdavOrigin {
+class WebdavOrigin implements StorageOrigin {
   /// De verbinding waar dit deck vandaan kwam. Hiermee gaat "Opslaan naar
   /// WebDAV" terug naar dezelfde klant zonder opnieuw te vragen — en blijft dat
   /// kloppen als de gebruiker de verbinding hernoemt of de server-URL
   /// corrigeert. Leeg voor herkomst uit een versie van vóór de
   /// verbindingenlijst; dan valt de app terug op [baseUrl] + [username].
+  @override
   final String connectionId;
 
   final String baseUrl;
@@ -311,6 +313,9 @@ class WebdavOrigin {
     final i = remotePath.lastIndexOf('/');
     return i < 0 ? '' : remotePath.substring(0, i);
   }
+
+  @override
+  String get remoteLocation => remotePath;
 
   bool matchesServer(WebdavServer server) =>
       server.baseUrl.trim() == baseUrl.trim() &&

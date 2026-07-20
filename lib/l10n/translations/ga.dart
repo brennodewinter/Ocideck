@@ -1828,6 +1828,16 @@ const _dutchSourceAddGa = <String, String>{
   'BIG-nummer van een zorgverlener': 'uimhir chláraithe gairmí sláinte (BIG)',
   'AGB-code': 'cód soláthraí cúraim sláinte (AGB)',
   'proces-verbaalnummer': 'uimhir thuairisce póilíní',
+  'Openen uit…': 'Oscail ó…',
+  'Opslaan naar…': 'Sábháil chuig…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Socraigh ceangal ar dtús faoi Socruithe → Stóráil.',
+  'Beginnen met:': 'Tosaigh le:',
+  'Verlopen datums markeren': 'Marcáil dátaí atá thart',
+  'Datums gemarkeerd': 'Dátaí marcáilte',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Dathaíonn sé cill a bhfuil dáta roimh an lá inniu inti dearg. Téann OciDeck de réir an lae a chuireann tú i láthair, mar sin déanann sleamhnáin a fhilleann míonna ina dhiaidh sin iad féin a mharcáil. Ní chomhairtear mar dháta ach bbbb-mm-ll. Múchta de réir réamhshocraithe.',
+  'Standaarden en methodieken': 'Caighdeáin agus modheolaíochtaí',
   'Aanvalsoppervlak': 'Dromchla ionsaithe',
   'Soort toevoegen': 'Cuir cineál leis',
   'Soort verwijderen': 'Bain an cineál',
@@ -2246,7 +2256,6 @@ const _dutchSourceAddGa = <String, String>{
       'Tá leagan níos nuaí anois ag caighdeán a úsáideadh don tástáil:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Ní gá gur botún é sin — rinneadh an tástáil nuair a bhí an leagan sin i bhfeidhm. Taifeadann an tuairisc a úsáideadh i ndáiríre.',
-  'Gebundelde standaarden': 'Caighdeáin chuimsithe',
   'geen versienummer': 'gan uimhir leagain',
   'Bron': 'Foinse',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
@@ -2383,7 +2392,6 @@ const _dutchSourceAddGa = <String, String>{
   'Commitboodschap': 'Teachtaireacht commit',
   'Wat is er veranderd?': 'Cad a athraíodh?',
   'Opslaan naar git': 'Sábháil chuig git',
-  'Opslaan naar git…': 'Sábháil chuig git…',
   'Opgeslagen in git:': 'Sábháilte chuig git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Bhog an bhrainse; athluchtaigh an deic agus sábháil arís.',
@@ -2398,7 +2406,6 @@ const _dutchSourceAddGa = <String, String>{
   'Eigenaar': 'Úinéir',
   'Repository': 'Stór',
   'Personal access token': 'Ceadchomhartha rochtana pearsanta',
-  'Openen uit git…': 'Oscail ó Git…',
   'Presentatie openen uit git': 'Oscail láithreoireacht ó Git',
   'Geen presentaties in deze repository.':
       'Níl aon láithreoireacht sa stór seo.',

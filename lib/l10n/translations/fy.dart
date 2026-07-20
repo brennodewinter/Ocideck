@@ -751,6 +751,16 @@ const _dutchSourceAddFy = {
   'BIG-nummer van een zorgverlener': 'BIG-nûmer fan in soarchferliener',
   'AGB-code': 'AGB-koade',
   'proces-verbaalnummer': 'proses-ferbaalnûmer',
+  'Openen uit…': 'Iepenje út…',
+  'Opslaan naar…': 'Bewarje nei…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Stel earst in ferbining yn by Ynstellings → Opslach.',
+  'Beginnen met:': 'Begjinne mei:',
+  'Verlopen datums markeren': 'Ferrûne datums markearje',
+  'Datums gemarkeerd': 'Datums markearre',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Kleuret in sel mei in datum fan foar hjoed read. OciDeck sjocht nei de dei dat jo presintearje, dus in deck dat moannen letter weromkomt markearret himsels. Allinne jjjj-mm-dd jildt as datum. Standert út.',
+  'Standaarden en methodieken': 'Standerts en metoadyken',
   'Aanvalsoppervlak': 'Oanfalsflak',
   'Soort toevoegen': 'Soarte tafoegje',
   'Soort verwijderen': 'Soarte fuortsmite',
@@ -1164,7 +1174,6 @@ const _dutchSourceAddFy = {
       'Fan in standert dêr\'t tsjin toetst is bestiet no in nijere ferzje:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Dat hoecht net ferkeard te wêzen — it ûndersyk is dien doe\'t dy ferzje jilde. It rapport leit fêst wat der echt brûkt is.',
-  'Gebundelde standaarden': 'Bondele standerts',
   'geen versienummer': 'gjin ferzjenûmer',
   'Bron': 'Boarne',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
@@ -1299,7 +1308,6 @@ const _dutchSourceAddFy = {
   'Commitboodschap': 'Commit-boadskip',
   'Wat is er veranderd?': 'Wat is der feroare?',
   'Opslaan naar git': 'Bewarje nei git',
-  'Opslaan naar git…': 'Bewarje nei git…',
   'Opgeslagen in git:': 'Bewarre nei git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'De branch is ferpleatst; laad it deck opnij en bewarje wer.',
@@ -1314,7 +1322,6 @@ const _dutchSourceAddFy = {
   'Eigenaar': 'Eigener',
   'Repository': 'Repository',
   'Personal access token': 'Persoanlik tagongstoken',
-  'Openen uit git…': 'Iepenje út git…',
   'Presentatie openen uit git': 'Presintaasje iepenje út git',
   'Geen presentaties in deze repository.':
       'Gjin presintaasjes yn dizze repository.',

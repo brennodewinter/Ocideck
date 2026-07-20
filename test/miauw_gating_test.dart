@@ -19,6 +19,9 @@ void main() {
     // The add-slide picker hides SlideCategory.informatieveiligheid types when
     // the module is off, so each security type must declare that category.
     const securityTypes = {
+      // Aanvalsoppervlak hoort hier: het is MIAUW-materiaal, geen algemeen
+      // presentatiemiddel, en miste alleen zijn categorie.
+      SlideType.assets,
       SlideType.finding,
       SlideType.findingsSummary,
       SlideType.checklist,

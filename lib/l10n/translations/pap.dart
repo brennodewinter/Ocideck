@@ -751,6 +751,16 @@ const _dutchSourceAddPap = {
       'number di registrashon di un profeshonal di salú (BIG)',
   'AGB-code': 'kódigo di proveedor di kuido (AGB)',
   'proces-verbaalnummer': 'number di rapòrt di polis',
+  'Openen uit…': 'Habri for di…',
+  'Opslaan naar…': 'Warda na…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Konfigurá promé un konekshon na Konfigurashon → Almasenamentu.',
+  'Beginnen met:': 'Kuminsá ku:',
+  'Verlopen datums markeren': 'Marka fechanan vensí',
+  'Datums gemarkeerd': 'Fechanan marká',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Ta pinta un selda ku un fecha promé ku awe kòrá. OciDeck ta wak e dia ku bo ta presentá, pues un deck ku ta bolbe luna despues ta marká su mes. Solamente aaaa-mm-dd ta konta komo fecha. Pará defout.',
+  'Standaarden en methodieken': 'Standarnan i metodologianan',
   'Aanvalsoppervlak': 'Superfisie di atake',
   'Soort toevoegen': 'Agregá tipo',
   'Soort verwijderen': 'Kita tipo',
@@ -1164,7 +1174,6 @@ const _dutchSourceAddPap = {
       'Un standar ku a wòrdu usá tin awor un vershon mas nobo:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Esei no tin ku ta robes — e investigashon a tuma lugá ora e vershon ei tabata bálido. E rapòrt ta registrá loke realmente a wòrdu usá.',
-  'Gebundelde standaarden': 'Standarnan inkluí',
   'geen versienummer': 'sin number di vershon',
   'Bron': 'Fuente',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
@@ -1300,7 +1309,6 @@ const _dutchSourceAddPap = {
   'Commitboodschap': 'Mensahe di commit',
   'Wat is er veranderd?': 'Kiko a kambia?',
   'Opslaan naar git': 'Warda na git',
-  'Opslaan naar git…': 'Warda na git…',
   'Opgeslagen in git:': 'Wardá na git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'E branch a move; recarga e deck i warda atrobe.',
@@ -1315,7 +1323,6 @@ const _dutchSourceAddPap = {
   'Eigenaar': 'Doño',
   'Repository': 'Repositorio',
   'Personal access token': 'Token di akseso personal',
-  'Openen uit git…': 'Habri for di Git…',
   'Presentatie openen uit git': 'Habri un presentashon for di Git',
   'Geen presentaties in deze repository.':
       'No tin presentashon den e repositorio aki.',

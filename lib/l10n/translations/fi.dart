@@ -1794,6 +1794,16 @@ const _dutchSourceAddFi = <String, String>{
       'terveydenhuollon ammattilaisen rekisterinumero (BIG)',
   'AGB-code': 'terveydenhuollon palveluntuottajan koodi (AGB)',
   'proces-verbaalnummer': 'poliisin tutkintailmoituksen numero',
+  'Openen uit…': 'Avaa sijainnista…',
+  'Opslaan naar…': 'Tallenna sijaintiin…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Määritä ensin yhteys kohdassa Asetukset → Tallennustila.',
+  'Beginnen met:': 'Aloita tästä:',
+  'Verlopen datums markeren': 'Merkitse menneet päivämäärät',
+  'Datums gemarkeerd': 'Päivämäärät merkitty',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Värjää punaiseksi solun, jossa on tätä päivää aiempi päivämäärä. OciDeck katsoo esityspäivää, joten kuukausia myöhemmin palaava esitys merkitsee itsensä. Päivämääräksi kelpaa vain vvvv-kk-pp. Oletuksena pois käytöstä.',
+  'Standaarden en methodieken': 'Standardit ja menetelmät',
   'Aanvalsoppervlak': 'Hyökkäyspinta',
   'Soort toevoegen': 'Lisää tyyppi',
   'Soort verwijderen': 'Poista tyyppi',
@@ -2207,7 +2217,6 @@ const _dutchSourceAddFi = <String, String>{
       'Standardista, jota vasten testattiin, on nyt uudempi versio:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Se ei välttämättä ole virhe — testaus tehtiin, kun kyseinen versio oli voimassa. Raportti kirjaa, mitä todella käytettiin.',
-  'Gebundelde standaarden': 'Mukana toimitetut standardit',
   'geen versienummer': 'ei versionumeroa',
   'Bron': 'Lähde',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
@@ -2342,7 +2351,6 @@ const _dutchSourceAddFi = <String, String>{
   'Commitboodschap': 'Commit-viesti',
   'Wat is er veranderd?': 'Mikä muuttui?',
   'Opslaan naar git': 'Tallenna gitiin',
-  'Opslaan naar git…': 'Tallenna gitiin…',
   'Opgeslagen in git:': 'Tallennettu gitiin:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Haara siirtyi; lataa setti uudelleen ja tallenna uudestaan.',
@@ -2357,7 +2365,6 @@ const _dutchSourceAddFi = <String, String>{
   'Eigenaar': 'Omistaja',
   'Repository': 'Tietovarasto',
   'Personal access token': 'Henkilökohtainen käyttöoikeustunnus',
-  'Openen uit git…': 'Avaa Gitistä…',
   'Presentatie openen uit git': 'Avaa esitys Gitistä',
   'Geen presentaties in deze repository.':
       'Tässä tietovarastossa ei ole esityksiä.',

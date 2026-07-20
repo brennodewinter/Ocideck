@@ -751,6 +751,16 @@ const _dutchSourceAddFr = {
       'numéro d\'enregistrement d\'un professionnel de santé (BIG)',
   'AGB-code': 'code de prestataire de soins (AGB)',
   'proces-verbaalnummer': 'numéro de procès-verbal',
+  'Openen uit…': 'Ouvrir depuis…',
+  'Opslaan naar…': 'Enregistrer vers…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Configurez d\'abord une connexion dans Paramètres → Stockage.',
+  'Beginnen met:': 'Commencer par :',
+  'Verlopen datums markeren': 'Signaler les dates dépassées',
+  'Datums gemarkeerd': 'Dates signalées',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Colore en rouge une cellule contenant une date antérieure à aujourd\'hui. OciDeck se fonde sur le jour de la présentation : un diaporama repris des mois plus tard se signale tout seul. Seul le format aaaa-mm-jj est reconnu. Désactivé par défaut.',
+  'Standaarden en methodieken': 'Normes et méthodologies',
   'Aanvalsoppervlak': 'Surface d\'attaque',
   'Soort toevoegen': 'Ajouter un type',
   'Soort verwijderen': 'Supprimer le type',
@@ -1168,7 +1178,6 @@ const _dutchSourceAddFr = {
       'Une norme utilisée pour ce test a désormais une version plus récente :',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Ce n\'est pas nécessairement une erreur : le test a été mené quand cette version s\'appliquait. Le rapport consigne ce qui a réellement servi.',
-  'Gebundelde standaarden': 'Normes intégrées',
   'geen versienummer': 'pas de numéro de version',
   'Bron': 'Source',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
@@ -1307,7 +1316,6 @@ const _dutchSourceAddFr = {
   'Commitboodschap': 'Message de commit',
   'Wat is er veranderd?': 'Qu\'est-ce qui a changé ?',
   'Opslaan naar git': 'Enregistrer vers git',
-  'Opslaan naar git…': 'Enregistrer vers git…',
   'Opgeslagen in git:': 'Enregistré vers git :',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'La branche a bougé ; rechargez le deck et enregistrez à nouveau.',
@@ -1322,7 +1330,6 @@ const _dutchSourceAddFr = {
   'Eigenaar': 'Propriétaire',
   'Repository': 'Dépôt',
   'Personal access token': 'Jeton d\'accès personnel',
-  'Openen uit git…': 'Ouvrir depuis Git…',
   'Presentatie openen uit git': 'Ouvrir une présentation depuis Git',
   'Geen presentaties in deze repository.': 'Aucune présentation dans ce dépôt.',
   'Rapportagetaal': 'Langue du rapport',

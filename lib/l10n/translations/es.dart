@@ -748,6 +748,16 @@ const _dutchSourceAddEs = {
       'número de registro de un profesional sanitario (BIG)',
   'AGB-code': 'código de proveedor sanitario (AGB)',
   'proces-verbaalnummer': 'número de atestado policial',
+  'Openen uit…': 'Abrir desde…',
+  'Opslaan naar…': 'Guardar en…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Configure primero una conexión en Ajustes → Almacenamiento.',
+  'Beginnen met:': 'Empezar con:',
+  'Verlopen datums markeren': 'Marcar fechas vencidas',
+  'Datums gemarkeerd': 'Fechas marcadas',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Colorea en rojo una celda con una fecha anterior a hoy. OciDeck se guía por el día en que usted presenta, de modo que una presentación que vuelve meses después se marca sola. Solo aaaa-mm-dd cuenta como fecha. Desactivado por defecto.',
+  'Standaarden en methodieken': 'Normas y metodologías',
   'Aanvalsoppervlak': 'Superficie de ataque',
   'Soort toevoegen': 'Añadir tipo',
   'Soort verwijderen': 'Eliminar tipo',
@@ -1164,7 +1174,6 @@ const _dutchSourceAddEs = {
       'Un estándar contra el que se probó tiene ahora una versión más reciente:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'No tiene por qué ser un error: la prueba se hizo cuando regía esa versión. El informe registra lo que realmente se usó.',
-  'Gebundelde standaarden': 'Estándares incluidos',
   'geen versienummer': 'sin número de versión',
   'Bron': 'Fuente',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
@@ -1301,7 +1310,6 @@ const _dutchSourceAddEs = {
   'Commitboodschap': 'Mensaje de commit',
   'Wat is er veranderd?': '¿Qué ha cambiado?',
   'Opslaan naar git': 'Guardar en git',
-  'Opslaan naar git…': 'Guardar en git…',
   'Opgeslagen in git:': 'Guardado en git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'La rama se ha movido; recarga el deck y guarda de nuevo.',
@@ -1316,7 +1324,6 @@ const _dutchSourceAddEs = {
   'Eigenaar': 'Propietario',
   'Repository': 'Repositorio',
   'Personal access token': 'Token de acceso personal',
-  'Openen uit git…': 'Abrir desde Git…',
   'Presentatie openen uit git': 'Abrir una presentación desde Git',
   'Geen presentaties in deze repository.':
       'No hay presentaciones en este repositorio.',

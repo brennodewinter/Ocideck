@@ -1811,6 +1811,16 @@ const _dutchSourceAddRo = <String, String>{
       'numărul de înregistrare al unui cadru medical (BIG)',
   'AGB-code': 'cod de furnizor de servicii medicale (AGB)',
   'proces-verbaalnummer': 'număr de proces-verbal',
+  'Openen uit…': 'Deschide din…',
+  'Opslaan naar…': 'Salvează în…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Configurați mai întâi o conexiune în Setări → Stocare.',
+  'Beginnen met:': 'Începeți cu:',
+  'Verlopen datums markeren': 'Marchează datele expirate',
+  'Datums gemarkeerd': 'Date marcate',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Colorează în roșu o celulă cu o dată anterioară zilei de azi. OciDeck se ghidează după ziua în care prezentați, așa că o prezentare care revine după luni de zile se marchează singură. Doar aaaa-ll-zz contează ca dată. Dezactivat implicit.',
+  'Standaarden en methodieken': 'Standarde și metodologii',
   'Aanvalsoppervlak': 'Suprafață de atac',
   'Soort toevoegen': 'Adaugă tip',
   'Soort verwijderen': 'Elimină tipul',
@@ -2230,7 +2240,6 @@ const _dutchSourceAddRo = <String, String>{
       'Un standard față de care s-a testat are acum o versiune mai nouă:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Nu este neapărat o greșeală — testarea s-a făcut când acea versiune era în vigoare. Raportul consemnează ce s-a folosit efectiv.',
-  'Gebundelde standaarden': 'Standarde incluse',
   'geen versienummer': 'fără număr de versiune',
   'Bron': 'Sursă',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
@@ -2368,7 +2377,6 @@ const _dutchSourceAddRo = <String, String>{
   'Commitboodschap': 'Mesaj de commit',
   'Wat is er veranderd?': 'Ce s-a schimbat?',
   'Opslaan naar git': 'Salvează în git',
-  'Opslaan naar git…': 'Salvează în git…',
   'Opgeslagen in git:': 'Salvat în git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Ramura s-a mutat; reîncarcă deck-ul și salvează din nou.',
@@ -2383,7 +2391,6 @@ const _dutchSourceAddRo = <String, String>{
   'Eigenaar': 'Proprietar',
   'Repository': 'Depozit',
   'Personal access token': 'Jeton de acces personal',
-  'Openen uit git…': 'Deschide din Git…',
   'Presentatie openen uit git': 'Deschide o prezentare din Git',
   'Geen presentaties in deze repository.': 'Nicio prezentare în acest depozit.',
   'Rapportagetaal': 'Limba raportului',

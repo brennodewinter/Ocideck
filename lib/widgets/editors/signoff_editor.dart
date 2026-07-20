@@ -5,6 +5,7 @@ import '../../l10n/app_localizations.dart';
 import '../../models/document_signature.dart';
 import '../../models/slide.dart';
 import '../../state/deck_provider.dart';
+import '../../state/info_safety_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/image_limits.dart' show cappedMemoryImage;
 import '../dialogs/finalize_seal_dialog.dart';
@@ -219,15 +220,25 @@ class _SignOffEditorState extends ConsumerState<SignOffEditor>
         EditorField(label: 'Getypte handtekening', controller: _typed),
         const SizedBox(height: 12),
         _drawnSignatureField(l10n),
-        const SizedBox(height: 20),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: FilledButton.icon(
-            onPressed: _finalizeAndSeal,
-            icon: const Icon(Icons.lock_outline, size: 16),
-            label: Text(l10n.d('Afronden & verzegelen')),
+        // Verzegelen zit achter de informatieveiligheidsmodule, net als in het
+        // overloopmenu. Deze knop was de laatste weg eromheen: een dia van een
+        // moduletype blijft renderen met de module uit (MODUS-REGEL), dus een
+        // rapport dat er al een draagt bood het verzegelen alsnog aan. Weglaten
+        // in plaats van grijs maken — een knop die alleen kan uitleggen waarom
+        // hij niet werkt, is ruis. Wie een verzegeld rapport opent met de
+        // module uit, krijgt de ontdekkingsbanner die aanbiedt hem aan te
+        // zetten.
+        if (ref.watch(infoSafetyRevealProvider)) ...[
+          const SizedBox(height: 20),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: FilledButton.icon(
+              onPressed: _finalizeAndSeal,
+              icon: const Icon(Icons.lock_outline, size: 16),
+              label: Text(l10n.d('Afronden & verzegelen')),
+            ),
           ),
-        ),
+        ],
       ],
     );
   }

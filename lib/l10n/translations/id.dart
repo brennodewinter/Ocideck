@@ -1792,6 +1792,16 @@ const _dutchSourceAddId = <String, String>{
   'BIG-nummer van een zorgverlener': 'nomor registrasi tenaga kesehatan (BIG)',
   'AGB-code': 'kode penyedia layanan kesehatan (AGB)',
   'proces-verbaalnummer': 'nomor laporan polisi',
+  'Openen uit…': 'Buka dari…',
+  'Opslaan naar…': 'Simpan ke…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Siapkan koneksi terlebih dahulu di Pengaturan → Penyimpanan.',
+  'Beginnen met:': 'Mulai dengan:',
+  'Verlopen datums markeren': 'Tandai tanggal yang lewat',
+  'Datums gemarkeerd': 'Tanggal ditandai',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Mewarnai merah sel yang memuat tanggal sebelum hari ini. OciDeck mengacu pada hari Anda mempresentasikan, sehingga dek yang kembali berbulan-bulan kemudian menandai dirinya sendiri. Hanya tttt-bb-hh yang dihitung sebagai tanggal. Nonaktif secara bawaan.',
+  'Standaarden en methodieken': 'Standar dan metodologi',
   'Aanvalsoppervlak': 'Permukaan serangan',
   'Soort toevoegen': 'Tambah jenis',
   'Soort verwijderen': 'Hapus jenis',
@@ -2208,7 +2218,6 @@ const _dutchSourceAddId = <String, String>{
       'Standar yang diuji kini punya versi lebih baru:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Itu belum tentu salah — pengujian dilakukan saat versi itu berlaku. Laporan mencatat apa yang benar-benar dipakai.',
-  'Gebundelde standaarden': 'Standar bawaan',
   'geen versienummer': 'tanpa nomor versi',
   'Bron': 'Sumber',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
@@ -2342,7 +2351,6 @@ const _dutchSourceAddId = <String, String>{
   'Commitboodschap': 'Pesan commit',
   'Wat is er veranderd?': 'Apa yang berubah?',
   'Opslaan naar git': 'Simpan ke git',
-  'Opslaan naar git…': 'Simpan ke git…',
   'Opgeslagen in git:': 'Disimpan ke git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Branch telah berpindah; muat ulang dek dan simpan lagi.',
@@ -2357,7 +2365,6 @@ const _dutchSourceAddId = <String, String>{
   'Eigenaar': 'Pemilik',
   'Repository': 'Repositori',
   'Personal access token': 'Token akses pribadi',
-  'Openen uit git…': 'Buka dari Git…',
   'Presentatie openen uit git': 'Buka presentasi dari Git',
   'Geen presentaties in deze repository.':
       'Tidak ada presentasi di repositori ini.',

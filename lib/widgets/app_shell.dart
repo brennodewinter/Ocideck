@@ -20,6 +20,8 @@ import '../models/used_tool.dart';
 import '../models/slide_quality.dart';
 import '../models/storage_connection.dart';
 import '../models/webdav_settings.dart';
+import '../models/s3_settings.dart';
+import '../models/storage_origin.dart';
 import '../services/audit_dossier.dart';
 import '../services/caption_service.dart';
 import '../services/description_service.dart';

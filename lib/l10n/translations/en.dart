@@ -932,6 +932,16 @@ const _dutchSourceAddEn = {
       'healthcare professional registration number (BIG)',
   'AGB-code': 'healthcare provider code (AGB)',
   'proces-verbaalnummer': 'police report number',
+  'Openen uit…': 'Open from…',
+  'Opslaan naar…': 'Save to…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Set up a connection first, under Settings → Storage.',
+  'Beginnen met:': 'Start with:',
+  'Verlopen datums markeren': 'Mark expired dates',
+  'Datums gemarkeerd': 'Dates marked',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Colours a cell holding a date before today red. OciDeck goes by the day you present, so a deck that comes back months later marks itself. Only yyyy-mm-dd counts as a date. Off by default.',
+  'Standaarden en methodieken': 'Standards and methodologies',
   'Aanvalsoppervlak': 'Attack surface',
   'Soort toevoegen': 'Add kind',
   'Soort verwijderen': 'Remove kind',
@@ -1346,7 +1356,6 @@ const _dutchSourceAddEn = {
       'A standard this report was tested against now has a newer version:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'That need not be wrong — the test was carried out while that version applied. The report records what was actually used.',
-  'Gebundelde standaarden': 'Bundled standards',
   'geen versienummer': 'no version number',
   'Bron': 'Source',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
@@ -1481,7 +1490,6 @@ const _dutchSourceAddEn = {
   'Commitboodschap': 'Commit message',
   'Wat is er veranderd?': 'What changed?',
   'Opslaan naar git': 'Save to git',
-  'Opslaan naar git…': 'Save to git…',
   'Opgeslagen in git:': 'Saved to git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'The branch has moved; reload the deck and save again.',
@@ -1496,7 +1504,6 @@ const _dutchSourceAddEn = {
   'Eigenaar': 'Owner',
   'Repository': 'Repository',
   'Personal access token': 'Personal access token',
-  'Openen uit git…': 'Open from git…',
   'Presentatie openen uit git': 'Open a presentation from git',
   'Geen presentaties in deze repository.':
       'No presentations in this repository.',

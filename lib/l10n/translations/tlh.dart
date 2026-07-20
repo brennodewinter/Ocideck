@@ -1767,6 +1767,16 @@ const _dutchSourceAddTlh = <String, String>{
   'BIG-nummer van een zorgverlener': 'Qel mI\' (BIG)',
   'AGB-code': 'Qel ghom mI\' (AGB)',
   'proces-verbaalnummer': 'HuchwI\' De\' mI\'',
+  'Openen uit…': 'poSmoH vo\'…',
+  'Opslaan naar…': 'polmeH…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'wa\'DIch rar\'egh yIchenmoH: Do\'Ha\'ghach → nISwI\'.',
+  'Beginnen met:': 'vam Do\'',
+  'Verlopen datums markeren': 'jajmey vI\'ang',
+  'Datums gemarkeerd': 'jajmey \'angbogh',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'jaj vorgh qaSpu\'bogh jaj ngaSbogh yav Doq. jIH\'a\' \'ang OciDeck jaj cha\'lu\'bogh, vaj chorgh Hogh ret cha\'qa\'bogh nav \'ang\'egh. jaj \'oH neH jjjj-mm-dd\'e\'. motlh chu\'Ha\'.',
+  'Standaarden en methodieken': 'chutmey mIwmey je',
   'Aanvalsoppervlak': 'HIv \'ay\'',
   'Soort toevoegen': 'Segh chel',
   'Soort verwijderen': 'Segh teq',
@@ -2177,7 +2187,6 @@ const _dutchSourceAddTlh = <String, String>{
       'tetlh chu\' tu\'lu\':',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'qab \'oHbe\'; mI\' vIleghpu\'DI\' qaStaHvIS. lo\'lu\'pu\'bogh qon.',
-  'Gebundelde standaarden': 'tetlh chuv',
   'geen versienummer': 'mI\' Hutlh',
   'Bron': 'Daq',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
@@ -2308,7 +2317,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Commitboodschap': 'commit QIn',
   'Wat is er veranderd?': 'nuq choHlu\'pu\'?',
   'Opslaan naar git': 'git-Daq Qaw\'',
-  'Opslaan naar git…': 'git-Daq Qaw\'…',
   'Opgeslagen in git:': 'git-Daq Qaw\'ta\':',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'branch vIHpu\'; deck yISamqa\' \'ej yIQaw\'qa\'.',
@@ -2323,7 +2331,6 @@ const _dutchSourceAddTlh = <String, String>{
   'Eigenaar': 'ghaj wI\'',
   'Repository': 'qawHaq',
   'Personal access token': 'pagh QulHom',
-  'Openen uit git…': 'Gitvo\' poSmoH…',
   'Presentatie openen uit git': 'Gitvo\' HaSta\' poQwI\' poSmoH',
   'Geen presentaties in deze repository.':
       'qawHaqvamDaq HaSta\' poQwI\' tu\'lu\'be\'.',

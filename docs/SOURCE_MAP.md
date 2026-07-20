@@ -43,7 +43,6 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `rehearsal.dart` — `RehearsalRun`/`SlideTiming` for tracking presentation-practice durations per slide.
 - `scope_matrix_spec.dart` — `ScopeMatrixSpec`/`ScopeRow`/`ScopeObjectType`/`ScopeStatus` for the scope-matrix slide; each row carries a `CiaRating` (serialised as the `C`/`I`/`A` columns).
 - `asset_overview_spec.dart` — `AssetOverviewSpec`/`AssetGroup` for the attack-surface slide: a *kind* of exposed object with how many there are, at risk, new and unowned. Totals are derived; "asset" here is an exposed object, not a media file.
-- `actions_spec.dart` — `ActionsSpec`/`ActionItem` for the actions slide: what, who, by when, and what is being asked. "Overdue" is derived from the deadline against the day the deck is shown, never stored.
 - `scorecard_spec.dart` — `ScorecardSpec`/`ScorecardEntry` for the scorecard slide: a figure plus the figure it replaces, with the delta, direction and sentiment all derived. Polarity is stored because the deck cannot know whether a rise is good news.
 - `privacy_disposition.dart` — `PrivacyDisposition` (warn/accept/shield/redact) and the slide-overrides-deck resolution.
 - `quality_disposition.dart` — `QualityDisposition` (warn/accept): the same idea for quality findings, per slide only. Two values and not four — a contrast problem has no recipient to warn and nothing to black out.
@@ -58,6 +57,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `timeline.dart` — `TimelineEvent` and `TimelineLayout`/`TimelineReveal` enums for animated timeline slides.
 - `video_source.dart` — `VideoSource` parser for local files, YouTube, Vimeo, and remote video URLs.
 - `parts/app_appearance_profile.dart` — `AppAppearanceProfile`: how the application itself looks, as opposed to `ThemeProfile`, which styles a slide and travels inside the deck. A `part` of `settings.dart` so callers need no second import.
+- `storage_origin.dart` — `StorageOrigin`: het smalle contract dat elke herkomst deelt (`connectionId`, `remoteLocation`), geïmplementeerd door `WebdavOrigin`, `S3Origin` en `GitOrigin`. Bestaat zodat een tabblad één herkomstveld heeft in plaats van drie: met drie losse velden kon een deck er twee tegelijk dragen en was "waar kwam dit vandaan" niet te beantwoorden.
 - `storage_connection.dart` — `StorageConnection` (sealed: `LocalConnection`/`WebdavConnection`/`S3Connection`/`GitConnection`) — the single notion of "a place decks live". One list, user-ordered, replacing the old split between a libraries list and one-of-each network source. Each carries a stable `id` so renaming a connection or fixing a typo in its URL never detaches an open deck from its origin; secrets stay in the keychain, keyed on server + user, so two connections to one account share one password.
 - `s3_settings.dart` — `S3Bucket` for S3 source configuration: endpoint, region, bucket, access key id, prefix and addressing style. The endpoint is a free field rather than a list of AWS regions because the self-hosted (MinIO) and European providers are the interesting case; `S3AddressingStyle` decides whether the bucket goes in the host name (AWS) or the path (most self-hosted endpoints). `uriForKey` encodes the path with the strict AWS rules instead of leaving it to `Uri` — S3 compares our signature against a canonical form derived from the path it received, so what goes over the wire must match what was signed byte for byte.
 - `webdav_settings.dart` — `WebdavServer`/`WebdavOrigin` (the origin carries the `etag` a save is checked against, plus the `connectionId` that sends a save back to the connection it came from) for WebDAV source configuration (Nextcloud, ownCloud, or any other server).
@@ -250,6 +250,7 @@ deliberately manual).
 - `password_strength.dart` — Entropy-based password-strength estimate (warn-only) for the encrypt dialog.
 - `project_path.dart` — Path resolution with project containment and symlink checking.
 - `sanitize_svg.dart` — Strips dangerous elements/attributes from Mermaid SVG output.
+- `table_dates.dart` — `parseIsoDateCell`/`isPastDateCell`: recognises a table cell that is a bare ISO date and whether it has passed. Strict `yyyy-mm-dd` only, and it rejects dates that do not exist (`DateTime` silently rolls 31 February into March). Drives the `table-overdue` marking, which is derived against the day the deck is shown rather than stored.
 - `table_clipboard.dart` — Recognises whether clipboard content is a table and which separator it uses (the part that is genuinely about a paste); the field scanning is `csv.dart`. Parses tabular clipboard content (TSV, CSV, markdown tables).
 - `text_search.dart` — Case-insensitive text search/replace with match tracking.
 - `title_contrast.dart` — Evaluates title contrast and recommends WCAG fixes.
@@ -300,7 +301,7 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 
 - `ai_actions.dart` — `_MainLayoutAiActions`: the bulk "wipe AI alt-texts" safety action.
 - `command_palette_actions.dart` — `_MainLayoutCommandPalette`: builds and shows the Ctrl/Cmd+K command list (incl. the security-module actions).
-- `shell_actions.dart` — File-IO helpers for deck import/export and the WebDAV source, plus shared `presentDeck`/`requestCloseTab` helpers.
+- `shell_actions.dart` — File-IO helpers for deck import/export and the WebDAV source, plus shared `presentDeck`/`requestCloseTab` helpers. Draagt ook de twee gedeelde ingangen `_openFromConnection`/`_saveToConnection` (één "Openen uit…" en één "Opslaan naar…" voor alle opslagsoorten) en `_saveToOrigin`, waarmee de gewone opslaanknop teruggaat naar de plek waar het deck vandaan kwam in plaats van lokaal te landen.
 - `shell_actions_git.dart` — The `…`-menu handlers for the git plane: open/save, sync, flush the outbox, history, versions, compare, resolve a merge conflict, open for review, merge the concept, tag a release, and the pool overview. Each one gates and reports; the dialogs themselves live next door.
 - `shell_actions_git_dialogs.dart` — The git dialogs: browse, history, the version list and its compare picker, the version diff, the merge-conflict chooser, save, review, merge and tag.
 - `shell_actions_git_search.dart` — `_GitSearchDialog`: the cross-deck search UI. A button rather than search-as-you-type, since each round reads N files over REST. Picking a hit returns its deck dir to `_searchDecks`, which opens it through the ordinary `_openFromGit` path.

@@ -1801,6 +1801,16 @@ const _dutchSourceAddLt = <String, String>{
       'sveikatos priežiūros specialisto registracijos numeris (BIG)',
   'AGB-code': 'sveikatos priežiūros paslaugų teikėjo kodas (AGB)',
   'proces-verbaalnummer': 'policijos protokolo numeris',
+  'Openen uit…': 'Atverti iš…',
+  'Opslaan naar…': 'Įrašyti į…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Pirmiausia nustatykite ryšį skiltyje Nustatymai → Saugykla.',
+  'Beginnen met:': 'Pradėti nuo:',
+  'Verlopen datums markeren': 'Žymėti pasibaigusias datas',
+  'Datums gemarkeerd': 'Datos pažymėtos',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Nuspalvina raudonai langelį su data iki šiandienos. OciDeck remiasi pristatymo diena, todėl po mėnesių sugrįžusi skaidrių rinkinys pasižymi pats. Data laikoma tik mmmm-mm-dd. Pagal numatytuosius nustatymus išjungta.',
+  'Standaarden en methodieken': 'Standartai ir metodikos',
   'Aanvalsoppervlak': 'Atakos paviršius',
   'Soort toevoegen': 'Pridėti rūšį',
   'Soort verwijderen': 'Pašalinti rūšį',
@@ -2217,7 +2227,6 @@ const _dutchSourceAddLt = <String, String>{
       'Standartas, su kuriuo lyginta, dabar turi naujesnę versiją:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Tai nebūtinai klaida — tyrimas atliktas galiojant tai versijai. Ataskaita fiksuoja, kas iš tikrųjų buvo naudota.',
-  'Gebundelde standaarden': 'Pridėti standartai',
   'geen versienummer': 'be versijos numerio',
   'Bron': 'Šaltinis',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
@@ -2355,7 +2364,6 @@ const _dutchSourceAddLt = <String, String>{
   'Commitboodschap': 'Commit pranešimas',
   'Wat is er veranderd?': 'Kas pasikeitė?',
   'Opslaan naar git': 'Įrašyti į git',
-  'Opslaan naar git…': 'Įrašyti į git…',
   'Opgeslagen in git:': 'Įrašyta į git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Šaka pasislinko; iš naujo įkelkite rinkinį ir įrašykite dar kartą.',
@@ -2370,7 +2378,6 @@ const _dutchSourceAddLt = <String, String>{
   'Eigenaar': 'Savininkas',
   'Repository': 'Saugykla',
   'Personal access token': 'Asmeninis prieigos raktas',
-  'Openen uit git…': 'Atverti iš Git…',
   'Presentatie openen uit git': 'Atverti pristatymą iš Git',
   'Geen presentaties in deze repository.': 'Šioje saugykloje pristatymų nėra.',
   'Rapportagetaal': 'Ataskaitos kalba',

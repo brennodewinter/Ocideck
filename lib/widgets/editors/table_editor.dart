@@ -29,6 +29,7 @@ class _TableEditorState extends State<TableEditor> {
 
   late final TextEditingController _title;
   late List<List<TextEditingController>> _cells;
+  bool _wasBlank = true;
 
   @override
   void initState() {
@@ -36,6 +37,7 @@ class _TableEditorState extends State<TableEditor> {
     _title = TextEditingController(text: widget.slide.title);
     _title.addListener(_emit);
     _initCells(widget.slide.tableRows);
+    _wasBlank = _isBlank;
   }
 
   void _initCells(List<List<String>> raw) {
@@ -63,13 +65,61 @@ class _TableEditorState extends State<TableEditor> {
 
   int get _colCount => _cells.isEmpty ? 0 : _cells.first.length;
 
+  List<List<String>> get _rows =>
+      _cells.map((row) => row.map((c) => c.text).toList()).toList();
+
   void _emit() {
+    widget.onUpdate(
+      widget.slide.copyWith(title: _title.text, tableRows: _rows),
+    );
+    // De presetknop hoort te verdwijnen zodra er iets staat. De cellen melden
+    // hun wijziging via deze listener, niet via setState, dus die stap is hier
+    // nodig — en alleen op de overgang, om niet elke toetsaanslag te herbouwen.
+    final blank = _isBlank;
+    if (blank != _wasBlank) {
+      _wasBlank = blank;
+      if (mounted) setState(() {});
+    }
+  }
+
+  /// Of de tabel nog helemaal leeg is. Alleen dan biedt de editor een preset
+  /// aan: een voorgevulde koprij over ingetypte inhoud heen zetten zou werk
+  /// weggooien, en de knop hoort weg zodra hij niet meer helpt.
+  bool get _isBlank =>
+      _cells.every((row) => row.every((c) => c.text.trim().isEmpty));
+
+  /// Zet de kolommen van een actielijst neer en schakelt de datummarkering in.
+  /// Dit verving het opgeheven slidetype 'Acties en besluiten': dezelfde
+  /// kolommen om mee te beginnen, maar in een gewone tabel — dus mét plakken
+  /// uit een spreadsheet, kolommen bijzetten en bewerken tijdens presenteren.
+  void _applyActionsPreset() {
+    final l10n = context.l10n;
+    final headers = [
+      l10n.d('Actie'),
+      l10n.d('Eigenaar'),
+      l10n.d('Deadline'),
+      l10n.d('Status'),
+    ];
+    setState(() {
+      while (_colCount < headers.length) {
+        for (final row in _cells) {
+          row.add(_makeCtrl(''));
+        }
+      }
+      for (var c = 0; c < headers.length; c++) {
+        final ctrl = _cells[0][c];
+        // Zonder tussentijdse melding; één update volgt hieronder.
+        ctrl.removeListener(_emit);
+        ctrl.text = headers[c];
+        ctrl.addListener(_emit);
+      }
+      _wasBlank = false;
+    });
     widget.onUpdate(
       widget.slide.copyWith(
         title: _title.text,
-        tableRows: _cells
-            .map((row) => row.map((c) => c.text).toList())
-            .toList(),
+        tableRows: _rows,
+        tableMarkOverdue: true,
       ),
     );
   }
@@ -208,6 +258,7 @@ class _TableEditorState extends State<TableEditor> {
             style: TextStyle(fontSize: 11, color: AppTheme.slate500),
           ),
         ),
+        if (_isBlank) _buildPresetRow(),
         _buildColumnControls(),
         for (int r = 0; r < _cells.length; r++) _buildRow(r),
         const SizedBox(height: 8),
@@ -227,6 +278,28 @@ class _TableEditorState extends State<TableEditor> {
           ],
         ),
       ],
+    );
+  }
+
+  /// Aangeboden zolang de tabel leeg is: één klik zet de kolommen van een
+  /// actielijst neer, zodat het gemak van het oude slidetype niet verloren gaat.
+  Widget _buildPresetRow() {
+    final l10n = context.l10n;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Row(
+        children: [
+          Text(
+            l10n.d('Beginnen met:'),
+            style: TextStyle(fontSize: 11, color: AppTheme.slate500),
+          ),
+          const SizedBox(width: 8),
+          OutlinedButton(
+            onPressed: _applyActionsPreset,
+            child: Text(l10n.d('Acties en besluiten')),
+          ),
+        ],
+      ),
     );
   }
 

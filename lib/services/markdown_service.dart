@@ -370,6 +370,10 @@ class MarkdownService {
       // default, so tables stay read-only unless the author opts in.
       if (slide.type == SlideType.table && slide.tableEditable)
         'table-editable',
+      // Table slides that mark expired ISO dates. Absent by default, so an
+      // existing table never changes appearance.
+      if (slide.type == SlideType.table && slide.tableMarkOverdue)
+        'table-overdue',
       // Timeline layout/animation options ride along as extra class tokens so
       // they round-trip without a JSON block (the base `timeline` token comes
       // from marpClass above).
@@ -443,7 +447,6 @@ class MarkdownService {
         _writeQuestionSlide(buf, slide);
       // Zie [_writeTableSlide] voor waarom deze zes hetzelfde wegschrijven.
       case SlideType.scorecard:
-      case SlideType.actions:
       case SlideType.assets:
       case SlideType.checklist:
       case SlideType.scopeMatrix:

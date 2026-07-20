@@ -37,16 +37,28 @@ GitConnection? _originConnection(
   return connection;
 }
 
-Future<void> _saveToGit(BuildContext context, WidgetRef ref) async {
+Future<void> _saveToGit(
+  BuildContext context,
+  WidgetRef ref, {
+  GitConnection? connectionOverride,
+}) async {
   final tab = ref.read(tabsProvider).current;
   final deck = tab?.deckNotifier.currentState.deck;
   if (tab == null || deck == null) return;
   // Kwam dit deck uit een repo die nog bestaat, dan gaat het daar zonder vragen
-  // naartoe terug. Alleen een deck zonder herkomst laat kiezen.
+  // naartoe terug. Alleen een deck zonder herkomst laat kiezen — of een
+  // expliciet gekozen doel, want dat is wat "Opslaan naar…" betekent.
   final origin = tab.gitOrigin;
-  final connection = origin == null
-      ? await _pickGitConnection(context, ref)
-      : _originConnection(context, ref, origin);
+  // Bewust uitgeschreven en niet als één expressie: de herkomst-tak doet geen
+  // await, en dan hoort de analyse dat ook te kunnen zien.
+  final GitConnection? connection;
+  if (connectionOverride != null) {
+    connection = connectionOverride;
+  } else if (origin != null) {
+    connection = _originConnection(context, ref, origin);
+  } else {
+    connection = await _pickGitConnection(context, ref);
+  }
   if (connection == null || !context.mounted) return;
   final forge = await ref.read(gitForgeProvider(connection.id).future);
   if (!context.mounted) return;

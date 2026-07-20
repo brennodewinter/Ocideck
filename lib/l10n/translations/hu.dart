@@ -1797,6 +1797,16 @@ const _dutchSourceAddHu = <String, String>{
       'egészségügyi dolgozó nyilvántartási száma (BIG)',
   'AGB-code': 'egészségügyi szolgáltató kódja (AGB)',
   'proces-verbaalnummer': 'rendőrségi jegyzőkönyv száma',
+  'Openen uit…': 'Megnyitás innen…',
+  'Opslaan naar…': 'Mentés ide…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Először állítson be egy kapcsolatot a Beállítások → Tárhely alatt.',
+  'Beginnen met:': 'Kezdés ezzel:',
+  'Verlopen datums markeren': 'Lejárt dátumok jelölése',
+  'Datums gemarkeerd': 'Dátumok jelölve',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Pirosra színez egy cellát, amelyben a mainál korábbi dátum áll. Az OciDeck a bemutatás napjához igazodik, így a hónapokkal később visszatérő diasor önmagát jelöli meg. Dátumnak csak az éééé-hh-nn számít. Alapértelmezés szerint kikapcsolva.',
+  'Standaarden en methodieken': 'Szabványok és módszertanok',
   'Aanvalsoppervlak': 'Támadási felület',
   'Soort toevoegen': 'Típus hozzáadása',
   'Soort verwijderen': 'Típus eltávolítása',
@@ -2213,7 +2223,6 @@ const _dutchSourceAddHu = <String, String>{
       'Egy vizsgálati alapként használt szabványnak már újabb verziója van:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Ez nem feltétlenül hiba — a vizsgálat akkor készült, amikor az a verzió volt érvényben. A jelentés azt rögzíti, amit ténylegesen használtak.',
-  'Gebundelde standaarden': 'Mellékelt szabványok',
   'geen versienummer': 'nincs verziószám',
   'Bron': 'Forrás',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
@@ -2349,7 +2358,6 @@ const _dutchSourceAddHu = <String, String>{
   'Commitboodschap': 'Commit üzenet',
   'Wat is er veranderd?': 'Mi változott?',
   'Opslaan naar git': 'Mentés gitbe',
-  'Opslaan naar git…': 'Mentés gitbe…',
   'Opgeslagen in git:': 'Mentve gitbe:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Az ág elmozdult; töltsd újra a csomagot, és ments újra.',
@@ -2364,7 +2372,6 @@ const _dutchSourceAddHu = <String, String>{
   'Eigenaar': 'Tulajdonos',
   'Repository': 'Tároló',
   'Personal access token': 'Személyes hozzáférési token',
-  'Openen uit git…': 'Megnyitás Gitből…',
   'Presentatie openen uit git': 'Bemutató megnyitása Gitből',
   'Geen presentaties in deze repository.':
       'Nincsenek bemutatók ebben a tárolóban.',

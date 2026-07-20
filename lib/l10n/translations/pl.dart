@@ -1805,6 +1805,16 @@ const _dutchSourceAddPl = <String, String>{
       'numer rejestracyjny pracownika ochrony zdrowia (BIG)',
   'AGB-code': 'kod świadczeniodawcy (AGB)',
   'proces-verbaalnummer': 'numer protokołu policyjnego',
+  'Openen uit…': 'Otwórz z…',
+  'Opslaan naar…': 'Zapisz do…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Skonfiguruj najpierw połączenie w Ustawienia → Magazyn.',
+  'Beginnen met:': 'Zacznij od:',
+  'Verlopen datums markeren': 'Oznacz przeterminowane daty',
+  'Datums gemarkeerd': 'Daty oznaczone',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Koloruje na czerwono komórkę z datą wcześniejszą niż dzisiaj. OciDeck kieruje się dniem prezentacji, więc talia wracająca po miesiącach oznacza się sama. Za datę uznawany jest wyłącznie format rrrr-mm-dd. Domyślnie wyłączone.',
+  'Standaarden en methodieken': 'Normy i metodyki',
   'Aanvalsoppervlak': 'Powierzchnia ataku',
   'Soort toevoegen': 'Dodaj rodzaj',
   'Soort verwijderen': 'Usuń rodzaj',
@@ -2218,7 +2228,6 @@ const _dutchSourceAddPl = <String, String>{
       'Standard, względem którego testowano, ma już nowszą wersję:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'To nie musi być błąd — badanie przeprowadzono, gdy obowiązywała tamta wersja. Raport zapisuje to, czego faktycznie użyto.',
-  'Gebundelde standaarden': 'Dołączone standardy',
   'geen versienummer': 'brak numeru wersji',
   'Bron': 'Źródło',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
@@ -2354,7 +2363,6 @@ const _dutchSourceAddPl = <String, String>{
   'Commitboodschap': 'Komunikat commita',
   'Wat is er veranderd?': 'Co się zmieniło?',
   'Opslaan naar git': 'Zapisz do gita',
-  'Opslaan naar git…': 'Zapisz do gita…',
   'Opgeslagen in git:': 'Zapisano do gita:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Gałąź się przesunęła; przeładuj zestaw i zapisz ponownie.',
@@ -2369,7 +2377,6 @@ const _dutchSourceAddPl = <String, String>{
   'Eigenaar': 'Właściciel',
   'Repository': 'Repozytorium',
   'Personal access token': 'Osobisty token dostępu',
-  'Openen uit git…': 'Otwórz z Git…',
   'Presentatie openen uit git': 'Otwórz prezentację z Git',
   'Geen presentaties in deze repository.':
       'Brak prezentacji w tym repozytorium.',

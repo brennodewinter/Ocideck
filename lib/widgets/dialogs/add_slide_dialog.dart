@@ -48,14 +48,13 @@ class AddSlideDialog extends StatefulWidget {
     SlideType.chart,
     SlideType.cockpit,
     SlideType.scorecard,
-    SlideType.actions,
-    SlideType.assets,
     SlideType.timeline,
     SlideType.question,
     SlideType.code,
     SlideType.freeMarkdown,
     // Informatieveiligheid-module — grouped last; shown under their own picker
     // tab (P0-PICK) once the category carries types.
+    SlideType.assets,
     SlideType.finding,
     SlideType.findingsSummary,
     SlideType.checklist,
@@ -516,8 +515,6 @@ class SlideTypePreviewPainter extends CustomPainter {
         }
       case SlideType.scorecard:
         _paintScorecardWireframe(canvas);
-      case SlideType.actions:
-        _paintActionsWireframe(canvas);
       case SlideType.assets:
         _paintAssetsWireframe(canvas);
       case SlideType.finding:
@@ -539,20 +536,6 @@ class SlideTypePreviewPainter extends CustomPainter {
       _bar(canvas, x, 32, 26, 5, _soft, radius: 2);
       _bar(canvas, x, 43, 38, 14, _ink, radius: 3);
       _bar(canvas, x, 63, 18, 6, _accent, radius: 2);
-    }
-  }
-
-  /// Heading plus four rows, each an accent marker for what is being asked, the
-  /// action itself, and a short owner/date tail. Split out of [paint] for the
-  /// length ratchet, like [_paintScorecardWireframe].
-  void _paintActionsWireframe(Canvas canvas) {
-    _bar(canvas, 14, 12, 72, 9, _ink);
-    for (var i = 0; i < 4; i++) {
-      final y = 32.0 + i * 14;
-      // The first two rows are asks, so they carry the accent marker.
-      _bar(canvas, 14, y, 5, 8, i < 2 ? _accent : _soft, radius: 2);
-      _bar(canvas, 24, y + 1, i.isEven ? 74 : 60, 6, _ink, radius: 2);
-      _bar(canvas, 108, y + 1, 38, 6, _soft, radius: 2);
     }
   }
 

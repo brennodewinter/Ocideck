@@ -88,6 +88,9 @@ void main() {
     // tab bar and no informatieveiligheid type is reachable.
     expect(find.byType(ChoiceChip), findsNothing);
     expect(find.text('Bevinding'), findsNothing);
+    // Aanvalsoppervlak is MIAUW-materiaal en hoort bij de module; het miste
+    // alleen zijn categorie en stond daardoor altijd in de kiezer.
+    expect(find.text('Aanvalsoppervlak'), findsNothing);
   });
 
   testWidgets('module on: the picker reveals the security tab', (tester) async {
@@ -99,6 +102,7 @@ void main() {
     await tester.tap(find.text('Informatieveiligheid'));
     await tester.pumpAndSettle();
     expect(find.text('Bevinding'), findsOneWidget);
+    expect(find.text('Aanvalsoppervlak'), findsOneWidget);
   });
 
   testWidgets(

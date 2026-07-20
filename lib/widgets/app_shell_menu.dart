@@ -10,6 +10,11 @@
 part of 'app_shell.dart';
 
 extension _MainLayoutMenu on _MainLayoutState {
+  /// Of er iets te openen of op te slaan valt buiten de lokale schijf. Zonder
+  /// verbinding zouden beide items altijd op dezelfde "stel eerst iets in"-
+  /// melding uitkomen, en dat is geen menu-item maar ruis.
+  bool get _hasRemoteConnections => _remoteConnections(ref).isNotEmpty;
+
   /// De git-blokken van het menu.
   ///
   /// Eigen methode omdat dit één samenhangend verhaal is: wat er te zien is
@@ -42,12 +47,9 @@ extension _MainLayoutMenu on _MainLayoutState {
 
     return [
       const PopupMenuDivider(),
-      _menuItem('open_git', Icons.hub_outlined, l10n.d('Openen uit git…')),
-      _menuItem(
-        'save_git',
-        Icons.cloud_upload_outlined,
-        l10n.d('Opslaan naar git…'),
-      ),
+      // Openen en opslaan staan hier niet meer: die lopen via de gedeelde
+      // "Openen uit…" en "Opslaan naar…" hierboven, samen met WebDAV en S3.
+      // Wat hier overblijft is wat git écht toevoegt en geen andere opslag kan.
       _menuItem('sync_git', Icons.sync, l10n.d('Nu synchroniseren')),
       _menuItem(
         'search_git',
@@ -104,6 +106,23 @@ extension _MainLayoutMenu on _MainLayoutState {
       // dialoog-in-nieuw-tabblad bereikbaar. Drie keer hetzelfde in beeld maakt
       // het menu alleen langer.
       _menuItem('open', Icons.folder_open_outlined, l10n.t('openEllipsis')),
+      // Eén ingang per richting, ongeacht de soort opslag. De vraag is "waar
+      // staat mijn presentatie", niet "welk protocol draait daar" — en met
+      // precies één verbinding stelt de kiezer de vraag helemaal niet.
+      // Opslaan zonder meer volgt de herkomst; dit is het pad om iets bewust
+      // ergens ánders neer te zetten.
+      if (_hasRemoteConnections) ...[
+        _menuItem(
+          'open_remote',
+          Icons.cloud_download_outlined,
+          l10n.d('Openen uit…'),
+        ),
+        _menuItem(
+          'save_remote',
+          Icons.cloud_upload_outlined,
+          l10n.d('Opslaan naar…'),
+        ),
+      ],
       const PopupMenuDivider(),
       // ── Pakket en import ──────────────────────────────────────────
       // Pakketten en URL-import werken overal: op web volledig in het
@@ -122,30 +141,6 @@ extension _MainLayoutMenu on _MainLayoutState {
       ),
       _menuItem('import_url', Icons.link, l10n.t('importUrl')),
       ..._gitMenuItems(l10n),
-      // ── Netwerkbronnen ────────────────────────────────────────────
-      if (supportsNetworkDeckSources) ...[
-        const PopupMenuDivider(),
-        _menuItem(
-          'open_nextcloud',
-          Icons.cloud_download_outlined,
-          l10n.d('Openen vanaf WebDAV'),
-        ),
-        _menuItem(
-          'save_nextcloud',
-          Icons.cloud_upload_outlined,
-          l10n.d('Opslaan naar WebDAV'),
-        ),
-        _menuItem(
-          'open_s3',
-          Icons.inventory_2_outlined,
-          l10n.d('Openen vanuit S3'),
-        ),
-        _menuItem(
-          'save_s3',
-          Icons.inventory_outlined,
-          l10n.d('Opslaan naar S3'),
-        ),
-      ],
       const PopupMenuDivider(),
       // ── Bewerken in dit deck ──────────────────────────────────────
       _menuItem('find', Icons.find_replace, l10n.t('findReplace')),
@@ -172,8 +167,12 @@ extension _MainLayoutMenu on _MainLayoutState {
         ),
       const PopupMenuDivider(),
       // Documentintegriteit (§8 A1): afronden is bewust eenrichtingsverkeer, dus
-      // het item verdwijnt zodra het deck verzegeld is.
-      if (ref.read(deckProvider).deck?.finalized != true)
+      // het item verdwijnt zodra het deck verzegeld is. Verzegelen is een
+      // informatieveiligheidsfunctie — het hoort achter dezelfde module-gate als
+      // het RFC3161-tijdstempel dat er in het commandopalet op volgt, anders is
+      // het halve verzegelspoor bereikbaar met de module uit.
+      if (ref.read(infoSafetyRevealProvider) &&
+          ref.read(deckProvider).deck?.finalized != true)
         _menuItem(
           'finalize',
           Icons.verified_user_outlined,

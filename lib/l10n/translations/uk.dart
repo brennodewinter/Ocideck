@@ -1812,6 +1812,16 @@ const _dutchSourceAddUk = <String, String>{
       'реєстраційний номер медичного працівника (BIG)',
   'AGB-code': 'код надавача медичних послуг (AGB)',
   'proces-verbaalnummer': 'номер поліцейського протоколу',
+  'Openen uit…': 'Відкрити з…',
+  'Opslaan naar…': 'Зберегти до…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Спершу налаштуйте з\'єднання в Налаштування → Сховище.',
+  'Beginnen met:': 'Почати з:',
+  'Verlopen datums markeren': 'Позначати прострочені дати',
+  'Datums gemarkeerd': 'Дати позначено',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Фарбує в червоне комірку з датою до сьогодні. OciDeck зважає на день, коли ви презентуєте, тож набір слайдів, що повертається за місяці, позначає себе сам. Датою вважається лише рррр-мм-дд. Типово вимкнено.',
+  'Standaarden en methodieken': 'Стандарти та методології',
   'Aanvalsoppervlak': 'Поверхня атаки',
   'Soort toevoegen': 'Додати вид',
   'Soort verwijderen': 'Видалити вид',
@@ -2225,7 +2235,6 @@ const _dutchSourceAddUk = <String, String>{
       'Стандарт, щодо якого проводилася перевірка, має новішу версію:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Це не обов\'язково помилка — перевірку проводили, коли діяла та версія. Звіт фіксує те, що справді використовувалося.',
-  'Gebundelde standaarden': 'Вбудовані стандарти',
   'geen versienummer': 'без номера версії',
   'Bron': 'Джерело',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
@@ -2362,7 +2371,6 @@ const _dutchSourceAddUk = <String, String>{
   'Commitboodschap': 'Повідомлення коміту',
   'Wat is er veranderd?': 'Що змінилося?',
   'Opslaan naar git': 'Зберегти в git',
-  'Opslaan naar git…': 'Зберегти в git…',
   'Opgeslagen in git:': 'Збережено в git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Гілку переміщено; перезавантажте колоду й збережіть знову.',
@@ -2377,7 +2385,6 @@ const _dutchSourceAddUk = <String, String>{
   'Eigenaar': 'Власник',
   'Repository': 'Репозиторій',
   'Personal access token': 'Особистий токен доступу',
-  'Openen uit git…': 'Відкрити з Git…',
   'Presentatie openen uit git': 'Відкрити презентацію з Git',
   'Geen presentaties in deze repository.':
       'У цьому репозиторії немає презентацій.',

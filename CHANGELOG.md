@@ -10,6 +10,34 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Added
+- **De tabel markeert verlopen datums, en begint waar u wilt beginnen.** Twee
+  eigenschappen die het opgeheven slidetype 'Acties en besluiten' had, maar nu
+  van het tabeltype zelf zijn — dus mét plakken uit een spreadsheet, kolommen
+  bijzetten, en bewerken tijdens het presenteren.
+
+  Zet **Verlopen datums markeren** aan en een cel met een datum van vóór
+  vandaag kleurt rood. OciDeck kijkt daarvoor naar de dag waarop u presenteert,
+  niet naar een opgeslagen vlag: een deck dat drie maanden later terugkomt,
+  markeert zijn eigen verlopen deadlines in plaats van te blijven beweren dat
+  alles op schema ligt. Er is dan ook geen status "te laat" die u zelf zet —
+  wat u typt bevriest op de dag dat u het typte.
+
+  De markering staat standaard uit. Een tabel met historische datums zou anders
+  volledig rood kleuren, en een waarschuwing die overal staat waarschuwt
+  nergens voor.
+
+  Alleen jjjj-mm-dd telt als datum. `05-08-2026` is twee verschillende dagen
+  afhankelijk van wie het typte, en een deadline is een slechte plek om te
+  gokken; een cel die niet strikt ISO is, wordt simpelweg niet gemarkeerd.
+  Bestaande-maar-onmogelijke datums vallen ook af: 31 februari rolt in Dart
+  stilzwijgend door naar maart, en die stilte is hier niet gewenst.
+
+  Zolang de tabel nog leeg is, biedt de editor daarnaast een **preset** aan die
+  in één klik de kolommen van een actielijst neerzet — Actie, Eigenaar,
+  Deadline, Status — en de datummarkering aanzet. De knop verdwijnt zodra er
+  iets in de tabel staat, zodat hij nooit overschrijft wat u al had getypt.
+
+
 - **De laatste vier geheimen.** Azure-sleutels en SAS-tokens, wachtwoordhashes
   (bcrypt, argon2, sha512-crypt, NTLM-dumps), TOTP-seeds uit een `otpauth://`-URI,
   en een vangnet voor hoog-entropische strings. Dat laatste is de eerste
@@ -55,33 +83,10 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   waar het bij hoort. Corrigeren doet hij het niet: dat zou de fout verbergen in
   wat het getal produceerde, en juist zulke fouten hoort een rapportage te laten
   zien.
-- **Een nieuw slidetype: acties en besluiten.** Tot acht regels met wat er moet
-  gebeuren, wie het doet, wanneer het af moet, en — het veld waar het type om
-  bestaat — wat u van de zaal vraagt: ter informatie, besluit gevraagd, of
-  escalatie.
 
-  Alleen een besluit of escalatie krijgt een label op de slide. De
-  informatieregels blijven bewust onbenoemd: een besluit dat tussen de
-  mededelingen staat, wordt geen besluit genomen, en het oog hoort naar de
-  regels te gaan die iets nodig hebben.
-
-  "Te laat" bestaat niet als status die u zelf zet. OciDeck leidt het af uit de
-  deadline tegen de dag waarop het deck getoond wordt, dus een presentatie die
-  twee maanden later opnieuw langskomt, markeert haar eigen verlopen deadlines
-  in plaats van te blijven beweren dat alles op schema ligt. Een afgeronde actie
-  wordt nooit als te laat gemarkeerd, hoe laat ze ook was — de slide meldt de
-  stand, niet de geschiedenis. Ze blijft wel staan, doorgestreept: dát ze af is,
-  is het nieuws.
-
-  Er is ook een veld **op de lijst sinds**. Dat maakt van een terugkerende
-  rapportage een dossier in plaats van een frisse lijst: een punt dat drie
-  rapportages meegaat, is een ander gesprek dan een punt van vorige week.
-
-  Datums typt u als jjjj-mm-dd. Een andere schrijfwijze wordt geweigerd en niet
-  geraden: 05-08-2026 is twee verschillende dagen afhankelijk van wie het
-  opschreef, en bij een deadline is er drie maanden naast zitten geen kleinigheid.
-
-  De volgorde die u kiest blijft staan; de slide sorteert nooit achter uw rug om.
+  Het type hoort bij de uitbreiding **Informatieveiligheid** en wordt alleen
+  aangeboden als die aan staat — een aanvalsoppervlak is MIAUW-materiaal, geen
+  algemeen presentatiemiddel. Een deck dat er al een draagt, toont hem altijd.
 - **Een nieuw slidetype: de scorecard.** Tot vijf kerncijfers, elk met het cijfer
   van de vorige rapportage ernaast. Bedoeld voor een rapportage die elke maand of
   elk kwartaal terugkomt: het getal zelf is context, de verandering is het
@@ -524,6 +529,53 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   een strafzaak gaat. Een markering verbergt een waarde, geen onderwerp.
 
 ### Fixed
+- **Opslaan ging niet terug naar waar de presentatie vandaan kwam.** Wie een
+  deck van WebDAV, S3 of git opende en daarna gewoon op opslaan drukte (of
+  Ctrl/Cmd+S), zag het als lokaal bestand landen. De server hield de oude
+  versie, de laptop kreeg de nieuwe, en niets meldde dat de twee uit elkaar
+  liepen — het is precies het soort fout dat je pas ontdekt als iemand anders
+  de verouderde versie opent.
+
+  Terugschrijven naar de bron kon wel, maar alleen via een apart menu-item per
+  soort opslag. Dat betekende dat de gebruiker moest onthouden welk van de
+  opslaanknoppen bij zijn bron hoorde, terwijl het antwoord al vastlag: waar
+  het vandaan komt, gaat het naartoe terug. Nu volgt opslaan de herkomst,
+  zonder te vragen, naar hetzelfde pad in hetzelfde formaat.
+
+- **Zes menu-items voor openen en opslaan zijn er twee geworden.** In plaats
+  van "Openen vanaf WebDAV", "Openen vanuit S3", "Openen uit git" en drie
+  bijbehorende opslaanvarianten staat er nu één **Openen uit…** en één
+  **Opslaan naar…**. Beide beginnen met dezelfde vraag — welke verbinding — en
+  die vraag wordt overgeslagen als er maar één is, dus wie één server heeft
+  merkt van de hele keuze niets.
+
+  De vraag die iemand heeft is "waar staat mijn presentatie", niet "welk
+  protocol draait op de plek waar mijn presentatie staat". Het welkomscherm
+  bood om dezelfde reden alleen WebDAV aan; wie met S3 of git werkte kon daar
+  nergens heen. Nu is het daar dezelfde ingang.
+
+  "Opslaan naar…" blijft bestaan als de uitzondering: het deck bewust ergens
+  ánders neerzetten. Wat git écht toevoegt — synchroniseren, geschiedenis,
+  versies, uitbrengen ter review — staat nog gewoon in zijn eigen blok.
+
+- **"Gebundelde standaarden" heet nu "Standaarden en methodieken".** De sectie
+  bij Over OciDeck somt naast standaarden ook MIAUW op, en dat is een methodiek.
+  Een rapportage die vermeldt waartegen is getoetst, hoort het onderscheid niet
+  te laten vervagen in de kop erboven.
+- **Afronden & verzegelen stond in het menu met de module uit.** Verzegelen is
+  documentintegriteit uit de uitbreiding Informatieveiligheid, maar het menu-item
+  keek alleen of het deck al verzegeld was. Het stond daarmee pal naast zijn
+  buurman "Bijlage hulpmiddelen invoegen", die de module-check wél had, en het
+  RFC3161-tijdstempel dat ná het verzegelen komt zat er ook al achter. Wie de
+  uitbreiding uit had staan, kon dus wel verzegelen maar het zegel daarna niet
+  van een tijdstempel voorzien: het spoor was halverwege afgesloten.
+
+  Dezelfde knop op de ondertekeningsdia is meegegaan. Die was de laatste weg
+  eromheen: een dia van een moduletype blijft renderen met de module uit, dus
+  een rapport dat er al een droeg bood het verzegelen alsnog aan. De
+  handtekeningvelden blijven wél bewerkbaar — die gegevens horen bij het deck,
+  niet bij de schakelaar.
+
 - **Vier keer stond het middel er al, en was het op één plek niet aangesloten.**
   Uit de bugjacht kwam dit als het karakteristieke patroon van de codebase naar
   voren: niet een ontbrekend idee, maar een geschreven en getoetst mechanisme dat

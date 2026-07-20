@@ -32,7 +32,6 @@ final _reImageWidthStyle = RegExp(r'--image-width:\s*(\d+)%');
 const _tableBackedTypes = {
   SlideType.table,
   SlideType.scorecard,
-  SlideType.actions,
   SlideType.assets,
   SlideType.checklist,
   SlideType.scopeMatrix,
@@ -539,6 +538,8 @@ extension _MarkdownParse on MarkdownService {
       tableRows: _tableBackedTypes.contains(type) ? tableRows : const [],
       tableEditable:
           type == SlideType.table && classTokens.contains('table-editable'),
+      tableMarkOverdue:
+          type == SlideType.table && classTokens.contains('table-overdue'),
       timelineLayout: type == SlideType.timeline
           ? timelineLayoutFromTokens(classTokens)
           : TimelineLayout.auto,
@@ -868,7 +869,11 @@ extension _MarkdownParse on MarkdownService {
     if (tokens.contains('video')) return SlideType.video;
     if (tokens.contains('table')) return SlideType.table;
     if (tokens.contains('scorecard')) return SlideType.scorecard;
-    if (tokens.contains('actions')) return SlideType.actions;
+    // Het losse 'actions'-type is opgeheven: het was een tabel met een vaste
+    // kop en een getypeerde editer eroverheen. De rijen stonden al als gewone
+    // Markdown-tabel op schijf, dus een bestaand deck migreert door het token
+    // simpelweg als `table` te lezen — geen dataconversie nodig.
+    if (tokens.contains('actions')) return SlideType.table;
     if (tokens.contains('assets')) return SlideType.assets;
     // Informatieveiligheid-module (PENTEST_MIAUW §4). Elk type draagt een eigen
     // `_class`-token; de body round-trip't als vrije Markdown (zie de

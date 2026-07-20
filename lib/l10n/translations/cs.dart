@@ -1795,6 +1795,16 @@ const _dutchSourceAddCs = <String, String>{
   'BIG-nummer van een zorgverlener': 'registrační číslo zdravotníka (BIG)',
   'AGB-code': 'kód poskytovatele péče (AGB)',
   'proces-verbaalnummer': 'číslo policejního protokolu',
+  'Openen uit…': 'Otevřít z…',
+  'Opslaan naar…': 'Uložit do…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Nejprve nastavte připojení v Nastavení → Úložiště.',
+  'Beginnen met:': 'Začít s:',
+  'Verlopen datums markeren': 'Označit prošlá data',
+  'Datums gemarkeerd': 'Data označena',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Obarví červeně buňku s datem před dneškem. OciDeck se řídí dnem, kdy prezentujete, takže sada snímků vracející se po měsících se označí sama. Za datum se počítá pouze rrrr-mm-dd. Ve výchozím stavu vypnuto.',
+  'Standaarden en methodieken': 'Normy a metodiky',
   'Aanvalsoppervlak': 'Útočná plocha',
   'Soort toevoegen': 'Přidat druh',
   'Soort verwijderen': 'Odebrat druh',
@@ -2208,7 +2218,6 @@ const _dutchSourceAddCs = <String, String>{
       'Standard, vůči kterému se testovalo, má nyní novější verzi:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Nemusí to být chyba — test proběhl v době, kdy platila ta verze. Zpráva zaznamenává, co se skutečně použilo.',
-  'Gebundelde standaarden': 'Přibalené standardy',
   'geen versienummer': 'bez čísla verze',
   'Bron': 'Zdroj',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
@@ -2342,7 +2351,6 @@ const _dutchSourceAddCs = <String, String>{
   'Commitboodschap': 'Zpráva commitu',
   'Wat is er veranderd?': 'Co se změnilo?',
   'Opslaan naar git': 'Uložit do gitu',
-  'Opslaan naar git…': 'Uložit do gitu…',
   'Opgeslagen in git:': 'Uloženo do gitu:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Větev se posunula; načti sadu znovu a ulož znovu.',
@@ -2357,7 +2365,6 @@ const _dutchSourceAddCs = <String, String>{
   'Eigenaar': 'Vlastník',
   'Repository': 'Repozitář',
   'Personal access token': 'Osobní přístupový token',
-  'Openen uit git…': 'Otevřít z Gitu…',
   'Presentatie openen uit git': 'Otevřít prezentaci z Gitu',
   'Geen presentaties in deze repository.':
       'V tomto repozitáři nejsou žádné prezentace.',

@@ -1800,6 +1800,16 @@ const _dutchSourceAddHr = <String, String>{
       'registarski broj zdravstvenog djelatnika (BIG)',
   'AGB-code': 'šifra pružatelja zdravstvene skrbi (AGB)',
   'proces-verbaalnummer': 'broj policijskog zapisnika',
+  'Openen uit…': 'Otvori iz…',
+  'Opslaan naar…': 'Spremi u…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Najprije postavite vezu u Postavke → Pohrana.',
+  'Beginnen met:': 'Počnite s:',
+  'Verlopen datums markeren': 'Označi istekle datume',
+  'Datums gemarkeerd': 'Datumi označeni',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Boji crveno ćeliju s datumom prije današnjeg. OciDeck se ravna prema danu kada izlažete, pa se prezentacija koja se vrati mjesecima kasnije označi sama. Kao datum vrijedi samo gggg-mm-dd. Prema zadanome isključeno.',
+  'Standaarden en methodieken': 'Norme i metodologije',
   'Aanvalsoppervlak': 'Napadna površina',
   'Soort toevoegen': 'Dodaj vrstu',
   'Soort verwijderen': 'Ukloni vrstu',
@@ -2213,7 +2223,6 @@ const _dutchSourceAddHr = <String, String>{
       'Standard prema kojem se testiralo sada ima noviju verziju:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'To ne mora biti pogrešno — ispitivanje je provedeno dok je vrijedila ta verzija. Izvještaj bilježi što je stvarno korišteno.',
-  'Gebundelde standaarden': 'Uključeni standardi',
   'geen versienummer': 'bez broja verzije',
   'Bron': 'Izvor',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
@@ -2348,7 +2357,6 @@ const _dutchSourceAddHr = <String, String>{
   'Commitboodschap': 'Poruka commita',
   'Wat is er veranderd?': 'Što se promijenilo?',
   'Opslaan naar git': 'Spremi u git',
-  'Opslaan naar git…': 'Spremi u git…',
   'Opgeslagen in git:': 'Spremljeno u git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Grana je pomaknuta; ponovno učitaj komplet i spremi opet.',
@@ -2363,7 +2371,6 @@ const _dutchSourceAddHr = <String, String>{
   'Eigenaar': 'Vlasnik',
   'Repository': 'Repozitorij',
   'Personal access token': 'Osobni pristupni token',
-  'Openen uit git…': 'Otvori iz Gita…',
   'Presentatie openen uit git': 'Otvori prezentaciju iz Gita',
   'Geen presentaties in deze repository.':
       'Nema prezentacija u ovom repozitoriju.',

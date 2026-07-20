@@ -1821,6 +1821,16 @@ const _dutchSourceAddEl = <String, String>{
       'αριθμός μητρώου επαγγελματία υγείας (BIG)',
   'AGB-code': 'κωδικός παρόχου υγείας (AGB)',
   'proces-verbaalnummer': 'αριθμός αστυνομικής έκθεσης',
+  'Openen uit…': 'Άνοιγμα από…',
+  'Opslaan naar…': 'Αποθήκευση σε…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Ρυθμίστε πρώτα μια σύνδεση στις Ρυθμίσεις → Αποθήκευση.',
+  'Beginnen met:': 'Ξεκινήστε με:',
+  'Verlopen datums markeren': 'Επισήμανση ληγμένων ημερομηνιών',
+  'Datums gemarkeerd': 'Ημερομηνίες επισημασμένες',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Χρωματίζει κόκκινο ένα κελί με ημερομηνία πριν από σήμερα. Το OciDeck λαμβάνει υπόψη την ημέρα που παρουσιάζετε, οπότε μια παρουσίαση που επανέρχεται μήνες αργότερα επισημαίνεται μόνη της. Μόνο το εεεε-μμ-ηη μετρά ως ημερομηνία. Απενεργοποιημένο εξ ορισμού.',
+  'Standaarden en methodieken': 'Πρότυπα και μεθοδολογίες',
   'Aanvalsoppervlak': 'Επιφάνεια επίθεσης',
   'Soort toevoegen': 'Προσθήκη είδους',
   'Soort verwijderen': 'Αφαίρεση είδους',
@@ -2238,7 +2248,6 @@ const _dutchSourceAddEl = <String, String>{
       'Ένα πρότυπο βάσει του οποίου ελέγχθηκε έχει πλέον νεότερη έκδοση:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Δεν είναι κατ\' ανάγκη λάθος — ο έλεγχος έγινε όταν ίσχυε εκείνη η έκδοση. Η αναφορά καταγράφει τι χρησιμοποιήθηκε πράγματι.',
-  'Gebundelde standaarden': 'Ενσωματωμένα πρότυπα',
   'geen versienummer': 'χωρίς αριθμό έκδοσης',
   'Bron': 'Πηγή',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
@@ -2378,7 +2387,6 @@ const _dutchSourceAddEl = <String, String>{
   'Commitboodschap': 'Μήνυμα commit',
   'Wat is er veranderd?': 'Τι άλλαξε;',
   'Opslaan naar git': 'Αποθήκευση σε git',
-  'Opslaan naar git…': 'Αποθήκευση σε git…',
   'Opgeslagen in git:': 'Αποθηκεύτηκε σε git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Ο κλάδος μετακινήθηκε· φόρτωσε ξανά το deck και αποθήκευσε πάλι.',
@@ -2393,7 +2401,6 @@ const _dutchSourceAddEl = <String, String>{
   'Eigenaar': 'Κάτοχος',
   'Repository': 'Αποθετήριο',
   'Personal access token': 'Προσωπικό διακριτικό πρόσβασης',
-  'Openen uit git…': 'Άνοιγμα από Git…',
   'Presentatie openen uit git': 'Άνοιγμα παρουσίασης από Git',
   'Geen presentaties in deze repository.':
       'Δεν υπάρχουν παρουσιάσεις σε αυτό το αποθετήριο.',

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../models/slide.dart';
 import '../../services/cvss/cvss4.dart';
 import '../../services/image_service.dart';
-import 'actions_editor.dart';
 import 'asset_overview_editor.dart';
 import 'bullets_editor.dart';
 import 'bullets_image_editor.dart';
@@ -213,12 +212,6 @@ final Map<SlideType, Widget Function(SlideEditorContext)> slideEditorBuilders =
         nestedInScrollView: c.nestedInScrollView,
       ),
       SlideType.scorecard: (c) => ScorecardEditor(
-        key: c._key,
-        slide: c.slide,
-        onUpdate: c.onUpdate,
-        nestedInScrollView: c.nestedInScrollView,
-      ),
-      SlideType.actions: (c) => ActionsEditor(
         key: c._key,
         slide: c.slide,
         onUpdate: c.onUpdate,

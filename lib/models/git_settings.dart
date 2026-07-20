@@ -1,4 +1,5 @@
 import 'package:path/path.dart' as p;
+import 'storage_origin.dart';
 
 /// De ondersteunde forges. Volgorde = prioriteit uit het ontwerp: Forgejo/Gitea
 /// eerst (zelfde REST-oppervlak), daarna GitHub en GitLab.
@@ -326,7 +327,7 @@ class GitRepoLayout {
 /// erbij geeft. Een gequeuede commit draagt de sha waar hij tegenaan is
 /// geschreven, zodat de forge een non-fast-forward kan weigeren in plaats van
 /// stil werk te overschrijven.
-class GitOrigin {
+class GitOrigin implements StorageOrigin {
   final GitRepoConfig config;
 
   /// De bestandsverbinding waar dit deck vandaan kwam. Hiermee gaat opslaan
@@ -336,6 +337,7 @@ class GitOrigin {
   ///
   /// Leeg voor herkomst uit een versie van vóór de verbindingenlijst; dan valt
   /// de app terug op het vergelijken van [config] (zie [matchesRepo]).
+  @override
   final String connectionId;
 
   /// Branch waarop deze tab werkt.
@@ -357,6 +359,9 @@ class GitOrigin {
 
   /// De deknaam, of null wanneer [deckDir] niet de layout van §6 volgt.
   String? get deckName => GitRepoLayout.deckNameOf(deckDir);
+
+  @override
+  String get remoteLocation => deckDir;
 
   bool matchesRepo(GitRepoConfig other) => other == config;
 

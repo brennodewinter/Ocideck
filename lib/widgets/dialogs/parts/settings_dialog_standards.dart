@@ -16,7 +16,12 @@ extension _SettingsStandards on _SettingsDialogState {
   Widget _standardsSection(AppLocalizations l10n) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      _aboutHeading(Icons.menu_book_outlined, l10n.d('Gebundelde standaarden')),
+      // "Standaarden" alleen zou de lading niet dekken: MIAUW is een methodiek,
+      // geen standaard, en het lijstje hieronder mengt de twee bewust.
+      _aboutHeading(
+        Icons.menu_book_outlined,
+        l10n.d('Standaarden en methodieken'),
+      ),
       _aboutCard(
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,

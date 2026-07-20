@@ -422,10 +422,10 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
               _openCommandPalette();
             case 'open':
               _openWithSearch(context, ref);
-            case 'open_git':
-              _openFromGit(context, ref);
-            case 'save_git':
-              _saveToGit(context, ref);
+            case 'open_remote':
+              _openFromConnection(context, ref);
+            case 'save_remote':
+              _saveToConnection(context, ref);
             case 'sync_git':
               _syncGit(context, ref);
             case 'history_git':
@@ -444,14 +444,6 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
               _mergeConcept(context, ref);
             case 'tag_git':
               _tagRelease(context, ref);
-            case 'open_nextcloud':
-              _openFromNextcloud(context, ref);
-            case 'save_nextcloud':
-              _saveToNextcloud(context, ref);
-            case 'open_s3':
-              _openFromS3(context, ref);
-            case 'save_s3':
-              _saveToS3(context, ref);
             case 'export_package':
               _exportPackage(context, ref);
             case 'import_package':

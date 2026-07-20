@@ -95,14 +95,19 @@ class _WelcomeScreen extends ConsumerWidget {
                             ),
                           ),
                         ],
-                        if (supportsNetworkDeckSources) ...[
+                        // Dezelfde ingang als in het menu: één knop voor alle
+                        // soorten opslag. Hier stond alleen WebDAV, waardoor
+                        // wie met S3 of git werkte vanaf dit scherm nergens
+                        // heen kon.
+                        if (_remoteConnections(ref).isNotEmpty) ...[
                           const SizedBox(height: 12),
                           SizedBox(
                             width: 220,
                             child: OutlinedButton.icon(
-                              onPressed: () => _openFromNextcloud(context, ref),
+                              onPressed: () =>
+                                  _openFromConnection(context, ref),
                               icon: const Icon(Icons.cloud_outlined, size: 18),
-                              label: Text(l10n.d('Openen vanaf WebDAV')),
+                              label: Text(l10n.d('Openen uit…')),
                             ),
                           ),
                         ],

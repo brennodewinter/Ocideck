@@ -10,10 +10,15 @@ import 'package:ocideck/state/tabs_provider.dart';
 import 'package:ocideck/widgets/app_shell.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// De UI-lijm van "Opslaan naar git…": met een ingestelde repo staat het item in
-// het overloopmenu, en een tik komt uit bij saveToGit — zichtbaar doordat het
-// opslaandialoog om een deknaam vraagt. Zo is de koppeling bewezen zonder een
+// De UI-lijm van "Opslaan naar…": met precies één ingestelde verbinding — een
+// git-repo — komt een tik daarop rechtstreeks bij saveToGit uit, zonder
+// tussenvraag welke verbinding het moet zijn. Zichtbaar doordat het
+// opslaandialoog om een deknaam vraagt; zo is de koppeling bewezen zonder een
 // echte forge op te zetten.
+//
+// Dat er één gedeelde ingang is in plaats van één per opslagsoort is de kern:
+// opslaan zonder meer volgt de herkomst, en dít item is het pad om iets bewust
+// ergens anders neer te zetten.
 //
 // Dat de git-items zónder ingestelde repo helemaal wegblijven is een aparte
 // afspraak; die staat in app_shell_actions_test.dart.
@@ -58,7 +63,7 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  testWidgets('het overloopmenu toont "Opslaan naar git…"', (tester) async {
+  testWidgets('het overloopmenu toont "Opslaan naar…"', (tester) async {
     await pumpWithDeck(tester);
     await tester.tap(
       find.descendant(
@@ -67,8 +72,14 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-    expect(find.text('Opslaan naar git…'), findsOneWidget);
+    expect(find.text('Opslaan naar…'), findsOneWidget);
+    expect(find.text('Openen uit…'), findsOneWidget);
+    // De git-eigen handelingen blijven in hun eigen blok staan; alleen openen
+    // en opslaan zijn samengevoegd.
     expect(find.text('Nu synchroniseren'), findsOneWidget);
+    // En de oude, per-protocol items zijn weg.
+    expect(find.text('Opslaan naar git…'), findsNothing);
+    expect(find.text('Openen uit git…'), findsNothing);
   });
 
   testWidgets('tikken op het item opent het opslaandialoog', (tester) async {
@@ -80,11 +91,12 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Opslaan naar git…'));
+    await tester.tap(find.text('Opslaan naar…'));
     await tester.pumpAndSettle();
 
-    // Het opslaandialoog vraagt om een deknaam: bewijs dat het menu-item bij
-    // _saveToGit uitkomt en niet onderweg blijft hangen.
+    // Eén verbinding, dus geen tussenvraag: het opslaandialoog vraagt meteen om
+    // een deknaam. Bewijs dat het menu-item bij _saveToGit uitkomt en niet
+    // onderweg in een keuzedialoog blijft hangen.
     expect(find.text('Deknaam'), findsOneWidget);
   });
 }

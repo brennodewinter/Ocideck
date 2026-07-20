@@ -341,8 +341,9 @@ class Deck {
     );
   }
 
-  /// Index of the first Informatieveiligheid slide (finding, findingsSummary,
-  /// checklist, scopeMatrix, signOff — see [SlideCategory.informatieveiligheid]),
+  /// Index of the first Informatieveiligheid slide (assets, finding,
+  /// findingsSummary, checklist, scopeMatrix, signOff — see
+  /// [SlideCategory.informatieveiligheid]),
   /// or -1 when there is none. The discovery prompt carries this index so the
   /// user can jump straight to the slide the message is about and check for
   /// themselves before deciding to switch the module on.

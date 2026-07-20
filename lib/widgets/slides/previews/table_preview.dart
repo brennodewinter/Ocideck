@@ -259,6 +259,12 @@ class _TablePreview extends StatelessWidget {
     final headerBackground = _hexColor(profile.tableHeaderBackgroundColor);
     final borderColor = accent.withValues(alpha: 0.35);
     final editing = edit?.enabled == true;
+    // Tegen de dag waarop het deck getoond wordt, niet tegen een opgeslagen
+    // vlag: een presentatie die twee maanden later opnieuw langskomt, markeert
+    // haar eigen verlopen deadlines in plaats van te blijven beweren dat alles
+    // op schema ligt. Uit tenzij de auteur het aanzet, dus een tabel met
+    // historische datums kleurt niet vanzelf rood.
+    final today = slide.tableMarkOverdue ? DateTime.now() : null;
 
     Widget cell(
       String value, {
@@ -272,6 +278,8 @@ class _TablePreview extends StatelessWidget {
       );
 
       if (!editing) {
+        final expired =
+            today != null && !header && isPastDateCell(value, today);
         return Padding(
           padding: padding,
           child: _md(
@@ -281,8 +289,12 @@ class _TablePreview extends StatelessWidget {
               font,
               TextStyle(
                 fontSize: cellSize,
-                color: header ? headerTextColor : textColor,
-                fontWeight: header ? FontWeight.bold : FontWeight.normal,
+                color: expired
+                    ? AppTheme.danger700
+                    : (header ? headerTextColor : textColor),
+                fontWeight: header || expired
+                    ? FontWeight.bold
+                    : FontWeight.normal,
               ),
             ),
             linkColor: header ? headerTextColor : accent,

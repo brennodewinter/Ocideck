@@ -1809,6 +1809,16 @@ const _dutchSourceAddLa = <String, String>{
   'BIG-nummer van een zorgverlener': 'numerus curatoris valetudinis (BIG)',
   'AGB-code': 'codex curatoris valetudinis (AGB)',
   'proces-verbaalnummer': 'numerus actorum vigilum',
+  'Openen uit…': 'Aperire ex…',
+  'Opslaan naar…': 'Servare in…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Nexum primum in Optionibus → Repositorio institue.',
+  'Beginnen met:': 'Incipe cum:',
+  'Verlopen datums markeren': 'Dies elapsos notare',
+  'Datums gemarkeerd': 'Dies notati',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Cellam diem ante hodiernum ferentem rubro colorat. OciDeck diem quo praesentas spectat, itaque fasciculus post menses rediens se ipsum notat. Sola forma aaaa-mm-dd pro die habetur. Ex more exstinctum.',
+  'Standaarden en methodieken': 'Normae et methodologiae',
   'Aanvalsoppervlak': 'Area impetus',
   'Soort toevoegen': 'Genus addere',
   'Soort verwijderen': 'Genus removere',
@@ -2221,7 +2231,6 @@ const _dutchSourceAddLa = <String, String>{
       'Normae qua probatum est nunc versio recentior exstat:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Id non necesse est erratum esse: probatio facta est cum ea versio valeret. Relatio consignat quid re vera adhibitum sit.',
-  'Gebundelde standaarden': 'Normae inclusae',
   'geen versienummer': 'sine numero versionis',
   'Bron': 'Fons',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
@@ -2356,7 +2365,6 @@ const _dutchSourceAddLa = <String, String>{
   'Commitboodschap': 'Nuntius commissionis',
   'Wat is er veranderd?': 'Quid mutatum est?',
   'Opslaan naar git': 'In git servare',
-  'Opslaan naar git…': 'In git servare…',
   'Opgeslagen in git:': 'In git servatum:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Ramus motus est; fasciculum recarga et iterum serva.',
@@ -2371,7 +2379,6 @@ const _dutchSourceAddLa = <String, String>{
   'Eigenaar': 'Dominus',
   'Repository': 'Repositorium',
   'Personal access token': 'Signum accessus personale',
-  'Openen uit git…': 'Ex Git aperire…',
   'Presentatie openen uit git': 'Presentationem ex Git aperire',
   'Geen presentaties in deze repository.':
       'Nullae presentationes in hoc repositorio.',

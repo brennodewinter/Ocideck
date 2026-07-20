@@ -79,10 +79,6 @@ String slideTypeHelpText(AppLocalizations l10n, SlideType type) {
       return l10n.d(
         'Een paar kerncijfers met het cijfer van de vorige rapportage ernaast, zodat de verandering het verhaal vertelt. Geef per cijfer aan of stijgen goed of slecht nieuws is.',
       );
-    case SlideType.actions:
-      return l10n.d(
-        'Wat er moet gebeuren, wie het doet en wanneer. Geef per regel aan of het ter informatie is, of dat u een besluit vraagt — dat is waar de zaal op scant.',
-      );
     case SlideType.assets:
       return l10n.d(
         'Het aanvalsoppervlak per soort object: hoeveel er zijn, hoeveel er werk kosten, wat nieuw is en wat niemand bezit. Dat laatste is meestal het gesprek.',

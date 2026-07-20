@@ -1,6 +1,7 @@
 import 'package:path/path.dart' as p;
 
 import '../services/s3/s3_sigv4.dart';
+import 'storage_origin.dart';
 
 /// Hoe de bucketnaam in de URL terechtkomt.
 enum S3AddressingStyle {
@@ -245,10 +246,11 @@ class S3Bucket {
 /// Herkomst van een tab die uit een S3-bron is geopend, zodat "Opslaan naar S3"
 /// weet waar (en in welke bucket) terug te schrijven. Spiegelt `WebdavOrigin`;
 /// [endpoint] en [bucket] dienen om een bronwissel te detecteren.
-class S3Origin {
+class S3Origin implements StorageOrigin {
   /// De verbinding waar dit deck vandaan kwam. Hiermee gaat "Opslaan naar S3"
   /// terug naar dezelfde klant zonder opnieuw te vragen — en blijft dat kloppen
   /// als de gebruiker de verbinding hernoemt of het endpoint corrigeert.
+  @override
   final String connectionId;
 
   final String endpoint;
@@ -276,6 +278,9 @@ class S3Origin {
     final i = remotePath.lastIndexOf('/');
     return i < 0 ? '' : remotePath.substring(0, i);
   }
+
+  @override
+  String get remoteLocation => remotePath;
 
   bool matchesBucket(S3Bucket config) =>
       config.endpoint.trim() == endpoint.trim() &&

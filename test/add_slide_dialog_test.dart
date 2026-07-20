@@ -87,10 +87,11 @@ void main() {
       ).any((t) => t.category == SlideCategory.informatieveiligheid),
       isFalse,
     );
-    // The Informatieveiligheid tab shows exactly the five scaffolded types.
+    // The Informatieveiligheid tab shows exactly the module's types.
     await tester.tap(find.text('Informatieveiligheid'));
     await tester.pumpAndSettle();
     expect(visibleTypes(tester).toSet(), {
+      SlideType.assets,
       SlideType.finding,
       SlideType.findingsSummary,
       SlideType.checklist,

@@ -1799,6 +1799,16 @@ const _dutchSourceAddGsw = <String, String>{
       'Registriernummere vomene Pflegepersonal (BIG)',
   'AGB-code': 'Leischtigserbringer-Code (AGB)',
   'proces-verbaalnummer': 'Aktezeiche vonere Aazeig',
+  'Openen uit…': 'Uftue us…',
+  'Opslaan naar…': 'Speichere uf…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Richte Sie zerscht e Verbindig i under Istellige → Speicher.',
+  'Beginnen met:': 'Aafange mit:',
+  'Verlopen datums markeren': 'Abglaufeni Date markiere',
+  'Datums gemarkeerd': 'Date markiert',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Färbt e Zäle mit eme Datum vor hüt rot. OciDeck richtet sich nach em Tag, wo Sie präsentiere, drum markiert sich e Foliesatz, wo Mönet spöter widercho isch, sälber. Nume jjjj-mm-tt gilt as Datum. Standardmässig us.',
+  'Standaarden en methodieken': 'Standards und Methodike',
   'Aanvalsoppervlak': 'Aagriffsflächi',
   'Soort toevoegen': 'Art hinzuefüege',
   'Soort verwijderen': 'Art entferne',
@@ -2213,7 +2223,6 @@ const _dutchSourceAddGsw = <String, String>{
       'Vome prüefte Standard git s jetz e nöieri Version:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Das mues nid falsch sy — d Prüefig isch gmacht worde, wo die Version golte het. De Bricht haltet fescht, was würkli bruucht worde isch.',
-  'Gebundelde standaarden': 'Mitglieferti Standards',
   'geen versienummer': 'kei Versionsnummere',
   'Bron': 'Quelle',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
@@ -2349,7 +2358,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Commitboodschap': 'Commit-Nachricht',
   'Wat is er veranderd?': 'Was het sich gänderet?',
   'Opslaan naar git': 'In git spichere',
-  'Opslaan naar git…': 'In git spichere…',
   'Opgeslagen in git:': 'In git gspicheret:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'De Branch isch verschobe; lad s Deck neu und spicher nomol.',
@@ -2364,7 +2372,6 @@ const _dutchSourceAddGsw = <String, String>{
   'Eigenaar': 'Bsitzer',
   'Repository': 'Repository',
   'Personal access token': 'Persönlichs Zuegriffstoken',
-  'Openen uit git…': 'Us Git ufmache…',
   'Presentatie openen uit git': 'Presentation us Git ufmache',
   'Geen presentaties in deze repository.':
       'Kei Presentatione i dem Repository.',

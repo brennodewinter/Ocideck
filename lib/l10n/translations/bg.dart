@@ -1816,6 +1816,16 @@ const _dutchSourceAddBg = <String, String>{
       'регистрационен номер на медицински специалист (BIG)',
   'AGB-code': 'код на доставчик на здравни услуги (AGB)',
   'proces-verbaalnummer': 'номер на полицейски протокол',
+  'Openen uit…': 'Отваряне от…',
+  'Opslaan naar…': 'Запазване в…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Първо настройте връзка в Настройки → Хранилище.',
+  'Beginnen met:': 'Започнете с:',
+  'Verlopen datums markeren': 'Отбелязване на изтекли дати',
+  'Datums gemarkeerd': 'Датите са отбелязани',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Оцветява в червено клетка с дата преди днес. OciDeck се ръководи от деня, в който представяте, така че презентация, връщаща се месеци по-късно, се отбелязва сама. За дата се брои само гггг-мм-дд. По подразбиране изключено.',
+  'Standaarden en methodieken': 'Стандарти и методологии',
   'Aanvalsoppervlak': 'Атакуема повърхност',
   'Soort toevoegen': 'Добавяне на вид',
   'Soort verwijderen': 'Премахване на вид',
@@ -2231,7 +2241,6 @@ const _dutchSourceAddBg = <String, String>{
       'Стандарт, спрямо който е тествано, вече има по-нова версия:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Това не е непременно грешка — проверката е извършена, когато е важала тази версия. Докладът записва какво наистина е използвано.',
-  'Gebundelde standaarden': 'Вградени стандарти',
   'geen versienummer': 'без номер на версия',
   'Bron': 'Източник',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
@@ -2368,7 +2377,6 @@ const _dutchSourceAddBg = <String, String>{
   'Commitboodschap': 'Съобщение за commit',
   'Wat is er veranderd?': 'Какво се промени?',
   'Opslaan naar git': 'Запазване в git',
-  'Opslaan naar git…': 'Запазване в git…',
   'Opgeslagen in git:': 'Запазено в git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Клонът е преместен; презаредете тестето и запазете отново.',
@@ -2383,7 +2391,6 @@ const _dutchSourceAddBg = <String, String>{
   'Eigenaar': 'Собственик',
   'Repository': 'Хранилище',
   'Personal access token': 'Личен токен за достъп',
-  'Openen uit git…': 'Отваряне от Git…',
   'Presentatie openen uit git': 'Отваряне на презентация от Git',
   'Geen presentaties in deze repository.': 'В това хранилище няма презентации.',
   'Rapportagetaal': 'Език на доклада',

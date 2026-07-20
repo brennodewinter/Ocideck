@@ -1792,6 +1792,16 @@ const _dutchSourceAddLv = <String, String>{
       'veselības aprūpes speciālista reģistrācijas numurs (BIG)',
   'AGB-code': 'veselības aprūpes pakalpojumu sniedzēja kods (AGB)',
   'proces-verbaalnummer': 'policijas protokola numurs',
+  'Openen uit…': 'Atvērt no…',
+  'Opslaan naar…': 'Saglabāt uz…',
+  'Stel eerst een verbinding in bij Instellingen → Opslag.':
+      'Vispirms iestatiet savienojumu sadaļā Iestatījumi → Krātuve.',
+  'Beginnen met:': 'Sākt ar:',
+  'Verlopen datums markeren': 'Atzīmēt nokavētos datumus',
+  'Datums gemarkeerd': 'Datumi atzīmēti',
+  'Kleurt een cel met een datum van vóór vandaag rood. OciDeck kijkt naar de dag waarop u presenteert, dus een deck dat maanden later terugkomt markeert zichzelf. Alleen jjjj-mm-dd telt als datum. Staat standaard uit.':
+      'Iekrāso sarkanu šūnu ar datumu pirms šodienas. OciDeck vadās pēc dienas, kad prezentējat, tāpēc prezentācija, kas atgriežas pēc mēnešiem, atzīmē sevi pati. Par datumu tiek uzskatīts tikai gggg-mm-dd. Pēc noklusējuma izslēgts.',
+  'Standaarden en methodieken': 'Standarti un metodoloģijas',
   'Aanvalsoppervlak': 'Uzbrukuma virsma',
   'Soort toevoegen': 'Pievienot veidu',
   'Soort verwijderen': 'Noņemt veidu',
@@ -2205,7 +2215,6 @@ const _dutchSourceAddLv = <String, String>{
       'Standartam, pret kuru tika testēts, tagad ir jaunāka versija:',
   'Dat hoeft niet fout te zijn — het onderzoek is uitgevoerd toen die versie gold. Het rapport legt vast wat er echt is gebruikt.':
       'Tā nav obligāti kļūda — pārbaude notika, kad bija spēkā tā versija. Ziņojums fiksē, kas patiešām tika izmantots.',
-  'Gebundelde standaarden': 'Iekļautie standarti',
   'geen versienummer': 'bez versijas numura',
   'Bron': 'Avots',
   'De versies die in dit exemplaar zitten. Een pentestrapport hoort te vermelden waartegen is getoetst — en welke versie dat was.':
@@ -2342,7 +2351,6 @@ const _dutchSourceAddLv = <String, String>{
   'Commitboodschap': 'Commit ziņojums',
   'Wat is er veranderd?': 'Kas mainījās?',
   'Opslaan naar git': 'Saglabāt git',
-  'Opslaan naar git…': 'Saglabāt git…',
   'Opgeslagen in git:': 'Saglabāts git:',
   'De branch is verplaatst; herlaad het deck en sla opnieuw op.':
       'Zars ir pārvietots; pārlādē klāju un saglabā vēlreiz.',
@@ -2357,7 +2365,6 @@ const _dutchSourceAddLv = <String, String>{
   'Eigenaar': 'Īpašnieks',
   'Repository': 'Repozitorijs',
   'Personal access token': 'Personīgā piekļuves pilnvara',
-  'Openen uit git…': 'Atvērt no Git…',
   'Presentatie openen uit git': 'Atvērt prezentāciju no Git',
   'Geen presentaties in deze repository.':
       'Šajā repozitorijā nav prezentāciju.',

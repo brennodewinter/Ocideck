@@ -222,8 +222,8 @@ the most common one, but any WebDAV server works:
 1. Pick the server type — *Nextcloud or ownCloud* (the DAV path is derived) or
    *Other WebDAV server* (the path in the server URL is the WebDAV root)
 2. Configure server URL, credentials, and optional subfolder in Settings
-3. Open decks via the "Open from WebDAV" option
-4. Save back with "Save to WebDAV"
+3. Open decks via "Open from…" and pick the server
+4. Save back with the ordinary save button; "Save to…" puts it elsewhere
 5. Supports both flat format (.md + assets) or package formats
 
 ### How does S3 storage work?
@@ -237,7 +237,7 @@ as MinIO or a European provider:
    self-hosted and non-AWS endpoints are the interesting case
 3. Pick the addressing style: bucket in the host name (AWS) or in the path (most
    self-hosted endpoints)
-4. Open and save through "Open from S3" and "Save to S3"
+4. Open and save through "Open from…" and "Save to…"
 
 Your secret access key goes to the OS keychain; the endpoint, bucket and access
 key ID are ordinary settings. A MinIO box on your own LAN needs the *trusted

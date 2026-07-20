@@ -1,5 +1,4 @@
 import 'package:uuid/uuid.dart';
-import 'actions_spec.dart';
 import 'asset_overview_spec.dart';
 import 'checklist_spec.dart';
 import 'cockpit.dart';
@@ -34,7 +33,6 @@ enum SlideType {
   question,
   timeline,
   scorecard,
-  actions,
   assets,
   // Informatieveiligheid-module (pentestrapportage, PENTEST_MIAUW §4). Elk type
   // heeft een eigen gestructureerde editor, preview en serialiser; inhoud én
@@ -191,17 +189,14 @@ const Map<SlideType, SlideTypeMeta> slideTypeMeta = {
     label: 'Scorecard',
     marpClass: 'scorecard',
   ),
-  SlideType.actions: SlideTypeMeta(
-    label: 'Acties en besluiten',
-    marpClass: 'actions',
-  ),
-  SlideType.assets: SlideTypeMeta(
-    label: 'Aanvalsoppervlak',
-    marpClass: 'assets',
-  ),
   // Informatieveiligheid-module — categorie [SlideCategory.informatieveiligheid],
   // waardoor de kiezer automatisch een tabblad toont (P0-PICK). marpClass-tokens
   // volgen PENTEST_MIAUW §4.
+  SlideType.assets: SlideTypeMeta(
+    label: 'Aanvalsoppervlak',
+    marpClass: 'assets',
+    category: SlideCategory.informatieveiligheid,
+  ),
   SlideType.finding: SlideTypeMeta(
     label: 'Bevinding',
     marpClass: 'finding',
@@ -397,6 +392,14 @@ class Slide {
   /// and therefore keep the safe default (not editable).
   final bool tableEditable;
 
+  /// Table slides only: whether a cell holding an ISO date in the past is
+  /// marked as expired. Off by default — a table of historical dates would
+  /// otherwise turn entirely red, which says nothing. Derived at render time
+  /// against the day the deck is shown, never stored per cell: a flag you type
+  /// freezes at whatever was true the day you wrote it, so a deck presented two
+  /// months later would go on claiming everything is on schedule.
+  final bool tableMarkOverdue;
+
   /// Timeline slides only: how the events are arranged and animated. The events
   /// themselves are stored in [bullets] as `marker :: title :: description`
   /// strings; the layout/reveal options round-trip as `_class` tokens and the
@@ -492,6 +495,7 @@ class Slide {
     this.quality = QualityDisposition.warn,
     this.tableRows = const [],
     this.tableEditable = false,
+    this.tableMarkOverdue = false,
     this.timelineLayout = TimelineLayout.auto,
     this.timelineReveal = TimelineReveal.onEnter,
     this.timelineAnimationMs,
@@ -539,9 +543,6 @@ class Slide {
           // Alleen de vaste kop. Lege cijferregels horen niet op schijf — de
           // editor deelt ze zelf uit zolang er nog niets is ingevuld.
           ? const ScorecardSpec().toTableRows()
-          : type == SlideType.actions
-          // Alleen de vaste kop; lege regels deelt de editor zelf uit.
-          ? const ActionsSpec().toTableRows()
           : type == SlideType.assets
           ? const AssetOverviewSpec().toTableRows()
           : const [],
@@ -604,6 +605,7 @@ class Slide {
       quality: src.quality,
       tableRows: src.tableRows.map((r) => List<String>.from(r)).toList(),
       tableEditable: src.tableEditable,
+      tableMarkOverdue: src.tableMarkOverdue,
       timelineLayout: src.timelineLayout,
       timelineReveal: src.timelineReveal,
       timelineAnimationMs: src.timelineAnimationMs,
@@ -666,6 +668,7 @@ class Slide {
     QualityDisposition? quality,
     List<List<String>>? tableRows,
     bool? tableEditable,
+    bool? tableMarkOverdue,
     TimelineLayout? timelineLayout,
     TimelineReveal? timelineReveal,
     int? timelineAnimationMs,
@@ -731,6 +734,7 @@ class Slide {
       quality: quality ?? this.quality,
       tableRows: tableRows ?? this.tableRows,
       tableEditable: tableEditable ?? this.tableEditable,
+      tableMarkOverdue: tableMarkOverdue ?? this.tableMarkOverdue,
       timelineLayout: timelineLayout ?? this.timelineLayout,
       timelineReveal: timelineReveal ?? this.timelineReveal,
       timelineAnimationMs: clearTimelineAnimation

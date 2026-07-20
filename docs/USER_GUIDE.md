@@ -55,6 +55,21 @@ list, mixed together — because the question you actually ask is "where does th
 work live?", not "which protocol is this?". Give each one a name (*Client A –
 Nextcloud*, *Private*) so you can tell them apart at a glance.
 
+The `…` menu follows the same idea: **one** *Open from…* and **one** *Save to…*,
+not a pair per protocol. Both start with the same question — which connection —
+and that question is skipped entirely when you have only one, so a single-server
+setup never sees a picker.
+
+**Saving goes back to where the deck came from.** Open a deck from a WebDAV
+server and the ordinary save button (or `Ctrl/Cmd+S`) writes it back to that
+server, at the same path, in the same format. The same holds for S3 and git. You
+never have to remember which of several save commands matches where you opened
+it — getting that wrong would leave the edited version on your laptop while the
+server kept the old one, and you would have no way of noticing.
+
+*Save to…* is the exception: it puts the deck somewhere **else**, on purpose.
+Use it to move or copy a deck between connections.
+
 - **Add** one with *Add connection* and pick the kind. A folder is done as soon
   as you pick it; a WebDAV server, S3 bucket or git repository opens its
   settings straight away so you can fill them in.
@@ -107,10 +122,11 @@ MinIO on your own server, Ceph, Wasabi, Scaleway, Hetzner.
   home network, which is the normal case for your own MinIO. Without it the
   SSRF protection refuses the connection.
 
-**Open and save** through *Open from S3* and *Save to S3* in the file menu. A
-deck you opened from a bucket saves back to that same bucket without asking,
-just as it does for WebDAV and git. You choose between one `.ocideck` package
-and a flat `.md` with its asset folders, exactly as for WebDAV.
+**Open and save** through *Open from…* and *Save to…* in the file menu — the
+same two entries used for every kind of storage. A deck you opened from a bucket
+saves back to that same bucket without asking, just as it does for WebDAV and
+git. You choose between one `.ocideck` package and a flat `.md` with its asset
+folders, exactly as for WebDAV.
 
 One difference from the other kinds is worth knowing. S3 is object storage, not
 a file system, and the guard against two people overwriting each other's work
@@ -161,10 +177,12 @@ saved version stays retrievable, which a plain folder cannot give you.
   keeps the deck on this computer until there is a connection again; the bar is
   what tells you it is still there. It stays quiet when nothing is waiting, and
   it is not clickable — use *Flush queue* in the `…` menu to send it now.
-- **Open** via the `…` menu (*Open from git…*): pick a deck and it is fetched,
-  checked by the same safety scan as any other deck, and opened. A repository is
-  untrusted input — coming from your own forge does not make it trusted.
-- **Save** via the `…` menu (*Save to git…*): the deck is written back as one
+- **Open** via the `…` menu (*Open from…*, then pick the repository): the deck
+  is fetched, checked by the same safety scan as any other deck, and opened. A
+  repository is untrusted input — coming from your own forge does not make it
+  trusted.
+- **Save** with the ordinary save button, or *Save to…* to publish somewhere
+  else: the deck is written back as one
   commit — the markdown and its images, which go into the shared pool exactly as
   opening reads them. A deck you opened from git offers its own name and updates
   in place; a new deck is published by choosing a name (it becomes
@@ -314,11 +332,13 @@ Nextcloud is the most common one, but any WebDAV server works.
 
   The same applies to a self-hosted S3 endpoint and a self-hosted forge: each
   connection carries its own pinned certificate.
-- **Open** via the welcome screen (*Open from WebDAV*) or the `…` menu:
-  browse the folder and pick an `.ocideck` package or a Marp `.md`. The file is
-  downloaded, checked by the same safety scan as any other deck, and opened in a
-  tab.
-- **Save back** with *Save to WebDAV* (`…` menu). Choose a target path and a
+- **Open** via the welcome screen or the `…` menu (*Open from…*, then pick the
+  server): browse the folder and pick an `.ocideck` package or a Marp `.md`. The
+  file is downloaded, checked by the same safety scan as any other deck, and
+  opened in a tab.
+- **Save back** with the ordinary save button — a deck from WebDAV goes back to
+  WebDAV. Use *Save to…* (`…` menu) to put it somewhere else. Choose a target
+  path and a
   format: a single **`.ocideck` package** (one file, assets included) or a
   **flat `.md` plus its asset folders** (`images/`, `themes/`, …) mirrored into
   the same folder. A deck opened from WebDAV remembers where it came from, so
@@ -339,18 +359,17 @@ spider/radar, scatter, waterfall, or heatmap/risk matrix), **cockpit** (a
 dashboard of aviation-style instrument gauges),
 **question** (an interactive quiz slide), **timeline** (an animated timeline of
 dated events), **scorecard** (a few headline figures, each beside the figure from
-the previous report), **actions** (what has to happen, who does it and what is
-being asked of the room), **asset overview** (the attack surface by kind of
-object), and
+the previous report), and
 **free Markdown**. Each card in the chooser shows a miniature
 wireframe of the layout, and the dialog works entirely with the keyboard
 (`Tab`/`Enter` to choose, `Esc` to cancel). Each type has a dedicated editor on
 the left and a live preview on the right. You can change an existing slide's type
 at any time from the **TYPE** control in the editor header: it opens the same
 chooser, so adding and re-typing a slide always offer exactly the same set of
-types. (Both pickers are category-filtered: the five Informatieveiligheid types —
-finding, findings-summary, checklist, scope matrix and sign-off — appear only once
-the security module is enabled; see the pentest-reporting section below.)
+types. (Both pickers are category-filtered: the six Informatieveiligheid types —
+asset overview, finding, findings-summary, checklist, scope matrix and sign-off —
+appear only once the security module is enabled; see the pentest-reporting
+section below.)
 
 Not sure what a slide type is for? Click the small **"What can I do here?"**
 button at the top of the editor for a one-line hint about the selected type (for
@@ -425,6 +444,23 @@ Numbers, LibreOffice Calc, Google Sheets), CSV text (comma- or
 semicolon-separated), or a markdown table fills the grid from that cell onward,
 adding rows and columns as needed. Ordinary text — even a sentence with a comma
 in it — still pastes into just the one cell.
+
+While the table is still empty the editor offers a **preset**: one click lays
+down the columns of an action list (Action, Owner, Deadline, Status) and switches
+on the date marking below. The button disappears as soon as the table carries
+anything, so it can never overwrite what you typed. This replaces the separate
+*Actions and decisions* slide type, which gave you those columns at the cost of
+everything else a table can do.
+
+Tick **Mark expired dates** in *Per-slide options* to colour any cell holding a
+date before today red. OciDeck works this out against the day you present, so a
+deck that comes back three months later marks its own lapsed deadlines instead
+of going on claiming everything is on schedule — there is no "overdue" you can
+type, because a flag you type freezes at whatever was true the day you wrote it.
+Only **yyyy-mm-dd** counts as a date; `05-08-2026` is two different days
+depending on who wrote it, and a deadline is a bad place to be wrong by three
+months. The setting is off by default, since a table of historical dates would
+otherwise turn entirely red, and a warning that is everywhere warns of nothing.
 
 By default a table can only be changed in the builder. To also let it be edited
 live during a presentation, tick **Table editable while presenting** in
@@ -632,6 +668,10 @@ table directly. See [FILE_FORMAT.md](FILE_FORMAT.md) §5 for the columns.
 
 ### Asset overview slides
 
+An asset-overview slide belongs to the [information security
+module](#information-security-module-pentest-reports) and is offered only while
+that module is on; an existing deck that uses one always renders it regardless.
+
 An asset-overview slide shows your **attack surface** — the objects reachable
 from outside — broken into up to eight **kinds**: web applications, mail servers,
 VPN endpoints, APIs, certificates, whatever your estate consists of.
@@ -664,40 +704,20 @@ error a report should surface.
 Storage is an ordinary Markdown table, so the tool that has your numbers can
 write the slide directly — see [FILE_FORMAT.md](FILE_FORMAT.md) §5.
 
-### Actions and decisions slides
+### Actions and decisions
 
-An actions slide carries up to **eight lines**: what has to happen, who carries
-it, by when, and — the field that makes the slide worth having — **what you are
-asking**. Each line is *for information*, a *decision required*, or an
-*escalation*.
+There is no separate slide type for this. There used to be, and it was a
+mistake: it was a table with fixed columns and a form bolted over it, so you
+edited a table without having a table's conveniences. Use a **table** slide.
 
-That column is the point. A decision buried among status updates does not get
-taken, so only a decision or escalation is labelled on the rendered slide. The
-informational lines stay unlabelled on purpose: the eye should go to the ones
-that need something from the room.
+The *Actions and decisions* preset gives you the columns to start from, and a
+table can mark expired deadlines for you — see [Tables](#tables). What you gain
+over the old type is everything the table already had: paste a block straight
+out of a spreadsheet, add and remove columns as the report needs them, and edit
+cells while presenting.
 
-Two more fields earn their place in a report that comes back every month:
-
-- **Deadline** — and OciDeck works out for itself whether it has passed. There
-  is no "overdue" you can set, because a flag you type freezes at whatever was
-  true the day you wrote it. A deck shown two months later marks its own expired
-  deadlines in red. An action marked *Done* is never flagged late, however late
-  it was — the slide reports where things stand, not how they got there.
-- **On the list since** — when the action was first raised. This is what turns a
-  recurring report from a fresh list into a record: an item carried across three
-  reports is a different conversation from one raised last week.
-
-A finished action stays on the slide, struck through. That it is done is part of
-the news; it just stops competing for attention.
-
-Dates are typed as **yyyy-mm-dd**. Other spellings are refused rather than
-guessed at — `05-08-2026` is two different days depending on who wrote it, and a
-deadline is a bad place to be wrong by three months. Leave a deadline empty and
-the slide says "no date", which is usually the thing to settle in the meeting.
-
-Lines keep the order you put them in; the slide never re-sorts behind your back.
-Storage is an ordinary Markdown table, so a script can write one — see
-[FILE_FORMAT.md](FILE_FORMAT.md) §5 for the columns.
+A file that still carries the old `actions` type opens unchanged and becomes an
+ordinary table; nothing is converted and nothing is lost.
 
 ### Video slides
 
@@ -1884,6 +1904,12 @@ presentation is not asked for pentest metadata it has no use for:
   the person who entered it.
 - **Insert tools appendix…** in the `…` menu, which turns *Tools used* into a
   table slide.
+- **Afronden & verzegelen**, both in the `…` menu and on a sign-off slide's own
+  editor. Sealing is a document-integrity function of this module — it sits
+  behind the same toggle as the RFC3161 timestamp that follows it, so the
+  sealing trail is never half-reachable with the module off. The sign-off
+  slide's signature fields stay editable regardless: that data belongs to the
+  deck, not to the toggle.
 
 **Opening a security report while the module is off** surfaces a one-time
 prompt — a banner at the top of the window — so you can turn the module on right
