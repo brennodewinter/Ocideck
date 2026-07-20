@@ -11,6 +11,7 @@ import '../../models/slide.dart';
 import '../../state/deck_provider.dart';
 import '../../state/deck_quality_provider.dart';
 import '../../state/editor_provider.dart';
+import '../../state/image_contrast_provider.dart';
 import '../../state/image_privacy_provider.dart';
 import '../../state/privacy_provider.dart';
 import '../../state/settings_provider.dart';
@@ -160,6 +161,70 @@ class SlideThumbnail extends ConsumerWidget {
     this.reportLanguage = '',
   });
 
+  /// De twee badge-tonen van deze kaart: kwaliteit en privacy.
+  ///
+  /// Twee badges, geen één. Privacy zat ooit in de kwaliteitsbadge gevouwen, en
+  /// dat maakte het bolletje onleesbaar: het kon contrast betekenen, of
+  /// tekstdichtheid, of een BSN in de tekst. Wie een deck nakeek op
+  /// persoonsgegevens kon niet zien wélke dia's daarover gingen — en wie een
+  /// contrastwaarschuwing zag, kon denken dat er persoonsgegevens stonden.
+  ///
+  /// Elke toon leest de RUWE uitslagen (tekst, beeld én — voor privacy — de
+  /// gezichtsscan, voor kwaliteit óók de asynchrone titel-over-beeld-contrast).
+  /// Ruw, zodat een afgehandelde melding grijs blijft in plaats van te
+  /// verdwijnen: verdween ze, dan zag een dia waarvan de auteur de bevinding
+  /// bewust accepteerde er precies zo uit als een dia waarop niets gevonden is.
+  /// En omdat badge én popover uit dezelfde ruwe uitslagen lezen, kan het
+  /// overzicht nooit iets tonen dat de badge bij aanklikken ontkent.
+  ///
+  /// Selects op kleine waarden i.p.v. het hele resultaat: anders herbouwt élke
+  /// thumbnail bij elke wijziging waar dan ook in het deck.
+  (SlideBadgeTone, SlideBadgeTone) _badgeTones(WidgetRef ref) {
+    final privacyDone = ref.watch(
+      deckProvider.select(
+        (state) => effectivePrivacyDisposition(
+          deck: state.deck?.privacy ?? PrivacyDisposition.warn,
+          slide: slide.privacy,
+        ).isResolved,
+      ),
+    );
+    final qualityAccepted = slide.quality.isResolved;
+    final syncQualityTone = ref.watch(
+      deckQualityRawProvider.select(
+        (r) => qualityBadgeTone(r.forSlide(index), accepted: qualityAccepted),
+      ),
+    );
+    final imageContrastTone = ref.watch(
+      imageContrastIssuesProvider.select(
+        (async) => qualityBadgeTone(
+          (async.value ?? const <SlideQualityIssue>[]).where(
+            (i) => i.slideIndex == index,
+          ),
+          accepted: qualityAccepted,
+        ),
+      ),
+    );
+    final textPrivacyTone = ref.watch(
+      privacyRawScanProvider.select(
+        (scan) => privacyBadgeTone(scan.forSlide(index), accepted: privacyDone),
+      ),
+    );
+    final imagePrivacyTone = ref.watch(
+      imagePrivacyRawIssuesProvider.select(
+        (async) =>
+            (async.value ?? const <SlideQualityIssue>[]).any(
+              (i) => i.slideIndex == index,
+            )
+            ? (privacyDone ? SlideBadgeTone.accepted : SlideBadgeTone.warning)
+            : SlideBadgeTone.none,
+      ),
+    );
+    return (
+      worstBadgeTone(syncQualityTone, imageContrastTone),
+      worstBadgeTone(textPrivacyTone, imagePrivacyTone),
+    );
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
@@ -172,59 +237,7 @@ class SlideThumbnail extends ConsumerWidget {
         (s) => (s.selection.contains(index), s.selectedIndex == index),
       ),
     );
-    // De privacystand van déze slide: die van de slide zelf, of anders die van
-    // het deck. Alleen de uitkomst wordt bekeken, zodat een wijziging elders in
-    // het deck deze thumbnail niet opnieuw bouwt.
-    final privacyDone = ref.watch(
-      deckProvider.select(
-        (state) => effectivePrivacyDisposition(
-          deck: state.deck?.privacy ?? PrivacyDisposition.warn,
-          slide: slide.privacy,
-        ).isResolved,
-      ),
-    );
-    // Selects op kleine waarden i.p.v. het hele kwaliteitsresultaat: anders
-    // rebuildt élke thumbnail bij elke wijziging waar dan ook in het deck.
-    //
-    // Twee badges, geen één. Privacy zat hier in de kwaliteitsbadge gevouwen, en
-    // dat maakte het oranje bolletje onleesbaar: het kon contrast betekenen, of
-    // tekstdichtheid, of een BSN in de tekst. Wie een deck nakeek op
-    // persoonsgegevens kon niet zien wélke slides daarover gingen — en wie een
-    // contrastwaarschuwing zag, kon denken dat er persoonsgegevens stonden.
-    //
-    // Allebei lezen ze de RUWE uitslag. Een afgehandelde slide verdween
-    // voorheen spoorloos uit het beeld, en dan ziet een slide waarvan de auteur
-    // de bevindingen bewust accepteerde er precies zo uit als een slide waarop
-    // niets gevonden is. Grijs vertelt het verschil.
-    final qualityTone = ref.watch(
-      deckQualityRawProvider.select(
-        (r) => qualityBadgeTone(
-          r.forSlide(index),
-          accepted: slide.quality.isResolved,
-        ),
-      ),
-    );
-    final textPrivacyTone = ref.watch(
-      privacyRawScanProvider.select(
-        (scan) => privacyBadgeTone(scan.forSlide(index), accepted: privacyDone),
-      ),
-    );
-    // De beeldcontrole levert kwaliteitsmeldingen in plaats van
-    // PrivacyFindings, want ze draait asynchroon en buiten de tekstscanner om.
-    // Voor de badge maakt dat niet uit: een gezicht op een dia is net zo goed
-    // een persoonsgegeven als een BSN in de tekst, en de gebruiker hoort er één
-    // markering voor te zien.
-    final imagePrivacyTone = ref.watch(
-      imagePrivacyIssuesProvider.select(
-        (async) =>
-            (async.value ?? const <SlideQualityIssue>[]).any(
-              (i) => i.slideIndex == index,
-            )
-            ? (privacyDone ? SlideBadgeTone.accepted : SlideBadgeTone.warning)
-            : SlideBadgeTone.none,
-      ),
-    );
-    final privacyTone = worstBadgeTone(textPrivacyTone, imagePrivacyTone);
+    final (qualityTone, privacyTone) = _badgeTones(ref);
     final showWatermark = ref.watch(
       settingsProvider.select((s) => s.classificationWatermarkEnabled),
     );
