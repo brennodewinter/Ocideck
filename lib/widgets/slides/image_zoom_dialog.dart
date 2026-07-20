@@ -28,10 +28,24 @@ Future<void> showImageZoomDialog(
     if (resolved == null) return Future<void>.value();
     provider = cappedFileImage(File(resolved));
   }
+  return showImageProviderZoomDialog(
+    context,
+    image: provider,
+    caption: caption,
+  );
+}
+
+/// Same viewer for an [ImageProvider] that is already resolved — bundled assets
+/// (`AssetImage`) carry no project-relative path to resolve, so they enter here.
+Future<void> showImageProviderZoomDialog(
+  BuildContext context, {
+  required ImageProvider image,
+  String caption = '',
+}) {
   return showDialog<void>(
     context: context,
     barrierColor: Colors.black.withValues(alpha: 0.92),
-    builder: (_) => _ImageZoomView(image: provider, caption: caption),
+    builder: (_) => _ImageZoomView(image: image, caption: caption),
   );
 }
 
