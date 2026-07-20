@@ -445,6 +445,7 @@ class MarkdownService {
       // tabelgedragen types hieronder: leesbaar en buiten de app te bewerken,
       // wat voor een gegenereerde rapportage de hele route is.
       case SlideType.scorecard:
+      case SlideType.actions:
         _writeTableSlide(buf, slide);
       // Informatieveiligheid: `checklist` (§3.2), `scopeMatrix` (§4.4) en
       // `findingsSummary` (§4.3.4) serialiseren als een gewone Markdown-tabel.

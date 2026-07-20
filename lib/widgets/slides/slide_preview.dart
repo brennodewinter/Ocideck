@@ -27,6 +27,7 @@ import '../../models/finding_spec.dart';
 import '../../models/findings_summary_spec.dart';
 import '../../models/question.dart';
 import '../../models/scope_matrix_spec.dart';
+import '../../models/actions_spec.dart';
 import '../../models/scorecard_spec.dart';
 import '../../models/settings.dart';
 import '../../models/slide.dart';
@@ -77,6 +78,7 @@ part 'previews/cockpit_preview.dart';
 part 'previews/question_preview.dart';
 part 'previews/timeline_preview.dart';
 part 'previews/scorecard_preview.dart';
+part 'previews/actions_preview.dart';
 part 'previews/checklist_preview.dart';
 part 'previews/scaffold_previews.dart';
 part 'previews/finding_preview.dart';
@@ -709,6 +711,13 @@ class SlidePreviewWidget extends StatelessWidget {
         );
       case SlideType.scorecard:
         return _ScorecardPreview(
+          slide: slide,
+          w: w,
+          font: fontFamily,
+          profile: themeProfile,
+        );
+      case SlideType.actions:
+        return _ActionsPreview(
           slide: slide,
           w: w,
           font: fontFamily,

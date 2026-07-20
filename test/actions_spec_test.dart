@@ -122,7 +122,10 @@ void main() {
 
     test('a blank row never reaches the table on write either', () {
       const spec = ActionsSpec(
-        items: [ActionItem(action: 'X'), ActionItem()],
+        items: [
+          ActionItem(action: 'X'),
+          ActionItem(),
+        ],
       );
       expect(spec.toTableRows().length, 2);
       expect(_parse(spec.toTableRows()).items.length, 1);
