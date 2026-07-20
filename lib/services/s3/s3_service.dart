@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -570,7 +571,13 @@ class S3Service {
 
   Future<String> _readCapped(HttpClientResponse response, int max) async {
     final bytes = await _readCappedBytes(response, max);
-    return String.fromCharCodes(bytes);
+    // ListObjectsV2 antwoordt in UTF-8. `String.fromCharCodes` leest elke byte
+    // als één teken, dus `café.md` werd `cafÃ©.md`: zichtbaar in de bladerlijst,
+    // maar bij het openen opnieuw gecodeerd tot `%C3%83%C2%A9` en dus een 404 op
+    // een bestand dat er gewoon staat. De WebDAV-kant deed dit al goed.
+    // `allowMalformed`, want een kapot antwoord mag geen uitzondering worden op
+    // een pad dat alleen een lijst wil tonen.
+    return utf8.decode(bytes, allowMalformed: true);
   }
 
   /// Ontleedt een ListObjectsV2-antwoord.

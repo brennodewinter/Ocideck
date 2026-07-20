@@ -42,12 +42,9 @@ extension _CarouselPreview on _ImageCarouselPickerState {
                       padding: const EdgeInsets.all(16),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(12),
-                        child: Image.file(
-                          File(_selected!),
+                        child: Image(
+                          image: boundedFileImage(File(_selected!), 720),
                           fit: BoxFit.contain,
-                          // Cap decode resolution: the preview pane is narrow,
-                          // so full-resolution decodes would waste memory.
-                          cacheWidth: 720,
                           errorBuilder: (context, error, stackTrace) =>
                               const Center(
                                 child: Icon(

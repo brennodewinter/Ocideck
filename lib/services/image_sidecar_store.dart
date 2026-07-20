@@ -11,6 +11,20 @@ import '../utils/log.dart';
 /// descriptionservice verschillen alleen in bestandsnaam en in hun
 /// pad-resolutiestrategie (die blijft bij de services); lezen, muteren,
 /// atomisch schrijven en opruimen-bij-leeg staan hier één keer.
+/// De sidecar bestaat maar is niet te lezen.
+///
+/// Losgetrokken van een gewone schrijffout omdat de afhandeling anders is: hier
+/// staat er ándermans werk in het bestand, en dat mag een nieuwe schrijfbeurt
+/// niet overschrijven.
+class SidecarUnreadable implements Exception {
+  final String path;
+  final Object cause;
+  const SidecarUnreadable(this.path, this.cause);
+
+  @override
+  String toString() => 'Sidecar niet leesbaar: $path';
+}
+
 class ImageSidecarStore {
   final String sidecarName;
 
@@ -47,7 +61,14 @@ class ImageSidecarStore {
           jsonDecode(await file.readAsString()) as Map,
         );
       } catch (e, s) {
+        // Niet dóórgaan met een lege map: die wordt hieronder over het bestand
+        // heen geschreven, en dan zijn alle andere bijschriften in deze map weg
+        // — of het bestand wordt in zijn geheel verwijderd wanneer de gebruiker
+        // net een bijschrift wíste. Eén beschadigde sidecar (een
+        // synchronisatieconflict, een halve kopie) kostte zo alle andere.
+        // Liever niets doen dan de rest slopen; de aanroeper krijgt het te zien.
         logError('$logLabel: parse existing sidecar', e, s);
+        throw SidecarUnreadable(file.path, e);
       }
     }
     final key = p.basename(resolvedImagePath);

@@ -23,11 +23,30 @@ const int _levelError = 1000;
 
 /// An unexpected failure that was handled by falling back. [op] is a short
 /// description of what was attempted, e.g. `'openDeck: read annotation sidecar'`.
+/// De foutwaarde zoals hij de logstroom in mag.
+///
+/// `FormatException.toString()` plakt een stuk van de ontlede brón in de
+/// melding, en `jsonDecode` zet die bron op precies de tekst die werd ontleed.
+/// Een mislukte decode van een dia-veld schreef daarmee de inhoud van die dia
+/// weg — inclusief wat er aan bijzondere persoonsgegevens in stond. Het
+/// doc-commentaar hierboven verbood dat al ("nooit deck- of bestandsinhoud"),
+/// maar de aanroepers hielden zich eraan: het lek zat in het foutobject zelf.
+///
+/// De boodschap en de positie blijven; die heb je nodig om de fout te vinden.
+/// De tekst eromheen niet.
+Object _safeError(Object error) {
+  if (error is FormatException) {
+    final at = error.offset == null ? '' : ' (positie ${error.offset})';
+    return 'FormatException: ${error.message}$at';
+  }
+  return error;
+}
+
 void logError(String op, Object error, [StackTrace? stack]) {
   developer.log(
     op,
     name: _name,
-    error: error,
+    error: _safeError(error),
     stackTrace: stack,
     level: _levelError,
   );
@@ -37,5 +56,10 @@ void logError(String op, Object error, [StackTrace? stack]) {
 /// (e.g. an absent optional file, an unsupported platform capability). Lower
 /// severity than [logError]; [error] is optional.
 void logWarning(String op, [Object? error]) {
-  developer.log(op, name: _name, error: error, level: _levelWarning);
+  developer.log(
+    op,
+    name: _name,
+    error: error == null ? null : _safeError(error),
+    level: _levelWarning,
+  );
 }

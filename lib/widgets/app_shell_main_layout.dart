@@ -500,12 +500,27 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     );
   }
 
+  /// Zoeken. In markdown-modus vraagt de editor zijn eigen zoekbalk op; in de
+  /// gewone editor is er geen zoekbalk, dus opent hetzelfde venster als
+  /// [_openFindReplace] — met het vervangen ingeklapt.
+  ///
+  /// Voorheen deed Ctrl/Cmd+F in de gewone editor niets: de sneltoets stond wél
+  /// geregistreerd, dus de toets werd opgegeten en er gebeurde vervolgens niks.
+  /// Deckbreed zoeken was daardoor alleen te bereiken via de vervang-sneltoets.
   void _openFind() {
     final editorNotifier = ref.read(editorProvider.notifier);
+    final deckNotifier = ref.read(deckProvider.notifier);
     final isMarkdownMode = ref.read(editorProvider).mode == EditorMode.markdown;
     if (isMarkdownMode) {
       editorNotifier.requestMarkdownFind(showReplace: false);
+      return;
     }
+    FindReplaceDialog.show(
+      context,
+      countMatches: (q, cs) => deckNotifier.countMatches(q, caseSensitive: cs),
+      replaceAll: (q, r, cs) =>
+          deckNotifier.replaceAll(q, r, caseSensitive: cs),
+    );
   }
 
   void _openFindReplace() {
