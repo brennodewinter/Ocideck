@@ -59,6 +59,11 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 
 
 ### Fixed
+- **Geredigeerde media laat een zichtbaar spoor na in de HTML-export.** De
+  privacyprojectie haalt beeld, video en audio van een slide af; de
+  PDF/PPTX-export tekende daar een zwart vlak, maar de HTML-export liet alleen
+  een lege plek — terwijl de tekst ernaast wél zwarte blokken toonde. De
+  ontvanger ziet nu ook in de HTML dát er iets is weggehaald.
 - **Wat het apparaat verlaat, gaat eerst door de privacyprojectie.** De
   AI-context die de vindingeneditor meestuurde was de ruwe brontekst; de
   projectie die bij elke andere uitgang vooropstaat, stond hier niet. Nu wordt

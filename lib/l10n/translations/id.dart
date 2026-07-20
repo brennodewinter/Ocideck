@@ -1781,6 +1781,7 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Media verwijderd om privacyredenen': 'Media dihapus karena alasan privasi',
   'Afbeeldingen door AI laten taggen?':
       'Biarkan AI menandai gambar-gambar ini?',
   'afbeeldingen gaan naar': 'gambar akan dikirim ke',

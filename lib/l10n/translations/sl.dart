@@ -1783,6 +1783,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Media verwijderd om privacyredenen':
+      'Predstavnostna vsebina odstranjena zaradi zasebnosti',
   'Afbeeldingen door AI laten taggen?': 'Naj UI označi te slike?',
   'afbeeldingen gaan naar': 'slik bo poslanih na',
   'een model op dit apparaat': 'model v tej napravi',

@@ -1809,6 +1809,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Media verwijderd om privacyredenen':
+      'Τα πολυμέσα αφαιρέθηκαν για λόγους απορρήτου',
   'Afbeeldingen door AI laten taggen?':
       'Να προσθέσει η ΤΝ ετικέτες σε αυτές τις εικόνες;',
   'afbeeldingen gaan naar': 'εικόνες θα σταλούν σε',

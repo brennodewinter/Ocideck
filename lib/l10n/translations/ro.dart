@@ -1799,6 +1799,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Media verwijderd om privacyredenen':
+      'Conținut media eliminat din motive de confidențialitate',
   'Afbeeldingen door AI laten taggen?':
       'Lăsați IA să eticheteze aceste imagini?',
   'afbeeldingen gaan naar': 'imagini vor fi trimise către',

@@ -589,4 +589,45 @@ void main() {}
       slide,
     );
   });
+
+  test('een geredigeerde media-slide toont een zwart vlak in de export', () {
+    // De privacyprojectie zet mediaRedacted en leegt het beeldpad; de
+    // serialisatie voor de export schrijft dan een marker, en de HTML-render
+    // maakt daar een zichtbaar zwart vlak van — anders verdween het beeld
+    // spoorloos terwijl de tekst wél zwarte blokken toonde.
+    final slide = Slide.create(SlideType.bulletsImage).copyWith(
+      title: 'Bewijs',
+      bullets: const ['een waarneming'],
+      imagePath: 'images/foto.png',
+      mediaRedacted: true,
+    );
+    final md = MarkdownService().generateSlide(slide, forExport: true);
+    expect(md, contains('ocideck_media_redacted'));
+
+    final html = MarpHtmlService.renderMediaRedacted(md);
+    expect(html, isNot(contains('ocideck_media_redacted')));
+    expect(html, contains('class="media-redacted"'));
+    expect(html, contains('Media verwijderd'));
+  });
+
+  test('zonder redactie komt er geen media-vlak en geen marker', () {
+    final slide = Slide.create(
+      SlideType.bulletsImage,
+    ).copyWith(title: 'Bewijs', imagePath: 'images/foto.png');
+    final md = MarkdownService().generateSlide(slide, forExport: true);
+    expect(md, isNot(contains('ocideck_media_redacted')));
+    expect(MarpHtmlService.renderMediaRedacted(md), md);
+  });
+
+  test('de marker landt nooit in een bewaard bestand (forExport: false)', () {
+    final slide = Slide.create(
+      SlideType.bulletsImage,
+    ).copyWith(title: 'Bewijs', mediaRedacted: true);
+    // mediaRedacted bestaat alleen in de projectie, maar de poort staat óók op
+    // forExport: een bewaarpad mag de marker nooit schrijven.
+    expect(
+      MarkdownService().generateSlide(slide),
+      isNot(contains('ocideck_media_redacted')),
+    );
+  });
 }

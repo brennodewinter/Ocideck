@@ -1785,6 +1785,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Media verwijderd om privacyredenen':
+      'A médiatartalom eltávolítva adatvédelmi okokból',
   'Afbeeldingen door AI laten taggen?': 'Címkézze az MI ezeket a képeket?',
   'afbeeldingen gaan naar': 'kép elküldésre kerül ide:',
   'een model op dit apparaat': 'egy modell ezen az eszközön',

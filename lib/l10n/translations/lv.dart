@@ -1780,6 +1780,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Media verwijderd om privacyredenen':
+      'Multivide noņemta privātuma apsvērumu dēļ',
   'Afbeeldingen door AI laten taggen?': 'Ļaut MI marķēt šos attēlus?',
   'afbeeldingen gaan naar': 'attēli tiks nosūtīti uz',
   'een model op dit apparaat': 'modelis šajā ierīcē',

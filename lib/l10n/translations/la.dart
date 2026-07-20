@@ -1797,6 +1797,7 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Media verwijderd om privacyredenen': 'Media propter privatam causam remota',
   'Afbeeldingen door AI laten taggen?': 'Sinasne AI has imagines notare?',
   'afbeeldingen gaan naar': 'imagines mittentur ad',
   'een model op dit apparaat': 'exemplar in hoc instrumento',

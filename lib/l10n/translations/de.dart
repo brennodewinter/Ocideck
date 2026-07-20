@@ -738,6 +738,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Media verwijderd om privacyredenen':
+      'Medien aus Datenschutzgründen entfernt',
   'Afbeeldingen door AI laten taggen?': 'Bilder von der KI taggen lassen?',
   'afbeeldingen gaan naar': 'Bilder gehen an',
   'een model op dit apparaat': 'ein Modell auf diesem Gerät',

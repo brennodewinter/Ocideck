@@ -739,6 +739,7 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Media verwijderd om privacyredenen': 'Media fuorthelle om privacyredenen',
   'Afbeeldingen door AI laten taggen?': 'Litte jo AI dizze ôfbyldings tagje?',
   'afbeeldingen gaan naar': 'ôfbyldings gean nei',
   'een model op dit apparaat': 'in model op dit apparaat',

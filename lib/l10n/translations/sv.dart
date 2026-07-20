@@ -1780,6 +1780,7 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Media verwijderd om privacyredenen': 'Media borttaget av integritetsskäl',
   'Afbeeldingen door AI laten taggen?': 'Låt AI tagga dessa bilder?',
   'afbeeldingen gaan naar': 'bilder skickas till',
   'een model op dit apparaat': 'en modell på den här enheten',

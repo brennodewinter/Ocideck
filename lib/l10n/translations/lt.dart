@@ -1789,6 +1789,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Media verwijderd om privacyredenen':
+      'Medija pašalinta dėl privatumo priežasčių',
   'Afbeeldingen door AI laten taggen?': 'Leisti DI pažymėti šiuos vaizdus?',
   'afbeeldingen gaan naar': 'vaizdai bus išsiųsti į',
   'een model op dit apparaat': 'modelis šiame įrenginyje',
