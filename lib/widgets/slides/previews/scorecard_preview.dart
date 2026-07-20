@@ -194,7 +194,10 @@ class _ScorecardPreview extends StatelessWidget {
           decoration: BoxDecoration(
             color: accent.withValues(alpha: 0.06),
             borderRadius: BorderRadius.circular(w * 0.014),
-            border: Border.all(color: accent.withValues(alpha: 0.18)),
+            border: Border.all(
+              color: accent.withValues(alpha: 0.18),
+              width: m.borderWidth,
+            ),
           ),
           clipBehavior: Clip.antiAlias,
           child: Column(
@@ -236,7 +239,7 @@ class _ScorecardPreview extends StatelessWidget {
                         SizedBox(height: m.gap * 0.6),
                         Text(
                           '${l10n.d('was')} ${formatScorecardNumber(entry.previous!)}'
-                          '${entry.unit.isEmpty ? '' : ' ${entry.unit}'}',
+                          '${_unitSuffix(entry.unit)}',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: _applyFont(
@@ -284,7 +287,10 @@ class _ScorecardPreview extends StatelessWidget {
               ),
             ),
             if (entry.unit.isNotEmpty) ...[
-              SizedBox(width: m.figureSize * 0.12),
+              SizedBox(
+                width:
+                    m.figureSize * (_unitTakesSpace(entry.unit) ? 0.12 : 0.05),
+              ),
               Text(
                 entry.unit,
                 style: _applyFont(
@@ -349,6 +355,21 @@ class _ScorecardPreview extends StatelessWidget {
   }
 }
 
+/// Whether a unit is set off from the figure by a space.
+///
+/// "62 dagen" wants one; "3.5/10" and "72%" do not — a space before a symbol
+/// reads as a typo in a report, and "was 4.2 /10" is where it shows worst. The
+/// test is the first character: a word takes a space, a sign does not.
+bool _unitTakesSpace(String unit) =>
+    unit.isNotEmpty && RegExp(r'^[\p{L}\p{N}]', unicode: true).hasMatch(unit);
+
+/// The unit as it is appended to a written line (the "was …" figure).
+String _unitSuffix(String unit) => unit.isEmpty
+    ? ''
+    : _unitTakesSpace(unit)
+    ? ' $unit'
+    : unit;
+
 /// How a given number of figures is arranged.
 ///
 /// The row shapes keep the cards square-ish — four figures as 2×2 rather than a
@@ -388,6 +409,7 @@ class _ScorecardLayout {
 class _CardMetrics {
   const _CardMetrics._({
     required this.barHeight,
+    required this.borderWidth,
     required this.hPad,
     required this.vPad,
     required this.gap,
@@ -402,6 +424,13 @@ class _CardMetrics {
   static const int labelMaxLines = 2;
 
   final double barHeight;
+
+  /// The card's outline. Scaled with the slide rather than left at a hairline:
+  /// a fixed 1px is invisible on an exported slide and, more to the point, eats
+  /// two whole pixels out of a 40px-tall thumbnail card — which is how the
+  /// original version came to draw overflow stripes in the slide rail while
+  /// looking fine at full size.
+  final double borderWidth;
   final double hPad;
   final double vPad;
   final double gap;
@@ -443,6 +472,7 @@ class _CardMetrics {
     // back to the slide width so the figures stay sane rather than infinite.
     final h = height.isFinite ? height : slideWidth * 0.3;
     final barHeight = slideWidth * 0.005;
+    final borderWidth = (slideWidth * 0.0013).clamp(0.5, 1.4);
     final hPad = width * (hero ? 0.06 : 0.08);
     final vPad = h * 0.08;
     final gap = h * 0.04;
@@ -467,9 +497,15 @@ class _CardMetrics {
     final changeHeight = hasChange ? changeSize * 1.6 : 0.0;
     final footnoteHeight = footnoteSize * 1.3;
 
+    // The border counts twice: it is drawn inside the card's box, so it takes
+    // height away from the content exactly like padding does. Leaving it out is
+    // what made a card that fits at slide size overflow by a pixel in the slide
+    // rail, where the same border is a tenth of the budget instead of a
+    // hundredth.
     double leftover(bool withPrevious) =>
         h -
         barHeight -
+        2 * borderWidth -
         2 * vPad -
         (label.isEmpty ? 0 : labelHeight + gap) -
         (hasChange ? changeHeight + gap : 0) -
@@ -484,15 +520,19 @@ class _CardMetrics {
       available = leftover(false);
     }
 
-    final minimum = h * 0.14;
+    // No floor beyond "still a positive number": a minimum that ignores the
+    // budget is a minimum that overflows, and a figure shrunk to nothing on an
+    // impossibly small card is the honest outcome — the slide rail is a preview,
+    // not the deliverable.
     final figure = available * 0.94;
     return _CardMetrics._(
       barHeight: barHeight,
+      borderWidth: borderWidth,
       hPad: hPad,
       vPad: vPad,
       gap: gap,
       labelSize: labelSize,
-      figureSize: figure < minimum ? minimum : figure,
+      figureSize: figure < 1 ? 1 : figure,
       changeSize: changeSize,
       footnoteSize: footnoteSize,
       showPrevious: showPrevious,
