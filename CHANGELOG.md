@@ -58,6 +58,44 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   staaf, dus een half ingevulde grafiek toont nog steeds iets zinnigs.
 
 
+### Fixed
+- **Wat het apparaat verlaat, gaat eerst door de privacyprojectie.** De
+  AI-context die de vindingeneditor meestuurde was de ruwe brontekst; de
+  projectie die bij elke andere uitgang vooropstaat, stond hier niet. Nu wordt
+  de context eerst voor externe verwerking geprojecteerd, met de identifiers
+  (CVSS/CWE/CVE) onaangeroerd.
+- **Getallen die in een dossier belanden kloppen weer.** "Onbereikbaar" telde
+  mee als getoetst (het dossier meldde "3/3" terwijl er één van de drie was
+  getest); hetzelfde scope-object op twee matrices woog dubbel en de winnende
+  status hing van de diavolgorde af; hernummeren hing detaildia's aan de
+  verkeerde bevinding; en 99,5% werd als 100% getoond. Ook telde de
+  MIAUW-analyse detaildia's als losse bevindingen.
+- **Alleen kijken in de visuele notitiestand sloopt geen tekst meer.** De
+  heen-en-terugweg door de rijke-tekstlaag is niet verliesvrij (een tabel komt
+  er als losse woorden uit, `\*` verliest zijn backslash); de stand schreef die
+  uitkomst onvoorwaardelijk terug. Nu alleen na een echte wijziging.
+- **Paginanotities raken niet meer kwijt.** Een rijke-tekstdia over meerdere
+  pagina's leverde meerdere notities met dezelfde dia-index; de decoder claimde
+  op de dia alleen en stootte de tweede af naar een andere dia of naar niets. De
+  claim staat nu op (dia, pagina).
+- **Twee poorten sluiten weer voor het geval waarvoor ze bedoeld zijn.** De
+  harde exportblokkade bij kwaliteitsfouten ging stilzwijgend mee uit met de
+  aparte bevestigingsvraag; en "Kopieer als afbeelding" toetste alleen de
+  markering van het dek, waardoor een TLP:RED-dia in een TLP:GREEN-dek naar het
+  klembord kon. Nu geldt de strengste van dek en dia.
+- **Tijdlijn- en akkoorddia's komen niet meer als ruwe tekst uit de
+  HTML-export.** Een tijdlijn toonde "2024-01 :: Start" met de interne scheiding
+  erin; de akkoordpagina was een kop met wit eronder terwijl de verklaring op
+  dekniveau klaarstond. Beide worden nu volwaardig gerenderd.
+- **Een merge blijft niet half toegepast staan.** `NativeGitMirror.mergeRemote`
+  ving alleen git-fouten rond het blok dat óók schrijft; een mislukte schrijf
+  liet de merge half toegepast met een open MERGE_HEAD achter. Elke fout leidt
+  nu tot afbreken en terugmelden.
+- **Een dode CWE-check en een dode F-NN-verwijzing opgeruimd.**
+  `EisCheck.everyFindingHasCwe` was een wees zonder EIS in de catalogus en liep
+  nooit; en een wees-detaildia (kop verwijderd) hield een titelprefix die naar
+  een verdwenen bevinding wees.
+
 ### Added
 - **Eén bron, een managementversie en een techniekversie.** Markeer een slide als
   **verdieping** en hij gaat mee in de volledige export maar valt weg in de
