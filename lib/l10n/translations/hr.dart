@@ -1788,6 +1788,31 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Ontdekkingen': 'Otkrića',
+  'Wat is gevonden': 'Što je pronađeno',
+  'Soort': 'Vrsta',
+  'Dagen onopgemerkt': 'Dana neopaženo',
+  'Ontdekking toevoegen': 'Dodaj otkriće',
+  'Ontdekking verwijderen': 'Ukloni otkriće',
+  'Kop van de slide': 'Naslov slajda',
+  'dagen onopgemerkt': 'dana neopaženo',
+  'Nog geen blootstelling ingevuld — de slide toont dan geen kop, alleen de lijst.':
+      'Izloženost još nije unesena — slajd tada ne prikazuje naslov, samo popis.',
+  'Zes ontdekkingen is het maximum; wie er meer noemt maakt een bijlage in plaats van een slide.':
+      'Šest otkrića je najviše; tko navede više, radi prilog umjesto slajda.',
+  'Laat de dagen leeg als de eerste blootstelling onbekend is; de slide zegt dan "onbekend" in plaats van nul. Een lege eigenaar leest als "geen eigenaar" en valt rood op.':
+      'Ostavite dane prazne ako je prva izloženost nepoznata; slajd tada kaže "nepoznato" umjesto nule. Prazan vlasnik čita se kao "bez vlasnika" i ističe se crveno.',
+  'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
+      'Što je skeniranje pronašlo, a nitko nije znao da ima. Po otkriću, koliko je dugo bilo dostupno neopaženo i tko je sada vlasnik; najduža izloženost je naslov.',
+  'dag': 'dan',
+  'maand': 'mjesec',
+  'maanden': 'mjeseci',
+  'eigenaar': 'vlasnik',
+  'langst onopgemerkt bereikbaar': 'najdulje dostupno neopaženo',
+  'onbekend': 'nepoznato',
+  'onopgemerkt': 'neopaženo',
+  'ontdekking': 'otkriće',
+  'ontdekkingen': 'otkrića',
   'Norm en prestatie': 'Cilj i ostvarenje',
   'Norm per rij (optioneel)': 'Cilj po retku (neobavezno)',
   'Bandgrenzen (optioneel)': 'Granice pojaseva (neobavezno)',

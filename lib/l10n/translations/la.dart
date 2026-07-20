@@ -1797,6 +1797,31 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Ontdekkingen': 'Inventa',
+  'Wat is gevonden': 'Quid inventum sit',
+  'Soort': 'Genus',
+  'Dagen onopgemerkt': 'Dies inobservatus',
+  'Ontdekking toevoegen': 'Inventum addere',
+  'Ontdekking verwijderen': 'Inventum removere',
+  'Kop van de slide': 'Titulus tabulae',
+  'dagen onopgemerkt': 'dies inobservatus',
+  'Nog geen blootstelling ingevuld — de slide toont dan geen kop, alleen de lijst.':
+      'Nulla expositio adhuc inscripta — tabula igitur nullum titulum, solum indicem ostendit.',
+  'Zes ontdekkingen is het maximum; wie er meer noemt maakt een bijlage in plaats van een slide.':
+      'Sex inventa maximus numerus est; qui plura nominat appendicem facit, non tabulam.',
+  'Laat de dagen leeg als de eerste blootstelling onbekend is; de slide zegt dan "onbekend" in plaats van nul. Een lege eigenaar leest als "geen eigenaar" en valt rood op.':
+      'Dies vacuos relinque si prima expositio ignota est; tabula tunc "ignotum" pro nihilo dicit. Curator vacuus "sine curatore" legitur et rubro eminet.',
+  'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
+      'Quod scrutatio invenit quod nemo se habere sciebat. Per inventum quam diu inobservatum pervium fuerit et quis nunc curet; longissima expositio titulus est.',
+  'dag': 'dies',
+  'maand': 'mensis',
+  'maanden': 'menses',
+  'eigenaar': 'curator',
+  'langst onopgemerkt bereikbaar': 'diutissime inobservatum pervium',
+  'onbekend': 'ignotum',
+  'onopgemerkt': 'inobservatum',
+  'ontdekking': 'inventum',
+  'ontdekkingen': 'inventa',
   'Norm en prestatie': 'Norma et effectus',
   'Norm per rij (optioneel)': 'Norma per versum (optio)',
   'Bandgrenzen (optioneel)': 'Fines zonarum (optio)',

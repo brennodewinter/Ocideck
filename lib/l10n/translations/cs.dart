@@ -1784,6 +1784,31 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Ontdekkingen': 'Objevy',
+  'Wat is gevonden': 'Co bylo nalezeno',
+  'Soort': 'Druh',
+  'Dagen onopgemerkt': 'Dní nepovšimnuto',
+  'Ontdekking toevoegen': 'Přidat objev',
+  'Ontdekking verwijderen': 'Odebrat objev',
+  'Kop van de slide': 'Titulek snímku',
+  'dagen onopgemerkt': 'dní nepovšimnuto',
+  'Nog geen blootstelling ingevuld — de slide toont dan geen kop, alleen de lijst.':
+      'Doba vystavení zatím není vyplněna — snímek pak nezobrazí titulek, jen seznam.',
+  'Zes ontdekkingen is het maximum; wie er meer noemt maakt een bijlage in plaats van een slide.':
+      'Šest objevů je maximum; kdo jich uvede více, dělá přílohu místo snímku.',
+  'Laat de dagen leeg als de eerste blootstelling onbekend is; de slide zegt dan "onbekend" in plaats van nul. Een lege eigenaar leest als "geen eigenaar" en valt rood op.':
+      'Nechte dny prázdné, pokud je první vystavení neznámé; snímek pak uvede "neznámé" místo nuly. Prázdný vlastník se čte jako "bez vlastníka" a vyniká červeně.',
+  'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
+      'Co sken našel a o čem nikdo nevěděl. U každého objevu, jak dlouho byl dostupný nepovšimnut a kdo je nyní vlastníkem; nejdelší vystavení je titulek.',
+  'dag': 'den',
+  'maand': 'měsíc',
+  'maanden': 'měsíců',
+  'eigenaar': 'vlastník',
+  'langst onopgemerkt bereikbaar': 'nejdéle dostupné nepovšimnuto',
+  'onbekend': 'neznámé',
+  'onopgemerkt': 'nepovšimnuto',
+  'ontdekking': 'objev',
+  'ontdekkingen': 'objevů',
   'Norm en prestatie': 'Cíl a skutečnost',
   'Norm per rij (optioneel)': 'Cíl na řádek (volitelné)',
   'Bandgrenzen (optioneel)': 'Hranice pásem (volitelné)',

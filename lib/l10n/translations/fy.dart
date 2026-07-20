@@ -739,6 +739,31 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Ontdekkingen': 'Untdekkingen',
+  'Wat is gevonden': 'Wat fûn is',
+  'Soort': 'Soarte',
+  'Dagen onopgemerkt': 'Dagen ûngemurken',
+  'Ontdekking toevoegen': 'Untdekking tafoegje',
+  'Ontdekking verwijderen': 'Untdekking fuortsmite',
+  'Kop van de slide': 'Kop fan de slide',
+  'dagen onopgemerkt': 'dagen ûngemurken',
+  'Nog geen blootstelling ingevuld — de slide toont dan geen kop, alleen de lijst.':
+      'Noch gjin bleatstelling ynfolle — de slide lit dan gjin kop sjen, allinnich de list.',
+  'Zes ontdekkingen is het maximum; wie er meer noemt maakt een bijlage in plaats van een slide.':
+      'Seis ûntdekkingen is it maksimum; wa\'t der mear neamt makket in bylage yn stee fan in slide.',
+  'Laat de dagen leeg als de eerste blootstelling onbekend is; de slide zegt dan "onbekend" in plaats van nul. Een lege eigenaar leest als "geen eigenaar" en valt rood op.':
+      'Lit de dagen leech as de earste bleatstelling ûnbekend is; de slide seit dan "ûnbekend" yn stee fan nul. In lege eigner lêst as "gjin eigner" en falt read op.',
+  'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
+      'Wat de scan fûn dat gjinien wist te hawwen. Per ûntdekking hoe lang dy ûngemurken berikber wie en wa\'t him no hat; de langste bleatstelling is de kop.',
+  'dag': 'dei',
+  'maand': 'moanne',
+  'maanden': 'moannen',
+  'eigenaar': 'eigner',
+  'langst onopgemerkt bereikbaar': 'langst ûngemurken berikber',
+  'onbekend': 'ûnbekend',
+  'onopgemerkt': 'ûngemurken',
+  'ontdekking': 'ûntdekking',
+  'ontdekkingen': 'ûntdekkingen',
   'Norm en prestatie': 'Noarm en prestaasje',
   'Norm per rij (optioneel)': 'Noarm de rigel (opsjoneel)',
   'Bandgrenzen (optioneel)': 'Bângrinzen (opsjoneel)',

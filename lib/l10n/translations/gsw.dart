@@ -1785,6 +1785,31 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Ontdekkingen': 'Entdeckige',
+  'Wat is gevonden': 'Was gfunde worde isch',
+  'Soort': 'Art',
+  'Dagen onopgemerkt': 'Täg unbemerkt',
+  'Ontdekking toevoegen': 'Entdeckig zuefüege',
+  'Ontdekking verwijderen': 'Entdeckig entferne',
+  'Kop van de slide': 'Schlagziile vo de Folie',
+  'dagen onopgemerkt': 'Täg unbemerkt',
+  'Nog geen blootstelling ingevuld — de slide toont dan geen kop, alleen de lijst.':
+      'No kei Expositionsduur iigfüegt — d Folie zeigt denn kei Schlagziile, nur d Liste.',
+  'Zes ontdekkingen is het maximum; wie er meer noemt maakt een bijlage in plaats van een slide.':
+      'Sächs Entdeckige sind s Maximum; wer meh nennt, macht en Aahang statt ere Folie.',
+  'Laat de dagen leeg als de eerste blootstelling onbekend is; de slide zegt dan "onbekend" in plaats van nul. Een lege eigenaar leest als "geen eigenaar" en valt rood op.':
+      'Lönd d Täg leer, wenn di erscht Exposition unbekannt isch; d Folie seit denn "unbekannt" statt null. En leere Verantwortliche liest sich als "ohni Verantwortliche" und fallt rot uf.',
+  'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
+      'Was de Scan gfunde het und wo niemert devo gwüsst het. Pro Entdeckig, wie lang si unbemerkt erreichbar gsi isch und wer si jetz verantwortet; di längscht Exposition isch d Schlagziile.',
+  'dag': 'Tag',
+  'maand': 'Monet',
+  'maanden': 'Monet',
+  'eigenaar': 'Verantwortliche',
+  'langst onopgemerkt bereikbaar': 'am längschte unbemerkt erreichbar',
+  'onbekend': 'unbekannt',
+  'onopgemerkt': 'unbemerkt',
+  'ontdekking': 'Entdeckig',
+  'ontdekkingen': 'Entdeckige',
   'Norm en prestatie': 'Soll und Ist',
   'Norm per rij (optioneel)': 'Soll pro Zile (optional)',
   'Bandgrenzen (optioneel)': 'Bandgränze (optional)',

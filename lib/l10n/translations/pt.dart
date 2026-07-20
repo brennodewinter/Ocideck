@@ -1811,6 +1811,31 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Ontdekkingen': 'Descobertas',
+  'Wat is gevonden': 'O que foi encontrado',
+  'Soort': 'Tipo',
+  'Dagen onopgemerkt': 'Dias despercebido',
+  'Ontdekking toevoegen': 'Adicionar descoberta',
+  'Ontdekking verwijderen': 'Remover descoberta',
+  'Kop van de slide': 'Manchete do slide',
+  'dagen onopgemerkt': 'dias despercebido',
+  'Nog geen blootstelling ingevuld — de slide toont dan geen kop, alleen de lijst.':
+      'Ainda não foi preenchida nenhuma exposição — o slide não mostra manchete, apenas a lista.',
+  'Zes ontdekkingen is het maximum; wie er meer noemt maakt een bijlage in plaats van een slide.':
+      'Seis descobertas é o máximo; quem nomeia mais faz um anexo em vez de um slide.',
+  'Laat de dagen leeg als de eerste blootstelling onbekend is; de slide zegt dan "onbekend" in plaats van nul. Een lege eigenaar leest als "geen eigenaar" en valt rood op.':
+      'Deixe os dias vazios se a primeira exposição for desconhecida; o slide dirá "desconhecido" em vez de zero. Um responsável vazio lê-se como "sem responsável" e destaca-se a vermelho.',
+  'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
+      'O que a análise encontrou e que ninguém sabia ter. Por descoberta, quanto tempo esteve acessível despercebida e quem é responsável agora; a exposição mais longa é a manchete.',
+  'dag': 'dia',
+  'maand': 'mês',
+  'maanden': 'meses',
+  'eigenaar': 'responsável',
+  'langst onopgemerkt bereikbaar': 'mais tempo acessível despercebido',
+  'onbekend': 'desconhecido',
+  'onopgemerkt': 'despercebido',
+  'ontdekking': 'descoberta',
+  'ontdekkingen': 'descobertas',
   'Norm en prestatie': 'Meta e resultado',
   'Norm per rij (optioneel)': 'Meta por linha (opcional)',
   'Bandgrenzen (optioneel)': 'Limites das faixas (opcional)',

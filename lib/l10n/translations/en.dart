@@ -920,6 +920,31 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Ontdekkingen': 'Discoveries',
+  'Wat is gevonden': 'What was found',
+  'Soort': 'Kind',
+  'Dagen onopgemerkt': 'Days unnoticed',
+  'Ontdekking toevoegen': 'Add discovery',
+  'Ontdekking verwijderen': 'Remove discovery',
+  'Kop van de slide': 'Slide headline',
+  'dagen onopgemerkt': 'days unnoticed',
+  'Nog geen blootstelling ingevuld — de slide toont dan geen kop, alleen de lijst.':
+      'No exposure filled in yet — the slide then shows no headline, only the list.',
+  'Zes ontdekkingen is het maximum; wie er meer noemt maakt een bijlage in plaats van een slide.':
+      'Six discoveries is the maximum; naming more makes an appendix rather than a slide.',
+  'Laat de dagen leeg als de eerste blootstelling onbekend is; de slide zegt dan "onbekend" in plaats van nul. Een lege eigenaar leest als "geen eigenaar" en valt rood op.':
+      'Leave the days empty when the first exposure is unknown; the slide then says "unknown" instead of nought. An empty owner reads as "no owner" and stands out in red.',
+  'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
+      'What the scan found that nobody knew they had. Per discovery, how long it was reachable unnoticed and who owns it now; the longest exposure is the headline.',
+  'dag': 'day',
+  'maand': 'month',
+  'maanden': 'months',
+  'eigenaar': 'owner',
+  'langst onopgemerkt bereikbaar': 'longest reachable unnoticed',
+  'onbekend': 'unknown',
+  'onopgemerkt': 'unnoticed',
+  'ontdekking': 'discovery',
+  'ontdekkingen': 'discoveries',
   'Norm en prestatie': 'Target and actual',
   'Norm per rij (optioneel)': 'Target per row (optional)',
   'Bandgrenzen (optioneel)': 'Band thresholds (optional)',

@@ -1803,6 +1803,32 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Ontdekkingen': 'Skoperti',
+  'Wat is gevonden': 'X\'instab',
+  'Soort': 'Tip',
+  'Dagen onopgemerkt': 'Jiem mhux innutat',
+  'Ontdekking toevoegen': 'Żid skoperta',
+  'Ontdekking verwijderen': 'Neħħi skoperta',
+  'Kop van de slide': 'Titlu tal-islajd',
+  'dagen onopgemerkt': 'jiem mhux innutat',
+  'Nog geen blootstelling ingevuld — de slide toont dan geen kop, alleen de lijst.':
+      'Għadha ma ddaħħlitx espożizzjoni — l-islajd allura ma jurix titlu, is-sempliċi lista biss.',
+  'Zes ontdekkingen is het maximum; wie er meer noemt maakt een bijlage in plaats van een slide.':
+      'Sitt skoperti huma l-massimu; min isemmi aktar jagħmel anness minflok islajd.',
+  'Laat de dagen leeg als de eerste blootstelling onbekend is; de slide zegt dan "onbekend" in plaats van nul. Een lege eigenaar leest als "geen eigenaar" en valt rood op.':
+      'Ħalli l-jiem vojta jekk l-ewwel espożizzjoni mhijiex magħrufa; l-islajd imbagħad jgħid "mhux magħruf" minflok żero. Responsabbli vojt jinqara bħala "bla responsabbli" u joħroġ bl-aħmar.',
+  'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
+      'Dak li sabet l-iskennjar li ħadd ma kien jaf li għandu. Għal kull skoperta, kemm damet tintlaħaq mingħajr ma ġiet innutata u min hu responsabbli issa; l-itwal espożizzjoni hija t-titlu.',
+  'dag': 'jum',
+  'maand': 'xahar',
+  'maanden': 'xhur',
+  'eigenaar': 'responsabbli',
+  'langst onopgemerkt bereikbaar':
+      'l-itwal li seta\' jintlaħaq mingħajr ma ġie innutat',
+  'onbekend': 'mhux magħruf',
+  'onopgemerkt': 'mhux innutat',
+  'ontdekking': 'skoperta',
+  'ontdekkingen': 'skoperti',
   'Norm en prestatie': 'Mira u riżultat',
   'Norm per rij (optioneel)': 'Mira għal kull ringiela (mhux obbligatorju)',
   'Bandgrenzen (optioneel)': 'Limiti tal-faxxi (mhux obbligatorju)',

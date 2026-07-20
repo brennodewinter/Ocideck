@@ -3,6 +3,7 @@ import 'package:ocideck/models/asset_overview_spec.dart';
 import 'package:ocideck/models/chart.dart';
 import 'package:ocideck/models/cockpit.dart';
 import 'package:ocideck/models/deck.dart';
+import 'package:ocideck/models/discoveries_spec.dart';
 import 'package:ocideck/models/document_signature.dart';
 import 'package:ocideck/models/finding_spec.dart';
 import 'package:ocideck/models/question.dart';
@@ -1960,6 +1961,64 @@ void main() {
       // Totals are derived on the far side too, never carried in the file.
       expect(spec.totalAssets, 185);
       expect(spec.totalAtRisk, 14);
+    });
+  });
+
+  group('discoveries slide round-trip', () {
+    Slide discoveries(List<Discovery> found) {
+      const title = 'Wat we niet wisten te hebben';
+      final spec = DiscoveriesSpec(title: title, discoveries: found);
+      return Slide.create(
+        SlideType.discoveries,
+      ).copyWith(title: title, tableRows: spec.toTableRows());
+    }
+
+    test('the class token is written and read back', () {
+      final service = MarkdownService();
+      final markdown = service.generateDeck(
+        Deck(
+          title: 'Demo',
+          slides: [
+            discoveries(const [
+              Discovery(name: 'oud-intranet.example.nl', daysUnnoticed: 412),
+            ]),
+          ],
+        ),
+      );
+      expect(markdown, contains('<!-- _class: discoveries -->'));
+      expect(
+        markdown,
+        contains('| Discovery | Kind | DaysUnnoticed | Owner |'),
+      );
+    });
+
+    test('every field survives the trip', () {
+      final out = _roundTrip(
+        discoveries(const [
+          Discovery(
+            name: 'betaalportaal-acc.example.nl',
+            kind: 'Webapplicatie',
+            daysUnnoticed: 412,
+            owner: 'Team Betalen',
+          ),
+          Discovery(name: 'files.example.nl', kind: 'Bestandsdeling'),
+        ]),
+      );
+      expect(out.type, SlideType.discoveries);
+
+      final spec = DiscoveriesSpec.fromSlide(out.title, out.tableRows);
+      expect(spec.discoveries, hasLength(2));
+      final portal = spec.discoveries.first;
+      expect(portal.name, 'betaalportaal-acc.example.nl');
+      expect(portal.kind, 'Webapplicatie');
+      expect(portal.daysUnnoticed, 412);
+      expect(portal.owner, 'Team Betalen');
+      // An unknown exposure comes back unknown, not as a nought.
+      expect(spec.discoveries.last.daysUnnoticed, isNull);
+      expect(spec.discoveries.last.hasOwner, isFalse);
+      // Derived on the far side too, never carried in the file.
+      expect(spec.longestUnnoticed, 412);
+      expect(spec.unownedCount, 1);
     });
   });
 

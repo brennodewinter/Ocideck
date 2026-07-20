@@ -1772,6 +1772,31 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Ontdekkingen': 'Leiud',
+  'Wat is gevonden': 'Mis leiti',
+  'Soort': 'Liik',
+  'Dagen onopgemerkt': 'Päeva märkamatult',
+  'Ontdekking toevoegen': 'Lisa leid',
+  'Ontdekking verwijderen': 'Eemalda leid',
+  'Kop van de slide': 'Slaidi pealkiri',
+  'dagen onopgemerkt': 'päeva märkamatult',
+  'Nog geen blootstelling ingevuld — de slide toont dan geen kop, alleen de lijst.':
+      'Kokkupuuteaeg pole veel täidetud — slaid ei näita siis pealkirja, ainult loendit.',
+  'Zes ontdekkingen is het maximum; wie er meer noemt maakt een bijlage in plaats van een slide.':
+      'Kuus leidu on maksimum; kes nimetab rohkem, teeb lisa, mitte slaidi.',
+  'Laat de dagen leeg als de eerste blootstelling onbekend is; de slide zegt dan "onbekend" in plaats van nul. Een lege eigenaar leest als "geen eigenaar" en valt rood op.':
+      'Jätke päevad tühjaks, kui esimene kokkupuude on teadmata; slaid ütleb siis "teadmata" nulli asemel. Tühi vastutaja loetakse kui "vastutajata" ja paistab punaselt silma.',
+  'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
+      'Mida skannimine leidis, millest keegi ei teadnud. Iga leiu kohta, kui kaua see oli märkamatult kättesaadav ja kes selle eest nüüd vastutab; pikim kokkupuude on pealkiri.',
+  'dag': 'päev',
+  'maand': 'kuu',
+  'maanden': 'kuud',
+  'eigenaar': 'vastutaja',
+  'langst onopgemerkt bereikbaar': 'kõige kauem märkamatult kättesaadav',
+  'onbekend': 'teadmata',
+  'onopgemerkt': 'märkamatult',
+  'ontdekking': 'leid',
+  'ontdekkingen': 'leidu',
   'Norm en prestatie': 'Eesmärk ja tulemus',
   'Norm per rij (optioneel)': 'Eesmärk rea kohta (valikuline)',
   'Bandgrenzen (optioneel)': 'Vööndite piirid (valikuline)',

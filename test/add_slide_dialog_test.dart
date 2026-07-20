@@ -92,6 +92,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(visibleTypes(tester).toSet(), {
       SlideType.assets,
+      SlideType.discoveries,
       SlideType.finding,
       SlideType.findingsSummary,
       SlideType.checklist,

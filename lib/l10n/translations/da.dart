@@ -1780,6 +1780,31 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Ontdekkingen': 'Fund',
+  'Wat is gevonden': 'Hvad der blev fundet',
+  'Soort': 'Type',
+  'Dagen onopgemerkt': 'Dage ubemærket',
+  'Ontdekking toevoegen': 'Tilføj fund',
+  'Ontdekking verwijderen': 'Fjern fund',
+  'Kop van de slide': 'Slidens overskrift',
+  'dagen onopgemerkt': 'dage ubemærket',
+  'Nog geen blootstelling ingevuld — de slide toont dan geen kop, alleen de lijst.':
+      'Der er endnu ikke angivet nogen eksponering — sliden viser så ingen overskrift, kun listen.',
+  'Zes ontdekkingen is het maximum; wie er meer noemt maakt een bijlage in plaats van een slide.':
+      'Seks fund er maksimum; den der nævner flere, laver et bilag i stedet for en slide.',
+  'Laat de dagen leeg als de eerste blootstelling onbekend is; de slide zegt dan "onbekend" in plaats van nul. Een lege eigenaar leest als "geen eigenaar" en valt rood op.':
+      'Lad dagene stå tomme, hvis den første eksponering er ukendt; sliden siger så "ukendt" i stedet for nul. En tom ansvarlig læses som "uden ansvarlig" og springer i øjnene med rødt.',
+  'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
+      'Hvad scanningen fandt, som ingen vidste de havde. Pr. fund, hvor længe det var tilgængeligt ubemærket, og hvem der er ansvarlig nu; den længste eksponering er overskriften.',
+  'dag': 'dag',
+  'maand': 'måned',
+  'maanden': 'måneder',
+  'eigenaar': 'ansvarlig',
+  'langst onopgemerkt bereikbaar': 'længst tilgængelig ubemærket',
+  'onbekend': 'ukendt',
+  'onopgemerkt': 'ubemærket',
+  'ontdekking': 'fund',
+  'ontdekkingen': 'fund',
   'Norm en prestatie': 'Mål og resultat',
   'Norm per rij (optioneel)': 'Mål pr. række (valgfrit)',
   'Bandgrenzen (optioneel)': 'Båndgrænser (valgfrit)',

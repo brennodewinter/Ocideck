@@ -81,6 +81,7 @@ extension _QualityDensityChecks on SlideQualityAnalyzer {
       case SlideType.timeline:
       case SlideType.scorecard:
       case SlideType.assets:
+      case SlideType.discoveries:
       case SlideType.finding:
       case SlideType.findingsSummary:
       case SlideType.checklist:

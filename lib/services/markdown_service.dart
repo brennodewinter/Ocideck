@@ -460,9 +460,10 @@ class MarkdownService {
         _writeTimelineSlide(buf, slide);
       case SlideType.question:
         _writeQuestionSlide(buf, slide);
-      // Zie [_writeTableSlide] voor waarom deze zes hetzelfde wegschrijven.
+      // Zie [_writeTableSlide] voor waarom deze zeven hetzelfde wegschrijven.
       case SlideType.scorecard:
       case SlideType.assets:
+      case SlideType.discoveries:
       case SlideType.checklist:
       case SlideType.scopeMatrix:
       case SlideType.findingsSummary:

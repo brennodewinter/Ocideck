@@ -738,6 +738,31 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Ontdekkingen': 'Deskubrimentunan',
+  'Wat is gevonden': 'Kiko a wòrdu hañá',
+  'Soort': 'Tipo',
+  'Dagen onopgemerkt': 'Dianan sin ser notá',
+  'Ontdekking toevoegen': 'Agregá deskubrimentu',
+  'Ontdekking verwijderen': 'Kita deskubrimentu',
+  'Kop van de slide': 'Kabes di e slide',
+  'dagen onopgemerkt': 'dianan sin ser notá',
+  'Nog geen blootstelling ingevuld — de slide toont dan geen kop, alleen de lijst.':
+      'Ainda no a yena niun eksposishon — e slide no ta mustra kabes, solamente e lista.',
+  'Zes ontdekkingen is het maximum; wie er meer noemt maakt een bijlage in plaats van een slide.':
+      'Seis deskubrimentu ta e máksimo; ken ta menshoná mas ta traha un anekso en bes di un slide.',
+  'Laat de dagen leeg als de eerste blootstelling onbekend is; de slide zegt dan "onbekend" in plaats van nul. Een lege eigenaar leest als "geen eigenaar" en valt rood op.':
+      'Laga e dianan bashí si e promé eksposishon ta deskonosí; e slide ta bisa anto "deskonosí" en bes di sero. Un doño bashí ta lesa komo "sin doño" i ta resaltá na kòrá.',
+  'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
+      'Loke e skan a hañá ku ningun hende tabata sa ku e tabatin. Pa kada deskubrimentu kuantu tempu e tabata alkansabel sin ser notá i ken ta su doño awor; e eksposishon mas largu ta e kabes.',
+  'dag': 'dia',
+  'maand': 'luna',
+  'maanden': 'lunanan',
+  'eigenaar': 'doño',
+  'langst onopgemerkt bereikbaar': 'mas largu alkansabel sin ser notá',
+  'onbekend': 'deskonosí',
+  'onopgemerkt': 'sin ser notá',
+  'ontdekking': 'deskubrimentu',
+  'ontdekkingen': 'deskubrimentunan',
   'Norm en prestatie': 'Meta i resultado',
   'Norm per rij (optioneel)': 'Meta pa liña (opshonal)',
   'Bandgrenzen (optioneel)': 'Límite di banda (opshonal)',

@@ -1809,6 +1809,31 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Ontdekkingen': 'Ανακαλύψεις',
+  'Wat is gevonden': 'Τι βρέθηκε',
+  'Soort': 'Είδος',
+  'Dagen onopgemerkt': 'Ημέρες απαρατήρητο',
+  'Ontdekking toevoegen': 'Προσθήκη ανακάλυψης',
+  'Ontdekking verwijderen': 'Αφαίρεση ανακάλυψης',
+  'Kop van de slide': 'Επικεφαλίδα διαφάνειας',
+  'dagen onopgemerkt': 'ημέρες απαρατήρητο',
+  'Nog geen blootstelling ingevuld — de slide toont dan geen kop, alleen de lijst.':
+      'Δεν έχει συμπληρωθεί έκθεση ακόμη — η διαφάνεια δεν δείχνει επικεφαλίδα, μόνο τη λίστα.',
+  'Zes ontdekkingen is het maximum; wie er meer noemt maakt een bijlage in plaats van een slide.':
+      'Έξι ανακαλύψεις είναι το μέγιστο· όποιος αναφέρει περισσότερες φτιάχνει παράρτημα αντί για διαφάνεια.',
+  'Laat de dagen leeg als de eerste blootstelling onbekend is; de slide zegt dan "onbekend" in plaats van nul. Een lege eigenaar leest als "geen eigenaar" en valt rood op.':
+      'Αφήστε τις ημέρες κενές αν η πρώτη έκθεση είναι άγνωστη· η διαφάνεια λέει τότε "άγνωστο" αντί για μηδέν. Κενός υπεύθυνος διαβάζεται ως "χωρίς υπεύθυνο" και ξεχωρίζει με κόκκινο.',
+  'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
+      'Τι βρήκε η σάρωση που κανείς δεν ήξερε ότι είχε. Ανά ανακάλυψη, πόσο καιρό ήταν προσβάσιμη απαρατήρητη και ποιος είναι τώρα υπεύθυνος· η μεγαλύτερη έκθεση είναι η επικεφαλίδα.',
+  'dag': 'ημέρα',
+  'maand': 'μήνας',
+  'maanden': 'μήνες',
+  'eigenaar': 'υπεύθυνος',
+  'langst onopgemerkt bereikbaar': 'περισσότερο προσβάσιμο απαρατήρητο',
+  'onbekend': 'άγνωστο',
+  'onopgemerkt': 'απαρατήρητο',
+  'ontdekking': 'ανακάλυψη',
+  'ontdekkingen': 'ανακαλύψεις',
   'Norm en prestatie': 'Στόχος και επίδοση',
   'Norm per rij (optioneel)': 'Στόχος ανά γραμμή (προαιρετικό)',
   'Bandgrenzen (optioneel)': 'Όρια ζωνών (προαιρετικό)',

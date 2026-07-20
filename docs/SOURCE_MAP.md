@@ -42,6 +42,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `question.dart` — `QuestionSpec`/`QuestionView` for interactive quiz slides (multiple-choice/true-false/multiple-correct/ordering).
 - `rehearsal.dart` — `RehearsalRun`/`SlideTiming` for tracking presentation-practice durations per slide.
 - `scope_matrix_spec.dart` — `ScopeMatrixSpec`/`ScopeRow`/`ScopeObjectType`/`ScopeStatus` for the scope-matrix slide; each row carries a `CiaRating` (serialised as the `C`/`I`/`A` columns).
+- `discoveries_spec.dart` — `DiscoveriesSpec`/`Discovery` for the shadow-IT slide: a named find with its kind, how many days it sat unnoticed and who owns it now. The longest exposure and the unowned tally are derived; an unknown exposure stays null rather than becoming a zero. `scaleDaysUnnoticed` restates a long exposure in months and leaves the word to the widget.
 - `asset_overview_spec.dart` — `AssetOverviewSpec`/`AssetGroup` for the attack-surface slide: a *kind* of exposed object with how many there are, at risk, new and unowned. Totals are derived; "asset" here is an exposed object, not a media file.
 - `scorecard_spec.dart` — `ScorecardSpec`/`ScorecardEntry` for the scorecard slide: a figure plus the figure it replaces, with the delta, direction and sentiment all derived. Polarity is stored because the deck cannot know whether a rise is good news.
 - `privacy_disposition.dart` — `PrivacyDisposition` (warn/accept/shield/redact) and the slide-overrides-deck resolution.
@@ -422,6 +423,7 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 - `question_editor.dart` — Edits a question slide (answers, options).
 - `quote_editor.dart` — Edits a quote slide (text, author, background image).
 - `scope_matrix_editor.dart` — Edits a scope-matrix slide (objects × type/standard × coverage status).
+- `discoveries_editor.dart` — Edits a discoveries slide (up to six finds, four fields each), with a banner that restates the headline the slide will lead with as you type.
 - `asset_overview_editor.dart` — Edits an asset-overview slide (up to eight kinds, four counts each), summing as you type and flagging a subtotal larger than its total.
 - `actions_editor.dart` — Edits an actions slide (up to eight lines: action, owner, deadline, on-the-list-since, what is asked, status).
 - `scorecard_editor.dart` — Edits a scorecard slide (up to five figures: label, now, previous report, unit, direction). One figure is one compact two-row card carrying a live change chip; ordering is a drag handle, like every other reorderable list in the app.
@@ -474,6 +476,7 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 - `table_preview.dart` — Table slides with a cell-edit scope.
 - `text_previews.dart` — Title and text-based slides.
 - `timeline_preview.dart` — Animated timeline renderer with event cards.
+- `discoveries_preview.dart` — The longest exposure as a headline, then one row per find: name over kind, an exposure bar on the shared scale, the figure in words and the owner (red when there is none).
 - `asset_overview_preview.dart` — Per-kind bars on one shared scale with the at-risk share filled, four aligned count columns and a derived totals row.
 - `actions_preview.dart` — Action rows with a kind marker, owner and deadline; a passed deadline is flagged against the current date, like the footer's `{date}`.
 - `scorecard_preview.dart` — Scorecard cards: label, figure, the signed change as a tinted pill and the figure it replaced. The number of figures decides the grid (one becomes a hero, four a 2×2, five three-above-two) and the card each figure gets decides its type size — `_CardMetrics` measures the label and hands the figure whatever is left. Card tint and rule follow the profile's accent; the green/red sentiment tokens stay fixed, because they carry meaning rather than styling.

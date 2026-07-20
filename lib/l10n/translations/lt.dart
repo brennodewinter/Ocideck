@@ -1789,6 +1789,31 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Ontdekkingen': 'Atradimai',
+  'Wat is gevonden': 'Kas rasta',
+  'Soort': 'Rūšis',
+  'Dagen onopgemerkt': 'Dienų nepastebėta',
+  'Ontdekking toevoegen': 'Pridėti atradimą',
+  'Ontdekking verwijderen': 'Pašalinti atradimą',
+  'Kop van de slide': 'Skaidrės antraštė',
+  'dagen onopgemerkt': 'dienų nepastebėta',
+  'Nog geen blootstelling ingevuld — de slide toont dan geen kop, alleen de lijst.':
+      'Ekspozicija dar neįvesta — skaidrė tada nerodo antraštės, tik sąrašą.',
+  'Zes ontdekkingen is het maximum; wie er meer noemt maakt een bijlage in plaats van een slide.':
+      'Šeši atradimai yra daugiausia; kas išvardija daugiau, kuria priedą, o ne skaidrę.',
+  'Laat de dagen leeg als de eerste blootstelling onbekend is; de slide zegt dan "onbekend" in plaats van nul. Een lege eigenaar leest als "geen eigenaar" en valt rood op.':
+      'Palikite dienas tuščias, jei pirmoji ekspozicija nežinoma; skaidrė tada rašo "nežinoma", o ne nulį. Tuščias atsakingas skaitomas kaip "be atsakingo" ir išsiskiria raudonai.',
+  'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
+      'Ką nuskaitymas rado, apie ką niekas nežinojo. Kiekvienam atradimui, kiek ilgai jis buvo pasiekiamas nepastebėtas ir kas dabar už jį atsakingas; ilgiausia ekspozicija yra antraštė.',
+  'dag': 'diena',
+  'maand': 'mėnuo',
+  'maanden': 'mėnesių',
+  'eigenaar': 'atsakingas',
+  'langst onopgemerkt bereikbaar': 'ilgiausiai pasiekiamas nepastebėtas',
+  'onbekend': 'nežinoma',
+  'onopgemerkt': 'nepastebėta',
+  'ontdekking': 'atradimas',
+  'ontdekkingen': 'atradimai',
   'Norm en prestatie': 'Tikslas ir rezultatas',
   'Norm per rij (optioneel)': 'Tikslas eilutei (nebūtina)',
   'Bandgrenzen (optioneel)': 'Juostų ribos (nebūtina)',

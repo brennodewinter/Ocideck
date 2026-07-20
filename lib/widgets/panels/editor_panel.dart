@@ -363,6 +363,7 @@ const Map<SlideType, IconData> slideTypeIcons = {
   SlideType.cockpit: Icons.speed_outlined,
   SlideType.scorecard: Icons.scoreboard_outlined,
   SlideType.assets: Icons.travel_explore_outlined,
+  SlideType.discoveries: Icons.radar_outlined,
   SlideType.question: Icons.quiz_outlined,
   SlideType.timeline: Icons.timeline_outlined,
   SlideType.finding: Icons.bug_report_outlined,

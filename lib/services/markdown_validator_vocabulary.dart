@@ -22,6 +22,7 @@ const _knownClassTokens = {
   'scorecard',
   'actions',
   'assets',
+  'discoveries',
   'finding',
   'findings-summary',
   'checklist',

@@ -1781,6 +1781,31 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Ontdekkingen': 'Löydöt',
+  'Wat is gevonden': 'Mitä löytyi',
+  'Soort': 'Laji',
+  'Dagen onopgemerkt': 'Päivää huomaamatta',
+  'Ontdekking toevoegen': 'Lisää löytö',
+  'Ontdekking verwijderen': 'Poista löytö',
+  'Kop van de slide': 'Dian otsikko',
+  'dagen onopgemerkt': 'päivää huomaamatta',
+  'Nog geen blootstelling ingevuld — de slide toont dan geen kop, alleen de lijst.':
+      'Altistusaikaa ei ole vielä täytetty — dia ei silloin näytä otsikkoa, vain listan.',
+  'Zes ontdekkingen is het maximum; wie er meer noemt maakt een bijlage in plaats van een slide.':
+      'Kuusi löytöä on enimmäismäärä; useamman luetteleminen tekee liitteen eikä diaa.',
+  'Laat de dagen leeg als de eerste blootstelling onbekend is; de slide zegt dan "onbekend" in plaats van nul. Een lege eigenaar leest als "geen eigenaar" en valt rood op.':
+      'Jätä päivät tyhjiksi, jos ensimmäinen altistus on tuntematon; dia sanoo silloin "tuntematon" nollan sijaan. Tyhjä vastuuhenkilö luetaan muodossa "ei vastuuhenkilöä" ja erottuu punaisena.',
+  'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
+      'Mitä skannaus löysi, mitä kukaan ei tiennyt omistavansa. Löydöittäin, kuinka kauan se oli tavoitettavissa huomaamatta ja kuka siitä nyt vastaa; pisin altistus on otsikko.',
+  'dag': 'päivä',
+  'maand': 'kuukausi',
+  'maanden': 'kuukautta',
+  'eigenaar': 'vastuuhenkilö',
+  'langst onopgemerkt bereikbaar': 'pisimpään tavoitettavissa huomaamatta',
+  'onbekend': 'tuntematon',
+  'onopgemerkt': 'huomaamatta',
+  'ontdekking': 'löytö',
+  'ontdekkingen': 'löytöä',
   'Norm en prestatie': 'Tavoite ja toteuma',
   'Norm per rij (optioneel)': 'Tavoite riviä kohden (valinnainen)',
   'Bandgrenzen (optioneel)': 'Vyöhykerajat (valinnainen)',

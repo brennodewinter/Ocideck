@@ -1793,6 +1793,31 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Ontdekkingen': 'Odkrycia',
+  'Wat is gevonden': 'Co znaleziono',
+  'Soort': 'Rodzaj',
+  'Dagen onopgemerkt': 'Dni niezauważone',
+  'Ontdekking toevoegen': 'Dodaj odkrycie',
+  'Ontdekking verwijderen': 'Usuń odkrycie',
+  'Kop van de slide': 'Nagłówek slajdu',
+  'dagen onopgemerkt': 'dni niezauważone',
+  'Nog geen blootstelling ingevuld — de slide toont dan geen kop, alleen de lijst.':
+      'Nie podano jeszcze czasu ekspozycji — slajd nie pokaże nagłówka, tylko listę.',
+  'Zes ontdekkingen is het maximum; wie er meer noemt maakt een bijlage in plaats van een slide.':
+      'Sześć odkryć to maksimum; kto wymienia więcej, tworzy załącznik zamiast slajdu.',
+  'Laat de dagen leeg als de eerste blootstelling onbekend is; de slide zegt dan "onbekend" in plaats van nul. Een lege eigenaar leest als "geen eigenaar" en valt rood op.':
+      'Pozostaw dni puste, jeśli pierwsza ekspozycja jest nieznana; slajd napisze wtedy "nieznane" zamiast zera. Pusty właściciel czyta się jako "bez właściciela" i wyróżnia się na czerwono.',
+  'Wat de scan vond dat niemand wist te hebben. Per ontdekking hoe lang die onopgemerkt bereikbaar was en wie hem nu bezit; de langste blootstelling is de kop.':
+      'Co skan znalazł, a o czym nikt nie wiedział. Dla każdego odkrycia, jak długo było osiągalne niezauważone i kto jest teraz właścicielem; najdłuższa ekspozycja jest nagłówkiem.',
+  'dag': 'dzień',
+  'maand': 'miesiąc',
+  'maanden': 'miesięcy',
+  'eigenaar': 'właściciel',
+  'langst onopgemerkt bereikbaar': 'najdłużej osiągalne niezauważone',
+  'onbekend': 'nieznane',
+  'onopgemerkt': 'niezauważone',
+  'ontdekking': 'odkrycie',
+  'ontdekkingen': 'odkrycia',
   'Norm en prestatie': 'Cel i wynik',
   'Norm per rij (optioneel)': 'Cel na wiersz (opcjonalnie)',
   'Bandgrenzen (optioneel)': 'Progi pasm (opcjonalnie)',
