@@ -57,6 +57,7 @@ Future<bool> _confirmGitOmissions(BuildContext context, Deck deck) async {
       '${l10n.d('Tekeningen op slides')}: ${missing.annotatedSlides} ${l10n.d('slides')}',
     if (missing.noteSlides > 0)
       '${l10n.d('Gebruikersnotities')}: ${missing.noteSlides} ${l10n.d('slides')}',
+    if (missing.sealed) l10n.d('Zegel en handtekening'),
   ];
   final choice = await showDialog<bool>(
     context: context,
