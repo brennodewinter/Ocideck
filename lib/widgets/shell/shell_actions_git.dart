@@ -719,14 +719,12 @@ Future<void> _searchDecks(BuildContext context, WidgetRef ref) async {
       ? ServerCodeSearchShortlister(forge)
       : null;
 
-  final deckDir = await showDialog<String>(
-    context: context,
-    builder: (_) => _GitSearchDialog(
-      searcher: DeckSearch(
-        forge: forge,
-        branch: config.defaultBranch,
-        shortlister: shortlister,
-      ),
+  final deckDir = await GitSearchDialog.show(
+    context,
+    DeckSearch(
+      forge: forge,
+      branch: config.defaultBranch,
+      shortlister: shortlister,
     ),
   );
   if (deckDir == null || !context.mounted) return;
