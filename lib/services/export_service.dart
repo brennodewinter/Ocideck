@@ -277,19 +277,27 @@ class ExportService {
   ///
   /// TWEE bestanden, met opzet, en met namen die het verschil onmiskenbaar maken:
   ///
-  ///   * `<naam>-redacties.json` — commitments zonder salts. Dit reist mee met
+  ///   * `<naam>-redactions.json` — commitments zonder salts. Dit reist mee met
   ///     het geredigeerde rapport. Een ontvanger ziet hoeveel er is weggehaald,
   ///     welke regel het vond en op welke slide, en kan een specifieke redactie
   ///     bij naam betwisten ("ik betwist a3f1"). Terugrekenen kan hij niet.
   ///
-  ///   * `<naam>-redacties-verificatiesleutels.json` — mét salts. Dit levert je
-  ///     NIET mee. Hiermee kan de houder van de bron elke redactie natrekken, of
-  ///     er één selectief openen zonder de rest prijs te geven.
+  ///   * `<naam>-redaction-keys.json` — mét salts. Dit levert je NIET mee.
+  ///     Hiermee kan de houder van de bron elke redactie natrekken, of er één
+  ///     selectief openen zonder de rest prijs te geven.
   ///
   /// Zonder salt is een SHA-256 van een geredigeerd BSN in seconden terug te
   /// rekenen — 10⁹ kandidaten. De scheiding tussen deze twee bestanden ís de
-  /// beveiliging; daarom staat het verschil in de bestandsnaam en niet in een
-  /// veldje binnenin.
+  /// beveiliging; daarom staat het verschil in de bestandsnaam.
+  ///
+  /// En sinds kort óók binnenin, in het `notice`-veld. Dat is geen dubbelop: de
+  /// naam verdwijnt zodra iemand het bestand hernoemt of in een zip stopt, en
+  /// dan is het enige wat de houder nog kan lezen de inhoud. De namen zijn
+  /// daarnaast Engels geworden — ze heetten `-redacties.json` en
+  /// `-redacties-verificatiesleutels.json`, twee Nederlandse namen die op
+  /// elkaar lijken, in een app met 32 talen en ontvangers in evenzovele.
+  /// [ExportDialog] noemt beide bestanden nu ook bij naam vóór de export, want
+  /// tot dan schreef OciDeck de sleutel naast de deur zonder het te zeggen.
   static Future<void> _writeRedactionManifest(
     String outputPath,
     RedactionManifest manifest,
@@ -315,12 +323,12 @@ class ExportService {
     Uint8List enc(String s) => Uint8List.fromList(utf8.encode(s));
     return [
       (
-        name: '$base-redacties.json',
+        name: '$base$kRedactionManifestSuffix',
         bytes: enc(manifest.withoutSalts.toPrettyJson()),
       ),
       if (manifest.carriesSalts)
         (
-          name: '$base-redacties-verificatiesleutels.json',
+          name: '$base$kRedactionKeysSuffix',
           bytes: enc(manifest.toPrettyJson()),
         ),
     ];

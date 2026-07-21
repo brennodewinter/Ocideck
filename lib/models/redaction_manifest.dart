@@ -29,6 +29,39 @@
 
 import 'dart:convert';
 
+/// Het achtervoegsel van het manifest dat mét het rapport mee mag.
+///
+/// Bewust Engels en niet Nederlands. De inhoud van het bestand is Engels
+/// (`format`, `derived_from`, `commitment`), het gaat naar ontvangers in elke
+/// taal, en de scheiding tussen dit bestand en [kRedactionKeysSuffix] ís de
+/// beveiliging — die scheiding moet je kunnen lezen zonder Nederlands te
+/// kennen. Ze heette eerder `-redacties.json` naast
+/// `-redacties-verificatiesleutels.json`: twee namen die op elkaar lijken, in
+/// één taal, in een app met 32.
+const String kRedactionManifestSuffix = '-redactions.json';
+
+/// Het achtervoegsel van het bestand met de salts. **Dit gaat niet mee.**
+///
+/// Wie dit bestand naast het geredigeerde rapport meestuurt, heft de redactie
+/// op: met de salt erbij is het commitment van een BSN in seconden terug te
+/// rekenen. De naam draagt daarom `-keys`, en de kop van het bestand zelf zegt
+/// het nog een keer — een bestandsnaam overleeft geen doorstuur, de inhoud wel.
+const String kRedactionKeysSuffix = '-redaction-keys.json';
+
+/// Wat er bovenaan het sleutelbestand staat.
+///
+/// Engels, om dezelfde reden als de bestandsnaam: dit reist naar wie het ook
+/// maar opent. Kort genoeg om gelezen te worden.
+const String kRedactionKeysNotice =
+    'KEEP THIS FILE. It holds the salts that reverse every redaction in the '
+    'accompanying document. Do not send it to the recipients of the redacted '
+    'version; keep it with the source.';
+
+/// Idem voor het manifest dat wél meereist.
+const String kRedactionManifestNotice =
+    'This file lists what was redacted in the accompanying document, without '
+    'the values. It carries no salts and reverses nothing.';
+
 /// Eén redactie, met een bewijsbare verwijzing naar wat er verborgen werd.
 class RedactionEntry {
   /// Korte, stabiele referentie (`a3f1`). Zodat een verificateur kan zeggen: "ik
@@ -110,6 +143,10 @@ class RedactionManifest {
 
   Map<String, dynamic> toJson() => {
     'format': 'ocideck-redaction-manifest/1',
+    // De waarschuwing hoort ín het bestand en niet alleen in de naam. Een
+    // bestandsnaam overleeft geen doorstuur, geen bijlage die iemand hernoemt
+    // en geen zip; de eerste regel van de JSON wel.
+    'notice': carriesSalts ? kRedactionKeysNotice : kRedactionManifestNotice,
     'derived_from': derivedFrom,
     'algorithm': 'sha-256(salt || value)',
     'redactions': [for (final e in entries) e.toJson()],

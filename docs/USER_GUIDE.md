@@ -1502,7 +1502,37 @@ full copy to the wider circle. A mix-up should be something you can *see*, not
 something you have to remember.
 
 The redaction manifest follows the profile too, so a redacted report stays
-verifiable against the source — see below.
+verifiable against the source. That manifest is two files, and one of them must
+not travel — see *The two manifest files* below.
+
+### The two manifest files
+
+Whenever an export actually removes something, OciDeck writes two extra files
+into the same folder as the export (on the web, into the same download folder):
+
+| File | What is in it | Does it go with the report? |
+| --- | --- | --- |
+| `<name>-redactions.json` | One entry per redaction: a short id (`a3f1`), the rule that found it, the slide and field, and a cryptographic commitment. **No values, no keys.** | **Yes.** It is what lets a recipient say "I dispute redaction a3f1" and lets you prove what it hid — without opening any of the others. |
+| `<name>-redaction-keys.json` | The same entries **plus the salts**. | **No. Never.** |
+
+The salts are the whole security of this scheme. A commitment is a SHA-256 over
+`salt ‖ value`; without the salt a citizen service number has only a billion
+candidates and falls in seconds. Hand someone the keys file alongside the
+redacted report and you have handed them the redacted values — you have undone
+your own redaction, and the document still *looks* redacted.
+
+So: keep `-redaction-keys.json` with the source, in the same place you keep the
+unredacted deck. Send it to nobody by default. When a specific redaction is
+disputed, open **that one** — reveal its salt and its value, and the recipient
+can recompute the commitment themselves. Every other redaction stays shut.
+
+The export dialog names both files before you export, and each file says what it
+is in its own `notice` field, because a filename does not survive being renamed
+or zipped.
+
+The names are deliberately in English, unlike the `-geredigeerd` suffix on the
+export itself: these files travel to recipients in any language, and telling the
+two apart is the point.
 
 ## Redaction — leaving data out
 

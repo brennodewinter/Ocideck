@@ -209,15 +209,48 @@ void main() {
     expect(r.success, isTrue, reason: r.error);
 
     final base = p.basenameWithoutExtension(r.outputPath!);
-    final commitments = File(p.join(tmp.path, '$base-redacties.json'));
-    final keys = File(
-      p.join(tmp.path, '$base-redacties-verificatiesleutels.json'),
+    final commitments = File(
+      p.join(tmp.path, '$base$kRedactionManifestSuffix'),
     );
+    final keys = File(p.join(tmp.path, '$base$kRedactionKeysSuffix'));
     expect(await commitments.exists(), isTrue);
     expect(await keys.exists(), isTrue);
     // De commitments-versie draagt de salt niet; de sleutelversie wel.
     expect(await commitments.readAsString(), isNot(contains('peper')));
     expect(await keys.readAsString(), contains('peper'));
+
+    // De waarschuwing hoort ín het bestand. De naam verdwijnt zodra iemand het
+    // hernoemt of in een zip stopt; dan is de inhoud het enige wat nog vertelt
+    // dat dit bestand elke redactie ongedaan maakt.
+    expect(await keys.readAsString(), contains(kRedactionKeysNotice));
+    expect(
+      await commitments.readAsString(),
+      contains(kRedactionManifestNotice),
+      reason: 'ook het onschuldige bestand hoort te zeggen wat het is',
+    );
+    expect(
+      await commitments.readAsString(),
+      isNot(contains(kRedactionKeysNotice)),
+      reason: 'het meereizende manifest mag niet als "bewaar dit" lezen',
+    );
+  });
+
+  test('de bestandsnamen zijn taalonafhankelijk en niet te verwisselen', () {
+    // Ze heetten `-redacties.json` en `-redacties-verificatiesleutels.json`:
+    // twee Nederlandse namen die op elkaar lijken, in een app met 32 talen en
+    // ontvangers in evenzovele. De scheiding tussen die twee bestanden ís de
+    // beveiliging, dus ze moet leesbaar zijn zonder Nederlands te kennen.
+    expect(kRedactionManifestSuffix, isNot(contains('redacties')));
+    expect(kRedactionKeysSuffix, isNot(contains('verificatiesleutels')));
+    expect(
+      kRedactionKeysSuffix.startsWith(
+        kRedactionManifestSuffix.replaceAll('.json', ''),
+      ),
+      isFalse,
+      reason:
+          'het sleutelbestand mag geen verlengstuk van de andere naam zijn — '
+          'dan staan ze naast elkaar in de verkenner en pak je de verkeerde',
+    );
   });
 
   test('PDF embeds OciDeck as Creator and Producer', () async {
