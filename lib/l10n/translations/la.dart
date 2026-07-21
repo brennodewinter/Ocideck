@@ -1840,6 +1840,19 @@ const _dutchSourceAddLa = <String, String>{
   'F-03 · SQL-injectie in het loginformulier':
       'F-03 · Iniectio SQL in formula accessus',
   'https://app.voorbeeld/login': 'https://app.example/login',
+  'Deze afbeelding naar het AI-model sturen?':
+      'Hanc imaginem ad exemplar IA mittere?',
+  'De afbeelding gaat ongewijzigd naar': 'Imago immutata mittetur ad',
+  'OciDeck lakt niets weg in een afbeelding: gezichten, tekst op een schermafdruk en gegevens in beeld gaan mee.':
+      'OciDeck nihil in imagine obliterat: vultus, textus in imagine capta et data conspicua una mittuntur.',
+  'De beeldcontrole vond hier een of meer herkenbare gezichten.':
+      'Examen imaginum hic unum vel plures vultus agnoscibiles invenit.',
+  'Naast de export komen twee bestanden te staan waarmee een ontvanger de redacties kan natrekken.':
+      'Iuxta exportationem duo documenta ponuntur quibus accipiens obliterationes examinare potest.',
+  'somt op wat er is weggelaten, zonder de waarden zelf. Dit bestand mag met het rapport mee.':
+      'enumerat quae omissa sint, sine ipsis valoribus. Hoc documentum cum relatione mitti licet.',
+  'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
+      'claves continet quibus omnis valor obliteratus retro computari potest. Noli hoc documentum una mittere: ita obliteratio irrita fit. Apud fontem id serva.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Basis datorum CVE localis (descensum ipse incipis): OciDeck data cumulata per api.github.com petit et per plagulam emissionis quam illa inscriptio monstrat.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

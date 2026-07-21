@@ -1824,6 +1824,20 @@ const _dutchSourceAddFi = <String, String>{
   'F-03 · SQL-injectie in het loginformulier':
       'F-03 · SQL-injektio kirjautumislomakkeessa',
   'https://app.voorbeeld/login': 'https://app.example/login',
+  'Deze afbeelding naar het AI-model sturen?':
+      'Lähetetäänkö tämä kuva tekoälymallille?',
+  'De afbeelding gaat ongewijzigd naar':
+      'Kuva lähetetään muuttumattomana kohteeseen',
+  'OciDeck lakt niets weg in een afbeelding: gezichten, tekst op een schermafdruk en gegevens in beeld gaan mee.':
+      'OciDeck ei peitä kuvasta mitään: kasvot, kuvakaappauksen teksti ja näkyvät tiedot lähtevät mukana.',
+  'De beeldcontrole vond hier een of meer herkenbare gezichten.':
+      'Kuvatarkistus löysi tästä yhdet tai useammat tunnistettavat kasvot.',
+  'Naast de export komen twee bestanden te staan waarmee een ontvanger de redacties kan natrekken.':
+      'Viennin viereen tallennetaan kaksi tiedostoa, joiden avulla vastaanottaja voi tarkistaa peitetyt kohdat.',
+  'somt op wat er is weggelaten, zonder de waarden zelf. Dit bestand mag met het rapport mee.':
+      'luettelee, mitä on jätetty pois, ilman itse arvoja. Tämän tiedoston saa lähettää raportin mukana.',
+  'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
+      'sisältää avaimet, joilla jokainen peitetty arvo voidaan laskea takaisin. Älä lähetä tätä tiedostoa mukana: silloin peittäminen kumoutuu. Säilytä se lähteen luona.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Paikallinen CVE-tietokanta (käynnistät latauksen itse): OciDeck hakee joukkotiedot osoitteen api.github.com kautta ja sen julkaisutiedoston, johon osoite viittaa.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

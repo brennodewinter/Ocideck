@@ -793,6 +793,19 @@ const _dutchSourceAddFr = {
   'F-03 · SQL-injectie in het loginformulier':
       'F-03 · Injection SQL dans le formulaire de connexion',
   'https://app.voorbeeld/login': 'https://app.example/login',
+  'Deze afbeelding naar het AI-model sturen?':
+      'Envoyer cette image au modèle IA ?',
+  'De afbeelding gaat ongewijzigd naar': 'L\'image sera envoyée telle quelle à',
+  'OciDeck lakt niets weg in een afbeelding: gezichten, tekst op een schermafdruk en gegevens in beeld gaan mee.':
+      'OciDeck ne caviarde rien dans une image : les visages, le texte d\'une capture d\'écran et les données visibles partent avec.',
+  'De beeldcontrole vond hier een of meer herkenbare gezichten.':
+      'Le contrôle des images a détecté ici un ou plusieurs visages reconnaissables.',
+  'Naast de export komen twee bestanden te staan waarmee een ontvanger de redacties kan natrekken.':
+      'Deux fichiers sont créés à côté de l\'export, permettant au destinataire de vérifier les caviardages.',
+  'somt op wat er is weggelaten, zonder de waarden zelf. Dit bestand mag met het rapport mee.':
+      'énumère ce qui a été omis, sans les valeurs elles-mêmes. Ce fichier peut accompagner le rapport.',
+  'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
+      'contient les clés permettant de recalculer chaque valeur caviardée. N\'envoyez pas ce fichier : le caviardage serait annulé. Conservez-le auprès de la source.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  La base de données CVE locale (c\'est vous qui lancez le téléchargement) : OciDeck récupère les données en masse via api.github.com et le fichier de publication vers lequel cette adresse pointe.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

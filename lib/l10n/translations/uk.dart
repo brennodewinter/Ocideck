@@ -1841,6 +1841,20 @@ const _dutchSourceAddUk = <String, String>{
   'F-03 · SQL-injectie in het loginformulier':
       'F-03 · SQL-ін’єкція у формі входу',
   'https://app.voorbeeld/login': 'https://app.example/login',
+  'Deze afbeelding naar het AI-model sturen?':
+      'Надіслати це зображення до моделі ШІ?',
+  'De afbeelding gaat ongewijzigd naar':
+      'Зображення буде надіслано без змін до',
+  'OciDeck lakt niets weg in een afbeelding: gezichten, tekst op een schermafdruk en gegevens in beeld gaan mee.':
+      'OciDeck нічого не редагує всередині зображення: обличчя, текст на знімку екрана та видимі дані надсилаються разом.',
+  'De beeldcontrole vond hier een of meer herkenbare gezichten.':
+      'Перевірка зображень виявила тут одне або кілька впізнаваних облич.',
+  'Naast de export komen twee bestanden te staan waarmee een ontvanger de redacties kan natrekken.':
+      'Поряд з експортом створюються два файли, за якими одержувач може перевірити редагування.',
+  'somt op wat er is weggelaten, zonder de waarden zelf. Dit bestand mag met het rapport mee.':
+      'перелічує, що було вилучено, без самих значень. Цей файл можна надіслати разом зі звітом.',
+  'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
+      'містить ключі, за якими можна відновити кожне відредаговане значення. Не надсилайте цей файл: тоді редагування скасовується. Зберігайте його разом із джерелом.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Локальна база CVE (завантаження запускаєте ви самі): OciDeck отримує масив даних через api.github.com і файл випуску, на який вказує ця адреса.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

@@ -1832,6 +1832,18 @@ const _dutchSourceAddLt = <String, String>{
   'F-03 · SQL-injectie in het loginformulier':
       'F-03 · SQL injekcija prisijungimo formoje',
   'https://app.voorbeeld/login': 'https://app.example/login',
+  'Deze afbeelding naar het AI-model sturen?': 'Siųsti šį vaizdą DI modeliui?',
+  'De afbeelding gaat ongewijzigd naar': 'Vaizdas bus išsiųstas nepakeistas į',
+  'OciDeck lakt niets weg in een afbeelding: gezichten, tekst op een schermafdruk en gegevens in beeld gaan mee.':
+      'OciDeck vaizde nieko nepaslepia: veidai, tekstas ekrano kopijoje ir matomi duomenys išsiunčiami kartu.',
+  'De beeldcontrole vond hier een of meer herkenbare gezichten.':
+      'Vaizdų patikra čia aptiko vieną ar daugiau atpažįstamų veidų.',
+  'Naast de export komen twee bestanden te staan waarmee een ontvanger de redacties kan natrekken.':
+      'Šalia eksporto sukuriami du failai, kuriais gavėjas gali patikrinti redagavimus.',
+  'somt op wat er is weggelaten, zonder de waarden zelf. Dit bestand mag met het rapport mee.':
+      'išvardija, kas praleista, be pačių reikšmių. Šį failą galima siųsti kartu su ataskaita.',
+  'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
+      'turi raktus, kuriais kiekvieną paslėptą reikšmę galima atkurti. Nesiųskite šio failo kartu: tada redagavimas panaikinamas. Laikykite jį prie šaltinio.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Vietinė CVE duomenų bazė (atsisiuntimą pradedate patys): OciDeck paima masinius duomenis per api.github.com ir leidimo failą, į kurį tas adresas nurodo.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

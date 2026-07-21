@@ -1852,6 +1852,19 @@ const _dutchSourceAddEl = <String, String>{
   'F-03 · SQL-injectie in het loginformulier':
       'F-03 · Ένεση SQL στη φόρμα σύνδεσης',
   'https://app.voorbeeld/login': 'https://app.example/login',
+  'Deze afbeelding naar het AI-model sturen?':
+      'Αποστολή αυτής της εικόνας στο μοντέλο AI;',
+  'De afbeelding gaat ongewijzigd naar': 'Η εικόνα θα σταλεί χωρίς αλλαγές σε',
+  'OciDeck lakt niets weg in een afbeelding: gezichten, tekst op een schermafdruk en gegevens in beeld gaan mee.':
+      'Το OciDeck δεν αποκρύπτει τίποτα μέσα σε μια εικόνα: πρόσωπα, κείμενο σε στιγμιότυπο οθόνης και ορατά δεδομένα αποστέλλονται μαζί.',
+  'De beeldcontrole vond hier een of meer herkenbare gezichten.':
+      'Ο έλεγχος εικόνων εντόπισε εδώ ένα ή περισσότερα αναγνωρίσιμα πρόσωπα.',
+  'Naast de export komen twee bestanden te staan waarmee een ontvanger de redacties kan natrekken.':
+      'Δίπλα στην εξαγωγή δημιουργούνται δύο αρχεία με τα οποία ο παραλήπτης μπορεί να ελέγξει τις αποκρύψεις.',
+  'somt op wat er is weggelaten, zonder de waarden zelf. Dit bestand mag met het rapport mee.':
+      'απαριθμεί τι παραλείφθηκε, χωρίς τις ίδιες τις τιμές. Αυτό το αρχείο μπορεί να συνοδεύσει την αναφορά.',
+  'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
+      'περιέχει τα κλειδιά με τα οποία κάθε αποκρυμμένη τιμή μπορεί να υπολογιστεί ξανά. Μην στέλνετε αυτό το αρχείο: τότε η απόκρυψη αναιρείται. Κρατήστε το κοντά στην πηγή.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Η τοπική βάση δεδομένων CVE (τη λήψη την ξεκινάτε εσείς): το OciDeck ανακτά τα μαζικά δεδομένα μέσω του api.github.com και του αρχείου έκδοσης στο οποίο παραπέμπει η διεύθυνση αυτή.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

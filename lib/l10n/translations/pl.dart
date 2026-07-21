@@ -1836,6 +1836,18 @@ const _dutchSourceAddPl = <String, String>{
   'F-03 · SQL-injectie in het loginformulier':
       'F-03 · Wstrzyknięcie SQL w formularzu logowania',
   'https://app.voorbeeld/login': 'https://app.example/login',
+  'Deze afbeelding naar het AI-model sturen?': 'Wysłać ten obraz do modelu AI?',
+  'De afbeelding gaat ongewijzigd naar': 'Obraz zostanie wysłany bez zmian do',
+  'OciDeck lakt niets weg in een afbeelding: gezichten, tekst op een schermafdruk en gegevens in beeld gaan mee.':
+      'OciDeck niczego nie redaguje w obrazie: twarze, tekst na zrzucie ekranu i widoczne dane zostaną wysłane.',
+  'De beeldcontrole vond hier een of meer herkenbare gezichten.':
+      'Kontrola obrazu wykryła tu jedną lub więcej rozpoznawalnych twarzy.',
+  'Naast de export komen twee bestanden te staan waarmee een ontvanger de redacties kan natrekken.':
+      'Obok eksportu powstają dwa pliki, dzięki którym odbiorca może sprawdzić redakcje.',
+  'somt op wat er is weggelaten, zonder de waarden zelf. Dit bestand mag met het rapport mee.':
+      'wymienia, co zostało pominięte, bez samych wartości. Ten plik może trafić razem z raportem.',
+  'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
+      'zawiera klucze pozwalające odtworzyć każdą zredagowaną wartość. Nie wysyłaj tego pliku: redakcja zostanie wtedy cofnięta. Przechowuj go przy źródle.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Lokalna baza CVE (pobieranie uruchamiasz sam): OciDeck pobiera dane zbiorcze przez api.github.com oraz plik wydania, na który ten adres wskazuje.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

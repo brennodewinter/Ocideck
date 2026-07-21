@@ -794,6 +794,19 @@ const _dutchSourceAddPap = {
   'F-03 · SQL-injectie in het loginformulier':
       'F-03 · Inyekshon SQL den e formulario di login',
   'https://app.voorbeeld/login': 'https://app.example/login',
+  'Deze afbeelding naar het AI-model sturen?':
+      'Manda e imagen aki na e modelo di IA?',
+  'De afbeelding gaat ongewijzigd naar': 'E imagen ta bai sin kambio na',
+  'OciDeck lakt niets weg in een afbeelding: gezichten, tekst op een schermafdruk en gegevens in beeld gaan mee.':
+      'OciDeck no ta redaktá nada den un imagen: karanan, teksto riba un potrèt di pantaya i datos na bista ta bai huntu.',
+  'De beeldcontrole vond hier een of meer herkenbare gezichten.':
+      'E kontrol di imagen a haña un o mas kara rekonosibel akinan.',
+  'Naast de export komen twee bestanden te staan waarmee een ontvanger de redacties kan natrekken.':
+      'Banda di e eksportashon ta keda dos file ku kua un risibidó por kontrolá e redakshonnan.',
+  'somt op wat er is weggelaten, zonder de waarden zelf. Dit bestand mag met het rapport mee.':
+      'ta lista loke a keda afó, sin e balornan mes. E file aki por bai huntu ku e rapòrt.',
+  'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
+      'ta kontené e yabinan ku kua tur balor redaktá por wòrdu kalkulá bèk. No manda e file aki huntu: e ora ei e redakshon ta anulá. Wardé serka e fuente.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  E base di datos CVE lokal (ta bo ta kuminsá e download): OciDeck ta buska e datos na bulto via api.github.com i e archivo di release ku e adrès ei ta indiká.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

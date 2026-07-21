@@ -1831,6 +1831,19 @@ const _dutchSourceAddHr = <String, String>{
   'F-03 · SQL-injectie in het loginformulier':
       'F-03 · SQL injekcija u obrascu za prijavu',
   'https://app.voorbeeld/login': 'https://app.example/login',
+  'Deze afbeelding naar het AI-model sturen?': 'Poslati ovu sliku AI modelu?',
+  'De afbeelding gaat ongewijzigd naar':
+      'Slika će nepromijenjena biti poslana na',
+  'OciDeck lakt niets weg in een afbeelding: gezichten, tekst op een schermafdruk en gegevens in beeld gaan mee.':
+      'OciDeck ništa ne redigira unutar slike: lica, tekst na snimci zaslona i vidljivi podaci šalju se zajedno.',
+  'De beeldcontrole vond hier een of meer herkenbare gezichten.':
+      'Provjera slika ovdje je pronašla jedno ili više prepoznatljivih lica.',
+  'Naast de export komen twee bestanden te staan waarmee een ontvanger de redacties kan natrekken.':
+      'Uz izvoz nastaju dvije datoteke pomoću kojih primatelj može provjeriti redakcije.',
+  'somt op wat er is weggelaten, zonder de waarden zelf. Dit bestand mag met het rapport mee.':
+      'navodi što je izostavljeno, bez samih vrijednosti. Ova datoteka smije ići uz izvještaj.',
+  'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
+      'sadrži ključeve kojima se svaka redigirana vrijednost može ponovno izračunati. Ne šaljite ovu datoteku: time je redakcija poništena. Čuvajte je uz izvor.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Lokalna baza CVE (preuzimanje pokrećete sami): OciDeck dohvaća skupne podatke preko api.github.com i datoteke izdanja na koju ta adresa upućuje.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

@@ -1847,6 +1847,20 @@ const _dutchSourceAddBg = <String, String>{
   'F-03 · SQL-injectie in het loginformulier':
       'F-03 · SQL инжекция във формата за вход',
   'https://app.voorbeeld/login': 'https://app.example/login',
+  'Deze afbeelding naar het AI-model sturen?':
+      'Да се изпрати ли това изображение до AI модела?',
+  'De afbeelding gaat ongewijzigd naar':
+      'Изображението ще бъде изпратено без промени до',
+  'OciDeck lakt niets weg in een afbeelding: gezichten, tekst op een schermafdruk en gegevens in beeld gaan mee.':
+      'OciDeck не заличава нищо в изображението: лица, текст на екранна снимка и видими данни се изпращат заедно с него.',
+  'De beeldcontrole vond hier een of meer herkenbare gezichten.':
+      'Проверката на изображенията откри тук едно или повече разпознаваеми лица.',
+  'Naast de export komen twee bestanden te staan waarmee een ontvanger de redacties kan natrekken.':
+      'До експорта се създават два файла, с които получателят може да провери заличаванията.',
+  'somt op wat er is weggelaten, zonder de waarden zelf. Dit bestand mag met het rapport mee.':
+      'изброява какво е пропуснато, без самите стойности. Този файл може да придружи доклада.',
+  'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
+      'съдържа ключовете, с които всяка заличена стойност може да бъде възстановена. Не изпращайте този файл: така заличаването се обезсилва. Съхранявайте го при източника.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Локалната база данни CVE (изтеглянето стартирате вие): OciDeck взема масовите данни през api.github.com и файла на изданието, към който сочи този адрес.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

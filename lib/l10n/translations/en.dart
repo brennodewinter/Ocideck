@@ -963,6 +963,19 @@ const _dutchSourceAddEn = {
   'F-03 · SQL-injectie in het loginformulier':
       'F-03 · SQL injection in the login form',
   'https://app.voorbeeld/login': 'https://app.example/login',
+  'Deze afbeelding naar het AI-model sturen?':
+      'Send this image to the AI model?',
+  'De afbeelding gaat ongewijzigd naar': 'The image will be sent unchanged to',
+  'OciDeck lakt niets weg in een afbeelding: gezichten, tekst op een schermafdruk en gegevens in beeld gaan mee.':
+      'OciDeck redacts nothing inside an image: faces, text in a screenshot and data in view are sent along.',
+  'De beeldcontrole vond hier een of meer herkenbare gezichten.':
+      'The image check found one or more recognisable faces here.',
+  'Naast de export komen twee bestanden te staan waarmee een ontvanger de redacties kan natrekken.':
+      'Two files are placed next to the export so a recipient can verify the redactions.',
+  'somt op wat er is weggelaten, zonder de waarden zelf. Dit bestand mag met het rapport mee.':
+      'lists what was left out, without the values themselves. This file may go with the report.',
+  'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
+      'contains the keys with which every redacted value can be recovered. Do not send this file along: that undoes the redaction. Keep it with the source.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  The local CVE database (you start the download yourself): OciDeck fetches the bulk data via api.github.com and the release file that address points to.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

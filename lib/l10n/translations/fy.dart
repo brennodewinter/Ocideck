@@ -795,6 +795,19 @@ const _dutchSourceAddFy = {
   'F-03 · SQL-injectie in het loginformulier':
       'F-03 · SQL-ynjeksje yn it oanmeldformulier',
   'https://app.voorbeeld/login': 'https://app.example/login',
+  'Deze afbeelding naar het AI-model sturen?':
+      'Dizze ôfbylding nei it AI-model stjoere?',
+  'De afbeelding gaat ongewijzigd naar': 'De ôfbylding giet ûnferoare nei',
+  'OciDeck lakt niets weg in een afbeelding: gezichten, tekst op een schermafdruk en gegevens in beeld gaan mee.':
+      'OciDeck lakket neat wei yn in ôfbylding: gesichten, tekst op in skermôfdruk en gegevens yn byld geane mei.',
+  'De beeldcontrole vond hier een of meer herkenbare gezichten.':
+      'De byldkontrôle fûn hjir ien of mear werkenbere gesichten.',
+  'Naast de export komen twee bestanden te staan waarmee een ontvanger de redacties kan natrekken.':
+      'Neist de eksport komme twa bestannen te stean dêr\'t in ûntfanger de redaksjes mei neigean kin.',
+  'somt op wat er is weggelaten, zonder de waarden zelf. Dit bestand mag met het rapport mee.':
+      'somt op wat weilitten is, sûnder de wearden sels. Dit bestân mei meistjoerd wurde mei it rapport.',
+  'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
+      'befettet de kaaien dêr\'t eltse redigearre wearde mei werom te rekkenjen is. Stjoer dit bestân net mei: dan is de redaksje ûngedien makke. Bewarje it by de boarne.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  De lokale CVE-databank (do starte de download sels): OciDeck hellet de bulkgegevens op fia api.github.com en it releasebestân dêr\'t dat adres nei wiist.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
