@@ -234,13 +234,23 @@ class _PresentationInfoDialogState
                   secondary: const Icon(Icons.timeline_outlined, size: 20),
                   title: Text(l10n.d('Tijden-overzicht tonen na afloop')),
                   subtitle: Text(
-                    l10n.d(
-                      'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.',
-                    ),
+                    _playOnly
+                        ? l10n.d(
+                            'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.',
+                          )
+                        : l10n.d(
+                            'De tijd per slide wordt altijd gemeten; dit bepaalt alleen of het overzicht na deze presentatie verschijnt.',
+                          ),
                     style: const TextStyle(fontSize: 11),
                   ),
-                  value: _showRehearsalSummary,
-                  onChanged: (v) => setState(() => _showRehearsalSummary = v),
+                  value: _showRehearsalSummary && !_playOnly,
+                  // Uitgeschakeld zodra het deck vergrendeld is: een schakelaar
+                  // die aan lijkt te staan maar niets doet, is erger dan geen
+                  // schakelaar. De bewaarde waarde blijft ongemoeid, zodat het
+                  // ontgrendelen de oude keuze teruggeeft.
+                  onChanged: _playOnly
+                      ? null
+                      : (v) => setState(() => _showRehearsalSummary = v),
                 ),
                 const SizedBox(height: 4),
                 SwitchListTile(
