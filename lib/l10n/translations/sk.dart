@@ -1786,6 +1786,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Jouw antwoord': 'Tvoja odpoveď',
+  'nodig': 'potrebné',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
       'Pri zamknutej prezentácii sa prehľad nikdy nezobrazí; tento prepínač potom nič nerobí.',
   'De twee afbeeldingen': 'Dva obrázky',

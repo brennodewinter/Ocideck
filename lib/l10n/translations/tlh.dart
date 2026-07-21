@@ -1754,6 +1754,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Jouw antwoord': 'janglIj',
+  'nodig': 'poQlu\'',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
       'nob ngaQmoHlu\'pu\'chugh, not nargh Hoch cha\'nav; vaj pagh ta\' pel vam.',
   'De twee afbeeldingen': 'cha\' mIlloghmey',

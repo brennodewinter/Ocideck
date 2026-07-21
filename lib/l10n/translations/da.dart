@@ -1778,6 +1778,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Jouw antwoord': 'Dit svar',
+  'nodig': 'kræves',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
       'Ved en låst præsentation vises oversigten aldrig; denne kontakt gør derfor ingenting.',
   'De twee afbeeldingen': 'De to billeder',

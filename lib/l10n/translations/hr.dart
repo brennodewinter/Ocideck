@@ -1786,6 +1786,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Jouw antwoord': 'Tvoj odgovor',
+  'nodig': 'potrebno',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
       'Kod zaključane prezentacije pregled se nikad ne pojavljuje; ovaj prekidač tada ne radi ništa.',
   'De twee afbeeldingen': 'Dvije slike',

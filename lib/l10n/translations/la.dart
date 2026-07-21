@@ -1795,6 +1795,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Jouw antwoord': 'Responsum tuum',
+  'nodig': 'requiritur',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
       'In praesentatione clausa conspectus numquam apparet; hoc igitur claustrum nihil agit.',
   'De twee afbeeldingen': 'Duae imagines',

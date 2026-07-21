@@ -1787,6 +1787,8 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Jouw antwoord': 'Jūsų atsakymas',
+  'nodig': 'reikia',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
       'Užrakintame pristatyme apžvalga niekada nepasirodo; šis jungiklis tada nieko nedaro.',
   'De twee afbeeldingen': 'Abu paveikslėliai',

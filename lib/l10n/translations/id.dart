@@ -1779,6 +1779,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Jouw antwoord': 'Jawabanmu',
+  'nodig': 'dibutuhkan',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
       'Pada presentasi terkunci, ikhtisar tidak pernah muncul; sakelar ini lalu tidak berpengaruh.',
   'De twee afbeeldingen': 'Kedua gambar',

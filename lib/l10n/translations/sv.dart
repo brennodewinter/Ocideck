@@ -1778,6 +1778,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Jouw antwoord': 'Ditt svar',
+  'nodig': 'krävs',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
       'Med en låst presentation visas översikten aldrig; det här reglaget gör då ingenting.',
   'De twee afbeeldingen': 'De två bilderna',

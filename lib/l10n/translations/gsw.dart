@@ -1783,6 +1783,8 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Jouw antwoord': 'Dini Antwort',
+  'nodig': 'nötig',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
       'Bi ere verrieglete Präsentation erschiint de Überblick nie; de Schalter macht denn nüt.',
   'De twee afbeeldingen': 'Die zwei Bilder',

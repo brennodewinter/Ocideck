@@ -1801,6 +1801,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Jouw antwoord': 'It-tweġiba tiegħek',
+  'nodig': 'meħtieġ',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
       'F\'preżentazzjoni msakkra l-ħarsa ġenerali qatt ma tidher; dan is-swiċċ imbagħad ma jagħmel xejn.',
   'De twee afbeeldingen': 'Iż-żewġ immaġni',

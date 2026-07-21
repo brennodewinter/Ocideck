@@ -918,6 +918,8 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Jouw antwoord': 'Your answer',
+  'nodig': 'required',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
       'With a locked deck the overview never appears; this switch then does nothing.',
   'De twee afbeeldingen': 'The two images',

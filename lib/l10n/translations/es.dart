@@ -733,6 +733,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Jouw antwoord': 'Tu respuesta',
+  'nodig': 'necesario',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
       'Con una presentación bloqueada el resumen nunca aparece; entonces este interruptor no hace nada.',
   'De twee afbeeldingen': 'Las dos imágenes',

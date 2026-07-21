@@ -1791,6 +1791,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Jouw antwoord': 'Twoja odpowiedź',
+  'nodig': 'wymagane',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
       'Przy zablokowanej prezentacji przegląd nigdy się nie pojawia; ten przełącznik nic wtedy nie robi.',
   'De twee afbeeldingen': 'Dwa obrazy',

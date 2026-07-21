@@ -1797,6 +1797,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Jouw antwoord': 'Răspunsul tău',
+  'nodig': 'necesar',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
       'La o prezentare blocată, prezentarea generală nu apare niciodată; acest comutator nu face atunci nimic.',
   'De twee afbeeldingen': 'Cele două imagini',

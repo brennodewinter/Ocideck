@@ -1807,6 +1807,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Jouw antwoord': 'Η απάντησή σας',
+  'nodig': 'απαιτείται',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
       'Σε κλειδωμένη παρουσίαση η επισκόπηση δεν εμφανίζεται ποτέ· αυτός ο διακόπτης τότε δεν κάνει τίποτα.',
   'De twee afbeeldingen': 'Οι δύο εικόνες',

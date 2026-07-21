@@ -1779,6 +1779,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Jouw antwoord': 'Vastauksesi',
+  'nodig': 'vaaditaan',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
       'Lukitussa esityksessä katsaus ei koskaan näy; tämä valitsin ei silloin tee mitään.',
   'De twee afbeeldingen': 'Kaksi kuvaa',

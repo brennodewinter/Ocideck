@@ -1778,6 +1778,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Jouw antwoord': 'Jūsu atbilde',
+  'nodig': 'nepieciešams',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
       'Bloķētā prezentācijā pārskats nekad neparādās; šis slēdzis tad neko nedara.',
   'De twee afbeeldingen': 'Abi attēli',

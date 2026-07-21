@@ -737,6 +737,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Jouw antwoord': 'Dyn antwurd',
+  'nodig': 'nedich',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
       'By in skoattele deck ferskynt it oersjoch nea; dizze skeakel docht dan neat.',
   'De twee afbeeldingen': 'De twa ôfbyldings',

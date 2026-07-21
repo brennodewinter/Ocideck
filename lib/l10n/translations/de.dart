@@ -736,6 +736,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Jouw antwoord': 'Deine Antwort',
+  'nodig': 'nötig',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
       'Bei einer gesperrten Präsentation erscheint die Übersicht nie; dieser Schalter bewirkt dann nichts.',
   'De twee afbeeldingen': 'Die beiden Bilder',

@@ -1783,6 +1783,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Jouw antwoord': 'A te válaszod',
+  'nodig': 'szükséges',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
       'Zárolt bemutatónál az áttekintés soha nem jelenik meg; ez a kapcsoló ilyenkor nem csinál semmit.',
   'De twee afbeeldingen': 'A két kép',

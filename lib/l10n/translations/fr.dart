@@ -736,6 +736,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Jouw antwoord': 'Votre réponse',
+  'nodig': 'requis',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
       'Avec une présentation verrouillée, le récapitulatif n\'apparaît jamais ; ce commutateur n\'a alors aucun effet.',
   'De twee afbeeldingen': 'Les deux images',

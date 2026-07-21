@@ -1815,6 +1815,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Jouw antwoord': 'Do fhreagra',
+  'nodig': 'riachtanach',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
       'Le láithreoireacht ghlasáilte ní fheictear an forbhreathnú riamh; ní dhéanann an lasc seo aon rud ansin.',
   'De twee afbeeldingen': 'An dá íomhá',

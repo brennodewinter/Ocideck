@@ -736,6 +736,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Jouw antwoord': 'Bo kontesta',
+  'nodig': 'nesesario',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
       'Ku un presentashon blokeá e resúmen nunka ta aparesé; e switch aki no ta hasi nada anto.',
   'De twee afbeeldingen': 'E dos imágennan',

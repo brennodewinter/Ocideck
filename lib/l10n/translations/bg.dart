@@ -1802,6 +1802,8 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Jouw antwoord': 'Вашият отговор',
+  'nodig': 'нужно',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
       'При заключена презентация прегледът никога не се появява; този превключвател тогава не прави нищо.',
   'De twee afbeeldingen': 'Двете изображения',

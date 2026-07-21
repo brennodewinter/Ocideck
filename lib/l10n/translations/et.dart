@@ -1770,6 +1770,8 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Jouw antwoord': 'Sinu vastus',
+  'nodig': 'vajalik',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
       'Lukustatud esitluses ülevaadet kunagi ei kuvata; see lüliti ei tee siis midagi.',
   'De twee afbeeldingen': 'Kaks pilti',

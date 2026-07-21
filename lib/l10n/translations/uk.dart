@@ -1797,6 +1797,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Jouw antwoord': 'Ваша відповідь',
+  'nodig': 'потрібно',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
       'У заблокованій презентації огляд ніколи не з\'являється; цей перемикач тоді нічого не робить.',
   'De twee afbeeldingen': 'Два зображення',

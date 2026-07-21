@@ -1781,6 +1781,8 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Jouw antwoord': 'Tvoj odgovor',
+  'nodig': 'potrebno',
   'Bij een vergrendeld deck verschijnt het overzicht nooit; deze schakelaar doet dan niets.':
       'Pri zaklenjeni predstavitvi se pregled nikoli ne prikaže; to stikalo takrat ne naredi ničesar.',
   'De twee afbeeldingen': 'Dve sliki',
