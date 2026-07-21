@@ -1778,6 +1778,23 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Presentatietitel': 'Præsentationstitel',
+  'Sectienaam': 'Sektionsnavn',
+  'Optionele toelichting': 'Valgfri forklaring',
+  'Scope': 'Omfang',
+  'Sinds de vorige rapportage': 'Siden den forrige rapport',
+  'Ons aanvalsoppervlak': 'Vores angrebsflade',
+  'Webapplicaties': 'Webapplikationer',
+  'Webapplicatie': 'Webapplikation',
+  'Wat we niet wisten te hebben': 'Det vi ikke vidste, vi havde',
+  'Tekst onder de afbeeldingen': 'Tekst under billederne',
+  'Titel boven de video': 'Titel over videoen',
+  'Titel over de afbeelding': 'Titel over billedet',
+  'Team Betalen': 'Betalingsteamet',
+  'betaalportaal-acc.example.nl': 'betalingsportal-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'f.eks. gentest 2026-07-20, rettelse anvendt',
   'Titel (H1)': 'Titel (H1)',
   'Subtitel (H2)': 'Undertitel (H2)',
   'Tussentitel (H1)': 'Sektionsoverskrift (H1)',

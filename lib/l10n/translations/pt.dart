@@ -1809,6 +1809,23 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Presentatietitel': 'Título da apresentação',
+  'Sectienaam': 'Nome da secção',
+  'Optionele toelichting': 'Explicação opcional',
+  'Scope': 'Âmbito',
+  'Sinds de vorige rapportage': 'Desde o relatório anterior',
+  'Ons aanvalsoppervlak': 'A nossa superfície de ataque',
+  'Webapplicaties': 'Aplicações web',
+  'Webapplicatie': 'Aplicação web',
+  'Wat we niet wisten te hebben': 'O que não sabíamos que tínhamos',
+  'Tekst onder de afbeeldingen': 'Texto por baixo das imagens',
+  'Titel boven de video': 'Título acima do vídeo',
+  'Titel over de afbeelding': 'Título sobre a imagem',
+  'Team Betalen': 'Equipa de Pagamentos',
+  'betaalportaal-acc.example.nl': 'portal-pagamentos-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'ex.: novo teste 2026-07-20, correção aplicada',
   'Titel (H1)': 'Título (H1)',
   'Subtitel (H2)': 'Subtítulo (H2)',
   'Tussentitel (H1)': 'Cabeçalho de secção (H1)',

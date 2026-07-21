@@ -1783,6 +1783,23 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Presentatietitel': 'Presentationstitel',
+  'Sectienaam': 'Abschnittsname',
+  'Optionele toelichting': 'Optionali Erklärig',
+  'Scope': 'Geltigsberiich',
+  'Sinds de vorige rapportage': 'Sit em letschte Bricht',
+  'Ons aanvalsoppervlak': 'Üsi Aagriffsflächi',
+  'Webapplicaties': 'Webaawändige',
+  'Webapplicatie': 'Webaawändig',
+  'Wat we niet wisten te hebben': 'Was mir nöd gwüsst hend, dass mirs hend',
+  'Tekst onder de afbeeldingen': 'Täxt under de Bilder',
+  'Titel boven de video': 'Titel über em Video',
+  'Titel over de afbeelding': 'Titel über em Bild',
+  'Team Betalen': 'Team Zahlige',
+  'betaalportaal-acc.example.nl': 'zahligsportal-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'z.B. Nachtescht 2026-07-20, Patch iigspiilt',
   'Titel (H1)': 'Titel (H1)',
   'Subtitel (H2)': 'Undertitel (H2)',
   'Tussentitel (H1)': 'Abschnittsüberschrift (H1)',

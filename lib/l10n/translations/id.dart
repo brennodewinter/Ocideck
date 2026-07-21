@@ -1779,6 +1779,23 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Presentatietitel': 'Judul presentasi',
+  'Sectienaam': 'Nama bagian',
+  'Optionele toelichting': 'Penjelasan opsional',
+  'Scope': 'Ruang lingkup',
+  'Sinds de vorige rapportage': 'Sejak laporan sebelumnya',
+  'Ons aanvalsoppervlak': 'Permukaan serangan kami',
+  'Webapplicaties': 'Aplikasi web',
+  'Webapplicatie': 'Aplikasi web',
+  'Wat we niet wisten te hebben': 'Yang tidak kami tahu kami miliki',
+  'Tekst onder de afbeeldingen': 'Teks di bawah gambar',
+  'Titel boven de video': 'Judul di atas video',
+  'Titel over de afbeelding': 'Judul di atas gambar',
+  'Team Betalen': 'Tim Pembayaran',
+  'betaalportaal-acc.example.nl': 'portal-pembayaran-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'mis. uji ulang 2026-07-20, tambalan diterapkan',
   'Titel (H1)': 'Judul (H1)',
   'Subtitel (H2)': 'Subjudul (H2)',
   'Tussentitel (H1)': 'Judul bagian (H1)',

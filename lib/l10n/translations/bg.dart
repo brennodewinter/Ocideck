@@ -1802,6 +1802,23 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Presentatietitel': 'Заглавие на презентацията',
+  'Sectienaam': 'Име на секцията',
+  'Optionele toelichting': 'Пояснение по избор',
+  'Scope': 'Обхват',
+  'Sinds de vorige rapportage': 'От предишния доклад',
+  'Ons aanvalsoppervlak': 'Нашата атакуема повърхност',
+  'Webapplicaties': 'Уеб приложения',
+  'Webapplicatie': 'Уеб приложение',
+  'Wat we niet wisten te hebben': 'Това, за което не знаехме, че имаме',
+  'Tekst onder de afbeeldingen': 'Текст под изображенията',
+  'Titel boven de video': 'Заглавие над видеото',
+  'Titel over de afbeelding': 'Заглавие върху изображението',
+  'Team Betalen': 'Екип „Плащания“',
+  'betaalportaal-acc.example.nl': 'payment-portal-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'напр. повторен тест 2026-07-20, кръпката е приложена',
   'Titel (H1)': 'Заглавие (H1)',
   'Subtitel (H2)': 'Подзаглавие (H2)',
   'Tussentitel (H1)': 'Заглавие на секция (H1)',

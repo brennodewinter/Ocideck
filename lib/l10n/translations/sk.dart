@@ -1786,6 +1786,23 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Presentatietitel': 'Názov prezentácie',
+  'Sectienaam': 'Názov sekcie',
+  'Optionele toelichting': 'Voliteľné vysvetlenie',
+  'Scope': 'Rozsah',
+  'Sinds de vorige rapportage': 'Od minulej správy',
+  'Ons aanvalsoppervlak': 'Naša útočná plocha',
+  'Webapplicaties': 'Webové aplikácie',
+  'Webapplicatie': 'Webová aplikácia',
+  'Wat we niet wisten te hebben': 'Čo sme nevedeli, že máme',
+  'Tekst onder de afbeeldingen': 'Text pod obrázkami',
+  'Titel boven de video': 'Názov nad videom',
+  'Titel over de afbeelding': 'Názov cez obrázok',
+  'Team Betalen': 'Tím Platby',
+  'betaalportaal-acc.example.nl': 'platobny-portal-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'napr. opakovaný test 2026-07-20, oprava nasadená',
   'Titel (H1)': 'Názov (H1)',
   'Subtitel (H2)': 'Podnadpis (H2)',
   'Tussentitel (H1)': 'Nadpis sekcie (H1)',

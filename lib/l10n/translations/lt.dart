@@ -1787,6 +1787,23 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Presentatietitel': 'Pristatymo pavadinimas',
+  'Sectienaam': 'Skyriaus pavadinimas',
+  'Optionele toelichting': 'Nebūtinas paaiškinimas',
+  'Scope': 'Apimtis',
+  'Sinds de vorige rapportage': 'Nuo ankstesnės ataskaitos',
+  'Ons aanvalsoppervlak': 'Mūsų atakos paviršius',
+  'Webapplicaties': 'Žiniatinklio programos',
+  'Webapplicatie': 'Žiniatinklio programa',
+  'Wat we niet wisten te hebben': 'Tai, ko nežinojome turintys',
+  'Tekst onder de afbeeldingen': 'Tekstas po paveikslėliais',
+  'Titel boven de video': 'Pavadinimas virš vaizdo įrašo',
+  'Titel over de afbeelding': 'Pavadinimas ant paveikslėlio',
+  'Team Betalen': 'Mokėjimų komanda',
+  'betaalportaal-acc.example.nl': 'mokejimu-portalas-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'pvz. pakartotinis testas 2026-07-20, pataisa pritaikyta',
   'Titel (H1)': 'Pavadinimas (H1)',
   'Subtitel (H2)': 'Paantraštė (H2)',
   'Tussentitel (H1)': 'Skyriaus antraštė (H1)',

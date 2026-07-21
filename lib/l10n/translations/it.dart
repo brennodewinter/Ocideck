@@ -732,6 +732,25 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Citaat tekst...': 'Testo della citazione...',
+  'Naam van de auteur': 'Nome dell\'autore',
+  'Presentatietitel': 'Titolo presentazione',
+  'Sectienaam': 'Nome della sezione',
+  'Optionele toelichting': 'Spiegazione facoltativa',
+  'Scope': 'Ambito',
+  'Sinds de vorige rapportage': 'Dalla relazione precedente',
+  'Ons aanvalsoppervlak': 'La nostra superficie di attacco',
+  'Webapplicaties': 'Applicazioni web',
+  'Webapplicatie': 'Applicazione web',
+  'Wat we niet wisten te hebben': 'Ciò che non sapevamo di avere',
+  'Tekst onder de afbeeldingen': 'Testo sotto le immagini',
+  'Titel boven de video': 'Titolo sopra il video',
+  'Titel over de afbeelding': 'Titolo sopra l\'immagine',
+  'Team Betalen': 'Team Pagamenti',
+  'betaalportaal-acc.example.nl': 'portale-pagamenti-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'es. nuovo test 2026-07-20, patch applicata',
   'Titel (H1)': 'Titolo (H1)',
   'Subtitel (H2)': 'Sottotitolo (H2)',
   'Tussentitel (H1)': 'Intestazione di sezione (H1)',

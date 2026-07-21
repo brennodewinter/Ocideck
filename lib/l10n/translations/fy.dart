@@ -737,6 +737,25 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Citaat tekst...': 'Sitaattekst...',
+  'Naam van de auteur': 'Namme fan de auteur',
+  'Presentatietitel': 'Presintaasjetitel',
+  'Sectienaam': 'Seksjenamme',
+  'Optionele toelichting': 'Opsjonele taljochting',
+  'Scope': 'Berik',
+  'Sinds de vorige rapportage': 'Sûnt de foarige rapportaazje',
+  'Ons aanvalsoppervlak': 'Us oanfalsoerflak',
+  'Webapplicaties': 'Webapplikaasjes',
+  'Webapplicatie': 'Webapplikaasje',
+  'Wat we niet wisten te hebben': 'Wat wy net wisten te hawwen',
+  'Tekst onder de afbeeldingen': 'Tekst ûnder de ôfbyldings',
+  'Titel boven de video': 'Titel boppe de fideo',
+  'Titel over de afbeelding': 'Titel oer de ôfbylding',
+  'Team Betalen': 'Team Beteljen',
+  'betaalportaal-acc.example.nl': 'betelportaal-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'bgl. hertest 2026-07-20, patch tapast',
   'Titel (H1)': 'Titel (H1)',
   'Subtitel (H2)': 'Undertitel (H2)',
   'Tussentitel (H1)': 'Tussentitel (H1)',

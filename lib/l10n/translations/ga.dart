@@ -1815,6 +1815,23 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Presentatietitel': 'Teideal an chur i láthair',
+  'Sectienaam': 'Ainm na rannóige',
+  'Optionele toelichting': 'Míniú roghnach',
+  'Scope': 'Scóip',
+  'Sinds de vorige rapportage': 'Ón tuairisc roimhe seo',
+  'Ons aanvalsoppervlak': 'Ár ndromchla ionsaithe',
+  'Webapplicaties': 'Feidhmchláir ghréasáin',
+  'Webapplicatie': 'Feidhmchlár gréasáin',
+  'Wat we niet wisten te hebben': 'Rud nach raibh a fhios againn a bhí againn',
+  'Tekst onder de afbeeldingen': 'Téacs faoi na híomhánna',
+  'Titel boven de video': 'Teideal os cionn an fhíseáin',
+  'Titel over de afbeelding': 'Teideal ar an íomhá',
+  'Team Betalen': 'Foireann Íocaíochtaí',
+  'betaalportaal-acc.example.nl': 'tairseach-ioca-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'm.sh. athtástáil 2026-07-20, paiste curtha i bhfeidhm',
   'Titel (H1)': 'Teideal (H1)',
   'Subtitel (H2)': 'Fotheideal (H2)',
   'Tussentitel (H1)': 'Ceannteideal rannóige (H1)',

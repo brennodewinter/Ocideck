@@ -40,6 +40,11 @@ void main() {
     AppLocalizations.setActiveLanguageCode('en');
 
     const unchangedInEnglish = {
+      'MASWE',
+      'MASWE-0005',
+      'WSTG-ATHN-07',
+      'Testing for Weak Password Policy',
+      'CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:L/SC:N/SI:N/SA:N',
       'CWE',
       'CVE',
       'F-03',
@@ -125,6 +130,11 @@ void main() {
 
   test('all literal Dutch source strings are translated in every language', () {
     const unchangedInAllLanguages = {
+      'MASWE',
+      'MASWE-0005',
+      'WSTG-ATHN-07',
+      'Testing for Weak Password Policy',
+      'CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:L/SC:N/SI:N/SA:N',
       'CWE',
       'CVE',
       'F-03',

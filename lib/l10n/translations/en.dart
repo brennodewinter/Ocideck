@@ -918,6 +918,23 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Presentatietitel': 'Presentation title',
+  'Sectienaam': 'Section name',
+  'Optionele toelichting': 'Optional explanation',
+  'Scope': 'Scope',
+  'Sinds de vorige rapportage': 'Since the previous report',
+  'Ons aanvalsoppervlak': 'Our attack surface',
+  'Webapplicaties': 'Web applications',
+  'Webapplicatie': 'Web application',
+  'Wat we niet wisten te hebben': 'What we did not know we had',
+  'Tekst onder de afbeeldingen': 'Text below the images',
+  'Titel boven de video': 'Title above the video',
+  'Titel over de afbeelding': 'Title over the image',
+  'Team Betalen': 'Payments team',
+  'betaalportaal-acc.example.nl': 'payment-portal-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'e.g. retest 2026-07-20, patch applied',
   'Titel (H1)': 'Title (H1)',
   'Subtitel (H2)': 'Subtitle (H2)',
   'Tussentitel (H1)': 'Section heading (H1)',

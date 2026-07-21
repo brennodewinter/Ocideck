@@ -1801,6 +1801,23 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Presentatietitel': 'Titlu tal-preżentazzjoni',
+  'Sectienaam': 'Isem tas-sezzjoni',
+  'Optionele toelichting': 'Spjegazzjoni fakultattiva',
+  'Scope': 'Ambitu',
+  'Sinds de vorige rapportage': 'Mir-rapport ta\' qabel',
+  'Ons aanvalsoppervlak': 'Il-wiċċ ta\' attakk tagħna',
+  'Webapplicaties': 'Applikazzjonijiet web',
+  'Webapplicatie': 'Applikazzjoni web',
+  'Wat we niet wisten te hebben': 'Dak li ma konniex nafu li għandna',
+  'Tekst onder de afbeeldingen': 'Test taħt l-immaġni',
+  'Titel boven de video': 'Titlu fuq il-vidjow',
+  'Titel over de afbeelding': 'Titlu fuq l-immaġni',
+  'Team Betalen': 'Tim tal-Ħlasijiet',
+  'betaalportaal-acc.example.nl': 'portal-hlas-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'eż. test mill-ġdid 2026-07-20, patch applikata',
   'Titel (H1)': 'Titlu (H1)',
   'Subtitel (H2)': 'Sottotitlu (H2)',
   'Tussentitel (H1)': 'Intestatura tas-sezzjoni (H1)',

@@ -1797,6 +1797,23 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Presentatietitel': 'Titlul prezentării',
+  'Sectienaam': 'Numele secțiunii',
+  'Optionele toelichting': 'Explicație opțională',
+  'Scope': 'Domeniu de aplicare',
+  'Sinds de vorige rapportage': 'De la raportul anterior',
+  'Ons aanvalsoppervlak': 'Suprafața noastră de atac',
+  'Webapplicaties': 'Aplicații web',
+  'Webapplicatie': 'Aplicație web',
+  'Wat we niet wisten te hebben': 'Ce nu știam că avem',
+  'Tekst onder de afbeeldingen': 'Text sub imagini',
+  'Titel boven de video': 'Titlu deasupra videoclipului',
+  'Titel over de afbeelding': 'Titlu peste imagine',
+  'Team Betalen': 'Echipa Plăți',
+  'betaalportaal-acc.example.nl': 'portal-plati-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'ex. retestare 2026-07-20, patch aplicat',
   'Titel (H1)': 'Titlu (H1)',
   'Subtitel (H2)': 'Subtitlu (H2)',
   'Tussentitel (H1)': 'Titlu de secțiune (H1)',

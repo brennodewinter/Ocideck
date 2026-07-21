@@ -1797,6 +1797,23 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Presentatietitel': 'Назва презентації',
+  'Sectienaam': 'Назва розділу',
+  'Optionele toelichting': 'Необов’язкове пояснення',
+  'Scope': 'Обсяг',
+  'Sinds de vorige rapportage': 'Від попереднього звіту',
+  'Ons aanvalsoppervlak': 'Наша поверхня атаки',
+  'Webapplicaties': 'Вебзастосунки',
+  'Webapplicatie': 'Вебзастосунок',
+  'Wat we niet wisten te hebben': 'Те, про що ми не знали, що маємо',
+  'Tekst onder de afbeeldingen': 'Текст під зображеннями',
+  'Titel boven de video': 'Заголовок над відео',
+  'Titel over de afbeelding': 'Заголовок поверх зображення',
+  'Team Betalen': 'Команда платежів',
+  'betaalportaal-acc.example.nl': 'payment-portal-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'напр. повторний тест 2026-07-20, виправлення застосовано',
   'Titel (H1)': 'Заголовок (H1)',
   'Subtitel (H2)': 'Підзаголовок (H2)',
   'Tussentitel (H1)': 'Заголовок розділу (H1)',

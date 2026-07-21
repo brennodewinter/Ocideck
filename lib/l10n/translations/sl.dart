@@ -1781,6 +1781,23 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Presentatietitel': 'Naslov predstavitve',
+  'Sectienaam': 'Ime razdelka',
+  'Optionele toelichting': 'Neobvezno pojasnilo',
+  'Scope': 'Obseg',
+  'Sinds de vorige rapportage': 'Od prejšnjega poročila',
+  'Ons aanvalsoppervlak': 'Naša napadalna površina',
+  'Webapplicaties': 'Spletne aplikacije',
+  'Webapplicatie': 'Spletna aplikacija',
+  'Wat we niet wisten te hebben': 'Kar nismo vedeli, da imamo',
+  'Tekst onder de afbeeldingen': 'Besedilo pod slikami',
+  'Titel boven de video': 'Naslov nad videoposnetkom',
+  'Titel over de afbeelding': 'Naslov čez sliko',
+  'Team Betalen': 'Ekipa za plačila',
+  'betaalportaal-acc.example.nl': 'placilni-portal-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'npr. ponovni test 2026-07-20, popravek nameščen',
   'Titel (H1)': 'Naslov (H1)',
   'Subtitel (H2)': 'Podnaslov (H2)',
   'Tussentitel (H1)': 'Naslov razdelka (H1)',

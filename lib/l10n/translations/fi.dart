@@ -1779,6 +1779,23 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Presentatietitel': 'Esityksen otsikko',
+  'Sectienaam': 'Osion nimi',
+  'Optionele toelichting': 'Valinnainen selitys',
+  'Scope': 'Laajuus',
+  'Sinds de vorige rapportage': 'Edellisen raportin jälkeen',
+  'Ons aanvalsoppervlak': 'Hyökkäyspintamme',
+  'Webapplicaties': 'Verkkosovellukset',
+  'Webapplicatie': 'Verkkosovellus',
+  'Wat we niet wisten te hebben': 'Se mitä emme tienneet omistavamme',
+  'Tekst onder de afbeeldingen': 'Teksti kuvien alla',
+  'Titel boven de video': 'Otsikko videon yläpuolella',
+  'Titel over de afbeelding': 'Otsikko kuvan päällä',
+  'Team Betalen': 'Maksutiimi',
+  'betaalportaal-acc.example.nl': 'maksuportaali-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'esim. uusintatesti 2026-07-20, korjaus asennettu',
   'Titel (H1)': 'Otsikko (H1)',
   'Subtitel (H2)': 'Alaotsikko (H2)',
   'Tussentitel (H1)': 'Osion otsikko (H1)',

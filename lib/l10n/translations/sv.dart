@@ -1778,6 +1778,23 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Presentatietitel': 'Presentationstitel',
+  'Sectienaam': 'Avsnittsnamn',
+  'Optionele toelichting': 'Valfri förklaring',
+  'Scope': 'Omfattning',
+  'Sinds de vorige rapportage': 'Sedan föregående rapport',
+  'Ons aanvalsoppervlak': 'Vår attackyta',
+  'Webapplicaties': 'Webbapplikationer',
+  'Webapplicatie': 'Webbapplikation',
+  'Wat we niet wisten te hebben': 'Det vi inte visste att vi hade',
+  'Tekst onder de afbeeldingen': 'Text under bilderna',
+  'Titel boven de video': 'Titel ovanför videon',
+  'Titel over de afbeelding': 'Titel över bilden',
+  'Team Betalen': 'Betalningsteamet',
+  'betaalportaal-acc.example.nl': 'betalportal-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      't.ex. omtest 2026-07-20, patch installerad',
   'Titel (H1)': 'Titel (H1)',
   'Subtitel (H2)': 'Underrubrik (H2)',
   'Tussentitel (H1)': 'Avsnittsrubrik (H1)',

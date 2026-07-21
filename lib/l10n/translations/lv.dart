@@ -1778,6 +1778,23 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Presentatietitel': 'Prezentācijas virsraksts',
+  'Sectienaam': 'Sadaļas nosaukums',
+  'Optionele toelichting': 'Neobligāts skaidrojums',
+  'Scope': 'Tvērums',
+  'Sinds de vorige rapportage': 'Kopš iepriekšējā ziņojuma',
+  'Ons aanvalsoppervlak': 'Mūsu uzbrukuma virsma',
+  'Webapplicaties': 'Tīmekļa lietotnes',
+  'Webapplicatie': 'Tīmekļa lietotne',
+  'Wat we niet wisten te hebben': 'Tas, ko nezinājām, ka mums ir',
+  'Tekst onder de afbeeldingen': 'Teksts zem attēliem',
+  'Titel boven de video': 'Virsraksts virs video',
+  'Titel over de afbeelding': 'Virsraksts uz attēla',
+  'Team Betalen': 'Maksājumu komanda',
+  'betaalportaal-acc.example.nl': 'maksajumu-portals-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'piem., atkārtots tests 2026-07-20, ielāps uzstādīts',
   'Titel (H1)': 'Virsraksts (H1)',
   'Subtitel (H2)': 'Apakšvirsraksts (H2)',
   'Tussentitel (H1)': 'Sadaļas virsraksts (H1)',

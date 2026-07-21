@@ -736,6 +736,25 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Citaat tekst...': 'Teksto di e sita...',
+  'Naam van de auteur': 'Nòmber di e outor',
+  'Presentatietitel': 'Título di presentashon',
+  'Sectienaam': 'Nòmber di sekshon',
+  'Optionele toelichting': 'Splikashon opshonal',
+  'Scope': 'Alkanse',
+  'Sinds de vorige rapportage': 'For di e rapòrt anterior',
+  'Ons aanvalsoppervlak': 'Nos superfisie di atake',
+  'Webapplicaties': 'Aplikashonnan web',
+  'Webapplicatie': 'Aplikashon web',
+  'Wat we niet wisten te hebben': 'Loke nos no tabata sa ku nos tabatin',
+  'Tekst onder de afbeeldingen': 'Teksto bou di e imágennan',
+  'Titel boven de video': 'Título riba e vidio',
+  'Titel over de afbeelding': 'Título riba e imágen',
+  'Team Betalen': 'Ekipo di Pago',
+  'betaalportaal-acc.example.nl': 'portal-pago-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'p.e. re-tèst 2026-07-20, patch apliká',
   'Titel (H1)': 'Título (H1)',
   'Subtitel (H2)': 'Subtítulo (H2)',
   'Tussentitel (H1)': 'Título intermedio (H1)',

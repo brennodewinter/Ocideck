@@ -1807,6 +1807,23 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Presentatietitel': 'Τίτλος παρουσίασης',
+  'Sectienaam': 'Όνομα ενότητας',
+  'Optionele toelichting': 'Προαιρετική επεξήγηση',
+  'Scope': 'Εύρος',
+  'Sinds de vorige rapportage': 'Από την προηγούμενη αναφορά',
+  'Ons aanvalsoppervlak': 'Η επιφάνεια επίθεσής μας',
+  'Webapplicaties': 'Διαδικτυακές εφαρμογές',
+  'Webapplicatie': 'Διαδικτυακή εφαρμογή',
+  'Wat we niet wisten te hebben': 'Όσα δεν ξέραμε ότι είχαμε',
+  'Tekst onder de afbeeldingen': 'Κείμενο κάτω από τις εικόνες',
+  'Titel boven de video': 'Τίτλος πάνω από το βίντεο',
+  'Titel over de afbeelding': 'Τίτλος πάνω στην εικόνα',
+  'Team Betalen': 'Ομάδα Πληρωμών',
+  'betaalportaal-acc.example.nl': 'payment-portal-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'π.χ. επανέλεγχος 2026-07-20, ενημέρωση εφαρμόστηκε',
   'Titel (H1)': 'Τίτλος (H1)',
   'Subtitel (H2)': 'Υπότιτλος (H2)',
   'Tussentitel (H1)': 'Επικεφαλίδα ενότητας (H1)',

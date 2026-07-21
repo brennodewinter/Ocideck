@@ -2761,6 +2761,23 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Presentatietitel': 'Sunum başlığı',
+  'Sectienaam': 'Bölüm adı',
+  'Optionele toelichting': 'İsteğe bağlı açıklama',
+  'Scope': 'Kapsam',
+  'Sinds de vorige rapportage': 'Önceki rapordan bu yana',
+  'Ons aanvalsoppervlak': 'Saldırı yüzeyimiz',
+  'Webapplicaties': 'Web uygulamaları',
+  'Webapplicatie': 'Web uygulaması',
+  'Wat we niet wisten te hebben': 'Sahip olduğumuzu bilmediklerimiz',
+  'Tekst onder de afbeeldingen': 'Görsellerin altındaki metin',
+  'Titel boven de video': 'Videonun üstündeki başlık',
+  'Titel over de afbeelding': 'Görselin üstündeki başlık',
+  'Team Betalen': 'Ödemeler ekibi',
+  'betaalportaal-acc.example.nl': 'odeme-portali-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'örn. yeniden test 2026-07-20, yama uygulandı',
   'Titel (H1)': 'Başlık (H1)',
   'Subtitel (H2)': 'Alt başlık (H2)',
   'Tussentitel (H1)': 'Ara başlık (H1)',

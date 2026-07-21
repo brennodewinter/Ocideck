@@ -1795,6 +1795,23 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Presentatietitel': 'Titulus praesentationis',
+  'Sectienaam': 'Nomen sectionis',
+  'Optionele toelichting': 'Explicatio optativa',
+  'Scope': 'Ambitus',
+  'Sinds de vorige rapportage': 'Ab relatione priore',
+  'Ons aanvalsoppervlak': 'Superficies impetus nostra',
+  'Webapplicaties': 'Applicationes interretiales',
+  'Webapplicatie': 'Applicatio interretialis',
+  'Wat we niet wisten te hebben': 'Quae nos habere nesciebamus',
+  'Tekst onder de afbeeldingen': 'Textus sub imaginibus',
+  'Titel boven de video': 'Titulus supra pelliculam',
+  'Titel over de afbeelding': 'Titulus super imagine',
+  'Team Betalen': 'Grex solutionum',
+  'betaalportaal-acc.example.nl': 'portale-solutionum-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'e.g. retestatio 2026-07-20, emplastrum adhibitum',
   'Titel (H1)': 'Titulus (H1)',
   'Subtitel (H2)': 'Subtitulus (H2)',
   'Tussentitel (H1)': 'Titulus sectionis (H1)',

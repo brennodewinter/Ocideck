@@ -1770,6 +1770,23 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Presentatietitel': 'Esitluse pealkiri',
+  'Sectienaam': 'Jaotise nimi',
+  'Optionele toelichting': 'Valikuline selgitus',
+  'Scope': 'Ulatus',
+  'Sinds de vorige rapportage': 'Alates eelmisest aruandest',
+  'Ons aanvalsoppervlak': 'Meie ründepind',
+  'Webapplicaties': 'Veebirakendused',
+  'Webapplicatie': 'Veebirakendus',
+  'Wat we niet wisten te hebben': 'See, mille olemasolust me ei teadnud',
+  'Tekst onder de afbeeldingen': 'Tekst piltide all',
+  'Titel boven de video': 'Pealkiri video kohal',
+  'Titel over de afbeelding': 'Pealkiri pildi peal',
+  'Team Betalen': 'Maksete meeskond',
+  'betaalportaal-acc.example.nl': 'maksete-portaal-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'nt kordustest 2026-07-20, paik paigaldatud',
   'Titel (H1)': 'Pealkiri (H1)',
   'Subtitel (H2)': 'Alapealkiri (H2)',
   'Tussentitel (H1)': 'Vahepealkiri (H1)',

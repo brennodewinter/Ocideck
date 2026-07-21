@@ -1782,6 +1782,23 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Presentatietitel': 'Název prezentace',
+  'Sectienaam': 'Název sekce',
+  'Optionele toelichting': 'Volitelné vysvětlení',
+  'Scope': 'Rozsah',
+  'Sinds de vorige rapportage': 'Od minulé zprávy',
+  'Ons aanvalsoppervlak': 'Naše útočná plocha',
+  'Webapplicaties': 'Webové aplikace',
+  'Webapplicatie': 'Webová aplikace',
+  'Wat we niet wisten te hebben': 'Co jsme nevěděli, že máme',
+  'Tekst onder de afbeeldingen': 'Text pod obrázky',
+  'Titel boven de video': 'Název nad videem',
+  'Titel over de afbeelding': 'Název přes obrázek',
+  'Team Betalen': 'Tým Platby',
+  'betaalportaal-acc.example.nl': 'platebni-portal-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'např. opakovaný test 2026-07-20, oprava nasazena',
   'Titel (H1)': 'Název (H1)',
   'Subtitel (H2)': 'Podnadpis (H2)',
   'Tussentitel (H1)': 'Nadpis sekce (H1)',

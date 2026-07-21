@@ -1783,6 +1783,23 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Presentatietitel': 'Prezentációcím',
+  'Sectienaam': 'Szakasz neve',
+  'Optionele toelichting': 'Opcionális magyarázat',
+  'Scope': 'Hatókör',
+  'Sinds de vorige rapportage': 'Az előző jelentés óta',
+  'Ons aanvalsoppervlak': 'A támadási felületünk',
+  'Webapplicaties': 'Webalkalmazások',
+  'Webapplicatie': 'Webalkalmazás',
+  'Wat we niet wisten te hebben': 'Amiről nem tudtuk, hogy megvan',
+  'Tekst onder de afbeeldingen': 'Szöveg a képek alatt',
+  'Titel boven de video': 'Cím a videó felett',
+  'Titel over de afbeelding': 'Cím a képen',
+  'Team Betalen': 'Fizetési csapat',
+  'betaalportaal-acc.example.nl': 'fizetesi-portal-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'pl. újratesztelés 2026-07-20, javítás telepítve',
   'Titel (H1)': 'Cím (H1)',
   'Subtitel (H2)': 'Alcím (H2)',
   'Tussentitel (H1)': 'Szakaszcím (H1)',
