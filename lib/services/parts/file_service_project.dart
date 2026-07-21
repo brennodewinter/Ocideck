@@ -63,12 +63,38 @@ extension _FileServiceProject on FileService {
 
     final markdown = _md.generateDeck(updatedDeck);
     await writeStringAtomic(File(filePath), markdown);
-    // Annotaties, notities en de MIAUW-dispositie leven in eigen sidecars,
-    // zodat de `.md` pure, leesbare Marp blijft.
+    updatedDeck = _recordSeal(updatedDeck, markdown);
+    // Annotaties, notities, de MIAUW-dispositie en het zegel leven in eigen
+    // sidecars, zodat de `.md` pure, leesbare Marp blijft.
     await _writeSidecar(updatedDeck, filePath);
     await _writeUserNotesSidecar(updatedDeck, filePath);
     await _writeMiauwSidecar(updatedDeck, filePath);
+    await _writeSealSidecar(updatedDeck, filePath);
     return (deck: updatedDeck, chartWarnings: chartWarnings);
+  }
+
+  /// Leg de bestandsbytes vast in het zegel: [markdown] is precies wat er
+  /// zojuist is weggeschreven, dus dit is de hash van het bestand op schijf.
+  ///
+  /// Twee regels, en ze zijn allebei belangrijk.
+  ///
+  /// [Deck.fileHash] wordt altijd bijgewerkt — dat is de waargenomen toestand
+  /// van het bestand, en zonder deze regel zou een deck na opslaan nog steeds
+  /// met de hash van vóór de opslag rondlopen.
+  ///
+  /// [Deck.sealHash] wordt alleen gezet als hij nog leeg is, en dat is de
+  /// tamper-evidence zelf: bij het verzegelen bestond het bestand nog niet, dus
+  /// die eerste opslag legt de hash vast. Elke opslag daarna raakt hem niet meer
+  /// aan. Zou hij wél opnieuw worden uitgerekend, dan zou een wijziging in het
+  /// bestand zichzelf goedkeuren en zou het zegel niets meer betekenen.
+  Deck _recordSeal(Deck deck, String markdown) {
+    final hash = DocumentIntegrity.hashMarkdown(markdown);
+    final fresh = deck.finalized && deck.sealHash.isEmpty;
+    return deck.copyWith(
+      fileHash: hash,
+      sealHash: fresh ? hash : null,
+      sealForm: fresh ? SealForm.fileBytes : null,
+    );
   }
 
   Future<Deck> _hydrateImageCaptions(Deck deck) async {

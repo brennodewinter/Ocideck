@@ -12,6 +12,7 @@ import '../models/chart.dart';
 import '../models/deck.dart';
 import '../models/deck_template.dart';
 import '../models/settings.dart';
+import '../models/seal_record.dart';
 import '../models/slide.dart';
 import '../models/storage_origin.dart';
 import '../services/annotation_codec.dart';
@@ -35,6 +36,7 @@ import '../services/markdown_safety.dart';
 import '../services/markdown_service.dart';
 import '../services/recovery_service.dart';
 import '../services/miauw_codec.dart';
+import '../services/seal_codec.dart';
 import '../services/user_notes_codec.dart';
 import '../services/web_asset_store.dart';
 import '../services/s3/s3_service.dart';
@@ -224,6 +226,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
               deck.miauwWaivers,
               deck.miauwConfirmations,
             ),
+            seal: SealCodec.encode(SealRecord.of(deck)),
             // Tekeningen staan niet in de markdown (eigen sidecar), en tekenen
             // maakt het deck wél vuil. Zonder deze regel kwam een herstelde
             // presentatie stil zonder annotaties terug.
@@ -269,6 +272,10 @@ class TabsNotifier extends StateNotifier<TabsState> {
             miauwConfirmations: d.confirmations,
           );
         }
+      }
+      if (snap.seal != null && snap.seal!.isNotEmpty) {
+        final record = SealCodec.decode(snap.seal!);
+        if (record != null) deck = record.applyTo(deck);
       }
       final ink = snap.annotations;
       if (ink != null && ink.isNotEmpty) {

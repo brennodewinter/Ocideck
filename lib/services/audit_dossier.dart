@@ -4,7 +4,9 @@ import 'dart:typed_data';
 import '../models/deck.dart';
 import '../models/eis_entry.dart';
 import '../models/findings_summary_spec.dart';
+import '../models/seal_record.dart';
 import 'cvss/cvss4.dart';
+import 'document_integrity.dart';
 import 'evidence_hash_service.dart';
 import 'management_summary.dart';
 import 'miauw_compliance_analyzer.dart';
@@ -26,6 +28,50 @@ String _severityLabel(Cvss4Severity s) => switch (s) {
   Cvss4Severity.medium => 'Middel',
   Cvss4Severity.low => 'Laag',
   Cvss4Severity.none => 'Informatief',
+};
+
+/// De uitkomst van [DocumentIntegrity.verify] in één regel dossiertekst.
+String _integrityLabel(Deck deck) => switch (deckIntegrityStatus(deck)) {
+  IntegrityStatus.intact => 'zegel komt overeen met de inhoud',
+  IntegrityStatus.changed =>
+    'ZEGEL KOMT NIET OVEREEN — het rapport is na het verzegelen gewijzigd',
+  IntegrityStatus.notVerifiable =>
+    'niet gecontroleerd — er was geen opgeslagen bestand om tegen na te rekenen',
+  IntegrityStatus.notSealed => 'niet verzegeld',
+  IntegrityStatus.redactedDerivative => 'geredigeerde afleiding van een zegel',
+};
+
+/// Hoe de ontvanger de zegel-hash zelf narekent — het stuk tekst waar dit hele
+/// dossier om draait.
+///
+/// Voor een zegel over de bestandsbytes staat hier één commando en verder niets:
+/// geen specificatie om na te spelen, geen OciDeck om te installeren. Voor een
+/// zegel van vóór 0.1.0 kan dat niet, en dan zegt het dossier dat ook — een
+/// controleaanwijzing die de ontvanger niet kán uitvoeren, is erger dan geen
+/// aanwijzing.
+String _verificationRecipe(Deck deck) => switch (deck.sealForm) {
+  SealForm.fileBytes =>
+    'Controleer de integriteit met `sha512sum <rapport>.md` en vergelijk de '
+        'uitkomst met de zegel-hash hierboven (of met `hash` in '
+        '`<rapport>.seal.json`). De hash gaat over de bytes van het '
+        'markdown-bestand, zonder normalisatie: elk ander gereedschap dat '
+        'SHA-512 rekent geeft dezelfde waarde, en OciDeck is er niet voor '
+        'nodig. Een RFC 3161-token bindt die hash aan een tijdstip, maar '
+        'OciDeck vergelijkt daarvan alleen de imprint — de TSA-handtekening en '
+        'de certificaatketen worden niet gecontroleerd. Het getoonde tijdstip '
+        'is dus een claim van het token, geen geverifieerd feit; voor '
+        'onweerlegbare tijdsverankering moet het token tegen de TSA worden '
+        'geverifieerd.',
+  SealForm.canonical =>
+    'Let op: dit rapport draagt een zegel van vóór 0.1.0. De hash gaat daar '
+        'over de gekanoniseerde rapportinhoud zoals OciDeck die uitschrijft, '
+        'niet over de bytes van het bestand, en is buiten OciDeck om niet na '
+        'te rekenen. OciDeck rekent hem ook niet om naar de nieuwe vorm: dat '
+        'zou een andere hash opleveren dan het RFC 3161-token heeft '
+        'getijdstempeld, en die notarisatie is meer waard dan het gemak. Open '
+        'het rapport in OciDeck om de controle te laten uitvoeren; alleen een '
+        'rapport dat opnieuw wordt verzegeld krijgt een zegel over de '
+        'bestandsbytes.',
 };
 
 /// Builds the audit-dossier index Markdown for [deck]. [evidenceHashes] is keyed
@@ -72,6 +118,10 @@ String buildAuditDossier(
     meta('Zegel-algoritme', deck.sealAlgo);
     meta('Zegel-hash', deck.sealHash);
     meta('Verzegeld op', deck.sealAt);
+    // Het oordeel, niet alleen de waarde. Een dossier dat de hash afdrukt maar
+    // niet zegt of hij klopt, laat de lezer denken dat het afdrukken zélf de
+    // controle was.
+    meta('Controle bij samenstellen', _integrityLabel(deck));
     // The imprint is checked against the seal hash, but the token's CMS
     // signature and TSA certificate chain are deliberately NOT verified in-app
     // (see rfc3161_timestamp.dart, §8-A3). So genTime is the token's *claim*,
@@ -96,15 +146,7 @@ String buildAuditDossier(
       meta('Getijdstempeld op (claim)', tsParsed.genTime.toIso8601String());
     }
     b.writeln();
-    b.writeln(
-      'Controleer de integriteit door de ${deck.sealAlgo}-hash van de '
-      'gekanoniseerde rapportinhoud te herberekenen en te vergelijken met de '
-      'zegel-hash hierboven. Een RFC 3161-token bindt die hash aan een '
-      'tijdstip, maar OciDeck verifieert de TSA-handtekening en '
-      'certificaatketen niet in-app; het getoonde tijdstip is dus een claim '
-      'van het token, geen geverifieerd feit. Voor onweerlegbare '
-      'tijdsverankering moet het token tegen de TSA worden geverifieerd.',
-    );
+    b.writeln(_verificationRecipe(deck));
   } else {
     b.writeln();
     b.writeln(

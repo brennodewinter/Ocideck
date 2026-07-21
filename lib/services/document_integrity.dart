@@ -126,8 +126,9 @@ class DocumentIntegrity {
     if (sourceStatus == IntegrityStatus.changed) return IntegrityStatus.changed;
     // Niet verzegeld óf niets om tegen na te rekenen: er is geen bron om deze
     // afleiding aan op te hangen. Dat is geen manipulatiemelding.
-    if (sourceStatus != IntegrityStatus.intact)
+    if (sourceStatus != IntegrityStatus.intact) {
       return IntegrityStatus.notSealed;
+    }
     if (manifest.derivedFrom != source.sealHash) return IntegrityStatus.changed;
     return verifier(manifest, source)
         ? IntegrityStatus.redactedDerivative
