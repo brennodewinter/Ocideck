@@ -117,7 +117,8 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `miauw_codec.dart` — The MIAUW disposition (client exclusions and confirmations) as the `<name>.miauw.json` sidecar, plus the read-only decoder for the base64 front-matter keys it replaced, so an older file still opens.
 - `markdown_service_finding.dart` — Parses/serializes the `finding` slide group's id/role markers and header spec.
 - `markdown_validator.dart` — Line-anchored structural pre-flight against the parser's expectations.
-- `marp_html_service.dart` — Builds the self-contained, sanitised HTML export with embedded assets.
+- `marp_html_service.dart` — Builds the self-contained, sanitised HTML export with embedded assets. Also writes the third-party notices into that file: a `/*! @license … */` banner on every inlined bundle (MathJax and Mermaid ship minified without one) and a collapsed `<details>` block with the full licence texts, plus the OFL text whenever EB Garamond is embedded as base64 — forwarding an export makes the user the distributing party.
+- `bundled_licenses.dart` — The licence texts for everything OciDeck bundles that is **not** a Dart package: four font families, the YuNet model and the five JS/CSS bundles. Flutter's own `NOTICES` asset covers packages (including both `third_party/` forks) and nothing else; this registers the rest with `LicenseRegistry` so `showLicensePage` is complete, and pins the `.txt` files as declared assets so they are actually in the binary.
 - `mermaid_render_service.dart` — Renders Mermaid diagrams to cached inline SVG via a shared WebView.
 - `miauw_compliance_analyzer.dart` — Scores each MIAUW EIS (Voldaan/Openstaand/Uitgesloten) from deck content + waivers.
 - `miauw_eis_catalog.dart` — The bundled offline MIAUW EIS catalog (`MiauwEisCatalog`): all 88 testable EIS, parsed from the authoritative MIAUW workbook.

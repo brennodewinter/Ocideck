@@ -47,13 +47,27 @@ disagree with what is actually built (see [`tool/sbom_build.dart`](../tool/sbom_
 | --- | --- | --- |
 | **Dart/Flutter packages** (direct + transitive) | `pubspec.lock` | version, `pkg:pub` purl, archive SHA-256, hosted URL, dependency scope, licence |
 | **Vendored JS/CSS export bundles** | `assets/web_export/MANIFEST.json` | version, `pkg:npm` purl, SHA-256, source URL, licence |
-| **Vendored plugin forks** | `pubspec.lock` (`third_party/`) | version, upstream VCS URL, licence |
+| **Vendored plugin forks** | `pubspec.lock` (`third_party/`) | version, upstream VCS URL **pinned to the exact commit**, upstream revision, SHA-256 **tree hash** of the vendored directory, licence |
 | **Bundled fonts** | `pubspec.yaml` (`flutter.fonts`) | file SHA-256, licence (OFL-1.1) |
 | **Build SDKs** | `.tool-versions`, `pubspec.yaml` | Flutter version, Dart SDK constraint |
 
 Licences are classified with the exact same logic as the compliance gate
 (`tool/license_detect.dart`, shared with `tool/check_licenses.dart`), so the
 SBOM and [`LICENSE_COMPLIANCE.md`](LICENSE_COMPLIANCE.md) always agree.
+
+> That sentence was not true for the two vendored forks until 2026-07-22: their
+> licence was **hardcoded** in the generator, and it was wrong —
+> `desktop_multi_window` was listed as MIT while the file on disk is the
+> Apache-2.0 text. Nothing is hardcoded now; both forks are classified from their
+> own `LICENSE`, like every other component.
+
+A path dependency has no pub archive, so the two forks had **no hash and no
+upstream revision** — the only components in the document a verifier could not
+check against anything. They now carry the upstream commit they were branched
+from and a **tree hash**: SHA-256 over the sorted `<relative path> <sha256>` line
+of every file in the vendored directory (dot-files excluded so it is
+machine-independent). `make sbom-verify` recomputes it, so an edit inside
+`third_party/` that is not committed with a fresh SBOM fails the gate.
 
 ## How to (re)generate
 
