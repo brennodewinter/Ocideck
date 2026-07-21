@@ -531,7 +531,7 @@ const _dutchSourceTlh = {
   'Verwijder afbeelding': 'mIllogh yIteq',
   'Geen afbeelding gekozen': 'mIllogh wIvlu\'be\'',
   'Caption / bronvermelding (bijv. © Naam Fotograaf)':
-      'por / DuHbogh (mu\'wIj © mIllogh chenmoHwI\' pong)',
+      'por / DuHbogh (lo\': © mIllogh chenmoHwI\' pong)',
   'Caption / bronvermelding': 'por / DuHbogh',
   'Beschrijving (doorzoekbaar)': 'QIj (SamlaH)',
   'Markdown inhoud': 'Markdown ngaSbogh',
@@ -607,20 +607,20 @@ const _dutchSourceTlh = {
   'resultaat': 'Segh',
   'resultaten': 'Segh',
   'Nieuwe presentatie': 'cha\'nob chu\'',
-  'Bijv. Kwartaalupdate Q4': 'mu\'wIj Q4 choH',
+  'Bijv. Kwartaalupdate Q4': 'lo\': Q4 choH',
   'Vul een titel in': 'per yIchel',
   'Aanmaken': 'yIchenmoH',
   'Slide type kiezen': 'cha\'nob Segh yIwIv',
   'Presentatie-eigenschappen': 'cha\'nob Degh',
   'Versie': 'mo\'',
-  'Bijv. Jan Jansen': 'mu\'wIj Jane Doe',
-  'Bijv. Vigilis': 'mu\'wIj Vigilis',
-  'Bijv. 2026-05-30': 'mu\'wIj 2026-05-30',
+  'Bijv. Jan Jansen': 'lo\': Jane Doe',
+  'Bijv. Vigilis': 'lo\': Vigilis',
+  'Bijv. 2026-05-30': 'lo\': 2026-05-30',
   'Beschrijving': 'QIj',
   'Korte omschrijving van de presentatie': 'cha\'nob QIj run',
   'Trefwoorden': '\'oS mu\'mey',
   'Komma-gescheiden, bijv. kwartaal, cijfers, 2026':
-      'mIvvaD chevlu\', mu\'wIj: \'ay\', mI\', 2026',
+      'mIvvaD chevlu\', lo\': \'ay\', mI\', 2026',
   'Deze gegevens worden in de markdown opgeslagen en zijn doorzoekbaar bij het openen.':
       'De\'vam Markdown-Daq pollu\' \'ej poSmoHlu\'DI\' Samlu\'laH.',
   'App-thema': 'De\'wI\' pat',
@@ -670,7 +670,7 @@ const _dutchSourceTlh = {
   'Rechtsonder': 'nIH bIng',
   'Footertekst': 'bIng mu\'',
   'bijv. Vertrouwelijk · {title} · {date}':
-      'mu\'wIj Say\'be\' · {title} · {date}',
+      'lo\': Say\'be\' · {title} · {date}',
   'Footerpositie': 'bIng mu\' Daq',
   'Tokens: {page}, {total}, {date}, {title}. Footer verschijnt op alle slides behalve titel- en sectieslides, tenzij je hem per slide uitzet.':
       'SabtaghmeH mu\'mey: {page}, {total}, {date}, {title}. per cha\'nobmey \'ej \'ay\' cha\'nobmey neH lujbe\'; Hoch cha\'nobDaq bIng mu\' \'ang, cha\'nob mob Dachop\'a\'.',
@@ -1018,7 +1018,7 @@ const _dutchSourceTlh = {
   'Gebeurtenissen': 'wanI\'mey',
   'Gebeurtenis toevoegen': 'wanI\' chel',
   'Markering': 'per',
-  'bijv. 2024': 'Da 2024',
+  'bijv. 2024': 'lo\': 2024',
   'Titel van gebeurtenis': 'wanI\' per',
   'Omschrijving (optioneel)': 'QIj (wIvlaH)',
   'Soort vraag': 'ghel segh',
@@ -1770,7 +1770,7 @@ const _dutchSourceAddTlh = <String, String>{
   'betaalportaal-acc.example.nl': 'payment-portal-acc.example.com',
   'https://app.voorbeeld': 'https://app.example',
   'bijv. hertest 2026-07-20, patch toegepast':
-      'mu\'wIj: 2026-07-20 waw\', patch lo\'lu\'',
+      'lo\': 2026-07-20 waw\', patch lo\'lu\'',
   'Titel (H1)': 'per (H1)',
   'Subtitel (H2)': 'bIng per (H2)',
   'Tussentitel (H1)': '\'ay\' nab (H1)',
@@ -1783,10 +1783,10 @@ const _dutchSourceAddTlh = <String, String>{
   'Titeltekstkleur': 'per mu\' rItlh',
   'Knippen': 'pe\'',
   'Geen achtergrondafbeelding': 'pagh \'em mIllogh',
-  'Bijv. 1.0': 'mu\'wIj 1.0',
+  'Bijv. 1.0': 'lo\': 1.0',
   'Datum': 'jaj',
   'Komma-gescheiden, bijv. OWASP WSTG@4.2':
-      'mIvvaD chevlu\', mu\'wIj: OWASP WSTG@4.2',
+      'mIvvaD chevlu\', lo\': OWASP WSTG@4.2',
   'Titel van de presentatie': '\'echletHommey per',
   'F-03 · SQL-injectie in het loginformulier':
       'F-03 · \'elmeH nav SQL-injection',
@@ -2283,7 +2283,7 @@ const _dutchSourceAddTlh = <String, String>{
   'Hulpmiddel': 'jan',
   'Referentie': '\'ang',
   'Eén per regel, bijv. Burp Suite@2026.4 | https://portswigger.net | Webproxy':
-      'wa\' Doq, Dev: Burp Suite@2026.4 | https://portswigger.net | web proxy',
+      'wa\' Doq, lo\': Burp Suite@2026.4 | https://portswigger.net | web proxy',
   'Nog geen hulpmiddelen vastgelegd — vul ze in bij Presentatie-info.':
       'jan qonlu\'be\' — Presentatie-info-Daq chel.',
   'Bijlage met hulpmiddelen toegevoegd.': 'jan tetlh chellu\'.',
@@ -2354,7 +2354,7 @@ const _dutchSourceAddTlh = <String, String>{
   'Vastleggen geblokkeerd door het classificatiebeleid.':
       'classification pab qon botlh.',
   'Ongeldige versie — gebruik vX, bijvoorbeeld v1.0.':
-      'mI\' lI\'be\' — vX yIlo\', ghItlh v1.0.',
+      'mI\' lI\'be\' — vX yIlo\', lo\': v1.0.',
   'Geen deck om vast te leggen.': 'qonmeH deck tu\'lu\'be\'.',
   'Vastleggen mislukt:': 'qon luj:',
   'Concept mergen': 'concept DamuvmoH',
@@ -2365,7 +2365,7 @@ const _dutchSourceAddTlh = <String, String>{
   'Versie vastleggen': 'mI\' DaqonmoH',
   'Zet een release-tag op de kop van de hoofdbranch — de versie die je hebt gepresenteerd.':
       'nIvbogh branch nach release tag lan — mI\' Dacha\'pu\'bogh.',
-  'Gebruik vX, bijvoorbeeld v1.0.': 'vX yIlo\', ghItlh v1.0.',
+  'Gebruik vX, bijvoorbeeld v1.0.': 'vX yIlo\', lo\': v1.0.',
   'Vastleggen': 'DaqonmoH',
   'Uitbrengen ter review…': 'review ngeH…',
   'Uitbrengen ter review': 'review ngeH',
@@ -2704,7 +2704,7 @@ const _dutchSourceAddTlh = <String, String>{
   'Zet CVE opzoeken (online) aan in Instellingen → Beveiliging om online in CVE\'s te zoeken.':
       'CVE-mey online SammeH Settings → Security-Daq CVE nej (online) yIchu\'.',
   'Zoek CVE…': 'CVE yInej…',
-  'Zoek op CVE-id, bijv. 2021-44228': 'CVE id-Daq yInej, ghItlh 2021-44228',
+  'Zoek op CVE-id, bijv. 2021-44228': 'CVE id-Daq yInej, lo\': 2021-44228',
   'Zoeken': 'yInej',
   'Hertest': 'nIDqa\'',
   'Niet hertest': 'nIDqa\'be\'',
