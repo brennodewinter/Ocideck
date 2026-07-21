@@ -143,6 +143,12 @@ class FullscreenPresenter extends StatefulWidget {
   /// instelling `showRehearsalSummary` (standaard aan).
   final bool showRehearsalSummary;
 
+  /// Of het open deck vergrendeld is op 'alleen afspelen' ([Deck.playOnly]).
+  /// Dan verschijnt het tijdenoverzicht nooit: een vergrendeld deck is bedoeld
+  /// om áf te spelen, en de meetgegevens van wie het afspeelt gaan de maker van
+  /// het deck niets aan.
+  final bool playOnly;
+
   /// When set, this presenter drives a separate audience (beamer) window: the
   /// laptop shows the presenter view, the slide goes to [audience]. Null
   /// for the classic single-screen mode.
@@ -173,6 +179,7 @@ class FullscreenPresenter extends StatefulWidget {
     this.allowRemoteMedia = false,
     this.targetDuration,
     this.showRehearsalSummary = true,
+    this.playOnly = false,
     this.audience,
     this.initialAnnotations = const {},
     this.onAnnotationsChanged,
@@ -197,6 +204,7 @@ class FullscreenPresenter extends StatefulWidget {
     bool allowRemoteMedia = false,
     Duration? targetDuration,
     bool showRehearsalSummary = true,
+    bool playOnly = false,
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
     ValueChanged<Slide>? onSlideChanged,
@@ -242,6 +250,7 @@ class FullscreenPresenter extends StatefulWidget {
         allowRemoteMedia: allowRemoteMedia,
         targetDuration: targetDuration,
         showRehearsalSummary: showRehearsalSummary,
+        playOnly: playOnly,
         annotations: annotations,
         onAnnotationsChanged: onAnnotationsChanged,
         onSlideChanged: onSlideChanged,
@@ -263,6 +272,7 @@ class FullscreenPresenter extends StatefulWidget {
         allowRemoteMedia: allowRemoteMedia,
         targetDuration: targetDuration,
         showRehearsalSummary: showRehearsalSummary,
+        playOnly: playOnly,
         annotations: annotations,
         onAnnotationsChanged: onAnnotationsChanged,
         onSlideChanged: onSlideChanged,
@@ -286,6 +296,7 @@ class FullscreenPresenter extends StatefulWidget {
     bool allowRemoteMedia = false,
     Duration? targetDuration,
     bool showRehearsalSummary = true,
+    bool playOnly = false,
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
     ValueChanged<Slide>? onSlideChanged,
@@ -317,6 +328,7 @@ class FullscreenPresenter extends StatefulWidget {
               allowRemoteMedia: allowRemoteMedia,
               targetDuration: targetDuration,
               showRehearsalSummary: showRehearsalSummary,
+              playOnly: playOnly,
               initialAnnotations: annotations,
               onAnnotationsChanged: onAnnotationsChanged,
               onSlideChanged: onSlideChanged,
@@ -352,6 +364,7 @@ class FullscreenPresenter extends StatefulWidget {
     bool allowRemoteMedia = false,
     Duration? targetDuration,
     bool showRehearsalSummary = true,
+    bool playOnly = false,
     Map<String, List<InkStroke>> annotations = const {},
     void Function(Map<String, List<InkStroke>>)? onAnnotationsChanged,
     ValueChanged<Slide>? onSlideChanged,
@@ -424,6 +437,7 @@ class FullscreenPresenter extends StatefulWidget {
           showClassificationWatermark: showClassificationWatermark,
           allowRemoteMedia: allowRemoteMedia,
           showRehearsalSummary: showRehearsalSummary,
+          playOnly: playOnly,
           annotations: annotations,
           onAnnotationsChanged: onAnnotationsChanged,
           onSlideChanged: onSlideChanged,
@@ -454,6 +468,7 @@ class FullscreenPresenter extends StatefulWidget {
               showClassificationWatermark: showClassificationWatermark,
               allowRemoteMedia: allowRemoteMedia,
               showRehearsalSummary: showRehearsalSummary,
+              playOnly: playOnly,
               audience: audienceHandle,
               initialAnnotations: annotations,
               onAnnotationsChanged: onAnnotationsChanged,
@@ -850,6 +865,11 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
   /// Toon na afloop de oefenrun-samenvatting wanneer de deck-schakelaar aan
   /// staat. Sessie-only: niets wordt opgeslagen.
   Future<void> _maybeShowRehearsalSummary() async {
+    // Een vergrendeld deck ('alleen afspelen') toont het overzicht nooit. Dat
+    // is geen instelling die de afspeler kan aanzetten: het deck is bedoeld om
+    // af te spelen, en wie het afspeelt hoort achteraf geen meetrapport over
+    // zichzelf te krijgen. Dus vóór de schakelaar, niet erin verweven.
+    if (widget.playOnly) return;
     // Tijd wordt altijd gemeten; deze schakelaar bepaalt enkel of het
     // eindscherm verschijnt (uit = stille modus, bv. bij een echte presentatie).
     // Staat de schakelaar aan, dan verschijnt het altijd — ook een korte run

@@ -878,6 +878,7 @@ void presentDeck(
     showClassificationWatermark: settings.classificationWatermarkEnabled,
     allowRemoteMedia: settings.allowRemoteMedia,
     showRehearsalSummary: deck.showRehearsalSummary,
+    playOnly: deck.playOnly,
     targetDuration: () {
       final secs = deck.presentationTargetSeconds;
       return secs > 0 ? Duration(seconds: secs) : null;

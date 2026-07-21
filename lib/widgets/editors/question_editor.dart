@@ -7,8 +7,12 @@ import '../../services/image_service.dart';
 import '_editor_field.dart';
 import '../../theme/app_theme.dart';
 
-/// Editor for a question slide. Today only multiple choice is wired up; the
-/// `kind` dropdown is present so future question kinds slot in here.
+part 'question_editor_kinds.dart';
+
+/// Editor for a question slide. De soort bepaalt welke velden verschijnen: een
+/// antwoordlijst, een stelling, twee afbeeldingen of een getypt antwoord met
+/// een overeenkomstdrempel. De soorten zonder antwoordlijst staan in
+/// `question_editor_kinds.dart`.
 class QuestionEditor extends StatefulWidget {
   final Slide slide;
   final ValueChanged<Slide> onUpdate;
@@ -37,6 +41,13 @@ class _QuestionEditorState extends State<QuestionEditor> {
   late final TextEditingController _timeLimit;
   late List<TextEditingController> _answers;
   late List<bool> _correct;
+
+  /// De afbeelding per antwoord (alleen bij een beeldparen-vraag). Loopt gelijk
+  /// op met [_answers]; leeg bij een tekstantwoord.
+  late List<String> _images;
+
+  /// Hoe dicht een getypt antwoord bij het juiste moet liggen (0..1).
+  late double _similarity;
   late int _optionCount;
   late QuestionOnWrong _onWrong;
   late QuestionKind _kind;
@@ -58,12 +69,19 @@ class _QuestionEditorState extends State<QuestionEditor> {
     _onWrong = spec.onWrong;
     _kind = spec.kind;
     _statementIsTrue = spec.statementIsTrue;
+    _similarity = spec.similarityThreshold;
     final answers = spec.answers.isEmpty
         ? [const QuestionAnswer()]
         : spec.answers;
     _answers = answers.map((a) => _makeCtrl(a.text)).toList();
     _correct = answers.map((a) => a.correct).toList();
+    _images = answers.map((a) => a.image).toList();
   }
+
+  /// Herbouw-hulp voor de `part`-uitbreiding hieronder: een extensie mag
+  /// [State.setState] niet rechtstreeks aanroepen (het is protected), maar het
+  /// gedrag is identiek.
+  void _rebuild(VoidCallback fn) => setState(fn);
 
   TextEditingController _makeCtrl(String text) {
     final c = TextEditingController(text: text);
@@ -76,12 +94,17 @@ class _QuestionEditorState extends State<QuestionEditor> {
     prompt: _prompt.text,
     answers: [
       for (var i = 0; i < _answers.length; i++)
-        QuestionAnswer(text: _answers[i].text, correct: _correct[i]),
+        QuestionAnswer(
+          text: _answers[i].text,
+          correct: _correct[i],
+          image: _images[i],
+        ),
     ],
     optionCount: _optionCount,
     timeLimitSeconds: int.tryParse(_timeLimit.text.trim()) ?? 0,
     onWrong: _onWrong,
     statementIsTrue: _statementIsTrue,
+    similarityThreshold: _similarity,
   );
 
   void _emit() {
@@ -97,6 +120,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
     setState(() {
       _answers.add(_makeCtrl(''));
       _correct.add(false);
+      _images.add('');
     });
     _emit();
   }
@@ -113,6 +137,9 @@ class _QuestionEditorState extends State<QuestionEditor> {
       final flag = _correct[i];
       _correct[i] = _correct[j];
       _correct[j] = flag;
+      final image = _images[i];
+      _images[i] = _images[j];
+      _images[j] = image;
     });
     _emit();
   }
@@ -124,6 +151,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
       _answers[i].dispose();
       _answers.removeAt(i);
       _correct.removeAt(i);
+      _images.removeAt(i);
     });
     _emit();
   }
@@ -145,6 +173,13 @@ class _QuestionEditorState extends State<QuestionEditor> {
     final isTrueFalse = _kind == QuestionKind.trueFalse;
     final isMulti = _kind == QuestionKind.multipleCorrect;
     final isOrdering = _kind == QuestionKind.ordering;
+    final isImagePair = _kind == QuestionKind.imagePair;
+    final isOpenText = _kind == QuestionKind.openText;
+    // Het aantal getoonde opties geldt alleen waar er iets uit een pool
+    // getrokken wordt. Bij 'meerdere juiste' komen ze allemaal op het scherm,
+    // en de andere soorten hebben helemaal geen optielijst.
+    final drawsFromPool =
+        _kind == QuestionKind.multipleChoice || _kind == QuestionKind.ordering;
     final filledCorrect = [
       for (var i = 0; i < _answers.length; i++)
         if (_correct[i] && _answers[i].text.trim().isNotEmpty) i,
@@ -180,10 +215,21 @@ class _QuestionEditorState extends State<QuestionEditor> {
               value: QuestionKind.ordering,
               child: Text(l10n.d('Volgorde')),
             ),
+            DropdownMenuItem(
+              value: QuestionKind.imagePair,
+              child: Text(l10n.d('Twee afbeeldingen')),
+            ),
+            DropdownMenuItem(
+              value: QuestionKind.openText,
+              child: Text(l10n.d('Getypt antwoord')),
+            ),
           ],
           onChanged: (value) {
             if (value == null) return;
-            setState(() => _kind = value);
+            setState(() {
+              _kind = value;
+              if (value == QuestionKind.imagePair) _ensureImagePairSlots();
+            });
             _emit();
           },
         ),
@@ -201,6 +247,10 @@ class _QuestionEditorState extends State<QuestionEditor> {
           ..._buildTrueFalseSection(l10n)
         else if (isOrdering)
           ..._orderingSection(l10n)
+        else if (isImagePair)
+          ..._imagePairSection(l10n)
+        else if (isOpenText)
+          ..._openTextSection(l10n)
         else
           ..._answersSection(
             l10n,
@@ -210,7 +260,7 @@ class _QuestionEditorState extends State<QuestionEditor> {
           ),
         const SizedBox(height: 20),
         const SectionLabel('Weergave'),
-        if (!isTrueFalse) ...[
+        if (drawsFromPool) ...[
           _buildOptionCountRow(l10n),
           const SizedBox(height: 12),
         ],
@@ -253,7 +303,10 @@ class _QuestionEditorState extends State<QuestionEditor> {
           style: TextStyle(fontSize: 12, color: AppTheme.slate500),
         ),
         const SizedBox(height: 20),
-        ..._imageSection(),
+        // Een beeldparen-vraag heeft haar afbeeldingen al; een derde,
+        // decoratieve afbeelding erbij maakt alleen maar onduidelijk welke van
+        // de drie het antwoord is.
+        if (!isImagePair) ..._imageSection(),
       ],
     );
   }
