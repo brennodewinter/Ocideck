@@ -820,12 +820,21 @@ class FileService {
         try {
           raw = f.content;
         } catch (e) {
-          logWarning(
-            'FileService.decodePackageEntries: unreadable encrypted entry '
-            'skipped (${f.name})',
+          // **Fail-closed.** WinZip-AES toetst per lid een HMAC; `archive`
+          // gooit hier ("macs don't match") zodra die niet klopt. Dat is geen
+          // leesfout maar een bewijs van wijziging ná het versleutelen.
+          //
+          // Dit lid overslaan en doorgaan leverde stil een pakket op waar één
+          // bestand uit verdwenen was — precies het lid dat een aanvaller
+          // eruit wilde hebben. Wie een pakket versleutelt, doet dat om te
+          // kunnen vertrouwen wat eruit komt; dan is een half pakket zonder
+          // melding de verkeerde uitkomst. Het hele pakket wordt geweigerd.
+          logError(
+            'FileService.decodePackageEntries: encrypted entry failed its '
+            'integrity check, refusing the package (${f.name})',
             e,
           );
-          continue;
+          return null;
         }
         if (extracted + raw.length > maxBytes) {
           logWarning(
