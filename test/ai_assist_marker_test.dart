@@ -103,7 +103,7 @@ void main() {
       expect(n.slidesBlockingSeal, isEmpty);
       n.finalizeAndSeal();
       expect(n.state.deck!.finalized, isTrue);
-      expect(n.state.deck!.sealHash, isNotEmpty);
+      expect(n.state.deck!.sealAt, isNotEmpty);
     });
   });
 }

@@ -71,9 +71,19 @@ void main() {
   group('setSealTimestampToken', () {
     test('stamps the token onto a sealed deck', () {
       final n = _notifier();
-      n.newDeck('Verzegeld');
-      n.finalizeAndSeal();
-      expect(n.state.deck!.sealHash, isNotEmpty, reason: 'deck is sealed');
+      // Een deck met een vastgelegd zegel: de hash ontstaat pas bij het
+      // opslaan (hij gaat over de bestandsbytes), dus die zetten we hier zoals
+      // de opslagroute dat doet.
+      n.loadDeck(
+        Deck(
+          title: 'Verzegeld',
+          slides: [Slide.create(SlideType.title)],
+          finalized: true,
+          sealAlgo: 'sha-512',
+          sealHash: 'a' * 128,
+          sealAt: '2026-07-10T12:00:00.000Z',
+        ),
+      );
 
       n.setSealTimestampToken('base64url-tsr-token');
 

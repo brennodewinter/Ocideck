@@ -89,6 +89,30 @@ class DocumentIntegrity {
   String computeCanonicalHash(Deck deck) =>
       hashMarkdown(_md.canonicalContentForSeal(deck));
 
+  /// [deck] nadat [markdown] als zijn `.md` is weggeschreven — de enige plek
+  /// waar een zegelhash ontstaat.
+  ///
+  /// Twee regels, en ze zijn allebei belangrijk.
+  ///
+  /// [Deck.fileHash] wordt altijd bijgewerkt: dat is de *waargenomen* toestand
+  /// van het bestand. Zonder deze regel zou een deck na opslaan nog rondlopen
+  /// met de hash van vóór de opslag.
+  ///
+  /// [Deck.sealHash] wordt alleen gezet als hij nog leeg is, en dat is de
+  /// tamper-evidence zelf: bij het verzegelen bestond het bestand nog niet, dus
+  /// de eerste opslag legt de hash vast. Elke opslag daarna raakt hem niet meer
+  /// aan. Zou hij opnieuw worden uitgerekend, dan keurde elke wijziging zichzelf
+  /// goed en betekende het zegel niets meer.
+  static Deck recordWrittenBytes(Deck deck, String markdown) {
+    final hash = hashMarkdown(markdown);
+    final fresh = deck.finalized && deck.sealHash.isEmpty;
+    return deck.copyWith(
+      fileHash: hash,
+      sealHash: fresh ? hash : null,
+      sealForm: fresh ? SealForm.fileBytes : null,
+    );
+  }
+
   /// Verify [deck] against its stored seal.
   IntegrityStatus verify(Deck deck) {
     if (!deck.finalized) return IntegrityStatus.notSealed;

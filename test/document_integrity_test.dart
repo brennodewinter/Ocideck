@@ -19,15 +19,10 @@ Deck _deck({String title = 'Rapport', List<Slide>? slides}) => Deck(
       ],
 );
 
-/// Wat de opslagroute doet: de bytes wegschrijven en de hash daarvan vastleggen.
-/// Hier nagebootst zonder schijf, zodat de verificatieregels los van de IO te
-/// toetsen zijn.
-Deck _writeAndRecord(MarkdownService md, Deck deck) {
-  final markdown = md.generateDeck(deck);
-  final hash = DocumentIntegrity.hashMarkdown(markdown);
-  final fresh = deck.finalized && deck.sealHash.isEmpty;
-  return deck.copyWith(fileHash: hash, sealHash: fresh ? hash : null);
-}
+/// Wat de opslagroute doet, zonder schijf: de bytes serialiseren en er dezelfde
+/// vastleggingsregel op loslaten die `_writeProject` gebruikt.
+Deck _writeAndRecord(MarkdownService md, Deck deck) =>
+    DocumentIntegrity.recordWrittenBytes(deck, md.generateDeck(deck));
 
 void main() {
   final md = MarkdownService();
