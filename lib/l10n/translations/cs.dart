@@ -1790,6 +1790,8 @@ const _dutchSourceAddCs = <String, String>{
       '•  Vložené video z YouTube nebo Vimea načte přehrávač od této služby.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
       '•  V prohlížeči: odmítne-li prohlížeč načíst adresu přímo, zkusí to OciDeck přes server, ze kterého aplikace pochází; ta adresa se pak dostane na onen server.',
+  'Intrekken is niet vastgelegd. Bij de volgende start geldt uw toestemming weer.':
+      'Odvolání nebylo uloženo. Při příštím spuštění bude váš souhlas opět platit.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Nadpis oddílu, který uvádí novou část prezentace. Buďte struční. Přidejte obrázek na pozadí z knihovny obrázků.',
   'Bronnen doorzoeken…': 'Prohledávání zdrojů…',

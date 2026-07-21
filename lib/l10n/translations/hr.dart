@@ -1794,6 +1794,8 @@ const _dutchSourceAddHr = <String, String>{
       '•  Ugrađeni YouTube ili Vimeo videozapis učitava reproduktor s te usluge.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
       '•  U pregledniku: ako preglednik odbije izravno dohvatiti adresu, OciDeck pokušava ponovno preko poslužitelja s kojega je aplikacija došla; ta adresa tada stiže do toga poslužitelja.',
+  'Intrekken is niet vastgelegd. Bij de volgende start geldt uw toestemming weer.':
+      'Povlačenje nije spremljeno. Pri sljedećem pokretanju vaša privola ponovno vrijedi.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Naslov odjeljka koji najavljuje novi dio prezentacije. Neka bude kratak. Iz knjižnice slika dodajte pozadinsku sliku.',
   'Bronnen doorzoeken…': 'Pretraživanje izvora…',

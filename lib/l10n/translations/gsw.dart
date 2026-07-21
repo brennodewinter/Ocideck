@@ -1791,6 +1791,8 @@ const _dutchSourceAddGsw = <String, String>{
       '•  Es iibunde YouTube- oder Vimeo-Video ladt de Player bi dem Dienscht.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
       '•  Im Browser: wenn de Browser en Adrässe nöd direkt abhole will, probiert s OciDeck über de Server, wo d App härchunt; die Adrässe chunt denn zu dem Server.',
+  'Intrekken is niet vastgelegd. Bij de volgende start geldt uw toestemming weer.':
+      'De Widerruef isch nöd gspeicheret worde. Bim nöchschte Schtart gilt dini Zueschtimmig wider.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'E Zwüschetitel wo en neue Teil vo de Präsentation aakündigt. Halt en churz. Über d Bildbibliothek chasch es Hintergrundbild derzuetue.',
   'Bronnen doorzoeken…': 'Quelle wärde durchsuecht…',

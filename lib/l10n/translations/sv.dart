@@ -1786,6 +1786,8 @@ const _dutchSourceAddSv = <String, String>{
       '•  En inbäddad YouTube- eller Vimeo-video hämtar spelaren från den tjänsten.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
       '•  I webbläsaren: om webbläsaren vägrar hämta en adress direkt försöker OciDeck igen via den server appen kom från; adressen når då den servern.',
+  'Intrekken is niet vastgelegd. Bij de volgende start geldt uw toestemming weer.':
+      'Återkallelsen sparades inte. Vid nästa start gäller ditt samtycke igen.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'En mellanrubrik som aviserar en ny del av presentationen. Håll den kort. Lägg till en bakgrundsbild via bildbiblioteket.',
   'Bronnen doorzoeken…': 'Söker i källor…',

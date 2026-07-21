@@ -1778,6 +1778,8 @@ const _dutchSourceAddEt = <String, String>{
       '•  Manustatud YouTube\'i või Vimeo video laadib mängija sellelt teenuselt.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
       '•  Brauseris: kui brauser keeldub aadressi otse hankimast, proovib OciDeck seda uuesti selle serveri kaudu, kust rakendus tuli; siis jõuab see aadress tolle serverini.',
+  'Intrekken is niet vastgelegd. Bij de volgende start geldt uw toestemming weer.':
+      'Tagasivõtmist ei salvestatud. Järgmisel käivitamisel kehtib teie nõusolek taas.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Vahepealkiri, mis kuulutab ette esitluse uue osa. Hoia see lühike. Lisa taustapilt pildikogust.',
   'Bronnen doorzoeken…': 'Otsitakse allikatest…',

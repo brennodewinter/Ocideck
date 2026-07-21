@@ -1799,6 +1799,8 @@ const _dutchSourceAddPl = <String, String>{
       '•  Osadzony film z YouTube lub Vimeo ładuje odtwarzacz z tej usługi.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
       '•  W przeglądarce: jeśli przeglądarka odmówi bezpośredniego pobrania adresu, OciDeck próbuje ponownie przez serwer, z którego pochodzi aplikacja; ten adres trafia wtedy do tego serwera.',
+  'Intrekken is niet vastgelegd. Bij de volgende start geldt uw toestemming weer.':
+      'Cofnięcie zgody nie zostało zapisane. Przy następnym uruchomieniu zgoda znów będzie obowiązywać.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Nagłówek sekcji zapowiadający nową część prezentacji. Zwięźle. Dodaj obraz tła z biblioteki obrazów.',
   'Bronnen doorzoeken…': 'Przeszukiwanie źródeł…',

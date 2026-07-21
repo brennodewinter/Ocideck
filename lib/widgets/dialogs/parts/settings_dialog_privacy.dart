@@ -73,10 +73,29 @@ extension _SettingsPrivacy on _SettingsDialogState {
             child: Text(l10n.t('cancel')),
           ),
           ElevatedButton(
-            onPressed: () {
-              ref.read(consentProvider.notifier).revokeConsent();
+            // Bewust wachten op het wegschrijven vóór het sluiten. Mislukt het,
+            // dan blijft de vlag op schijf op "toegestaan" staan: deze sessie
+            // gedraagt zich als ingetrokken, maar de volgende start toont de
+            // toestemmingspoort NIET meer. Dat stil laten gebeuren is het
+            // ergste geval — de gebruiker denkt te hebben ingetrokken.
+            onPressed: () async {
+              final messenger = ScaffoldMessenger.of(context);
+              final navigator = Navigator.of(context);
+              final ok = await ref
+                  .read(consentProvider.notifier)
+                  .revokeConsent();
+              if (!ctx.mounted) return;
               Navigator.pop(ctx);
-              Navigator.pop(context);
+              navigator.pop();
+              if (!ok) {
+                showErrorSnackBar(
+                  messenger,
+                  l10n,
+                  l10n.d(
+                    'Intrekken is niet vastgelegd. Bij de volgende start geldt uw toestemming weer.',
+                  ),
+                );
+              }
             },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.red[600]),
             child: Text(

@@ -1823,6 +1823,8 @@ const _dutchSourceAddGa = <String, String>{
       '•  Luchtaíonn físeán YouTube nó Vimeo leabaithe an seinnteoir ón tseirbhís sin.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
       '•  Sa bhrabhsálaí: má dhiúltaíonn an brabhsálaí seoladh a fháil go díreach, déanann OciDeck iarracht eile tríd an bhfreastalaí ar tháinig an feidhmchlár uaidh; sroicheann an seoladh sin an freastalaí sin ansin.',
+  'Intrekken is niet vastgelegd. Bij de volgende start geldt uw toestemming weer.':
+      'Níor sábháladh an cúlghairm. Ag an gcéad tosú eile, beidh do thoiliú i bhfeidhm arís.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Ceannteideal rannóige a fhógraíonn cuid nua den chur i láthair. Coinnigh gearr é. Cuir íomhá chúlra leis ón leabharlann íomhánna.',
   'Bronnen doorzoeken…': 'Ag cuardach foinsí…',

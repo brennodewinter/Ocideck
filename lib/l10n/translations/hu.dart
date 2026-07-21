@@ -1791,6 +1791,8 @@ const _dutchSourceAddHu = <String, String>{
       '•  A beágyazott YouTube- vagy Vimeo-videó a lejátszót az adott szolgáltatástól tölti be.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
       '•  A böngészőben: ha a böngésző megtagadja egy cím közvetlen letöltését, az OciDeck újra próbálja azon a kiszolgálón keresztül, ahonnan az alkalmazás érkezett; így az a cím eljut arra a kiszolgálóra.',
+  'Intrekken is niet vastgelegd. Bij de volgende start geldt uw toestemming weer.':
+      'A visszavonás nem lett elmentve. A következő indításkor a hozzájárulása ismét érvényes lesz.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Szakaszcím, amely a bemutató új részét jelzi. Tartsd röviden. Adj hozzá háttérképet a képtárból.',
   'Bronnen doorzoeken…': 'Keresés a forrásokban…',

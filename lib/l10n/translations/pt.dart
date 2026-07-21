@@ -1817,6 +1817,8 @@ const _dutchSourceAddPt = <String, String>{
       '•  Um vídeo do YouTube ou do Vimeo incorporado carrega o leitor a partir desse serviço.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
       '•  No navegador: se o navegador recusar obter um endereço diretamente, o OciDeck tenta de novo através do servidor de onde a aplicação veio; esse endereço chega então a esse servidor.',
+  'Intrekken is niet vastgelegd. Bij de volgende start geldt uw toestemming weer.':
+      'A revogação não foi guardada. No próximo arranque o seu consentimento volta a ser válido.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Um subtítulo de secção que anuncia uma nova parte da apresentação. Seja breve. Adicione uma imagem de fundo a partir da biblioteca de imagens.',
   'Bronnen doorzoeken…': 'A pesquisar nas fontes…',

@@ -1762,6 +1762,8 @@ const _dutchSourceAddTlh = <String, String>{
       '•  YouTube ghap Vimeo HaSta lulanpu\'bogh \'e\' lI\'wI\' Qu\'vetlhvo\' ghajlu\'.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
       '•  browserDaq: Daq nIH tlhap \'e\' lajQo\'chugh browser, vaj app ghoSpu\'bogh Server lo\'taHvIS nID OciDeck; vaj Daqvetlh Sam Servervetlh.',
+  'Intrekken is niet vastgelegd. Bij de volgende start geldt uw toestemming weer.':
+      'chaw\' Dateb \'ach polbe\'lu\'. OciDeck Dataghqa\'DI\', chaw\'lIj tu\'lu\'qa\'.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'presentation \'ay\' chu\' \'ang per. tItlhutlh. nagh beQmey qach vabDot chal DIr chelmoH.',
   'Bronnen doorzoeken…': 'De\' nejlI\'…',

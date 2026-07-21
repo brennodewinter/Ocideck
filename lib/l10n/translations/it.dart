@@ -740,6 +740,8 @@ const _dutchSourceAddIt = {
       '•  Un video YouTube o Vimeo incorporato carica il lettore da quel servizio.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
       '•  Nel browser: se il browser rifiuta di recuperare un indirizzo direttamente, OciDeck riprova tramite il server da cui proviene l\'app; quell\'indirizzo raggiunge allora quel server.',
+  'Intrekken is niet vastgelegd. Bij de volgende start geldt uw toestemming weer.':
+      'La revoca non è stata salvata. Al prossimo avvio il suo consenso sarà di nuovo valido.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Un titolo di sezione che annuncia una nuova parte della presentazione. Mantienilo breve. Aggiungi un\'immagine di sfondo dalla libreria immagini.',
   'Bronnen doorzoeken…': 'Ricerca nelle fonti…',

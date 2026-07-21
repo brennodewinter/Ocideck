@@ -1795,6 +1795,8 @@ const _dutchSourceAddLt = <String, String>{
       '•  Įterptas YouTube arba Vimeo vaizdo įrašas įkelia grotuvą iš tos paslaugos.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
       '•  Naršyklėje: jei naršyklė atsisako paimti adresą tiesiogiai, OciDeck bando dar kartą per serverį, iš kurio atkeliavo programa; tada tas adresas pasiekia tą serverį.',
+  'Intrekken is niet vastgelegd. Bij de volgende start geldt uw toestemming weer.':
+      'Atšaukimas nebuvo išsaugotas. Kitą kartą paleidus jūsų sutikimas vėl galios.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Skyriaus antraštė, skelbianti naują pristatymo dalį. Laikykite ją trumpą. Pridėkite fono vaizdą iš vaizdų bibliotekos.',
   'Bronnen doorzoeken…': 'Ieškoma šaltiniuose…',

@@ -2769,4 +2769,6 @@ const _dutchSourceAddTr = <String, String>{
       '•  Gömülü bir YouTube veya Vimeo videosu oynatıcıyı o hizmetten yükler.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
       '•  Tarayıcıda: tarayıcı bir adresi doğrudan almayı reddederse OciDeck bunu uygulamanın geldiği sunucu üzerinden yeniden dener; o adres böylece o sunucuya ulaşır.',
+  'Intrekken is niet vastgelegd. Bij de volgende start geldt uw toestemming weer.':
+      'Geri çekme kaydedilmedi. Bir sonraki başlatmada onayınız yeniden geçerli olur.',
 };

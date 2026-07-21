@@ -1810,6 +1810,8 @@ const _dutchSourceAddBg = <String, String>{
       '•  Вградено видео от YouTube или Vimeo зарежда плейъра от съответната услуга.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
       '•  В браузъра: ако браузърът откаже да извлече адрес директно, OciDeck опитва отново през сървъра, от който идва приложението; тогава този адрес стига до онзи сървър.',
+  'Intrekken is niet vastgelegd. Bij de volgende start geldt uw toestemming weer.':
+      'Оттеглянето не беше запазено. При следващото стартиране съгласието ви ще важи отново.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Заглавие на раздел, което обявява нова част от презентацията. Дръжте го кратко. Добавете фоново изображение от библиотеката с изображения.',
   'Bronnen doorzoeken…': 'Търсене в източниците…',

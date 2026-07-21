@@ -1803,6 +1803,8 @@ const _dutchSourceAddLa = <String, String>{
       '•  Pellicula YouTube vel Vimeo inserta lusorem ab illo ministerio onerat.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
       '•  In navigatro: si navigatrum inscriptionem directe petere recusat, OciDeck per servitorem unde applicatio venit iterum conatur; illa inscriptio tunc ad illum servitorem pervenit.',
+  'Intrekken is niet vastgelegd. Bij de volgende start geldt uw toestemming weer.':
+      'Retractio non servata est. Cum rursus incohabis, consensus tuus iterum valebit.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Titulus partis qui novam praesentationis partem nuntiat. Brevem serva. Ex bibliotheca imaginum imaginem fundi adde.',
   'Bronnen doorzoeken…': 'Fontes perscrutans…',

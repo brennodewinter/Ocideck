@@ -1809,6 +1809,8 @@ const _dutchSourceAddMt = <String, String>{
       '•  Vidjow inkorporat minn YouTube jew Vimeo jgħabbi l-plejer minn dak is-servizz.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
       '•  Fil-brawżer: jekk il-brawżer jirrifjuta li jġib indirizz direttament, OciDeck jerġa\' jipprova permezz tas-server li minnu ġiet l-app; dak l-indirizz imbagħad jasal għand dak is-server.',
+  'Intrekken is niet vastgelegd. Bij de volgende start geldt uw toestemming weer.':
+      'L-irtirar ma ġiex issejvjat. Fil-bidu li jmiss il-kunsens tiegħek ikun validu mill-ġdid.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Intestatura ta\' taqsima li tħabbar parti ġdida tal-preżentazzjoni. Żommha qasira. Żid immaġni ta\' sfond mil-librerija tal-immaġini.',
   'Bronnen doorzoeken…': 'Tfittex fis-sorsi…',

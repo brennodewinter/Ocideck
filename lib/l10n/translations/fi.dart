@@ -1787,6 +1787,8 @@ const _dutchSourceAddFi = <String, String>{
       '•  Upotettu YouTube- tai Vimeo-video lataa soittimen kyseiseltä palvelulta.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
       '•  Selaimessa: jos selain kieltäytyy noutamasta osoitetta suoraan, OciDeck yrittää uudelleen sen palvelimen kautta, jolta sovellus tuli; osoite päätyy silloin tuolle palvelimelle.',
+  'Intrekken is niet vastgelegd. Bij de volgende start geldt uw toestemming weer.':
+      'Peruutusta ei tallennettu. Seuraavalla käynnistyskerralla suostumuksesi on jälleen voimassa.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Osion väliotsikko, joka ilmoittaa esityksen uudesta osasta. Pidä se lyhyenä. Lisää taustakuva kuvakirjastosta.',
   'Bronnen doorzoeken…': 'Haetaan lähteistä…',
