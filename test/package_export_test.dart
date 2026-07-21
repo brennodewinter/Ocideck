@@ -76,6 +76,52 @@ void main() {
     },
   );
 
+  // Een pakket is bedoeld om weg te geven: wat er niet in zit, ziet de
+  // ontvanger niet. Een afbeelding in de vrije tekst hoort er dus net zo goed
+  // in als eentje in een afbeeldingsveld.
+  test('export then import bundles an image from the free text', () async {
+    final srcImg = File(p.join(tmp.path, 'tekstfoto.png'))
+      ..writeAsBytesSync([5, 6, 7, 8]);
+
+    final deck = Deck(
+      title: 'Tekstdeck',
+      slides: [
+        Slide.create(SlideType.freeMarkdown).copyWith(
+          title: 'Verhaal',
+          customMarkdown: 'Zie ![w:600 de foto](${srcImg.path}) hierboven.',
+        ),
+      ],
+    );
+
+    final zipPath = p.join(tmp.path, 'tekst.ocideck');
+    await file.exportPackage(deck, zipPath);
+
+    // Het lid zit in het archief...
+    final members = ZipDecoder()
+        .decodeBytes(File(zipPath).readAsBytesSync())
+        .files
+        .map((f) => f.name);
+    expect(members, contains('images/tekstfoto.png'));
+
+    // ...en na import wijst de tekst ernaar, projectrelatief.
+    final out = Directory(p.join(tmp.path, 'out_tekst'))..createSync();
+    final mdPath = await file.importPackageBytes(
+      File(zipPath).readAsBytesSync(),
+      out.path,
+    );
+    final imported = await file.openDeck(mdPath!);
+    expect(
+      imported!.slides.single.customMarkdown,
+      contains('![w:600 de foto](images/tekstfoto.png)'),
+    );
+    expect(
+      File(
+        p.join(imported.projectPath!, 'images', 'tekstfoto.png'),
+      ).readAsBytesSync(),
+      [5, 6, 7, 8],
+    );
+  });
+
   test('export then import round-trips user notes sidecar', () async {
     final slide = Slide.create(SlideType.bullets).copyWith(title: 'Een');
     final deck = Deck(

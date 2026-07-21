@@ -31,6 +31,7 @@ import 'caption_service.dart';
 import 'image_service.dart';
 import 'markdown_safety.dart';
 import 'markdown_service.dart';
+import 'slide_image_refs.dart';
 import 'web_asset_store.dart';
 
 part 'parts/file_service_net.dart';

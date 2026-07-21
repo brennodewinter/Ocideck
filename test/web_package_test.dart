@@ -115,6 +115,47 @@ void main() {
       },
     );
 
+    // Ook een `![…](…)` in de vrije tekst wijst naar een lid van het pakket,
+    // en moet dus dezelfde weg naar het geheugen lopen — anders opent het deck
+    // met een verwijzing naar een bestand dat alleen ín het archief bestaat.
+    test('een afbeelding in de vrije tekst gaat ook mee', () async {
+      final container = _container();
+      final md = container.read(markdownServiceProvider);
+      final deck = Deck(
+        title: 'Tekstdeck',
+        slides: [
+          Slide.create(SlideType.freeMarkdown).copyWith(
+            title: 'Verhaal',
+            customMarkdown: 'Zie ![alt](images/tekstfoto.png) hierboven.',
+          ),
+        ],
+      );
+      final zip = _zipOf({
+        'Tekstdeck.md': utf8.encode(md.generateDeck(deck)),
+        'images/tekstfoto.png': _pngBytes,
+      });
+
+      final tabs = container.read(tabsProvider.notifier);
+      expect(
+        await tabs.openDeckFromBytes(zip, 'Tekstdeck.ocideck'),
+        OpenResult.opened,
+      );
+
+      final opened = container
+          .read(tabsProvider)
+          .current!
+          .deckNotifier
+          .currentState
+          .deck!;
+      final markdown = opened.slides.single.customMarkdown;
+      expect(markdown, isNot(contains('images/tekstfoto.png')));
+      final mem = RegExp(
+        r'!\[alt\]\(([^)]+)\)',
+      ).firstMatch(markdown)!.group(1)!;
+      expect(WebAssetStore.isMemPath(mem), isTrue);
+      expect(WebAssetStore.bytesFor(mem), equals(_pngBytes));
+    });
+
     test('een pakket zonder markdown is geen presentatie', () async {
       final container = _container();
       final tabs = container.read(tabsProvider.notifier);

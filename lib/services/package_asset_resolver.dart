@@ -3,6 +3,7 @@ import 'package:path/path.dart' as p;
 import '../models/deck.dart';
 import 'file_service.dart' show PackageEntry;
 import 'image_service.dart';
+import 'slide_image_refs.dart';
 import 'web_asset_store.dart';
 
 /// Zet de afbeeldings-leden van een `.ocideck`-pakket in de [WebAssetStore] en
@@ -43,12 +44,11 @@ Deck attachPackageAssetsToMem(
     return mem;
   }
 
+  // Ook een `![…](…)` in de vrije tekst wijst naar een lid van het pakket, en
+  // moet dus dezelfde weg naar het geheugen lopen — anders opent het deck met
+  // een verwijzing naar een bestand dat alleen ín het archief bestaat.
   final slides = [
-    for (final s in deck.slides)
-      s.copyWith(
-        imagePath: memPath(s.imagePath) ?? s.imagePath,
-        imagePath2: memPath(s.imagePath2) ?? s.imagePath2,
-      ),
+    for (final s in deck.slides) rewriteSlideImagePaths(s, memPath),
   ];
   return deck.copyWith(slides: slides);
 }
