@@ -186,6 +186,15 @@ enum ImportFailure {
 typedef PackagePasswordResolver =
     Future<String?> Function({required bool retry});
 
+/// Vraagt of de web-import mag terugvallen op het same-origin fetch-hulppunt.
+///
+/// Die terugval stuurt de hele URL naar de origin die de app serveert — een
+/// partij die de gebruiker niet zelf heeft aangewezen, en de URL kan een
+/// deelsleutel bevatten. Daarom een vraag en geen automatisme. [host] is de
+/// bronhost, zodat de vraag concreet kan zijn. De service kent geen UI; de
+/// shell levert de implementatie. Geen implementatie = geen toestemming.
+typedef ProxyFallbackConfirm = Future<bool> Function({required String host});
+
 /// Uitkomst van een import: het pad naar de hoofd-markdown bij succes, anders
 /// een [failure] met de reden.
 class ImportOutcome {

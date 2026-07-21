@@ -118,6 +118,12 @@ class TabsNotifier extends StateNotifier<TabsState> {
   /// versleutelde pakketten met [ImportFailure.needsPassword].
   PackagePasswordResolver? packagePasswordResolver;
 
+  /// UI-callback die vraagt of de web-import mag terugvallen op het
+  /// same-origin fetch-hulppunt. Geregistreerd door de shell. Zonder
+  /// registratie is er geen toestemming en vervalt de terugval — dat is de
+  /// bedoeling: die terugval geeft de volledige URL aan een derde partij.
+  ProxyFallbackConfirm? proxyFallbackConfirm;
+
   /// Hoe vaak niet-opgeslagen tabbladen naar een herstelbestand worden bewaard.
   static const _autosaveInterval = Duration(seconds: 25);
 
@@ -713,6 +719,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
     final bytes = await _file.fetchUrlBytes(
       url,
       maxBytes: FileService.maxPackageBytes,
+      onConfirmProxy: proxyFallbackConfirm,
     );
     if (bytes == null || !mounted) return OpenResult.unreadable;
     // Zelfde kern als de web-picker en drag-drop: [openDeckFromBytes]. De URL
