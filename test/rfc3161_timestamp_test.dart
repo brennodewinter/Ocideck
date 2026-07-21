@@ -187,10 +187,10 @@ void main() {
     });
   });
 
-  group('timeStampMatchesHash', () {
+  group('timeStampImprintMatchesHash', () {
     test('true when the imprint equals the seal hash', () {
       expect(
-        timeStampMatchesHash(
+        timeStampImprintMatchesHash(
           fakeTimeStampToken(hash, '20260712120000Z'),
           hexOf(hash),
         ),
@@ -200,7 +200,7 @@ void main() {
 
     test('false for a different hash', () {
       expect(
-        timeStampMatchesHash(
+        timeStampImprintMatchesHash(
           fakeTimeStampToken(hash, '20260712120000Z'),
           'deadbeef',
         ),
