@@ -39,15 +39,41 @@ post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_macos_build_settings(target)
 
-    next unless target.name == 'video_player_avfoundation'
-
-    target.build_configurations.each do |config|
-      config.build_settings['GCC_WARN_INHIBIT_ALL_WARNINGS'] = 'YES'
-      config.build_settings['SWIFT_SUPPRESS_WARNINGS'] = 'YES'
-      config.build_settings['OTHER_CFLAGS'] = [
-        '$(inherited)',
-        '-Wno-deprecated-declarations',
-      ]
+    case target.name
+    when 'video_player_avfoundation'
+      target.build_configurations.each do |config|
+        config.build_settings['GCC_WARN_INHIBIT_ALL_WARNINGS'] = 'YES'
+        config.build_settings['SWIFT_SUPPRESS_WARNINGS'] = 'YES'
+        config.build_settings['OTHER_CFLAGS'] = [
+          '$(inherited)',
+          '-Wno-deprecated-declarations',
+        ]
+      end
+    when 'DartCvMacOS'
+      # DartCvMacOS levert OpenCV mee als voorgebouwde, universele libopencv.a
+      # van een kwart gigabyte. De x86_64-helft daarvan bestaat grotendeels uit
+      # Intel IPP-objecten die zonder platform-load-command zijn geassembleerd,
+      # en de pod zet daarbovenop nog een keer -lc++ in OTHER_LDFLAGS terwijl de
+      # toolchain libc++ allang koppelt. Het koppelen van dit ene doel spuwt
+      # daardoor ruim tienduizend regels:
+      #
+      #   ld: warning: no platform load command found in
+      #       '.../libopencv.a[x86_64][1250](psceilca_l9---ippsCeilOne.o)',
+      #       assuming: macOS
+      #   ld: warning: ignoring duplicate libraries: '-lc++'
+      #
+      # Het is geen code die wij schrijven of kunnen herstellen — de objecten
+      # zitten in een binair archief dat we inkopen — en de waarschuwingen
+      # verbergen alles wat er wél toe doet. Daarom dempen we ze op dít doel:
+      # -Wl,-w zwijgt de koppelaar alleen voor DartCvMacOS, elk ander doel
+      # (Runner voorop) blijft zijn waarschuwingen tonen.
+      target.build_configurations.each do |config|
+        config.build_settings['GCC_WARN_INHIBIT_ALL_WARNINGS'] = 'YES'
+        config.build_settings['OTHER_LDFLAGS'] = [
+          '$(inherited)',
+          '-Wl,-w',
+        ]
+      end
     end
   end
 end
