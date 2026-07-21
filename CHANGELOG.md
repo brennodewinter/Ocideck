@@ -80,6 +80,20 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   markdown of de HTML.
 
 ### Fixed
+- **De webversie zegt nu ook waar een formulier níet heen mag.** De
+  beveiligingsregels van de webbundel bepalen per soort verkeer waar de pagina
+  iets vandaan mag halen. Voor het versturen van een formulier stond dat er niet
+  bij — en anders dan bij de meeste van die regels betekent "niets ingevuld"
+  hier niet "dan geldt de algemene regel", maar "dan mag alles". Een injectie
+  had een formulier dus naar een willekeurige bestemming kunnen sturen.
+
+  Er staat nu expliciet dat het naar niets mag. OciDeck tekent zijn scherm zelf
+  en verstuurt geen enkel formulier, dus u merkt er niets van.
+
+  Gevonden door de nieuwe scan van de webversie, de eerste keer dat die liep.
+  De controle op de webbundel bewaakt het voortaan, en die controle is ook
+  omgekeerd getoetst: haal je de regel weg, dan valt hij echt om.
+
 - **Uw eigen regels in de kop breken het zegel niet meer.** Sinds OciDeck de
   front matter bijwerkt in plaats van herbouwt, blijft wat u er zelf in zet
   netjes staan — een eigen `style:`-blok, een commentaarregel, een handmatige

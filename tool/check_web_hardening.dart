@@ -72,6 +72,16 @@ void main() {
         _eq(directives['object-src'], ["'none'"]),
         "CSP should set object-src 'none'.",
       );
+      // form-action does NOT fall back to default-src, so leaving it out is not
+      // "covered by 'self'" — it leaves form submission unrestricted. The app
+      // paints into a canvas and submits no HTML forms, so 'none' costs nothing
+      // and closes the destination an injected <form> would otherwise reach.
+      // Found by the ZAP baseline (rule 10055), which is exactly the class of
+      // gap a directive-by-directive read of the policy tends to miss.
+      require(
+        _eq(directives['form-action'], ["'none'"]),
+        "CSP must set form-action 'none' (it does not fall back to default-src).",
+      );
       // default-src is the fallback for every unlisted fetch directive; keep it
       // first-party so a future directive removal can't silently open a hole.
       require(

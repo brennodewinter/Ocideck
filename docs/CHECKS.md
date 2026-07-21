@@ -350,7 +350,9 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Runs:** `make build-web` then `dart run tool/check_web_hardening.dart`.
 - **Covers:** that the built `build/web` keeps its hardening — a strict CSP in
   `index.html` (`script-src 'self' 'wasm-unsafe-eval'`, no `unsafe-inline`/
-  `unsafe-eval`, `connect-src 'self'`, `object-src 'none'`), CanvasKit
+  `unsafe-eval`, `connect-src 'self'`, `object-src 'none'`, `form-action
+  'none'` — that last one does *not* fall back to `default-src`, so it is
+  asserted separately), CanvasKit
   **self-hosted** (local wasm + the `useLocalCanvasKit` flag), and the UI font
   **bundled** — so the running app pulls zero third-party origins.
 - **Failure means:** a change weakened the CSP or re-introduced a CDN/font fetch;
