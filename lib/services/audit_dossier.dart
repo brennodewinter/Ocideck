@@ -130,7 +130,7 @@ String buildAuditDossier(
     final tsToken = _decodeTimestampToken(deck.sealTimestampToken);
     final tsParsed = tsToken == null ? null : parseTimeStampToken(tsToken);
     final tsMatches =
-        tsToken != null && timeStampMatchesHash(tsToken, deck.sealHash);
+        tsToken != null && timeStampImprintMatchesHash(tsToken, deck.sealHash);
     if (deck.sealTimestampToken.trim().isEmpty) {
       b.writeln('- **RFC 3161-tijdstempel:** afwezig');
     } else if (tsParsed == null || !tsMatches) {

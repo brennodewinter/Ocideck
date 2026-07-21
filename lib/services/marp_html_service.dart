@@ -13,6 +13,7 @@ import '../models/deck.dart';
 import '../models/settings.dart';
 import '../models/timeline.dart';
 import '../utils/log.dart';
+import '../models/document_signature.dart';
 import 'export_metadata.dart';
 
 part 'parts/marp_html_service_cockpit.dart';
@@ -104,7 +105,14 @@ class MarpHtmlService {
       List<int>.generate(16, (_) => rng.nextInt(256)),
     );
 
-    final signature = signatureFields(deckMarkdown);
+    // De ondertekening komt van het deck mee (het zegelblok staat sinds 0.1.0
+    // niet meer in de front matter). Een `.md` van vóór die verhuizing draagt
+    // hem nog wél in de kop, en die blijft leesbaar: [signatureFields] is het
+    // terugvalpad, niet de hoofdroute.
+    final docMeta = metadata ?? const ExportDocumentMetadata();
+    final signature = docMeta.signature != null
+        ? signatureFieldsOf(docMeta.signature!, sealedAt: docMeta.sealedAt)
+        : signatureFields(deckMarkdown);
     final sections = StringBuffer();
     for (final slide in marpSlides(deckMarkdown)) {
       final renderedBlocks = renderCockpitBlocks(
@@ -132,7 +140,7 @@ class MarpHtmlService {
     String inline(String code) =>
         '<script nonce="$nonce">${_guardScript(code)}</script>';
 
-    final meta = metadata ?? const ExportDocumentMetadata();
+    final meta = docMeta;
     final title = _htmlAttr(meta.displayTitle(fallbackTitle));
     final headMeta = _htmlHeadMeta(meta, fallbackTitle: fallbackTitle);
     final banner = meta.htmlClassification == null
@@ -443,12 +451,39 @@ class MarpHtmlService {
     r'<!--\s*_class:\s*sign-off\s*-->',
   );
 
+  /// De velden die [renderSignOffBlock] verwacht, uit een [DocumentSignature].
+  ///
+  /// De sleutelnamen zijn die van de oude front matter. Dat is geen nostalgie
+  /// maar het punt: zo blijven de nieuwe route (het deck levert de
+  /// handtekening) en het terugvalpad ([signatureFields], een `.md` van vóór
+  /// 0.1.0) door dezelfde renderer lopen, en kan de akkoordpagina er niet op
+  /// twee manieren uit gaan zien.
+  static Map<String, String> signatureFieldsOf(
+    DocumentSignature sig, {
+    String sealedAt = '',
+  }) {
+    final out = <String, String>{};
+    void put(String key, String value) {
+      if (value.trim().isNotEmpty) out[key] = value.trim();
+    }
+
+    put('ocideck_sig_name', sig.name);
+    put('ocideck_sig_role', sig.role);
+    put('ocideck_sig_cert', sig.certification);
+    put('ocideck_sig_date', sig.date);
+    put('ocideck_sig_statement', sig.statement);
+    put('ocideck_sig_typed', sig.typedSignature);
+    put('ocideck_seal_at', sealedAt);
+    return out;
+  }
+
   /// Leest de `ocideck_sig_*`- en `ocideck_seal_at`-regels uit de voorpagina
   /// van [deckMarkdown].
   ///
-  /// De ondertekening staat op dekniveau, niet op de dia — zie
-  /// `_writeSignOffSlide`. De export krijgt alleen de markdown mee, dus wordt
-  /// hij hier teruggelezen uit de front matter.
+  /// Alleen nog het terugvalpad voor een `.md` van vóór 0.1.0, toen die regels
+  /// daar stonden. Een deck dat door OciDeck komt levert zijn handtekening via
+  /// [ExportDocumentMetadata]; deze route bestaat voor markdown die van elders
+  /// komt en de oude kop nog draagt.
   static Map<String, String> signatureFields(String deckMarkdown) {
     final text = deckMarkdown.replaceAll('\r\n', '\n');
     if (!text.startsWith('---\n')) return const {};
