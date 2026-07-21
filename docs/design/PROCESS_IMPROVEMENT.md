@@ -787,7 +787,7 @@ shape for this codebase, and *one order of magnitude* below option A's ~300k.
   `chart_preview` split into `_cartesian`/`_extra`/`_radar` is the ratchet's
   fingerprint, not style. **Budget the `part`/`part of` split from day one.**
 - `maxMethodLines = 150`, baseline also **empty** (`tool/check_method_length.dart:26`, `:32`), AST-measured.
-- `make check` runs `coverage --min=78 --require-instrumented` (Makefile:438) —
+- `make check` runs `coverage --min=79 --require-instrumented` (Makefile) —
   every `lib/` file must appear in at least one test, and `check-dead-code` fails
   on any file not reachable from an entrypoint. **A painter that is not yet wired
   into `_buildContent` fails the build.** Land each engine end-to-end, never
