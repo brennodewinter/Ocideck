@@ -1,10 +1,8 @@
-import 'dart:convert';
-
-import 'package:crypto/crypto.dart';
-
 import '../models/deck.dart';
 import '../models/document_signature.dart';
 import '../models/redaction_manifest.dart';
+import '../models/seal_record.dart';
+import '../utils/content_hash.dart';
 import 'markdown_service.dart';
 
 /// Result of verifying a deck's document seal (§8 A1).
@@ -18,6 +16,15 @@ enum IntegrityStatus {
   /// The recomputed content hash differs from the stored seal: the content was
   /// changed after finalising (tamper-evidence).
   changed,
+
+  /// Verzegeld, maar er is niets om het zegel tegen na te rekenen.
+  ///
+  /// Twee manieren om hier te komen, en ze lopen op hetzelfde uit: het deck is
+  /// zojuist afgerond maar nog niet opgeslagen (de hash gaat over bestandsbytes,
+  /// dus die kan pas bestaan zodra het bestand bestaat), of het deck is nooit
+  /// uit een bestand gekomen. In beide gevallen is "intact" een bewering die
+  /// niemand kan staven, en die is erger dan geen bewering.
+  notVerifiable,
 
   /// Een geredigeerde afleiding van een verzegeld deck.
   ///
@@ -40,11 +47,26 @@ enum IntegrityStatus {
 /// The guarantee is deliberately **tamper-evidence**, not impossibility: a
 /// `.md` handed to someone else can always be edited, but a mismatch between the
 /// recomputed hash and the stored [Deck.sealHash] makes such an edit visible.
-/// The hash is a SHA-512 over the canonicalised markdown content (styling and
-/// the seal fields themselves excluded — see
-/// [MarkdownService.canonicalContentForSeal]), using the `crypto` package.
+///
+/// **Het zegel gaat over de bytes van de `.md`.** Niet over een canonicalisatie,
+/// niet over de uitvoer van een serialisator, niet over een selectie van velden:
+/// over het bestand. Dat is de hele winst van het zegel ernaast zetten in plaats
+/// van erin. Een ontvanger heeft OciDeck niet nodig en hoeft geen specificatie
+/// na te spelen — `sha512sum rapport.md` en vergelijken met `hash` uit
+/// `rapport.seal.json`, klaar. Er is dan ook géén normalisatiestap: geen
+/// regeleinde-omzetting, geen trimmen, geen sortering. Elke stap die hier stond
+/// zou een stap zijn die de ontvanger moet naspelen, en dus een stap waarop de
+/// controle stuk kan gaan.
+///
+/// De keerzijde is dat het zegel streng is: élke wijziging aan de `.md` breekt
+/// het, ook een die niets aan de inhoud verandert. Dat is de bedoeling — een
+/// verzegeld document is bevroren — en het is waarom OciDeck een verzegeld deck
+/// alleen-lezen maakt in plaats van erop te vertrouwen dat niemand het opslaat.
+///
+/// Zie [SealForm.canonical] voor de oude vorm, die alleen nog voorkomt op een
+/// deck van vóór 0.1.0.
 class DocumentIntegrity {
-  /// The one hash algorithm A1 uses. Recorded in the front matter so a future
+  /// The one hash algorithm A1 uses. Recorded in the seal sidecar so a future
   /// algorithm stays distinguishable.
   static const String algorithm = 'sha-512';
 
@@ -52,22 +74,36 @@ class DocumentIntegrity {
 
   DocumentIntegrity(this._md);
 
-  /// Compute the SHA-512 seal hash over [deck]'s canonical content. Independent
-  /// of any integrity metadata already on [deck], so sealing and re-verifying
-  /// yield the same value for unchanged content.
-  String computeHash(Deck deck) {
-    final canonical = _md.canonicalContentForSeal(deck);
-    return sha512.convert(utf8.encode(canonical)).toString();
-  }
+  /// De zegelhash over [bytes]: de SHA-512 in kleine-letter-hex, precies zoals
+  /// `sha512sum` hem afdrukt.
+  static String hashBytes(List<int> bytes) => sha512Hex(bytes);
+
+  /// De zegelhash over [markdown] zoals het bestand hem krijgt: UTF-8, zonder
+  /// enige bewerking. OciDeck schrijft elke `.md` met `utf8.encode` van precies
+  /// deze tekst, dus dit is de hash van het bestand op schijf.
+  static String hashMarkdown(String markdown) => sha512HexOfText(markdown);
+
+  /// De hash zoals een deck van vóór 0.1.0 hem droeg: over de uitvoer van
+  /// [MarkdownService.canonicalContentForSeal]. Alleen nog gebruikt om zo'n oud
+  /// zegel te blijven controleren; nieuwe zegels ontstaan nooit zo.
+  String computeCanonicalHash(Deck deck) =>
+      hashMarkdown(_md.canonicalContentForSeal(deck));
 
   /// Verify [deck] against its stored seal.
   IntegrityStatus verify(Deck deck) {
-    if (!deck.finalized || deck.sealHash.isEmpty) {
-      return IntegrityStatus.notSealed;
+    if (!deck.finalized) return IntegrityStatus.notSealed;
+    if (deck.sealHash.isEmpty) return IntegrityStatus.notVerifiable;
+    switch (deck.sealForm) {
+      case SealForm.fileBytes:
+        if (deck.fileHash.isEmpty) return IntegrityStatus.notVerifiable;
+        return deck.fileHash == deck.sealHash
+            ? IntegrityStatus.intact
+            : IntegrityStatus.changed;
+      case SealForm.canonical:
+        return computeCanonicalHash(deck) == deck.sealHash
+            ? IntegrityStatus.intact
+            : IntegrityStatus.changed;
     }
-    return computeHash(deck) == deck.sealHash
-        ? IntegrityStatus.intact
-        : IntegrityStatus.changed;
   }
 
   /// Verifieer een **geredigeerde afleiding** tegen de bron waaruit hij komt.
@@ -85,40 +121,40 @@ class DocumentIntegrity {
     Deck source, {
     required bool Function(RedactionManifest, Deck) verifier,
   }) {
-    if (!source.finalized || source.sealHash.isEmpty) {
+    // Een bron die zelf niet klopt, kan geen afleiding staven.
+    final sourceStatus = verify(source);
+    if (sourceStatus == IntegrityStatus.changed) return IntegrityStatus.changed;
+    // Niet verzegeld óf niets om tegen na te rekenen: er is geen bron om deze
+    // afleiding aan op te hangen. Dat is geen manipulatiemelding.
+    if (sourceStatus != IntegrityStatus.intact)
       return IntegrityStatus.notSealed;
-    }
     if (manifest.derivedFrom != source.sealHash) return IntegrityStatus.changed;
-    if (computeHash(source) != source.sealHash) return IntegrityStatus.changed;
     return verifier(manifest, source)
         ? IntegrityStatus.redactedDerivative
         : IntegrityStatus.changed;
   }
 
-  /// Return a finalised, sealed copy of [deck]: the content hash is computed
-  /// over the current content (with the optional [signature] already folded in,
-  /// so the signature is covered by the seal), then the finalise flag, hash,
-  /// algorithm and timestamp are set. [at] defaults to now (UTC). Finalising is
+  /// Return a finalised copy of [deck]: the read-only lock, the algorithm, the
+  /// form and the moment of sealing. [at] defaults to now (UTC). Finalising is
   /// intentionally one-way in the UI — there is no matching "unseal" here.
+  ///
+  /// **De hash zet dit niet.** Die gaat over de bytes van de `.md`, en die
+  /// bestaan pas wanneer het deck wordt opgeslagen — de opslagroute vult hem in
+  /// ([Deck.sealHash] blijft tot dat moment leeg, en het zegel meldt zich als
+  /// [IntegrityStatus.notVerifiable]). Vooruitrekenen op wat de serialisator
+  /// straks zou schrijven, was precies de fout die dit zegel niet meer maakt:
+  /// het opslaan verplaatst afbeeldingen en grafiekdata, dus de bytes die
+  /// werkelijk op schijf komen zijn niet de bytes die je hier zou hashen.
   Deck seal(Deck deck, {DocumentSignature? signature, DateTime? at}) {
-    // Start from a clean, non-finalised base without any prior seal fields so
-    // the hash is over content only. The signature (if given) is content and
-    // must be present before hashing.
-    final base = deck.copyWith(
-      finalized: false,
+    final when = (at ?? DateTime.now()).toUtc();
+    return deck.copyWith(
+      finalized: true,
       sealHash: '',
-      sealAlgo: '',
-      sealAt: '',
+      sealAlgo: algorithm,
+      sealForm: SealForm.fileBytes,
+      sealAt: when.toIso8601String(),
       signature: (signature != null && signature.isNotEmpty) ? signature : null,
       clearSignature: signature != null && signature.isEmpty,
-    );
-    final hash = computeHash(base);
-    final when = (at ?? DateTime.now()).toUtc();
-    return base.copyWith(
-      finalized: true,
-      sealHash: hash,
-      sealAlgo: algorithm,
-      sealAt: when.toIso8601String(),
     );
   }
 }

@@ -108,7 +108,7 @@ class _BodyParse {
 }
 
 extension _MarkdownParse on MarkdownService {
-  Deck _doParse(String markdown, {String? filePath}) {
+  Deck _doParse(String markdown, {String? filePath, String fileHash = ''}) {
     final fm = _parseFrontMatter(markdown);
 
     final blocks = MarkdownService.splitSlideBlocks(fm.body);
@@ -149,9 +149,14 @@ extension _MarkdownParse on MarkdownService {
       finalized: fm.finalized,
       sealHash: fm.sealHash,
       sealAlgo: fm.sealAlgo,
+      // Een zegel dat nog uit de front matter komt is per definitie van vóór
+      // 0.1.0 en gaat dus over de gecanonicaliseerde inhoud. Ligt er een
+      // `.seal.json` naast, dan overschrijft die dit bij het openen.
+      sealForm: SealForm.canonical,
       sealAt: fm.sealAt,
       sealTimestampToken: fm.sealTsr,
       signature: fm.signature.isEmpty ? null : fm.signature,
+      fileHash: fileHash,
       miauwWaivers: fm.legacyMiauwWaivers,
       miauwConfirmations: fm.legacyMiauwConfirmations,
       frontMatterSource: fm.sourceLines,
