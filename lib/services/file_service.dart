@@ -24,6 +24,7 @@ import '../utils/net_guard.dart';
 import '../utils/project_path.dart';
 import '../utils/zip_encryption.dart';
 import 'annotation_codec.dart';
+import 'miauw_codec.dart';
 import 'sidecar_format.dart';
 import 'user_notes_codec.dart';
 import 'caption_service.dart';
@@ -715,6 +716,23 @@ class FileService {
           if (map.isNotEmpty) hydrated = hydrated.copyWith(userNotes: map);
         } catch (e) {
           logWarning('FileService.openDeck: user-notes sidecar unreadable', e);
+        }
+      }
+      // De MIAUW-dispositie. Ligt er een sidecar, dan is die de waarheid; wat
+      // de parser nog uit de oude base64-front matter haalde, is het
+      // opwaardeerpad voor een bestand dat er nog geen heeft.
+      final miauwSidecar = File(_miauwSidecarPath(filePath));
+      if (await miauwSidecar.exists()) {
+        try {
+          final d = MiauwCodec.decode(await miauwSidecar.readAsString());
+          if (!d.isEmpty) {
+            hydrated = hydrated.copyWith(
+              miauwWaivers: d.waivers,
+              miauwConfirmations: d.confirmations,
+            );
+          }
+        } catch (e) {
+          logWarning('FileService.openDeck: MIAUW sidecar unreadable', e);
         }
       }
     }

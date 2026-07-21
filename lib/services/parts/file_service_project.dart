@@ -57,9 +57,11 @@ extension _FileServiceProject on FileService {
 
     final markdown = _md.generateDeck(updatedDeck);
     await writeStringAtomic(File(filePath), markdown);
-    // Annotations and user notes live in separate sidecars so the .md stays pure.
+    // Annotaties, notities en de MIAUW-dispositie leven in eigen sidecars,
+    // zodat de `.md` pure, leesbare Marp blijft.
     await _writeSidecar(updatedDeck, filePath);
     await _writeUserNotesSidecar(updatedDeck, filePath);
+    await _writeMiauwSidecar(updatedDeck, filePath);
     return updatedDeck;
   }
 

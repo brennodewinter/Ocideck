@@ -158,6 +158,50 @@ style: |
     });
   });
 
+  group('opgeruimde sleutels verdwijnen, andermans sleutels niet', () {
+    // Het onderscheid dat [kRetiredFrontMatterKeys] maakt: een sleutel die
+    // OciDeck ooit schreef gaat er bij het opslaan uít, terwijl een sleutel van
+    // iemand anders blijft staan. Zonder dat onderscheid zou de base64 die we
+    // net hebben opgeheven tot in lengte van dagen in het bestand blijven.
+    const metOudeSleutels =
+        '---\n'
+        'marp: true\n'
+        'theme: ocideck\n'
+        'ocideck_style_profile: eyJuYW1lIjoiS2xhbnQifQ==\n'
+        'ocideck_miauw_waivers: eyIxLjMiOiJyZWRlbiJ9\n'
+        'ocideck_miauw_confirmations: eyIyLjEiOiJha2tvb3JkIn0=\n'
+        'iemand_anders: blijft staan\n'
+        '---\n\n# T\n';
+
+    test('elke opgeruimde sleutel is weg na één keer opslaan', () {
+      final opnieuw = _openenEnOpslaan(metOudeSleutels);
+      for (final sleutel in kRetiredFrontMatterKeys) {
+        expect(opnieuw, isNot(contains(sleutel)), reason: sleutel);
+      }
+      expect(opnieuw, contains('iemand_anders: blijft staan'));
+    });
+
+    test('de checker noemt ze niet onbekend', () {
+      // Ze zijn bekend; ze staan alleen ergens anders. Een waarschuwing die
+      // zegt "doet niets en blijft behouden" zou bovendien onwaar zijn.
+      final meldingen = MarkdownValidator()
+          .validate(metOudeSleutels)
+          .issues
+          .map((i) => i.message);
+      for (final sleutel in kRetiredFrontMatterKeys) {
+        expect(meldingen, isNot(contains(contains(sleutel))));
+      }
+      expect(meldingen, contains(contains('iemand_anders')));
+    });
+
+    test('geen sleutel staat op beide lijsten', () {
+      expect(
+        kOwnedFrontMatterKeys.intersection(kRetiredFrontMatterKeys),
+        isEmpty,
+      );
+    });
+  });
+
   group('formaatversie ocideck_format', () {
     test('afwezig is versie 1 en nooit een fout', () {
       final deck = MarkdownService().parseDeck('---\nmarp: true\n---\n\n# T\n');
@@ -260,10 +304,7 @@ style: |
           miauwWaivers: const {'1.6': 'reden'},
           miauwConfirmations: const {'2.3': 'bevestigd'},
         );
-        final markdown = MarkdownService().generateDeck(
-          deck,
-          inlineStyleProfile: true,
-        );
+        final markdown = MarkdownService().generateDeck(deck);
         final geschreven = _frontMatter(
           markdown,
         ).map(frontMatterKeyOf).whereType<String>().toSet();

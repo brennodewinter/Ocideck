@@ -84,6 +84,29 @@ extension _FileServiceOpen on FileService {
     }
   }
 
+  /// Path of the MIAUW-disposition sidecar next to a deck `<name>.md`.
+  String _miauwSidecarPath(String mdPath) =>
+      p.setExtension(mdPath, '.miauw.json');
+
+  /// Write the MIAUW sidecar next to [filePath], or remove it when empty.
+  Future<void> _writeMiauwSidecar(Deck deck, String filePath) async {
+    final sidecar = File(_miauwSidecarPath(filePath));
+    if (await _sidecarFromNewerBuild(sidecar, MiauwCodec.version)) {
+      logWarning(
+        'FileService._writeMiauwSidecar: MIAUW sidecar is from a newer '
+        'OciDeck and was left untouched',
+        sidecar.path,
+      );
+      return;
+    }
+    final json = MiauwCodec.encode(deck.miauwWaivers, deck.miauwConfirmations);
+    if (json == null) {
+      if (await sidecar.exists()) await sidecar.delete();
+    } else {
+      await writeStringAtomic(sidecar, json);
+    }
+  }
+
   /// Load the external CSV of any chart slide that links one, inlining the data
   /// into the in-memory spec so the renderer has it. The markdown on disk keeps
   /// only the `source` reference (data is stripped again on save).

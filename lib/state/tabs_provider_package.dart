@@ -153,6 +153,20 @@ extension _TabsPackageAssets on TabsNotifier {
         logWarning('TabsNotifier._attachPackageSidecars: notes unreadable', e);
       }
     }
+    final miauw = textFor('$base.miauw.json');
+    if (miauw != null) {
+      try {
+        final d = MiauwCodec.decode(miauw);
+        if (!d.isEmpty) {
+          result = result.copyWith(
+            miauwWaivers: d.waivers,
+            miauwConfirmations: d.confirmations,
+          );
+        }
+      } catch (e) {
+        logWarning('TabsNotifier._attachPackageSidecars: MIAUW unreadable', e);
+      }
+    }
     return result;
   }
 }

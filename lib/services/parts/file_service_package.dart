@@ -243,6 +243,24 @@ extension FileServicePackage on FileService {
       );
     }
 
+    // De MIAUW-dispositie reist als eigen sidecar mee; zonder dit lid zou het
+    // pakket de afspraken met de klant kwijtraken nu ze niet meer in de front
+    // matter staan.
+    final miauw = MiauwCodec.encode(
+      packDeck.miauwWaivers,
+      packDeck.miauwConfirmations,
+    );
+    if (miauw != null) {
+      final miauwBytes = utf8.encode(miauw);
+      archive.add(
+        ArchiveFile(
+          '${_safeName(deck.title)}.miauw.json',
+          miauwBytes.length,
+          miauwBytes,
+        ),
+      );
+    }
+
     // Thema-CSS (zodat het pakket ook in Marp/CLI bruikbaar is).
     final css = await _packageThemeCss(packDeck.theme, profile, logoRel);
     if (css != null) {

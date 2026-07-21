@@ -34,6 +34,7 @@ import '../services/image_service.dart';
 import '../services/markdown_safety.dart';
 import '../services/markdown_service.dart';
 import '../services/recovery_service.dart';
+import '../services/miauw_codec.dart';
 import '../services/user_notes_codec.dart';
 import '../services/web_asset_store.dart';
 import '../services/s3/s3_service.dart';
@@ -239,6 +240,10 @@ class TabsNotifier extends StateNotifier<TabsState> {
             label: tab.label,
             markdown: tab.deckNotifier.generateMarkdown(),
             userNotes: UserNotesCodec.encode(deck.slides, deck.userNotes),
+            miauw: MiauwCodec.encode(
+              deck.miauwWaivers,
+              deck.miauwConfirmations,
+            ),
           ),
         );
         _lastAutosavedDeck[tab.id] = deck;
@@ -269,6 +274,15 @@ class TabsNotifier extends StateNotifier<TabsState> {
         final notes = UserNotesCodec.decode(snap.userNotes!, deck.slides);
         if (notes.isNotEmpty) {
           deck = deck.copyWith(userNotes: notes);
+        }
+      }
+      if (snap.miauw != null && snap.miauw!.isNotEmpty) {
+        final d = MiauwCodec.decode(snap.miauw!);
+        if (!d.isEmpty) {
+          deck = deck.copyWith(
+            miauwWaivers: d.waivers,
+            miauwConfirmations: d.confirmations,
+          );
         }
       }
       // Hergebruik de sleutel van de momentopname. Het bestand dat er al ligt ís

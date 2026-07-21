@@ -114,9 +114,13 @@ class _BodyParse {
 class _FrontMatter {
   String theme = 'ocideck';
   bool paginate = true;
-  ThemeProfile themeProfile = const ThemeProfile();
-  Map<String, String> miauwWaivers = const {};
-  Map<String, String> miauwConfirmations = const {};
+
+  /// De MIAUW-dispositie uit een bestand van vóór 0.1.0, toen ze nog als
+  /// base64 in de front matter stond. Nieuwe bestanden dragen haar in de
+  /// `.miauw.json`-sidecar; die overschrijft dit bij het openen. Zie
+  /// [MiauwCodec.legacyFrontMatterMap].
+  Map<String, String> legacyMiauwWaivers = const {};
+  Map<String, String> legacyMiauwConfirmations = const {};
   String? presentationTitle;
   String author = '';
   String language = '';
@@ -176,7 +180,6 @@ extension _MarkdownParse on MarkdownService {
       paginate: fm.paginate,
       slides: slides.isEmpty ? [Slide.create(SlideType.title)] : slides,
       projectPath: projectPath,
-      themeProfile: fm.themeProfile,
       author: fm.author,
       organization: fm.organization,
       version: fm.version,
@@ -197,8 +200,8 @@ extension _MarkdownParse on MarkdownService {
       sealAt: fm.sealAt,
       sealTimestampToken: fm.sealTsr,
       signature: fm.signature.isEmpty ? null : fm.signature,
-      miauwWaivers: fm.miauwWaivers,
-      miauwConfirmations: fm.miauwConfirmations,
+      miauwWaivers: fm.legacyMiauwWaivers,
+      miauwConfirmations: fm.legacyMiauwConfirmations,
       frontMatterSource: fm.sourceLines,
       formatVersion: fm.formatVersion,
     );
@@ -291,23 +294,18 @@ extension _MarkdownParse on MarkdownService {
               fm.sealAt = _parseScalar(value);
             case 'ocideck_seal_tsr':
               fm.sealTsr = value;
-            case 'ocideck_style_profile':
-              final styleJson = _decodeBase64JsonMap(value, key);
-              if (styleJson != null) {
-                fm.themeProfile = ThemeProfile.fromJson(styleJson);
-              }
+            // Alleen lezen, nooit meer schrijven: het opwaardeerpad voor een
+            // bestand van vóór 0.1.0.
             case 'ocideck_miauw_waivers':
-              final waiverJson = _decodeBase64JsonMap(value, key);
-              if (waiverJson != null) {
-                fm.miauwWaivers = waiverJson.map((k, v) => MapEntry(k, '$v'));
-              }
+              fm.legacyMiauwWaivers = MiauwCodec.legacyFrontMatterMap(
+                value,
+                key,
+              );
             case 'ocideck_miauw_confirmations':
-              final confirmJson = _decodeBase64JsonMap(value, key);
-              if (confirmJson != null) {
-                fm.miauwConfirmations = confirmJson.map(
-                  (k, v) => MapEntry(k, '$v'),
-                );
-              }
+              fm.legacyMiauwConfirmations = MiauwCodec.legacyFrontMatterMap(
+                value,
+                key,
+              );
           }
         }
         content = content.substring(end + 5).trim();

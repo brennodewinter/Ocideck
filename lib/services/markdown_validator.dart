@@ -169,7 +169,7 @@ class MarkdownValidator {
             ),
           );
         }
-      } else if (!kOwnedFrontMatterKeys.contains(key)) {
+      } else if (!ownsFrontMatterKey(key)) {
         issues.add(
           MarkdownValidationIssue(
             line: i + 1,

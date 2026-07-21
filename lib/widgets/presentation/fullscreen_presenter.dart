@@ -360,7 +360,6 @@ class FullscreenPresenter extends StatefulWidget {
     final markdown = buildBeamerMarkdown(
       slides: slides,
       projectPath: projectPath,
-      themeProfile: themeProfile,
       tlp: tlp,
       organization: organization,
       reportLanguage: reportLanguage,
@@ -381,8 +380,10 @@ class FullscreenPresenter extends StatefulWidget {
       'ink': inkByIndex,
       'classificationWatermarkEnabled': showClassificationWatermark,
       'allowRemoteMedia': allowRemoteMedia,
-      // The cockpit colour scheme is styling, so it travels with the transient
-      // beamer payload (like the inlined style profile) rather than the deck.
+      // Styling reist naast de markdown mee, niet erin: het publieksvenster kan
+      // het profiel nergens anders vandaan halen, maar de markdown zelf hoort
+      // leesbaar te blijven. Hetzelfde geldt voor het cockpit-kleurenschema.
+      beamerStyleProfileKey: themeProfile.toJson(),
       'cockpitColorScheme': cockpitColorScheme.toJson(),
     });
 

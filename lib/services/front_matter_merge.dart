@@ -88,10 +88,32 @@ const Set<String> kOwnedFrontMatterKeys = {
   'ocideck_seal_algo',
   'ocideck_seal_at',
   'ocideck_seal_tsr',
+};
+
+/// Sleutels die OciDeck ooit schreef en nu niet meer, maar nog wél bezit.
+///
+/// Ze zijn niet uit [kOwnedFrontMatterKeys] verdwenen maar hierheen verhuisd,
+/// en dat verschil is het hele punt. Een sleutel die van beide lijsten af is,
+/// valt onder "wat ik niet ken laat ik met rust": hij zou dan tot in lengte van
+/// dagen in het bestand blijven staan. Hier staan betekent: bij het opslaan
+/// gaat de regel eruit, en komt hij niet terug.
+///
+/// Alle drie droegen base64. `ocideck_style_profile` reisde alleen mee in de
+/// vluchtige beamer-payload en gaat nu naast de markdown mee in dezelfde
+/// boodschap; de twee MIAUW-sleutels stonden wél op schijf en verhuizen naar de
+/// `.miauw.json`-sidecar. Zie docs/FILE_FORMAT.md.
+const Set<String> kRetiredFrontMatterKeys = {
   'ocideck_style_profile',
   'ocideck_miauw_waivers',
   'ocideck_miauw_confirmations',
 };
+
+/// Of [key] van OciDeck is: geschreven óf opgeruimd. Dit is de toets die
+/// bepaalt of een regel bij het opslaan door de generator gaat; alles daarbuiten
+/// blijft staan waar het stond.
+bool ownsFrontMatterKey(String key) =>
+    kOwnedFrontMatterKeys.contains(key) ||
+    kRetiredFrontMatterKeys.contains(key);
 
 /// Een sleutelregel op kolom 0 (`key:` of `key: waarde`). Ingesprongen regels
 /// vallen er bewust buiten: die horen bij het blok erboven, en dat is precies
@@ -123,9 +145,9 @@ bool isFrontMatterContinuation(String line) => _reContinuation.hasMatch(line);
 /// (zonder de `---`-hekken), [generated] de regels die de serialisatie
 /// oplevert. De uitkomst:
 ///
-/// - een sleutel uit [kOwnedFrontMatterKeys] die in [original] staat, wordt op
-///   zijn eigen plek vervangen door wat [generated] ervoor heeft — of
-///   weggelaten als [generated] hem niet meer schrijft;
+/// - een sleutel die OciDeck bezit ([ownsFrontMatterKey]) en die in [original]
+///   staat, wordt op zijn eigen plek vervangen door wat [generated] ervoor
+///   heeft — of weggelaten als [generated] hem niet meer schrijft;
 /// - elke andere regel blijft exact staan waar hij stond, inclusief
 ///   `#`-commentaar, lege regels, ingesprongen blokken, de oorspronkelijke
 ///   volgorde en de oorspronkelijke aanhalingstekens;
@@ -169,7 +191,7 @@ List<String> mergeFrontMatter({
   for (final line in original) {
     final key = frontMatterKeyOf(line);
     if (key != null) {
-      inOwnedBlock = kOwnedFrontMatterKeys.contains(key);
+      inOwnedBlock = ownsFrontMatterKey(key);
       if (!inOwnedBlock) {
         out.add(line);
       } else if (placed.add(key)) {
