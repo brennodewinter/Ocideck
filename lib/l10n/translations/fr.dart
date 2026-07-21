@@ -736,6 +736,20 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Bijv. 1.0': 'Ex. 1.0',
+  'Bijv. 2026-05-30': 'Ex. 2026-05-30',
+  'Bijv. Jan Jansen': 'Ex. Jean Dupont',
+  'Bijv. Vigilis': 'Ex. Vigilis',
+  'Komma-gescheiden, bijv. kwartaal, cijfers, 2026':
+      'Séparés par des virgules, ex. trimestre, chiffres, 2026',
+  'Komma-gescheiden, bijv. OWASP WSTG@4.2':
+      'Séparés par des virgules, ex. OWASP WSTG@4.2',
+  'Korte omschrijving van de presentatie':
+      'Brève description de la présentation',
+  'Titel van de presentatie': 'Titre de la présentation',
+  'F-03 · SQL-injectie in het loginformulier':
+      'F-03 · Injection SQL dans le formulaire de connexion',
+  'https://app.voorbeeld/login': 'https://app.example/login',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  La base de données CVE locale (c\'est vous qui lancez le téléchargement) : OciDeck récupère les données en masse via api.github.com et le fichier de publication vers lequel cette adresse pointe.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

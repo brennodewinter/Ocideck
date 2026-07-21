@@ -1807,6 +1807,14 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Bijv. 1.0': 'Π.χ. 1.0',
+  'Datum': 'Ημερομηνία',
+  'Komma-gescheiden, bijv. OWASP WSTG@4.2':
+      'Χωρισμένα με κόμμα, π.χ. OWASP WSTG@4.2',
+  'Titel van de presentatie': 'Τίτλος της παρουσίασης',
+  'F-03 · SQL-injectie in het loginformulier':
+      'F-03 · Ένεση SQL στη φόρμα σύνδεσης',
+  'https://app.voorbeeld/login': 'https://app.example/login',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Η τοπική βάση δεδομένων CVE (τη λήψη την ξεκινάτε εσείς): το OciDeck ανακτά τα μαζικά δεδομένα μέσω του api.github.com και του αρχείου έκδοσης στο οποίο παραπέμπει η διεύθυνση αυτή.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

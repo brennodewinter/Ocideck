@@ -40,6 +40,12 @@ void main() {
     AppLocalizations.setActiveLanguageCode('en');
 
     const unchangedInEnglish = {
+      'CWE',
+      'CVE',
+      'F-03',
+      'CVE-2024-1234, CVE-2024-5678',
+      'CWE-89 — Improper Neutralization of SQL',
+      'IBAN',
       'Server',
       'Deadline',
       'Access key ID',
@@ -119,6 +125,12 @@ void main() {
 
   test('all literal Dutch source strings are translated in every language', () {
     const unchangedInAllLanguages = {
+      'CWE',
+      'CVE',
+      'F-03',
+      'CVE-2024-1234, CVE-2024-5678',
+      'CWE-89 — Improper Neutralization of SQL',
+      'IBAN',
       'Server',
       'Access key ID',
       'Bucket',

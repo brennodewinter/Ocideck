@@ -1778,6 +1778,14 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Bijv. 1.0': 'T.ex. 1.0',
+  'Datum': 'Datum',
+  'Komma-gescheiden, bijv. OWASP WSTG@4.2':
+      'Kommaseparerade, t.ex. OWASP WSTG@4.2',
+  'Titel van de presentatie': 'Presentationens titel',
+  'F-03 · SQL-injectie in het loginformulier':
+      'F-03 · SQL-injektion i inloggningsformuläret',
+  'https://app.voorbeeld/login': 'https://app.example/login',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Den lokala CVE-databasen (du startar hämtningen själv): OciDeck hämtar massdata via api.github.com och den utgåvefil som adressen pekar på.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

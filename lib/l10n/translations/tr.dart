@@ -2761,6 +2761,14 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  'Bijv. 1.0': 'Örn. 1.0',
+  'Datum': 'Tarih',
+  'Komma-gescheiden, bijv. OWASP WSTG@4.2':
+      'Virgülle ayrılmış, örn. OWASP WSTG@4.2',
+  'Titel van de presentatie': 'Sunumun başlığı',
+  'F-03 · SQL-injectie in het loginformulier':
+      'F-03 · Oturum açma formunda SQL enjeksiyonu',
+  'https://app.voorbeeld/login': 'https://app.example/login',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Yerel CVE veri tabanı (indirmeyi siz başlatırsınız): OciDeck toplu verileri api.github.com üzerinden ve o adresin işaret ettiği sürüm dosyasından alır.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

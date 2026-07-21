@@ -1815,6 +1815,14 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Bijv. 1.0': 'm.sh. 1.0',
+  'Datum': 'Dáta',
+  'Komma-gescheiden, bijv. OWASP WSTG@4.2':
+      'Camóg-scartha, m.sh. OWASP WSTG@4.2',
+  'Titel van de presentatie': 'Teideal an chur i láthair',
+  'F-03 · SQL-injectie in het loginformulier':
+      'F-03 · Instealladh SQL san fhoirm logála isteach',
+  'https://app.voorbeeld/login': 'https://app.example/login',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  An bunachar sonraí CVE áitiúil (tusa a chuireann an íoslódáil ar bun): faigheann OciDeck na sonraí ollmhóra trí api.github.com agus an comhad eisiúna a bhfuil an seoladh sin ag díriú air.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
