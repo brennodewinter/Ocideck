@@ -282,6 +282,30 @@ bool isValidBalticPersonalCode(String raw) {
   return rest == d.codeUnitAt(10) - 0x30;
 }
 
+// ── Malta ────────────────────────────────────────────────────────────────────
+
+/// De letters die achter een Maltees identiteitskaartnummer mogen staan.
+///
+/// Geen controleletter maar een categorie: `M` en `G` voor wie tussen 1900 en
+/// 1999 in Malta respectievelijk Gozo is geregistreerd, `L` en `H` voor wie dat
+/// vanaf 2000 is, `B` en `Z` voor de negentiende eeuw, `A` voor houders van een
+/// verblijfsvergunning en `P` voor Maltezen die in het buitenland zijn geboren.
+const String _mtIdCardSuffixes = 'ABGHLMPZ';
+
+/// Identiteitskaartnummer: 7 cijfers + één van acht letters.
+///
+/// **Er is geen checksum, en die verzinnen we niet.** De letter codeert een
+/// categorie en controleert niets; de zeven cijfers zijn een volgnummer. Wat
+/// overblijft is een vorm die acht van de 26 letters toestaat — te weinig om
+/// alleen op af te gaan, want `1234567M` is net zo goed een artikelcode. Vandaar
+/// dat de regel in `privacy_eu_rules.dart` een contextwoord eist en nooit boven
+/// `waarschijnlijk` komt, precies zoals `uk.nino` en `cw.sedula`.
+bool isValidMtIdCard(String raw) {
+  final v = raw.replaceAll(RegExp(r'[\s-]'), '').toUpperCase();
+  if (!RegExp(r'^\d{7}[A-Z]$').hasMatch(v)) return false;
+  return _mtIdCardSuffixes.contains(v[7]);
+}
+
 // ── Cyprus ───────────────────────────────────────────────────────────────────
 
 /// De omzetting van de cijfers op de óneven posities in een Cypriotische TIC.

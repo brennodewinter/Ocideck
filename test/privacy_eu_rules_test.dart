@@ -64,6 +64,19 @@ void main() {
       expect(rulesIn('NHS 943 476 7016'), contains('uk.nhs'));
     });
 
+    test('het Maltese ID-nummer vuurt alleen mét contextwoord', () {
+      // Zeven cijfers plus een van acht letters is geen bewijs: `0384219M` is
+      // net zo goed een artikelcode.
+      expect(rulesIn('code 0384219M'), isNot(contains('mt.id')));
+      expect(rulesIn('identity card 0384219M'), contains('mt.id'));
+    });
+
+    test('"valid card" is geen contextwoord voor Malta', () {
+      // Contextwoorden worden als deelstring gezocht, dus `id card` zou
+      // aanslaan op "valid card". Daarom staat het er niet bij.
+      expect(rulesIn('a valid card 0384219M'), isNot(contains('mt.id')));
+    });
+
     test('de Cypriotische TIC komt niet boven "waarschijnlijk"', () {
       // Een mod-26 over acht cijfers is te zwak voor `zeker`, en dezelfde code
       // hoort bij een mens óf bij een bedrijf. Twee redenen, dezelfde uitkomst.

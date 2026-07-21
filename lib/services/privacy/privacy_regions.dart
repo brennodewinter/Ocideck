@@ -55,14 +55,14 @@ const Set<String> _knownEuropeanCodes = {
 /// níét doet" verbiedt. LT en SK stáán er wél in: hun nummers worden gedekt door
 /// een regel van de buren, zie [sharedRegionRules].
 ///
-/// Nog open: MT en LI.
+/// Nog open: alleen LI.
 ///
 /// Bouw je zo'n regel, zet het land er dan bij — `privacy_region_coverage_test`
 /// wordt rood tot je dat doet.
 const Set<String> _europeanRegions = {
   'at', 'be', 'bg', 'ch', 'cy', 'cz', 'de', 'dk', 'ee', 'es', 'fi', 'fr', //
-  'gr', 'hr', 'hu', 'ie', 'is', 'it', 'lt', 'lu', 'lv', 'nl', 'no', 'pl', //
-  'pt', 'ro', 'se', 'si', 'sk', 'uk', //
+  'gr', 'hr', 'hu', 'ie', 'is', 'it', 'lt', 'lu', 'lv', 'mt', 'nl', 'no', //
+  'pl', 'pt', 'ro', 'se', 'si', 'sk', 'uk', //
 };
 
 /// Regels die voor meer dan één land gelden.

@@ -168,6 +168,26 @@ void main() {
     );
   });
 
+  group('Malta — géén checksum, dus alleen een vorm', () {
+    test('accepteert elk van de acht categorieletters', () {
+      for (final letter in ['A', 'B', 'G', 'H', 'L', 'M', 'P', 'Z']) {
+        expect(isValidMtIdCard('0384219$letter'), isTrue, reason: letter);
+      }
+    });
+
+    test('wijst een letter buiten de acht af', () {
+      for (final letter in ['C', 'D', 'K', 'Q', 'X']) {
+        expect(isValidMtIdCard('0384219$letter'), isFalse, reason: letter);
+      }
+    });
+
+    test('wijst een andere lengte af', () {
+      expect(isValidMtIdCard('038421M'), isFalse);
+      expect(isValidMtIdCard('03842190M'), isFalse);
+      expect(isValidMtIdCard('0384219'), isFalse);
+    });
+  });
+
   group('Cyprus — de TIC en de mod-26-controleletter', () {
     test('de referentiewaarde uit python-stdnum klopt', () {
       // `10259033P` is de doctest-waarde van `stdnum/cy/vat.py`. Hij staat hier

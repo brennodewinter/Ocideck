@@ -106,6 +106,26 @@ final List<NationalIdentifierRule> euIdentifierRules = [
     validate: isValidBalticPersonalCode,
   ),
   NationalIdentifierRule(
+    id: 'mt.id',
+    country: 'MT',
+    pattern: RegExp(r'\b\d{7}[A-Z]\b'),
+    validate: isValidMtIdCard,
+    // Géén checksum — de letter codeert geboortestreek en -eeuw, niet een
+    // controle. Acht van de 26 letters toestaan achter zeven cijfers is te ruim
+    // om alleen op af te gaan, dus de contextpoort draagt alles.
+    //
+    // `id card` staat er bewust níét bij: contextwoorden worden als
+    // deelstring gezocht, en "valid card" bevat "id card".
+    contextWords: [
+      'identity card',
+      'identiteitskaart',
+      'karta tal-identità',
+      'id-kaart',
+      'maltese id',
+    ],
+    confidence: PrivacyConfidence.likely,
+  ),
+  NationalIdentifierRule(
     id: 'cy.tic',
     country: 'CY',
     pattern: RegExp(r'\b\d{8}[A-Z]\b'),

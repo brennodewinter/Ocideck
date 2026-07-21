@@ -571,6 +571,7 @@ const Map<String, String> _nationalNumberNames = {
   'lv.pk': 'personas kods',
   'lu.matricule': 'matricule',
   'cy.tic': 'TIC',
+  'mt.id': 'ID Card Number',
   'uk.nhs': 'NHS',
   'uk.nino': 'NINO',
 };
