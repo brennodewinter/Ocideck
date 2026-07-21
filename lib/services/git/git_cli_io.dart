@@ -7,6 +7,8 @@ import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
+import '../../utils/log.dart';
+
 import 'git_cli.dart';
 
 /// De echte uitvoerder: één subproces, gestart en afgeschermd. Vervangbaar in
@@ -275,7 +277,13 @@ class NativeGitCli implements GitCli {
     try {
       final support = await getApplicationSupportDirectory();
       return Directory(p.join(support.path, 'git_sandbox'));
-    } catch (_) {
+    } on Object catch (e) {
+      // Geen stille terugval: dat de app-support-map niet te krijgen is, is
+      // het vermelden waard — in de app hoort dit niet te gebeuren.
+      logWarning(
+        'NativeGitCli: geen app-support-map, zandbak in een privé tijdelijke map',
+        e,
+      );
       return Directory.systemTemp.createTemp('ocideck_git_sandbox_');
     }
   }
