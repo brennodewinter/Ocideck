@@ -737,6 +737,9 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Via deze website ophalen?': 'Fia dizze webside ophelje?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'De server fan dizze presintaasje liet de browser it bestân net streekrjocht lêze. OciDeck kin it adres trochjaan oan de webside dêr\'t OciDeck sels weikomt, en dy hellet it dan op. Dy webside sjocht dêrmei it folsleine adres — stiet der in kaai of koade yn de link, dan sjocht dy webside dy ek.',
   'In de browser kan dit niet worden bewaard':
       'Yn de browser kin dit net bewarre wurde',
   'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':

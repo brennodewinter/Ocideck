@@ -1807,6 +1807,9 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Via deze website ophalen?': 'Λήψη μέσω αυτού του ιστότοπου;',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Ο διακομιστής αυτής της παρουσίασης δεν επέτρεψε στο πρόγραμμα περιήγησης να διαβάσει το αρχείο απευθείας. Το OciDeck μπορεί να προωθήσει τη διεύθυνση στον ιστότοπο από τον οποίο προέρχεται το ίδιο το OciDeck, και εκείνος το ανακτά. Έτσι ο ιστότοπος αυτός βλέπει ολόκληρη τη διεύθυνση — αν στον σύνδεσμο υπάρχει κλειδί ή κωδικός, τα βλέπει κι αυτά.',
   'In de browser kan dit niet worden bewaard':
       'Στο πρόγραμμα περιήγησης αυτό δεν μπορεί να αποθηκευτεί',
   'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':

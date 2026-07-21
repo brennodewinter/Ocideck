@@ -1770,6 +1770,9 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Via deze website ophalen?': 'Kas tuua selle veebisaidi kaudu?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Selle esitluse server ei lubanud brauseril faili otse lugeda. OciDeck saab anda aadressi edasi veebisaidile, kust OciDeck ise pärineb, ja see toob faili. Nii näeb see veebisait kogu aadressi — kui lingis on võti või kood, näeb see veebisait ka seda.',
   'In de browser kan dit niet worden bewaard':
       'Brauseris ei saa seda salvestada',
   'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':

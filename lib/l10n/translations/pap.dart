@@ -736,6 +736,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Via deze website ophalen?': 'Buska via e website aki?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'E server di e presentashon aki no a laga e browser lesa e archivo direktamente. OciDeck por pasa e adrès pa e website di unda OciDeck mes ta bini, i e website ei ta buska. Asina e website ei ta mira e adrès kompleto — si tin un yabi of un kódigo den e link, e website ei ta mira esei tambe.',
   'In de browser kan dit niet worden bewaard':
       'Den e browser esaki no por wòrdu wardá',
   'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':

@@ -1815,6 +1815,9 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Via deze website ophalen?': 'Faigh tríd an suíomh seo?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Níor lig freastalaí na láithreoireachta seo don bhrabhsálaí an comhad a léamh go díreach. Is féidir le OciDeck an seoladh a chur ar aghaidh chuig an suíomh as a dtagann OciDeck féin, agus faigheann an suíomh sin é. Mar sin feiceann an suíomh sin an seoladh iomlán — má tá eochair nó cód sa nasc, feiceann an suíomh sin iad sin freisin.',
   'In de browser kan dit niet worden bewaard':
       'Ní féidir é seo a shábháil sa bhrabhsálaí',
   'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':

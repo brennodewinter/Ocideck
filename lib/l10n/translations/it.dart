@@ -732,6 +732,9 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Via deze website ophalen?': 'Recuperare tramite questo sito?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Il server di questa presentazione non ha permesso al browser di leggere il file direttamente. OciDeck può passare l\'indirizzo al sito da cui proviene OciDeck stesso, che lo recupera al posto suo. Quel sito vede così l\'indirizzo completo — se nel link c\'è una chiave o un codice, quel sito vede anche quelli.',
   'In de browser kan dit niet worden bewaard':
       'Nel browser questo non può essere salvato',
   'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':

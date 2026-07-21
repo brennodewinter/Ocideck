@@ -1783,6 +1783,9 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Via deze website ophalen?': 'Über die Website abhole?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'De Server vo dere Präsentation het de Browser d Datei nöd direkt läse la. OciDeck cha d Adrässe a die Website wytergäh, wo s OciDeck sälber härchunt, und die holt si denn ab. Damit gseht die Website di ganzi Adrässe — staht im Link en Schlüssel oder Code, gseht die Website dä au.',
   'In de browser kan dit niet worden bewaard':
       'Im Browser cha das nöd gspycheret wärde',
   'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':

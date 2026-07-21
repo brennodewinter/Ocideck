@@ -1795,6 +1795,9 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Via deze website ophalen?': 'Per hunc situm accersere?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Servitor huius praesentationis navigatro plicam directe legere non permisit. OciDeck inscriptionem tradere potest situi unde ipsum OciDeck venit, qui eam tunc accersit. Ita ille situs totam inscriptionem videt — si clavis aut nota in nexu inest, ille situs eam quoque videt.',
   'In de browser kan dit niet worden bewaard':
       'In navigatro hoc servari non potest',
   'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':

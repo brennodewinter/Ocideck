@@ -1797,6 +1797,9 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Via deze website ophalen?': 'Preluare prin acest site?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Serverul acestei prezentări nu a lăsat browserul să citească fișierul direct. OciDeck poate transmite adresa către site-ul de la care vine însuși OciDeck, iar acel site îl preia. Astfel, acel site vede adresa completă — dacă în link există o cheie sau un cod, acel site le vede și pe acestea.',
   'In de browser kan dit niet worden bewaard':
       'În browser acest lucru nu poate fi salvat',
   'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':

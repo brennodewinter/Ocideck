@@ -1801,6 +1801,9 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Via deze website ophalen?': 'Iġib permezz ta\' dan is-sit?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Is-server ta\' din il-preżentazzjoni ma ħalliex lill-brawżer jaqra l-fajl direttament. OciDeck jista\' jgħaddi l-indirizz lis-sit li minnu ġej OciDeck stess, u dak is-sit iġibu. B\'hekk dak is-sit jara l-indirizz sħiħ — jekk fil-link hemm ċavetta jew kodiċi, dak is-sit jarahom ukoll.',
   'In de browser kan dit niet worden bewaard':
       'Fil-browser dan ma jistax jiġi salvat',
   'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':

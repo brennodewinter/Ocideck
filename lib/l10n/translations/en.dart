@@ -918,6 +918,9 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Via deze website ophalen?': 'Fetch via this website?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'The server of this presentation did not let the browser read the file directly. OciDeck can pass the address on to the website OciDeck itself comes from, and that website fetches it instead. That website then sees the full address — if there is a key or a code in the link, that website sees it too.',
   'In de browser kan dit niet worden bewaard':
       'This cannot be saved in the browser',
   'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':

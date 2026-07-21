@@ -1778,6 +1778,9 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Via deze website ophalen?': 'Hämta via den här webbplatsen?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Servern för den här presentationen lät inte webbläsaren läsa filen direkt. OciDeck kan skicka adressen vidare till den webbplats som OciDeck självt kommer från, och den hämtar filen. Därmed ser den webbplatsen hela adressen — finns det en nyckel eller kod i länken ser webbplatsen även den.',
   'In de browser kan dit niet worden bewaard':
       'Det här kan inte sparas i webbläsaren',
   'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':

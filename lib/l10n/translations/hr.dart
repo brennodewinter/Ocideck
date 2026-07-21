@@ -1786,6 +1786,9 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Via deze website ophalen?': 'Dohvatiti putem ovog web-mjesta?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Poslužitelj ove prezentacije nije dopustio pregledniku da izravno pročita datoteku. OciDeck može proslijediti adresu web-mjestu s kojega dolazi i sam OciDeck, pa će je ono dohvatiti. To web-mjesto tada vidi cijelu adresu — ako je u poveznici ključ ili kôd, to web-mjesto vidi i njega.',
   'In de browser kan dit niet worden bewaard':
       'U pregledniku se ovo ne može spremiti',
   'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':

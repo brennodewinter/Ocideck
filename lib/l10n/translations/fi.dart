@@ -1779,6 +1779,9 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Via deze website ophalen?': 'Haetaanko tämän sivuston kautta?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Tämän esityksen palvelin ei antanut selaimen lukea tiedostoa suoraan. OciDeck voi välittää osoitteen sille sivustolle, jolta OciDeck itse on peräisin, ja se hakee tiedoston. Silloin tuo sivusto näkee koko osoitteen — jos linkissä on avain tai koodi, sivusto näkee myös sen.',
   'In de browser kan dit niet worden bewaard':
       'Tätä ei voi tallentaa selaimessa',
   'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':

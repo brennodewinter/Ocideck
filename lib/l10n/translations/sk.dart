@@ -1786,6 +1786,9 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Via deze website ophalen?': 'Načítať cez túto webovú stránku?',
+  'De server van deze presentatie liet de browser het bestand niet rechtstreeks lezen. OciDeck kan het adres doorgeven aan de website waar OciDeck zelf vandaan komt, en die haalt het dan op. Die website ziet daarmee het volledige adres — staat er een sleutel of code in de link, dan ziet die website die ook.':
+      'Server tejto prezentácie nedovolil prehliadaču prečítať súbor priamo. OciDeck môže odovzdať adresu webovej stránke, z ktorej sám pochádza, a tá súbor načíta. Tá webová stránka tak vidí celú adresu — ak je v odkaze kľúč alebo kód, vidí aj ten.',
   'In de browser kan dit niet worden bewaard':
       'V prehliadači sa to nedá uložiť',
   'Een browser heeft geen sleutelbos zoals een computer die heeft: wat OciDeck hier zou opslaan, kan elk script op deze pagina meelezen. Gebruik de desktopversie — daar gaat het geheim wél in de sleutelbos van het besturingssysteem.':
