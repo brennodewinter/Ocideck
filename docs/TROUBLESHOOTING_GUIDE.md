@@ -120,23 +120,35 @@ This guide addresses frequently encountered problems, their causes, and step-by-
    - A rule that keeps flagging something you accept can be switched off
      individually — *Deze regel nooit meer melden* on the finding itself
 
-### Installation and Setup Problems
+### Build and Startup Problems
+
+There is no installer. OciDeck is built from source with the pinned Flutter
+toolchain, so what would elsewhere be an installation problem is a build problem
+here. *Corrected 2026-07-21: this section used to advise "completely uninstall
+OciDeck before reinstalling" and to clear residual configuration in
+"application directories" — instructions for a distribution that does not
+exist.*
 
 **Symptoms**:
-- Application fails to start or crashes on launch
+- The app fails to start or crashes on launch
 - Missing dependencies or library errors
-- Platform-specific issues  
+- Platform-specific build errors
 
 **Solutions**:
 1. **Verify Prerequisites**:
-   - Check Flutter/Dart version requirements match installed versions  
-   - Confirm platform toolchain is properly configured
-   - Ensure sufficient disk space for installation
+   - Check that your Flutter/Dart version matches the pinned toolchain in
+     `.tool-versions` — `make format-check` in particular is version-sensitive
+     (see [BUILD.md](BUILD.md))
+   - Confirm the platform toolchain is properly configured
+   - Ensure sufficient disk space for the build output
 
-2. **Reinstallation Process**:
-   - Completely uninstall OciDeck before reinstalling
-   - Clear any residual configuration files in application directories  
-   - Reinstall with clean dependencies using `make setup`
+2. **Start from a clean build**:
+   - `flutter clean`, then `make setup` (which is `flutter pub get`)
+   - In a fresh worktree, `flutter pub get` must run before `make check`, or the
+     format check trips over `third_party/`
+   - Settings live in the platform's ordinary preferences store and survive a
+     rebuild; removing them resets the app to its defaults, and also drops the
+     list of storage connections
 
 3. **Platform-Specific Issues**:
    - macOS: Verify Xcode command line tools are installed
@@ -224,7 +236,9 @@ This guide addresses frequently encountered problems, their causes, and step-by-
 ### System Information Collection
 
 1. **Basic Info Gathering**:
-   - Note OciDeck version, OS version, and Flutter/Dart versions
+   - Note the commit you built from, your OS version, and the Flutter/Dart
+     versions. There is no OciDeck version to quote: nothing is released, and
+     the app does not display one.
    - Capture exact error messages with timestamps  
    - Document steps taken before the issue occurred
 
