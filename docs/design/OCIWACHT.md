@@ -935,7 +935,7 @@ gemarkeerd. Elk kanaal krijgt een eigen test.
 
 | Kanaal | Code | Behandeling |
 | --- | --- | --- |
-| Preview / thumbnail / slidelijst | `slide_preview.dart`, `slide_thumbnail.dart` | AudienceDeck |
+| Preview / thumbnail / slidelijst | `slide_preview.dart`, `slide_thumbnail.dart` | **Nog bron** — zie de noot onder deze tabel |
 | Volledig scherm + **publieksvenster** | `fullscreen_presenter.dart`, `audience_window.dart` | AudienceDeck |
 | PDF | `export_service.dart:238-255` — puur raster (`pw.Image`), **geen tekstlaag** ✓ | AudienceDeck (pixels) |
 | PPTX-slides | `slide_rasterizer.dart` → PNG in de zip | AudienceDeck (pixels) |
@@ -945,12 +945,24 @@ gemarkeerd. Elk kanaal krijgt een eigen test.
 | Mermaid-diagrammen | `mermaid_render_service.dart`, `marp_html_service_charts.dart` | AudienceDeck |
 | Semantics / schermlezer | Flutter-semantics van de preview-widgets | Volgt automatisch: de widget krijgt de tekens niet |
 | Tekstselectie in een leesoppervlak | `SelectionArea` in `document_reader_screen.dart` | Volgt automatisch |
-| **AI-verzoeken** | `ai_client_service.dart`, `finding_ai_service.dart`, `image_alt_ai_service.dart`, `management_summary.dart` | **Strengere projectie**, zie §6.2 |
+| **AI-verzoeken (tekst)** | `ai_client_service.dart`, `finding_ai_service.dart`, `management_summary.dart` | **Strengere projectie**, zie §6.2 |
+| **AI-verzoeken (beeld)** | `image_alt_ai_service.dart` | **Geen projectie** — de afbeeldingsbytes gaan ongewijzigd naar het model; alleen de consent-poort staat ertussen, zie §6.2 |
 | Auditdossier | `audit_dossier.dart` | AudienceDeck, tenzij het dossier bewust de bron vastlegt (dan expliciet als zodanig gemarkeerd) |
 | Klembord (repetitie-samenvatting) | `rehearsal_summary.dart:55` | AudienceDeck |
 | Klembord (markdown-editor) | `markdown_deck_editor.dart:666` | **Bron-kanaal** — dit ís de markdown, per ontwerp ongeredigeerd |
 | Opslaan / WebDAV / Nextcloud | `file_service.dart`, `webdav_service.dart` | **Bron-kanaal** — de `.md` blijft integraal, dat was de eis |
 | Logging | `lib/utils/log.dart` | Veldinhoud wordt nooit gelogd; bevindingen loggen alleen regel-id + slide-index, nooit de waarde |
+
+> **De editor-preview is nog geen ontvangend oppervlak** (*gecorrigeerd
+> 2026-07-21*). De eerste rij zei "AudienceDeck", en §6 staat in de statustabel
+> bovenaan als *geleverd*, wat samen leest als: de preview toont geredigeerde
+> tekst. Dat doet ze niet. `preview_panel.dart` leest `deckProvider` rechtstreeks
+> en geeft het rauwe deck door; de slidelijst en de miniaturen ook. De projectie
+> wordt wél toegepast waar een ander dan de auteur meekijkt: presenteren en het
+> publieksvenster (`shell_actions.dart`), elke export (`app_shell_main_layout.dart`),
+> het klembord van de slidelijst en het auditdossier. De grens klopt dus voor
+> iedereen behalve de auteur aan zijn eigen scherm — wat verdedigbaar is, maar
+> niet is wat hier stond.
 
 ### 6.2 Het publiek is niet hetzelfde als een derde partij
 
@@ -967,6 +979,18 @@ Daarom twee projecties:
   toestemming voor geeft. Dit is de projectie die de AI-diensten krijgen.
 
 `ai_security_gate.dart` bestaat al en is de natuurlijke plek voor die poort.
+
+> **Waar dit staat, en waar nog niet** (*gecorrigeerd 2026-07-21*). De
+> tekstkant klopt: `finding_editor.dart` haalt de vrije tekst door
+> `PrivacyProjection.forExternalProcessing` voordat er iets naar het model gaat.
+> De **beeldkant niet**: `alt_text_field.dart` en de tagger in de
+> afbeeldingenbibliotheek lezen de afbeelding van schijf, verkleinen haar en
+> sturen de bytes door `ai_client_service` naar buiten. Er is geen projectie
+> tussen — die redigeert tekst en zou op pixels ook niets doen. Wat er wél
+> tussen zit is de poort: de AI-backend staat standaard uit en een uitgaande
+> endpoint vraagt om expliciete toestemming. Dat is een andere waarborg dan een
+> projectie, en de tabel in §6.1 hoort dat verschil te tonen in plaats van beide
+> "Strengere projectie" te noemen.
 
 ### 6.3 De vervanging zelf
 
@@ -1127,8 +1151,15 @@ Nieuwe sectie in het tabblad "Veiligheid" (`settings_dialog_security.dart`), wan
 | `privacyRedactionStyle` | blokken (`████`) / label (`[BSN]`) | blokken |
 | `privacyOwnIdentity` | vrije lijst: naam, e-mail, telefoon, domein | leeg |
 | `ociWachtWatermark` | bool | uit |
-| `privacyPreviewProfile` | welk doelgroepprofiel de preview toont | het profiel waarmee je zou exporteren |
+| `privacyPreviewProfile` | welk doelgroepprofiel de preview toont | het profiel waarmee je zou exporteren — **bestaat niet**, zie de noot |
 | `privacyCustomRules` | pad naar een eigen regelbestand (fase 7) | leeg |
+
+> **`privacyPreviewProfile` is nooit gebouwd** (*vastgesteld 2026-07-21*). De
+> naam komt in `lib/` en `test/` nergens voor, en de editor-preview toont de
+> bron in plaats van een doelgroepprofiel (zie de noot bij §6.1). De regel blijft
+> in deze tabel staan omdat dit een ontwerpdocument is en het voorstel er nog
+> ligt, maar met het etiket erbij — anders leest hij als een instelling die je in
+> de app kunt vinden.
 
 De hoofdschakelaar staat aan; alles is uit te zetten. Per regel uitzetten kan via
 `privacyDisabledRules` (vanuit de melding zelf: "deze regel nooit meer melden") — dat is een
@@ -1237,6 +1268,10 @@ Vastgesteld, niet meer open:
    met standaard het profiel waarmee je zou exporteren. Daar is dit stelsel voor: de auteur ziet
    wat de gekozen ontvanger ziet. Een expliciete "toon origineel"-knop blijft beschikbaar in het
    paneel — de bron staat sowieso in de editorvelden en in markdown-modus.
+
+   *Besloten, niet gebouwd (2026-07-21).* De instelling bestaat niet en de preview toont de
+   bron. Deze beslissing staat er nog omdat ze niet is teruggedraaid, maar ze beschrijft geen
+   gedrag dat je in de app aantreft; §6.1 en §7 dragen dezelfde noot.
 2. **Gemengd in het kwaliteitspaneel**, met een eigen categoriefilter. Eén plek waar de gebruiker
    kijkt.
 3. **`zeker`-bevindingen zijn standaard een waarschuwing**, niet een fout, met

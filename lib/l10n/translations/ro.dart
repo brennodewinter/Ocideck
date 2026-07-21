@@ -1797,6 +1797,14 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
+      '•  Baza de date CVE locală (descărcarea o porniți dumneavoastră): OciDeck preia datele în masă prin api.github.com și fișierul de lansare către care indică acea adresă.',
+  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
+      '•  Căutare CVE (dezactivată implicit): când este activată, termenul dumneavoastră de căutare ajunge la oglinda CVE configurată și, dacă aceasta nu găsește nimic, la baza de date europeană a ENISA și la MITRE.',
+  '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
+      '•  Un videoclip YouTube sau Vimeo încorporat încarcă playerul de la serviciul respectiv.',
+  '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
+      '•  În browser: dacă browserul refuză să preia direct o adresă, OciDeck încearcă din nou prin serverul de la care a venit aplicația; acea adresă ajunge atunci la acel server.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Un subtitlu de secțiune care anunță o nouă parte a prezentării. Păstrează-l scurt. Adaugă o imagine de fundal din biblioteca de imagini.',
   'Bronnen doorzoeken…': 'Se caută în surse…',

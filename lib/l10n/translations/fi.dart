@@ -1779,6 +1779,14 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
+      '•  Paikallinen CVE-tietokanta (käynnistät latauksen itse): OciDeck hakee joukkotiedot osoitteen api.github.com kautta ja sen julkaisutiedoston, johon osoite viittaa.',
+  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
+      '•  CVE-haku (oletuksena pois päältä): kun se on päällä, hakusanasi menee asetettuun CVE-peilipalvelimeen ja, jos se ei löydä mitään, ENISAn eurooppalaiseen tietokantaan ja MITREen.',
+  '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
+      '•  Upotettu YouTube- tai Vimeo-video lataa soittimen kyseiseltä palvelulta.',
+  '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
+      '•  Selaimessa: jos selain kieltäytyy noutamasta osoitetta suoraan, OciDeck yrittää uudelleen sen palvelimen kautta, jolta sovellus tuli; osoite päätyy silloin tuolle palvelimelle.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Osion väliotsikko, joka ilmoittaa esityksen uudesta osasta. Pidä se lyhyenä. Lisää taustakuva kuvakirjastosta.',
   'Bronnen doorzoeken…': 'Haetaan lähteistä…',

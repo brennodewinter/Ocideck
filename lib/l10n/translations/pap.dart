@@ -736,6 +736,14 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
+      '•  E base di datos CVE lokal (ta bo ta kuminsá e download): OciDeck ta buska e datos na bulto via api.github.com i e archivo di release ku e adrès ei ta indiká.',
+  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
+      '•  Buska CVE (ta pagá pa defekto): si e ta sendé, bo palabra di buskeda ta bai na e spil CVE konfigurá i, si esei no haña nada, na e base di datos Europeo di ENISA i na MITRE.',
+  '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
+      '•  Un vidio di YouTube of Vimeo inkorporá ta karga e reprodukdó for di e servisio ei.',
+  '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
+      '•  Den e browser: si e browser ta nenga di haña un adrès direktamente, OciDeck ta purba atrobe via e server for di kua e app a bini; e ora ei e adrès ta yega e server ei.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Un enkabesamentu di sekshon ku ta anunsiá un parti nobo di e presentashon. Tenele kòrtiku. Agregá un imágen di fondo for di e biblioteka di imágen.',
   'Bronnen doorzoeken…': 'Ta buska den e fuentenan…',

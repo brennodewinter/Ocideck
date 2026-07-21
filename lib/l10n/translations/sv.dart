@@ -1778,6 +1778,14 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
+      '•  Den lokala CVE-databasen (du startar hämtningen själv): OciDeck hämtar massdata via api.github.com och den utgåvefil som adressen pekar på.',
+  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
+      '•  CVE-sökning (av som standard): när den är på skickas din sökterm till den inställda CVE-spegeln och, om den inte hittar något, till ENISA:s europeiska databas och till MITRE.',
+  '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
+      '•  En inbäddad YouTube- eller Vimeo-video hämtar spelaren från den tjänsten.',
+  '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
+      '•  I webbläsaren: om webbläsaren vägrar hämta en adress direkt försöker OciDeck igen via den server appen kom från; adressen når då den servern.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'En mellanrubrik som aviserar en ny del av presentationen. Håll den kort. Lägg till en bakgrundsbild via bildbiblioteket.',
   'Bronnen doorzoeken…': 'Söker i källor…',

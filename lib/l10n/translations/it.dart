@@ -732,6 +732,14 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
+      '•  La banca dati CVE locale (sei tu ad avviare il download): OciDeck recupera i dati in blocco tramite api.github.com e il file di rilascio a cui quell\'indirizzo rimanda.',
+  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
+      '•  Ricerca CVE (disattivata per impostazione predefinita): se è attiva, il termine di ricerca viene inviato al mirror CVE configurato e, se non trova nulla, alla banca dati europea dell\'ENISA e a MITRE.',
+  '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
+      '•  Un video YouTube o Vimeo incorporato carica il lettore da quel servizio.',
+  '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
+      '•  Nel browser: se il browser rifiuta di recuperare un indirizzo direttamente, OciDeck riprova tramite il server da cui proviene l\'app; quell\'indirizzo raggiunge allora quel server.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Un titolo di sezione che annuncia una nuova parte della presentazione. Mantienilo breve. Aggiungi un\'immagine di sfondo dalla libreria immagini.',
   'Bronnen doorzoeken…': 'Ricerca nelle fonti…',

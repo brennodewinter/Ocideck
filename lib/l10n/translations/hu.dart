@@ -1783,6 +1783,14 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
+      '•  A helyi CVE-adatbázis (a letöltést Ön indítja): az OciDeck a tömeges adatokat az api.github.com címen és az arra mutató kiadási fájlon keresztül tölti le.',
+  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
+      '•  CVE-keresés (alapértelmezetten kikapcsolva): ha be van kapcsolva, a keresőkifejezés a beállított CVE-tükörhöz kerül, és ha az nem talál semmit, az ENISA európai adatbázisához és a MITRE-hez.',
+  '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
+      '•  A beágyazott YouTube- vagy Vimeo-videó a lejátszót az adott szolgáltatástól tölti be.',
+  '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
+      '•  A böngészőben: ha a böngésző megtagadja egy cím közvetlen letöltését, az OciDeck újra próbálja azon a kiszolgálón keresztül, ahonnan az alkalmazás érkezett; így az a cím eljut arra a kiszolgálóra.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Szakaszcím, amely a bemutató új részét jelzi. Tartsd röviden. Adj hozzá háttérképet a képtárból.',
   'Bronnen doorzoeken…': 'Keresés a forrásokban…',

@@ -271,9 +271,14 @@ model.
   `verifyRedactedDerivative()` reconciles a redacted export against its sealed
   source via the redaction manifest so a legitimate redaction is not a false
   alarm. An optional `DocumentSignature` is folded into the seal. Related
-  audit-value tooling exists for the pentest module: RFC 3161 trusted timestamps
+  audit-value tooling exists for the pentest module: RFC 3161 timestamp tokens
   (`rfc3161_timestamp.dart`), evidence hashing (`evidence_hash_service.dart`),
-  and an audit dossier (`audit_dossier.dart`).
+  and an audit dossier (`audit_dossier.dart`). The timestamp handling is
+  deliberately shallow: `timeStampMatchesHash` compares the token's message
+  imprint with the seal hash and stops there — no CMS signature, no certificate,
+  no chain. It shows that *this* token was issued over *this* hash, not that a
+  trustworthy authority issued it. Calling it a "trusted timestamp" overstated
+  that; *corrected 2026-07-21*.
 - **Encrypted packages.** `.ocideck` packages can be encrypted
   (`lib/utils/zip_encryption.dart`, wired into `FileService`); an encrypted
   package cannot be opened without its password.
@@ -344,14 +349,31 @@ data local:
   re-pins the socket on every redirect hop (max 5, https-only). Live CVE lookups
   use the 2 MiB-capped `PinnedCveTransport`.
 
-## Compliance & standards
+## Standards this design draws on
 
-- **EU Cyber Resilience Act (CRA):** machine-readable SBOM in CycloneDX and SPDX,
-  with a staleness gate (§2).
-- **GDPR:** data minimisation (no telemetry), local-only processing, and the
-  OciWacht scanner/redaction model (§8).
-- **ISO/IEC 27001:** risk-management thinking in the design; defence-in-depth and
-  fail-closed defaults.
+Read as influences on the design, not as a conformance statement — this section
+claims no certification and no compliance (*reworded 2026-07-21*).
+
+- **SBOM formats.** The bill of materials is emitted in CycloneDX 1.6 and SPDX
+  2.3 and held current by a staleness gate (§2), so it is machine-readable for
+  whoever needs it.
+- **GDPR thinking.** Data minimisation (no telemetry), processing on the device,
+  and the OciWacht scanner/redaction model (§8).
+- **Defence in depth.** Layered guards rather than a single boundary: the SSRF
+  guard, the import caps, path containment, the projection boundary.
+
+**"Fail-closed" is per mechanism, not a blanket default.** Several mechanisms do
+fail closed once they are switched on — the classification gate writes no file
+when a rule blocks, the SSRF guard refuses rather than falls back, an import over
+its cap is rejected. But the security-relevant *defaults* are mixed, and it is
+worth naming which is which: the privacy check is on by default, remote media,
+the AI backend and the CVE lookup are off by default, and the classification
+enforcement is **entirely off** by default (`maxReleaseExportTlpKey` and
+`minRequiredExportTlpKey` are null and `requireClassificationOnExport` is false
+in `AppSettings`). A deck therefore exports without any classification
+constraint until an organisation configures one, which is a deliberate choice —
+a gate nobody asked for is a gate that gets worked around — but it means "fail-closed
+defaults" was the wrong summary. *Corrected 2026-07-21.*
 
 ## Threat model
 

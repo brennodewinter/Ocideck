@@ -201,11 +201,13 @@ the key thing to understand before touching rendering:
    second on-screen WebView (`_VideoEmbedPreview`, the same pattern as the
    Mermaid host) wired to the provider's iframe API for end-detection and
    playhead reporting; remote rendering is gated by the **Online media** setting.
-2. **HTML export** — `services/marp_html_service.dart` produces a single
-   self-contained `.html` that renders in a browser using inlined JavaScript
-   (marked, highlight.js, mermaid, MathJax). Charts are pre-rendered to inline
-   **SVG in Dart** here (no JS chart library). Fidelity differs from the in-app
-   renderer by design.
+2. **HTML export** — `services/marp_html_service.dart` produces a single `.html`
+   that renders in a browser using inlined JavaScript (marked, highlight.js,
+   mermaid, MathJax), inlined CSS and an inlined font. Charts are pre-rendered to
+   inline **SVG in Dart** here (no JS chart library). Fidelity differs from the
+   in-app renderer by design. The service never reads image files: an `![](…)`
+   reaches the browser as a relative `<img src>`, so the export is
+   self-contained in everything except slide images (corrected 2026-07-21).
 
 Both worlds converge at one chokepoint: `services/export_service.dart`
 (`ExportService.export()`) is the only place that writes an export.

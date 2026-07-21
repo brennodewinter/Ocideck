@@ -1815,6 +1815,14 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
+      '•  An bunachar sonraí CVE áitiúil (tusa a chuireann an íoslódáil ar bun): faigheann OciDeck na sonraí ollmhóra trí api.github.com agus an comhad eisiúna a bhfuil an seoladh sin ag díriú air.',
+  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
+      '•  Cuardach CVE (múchta de réir réamhshocraithe): nuair atá sé lasta, téann do théarma cuardaigh chuig an scáthán CVE atá socraithe agus, mura bhfaigheann sin aon rud, chuig bunachar sonraí Eorpach ENISA agus chuig MITRE.',
+  '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
+      '•  Luchtaíonn físeán YouTube nó Vimeo leabaithe an seinnteoir ón tseirbhís sin.',
+  '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
+      '•  Sa bhrabhsálaí: má dhiúltaíonn an brabhsálaí seoladh a fháil go díreach, déanann OciDeck iarracht eile tríd an bhfreastalaí ar tháinig an feidhmchlár uaidh; sroicheann an seoladh sin an freastalaí sin ansin.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Ceannteideal rannóige a fhógraíonn cuid nua den chur i láthair. Coinnigh gearr é. Cuir íomhá chúlra leis ón leabharlann íomhánna.',
   'Bronnen doorzoeken…': 'Ag cuardach foinsí…',

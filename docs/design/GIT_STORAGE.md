@@ -1,21 +1,26 @@
 # OciDeck — Git-Repository Storage (Design)
 
-> **Status: Phases 0 and 1 landed; the rest is still a design proposal.**
-> Opening a deck read-only from a Forgejo/Gitea repository works today, pooled
-> images and all — see [`../SOURCE_MAP.md`](../SOURCE_MAP.md) for what exists
-> (`lib/services/git/`, `lib/state/git_provider.dart`,
-> `lib/state/tabs_provider_git.dart`) and [`../USER_GUIDE.md`](../USER_GUIDE.md)
-> for how to use it. Everything from Phase 2 on — writing, native git, releases —
-> is still design. Each phase folds its part into the current-state docs as it
-> lands.
+> **Status: phases 0 through 6 have landed.** Reading, writing, the native `git`
+> plane, releases, the GitHub and GitLab adapters and the cross-deck asset index
+> all exist — see §12 for what each phase actually delivered, together with the
+> gaps each one recorded rather than hid. What remains open is verification, not
+> construction: §14 "The one still open" (OQ-10 on Windows and Linux, and a live
+> Basic-auth handshake) and [`VERIFICATION.md`](VERIFICATION.md).
 >
-> This document describes a *future* storage backend and the architecture chosen
-> for it. It is deliberately kept separate from the current-state contributor
-> docs ([`ARCHITECTURE.md`](../ARCHITECTURE.md), [`SOURCE_MAP.md`](../SOURCE_MAP.md),
+> *Corrected 2026-07-21: this banner said "Phases 0 and 1 landed; the rest is
+> still a design proposal" and "everything from Phase 2 on … is still design",
+> while §12 in this same document marks phase 5 done and phase 6 shipped, and
+> `lib/services/git/` carries the sync engine, the outbox, the three forge
+> adapters and the native mirror. A status line at the top of a design document
+> is the first thing a reader believes and the last thing anyone updates.*
+>
+> This document describes the architecture chosen for that backend. It is
+> deliberately kept separate from the current-state contributor docs
+> ([`ARCHITECTURE.md`](../ARCHITECTURE.md), [`SOURCE_MAP.md`](../SOURCE_MAP.md),
 > [`FILE_FORMAT.md`](../FILE_FORMAT.md)) so that those keep describing what
-> exists. When (parts of) this lands, fold the relevant sections into those docs
-> and the [`USER_GUIDE.md`](../USER_GUIDE.md), and update the
-> [`CHANGELOG.md`](../../CHANGELOG.md).
+> exists, and [`../USER_GUIDE.md`](../USER_GUIDE.md) describes how to use it.
+> Where a further piece lands, fold the relevant section into those docs and
+> update the [`CHANGELOG.md`](../../CHANGELOG.md).
 >
 > It is written to be **picked up cold**: exact file paths, integration points,
 > data shapes, invariants and open questions are spelled out so a later

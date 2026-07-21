@@ -65,6 +65,11 @@ extension _SettingsDocs on _SettingsDialogState {
         assetBase: 'docs/PRIVACY.md',
       ),
       DocEntry(
+        icon: Icons.accessibility_new_outlined,
+        title: l10n.d('Toegankelijkheid'),
+        assetBase: 'docs/ACCESSIBILITY.md',
+      ),
+      DocEntry(
         icon: Icons.menu_book_outlined,
         title: l10n.d('Begrippenlijst'),
         assetBase: 'docs/GLOSSARY.md',

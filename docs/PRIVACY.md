@@ -36,11 +36,21 @@ machine (desktop) or in your browser tab (web). This includes:
 - **Git working copies.** Connecting a git repository puts a real clone — full
   deck content and history — in a per-user application-support folder, plus a
   queue of commits that haven't been pushed yet. Unlike autosave snapshots these
-  are **not** cleared after 7 days: a working copy is meant to persist, so it
-  stays until you remove the connection. They are not encrypted either, and the
-  queued commit *messages* you typed are stored in the ordinary settings file.
-  If a repository's contents are sensitive, that sensitivity is on this disk too,
-  not only on the server.
+  are **not** cleared after 7 days: a working copy is meant to persist. They are
+  not encrypted either, and the queued commit *messages* you typed are stored in
+  the ordinary settings file. If a repository's contents are sensitive, that
+  sensitivity is on this disk too, not only on the server.
+
+  **Removing the connection does not remove the clone.** Deleting a git
+  connection in Settings takes the connection out of the settings file and
+  nothing else: the clone under `git_clone/<connection>/`, the draft store under
+  `git_mirror/<connection>/` and the queued commits under the `git_outbox::`
+  keys all stay where they are. The keychain secret stays too — deliberately,
+  because it belongs to the account rather than to this one connection. If you
+  need that content gone, delete those folders yourself. *Corrected 2026-07-21:
+  this paragraph used to say the working copy "stays until you remove the
+  connection", which reads as a promise that removing it cleans up. It does
+  not.*
 
 There is **no analytics, tracking, or usage reporting of any kind.**
 
@@ -94,12 +104,36 @@ against accessing internal/private network addresses.
 | Action | What is sent | Where |
 |---|---|---|
 | **Import from URL** | An HTTP(S) request for the deck/asset you named | The URL you entered |
+| **Import from URL — web fallback** | The same URL, as a query parameter, when the browser refuses the direct request on CORS grounds | `fetch-proxy` on the origin that served the app (see below) |
 | **Save/Open — Nextcloud/WebDAV** | Your deck files | Your configured server |
 | **Save/Open — S3** | Your deck files (objects) | Your configured endpoint (AWS S3, MinIO, or any S3-compatible service) |
 | **Save/Open — Git** | Your deck files (commits) | Your configured forge (Gitea/Forgejo/GitLab/GitHub) |
 | **AI assistant** (off by default) | The specific text/image you request help with | The endpoint you configured |
+| **CVE lookup** (off by default, desktop only) | Your search term or CVE id | The CVE mirror in Settings — by default `cveapi.librekat.nl`, run by the publisher — and, when that yields nothing, ENISA's EU Vulnerability Database and MITRE (neither of those two is configurable) |
+| **Local CVE database** (you start the download) | A request for the latest bulk release | `api.github.com`, then the release asset it points to |
+| **Embedded YouTube / Vimeo video** | A request for that service's player script and the video itself; the service can see that the video is being played | `youtube.com` / `vimeo.com` |
 
-Nothing here goes to OciDeck — it goes to servers **you** point it at.
+Everything in the first six rows goes to servers **you** point it at — not to
+OciDeck. The last three rows are the exceptions, and they are listed because
+naming them is the only honest way to keep the sentence above true:
+
+- The **fetch-proxy** exists because most servers send no CORS headers, so a
+  browser will not let the app read them. It only forwards bytes and stores
+  nothing, and it applies the same SSRF rules server-side that NetGuard applies
+  on desktop — but the URL you typed does reach whoever operates that origin,
+  and it is used automatically, without a separate prompt. On desktop the
+  fallback never runs. If you host the web build yourself, §4 of
+  [HOSTING.md](HOSTING.md) covers deploying (or deliberately not deploying) it.
+- The **CVE lookup** is off by default and desktop-only, and the mirror address
+  is a setting you can repoint at your own spiegel. The ENISA and MITRE
+  fallbacks are not settings; they are compiled in.
+- **YouTube and Vimeo** load their player from their own service, which is
+  inherent to embedding a video hosted there. Remote media is off by default
+  (*Settings → Security → allow remote media*).
+
+*Corrected 2026-07-21: this table previously listed only the five rows you
+choose yourself, and the sentence "Nothing here goes to OciDeck" was true of
+that shortened list rather than of the code.*
 
 ### Secrets are stored in your OS keychain
 
@@ -154,8 +188,10 @@ OciDeck can scan your deck for personal and sensitive data and either flag it or
 redact it. It detects, among others:
 
 - Email addresses, phone numbers, postal addresses and postcodes
-- IBAN/bank numbers (checksum-validated), BSN, and national identifiers for 13
-  EU member states plus two UK ones
+- IBAN/bank numbers (checksum-validated), BSN, and national identifiers for 21
+  EU member states, plus two UK ones and Swiss and Norwegian numbers
+  (*corrected 2026-07-21: the count said 13, which was the state of
+  `privacy_eu_rules.dart` before the second batch of European numbers landed*)
 - Secrets (API tokens, private keys, JWTs, plaintext passwords)
 - GDPR Article 9 special-category keywords
 - Structural leaks such as tokens embedded in URLs or local file paths

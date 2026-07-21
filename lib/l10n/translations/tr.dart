@@ -2760,4 +2760,13 @@ const _dutchSourceTr = {
 // Turks kwam in één keer binnen, dus de hele vertaling staat hierboven in de
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
-const _dutchSourceAddTr = <String, String>{};
+const _dutchSourceAddTr = <String, String>{
+  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
+      '•  Yerel CVE veri tabanı (indirmeyi siz başlatırsınız): OciDeck toplu verileri api.github.com üzerinden ve o adresin işaret ettiği sürüm dosyasından alır.',
+  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
+      '•  CVE arama (varsayılan olarak kapalı): açıksa arama teriminiz ayarlanan CVE aynasına, orada bir şey bulunamazsa ENISA\'nın Avrupa veri tabanına ve MITRE\'ye gider.',
+  '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
+      '•  Gömülü bir YouTube veya Vimeo videosu oynatıcıyı o hizmetten yükler.',
+  '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
+      '•  Tarayıcıda: tarayıcı bir adresi doğrudan almayı reddederse OciDeck bunu uygulamanın geldiği sunucu üzerinden yeniden dener; o adres böylece o sunucuya ulaşır.',
+};

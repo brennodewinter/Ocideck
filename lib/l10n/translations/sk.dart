@@ -1786,6 +1786,14 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
+      '•  Lokálna databáza CVE (sťahovanie spúšťate sami): OciDeck načítava hromadné údaje cez api.github.com a súbor vydania, na ktorý táto adresa odkazuje.',
+  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
+      '•  Vyhľadávanie CVE (predvolene vypnuté): keď je zapnuté, váš hľadaný výraz ide na nastavené zrkadlo CVE, a ak tam nič nenájde, do európskej databázy ENISA a do MITRE.',
+  '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
+      '•  Vložené video z YouTube alebo Vimea načíta prehrávač od tejto služby.',
+  '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
+      '•  V prehliadači: ak prehliadač odmietne načítať adresu priamo, OciDeck to skúsi znova cez server, z ktorého aplikácia prišla; tá adresa sa potom dostane na onen server.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Nadpis sekcie, ktorý ohlasuje novú časť prezentácie. Buďte struční. Pridajte obrázok na pozadie z knižnice obrázkov.',
   'Bronnen doorzoeken…': 'Prehľadávanie zdrojov…',

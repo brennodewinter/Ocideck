@@ -9,6 +9,39 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 
 ## [Unreleased]
 
+### Changed
+- **De documentatie belooft niet langer meer dan de app doet.** Elf beoordelaars
+  liepen de teksten na en vonden op een reeks plekken een belofte die ruimer was
+  dan de code. Die zijn teruggebracht tot wat er werkelijk gebeurt, met de datum
+  van de correctie in de tekst zodat een lezer kan zien wat er is bijgesteld.
+
+  Het zwaarste punt raakt uw privacy, en daarom staat het ook in de app zelf. De
+  verklaring in *Instellingen → Privacy* zei dat gegevens dit apparaat alleen
+  verlaten als u dat kiest, en somde daarna alleen bestemmingen op die u zelf
+  aanwijst. Er zijn er vier die u niet aanwijst: in de browser gaat een adres dat
+  de browser weigert op te halen automatisch naar het hulppunt op de server waar
+  de app vandaan komt, het opzoeken van een CVE gaat naar een spiegel van de
+  uitgever met ENISA en MITRE als vaste terugval, de lokale CVE-database haalt
+  haar bulkgegevens via api.github.com, en een ingesloten YouTube- of
+  Vimeo-video laadt de speler bij die dienst. Alle vier staan nu in de
+  verklaring, in alle 32 talen, en in `docs/PRIVACY.md`.
+
+  Verder, kort: de HTML-export sluit haar afbeeldingen niet in en heet daarom
+  niet meer "self-contained"; het RFC 3161-tijdstempel wordt vergeleken op zijn
+  afdruk en niet gecontroleerd op handtekening of certificaat, en dat gebeurt
+  wanneer u de dialoog opent — niet bij het openen van het deck; de interface is
+  in 32 talen beschikbaar maar een vijftigtal editorlabels staat nog in het
+  Nederlands, wat de vertaalpoort niet ziet; het verwijderen van een
+  git-verbinding laat de werkkopie op schijf staan; en er valt nog niets te
+  downloaden, want er is geen release.
+- **Een eerlijk overzicht van de toegankelijkheid**, te lezen via *Instellingen
+  → Documentatie → Toegankelijkheid*. Het zet wat werkt en wat niet werkt naast
+  elkaar, met de beperkingen vooraan. De belangrijkste: de PDF- en
+  PPTX-export zetten elke dia als afbeelding neer. Er zit geen tekstlaag in,
+  geen alt-tekst en geen structuur — ook niet de alt-tekst die u in de editor
+  invulde. Moet de ontvanger kunnen lézen in plaats van kijken, lever dan de
+  markdown of de HTML.
+
 ### Fixed
 - **De tijdlijn kapt haar tekst niet langer af.** Een tijdlijn met zes normale
   gebeurtenissen liet van élke titel en élke beschrijving een deel wegvallen
