@@ -1803,6 +1803,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Bronnen doorzoeken…': 'Tfittex fis-sorsi…',
+  'Niet doorzocht': 'Mhux imfittex',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Din il-verifika ma taħdimx fil-verżjoni tal-web: is-sejbien tal-uċuħ jeħtieġ librerija tas-sistema li l-browser m\'għandux. Uża l-verżjoni tad-desktop biex tiċċekkja l-uċuħ fl-istampi.',
   'Media blijft niet bewaard in een los .md-bestand':

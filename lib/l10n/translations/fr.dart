@@ -738,6 +738,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Bronnen doorzoeken…': 'Recherche dans les sources…',
+  'Niet doorzocht': 'Non parcouru',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Cette vérification ne s\'exécute pas dans la version web : la détection de visages nécessite une bibliothèque système absente du navigateur. Utilisez la version bureau pour vérifier les visages sur les images.',
   'Media blijft niet bewaard in een los .md-bestand':

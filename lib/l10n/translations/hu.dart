@@ -1785,6 +1785,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Bronnen doorzoeken…': 'Keresés a forrásokban…',
+  'Niet doorzocht': 'Nem átvizsgálva',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Ez az ellenőrzés nem fut a webes verzióban: az arcfelismeréshez egy rendszerkönyvtár kell, amely a böngészőből hiányzik. A képek arcokra való ellenőrzéséhez használd az asztali verziót.',
   'Media blijft niet bewaard in een los .md-bestand':

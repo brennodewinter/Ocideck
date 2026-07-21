@@ -10,9 +10,23 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/services/presentation_search/presentation_source.dart';
 import 'package:ocideck/widgets/dialogs/import_slides_dialog.dart';
 import 'package:ocideck/widgets/dialogs/slide_diff_dialog.dart';
 import 'package:ocideck/widgets/dialogs/slide_finder_dialog.dart';
+
+/// Een remote bron met vaste inhoud, om het samenvoegen in de finder te toetsen
+/// zonder een echte git/WebDAV/S3-server.
+class _FakeRemoteSource implements PresentationSource {
+  _FakeRemoteSource(this.label, this.items);
+
+  @override
+  final String label;
+  final List<ScannedPresentation> items;
+
+  @override
+  Future<List<ScannedPresentation>> scan() async => items;
+}
 
 FileService _fileService(String homeDir) => FileService(
   MarkdownService(),
@@ -192,6 +206,40 @@ void main() {
     // tweede bronmap; hij hoort nu tóch tussen de resultaten te staan.
     expect(find.textContaining('unieke slide'), findsOneWidget);
     expect(find.textContaining('Deck C'), findsWidgets);
+  });
+
+  testWidgets('Slide zoeken toont ook treffers uit een remote bron', (
+    tester,
+  ) async {
+    // Een remote deck met een unieke term, geleverd door een nagebootste bron
+    // (net als een git/WebDAV/S3-verbinding). De term staat niet in de lokale
+    // map, dus een treffer bewijst dat de remote bron is meegenomen.
+    final remoteDeck = MarkdownService().parseDeck(
+      '---\nmarp: true\ntheme: ocideck\ntitle: Remote Deck\n---\n\n'
+      '# Sleutelbeheer op afstand\n\n- alleen in de remote bron\n',
+    )!;
+    final remote = _FakeRemoteSource('Git: test', [
+      ScannedPresentation(
+        path: 'git:team/presentaties/decks/r',
+        fileName: 'r/deck.md',
+        deck: remoteDeck,
+      ),
+    ]);
+
+    await _openAndSearch(
+      tester,
+      show: (context) => SlideFinderDialog.show(
+        context,
+        fileService: _fileService(dir.path),
+        roots: [LibraryFolder(name: 'Test', path: dir.path)],
+        remoteSources: [remote],
+        onAdd: (Slide _) {},
+      ),
+      query: 'Sleutelbeheer op afstand',
+    );
+
+    expect(find.textContaining('unieke slide'), findsOneWidget);
+    expect(find.textContaining('Remote Deck'), findsWidgets);
   });
 
   testWidgets('Slides importeren ontdubbelt identieke slides over decks heen', (

@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/image_service.dart';
+import 'package:ocideck/services/web_asset_store.dart';
 import 'package:path/path.dart' as p;
 
 void main() {
@@ -80,6 +81,36 @@ void main() {
 
       expect(out.single.imagePath, 'images/a.png');
       expect(out.single.imagePath2, 'images/b.png');
+    });
+
+    test('materialiseert een mem:-afbeelding als bestand in images/', () async {
+      // Slides uit een remote deck dragen hun beeld als mem:-pad. Bij opslaan
+      // moeten die bytes een echt bestand worden, anders breken ze na herladen.
+      addTearDown(WebAssetStore.clear);
+      final bytes = Uint8List.fromList([9, 8, 7, 6, 5]);
+      final mem = WebAssetStore.put(bytes, name: 'plaatje.png');
+      final project = Directory(p.join(tmp.path, 'project'))..createSync();
+
+      final out = await service.copyImagesToProject([
+        Slide.create(SlideType.image).copyWith(imagePath: mem),
+      ], project.path);
+
+      expect(out.single.imagePath, 'images/plaatje.png');
+      final file = File(p.join(project.path, 'images', 'plaatje.png'));
+      expect(file.existsSync(), isTrue);
+      expect(file.readAsBytesSync(), bytes);
+    });
+
+    test('laat een mem:-pad staan als de bytes weg zijn', () async {
+      // Na een paginaherlaad is de store leeg; er valt niets te schrijven, dus
+      // het pad blijft ongemoeid in plaats van naar een leeg bestand te wijzen.
+      final project = Directory(p.join(tmp.path, 'project'))..createSync();
+      const dangling = 'mem:00000000-0000-0000-0000-000000000000';
+      final out = await service.copyImagesToProject([
+        Slide.create(SlideType.image).copyWith(imagePath: dangling),
+      ], project.path);
+      expect(out.single.imagePath, dangling);
+      expect(Directory(p.join(project.path, 'images')).listSync(), isEmpty);
     });
   });
 

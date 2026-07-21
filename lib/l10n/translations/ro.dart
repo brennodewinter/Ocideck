@@ -1799,6 +1799,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Bronnen doorzoeken…': 'Se caută în surse…',
+  'Niet doorzocht': 'Necăutat',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Această verificare nu rulează în versiunea web: detectarea fețelor necesită o bibliotecă de sistem pe care browserul nu o are. Folosește versiunea desktop pentru a verifica fețele din imagini.',
   'Media blijft niet bewaard in een los .md-bestand':

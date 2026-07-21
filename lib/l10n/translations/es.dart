@@ -735,6 +735,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Bronnen doorzoeken…': 'Buscando en las fuentes…',
+  'Niet doorzocht': 'No buscado',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Esta comprobación no se ejecuta en la versión web: la detección de rostros necesita una biblioteca del sistema que el navegador no tiene. Usa la versión de escritorio para revisar rostros en las imágenes.',
   'Media blijft niet bewaard in een los .md-bestand':

@@ -1780,6 +1780,8 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Bronnen doorzoeken…': 'Söker i källor…',
+  'Niet doorzocht': 'Inte genomsökt',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Den här kontrollen körs inte i webbversionen: ansiktsigenkänning kräver ett systembibliotek som webbläsaren saknar. Använd skrivbordsversionen för att kontrollera ansikten i bilder.',
   'Media blijft niet bewaard in een los .md-bestand':

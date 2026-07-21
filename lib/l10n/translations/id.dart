@@ -1781,6 +1781,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Bronnen doorzoeken…': 'Menelusuri sumber…',
+  'Niet doorzocht': 'Tidak ditelusuri',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Pemeriksaan ini tidak berjalan di versi web: deteksi wajah memerlukan pustaka sistem yang tidak dimiliki peramban. Gunakan versi desktop untuk memeriksa wajah pada gambar.',
   'Media blijft niet bewaard in een los .md-bestand':

@@ -734,6 +734,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Bronnen doorzoeken…': 'Ricerca nelle fonti…',
+  'Niet doorzocht': 'Non cercato',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Questo controllo non viene eseguito nella versione web: il rilevamento dei volti richiede una libreria di sistema che il browser non ha. Usa la versione desktop per controllare i volti nelle immagini.',
   'Media blijft niet bewaard in een los .md-bestand':

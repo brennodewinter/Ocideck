@@ -739,6 +739,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Bronnen doorzoeken…': 'Boarnen trochsykje…',
+  'Niet doorzocht': 'Net trochsocht',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Dizze kontrôle draait net yn de webferzje: gesichtsherkenning fereasket in systeembibleteek dy\'t de browser net hat. Brûk de desktopferzje om ôfbyldings op gesichten nei te sjen.',
   'Media blijft niet bewaard in een los .md-bestand':

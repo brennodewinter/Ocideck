@@ -1817,6 +1817,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Bronnen doorzoeken…': 'Ag cuardach foinsí…',
+  'Niet doorzocht': 'Gan chuardach',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Ní ritheann an tseiceáil seo sa leagan gréasáin: teastaíonn leabharlann córais ón mbrath aghaidhe nach bhfuil ag an mbrabhsálaí. Bain úsáid as an leagan deisce chun aghaidheanna in íomhánna a sheiceáil.',
   'Media blijft niet bewaard in een los .md-bestand':
