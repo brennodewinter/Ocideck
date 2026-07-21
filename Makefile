@@ -1,4 +1,4 @@
-.PHONY: sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-method-length check-dead-code check-hardcoded-text coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
+.PHONY: dast sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-method-length check-dead-code check-hardcoded-text coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -46,6 +46,7 @@ help:
 	@echo "  make test-presenter  Fullscreen presenter interaction tests."
 	@echo "  make deps-outdated   Advisory dependency freshness report."
 	@echo "  make deps-check      Verify vendored JS bundles vs manifest + OSV CVEs."
+	@echo "  make dast            Advisory ZAP baseline over a served build (DAST_URL=… for a real host)."
 	@echo "  make sast            Semgrep over shipped Dart with the rules in semgrep/ (needs semgrep)."
 	@echo "  make check-secrets   Sweep working tree and history for committed secrets (needs gitleaks + trufflehog)."
 	@echo "  make trivy           Advisory supply-chain scan: Dart-dep CVEs + committed secrets (needs trivy)."
@@ -299,6 +300,47 @@ check-secrets:
 	trufflehog filesystem . --no-verification --no-update --exclude-paths .trufflehogignore --fail
 	trufflehog git file://. --no-verification --no-update --exclude-paths .trufflehogignore --fail
 
+# Advisory DAST: an OWASP ZAP baseline (passive) scan against a served build.
+#
+# ADVISORY, and not wired into any aggregate target. Be honest about what this
+# can and cannot see:
+#   - The CSP is already pinned exactly by `make check-web`, from the meta tag
+#     in the built index.html. ZAP does not improve on that.
+#   - ZAP's spider cannot traverse the UI: CanvasKit paints into a canvas, so
+#     there are no links or forms to follow. Only the initial load is observed.
+#   - Against the default local server, findings about response headers are
+#     mostly about *that server*. zap/baseline.conf silences exactly those and
+#     nothing else.
+# Its real value arrives when DAST_URL points at a genuinely deployed instance:
+# then the response headers are the host's, and they are the thing under test.
+#
+# Override the target: `make dast DAST_URL=https://example.org/ocideck/`.
+# Without it, the local bundle is built, served on DAST_PORT, and torn down.
+DAST_PORT ?= 8091
+DAST_URL ?=
+dast:
+	@echo "== OciDeck advisory check: DAST (OWASP ZAP baseline) =="
+	@echo "Command: zap-baseline.py against $(if $(DAST_URL),$(DAST_URL),a local server on port $(DAST_PORT))"
+	@echo "Covers: passive checks over the initial load — headers, CSP delivery, cookies."
+	@echo "Failure means: ZAP or the container runtime is missing. Findings are advisory;"
+	@echo "        read them by hand. See zap/baseline.conf for what is silenced and why."
+	@command -v docker >/dev/null 2>&1 || { echo "docker not found — install a runtime (macOS: brew install colima docker && colima start)"; exit 2; }
+	@docker info >/dev/null 2>&1 || { echo "no container runtime reachable — start it (macOS: colima start)"; exit 2; }
+ifeq ($(strip $(DAST_URL)),)
+	$(MAKE) build-web
+	@echo "-- serving build/web on :$(DAST_PORT) for the duration of the scan --"
+	@cd build/web && python3 -m http.server $(DAST_PORT) >/dev/null 2>&1 & echo $$! > /tmp/ocideck-dast.pid
+	@sleep 2
+	-docker run --rm --add-host=host.docker.internal:host-gateway \
+	  -v "$(PWD)/zap:/zap/wrk/conf:ro" zaproxy/zap-stable \
+	  zap-baseline.py -t http://host.docker.internal:$(DAST_PORT) -c conf/baseline.conf -I
+	@kill $$(cat /tmp/ocideck-dast.pid) 2>/dev/null || true; rm -f /tmp/ocideck-dast.pid
+	@echo "-- local server stopped --"
+else
+	-docker run --rm -v "$(PWD)/zap:/zap/wrk/conf:ro" zaproxy/zap-stable \
+	  zap-baseline.py -t "$(DAST_URL)" -c conf/baseline.conf -I
+endif
+
 # Advisory supply-chain scan with Trivy (github.com/aquasecurity/trivy). Scans
 # the resolved Dart packages (pubspec.lock) for known CVEs and sweeps the repo
 # for committed secrets — see trivy.yaml for the enabled scanners and rationale.
@@ -313,11 +355,14 @@ trivy:
 	@echo "Failure means: trivy is missing or the scan errored — reported"
 	@echo "        vulnerabilities/secrets are advisory; triage them by hand."
 	@command -v trivy >/dev/null 2>&1 || { echo "trivy not found — install it (macOS: brew install trivy; docs: https://trivy.dev/latest/getting-started/installation/)"; exit 2; }
-	@# Trivy pulls its public vuln DB from an OCI registry and would otherwise
-	@# read ~/.docker/config.json; a stale credsStore (e.g. docker-credential-
-	@# desktop missing from PATH) then aborts the DB download. The DB needs no
-	@# auth, so point DOCKER_CONFIG at an empty dir to bypass the cred helper.
-	DOCKER_CONFIG=$$(mktemp -d) trivy fs --config trivy.yaml .
+	@# This used to run with DOCKER_CONFIG pointed at an empty temp dir, to dodge a
+	@# stale `credsStore: desktop` left behind by an uninstalled Docker Desktop.
+	@# That workaround became the bug: ~/.docker/config.json also holds
+	@# `currentContext`, so blanking the config drops the container context and
+	@# docker falls back to /var/run/docker.sock — which does not exist under
+	@# colima. Fix the cause instead: remove the dangling credsStore key. With
+	@# empty `auths` no credential helper is needed for public registries.
+	trivy fs --config trivy.yaml .
 
 # Advisory freshness monitor for the third-party CI Actions we pin to an EXACT
 # version. Reads .github/pinned-actions.json and asks each Action's release API

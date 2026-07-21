@@ -239,6 +239,26 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   rij, dus ze kunnen nooit over elkaar heen vallen.
 
 ### Added
+- **Een scan die de webversie aanvalt zoals een buitenstaander dat zou doen**
+  (`make dast`, met OWASP ZAP). Waar de andere controles de broncode lezen,
+  bekijkt deze wat er werkelijk over de lijn gaat wanneer de pagina wordt
+  geladen. Hij is adviserend: de uitkomst is om te lézen, niet om de bouw te
+  breken.
+
+  Richt hem desgewenst op een echt gepubliceerde instantie
+  (`make dast DAST_URL=…`); dan meet hij ook de instellingen van de server die
+  hem uitserveert, en dat is precies wat geen enkele controle op de broncode kan
+  zien.
+
+  Wat er onderdrukt wordt, is bewust minimaal: alleen de drie meldingen die de
+  tijdelijke testserver zélf veroorzaakt. Alles waar een echte host
+  verantwoordelijk voor is, blijft in beeld — ook al valt het lokaal niet op te
+  lossen.
+
+  De eerste keer dat hij liep, vond hij meteen iets: de beveiligingsregels van
+  de webversie zeggen niets over waar een formulier naartoe mag worden
+  verstuurd. Dat wordt apart hersteld.
+
 - **Een poort die de code op drie beveiligingsfouten controleert** (`make sast`,
   met Semgrep). Hij let op precies drie dingen: of certificaatcontrole ergens
   wordt uitgezet buiten de plek waar dat bij het vastpinnen hoort, of er een

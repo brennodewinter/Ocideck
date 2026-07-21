@@ -83,6 +83,7 @@ remote, the number you see locally is the number that gates the push.
 | [`make catalogs-outdated`](#make-catalogs-outdated-advisory) | Bundled reference data vs upstream (advisory, pre-release) | — | — | — |
 | [`make check-secrets`](#make-check-secrets) | No credential-shaped strings in the working tree or in history | — | ✅ | — |
 | [`make sast`](#make-sast) | Semgrep rules over shipped Dart (cert validation, subprocesses, weak randomness) | — | ✅ | — |
+| [`make dast`](#make-dast-advisory) | ZAP baseline over a served build (advisory) | — | — | — |
 | [`make trivy`](#make-trivy-advisory) | Dart-dep CVEs + committed secrets (advisory) | — | — | ✅ (advisory) |
 | [`make check-actions`](#make-check-actions-advisory) | Pinned CI Actions vs their latest release (advisory) | — | — | — |
 
@@ -412,6 +413,39 @@ also declares them, but see the [CI note](#continuous-integration).)
   credential-shaped values. The price is real and is stated in the config: a
   genuine secret placed in one of those files would not be caught, and would not
   stand out visually either.
+
+### `make dast` (advisory)
+- **Runs:** an OWASP ZAP **baseline** (passive) scan in a container against a
+  served build. Without arguments it runs `make build-web`, serves `build/web`
+  on `DAST_PORT` (default 8091), scans, and tears the server down. Point it at a
+  real instance with `make dast DAST_URL=https://…`.
+- **Needs** a container runtime. On macOS: `brew install colima docker && colima
+  start`. Docker Desktop also works but is proprietary; colima is the
+  open-source equivalent and is what this was built against. The ZAP Homebrew
+  cask is *not* an option — it fails the macOS Gatekeeper check and is scheduled
+  for removal.
+- **Advisory, in no aggregate target.** Findings are for a human to read.
+- **Be honest about what it can see.** The CSP is already pinned exactly by
+  [`make check-web`](#make-check-web) from the meta tag, so ZAP does not improve
+  on that. Its spider cannot traverse the UI — CanvasKit paints into a canvas,
+  so there are no links or forms to follow and only the initial load is
+  observed. Against the local server, most header findings are about *that
+  server*.
+- **What it silences, and nothing more:** [`zap/baseline.conf`](../zap/baseline.conf)
+  ignores exactly three rules, all pure artefacts of `python3 -m http.server`
+  (leaked `Server` version, its cache headers, and the "Modern Web Application"
+  observation). Everything a real host would have to answer for — CSP delivered
+  as a header, `Permissions-Policy`, `Cross-Origin-Embedder-Policy`,
+  anti-clickjacking, `X-Content-Type-Options` — stays visible on purpose, so the
+  list still says something the day this is published somewhere.
+- **Known noisy:** rule 10027 (*Information Disclosure — Suspicious Comments*)
+  fires on the vendored export libraries, not on our own `index.html`. It is
+  left visible rather than silenced, because silencing a rule nobody has read is
+  how a scanner stops being worth running.
+- **Its first run earned its keep:** it found that the CSP has no `form-action`
+  directive, which does *not* fall back to `default-src`. `frame-ancestors` is a
+  different matter — it is present but browsers ignore it in a `<meta>` tag, and
+  `web/index.html` already documents exactly that.
 
 ### `make trivy` (advisory)
 - **Runs:** `trivy fs --config trivy.yaml .` (needs the external
