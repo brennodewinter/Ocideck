@@ -35,6 +35,23 @@ Widget _host(List<Slide> slides) => MaterialApp(
 Finder _option(String text) =>
     find.ancestor(of: find.text(text), matching: find.byType(InkWell)).first;
 
+/// Zet de dia neer op een ruim, vast venster.
+///
+/// Het standaard testvenster is 800×600; een vraag met zes opties krimpt daar
+/// tot tegen de leesbaarheidsondergrens, en dan hangt het van de toevallige
+/// indeling af of een tik de goede tegel raakt. Deze test ging daardoor in de
+/// volle suite soms om, en een wisselvallige test bewijst niets.
+Future<void> _pumpQuestion(WidgetTester tester, List<Slide> slides) async {
+  tester.view.physicalSize = const Size(1600, 900);
+  tester.view.devicePixelRatio = 1.0;
+  addTearDown(() {
+    tester.view.resetPhysicalSize();
+    tester.view.resetDevicePixelRatio();
+  });
+  await tester.pumpWidget(_host(slides));
+  await tester.pump();
+}
+
 void main() {
   final after = Slide.create(
     SlideType.bullets,
@@ -60,8 +77,7 @@ void main() {
     );
 
     testWidgets('toont élk antwoord, niet een greep', (tester) async {
-      await tester.pumpWidget(_host([_question(spec), after]));
-      await tester.pump();
+      await _pumpQuestion(tester, [_question(spec), after]);
 
       for (final text in [
         'Sleutel',
@@ -80,13 +96,21 @@ void main() {
     testWidgets('alle juiste aanvinken en bevestigen geeft goed', (
       tester,
     ) async {
-      await tester.pumpWidget(_host([_question(spec), after]));
-      await tester.pump();
+      await _pumpQuestion(tester, [_question(spec), after]);
 
       for (final text in ['Sleutel', 'Wachtwoord', 'Paspoort']) {
         await tester.tap(_option(text));
         await tester.pump();
       }
+      // Eerst vaststellen dát er een selectie ligt: de bevestigknop staat
+      // gedimd zolang dat niet zo is. Zonder deze stap eindigt een gemiste tik
+      // als een raadselachtig ontbrekend 'Goed!' drie regels verderop.
+      final submitOpacity = tester.widget<Opacity>(
+        find
+            .ancestor(of: find.text('Bevestig'), matching: find.byType(Opacity))
+            .first,
+      );
+      expect(submitOpacity.opacity, 1, reason: 'de bevestigknop staat gedimd');
       await tester.tap(find.text('Bevestig'));
       await tester.pump();
 
@@ -146,8 +170,7 @@ void main() {
     });
 
     testWidgets('beide bijschriften staan op de dia', (tester) async {
-      await tester.pumpWidget(_host([_question(spec()), after]));
-      await tester.pump();
+      await _pumpQuestion(tester, [_question(spec()), after]);
 
       expect(find.text('De echte'), findsOneWidget);
       expect(find.text('De valse'), findsOneWidget);
@@ -159,8 +182,7 @@ void main() {
     testWidgets('de juiste aantikken geeft goed, de andere fout', (
       tester,
     ) async {
-      await tester.pumpWidget(_host([_question(spec()), after]));
-      await tester.pump();
+      await _pumpQuestion(tester, [_question(spec()), after]);
 
       await tester.tap(_option('De valse'));
       await tester.pump();
@@ -175,8 +197,7 @@ void main() {
       // Fout antwoorden geeft in de retry-stand een verse ronde. Over genoeg
       // rondes hoort het juiste beeld op beide plekken te belanden — anders is
       // het na één keer kijken te onthouden welke kant het is.
-      await tester.pumpWidget(_host([_question(spec()), after]));
-      await tester.pump();
+      await _pumpQuestion(tester, [_question(spec()), after]);
 
       final sides = <int>{};
       for (var round = 0; round < 25 && sides.length < 2; round++) {
@@ -219,17 +240,10 @@ void main() {
       ],
     );
 
-    await tester.pumpWidget(
-      _host([
-        Slide(
-          id: 'q',
-          type: SlideType.question,
-          customMarkdown: spec.toBlock(),
-        ),
-        after,
-      ]),
-    );
-    await tester.pump();
+    await _pumpQuestion(tester, [
+      Slide(id: 'q', type: SlideType.question, customMarkdown: spec.toBlock()),
+      after,
+    ]);
 
     // Het juiste beeld staat er, en precies één van de twee foute.
     expect(find.text('Echt'), findsOneWidget);
@@ -284,8 +298,7 @@ void main() {
     testWidgets('het juiste antwoord staat er niet vóór het antwoorden', (
       tester,
     ) async {
-      await tester.pumpWidget(_host([_question(spec()), after]));
-      await tester.pump();
+      await _pumpQuestion(tester, [_question(spec()), after]);
 
       expect(find.text('Typ je antwoord en bevestig'), findsOneWidget);
       expect(find.text('in de kluis'), findsNothing);
@@ -294,8 +307,7 @@ void main() {
     });
 
     testWidgets('een tikfout telt als goed', (tester) async {
-      await tester.pumpWidget(_host([_question(spec()), after]));
-      await tester.pump();
+      await _pumpQuestion(tester, [_question(spec()), after]);
 
       await tester.enterText(find.byType(TextField), 'in de klius');
       await tester.pump();
@@ -310,8 +322,7 @@ void main() {
     testWidgets('een ander antwoord is fout en onthult het juiste', (
       tester,
     ) async {
-      await tester.pumpWidget(_host([_question(spec()), after]));
-      await tester.pump();
+      await _pumpQuestion(tester, [_question(spec()), after]);
 
       await tester.enterText(find.byType(TextField), 'in mijn agenda');
       await tester.pump();
@@ -330,8 +341,7 @@ void main() {
       (tester) async {
         // "fout" met een percentage leert niemand iets. De kijker hoort te zien
         // wélke letters er te veel stonden en welke er misten.
-        await tester.pumpWidget(_host([_question(spec()), after]));
-        await tester.pump();
+        await _pumpQuestion(tester, [_question(spec()), after]);
 
         await tester.enterText(find.byType(TextField), 'in de klius');
         await tester.pump();
@@ -358,8 +368,7 @@ void main() {
     testWidgets('een letterlijk goed antwoord krijgt geen vergelijking', (
       tester,
     ) async {
-      await tester.pumpWidget(_host([_question(spec()), after]));
-      await tester.pump();
+      await _pumpQuestion(tester, [_question(spec()), after]);
 
       await tester.enterText(find.byType(TextField), 'In De Kluis');
       await tester.pump();
@@ -388,17 +397,14 @@ void main() {
         ],
       );
 
-      await tester.pumpWidget(
-        _host([
-          Slide(
-            id: 'q',
-            type: SlideType.question,
-            customMarkdown: meerdere.toBlock(),
-          ),
-          after,
-        ]),
-      );
-      await tester.pump();
+      await _pumpQuestion(tester, [
+        Slide(
+          id: 'q',
+          type: SlideType.question,
+          customMarkdown: meerdere.toBlock(),
+        ),
+        after,
+      ]);
 
       await tester.enterText(
         find.byType(TextField),
@@ -417,10 +423,10 @@ void main() {
     testWidgets('een strengere drempel keurt dezelfde tikfout af', (
       tester,
     ) async {
-      await tester.pumpWidget(
-        _host([_question(spec(threshold: questionMaxSimilarity)), after]),
-      );
-      await tester.pump();
+      await _pumpQuestion(tester, [
+        _question(spec(threshold: questionMaxSimilarity)),
+        after,
+      ]);
 
       await tester.enterText(find.byType(TextField), 'in de klius');
       await tester.pump();
@@ -437,8 +443,7 @@ void main() {
     ) async {
       // De sneltoetsen mogen niet meeluisteren zolang er getypt wordt; een "2"
       // in het antwoord sprong anders naar slide 2.
-      await tester.pumpWidget(_host([_question(spec()), after]));
-      await tester.pump();
+      await _pumpQuestion(tester, [_question(spec()), after]);
 
       await tester.enterText(find.byType(TextField), 'kluis 2');
       await tester.pump();
