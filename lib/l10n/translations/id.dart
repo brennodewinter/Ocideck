@@ -1787,6 +1787,8 @@ const _dutchSourceAddId = <String, String>{
       '•  Video YouTube atau Vimeo yang disematkan memuat pemutar dari layanan tersebut.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
       '•  Di peramban: jika peramban menolak mengambil sebuah alamat secara langsung, OciDeck mencobanya lagi melalui server asal aplikasi; alamat itu lalu sampai ke server tersebut.',
+  'Intrekken is niet vastgelegd. Bij de volgende start geldt uw toestemming weer.':
+      'Pencabutan tidak tersimpan. Pada peluncuran berikutnya persetujuan Anda berlaku lagi.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Subjudul bagian yang mengumumkan bagian baru presentasi. Buat singkat. Tambahkan gambar latar dari pustaka gambar.',
   'Bronnen doorzoeken…': 'Menelusuri sumber…',

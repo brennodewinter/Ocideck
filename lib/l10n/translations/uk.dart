@@ -1805,6 +1805,8 @@ const _dutchSourceAddUk = <String, String>{
       '•  Вбудоване відео з YouTube або Vimeo завантажує програвач із цієї служби.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
       '•  У браузері: якщо браузер відмовляється отримати адресу напряму, OciDeck пробує ще раз через сервер, з якого надійшов застосунок; тоді ця адреса потрапляє на той сервер.',
+  'Intrekken is niet vastgelegd. Bij de volgende start geldt uw toestemming weer.':
+      'Відкликання не збережено. Під час наступного запуску ваша згода діятиме знову.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Підзаголовок розділу, що оголошує нову частину презентації. Тримайте його коротким. Додайте фонове зображення з бібліотеки зображень.',
   'Bronnen doorzoeken…': 'Пошук у джерелах…',

@@ -15,7 +15,6 @@
 // A second module needs a real registry (module id, parameterised keys,
 // per-module reveal) — build that when one actually arrives, rather than
 // budgeting to "reuse" this.
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -81,8 +80,11 @@ class InfoSafetyNotifier extends Notifier<InfoSafetyState> {
       if (prefs.containsKey(_legacyVersionKey)) {
         await prefs.remove(_legacyVersionKey);
       }
-    } catch (e) {
-      debugPrint('InfoSafetyNotifier: kon moduletoestand niet laden: $e');
+    } catch (e, s) {
+      // Onleesbare voorkeuren: de module blijft uit (de veilige stand) maar het
+      // laden stopt wél, anders blijft de UI hangen. Zelfde logweg als de
+      // schrijffout hieronder — een `debugPrint` haalde de logstroom niet.
+      logError('InfoSafetyNotifier._initialize: read module state', e, s);
       state = state.copyWith(loading: false);
     }
   }

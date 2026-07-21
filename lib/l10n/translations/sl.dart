@@ -1789,6 +1789,8 @@ const _dutchSourceAddSl = <String, String>{
       '•  Vgrajen videoposnetek YouTube ali Vimeo naloži predvajalnik pri tej storitvi.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
       '•  V brskalniku: če brskalnik zavrne neposredno pridobitev naslova, OciDeck poskusi znova prek strežnika, s katerega je prišla aplikacija; ta naslov nato pride do tistega strežnika.',
+  'Intrekken is niet vastgelegd. Bij de volgende start geldt uw toestemming weer.':
+      'Preklic ni bil shranjen. Ob naslednjem zagonu vaše soglasje spet velja.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Naslov razdelka, ki napoveduje nov del predstavitve. Naj bo kratek. Iz knjižnice slik dodajte sliko za ozadje.',
   'Bronnen doorzoeken…': 'Iskanje po virih…',

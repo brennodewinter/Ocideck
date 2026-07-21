@@ -1805,6 +1805,8 @@ const _dutchSourceAddRo = <String, String>{
       '•  Un videoclip YouTube sau Vimeo încorporat încarcă playerul de la serviciul respectiv.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
       '•  În browser: dacă browserul refuză să preia direct o adresă, OciDeck încearcă din nou prin serverul de la care a venit aplicația; acea adresă ajunge atunci la acel server.',
+  'Intrekken is niet vastgelegd. Bij de volgende start geldt uw toestemming weer.':
+      'Retragerea nu a fost salvată. La următoarea pornire consimțământul dumneavoastră este din nou valabil.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Un subtitlu de secțiune care anunță o nouă parte a prezentării. Păstrează-l scurt. Adaugă o imagine de fundal din biblioteca de imagini.',
   'Bronnen doorzoeken…': 'Se caută în surse…',

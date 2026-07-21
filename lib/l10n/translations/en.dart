@@ -926,6 +926,8 @@ const _dutchSourceAddEn = {
       '•  An embedded YouTube or Vimeo video loads the player from that service.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
       '•  In the browser: if the browser refuses to fetch an address directly, OciDeck retries it through the server the app came from; that address then reaches that server.',
+  'Intrekken is niet vastgelegd. Bij de volgende start geldt uw toestemming weer.':
+      'The revocation was not saved. On the next start your consent applies again.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'A section heading that announces a new part of the presentation. Keep it short. Add a background image from the image library.',
   'Bronnen doorzoeken…': 'Searching sources…',

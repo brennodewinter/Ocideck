@@ -745,6 +745,8 @@ const _dutchSourceAddFy = {
       '•  In ynsletten YouTube- of Vimeo-fideo laadt de spiler by dy tsjinst.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
       '•  Yn de browser: wegeret de browser in adres streekrjocht op te heljen, dan besiket OciDeck it fia de server dêr\'t de app weikomt; dat adres komt dan by dy server telâne.',
+  'Intrekken is niet vastgelegd. Bij de volgende start geldt uw toestemming weer.':
+      'It ynlûken is net fêstlein. By de folgjende start jildt jo tastimming wer.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'In tuskenkop dy\'t in nij diel fan de presintaasje oankundiget. Hâld it koart. Foegje fia de ôfbyldingsbibleteek in eftergrûnbyld ta.',
   'Bronnen doorzoeken…': 'Boarnen trochsykje…',

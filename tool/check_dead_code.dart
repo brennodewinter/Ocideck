@@ -26,12 +26,13 @@ import 'dart:io';
 /// entrypoints the static walk can't follow. Add an entry only with a reason;
 /// the goal is to keep this empty. Paths are lib-relative, forward-slash.
 const Set<String> deadCodeAllowlist = {
-  // P0-CVSS foundation module (PENTEST_MIAUW.md §7 / AGENTIC_BUILD_PLAN.md):
-  // the native CVSS 4.0 engine ships ahead of its consumer (the pentest
-  // finding wizard), so nothing imports it from an entrypoint yet. Its two
-  // `part` files are reached through this library root. Remove this entry once
-  // the pentest module wires the engine in.
-  'services/cvss/cvss4.dart',
+  // Empty on purpose — keep it that way. An entry here is a promise that the
+  // file is reached by a mechanism the static walk cannot follow; it is not a
+  // parking spot for "not wired up yet". `services/cvss/cvss4.dart` sat here
+  // from the day the CVSS 4.0 engine shipped ahead of its consumer, and stayed
+  // long after the finding wizard, the severity palette and the audit dossier
+  // started importing it — an exemption that outlives its reason hides the
+  // very thing this check exists to see.
 };
 
 /// Matches a whole `import` / `export` / `part` directive up to its `;`. The

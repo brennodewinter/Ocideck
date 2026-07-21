@@ -64,9 +64,11 @@ const Set<String> uncoveredBaseline = {
   'lib/services/markdown_validator_vocabulary.dart',
   // PLATFORM: entrypoint — runApp() never executes under the test runner.
   'lib/main.dart',
-  // PLATFORM: conditional-import facades + their io/web halves.
+  // PLATFORM: conditional-import facades + their io/web halves. De io-helft van
+  // native_window staat hier NIET meer: dat was gewone dart:io-code met
+  // negentien echte statements, geen platformnaad. Zie native_window_test.dart,
+  // dat het `window_manager`-kanaal namaakt en de opstartvolgorde toetst.
   'lib/platform/native_window.dart',
-  'lib/platform/native_window_io.dart',
   'lib/platform/native_window_stub.dart',
   'lib/platform/platform_features_web.dart',
   'lib/platform/presenter_fullscreen_web.dart',

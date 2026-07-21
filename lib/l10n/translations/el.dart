@@ -1815,6 +1815,8 @@ const _dutchSourceAddEl = <String, String>{
       '•  Ένα ενσωματωμένο βίντεο YouTube ή Vimeo φορτώνει το πρόγραμμα αναπαραγωγής από την υπηρεσία αυτή.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
       '•  Στο πρόγραμμα περιήγησης: αν το πρόγραμμα περιήγησης αρνηθεί να ανακτήσει απευθείας μια διεύθυνση, το OciDeck δοκιμάζει ξανά μέσω του διακομιστή από τον οποίο προήλθε η εφαρμογή· η διεύθυνση αυτή φτάνει τότε σε εκείνον τον διακομιστή.',
+  'Intrekken is niet vastgelegd. Bij de volgende start geldt uw toestemming weer.':
+      'Η ανάκληση δεν αποθηκεύτηκε. Στην επόμενη εκκίνηση η συγκατάθεσή σας ισχύει ξανά.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Μια επικεφαλίδα ενότητας που ανακοινώνει ένα νέο μέρος της παρουσίασης. Κρατήστε την σύντομη. Προσθέστε μια εικόνα φόντου από τη βιβλιοθήκη εικόνων.',
   'Bronnen doorzoeken…': 'Αναζήτηση στις πηγές…',

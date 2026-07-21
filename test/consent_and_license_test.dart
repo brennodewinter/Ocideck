@@ -4,8 +4,38 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/state/consent_provider.dart';
 import 'package:ocideck/widgets/dialogs/consent_dialog.dart';
 import 'package:ocideck/widgets/language_flag.dart';
+import 'package:ocideck/widgets/dialogs/settings_dialog.dart';
 import 'package:ocideck/widgets/privacy_statement_content.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+/// Een toestemmingsopslag die faalt waar de echte dat alleen op een kapot
+/// apparaat doet. Zonder deze seam is elk foutpad in [ConsentNotifier] dode
+/// tekst: de SharedPreferences-mock slaagt altijd.
+class _FakeConsentStore implements ConsentStore {
+  _FakeConsentStore({
+    this.stored = false,
+    this.readThrows = false,
+    this.writeThrows = false,
+  });
+
+  bool stored;
+  final bool readThrows;
+  final bool writeThrows;
+  int writes = 0;
+
+  @override
+  Future<bool> read() async {
+    if (readThrows) throw StateError('voorkeuren onleesbaar');
+    return stored;
+  }
+
+  @override
+  Future<void> write(bool value) async {
+    writes++;
+    if (writeThrows) throw StateError('voorkeuren niet schrijfbaar');
+    stored = value;
+  }
+}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -78,6 +108,134 @@ void main() {
 
       expect(container.read(consentProvider).hasAccepted, isTrue);
     });
+  });
+
+  // De vlag staat op schijf; wat er gebeurt als die schijf niet meewerkt was
+  // tot nu toe nergens getoetst. Het gevaarlijke geval is het intrekken: de
+  // toestand zegt dan "ingetrokken", maar op schijf staat nog "toegestaan", en
+  // de volgende start toont de toestemmingspoort dus NIET meer.
+  group('ConsentNotifier bij een falende opslag', () {
+    ProviderContainer containerWith(_FakeConsentStore store) {
+      final container = ProviderContainer(
+        overrides: [consentStoreProvider.overrideWithValue(store)],
+      );
+      addTearDown(container.dispose);
+      // De notifier wordt pas bij de eerste read gebouwd, en pas dán start
+      // `_initialize()`. Zonder deze regel pompt een test een lege wachtrij en
+      // ziet hij altijd de begintoestand.
+      container.read(consentProvider);
+      return container;
+    }
+
+    test(
+      'een onleesbare vlag houdt de poort dicht en stopt het laden',
+      () async {
+        final container = containerWith(_FakeConsentStore(readThrows: true));
+        expect(container.read(consentProvider).isLoading, isTrue);
+
+        await pumpEventQueue();
+
+        expect(container.read(consentProvider).hasAccepted, isFalse);
+        expect(container.read(consentProvider).isLoading, isFalse);
+      },
+    );
+
+    test('een leesbare vlag komt in de toestand terecht', () async {
+      final container = containerWith(_FakeConsentStore(stored: true));
+      await pumpEventQueue();
+
+      expect(container.read(consentProvider).hasAccepted, isTrue);
+      expect(container.read(consentProvider).isLoading, isFalse);
+    });
+
+    test('intrekken dat niet wegschrijft meldt dat terug', () async {
+      final store = _FakeConsentStore(stored: true, writeThrows: true);
+      final container = containerWith(store);
+      await pumpEventQueue();
+
+      final ok = await container.read(consentProvider.notifier).revokeConsent();
+
+      expect(ok, isFalse, reason: 'een mislukte schrijfactie mag niet slagen');
+      expect(store.writes, 1);
+      // Op schijf staat de toestemming er nog: precies het gat dat de melding
+      // aan de gebruiker moet dichten.
+      expect(store.stored, isTrue);
+      // Deze sessie gedraagt zich wél als ingetrokken.
+      expect(container.read(consentProvider).hasAccepted, isFalse);
+    });
+
+    test('intrekken dat wél wegschrijft meldt succes', () async {
+      final store = _FakeConsentStore(stored: true);
+      final container = containerWith(store);
+      await pumpEventQueue();
+
+      final ok = await container.read(consentProvider.notifier).revokeConsent();
+
+      expect(ok, isTrue);
+      expect(store.stored, isFalse);
+      expect(container.read(consentProvider).hasAccepted, isFalse);
+    });
+
+    test('toestemmen dat niet wegschrijft meldt dat terug', () async {
+      final store = _FakeConsentStore(writeThrows: true);
+      final container = containerWith(store);
+      await pumpEventQueue();
+
+      final ok = await container.read(consentProvider.notifier).acceptConsent();
+
+      expect(ok, isFalse);
+      // Deze sessie mag door; de poort komt bij de volgende start terug.
+      expect(container.read(consentProvider).hasAccepted, isTrue);
+      expect(store.stored, isFalse);
+    });
+  });
+
+  testWidgets('een intrekking die niet wegschrijft wordt aan de gebruiker '
+      'gemeld', (tester) async {
+    SharedPreferences.setMockInitialValues({});
+    await tester.binding.setSurfaceSize(const Size(1500, 1100));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    final store = _FakeConsentStore(stored: true, writeThrows: true);
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [consentStoreProvider.overrideWithValue(store)],
+        child: MaterialApp(
+          home: Scaffold(
+            body: Builder(
+              builder: (context) => ElevatedButton(
+                onPressed: () => SettingsDialog.show(context),
+                child: const Text('open'),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    await tester.tap(find.text('open'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byIcon(Icons.privacy_tip_outlined));
+    await tester.pumpAndSettle();
+
+    await tester.ensureVisible(find.text('Toestemming intrekken'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Toestemming intrekken'));
+    await tester.pumpAndSettle();
+
+    // Bevestigen in het waarschuwingsvenster.
+    await tester.tap(find.widgetWithText(ElevatedButton, 'Intrekken'));
+    await tester.pumpAndSettle();
+
+    expect(store.writes, 1, reason: 'de intrekking is wel geprobeerd');
+    expect(find.byType(SettingsDialog), findsNothing);
+    expect(
+      find.text(
+        'Intrekken is niet vastgelegd. Bij de volgende start geldt uw '
+        'toestemming weer.',
+      ),
+      findsOneWidget,
+    );
   });
 
   group('language flags', () {

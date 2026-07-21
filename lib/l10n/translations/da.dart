@@ -1786,6 +1786,8 @@ const _dutchSourceAddDa = <String, String>{
       '•  En indlejret YouTube- eller Vimeo-video henter afspilleren hos den tjeneste.',
   '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
       '•  I browseren: hvis browseren nægter at hente en adresse direkte, prøver OciDeck igen via den server, appen kom fra; den adresse når så frem til den server.',
+  'Intrekken is niet vastgelegd. Bij de volgende start geldt uw toestemming weer.':
+      'Tilbagetrækningen blev ikke gemt. Ved næste opstart gælder dit samtykke igen.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'En mellemoverskrift, der annoncerer en ny del af præsentationen. Hold den kort. Tilføj et baggrundsbillede via billedbiblioteket.',
   'Bronnen doorzoeken…': 'Søger i kilder…',
