@@ -45,7 +45,7 @@ All code changes should include:
 - Unit tests for new functionality
 - Widget tests where behaviour is visible in the UI (there is no
   `integration_test/` suite)
-- Coverage maintained at or above the enforced floor (78% line coverage, checked by `make coverage`)
+- Coverage maintained at or above the enforced floor (80% line coverage, checked by `make coverage`)
 - Test the specific behavior being changed
 
 ## Development Setup

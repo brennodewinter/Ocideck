@@ -241,7 +241,7 @@ The development workflow enforces:
 - `dart format` compliance (via make format-check)
 - Static analysis (`flutter analyze --fatal-infos`)
 - Unit and widget tests for all new features  
-- Coverage minimum of 78% line coverage (enforced by `make coverage`)
+- Coverage minimum of 80% line coverage (enforced by `make coverage`)
 - Convention enforcement through check_conventions
 
 ### Version Control Guidelines  

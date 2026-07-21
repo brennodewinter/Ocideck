@@ -43,6 +43,14 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   markdown of de HTML.
 
 ### Fixed
+- **De documentatie noemt de juiste dekkingsvloer.** Vijf plaatsen in `docs/`
+  hielden vol dat de afgedwongen dekking 78 % was — één zei 79 % — terwijl de
+  Makefile al op `--min=80` staat. Wie de documentatie geloofde, dacht ruimte te
+  hebben die er niet is. `docs/CHECKS.md` had het als enige goed; de rest volgt
+  dat nu. De twee andere getallen in diezelfde tabel (bestandslengte 1000,
+  methodelengte 150) zijn tegen `tool/check_conventions.dart` en
+  `tool/check_method_length.dart` nagelopen en kloppen wel.
+
 - **Wat u zelf in de kop van een bestand zet, blijft nu staan.** Zette u met de
   hand een `header:`, `footer:`, `size:` of `style:` in de front matter — gewone
   Marp-opties — dan was die verdwenen zodra OciDeck het bestand één keer had
