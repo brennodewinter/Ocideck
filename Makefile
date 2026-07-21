@@ -1,4 +1,4 @@
-.PHONY: refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-method-length check-dead-code add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
+.PHONY: refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-method-length check-dead-code check-hardcoded-text add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -54,6 +54,7 @@ help:
 	@echo "  make check-conventions  No print(); bare catch (_) & file-size ratchets."
 	@echo "  make check-method-length  Per-method length ratchet (AST-measured, max 150)."
 	@echo "  make check-dead-code Fail on orphaned lib/ files (unreachable from any entrypoint)."
+	@echo "  make check-hardcoded-text  Hardcoded visible strings ratchet (must reach 0 before 0.1.0)."
 	@echo "  make add-l10n SPEC=… Add d('…') source strings to every language from a JSON spec."
 	@echo "  make catalogs-outdated Advisory: bundled reference data vs upstream (run before a release build)."
 	@echo "  make refresh-catalogs Regenerate WSTG/MASTG/MASWE from upstream (not in check)."
@@ -422,6 +423,25 @@ check-dead-code:
 	@echo "        tool/check_dead_code.dart."
 	dart run tool/check_dead_code.dart
 
+# De andere helft van de vertaalbelofte. app_localizations_test controleert dat
+# elke `d('…')`-literal in alle 31 talen bestaat; deze poort controleert dat een
+# zichtbare string ook DÓÓR `d()` gaat. Het gat zat in de doorgeefluiken —
+# `EditorField(label: 'Titel (H1)')` gaat via `l10n.d(widget.label)` en was voor
+# een letterlijke scanner onzichtbaar.
+check-hardcoded-text:
+	@echo "== OciDeck check: hardgecodeerde tekst =="
+	@echo "Command: dart run tool/check_hardcoded_text.dart"
+	@echo "Covers: elke zichtbare letterlijke tekst in lib/ die niet door l10n.d()"
+	@echo "        loopt — knoplabels, veldlabels, hints, tooltips, meldingen, en de"
+	@echo "        indirecte doorgeefluiken (AST + datastroom, dus ook"
+	@echo "        EditorField(label: '…')). Aflopende ratchet: het plafond mag"
+	@echo "        alleen omlaag, en een stille daling faalt ook."
+	@echo "Failure means: haal de string door l10n.d('…') (make add-l10n SPEC=… zet de"
+	@echo "        31 vertalingen erbij), of verlaag hardcodedTextBaseline in"
+	@echo "        tool/check_hardcoded_text.dart als je er hebt opgeruimd."
+	@echo "        Volledige lijst: dart run tool/check_hardcoded_text.dart --list"
+	dart run tool/check_hardcoded_text.dart
+
 # Add new d('…') source strings to every language's additions overlay from a
 # JSON spec (format documented in tool/add_l10n.dart). Inserts, dart-formats and
 # de-duplicates across all 30 language files in one step, and whitelists any
@@ -536,9 +556,9 @@ build-release:
 # nothing ran them — and the GitHub workflow that did cannot fire on a Forgejo
 # remote without a runner. `make check` is the real gate; it should contain the
 # gates.
-check: format-check analyze check-conventions check-method-length check-dead-code coverage
+check: format-check analyze check-conventions check-method-length check-dead-code check-hardcoded-text coverage
 	@echo "== OciDeck check complete =="
-	@echo "Validated: formatting, static analysis, conventions, method length, dead-code, the full Flutter test suite, and the coverage floor."
+	@echo "Validated: formatting, static analysis, conventions, method length, dead-code, hardcoded visible text, the full Flutter test suite, and the coverage floor."
 
 # Extended local check: the gate plus licence/compliance, bundled-JS CVEs, the
 # web-hardening assertion (rebuilds the web bundle), and a freshness report.

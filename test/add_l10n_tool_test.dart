@@ -74,6 +74,43 @@ void main() {
     );
   });
 
+  // ── dartStr ────────────────────────────────────────────────────────────────
+  //
+  // Tweede gebrek in hetzelfde gereedschap, van dezelfde stille soort: het
+  // escapen kende alleen `\` en `'`. Een bronstring met een echt regeleinde —
+  // 'Selecteer een\nafbeelding', de toestemmingsteksten — kwam als de
+  // regeleinde-BYTE in een enkelquote-literal terecht. Dart parseert dat niet,
+  // dus viel de opmaakstap om en bleef de kapotte overlay op schijf staan. De
+  // omweg die iemand toen koos, `\n` met de hand in de spec, maakte het
+  // erger: de backslash werd geëscapet tot `\\n` en de lezer kreeg de twee
+  // tekens backslash-n te zien in plaats van een regelovergang.
+
+  test('een echt regeleinde wordt de escape \\n, niet de byte zelf', () {
+    expect(
+      dartStr('Selecteer een\nafbeelding'),
+      r"'Selecteer een\nafbeelding'",
+    );
+    expect(dartStr('Kop\n\nTekst'), r"'Kop\n\nTekst'");
+    expect(dartStr('a\tb\rc'), r"'a\tb\rc'");
+  });
+
+  test('een backslash-n die al tekst was blijft twee tekens', () {
+    // Andersom moet ook kloppen: een bronstring die letterlijk een backslash
+    // en een n bevat mag geen regelovergang worden.
+    expect(dartStr(r'pad\naam'), r"'pad\\naam'");
+  });
+
+  test('aanhalingsteken en dollar worden geëscapet', () {
+    // Een niet-geëscapete `$` begint een interpolatie: compileerfout, of erger,
+    // een string die iets anders zegt.
+    expect(dartStr("video's"), r"'video\'s'");
+    expect(dartStr(r'kost $5'), r"'kost \$5'");
+  });
+
+  test('een gewone string blijft ongemoeid', () {
+    expect(dartStr('Presentatietitel'), "'Presentatietitel'");
+  });
+
   test('overlayAnchor volgt de naamgeving in de taalbestanden', () {
     expect(overlayAnchor('tr'), 'const _dutchSourceAddTr = ');
     expect(overlayAnchor('gsw'), 'const _dutchSourceAddGsw = ');
