@@ -1778,6 +1778,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
+      '•  Vietējā CVE datubāze (lejupielādi sākat jūs pats): OciDeck iegūst apjoma datus caur api.github.com un laidiena failu, uz kuru šī adrese norāda.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
       '•  CVE meklēšana (pēc noklusējuma izslēgta): kad tā ir ieslēgta, jūsu meklējamais vārds nonāk iestatītajā CVE spogulī un, ja tas neko neatrod, ENISA Eiropas datubāzē un MITRE.',
   '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':

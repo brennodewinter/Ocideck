@@ -127,6 +127,7 @@ flutter:
     - docs/FAQ.md
     - docs/TROUBLESHOOTING_GUIDE.md
     - docs/PRIVACY.md
+    - docs/ACCESSIBILITY.md
     - docs/GLOSSARY.md
     - docs/API_DOCUMENTATION.md
     - docs/PERFORMANCE_GUIDE.md

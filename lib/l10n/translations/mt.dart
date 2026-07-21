@@ -1801,6 +1801,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
+      '•  Id-database CVE lokali (id-download tibdieh int stess): OciDeck iġib id-data bl-ingrossa permezz ta\' api.github.com u l-fajl tal-ħruġ li dak l-indirizz jipponta lejh.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
       '•  Tfittxija CVE (mitfija awtomatikament): meta tkun mixgħula, il-kelma li tfittex tmur lejn il-mera CVE issettjata u, jekk dik ma ssib xejn, lejn id-database Ewropea tal-ENISA u lejn MITRE.',
   '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':

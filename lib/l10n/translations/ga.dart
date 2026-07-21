@@ -1815,6 +1815,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
+      '•  An bunachar sonraí CVE áitiúil (tusa a chuireann an íoslódáil ar bun): faigheann OciDeck na sonraí ollmhóra trí api.github.com agus an comhad eisiúna a bhfuil an seoladh sin ag díriú air.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
       '•  Cuardach CVE (múchta de réir réamhshocraithe): nuair atá sé lasta, téann do théarma cuardaigh chuig an scáthán CVE atá socraithe agus, mura bhfaigheann sin aon rud, chuig bunachar sonraí Eorpach ENISA agus chuig MITRE.',
   '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':

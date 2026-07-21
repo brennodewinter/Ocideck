@@ -2761,6 +2761,8 @@ const _dutchSourceTr = {
 // hoofdtabel. Deze overlay begint leeg en vult zich vanzelf: `add_l10n.dart`
 // schrijft elke nieuwe `d(...)`-bronstring hierin, net als bij de andere talen.
 const _dutchSourceAddTr = <String, String>{
+  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
+      '•  Yerel CVE veri tabanı (indirmeyi siz başlatırsınız): OciDeck toplu verileri api.github.com üzerinden ve o adresin işaret ettiği sürüm dosyasından alır.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
       '•  CVE arama (varsayılan olarak kapalı): açıksa arama teriminiz ayarlanan CVE aynasına, orada bir şey bulunamazsa ENISA\'nın Avrupa veri tabanına ve MITRE\'ye gider.',
   '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':

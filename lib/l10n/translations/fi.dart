@@ -1779,6 +1779,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
+      '•  Paikallinen CVE-tietokanta (käynnistät latauksen itse): OciDeck hakee joukkotiedot osoitteen api.github.com kautta ja sen julkaisutiedoston, johon osoite viittaa.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
       '•  CVE-haku (oletuksena pois päältä): kun se on päällä, hakusanasi menee asetettuun CVE-peilipalvelimeen ja, jos se ei löydä mitään, ENISAn eurooppalaiseen tietokantaan ja MITREen.',
   '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':

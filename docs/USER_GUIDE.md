@@ -1778,7 +1778,11 @@ independent of classification enforcement — both can apply at once.
 
 ## Accessibility
 
-OciDeck aims for WCAG 2.1 in the editor:
+OciDeck aims for WCAG 2.1 **in the editor**, and does not reach it in the
+exports: PDF and PPTX are rendered as one image per slide, so they carry no text
+layer, no alt-text and no structure. [ACCESSIBILITY.md](ACCESSIBILITY.md) sets
+out what is in place and what is not, limitations included; the list below is
+the editor half of it.
 
 - **Interface text size** — Settings → General → Accessibility offers 100–200%
   text scaling for the whole editing environment, on top of what the operating

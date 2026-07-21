@@ -733,6 +733,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
+      '•  La base de datos CVE local (el que inicia la descarga eres tú): OciDeck obtiene los datos masivos a través de api.github.com y el archivo de versión al que apunta esa dirección.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
       '•  Búsqueda de CVE (desactivada de forma predeterminada): si está activada, el término de búsqueda va al espejo CVE configurado y, si este no encuentra nada, a la base de datos europea de ENISA y a MITRE.',
   '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':

@@ -1754,6 +1754,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
+      '•  CVE qawHaq Sumbogh (SoH DaHoSmoH download): api.github.com lo\'taHvIS De\' law\' Sam OciDeck \'ej Daqvetlh \'angbogh release De\'wI\' nav Sam.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
       '•  CVE nej (motlh chu\'Ha\'lu\'): chu\'lu\'chugh, vaj CVE velDaq DawIvbogh nejmeH mu\' ngeHlu\', \'ej pagh Sam chugh, ENISA Europa qawHaq je MITRE ngeHlu\'.',
   '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':

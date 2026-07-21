@@ -232,6 +232,12 @@ class PrivacyStatementContent extends StatelessWidget {
       ),
       Text(
         l10n.d(
+          '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.',
+        ),
+        style: _bodyStyle,
+      ),
+      Text(
+        l10n.d(
           '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.',
         ),
         style: _bodyStyle,
