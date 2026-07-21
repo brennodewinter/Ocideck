@@ -736,6 +736,14 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'esc': 'esc',
+  'Enter': 'Enter',
+  'OK': 'OK',
+  'min': 'min',
+  '# Bedankt\n\nVragen?': '# Danki\n\nPregunta?',
+  'P {pitch}  B {bank}': 'P {pitch}  B {bank}',
+  'ACT {value}°': 'AKT {value}°',
+  'TGT {heading}°': 'MET {heading}°',
   'Citaat tekst...': 'Teksto di e sita...',
   'Naam van de auteur': 'Nòmber di e outor',
   'Presentatietitel': 'Título di presentashon',

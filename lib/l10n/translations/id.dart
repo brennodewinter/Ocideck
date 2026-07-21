@@ -1779,6 +1779,14 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'esc': 'esc',
+  'Enter': 'Enter',
+  'OK': 'OK',
+  'min': 'mnt',
+  '# Bedankt\n\nVragen?': '# Terima kasih\n\nAda pertanyaan?',
+  'P {pitch}  B {bank}': 'P {pitch}  B {bank}',
+  'ACT {value}°': 'AKT {value}°',
+  'TGT {heading}°': 'TGT {heading}°',
   'Presentatietitel': 'Judul presentasi',
   'Sectienaam': 'Nama bagian',
   'Optionele toelichting': 'Penjelasan opsional',

@@ -1787,6 +1787,14 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'esc': 'esc',
+  'Enter': 'Enter',
+  'OK': 'Gerai',
+  'min': 'min',
+  '# Bedankt\n\nVragen?': '# Ačiū\n\nKlausimai?',
+  'P {pitch}  B {bank}': 'P {pitch}  B {bank}',
+  'ACT {value}°': 'DAB {value}°',
+  'TGT {heading}°': 'TIK {heading}°',
   'Presentatietitel': 'Pristatymo pavadinimas',
   'Sectienaam': 'Skyriaus pavadinimas',
   'Optionele toelichting': 'Nebūtinas paaiškinimas',

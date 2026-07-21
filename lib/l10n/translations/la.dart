@@ -1795,6 +1795,14 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'esc': 'esc',
+  'Enter': 'Enter',
+  'OK': 'Bene',
+  'min': 'min',
+  '# Bedankt\n\nVragen?': '# Gratias ago\n\nQuaestiones?',
+  'P {pitch}  B {bank}': 'P {pitch}  B {bank}',
+  'ACT {value}°': 'NUNC {value}°',
+  'TGT {heading}°': 'META {heading}°',
   'Presentatietitel': 'Titulus praesentationis',
   'Sectienaam': 'Nomen sectionis',
   'Optionele toelichting': 'Explicatio optativa',

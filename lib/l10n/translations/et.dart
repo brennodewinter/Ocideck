@@ -1770,6 +1770,14 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'esc': 'esc',
+  'Enter': 'Enter',
+  'OK': 'OK',
+  'min': 'min',
+  '# Bedankt\n\nVragen?': '# Aitäh\n\nKüsimusi?',
+  'P {pitch}  B {bank}': 'P {pitch}  K {bank}',
+  'ACT {value}°': 'TEG {value}°',
+  'TGT {heading}°': 'SIH {heading}°',
   'Presentatietitel': 'Esitluse pealkiri',
   'Sectienaam': 'Jaotise nimi',
   'Optionele toelichting': 'Valikuline selgitus',

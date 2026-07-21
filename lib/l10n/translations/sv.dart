@@ -1778,6 +1778,14 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'esc': 'esc',
+  'Enter': 'Enter',
+  'OK': 'OK',
+  'min': 'min',
+  '# Bedankt\n\nVragen?': '# Tack\n\nFrågor?',
+  'P {pitch}  B {bank}': 'T {pitch}  R {bank}',
+  'ACT {value}°': 'AKT {value}°',
+  'TGT {heading}°': 'MÅL {heading}°',
   'Presentatietitel': 'Presentationstitel',
   'Sectienaam': 'Avsnittsnamn',
   'Optionele toelichting': 'Valfri förklaring',

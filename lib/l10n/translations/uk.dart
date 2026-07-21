@@ -1797,6 +1797,14 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'esc': 'esc',
+  'Enter': 'Enter',
+  'OK': 'Гаразд',
+  'min': 'хв',
+  '# Bedankt\n\nVragen?': '# Дякую\n\nЗапитання?',
+  'P {pitch}  B {bank}': 'Т {pitch}  К {bank}',
+  'ACT {value}°': 'ФАК {value}°',
+  'TGT {heading}°': 'ЦІЛ {heading}°',
   'Presentatietitel': 'Назва презентації',
   'Sectienaam': 'Назва розділу',
   'Optionele toelichting': 'Необов’язкове пояснення',

@@ -1797,6 +1797,14 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'esc': 'esc',
+  'Enter': 'Enter',
+  'OK': 'OK',
+  'min': 'min',
+  '# Bedankt\n\nVragen?': '# Mulțumesc\n\nÎntrebări?',
+  'P {pitch}  B {bank}': 'T {pitch}  Î {bank}',
+  'ACT {value}°': 'ACT {value}°',
+  'TGT {heading}°': 'ȚIN {heading}°',
   'Presentatietitel': 'Titlul prezentării',
   'Sectienaam': 'Numele secțiunii',
   'Optionele toelichting': 'Explicație opțională',

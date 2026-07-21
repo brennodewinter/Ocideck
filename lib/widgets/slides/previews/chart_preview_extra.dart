@@ -786,7 +786,7 @@ extension _ChartPreviewExtra on _ChartPreviewState {
                                   alignment: Alignment.centerRight,
                                   child: Text(
                                     rows[r].name.isEmpty
-                                        ? 'Reeks ${r + 1}'
+                                        ? '${context.l10n.d('Reeks')} ${r + 1}'
                                         : rows[r].name,
                                     textAlign: TextAlign.right,
                                     maxLines: 2,

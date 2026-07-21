@@ -1754,6 +1754,14 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'esc': 'esc',
+  'Enter': 'Enter',
+  'OK': 'lu\'',
+  'min': 'tup',
+  '# Bedankt\n\nVragen?': '# qatlho\'\n\nyu\'mey?',
+  'P {pitch}  B {bank}': 'P {pitch}  B {bank}',
+  'ACT {value}°': 'DaH {value}°',
+  'TGT {heading}°': 'ngoQ {heading}°',
   'Presentatietitel': '\'echletHommey per',
   'Sectienaam': '\'ay\' pong',
   'Optionele toelichting': 'QIj (DubwI\')',

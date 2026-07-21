@@ -1782,6 +1782,14 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'esc': 'esc',
+  'Enter': 'Enter',
+  'OK': 'OK',
+  'min': 'min',
+  '# Bedankt\n\nVragen?': '# Děkuji\n\nOtázky?',
+  'P {pitch}  B {bank}': 'K {pitch}  N {bank}',
+  'ACT {value}°': 'AKT {value}°',
+  'TGT {heading}°': 'CÍL {heading}°',
   'Presentatietitel': 'Název prezentace',
   'Sectienaam': 'Název sekce',
   'Optionele toelichting': 'Volitelné vysvětlení',

@@ -918,6 +918,14 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'esc': 'esc',
+  'Enter': 'Enter',
+  'OK': 'OK',
+  'min': 'min',
+  '# Bedankt\n\nVragen?': '# Thank you\n\nQuestions?',
+  'P {pitch}  B {bank}': 'P {pitch}  B {bank}',
+  'ACT {value}°': 'ACT {value}°',
+  'TGT {heading}°': 'TGT {heading}°',
   'Presentatietitel': 'Presentation title',
   'Sectienaam': 'Section name',
   'Optionele toelichting': 'Optional explanation',

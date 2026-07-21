@@ -1781,6 +1781,14 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'esc': 'esc',
+  'Enter': 'Enter',
+  'OK': 'V redu',
+  'min': 'min',
+  '# Bedankt\n\nVragen?': '# Hvala\n\nVprašanja?',
+  'P {pitch}  B {bank}': 'P {pitch}  B {bank}',
+  'ACT {value}°': 'TRE {value}°',
+  'TGT {heading}°': 'CILJ {heading}°',
   'Presentatietitel': 'Naslov predstavitve',
   'Sectienaam': 'Ime razdelka',
   'Optionele toelichting': 'Neobvezno pojasnilo',
