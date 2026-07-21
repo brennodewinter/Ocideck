@@ -281,7 +281,7 @@ String formatSlideQualityIssue(AppLocalizations l10n, SlideQualityIssue issue) {
           '${issue.args['percent']}${l10n.d(' van de ontwerpgrootte.')}',
     SlideQualityIssueKind.textDensityCritical =>
       '${l10n.d('Veel tekst op deze slide: het lettertype wordt sterk verkleind (')}'
-          '${issue.args['percent']}${l10n.d('van de ontwerpgrootte). Overweeg de inhoud te splitsen.')}',
+          '${issue.args['percent']}${l10n.d(' van de ontwerpgrootte). Overweeg de inhoud te splitsen.')}',
     // Eén hele zin met plaatshouders in plaats van aan elkaar geplakte
     // fragmenten: de woordvolgorde verschilt per taal, dus een vertaler moet de
     // getallen kunnen verplaatsen.

@@ -1411,8 +1411,8 @@ const _dutchSourceEl = {
   ' van de ontwerpgrootte.': ' του μεγέθους σχεδίασης.',
   'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
       'Πολύ κείμενο σε αυτή τη διαφάνεια: το μέγεθος γραμματοσειράς μειώνεται σημαντικά (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
-      'του μεγέθους σχεδίασης). Εξετάστε το ενδεχόμενο να χωρίσετε το περιεχόμενο.',
+  ' van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      ' του μεγέθους σχεδίασης). Εξετάστε το ενδεχόμενο να χωρίσετε το περιεχόμενο.',
   'Grote tabel (': 'Μεγάλος πίνακας (',
   ' rijen, ': ' σειρές, ',
   ' kolommen): celtekst staat op het minimumformaat.':

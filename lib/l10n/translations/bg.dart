@@ -1408,8 +1408,8 @@ const _dutchSourceBg = {
   ' van de ontwerpgrootte.': ' от проектния размер.',
   'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
       'Много текст на този слайд: размерът на шрифта се намалява силно (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
-      'от проектния размер). Обмислете разделяне на съдържанието.',
+  ' van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      ' от проектния размер). Обмислете разделяне на съдържанието.',
   'Grote tabel (': 'Голяма таблица (',
   ' rijen, ': ' реда, ',
   ' kolommen): celtekst staat op het minimumformaat.':

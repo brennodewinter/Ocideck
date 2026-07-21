@@ -1391,8 +1391,8 @@ const _dutchSourceLv = {
   ' van de ontwerpgrootte.': ' no dizaina izmēra.',
   'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
       'Daudz teksta šajā slaidā: fonta izmērs stipri samazināts (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
-      'no dizaina izmēra). Apsveriet iespēju sadalīt saturu.',
+  ' van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      ' no dizaina izmēra). Apsveriet iespēju sadalīt saturu.',
   'Grote tabel (': 'Liela tabula (',
   ' rijen, ': ' rindas, ',
   ' kolommen): celtekst staat op het minimumformaat.':

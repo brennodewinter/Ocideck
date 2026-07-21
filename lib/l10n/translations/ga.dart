@@ -1421,8 +1421,8 @@ const _dutchSourceGa = {
   ' van de ontwerpgrootte.': ' den mhéid deartha.',
   'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
       'Go leor téacs ar an sleamhnán seo: laghdaítear méid an chló go mór (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
-      'den mhéid deartha). Smaoinigh ar an ábhar a roinnt.',
+  ' van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      ' den mhéid deartha). Smaoinigh ar an ábhar a roinnt.',
   'Grote tabel (': 'Tábla mór (',
   ' rijen, ': ' ró, ',
   ' kolommen): celtekst staat op het minimumformaat.':

@@ -1390,8 +1390,8 @@ const _dutchSourceSv = {
   ' van de ontwerpgrootte.': ' av designstorleken.',
   'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
       'Mycket text på denna bild: teckenstorleken minskas kraftigt (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
-      'av designstorleken). Överväg att dela upp innehållet.',
+  ' van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      ' av designstorleken). Överväg att dela upp innehållet.',
   'Grote tabel (': 'Stor tabell (',
   ' rijen, ': ' rader, ',
   ' kolommen): celtekst staat op het minimumformaat.':

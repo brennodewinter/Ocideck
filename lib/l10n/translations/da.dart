@@ -1389,8 +1389,8 @@ const _dutchSourceDa = {
   ' van de ontwerpgrootte.': ' af designstørrelsen.',
   'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
       'Meget tekst på denne slide: skriftstørrelsen reduceres kraftigt (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
-      'af designstørrelsen). Overvej at opdele indholdet.',
+  ' van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      ' af designstørrelsen). Overvej at opdele indholdet.',
   'Grote tabel (': 'Stor tabel (',
   ' rijen, ': ' rækker, ',
   ' kolommen): celtekst staat op het minimumformaat.':

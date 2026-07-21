@@ -1384,8 +1384,8 @@ const _dutchSourceEt = {
   ' van de ontwerpgrootte.': ' kavandatud suurusest.',
   'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
       'Sellel slaidil on palju teksti: fondi suurust vähendatakse tugevalt (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
-      'kavandatud suurusest). Kaalu sisu jagamist.',
+  ' van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      ' kavandatud suurusest). Kaalu sisu jagamist.',
   'Grote tabel (': 'Suur tabel (',
   ' rijen, ': ' rida, ',
   ' kolommen): celtekst staat op het minimumformaat.':

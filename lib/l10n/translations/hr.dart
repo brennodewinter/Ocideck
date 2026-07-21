@@ -1397,8 +1397,8 @@ const _dutchSourceHr = {
   ' van de ontwerpgrootte.': ' od veličine dizajna.',
   'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
       'Puno teksta na ovom slajdu: veličina fonta znatno je smanjena (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
-      'od veličine dizajna). Razmislite o podjeli sadržaja.',
+  ' van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      ' od veličine dizajna). Razmislite o podjeli sadržaja.',
   'Grote tabel (': 'Velika tablica (',
   ' rijen, ': ' redaka, ',
   ' kolommen): celtekst staat op het minimumformaat.':

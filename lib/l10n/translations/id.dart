@@ -1391,8 +1391,8 @@ const _dutchSourceId = {
   ' van de ontwerpgrootte.': ' dari ukuran desain.',
   'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
       'Banyak teks pada slide ini: ukuran font dikecilkan secara drastis (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
-      'dari ukuran desain). Pertimbangkan untuk memisahkan kontennya.',
+  ' van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      ' dari ukuran desain). Pertimbangkan untuk memisahkan kontennya.',
   'Grote tabel (': 'Tabel besar (',
   ' rijen, ': ' baris, ',
   ' kolommen): celtekst staat op het minimumformaat.':

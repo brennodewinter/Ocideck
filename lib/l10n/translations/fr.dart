@@ -2462,8 +2462,8 @@ const _dutchSourceAddFr = {
   ' van de ontwerpgrootte.': ' de la taille de conception.',
   'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
       'Beaucoup de texte sur cette slide : la taille de police est fortement réduite (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
-      'de la taille de conception). Envisagez de diviser le contenu.',
+  ' van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      ' de la taille de conception). Envisagez de diviser le contenu.',
   'Grote tabel (': 'Grand tableau (',
   ' rijen, ': ' lignes, ',
   ' kolommen): celtekst staat op het minimumformaat.':

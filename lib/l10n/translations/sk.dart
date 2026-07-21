@@ -1398,8 +1398,8 @@ const _dutchSourceSk = {
   ' van de ontwerpgrootte.': ' návrhovej veľkosti.',
   'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
       'Veľa textu na tejto snímke: veľkosť písma sa výrazne zmenší (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
-      'návrhovej veľkosti). Zvážte rozdelenie obsahu.',
+  ' van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      ' návrhovej veľkosti). Zvážte rozdelenie obsahu.',
   'Grote tabel (': 'Veľká tabuľka (',
   ' rijen, ': ' riadkov, ',
   ' kolommen): celtekst staat op het minimumformaat.':

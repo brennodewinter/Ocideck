@@ -246,6 +246,32 @@ void main() {
       });
     });
 
+    test('no message runs the percentage into the next word', () {
+      // De dichtheidsmeldingen worden aan elkaar geplakt uit voorvoegsel +
+      // getal + achtervoegsel. Ontbreekt de spatie op die naad, dan leest de
+      // zin als "(55%van de ontwerpgrootte)": onzichtbaar in de bron, meteen
+      // zichtbaar op het scherm. De Nederlandse tekst ís de opzoeksleutel, dus
+      // zo'n gat wordt in één klap naar alle talen gekopieerd — vandaar dat
+      // deze test ze allemaal langsloopt en niet alleen NL en EN.
+      final glued = RegExp(r'%\p{L}', unicode: true);
+      for (final code in AppLocalizations.languageNames.keys) {
+        AppLocalizations.setActiveLanguageCode(code);
+        for (final kind in SlideQualityIssueKind.values) {
+          final message = formatSlideQualityIssue(
+            l10n,
+            issue(kind, args: argsByKind[kind]!),
+          );
+          expect(
+            glued.hasMatch(message),
+            isFalse,
+            reason:
+                '$code/$kind plakt het percentage tegen het volgende '
+                'woord: $message',
+          );
+        }
+      }
+    });
+
     test('privacy escalation suffix differs for a linked special category', () {
       AppLocalizations.setActiveLanguageCode('nl');
       // A special-category finding that is NOT merely informational escalates,

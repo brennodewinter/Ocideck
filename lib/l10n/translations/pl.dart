@@ -1400,8 +1400,8 @@ const _dutchSourcePl = {
   ' van de ontwerpgrootte.': ' rozmiaru projektowego.',
   'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
       'Dużo tekstu na tym slajdzie: rozmiar czcionki jest mocno zmniejszany (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
-      'rozmiaru projektowego). Rozważ podzielenie treści.',
+  ' van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      ' rozmiaru projektowego). Rozważ podzielenie treści.',
   'Grote tabel (': 'Duża tabela (',
   ' rijen, ': ' wierszy, ',
   ' kolommen): celtekst staat op het minimumformaat.':

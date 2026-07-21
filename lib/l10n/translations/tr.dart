@@ -2434,7 +2434,7 @@ const _dutchSourceTr = {
   ' van de ontwerpgrootte.': ' kadarına küçültülüyor.',
   'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
       'Bu slaytta çok fazla metin var: yazı tipi büyük ölçüde küçültülüyor (tasarım boyutunun ',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+  ' van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
       ' kadarına). İçeriği bölmeyi düşünün.',
   'Grote tabel (': 'Büyük tablo (',
   ' rijen, ': ' satır, ',

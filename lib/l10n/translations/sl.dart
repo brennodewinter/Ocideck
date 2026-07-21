@@ -1393,8 +1393,8 @@ const _dutchSourceSl = {
   ' van de ontwerpgrootte.': ' glede na oblikovno velikost.',
   'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
       'Veliko besedila na tej prosojnici: velikost pisave je močno zmanjšana (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
-      'glede na oblikovno velikost). Razmislite o delitvi vsebine.',
+  ' van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      ' glede na oblikovno velikost). Razmislite o delitvi vsebine.',
   'Grote tabel (': 'Velika tabela (',
   ' rijen, ': ' vrstic, ',
   ' kolommen): celtekst staat op het minimumformaat.':
