@@ -1793,8 +1793,8 @@ const _dutchSourceAddHu = <String, String>{
       'Ez az ellenőrzés nem fut a webes verzióban: az arcfelismeréshez egy rendszerkönyvtár kell, amely a böngészőből hiányzik. A képek arcokra való ellenőrzéséhez használd az asztali verziót.',
   'Het token heeft lees- en schrijfrechten op de repository nodig. Gitea en Forgejo kennen geen server-side zoeken; OciDeck zoekt lokaal.':
       'A tokennek olvasási és írási hozzáférés kell a tárolóhoz. A Gitea és a Forgejo nem tud kiszolgálóoldali keresést; az OciDeck helyben keres.',
-  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven). Codezoeken op de server dekt alleen de standaardbranch.':
-      'A tokennek a repo hatókör kell (vagy finomhangolva: Contents olvasás és írás). A kiszolgálóoldali kódkeresés csak az alapértelmezett ágra terjed ki.',
+  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven).':
+      'A tokennek a repo hatókör kell (vagy finomhangolva: Contents olvasás és írás).',
   'Het token heeft read_repository, write_repository en read_api nodig. Server-side zoeken vereist Advanced- of Exact Search.':
       'A tokennek read_repository, write_repository és read_api kell. A kiszolgálóoldali kereséshez Advanced vagy Exact Search szükséges.',
   'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':

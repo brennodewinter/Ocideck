@@ -120,7 +120,7 @@ extension _SettingsGit on _SettingsDialogState {
         'Het token heeft lees- en schrijfrechten op de repository nodig. Gitea en Forgejo kennen geen server-side zoeken; OciDeck zoekt lokaal.',
       ),
       GitProvider.github => l10n.d(
-        'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven). Codezoeken op de server dekt alleen de standaardbranch.',
+        'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven).',
       ),
       GitProvider.gitlab => l10n.d(
         'Het token heeft read_repository, write_repository en read_api nodig. Server-side zoeken vereist Advanced- of Exact Search.',

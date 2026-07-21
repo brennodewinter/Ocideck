@@ -1793,8 +1793,8 @@ const _dutchSourceAddGsw = <String, String>{
       'Die Prüefig lauft i de Web-Version nöd: Gsichtserkennig bruucht e Systembibliothek, wo de Browser nöd het. Nimm d Desktop-Version, zum Bilder uf Gsichter z prüefe.',
   'Het token heeft lees- en schrijfrechten op de repository nodig. Gitea en Forgejo kennen geen server-side zoeken; OciDeck zoekt lokaal.':
       'S Token bruucht Läse- und Schriibrächt fürs Repository. Gitea und Forgejo hei kei serversitigi Suech; OciDeck suecht lokal.',
-  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven). Codezoeken op de server dekt alleen de standaardbranch.':
-      'S Token bruucht de repo-Scope (oder fiin: Contents läse und schriibe). D Codesuech uf em Server deckt nume de Standardbranch.',
+  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven).':
+      'S Token bruucht de repo-Scope (oder fiin: Contents läse und schriibe).',
   'Het token heeft read_repository, write_repository en read_api nodig. Server-side zoeken vereist Advanced- of Exact Search.':
       'S Token bruucht read_repository, write_repository und read_api. D serversitigi Suech verlangt Advanced oder Exact Search.',
   'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':

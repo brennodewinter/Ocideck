@@ -1801,8 +1801,8 @@ const _dutchSourceAddPl = <String, String>{
       'Ta kontrola nie działa w wersji internetowej: wykrywanie twarzy wymaga biblioteki systemowej, której przeglądarka nie ma. Użyj wersji desktopowej, aby sprawdzić twarze na obrazach.',
   'Het token heeft lees- en schrijfrechten op de repository nodig. Gitea en Forgejo kennen geen server-side zoeken; OciDeck zoekt lokaal.':
       'Token musi mieć dostęp do odczytu i zapisu repozytorium. Gitea i Forgejo nie mają wyszukiwania po stronie serwera; OciDeck szuka lokalnie.',
-  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven). Codezoeken op de server dekt alleen de standaardbranch.':
-      'Token musi mieć zakres repo (lub szczegółowo: Contents do odczytu i zapisu). Wyszukiwanie kodu na serwerze obejmuje tylko gałąź domyślną.',
+  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven).':
+      'Token musi mieć zakres repo (lub szczegółowo: Contents do odczytu i zapisu).',
   'Het token heeft read_repository, write_repository en read_api nodig. Server-side zoeken vereist Advanced- of Exact Search.':
       'Token musi mieć read_repository, write_repository i read_api. Wyszukiwanie po stronie serwera wymaga Advanced lub Exact Search.',
   'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':

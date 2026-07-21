@@ -1764,8 +1764,8 @@ const _dutchSourceAddTlh = <String, String>{
       'web version-Daq nptlh vam waH: qab nojwI\' pol system library \'e\' poQ, \'ach browser vam Hutlh. nagh Daq qab noj \'e\' DaneHchugh, desktop version yIlo\'.',
   'Het token heeft lees- en schrijfrechten op de repository nodig. Gitea en Forgejo kennen geen server-side zoeken; OciDeck zoekt lokaal.':
       'De\' laDmeH ghItlhmeH je repository nISwI\' poQ. Gitea Forgejo je server-Daq Sam tu\'be\'; OciDeck pa\' Sam.',
-  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven). Codezoeken op de server dekt alleen de standaardbranch.':
-      'repo scope poQ token (pagh: Contents laD ghItlh je). server-Daq QIn Sam neH default branch buv.',
+  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven).':
+      'repo scope poQ token (pagh: Contents laD ghItlh je).',
   'Het token heeft read_repository, write_repository en read_api nodig. Server-side zoeken vereist Advanced- of Exact Search.':
       'read_repository, write_repository read_api je poQ token. server-Daq Sam Advanced Exact Search poQ.',
   'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':

@@ -1780,8 +1780,8 @@ const _dutchSourceAddEt = <String, String>{
       'See kontroll veebiversioonis ei tööta: näotuvastus vajab süsteemiteeki, mida brauseris pole. Piltide näotuvastuseks kasuta lauaarvuti versiooni.',
   'Het token heeft lees- en schrijfrechten op de repository nodig. Gitea en Forgejo kennen geen server-side zoeken; OciDeck zoekt lokaal.':
       'Luba vajab hoidlas lugemis- ja kirjutamisõigust. Giteal ja Forgejol pole serveripoolset otsingut; OciDeck otsib kohapeal.',
-  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven). Codezoeken op de server dekt alleen de standaardbranch.':
-      'Luba vajab repo ulatust (või täpselt: Contents lugemine ja kirjutamine). Serveripoolne koodiotsing katab ainult vaikeharu.',
+  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven).':
+      'Luba vajab repo ulatust (või täpselt: Contents lugemine ja kirjutamine).',
   'Het token heeft read_repository, write_repository en read_api nodig. Server-side zoeken vereist Advanced- of Exact Search.':
       'Luba vajab read_repository, write_repository ja read_api. Serveripoolne otsing nõuab Advanced või Exact Search.',
   'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':

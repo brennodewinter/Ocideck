@@ -747,8 +747,8 @@ const _dutchSourceAddFy = {
       'Dizze kontrôle draait net yn de webferzje: gesichtsherkenning fereasket in systeembibleteek dy\'t de browser net hat. Brûk de desktopferzje om ôfbyldings op gesichten nei te sjen.',
   'Het token heeft lees- en schrijfrechten op de repository nodig. Gitea en Forgejo kennen geen server-side zoeken; OciDeck zoekt lokaal.':
       'It token hat lês- en skriuwrjochten op it repository nedich. Gitea en Forgejo kenne gjin sykjen op de tsjinner; OciDeck siket lokaal.',
-  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven). Codezoeken op de server dekt alleen de standaardbranch.':
-      'It token hat de repo-scope nedich (of fynkorrelich: Contents lêze en skriuwe). It sykjen fan koade op de tsjinner dekt allinne de standertbranch.',
+  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven).':
+      'It token hat de repo-scope nedich (of fynkorrelich: Contents lêze en skriuwe).',
   'Het token heeft read_repository, write_repository en read_api nodig. Server-side zoeken vereist Advanced- of Exact Search.':
       'It token hat read_repository, write_repository en read_api nedich. Sykjen op de tsjinner freget Advanced of Exact Search.',
   'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':
