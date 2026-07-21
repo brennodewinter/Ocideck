@@ -3,6 +3,15 @@
 part of '../fullscreen_presenter.dart';
 
 extension _PresenterQuestions on _FullscreenPresenterState {
+  /// Of de kijker nu een antwoord staat te typen. Afgeleid uit de vraag zelf,
+  /// niet apart bijgehouden: zodra er een openstaande getypte vraag op het
+  /// scherm staat, horen de toetsen in het invoerveld en niet bij de
+  /// sneltoetsen — anders springt een "3" in het antwoord naar slide 3.
+  bool get _answerInput {
+    final v = _currentQuestionView;
+    return v != null && v.openText && v.answerable && !v.revealed && !v.locked;
+  }
+
   /// De live vraag-toestand voor de huidige slide, of null als het geen
   /// vraag-slide is.
   QuestionView? get _currentQuestionView {
@@ -20,13 +29,12 @@ extension _PresenterQuestions on _FullscreenPresenterState {
     if (view == null) return true; // nog niet beantwoord
     // Een onbeantwoordbare vraag mag nooit blokkeren. De maat daarvoor is of er
     // een juist antwoord te géven valt, niet of er opties staan: een vraag met
-    // twee opties waarvan er géén als juist is aangemerkt levert een lege
-    // [correctIndices] op, dus elk antwoord telt als fout. In de standaard
-    // retry-stand vergrendelt zo'n fout niet, waardoor de presentatie muurvast
-    // kwam te zitten op een slide die per definitie niet te halen was — alleen
-    // afsluiten hielp nog. De tekenroutines hierboven noemen dit geval al
-    // "niet presenteerbaar"; hier stond de bijpassende uitweg te smal.
-    if (view.correctIndices.isEmpty) return false;
+    // twee opties waarvan er géén als juist is aangemerkt is per definitie niet
+    // te halen, dus elk antwoord telt als fout. In de standaard retry-stand
+    // vergrendelt zo'n fout niet, waardoor de presentatie muurvast kwam te
+    // zitten op zo'n slide — alleen afsluiten hielp nog. De tekenroutines
+    // hieronder merken dat geval aan met [QuestionView.answerable].
+    if (!view.answerable) return false;
     return !view.passed;
   }
 
@@ -73,11 +81,23 @@ extension _PresenterQuestions on _FullscreenPresenterState {
     final spec = QuestionSpec.parse(slide.customMarkdown);
     final view = _drawQuestionRound(spec);
     _rebuild(() => _questionViews[slide.id] = view);
+    // De klok voor déze poging loopt vanaf nu; het tijdenoverzicht na afloop
+    // toont elke poging apart.
+    if (view.answerable) _rehearsal.startQuestion(slide.id, _index);
     _pushQuestion();
     if (view.hasTimer) _startQuestionTimer(slide.id);
   }
 
   QuestionView _drawQuestionRound(QuestionSpec spec) {
+    final view = _drawByKind(spec);
+    // Een vraag die niet te halen is, krijgt ook geen aftelling: die zou alleen
+    // maar aftikken naar een fout die nergens toe leidt.
+    return view.answerable
+        ? view
+        : view.copyWith(totalSeconds: 0, remainingMs: 0);
+  }
+
+  QuestionView _drawByKind(QuestionSpec spec) {
     final base = QuestionView(
       totalSeconds: spec.timeLimitSeconds,
       remainingMs: spec.timeLimitSeconds * 1000,
@@ -92,10 +112,49 @@ extension _PresenterQuestions on _FullscreenPresenterState {
         return _drawMultiCorrect(spec, base);
       case QuestionKind.ordering:
         return _drawOrdering(spec, base);
+      case QuestionKind.imagePair:
+        return _drawImagePair(spec, base);
+      case QuestionKind.openText:
+        return _drawOpenText(spec, base);
       case QuestionKind.multipleChoice:
         return _drawSingleChoice(spec, base);
     }
   }
+
+  /// Beeldpaar: twee afbeeldingen, één juiste. Er valt niets te grijpen uit een
+  /// pool — het willekeurige zit hier in de kant waarop de juiste terechtkomt,
+  /// zodat de kijker de vorige ronde niet kan naspelen.
+  QuestionView _drawImagePair(QuestionSpec spec, QuestionView base) {
+    final pool = spec.filledAnswers;
+    if (!spec.isPresentable) {
+      return QuestionView(
+        options: [for (final a in pool) a.text],
+        optionImages: [for (final a in pool) a.image],
+        correctIndices: [
+          for (var i = 0; i < pool.length; i++)
+            if (pool[i].correct) i,
+        ],
+        answerable: false,
+      );
+    }
+    final shown = [...pool.take(questionImagePairCount)]
+      ..shuffle(math.Random());
+    return base.copyWith(
+      options: [for (final a in shown) a.text],
+      optionImages: [for (final a in shown) a.image],
+      correctIndices: [
+        for (var i = 0; i < shown.length; i++)
+          if (shown[i].correct) i,
+      ],
+    );
+  }
+
+  /// Getypt antwoord: er valt niets te tonen tot het antwoord binnen is. De
+  /// juiste antwoorden blijven bewust uit de [QuestionView] — die reist naar het
+  /// beamervenster, en een antwoordsleutel hoort daar niet te liggen voordat er
+  /// geantwoord is.
+  QuestionView _drawOpenText(QuestionSpec spec, QuestionView base) =>
+      base.copyWith(openText: true, answerable: spec.isPresentable);
 
   /// Multiple choice: één willekeurig goed antwoord + een willekeurige greep
   /// foute antwoorden, geschud. Eén juist antwoord.
@@ -104,13 +163,14 @@ extension _PresenterQuestions on _FullscreenPresenterState {
     final wrong = spec.wrongAnswers;
     if (correct.isEmpty || wrong.isEmpty) {
       // Niet presenteerbaar: toon wat er is, zonder timer, en blokkeer niet.
-      final all = spec.answers.where((a) => a.text.trim().isNotEmpty).toList();
+      final all = spec.filledAnswers;
       return QuestionView(
         options: all.map((a) => a.text).toList(),
         correctIndices: [
           for (var i = 0; i < all.length; i++)
             if (all[i].correct) i,
         ],
+        answerable: false,
       );
     }
     final rng = math.Random();
@@ -127,42 +187,24 @@ extension _PresenterQuestions on _FullscreenPresenterState {
     );
   }
 
-  /// Meerdere juiste antwoorden: een willekeurige greep met ten minste één goed
-  /// én (indien beschikbaar) één fout antwoord. De kijker kiest álle juiste.
+  /// Meerdere juiste antwoorden: álle antwoorden, geschud. De kijker moet hier
+  /// "alle juiste" aanwijzen, en dat is een onmogelijke opdracht in een set
+  /// waar er willekeurig een paar van weggelaten zijn — je kunt niet weten of
+  /// het er twee of vijf zijn, en een antwoord dat gisteren goed was ontbreekt
+  /// vandaag. Alleen de vólgorde is willekeurig; het aantal getoonde opties uit
+  /// de editor geldt hier dan ook niet.
   QuestionView _drawMultiCorrect(QuestionSpec spec, QuestionView base) {
-    final correct = spec.correctAnswers;
-    final wrong = spec.wrongAnswers;
-    if (correct.isEmpty) {
-      final all = spec.answers.where((a) => a.text.trim().isNotEmpty).toList();
-      return QuestionView(
-        options: all.map((a) => a.text).toList(),
-        correctIndices: [
-          for (var i = 0; i < all.length; i++)
-            if (all[i].correct) i,
-        ],
-        multi: true,
-      );
-    }
-    final rng = math.Random();
-    final n = spec.optionCount;
-    final correctPool = [...correct]..shuffle(rng);
-    final wrongPool = [...wrong]..shuffle(rng);
-    // Laat ruimte voor minstens één fout antwoord als die er is.
-    final maxCorrectShown = wrongPool.isNotEmpty
-        ? math.min(correctPool.length, n - 1)
-        : math.min(correctPool.length, n);
-    final kCorrect = 1 + rng.nextInt(math.max(1, maxCorrectShown));
-    final chosenCorrect = correctPool.take(kCorrect).toList();
-    final fill = (n - chosenCorrect.length).clamp(0, wrongPool.length);
-    final shown = [...chosenCorrect, ...wrongPool.take(fill)]..shuffle(rng);
-    final correctSet = chosenCorrect.toSet();
+    final all = spec.filledAnswers;
+    final shown = [...all]..shuffle(math.Random());
+    final indices = [
+      for (var i = 0; i < shown.length; i++)
+        if (shown[i].correct) i,
+    ];
     return base.copyWith(
       options: shown.map((a) => a.text).toList(),
-      correctIndices: [
-        for (var i = 0; i < shown.length; i++)
-          if (correctSet.contains(shown[i])) i,
-      ],
+      correctIndices: indices,
       multi: true,
+      answerable: indices.isNotEmpty,
     );
   }
 
@@ -178,6 +220,7 @@ extension _PresenterQuestions on _FullscreenPresenterState {
         correctIndices: [for (var i = 0; i < pool.length; i++) i],
         multi: true,
         ordering: true,
+        answerable: false,
       );
     }
     final rng = math.Random();
@@ -247,18 +290,33 @@ extension _PresenterQuestions on _FullscreenPresenterState {
     }
     _questionTimer?.cancel();
     if (view.isCorrect(optionIndex)) {
-      _rebuild(() {
-        _questionViews[slide.id] = view.copyWith(
-          selectedIndices: [optionIndex],
-          result: QuestionResult.correct,
-          revealed: true,
-          locked: true,
-        );
-      });
-      _pushQuestion();
+      _resolveCorrect(slide.id, view, selected: [optionIndex]);
     } else {
       _resolveWrong(slide.id, selected: [optionIndex]);
     }
+  }
+
+  /// Verwerk een goed antwoord: onthullen, vergrendelen en de poging opnemen in
+  /// het tijdenoverzicht.
+  void _resolveCorrect(
+    String slideId,
+    QuestionView view, {
+    List<int>? selected,
+    String expectedAnswer = '',
+    double matchScore = 0,
+  }) {
+    _rebuild(() {
+      _questionViews[slideId] = view.copyWith(
+        selectedIndices: selected ?? view.selectedIndices,
+        result: QuestionResult.correct,
+        revealed: true,
+        locked: true,
+        expectedAnswer: expectedAnswer,
+        matchScore: matchScore,
+      );
+    });
+    _rehearsal.finishQuestion(correct: true);
+    _pushQuestion();
   }
 
   /// Bevestig de selectie bij een meervoudige vraag: goed wanneer precies de
@@ -269,7 +327,12 @@ extension _PresenterQuestions on _FullscreenPresenterState {
     final slide = _currentSlide;
     if (slide.type != SlideType.question) return;
     final view = _questionViews[slide.id];
-    if (view == null || !view.multi || view.revealed || view.locked) return;
+    if (view == null || view.revealed || view.locked) return;
+    if (view.openText) {
+      _submitTypedAnswer(slide, view);
+      return;
+    }
+    if (!view.multi) return;
     if (view.selectedIndices.isEmpty) return;
     // Een volgorde-antwoord telt pas als álle opties een plek hebben.
     if (view.ordering && !view.orderComplete) return;
@@ -280,28 +343,65 @@ extension _PresenterQuestions on _FullscreenPresenterState {
         ? view.orderMatches
         : selected.length == correct.length && selected.containsAll(correct);
     if (ok) {
-      _rebuild(() {
-        _questionViews[slide.id] = view.copyWith(
-          result: QuestionResult.correct,
-          revealed: true,
-          locked: true,
-        );
-      });
-      _pushQuestion();
+      _resolveCorrect(slide.id, view);
     } else {
       _resolveWrong(slide.id, selected: view.selectedIndices);
+    }
+  }
+
+  /// De kijker heeft zijn getypte antwoord bijgewerkt. Alleen bijhouden en
+  /// doorgeven; beoordelen gebeurt pas bij bevestigen.
+  void _onAnswerTextChanged(String text) {
+    final slide = _currentSlide;
+    if (slide.type != SlideType.question) return;
+    final view = _questionViews[slide.id];
+    if (view == null || !view.openText || view.revealed || view.locked) return;
+    _rebuild(() {
+      _questionViews[slide.id] = view.copyWith(typedAnswer: text);
+    });
+    _pushQuestion();
+  }
+
+  /// Beoordeel een getypt antwoord: goed zodra het genoeg lijkt op een van de
+  /// juiste antwoorden. "Genoeg" is [QuestionSpec.similarityThreshold] — de
+  /// auteur bepaalt zelf of een typefout mag.
+  void _submitTypedAnswer(Slide slide, QuestionView view) {
+    if (view.typedAnswer.trim().isEmpty) return;
+    final spec = QuestionSpec.parse(slide.customMarkdown);
+    final accepted = [for (final a in spec.correctAnswers) a.text];
+    if (accepted.isEmpty) return; // niets om tegen af te zetten
+    final score = bestAnswerSimilarity(view.typedAnswer, accepted);
+    _questionTimer?.cancel();
+    if (score >= spec.similarityThreshold) {
+      _resolveCorrect(
+        slide.id,
+        view,
+        expectedAnswer: accepted.first,
+        matchScore: score,
+      );
+    } else {
+      _resolveWrong(slide.id, matchScore: score);
     }
   }
 
   /// Verwerk een fout antwoord of een verlopen timer: toon het juiste antwoord
   /// en bepaal, op basis van [QuestionSpec.onWrong], of er een verse poging
   /// volgt (retry) of dat de slide vergrendeld wordt zodat je verder mag.
-  void _resolveWrong(String slideId, {List<int> selected = const []}) {
+  void _resolveWrong(
+    String slideId, {
+    List<int> selected = const [],
+    double matchScore = 0,
+  }) {
     final view = _questionViews[slideId];
     if (view == null) return;
     final slide = _currentSlide;
     final spec = QuestionSpec.parse(slide.customMarkdown);
     final lock = spec.onWrong == QuestionOnWrong.lockAndContinue;
+    // Pas nú mag het juiste antwoord op het scherm — en dus pas nú mag het in
+    // de [QuestionView], die naar het beamervenster reist.
+    final expected = view.openText && spec.correctAnswers.isNotEmpty
+        ? spec.correctAnswers.first.text
+        : '';
     _rebuild(() {
       _questionViews[slideId] = view.copyWith(
         selectedIndices: selected,
@@ -309,8 +409,11 @@ extension _PresenterQuestions on _FullscreenPresenterState {
         revealed: true,
         locked: lock,
         remainingMs: 0,
+        expectedAnswer: expected,
+        matchScore: matchScore,
       );
     });
+    _rehearsal.finishQuestion(correct: false);
     _pushQuestion();
     // Bij retry blijft de fout-feedback staan; een verse set komt pas na een
     // klik (zie [_questionRetryPending] + [_next]), niet automatisch.

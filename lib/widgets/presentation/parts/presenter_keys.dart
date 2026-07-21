@@ -66,6 +66,28 @@ extension _PresenterKeys on _FullscreenPresenterState {
       return KeyEventResult.ignored;
     }
 
+    // Een getypt antwoord vangt de toetsen: ze horen in het invoerveld en niet
+    // bij de sneltoetsen. Enter bevestigt en PgUp/PgDn blijven werken, zodat
+    // een presentatieklikker niet stilvalt.
+    if (_answerInput) {
+      if (key == LogicalKeyboardKey.enter ||
+          key == LogicalKeyboardKey.numpadEnter) {
+        _onAnswerSubmit();
+        return KeyEventResult.handled;
+      }
+      if (key == LogicalKeyboardKey.pageDown) {
+        _next();
+        return KeyEventResult.handled;
+      }
+      if (key == LogicalKeyboardKey.pageUp) {
+        _prev();
+        return KeyEventResult.handled;
+      }
+      // Esc valt bewust dóór naar de gewone afhandeling: die sluit de
+      // presentatie, en dat moet ook kunnen terwijl er een vraag open staat.
+      if (key != LogicalKeyboardKey.escape) return KeyEventResult.ignored;
+    }
+
     // Terwijl het raster open is, sturen de pijltjes een aparte cursor aan.
     if (_gridOpen) return _handleGridKey(key);
 

@@ -80,6 +80,7 @@ part 'previews/chart_preview_extra.dart';
 part 'previews/chart_preview_bullet.dart';
 part 'previews/cockpit_preview.dart';
 part 'previews/question_preview.dart';
+part 'previews/question_preview_answers.dart';
 part 'previews/timeline_preview.dart';
 part 'previews/timeline_fit.dart';
 part 'previews/scorecard_preview.dart';
@@ -342,6 +343,12 @@ class SlidePreviewWidget extends StatelessWidget {
   /// Aangeroepen bij 'Bevestig' op een meerdere-juiste-antwoorden-vraag.
   final VoidCallback? onAnswerSubmit;
 
+  /// Aangeroepen terwijl de kijker een antwoord typt (vraagsoort 'getypt
+  /// antwoord'). Null → het invoerveld staat er wel, maar is niet te bewerken:
+  /// zo spiegelt het beamervenster wat er op de presentator zijn scherm getypt
+  /// wordt, zonder dat er op twee plekken tegelijk getypt kan worden.
+  final ValueChanged<String>? onAnswerTextChanged;
+
   /// Tijdlijn-slides in stap-voor-stap-modus: hoeveel gebeurtenissen tot nu toe
   /// onthuld zijn (door de presenter aangestuurd). Null = niet in stapmodus →
   /// de tijdlijn toont alles (en tekent zichzelf in bij [presentationMode]).
@@ -407,6 +414,7 @@ class SlidePreviewWidget extends StatelessWidget {
     this.questionView,
     this.onAnswerSelected,
     this.onAnswerSubmit,
+    this.onAnswerTextChanged,
     this.timelineRevealedCount,
     this.numberStart = 1,
     this.fitScaleOverride,
@@ -711,6 +719,7 @@ class SlidePreviewWidget extends StatelessWidget {
           view: questionView,
           onAnswerSelected: onAnswerSelected,
           onAnswerSubmit: onAnswerSubmit,
+          onAnswerTextChanged: onAnswerTextChanged,
         );
       case SlideType.timeline:
         return _TimelinePreview(

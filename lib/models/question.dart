@@ -314,6 +314,11 @@ class QuestionView {
   /// after an answer or a timeout.
   final bool revealed;
 
+  /// Of er überhaupt een juist antwoord te géven valt. Een vraag zonder
+  /// aangemerkt juist antwoord is niet te halen; die mag het doorbladeren dan
+  /// ook niet tegenhouden, hoe de auteur de fout-afhandeling ook instelde.
+  final bool answerable;
+
   /// When locked, the options are no longer tappable (answered, or wrong with
   /// "lock & continue").
   final bool locked;
@@ -349,6 +354,7 @@ class QuestionView {
     this.ordering = false,
     this.result = QuestionResult.none,
     this.revealed = false,
+    this.answerable = true,
     this.locked = false,
     this.totalSeconds = 0,
     this.remainingMs = 0,
@@ -405,6 +411,7 @@ class QuestionView {
     bool? ordering,
     QuestionResult? result,
     bool? revealed,
+    bool? answerable,
     bool? locked,
     int? totalSeconds,
     int? remainingMs,
@@ -421,6 +428,7 @@ class QuestionView {
     ordering: ordering ?? this.ordering,
     result: result ?? this.result,
     revealed: revealed ?? this.revealed,
+    answerable: answerable ?? this.answerable,
     locked: locked ?? this.locked,
     totalSeconds: totalSeconds ?? this.totalSeconds,
     remainingMs: remainingMs ?? this.remainingMs,
@@ -439,6 +447,7 @@ class QuestionView {
     'ordering': ordering,
     'result': result.name,
     'revealed': revealed,
+    'answerable': answerable,
     'locked': locked,
     'totalSeconds': totalSeconds,
     'remainingMs': remainingMs,
@@ -468,6 +477,7 @@ class QuestionView {
       orElse: () => QuestionResult.none,
     ),
     revealed: json['revealed'] == true,
+    answerable: json['answerable'] != false,
     locked: json['locked'] == true,
     totalSeconds: (json['totalSeconds'] as num?)?.toInt() ?? 0,
     remainingMs: (json['remainingMs'] as num?)?.toInt() ?? 0,
