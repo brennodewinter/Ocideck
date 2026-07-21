@@ -25,6 +25,34 @@
 //      ze met de hand hoeft op te schrijven.
 //   3. Melden. Elke tekst-literal die op een putpositie staat.
 //
+// ── Twee soorten vondst: bronsleutel of écht hardgecodeerd ───────────────────
+//
+// Stap 2 loopt twee keer, vanaf twee zaadverzamelingen, en dát verschil is de
+// hele indeling:
+//
+//   * Vanaf ALLE putten (Flutter + `d()`) → elke literal die ooit op het scherm
+//     belandt.
+//   * Vanaf ALLEEN `d()` → de literals die onderweg gegarandeerd door de
+//     vertaalfunctie gaan.
+//
+// Valt een vondst in de tweede verzameling, dan is hij een BRONSLEUTEL. Bij
+// `EditorField(label: 'Titel')` staat `'Titel'` precies waar hij hoort: het
+// veld doet intern `l10n.d(widget.label)`, dus de literal ís het argument van
+// `d()`, alleen een aanroep verderop. Dat is geen overtreding en mag niet naar
+// `context.l10n.d('Titel')` herschreven worden — de eigenaar heeft daar bewust
+// tegen gekozen. Wat wél moet: de string bestaat in alle 31 talen, net als een
+// letterlijke `d('…')`. Dat dwingt `test/app_localizations_test.dart` af, dat
+// hier `sourceKeysIn('lib')` voor gebruikt; het deelt de whitelist
+// `unchangedInAllLanguages` met de letterlijke variant, zodat een identifier
+// die in elke taal gelijk blijft (CWE, F-03) op één plek staat.
+//
+// Valt hij er buiten, dan is het een ECHTE overtreding: de literal bereikt het
+// scherm zonder ergens vertaald te worden. Alleen díe telt mee voor
+// [hardcodedTextBaseline], en dat getal moet naar nul.
+//
+// Een vondst die langs meerdere wegen binnenkomt en waarvan er één níet
+// localiseert, telt als overtreding — het scherm toont hem dan soms rauw.
+//
 // Daardoor stuurt het TYPE de beslissing, niet de parameternaam. Dat is precies
 // het verschil dat een naamgebaseerde grep niet kan maken: `title:` op een
 // `MastgTest` of een `SlideSpec` is referentiedata en deck-inhoud, geen
@@ -101,7 +129,11 @@ import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/source/line_info.dart';
 
-/// Het aantal hardgecodeerde zichtbare strings dat `lib/` nog mag bevatten.
+/// Het aantal ECHT hardgecodeerde zichtbare strings dat `lib/` nog mag
+/// bevatten — literals die het scherm bereiken zonder ooit door `d()` te gaan.
+///
+/// Bronsleutels tellen hier NIET in mee: die staan op hun plek en worden op
+/// vertaaldekking bewaakt in plaats van op aantal (zie de kop).
 ///
 /// RATCHET: dit getal mag ALLEEN omlaag. Ruim je er tien op, verlaag het dan
 /// met tien — de run drukt een tip met het nieuwe getal af, en weigert een
@@ -114,7 +146,7 @@ import 'package:analyzer/source/line_info.dart';
 /// is de dichte deur; de opruiming loopt erachter door.
 ///
 /// **Dit moet 0 zijn vóór release 0.1.0.**
-const int hardcodedTextBaseline = 277;
+const int hardcodedTextBaseline = 48;
 
 /// Bestanden die deck-INHOUD dragen in plaats van interfacetekst: de sjablonen
 /// die een nieuwe presentatie met voorbeeldslides vullen. Die tekst is vanaf
@@ -237,9 +269,26 @@ const Set<String> _sanctionedSinks = {_translateSink};
 /// vanzelf doorheen. Vandaar deze korte, met naam genoemde lijst — per positie
 /// precies de sleutels die getoond worden, want in dezelfde map zitten ook
 /// getallen en vlaggen (`'ratio'`, `'largeText'`) die niemand leest als taal.
-const Map<String, Set<String>> _mapValueSinks = {
-  'c|SlideQualityIssue|args': {'label'},
+///
+/// [_MapChannel.localizes] zegt of de LEZER de waarde door `d()` haalt. Dat is
+/// per kanaal met de hand vastgesteld en moet dat blijven: de propagatie kan
+/// hier niet doorheen kijken, dus als niemand het opschrijft weet de poort het
+/// niet. Staat hij op `true`, dan zijn de literals aan de schrijfkant
+/// bronsleutels; op `false` zijn het echte overtredingen.
+const Map<String, _MapChannel> _mapValueSinks = {
+  // `l10n.d(issue.args[key] ?? key)` in slide_quality_localization.dart — de
+  // servicetekst wordt aan de leeskant vertaald.
+  'c|SlideQualityIssue|args': _MapChannel({'label'}, localizes: true),
 };
+
+/// Eén sleutel-waardekanaal: welke sleutels getoond worden, en of de leeskant
+/// ze vertaalt.
+class _MapChannel {
+  const _MapChannel(this.shownKeys, {required this.localizes});
+
+  final Set<String> shownKeys;
+  final bool localizes;
+}
 
 /// Minstens één letter — anders valt er niets te vertalen (`'•'`, `'—'`, `'%'`,
 /// `''`, `'12'`). Latijn plus de diakrieten die het Nederlands en de andere
@@ -261,14 +310,27 @@ bool isVisibleText(String text) {
 bool _isTranslationData(String path) =>
     path.replaceAll(r'\', '/').contains('lib/l10n/translations/');
 
-/// Eén gemelde overtreding.
+/// Eén gemelde tekst-literal op een putpositie.
 class Violation {
-  Violation(this.path, this.line, this.text, this.sink);
+  Violation(
+    this.path,
+    this.line,
+    this.text,
+    this.sink, {
+    required this.isSourceKey,
+  });
 
   final String path;
   final int line;
   final String text;
   final String sink;
+
+  /// Of de literal onderweg gegarandeerd door `l10n.d('…')` gaat.
+  ///
+  /// `true` betekent BRONSLEUTEL: geen overtreding, maar hij moet wel in alle
+  /// 31 talen bestaan. `false` betekent een echte overtreding: zichtbare tekst
+  /// die niemand vertaalt.
+  final bool isSourceKey;
 
   String get location => '$path:$line';
 }
@@ -322,37 +384,81 @@ List<Violation> scanForHardcodedText(String root) {
     u.unit.visitChildren(_UseVisitor(index, uses, u.path, u.lineInfo));
   }
 
-  return _collect(uses, _solveSinks(uses))
+  return _collect(uses, _solveLocalizedSinks(uses), _solveRawSinks(uses))
     ..sort((a, b) => a.location.compareTo(b.location));
 }
 
+/// De Nederlandse bronstrings die via een doorgeefluik in `l10n.d('…')` landen.
+///
+/// `test/app_localizations_test.dart` gebruikt dit om af te dwingen dat ze in
+/// alle 31 talen bestaan — dezelfde eis die daar al voor een letterlijke
+/// `d('…')` geldt. De literals die er rechtstreeks in staan zitten er níet in
+/// (die vindt de test zelf met haar eigen scan op de bron).
+Set<String> sourceKeysIn(String root) => {
+  for (final v in scanForHardcodedText(root))
+    if (v.isSourceKey) v.text,
+};
+
 void main(List<String> args) {
   final listOnly = args.contains('--list');
-  final violations = scanForHardcodedText('lib');
+  final found = scanForHardcodedText('lib');
+  final violations = [
+    for (final v in found)
+      if (!v.isSourceKey) v,
+  ];
 
   if (listOnly) {
-    stdout.write(renderList(violations));
+    stdout.write(renderList(found));
     exit(0);
   }
-  _report(violations);
+  _report(violations, found.length - violations.length);
 }
 
-/// Dekpunt: begin bij de Flutter-putten en voeg elke parameter toe die naar een
-/// put doorstroomt, tot er niets meer bijkomt.
-Set<String> _solveSinks(List<_Use> uses) {
-  final sinks = <String>{_translateSink};
+/// Dekpunt vanaf `d()`: de posities waarvan vaststaat dat wat erin stroomt
+/// vertaald wordt.
+///
+/// Samen met [_solveRawSinks] is dit de hele indeling van deze poort. Zit een
+/// positie hier ín en in [_solveRawSinks] níet, dan is een literal erop een
+/// bronsleutel; anders is het een echte overtreding.
+Set<String> _solveLocalizedSinks(List<_Use> uses) => _propagate(uses, {
+  _translateSink,
+  for (final e in _mapValueSinks.entries)
+    if (e.value.localizes) e.key,
+});
+
+/// Dekpunt vanaf de RAUWE putten: de Flutter-parameters die tekst rechtstreeks
+/// op het scherm zetten, plus de sleutel-waardekanalen waarvan de leeskant niet
+/// vertaalt.
+///
+/// Waarom dit een eigen dekpunt is en niet "alles min de vertaalde": een
+/// parameter kan langs twee wegen tegelijk naar buiten. `HalfField.label` die
+/// in één tak `d(label)` doet en in de andere `Tooltip(message: label)` staat
+/// in béide dekpunten — en dan wint de rauwe tak, want die toont de
+/// Nederlandse tekst ook aan wie Grieks leest.
+///
+/// Dat de twee dekpunten samen precies het oude, gezamenlijke dekpunt zijn is
+/// geen toeval: elke propagatiestap heeft één premisse (`use.reaches`), dus de
+/// afsluiting verdeelt zich over de vereniging van de zaadverzamelingen.
+Set<String> _solveRawSinks(List<_Use> uses) {
+  final seeds = <String>{};
   _flutterSinks.forEach((type, selectors) {
     for (final s in selectors) {
-      sinks.add('c|$type|$s');
+      seeds.add('c|$type|$s');
     }
   });
   _flutterFunctionSinks.forEach((fn, selectors) {
     for (final s in selectors) {
-      sinks.add('f|$fn|$s');
+      seeds.add('f|$fn|$s');
     }
   });
-  sinks.addAll(_mapValueSinks.keys);
+  _mapValueSinks.forEach((sink, channel) {
+    if (!channel.localizes) seeds.add(sink);
+  });
+  return _propagate(uses, seeds);
+}
 
+Set<String> _propagate(List<_Use> uses, Set<String> seeds) {
+  final sinks = <String>{...seeds};
   var changed = true;
   while (changed) {
     changed = false;
@@ -366,19 +472,38 @@ Set<String> _solveSinks(List<_Use> uses) {
   return sinks;
 }
 
-List<Violation> _collect(List<_Use> uses, Set<String> sinks) {
+List<Violation> _collect(
+  List<_Use> uses,
+  Set<String> localized,
+  Set<String> raw,
+) {
   final out = <Violation>[];
   final seen = <String>{};
   for (final use in uses) {
-    final reached = use.sinks.where(sinks.contains).toList();
+    final reached = use.sinks
+        .where((s) => localized.contains(s) || raw.contains(s))
+        .toList();
     if (reached.isEmpty) continue;
     if (reached.every(_sanctionedSinks.contains)) continue;
+    // Eén weg die niet localiseert is genoeg om het een overtreding te maken:
+    // die weg toont de rauwe Nederlandse tekst.
+    final isSourceKey = reached.every(
+      (s) => localized.contains(s) && !raw.contains(s),
+    );
     for (final text in use.literals) {
       if (!isVisibleText(text)) continue;
       // Dezelfde literal kan via twee mogelijke bestemmingen binnenkomen; hij
       // staat maar één keer in de code, dus telt hij één keer.
       if (!seen.add('${use.path}:${use.line}:$text')) continue;
-      out.add(Violation(use.path, use.line, text, reached.first));
+      out.add(
+        Violation(
+          use.path,
+          use.line,
+          text,
+          reached.first,
+          isSourceKey: isSourceKey,
+        ),
+      );
     }
   }
   return out;
@@ -405,39 +530,64 @@ String areaOf(String path) {
   return 'overig';
 }
 
-/// De volledige lijst, gegroepeerd per gebied: `bestand:regel  "string"`.
-String renderList(List<Violation> violations) {
-  final byArea = <String, List<Violation>>{};
-  for (final v in violations) {
-    byArea.putIfAbsent(areaOf(v.path), () => []).add(v);
-  }
-  final areas = byArea.keys.toList()
-    ..sort((a, b) => byArea[b]!.length.compareTo(byArea[a]!.length));
-
+/// De volledige lijst, in twee delen (echte overtredingen, dan bronsleutels) en
+/// per deel gegroepeerd per gebied: `bestand:regel  "string"`.
+String renderList(List<Violation> found) {
   final buffer = StringBuffer()
-    ..writeln('# Hardgecodeerde zichtbare tekst in lib/')
+    ..writeln('# Zichtbare tekst-literals in lib/')
     ..writeln('#')
     ..writeln(
       '# Gegenereerd met: dart run tool/check_hardcoded_text.dart --list',
-    )
-    ..writeln(
-      '# Totaal: ${violations.length} string(s) in '
-      '${violations.map((v) => v.path).toSet().length} bestand(en).',
     )
     ..writeln('#')
     ..writeln(
       '# Per regel: bestand:regel  "de string"  → de put die hem toont.',
     )
     ..writeln();
+  _renderSection(
+    buffer,
+    'ECHTE OVERTREDINGEN — bereiken het scherm zonder d()',
+    [
+      for (final v in found)
+        if (!v.isSourceKey) v,
+    ],
+  );
+  _renderSection(
+    buffer,
+    'BRONSLEUTELS — gaan door d(), moeten in alle 31 talen bestaan',
+    [
+      for (final v in found)
+        if (v.isSourceKey) v,
+    ],
+  );
+  return buffer.toString();
+}
+
+void _renderSection(StringBuffer buffer, String title, List<Violation> items) {
+  final byArea = <String, List<Violation>>{};
+  for (final v in items) {
+    byArea.putIfAbsent(areaOf(v.path), () => []).add(v);
+  }
+  final areas = byArea.keys.toList()
+    ..sort((a, b) => byArea[b]!.length.compareTo(byArea[a]!.length));
+
+  buffer
+    ..writeln('#' * 78)
+    ..writeln(
+      '# $title: ${items.length} string(s) in '
+      '${items.map((v) => v.path).toSet().length} bestand(en).',
+    )
+    ..writeln('#' * 78)
+    ..writeln();
   for (final area in areas) {
-    final items = byArea[area]!;
-    final files = items.map((v) => v.path).toSet().length;
+    final entries = byArea[area]!;
+    final files = entries.map((v) => v.path).toSet().length;
     buffer
       ..writeln('=' * 78)
-      ..writeln('## $area — ${items.length} string(s), $files bestand(en)')
+      ..writeln('## $area — ${entries.length} string(s), $files bestand(en)')
       ..writeln('=' * 78);
     var current = '';
-    for (final v in items) {
+    for (final v in entries) {
       if (v.path != current) {
         current = v.path;
         buffer.writeln('\n--- $current');
@@ -446,7 +596,6 @@ String renderList(List<Violation> violations) {
     }
     buffer.writeln();
   }
-  return buffer.toString();
 }
 
 String _oneLine(String text) {
@@ -454,7 +603,7 @@ String _oneLine(String text) {
   return flat.length <= 120 ? flat : '${flat.substring(0, 117)}…';
 }
 
-void _report(List<Violation> violations) {
+void _report(List<Violation> violations, int sourceKeys) {
   final count = violations.length;
   final byArea = <String, int>{};
   for (final v in violations) {
@@ -503,7 +652,12 @@ void _report(List<Violation> violations) {
       'Hardcoded text OK: $count zichtbare string(en) nog niet door '
       "l10n.d('…') (plafond $hardcodedTextBaseline, doel 0 vóór 0.1.0).",
     )
-    ..writeln('  Verdeling: $spread.');
+    ..writeln('  Verdeling: ${count == 0 ? '—' : spread}.')
+    ..writeln(
+      '  Daarnaast $sourceKeys bronsleutel(s) via een doorgeefluik naar d(); '
+      'die horen daar en worden op vertaaldekking bewaakt in '
+      'test/app_localizations_test.dart.',
+    );
   exit(0);
 }
 
@@ -797,7 +951,7 @@ class _UseVisitor extends RecursiveAstVisitor<void> {
       }
       final sinks = [for (final callee in callees) '$callee|$selector'];
       final shown = <String>{
-        for (final sink in sinks) ...?_mapValueSinks[sink],
+        for (final sink in sinks) ...?_mapValueSinks[sink]?.shownKeys,
       };
       if (value is SetOrMapLiteral && shown.isNotEmpty) {
         _recordMapValues(sinks, shown, value);

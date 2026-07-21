@@ -26,9 +26,21 @@ void main() {
   Set<String> scan() =>
       scanForHardcodedText(root.path).map((v) => v.text).toSet();
 
+  /// De echte overtredingen: tekst die het scherm bereikt zonder ooit door
+  /// `d()` te gaan.
+  Set<String> hardcoded() => {
+    for (final v in scanForHardcodedText(root.path))
+      if (!v.isSourceKey) v.text,
+  };
+
+  /// De bronsleutels: literals die via een doorgeefluik in `d()` landen.
+  Set<String> sourceKeys() => sourceKeysIn(root.path);
+
   test('een letterlijke Text() is een overtreding', () {
     write('a.dart', "Widget b() => Text('Opslaan');\n");
     expect(scan(), contains('Opslaan'));
+    expect(hardcoded(), contains('Opslaan'));
+    expect(sourceKeys(), isEmpty);
   });
 
   test('dezelfde tekst binnen d() is juist de goede vorm', () {
@@ -55,6 +67,49 @@ class _EditorFieldState extends State<EditorField> {
 ''');
     write('caller.dart', "Widget b() => EditorField(label: 'Titel (H1)');\n");
     expect(scan(), contains('Titel (H1)'));
+    // ...maar als BRONSLEUTEL, niet als overtreding: het veld vertaalt hem
+    // zelf, dus de literal staat waar hij hoort en moet enkel in alle talen
+    // bestaan. De aanroepplaats herschrijven naar `l10n.d('Titel (H1)')` is
+    // uitdrukkelijk niet de bedoeling.
+    expect(sourceKeys(), contains('Titel (H1)'));
+    expect(hardcoded(), isEmpty);
+  });
+
+  test('een doorgeefluik dat NIET vertaalt blijft een overtreding', () {
+    // Hetzelfde vormgevingspatroon, maar zonder `d()` ertussen: de wizard van
+    // de bevindingen deed dit en toonde zijn veldlabels in elke taal in het
+    // Nederlands. Het TYPE van het doorgeefluik zegt dus niets — alleen of er
+    // onderweg vertaald wordt.
+    write('field.dart', '''
+class RawField extends StatelessWidget {
+  final String label;
+  const RawField({required this.label});
+  @override
+  Widget build(BuildContext context) =>
+      TextField(decoration: InputDecoration(labelText: label));
+}
+''');
+    write('caller.dart', "Widget b() => RawField(label: 'Bevinding-id');\n");
+    expect(hardcoded(), contains('Bevinding-id'));
+    expect(sourceKeys(), isEmpty);
+  });
+
+  test('een tak zonder d() maakt het geheel een overtreding', () {
+    // Eén weg localiseert, de andere niet. Dan toont het scherm hem soms rauw,
+    // dus telt hij als overtreding — de voorzichtige kant van de twijfel.
+    write('field.dart', '''
+class HalfField extends StatelessWidget {
+  final String label;
+  const HalfField({required this.label});
+  @override
+  Widget build(BuildContext context) => Column(
+    children: [Text(context.l10n.d(label)), Tooltip(message: label)],
+  );
+}
+''');
+    write('caller.dart', "Widget b() => HalfField(label: 'Half');\n");
+    expect(hardcoded(), contains('Half'));
+    expect(sourceKeys(), isEmpty);
   });
 
   test('een positioneel doorgeefluik wordt ook gevonden', () {
@@ -68,6 +123,7 @@ class SectionLabel extends StatelessWidget {
 ''');
     write('caller.dart', "Widget b() => const SectionLabel('Achtergrond');\n");
     expect(scan(), contains('Achtergrond'));
+    expect(sourceKeys(), contains('Achtergrond'));
   });
 
   test('een tekst via een vrije functie naar Text() telt mee', () {
@@ -79,6 +135,7 @@ void showError(String message) {
 ''');
     write('caller.dart', "void go() => showError('Opslaan mislukt');\n");
     expect(scan(), contains('Opslaan mislukt'));
+    expect(hardcoded(), contains('Opslaan mislukt'));
   });
 
   test('een titel op een datamodel is geen interfacetekst', () {
@@ -122,5 +179,31 @@ const tests = [MastgTest(title: 'Testing Data Storage')];
     expect(rendered, contains('a.dart'));
     expect(rendered, contains('Opslaan'));
     expect(rendered, contains('1:'));
+  });
+
+  test('de lijst scheidt overtredingen van bronsleutels', () {
+    write('field.dart', '''
+class EditorField extends StatefulWidget {
+  final String label;
+  const EditorField({required this.label});
+  @override
+  State<EditorField> createState() => _EditorFieldState();
+}
+
+class _EditorFieldState extends State<EditorField> {
+  @override
+  Widget build(BuildContext context) => Text(context.l10n.d(widget.label));
+}
+''');
+    write('caller.dart', '''
+Widget a() => Text('Rauw');
+Widget b() => EditorField(label: 'Sleutel');
+''');
+    final rendered = renderList(scanForHardcodedText(root.path));
+    final split = rendered.indexOf('BRONSLEUTELS');
+    expect(split, greaterThan(0));
+    expect(rendered.substring(0, split), contains('"Rauw"'));
+    expect(rendered.substring(0, split), isNot(contains('"Sleutel"')));
+    expect(rendered.substring(split), contains('"Sleutel"'));
   });
 }

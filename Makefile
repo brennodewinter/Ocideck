@@ -439,18 +439,24 @@ check-dead-code:
 	dart run tool/check_dead_code.dart
 
 # De andere helft van de vertaalbelofte. app_localizations_test controleert dat
-# elke `d('…')`-literal in alle 31 talen bestaat; deze poort controleert dat een
+# elke bronstring in alle 31 talen bestaat; deze poort controleert dat een
 # zichtbare string ook DÓÓR `d()` gaat. Het gat zat in de doorgeefluiken —
 # `EditorField(label: 'Titel (H1)')` gaat via `l10n.d(widget.label)` en was voor
-# een letterlijke scanner onzichtbaar.
+# een letterlijke scanner onzichtbaar. De poort splitst die twee gevallen:
+# gaat de literal onderweg door `d()`, dan is hij een BRONSLEUTEL (geen
+# overtreding, wél vertaalplicht — bewaakt in app_localizations_test); gaat hij
+# er niet doorheen, dan is het een echte overtreding en telt hij voor de
+# ratchet.
 check-hardcoded-text:
 	@echo "== OciDeck check: hardgecodeerde tekst =="
 	@echo "Command: dart run tool/check_hardcoded_text.dart"
 	@echo "Covers: elke zichtbare letterlijke tekst in lib/ die niet door l10n.d()"
 	@echo "        loopt — knoplabels, veldlabels, hints, tooltips, meldingen, en de"
 	@echo "        indirecte doorgeefluiken (AST + datastroom, dus ook"
-	@echo "        EditorField(label: '…')). Aflopende ratchet: het plafond mag"
-	@echo "        alleen omlaag, en een stille daling faalt ook."
+	@echo "        EditorField(label: '…')). Bronsleutels die wél door d() gaan"
+	@echo "        tellen niet mee; hun vertaaldekking bewaakt make l10n-check."
+	@echo "        Aflopende ratchet: het plafond mag alleen omlaag, en een stille"
+	@echo "        daling faalt ook."
 	@echo "Failure means: haal de string door l10n.d('…') (make add-l10n SPEC=… zet de"
 	@echo "        31 vertalingen erbij), of verlaag hardcodedTextBaseline in"
 	@echo "        tool/check_hardcoded_text.dart als je er hebt opgeruimd."
