@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -8,9 +10,11 @@ import '../../services/image_alt_ai_service.dart';
 import '../../services/secret_store.dart';
 import '../../state/consent_provider.dart';
 import '../../state/deck_provider.dart';
+import '../../state/image_privacy_provider.dart';
 import '../../state/settings_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/log.dart';
+import '../dialogs/ai_image_outbound_dialog.dart';
 
 /// A per-usage alt-text field (WCAG 1.1.1). The value lives on the slide
 /// ([Slide.imageAltText]) and travels in the `.md` — no sidecar. When
@@ -103,6 +107,22 @@ class _AltTextFieldState extends ConsumerState<AltTextField> {
         return;
       }
       final settings = ref.read(settingsProvider).aiSettings;
+      // Vóór de bytes het apparaat verlaten: zeggen wát er weggaat en waarheen.
+      // Een afbeelding kan niet door de projectie — die vervangt tekens, en in
+      // een JPEG staan er geen. Wat overblijft is toestemming met kennis van
+      // zaken, per beeld. Zonder dit stuurde één klik een schermafdruk van een
+      // beheerpaneel of een groepsfoto naar een derde partij, in een app
+      // waarvan de belofte begint met "het blijft op dit apparaat".
+      final faces = await _countFaces(bytes);
+      if (!mounted) return;
+      final go = await confirmAiImageOutbound(
+        context,
+        title: l10n.d('Deze afbeelding naar het AI-model sturen?'),
+        settings: settings,
+        imageCount: 1,
+        faceCount: faces,
+      );
+      if (!go || !mounted) return;
       final client = AiClientService(
         settings: settings,
         hasOutboundConsent: ref.read(consentProvider).hasAccepted,
@@ -144,6 +164,31 @@ class _AltTextFieldState extends ConsumerState<AltTextField> {
       );
     } finally {
       if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  /// Hoeveel herkenbare gezichten de beeldcontrole hier ziet, of 0 wanneer er
+  /// niet gekeken kon worden.
+  ///
+  /// Nul betekent dus twee dingen tegelijk, en dat is met opzet niet weggepoetst:
+  /// de dialoog toont bij nul géén regel over gezichten, in plaats van te
+  /// beweren dat er niemand op staat. "Wij vonden niets" en "hier is niet
+  /// gekeken" mogen nooit hetzelfde lezen — dezelfde regel als in
+  /// `image_face_scan.dart`.
+  ///
+  /// Faalt de controle, dan gaat de bevestiging gewoon door zónder de
+  /// gezichtsregel: een kapotte detector mag de gebruiker niet blokkeren, en de
+  /// hoofdwaarschuwing (er gaat een ongewijzigde afbeelding naar buiten) staat
+  /// er hoe dan ook.
+  Future<int> _countFaces(Uint8List bytes) async {
+    try {
+      final scanner = await ref.read(imageFaceScannerProvider);
+      if (!scanner.isSupported) return 0;
+      final result = await scanner.countFaces(bytes);
+      return result.readable ? result.faces : 0;
+    } catch (e, s) {
+      logError('AltTextField._countFaces', e, s);
+      return 0;
     }
   }
 

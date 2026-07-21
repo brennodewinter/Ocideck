@@ -196,31 +196,20 @@ extension _CarouselActions on _ImageCarouselPickerState {
     // — schermafdrukken van beheerpanelen, klantsystemen, gezichten — serieel
     // naar een derde partij. De knop ernaast, die alleen lokale tekst wíst,
     // vraagt wél om bevestiging.
+    //
+    // Dezelfde dialoog als bij het losse alt-tekstveld, zodat er één plek is
+    // waar staat wat er werkelijk weggaat — inclusief de regel dat OciDeck in
+    // een afbeelding níéts weglakt. Het gezichtsaantal blijft hier op nul: dat
+    // per beeld bepalen zou de hele bibliotheek moeten decoderen vóór de vraag,
+    // en dan wacht de gebruiker minuten op een dialoog.
     final settings = ref.read(settingsProvider).aiSettings;
-    final destination = settings.mode == AiBackendMode.cloud
-        ? settings.baseUrl
-        : l10n.d('een model op dit apparaat');
-    final go = await showDialog<bool>(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text(ctx.l10n.d('Afbeeldingen door AI laten taggen?')),
-        content: Text(
-          '${untagged.length} ${ctx.l10n.d('afbeeldingen gaan naar')} '
-          '$destination.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx, false),
-            child: Text(ctx.l10n.d('Annuleren')),
-          ),
-          ElevatedButton(
-            onPressed: () => Navigator.pop(ctx, true),
-            child: Text(ctx.l10n.d('Doorgaan')),
-          ),
-        ],
-      ),
+    final go = await confirmAiImageOutbound(
+      context,
+      title: l10n.d('Afbeeldingen door AI laten taggen?'),
+      settings: settings,
+      imageCount: untagged.length,
     );
-    if (go != true || !mounted) return;
+    if (!go || !mounted) return;
     final tagger = ImageAltAiService(
       AiClientService(
         settings: settings,
