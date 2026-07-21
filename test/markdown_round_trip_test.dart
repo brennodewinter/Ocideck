@@ -481,52 +481,30 @@ void main() {
       expect(markdown, isNot(contains('text-decoration:line-through')));
     });
 
-    test('MIAUW waivers round-trip through the front matter', () {
-      final service = MarkdownService();
-      const waivers = {
-        '1.3': 'Certificering niet vereist door klant',
-        '3.3': 'Geen bewijsbestanden in scope',
-      };
-      final markdown = service.generateDeck(
+    test('de MIAUW-dispositie staat niet meer in de markdown', () {
+      // Ze ging naar `<naam>.miauw.json`; zie miauw_sidecar_test.dart voor de
+      // rondgang en het opwaardeerpad van een bestand met de oude sleutels.
+      final markdown = MarkdownService().generateDeck(
         Deck(
           title: 'Pentest',
-          miauwWaivers: waivers,
+          miauwWaivers: const {'1.3': 'Certificering niet vereist door klant'},
+          miauwConfirmations: const {'2.1': 'Intake gehouden op 2026-07-01'},
           slides: [Slide.create(SlideType.title)],
         ),
-      );
-      expect(markdown, contains('ocideck_miauw_waivers:'));
-      expect(service.parseDeck(markdown)!.miauwWaivers, waivers);
-    });
-
-    test('a deck without waivers writes no waiver key', () {
-      final markdown = MarkdownService().generateDeck(
-        Deck(title: 'X', slides: [Slide.create(SlideType.title)]),
       );
       expect(markdown, isNot(contains('ocideck_miauw_waivers')));
-    });
-
-    test('MIAUW confirmations round-trip through the front matter', () {
-      final service = MarkdownService();
-      const confirmations = {
-        '1.2': 'Rapporteur OSCP-gecertificeerd, bewijs bijgevoegd',
-        '2.1': 'Intake gehouden op 2026-07-01',
-      };
-      final markdown = service.generateDeck(
-        Deck(
-          title: 'Pentest',
-          miauwConfirmations: confirmations,
-          slides: [Slide.create(SlideType.title)],
-        ),
-      );
-      expect(markdown, contains('ocideck_miauw_confirmations:'));
-      expect(service.parseDeck(markdown)!.miauwConfirmations, confirmations);
-    });
-
-    test('a deck without confirmations writes no confirmation key', () {
-      final markdown = MarkdownService().generateDeck(
-        Deck(title: 'X', slides: [Slide.create(SlideType.title)]),
-      );
       expect(markdown, isNot(contains('ocideck_miauw_confirmations')));
+    });
+
+    test('een oud bestand met de base64-sleutels blijft leesbaar', () {
+      // Het opwaardeerpad: lezen kan nog, schrijven niet meer.
+      const oud =
+          '---\n'
+          'marp: true\n'
+          'ocideck_miauw_waivers: eyIxLjMiOiJyZWRlbiJ9\n'
+          '---\n\n# T\n';
+      final deck = MarkdownService().parseDeck(oud)!;
+      expect(deck.miauwWaivers, {'1.3': 'reden'});
     });
 
     test(
