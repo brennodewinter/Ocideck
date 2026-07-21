@@ -46,6 +46,7 @@ import '../services/export_bundle.dart';
 import '../services/privacy/privacy_projection.dart';
 import '../services/privacy/privacy_scanner.dart';
 import '../services/privacy/redaction_manifest_service.dart';
+import '../services/image_usage.dart';
 import '../services/web_asset_store.dart';
 import '../services/quality_export_policy.dart';
 import '../services/recovery_service.dart';
