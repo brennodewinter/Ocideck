@@ -736,6 +736,12 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
+      '•  CVE-Suche (standardmäßig aus): Ist sie eingeschaltet, geht Ihr Suchbegriff an den eingestellten CVE-Spiegel und, wenn dieser nichts findet, an die europäische Datenbank der ENISA und an MITRE.',
+  '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
+      '•  Ein eingebettetes YouTube- oder Vimeo-Video lädt den Player bei diesem Dienst.',
+  '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
+      '•  Im Browser: Weigert sich der Browser, eine Adresse direkt abzurufen, versucht OciDeck es über den Server, von dem die App stammt; diese Adresse erreicht dann jenen Server.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Eine Zwischenüberschrift, die einen neuen Teil der Präsentation ankündigt. Halte sie kurz. Füge über die Bildbibliothek ein Hintergrundbild hinzu.',
   'Bronnen doorzoeken…': 'Quellen werden durchsucht…',

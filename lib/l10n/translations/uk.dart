@@ -1797,6 +1797,12 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
+      '•  Пошук CVE (типово вимкнено): якщо його ввімкнено, ваш пошуковий запит іде на налаштоване дзеркало CVE, а якщо там нічого не знайдено — до європейської бази ENISA та до MITRE.',
+  '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
+      '•  Вбудоване відео з YouTube або Vimeo завантажує програвач із цієї служби.',
+  '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
+      '•  У браузері: якщо браузер відмовляється отримати адресу напряму, OciDeck пробує ще раз через сервер, з якого надійшов застосунок; тоді ця адреса потрапляє на той сервер.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Підзаголовок розділу, що оголошує нову частину презентації. Тримайте його коротким. Додайте фонове зображення з бібліотеки зображень.',
   'Bronnen doorzoeken…': 'Пошук у джерелах…',

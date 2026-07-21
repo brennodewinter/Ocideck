@@ -1786,6 +1786,12 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
+      '•  Pretraživanje CVE-a (prema zadanome isključeno): kada je uključeno, vaš pojam za pretraživanje ide na postavljeno CVE zrcalo, a ako ono ništa ne nađe — u europsku bazu ENISA-e i u MITRE.',
+  '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
+      '•  Ugrađeni YouTube ili Vimeo videozapis učitava reproduktor s te usluge.',
+  '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
+      '•  U pregledniku: ako preglednik odbije izravno dohvatiti adresu, OciDeck pokušava ponovno preko poslužitelja s kojega je aplikacija došla; ta adresa tada stiže do toga poslužitelja.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Naslov odjeljka koji najavljuje novi dio prezentacije. Neka bude kratak. Iz knjižnice slika dodajte pozadinsku sliku.',
   'Bronnen doorzoeken…': 'Pretraživanje izvora…',

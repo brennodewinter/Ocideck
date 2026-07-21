@@ -1778,6 +1778,12 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
+      '•  CVE meklēšana (pēc noklusējuma izslēgta): kad tā ir ieslēgta, jūsu meklējamais vārds nonāk iestatītajā CVE spogulī un, ja tas neko neatrod, ENISA Eiropas datubāzē un MITRE.',
+  '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
+      '•  Iegults YouTube vai Vimeo video ielādē atskaņotāju no attiecīgā pakalpojuma.',
+  '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
+      '•  Pārlūkā: ja pārlūks atsakās adresi ielādēt tieši, OciDeck mēģina vēlreiz caur serveri, no kura nāca lietotne; tad šī adrese nonāk pie tā servera.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Sadaļas virsraksts, kas paziņo par jaunu prezentācijas daļu. Turiet to īsu. Pievienojiet fona attēlu no attēlu bibliotēkas.',
   'Bronnen doorzoeken…': 'Meklē avotos…',

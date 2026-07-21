@@ -1801,6 +1801,12 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
+      '•  Tfittxija CVE (mitfija awtomatikament): meta tkun mixgħula, il-kelma li tfittex tmur lejn il-mera CVE issettjata u, jekk dik ma ssib xejn, lejn id-database Ewropea tal-ENISA u lejn MITRE.',
+  '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
+      '•  Vidjow inkorporat minn YouTube jew Vimeo jgħabbi l-plejer minn dak is-servizz.',
+  '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
+      '•  Fil-brawżer: jekk il-brawżer jirrifjuta li jġib indirizz direttament, OciDeck jerġa\' jipprova permezz tas-server li minnu ġiet l-app; dak l-indirizz imbagħad jasal għand dak is-server.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Intestatura ta\' taqsima li tħabbar parti ġdida tal-preżentazzjoni. Żommha qasira. Żid immaġni ta\' sfond mil-librerija tal-immaġini.',
   'Bronnen doorzoeken…': 'Tfittex fis-sorsi…',

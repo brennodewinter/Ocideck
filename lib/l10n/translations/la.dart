@@ -1795,6 +1795,12 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
+      '•  Inquisitio CVE (praedefinite exstincta): si accensa est, verbum quaesitum ad speculum CVE constitutum mittitur et, si nihil invenit, ad basim datorum Europaeam ENISA et ad MITRE.',
+  '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
+      '•  Pellicula YouTube vel Vimeo inserta lusorem ab illo ministerio onerat.',
+  '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
+      '•  In navigatro: si navigatrum inscriptionem directe petere recusat, OciDeck per servitorem unde applicatio venit iterum conatur; illa inscriptio tunc ad illum servitorem pervenit.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Titulus partis qui novam praesentationis partem nuntiat. Brevem serva. Ex bibliotheca imaginum imaginem fundi adde.',
   'Bronnen doorzoeken…': 'Fontes perscrutans…',

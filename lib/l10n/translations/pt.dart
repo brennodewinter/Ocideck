@@ -1809,6 +1809,12 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
+      '•  Pesquisa de CVE (desativada por predefinição): quando está ativa, o seu termo de pesquisa vai para o espelho CVE configurado e, se este não encontrar nada, para a base de dados europeia da ENISA e para a MITRE.',
+  '•  Een ingesloten YouTube- of Vimeo-video laadt de speler bij die dienst.':
+      '•  Um vídeo do YouTube ou do Vimeo incorporado carrega o leitor a partir desse serviço.',
+  '•  In de browser: weigert de browser een adres rechtstreeks op te halen, dan probeert OciDeck het via de server waar de app vandaan komt; dat adres komt dan bij die server terecht.':
+      '•  No navegador: se o navegador recusar obter um endereço diretamente, o OciDeck tenta de novo através do servidor de onde a aplicação veio; esse endereço chega então a esse servidor.',
   'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Um subtítulo de secção que anuncia uma nova parte da apresentação. Seja breve. Adicione uma imagem de fundo a partir da biblioteca de imagens.',
   'Bronnen doorzoeken…': 'A pesquisar nas fontes…',
