@@ -76,10 +76,20 @@ wholly inside a browser tab. Areas of particular interest:
 `assets/web_export/MANIFEST.json`; it is part of `make check-full`, which the
 committer runs before a dependency or web-facing change (the CI workflow that
 also declares it does not currently run — the remote is Forgejo with no runner).
-As of the last review all
-pins (marked 18.0.5, highlight.js 11.11.1, DOMPurify 3.4.11, mermaid 10.9.6,
-MathJax 3.2.2) carry **no known advisories**. Two tracked (non-urgent)
-maintenance items:
+As of 2026-07-22 one pin carries an advisory (DOMPurify 3.4.11, below); the
+others (marked 18.0.5, highlight.js 11.11.1, mermaid 10.9.6, MathJax 3.2.2)
+carry none. Three tracked (non-urgent) maintenance items:
+
+- **DOMPurify 3.4.11 → 3.4.12** — `GHSA-c2j3-45gr-mqc4`: an element allowed via
+  `CUSTOM_ELEMENT_HANDLING.tagNameCheck` skips `afterSanitizeElements`, so an
+  application relying on that hook as a policy layer keeps attributes on custom
+  elements it strips everywhere else. **Both preconditions are absent here**:
+  the export calls `DOMPurify.sanitize()` with defaults (and the SVG profile for
+  mermaid output), sets no `CUSTOM_ELEMENT_HANDLING`, and registers no hook at
+  all — `addHook` appears nowhere in `lib/`. The advisory is a second-order
+  gadget in code paths OciDeck does not execute, CVSS v4 vector `AV:N/AC:H/UI:A`
+  with no confidentiality or integrity impact on the vulnerable component.
+  Upgrade with the next bundle refresh; not a release blocker.
 
 - **mermaid 10.9.6 → 11.x** is a planned major upgrade, deferred until its
   rendering can be validated (real offscreen WebView), as it fixes no known
