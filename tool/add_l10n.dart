@@ -60,9 +60,32 @@ const langs = [
 
 String cap(String code) => code[0].toUpperCase() + code.substring(1);
 
-/// A Dart single-quoted string literal for [value] (escapes `\` and `'`).
-String dartStr(String value) =>
-    "'${value.replaceAll('\\', '\\\\').replaceAll("'", "\\'")}'";
+/// A Dart single-quoted string literal for [value].
+///
+/// Escaping only `\` and `'` was not enough, en het gat was de stille soort.
+/// Een bronstring met een echt regeleinde — de toestemmingsteksten en de
+/// afbeeldingsplaceholder hebben er meerdere — kwam als de regeleinde-BYTE in
+/// een enkelquote-literal terecht. Dat parseert Dart niet, dus viel `dart
+/// format` om en stopte de run halverwege; de omweg was `\n` met de hand in de
+/// spec zetten, waarna deze functie de backslash escapete tot `\\n` en de lezer
+/// twee tekens backslash-n te zien kreeg. In beide gevallen belandde er een
+/// andere string in de overlay dan er gevraagd was.
+///
+/// Dus: de spec draagt de tekst precies zoals de gebruiker hem leest (een echt
+/// regeleinde is in JSON `"\n"`), en dit maakt er een literal van die parseert
+/// én hetzelfde betekent. `$` gaat mee omdat een niet-geëscapete dollar een
+/// interpolatie begint — in het beste geval een compileerfout, in het slechtste
+/// een verkeerde tekst.
+String dartStr(String value) {
+  final escaped = value
+      .replaceAll('\\', r'\\')
+      .replaceAll(r'$', r'\$')
+      .replaceAll("'", "\\'")
+      .replaceAll('\n', r'\n')
+      .replaceAll('\r', r'\r')
+      .replaceAll('\t', r'\t');
+  return "'$escaped'";
+}
 
 Never fail(String message) {
   stderr.writeln('add_l10n: $message');
