@@ -9,6 +9,7 @@
 // Elke functie hier is puur en zelfstandig testbaar; `privacy_checksums_eu_test`
 // voert per land een bekend-geldige én een bekend-ongeldige waarde in.
 
+import 'privacy_allowlist.dart';
 import 'privacy_checksums.dart';
 
 /// Cijfers uit een string, zonder scheidingstekens.
@@ -282,6 +283,184 @@ bool isValidBalticPersonalCode(String raw) {
   return rest == d.codeUnitAt(10) - 0x30;
 }
 
+// ── Liechtenstein ────────────────────────────────────────────────────────────
+
+/// PEID (Personenidentifikationsnummer): 4 tot 12 cijfers, zónder checksum.
+///
+/// **Het zwakste patroon in dit bestand, en dat is geen slordigheid maar de
+/// werkelijkheid.** Het Liechtensteinse belastingnummer bestaat uit niets dan
+/// cijfers; er is geen controlecijfer, geen datum en geen vast prefix. De
+/// ondergrens van vier komt uit de OESO-beschrijving: kortere nummers bestaan
+/// alleen doordat voorloopnullen worden weggelaten.
+///
+/// Daarom eist de regel in `privacy_eu_rules.dart` een contextwoord en komt hij
+/// nooit boven `mogelijk`. Zonder het woord `PEID` ernaast zwijgt hij volledig —
+/// hetzelfde ontwerp als bij de Curaçaose sedula, waar ook geen checksum
+/// bestaat.
+///
+/// De Liechtensteinse AHV-Versichertennummer heeft dezelfde vorm en evenmin een
+/// controlecijfer, maar valt hier bewust buiten: het enige contextwoord dat hem
+/// zou aanwijzen is "AHV-Nummer", en dat woord is net zo goed Zwitsers. Daar
+/// doet `ch.ahv` het werk al mét een echte checksum, en twee regels die
+/// hetzelfde nummer melden maken de lijst langer en de boodschap niet sterker.
+bool isValidLiPeid(String raw) {
+  final d = _digits(raw);
+  if (d.length < 4 || d.length > 12) return false;
+  // `1234`, `00000000`: reeksen die niemand aanwijzen. Bij een patroon dat
+  // verder alleen op zijn lengte steunt is dit geen franje maar de enige
+  // inhoudelijke eis die er is.
+  return !isMeaninglessDigitRun(d);
+}
+
+// ── Malta ────────────────────────────────────────────────────────────────────
+
+/// De letters die achter een Maltees identiteitskaartnummer mogen staan.
+///
+/// Geen controleletter maar een categorie: `M` en `G` voor wie tussen 1900 en
+/// 1999 in Malta respectievelijk Gozo is geregistreerd, `L` en `H` voor wie dat
+/// vanaf 2000 is, `B` en `Z` voor de negentiende eeuw, `A` voor houders van een
+/// verblijfsvergunning en `P` voor Maltezen die in het buitenland zijn geboren.
+const String _mtIdCardSuffixes = 'ABGHLMPZ';
+
+/// Identiteitskaartnummer: 7 cijfers + één van acht letters.
+///
+/// **Er is geen checksum, en die verzinnen we niet.** De letter codeert een
+/// categorie en controleert niets; de zeven cijfers zijn een volgnummer. Wat
+/// overblijft is een vorm die acht van de 26 letters toestaat — te weinig om
+/// alleen op af te gaan, want `1234567M` is net zo goed een artikelcode. Vandaar
+/// dat de regel in `privacy_eu_rules.dart` een contextwoord eist en nooit boven
+/// `waarschijnlijk` komt, precies zoals `uk.nino` en `cw.sedula`.
+bool isValidMtIdCard(String raw) {
+  final v = raw.replaceAll(RegExp(r'[\s-]'), '').toUpperCase();
+  if (!RegExp(r'^\d{7}[A-Z]$').hasMatch(v)) return false;
+  return _mtIdCardSuffixes.contains(v[7]);
+}
+
+// ── Cyprus ───────────────────────────────────────────────────────────────────
+
+/// De omzetting van de cijfers op de óneven posities in een Cypriotische TIC.
+///
+/// Geen gewichten maar een opzoektabel — een cijfer wordt vervangen door een
+/// waarde die er niets mee te maken heeft (`2` → 5, `9` → 21). Dat is precies
+/// wat de controle sterk maakt tegen omwisselingen, en waarom je hem niet uit
+/// je hoofd kunt narekenen.
+const List<int> _cyOddPositionMap = [1, 0, 5, 7, 9, 13, 15, 17, 19, 21];
+
+/// De fiscale identificatiecode (TIC / ΑΦΜ): 8 cijfers + een controleletter.
+///
+/// **Waarom de TIC en niet het identiteitskaartnummer.** Het Cypriotische
+/// ID-kaartnummer is een doorlopend volgnummer zonder enige controle — daar valt
+/// geen verdedigbare regel op te bouwen. De TIC heeft er wél een: de letter is
+/// een mod-26 over de acht cijfers, met een omzettabel voor de oneven posities.
+///
+/// **Twee dingen die deze controle níét weet.** Ten eerste of het om een mens
+/// gaat: dezelfde code identificeert natuurlijke én rechtspersonen, en het
+/// btw-nummer is deze code met `CY` ervoor. Vandaar `waarschijnlijk` in de
+/// regeltabel en niet `zeker`. Ten tweede of het algoritme na 27 maart 2023 nog
+/// hetzelfde is — vanaf die datum geeft het TFA-systeem codes uit vanaf
+/// 60000000, en geen publieke bron zegt of de controleletter mee is veranderd.
+/// De fout valt daar de goede kant op: mocht het schema zijn gewijzigd, dan
+/// missen we die codes (vals-negatief) in plaats van willekeurige nummers te
+/// melden.
+bool isValidCyTic(String raw) {
+  final v = raw.replaceAll(RegExp(r'[\s-]'), '').toUpperCase();
+  if (!RegExp(r'^\d{8}[A-Z]$').hasMatch(v)) return false;
+  // Het bereik `12xxxxxx` wordt niet uitgegeven.
+  if (v.startsWith('12')) return false;
+
+  var sum = 0;
+  for (var i = 0; i < 8; i++) {
+    final digit = v.codeUnitAt(i) - 0x30;
+    sum += i.isEven ? _cyOddPositionMap[digit] : digit;
+  }
+  return v.codeUnitAt(8) == 0x41 + sum % 26;
+}
+
+// ── Luxemburg ────────────────────────────────────────────────────────────────
+
+/// Matricule: 13 cijfers, `AAAAMMJJXXXC1C2`, met twee controlecijfers.
+///
+/// Het enige nummer in dit bestand met twéé onafhankelijke controles, en dat is
+/// geen franje van de Luxemburgse wetgever: `C1` is een Luhn over de elf
+/// identificerende cijfers, `C2` een Verhoeff over diezélfde elf. Niet over
+/// twaalf — dat is de valkuil, want elke andere twee-controlecijferregeling die
+/// je kent stapelt ze wél. Samen drukken ze de kans dat een willekeurige reeks
+/// erdoorheen komt naar één op de honderd, en met de geboortedatum ervoor naar
+/// ver daaronder.
+///
+/// Rechtspersonen krijgen een matricule met een ándere opbouw (jaar +
+/// rechtsvorm + volgnummer + één mod-11-cijfer). Die valt hier af op de
+/// datumcontrole, en dat is precies de bedoeling: een bedrijfsmatricule op een
+/// factuurslide is geen persoonsgegeven.
+bool isValidLuMatricule(String raw) {
+  final d = _digits(raw);
+  if (d.length != 13) return false;
+
+  // Vier cijfers geboortejaar. De ondergrens is ruim genomen — het gaat er niet
+  // om wie er nog leeft, maar om het uitsluiten van de negentig procent van de
+  // willekeurige reeksen die met iets anders dan een jaartal beginnen.
+  final year = int.parse(d.substring(0, 4));
+  if (year < 1880 || year > 2099) return false;
+  if (!_plausibleDayMonth(
+    int.parse(d.substring(6, 8)),
+    int.parse(d.substring(4, 6)),
+  )) {
+    return false;
+  }
+
+  final body = d.substring(0, 11);
+  return _luhn('$body${d[11]}') && passesVerhoeff('$body${d[12]}');
+}
+
+// ── Letland ──────────────────────────────────────────────────────────────────
+
+/// Personas kods: 11 cijfers, mod-11 met de gewichten 1-6-3-7-9-10-5-8-4-2.
+///
+/// **Niet** het Baltische schema van hierboven.
+/// [isValidBalticPersonalCode] dekt Estland en Litouwen — die twee delen vorm
+/// én dubbele mod-11 — maar Letland rekent anders: andere gewichten, één ronde,
+/// en een afsluitende `mod 10` die een rest van 10 op 0 laat uitkomen. Een
+/// Letse kods door de Estse validator halen keurt vier op de vijf echte nummers
+/// af.
+///
+/// Twee formaten naast elkaar:
+///
+///  * **oud** — `ddmmjj` + eeuwcijfer (0 = 1800-1899, 1 = 1900-1999,
+///    2 = 2000-2099) + drie volgnummercijfers + de controle;
+///  * **nieuw** — sinds 1 juli 2017 begint een kods met `32` en draagt hij géén
+///    geboortedatum meer. Dat is een privacymaatregel van de Letse wetgever, en
+///    het kost ons precies de datumcontrole die het oude formaat wél levert.
+///
+/// Rechtspersonen beginnen met een cijfer boven de 3 en rekenen met een ander
+/// schema. Die vallen hier af op het eerste cijfer, want een bedrijfsnummer is
+/// geen persoonsgegeven.
+bool isValidLvPersonasKods(String raw) {
+  final d = _digits(raw);
+  if (d.length != 11) return false;
+
+  if (!d.startsWith('32')) {
+    // Het oude formaat. Alles boven de 3 op positie 0 is een rechtspersoon, en
+    // `30`/`31` blijven geldige dagen — vandaar de datumcontrole eronder in
+    // plaats van een tweede cijfergrens.
+    if (d.codeUnitAt(0) > 0x33) return false;
+    if (!_plausibleDayMonth(
+      int.parse(d.substring(0, 2)),
+      int.parse(d.substring(2, 4)),
+    )) {
+      return false;
+    }
+    // Er zijn maar drie eeuwen uitgegeven. Zonder deze eis is dit de zwakste
+    // schakel: hij haalt er in één regel zeventig procent uit.
+    if (d.codeUnitAt(6) > 0x32) return false;
+  }
+
+  const weights = [1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
+  // 1101 ≡ 1 (mod 11); de vorm met 1101 staat zo in de Letse beschrijving en
+  // houdt het tussenresultaat positief.
+  final check = (1101 - _weighted(d, weights)) % 11 % 10;
+  return check == d.codeUnitAt(10) - 0x30;
+}
+
 // ── Verenigd Koninkrijk ──────────────────────────────────────────────────────
 
 /// NHS-nummer: 10 cijfers, gewichten 10..2, controle = 11 − rest (11 → 0,
@@ -510,6 +689,40 @@ bool isValidNoFodselsnummer(String raw) {
   final k2 = 11 - (_weighted(d, w2) % 11);
   if (k2 == 10) return false;
   return (k2 == 11 ? 0 : k2) == d.codeUnitAt(10) - 0x30;
+}
+
+// ── IJsland ──────────────────────────────────────────────────────────────────
+
+/// Kennitala: 10 cijfers, mod-11 met de gewichten 3-2-7-6-5-4-3-2.
+///
+/// Opbouw `ddmmjj` + twee volgnummercijfers + het controlecijfer + het
+/// eeuwcijfer (`9` voor 1900-1999, `0` vanaf 2000). Het controlecijfer telt
+/// zelf mee met gewicht 1 en het eeuwcijfer met 0, zodat de hele gewogen som
+/// restloos door 11 deelbaar moet zijn — dezelfde formulering als de
+/// referentie-implementatie, en één stap minder dan `11 − rest` uitrekenen.
+///
+/// **Rechtspersonen worden bewust afgewezen.** Een bedrijfskennitala heeft
+/// exact dezelfde vorm met 40 opgeteld bij de dag (41-71), en die staat in elk
+/// zakelijk deck met een IJslandse leverancier erin. Het is geen
+/// persoonsgegeven, en de dagcontrole hieronder houdt hem tegen zonder dat er
+/// een aparte regel voor nodig is.
+///
+/// De kerfiskennitala — het systeemnummer voor wie kort in IJsland verblijft —
+/// heeft wél dezelfde vorm én dezelfde betekenis: hij wijst een mens aan. Die
+/// valt dus terecht onder deze regel, en er is niets aan te onderscheiden.
+bool isValidIsKennitala(String raw) {
+  final d = _digits(raw);
+  if (d.length != 10) return false;
+  // Alleen deze twee eeuwcijfers worden uitgegeven. Het is de goedkoopste eis
+  // in de hele controle en hij haalt er meteen tachtig procent uit.
+  if (d[9] != '0' && d[9] != '9') return false;
+  if (!_plausibleDayMonth(
+    int.parse(d.substring(0, 2)),
+    int.parse(d.substring(2, 4)),
+  )) {
+    return false;
+  }
+  return _weighted(d, [3, 2, 7, 6, 5, 4, 3, 2, 1, 0]) % 11 == 0;
 }
 
 // ── Slovenië ─────────────────────────────────────────────────────────────────

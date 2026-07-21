@@ -192,10 +192,22 @@ OciDeck can scan your deck for personal and sensitive data and either flag it or
 redact it. It detects, among others:
 
 - Email addresses, phone numbers, postal addresses and postcodes
-- IBAN/bank numbers (checksum-validated), BSN, and national identifiers for 21
-  EU member states, plus two UK ones and Swiss and Norwegian numbers
+- IBAN/bank numbers (checksum-validated), BSN, and national identifiers for all
+  27 EU member states, plus Iceland, Liechtenstein, Norway, Switzerland and two
+  UK numbers
   (*corrected 2026-07-21: the count said 13, which was the state of
-  `privacy_eu_rules.dart` before the second batch of European numbers landed*)
+  `privacy_eu_rules.dart` before the second batch of European numbers landed;
+  raised to 21 that same day, and to the full 27 on 2026-07-22 when Cyprus,
+  Latvia, Luxembourg and Malta got their rules*)
+
+  Two of those rules deliberately have no checksum, because none is published
+  that we could verify: the Maltese identity card number and the Liechtenstein
+  PEID. Both only report when a matching label sits next to the number, and
+  neither ever rises above "likely". For Cyprus, the rule covers the tax
+  identification code (which does carry a check character) and not the identity
+  card number, which has no check digit at all. Guessing an algorithm would be
+  worse than having none: it would reject genuine numbers and wave invented ones
+  through.
 - Secrets (API tokens, private keys, JWTs, plaintext passwords)
 - GDPR Article 9 special-category keywords
 - Structural leaks such as tokens embedded in URLs or local file paths

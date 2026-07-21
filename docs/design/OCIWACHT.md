@@ -231,10 +231,14 @@ nul. Waar géén checksum bestaat (US SSN, V-nummer), is een contextwoord verpli
 | `ro.cnp` | CNP | sleutel `279146358279`, mod 11 | zeker | ◐ |
 | `si.emso` | EMŠO | mod 11 | zeker | ◐ |
 | `ee.isikukood` | Estse isikukood — en het Litouwse asmens kodas, dat dezelfde vorm en dezelfde dubbele mod-11 heeft; één regel dekt beide (`sharedRegionRules`) | mod-11 dubbele pas | zeker | ◐ |
-| `lv.pk` | Letse personas kods | mod-11 | zeker | — |
+| `lv.pk` | Letse personas kods | mod-11 met de gewichten 1-6-3-7-9-10-5-8-4-2 — **niet** het Estse schema. Oud formaat met `ddmmjj` + eeuwcijfer; nieuw formaat sinds 1-7-2017 begint met `32` en draagt geen datum | zeker | ◐ |
+| `is.kennitala` | IJslandse kennitala | mod-11 met de gewichten 3-2-7-6-5-4-3-2, eeuwcijfer 9 of 0. Een bedrijfskennitala (dag +40) valt bewust af | zeker | ◐ |
 | `at.svnr` | Sozialversicherungsnummer | gewichten 3-7-9-5-8-4-2-1-6, mod 11 | zeker | ◐ |
 | `ch.ahv` | AHV-Nummer | `756.xxxx.xxxx.xx`, EAN-13-controlecijfer | zeker | ◐ |
-| `mt.id` / `cy.id` / `lu.matricule` | Maltese/Cypriotische/Luxemburgse ID | formaat + context | mogelijk | — |
+| `lu.matricule` | Luxemburgs matricule | `AAAAMMJJXXXC1C2`: C1 = Luhn over de eerste elf cijfers, C2 = Verhoeff over diezélfde elf | zeker | ◐ |
+| `cy.tic` | Cypriotische fiscale identificatiecode (TIC / ΑΦΜ) | 8 cijfers + controleletter, mod-26 met een omzettabel voor de oneven posities. Nooit `zeker`: de code hoort bij een mens óf bij een bedrijf, en mod-26 is de zwakste checksum in deze tabel | waarschijnlijk | ◐ |
+| `mt.id` | Maltees identiteitskaartnummer | géén checksum — 7 cijfers + een letter uit `{A,B,G,H,L,M,P,Z}` die geboortestreek en -eeuw codeert. **Contextwoord verplicht** | waarschijnlijk | ◐ |
+| `li.peid` | Liechtensteinse Personenidentifikationsnummer | géén checksum, géén datum, géén prefix: 4 tot 12 kale cijfers. **Contextwoord verplicht** (`peid`), en nooit boven `mogelijk`. De AHV-Versichertennummer heeft dezelfde vorm en valt bewust buiten — zie de toelichting bij de functie | mogelijk | ◐ |
 | `uk.nino` | National Insurance Number | formaat `QQ123456A` + uitgesloten prefixen (BG, GB, NK, KN, TN, NT, ZZ), geen D/F/I/Q/U/V als eerste letter, geen O als tweede | waarschijnlijk | ◐ |
 | `uk.nhs` | NHS-nummer | mod-11 (gewichten 10…2), rest 10 = ongeldig | zeker | ◐ |
 | `us.ssn` | Social Security Number | géén checksum. Area ≠ 000/666/900-999, groep ≠ 00, serie ≠ 0000. **Contextwoord verplicht** (`ssn`, `social security`), anders veel te veel FP's op datums en ordernummers | waarschijnlijk | ◐ |
@@ -254,8 +258,10 @@ nul. Waar géén checksum bestaat (US SSN, V-nummer), is een contextwoord verpli
 > `lv.pk`, `mt.id`, `cy.id` en `lu.matricule` was dat niet zo; die id's komen in
 > `lib/` niet voor. Ze staan er nog als voornemen, nu met een streepje. Vier van
 > de vijf betroffen landen waarvoor géén andere regel bestond, en dat is precies
-> de reden dat CY, LU, LV en MT (met IS en LI) uit `defaultPrivacyRegions` zijn
-> gehaald — zie de noot bij §7.
+> de reden dat CY, LU, LV en MT (met IS en LI) uit `defaultPrivacyRegions` waren
+> gehaald — zie de noot bij §7. *Bijgewerkt 2026-07-22: alle vier hebben nu een
+> regel en staan er weer in; `cy.id` is daarbij `cy.tic` geworden. Alleen
+> `de.svnr` staat nog als voornemen.*
 >
 > Twee rijen zijn de andere kant op gecorrigeerd. `sk.rodne_cislo` en `lt.ak`
 > stonden er als eigen id naast hun buur; dat zijn ze niet en zullen ze niet
@@ -1337,6 +1343,42 @@ Zwitserse gegevens routinematig. Wie het smaller wil, zet pakketten uit.
 > niet: zou `cy` daar ontbreken, dan leest een toekomstige `cy.id` als een regel
 > zónder land, en die draait dan altijd — buiten elk pakket om, ook bij wie Cyprus
 > bewust heeft uitgezet.
+
+> **En de zes zijn terug, nu mét regel** (*2026-07-22*). CY, LU, LV, MT, IS en
+> LI staan weer in `defaultPrivacyRegions`, want er is nu voor elk van de zes een
+> regel. Daarmee dekken de Europese pakketten alle 27 lidstaten plus IJsland,
+> Liechtenstein, Noorwegen, Zwitserland en het VK.
+>
+> Vier ervan dragen een echte checksum en mogen dus standaard aan: de IJslandse
+> kennitala (mod-11), de Letse personas kods (mod-11, een ánder schema dan het
+> Estse), het Luxemburgse matricule (Luhn én Verhoeff, allebei over dezelfde
+> elf cijfers) en de Cypriotische TIC (mod-26-controleletter).
+>
+> Twee hebben er geen die zich laat staven, en dat is expliciet opgeschreven in
+> plaats van weggemoffeld. Het Maltese identiteitskaartnummer heeft een letter
+> die geboortestreek en -eeuw codeert en verder niets controleert; de
+> Liechtensteinse PEID is vier tot twaalf kale cijfers. Allebei
+> contextpoort-gebonden, allebei nooit boven `waarschijnlijk` respectievelijk
+> `mogelijk`.
+>
+> Drie dingen die de catalogus verkeerd voorspelde:
+>
+> * **`cy.id` bestaat niet en komt er niet.** Het Cypriotische
+>   identiteitskaartnummer is een doorlopend volgnummer zonder controle. De regel
+>   heet `cy.tic` en dekt de fiscale identificatiecode, die wél een
+>   controleletter heeft. Nooit `zeker`: dezelfde code hoort bij een mens óf bij
+>   een bedrijf.
+> * **Letland deelt niets met Estland.** De verleiding was groot — elf cijfers,
+>   mod-11, buurland — maar `isValidBalticPersonalCode` keurt vier op de vijf
+>   Letse nummers af. Twee tests leggen dat verschil vast.
+> * **`lu.matricule` is geen "formaat + context"-regel.** Twee onafhankelijke
+>   controlecijfers over dezelfde elf cijfers is de sterkste controle in de hele
+>   tabel.
+>
+> Wat er bewust níét in zit: de Liechtensteinse AHV-Versichertennummer. Die heeft
+> dezelfde vorm en evenmin een controlecijfer, maar het enige contextwoord dat
+> hem zou aanwijzen — "AHV-Nummer" — is net zo goed Zwitsers, en daar doet
+> `ch.ahv` het werk mét checksum.
 
 **`privacyOwnIdentity` bewaart zelf persoonsgegevens.** De lijst met de eigen naam, het eigen
 e-mailadres en telefoonnummer komt in de lokale voorkeuren te staan. Dat is nieuw op dit

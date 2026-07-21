@@ -10,6 +10,35 @@ import 'package:ocideck/services/privacy/privacy_checksums_eu.dart';
 //
 // Per land: één geldige waarde, en één die één cijfer verderop zit. Dat tweede
 // is de eigenlijke test — een checksum die alles goedkeurt, keurt niets.
+
+/// De kale mod-11 van de kennitala, zónder de datum- en eeuwcontrole.
+///
+/// Staat hier zodat een testwaarde die de checksum wél haalt maar op de datum
+/// afvalt, dat ook kan bewijzen. Zonder dit onderscheid toont zo'n test alleen
+/// dát hij afvalt, niet dat het de dátum was die hem tegenhield — en dan zou
+/// een kapotte checksum de test net zo goed groen houden.
+bool _haaltDeIsMod11(String d) {
+  const w = [3, 2, 7, 6, 5, 4, 3, 2, 1, 0];
+  var sum = 0;
+  for (var i = 0; i < 10; i++) {
+    sum += (d.codeUnitAt(i) - 0x30) * w[i];
+  }
+  return sum % 11 == 0;
+}
+
+/// De kale mod-11 van de personas kods, zónder de datum- en eeuwcontrole.
+///
+/// Zelfde reden als [_haaltDeIsMod11]: een test die alleen "valt af" bewijst
+/// niet wélke eis hem tegenhield.
+bool _haaltDeLvMod11(String d) {
+  const w = [1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
+  var sum = 0;
+  for (var i = 0; i < 10; i++) {
+    sum += (d.codeUnitAt(i) - 0x30) * w[i];
+  }
+  return (1101 - sum) % 11 % 10 == d.codeUnitAt(10) - 0x30;
+}
+
 void main() {
   /// Draait de checksum op een geldige waarde en op dezelfde waarde met een
   /// verminkt laatste cijfer.
@@ -113,6 +142,198 @@ void main() {
       '943 476 7016',
       '943 476 7015',
     );
+    checksum(
+      'IJsland — kennitala (mod-11)',
+      isValidIsKennitala,
+      '2902007170',
+      '2902007180',
+    );
+    checksum(
+      'Letland — personas kods, oud formaat (mod-11)',
+      isValidLvPersonasKods,
+      '11048112348',
+      '11048112347',
+    );
+    checksum(
+      'Letland — personas kods, nieuw formaat (mod-11)',
+      isValidLvPersonasKods,
+      '32182736453',
+      '32182736452',
+    );
+    checksum(
+      'Luxemburg — matricule (Luhn + Verhoeff)',
+      isValidLuMatricule,
+      '1977063000135',
+      '1977063000136',
+    );
+  });
+
+  group('Liechtenstein — cijfers en verder niets', () {
+    test('accepteert de lengtes uit de OESO-beschrijving', () {
+      // "up to 12 numerals", en korter dan dat alleen doordat voorloopnullen
+      // worden weggelaten.
+      expect(isValidLiPeid('2637'), isTrue);
+      expect(isValidLiPeid('4082617'), isTrue);
+      expect(isValidLiPeid('284615930472'), isTrue);
+    });
+
+    test('wijst een lengte buiten het bereik af', () {
+      expect(isValidLiPeid('263'), isFalse);
+      expect(isValidLiPeid('2846159304725'), isFalse);
+    });
+
+    test('wijst een betekenisloze reeks af', () {
+      // Bij een patroon dat verder alleen op zijn lengte steunt is dit de enige
+      // inhoudelijke eis die er is.
+      expect(isValidLiPeid('00000000'), isFalse);
+      expect(isValidLiPeid('123456'), isFalse);
+    });
+  });
+
+  group('Malta — géén checksum, dus alleen een vorm', () {
+    test('accepteert elk van de acht categorieletters', () {
+      for (final letter in ['A', 'B', 'G', 'H', 'L', 'M', 'P', 'Z']) {
+        expect(isValidMtIdCard('0384219$letter'), isTrue, reason: letter);
+      }
+    });
+
+    test('wijst een letter buiten de acht af', () {
+      for (final letter in ['C', 'D', 'K', 'Q', 'X']) {
+        expect(isValidMtIdCard('0384219$letter'), isFalse, reason: letter);
+      }
+    });
+
+    test('wijst een andere lengte af', () {
+      expect(isValidMtIdCard('038421M'), isFalse);
+      expect(isValidMtIdCard('03842190M'), isFalse);
+      expect(isValidMtIdCard('0384219'), isFalse);
+    });
+  });
+
+  group('Cyprus — de TIC en de mod-26-controleletter', () {
+    test('de referentiewaarde uit python-stdnum klopt', () {
+      // `10259033P` is de doctest-waarde van `stdnum/cy/vat.py`. Hij staat hier
+      // als bewijs dat onze omzettabel dezelfde is als die van de
+      // referentie-implementatie — een eigen uitgerekende waarde bewijst alleen
+      // dat de code met zichzelf overweg kan.
+      expect(isValidCyTic('10259033P'), isTrue);
+      expect(isValidCyTic('10259033Z'), isFalse);
+    });
+
+    test('accepteert de vorm met landcode-scheiding', () {
+      expect(isValidCyTic('00123456H'), isTrue);
+      expect(isValidCyTic('0012 3456 H'), isTrue);
+    });
+
+    test('accepteert ook het TFA-bereik vanaf 60000000', () {
+      // Sinds 27 maart 2023 worden codes vanaf 60000000 uitgegeven. Of de
+      // controleletter daar met hetzelfde schema wordt berekend zegt geen
+      // publieke bron; deze test legt vast wat we aannemen, niet wat we weten.
+      expect(isValidCyTic('60001234D'), isTrue);
+    });
+
+    test('wijst het niet-uitgegeven 12-bereik af', () {
+      // `12345678F` haalt de mod-26 gewoon; het bereik wordt alleen niet
+      // uitgegeven. Zonder deze eis zou de meest voor de hand liggende
+      // verzonnen cijferreeks van allemaal een treffer zijn.
+      expect(isValidCyTic('12345678F'), isFalse);
+      expect(isValidCyTic('02345678G'), isTrue);
+    });
+
+    test('wijst een reeks zonder letter af', () {
+      expect(isValidCyTic('102590331'), isFalse);
+    });
+  });
+
+  group('Luxemburg — twee controlecijfers, en allebei nodig', () {
+    // De valkuil: `C2` is een Verhoeff over de eerste ELF cijfers, niet over de
+    // twaalf inclusief `C1`. Wie ze stapelt — wat elke andere
+    // twee-controlecijferregeling doet — krijgt een validator die geen enkel
+    // echt matricule accepteert.
+    test('een verminkt Luhn-cijfer valt af', () {
+      expect(isValidLuMatricule('1977063000135'), isTrue);
+      expect(isValidLuMatricule('1977063000145'), isFalse);
+    });
+
+    test('een verminkt Verhoeff-cijfer valt af', () {
+      expect(isValidLuMatricule('1977063000136'), isFalse);
+    });
+
+    test('wijst een onmogelijk geboortejaar af', () {
+      // Een bedrijfsmatricule begint met het oprichtingsjaar of met vier
+      // nullen, en heeft daarna een heel andere opbouw.
+      expect(isValidLuMatricule('0000205000135'), isFalse);
+    });
+  });
+
+  group('Letland — het is niet het Estse schema', () {
+    test('de Estse validator keurt een Letse kods af', () {
+      // De catalogus verleidt tot hergebruik: elf cijfers, mod-11, buurland.
+      // Dat is precies de fout die echte nummers zou afwijzen.
+      expect(isValidLvPersonasKods('11048112348'), isTrue);
+      expect(isValidBalticPersonalCode('11048112348'), isFalse);
+    });
+
+    test('en de Letse validator keurt een Estse code af', () {
+      expect(isValidBalticPersonalCode('37205030203'), isTrue);
+      expect(isValidLvPersonasKods('37205030203'), isFalse);
+    });
+  });
+
+  group('Letland — wat er buiten de checksum om afvalt', () {
+    test('accepteert beide schrijfwijzen', () {
+      expect(isValidLvPersonasKods('280760-13575'), isTrue);
+      expect(isValidLvPersonasKods('28076013575'), isTrue);
+    });
+
+    test('wijst een rechtspersoon af', () {
+      // Eerste cijfer boven de 3; die nummers rekenen met een ander schema en
+      // horen sowieso bij een bedrijf en niet bij een mens.
+      expect(isValidLvPersonasKods('41048112345'), isFalse);
+    });
+
+    test('wijst een onmogelijk eeuwcijfer af', () {
+      // Positie 7 kent maar drie waarden: 0, 1 en 2.
+      expect(_haaltDeLvMod11('11048192341'), isTrue);
+      expect(isValidLvPersonasKods('11048192341'), isFalse);
+    });
+
+    test('het nieuwe formaat draagt geen datum en hoeft er dus geen', () {
+      // `321827…` zou als dag 32 afvallen; het `32`-prefix is juist het teken
+      // dat er geen geboortedatum in zit.
+      expect(isValidLvPersonasKods('32182736453'), isTrue);
+    });
+  });
+
+  group('IJsland — de kennitala buiten de checksum om', () {
+    test('accepteert beide schrijfwijzen', () {
+      expect(isValidIsKennitala('120788-3539'), isTrue);
+      expect(isValidIsKennitala('1207883539'), isTrue);
+    });
+
+    test('wijst een bedrijfskennitala af', () {
+      // Rechtspersonen krijgen 40 opgeteld bij de dag. `4105903010` haalt de
+      // mod-11 wél, en zonder de dagcontrole zou elke IJslandse leverancier op
+      // een factuurslide als persoonsgegeven binnenkomen.
+      expect(_haaltDeIsMod11('4105903010'), isTrue);
+      expect(isValidIsKennitala('4105903010'), isFalse);
+    });
+
+    test('wijst een onmogelijk eeuwcijfer af', () {
+      // Alleen `9` (1900-1999) en `0` (vanaf 2000) worden uitgegeven.
+      expect(isValidIsKennitala('2902007175'), isFalse);
+    });
+
+    test('wijst een onmogelijke maand af', () {
+      // Haalt de mod-11 gewoon — maand 13 bestaat alleen niet.
+      expect(_haaltDeIsMod11('0113882059'), isTrue);
+      expect(isValidIsKennitala('0113882059'), isFalse);
+    });
+
+    test('wijst een onmogelijke dag af', () {
+      expect(_haaltDeIsMod11('3207882189'), isTrue);
+      expect(isValidIsKennitala('3207882189'), isFalse);
+    });
   });
 
   group('Duitsland: de cijferherhalingsregel doet echt werk', () {
