@@ -1289,7 +1289,7 @@ const _dutchSourceTr = {
   'Ongeldig endpoint': 'Geçersiz endpoint',
   'Dit endpoint ondersteunt geen voorwaardelijk schrijven; gelijktijdig bewerken is hier slechter beschermd.':
       'Bu endpoint koşullu yazmayı desteklemiyor; eşzamanlı düzenleme burada daha zayıf korunur.',
-  'Naar de slide': 'Slayta git',
+  'Naar de slide': 'Slayda git',
   'De git-verbinding van dit deck bestaat niet meer.':
       'Bu sunumun git bağlantısı artık mevcut değil.',
   'Stel eerst een git-repository in bij Instellingen → Opslag.':
@@ -1364,12 +1364,12 @@ const _dutchSourceTr = {
       'Sunumları bir WebDAV sunucusundaki klasörde açın ve saklayın.',
   'Het pad in de server-URL is de WebDAV-wortel.':
       'Sunucu URL\'sindeki yol, WebDAV kökü olur.',
-  'Repareer slide': 'Slaytı onar',
-  'Voortzetting van vorige slide': 'Önceki slaytın devamı',
+  'Repareer slide': 'Slaydı onar',
+  'Voortzetting van vorige slide': 'Önceki slaydın devamı',
   'Deze slide hoort bij de lijst van de vorige slide en deelt daarmee één lettergrootte: die van de volste pagina.':
-      'Bu slayt, önceki slaytın listesine ait olduğundan tek bir yazı boyutunu paylaşır: en dolu sayfanınkini.',
+      'Bu slayt, önceki slaydın listesine ait olduğundan tek bir yazı boyutunu paylaşır: en dolu sayfanınkini.',
   'Deze slide rendert op {klein} van de ontwerpgrootte in plaats van {eigen}, omdat hij een gesplitste reeks deelt met de veel vollere slide {pagina}.':
-      'Bu slayt, çok daha dolu olan {pagina} slaytıyla bölünmüş bir seriyi paylaştığı için tasarım boyutunun {eigen} değil {klein} oranında görüntüleniyor.',
+      'Bu slayt, çok daha dolu olan {pagina} slaydıyla bölünmüş bir seriyi paylaştığı için tasarım boyutunun {eigen} değil {klein} oranında görüntüleniyor.',
   'Niet de tekst op deze slide is het probleem, maar de reeks.':
       'Sorun bu slayttaki metin değil, serinin kendisi.',
   'Haal volle pagina uit de reeks': 'Dolu sayfayı seriden çıkar',
@@ -2292,7 +2292,7 @@ const _dutchSourceTr = {
   'Plak of typ hier je broncode...':
       'Kaynak kodunuzu buraya yapıştırın veya yazın...',
   'Programmeertaal': 'Programlama dili',
-  'TLP van deze slide': 'Bu slaytın TLP\'si',
+  'TLP van deze slide': 'Bu slaydın TLP\'si',
   'Wis annotaties (C)': 'İşaretlemeleri sil (C)',
   'Stoppen (Esc)': 'Durdur (Esc)',
   'Pen · markeerstift · gum': 'Kalem · fosforlu kalem · silgi',
