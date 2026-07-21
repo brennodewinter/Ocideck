@@ -271,9 +271,14 @@ model.
   `verifyRedactedDerivative()` reconciles a redacted export against its sealed
   source via the redaction manifest so a legitimate redaction is not a false
   alarm. An optional `DocumentSignature` is folded into the seal. Related
-  audit-value tooling exists for the pentest module: RFC 3161 trusted timestamps
+  audit-value tooling exists for the pentest module: RFC 3161 timestamp tokens
   (`rfc3161_timestamp.dart`), evidence hashing (`evidence_hash_service.dart`),
-  and an audit dossier (`audit_dossier.dart`).
+  and an audit dossier (`audit_dossier.dart`). The timestamp handling is
+  deliberately shallow: `timeStampMatchesHash` compares the token's message
+  imprint with the seal hash and stops there — no CMS signature, no certificate,
+  no chain. It shows that *this* token was issued over *this* hash, not that a
+  trustworthy authority issued it. Calling it a "trusted timestamp" overstated
+  that; *corrected 2026-07-21*.
 - **Encrypted packages.** `.ocideck` packages can be encrypted
   (`lib/utils/zip_encryption.dart`, wired into `FileService`); an encrypted
   package cannot be opened without its password.

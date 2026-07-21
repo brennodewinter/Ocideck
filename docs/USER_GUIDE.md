@@ -2231,7 +2231,7 @@ Four more command-palette actions remove mechanical bookkeeping:
   tested, and the test standards used (WSTG, PTES, MASTG, … from the scope objects
   and checklists). It regenerates from the deck, so it always matches the report.
 
-### Trusted timestamp (RFC 3161)
+### Timestamp (RFC 3161)
 
 Once a report is finalised and sealed, its content is protected by a SHA-512 hash.
 To anchor that hash to a point in time, the **RFC3161-tijdstempel** command opens a
@@ -2239,13 +2239,29 @@ small dialog that lets you:
 
 - **Export a request (`.tsq`)** — a timestamp request over the seal hash, which you
   hand to OpenKAT or any RFC 3161 timestamp authority (TSA) out-of-band.
-- **Import the token (`.tsr`)** — the token the TSA returns. OciDeck verifies it
-  offline (its message imprint must equal the current seal hash) and, when it
-  matches, stores it in the deck (`ocideck_seal_tsr`) and shows the timestamp.
+- **Import the token (`.tsr`)** — the token the TSA returns. OciDeck compares its
+  message imprint with the current seal hash and, when the two match, stores it
+  in the deck (`ocideck_seal_tsr`) and shows the timestamp.
 
 This keeps OciDeck a *producer of hashes* — it never has to contact the TSA itself.
-The stored token is verified again every time the deck opens, so a "timestamped on
-…" or "does not match" status is always shown (PENTEST_MIAUW §8-A2).
+
+**What the check does and does not do.** Two limits, both worth knowing before
+you lean on a timestamp in a report (*corrected 2026-07-21; this passage used to
+say the token "is verified again every time the deck opens"*):
+
+- It is an **imprint comparison**, not a signature check. `timeStampMatchesHash`
+  parses the token far enough to read the hashed value and the generation time
+  and compares that value with the seal hash. It does not validate the TSA's CMS
+  signature, its certificate, or the chain behind it. A token whose imprint
+  matches will therefore be accepted even if it was never signed by anyone you
+  trust. Establishing *who* issued it is out-of-band work, with the TSA's own
+  tooling.
+- It runs **when you look**, not on open. The comparison happens in the timestamp
+  dialog (and again when an audit dossier is built). Opening a deck stores and
+  displays the token without re-checking it, so no "does not match" warning
+  appears unless you open that dialog. The seal hash itself *is* recomputed on
+  open — that part is unchanged, and it is what tells you whether the content
+  was altered.
 
 ### One-click audit dossier
 
