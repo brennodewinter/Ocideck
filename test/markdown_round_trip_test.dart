@@ -2226,7 +2226,10 @@ Slide _metInhoud(SlideType type) {
       imagePath2: 'images/b.png',
     ),
     SlideType.video => basis.copyWith(videoPath: 'media/film.mp4'),
-    SlideType.quote => basis.copyWith(quote: 'Zo gaat dat', quoteAuthor: 'N.N.'),
+    SlideType.quote => basis.copyWith(
+      quote: 'Zo gaat dat',
+      quoteAuthor: 'N.N.',
+    ),
     SlideType.freeMarkdown => basis.copyWith(
       customMarkdown: 'Vrije **tekst** zonder kop.',
     ),

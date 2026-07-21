@@ -24,6 +24,7 @@ import '../utils/net_guard.dart';
 import '../utils/project_path.dart';
 import '../utils/zip_encryption.dart';
 import 'annotation_codec.dart';
+import 'sidecar_format.dart';
 import 'user_notes_codec.dart';
 import 'caption_service.dart';
 import 'image_service.dart';

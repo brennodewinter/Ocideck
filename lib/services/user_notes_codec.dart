@@ -4,6 +4,7 @@ import '../models/slide.dart';
 import '../utils/log.dart';
 import '../utils/page_scoped_notes.dart';
 import 'annotation_codec.dart';
+import 'sidecar_format.dart';
 
 /// Serializes per-slide user notes (recipient/course notes) into a sidecar
 /// payload fully decoupled from Marp markdown and speaker notes.
@@ -47,8 +48,18 @@ class UserNotesCodec {
     final result = <String, String>{};
     try {
       final data = jsonDecode(json);
-      final fileVersion =
-          (data is Map ? data['version'] as num? : null)?.toInt() ?? 1;
+      final fileVersion = declaredSidecarVersion(data);
+      // Een onbekende hogere versie werd tot nu toe als 2 gelezen: wél inladen,
+      // en bij de eerstvolgende opslag terugschrijven als wat deze build ervan
+      // begreep. Zie [sidecarIsFromNewerBuild]; de schrijfkant laat hetzelfde
+      // bestand met rust.
+      if (fileVersion > version) {
+        logWarning(
+          'UserNotesCodec.decode: user-notes sidecar is version $fileVersion, '
+          'this build reads $version — not loading it',
+        );
+        return {};
+      }
       final raw = (data is Map ? data['slides'] : null) as List? ?? const [];
       // Op (dia, pagina), niet op dia alleen: een rijke-tekstdia die over
       // meerdere pagina's loopt levert meerdere notities met hetzelfde

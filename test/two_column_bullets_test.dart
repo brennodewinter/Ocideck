@@ -16,8 +16,8 @@ Slide _leesEen(String slideBody) {
   return deck.slides.single;
 }
 
-String _schrijf(Slide slide, {ThemeProfile? profiel}) => MarkdownService()
-    .generateDeck(
+String _schrijf(Slide slide, {ThemeProfile? profiel}) =>
+    MarkdownService().generateDeck(
       Deck(
         title: 'D',
         slides: [slide],
@@ -25,9 +25,8 @@ String _schrijf(Slide slide, {ThemeProfile? profiel}) => MarkdownService()
       ),
     );
 
-Slide _heenEnTerug(Slide slide) => _leesEen(
-  _schrijf(slide).split('---\n').last.trim(),
-);
+Slide _heenEnTerug(Slide slide) =>
+    _leesEen(_schrijf(slide).split('---\n').last.trim());
 
 void main() {
   group('een handgeschreven tweekolomsdia leest gewoon in', () {
@@ -141,11 +140,9 @@ void main() {
     test('een bullet met HTML en een pipe komt ongeschonden terug', () {
       const lastig = 'Punt <b>vet</b> | met pipe & "aanhaling"';
       final uit = _heenEnTerug(
-        Slide.create(SlideType.twoBullets).copyWith(
-          title: 'T',
-          bullets: [lastig],
-          bullets2: const ['Rechts'],
-        ),
+        Slide.create(
+          SlideType.twoBullets,
+        ).copyWith(title: 'T', bullets: [lastig], bullets2: const ['Rechts']),
       );
       expect(uit.bullets, [lastig]);
       expect(uit.bullets2, const ['Rechts']);

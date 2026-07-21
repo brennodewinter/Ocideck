@@ -24,9 +24,35 @@ extension _FileServiceOpen on FileService {
   /// Path of the annotation sidecar next to a deck `<name>.md` → `<name>.ink.json`.
   String _sidecarPath(String mdPath) => p.setExtension(mdPath, '.ink.json');
 
+  /// Of [sidecar] uit een nieuwere OciDeck komt dan deze build ([supported]) —
+  /// dan blijft hij onaangeroerd, inclusief het niet-verwijderen.
+  ///
+  /// De leeskant laadt zo'n bestand al niet in (zie de codecs). Zonder deze
+  /// tweede helft was dat juist gevaarlijk: het deck heeft dan geen strepen of
+  /// notities in het geheugen, en de eerstvolgende opslag zou het bestand
+  /// daarom wíssen. Niets laden en toch overschrijven is erger dan half lezen.
+  Future<bool> _sidecarFromNewerBuild(File sidecar, int supported) async {
+    if (!await sidecar.exists()) return false;
+    try {
+      return sidecarIsFromNewerBuild(await sidecar.readAsString(), supported);
+    } catch (e) {
+      // Onleesbaar is niet "van later": dat valt onder gewone corruptie.
+      logWarning('FileService: sidecar version unreadable', e);
+      return false;
+    }
+  }
+
   /// Write the annotation sidecar next to [filePath], or remove it when empty.
   Future<void> _writeSidecar(Deck deck, String filePath) async {
     final sidecar = File(_sidecarPath(filePath));
+    if (await _sidecarFromNewerBuild(sidecar, AnnotationCodec.version)) {
+      logWarning(
+        'FileService._writeSidecar: annotation sidecar is from a newer '
+        'OciDeck and was left untouched',
+        sidecar.path,
+      );
+      return;
+    }
     final json = AnnotationCodec.encode(deck.slides, deck.annotations);
     if (json == null) {
       if (await sidecar.exists()) await sidecar.delete();
@@ -42,6 +68,14 @@ extension _FileServiceOpen on FileService {
   /// Write the user-notes sidecar next to [filePath], or remove it when empty.
   Future<void> _writeUserNotesSidecar(Deck deck, String filePath) async {
     final sidecar = File(_userNotesSidecarPath(filePath));
+    if (await _sidecarFromNewerBuild(sidecar, UserNotesCodec.version)) {
+      logWarning(
+        'FileService._writeUserNotesSidecar: user-notes sidecar is from a '
+        'newer OciDeck and was left untouched',
+        sidecar.path,
+      );
+      return;
+    }
     final json = UserNotesCodec.encode(deck.slides, deck.userNotes);
     if (json == null) {
       if (await sidecar.exists()) await sidecar.delete();
