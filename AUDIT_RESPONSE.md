@@ -10,13 +10,21 @@ The guiding constraint throughout was that no functionality may be lost. That
 rules out several of the proposed changes on its own: a refactor that risks
 behaviour to satisfy a metric which is already met is a net loss.
 
+> **The counts in this document are measurements, and measurements go stale.**
+> They were re-taken on **2026-07-21** and corrected where the code had moved
+> on: `deck_provider.dart` had shrunk from 958 to 744 lines (and gained a
+> seventh companion), the direct dependencies had grown from 36 to 37, the files
+> using `async`/`await` from 143 to 185, and the tooltips from 198 to 209. None
+> of the verdicts changed — every premise the audit got wrong is still wrong —
+> but a document that argues from numbers has to keep them true.
+
 ## Summary
 
 | # | Audit point | Verdict |
 |---|-------------|---------|
-| 1 | Split `deck_provider.dart` (>2000 lines) | Premise incorrect — already 958 lines across 6 parts |
+| 1 | Split `deck_provider.dart` (>2000 lines) | Premise incorrect — already 744 lines across 7 files |
 | 2A | No media caching; add LRU + lazy loading | Largely present; one real gap, fixed |
-| 2B | 100+ dependencies; prune | Premise incorrect — 36 direct dependencies |
+| 2B | 100+ dependencies; prune | Premise incorrect — 37 direct dependencies |
 | 3A | `lib/` lacks structure | Already structured by domain |
 | 3B | async/await vs callbacks inconsistent | No inconsistency found |
 | 4 | No performance tests for large decks | **Valid — tests added** |
@@ -29,9 +37,9 @@ behaviour to satisfy a metric which is already met is a net loss.
 **Claim:** the file exceeds 2000 lines and should be split into
 `slide_deck_provider`, `privacy_deck_provider` and `ai_deck_provider`.
 
-**Measured:** `lib/state/deck_provider.dart` is 958 lines. It is already split
-by domain into six files (`_ai`, `_auto`, `_checklist`, `_markdown`, `_miauw`,
-plus `deck_quality_provider`), together 1332 lines.
+**Measured:** `lib/state/deck_provider.dart` is 744 lines. It is already split
+by domain into seven companions (`_ai`, `_auto`, `_checklist`, `_markdown`,
+`_miauw`, `_slides`, plus `deck_quality_provider`), together 758 lines.
 
 **Verdict:** the premise does not hold, and the recommendation is already
 implemented in substance. `tool/check_conventions.dart` caps files under `lib/`
@@ -71,7 +79,7 @@ so degrading them to save negligible memory would be the wrong trade.
 
 **Claim:** 100+ dependencies inflate memory use; analyse the tree and prune.
 
-**Measured:** `pubspec.yaml` declares 36 direct dependencies. The 100+ figure
+**Measured:** `pubspec.yaml` declares 37 direct dependencies. The 100+ figure
 counts transitive packages, which are not independently removable — pruning them
 means removing the direct dependency that pulls them in, along with its feature.
 
@@ -97,7 +105,7 @@ further divided into `editors/`, `dialogs/`, `panels/`, `slides/`,
 **Claim:** some services use `async`/`await` while others use callbacks;
 standardise on one.
 
-**Measured:** 143 files use `async`/`await`. The callbacks that remain are
+**Measured:** 185 files use `async`/`await`. The callbacks that remain are
 Flutter's widget callbacks (`VoidCallback`, `ValueChanged<T>`) — the framework's
 own idiom for event handling, not an alternative style of asynchrony. No service
 was found returning results through a callback where a `Future` was the
@@ -126,7 +134,7 @@ reddens the build on an unlucky day.
 
 ## 5A. Editor usability
 
-Tooltips are present: 198 across 67 files, including every action in the main
+Tooltips are present: 209 across 70 files, including every action in the main
 toolbar.
 
 A wizard mode for new users is a reasonable product idea, but it is a new
@@ -167,6 +175,7 @@ guard rail and fixes what it caught; it does not claim full conformance.
 
 ## Verification
 
-The full suite passes: 3078 tests. The changes above are additive — two new test
-files, three tooltip attachments and one decode hint — so no existing behaviour
-was modified.
+The full suite passed when this response was written (3078 tests at that moment;
+it has grown since, and `make check` is where the current number lives). The
+changes above are additive — two new test files, three tooltip attachments and
+one decode hint — so no existing behaviour was modified.
