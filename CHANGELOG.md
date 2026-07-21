@@ -225,10 +225,24 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   naar de sneltoetsen — anders sprong een `3` in het antwoord naar dia 3 —
   behalve `Enter` (bevestigen), `PgUp`/`PgDn` (bladeren, zodat een
   presentatieklikker blijft werken), `Esc` (presentatie afsluiten) en
-  `Ctrl/Cmd+W`. Het juiste antwoord reist pas naar het beamervenster nadat er
-  geantwoord is; daarvóór is er niets van de oplossing te zien, ook niet in het
-  bericht tussen de twee vensters. Na afloop staat er hoeveel procent uw
-  antwoord op het juiste leek.
+  `Ctrl/Cmd+W`. Vóór het antwoorden is er op geen van beide schermen iets van de
+  oplossing te zien — maar dat is enscenering, geen geheimhouding: het
+  beamervenster krijgt het hele deck, dus een vraagdia is niet de plek om iets
+  te verbergen voor wie bij die machine kan.
+
+  Zodra het antwoord binnen is, komt er in plaats van het invoerveld een
+  **correctie**: *Jouw antwoord* en *Het juiste antwoord* onder elkaar, met het
+  verschil aangewezen. Wat er te veel stond is rood en doorgestreept, wat er
+  miste groen en onderstreept — de doorstreping en de onderstreping staan er
+  náást de kleur, zodat de aanwijzing ook leesbaar blijft voor wie rood en groen
+  slecht uit elkaar houdt. Eronder staat het percentage naast de drempel die u
+  koos ("Overeenkomst: 62% · nodig: 85%"), want een kaal getal is nog geen
+  oordeel. De vergelijking is net zo soepel als het goedrekenen zelf —
+  hoofdletters en dubbele spaties tellen niet mee — dus er wordt nooit een
+  verschil aangewezen dat niet meetelde, en bij een letterlijk goed antwoord
+  blijft de vergelijking helemaal weg. Heeft u meerdere antwoorden goed
+  gerekend, dan wordt er gecorrigeerd tegen het antwoord dat het dichtst bij het
+  getypte lag, niet tegen het eerste in uw lijst.
 - **Het tijdenoverzicht na een oefenronde toont nu ook de vragen.** Onder de
   tijd per dia staat elke beantwoorde vraag, met de tijd van díe poging en of
   het antwoord goed was. Elke poging apart en niet opgeteld: bij *opnieuw

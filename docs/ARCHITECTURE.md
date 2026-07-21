@@ -132,14 +132,20 @@ lib/
   `answerSubmit`) and the presenter pushes the resulting `QuestionView` back over
   the window channel, the same pattern as the checklist/table sync.
 
-  Two consequences of that channel are load-bearing rather than incidental.
-  Because the `QuestionView` *travels*, an `openText` round carries no accepted
-  answer until the reveal — the answer key would otherwise sit in the beamer
-  window's memory before anyone answered. And because typing must not be possible
-  in two places at once, the audience window passes no `onAnswerTextChanged`, so
-  its input field mirrors read-only; `presenter_keys.dart` hands the keyboard to
-  the field while such a round is open, keeping only `Enter`, `PageUp`/`PageDown`,
-  `Esc` and `Ctrl/Cmd+W` as shortcuts.
+  Two consequences of that split are load-bearing rather than incidental. First,
+  the `QuestionView` is a **render state**, so whatever it holds is on screen: an
+  `openText` round therefore carries no `expectedAnswer` until the reveal, and the
+  presenter fills it in at the moment it resolves the answer. This is not a
+  confidentiality boundary — `buildBeamerMarkdown` hands the audience window the
+  whole deck markdown, `question` block and `correct` flags and all, so the answer
+  key is already over there. It is a display rule: the view decides what is
+  painted, and painting the answer before it is given would spoil the question.
+  (*Corrected 2026-07-21: this paragraph claimed the answer key does not travel to
+  the beamer window. It does.*) Second, typing must not be possible in two places
+  at once, so the audience window passes no `onAnswerTextChanged` and its input
+  field mirrors read-only; `presenter_keys.dart` hands the keyboard to the field
+  while such a round is open, keeping only `Enter`, `PageUp`/`PageDown`, `Esc` and
+  `Ctrl/Cmd+W` as shortcuts.
 - **Timeline slides** keep their events in the normal `bullets` field as
   `marker :: title :: description` list items (no `customMarkdown`), so the `.md`
   stays a readable Markdown list. The layout (`TimelineLayout`) and animation

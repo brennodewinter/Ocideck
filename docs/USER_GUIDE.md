@@ -618,9 +618,21 @@ the chooser, then choose the **kind** in the editor:
   are ignored before comparing; punctuation is kept, because it is sometimes part
   of the answer — a stray full stop rarely drops you below the threshold. The
   viewer types on **your** screen; the beamer window mirrors what is typed but
-  cannot be typed into. After answering, the slide shows how close the typed
-  answer came as a percentage — and, when it was wrong, what the right answer
-  was.
+  cannot be typed into.
+
+  Once the answer is in, a **correction** takes the place of the input field:
+  *Your answer* and *The right answer* on two lines, with the differences marked.
+  What was there too much is red and struck through; what was missing is green
+  and underlined. The strike-through and underline sit *beside* the colour on
+  purpose, so the marking still reads for anyone who tells red and green apart
+  poorly. Under it, the score names the bar it was measured against —
+  *Match: 62% · needed: 85%* — because a bare percentage is a number rather than
+  a verdict. The comparison ignores capitals and collapses doubled spaces, the
+  same leniency used to mark the answer right, so it never points at a difference
+  that did not count. An answer that was literally right (after that leniency)
+  gets no comparison at all — there is nothing to point at. With several accepted
+  answers, the correction is against the **closest** one, not the first in the
+  list.
 
 Common options for every kind:
 
@@ -651,9 +663,12 @@ While a **typed answer** is open the keys go into the input field instead of to
 the shortcuts — otherwise a `3` in the answer would jump to slide 3. Four keys
 keep working: `Enter` confirms the answer, `Page Up`/`Page Down` still page (so a
 presentation clicker does not go dead), `Esc` exits the presentation as always,
-and `Ctrl/Cmd + W` closes it. The accepted answers stay on the presenter side
-until the answer is in: they only travel to the beamer window once the question
-has been answered.
+and `Ctrl/Cmd + W` closes it. Nothing of the answer appears on either screen
+before it is given, but treat that as staging rather than secrecy: the beamer
+window is handed the whole deck, so a question slide is not a place to hide
+something from whoever can reach that machine (*corrected 2026-07-22: this
+paragraph said the accepted answers only travel to the beamer window after the
+question is answered*).
 
 A **static export** shows the question without interactivity. In the **HTML**
 export that works out per kind: multiple choice, true/false, multiple correct and

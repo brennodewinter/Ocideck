@@ -60,10 +60,12 @@ Two classes, deliberately separate:
   only a correct one, the rest need a correct *and* a wrong one).
 - **`QuestionView`** — the drawn round, **session-only**: the options actually
   shown, `optionImages`, the pick, `openText`/`typedAnswer`, `result`, `revealed`,
-  `locked` and the countdown. It is what crosses the window channel to the
-  audience window, which is why an `openText` round leaves `expectedAnswer` empty
-  until the answer is revealed. `answerable` is the flag for "a right answer can
-  actually be given"; the presenter uses it instead of testing
+  `locked`, `matchScore` and the countdown. It crosses the window channel to the
+  audience window and drives what both screens paint — which is why an `openText`
+  round leaves `expectedAnswer` empty until the answer is revealed. That is a
+  render rule, not a confidentiality one: the audience window is separately handed
+  the whole deck markdown, `correct` flags included. `answerable` is the flag for
+  "a right answer can actually be given"; the presenter uses it instead of testing
   `correctIndices.isEmpty`, which `openText` cannot express because it draws no
   options.
 
