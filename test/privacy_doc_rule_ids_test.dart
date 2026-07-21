@@ -36,7 +36,7 @@ import 'package:ocideck/services/privacy/privacy_world_rules.dart';
 const Set<String> geplandeRegels = {
   // EU-landen waarvoor nog geen pakket is gebouwd, plus twee losse nummers in
   // landen die al wél een pakket hebben.
-  'cy.id', 'lt.ak', 'lu.matricule', 'lv.pk', 'mt.id', 'de.svnr', 'es.nie',
+  'cy.id', 'lt.ak', 'lu.matricule', 'mt.id', 'de.svnr', 'es.nie',
 
   // Reis- en identiteitsdocumenten naast de gebouwde `doc.mrz`.
   'doc.passport_nl', 'doc.driving_licence', 'doc.residence',

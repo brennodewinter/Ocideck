@@ -282,6 +282,55 @@ bool isValidBalticPersonalCode(String raw) {
   return rest == d.codeUnitAt(10) - 0x30;
 }
 
+// ── Letland ──────────────────────────────────────────────────────────────────
+
+/// Personas kods: 11 cijfers, mod-11 met de gewichten 1-6-3-7-9-10-5-8-4-2.
+///
+/// **Niet** het Baltische schema van hierboven.
+/// [isValidBalticPersonalCode] dekt Estland en Litouwen — die twee delen vorm
+/// én dubbele mod-11 — maar Letland rekent anders: andere gewichten, één ronde,
+/// en een afsluitende `mod 10` die een rest van 10 op 0 laat uitkomen. Een
+/// Letse kods door de Estse validator halen keurt vier op de vijf echte nummers
+/// af.
+///
+/// Twee formaten naast elkaar:
+///
+///  * **oud** — `ddmmjj` + eeuwcijfer (0 = 1800-1899, 1 = 1900-1999,
+///    2 = 2000-2099) + drie volgnummercijfers + de controle;
+///  * **nieuw** — sinds 1 juli 2017 begint een kods met `32` en draagt hij géén
+///    geboortedatum meer. Dat is een privacymaatregel van de Letse wetgever, en
+///    het kost ons precies de datumcontrole die het oude formaat wél levert.
+///
+/// Rechtspersonen beginnen met een cijfer boven de 3 en rekenen met een ander
+/// schema. Die vallen hier af op het eerste cijfer, want een bedrijfsnummer is
+/// geen persoonsgegeven.
+bool isValidLvPersonasKods(String raw) {
+  final d = _digits(raw);
+  if (d.length != 11) return false;
+
+  if (!d.startsWith('32')) {
+    // Het oude formaat. Alles boven de 3 op positie 0 is een rechtspersoon, en
+    // `30`/`31` blijven geldige dagen — vandaar de datumcontrole eronder in
+    // plaats van een tweede cijfergrens.
+    if (d.codeUnitAt(0) > 0x33) return false;
+    if (!_plausibleDayMonth(
+      int.parse(d.substring(0, 2)),
+      int.parse(d.substring(2, 4)),
+    )) {
+      return false;
+    }
+    // Er zijn maar drie eeuwen uitgegeven. Zonder deze eis is dit de zwakste
+    // schakel: hij haalt er in één regel zeventig procent uit.
+    if (d.codeUnitAt(6) > 0x32) return false;
+  }
+
+  const weights = [1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
+  // 1101 ≡ 1 (mod 11); de vorm met 1101 staat zo in de Letse beschrijving en
+  // houdt het tussenresultaat positief.
+  final check = (1101 - _weighted(d, weights)) % 11 % 10;
+  return check == d.codeUnitAt(10) - 0x30;
+}
+
 // ── Verenigd Koninkrijk ──────────────────────────────────────────────────────
 
 /// NHS-nummer: 10 cijfers, gewichten 10..2, controle = 11 − rest (11 → 0,

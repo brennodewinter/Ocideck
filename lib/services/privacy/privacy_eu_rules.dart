@@ -106,6 +106,12 @@ final List<NationalIdentifierRule> euIdentifierRules = [
     validate: isValidBalticPersonalCode,
   ),
   NationalIdentifierRule(
+    id: 'lv.pk',
+    country: 'LV',
+    pattern: RegExp(r'(?<!\d)\d{6}-?\d{5}(?!\d)'),
+    validate: isValidLvPersonasKods,
+  ),
+  NationalIdentifierRule(
     id: 'uk.nhs',
     country: 'GB',
     pattern: RegExp(r'(?<!\d)\d{3}[\s-]?\d{3}[\s-]?\d{4}(?!\d)'),

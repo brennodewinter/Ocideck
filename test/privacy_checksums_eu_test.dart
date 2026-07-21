@@ -26,6 +26,19 @@ bool _haaltDeIsMod11(String d) {
   return sum % 11 == 0;
 }
 
+/// De kale mod-11 van de personas kods, zónder de datum- en eeuwcontrole.
+///
+/// Zelfde reden als [_haaltDeIsMod11]: een test die alleen "valt af" bewijst
+/// niet wélke eis hem tegenhield.
+bool _haaltDeLvMod11(String d) {
+  const w = [1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
+  var sum = 0;
+  for (var i = 0; i < 10; i++) {
+    sum += (d.codeUnitAt(i) - 0x30) * w[i];
+  }
+  return (1101 - sum) % 11 % 10 == d.codeUnitAt(10) - 0x30;
+}
+
 void main() {
   /// Draait de checksum op een geldige waarde en op dezelfde waarde met een
   /// verminkt laatste cijfer.
@@ -135,6 +148,57 @@ void main() {
       '2902007170',
       '2902007180',
     );
+    checksum(
+      'Letland — personas kods, oud formaat (mod-11)',
+      isValidLvPersonasKods,
+      '11048112348',
+      '11048112347',
+    );
+    checksum(
+      'Letland — personas kods, nieuw formaat (mod-11)',
+      isValidLvPersonasKods,
+      '32182736453',
+      '32182736452',
+    );
+  });
+
+  group('Letland — het is niet het Estse schema', () {
+    test('de Estse validator keurt een Letse kods af', () {
+      // De catalogus verleidt tot hergebruik: elf cijfers, mod-11, buurland.
+      // Dat is precies de fout die echte nummers zou afwijzen.
+      expect(isValidLvPersonasKods('11048112348'), isTrue);
+      expect(isValidBalticPersonalCode('11048112348'), isFalse);
+    });
+
+    test('en de Letse validator keurt een Estse code af', () {
+      expect(isValidBalticPersonalCode('37205030203'), isTrue);
+      expect(isValidLvPersonasKods('37205030203'), isFalse);
+    });
+  });
+
+  group('Letland — wat er buiten de checksum om afvalt', () {
+    test('accepteert beide schrijfwijzen', () {
+      expect(isValidLvPersonasKods('280760-13575'), isTrue);
+      expect(isValidLvPersonasKods('28076013575'), isTrue);
+    });
+
+    test('wijst een rechtspersoon af', () {
+      // Eerste cijfer boven de 3; die nummers rekenen met een ander schema en
+      // horen sowieso bij een bedrijf en niet bij een mens.
+      expect(isValidLvPersonasKods('41048112345'), isFalse);
+    });
+
+    test('wijst een onmogelijk eeuwcijfer af', () {
+      // Positie 7 kent maar drie waarden: 0, 1 en 2.
+      expect(_haaltDeLvMod11('11048192341'), isTrue);
+      expect(isValidLvPersonasKods('11048192341'), isFalse);
+    });
+
+    test('het nieuwe formaat draagt geen datum en hoeft er dus geen', () {
+      // `321827…` zou als dag 32 afvallen; het `32`-prefix is juist het teken
+      // dat er geen geboortedatum in zit.
+      expect(isValidLvPersonasKods('32182736453'), isTrue);
+    });
   });
 
   group('IJsland — de kennitala buiten de checksum om', () {

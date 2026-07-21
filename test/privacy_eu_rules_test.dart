@@ -39,6 +39,7 @@ void main() {
       'fi.hetu': '131052-308T',
       'ee.isikukood': '37205030203',
       'is.kennitala': '290200-7170',
+      'lv.pk': '110481-12348',
     };
 
     cases.forEach((rule, value) {
