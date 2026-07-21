@@ -52,6 +52,7 @@ import '../services/mermaid_render_service.dart';
 import '../models/git_settings.dart';
 import '../services/git/asset_index.dart';
 import '../services/git/deck_merge.dart';
+import '../services/git/deck_repo_serializer.dart';
 import '../services/git/deck_search.dart';
 import '../services/git/git_forge.dart';
 import '../services/git/version_diff.dart';
