@@ -100,7 +100,10 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   meereisde. Een vergrendeld deck is bedoeld om áf te spelen; wie dat doet hoort
   achteraf geen rapport over zichzelf te krijgen. De uitzondering zit nu in het
   presentatiescherm zelf, dus ook een deck dat langs een andere weg wordt
-  afgespeeld valt eronder.
+  afgespeeld valt eronder. Zet u *alleen afspelen* aan onder
+  *Presentatie-eigenschappen*, dan valt de schakelaar *tijden-overzicht tonen*
+  daar meteen zichtbaar stil, met de reden eronder; uw bewaarde keuze blijft
+  staan, zodat ontgrendelen haar teruggeeft.
 - **De documentatie noemt de juiste dekkingsvloer.** Vijf plaatsen in `docs/`
   hielden vol dat de afgedwongen dekking 78 % was — één zei 79 % — terwijl de
   Makefile al op `--min=80` staat. Wie de documentatie geloofde, dacht ruimte te
@@ -202,9 +205,13 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   juiste aanwijzen — "welke van deze twee schermen is de phishingpagina". U
   kiest in de editor twee afbeeldingen, geeft ze elk een bijschrift en zet met
   één knop vast welke de juiste is. Bij het presenteren wisselen links en rechts
-  per ronde, dus noem ze in uw bijschrift niet "de linker" en "de rechter". In
-  een HTML-export komen de twee beelden gewoon als afbeeldingen achter de vraag
-  te staan, zonder dat erbij staat welke de goede is.
+  per ronde, dus noem ze in uw bijschrift niet "de linker" en "de rechter". Zet
+  u er met de hand meer paren in het bestand, dan komt er elke ronde één juiste
+  en één foute uit die verzameling. Ontbreekt een van de beelden, dan meldt de
+  bestandscontrole dat — een lege tegel waar een antwoord hoort merkt u anders
+  pas als u in de zaal staat. In een HTML-export komen de twee beelden gewoon
+  als afbeeldingen achter de vraag te staan, zonder dat erbij staat welke de
+  goede is.
 
   **Getypt antwoord** laat de kijker het antwoord intypen in plaats van
   aanwijzen. U vinkt aan welke antwoorden goed gerekend worden — meer dan één

@@ -604,6 +604,13 @@ the chooser, then choose the **kind** in the editor:
   time **left and right swap at random each round**, so do not write "the left
   one" in a caption. This kind has no separate decorative image: the two answers
   *are* the pictures.
+
+  The editor offers two slots, but you may put more pairs in the Markdown by
+  hand. Each round then draws **one correct and one wrong** picture from the
+  pool, so a longer pool gives a fresh pair every time instead of always the
+  first two. A missing answer image is reported by the file check like any other
+  missing image — an empty tile where an answer belongs is something you would
+  otherwise only notice in the room.
 - **Typed answer** — the viewer types instead of picking. Tick every answer that
   should count as right (more than one is allowed) and set **how closely the typed
   answer must match** with the slider: 85% by default, which lets a typo through
@@ -1711,7 +1718,11 @@ remove the `ocideck_play_only` key from its markdown.
 A play-only deck also **never shows the rehearsal summary** afterwards, even when
 the deck carries the *show timing summary* switch turned on. Time is still
 measured while presenting, but the timing screen belongs to the person preparing
-the talk, not to the person the deck was handed to.
+the talk, not to the person the deck was handed to. Turning on *Play only* in
+*Presentation properties* therefore greys out the *Show timing summary* switch
+right there, with the reason under it — a switch that looks on while doing
+nothing is worse than no switch. Your stored choice is left alone, so unlocking
+the deck gives it back.
 
 ### Rehearsing and timing
 

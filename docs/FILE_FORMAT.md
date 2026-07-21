@@ -900,11 +900,14 @@ Fields:
 - `prompt` — the question, or the statement for `trueFalse`.
 - `answers` — the full pool; each has `text`, `correct` and optionally `image`.
   Ignored for `trueFalse`. For `multipleChoice` and `ordering` the presentation
-  draws a random subset from it; the other kinds use every filled-in answer. For
-  `ordering` the **list order is the correct order** and the `correct` flags are
-  ignored; the drawn subset keeps its relative order as the right answer and is
-  shown shuffled. For `openText` the entries with `correct: true` are the accepted
-  answers and the rest are ignored.
+  draws a random subset of `optionCount` from it; `multipleCorrect` shows every
+  filled-in answer, shuffled. For `ordering` the **list order is the correct
+  order** and the `correct` flags are ignored; the drawn subset keeps its relative
+  order as the right answer and is shown shuffled. For `imagePair` each round
+  draws **one** `correct: true` and **one** `correct: false` answer and shuffles
+  the pair, so the editor's two slots are the common case but a longer pool in the
+  file gives a fresh pair every round. For `openText` the entries with
+  `correct: true` are the accepted answers and the rest are ignored.
 - `answers[].image` — a deck-relative image path, for `imagePair`: there the
   picture *is* the answer and `text` is only its caption. **Written only when it
   has a value**, so a text-only question keeps the two-key answer objects it
