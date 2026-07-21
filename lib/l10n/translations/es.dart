@@ -733,6 +733,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'TYPE': 'TIPO',
+  'STIJL': 'ESTILO',
   'Bijv. 1.0': 'P. ej. 1.0',
   'Bijv. 2026-05-30': 'P. ej. 2026-05-30',
   'Bijv. Jan Jansen': 'P. ej. Juan Pérez',

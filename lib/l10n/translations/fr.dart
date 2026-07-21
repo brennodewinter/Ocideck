@@ -736,6 +736,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'TYPE': 'TYPE',
+  'STIJL': 'STYLE',
   'Bijv. 1.0': 'Ex. 1.0',
   'Bijv. 2026-05-30': 'Ex. 2026-05-30',
   'Bijv. Jan Jansen': 'Ex. Jean Dupont',

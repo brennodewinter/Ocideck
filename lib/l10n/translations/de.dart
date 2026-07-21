@@ -736,6 +736,8 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'TYPE': 'TYP',
+  'STIJL': 'STIL',
   'Bijv. 1.0': 'Z. B. 1.0',
   'Bijv. 2026-05-30': 'Z. B. 2026-05-30',
   'Bijv. Jan Jansen': 'Z. B. Max Mustermann',

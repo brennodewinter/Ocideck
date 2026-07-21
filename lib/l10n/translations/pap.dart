@@ -736,6 +736,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'TYPE': 'TIPO',
+  'STIJL': 'STILO',
   'Bijv. 1.0': 'Por ehèmpel 1.0',
   'Bijv. 2026-05-30': 'Por ehèmpel 2026-05-30',
   'Bijv. Jan Jansen': 'Por ehèmpel Juan Pérez',

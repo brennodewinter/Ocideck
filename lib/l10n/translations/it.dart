@@ -732,6 +732,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'TYPE': 'TIPO',
+  'STIJL': 'STILE',
   'Bijv. 1.0': 'Es. 1.0',
   'Bijv. 2026-05-30': 'Es. 2026-05-30',
   'Bijv. Jan Jansen': 'Es. Mario Rossi',

@@ -737,6 +737,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'TYPE': 'TYPE',
+  'STIJL': 'STIL',
   'Bijv. 1.0': 'Bgl. 1.0',
   'Bijv. 2026-05-30': 'Bgl. 2026-05-30',
   'Bijv. Jan Jansen': 'Bgl. Jan Jansen',
