@@ -1402,8 +1402,8 @@ const _dutchSourceRo = {
   ' van de ontwerpgrootte.': ' din dimensiunea de proiectare.',
   'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
       'Mult text pe acest slide: dimensiunea fontului este redusă puternic (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
-      'din dimensiunea de proiectare). Ia în calcul împărțirea conținutului.',
+  ' van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      ' din dimensiunea de proiectare). Ia în calcul împărțirea conținutului.',
   'Grote tabel (': 'Tabelă mare (',
   ' rijen, ': ' rânduri, ',
   ' kolommen): celtekst staat op het minimumformaat.':

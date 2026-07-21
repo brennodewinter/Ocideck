@@ -1394,8 +1394,8 @@ const _dutchSourceFi = {
   ' van de ontwerpgrootte.': ' suunnittelukoosta.',
   'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
       'Paljon tekstiä tällä dialla: fonttikokoa pienennetään voimakkaasti (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
-      'suunnittelukoosta). Harkitse sisällön jakamista.',
+  ' van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      ' suunnittelukoosta). Harkitse sisällön jakamista.',
   'Grote tabel (': 'Suuri taulukko (',
   ' rijen, ': ' riviä, ',
   ' kolommen): celtekst staat op het minimumformaat.':

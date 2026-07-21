@@ -1395,8 +1395,8 @@ const _dutchSourceHu = {
   ' van de ontwerpgrootte.': ' a tervezési méretnek.',
   'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
       'Sok szöveg ezen a dián: a betűméret erősen csökken (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
-      'a tervezési méretnek). Fontolja meg a tartalom szétosztását.',
+  ' van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      ' a tervezési méretnek). Fontolja meg a tartalom szétosztását.',
   'Grote tabel (': 'Nagy táblázat (',
   ' rijen, ': ' sor, ',
   ' kolommen): celtekst staat op het minimumformaat.':

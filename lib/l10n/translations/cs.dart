@@ -1394,8 +1394,8 @@ const _dutchSourceCs = {
   ' van de ontwerpgrootte.': ' návrhové velikosti.',
   'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
       'Hodně textu na tomto snímku: velikost písma je silně zmenšena (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
-      'návrhové velikosti). Zvažte rozdělení obsahu.',
+  ' van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      ' návrhové velikosti). Zvažte rozdělení obsahu.',
   'Grote tabel (': 'Velká tabulka (',
   ' rijen, ': ' řádků, ',
   ' kolommen): celtekst staat op het minimumformaat.':

@@ -2430,8 +2430,8 @@ const _dutchSourceAddPap = {
   ' van de ontwerpgrootte.': ' di e tamaño di diseño.',
   'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
       'Hopi teksto riba e slide aki: tamaño di letra ta baha hopi (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
-      'di e tamaño di diseño). Konsiderá di dividí e kontenido.',
+  ' van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      ' di e tamaño di diseño). Konsiderá di dividí e kontenido.',
   'Grote tabel (': 'Tabel grandi (',
   ' rijen, ': ' fila, ',
   ' kolommen): celtekst staat op het minimumformaat.':

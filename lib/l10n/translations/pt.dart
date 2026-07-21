@@ -1415,8 +1415,8 @@ const _dutchSourcePt = {
   ' van de ontwerpgrootte.': ' do tamanho de design.',
   'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
       'Muito texto neste diapositivo: o tamanho da letra é fortemente reduzido (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
-      'do tamanho de design). Considere dividir o conteúdo.',
+  ' van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      ' do tamanho de design). Considere dividir o conteúdo.',
   'Grote tabel (': 'Tabela grande (',
   ' rijen, ': ' linhas, ',
   ' kolommen): celtekst staat op het minimumformaat.':

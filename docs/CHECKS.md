@@ -23,8 +23,8 @@ make check-full   # check + licenses + sbom-verify + deps-check + check-web + de
 
 ## Localisation helpers
 
-Every translatable string must exist in all 31 languages, so adding one used to
-mean editing 30 files by hand. Two helpers remove that toil:
+Every translatable string must exist in all 32 languages, so adding one used to
+mean editing 31 files by hand. Two helpers remove that toil:
 
 ```sh
 make add-l10n SPEC=strings.json  # insert d('…') strings into every language
@@ -94,7 +94,7 @@ dependency or web-facing change.
 The workflow additionally declares `flutter pub get --enforce-lockfile`
 (reproducible dependencies) and a **Markdown link check** (`lychee --offline`).
 
-Enforced inside `make test`: **localization in all 31 languages**, the
+Enforced inside `make test`: **localization in all 32 languages**, the
 **path/SSRF guards**, the **HTML-export sanitisation** invariants (strict
 export CSP + injected-`</script>` neutralisation; see
 [below](#enforced-behaviours-worth-calling-out)), and **documentation

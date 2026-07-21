@@ -1397,8 +1397,8 @@ const _dutchSourceLt = {
   ' van de ontwerpgrootte.': ' projektinio dydžio.',
   'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
       'Daug teksto šioje skaidrėje: šrifto dydis stipriai sumažinamas (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
-      'projektinio dydžio). Apsvarstykite turinio padalijimą.',
+  ' van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      ' projektinio dydžio). Apsvarstykite turinio padalijimą.',
   'Grote tabel (': 'Didelė lentelė (',
   ' rijen, ': ' eilutės, ',
   ' kolommen): celtekst staat op het minimumformaat.':

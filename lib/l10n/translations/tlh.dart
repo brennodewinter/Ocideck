@@ -1369,8 +1369,8 @@ const _dutchSourceTlh = {
   ' van de ontwerpgrootte.': ' chen mI\'vo\'.',
   'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
       '\'echletHomvamDaq mu\'ghom law\': mu\' mI\' puSqu\'lu\' (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
-      'chen mI\'vo\'). inhoud DaSang \'e\' yIqel.',
+  ' van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      ' chen mI\'vo\'). inhoud DaSang \'e\' yIqel.',
   'Grote tabel (': 'raS tIn (',
   ' rijen, ': ' retmey, ',
   ' kolommen): celtekst staat op het minimumformaat.':

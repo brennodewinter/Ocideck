@@ -2420,8 +2420,8 @@ const _dutchSourceAddFy = {
   ' van de ontwerpgrootte.': ' fan de ûntwerpgrootte.',
   'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
       'In protte tekst op dizze dia: lettergrutte wurdt sterk ferlytse (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
-      'fan de ûntwerpgrootte). Split de ynhâld op.',
+  ' van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      ' fan de ûntwerpgrootte). Split de ynhâld op.',
   'Grote tabel (': 'Grutte tabel (',
   ' rijen, ': ' rigen, ',
   ' kolommen): celtekst staat op het minimumformaat.':

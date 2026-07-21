@@ -1407,8 +1407,8 @@ const _dutchSourceMt = {
   ' van de ontwerpgrootte.': ' mid-daqs tad-disinn.',
   'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
       'Ħafna test fuq din l-islajd: id-daqs tal-font qed jitnaqqas ħafna (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
-      'mid-daqs tad-disinn). Ikkunsidra li taqsam il-kontenut.',
+  ' van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      ' mid-daqs tad-disinn). Ikkunsidra li taqsam il-kontenut.',
   'Grote tabel (': 'Tabella kbira (',
   ' rijen, ': ' ringieli, ',
   ' kolommen): celtekst staat op het minimumformaat.':

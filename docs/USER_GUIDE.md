@@ -2429,6 +2429,6 @@ find it.
   style profile, these colours are app settings and are not stored in the `.md`
   file.
 - The interface is available in 32 languages — among them Dutch, English,
-  German, French, Spanish, Italian, Portuguese, Polish, Ukrainian, Greek, the
-  Nordic and Baltic languages, Frisian and Papiamento. *Settings → General →
-  Language* has the full list.
+  German, French, Spanish, Italian, Portuguese, Polish, Ukrainian, Turkish,
+  Greek, the Nordic and Baltic languages, Frisian and Papiamento. *Settings →
+  General → Language* has the full list.

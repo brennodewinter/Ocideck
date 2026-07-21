@@ -1400,8 +1400,8 @@ const _dutchSourceLa = {
   ' van de ontwerpgrootte.': ' magnitudinis designationis.',
   'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
       'Multus textus in hac tabella: magnitudo litterarum valde minuitur (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
-      'magnitudinis designationis). Considera contentum dividere.',
+  ' van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      ' magnitudinis designationis). Considera contentum dividere.',
   'Grote tabel (': 'Tabula magna (',
   ' rijen, ': ' ordines, ',
   ' kolommen): celtekst staat op het minimumformaat.':

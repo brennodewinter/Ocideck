@@ -10,6 +10,16 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Added
+- **De interface spreekt nu ook Turks.** OciDeck draaide in 31 talen — alle
+  EU-talen plus een paar daarbuiten — maar Turks ontbrak, terwijl het een van de
+  grootste talen van Europa is en de taal van een kandidaat-lidstaat. `tr` is nu
+  een volwaardige taal en geen half werk: alle 76 sleutelstrings, alle 2.074
+  bronstrings en de drie meegeleverde bevindingsjablonen zijn vertaald, en
+  Flutter zelf schakelt mee naar zijn Turkse Material-vertaling. *Instellingen →
+  Algemeen → Taal* toont Türkçe met de Turkse vlag; de sorteersleutel van de
+  talenlijst kent nu ook de ı en de ğ, zodat namen met die letters landen waar
+  een lezer ze zoekt. Het vertaalwerk bracht en passant een spatiefout in de
+  Nederlandse bron aan het licht (zie *Fixed*).
 - **Een achtergrondafbeelding op de tussentitel, net als op de titeldia.** Een
   tussentitel kon alleen een effen kleur dragen terwijl de titeldia allang een
   schermvullend beeld kon hebben — een gat, geen keuze. De tussentitel krijgt nu
@@ -103,6 +113,14 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 
 
 ### Fixed
+- **Het percentage plakt niet meer tegen het volgende woord.** De strengste
+  melding over te veel tekst op een slide las "het lettertype wordt sterk
+  verkleind (55%van de ontwerpgrootte)" — de zin wordt uit drie stukken geplakt
+  en op die naad ontbrak een spatie. De variant erboven deed het al goed. Omdat
+  het Nederlandse fragment tegelijk de opzoeksleutel is, was de fout door alle
+  talen heen gekopieerd; hij is nu in alle tweeëndertig hersteld. Een test loopt
+  voortaan elke melding in elke taal langs en struikelt over een percentage dat
+  tegen een letter aan komt te staan.
 - **Een macOS-build die weer leesbaar is: tienduizend linkerwaarschuwingen weg.**
   Elke `flutter build macos` eindigde in een muur van ruim 10.000 regels
   `ld: warning: no platform load command found in '…libopencv.a[x86_64][…]'`,

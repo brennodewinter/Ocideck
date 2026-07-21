@@ -2445,8 +2445,8 @@ const _dutchSourceAddDe = {
   ' van de ontwerpgrootte.': ' der Entwurfsgröße.',
   'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
       'Viel Text auf dieser Folie: Schriftgröße wird stark verkleinert (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
-      'der Entwurfsgröße). Inhalt aufteilen erwägen.',
+  ' van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      ' der Entwurfsgröße). Inhalt aufteilen erwägen.',
   'Grote tabel (': 'Große Tabelle (',
   ' rijen, ': ' Zeilen, ',
   ' kolommen): celtekst staat op het minimumformaat.':

@@ -1394,8 +1394,8 @@ const _dutchSourceGsw = {
   ' van de ontwerpgrootte.': ' vo de Designgrössi.',
   'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
       'Vill Täxt uf dere Folie: d Schriftgrössi wird schtark verchleineret (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
-      'vo de Designgrössi). Überleg dir, de Inhalt z splitte.',
+  ' van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      ' vo de Designgrössi). Überleg dir, de Inhalt z splitte.',
   'Grote tabel (': 'Grossi Tabälle (',
   ' rijen, ': ' Zile, ',
   ' kolommen): celtekst staat op het minimumformaat.':

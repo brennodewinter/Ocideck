@@ -1406,8 +1406,8 @@ const _dutchSourceUk = {
   ' van de ontwerpgrootte.': ' від проєктного розміру.',
   'Veel tekst op deze slide: het lettertype wordt sterk verkleind (':
       'Багато тексту на цьому слайді: розмір шрифту сильно зменшено (',
-  'van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
-      'від проєктного розміру). Розгляньте можливість розділити вміст.',
+  ' van de ontwerpgrootte). Overweeg de inhoud te splitsen.':
+      ' від проєктного розміру). Розгляньте можливість розділити вміст.',
   'Grote tabel (': 'Велика таблиця (',
   ' rijen, ': ' рядків, ',
   ' kolommen): celtekst staat op het minimumformaat.':

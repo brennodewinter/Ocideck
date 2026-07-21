@@ -29,7 +29,7 @@ void main() {
       equals(anchors.toSet()),
       reason:
           'FindingSpec.sectionSources must cover exactly the section anchors. '
-          'A new section needs its Dutch source here (and 30 translations), or '
+          'A new section needs its Dutch source here (and 31 translations), or '
           'it renders English regardless of the report language.',
     );
   });
