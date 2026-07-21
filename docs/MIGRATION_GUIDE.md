@@ -2,10 +2,13 @@
 
 ## There is nothing to migrate between yet
 
-OciDeck has **never tagged a release**. `git tag` is empty, `pubspec.yaml` says
-`0.2.0+1`, and there is no versioning or release scheme. There are no numbered
-versions, so there are no migration paths between them, no release notes, and no
-conversion tooling.
+OciDeck has **never tagged a release**. The repository carries no release tag
+(the single tag that exists, `archive/git-mirror`, marks an archived branch),
+`pubspec.yaml` says `0.2.0+1`, and there is no versioning or release scheme.
+There are no numbered versions, so there are no migration paths between them, no
+release notes, and no conversion tooling. [SECURITY.md](../SECURITY.md) says the
+same under *Supported versions*; if the two ever disagree, that one is about
+which versions get fixes and this one is about file compatibility.
 
 Until that changes, this document records only what is true today: what the app
 migrates on its own, and the rules that migration follows.
