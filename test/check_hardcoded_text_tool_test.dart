@@ -162,8 +162,15 @@ const tests = [MastgTest(title: 'Testing Data Storage')];
     expect(isVisibleText('•'), isFalse);
     expect(isVisibleText('—'), isFalse);
     expect(isVisibleText('12'), isFalse);
+    // × en ÷ vallen binnen het Latin-1-lettersblok van de regex maar zijn
+    // rekentekens. Een scheidingsteken tussen twee vertaalde stukken is geen
+    // tekst om te vertalen.
+    expect(isVisibleText('  ·   × '), isFalse);
+    expect(isVisibleText(' ÷ '), isFalse);
     expect(isVisibleText('Opslaan'), isTrue);
     expect(isVisibleText(' min'), isTrue);
+    // Maar een × tússen woorden mag de tekst niet onzichtbaar maken.
+    expect(isVisibleText('2 × per dag'), isTrue);
   });
 
   test('areaOf deelt in naar de gebieden waarin de opruiming gaat', () {

@@ -144,7 +144,7 @@ import 'package:analyzer/source/line_info.dart';
 /// is de dichte deur; de opruiming loopt erachter door.
 ///
 /// **Dit moet 0 zijn vóór release 0.1.0.**
-const int hardcodedTextBaseline = 34;
+const int hardcodedTextBaseline = 33;
 
 /// Bestanden die deck-INHOUD dragen in plaats van interfacetekst: de sjablonen
 /// die een nieuwe presentatie met voorbeeldslides vullen. Die tekst is vanaf
@@ -302,7 +302,17 @@ class _MapChannel {
 /// Minstens één letter — anders valt er niets te vertalen (`'•'`, `'—'`, `'%'`,
 /// `''`, `'12'`). Latijn plus de diakrieten die het Nederlands en de andere
 /// brontalen gebruiken.
+///
+/// Het blok À-ɏ is niet louter letters: er staan twee rekenkundige tekens in,
+/// `×` (U+00D7) en `÷` (U+00F7). Die uitgezonderd, want anders telt een
+/// scheidingsteken als tekst. Concreet gebeurde dat bij
+/// `'$title  ·  ${paths.length} × ${l10n.d('Identieke kopieën')}'`: elk woord
+/// erin loopt al door `d()`, alleen de scheidingstekens zijn letterlijk, en
+/// toch stond die regel als overtreding in de lijst. Er viel niets te
+/// vertalen, dus er viel niets op te lossen — een melding die alleen maar kan
+/// worden weggekeken, en dat is precies wat een poort onbetrouwbaar maakt.
 final _hasLetter = RegExp(r'[A-Za-zÀ-ɏͰ-ϿЀ-ӿ]');
+final _notALetter = RegExp('[×÷]');
 
 /// Of [text] iets is dat een gebruiker als taal leest.
 ///
@@ -312,7 +322,7 @@ final _hasLetter = RegExp(r'[A-Za-zÀ-ɏͰ-ϿЀ-ӿ]');
 /// en `'esc'` weg, en dat zijn wél teksten die iemand leest. Liever een handvol
 /// sleutels te veel in de lijst dan één zichtbare string die stil wegvalt.
 bool isVisibleText(String text) {
-  final trimmed = text.trim();
+  final trimmed = text.trim().replaceAll(_notALetter, '');
   return trimmed.length >= 2 && _hasLetter.hasMatch(trimmed);
 }
 
