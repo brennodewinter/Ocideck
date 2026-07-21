@@ -151,6 +151,22 @@ does not currently run — see the [CI](#ci) note). Artifacts land under
 - **`video_player_avfoundation` is pinned** (see `dependency_overrides`) because a
   newer release ships a Swift module whose private Objective-C dependency isn't
   packaged correctly by CocoaPods on recent Xcode.
+- **The `DartCvMacOS` link is silenced on purpose.** That pod (pulled in by
+  `opencv_core`) vendors OpenCV as a quarter-gigabyte prebuilt universal
+  `libopencv.a`. Most of its x86_64 half is Intel IPP object code assembled
+  without a platform load command, and the pod adds a second `-lc++` on top of
+  the one the toolchain already links, so linking that single target used to
+  emit over ten thousand lines of `ld: warning: no platform load command found
+  in '…libopencv.a[x86_64][…]', assuming: macOS` plus `ld: warning: ignoring
+  duplicate libraries: '-lc++'`. None of it is our code and none of it is
+  fixable from here, so the `post_install` hook in `macos/Podfile` gives *only*
+  the `DartCvMacOS` target `OTHER_LDFLAGS = -Wl,-w` (silences that target's
+  linker) plus `GCC_WARN_INHIBIT_ALL_WARNINGS`, which also drops the
+  `-Wshorten-64-to-32` warnings from the pod's own `dartcv/core/mat.cpp` — the
+  same treatment `video_player_avfoundation` already gets. Every other target,
+  `Runner` first among them, still reports its warnings in full. If you ever need
+  to inspect that pod's own build, drop the settings temporarily rather than
+  widening them to the project.
 - **CocoaPods + Ruby locale**: on some setups `pod install` (run by
   `flutter build macos`) fails with `Encoding::CompatibilityError` /
   "Unicode Normalization not appropriate for ASCII-8BIT". This is a Ruby/CocoaPods
