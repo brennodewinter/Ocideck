@@ -170,6 +170,59 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   De markdown-controle in de app zei bij zo'n sleutel "wordt genegeerd". Dat
   klopte niet meer en is nu: hij doet niets in OciDeck, maar hij blijft
   behouden.
+- **Grafiekcijfers die bij het opslaan niet weggeschreven konden worden, worden
+  gemeld.** Opslaan haalt de cijfers van een grafiek uit de markdown en zet ze in
+  een bestand in `data/`; de presentatie houdt alleen de verwijzing over. Lukte
+  dat schrijven niet — het `source`-pad wees buiten de projectmap, de schijf was
+  vol, de rechten ontbraken — dan stond er een geslaagde opslag op het scherm
+  terwijl die cijfers alleen nog in dit venster bestonden. De opslag geeft de
+  klacht nu door en u krijgt een foutmelding met de betrokken bestanden erbij, in
+  dezelfde vorm als de melding die u bij het *openen* al kreeg.
+
+  Daarnaast wordt een databestand dat u ondertussen buiten de app hebt gewijzigd
+  niet meer overschreven. Veranderden beide kanten, dan won tot nu toe de app en
+  verdween de wijziging van degene die het bestand bijwerkte, met niets meer dan
+  een regel in het logboek. Nu blijft het bestand op schijf staan zoals het is
+  geworden en hoort u van de botsing; wat in de editor staat is niet weg, het
+  staat alleen nog niet op schijf.
+- **Een dia die door zijn classificatie wordt achtergehouden, verdwijnt niet
+  langer zwijgend.** Een dia met een strengere TLP-classificatie dan de
+  presentatie haalt het publiek niet — dat is de bedoeling — maar er was in de
+  editor niets van te zien. Beide niveaus staan standaard op *geen*, dus één dia
+  op AMBER valt weg uit een deck waarvan het deckniveau nooit is gezet.
+
+  In de diastrook draagt zo'n dia nu een eigen vlaggetje **Achtergehouden** en is
+  hij gedimd zoals een overgeslagen dia, met een eigen kleur en een tooltip die
+  het niveau noemt; boven de lijst staat hoeveel dia's het betreft. Blijft er
+  niets over om te tonen of te exporteren, dan noemt de melding de echte oorzaak.
+  Daar stond "Alle slides zijn overgeslagen", en dat wees naar *Alles tonen* —
+  een knop die aan een classificatie niets verandert.
+- **Opslaan naar git zegt vóór de commit wat er niet meereist.** In de commit
+  gaan `deck.md`, de gedeelde afbeeldingenpool en de grafiekdata. Video, audio,
+  de tekeningen op uw dia's en de gebruikersnotities gaan niet mee; naar een
+  bestand of een `.ocideck`-pakket gaan ze wél, dus wie van schijf naar git
+  verhuisde raakte ze kwijt zonder dat er iets misging. Het enige wat erover werd
+  gezegd was een regel ná de commit, en die ging alleen over video en audio.
+
+  Nu telt een venster vóór de commit per soort wat achterblijft, en u kiest of
+  het door mag gaan. Achteraf melden is geen melding meer: dan denkt u al dat uw
+  werk in de repository staat. Wat er wél en niet meegaat is verder ongewijzigd —
+  alleen de waarschuwing is nieuw.
+- **De browser waarschuwt voordat u een tabblad met onopgeslagen werk sluit.** In
+  de webversie bestaat geen crashherstel: er is geen map om een herstelkopie in
+  te schrijven, dus er wordt niets bewaard. Op desktop werkt dat wél, en niets
+  vertelde u dat het hier anders is. Zodra u iets wijzigt zegt de app dat nu één
+  keer, en zolang er niet-opgeslagen werk openstaat vraagt de browser om
+  bevestiging voordat het tabblad weggaat. De tekst van die vraag is van de
+  browser zelf en niet te kiezen. Op desktop verandert er niets: daar houdt het
+  venster het sluiten al tegen en stelt de app dezelfde vraag zelf.
+- **De herstelkopie neemt de tekeningen mee.** Tekenen op een dia maakt de
+  presentatie gewijzigd, dus een deck waarin u alleen getekend had werd wel
+  automatisch bewaard — maar de tekenlaag zit in een eigen bestand naast de
+  markdown en ging niet mee in de kopie. Na een crash kwam het deck terug zonder
+  de tekeningen, zonder dat iets dat zei. De autosave schrijft de tekenlaag nu
+  mee en het herstel zet haar terug. Een tekenlaag die niet te lezen is houdt het
+  herstel van de tekst niet tegen, net zoals bij een beschadigd bestand op schijf.
 - **De tijdlijn kapt haar tekst niet langer af.** Een tijdlijn met zes normale
   gebeurtenissen liet van élke titel en élke beschrijving een deel wegvallen
   achter een `…`. De oorzaak was een schatting: het aantal regels werd afgeleid

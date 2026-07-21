@@ -1861,6 +1861,33 @@ const _dutchSourceAddBg = <String, String>{
       'изброява какво е пропуснато, без самите стойности. Този файл може да придружи доклада.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'съдържа ключовете, с които всяка заличена стойност може да бъде възстановена. Не изпращайте този файл: така заличаването се обезсилва. Съхранявайте го при източника.',
+  'slides': 'слайда',
+  'Achtergehouden': 'Задържан',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Задържан: класифициран по-строго от презентацията',
+  '1 slide achtergehouden door haar TLP': '1 слайд задържан заради своя TLP',
+  'slides achtergehouden door hun TLP': 'слайда задържани заради своя TLP',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'Тези слайдове не се включват при представяне, експортиране или в пакета. Повишете нивото TLP на презентацията в Информация за презентацията, за да ги включите.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Всички слайдове са задържани заради своята TLP класификация — няма какво да се покаже.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Всички слайдове са задържани заради своята TLP класификация — няма какво да се експортира.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Всички слайдове са пропуснати или задържани заради своята TLP класификация — няма какво да се покаже.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Всички слайдове са пропуснати или задържани заради своята TLP класификация — няма какво да се експортира.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'Числата на диаграмите не бяха запазени — те съществуват само в този прозорец:',
+  'Niet alles gaat mee naar git': 'Не всичко отива в git',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'Тези части не попадат в commit-а и после няма да ги има в хранилището:',
+  'Tekeningen op slides': 'Рисунки върху слайдове',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'Те остават в този прозорец. Запазете презентацията и като файл или като пакет .ocideck, за да ги съхраните.',
+  'Toch opslaan': 'Все пак запази',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'В браузъра няма възстановяване след срив: затворите ли този раздел, незапазената работа изчезва. Запазете презентацията си сами.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Локалната база данни CVE (изтеглянето стартирате вие): OciDeck взема масовите данни през api.github.com и файла на изданието, към който сочи този адрес.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

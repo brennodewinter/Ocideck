@@ -15,6 +15,10 @@ import '../tool/check_hardcoded_text.dart' show sourceKeysIn;
 const unchangedInEnglish = {
   'OciDeck',
   'Stichting LibreKAT',
+  // 'slides' is in het Engels hetzelfde woord als in het Nederlands. Het staat
+  // hier omdat het óók een `t()`-sleutel is: `add_l10n` keek bestandsbreed en
+  // sloeg de `d()`-variant daardoor in alle 31 talen over.
+  'slides',
   'GitHub',
   'GitLab',
   'TLP',

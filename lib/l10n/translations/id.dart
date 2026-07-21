@@ -1837,6 +1837,33 @@ const _dutchSourceAddId = <String, String>{
       'mencantumkan apa saja yang dihilangkan, tanpa nilainya sendiri. Berkas ini boleh disertakan bersama laporan.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'berisi kunci yang membuat setiap nilai yang diredaksi dapat dihitung kembali. Jangan sertakan berkas ini: redaksi menjadi batal. Simpan berkas ini bersama sumbernya.',
+  'slides': 'slide',
+  'Achtergehouden': 'Ditahan',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Ditahan: diklasifikasikan lebih ketat daripada presentasi',
+  '1 slide achtergehouden door haar TLP': '1 slide ditahan oleh TLP-nya',
+  'slides achtergehouden door hun TLP': 'slide ditahan oleh TLP-nya',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'Slide ini tidak ikut saat presentasi, ekspor, atau dalam paket. Naikkan tingkat TLP presentasi di Info presentasi agar ikut disertakan.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Semua slide ditahan oleh klasifikasi TLP-nya, jadi tidak ada yang ditampilkan.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Semua slide ditahan oleh klasifikasi TLP-nya, jadi tidak ada yang diekspor.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Semua slide dilewati atau ditahan oleh klasifikasi TLP-nya, jadi tidak ada yang ditampilkan.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Semua slide dilewati atau ditahan oleh klasifikasi TLP-nya, jadi tidak ada yang diekspor.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'Angka bagan tidak tersimpan — sekarang hanya ada di jendela ini:',
+  'Niet alles gaat mee naar git': 'Tidak semuanya ikut ke git',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'Bagian-bagian ini tidak masuk ke dalam commit dan nanti tidak ada di repositori:',
+  'Tekeningen op slides': 'Coretan pada slide',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'Semuanya tetap ada di jendela ini. Simpan juga presentasi sebagai berkas atau sebagai paket .ocideck agar tersimpan.',
+  'Toch opslaan': 'Tetap simpan',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'Di peramban tidak ada pemulihan setelah crash: jika kamu menutup tab ini, pekerjaan yang belum tersimpan akan hilang. Simpan sendiri presentasimu.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Basis data CVE lokal (Anda sendiri yang memulai unduhan): OciDeck mengambil data massal melalui api.github.com dan berkas rilis yang ditunjuk alamat itu.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

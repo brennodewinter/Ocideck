@@ -1811,6 +1811,33 @@ const _dutchSourceAddTlh = <String, String>{
       'So\'lu\'bogh Dochmey tetlh ghaj, \'ach De\' ngaSbe\'. ghItlh tlhej ngeHlu\'laH teywI\'vam.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'So\'lu\'bogh Hoch De\' ngaQHa\'moHmeH ngaQHa\'moHwI\'mey ngaS. teywI\'vam yIngeHQo\': vaj So\'ta\'ghach chIlHa\'lu\'. mung retlhDaq yIpol.',
+  'slides': '\'anghommey',
+  'Achtergehouden': '\'angbe\'lu\'',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      '\'angbe\'lu\': \'echletHom patlh jen law\' cha\'nob patlh jen puS',
+  '1 slide achtergehouden door haar TLP': '1 slide \'angbe\'lu\' TLPmo\'',
+  'slides achtergehouden door hun TLP': 'slidemey \'angbe\'lu\' TLPmo\'',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'presentDI\', boSDI\' je ngaSwI\'Daq slidemeyvam tlhapbe\'lu\'. chaH tlhapmeH Presentatie-info-Daq cha\'nob TLP patlh yIghurmoH.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Hoch slidemey \'angbe\'lu\' TLP tlheghmo\' — \'oH cha\'meH pagh tu\'lu\'be\'.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Hoch slidemey \'angbe\'lu\' TLP tlheghmo\' — \'oH weHmeH pagh tu\'lu\'be\'.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Hoch slidemey juSlu\' pagh \'angbe\'lu\' TLP tlheghmo\' — \'oH cha\'meH pagh tu\'lu\'be\'.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Hoch slidemey juSlu\' pagh \'angbe\'lu\' TLP tlheghmo\' — \'oH weHmeH pagh tu\'lu\'be\'.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'ta\'nom mI\'mey polbe\'lu\' — Qorwaghvam neH tu\'lu\':',
+  'Niet alles gaat mee naar git': 'git-Daq Hoch ghoSbe\'',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'commit-Daq \'ay\'meyvam ghoSbe\' \'ej repository-Daq tu\'lu\'be\':',
+  'Tekeningen op slides': '\'anghommeyDaq ghItlhmey',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'QorwaghvamDaq ratlhtaH. chaH polmeH De\'Daq ghap .ocideck ngaSwI\'Daq cha\'nob yIpol.',
+  'Toch opslaan': 'pol \'e\' yIruch',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'browserDaq Qagh vangHa\'ghach tu\'lu\'be\': \'echletvam DaSoQmoHchugh, polbe\'lu\'bogh Qu\' natlh. cha\'nob yIpol.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  CVE qawHaq Sumbogh (SoH DaHoSmoH download): api.github.com lo\'taHvIS De\' law\' Sam OciDeck \'ej Daqvetlh \'angbogh release De\'wI\' nav Sam.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

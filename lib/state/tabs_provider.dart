@@ -46,6 +46,7 @@ import 'editor_provider.dart';
 import 'settings_provider.dart';
 import 'slide_clipboard_provider.dart';
 
+part 'tabs_provider_import_types.dart';
 part 'tabs_provider_tab_info.dart';
 part 'tabs_provider_package.dart';
 part 'tabs_provider_s3.dart';
@@ -54,36 +55,6 @@ part 'tabs_provider_git_native.dart';
 part 'tabs_provider_git_review.dart';
 
 const _uuid = Uuid();
-
-/// How a single open/import attempt ended. Used by the import flows to decide
-/// whether to clean up downloaded/extracted files and what to report.
-enum OpenResult {
-  /// The deck was opened in a tab.
-  opened,
-
-  /// The file could not be read or parsed (missing, over-size, corrupt).
-  unreadable,
-
-  /// The file is not a Marp/OciDeck presentation — readable, but not a deck.
-  /// Kept distinct from [unreadable] so the UI can say so specifically.
-  notAPresentation,
-
-  /// The file was refused because it contains executable content; the security
-  /// alarm has been raised via [importSecurityAlarmProvider].
-  blocked,
-
-  /// The package is encrypted and the user cancelled the password prompt (or no
-  /// resolver was available). Handled silently — no error is surfaced.
-  passwordCancelled,
-}
-
-/// A blocked import surfaced to the UI: the offending file plus what was found.
-/// The shell listens on [importSecurityAlarmProvider] and shows the alarm.
-class ImportSecurityAlarm {
-  final String path;
-  final List<MarkdownSafetyFinding> findings;
-  const ImportSecurityAlarm({required this.path, required this.findings});
-}
 
 // ── Tabs notifier ─────────────────────────────────────────────────────────────
 
@@ -203,6 +174,15 @@ class TabsNotifier extends StateNotifier<TabsState> {
     // nergens meer — in geen enkel tabblad, ongedaan-stapel of klembord —
     // gebruikt worden. Op desktop is de store leeg, dus dit is er een no-op.
     deckNotifier.onSweepWebAssets = sweepWebAssets;
+    // Een opslag die de grafiekcijfers niet kwijt kon, mag niet als geslaagd
+    // voorbijgaan: dezelfde melding als bij het openen, met een eigen tekst.
+    deckNotifier.onChartDataWarnings = (sources) {
+      if (!mounted) return;
+      _ref.read(chartDataWarningProvider.notifier).state = ChartDataWarning(
+        sources,
+        whileSaving: true,
+      );
+    };
     final tab = TabInfo(
       id: id,
       recoveryId: key,
@@ -244,6 +224,10 @@ class TabsNotifier extends StateNotifier<TabsState> {
               deck.miauwWaivers,
               deck.miauwConfirmations,
             ),
+            // Tekeningen staan niet in de markdown (eigen sidecar), en tekenen
+            // maakt het deck wél vuil. Zonder deze regel kwam een herstelde
+            // presentatie stil zonder annotaties terug.
+            annotations: AnnotationCodec.encode(deck.slides, deck.annotations),
           ),
         );
         _lastAutosavedDeck[tab.id] = deck;
@@ -259,8 +243,8 @@ class TabsNotifier extends StateNotifier<TabsState> {
     final restored = <TabInfo>[];
     var unreadable = 0;
     for (final snap in snapshots) {
-      var deck = _md.parseDeck(snap.markdown, filePath: snap.filePath);
-      if (deck == null) {
+      final parsed = _md.parseDeck(snap.markdown, filePath: snap.filePath);
+      if (parsed == null) {
         // Niet weggooien. `parseDeck` vangt zijn eigen fouten af juist omdát hij
         // in de praktijk struikelt, en een crash ín de parser is een van de
         // waarschijnlijkere redenen dat deze momentopname er überhaupt ligt.
@@ -270,6 +254,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
         logWarning('restoreRecovered: momentopname onleesbaar', snap.filePath);
         continue;
       }
+      var deck = parsed;
       if (snap.userNotes != null && snap.userNotes!.isNotEmpty) {
         final notes = UserNotesCodec.decode(snap.userNotes!, deck.slides);
         if (notes.isNotEmpty) {
@@ -283,6 +268,17 @@ class TabsNotifier extends StateNotifier<TabsState> {
             miauwWaivers: d.waivers,
             miauwConfirmations: d.confirmations,
           );
+        }
+      }
+      final ink = snap.annotations;
+      if (ink != null && ink.isNotEmpty) {
+        try {
+          final strokes = AnnotationCodec.decode(ink, deck.slides);
+          if (strokes.isNotEmpty) deck = deck.copyWith(annotations: strokes);
+        } catch (e) {
+          // Een kapotte tekenlaag mag het herstel van de tekst nooit blokkeren;
+          // hetzelfde als bij een onleesbare sidecar op schijf.
+          logWarning('restoreRecovered: annotaties onleesbaar', e);
         }
       }
       // Hergebruik de sleutel van de momentopname. Het bestand dat er al ligt ís
@@ -952,20 +948,28 @@ final securityModulePromptProvider = StateProvider<SecurityModulePrompt?>(
   (ref) => null,
 );
 
-/// Grafieken waarvan het gekoppelde databestand niet gelezen kon worden bij het
-/// openen: ontbrekend, onleesbaar, of buiten de projectmap.
+/// Grafieken waarvan het gekoppelde databestand niet gelezen of niet geschreven
+/// kon worden: ontbrekend, onleesbaar, buiten de projectmap, of intussen buiten
+/// de app gewijzigd.
 ///
-/// Zo'n grafiek tekent leeg, en dat ziet er precies uit als een grafiek zonder
-/// cijfers — het probleem is dus onzichtbaar tenzij we het zeggen. Zelfde
+/// Bij het openen tekent zo'n grafiek leeg, en dat ziet er precies uit als een
+/// grafiek zonder cijfers. Bij het opslaan is het erger: de markdown draagt dan
+/// alleen nog de verwijzing, dus de cijfers staan enkel nog in dit venster. In
+/// beide gevallen is het probleem onzichtbaar tenzij we het zeggen. Zelfde
 /// eenmalige signaalvorm als [securityModulePromptProvider]: de state-laag zet
-/// hem bij het openen, de shell toont hem en wist hem.
+/// hem, de shell toont hem en wist hem.
 class ChartDataWarning {
-  /// De `source`-paden die niet gelezen konden worden.
+  /// De `source`-paden die het niet haalden.
   final List<String> sources;
+
+  /// Of dit een opslag betrof. De twee gevallen vragen een andere tekst — bij
+  /// lezen blijft de grafiek leeg, bij schrijven zijn de cijfers nergens
+  /// vastgelegd — en dat verschil bepaalt wat de gebruiker moet doen.
+  final bool whileSaving;
 
   /// Niet-const, net als [SecurityModulePrompt]: twee identieke const-instanties
   /// zouden bij een tweede open als "geen wijziging" worden weggeslikt.
-  ChartDataWarning(this.sources);
+  ChartDataWarning(this.sources, {this.whileSaving = false});
 }
 
 final chartDataWarningProvider = StateProvider<ChartDataWarning?>(

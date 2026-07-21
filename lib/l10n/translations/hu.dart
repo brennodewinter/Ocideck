@@ -1842,6 +1842,33 @@ const _dutchSourceAddHu = <String, String>{
       'felsorolja, mi maradt ki, maguk az értékek nélkül. Ez a fájl mehet a jelentéssel együtt.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'tartalmazza a kulcsokat, amelyekkel minden kitakart érték visszaszámítható. Ezt a fájlt ne küldje el: ezzel a kitakarás érvényét veszti. Tartsa a forrás mellett.',
+  'slides': 'dia',
+  'Achtergehouden': 'Visszatartva',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Visszatartva: szigorúbb besorolású, mint a prezentáció',
+  '1 slide achtergehouden door haar TLP': '1 dia visszatartva a TLP-je miatt',
+  'slides achtergehouden door hun TLP': 'dia visszatartva a TLP-jük miatt',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'Ezek a diák nem kerülnek bele a bemutatóba, az exportba, sem a csomagba. Emeld meg a prezentáció TLP-szintjét a Prezentáció adatainál, hogy bekerüljenek.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Minden dia vissza van tartva a TLP-besorolása miatt – nincs mit megjeleníteni.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Minden dia vissza van tartva a TLP-besorolása miatt – nincs mit exportálni.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Minden dia ki van hagyva vagy vissza van tartva a TLP-besorolása miatt – nincs mit megjeleníteni.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Minden dia ki van hagyva vagy vissza van tartva a TLP-besorolása miatt – nincs mit exportálni.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'A diagramok számai nem lettek elmentve — már csak ebben az ablakban léteznek:',
+  'Niet alles gaat mee naar git': 'Nem minden kerül a gitbe',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'Ezek a részek nem kerülnek bele a commitba, és később nem lesznek a tárolóban:',
+  'Tekeningen op slides': 'Rajzok a diákon',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'Ebben az ablakban maradnak. Mentsd a prezentációt fájlként vagy .ocideck csomagként is, hogy megőrizd őket.',
+  'Toch opslaan': 'Mentés mindenképp',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'A böngészőben nincs összeomlás utáni helyreállítás: ha bezárod ezt a lapot, a nem mentett munka elvész. Mentsd el magad a prezentációdat.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  A helyi CVE-adatbázis (a letöltést Ön indítja): az OciDeck a tömeges adatokat az api.github.com címen és az arra mutató kiadási fájlon keresztül tölti le.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

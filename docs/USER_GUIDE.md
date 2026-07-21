@@ -32,7 +32,13 @@ Files stay standard Marp Markdown, so a deck remains usable in other Marp tools.
   `.md` (`images/`, `data/`, `logos/`, `themes/`) and copies assets in. See
   [`FILE_FORMAT.md`](FILE_FORMAT.md).
 - **Crash recovery**: unsaved work is snapshotted automatically and offered back
-  after an unexpected exit.
+  after an unexpected exit. The snapshot carries the deck text, your user notes
+  and the drawing layer, so a deck you only drew on comes back with the drawings
+  on it. **In the browser there is no crash recovery at all** — no folder to
+  write a snapshot to — and the app says so once, as soon as you make your first
+  edit. While unsaved work is open the browser also asks for confirmation before
+  the tab closes; the wording of that question is the browser's own and cannot be
+  set by the app. On desktop the window asks the same thing itself.
 
 ## Command palette
 
@@ -185,12 +191,24 @@ saved version stays retrievable, which a plain folder cannot give you.
   trusted.
 - **Save** with the ordinary save button, or *Save to…* to publish somewhere
   else: the deck is written back as one
-  commit — the markdown and its images, which go into the shared pool exactly as
-  opening reads them. A deck you opened from git offers its own name and updates
+  commit — the markdown, its images, which go into the shared pool exactly as
+  opening reads them, and the linked chart data files. A deck you opened from git offers its own name and updates
   in place; a new deck is published by choosing a name (it becomes
   `decks/<name>`). If someone moved the branch since you opened it, the save is
-  refused so you do not overwrite their work — reload and save again. Video and
-  audio are not written yet; you are told when a deck has them.
+  refused so you do not overwrite their work — reload and save again.
+- **Not everything travels to git, and you are asked first.** A commit carries
+  `deck.md`, the images in the shared pool, and the linked chart data files.
+  Video and audio are not written yet, and neither are the two sidecars: the
+  drawings made on your slides (`.ink.json`) and the user notes
+  (`.user-notes.json`). Saving to a folder or to an `.ocideck` package does take
+  all of those along, so moving a deck from disk into a repository is where they
+  would be lost. Before the commit is made, a dialog therefore counts per kind
+  what stays behind and lets you cancel or go ahead; empty notes and slides with
+  no strokes are not counted, so it stays quiet when there is nothing to lose.
+  Going ahead does not delete anything — the layers stay in this window, and a
+  save to a file or a package still keeps them. *(Until 21-07-2026 the only word
+  about this came after the commit had been made, and only about video and
+  audio; that line after the fact is still there.)*
 - **Lose your connection while saving** and the deck's text is kept locally and
   queued instead of failing — you see "saved, syncs when you're back online".
   The queue survives closing the app; it empties on your next successful save
@@ -525,7 +543,18 @@ The available types:
   a spreadsheet or by hand, and the app picks it up next time the deck opens.
   The two do not fight: saving only rewrites a data file whose numbers you
   actually changed in the app, so an edit you made elsewhere while the deck was
-  open is still there afterwards.
+  open is still there afterwards. And if you changed the numbers on *both* sides,
+  the file is left as it became outside the app and you are told about the clash
+  — your grid still holds what you typed, it is just not on disk yet, so you can
+  save elsewhere or reopen the deck and decide.
+
+  If a data file cannot be written at all — the `source` points outside the
+  project folder, the disk is full, the permissions are not there — you get an
+  error naming the charts it happened to. That is not a detail: the numbers have
+  just been taken out of the `.md`, so at that moment they exist only in this
+  window. Save somewhere the file can be written, or use **Ontkoppelen** to drop
+  the reference — the next save then gives the chart a fresh file inside the
+  project folder.
 
   New data files are written as JSON. A deck that already uses a `.csv` keeps
   using CSV, so anything else pointing at that file keeps working. Colours,
@@ -988,6 +1017,23 @@ under *Presentation properties*). Each slide can *also* carry its own level
 **stricter** than the level chosen for the deck are **withheld** — so the same
 deck can be shown safely to audiences with different clearances. Order, least to
 most restrictive: none < CLEAR < GREEN < AMBER < AMBER+STRICT < RED.
+
+**A withheld slide is marked while you edit**, because the consequence is
+invisible otherwise: it is simply not there when you present, export or package.
+In the slide rail such a slide is dimmed like a skipped one and carries its own
+**Achtergehouden** flag, in its own colour, with a tooltip naming the level that
+holds it back. Above the list a bar counts how many there are. Skipping and
+withholding are deliberately kept apart, even though both end in the slide not
+being shown: skipping is a choice you made per slide, withholding follows from a
+classification you may never have set — both levels default to *none*, so a
+single AMBER slide drops out of a deck whose own level was never chosen. There is
+no button on the bar: raising the deck's level is a classification decision, and
+it belongs with the TLP chip, not in a tidy-up action in a sidebar.
+
+When *nothing* is left to show or export, the message names the actual cause —
+skipped, withheld, or both. It used to say "all slides are skipped" in every
+case, which pointed at *Alles tonen* on the skip bar — a button that changes
+nothing about a classification. *(Corrected 21-07-2026.)*
 
 Classifying a deck is **optional** by default. An organisation can tighten that
 with the **classification enforcement** settings under *Settings → General →
@@ -2458,9 +2504,9 @@ are not switched off somewhere — there is no setting to find.
 | Local project folders and sidecar files | Absent. Opening and saving go through the browser, and your deck lives in the tab. |
 | WebDAV / Nextcloud as a deck source | Absent. |
 | An S3 bucket as a deck source | Absent. |
-| A git repository as a deck source | Absent — it needs the real `git` program. |
+| A git repository as a deck source | **Works**, over the forge's REST interface — see *Git repository* above; opening, saving, review, merging and versions are all there. What is absent is the local clone, which needs the real `git` program: no durable offline commit history, and no `git grep` to speed up cross-deck search. *(Corrected 21-07-2026; this row said "absent", which contradicted the git section of this same guide.)* |
 | The second-screen presenter view | Absent — it needs a real second window. |
-| **Recovery after a crash** | Absent. Nothing is autosaved, so a browser crash loses unsaved work. |
+| **Recovery after a crash** | Absent. There is no folder to write a snapshot to, so nothing is autosaved and a browser crash loses unsaved work. The app says this once, at your first edit, and the browser asks for confirmation before you close a tab that holds unsaved work. |
 | **The image half of the privacy check** | Absent. See below. |
 | The offline CVE database | Absent — and so is the online lookup, which is desktop-only (SSRF-safe subprocess). The **Zoek CVE…** button reports "niet beschikbaar in de webversie". |
 | Image caption sidecars | Absent — they are files beside the image. |

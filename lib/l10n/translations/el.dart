@@ -1865,6 +1865,35 @@ const _dutchSourceAddEl = <String, String>{
       'απαριθμεί τι παραλείφθηκε, χωρίς τις ίδιες τις τιμές. Αυτό το αρχείο μπορεί να συνοδεύσει την αναφορά.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'περιέχει τα κλειδιά με τα οποία κάθε αποκρυμμένη τιμή μπορεί να υπολογιστεί ξανά. Μην στέλνετε αυτό το αρχείο: τότε η απόκρυψη αναιρείται. Κρατήστε το κοντά στην πηγή.',
+  'slides': 'διαφάνειες',
+  'Achtergehouden': 'Παρακρατείται',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Παρακρατείται: ταξινομείται αυστηρότερα από την παρουσίαση',
+  '1 slide achtergehouden door haar TLP':
+      '1 διαφάνεια παρακρατείται λόγω του TLP της',
+  'slides achtergehouden door hun TLP':
+      'διαφάνειες παρακρατούνται λόγω του TLP τους',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'Αυτές οι διαφάνειες δεν συμπεριλαμβάνονται στην παρουσίαση, στην εξαγωγή ούτε στο πακέτο. Αυξήστε το επίπεδο TLP της παρουσίασης στις Πληροφορίες παρουσίασης για να τις συμπεριλάβετε.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Όλες οι διαφάνειες παρακρατούνται λόγω της ταξινόμησης TLP τους, οπότε δεν υπάρχει τίποτα να εμφανιστεί.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Όλες οι διαφάνειες παρακρατούνται λόγω της ταξινόμησης TLP τους, οπότε δεν υπάρχει τίποτα να εξαχθεί.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Όλες οι διαφάνειες παραλείπονται ή παρακρατούνται λόγω της ταξινόμησης TLP τους, οπότε δεν υπάρχει τίποτα να εμφανιστεί.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Όλες οι διαφάνειες παραλείπονται ή παρακρατούνται λόγω της ταξινόμησης TLP τους, οπότε δεν υπάρχει τίποτα να εξαχθεί.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'Οι αριθμοί των γραφημάτων δεν αποθηκεύτηκαν — υπάρχουν πλέον μόνο σε αυτό το παράθυρο:',
+  'Niet alles gaat mee naar git': 'Δεν πηγαίνουν όλα στο git',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'Αυτά τα μέρη δεν καταλήγουν στο commit και δεν θα βρίσκονται στο αποθετήριο:',
+  'Tekeningen op slides': 'Σχέδια σε διαφάνειες',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'Παραμένουν σε αυτό το παράθυρο. Αποθηκεύστε την παρουσίαση και ως αρχείο ή ως πακέτο .ocideck για να τα διατηρήσετε.',
+  'Toch opslaan': 'Αποθήκευση ούτως ή άλλως',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'Στο πρόγραμμα περιήγησης δεν υπάρχει ανάκτηση μετά από κατάρρευση: αν κλείσετε αυτήν την καρτέλα, η μη αποθηκευμένη εργασία χάνεται. Αποθηκεύστε μόνοι σας την παρουσίασή σας.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Η τοπική βάση δεδομένων CVE (τη λήψη την ξεκινάτε εσείς): το OciDeck ανακτά τα μαζικά δεδομένα μέσω του api.github.com και του αρχείου έκδοσης στο οποίο παραπέμπει η διεύθυνση αυτή.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

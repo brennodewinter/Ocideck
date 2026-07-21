@@ -1868,6 +1868,33 @@ const _dutchSourceAddPt = <String, String>{
       'enumera o que foi omitido, sem os próprios valores. Este ficheiro pode seguir com o relatório.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'contém as chaves que permitem recalcular cada valor ocultado. Não envie este ficheiro: assim a ocultação fica anulada. Guarde-o junto da fonte.',
+  'slides': 'slides',
+  'Achtergehouden': 'Retido',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Retido: classificado de forma mais estrita do que a apresentação',
+  '1 slide achtergehouden door haar TLP': '1 slide retido pelo seu TLP',
+  'slides achtergehouden door hun TLP': 'slides retidos pelo seu TLP',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'Estes slides não seguem ao apresentar, ao exportar nem no pacote. Aumente o nível TLP da apresentação em Informação da apresentação para os incluir.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Todos os slides estão retidos pela sua classificação TLP — nada para mostrar.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Todos os slides estão retidos pela sua classificação TLP — nada para exportar.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Todos os slides estão ignorados ou retidos pela sua classificação TLP — nada para mostrar.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Todos os slides estão ignorados ou retidos pela sua classificação TLP — nada para exportar.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'Os números dos gráficos não foram guardados — só existem nesta janela:',
+  'Niet alles gaat mee naar git': 'Nem tudo segue para o git',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'Estas partes não entram no commit e não estarão no repositório:',
+  'Tekeningen op slides': 'Desenhos nos slides',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'Ficam nesta janela. Guarde a apresentação também como ficheiro ou como pacote .ocideck para os manter.',
+  'Toch opslaan': 'Guardar mesmo assim',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'No navegador não existe recuperação após falha: se fechar este separador, o trabalho não guardado desaparece. Guarde a sua apresentação por si.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  A base de dados CVE local (é você que inicia a transferência): o OciDeck obtém os dados em massa através de api.github.com e do ficheiro de lançamento para o qual esse endereço aponta.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

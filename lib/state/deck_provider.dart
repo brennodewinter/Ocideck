@@ -200,6 +200,15 @@ class DeckNotifier extends StateNotifier<DeckState> {
   /// meldt alleen dát het moment daar is.
   void Function()? onSweepWebAssets;
 
+  /// Aangeroepen na een opslag waarbij één of meer grafieken hun cijfers niet in
+  /// hun databestand kwijt konden. Die cijfers staan dan nergens meer: de
+  /// markdown draagt alleen nog de verwijzing.
+  ///
+  /// Zelfde constructie als [onSweepWebAssets] — deze notifier heeft geen `Ref`,
+  /// en [TabsNotifier] wel; die zet er [chartDataWarningProvider] mee, waarna de
+  /// shell het meldt.
+  void Function(List<String> sources)? onChartDataWarnings;
+
   /// Elk `mem:`-pad dat dit tabblad nog terug kan halen: de huidige dia's plus
   /// alles in de ongedaan-/opnieuw-stapel. Een verwijderde dia leeft in de
   /// ongedaan-stapel voort, dus zijn afbeelding mag pas weg als die stap dat ook
@@ -315,7 +324,12 @@ class DeckNotifier extends StateNotifier<DeckState> {
     if (deck == null) return false;
     final String? path;
     try {
-      path = await _file.saveDeckAs(deck, initialDirectory: initialDirectory);
+      final written = await _file.saveDeckAsDetailed(
+        deck,
+        initialDirectory: initialDirectory,
+      );
+      path = written.path;
+      _reportChartWarnings(written.chartWarnings);
     } catch (e, s) {
       logError('DeckNotifier.saveAs: write deck', e, s);
       // Keep isDirty so the work still counts as unsaved.
@@ -349,12 +363,20 @@ class DeckNotifier extends StateNotifier<DeckState> {
     return true;
   }
 
+  /// Meld grafieken die hun cijfers niet naar hun databestand kwijt konden.
+  /// Alleen wanneer er iets te melden is — een lege lijst is het normale geval.
+  void _reportChartWarnings(List<String> sources) {
+    if (sources.isNotEmpty) onChartDataWarnings?.call(sources);
+  }
+
   Future<bool> _saveToPath(String path) async {
     final deck = state.deck;
     if (deck == null) return false;
     final Deck savedDeck;
     try {
-      savedDeck = await _file.saveDeck(deck, path);
+      final written = await _file.saveDeckDetailed(deck, path);
+      savedDeck = written.deck;
+      _reportChartWarnings(written.chartWarnings);
     } catch (e, s) {
       logError('DeckNotifier._saveToPath: write deck', e, s);
       // Keep isDirty so the work still counts as unsaved.

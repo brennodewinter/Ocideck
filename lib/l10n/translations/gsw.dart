@@ -1840,6 +1840,33 @@ const _dutchSourceAddGsw = <String, String>{
       'listet uf, was weggloh worde isch, ohni d Wärt sälber. Die Datei tarf mit em Bricht mit.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'enthaltet d Schlüssel, wo mer dermit jede gschwärzti Wärt zrugg cha rächne. Schick die Datei nöd mit: susch isch d Schwärzig ufghobe. Bhalt sie bi de Quelle.',
+  'slides': 'Slides',
+  'Achtergehouden': 'Zrugghalte',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Zrugghalte: strenger klassifiziert als d Präsentation',
+  '1 slide achtergehouden door haar TLP': '1 Slide wäg sim TLP zrugghalte',
+  'slides achtergehouden door hun TLP': 'Slides wäg ihrem TLP zrugghalte',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'Die Slides chömed bim Präsentiere, Exportiere und im Paket nöd mit. Erhöh under Präsentationsinfo s TLP-Niveau vo de Präsentation, zum si mitznäh.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Alli Slides sind wäg ihrer TLP-Klassifizierig zrugghalte, drum git\'s nüt zum zeige.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Alli Slides sind wäg ihrer TLP-Klassifizierig zrugghalte, drum git\'s nüt zum exportiere.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Alli Slides sind übersprunge oder wäg ihrer TLP-Klassifizierig zrugghalte, drum git\'s nüt zum zeige.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Alli Slides sind übersprunge oder wäg ihrer TLP-Klassifizierig zrugghalte, drum git\'s nüt zum exportiere.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'D Diagrammzahle sind nöd gspeicheret worde — sie stönd nu no i dem Fänschter:',
+  'Niet alles gaat mee naar git': 'Nöd alles gaht mit uf git',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'Die Teil chömed nöd i de Commit und stönd nachher nöd im Repository:',
+  'Tekeningen op slides': 'Zeichnige uf Slides',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'Sie bliibed i dem Fänschter. Speicher d Präsentation au als Datei oder als .ocideck-Paket, zum si z\'behalte.',
+  'Toch opslaan': 'Trotzdem speichere',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'Im Browser git\'s kei Absturz-Wiederherstellig: wänn du das Tab zuemachsch, isch nöd gspeicherti Arbet ewäg. Speicher dini Präsentation sälber.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  D lokal CVE-Datebank (de Download startisch du sälber): OciDeck holt d Massedate über api.github.com und d Release-Datei, wo die Adrässe druf zeigt.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

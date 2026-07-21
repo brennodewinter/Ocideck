@@ -86,8 +86,23 @@ project folders reasonably shallow.
 
 - Autosave ticks every **25 s** (`lib/state/tabs_provider.dart`, `_autosaveInterval`), writing an
   atomic snapshot so a crash never truncates the open file.
+- A snapshot holds the deck markdown plus the two layers that are not in it: the
+  user notes and the ink annotations. Three encodes per dirty tab per tick, and
+  only for tabs whose deck actually changed since the last one.
 - Recovery snapshots are retained for **7 days** by default
-  (`lib/services/recovery_service.dart:134`), then pruned.
+  (`RecoveryService.defaultMaxAge`, `lib/services/recovery_service.dart`), then
+  pruned. *(The line number that stood here, `:134`, had drifted; a constant name
+  survives an edit above it. Corrected 21-07-2026.)*
+- **On web none of this runs.** The timer is only started where local project
+  folders exist, and `RecoveryService.available` is false anyway — no
+  application-support directory to write to, so every snapshot call would be a
+  no-op. Ticking there would serialise a deck every 25 s for nothing. Because the
+  absence is silent otherwise, the shell says so once at the first edit
+  (`RecoveryService.available`, not a second `kIsWeb` test). The browser build
+  instead registers a
+  `beforeunload` guard while work is unsaved (`lib/platform/unsaved_work_guard_web.dart`),
+  and only while it is unsaved, so a clean tab can still enter the back/forward
+  cache.
 
 ## Development ratchets (keep the codebase fast to work in)
 
@@ -95,7 +110,11 @@ project folders reasonably shallow.
 |---|---|---|
 | Max file length | **1000 lines** | `tool/check_conventions.dart`, `maxFileLines` |
 | Max method/function length | **150 lines** | `tool/check_method_length.dart:26` |
+<<<<<<< HEAD
 | Coverage floor | **80 %** line coverage | `Makefile`, the `coverage` target |
+=======
+| Coverage floor | **79 %** line coverage | `Makefile`, the `coverage` target |
+>>>>>>> 26b3fa16 (docs: breng de gidsen in overeenstemming met de vijf gedichte paden)
 
 ## Measured figures
 

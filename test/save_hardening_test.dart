@@ -16,9 +16,13 @@ class _ThrowingFileService extends FileService {
   _ThrowingFileService(MarkdownService md)
     : super(md, ImageService(), () => const ThemeProfile());
 
+  // `saveDeckDetailed` is wat de state-laag aanroept (het draagt ook de
+  // grafiekdata-klachten); `saveDeck` is er de dunne wrapper omheen.
   @override
-  Future<Deck> saveDeck(Deck deck, String filePath) async =>
-      throw const FileSystemException('disk full');
+  Future<({Deck deck, List<String> chartWarnings})> saveDeckDetailed(
+    Deck deck,
+    String filePath,
+  ) async => throw const FileSystemException('disk full');
 }
 
 /// A FileService whose write blocks until [gate] completes, to exercise the
@@ -31,10 +35,13 @@ class _BlockingFileService extends FileService {
   int calls = 0;
 
   @override
-  Future<Deck> saveDeck(Deck deck, String filePath) async {
+  Future<({Deck deck, List<String> chartWarnings})> saveDeckDetailed(
+    Deck deck,
+    String filePath,
+  ) async {
     calls++;
     await gate.future;
-    return deck;
+    return (deck: deck, chartWarnings: const <String>[]);
   }
 }
 

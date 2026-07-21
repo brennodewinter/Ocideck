@@ -634,6 +634,24 @@ auto-message (`Update <deck title>`), editable. Push is the SyncEngine — from 
 user's point of view, **save = commit, and it reaches the forge when the network
 does**.
 
+> **What a commit actually carries today** (recorded 21-07-2026, because the
+> layout in §6 and the principle in P3 describe the intended set, not the built
+> one). `buildDeckRepoFiles` produces exactly three things: `<deckDir>/deck.md`,
+> the pool blobs that are not in the repo yet, and each linked chart's data file
+> at the path its `source` names. **Video and audio are not written**, and
+> **neither sidecar is**: nothing in `services/git/` writes `deck.annotations` or
+> `deck.notes`, so the ink layer and the user notes stay behind. Saving the same
+> deck to a folder or a package does take all four along, which makes moving a
+> deck from disk into a repository the moment they would be lost.
+>
+> Carrying them is a larger change than a warning, and the warning could not wait
+> for it. `gitDeckOmissions` counts what stays behind per kind, and
+> `_confirmGitOmissions` puts that in front of the user as a blocking dialog
+> **before** the commit — afterwards the choice has already been made. Only
+> non-empty layers count; a warning that also fires when nothing is at stake
+> trains people to dismiss it. Note that the §9.7 merge semantics therefore have
+> nothing to merge yet: they describe the sidecars once they are committed.
+
 ### 9.2 Opening / loading
 
 Native: clone or fetch, then read from the working tree. REST: `listTree` the
@@ -729,6 +747,11 @@ has no opinion on last year's version. A future session may combine them (a room
 whose participants share a repo), but neither doc depends on the other landing.
 
 ### 9.7 Sidecar merge semantics
+
+> **Design, not yet built** (recorded 21-07-2026). Neither sidecar is committed
+> today — see the note in §9.1 — so nothing below is running. It stays here
+> because it is the decision to implement *when* they travel, not a description
+> of current behaviour.
 
 "Sidecars merge poorly" flattened a distinction worth keeping: the two sidecars
 are not the same kind of file, and each has its own right answer (§14, D7).
@@ -903,6 +926,10 @@ Each phase is shippable and preserves the invariants.
 - `NativeGitMirror implements DeckMirror` — partial clone (D5), commit, fetch,
   push, merge, log, tag. Real offline history; real merges.
 - The `.annotations` union merge driver + `.gitattributes` in the clone (§9.7).
+  **Not built** (recorded 21-07-2026): there is no `.gitattributes` and no
+  `merge=ocideck-ink` anywhere in `lib/`. It has nothing to act on yet either —
+  the commit set carries no sidecars at all (§9.1) — so this belongs with the
+  work that makes them travel, not with what Phase 3 delivered.
 - **Prove OQ-10** (token delivery) on macOS, Windows and Linux before this phase
   is called done; §10.2 is provisional until then.
 - Verify: same `DeckMirror` contract tests pass against both implementations.

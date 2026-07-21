@@ -117,8 +117,9 @@ lib/
 ## Data model
 
 - **`Deck`** holds metadata, a list of **`Slide`**s, the active **`ThemeProfile`**,
-  the deck-wide TLP level, and an in-memory **annotation layer** (`Map<slideId,
-  List<InkStroke>>`) that is *never* serialized into the Markdown.
+  the deck-wide TLP level, and an **annotation layer** (`Map<slideId,
+  List<InkStroke>>`) that is *never* serialized into the Markdown — it goes to
+  its own sidecar on save, and into the autosave snapshot in between.
 - **`Slide`** is a single immutable value with a `SlideType` and typed fields. A
   few types reuse `customMarkdown` for their payload: free-Markdown (raw),
   `code` (the source), `chart` (the JSON spec), `cockpit` (the JSON spec of
@@ -305,7 +306,16 @@ To keep the `.md` pure Marp, five kinds of data live beside it (see
 - **User notes** — `<name>.user-notes.json` (`services/user_notes_codec.dart`).
   In the visual editor, slides with user notes are marked on thumbnails in the
   slide list (`widgets/slides/slide_thumbnail.dart`).
-- **Linked chart data** — `data/*.csv` (the living source for a chart).
+- **Linked chart data** — `data/*.json` for anything new, `data/*.csv` for a deck
+  that already links one (the living source for a chart).
+
+The last two carry a consequence worth stating where the layers are listed: a
+commit to a git repository takes `deck.md`, the pooled images and the chart data
+— and **not** the ink or the user-notes sidecar, since nothing in `services/git/`
+writes them. `gitDeckOmissions` counts what stays behind and the save path asks
+before committing (`design/GIT_STORAGE.md` §9.1). The ink and the notes *are*
+carried in an autosave snapshot, because both live outside the markdown and
+drawing alone already makes a deck dirty.
 
 ## Git storage (`services/git/`)
 

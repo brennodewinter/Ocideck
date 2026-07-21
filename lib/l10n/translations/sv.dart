@@ -1836,6 +1836,33 @@ const _dutchSourceAddSv = <String, String>{
       'räknar upp vad som har utelämnats, utan värdena själva. Den här filen får följa med rapporten.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'innehåller nycklarna som varje maskat värde kan räknas tillbaka med. Skicka inte med den här filen: då är maskningen upphävd. Förvara den vid källan.',
+  'slides': 'bilder',
+  'Achtergehouden': 'Undanhållen',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Undanhållen: klassificerad strängare än presentationen',
+  '1 slide achtergehouden door haar TLP': '1 bild undanhållen av sin TLP',
+  'slides achtergehouden door hun TLP': 'bilder undanhållna av sin TLP',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'De här bilderna följer inte med vid presentation, export eller i paketet. Höj presentationens TLP-nivå under Presentationsinfo för att få med dem.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Alla bilder är undanhållna av sin TLP-klassificering, så det finns inget att visa.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Alla bilder är undanhållna av sin TLP-klassificering, så det finns inget att exportera.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Alla bilder är överhoppade eller undanhållna av sin TLP-klassificering, så det finns inget att visa.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Alla bilder är överhoppade eller undanhållna av sin TLP-klassificering, så det finns inget att exportera.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'Diagramsiffrorna sparades inte — de finns bara kvar i det här fönstret:',
+  'Niet alles gaat mee naar git': 'Allt följer inte med till git',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'De här delarna hamnar inte i commiten och finns sedan inte i repositoryt:',
+  'Tekeningen op slides': 'Teckningar på bilder',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'De blir kvar i det här fönstret. Spara även presentationen som fil eller som ett .ocideck-paket för att behålla dem.',
+  'Toch opslaan': 'Spara ändå',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'I webbläsaren finns ingen kraschåterställning: stänger du den här fliken är osparat arbete borta. Spara din presentation själv.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Den lokala CVE-databasen (du startar hämtningen själv): OciDeck hämtar massdata via api.github.com och den utgåvefil som adressen pekar på.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

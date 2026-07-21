@@ -1844,6 +1844,33 @@ const _dutchSourceAddSk = <String, String>{
       'vypisuje, čo bolo vynechané, bez samotných hodnôt. Tento súbor môže ísť so správou.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'obsahuje kľúče, ktorými možno každú začiernenú hodnotu spätne dopočítať. Tento súbor neposielajte: začiernenie by sa tým zrušilo. Uchovajte ho pri zdroji.',
+  'slides': 'snímky',
+  'Achtergehouden': 'Zadržané',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Zadržané: klasifikované prísnejšie než prezentácia',
+  '1 slide achtergehouden door haar TLP': '1 snímka zadržaná kvôli svojmu TLP',
+  'slides achtergehouden door hun TLP': 'snímok zadržaných kvôli ich TLP',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'Tieto snímky sa nedostanú do prezentácie, exportu ani balíka. Zvýšte úroveň TLP prezentácie v Informáciách o prezentácii, aby sa zahrnuli.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Všetky snímky sú zadržané kvôli svojej klasifikácii TLP — nie je čo zobraziť.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Všetky snímky sú zadržané kvôli svojej klasifikácii TLP — nie je čo exportovať.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Všetky snímky sú preskočené alebo zadržané kvôli svojej klasifikácii TLP — nie je čo zobraziť.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Všetky snímky sú preskočené alebo zadržané kvôli svojej klasifikácii TLP — nie je čo exportovať.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'Čísla grafov sa neuložili — existujú už len v tomto okne:',
+  'Niet alles gaat mee naar git': 'Do gitu nejde všetko',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'Tieto časti sa nedostanú do commitu a v repozitári potom nebudú:',
+  'Tekeningen op slides': 'Kresby na snímkach',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'Zostávajú v tomto okne. Uložte prezentáciu aj ako súbor alebo ako balík .ocideck, aby ste ich zachovali.',
+  'Toch opslaan': 'Uložiť aj tak',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'V prehliadači neexistuje obnova po páde: ak zavriete túto kartu, neuložená práca je preč. Uložte si prezentáciu sami.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Lokálna databáza CVE (sťahovanie spúšťate sami): OciDeck načítava hromadné údaje cez api.github.com a súbor vydania, na ktorý táto adresa odkazuje.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

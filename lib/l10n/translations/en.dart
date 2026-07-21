@@ -976,6 +976,33 @@ const _dutchSourceAddEn = {
       'lists what was left out, without the values themselves. This file may go with the report.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'contains the keys with which every redacted value can be recovered. Do not send this file along: that undoes the redaction. Keep it with the source.',
+  'slides': 'slides',
+  'Achtergehouden': 'Withheld',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Withheld: classified more strictly than the presentation',
+  '1 slide achtergehouden door haar TLP': '1 slide withheld by its TLP',
+  'slides achtergehouden door hun TLP': 'slides withheld by their TLP',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'These slides are left out when presenting, exporting or packaging. Raise the presentation\'s TLP level under Presentation info to include them.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'All slides are withheld by their TLP classification, so there is nothing to show.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'All slides are withheld by their TLP classification, so there is nothing to export.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'All slides are skipped or withheld by their TLP classification, so there is nothing to show.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'All slides are skipped or withheld by their TLP classification, so there is nothing to export.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'Chart figures were not saved — they now exist only in this window:',
+  'Niet alles gaat mee naar git': 'Not everything goes to git',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'These parts do not end up in the commit and will not be in the repository:',
+  'Tekeningen op slides': 'Drawings on slides',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'They stay in this window. Also save the presentation as a file or as an .ocideck package to keep them.',
+  'Toch opslaan': 'Save anyway',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'In the browser there is no crash recovery: if you close this tab, unsaved work is gone. Save your presentation yourself.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  The local CVE database (you start the download yourself): OciDeck fetches the bulk data via api.github.com and the release file that address points to.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

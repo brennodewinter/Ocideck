@@ -25,6 +25,16 @@ class RecoverySnapshot {
   /// de markdown bewaart zou de afspraken met de klant kwijtraken.
   final String? miauw;
 
+  /// JSON-payload van [AnnotationCodec.encode], als er tekeningen op de slides
+  /// staan.
+  ///
+  /// Annotaties maken het deck vuil ([DeckNotifier.setAnnotations]), dus een
+  /// deck waarin alleen getekend is komt hier terecht — en zonder dit veld gaf
+  /// herstel het deck stil zonder die tekeningen terug. Ze leven op schijf in
+  /// een eigen sidecar (`.ink.json`) en zitten dus níét in [markdown]; wie ze
+  /// wil bewaren moet ze apart meenemen.
+  final String? annotations;
+
   const RecoverySnapshot({
     required this.id,
     required this.savedAt,
@@ -33,6 +43,7 @@ class RecoverySnapshot {
     required this.markdown,
     this.userNotes,
     this.miauw,
+    this.annotations,
   });
 
   Map<String, Object?> toJson() => {
@@ -43,6 +54,7 @@ class RecoverySnapshot {
     'markdown': markdown,
     if (userNotes != null) 'userNotes': userNotes,
     if (miauw != null) 'miauw': miauw,
+    if (annotations != null) 'annotations': annotations,
   };
 
   static RecoverySnapshot fromJson(Map<String, Object?> json) {
@@ -55,6 +67,7 @@ class RecoverySnapshot {
       markdown: (json['markdown'] as String?) ?? '',
       userNotes: json['userNotes'] as String?,
       miauw: json['miauw'] as String?,
+      annotations: json['annotations'] as String?,
     );
   }
 }
@@ -104,6 +117,15 @@ class RecoveryService {
   /// operatie is daar een stille no-op in plaats van een logregen aan
   /// UnsupportedErrors uit de dart:io-stubs.
   static bool get _unavailable => kIsWeb;
+
+  /// Of crashherstel op dit platform überhaupt bestaat.
+  ///
+  /// Vraag dit in plaats van zelf `kIsWeb` te toetsen: de reden dat een tabblad
+  /// in de browser geen herstelkopie krijgt is dat déze dienst er niets kan, en
+  /// wie dat elders naschrijft laat de twee vanzelf uit elkaar lopen. De UI
+  /// meldt aan de hand hiervan eenmalig dat er in de browser niets terugkomt na
+  /// een crash — stilzwijgen is daar een valstrik, want op desktop wérkt het.
+  bool get available => !_unavailable;
 
   Future<void> save(RecoverySnapshot snapshot) {
     if (_unavailable) return Future.value();

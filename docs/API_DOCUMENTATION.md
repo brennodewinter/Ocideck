@@ -24,6 +24,24 @@ providers.
 - `Map<String, String> userNotes` and per-slide ink `annotations`
 - `int presentationTargetSeconds` (presentation timing target)
 
+The audience gates are top-level functions in the same file, not methods:
+
+```dart
+bool slideVisibleAtTlp(Slide slide, TlpLevel presentationTlp);
+bool slideWithheldByTlp(Slide slide, TlpLevel presentationTlp); // its negation
+int  withheldSlideCount(Deck deck);                            // for the editor
+bool slideReachesAudience(Slide slide, {
+  required TlpLevel presentationTlp,
+  required bool includeDetail,
+}); // skipped ∧ TLP ∧ detail — the one place the three gates meet
+TlpLevel effectiveTlp({required TlpLevel deckTlp, required TlpLevel slideTlp});
+TlpLevel deckReleaseTlp(Deck deck); // strictest level anywhere in the deck
+```
+
+`slideWithheldByTlp` exists beside `Slide.skipped` deliberately: both end in the
+slide not reaching the audience, but a skip is an authoring choice and a
+withholding is a policy consequence, so the UI has to be able to say which.
+
 ### Slide Model
 `lib/models/slide.dart` — `Slide` is an immutable value object (all fields
 `final`, `const` constructor). It is **not** a generic property bag: besides
@@ -69,6 +87,33 @@ Structural pre-flight validation is a separate class; `validate` is an instance
 method, `MarkdownValidationResult validate(String markdown)`, in
 `lib/services/markdown_validator.dart`, which returns a `MarkdownValidationResult`
 (`lib/models/markdown_validation.dart`).
+
+### FileService (deck read/write)
+`lib/services/file_service.dart` — opening and saving a deck as a project folder.
+Each direction comes in a plain form and a `…Detailed` form; the detailed one
+also reports the chart data files it could not handle, and the plain one is a
+wrapper for callers with nothing to report:
+
+```dart
+Future<Deck?> openDeck(String filePath, {String? content});
+Future<({Deck? deck, OpenFailure? failure, List<String> warnings})>
+    openDeckDetailed(String filePath, {String? content});
+
+Future<Deck> saveDeck(Deck deck, String filePath);
+Future<({Deck deck, List<String> chartWarnings})>
+    saveDeckDetailed(Deck deck, String filePath);
+
+Future<String?> saveDeckAs(Deck deck, {String? initialDirectory});
+Future<({String? path, List<String> chartWarnings})>
+    saveDeckAsDetailed(Deck deck, {String? initialDirectory});
+```
+
+The two warning lists are not the same problem. On open, an unreadable data file
+means a chart draws empty. On save, writing the deck has just moved the numbers
+out of the markdown, so a data file that could not be written means they exist
+nowhere but the open window — which is why `whileSaving` rides along on
+`ChartDataWarning` and the shell shows an error rather than a note. `path` is
+null when the user dismissed the file picker.
 
 ### ExportService
 `lib/services/export_service.dart` — export to PDF, PPTX, and HTML:
@@ -133,6 +178,10 @@ void newDeck(/* … */);
 Future<bool> save({String? initialDirectory}); // false if the user cancels
 void undo();
 void redo();
+
+// Callbacks, because this notifier has no Ref and TabsNotifier does.
+void Function()? onSweepWebAssets;
+void Function(List<String> sources)? onChartDataWarnings;
 ```
 
 ### SettingsProvider

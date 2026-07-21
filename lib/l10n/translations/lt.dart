@@ -1844,6 +1844,33 @@ const _dutchSourceAddLt = <String, String>{
       'išvardija, kas praleista, be pačių reikšmių. Šį failą galima siųsti kartu su ataskaita.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'turi raktus, kuriais kiekvieną paslėptą reikšmę galima atkurti. Nesiųskite šio failo kartu: tada redagavimas panaikinamas. Laikykite jį prie šaltinio.',
+  'slides': 'skaidrės',
+  'Achtergehouden': 'Sulaikyta',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Sulaikyta: klasifikuota griežčiau nei pristatymas',
+  '1 slide achtergehouden door haar TLP': '1 skaidrė sulaikyta dėl jos TLP',
+  'slides achtergehouden door hun TLP': 'skaidrės sulaikytos dėl jų TLP',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'Šios skaidrės neįtraukiamos pristatant, eksportuojant ar į paketą. Padidinkite pristatymo TLP lygį skiltyje Pristatymo informacija, kad jos būtų įtrauktos.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Visos skaidrės sulaikytos dėl jų TLP klasifikacijos — nėra ką rodyti.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Visos skaidrės sulaikytos dėl jų TLP klasifikacijos — nėra ką eksportuoti.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Visos skaidrės praleistos arba sulaikytos dėl jų TLP klasifikacijos — nėra ką rodyti.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Visos skaidrės praleistos arba sulaikytos dėl jų TLP klasifikacijos — nėra ką eksportuoti.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'Diagramų skaičiai neįrašyti — jie liko tik šiame lange:',
+  'Niet alles gaat mee naar git': 'Ne viskas patenka į git',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'Šios dalys nepatenka į commit\'ą ir vėliau jų nebus saugykloje:',
+  'Tekeningen op slides': 'Piešiniai skaidrėse',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'Jie lieka šiame lange. Išsaugokite pristatymą ir kaip failą arba kaip .ocideck paketą, kad juos išlaikytumėte.',
+  'Toch opslaan': 'Vis tiek išsaugoti',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'Naršyklėje nėra atkūrimo po strigties: uždarius šį skirtuką, neįrašytas darbas dings. Išsaugokite pristatymą patys.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Vietinė CVE duomenų bazė (atsisiuntimą pradedate patys): OciDeck paima masinius duomenis per api.github.com ir leidimo failą, į kurį tas adresas nurodo.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

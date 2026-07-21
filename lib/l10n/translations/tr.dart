@@ -2819,6 +2819,34 @@ const _dutchSourceAddTr = <String, String>{
       'değerlerin kendisi olmadan nelerin çıkarıldığını listeler. Bu dosya raporla birlikte gönderilebilir.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'redakte edilmiş her değerin geri hesaplanmasını sağlayan anahtarları içerir. Bu dosyayı birlikte göndermeyin: redaksiyon böylece geçersiz olur. Onu kaynağın yanında saklayın.',
+  'slides': 'slayt',
+  'Achtergehouden': 'Alıkonuldu',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Alıkonuldu: sunumdan daha katı sınıflandırılmış',
+  '1 slide achtergehouden door haar TLP':
+      '1 slayt TLP\'si nedeniyle alıkonuldu',
+  'slides achtergehouden door hun TLP': 'slayt TLP\'si nedeniyle alıkonuldu',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'Bu slaytlar sunumda, dışa aktarımda ve pakette yer almaz. Bunları da dahil etmek için Sunum bilgisi bölümünde sunumun TLP düzeyini yükseltin.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Tüm slaytlar TLP sınıflandırmaları nedeniyle alıkonuldu — gösterilecek bir şey yok.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Tüm slaytlar TLP sınıflandırmaları nedeniyle alıkonuldu — dışa aktarılacak bir şey yok.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Tüm slaytlar atlandı ya da TLP sınıflandırmaları nedeniyle alıkonuldu — gösterilecek bir şey yok.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Tüm slaytlar atlandı ya da TLP sınıflandırmaları nedeniyle alıkonuldu — dışa aktarılacak bir şey yok.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'Grafik sayıları kaydedilmedi — artık yalnızca bu pencerede duruyorlar:',
+  'Niet alles gaat mee naar git': 'Her şey git\'e gitmiyor',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'Bu bölümler commit\'e girmez ve sonrasında repository\'de bulunmaz:',
+  'Tekeningen op slides': 'Slaytlardaki çizimler',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'Bu pencerede kalırlar. Onları saklamak için sunumu ayrıca dosya olarak veya .ocideck paketi olarak kaydedin.',
+  'Toch opslaan': 'Yine de kaydet',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'Tarayıcıda çökme kurtarma yoktur: bu sekmeyi kapatırsanız kaydedilmemiş çalışma kaybolur. Sunumunuzu kendiniz kaydedin.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Yerel CVE veri tabanı (indirmeyi siz başlatırsınız): OciDeck toplu verileri api.github.com üzerinden ve o adresin işaret ettiği sürüm dosyasından alır.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

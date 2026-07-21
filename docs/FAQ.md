@@ -220,14 +220,25 @@ Troubleshooting steps:
 3. Export your work immediately if possible
 4. Report issues through official channels with error details
 
+In the browser there are no recovery snapshots — the app has nowhere to write
+them — so step 2 does not apply there and unsaved work is gone. The app says so
+at your first edit, and the browser asks before you close a tab that still holds
+unsaved work. Save early if you work in a browser tab.
+
 ## Configuration and Settings
 
 ### How does Git integration work?
 OciDeck supports Git repository storage:
-- Configure in Settings → Git Repository
+- Configure it as a connection under *Settings → Storage*, alongside folders,
+  WebDAV and S3 *(corrected 21-07-2026; there is no separate "Git Repository"
+  tab — storage is one list)*
 - Save decks to remote repositories via REST API or native Git
 - Supports both public and private repositories  
 - Provides version history access
+- Note what a commit carries: the markdown, the pooled images and the linked
+  chart data. Video, audio, the drawings on your slides and the user notes do
+  **not** travel this way; OciDeck counts them and asks before it commits. Save
+  to a folder or an `.ocideck` package if you need those to come along.
 
 ### What are the WebDAV settings for?
 

@@ -1335,6 +1335,7 @@ Marp `.md` is never touched by annotations.
 `points` is a flat list `[x0, y0, x1, y1, ...]`; `color` is an ARGB int; `tool`
 is `pen` or `highlighter` (laser pointers are transient and are not stored).
 
+<<<<<<< HEAD
 `version` is a single increasing integer, and every sidecar in this chapter
 handles it the same way (`lib/services/sidecar_format.dart`): **a file declaring
 a higher version than this build understands is not loaded, and not
@@ -1343,6 +1344,17 @@ and then writing back what you did understand deletes the rest; and refusing to
 read it while still saving over it deletes all of it — the deck would hold no
 strokes in memory, and the save would take that as "there is nothing here".
 A missing `version` is version 1.
+=======
+The same payload rides along in an **autosave/recovery snapshot**, since drawing
+marks a deck as changed and the strokes are not in the markdown: without it a
+deck that had only been drawn on came back after a crash with the drawings gone.
+A snapshot that carries an unreadable ink payload still restores the text.
+
+**A commit to a git repository does not carry this sidecar** — nothing in
+`services/git/` writes it — so drawings do not travel that way. Saving to a
+folder or into a package does take them along. OciDeck says so before the commit
+is made rather than after; see `design/GIT_STORAGE.md` §9.1.
+>>>>>>> 26b3fa16 (docs: breng de gidsen in overeenstemming met de vijf gedichte paden)
 
 ### 6.3 User Notes (`<name>.user-notes.json`)
 
@@ -1368,6 +1380,10 @@ not stored; when there are no notes, the sidecar file is deleted or not written.
   ]
 }
 ```
+
+Like the annotation layer, user notes ride along in an autosave/recovery snapshot
+and are **not** carried by a commit to a git repository; the warning before the
+commit counts them separately (`design/GIT_STORAGE.md` §9.1).
 
 ### 6.4 Chart Data (`data/*.json`, `data/*.csv`)
 
@@ -1506,11 +1522,25 @@ like an inline one and writes the file back on save; the file can equally be
 edited outside the app. To keep those from fighting, a save only rewrites a data
 file whose values actually changed in the app: an untouched chart leaves its
 file completely alone, so an edit made elsewhere while the deck was open
-survives. If both changed, the app wins; the clash is recorded in the log, but
-is not currently surfaced in the interface on the save path the way a problem
-found while *opening* is.
+survives.
 
-Two shapes fall outside that comparison. A chart that arrives with inline data
+If **both** sides changed, neither wins: the file on disk is left as it became
+outside the app, and the save reports the clash. Until 21-07-2026 the app
+overwrote it and only wrote a line to the log — a lost update, which is exactly
+the failure this comparison exists to prevent. Nothing in the editor is lost by
+refusing; the numbers are simply not on disk yet, and the user can save elsewhere
+or reopen the deck. The recorded baseline is deliberately *not* advanced on a
+refusal, so the next save meets the same clash instead of silently resolving it.
+
+**A data file that cannot be written at all** — a `source` outside the project
+folder, a full disk, missing permissions — is reported the same way, and it
+matters more than it looks: the conversion described under *Automatic* has just
+taken the values out of the `.md`, so at that point they exist only in memory.
+Both cases come back from `saveDeckDetailed`/`saveDeckAsDetailed` as
+`chartWarnings` and are shown as an error, mirroring the warning the *open* path
+already gave. *(Before 21-07-2026 the save path only logged this.)*
+
+Two shapes fall outside that baseline comparison. A chart that arrives with inline data
 *and* a `source` is not hydrated from the file — the block already has values —
 so there is nothing to compare against and its file is overwritten on save. And
 a chart whose rows are all deleted stops counting as having data at all, so its

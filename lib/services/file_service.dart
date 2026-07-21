@@ -696,7 +696,15 @@ class FileService {
     return (deck: hydrated, failure: null, warnings: chartWarnings);
   }
 
-  Future<String?> saveDeckAs(Deck deck, {String? initialDirectory}) async {
+  /// Als [saveDeckAs], maar mét de grafiekdata-waarschuwingen.
+  ///
+  /// Zie [saveDeckDetailed]: een grafiek waarvan het databestand niet geschreven
+  /// kon worden, houdt zijn cijfers nergens meer, dus dat moet de gebruiker
+  /// horen. `path` is null wanneer de gebruiker het venster wegklikte.
+  Future<({String? path, List<String> chartWarnings})> saveDeckAsDetailed(
+    Deck deck, {
+    String? initialDirectory,
+  }) async {
     final safeName = deck.title
         .replaceAll(RegExp(r'[^\w\s-]'), '')
         .replaceAll(' ', '_');
@@ -705,15 +713,30 @@ class FileService {
       fileName: '$safeName.md',
       initialDirectory: initialDirectory,
     );
-    if (result == null) return null;
+    if (result == null) return (path: null, chartWarnings: const <String>[]);
     final path = result.endsWith('.md') ? result : '$result.md';
-    await _writeProject(deck, path);
-    return path;
+    final written = await _writeProject(deck, path);
+    return (path: path, chartWarnings: written.chartWarnings);
   }
 
-  Future<Deck> saveDeck(Deck deck, String filePath) async {
-    return _writeProject(deck, filePath);
-  }
+  Future<String?> saveDeckAs(Deck deck, {String? initialDirectory}) async =>
+      (await saveDeckAsDetailed(deck, initialDirectory: initialDirectory)).path;
+
+  /// Sla op én vertel welke grafieken hun cijfers niet kwijt konden.
+  ///
+  /// Het opslaan haalt de cijfers uit de markdown en zet ze in `data/`; mislukt
+  /// dat tweede deel — pad buiten de projectmap, schijf vol, geen rechten, of
+  /// het bestand is ondertussen buiten de app gewijzigd — dan bestaan die
+  /// cijfers alleen nog in dit venster. De aanroeper hoort dat te melden;
+  /// zwijgen zou een geslaagde opslag voorspiegelen. Spiegelbeeld van
+  /// [openDeckDetailed], dat hetzelfde doet voor het lezen.
+  Future<({Deck deck, List<String> chartWarnings})> saveDeckDetailed(
+    Deck deck,
+    String filePath,
+  ) => _writeProject(deck, filePath);
+
+  Future<Deck> saveDeck(Deck deck, String filePath) async =>
+      (await _writeProject(deck, filePath)).deck;
 
   // ── Draagbaar pakket ── zie parts/file_service_package.dart voor de
   // pakket-bouw (exportPackage/buildPackageBytes/buildPackageMembers).

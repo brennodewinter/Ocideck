@@ -95,6 +95,21 @@ Never fail(String message) {
 /// De naam van de overlay-map van [code], zoals hij in de bron staat.
 String overlayAnchor(String code) => 'const _dutchSourceAdd${cap(code)} = ';
 
+/// Het deel van [text] waar de Nederlandse bronsleutels wonen: vanaf de
+/// declaratie van `_dutchSource<Lang>` tot het einde van het bestand, dus de
+/// primaire map plus de overlay.
+///
+/// Bewust NIET het hele bestand. De `t()`-map `_strings<Lang>` staat er vóór en
+/// heeft een eigen sleutelruimte: `t('slides')` en `d('slides')` zijn twee
+/// verschillende dingen, en de dubbele-sleutelwacht toetst dan ook per map. Een
+/// bestandsbrede zoektocht las de `t()`-sleutel als "al vertaald", sloeg de
+/// bronstring in alle 31 talen over en liet de poort rood achter zonder dat
+/// `make add-l10n` er nog iets aan kon doen.
+String dutchSourceRegion(String text, String code) {
+  final at = text.indexOf('const _dutchSource${cap(code)} = ');
+  return at < 0 ? text : text.substring(at);
+}
+
 /// Zet [lines] in de overlay-map die op [anchor] volgt, direct ná haar
 /// OPENENDE ACCOLADE. Geeft `null` als die map niet te vinden is.
 ///
@@ -155,12 +170,14 @@ void main(List<String> args) {
       fail('no overlay map in ${file.path} (run migration?)');
     }
 
+    final region = dutchSourceRegion(text, code);
     final lines = <String>[];
     additions.forEach((source, value) {
       final t = (value as Map).cast<String, dynamic>();
-      // Skip if this language already carries the key anywhere in the file
-      // (overlay or base map) — avoids duplicate keys.
-      if (text.contains('${dartStr(source)}:')) {
+      // Skip if this language already carries the key in one of its Dutch-source
+      // maps (overlay or base) — avoids duplicate keys. De `t()`-map telt niet
+      // mee: die heeft haar eigen sleutelruimte.
+      if (region.contains('${dartStr(source)}:')) {
         skipped++;
         return;
       }

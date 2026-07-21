@@ -57,6 +57,12 @@ can flag or redact it. Name detection is deliberately not NER (see
 `GREEN`, `AMBER`, `AMBER+STRICT`, `RED` (plus an unset `none`). OciDeck can
 enforce a release ceiling on export.
 
+**Withheld (achtergehouden)** — a slide whose own TLP level is stricter than the
+deck's, so it does not reach the audience when you present, export or package
+(`slideWithheldByTlp`). Not the same as **skipped**: skipping is a choice the
+author made on that slide, withholding follows from the classification. The
+editor marks the two differently for exactly that reason.
+
 **Disposition** — a per-slide privacy decision for a scanner finding
 (`warn`, `accept`, `shield`, `redact`).
 

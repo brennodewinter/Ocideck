@@ -1836,6 +1836,33 @@ const _dutchSourceAddDa = <String, String>{
       'opregner, hvad der er udeladt, uden selve værdierne. Denne fil må følge med rapporten.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'indeholder de nøgler, som enhver bortredigeret værdi kan regnes tilbage med. Send ikke denne fil med: så er redigeringen ophævet. Opbevar den ved kilden.',
+  'slides': 'slides',
+  'Achtergehouden': 'Tilbageholdt',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Tilbageholdt: klassificeret strengere end præsentationen',
+  '1 slide achtergehouden door haar TLP': '1 slide tilbageholdt af sit TLP',
+  'slides achtergehouden door hun TLP': 'slides tilbageholdt af deres TLP',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'Disse slides kommer ikke med ved præsentation, eksport eller i pakken. Hæv præsentationens TLP-niveau under Præsentationsinfo for at få dem med.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Alle slides er tilbageholdt af deres TLP-klassifikation, så der er intet at vise.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Alle slides er tilbageholdt af deres TLP-klassifikation, så der er intet at eksportere.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Alle slides er sprunget over eller tilbageholdt af deres TLP-klassifikation, så der er intet at vise.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Alle slides er sprunget over eller tilbageholdt af deres TLP-klassifikation, så der er intet at eksportere.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'Diagramtallene blev ikke gemt — de findes kun i dette vindue:',
+  'Niet alles gaat mee naar git': 'Ikke alt kommer med til git',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'Disse dele kommer ikke med i commit\'en og står bagefter ikke i repositoryet:',
+  'Tekeningen op slides': 'Tegninger på slides',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'De bliver i dette vindue. Gem også præsentationen som fil eller som .ocideck-pakke for at beholde dem.',
+  'Toch opslaan': 'Gem alligevel',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'I browseren findes der ingen nedbrudsgendannelse: lukker du denne fane, er ikke-gemt arbejde væk. Gem selv din præsentation.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Den lokale CVE-database (du starter selv downloaden): OciDeck henter massedataene via api.github.com og den udgivelsesfil, som den adresse peger på.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

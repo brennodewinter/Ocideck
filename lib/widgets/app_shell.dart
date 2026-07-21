@@ -9,6 +9,7 @@ import 'package:window_manager/window_manager.dart';
 
 import '../platform/launch_files.dart';
 import '../platform/platform_features.dart';
+import '../platform/unsaved_work_guard.dart';
 import '../utils/display_path.dart';
 import '../utils/log.dart';
 import '../models/asset_origin.dart';
@@ -52,6 +53,7 @@ import '../services/mermaid_render_service.dart';
 import '../models/git_settings.dart';
 import '../services/git/asset_index.dart';
 import '../services/git/deck_merge.dart';
+import '../services/git/deck_repo_serializer.dart';
 import '../services/git/deck_search.dart';
 import '../services/git/git_forge.dart';
 import '../services/git/version_diff.dart';
@@ -524,22 +526,79 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     child: const _TabContent(),
   );
 
-  /// Een grafiek verwijst naar een databestand dat niet gelezen kon worden:
-  /// ontbrekend, onleesbaar, of buiten de projectmap.
+  /// Een grafiek kon zijn databestand niet lezen of niet schrijven: ontbrekend,
+  /// onleesbaar, buiten de projectmap, of intussen buiten de app gewijzigd.
   ///
-  /// Melden is hier het hele punt. Zo'n grafiek tekent leeg, en een lege
-  /// grafiek is niet te onderscheiden van een grafiek waar nog geen cijfers in
-  /// staan — zonder deze melding is het probleem dus onzichtbaar.
+  /// Melden is hier het hele punt. Bij het openen tekent zo'n grafiek leeg, en
+  /// een lege grafiek is niet te onderscheiden van een grafiek waar nog geen
+  /// cijfers in staan. Bij het opslaan weegt het zwaarder: de markdown draagt
+  /// dan alleen nog de verwijzing, dus die cijfers bestaan enkel nog in dit
+  /// venster — een geslaagde opslag melden zou ronduit misleidend zijn. Vandaar
+  /// twee teksten, en bij het opslaan de foutkleur.
   void _listenChartDataWarning(BuildContext context, WidgetRef ref) {
     ref.listen<ChartDataWarning?>(chartDataWarningProvider, (_, warning) {
       if (warning == null) return;
       ref.read(chartDataWarningProvider.notifier).state = null;
-      ScaffoldMessenger.of(context).showSnackBar(
+      final l10n = context.l10n;
+      final messenger = ScaffoldMessenger.of(context);
+      final sources = warning.sources.join(', ');
+      if (warning.whileSaving) {
+        showErrorSnackBar(
+          messenger,
+          l10n,
+          '${l10n.d('Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:')} '
+          '$sources',
+        );
+        return;
+      }
+      messenger.showSnackBar(
         SnackBar(
           duration: const Duration(seconds: 8),
           content: Text(
-            '${context.l10n.d('Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:')} '
-            '${warning.sources.join(', ')}',
+            '${l10n.d('Grafiekdata kon niet worden gelezen; die grafieken blijven leeg:')} '
+            '$sources',
+          ),
+        ),
+      );
+    });
+  }
+
+  /// Of de eenmalige web-mededeling over crashherstel al is getoond. Per
+  /// sessie, niet per tabblad: hij gaat over de omgeving, niet over dit deck.
+  bool _toldAboutNoWebRecovery = false;
+
+  /// Er staat niet-opgeslagen werk open.
+  ///
+  /// Twee dingen tegelijk, allebei alleen op web nodig:
+  ///
+  ///   * de browser krijgt een rem op het sluiten van het tabblad
+  ///     ([setUnsavedWorkGuard]) — op desktop doet `windowManager` dat al;
+  ///   * en de gebruiker hoort één keer dat crashherstel hier niet bestaat.
+  ///     [RecoveryService.available] is op web onwaar (geen app-supportmap) en
+  ///     de autosave-tik start er niet eens. Dat is een verdedigbare keuze, maar
+  ///     stilzwijgend is het een valstrik: op desktop wérkt het wel, dus de
+  ///     gebruiker heeft geen reden te vermoeden dat het hier anders is.
+  ///
+  /// Bewust bij de eerste bewerking en niet bij het opstarten: een waarschuwing
+  /// over verlies van werk terwijl er nog geen werk is, leest als ruis. En
+  /// bewust aan de dienst gevraagd in plaats van aan `kIsWeb`: als herstel er
+  /// ooit tóch komt, verdwijnt deze mededeling vanzelf mee.
+  void _listenUnsavedWork(BuildContext context, WidgetRef ref) {
+    ref.listen<bool>(tabsProvider.select((s) => s.anyDirty), (_, dirty) {
+      setUnsavedWorkGuard(dirty);
+      if (!dirty ||
+          ref.read(recoveryServiceProvider).available ||
+          _toldAboutNoWebRecovery) {
+        return;
+      }
+      _toldAboutNoWebRecovery = true;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          duration: const Duration(seconds: 10),
+          content: Text(
+            context.l10n.d(
+              'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.',
+            ),
           ),
         ),
       );
@@ -706,6 +765,8 @@ class _AppShellState extends ConsumerState<AppShell> with WindowListener {
     _listenSecurityModulePrompt(context);
 
     _listenChartDataWarning(context, ref);
+
+    _listenUnsavedWork(context, ref);
 
     // Een zojuist geopend bestand heeft elders een byte-identieke kopie:
     // niet-blokkerend melden (de gebruiker wilde gewoon openen), met de

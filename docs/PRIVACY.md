@@ -25,7 +25,11 @@ machine (desktop) or in your browser tab (web). This includes:
 - Your settings and theme profiles.
 - Autosave/recovery snapshots — written to a per-user application-support folder,
   kept for 7 days, then removed. They are not encrypted; they rely on your
-  operating-system account protections, just like your other files.
+  operating-system account protections, just like your other files. A snapshot
+  holds the deck text, your user notes and the drawings made on the slides, so
+  everything you would want back after a crash is in there — including the parts
+  that live beside the `.md` rather than in it. In the browser no snapshot is
+  written at all, because there is no such folder.
 - **Staged media.** A deck you have not saved yet has no project folder to keep
   its images in, so an image you insert is copied into a per-session folder under
   your operating system's temporary directory. That is what keeps the picture

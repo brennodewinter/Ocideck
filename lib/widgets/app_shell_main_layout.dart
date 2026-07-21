@@ -670,9 +670,7 @@ class _MainLayoutState extends ConsumerState<_MainLayout> {
     if (slides.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(
-            l10n.d('Alle slides zijn overgeslagen — niets om te exporteren.'),
-          ),
+          content: Text(emptyAudienceReason(l10n, deck, forExport: true)),
         ),
       );
       return;

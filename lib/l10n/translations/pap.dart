@@ -807,6 +807,33 @@ const _dutchSourceAddPap = {
       'ta lista loke a keda afó, sin e balornan mes. E file aki por bai huntu ku e rapòrt.',
   'bevat de sleutels waarmee elke weggelakte waarde is terug te rekenen. Stuur dit bestand niet mee: dan is de redactie ongedaan gemaakt. Bewaar het bij de bron.':
       'ta kontené e yabinan ku kua tur balor redaktá por wòrdu kalkulá bèk. No manda e file aki huntu: e ora ei e redakshon ta anulá. Wardé serka e fuente.',
+  'slides': 'slides',
+  'Achtergehouden': 'Retené',
+  'Achtergehouden: strenger geclassificeerd dan de presentatie':
+      'Retené: klasifiká mas strikto ku e presentashon',
+  '1 slide achtergehouden door haar TLP': '1 lámina retené pa su TLP',
+  'slides achtergehouden door hun TLP': 'lámina retené pa nan TLP',
+  'Deze slides gaan niet mee bij presenteren, exporteren of in het pakket. Verhoog het TLP-niveau van de presentatie bij Presentatie-info om ze mee te nemen.':
+      'E slidenan aki no ta bai huntu ora di presentá, eksportá ni den e paket. Halsa e nivel TLP di e presentashon na Info di presentashon pa hiba nan huntu.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Tur lámina ta retené pa nan klasifikashon TLP — no tin nada pa mustra.',
+  'Alle slides zijn achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Tur lámina ta retené pa nan klasifikashon TLP — no tin nada pa eksportá.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te tonen.':
+      'Tur lámina ta pasá over of retené pa nan klasifikashon TLP — no tin nada pa mustra.',
+  'Alle slides zijn overgeslagen of achtergehouden door hun TLP-classificatie — niets om te exporteren.':
+      'Tur lámina ta pasá over of retené pa nan klasifikashon TLP — no tin nada pa eksportá.',
+  'Grafiekcijfers zijn niet opgeslagen — ze staan alleen nog in dit venster:':
+      'E sifranan di grafiko no a keda wardá — nan ta solamente den e bentana aki:',
+  'Niet alles gaat mee naar git': 'No tur kos ta bai ku git',
+  'Deze onderdelen komen niet in de commit terecht en staan straks niet in de repository:':
+      'E partinan aki no ta yega den e commit i lo no ta den e repositorio:',
+  'Tekeningen op slides': 'Dibuhonan riba lámina',
+  'Ze blijven in dit venster staan. Sla de presentatie ook als bestand of als .ocideck-pakket op om ze te bewaren.':
+      'Nan ta keda den e bentana aki. Warda e presentashon tambe komo archivo of komo paket .ocideck pa konservá nan.',
+  'Toch opslaan': 'Warda igualmente',
+  'In de browser is er geen crashherstel: sluit je dit tabblad, dan is niet-opgeslagen werk weg. Sla je presentatie zelf op.':
+      'Den e browser no tin rekuperashon despues di un crash: si bo sera e tab aki, trabou no wardá ta pèrdí. Warda bo presentashon bo mes.',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  E base di datos CVE lokal (ta bo ta kuminsá e download): OciDeck ta buska e datos na bulto via api.github.com i e archivo di release ku e adrès ei ta indiká.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

@@ -106,6 +106,11 @@ const Set<String> uncoveredBaseline = {
   'lib/services/cve/local_cve_database_web.dart',
   'lib/utils/file_download.dart',
   'lib/utils/file_download_web.dart',
+  // PLATFORM: de webhelft van de rem op het sluiten van een tabblad. Dit is
+  // `dart:js_interop`-code (`beforeunload`); de VM-runner kan haar niet laden.
+  // De gevel én de io-helft worden wél uitgevoerd — zie
+  // test/web_no_recovery_notice_test.dart.
+  'lib/platform/unsaved_work_guard_web.dart',
   // NO EXECUTABLE LINES: const data table (345 lines, zero statements).
   'lib/services/cvss/cvss4_lookup.dart',
   // NO EXECUTABLE LINES: const data tables — the finding templates, one file
