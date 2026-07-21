@@ -14,6 +14,7 @@ import 'package:ocideck/services/presentation_search/presentation_source.dart';
 import 'package:ocideck/widgets/dialogs/import_slides_dialog.dart';
 import 'package:ocideck/widgets/dialogs/slide_diff_dialog.dart';
 import 'package:ocideck/widgets/dialogs/slide_finder_dialog.dart';
+import 'package:ocideck/widgets/slides/slide_preview.dart';
 
 /// Een remote bron met vaste inhoud, om het samenvoegen in de finder te toetsen
 /// zonder een echte git/WebDAV/S3-server.
@@ -259,5 +260,79 @@ void main() {
     // offers a compare.
     expect(find.byIcon(Icons.copy_all_outlined), findsOneWidget);
     expect(find.text('Verschillen'), findsWidgets);
+  });
+
+  // Een relatief pad betekent iets anders in het bron-deck dan in de
+  // presentatie waar de dia naartoe gaat. Beide dialogen maken het daarom
+  // absoluut — maar deden dat alleen voor de afbeeldingsvelden, dus een
+  // `![…](…)` in de vrije tekst wees na het overnemen naar de verkeerde map.
+  group('een afbeelding in de vrije tekst reist mee met het juiste pad', () {
+    late Directory tekstDir;
+
+    setUp(() {
+      tekstDir = Directory.systemTemp.createTempSync('dedup_tekst_');
+      File('${tekstDir.path}/deck_tekst.md').writeAsStringSync(
+        '---\nmarp: true\ntheme: ocideck\ntitle: Tekstdeck\n---\n\n'
+        'Sleutelbeheer in tekst\n\n![de foto](images/foto.png)\n',
+      );
+    });
+
+    tearDown(() {
+      if (tekstDir.existsSync()) tekstDir.deleteSync(recursive: true);
+    });
+
+    testWidgets('Slide zoeken maakt het pad absoluut', (tester) async {
+      Slide? toegevoegd;
+
+      await _openAndSearch(
+        tester,
+        show: (context) => SlideFinderDialog.show(
+          context,
+          fileService: _fileService(tekstDir.path),
+          roots: [LibraryFolder(name: 'Tekst', path: tekstDir.path)],
+          onAdd: (Slide slide) => toegevoegd = slide,
+        ),
+        query: 'Sleutelbeheer in tekst',
+        then: () async {
+          await tester.tap(find.text('Toevoegen').first);
+          await _flushFrames(tester);
+        },
+      );
+
+      expect(toegevoegd, isNotNull);
+      expect(
+        toegevoegd!.customMarkdown,
+        contains('![de foto](${tekstDir.path}/images/foto.png)'),
+      );
+    });
+
+    testWidgets('Slides importeren maakt het pad absoluut', (tester) async {
+      List<Slide>? geimporteerd;
+
+      await _openAndSearch(
+        tester,
+        show: (context) async {
+          geimporteerd = await ImportSlidesDialog.show(
+            context,
+            fileService: _fileService(tekstDir.path),
+            initialDirectory: tekstDir.path,
+          );
+        },
+        query: 'Sleutelbeheer in tekst',
+        then: () async {
+          // De kaart aantikken selecteert de dia; daarna importeren.
+          await tester.tap(find.byType(SlidePreviewWidget).first);
+          await _flushFrames(tester);
+          await tester.tap(find.textContaining('Importeren').last);
+          await _flushFrames(tester);
+        },
+      );
+
+      expect(geimporteerd, hasLength(1));
+      expect(
+        geimporteerd!.single.customMarkdown,
+        contains('![de foto](${tekstDir.path}/images/foto.png)'),
+      );
+    });
   });
 }
