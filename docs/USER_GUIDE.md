@@ -428,7 +428,59 @@ In the **PDF and PPTX** export each page is written as a full-size slide of its
 own, so a footer with page numbers counts the continuation pages along with
 everything else. *Corrected 2026-07-22: before that, the export rendered the
 first page of such a slide and left the rest out of the file without saying so.*
-Presenting is unaffected — there the pages remain pages of one slide.
+Presenting is unaffected — there the pages remain pages of one slide. The **HTML**
+export writes such a slide **once**, with the whole body in it: the page split is
+a property of OciDeck's own rendering and there is nothing about it in the
+Markdown to reproduce.
+
+**A picture inside the text.** Put an image on a line of its own in a rich-text
+body and it is drawn there, in the flow of the text:
+
+```markdown
+What we found on the third day:
+
+![The login screen, with the error message in red](images/login.png)
+
+The message names a user account that does not exist.
+```
+
+Size it the way Marp does, with `w:` and `h:` in the square brackets —
+`![Login screen w:600 h:400](images/login.png)`. Those numbers count in Marp's
+own measure, where a slide is 1280 wide, so the same `w:600` means the same
+thing in the app and in the HTML export. Leave `w:` out and the picture uses the
+full width of the text column; leave `h:` out and it gets a fixed box a quarter
+of the slide width high. That box is deliberately worked out from the Markdown
+and not from the picture: the page split has to know how much room the image
+takes before any file has been read, and a box that changed once the picture
+arrived would make the text jump. Inside the box the picture is scaled to fit —
+never cropped, never stretched — so `h:` is how you make it taller or shorter.
+Everything else between the brackets is ordinary alt text, which is also what
+other Markdown readers make of the `w:`/`h:` part.
+
+Only an image that sits alone on its line is drawn this way; one in the middle
+of a sentence stays text, so a sentence is never broken in half by a picture.
+The image travels with the deck like any other (see *Images and media travel
+with the presentation*), and on a slide set to **redact** it is removed along
+with the slide's other media.
+
+**Splitting a pasted document into chapters.** Paste a long document into a
+rich-text body and its `#` headings end up in the middle of one slide. In Marp a
+`#` *is* a slide's title, so such a heading looks like a title without being one,
+and you cannot move, skip or present that chapter on its own.
+
+A line above the text box therefore says how many slides splitting would produce,
+with a **Splits op hoofdstukken** (Split by chapters) button. Each chapter becomes
+its own slide with the heading as its title; a `##` directly under such a heading
+becomes that slide's subheading. Whatever came before the first chapter stays on
+the slide you were already on, with its existing title. It is one edit, so one
+undo puts everything back.
+
+It only happens when you ask. A deck that has headings in a body today opens
+unchanged tomorrow — restructuring while reading the file would quietly change
+what you wrote. A `##` stays a heading *inside* the slide, and a `#` inside a
+fenced code block is source code and does not split. The button is not offered on
+a bullets-with-image slide: where that picture should go is a choice only you can
+make.
 
 **Group headings ("tussenkoppen").** To split one slide's bullets into visually
 separated groups — an agenda's *morning* and *afternoon*, pros versus cons —
@@ -923,6 +975,16 @@ If the presentation has not been saved yet there is no such folder, so the copy
 goes to a temporary staging area with the same layout; saving moves it to its
 final place. Either way the file is safe from the moment you insert it: moving or
 renaming the original afterwards no longer breaks the slide.
+
+A picture you typed into a rich-text body yourself — `![…](…)`, see *Bullets and
+lists* — counts as one of the slide's images everywhere this guide mentions them:
+it is copied into the presentation folder on save, packed into a `.ocideck`
+package, pooled into a git repository's shared assets, pre-loaded for PDF/PPTX
+export, reported by the quality panel when it is missing or lies outside the
+presentation, counted as a use by the image library, repointed when duplicates are
+cleaned up, and made absolute when you take the slide over from another deck.
+*Added 2026-07-22: until then all of those looked only at the image fields, so an
+image that existed solely in the text was skipped by each of them.*
 
 Next to the file path in the editor a **badge** tells you what will happen when
 you pass the presentation on. It stays quiet for material that simply travels

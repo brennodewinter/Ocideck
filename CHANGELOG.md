@@ -80,6 +80,39 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   markdown of de HTML.
 
 ### Fixed
+- **Een afbeelding in de lopende tekst telt nu overal mee.** Stond een afbeelding
+  in een afbeeldingsveld, dan wist OciDeck ervan. Stond hij als `![…](…)` in de
+  tekst van een dia, dan keek de ene plek na de andere eraan voorbij, elke keer
+  met hetzelfde gevolg: een bestand dat wel getekend werd maar nergens in
+  meetelde. Er is nu één antwoord op de vraag "welke afbeeldingen gebruikt deze
+  dia", en alle plekken lezen datzelfde antwoord.
+
+  Concreet: de privacycontrole redigeert zo'n afbeelding nu ook op een dia die op
+  *redigeren* staat — hij reisde daarvoor gewoon mee naar het scherm en de export
+  terwijl de tekst ernaast al zwarte blokken toonde. Het opslaan kopieert hem mee
+  naar de map van de presentatie in plaats van naar uw eigen schijf te blijven
+  wijzen. Het `.ocideck`-pakket stopt hem in het archief, zodat de ontvanger geen
+  gat krijgt. De git-opslag neemt hem op in de gedeelde bestandenmap van de
+  repository — anders bleef er in `deck.md` een pad staan dat alleen op uw eigen
+  computer klopt — en leest hem daar bij het openen ook weer uit. De PDF- en
+  PPTX-export laadt hem vooraf in, zodat er geen leeg vak in belandt. De
+  kwaliteitscontrole meldt hem als hij ontbreekt of buiten de presentatie ligt.
+  De afbeeldingenbibliotheek telt hem als gebruik, zodat "0 dia's gebruiken dit"
+  niet langer een onterechte vrijbrief is om te verwijderen, en wijst hem na het
+  opruimen van dubbele bestanden naar het behouden exemplaar. Het overnemen van
+  dia's uit een andere presentatie maakt zijn pad absoluut, zodat hij niet naar
+  de map van de ontvanger wijst. En in de webversie ziet de opruiming van
+  afbeeldingen in het browsergeheugen hem eveneens, en gooit ze hem dus niet meer
+  weg terwijl de dia hem nog tekent.
+- **De HTML-export herhaalde een lange vrije-tekstdia.** Sinds elke pagina van
+  zo'n dia als eigen dia wordt geëxporteerd (zie hieronder), kreeg de HTML-export
+  diezelfde lijst voorgeschoteld — en omdat een pagina in het bestandsformaat
+  geen eigen gedaante heeft, schreef elke pagina de volledige tekst weg. Een dia
+  die in drie pagina's uiteenviel stond dus drie keer achter elkaar in de HTML,
+  elke keer compleet. De PDF- en PPTX-export hadden hier geen last van; die
+  tekenen de pagina's en zien het verschil wel. De HTML-export schrijft zo'n dia
+  nu één keer weg, met de hele tekst erin: het opdelen in pagina's is iets van
+  de weergave in OciDeck en staat niet in het bestand.
 - **Een lange vrije-tekstdia raakt zijn vervolgpagina's niet meer kwijt bij het
   exporteren.** Zet u meer tekst op een dia dan er past, dan verdeelt OciDeck die
   over meerdere pagina's; in de editor en tijdens het presenteren bladert u
@@ -203,6 +236,46 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   rij, dus ze kunnen nooit over elkaar heen vallen.
 
 ### Added
+- **Een afbeelding midden in een tekstdia.** Zet u op een dia met vrije tekst een
+  `![beschrijving](images/foto.png)` op een eigen regel, dan tekent OciDeck die
+  afbeelding voortaan op die plek in de tekst. Tot nu toe bleef daar de kale
+  markdowncode staan. Het bestandsformaat kon dit al — de tekst gaat letterlijk
+  het bestand in en er weer uit — alleen keek er niemand naar.
+
+  De maat regelt u met dezelfde aanwijzing als Marp: `![w:600 h:400](…)`. Die
+  telt in Marp's eigen maatvoering, waarin een dia 1280 breed is, zodat `w:600`
+  in de app hetzelfde betekent als in de HTML-export. Laat u `w:` weg, dan
+  gebruikt de afbeelding de volle breedte van de tekstkolom. Laat u `h:` weg,
+  dan krijgt hij een vast vak van een kwart van de diabreedte hoog. Dat vak komt
+  bewust niet uit de afbeelding zelf: OciDeck moet weten hoeveel ruimte er weg
+  gaat vóórdat er ook maar één bestand is ingelezen, anders zou de tekst
+  verspringen zodra een foto binnen is. Binnen dat vak wordt de afbeelding
+  passend geschaald zonder bij te snijden — wilt u hem hoger of lager, geef dan
+  `h:` op. Voor elke andere markdownlezer is die `w:`/`h:` gewone
+  beschrijvingstekst, dus uw bestand blijft leesbaar buiten OciDeck.
+
+  Alleen een afbeelding die alléén op zijn regel staat wordt zo getekend; eentje
+  midden in een zin blijft tekst, zodat een zin niet halverwege door een plaatje
+  wordt gebroken.
+- **Een lang document opknippen in hoofdstukken.** Plakt u een heel document in
+  een tekstdia, dan staan de `#`-koppen ervan midden in die ene dia. In Marp ís
+  `#` de titel van een dia, dus zo'n kop doet zich voor als titel zonder er een
+  te zijn, en u kunt dat hoofdstuk niet verplaatsen, overslaan of apart
+  presenteren.
+
+  Boven het tekstvak verschijnt daarom een regel die zegt hoeveel dia's het
+  oplevert, met de knop **Splits op hoofdstukken**. Elk hoofdstuk wordt een eigen
+  dia met de kop als titel; staat er een `##` direct onder zo'n kop, dan wordt
+  dat de ondertitel. De tekst vóór het eerste hoofdstuk blijft bij de dia waar u
+  al was, met zijn eigen titel. Het is één bewerking, dus één keer ongedaan maken
+  zet alles terug.
+
+  Het gebeurt alleen als u erom vraagt. Een bestaand deck met koppen in de tekst
+  komt bij het openen ongewijzigd terug — herstructureren tijdens het inlezen zou
+  stilzwijgend veranderen wat u had opgeschreven. Een `##` blijft een kop bínnen de
+  dia, en een `#` in een codeblok is broncode en knipt niet. Op een dia met tekst
+  én een afbeelding wordt het niet aangeboden: waar die afbeelding heen moet is
+  een keuze die alleen u kunt maken.
 - **Een bestand vertelt nu welke formaatversie het heeft** (`ocideck_format` in
   de front matter). Dat is nodig om oudere bestanden later te kunnen blijven
   openen zonder te raden. Er verandert niets aan wat u ziet, maar drie regels

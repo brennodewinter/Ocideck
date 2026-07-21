@@ -610,6 +610,34 @@ typed:
 A paragraph, **bold**, a `- list` if you want one, all of it ordinary Markdown.
 ```
 
+**An `![alt](path)` alone on a line in such a body is an image**, drawn in the
+flow of the text rather than left as literal Markdown (since 2026-07-22). It is
+written and read back verbatim — there is no OciDeck marker around it — so this
+costs the format nothing; what changed is that OciDeck now looks at it. Two
+reading rules:
+
+- The image must be the **whole line**. A `![…](…)` inside a paragraph stays part
+  of that paragraph's text, so a sentence is never broken in half.
+- `w:` and `h:` **inside the alt text** set its size, following Marp's own
+  convention: `![Login screen w:600 h:400](images/login.png)`. They count against
+  a slide 1280 wide — Marp's measure, and the width the HTML export uses — not
+  against OciDeck's internal 960 layout unit, so the same directive means the
+  same thing in the app and in the export. Without `w:` the image spans the text
+  column; without `h:` it gets a fixed box of `kMarkdownImageDefaultHeightFraction`
+  (a quarter) of the reference width, and is scaled to fit inside it. A value that
+  is not a positive finite number is ignored rather than honoured. To any other
+  Markdown reader the whole of `Login screen w:600 h:400` is just alt text.
+
+The box is derived from the Markdown alone and never from the image file:
+pagination is synchronous and cannot wait for a decode, so the height a line
+reserves must be readable off the text. `lib/services/markdown_body_blocks.dart`
+holds both the parse and the box, and the paginator and the renderer call the
+same function — the reserved and the drawn height cannot drift apart.
+
+An empty path (`![alt]()`) is deliberately kept as an image block: that is what
+the privacy projection leaves behind when it removes the picture of a redacted
+slide, and keeping the block keeps the layout from shifting.
+
 **The page split of such a body is not in the file.** Text that would have to
 shrink below the readable floor to fit one slide is broken into pages while
 rendering, worked out from the theme (the font, and the reserve a logo or footer
@@ -699,6 +727,17 @@ save the comments are gone.
 
 </div>
 ```
+
+**The `split-image` div decides which image is the side image.** On a slide whose
+body is rich text (§ *Rich text*), only a `![…](…)` **inside** that div becomes
+`imagePath`; one in the `split-text` half is an image in the running text and
+stays in the body. The rule used to be "the first `![…]` on a split slide is the
+side image"; since a body may hold pictures of its own (2026-07-22) that rule
+would swallow one the author put in the text. Leaning on the scaffolding is safe
+here because this branch only runs for a
+body carrying `<!-- ocideck_list_style: richText -->`, a marker only OciDeck
+writes — so the div is there too; a hand-written Marp split slide has no rich-text
+body and is read down the bullet path.
 
 **Two images** (no class) — as left/right backgrounds:
 ```markdown

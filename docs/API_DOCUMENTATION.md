@@ -73,6 +73,13 @@ String generateDeck(Deck deck, {
 Deck? parseDeck(String markdown, {String? filePath});
 ```
 
+`generateDeck` drops every slide whose `renderPage > 0` (2026-07-22). Those are
+render copies of one paginated rich-text body: each carries the whole body and
+differs only in a field that is not serialized, so writing them out repeats the
+same slide. Passing an `expandRichTextForRender` result to `generateDeck` is
+therefore always a caller mistake, and the filter sits in the service rather than
+at the call site.
+
 Structural pre-flight validation is a separate class; `validate` is an instance
 method, `MarkdownValidationResult validate(String markdown)`, in
 `lib/services/markdown_validator.dart`, which returns a `MarkdownValidationResult`
@@ -208,6 +215,29 @@ bytes, not extension (`imageMimeFromBytes` accepts PNG, JPEG, GIF, BMP, WebP).
 Key methods: `pickImage` / `pickImageDetailed` (→ `ImageImportOutcome`),
 `pasteImage` / `pasteImageDetailed`, `readSlideImageBytes`, `copyImagesToProject`,
 `copyMediaToProject`.
+
+### Slide image references
+`lib/services/slide_image_refs.dart` — the single answer to "which images does
+this slide use". Do **not** read `imagePath`/`imagePath2` directly: a rich-text
+body may hold `![…](…)` of its own, and those are slide images as well.
+
+```dart
+// Every reference, in reading order: the fields first, then the body.
+// SlideImageSlot is { image, image2, inline }; empty paths are dropped.
+List<SlideImageRef> slideImageRefs(Slide slide);
+Iterable<String> slideImagePaths(Slide slide);
+
+// The counterpart: rewrite the same set. `null` (or the same path) keeps it.
+Slide rewriteSlideImagePaths(Slide slide, String? Function(String path) map);
+String rewriteInlineImagePaths(String markdown, String? Function(String) map);
+List<String> inlineImagePaths(String markdown);
+```
+
+`lib/services/image_usage.dart` builds the library's two questions on top of it:
+`slideIndexesUsingImage(deck, target, resolve)` and
+`slideWithImageReplaced(slide, target, resolve, replacement)`, where
+`ImagePathResolver resolve` is what differs per call site (with or without the
+containment guard) rather than what the questions themselves mean.
 
 ### WebAssetStore
 `lib/services/web_asset_store.dart` — in-memory image store for the web build,

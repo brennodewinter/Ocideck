@@ -132,6 +132,22 @@ lib/
   `mediaRedacted` is written as `<!-- ocideck_media_redacted -->` under `forExport`
   only, so the HTML export can draw the black block the rasterized exports draw
   themselves. Neither is carried over by `Slide.duplicate`.
+- **"Which images does this slide use" has one definition**,
+  `services/slide_image_refs.dart` (added 2026-07-22), and it is not
+  `imagePath` + `imagePath2`: a rich-text body may carry `![…](…)` of its own
+  (FILE_FORMAT § *Rich text*), and those are slide images too. `slideImageRefs` /
+  `slideImagePaths` read the set; `rewriteSlideImagePaths` /
+  `rewriteInlineImagePaths` rewrite it — a caller that can enumerate must be able
+  to rewrite, or it leaves an inline path pointing nowhere. A dozen or so files
+  had spelled the field pair out by hand, and each one that missed the body
+  failed in its own direction: the privacy projection let a redacted slide keep
+  its picture, the git pool wrote a path into `deck.md` that only the author's
+  machine could resolve, the web `mem:` sweep freed bytes still being drawn, the
+  save and package paths shipped a deck with a hole in it, and the library's
+  "0 slides use this" invited a deletion.
+  `services/image_usage.dart` sits on top of it for the library's two questions
+  (who uses this file, and repoint them), which existed twice with the same blind
+  spot.
 - **Question slides** are interactive. The authored `QuestionSpec` round-trips in
   `customMarkdown`; the live per-presentation state (`QuestionView` — the random
   options drawn, the pick, correct/wrong, timer) is **session-only** and never

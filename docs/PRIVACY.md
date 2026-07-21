@@ -207,6 +207,15 @@ salutation or label makes them unambiguous, to avoid crying wolf.
   original length can't be reconstructed.
 - Redaction is applied **before** the content reaches any preview, presentation,
   or export surface — not painted over afterwards.
+- On a slide set to **redact**, the media goes too: image, video and audio are
+  removed and a black redaction block takes their place, rather than the grey box
+  that means "no picture chosen yet". This includes a picture typed into the
+  running text of a rich-text body (`![…](…)`) — the path is emptied while the
+  reference itself stays, so the text does not shift as if nothing had ever been
+  there. *Added 2026-07-22: until then only the image, video and audio fields were
+  cleared, so a redacted slide travelled to the screen and the export with the
+  picture from its body intact.* The source file keeps its images; this is about
+  what is shown and exported.
 
 ### The redaction manifest, and the file that must stay home
 
