@@ -54,7 +54,7 @@ help:
 	@echo "  make check-conventions  No print(); bare catch (_) & file-size ratchets."
 	@echo "  make check-method-length  Per-method length ratchet (AST-measured, max 150)."
 	@echo "  make check-dead-code Fail on orphaned lib/ files (unreachable from any entrypoint)."
-	@echo "  make check-hardcoded-text  Hardcoded visible strings ratchet (must reach 0 before 0.1.0)."
+	@echo "  make check-hardcoded-text  Hard gate: no visible string in lib/ may bypass l10n.d()."
 	@echo "  make coverage-per-file  Per-file coverage floor: budget of files below it (must reach 0)."
 	@echo "  make add-l10n SPEC=… Add d('…') source strings to every language from a JSON spec."
 	@echo "  make catalogs-outdated Advisory: bundled reference data vs upstream (run before a release build)."
@@ -445,8 +445,7 @@ check-dead-code:
 # een letterlijke scanner onzichtbaar. De poort splitst die twee gevallen:
 # gaat de literal onderweg door `d()`, dan is hij een BRONSLEUTEL (geen
 # overtreding, wél vertaalplicht — bewaakt in app_localizations_test); gaat hij
-# er niet doorheen, dan is het een echte overtreding en telt hij voor de
-# ratchet.
+# er niet doorheen, dan is het een echte overtreding en faalt de poort.
 check-hardcoded-text:
 	@echo "== OciDeck check: hardgecodeerde tekst =="
 	@echo "Command: dart run tool/check_hardcoded_text.dart"
@@ -455,11 +454,11 @@ check-hardcoded-text:
 	@echo "        indirecte doorgeefluiken (AST + datastroom, dus ook"
 	@echo "        EditorField(label: '…')). Bronsleutels die wél door d() gaan"
 	@echo "        tellen niet mee; hun vertaaldekking bewaakt make l10n-check."
-	@echo "        Aflopende ratchet: het plafond mag alleen omlaag, en een stille"
-	@echo "        daling faalt ook."
+	@echo "        Harde poort: geen plafond, elke overtreding faalt."
 	@echo "Failure means: haal de string door l10n.d('…') (make add-l10n SPEC=… zet de"
-	@echo "        31 vertalingen erbij), of verlaag hardcodedTextBaseline in"
-	@echo "        tool/check_hardcoded_text.dart als je er hebt opgeruimd."
+	@echo "        31 vertalingen erbij). Een merknaam, identifier of voorbeeldwaarde"
+	@echo "        gaat óók door d() en komt op unchangedInAllLanguages in"
+	@echo "        test/app_localizations_test.dart — niet om de poort heen."
 	@echo "        Volledige lijst: dart run tool/check_hardcoded_text.dart --list"
 	dart run tool/check_hardcoded_text.dart
 

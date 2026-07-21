@@ -48,8 +48,8 @@
 // `unchangedInAllLanguages` met de letterlijke variant, zodat een identifier
 // die in elke taal gelijk blijft (CWE, F-03) op één plek staat.
 //
-// Alleen de echte overtredingen tellen mee voor [hardcodedTextBaseline], en dat
-// getal moet naar nul.
+// Alleen de echte overtredingen laten de poort falen; een bronsleutel doet dat
+// niet, want daar bewaakt de vertaaltest de andere helft van de belofte.
 //
 // Daardoor stuurt het TYPE de beslissing, niet de parameternaam. Dat is precies
 // het verschil dat een naamgebaseerde grep niet kan maken: `title:` op een
@@ -100,18 +100,25 @@
 //   * Strings die via een lijst, een veld of een `Map` reizen waar geen
 //     [_mapValueSinks]-ingang voor is.
 //
-// ── De ratchet ───────────────────────────────────────────────────────────────
+// ── Er is geen plafond meer ──────────────────────────────────────────────────
 //
-// De poort kan niet op nul beginnen; er staan honderden overtredingen. Dus één
-// getal als plafond, dat alleen omlaag mag — geen lijst van toegestane
-// bestanden. Een lijst groeit stilletjes mee met elke uitzondering; een getal
-// niet. Zakt het werkelijke aantal onder het plafond zonder dat het plafond
-// meegaat, dan faalt de poort óók: de winst wordt meteen vastgezet in plaats
-// van later weer opgesoupeerd. Dat is dezelfde omgekeerde ratchet als bij de
-// dekkingsvloer.
+// Hier stond een ratchet: één getal als plafond dat alleen omlaag mocht, omdat
+// de poort niet op nul kón beginnen — er stonden honderden overtredingen. Die
+// opruiming is af. Het plafond is weg en de poort faalt nu bij élke
+// overtreding.
 //
-// Het plafond MOET nul zijn vóór de eerste release (0.1.0). Zolang het boven
-// nul staat, is de belofte "alles is vertaald" niet waar.
+// Dat verschil is niet cosmetisch. Een plafond dat op nul staat is nog steeds
+// een getal, en een getal kan iemand ophogen: één regel diff, en de belofte
+// "alles wat je leest is vertaald" is stilletjes weer een streefwaarde. Een
+// poort zonder getal laat zich niet oprekken — de enige uitweg is de string
+// door `l10n.d('…')` halen. Dat is de bedoeling.
+//
+// Er komt ook geen uitzonderingslijst van literals voor terug. Een merknaam,
+// een identifier of een voorbeeldwaarde (OciDeck, CWE, `#33FF33`, `v1.0`) gaat
+// gewoon door `d()` en komt op `unchangedInAllLanguages` in
+// test/app_localizations_test.dart: dan zit hij in het systeem, telt de poort
+// hem als afgehandeld, en wordt er geen nepvertaling van gemaakt. Een lijst
+// naast de poort zou juist de plek zijn waar het langzaam weer scheefloopt.
 //
 // Gebruik:
 //   dart run tool/check_hardcoded_text.dart            # de poort
@@ -126,25 +133,6 @@ import 'package:analyzer/dart/analysis/utilities.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/source/line_info.dart';
-
-/// Het aantal ECHT hardgecodeerde zichtbare strings dat `lib/` nog mag
-/// bevatten — literals die het scherm bereiken zonder ooit door `d()` te gaan.
-///
-/// Bronsleutels tellen hier NIET in mee: die staan op hun plek en worden op
-/// vertaaldekking bewaakt in plaats van op aantal (zie de kop).
-///
-/// RATCHET: dit getal mag ALLEEN omlaag. Ruim je er tien op, verlaag het dan
-/// met tien — de run drukt een tip met het nieuwe getal af, en weigert een
-/// stille daling. Verhogen betekent dat er nieuwe onvertaalde tekst bij is
-/// gekomen; dat is geen reden om het plafond op te rekken maar om de string
-/// door `l10n.d('…')` te halen (`make add-l10n SPEC=…` doet de 31 vertalingen).
-///
-/// Waarom het getal er staat: de opruiming zelf is honderden strings groot en
-/// gaat in batches. Wat NIET mag wachten is dat er nieuwe bij komen. Dit getal
-/// is de dichte deur; de opruiming loopt erachter door.
-///
-/// **Dit moet 0 zijn vóór release 0.1.0.**
-const int hardcodedTextBaseline = 0;
 
 /// Bestanden die deck-INHOUD dragen in plaats van interfacetekst: de sjablonen
 /// die een nieuwe presentatie met voorbeeldslides vullen. Die tekst is vanaf
@@ -626,28 +614,31 @@ String _oneLine(String text) {
 }
 
 void _report(List<Violation> violations, int sourceKeys) {
-  final count = violations.length;
-  final byArea = <String, int>{};
-  for (final v in violations) {
-    byArea.update(areaOf(v.path), (n) => n + 1, ifAbsent: () => 1);
-  }
-  final spread =
-      (byArea.entries.toList()..sort((a, b) => b.value.compareTo(a.value)))
-          .map((e) => '${e.key} ${e.value}')
-          .join(', ');
-
-  if (count > hardcodedTextBaseline) {
-    final fresh = violations.take(40).toList();
+  if (violations.isNotEmpty) {
+    final byArea = <String, int>{};
+    for (final v in violations) {
+      byArea.update(areaOf(v.path), (n) => n + 1, ifAbsent: () => 1);
+    }
+    final spread =
+        (byArea.entries.toList()..sort((a, b) => b.value.compareTo(a.value)))
+            .map((e) => '${e.key} ${e.value}')
+            .join(', ');
+    final shown = violations.take(40).toList();
     stderr
       ..writeln('Hardcoded text check FAILED:')
       ..writeln(
-        '  Hardgecodeerde zichtbare strings gestegen naar $count (plafond '
-        '$hardcodedTextBaseline). Elke zichtbare tekst hoort door '
-        "l10n.d('…') te lopen; `make add-l10n SPEC=…` zet de 31 vertalingen "
-        'erbij. Verdeling: $spread.',
+        '  ${violations.length} zichtbare string(en) bereiken het scherm '
+        "zonder door l10n.d('…') te gaan. Verdeling: $spread.",
       )
-      ..writeln('  Eerste ${fresh.length} van $count:');
-    for (final v in fresh) {
+      ..writeln(
+        "  Haal elke string door l10n.d('…'); `make add-l10n SPEC=…` zet de 31 "
+        'vertalingen erbij. Is het een merknaam, een identifier of een '
+        'voorbeeldwaarde (OciDeck, CWE, #33FF33), laat hem dan óók door d() '
+        'lopen en zet hem in unchangedInAllLanguages — dan staat hij in het '
+        'systeem zonder dat er een nepvertaling van gemaakt wordt.',
+      )
+      ..writeln('  Eerste ${shown.length} van ${violations.length}:');
+    for (final v in shown) {
       stderr.writeln('    ${v.location}: "${_oneLine(v.text)}"');
     }
     stderr.writeln(
@@ -656,27 +647,12 @@ void _report(List<Violation> violations, int sourceKeys) {
     exit(1);
   }
 
-  if (count < hardcodedTextBaseline) {
-    stderr
-      ..writeln('Hardcoded text check FAILED:')
-      ..writeln(
-        '  Goed nieuws, maar zet het vast: het aantal hardgecodeerde zichtbare '
-        'strings is gedaald naar $count terwijl hardcodedTextBaseline nog op '
-        '$hardcodedTextBaseline staat. Zet hardcodedTextBaseline in '
-        'tool/check_hardcoded_text.dart op $count, anders sijpelt de winst er '
-        'ongemerkt weer uit. Het doel is 0 vóór release 0.1.0.',
-      );
-    exit(1);
-  }
-
   stdout
     ..writeln(
-      'Hardcoded text OK: $count zichtbare string(en) nog niet door '
-      "l10n.d('…') (plafond $hardcodedTextBaseline, doel 0 vóór 0.1.0).",
+      "Hardcoded text OK: geen zichtbare string in lib/ omzeilt l10n.d('…').",
     )
-    ..writeln('  Verdeling: ${count == 0 ? '—' : spread}.')
     ..writeln(
-      '  Daarnaast $sourceKeys bronsleutel(s) via een doorgeefluik naar d(); '
+      '  $sourceKeys bronsleutel(s) lopen via een doorgeefluik naar d(); '
       'die horen daar en worden op vertaaldekking bewaakt in '
       'test/app_localizations_test.dart.',
     );
