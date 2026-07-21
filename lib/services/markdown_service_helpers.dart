@@ -59,23 +59,16 @@ void _writeTwoBulletColumns(
   bool showChecklistProgress,
   ThemeProfile themeProfile,
 ) {
-  buf.writeln('<!-- ocideck_two_bullets_left: ${_encodeBullets(left)} -->');
-  buf.writeln('<!-- ocideck_two_bullets_right: ${_encodeBullets(right)} -->');
+  // De inhoud van beide kolommen stond hier tot 0.1.0 in vier
+  // base64-richtlijnen, met de zichtbare `<ul><li>` eronder als decor. Nu draagt
+  // die opmaak de inhoud zelf: de ontsnapping in [_writeHtmlBulletItems] maakt
+  // een bullet met HTML of een pipe erin veilig, en [_parseTwoColumnBullets]
+  // leest hem weer terug. Wat overblijft aan commentaar is leesbaar.
   if (listStyle != ListStyle.bullets) {
     buf.writeln('<!-- ocideck_list_style: ${listStyle.name} -->');
   }
   if (showChecklistProgress) {
     buf.writeln('<!-- ocideck_checklist_progress: true -->');
-  }
-  if (leftTitle.isNotEmpty) {
-    buf.writeln(
-      '<!-- ocideck_two_bullets_left_title: ${_encodeText(leftTitle)} -->',
-    );
-  }
-  if (rightTitle.isNotEmpty) {
-    buf.writeln(
-      '<!-- ocideck_two_bullets_right_title: ${_encodeText(rightTitle)} -->',
-    );
   }
   buf.writeln(
     '<div class="ocideck-two-bullets" style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">',
@@ -139,11 +132,9 @@ void _writeBulletColumn(
   buf.writeln('</div>');
 }
 
-String _encodeBullets(List<String> bullets) {
-  return base64Url.encode(utf8.encode(jsonEncode(bullets)));
-}
-
-String _encodeText(String value) => base64Url.encode(utf8.encode(value));
+// Alleen nog lezen: de base64-tegenhangers zijn weg. Deze twee blijven bestaan
+// om een bestand dat OciDeck vóór 0.1.0 schreef te kunnen openen; bij het
+// opslaan gaat het naar de zichtbare vorm en komen ze niet meer terug.
 
 String _decodeText(String encoded) {
   try {
@@ -223,6 +214,22 @@ String _escapeHtml(String value) {
       .replaceAll('<', '&lt;')
       .replaceAll('>', '&gt;')
       .replaceAll('"', '&quot;');
+}
+
+/// De omkering van [_escapeHtml], en de reden dat de zichtbare `<li>` de inhoud
+/// mág dragen: een bullet die zelf HTML of een pipe bevat overleeft de rondgang
+/// omdat hij ontsnapt wordt geschreven en hier weer heel terugkomt. Het paar
+/// staat bewust naast elkaar — gaan ze uit de pas lopen, dan is dat hier te zien
+/// en niet pas in een deck waarin `&amp;lt;` in beeld staat.
+///
+/// `&amp;` gaat als laatste, anders wordt een letterlijk getypte `&lt;` na twee
+/// stappen alsnog een `<`.
+String _unescapeHtml(String value) {
+  return value
+      .replaceAll('&lt;', '<')
+      .replaceAll('&gt;', '>')
+      .replaceAll('&quot;', '"')
+      .replaceAll('&amp;', '&');
 }
 
 double _splitTextScale(Slide slide) {

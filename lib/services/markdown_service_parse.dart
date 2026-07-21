@@ -95,6 +95,12 @@ class _BodyParse {
   ListStyle listStyle;
   bool richTextHeaderPhase;
 
+  /// Of er een item met een vinkje (`[x]`) of een nummer is gezien, en of er
+  /// een gewoon item zonder allebei was. Samen laten ze de zichtbare opmaak de
+  /// lijststijl ook naar bénéden bijstellen; zie [_MarkdownParse._parseBodyLines].
+  bool sawMarkedItem = false;
+  bool sawPlainItem = false;
+
   /// Of het blok de `split`-class draagt; één keer bepaald in
   /// [_MarkdownParse._parseBodyLines] zodat de per-regel handlers niet elke
   /// regel opnieuw de cssClass hoeven te splitsen.
@@ -501,14 +507,26 @@ extension _MarkdownParse on MarkdownService {
     final structured = _structuredSlideOrNull(d, link);
     if (structured != null) return structured;
 
+    final classTokens = d.cssClass.split(_reWhitespace);
+    // De zichtbare kolommen zijn de inhoud. Alleen als er géén lijst-HTML staat
+    // — een oud bestand waarvan de opmaak is weggeknipt, of een handgeschreven
+    // blok met gewone Markdown-bullets — telt wat er verder in het blok stond.
+    final columns = _declaredSlideType(classTokens) == SlideType.twoBullets
+        ? _parseTwoColumnBullets(d.remaining)
+        : null;
+    final visibleColumns = columns != null && columns.found;
     // bullets may already hold the decoded two-column data; the line parser
     // appends to the same list, so pass it through by reference.
-    final bullets = d.bullets;
+    final bullets = visibleColumns ? columns.left : d.bullets;
+    final bullets2 = visibleColumns ? columns.right : d.bullets2;
     final body = _parseBodyLines(
       d.remaining.split('\n'),
       d.cssClass,
       d.listStyle,
       bullets,
+      // Staat de inhoud al in de kolommen, dan zou de generieke regelwandeling
+      // elk `<li>` van béíde kolommen nog eens op één hoop gooien.
+      skipContentLines: visibleColumns,
     );
 
     final imageSize = _cappedImageSize(body.imageSize, d.styleImageWidth);
@@ -529,7 +547,6 @@ extension _MarkdownParse on MarkdownService {
       paragraph: body.paragraph,
     );
 
-    final classTokens = d.cssClass.split(_reWhitespace);
     final showLogo = !classTokens.contains('no-logo');
     final showFooter = !classTokens.contains('no-footer');
 
@@ -552,13 +569,19 @@ extension _MarkdownParse on MarkdownService {
       title: body.h1,
       subtitle: type == SlideType.section ? body.paragraph : body.h2,
       bullets: bullets,
-      bullets2: d.bullets2,
-      listStyle: body.listStyle,
+      bullets2: bullets2,
+      // De zichtbare opmaak beslist over de lijststijl zodra ze er iets over
+      // zegt; de richtlijn is niet meer dan de startwaarde.
+      listStyle: visibleColumns
+          ? (columns.listStyle ?? body.listStyle)
+          : body.listStyle,
       showChecklistProgress: d.showChecklistProgress,
       continueNumbering: d.continueNumbering,
       continuesSplit: d.continuesSplit,
-      columnTitle1: d.columnTitle1,
-      columnTitle2: d.columnTitle2,
+      // Een zichtbare `<h3>` boven een kolom is de kop; alleen zonder kolommen
+      // telt de oude base64-richtlijn nog.
+      columnTitle1: visibleColumns ? columns.leftTitle : d.columnTitle1,
+      columnTitle2: visibleColumns ? columns.rightTitle : d.columnTitle2,
       imagePath: body.imagePath,
       imagePath2: body.imagePath2,
       imageCaption: body.imageCaption,
@@ -722,11 +745,11 @@ extension _MarkdownParse on MarkdownService {
     List<String> lines,
     String cssClass,
     ListStyle listStyle,
-    List<String> bullets,
-  ) {
+    List<String> bullets, {
+    required bool skipContentLines,
+  }) {
     final b = _BodyParse(listStyle);
     final classTokens = cssClass.split(_reWhitespace);
-    final isTwoBullets = classTokens.contains('two-bullets');
     b.isSplit = classTokens.contains('split');
 
     for (final line in lines) {
@@ -735,7 +758,7 @@ extension _MarkdownParse on MarkdownService {
         continue;
       }
       final t = line.trim();
-      if (isTwoBullets) {
+      if (skipContentLines) {
         if (t.startsWith('# ')) {
           b.h1 = t.substring(2);
         } else if (t.startsWith('## ')) {
@@ -744,6 +767,18 @@ extension _MarkdownParse on MarkdownService {
         continue;
       }
       _consumeContentLine(line, t, bullets, b);
+    }
+
+    // De zichtbare opmaak mag de stijl ook terugzetten. Stond er `checklist` of
+    // `numbered` in de richtlijn maar draagt geen enkel item nog een vinkje of
+    // een nummer, dan heeft iemand ze weggehaald en is dit een gewone
+    // opsomming. Alleen omhoog kunnen betekende dat je een checklist nooit meer
+    // kwijtraakte door de tekst te bewerken.
+    if (b.sawPlainItem &&
+        !b.sawMarkedItem &&
+        (b.listStyle == ListStyle.checklist ||
+            b.listStyle == ListStyle.numbered)) {
+      b.listStyle = ListStyle.bullets;
     }
 
     return (
@@ -858,8 +893,14 @@ extension _MarkdownParse on MarkdownService {
       bullets.add('\t' * level + body);
       if (_reChecklistMark.hasMatch(body)) {
         b.listStyle = ListStyle.checklist;
+        b.sawMarkedItem = true;
       } else if (_reNumberedMark.hasMatch(marker)) {
         b.listStyle = ListStyle.numbered;
+        b.sawMarkedItem = true;
+      } else if (!isGroupHeading(body)) {
+        // Een tussenkop draagt per ontwerp geen vinkje of nummer, dus hij zegt
+        // niets over de stijl van de lijst eromheen.
+        b.sawPlainItem = true;
       }
     } else if (t == '>' || t.startsWith('> ')) {
       // Aanvullen, niet overschrijven: een citaat mag meerdere regels beslaan.
