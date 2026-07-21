@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 /// lichte app-thema. Daarom een eigen palet in plaats van [AppTheme]-tokens;
 /// de conventie-ratchet op rauwe `Color(0x…)` zondert dit bestand bewust uit.
 abstract final class ImagePickerPalette {
-
   // Oppervlakken (donker → lichter)
   static const bgDeepest = Color(0xFF080D14);
   static const bgDeep = Color(0xFF0B0F16);

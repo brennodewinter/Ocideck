@@ -8,6 +8,7 @@ import 'package:ocideck/state/s3_provider.dart';
 import 'package:ocideck/state/webdav_provider.dart';
 import 'package:ocideck/widgets/dialogs/s3_browser_dialog.dart';
 import 'package:ocideck/widgets/dialogs/webdav_browser_dialog.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// De twee bladeraars over externe opslag (WebDAV/Nextcloud en S3) zijn
 /// tweelingen: ze filteren, navigeren en falen op dezelfde manier. Ze staan
@@ -425,6 +426,48 @@ void main() {
 
       expect(find.widgetWithText(ListTile, 'rapport.ocideck'), findsNothing);
       expect(find.text('Deze map is leeg'), findsOneWidget);
+    });
+
+    testWidgets('een niet-ingestelde verbinding meldt dat, en blijft niet '
+        'eeuwig laden', (tester) async {
+      // Bewust zónder override: de échte provider, die zelf een
+      // WebdavException/S3Exception gooit als er geen client te bouwen is.
+      //
+      // Riverpod 3 herhaalt een gegooide Exception uit zichzelf, en een
+      // herhalende provider staat in AsyncLoading — dus dit scherm bleef op de
+      // laadindicator hangen en de uitgeschreven foutmeldingen kwamen nooit in
+      // beeld. Zie noAutoRetry in lib/state/provider_retry.dart.
+      for (final body in const [
+        WebdavBrowserDialog(
+          mode: WebdavBrowseMode.deck,
+          connectionId: 'onbekend',
+        ),
+        S3BrowserDialog(mode: S3BrowseMode.deck, connectionId: 'onbekend'),
+      ]) {
+        SharedPreferences.setMockInitialValues({});
+        await tester.pumpWidget(
+          ProviderScope(
+            child: MaterialApp(home: Scaffold(body: body)),
+          ),
+        );
+        // Begrensd doorpompen: de provider is asynchroon, maar mag niet
+        // eindeloos laden.
+        for (var i = 0; i < 40; i++) {
+          await tester.pump(const Duration(milliseconds: 20));
+          if (find.byType(CircularProgressIndicator).evaluate().isEmpty) break;
+        }
+
+        expect(
+          find.byType(CircularProgressIndicator),
+          findsNothing,
+          reason: '$body bleef laden',
+        );
+        expect(
+          find.widgetWithText(OutlinedButton, 'Opnieuw proberen'),
+          findsOneWidget,
+          reason: '$body bood geen zichtbare herkansing',
+        );
+      }
     });
 
     testWidgets('vernieuwen laadt de lijst opnieuw op', (tester) async {

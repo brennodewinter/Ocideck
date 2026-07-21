@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 /// onderdeel van het lichte app-thema, daarom een eigen palet dat de
 /// raw-colour-ratchet uitzondert.
 abstract final class PresenterPalette {
-
   // Oppervlakken (donker → lichter)
   static const bgDeepest = Color(0xFF0A0A0A);
   static const bg = Color(0xFF141414);
