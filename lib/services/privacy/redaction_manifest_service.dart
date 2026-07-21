@@ -72,8 +72,16 @@ class RedactionManifestService {
   }
 
   /// Elke waarde die de projectie op dit deck zou wegredigeren, in vaste
-  /// volgorde (slide, dan bevinding). Eén bron van waarheid voor zowel het
-  /// bouwen als het verifiëren van een manifest — anders lopen die twee uiteen.
+  /// volgorde (deckbreed, dan slide, dan bevinding). Eén bron van waarheid voor
+  /// zowel het bouwen als het verifiëren van een manifest — anders lopen die
+  /// twee uiteen.
+  ///
+  /// De `isRedactable`-poort is dezelfde als in `PrivacyProjection._byFragment`,
+  /// en dat is geen detail. Zonder die poort telde het manifest ook de losse
+  /// aanwijzingen mee — een deck met "de diagnose is nog niet gesteld" leverde
+  /// twee entries op terwijl er nul blokken in de export stonden. De ontvanger
+  /// zocht dan naar redacties die er niet zijn, en dat ondermijnt precies het
+  /// vertrouwen dat het manifest hoort te vestigen.
   List<({PrivacyFinding finding, String value})> redactedValues(
     Deck deck, {
     PrivacyExportProfile profile = PrivacyExportProfile.full,
@@ -83,6 +91,22 @@ class RedactionManifestService {
       ownIdentity: ownIdentity,
     ).scan(deck);
     final out = <({PrivacyFinding finding, String value})>[];
+
+    // Eerst de deckbrede redacties. Die stonden hier niet, en dan had een ████
+    // in het PDF-auteursveld of in de andere documentmetadata geen entry om te
+    // betwisten: de ontvanger zag dát er iets weg was, maar had geen id om naar
+    // te wijzen en geen commitment om tegen te toetsen. Ze komen vóór de dia's
+    // omdat de projectie ze ook als eerste verwerkt — `verifyAgainstSource`
+    // vergelijkt op positie, dus de volgorde is onderdeel van het contract.
+    if (deck.privacy == PrivacyDisposition.redact ||
+        profile == PrivacyExportProfile.redacted) {
+      for (final finding in scan.findings.where(
+        (f) => f.isDeckWide && f.isRedactable,
+      )) {
+        final value = _deckValueOf(deck, finding);
+        if (value != null) out.add((finding: finding, value: value));
+      }
+    }
 
     for (var i = 0; i < deck.slides.length; i++) {
       final slide = deck.slides[i];
@@ -95,12 +119,37 @@ class RedactionManifestService {
       final redactAll = profile == PrivacyExportProfile.redacted;
       if (!redactAll && disposition != PrivacyDisposition.redact) continue;
 
-      for (final finding in scan.forSlide(i)) {
+      for (final finding in scan.forSlide(i).where((f) => f.isRedactable)) {
         final value = _valueOf(slide, finding);
         if (value != null) out.add((finding: finding, value: value));
       }
     }
     return out;
+  }
+
+  /// De oorspronkelijke tekst achter een deckbrede bevinding.
+  ///
+  /// Dezelfde velden, dezelfde nummering en dezelfde volgorde als
+  /// `PrivacyScannerFragments._deckFragments` en `PrivacyProjection._project`.
+  /// Lopen die drie uiteen, dan committeert het manifest een andere tekst dan
+  /// er is weggelakt — en dan faalt een eerlijke verificatie.
+  String? _deckValueOf(Deck deck, PrivacyFinding finding) {
+    final i = finding.fragmentIndex;
+    final text = switch (finding.field) {
+      'deckTitle' => deck.title,
+      'author' => deck.author,
+      'organization' => deck.organization,
+      'description' => deck.description,
+      'keywords' => deck.keywords,
+      'version' => deck.version,
+      'date' => deck.date,
+      'standardsUsed' => _at(deck.standardsUsed, i),
+      'toolsUsed' => _at(deck.toolsUsed.map((t) => t.name).toList(), i),
+      'miauwWaivers' => _at(deck.miauwWaivers.values.toList(), i),
+      'miauwConfirmations' => _at(deck.miauwConfirmations.values.toList(), i),
+      _ => null,
+    };
+    return _span(text, finding);
   }
 
   String _newSalt() {
@@ -127,10 +176,27 @@ class RedactionManifestService {
       'bullets' => _at(slide.bullets, finding.fragmentIndex),
       'bullets2' => _at(slide.bullets2, finding.fragmentIndex),
       'tableRows' => _tableCell(slide, finding.fragmentIndex),
+      // Het scope-object van een checklist wordt sinds kort óók geredigeerd; de
+      // mediapaden bewust niet (zie `PrivacyProjection._projectMedia`), dus
+      // daar valt geen tekstbereik te committen.
+      'checklistScope' => slide.checklistScope,
       _ => null,
     };
+    return _span(text, finding);
+  }
+
+  /// De tekst achter een bevinding, of `null` als er niets te committen valt.
+  ///
+  /// Een leeg bereik is geen redactie. `struct.notes_leak` is zo'n bevinding:
+  /// hij meldt *dát* er iets in de sprekersnotities staat en wijst met `[0,0)`
+  /// nergens naar. Die kreeg hier een entry met het commitment over de lége
+  /// string — een redactie die niet in het document staat, met een commitment
+  /// dat iedereen in één regel kan naspelen. Precies het tegendeel van wat het
+  /// manifest hoort te bewijzen.
+  static String? _span(String? text, PrivacyFinding finding) {
     if (text == null) return null;
     if (finding.end > text.length) return null;
+    if (finding.end <= finding.start) return null;
     return text.substring(finding.start, finding.end);
   }
 
