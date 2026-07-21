@@ -293,13 +293,19 @@ class _Use {
   bool reaches(Set<String> solved) => sinks.any(solved.contains);
 }
 
-void main(List<String> args) {
-  final listOnly = args.contains('--list');
+/// Scant [root] en levert elke hardgecodeerde zichtbare string op, gesorteerd
+/// op locatie.
+///
+/// Los van [main] zodat een test hem op een kleine fixture-map kan loslaten en
+/// kan vaststellen dát het doorgeefluik gevonden wordt — de reden dat deze
+/// poort bestaat. Zonder zo'n test kan de analyse stilvallen bij een
+/// analyzer-upgrade (een AST-accessor die verschuift) en dan meldt hij nul.
+List<Violation> scanForHardcodedText(String root) {
   final index = _Index();
   final uses = <_Use>[];
   final units = <({String path, CompilationUnit unit, LineInfo lineInfo})>[];
 
-  for (final file in _dartFiles(Directory('lib'))) {
+  for (final file in _dartFiles(Directory(root))) {
     final path = file.path.replaceAll(r'\', '/');
     if (_isTranslationData(path)) continue;
     if (_contentHomes.contains(path)) continue;
@@ -316,9 +322,13 @@ void main(List<String> args) {
     u.unit.visitChildren(_UseVisitor(index, uses, u.path, u.lineInfo));
   }
 
-  final sinks = _solveSinks(uses);
-  final violations = _collect(uses, sinks)
+  return _collect(uses, _solveSinks(uses))
     ..sort((a, b) => a.location.compareTo(b.location));
+}
+
+void main(List<String> args) {
+  final listOnly = args.contains('--list');
+  final violations = scanForHardcodedText('lib');
 
   if (listOnly) {
     stdout.write(renderList(violations));
