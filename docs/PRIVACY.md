@@ -30,6 +30,16 @@ machine (desktop) or in your browser tab (web). This includes:
   everything you would want back after a crash is in there — including the parts
   that live beside the `.md` rather than in it. In the browser no snapshot is
   written at all, because there is no such folder.
+- **Unpushed git work in the browser.** With a git repository connected, the web
+  build keeps your not-yet-pushed deck text, notes and annotations in the
+  browser's own key/value storage, so a reload does not throw the work away.
+  That is ordinary browser storage for the origin serving OciDeck, not a
+  protected store: anything with access to that browser profile can read it.
+  It holds your own document, never a password or token — those are refused
+  outright in the browser (see *Secrets are stored in your OS keychain*). The
+  entry is overwritten as you work, but it is **not** removed after a
+  successful push: the last state of a deck stays in that storage until you
+  clear the site's data in your browser.
 - **Staged media.** A deck you have not saved yet has no project folder to keep
   its images in, so an image you insert is copied into a per-session folder under
   your operating system's temporary directory. That is what keeps the picture
