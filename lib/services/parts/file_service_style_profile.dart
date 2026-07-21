@@ -174,7 +174,7 @@ extension FileServiceStyleProfile on FileService {
         logoOmitted: built.logoOmitted,
       );
     }
-    final dest = await FilePicker.saveFile(
+    final dest = await _saveDestination(
       dialogTitle: _d('Stijlprofiel exporteren'),
       fileName: name,
     );

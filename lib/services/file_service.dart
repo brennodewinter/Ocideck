@@ -194,6 +194,32 @@ class ImportOutcome {
   const ImportOutcome.failed(this.failure) : mdPath = null;
 }
 
+/// Vraagt de gebruiker waar een bestand naartoe moet. Standaard het
+/// systeemvenster (`FilePicker.saveFile`).
+///
+/// Eén dunne indirectie, met opzet niet meer dan dat: het bewaar-venster is het
+/// enige stuk van het uitvoerpad dat onder `flutter test` niet bestaat — de
+/// plugin wordt daar niet geregistreerd — en zonder deze naad is álles
+/// eráchter onbereikbaar: de classificatiepoort, het wachtwoorddialoog, het
+/// wegschrijven en de meldingen aan de gebruiker. Volgt het patroon dat
+/// [FileService] al gebruikt voor `homeDirectory` en `libraryPaths`.
+typedef SaveDestinationPicker =
+    Future<String?> Function({
+      String? dialogTitle,
+      String? fileName,
+      String? initialDirectory,
+    });
+
+Future<String?> _systemSaveDestination({
+  String? dialogTitle,
+  String? fileName,
+  String? initialDirectory,
+}) => FilePicker.saveFile(
+  dialogTitle: dialogTitle,
+  fileName: fileName,
+  initialDirectory: initialDirectory,
+);
+
 class FileService {
   final MarkdownService _md;
   final ImageService _img;
@@ -201,6 +227,7 @@ class FileService {
   final String Function() _languageCode;
   final String? Function() _homeDirectory;
   final List<String> Function() _libraryPaths;
+  final SaveDestinationPicker _saveDestination;
   final CaptionService _captions = CaptionService();
 
   /// Deck (zijn eigen `.md`, via [_deckChartKey]) → { absoluut pad van een
@@ -232,9 +259,11 @@ class FileService {
     String Function()? languageCode,
     String? Function()? homeDirectory,
     List<String> Function()? libraryPaths,
+    SaveDestinationPicker? saveDestination,
   }) : _languageCode = languageCode ?? (() => 'nl'),
        _homeDirectory = homeDirectory ?? (() => null),
-       _libraryPaths = libraryPaths ?? (() => const []);
+       _libraryPaths = libraryPaths ?? (() => const []),
+       _saveDestination = saveDestination ?? _systemSaveDestination;
 
   ThemeProfile get currentThemeProfile => resolveThemeProfile(_themeProfile());
 
@@ -695,7 +724,7 @@ class FileService {
     final safeName = deck.title
         .replaceAll(RegExp(r'[^\w\s-]'), '')
         .replaceAll(' ', '_');
-    final result = await FilePicker.saveFile(
+    final result = await _saveDestination(
       dialogTitle: _d('Opslaan als'),
       fileName: '$safeName.md',
       initialDirectory: initialDirectory,
@@ -914,7 +943,7 @@ class FileService {
   }
 
   Future<String?> pickPackageDestination(Deck deck) async {
-    return FilePicker.saveFile(
+    return _saveDestination(
       dialogTitle: _d('Pakket exporteren'),
       fileName: '${_safeName(deck.title)}.$packageExtension',
     );

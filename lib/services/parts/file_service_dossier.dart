@@ -91,7 +91,7 @@ extension FileServiceDossier on FileService {
   /// Desktop: ask where to write the dossier, defaulting to a dossier-distinct
   /// name. Mirrors [pickPackageDestination].
   Future<String?> pickDossierDestination(Deck deck) async {
-    return FilePicker.saveFile(
+    return _saveDestination(
       dialogTitle: _d('Auditdossier exporteren'),
       fileName:
           '${_safeName(deck.title)}_auditdossier.'
