@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/storage_connection.dart';
 import '../services/webdav_service.dart';
+import 'provider_retry.dart';
 import 'settings_provider.dart';
 
 /// Bouwt een [WebdavService] voor één WebDAV-verbinding: de opgeslagen
@@ -48,7 +49,10 @@ final webdavConnectionsProvider = Provider<List<WebdavConnection>>(
 typedef WebdavListingKey = ({String connectionId, String remotePath});
 
 final webdavListingProvider = FutureProvider.autoDispose
-    .family<List<WebdavEntry>, WebdavListingKey>((ref, key) async {
+    .family<List<WebdavEntry>, WebdavListingKey>(retry: noAutoRetry, (
+      ref,
+      key,
+    ) async {
       final service = await ref.watch(
         webdavServiceProvider(key.connectionId).future,
       );

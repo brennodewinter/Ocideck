@@ -70,7 +70,10 @@ class _SealTimestampDialogState extends State<SealTimestampDialog> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'SHA-512: ${deck.sealHash.substring(0, 24)}…',
+                    // Afgekapt met een beletselteken, tenzij de hash korter is
+                    // dan dat — substring(0, 24) op een beschadigde hash liet
+                    // het hele scherm crashen op een RangeError.
+                    'SHA-512: ${_shortHash(deck.sealHash)}',
                     style: TextStyle(
                       fontFamily: 'monospace',
                       fontSize: 11,
@@ -172,7 +175,14 @@ class _SealTimestampDialogState extends State<SealTimestampDialog> {
 
   Future<void> _exportTsq(Deck deck) async {
     final l10n = context.l10n;
-    final tsq = buildTimeStampRequest(_hexToBytes(deck.sealHash));
+    final tsq = buildTimeStampRequestForSealHash(deck.sealHash);
+    if (tsq == null) {
+      // Een zegel dat geen SHA-512 is, is geen zegel. Eerder werd de hash
+      // half ingelezen en alsnog een verzoek geëxporteerd — dan laat je een
+      // TSA een document stempelen dat niet bestaat.
+      _toast(l10n.d('Tijdstempel komt niet overeen met de seal-hash'));
+      return;
+    }
     try {
       final path = await FilePicker.saveFile(
         dialogTitle: l10n.d('Verzoek (.tsq) exporteren'),
@@ -212,10 +222,11 @@ class _SealTimestampDialogState extends State<SealTimestampDialog> {
     ).showSnackBar(SnackBar(content: Text(message)));
   }
 
-  Uint8List _hexToBytes(String hex) => Uint8List.fromList([
-    for (var i = 0; i + 1 < hex.length; i += 2)
-      int.parse(hex.substring(i, i + 2), radix: 16),
-  ]);
+  static const _hashPreviewChars = 24;
+
+  String _shortHash(String hash) => hash.length <= _hashPreviewChars
+      ? hash
+      : '${hash.substring(0, _hashPreviewChars)}…';
 
   Uint8List? _decodeToken(String base64Token) {
     try {

@@ -14,14 +14,20 @@ import '../utils/asn1_der.dart';
 /// The hash algorithms whose OID this module recognises (for building a request
 /// and for locating the message imprint in a token).
 enum Rfc3161HashAlgorithm {
-  sha1([0x2b, 0x0e, 0x03, 0x02, 0x1a]),
-  sha256([0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x01]),
-  sha512([0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x03]);
+  sha1([0x2b, 0x0e, 0x03, 0x02, 0x1a], 20),
+  sha256([0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x01], 32),
+  sha512([0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x03], 64);
 
-  const Rfc3161HashAlgorithm(this.oidBody);
+  const Rfc3161HashAlgorithm(this.oidBody, this.digestBytes);
 
   /// The DER OID body (the octets after tag+length).
   final List<int> oidBody;
+
+  /// The digest length in bytes. A MessageImprint that declares this algorithm
+  /// but carries a different number of octets is malformed, and a TSA is
+  /// entitled to reject it — better to notice that here than after the user has
+  /// mailed the request off.
+  final int digestBytes;
 }
 
 /// OID `1.2.840.113549.1.9.16.1.4` — `id-ct-TSTInfo`, the eContent type that
@@ -56,6 +62,53 @@ Uint8List buildTimeStampRequest(
     derBoolean(true), // certReq
   ]);
   return Uint8List.fromList(tsq);
+}
+
+/// Decode a hex digest — the deck's `sealHash` as it is stored — to its bytes.
+/// Returns null when [hex] is not an even-length run of hex digits.
+///
+/// Deliberately strict. The tempting version skips whatever it cannot read and
+/// carries on, which turns a typo into a *different* imprint: the request then
+/// asks a TSA to timestamp a document that does not exist, and the token that
+/// comes back is worthless in exactly the situation it was meant for. Refusing
+/// is the only safe answer.
+Uint8List? decodeHashHex(String hex) {
+  if (hex.isEmpty || hex.length.isOdd) return null;
+  final out = Uint8List(hex.length ~/ 2);
+  for (var i = 0; i < out.length; i++) {
+    final byte = int.tryParse(hex.substring(i * 2, i * 2 + 2), radix: 16);
+    // int.tryParse accepts a leading sign and surrounding whitespace, neither
+    // of which is a hex digit; check the characters themselves.
+    if (byte == null || !_isHexPair(hex, i * 2)) return null;
+    out[i] = byte;
+  }
+  return out;
+}
+
+bool _isHexPair(String hex, int at) {
+  for (var i = at; i < at + 2; i++) {
+    final c = hex.codeUnitAt(i);
+    final isDigit = c >= 0x30 && c <= 0x39;
+    final isLower = c >= 0x61 && c <= 0x66;
+    final isUpper = c >= 0x41 && c <= 0x46;
+    if (!isDigit && !isLower && !isUpper) return false;
+  }
+  return true;
+}
+
+/// Build the `.tsq` for a deck's `sealHash`, or null when that hash is not a
+/// well-formed digest of the right length for [algorithm].
+///
+/// The length check is the point: a request that announces SHA-512 and encloses
+/// 32 octets is malformed, and the failure would surface at the TSA — out of
+/// band, days later, to a user who no longer has the deck in front of them.
+Uint8List? buildTimeStampRequestForSealHash(
+  String sealHashHex, {
+  Rfc3161HashAlgorithm algorithm = Rfc3161HashAlgorithm.sha512,
+}) {
+  final hash = decodeHashHex(sealHashHex);
+  if (hash == null || hash.length != algorithm.digestBytes) return null;
+  return buildTimeStampRequest(hash, algorithm: algorithm);
 }
 
 /// The data extracted from a timestamp token that OciDeck can verify offline.

@@ -11,7 +11,7 @@ Run `make help` for a one-line summary of every target.
 ## The one command
 
 ```sh
-make check        # format-check + analyze + conventions + method-length + dead-code + coverage
+make check        # format-check + analyze + conventions + method-length + dead-code + coverage + per-file floor
 ```
 
 Run this before every push — it is the enforced gate. For the extended
@@ -44,10 +44,10 @@ To give a sense of scale (point-in-time figures — they only grow):
 
 | Metric | Approx. |
 | --- | ---: |
-| Automated tests in the suite | **~3355** |
-| Test files under `test/` | **~339** |
-| Source files under `lib/` | ~483 excl. translations (indexed in [`SOURCE_MAP.md`](SOURCE_MAP.md)) |
-| Line coverage (enforced floor: 78%) | **≥ 78%** |
+| Automated tests in the suite | **~4570** |
+| Test files under `test/` | **~435** |
+| Source files under `lib/` | ~564 excl. translations (indexed in [`SOURCE_MAP.md`](SOURCE_MAP.md)) |
+| Line coverage (enforced floor: 80%) | **≥ 80%** |
 
 Coverage is a floor **and** a census: `make coverage` also fails when a `lib/`
 file appears in no test at all. Such a file is not 0% — lcov never records it,
@@ -73,7 +73,8 @@ remote, the number you see locally is the number that gates the push.
 | [`make check-method-length`](#make-check-method-length) | Per-method length ratchet (AST, max 150) | ✅ | ✅ | ✅ |
 | [`make check-dead-code`](#make-check-dead-code) | No orphaned `lib/` files (unreachable from any entrypoint) | ✅ | ✅ | ✅ |
 | [`make test`](#make-test) | Full unit/widget suite passes (randomised order) | ✅ (via `coverage`) | ✅ | ✅ |
-| [`make coverage`](#make-coverage) | Line coverage ≥ 78% floor **and** every `lib/` file is in some test | ✅ | ✅ | ✅ (gate) |
+| [`make coverage`](#make-coverage) | Line coverage ≥ 80% floor **and** every `lib/` file is in some test | ✅ | ✅ | ✅ (gate) |
+| [`make coverage-per-file`](#make-coverage-per-file) | At most `filesBelowFloorBudget` `lib/` files run under 20% of their own lines | ✅ | ✅ | — |
 | [`make licenses`](#make-licenses) | Every dependency is open-source | — | ✅ | ✅ |
 | [`make sbom-verify`](#make-sbom--make-sbom-verify) | Committed SBOM matches the dependency set | — | ✅ | ✅ |
 | [`make deps-check`](#make-deps-check) | Vendored export JS: integrity + CVEs | — | ✅ | ✅ |
@@ -237,10 +238,10 @@ also declares them, but see the [CI note](#continuous-integration).)
 
 ### `make coverage`
 - **Runs:** `flutter test --coverage --test-randomize-ordering-seed random --exclude-tags golden`
-  then `dart run tool/coverage_summary.dart --min=79 --require-instrumented`.
+  then `dart run tool/coverage_summary.dart --min=80 --require-instrumented`.
 - **Covers:** two things. (1) Line coverage across every `lib/` file a test
   imports. (2) That there **is** such a test for every `lib/` file.
-- **Failure means:** coverage dropped below the floor (currently **78%**), **or**
+- **Failure means:** coverage dropped below the floor (currently **80%**), **or**
   a `lib/` file is in no test at all.
 - **Why (2) exists:** lcov only records files a test imported, so a file no test
   touches is not 0% — it is absent from the denominator altogether. Add a
@@ -256,6 +257,29 @@ also declares them, but see the [CI note](#continuous-integration).)
   the run prints a tip when a baselined file becomes covered.
 - Since this supersedes `make test` (same suite, one run, plus the floor),
   `make check` depends on **`coverage`** rather than `test`.
+
+### `make coverage-per-file`
+- **Runs:** `dart run tool/coverage_summary.dart --per-file-floor`, over the
+  report `make coverage` just wrote — no second test run.
+- **Covers:** the worst case *per file* instead of the average: how many `lib/`
+  files execute less than **20%** of their own lines.
+- **Failure means:** more files sit below that floor than
+  `filesBelowFloorBudget` allows (write a test for one of the files the run
+  lists), **or** the budget was left standing after an improvement (lower it to
+  the number the run prints).
+- **Why it exists:** being in the denominator is not being executed. A test that
+  imports a file without ever calling into it keeps that file in the report at
+  0%, and an 80% average absorbs it without a ripple — on 2026-07-21 twenty-two
+  `lib/` files were in exactly that state, 1.219 lines between them, and they
+  passed both gates above. Neither the floor nor `--require-instrumented` can
+  see this: one looks at the mean, the other only at whether a file is mentioned
+  anywhere.
+- **A budget, not an allow-list.** A list of blessed files grows quietly — one
+  more line per untested file and nobody notices. A number cannot absorb
+  anything: a new untested file pushes the count over the budget and the gate
+  goes red. It is a **ratchet in both directions** — it may only shrink, and it
+  fails when it lags reality by more than a file or two, so the win is locked in
+  rather than left as headroom for the next regression. Target: **0**.
 
 ---
 

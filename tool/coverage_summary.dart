@@ -2,6 +2,7 @@
 //
 //   flutter test --coverage
 //   dart run tool/coverage_summary.dart [--min=50] [--require-instrumented]
+//                                       [--per-file-floor]
 //   (or: make coverage)
 //
 // Reads coverage/lcov.info, prints overall line coverage, and exits non-zero
@@ -14,6 +15,13 @@
 // supposed to catch is the one thing it structurally cannot see. This flag
 // enumerates lib/ from disk instead and fails on any file missing from the
 // report that is not in [uncoveredBaseline].
+//
+// --per-file-floor closes the *second* hole: being in the denominator is not
+// being executed. A file can be imported by a test and still run zero lines —
+// on 2026-07-21 twenty-two lib/ files were in that state, 1.219 lines between
+// them, and every one of them sailed through both checks above, because an
+// 80% average absorbs a single file that never runs. A floor that looks at the
+// mean cannot see the worst case; this flag looks at the worst case.
 
 import 'dart:io';
 
@@ -149,7 +157,48 @@ const Set<String> uncoveredBaseline = {
   'lib/services/cve/local_cve_database_api.dart',
   // NO EXECUTABLE LINES: a single enum declaration.
   'lib/widgets/markdown_editor/notes_editor_mode.dart',
+  // NO EXECUTABLE LINES: the two stand-alone dark palettes — nothing but
+  // `static const Color` tokens. They used to hold one unreachable line each (a
+  // private constructor that existed only to block instantiation) and therefore
+  // sat at 0% forever, which no test could ever fix. They are now
+  // `abstract final class`, the way `finding_severity_palette.dart` already
+  // did it, which says the same thing without a statement to reach.
+  'lib/theme/image_picker_palette.dart',
+  'lib/theme/presenter_palette.dart',
 };
+
+/// The per-file coverage floor: a lib/ file below this fraction of executed
+/// lines counts as untested. RATCHET: may rise, never fall.
+///
+/// Why 20 and not 80: at 20% a file has at least one line in five that some
+/// test really runs — enough that a behaviour change somewhere in it stands a
+/// chance of turning a test red. Below that the file is decoration in the
+/// report. The number is deliberately reachable today so that the *budget*
+/// below is the thing that squeezes; raise it once the budget is near zero.
+const int perFileFloorPercent = 20;
+
+/// How many lib/ files may sit below [perFileFloorPercent]. RATCHET: may
+/// shrink, never grow — and it must track reality, so the check also fails when
+/// the budget is left standing well above the true count (see [_staleSlack]).
+///
+/// This is a number and not a list of blessed files on purpose. A list grows
+/// quietly: every new untested file gets one more line and nobody notices. A
+/// budget cannot absorb anything — a new untested file pushes the count over
+/// and the gate goes red, and the only way to make it green is to write a test
+/// or to visibly, deliberately edit this number upwards in a commit somebody
+/// has to justify.
+///
+/// Where it must go: 0. Every step down is one file that went from decoration
+/// to something a test can hold accountable. It started at 39 on 2026-07-21
+/// (22 of those files ran not a single line); what is left is mostly the
+/// app-shell command layer and a handful of dialogs.
+const int filesBelowFloorBudget = 21;
+
+/// Slack on the downward ratchet. Coverage of a file that sits near the floor
+/// can wobble by one when an optional dependency (the native OpenCV library
+/// behind DARTCV_LIB_PATH) is absent, so demanding an exact match would make
+/// the gate depend on the machine. More than this and the budget is stale.
+const int _staleSlack = 2;
 
 /// Translation data carries no logic; it is gated by the l10n tests instead.
 bool _isTranslationData(String path) => path.contains('lib/l10n/translations/');
@@ -181,14 +230,18 @@ void main(List<String> args) {
 
   double? min;
   var requireInstrumented = false;
+  var perFileFloor = false;
   for (final arg in args) {
     if (arg.startsWith('--min=')) min = double.tryParse(arg.substring(6));
     if (arg == '--require-instrumented') requireInstrumented = true;
+    if (arg == '--per-file-floor') perFileFloor = true;
   }
 
   var failed = false;
 
   if (requireInstrumented && !_checkInstrumented(report)) failed = true;
+
+  if (perFileFloor && !_checkPerFileFloor(report)) failed = true;
 
   if (min != null && pct < min) {
     stderr.writeln(
@@ -242,6 +295,82 @@ bool _checkInstrumented(File report) {
     );
   }
   return true;
+}
+
+/// One file's line tally, as lcov reports it.
+typedef _FileCoverage = ({String path, int hit, int found});
+
+/// Reads every per-file record from the lcov report. Files with no executable
+/// line at all are dropped: they carry no percentage to speak of.
+List<_FileCoverage> _perFile(File report) {
+  final result = <_FileCoverage>[];
+  String? path;
+  var found = 0;
+  var hit = 0;
+  for (final line in report.readAsLinesSync()) {
+    if (line.startsWith('SF:')) {
+      path = line.substring(3).trim();
+      found = 0;
+      hit = 0;
+    } else if (line.startsWith('LF:')) {
+      found = int.tryParse(line.substring(3)) ?? 0;
+    } else if (line.startsWith('LH:')) {
+      hit = int.tryParse(line.substring(3)) ?? 0;
+    } else if (line.trim() == 'end_of_record' && path != null && found > 0) {
+      result.add((path: path, hit: hit, found: found));
+    }
+  }
+  return result;
+}
+
+/// Fails when more lib/ files sit below [perFileFloorPercent] than
+/// [filesBelowFloorBudget] allows, and equally when the budget has been left
+/// standing above the truth. Returns true when the tree is clean.
+bool _checkPerFileFloor(File report) {
+  final below =
+      _perFile(report)
+          .where((f) => !_isTranslationData(f.path))
+          .where((f) => f.hit * 100 < perFileFloorPercent * f.found)
+          .toList()
+        ..sort((a, b) {
+          final byShare = (a.hit / a.found).compareTo(b.hit / b.found);
+          return byShare != 0 ? byShare : a.path.compareTo(b.path);
+        });
+
+  final dead = below.where((f) => f.hit == 0).length;
+  stdout.writeln(
+    'Per-file floor: ${below.length}/$filesBelowFloorBudget file(s) below '
+    '$perFileFloorPercent% executed lines ($dead of them at zero).',
+  );
+
+  if (below.length > filesBelowFloorBudget) {
+    stderr.writeln(
+      '${below.length} lib/ file(s) run less than $perFileFloorPercent% of '
+      'their lines, but only $filesBelowFloorBudget are budgeted. A test that '
+      'imports a file without running it keeps the file in the denominator and '
+      'the average hides it — that is what this floor is for. Write a test for '
+      'one of these, or (deliberately, and with a reason in the commit) raise '
+      'filesBelowFloorBudget in tool/coverage_summary.dart:\n'
+      '${below.map(_describe).join('\n')}',
+    );
+    return false;
+  }
+
+  if (below.length < filesBelowFloorBudget - _staleSlack) {
+    stderr.writeln(
+      'Only ${below.length} lib/ file(s) are below $perFileFloorPercent%, but '
+      'filesBelowFloorBudget still says $filesBelowFloorBudget. A ratchet that '
+      'lags reality gives back the ground you just won: set '
+      'filesBelowFloorBudget in tool/coverage_summary.dart to ${below.length}.',
+    );
+    return false;
+  }
+  return true;
+}
+
+String _describe(_FileCoverage f) {
+  final pct = (f.hit / f.found * 100).toStringAsFixed(1).padLeft(5);
+  return '    $pct%  ${f.hit}/${f.found}  ${f.path}';
 }
 
 int _fileCount(File report) {

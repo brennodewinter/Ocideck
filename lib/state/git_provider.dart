@@ -18,6 +18,7 @@ import '../services/git/outbox.dart';
 import '../services/git/sync_engine.dart';
 import '../services/git/draft_store_factory.dart';
 import '../utils/log.dart';
+import 'provider_retry.dart';
 import 'settings_provider.dart';
 
 /// Alle bruikbare git-verbindingen, in de volgorde die de gebruiker sleepte —
@@ -218,7 +219,10 @@ final syncEngineProvider = FutureProvider.family<SyncEngine?, String>((
 typedef GitDeckListKey = ({String connectionId, String branch});
 
 final gitDeckListProvider = FutureProvider.autoDispose
-    .family<Map<String, String>, GitDeckListKey>((ref, key) async {
+    .family<Map<String, String>, GitDeckListKey>(retry: noAutoRetry, (
+      ref,
+      key,
+    ) async {
       final forge = await ref.watch(gitForgeProvider(key.connectionId).future);
       if (forge == null) {
         throw const GitForgeException(
@@ -234,7 +238,7 @@ final gitDeckListProvider = FutureProvider.autoDispose
 typedef GitDeckTagsKey = ({String connectionId, String deckName});
 
 final gitDeckTagsProvider = FutureProvider.autoDispose
-    .family<List<TagRef>, GitDeckTagsKey>((ref, key) async {
+    .family<List<TagRef>, GitDeckTagsKey>(retry: noAutoRetry, (ref, key) async {
       final forge = await ref.watch(gitForgeProvider(key.connectionId).future);
       if (forge == null) {
         throw const GitForgeException(

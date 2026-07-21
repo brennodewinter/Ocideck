@@ -1,4 +1,4 @@
-.PHONY: refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-method-length check-dead-code check-hardcoded-text add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
+.PHONY: refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-method-length check-dead-code check-hardcoded-text coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -55,6 +55,7 @@ help:
 	@echo "  make check-method-length  Per-method length ratchet (AST-measured, max 150)."
 	@echo "  make check-dead-code Fail on orphaned lib/ files (unreachable from any entrypoint)."
 	@echo "  make check-hardcoded-text  Hardcoded visible strings ratchet (must reach 0 before 0.1.0)."
+	@echo "  make coverage-per-file  Per-file coverage floor: budget of files below it (must reach 0)."
 	@echo "  make add-l10n SPEC=… Add d('…') source strings to every language from a JSON spec."
 	@echo "  make catalogs-outdated Advisory: bundled reference data vs upstream (run before a release build)."
 	@echo "  make refresh-catalogs Regenerate WSTG/MASTG/MASWE from upstream (not in check)."
@@ -126,11 +127,25 @@ test:
 # lib/ from disk and fails on any non-baselined file that is in no test.
 coverage:
 	@echo "== OciDeck check: coverage =="
-	@echo "Command: flutter test --coverage && dart run tool/coverage_summary.dart --min=79 --require-instrumented"
+	@echo "Command: flutter test --coverage && dart run tool/coverage_summary.dart --min=80 --require-instrumented"
 	@echo "Covers: line coverage over lib/, plus: every lib/ file is in at least one test."
 	@echo "Failure means: coverage fell below the floor, or a lib/ file is in no test at all."
 	$(RAISE_FDS) flutter test --coverage --test-randomize-ordering-seed random --exclude-tags golden
-	dart run tool/coverage_summary.dart --min=79 --require-instrumented
+	dart run tool/coverage_summary.dart --min=80 --require-instrumented
+
+# The per-file floor, over the report `coverage` just wrote (no second test run).
+#
+# Separate from the floor above because it answers a different question. The
+# average says how much of lib/ runs; it says nothing about *where*. A file that
+# a test imports but never calls sits at 0% inside an 80% average and no gate
+# above notices — twenty-two files were in exactly that state. This one looks at
+# the worst case per file and budgets how many may be there.
+coverage-per-file:
+	@echo "== OciDeck check: per-file coverage floor =="
+	@echo "Command: dart run tool/coverage_summary.dart --per-file-floor"
+	@echo "Covers: how many lib/ files run less than a fifth of their own lines — the worst case per file, which the overall average cannot show."
+	@echo "Failure means: more files sit below the floor than the budget allows (write a test for one of the files listed), or the budget is stale after an improvement (lower it to the number printed)."
+	dart run tool/coverage_summary.dart --per-file-floor
 
 # Slide-renderer visual-regression goldens (test/golden/). Pixel- and
 # platform-specific (default flutter-test font, so they catch layout/structure/
@@ -556,9 +571,9 @@ build-release:
 # nothing ran them — and the GitHub workflow that did cannot fire on a Forgejo
 # remote without a runner. `make check` is the real gate; it should contain the
 # gates.
-check: format-check analyze check-conventions check-method-length check-dead-code check-hardcoded-text coverage
+check: format-check analyze check-conventions check-method-length check-dead-code check-hardcoded-text coverage coverage-per-file
 	@echo "== OciDeck check complete =="
-	@echo "Validated: formatting, static analysis, conventions, method length, dead-code, hardcoded visible text, the full Flutter test suite, and the coverage floor."
+	@echo "Validated: formatting, static analysis, conventions, method length, dead-code, hardcoded visible text, the full Flutter test suite, the coverage floor, and the per-file coverage floor."
 
 # Extended local check: the gate plus licence/compliance, bundled-JS CVEs, the
 # web-hardening assertion (rebuilds the web bundle), and a freshness report.

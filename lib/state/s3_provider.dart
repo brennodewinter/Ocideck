@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/storage_connection.dart';
 import '../services/s3/s3_service.dart';
+import 'provider_retry.dart';
 import 'settings_provider.dart';
 
 /// Bouwt een [S3Service] voor één S3-verbinding: de opgeslagen
@@ -49,7 +50,7 @@ final s3ConnectionsProvider = Provider<List<S3Connection>>(
 typedef S3ListingKey = ({String connectionId, String remotePath});
 
 final s3ListingProvider = FutureProvider.autoDispose
-    .family<List<S3Entry>, S3ListingKey>((ref, key) async {
+    .family<List<S3Entry>, S3ListingKey>(retry: noAutoRetry, (ref, key) async {
       final service = await ref.watch(
         s3ServiceProvider(key.connectionId).future,
       );

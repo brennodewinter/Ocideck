@@ -1,22 +1,38 @@
-// Part of the app_shell library — see ../app_shell.dart.
-// Zoeken over álle decks in de repository (§9.3), niet alleen het geopende.
-// Eigen bestand omdat de git-dialogen anders over de regelratchet gaan; de
-// handler staat in shell_actions_git.dart.
-part of '../app_shell.dart';
+import 'package:flutter/material.dart';
 
-/// Zoek in elke `deck.md` in de repo en open de gekozen vindplaats.
+import '../../l10n/app_localizations.dart';
+import '../../services/git/deck_search.dart';
+import '../../services/git/git_forge.dart';
+import '../../theme/app_theme.dart';
+import '../../utils/log.dart';
+import '../../utils/user_facing_error.dart';
+
+/// Zoeken over álle decks in de repository (§9.3), niet alleen het geopende:
+/// zoek in elke `deck.md` in de repo en geef de gekozen deckmap terug, zodat de
+/// aanroeper hem langs het gewone openpad opent.
 ///
 /// Bewust een knop en geen zoeken-tijdens-typen: elke ronde leest N bestanden
 /// over de REST-laag, en dat is niet iets om per toetsaanslag te doen.
-class _GitSearchDialog extends StatefulWidget {
+///
+/// Een eigen dialoogbestand en geen `part` van de app-shell: de shell hoeft er
+/// alleen een [DeckSearch] in te schuiven, en zo is dit scherm ook los te
+/// beproeven — als deel van de shell-bibliotheek was het dat niet.
+class GitSearchDialog extends StatefulWidget {
   final DeckSearch searcher;
-  const _GitSearchDialog({required this.searcher});
+  const GitSearchDialog({super.key, required this.searcher});
+
+  /// Toont het scherm en geeft de gekozen deckmap terug, of `null`.
+  static Future<String?> show(BuildContext context, DeckSearch searcher) =>
+      showDialog<String>(
+        context: context,
+        builder: (_) => GitSearchDialog(searcher: searcher),
+      );
 
   @override
-  State<_GitSearchDialog> createState() => _GitSearchDialogState();
+  State<GitSearchDialog> createState() => _GitSearchDialogState();
 }
 
-class _GitSearchDialogState extends State<_GitSearchDialog> {
+class _GitSearchDialogState extends State<GitSearchDialog> {
   final _query = TextEditingController();
   bool _caseSensitive = false;
   bool _busy = false;
