@@ -1781,6 +1781,9 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Zegel nog niet vastgelegd': 'Pečat še ni zabeležen',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Shranjene datoteke, ob kateri bi bilo mogoče preveriti pečat, še ni. Shranite predstavitev.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'V redu',

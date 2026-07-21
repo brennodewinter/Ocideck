@@ -1815,6 +1815,9 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Zegel nog niet vastgelegd': 'Séala gan taifeadadh fós',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Níl comhad sábháilte ann fós chun an séala a sheiceáil ina choinne. Sábháil an deic.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Ceart go leor',

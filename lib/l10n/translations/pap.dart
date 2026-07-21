@@ -736,6 +736,9 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Zegel nog niet vastgelegd': 'Seyo no registrá ainda',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'No tin ainda un archivo wardá pa kontrolá e seyo kuné. Warda e deck.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

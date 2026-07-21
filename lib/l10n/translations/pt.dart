@@ -1809,6 +1809,9 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Zegel nog niet vastgelegd': 'Selo ainda não registado',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Ainda não existe um ficheiro guardado com o qual verificar o selo. Guarde o deck.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

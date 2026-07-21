@@ -732,6 +732,9 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Zegel nog niet vastgelegd': 'Sigillo non ancora registrato',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Non esiste ancora un file salvato con cui verificare il sigillo. Salva il deck.',
   'esc': 'esc',
   'Enter': 'Invio',
   'OK': 'OK',

@@ -733,6 +733,9 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Zegel nog niet vastgelegd': 'Sello aún no registrado',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Todavía no hay un archivo guardado con el que comprobar el sello. Guarde el deck.',
   'esc': 'esc',
   'Enter': 'Intro',
   'OK': 'OK',

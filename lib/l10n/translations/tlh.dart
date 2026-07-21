@@ -1754,6 +1754,9 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Zegel nog niet vastgelegd': 'DaH SoQmoHmeH HablI\' qonlu\'be\'',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'teywI\' choqlu\'bogh tu\'lu\'be\', vaj SoQ toblaHbe\'lu\'. cha\'nob yIchoq.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'lu\'',

@@ -737,6 +737,9 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Zegel nog niet vastgelegd': 'Segel noch net fêstlein',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Der is noch gjin bewarre bestân dêr\'t it segel tsjin neirekkene wurde kin. Bewarje it deck.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

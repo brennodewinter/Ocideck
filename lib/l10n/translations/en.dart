@@ -918,6 +918,9 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Zegel nog niet vastgelegd': 'Seal not yet recorded',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'There is no saved file yet to check the seal against. Save the deck.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

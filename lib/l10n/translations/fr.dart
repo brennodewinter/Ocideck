@@ -736,6 +736,9 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Zegel nog niet vastgelegd': 'Sceau pas encore enregistré',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Il n\'existe pas encore de fichier enregistré permettant de recalculer le sceau. Enregistrez le deck.',
   'esc': 'échap',
   'Enter': 'Entrée',
   'OK': 'OK',

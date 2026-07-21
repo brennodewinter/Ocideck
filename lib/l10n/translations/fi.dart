@@ -1779,6 +1779,9 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Zegel nog niet vastgelegd': 'Sinettiä ei ole vielä kirjattu',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Tallennettua tiedostoa, jota vasten sinetin voisi tarkistaa, ei vielä ole. Tallenna diasarja.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

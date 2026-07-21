@@ -1801,6 +1801,9 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Zegel nog niet vastgelegd': 'Siġill għadu mhux irreġistrat',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Għad m\'hemmx fajl issejvjat li miegħu jista\' jiġi ċċekkjat is-siġill. Issejvja d-deck.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

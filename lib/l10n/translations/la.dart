@@ -1795,6 +1795,9 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Zegel nog niet vastgelegd': 'Sigillum nondum consignatum',
+  'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
+      'Nulla adhuc tabella servata est ad sigillum recomputandum. Serva acervum.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Bene',
