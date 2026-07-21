@@ -14,8 +14,36 @@
 /// voor elk handgeschreven Marp-bestand, dus afwezigheid is nooit een fout.
 const int kOciDeckFormatVersion = 1;
 
+/// De oudste formaatversie die bestaat. Elk bestand zonder [kFormatVersionKey]
+/// is er een — dat is niet uitzonderlijk maar de normale toestand van elk
+/// handgeschreven Marp-bestand.
+const int kOldestFormatVersion = 1;
+
 /// De front-matter-sleutel die [kOciDeckFormatVersion] draagt.
 const String kFormatVersionKey = 'ocideck_format';
+
+/// De versie die het bestand declareert, uit de ruwe `ocideck_format`-waarde.
+///
+/// Alles wat geen bruikbaar versienummer is telt als [kOldestFormatVersion]. Een
+/// bestand weigeren op een onleesbare versiesleutel zou het onbruikbaar maken om
+/// een reden die de auteur niet kan zien; als oudste versie lezen betekent
+/// hooguit dat het opwaarderingspad nog een keer overloopt, en dat is
+/// onschadelijk.
+int readFormatVersion(String raw) {
+  final n = int.tryParse(raw.trim());
+  return (n == null || n < kOldestFormatVersion) ? kOldestFormatVersion : n;
+}
+
+/// De versie die bij opslaan in het bestand komt: het hoogste van wat het
+/// bestand al zei en wat deze build schrijft.
+///
+/// **Een lezer verlaagt de versie nooit.** Leest deze build een bestand met
+/// `ocideck_format: 2`, dan schrijft hij `2` terug — anders liegt het bestand na
+/// één keer opslaan over zichzelf. Dat kan alleen doordat [mergeFrontMatter] de
+/// sleutels van die nieuwere versie laat staan: de versie klopt dan nog steeds
+/// met wat er in het bestand staat.
+int persistedFormatVersion(int fileVersion) =>
+    fileVersion > kOciDeckFormatVersion ? fileVersion : kOciDeckFormatVersion;
 
 /// De front-matter-sleutels die OciDeck zelf schrijft en dus mag vervangen of
 /// weghalen. Alles daarbuiten is van iemand anders — een Marp-optie die OciDeck
@@ -115,10 +143,12 @@ List<String> mergeFrontMatter({
   for (final line in generated) {
     final key = frontMatterKeyOf(line);
     if (key == null) continue;
-    byKey.putIfAbsent(key, () {
-      order.add(key);
-      return <String>[];
-    }).add(line);
+    byKey
+        .putIfAbsent(key, () {
+          order.add(key);
+          return <String>[];
+        })
+        .add(line);
   }
 
   final out = <String>[];

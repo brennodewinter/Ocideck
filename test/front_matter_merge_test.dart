@@ -8,9 +8,10 @@ void main() {
     test('herkent een sleutel op kolom 0, met en zonder waarde', () {
       expect(frontMatterKeyOf('theme: ocideck'), 'theme');
       expect(frontMatterKeyOf('style:'), 'style');
-      expect(frontMatterKeyOf('ocideck_seal_at: 2026-07-21T10:00:00Z'), (
-        'ocideck_seal_at'
-      ));
+      expect(
+        frontMatterKeyOf('ocideck_seal_at: 2026-07-21T10:00:00Z'),
+        ('ocideck_seal_at'),
+      );
     });
 
     test('een ingesprongen regel is geen sleutel maar een vervolgregel', () {
@@ -91,12 +92,7 @@ void main() {
     });
 
     test('een genest blok van een onbekende sleutel blijft heel', () {
-      const style = [
-        'style: |',
-        '  section {',
-        '    color: red;',
-        '  }',
-      ];
+      const style = ['style: |', '  section {', '    color: red;', '  }'];
       expect(
         mergeFrontMatter(
           original: const ['marp: true', ...style, 'theme: oud'],
@@ -131,11 +127,7 @@ void main() {
     test('een sleutel die meermaals mag voorkomen landt op de eerste plek', () {
       expect(
         mergeFrontMatter(
-          original: const [
-            'tool: Burp@1',
-            'header: kop',
-            'tool: Nmap@7',
-          ],
+          original: const ['tool: Burp@1', 'header: kop', 'tool: Nmap@7'],
           generated: const ['tool: Burp@2', 'tool: Nmap@8', 'tool: Zap@1'],
         ),
         ['tool: Burp@2', 'tool: Nmap@8', 'tool: Zap@1', 'header: kop'],
@@ -153,10 +145,7 @@ void main() {
         'footer: voet',
       ];
       const generated = ['marp: true', 'theme: nieuw', 'title: T'];
-      final eerste = mergeFrontMatter(
-        original: original,
-        generated: generated,
-      );
+      final eerste = mergeFrontMatter(original: original, generated: generated);
       final tweede = mergeFrontMatter(original: eerste, generated: generated);
       expect(tweede, eerste);
     });

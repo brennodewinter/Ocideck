@@ -108,6 +108,14 @@ class _FrontMatter {
   String sealTsr = '';
   DocumentSignature signature = const DocumentSignature();
 
+  /// De front-matter-regels precies zoals ze in het bestand stonden, inclusief
+  /// wat de switch hieronder niet herkent. Zie [Deck.frontMatterSource].
+  List<String> sourceLines = const [];
+
+  /// De formaatversie die het bestand declareerde; ontbreekt de sleutel, dan is
+  /// het de oudste versie. Zie [Deck.formatVersion].
+  int formatVersion = kOldestFormatVersion;
+
   /// The markdown body with the front-matter block stripped off.
   String body = '';
 }
@@ -160,6 +168,8 @@ extension _MarkdownParse on MarkdownService {
       signature: fm.signature.isEmpty ? null : fm.signature,
       miauwWaivers: fm.miauwWaivers,
       miauwConfirmations: fm.miauwConfirmations,
+      frontMatterSource: fm.sourceLines,
+      formatVersion: fm.formatVersion,
     );
   }
 
@@ -175,7 +185,8 @@ extension _MarkdownParse on MarkdownService {
       final end = content.indexOf('\n---\n', 4);
       if (end != -1) {
         final frontMatter = content.substring(4, end);
-        for (final rawLine in frontMatter.split('\n')) {
+        fm.sourceLines = frontMatter.split('\n');
+        for (final rawLine in fm.sourceLines) {
           // Parse `key: value` generically: split on the first colon and trim,
           // so leading indentation or extra spacing no longer silently drops a
           // field. Splitting on the *first* colon keeps colons in the value
@@ -231,6 +242,8 @@ extension _MarkdownParse on MarkdownService {
               fm.tlp = TlpLevelX.fromKey(value);
             case 'privacy':
               fm.privacy = PrivacyDispositionX.fromKey(value);
+            case kFormatVersionKey:
+              fm.formatVersion = readFormatVersion(value);
             case 'ocideck_target_seconds':
               fm.presentationTargetSeconds = int.tryParse(value) ?? 0;
             case 'ocideck_show_rehearsal_summary':

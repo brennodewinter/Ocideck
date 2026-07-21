@@ -14,6 +14,7 @@ import '../models/slide.dart';
 import '../models/used_tool.dart';
 import '../models/timeline.dart';
 import '../models/video_source.dart';
+import 'front_matter_merge.dart';
 import '../utils/deck_markdown_dashes.dart';
 import '../utils/log.dart';
 import '../utils/markdown_paste_cleanup.dart';
@@ -49,94 +50,22 @@ class MarkdownService {
     bool inlineChartData = false,
     bool inlineStyleProfile = false,
     bool forExport = false,
+    bool includeFormatVersion = true,
   }) {
     final buf = StringBuffer();
     buf.writeln('---');
-    buf.writeln('marp: true');
-    buf.writeln('theme: ${deck.theme}');
-    if (deck.paginate) buf.writeln('paginate: true');
-    // General presentation metadata (also picked up by Marp where applicable).
-    if (deck.title.isNotEmpty) {
-      buf.writeln('title: ${_yamlScalar(deck.title)}');
-    }
-    if (deck.author.isNotEmpty) {
-      buf.writeln('author: ${_yamlScalar(deck.author)}');
-    }
-    if (deck.organization.isNotEmpty) {
-      buf.writeln('organization: ${_yamlScalar(deck.organization)}');
-    }
-    if (deck.version.isNotEmpty) {
-      buf.writeln('version: ${_yamlScalar(deck.version)}');
-    }
-    if (deck.date.isNotEmpty) {
-      buf.writeln('date: ${_yamlScalar(deck.date)}');
-    }
-    if (deck.description.isNotEmpty) {
-      buf.writeln('description: ${_yamlScalar(deck.description)}');
-    }
-    if (deck.keywords.isNotEmpty) {
-      buf.writeln('keywords: ${_yamlScalar(deck.keywords)}');
-    }
-    if (deck.standardsUsed.isNotEmpty) {
-      // Komma-gescheiden op één regel, net als keywords: de front matter blijft
-      // met het blote oog leesbaar en diff't per regel.
-      buf.writeln('standards: ${_yamlScalar(deck.standardsUsed.join(', '))}');
-    }
-    for (final tool in deck.toolsUsed) {
-      // Eén regel per hulpmiddel: de front matter blijft leesbaar en een
-      // toegevoegde tool is één regel diff.
-      buf.writeln('tool: ${_yamlScalar(tool.format())}');
-    }
-    if (deck.language.isNotEmpty) {
-      buf.writeln('language: ${_yamlScalar(deck.language)}');
-    }
-    if (deck.tlp != TlpLevel.none) {
-      buf.writeln('tlp: ${deck.tlp.key}');
-    }
-    if (deck.privacy != PrivacyDisposition.warn) {
-      buf.writeln('privacy: ${deck.privacy.key}');
-    }
-    if (deck.presentationTargetSeconds > 0) {
-      buf.writeln('ocideck_target_seconds: ${deck.presentationTargetSeconds}');
-    }
-    // Default (true) stays out of the front matter; only persist an opt-out.
-    if (!deck.showRehearsalSummary) {
-      buf.writeln('ocideck_show_rehearsal_summary: false');
-    }
-    // 'Alleen afspelen'-vergrendeling: default (false) blijft uit de front
-    // matter; enkel de opt-in wordt bewaard.
-    if (deck.playOnly) {
-      buf.writeln('ocideck_play_only: true');
-    }
-    // Documentintegriteit (§8 A1). De handtekening is inhoud en valt daarom
-    // ónder het zegel; ze wordt vóór de zegelvelden geschreven zodat de
-    // canonicalisatie (die enkel de zegelvelden weglaat) haar meeneemt.
-    _writeSignature(buf, deck.signature);
-    if (deck.finalized) {
-      buf.writeln('ocideck_finalized: true');
-    }
-    if (deck.sealHash.isNotEmpty) {
-      buf.writeln('ocideck_seal_hash: ${_yamlScalar(deck.sealHash)}');
-      buf.writeln('ocideck_seal_algo: ${_yamlScalar(deck.sealAlgo)}');
-      buf.writeln('ocideck_seal_at: ${_yamlScalar(deck.sealAt)}');
-    }
-    if (deck.sealTimestampToken.isNotEmpty) {
-      buf.writeln('ocideck_seal_tsr: ${deck.sealTimestampToken}');
-    }
-    if (inlineStyleProfile) {
-      buf.writeln(
-        'ocideck_style_profile: ${base64Url.encode(utf8.encode(jsonEncode(deck.themeProfile.toJson())))}',
-      );
-    }
-    if (deck.miauwWaivers.isNotEmpty) {
-      buf.writeln(
-        'ocideck_miauw_waivers: ${base64Url.encode(utf8.encode(jsonEncode(deck.miauwWaivers)))}',
-      );
-    }
-    if (deck.miauwConfirmations.isNotEmpty) {
-      buf.writeln(
-        'ocideck_miauw_confirmations: ${base64Url.encode(utf8.encode(jsonEncode(deck.miauwConfirmations)))}',
-      );
+    // De front matter wordt niet opnieuw opgebouwd maar chirurgisch bijgewerkt:
+    // alleen de sleutels die OciDeck bezit gaan door de generator, elke andere
+    // regel uit het geopende bestand blijft staan waar hij stond.
+    for (final line in mergeFrontMatter(
+      original: deck.frontMatterSource,
+      generated: _frontMatterLines(
+        deck,
+        inlineStyleProfile: inlineStyleProfile,
+        includeFormatVersion: includeFormatVersion,
+      ),
+    )) {
+      buf.writeln(line);
     }
     buf.writeln('---');
     buf.writeln();
@@ -158,14 +87,117 @@ class MarkdownService {
     return buf.toString();
   }
 
-  /// Writes the (optional) visual signature as plain front-matter lines. Each
+  /// De front-matter-regels die OciDeck zelf schrijft, in de volgorde waarin een
+  /// nieuw bestand ze krijgt. Alleen sleutels uit [kOwnedFrontMatterKeys] horen
+  /// hier thuis; [mergeFrontMatter] weeft ze in wat er al stond.
+  List<String> _frontMatterLines(
+    Deck deck, {
+    required bool inlineStyleProfile,
+    required bool includeFormatVersion,
+  }) {
+    final out = <String>[];
+    out.add('marp: true');
+    if (includeFormatVersion) {
+      out.add(
+        '$kFormatVersionKey: ${persistedFormatVersion(deck.formatVersion)}',
+      );
+    }
+    out.add('theme: ${deck.theme}');
+    if (deck.paginate) out.add('paginate: true');
+    // General presentation metadata (also picked up by Marp where applicable).
+    if (deck.title.isNotEmpty) {
+      out.add('title: ${_yamlScalar(deck.title)}');
+    }
+    if (deck.author.isNotEmpty) {
+      out.add('author: ${_yamlScalar(deck.author)}');
+    }
+    if (deck.organization.isNotEmpty) {
+      out.add('organization: ${_yamlScalar(deck.organization)}');
+    }
+    if (deck.version.isNotEmpty) {
+      out.add('version: ${_yamlScalar(deck.version)}');
+    }
+    if (deck.date.isNotEmpty) {
+      out.add('date: ${_yamlScalar(deck.date)}');
+    }
+    if (deck.description.isNotEmpty) {
+      out.add('description: ${_yamlScalar(deck.description)}');
+    }
+    if (deck.keywords.isNotEmpty) {
+      out.add('keywords: ${_yamlScalar(deck.keywords)}');
+    }
+    if (deck.standardsUsed.isNotEmpty) {
+      // Komma-gescheiden op één regel, net als keywords: de front matter blijft
+      // met het blote oog leesbaar en diff't per regel.
+      out.add('standards: ${_yamlScalar(deck.standardsUsed.join(', '))}');
+    }
+    for (final tool in deck.toolsUsed) {
+      // Eén regel per hulpmiddel: de front matter blijft leesbaar en een
+      // toegevoegde tool is één regel diff.
+      out.add('tool: ${_yamlScalar(tool.format())}');
+    }
+    if (deck.language.isNotEmpty) {
+      out.add('language: ${_yamlScalar(deck.language)}');
+    }
+    if (deck.tlp != TlpLevel.none) {
+      out.add('tlp: ${deck.tlp.key}');
+    }
+    if (deck.privacy != PrivacyDisposition.warn) {
+      out.add('privacy: ${deck.privacy.key}');
+    }
+    if (deck.presentationTargetSeconds > 0) {
+      out.add('ocideck_target_seconds: ${deck.presentationTargetSeconds}');
+    }
+    // Default (true) stays out of the front matter; only persist an opt-out.
+    if (!deck.showRehearsalSummary) {
+      out.add('ocideck_show_rehearsal_summary: false');
+    }
+    // 'Alleen afspelen'-vergrendeling: default (false) blijft uit de front
+    // matter; enkel de opt-in wordt bewaard.
+    if (deck.playOnly) {
+      out.add('ocideck_play_only: true');
+    }
+    // Documentintegriteit (§8 A1). De handtekening is inhoud en valt daarom
+    // ónder het zegel; ze wordt vóór de zegelvelden geschreven zodat de
+    // canonicalisatie (die enkel de zegelvelden weglaat) haar meeneemt.
+    _addSignature(out, deck.signature);
+    if (deck.finalized) {
+      out.add('ocideck_finalized: true');
+    }
+    if (deck.sealHash.isNotEmpty) {
+      out.add('ocideck_seal_hash: ${_yamlScalar(deck.sealHash)}');
+      out.add('ocideck_seal_algo: ${_yamlScalar(deck.sealAlgo)}');
+      out.add('ocideck_seal_at: ${_yamlScalar(deck.sealAt)}');
+    }
+    if (deck.sealTimestampToken.isNotEmpty) {
+      out.add('ocideck_seal_tsr: ${deck.sealTimestampToken}');
+    }
+    if (inlineStyleProfile) {
+      out.add(
+        'ocideck_style_profile: ${base64Url.encode(utf8.encode(jsonEncode(deck.themeProfile.toJson())))}',
+      );
+    }
+    if (deck.miauwWaivers.isNotEmpty) {
+      out.add(
+        'ocideck_miauw_waivers: ${base64Url.encode(utf8.encode(jsonEncode(deck.miauwWaivers)))}',
+      );
+    }
+    if (deck.miauwConfirmations.isNotEmpty) {
+      out.add(
+        'ocideck_miauw_confirmations: ${base64Url.encode(utf8.encode(jsonEncode(deck.miauwConfirmations)))}',
+      );
+    }
+    return out;
+  }
+
+  /// Adds the (optional) visual signature as plain front-matter lines. Each
   /// non-empty field rides along as its own `ocideck_sig_*` key so the block
   /// stays human-readable and round-trips. Nothing is written for an absent or
   /// empty signature, so the default document has no signature noise.
-  void _writeSignature(StringBuffer buf, DocumentSignature? sig) {
+  void _addSignature(List<String> out, DocumentSignature? sig) {
     if (sig == null || sig.isEmpty) return;
     void line(String key, String value) {
-      if (value.isNotEmpty) buf.writeln('$key: ${_yamlScalar(value)}');
+      if (value.isNotEmpty) out.add('$key: ${_yamlScalar(value)}');
     }
 
     line('ocideck_sig_name', sig.name);
@@ -183,8 +215,16 @@ class MarkdownService {
   /// stays stable across sealing and re-opening. Styling is already excluded by
   /// [generateDeck], so the seal is purely over content; the visible signature
   /// is deliberately kept, so tampering with it is detectable.
+  ///
+  /// De formaatversie (`ocideck_format`) valt er om dezelfde reden buiten: die
+  /// beschrijft de codering van het bestand, niet de inhoud. Zat ze er wél in,
+  /// dan zou een verzegeld deck breken zodra een nieuwere build het opnieuw
+  /// uitschrijft — bijvoorbeeld bij het bouwen van een pakket — terwijl er geen
+  /// letter inhoud veranderd is. Een vals manipulatie-alarm is duurder dan geen
+  /// alarm.
   String canonicalContentForSeal(Deck deck) {
     return generateDeck(
+      includeFormatVersion: false,
       deck.copyWith(
         finalized: false,
         sealHash: '',
