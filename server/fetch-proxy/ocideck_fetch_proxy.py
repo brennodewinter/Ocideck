@@ -166,6 +166,10 @@ class Handler(BaseHTTPRequestHandler):
         self.send_response(code)
         self.send_header("Content-Type", "text/plain; charset=utf-8")
         self.send_header("Content-Length", str(len(body)))
+        # Ook op het weigerpad: het 200-pad zet nosniff wel, en een weigering is
+        # juist de reactie die een aanvaller kan uitlokken. Een korte tekst die
+        # de browser alsnog als HTML mag raden, is een gat dat hier niets kost.
+        self.send_header("X-Content-Type-Options", "nosniff")
         self.send_header("Cache-Control", "no-store")
         self.end_headers()
         self.wfile.write(body)
