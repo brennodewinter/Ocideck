@@ -221,7 +221,7 @@ extension _QuestionPreviewAnswers on _QuestionPreview {
     final prompt = spec.prompt.isEmpty ? '—' : spec.prompt;
     final v = view;
 
-    return Column(
+    final column = Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -265,6 +265,17 @@ extension _QuestionPreviewAnswers on _QuestionPreview {
             _submitRow(context, 1),
         ],
       ],
+    );
+
+    // Ná het antwoorden komt er inhoud bij (het juiste antwoord, het
+    // overeenkomstpercentage). Zonder deze krimp liep de dia dan over de rand —
+    // precies op het moment dat de kijker naar de uitkomst kijkt.
+    return LayoutBuilder(
+      builder: (context, constraints) => FittedBox(
+        fit: BoxFit.scaleDown,
+        alignment: Alignment.topLeft,
+        child: SizedBox(width: constraints.maxWidth, child: column),
+      ),
     );
   }
 
