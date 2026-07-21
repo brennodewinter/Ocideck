@@ -743,77 +743,17 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // ── Header ──────────────────────────────────────────────────────
-              Container(
-                color: Theme.of(
-                  context,
-                ).extension<AppPalette>()!.panelText.withValues(alpha: 0.05),
-                padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          l10n.d('SLIDES'),
-                          style: TextStyle(
-                            color: AppTheme.slate400,
-                            fontSize: 10,
-                            fontWeight: FontWeight.w700,
-                            letterSpacing: 1.2,
-                          ),
-                        ),
-                        const Spacer(),
-                        Text(
-                          searching
-                              ? '$matchCount / ${deck.slides.length}'
-                              : '${deck.slides.length}',
-                          style: TextStyle(
-                            color: AppTheme.slate500,
-                            fontSize: 10,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 6),
-                    _buildSearchField(),
-                    // "Overslaan"-balk: alleen zichtbaar als er slides overgeslagen
-                    // worden. Eén klik zet alle markeringen weer uit.
-                    if (skippedCount > 0) ...[
-                      const SizedBox(height: 6),
-                      _SkipBanner(
-                        count: skippedCount,
-                        onClearAll: notifier.clearAllSkips,
-                      ),
-                    ],
-                    // Achtergehouden door TLP: even zichtbaar als overslaan,
-                    // want het gevolg is hetzelfde en de oorzaak niet.
-                    if (withheldCount > 0) ...[
-                      const SizedBox(height: 6),
-                      _WithheldBanner(count: withheldCount),
-                    ],
-                    // Bulk-actiebalk bij een meervoudige selectie.
-                    if (multiSelectionCount > 0) ...[
-                      const SizedBox(height: 6),
-                      _BulkActionBar(
-                        count: multiSelectionCount,
-                        onCopyToDeck: _copySelectionToOtherDeck,
-                        onDelete: _deleteSelection,
-                        onSkip: () => notifier.setSkippedForSlides(
-                          ref.read(editorProvider).selection,
-                          true,
-                        ),
-                        onShow: () => notifier.setSkippedForSlides(
-                          ref.read(editorProvider).selection,
-                          false,
-                        ),
-                        onDeselect: () => editorNotifier.select(
-                          ref.read(editorProvider).selectedIndex,
-                        ),
-                      ),
-                    ],
-                  ],
-                ),
+              _header(
+                context,
+                l10n,
+                deck: deck,
+                notifier: notifier,
+                editorNotifier: editorNotifier,
+                searching: searching,
+                matchCount: matchCount,
+                skippedCount: skippedCount,
+                withheldCount: withheldCount,
+                multiSelectionCount: multiSelectionCount,
               ),
 
               // ── Slide list ───────────────────────────────────────────────────
@@ -832,6 +772,93 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  /// De kop van de strook: titel met teller, zoekveld, en de balken die zeggen
+  /// waarom niet elke dia het publiek haalt (overgeslagen, achtergehouden) of
+  /// wat er met een meervoudige selectie kan.
+  ///
+  /// Apart van [build] omdat die anders over de methodelengte-ratchet gaat, en
+  /// omdat dit één samenhangend blok is: alles wat bóven de lijst staat.
+  Widget _header(
+    BuildContext context,
+    AppLocalizations l10n, {
+    required Deck deck,
+    required DeckNotifier notifier,
+    required EditorNotifier editorNotifier,
+    required bool searching,
+    required int matchCount,
+    required int skippedCount,
+    required int withheldCount,
+    required int multiSelectionCount,
+  }) {
+    return Container(
+      color: Theme.of(
+        context,
+      ).extension<AppPalette>()!.panelText.withValues(alpha: 0.05),
+      padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            children: [
+              Text(
+                l10n.d('SLIDES'),
+                style: TextStyle(
+                  color: AppTheme.slate400,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 1.2,
+                ),
+              ),
+              const Spacer(),
+              Text(
+                searching
+                    ? '$matchCount / ${deck.slides.length}'
+                    : '${deck.slides.length}',
+                style: TextStyle(color: AppTheme.slate500, fontSize: 10),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          _buildSearchField(),
+          // "Overslaan"-balk: alleen zichtbaar als er slides overgeslagen
+          // worden. Eén klik zet alle markeringen weer uit.
+          if (skippedCount > 0) ...[
+            const SizedBox(height: 6),
+            _SkipBanner(
+              count: skippedCount,
+              onClearAll: notifier.clearAllSkips,
+            ),
+          ],
+          // Achtergehouden door TLP: even zichtbaar als overslaan, want het
+          // gevolg is hetzelfde en de oorzaak niet.
+          if (withheldCount > 0) ...[
+            const SizedBox(height: 6),
+            _WithheldBanner(count: withheldCount),
+          ],
+          // Bulk-actiebalk bij een meervoudige selectie.
+          if (multiSelectionCount > 0) ...[
+            const SizedBox(height: 6),
+            _BulkActionBar(
+              count: multiSelectionCount,
+              onCopyToDeck: _copySelectionToOtherDeck,
+              onDelete: _deleteSelection,
+              onSkip: () => notifier.setSkippedForSlides(
+                ref.read(editorProvider).selection,
+                true,
+              ),
+              onShow: () => notifier.setSkippedForSlides(
+                ref.read(editorProvider).selection,
+                false,
+              ),
+              onDeselect: () =>
+                  editorNotifier.select(ref.read(editorProvider).selectedIndex),
+            ),
+          ],
+        ],
       ),
     );
   }
