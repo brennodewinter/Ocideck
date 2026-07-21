@@ -71,6 +71,21 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 
 
 ### Fixed
+- **Een macOS-build die weer leesbaar is: tienduizend linkerwaarschuwingen weg.**
+  Elke `flutter build macos` eindigde in een muur van ruim 10.000 regels
+  `ld: warning: no platform load command found in '…libopencv.a[x86_64][…]'`,
+  afgesloten met `ld: warning: ignoring duplicate libraries: '-lc++'`. Het komt
+  uit de ingekochte `DartCvMacOS`-pod: die levert OpenCV als voorgebouwd,
+  universeel archief van een kwart gigabyte, waarvan de x86_64-helft grotendeels
+  bestaat uit Intel IPP-objecten zonder platform-load-command — en de pod koppelt
+  libc++ een tweede keer terwijl de toolchain dat al doet. Geen van beide is code
+  die wij schrijven of kunnen herstellen, en samen overstemden ze alles wat er
+  wél toe deed. De `post_install`-haak in `macos/Podfile` dempt de koppelaar nu
+  op precies dat ene doel (`-Wl,-w`), plus de compilerwaarschuwingen uit de
+  meegeleverde `dartcv`-bronnen — dezelfde behandeling die
+  `video_player_avfoundation` daar al kreeg. Elk ander doel, `Runner` voorop,
+  blijft zijn waarschuwingen onverkort tonen. Een release-build gaat daarmee van
+  10.455 regels uitvoer naar 40.
 - **Een badge die iets meldt, en een popover die het ook laat zien.** Op een dia
   met alléén een gezichtstreffer of een titel-over-beeld-contrastprobleem kleurde
   de badge wel, maar zei de popover "geen meldingen meer op deze slide" en toonde
