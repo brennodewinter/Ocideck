@@ -367,7 +367,7 @@ bullet columns**, **bullets + image**, **two images**, **large image**, **video*
 bar, stacked bar, horizontal stacked bar, combo, line, area, pie, donut,
 spider/radar, scatter, waterfall, heatmap/risk matrix, or target-and-actual), **cockpit** (a
 dashboard of aviation-style instrument gauges),
-**question** (an interactive quiz slide), **timeline** (an animated timeline of
+**question** (an interactive quiz slide, in six kinds), **timeline** (an animated timeline of
 dated events), **scorecard** (a few headline figures, each beside the figure from
 the previous report), and
 **free Markdown**. Each card in the chooser shows a miniature
@@ -579,9 +579,13 @@ the chooser, then choose the **kind** in the editor:
   answer plus random wrong ones are drawn, so each run differs.
 - **True / false** — the prompt is a statement; a switch in the editor sets whether
   it is **true or false**. The viewer picks *Juist* (true) or *Onjuist* (false).
-- **Multiple correct answers** — several answers may be correct. The viewer ticks
-  **all** correct ones and presses **Confirm**; it is only right when exactly the
-  correct set is selected.
+- **Multiple correct answers** — several answers may be correct. **Every** answer
+  you filled in is shown, in a random order; the viewer ticks **all** correct ones
+  and presses **Confirm**, and it is only right when exactly the correct set is
+  selected. Nothing is left out here, because "tick all correct ones" is
+  unanswerable in a set that had some of them randomly removed — so *how many
+  options are shown* does not apply to this kind (*corrected 2026-07-21: it used
+  to draw a random subset, which is what this guide described*).
 - **Ordering** — enter the answers **in the correct order** in the editor (the
   up/down arrows rearrange them). At presentation time a random subset is drawn
   (keeping its relative order as the right answer) and shown shuffled — never
@@ -591,24 +595,66 @@ the chooser, then choose the **kind** in the editor:
   place. On a wrong answer the options are revealed **in the correct order**:
   correctly placed ones turn green, misplaced ones turn red with an explicit
   *Your order: n* line showing where the viewer had put them.
+- **Two images** — two pictures side by side; the viewer taps the right one. Pick
+  the two images in the editor, give each an optional caption, and set which one
+  is correct with the **Image 1 / Image 2** switch. The caption shows under the
+  picture and doubles as its alt text — for screen readers and in the HTML
+  export. Each picture also carries an **A**/**B** badge, which turns into a ✓ or
+  ✗ once the answer is in, so you can refer to them out loud. At presentation
+  time **left and right swap at random each round**, so do not write "the left
+  one" in a caption. This kind has no separate decorative image: the two answers
+  *are* the pictures.
+- **Typed answer** — the viewer types instead of picking. Tick every answer that
+  should count as right (more than one is allowed) and set **how closely the typed
+  answer must match** with the slider: 85% by default, which lets a typo through
+  but not a different word. Capitals, leading/trailing spaces and doubled spaces
+  are ignored before comparing; punctuation is kept, because it is sometimes part
+  of the answer — a stray full stop rarely drops you below the threshold. The
+  viewer types on **your** screen; the beamer window mirrors what is typed but
+  cannot be typed into. After answering, the slide shows how close the typed
+  answer came as a percentage — and, when it was wrong, what the right answer
+  was.
 
 Common options for every kind:
 
 - **Answer time** (optional) — a countdown starts the moment the slide appears;
-  running out counts as a wrong answer.
+  running out counts as a wrong answer. A question that cannot be got right as it
+  stands — nothing ticked as correct, or too few answers for the kind — gets no
+  countdown and never blocks you from moving on.
 - **On a wrong answer** — *try again* (you cannot continue; a click shows a fresh
   random set for another attempt) or *allow continuing* (the right answer is
   revealed, the slide locks, and you may move on without a retry).
+- **How many options are shown** — only for **multiple choice** and **ordering**,
+  the two kinds that genuinely draw from a pool. For the other kinds the field is
+  hidden rather than shown doing nothing. The grey line at the foot of the slide
+  preview spells out per kind what the presentation will randomise — "n of m
+  options are shown at random" for those two, and something else for the rest.
 - **Image** (optional) — shown beside the question with a split bar, with a
-  magnifier button that opens a **pan-and-zoom** detail view of the photo.
+  magnifier button that opens a **pan-and-zoom** detail view of the photo. Not
+  offered for *two images*, which already has its own two.
 
 While presenting, you **cannot advance** past a question until it is answered
 correctly (or answered and locked). A correct answer turns green and lets you
 continue; a wrong answer turns red and highlights the correct one. On a
 **two-screen** setup the audience window is interactive: clicks there register the
 answer and both screens stay in sync. The answer state is session-only — it is
-never written to the `.md` file, and a static export shows the question without
-interactivity.
+never written to the `.md` file.
+
+While a **typed answer** is open the keys go into the input field instead of to
+the shortcuts — otherwise a `3` in the answer would jump to slide 3. Four keys
+keep working: `Enter` confirms the answer, `Page Up`/`Page Down` still page (so a
+presentation clicker does not go dead), `Esc` exits the presentation as always,
+and `Ctrl/Cmd + W` closes it. The accepted answers stay on the presenter side
+until the answer is in: they only travel to the beamer window once the question
+has been answered.
+
+A **static export** shows the question without interactivity. In the **HTML**
+export that works out per kind: multiple choice, true/false, multiple correct and
+ordering print their options as a list; a *two images* question prints the two
+pictures as ordinary Markdown images after the question card, without saying
+which is the right one; and a *typed answer* prints the question alone, because
+there the accepted answers *are* the answer key. The right answer is never
+printed for any kind.
 
 ### Timeline slides
 
@@ -1662,6 +1708,11 @@ The lock is part of the file, so it stays with the deck when you share it.
 open and edit other decks as usual. To *unlock* a play-only deck for editing,
 remove the `ocideck_play_only` key from its markdown.
 
+A play-only deck also **never shows the rehearsal summary** afterwards, even when
+the deck carries the *show timing summary* switch turned on. Time is still
+measured while presenting, but the timing screen belongs to the person preparing
+the talk, not to the person the deck was handed to.
+
 ### Rehearsing and timing
 
 The presenter view (`P`) is also a rehearsal clock — it measures, it does not
@@ -1684,6 +1735,18 @@ target and the time spent per slide, with a button to copy the times to the
 clipboard. It can be switched off per deck, for when you are presenting for real
 rather than rehearsing. This is **session-only**: nothing is
 written to disk or into the `.md` file.
+
+Under the per-slide list the summary also lists the **questions** you answered:
+one line per answered attempt, with the time that attempt took and whether it was
+right. Attempts are listed separately rather than added up — a question set to
+*try again* may be answered as often as needed, and three attempts in five
+seconds says something different from one attempt of two minutes. A repeat
+attempt on the same question carries its number in parentheses. A question you paged
+past without answering does not appear. **Copy** takes the question block along.
+
+A deck locked as **play only** never shows this summary, whatever the per-deck
+switch says: it is meant to be played, and whoever plays it should not be handed
+a measurement report about themselves.
 
 ### Two screens (beamer + laptop)
 

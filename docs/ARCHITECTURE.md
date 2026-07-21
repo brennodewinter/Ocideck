@@ -123,14 +123,23 @@ lib/
   few types reuse `customMarkdown` for their payload: free-Markdown (raw),
   `code` (the source), `chart` (the JSON spec), `cockpit` (the JSON spec of
   its instrument meters), and `question` (the JSON quiz spec — kind, prompt,
-  answers, option count, time limit).
+  answers, option count, time limit, and the match threshold for a typed answer).
 - **Question slides** are interactive. The authored `QuestionSpec` round-trips in
-  `customMarkdown`; the live per-presentation state (`QuestionView` — the random
-  options drawn, the pick, correct/wrong, timer) is **session-only** and never
-  serialized. During presentation the presenter window is the single source of
-  truth: the audience window forwards clicks (`answerSelected` / `answerSubmit`)
-  and the presenter pushes the resulting `QuestionView` back over the window
-  channel, the same pattern as the checklist/table sync.
+  `customMarkdown`; the live per-presentation state (`QuestionView` — the options
+  drawn, the pick or the typed text, correct/wrong, timer) is **session-only** and
+  never serialized. During presentation the presenter window is the single source
+  of truth: the audience window forwards clicks (`answerSelected` /
+  `answerSubmit`) and the presenter pushes the resulting `QuestionView` back over
+  the window channel, the same pattern as the checklist/table sync.
+
+  Two consequences of that channel are load-bearing rather than incidental.
+  Because the `QuestionView` *travels*, an `openText` round carries no accepted
+  answer until the reveal — the answer key would otherwise sit in the beamer
+  window's memory before anyone answered. And because typing must not be possible
+  in two places at once, the audience window passes no `onAnswerTextChanged`, so
+  its input field mirrors read-only; `presenter_keys.dart` hands the keyboard to
+  the field while such a round is open, keeping only `Enter`, `PageUp`/`PageDown`,
+  `Esc` and `Ctrl/Cmd+W` as shortcuts.
 - **Timeline slides** keep their events in the normal `bullets` field as
   `marker :: title :: description` list items (no `customMarkdown`), so the `.md`
   stays a readable Markdown list. The layout (`TimelineLayout`) and animation
@@ -273,10 +282,20 @@ audience window, thumbnails, and export dialog.
 - **Rehearsal timing** lives in `services/rehearsal_controller.dart` — a plain,
   unit-testable controller (injectable clock) that the presenter feeds via a
   cheap, idempotent `observe(id, index)` on every build, so it captures every
-  navigation path. It measures only: elapsed, remaining against a target, and
-  per-slide time — no pacing logic. State is **session-only** (no prefs, no `.md`);
-  `_exit` shows a summary (`rehearsal_summary.dart`) and discards it. The default
-  target lives in `Deck.presentationTargetSeconds` (front matter: `ocideck_target_seconds`).
+  navigation path. It measures only: elapsed, remaining against a target,
+  per-slide time, and — through the explicit `startQuestion`/`finishQuestion`
+  pair, which the question logic calls — the duration and verdict of each
+  *answered* question attempt. No pacing logic. State is **session-only** (no
+  prefs, no `.md`); `_exit` shows a summary (`rehearsal_summary.dart`) and
+  discards it. The default target lives in `Deck.presentationTargetSeconds`
+  (front matter: `ocideck_target_seconds`).
+
+  Whether that summary appears at all is decided in `FullscreenPresenter`, not at
+  the call site: a `playOnly` deck is refused before the `showRehearsalSummary`
+  switch is even consulted. Putting the gate in the widget means every route into
+  the presenter is covered by it, which is the point — the switch travels in the
+  recipient's copy of the file, so a caller-side check would only cover the
+  callers we happened to think of.
 
 ### Dual-screen mode
 

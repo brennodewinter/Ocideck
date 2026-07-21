@@ -80,6 +80,27 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   markdown of de HTML.
 
 ### Fixed
+- **Een vraag met meerdere juiste antwoorden toont voortaan álle antwoorden.**
+  De opdracht luidt "vink alle juiste aan", maar de dia trok er eerst een
+  willekeurige greep uit — zoveel als u bij *aantal getoonde opties* had staan.
+  Dat is een onmogelijke opdracht: u kunt niet weten of er twee of vijf juiste
+  tussen zitten, en een antwoord dat in de vorige ronde goed was ontbrak in de
+  volgende. Alle ingevulde antwoorden staan nu op het scherm; alleen de
+  volgorde is nog willekeurig, zodat een tweede ronde niet na te spelen is.
+
+  Daarmee geldt de teller *aantal getoonde opties* alleen nog voor
+  **meerkeuze** en **volgorde** — de twee soorten die werkelijk uit een pool
+  trekken. Bij de andere soorten verdwijnt die teller uit de editor in plaats
+  van er te blijven staan zonder iets te doen. De regel in de editor onder een
+  vraag zegt nu per soort wat er bij het presenteren gebeurt.
+- **Een deck dat op 'alleen afspelen' staat toont nooit meer het
+  tijdenoverzicht.** Deelde u een vergrendeld deck uit, dan kreeg degene die het
+  afspeelde na afloop uw meetscherm te zien — totaaltijd, tijd per dia — omdat
+  de schakelaar *tijdenoverzicht tonen* standaard aan staat en met het bestand
+  meereisde. Een vergrendeld deck is bedoeld om áf te spelen; wie dat doet hoort
+  achteraf geen rapport over zichzelf te krijgen. De uitzondering zit nu in het
+  presentatiescherm zelf, dus ook een deck dat langs een andere weg wordt
+  afgespeeld valt eronder.
 - **De documentatie noemt de juiste dekkingsvloer.** Vijf plaatsen in `docs/`
   hielden vol dat de afgedwongen dekking 78 % was — één zei 79 % — terwijl de
   Makefile al op `--min=80` staat. Wie de documentatie geloofde, dacht ruimte te
@@ -173,6 +194,41 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   rij, dus ze kunnen nooit over elkaar heen vallen.
 
 ### Added
+- **Twee nieuwe vraagsoorten: een beeldpaar en een getypt antwoord.** De
+  vraagdia kende vier soorten, en die vroegen alle vier om een keuze uit een
+  rijtje tekst.
+
+  **Twee afbeeldingen** legt twee beelden naast elkaar en laat de kijker de
+  juiste aanwijzen — "welke van deze twee schermen is de phishingpagina". U
+  kiest in de editor twee afbeeldingen, geeft ze elk een bijschrift en zet met
+  één knop vast welke de juiste is. Bij het presenteren wisselen links en rechts
+  per ronde, dus noem ze in uw bijschrift niet "de linker" en "de rechter". In
+  een HTML-export komen de twee beelden gewoon als afbeeldingen achter de vraag
+  te staan, zonder dat erbij staat welke de goede is.
+
+  **Getypt antwoord** laat de kijker het antwoord intypen in plaats van
+  aanwijzen. U vinkt aan welke antwoorden goed gerekend worden — meer dan één
+  mag — en schuift met een regelaar in hoeverre het getypte antwoord daarop moet
+  lijken: standaard 85 %, wat een tikfout doorlaat maar een ander woord niet.
+  Hoofdletters, spaties vooraan en achteraan en dubbele spaties worden
+  weggepoetst voordat er vergeleken wordt; leestekens blijven staan, omdat ze
+  soms bij het antwoord horen — een losse punt te veel haalt u zelden onder de
+  drempel. Typen gaat op uw eigen scherm en het beamervenster toont mee wat
+  er staat. Zolang er getypt wordt gaan de toetsen naar het invoerveld en niet
+  naar de sneltoetsen — anders sprong een `3` in het antwoord naar dia 3 —
+  behalve `Enter` (bevestigen), `PgUp`/`PgDn` (bladeren, zodat een
+  presentatieklikker blijft werken), `Esc` (presentatie afsluiten) en
+  `Ctrl/Cmd+W`. Het juiste antwoord reist pas naar het beamervenster nadat er
+  geantwoord is; daarvóór is er niets van de oplossing te zien, ook niet in het
+  bericht tussen de twee vensters. Na afloop staat er hoeveel procent uw
+  antwoord op het juiste leek.
+- **Het tijdenoverzicht na een oefenronde toont nu ook de vragen.** Onder de
+  tijd per dia staat elke beantwoorde vraag, met de tijd van díe poging en of
+  het antwoord goed was. Elke poging apart en niet opgeteld: bij *opnieuw
+  proberen* mag een vraag zo vaak beantwoord worden als nodig, en drie pogingen
+  in vijf seconden is een ander verhaal dan één poging van twee minuten. Een
+  vraag die u overslaat zonder te antwoorden telt niet mee. De knop *Kopieer*
+  neemt het vragenblok mee naar het klembord.
 - **Een bestand vertelt nu welke formaatversie het heeft** (`ocideck_format` in
   de front matter). Dat is nodig om oudere bestanden later te kunnen blijven
   openen zonder te raden. Er verandert niets aan wat u ziet, maar drie regels

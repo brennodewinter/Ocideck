@@ -69,6 +69,23 @@ Every shortcut on this page works from **either** window in dual-screen mode: th
 beamer window forwards the keys it does not handle itself to the presenter, so a
 stray click on the beamer image no longer leaves the keyboard dead.
 
+Typed-answer questions:
+
+While a question of the kind **typed answer** is open and unanswered, the keys go
+into the input field instead of to the shortcuts — otherwise a `3` in the answer
+would jump to slide 3. Four keys are kept back:
+
+| Shortcut | Action |
+| --- | --- |
+| `Enter` | Confirm the typed answer |
+| `Page Up` · `Page Down` | Previous · next slide (so a presentation clicker keeps working) |
+| `Esc` | Falls through to the normal layered `Esc` below — so it still exits the presentation from an open question |
+| `Ctrl/Cmd + W` | Close the presentation |
+
+The field lives on the **presenter** side; the beamer window shows what is being
+typed but cannot be typed into. Once the answer has been given the keyboard goes
+back to the normal shortcut set.
+
 Annotation tools:
 
 | Shortcut | Action |

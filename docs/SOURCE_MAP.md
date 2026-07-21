@@ -39,8 +39,8 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `findings_summary_spec.dart` — per-severity findings-summary counts + retest-resolved total + `deckFindingSeverities` / `deckRetestResolvedCount` derivations.
 - `markdown_validation.dart` — `MarkdownValidationResult`/`MarkdownValidationIssue` for linting markdown content.
 - `miauw_compliance.dart` — `MiauwComplianceResult`/`EisResult`/`EisStatus` for the compliance overview.
-- `question.dart` — `QuestionSpec`/`QuestionView` for interactive quiz slides (multiple-choice/true-false/multiple-correct/ordering).
-- `rehearsal.dart` — `RehearsalRun`/`SlideTiming` for tracking presentation-practice durations per slide.
+- `question.dart` — `QuestionSpec`/`QuestionAnswer`/`QuestionView` for interactive quiz slides. `QuestionKind` has six values: multiple-choice, true/false, multiple-correct, ordering, image-pair and open-text. `QuestionSpec` is what the author writes and round-trips through the fenced block; `QuestionView` is the drawn round and is session-only. Two fields are written conditionally, so a plain text question keeps the block it always had: `QuestionAnswer.image` (only when set) and `similarityThreshold` (only for open-text). `QuestionView.answerable` is the "can this be got right at all" flag that keeps an unwinnable question from blocking the presentation — it replaced the earlier `correctIndices.isEmpty` test, which open-text could not express because it carries no options.
+- `rehearsal.dart` — `RehearsalRun`/`SlideTiming`/`QuestionAttempt` for tracking presentation-practice durations per slide, plus every answered question attempt. Attempts are kept per attempt rather than summed per question: a *try again* question is answered as often as needed, and the shape of that matters more than the total.
 - `scope_matrix_spec.dart` — `ScopeMatrixSpec`/`ScopeRow`/`ScopeObjectType`/`ScopeStatus` for the scope-matrix slide; each row carries a `CiaRating` (serialised as the `C`/`I`/`A` columns).
 - `discoveries_spec.dart` — `DiscoveriesSpec`/`Discovery` for the shadow-IT slide: a named find with its kind, how many days it sat unnoticed and who owns it now. The longest exposure and the unowned tally are derived; an unknown exposure stays null rather than becoming a zero. `scaleDaysUnnoticed` restates a long exposure in months and leaves the word to the widget.
 - `asset_overview_spec.dart` — `AssetOverviewSpec`/`AssetGroup` for the attack-surface slide: a *kind* of exposed object with how many there are, at risk, new and unowned. Totals are derived; "asset" here is an exposed object, not a media file.
@@ -153,7 +153,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `privacy/privacy_projection.dart` — `AudienceDeck` + `PrivacyProjection`: the single boundary a source deck crosses to reach any receiving surface. Redacts `[[…]]` markers before rendering or export; the private constructor means no export path can hold the unredacted source. Media redaction erases the paths *and* sets the projection-only `Slide.mediaRedacted`, because an empty path alone cannot tell the renderer whether a photo was removed or never chosen. Its field list is written out by hand and must match the scanner's and the manifest's, or the export gate reports a finding that *Redact* cannot clear; `test/privacy_scan_redact_parity_test.dart` holds the three lists against each other.
 - `quality_export_policy.dart` — Gates export by slide-quality issues with warnings.
 - `recovery_service.dart` — Auto-saves deck snapshots for crash/unsaved recovery.
-- `rehearsal_controller.dart` — Unit-testable controller tracking elapsed/remaining/per-slide rehearsal timing.
+- `rehearsal_controller.dart` — Unit-testable controller tracking elapsed/remaining/per-slide rehearsal timing, plus answered question attempts (`startQuestion`/`finishQuestion`). A round that is started and never finished is dropped, so a question you page past unanswered does not appear; `finishQuestion` without a running round does nothing, so a second verdict on the same attempt is not counted twice.
 - `rfc3161_timestamp.dart` — Builds a `.tsq` from the seal hash and parses/verifies a `.tsr` timestamp token.
 - `rich_text_layout.dart` — Computes pagination and scaling for rich-text markdown bodies.
 - `scope_coverage.dart` — `deckScopeCoverageGaps`: flags in-scope objects with no test and no finding.
@@ -245,6 +245,7 @@ deliberately manual).
 - `image_focal.dart` — Maps a normalized image crop focal point (0..1) to the `Alignment` used to reposition a cropped/cover image.
 - `image_limits.dart` — Caps decoded image dimensions to prevent OOM; the `CappedImage` provider only downscales over-cap images so within-cap animated GIFs/WebP decode natively and keep animating.
 - `image_luminance.dart` — Computes average image colour, cached by mtime/size.
+- `jaro_winkler.dart` — `jaro`/`jaroWinkler` similarity plus `normalizeAnswerText` and `bestAnswerSimilarity`, behind the open-text question kind: a typo should not be wrong, a different word should be. Normalisation lowercases and collapses whitespace but keeps punctuation, since punctuation is sometimes part of the answer and the threshold absorbs a stray one. Hand-written rather than a package — it is twenty lines of arithmetic, and every dependency is one more thing to weigh, scan and account for.
 - `log.dart` — Fail-soft logging to DevTools without exposing sensitive data (`logError`/`logWarning`). The rule is that a message carries an operation description and the caught error, never deck or file *contents*; `test/log_no_content_test.dart` scans `lib/` for the shapes that break it (a collection joined, taken from or sliced into a message), which is how a chart warning holding real cell values was found.
 - `lru_cache.dart` — Fixed-capacity LRU cache backed by `LinkedHashMap`.
 - `markdown_paste_cleanup.dart` — Cleans pasted website markdown and normalizes rich-text quirks.
@@ -429,12 +430,12 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 - `list_style_selector.dart` — Selects list style (bullets/numbered/checklist/rich text).
 - `markdown_deck_editor.dart` — Markdown editor with validation and find/replace, plus a sliding scope toggle for whole-deck vs. single-slide markdown.
 - `markdown_find_bar.dart` — In-editor find/replace bar for markdown mode.
-- `question_editor.dart` — Edits a question slide (answers, options).
+- `question_editor.dart` — Edits a question slide (kind, answers, options, timing). The kind decides which fields appear; *how many options are shown* is offered only for the two kinds that draw from a pool (multiple-choice and ordering) instead of sitting there doing nothing.
+- `question_editor_kinds.dart` — `part of question_editor.dart`: the two kinds that have no plain answer list. The image pair (two picker slots, a captions-are-not-"left"/"right" warning and a segmented control for which one is right) and the typed answer (accepted answers plus the similarity slider, shown as a percentage because "0.85 Jaro-Winkler" tells an author nothing). Extensions cannot call the protected `setState`, so both go through the main state's `_rebuild(fn)`.
 - `quote_editor.dart` — Edits a quote slide (text, author, background image).
 - `scope_matrix_editor.dart` — Edits a scope-matrix slide (objects × type/standard × coverage status).
 - `discoveries_editor.dart` — Edits a discoveries slide (up to six finds, four fields each), with a banner that restates the headline the slide will lead with as you type.
 - `asset_overview_editor.dart` — Edits an asset-overview slide (up to eight kinds, four counts each), summing as you type and flagging a subtotal larger than its total.
-- `actions_editor.dart` — Edits an actions slide (up to eight lines: action, owner, deadline, on-the-list-since, what is asked, status).
 - `scorecard_editor.dart` — Edits a scorecard slide (up to five figures: label, now, previous report, unit, direction). One figure is one compact two-row card carrying a live change chip; ordering is a drag handle, like every other reorderable list in the app.
 - `section_editor.dart` — Edits a section-divider slide (title, subtitle).
 - `signoff_editor.dart` — Edits the sign-off slide (truthfulness statement, signature, certification, seal).
@@ -481,13 +482,13 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 - `media_previews_image.dart` — Image rendering helpers, captions, and the placeholders. `ImagePlaceholderReason` keeps "no image chosen yet" visually distinct from "file missing", "outside the deck", "gone after reload", and `redacted` — the last one paints a fixed-black redaction block rather than the grey placeholder, and deliberately does not follow the slate palette (which inverts in dark mode).
 - `media_previews_video.dart` — Video/audio slide rendering: local playback, embeds, and the shared media placeholder.
 - `overlays.dart` — Logo overlay and TLP-marking badge renderers.
-- `question_preview.dart` — Question slides with answer reveal.
+- `question_preview.dart` — Question slides with answer reveal: the option-list kinds, the shared card, the option colours (`_visualColors`, one table for both the text tile and the image tile so "correct" is the same green in both) and the author hint, which states per kind what the presentation randomises rather than always claiming "n of m options" — the kinds that draw from no pool have nothing to say there.
+- `question_preview_answers.dart` — `part of slide_preview.dart`: the two kinds whose answers are not a list of text options. The image pair renders the two pictures side by side (a row, not a stack — "which of these two" only reads when they are next to each other); the typed answer renders an input field that is editable on the presenter side and read-only on the beamer, and shrinks to fit once the reveal adds the right answer and the match percentage.
 - `table_preview.dart` — Table slides with a cell-edit scope.
 - `text_previews.dart` — Title and text-based slides.
 - `timeline_preview.dart` — Animated timeline renderer with event cards.
 - `discoveries_preview.dart` — The longest exposure as a headline, then one row per find: name over kind, an exposure bar on the shared scale, the figure in words and the owner (red when there is none).
 - `asset_overview_preview.dart` — Per-kind bars on one shared scale with the at-risk share filled, four aligned count columns and a derived totals row.
-- `actions_preview.dart` — Action rows with a kind marker, owner and deadline; a passed deadline is flagged against the current date, like the footer's `{date}`.
 - `scorecard_preview.dart` — Scorecard cards: label, figure, the signed change as a tinted pill and the figure it replaced. The number of figures decides the grid (one becomes a hero, four a 2×2, five three-above-two) and the card each figure gets decides its type size — `_CardMetrics` measures the label and hands the figure whatever is left. Card tint and rule follow the profile's accent; the green/red sentiment tokens stay fixed, because they carry meaning rather than styling.
 
 ### `lib/widgets/presentation/` — presenter & dual-screen
@@ -495,7 +496,7 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 - `annotation_overlay.dart` — `AnnotationLayer` for interactive drawing/laser pointer on slides.
 - `audience_window.dart` — `AudienceWindowApp`: fullscreen slide on the secondary (beamer) window. Its own engine, so it forwards every key it does not handle itself to the presenter over `presenterChannel` (modifiers included — the other side's `HardwareKeyboard` knows nothing of this window); without that bridge the whole shortcut set died the moment this window took the keyboard focus.
 - `fullscreen_presenter.dart` — `FullscreenPresenter`: dual-screen presenter mode (notes/clock/grid).
-- `rehearsal_summary.dart` — Post-rehearsal timing summary dialog with per-slide breakdown.
+- `rehearsal_summary.dart` — Post-rehearsal timing summary dialog with a per-slide breakdown and, under it, one line per answered question attempt (time and right/wrong, repeat attempts numbered). The on-screen list and the clipboard copy read the same numbered attempts, so they cannot drift apart. Never shown for a `Deck.playOnly` deck — the gate for that sits in `FullscreenPresenter` itself, not only at the call site.
 
 ### `lib/widgets/presentation/parts/` (each `part of fullscreen_presenter.dart`, an `extension _PresenterX` unless noted)
 
@@ -507,5 +508,5 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 - `presenter_notes.dart` — Speaker- and user-note management.
 - `presenter_overlays.dart` — UI overlays (badges/help/grid/clock).
 - `presenter_playback.dart` — Auto-advance and media playback.
-- `presenter_questions.dart` — Question-slide logic (answers, timer).
+- `presenter_questions.dart` — Question-slide logic: drawing a round per kind, judging the answer, the timer, and feeding `RehearsalController.startQuestion`/`finishQuestion`. `_answerInput` is derived from the current view rather than kept as its own flag, and is what tells `presenter_keys.dart` that the keyboard belongs to the answer field. Two rules are enforced here: a round that is not `answerable` gets no countdown and never blocks, and an open-text question keeps its accepted answers out of the `QuestionView` until the reveal — that object travels to the beamer window.
 - `presenter_table.dart` — Live table editing during presentation.

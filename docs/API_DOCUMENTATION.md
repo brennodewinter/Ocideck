@@ -41,6 +41,36 @@ The last seven — from `assets` onward — are the informatieveiligheid
 Marp `_class` token stored in Markdown can differ from the enum name (e.g. the
 `split` class maps to `SlideType.bulletsImage`).
 
+### Question Model
+`lib/models/question.dart` — the payload of a `question` slide, carried as JSON in
+`Slide.customMarkdown` (see [FILE_FORMAT.md](FILE_FORMAT.md) for the block).
+
+`QuestionKind` (6 values): `multipleChoice, trueFalse, multipleCorrect, ordering,
+imagePair, openText`. `QuestionOnWrong` (2 values): `retry, lockAndContinue`.
+`QuestionResult` (3 values): `none, correct, wrong`.
+
+Two classes, deliberately separate:
+
+- **`QuestionSpec`** — what the author wrote: `kind`, `prompt`,
+  `List<QuestionAnswer> answers` (each `text`, `correct`, and for `imagePair` an
+  `image` path), `optionCount`, `timeLimitSeconds`, `onWrong`, `statementIsTrue`
+  and `similarityThreshold`. It round-trips through `toBlock()` / `parse()`;
+  `isPresentable` says whether it can be shown at all, and the rule differs per
+  kind (`trueFalse` always can, `ordering` needs two answers, `openText` needs
+  only a correct one, the rest need a correct *and* a wrong one).
+- **`QuestionView`** — the drawn round, **session-only**: the options actually
+  shown, `optionImages`, the pick, `openText`/`typedAnswer`, `result`, `revealed`,
+  `locked` and the countdown. It is what crosses the window channel to the
+  audience window, which is why an `openText` round leaves `expectedAnswer` empty
+  until the answer is revealed. `answerable` is the flag for "a right answer can
+  actually be given"; the presenter uses it instead of testing
+  `correctIndices.isEmpty`, which `openText` cannot express because it draws no
+  options.
+
+`RehearsalRun` (`lib/models/rehearsal.dart`) carries a `List<QuestionAttempt>`
+alongside its per-slide timings: one entry per *answered* attempt, with the
+slide id, index, duration and whether it was right.
+
 ### ThemeProfile Model
 `lib/models/settings.dart` — visual styling: colors, fonts (`fontFamily`,
 `codeFontFamily`), logo (`logoPath`, `logoPosition`, `logoSize`) and footer
