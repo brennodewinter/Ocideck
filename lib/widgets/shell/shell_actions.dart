@@ -859,7 +859,12 @@ void presentDeck(
   final renderInitial = expandFindingsForRender(
     slides.sublist(0, initial),
   ).length.clamp(0, renderSlides.length - 1);
-  FullscreenPresenter.present(
+  // Live bewerkingen (tabelcellen, checklists) komen buiten de editorvelden om
+  // binnen; die cachen hun tekst tot [DeckState.revision] verandert. Zonder de
+  // verversing hieronder blijft de editor na afloop de oude tekst tonen — en
+  // schrijft de eerstvolgende toetsaanslag daarin de live bewerking stil terug.
+  var liveEdited = false;
+  final presenting = FullscreenPresenter.present(
     context,
     // De projectiegrens. Presenteren is het ontvangende oppervlak bij uitstek:
     // wat hier op het scherm komt, ziet de zaal.
@@ -887,9 +892,17 @@ void presentDeck(
       );
       if (index != null && index >= 0) {
         deckNotifier.updateSlide(index, updated);
+        liveEdited = true;
       }
     },
   );
+  // Pas ná afloop verversen: tijdens het presenteren staat de editor toch
+  // achter de presentatie, en per toetsaanslag verversen zou elke aanslag een
+  // eigen ongedaan-stap maken (de coalescing in [updateSlide] hangt aan het
+  // uitblijven van een revisiesprong).
+  presenting.then((_) {
+    if (liveEdited) deckNotifier.refreshEditorFields();
+  });
 }
 
 // ── App shell ─────────────────────────────────────────────────────────────────

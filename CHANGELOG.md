@@ -113,6 +113,14 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 
 
 ### Fixed
+- **Een live bewerkte tabel kwam verouderd terug in de editor — en werd stil
+  teruggedraaid.** Wat je tijdens het presenteren in een tabelcel typte (of
+  afvinkte op een checklist) belandde wél in het deck, maar de editorvelden
+  cachen hun tekst in eigen controllers en lezen pas opnieuw bij een
+  revisiesprong. Na afloop stond daar dus nog de tekst van vóór de presentatie,
+  en de eerstvolgende toetsaanslag in zo'n veld schreef die hele oude inhoud
+  terug — je live bewerking was weg zonder dat iets dat meldde. Na het sluiten
+  van de presentatie verversen de velden nu, mits er live iets gewijzigd is.
 - **Het beamervenster slikte je toetsen op.** Bij dubbelschermpresenteren is de
   beamer een eigen venster met een eigen engine. Dat venster negeerde álle
   toetsen behalve Cmd/Ctrl+W en stuurde niets door — dus zodra het de

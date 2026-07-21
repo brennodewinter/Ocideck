@@ -85,9 +85,10 @@ class DeckState {
   final bool canUndo;
   final bool canRedo;
 
-  /// Telt alleen op bij undo/redo. De editor gebruikt dit om zijn
-  /// tekstvelden te verversen wanneer een wijziging op dezelfde slide wordt
-  /// teruggedraaid (de velden synchroniseren anders alleen op slide-id).
+  /// De editor gebruikt dit om zijn tekstvelden te verversen wanneer de inhoud
+  /// van de huidige slide buiten die velden om verandert; ze synchroniseren
+  /// anders alleen op slide-id. Telt op bij undo/redo en bij
+  /// [DeckNotifier.refreshEditorFields].
   final int revision;
 
   const DeckState({
@@ -176,6 +177,21 @@ class DeckNotifier extends StateNotifier<DeckState> {
 
   bool get canUndo => _undoStack.isNotEmpty;
   bool get canRedo => _redoStack.isNotEmpty;
+
+  /// Laat de editorvelden hun inhoud opnieuw uit het deck lezen.
+  ///
+  /// Die velden cachen in eigen [TextEditingController]s en verversen alleen
+  /// wanneer [DeckState.revision] verandert. Een wijziging die búiten de editor
+  /// om binnenkomt — live een tabelcel bijwerken of een checklist afvinken
+  /// tijdens het presenteren — laat ze dus op de oude tekst staan. Erger dan
+  /// verwarrend: de eerstvolgende toetsaanslag in zo'n veld schrijft de hele
+  /// gecachete inhoud terug en draait de live bewerking stil terug.
+  ///
+  /// Het deck zelf blijft ongemoeid, dus dit is geen mutatie: geen
+  /// ongedaan-stap, geen coalescing, geen 'gewijzigd'-vlag.
+  void refreshEditorFields() {
+    state = state.copyWith(revision: state.revision + 1);
+  }
 
   /// Aangeroepen wanneer een `mem:`-asset (webversie) niet meer nodig hóéft te
   /// zijn: na het verwijderen van dia's en na het opslaan. [TabsNotifier] hangt

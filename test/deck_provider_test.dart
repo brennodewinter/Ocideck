@@ -472,6 +472,26 @@ void main() {
     },
   );
 
+  test('refreshEditorFields bumps the revision without touching the deck', () {
+    // Na een live bewerking tijdens het presenteren staan de editorvelden nog
+    // op de oude tekst; alleen een revisiesprong laat ze opnieuw lezen. Het
+    // deck is dan al bijgewerkt, dus dit mag géén mutatie zijn: geen extra
+    // ongedaan-stap en geen 'gewijzigd'-vlag die er nog niet stond.
+    final n = _notifier()..newDeck('D');
+    n.loadDeck(n.state.deck!);
+    final deckBefore = n.state.deck;
+    final dirtyBefore = n.state.isDirty;
+    final undoBefore = n.state.canUndo;
+    final revisionBefore = n.state.revision;
+
+    n.refreshEditorFields();
+
+    expect(n.state.revision, greaterThan(revisionBefore));
+    expect(identical(n.state.deck, deckBefore), isTrue);
+    expect(n.state.isDirty, dirtyBefore);
+    expect(n.state.canUndo, undoBefore);
+  });
+
   test('clearAllChecklists is a no-op when nothing is checked', () {
     final n = _notifier()..newDeck('D');
     final slide = Slide.create(

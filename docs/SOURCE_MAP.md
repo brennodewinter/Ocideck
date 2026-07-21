@@ -200,7 +200,7 @@ deliberately manual).
 ## `lib/state/` — Riverpod providers
 
 - `consent_provider.dart` — `ConsentNotifier` managing consent acceptance/revocation with persistent storage.
-- `deck_provider.dart` — `DeckNotifier`: loaded deck, dirty state, undo/redo history, file path.
+- `deck_provider.dart` — `DeckNotifier`: loaded deck, dirty state, undo/redo history, file path. Also `refreshEditorFields`, which bumps `DeckState.revision` without touching the deck: the editor's text fields cache their content in their own controllers and only re-read when that revision changes, so a change arriving from outside them (a table cell edited live while presenting) would otherwise sit behind stale text that the next keystroke writes back.
 - `deck_provider_ai.dart` — `DeckNotifierAiAlt` extension: count/clear AI-generated image alt-texts.
 - `deck_provider_auto.dart` — `DeckNotifierAuto` extension: `autoRenumberFindings` (P2-AUTO).
 - `deck_provider_checklist.dart` — `DeckNotifierChecklist` extension: `generateScopeChecklists` (one checklist per scope object, feedback #8) and `clearAllChecklists`.
