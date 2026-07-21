@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:1223dc35-0581-5570-85fa-f1a12e07e131",
+  "serialNumber": "urn:uuid:17050574-38e3-5079-8c25-a7e1370c248d",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-07-19T14:45:45.854834Z",
+    "timestamp": "2026-07-21T22:52:13.387243Z",
     "tools": {
       "components": [
         {
@@ -7067,14 +7067,20 @@
       "licenses": [
         {
           "license": {
-            "id": "MIT"
+            "id": "Apache-2.0"
           }
+        }
+      ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "10296c973c10a77f20929aa163224c21aa9883cb094dd0e69dda6b0b4ef57860"
         }
       ],
       "externalReferences": [
         {
           "type": "vcs",
-          "url": "https://github.com/MixinNetwork/flutter-plugins"
+          "url": "https://github.com/MixinNetwork/flutter-plugins/tree/58a5868d1cb9031defa5db5868d6aaea0486d24a/packages/desktop_multi_window"
         }
       ],
       "properties": [
@@ -7087,8 +7093,12 @@
           "value": "direct main"
         },
         {
+          "name": "ocideck:upstream-revision",
+          "value": "58a5868d1cb9031defa5db5868d6aaea0486d24a"
+        },
+        {
           "name": "ocideck:note",
-          "value": "Vendored fork in third_party/desktop_multi_window (local native changes)."
+          "value": "Vendored fork in third_party/desktop_multi_window; the local changes are recorded in third_party/desktop_multi_window/MODIFICATIONS.md. The SHA-256 is a tree hash of the vendored directory, not an upstream archive hash — a path dependency has none."
         }
       ]
     },
@@ -7104,10 +7114,16 @@
           }
         }
       ],
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "c2dd845611ec1e289ae202094766bb0591017f598ff7f289cb4f53addfaaed53"
+        }
+      ],
       "externalReferences": [
         {
           "type": "vcs",
-          "url": "https://github.com/leanflutter/screen_retriever"
+          "url": "https://github.com/leanflutter/screen_retriever/tree/ed1e52204d75b69330fb4b0e0b8d4d57e3c53833/packages/screen_retriever_macos"
         }
       ],
       "properties": [
@@ -7120,8 +7136,12 @@
           "value": "direct overridden"
         },
         {
+          "name": "ocideck:upstream-revision",
+          "value": "ed1e52204d75b69330fb4b0e0b8d4d57e3c53833"
+        },
+        {
           "name": "ocideck:note",
-          "value": "Vendored fork in third_party/screen_retriever_macos (local native changes)."
+          "value": "Vendored fork in third_party/screen_retriever_macos; the local changes are recorded in third_party/screen_retriever_macos/MODIFICATIONS.md. The SHA-256 is a tree hash of the vendored directory, not an upstream archive hash — a path dependency has none."
         }
       ]
     }

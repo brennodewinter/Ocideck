@@ -40,10 +40,18 @@ Kept in `third_party/` and wired in via `pubspec.yaml` (path dependency /
 `dependency_overrides`). Both are forks of upstream plugins with local native
 changes; see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md#vendored-forks).
 
-| Component | Origin | Licence | Local changes |
+| Component | Origin (exact commit) | Licence | Local changes |
 | --- | --- | --- | --- |
-| `desktop_multi_window` | [MixinNetwork/flutter-plugins](https://github.com/MixinNetwork/flutter-plugins) | MIT | Added native macOS window placement/fullscreen/close methods for the dual-screen presenter |
-| `screen_retriever_macos` | [leanflutter/screen_retriever](https://github.com/leanflutter/screen_retriever) | MIT | Packaging fix for recent Xcode/CocoaPods |
+| `desktop_multi_window` | [MixinNetwork/flutter-plugins@58a5868](https://github.com/MixinNetwork/flutter-plugins/tree/58a5868d1cb9031defa5db5868d6aaea0486d24a/packages/desktop_multi_window) | **Apache-2.0** | Native macOS/Windows/Linux window placement, borderless fullscreen and close for the dual-screen presenter, plus hover delivery to non-key windows. Six files changed, each carrying an Apache-2.0 §4(b) notice; see [`third_party/desktop_multi_window/MODIFICATIONS.md`](third_party/desktop_multi_window/MODIFICATIONS.md) |
+| `screen_retriever_macos` | [leanflutter/screen_retriever@ed1e522](https://github.com/leanflutter/screen_retriever/tree/ed1e52204d75b69330fb4b0e0b8d4d57e3c53833/packages/screen_retriever_macos) | MIT | Swift Package Manager layout added for recent Xcode/CocoaPods; no upstream file edited. See [`third_party/screen_retriever_macos/MODIFICATIONS.md`](third_party/screen_retriever_macos/MODIFICATIONS.md) |
+
+> `desktop_multi_window` was listed here (and in the SBOM) as **MIT** until
+> 2026-07-22. It is not: `third_party/desktop_multi_window/LICENSE` is the
+> Apache-2.0 text, © 2021 Mixin. The trap is that the GitHub API reports MIT for
+> `MixinNetwork/flutter-plugins` — that is the *root* LICENSE of the monorepo,
+> and the package directory carries its own. The SBOM no longer hardcodes either
+> fork's licence; it classifies both from the vendored LICENSE file with the same
+> classifier `make licenses` uses, so this cannot drift again.
 
 ## Dart & Flutter packages
 

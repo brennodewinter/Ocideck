@@ -103,11 +103,15 @@ gate in the test suite (`make check`).
 Two boundaries, because both were overstated here before (*corrected
 2026-07-21*):
 
-- **SHA-256 covers most components, not all.** Of the 199 components listed, 190
-  carry a hash. The nine that do not are the two vendored plugin forks under
-  `third_party/` (`desktop_multi_window`, `screen_retriever_macos`), the
-  packages that ship inside the Flutter SDK rather than from pub, and the SDKs
-  themselves — none of which has a pub archive hash to record.
+- **SHA-256 covers most components, not all.** Of the 199 components listed, 192
+  carry a hash. The seven that do not are the packages that ship inside the
+  Flutter SDK rather than from pub (`flutter`, `flutter_localizations`,
+  `flutter_test`, `flutter_web_plugins`, `sky_engine`) and the two build SDKs
+  themselves — none of which has a pub archive hash to record. The two vendored
+  plugin forks under `third_party/` used to be in this list; since 2026-07-22
+  they carry a **tree hash** (SHA-256 over the sorted per-file digests of the
+  vendored directory) plus the upstream commit they were branched from, so what
+  we ship is verifiable even though a path dependency has no archive.
 - **It travels with the web build only.** `make build-web` copies `sbom/` into
   `build/web/sbom/`, so a hosted instance serves it from its own origin. The
   desktop build recipes do not bundle it; there, the SBOM lives in the
