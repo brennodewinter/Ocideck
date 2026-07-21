@@ -633,6 +633,18 @@ extension _MarkdownParse on MarkdownService {
 
   void _consumeRichTextLine(String line, _BodyParse b) {
     final t = line.trim();
+    // De split-stellage bijhouden vóór al het andere. De kopfase hieronder slikt
+    // elke `<div`-regel en keert meteen terug, en bij een dia met een lége body
+    // is die fase nog actief wanneer `<div class="split-image">` langskomt: de
+    // vlag ging dan nooit aan, de zij-afbeelding viel in de body-tak en was na
+    // opslaan-en-heropenen weg.
+    if (b.isSplit) {
+      if (t.startsWith('<div class="split-image"')) {
+        b.inSplitImageDiv = true;
+      } else if (t == '</div>') {
+        b.inSplitImageDiv = false;
+      }
+    }
     if (b.richTextHeaderPhase) {
       if (t.isEmpty) return;
       if (t.startsWith('<div') || t == '</div>') {
@@ -679,11 +691,9 @@ extension _MarkdownParse on MarkdownService {
       // serialiser schrijft deze markup nergens anders, en zonder die
       // voorwaarde verdween een door de auteur getypte `<div>`-regel — met zijn
       // inhoud en al — uit een gewone vrije-tekstslide.
-      if (t.startsWith('<div class="split-image"')) {
-        b.inSplitImageDiv = true;
-      } else if (t == '</div>') {
-        b.inSplitImageDiv = false;
-      }
+      //
+      // De `split-image`-vlag wordt bovenaan deze methode al bijgehouden, want
+      // die moet ook aangaan wanneer de kopfase deze regel opslokt.
     } else {
       b.richTextLines.add(line);
     }

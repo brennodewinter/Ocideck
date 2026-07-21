@@ -616,6 +616,29 @@ void main() {
       );
     });
 
+    test('the side image survives every combination of title and body', () {
+      // De lege body is het randgeval: de kopfase van de parser slikt elke
+      // `<div`-regel, en zonder body is die fase n\u00f3g actief wanneer
+      // `<div class="split-image">` langskomt. De zij-afbeelding viel dan in de
+      // body-tak en was na opslaan-en-heropenen weg.
+      for (final title in ['', 'Titel']) {
+        for (final body in ['', 'Tekst.']) {
+          final out = _roundTrip(
+            Slide.create(SlideType.bulletsImage).copyWith(
+              listStyle: ListStyle.richText,
+              title: title,
+              customMarkdown: body,
+              imagePath: 'images/photo.png',
+            ),
+          );
+          final where = 'titel=<$title> body=<$body>';
+          expect(out.imagePath, 'images/photo.png', reason: where);
+          expect(out.customMarkdown, body, reason: where);
+          expect(out.title, title, reason: where);
+        }
+      }
+    });
+
     test('a text image alone does not become the side image', () {
       const body =
           'Een dia zonder zij-afbeelding:\n\n![Alt](images/in-tekst.png)';
