@@ -106,6 +106,14 @@ final List<NationalIdentifierRule> euIdentifierRules = [
     validate: isValidBalticPersonalCode,
   ),
   NationalIdentifierRule(
+    id: 'lu.matricule',
+    country: 'LU',
+    // Wordt vrijwel altijd aan één stuk geschreven; spaties per groep komen op
+    // formulieren voor.
+    pattern: RegExp(r'(?<!\d)\d{4}[ ]?\d{2}[ ]?\d{2}[ ]?\d{5}(?!\d)'),
+    validate: isValidLuMatricule,
+  ),
+  NationalIdentifierRule(
     id: 'lv.pk',
     country: 'LV',
     pattern: RegExp(r'(?<!\d)\d{6}-?\d{5}(?!\d)'),

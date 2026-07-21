@@ -282,6 +282,42 @@ bool isValidBalticPersonalCode(String raw) {
   return rest == d.codeUnitAt(10) - 0x30;
 }
 
+// ── Luxemburg ────────────────────────────────────────────────────────────────
+
+/// Matricule: 13 cijfers, `AAAAMMJJXXXC1C2`, met twee controlecijfers.
+///
+/// Het enige nummer in dit bestand met twéé onafhankelijke controles, en dat is
+/// geen franje van de Luxemburgse wetgever: `C1` is een Luhn over de elf
+/// identificerende cijfers, `C2` een Verhoeff over diezélfde elf. Niet over
+/// twaalf — dat is de valkuil, want elke andere twee-controlecijferregeling die
+/// je kent stapelt ze wél. Samen drukken ze de kans dat een willekeurige reeks
+/// erdoorheen komt naar één op de honderd, en met de geboortedatum ervoor naar
+/// ver daaronder.
+///
+/// Rechtspersonen krijgen een matricule met een ándere opbouw (jaar +
+/// rechtsvorm + volgnummer + één mod-11-cijfer). Die valt hier af op de
+/// datumcontrole, en dat is precies de bedoeling: een bedrijfsmatricule op een
+/// factuurslide is geen persoonsgegeven.
+bool isValidLuMatricule(String raw) {
+  final d = _digits(raw);
+  if (d.length != 13) return false;
+
+  // Vier cijfers geboortejaar. De ondergrens is ruim genomen — het gaat er niet
+  // om wie er nog leeft, maar om het uitsluiten van de negentig procent van de
+  // willekeurige reeksen die met iets anders dan een jaartal beginnen.
+  final year = int.parse(d.substring(0, 4));
+  if (year < 1880 || year > 2099) return false;
+  if (!_plausibleDayMonth(
+    int.parse(d.substring(6, 8)),
+    int.parse(d.substring(4, 6)),
+  )) {
+    return false;
+  }
+
+  final body = d.substring(0, 11);
+  return _luhn('$body${d[11]}') && passesVerhoeff('$body${d[12]}');
+}
+
 // ── Letland ──────────────────────────────────────────────────────────────────
 
 /// Personas kods: 11 cijfers, mod-11 met de gewichten 1-6-3-7-9-10-5-8-4-2.

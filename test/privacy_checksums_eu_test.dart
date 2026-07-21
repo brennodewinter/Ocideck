@@ -160,6 +160,33 @@ void main() {
       '32182736453',
       '32182736452',
     );
+    checksum(
+      'Luxemburg — matricule (Luhn + Verhoeff)',
+      isValidLuMatricule,
+      '1977063000135',
+      '1977063000136',
+    );
+  });
+
+  group('Luxemburg — twee controlecijfers, en allebei nodig', () {
+    // De valkuil: `C2` is een Verhoeff over de eerste ELF cijfers, niet over de
+    // twaalf inclusief `C1`. Wie ze stapelt — wat elke andere
+    // twee-controlecijferregeling doet — krijgt een validator die geen enkel
+    // echt matricule accepteert.
+    test('een verminkt Luhn-cijfer valt af', () {
+      expect(isValidLuMatricule('1977063000135'), isTrue);
+      expect(isValidLuMatricule('1977063000145'), isFalse);
+    });
+
+    test('een verminkt Verhoeff-cijfer valt af', () {
+      expect(isValidLuMatricule('1977063000136'), isFalse);
+    });
+
+    test('wijst een onmogelijk geboortejaar af', () {
+      // Een bedrijfsmatricule begint met het oprichtingsjaar of met vier
+      // nullen, en heeft daarna een heel andere opbouw.
+      expect(isValidLuMatricule('0000205000135'), isFalse);
+    });
   });
 
   group('Letland — het is niet het Estse schema', () {

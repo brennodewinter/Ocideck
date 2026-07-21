@@ -40,6 +40,7 @@ void main() {
       'ee.isikukood': '37205030203',
       'is.kennitala': '290200-7170',
       'lv.pk': '110481-12348',
+      'lu.matricule': '1977063000135',
     };
 
     cases.forEach((rule, value) {
