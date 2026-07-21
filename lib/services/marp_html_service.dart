@@ -322,6 +322,14 @@ class MarpHtmlService {
     multiLine: true,
   );
 
+  /// Maak een bijschrift veilig als alt-tekst in Markdown: de haken zouden de
+  /// afbeeldingsverwijzing anders vroegtijdig afsluiten.
+  static String _markdownAltText(String raw) => raw
+      .replaceAll('[', '(')
+      .replaceAll(']', ')')
+      .replaceAll('\n', ' ')
+      .trim();
+
   /// Vervangt een ```question-blok door de vraag met zijn antwoordopties.
   ///
   /// Zonder deze stap viel het blok terug op de gewone codeweergave van marked,
@@ -333,14 +341,6 @@ class MarpHtmlService {
   /// De export is een leesbaar document, geen quiz: er valt niets te klikken en
   /// niets af te tellen. Daarom de vraag en de opties, en het goede antwoord
   /// juist niet — dat is de enige informatie die hier niet thuishoort.
-  /// Maak een bijschrift veilig als alt-tekst in Markdown: de haken zouden de
-  /// afbeeldingsverwijzing anders vroegtijdig afsluiten.
-  static String _markdownAltText(String raw) => raw
-      .replaceAll('[', '(')
-      .replaceAll(']', ')')
-      .replaceAll('\n', ' ')
-      .trim();
-
   static String renderQuestionBlocks(String slideMarkdown) {
     return slideMarkdown.replaceAllMapped(_questionFence, (m) {
       final spec = QuestionSpec.parse(m.group(1)!);
