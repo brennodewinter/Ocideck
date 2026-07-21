@@ -15,6 +15,7 @@ documentation. Start here and jump to what you need.
 | [SHORTCUTS.md](SHORTCUTS.md) | Keyboard shortcuts. |
 | [FAQ.md](FAQ.md) | Common questions about features, security, and privacy. |
 | [PRIVACY.md](PRIVACY.md) | What data stays local, what leaves only on your action, and how. |
+| [ACCESSIBILITY.md](ACCESSIBILITY.md) | What is accessible, and — the longer half — what is not. |
 | [TROUBLESHOOTING_GUIDE.md](TROUBLESHOOTING_GUIDE.md) | Fixes for common problems. |
 | [FILE_FORMAT.md](FILE_FORMAT.md) | The on-disk Markdown/Marp format — the stable contract. |
 
@@ -60,6 +61,7 @@ references (where they disagree with the code, the code wins):
 - **I want to build/hack on it** → [DEVELOPMENT_SETUP_GUIDE.md](DEVELOPMENT_SETUP_GUIDE.md), then [ARCHITECTURE.md](ARCHITECTURE.md).
 - **I want to host the web build** → [HOSTING.md](HOSTING.md).
 - **I need to assess its security/privacy** → [SECURITY_DESIGN.md](SECURITY_DESIGN.md) and [PRIVACY.md](PRIVACY.md).
+- **I depend on assistive technology** → [ACCESSIBILITY.md](ACCESSIBILITY.md).
 - **I hit a term I don't know** → [GLOSSARY.md](GLOSSARY.md).
 
 ## Licence
