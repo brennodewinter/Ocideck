@@ -147,11 +147,21 @@ and keep the dataset under it.
 > section was checked against the code, not assumed.
 
 **Referenced by name only** (no content bundled, so nothing to license): PTES,
-OWASP MASTG, OWASP ISTG and OWASP FSTM, used for the scope-to-standard mapping
-(Infra→PTES, IoT→ISTG, Firmware→FSTM, Mobile→MASTG). Nominative use of a
-standard's name carries no licensing obligation. Should any of their content be
-bundled later — the same way WSTG's was — it belongs in the table above **in the
-same commit**.
+OWASP ISTG and OWASP FSTM, used for the scope-to-standard mapping (Infra→PTES,
+IoT→ISTG, Firmware→FSTM). Nominative use of a standard's name carries no
+licensing obligation. Should any of their content be bundled later — the same way
+WSTG's was — it belongs in the table above **in the same commit**.
+
+> **And it happened again, with MASTG.** This list named OWASP MASTG as
+> referenced-by-name-only while the table above — in this same file — already
+> accounted for **186 verbatim MASTG test titles** under CC-BY-SA-4.0, split
+> across `mastg_catalog_android.dart` (98) and `mastg_catalog_ios.dart` (88).
+> The Mobile→MASTG mapping is still a nominative use, but the catalogue is not,
+> and the table is the entry that governs. MASTG is removed from this list;
+> *corrected 2026-07-21*. The failure mode is identical to the WSTG one above:
+> the sentence was written before the content landed and nobody came back to it.
+> If a third standard's content is ever bundled, the same two places have to
+> move together.
 
 ## A note on Apache-2.0 and the EUPL
 
