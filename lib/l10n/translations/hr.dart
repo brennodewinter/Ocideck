@@ -1786,6 +1786,10 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Ovaj tekst sadrži poglavlja. Broj slajdova nakon dijeljenja:',
+  'dia\'s op.': '(po jedan za svako poglavlje).',
+  'Splits op hoofdstukken': 'Podijeli po poglavljima',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'U redu',

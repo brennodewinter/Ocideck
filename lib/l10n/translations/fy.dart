@@ -737,6 +737,10 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Dizze tekst befettet haadstikken. Opknippen leveret',
+  'dia\'s op.': 'slides op.',
+  'Splits op hoofdstukken': 'Splits op haadstikken',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

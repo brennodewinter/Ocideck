@@ -1791,6 +1791,10 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Ten tekst zawiera rozdziały. Liczba slajdów po podziale:',
+  'dia\'s op.': '(po jednym na rozdział).',
+  'Splits op hoofdstukken': 'Podziel na rozdziały',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

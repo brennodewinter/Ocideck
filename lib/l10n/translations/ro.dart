@@ -1797,6 +1797,10 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Acest text conține capitole. Împărțirea produce',
+  'dia\'s op.': 'slide-uri.',
+  'Splits op hoofdstukken': 'Împarte pe capitole',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

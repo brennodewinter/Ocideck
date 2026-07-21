@@ -1815,6 +1815,10 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Tá caibidlí sa téacs seo. Líon na sleamhnán tar éis roinnte:',
+  'dia\'s op.': '(ceann in aghaidh gach caibidle).',
+  'Splits op hoofdstukken': 'Roinn de réir caibidlí',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Ceart go leor',

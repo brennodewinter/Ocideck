@@ -918,6 +918,10 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'This text contains chapters. Splitting it produces',
+  'dia\'s op.': 'slides.',
+  'Splits op hoofdstukken': 'Split by chapters',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

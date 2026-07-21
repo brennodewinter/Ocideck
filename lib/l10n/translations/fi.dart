@@ -1779,6 +1779,10 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Tässä tekstissä on lukuja. Jakaminen tuottaa',
+  'dia\'s op.': 'diaa.',
+  'Splits op hoofdstukken': 'Jaa luvuittain',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

@@ -1786,6 +1786,10 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Tento text obsahuje kapitoly. Počet snímok po rozdelení:',
+  'dia\'s op.': '(jedna na kapitolu).',
+  'Splits op hoofdstukken': 'Rozdeliť podľa kapitol',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

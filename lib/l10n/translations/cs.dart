@@ -1782,6 +1782,10 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Tento text obsahuje kapitoly. Počet snímků po rozdělení:',
+  'dia\'s op.': '(jeden na kapitolu).',
+  'Splits op hoofdstukken': 'Rozdělit po kapitolách',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

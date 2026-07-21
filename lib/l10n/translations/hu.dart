@@ -1783,6 +1783,10 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Ez a szöveg fejezeteket tartalmaz. A felosztás',
+  'dia\'s op.': 'diát eredményez.',
+  'Splits op hoofdstukken': 'Felosztás fejezetek szerint',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

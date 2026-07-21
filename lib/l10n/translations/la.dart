@@ -1795,6 +1795,10 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Hic textus capita continet. Divisio efficit',
+  'dia\'s op.': 'paginas.',
+  'Splits op hoofdstukken': 'Per capita dividere',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Bene',

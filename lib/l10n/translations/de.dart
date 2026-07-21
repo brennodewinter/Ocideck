@@ -736,6 +736,10 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Dieser Text enthält Kapitel. Das Aufteilen ergibt',
+  'dia\'s op.': 'Folien.',
+  'Splits op hoofdstukken': 'Nach Kapiteln aufteilen',
   'esc': 'Esc',
   'Enter': 'Enter',
   'OK': 'OK',

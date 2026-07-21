@@ -1781,6 +1781,10 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'To besedilo vsebuje poglavja. Število prosojnic po razdelitvi:',
+  'dia\'s op.': '(po ena na poglavje).',
+  'Splits op hoofdstukken': 'Razdeli po poglavjih',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'V redu',

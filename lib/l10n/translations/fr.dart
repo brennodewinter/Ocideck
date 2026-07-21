@@ -736,6 +736,10 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Ce texte contient des chapitres. Le découpage donne',
+  'dia\'s op.': 'diapositives.',
+  'Splits op hoofdstukken': 'Découper par chapitres',
   'esc': 'échap',
   'Enter': 'Entrée',
   'OK': 'OK',

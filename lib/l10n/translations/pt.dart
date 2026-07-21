@@ -1809,6 +1809,10 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Este texto contém capítulos. A divisão produz',
+  'dia\'s op.': 'slides.',
+  'Splits op hoofdstukken': 'Dividir por capítulos',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

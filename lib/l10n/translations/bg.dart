@@ -1802,6 +1802,10 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Този текст съдържа глави. Разделянето дава',
+  'dia\'s op.': 'слайда.',
+  'Splits op hoofdstukken': 'Разделяне по глави',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Добре',

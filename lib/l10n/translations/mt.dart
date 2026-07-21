@@ -1801,6 +1801,10 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Dan it-test fih kapitli. Il-qsim jipproduċi',
+  'dia\'s op.': 'slides.',
+  'Splits op hoofdstukken': 'Aqsam skont il-kapitli',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

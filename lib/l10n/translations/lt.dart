@@ -1787,6 +1787,10 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Šiame tekste yra skyrių. Skaidrių skaičius po padalijimo:',
+  'dia\'s op.': '(po vieną kiekvienam skyriui).',
+  'Splits op hoofdstukken': 'Skaidyti pagal skyrius',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Gerai',

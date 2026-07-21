@@ -1754,6 +1754,10 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      '\'ay\'mey ngaS ghItlh vam. wavlu\'chugh, chen',
+  'dia\'s op.': 'cha\'nob.',
+  'Splits op hoofdstukken': '\'ay\'meyDaq yIwav',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'lu\'',

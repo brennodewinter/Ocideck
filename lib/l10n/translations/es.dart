@@ -733,6 +733,10 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Este texto contiene capítulos. Al dividirlo se obtienen',
+  'dia\'s op.': 'diapositivas.',
+  'Splits op hoofdstukken': 'Dividir por capítulos',
   'esc': 'esc',
   'Enter': 'Intro',
   'OK': 'OK',

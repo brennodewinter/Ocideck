@@ -1778,6 +1778,10 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Den här texten innehåller kapitel. Uppdelningen ger',
+  'dia\'s op.': 'bilder.',
+  'Splits op hoofdstukken': 'Dela upp efter kapitel',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

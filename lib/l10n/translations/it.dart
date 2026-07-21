@@ -732,6 +732,10 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Questo testo contiene capitoli. La suddivisione produce',
+  'dia\'s op.': 'slide.',
+  'Splits op hoofdstukken': 'Dividi per capitoli',
   'esc': 'esc',
   'Enter': 'Invio',
   'OK': 'OK',

@@ -1770,6 +1770,10 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'See tekst sisaldab peatükke. Tükeldamine annab',
+  'dia\'s op.': 'slaidi.',
+  'Splits op hoofdstukken': 'Tükelda peatükkide kaupa',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

@@ -1779,6 +1779,10 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Teks ini berisi bab. Pemisahan menghasilkan',
+  'dia\'s op.': 'slide.',
+  'Splits op hoofdstukken': 'Pisahkan per bab',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

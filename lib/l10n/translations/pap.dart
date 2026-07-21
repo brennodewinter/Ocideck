@@ -736,6 +736,10 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'E teksto aki tin kapítulonan. Si bo parti e, bo ta haña',
+  'dia\'s op.': 'slide.',
+  'Splits op hoofdstukken': 'Parti pa kapítulo',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

@@ -1778,6 +1778,10 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Šajā tekstā ir nodaļas. Slaidu skaits pēc sadalīšanas:',
+  'dia\'s op.': '(pa vienam katrai nodaļai).',
+  'Splits op hoofdstukken': 'Sadalīt pa nodaļām',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Labi',

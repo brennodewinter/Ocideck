@@ -1807,6 +1807,10 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Αυτό το κείμενο περιέχει κεφάλαια. Ο διαχωρισμός δίνει',
+  'dia\'s op.': 'διαφάνειες.',
+  'Splits op hoofdstukken': 'Διαχωρισμός ανά κεφάλαιο',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Εντάξει',

@@ -1797,6 +1797,10 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Цей текст містить розділи. Кількість слайдів після поділу:',
+  'dia\'s op.': '(по одному на кожен розділ).',
+  'Splits op hoofdstukken': 'Поділити за розділами',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'Гаразд',

@@ -1778,6 +1778,10 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Denne tekst indeholder kapitler. Opdelingen giver',
+  'dia\'s op.': 'slides.',
+  'Splits op hoofdstukken': 'Opdel efter kapitler',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

@@ -1783,6 +1783,10 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Deze tekst bevat hoofdstukken. Opknippen levert':
+      'Dä Text hät Kapitel. S Uufteile git',
+  'dia\'s op.': 'Slides.',
+  'Splits op hoofdstukken': 'Nach Kapitel uufteile',
   'esc': 'Esc',
   'Enter': 'Enter',
   'OK': 'OK',
