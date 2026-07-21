@@ -256,6 +256,24 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   uitgevende dienst te sturen. Dat staat hier uit: dan zou een controle op
   weglekken zelf gegevens wegsturen.
 
+- **De privacycontrole kijkt nu naar alle 27 EU-lidstaten.** Zes landpakketten —
+  Cyprus, Luxemburg, Letland, Malta, IJsland en Liechtenstein — stonden wel als
+  vinkje in de instellingen maar keken naar niets; ze zijn eerder deze maand
+  uitgezet omdat "niemand keek" niet als "niets gevonden" mag lezen. Ze staan nu
+  weer aan, en nu doen ze ook echt iets.
+
+  Vier van de zes nummers dragen een controlegetal: de IJslandse kennitala, de
+  Letse personas kods, het Luxemburgse matricule (dat er zelfs twee heeft) en de
+  Cypriotische fiscale identificatiecode. Die melden zichzelf, net als het PESEL
+  of het rijksregisternummer.
+
+  Voor twee is er geen controlegetal dat wij konden nagaan: het Maltese
+  identiteitskaartnummer en de Liechtensteinse PEID. Die melden alleen wanneer
+  er ook een bijpassend woord naast staat, en nooit met de hoogste zekerheid.
+  Een controlegetal verzinnen dat er geloofwaardig uitziet zou erger zijn dan
+  geen: het wijst echte nummers af en laat verzonnen nummers door. Voor Cyprus
+  betekent dat ook dat de regel op de fiscale code zit en niet op het
+  identiteitskaartnummer, want dat laatste heeft geen enkele controle.
 - **Een bestand vertelt nu welke formaatversie het heeft** (`ocideck_format` in
   de front matter). Dat is nodig om oudere bestanden later te kunnen blijven
   openen zonder te raden. Er verandert niets aan wat u ziet, maar drie regels
