@@ -2178,4 +2178,65 @@ void main() {
       expect(md, isNot(contains('ocideck_finding_role')));
     });
   });
+
+  group('elk slidetype komt als zichzelf terug', () {
+    // Uitputtend over SlideType.values: de losse tests hierboven dekken de
+    // types die iemand ooit opschreef, en dat waren er niet alle. Een nieuw
+    // type dat de lezer niet kent, valt hier meteen door de mand — de
+    // schrijver gebruikt de registry (`type.marpClass`), dus de lezer moet dat
+    // ook. Elke tak is één regel in [_metInhoud], niet een nieuwe test.
+    for (final type in SlideType.values) {
+      test(type.name, () {
+        final out = _roundTrip(_metInhoud(type));
+        expect(
+          out.type,
+          type,
+          reason:
+              'een ${type.name}-dia kwam terug als ${out.type.name}; '
+              'kent de lezer het `_class`-token "${type.marpClass}"?',
+        );
+      });
+    }
+  });
+}
+
+/// Een dia van [type] met het minimum aan inhoud dat hem herkenbaar maakt.
+///
+/// Types zónder eigen `_class`-token (bullets, image, twoImages, freeMarkdown)
+/// worden aan hun inhoud herkend; die krijgen hier precies wat de heuristiek
+/// nodig heeft. De rest draagt zijn token en heeft alleen inhoud nodig die niet
+/// leeg is.
+Slide _metInhoud(SlideType type) {
+  final basis = Slide.create(type);
+  return switch (type) {
+    SlideType.bullets => basis.copyWith(title: 'T', bullets: const ['Punt']),
+    SlideType.twoBullets => basis.copyWith(
+      title: 'T',
+      bullets: const ['Links'],
+      bullets2: const ['Rechts'],
+    ),
+    SlideType.bulletsImage => basis.copyWith(
+      title: 'T',
+      bullets: const ['Punt'],
+      imagePath: 'images/a.png',
+    ),
+    SlideType.image => basis.copyWith(imagePath: 'images/a.png'),
+    SlideType.twoImages => basis.copyWith(
+      imagePath: 'images/a.png',
+      imagePath2: 'images/b.png',
+    ),
+    SlideType.video => basis.copyWith(videoPath: 'media/film.mp4'),
+    SlideType.quote => basis.copyWith(quote: 'Zo gaat dat', quoteAuthor: 'N.N.'),
+    SlideType.freeMarkdown => basis.copyWith(
+      customMarkdown: 'Vrije **tekst** zonder kop.',
+    ),
+    SlideType.code => basis.copyWith(
+      codeLanguage: 'dart',
+      customMarkdown: 'void main() {}',
+    ),
+    SlideType.title ||
+    SlideType.section => basis.copyWith(title: 'T', subtitle: 'S'),
+    // De overige types dragen hun token én een gevulde body uit Slide.create.
+    _ => basis.copyWith(title: 'T'),
+  };
 }

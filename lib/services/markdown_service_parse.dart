@@ -25,6 +25,31 @@ final _reClassDirective = RegExp(r'<!--\s*_class:\s*([^>]+?)\s*-->');
 final _reHtmlComment = RegExp(r'<!--([\s\S]*?)-->', multiLine: true);
 final _reImageWidthStyle = RegExp(r'--image-width:\s*(\d+)%');
 
+/// `_class`-tokens van opgeheven slidetypes en het type dat ze nu opleveren.
+///
+/// Het losse 'actions'-type is opgeheven: het was een tabel met een vaste kop en
+/// een getypeerde editor eroverheen. De rijen stonden al als gewone
+/// Markdown-tabel op schijf, dus een bestaand deck migreert door het token als
+/// `table` te lezen — geen dataconversie nodig.
+const Map<String, SlideType> _retiredSlideTypeClasses = {
+  'actions': SlideType.table,
+};
+
+/// Het slidetype dat één `_class`-token aanwijst, of null als het token geen
+/// type is (`logo-safe`, `split`-varianten, een eigen CSS-klasse van de auteur).
+SlideType? _slideTypeForClassToken(String token) =>
+    slideTypeByMarpClass[token] ?? _retiredSlideTypeClasses[token];
+
+/// Het slidetype dat [tokens] declareert: het eerste token dat een type is, of
+/// null wanneer geen enkel token dat doet (dan beslist de inhoud).
+SlideType? _declaredSlideType(Iterable<String> tokens) {
+  for (final token in tokens) {
+    final type = _slideTypeForClassToken(token);
+    if (type != null) return type;
+  }
+  return null;
+}
+
 /// Slide types whose body is stored as a Markdown table, so the parser keeps the
 /// decoded rows in [Slide.tableRows]: the `table` and `scorecard` types plus the
 /// security types that serialise as a table (`checklist` P1-CHK, `scopeMatrix`
@@ -609,51 +634,52 @@ extension _MarkdownParse on MarkdownService {
     required String findingId,
     required FindingRole findingRole,
   }) {
-    final tokens = cssClass.split(_reWhitespace);
-    if (tokens.contains('code')) {
-      return _parseCodeBlock(
-        remaining: remaining,
-        cssClass: cssClass,
-        notes: notes,
-        advanceDuration: advanceDuration,
-        skipped: skipped,
-        isDetail: isDetail,
-        tlp: tlp,
-      );
-    }
-    if (tokens.contains('chart')) {
-      return _parseChartBlock(
-        remaining: remaining,
-        cssClass: cssClass,
-        notes: notes,
-        advanceDuration: advanceDuration,
-        skipped: skipped,
-        isDetail: isDetail,
-        tlp: tlp,
-      );
-    }
-    if (tokens.contains('cockpit')) {
-      return _parseCockpitBlock(
-        remaining: remaining,
-        cssClass: cssClass,
-        notes: notes,
-        advanceDuration: advanceDuration,
-        skipped: skipped,
-        isDetail: isDetail,
-        tlp: tlp,
-      );
-    }
-    if (tokens.contains('question')) {
-      return _parseQuestionBlock(
-        remaining: remaining,
-        cssClass: cssClass,
-        notes: notes,
-        advanceDuration: advanceDuration,
-        skipped: skipped,
-        isDetail: isDetail,
-        tlp: tlp,
-        imageSize: styleImageWidth,
-      );
+    // Ook hier beslist de registry welk token welk type is; zie
+    // [_declaredSlideType]. Vier types dragen een eigen fenced body.
+    switch (_declaredSlideType(cssClass.split(_reWhitespace))) {
+      case SlideType.code:
+        return _parseCodeBlock(
+          remaining: remaining,
+          cssClass: cssClass,
+          notes: notes,
+          advanceDuration: advanceDuration,
+          skipped: skipped,
+          isDetail: isDetail,
+          tlp: tlp,
+        );
+      case SlideType.chart:
+        return _parseChartBlock(
+          remaining: remaining,
+          cssClass: cssClass,
+          notes: notes,
+          advanceDuration: advanceDuration,
+          skipped: skipped,
+          isDetail: isDetail,
+          tlp: tlp,
+        );
+      case SlideType.cockpit:
+        return _parseCockpitBlock(
+          remaining: remaining,
+          cssClass: cssClass,
+          notes: notes,
+          advanceDuration: advanceDuration,
+          skipped: skipped,
+          isDetail: isDetail,
+          tlp: tlp,
+        );
+      case SlideType.question:
+        return _parseQuestionBlock(
+          remaining: remaining,
+          cssClass: cssClass,
+          notes: notes,
+          advanceDuration: advanceDuration,
+          skipped: skipped,
+          isDetail: isDetail,
+          tlp: tlp,
+          imageSize: styleImageWidth,
+        );
+      default:
+        break;
     }
     return _tryFindingSlide(
       cssClass: cssClass,
@@ -909,32 +935,12 @@ extension _MarkdownParse on MarkdownService {
     required String h2,
     required String paragraph,
   }) {
-    final tokens = cssClass.split(_reWhitespace).toSet();
-    if (tokens.contains('title')) return SlideType.title;
-    if (tokens.contains('section')) return SlideType.section;
-    if (tokens.contains('timeline')) return SlideType.timeline;
-    if (tokens.contains('two-bullets')) return SlideType.twoBullets;
-    if (tokens.contains('split')) return SlideType.bulletsImage;
-    if (tokens.contains('quote')) return SlideType.quote;
-    if (tokens.contains('video')) return SlideType.video;
-    if (tokens.contains('table')) return SlideType.table;
-    if (tokens.contains('scorecard')) return SlideType.scorecard;
-    // Het losse 'actions'-type is opgeheven: het was een tabel met een vaste
-    // kop en een getypeerde editer eroverheen. De rijen stonden al als gewone
-    // Markdown-tabel op schijf, dus een bestaand deck migreert door het token
-    // simpelweg als `table` te lezen — geen dataconversie nodig.
-    if (tokens.contains('actions')) return SlideType.table;
-    if (tokens.contains('assets')) return SlideType.assets;
-    if (tokens.contains('discoveries')) return SlideType.discoveries;
-    // Informatieveiligheid-module (PENTEST_MIAUW §4). Elk type draagt een eigen
-    // `_class`-token; de body round-trip't als vrije Markdown (zie de
-    // customMarkdown-toewijzing hieronder). Exacte tokens, dus geen conflict
-    // onderling ('finding' matcht niet 'findings-summary').
-    if (tokens.contains('finding')) return SlideType.finding;
-    if (tokens.contains('findings-summary')) return SlideType.findingsSummary;
-    if (tokens.contains('checklist')) return SlideType.checklist;
-    if (tokens.contains('scope-matrix')) return SlideType.scopeMatrix;
-    if (tokens.contains('sign-off')) return SlideType.signOff;
+    // Het token beslist, en welk token bij welk type hoort staat in de registry
+    // die de serialisatie óók gebruikt ([slideTypeByMarpClass]) — niet in een
+    // tweede lijst hier. Exacte tokens, dus geen conflict onderling ('finding'
+    // matcht niet 'findings-summary').
+    final declared = _declaredSlideType(cssClass.split(_reWhitespace));
+    if (declared != null) return declared;
 
     // No explicit class token — fall back to content heuristics.
     if (quote.isNotEmpty) return SlideType.quote;
