@@ -35,6 +35,7 @@ import 'sk.dart';
 import 'sl.dart';
 import 'sv.dart';
 import 'tlh.dart';
+import 'tr.dart';
 import 'uk.dart';
 
 /// Taalcode → (slug → sjabloon-Markdown). `en` is de terugval en moet dus
@@ -70,5 +71,6 @@ const Map<String, Map<String, String>> findingTemplateSources = {
   'sl': findingTemplatesSl,
   'sv': findingTemplatesSv,
   'tlh': findingTemplatesTlh,
+  'tr': findingTemplatesTr,
   'uk': findingTemplatesUk,
 };

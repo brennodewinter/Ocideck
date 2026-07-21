@@ -7,7 +7,7 @@
 // Spec format:
 //   {
 //     "additions": {
-//       "<Dutch source string>": { "en": "…", "de": "…", … all 30 non-nl … },
+//       "<Dutch source string>": { "en": "…", "de": "…", … all 31 non-nl … },
 //       …
 //     },
 //     "unchanged": ["Heatmap", "Combo"]   // optional: loanwords kept identical
@@ -55,6 +55,7 @@ const langs = [
   'sl',
   'sk',
   'tlh',
+  'tr',
 ];
 
 String cap(String code) => code[0].toUpperCase() + code.substring(1);
@@ -82,7 +83,7 @@ void main(List<String> args) {
     for (final t in (spec['unchanged'] as List? ?? const [])) t.toString(),
   ];
 
-  // Validate every addition covers exactly the 30 target languages up front, so
+  // Validate every addition covers exactly the 31 target languages up front, so
   // a gap fails here (with a clear message) rather than deep in `make check`.
   additions.forEach((source, value) {
     final t = (value as Map).cast<String, dynamic>();

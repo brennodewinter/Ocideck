@@ -32,6 +32,7 @@ part 'translations/ro.dart';
 part 'translations/sl.dart';
 part 'translations/sk.dart';
 part 'translations/tlh.dart';
+part 'translations/tr.dart';
 
 class AppLocalizations {
   final Locale locale;
@@ -70,6 +71,7 @@ class AppLocalizations {
     Locale('sl'),
     Locale('sk'),
     Locale('tlh'),
+    Locale('tr'),
   ];
 
   static const languageNames = {
@@ -104,6 +106,7 @@ class AppLocalizations {
     'sl': 'Slovenščina',
     'sk': 'Slovenčina',
     'tlh': 'tlhIngan Hol',
+    'tr': 'Türkçe',
   };
 
   /// A country flag (emoji) per language, shown in the language pickers. Some
@@ -144,6 +147,7 @@ class AppLocalizations {
     // Klingon has no country flag; a bundled Klingon-Empire emblem is used
     // instead (see languageFlag()). This emoji is only a text fallback.
     'tlh': '🖖',
+    'tr': '🇹🇷',
   };
 
   // Transliteration to a Latin sort key, so names in other scripts (Greek,
@@ -154,13 +158,13 @@ class AppLocalizations {
   static const _translitMap = {
     'á': 'a', 'à': 'a', 'â': 'a', 'ä': 'a', 'ã': 'a', 'å': 'a', 'ą': 'a',
     'é': 'e', 'è': 'e', 'ê': 'e', 'ë': 'e', 'ě': 'e', 'ę': 'e',
-    'í': 'i', 'ì': 'i', 'î': 'i', 'ï': 'i',
+    'í': 'i', 'ì': 'i', 'î': 'i', 'ï': 'i', 'ı': 'i',
     'ó': 'o', 'ò': 'o', 'ô': 'o', 'ö': 'o', 'õ': 'o', 'ø': 'o',
     'ú': 'u', 'ù': 'u', 'û': 'u', 'ü': 'u', 'ů': 'u',
     'ý': 'y', 'ÿ': 'y',
     'ç': 'c', 'ć': 'c', 'č': 'c', 'ñ': 'n', 'ń': 'n',
     'š': 's', 'ś': 's', 'ş': 's', 'ž': 'z', 'ź': 'z', 'ż': 'z',
-    'đ': 'd', 'ď': 'd', 'ł': 'l', 'ř': 'r', 'ť': 't', 'ň': 'n',
+    'đ': 'd', 'ď': 'd', 'ł': 'l', 'ř': 'r', 'ť': 't', 'ň': 'n', 'ğ': 'g',
     'æ': 'ae', 'ß': 'ss',
     // Greek
     'α': 'a', 'ά': 'a', 'β': 'v', 'γ': 'g', 'δ': 'd', 'ε': 'e', 'έ': 'e',
@@ -232,6 +236,7 @@ class AppLocalizations {
     'sl': Locale('sl'),
     'sk': Locale('sk'),
     'tlh': Locale('en'),
+    'tr': Locale('tr'),
   };
 
   static String _activeLanguageCode = 'nl';
@@ -352,6 +357,7 @@ const _strings = {
   'sl': _stringsSl,
   'sk': _stringsSk,
   'tlh': _stringsTlh,
+  'tr': _stringsTr,
 };
 
 const _dutchSourceStrings = {
@@ -385,6 +391,7 @@ const _dutchSourceStrings = {
   'sl': _dutchSourceSl,
   'sk': _dutchSourceSk,
   'tlh': _dutchSourceTlh,
+  'tr': _dutchSourceTr,
 };
 
 const _dutchSourceStringAdditions = {
@@ -418,4 +425,5 @@ const _dutchSourceStringAdditions = {
   'sl': _dutchSourceAddSl,
   'sk': _dutchSourceAddSk,
   'tlh': _dutchSourceAddTlh,
+  'tr': _dutchSourceAddTr,
 };
