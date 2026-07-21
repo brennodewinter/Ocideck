@@ -2,9 +2,9 @@
 
 OciDeck builds [Marp](https://marp.app/) presentations through a structured,
 slide-by-slide editor. You compose typed slides, preview them live, present them
-(on one or two screens), and export to Markdown, PDF, PPTX, or a self-contained
-HTML file. Files stay standard Marp Markdown, so a deck remains usable in other
-Marp tools.
+(on one or two screens), and export to Markdown, PDF, PPTX, or a single offline
+HTML file (which keeps its images beside it — see [Exporting](#exporting)).
+Files stay standard Marp Markdown, so a deck remains usable in other Marp tools.
 
 ## Creating and opening decks
 
@@ -1704,8 +1704,18 @@ Export to:
 
 - **PDF** and **PPTX** (PPTX includes speaker notes) — rendered from the in-app
   slide renderer.
-- **Self-contained HTML** — one offline file; code highlighting, math, charts, and
-  mermaid diagrams render in the browser.
+- **HTML** — one file, with the JavaScript (marked, highlight.js, MathJax,
+  mermaid), the CSS and the bundled EB Garamond font inlined, and charts
+  pre-rendered to inline SVG, so code highlighting, math, charts and diagrams all
+  render offline with no network fetch.
+
+  **Images are the exception.** The export writes only the `.html`; a picture on
+  a slide stays an ordinary relative `<img src="images/…">`. The file is
+  therefore self-contained for a deck of text, and needs its `images/` folder
+  alongside it for a deck with pictures — move the `.html` on its own and the
+  pictures break. If you need one artefact that travels, use the portable
+  package or PDF. *Corrected 2026-07-21: this entry read "self-contained HTML —
+  one offline file", which is true of everything except the images.*
 - **Portable package** (`.ocideck`) — a single zip with the Markdown and all
   assets, to hand the whole deck to someone else.
 
