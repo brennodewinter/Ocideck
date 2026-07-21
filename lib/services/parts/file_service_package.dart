@@ -214,52 +214,9 @@ extension FileServicePackage on FileService {
       ArchiveFile('${_safeName(deck.title)}.md', mdBytes.length, mdBytes),
     );
 
-    // Annotation layer travels as a separate sidecar (same base name as the
-    // markdown), so the .md inside the package stays pure Marp.
-    final ink = AnnotationCodec.encode(packDeck.slides, packDeck.annotations);
-    if (ink != null) {
-      final inkBytes = utf8.encode(ink);
-      archive.add(
-        ArchiveFile(
-          '${_safeName(deck.title)}.ink.json',
-          inkBytes.length,
-          inkBytes,
-        ),
-      );
-    }
-
-    final userNotes = UserNotesCodec.encode(
-      packDeck.slides,
-      packDeck.userNotes,
-    );
-    if (userNotes != null) {
-      final userNotesBytes = utf8.encode(userNotes);
-      archive.add(
-        ArchiveFile(
-          '${_safeName(deck.title)}.user-notes.json',
-          userNotesBytes.length,
-          userNotesBytes,
-        ),
-      );
-    }
-
-    // De MIAUW-dispositie reist als eigen sidecar mee; zonder dit lid zou het
-    // pakket de afspraken met de klant kwijtraken nu ze niet meer in de front
-    // matter staan.
-    final miauw = MiauwCodec.encode(
-      packDeck.miauwWaivers,
-      packDeck.miauwConfirmations,
-    );
-    if (miauw != null) {
-      final miauwBytes = utf8.encode(miauw);
-      archive.add(
-        ArchiveFile(
-          '${_safeName(deck.title)}.miauw.json',
-          miauwBytes.length,
-          miauwBytes,
-        ),
-      );
-    }
+    // De lagen naast de markdown (inkt, notities, MIAUW-dispositie) reizen als
+    // eigen leden mee, zodat de `.md` in het pakket pure Marp blijft.
+    _addSidecarMembers(archive, packDeck, _safeName(deck.title));
 
     // Thema-CSS (zodat het pakket ook in Marp/CLI bruikbaar is).
     final css = await _packageThemeCss(packDeck.theme, profile, logoRel);
@@ -272,6 +229,33 @@ extension FileServicePackage on FileService {
     }
 
     return archive;
+  }
+
+  /// Voeg de sidecar-leden van [packDeck] toe onder [base]: dezelfde
+  /// bestandsnamen als naast een `.md` op schijf, zodat het openen van een
+  /// pakket en het openen van een map dezelfde lagen terugvinden.
+  ///
+  /// Een lege laag levert geen lid op — een pakket zonder aantekeningen hoort
+  /// geen leeg `.ink.json` mee te dragen.
+  void _addSidecarMembers(Archive archive, Deck packDeck, String base) {
+    void member(String name, String? json) {
+      if (json == null) return;
+      final bytes = utf8.encode(json);
+      archive.add(ArchiveFile(name, bytes.length, bytes));
+    }
+
+    member(
+      '$base.ink.json',
+      AnnotationCodec.encode(packDeck.slides, packDeck.annotations),
+    );
+    member(
+      '$base.user-notes.json',
+      UserNotesCodec.encode(packDeck.slides, packDeck.userNotes),
+    );
+    member(
+      '$base.miauw.json',
+      MiauwCodec.encode(packDeck.miauwWaivers, packDeck.miauwConfirmations),
+    );
   }
 
   /// Voeg een méégebundelde asset (asset:-pad, bv. het logo van een ingebouwd

@@ -691,51 +691,8 @@ class FileService {
       chartWarnings,
       deckPath: filePath,
     );
-    // Re-attach separate sidecar layers when reading from disk.
-    if (content == null) {
-      final sidecar = File(_sidecarPath(filePath));
-      if (await sidecar.exists()) {
-        try {
-          final map = AnnotationCodec.decode(
-            await sidecar.readAsString(),
-            hydrated.slides,
-          );
-          if (map.isNotEmpty) hydrated = hydrated.copyWith(annotations: map);
-        } catch (e) {
-          // A broken sidecar must never block opening the deck.
-          logWarning('FileService.openDeck: annotation sidecar unreadable', e);
-        }
-      }
-      final userNotesSidecar = File(_userNotesSidecarPath(filePath));
-      if (await userNotesSidecar.exists()) {
-        try {
-          final map = UserNotesCodec.decode(
-            await userNotesSidecar.readAsString(),
-            hydrated.slides,
-          );
-          if (map.isNotEmpty) hydrated = hydrated.copyWith(userNotes: map);
-        } catch (e) {
-          logWarning('FileService.openDeck: user-notes sidecar unreadable', e);
-        }
-      }
-      // De MIAUW-dispositie. Ligt er een sidecar, dan is die de waarheid; wat
-      // de parser nog uit de oude base64-front matter haalde, is het
-      // opwaardeerpad voor een bestand dat er nog geen heeft.
-      final miauwSidecar = File(_miauwSidecarPath(filePath));
-      if (await miauwSidecar.exists()) {
-        try {
-          final d = MiauwCodec.decode(await miauwSidecar.readAsString());
-          if (!d.isEmpty) {
-            hydrated = hydrated.copyWith(
-              miauwWaivers: d.waivers,
-              miauwConfirmations: d.confirmations,
-            );
-          }
-        } catch (e) {
-          logWarning('FileService.openDeck: MIAUW sidecar unreadable', e);
-        }
-      }
-    }
+    // Losse lagen naast de markdown; alleen bij lezen van schijf.
+    if (content == null) hydrated = await _attachSidecars(hydrated, filePath);
     return (deck: hydrated, failure: null, warnings: chartWarnings);
   }
 
