@@ -1776,8 +1776,6 @@ const _dutchSourceLa = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Perfice et obsigna',
   'Verzegelen': 'Obsigna',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Hanc praesentationem perfice et sigillum SHA-512 super contentum computa. Deinde tabella obserata est nec amplius mutari potest; mutationes posteriores conspicuae fiunt. Hoc in applicatione revocari non potest.',
   'Handtekening (optioneel)': 'Subscriptio (ad libitum)',
   'Naam': 'Nomen',
   'Rol of functie': 'Munus vel officium',
@@ -1795,6 +1793,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Hanc praesentationem perfice et sigillum SHA-512 super tabellam servatam consigna. Deinde obserata est nec amplius mutari potest; omnis mutatio posterior conspicua fit. Qui relationem accipit, sigillum ipse per sha512sum recomputat. Hoc in applicatione revocari non potest.',
   'Zegel en handtekening': 'Sigillum et subscriptio',
   'Zegel nog niet vastgelegd': 'Sigillum nondum consignatum',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':

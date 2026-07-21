@@ -717,8 +717,6 @@ const _dutchSourcePap = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Finalisá & seyá',
   'Verzegelen': 'Seyá',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Finalisá e presentashon aki i kalkulá un seyo SHA-512 riba su kontenido. Despues e archivo ta wòrdu será i no por wòrdu editá mas; kambionan posterior ta bira visibel. Esaki no por wòrdu deshasí den e app.',
   'Handtekening (optioneel)': 'Firma (opshonal)',
   'Naam': 'Nòmber',
   'Rol of functie': 'Ròl òf funshon',
@@ -736,6 +734,8 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Finalisá e presentashon aki i registrá un seyo SHA-512 riba e archivo wardá. Despues e ta será i no por wòrdu editá mas; kada kambio posterior ta bira visibel. Ken ta risibí e rapòrt ta kontrolá e seyo su mes ku sha512sum. Esaki no por wòrdu deshasí den e app.',
   'Zegel en handtekening': 'Seyo i firma',
   'Zegel nog niet vastgelegd': 'Seyo no registrá ainda',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':

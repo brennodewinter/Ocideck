@@ -1777,8 +1777,6 @@ const _dutchSourceUk = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Завершити та скріпити печаткою',
   'Verzegelen': 'Скріпити печаткою',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Завершіть цю презентацію та обчисліть печатку SHA-512 для її вмісту. Після цього файл буде заблоковано, і його більше не можна буде редагувати; подальші зміни стануть помітними. Цю дію не можна скасувати в застосунку.',
   'Handtekening (optioneel)': 'Підпис (необовʼязково)',
   'Naam': 'Імʼя',
   'Rol of functie': 'Роль або посада',
@@ -1797,6 +1795,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Завершіть цю презентацію та зафіксуйте печатку SHA-512 для збереженого файлу. Після цього його буде заблоковано, і його більше не можна буде редагувати; кожна подальша зміна стане помітною. Той, хто отримає звіт, сам перевірить печатку за допомогою sha512sum. Цю дію не можна скасувати в застосунку.',
   'Zegel en handtekening': 'Печатка та підпис',
   'Zegel nog niet vastgelegd': 'Печатку ще не зафіксовано',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':

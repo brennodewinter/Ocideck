@@ -1763,8 +1763,6 @@ const _dutchSourceCs = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Dokončit a zapečetit',
   'Verzegelen': 'Zapečetit',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Dokončete tuto prezentaci a vypočítejte pečeť SHA-512 z jejího obsahu. Soubor se poté uzamkne a nelze jej dále upravovat; pozdější změny se stanou viditelnými. Tuto akci nelze v aplikaci vrátit zpět.',
   'Handtekening (optioneel)': 'Podpis (volitelné)',
   'Naam': 'Jméno',
   'Rol of functie': 'Role nebo funkce',
@@ -1782,6 +1780,8 @@ const _dutchSourceCs = {
 };
 
 const _dutchSourceAddCs = <String, String>{
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Dokončete tuto prezentaci a zaznamenejte pečeť SHA-512 nad uloženým souborem. Ten se poté uzamkne a nelze jej dále upravovat; každá pozdější změna se stane viditelnou. Kdo zprávu obdrží, ověří si pečeť sám pomocí sha512sum. Tuto akci nelze v aplikaci vrátit zpět.',
   'Zegel en handtekening': 'Pečeť a podpis',
   'Zegel nog niet vastgelegd': 'Pečeť zatím nezaznamenána',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':

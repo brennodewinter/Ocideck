@@ -1781,8 +1781,6 @@ const _dutchSourceMt = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Iffinalizza u ssiġilla',
   'Verzegelen': 'Issiġilla',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Iffinalizza din il-preżentazzjoni u kkalkula siġill SHA-512 fuq il-kontenut tagħha. Wara, il-fajl jiġi msakkar u ma jistax jiġi editjat aktar; il-bidliet ta\' wara jsiru viżibbli. Dan ma jistax jiġi żvolut fl-app.',
   'Handtekening (optioneel)': 'Firma (mhux obbligatorja)',
   'Naam': 'Isem',
   'Rol of functie': 'Rwol jew funzjoni',
@@ -1801,6 +1799,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Iffinalizza din il-preżentazzjoni u rreġistra siġill SHA-512 fuq il-fajl issejvjat. Wara, dan jiġi msakkar u ma jistax jiġi editjat aktar; kull bidla ta\' wara ssir viżibbli. Min jirċievi r-rapport jiċċekkja s-siġill hu stess b\'sha512sum. Dan ma jistax jiġi żvolut fl-app.',
   'Zegel en handtekening': 'Siġill u firma',
   'Zegel nog niet vastgelegd': 'Siġill għadu mhux irreġistrat',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':

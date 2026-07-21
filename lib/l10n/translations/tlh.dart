@@ -1735,8 +1735,6 @@ const _dutchSourceTlh = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'rInmoH & SoQmoH',
   'Verzegelen': 'SoQmoH',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'cha\'nob rInmoH \'ej De\' SHA-512 HablI\' chenmoH. ngugh teywI\' SoQlu\' \'ej choHlaHbe\'lu\'. choHmey veb \'anglu\'. naDev DaW\' laHbe\'.',
   'Handtekening (optioneel)': 'ghItlh pong (DIch)',
   'Naam': 'pong',
   'Rol of functie': 'Qu\' pagh patlh',
@@ -1754,6 +1752,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'cha\'nob rInmoH \'ej teywI\' choqlu\'bogh SHA-512 HablI\' qonlu\'. ngugh SoQlu\' \'ej choHlaHbe\'lu\'. Hoch choHmey veb \'anglu\'. sha512sum lo\'taHvIS, HablI\' tob ja\'ghach Hevbogh nuv. naDev DaW\' laHbe\'.',
   'Zegel en handtekening': 'SoQmoHwI\' ghItlh pong je',
   'Zegel nog niet vastgelegd': 'DaH SoQmoHmeH HablI\' qonlu\'be\'',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':

@@ -1795,8 +1795,6 @@ const _dutchSourceGa = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Cuir i gcrích agus séalaigh',
   'Verzegelen': 'Séalaigh',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Cuir an cur i láthair seo i gcrích agus ríomh séala SHA-512 ar a bhfuil ann. Ansin cuirtear an comhad faoi ghlas agus ní féidir é a chur in eagar a thuilleadh; feictear athruithe níos déanaí. Ní féidir é seo a chealú san aip.',
   'Handtekening (optioneel)': 'Síniú (roghnach)',
   'Naam': 'Ainm',
   'Rol of functie': 'Ról nó feidhm',
@@ -1815,6 +1813,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Cuir an cur i láthair seo i gcrích agus taifead séala SHA-512 ar an gcomhad sábháilte. Ansin cuirtear faoi ghlas é agus ní féidir é a chur in eagar a thuilleadh; feictear gach athrú a dhéantar ina dhiaidh sin. Déanann an té a fhaigheann an tuairisc an séala a sheiceáil é féin le sha512sum. Ní féidir é seo a chealú san aip.',
   'Zegel en handtekening': 'Séala agus síniú',
   'Zegel nog niet vastgelegd': 'Séala gan taifeadadh fós',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':

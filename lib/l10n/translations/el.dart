@@ -1787,8 +1787,6 @@ const _dutchSourceEl = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Οριστικοποίηση & σφράγιση',
   'Verzegelen': 'Σφράγιση',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Οριστικοποιήστε αυτήν την παρουσίαση και υπολογίστε μια σφραγίδα SHA-512 στο περιεχόμενό της. Στη συνέχεια το αρχείο κλειδώνεται και δεν μπορεί πλέον να επεξεργαστεί· οι μεταγενέστερες αλλαγές γίνονται ορατές. Αυτό δεν μπορεί να αναιρεθεί στην εφαρμογή.',
   'Handtekening (optioneel)': 'Υπογραφή (προαιρετικά)',
   'Naam': 'Όνομα',
   'Rol of functie': 'Ρόλος ή ιδιότητα',
@@ -1807,6 +1805,8 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Οριστικοποιήστε αυτήν την παρουσίαση και καταγράψτε μια σφραγίδα SHA-512 για το αποθηκευμένο αρχείο. Στη συνέχεια κλειδώνεται και δεν μπορεί πλέον να επεξεργαστεί· κάθε μεταγενέστερη αλλαγή γίνεται ορατή. Όποιος λάβει την αναφορά ελέγχει ο ίδιος τη σφραγίδα με sha512sum. Αυτό δεν μπορεί να αναιρεθεί στην εφαρμογή.',
   'Zegel en handtekening': 'Σφραγίδα και υπογραφή',
   'Zegel nog niet vastgelegd': 'Η σφραγίδα δεν καταγράφηκε ακόμη',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':

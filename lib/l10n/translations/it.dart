@@ -712,8 +712,6 @@ const _dutchSourceIt = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Finalizza e sigilla',
   'Verzegelen': 'Sigilla',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Finalizza questa presentazione e calcola un sigillo SHA-512 sul contenuto. Il file viene quindi bloccato e non può più essere modificato; le modifiche successive diventano visibili. Questa operazione non può essere annullata nell\'app.',
   'Handtekening (optioneel)': 'Firma (facoltativa)',
   'Naam': 'Nome',
   'Rol of functie': 'Ruolo o funzione',
@@ -732,6 +730,8 @@ const _dutchSourceIt = {
 };
 
 const _dutchSourceAddIt = {
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Finalizza questa presentazione e registra un sigillo SHA-512 sul file salvato. Da quel momento è bloccato e non può più essere modificato; ogni modifica successiva diventa visibile. Chi riceve il rapporto verifica il sigillo da sé con sha512sum. Questa operazione non può essere annullata nell\'app.',
   'Zegel en handtekening': 'Sigillo e firma',
   'Zegel nog niet vastgelegd': 'Sigillo non ancora registrato',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':

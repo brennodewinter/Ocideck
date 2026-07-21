@@ -1760,8 +1760,6 @@ const _dutchSourceFi = {
   // Document integrity (A1) — finalise, seal (SHA-512) and signature.
   'Afronden & verzegelen': 'Viimeistele ja sinetöi',
   'Verzegelen': 'Sinetöi',
-  'Rond deze presentatie af en bereken een SHA-512-zegel over de inhoud. Daarna is het bestand vergrendeld en niet meer te bewerken; latere wijzigingen worden zichtbaar. Dit kan in de app niet ongedaan worden gemaakt.':
-      'Viimeistele tämä esitys ja laske sisällöstä SHA-512-sinetti. Tämän jälkeen tiedosto lukitaan eikä sitä voi enää muokata; myöhemmät muutokset tulevat näkyviin. Tätä ei voi kumota sovelluksessa.',
   'Handtekening (optioneel)': 'Allekirjoitus (valinnainen)',
   'Naam': 'Nimi',
   'Rol of functie': 'Rooli tai tehtävä',
@@ -1779,6 +1777,8 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Rond deze presentatie af en leg een SHA-512-zegel vast over het opgeslagen bestand. Daarna is het vergrendeld en niet meer te bewerken; elke latere wijziging wordt zichtbaar. Wie het rapport ontvangt, rekent het zegel zelf na met sha512sum. Dit kan in de app niet ongedaan worden gemaakt.':
+      'Viimeistele tämä esitys ja kirjaa SHA-512-sinetti tallennetusta tiedostosta. Tämän jälkeen se lukitaan eikä sitä voi enää muokata; jokainen myöhempi muutos tulee näkyviin. Raportin vastaanottaja tarkistaa sinetin itse sha512sum-komennolla. Tätä ei voi kumota sovelluksessa.',
   'Zegel en handtekening': 'Sinetti ja allekirjoitus',
   'Zegel nog niet vastgelegd': 'Sinettiä ei ole vielä kirjattu',
   'Er is nog geen opgeslagen bestand om het zegel tegen na te rekenen. Sla het deck op.':
