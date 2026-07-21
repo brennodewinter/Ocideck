@@ -594,11 +594,11 @@ class _UrlImportDialogState extends State<_UrlImportDialog> {
               controller: _controller,
               autofocus: true,
               keyboardType: TextInputType.url,
-              decoration: const InputDecoration(
-                hintText: 'https://...',
-                prefixIcon: Icon(Icons.link, size: 18),
+              decoration: InputDecoration(
+                hintText: l10n.d('https://...'),
+                prefixIcon: const Icon(Icons.link, size: 18),
                 isDense: true,
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
               ),
               onSubmitted: (v) {
                 if (_isFetchable) Navigator.pop(context, v);

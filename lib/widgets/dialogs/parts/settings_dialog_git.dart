@@ -37,13 +37,13 @@ extension _SettingsGit on _SettingsDialogState {
                 value: GitProvider.gitea,
                 child: Text(l10n.d('Forgejo of Gitea')),
               ),
-              const DropdownMenuItem(
+              DropdownMenuItem(
                 value: GitProvider.github,
-                child: Text('GitHub'),
+                child: Text(l10n.d('GitHub')),
               ),
-              const DropdownMenuItem(
+              DropdownMenuItem(
                 value: GitProvider.gitlab,
-                child: Text('GitLab'),
+                child: Text(l10n.d('GitLab')),
               ),
             ],
             onChanged: (v) =>

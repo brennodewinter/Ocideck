@@ -210,7 +210,7 @@ class _ChartColorDialogState extends State<_ChartColorDialog> {
               controller: _controller,
               decoration: InputDecoration(
                 labelText: context.l10n.d('Hexkleur'),
-                hintText: '#2563EB',
+                hintText: context.l10n.d('#2563EB'),
                 border: const OutlineInputBorder(),
                 isDense: true,
               ),

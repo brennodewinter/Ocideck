@@ -13,6 +13,17 @@ import '../tool/check_hardcoded_text.dart' show sourceKeysIn;
 /// lijst bijwerkt (het "unchanged"-deel van de spec) en meerdere tests hem
 /// delen.
 const unchangedInEnglish = {
+  'OciDeck',
+  'Stichting LibreKAT',
+  'GitHub',
+  'GitLab',
+  'TLP',
+  'SHA-512:',
+  '#33FF33',
+  '#2563EB',
+  'v1.0',
+  'https://...',
+  'brenno@dewinter.com\ndewinter.com',
   'MASWE',
   'MASWE-0005',
   'WSTG-ATHN-07',
@@ -83,6 +94,17 @@ const unchangedInEnglish = {
 /// leenwoorden en technische identifiers (CWE, MASWE, F-03, een CVSS-vector).
 /// Vertalen zou ze onvindbaar maken.
 const unchangedInAllLanguages = {
+  'OciDeck',
+  'Stichting LibreKAT',
+  'GitHub',
+  'GitLab',
+  'TLP',
+  'SHA-512:',
+  '#33FF33',
+  '#2563EB',
+  'v1.0',
+  'https://...',
+  'brenno@dewinter.com\ndewinter.com',
   'MASWE',
   'MASWE-0005',
   'WSTG-ATHN-07',

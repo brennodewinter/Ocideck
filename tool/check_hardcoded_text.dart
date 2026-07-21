@@ -144,7 +144,7 @@ import 'package:analyzer/source/line_info.dart';
 /// is de dichte deur; de opruiming loopt erachter door.
 ///
 /// **Dit moet 0 zijn vóór release 0.1.0.**
-const int hardcodedTextBaseline = 33;
+const int hardcodedTextBaseline = 15;
 
 /// Bestanden die deck-INHOUD dragen in plaats van interfacetekst: de sjablonen
 /// die een nieuwe presentatie met voorbeeldslides vullen. Die tekst is vanaf

@@ -433,7 +433,7 @@ extension _SettingsSecurity on _SettingsDialogState {
           decoration: InputDecoration(
             isDense: true,
             border: const OutlineInputBorder(),
-            hintText: 'brenno@dewinter.com\ndewinter.com',
+            hintText: l10n.d('brenno@dewinter.com\ndewinter.com'),
             hintStyle: TextStyle(fontSize: 11, color: AppTheme.slate400),
           ),
           onChanged: (value) =>
