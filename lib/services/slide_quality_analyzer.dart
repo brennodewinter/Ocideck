@@ -15,6 +15,7 @@ import '../models/video_source.dart';
 import '../utils/color_contrast.dart';
 import '../utils/project_path.dart';
 import '../widgets/slides/inline_markdown.dart';
+import 'slide_image_refs.dart';
 import 'slide_layout_metrics.dart';
 import 'split_run.dart';
 
@@ -550,6 +551,15 @@ class SlideQualityAnalyzer {
       if (origin == AssetOrigin.external) {
         issues.add(issue(SlideQualityIssueKind.externalMediaFile));
       }
+    }
+
+    // Een afbeelding in de vrije tekst kan net zo goed ontbreken of buiten de
+    // presentatie liggen als eentje in een afbeeldingsveld, dus hij verdient
+    // dezelfde melding. Buiten de switch, want elke slidesoort kan vrije tekst
+    // dragen. Het veld is `customMarkdown` — dát wijst de plek aan waar de
+    // gebruiker moet zijn; het pad in de melding zegt wélke afbeelding.
+    for (final path in inlineImagePaths(slide.customMarkdown)) {
+      missingFile(path: path, field: 'customMarkdown', label: 'Afbeelding');
     }
 
     switch (slide.type) {
