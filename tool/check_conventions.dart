@@ -2,6 +2,8 @@
 // lib/utils/log.dart):
 //
 //   * No `print(` — diagnostics go through the logger, never stdout.
+//   * No `debugPrint(` — it is stripped in release, reaches no operator and no
+//     user, and reads like logging while being a silent swallow. RATCHET at 0.
 //   * No bare `catch (_)` — swallowing errors silently hides failures; catch a
 //     named error and route it through `logError`/`logWarning`. This is a
 //     RATCHET: the count may not grow. It is currently 0 — keep it there.
@@ -31,6 +33,18 @@ const int catchUnderscoreBaseline = 0;
 /// deliberately-dark component) may move into its own file that [_isPaletteHome]
 /// exempts.
 const int rawColorBaseline = 0;
+
+/// `debugPrint(` calls allowed in lib/. RATCHET: keep at 0.
+///
+/// `debugPrint` looks like the responsible sibling of `print`, and that is
+/// exactly the problem. It is stripped in release builds, it never reaches
+/// [logError]/[logWarning] and therefore never reaches the DevTools logging
+/// stream an operator actually reads, and it reaches no user at all. Four call
+/// sites sat in the consent and info-safety providers under a comment that
+/// promised to "surface the failure instead of swallowing it" — while doing
+/// precisely the swallowing, one rung quieter than a bare `catch (_)` because
+/// the reviewer sees a logging call and moves on.
+const int debugPrintBaseline = 0;
 
 /// Raw control bytes (NUL, SOH, …) allowed in `lib/` sources. Keep at 0.
 ///
@@ -89,6 +103,7 @@ const int maxFileLines = 1000;
 const Map<String, int> fileSizeBaseline = {};
 
 final _print = RegExp(r'(?<![\w.])print\(');
+final _debugPrint = RegExp(r'(?<![\w.])debugPrint\(');
 final _catchUnderscore = RegExp(r'catch\s*\(\s*_\s*\)');
 final _plainWrite = RegExp(r'\.writeAs(String|Bytes)(Sync)?\(');
 final _rawColor = RegExp(r'Color\(0x[0-9A-Fa-f]{6,8}\)');
@@ -219,6 +234,7 @@ Iterable<String> _controlBytesIn(File file) sync* {
 
 void main() {
   final printHits = <String>[];
+  final debugPrintHits = <String>[];
   final plainWriteHits = <String>[];
   var catchCount = 0;
   var rawColorCount = 0;
@@ -247,6 +263,9 @@ void main() {
       // (e.g. the logger's own docstring) but never appear as real code there.
       if (line.trimLeft().startsWith('//')) continue;
       if (_print.hasMatch(line)) printHits.add('${file.path}:${i + 1}');
+      if (_debugPrint.hasMatch(line)) {
+        debugPrintHits.add('${file.path}:${i + 1}');
+      }
       if (_catchUnderscore.hasMatch(line)) catchCount++;
       if (_plainWrite.hasMatch(line) && !_isAtomicFileLib(file.path)) {
         plainWriteHits.add('${file.path}:${i + 1}');
@@ -296,6 +315,16 @@ void main() {
     failures.add(
       'Found ${printHits.length} `print(` call(s) — use the logger '
       '(lib/utils/log.dart):\n    ${printHits.join('\n    ')}',
+    );
+  }
+
+  if (debugPrintHits.length > debugPrintBaseline) {
+    failures.add(
+      'Found ${debugPrintHits.length} `debugPrint(` call(s) (baseline '
+      '$debugPrintBaseline) — stripped in release, invisible to operators and '
+      'to users. Route the failure through logError/logWarning '
+      '(lib/utils/log.dart), and tell the user when it is their problem:\n'
+      '    ${debugPrintHits.join('\n    ')}',
     );
   }
 
@@ -376,7 +405,8 @@ void main() {
 
   if (failures.isEmpty) {
     stdout.writeln(
-      'Conventions OK: no print(); no plain writeAs*; no raw control bytes; '
+      'Conventions OK: no print(); debugPrint() at ${debugPrintHits.length} '
+      '(baseline $debugPrintBaseline); no plain writeAs*; no raw control bytes; '
       'bare catch (_) at $catchCount (baseline $catchUnderscoreBaseline); raw '
       'Color(0x…) at $rawColorCount (baseline $rawColorBaseline); UI imports in '
       'lib/services at ${serviceUiImports.length} (baseline '
