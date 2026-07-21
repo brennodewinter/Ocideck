@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'deck_mirror.dart';
+import 'deck_search.dart';
 
 /// Hoe een native commit + push afliep (§8.2).
 enum GitCommitOutcome {
@@ -118,4 +119,43 @@ abstract class NativeGitMirror implements DeckMirror {
   /// De commits die de deckmap raakten, nieuwste eerst (§9.5). Leeg wanneer er
   /// nog geen clone/historie is.
   Future<List<GitLogEntry>> history(String deckDir, {int limit = 50});
+
+  /// Welke deckmappen bevatten [needle]? Snel en volledig via `git grep` over de
+  /// werkboom van de uitgecheckte clone — de forge-onafhankelijke versneller die
+  /// het lezen van elk deck bespaart (§9.3).
+  ///
+  /// Geeft de matchende deckmappen (exhaustief over [branch]), een lege lijst
+  /// wanneer niets matcht, of `null` wanneer grep hier niet kan versnellen: er is
+  /// nog geen clone, de werkboom staat op een andere branch dan [branch], of de
+  /// term begint met een streepje (die weigert de gehardde runner). Bij `null`
+  /// valt de aanroeper terug op de volledige scan, die overal werkt.
+  Future<List<String>?> grepDeckDirs(
+    String needle, {
+    required bool caseSensitive,
+    required String branch,
+  });
+}
+
+/// Versnelt [DeckSearch] met `git grep` over de lokale clone: forge-onafhankelijk
+/// en exhaustief. Geeft `null` door zodra de mirror niet kan versnellen, zodat de
+/// zoekopdracht stil terugvalt op de volledige scan.
+class NativeGrepShortlister implements DeckShortlister {
+  NativeGrepShortlister(this._mirror);
+
+  final NativeGitMirror _mirror;
+
+  @override
+  Future<DeckShortlist?> shortlist(
+    String needle, {
+    required bool caseSensitive,
+    required String branch,
+  }) async {
+    final dirs = await _mirror.grepDeckDirs(
+      needle,
+      caseSensitive: caseSensitive,
+      branch: branch,
+    );
+    if (dirs == null) return null;
+    return DeckShortlist(dirs.toSet());
+  }
 }

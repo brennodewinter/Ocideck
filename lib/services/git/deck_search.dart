@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import '../../models/git_settings.dart';
+import '../../utils/log.dart';
 import '../markdown_service.dart';
 import 'git_forge.dart';
 
@@ -34,6 +36,12 @@ class DeckSearchHit {
   bool get isFrontMatter => slideIndex < 0;
 }
 
+/// Hoe volledig een zoekantwoord is. De volledige scan en `git grep` zijn
+/// [exhaustive]: ze zien elke deck. Een geïndexeerde serverzoekopdracht is
+/// [bestEffort] — ze kan door indexeringsvertraging een verse deck missen, en
+/// dat mag de gebruiker weten in plaats van een stille halve waarheid.
+enum DeckSearchCoverage { exhaustive, bestEffort }
+
 /// De uitkomst van één zoekronde.
 class DeckSearchResult {
   final List<DeckSearchHit> hits;
@@ -46,14 +54,46 @@ class DeckSearchResult {
   /// gebruiker weten in plaats van een stille halve waarheid te krijgen.
   final bool truncated;
 
+  /// Hoe volledig dit antwoord is. Standaard [DeckSearchCoverage.exhaustive] —
+  /// de volledige scan ziet elke deck; alleen een geïndexeerde serverzoekopdracht
+  /// zet dit op [DeckSearchCoverage.bestEffort].
+  final DeckSearchCoverage coverage;
+
   const DeckSearchResult({
     required this.hits,
     required this.unreadableDecks,
     this.truncated = false,
+    this.coverage = DeckSearchCoverage.exhaustive,
   });
 
   /// Iedere deck is gelezen en niets is afgekapt.
   bool get isComplete => unreadableDecks.isEmpty && !truncated;
+}
+
+/// De uitkomst van een versneller: welke deckmappen mogelijk de term bevatten,
+/// en hoe volledig die lijst is. [DeckSearch] leest dan alléén deze mappen (K)
+/// in plaats van elk deck (N).
+class DeckShortlist {
+  final Set<String> deckDirs;
+  final DeckSearchCoverage coverage;
+
+  const DeckShortlist(
+    this.deckDirs, {
+    this.coverage = DeckSearchCoverage.exhaustive,
+  });
+}
+
+/// Een snelle voorfilter: welke decks bevatten de term, zonder alle N te lezen?
+///
+/// Geeft `null` wanneer versnellen hier niet kan (geen lokale clone, een andere
+/// branch, een instantie die geen codezoeken kent) — dan valt [DeckSearch] stil
+/// terug op de volledige scan, die overal werkt.
+abstract interface class DeckShortlister {
+  Future<DeckShortlist?> shortlist(
+    String needle, {
+    required bool caseSensitive,
+    required String branch,
+  });
 }
 
 /// Zoeken over álle decks in de repo, niet alleen het geopende (§9.3).
@@ -66,10 +106,15 @@ class DeckSearchResult {
 /// deck ontbreekt: de gebruiker krijgt de treffers die er zijn, mét de melding
 /// welk deck niet gelezen kon worden. Stil afkappen zou het erge zijn.
 class DeckSearch {
-  DeckSearch({required this.forge, required this.branch});
+  DeckSearch({required this.forge, required this.branch, this.shortlister});
 
   final GitForge forge;
   final String branch;
+
+  /// De optionele versneller die zegt wélke decks gelezen hoeven te worden.
+  /// `null` = altijd de volledige scan (het gedrag van voorheen, en de terugval
+  /// die overal werkt, ook op web).
+  final DeckShortlister? shortlister;
 
   /// Voorbij deze grens houdt een lijst op nuttig te zijn en wordt hij afgekapt
   /// — maar wel zichtbaar, via [DeckSearchResult.truncated].
@@ -94,7 +139,23 @@ class DeckSearch {
       return const DeckSearchResult(hits: [], unreadableDecks: []);
     }
 
-    final decks = await forge.listDecks(branch);
+    // Een versneller (native `git grep`, of later een serverzoekopdracht) zegt
+    // wélke decks de term bevatten, zodat we alléén die lezen in plaats van elk
+    // deck. Kan hij niet, dan valt hij stil terug op de volledige scan.
+    final shortlist = await _shortlist(query, caseSensitive: caseSensitive);
+    final Map<String, String> decks;
+    if (shortlist != null) {
+      // De deknaam volgt uit het pad; een pad dat geen geldige deckmap is valt
+      // met de null-aware sleutel vanzelf weg.
+      decks = {
+        for (final dir in shortlist.deckDirs)
+          ?GitRepoLayout.deckNameOf(dir): dir,
+      };
+    } else {
+      decks = await forge.listDecks(branch);
+    }
+    final coverage = shortlist?.coverage ?? DeckSearchCoverage.exhaustive;
+
     final hits = <DeckSearchHit>[];
     final unreadable = <String>[];
     var truncated = false;
@@ -125,7 +186,32 @@ class DeckSearch {
       hits: hits,
       unreadableDecks: unreadable..sort(),
       truncated: truncated,
+      coverage: coverage,
     );
+  }
+
+  /// Vraag de versneller om de deckmappen die de term bevatten. Een kapotte of
+  /// afwezige versneller mag de zoekopdracht nooit breken: dan `null`, en de
+  /// aanroeper leest gewoon alle decks.
+  Future<DeckShortlist?> _shortlist(
+    String query, {
+    required bool caseSensitive,
+  }) async {
+    final sl = shortlister;
+    if (sl == null) return null;
+    try {
+      return await sl.shortlist(
+        query,
+        caseSensitive: caseSensitive,
+        branch: branch,
+      );
+    } catch (e) {
+      logWarning(
+        'DeckSearch: versneller faalde, volledige scan als terugval',
+        e,
+      );
+      return null;
+    }
   }
 
   ({List<DeckSearchHit> hits, bool truncated}) _searchDeck({

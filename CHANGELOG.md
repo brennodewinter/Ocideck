@@ -22,6 +22,16 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   het menu, de opdrachtenbalk), maar niets in de weergave zelf verried dat — dus
   "in markdown kan ik niet zoeken". Er staat nu een vergrootglas in de kopregel
   dat dezelfde zoekbalk opent.
+- **Zoeken in alle decks gaat sneller op desktop.** *Zoeken in alle decks…* las
+  tot nu toe elk deck in de repository één voor één over de REST-laag. Staat de
+  repository lokaal gekloond (desktop met native git), dan wijst `git grep` nu
+  eerst aan wélke decks de term bevatten, en worden alléén die gelezen — K in
+  plaats van N. De versneller is forge-onafhankelijk (Gitea, GitHub én GitLab) en
+  volledig: hij ziet elke deck. Zonder clone — in de browser, of vóór de eerste
+  keer openen — valt het zoeken stil terug op de volledige scan, die overal
+  werkt. De treffers zelf, en de eerlijke meldingen over onleesbare of afgekapte
+  resultaten, blijven ongewijzigd.
+
 - **Een ontdekkingendia: wat we niet wisten te hebben.** Het aanvalsoppervlak
   *telt* wat nieuw is; deze dia *noemt* het. De handvol objecten die de scan
   vond en die in geen enkele inventaris stonden — schaduw-IT, een vergeten
