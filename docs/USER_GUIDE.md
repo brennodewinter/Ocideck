@@ -143,9 +143,11 @@ saved version stays retrievable, which a plain folder cannot give you.
 - **Set it up** on a git connection in *Settings → Storage*: the server URL
   (`https://git.example.org`), the owner (user or organisation), the repository
   name, and a **personal access token**. Scope the token to just that repository
-  where your forge supports it. It is stored encrypted in your operating
-  system's keychain, not in the plain settings file. A public repository needs
-  no token at all.
+  where your forge supports it; the panel spells out, per forge, which
+  permissions it needs — read and write on the repository, and for GitLab
+  `read_api` on top if you want its server-side search. It is stored encrypted in
+  your operating system's keychain, not in the plain settings file. A public
+  repository needs no token at all.
 - **Self-hosted on a private address**: tick **Trusted internal server**, the
   same safeguard as for Nextcloud.
 - **The status line of each connection** has three states, not two: *not set
