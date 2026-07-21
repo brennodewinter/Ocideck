@@ -1,4 +1,4 @@
-.PHONY: refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-method-length check-dead-code check-hardcoded-text add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
+.PHONY: refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-method-length check-dead-code check-hardcoded-text coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -55,6 +55,7 @@ help:
 	@echo "  make check-method-length  Per-method length ratchet (AST-measured, max 150)."
 	@echo "  make check-dead-code Fail on orphaned lib/ files (unreachable from any entrypoint)."
 	@echo "  make check-hardcoded-text  Hardcoded visible strings ratchet (must reach 0 before 0.1.0)."
+	@echo "  make coverage-per-file  Per-file coverage floor: budget of files below it (must reach 0)."
 	@echo "  make add-l10n SPEC=… Add d('…') source strings to every language from a JSON spec."
 	@echo "  make catalogs-outdated Advisory: bundled reference data vs upstream (run before a release build)."
 	@echo "  make refresh-catalogs Regenerate WSTG/MASTG/MASWE from upstream (not in check)."
