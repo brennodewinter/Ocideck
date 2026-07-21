@@ -1801,6 +1801,12 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Licenties van derden': 'Liċenzji ta\' partijiet terzi',
+  'Alle licentieteksten tonen': 'Uri t-testi kollha tal-liċenzji',
+  'OciDeck zelf staat onder de EUPL-1.2. Daarnaast bundelt het software van derden: de Dart- en Flutter-pakketten, twee gevendorde plugins, vier lettertypefamilies, het gezichtsmodel voor de privacycontrole en de JavaScript die in een HTML-export meegaat. Elk daarvan houdt zijn eigen licentie.':
+      'OciDeck innifsu huwa taħt il-EUPL-1.2. Barra minn hekk jiġbor fih softwer ta\' partijiet terzi: il-pakketti Dart u Flutter, żewġ plugins inklużi, erba\' familji ta\' tipi ta\' karattri, il-mudell tal-wiċċ għall-verifika tal-privatezza u l-JavaScript li jivvjaġġa ma\' esportazzjoni HTML. Kull wieħed iżomm il-liċenzja tiegħu.',
+  'Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.':
+      'Dan il-fajl fih softwer ta\' partijiet terzi u xi kultant tipa ta\' karattri. Hawn taħt hemm it-testi sħaħ tal-liċenzji li jappartjenu; għaddihom magħhom meta tgħaddi dan il-fajl.',
   'esc': 'esc',
   'Enter': 'Enter',
   'OK': 'OK',

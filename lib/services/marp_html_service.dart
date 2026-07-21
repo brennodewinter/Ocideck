@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'dart:typed_data';
 import 'dart:ui' show Locale;
 
+import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:flutter/services.dart' show rootBundle;
 
 import '../l10n/app_localizations.dart';
@@ -13,12 +14,35 @@ import '../models/deck.dart';
 import '../models/settings.dart';
 import '../models/timeline.dart';
 import '../utils/log.dart';
+import 'bundled_licenses.dart';
 import 'export_metadata.dart';
 
 part 'parts/marp_html_service_cockpit.dart';
 part 'parts/marp_html_service_charts.dart';
 part 'parts/marp_html_service_charts_radial.dart';
 part 'parts/marp_html_service_charts_bullet.dart';
+
+/// The third-party notices for one HTML export: a licence banner per inlined
+/// script (keyed by npm package name) and the collapsible block that carries the
+/// full licence texts.
+///
+/// Both halves exist because an export makes the *user* the distributing party.
+/// MathJax and Mermaid ship minified without any banner at all, so an export
+/// used to hand someone 5 MB of third-party code with no way to tell what it
+/// was or under what terms — a duty the recipient cannot discharge because we
+/// removed the evidence of it.
+class ExportNotices {
+  const ExportNotices({required this.banners, required this.html});
+
+  /// npm package name → the `/*! @license … */` comment prepended to its
+  /// `<script>`, or an empty string for a bundle we have no entry for.
+  final Map<String, String> banners;
+
+  /// The `<details>` block appended to `<body>`, with every full licence text.
+  final String html;
+
+  String bannerFor(String npm) => banners[npm] ?? '';
+}
 
 /// Builds a single, self-contained HTML file from a deck's Marp Markdown.
 ///
@@ -94,6 +118,13 @@ class MarpHtmlService {
       theme == null ? Future.value(_baseCss) : _themedCss(theme),
     ]);
 
+    // Wie een export doorstuurt, verspreidt vijf JavaScript-bundels en — als het
+    // gebundelde lettertype is ingesloten — ook een font. Dat mag alleen mét de
+    // kennisgevingen erbij, dus die reizen mee in het bestand zelf.
+    final notices = await thirdPartyNotices(
+      embedsFont: css.contains('data:font/ttf;base64,'),
+    );
+
     // Per-export CSP nonce. Every executable <script> we emit carries it; the
     // CSP then allows only nonce'd scripts, so an injected inline <script> that
     // somehow survives DOMPurify can't execute when the file is opened. The
@@ -129,8 +160,15 @@ class MarpHtmlService {
         ..write('</script></section>');
     }
 
-    String inline(String code) =>
-        '<script nonce="$nonce">${_guardScript(code)}</script>';
+    // Elke ingesloten bundel krijgt een licentiebanner, ook als de geminificeerde
+    // upstream-build er geen heeft. marked, highlight.js en DOMPurify dragen er
+    // zelf een; MathJax en Mermaid niet, en zonder banner kan de ontvanger van
+    // een export niet zien wat hij doorstuurt. [notices] draagt de volledige
+    // teksten; deze regel wijst erheen.
+    String inline(String code, [String? npm]) {
+      final head = npm == null ? '' : notices.bannerFor(npm);
+      return '<script nonce="$nonce">$head${_guardScript(code)}</script>';
+    }
 
     final meta = metadata ?? const ExportDocumentMetadata();
     final title = _htmlAttr(meta.displayTitle(fallbackTitle));
@@ -164,16 +202,88 @@ class MarpHtmlService {
         '$headMeta'
         '<style>$css\n$hljsCss</style>'
         '<script nonce="$nonce">$_mathjaxConfig</script>'
-        '${inline(marked)}'
-        '${inline(purify)}'
-        '${inline(hljs)}'
-        '${inline(mathjax)}'
-        '${inline(mermaid)}'
+        '${inline(marked, 'marked')}'
+        '${inline(purify, 'dompurify')}'
+        '${inline(hljs, 'highlight.js')}'
+        '${inline(mathjax, 'mathjax')}'
+        '${inline(mermaid, 'mermaid')}'
         '</head><body>'
         '$banner'
         '$sections'
         '${inline(_renderScript)}'
+        '${notices.html}'
         '</body></html>';
+  }
+
+  /// Collects the third-party notices for one export: the per-script licence
+  /// banners and the collapsible block carrying the full licence texts.
+  ///
+  /// Versions and source URLs come from `assets/web_export/MANIFEST.json`, the
+  /// same pinned inventory `make deps-check` verifies, so a bundle upgrade
+  /// updates the notice with it instead of leaving a stale version behind.
+  /// [embedsFont] adds the EB Garamond notice, which only applies when the deck
+  /// theme actually inlines the font (OFL-1.1 §2 — the licence must accompany
+  /// the font, and in a base64 `@font-face` the font is right there).
+  @visibleForTesting
+  Future<ExportNotices> thirdPartyNotices({required bool embedsFont}) async {
+    final manifest =
+        jsonDecode(await loadAsset('$_assetDir/MANIFEST.json'))
+            as Map<String, dynamic>;
+    final bundles = (manifest['bundles'] as List).cast<Map<String, dynamic>>();
+
+    final banners = <String, String>{};
+    final texts = <(String, String)>[];
+    for (final b in bundles) {
+      final npm = b['npm'] as String?;
+      if (npm == null) continue; // hash-pinned CSS, covered by highlight.js
+      final entry = BundledLicenses.forNpm(npm);
+      if (entry == null) continue;
+      final version = b['version'] as String? ?? '';
+      final label = '${entry.component} $version';
+      banners[npm] =
+          '/*! @license $label — ${entry.license}. '
+          'Full licence text: see "Licenties van derden" at the end of this '
+          'file, or ${entry.source} */\n';
+      texts.add((label, await loadAsset(entry.licenseAsset)));
+    }
+
+    if (embedsFont) {
+      final font = BundledLicenses.all.firstWhere(
+        (e) => e.component.startsWith('EB Garamond'),
+      );
+      texts.add((font.component, await loadAsset(font.licenseAsset)));
+    }
+
+    return ExportNotices(banners: banners, html: _noticesHtml(texts));
+  }
+
+  /// The collapsible notice block appended to every export.
+  ///
+  /// A `<details>` rather than an HTML comment for two reasons: a comment may
+  /// not contain `--`, which the OFL text does three times, and a notice nobody
+  /// can read is not much of a notice. It is collapsed by default and hidden in
+  /// print, so a deck still prints as a deck.
+  static String _noticesHtml(List<(String, String)> texts) {
+    if (texts.isEmpty) return '';
+    const l10n = AppLocalizations(Locale('nl'));
+    final body = StringBuffer();
+    for (final (label, text) in texts) {
+      body
+        ..write('<h3>${_htmlText(label)}</h3>')
+        ..write('<pre>${_htmlText(text.trimRight())}</pre>');
+    }
+    return '<style>'
+        '.ocideck-licenses{max-width:1280px;margin:24px auto 48px;padding:0 24px;'
+        'color:#c8c8c8;font:12px/1.5 -apple-system,"Segoe UI",Roboto,sans-serif}'
+        '.ocideck-licenses h3{font-size:12px;margin:14px 0 4px}'
+        '.ocideck-licenses pre{white-space:pre-wrap;font-size:11px}'
+        '@media print{.ocideck-licenses{display:none}}'
+        '</style>'
+        '<details class="ocideck-licenses">'
+        '<summary>${_htmlText(l10n.d('Licenties van derden'))}</summary>'
+        '<p>${_htmlText(l10n.d('Dit bestand bevat software van derden en soms een lettertype. Hieronder staan de volledige licentieteksten die daarbij horen; stuur ze mee als je dit bestand doorgeeft.'))}</p>'
+        '$body'
+        '</details>';
   }
 
   /// Split Marp Markdown into per-slide Markdown chunks: drop the leading YAML

@@ -87,7 +87,22 @@ flutter:
   assets:
     # Het YuNet-gezichtsmodel (OpenCV Zoo, MIT). 232 KB, en bewust een asset in
     # plaats van een download: de privacycontrole mag geen netwerkuitgang hebben.
+    # De MIT-tekst reist mee: een model verspreiden zonder zijn kennisgeving
+    # mag niet (zie lib/services/bundled_licenses.dart).
     - assets/models/face_detection_yunet_2023mar.onnx
+    - assets/models/YuNet-LICENSE.txt
+    # De OFL-teksten van de vier gebundelde lettertypefamilies. OFL-1.1 §2 staat
+    # herdistributie alleen toe mét de copyrightvermelding en de licentie erbij,
+    # dus deze horen in de binary, niet alleen in de repo.
+    - assets/fonts/OFL.txt
+    - assets/fonts/Inter-OFL.txt
+    - assets/fonts/Lora-OFL.txt
+    - assets/fonts/Roboto-OFL.txt
+    # Volledige licentieteksten van de gebundelde JavaScript/CSS uit
+    # assets/web_export/. Die bestanden dragen hooguit een banner; MIT, BSD-3 en
+    # Apache-2.0 vragen de hele tekst bij herdistributie, en de gebruiker die
+    # een HTML-export doorstuurt is de verspreidende partij.
+    - assets/licenses/
     - assets/images/ocideck-logo.png
     - assets/images/ocideck-logo-eu.png
     - assets/images/librekat-logo.png
