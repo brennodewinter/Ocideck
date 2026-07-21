@@ -225,8 +225,17 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
   }
 
   /// Cmd+W / Ctrl+W op het beamervenster vraagt de presenter de presentatie af
-  /// te sluiten (die ruimt dit venster daarna op). Overige toetsen laten we
-  /// door, zodat het beamervenster verder geen sneltoetsen opslokt.
+  /// te sluiten (die ruimt dit venster daarna op).
+  ///
+  /// Elke andere toets sturen we óók naar de presenter, die hem afhandelt alsof
+  /// hij op het laptopvenster was ingetikt. Dat moet, want dit is een eigen
+  /// venster: zodra het de toetsenbordfocus heeft — één klik op het beamerbeeld
+  /// is genoeg — bleef er van de hele sneltoetsenset niets over. Wie op dat
+  /// moment in een tabel stond te typen kwam er met Escape niet meer uit.
+  ///
+  /// De modifiers reizen mee: dit venster draait op een eigen engine, dus de
+  /// [HardwareKeyboard] aan de presenterkant weet niets van wat hier ingedrukt
+  /// staat.
   KeyEventResult _handleKey(FocusNode _, KeyEvent event) {
     if (event is! KeyDownEvent) return KeyEventResult.ignored;
     final keys = HardwareKeyboard.instance;
@@ -235,7 +244,13 @@ class _AudienceWindowAppState extends State<AudienceWindowApp> {
       _send('exit');
       return KeyEventResult.handled;
     }
-    return KeyEventResult.ignored;
+    _send('key', {
+      'keyId': event.logicalKey.keyId,
+      'meta': keys.isMetaPressed,
+      'control': keys.isControlPressed,
+      'shift': keys.isShiftPressed,
+    });
+    return KeyEventResult.handled;
   }
 
   @override

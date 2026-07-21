@@ -66,5 +66,57 @@ void main() {
       ).copyWith(bullets: ['Eén zin.', 'Nog één.']);
       expect(canSplitSentenceBullets(slide), isFalse);
     });
+
+    test('de hele oorspronkelijke regel gaat naar de sprekersnotities', () {
+      final slide = Slide.create(SlideType.bullets).copyWith(
+        bullets: ['Blijft heel.', 'Eerste zin. Tweede zin.'],
+        notes: 'Bestaande notitie',
+      );
+      final fixed = splitSentenceBullets(slide);
+      expect(fixed.bullets, ['Blijft heel.', 'Eerste zin.', 'Tweede zin.']);
+      // Bestaande notities blijven staan, de volzin komt eronder — alleen van
+      // de regel die daadwerkelijk is opgeknipt.
+      expect(fixed.notes, 'Bestaande notitie\nEerste zin. Tweede zin.');
+    });
+
+    test('de notities krijgen de tussenkop als context mee', () {
+      final slide = Slide.create(SlideType.bullets).copyWith(
+        bullets: [
+          groupHeadingBullet('Aanpak'),
+          'Eerste zin. Tweede zin.',
+          'Derde zin. Vierde zin.',
+        ],
+      );
+      // De kop staat er eenmaal boven, niet bij elke regel opnieuw.
+      expect(
+        splitSentenceBullets(slide).notes,
+        [
+          'Aanpak',
+          'Eerste zin. Tweede zin.',
+          'Derde zin. Vierde zin.',
+        ].join('\n'),
+      );
+    });
+
+    test('een slide die te vol zou worden krijgt de actie niet aangeboden', () {
+      // Zeven bullets waarvan één uit twee zinnen bestaat: opknippen maakt er
+      // acht, nog net binnen de leesbaarheidsdrempel.
+      final passend = Slide.create(SlideType.bullets).copyWith(
+        bullets: [
+          for (var i = 0; i < 6; i++) 'Regel $i.',
+          'Eerste zin. Tweede zin.',
+        ],
+      );
+      expect(canSplitSentenceBullets(passend), isTrue);
+
+      // Eén bullet erbij en het resultaat gaat eroverheen: dan hoort alleen
+      // "Splits slide" te blijven staan.
+      final teVol = passend.copyWith(
+        bullets: [...passend.bullets, 'Nog een regel.'],
+      );
+      expect(canSplitSentenceBullets(teVol), isFalse);
+      // Wat de fix zou doen verandert niet — alleen of we hem aanbieden.
+      expect(splitSentenceBullets(teVol).bullets.length, 9);
+    });
   });
 }

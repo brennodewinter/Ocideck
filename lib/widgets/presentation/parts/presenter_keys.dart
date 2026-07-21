@@ -5,13 +5,28 @@ part of '../fullscreen_presenter.dart';
 extension _PresenterKeys on _FullscreenPresenterState {
   KeyEventResult _handleKey(FocusNode _, KeyEvent event) {
     if (event is! KeyDownEvent) return KeyEventResult.ignored;
-    final key = event.logicalKey;
+    final hw = HardwareKeyboard.instance;
+    return _handleLogicalKey(
+      event.logicalKey,
+      meta: hw.isMetaPressed,
+      control: hw.isControlPressed,
+      shift: hw.isShiftPressed,
+    );
+  }
 
+  /// Dezelfde afhandeling, maar zonder [KeyEvent] — zodat het beamervenster
+  /// zijn toetsen hierheen kan doorsturen. Dat is een eigen venster met een
+  /// eigen engine, dus zijn [HardwareKeyboard] staat volledig los van deze:
+  /// de modifiers reizen daarom mee in plaats van dat we ze hier uitlezen.
+  KeyEventResult _handleLogicalKey(
+    LogicalKeyboardKey key, {
+    bool meta = false,
+    bool control = false,
+    bool shift = false,
+  }) {
     // Cmd+W / Ctrl+W sluit de presentatie, net als het sluiten van een venster
     // elders in het systeem — werkt in elke modus, ongeacht overlays.
-    final hw = HardwareKeyboard.instance;
-    if ((hw.isMetaPressed || hw.isControlPressed) &&
-        key == LogicalKeyboardKey.keyW) {
+    if ((meta || control) && key == LogicalKeyboardKey.keyW) {
       _exit();
       return KeyEventResult.handled;
     }
@@ -32,13 +47,11 @@ extension _PresenterKeys on _FullscreenPresenterState {
     // Gebruikersnotities: sluiten/togglen en bladeren met PgUp/PgDn; overige
     // toetsen (inclusief pijltjes, die de cursor besturen) naar het veld.
     if (_userNotesMode) {
-      final keys = HardwareKeyboard.instance;
       if (key == LogicalKeyboardKey.escape) {
         _closeUserNotesMode();
         return KeyEventResult.handled;
       }
-      if ((keys.isControlPressed || keys.isMetaPressed) &&
-          key == LogicalKeyboardKey.keyN) {
+      if ((control || meta) && key == LogicalKeyboardKey.keyN) {
         _toggleUserNotesMode();
         return KeyEventResult.handled;
       }
@@ -57,7 +70,7 @@ extension _PresenterKeys on _FullscreenPresenterState {
     if (_gridOpen) return _handleGridKey(key);
 
     // Tabelbewerking: navigatie-toetsen voor celkeuze; tekstinvoer blijft intact.
-    if (_tableEditMode) return _handleTableEditKey(key);
+    if (_tableEditMode) return _handleTableEditKey(key, shift: shift);
 
     // Cijfers verzamelen om naar een slidenummer te springen.
     final digit = _digits[key];
@@ -66,17 +79,15 @@ extension _PresenterKeys on _FullscreenPresenterState {
       return KeyEventResult.handled;
     }
 
-    final keys = HardwareKeyboard.instance;
-    if ((keys.isControlPressed || keys.isMetaPressed) &&
-        key == LogicalKeyboardKey.keyN) {
+    if ((control || meta) && key == LogicalKeyboardKey.keyN) {
       _toggleUserNotesMode();
       return KeyEventResult.handled;
     }
 
-    return _handleNavKey(key);
+    return _handleNavKey(key, shift: shift);
   }
 
-  KeyEventResult _handleNavKey(LogicalKeyboardKey key) {
+  KeyEventResult _handleNavKey(LogicalKeyboardKey key, {bool shift = false}) {
     final last = widget.slides.length - 1;
     switch (key) {
       case LogicalKeyboardKey.enter:
@@ -115,6 +126,13 @@ extension _PresenterKeys on _FullscreenPresenterState {
       case LogicalKeyboardKey.keyP:
         _togglePresenterView();
         return KeyEventResult.handled;
+      case LogicalKeyboardKey.keyN:
+        // Kale N opent de eigen notities, net als elke andere letter hier een
+        // kale sneltoets is. Ctrl/Cmd+N blijft óók werken: binnen het
+        // notitieveld typt een kale N gewoon een 'n', dus dáár is de
+        // modifier-variant de enige die kan sluiten (zie [_handleKey]).
+        _toggleUserNotesMode();
+        return KeyEventResult.handled;
       case LogicalKeyboardKey.keyR:
         _resetTimer();
         return KeyEventResult.handled;
@@ -149,7 +167,7 @@ extension _PresenterKeys on _FullscreenPresenterState {
         _setTool(InkTool.highlighter);
         return KeyEventResult.handled;
       case LogicalKeyboardKey.keyE:
-        if (HardwareKeyboard.instance.isShiftPressed) {
+        if (shift) {
           _setTool(InkTool.eraser);
         } else if (_currentSlideTableEditable) {
           _toggleTableEditMode();

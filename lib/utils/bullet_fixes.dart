@@ -1,4 +1,9 @@
 import '../models/slide.dart';
+import '../services/slide_quality_analyzer.dart'
+    show
+        kChecklistBulletWarningCount,
+        kSingleColumnBulletWarningCount,
+        kTwoColumnBulletWarningCount;
 
 /// Deterministische quick-fix voor de kwaliteitsmelding "bullet met meerdere
 /// zinnen": knip elke meerzinnige bullet op zinsgrenzen in losse bullets op
@@ -11,9 +16,38 @@ final _sentenceEnd = RegExp(r'[.!?](?:\s+|$)');
 final _checklistPrefix = RegExp(r'^\[[ xX]\]\s*');
 
 /// Of [slide] bullets heeft die [splitSentencesInBullets] daadwerkelijk zou
-/// opknippen — zodat de UI de actie alleen aanbiedt als die iets doet.
-bool canSplitSentenceBullets(Slide slide) =>
-    slide.bullets.any(_isMultiSentence) || slide.bullets2.any(_isMultiSentence);
+/// opknippen — zodat de UI de actie alleen aanbiedt als die iets doet — én de
+/// slide daar niet te vol van wordt.
+///
+/// Die tweede eis maakt het verschil tussen een hulpmiddel en een rommeltje:
+/// opknippen levert méér bullets op, dus op een slide die de leesbaarheids-
+/// drempel al raakt maakt deze fix het probleem groter. Daar hoort maar één
+/// vervolgstap te staan — "Splits slide" — zodat de auteur per melding één
+/// scenario voor zich heeft in plaats van twee acties die elkaar tegenwerken.
+bool canSplitSentenceBullets(Slide slide) {
+  if (!slide.bullets.any(_isMultiSentence) &&
+      !slide.bullets2.any(_isMultiSentence)) {
+    return false;
+  }
+  final after =
+      _visibleBulletCount(splitSentencesInBullets(slide.bullets)) +
+      _visibleBulletCount(splitSentencesInBullets(slide.bullets2));
+  return after <= _bulletWarningCount(slide);
+}
+
+/// De drempel die de kwaliteitsanalyse voor deze slide aanhoudt; hier
+/// gespiegeld zodat de actie precies verdwijnt wanneer de dichtheidsmelding
+/// die het probleem al beschrijft de leiding neemt.
+int _bulletWarningCount(Slide slide) => slide.type == SlideType.twoBullets
+    ? kTwoColumnBulletWarningCount
+    : (slide.listStyle == ListStyle.checklist
+          ? kChecklistBulletWarningCount
+          : kSingleColumnBulletWarningCount);
+
+/// Tussenkoppen zijn secties, geen inhoudelijke bullets: ze tellen bij de
+/// analyse niet mee en hier dus ook niet.
+int _visibleBulletCount(List<String> bullets) =>
+    bullets.where((b) => b.trimLeft().isNotEmpty && !isGroupHeading(b)).length;
 
 bool _isMultiSentence(String bullet) =>
     _splitSentences(_plainText(bullet)).length > 1;
@@ -23,34 +57,65 @@ String _plainText(String bullet) =>
 
 /// Nieuwe slide waarin elke meerzinnige bullet is opgeknipt in één bullet per
 /// zin. Bullets met hooguit één zin blijven ongemoeid.
+///
+/// De regel zoals hij was gaat naar de sprekersnotities. Op de slide staan
+/// straks losse zinnen — prima om te lezen, maar het verband tussen die zinnen
+/// zat juist in de volzin die je zojuist uit elkaar trok. Zonder die kopie
+/// bewaart de slide de woorden en verliest de spreker het verhaal.
 Slide splitSentenceBullets(Slide slide) {
-  return slide.copyWith(
-    bullets: splitSentencesInBullets(slide.bullets),
-    bullets2: splitSentencesInBullets(slide.bullets2),
-  );
+  final moved = <String>[];
+  final bullets = _splitColumn(slide.bullets, moved);
+  final bullets2 = _splitColumn(slide.bullets2, moved);
+  if (moved.isEmpty) return slide;
+
+  final existing = slide.notes.trimRight();
+  final notes = [if (existing.isNotEmpty) existing, ...moved].join('\n');
+  return slide.copyWith(bullets: bullets, bullets2: bullets2, notes: notes);
 }
 
 /// Knip elke meerzinnige bullet in [bullets] op in losse bullets; volgorde en
 /// inspring-niveau blijven behouden.
-List<String> splitSentencesInBullets(List<String> bullets) {
+List<String> splitSentencesInBullets(List<String> bullets) =>
+    _splitColumn(bullets, <String>[]);
+
+/// Verwerkt één kolom en legt van elke opgeknipte regel de oorspronkelijke,
+/// hele tekst in [moved] — met dezelfde context als [trimBulletExplanations]
+/// meegeeft: de tussenkop waaronder de regel stond (eenmaal, boven de eerste
+/// regel die eronder valt) en het inspring-niveau.
+List<String> _splitColumn(List<String> bullets, List<String> moved) {
   final result = <String>[];
+  String? heading; // de tussenkop waaronder we nu lopen
+  var headingMoved = false;
   for (final bullet in bullets) {
     // A group heading is a section label, never a multi-sentence bullet to
     // split — keep it verbatim.
-    if (isGroupHeading(bullet) || !_isMultiSentence(bullet)) {
+    if (isGroupHeading(bullet)) {
+      heading = groupHeadingText(bullet);
+      headingMoved = false;
+      result.add(bullet);
+      continue;
+    }
+    if (!_isMultiSentence(bullet)) {
       result.add(bullet);
       continue;
     }
     final level = bulletLevel(bullet);
     final isChecklist = _checklistPrefix.hasMatch(bulletText(bullet));
     final checked = isChecklist && checklistItemChecked(bullet);
-    for (final sentence in _splitSentences(_plainText(bullet))) {
+    final plain = _plainText(bullet);
+    for (final sentence in _splitSentences(plain)) {
       result.add(
         isChecklist
             ? checklistBullet(level: level, text: sentence, checked: checked)
             : '${'\t' * level}$sentence',
       );
     }
+    // Een naamloze kop is een scheidingsstreep, geen context om te melden.
+    if (heading != null && heading.isNotEmpty && !headingMoved) {
+      moved.add(heading);
+      headingMoved = true;
+    }
+    moved.add('${'\t' * level}$plain');
   }
   return result;
 }
@@ -80,8 +145,9 @@ List<String> _splitSentences(String text) {
 ///
 /// Dit vult de twee bestaande dichtheidsfixes aan: "Splits slide" verdeelt
 /// bullets over pagina's en "Zinnen naar losse bullets" knipt ze op — beide
-/// houden álle tekst op de slide. Deze haalt tekst wég, voor het geval dat de
-/// enige echte oplossing is.
+/// houden álle tekst op de slide staan (de tweede legt er een kopie van in de
+/// notities naast). Deze haalt tekst wég, voor het geval dat de enige echte
+/// oplossing is.
 
 /// Scheidingstekens tussen een label en zijn uitleg, in de vorm die mensen
 /// intuïtief gebruiken: "Term: uitleg", "Item - uitleg", of een eerste zin

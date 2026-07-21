@@ -148,6 +148,54 @@ void main() {
     await tester.pumpWidget(const SizedBox());
   });
 
+  testWidgets('other keys travel to the presenter instead of dying here', (
+    tester,
+  ) async {
+    // Het beamervenster is een eigen venster met een eigen engine: pakt het de
+    // toetsenbordfocus, dan is dit de enige weg terug naar de sneltoetsen van
+    // de presentatie. Vroeger slikte dit venster alles behalve Cmd+W op —
+    // Escape kwam dus nooit aan, en wie in een tabel stond te typen zat vast.
+    const bridge = MethodChannel('mixin.one/desktop_multi_window/channels');
+    final sent = <String, Object?>{};
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(bridge, (
+      call,
+    ) async {
+      if (call.method == 'invokeMethod') {
+        final args = Map<String, dynamic>.from(call.arguments as Map);
+        if (args['method'] == 'key') {
+          sent.addAll(Map<String, dynamic>.from(args['arguments'] as Map));
+        }
+      }
+      return null;
+    });
+    addTearDown(
+      () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        bridge,
+        null,
+      ),
+    );
+
+    await _pumpAudience(tester, <String, dynamic>{
+      'markdown': _deckMarkdown,
+      'index': 0,
+    });
+
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.shiftLeft);
+    await tester.sendKeyDownEvent(LogicalKeyboardKey.escape);
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.escape);
+    await tester.sendKeyUpEvent(LogicalKeyboardKey.shiftLeft);
+    await tester.pump();
+
+    // De modifiers reizen mee: de presenterkant draait op een eigen engine en
+    // kan ze daar niet uitlezen.
+    expect(sent['keyId'], LogicalKeyboardKey.escape.keyId);
+    expect(sent['shift'], isTrue);
+    expect(sent['meta'], isFalse);
+    expect(sent['control'], isFalse);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
   test('stale update sequence numbers are rejected, unnumbered accepted', () {
     // Nieuwere en gelijk-oplopende nummers verwerken.
     expect(isStaleUpdateSeq(5, 4), isFalse);

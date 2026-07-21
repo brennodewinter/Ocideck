@@ -688,6 +688,20 @@ class _FullscreenPresenterState extends State<FullscreenPresenter> {
             _prev();
           case 'exit':
             await _exit();
+          case 'key':
+            // Een toets die op het beamervenster is ingetikt: afhandelen alsof
+            // hij hier binnenkwam, zodat de presentatie bestuurbaar blijft
+            // welk van de twee vensters ook de focus heeft.
+            final args = Map<String, dynamic>.from(call.arguments as Map);
+            final keyId = (args['keyId'] as num?)?.toInt();
+            if (keyId != null) {
+              _handleLogicalKey(
+                LogicalKeyboardKey(keyId),
+                meta: args['meta'] == true,
+                control: args['control'] == true,
+                shift: args['shift'] == true,
+              );
+            }
           case 'audioComplete':
             _onMediaCompleted(kind: 'audio');
           case 'mediaComplete':

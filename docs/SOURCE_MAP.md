@@ -200,7 +200,7 @@ deliberately manual).
 ## `lib/state/` — Riverpod providers
 
 - `consent_provider.dart` — `ConsentNotifier` managing consent acceptance/revocation with persistent storage.
-- `deck_provider.dart` — `DeckNotifier`: loaded deck, dirty state, undo/redo history, file path.
+- `deck_provider.dart` — `DeckNotifier`: loaded deck, dirty state, undo/redo history, file path. Also `refreshEditorFields`, which bumps `DeckState.revision` without touching the deck: the editor's text fields cache their content in their own controllers and only re-read when that revision changes, so a change arriving from outside them (a table cell edited live while presenting) would otherwise sit behind stale text that the next keystroke writes back.
 - `deck_provider_ai.dart` — `DeckNotifierAiAlt` extension: count/clear AI-generated image alt-texts.
 - `deck_provider_auto.dart` — `DeckNotifierAuto` extension: `autoRenumberFindings` (P2-AUTO).
 - `deck_provider_checklist.dart` — `DeckNotifierChecklist` extension: `generateScopeChecklists` (one checklist per scope object, feedback #8) and `clearAllChecklists`.
@@ -231,6 +231,7 @@ deliberately manual).
 - `asn1_der.dart` — Minimal dependency-free ASN.1/DER encode + parse for RFC 3161 timestamping.
 - `asset_destination.dart` — `resolveAssetDestination`: picks where an imported asset lands. On a name clash it compares contents — identical means reuse, different means a numbered suffix — so two pictures both called `screenshot.png` stay two pictures instead of silently becoming one.
 - `atomic_file.dart` — Atomic writes (temp file + rename) to prevent data loss on crash.
+- `bullet_fixes.dart` — The deterministic one-click fixes behind the text-density quality reports: `splitSentenceBullets` cuts a multi-sentence bullet into one bullet per sentence (and copies the line as it was into the speaker notes, because the connection between those sentences lived in the full sentence), `trimBulletExplanations` moves the explanation behind a *label : explanation* bullet off the slide. Each has a `can…` twin so the panel offers an action only when it does something — and, for the sentence split, only while the result stays inside the readability threshold, since splitting adds bullets.
 - `bundled_asset.dart` — `asset:`-schema voor méégebundelde logo's van ingebouwde stijlprofielen.
 - `color_contrast.dart` — WCAG 2.1 contrast-ratio calculation and hex colour parsing.
 - `number_convention.dart` — Works out whether a file writes `1.234,56` or `1,234.56`, from evidence across all its values rather than per cell (`scanDecimalConvention`), and reads a value under a settled convention (`parseNumberUnder`). Deduces or refuses: what no value settles comes back as `undecided` for the chart import to ask about, never guessed from locale.
@@ -488,7 +489,7 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 ### `lib/widgets/presentation/` — presenter & dual-screen
 
 - `annotation_overlay.dart` — `AnnotationLayer` for interactive drawing/laser pointer on slides.
-- `audience_window.dart` — `AudienceWindowApp`: fullscreen slide on the secondary (beamer) window.
+- `audience_window.dart` — `AudienceWindowApp`: fullscreen slide on the secondary (beamer) window. Its own engine, so it forwards every key it does not handle itself to the presenter over `presenterChannel` (modifiers included — the other side's `HardwareKeyboard` knows nothing of this window); without that bridge the whole shortcut set died the moment this window took the keyboard focus.
 - `fullscreen_presenter.dart` — `FullscreenPresenter`: dual-screen presenter mode (notes/clock/grid).
 - `rehearsal_summary.dart` — Post-rehearsal timing summary dialog with per-slide breakdown.
 
@@ -497,7 +498,7 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
 - `presenter_beamer_payload.dart` — `buildBeamerMarkdown`: the self-contained markdown handed to the audience window. A top-level function, not an extension. Everything the beamer cannot look up for itself travels inside this string — hence the inlined style profile *and* the inlined chart data (a chart's `source` is a projectmap-relative path the second screen cannot resolve).
 - `presenter_displays.dart` — Multi-monitor screen management.
 - `presenter_ink.dart` — Annotation layer stroking/erasing/laser.
-- `presenter_keys.dart` — Keyboard input during presentation.
+- `presenter_keys.dart` — Keyboard input during presentation. `_handleKey` is a thin `KeyEvent` adapter over `_handleLogicalKey`, which takes the key and its modifiers as plain values so the beamer window can feed its forwarded keys through the same ladder.
 - `presenter_navigation.dart` — Slide/page navigation.
 - `presenter_notes.dart` — Speaker- and user-note management.
 - `presenter_overlays.dart` — UI overlays (badges/help/grid/clock).

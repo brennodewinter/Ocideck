@@ -112,6 +112,78 @@ void main() {
     expect(handle.isClosed, isTrue);
   });
 
+  testWidgets('a key forwarded from the beamer window drives the presenter', (
+    tester,
+  ) async {
+    // Het beamervenster stuurt toetsen die het zelf niet afhandelt hierheen.
+    // Zonder die brug is de presentatie onbestuurbaar zodra dat venster de
+    // toetsenbordfocus heeft — dan doet Escape niets en zit je muurvast.
+    // Dual-schermmodus toont de presenter view; die heeft laptopformaat nodig.
+    tester.view.physicalSize = const Size(1280, 800);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    const bridge = MethodChannel('mixin.one/desktop_multi_window/channels');
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+      bridge,
+      (call) async => null,
+    );
+    addTearDown(
+      () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        bridge,
+        null,
+      ),
+    );
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: FullscreenPresenter(
+          slides: slides,
+          projectPath: null,
+          themeProfile: const ThemeProfile(),
+          initialIndex: 0,
+          audience: AudienceWindowHandle(
+            WindowController.fromWindowId('test'),
+            closeImpl: (_) async {},
+          ),
+        ),
+      ),
+    );
+    // De handler registreert zich asynchroon over dezelfde brug.
+    await tester.pumpAndSettle();
+
+    Future<void> forward(LogicalKeyboardKey key) =>
+        tester.binding.defaultBinaryMessenger.handlePlatformMessage(
+          bridge.name,
+          bridge.codec.encodeMethodCall(
+            MethodCall('methodCall', {
+              'channel': 'ocideck/presenter',
+              'method': 'key',
+              'arguments': {
+                'keyId': key.keyId,
+                'meta': false,
+                'control': false,
+                'shift': false,
+              },
+            }),
+          ),
+          (_) {},
+        );
+
+    await forward(LogicalKeyboardKey.keyG);
+    await tester.pumpAndSettle();
+    expect(find.text('Slide-overzicht'), findsOneWidget);
+
+    // En de weg terug: Escape sluit het raster, precies wat op het
+    // beamervenster vroeger niet aankwam.
+    await forward(LogicalKeyboardKey.escape);
+    await tester.pumpAndSettle();
+    expect(find.text('Slide-overzicht'), findsNothing);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
   test('dual-screen mode requires a desktop platform and two displays', () {
     expect(
       shouldUseDualScreen(isDesktopNative: true, displayCount: 1),
@@ -792,6 +864,25 @@ void main() {
     await tester.pump();
     expect(find.text('Mijn notities'), findsOneWidget);
 
+    await sendControlKey(tester, LogicalKeyboardKey.keyN);
+    await tester.pump();
+    expect(find.text('Mijn notities'), findsNothing);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('a plain N opens the user notes panel', (tester) async {
+    // De legenda belooft "N": zonder modifier deed die toets vroeger niets,
+    // waardoor de sneltoets in de praktijk onvindbaar was.
+    await tester.pumpWidget(_host(slides));
+    await tester.pump();
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.keyN);
+    await tester.pump();
+    expect(find.text('Mijn notities'), findsOneWidget);
+
+    // Binnen het notitieveld typt een kale N een letter, dus daar sluit alleen
+    // Ctrl+N (of Esc) het paneel weer.
     await sendControlKey(tester, LogicalKeyboardKey.keyN);
     await tester.pump();
     expect(find.text('Mijn notities'), findsNothing);
