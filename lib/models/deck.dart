@@ -2,6 +2,7 @@ import '../services/front_matter_merge.dart';
 import 'privacy_disposition.dart';
 import 'annotation.dart';
 import 'document_signature.dart';
+import 'seal_record.dart';
 import 'slide.dart';
 import 'used_tool.dart';
 import 'settings.dart';
@@ -232,27 +233,46 @@ class Deck {
   /// bestand. Generaliseert dezelfde opslag-/parse-/gate-aanpak als [playOnly].
   final bool finalized;
 
-  /// Het inhouds-zegel: een SHA-512-hash over de gecanonicaliseerde inhoud van
-  /// het deck (exclusief de zegelvelden zelf, zodat de hash niet circulair is).
-  /// Leeg wanneer het deck niet verzegeld is. Bij openen wordt de hash
-  /// herberekend en vergeleken om wijziging-na-afronden zichtbaar te maken.
+  /// Het zegel: een SHA-512-hash over de **bytes van de `.md`** waarin dit deck
+  /// staat. Leeg wanneer het deck niet verzegeld is, of wanneer het net is
+  /// afgerond maar nog niet opgeslagen — de hash kan pas bestaan zodra het
+  /// bestand bestaat. Woont met de rest van het zegel in `<naam>.seal.json`.
+  ///
+  /// Zie [sealForm] voor de oude vorm, die over de gecanonicaliseerde inhoud
+  /// ging in plaats van over de bytes.
   final String sealHash;
 
   /// Het gebruikte hash-algoritme voor [sealHash] (`sha-512`). Meegeslagen zodat
   /// een later algoritme herkenbaar blijft.
   final String sealAlgo;
 
+  /// Waar [sealHash] over gaat: de bytes van het bestand, of — bij een deck van
+  /// vóór 0.1.0 — de uitvoer van OciDecks eigen serialisator.
+  final SealForm sealForm;
+
   /// Tijdstip van verzegelen als ISO-8601-string. Leeg wanneer niet verzegeld.
   final String sealAt;
 
   /// Optionele RFC 3161-tijdstempeltoken (`.tsr`) over [sealHash], base64url-
   /// gecodeerd (PENTEST_MIAUW §8-A2). Een externe TSA/OpenKAT tijdstempelt de
-  /// hash out-of-band; de geïmporteerde token wordt in-app geverifieerd. Leeg
-  /// wanneer er geen tijdstempel is. Reist mee als `ocideck_seal_tsr`.
+  /// hash out-of-band; van de geïmporteerde token vergelijkt OciDeck de imprint
+  /// met [sealHash] — niet meer dan dat, zie `rfc3161_timestamp.dart`. Leeg
+  /// wanneer er geen tijdstempel is. Woont in `<naam>.seal.json`.
   final String sealTimestampToken;
+
+  /// De SHA-512 van de bestandsbytes waaruit dit deck is gelezen, of die er bij
+  /// de laatste opslag voor zijn geschreven. Leeg voor een deck dat nooit een
+  /// bestand is geweest.
+  ///
+  /// Bewust vluchtig: dit wordt nergens bewaard. Het is de *waargenomen*
+  /// toestand van het bestand, waar [sealHash] de *vastgelegde* toestand is; het
+  /// verschil tussen die twee is precies wat [DocumentIntegrity.verify] meldt.
+  /// Zou het meereizen in een bestand, dan zou het zichzelf bevestigen.
+  final String fileHash;
 
   /// Optionele zichtbare handtekening die bij het verzegelen is vastgelegd.
   /// Herbruikbaar element (zie [DocumentSignature]); null wanneer niet gezet.
+  /// Woont met het zegel in `<naam>.seal.json`.
   final DocumentSignature? signature;
 
   /// Annotatielaag: vrije-hand-tekeningen per slide, gekeyd op [Slide.id].
@@ -324,8 +344,10 @@ class Deck {
     this.finalized = false,
     this.sealHash = '',
     this.sealAlgo = '',
+    this.sealForm = SealForm.fileBytes,
     this.sealAt = '',
     this.sealTimestampToken = '',
+    this.fileHash = '',
     this.signature,
     this.annotations = const {},
     this.userNotes = const {},
@@ -360,8 +382,10 @@ class Deck {
     bool? finalized,
     String? sealHash,
     String? sealAlgo,
+    SealForm? sealForm,
     String? sealAt,
     String? sealTimestampToken,
+    String? fileHash,
     DocumentSignature? signature,
     bool clearSignature = false,
     Map<String, List<InkStroke>>? annotations,
@@ -396,8 +420,10 @@ class Deck {
       finalized: finalized ?? this.finalized,
       sealHash: sealHash ?? this.sealHash,
       sealAlgo: sealAlgo ?? this.sealAlgo,
+      sealForm: sealForm ?? this.sealForm,
       sealAt: sealAt ?? this.sealAt,
       sealTimestampToken: sealTimestampToken ?? this.sealTimestampToken,
+      fileHash: fileHash ?? this.fileHash,
       signature: clearSignature ? null : (signature ?? this.signature),
       annotations: annotations ?? this.annotations,
       userNotes: userNotes ?? this.userNotes,
