@@ -266,19 +266,48 @@ model.
   rasterized PDF/PPTX output (`SlideRasterizer`) and rendered as a banner in HTML
   export.
 - **Document integrity seal.** `lib/services/document_integrity.dart` computes a
-  **SHA-512** seal over a deck's canonical Markdown content; `verify()` reports
-  `intact` / `changed` (tamper-evidence, not tamper-proofing), and
+  **SHA-512** over the **bytes of the deck's `.md` file** and records it beside
+  that file in `<name>.seal.json`, together with the visible signature
+  (`services/seal_codec.dart`, FILE_FORMAT §6.6). `verify()` reports `intact` /
+  `changed` / `notVerifiable` — tamper-evidence, not tamper-proofing: there is
+  no signing key, so anyone who can rewrite the `.md` can rewrite the sidecar
+  too. What the design does buy is **reproducibility by a third party**:
+  `sha512sum rapport.md` reproduces the value with no OciDeck and no
+  specification to replay, because there is no normalisation step at all
+  (*changed 2026-07-22: the hash used to cover the output of OciDeck's own
+  serialiser, which nobody outside the app could recompute and which any later
+  change to that serialiser would silently invalidate*). The consequence is
+  strictness — any byte change breaks the seal, including a format-version bump
+  — which is why a finalised deck is read-only and OciDeck never rewrites one on
+  its own. A seal made before 0.1.0 keeps its old form (`canonical-v1`) rather
+  than being re-issued, so an RFC 3161 token over that hash stays meaningful.
   `verifyRedactedDerivative()` reconciles a redacted export against its sealed
   source via the redaction manifest so a legitimate redaction is not a false
-  alarm. An optional `DocumentSignature` is folded into the seal. Related
-  audit-value tooling exists for the pentest module: RFC 3161 timestamp tokens
-  (`rfc3161_timestamp.dart`), evidence hashing (`evidence_hash_service.dart`),
-  and an audit dossier (`audit_dossier.dart`). The timestamp handling is
-  deliberately shallow: `timeStampMatchesHash` compares the token's message
-  imprint with the seal hash and stops there — no CMS signature, no certificate,
-  no chain. It shows that *this* token was issued over *this* hash, not that a
-  trustworthy authority issued it. Calling it a "trusted timestamp" overstated
-  that; *corrected 2026-07-21*.
+  alarm.
+
+  The seal's reach narrowed in the same step: the visible signature moved out of
+  the `.md` and is no longer inside the hash. It now sits next to the hash
+  rather than under it — the hash proves the *report* is unchanged, and the
+  attestation beside it is worth what its delivery channel is worth.
+
+  `MiauwComplianceAnalyzer` calls `verify()` for EIS 1.1; it previously scored
+  the requirement as met whenever a hash was merely *present*, so a tampered
+  report reported itself as compliant (*fixed 2026-07-22*).
+
+  Related audit-value tooling exists for the pentest module: RFC 3161 timestamp
+  tokens (`rfc3161_timestamp.dart`), evidence hashing
+  (`evidence_hash_service.dart`), and an audit dossier (`audit_dossier.dart`).
+  The timestamp handling is deliberately shallow:
+  `timeStampImprintMatchesHash` compares the token's message imprint with the
+  seal hash and stops there — no CMS signature, no certificate, no chain, and no
+  nonce in the request. It shows that *this* token was issued over *this* hash,
+  not that a trustworthy authority issued it, and `genTime` is therefore a claim
+  rather than a checked fact. Calling it a "trusted timestamp" overstated that;
+  *corrected 2026-07-21, function renamed to say so 2026-07-22*. Building the
+  real check would mean X.509 path validation against a bundled trust anchor
+  list — a new dependency with SBOM and licence consequences, plus reference
+  data that ages — in an application that makes no network connection and
+  promises tamper-evidence, not tamper-proofing.
 - **Encrypted packages.** `.ocideck` packages can be encrypted
   (`lib/utils/zip_encryption.dart`, wired into `FileService`); an encrypted
   package cannot be opened without its password.
@@ -387,7 +416,7 @@ networks are usable but not trusted; files from third parties are untrusted.
   byte caps (§3); trusted-internal is opt-in only (§10).
 - *Data exfiltration via AI:* fail-closed egress gate, dual cloud consent,
   web block (§7).
-- *Tampering with a finalised report:* SHA-512 document seal (§9).
+- *Tampering with a finalised report:* SHA-512 document seal over the file's bytes (§9), recomputable by the recipient with `sha512sum`.
 - *Supply-chain drift:* hashed+CVE-checked bundles, SBOM staleness gate, license
   and pinned-action gates (§2).
 
