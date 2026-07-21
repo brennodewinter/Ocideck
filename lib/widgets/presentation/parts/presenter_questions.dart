@@ -121,9 +121,11 @@ extension _PresenterQuestions on _FullscreenPresenterState {
     }
   }
 
-  /// Beeldpaar: twee afbeeldingen, één juiste. Er valt niets te grijpen uit een
-  /// pool — het willekeurige zit hier in de kant waarop de juiste terechtkomt,
-  /// zodat de kijker de vorige ronde niet kan naspelen.
+  /// Beeldpaar: twee afbeeldingen, één juiste. Het willekeurige zit in de kant
+  /// waarop de juiste belandt, zodat de kijker de vorige ronde niet kan
+  /// naspelen. De editor biedt twee plekken, maar wie er in de Markdown meer
+  /// neerzet krijgt hier elke ronde een vers paar — vandaar dat er één juiste
+  /// en één foute getrókken worden en niet simpelweg de eerste twee genomen.
   QuestionView _drawImagePair(QuestionSpec spec, QuestionView base) {
     final pool = spec.filledAnswers;
     if (!spec.isPresentable) {
@@ -137,8 +139,13 @@ extension _PresenterQuestions on _FullscreenPresenterState {
         answerable: false,
       );
     }
-    final shown = [...pool.take(questionImagePairCount)]
-      ..shuffle(math.Random());
+    final rng = math.Random();
+    final correct = spec.correctAnswers;
+    final wrong = spec.wrongAnswers;
+    final shown = <QuestionAnswer>[
+      correct[rng.nextInt(correct.length)],
+      wrong[rng.nextInt(wrong.length)],
+    ]..shuffle(rng);
     return base.copyWith(
       options: [for (final a in shown) a.text],
       optionImages: [for (final a in shown) a.image],

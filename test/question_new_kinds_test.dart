@@ -202,6 +202,46 @@ void main() {
     });
   });
 
+  testWidgets('meer dan twee beelden levert elke ronde een echt paar op', (
+    tester,
+  ) async {
+    // De editor biedt twee plekken, maar in de Markdown kan er meer staan.
+    // Dan hoort er per ronde één juiste en één foute getrokken te worden —
+    // gewoon de eerste twee nemen kon twee foute opleveren, en dan is de vraag
+    // niet te halen terwijl hij wél blokkeert.
+    const spec = QuestionSpec(
+      kind: QuestionKind.imagePair,
+      prompt: 'Welke is echt?',
+      answers: [
+        QuestionAnswer(text: 'Vals A', image: 'a.png'),
+        QuestionAnswer(text: 'Vals B', image: 'b.png'),
+        QuestionAnswer(text: 'Echt', image: 'c.png', correct: true),
+      ],
+    );
+
+    await tester.pumpWidget(
+      _host([
+        Slide(
+          id: 'q',
+          type: SlideType.question,
+          customMarkdown: spec.toBlock(),
+        ),
+        after,
+      ]),
+    );
+    await tester.pump();
+
+    // Het juiste beeld staat er, en precies één van de twee foute.
+    expect(find.text('Echt'), findsOneWidget);
+    expect(
+      find.text('Vals A').evaluate().length +
+          find.text('Vals B').evaluate().length,
+      1,
+    );
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
   // ── Getypt antwoord ────────────────────────────────────────────────────────
 
   group('getypt antwoord', () {
