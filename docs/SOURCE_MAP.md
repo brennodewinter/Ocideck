@@ -117,7 +117,7 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `miauw_codec.dart` — The MIAUW disposition (client exclusions and confirmations) as the `<name>.miauw.json` sidecar, plus the read-only decoder for the base64 front-matter keys it replaced, so an older file still opens.
 - `markdown_service_finding.dart` — Parses/serializes the `finding` slide group's id/role markers and header spec.
 - `markdown_validator.dart` — Line-anchored structural pre-flight against the parser's expectations.
-- `marp_html_service.dart` — Builds the self-contained, sanitised HTML export with embedded assets.
+- `marp_html_service.dart` — Builds the sanitised HTML export: the JavaScript, the CSS and the font are inlined and charts are pre-rendered to inline SVG, but the service never reads an image file — a picture stays a relative `<img src>`. *Corrected 2026-07-22: this read "self-contained … with embedded assets", the overstatement corrected elsewhere on 2026-07-21.*
 - `mermaid_render_service.dart` — Renders Mermaid diagrams to cached inline SVG via a shared WebView.
 - `miauw_compliance_analyzer.dart` — Scores each MIAUW EIS (Voldaan/Openstaand/Uitgesloten) from deck content + waivers.
 - `miauw_eis_catalog.dart` — The bundled offline MIAUW EIS catalog (`MiauwEisCatalog`): all 88 testable EIS, parsed from the authoritative MIAUW workbook.
@@ -155,9 +155,10 @@ flows) with a *what-is-this-file* lookup. For the on-disk file format see
 - `recovery_service.dart` — Auto-saves deck snapshots for crash/unsaved recovery.
 - `rehearsal_controller.dart` — Unit-testable controller tracking elapsed/remaining/per-slide rehearsal timing.
 - `rfc3161_timestamp.dart` — Builds a `.tsq` from the seal hash and parses/verifies a `.tsr` timestamp token.
-- `rich_text_layout.dart` — Computes pagination and scaling for rich-text markdown bodies.
+- `rich_text_layout.dart` — Computes pagination and scaling for rich-text markdown bodies. `expandRichTextForRender` is the counterpart of `expandFindingsForRender` for surfaces that *enumerate* slides instead of paging through them (the export): every page becomes a full-size slide tagged with `Slide.renderPage`. Each copy keeps the whole body and the slide id — the page split and the shared font scale are properties of the body as a whole, so handing a renderer one page's markdown in isolation would size that page on its own. `freeMarkdown` is deliberately left out: `slideUsesRichText` counts it, but its preview has no notion of a page and always draws the whole body, so expanding it would yield identical copies rather than continuation pages.
 - `scope_coverage.dart` — `deckScopeCoverageGaps`: flags in-scope objects with no test and no finding.
 - `finding_context_score.dart` — builds the deck's scope-object→CIA index and derives each finding's context (environmental) score / effective severity from it.
+- `finding_pagination.dart` — Render-time pagination for `finding` slides (PENTEST_MIAUW §3.1). A finding is edited as one slide but rendered across several when its prose overflows, so the text stays full-size instead of shrinking; page 1 keeps the header card, each continuation page repeats the heading with an `(i/N)` marker. A pure transform: the `.md` is untouched, only what a surface enumerates changes. `expandRichTextForRender` (in `rich_text_layout.dart`) does the same for a paginated rich-text body; the export applies both.
 - `sidecar_format.dart` — The version contract shared by every sidecar next to a `.md`: a file declaring a higher version is not loaded **and** not overwritten. Refusing to read while still saving over it is worse than reading half, not better — the deck holds nothing in memory, so the save reads as "there is nothing here".
 - `secret_store.dart` — Manages secrets (WebDAV credentials, S3 secret access key, git token, AI API key) in the OS keychain.
 - `slide_layout_metrics.dart` — Layout constants/helpers for text sizing, fonts, and fit scaling; `bulletFitCounts` measures how many bullets fit at natural size (the input to the "Split slide" page capacity).

@@ -47,8 +47,15 @@ optimisation.
 - PDF/PPTX exports rasterize each slide to a PNG at a default **1920 × 1080**
   (16:9) target (`lib/services/slide_rasterizer.dart`, `logicalSize` and `targetWidth`); rasterization cost
   scales with slide count and per-slide complexity.
+- The slide count it scales with is the **expanded** one: an overflowing finding
+  and a rich-text body longer than one slide each become several full-size slides
+  before rasterization (ARCHITECTURE § *Render-time pagination*), so a deck with
+  long prose costs more images than it has slides in the editor.
 - HTML export pre-renders charts to inline SVG in Dart and inlines the vendored
-  JS/CSS, producing a self-contained file (see measured bundle sizes below).
+  JS/CSS (see measured bundle sizes below). Slide images are the exception — they
+  stay relative `<img src>` references and are not inlined. *Corrected 2026-07-22:
+  this called the result "a self-contained file", the same overstatement corrected
+  in ARCHITECTURE and USER_GUIDE on 2026-07-21.*
 
 ## Network limits
 

@@ -15,6 +15,7 @@
 | `Ctrl/Cmd + H` | Find & replace (visual mode: dialog; markdown mode: in-editor bar — see below) |
 | `Ctrl/Cmd + V` (in a table cell) | Paste a spreadsheet/CSV/markdown selection as a table (also `Shift + Insert`) |
 | `Tab` to the panel divider, then `←` / `→` | Resize the slide panel |
+| `←` `↑` `Page Up` · `→` `↓` `Page Down` (click the preview first) | Previous · next slide, stepping through the pages of a long rich-text slide or an overflowing finding before moving on |
 
 In the **add-slide dialog**, `Tab` moves between the type cards, `Enter` picks
 the focused one, and `Esc` cancels.
@@ -48,6 +49,12 @@ Navigation:
 | `Backspace` | Erase the last digit of a typed slide number |
 | `Home` · `End` | First · last slide |
 | `G` | Slide-grid overview (arrows + `Enter` to jump) |
+
+*Next* and *previous* first move **within** a slide that has more to show: the
+pages of a rich-text body too long for one slide (the control bar then reads
+`Slide 7 / 24 · Pagina 2 / 3`), and a timeline in step mode revealing its next
+event. Stepping back into the previous slide lands on its last page. A question
+slide holds *next* until it has been answered.
 
 View & timing:
 

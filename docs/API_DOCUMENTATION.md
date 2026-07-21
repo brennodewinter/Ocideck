@@ -27,10 +27,18 @@ providers.
 ### Slide Model
 `lib/models/slide.dart` — `Slide` is an immutable value object (all fields
 `final`, `const` constructor). It is **not** a generic property bag: besides
-`id` and `SlideType type`, it carries ~50 strongly-typed, type-specific fields
-(`title`, `subtitle`, `bullets`, `tableRows`, `imagePath`, `quote`, `findingId`,
-`tlp`, per-slide style overrides such as `titleTextColorOverride`, …). A field is
-only meaningful for the slide types that use it.
+`id` and `SlideType type`, it carries close to sixty strongly-typed,
+type-specific fields (`title`, `subtitle`, `bullets`, `tableRows`, `imagePath`,
+`quote`, `findingId`, `tlp`, per-slide style overrides such as
+`titleTextColorOverride`, …). A field is only meaningful for the slide types that
+use it. *Corrected 2026-07-22: this said "~50"; the constructor takes 60
+parameters, `id` and `type` included.*
+
+Two of those fields exist **only while rendering** and never reach a saved file:
+`mediaRedacted`, set by the privacy projection, and `renderPage` (added
+2026-07-22), set by `expandRichTextForRender` to say which page of a paginated
+rich-text body a copy draws. Neither is read back by the parser and neither is
+carried over by `Slide.duplicate`; see ARCHITECTURE § *Render-time pagination*.
 
 `SlideType` (24 values): `title, section, bullets, twoBullets, bulletsImage,
 twoImages, image, video, quote, table, freeMarkdown, code, chart, cockpit,

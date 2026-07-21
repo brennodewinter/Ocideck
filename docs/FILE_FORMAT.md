@@ -599,6 +599,27 @@ rendering/exports it draws as an accent-coloured label above a thin rule:
 - Borrel
 ```
 
+**Rich text** (`<!-- ocideck_list_style: richText -->`) — a bullets or
+bullets-with-image slide whose body is free Markdown instead of a list. After the
+heading lines the comment is written, then a blank line, then the body as it was
+typed:
+```markdown
+# Heading
+<!-- ocideck_list_style: richText -->
+
+A paragraph, **bold**, a `- list` if you want one, all of it ordinary Markdown.
+```
+
+**The page split of such a body is not in the file.** Text that would have to
+shrink below the readable floor to fit one slide is broken into pages while
+rendering, worked out from the theme (the font, and the reserve a logo or footer
+claims) at the reference 16:9 geometry — `lib/services/rich_text_layout.dart`. The
+same file can therefore be one page under one theme and three under another, and
+there is no page marker to hand-edit. `Slide.renderPage`, which says which page a
+rendered copy draws, exists only for surfaces that enumerate slides instead of
+paging through them (the export; see ARCHITECTURE § *Render-time pagination*). It
+is never written and never read: a slide that came from a file always has it at 0.
+
 **Two bullet columns** (`two-bullets`) — **the visible HTML is the content.**
 Until 0.1.0 both columns were also stored as base64 in four comments above the
 grid, and those comments won; the `<ul><li>` below them was decoration. Worse:

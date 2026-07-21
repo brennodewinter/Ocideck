@@ -80,6 +80,23 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   markdown of de HTML.
 
 ### Fixed
+- **Een lange vrije-tekstdia raakt zijn vervolgpagina's niet meer kwijt bij het
+  exporteren.** Zet u meer tekst op een dia dan er past, dan verdeelt OciDeck die
+  over meerdere pagina's; in de editor en tijdens het presenteren bladert u
+  daardoorheen. De PDF- en PPTX-export deed dat niet: die somt dia's op, tekende
+  pagina 1 en liet de rest zonder melding weg. Elke pagina wordt nu als een
+  eigen dia op ware grootte geëxporteerd, en omdat de voettekst zijn nummer aan
+  zijn plaats in die lijst ontleent, tellen paginanummers in de voettekst de
+  vervolgpagina's voortaan mee.
+
+  In dezelfde beweging is de teller die rechtsboven **op** zo'n dia stond
+  verdwenen. Die begon bij elke dia opnieuw bij één, terwijl de zaal naar dia 7
+  van 24 keek — twee nummeringen door elkaar, waarvan de opvallendste de minst
+  betekenisvolle was. Waar u bent blijft gewoon zichtbaar, maar in de rand van
+  het programma in plaats van in het beeld van de zaal: het voorbeeldpaneel en
+  de presentatorweergave tonen "Pagina 2 / 3" naast het dianummer. Aan het
+  presenteren zelf verandert niets — u bladert met dezelfde toetsen eerst door
+  de pagina's van een dia en dan pas naar de volgende dia.
 - **Uw eigen regels in de kop breken het zegel niet meer.** Sinds OciDeck de
   front matter bijwerkt in plaats van herbouwt, blijft wat u er zelf in zet
   netjes staan — een eigen `style:`-blok, een commentaarregel, een handmatige

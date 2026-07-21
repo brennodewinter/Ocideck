@@ -232,11 +232,14 @@ Tag a deck with a Traffic Light Protocol level — `CLEAR`, `GREEN`, `AMBER`,
 allowed level are blocked, and optionally stamp the classification as a watermark
 on exported files.
 
-### Exports are self-contained and can't phone home
+### Exports can't phone home
 
 HTML exports are sanitised and carry their own strict content-security policy, so
 an exported file opened in a browser cannot run injected scripts or send data
-anywhere. `.ocideck` packages can be password-encrypted.
+anywhere. `.ocideck` packages can be password-encrypted. *Corrected 2026-07-22:
+this heading also called an export "self-contained". It is not, in one respect:
+the HTML export leaves slide images as relative references instead of embedding
+them — the same overstatement corrected elsewhere on 2026-07-21.*
 
 ## Your rights and this tool
 

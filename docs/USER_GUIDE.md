@@ -407,6 +407,29 @@ reorder. The list style picker switches the whole list between plain **bullets**
 **rich text** (a free-Markdown body). Plain bullets can use a dot or a cat-paw
 marker.
 
+**A rich-text body that does not fit runs on to a next page.** The text is first
+scaled to fill the slide; only when it would have to shrink past the readable
+floor is it broken into pages. All pages share one font size — the size of the
+fullest page — so paging through does not make the letters jump, and the title
+and subheading appear on the first page only. The split is worked out while
+rendering, from the theme (the font, and the room a logo or footer claims) at the
+fixed 16:9 slide size, so nothing about it is stored in the `.md`: change the
+theme and the same text may need one page more or fewer.
+
+Which page you are looking at is shown in the program's own chrome, never on the
+slide: the preview header reads `7 / 24 · Pagina 2 / 3`, the presenter's control
+bar shows the same beside the slide number, and both the preview's arrow keys and
+the presenter's next/previous step through the pages before moving on to the next
+slide. *Until 2026-07-22 a `1 / 3` badge was drawn in the top-right corner of the
+slide itself. It counted from one again on every slide while the audience was
+looking at slide 7 of 24, and it has been removed.*
+
+In the **PDF and PPTX** export each page is written as a full-size slide of its
+own, so a footer with page numbers counts the continuation pages along with
+everything else. *Corrected 2026-07-22: before that, the export rendered the
+first page of such a slide and left the rest out of the file without saying so.*
+Presenting is unaffected — there the pages remain pages of one slide.
+
 **Group headings ("tussenkoppen").** To split one slide's bullets into visually
 separated groups — an agenda's *morning* and *afternoon*, pros versus cons —
 click **Tussenkop toevoegen** (Add group heading), or turn any row into one with

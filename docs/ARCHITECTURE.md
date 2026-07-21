@@ -124,6 +124,14 @@ lib/
   `code` (the source), `chart` (the JSON spec), `cockpit` (the JSON spec of
   its instrument meters), and `question` (the JSON quiz spec — kind, prompt,
   answers, option count, time limit).
+- A couple of `Slide` fields exist **only for rendering** and never reach a saved
+  file: `mediaRedacted`, set by the privacy projection because an emptied image
+  path alone cannot tell the renderer whether a photo was removed or never chosen,
+  and `renderPage`, set by `expandRichTextForRender` to say which page of a
+  paginated rich-text body this copy draws. `renderPage` is not serialized at all;
+  `mediaRedacted` is written as `<!-- ocideck_media_redacted -->` under `forExport`
+  only, so the HTML export can draw the black block the rasterized exports draw
+  themselves. Neither is carried over by `Slide.duplicate`.
 - **Question slides** are interactive. The authored `QuestionSpec` round-trips in
   `customMarkdown`; the live per-presentation state (`QuestionView` — the random
   options drawn, the pick, correct/wrong, timer) is **session-only** and never
@@ -211,6 +219,37 @@ the key thing to understand before touching rendering:
 
 Both worlds converge at one chokepoint: `services/export_service.dart`
 (`ExportService.export()`) is the only place that writes an export.
+
+### Render-time pagination
+
+What an export enumerates is not the deck's slide list.
+`_MainLayoutState._expandForExport` (`widgets/app_shell_main_layout.dart`) runs
+`expandFindingsForRender` (`services/finding_pagination.dart`) and then
+`expandRichTextForRender` (`services/rich_text_layout.dart`) over the chosen
+slides, and that expanded list is the deck the privacy projection is taken of —
+so it is what the rasterizer walks and what the export's markdown is generated
+from. Both transforms are pure and leave the deck itself alone.
+
+The reason is the same in both cases: a finding whose prose overflows, and a
+rich-text body longer than one slide, are *edited* as one slide but must be
+*rendered* as several at full size. The editor preview and the presenter page
+through those pages themselves; a surface that enumerates slides cannot, and
+until 2026-07-22 the export therefore rendered the first page of a paginated
+rich-text slide and left the rest out of the file.
+
+Two consequences worth knowing:
+
+- The footer's page number is the slide's **position in the expanded list**
+  (`SlideRasterizer` hands `SlidePreviewWidget` `i + 1` and `slides.length`), so
+  continuation pages are counted like any other slide.
+- Each rich-text page copy keeps the *whole* body and the original slide id, and
+  carries only `renderPage`. The page split and the shared font scale are
+  properties of the body as a whole — one page's markdown in isolation would be
+  scaled on its own and the text would jump from page to page. Presenting expands
+  findings only (`widgets/shell/shell_actions.dart`), because the presenter pages
+  through a rich-text slide itself; `SlidePreviewWidget._effectivePage` lets a set
+  `renderPage` win over the page a surface paged to, and the two never occur
+  together.
 
 ### Classification enforcement
 
