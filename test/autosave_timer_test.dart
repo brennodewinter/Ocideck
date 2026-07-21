@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:ui' show Offset;
 
 import 'package:fake_async/fake_async.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

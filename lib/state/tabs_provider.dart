@@ -203,6 +203,15 @@ class TabsNotifier extends StateNotifier<TabsState> {
     // nergens meer — in geen enkel tabblad, ongedaan-stapel of klembord —
     // gebruikt worden. Op desktop is de store leeg, dus dit is er een no-op.
     deckNotifier.onSweepWebAssets = sweepWebAssets;
+    // Een opslag die de grafiekcijfers niet kwijt kon, mag niet als geslaagd
+    // voorbijgaan: dezelfde melding als bij het openen, met een eigen tekst.
+    deckNotifier.onChartDataWarnings = (sources) {
+      if (!mounted) return;
+      _ref.read(chartDataWarningProvider.notifier).state = ChartDataWarning(
+        sources,
+        whileSaving: true,
+      );
+    };
     final tab = TabInfo(
       id: id,
       recoveryId: key,
@@ -968,20 +977,28 @@ final securityModulePromptProvider = StateProvider<SecurityModulePrompt?>(
   (ref) => null,
 );
 
-/// Grafieken waarvan het gekoppelde databestand niet gelezen kon worden bij het
-/// openen: ontbrekend, onleesbaar, of buiten de projectmap.
+/// Grafieken waarvan het gekoppelde databestand niet gelezen of niet geschreven
+/// kon worden: ontbrekend, onleesbaar, buiten de projectmap, of intussen buiten
+/// de app gewijzigd.
 ///
-/// Zo'n grafiek tekent leeg, en dat ziet er precies uit als een grafiek zonder
-/// cijfers — het probleem is dus onzichtbaar tenzij we het zeggen. Zelfde
+/// Bij het openen tekent zo'n grafiek leeg, en dat ziet er precies uit als een
+/// grafiek zonder cijfers. Bij het opslaan is het erger: de markdown draagt dan
+/// alleen nog de verwijzing, dus de cijfers staan enkel nog in dit venster. In
+/// beide gevallen is het probleem onzichtbaar tenzij we het zeggen. Zelfde
 /// eenmalige signaalvorm als [securityModulePromptProvider]: de state-laag zet
-/// hem bij het openen, de shell toont hem en wist hem.
+/// hem, de shell toont hem en wist hem.
 class ChartDataWarning {
-  /// De `source`-paden die niet gelezen konden worden.
+  /// De `source`-paden die het niet haalden.
   final List<String> sources;
+
+  /// Of dit een opslag betrof. De twee gevallen vragen een andere tekst — bij
+  /// lezen blijft de grafiek leeg, bij schrijven zijn de cijfers nergens
+  /// vastgelegd — en dat verschil bepaalt wat de gebruiker moet doen.
+  final bool whileSaving;
 
   /// Niet-const, net als [SecurityModulePrompt]: twee identieke const-instanties
   /// zouden bij een tweede open als "geen wijziging" worden weggeslikt.
-  ChartDataWarning(this.sources);
+  ChartDataWarning(this.sources, {this.whileSaving = false});
 }
 
 final chartDataWarningProvider = StateProvider<ChartDataWarning?>(

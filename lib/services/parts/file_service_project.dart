@@ -5,7 +5,10 @@
 part of '../file_service.dart';
 
 extension _FileServiceProject on FileService {
-  Future<Deck> _writeProject(Deck deck, String filePath) async {
+  Future<({Deck deck, List<String> chartWarnings})> _writeProject(
+    Deck deck,
+    String filePath,
+  ) async {
     final dir = p.dirname(filePath);
 
     final imagesDir = Directory(p.join(dir, 'images'));
@@ -46,8 +49,11 @@ extension _FileServiceProject on FileService {
       deckPath: filePath,
     );
     await _pruneChartData(updatedDeck, dir, deckPath: filePath);
-    // TODO(chart-data): via de meldkanaal van openDeckDetailed aan de gebruiker
-    // tonen; tot dat kanaal bestaat is loggen beter dan weggooien.
+    // Een grafiek waarvan het databestand niet geschreven kon worden, staat
+    // hierna nergens meer: [_externalizeCharts] heeft de cijfers zojuist uit de
+    // markdown gehaald. Loggen alleen was daarom te weinig — de aanroeper krijgt
+    // ze terug en zet er [chartDataWarningProvider] mee, zodat de gebruiker het
+    // ziet in plaats van een geslaagde opslag te lezen.
     if (chartWarnings.isNotEmpty) {
       logWarning(
         'FileService._writeProject: chart data files not cleanly written',
@@ -62,7 +68,7 @@ extension _FileServiceProject on FileService {
     await _writeSidecar(updatedDeck, filePath);
     await _writeUserNotesSidecar(updatedDeck, filePath);
     await _writeMiauwSidecar(updatedDeck, filePath);
-    return updatedDeck;
+    return (deck: updatedDeck, chartWarnings: chartWarnings);
   }
 
   Future<Deck> _hydrateImageCaptions(Deck deck) async {
