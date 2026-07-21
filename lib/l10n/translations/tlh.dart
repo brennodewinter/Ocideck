@@ -1754,6 +1754,43 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Presentatietitel': '\'echletHommey per',
+  'Sectienaam': '\'ay\' pong',
+  'Optionele toelichting': 'QIj (DubwI\')',
+  'Scope': 'veH',
+  'Sinds de vorige rapportage': 'ja\'chuq ret',
+  'Ons aanvalsoppervlak': 'HIvmeH \'ay\'maj',
+  'Webapplicaties': 'web lo\'wI\'mey',
+  'Webapplicatie': 'web lo\'wI\'',
+  'Wat we niet wisten te hebben': 'wIghajbe\'law\'pu\'bogh Dochmey',
+  'Tekst onder de afbeeldingen': 'mIlloghmey bIng mu\'',
+  'Titel boven de video': 'HaSta Dung per',
+  'Titel over de afbeelding': 'mIllogh Dung per',
+  'Team Betalen': 'HuchmeH ghom',
+  'betaalportaal-acc.example.nl': 'payment-portal-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'mu\'wIj: 2026-07-20 waw\', patch lo\'lu\'',
+  'Titel (H1)': 'per (H1)',
+  'Subtitel (H2)': 'bIng per (H2)',
+  'Tussentitel (H1)': '\'ay\' nab (H1)',
+  'Ondertitel / toelichting': 'bIng per / QIj',
+  'Ondertitel (optioneel)': 'bIng per (DubwI\')',
+  'Titel overlay (optioneel)': 'mIllogh Dung per (DubwI\')',
+  'Tekst (links)': 'mu\' (poS)',
+  'Bullets links': 'ghItlhmey poS',
+  'Bullets rechts': 'ghItlhmey nIH',
+  'Titeltekstkleur': 'per mu\' rItlh',
+  'Knippen': 'pe\'',
+  'Geen achtergrondafbeelding': 'pagh \'em mIllogh',
+  'Bijv. 1.0': 'mu\'wIj 1.0',
+  'Datum': 'jaj',
+  'Komma-gescheiden, bijv. OWASP WSTG@4.2':
+      'mIvvaD chevlu\', mu\'wIj: OWASP WSTG@4.2',
+  'Titel van de presentatie': '\'echletHommey per',
+  'F-03 · SQL-injectie in het loginformulier':
+      'F-03 · \'elmeH nav SQL-injection',
+  'https://app.voorbeeld/login': 'https://app.example/login',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  CVE qawHaq Sumbogh (SoH DaHoSmoH download): api.github.com lo\'taHvIS De\' law\' Sam OciDeck \'ej Daqvetlh \'angbogh release De\'wI\' nav Sam.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

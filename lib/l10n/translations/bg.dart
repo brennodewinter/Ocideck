@@ -1802,6 +1802,43 @@ const _dutchSourceBg = {
 };
 
 const _dutchSourceAddBg = <String, String>{
+  'Presentatietitel': 'Заглавие на презентацията',
+  'Sectienaam': 'Име на секцията',
+  'Optionele toelichting': 'Пояснение по избор',
+  'Scope': 'Обхват',
+  'Sinds de vorige rapportage': 'От предишния доклад',
+  'Ons aanvalsoppervlak': 'Нашата атакуема повърхност',
+  'Webapplicaties': 'Уеб приложения',
+  'Webapplicatie': 'Уеб приложение',
+  'Wat we niet wisten te hebben': 'Това, за което не знаехме, че имаме',
+  'Tekst onder de afbeeldingen': 'Текст под изображенията',
+  'Titel boven de video': 'Заглавие над видеото',
+  'Titel over de afbeelding': 'Заглавие върху изображението',
+  'Team Betalen': 'Екип „Плащания“',
+  'betaalportaal-acc.example.nl': 'payment-portal-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'напр. повторен тест 2026-07-20, кръпката е приложена',
+  'Titel (H1)': 'Заглавие (H1)',
+  'Subtitel (H2)': 'Подзаглавие (H2)',
+  'Tussentitel (H1)': 'Заглавие на секция (H1)',
+  'Ondertitel / toelichting': 'Подзаглавие / пояснение',
+  'Ondertitel (optioneel)': 'Подзаглавие (по избор)',
+  'Titel overlay (optioneel)': 'Заглавие върху изображението (по избор)',
+  'Tekst (links)': 'Текст (ляво)',
+  'Bullets links': 'Водещи символи вляво',
+  'Bullets rechts': 'Водещи символи вдясно',
+  'Titeltekstkleur': 'Цвят на текста на заглавието',
+  'Knippen': 'Изрязване',
+  'Geen achtergrondafbeelding': 'Без фоново изображение',
+  'Bijv. 1.0': 'Напр. 1.0',
+  'Datum': 'Дата',
+  'Komma-gescheiden, bijv. OWASP WSTG@4.2':
+      'Разделени със запетая, напр. OWASP WSTG@4.2',
+  'Titel van de presentatie': 'Заглавие на презентацията',
+  'F-03 · SQL-injectie in het loginformulier':
+      'F-03 · SQL инжекция във формата за вход',
+  'https://app.voorbeeld/login': 'https://app.example/login',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Локалната база данни CVE (изтеглянето стартирате вие): OciDeck взема масовите данни през api.github.com и файла на изданието, към който сочи този адрес.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

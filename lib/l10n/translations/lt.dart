@@ -1787,6 +1787,43 @@ const _dutchSourceLt = {
 };
 
 const _dutchSourceAddLt = <String, String>{
+  'Presentatietitel': 'Pristatymo pavadinimas',
+  'Sectienaam': 'Skyriaus pavadinimas',
+  'Optionele toelichting': 'Nebūtinas paaiškinimas',
+  'Scope': 'Apimtis',
+  'Sinds de vorige rapportage': 'Nuo ankstesnės ataskaitos',
+  'Ons aanvalsoppervlak': 'Mūsų atakos paviršius',
+  'Webapplicaties': 'Žiniatinklio programos',
+  'Webapplicatie': 'Žiniatinklio programa',
+  'Wat we niet wisten te hebben': 'Tai, ko nežinojome turintys',
+  'Tekst onder de afbeeldingen': 'Tekstas po paveikslėliais',
+  'Titel boven de video': 'Pavadinimas virš vaizdo įrašo',
+  'Titel over de afbeelding': 'Pavadinimas ant paveikslėlio',
+  'Team Betalen': 'Mokėjimų komanda',
+  'betaalportaal-acc.example.nl': 'mokejimu-portalas-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'pvz. pakartotinis testas 2026-07-20, pataisa pritaikyta',
+  'Titel (H1)': 'Pavadinimas (H1)',
+  'Subtitel (H2)': 'Paantraštė (H2)',
+  'Tussentitel (H1)': 'Skyriaus antraštė (H1)',
+  'Ondertitel / toelichting': 'Paantraštė / paaiškinimas',
+  'Ondertitel (optioneel)': 'Paantraštė (nebūtina)',
+  'Titel overlay (optioneel)': 'Pavadinimas ant paveikslėlio (nebūtinas)',
+  'Tekst (links)': 'Tekstas (kairėje)',
+  'Bullets links': 'Ženklai kairėje',
+  'Bullets rechts': 'Ženklai dešinėje',
+  'Titeltekstkleur': 'Pavadinimo teksto spalva',
+  'Knippen': 'Kirpimas',
+  'Geen achtergrondafbeelding': 'Nėra fono paveikslėlio',
+  'Bijv. 1.0': 'Pvz. 1.0',
+  'Datum': 'Data',
+  'Komma-gescheiden, bijv. OWASP WSTG@4.2':
+      'Atskirti kableliais, pvz. OWASP WSTG@4.2',
+  'Titel van de presentatie': 'Pristatymo pavadinimas',
+  'F-03 · SQL-injectie in het loginformulier':
+      'F-03 · SQL injekcija prisijungimo formoje',
+  'https://app.voorbeeld/login': 'https://app.example/login',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Vietinė CVE duomenų bazė (atsisiuntimą pradedate patys): OciDeck paima masinius duomenis per api.github.com ir leidimo failą, į kurį tas adresas nurodo.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

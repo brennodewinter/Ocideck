@@ -1770,6 +1770,43 @@ const _dutchSourceEt = {
 };
 
 const _dutchSourceAddEt = <String, String>{
+  'Presentatietitel': 'Esitluse pealkiri',
+  'Sectienaam': 'Jaotise nimi',
+  'Optionele toelichting': 'Valikuline selgitus',
+  'Scope': 'Ulatus',
+  'Sinds de vorige rapportage': 'Alates eelmisest aruandest',
+  'Ons aanvalsoppervlak': 'Meie ründepind',
+  'Webapplicaties': 'Veebirakendused',
+  'Webapplicatie': 'Veebirakendus',
+  'Wat we niet wisten te hebben': 'See, mille olemasolust me ei teadnud',
+  'Tekst onder de afbeeldingen': 'Tekst piltide all',
+  'Titel boven de video': 'Pealkiri video kohal',
+  'Titel over de afbeelding': 'Pealkiri pildi peal',
+  'Team Betalen': 'Maksete meeskond',
+  'betaalportaal-acc.example.nl': 'maksete-portaal-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'nt kordustest 2026-07-20, paik paigaldatud',
+  'Titel (H1)': 'Pealkiri (H1)',
+  'Subtitel (H2)': 'Alapealkiri (H2)',
+  'Tussentitel (H1)': 'Vahepealkiri (H1)',
+  'Ondertitel / toelichting': 'Alapealkiri / selgitus',
+  'Ondertitel (optioneel)': 'Alapealkiri (valikuline)',
+  'Titel overlay (optioneel)': 'Pealkiri pildi peal (valikuline)',
+  'Tekst (links)': 'Tekst (vasakul)',
+  'Bullets links': 'Täpid vasakul',
+  'Bullets rechts': 'Täpid paremal',
+  'Titeltekstkleur': 'Pealkirja teksti värv',
+  'Knippen': 'Lõikamine',
+  'Geen achtergrondafbeelding': 'Taustapilt puudub',
+  'Bijv. 1.0': 'Nt 1.0',
+  'Datum': 'Kuupäev',
+  'Komma-gescheiden, bijv. OWASP WSTG@4.2':
+      'Komadega eraldatud, nt OWASP WSTG@4.2',
+  'Titel van de presentatie': 'Esitluse pealkiri',
+  'F-03 · SQL-injectie in het loginformulier':
+      'F-03 · SQL-süst sisselogimisvormis',
+  'https://app.voorbeeld/login': 'https://app.example/login',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Kohalik CVE andmebaas (allalaadimise käivitate ise): OciDeck toob masskogumi aadressi api.github.com kaudu ja selle väljalaskefaili, millele see aadress osutab.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

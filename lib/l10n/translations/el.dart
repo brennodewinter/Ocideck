@@ -1807,6 +1807,43 @@ const _dutchSourceEl = {
 };
 
 const _dutchSourceAddEl = <String, String>{
+  'Presentatietitel': 'Τίτλος παρουσίασης',
+  'Sectienaam': 'Όνομα ενότητας',
+  'Optionele toelichting': 'Προαιρετική επεξήγηση',
+  'Scope': 'Εύρος',
+  'Sinds de vorige rapportage': 'Από την προηγούμενη αναφορά',
+  'Ons aanvalsoppervlak': 'Η επιφάνεια επίθεσής μας',
+  'Webapplicaties': 'Διαδικτυακές εφαρμογές',
+  'Webapplicatie': 'Διαδικτυακή εφαρμογή',
+  'Wat we niet wisten te hebben': 'Όσα δεν ξέραμε ότι είχαμε',
+  'Tekst onder de afbeeldingen': 'Κείμενο κάτω από τις εικόνες',
+  'Titel boven de video': 'Τίτλος πάνω από το βίντεο',
+  'Titel over de afbeelding': 'Τίτλος πάνω στην εικόνα',
+  'Team Betalen': 'Ομάδα Πληρωμών',
+  'betaalportaal-acc.example.nl': 'payment-portal-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'π.χ. επανέλεγχος 2026-07-20, ενημέρωση εφαρμόστηκε',
+  'Titel (H1)': 'Τίτλος (H1)',
+  'Subtitel (H2)': 'Υπότιτλος (H2)',
+  'Tussentitel (H1)': 'Επικεφαλίδα ενότητας (H1)',
+  'Ondertitel / toelichting': 'Υπότιτλος / επεξήγηση',
+  'Ondertitel (optioneel)': 'Υπότιτλος (προαιρετικός)',
+  'Titel overlay (optioneel)': 'Τίτλος επικάλυψης (προαιρετικός)',
+  'Tekst (links)': 'Κείμενο (αριστερά)',
+  'Bullets links': 'Κουκκίδες αριστερά',
+  'Bullets rechts': 'Κουκκίδες δεξιά',
+  'Titeltekstkleur': 'Χρώμα κειμένου τίτλου',
+  'Knippen': 'Κόψιμο',
+  'Geen achtergrondafbeelding': 'Χωρίς εικόνα φόντου',
+  'Bijv. 1.0': 'Π.χ. 1.0',
+  'Datum': 'Ημερομηνία',
+  'Komma-gescheiden, bijv. OWASP WSTG@4.2':
+      'Χωρισμένα με κόμμα, π.χ. OWASP WSTG@4.2',
+  'Titel van de presentatie': 'Τίτλος της παρουσίασης',
+  'F-03 · SQL-injectie in het loginformulier':
+      'F-03 · Ένεση SQL στη φόρμα σύνδεσης',
+  'https://app.voorbeeld/login': 'https://app.example/login',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Η τοπική βάση δεδομένων CVE (τη λήψη την ξεκινάτε εσείς): το OciDeck ανακτά τα μαζικά δεδομένα μέσω του api.github.com και του αρχείου έκδοσης στο οποίο παραπέμπει η διεύθυνση αυτή.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

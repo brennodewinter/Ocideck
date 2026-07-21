@@ -1809,6 +1809,43 @@ const _dutchSourcePt = {
 };
 
 const _dutchSourceAddPt = <String, String>{
+  'Presentatietitel': 'Título da apresentação',
+  'Sectienaam': 'Nome da secção',
+  'Optionele toelichting': 'Explicação opcional',
+  'Scope': 'Âmbito',
+  'Sinds de vorige rapportage': 'Desde o relatório anterior',
+  'Ons aanvalsoppervlak': 'A nossa superfície de ataque',
+  'Webapplicaties': 'Aplicações web',
+  'Webapplicatie': 'Aplicação web',
+  'Wat we niet wisten te hebben': 'O que não sabíamos que tínhamos',
+  'Tekst onder de afbeeldingen': 'Texto por baixo das imagens',
+  'Titel boven de video': 'Título acima do vídeo',
+  'Titel over de afbeelding': 'Título sobre a imagem',
+  'Team Betalen': 'Equipa de Pagamentos',
+  'betaalportaal-acc.example.nl': 'portal-pagamentos-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'ex.: novo teste 2026-07-20, correção aplicada',
+  'Titel (H1)': 'Título (H1)',
+  'Subtitel (H2)': 'Subtítulo (H2)',
+  'Tussentitel (H1)': 'Cabeçalho de secção (H1)',
+  'Ondertitel / toelichting': 'Subtítulo / explicação',
+  'Ondertitel (optioneel)': 'Subtítulo (opcional)',
+  'Titel overlay (optioneel)': 'Título sobreposto (opcional)',
+  'Tekst (links)': 'Texto (esquerda)',
+  'Bullets links': 'Marcadores à esquerda',
+  'Bullets rechts': 'Marcadores à direita',
+  'Titeltekstkleur': 'Cor do texto do título',
+  'Knippen': 'Corte',
+  'Geen achtergrondafbeelding': 'Sem imagem de fundo',
+  'Bijv. 1.0': 'Ex.: 1.0',
+  'Datum': 'Data',
+  'Komma-gescheiden, bijv. OWASP WSTG@4.2':
+      'Separados por vírgulas, ex.: OWASP WSTG@4.2',
+  'Titel van de presentatie': 'Título da apresentação',
+  'F-03 · SQL-injectie in het loginformulier':
+      'F-03 · Injeção de SQL no formulário de início de sessão',
+  'https://app.voorbeeld/login': 'https://app.example/login',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  A base de dados CVE local (é você que inicia a transferência): o OciDeck obtém os dados em massa através de api.github.com e do ficheiro de lançamento para o qual esse endereço aponta.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

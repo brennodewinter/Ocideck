@@ -1815,6 +1815,43 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Presentatietitel': 'Teideal an chur i láthair',
+  'Sectienaam': 'Ainm na rannóige',
+  'Optionele toelichting': 'Míniú roghnach',
+  'Scope': 'Scóip',
+  'Sinds de vorige rapportage': 'Ón tuairisc roimhe seo',
+  'Ons aanvalsoppervlak': 'Ár ndromchla ionsaithe',
+  'Webapplicaties': 'Feidhmchláir ghréasáin',
+  'Webapplicatie': 'Feidhmchlár gréasáin',
+  'Wat we niet wisten te hebben': 'Rud nach raibh a fhios againn a bhí againn',
+  'Tekst onder de afbeeldingen': 'Téacs faoi na híomhánna',
+  'Titel boven de video': 'Teideal os cionn an fhíseáin',
+  'Titel over de afbeelding': 'Teideal ar an íomhá',
+  'Team Betalen': 'Foireann Íocaíochtaí',
+  'betaalportaal-acc.example.nl': 'tairseach-ioca-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'm.sh. athtástáil 2026-07-20, paiste curtha i bhfeidhm',
+  'Titel (H1)': 'Teideal (H1)',
+  'Subtitel (H2)': 'Fotheideal (H2)',
+  'Tussentitel (H1)': 'Ceannteideal rannóige (H1)',
+  'Ondertitel / toelichting': 'Fotheideal / míniú',
+  'Ondertitel (optioneel)': 'Fotheideal (roghnach)',
+  'Titel overlay (optioneel)': 'Forleagan teidil (roghnach)',
+  'Tekst (links)': 'Téacs (ar chlé)',
+  'Bullets links': 'Urchair ar chlé',
+  'Bullets rechts': 'Urchair ar dheis',
+  'Titeltekstkleur': 'Dath théacs an teidil',
+  'Knippen': 'Bearradh',
+  'Geen achtergrondafbeelding': 'Gan íomhá chúlra',
+  'Bijv. 1.0': 'm.sh. 1.0',
+  'Datum': 'Dáta',
+  'Komma-gescheiden, bijv. OWASP WSTG@4.2':
+      'Camóg-scartha, m.sh. OWASP WSTG@4.2',
+  'Titel van de presentatie': 'Teideal an chur i láthair',
+  'F-03 · SQL-injectie in het loginformulier':
+      'F-03 · Instealladh SQL san fhoirm logála isteach',
+  'https://app.voorbeeld/login': 'https://app.example/login',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  An bunachar sonraí CVE áitiúil (tusa a chuireann an íoslódáil ar bun): faigheann OciDeck na sonraí ollmhóra trí api.github.com agus an comhad eisiúna a bhfuil an seoladh sin ag díriú air.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

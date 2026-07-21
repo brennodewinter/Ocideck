@@ -1779,6 +1779,43 @@ const _dutchSourceFi = {
 };
 
 const _dutchSourceAddFi = <String, String>{
+  'Presentatietitel': 'Esityksen otsikko',
+  'Sectienaam': 'Osion nimi',
+  'Optionele toelichting': 'Valinnainen selitys',
+  'Scope': 'Laajuus',
+  'Sinds de vorige rapportage': 'Edellisen raportin jälkeen',
+  'Ons aanvalsoppervlak': 'Hyökkäyspintamme',
+  'Webapplicaties': 'Verkkosovellukset',
+  'Webapplicatie': 'Verkkosovellus',
+  'Wat we niet wisten te hebben': 'Se mitä emme tienneet omistavamme',
+  'Tekst onder de afbeeldingen': 'Teksti kuvien alla',
+  'Titel boven de video': 'Otsikko videon yläpuolella',
+  'Titel over de afbeelding': 'Otsikko kuvan päällä',
+  'Team Betalen': 'Maksutiimi',
+  'betaalportaal-acc.example.nl': 'maksuportaali-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'esim. uusintatesti 2026-07-20, korjaus asennettu',
+  'Titel (H1)': 'Otsikko (H1)',
+  'Subtitel (H2)': 'Alaotsikko (H2)',
+  'Tussentitel (H1)': 'Osion otsikko (H1)',
+  'Ondertitel / toelichting': 'Alaotsikko / selitys',
+  'Ondertitel (optioneel)': 'Alaotsikko (valinnainen)',
+  'Titel overlay (optioneel)': 'Otsikko kuvan päällä (valinnainen)',
+  'Tekst (links)': 'Teksti (vasemmalla)',
+  'Bullets links': 'Luettelomerkit vasemmalla',
+  'Bullets rechts': 'Luettelomerkit oikealla',
+  'Titeltekstkleur': 'Otsikkotekstin väri',
+  'Knippen': 'Leikkaus',
+  'Geen achtergrondafbeelding': 'Ei taustakuvaa',
+  'Bijv. 1.0': 'Esim. 1.0',
+  'Datum': 'Päivämäärä',
+  'Komma-gescheiden, bijv. OWASP WSTG@4.2':
+      'Pilkuin eroteltuna, esim. OWASP WSTG@4.2',
+  'Titel van de presentatie': 'Esityksen otsikko',
+  'F-03 · SQL-injectie in het loginformulier':
+      'F-03 · SQL-injektio kirjautumislomakkeessa',
+  'https://app.voorbeeld/login': 'https://app.example/login',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Paikallinen CVE-tietokanta (käynnistät latauksen itse): OciDeck hakee joukkotiedot osoitteen api.github.com kautta ja sen julkaisutiedoston, johon osoite viittaa.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

@@ -1795,6 +1795,43 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Presentatietitel': 'Titulus praesentationis',
+  'Sectienaam': 'Nomen sectionis',
+  'Optionele toelichting': 'Explicatio optativa',
+  'Scope': 'Ambitus',
+  'Sinds de vorige rapportage': 'Ab relatione priore',
+  'Ons aanvalsoppervlak': 'Superficies impetus nostra',
+  'Webapplicaties': 'Applicationes interretiales',
+  'Webapplicatie': 'Applicatio interretialis',
+  'Wat we niet wisten te hebben': 'Quae nos habere nesciebamus',
+  'Tekst onder de afbeeldingen': 'Textus sub imaginibus',
+  'Titel boven de video': 'Titulus supra pelliculam',
+  'Titel over de afbeelding': 'Titulus super imagine',
+  'Team Betalen': 'Grex solutionum',
+  'betaalportaal-acc.example.nl': 'portale-solutionum-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'e.g. retestatio 2026-07-20, emplastrum adhibitum',
+  'Titel (H1)': 'Titulus (H1)',
+  'Subtitel (H2)': 'Subtitulus (H2)',
+  'Tussentitel (H1)': 'Titulus sectionis (H1)',
+  'Ondertitel / toelichting': 'Subtitulus / explicatio',
+  'Ondertitel (optioneel)': 'Subtitulus (optativus)',
+  'Titel overlay (optioneel)': 'Titulus superpositus (optativus)',
+  'Tekst (links)': 'Textus (sinistra)',
+  'Bullets links': 'Notae sinistrae',
+  'Bullets rechts': 'Notae dextrae',
+  'Titeltekstkleur': 'Color textus tituli',
+  'Knippen': 'Sectio',
+  'Geen achtergrondafbeelding': 'Nulla imago fundi',
+  'Bijv. 1.0': 'E.g. 1.0',
+  'Datum': 'Dies',
+  'Komma-gescheiden, bijv. OWASP WSTG@4.2':
+      'Commate separata, e.g. OWASP WSTG@4.2',
+  'Titel van de presentatie': 'Titulus praesentationis',
+  'F-03 · SQL-injectie in het loginformulier':
+      'F-03 · Iniectio SQL in formula accessus',
+  'https://app.voorbeeld/login': 'https://app.example/login',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Basis datorum CVE localis (descensum ipse incipis): OciDeck data cumulata per api.github.com petit et per plagulam emissionis quam illa inscriptio monstrat.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

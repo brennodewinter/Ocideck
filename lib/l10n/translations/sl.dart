@@ -1781,6 +1781,43 @@ const _dutchSourceSl = {
 };
 
 const _dutchSourceAddSl = <String, String>{
+  'Presentatietitel': 'Naslov predstavitve',
+  'Sectienaam': 'Ime razdelka',
+  'Optionele toelichting': 'Neobvezno pojasnilo',
+  'Scope': 'Obseg',
+  'Sinds de vorige rapportage': 'Od prejšnjega poročila',
+  'Ons aanvalsoppervlak': 'Naša napadalna površina',
+  'Webapplicaties': 'Spletne aplikacije',
+  'Webapplicatie': 'Spletna aplikacija',
+  'Wat we niet wisten te hebben': 'Kar nismo vedeli, da imamo',
+  'Tekst onder de afbeeldingen': 'Besedilo pod slikami',
+  'Titel boven de video': 'Naslov nad videoposnetkom',
+  'Titel over de afbeelding': 'Naslov čez sliko',
+  'Team Betalen': 'Ekipa za plačila',
+  'betaalportaal-acc.example.nl': 'placilni-portal-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'npr. ponovni test 2026-07-20, popravek nameščen',
+  'Titel (H1)': 'Naslov (H1)',
+  'Subtitel (H2)': 'Podnaslov (H2)',
+  'Tussentitel (H1)': 'Naslov razdelka (H1)',
+  'Ondertitel / toelichting': 'Podnaslov / pojasnilo',
+  'Ondertitel (optioneel)': 'Podnaslov (neobvezno)',
+  'Titel overlay (optioneel)': 'Naslov čez sliko (neobvezno)',
+  'Tekst (links)': 'Besedilo (levo)',
+  'Bullets links': 'Alineje levo',
+  'Bullets rechts': 'Alineje desno',
+  'Titeltekstkleur': 'Barva besedila naslova',
+  'Knippen': 'Rezanje',
+  'Geen achtergrondafbeelding': 'Brez slike ozadja',
+  'Bijv. 1.0': 'Npr. 1.0',
+  'Datum': 'Datum',
+  'Komma-gescheiden, bijv. OWASP WSTG@4.2':
+      'Ločeno z vejico, npr. OWASP WSTG@4.2',
+  'Titel van de presentatie': 'Naslov predstavitve',
+  'F-03 · SQL-injectie in het loginformulier':
+      'F-03 · Vrivanje SQL v prijavnem obrazcu',
+  'https://app.voorbeeld/login': 'https://app.example/login',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Lokalna zbirka podatkov CVE (prenos zaženete sami): OciDeck pridobi množične podatke prek api.github.com in datoteke izdaje, na katero kaže ta naslov.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

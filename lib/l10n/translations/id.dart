@@ -1779,6 +1779,43 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Presentatietitel': 'Judul presentasi',
+  'Sectienaam': 'Nama bagian',
+  'Optionele toelichting': 'Penjelasan opsional',
+  'Scope': 'Ruang lingkup',
+  'Sinds de vorige rapportage': 'Sejak laporan sebelumnya',
+  'Ons aanvalsoppervlak': 'Permukaan serangan kami',
+  'Webapplicaties': 'Aplikasi web',
+  'Webapplicatie': 'Aplikasi web',
+  'Wat we niet wisten te hebben': 'Yang tidak kami tahu kami miliki',
+  'Tekst onder de afbeeldingen': 'Teks di bawah gambar',
+  'Titel boven de video': 'Judul di atas video',
+  'Titel over de afbeelding': 'Judul di atas gambar',
+  'Team Betalen': 'Tim Pembayaran',
+  'betaalportaal-acc.example.nl': 'portal-pembayaran-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'mis. uji ulang 2026-07-20, tambalan diterapkan',
+  'Titel (H1)': 'Judul (H1)',
+  'Subtitel (H2)': 'Subjudul (H2)',
+  'Tussentitel (H1)': 'Judul bagian (H1)',
+  'Ondertitel / toelichting': 'Subjudul / penjelasan',
+  'Ondertitel (optioneel)': 'Subjudul (opsional)',
+  'Titel overlay (optioneel)': 'Judul hamparan (opsional)',
+  'Tekst (links)': 'Teks (kiri)',
+  'Bullets links': 'Bullet kiri',
+  'Bullets rechts': 'Bullet kanan',
+  'Titeltekstkleur': 'Warna teks judul',
+  'Knippen': 'Pemotongan',
+  'Geen achtergrondafbeelding': 'Tanpa gambar latar',
+  'Bijv. 1.0': 'Mis. 1.0',
+  'Datum': 'Tanggal',
+  'Komma-gescheiden, bijv. OWASP WSTG@4.2':
+      'Dipisahkan koma, mis. OWASP WSTG@4.2',
+  'Titel van de presentatie': 'Judul presentasi',
+  'F-03 · SQL-injectie in het loginformulier':
+      'F-03 · Injeksi SQL pada formulir masuk',
+  'https://app.voorbeeld/login': 'https://app.example/login',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Basis data CVE lokal (Anda sendiri yang memulai unduhan): OciDeck mengambil data massal melalui api.github.com dan berkas rilis yang ditunjuk alamat itu.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

@@ -1801,6 +1801,43 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Presentatietitel': 'Titlu tal-preżentazzjoni',
+  'Sectienaam': 'Isem tas-sezzjoni',
+  'Optionele toelichting': 'Spjegazzjoni fakultattiva',
+  'Scope': 'Ambitu',
+  'Sinds de vorige rapportage': 'Mir-rapport ta\' qabel',
+  'Ons aanvalsoppervlak': 'Il-wiċċ ta\' attakk tagħna',
+  'Webapplicaties': 'Applikazzjonijiet web',
+  'Webapplicatie': 'Applikazzjoni web',
+  'Wat we niet wisten te hebben': 'Dak li ma konniex nafu li għandna',
+  'Tekst onder de afbeeldingen': 'Test taħt l-immaġni',
+  'Titel boven de video': 'Titlu fuq il-vidjow',
+  'Titel over de afbeelding': 'Titlu fuq l-immaġni',
+  'Team Betalen': 'Tim tal-Ħlasijiet',
+  'betaalportaal-acc.example.nl': 'portal-hlas-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'eż. test mill-ġdid 2026-07-20, patch applikata',
+  'Titel (H1)': 'Titlu (H1)',
+  'Subtitel (H2)': 'Sottotitlu (H2)',
+  'Tussentitel (H1)': 'Intestatura tas-sezzjoni (H1)',
+  'Ondertitel / toelichting': 'Sottotitlu / spjegazzjoni',
+  'Ondertitel (optioneel)': 'Sottotitlu (mhux obbligatorju)',
+  'Titel overlay (optioneel)': 'Titlu fuq l-immaġni (mhux obbligatorju)',
+  'Tekst (links)': 'Test (xellug)',
+  'Bullets links': 'Bullets fuq ix-xellug',
+  'Bullets rechts': 'Bullets fuq il-lemin',
+  'Titeltekstkleur': 'Kulur tat-test tat-titlu',
+  'Knippen': 'Qtugħ',
+  'Geen achtergrondafbeelding': 'L-ebda immaġni ta\' sfond',
+  'Bijv. 1.0': 'Eż. 1.0',
+  'Datum': 'Data',
+  'Komma-gescheiden, bijv. OWASP WSTG@4.2':
+      'Separati bil-virgola, eż. OWASP WSTG@4.2',
+  'Titel van de presentatie': 'It-titlu tal-preżentazzjoni',
+  'F-03 · SQL-injectie in het loginformulier':
+      'F-03 · Injezzjoni SQL fil-formola tal-login',
+  'https://app.voorbeeld/login': 'https://app.example/login',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Id-database CVE lokali (id-download tibdieh int stess): OciDeck iġib id-data bl-ingrossa permezz ta\' api.github.com u l-fajl tal-ħruġ li dak l-indirizz jipponta lejh.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

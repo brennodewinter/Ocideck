@@ -302,23 +302,32 @@ class _FindingWizardState extends State<FindingWizard> {
     ],
   );
 
+  /// Eén tekstveld van de wizard.
+  ///
+  /// [label] en [hint] zijn Nederlandse BRONSTRINGS, geen kant-en-klare tekst:
+  /// ze gaan hier door `d()`, precies zoals `EditorField` dat doet. Tot voor
+  /// kort deed dit veld dat niet, en dan las een Griek zijn bevindingenwizard
+  /// in het Nederlands.
   Widget _field(
     String label,
     TextEditingController controller, {
     String? hint,
     int maxLines = 1,
-  }) => Padding(
-    padding: const EdgeInsets.only(bottom: 10),
-    child: TextField(
-      controller: controller,
-      minLines: 1,
-      maxLines: maxLines,
-      decoration: InputDecoration(
-        labelText: label,
-        hintText: hint,
-        isDense: true,
-        border: const OutlineInputBorder(),
+  }) {
+    final l10n = context.l10n;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: TextField(
+        controller: controller,
+        minLines: 1,
+        maxLines: maxLines,
+        decoration: InputDecoration(
+          labelText: l10n.d(label),
+          hintText: hint == null ? null : l10n.d(hint),
+          isDense: true,
+          border: const OutlineInputBorder(),
+        ),
       ),
-    ),
-  );
+    );
+  }
 }

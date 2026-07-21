@@ -1791,6 +1791,43 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Presentatietitel': 'Tytuł prezentacji',
+  'Sectienaam': 'Nazwa sekcji',
+  'Optionele toelichting': 'Objaśnienie opcjonalne',
+  'Scope': 'Zakres',
+  'Sinds de vorige rapportage': 'Od poprzedniego raportu',
+  'Ons aanvalsoppervlak': 'Nasza powierzchnia ataku',
+  'Webapplicaties': 'Aplikacje internetowe',
+  'Webapplicatie': 'Aplikacja internetowa',
+  'Wat we niet wisten te hebben': 'Czego nie wiedzieliśmy, że mamy',
+  'Tekst onder de afbeeldingen': 'Tekst pod obrazami',
+  'Titel boven de video': 'Tytuł nad filmem',
+  'Titel over de afbeelding': 'Tytuł na obrazie',
+  'Team Betalen': 'Zespół Płatności',
+  'betaalportaal-acc.example.nl': 'portal-platnosci-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'np. ponowny test 2026-07-20, poprawka wdrożona',
+  'Titel (H1)': 'Tytuł (H1)',
+  'Subtitel (H2)': 'Podtytuł (H2)',
+  'Tussentitel (H1)': 'Nagłówek sekcji (H1)',
+  'Ondertitel / toelichting': 'Podtytuł / objaśnienie',
+  'Ondertitel (optioneel)': 'Podtytuł (opcjonalnie)',
+  'Titel overlay (optioneel)': 'Tytuł na obrazie (opcjonalnie)',
+  'Tekst (links)': 'Tekst (po lewej)',
+  'Bullets links': 'Punktory po lewej',
+  'Bullets rechts': 'Punktory po prawej',
+  'Titeltekstkleur': 'Kolor tekstu tytułu',
+  'Knippen': 'Przycinanie',
+  'Geen achtergrondafbeelding': 'Brak obrazu tła',
+  'Bijv. 1.0': 'Np. 1.0',
+  'Datum': 'Data',
+  'Komma-gescheiden, bijv. OWASP WSTG@4.2':
+      'Rozdzielone przecinkami, np. OWASP WSTG@4.2',
+  'Titel van de presentatie': 'Tytuł prezentacji',
+  'F-03 · SQL-injectie in het loginformulier':
+      'F-03 · Wstrzyknięcie SQL w formularzu logowania',
+  'https://app.voorbeeld/login': 'https://app.example/login',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Lokalna baza CVE (pobieranie uruchamiasz sam): OciDeck pobiera dane zbiorcze przez api.github.com oraz plik wydania, na który ten adres wskazuje.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

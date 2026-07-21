@@ -1783,6 +1783,43 @@ const _dutchSourceGsw = {
 };
 
 const _dutchSourceAddGsw = <String, String>{
+  'Presentatietitel': 'Presentationstitel',
+  'Sectienaam': 'Abschnittsname',
+  'Optionele toelichting': 'Optionali Erklärig',
+  'Scope': 'Geltigsberiich',
+  'Sinds de vorige rapportage': 'Sit em letschte Bricht',
+  'Ons aanvalsoppervlak': 'Üsi Aagriffsflächi',
+  'Webapplicaties': 'Webaawändige',
+  'Webapplicatie': 'Webaawändig',
+  'Wat we niet wisten te hebben': 'Was mir nöd gwüsst hend, dass mirs hend',
+  'Tekst onder de afbeeldingen': 'Täxt under de Bilder',
+  'Titel boven de video': 'Titel über em Video',
+  'Titel over de afbeelding': 'Titel über em Bild',
+  'Team Betalen': 'Team Zahlige',
+  'betaalportaal-acc.example.nl': 'zahligsportal-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'z.B. Nachtescht 2026-07-20, Patch iigspiilt',
+  'Titel (H1)': 'Titel (H1)',
+  'Subtitel (H2)': 'Undertitel (H2)',
+  'Tussentitel (H1)': 'Abschnittsüberschrift (H1)',
+  'Ondertitel / toelichting': 'Undertitel / Erklärig',
+  'Ondertitel (optioneel)': 'Undertitel (optional)',
+  'Titel overlay (optioneel)': 'Titel-Overlay (optional)',
+  'Tekst (links)': 'Täxt (links)',
+  'Bullets links': 'Bullets links',
+  'Bullets rechts': 'Bullets rächts',
+  'Titeltekstkleur': 'Farb vom Titeltäxt',
+  'Knippen': 'Schniide',
+  'Geen achtergrondafbeelding': 'Kes Hintergrundbild',
+  'Bijv. 1.0': 'Z.B. 1.0',
+  'Datum': 'Datum',
+  'Komma-gescheiden, bijv. OWASP WSTG@4.2':
+      'Mit Komma trännt, z.B. OWASP WSTG@4.2',
+  'Titel van de presentatie': 'Titel vo dr Presentation',
+  'F-03 · SQL-injectie in het loginformulier':
+      'F-03 · SQL-Injection im Aamäldeformular',
+  'https://app.voorbeeld/login': 'https://app.example/login',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  D lokal CVE-Datebank (de Download startisch du sälber): OciDeck holt d Massedate über api.github.com und d Release-Datei, wo die Adrässe druf zeigt.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

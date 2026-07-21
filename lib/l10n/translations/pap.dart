@@ -736,6 +736,56 @@ const _dutchSourcePap = {
 };
 
 const _dutchSourceAddPap = {
+  'Citaat tekst...': 'Teksto di e sita...',
+  'Naam van de auteur': 'Nòmber di e outor',
+  'Presentatietitel': 'Título di presentashon',
+  'Sectienaam': 'Nòmber di sekshon',
+  'Optionele toelichting': 'Splikashon opshonal',
+  'Scope': 'Alkanse',
+  'Sinds de vorige rapportage': 'For di e rapòrt anterior',
+  'Ons aanvalsoppervlak': 'Nos superfisie di atake',
+  'Webapplicaties': 'Aplikashonnan web',
+  'Webapplicatie': 'Aplikashon web',
+  'Wat we niet wisten te hebben': 'Loke nos no tabata sa ku nos tabatin',
+  'Tekst onder de afbeeldingen': 'Teksto bou di e imágennan',
+  'Titel boven de video': 'Título riba e vidio',
+  'Titel over de afbeelding': 'Título riba e imágen',
+  'Team Betalen': 'Ekipo di Pago',
+  'betaalportaal-acc.example.nl': 'portal-pago-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'p.e. re-tèst 2026-07-20, patch apliká',
+  'Titel (H1)': 'Título (H1)',
+  'Subtitel (H2)': 'Subtítulo (H2)',
+  'Tussentitel (H1)': 'Título intermedio (H1)',
+  'Ondertitel / toelichting': 'Subtítulo / splikashon',
+  'Ondertitel (optioneel)': 'Subtítulo (opshonal)',
+  'Titel overlay (optioneel)': 'Título riba imágen (opshonal)',
+  'Tekst (links)': 'Teksto (banda robes)',
+  'Bullets links': 'Bullets banda robes',
+  'Bullets rechts': 'Bullets banda drechi',
+  'Titeltekstkleur': 'Koló di e teksto di título',
+  'Knippen': 'Kòrtamentu',
+  'Geen achtergrondafbeelding': 'Sin imágen di fondo',
+  'Breedte afbeeldingspaneel (rechts)':
+      'Hanchura di e panel di imágen (banda drechi)',
+  'Verdeling (links / rechts)': 'Divishon (banda robes / banda drechi)',
+  'TYPE': 'TIPO',
+  'STIJL': 'STILO',
+  'Bijv. 1.0': 'Por ehèmpel 1.0',
+  'Bijv. 2026-05-30': 'Por ehèmpel 2026-05-30',
+  'Bijv. Jan Jansen': 'Por ehèmpel Juan Pérez',
+  'Bijv. Vigilis': 'Por ehèmpel Vigilis',
+  'Komma-gescheiden, bijv. kwartaal, cijfers, 2026':
+      'Separá ku koma, p.e. trimester, sifranan, 2026',
+  'Komma-gescheiden, bijv. OWASP WSTG@4.2':
+      'Separá ku koma, p.e. OWASP WSTG@4.2',
+  'Korte omschrijving van de presentatie':
+      'Deskripshon kòrtiku di e presentashon',
+  'Titel van de presentatie': 'Título di e presentashon',
+  'F-03 · SQL-injectie in het loginformulier':
+      'F-03 · Inyekshon SQL den e formulario di login',
+  'https://app.voorbeeld/login': 'https://app.example/login',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  E base di datos CVE lokal (ta bo ta kuminsá e download): OciDeck ta buska e datos na bulto via api.github.com i e archivo di release ku e adrès ei ta indiká.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

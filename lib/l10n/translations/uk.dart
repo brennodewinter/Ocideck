@@ -1797,6 +1797,42 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Presentatietitel': 'Назва презентації',
+  'Sectienaam': 'Назва розділу',
+  'Optionele toelichting': 'Необов’язкове пояснення',
+  'Scope': 'Обсяг',
+  'Sinds de vorige rapportage': 'Від попереднього звіту',
+  'Ons aanvalsoppervlak': 'Наша поверхня атаки',
+  'Webapplicaties': 'Вебзастосунки',
+  'Webapplicatie': 'Вебзастосунок',
+  'Wat we niet wisten te hebben': 'Те, про що ми не знали, що маємо',
+  'Tekst onder de afbeeldingen': 'Текст під зображеннями',
+  'Titel boven de video': 'Заголовок над відео',
+  'Titel over de afbeelding': 'Заголовок поверх зображення',
+  'Team Betalen': 'Команда платежів',
+  'betaalportaal-acc.example.nl': 'payment-portal-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'напр. повторний тест 2026-07-20, виправлення застосовано',
+  'Titel (H1)': 'Заголовок (H1)',
+  'Subtitel (H2)': 'Підзаголовок (H2)',
+  'Tussentitel (H1)': 'Заголовок розділу (H1)',
+  'Ondertitel / toelichting': 'Підзаголовок / пояснення',
+  'Ondertitel (optioneel)': 'Підзаголовок (необов’язково)',
+  'Titel overlay (optioneel)': 'Заголовок поверх зображення (необов’язково)',
+  'Tekst (links)': 'Текст (ліворуч)',
+  'Bullets links': 'Пункти ліворуч',
+  'Bullets rechts': 'Пункти праворуч',
+  'Titeltekstkleur': 'Колір тексту заголовка',
+  'Knippen': 'Обрізання',
+  'Geen achtergrondafbeelding': 'Без фонового зображення',
+  'Bijv. 1.0': 'Напр. 1.0',
+  'Datum': 'Дата',
+  'Komma-gescheiden, bijv. OWASP WSTG@4.2': 'Через кому, напр. OWASP WSTG@4.2',
+  'Titel van de presentatie': 'Назва презентації',
+  'F-03 · SQL-injectie in het loginformulier':
+      'F-03 · SQL-ін’єкція у формі входу',
+  'https://app.voorbeeld/login': 'https://app.example/login',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Локальна база CVE (завантаження запускаєте ви самі): OciDeck отримує масив даних через api.github.com і файл випуску, на який вказує ця адреса.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

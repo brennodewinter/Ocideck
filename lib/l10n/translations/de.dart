@@ -736,6 +736,55 @@ const _dutchSourceDe = {
 };
 
 const _dutchSourceAddDe = {
+  'Citaat tekst...': 'Zitattext ...',
+  'Naam van de auteur': 'Name des Autors',
+  'Presentatietitel': 'Präsentationstitel',
+  'Sectienaam': 'Abschnittsname',
+  'Optionele toelichting': 'Optionale Erläuterung',
+  'Scope': 'Geltungsbereich',
+  'Sinds de vorige rapportage': 'Seit dem letzten Bericht',
+  'Ons aanvalsoppervlak': 'Unsere Angriffsfläche',
+  'Webapplicaties': 'Webanwendungen',
+  'Webapplicatie': 'Webanwendung',
+  'Wat we niet wisten te hebben': 'Was wir nicht wussten, dass wir es haben',
+  'Tekst onder de afbeeldingen': 'Text unter den Bildern',
+  'Titel boven de video': 'Titel über dem Video',
+  'Titel over de afbeelding': 'Titel über dem Bild',
+  'Team Betalen': 'Team Zahlungen',
+  'betaalportaal-acc.example.nl': 'zahlungsportal-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'z. B. Nachtest 2026-07-20, Patch eingespielt',
+  'Titel (H1)': 'Titel (H1)',
+  'Subtitel (H2)': 'Untertitel (H2)',
+  'Tussentitel (H1)': 'Abschnittsüberschrift (H1)',
+  'Ondertitel / toelichting': 'Untertitel / Erläuterung',
+  'Ondertitel (optioneel)': 'Untertitel (optional)',
+  'Titel overlay (optioneel)': 'Titel-Overlay (optional)',
+  'Tekst (links)': 'Text (links)',
+  'Bullets links': 'Stichpunkte links',
+  'Bullets rechts': 'Stichpunkte rechts',
+  'Titeltekstkleur': 'Farbe des Titeltextes',
+  'Knippen': 'Schneiden',
+  'Geen achtergrondafbeelding': 'Kein Hintergrundbild',
+  'Breedte afbeeldingspaneel (rechts)': 'Breite des Bildbereichs (rechts)',
+  'Verdeling (links / rechts)': 'Aufteilung (links / rechts)',
+  'TYPE': 'TYP',
+  'STIJL': 'STIL',
+  'Bijv. 1.0': 'Z. B. 1.0',
+  'Bijv. 2026-05-30': 'Z. B. 2026-05-30',
+  'Bijv. Jan Jansen': 'Z. B. Max Mustermann',
+  'Bijv. Vigilis': 'Z. B. Vigilis',
+  'Komma-gescheiden, bijv. kwartaal, cijfers, 2026':
+      'Kommagetrennt, z. B. Quartal, Zahlen, 2026',
+  'Komma-gescheiden, bijv. OWASP WSTG@4.2':
+      'Kommagetrennt, z. B. OWASP WSTG@4.2',
+  'Korte omschrijving van de presentatie':
+      'Kurze Beschreibung der Präsentation',
+  'Titel van de presentatie': 'Titel der Präsentation',
+  'F-03 · SQL-injectie in het loginformulier':
+      'F-03 · SQL-Injection im Anmeldeformular',
+  'https://app.voorbeeld/login': 'https://app.example/login',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Die lokale CVE-Datenbank (den Download starten Sie selbst): OciDeck holt die Massendaten über api.github.com und die Release-Datei, auf die diese Adresse verweist.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

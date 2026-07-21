@@ -1778,6 +1778,43 @@ const _dutchSourceSv = {
 };
 
 const _dutchSourceAddSv = <String, String>{
+  'Presentatietitel': 'Presentationstitel',
+  'Sectienaam': 'Avsnittsnamn',
+  'Optionele toelichting': 'Valfri förklaring',
+  'Scope': 'Omfattning',
+  'Sinds de vorige rapportage': 'Sedan föregående rapport',
+  'Ons aanvalsoppervlak': 'Vår attackyta',
+  'Webapplicaties': 'Webbapplikationer',
+  'Webapplicatie': 'Webbapplikation',
+  'Wat we niet wisten te hebben': 'Det vi inte visste att vi hade',
+  'Tekst onder de afbeeldingen': 'Text under bilderna',
+  'Titel boven de video': 'Titel ovanför videon',
+  'Titel over de afbeelding': 'Titel över bilden',
+  'Team Betalen': 'Betalningsteamet',
+  'betaalportaal-acc.example.nl': 'betalportal-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      't.ex. omtest 2026-07-20, patch installerad',
+  'Titel (H1)': 'Titel (H1)',
+  'Subtitel (H2)': 'Underrubrik (H2)',
+  'Tussentitel (H1)': 'Avsnittsrubrik (H1)',
+  'Ondertitel / toelichting': 'Underrubrik / förklaring',
+  'Ondertitel (optioneel)': 'Underrubrik (valfritt)',
+  'Titel overlay (optioneel)': 'Titelöverlägg (valfritt)',
+  'Tekst (links)': 'Text (vänster)',
+  'Bullets links': 'Punkter till vänster',
+  'Bullets rechts': 'Punkter till höger',
+  'Titeltekstkleur': 'Färg på titeltexten',
+  'Knippen': 'Klippning',
+  'Geen achtergrondafbeelding': 'Ingen bakgrundsbild',
+  'Bijv. 1.0': 'T.ex. 1.0',
+  'Datum': 'Datum',
+  'Komma-gescheiden, bijv. OWASP WSTG@4.2':
+      'Kommaseparerade, t.ex. OWASP WSTG@4.2',
+  'Titel van de presentatie': 'Presentationens titel',
+  'F-03 · SQL-injectie in het loginformulier':
+      'F-03 · SQL-injektion i inloggningsformuläret',
+  'https://app.voorbeeld/login': 'https://app.example/login',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Den lokala CVE-databasen (du startar hämtningen själv): OciDeck hämtar massdata via api.github.com och den utgåvefil som adressen pekar på.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

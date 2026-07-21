@@ -1783,6 +1783,43 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Presentatietitel': 'Prezentációcím',
+  'Sectienaam': 'Szakasz neve',
+  'Optionele toelichting': 'Opcionális magyarázat',
+  'Scope': 'Hatókör',
+  'Sinds de vorige rapportage': 'Az előző jelentés óta',
+  'Ons aanvalsoppervlak': 'A támadási felületünk',
+  'Webapplicaties': 'Webalkalmazások',
+  'Webapplicatie': 'Webalkalmazás',
+  'Wat we niet wisten te hebben': 'Amiről nem tudtuk, hogy megvan',
+  'Tekst onder de afbeeldingen': 'Szöveg a képek alatt',
+  'Titel boven de video': 'Cím a videó felett',
+  'Titel over de afbeelding': 'Cím a képen',
+  'Team Betalen': 'Fizetési csapat',
+  'betaalportaal-acc.example.nl': 'fizetesi-portal-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'pl. újratesztelés 2026-07-20, javítás telepítve',
+  'Titel (H1)': 'Cím (H1)',
+  'Subtitel (H2)': 'Alcím (H2)',
+  'Tussentitel (H1)': 'Szakaszcím (H1)',
+  'Ondertitel / toelichting': 'Alcím / magyarázat',
+  'Ondertitel (optioneel)': 'Alcím (opcionális)',
+  'Titel overlay (optioneel)': 'Címfelirat a képen (opcionális)',
+  'Tekst (links)': 'Szöveg (balra)',
+  'Bullets links': 'Felsorolás balra',
+  'Bullets rechts': 'Felsorolás jobbra',
+  'Titeltekstkleur': 'A címszöveg színe',
+  'Knippen': 'Vágás',
+  'Geen achtergrondafbeelding': 'Nincs háttérkép',
+  'Bijv. 1.0': 'Pl. 1.0',
+  'Datum': 'Dátum',
+  'Komma-gescheiden, bijv. OWASP WSTG@4.2':
+      'Vesszővel elválasztva, pl. OWASP WSTG@4.2',
+  'Titel van de presentatie': 'A prezentáció címe',
+  'F-03 · SQL-injectie in het loginformulier':
+      'F-03 · SQL-injektálás a bejelentkezési űrlapon',
+  'https://app.voorbeeld/login': 'https://app.example/login',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  A helyi CVE-adatbázis (a letöltést Ön indítja): az OciDeck a tömeges adatokat az api.github.com címen és az arra mutató kiadási fájlon keresztül tölti le.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

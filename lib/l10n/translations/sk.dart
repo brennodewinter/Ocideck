@@ -1786,6 +1786,43 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Presentatietitel': 'Názov prezentácie',
+  'Sectienaam': 'Názov sekcie',
+  'Optionele toelichting': 'Voliteľné vysvetlenie',
+  'Scope': 'Rozsah',
+  'Sinds de vorige rapportage': 'Od minulej správy',
+  'Ons aanvalsoppervlak': 'Naša útočná plocha',
+  'Webapplicaties': 'Webové aplikácie',
+  'Webapplicatie': 'Webová aplikácia',
+  'Wat we niet wisten te hebben': 'Čo sme nevedeli, že máme',
+  'Tekst onder de afbeeldingen': 'Text pod obrázkami',
+  'Titel boven de video': 'Názov nad videom',
+  'Titel over de afbeelding': 'Názov cez obrázok',
+  'Team Betalen': 'Tím Platby',
+  'betaalportaal-acc.example.nl': 'platobny-portal-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'napr. opakovaný test 2026-07-20, oprava nasadená',
+  'Titel (H1)': 'Názov (H1)',
+  'Subtitel (H2)': 'Podnadpis (H2)',
+  'Tussentitel (H1)': 'Nadpis sekcie (H1)',
+  'Ondertitel / toelichting': 'Podnadpis / vysvetlenie',
+  'Ondertitel (optioneel)': 'Podnadpis (voliteľné)',
+  'Titel overlay (optioneel)': 'Názov cez obrázok (voliteľné)',
+  'Tekst (links)': 'Text (vľavo)',
+  'Bullets links': 'Odrážky vľavo',
+  'Bullets rechts': 'Odrážky vpravo',
+  'Titeltekstkleur': 'Farba textu názvu',
+  'Knippen': 'Strih',
+  'Geen achtergrondafbeelding': 'Bez obrázka na pozadí',
+  'Bijv. 1.0': 'Napr. 1.0',
+  'Datum': 'Dátum',
+  'Komma-gescheiden, bijv. OWASP WSTG@4.2':
+      'Oddelené čiarkou, napr. OWASP WSTG@4.2',
+  'Titel van de presentatie': 'Názov prezentácie',
+  'F-03 · SQL-injectie in het loginformulier':
+      'F-03 · SQL injection v prihlasovacom formulári',
+  'https://app.voorbeeld/login': 'https://app.example/login',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  Lokálna databáza CVE (sťahovanie spúšťate sami): OciDeck načítava hromadné údaje cez api.github.com a súbor vydania, na ktorý táto adresa odkazuje.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':

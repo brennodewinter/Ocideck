@@ -918,6 +918,43 @@ const _dutchSourceEn = {
 };
 
 const _dutchSourceAddEn = {
+  'Presentatietitel': 'Presentation title',
+  'Sectienaam': 'Section name',
+  'Optionele toelichting': 'Optional explanation',
+  'Scope': 'Scope',
+  'Sinds de vorige rapportage': 'Since the previous report',
+  'Ons aanvalsoppervlak': 'Our attack surface',
+  'Webapplicaties': 'Web applications',
+  'Webapplicatie': 'Web application',
+  'Wat we niet wisten te hebben': 'What we did not know we had',
+  'Tekst onder de afbeeldingen': 'Text below the images',
+  'Titel boven de video': 'Title above the video',
+  'Titel over de afbeelding': 'Title over the image',
+  'Team Betalen': 'Payments team',
+  'betaalportaal-acc.example.nl': 'payment-portal-acc.example.com',
+  'https://app.voorbeeld': 'https://app.example',
+  'bijv. hertest 2026-07-20, patch toegepast':
+      'e.g. retest 2026-07-20, patch applied',
+  'Titel (H1)': 'Title (H1)',
+  'Subtitel (H2)': 'Subtitle (H2)',
+  'Tussentitel (H1)': 'Section heading (H1)',
+  'Ondertitel / toelichting': 'Subtitle / explanation',
+  'Ondertitel (optioneel)': 'Subtitle (optional)',
+  'Titel overlay (optioneel)': 'Title overlay (optional)',
+  'Tekst (links)': 'Text (left)',
+  'Bullets links': 'Bullets left',
+  'Bullets rechts': 'Bullets right',
+  'Titeltekstkleur': 'Title text colour',
+  'Knippen': 'Trimming',
+  'Geen achtergrondafbeelding': 'No background image',
+  'Bijv. 1.0': 'E.g. 1.0',
+  'Datum': 'Date',
+  'Komma-gescheiden, bijv. OWASP WSTG@4.2':
+      'Comma-separated, e.g. OWASP WSTG@4.2',
+  'Titel van de presentatie': 'Title of the presentation',
+  'F-03 · SQL-injectie in het loginformulier':
+      'F-03 · SQL injection in the login form',
+  'https://app.voorbeeld/login': 'https://app.example/login',
   '•  De lokale CVE-database (je start de download zelf): OciDeck haalt de bulkgegevens op via api.github.com en het releasebestand waar dat adres naar wijst.':
       '•  The local CVE database (you start the download yourself): OciDeck fetches the bulk data via api.github.com and the release file that address points to.',
   '•  CVE opzoeken (staat standaard uit): staat het aan, dan gaat je zoekterm naar de ingestelde CVE-spiegel en, als die niets vindt, naar de Europese database van ENISA en naar MITRE.':
