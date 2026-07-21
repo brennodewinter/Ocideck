@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import '../models/deck.dart';
 import '../models/markdown_validation.dart';
+import 'front_matter_merge.dart';
 import 'markdown_service.dart';
 import '../utils/log.dart';
 
@@ -163,13 +164,13 @@ class MarkdownValidator {
             ),
           );
         }
-      } else if (!_knownFrontMatterKeys.contains(key)) {
+      } else if (!kOwnedFrontMatterKeys.contains(key)) {
         issues.add(
           MarkdownValidationIssue(
             line: i + 1,
             severity: MarkdownValidationSeverity.warning,
             message:
-                'Onbekende front-matter sleutel "$key" wordt genegeerd (typefout of niet-ondersteunde MARP-optie).',
+                'Onbekende front-matter sleutel "$key" doet niets in OciDeck (typefout of niet-ondersteunde MARP-optie), maar blijft bij opslaan behouden.',
           ),
         );
       }
