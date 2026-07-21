@@ -55,12 +55,14 @@ const Set<String> geplandeRegels = {
 
   // Bulk: `bulk.quasi_combo` is gebouwd, k-anonimiteit nog niet.
   'bulk.k_anonymity',
-
-  // Krijgt bewust nooit een eigen regel: Slowakije deelt het rodné číslo met
-  // Tsjechië, dus `cz.rodne_cislo` dekt het al. Een tweede id zou hetzelfde
-  // nummer dubbel melden. Staat hier zodat de tabelrij mag blijven bestaan.
-  'sk.rodne_cislo',
 };
+
+// Hier stonden `sk.rodne_cislo` en `lt.ak` als "krijgt bewust nooit een eigen
+// regel, staat hier zodat de tabelrij mag blijven bestaan". Die tabelrijen
+// bestaan niet meer: `sharedRegionRules` maakt van `cz.rodne_cislo` en
+// `ee.isikukood` regels die onder twéé landcodes vallen, en dát is nu wat er in
+// OCIWACHT §3-A staat. Een uitzondering die niets meer uitzondert hoort weg —
+// anders leest een volgende lezer hem als bewijs dat er nog iets open staat.
 
 /// Wat een bestandsnaam is en geen regel-id.
 const Set<String> _bestandsextensies = {'dart', 'md', 'json', 'yaml', 'yml'};

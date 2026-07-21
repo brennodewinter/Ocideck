@@ -1069,9 +1069,17 @@ content destroys your trust in every other finding.
 ### Which countries it knows
 
 The check is not limited to Europe. It knows the national identification numbers
-of the EU-27, the EEA, Switzerland and the UK, and beyond that the United States,
-Canada, Australia, India, Brazil, South Africa, Curaçao and Aruba. **All of them
-are on by default.**
+of most of the EU, the EEA, Switzerland and the UK, and beyond that the United
+States, Canada, Australia, India, Brazil, South Africa, Curaçao and Aruba. **All
+of them are on by default.**
+
+"Most of" is deliberate. Cyprus, Luxembourg, Latvia, Malta, Iceland and
+Liechtenstein have no rule yet, so they are **not** in the list — a country pack
+you can switch on that then finds nothing is worse than no pack at all, because
+it turns "nobody looked" into "nothing found". They come back the day their rule
+exists. Lithuania and Slovakia *are* covered: their national numbers share a
+format and a checksum with the Estonian and Czech ones, so one rule serves both
+countries rather than reporting the same number twice.
 
 That last part is a deliberate decision rather than a convenience. Turning a
 country pack on costs almost nothing in noise, because every rule carries either

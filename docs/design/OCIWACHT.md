@@ -10,7 +10,7 @@ accepteren, waarschuwen met een shield-badge, of redigeren op scherm en in expor
 | §6 De projectiegrens (`AudienceDeck`, afgedwongen door de conventiecheck) | **geleverd** |
 | §6.4 Handmatige redactie `[[…]]` | **geleverd** |
 | §3 Scanner: checksums, nepwaardelijst, contextpoorten | **geleverd** |
-| §3-A NL + vijftien Europese landpakketten (BE/DE/FR/ES/PT/PL/IT/HR/BG/RO/SE/FI/EE/GB) | **geleverd** |
+| §3-A NL + veertien Europese landpakketten (BE/DE/FR/ES/PT/PL/IT/HR/BG/RO/SE/FI/EE/GB) | **geleverd** |
 | §3-C/D Financieel en contact (IBAN, e-mail) | **geleverd** |
 | §3-F Secrets-familie (leverancierstokens, PEM, JWT, connection strings, wachtwoorden) | **geleverd** |
 | §3-G Bijzondere categorieën + co-occurrence-escalator | **geleverd** |
@@ -50,6 +50,7 @@ accepteren, waarschuwen met een shield-badge, of redigeren op scherm en in expor
 | §15.7 fase 8d AU/IN/BR/ZA + Curaçao en Aruba | **geleverd** |
 | §15.6 alle wereldpakketten standaard aan | **geleverd** |
 | §15.8 Labeldekkingstest over de regeltabellen | **geleverd** |
+| §5.7/§7 Elk aan te zetten pakket heeft ook een regel (`privacy_region_coverage_test`) | **geleverd** |
 
 De genomen beslissingen staan in §11; die zijn niet meer open.
 
@@ -141,7 +142,7 @@ groeit de regelset zonder de compile te breken.
 | `lib/services/privacy/privacy_phone_rules.dart` | Telefoon: E.164, nationale vorm, contextwoorden, toegekende landnummers, gereserveerde reeksen |
 | `lib/models/privacy_lexicon.dart` | `PrivacyLexiconEntry`, `PrivacyTermMatch` (word/prefix/compound), `PrivacyLexiconRole`, `kMinCompoundLength` |
 | `lib/services/privacy/privacy_plate_rules.dart` | Kenteken (sidecodes 1-14, verplicht contextwoord) en buitenlandse postcodes per land |
-| `lib/services/privacy/privacy_regions.dart` | Landpakketten: welke regio's aan staan, en welke regels daaraan hangen |
+| `lib/services/privacy/privacy_regions.dart` | Landpakketten: welke regio's aan staan, en welke regels daaraan hangen. Draagt ook `sharedRegionRules` (één regel onder twee landcodes) en de complete lijst landcodes waartegen `privacyRuleRegion` toetst |
 | `lib/services/privacy/privacy_context_role.dart` | ConText: rolherkenning (verdachte/aangever/getuige) met terminatiewoorden en drieweg-uitkomst |
 | `lib/services/privacy/privacy_lexicon_data.dart` | Het gebundelde art. 9/10-lexicon: term, categorie, taal, matchmodus, gewicht, rol |
 | `lib/services/privacy/privacy_card_rules.dart` | Creditcards: IIN-bereiken per schema, Luhn, CVV-patroon |
@@ -149,7 +150,7 @@ groeit de regelset zonder de compile te breken.
 | `lib/services/privacy/privacy_location_rules.dart` | Geboortedatum en coördinaten: datumvormen, contextwoorden, lat/lon, `geo:`-URI, plus-code, what3words |
 | `lib/services/privacy/privacy_scanner_detectors.dart` | `part of` de scanner: de detectoren voor MRZ, digitaal, geboortedatum en geo — puur om het hoofdbestand onder de 1000-regelgrens te houden |
 | `lib/services/privacy/privacy_document_rules.dart` | Reisdocumenten: de machine-readable zone (TD1/TD2/TD3) met de ICAO 9303-controlecijfers |
-| `lib/services/privacy/privacy_eu_rules.dart` | Europese landpakketten: BE/BG/DE/EE/ES/FI/FR/HR/IT/PL/PT/RO/SE + UK (NHS/NINO) |
+| `lib/services/privacy/privacy_eu_rules.dart` | De Europese identificatienummers, plus de zes Nederlandse naast het BSN: AT/BE/BG/CH/CZ/DE/DK/EE/ES/FI/FR/GR/HR/HU/IE/IT/NL/NO/PL/PT/RO/SE/SI + UK (NHS/NINO). LT en SK hebben geen eigen regel maar delen er één, zie `sharedRegionRules` |
 | `lib/services/privacy/privacy_checksums.dart`, `privacy_checksums_eu.dart` | 11-proef, mod-97, Luhn, ISO 7064, geboortedatum-validatie, enz. |
 | `lib/services/privacy/privacy_secret_rules.dart` | Leverancierstokens, PEM, JWT, connection strings, wachtwoorden |
 | `lib/services/privacy/privacy_special_rules.dart` | Art. 9/10-trefwoorden, genetische notatie, parketnummer, `statementSpan`, `identifiesAPerson` |
@@ -193,6 +194,8 @@ niets extra.
 Kolom **Zekerheid**: `zeker` = checksum- of structureel gevalideerd, praktisch geen FP's ·
 `waarschijnlijk` = sterk formaat zonder checksum · `mogelijk` = context-/woordgedreven.
 Kolom **Std.**: staat de regel standaard aan (✓), aan binnen het regiopakket (◐), of uit (○).
+Een streepje (—) betekent: ontworpen maar niet gebouwd — er is geen regel met dit id, en er
+is dus ook geen landpakket dat hem aanzet.
 
 ### A. Nationale identificatienummers — met checksum
 
@@ -209,7 +212,7 @@ nul. Waar géén checksum bestaat (US SSN, V-nummer), is een contextwoord verpli
 | `nl.agb` | AGB-code | 8 cijfers, contextwoord `agb` | mogelijk | ◐ |
 | `be.rijksregister` | Rijksregisternummer | mod-97 over de eerste 9 cijfers (met `2`-prefix voor geboorten ≥ 2000); bevat geboortedatum en geslacht | zeker | ◐ |
 | `de.steuer_id` | Steuerliche Identifikationsnummer | 11 cijfers, ISO 7064 MOD 11,10 + de cijferherhalingsregel (precies één cijfer komt 2-3× voor, één cijfer ontbreekt) | zeker | ◐ |
-| `de.svnr` | Sozialversicherungsnummer | gewogen mod-10, bevat geboortedatum | zeker | ◐ |
+| `de.svnr` | Sozialversicherungsnummer | gewogen mod-10, bevat geboortedatum | zeker | — |
 | `fr.nir` | Numéro INSEE / sécurité sociale | 13 cijfers + 2 controlecijfers = 97 − (n mod 97). Bevat geslacht, geboortejaar/-maand, departement → is zelf al bijna een bijzonder gegeven | zeker | ◐ |
 | `es.dni` / `es.nie` | DNI / NIE | 8 cijfers mod 23 → letter uit `TRWAGMYFPDXBNJZSQVHLCKE`; NIE: X/Y/Z → 0/1/2 | zeker | ◐ |
 | `pt.nif` | Número de identificação fiscal | 9 cijfers, gewogen mod 11 | zeker | ◐ |
@@ -222,15 +225,16 @@ nul. Waar géén checksum bestaat (US SSN, V-nummer), is een contextwoord verpli
 | `gr.amka` | ΑΜΚΑ | Luhn, eerste 6 = geboortedatum | zeker | ◐ |
 | `ie.pps` | PPS Number | mod-23 controleletter | zeker | ◐ |
 | `hr.oib` | OIB | ISO 7064 MOD 11,10 | zeker | ◐ |
-| `cz.rodne_cislo` / `sk.rodne_cislo` | Rodné číslo | mod 11 (na 1954), geboortedatum + geslacht | zeker | ◐ |
+| `cz.rodne_cislo` | Rodné číslo — één id, twee landen: de regel draait ook onder het `sk`-pakket (`sharedRegionRules`) | mod 11 (na 1954), geboortedatum + geslacht | zeker | ◐ |
 | `hu.taj` | TAJ-szám | gewogen mod 10 | zeker | ◐ |
 | `bg.egn` | ЕГН | gewichten 2-4-8-5-10-9-7-3-6, mod 11 | zeker | ◐ |
 | `ro.cnp` | CNP | sleutel `279146358279`, mod 11 | zeker | ◐ |
 | `si.emso` | EMŠO | mod 11 | zeker | ◐ |
-| `ee.isikukood` / `lv.pk` / `lt.ak` | Baltische persoonscodes | mod-11 dubbele pas | zeker | ◐ |
+| `ee.isikukood` | Estse isikukood — en het Litouwse asmens kodas, dat dezelfde vorm en dezelfde dubbele mod-11 heeft; één regel dekt beide (`sharedRegionRules`) | mod-11 dubbele pas | zeker | ◐ |
+| `lv.pk` | Letse personas kods | mod-11 | zeker | — |
 | `at.svnr` | Sozialversicherungsnummer | gewichten 3-7-9-5-8-4-2-1-6, mod 11 | zeker | ◐ |
 | `ch.ahv` | AHV-Nummer | `756.xxxx.xxxx.xx`, EAN-13-controlecijfer | zeker | ◐ |
-| `mt.id` / `cy.id` / `lu.matricule` | Maltese/Cypriotische/Luxemburgse ID | formaat + context | mogelijk | ◐ |
+| `mt.id` / `cy.id` / `lu.matricule` | Maltese/Cypriotische/Luxemburgse ID | formaat + context | mogelijk | — |
 | `uk.nino` | National Insurance Number | formaat `QQ123456A` + uitgesloten prefixen (BG, GB, NK, KN, TN, NT, ZZ), geen D/F/I/Q/U/V als eerste letter, geen O als tweede | waarschijnlijk | ◐ |
 | `uk.nhs` | NHS-nummer | mod-11 (gewichten 10…2), rest 10 = ongeldig | zeker | ◐ |
 | `us.ssn` | Social Security Number | géén checksum. Area ≠ 000/666/900-999, groep ≠ 00, serie ≠ 0000. **Contextwoord verplicht** (`ssn`, `social security`), anders veel te veel FP's op datums en ordernummers | waarschijnlijk | ◐ |
@@ -243,6 +247,21 @@ nul. Waar géén checksum bestaat (US SSN, V-nummer), is een contextwoord verpli
 | `au.tfn` | Tax File Number | gewogen mod 11 over 9 cijfers → contextpoort verplicht, zelfde reden als `ca.sin` (§15.4) | waarschijnlijk | ◐ |
 | `au.medicare` | Medicare-nummer | gewogen checksum | zeker | ◐ |
 | `cw.sedula` / `aw.persoonsnummer` | Curaçao / Aruba | formaat + contextwoord; geen gedocumenteerde checksum, dus bewust nooit `zeker` | mogelijk | ◐ |
+
+> **Vijf rijen droegen een ◐ zonder regel** (*gecorrigeerd 2026-07-21*). De
+> kolomlegenda staat in de tegenwoordige tijd — "staat de regel standaard aan" —
+> en dus las een ◐ als: dit werkt zodra je het pakket aan hebt. Voor `de.svnr`,
+> `lv.pk`, `mt.id`, `cy.id` en `lu.matricule` was dat niet zo; die id's komen in
+> `lib/` niet voor. Ze staan er nog als voornemen, nu met een streepje. Vier van
+> de vijf betroffen landen waarvoor géén andere regel bestond, en dat is precies
+> de reden dat CY, LU, LV en MT (met IS en LI) uit `defaultPrivacyRegions` zijn
+> gehaald — zie de noot bij §7.
+>
+> Twee rijen zijn de andere kant op gecorrigeerd. `sk.rodne_cislo` en `lt.ak`
+> stonden er als eigen id naast hun buur; dat zijn ze niet en zullen ze niet
+> worden, want dan meldt hetzelfde nummer zich twee keer bij wie beide pakketten
+> aan heeft. Ze zijn nu wat ze in de code zijn: één regel die onder twee
+> landcodes valt, via `sharedRegionRules`.
 
 > **Gebouwd (2026-07-20): de zes Nederlandse nummers naast het BSN.** Twee
 > regels in de tabel hierboven klopten niet, en allebei op een manier die pas bij
@@ -309,13 +328,21 @@ nul. Waar géén checksum bestaat (US SSN, V-nummer), is een contextwoord verpli
 >
 > `sk.rodne_cislo` heeft geen eigen regel: Slowakije deelt het nummer met
 > Tsjechië — het stamt uit Tsjecho-Slowakije — en een tweede id zou hetzelfde
-> nummer dubbel melden.
+> nummer dubbel melden. *Aangevuld 2026-07-21:* dat klopte, maar het had een
+> gevolg dat hier niet stond. Het `sk`-pakket zette daarmee niets aan, want de
+> poort vergeleek alleen het prefix van het regel-id met de aangevinkte landen.
+> Sinds `sharedRegionRules` leest de poort óók wie een regel deelt, en vindt het
+> Slowaakse pakket het rodné číslo. Dezelfde constructie draagt het Litouwse
+> asmens kodas onder `ee.isikukood`.
 
-> **Ontwerpnotitie.** De regiopakketten worden standaard geactiveerd op basis van de
-> app-taal, plus altijd het pakket van de gebruiker zelf. Een Nederlandse gebruiker draait
-> `nl` + universeel; wie in een internationale context werkt, vinkt extra pakketten aan, of
-> kiest "alle landen" en accepteert de hogere FP-ruis. Dit is de belangrijkste knop tegen
-> internationale ruis.
+> **Ontwerpnotitie, achterhaald** (*vastgesteld 2026-07-21*). Hier stond dat de
+> regiopakketten geactiveerd worden op basis van de app-taal, plus altijd het
+> pakket van de gebruiker zelf, en dat "alle landen" een keuze is die je met
+> extra FP-ruis betaalt. Zo is het niet gebouwd en zo is het ook niet meer
+> bedoeld: §7 besluit 4 zette alle pakketten waarvoor een regel bestaat standaard
+> aan, en de FP-strategie draagt dat omdat vrijwel elke regel een checksum of een
+> contextpoort heeft. De notitie blijft staan als vastlegging van de eerdere
+> gedachte, niet als beschrijving van het gedrag.
 
 ### B. Reis- en identiteitsdocumenten
 
@@ -850,9 +877,15 @@ met alleen het parketnummer weg laat nog steeds zien dát zij verdachte is — e
 art. 10-gegeven; het nummer is er hooguit het bewijs van.
 
 ### 5.7 Regiopakketten
-Standaard draaien alleen de universele regels plus het landpakket van de app-taal (en het
-door de gebruiker gekozen thuisland). Alle 40 landen tegelijk aanzetten is mogelijk, maar
-kost FP-precisie — en dat staat er ook bij in de instellingen, in gewone taal.
+Elk pakket staat standaard aan, en dat kán omdat de FP-strategie op checksums en
+contextpoorten leunt: een pakket erbij kost vrijwel geen precisie. De redenering staat
+voluit in §7 en het besluit in §11.4.
+
+*Gecorrigeerd 2026-07-21.* Hier stond dat standaard alleen de universele regels draaien plus
+het landpakket van de app-taal, en dat "alle 40 landen" een keuze met extra ruis is. Dat is
+het oude voorstel; §7 heeft het vervangen en de code volgt §7. Het getal klopte evenmin: er
+zijn 34 pakketten (26 Europese en 8 daarbuiten), en dat aantal is gelijk aan het aantal
+landen waarvoor werkelijk een regel bestaat — zie de noot bij §7.
 
 ### 5.8 Codeblokken krijgen een ander profiel
 In een codeblok zijn secrets zéér relevant, maar telefoonnummers, postcodes en namen bijna
@@ -946,12 +979,12 @@ gemarkeerd. Elk kanaal krijgt een eigen test.
 | Semantics / schermlezer | Flutter-semantics van de preview-widgets | Volgt automatisch: de widget krijgt de tekens niet |
 | Tekstselectie in een leesoppervlak | `SelectionArea` in `document_reader_screen.dart` | Volgt automatisch |
 | **AI-verzoeken (tekst)** | `ai_client_service.dart`, `finding_ai_service.dart`, `management_summary.dart` | **Strengere projectie**, zie §6.2 |
-| **AI-verzoeken (beeld)** | `image_alt_ai_service.dart` | **Geen projectie** — de afbeeldingsbytes gaan ongewijzigd naar het model; alleen de consent-poort staat ertussen, zie §6.2 |
+| **AI-verzoeken (beeld)** | `image_alt_ai_service.dart` | **Geen projectie** — de afbeeldingsbytes gaan ongewijzigd naar het model. Wat ertussen staat is de consent-poort plus een bevestiging per beeld die de bestemming noemt (`ai_image_outbound_dialog.dart`), zie §6.2 |
 | Auditdossier | `audit_dossier.dart` | AudienceDeck, tenzij het dossier bewust de bron vastlegt (dan expliciet als zodanig gemarkeerd) |
 | Klembord (repetitie-samenvatting) | `rehearsal_summary.dart:55` | AudienceDeck |
 | Klembord (markdown-editor) | `markdown_deck_editor.dart:666` | **Bron-kanaal** — dit ís de markdown, per ontwerp ongeredigeerd |
 | Opslaan / WebDAV / Nextcloud | `file_service.dart`, `webdav_service.dart` | **Bron-kanaal** — de `.md` blijft integraal, dat was de eis |
-| Logging | `lib/utils/log.dart` | Veldinhoud wordt nooit gelogd; bevindingen loggen alleen regel-id + slide-index, nooit de waarde |
+| Logging | `lib/utils/log.dart` | Veldinhoud wordt nooit gelogd; bevindingen loggen alleen regel-id + slide-index, nooit de waarde. Bewaakt door `log_no_content_test.dart` — zie de noot onder deze tabel |
 
 > **De editor-preview is nog geen ontvangend oppervlak** (*gecorrigeerd
 > 2026-07-21*). De eerste rij zei "AudienceDeck", en §6 staat in de statustabel
@@ -963,6 +996,34 @@ gemarkeerd. Elk kanaal krijgt een eigen test.
 > het klembord van de slidelijst en het auditdossier. De grens klopt dus voor
 > iedereen behalve de auteur aan zijn eigen scherm — wat verdedigbaar is, maar
 > niet is wat hier stond.
+
+> **De logregel was er één keer doorheen geglipt** (*hersteld 2026-07-21*). De
+> laatste rij belooft dat veldinhoud nooit gelogd wordt, en de kop van `log.dart`
+> zegt hetzelfde. `file_service_open.dart` schreef desondanks tot vijf werkelijke
+> celwaarden uit een grafiekbestand in een waarschuwing. Een grafiekbestand
+> draagt een omzet per klant of een uitslag per persoon, en juist de cel die géén
+> getal is, is vaak de tekstkolom ernaast — een naam dus. De melding noemt nu
+> alleen het aantal. `log_no_content_test.dart` scant `lib/` op de vórmen waarmee
+> inhoud in een melding belandt (een verzameling die wordt samengevoegd,
+> afgekapt of uitgesneden); een losse variabele die toevallig celinhoud draagt
+> ziet die test niet, en dat is een eerlijke grens van wat een tekstscan kan.
+
+> **De deckvelden in de rij "Documentmetadata" waren er vijf van elf**
+> (*hersteld 2026-07-21*). De rij noemt titel, onderwerp en keywords, en dat is
+> wat `export_metadata.dart` in de documenteigenschappen zet. De projectie doet
+> echter meer dan die drie: ze redigeert alle deckvelden die de scanner leest,
+> en daar ontbraken er zes — `version`, `date`, `standardsUsed`, `toolsUsed`,
+> `miauwWaivers` en `miauwConfirmations`. Die werden wél gescand, dus de
+> exportpoort meldde een bevinding die de gebruiker met *redigeren* niet kón
+> oplossen: een doodlopende weg, en de waarde reisde alsnog mee. De twee
+> MIAUW-motiveringen wegen daarin het zwaarst — die gaan base64-gecodeerd de
+> front matter in, waar geen enkel vangnet dat op platte tekst zoekt ze leest, en
+> ze beginnen niet zelden met "op verzoek van".
+>
+> Op de slidekant gold hetzelfde voor `checklistScope`, dat zichtbaar op de dia
+> staat en toch nooit werd weggelakt. `privacy_scan_redact_parity_test.dart` legt
+> de drie handmatige veldenlijsten (scanner, projectie, manifest) nu naast elkaar,
+> zodat het volgende veld niet opnieuw door dat gat valt.
 
 ### 6.2 Het publiek is niet hetzelfde als een derde partij
 
@@ -991,6 +1052,24 @@ Daarom twee projecties:
 > endpoint vraagt om expliciete toestemming. Dat is een andere waarborg dan een
 > projectie, en de tabel in §6.1 hoort dat verschil te tonen in plaats van beide
 > "Strengere projectie" te noemen.
+
+> **Wat er sindsdien wél tussen staat** (*aangevuld 2026-07-21*). Een projectie
+> op pixels blijft onmogelijk, dus de waarborg is een andere: `confirmAiImageOutbound`
+> (`lib/widgets/dialogs/ai_image_outbound_dialog.dart`) vraagt vóór élk uitgaand
+> beeld om bevestiging, noemt de bestemming bij naam (de werkelijke URL bij een
+> cloud-backend, niet "de cloud"), zegt uitdrukkelijk dat OciDeck in een
+> afbeelding níéts weglakt — gezichten, tekst op een schermafdruk, gegevens in
+> beeld gaan mee — en meldt de gezichten die `image_face_scan.dart` hier vindt.
+>
+> Nul gezichten laat die regel wég in plaats van "geen gezichten gevonden" te
+> beweren: op web, met de controle uit of bij een onleesbaar bestand betekent nul
+> "hier is niet gekeken", en die twee mogen nooit hetzelfde lezen (§1.2).
+>
+> Het losse alt-tekstveld had die vraag niet; daar stuurde één klik de hele
+> afbeelding naar een derde partij zonder dat er ergens stond dat dat gebeurde.
+> De bulkactie in de afbeeldingenbibliotheek gebruikt nu dezelfde dialoog, maar
+> zonder gezichtstelling: de hele bibliotheek decoderen vóór de vraag zou de
+> gebruiker minuten op een dialoog laten wachten.
 
 ### 6.3 De vervanging zelf
 
@@ -1097,12 +1176,25 @@ hem expliciet vermijden.
 
 Het geredigeerde artefact bevat:
 
-- de blokken zelf, met een stabiele referentie: `[GEREDIGEERD #a3f1]` — zodat een verificateur
-  kan zeggen "ik betwist redactie a3f1" (staande praktijk in juridische redactie);
-- een **redactiemanifest**: per redactie `id`, `commitment`, `regel-id`, `slide-index`, `reden`;
+- de blokken zelf: acht keer U+2588, ongeacht de lengte van het origineel (§6.3);
+- een **redactiemanifest**: per redactie `id`, `commitment`, `rule`, `slide`, `field` — en een
+  stabiele referentie in dat `id` (`a3f1`), zodat een verificateur kan zeggen "ik betwist
+  redactie a3f1" (staande praktijk in juridische redactie);
 - de hash van de gezegelde bron (`derived_from`), zodat de herkomst vaststaat.
 
 De salts en de klaartekst zitten **alleen** in de volledige versie.
+
+> **Twee correcties op de opsomming hierboven** (*2026-07-21*). Er stond dat het
+> blok zélf de referentie draagt: `[GEREDIGEERD #a3f1]`. Dat is nooit zo gebouwd
+> en het is ook niet wenselijk — een id per blok maakt van elke redactie een
+> aparte, telbare gebeurtenis op de dia zelf, en dat is precies de
+> lengte-informatie die §6.3 weigert prijs te geven. Het id leeft in het manifest;
+> de ontvanger legt het naast het document.
+>
+> En het vijfde veld heet geen `reden`. Zo'n veld bestaat niet en zou er ook niet
+> horen: een reden is vrije tekst van de auteur en zou over de weggelakte waarde
+> kunnen gaan. Wat er staat is `field` — in welk veld van welke dia de redactie
+> viel. Zie `RedactionEntry.toJson`.
 
 **Wat een derde partij daarmee kan:**
 
@@ -1114,8 +1206,32 @@ De salts en de klaartekst zitten **alleen** in de volledige versie.
    zonder één van de andere redacties prijs te geven. Dat is precies wat een verificatieproces
    nodig heeft: een derde partij die één bevinding wil controleren, hoeft daarvoor niet het hele
    rapport ongeredigeerd te krijgen.
-3. **Geen stille wijziging van het manifest** — de hash van het redactiemanifest valt onder het
-   zegel, dus achteraf een redactie toevoegen of weglaten is zichtbaar.
+3. **Geen stille wijziging van het manifest** — wie de bron heeft, kan het manifest niet
+   ongemerkt bijstellen: `verifyAgainstSource` bouwt de lijst redacties opnieuw uit de bron en
+   legt hem entry voor entry naast het manifest. Een toegevoegde of weggelaten redactie valt
+   daarmee allebei op.
+
+> **Hoe punt 3 werkt, precies** (*gecorrigeerd 2026-07-21*). Hier stond dat "de
+> hash van het redactiemanifest onder het zegel valt". Dat kan niet en gebeurt
+> niet: het zegel ligt over de bron en het manifest wordt pas bij export gemaakt,
+> met verse willekeurige salts — het zou het zegel moeten wijzigen om erin te
+> passen. De relatie loopt de andere kant op. Het manifest draagt de zegelhash
+> van de bron in `derived_from`, en `DocumentIntegrity.verifyRedactedDerivative`
+> weigert een manifest waarvan die hash niet bij deze bron hoort. Wat een
+> weglating zichtbaar maakt is de hertelling in `verifyAgainstSource`, en die
+> heeft dus de bron nodig — zonder bron bewijst het manifest alleen wat het zegt
+> te bewijzen: dat een specifieke redactie een specifieke waarde verborg.
+
+**Het manifest telt wat er werkelijk is weggelakt, en niets anders.** Dat is één regel met twee
+kanten, en beide zijn een keer misgegaan. Een entry die geen blok in het document heeft, laat
+de ontvanger zoeken naar een redactie die er niet is; een blok zonder entry laat hem een
+redactie zien die hij nergens kan betwisten. De lijst komt daarom uit dezelfde poort als de
+projectie: alleen `isRedactable`-bevindingen (een losse aanwijzing als "diagnose" wordt niet
+weggelakt en hoort er dus niet in — §13.2) en alleen bevindingen met een niet-leeg bereik
+(`struct.notes_leak` meldt *dát* er iets in de notities staat en wijst met `[0,0)` nergens
+heen; het commitment zou over de lege string gaan en door iedereen na te spelen zijn). De
+deckbrede redacties staan er sinds 2026-07-21 óók in, vóór de dia's, in dezelfde volgorde
+waarin de projectie ze verwerkt — want de verificatie vergelijkt op positie.
 
 **`IntegrityStatus` krijgt een vierde waarde:** `redactedDerivative`. Een geredigeerd artefact
 kondigt zichzelf aan, en de verificatie loopt tegen het manifest in plaats van tegen de ruwe
@@ -1126,6 +1242,27 @@ rapport, de geredigeerde versie, het redactiemanifest, de bewijs-hashtabel
 (`evidence_hash_service.dart`) en het dossier dat uitlegt wélke versie dit is, hoeveel redacties
 er zijn en hoe je ze controleert. Dat laatste is geen bijzaak: een geredigeerd rapport zonder
 uitleg hoe het te verifiëren valt, is een rapport dat een auditor niet kan aannemen.
+
+> **De redactiekant van het auditpakket is niet gebouwd** (*vastgesteld
+> 2026-07-21*). `_exportAuditDossier` levert het verzegelde rapport, de assets,
+> het bewijs en `AUDIT_DOSSIER.md`; die index restateert de zegelgegevens, de
+> managementsamenvatting, het MIAUW-overzicht en de bewijs-hashtabel.
+> `audit_dossier.dart` noemt het woord redactie niet, dus de geredigeerde versie
+> en het manifest zitten er niet in en het aantal redacties staat er niet in. Het
+> manifest wordt wél geschreven, maar door de gewone exportweg (`ExportService`),
+> naast het exportbestand. De alinea hierboven blijft staan als voorstel — dit is
+> een ontwerpdocument — maar §6.6 staat bovenaan als *geleverd*, en dat sloeg op
+> het commitment-schema, niet op deze bundeling.
+
+**Twee bestanden, en de scheiding ertussen ís de beveiliging.** Naast de export komen
+`<naam>-redactions.json` (commitments zonder salts, mag met het rapport mee) en
+`<naam>-redaction-keys.json` (mét salts, blijft bij de bron). De namen zijn sinds 2026-07-21
+Engels; ze heetten `-redacties.json` en `-redacties-verificatiesleutels.json`, twee Nederlandse
+namen die op elkaar lijken terwijl ze precies tegengesteld behandeld moeten worden, in een app
+met 32 talen en ontvangers in evenzovele. Beide dragen bovenaan een `notice`-veld dat in één
+zin zegt wat het bestand is en of het mee mag, want een bestandsnaam overleeft geen hernoeming
+en geen zip — de eerste regel van de JSON wel. `ExportDialog` noemt beide bestanden bij naam
+vóór de export; tot dan schreef OciDeck de sleutel naast de deur zonder het te zeggen.
 
 **Nog een grens, eerlijk benoemd:** dit is een *commitment*-schema, geen redactable signature in
 de cryptografische zin. Het bewijst dat een geredigeerde versie een eerlijke afleiding is van een
@@ -1145,7 +1282,7 @@ Nieuwe sectie in het tabblad "Veiligheid" (`settings_dialog_security.dart`), wan
 | `privacyImageFaceDetection` | bool — afbeeldingen nakijken op gezichten | **aan** (grijs zolang de hoofdschakelaar uit staat) |
 | `privacyFamilies` | set van 8 familieschakelaars | alle aan |
 | `privacyDisabledRules` | set van regel-id's | leeg |
-| `privacyRegions` | set van landpakketten | **heel Europa** (EU-27 + EER + CH + UK) — **geleverd** |
+| `privacyRegions` | set van landpakketten | **alle 34 pakketten aan** — 26 Europese en 8 daarbuiten (§15.6); dat zijn precies de landen waarvoor een regel bestaat — **geleverd** |
 | `privacyStrictSeverity` | bool — behandel `zeker` als fout i.p.v. waarschuwing | uit — **geleverd** |
 | `privacyExportGate` | uit / waarschuwen / blokkeren | waarschuwen |
 | `privacyRedactionStyle` | blokken (`████`) / label (`[BSN]`) | blokken |
@@ -1165,14 +1302,41 @@ De hoofdschakelaar staat aan; alles is uit te zetten. Per regel uitzetten kan vi
 `privacyDisabledRules` (vanuit de melding zelf: "deze regel nooit meer melden") — dat is een
 veel bruikbaardere ontsnappingsklep dan 90 vinkjes in een dialoog.
 
-**Regiopakketten: heel Europa standaard aan.** Dat is verdedigbaar juist omdát de
-FP-strategie op checksums leunt: van de ~30 Europese nummers zijn er ruim twintig
-zelfvaliderend (mod-97, mod-11, ISO 7064, Luhn), en die kosten dus vrijwel geen precisie als je
-ze allemaal aanzet. De uitzonderingen zijn de handvol zonder bruikbare checksum — `dk.cpr`
-(sinds 2007 losgelaten), `uk.nino`, `mt.id` / `cy.id` / `lu.matricule` — en die zijn sowieso
-contextpoort-gebonden (§5.2). "Heel Europa" leest hier als EU-27 + EER (NO/IS/LI) + Zwitserland
-+ het VK: decks reizen, en een Nederlandse organisatie ziet Britse en Zwitserse gegevens
-routinematig. Wie het smaller wil, zet pakketten uit.
+**Regiopakketten: alles aan waarvoor een regel bestaat.** Dat is verdedigbaar juist omdát de
+FP-strategie op checksums leunt: de meeste Europese nummers zijn zelfvaliderend (mod-97,
+mod-11, ISO 7064, mod-23, Luhn), en die kosten vrijwel geen precisie als je ze allemaal
+aanzet. De uitzonderingen zijn de handvol zonder bruikbare checksum — `dk.cpr` (sinds 2007
+losgelaten), `uk.nino`, en de vijf Nederlandse nummers naast het btw-id — en die zijn sowieso
+contextpoort-gebonden (§5.2). Decks reizen, en een Nederlandse organisatie ziet Britse en
+Zwitserse gegevens routinematig. Wie het smaller wil, zet pakketten uit.
+
+> **Zes pakketten stonden aan en keken naar niets** (*hersteld 2026-07-21*).
+> Hier stond "heel Europa", gelezen als EU-27 + EER (NO/IS/LI) + Zwitserland + het
+> VK, en de zin hierboven noemde `mt.id`, `cy.id` en `lu.matricule` als regels die
+> je gerust aan kunt laten staan omdat ze contextpoort-gebonden zijn. Die drie
+> regels bestaan niet. CY, LU, LV, MT, IS en LI hadden samen nul regels en stonden
+> desondanks als vinkje in de instellingen, standaard aan.
+>
+> Dat is geen tekortkoming in de dekking maar een verkeerde bewering aan de
+> gebruiker. Wie CY aanvinkt en niets terugkrijgt, leest "niets gevonden" waar
+> "niemand keek" staat — precies wat `docs/PRIVACY.md` belooft niet te doen, en op
+> een vinkje dat de gebruiker zelf heeft aangezet weegt dat dubbel. De zes zijn
+> daarom uit `defaultPrivacyRegions`/`allPrivacyRegions` gehaald tot hun regel er
+> is; `privacy_region_coverage_test` bewaakt beide kanten van die afspraak, dus wie
+> `lv.pk` bouwt krijgt rood tot `lv` er weer in staat, en wie een land toevoegt
+> zonder regel net zo goed.
+>
+> Twee landen kwamen er juist bij zonder één regel te schrijven. `sharedRegionRules`
+> laat één regel onder meerdere landcodes vallen: `cz.rodne_cislo` draait ook onder
+> `sk` en `ee.isikukood` ook onder `lt`. Geen eigen id, want dan meldt hetzelfde
+> nummer zich twee keer bij wie beide pakketten aan heeft, en een scanner die dubbel
+> roept wordt uitgezet.
+>
+> `privacyRuleRegion` toetst tegen een aparte, complete lijst landcodes
+> (`_knownEuropeanCodes`) en niet tegen de pakketten. Dat lijkt omslachtig en is het
+> niet: zou `cy` daar ontbreken, dan leest een toekomstige `cy.id` als een regel
+> zónder land, en die draait dan altijd — buiten elk pakket om, ook bij wie Cyprus
+> bewust heeft uitgezet.
 
 **`privacyOwnIdentity` bewaart zelf persoonsgegevens.** De lijst met de eigen naam, het eigen
 e-mailadres en telefoonnummer komt in de lokale voorkeuren te staan. Dat is nieuw op dit
@@ -1234,6 +1398,9 @@ maar data-assets: ze worden nooit getoond, alleen gematcht.
 | `privacy_export_policy_test.dart` | De gate: uit / waarschuwen / blokkeren, en wat "afgehandeld" betekent |
 | `privacy_panel_test.dart` + golden | Shield-badge en redactiebalken renderen zoals bedoeld; badge wijkt correct voor logo en footer |
 | `privacy_performance_test.dart` | 100-slide deck < budget; memo doet zijn werk (tweede scan is gratis) |
+| `privacy_scan_redact_parity_test.dart` | De drie handmatige veldenlijsten (scanner, projectie, manifest) dekken elkaar: wat gescand wordt, wordt ook geredigeerd en gecommitteerd. Mediapaden zijn de benoemde uitzondering — die verdwijnen als verwijzing in plaats van als tekst |
+| `privacy_region_coverage_test.dart` | Elk pakket dat je kunt aanzetten heeft minstens één regel, en elke regel hangt aan een pakket dat je kunt aanzetten. Plus: een gedeelde regel (`sharedRegionRules`) vuurt onder élk land dat hem deelt en onder geen ander |
+| `log_no_content_test.dart` | Geen logmelding in `lib/` bouwt haar tekst op uit deck- of bestandsinhoud (samengevoegde, afgekapte of uitgesneden verzamelingen) |
 
 ---
 
@@ -1277,8 +1444,14 @@ Vastgesteld, niet meer open:
 3. **`zeker`-bevindingen zijn standaard een waarschuwing**, niet een fout, met
    `privacyStrictSeverity` voor gereguleerde omgevingen. Fout zou `qualityBlockExportOnErrors`
    onbedoeld scherp zetten voor bestaande gebruikers.
-4. **Heel Europa staat standaard aan** (EU-27 + EER + CH + UK). Verdedigbaar omdat het merendeel
-   van die nummers zelfvaliderend is; de handvol zonder checksum is contextpoort-gebonden. Zie §7.
+4. **Elk landpakket staat standaard aan.** Verdedigbaar omdat het merendeel van die nummers
+   zelfvaliderend is; de handvol zonder checksum is contextpoort-gebonden. Zie §7.
+
+   *Aangescherpt 2026-07-21.* Dit besluit luidde "heel Europa staat standaard aan (EU-27 +
+   EER + CH + UK)", en dat werd letterlijk uitgevoerd: ook zes landen waarvoor geen enkele
+   regel bestond. Aan staan zonder iets te kunnen vinden is geen ruime keuze maar een
+   onjuiste mededeling. Het besluit geldt dus onverkort voor elk land waarvoor een regel
+   bestaat, en een land komt erbij zodra zijn regel er is — niet eerder.
 5. **`accept` geldt niet voor AI-verzoeken.** De AI-diensten krijgen
    `PrivacyProjection.forExternalProcessing()`, die de dispositie negeert en alles verwijdert wat
    gedetecteerd is. Wil de gebruiker dat toch anders, dan is dat een aparte, expliciete
@@ -2250,7 +2423,13 @@ Richtsnoeren 8/2020 §8.1.2 en 3/2019 §62-76; AP-onderzoeken kinderopvangtoesla
 
 ## 15. Fase 8: de wereldpakketten, met de AVG als maatstaf
 
-### 15.1 Wat er nu werkelijk staat
+### 15.1 Wat er werkelijk stond, vóór fase 8
+
+> *Ingehaald 2026-07-21.* Deze paragraaf beschrijft de toestand waaruit fase 8
+> begon en staat in de tegenwoordige tijd; §15.7 laat zien dat 8a t/m 8d
+> geleverd zijn en dat de genoemde regels er dus zijn. Ze blijft staan omdat de
+> diagnose eronder — een leeg pakket is erger dan een afwezige knop — precies de
+> redenering is die in juli 2026 zes Europese pakketten uit de lijst haalde.
 
 `worldPrivacyRegions` (`privacy_regions.dart`) bevat `us, ca, au, in, br, za, cw,
 aw`, en die chips zijn aan te vinken in de instellingen. Daarachter hangt vrijwel
@@ -2374,6 +2553,10 @@ Praktisch: `us` en `ca` verhuizen naar `defaultPrivacyRegions` zodra hun regels 
 zijn (fase 8c), niet eerder. Daarmee gaan `us.postcode` en `ca.postcode` mee aan;
 dat is akkoord, want `us` staat al in `postcodeNeedsContext` en de Canadese
 `A1A 1A1` is structureel onderscheidend genoeg.
+
+Die laatste voorwaarde — *zodra hun regels er zijn, niet eerder* — stond hier
+alleen voor de wereldpakketten en gold sinds 2026-07-21 ook terugwerkend voor
+Europa, waar zes pakketten hem nooit hadden gehaald. Zie de noot bij §7.
 
 ### 15.7 Fasering
 

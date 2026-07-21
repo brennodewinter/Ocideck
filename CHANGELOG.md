@@ -32,6 +32,21 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 
   **Bestaande bestanden hoeft u nergens voor om te zetten.** Ze openen zoals ze
   zijn; bij de eerstvolgende keer opslaan staat alles in de nieuwe vorm.
+- **De twee begeleidende bestanden bij een geredigeerde export hebben andere
+  namen gekregen.** Ze heetten `<naam>-redacties.json` en
+  `<naam>-redacties-verificatiesleutels.json`; dat zijn twee Nederlandse namen
+  die op elkaar lijken, terwijl ze precies tegengesteld behandeld moeten worden
+  en bij ontvangers in elke taal terechtkomen. Ze heten nu
+  `<naam>-redactions.json` — die mag met het rapport mee — en
+  `<naam>-redaction-keys.json`, die bij de bron blijft omdat de sleutels erin
+  elke weggelakte waarde terugrekenbaar maken.
+
+  Beide bestanden zeggen bovendien in hun eigen inhoud wat ze zijn, in een
+  `notice`-veld bovenaan. Een bestandsnaam overleeft geen hernoeming en geen
+  zip; de eerste regel van de JSON wel. En het exportvenster noemt allebei de
+  bestanden vóórdat u exporteert, met de waarschuwing bij het sleutelbestand —
+  tot nu toe zette OciDeck dat bestand naast uw rapport neer zonder er iets over
+  te zeggen.
 - **De documentatie belooft niet langer meer dan de app doet.** Elf beoordelaars
   liepen de teksten na en vonden op een reeks plekken een belofte die ruimer was
   dan de code. Die zijn teruggebracht tot wat er werkelijk gebeurt, met de datum
@@ -86,6 +101,47 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   had gezet werd voor de helft ingeladen, en bij het eerstvolgende opslaan
   verdween de rest. Nu wordt zo'n bestand niet geladen én niet overschreven, dus
   het blijft heel tot u het opent met een versie die het begrijpt.
+- **Zes landpakketten stonden aan en keken naar niets.** Cyprus, Luxemburg,
+  Letland, Malta, IJsland en Liechtenstein stonden als vinkje in *Instellingen →
+  Beveiliging*, standaard aan, terwijl er voor die landen geen enkele regel
+  bestond. Wie ze zag staan mocht aannemen dat er naar Cypriotische of Maltese
+  nummers werd gekeken, en las "niets gevonden" waar in werkelijkheid niemand
+  had gekeken. Dat is het verkeerde soort geruststelling, en het is precies wat
+  `docs/PRIVACY.md` belooft niet te doen. De zes zijn daarom uit de lijst
+  gehaald tot hun regel er is.
+
+  Twee landen zijn juist wél gaan werken. Slowakije deelt het rodné číslo met
+  Tsjechië — het nummer stamt uit Tsjecho-Slowakije en heeft in beide landen
+  dezelfde vorm en dezelfde controle — en de Litouwse persoonscode heeft
+  dezelfde dubbele mod-11 als de Estse. Beide nummers worden nu herkend zodra u
+  het Slowaakse respectievelijk het Litouwse pakket aan hebt staan, zonder dat
+  wie beide buurlanden aan heeft dezelfde treffer twee keer krijgt.
+- **Zes velden uit de documentgegevens werden gemeld maar niet weggelakt.** De
+  controle keek al naar de versie, de datum, de gebruikte normen, de gebruikte
+  hulpmiddelen en de twee soorten MIAUW-motiveringen, maar het profiel
+  *geredigeerd* liet ze staan. U kreeg dus een melding die u met redigeren niet
+  kón oplossen, en de waarde ging alsnog mee in PDF, PPTX, HTML en het
+  publieksvenster. Juist de motiveringen zijn hier gevoelig: die reizen
+  gecodeerd mee in de kop van het bestand, waar geen enkele vluchtige controle
+  ze leest, en beginnen niet zelden met "op verzoek van".
+
+  Hetzelfde gold voor het scopeveld van een controlelijst-dia. Dat staat
+  zichtbaar op de dia en werd gescand, maar bleef staan — inclusief een adres
+  met een klant- of gebruikersnaam erin.
+- **Het redactieoverzicht telt nu wat er werkelijk is weggelakt.** Het bestand
+  dat opsomt wat er uit een export is gehaald, kreeg regels voor twee soorten
+  dingen die niet in het document staan: een aanwijzing die niet weggelakt
+  wordt (het woord "diagnose" zonder dat er iemand bij staat) en een bevinding
+  die nergens naar wijst. Een ontvanger ging dan zoeken naar zwarte blokken die
+  er niet zijn, wat het overzicht juist onbetrouwbaar maakt. Omgekeerd ontbraken
+  de redacties in de documentgegevens volledig: een weggelakte auteursnaam had
+  geen enkele regel om naar te wijzen en dus ook niets om tegen te betwisten.
+- **Werkelijke celwaarden uit een grafiekbestand stonden in het logboek.** Kon
+  OciDeck een cel niet als getal lezen, dan schreef de waarschuwing tot vijf van
+  die cellen letterlijk weg. Een grafiekbestand kan een omzet per klant of een
+  uitslag per persoon bevatten, en de cel die "geen getal" is, is vaak juist de
+  tekstkolom ernaast. De melding noemt nu alleen nog hoeveel cellen het betrof;
+  wélke het zijn, ziet u in het bestand zelf.
 - **Wat u zelf in de kop van een bestand zet, blijft nu staan.** Zette u met de
   hand een `header:`, `footer:`, `size:` of `style:` in de front matter — gewone
   Marp-opties — dan was die verdwenen zodra OciDeck het bestand één keer had

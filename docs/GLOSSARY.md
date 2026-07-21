@@ -72,6 +72,10 @@ compile time.
 
 **Redaction manifest** — the record of what was redacted from a sealed deck, so a
 redacted export can be verified against its source without a false tamper alarm.
+It is written as two files beside the export: `<name>-redactions.json`, which may
+travel with the report, and `<name>-redaction-keys.json`, which holds the salts
+and stays with the source — the separation between them is what keeps a
+commitment from being reversible. See FILE_FORMAT.md §12.
 
 **Document seal** — a SHA-512 hash over a deck's canonical content, stored in the
 front matter, giving tamper-evidence for finalised documents.

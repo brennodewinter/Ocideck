@@ -351,12 +351,18 @@ Two consequences worth knowing about:
   projection. The presenter writes a live table edit back as a whole slide, and
   it only ever saw the blocks.
 - Redaction covers slide fields (title, subtitle, bullets, column titles,
-  captions, alt text, quotes, free Markdown, table cells, **speaker notes**) and
-  the deck fields that feed document metadata (title, author, organisation,
-  description, keywords). It deliberately does **not** cover `userNotes` — those
-  are the recipient's own sidecar notes, they reach no export artefact, and
-  projecting them would let the presenter write blocks over someone's own
-  annotations.
+  captions, alt text, quotes, free Markdown, table cells, the checklist scope,
+  **speaker notes**) and every deck field the scanner reads: title, author,
+  organisation, description, keywords, version, date, standards used, tools used,
+  and the two MIAUW justification maps (waivers and confirmations). The last six
+  were scanned but not redacted until 2026-07-21, which meant the export gate
+  reported a finding that *Redact* could not clear while the value still
+  travelled. Media is handled differently: on a redacted slide the whole image,
+  video or audio reference is dropped rather than blacked out, because a path
+  with blocks in it is a broken reference.
+- Redaction deliberately does **not** cover `userNotes` — those are the
+  recipient's own sidecar notes, they reach no export artefact, and projecting
+  them would let the presenter write blocks over someone's own annotations.
 
 ### 3.2 The Style Profile
 
@@ -1264,8 +1270,10 @@ The editor exposes the cover case as an **"Afbeelding slidevullend"**
 
 ## 6. Sidecars and Separate Data
 
-Three kinds of data deliberately live **next to** the `.md` file instead of
-inside it, so the Marp Markdown remains clean and exchangeable.
+Four kinds of data deliberately live **next to** the `.md` file instead of
+inside it, so the Marp Markdown remains clean and exchangeable. (The redaction
+manifests of §12 are not among them: those sit beside an *export*, not beside the
+deck.)
 
 ### 6.1 Image Captions
 
@@ -1766,3 +1774,67 @@ Visual TLP marking (banner, badge, optional watermark) is **rasterized** into
 PDF/PPTX slides and is separate from these document properties. See
 [`USER_GUIDE.md`](USER_GUIDE.md) (§ Traffic Light Protocol, § Exporting) and
 [`ARCHITECTURE.md`](ARCHITECTURE.md) (§ Classification enforcement).
+
+---
+
+## 12. Redaction Manifest Files (Beside an Export)
+
+When an export actually removes something (§3.1a), OciDeck writes two JSON files
+into the same folder as the export — on the web, into the same download folder.
+They are export artefacts, not deck sidecars: nothing reads them back in, and
+they never appear next to the `.md`.
+
+| File | Contains | Travels with the report |
+| --- | --- | --- |
+| `<name>-redactions.json` | One entry per redaction, without salts | Yes |
+| `<name>-redaction-keys.json` | The same entries **plus the salts** | **No** — it stays with the source |
+
+The second file is only written when there is something to protect (a manifest
+carrying salts). Both suffixes are constants in
+`lib/models/redaction_manifest.dart`; they are English on purpose, because the
+whole point is that a recipient in any language can tell the two apart. They were
+`-redacties.json` and `-redacties-verificatiesleutels.json` until 2026-07-21 —
+two Dutch names that look alike while needing opposite handling.
+
+```json
+{
+  "format": "ocideck-redaction-manifest/1",
+  "notice": "This file lists what was redacted in the accompanying document, without the values. It carries no salts and reverses nothing.",
+  "derived_from": "9f1c…",
+  "algorithm": "sha-256(salt || value)",
+  "redactions": [
+    { "id": "a3f1", "commitment": "a3f1…", "rule": "nl.bsn", "slide": 4, "field": "bullets" },
+    { "id": "77bd", "commitment": "77bd…", "rule": "contact.email", "slide": -1, "field": "author" }
+  ]
+}
+```
+
+- `notice` is the one-line statement of what the file is and whether it may be
+  sent on. It is there because a filename does not survive being renamed, zipped
+  or forwarded, and the keys file is the one you must not attach.
+- `derived_from` is the seal hash (§ Document seal) of the source deck, empty
+  when the deck is not sealed. It pins provenance; it does **not** put the
+  manifest under the seal, which is impossible — the manifest is made at export,
+  after the seal, with fresh random salts.
+- `id` is the first four hex characters of the commitment: enough to name one
+  redaction in a conversation ("I dispute a3f1"), too little to reveal anything.
+- `commitment` is `SHA-256(salt ‖ value)` in hex. The values themselves are never
+  in either file.
+- `salt` appears only in the keys file. Without it a commitment over a short,
+  structured value is trivially reversible, which is exactly why the two files
+  are separate.
+- `slide` is the slide index, or `-1` for a redaction in the deck-wide fields
+  (the front matter that feeds document metadata). Deck-wide entries come first
+  and in the order the projection applies them, because verification compares
+  entry by entry against a fresh projection of the source.
+- `field` is the field the redaction fell in. There is no free-text reason field:
+  a reason written by the author could describe the value that was just removed.
+
+An entry exists for a redaction that is actually in the document, and for no
+other. Findings that are not redactable (an *indicator* such as the word
+"diagnosis" with nobody attached to it) and findings with an empty span (a
+notice that *something* is in the speaker notes, pointing nowhere) produce no
+entry — before 2026-07-21 they did, which sent recipients looking for blocks
+that were not there. See [`design/OCIWACHT.md`](design/OCIWACHT.md) §6.6 for the
+reasoning and [`USER_GUIDE.md`](USER_GUIDE.md) (*The two manifest files*) for
+what to do with them.
