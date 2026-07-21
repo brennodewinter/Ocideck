@@ -1,0 +1,63 @@
+# Semgrep-regels voor OciDeck.
+#
+# Deze regels doen NIET over wat de eigen gereedschappen al doen.
+# `tool/check_conventions.dart` en `tool/check_hardcoded_text.dart` kennen de
+# Dart-AST en bewaken print(), kale catch, bestandslengte, laagindeling en
+# zichtbare tekst. Semgrep verdient hier zijn plek om één reden: hij parseert,
+# en een grep doet dat niet.
+#
+# Dat is geen theorie. Bij het opstellen van deze regels gaf `grep` op
+# `badCertificateCallback` drie treffers in lib/ — alle drie in doccommentaar
+# dat het pinnen uitlegt. Semgrep meldt die niet en vindt alleen een echte
+# toewijzing. Precies dat verschil is waarom dit bestand bestaat.
+#
+# Draaien: `make sast`. Elke regel is in twee richtingen getoetst — nul op de
+# repo, en wél alarm op een geplante overtreding.
+
+rules:
+  - id: ocideck-certificaatvalidatie-uitgezet
+    languages: [dart]
+    severity: ERROR
+    message: >-
+      Certificaatvalidatie wordt hier overschreven. Dat hoort uitsluitend in
+      lib/utils/net_guard.dart, waar het bij het pinnen staat en waar
+      uitgelegd is waarom. Een callback die true teruggeeft, aanvaardt elk
+      certificaat en maakt de gepinde verbinding waardeloos.
+    pattern: $C.badCertificateCallback = $F
+    paths:
+      exclude: ["**/lib/utils/net_guard.dart"]
+
+  - id: ocideck-subproces-buiten-de-gitlaag
+    languages: [dart]
+    severity: WARNING
+    message: >-
+      Een subproces laat zich niet door NetGuard onderscheppen — het praat
+      buiten de guard om met het netwerk. In lib/services/git/ is dat een
+      bewuste, empirisch getoetste uitzondering waar de guard via git-config
+      wordt opgelegd. Daarbuiten is een nieuw subproces een gat.
+    pattern-either:
+      - pattern: Process.run(...)
+      - pattern: Process.start(...)
+      - pattern: Process.runSync(...)
+    paths:
+      # Alleen uitgeleverde code. tool/ is ontwikkelgereedschap dat per
+      # definitie dart, flutter en git aanroept; daar gaat deze zorg niet over.
+      include: ["**/lib/**"]
+      exclude: ["**/lib/services/git/**"]
+
+  - id: ocideck-zwakke-random-voor-geheim
+    languages: [dart]
+    severity: ERROR
+    message: >-
+      Random() is niet cryptografisch en is voorspelbaar. Voor sleutels,
+      tokens, nonces, salts en IV's hoort Random.secure(). De naam van deze
+      variabele zegt dat het om een geheim gaat.
+    patterns:
+      - pattern-either:
+          - pattern: final $X = Random();
+          - pattern: var $X = Random();
+      # Op de naam, zodat een Random() voor een animatie of een testfixture
+      # niet meetelt. Liever een gemiste dan een luidruchtige regel.
+      - metavariable-regex:
+          metavariable: $X
+          regex: (?i).*(key|token|secret|nonce|salt|iv|seed|passw).*
