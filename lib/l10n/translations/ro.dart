@@ -399,8 +399,6 @@ const _dutchSourceRo = {
   'Slide-instellingen': 'Setări diapozitiv',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Diapozitivul de deschidere cu un titlu mare și un subtitlu. Adaugă o imagine de fundal din biblioteca de imagini.',
-  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
-      'Un subtitlu de secțiune care anunță o nouă parte a prezentării. Păstrează-l scurt.',
   'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
       'O listă cu marcatori. Indentează o linie cu spații pentru un subpunct; începe cu "[ ]" pentru un element bifabil.',
   'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':

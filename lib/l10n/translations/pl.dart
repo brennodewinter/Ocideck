@@ -400,8 +400,6 @@ const _dutchSourcePl = {
   'Slide-instellingen': 'Ustawienia slajdu',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Slajd otwierający z dużym tytułem i podtytułem. Dodaj obraz tła z biblioteki obrazów.',
-  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
-      'Nagłówek sekcji zapowiadający nową część prezentacji. Zwięźle.',
   'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
       'Lista wypunktowana. Wcięcie spacjami tworzy podpunkt; zacznij od "[ ]", aby dodać element do odhaczenia.',
   'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':

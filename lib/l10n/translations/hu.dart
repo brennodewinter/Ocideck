@@ -398,8 +398,6 @@ const _dutchSourceHu = {
   'Slide-instellingen': 'Dia beállításai',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'A nyitódia nagy címmel és alcímmel. Adj hozzá háttérképet a képtárból.',
-  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
-      'Szakaszcím, amely a bemutató új részét jelzi. Tartsd röviden.',
   'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
       'Felsorolás. Behúzhatsz egy sort szóközökkel egy alponthoz; kezdd a "[ ]" jellel a kipipálható elemhez.',
   'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':

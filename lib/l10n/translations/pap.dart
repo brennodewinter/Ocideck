@@ -398,8 +398,6 @@ const _dutchSourcePap = {
   'Slide-instellingen': 'Konfigurashon di slide',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'E slide di apertura ku un título grandi i un subtítulo. Agregá un imágen di fondo for di e biblioteka di imágen.',
-  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
-      'Un enkabesamentu di sekshon ku ta anunsiá un parti nobo di e presentashon. Tenele kòrtiku.',
   'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
       'Un lista ku punto. Indentá un liña ku espasio pa un subpunto; kuminsá ku "[ ]" pa un item ku bo por marká.',
   'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':

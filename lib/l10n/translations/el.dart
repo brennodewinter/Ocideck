@@ -403,8 +403,6 @@ const _dutchSourceEl = {
   'Slide-instellingen': 'Ρυθμίσεις διαφάνειας',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Η αρχική διαφάνεια με μεγάλο τίτλο και υπότιτλο. Προσθέστε μια εικόνα φόντου από τη βιβλιοθήκη εικόνων.',
-  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
-      'Μια επικεφαλίδα ενότητας που ανακοινώνει ένα νέο μέρος της παρουσίασης. Κρατήστε την σύντομη.',
   'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
       'Μια λίστα με κουκκίδες. Κάντε εσοχή σε μια γραμμή με κενά για υποσημείο· ξεκινήστε με "[ ]" για στοιχείο με πλαίσιο ελέγχου.',
   'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':

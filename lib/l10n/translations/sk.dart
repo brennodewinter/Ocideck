@@ -398,8 +398,6 @@ const _dutchSourceSk = {
   'Slide-instellingen': 'Nastavenia snímky',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Úvodná snímka s veľkým názvom a podtitulom. Pridajte obrázok na pozadie z knižnice obrázkov.',
-  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
-      'Nadpis sekcie, ktorý ohlasuje novú časť prezentácie. Buďte struční.',
   'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
       'Zoznam s odrážkami. Odsadením medzerami vytvoríte podbod; začnite znakom "[ ]" pre odškrtávateľnú položku.',
   'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':

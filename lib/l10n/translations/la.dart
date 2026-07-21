@@ -398,8 +398,6 @@ const _dutchSourceLa = {
   'Slide-instellingen': 'Optiones paginae',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Prima tabella cum titulo magno et subtitulo. Ex bibliotheca imaginum imaginem fundi adde.',
-  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
-      'Titulus partis qui novam praesentationis partem nuntiat. Brevem serva.',
   'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
       'Index rerum enumeratarum. Lineam spatiis induc ut subpunctum fiat; ab "[ ]" incipe ut res notari possit.',
   'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':

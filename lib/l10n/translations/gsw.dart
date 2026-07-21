@@ -399,8 +399,6 @@ const _dutchSourceGsw = {
   'Slide-instellingen': 'Slide-Iistellige',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'D Titelfolie mit eme grosse Titel und Undertitel. Über d Bildbibliothek chasch es Hintergrundbild derzuetue.',
-  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
-      'E Zwüschetitel wo en neue Teil vo de Präsentation aakündigt. Halt en churz.',
   'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
       'En Ufzählig. Rugg e Zile mit Läärzeiche ii für en Underpunkt; fang mit "[ ]" aa für en abhaggbare Iitrag.',
   'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':

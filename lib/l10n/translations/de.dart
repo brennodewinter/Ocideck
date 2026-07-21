@@ -403,8 +403,6 @@ const _dutchSourceDe = {
   'Slide-instellingen': 'Folien-Einstellungen',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Die Titelfolie mit einem großen Titel und Untertitel. Füge über die Bildbibliothek ein Hintergrundbild hinzu.',
-  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
-      'Eine Zwischenüberschrift, die einen neuen Teil der Präsentation ankündigt. Halte sie kurz.',
   'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
       'Eine Aufzählung. Rücke eine Zeile mit Leerzeichen ein für einen Unterpunkt; beginne mit "[ ]" für einen abhakbaren Eintrag.',
   'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':

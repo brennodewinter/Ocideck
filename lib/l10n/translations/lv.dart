@@ -396,8 +396,6 @@ const _dutchSourceLv = {
   'Slide-instellingen': 'Slaida iestatījumi',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Sākuma slaids ar lielu virsrakstu un apakšvirsrakstu. Pievienojiet fona attēlu no attēlu bibliotēkas.',
-  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
-      'Sadaļas virsraksts, kas paziņo par jaunu prezentācijas daļu. Turiet to īsu.',
   'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
       'Aizzīmju saraksts. Atkāpieties rindā ar atstarpēm apakšpunktam; sāciet ar "[ ]", lai izveidotu atzīmējamu vienumu.',
   'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':

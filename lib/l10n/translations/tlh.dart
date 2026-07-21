@@ -387,8 +387,6 @@ const _dutchSourceTlh = {
   'Slide-instellingen': 'Slide DuHmey',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'mung QIn \'ay\' \'oH. tIn per je qutlh per luben. nagh beQmey qach vabDot chal DIr chelmoH.',
-  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
-      'presentation \'ay\' chu\' \'ang per. tItlhutlh.',
   'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
       'tetlh. tlhoy\' lo\'lu\'taH bIng ghItlh; "[ ]" lo\' \'e\' DaghItlhchugh, item lupoQ \'e\' laj.',
   'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':

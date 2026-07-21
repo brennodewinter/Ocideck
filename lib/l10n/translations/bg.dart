@@ -399,8 +399,6 @@ const _dutchSourceBg = {
   'Slide-instellingen': 'Настройки на слайда',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Начален слайд с голямо заглавие и подзаглавие. Добавете фоново изображение от библиотеката с изображения.',
-  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
-      'Заглавие на раздел, което обявява нова част от презентацията. Дръжте го кратко.',
   'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
       'Списък с водещи символи. Отстъпете ред с интервали за подточка; започнете с "[ ]" за отметим елемент.',
   'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':

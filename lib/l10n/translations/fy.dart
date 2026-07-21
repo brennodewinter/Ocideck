@@ -397,8 +397,6 @@ const _dutchSourceFy = {
   'Slide-instellingen': 'Slide-ynstellingen',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'De iepeningsslide mei in grutte titel en ûndertitel. Foegje fia de ôfbyldingsbibleteek in eftergrûnbyld ta.',
-  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
-      'In tuskenkop dy\'t in nij diel fan de presintaasje oankundiget. Hâld it koart.',
   'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
       'In opsomming. Lit in rigel mei spaasjes ynspringe foar in subpunt; begjin mei "[ ]" foar in ôffinkber item.',
   'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':

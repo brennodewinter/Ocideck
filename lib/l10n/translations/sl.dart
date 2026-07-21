@@ -396,8 +396,6 @@ const _dutchSourceSl = {
   'Slide-instellingen': 'Nastavitve prosojnice',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Uvodni prosojnica z velikim naslovom in podnaslovom. Iz knjižnice slik dodajte sliko za ozadje.',
-  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
-      'Naslov razdelka, ki napoveduje nov del predstavitve. Naj bo kratek.',
   'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
       'Seznam z alinejami. Zamik z presledki ustvari podtočko; začnite z "[ ]" za postavko, ki jo je mogoče odkljukati.',
   'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':

@@ -397,8 +397,6 @@ const _dutchSourceFi = {
   'Slide-instellingen': 'Dian asetukset',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Avausdia, jossa on suuri otsikko ja alaotsikko. Lisää taustakuva kuvakirjastosta.',
-  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
-      'Osion väliotsikko, joka ilmoittaa esityksen uudesta osasta. Pidä se lyhyenä.',
   'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
       'Luettelo. Sisennä rivi välilyönneillä alakohtaa varten; aloita merkinnällä "[ ]", jos kohta on ruksittavissa.',
   'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':

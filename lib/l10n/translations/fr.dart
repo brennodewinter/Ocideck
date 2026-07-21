@@ -405,8 +405,6 @@ const _dutchSourceFr = {
   'Slide-instellingen': 'Paramètres de la diapo',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'La diapositive d\'ouverture avec un grand titre et un sous-titre. Ajoutez une image de fond depuis la bibliothèque d\'images.',
-  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
-      'Un intertitre qui annonce une nouvelle partie de la présentation. Restez concis.',
   'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
       'Une liste à puces. Indentez une ligne avec des espaces pour un sous-point ; commencez par "[ ]" pour un élément cochable.',
   'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':
