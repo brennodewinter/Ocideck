@@ -202,13 +202,19 @@ extension _FileServiceOpen on FileService {
         // Parsing twice is deliberate and cheap: chart data is a handful of
         // rows, and threading the diagnosis through withData would change its
         // signature for every caller.
+        //
+        // Het *aantal*, nooit de waarden. Hier stonden tot vijf werkelijke
+        // celwaarden in de logregel, tegen de regel in de kop van `log.dart`
+        // in: een grafiekbestand kan een omzet per klant of een uitslag per
+        // persoon bevatten, en een niet-numerieke cel is juist vaak de
+        // tekstkolom ernaast. Het aantal zegt de ontwikkelaar alles wat hij
+        // nodig heeft; de gebruiker ziet welke cellen het zijn in het bestand.
         if (!abs.toLowerCase().endsWith('.json')) {
           final unreadable = parseCsv(raw).unreadable;
           if (unreadable.isNotEmpty) {
             logWarning(
               'FileService._hydrateCharts: ${unreadable.length} value(s) in '
-              '${spec.source} are not numbers and were charted as 0 '
-              '(${unreadable.take(5).join(' · ')})',
+              '${spec.source} are not numbers and were charted as 0',
             );
           }
         }
