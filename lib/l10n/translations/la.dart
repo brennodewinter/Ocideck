@@ -1801,6 +1801,12 @@ const _dutchSourceAddLa = <String, String>{
   'Niet doorzocht': 'Non perscrutatum',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Haec inspectio in versione interretiali non decurrit: agnitio vultuum bibliothecam systematis requirit quam navigatrum non habet. Versione mensali utere ad vultus in imaginibus inspiciendos.',
+  'Het token heeft lees- en schrijfrechten op de repository nodig. Gitea en Forgejo kennen geen server-side zoeken; OciDeck zoekt lokaal.':
+      'Signum lectionis et scriptionis iura in repositorio requirit. Gitea et Forgejo quaestionem in servo non habent; OciDeck localiter quaerit.',
+  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven). Codezoeken op de server dekt alleen de standaardbranch.':
+      'Signum ambitum repo requirit (vel subtiliter: Contents legere et scribere). Quaestio codicis in servo ramum solum praedefinitum tegit.',
+  'Het token heeft read_repository, write_repository en read_api nodig. Server-side zoeken vereist Advanced- of Exact Search.':
+      'Signum read_repository, write_repository et read_api requirit. Quaestio in servo Advanced vel Exact Search poscit.',
   'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':
       'Inquisitio celeris in servo — propter moram indicis, fasciculus modo mutatus deesse potest.',
   'Media blijft niet bewaard in een los .md-bestand':

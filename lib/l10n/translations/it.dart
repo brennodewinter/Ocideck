@@ -738,6 +738,12 @@ const _dutchSourceAddIt = {
   'Niet doorzocht': 'Non cercato',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Questo controllo non viene eseguito nella versione web: il rilevamento dei volti richiede una libreria di sistema che il browser non ha. Usa la versione desktop per controllare i volti nelle immagini.',
+  'Het token heeft lees- en schrijfrechten op de repository nodig. Gitea en Forgejo kennen geen server-side zoeken; OciDeck zoekt lokaal.':
+      'Il token deve avere accesso in lettura e scrittura al repository. Gitea e Forgejo non hanno ricerca lato server; OciDeck cerca in locale.',
+  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven). Codezoeken op de server dekt alleen de standaardbranch.':
+      'Il token deve avere lo scope repo (o granulare: Contents in lettura e scrittura). La ricerca di codice sul server copre solo il ramo predefinito.',
+  'Het token heeft read_repository, write_repository en read_api nodig. Server-side zoeken vereist Advanced- of Exact Search.':
+      'Il token deve avere read_repository, write_repository e read_api. La ricerca lato server richiede Advanced o Exact Search.',
   'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':
       'Ricerca veloce lato server — per il ritardo di indicizzazione una presentazione appena modificata potrebbe mancare.',
   'Media blijft niet bewaard in een los .md-bestand':

@@ -80,6 +80,7 @@ extension _SettingsGit on _SettingsDialogState {
           obscure: true,
           icon: Icons.key_outlined,
         ),
+        _gitTokenScopeHelp(l10n, form.provider),
         CheckboxListTile(
           value: form.trusted,
           onChanged: (v) => _rebuild(() {
@@ -106,6 +107,40 @@ extension _SettingsGit on _SettingsDialogState {
         _gitTestRow(l10n, form),
         _nativeGitStatus(l10n),
       ],
+    );
+  }
+
+  /// Welke rechten het token nodig heeft — per forge anders, en de naam van de
+  /// scope verschilt per forge. Proactief onder het tokenveld, niet pas nadat een
+  /// verbindingstest faalt: je hoeft het niet eerst mis te hebben om te weten wat
+  /// je moet aanvinken. Wijzigt mee met de gekozen soort forge.
+  Widget _gitTokenScopeHelp(AppLocalizations l10n, GitProvider provider) {
+    final text = switch (provider) {
+      GitProvider.gitea => l10n.d(
+        'Het token heeft lees- en schrijfrechten op de repository nodig. Gitea en Forgejo kennen geen server-side zoeken; OciDeck zoekt lokaal.',
+      ),
+      GitProvider.github => l10n.d(
+        'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven). Codezoeken op de server dekt alleen de standaardbranch.',
+      ),
+      GitProvider.gitlab => l10n.d(
+        'Het token heeft read_repository, write_repository en read_api nodig. Server-side zoeken vereist Advanced- of Exact Search.',
+      ),
+    };
+    return Padding(
+      padding: const EdgeInsets.only(top: 6),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(Icons.info_outline, size: 14, color: AppTheme.slate400),
+          const SizedBox(width: 6),
+          Expanded(
+            child: Text(
+              text,
+              style: TextStyle(fontSize: 11, color: AppTheme.slate400),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

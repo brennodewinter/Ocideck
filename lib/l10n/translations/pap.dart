@@ -742,6 +742,12 @@ const _dutchSourceAddPap = {
   'Niet doorzocht': 'No buska',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'E kontrol aki no ta kore den e version web: detekshon di kara ta rekerí un biblioteka di sistema ku e browser no tin. Usa e version desktop pa chek kara den imagen.',
+  'Het token heeft lees- en schrijfrechten op de repository nodig. Gitea en Forgejo kennen geen server-side zoeken; OciDeck zoekt lokaal.':
+      'E token mester tin akseso di lesa i skirbi na e repositorio. Gitea i Forgejo no tin buskeda na servidó; OciDeck ta buska lokalmente.',
+  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven). Codezoeken op de server dekt alleen de standaardbranch.':
+      'E token mester tin e scope repo (òf detayá: Contents lesa i skirbi). Buskeda di kódigo na servidó ta kubri solamente e branch standard.',
+  'Het token heeft read_repository, write_repository en read_api nodig. Server-side zoeken vereist Advanced- of Exact Search.':
+      'E token mester tin read_repository, write_repository i read_api. Buskeda na servidó ta rekerí Advanced òf Exact Search.',
   'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':
       'Buskeda rápido riba servidó — pa motibu di retraso di indeksashon, un dek net kambiá por falta.',
   'Media blijft niet bewaard in een los .md-bestand':

@@ -1784,6 +1784,12 @@ const _dutchSourceAddLv = <String, String>{
   'Niet doorzocht': 'Nav meklēts',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Šī pārbaude nedarbojas tīmekļa versijā: sejas atpazīšanai nepieciešama sistēmas bibliotēka, kuras pārlūkprogrammā nav. Izmantojiet darbvirsmas versiju, lai pārbaudītu sejas attēlos.',
+  'Het token heeft lees- en schrijfrechten op de repository nodig. Gitea en Forgejo kennen geen server-side zoeken; OciDeck zoekt lokaal.':
+      'Pilnvarai nepieciešamas lasīšanas un rakstīšanas tiesības krātuvē. Gitea un Forgejo nav meklēšanas serverī; OciDeck meklē lokāli.',
+  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven). Codezoeken op de server dekt alleen de standaardbranch.':
+      'Pilnvarai nepieciešams repo tvērums (vai detalizēti: Contents lasīšanai un rakstīšanai). Koda meklēšana serverī aptver tikai noklusējuma zaru.',
+  'Het token heeft read_repository, write_repository en read_api nodig. Server-side zoeken vereist Advanced- of Exact Search.':
+      'Pilnvarai nepieciešami read_repository, write_repository un read_api. Meklēšanai serverī nepieciešams Advanced vai Exact Search.',
   'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':
       'Ātra meklēšana serverī — indeksēšanas aiztures dēļ tikko mainīta kava var iztrūkt.',
   'Media blijft niet bewaard in een los .md-bestand':

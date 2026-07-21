@@ -1813,6 +1813,12 @@ const _dutchSourceAddEl = <String, String>{
   'Niet doorzocht': 'Δεν αναζητήθηκε',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Αυτός ο έλεγχος δεν εκτελείται στην έκδοση web: η ανίχνευση προσώπων χρειάζεται μια βιβλιοθήκη συστήματος που δεν έχει το πρόγραμμα περιήγησης. Χρησιμοποιήστε την έκδοση για υπολογιστή για να ελέγξετε πρόσωπα στις εικόνες.',
+  'Het token heeft lees- en schrijfrechten op de repository nodig. Gitea en Forgejo kennen geen server-side zoeken; OciDeck zoekt lokaal.':
+      'Το διακριτικό χρειάζεται δικαιώματα ανάγνωσης και εγγραφής στο αποθετήριο. Το Gitea και το Forgejo δεν έχουν αναζήτηση στον διακομιστή· το OciDeck ψάχνει τοπικά.',
+  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven). Codezoeken op de server dekt alleen de standaardbranch.':
+      'Το διακριτικό χρειάζεται το εύρος repo (ή αναλυτικά: Contents ανάγνωση και εγγραφή). Η αναζήτηση κώδικα στον διακομιστή καλύπτει μόνο τον προεπιλεγμένο κλάδο.',
+  'Het token heeft read_repository, write_repository en read_api nodig. Server-side zoeken vereist Advanced- of Exact Search.':
+      'Το διακριτικό χρειάζεται read_repository, write_repository και read_api. Η αναζήτηση στον διακομιστή απαιτεί Advanced ή Exact Search.',
   'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':
       'Γρήγορη αναζήτηση στον διακομιστή — λόγω καθυστέρησης ευρετηρίασης, μια πρόσφατα τροποποιημένη παρουσίαση μπορεί να λείπει.',
   'Media blijft niet bewaard in een los .md-bestand':

@@ -1815,6 +1815,12 @@ const _dutchSourceAddPt = <String, String>{
   'Niet doorzocht': 'Não pesquisado',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Esta verificação não é executada na versão web: a deteção de rostos precisa de uma biblioteca de sistema que o navegador não tem. Use a versão para computador para verificar rostos nas imagens.',
+  'Het token heeft lees- en schrijfrechten op de repository nodig. Gitea en Forgejo kennen geen server-side zoeken; OciDeck zoekt lokaal.':
+      'O token precisa de acesso de leitura e escrita ao repositório. Gitea e Forgejo não têm pesquisa no servidor; o OciDeck pesquisa localmente.',
+  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven). Codezoeken op de server dekt alleen de standaardbranch.':
+      'O token precisa do escopo repo (ou detalhado: Contents de leitura e escrita). A pesquisa de código no servidor cobre apenas o ramo padrão.',
+  'Het token heeft read_repository, write_repository en read_api nodig. Server-side zoeken vereist Advanced- of Exact Search.':
+      'O token precisa de read_repository, write_repository e read_api. A pesquisa no servidor requer Advanced ou Exact Search.',
   'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':
       'Pesquisa rápida no servidor — devido ao atraso de indexação, um deck alterado há pouco pode faltar.',
   'Media blijft niet bewaard in een los .md-bestand':

@@ -1808,6 +1808,12 @@ const _dutchSourceAddBg = <String, String>{
   'Niet doorzocht': 'Не е претърсено',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Тази проверка не се изпълнява в уеб версията: разпознаването на лица изисква системна библиотека, която браузърът няма. Използвайте настолната версия, за да проверите изображенията за лица.',
+  'Het token heeft lees- en schrijfrechten op de repository nodig. Gitea en Forgejo kennen geen server-side zoeken; OciDeck zoekt lokaal.':
+      'Токенът се нуждае от права за четене и запис в хранилището. Gitea и Forgejo нямат търсене на сървъра; OciDeck търси локално.',
+  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven). Codezoeken op de server dekt alleen de standaardbranch.':
+      'Токенът се нуждае от обхвата repo (или подробно: Contents за четене и запис). Търсенето на код на сървъра обхваща само клона по подразбиране.',
+  'Het token heeft read_repository, write_repository en read_api nodig. Server-side zoeken vereist Advanced- of Exact Search.':
+      'Токенът се нуждае от read_repository, write_repository и read_api. Търсенето на сървъра изисква Advanced или Exact Search.',
   'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':
       'Бързо търсене на сървъра — поради забавяне на индексирането наскоро променена колода може да липсва.',
   'Media blijft niet bewaard in een los .md-bestand':

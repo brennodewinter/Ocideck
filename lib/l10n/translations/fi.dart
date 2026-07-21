@@ -1785,6 +1785,12 @@ const _dutchSourceAddFi = <String, String>{
   'Niet doorzocht': 'Ei haettu',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Tämä tarkistus ei toimi verkkoversiossa: kasvojen tunnistus vaatii järjestelmäkirjaston, jota selaimessa ei ole. Tarkista kuvien kasvot työpöytäversiolla.',
+  'Het token heeft lees- en schrijfrechten op de repository nodig. Gitea en Forgejo kennen geen server-side zoeken; OciDeck zoekt lokaal.':
+      'Poletti tarvitsee luku- ja kirjoitusoikeuden repositorioon. Giteassa ja Forgejossa ei ole palvelinhakua; OciDeck hakee paikallisesti.',
+  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven). Codezoeken op de server dekt alleen de standaardbranch.':
+      'Poletti tarvitsee repo-alueen (tai tarkasti: Contents luku ja kirjoitus). Palvelimen koodihaku kattaa vain oletushaaran.',
+  'Het token heeft read_repository, write_repository en read_api nodig. Server-side zoeken vereist Advanced- of Exact Search.':
+      'Poletti tarvitsee read_repository, write_repository ja read_api. Palvelinhaku edellyttää Advanced- tai Exact Search -toimintoa.',
   'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':
       'Nopea palvelinhaku — indeksoinnin viiveen vuoksi juuri muutettu pakka voi puuttua.',
   'Media blijft niet bewaard in een los .md-bestand':

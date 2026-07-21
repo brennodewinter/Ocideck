@@ -1793,6 +1793,12 @@ const _dutchSourceAddLt = <String, String>{
   'Niet doorzocht': 'Neieškota',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Ši patikra neveikia žiniatinklio versijoje: veidų aptikimui reikia sistemos bibliotekos, kurios naršyklė neturi. Naudokite darbalaukio versiją, kad patikrintumėte veidus paveikslėliuose.',
+  'Het token heeft lees- en schrijfrechten op de repository nodig. Gitea en Forgejo kennen geen server-side zoeken; OciDeck zoekt lokaal.':
+      'Prieigos raktui reikia repozitorijaus skaitymo ir rašymo teisių. Gitea ir Forgejo neturi paieškos serveryje; OciDeck ieško vietoje.',
+  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven). Codezoeken op de server dekt alleen de standaardbranch.':
+      'Prieigos raktui reikia repo srities (arba detaliai: Contents skaityti ir rašyti). Kodo paieška serveryje apima tik numatytąją šaką.',
+  'Het token heeft read_repository, write_repository en read_api nodig. Server-side zoeken vereist Advanced- of Exact Search.':
+      'Prieigos raktui reikia read_repository, write_repository ir read_api. Paieškai serveryje reikia Advanced arba Exact Search.',
   'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':
       'Greita paieška serveryje — dėl indeksavimo vėlavimo ką tik pakeista kaladė gali būti praleista.',
   'Media blijft niet bewaard in een los .md-bestand':
