@@ -18,6 +18,23 @@ enum TlpLevel { none, clear, green, amber, amberStrict, red }
 bool slideVisibleAtTlp(Slide slide, TlpLevel presentationTlp) =>
     slide.tlp.index <= presentationTlp.index;
 
+/// Of [slide] wordt *achtergehouden*: zijn eigen classificatie is strenger dan
+/// die van de presentatie, dus hij haalt het publiek niet.
+///
+/// Bewust een eigen naam naast [Slide.skipped]. Achterhouden en overslaan zien
+/// er in de uitvoer hetzelfde uit — de dia is er niet — maar het zijn twee
+/// verschillende beslissingen: overslaan doet de auteur bewust per dia,
+/// achterhouden volgt uit een classificatiebeleid dat hij misschien niet eens
+/// heeft ingesteld (beide standaardwaarden zijn [TlpLevel.none], dus één dia op
+/// AMBER verdwijnt uit een deck zonder deckniveau). Ze in de interface op één
+/// hoop gooien laat de gebruiker de verkeerde knop zoeken.
+bool slideWithheldByTlp(Slide slide, TlpLevel presentationTlp) =>
+    !slideVisibleAtTlp(slide, presentationTlp);
+
+/// Hoeveel dia's van [deck] worden achtergehouden door hun TLP-classificatie.
+int withheldSlideCount(Deck deck) =>
+    deck.slides.where((s) => slideWithheldByTlp(s, deck.tlp)).length;
+
 /// Of [slide] het publiek bereikt bij presenteren of exporteren.
 ///
 /// Drie onafhankelijke poorten, en een slide moet ze alle drie passeren: de

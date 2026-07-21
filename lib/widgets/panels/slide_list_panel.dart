@@ -729,6 +729,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
         ? deck.slides.where((s) => _matches(s, query)).length
         : deck.slides.length;
     final skippedCount = deck.slides.where((s) => s.skipped).length;
+    final withheldCount = withheldSlideCount(deck);
 
     return Focus(
       focusNode: _focusNode,
@@ -784,6 +785,12 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
                         count: skippedCount,
                         onClearAll: notifier.clearAllSkips,
                       ),
+                    ],
+                    // Achtergehouden door TLP: even zichtbaar als overslaan,
+                    // want het gevolg is hetzelfde en de oorzaak niet.
+                    if (withheldCount > 0) ...[
+                      const SizedBox(height: 6),
+                      _WithheldBanner(count: withheldCount),
                     ],
                     // Bulk-actiebalk bij een meervoudige selectie.
                     if (multiSelectionCount > 0) ...[
