@@ -481,6 +481,22 @@ class Slide {
   /// Round-trips as `<!-- ocideck_checklist_scope: https://app.example/login -->`.
   final String checklistScope;
 
+  /// Which page of a paginated rich-text body this copy of the slide renders.
+  ///
+  /// Render-only, and deliberately absent from the file format: a long free-text
+  /// slide is one slide in the deck, but presents as several full-size pages.
+  /// `expandRichTextForRender` makes one copy per page for surfaces that
+  /// enumerate slides rather than page through them — the export above all,
+  /// which used to rasterise page 1 and silently drop the rest. Every copy keeps
+  /// the *whole* body, because the page split and the shared font scale are
+  /// properties of the body as a whole; handing a renderer one page's markdown
+  /// in isolation would size that page on its own and the text would grow and
+  /// shrink from page to page.
+  ///
+  /// Always 0 on a slide that came from a file, and never serialised — see
+  /// `Slide.duplicate`, which resets it.
+  final int renderPage;
+
   const Slide({
     required this.id,
     required this.type,
@@ -541,6 +557,7 @@ class Slide {
     this.findingRole = FindingRole.header,
     this.aiAssistedFields = const [],
     this.checklistScope = '',
+    this.renderPage = 0,
   });
 
   factory Slide.create(SlideType type) {
@@ -721,6 +738,7 @@ class Slide {
     FindingRole? findingRole,
     List<String>? aiAssistedFields,
     String? checklistScope,
+    int? renderPage,
   }) {
     return Slide(
       id: id,
@@ -790,6 +808,7 @@ class Slide {
       findingRole: findingRole ?? this.findingRole,
       aiAssistedFields: aiAssistedFields ?? this.aiAssistedFields,
       checklistScope: checklistScope ?? this.checklistScope,
+      renderPage: renderPage ?? this.renderPage,
     );
   }
 

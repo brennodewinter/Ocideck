@@ -43,8 +43,6 @@ class _BulletsPreview extends StatelessWidget {
   final String font;
   final ThemeProfile profile;
   final int richTextPage;
-  final bool showRichTextPageControls;
-  final ValueChanged<int>? onRichTextPageChanged;
 
   /// First number for a numbered list (continues a chain across slides).
   final int numberStart;
@@ -58,8 +56,6 @@ class _BulletsPreview extends StatelessWidget {
     required this.font,
     required this.profile,
     this.richTextPage = 0,
-    this.showRichTextPageControls = false,
-    this.onRichTextPageChanged,
     this.numberStart = 1,
     this.fitScaleOverride,
   });
@@ -265,7 +261,6 @@ class _BulletsPreview extends StatelessWidget {
         availH: availH,
         splitWithImage: false,
         richTextPage: richTextPage,
-        showPageControls: showRichTextPageControls,
       ),
     );
   }
@@ -281,7 +276,6 @@ Widget _richTextPaginatedContent({
   required double availH,
   required bool splitWithImage,
   int richTextPage = 0,
-  bool showPageControls = false,
 }) {
   final pad = splitWithImage ? w * 0.038 : w * 0.07;
   final vPad = splitWithImage ? w * 0.042 : w * 0.05;
@@ -377,47 +371,14 @@ Widget _richTextPaginatedContent({
             ),
           ),
         ),
-        if (plan.pageCount > 1 && !showPageControls)
-          Positioned(
-            top: w * 0.012,
-            right: w * 0.012,
-            child: _richTextPageBadge(
-              label: '${pageIndex + 1} / ${plan.pageCount}',
-              w: w,
-              font: font,
-              profile: profile,
-            ),
-          ),
+        // Geen "1 / 3"-teller op de dia. Die telde per slide opnieuw vanaf één,
+        // terwijl de zaal naar dia 7 van 24 kijkt — twee nummeringen door
+        // elkaar, waarvan de opvallendste de minst betekenisvolle was. Wie wél
+        // moet weten waar hij is, ziet het waar het thuishoort: de editor en de
+        // presentatorweergave tonen "Pagina 2 / 3" in hun eigen rand, en de
+        // export klapt de pagina's uit tot echte dia's zodat de voettekst ze
+        // gewoon meetelt (`expandRichTextForRender`).
       ],
-    ),
-  );
-}
-
-Widget _richTextPageBadge({
-  required String label,
-  required double w,
-  required String font,
-  required ThemeProfile profile,
-}) {
-  return Container(
-    padding: EdgeInsets.symmetric(horizontal: w * 0.014, vertical: w * 0.005),
-    decoration: BoxDecoration(
-      color: _hexColor(profile.textColor).withValues(alpha: 0.12),
-      borderRadius: BorderRadius.circular(w * 0.008),
-      border: Border.all(
-        color: _hexColor(profile.textColor).withValues(alpha: 0.2),
-      ),
-    ),
-    child: Text(
-      label,
-      style: _applyFont(
-        font,
-        TextStyle(
-          fontSize: w * 0.018,
-          color: _hexColor(profile.textColor).withValues(alpha: 0.85),
-          fontWeight: FontWeight.w600,
-        ),
-      ),
     ),
   );
 }
