@@ -35,7 +35,7 @@ Built with Flutter for macOS, Windows, Linux, and **web**.
 - **Accessibility** — WCAG 2.1-oriented: interface text scaling up to 200%, keyboard-operable panel divider and dialogs, screen-reader labels for slides and charts (charts read out their data), and slide-change announcements while presenting.
 - **Crash recovery** — automatic snapshots so work survives an unexpected exit.
 - **Theming** — customizable deck style profiles (deck and source-code colours via presets or custom hex, fonts, logo, footer) and app appearance (including a dark interface), a bundled Marp CSS theme (`assets/themes/ocideck.css`), and a bundled EB Garamond font (no network fetch). A style profile can be exported to and imported from a standalone `.ocideckstyle` file — logo included — so a house style travels between installs without a deck around it.
-- **Localized** — a fully translated interface in **31 languages**: Dutch, English, German, French, Italian, Spanish, Portuguese, Polish, Czech, Slovak, Slovenian, Croatian, Bulgarian, Romanian, Hungarian, Greek, Danish, Swedish, Finnish, Estonian, Latvian, Lithuanian, Maltese, Irish, Ukrainian, Indonesian, Frisian, Swiss German, Latin, Papiamento, and Klingon. Every interface string is translated in all of them, enforced by tests.
+- **Localized** — a fully translated interface in **32 languages**: Dutch, English, German, French, Italian, Spanish, Portuguese, Polish, Czech, Slovak, Slovenian, Croatian, Bulgarian, Romanian, Hungarian, Greek, Danish, Swedish, Finnish, Estonian, Latvian, Lithuanian, Maltese, Irish, Ukrainian, Turkish, Indonesian, Frisian, Swiss German, Latin, Papiamento, and Klingon. Every interface string is translated in all of them, enforced by tests.
 
 ## Requirements
 
@@ -94,7 +94,7 @@ lib/
   services/   # Markdown, export, file, image, caption, recovery, rasterizer
   state/      # Riverpod providers (deck, editor, settings, tabs, clipboard)
   widgets/    # UI: app shell, panels, dialogs, per-type editors, presenter
-  l10n/       # AppLocalizations (31 languages)
+  l10n/       # AppLocalizations (32 languages)
   theme/      # App theming
   utils/      # Small shared helpers (clipboard table parsing, URL launching)
 ```

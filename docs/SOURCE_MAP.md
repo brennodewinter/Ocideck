@@ -283,10 +283,10 @@ deliberately manual).
 
 ### `lib/l10n/translations/` (each `part of app_localizations.dart`)
 
-One file per language, 31 in total. `nl.dart` is the source language; the other 30
+One file per language, 32 in total. `nl.dart` is the source language; the other 31
 carry the translations and are kept in step by `make add-l10n` / `make l10n-check`:
 `en` (English), `de`, `fr`, `es`, `it`, `pt`, `pl`, `uk`, `el`, `da`, `sv`, `fi`,
-`cs`, `sk`, `sl`, `hr`, `hu`, `ro`, `bg`, `et`, `lv`, `lt`, `ga`, `mt`, `id`,
+`cs`, `sk`, `sl`, `hr`, `hu`, `ro`, `bg`, `et`, `lv`, `lt`, `ga`, `mt`, `tr`, `id`,
 `fy` (Frisian), `pap` (Papiamento), `gsw` (Swiss German), `la` (Latin) and
 `tlh` (Klingon).
 

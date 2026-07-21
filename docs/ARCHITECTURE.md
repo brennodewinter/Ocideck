@@ -109,7 +109,7 @@ lib/
               # info_safety, local_cve, deck_quality, …
   platform/   # conditional-import platform abstraction (io/web halves)
   widgets/    # app shell, panels, dialogs, per-type editors, slides, presenter
-  l10n/       # AppLocalizations + translations/<lang>.dart (31 languages)
+  l10n/       # AppLocalizations + translations/<lang>.dart (32 languages)
   theme/      # app theming
   utils/      # small shared helpers (clipboard table parsing, URL launching)
 ```

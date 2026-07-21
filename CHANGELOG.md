@@ -10,6 +10,15 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 ## [Unreleased]
 
 ### Added
+- **De interface spreekt nu ook Turks.** OciDeck draaide in 31 talen — alle
+  EU-talen plus een paar daarbuiten — maar Turks ontbrak, terwijl het een van de
+  grootste talen van Europa is en de taal van een kandidaat-lidstaat. `tr` is nu
+  een volwaardige taal en geen half werk: alle 76 sleutelstrings, alle 2.074
+  bronstrings en de drie meegeleverde bevindingsjablonen zijn vertaald, en
+  Flutter zelf schakelt mee naar zijn Turkse Material-vertaling. *Instellingen →
+  Algemeen → Taal* toont Türkçe met de Turkse vlag; de sorteersleutel van de
+  talenlijst kent nu ook de ı en de ğ, zodat namen met die letters landen waar
+  een lezer ze zoekt.
 - **Een achtergrondafbeelding op de tussentitel, net als op de titeldia.** Een
   tussentitel kon alleen een effen kleur dragen terwijl de titeldia allang een
   schermvullend beeld kon hebben — een gat, geen keuze. De tussentitel krijgt nu
