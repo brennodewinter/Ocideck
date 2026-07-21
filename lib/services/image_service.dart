@@ -11,6 +11,7 @@ import '../utils/atomic_file.dart';
 import '../utils/log.dart';
 import '../utils/project_path.dart';
 import 'asset_staging.dart';
+import 'slide_image_refs.dart';
 import 'web_asset_store.dart';
 
 /// Waarom een afbeelding kiezen/plakken géén pad opleverde. [cancelled] is een
@@ -376,6 +377,14 @@ class ImageService {
 
   /// Copy images referenced by absolute path into the project images/ dir
   /// and return updated slides with relative paths.
+  ///
+  /// Élke verwijzing telt mee, ook een `![…](…)` midden in de vrije tekst. Bleef
+  /// die achter als absoluut pad, dan wijst de opgeslagen presentatie naar een
+  /// bestand buiten haar eigen map: bij de maker werkt het, bij de ontvanger is
+  /// het een leeg vak.
+  ///
+  /// Kopiëren is asynchroon en herschrijven niet, dus het gaat in twee slagen:
+  /// eerst elk pad naar zijn nieuwe plek, dan de dia in haar geheel om.
   Future<List<Slide>> copyImagesToProject(
     List<Slide> slides,
     String projectPath,
@@ -385,15 +394,12 @@ class ImageService {
 
     final updated = <Slide>[];
     for (final slide in slides) {
-      var next = slide;
-      final copiedImage = await _copyImageToProject(next.imagePath, imagesDir);
-      if (copiedImage != null) next = next.copyWith(imagePath: copiedImage);
-      final copiedImage2 = await _copyImageToProject(
-        next.imagePath2,
-        imagesDir,
-      );
-      if (copiedImage2 != null) next = next.copyWith(imagePath2: copiedImage2);
-      updated.add(next);
+      final copied = <String, String>{};
+      for (final path in slideImagePaths(slide).toSet()) {
+        final dest = await _copyImageToProject(path, imagesDir);
+        if (dest != null) copied[path] = dest;
+      }
+      updated.add(rewriteSlideImagePaths(slide, (path) => copied[path]));
     }
     return updated;
   }
