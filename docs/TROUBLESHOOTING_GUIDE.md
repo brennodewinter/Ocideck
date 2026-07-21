@@ -26,8 +26,11 @@ This guide addresses frequently encountered problems, their causes, and step-by-
    - Verify slide separators are correctly formatted (`---` on their own line)
 
 3. **Recovery Options**:
-   - Use crash recovery snapshots (automatically generated)
-   - Restore from Git repository if available
+   - Use crash recovery snapshots (automatically generated — desktop only; the
+     browser build writes none, because it has no folder to write them to)
+   - Restore from Git repository if available — but note that a commit carries
+     the markdown, the pooled images and the chart data, not video, audio, the
+     drawings on your slides or the user notes
    - Try opening backup copies
 
 ### Export Problems

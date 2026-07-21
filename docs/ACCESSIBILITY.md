@@ -20,8 +20,11 @@ The documentation reader has its own **A− / A+** control on top of that, becau
 reading a guide and operating an editor want different sizes.
 
 **Screen-reader labels where the interface is not text.** Slide thumbnails carry
-a composed label ("Slide 3/12: <title>", plus skipped state and whether the slide
-has notes) rather than being announced as an unnamed image. Charts expose their
+a composed label ("Slide 3/12: <title>", plus skipped state, whether the slide is
+withheld by its TLP classification and at which level, and whether it has notes)
+rather than being announced as an unnamed image. Both reasons a slide will not
+reach the audience are spoken, and spoken separately, because the dimming and the
+two coloured flags that carry the same message on screen are of no use here. Charts expose their
 data as a text alternative (`_semanticsLabel` in `chart_preview.dart`), so a
 chart is readable and not merely present. Icon-only buttons carry a name.
 

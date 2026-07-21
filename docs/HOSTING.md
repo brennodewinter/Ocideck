@@ -111,7 +111,7 @@ services named below.
 | S3 buckets as a deck source | ✗ | The client is `dart:io` with hand-rolled SigV4 and its own SSRF pinning; a browser has neither, and would need CORS agreed on the bucket. |
 | Git as a deck source | ✓ | Over the REST transport (`git_transport_web.dart`), under the same security gate as URL import (§4). The native `git` subprocess is unavailable on web, so there is no local clone or offline merge — commits go straight to the forge — but open and save both work. |
 | Second-screen presenter view | ✗ | Needs native windowing. |
-| Crash recovery / autosave snapshots | ✗ | No app-support directory, so every snapshot call is a silent no-op. **Nothing is recovered after a browser crash.** |
+| Crash recovery / autosave snapshots | ✗ | No app-support directory, so every snapshot call is a no-op and the autosave timer is not even started. **Nothing is recovered after a browser crash.** It is no longer silent, though: the app says so once at the user's first edit, and a `beforeunload` guard makes the browser ask before a tab with unsaved work closes. That guard is the only lever a browser offers here, and its wording belongs to the browser. |
 | Face detection in slide images | ✗ | The detector is a native library over FFI. See below — this one has a privacy consequence. |
 | Local CVE database (offline lookup) | ✗ | Needs a multi-gigabyte on-disk index. The online CVE lookup is also desktop-only — it runs through an SSRF-pinned `dart:io` request the browser can't make; the in-app button says so. |
 | Image caption sidecars | ✗ | Sidecars are files next to the image; there are none. |
