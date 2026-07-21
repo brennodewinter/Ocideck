@@ -12,6 +12,7 @@ import 'package:ocideck/services/file_service.dart';
 import 'package:ocideck/services/image_service.dart';
 import 'package:ocideck/services/markdown_service.dart';
 import 'package:ocideck/services/seal_codec.dart';
+import 'package:ocideck/services/trash_service.dart';
 import 'package:path/path.dart' as p;
 
 /// Het zegel en de handtekening gaan over het document in plaats van erin, en
@@ -174,6 +175,45 @@ void main() {
       final pad = p.join(map.path, 'deck.md');
       await _dienst().saveDeck(_deck(), pad);
       expect(File(p.join(map.path, 'deck.seal.json')).existsSync(), isFalse);
+    });
+  });
+
+  group('het zegel reist mee waar de markdown alleen gaat', () {
+    test('een pakket draagt het als eigen lid', () async {
+      final verzegeld = DocumentIntegrity(
+        MarkdownService(),
+      ).seal(_deck(), signature: _handtekening);
+      final leden = await _dienst().buildPackageMembers(
+        // Zoals het deck na een opslag is: mét vastgelegde hash.
+        DocumentIntegrity.recordWrittenBytes(
+          verzegeld,
+          MarkdownService().generateDeck(verzegeld),
+        ),
+      );
+      expect(leden.keys, contains('Pentest.seal.json'));
+      expect(utf8.decode(leden['Pentest.seal.json']!), contains('OSCP'));
+      expect(
+        utf8.decode(leden['Pentest.md']!),
+        isNot(contains('ocideck_seal')),
+      );
+      expect(
+        utf8.decode(leden['Pentest.md']!),
+        isNot(contains('ocideck_sig_')),
+      );
+    });
+
+    test('een deck zonder zegel draagt geen leeg lid mee', () async {
+      final leden = await _dienst().buildPackageMembers(_deck());
+      expect(leden.keys, isNot(contains('Pentest.seal.json')));
+    });
+
+    test('de prullenbak neemt het zegelbestand mee', () async {
+      final map = await _tijdelijkeMap();
+      final pad = p.join(map.path, 'los-deck.md');
+      await File(pad).writeAsString('---\nmarp: true\n---\n\n# T\n');
+      final zegel = File(p.join(map.path, 'los-deck.seal.json'))
+        ..writeAsStringSync('{"version":1,"finalized":true}');
+      expect(TrashService.trashTargetsFor(pad), contains(zegel.path));
     });
   });
 
