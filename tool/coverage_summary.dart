@@ -189,9 +189,10 @@ const int perFileFloorPercent = 20;
 /// has to justify.
 ///
 /// Where it must go: 0. Every step down is one file that went from decoration
-/// to something a test can hold accountable. The tail below the floor is
-/// mostly dialogs and the app-shell command layer.
-const int filesBelowFloorBudget = 39;
+/// to something a test can hold accountable. It started at 39 on 2026-07-21
+/// (22 of those files ran not a single line); what is left is mostly the
+/// app-shell command layer and a handful of dialogs.
+const int filesBelowFloorBudget = 21;
 
 /// Slack on the downward ratchet. Coverage of a file that sits near the floor
 /// can wobble by one when an optional dependency (the native OpenCV library
