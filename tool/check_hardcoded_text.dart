@@ -253,7 +253,18 @@ const String _translateCallee = 'm|AppLocalizations.d';
 const String _translateSink = '$_translateCallee|#0';
 
 /// Putten waar een letterlijke string de BEDOELING is.
-const Set<String> _sanctionedSinks = {_translateSink};
+const Set<String> _sanctionedSinks = {
+  _translateSink,
+  // `formatSlideQualityIssue` heeft een lokale helper
+  // `String label(String key) => l10n.d(issue.args[key] ?? key);`. De vier
+  // aanroepen `label('label')` geven daar de SLEUTEL in `issue.args` door, niet
+  // iets wat iemand leest. De `?? key`-tak is een noodrem voor een melding die
+  // vergeten is haar eigen argument te vullen; die tekst hoort de gebruiker
+  // nooit te zien, en 31 vertalingen voor het woord "label" zouden dat ook niet
+  // veranderen. De WAARDEN in die map worden wél bewaakt — via
+  // [_mapValueSinks], aan de schrijfkant in lib/services.
+  'l|lib/l10n/slide_quality_localization.dart|label|#0',
+};
 
 /// Eigen sleutel-waardekanalen: posities waar een MAP wordt doorgegeven en de
 /// WAARDEN daarin zichtbare tekst zijn.
@@ -370,7 +381,10 @@ List<Violation> scanForHardcodedText(String root) {
     if (_isTranslationData(path)) continue;
     if (_contentHomes.contains(path)) continue;
     final result = parseFile(
-      path: file.path,
+      // De analyzer weigert een relatief pad; `scanForHardcodedText('lib')`
+      // vanuit een test gaf daar een harde fout op. Het GEMELDE pad blijft
+      // relatief — dat is wat een mens in de lijst wil lezen.
+      path: file.absolute.path,
       featureSet: FeatureSet.latestLanguageVersion(),
       throwIfDiagnostics: false,
     );

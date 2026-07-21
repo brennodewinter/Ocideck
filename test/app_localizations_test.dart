@@ -5,6 +5,128 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ocideck/l10n/app_localizations.dart';
 
+import '../tool/check_hardcoded_text.dart' show sourceKeysIn;
+
+/// Leenwoorden die in het Engels letterlijk gelijk blijven aan het Nederlands.
+///
+/// Staat bovenaan het bestand en niet in de test, omdat `make add-l10n` deze
+/// lijst bijwerkt (het "unchanged"-deel van de spec) en meerdere tests hem
+/// delen.
+const unchangedInEnglish = {
+  'MASWE',
+  'MASWE-0005',
+  'WSTG-ATHN-07',
+  'Testing for Weak Password Policy',
+  'CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:L/SC:N/SI:N/SA:N',
+  'CWE',
+  'CVE',
+  'F-03',
+  'CVE-2024-1234, CVE-2024-5678',
+  'CWE-89 — Improper Neutralization of SQL',
+  'IBAN',
+  'Server',
+  'Deadline',
+  'Access key ID',
+  'Bucket',
+  'Endpoint',
+  'Secret access key',
+  'WebDAV',
+  'Repository',
+  'Personal access token',
+  'ID',
+  'Test',
+  'Checklists',
+  'Context',
+  'Accent / bullets',
+  'Audio',
+  'Bank',
+  'Bullet',
+  'Code',
+  'Combo',
+  'Donut',
+  'Heatmap',
+  'Video',
+  'Contact',
+  'Coverflow',
+  'Label',
+  'Link',
+  'Laser (X)',
+  'Logo',
+  'Logo px',
+  'Max',
+  'Media',
+  'Meter',
+  'Pen (D)',
+  'Min',
+  'Nextcloud',
+  'Object',
+  'Online',
+  'Online media',
+  'Status',
+  'PREVIEW',
+  'Pitch',
+  'Preview',
+  'Privacy',
+  'SLIDES',
+  'Slide',
+  'slide',
+  'Spider',
+  'Type',
+  'Contrast',
+  ':1).',
+  // The scorecard's "was 375" line. Dutch and English happen to spell it
+  // the same; it is genuinely translated everywhere else.
+  'was',
+};
+
+/// Idem, maar voor ALLE talen: termen die overal letterlijk gelijk blijven —
+/// leenwoorden en technische identifiers (CWE, MASWE, F-03, een CVSS-vector).
+/// Vertalen zou ze onvindbaar maken.
+const unchangedInAllLanguages = {
+  'MASWE',
+  'MASWE-0005',
+  'WSTG-ATHN-07',
+  'Testing for Weak Password Policy',
+  'CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:L/SC:N/SI:N/SA:N',
+  'CWE',
+  'CVE',
+  'F-03',
+  'CVE-2024-1234, CVE-2024-5678',
+  'CWE-89 — Improper Neutralization of SQL',
+  'IBAN',
+  'Server',
+  'Access key ID',
+  'Bucket',
+  'Endpoint',
+  'Secret access key',
+  'WebDAV',
+  'Repository',
+  'Personal access token',
+  'ID',
+  'Test',
+  'Checklists',
+  'Context',
+  'Accent / bullets',
+  'Bullet',
+  'Code',
+  'Combo',
+  'Coverflow',
+  'Donut',
+  'Heatmap',
+  'Label',
+  'Link',
+  'Logo',
+  'Logo px',
+  'Media',
+  'PREVIEW',
+  'Preview',
+  'SLIDES',
+  'Slide',
+  'slide',
+  'Contrast',
+  ':1).',
+};
+
 void main() {
   tearDown(() => AppLocalizations.setActiveLanguageCode('nl'));
 
@@ -39,72 +161,6 @@ void main() {
   test('all literal Dutch source strings have an English fallback', () {
     AppLocalizations.setActiveLanguageCode('en');
 
-    const unchangedInEnglish = {
-      'MASWE',
-      'MASWE-0005',
-      'WSTG-ATHN-07',
-      'Testing for Weak Password Policy',
-      'CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:L/SC:N/SI:N/SA:N',
-      'CWE',
-      'CVE',
-      'F-03',
-      'CVE-2024-1234, CVE-2024-5678',
-      'CWE-89 — Improper Neutralization of SQL',
-      'IBAN',
-      'Server',
-      'Deadline',
-      'Access key ID',
-      'Bucket',
-      'Endpoint',
-      'Secret access key',
-      'WebDAV',
-      'Repository',
-      'Personal access token',
-      'ID',
-      'Test',
-      'Checklists',
-      'Context',
-      'Accent / bullets',
-      'Audio',
-      'Bank',
-      'Bullet',
-      'Code',
-      'Combo',
-      'Donut',
-      'Heatmap',
-      'Video',
-      'Contact',
-      'Coverflow',
-      'Label',
-      'Link',
-      'Laser (X)',
-      'Logo',
-      'Logo px',
-      'Max',
-      'Media',
-      'Meter',
-      'Pen (D)',
-      'Min',
-      'Nextcloud',
-      'Object',
-      'Online',
-      'Online media',
-      'Status',
-      'PREVIEW',
-      'Pitch',
-      'Preview',
-      'Privacy',
-      'SLIDES',
-      'Slide',
-      'slide',
-      'Spider',
-      'Type',
-      'Contrast',
-      ':1).',
-      // The scorecard's "was 375" line. Dutch and English happen to spell it
-      // the same; it is genuinely translated everywhere else.
-      'was',
-    };
     final expression = RegExp(r'''\.d\(\s*('(?:\\.|[^'])*'|"(?:\\.|[^"])*")''');
     final files = Directory('lib')
         .listSync(recursive: true)
@@ -129,50 +185,6 @@ void main() {
   });
 
   test('all literal Dutch source strings are translated in every language', () {
-    const unchangedInAllLanguages = {
-      'MASWE',
-      'MASWE-0005',
-      'WSTG-ATHN-07',
-      'Testing for Weak Password Policy',
-      'CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:L/SC:N/SI:N/SA:N',
-      'CWE',
-      'CVE',
-      'F-03',
-      'CVE-2024-1234, CVE-2024-5678',
-      'CWE-89 — Improper Neutralization of SQL',
-      'IBAN',
-      'Server',
-      'Access key ID',
-      'Bucket',
-      'Endpoint',
-      'Secret access key',
-      'WebDAV',
-      'Repository',
-      'Personal access token',
-      'ID',
-      'Test',
-      'Checklists',
-      'Context',
-      'Accent / bullets',
-      'Bullet',
-      'Code',
-      'Combo',
-      'Coverflow',
-      'Donut',
-      'Heatmap',
-      'Label',
-      'Link',
-      'Logo',
-      'Logo px',
-      'Media',
-      'PREVIEW',
-      'Preview',
-      'SLIDES',
-      'Slide',
-      'slide',
-      'Contrast',
-      ':1).',
-    };
     final expression = RegExp(r'''\.d\(\s*('(?:\\.|[^'])*'|"(?:\\.|[^"])*")''');
     final files = Directory('lib')
         .listSync(recursive: true)
@@ -186,6 +198,40 @@ void main() {
         sources.add(_unquoteDartString(match.group(1)!));
       }
     }
+
+    final missingByLanguage = <String, List<String>>{};
+    for (final languageCode in AppLocalizations.languageNames.keys) {
+      if (languageCode == 'nl') continue;
+      final missing = sources.where((source) {
+        if (unchangedInAllLanguages.contains(source)) return false;
+        return !AppLocalizations.hasDirectDutchSourceTranslation(
+          languageCode,
+          source,
+        );
+      }).toList()..sort();
+      if (missing.isNotEmpty) missingByLanguage[languageCode] = missing;
+    }
+
+    expect(missingByLanguage, isEmpty);
+  });
+
+  test('every indirect Dutch source key is translated in every language', () {
+    // De andere helft van dezelfde belofte. De test hierboven leest alleen een
+    // LETTERLIJKE `d('…')`; een bronstring die via een doorgeefluik in `d()`
+    // belandt — `EditorField(label: 'Titel (H1)')`, `SectionLabel('Bullets')`,
+    // `SettingsSearchEntry(label: …)` — ziet hij niet. Precies daar zaten
+    // honderden onvertaalde labels: de string stond op de goede plek, maar in
+    // 31 talen was hij Nederlands.
+    //
+    // De datastroomanalyse van tool/check_hardcoded_text.dart weet welke
+    // literals langs zo'n weg lopen, en levert ze hier aan. Zo staat de eis op
+    // één plek in plaats van als een lijst doorgeefluiken die iemand met de
+    // hand moet bijhouden: een NIEUW doorgeefluik komt er vanzelf bij.
+    final sources = sourceKeysIn('lib');
+
+    // Een stilgevallen analyse meldt niets en zou dus groen zijn — dat is de
+    // ene manier waarop deze test kan liegen.
+    expect(sources, isNotEmpty);
 
     final missingByLanguage = <String, List<String>>{};
     for (final languageCode in AppLocalizations.languageNames.keys) {
