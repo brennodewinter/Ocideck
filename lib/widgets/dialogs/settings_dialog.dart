@@ -19,6 +19,7 @@ import '../../services/reference_standards.dart';
 import '../../services/ai_client_service.dart';
 import '../../services/ai_security_gate.dart';
 import '../../services/file_service.dart';
+import '../../services/secret_store.dart';
 import '../../services/recovery_service.dart';
 import '../../services/classification_enforcement_policy.dart';
 import '../../services/git/git_forge.dart';

@@ -147,7 +147,7 @@ access token, and any AI API key) are stored in the operating-system keychain
 store) — never in a plain config file. Server URLs and usernames are ordinary
 settings.
 
-Two boundaries of that sentence are worth naming, because "in the keychain" is
+Three boundaries of that sentence are worth naming, because "in the keychain" is
 easy to over-read:
 
 - For S3 it is the **secret** access key that is protected. The **access key ID**
@@ -160,6 +160,19 @@ easy to over-read:
   kept out of the command line, out of the remote URL and out of `.git/config`,
   and the subprocess runs with a stripped environment — but for the life of that
   process the token exists outside the keychain.
+- **In the browser there is no keychain, so the web build stores no secrets at
+  all.** A browser has nowhere to put a secret that other scripts on the same
+  page cannot reach: anything the app "encrypted" into browser storage would
+  have to keep its key in that same storage, which protects nothing. Rather than
+  make a promise the platform cannot keep, the web build refuses — the password,
+  token and key fields are disabled there and say why on the spot. Sources that
+  need no secret (a public URL, a local file) keep working. To use
+  Nextcloud/WebDAV, S3, a git forge or an AI key, use the desktop build, where
+  the sentence above holds.
+
+*Corrected 2026-07-22: the web build previously wrote these secrets into browser
+storage next to the key that encrypted them, which this section did not say and
+which the sentence above did not describe. It now stores nothing.*
 
 ### The AI assistant is off by default and fail-closed
 
