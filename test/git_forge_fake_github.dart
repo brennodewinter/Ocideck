@@ -167,25 +167,6 @@ class FakeGitHubTransport implements GitTransport {
       return _notFound();
     }
 
-    // search/code?q=<term> repo:owner/repo path:decks filename:deck.md
-    // The qualifiers are ignored here on purpose: the fake returns every file
-    // whose content contains the free-text term, so the adapter's own filtering
-    // (down to decks/<name>/deck.md) is what the test exercises.
-    if (s.length == 2 && s[0] == 'search' && s[1] == 'code') {
-      final term = (uri.queryParameters['q'] ?? '')
-          .split(' repo:')
-          .first
-          .trim();
-      final lower = term.toLowerCase();
-      return _json({
-        'items': [
-          for (final e in repo.files.entries)
-            if (utf8.decode(e.value).toLowerCase().contains(lower))
-              {'path': e.key, 'name': e.key.split('/').last},
-        ],
-      });
-    }
-
     return _notFound();
   }
 

@@ -309,25 +309,33 @@ abstract class GitForge {
 
 /// Sommige forges kunnen server-side in de bestandsinhoud zoeken — veel
 /// goedkoper dan elk deck lezen (§9.3). Bewust een aparte capability en geen
-/// [GitForge]-methode: Gitea/Forgejo heeft er geen REST-endpoint voor
-/// (go-gitea/gitea#31375), en het [GitForge]-contract hoort alleen te beloven
-/// wat élke adapter waar kan maken — een methode die eerlijk zegt dát hij het
-/// niet kan is beter dan een die `UnimplementedError` gooit. GitHub en GitLab
-/// implementeren dit; de aanroeper toetst met `forge is CodeSearchCapable`.
+/// [GitForge]-methode: lang niet elke forge kan dit, en het [GitForge]-contract
+/// hoort alleen te beloven wat élke adapter waar kan maken — een interface die
+/// eerlijk zegt dát hij iets niet kan is beter dan een methode die
+/// `UnimplementedError` gooit. De aanroeper toetst met
+/// `forge is CodeSearchCapable`.
+///
+/// Alleen **GitLab** implementeert dit. De andere twee bewust niet:
+/// - **Gitea/Forgejo** heeft er domweg geen REST-endpoint voor
+///   (go-gitea/gitea#31375).
+/// - **GitHub** heeft `/search/code` wél, maar die index is woord-/tokengebaseerd:
+///   een deelwoord (`dekk` in `dekking`) matcht er niet, terwijl de lokale scan
+///   juist op deelstrings zoekt. Als voorfilter zou hij dus stelselmatig decks
+///   overslaan die de gebruiker wél bedoelde — en een versneller die de uitkomst
+///   verandert is geen versnelling maar een bug. GitHub gaat daarom langs
+///   `git grep` (volledig) of de volledige scan.
 abstract interface class CodeSearchCapable {
   /// De deckmappen waarvan een bestand [needle] bevat op [branch], of `null`
-  /// wanneer de forge/instantie het hier niet kan: geen index, een andere dan de
-  /// standaardbranch, of een leeg/dubbelzinnig antwoord waarvan niet te zeggen is
-  /// of het "geen treffers" of "niet doorzoekbaar" betekent.
+  /// wanneer de forge/instantie het hier niet kan: geen index, of een
+  /// leeg/dubbelzinnig antwoord waarvan niet te zeggen is of het "geen treffers"
+  /// of "niet doorzoekbaar" betekent.
   ///
   /// Geïndexeerd, dus **best-effort**: het kan een net vastgelegde deck missen.
   /// De aanroeper markeert de dekking als zodanig en houdt de volledige scan als
-  /// terugval. [defaultBranch] is de standaardbranch zoals de forge hem kent —
-  /// GitHub kan alléén díé doorzoeken.
+  /// terugval.
   Future<Set<String>?> searchDeckCodeDirs(
     String needle, {
     required String branch,
-    required String defaultBranch,
   });
 }
 

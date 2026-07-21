@@ -13,9 +13,11 @@ import 'git_forge_fake.dart';
 import 'git_forge_fake_github.dart';
 import 'git_forge_fake_gitlab.dart';
 
-// De server-side codezoekopdracht (§9.3): GitHub en GitLab kunnen aanwijzen
-// wélke decks een term bevatten, zodat DeckSearch alleen die leest. Gitea/Forgejo
-// heeft er geen REST-endpoint voor en doet dus niet mee.
+// De server-side codezoekopdracht (§9.3): GitLab kan aanwijzen wélke decks een
+// term bevatten, zodat DeckSearch alleen díé leest. De andere twee doen bewust
+// niet mee — Gitea/Forgejo heeft er geen REST-endpoint voor, en GitHub's index is
+// woordgebaseerd en zou deelwoorden stelselmatig missen. Zij gaan langs
+// `git grep` of de volledige scan.
 
 Uint8List _b(String s) => Uint8List.fromList(utf8.encode(s));
 
@@ -48,39 +50,6 @@ const _giteaConfig = GitRepoConfig(
 );
 
 void main() {
-  group('GitHubForge.searchDeckCodeDirs', () {
-    GitHubForge forge(FakeRepo repo) => GitHubForge(
-      config: _githubConfig,
-      token: 't',
-      transport: FakeGitHubTransport(repo),
-    );
-
-    test('geeft de deckmappen terug en filtert niet-deck.md weg', () async {
-      final dirs = await forge(
-        _repo(),
-      ).searchDeckCodeDirs('dekking', branch: 'main', defaultBranch: 'main');
-      expect(dirs, {'decks/jaarplan', 'decks/kwartaal'});
-    });
-
-    test('een andere branch dan de standaard: geen versnelling', () async {
-      // GitHub indexeert alléén de standaardbranch.
-      final dirs = await forge(
-        _repo(),
-      ).searchDeckCodeDirs('dekking', branch: 'feature', defaultBranch: 'main');
-      expect(dirs, isNull);
-    });
-
-    test('geen serverzijdige treffer geeft null, niet leeg', () async {
-      // Leeg is dubbelzinnig — geen treffer óf niet geïndexeerd — dus terugvallen.
-      final dirs = await forge(_repo()).searchDeckCodeDirs(
-        'nietbestaand',
-        branch: 'main',
-        defaultBranch: 'main',
-      );
-      expect(dirs, isNull);
-    });
-  });
-
   group('GitLabForge.searchDeckCodeDirs', () {
     GitLabForge forge(FakeRepo repo) => GitLabForge(
       config: _gitlabConfig,
@@ -91,34 +60,33 @@ void main() {
     test('geeft de deckmappen terug en filtert niet-deck.md weg', () async {
       final dirs = await forge(
         _repo(),
-      ).searchDeckCodeDirs('dekking', branch: 'main', defaultBranch: 'main');
+      ).searchDeckCodeDirs('dekking', branch: 'main');
       expect(dirs, {'decks/jaarplan', 'decks/kwartaal'});
     });
 
     test('werkt ook op een niet-standaardbranch via de ref', () async {
-      // Anders dan GitHub kent GitLab een ref-parameter.
       final dirs = await forge(
         _repo(),
-      ).searchDeckCodeDirs('dekking', branch: 'feature', defaultBranch: 'main');
+      ).searchDeckCodeDirs('dekking', branch: 'feature');
       expect(dirs, {'decks/jaarplan', 'decks/kwartaal'});
     });
 
-    test('geen treffer geeft null', () async {
-      final dirs = await forge(_repo()).searchDeckCodeDirs(
-        'nietbestaand',
-        branch: 'main',
-        defaultBranch: 'main',
-      );
+    test('geen treffer geeft null, niet leeg', () async {
+      // Leeg is dubbelzinnig — geen treffer óf blobs-zoeken staat uit op deze
+      // instantie — dus terugvallen op de volledige scan.
+      final dirs = await forge(
+        _repo(),
+      ).searchDeckCodeDirs('nietbestaand', branch: 'main');
       expect(dirs, isNull);
     });
   });
 
   group('ServerCodeSearchShortlister', () {
     test('verpakt de servertreffers als een best-effort shortlist', () async {
-      final forge = GitHubForge(
-        config: _githubConfig,
+      final forge = GitLabForge(
+        config: _gitlabConfig,
         token: 't',
-        transport: FakeGitHubTransport(_repo()),
+        transport: FakeGitLabTransport(_repo()),
       );
       final result = await ServerCodeSearchShortlister(
         forge,
@@ -140,18 +108,22 @@ void main() {
       ).shortlist('dekking', caseSensitive: false, branch: 'main');
       expect(result, isNull);
     });
+
+    test('ook GitHub versnelt niet — die zoekt lokaal', () async {
+      final forge = GitHubForge(
+        config: _githubConfig,
+        token: 't',
+        transport: FakeGitHubTransport(_repo()),
+      );
+      final result = await ServerCodeSearchShortlister(
+        forge,
+      ).shortlist('dekking', caseSensitive: false, branch: 'main');
+      expect(result, isNull);
+    });
   });
 
   group('CodeSearchCapable', () {
-    test('GitHub en GitLab kunnen het, Gitea/Forgejo niet', () {
-      expect(
-        GitHubForge(
-          config: _githubConfig,
-          token: '',
-          transport: FakeGitHubTransport(_repo()),
-        ),
-        isA<CodeSearchCapable>(),
-      );
+    test('alleen GitLab kan het; GitHub en Gitea/Forgejo niet', () {
       expect(
         GitLabForge(
           config: _gitlabConfig,
@@ -159,6 +131,17 @@ void main() {
           transport: FakeGitLabTransport(_repo()),
         ),
         isA<CodeSearchCapable>(),
+      );
+      // GitHub's /search/code bestaat wél, maar is woord-/tokengebaseerd: als
+      // voorfilter zou hij deelwoorden missen en de uitkomst veranderen. Bewust
+      // niet geïmplementeerd — zie de doc bij CodeSearchCapable.
+      expect(
+        GitHubForge(
+          config: _githubConfig,
+          token: '',
+          transport: FakeGitHubTransport(_repo()),
+        ),
+        isNot(isA<CodeSearchCapable>()),
       );
       expect(
         GiteaForge(
