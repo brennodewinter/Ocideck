@@ -95,7 +95,7 @@ project folders reasonably shallow.
 |---|---|---|
 | Max file length | **1000 lines** | `tool/check_conventions.dart`, `maxFileLines` |
 | Max method/function length | **150 lines** | `tool/check_method_length.dart:26` |
-| Coverage floor | **78 %** line coverage | `Makefile`, the `coverage` target |
+| Coverage floor | **80 %** line coverage | `Makefile`, the `coverage` target |
 
 ## Measured figures
 

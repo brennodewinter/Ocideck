@@ -130,4 +130,4 @@ method-length, dead-code, and the test suite with the coverage floor. See
 length 150): existing over-limit spots are grandfathered but may only shrink, and
 no new violations are allowed.
 
-**Coverage floor** — the minimum enforced line coverage (currently **78 %**).
+**Coverage floor** — the minimum enforced line coverage (currently **80 %**).
