@@ -82,6 +82,7 @@ remote, the number you see locally is the number that gates the push.
 | [`make deps-outdated`](#make-deps-outdated-advisory) | Dependency freshness (advisory) | — | ✅ | — |
 | [`make catalogs-outdated`](#make-catalogs-outdated-advisory) | Bundled reference data vs upstream (advisory, pre-release) | — | — | — |
 | [`make check-secrets`](#make-check-secrets) | No credential-shaped strings in the working tree or in history | — | ✅ | — |
+| [`make sast`](#make-sast) | Semgrep rules over shipped Dart (cert validation, subprocesses, weak randomness) | — | ✅ | — |
 | [`make trivy`](#make-trivy-advisory) | Dart-dep CVEs + committed secrets (advisory) | — | — | ✅ (advisory) |
 | [`make check-actions`](#make-check-actions-advisory) | Pinned CI Actions vs their latest release (advisory) | — | — | — |
 
@@ -360,6 +361,31 @@ also declares them, but see the [CI note](#continuous-integration).)
 - **Covers:** dependency freshness only. **Advisory** — it may need network
   access and an outdated package is not in itself a regression. Not part of the
   required gate.
+
+### `make sast`
+- **Runs:** `semgrep scan --config semgrep/ocideck.yaml --metrics=off --error`
+  over `lib/`, `tool/` and `test/`. Needs the `semgrep` binary
+  (`brew install semgrep`).
+- **Covers:** three invariants that the Dart-specific tools do not check —
+  certificate validation being overridden outside `net_guard.dart`, a subprocess
+  started outside the git layer (it escapes NetGuard), and a non-cryptographic
+  `Random()` bound to a name that says "secret".
+- **Rules are local and committed**, in [`semgrep/ocideck.yaml`](../semgrep/ocideck.yaml).
+  Deliberately not `--config auto`: that fetches rules over the network at scan
+  time and reports metrics. Local rules keep the gate offline and reproducible,
+  the same reason `deps-verify-offline` exists.
+- **Why Semgrep at all**, given `check_conventions.dart` already knows the AST:
+  because it parses, and grep does not. Writing these rules, a grep for
+  `badCertificateCallback` returned three hits in `lib/` — all three inside doc
+  comments explaining the pinning design. Semgrep returns none, and flags only a
+  real assignment. The ruleset is scoped to that difference and does not repeat
+  the existing gates.
+- **Failure means:** a rule matched. Read it before silencing it; each rule is
+  deliberately narrow (the randomness rule keys on the *variable name* so a
+  `Random()` for an animation stays quiet).
+- **Both directions are tested:** zero findings across 627 files on `main`, and
+  three findings on a file with planted violations — with the commented-out
+  equivalents correctly ignored.
 
 ### `make check-secrets`
 - **Runs:** `gitleaks` over the working tree and over all history, then

@@ -1,4 +1,4 @@
-.PHONY: check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-method-length check-dead-code check-hardcoded-text coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
+.PHONY: sast check-secrets refresh-catalogs setup format format-check fix analyze test coverage test-contracts test-preview test-export test-state test-services test-presenter deps-outdated deps-check deps-verify-offline trivy check-actions catalogs-outdated refresh-lexicon licenses sbom sbom-verify check-conventions check-method-length check-dead-code check-hardcoded-text coverage-per-file add-l10n l10n-check mutate mutate-parsers build-web check-web build-macos build-windows build-linux build-all build-release check check-full help
 
 # macOS (and some Linux setups) ship a low open-file-descriptor soft limit. The
 # full test suite exhausts it and fails with "Too many open files" — worst under
@@ -33,7 +33,7 @@ endif
 help:
 	@echo "OciDeck quality targets:"
 	@echo "  make check           Format check + static analysis + full Flutter test suite + coverage floor."
-	@echo "  make check-full      make check + secrets sweep + licences, SBOM, deps, web hardening."
+	@echo "  make check-full      make check + secrets + SAST + licences, SBOM, deps, web hardening."
 	@echo "  make coverage        Test suite with coverage: enforce the floor AND that every lib/ file is in some test."
 	@echo "  make mutate          Mutation check for dead/untested branch operands (manual; FILE/TESTS overridable)."
 	@echo "  make mutate-parsers  Mutation sweep over all markdown parsers/serializers (manual, slow)."
@@ -46,6 +46,7 @@ help:
 	@echo "  make test-presenter  Fullscreen presenter interaction tests."
 	@echo "  make deps-outdated   Advisory dependency freshness report."
 	@echo "  make deps-check      Verify vendored JS bundles vs manifest + OSV CVEs."
+	@echo "  make sast            Semgrep over shipped Dart with the rules in semgrep/ (needs semgrep)."
 	@echo "  make check-secrets   Sweep working tree and history for committed secrets (needs gitleaks + trufflehog)."
 	@echo "  make trivy           Advisory supply-chain scan: Dart-dep CVEs + committed secrets (needs trivy)."
 	@echo "  make check-actions   Advisory: exact-pinned CI Actions vs their latest release."
@@ -268,6 +269,23 @@ deps-outdated:
 # traffic carrying credentials to third parties, from a project whose whole
 # premise is that nothing leaves the machine unasked. Verify by hand if ever
 # needed, deliberately, on a single finding.
+# Static analysis with Semgrep over the shipped Dart, using rules committed in
+# semgrep/. Deliberately NOT `--config auto`: that fetches rules over the network
+# at scan time and phones home with metrics. Local rules keep the gate offline
+# and reproducible, which is the same reason `deps-verify-offline` exists.
+#
+# The ruleset does not repeat what tool/check_conventions.dart already does with
+# real AST knowledge. Semgrep earns its place because it parses: a grep for
+# `badCertificateCallback` returns three doc-comment hits in lib/, Semgrep
+# returns none and would flag only a real assignment.
+sast:
+	@echo "== OciDeck check: SAST (Semgrep) =="
+	@echo "Command: semgrep scan --config semgrep/ocideck.yaml --metrics=off --error"
+	@echo "Covers: shipped Dart in lib/, plus tool/ and test/ where the rule applies."
+	@echo "Failure means: a rule matched. Read it — every rule here is scoped to be quiet."
+	@command -v semgrep >/dev/null 2>&1 || { echo "semgrep not found — install it (macOS: brew install semgrep)"; exit 2; }
+	semgrep scan --config semgrep/ocideck.yaml --metrics=off --error lib/ tool/ test/
+
 check-secrets:
 	@echo "== OciDeck check: committed secrets =="
 	@echo "Command: gitleaks (dir + git) and trufflehog (filesystem + git)"
@@ -611,6 +629,6 @@ check: format-check analyze check-conventions check-method-length check-dead-cod
 
 # Extended local check: the gate plus licence/compliance, bundled-JS CVEs, the
 # web-hardening assertion (rebuilds the web bundle), and a freshness report.
-check-full: check check-secrets licenses sbom-verify deps-check check-web deps-outdated
+check-full: check check-secrets sast licenses sbom-verify deps-check check-web deps-outdated
 	@echo "== OciDeck extended check complete =="
 	@echo "Validated: required quality gate, licence compliance, SBOM freshness, bundled-JS CVEs, web hardening, and dependency freshness."

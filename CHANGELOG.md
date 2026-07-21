@@ -239,6 +239,22 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   rij, dus ze kunnen nooit over elkaar heen vallen.
 
 ### Added
+- **Een poort die de code op drie beveiligingsfouten controleert** (`make sast`,
+  met Semgrep). Hij let op precies drie dingen: of certificaatcontrole ergens
+  wordt uitgezet buiten de plek waar dat bij het vastpinnen hoort, of er een
+  extern programma wordt gestart buiten de git-laag — dat ontsnapt namelijk aan
+  de netwerkbewaking — en of er een niet-veilige toevalsgenerator wordt gebruikt
+  voor iets dat een sleutel of wachtwoord heet.
+
+  De regels staan in de repository zelf en worden niet van internet gehaald
+  tijdens het controleren: dat houdt de poort werkend zonder verbinding, en
+  voorkomt dat de controle zelf gegevens wegstuurt.
+
+  Ze zijn in twee richtingen getoetst — nul meldingen op de bestaande code, en
+  wél alarm op een bestand waarin de fouten expres waren gezet. Wat er in
+  commentáár over die fouten geschreven staat, wordt terecht genegeerd; dat is
+  ook precies waarom hier een echte parser staat en geen zoekopdracht op tekst.
+
 - **Een poort die de repository op weggelekte geheimen doorzoekt**
   (`make check-secrets`). Twee onafhankelijke scanners — gitleaks en trufflehog
   — kijken naar de werkbestanden én naar de volledige geschiedenis, want een
