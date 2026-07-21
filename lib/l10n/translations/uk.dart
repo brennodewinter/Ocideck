@@ -1807,8 +1807,8 @@ const _dutchSourceAddUk = <String, String>{
       'Ця перевірка не працює у вебверсії: розпізнавання облич потребує системної бібліотеки, якої немає в браузері. Скористайтеся десктопною версією, щоб перевірити зображення на обличчя.',
   'Het token heeft lees- en schrijfrechten op de repository nodig. Gitea en Forgejo kennen geen server-side zoeken; OciDeck zoekt lokaal.':
       'Токен потребує доступу на читання й запис до репозиторію. Gitea та Forgejo не мають пошуку на сервері; OciDeck шукає локально.',
-  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven). Codezoeken op de server dekt alleen de standaardbranch.':
-      'Токен потребує область repo (або деталізовано: Contents на читання й запис). Пошук коду на сервері охоплює лише гілку за замовчуванням.',
+  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven).':
+      'Токен потребує область repo (або деталізовано: Contents на читання й запис).',
   'Het token heeft read_repository, write_repository en read_api nodig. Server-side zoeken vereist Advanced- of Exact Search.':
       'Токен потребує read_repository, write_repository та read_api. Пошук на сервері вимагає Advanced або Exact Search.',
   'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':

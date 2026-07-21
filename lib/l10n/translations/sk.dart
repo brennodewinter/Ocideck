@@ -1796,8 +1796,8 @@ const _dutchSourceAddSk = <String, String>{
       'Táto kontrola sa vo webovej verzii nespúšťa: rozpoznávanie tvárí vyžaduje systémovú knižnicu, ktorú prehliadač nemá. Na kontrolu tvárí v obrázkoch použite desktopovú verziu.',
   'Het token heeft lees- en schrijfrechten op de repository nodig. Gitea en Forgejo kennen geen server-side zoeken; OciDeck zoekt lokaal.':
       'Token potrebuje práva na čítanie a zápis do repozitára. Gitea a Forgejo nemajú vyhľadávanie na serveri; OciDeck hľadá lokálne.',
-  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven). Codezoeken op de server dekt alleen de standaardbranch.':
-      'Token potrebuje rozsah repo (alebo podrobne: Contents na čítanie a zápis). Vyhľadávanie kódu na serveri pokrýva len predvolenú vetvu.',
+  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven).':
+      'Token potrebuje rozsah repo (alebo podrobne: Contents na čítanie a zápis).',
   'Het token heeft read_repository, write_repository en read_api nodig. Server-side zoeken vereist Advanced- of Exact Search.':
       'Token potrebuje read_repository, write_repository a read_api. Vyhľadávanie na serveri vyžaduje Advanced alebo Exact Search.',
   'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':

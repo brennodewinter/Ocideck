@@ -1796,8 +1796,8 @@ const _dutchSourceAddHr = <String, String>{
       'Ova se provjera ne izvodi u web verziji: prepoznavanje lica zahtijeva sistemsku biblioteku koju preglednik nema. Upotrijebite verziju za računalo da provjerite lica na slikama.',
   'Het token heeft lees- en schrijfrechten op de repository nodig. Gitea en Forgejo kennen geen server-side zoeken; OciDeck zoekt lokaal.':
       'Token treba prava čitanja i pisanja u repozitorij. Gitea i Forgejo nemaju pretraživanje na poslužitelju; OciDeck pretražuje lokalno.',
-  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven). Codezoeken op de server dekt alleen de standaardbranch.':
-      'Token treba opseg repo (ili detaljno: Contents čitanje i pisanje). Pretraživanje koda na poslužitelju pokriva samo zadanu granu.',
+  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven).':
+      'Token treba opseg repo (ili detaljno: Contents čitanje i pisanje).',
   'Het token heeft read_repository, write_repository en read_api nodig. Server-side zoeken vereist Advanced- of Exact Search.':
       'Token treba read_repository, write_repository i read_api. Pretraživanje na poslužitelju zahtijeva Advanced ili Exact Search.',
   'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':

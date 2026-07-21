@@ -1789,8 +1789,8 @@ const _dutchSourceAddId = <String, String>{
       'Pemeriksaan ini tidak berjalan di versi web: deteksi wajah memerlukan pustaka sistem yang tidak dimiliki peramban. Gunakan versi desktop untuk memeriksa wajah pada gambar.',
   'Het token heeft lees- en schrijfrechten op de repository nodig. Gitea en Forgejo kennen geen server-side zoeken; OciDeck zoekt lokaal.':
       'Token perlu akses baca dan tulis ke repositori. Gitea dan Forgejo tidak punya pencarian sisi server; OciDeck mencari secara lokal.',
-  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven). Codezoeken op de server dekt alleen de standaardbranch.':
-      'Token perlu cakupan repo (atau rinci: Contents baca dan tulis). Pencarian kode di server hanya mencakup cabang default.',
+  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven).':
+      'Token perlu cakupan repo (atau rinci: Contents baca dan tulis).',
   'Het token heeft read_repository, write_repository en read_api nodig. Server-side zoeken vereist Advanced- of Exact Search.':
       'Token perlu read_repository, write_repository dan read_api. Pencarian sisi server memerlukan Advanced atau Exact Search.',
   'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':

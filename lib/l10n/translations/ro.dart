@@ -1807,8 +1807,8 @@ const _dutchSourceAddRo = <String, String>{
       'Această verificare nu rulează în versiunea web: detectarea fețelor necesită o bibliotecă de sistem pe care browserul nu o are. Folosește versiunea desktop pentru a verifica fețele din imagini.',
   'Het token heeft lees- en schrijfrechten op de repository nodig. Gitea en Forgejo kennen geen server-side zoeken; OciDeck zoekt lokaal.':
       'Tokenul are nevoie de acces de citire și scriere la depozit. Gitea și Forgejo nu au căutare pe server; OciDeck caută local.',
-  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven). Codezoeken op de server dekt alleen de standaardbranch.':
-      'Tokenul are nevoie de domeniul repo (sau detaliat: Contents citire și scriere). Căutarea de cod pe server acoperă doar ramura implicită.',
+  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven).':
+      'Tokenul are nevoie de domeniul repo (sau detaliat: Contents citire și scriere).',
   'Het token heeft read_repository, write_repository en read_api nodig. Server-side zoeken vereist Advanced- of Exact Search.':
       'Tokenul are nevoie de read_repository, write_repository și read_api. Căutarea pe server necesită Advanced sau Exact Search.',
   'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':

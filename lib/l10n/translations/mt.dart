@@ -1811,8 +1811,8 @@ const _dutchSourceAddMt = <String, String>{
       'Din il-verifika ma taħdimx fil-verżjoni tal-web: is-sejbien tal-uċuħ jeħtieġ librerija tas-sistema li l-browser m\'għandux. Uża l-verżjoni tad-desktop biex tiċċekkja l-uċuħ fl-istampi.',
   'Het token heeft lees- en schrijfrechten op de repository nodig. Gitea en Forgejo kennen geen server-side zoeken; OciDeck zoekt lokaal.':
       'It-token jeħtieġ aċċess ta\' qari u kitba għar-repożitorju. Gitea u Forgejo m\'għandhomx tfittxija fis-server; OciDeck ifittex lokalment.',
-  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven). Codezoeken op de server dekt alleen de standaardbranch.':
-      'It-token jeħtieġ l-ambitu repo (jew fin: Contents qari u kitba). It-tfittxija tal-kodiċi fis-server tkopri biss il-fergħa prefinita.',
+  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven).':
+      'It-token jeħtieġ l-ambitu repo (jew fin: Contents qari u kitba).',
   'Het token heeft read_repository, write_repository en read_api nodig. Server-side zoeken vereist Advanced- of Exact Search.':
       'It-token jeħtieġ read_repository, write_repository u read_api. It-tfittxija fis-server teħtieġ Advanced jew Exact Search.',
   'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':

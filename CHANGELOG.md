@@ -31,21 +31,27 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   keer openen — valt het zoeken stil terug op de volledige scan, die overal
   werkt. De treffers zelf, en de eerlijke meldingen over onleesbare of afgekapte
   resultaten, blijven ongewijzigd.
-- **Server-side zoeken bij GitHub en GitLab.** Is er geen lokale clone (op web,
-  of vóór de eerste keer openen), dan vraagt het zoeken nu eerst aan de forge
-  zélf welke decks de term bevatten — GitHub via `/search/code`, GitLab via de
-  blobs-zoekopdracht — en leest alleen die. Dat scheelt opnieuw de N lezingen.
-  Deze weg is geïndexeerd en dus **best-effort**: een net gewijzigd deck kan door
-  indexeringsvertraging nog ontbreken, en het zoekscherm zegt dat er dan bij.
-  GitHub doorzoekt alleen de standaardbranch; GitLab vereist dat de instantie
-  Advanced/Exact Search aan heeft. Kan de forge het niet — of Gitea/Forgejo, dat
-  er geen REST-endpoint voor heeft — dan valt het terug op de volledige scan.
+- **Server-side zoeken bij GitLab.** Is er geen lokale clone (op web, of vóór de
+  eerste keer openen), dan vraagt het zoeken bij GitLab eerst aan de forge zélf
+  welke decks de term bevatten — via de blobs-zoekopdracht — en leest alleen die.
+  Dat scheelt opnieuw de N lezingen. Deze weg is geïndexeerd en dus
+  **best-effort**: een net gewijzigd deck kan door indexeringsvertraging nog
+  ontbreken, en het zoekscherm zegt dat er dan bij. Het vereist wel dat de
+  instantie Advanced- of Exact Search aan heeft; zo niet, dan valt het terug op
+  de volledige scan.
+
+  De andere twee doen bewust niet mee. Gitea/Forgejo heeft er domweg geen
+  REST-endpoint voor. GitHub heeft `/search/code` wél, maar die index is
+  woord-/tokengebaseerd: een deelwoord (`dekk` in `dekking`) matcht er niet,
+  terwijl de lokale scan juist op deelstrings zoekt. Als voorfilter zou hij dus
+  stelselmatig decks overslaan die je wél bedoelde — en een versneller die de
+  uitkomst verandert is geen versnelling. Bij beide doet `git grep` (met clone)
+  of de volledige scan het werk.
 - **Uitleg over de tokenrechten in de instellingen.** Onder het tokenveld van een
   git-verbinding staat nu, afhankelijk van de gekozen forge, welke rechten het
   token nodig heeft: bij Gitea/Forgejo lees- en schrijfrechten op de repository
-  (en dat server-side zoeken er niet is), bij GitHub de `repo`-scope met de
-  kanttekening dat codezoeken alleen de standaardbranch dekt, en bij GitLab
-  `read_repository`/`write_repository`/`read_api` met de Advanced/Exact
+  (en dat server-side zoeken er niet is), bij GitHub de `repo`-scope, en bij
+  GitLab `read_repository`/`write_repository`/`read_api` met de Advanced/Exact
   Search-voorwaarde. Proactief, niet pas nadat een verbindingstest is mislukt.
 
 - **Een ontdekkingendia: wat we niet wisten te hebben.** Het aanvalsoppervlak

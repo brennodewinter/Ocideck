@@ -117,21 +117,9 @@ class ServerCodeSearchShortlister implements DeckShortlister {
     // `CodeSearchCapable` is geen subtype van `GitForge`, dus geen promotie:
     // expliciet casten na de guard.
     final search = forge as CodeSearchCapable;
-    // De standaardbranch is nodig omdat GitHub alléén díé indexeert. Eén goedkope
-    // probe, verwaarloosbaar naast N lezingen; faalt hij, dan geen versnelling.
     // caseSensitive hoeft niet mee: een hoofdletterongevoelige serverzoekopdracht
     // geeft een superset, en _searchDeck filtert daarna exact — nooit een gemis.
-    final String defaultBranch;
-    try {
-      defaultBranch = (await forge.probe()).defaultBranch;
-    } on GitForgeException {
-      return null;
-    }
-    final dirs = await search.searchDeckCodeDirs(
-      needle,
-      branch: branch,
-      defaultBranch: defaultBranch,
-    );
+    final dirs = await search.searchDeckCodeDirs(needle, branch: branch);
     if (dirs == null) return null;
     return DeckShortlist(dirs, coverage: DeckSearchCoverage.bestEffort);
   }

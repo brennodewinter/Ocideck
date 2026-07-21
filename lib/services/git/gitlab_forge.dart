@@ -78,14 +78,12 @@ class GitLabForge implements GitForge, CodeSearchCapable {
   Future<Set<String>?> searchDeckCodeDirs(
     String needle, {
     required String branch,
-    required String defaultBranch,
   }) async {
     final term = needle.trim();
     if (term.isEmpty) return null;
-    // Project-scope blobs-zoeken: `ref` mag elke branch zijn (anders dan GitHub),
-    // dus [defaultBranch] hoeft hier niet mee. Beschikbaar alleen wanneer de
-    // instantie Advanced/Exact Search aan heeft; staat dat uit, dan komt er een
-    // leeg antwoord terug — dat vangen we hieronder af.
+    // Project-scope blobs-zoeken: `ref` mag elke branch zijn. Beschikbaar alleen
+    // wanneer de instantie Advanced/Exact Search aan heeft; staat dat uit, dan
+    // komt er een leeg antwoord terug — dat vangen we hieronder af.
     final GitResponse response;
     try {
       response = await _transport.get(

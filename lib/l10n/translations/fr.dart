@@ -746,8 +746,8 @@ const _dutchSourceAddFr = {
       'Cette vérification ne s\'exécute pas dans la version web : la détection de visages nécessite une bibliothèque système absente du navigateur. Utilisez la version bureau pour vérifier les visages sur les images.',
   'Het token heeft lees- en schrijfrechten op de repository nodig. Gitea en Forgejo kennen geen server-side zoeken; OciDeck zoekt lokaal.':
       'Le jeton doit avoir un accès en lecture et écriture au dépôt. Gitea et Forgejo n\'ont pas de recherche côté serveur ; OciDeck cherche en local.',
-  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven). Codezoeken op de server dekt alleen de standaardbranch.':
-      'Le jeton doit avoir la portée repo (ou fin : Contents en lecture et écriture). La recherche de code côté serveur ne couvre que la branche par défaut.',
+  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven).':
+      'Le jeton doit avoir la portée repo (ou fin : Contents en lecture et écriture).',
   'Het token heeft read_repository, write_repository en read_api nodig. Server-side zoeken vereist Advanced- of Exact Search.':
       'Le jeton doit avoir read_repository, write_repository et read_api. La recherche côté serveur nécessite Advanced ou Exact Search.',
   'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':
