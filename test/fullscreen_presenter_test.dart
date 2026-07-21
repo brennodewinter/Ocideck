@@ -799,6 +799,25 @@ void main() {
     await tester.pumpWidget(const SizedBox());
   });
 
+  testWidgets('a plain N opens the user notes panel', (tester) async {
+    // De legenda belooft "N": zonder modifier deed die toets vroeger niets,
+    // waardoor de sneltoets in de praktijk onvindbaar was.
+    await tester.pumpWidget(_host(slides));
+    await tester.pump();
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.keyN);
+    await tester.pump();
+    expect(find.text('Mijn notities'), findsOneWidget);
+
+    // Binnen het notitieveld typt een kale N een letter, dus daar sluit alleen
+    // Ctrl+N (of Esc) het paneel weer.
+    await sendControlKey(tester, LogicalKeyboardKey.keyN);
+    await tester.pump();
+    expect(find.text('Mijn notities'), findsNothing);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
   testWidgets('Escape closes user notes without exiting presentation', (
     tester,
   ) async {

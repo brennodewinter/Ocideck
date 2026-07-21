@@ -115,6 +115,13 @@ extension _PresenterKeys on _FullscreenPresenterState {
       case LogicalKeyboardKey.keyP:
         _togglePresenterView();
         return KeyEventResult.handled;
+      case LogicalKeyboardKey.keyN:
+        // Kale N opent de eigen notities, net als elke andere letter hier een
+        // kale sneltoets is. Ctrl/Cmd+N blijft óók werken: binnen het
+        // notitieveld typt een kale N gewoon een 'n', dus dáár is de
+        // modifier-variant de enige die kan sluiten (zie [_handleKey]).
+        _toggleUserNotesMode();
+        return KeyEventResult.handled;
       case LogicalKeyboardKey.keyR:
         _resetTimer();
         return KeyEventResult.handled;

@@ -103,7 +103,7 @@ extension _PresenterOverlays on _FullscreenPresenterState {
       ('Home · End', l10n.d('Eerste · laatste slide')),
       ('G', l10n.d('Slide-overzicht (pijltjes + Enter)')),
       ('P', l10n.d('Presenter view (notities, klok)')),
-      ('Ctrl+N', l10n.d('Mijn notities aan/uit')),
+      ('N · Ctrl+N', l10n.d('Mijn notities aan/uit')),
       ('S', l10n.d('Scherm wisselen (meerdere schermen)')),
       ('B · W', l10n.d('Zwart · wit scherm')),
       ('D · T · Shift+E', l10n.d('Pen · markeerstift · gum')),
