@@ -739,6 +739,8 @@ const _dutchSourceFy = {
 };
 
 const _dutchSourceAddFy = {
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'In tuskenkop dy\'t in nij diel fan de presintaasje oankundiget. Hâld it koart. Foegje fia de ôfbyldingsbibleteek in eftergrûnbyld ta.',
   'Bronnen doorzoeken…': 'Boarnen trochsykje…',
   'Niet doorzocht': 'Net trochsocht',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':

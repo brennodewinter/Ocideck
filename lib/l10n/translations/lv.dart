@@ -1780,6 +1780,8 @@ const _dutchSourceLv = {
 };
 
 const _dutchSourceAddLv = <String, String>{
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Sadaļas virsraksts, kas paziņo par jaunu prezentācijas daļu. Turiet to īsu. Pievienojiet fona attēlu no attēlu bibliotēkas.',
   'Bronnen doorzoeken…': 'Meklē avotos…',
   'Niet doorzocht': 'Nav meklēts',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':

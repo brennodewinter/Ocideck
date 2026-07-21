@@ -1817,6 +1817,8 @@ const _dutchSourceGa = {
 };
 
 const _dutchSourceAddGa = <String, String>{
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Ceannteideal rannóige a fhógraíonn cuid nua den chur i láthair. Coinnigh gearr é. Cuir íomhá chúlra leis ón leabharlann íomhánna.',
   'Bronnen doorzoeken…': 'Ag cuardach foinsí…',
   'Niet doorzocht': 'Gan chuardach',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':

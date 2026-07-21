@@ -735,6 +735,8 @@ const _dutchSourceEs = {
 };
 
 const _dutchSourceAddEs = {
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Un subtítulo de sección que anuncia una nueva parte de la presentación. Mantenlo breve. Añade una imagen de fondo desde la biblioteca de imágenes.',
   'Bronnen doorzoeken…': 'Buscando en las fuentes…',
   'Niet doorzocht': 'No buscado',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':

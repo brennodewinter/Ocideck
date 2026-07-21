@@ -1799,6 +1799,8 @@ const _dutchSourceUk = {
 };
 
 const _dutchSourceAddUk = <String, String>{
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Підзаголовок розділу, що оголошує нову частину презентації. Тримайте його коротким. Додайте фонове зображення з бібліотеки зображень.',
   'Bronnen doorzoeken…': 'Пошук у джерелах…',
   'Niet doorzocht': 'Не переглянуто',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':

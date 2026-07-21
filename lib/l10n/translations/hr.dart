@@ -1788,6 +1788,8 @@ const _dutchSourceHr = {
 };
 
 const _dutchSourceAddHr = <String, String>{
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Naslov odjeljka koji najavljuje novi dio prezentacije. Neka bude kratak. Iz knjižnice slika dodajte pozadinsku sliku.',
   'Bronnen doorzoeken…': 'Pretraživanje izvora…',
   'Niet doorzocht': 'Nije pretraženo',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':

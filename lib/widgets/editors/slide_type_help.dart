@@ -19,7 +19,7 @@ String slideTypeHelpText(AppLocalizations l10n, SlideType type) {
       );
     case SlideType.section:
       return l10n.d(
-        'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.',
+        'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.',
       );
     case SlideType.bullets:
       return l10n.d(

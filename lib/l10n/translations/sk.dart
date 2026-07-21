@@ -1788,6 +1788,8 @@ const _dutchSourceSk = {
 };
 
 const _dutchSourceAddSk = <String, String>{
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Nadpis sekcie, ktorý ohlasuje novú časť prezentácie. Buďte struční. Pridajte obrázok na pozadie z knižnice obrázkov.',
   'Bronnen doorzoeken…': 'Prehľadávanie zdrojov…',
   'Niet doorzocht': 'Neprehľadané',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':

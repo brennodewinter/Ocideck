@@ -1803,6 +1803,8 @@ const _dutchSourceMt = {
 };
 
 const _dutchSourceAddMt = <String, String>{
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Intestatura ta\' taqsima li tħabbar parti ġdida tal-preżentazzjoni. Żommha qasira. Żid immaġni ta\' sfond mil-librerija tal-immaġini.',
   'Bronnen doorzoeken…': 'Tfittex fis-sorsi…',
   'Niet doorzocht': 'Mhux imfittex',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':

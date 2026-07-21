@@ -1799,6 +1799,8 @@ const _dutchSourceRo = {
 };
 
 const _dutchSourceAddRo = <String, String>{
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Un subtitlu de secțiune care anunță o nouă parte a prezentării. Păstrează-l scurt. Adaugă o imagine de fundal din biblioteca de imagini.',
   'Bronnen doorzoeken…': 'Se caută în surse…',
   'Niet doorzocht': 'Necăutat',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':

@@ -1785,6 +1785,8 @@ const _dutchSourceHu = {
 };
 
 const _dutchSourceAddHu = <String, String>{
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Szakaszcím, amely a bemutató új részét jelzi. Tartsd röviden. Adj hozzá háttérképet a képtárból.',
   'Bronnen doorzoeken…': 'Keresés a forrásokban…',
   'Niet doorzocht': 'Nem átvizsgálva',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':

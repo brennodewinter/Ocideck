@@ -1793,6 +1793,8 @@ const _dutchSourcePl = {
 };
 
 const _dutchSourceAddPl = <String, String>{
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Nagłówek sekcji zapowiadający nową część prezentacji. Zwięźle. Dodaj obraz tła z biblioteki obrazów.',
   'Bronnen doorzoeken…': 'Przeszukiwanie źródeł…',
   'Niet doorzocht': 'Nie przeszukano',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':

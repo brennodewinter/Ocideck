@@ -1797,6 +1797,8 @@ const _dutchSourceLa = {
 };
 
 const _dutchSourceAddLa = <String, String>{
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Titulus partis qui novam praesentationis partem nuntiat. Brevem serva. Ex bibliotheca imaginum imaginem fundi adde.',
   'Bronnen doorzoeken…': 'Fontes perscrutans…',
   'Niet doorzocht': 'Non perscrutatum',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':

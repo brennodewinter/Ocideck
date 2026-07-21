@@ -738,6 +738,8 @@ const _dutchSourceFr = {
 };
 
 const _dutchSourceAddFr = {
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Un intertitre qui annonce une nouvelle partie de la présentation. Restez concis. Ajoutez une image de fond depuis la bibliothèque d\'images.',
   'Bronnen doorzoeken…': 'Recherche dans les sources…',
   'Niet doorzocht': 'Non parcouru',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':

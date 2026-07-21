@@ -1756,6 +1756,8 @@ const _dutchSourceTlh = {
 };
 
 const _dutchSourceAddTlh = <String, String>{
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'presentation \'ay\' chu\' \'ang per. tItlhutlh. nagh beQmey qach vabDot chal DIr chelmoH.',
   'Bronnen doorzoeken…': 'De\' nejlI\'…',
   'Niet doorzocht': 'nejbe\'',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':

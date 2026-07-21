@@ -1781,6 +1781,8 @@ const _dutchSourceId = {
 };
 
 const _dutchSourceAddId = <String, String>{
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'Subjudul bagian yang mengumumkan bagian baru presentasi. Buat singkat. Tambahkan gambar latar dari pustaka gambar.',
   'Bronnen doorzoeken…': 'Menelusuri sumber…',
   'Niet doorzocht': 'Tidak ditelusuri',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':

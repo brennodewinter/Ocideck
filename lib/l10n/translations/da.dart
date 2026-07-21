@@ -1780,6 +1780,8 @@ const _dutchSourceDa = {
 };
 
 const _dutchSourceAddDa = <String, String>{
+  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
+      'En mellemoverskrift, der annoncerer en ny del af præsentationen. Hold den kort. Tilføj et baggrundsbillede via billedbiblioteket.',
   'Bronnen doorzoeken…': 'Søger i kilder…',
   'Niet doorzocht': 'Ikke søgt',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
