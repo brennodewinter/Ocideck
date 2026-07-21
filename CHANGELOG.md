@@ -113,6 +113,28 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 
 
 ### Fixed
+- **Het beamervenster slikte je toetsen op.** Bij dubbelschermpresenteren is de
+  beamer een eigen venster met een eigen engine. Dat venster negeerde álle
+  toetsen behalve Cmd/Ctrl+W en stuurde niets door — dus zodra het de
+  toetsenbordfocus had, en één klik op het beamerbeeld is daarvoor genoeg, deed
+  geen enkele sneltoets nog iets. Wie op dat moment in een live bewerkte tabel
+  stond te typen kwam er met Escape niet meer uit. Elke onafgehandelde toets
+  reist nu naar de presenter en wordt daar afgehandeld alsof hij op de laptop was
+  ingetikt; de modifiers gaan mee, want de overkant kan ze niet uitlezen.
+- **Een kale N opent nu de eigen notities.** De legenda beloofde Ctrl+N, maar wie
+  tijdens het presenteren gewoon N tikte kreeg niets terwijl elke andere
+  sneltoets daar juist een kale letter is. N opent het notitiepaneel; Ctrl+N
+  blijft werken en blijft binnen het paneel de enige toggle, want daar typt een
+  kale N een letter in je notitie.
+- **Zinnen opknippen bewaart de volzin in de sprekersnotities.** Wie een
+  meerzinnige bullet in losse bullets liet knippen hield de woorden maar verloor
+  het verhaal: op de slide staan daarna losse zinnen, terwijl het verband er juist
+  in de volzin zat. Die volzin gaat nu mee naar de notities, met dezelfde context
+  (tussenkop, inspring-niveau) als *Uitleg naar notities* al meegaf. Daarnaast
+  biedt het kwaliteitspaneel de actie alleen nog aan zolang de slide er niet te
+  vol van wordt: opknippen levert méér bullets op, dus op een slide die de
+  leesbaarheidsdrempel al raakt maakte deze fix het probleem groter. Daar blijft
+  alleen *Splits slide* staan — één scenario per melding.
 - **Het percentage plakt niet meer tegen het volgende woord.** De strengste
   melding over te veel tekst op een slide las "het lettertype wordt sterk
   verkleind (55%van de ontwerpgrootte)" — de zin wordt uit drie stukken geplakt

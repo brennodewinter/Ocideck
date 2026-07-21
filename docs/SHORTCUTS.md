@@ -54,7 +54,7 @@ View & timing:
 | Shortcut | Action |
 | --- | --- |
 | `P` | Toggle presenter view (notes, clock, countdown, per-slide timer, next slide) |
-| `Ctrl/Cmd + N` | Toggle **my notes** panel (recipient/course notes; local only, never on beamer) |
+| `N` · `Ctrl/Cmd + N` | Toggle **my notes** panel (recipient/course notes; local only, never on beamer). Inside the panel a bare `N` types a letter, so only `Ctrl/Cmd + N` (or `Esc`) closes it |
 | `S` | Move the presentation to another screen |
 | `B` · `W` | Black · white screen |
 | `K` | Set the target time / countdown (type `MMSS`, `Backspace` erases a digit, `Enter` to confirm, `0` = off) |
@@ -64,6 +64,10 @@ View & timing:
 | `M` | Advance automatically after a slide's audio finishes |
 | `H` · `?` | Show the in-app shortcut cheatsheet |
 | `Ctrl/Cmd + W` | Close the presentation (works from the presenter and the beamer window) |
+
+Every shortcut on this page works from **either** window in dual-screen mode: the
+beamer window forwards the keys it does not handle itself to the presenter, so a
+stray click on the beamer image no longer leaves the keyboard dead.
 
 Annotation tools:
 

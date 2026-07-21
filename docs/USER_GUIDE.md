@@ -1644,7 +1644,10 @@ automatically shows the **slide on the beamer** and the **presenter view on your
 laptop** (current slide, next slide, notes, clock). Use an *extended* (not
 mirrored) display. Notes:
 
-- The keyboard stays on the laptop; clicking the beamer also advances.
+- Shortcuts work from either window: whichever one has the keyboard focus, the
+  keys end up in the presentation. Click on the beamer image and `Esc`, the
+  arrows and the rest keep working.
+- Clicking the beamer also advances.
 - On macOS the "external" screen is the one without the menu bar.
 
 ### Annotating while presenting
@@ -1671,9 +1674,10 @@ to the beamer in dual-screen mode.
 Separate from **speaker notes** (the collapsible amber block above). User notes
 are for the person following the presentation — for example during a course. They
 are stored in a `<name>.user-notes.json` sidecar, never written into the Marp
-Markdown, and hidden by default while presenting. Press `Ctrl/Cmd + N` in the
-presenter to open a local **My notes** panel on the laptop only (never mirrored
-to the beamer). `Esc` closes the panel before other layers.
+Markdown, and hidden by default while presenting. Press `N` (or `Ctrl/Cmd + N`)
+in the presenter to open a local **My notes** panel on the laptop only (never
+mirrored to the beamer). `Esc` closes the panel before other layers; a bare `N`
+types a letter once the panel has the cursor, so closing it takes `Ctrl/Cmd + N`.
 
 In the visual editor, expand **User notes** below **Speaker notes** to author them
 per slide. Both blocks share the same layout: a collapsible header (icon, title,
@@ -1915,7 +1919,13 @@ Two-column slides spread both columns across the same set of pages.
 A bullet slide with multi-sentence or overly long bullets offers two more
 one-click fixes in the quality panel. **Split sentences into bullets** turns each
 multi-sentence bullet into one bullet per sentence — every word stays on the
-slide. **Explanation to notes** does the opposite: for a bullet shaped like
+slide, and the line as it was is copied into the **speaker notes** (with its
+sub-heading and indent level for context), because the connection between those
+sentences lived in the full sentence you just took apart. It is offered only
+while the result stays within the readability threshold: splitting produces
+*more* bullets, so on a slide that already sits at the limit it would make things
+worse — there **Split slide** is the one fix left standing.
+**Explanation to notes** does the opposite: for a bullet shaped like
 *label : explanation* (split on a colon, a spaced hyphen, or the first full stop,
 when the explanation is at least a few words) it keeps just the label on the slide
 and moves the full original line to the speaker notes — the point survives where
