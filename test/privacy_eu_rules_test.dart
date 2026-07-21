@@ -64,6 +64,15 @@ void main() {
       expect(rulesIn('NHS 943 476 7016'), contains('uk.nhs'));
     });
 
+    test('de Cypriotische TIC komt niet boven "waarschijnlijk"', () {
+      // Een mod-26 over acht cijfers is te zwak voor `zeker`, en dezelfde code
+      // hoort bij een mens óf bij een bedrijf. Twee redenen, dezelfde uitkomst.
+      final finding = scan(
+        'fiscale code 10259033P',
+      ).findings.firstWhere((f) => f.ruleId == 'cy.tic');
+      expect(finding.confidence, PrivacyConfidence.likely);
+    });
+
     test('NINO heeft geen checksum en komt niet boven "waarschijnlijk"', () {
       final result = scan('National Insurance AB123456C');
       final finding = result.findings.firstWhere((f) => f.ruleId == 'uk.nino');

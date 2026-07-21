@@ -168,6 +168,41 @@ void main() {
     );
   });
 
+  group('Cyprus — de TIC en de mod-26-controleletter', () {
+    test('de referentiewaarde uit python-stdnum klopt', () {
+      // `10259033P` is de doctest-waarde van `stdnum/cy/vat.py`. Hij staat hier
+      // als bewijs dat onze omzettabel dezelfde is als die van de
+      // referentie-implementatie — een eigen uitgerekende waarde bewijst alleen
+      // dat de code met zichzelf overweg kan.
+      expect(isValidCyTic('10259033P'), isTrue);
+      expect(isValidCyTic('10259033Z'), isFalse);
+    });
+
+    test('accepteert de vorm met landcode-scheiding', () {
+      expect(isValidCyTic('00123456H'), isTrue);
+      expect(isValidCyTic('0012 3456 H'), isTrue);
+    });
+
+    test('accepteert ook het TFA-bereik vanaf 60000000', () {
+      // Sinds 27 maart 2023 worden codes vanaf 60000000 uitgegeven. Of de
+      // controleletter daar met hetzelfde schema wordt berekend zegt geen
+      // publieke bron; deze test legt vast wat we aannemen, niet wat we weten.
+      expect(isValidCyTic('60001234D'), isTrue);
+    });
+
+    test('wijst het niet-uitgegeven 12-bereik af', () {
+      // `12345678F` haalt de mod-26 gewoon; het bereik wordt alleen niet
+      // uitgegeven. Zonder deze eis zou de meest voor de hand liggende
+      // verzonnen cijferreeks van allemaal een treffer zijn.
+      expect(isValidCyTic('12345678F'), isFalse);
+      expect(isValidCyTic('02345678G'), isTrue);
+    });
+
+    test('wijst een reeks zonder letter af', () {
+      expect(isValidCyTic('102590331'), isFalse);
+    });
+  });
+
   group('Luxemburg — twee controlecijfers, en allebei nodig', () {
     // De valkuil: `C2` is een Verhoeff over de eerste ELF cijfers, niet over de
     // twaalf inclusief `C1`. Wie ze stapelt — wat elke andere

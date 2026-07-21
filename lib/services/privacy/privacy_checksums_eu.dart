@@ -282,6 +282,46 @@ bool isValidBalticPersonalCode(String raw) {
   return rest == d.codeUnitAt(10) - 0x30;
 }
 
+// ── Cyprus ───────────────────────────────────────────────────────────────────
+
+/// De omzetting van de cijfers op de óneven posities in een Cypriotische TIC.
+///
+/// Geen gewichten maar een opzoektabel — een cijfer wordt vervangen door een
+/// waarde die er niets mee te maken heeft (`2` → 5, `9` → 21). Dat is precies
+/// wat de controle sterk maakt tegen omwisselingen, en waarom je hem niet uit
+/// je hoofd kunt narekenen.
+const List<int> _cyOddPositionMap = [1, 0, 5, 7, 9, 13, 15, 17, 19, 21];
+
+/// De fiscale identificatiecode (TIC / ΑΦΜ): 8 cijfers + een controleletter.
+///
+/// **Waarom de TIC en niet het identiteitskaartnummer.** Het Cypriotische
+/// ID-kaartnummer is een doorlopend volgnummer zonder enige controle — daar valt
+/// geen verdedigbare regel op te bouwen. De TIC heeft er wél een: de letter is
+/// een mod-26 over de acht cijfers, met een omzettabel voor de oneven posities.
+///
+/// **Twee dingen die deze controle níét weet.** Ten eerste of het om een mens
+/// gaat: dezelfde code identificeert natuurlijke én rechtspersonen, en het
+/// btw-nummer is deze code met `CY` ervoor. Vandaar `waarschijnlijk` in de
+/// regeltabel en niet `zeker`. Ten tweede of het algoritme na 27 maart 2023 nog
+/// hetzelfde is — vanaf die datum geeft het TFA-systeem codes uit vanaf
+/// 60000000, en geen publieke bron zegt of de controleletter mee is veranderd.
+/// De fout valt daar de goede kant op: mocht het schema zijn gewijzigd, dan
+/// missen we die codes (vals-negatief) in plaats van willekeurige nummers te
+/// melden.
+bool isValidCyTic(String raw) {
+  final v = raw.replaceAll(RegExp(r'[\s-]'), '').toUpperCase();
+  if (!RegExp(r'^\d{8}[A-Z]$').hasMatch(v)) return false;
+  // Het bereik `12xxxxxx` wordt niet uitgegeven.
+  if (v.startsWith('12')) return false;
+
+  var sum = 0;
+  for (var i = 0; i < 8; i++) {
+    final digit = v.codeUnitAt(i) - 0x30;
+    sum += i.isEven ? _cyOddPositionMap[digit] : digit;
+  }
+  return v.codeUnitAt(8) == 0x41 + sum % 26;
+}
+
 // ── Luxemburg ────────────────────────────────────────────────────────────────
 
 /// Matricule: 13 cijfers, `AAAAMMJJXXXC1C2`, met twee controlecijfers.

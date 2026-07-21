@@ -231,10 +231,13 @@ nul. Waar géén checksum bestaat (US SSN, V-nummer), is een contextwoord verpli
 | `ro.cnp` | CNP | sleutel `279146358279`, mod 11 | zeker | ◐ |
 | `si.emso` | EMŠO | mod 11 | zeker | ◐ |
 | `ee.isikukood` | Estse isikukood — en het Litouwse asmens kodas, dat dezelfde vorm en dezelfde dubbele mod-11 heeft; één regel dekt beide (`sharedRegionRules`) | mod-11 dubbele pas | zeker | ◐ |
-| `lv.pk` | Letse personas kods | mod-11 | zeker | — |
+| `lv.pk` | Letse personas kods | mod-11 met de gewichten 1-6-3-7-9-10-5-8-4-2 — **niet** het Estse schema. Oud formaat met `ddmmjj` + eeuwcijfer; nieuw formaat sinds 1-7-2017 begint met `32` en draagt geen datum | zeker | ◐ |
+| `is.kennitala` | IJslandse kennitala | mod-11 met de gewichten 3-2-7-6-5-4-3-2, eeuwcijfer 9 of 0. Een bedrijfskennitala (dag +40) valt bewust af | zeker | ◐ |
 | `at.svnr` | Sozialversicherungsnummer | gewichten 3-7-9-5-8-4-2-1-6, mod 11 | zeker | ◐ |
 | `ch.ahv` | AHV-Nummer | `756.xxxx.xxxx.xx`, EAN-13-controlecijfer | zeker | ◐ |
-| `mt.id` / `cy.id` / `lu.matricule` | Maltese/Cypriotische/Luxemburgse ID | formaat + context | mogelijk | — |
+| `lu.matricule` | Luxemburgs matricule | `AAAAMMJJXXXC1C2`: C1 = Luhn over de eerste elf cijfers, C2 = Verhoeff over diezélfde elf | zeker | ◐ |
+| `cy.tic` | Cypriotische fiscale identificatiecode (TIC / ΑΦΜ) | 8 cijfers + controleletter, mod-26 met een omzettabel voor de oneven posities. Nooit `zeker`: de code hoort bij een mens óf bij een bedrijf, en mod-26 is de zwakste checksum in deze tabel | waarschijnlijk | ◐ |
+| `mt.id` | Maltees identiteitskaartnummer | géén checksum — 7 cijfers + een letter uit `{A,B,G,H,L,M,P,Z}` die geboortestreek en -eeuw codeert. **Contextwoord verplicht** | waarschijnlijk | — |
 | `uk.nino` | National Insurance Number | formaat `QQ123456A` + uitgesloten prefixen (BG, GB, NK, KN, TN, NT, ZZ), geen D/F/I/Q/U/V als eerste letter, geen O als tweede | waarschijnlijk | ◐ |
 | `uk.nhs` | NHS-nummer | mod-11 (gewichten 10…2), rest 10 = ongeldig | zeker | ◐ |
 | `us.ssn` | Social Security Number | géén checksum. Area ≠ 000/666/900-999, groep ≠ 00, serie ≠ 0000. **Contextwoord verplicht** (`ssn`, `social security`), anders veel te veel FP's op datums en ordernummers | waarschijnlijk | ◐ |

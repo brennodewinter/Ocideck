@@ -570,6 +570,7 @@ const Map<String, String> _nationalNumberNames = {
   'is.kennitala': 'kennitala',
   'lv.pk': 'personas kods',
   'lu.matricule': 'matricule',
+  'cy.tic': 'TIC',
   'uk.nhs': 'NHS',
   'uk.nino': 'NINO',
 };

@@ -106,6 +106,18 @@ final List<NationalIdentifierRule> euIdentifierRules = [
     validate: isValidBalticPersonalCode,
   ),
   NationalIdentifierRule(
+    id: 'cy.tic',
+    country: 'CY',
+    pattern: RegExp(r'\b\d{8}[A-Z]\b'),
+    validate: isValidCyTic,
+    // Een mod-26 over acht cijfers is de zwakste checksum in deze tabel: één op
+    // de 26 willekeurige `12345678X`-reeksen komt erdoor. Dat is te weinig voor
+    // `zeker`, en er komt een tweede reden bij — dezelfde code identificeert
+    // een mens én een bedrijf, dus zelfs een terechte treffer is niet altijd
+    // een persoonsgegeven.
+    confidence: PrivacyConfidence.likely,
+  ),
+  NationalIdentifierRule(
     id: 'lu.matricule',
     country: 'LU',
     // Wordt vrijwel altijd aan één stuk geschreven; spaties per groep komen op
