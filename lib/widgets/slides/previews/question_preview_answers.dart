@@ -241,11 +241,16 @@ extension _QuestionPreviewAnswers on _QuestionPreview {
         SizedBox(height: w * 0.03),
         if (v == null)
           ..._openTextAuthorView(context, spec)
+        else if (v.revealed)
+          // Ná het antwoorden vervangt de correctie het invoerveld: het getypte
+          // antwoord staat daar nog een keer, maar dan mét de plekken waar het
+          // afweek aangewezen.
+          ..._openTextResult(context, v, spec)
         else ...[
           _OpenAnswerField(
             value: v.typedAnswer,
             hint: l10n.d('Typ je antwoord'),
-            enabled: !v.revealed && !v.locked,
+            enabled: !v.locked,
             onChanged: onAnswerTextChanged,
             onSubmit: onAnswerSubmit,
             fontFamily: font,
@@ -259,10 +264,7 @@ extension _QuestionPreviewAnswers on _QuestionPreview {
             accent: accent,
           ),
           SizedBox(height: w * 0.022),
-          if (v.revealed)
-            ..._openTextResult(context, v)
-          else if (_interactive)
-            _submitRow(context, 1),
+          if (_interactive) _submitRow(context, 1),
         ],
       ],
     );
@@ -309,27 +311,55 @@ extension _QuestionPreviewAnswers on _QuestionPreview {
     ];
   }
 
-  /// Na het antwoorden: wat er getypt is, hoe dicht dat bij het juiste antwoord
-  /// lag, en — als het fout was — wat het juiste antwoord dan was.
-  List<Widget> _openTextResult(BuildContext context, QuestionView v) {
+  /// Na het antwoorden: de correctie. Niet alleen "fout" met een percentage,
+  /// maar de twee teksten onder elkaar met de verschillen aangewezen — wat er
+  /// te veel stond doorgestreept, wat er miste onderstreept. Een cijfer zegt
+  /// hoe ver je zat; dit zegt waaróm, en daar leer je iets van.
+  ///
+  /// Bij een letterlijk goed antwoord blijft de vergelijking weg: er valt dan
+  /// niets aan te wijzen.
+  List<Widget> _openTextResult(
+    BuildContext context,
+    QuestionView v,
+    QuestionSpec spec,
+  ) {
     final l10n = context.l10n;
-    final correct = v.result == QuestionResult.correct;
+    final typed = _collapsed(v.typedAnswer);
+    final expected = _collapsed(v.expectedAnswer);
+    final identical =
+        normalizeAnswerText(typed) == normalizeAnswerText(expected);
+    final diff = identical
+        ? const <TextDiffSegment>[]
+        : diffText(typed, expected);
+
     return [
       _resultChip(context, 1),
-      if (!correct && v.expectedAnswer.trim().isNotEmpty) ...[
-        SizedBox(height: w * 0.018),
-        _optionTile(
+      if (!identical && expected.isNotEmpty) ...[
+        SizedBox(height: w * 0.02),
+        _answerLine(
           context,
-          v.expectedAnswer,
-          0,
-          _OptionVisual.correct,
-          1,
-          trailing: l10n.d('Het juiste antwoord'),
+          label: l10n.d('Jouw antwoord'),
+          segments: leftSide(diff),
+          markedKind: TextDiffKind.onlyLeft,
+          markedColor: AppTheme.danger800,
+          decoration: TextDecoration.lineThrough,
+        ),
+        SizedBox(height: w * 0.016),
+        _answerLine(
+          context,
+          label: l10n.d('Het juiste antwoord'),
+          segments: rightSide(diff),
+          markedKind: TextDiffKind.onlyRight,
+          markedColor: AppTheme.success600,
+          decoration: TextDecoration.underline,
         ),
       ],
-      SizedBox(height: w * 0.014),
+      SizedBox(height: w * 0.016),
       Text(
-        '${l10n.d('Overeenkomst')}: ${(v.matchScore * 100).round()}%',
+        // Het percentage staat naast de drempel die de auteur koos, anders is
+        // "62%" een getal zonder maatstaf.
+        '${l10n.d('Overeenkomst')}: ${(v.matchScore * 100).round()}%'
+        '  ·  ${l10n.d('nodig')}: ${(spec.similarityThreshold * 100).round()}%',
         style: TextStyle(
           fontFamily: font,
           fontSize: w * 0.022,
@@ -338,6 +368,76 @@ extension _QuestionPreviewAnswers on _QuestionPreview {
       ),
     ];
   }
+
+  /// Eén regel van de correctie: een kopje met daaronder de tekst, waarin de
+  /// stukken van [markedKind] gemarkeerd zijn. Bewust met een [decoration]
+  /// erbij en niet alleen met kleur — wie kleuren slecht onderscheidt, moet de
+  /// aanwijzing net zo goed kunnen lezen.
+  Widget _answerLine(
+    BuildContext context, {
+    required String label,
+    required List<TextDiffSegment> segments,
+    required TextDiffKind markedKind,
+    required Color markedColor,
+    required TextDecoration decoration,
+  }) {
+    final textColor = _hexColor(profile.textColor);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: TextStyle(
+            fontFamily: font,
+            fontSize: w * 0.021,
+            fontWeight: FontWeight.w600,
+            color: textColor.withValues(alpha: 0.55),
+          ),
+        ),
+        SizedBox(height: w * 0.006),
+        Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(
+            horizontal: w * 0.02,
+            vertical: w * 0.014,
+          ),
+          decoration: BoxDecoration(
+            color: markedColor.withValues(alpha: 0.08),
+            border: Border.all(
+              color: markedColor.withValues(alpha: 0.55),
+              width: w * 0.002,
+            ),
+            borderRadius: BorderRadius.circular(w * 0.01),
+          ),
+          child: Text.rich(
+            TextSpan(
+              children: [
+                for (final s in segments)
+                  TextSpan(
+                    text: s.text,
+                    style: s.kind == markedKind
+                        ? TextStyle(
+                            color: markedColor,
+                            fontWeight: FontWeight.w700,
+                            decoration: decoration,
+                            decorationColor: markedColor,
+                            decorationThickness: 2,
+                          )
+                        : TextStyle(color: textColor),
+                  ),
+              ],
+            ),
+            style: TextStyle(fontFamily: font, fontSize: w * 0.03, height: 1.3),
+          ),
+        ),
+      ],
+    );
+  }
+
+  /// Randspaties weg en dubbele spaties samentrekken, hoofdletters intact. Zo
+  /// wijst de vergelijking geen verschillen aan die bij het goedrekenen ook
+  /// niet meetellen.
+  String _collapsed(String raw) => raw.trim().replaceAll(RegExp(r'\s+'), ' ');
 }
 
 /// Het invoerveld voor een getypt antwoord.

@@ -157,9 +157,8 @@ extension _PresenterQuestions on _FullscreenPresenterState {
   }
 
   /// Getypt antwoord: er valt niets te tonen tot het antwoord binnen is. De
-  /// juiste antwoorden blijven bewust uit de [QuestionView] — die reist naar het
-  /// beamervenster, en een antwoordsleutel hoort daar niet te liggen voordat er
-  /// geantwoord is.
+  /// juiste antwoorden blijven bewust uit de [QuestionView] tot het onthullen —
+  /// dit is de weergavetoestand, dus wat erin staat komt op het scherm.
   QuestionView _drawOpenText(QuestionSpec spec, QuestionView base) =>
       base.copyWith(openText: true, answerable: spec.isPresentable);
 
@@ -377,17 +376,23 @@ extension _PresenterQuestions on _FullscreenPresenterState {
     final spec = QuestionSpec.parse(slide.customMarkdown);
     final accepted = [for (final a in spec.correctAnswers) a.text];
     if (accepted.isEmpty) return; // niets om tegen af te zetten
-    final score = bestAnswerSimilarity(view.typedAnswer, accepted);
+    // Tegen het bést passende antwoord afzetten, niet tegen het eerste: bij
+    // meerdere goed gerekende antwoorden is de correctie anders onnavolgbaar.
+    final match = bestAnswerMatch(view.typedAnswer, accepted);
     _questionTimer?.cancel();
-    if (score >= spec.similarityThreshold) {
+    if (match.score >= spec.similarityThreshold) {
       _resolveCorrect(
         slide.id,
         view,
-        expectedAnswer: accepted.first,
-        matchScore: score,
+        expectedAnswer: match.answer,
+        matchScore: match.score,
       );
     } else {
-      _resolveWrong(slide.id, matchScore: score);
+      _resolveWrong(
+        slide.id,
+        matchScore: match.score,
+        expectedAnswer: match.answer,
+      );
     }
   }
 
@@ -398,17 +403,23 @@ extension _PresenterQuestions on _FullscreenPresenterState {
     String slideId, {
     List<int> selected = const [],
     double matchScore = 0,
+    String expectedAnswer = '',
   }) {
     final view = _questionViews[slideId];
     if (view == null) return;
     final slide = _currentSlide;
     final spec = QuestionSpec.parse(slide.customMarkdown);
     final lock = spec.onWrong == QuestionOnWrong.lockAndContinue;
-    // Pas nú mag het juiste antwoord op het scherm — en dus pas nú mag het in
-    // de [QuestionView], die naar het beamervenster reist.
-    final expected = view.openText && spec.correctAnswers.isNotEmpty
-        ? spec.correctAnswers.first.text
-        : '';
+    // Pas nú mag het juiste antwoord op het scherm — en dus pas nú in de
+    // [QuestionView], die de weergave aanstuurt. Bij een verlopen antwoordtijd
+    // komt het hier niet mee, dus wordt het alsnog opgezocht bij wat er stond.
+    final expected = !view.openText
+        ? ''
+        : (expectedAnswer.isNotEmpty
+              ? expectedAnswer
+              : bestAnswerMatch(view.typedAnswer, [
+                  for (final a in spec.correctAnswers) a.text,
+                ]).answer);
     _rebuild(() {
       _questionViews[slideId] = view.copyWith(
         selectedIndices: selected,

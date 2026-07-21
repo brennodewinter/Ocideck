@@ -93,17 +93,36 @@ double jaroWinkler(String a, String b) {
 String normalizeAnswerText(String raw) =>
     raw.trim().toLowerCase().replaceAll(RegExp(r'\s+'), ' ');
 
+/// Het best passende van de [accepted] antwoorden bij [given], met de
+/// bijbehorende gelijkenis.
+///
+/// Ook het antwoord zelf komt terug en niet alleen het cijfer: bij meerdere
+/// goed gerekende antwoorden hoort de kijker achteraf te zien tegen wélk
+/// antwoord het zijne is afgezet. Dat is doorgaans niet het eerste in de lijst.
+/// [answer] is leeg wanneer er niets te vergelijken viel.
+({String answer, double score}) bestAnswerMatch(
+  String given,
+  Iterable<String> accepted,
+) {
+  final needle = normalizeAnswerText(given);
+  var best = 0.0;
+  String? bestAnswer;
+  for (final candidate in accepted) {
+    if (normalizeAnswerText(candidate).isEmpty) continue;
+    // Het eerste bruikbare antwoord is het vertrekpunt, zodat een leeg of
+    // volstrekt afwijkend antwoord toch ergens tegen afgezet wordt.
+    bestAnswer ??= candidate;
+    if (needle.isEmpty) continue;
+    final score = jaroWinkler(needle, normalizeAnswerText(candidate));
+    if (score > best) {
+      best = score;
+      bestAnswer = candidate;
+    }
+  }
+  return (answer: bestAnswer ?? '', score: best);
+}
+
 /// De beste gelijkenis van [given] met een van de [accepted] antwoorden, na
 /// normalisatie. 0 wanneer er niets te vergelijken valt.
-double bestAnswerSimilarity(String given, Iterable<String> accepted) {
-  final needle = normalizeAnswerText(given);
-  if (needle.isEmpty) return 0;
-  var best = 0.0;
-  for (final candidate in accepted) {
-    final hay = normalizeAnswerText(candidate);
-    if (hay.isEmpty) continue;
-    final score = jaroWinkler(needle, hay);
-    if (score > best) best = score;
-  }
-  return best;
-}
+double bestAnswerSimilarity(String given, Iterable<String> accepted) =>
+    bestAnswerMatch(given, accepted).score;

@@ -325,6 +325,95 @@ void main() {
       await tester.pumpWidget(const SizedBox());
     });
 
+    testWidgets(
+      'de correctie zet beide teksten naast elkaar met het verschil',
+      (tester) async {
+        // "fout" met een percentage leert niemand iets. De kijker hoort te zien
+        // wélke letters er te veel stonden en welke er misten.
+        await tester.pumpWidget(_host([_question(spec()), after]));
+        await tester.pump();
+
+        await tester.enterText(find.byType(TextField), 'in de klius');
+        await tester.pump();
+        await tester.tap(find.text('Bevestig'));
+        await tester.pump();
+
+        expect(find.text('Jouw antwoord'), findsOneWidget);
+        expect(find.text('in de klius'), findsOneWidget); // met markering erin
+        expect(find.text('in de kluis'), findsOneWidget);
+
+        // Het percentage staat naast de drempel, anders is het een getal zonder
+        // maatstaf.
+        expect(find.textContaining('Overeenkomst'), findsOneWidget);
+        expect(find.textContaining('nodig'), findsOneWidget);
+
+        // Het invoerveld maakt plaats voor de correctie; twee keer hetzelfde
+        // antwoord op de dia leest als een fout.
+        expect(find.byType(TextField), findsNothing);
+
+        await tester.pumpWidget(const SizedBox());
+      },
+    );
+
+    testWidgets('een letterlijk goed antwoord krijgt geen vergelijking', (
+      tester,
+    ) async {
+      await tester.pumpWidget(_host([_question(spec()), after]));
+      await tester.pump();
+
+      await tester.enterText(find.byType(TextField), 'In De Kluis');
+      await tester.pump();
+      await tester.tap(find.text('Bevestig'));
+      await tester.pump();
+
+      expect(find.text('Goed!'), findsOneWidget);
+      // Hoofdletters tellen niet mee, dus er valt niets aan te wijzen.
+      expect(find.text('Jouw antwoord'), findsNothing);
+
+      await tester.pumpWidget(const SizedBox());
+    });
+
+    testWidgets('de correctie zet het antwoord af tegen het best passende', (
+      tester,
+    ) async {
+      // Bij meerdere goed gerekende antwoorden is corrigeren tegen het eerste
+      // in de lijst onnavolgbaar: je krijgt dan een antwoord aangewezen waar je
+      // helemaal niet naar op weg was.
+      const meerdere = QuestionSpec(
+        kind: QuestionKind.openText,
+        prompt: 'Waar hoort een wachtwoord thuis?',
+        answers: [
+          QuestionAnswer(text: 'in de kluis', correct: true),
+          QuestionAnswer(text: 'in een wachtwoordbeheerder', correct: true),
+        ],
+      );
+
+      await tester.pumpWidget(
+        _host([
+          Slide(
+            id: 'q',
+            type: SlideType.question,
+            customMarkdown: meerdere.toBlock(),
+          ),
+          after,
+        ]),
+      );
+      await tester.pump();
+
+      await tester.enterText(
+        find.byType(TextField),
+        'in een wachtwoordbeheerdr',
+      );
+      await tester.pump();
+      await tester.tap(find.text('Bevestig'));
+      await tester.pump();
+
+      expect(find.text('in een wachtwoordbeheerder'), findsOneWidget);
+      expect(find.text('in de kluis'), findsNothing);
+
+      await tester.pumpWidget(const SizedBox());
+    });
+
     testWidgets('een strengere drempel keurt dezelfde tikfout af', (
       tester,
     ) async {
