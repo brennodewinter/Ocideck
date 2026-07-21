@@ -27,6 +27,7 @@ import '../services/git/git_forge.dart';
 import '../services/git/native_git_mirror_api.dart';
 import '../services/git/outbox.dart';
 import '../services/git/repo_asset_resolver.dart';
+import '../services/package_asset_resolver.dart';
 import 'git_provider.dart';
 import '../services/git/sync_engine.dart';
 import '../services/image_service.dart';

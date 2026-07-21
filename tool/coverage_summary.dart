@@ -35,6 +35,12 @@ const Set<String> uncoveredBaseline = {
   // (tab_storage_origin_test.dart), maar lcov schrijft geen record voor een
   // bestand zonder uitvoerbare regels.
   'lib/models/storage_origin.dart',
+  // NO EXECUTABLE LINES: `PresentationSource` is idem een abstract interface —
+  // één getter en één methode, verder niets — het contract dat de zoekbronnen
+  // van 'Slide zoeken' delen. De implementaties worden wél getest
+  // (git_presentation_source_test.dart, remote_presentation_source_test.dart),
+  // maar lcov schrijft geen record voor een bestand zonder uitvoerbare regels.
+  'lib/services/presentation_search/presentation_source.dart',
   // NO EXECUTABLE LINES: the generated MASTG index — two `part` files holding
   // nothing but a const list of 186 MastgTest literals. They are exercised
   // (mastg_catalog_test.dart reads every entry) but lcov emits no record for a

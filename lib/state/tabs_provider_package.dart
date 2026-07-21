@@ -24,41 +24,7 @@ extension _TabsPackageAssets on TabsNotifier {
     Deck deck,
     List<PackageEntry> entries,
     String mdName,
-  ) {
-    final mdDir = p.posix.dirname(mdName);
-    final byName = {
-      for (final e in entries) p.posix.normalize(e.name): e.bytes,
-    };
-    final memFor = <String, String>{};
-    String? memPath(String ref) {
-      if (ref.trim().isEmpty || WebAssetStore.isMemPath(ref)) return null;
-      final resolved = p.posix.normalize(
-        mdDir == '.' ? ref : p.posix.join(mdDir, ref),
-      );
-      if (resolved.startsWith('..')) return null; // buiten het pakket
-      final cached = memFor[resolved];
-      if (cached != null) return cached;
-      final bytes = byName[resolved];
-      if (bytes == null ||
-          bytes.isEmpty ||
-          bytes.length > ImageService.maxImageBytes ||
-          !ImageService.looksLikeImage(bytes)) {
-        return null;
-      }
-      final mem = WebAssetStore.put(bytes, name: p.posix.basename(resolved));
-      memFor[resolved] = mem;
-      return mem;
-    }
-
-    final slides = [
-      for (final s in deck.slides)
-        s.copyWith(
-          imagePath: memPath(s.imagePath) ?? s.imagePath,
-          imagePath2: memPath(s.imagePath2) ?? s.imagePath2,
-        ),
-    ];
-    return deck.copyWith(slides: slides);
-  }
+  ) => attachPackageAssetsToMem(deck, entries, mdName);
 
   /// Vul chart-slides die hun data via `source` koppelen aan uit de `data/`-
   /// leden van het pakket — het tegenhangertje van `_hydrateCharts` op schijf.

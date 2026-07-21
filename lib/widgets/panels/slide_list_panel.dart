@@ -8,19 +8,16 @@ import 'package:path/path.dart' as p;
 import '../../models/deck.dart';
 import '../../models/library_folder.dart';
 import '../../models/slide.dart';
-import '../../models/storage_connection.dart';
 import '../../platform/platform_features.dart';
 import '../../state/deck_provider.dart';
 import '../../state/editor_provider.dart';
-import '../../state/git_provider.dart';
 import '../../state/info_safety_provider.dart';
+import '../../state/presentation_sources.dart';
 import '../../state/settings_provider.dart';
 import '../../state/tabs_provider.dart';
 import '../../services/classification_enforcement_policy.dart';
 import '../../services/finding_context_score.dart';
 import '../../services/image_service.dart';
-import '../../services/presentation_search/git_presentation_source.dart';
-import '../../services/presentation_search/presentation_source.dart';
 import '../../services/privacy/privacy_own_identity.dart';
 import '../../services/privacy/privacy_projection.dart';
 import '../../services/slide_rasterizer.dart';
@@ -384,30 +381,6 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     return roots;
   }
 
-  /// Bouw een [PresentationSource] per geconfigureerde git-verbinding. De forge
-  /// (met token uit de keychain) wordt hier alvast klaargezet; het netwerk-
-  /// lijsten zelf gebeurt pas in de finder, op de achtergrond. Een verbinding
-  /// zonder bruikbare forge valt weg.
-  Future<List<PresentationSource>> _remoteSources(WidgetRef ref) async {
-    final settings = ref.read(settingsProvider);
-    final fileService = ref.read(fileServiceProvider);
-    final sources = <PresentationSource>[];
-    for (final conn in settings.connectionsOf<GitConnection>()) {
-      final forge = await ref.read(gitForgeProvider(conn.id).future);
-      if (forge == null) continue;
-      final name = conn.name.trim();
-      sources.add(
-        GitPresentationSource(
-          forge: forge,
-          config: conn.repo,
-          fileService: fileService,
-          label: 'Git: ${name.isEmpty ? conn.repo.slug : name}',
-        ),
-      );
-    }
-    return sources;
-  }
-
   Future<void> _findSlides(
     BuildContext context,
     WidgetRef ref,
@@ -416,7 +389,7 @@ class _SlideListPanelState extends ConsumerState<SlideListPanel> {
     final settings = ref.read(settingsProvider);
     final deck = deckState.deck;
     final roots = _slideSearchRoots(deck?.projectPath, settings.libraries);
-    final remoteSources = await _remoteSources(ref);
+    final remoteSources = await buildRemotePresentationSources(ref);
     if (!context.mounted) return;
 
     await SlideFinderDialog.show(
