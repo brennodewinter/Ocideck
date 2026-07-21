@@ -192,6 +192,39 @@ void main() {
     expect(find.text('Verbinding testen'), findsOneWidget);
   });
 
+  testWidgets('de tokenrechten-uitleg wisselt met de soort forge', (
+    tester,
+  ) async {
+    // Proactieve hulp onder het tokenveld: welke scope het token nodig heeft
+    // verschilt per forge, en die uitleg hoort mee te bewegen met de keuze.
+    seedConnections([git('g', 'Werk', owner: 'librekat', repo: 'decks')]);
+    await openSettings(tester);
+    await tester.tap(find.byIcon(Icons.expand_more));
+    await tester.pumpAndSettle();
+
+    // Gitea (de standaard): lokaal zoeken, geen serverzoeken.
+    expect(find.textContaining('OciDeck zoekt lokaal'), findsOneWidget);
+    expect(find.textContaining('repo-scope'), findsNothing);
+
+    // Naar GitHub: de repo-scope, en de standaardbranch-beperking.
+    await tester.ensureVisible(find.text('Forgejo of Gitea'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Forgejo of Gitea'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('GitHub').last);
+    await tester.pumpAndSettle();
+    expect(find.textContaining('repo-scope'), findsOneWidget);
+    expect(find.textContaining('OciDeck zoekt lokaal'), findsNothing);
+
+    // Naar GitLab: de drie scopes en de Advanced/Exact Search-voorwaarde.
+    await tester.tap(find.text('GitHub').last);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('GitLab').last);
+    await tester.pumpAndSettle();
+    expect(find.textContaining('read_api'), findsOneWidget);
+    expect(find.textContaining('repo-scope'), findsNothing);
+  });
+
   testWidgets('een halve git-configuratie test niet, maar zegt wat er '
       'mist', (tester) async {
     // Zonder eigenaar en repo valt er niets te bellen. Dat moet vóór het

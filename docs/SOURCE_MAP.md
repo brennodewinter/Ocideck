@@ -380,7 +380,11 @@ carry the translations and are kept in step by `make add-l10n` / `make l10n-chec
   *the* server. Each row expands to that kind's own panel, which stayed where it
   was: `parts/settings_dialog_webdav.dart` and `parts/settings_dialog_git.dart`,
   now taking the form object of one connection (`_webdavPanel(form)` /
-  `_gitPanel(form)`) instead of reading the single global one. The form objects
+  `_gitPanel(form)`) instead of reading the single global one. The git panel's
+  `_gitTokenScopeHelp` shows, under the token field and switching with the forge
+  dropdown, which token permissions each forge needs (Gitea/GitHub/GitLab differ,
+  and only GitLab's `read_api` unlocks its server-side search) — proactive, not
+  only after a failed connection test. The form objects
   live per connection id in `_webdavForms`/`_gitForms`, because a
   `TextEditingController` cannot sit in an immutable model. A fourth kind is a
   value in `StorageConnectionKind` plus a branch in `_connectionPanel`.

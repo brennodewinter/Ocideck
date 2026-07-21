@@ -1788,6 +1788,12 @@ const _dutchSourceAddCs = <String, String>{
   'Niet doorzocht': 'Neprohledáno',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Tato kontrola v webové verzi neběží: rozpoznávání obličejů vyžaduje systémovou knihovnu, kterou prohlížeč nemá. Ke kontrole obličejů v obrázcích použijte desktopovou verzi.',
+  'Het token heeft lees- en schrijfrechten op de repository nodig. Gitea en Forgejo kennen geen server-side zoeken; OciDeck zoekt lokaal.':
+      'Token potřebuje práva pro čtení a zápis do repozitáře. Gitea a Forgejo nemají vyhledávání na serveru; OciDeck hledá lokálně.',
+  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven). Codezoeken op de server dekt alleen de standaardbranch.':
+      'Token potřebuje rozsah repo (nebo podrobně: Contents pro čtení a zápis). Vyhledávání kódu na serveru pokrývá jen výchozí větev.',
+  'Het token heeft read_repository, write_repository en read_api nodig. Server-side zoeken vereist Advanced- of Exact Search.':
+      'Token potřebuje read_repository, write_repository a read_api. Vyhledávání na serveru vyžaduje Advanced nebo Exact Search.',
   'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':
       'Rychlé hledání na serveru — kvůli zpoždění indexace může chybět právě změněná sada.',
   'Media blijft niet bewaard in een los .md-bestand':

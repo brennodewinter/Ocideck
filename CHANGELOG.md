@@ -40,6 +40,13 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   GitHub doorzoekt alleen de standaardbranch; GitLab vereist dat de instantie
   Advanced/Exact Search aan heeft. Kan de forge het niet — of Gitea/Forgejo, dat
   er geen REST-endpoint voor heeft — dan valt het terug op de volledige scan.
+- **Uitleg over de tokenrechten in de instellingen.** Onder het tokenveld van een
+  git-verbinding staat nu, afhankelijk van de gekozen forge, welke rechten het
+  token nodig heeft: bij Gitea/Forgejo lees- en schrijfrechten op de repository
+  (en dat server-side zoeken er niet is), bij GitHub de `repo`-scope met de
+  kanttekening dat codezoeken alleen de standaardbranch dekt, en bij GitLab
+  `read_repository`/`write_repository`/`read_api` met de Advanced/Exact
+  Search-voorwaarde. Proactief, niet pas nadat een verbindingstest is mislukt.
 
 - **Een ontdekkingendia: wat we niet wisten te hebben.** Het aanvalsoppervlak
   *telt* wat nieuw is; deze dia *noemt* het. De handvol objecten die de scan

@@ -1821,6 +1821,12 @@ const _dutchSourceAddGa = <String, String>{
   'Niet doorzocht': 'Gan chuardach',
   'Deze controle draait niet in de webversie: gezichtsherkenning vergt een systeembibliotheek die de browser niet heeft. Gebruik de desktopversie om afbeeldingen op gezichten na te kijken.':
       'Ní ritheann an tseiceáil seo sa leagan gréasáin: teastaíonn leabharlann córais ón mbrath aghaidhe nach bhfuil ag an mbrabhsálaí. Bain úsáid as an leagan deisce chun aghaidheanna in íomhánna a sheiceáil.',
+  'Het token heeft lees- en schrijfrechten op de repository nodig. Gitea en Forgejo kennen geen server-side zoeken; OciDeck zoekt lokaal.':
+      'Teastaíonn rochtain léimh agus scríofa ar an stór ón gcomhartha. Níl cuardach ar an bhfreastalaí ag Gitea ná Forgejo; déanann OciDeck cuardach go háitiúil.',
+  'Het token heeft de repo-scope nodig (of fijnmazig: Contents lezen en schrijven). Codezoeken op de server dekt alleen de standaardbranch.':
+      'Teastaíonn an scóip repo ón gcomhartha (nó mionsonraithe: Contents léamh agus scríobh). Ní chlúdaíonn cuardach cóid ar an bhfreastalaí ach an brainse réamhshocraithe.',
+  'Het token heeft read_repository, write_repository en read_api nodig. Server-side zoeken vereist Advanced- of Exact Search.':
+      'Teastaíonn read_repository, write_repository agus read_api ón gcomhartha. Teastaíonn Advanced nó Exact Search do chuardach ar an bhfreastalaí.',
   'Snelle server-zoekopdracht — door indexeringsvertraging kan een net gewijzigd deck ontbreken.':
       'Cuardach tapa ar an bhfreastalaí — mar gheall ar mhoill innéacsúcháin, d\'fhéadfadh deic a athraíodh le déanaí a bheith ar iarraidh.',
   'Media blijft niet bewaard in een los .md-bestand':
