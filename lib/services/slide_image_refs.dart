@@ -46,11 +46,7 @@ class SlideImageRef {
 
   final SlideImageSlot slot;
 
-  const SlideImageRef({
-    required this.path,
-    required this.slot,
-    this.alt = '',
-  });
+  const SlideImageRef({required this.path, required this.slot, this.alt = ''});
 
   @override
   bool operator ==(Object other) =>

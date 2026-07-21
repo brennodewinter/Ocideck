@@ -90,8 +90,14 @@ void main() {
     });
 
     test('geeft dezelfde dia terug als er niets te herschrijven valt', () {
-      final slide = slideWith(imagePath: 'a.png', customMarkdown: '![x](c.png)');
-      expect(identical(rewriteSlideImagePaths(slide, (_) => null), slide), true);
+      final slide = slideWith(
+        imagePath: 'a.png',
+        customMarkdown: '![x](c.png)',
+      );
+      expect(
+        identical(rewriteSlideImagePaths(slide, (_) => null), slide),
+        true,
+      );
     });
   });
 }

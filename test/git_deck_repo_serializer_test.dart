@@ -429,10 +429,7 @@ void main() {
       final ref = refFor(bytes, 'png');
       final poolPath = GitRepoLayout.assetPathOf(ref)!;
 
-      final repo = FakeRepo(
-        branches: {'main': 'c0'},
-        files: {poolPath: bytes},
-      );
+      final repo = FakeRepo(branches: {'main': 'c0'}, files: {poolPath: bytes});
       final deck = await resolveRepoAssetsToMem(
         deckWith([textSlide('tekst ![alt]($ref) tekst')]),
         poolFor(repo),
@@ -441,7 +438,9 @@ void main() {
 
       final markdown = deck.slides.single.customMarkdown;
       expect(markdown, isNot(contains(ref)));
-      final mem = RegExp(r'!\[alt\]\(([^)]+)\)').firstMatch(markdown)!.group(1)!;
+      final mem = RegExp(
+        r'!\[alt\]\(([^)]+)\)',
+      ).firstMatch(markdown)!.group(1)!;
       expect(WebAssetStore.isMemPath(mem), isTrue);
       expect(WebAssetStore.bytesFor(mem), bytes);
     });
