@@ -9,6 +9,7 @@
 // Elke functie hier is puur en zelfstandig testbaar; `privacy_checksums_eu_test`
 // voert per land een bekend-geldige én een bekend-ongeldige waarde in.
 
+import 'privacy_allowlist.dart';
 import 'privacy_checksums.dart';
 
 /// Cijfers uit een string, zonder scheidingstekens.
@@ -280,6 +281,35 @@ bool isValidBalticPersonalCode(String raw) {
     if (rest == 10) rest = 0;
   }
   return rest == d.codeUnitAt(10) - 0x30;
+}
+
+// ── Liechtenstein ────────────────────────────────────────────────────────────
+
+/// PEID (Personenidentifikationsnummer): 4 tot 12 cijfers, zónder checksum.
+///
+/// **Het zwakste patroon in dit bestand, en dat is geen slordigheid maar de
+/// werkelijkheid.** Het Liechtensteinse belastingnummer bestaat uit niets dan
+/// cijfers; er is geen controlecijfer, geen datum en geen vast prefix. De
+/// ondergrens van vier komt uit de OESO-beschrijving: kortere nummers bestaan
+/// alleen doordat voorloopnullen worden weggelaten.
+///
+/// Daarom eist de regel in `privacy_eu_rules.dart` een contextwoord en komt hij
+/// nooit boven `mogelijk`. Zonder het woord `PEID` ernaast zwijgt hij volledig —
+/// hetzelfde ontwerp als bij de Curaçaose sedula, waar ook geen checksum
+/// bestaat.
+///
+/// De Liechtensteinse AHV-Versichertennummer heeft dezelfde vorm en evenmin een
+/// controlecijfer, maar valt hier bewust buiten: het enige contextwoord dat hem
+/// zou aanwijzen is "AHV-Nummer", en dat woord is net zo goed Zwitsers. Daar
+/// doet `ch.ahv` het werk al mét een echte checksum, en twee regels die
+/// hetzelfde nummer melden maken de lijst langer en de boodschap niet sterker.
+bool isValidLiPeid(String raw) {
+  final d = _digits(raw);
+  if (d.length < 4 || d.length > 12) return false;
+  // `1234`, `00000000`: reeksen die niemand aanwijzen. Bij een patroon dat
+  // verder alleen op zijn lengte steunt is dit geen franje maar de enige
+  // inhoudelijke eis die er is.
+  return !isMeaninglessDigitRun(d);
 }
 
 // ── Malta ────────────────────────────────────────────────────────────────────

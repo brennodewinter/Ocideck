@@ -237,7 +237,8 @@ nul. Waar géén checksum bestaat (US SSN, V-nummer), is een contextwoord verpli
 | `ch.ahv` | AHV-Nummer | `756.xxxx.xxxx.xx`, EAN-13-controlecijfer | zeker | ◐ |
 | `lu.matricule` | Luxemburgs matricule | `AAAAMMJJXXXC1C2`: C1 = Luhn over de eerste elf cijfers, C2 = Verhoeff over diezélfde elf | zeker | ◐ |
 | `cy.tic` | Cypriotische fiscale identificatiecode (TIC / ΑΦΜ) | 8 cijfers + controleletter, mod-26 met een omzettabel voor de oneven posities. Nooit `zeker`: de code hoort bij een mens óf bij een bedrijf, en mod-26 is de zwakste checksum in deze tabel | waarschijnlijk | ◐ |
-| `mt.id` | Maltees identiteitskaartnummer | géén checksum — 7 cijfers + een letter uit `{A,B,G,H,L,M,P,Z}` die geboortestreek en -eeuw codeert. **Contextwoord verplicht** | waarschijnlijk | — |
+| `mt.id` | Maltees identiteitskaartnummer | géén checksum — 7 cijfers + een letter uit `{A,B,G,H,L,M,P,Z}` die geboortestreek en -eeuw codeert. **Contextwoord verplicht** | waarschijnlijk | ◐ |
+| `li.peid` | Liechtensteinse Personenidentifikationsnummer | géén checksum, géén datum, géén prefix: 4 tot 12 kale cijfers. **Contextwoord verplicht** (`peid`), en nooit boven `mogelijk`. De AHV-Versichertennummer heeft dezelfde vorm en valt bewust buiten — zie de toelichting bij de functie | mogelijk | ◐ |
 | `uk.nino` | National Insurance Number | formaat `QQ123456A` + uitgesloten prefixen (BG, GB, NK, KN, TN, NT, ZZ), geen D/F/I/Q/U/V als eerste letter, geen O als tweede | waarschijnlijk | ◐ |
 | `uk.nhs` | NHS-nummer | mod-11 (gewichten 10…2), rest 10 = ongeldig | zeker | ◐ |
 | `us.ssn` | Social Security Number | géén checksum. Area ≠ 000/666/900-999, groep ≠ 00, serie ≠ 0000. **Contextwoord verplicht** (`ssn`, `social security`), anders veel te veel FP's op datums en ordernummers | waarschijnlijk | ◐ |

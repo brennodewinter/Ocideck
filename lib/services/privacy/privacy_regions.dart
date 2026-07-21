@@ -24,14 +24,18 @@
 //
 // ── Maar alleen de landen waarvoor iets te vinden valt ──────────────────────
 //
-// Zes van die landen hadden geen enkele regel en stonden tóch als chip in de
-// instellingen, standaard aan. Wie CY of MT zag staan, mocht aannemen dat er
-// naar Cypriotische of Maltese nummers werd gekeken; er gebeurde niets. Dat is
-// niet "minder vinden" maar iets ergers: het is de belofte van een controle die
-// niet bestaat, en het maakt van "niemand keek" een "niets gevonden".
+// Zes van die landen — CY, LU, LV, MT, IS en LI — hadden geen enkele regel en
+// stonden tóch als chip in de instellingen, standaard aan. Wie CY of MT zag
+// staan, mocht aannemen dat er naar Cypriotische of Maltese nummers werd
+// gekeken; er gebeurde niets. Dat is niet "minder vinden" maar iets ergers: het
+// is de belofte van een controle die niet bestaat, en het maakt van "niemand
+// keek" een "niets gevonden". Ze zijn er toen uit gehaald.
 //
-// Ze staan er daarom uit tot hun regel bestaat. `privacy_region_coverage_test`
-// bewaakt beide kanten van die afspraak.
+// Sinds juli 2026 staan ze er weer in, nu mét regel. Vier daarvan dragen een
+// echte checksum (IS, LV, LU en CY); twee hebben er geen die zich laat staven
+// (MT en LI) en dragen daarom een contextpoort, precies zoals `dk.cpr` en
+// `uk.nino`. `privacy_region_coverage_test` bewaakt beide kanten van die
+// afspraak: geen chip zonder regel, en geen regel buiten een chip om.
 
 /// De EU-27, EER, Zwitserland en het VK: elke landcode die de regiopoort als
 /// prefix van een regel-id herkent.
@@ -49,20 +53,23 @@ const Set<String> _knownEuropeanCodes = {
 
 /// Europese landen waarvoor werkelijk een regel bestaat.
 ///
-/// Wie hier ontbreekt is niet vergeten maar heeft nog geen regel, en een chip
-/// die aan staat en niets doet is erger dan geen chip — hij laat "niemand keek"
-/// lezen als "niets gevonden", precies wat `docs/PRIVACY.md` §"Wat de controle
-/// níét doet" verbiedt. LT en SK stáán er wél in: hun nummers worden gedekt door
-/// een regel van de buren, zie [sharedRegionRules].
+/// Sinds juli 2026 zijn dat er 32: gelijk aan [_knownEuropeanCodes], want elk
+/// land waarvoor de regiopoort een code kent heeft nu ook werkelijk een regel.
+/// Die twee lijsten blijven desondanks apart — zie [privacyRuleRegion] voor
+/// waarom.
 ///
-/// Nog open: alleen LI.
+/// Wie hier ooit weer ontbreekt is niet vergeten maar heeft geen regel, en een
+/// chip die aan staat en niets doet is erger dan geen chip — hij laat "niemand
+/// keek" lezen als "niets gevonden", precies wat `docs/PRIVACY.md` §"Wat de
+/// controle níét doet" verbiedt. LT en SK stáán er in zonder eigen regel: hun
+/// nummers worden gedekt door een regel van de buren, zie [sharedRegionRules].
 ///
 /// Bouw je zo'n regel, zet het land er dan bij — `privacy_region_coverage_test`
 /// wordt rood tot je dat doet.
 const Set<String> _europeanRegions = {
   'at', 'be', 'bg', 'ch', 'cy', 'cz', 'de', 'dk', 'ee', 'es', 'fi', 'fr', //
-  'gr', 'hr', 'hu', 'ie', 'is', 'it', 'lt', 'lu', 'lv', 'mt', 'nl', 'no', //
-  'pl', 'pt', 'ro', 'se', 'si', 'sk', 'uk', //
+  'gr', 'hr', 'hu', 'ie', 'is', 'it', 'li', 'lt', 'lu', 'lv', 'mt', 'nl', //
+  'no', 'pl', 'pt', 'ro', 'se', 'si', 'sk', 'uk', //
 };
 
 /// Regels die voor meer dan één land gelden.

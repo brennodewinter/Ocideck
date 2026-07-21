@@ -168,6 +168,28 @@ void main() {
     );
   });
 
+  group('Liechtenstein — cijfers en verder niets', () {
+    test('accepteert de lengtes uit de OESO-beschrijving', () {
+      // "up to 12 numerals", en korter dan dat alleen doordat voorloopnullen
+      // worden weggelaten.
+      expect(isValidLiPeid('2637'), isTrue);
+      expect(isValidLiPeid('4082617'), isTrue);
+      expect(isValidLiPeid('284615930472'), isTrue);
+    });
+
+    test('wijst een lengte buiten het bereik af', () {
+      expect(isValidLiPeid('263'), isFalse);
+      expect(isValidLiPeid('2846159304725'), isFalse);
+    });
+
+    test('wijst een betekenisloze reeks af', () {
+      // Bij een patroon dat verder alleen op zijn lengte steunt is dit de enige
+      // inhoudelijke eis die er is.
+      expect(isValidLiPeid('00000000'), isFalse);
+      expect(isValidLiPeid('123456'), isFalse);
+    });
+  });
+
   group('Malta — géén checksum, dus alleen een vorm', () {
     test('accepteert elk van de acht categorieletters', () {
       for (final letter in ['A', 'B', 'G', 'H', 'L', 'M', 'P', 'Z']) {

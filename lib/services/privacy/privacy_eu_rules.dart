@@ -106,6 +106,18 @@ final List<NationalIdentifierRule> euIdentifierRules = [
     validate: isValidBalticPersonalCode,
   ),
   NationalIdentifierRule(
+    id: 'li.peid',
+    country: 'LI',
+    pattern: RegExp(r'(?<!\d)\d{4,12}(?!\d)'),
+    validate: isValidLiPeid,
+    // Alleen Liechtensteinse termen. "AHV-Nummer" zou hier aanslaan op elk
+    // Zwitsers nummer op de slide, en dat is `ch.ahv` — mét checksum.
+    contextWords: ['peid', 'personenidentifikationsnummer'],
+    // Cijfers en verder niets: geen checksum, geen datum, geen prefix. Zelfs
+    // mét contextwoord is dit het zwakste bewijs in de hele tabel.
+    confidence: PrivacyConfidence.possible,
+  ),
+  NationalIdentifierRule(
     id: 'mt.id',
     country: 'MT',
     pattern: RegExp(r'\b\d{7}[A-Z]\b'),

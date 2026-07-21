@@ -572,6 +572,7 @@ const Map<String, String> _nationalNumberNames = {
   'lu.matricule': 'matricule',
   'cy.tic': 'TIC',
   'mt.id': 'ID Card Number',
+  'li.peid': 'PEID',
   'uk.nhs': 'NHS',
   'uk.nino': 'NINO',
 };

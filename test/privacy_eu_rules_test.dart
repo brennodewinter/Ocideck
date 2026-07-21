@@ -64,6 +64,22 @@ void main() {
       expect(rulesIn('NHS 943 476 7016'), contains('uk.nhs'));
     });
 
+    test('de PEID vuurt alleen mét contextwoord', () {
+      // Vier tot twaalf kale cijfers: zonder de poort zou dit élk getal op elke
+      // slide melden.
+      expect(rulesIn('bedrag 2637 euro'), isNot(contains('li.peid')));
+      expect(rulesIn('PEID 2637'), contains('li.peid'));
+    });
+
+    test('een Zwitsers AHV-nummer levert geen tweede melding op', () {
+      // "AHV-Nummer" staat bewust niet bij de contextwoorden van Liechtenstein:
+      // dat woord is net zo goed Zwitsers, en daar doet `ch.ahv` het werk mét
+      // een echte checksum.
+      final regels = rulesIn('AHV-Nummer 756.1234.5678.97');
+      expect(regels, contains('ch.ahv'));
+      expect(regels, isNot(contains('li.peid')));
+    });
+
     test('het Maltese ID-nummer vuurt alleen mét contextwoord', () {
       // Zeven cijfers plus een van acht letters is geen bewijs: `0384219M` is
       // net zo goed een artikelcode.
