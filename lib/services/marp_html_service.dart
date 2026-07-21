@@ -154,11 +154,21 @@ class MarpHtmlService {
         // 'none' (a planted <form action="https://…"> on submit). MathJax is
         // tex-svg (no web fonts) and the bundled theme/highlight CSS carry no
         // url()/@font-face, so these limits never bite a legitimate export.
+        //
+        // style-src 'unsafe-inline' sluit het laatste gat: zónder die richtlijn
+        // valt stijl helemaal buiten de CSP, en kon een `@import url(https://…)`
+        // in een `<style>`-blok alsnog naar buiten bellen — precies wat de rest
+        // van deze regel belooft te verhinderen. 'unsafe-inline' klinkt ruimer
+        // dan het is: het staat inline stijl toe (die er al was, want er stond
+        // niets) maar géén enkele externe herkomst, dus het import-verzoek
+        // wordt geweigerd. Een nonce zou strenger zijn, maar breekt de stijl
+        // die MathJax en mermaid tijdens het renderen zelf injecteren.
         '<meta http-equiv="Content-Security-Policy" '
         'content="script-src \'nonce-$nonce\'; object-src \'none\'; '
         'base-uri \'none\'; frame-src \'none\'; form-action \'none\'; '
         'img-src \'self\' data: blob: file:; '
         'media-src \'self\' data: blob: file:; font-src \'self\' data:; '
+        'style-src \'unsafe-inline\'; '
         'connect-src \'none\'">'
         '<title>$title</title>'
         '$headMeta'
