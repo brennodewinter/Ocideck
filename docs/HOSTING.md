@@ -73,7 +73,29 @@ relies on stop loading.
 
 Recommended companion headers: `Referrer-Policy: no-referrer`,
 `X-Content-Type-Options: nosniff`, and (for embedding control on old browsers)
-`X-Frame-Options` to match `frame-ancestors`.
+`X-Frame-Options` to match `frame-ancestors`. The bundle itself already carries
+`<meta name="referrer" content="no-referrer">` — unlike `frame-ancestors`, that
+one *is* honoured from a meta tag — so the header only reinforces what ships.
+
+### `Strict-Transport-Security`
+
+Send it, and send it on every response:
+
+```
+Strict-Transport-Security: max-age=63072000; includeSubDomains
+```
+
+Without HSTS the first request to a host a user types without a scheme goes out
+over plaintext, and a redirect to HTTPS is exactly the moment an attacker on the
+path gets to answer instead. That matters more here than for a typical static
+site: the URL-import and the fetch-proxy make this origin one that decks link
+*to*, so a downgrade reaches more than the one visitor in front of you.
+
+Only add `preload` if you accept what it means — the domain and every subdomain
+become HTTPS-only in shipped browsers, and getting removed from the list again
+takes months. `includeSubDomains` alone is the safe default.
+
+*(Added 2026-07-22: HSTS was recommended nowhere in this repository before.)*
 
 ## 4. Optional: the fetch-proxy (for web URL import)
 
@@ -152,7 +174,11 @@ the CRA inventory that matches the exact build you shipped. See [SBOM.md](SBOM.m
 - [ ] Served over HTTPS from a static host
 - [ ] CSP sent as an HTTP header, with `frame-ancestors` set for your embedding needs
 - [ ] `Referrer-Policy`, `X-Content-Type-Options` headers set
+- [ ] `Strict-Transport-Security` sent on every response (§3)
 - [ ] fetch-proxy deployed on the same origin **only if** web URL import is needed
+- [ ] fetch-proxy put behind authentication at the reverse proxy — its own origin
+      check is a header heuristic that any non-browser client can send, so an
+      unauthenticated deployment is an open fetch relay to public hosts
 - [ ] `/sbom/` reachable
 - [ ] Users told what the web build cannot do (§5) — the missing image privacy
       check in particular, if they present photographs of people

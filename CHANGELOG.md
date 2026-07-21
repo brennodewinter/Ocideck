@@ -109,6 +109,23 @@ starts tagging releases. It has not yet: everything below is unreleased work on
   Gevonden door de nieuwe scan van de webversie, de eerste keer dat die liep.
   De controle op de webbundel bewaakt het voortaan, en die controle is ook
   omgekeerd getoetst: haal je de regel weg, dan valt hij echt om.
+- **De webversie verklapt niet meer aan welke presentatie u werkt.** Haalt u een
+  deck op via een link, dan vertelde uw browser aan die server standaard van
+  welke pagina u kwam — inclusief het volledige adres van uw eigen presentatie.
+  Bij een deck-link is juist dat adres vaak het gevoelige deel: wie hem heeft,
+  heeft het deck.
+
+  De bundel zegt nu zelf dat er niets meegestuurd mag worden. Dat werkt zonder
+  dat uw beheerder er iets voor hoeft te doen — anders dan de meeste van deze
+  regels, die alleen gelden als de server ze meestuurt. De controle op de
+  webbundel bewaakt het.
+
+  Voor beheerders staat er in de uitrolgids nu ook bij dat de server
+  `Strict-Transport-Security` hoort mee te sturen; dat ontbrak. Zonder die kop
+  gaat het állereerste verzoek naar uw server nog over een onbeveiligde
+  verbinding, en dat is precies het moment waarop iemand ertussen kan gaan
+  zitten. En de losse ophaaldienst zet zijn "niet zelf raden wat voor bestand
+  dit is"-kop voortaan óók op een weigering, niet alleen als het lukt.
 
 - **Uw eigen regels in de kop breken het zegel niet meer.** Sinds OciDeck de
   front matter bijwerkt in plaats van herbouwt, blijft wat u er zelf in zet
