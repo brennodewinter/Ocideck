@@ -433,4 +433,56 @@ void main() {
       reason: 'de mem:-afbeelding staat niet in het raster',
     );
   });
+
+  testWidgets('zonder frames geeft de export op, en meldt dát hij begon', (
+    tester,
+  ) async {
+    // De faalvorm die dit vastlegt: rasteren laat de échte voorvertoning
+    // tekenen en wacht op `endOfFrame`. Levert de engine geen frames — venster
+    // geminimaliseerd, achter een ander venster, op een andere Space — dan
+    // kwam dat wachten nooit terug. Zes dia's, nul gerenderd, geen fout, geen
+    // teller: een export die stilstond en niets zei.
+    //
+    // Let op waarom de andere tests dit niet konden vangen: die pompen zelf
+    // frames, en leveren dus precies aan wat in productie ontbreekt. 97%
+    // regeldekking en de bug zat er gewoon in. Deze test pompt met opzet NIET.
+    final context = await _hostContext(tester);
+    final audience = PrivacyProjection.forAudience(_deck());
+
+    final fasen = <String>[];
+    Object? fout;
+    await tester.runAsync(() async {
+      try {
+        await SlideRasterizer.rasterize(
+          context: context,
+          audience: audience,
+          targetWidth: 320,
+          onStage: (fase, _, _) => fasen.add(fase),
+          frameTimeout: const Duration(milliseconds: 50),
+        );
+      } catch (e) {
+        fout = e;
+      }
+    });
+
+    expect(
+      fout,
+      isA<SlideRasterizerNoFrameException>(),
+      reason:
+          'zonder frames hoort de export te stoppen, niet te blijven wachten',
+    );
+    expect(
+      fasen.first,
+      'precache',
+      reason:
+          'de eerste melding moet vóór het eerste wachten komen, anders '
+          'ziet de gebruiker bij een blokkade helemaal niets',
+    );
+    expect(
+      '${fout!}',
+      contains('venster'),
+      reason:
+          'de fout moet zeggen wat eraan scheelt, niet alleen dát het faalde',
+    );
+  });
 }

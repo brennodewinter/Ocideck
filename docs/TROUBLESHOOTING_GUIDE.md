@@ -39,8 +39,17 @@ This guide addresses frequently encountered problems, their causes, and step-by-
 - Exports fail or produce corrupted files  
 - Missing content in exported documents
 - Error messages during export process
+- **The export sits still and renders nothing at all**
 
 **Solutions**:
+0. **Keep the window visible while exporting** (if nothing renders at all):
+   PDF and PPTX are produced by letting the real slide preview paint and
+   capturing the result, so the export needs the app to actually draw frames.
+   Minimise the window, put another window over it, or switch to a different
+   Space, and macOS stops delivering frames — the export then has nothing to
+   capture. It now gives up after 20 seconds with an explicit message instead
+   of waiting forever, but the fix is simply to leave the window in front.
+   HTML export is unaffected: it does not rasterize.
 1. **Check Classification Settings**:
    - Verify TLP levels aren't blocking exports
    - Confirm privacy disposition settings allow the export  
