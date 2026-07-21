@@ -132,6 +132,20 @@ coverage:
 	$(RAISE_FDS) flutter test --coverage --test-randomize-ordering-seed random --exclude-tags golden
 	dart run tool/coverage_summary.dart --min=79 --require-instrumented
 
+# The per-file floor, over the report `coverage` just wrote (no second test run).
+#
+# Separate from the floor above because it answers a different question. The
+# average says how much of lib/ runs; it says nothing about *where*. A file that
+# a test imports but never calls sits at 0% inside an 80% average and no gate
+# above notices — twenty-two files were in exactly that state. This one looks at
+# the worst case per file and budgets how many may be there.
+coverage-per-file:
+	@echo "== OciDeck check: per-file coverage floor =="
+	@echo "Command: dart run tool/coverage_summary.dart --per-file-floor"
+	@echo "Covers: how many lib/ files run less than a fifth of their own lines — the worst case per file, which the overall average cannot show."
+	@echo "Failure means: more files sit below the floor than the budget allows (write a test for one of the files listed), or the budget is stale after an improvement (lower it to the number printed)."
+	dart run tool/coverage_summary.dart --per-file-floor
+
 # Slide-renderer visual-regression goldens (test/golden/). Pixel- and
 # platform-specific (default flutter-test font, so they catch layout/structure/
 # colour regressions), hence excluded from the default suite and from CI. Run on
@@ -556,9 +570,9 @@ build-release:
 # nothing ran them — and the GitHub workflow that did cannot fire on a Forgejo
 # remote without a runner. `make check` is the real gate; it should contain the
 # gates.
-check: format-check analyze check-conventions check-method-length check-dead-code check-hardcoded-text coverage
+check: format-check analyze check-conventions check-method-length check-dead-code check-hardcoded-text coverage coverage-per-file
 	@echo "== OciDeck check complete =="
-	@echo "Validated: formatting, static analysis, conventions, method length, dead-code, hardcoded visible text, the full Flutter test suite, and the coverage floor."
+	@echo "Validated: formatting, static analysis, conventions, method length, dead-code, hardcoded visible text, the full Flutter test suite, the coverage floor, and the per-file coverage floor."
 
 # Extended local check: the gate plus licence/compliance, bundled-JS CVEs, the
 # web-hardening assertion (rebuilds the web bundle), and a freshness report.
