@@ -27,15 +27,17 @@
 //
 // ── Twee soorten vondst: bronsleutel of écht hardgecodeerd ───────────────────
 //
-// Stap 2 loopt twee keer, vanaf twee zaadverzamelingen, en dát verschil is de
-// hele indeling:
+// Stap 2 loopt twee keer, vanaf twee gescheiden zaadverzamelingen, en dát
+// verschil is de hele indeling:
 //
-//   * Vanaf ALLE putten (Flutter + `d()`) → elke literal die ooit op het scherm
-//     belandt.
-//   * Vanaf ALLEEN `d()` → de literals die onderweg gegarandeerd door de
-//     vertaalfunctie gaan.
+//   * Vanaf `d()` → de posities waarvan vaststaat dat wat erin stroomt vertaald
+//     wordt.
+//   * Vanaf de RAUWE putten (`Text`, `Tooltip`, `InputDecoration`, …) → de
+//     posities die tekst ongewijzigd op het scherm zetten.
 //
-// Valt een vondst in de tweede verzameling, dan is hij een BRONSLEUTEL. Bij
+// Zit een positie alleen in de eerste verzameling, dan is de literal erop een
+// BRONSLEUTEL. Zit hij (ook) in de tweede, dan is het een overtreding: er is
+// een weg waarlangs de Nederlandse tekst onvertaald op het scherm belandt. Bij
 // `EditorField(label: 'Titel')` staat `'Titel'` precies waar hij hoort: het
 // veld doet intern `l10n.d(widget.label)`, dus de literal ís het argument van
 // `d()`, alleen een aanroep verderop. Dat is geen overtreding en mag niet naar
@@ -46,12 +48,8 @@
 // `unchangedInAllLanguages` met de letterlijke variant, zodat een identifier
 // die in elke taal gelijk blijft (CWE, F-03) op één plek staat.
 //
-// Valt hij er buiten, dan is het een ECHTE overtreding: de literal bereikt het
-// scherm zonder ergens vertaald te worden. Alleen díe telt mee voor
-// [hardcodedTextBaseline], en dat getal moet naar nul.
-//
-// Een vondst die langs meerdere wegen binnenkomt en waarvan er één níet
-// localiseert, telt als overtreding — het scherm toont hem dan soms rauw.
+// Alleen de echte overtredingen tellen mee voor [hardcodedTextBaseline], en dat
+// getal moet naar nul.
 //
 // Daardoor stuurt het TYPE de beslissing, niet de parameternaam. Dat is precies
 // het verschil dat een naamgebaseerde grep niet kan maken: `title:` op een
@@ -146,7 +144,7 @@ import 'package:analyzer/source/line_info.dart';
 /// is de dichte deur; de opruiming loopt erachter door.
 ///
 /// **Dit moet 0 zijn vóór release 0.1.0.**
-const int hardcodedTextBaseline = 48;
+const int hardcodedTextBaseline = 34;
 
 /// Bestanden die deck-INHOUD dragen in plaats van interfacetekst: de sjablonen
 /// die een nieuwe presentatie met voorbeeldslides vullen. Die tekst is vanaf
