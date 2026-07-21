@@ -7,6 +7,7 @@ import 'package:ocideck/models/deck.dart';
 import 'package:ocideck/models/deck_template.dart';
 import 'package:ocideck/models/scope_matrix_spec.dart';
 import 'package:ocideck/models/settings.dart';
+import 'package:ocideck/models/document_signature.dart';
 import 'package:ocideck/models/seal_record.dart';
 import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/services/document_integrity.dart';
@@ -883,6 +884,29 @@ void main() {
     final strokes = n.state.deck!.annotations.values.expand((s) => s).toList();
     expect(strokes, isNotEmpty);
     expect(strokes.first.color, 0xFF112233);
+  });
+
+  test('applyMarkdown preserves the signature across a toggle', () {
+    // De handtekening staat sinds 0.1.0 niet meer in de markdown. Zonder dat de
+    // toggle haar apart meeneemt, was ze na één keer schakelen naar de
+    // markdown-weergave weg — en had de eerstvolgende opslag het zegelbestand
+    // met haar erin opgeruimd.
+    final n = _notifier();
+    n.loadDeck(
+      Deck(
+        title: 'Rapport',
+        slides: [Slide.create(SlideType.signOff)],
+        signature: const DocumentSignature(
+          name: 'Jan Jansen',
+          role: 'Onderzoeker',
+        ),
+      ),
+    );
+    final md = n.generateMarkdown();
+    expect(md, isNot(contains('ocideck_sig_')));
+    expect(n.applyMarkdown(md), isTrue);
+    expect(n.state.deck!.signature?.name, 'Jan Jansen');
+    expect(n.state.deck!.signature?.role, 'Onderzoeker');
   });
 
   test('generateMarkdown inlines linked chart data for the editor', () {

@@ -8,6 +8,7 @@ import '../models/deck_template.dart';
 import '../models/document_signature.dart';
 import '../models/scope_matrix_spec.dart';
 import '../models/settings.dart';
+import '../models/seal_record.dart';
 import '../models/slide.dart';
 import '../models/used_tool.dart';
 import '../services/ai_alt_text_cleanup.dart';
