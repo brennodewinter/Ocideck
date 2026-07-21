@@ -396,8 +396,6 @@ const _dutchSourceId = {
   'Slide-instellingen': 'Pengaturan slide',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Slide pembuka dengan judul dan subjudul besar. Tambahkan gambar latar dari pustaka gambar.',
-  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
-      'Subjudul bagian yang mengumumkan bagian baru presentasi. Buat singkat.',
   'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
       'Daftar berpoin. Indentasikan baris dengan spasi untuk subpoin; awali dengan "[ ]" untuk item yang dapat dicentang.',
   'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':

@@ -403,8 +403,6 @@ const _dutchSourceGa = {
   'Slide-instellingen': 'Socruithe sleamhnáin',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'An sleamhnán oscailte le teideal mór agus fotheideal. Cuir íomhá chúlra leis ón leabharlann íomhánna.',
-  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
-      'Ceannteideal rannóige a fhógraíonn cuid nua den chur i láthair. Coinnigh gearr é.',
   'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
       'Liosta urchar. Eangaigh líne le spásanna le haghaidh fophointe; tosaigh le "[ ]" le haghaidh míre inseiceáilte.',
   'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':

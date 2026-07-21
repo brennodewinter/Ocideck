@@ -395,8 +395,6 @@ const _dutchSourceEn = {
   'Slide-instellingen': 'Slide settings',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'The opening slide with a large title and subtitle. Add a background image from the image library.',
-  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
-      'A section heading that announces a new part of the presentation. Keep it short.',
   'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
       'A bulleted list. Indent a line with spaces for a sub-point; start with "[ ]" for a checkable item.',
   'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':

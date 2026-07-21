@@ -400,8 +400,6 @@ const _dutchSourceMt = {
   'Slide-instellingen': 'Settings tas-slajd',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Is-slide tal-ftuħ b\'titlu kbir u sottotitlu. Żid immaġni ta\' sfond mil-librerija tal-immaġini.',
-  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
-      'Intestatura ta\' taqsima li tħabbar parti ġdida tal-preżentazzjoni. Żommha qasira.',
   'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
       'Lista bil-punti. Indenta linja bi spazji għal sottopunt; ibda b\'"[ ]" għal element li jista\' jiġi mmarkat.',
   'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':

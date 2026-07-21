@@ -398,8 +398,6 @@ const _dutchSourceDa = {
   'Slide-instellingen': 'Slideindstillinger',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Åbningsslide med en stor titel og undertitel. Tilføj et baggrundsbillede via billedbiblioteket.',
-  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
-      'En mellemoverskrift, der annoncerer en ny del af præsentationen. Hold den kort.',
   'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
       'En punktopstilling. Indryk en linje med mellemrum for et underpunkt; begynd med "[ ]" for et afkrydseligt punkt.',
   'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':

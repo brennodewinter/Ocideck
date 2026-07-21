@@ -398,8 +398,6 @@ const _dutchSourceHr = {
   'Slide-instellingen': 'Postavke slajda',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Uvodni slajd s velikim naslovom i podnaslovom. Iz knjižnice slika dodajte pozadinsku sliku.',
-  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
-      'Naslov odjeljka koji najavljuje novi dio prezentacije. Neka bude kratak.',
   'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
       'Popis s natuknicama. Uvlačenje razmacima stvara podtočku; započnite s "[ ]" za stavku koja se može označiti.',
   'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':

@@ -394,8 +394,6 @@ const _dutchSourceEt = {
   'Slide-instellingen': 'Slaidi sätted',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Avaslaid suure pealkirja ja alapealkirjaga. Lisa taustapilt pildikogust.',
-  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
-      'Vahepealkiri, mis kuulutab ette esitluse uue osa. Hoia see lühike.',
   'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
       'Loend. Taande rida tühikutega alampunkti jaoks; alusta märgiga "[ ]", et punkt oleks linnutatav.',
   'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':

@@ -396,8 +396,6 @@ const _dutchSourceSv = {
   'Slide-instellingen': 'Bildinställningar',
   'De openingsslide met een grote titel en ondertitel. Voeg via de afbeeldingsbibliotheek een achtergrondbeeld toe.':
       'Öppningsbilden med en stor titel och underrubrik. Lägg till en bakgrundsbild via bildbiblioteket.',
-  'Een tussenkop die een nieuw deel van de presentatie aankondigt. Houd het kort.':
-      'En mellanrubrik som aviserar en ny del av presentationen. Håll den kort.',
   'Een opsomming. Laat een regel inspringen met spaties voor een subpunt; begin met "[ ]" voor een afvinkbaar item.':
       'En punktlista. Dra in en rad med blanksteg för en underpunkt; börja med "[ ]" för en avbockningsbar post.',
   'Twee opsommingskolommen naast elkaar — handig om twee dingen te vergelijken.':
