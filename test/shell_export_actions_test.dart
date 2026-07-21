@@ -92,6 +92,14 @@ void main() {
   /// dat alleen in [WidgetTester.runAsync] vordert — en dáárbinnen levert
   /// alleen een handmatige pomp frames. De grens is een tijdsgrens, zodat een
   /// vastloper een falende test wordt en geen hangende suite.
+  ///
+  /// De pomp zet de testklok bewust *niet* vooruit. Deed hij dat wel (zoals met
+  /// `pump(16ms)`), dan liep de klok mee met hoe lang het échte wachten duurt:
+  /// op een rustige machine een paar iteraties, onder belasting honderden. Een
+  /// `SnackBar` leeft vier seconden testtijd, dus dan verdween de melding door
+  /// het wachten zelf en viel een test om die niets met de code te maken had.
+  /// Het echte wachten gebeurt in de `Future.delayed` hieronder, in wérkelijke
+  /// tijd; de pomp is er alleen om frames te laten stromen.
   Future<bool> settleAsync(
     WidgetTester tester,
     bool Function() until, {
@@ -110,7 +118,7 @@ void main() {
           reached = true;
           return;
         }
-        await tester.pump(const Duration(milliseconds: 16));
+        await tester.pump();
         await Future<void>.delayed(const Duration(milliseconds: 5));
       }
       reached = until();
