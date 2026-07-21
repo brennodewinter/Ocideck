@@ -81,6 +81,7 @@ part 'previews/chart_preview_bullet.dart';
 part 'previews/cockpit_preview.dart';
 part 'previews/question_preview.dart';
 part 'previews/timeline_preview.dart';
+part 'previews/timeline_fit.dart';
 part 'previews/scorecard_preview.dart';
 part 'previews/asset_overview_preview.dart';
 part 'previews/discoveries_preview.dart';

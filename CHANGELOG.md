@@ -9,6 +9,22 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 
 ## [Unreleased]
 
+### Fixed
+- **De tijdlijn kapt haar tekst niet langer af.** Een tijdlijn met zes normale
+  gebeurtenissen liet van élke titel en élke beschrijving een deel wegvallen
+  achter een `…`. De oorzaak was een schatting: het aantal regels werd afgeleid
+  uit `lengte / tekens-per-regel`, wat de werkelijke breedte van de letters in
+  uw profiellettertype niet kan kennen. Op een dia van zes kaarten sloeg die
+  schatting om bij een marge van 0,2 promille, waarna de beschrijving terugviel
+  op één regel van ongeveer 35 tekens — terwijl er 64 stonden.
+
+  De kaarten meten nu de echte tekst en kiezen de grootste lettergrootte waarbij
+  alles heel blijft. Daarbij mogen ze breder worden dan voorheen (de oude
+  bovengrens lag ruim onder wat de tijdlijn aankan), mag een lange titel een
+  tweede regel gebruiken, en kan een uitzonderlijk lange markering de titel niet
+  meer uit de kaart duwen. Wat niet verandert: kaarten blijven binnen hun eigen
+  rij, dus ze kunnen nooit over elkaar heen vallen.
+
 ### Added
 - **De interface spreekt nu ook Turks.** OciDeck draaide in 31 talen — alle
   EU-talen plus een paar daarbuiten — maar Turks ontbrak, terwijl het een van de
