@@ -129,6 +129,14 @@ starts tagging releases. It has not yet: everything below is unreleased work on
 
 
 ### Fixed
+- **Een vraagdia zonder juist antwoord hield de presentatie voorgoed vast.** De
+  quiz blokkeert doorbladeren tot er juist geantwoord is, en de maat daarvoor was
+  of er ópties stonden. Een vraag met twee opties waarvan er géén als juist is
+  aangemerkt levert echter een lege verzameling juiste antwoorden op: elk
+  antwoord telt dan als fout, en in de standaard retry-stand vergrendelt een fout
+  niet. Zo'n dia was per definitie niet te halen en alleen met afsluiten te
+  verlaten. De maat is nu of er een juist antwoord te gévén valt — wat de
+  tekenroutines zelf al "niet presenteerbaar" noemden.
 - **Een live bewerkte tabel kwam verouderd terug in de editor — en werd stil
   teruggedraaid.** Wat je tijdens het presenteren in een tabelcel typte (of
   afvinkte op een checklist) belandde wél in het deck, maar de editorvelden
