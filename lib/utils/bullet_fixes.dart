@@ -46,9 +46,8 @@ int _bulletWarningCount(Slide slide) => slide.type == SlideType.twoBullets
 
 /// Tussenkoppen zijn secties, geen inhoudelijke bullets: ze tellen bij de
 /// analyse niet mee en hier dus ook niet.
-int _visibleBulletCount(List<String> bullets) => bullets
-    .where((b) => b.trimLeft().isNotEmpty && !isGroupHeading(b))
-    .length;
+int _visibleBulletCount(List<String> bullets) =>
+    bullets.where((b) => b.trimLeft().isNotEmpty && !isGroupHeading(b)).length;
 
 bool _isMultiSentence(String bullet) =>
     _splitSentences(_plainText(bullet)).length > 1;

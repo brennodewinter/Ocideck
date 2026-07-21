@@ -160,13 +160,16 @@ extension _PresenterTable on _FullscreenPresenterState {
   /// je vroeger soms uit de bewerking gooide. Pijltjes verplaatsen de celkeuze
   /// alleen als er geen tekstveld focus heeft; staat de cursor in een cel, dan
   /// vangt het veld ze zelf op om de tekstcursor te bewegen.
-  KeyEventResult _handleTableEditKey(LogicalKeyboardKey key) {
+  KeyEventResult _handleTableEditKey(
+    LogicalKeyboardKey key, {
+    bool shift = false,
+  }) {
     switch (key) {
       case LogicalKeyboardKey.escape:
         _exitTableEditMode();
         return KeyEventResult.handled;
       case LogicalKeyboardKey.tab:
-        _tabTableCell(backwards: HardwareKeyboard.instance.isShiftPressed);
+        _tabTableCell(backwards: shift);
         return KeyEventResult.handled;
       case LogicalKeyboardKey.arrowRight:
       case LogicalKeyboardKey.arrowLeft:

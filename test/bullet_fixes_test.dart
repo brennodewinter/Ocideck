@@ -88,11 +88,14 @@ void main() {
         ],
       );
       // De kop staat er eenmaal boven, niet bij elke regel opnieuw.
-      expect(splitSentenceBullets(slide).notes, [
-        'Aanpak',
-        'Eerste zin. Tweede zin.',
-        'Derde zin. Vierde zin.',
-      ].join('\n'));
+      expect(
+        splitSentenceBullets(slide).notes,
+        [
+          'Aanpak',
+          'Eerste zin. Tweede zin.',
+          'Derde zin. Vierde zin.',
+        ].join('\n'),
+      );
     });
 
     test('een slide die te vol zou worden krijgt de actie niet aangeboden', () {
