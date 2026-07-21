@@ -244,6 +244,10 @@ class TabsNotifier extends StateNotifier<TabsState> {
               deck.miauwWaivers,
               deck.miauwConfirmations,
             ),
+            // Tekeningen staan niet in de markdown (eigen sidecar), en tekenen
+            // maakt het deck wél vuil. Zonder deze regel kwam een herstelde
+            // presentatie stil zonder annotaties terug.
+            annotations: AnnotationCodec.encode(deck.slides, deck.annotations),
           ),
         );
         _lastAutosavedDeck[tab.id] = deck;
@@ -259,8 +263,8 @@ class TabsNotifier extends StateNotifier<TabsState> {
     final restored = <TabInfo>[];
     var unreadable = 0;
     for (final snap in snapshots) {
-      var deck = _md.parseDeck(snap.markdown, filePath: snap.filePath);
-      if (deck == null) {
+      final parsed = _md.parseDeck(snap.markdown, filePath: snap.filePath);
+      if (parsed == null) {
         // Niet weggooien. `parseDeck` vangt zijn eigen fouten af juist omdát hij
         // in de praktijk struikelt, en een crash ín de parser is een van de
         // waarschijnlijkere redenen dat deze momentopname er überhaupt ligt.
@@ -270,6 +274,7 @@ class TabsNotifier extends StateNotifier<TabsState> {
         logWarning('restoreRecovered: momentopname onleesbaar', snap.filePath);
         continue;
       }
+      var deck = parsed;
       if (snap.userNotes != null && snap.userNotes!.isNotEmpty) {
         final notes = UserNotesCodec.decode(snap.userNotes!, deck.slides);
         if (notes.isNotEmpty) {
@@ -283,6 +288,17 @@ class TabsNotifier extends StateNotifier<TabsState> {
             miauwWaivers: d.waivers,
             miauwConfirmations: d.confirmations,
           );
+        }
+      }
+      final ink = snap.annotations;
+      if (ink != null && ink.isNotEmpty) {
+        try {
+          final strokes = AnnotationCodec.decode(ink, deck.slides);
+          if (strokes.isNotEmpty) deck = deck.copyWith(annotations: strokes);
+        } catch (e) {
+          // Een kapotte tekenlaag mag het herstel van de tekst nooit blokkeren;
+          // hetzelfde als bij een onleesbare sidecar op schijf.
+          logWarning('restoreRecovered: annotaties onleesbaar', e);
         }
       }
       // Hergebruik de sleutel van de momentopname. Het bestand dat er al ligt ís
