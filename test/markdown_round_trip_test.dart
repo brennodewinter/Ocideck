@@ -592,6 +592,42 @@ void main() {
       expect(markdown, contains('Dit is **vet** tekst'));
     });
 
+    test('an image inside the text survives next to the side image', () {
+      // De zij-afbeelding staat in `<div class="split-image">`; een `![…]` in de
+      // tekst hoort daar niets mee te maken. Vroeger gold "de eerste `![…]` op
+      // een split-slide is de zij-afbeelding", en dan werd de afbeelding in de
+      // lopende tekst opgeslokt en verdween hij uit de body.
+      const body =
+          'Kijk naar deze grafiek:\n\n'
+          '![De omzet per kwartaal](images/grafiek.png)\n\n'
+          'En dat verklaart het verschil.';
+      final out = _roundTrip(
+        Slide.create(SlideType.bulletsImage).copyWith(
+          listStyle: ListStyle.richText,
+          customMarkdown: body,
+          imagePath: 'images/portret.png',
+        ),
+      );
+      expect(out.customMarkdown, body);
+      expect(
+        out.imagePath,
+        'images/portret.png',
+        reason: 'de zij-afbeelding blijft de zij-afbeelding',
+      );
+    });
+
+    test('a text image alone does not become the side image', () {
+      const body =
+          'Een dia zonder zij-afbeelding:\n\n![Alt](images/in-tekst.png)';
+      final out = _roundTrip(
+        Slide.create(
+          SlideType.bulletsImage,
+        ).copyWith(listStyle: ListStyle.richText, customMarkdown: body),
+      );
+      expect(out.customMarkdown, body);
+      expect(out.imagePath, isEmpty);
+    });
+
     test('twoImages slide keeps both images, split and captions', () {
       final out = _roundTrip(
         Slide.create(SlideType.twoImages).copyWith(

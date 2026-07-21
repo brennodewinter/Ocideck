@@ -299,6 +299,7 @@ class _BulletsImagePreview extends StatelessWidget {
                         contentW: availW,
                         availH: availH,
                         splitWithImage: true,
+                        projectPath: projectPath,
                         richTextPage: richTextPage,
                       ),
                     ),

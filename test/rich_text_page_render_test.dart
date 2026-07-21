@@ -75,4 +75,53 @@ void main() {
     // herhaalt leest als een nieuwe dia in plaats van als vervolg.
     expect(find.textContaining('Titel', findRichText: true), findsNothing);
   });
+
+  testWidgets('an image in the text is drawn, not printed as markdown', (
+    tester,
+  ) async {
+    final slide = Slide.create(SlideType.bullets).copyWith(
+      listStyle: ListStyle.richText,
+      customMarkdown:
+          'Kijk hiernaar:\n\n![De grafiek](images/grafiek.png)\n\nEinde.',
+    );
+    await tester.pumpWidget(_host(slide));
+
+    // De rauwe markdown hoort niet als tekst op de dia te staan.
+    expect(
+      find.textContaining('![De grafiek]', findRichText: true),
+      findsNothing,
+    );
+    // De tekst eromheen blijft gewoon staan.
+    expect(find.textContaining('Kijk hiernaar', findRichText: true), findsOne);
+    expect(find.textContaining('Einde.', findRichText: true), findsOne);
+  });
+
+  test('an image block reserves height, so it changes the page count', () {
+    // Als de paginering het afbeeldingsvak niet meerekent, past er te veel op
+    // een pagina en loopt de dia over de onderrand.
+    Slide withBody(String body) => Slide.create(
+      SlideType.bullets,
+    ).copyWith(listStyle: ListStyle.richText, customMarkdown: body);
+
+    final paragraphs = List.generate(
+      12,
+      (i) => 'Alinea $i met wat tekst om hoogte op te bouwen.',
+    ).join('\n\n');
+    final withImages = List.generate(
+      12,
+      (i) =>
+          'Alinea $i met wat tekst om hoogte op te bouwen.\n\n'
+          '![plaat $i](images/plaat$i.png)',
+    ).join('\n\n');
+
+    expect(
+      richTextPageCountForSlide(slide: withBody(withImages), profile: profile),
+      greaterThan(
+        richTextPageCountForSlide(
+          slide: withBody(paragraphs),
+          profile: profile,
+        ),
+      ),
+    );
+  });
 }

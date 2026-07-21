@@ -524,6 +524,8 @@ List<Widget> _markdownBodyBlocks(
   double? emptyLineHeight,
   double? heading1Size,
   double? heading2Size,
+  String? projectPath,
+  double scale = 1.0,
 }) {
   final link = _hexColor(profile.accentColor);
   final bodySize = bodyFontSize > 0 ? bodyFontSize : w * 0.024;
@@ -574,6 +576,43 @@ List<Widget> _markdownBodyBlocks(
         _fullWidthBlock(
           contentWidth,
           _markdownMathBlock(oneLine.group(1)!.trim(), w, font),
+        ),
+      );
+      i++;
+      continue;
+    }
+
+    // Een afbeelding op een eigen regel. Het vak komt uit dezelfde functie die
+    // de paginering gebruikt, zodat de gereserveerde hoogte en de getekende
+    // hoogte per definitie gelijk zijn.
+    final image = parseMarkdownImageBlock(line);
+    if (image != null) {
+      final box = markdownImageBlockBox(
+        spec: image,
+        contentW: contentWidth ?? w,
+        refW: w,
+        scale: scale,
+      );
+      widgets.add(
+        _fullWidthBlock(
+          contentWidth,
+          Align(
+            alignment: Alignment.centerLeft,
+            child: SizedBox(
+              width: box.width,
+              height: box.height,
+              // `contain`, niet `cover`: het vak is uit de markdown afgeleid en
+              // niet uit de afbeelding, dus bijsnijden zou een willekeurig stuk
+              // van andermans plaatje weghalen.
+              child: _resolvedImage(
+                context,
+                image.path,
+                projectPath,
+                fit: BoxFit.contain,
+                semanticLabel: image.alt.isEmpty ? null : image.alt,
+              ),
+            ),
+          ),
         ),
       );
       i++;

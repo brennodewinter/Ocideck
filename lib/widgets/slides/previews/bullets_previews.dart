@@ -40,6 +40,7 @@ Widget _bulletsSlideShell({
 class _BulletsPreview extends StatelessWidget {
   final Slide slide;
   final double w;
+  final String? projectPath;
   final String font;
   final ThemeProfile profile;
   final int richTextPage;
@@ -53,6 +54,7 @@ class _BulletsPreview extends StatelessWidget {
   const _BulletsPreview({
     required this.slide,
     required this.w,
+    this.projectPath,
     required this.font,
     required this.profile,
     this.richTextPage = 0,
@@ -260,6 +262,7 @@ class _BulletsPreview extends StatelessWidget {
         contentW: contentW,
         availH: availH,
         splitWithImage: false,
+        projectPath: projectPath,
         richTextPage: richTextPage,
       ),
     );
@@ -275,6 +278,7 @@ Widget _richTextPaginatedContent({
   required double contentW,
   required double availH,
   required bool splitWithImage,
+  String? projectPath,
   int richTextPage = 0,
 }) {
   final pad = splitWithImage ? w * 0.038 : w * 0.07;
@@ -365,6 +369,8 @@ Widget _richTextPaginatedContent({
                     emptyLineHeight: w * 0.01 * scale,
                     heading1Size: w * 0.04 * scale,
                     heading2Size: w * 0.03 * scale,
+                    projectPath: projectPath,
+                    scale: scale,
                   ),
                 ],
               ),

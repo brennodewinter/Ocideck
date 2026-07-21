@@ -38,6 +38,7 @@ import '../../theme/app_theme.dart';
 import '../../theme/finding_severity_palette.dart';
 import '../../services/cvss/cvss4.dart';
 import '../../services/finding_context_score.dart';
+import '../../services/markdown_body_blocks.dart';
 import '../../services/slide_layout_metrics.dart';
 import '../../services/rich_text_layout.dart';
 // De split-run-metingen zijn services (headless rekenwerk), maar hun natuurlijke
@@ -618,6 +619,7 @@ class SlidePreviewWidget extends StatelessWidget {
         return _BulletsPreview(
           slide: slide,
           w: w,
+          projectPath: projectPath,
           font: fontFamily,
           profile: themeProfile,
           richTextPage: _effectivePage,
