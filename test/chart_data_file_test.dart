@@ -231,8 +231,16 @@ void main() {
     // En de gebruiker hoort het: de markdown draagt na deze opslag alleen nog
     // de verwijzing, dus die cijfers staan nergens meer op schijf.
     expect(written.chartWarnings, ['../geheim.json']);
+
+    // De cijfers staan nergens meer: het blok draagt alleen de verwijzing.
+    // Toets dat op de velden die de cijfers dragen, niet op "er komt nergens
+    // een 1 voor" — dat laatste stond hier eerder en viel om zodra de front
+    // matter een `ocideck_format: 1` kreeg. Zo'n toets slaagt bovendien ook
+    // als het hele grafiekblok zou verdwijnen, en bewijst dus te weinig.
     final md = await File(p.join(project.path, 'deck.md')).readAsString();
-    expect(md, isNot(contains('1')));
+    expect(md, contains('"source": "../geheim.json"'));
+    expect(md, isNot(contains('"x"')));
+    expect(md, isNot(contains('"series"')));
   });
 
   test('een extern gewijzigd databestand wordt niet overschreven', () async {
