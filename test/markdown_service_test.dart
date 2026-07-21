@@ -67,10 +67,10 @@ void main() {
     expect(deck.slides.single.imageSize, greaterThan(0));
   });
 
-  test('frontmatter tolerates indentation and missing spaces', () {
+  test('frontmatter tolerates missing spaces around the colon', () {
     const md =
         '---\n'
-        '  title:   Mijn Talk\n' // leading indent + extra spaces
+        'title:   Mijn Talk\n' // extra spaces after the colon
         'theme:ocideck\n' // no space after the colon
         'ocideck_target_seconds: 600\n'
         'date: 2026-06-23T09:30:00\n' // value contains colons
@@ -81,6 +81,30 @@ void main() {
     expect(deck.theme, 'ocideck');
     expect(deck.presentationTargetSeconds, 600);
     expect(deck.date, '2026-06-23T09:30:00');
+  });
+
+  test('an indented key belongs to the block above, not to the deck', () {
+    // Was tolerance ("een ingesprongen sleutel lezen we ook wel"), and that
+    // tolerance is exactly what made CSS inside a `style: |` block set deck
+    // fields. It also duplicated the key on save: the merge keeps an indented
+    // line verbatim (it is a continuation) and appends the generated key after
+    // it. Reader, writer and checker now share one rule: column 0 or nothing.
+    const md =
+        '---\n'
+        'marp: true\n'
+        'title: Echt\n'
+        'style: |\n'
+        '  section {\n'
+        '    title: Nep;\n'
+        '  }\n'
+        '---\n'
+        '# Eerste\n';
+    final service = MarkdownService();
+    final deck = service.parseDeck(md)!;
+    expect(deck.title, 'Echt');
+    final opnieuw = service.generateDeck(deck);
+    expect('title: Echt'.allMatches(opnieuw), hasLength(1));
+    expect(opnieuw, contains('    title: Nep;'));
   });
 
   test('round-trips image slide with title as image slide', () {

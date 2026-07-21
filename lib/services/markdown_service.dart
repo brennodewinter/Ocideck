@@ -662,11 +662,11 @@ class MarkdownService {
     String? theme;
     String? title;
     for (final rawLine in frontMatter.split('\n')) {
-      final line = rawLine.trim();
-      final colon = line.indexOf(':');
-      if (colon <= 0) continue;
-      final key = line.substring(0, colon).trim();
-      final value = line.substring(colon + 1).trim();
+      // Sleutels op kolom 0, net als de volledige parse: een ingesprongen regel
+      // hoort bij het blok erboven en is geen deck-veld.
+      final key = frontMatterKeyOf(rawLine);
+      if (key == null) continue;
+      final value = rawLine.substring(rawLine.indexOf(':') + 1).trim();
       switch (key) {
         case 'marp':
           marp = value == 'true';

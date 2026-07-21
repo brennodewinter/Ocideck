@@ -107,6 +107,15 @@ final _reContinuation = RegExp(r'^([ \t]|-(\s|$))');
 String? frontMatterKeyOf(String line) =>
     _reFrontMatterKey.firstMatch(line)?.group(1);
 
+/// Of [line] een vervolgregel is van het blok erboven: ingesprongen tekst of
+/// een lijstitem.
+///
+/// Dit is de enige plek waar "hoort bij het blok erboven" wordt vastgelegd; de
+/// lezer, de schrijver en de checker moeten er hetzelfde over denken. Deden ze
+/// dat niet, dan las de één een ingesprongen `theme:` in een `style: |`-blok als
+/// deck-thema terwijl de ander hem als CSS liet staan.
+bool isFrontMatterContinuation(String line) => _reContinuation.hasMatch(line);
+
 /// Werk de front matter van een bestaand bestand bij met de regels die OciDeck
 /// nú zou schrijven, zonder de rest aan te raken.
 ///

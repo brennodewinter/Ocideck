@@ -6,6 +6,7 @@ import 'package:ocideck/models/slide.dart';
 import 'package:ocideck/models/used_tool.dart';
 import 'package:ocideck/services/front_matter_merge.dart';
 import 'package:ocideck/services/markdown_service.dart';
+import 'package:ocideck/services/markdown_validator.dart';
 
 /// Het formaatcontract van het `.md`-bestand, getoetst als contract en niet als
 /// functie: wat OciDeck belooft over andermans front matter en over de
@@ -93,6 +94,67 @@ style: |
       expect(opnieuw.indexOf('theme: ocideck'), 1);
       expect(opnieuw, isNot(contains('theme: gaia')));
       expect(opnieuw, contains('footer: voet'));
+    });
+  });
+
+  group('een genest blok is een blok, geen losse sleutels', () {
+    // Marp laat een auteur CSS meegeven in een `style: |`-blok. Wat daarin
+    // staat is CSS, geen front matter — ook niet als een regel toevallig op
+    // `sleutel: waarde` lijkt.
+    const metCssBlok = '''
+---
+marp: true
+theme: gaia
+
+style: |
+  section {
+    color: #222;
+  }
+  section.title h1 {
+    theme: dracula;
+  }
+---
+
+# Kwartaalrapport
+''';
+
+    test('een ingesprongen `theme:` in een style-blok is geen deck-thema', () {
+      final deck = MarkdownService().parseDeck(metCssBlok);
+      expect(deck, isNotNull);
+      expect(deck!.theme, 'gaia');
+    });
+
+    test('er komt geen tweede theme-regel bij het opslaan', () {
+      final regels = _frontMatter(_openenEnOpslaan(metCssBlok));
+      expect(regels.where((r) => frontMatterKeyOf(r) == 'theme'), hasLength(1));
+      expect(regels, contains('theme: gaia'));
+    });
+
+    test('opslaan is ook met een genest blok idempotent', () {
+      final eerste = _openenEnOpslaan(metCssBlok);
+      expect(_openenEnOpslaan(eerste), eerste);
+    });
+
+    test('de schijfscan leest het deck-thema, niet dat uit het blok', () {
+      final gesnoven = MarkdownService().sniffFrontmatter(metCssBlok);
+      expect(gesnoven.marp, isTrue);
+      expect(gesnoven.theme, 'gaia');
+    });
+
+    test('de checker klaagt niet over de regels van het blok', () {
+      final meldingen = MarkdownValidator()
+          .validate(metCssBlok)
+          .issues
+          .map((i) => i.message)
+          .toList();
+      // De CSS-regels zijn geen front-matter-regels: geen vormklacht…
+      expect(meldingen, isNot(contains(contains('geen sleutel:waarde-vorm'))));
+      // …en geen "onbekende sleutel" over wat er binnen het blok staat.
+      expect(meldingen, isNot(contains(contains('"color"'))));
+      expect(meldingen, isNot(contains(contains('"theme"'))));
+      // De sleutel `style:` zelf is wél van iemand anders; dát mag de checker
+      // blijven melden — hij blijft bij opslaan behouden.
+      expect(meldingen, contains(contains('"style"')));
     });
   });
 

@@ -187,15 +187,15 @@ extension _MarkdownParse on MarkdownService {
         final frontMatter = content.substring(4, end);
         fm.sourceLines = frontMatter.split('\n');
         for (final rawLine in fm.sourceLines) {
-          // Parse `key: value` generically: split on the first colon and trim,
-          // so leading indentation or extra spacing no longer silently drops a
-          // field. Splitting on the *first* colon keeps colons in the value
-          // (e.g. an ISO date/time).
-          final line = rawLine.trim();
-          final colon = line.indexOf(':');
-          if (colon <= 0) continue;
-          final key = line.substring(0, colon).trim();
-          final value = line.substring(colon + 1).trim();
+          // Alleen een sleutel op kolom 0 telt — [frontMatterKeyOf] is dezelfde
+          // toets die [mergeFrontMatter] gebruikt bij het terugschrijven, zodat
+          // lezen en schrijven het over de grenzen van een blok eens zijn. Een
+          // ingesprongen regel hoort bij het blok erboven: de CSS in een
+          // `style: |` mag geen deck-velden zetten. Splitsen op de *eerste*
+          // dubbele punt houdt dubbele punten in de waarde heel (een ISO-datum).
+          final key = frontMatterKeyOf(rawLine);
+          if (key == null) continue;
+          final value = rawLine.substring(rawLine.indexOf(':') + 1).trim();
           // Visual-signature fields share a prefix; fold them into the
           // accumulator here so the switch below stays short.
           if (key.startsWith('ocideck_sig_')) {

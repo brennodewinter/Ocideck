@@ -139,6 +139,11 @@ class MarkdownValidator {
     }
 
     for (var i = 1; i < closingIndex; i++) {
+      // Een ingesprongen regel (of een lijstitem) hoort bij het blok erboven —
+      // de CSS in een `style: |` is geen front-matter-regel en heeft dus geen
+      // `sleutel: waarde`-vorm nodig. Dezelfde toets als de lezer en de
+      // schrijver gebruiken, zodat de drie het eens blijven.
+      if (isFrontMatterContinuation(lines[i])) continue;
       final line = lines[i].trim();
       if (line.isEmpty || line.startsWith('#')) continue;
       if (!line.contains(':')) {
