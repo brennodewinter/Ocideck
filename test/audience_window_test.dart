@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ocideck/models/settings.dart';
 import 'package:ocideck/widgets/presentation/audience_window.dart';
+import 'package:ocideck/widgets/slides/slide_preview.dart';
 
 /// A small but representative deck: a title slide plus a bullets slide, enough
 /// to exercise the audience window's markdown parsing and slide rendering.
@@ -388,6 +390,32 @@ void main() {
 
     expect(tester.takeException(), isNull);
     expect(find.text('Welkom'), findsOneWidget);
+
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('de styling komt naast de markdown binnen, niet erin', (
+    tester,
+  ) async {
+    // Het stijlprofiel reisde tot 0.1.0 als base64 in de front matter van deze
+    // payload mee — het laatste stukje base64 dat de generator kon maken. Nu
+    // zit het in de envelop. Vergeten dat veld te lezen valt in een test niet
+    // op tenzij iemand er een schrijft: het venster toont dan gewoon het
+    // standaardthema, en dat ziet alleen een zaal.
+    await _pumpAudience(tester, <String, dynamic>{
+      'markdown': _deckMarkdown,
+      beamerStyleProfileKey: const ThemeProfile(
+        name: 'Klant A',
+        slideBackgroundColor: '#112233',
+      ).toJson(),
+    });
+
+    expect(tester.takeException(), isNull);
+    final getoond = tester
+        .widget<SlidePreviewWidget>(find.byType(SlidePreviewWidget))
+        .themeProfile;
+    expect(getoond.name, 'Klant A');
+    expect(getoond.slideBackgroundColor, '#112233');
 
     await tester.pumpWidget(const SizedBox());
   });
