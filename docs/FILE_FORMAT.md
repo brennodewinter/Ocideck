@@ -115,9 +115,60 @@ ocideck_style_profile: <base64url(JSON)>
 
 ## 3. Front Matter
 
+### 3.0 The format contract
+
+Four rules govern the front matter. They are written down because a file
+outlives the build that wrote it, and because the last of them is a promise made
+to future versions of OciDeck rather than to the reader.
+
+**1. Keys OciDeck does not know are kept.** On save, OciDeck does not
+regenerate the front matter — it updates the lines that were already there. The
+keys it owns (every key in the table below, `marp` included) are replaced,
+removed or appended; **every other line stays exactly where it was**, including
+`#` comments, blank lines, indented blocks, the original order and the original
+quoting. A hand-written `header:`, `footer:`, `size:` or `style:` therefore
+survives an OciDeck save unchanged. The implementation is in
+`lib/services/front_matter_merge.dart`; the owned keys live there in one list,
+which the markdown checker (§10) reads as well.
+
+Two boundaries are worth knowing. Only keys at column 0 count as keys — an
+indented `key: value` is read as the inside of the block above it, which is what
+keeps a nested `style: |` block intact. And a key OciDeck *does* own is replaced
+together with any lines indented underneath it, because leaving those behind
+would produce front matter that is no longer valid YAML.
+
+**2. `ocideck_format` is the format version.** One monotonically increasing
+integer, not `major.minor`: the only question to answer is "is this file older
+than I am?". A file **without** the key is version 1 — that is the normal state
+of every hand-written Marp file, never an error, and an unreadable value is read
+as version 1 for the same reason.
+
+**3. A reader never lowers the version, and never upgrades on open.** If this
+build reads `ocideck_format: 2` it writes `2` back, not `1` — otherwise the file
+would lie about itself after one save. That is only safe because rule 1 keeps
+the keys of that newer version in place. Upgrading happens **on save, never on
+open**: looking at someone else's file must not change it. This is the existing
+"migrate on read, persist on first write" policy — see
+[MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) and §6.4. An older file always opens
+and is never made read-only.
+
+**4. The meaning of an existing key never changes.** A changed meaning gets a
+new key. This is the precondition that makes "skip what you do not know" safe
+forever: a reader that ignores an unknown key must be able to trust that the
+keys it *does* recognise still mean what they meant. Renaming or repurposing a
+key would break every older build silently, which is the worst way to break
+something.
+
+The version is deliberately **not** part of the sealed content hash (§3
+`ocideck_seal_hash`): it describes the file's encoding, not its content. Were it
+inside the hash, a sealed deck would report tampering the moment a newer build
+wrote it out again — for instance while building a package — without a letter of
+content having changed.
+
 | Key | Type | Meaning |
 | --- | --- | --- |
 | `marp` | `true` | Fixed Marp marker. |
+| `ocideck_format` | int | The format version of this file (§3.0). Absent means version 1. Written on save; never lowered. |
 | `title` | string | Deck title. Written and parsed; also used as the export document title. |
 | `theme` | string | Theme name; defaults to `ocideck`. Refers to `themes/<theme>.css`. |
 | `paginate` | `true`/absent | Written only when pagination is enabled. |
@@ -150,8 +201,9 @@ line-by-line parser, so keep front matter flat (one key per line).
 
 Only the keys above (plus `marp`) are read; any other front-matter key — a typo,
 or a Marp option OciDeck does not implement such as `header`, `footer`, `size` or
-`style` — is silently ignored. The in-app markdown checker flags such keys with a
-warning so they are not mistaken for having an effect. Likewise, a comment that
+`style` — has no effect inside OciDeck, but it is **kept on save** (§3.0, rule
+1). The in-app markdown checker flags such keys with a warning so they are not
+mistaken for having an effect. Likewise, a comment that
 looks like a directive (`<!-- _key: … -->` or `<!-- ocideck_key: … -->`) but is
 not one OciDeck understands — e.g. Marp's per-slide `_paginate`, `_header`,
 `_footer`, `_color` — is dropped and flagged; plain prose comments remain speaker
@@ -1474,9 +1526,17 @@ for presenter notes):
 - **Marp-compatible:** the file remains valid Marp Markdown. External tools see
   normal headings, bullets, tables, background images, and HTML; OciDeck extras
   live in ignored comments and custom front-matter keys.
+- **Marp-compatible the other way round too:** front-matter keys OciDeck does
+  not know — Marp options it has not implemented, or a note the author put
+  there — survive an open-and-save unchanged (§3.0). What is *not* covered is
+  the slide body: everything outside the front matter is parsed into typed
+  slides and written back from them, so markup OciDeck cannot represent is not
+  passed through.
 - **Forward migration:** missing front-matter fields and style-profile fields
   fall back to defaults, and the absence of the `no-footer` token means (for
-  older files) "footer visible".
+  older files) "footer visible". A file that declares a *newer* format version
+  (§3.0) still opens: the keys of that version are unknown but preserved, and
+  the version is written back unchanged rather than lowered.
 - **Chart data:** inline `x`/`series` in a `chart` block stays valid and is
   read unchanged — it is still the only possible form where there is no project
   folder (web). A `source` pointing at a `.csv` keeps being read *and written*
@@ -1538,6 +1598,7 @@ not model is not reported.
 | **Document** | error | `parseDeck` fails completely (`null`). |
 | **Front matter** | error | Opening `---` without a closing `---` line. |
 | **Front matter** | warning | Line without `key: value` shape. |
+| **Front matter** | warning | Key OciDeck does not know: it has no effect, but it is kept on save (§3.0). |
 | **Front matter** | error | Unknown `tlp:` value. |
 | **Comment** | error | `<!--` without `-->` on the same line. |
 | **Comment** | warning | Comment without `_class:`, `_style:`, `ocideck_...`, `skip`, `tlp:`, or `advance:`. |
